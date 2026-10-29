@@ -403,7 +403,7 @@ def main():
                     assert picker["y"] < formats["y"]
                     assert picker["y"] + picker["height"] < 844
                     connect = page.locator("#auth-continue").bounding_box()
-                    assert connect["y"] + connect["height"] < 844
+                    assert connect["y"] + connect["height"] < 844, (width, connect)
                 page.screenshot(path=str(output / (method+"-"+str(width)+".png")), full_page=True)
         scenarios.append("all four sign-in tabs fit 320/390/1440px; file picker precedes format guidance")
         assert not errors and not outbound, {"errors":errors,"outbound":outbound}

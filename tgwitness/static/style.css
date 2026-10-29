@@ -1341,19 +1341,20 @@ details[open] > :not(summary) { animation: unfold .22s ease-out; }
   .page-kicker { margin-bottom: 4px; font-size: 10.5px; }
   .entry-header .quiet { min-height: 34px; padding: 0 9px; }
   .entry-header .quiet span { display: none; }
-  .auth-card { padding: 18px 16px; border-radius: var(--radius-lg); }
-  .login-methods { margin-bottom: 14px; }
+  .auth-card { padding: 16px; border-radius: var(--radius-lg); }
+  .login-methods { margin-bottom: 12px; }
   .login-method { min-height: 34px; padding: 0 2px; font-size: 12.5px; }
-  .method-description { margin-bottom: 12px; font-size: 13px; }
+  .method-description { margin-bottom: 10px; font-size: 13px; }
   #phone { min-height: 44px; font-size: 16px; }
-  .account-file-picker { padding: 14px 12px; }
+  .account-file-picker { padding: 12px; }
   .import-formats { margin: 10px 0 4px; }
-  .import-formats > div { grid-template-columns: 66px 1fr; gap: 8px; padding: 5px 0; }
+  .import-formats > div { grid-template-columns: 66px 1fr; gap: 8px; padding: 4px 0; }
   .import-formats code { font-size: 11px; }
   .key-metadata { grid-template-columns: minmax(100px, 1fr) minmax(0, 2fr); }
   .api-fields { grid-template-columns: 1fr; gap: 0; }
-  #api-details { margin-top: 14px; padding-top: 8px; }
-  .auth-actions { margin-top: 16px; }
+  .format-help { margin-top: 6px; }
+  #api-details { margin-top: 10px; padding-top: 8px; }
+  .auth-actions { margin-top: 12px; }
   #connection-options > summary { padding: 0 16px; }
   #connection-options .card { padding: 16px; }
 }
