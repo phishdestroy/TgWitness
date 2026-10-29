@@ -22,7 +22,7 @@ An export may grow beyond a checkpoint. After verifying the checkpoint signature
 compare the hash at its saved record count. A shorter export cannot satisfy a
 checkpoint beyond its end; matching the boundary does not replace checking every event.
 
-[Exact checkpoint formula](../HOW-IT-WORKS.md#what-an-earlier-checkpoint-adds) · [Static diagram](../assets/presentation/evidence-checkpoint-static.svg)
+[Open the full-size animation](../assets/presentation/evidence-checkpoint-animated.svg) · [Static diagram](../assets/presentation/evidence-checkpoint-static.svg) · [Exact checkpoint formula](../HOW-IT-WORKS.md#what-an-earlier-checkpoint-adds)
 
 ## Set up a witness
 

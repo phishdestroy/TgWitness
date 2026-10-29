@@ -17,7 +17,7 @@ Outputs:
 - The matching `.zip.sha256` file.
 - `dist/wiki-manifest.json`: destination repository, source branch and file hashes.
 
-The builder reads allowlisted source files only. It converts local wiki links to GitHub Wiki page URLs and documentation links to repository URLs. Referenced images are bundled under `assets/` and linked through the Wiki, so they travel with it rather than depending on unauthenticated raw URLs from a private source repository. Code blocks are preserved. Missing/private link targets and unexpected output files stop the build.
+The builder reads allowlisted source files only. It converts local wiki links to GitHub Wiki page URLs and documentation links to repository URLs. Inline images and links to full-size or static diagrams are bundled under `assets/` and linked through the Wiki, so they travel with it rather than depending on unauthenticated raw URLs from a private source repository. Code blocks are preserved. Missing/private link targets and unexpected output files stop the build.
 
 For a fork or a different source branch:
 

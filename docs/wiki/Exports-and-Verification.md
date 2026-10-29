@@ -13,7 +13,7 @@
 2. **Hash and sign.** SHA-256 describes those bytes; Ed25519 signs the 32 raw digest bytes.
 3. **Verify the handoff.** Recompute every hash, check every signature and compare the key fingerprint and retained checkpoint.
 
-[Follow the formulas and change scenarios](../HOW-IT-WORKS.md) · [Static diagram](../assets/presentation/evidence-chain-static.svg)
+[Open the full-size animation](../assets/presentation/evidence-chain-animated.svg) · [Static diagram](../assets/presentation/evidence-chain-static.svg) · [Formulas and change scenarios](../HOW-IT-WORKS.md)
 
 ## Choose the right output
 

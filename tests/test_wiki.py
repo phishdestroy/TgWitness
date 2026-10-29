@@ -47,9 +47,11 @@ def test_wiki_rewrites_page_document_and_image_links_for_forks(wiki_tree):
     assets = wiki_tree / "docs/assets"
     assets.mkdir()
     (assets / "demo.png").write_bytes(b"synthetic image")
+    (assets / "static.svg").write_text('<svg xmlns="http://www.w3.org/2000/svg"/>', encoding="utf-8")
     (wiki_tree / "docs/wiki/Home.md").write_text(
         '[Start](Getting-Started.md#install)\n[Reference](../reference.md)\n'
         '![Demo](../assets/demo.png "Fictional data")\n[External](https://example.org/docs)\n'
+        '[Full size](../assets/demo.png)\n[Static diagram](../assets/static.svg)\n'
         '[Section](#section)\n~~~md\n[Example](missing.md)\n~~~\n',
         encoding="utf-8")
     build_wiki(wiki_tree, repository="example/Project", branch="release")
@@ -57,11 +59,14 @@ def test_wiki_rewrites_page_document_and_image_links_for_forks(wiki_tree):
     assert "[Start](https://github.com/example/Project/wiki/Getting-Started#install)" in page
     assert "[Reference](https://github.com/example/Project/blob/release/docs/reference.md)" in page
     assert '![Demo](https://github.com/example/Project/wiki/assets/demo.png "Fictional data")' in page
+    assert "[Full size](https://github.com/example/Project/wiki/assets/demo.png)" in page
+    assert "[Static diagram](https://github.com/example/Project/wiki/assets/static.svg)" in page
     assert (wiki_tree / "dist/wiki/assets/demo.png").read_bytes() == b"synthetic image"
     manifest = json.loads((wiki_tree / "dist/wiki-manifest.json").read_text())
-    assert manifest["assets"] == 1
+    assert manifest["assets"] == 2
     with zipfile.ZipFile(wiki_tree / "dist" / manifest["archive"]) as archive:
         assert archive.read("assets/demo.png") == b"synthetic image"
+        assert archive.read("assets/static.svg") == (assets / "static.svg").read_bytes()
     assert "[External](https://example.org/docs)" in page
     assert "[Section](#section)" in page
     assert "~~~md\n[Example](missing.md)\n~~~" in page

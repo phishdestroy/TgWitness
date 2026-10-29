@@ -1,4 +1,5 @@
 <picture>
+  <source media="(max-width: 600px)" srcset="docs/assets/presentation/mobile.svg">
   <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/brand.svg">
   <img src="docs/assets/presentation/readme-hero.svg" width="1200" alt="TgWitness by PhishDestroy. Follow the trail. Preserve the evidence.">
 </picture>
