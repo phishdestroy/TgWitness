@@ -148,7 +148,9 @@ async function unlock() {
   sessionStorage.setItem("tgwitness-token", state.token);
   show("gate",false); show("workspace",true); $("panel-token").value="";
   navigate(state.view);
-  renderStatus(); await refreshEvents(); setAuthStep(state.status.collector.has_session ? "authorized" : "credentials");
+  // Set up sign-in before background loading yields control to the operator.
+  renderStatus(); setAuthStep(state.status.collector.has_session ? "authorized" : "credentials");
+  await refreshEvents();
   loadNotifications().catch(()=>{});
   if(state.view!=="parameters")loadParameters().catch(()=>{});  // names of parameters in journal records
   if(!state.status.demo&&!state.status.collector.has_session)navigate("connection");
