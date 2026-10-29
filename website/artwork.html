@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TgWitness — presentation artwork</title>
+<style>
+/* Repository artwork, drawn with the same mark and palette as the application. */
+:root { color-scheme: dark; --ink: #0b1120; --line: #35425c; --muted: #acb9d2; --blue: #96b6ff; --green: #8be1bd; }
+* { box-sizing: border-box; }
+body { margin: 0; color: #f4f7ff; font-family: "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+#artboard { position: relative; width: 100vw; height: 100vh; overflow: hidden; background: radial-gradient(ellipse at 83% 42%, #1e3760 0, transparent 55%), var(--ink); }
+.grid { position: absolute; inset: 0; background-image: radial-gradient(#b3c9f224 1px, transparent 1px); background-size: 24px 24px; mask-image: linear-gradient(100deg, transparent 26%, #000); }
+.orbit { position: absolute; width: 920px; height: 920px; top: -174px; right: -120px; border: 1px solid #a4c1fa12; border-radius: 50%; }
+.orbit::after { content: ""; position: absolute; inset: 102px; border: 1px solid #a4c1fa12; border-radius: 50%; }
+.brand { position: absolute; inset: 43px auto auto 64px; display: flex; align-items: center; gap: 13px; font-size: 29px; font-weight: 720; letter-spacing: -1px; }
+.brand img { width: 43px; height: 43px; }
+.edition { position: absolute; top: 58px; right: 64px; font: 11px Consolas, monospace; letter-spacing: .13em; color: var(--muted); }
+.edition b { color: var(--green); font-weight: 400; }
+.copy { position: absolute; left: 64px; top: 162px; width: 720px; }
+.eyebrow { margin: 0 0 20px; color: var(--blue); font: 12px Consolas, monospace; letter-spacing: .14em; }
+h1 { margin: 0; font-size: 75px; font-weight: 650; line-height: 1.06; letter-spacing: -3.9px; }
+h1 span { color: var(--blue); }
+.description { color: #b8c6dd; font-size: 21px; line-height: 1.65; margin: 25px 0 0; max-width: 605px; }
+.ledger { position: absolute; top: 140px; left: 874px; width: 640px; }
+.ledger-label { margin: 0 0 20px 6px; color: #94aace; font: 10px Consolas, monospace; letter-spacing: .14em; }
+.record { position: relative; width: 535px; min-height: 109px; margin: 0 0 15px; padding: 19px 23px 21px; border: 1px solid #4c6184; border-radius: 14px; background: linear-gradient(115deg, #1d2e4b, #162338); box-shadow: 0 16px 36px #02071338; }
+.record::before { content: ""; position: absolute; width: 7px; height: 7px; border-radius: 50%; background: var(--blue); left: -22px; top: 29px; box-shadow: 0 0 0 6px #172942; }
+.record::after { content: ""; position: absolute; left: -19px; top: 45px; height: 94px; width: 38px; border-left: 1px dashed #6a84ad88; border-bottom: 1px dashed #6a84ad88; border-bottom-left-radius: 10px; }
+.record-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 15px; font: 10px Consolas, monospace; letter-spacing: .07em; }
+.record-top time { color: #95a7c2; }
+.record-top b { font-weight: 400; color: #b8cded; }
+.record p { margin: 0; font-size: 23px; letter-spacing: -.55px; }
+.record-edit { margin-left: 38px; background: linear-gradient(115deg, #243d68, #1c2b47); border-color: #617eae; }
+.record-edit .record-top b { color: #adcaff; }
+.record-edit del { color: #a9b6cd; text-decoration-color: #c1cada; }
+.record-edit ins { margin-left: 9px; color: #dce8ff; text-decoration: none; background: #5d8fe84a; border-radius: 5px; padding: 2px 6px; }
+.record-delete { margin-left: 76px; border-color: #436d67; background: linear-gradient(115deg, #1b383b, #172d36); }
+.record-delete::before { background: var(--green); }
+.record-delete::after { display: none; }
+.record-delete .record-top b { color: var(--green); }
+.record-delete p { font-size: 21px; }
+.record-delete p span { color: var(--green); margin-right: 8px; }
+.rail { position: absolute; left: 64px; right: 64px; bottom: 34px; border-top: 1px solid #a2bde026; padding-top: 23px; display: flex; gap: 34px; align-items: center; }
+.rail span { color: #c8d4e8; font: 11px Consolas, monospace; letter-spacing: .08em; }
+.rail span::before { content: ""; display: inline-block; width: 5px; height: 5px; margin-right: 10px; border-radius: 50%; background: #93b5ff; vertical-align: 2px; }
+.rail small { margin-left: auto; font: 9px Consolas, monospace; letter-spacing: .09em; color: #8c9ebc; }
+.workflow { display: none; }
+.format-social .brand { top: 39px; left: 48px; }
+.format-social .edition { top: 54px; right: 48px; font-size: 10px; }
+.format-social .copy { left: 48px; top: 164px; width: 550px; }
+.format-social h1 { font-size: 58px; letter-spacing: -3px; }
+.format-social .description { max-width: 500px; font-size: 19px; }
+.format-social .ledger { left: 660px; top: 177px; transform: scale(.77); transform-origin: top left; }
+.format-social .rail { left: 48px; right: 48px; bottom: 34px; gap: 24px; }
+.format-social .rail small { max-width: 150px; text-align: right; line-height: 1.6; }
+.format-square .brand { left: 64px; top: 49px; }
+.format-square .edition { top: 65px; }
+.format-square .copy { top: 151px; width: 960px; }
+.format-square h1 { font-size: 88px; letter-spacing: -4px; }
+.format-square .description { max-width: 900px; font-size: 24px; }
+.format-square .ledger { left: 236px; top: 538px; transform: scale(1.05); transform-origin: top left; }
+.format-square .rail { bottom: 38px; gap: 24px; }
+.format-square .rail small { max-width: 165px; text-align: right; line-height: 1.6; }
+.format-cover:lang(ru) h1 { font-size: 66px; }
+.format-cover:lang(ru) .description { font-size: 20px; max-width: 665px; }
+.format-workflow .brand, .format-workflow .copy, .format-workflow .ledger, .format-workflow .rail, .format-workflow .edition { display: none; }
+.format-workflow .workflow { display: block; padding: 43px 58px; }
+.workflow-heading { display: flex; justify-content: space-between; align-items: center; margin-bottom: 31px; }
+.workflow-heading h2 { font-size: 30px; font-weight: 600; letter-spacing: -1px; margin: 0; }
+.workflow-heading span { color: var(--muted); font: 11px Consolas, monospace; letter-spacing: .09em; }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+.step { position: relative; display: flex; flex-direction: column; min-height: 279px; padding: 27px 28px 24px; border: 1px solid #425779; border-radius: 14px; background: #17263cf0; }
+.step:not(:last-child)::after { content: "→"; position: absolute; top: 127px; right: -24px; color: #a6c1ef; z-index: 1; font-size: 22px; }
+.step-label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; color: #adbfdf; font: 12px Consolas, monospace; letter-spacing: .07em; }
+.step-label b { font-weight: 400; color: var(--blue); }
+.step h3 { font-size: 29px; font-weight: 600; letter-spacing: -.8px; margin: 0 0 13px; }
+.step p { font-size: 18px; color: #bac8df; line-height: 1.55; margin: 0 0 23px; max-width: 350px; }
+.step footer { margin-top: auto; padding-top: 19px; border-top: 1px solid #40516c; font: 12px Consolas, monospace; color: #a5bee8; }
+.step:last-child { border-color: #456c67; background: #183034e8; }
+.step:last-child .step-label b, .step:last-child footer { color: var(--green); }
+.workflow-note { margin: 21px 0 0; color: #95a8c7; font-size: 13px; }
+</style>
+</head>
+<body>
+<main id="artboard">
+  <div class="grid"></div><div class="orbit"></div>
+  <div class="brand"><img src="../tgwitness/static/mark.svg" alt="">TgWitness</div>
+  <div class="edition"><b>OPEN SOURCE</b> &nbsp; / &nbsp; YOUR OWN WORKSPACE</div>
+  <div class="copy">
+    <p class="eyebrow">A RECORD BEYOND THE CONVERSATION</p>
+    <h1>Messages change.<br><span>Keep what you saw.</span></h1>
+    <p class="description">Observe Telegram. Preserve captured changes.<br>Hand over a history others can verify.</p>
+  </div>
+  <div class="ledger" aria-label="Illustrated sequence: message observed, edited, then deleted; captured versions remain">
+    <p class="ledger-label">ONE MESSAGE. THREE OBSERVATIONS.</p>
+    <div class="record">
+      <div class="record-top"><b>01 &nbsp; MESSAGE OBSERVED</b><time>14:02:18</time></div>
+      <p>The briefing starts at 14:00.</p>
+    </div>
+    <div class="record record-edit">
+      <div class="record-top"><b>02 &nbsp; EDIT CAPTURED</b><time>14:05:42</time></div>
+      <p>The briefing starts at <del>14:00</del><ins>16:30</ins>.</p>
+    </div>
+    <div class="record record-delete">
+      <div class="record-top"><b>03 &nbsp; DELETION NOTICE</b><time>14:08:09</time></div>
+      <p><span>↳</span> Captured versions stay in your journal.</p>
+    </div>
+  </div>
+  <div class="rail"><span>SELF-HOSTED</span><span>SIGNED EXPORTS</span><span>MIT LICENSED</span><small>ILLUSTRATED EXAMPLE · FICTIONAL DATA</small></div>
+  <section class="workflow" aria-label="From observation to verification">
+    <div class="workflow-heading"><h2>From a changing chat to a verifiable record.</h2><span>THE TGWITNESS WORKFLOW</span></div>
+    <div class="steps">
+      <article class="step"><div class="step-label"><b>01 / OBSERVE</b><span>YOUR ACCOUNT</span></div><h3>Choose your sources.</h3><p>A few chats, a Telegram folder, or the whole account. Keep control of what you collect.</p><footer>Messages · Edits · Deletion notices</footer></article>
+      <article class="step"><div class="step-label"><b>02 / PRESERVE</b><span>YOUR WORKSPACE</span></div><h3>Keep every captured version.</h3><p>Changes add to the journal. Captured content remains, with its observation history.</p><footer>Version history · Attachments · Gaps</footer></article>
+      <article class="step"><div class="step-label"><b>03 / VERIFY</b><span>YOUR HANDOFF</span></div><h3>Share a signed record.</h3><p>Export the journal and check it independently against a trusted key fingerprint.</p><footer>Signed ZIP · Offline report · Verifier</footer></article>
+    </div>
+    <p class="workflow-note">Signatures establish integrity relative to a trusted key. They do not prove Telegram origin or complete capture.</p>
+  </section>
+</main>
+<script>
+const params = new URLSearchParams(location.search);
+const formats = new Set(['cover', 'social', 'square', 'workflow']);
+const format = params.get('format') || 'cover';
+document.body.className = 'format-' + (formats.has(format) ? format : 'cover');
+if (params.get('lang') === 'ru') {
+  document.documentElement.lang = 'ru';
+  document.querySelector('.eyebrow').textContent = 'ВАШИ АККАУНТЫ. ВАША ИСТОРИЯ.';
+  document.querySelector('h1').firstChild.nodeValue = 'Сообщения меняются.';
+  document.querySelector('h1 span').textContent = 'История остаётся.';
+  document.querySelector('.description').textContent = 'Сохранённая переписка, история изменений и экспорт с цифровой подписью. Всё на вашем сервере.';
+  document.querySelector('.edition').textContent = 'ОТКРЫТЫЙ КОД / ВАШЕ ПРОСТРАНСТВО';
+  document.querySelector('.ledger-label').textContent = 'ОДНО СООБЩЕНИЕ. ТРИ НАБЛЮДЕНИЯ.';
+  ['01  СООБЩЕНИЕ СОХРАНЕНО', '02  ИЗМЕНЕНИЕ ЗАПИСАНО', '03  УВЕДОМЛЕНИЕ ОБ УДАЛЕНИИ'].forEach((text, i) => document.querySelectorAll('.record-top b')[i].textContent = text);
+  document.querySelector('.record p').textContent = 'Встреча начнётся в 14:00.';
+  document.querySelector('.record-edit p').firstChild.nodeValue = 'Встреча начнётся в ';
+  document.querySelector('.record-delete p').lastChild.nodeValue = ' Сохранённые версии остаются в журнале.';
+  ['НА ВАШЕМ СЕРВЕРЕ', 'ПОДПИСАННЫЙ ЭКСПОРТ', 'ЛИЦЕНЗИЯ MIT'].forEach((text, i) => document.querySelectorAll('.rail span')[i].textContent = text);
+  document.querySelector('.rail small').textContent = 'ИЛЛЮСТРАЦИЯ · ВЫМЫШЛЕННЫЕ ДАННЫЕ';
+}
+</script>
+</body>
+</html>

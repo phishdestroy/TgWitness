@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: User guides and troubleshooting
+    url: https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Home.md
+    about: Start with the wiki, FAQ and troubleshooting steps.
+  - name: Security reports
+    url: https://github.com/phishdestroy/TgWitness/blob/main/SECURITY.md
+    about: Use the private reporting process for suspected vulnerabilities.

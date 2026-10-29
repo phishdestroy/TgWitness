@@ -1,0 +1,15 @@
+<p class="guide-outcome">Share a signed record that someone else can check.</p>
+<div class="flow-strip export-flow" aria-label="Evidence handoff: retain a trusted reference, export the signed ZIP, verify with the recipient"><span>Retain a reference</span><span>Export signed ZIP</span><span>Recipient verifies</span></div>
+<p>New to signatures and checkpoints? <a href="@@GUIDE_CONCEPTS@@#chain">Change a sample record</a> and see which checks detect it.</p>
+<h2 id="retain">Retain a trusted reference</h2>
+<p>Save the workspace’s public-key fingerprint outside the collector. During collection, keep signed checkpoints elsewhere or use an <a href="@@GUIDE_WITNESS@@">independent witness</a>. These references let a recipient check the key and an earlier journal boundary.</p>
+<h2 id="export">Download the signed ZIP</h2>
+<p>Open <strong>Exports</strong> and create a signed evidence ZIP. It includes the workspace journal and a signed file manifest. Panel filters do not limit this full-journal export: review the material before sharing it.</p>
+<p>Standalone HTML and CSV downloads are useful for reading and analysis. Keep the signed ZIP as the verifiable original; the separate HTML or CSV file has no standalone signature.</p>
+<h2 id="verify">Verify with a trusted copy of TgWitness</h2>
+<p>In the installed project environment, replace the example fingerprint and file paths:</p>
+<pre><code>python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json</code></pre>
+<p>When both references pass, the result reports <code>key_pinned: true</code> and <code>checkpoint_checked: true</code>. Keep the verification result with the original archive. The retained checkpoint must be at or before the export’s boundary.</p>
+<h2 id="meaning">Understand the result</h2>
+<ul><li><strong>Integrity:</strong> the recorded history and exported files match their signatures.</li><li><strong>Earlier observation:</strong> an external checkpoint lets you compare the export with a previously retained journal prefix.</li><li><strong>Delivery:</strong> a <a href="@@GUIDE_PROOF@@">controlled send → edit → delete test</a> checks specific events against the captured record.</li></ul>
+<p class="callout">A valid signature does not prove that every Telegram event arrived, that the source told the truth or that the collector’s clock was correct.</p>
