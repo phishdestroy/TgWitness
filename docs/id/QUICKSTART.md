@@ -12,12 +12,12 @@ Pilih salah satu metode. Unduhan portabel akan tersedia setelah rilis build dite
 
 | Host | Belum ada yang terinstal | Dari sumber: Python 3.11+ | Docker: Engine/Desktop dengan Compose 2.20+ |
 | --- | --- | --- | --- |
-| Windows | Ekstrak `TgWitness-<version>-windows-amd64-portable.zip` dari GitHub Releases, klik dua kali `TgWitness.cmd` | Klik dua kali `Start.cmd` | Klik dua kali `Docker.cmd` |
-| Linux / macOS | — | `sh start.sh` | `sh docker-start.sh` |
+| Windows | Ekstrak `TgWitness-<version>-windows-amd64-portable.zip` dari GitHub Releases, klik dua kali `TgWitness.cmd` | Klik dua kali `Start.cmd` | Klik dua kali `scripts\Docker.cmd` |
+| Linux / macOS | — | `sh start.sh` | `sh scripts/docker-start.sh` |
 
 Untuk kode sumbernya, unduh dan ekstrak berkas ZIP sumber dari GitHub Releases atau kloning repositori tersebut. `Start.cmd` menawarkan untuk menginstal Python 3.12 bagi pengguna Windows jika tidak ditemukan Python yang sesuai (winget, atau penginstal python.org yang telah ditandatangani). `start.sh` menampilkan perintah instalasi yang tepat untuk distribusi Linux atau macOS Anda jika Python tidak terpasang. Saat pertama kali dijalankan, kode sumber akan membuat berkas `.venv` dan menginstal dependensi secara otomatis.
 
-Docker membangun aplikasi dan menjalankannya di latar belakang; Python di host tidak diperlukan. `Docker.cmd` dan `docker-start.sh` menampilkan alamat panel dan token saat kontainer dalam kondisi baik. Perintah Docker yang setara di setiap host yang didukung adalah:
+Docker membangun aplikasi dan menjalankannya di latar belakang; Python di host tidak diperlukan. `scripts\Docker.cmd` dan `scripts/docker-start.sh` menampilkan alamat panel dan token saat kontainer dalam kondisi baik. Perintah Docker yang setara di setiap host yang didukung adalah:
 
 ```sh
 docker compose up -d --build --wait
@@ -30,7 +30,7 @@ Untuk server, [penerapan](DEPLOYMENT.md) mencakup HTTPS otomatis, restart, gamba
 
 ## Jelajahi antarmuka
 
-1. Jalankan **TgWitness-Demo.cmd** dalam paket portabel, **Demo.cmd** di folder sumber Windows, atau `sh start.sh --demo` di Linux/macOS. Peluncuran dari sumber akan terlebih dahulu membuat `.venv` dan menginstal dependensi.
+1. Jalankan **TgWitness-Demo.cmd** dalam paket portabel, **scripts\Demo.cmd** di folder sumber Windows, atau `sh start.sh --demo` di Linux/macOS. Peluncuran dari sumber akan terlebih dahulu membuat `.venv` dan menginstal dependensi.
 2. Buka **http://127.0.0.1:8787**.
 3. Demo lokal akan membuka jurnal contoh secara otomatis. Tidak diperlukan salinan token untuk akses lokal langsung.
 

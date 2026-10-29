@@ -14,8 +14,8 @@ repository, then run the following from the project directory:
 | Native Windows | `Start.cmd` | No; use the optional logon task for background use. |
 | Native Linux/macOS | `sh start.sh` | No; use systemd/launchd for background use. |
 | Docker on any supported host | `docker compose up -d --build --wait` | Yes, while the Docker daemon runs. |
-| Docker helper on Windows | `Docker.cmd` | Yes; the helper waits for web-server health. |
-| Docker helper on Linux/macOS | `sh docker-start.sh` | Yes; the helper waits for web-server health. |
+| Docker helper on Windows | `scripts\Docker.cmd` | Yes; the helper waits for web-server health. |
+| Docker helper on Linux/macOS | `sh scripts/docker-start.sh` | Yes; the helper waits for web-server health. |
 
 Native startup creates a private `.venv` and installs the pinned dependencies.
 Docker builds them inside the image, without requiring host Python. First-time
@@ -63,7 +63,7 @@ are supplied but have not been executed on this development host. See
 
 ## Local computer
 
-Use `Start.cmd` on Windows or `sh start.sh` on Linux/macOS. `Setup.cmd` or
+Use `Start.cmd` on Windows or `sh start.sh` on Linux/macOS. `scripts\Setup.cmd` or
 `sh start.sh --setup-only` prepares
 the environment. The launcher installs dependencies on first use; later launches
 reuse the environment. Internet access is needed for setup and Telegram collection,

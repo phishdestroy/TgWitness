@@ -258,8 +258,8 @@ with the pinned runtime:
   showed the installation offer; declining printed manual instructions and exited 1.
   The python.org download step fetched the 3.12.10 installer and passed the Python
   Software Foundation Authenticode check; the installer itself was not run on this host.
-- `start.sh` without any Python printed the install hint and exited 1. `Docker.cmd` and
-  `docker-start.sh` were exercised against fake `docker` executables: correct call
+- `start.sh` without any Python printed the install hint and exited 1. `scripts\Docker.cmd` and
+  `scripts/docker-start.sh` were exercised against fake `docker` executables: correct call
   sequence, panel address and token output, and no success message after a failure.
 - `python tools/build_portable.py` built an 18.8 MiB Windows package after verifying the
   pinned embeddable-runtime checksum. Extracted to a path with spaces and started with only
@@ -433,7 +433,7 @@ missing Docker, missing Compose, failed health wait, and a successful alternate-
 startup. These simulated checks do not establish Docker runtime compatibility.
 
 A complete public-source copy was installed into a new Windows directory whose
-path contains spaces. `Setup.cmd` created a fresh environment and installed the
+path contains spaces. `scripts\Setup.cmd` created a fresh environment and installed the
 pinned runtime; `Start.cmd --check --json` reported ready without creating its
 target data directory. `pip check` passed. The rebuilt wheel also passed the
 installed-package check, including direct and streamed 32-event exports.

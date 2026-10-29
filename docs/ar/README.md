@@ -26,7 +26,7 @@
 </p>
 
 > [!TIP]
-> **استكشف قبل الاتصال.** قم بتشغيل `Demo.cmd` أو `sh start.sh --demo` لفتح مساحة عمل تحتوي على محادثات خيالية. لا حاجة إلى حساب Telegram.
+> **استكشف قبل الاتصال.** قم بتشغيل `scripts\Demo.cmd` أو `sh start.sh --demo` لفتح مساحة عمل تحتوي على محادثات خيالية. لا حاجة إلى حساب Telegram.
 
 **هل أنت جديد هنا؟** [ابدأ →](QUICKSTART.md) · [ويكي →](../wiki/Home.md) · [اختر دليلاً →](../README.md) · [احصل على المساعدة →](../../.github/SUPPORT.md) · [اطلع على ما تم اختباره →](../VERIFICATION.md)
 
@@ -76,17 +76,17 @@
 | **نظام Windows، لم يتم تثبيت أي برامج** | قم بتنزيل `TgWitness-<version>-windows-amd64-portable.zip` من [قسم الإصدارات](../../../../releases)، ثم قم بفك الضغط، وانقر نقرًا مزدوجًا على **`TgWitness.cmd`** | لا شيء؛ لغة Python مدمجة |
 | Windows، من المصدر | انقر نقرًا مزدوجًا على **`Start.cmd`** | Python 3.11+؛ يتم توفيره وتثبيته لك في حالة عدم توفره |
 | Linux / macOS | `sh start.sh` | Python 3.11+ مع `venv`؛ يقوم البرنامج النصي بطباعة أمر التثبيت الخاص بنظامك في حالة عدم وجوده |
-| Docker، أي نظام تشغيل | انقر نقرًا مزدوجًا على **`Docker.cmd`** أو قم بتشغيل `sh docker-start.sh` | محرك Docker/Desktop مع Compose 2.20+ |
+| Docker، أي نظام تشغيل | انقر نقرًا مزدوجًا على **`scripts\Docker.cmd`** أو قم بتشغيل `sh scripts/docker-start.sh` | محرك Docker/Desktop مع Compose 2.20+ |
 
 1. افتح **http://127.0.0.1:8787**.
 2. الصق رمز الوصول الخاص باللوحة:
    - التثبيت المحمول أو من المصدر: محتويات `data/live/panel-token.txt`
-   - Docker: تم طباعته بواسطة `Docker.cmd`/`docker-start.sh`، أو `docker compose exec tgwitness cat /data/panel-token.txt`
+   - Docker: تم طباعته بواسطة `scripts\Docker.cmd`/`scripts/docker-start.sh`، أو `docker compose exec tgwitness cat /data/panel-token.txt`
 3. أضف حساب Telegram الخاص بك، واختر الدردشات التي تريد مراقبةها، ثم اضغط على **«بدء المراقبة**».
 
 يؤدي التشغيل الأول للمصدر إلى إنشاء صورة خاصة `.venv` وتثبيت التبعيات المثبتة (يتطلب اتصالاً بالإنترنت). تقوم أدوات Docker المساعدة بإنشاء الصورة، والانتظار حتى تصبح اللوحة في حالة جيدة، ثم طباعة عنوانها ورمزها. `python start.py --check` (أو `TgWitness-Check.cmd` في الحزمة المحمولة) تقدم تقريرًا عن الجاهزية دون الحاجة إلى استخدام Telegram.
 
-> **هل تريد فقط إلقاء نظرة؟** قم بتشغيل **`Demo.cmd`** أو `sh start.sh --demo`. ستفتح مجلة خيالية مباشرةً في المتصفح؛ ولا يتم ربط أي حساب Telegram بها، وتُخزَّن البيانات بشكل منفصل في `data/demo`.
+> **هل تريد فقط إلقاء نظرة؟** قم بتشغيل **`scripts\Demo.cmd`** أو `sh start.sh --demo`. ستفتح مجلة خيالية مباشرةً في المتصفح؛ ولا يتم ربط أي حساب Telegram بها، وتُخزَّن البيانات بشكل منفصل في `data/demo`.
 
 <details>
 <summary><strong>داخل مساحة العمل: المحادثات، والسجل، وعمليات التصدير</strong></summary></details>

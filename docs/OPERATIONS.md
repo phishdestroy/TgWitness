@@ -27,7 +27,7 @@ events have been captured.
 
 | Mode | Action | Behavior |
 | --- | --- | --- |
-| Demo | Demo.cmd or `--demo` | Synthetic data; real account connections disabled |
+| Demo | scripts\Demo.cmd or `--demo` | Synthetic data; real account connections disabled |
 | Observation | Start observation | Record delivered updates for selected sources |
 | History snapshot | Sources → history snapshot | Up to 500 current messages; no reconstruction of all past changes |
 | Pause | Pause observation | Stop collection while retaining data and queued jobs |
@@ -143,7 +143,7 @@ screen-reader and human usability evaluation remain separate work.
 
 | Environment | Installation | Verification status |
 | --- | --- | --- |
-| Windows PC/server | Python 3.11+, Setup.cmd/Start.cmd, private data directory | Locally checked on Windows/Python 3.12 |
+| Windows PC/server | Python 3.11+, scripts\Setup.cmd/Start.cmd, private data directory | Locally checked on Windows/Python 3.12 |
 | Linux server/VPS | Python venv, dedicated service user, HTTPS/SSH | Code, CI and systemd example provided; not executed on this host |
 | macOS | Python venv, foreground process or user agent | launchd example provided; separate installation check needed |
 | Docker/Compose | Persistent volume, one worker | Definition and CI runtime check provided; Docker unavailable locally |

@@ -14,8 +14,8 @@ Choose one method. Portable downloads become available after a release build is 
 
 | Host | Nothing installed | From source: Python 3.11+ | Docker: Engine/Desktop with Compose 2.20+ |
 | --- | --- | --- | --- |
-| Windows | Extract `TgWitness-<version>-windows-amd64-portable.zip` from GitHub Releases, double-click `TgWitness.cmd` | Double-click `Start.cmd` | Double-click `Docker.cmd` |
-| Linux / macOS | — | `sh start.sh` | `sh docker-start.sh` |
+| Windows | Extract `TgWitness-<version>-windows-amd64-portable.zip` from GitHub Releases, double-click `TgWitness.cmd` | Double-click `Start.cmd` | Double-click `scripts\Docker.cmd` |
+| Linux / macOS | — | `sh start.sh` | `sh scripts/docker-start.sh` |
 
 For the source methods, download and extract the source ZIP from GitHub Releases or clone
 the repository. `Start.cmd` offers to install Python 3.12 for your Windows user if no
@@ -24,7 +24,7 @@ the exact install command for your Linux distribution or macOS if Python is miss
 The first source launch creates `.venv` and installs dependencies automatically.
 
 Docker builds the application and starts it in the background; host Python is
-unnecessary. `Docker.cmd` and `docker-start.sh` print the panel address and token when
+unnecessary. `scripts\Docker.cmd` and `scripts/docker-start.sh` print the panel address and token when
 the container is healthy. The equivalent Docker commands on every supported host are:
 
 ```sh
@@ -42,7 +42,7 @@ published images, updates, and backups.
 
 ## Explore the interface
 
-1. Run **TgWitness-Demo.cmd** in the portable package, **Demo.cmd** in a Windows source
+1. Run **TgWitness-Demo.cmd** in the portable package, **scripts\Demo.cmd** in a Windows source
    folder, or `sh start.sh --demo` on Linux/macOS. A source launch first creates `.venv`
    and installs dependencies.
 2. Open **http://127.0.0.1:8787**.

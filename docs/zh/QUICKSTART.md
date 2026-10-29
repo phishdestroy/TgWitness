@@ -12,12 +12,12 @@ TgWitness 是一款用于监控您账户可访问的 Telegram 群组和频道的
 
 | 主机 | 尚未安装任何内容 | 源代码：Python 3.11+ | Docker：Engine/Desktop 搭配 Compose 2.20+ |
 | --- | --- | --- | --- |
-| Windows | 从 GitHub 发布页面中提取 `TgWitness-<version>-windows-amd64-portable.zip`，双击 `TgWitness.cmd` | 双击`Start.cmd` | 双击`Docker.cmd` |
-| Linux / macOS | — | `sh start.sh` | `sh docker-start.sh` |
+| Windows | 从 GitHub 发布页面中提取 `TgWitness-<version>-windows-amd64-portable.zip`，双击 `TgWitness.cmd` | 双击`Start.cmd` | 双击`scripts\Docker.cmd` |
+| Linux / macOS | — | `sh start.sh` | `sh scripts/docker-start.sh` |
 
 若需获取源代码，请从 GitHub Releases 下载并解压源代码 ZIP 包，或克隆该代码库。`Start.cmd` 会在未检测到合适的 Python 环境（winget 或 python.org 签名安装程序）时，为您的 Windows 用户安装 Python 3.12。`start.sh` 会在缺少 Python 时，显示适用于您所用 Linux 发行版或 macOS 的精确安装命令。 首次运行源代码时，系统会生成`.venv`并自动安装依赖项。
 
-Docker 会构建该应用程序并在后台启动它；无需在主机上安装 Python。当容器运行正常时，`Docker.cmd` 和 `docker-start.sh` 会显示控制面板地址和令牌。在所有受支持的主机上，相应的 Docker 命令如下：
+Docker 会构建该应用程序并在后台启动它；无需在主机上安装 Python。当容器运行正常时，`scripts\Docker.cmd` 和 `scripts/docker-start.sh` 会显示控制面板地址和令牌。在所有受支持的主机上，相应的 Docker 命令如下：
 
 ```sh
 docker compose up -d --build --wait
@@ -30,7 +30,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 ## 探索界面
 
-1. 在便携包中运行 **TgWitness-Demo.cmd**，在 Windows 源代码文件夹中运行 **Demo.cmd**，或在 Linux/macOS 上运行 `sh start.sh --demo`。从源代码启动时，系统会先创建 `.venv` 并安装依赖项。
+1. 在便携包中运行 **TgWitness-Demo.cmd**，在 Windows 源代码文件夹中运行 **scripts\Demo.cmd**，或在 Linux/macOS 上运行 `sh start.sh --demo`。从源代码启动时，系统会先创建 `.venv` 并安装依赖项。
 2. 打开 **http://127.0.0.1:8787**。
 3. 本地演示会自动打开示例日志。直接本地访问无需复制令牌。
 

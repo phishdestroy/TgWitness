@@ -12,12 +12,12 @@ TgWitness هو تطبيق مستقل لمراقبة مجموعات وقنوات 
 
 | المضيف | لم يتم تثبيت أي شيء | من المصدر: Python 3.11+ | Docker: Engine/Desktop مع Compose 2.20+ |
 | --- | --- | --- | --- |
-| Windows | استخرج `TgWitness-<version>-windows-amd64-portable.zip` من إصدارات GitHub، وانقر نقرًا مزدوجًا على `TgWitness.cmd` | انقر نقرًا مزدوجًا على `Start.cmd` | انقر نقرًا مزدوجًا على `Docker.cmd` |
-| Linux / macOS | — | `sh start.sh` | `sh docker-start.sh` |
+| Windows | استخرج `TgWitness-<version>-windows-amd64-portable.zip` من إصدارات GitHub، وانقر نقرًا مزدوجًا على `TgWitness.cmd` | انقر نقرًا مزدوجًا على `Start.cmd` | انقر نقرًا مزدوجًا على `scripts\Docker.cmd` |
+| Linux / macOS | — | `sh start.sh` | `sh scripts/docker-start.sh` |
 
 بالنسبة لطرق المصدر، قم بتنزيل ملف ZIP المصدر من GitHub Releases واستخراجه أو قم بنسخ المستودع. `Start.cmd` يعرض تثبيت Python 3.12 لمستخدم Windows الخاص بك إذا لم يتم العثور على إصدار Python مناسب (winget، أو أداة التثبيت الموقعة من python.org). `start.sh` يعرض أمر التثبيت الدقيق لتوزيع Linux الخاص بك أو macOS إذا كان Python مفقودًا. يؤدي تشغيل المصدر لأول مرة إلى إنشاء `.venv` وتثبيت التبعيات تلقائيًا.
 
-يقوم Docker بإنشاء التطبيق وتشغيله في الخلفية؛ ولا حاجة إلى استضافة Python. تقوم العلامتان `Docker.cmd` و`docker-start.sh` بطباعة عنوان اللوحة والرمز المميز عندما يكون الحاوية في حالة جيدة. الأوامر المكافئة في Docker على كل مضيف مدعوم هي:
+يقوم Docker بإنشاء التطبيق وتشغيله في الخلفية؛ ولا حاجة إلى استضافة Python. تقوم العلامتان `scripts\Docker.cmd` و`scripts/docker-start.sh` بطباعة عنوان اللوحة والرمز المميز عندما يكون الحاوية في حالة جيدة. الأوامر المكافئة في Docker على كل مضيف مدعوم هي:
 
 ```sh
 docker compose up -d --build --wait
@@ -30,7 +30,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 ## استكشاف الواجهة
 
-1. قم بتشغيل **ملف TgWitness-Demo.cmd** الموجود في الحزمة المحمولة، أو ملف **Demo.cmd** الموجود في مجلد المصدر على نظام Windows، أو `sh start.sh --demo` على أنظمة Linux/macOS. يؤدي تشغيل الملف من المجلد المصدر أولاً إلى إنشاء ملف `.venv` وتثبيت التبعيات.
+1. قم بتشغيل **ملف TgWitness-Demo.cmd** الموجود في الحزمة المحمولة، أو ملف **scripts\Demo.cmd** الموجود في مجلد المصدر على نظام Windows، أو `sh start.sh --demo` على أنظمة Linux/macOS. يؤدي تشغيل الملف من المجلد المصدر أولاً إلى إنشاء ملف `.venv` وتثبيت التبعيات.
 2. افتح **http://127.0.0.1:8787**.
 3. يفتح العرض التوضيحي المحلي المجلة النموذجية تلقائيًا. ولا حاجة إلى نسخة من الرمز المميز للوصول المباشر محليًّا.
 

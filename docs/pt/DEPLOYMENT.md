@@ -12,8 +12,8 @@ Para o pacote portátil, extraia `TgWitness-<version>-windows-amd64-portable.zip
 | Versão nativa para Windows | `Start.cmd` | Não; utilize a tarefa opcional de logon para execução em segundo plano. |
 | Versão nativa para Linux/macOS | `sh start.sh` | Não; utilize o systemd/launchd para execução em segundo plano. |
 | Docker em qualquer host compatível | `docker compose up -d --build --wait` | Sim, enquanto o daemon do Docker estiver em execução. |
-| Auxiliar do Docker no Windows | `Docker.cmd` | Sim; o helper aguarda a verificação do estado do servidor web. |
-| Utilitário do Docker no Linux/macOS | `sh docker-start.sh` | Sim; o helper aguarda a verificação do estado do servidor web. |
+| Auxiliar do Docker no Windows | `scripts\Docker.cmd` | Sim; o helper aguarda a verificação do estado do servidor web. |
+| Utilitário do Docker no Linux/macOS | `sh scripts/docker-start.sh` | Sim; o helper aguarda a verificação do estado do servidor web. |
 
 A inicialização nativa cria uma imagem privada `.venv` e instala as dependências fixadas. O Docker as compila dentro da imagem, sem a necessidade do Python do host. A configuração inicial requer acesso à Internet. Quando não for encontrado o Python 3.11 ou superior, o `Start.cmd` solicita permissão antes de instalar o Python 3.12 para o usuário atual do Windows (via winget; caso contrário, o instalador do python.org, após verificar a assinatura da Python Software Foundation); ele nunca solicita privilégios de administrador. O Docker e os serviços do sistema operacional continuam sendo pré-requisitos.
 
@@ -34,7 +34,7 @@ O Windows 11/Python 3.12 foi verificado localmente. As definições para Linux/m
 
 ## Computador local
 
-Utilize `Start.cmd` no Windows ou `sh start.sh` no Linux/macOS. `Setup.cmd` ou `sh start.sh --setup-only` preparam o ambiente. O iniciador instala as dependências na primeira utilização; as execuções posteriores reutilizam o ambiente. É necessário acesso à Internet para a configuração e a coleta de dados do Telegram, mas a consulta de registros existentes e a criação de exportações funcionam offline.
+Utilize `Start.cmd` no Windows ou `sh start.sh` no Linux/macOS. `scripts\Setup.cmd` ou `sh start.sh --setup-only` preparam o ambiente. O iniciador instala as dependências na primeira utilização; as execuções posteriores reutilizam o ambiente. É necessário acesso à Internet para a configuração e a coleta de dados do Telegram, mas a consulta de registros existentes e a criação de exportações funcionam offline.
 
 Execute `python start.py --check` após a configuração para verificar as dependências locais, o Ed25519, o armazenamento, a configuração de chaves e o endereço de escuta sem iniciar um coletor. Utilize `--json` para obter uma saída estruturada. Passe os parâmetros pretendidos `--data-dir`, `--host` e `--port`. A verificação não instala pacotes, não cria um diário nem se conecta ao Telegram; não se trata de uma qualificação de integridade ou cobertura. A inicialização verifica separadamente os diários existentes. `python start.py --help` também evita a instalação.
 

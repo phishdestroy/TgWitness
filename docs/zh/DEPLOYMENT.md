@@ -12,8 +12,8 @@
 | Windows 原生版 | `Start.cmd` | 不需要；如需在后台运行，请使用可选的登录任务。 |
 | 原生 Linux/macOS 版本 | `sh start.sh` | 不需要；请使用 systemd/launchd 进行后台运行。 |
 | 在任何受支持的主机上运行 Docker | `docker compose up -d --build --wait` | 是的，只要 Docker 守护进程正在运行。 |
-| Windows 上的 Docker 辅助工具 | `Docker.cmd` | 是的；该辅助程序会监听 Web 服务器的运行状态。 |
-| Linux/macOS 上的 Docker 辅助工具 | `sh docker-start.sh` | 是的；该辅助程序会监听 Web 服务器的运行状态。 |
+| Windows 上的 Docker 辅助工具 | `scripts\Docker.cmd` | 是的；该辅助程序会监听 Web 服务器的运行状态。 |
+| Linux/macOS 上的 Docker 辅助工具 | `sh scripts/docker-start.sh` | 是的；该辅助程序会监听 Web 服务器的运行状态。 |
 
 原生启动会创建一个私有`.venv`，并安装已固定的依赖项。Docker会在镜像内部构建这些依赖项，无需使用主机端的Python。首次设置需要互联网连接。 若未检测到 Python 3.11 及以上版本，`Start.cmd` 会先征得当前 Windows 用户的同意，再为其安装 Python 3.12（使用 winget；若 winget 不可用，则在验证 Python 软件基金会签名后使用 python.org 安装程序）；该过程绝不会请求管理员权限。Docker 和操作系统服务仍是必备条件。
 
@@ -34,7 +34,7 @@
 
 ## 本地计算机
 
-在 Windows 系统上使用 `Start.cmd`，在 Linux/macOS 系统上使用 `sh start.sh`。`Setup.cmd` 或 `sh start.sh --setup-only` 可用于准备运行环境。启动程序在首次使用时会安装依赖项；后续启动将复用该环境。设置和 Telegram 数据采集需要互联网连接，但浏览现有记录和生成导出文件可在离线状态下进行。
+在 Windows 系统上使用 `Start.cmd`，在 Linux/macOS 系统上使用 `sh start.sh`。`scripts\Setup.cmd` 或 `sh start.sh --setup-only` 可用于准备运行环境。启动程序在首次使用时会安装依赖项；后续启动将复用该环境。设置和 Telegram 数据采集需要互联网连接，但浏览现有记录和生成导出文件可在离线状态下进行。
 
 设置完成后运行 `python start.py --check`，可在不启动收集器的情况下检查本地依赖项、Ed25519、存储、密钥配置及监听地址。使用 `--json` 获取结构化输出。请传入相应的 `--data-dir`、`--host` 和 `--port`。此检查不会安装软件包、创建日志或连接 Telegram；它并非完整性或覆盖范围的验证。 启动时会单独验证现有的日志。`python start.py --help`同样不会进行安装。
 

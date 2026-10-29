@@ -14,13 +14,13 @@ Download and extract the source archive or clone the project. Portable packages 
 | Windows source | Double-click `Start.cmd` | Python 3.11+; the launcher offers installation if missing |
 | Linux / macOS source | `sh start.sh` | Python 3.11+ with `venv` |
 | Windows portable | Extract the entire ZIP; open `TgWitness.cmd` | Embedded Python is included |
-| Docker | `Docker.cmd` on Windows; `sh docker-start.sh` elsewhere | Docker with Compose 2.20+ |
+| Docker | `scripts\Docker.cmd` on Windows; `sh scripts/docker-start.sh` elsewhere | Docker with Compose 2.20+ |
 
 The source launcher creates a private `.venv` and installs dependencies. Keep the native application's console open while collecting. Docker runs in the background.
 
 ## 2. Explore without an account
 
-For source installations, run `Demo.cmd` on Windows or:
+For source installations, run `scripts\Demo.cmd` on Windows or:
 
 ~~~sh
 sh start.sh --demo

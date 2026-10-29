@@ -1,9 +1,10 @@
 #!/bin/sh
 # Requires Docker Engine/Desktop and Compose v2.20 or newer; no host Python needed.
 set -eu
-cd -- "$(dirname -- "$0")"
+# Compose files and .env live in the project root, one level up.
+cd -- "$(dirname -- "$0")/.."
 if ! docker info >/dev/null 2>&1; then
-    printf '%s\n' 'Install and start Docker Engine/Desktop, then run sh docker-start.sh again.' >&2
+    printf '%s\n' 'Install and start Docker Engine/Desktop, then run sh scripts/docker-start.sh again.' >&2
     printf '%s\n' 'Linux: https://docs.docker.com/engine/install/ (add your user to the docker group or use sudo).' >&2
     exit 1
 fi

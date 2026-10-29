@@ -26,7 +26,7 @@
 </p>
 
 > [!TIP]
-> **Jelajahi terlebih dahulu sebelum terhubung.** Jalankan `Demo.cmd` atau `sh start.sh --demo` untuk membuka ruang kerja dengan percakapan fiktif. Tidak perlu akun Telegram.
+> **Jelajahi terlebih dahulu sebelum terhubung.** Jalankan `scripts\Demo.cmd` atau `sh start.sh --demo` untuk membuka ruang kerja dengan percakapan fiktif. Tidak perlu akun Telegram.
 
 **Baru di sini?** [Mulai →](QUICKSTART.md) · [Wiki →](../wiki/Home.md) · [Pilih panduan →](../README.md) · [Dapatkan bantuan →](../../.github/SUPPORT.md) · [Lihat apa yang sudah diuji →](../VERIFICATION.md)
 
@@ -76,17 +76,17 @@
 | **Windows, belum ada yang terinstal** | Unduh `TgWitness-<version>-windows-amd64-portable.zip` dari [bagian Rilis](../../../../releases), ekstrak, lalu klik dua kali **`TgWitness.cmd`** | Tidak ada; Python sudah disertakan |
 | Windows, dari sumber kode | Klik dua kali **`Start.cmd`** | Python 3.11+; disediakan dan diinstal untuk Anda jika belum terpasang |
 | Linux / macOS | `sh start.sh` | Python 3.11+ dengan `venv`; skrip ini akan menampilkan perintah instalasi untuk sistem Anda jika belum terpasang |
-| Docker, semua sistem operasi | Klik dua kali **`Docker.cmd`** atau jalankan `sh docker-start.sh` | Docker Engine/Desktop dengan Compose 2.20+ |
+| Docker, semua sistem operasi | Klik dua kali **`scripts\Docker.cmd`** atau jalankan `sh scripts/docker-start.sh` | Docker Engine/Desktop dengan Compose 2.20+ |
 
 1. Buka **http://127.0.0.1:8787**.
 2. Tempelkan token akses panel:
    - instalasi portabel atau dari sumber: isi dari `data/live/panel-token.txt`
-   - Docker: dicetak oleh `Docker.cmd`/`docker-start.sh`, atau `docker compose exec tgwitness cat /data/panel-token.txt`
+   - Docker: dicetak oleh `scripts\Docker.cmd`/`scripts/docker-start.sh`, atau `docker compose exec tgwitness cat /data/panel-token.txt`
 3. Tambahkan akun Telegram Anda, pilih obrolan yang akan dipantau, lalu tekan **Mulai pemantauan**.
 
 Peluncuran sumber pertama akan membuat instance pribadi `.venv` dan menginstal dependensi yang terpasang (diperlukan akses internet). Program bantu Docker akan membangun gambar, menunggu hingga panel dalam kondisi sehat, dan menampilkan alamat serta tokennya. `python start.py --check` (atau `TgWitness-Check.cmd` dalam paket portabel) memberikan laporan kesiapan tanpa perlu membuka Telegram.
 
-> **Hanya ingin melihat-lihat?** Jalankan **`Demo.cmd`** atau `sh start.sh --demo`. Jurnal fiktif akan terbuka langsung di browser; tidak ada akun Telegram yang terhubung dan datanya disimpan secara terpisah di `data/demo`.
+> **Hanya ingin melihat-lihat?** Jalankan **`scripts\Demo.cmd`** atau `sh start.sh --demo`. Jurnal fiktif akan terbuka langsung di browser; tidak ada akun Telegram yang terhubung dan datanya disimpan secara terpisah di `data/demo`.
 
 <details>
 <summary><strong>Di dalam ruang kerja: obrolan, riwayat, dan ekspor</strong></summary></details>

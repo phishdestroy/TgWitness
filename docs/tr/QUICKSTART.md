@@ -12,12 +12,12 @@ Bir yöntem seçin. Sürüm derlemesi yayınlandıktan sonra taşınabilir indir
 
 | Barındırma | Yüklü bir şey yok | Kaynak: Python 3.11+ | Docker: Engine/Desktop ile Compose 2.20+ |
 | --- | --- | --- | --- |
-| Windows | GitHub Sürümleri'nden `TgWitness-<version>-windows-amd64-portable.zip` dosyasını çıkarın, `TgWitness.cmd` dosyasına çift tıklayın | `Start.cmd` öğesine çift tıklayın | `Docker.cmd` öğesine çift tıklayın |
-| Linux / macOS | — | `sh start.sh` | `sh docker-start.sh` |
+| Windows | GitHub Sürümleri'nden `TgWitness-<version>-windows-amd64-portable.zip` dosyasını çıkarın, `TgWitness.cmd` dosyasına çift tıklayın | `Start.cmd` öğesine çift tıklayın | `scripts\Docker.cmd` öğesine çift tıklayın |
+| Linux / macOS | — | `sh start.sh` | `sh scripts/docker-start.sh` |
 
 Kaynak kod yöntemleri için, GitHub Releases'tan kaynak ZIP dosyasını indirip açın veya depoyu klonlayın. `Start.cmd`, uygun bir Python bulunamadığında (winget veya imzalı python.org yükleyicisi) Windows kullanıcınız için Python 3.12'yi yüklemeyi önerir. `start.sh`, Python eksikse Linux dağıtımınız veya macOS için tam yükleme komutunu görüntüler. Kaynak kodun ilk çalıştırılması, `.venv` dosyasını oluşturur ve bağımlılıkları otomatik olarak yükler.
 
-Docker, uygulamayı derler ve arka planda çalıştırır; ana bilgisayarda Python bulunması gerekmez. `Docker.cmd` ve `docker-start.sh`, konteyner düzgün çalıştığında panel adresini ve jetonu görüntüler. Desteklenen tüm ana bilgisayarlarda kullanılabilecek eşdeğer Docker komutları şunlardır:
+Docker, uygulamayı derler ve arka planda çalıştırır; ana bilgisayarda Python bulunması gerekmez. `scripts\Docker.cmd` ve `scripts/docker-start.sh`, konteyner düzgün çalıştığında panel adresini ve jetonu görüntüler. Desteklenen tüm ana bilgisayarlarda kullanılabilecek eşdeğer Docker komutları şunlardır:
 
 ```sh
 docker compose up -d --build --wait
@@ -30,7 +30,7 @@ Sunucu için [dağıtım](DEPLOYMENT.md), otomatik HTTPS, yeniden başlatma, yay
 
 ## Arayüzü keşfedin
 
-1. Taşınabilir paketteki **TgWitness-Demo.cmd** **dosyasını**, Windows kaynak klasöründeki **Demo.cmd** dosyasını veya Linux/macOS'ta `sh start.sh --demo` dosyasını çalıştırın. Kaynak dosyasını çalıştırdığınızda önce `.venv` dosyası oluşturulur ve bağımlılıklar yüklenir.
+1. Taşınabilir paketteki **TgWitness-Demo.cmd** **dosyasını**, Windows kaynak klasöründeki **scripts\Demo.cmd** dosyasını veya Linux/macOS'ta `sh start.sh --demo` dosyasını çalıştırın. Kaynak dosyasını çalıştırdığınızda önce `.venv` dosyası oluşturulur ve bağımlılıklar yüklenir.
 2. **http://127.0.0.1:8787** dosyasını açın.
 3. Yerel demo, örnek günlüğü otomatik olarak açar. Doğrudan yerel erişim için token kopyalamaya gerek yoktur.
 

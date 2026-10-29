@@ -12,12 +12,12 @@ Escolha um método. Os downloads portáteis ficam disponíveis após a publicaç
 
 | Hospedagem | Nada instalado | A partir da versão: Python 3.11+ | Docker: Engine/Desktop com Compose 2.20 ou superior |
 | --- | --- | --- | --- |
-| Windows | Extraia `TgWitness-<version>-windows-amd64-portable.zip` das versões do GitHub e clique duas vezes em `TgWitness.cmd` | Clique duas vezes em `Start.cmd` | Clique duas vezes em `Docker.cmd` |
-| Linux / macOS | — | `sh start.sh` | `sh docker-start.sh` |
+| Windows | Extraia `TgWitness-<version>-windows-amd64-portable.zip` das versões do GitHub e clique duas vezes em `TgWitness.cmd` | Clique duas vezes em `Start.cmd` | Clique duas vezes em `scripts\Docker.cmd` |
+| Linux / macOS | — | `sh start.sh` | `sh scripts/docker-start.sh` |
 
 Para acessar os métodos de código-fonte, baixe e extraia o arquivo ZIP de código-fonte a partir das versões do GitHub ou clone o repositório. `Start.cmd` oferece a instalação do Python 3.12 para usuários do Windows caso não seja encontrado um Python adequado (winget ou o instalador assinado do python.org). `start.sh` exibe o comando de instalação exato para sua distribuição Linux ou macOS caso o Python esteja ausente. A primeira execução do código-fonte cria `.venv` e instala as dependências automaticamente.
 
-O Docker compila o aplicativo e o inicia em segundo plano; não é necessário ter o Python instalado no host. `Docker.cmd` e `docker-start.sh` exibem o endereço do painel e o token quando o contêiner está funcionando corretamente. Os comandos equivalentes do Docker em todos os hosts compatíveis são:
+O Docker compila o aplicativo e o inicia em segundo plano; não é necessário ter o Python instalado no host. `scripts\Docker.cmd` e `scripts/docker-start.sh` exibem o endereço do painel e o token quando o contêiner está funcionando corretamente. Os comandos equivalentes do Docker em todos os hosts compatíveis são:
 
 ```sh
 docker compose up -d --build --wait
@@ -30,7 +30,7 @@ No caso de um servidor, [a implantação](DEPLOYMENT.md) abrange HTTPS automáti
 
 ## Explore a interface
 
-1. Execute **o** **arquivo** **`TgWitness-Demo.cmd`** no pacote portátil, o **`Demo.cmd`** na pasta de origem do Windows ou o ``sh start.sh --demo`` no Linux/macOS. Ao iniciar a execução a partir da fonte, o sistema cria primeiro o ``.venv`` e instala as dependências.
+1. Execute **o** **arquivo** **`TgWitness-Demo.cmd`** no pacote portátil, o **`scripts\Demo.cmd`** na pasta de origem do Windows ou o ``sh start.sh --demo`` no Linux/macOS. Ao iniciar a execução a partir da fonte, o sistema cria primeiro o ``.venv`` e instala as dependências.
 2. Abra **http://127.0.0.1:8787**.
 3. A demonstração local abre automaticamente o diário de amostra. Não é necessário copiar nenhum token para acesso local direto.
 

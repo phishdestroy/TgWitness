@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- The additional launchers moved to `scripts/`: `scripts\Demo.cmd`, `scripts\Setup.cmd`,
+  `scripts\Docker.cmd` and `sh scripts/docker-start.sh`. They still run from the project
+  root; `Start.cmd`, `start.sh` and `start.py` stay where they were.
 - Redesigned the repository presentation with a message-history cover, GitHub and
   website preview images, and an illustrated observation-to-verification workflow.
   The English README now leads with the workspace, feature cards and a demo;

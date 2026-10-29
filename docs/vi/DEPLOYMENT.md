@@ -12,8 +12,8 @@
 | Phiên bản gốc dành cho Windows | `Start.cmd` | Không; vui lòng sử dụng tác vụ đăng nhập tùy chọn để chạy nền. |
 | Phiên bản gốc dành cho Linux/macOS | `sh start.sh` | Không; hãy sử dụng systemd/launchd để chạy nền. |
 | Docker trên bất kỳ máy chủ nào được hỗ trợ | `docker compose up -d --build --wait` | Đúng vậy, miễn là daemon Docker vẫn đang chạy. |
-| Công cụ hỗ trợ Docker trên Windows | `Docker.cmd` | Đúng vậy; trình hỗ trợ sẽ theo dõi tình trạng hoạt động của máy chủ web. |
-| Công cụ hỗ trợ Docker trên Linux/macOS | `sh docker-start.sh` | Đúng vậy; trình hỗ trợ sẽ theo dõi tình trạng hoạt động của máy chủ web. |
+| Công cụ hỗ trợ Docker trên Windows | `scripts\Docker.cmd` | Đúng vậy; trình hỗ trợ sẽ theo dõi tình trạng hoạt động của máy chủ web. |
+| Công cụ hỗ trợ Docker trên Linux/macOS | `sh scripts/docker-start.sh` | Đúng vậy; trình hỗ trợ sẽ theo dõi tình trạng hoạt động của máy chủ web. |
 
 Quá trình khởi động gốc sẽ tạo ra một tệp `.venv` riêng tư và cài đặt các phụ thuộc được ghim sẵn. Docker sẽ xây dựng chúng bên trong hình ảnh, mà không cần đến Python trên máy chủ. Quá trình thiết lập lần đầu tiên cần có kết nối Internet. Khi không tìm thấy Python 3.11 trở lên, `Start.cmd` sẽ yêu cầu xác nhận trước khi cài đặt Python 3.12 cho người dùng Windows hiện tại (sử dụng winget, hoặc trình cài đặt từ python.org sau khi xác minh chữ ký của Python Software Foundation); hệ thống tuyệt đối không yêu cầu quyền quản trị viên. Docker và các dịch vụ hệ điều hành vẫn là các điều kiện tiên quyết.
 
@@ -34,7 +34,7 @@ Hệ điều hành Windows 11 và Python 3.12 đã được kiểm chứng trên
 
 ## Máy tính cục bộ
 
-Vui lòng sử dụng `Start.cmd` trên Windows hoặc `sh start.sh` trên Linux/macOS. `Setup.cmd` hoặc `sh start.sh --setup-only` sẽ chuẩn bị môi trường. Trình khởi chạy sẽ cài đặt các phụ thuộc khi sử dụng lần đầu; các lần khởi chạy sau đó sẽ tái sử dụng môi trường này. Cần có kết nối Internet để thiết lập và thu thập dữ liệu từ Telegram, tuy nhiên, việc duyệt qua các bản ghi hiện có và tạo tệp xuất vẫn có thể thực hiện được khi không có kết nối mạng.
+Vui lòng sử dụng `Start.cmd` trên Windows hoặc `sh start.sh` trên Linux/macOS. `scripts\Setup.cmd` hoặc `sh start.sh --setup-only` sẽ chuẩn bị môi trường. Trình khởi chạy sẽ cài đặt các phụ thuộc khi sử dụng lần đầu; các lần khởi chạy sau đó sẽ tái sử dụng môi trường này. Cần có kết nối Internet để thiết lập và thu thập dữ liệu từ Telegram, tuy nhiên, việc duyệt qua các bản ghi hiện có và tạo tệp xuất vẫn có thể thực hiện được khi không có kết nối mạng.
 
 Vui lòng chạy lệnh `python start.py --check` sau khi thiết lập để kiểm tra các phụ thuộc cục bộ, Ed25519, bộ nhớ lưu trữ, cấu hình khóa và địa chỉ lắng nghe mà không cần khởi động bộ thu thập dữ liệu. Sử dụng lệnh `--json` để nhận kết quả đầu ra có cấu trúc. Vui lòng truyền các tham số dự kiến `--data-dir`, `--host` và `--port`. Quá trình kiểm tra này không cài đặt gói phần mềm, không tạo nhật ký cũng như không kết nối với Telegram; đây không phải là quy trình đánh giá tính toàn vẹn hay phạm vi phủ sóng. Quá trình khởi động sẽ xác minh riêng các nhật ký hiện có. Lệnh `python start.py --help` cũng tránh việc cài đặt.
 

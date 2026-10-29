@@ -108,7 +108,7 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
-      - run: sh -n start.sh docker-start.sh
+      - run: sh -n start.sh scripts/docker-start.sh
       - name: Validate source and image configurations with HTTPS
         env:
           TGWITNESS_DOMAIN: watch.example.org

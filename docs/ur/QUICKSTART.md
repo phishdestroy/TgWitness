@@ -12,12 +12,12 @@ TgWitness ایک خود مختار ایپلیکیشن ہے جو آپ کے اکا
 
 | میزبان | کچھ بھی انسٹال نہیں ہوا | ماخذ سے: پائتھن 3.11+ | Docker: Engine/Desktop Compose 2.20+ کے ساتھ |
 | --- | --- | --- | --- |
-| ونڈوز | `TgWitness-<version>-windows-amd64-portable.zip` کو GitHub Releases سے نکالیں، `TgWitness.cmd` پر ڈبل کلک کریں۔ | `Start.cmd` پر ڈبل کلک کریں | `Docker.cmd` پر ڈبل کلک کریں |
-| لینکس / میک او ایس | — | `sh start.sh` | `sh docker-start.sh` |
+| ونڈوز | `TgWitness-<version>-windows-amd64-portable.zip` کو GitHub Releases سے نکالیں، `TgWitness.cmd` پر ڈبل کلک کریں۔ | `Start.cmd` پر ڈبل کلک کریں | `scripts\Docker.cmd` پر ڈبل کلک کریں |
+| لینکس / میک او ایس | — | `sh start.sh` | `sh scripts/docker-start.sh` |
 
 ماخذ طریقوں کے لیے GitHub Releases سے ماخذ ZIP ڈاؤن لوڈ کریں اور اسے نکالیں یا ریپوزیٹری کلون کریں۔ `Start.cmd` آپ کے Windows صارف کے لیے Python 3.12 انسٹال کرنے کی پیشکش کرتا ہے اگر کوئی موزوں Python نہ ملے (winget یا signed python.org انسٹالر کے ذریعے)۔ `start.sh` اگر Python موجود نہ ہو تو آپ کی Linux ڈسٹری بیوشن یا macOS کے لیے درست انسٹال کمانڈ دکھاتا ہے۔ پہلا سورس لانچ `.venv` بناتا ہے اور انحصار خودکار طور پر انسٹال کرتا ہے۔
 
-Docker ایپلیکیشن کو بناتا ہے اور اسے پسِ منظر میں چلاتا ہے؛ ہوسٹ Python غیر ضروری ہے۔ `Docker.cmd` اور `docker-start.sh` کنٹینر کے صحت مند ہونے پر پینل کا پتہ اور ٹوکن پرنٹ کرتے ہیں۔ ہر سپورٹڈ ہوسٹ پر مساوی Docker کمانڈز یہ ہیں:
+Docker ایپلیکیشن کو بناتا ہے اور اسے پسِ منظر میں چلاتا ہے؛ ہوسٹ Python غیر ضروری ہے۔ `scripts\Docker.cmd` اور `scripts/docker-start.sh` کنٹینر کے صحت مند ہونے پر پینل کا پتہ اور ٹوکن پرنٹ کرتے ہیں۔ ہر سپورٹڈ ہوسٹ پر مساوی Docker کمانڈز یہ ہیں:
 
 ```sh
 docker compose up -d --build --wait
@@ -30,7 +30,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 ## انٹرفیس کو دریافت کریں
 
-1. پورٹیبل پیکیج میں **TgWitness-Demo.cmd** چلائیں، ونڈوز سورس فولڈر میں **Demo.cmd** چلائیں، یا لینکس/macOS پر `sh start.sh --demo` چلائیں۔ سورس لانچ پہلے `.venv` بناتا ہے اور انحصارات انسٹال کرتا ہے۔
+1. پورٹیبل پیکیج میں **TgWitness-Demo.cmd** چلائیں، ونڈوز سورس فولڈر میں **scripts\Demo.cmd** چلائیں، یا لینکس/macOS پر `sh start.sh --demo` چلائیں۔ سورس لانچ پہلے `.venv` بناتا ہے اور انحصارات انسٹال کرتا ہے۔
 2. **http://127.0.0.1:8787** کھولیں۔
 3. مقامی ڈیمو نمونہ جرنل خود بخود کھولتا ہے۔ براہِ راست مقامی رسائی کے لیے ٹوکن کاپی کرنے کی ضرورت نہیں ہے۔
 

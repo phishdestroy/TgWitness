@@ -12,8 +12,8 @@ Taşınabilir paket için, GitHub Sürümleri'nden `TgWitness-<version>-windows-
 | Windows için yerel sürüm | `Start.cmd` | Hayır; arka planda çalıştırmak için isteğe bağlı oturum açma görevini kullanın. |
 | Linux/macOS için yerel sürüm | `sh start.sh` | Hayır; arka planda çalıştırmak için systemd/launchd kullanın. |
 | Desteklenen herhangi bir ana bilgisayarda Docker | `docker compose up -d --build --wait` | Evet, Docker arka plan programı çalışırken. |
-| Windows'ta Docker yardımcısı | `Docker.cmd` | Evet; yardımcı program, web sunucusunun durumunu bekler. |
-| Linux/macOS üzerinde Docker yardımcısı | `sh docker-start.sh` | Evet; yardımcı program, web sunucusunun durumunu bekler. |
+| Windows'ta Docker yardımcısı | `scripts\Docker.cmd` | Evet; yardımcı program, web sunucusunun durumunu bekler. |
+| Linux/macOS üzerinde Docker yardımcısı | `sh scripts/docker-start.sh` | Evet; yardımcı program, web sunucusunun durumunu bekler. |
 
 Yerel başlatma işlemi, özel bir `.venv` oluşturur ve sabitlenmiş bağımlılıkları yükler. Docker, ana bilgisayar Python'una ihtiyaç duymadan bunları görüntü içinde derler. İlk kurulum için İnternet erişimi gereklidir. Python 3.11+ bulunmadığında, `Start.cmd`, mevcut Windows kullanıcısı için Python 3.12'yi yüklemeden önce sorar (winget; aksi takdirde, Python Software Foundation imzasını kontrol ettikten sonra python.org yükleyicisi kullanılır); hiçbir zaman yönetici ayrıcalıkları talep etmez. Docker ve işletim sistemi hizmetleri ön koşul olarak kalır.
 
@@ -34,7 +34,7 @@ Windows 11/Python 3.12 yerel olarak doğrulanmıştır. Linux/macOS/konteyner ta
 
 ## Yerel bilgisayar
 
-Windows'ta `Start.cmd`, Linux/macOS'ta ise `sh start.sh` komutunu kullanın. `Setup.cmd` veya `sh start.sh --setup-only` komutları ortamı hazırlar. Başlatıcı, ilk kullanımda bağımlılıkları yükler; sonraki başlatmalarda mevcut ortam kullanılır. Kurulum ve Telegram verilerinin toplanması için internet erişimi gereklidir, ancak mevcut kayıtların görüntülenmesi ve dışa aktarımların oluşturulması çevrimdışı olarak yapılabilir.
+Windows'ta `Start.cmd`, Linux/macOS'ta ise `sh start.sh` komutunu kullanın. `scripts\Setup.cmd` veya `sh start.sh --setup-only` komutları ortamı hazırlar. Başlatıcı, ilk kullanımda bağımlılıkları yükler; sonraki başlatmalarda mevcut ortam kullanılır. Kurulum ve Telegram verilerinin toplanması için internet erişimi gereklidir, ancak mevcut kayıtların görüntülenmesi ve dışa aktarımların oluşturulması çevrimdışı olarak yapılabilir.
 
 Kurulumdan sonra `python start.py --check` komutunu çalıştırarak, bir toplayıcı başlatmadan yerel bağımlılıkları, Ed25519'u, depolama alanını, anahtar yapılandırmasını ve dinleme adresini kontrol edin. Yapılandırılmış çıktı için `--json` komutunu kullanın. İstenen `--data-dir`, `--host` ve `--port` parametrelerini aktarın. Bu kontrol, paketleri yüklemez, bir günlük oluşturmaz veya Telegram'a bağlanmaz; bir bütünlük veya kapsama yeterliliği değerlendirmesi değildir. Başlangıç işlemi, mevcut günlükleri ayrı olarak doğrular. `python start.py --help` da kurulumdan kaçınır.
 

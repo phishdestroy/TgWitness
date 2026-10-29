@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 VERSION = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))["project"]["version"]
 FILES = [
     "README.md", "docs/QUICKSTART.md", "LICENSE", ".github/SECURITY.md", ".github/SUPPORT.md", ".github/CONTRIBUTING.md", "docs/CHANGELOG.md", "pyproject.toml",
-    "start.py", "start.sh", "Start.cmd", "Demo.cmd", "Setup.cmd", "Docker.cmd", "docker-start.sh",
+    "start.py", "start.sh", "Start.cmd",
     "Dockerfile", "compose.yaml", "compose.image.yaml", "deploy/compose/compose.https.yaml", "deploy/compose/compose.witness.yaml", "deploy/compose/compose.proof.yaml", "deploy/compose/compose.proxies.yaml",
     ".gitignore", ".gitattributes", ".dockerignore", ".env.example", "constraints.txt",
 ]
@@ -16,6 +16,7 @@ DIRECTORIES = {
     "tgwitness": {".md", ".py", ".html", ".css", ".js", ".svg", ".json"},
     "docs": {".md", ".png", ".webp", ".svg", ".txt"}, "tests": {".py", ".md"}, "tools": {".py", ".md"},
     "deploy": {".md", ".ps1", ".service", ".example", ".docker"},
+    "scripts": {".md", ".cmd", ".sh"},
     ".github": {".md", ".yml", ".yaml"},
     "website": {".md", ".html", ".css", ".js", ".py", ".json"},
 }

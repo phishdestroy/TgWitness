@@ -33,7 +33,7 @@ or server, with your own accounts.
 
 | Windows | Linux / macOS |
 | --- | --- |
-| Double-click **`Demo.cmd`** | Run **`sh start.sh --demo`** |
+| Double-click **`scripts\Demo.cmd`** | Run **`sh start.sh --demo`** |
 
 From a source checkout, install Python 3.11+ first. The launcher prepares the
 environment and pinned dependencies. Open **http://127.0.0.1:8787**.

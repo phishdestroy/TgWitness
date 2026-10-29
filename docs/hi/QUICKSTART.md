@@ -12,12 +12,12 @@ TgWitness एक स्वतंत्र एप्लिकेशन है ज
 
 | होस्ट | कुछ भी स्थापित नहीं | स्रोत से: पाइथन 3.11+ | Docker: Engine/Desktop Compose 2.20+ के साथ |
 | --- | --- | --- | --- |
-| विंडोज | GitHub रिलीज़ से `TgWitness-<version>-windows-amd64-portable.zip` निकालें, `TgWitness.cmd` पर डबल-क्लिक करें | `Start.cmd` पर डबल-क्लिक करें | `Docker.cmd` पर डबल-क्लिक करें |
-| लिनक्स / मैकओएस | — | `sh start.sh` | `sh docker-start.sh` |
+| विंडोज | GitHub रिलीज़ से `TgWitness-<version>-windows-amd64-portable.zip` निकालें, `TgWitness.cmd` पर डबल-क्लिक करें | `Start.cmd` पर डबल-क्लिक करें | `scripts\Docker.cmd` पर डबल-क्लिक करें |
+| लिनक्स / मैकओएस | — | `sh start.sh` | `sh scripts/docker-start.sh` |
 
 सोर्स मेथड्स के लिए, GitHub रिलीज़ से सोर्स ZIP डाउनलोड और एक्सट्रेक्ट करें या रिपॉजिटरी क्लोन करें। `Start.cmd` आपके Windows यूज़र के लिए Python 3.12 इंस्टॉल करने का विकल्प देता है यदि कोई उपयुक्त Python नहीं मिलता (winget, या signed python.org इंस्टॉलर)। `start.sh` आपके Linux डिस्ट्रीब्यूशन या macOS के लिए सटीक इंस्टॉल कमांड प्रिंट करता है यदि Python मौजूद नहीं है। पहला स्रोत लॉन्च `.venv` बनाता है और निर्भरताएँ स्वचालित रूप से इंस्टॉल करता है।
 
-Docker एप्लिकेशन का निर्माण करता है और इसे पृष्ठभूमि में शुरू करता है; होस्ट Python अनावश्यक है। `Docker.cmd` और `docker-start.sh` कंटेनर स्वस्थ होने पर पैनल का पता और टोकन प्रिंट करते हैं। प्रत्येक समर्थित होस्ट पर समकक्ष Docker कमांड हैं:
+Docker एप्लिकेशन का निर्माण करता है और इसे पृष्ठभूमि में शुरू करता है; होस्ट Python अनावश्यक है। `scripts\Docker.cmd` और `scripts/docker-start.sh` कंटेनर स्वस्थ होने पर पैनल का पता और टोकन प्रिंट करते हैं। प्रत्येक समर्थित होस्ट पर समकक्ष Docker कमांड हैं:
 
 ```sh
 docker compose up -d --build --wait
@@ -30,7 +30,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 ## इंटरफ़ेस का अन्वेषण करें
 
-1. पोर्टेबल पैकेज में **TgWitness-Demo.cmd** चलाएँ, Windows स्रोत फ़ोल्डर में **Demo.cmd** चलाएँ, या Linux/macOS पर `sh start.sh --demo` चलाएँ। एक स्रोत लॉन्च पहले `.venv` बनाता है और निर्भरताएँ स्थापित करता है।
+1. पोर्टेबल पैकेज में **TgWitness-Demo.cmd** चलाएँ, Windows स्रोत फ़ोल्डर में **scripts\Demo.cmd** चलाएँ, या Linux/macOS पर `sh start.sh --demo` चलाएँ। एक स्रोत लॉन्च पहले `.venv` बनाता है और निर्भरताएँ स्थापित करता है।
 2. **http://127.0.0.1:8787** खोलें।
 3. स्थानीय डेमो स्वचालित रूप से नमूना जर्नल खोलता है। सीधे स्थानीय पहुँच के लिए टोकन कॉपी की आवश्यकता नहीं है।
 

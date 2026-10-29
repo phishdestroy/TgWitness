@@ -26,7 +26,7 @@
 </p>
 
 > [!TIP]
-> **Bağlanmadan önce keşfedin.** `Demo.cmd` veya `sh start.sh --demo` komutunu çalıştırarak kurgusal sohbetlerin bulunduğu bir çalışma alanını açın. Telegram hesabı gerekmez.
+> **Bağlanmadan önce keşfedin.** `scripts\Demo.cmd` veya `sh start.sh --demo` komutunu çalıştırarak kurgusal sohbetlerin bulunduğu bir çalışma alanını açın. Telegram hesabı gerekmez.
 
 **Buraya ilk kez mi geldiniz?** [Başlayın →](QUICKSTART.md) · [Wiki →](../wiki/Home.md) · [Bir kılavuz seçin →](../README.md) · [Yardım alın →](../../.github/SUPPORT.md) · [Test edilmiş olanları görün →](../VERIFICATION.md)
 
@@ -76,17 +76,17 @@
 | **Windows, hiçbir şey yüklenmemiş** | `TgWitness-<version>-windows-amd64-portable.zip` dosyasını [Sürümler](../../../../releases) bölümünden indirin, dosyayı açın ve **`TgWitness.cmd`** dosyasına çift tıklayın | Yok; Python pakete dahildir |
 | Windows, kaynak koddan derleme | **`Start.cmd`** öğesine çift tıklayın | Python 3.11+; eksikse sizin için sunulur ve kurulur |
 | Linux / macOS | `sh start.sh` | `venv` ile Python 3.11+; komut dosyası, eksikse sisteminiz için kurulum komutunu görüntüler |
-| Docker, herhangi bir işletim sistemi | **`Docker.cmd`** öğesine çift tıklayın veya `sh docker-start.sh` öğesini çalıştırın | Compose 2.20+ ile Docker Engine/Desktop |
+| Docker, herhangi bir işletim sistemi | **`scripts\Docker.cmd`** öğesine çift tıklayın veya `sh scripts/docker-start.sh` öğesini çalıştırın | Compose 2.20+ ile Docker Engine/Desktop |
 
 1. **http://127.0.0.1:8787** dosyasını açın.
 2. Panel erişim jetonunu yapıştırın:
    - taşınabilir veya kaynak kodu yüklemesi: `data/live/panel-token.txt` içeriği
-   - Docker: `Docker.cmd`/`docker-start.sh` veya `docker compose exec tgwitness cat /data/panel-token.txt` tarafından basılmıştır
+   - Docker: `scripts\Docker.cmd`/`scripts/docker-start.sh` veya `docker compose exec tgwitness cat /data/panel-token.txt` tarafından basılmıştır
 3. Telegram hesabınızı ekleyin, gözlemlemek istediğiniz sohbetleri seçin ve "**Gözlemi başlat" düğmesine** basın.
 
 İlk kaynak başlatma işlemi, özel bir `.venv` oluşturur ve sabitlenmiş bağımlılıkları yükler (İnternet erişimi gereklidir). Docker yardımcı programları görüntüyü oluşturur, panelin çalışır duruma gelmesini bekler ve adresini ile jetonunu görüntüler. `python start.py --check` (veya taşınabilir paketteki `TgWitness-Check.cmd`), Telegram'a dokunmadan bir hazırlık raporu sunar.
 
-> **Sadece bakmak mı istiyorsunuz?** **`Demo.cmd`** veya `sh start.sh --demo` komutunu çalıştırın. Tarayıcıda doğrudan kurgusal bir günlük açılır; herhangi bir Telegram hesabı bağlı değildir ve veriler `data/demo` içinde ayrı olarak depolanır.
+> **Sadece bakmak mı istiyorsunuz?** **`scripts\Demo.cmd`** veya `sh start.sh --demo` komutunu çalıştırın. Tarayıcıda doğrudan kurgusal bir günlük açılır; herhangi bir Telegram hesabı bağlı değildir ve veriler `data/demo` içinde ayrı olarak depolanır.
 
 <details>
 <summary><strong>Çalışma alanında neler var: sohbetler, geçmiş ve dışa aktarma işlemleri</strong></summary></details>

@@ -26,7 +26,7 @@
 </p>
 
 > [!TIP]
-> **Explore antes de se conectar.** Execute `Demo.cmd` ou `sh start.sh --demo` para abrir um espaço de trabalho com conversas fictícias. Não é necessária uma conta no Telegram.
+> **Explore antes de se conectar.** Execute `scripts\Demo.cmd` ou `sh start.sh --demo` para abrir um espaço de trabalho com conversas fictícias. Não é necessária uma conta no Telegram.
 
 **É novo aqui?** [Iniciar →](QUICKSTART.md) · [Wiki →](../wiki/Home.md) · [Escolha um guia →](../README.md) · [Obter ajuda →](../../.github/SUPPORT.md) · [Veja o que já foi testado →](../VERIFICATION.md)
 
@@ -76,17 +76,17 @@
 | **Windows, sem nada instalado** | Baixe `TgWitness-<version>-windows-amd64-portable.zip` da [seção “Lançamentos”](../../../../releases), extraia e clique duas vezes em **`TgWitness.cmd`** | Nada; o Python já está incluído |
 | Windows, a partir do código-fonte | Clique duas vezes em **`Start.cmd`** | Python 3.11+; disponibilizado e instalado para você, caso não esteja presente |
 | Linux / macOS | `sh start.sh` | Python 3.11+ com `venv`; o script exibe o comando de instalação para o seu sistema, caso esteja ausente |
-| Docker, qualquer sistema operacional | Clique duas vezes em **`Docker.cmd`** ou execute `sh docker-start.sh` | Docker Engine/Desktop com Compose 2.20 ou superior |
+| Docker, qualquer sistema operacional | Clique duas vezes em **`scripts\Docker.cmd`** ou execute `sh scripts/docker-start.sh` | Docker Engine/Desktop com Compose 2.20 ou superior |
 
 1. Abra **http://127.0.0.1:8787**.
 2. Cole o token de acesso ao painel:
    - instalação portátil ou a partir do código-fonte: o conteúdo de `data/live/panel-token.txt`
-   - Docker: gerado por `Docker.cmd`/`docker-start.sh` ou `docker compose exec tgwitness cat /data/panel-token.txt`
+   - Docker: gerado por `scripts\Docker.cmd`/`scripts/docker-start.sh` ou `docker compose exec tgwitness cat /data/panel-token.txt`
 3. Adicione sua conta do Telegram, escolha os chats a serem observados e clique em **“Iniciar observação**”.
 
 A primeira execução do código-fonte cria um `.venv` privado e instala as dependências fixadas (é necessário acesso à Internet). Os auxiliares do Docker compilam a imagem, aguardam até que o painel esteja em bom estado e exibem seu endereço e token. `python start.py --check` (ou `TgWitness-Check.cmd` no pacote portátil) fornece um relatório de prontidão sem acessar o Telegram.
 
-> **Está apenas dando uma olhada?** Execute **`Demo.cmd`** ou `sh start.sh --demo`. Um diário fictício é aberto diretamente no navegador; nenhuma conta do Telegram está conectada e os dados ficam armazenados separadamente em `data/demo`.
+> **Está apenas dando uma olhada?** Execute **`scripts\Demo.cmd`** ou `sh start.sh --demo`. Um diário fictício é aberto diretamente no navegador; nenhuma conta do Telegram está conectada e os dados ficam armazenados separadamente em `data/demo`.
 
 <details>
 <summary><strong>No interior do espaço de trabalho: conversas, histórico e exportações</strong></summary></details>

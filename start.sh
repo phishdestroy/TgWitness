@@ -27,5 +27,5 @@ else
     hint='Install Python from https://www.python.org/downloads/'
 fi
 printf '    %s\n' "$hint" >&2
-printf '%s\n' 'Alternatively, install Docker with Compose and run sh docker-start.sh.' >&2
+printf '%s\n' 'Alternatively, install Docker with Compose and run sh scripts/docker-start.sh.' >&2
 exit 1

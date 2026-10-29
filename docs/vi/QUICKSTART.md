@@ -12,12 +12,12 @@ Vui lòng chọn một phương thức. Các bản tải xuống di động sẽ
 
 | Máy chủ | Chưa cài đặt bất kỳ phần mềm nào | Từ nguồn: Python 3.11 trở lên | Docker: Engine/Desktop với Compose 2.20 trở lên |
 | --- | --- | --- | --- |
-| Windows | Trích xuất `TgWitness-<version>-windows-amd64-portable.zip` từ GitHub Releases, nhấp đúp vào `TgWitness.cmd` | Nhấp đúp vào `Start.cmd` | Nhấp đúp vào `Docker.cmd` |
-| Linux / macOS | — | `sh start.sh` | `sh docker-start.sh` |
+| Windows | Trích xuất `TgWitness-<version>-windows-amd64-portable.zip` từ GitHub Releases, nhấp đúp vào `TgWitness.cmd` | Nhấp đúp vào `Start.cmd` | Nhấp đúp vào `scripts\Docker.cmd` |
+| Linux / macOS | — | `sh start.sh` | `sh scripts/docker-start.sh` |
 
 Đối với các phương pháp nguồn, quý vị vui lòng tải xuống và giải nén tệp ZIP nguồn từ GitHub Releases hoặc sao chép kho lưu trữ. `Start.cmd` sẽ đề xuất cài đặt Python 3.12 cho người dùng Windows nếu không tìm thấy phiên bản Python phù hợp (winget hoặc trình cài đặt có chữ ký từ python.org). `start.sh` sẽ hiển thị lệnh cài đặt chính xác dành cho bản phân phối Linux hoặc macOS của quý vị nếu thiếu Python. Lần khởi chạy mã nguồn đầu tiên sẽ tạo tệp `.venv` và tự động cài đặt các phụ thuộc.
 
-Docker sẽ biên dịch ứng dụng và khởi chạy nó ở chế độ nền; không cần cài đặt Python trên máy chủ. `Docker.cmd` và `docker-start.sh` sẽ hiển thị địa chỉ bảng điều khiển và mã thông báo khi container đang hoạt động bình thường. Các lệnh Docker tương ứng trên mọi máy chủ được hỗ trợ là:
+Docker sẽ biên dịch ứng dụng và khởi chạy nó ở chế độ nền; không cần cài đặt Python trên máy chủ. `scripts\Docker.cmd` và `scripts/docker-start.sh` sẽ hiển thị địa chỉ bảng điều khiển và mã thông báo khi container đang hoạt động bình thường. Các lệnh Docker tương ứng trên mọi máy chủ được hỗ trợ là:
 
 ```sh
 docker compose up -d --build --wait
@@ -30,7 +30,7 @@ Mở tệp **http://127.0.0.1:8787**. Sử dụng mã thông báo được tạo
 
 ## Khám phá giao diện
 
-1. Vui lòng chạy **tệp TgWitness-Demo.cmd** trong gói di động, tệp **Demo.cmd** trong thư mục nguồn trên Windows, hoặc `sh start.sh --demo` trên Linux/macOS. Khi khởi chạy từ nguồn, hệ thống sẽ tạo tệp `.venv` và cài đặt các phụ thuộc.
+1. Vui lòng chạy **tệp TgWitness-Demo.cmd** trong gói di động, tệp **scripts\Demo.cmd** trong thư mục nguồn trên Windows, hoặc `sh start.sh --demo` trên Linux/macOS. Khi khởi chạy từ nguồn, hệ thống sẽ tạo tệp `.venv` và cài đặt các phụ thuộc.
 2. Mở **http://127.0.0.1:8787**.
 3. Bản demo cục bộ sẽ tự động mở nhật ký mẫu. Quý vị không cần sao chép mã thông báo để truy cập trực tiếp tại máy cục bộ.
 

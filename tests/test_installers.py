@@ -32,9 +32,10 @@ def test_native_entrypoint_from_another_directory_with_spaces(tmp_path, mode):
     flags = {"start": [], "setup": ["--setup-only"], "demo": ["--demo"], "failure": ["--fail"]}[mode]
     arguments = [*flags, "--data-dir", "saved observations", "--port", "9001"]
     if os.name == "nt":
-        for name in ("Start.cmd", "Setup.cmd", "Demo.cmd"):
+        (project / "scripts").mkdir()
+        for name in ("Start.cmd", "scripts/Setup.cmd", "scripts/Demo.cmd"):
             shutil.copyfile(ROOT / name, project / name)
-        entry = {"setup": "Setup.cmd", "demo": "Demo.cmd"}.get(mode, "Start.cmd")
+        entry = {"setup": "scripts/Setup.cmd", "demo": "scripts/Demo.cmd"}.get(mode, "Start.cmd")
         forwarded = "--fail " if mode == "failure" else ""
         command = ('cmd.exe /d /s /c ""' + str(project / entry) + '" ' + forwarded
                    + '--data-dir "saved observations" --port 9001"')
@@ -53,7 +54,8 @@ def test_native_entrypoint_from_another_directory_with_spaces(tmp_path, mode):
 def test_docker_shell_waits_and_reports_only_successful_start(tmp_path, failure):
     project = tmp_path / "TgWitness source"
     project.mkdir()
-    shutil.copyfile(ROOT / "docker-start.sh", project / "docker-start.sh")
+    (project / "scripts").mkdir()
+    shutil.copyfile(ROOT / "scripts/docker-start.sh", project / "scripts/docker-start.sh")
     executable = project / "docker"
     executable.write_text(
         "#!/bin/sh\n"
@@ -69,7 +71,7 @@ def test_docker_shell_waits_and_reports_only_successful_start(tmp_path, failure)
     log = tmp_path / "docker-calls.txt"
     environment = dict(os.environ, PATH=str(project) + os.pathsep + os.environ["PATH"],
                        INSTALLER_LOG=str(log), FAIL_PHASE=failure)
-    result = subprocess.run([shell(), str(project / "docker-start.sh")], cwd=tmp_path,
+    result = subprocess.run([shell(), str(project / "scripts/docker-start.sh")], cwd=tmp_path,
                             env=environment, text=True, capture_output=True, timeout=20)
     calls = log.read_text().splitlines()
     assert result.returncode == (1 if failure else 0), result.stdout + result.stderr

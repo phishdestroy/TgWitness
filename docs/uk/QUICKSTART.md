@@ -12,12 +12,12 @@ TgWitness — це автономний додаток для спостереж
 
 | Хостинг | Нічого не встановлено | З вихідного коду: Python 3.11+ | Docker: Engine/Desktop із Compose 2.20+ |
 | --- | --- | --- | --- |
-| Windows | Витягніть `TgWitness-<version>-windows-amd64-portable.zip` з GitHub Releases, двічі клацніть `TgWitness.cmd` | Двічі клацніть на `Start.cmd` | Двічі клацніть на `Docker.cmd` |
-| Linux / macOS | — | `sh start.sh` | `sh docker-start.sh` |
+| Windows | Витягніть `TgWitness-<version>-windows-amd64-portable.zip` з GitHub Releases, двічі клацніть `TgWitness.cmd` | Двічі клацніть на `Start.cmd` | Двічі клацніть на `scripts\Docker.cmd` |
+| Linux / macOS | — | `sh start.sh` | `sh scripts/docker-start.sh` |
 
 Щоб отримати вихідний код, завантажте та розпакуйте ZIP-архів із GitHub Releases або клонуйте репозиторій. `Start.cmd` пропонує встановити Python 3.12 для вашого користувача Windows, якщо не знайдено відповідної версії Python (winget або підписаний інсталятор з python.org). `start.sh` виводить точну команду встановлення для вашого дистрибутива Linux або macOS, якщо Python відсутній. При першому запуску вихідного коду створюється файл `.venv`, а залежності встановлюються автоматично.
 
-Docker компілює додаток і запускає його у фоновому режимі; Python на хості не потрібен. `Docker.cmd` та `docker-start.sh` виводять адресу панелі та токен, коли контейнер працює нормально. Відповідні команди Docker для кожного підтримуваного хоста:
+Docker компілює додаток і запускає його у фоновому режимі; Python на хості не потрібен. `scripts\Docker.cmd` та `scripts/docker-start.sh` виводять адресу панелі та токен, коли контейнер працює нормально. Відповідні команди Docker для кожного підтримуваного хоста:
 
 ```sh
 docker compose up -d --build --wait
@@ -30,7 +30,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 ## Ознайомтеся з інтерфейсом
 
-1. Запустіть **файл TgWitness-Demo.cmd** у портативному пакеті, **Demo.cmd** у папці з вихідним кодом для Windows або `sh start.sh --demo` у Linux/macOS. Запуск з вихідного коду спочатку створює файл `.venv` та встановлює залежності.
+1. Запустіть **файл TgWitness-Demo.cmd** у портативному пакеті, **scripts\Demo.cmd** у папці з вихідним кодом для Windows або `sh start.sh --demo` у Linux/macOS. Запуск з вихідного коду спочатку створює файл `.venv` та встановлює залежності.
 2. Відкрити **http://127.0.0.1:8787**.
 3. Локальна демо-версія автоматично відкриває зразок журналу. Для прямого локального доступу копіювання токена не потрібно.
 

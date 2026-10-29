@@ -26,7 +26,7 @@
 </p>
 
 > [!TIP]
-> **连接前请先探索。**运行 `Demo.cmd` 或 `sh start.sh --demo` 以打开包含虚构对话的工作区。无需 Telegram 账号。
+> **连接前请先探索。**运行 `scripts\Demo.cmd` 或 `sh start.sh --demo` 以打开包含虚构对话的工作区。无需 Telegram 账号。
 
 **初次访问？**[开始 →](QUICKSTART.md) · [维基 →](../wiki/Home.md) · [选择指南 →](../README.md) · [获取帮助 →](../../.github/SUPPORT.md) · [查看已测试内容 →](../VERIFICATION.md)
 
@@ -76,17 +76,17 @@
 | **Windows，无需安装任何软件** | 从[“发布](../../../../releases)”页面下载`TgWitness-<version>-windows-amd64-portable.zip`，解压后双击**`TgWitness.cmd`** | 无；Python 已捆绑其中 |
 | Windows 版，源代码编译 | 双击**`Start.cmd`** | Python 3.11 及以上版本；若未安装，系统将自动为您提供并安装 |
 | Linux / macOS | `sh start.sh` | 需 Python 3.11 及以上版本，并支持 `venv`；若缺少相关组件，脚本会打印适用于您系统的安装命令 |
-| Docker，任意操作系统 | 双击**`Docker.cmd`**或运行`sh docker-start.sh` | 配备 Compose 2.20+ 的 Docker Engine/Desktop |
+| Docker，任意操作系统 | 双击**`scripts\Docker.cmd`**或运行`sh scripts/docker-start.sh` | 配备 Compose 2.20+ 的 Docker Engine/Desktop |
 
 1. 打开 **http://127.0.0.1:8787**。
 2. 粘贴控制面板访问令牌：
    - 便携版或源代码安装：`data/live/panel-token.txt` 中的内容
-   - Docker：由 `Docker.cmd`/`docker-start.sh` 或 `docker compose exec tgwitness cat /data/panel-token.txt` 生成
+   - Docker：由 `scripts\Docker.cmd`/`scripts/docker-start.sh` 或 `docker compose exec tgwitness cat /data/panel-token.txt` 生成
 3. 添加您的 Telegram 账号，选择要监控的聊天群组，然后点击**“开始监控**”。
 
 首次源代码启动会创建一个私有 `.venv`，并安装固定依赖项（需要互联网连接）。Docker 辅助程序会构建镜像，等待控制面板运行正常后，输出其地址和令牌。`python start.py --check`（或便携包中的 `TgWitness-Check.cmd`）可在不触及 Telegram 的情况下提供就绪报告。
 
-> **只是想看看？**请运行 **`Demo.cmd`** 或 `sh start.sh --demo`。一个虚构的日志将直接在浏览器中打开；未关联任何 Telegram 账号，数据独立存储在 `data/demo` 中。
+> **只是想看看？**请运行 **`scripts\Demo.cmd`** 或 `sh start.sh --demo`。一个虚构的日志将直接在浏览器中打开；未关联任何 Telegram 账号，数据独立存储在 `data/demo` 中。
 
 <details>
 <summary><strong>工作区内部：聊天、历史记录和导出功能</strong></summary></details>

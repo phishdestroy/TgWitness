@@ -12,8 +12,8 @@ Untuk paket portabel, ekstrak `TgWitness-<version>-windows-amd64-portable.zip` d
 | Versi asli Windows | `Start.cmd` | Tidak; gunakan tugas login opsional untuk penggunaan di latar belakang. |
 | Versi asli untuk Linux/macOS | `sh start.sh` | Tidak; gunakan systemd/launchd untuk penggunaan di latar belakang. |
 | Docker di host apa pun yang didukung | `docker compose up -d --build --wait` | Ya, selama daemon Docker sedang berjalan. |
-| Alat bantu Docker di Windows | `Docker.cmd` | Ya; program bantu tersebut menunggu status kesehatan server web. |
-| Alat bantu Docker di Linux/macOS | `sh docker-start.sh` | Ya; program bantu tersebut menunggu status kesehatan server web. |
+| Alat bantu Docker di Windows | `scripts\Docker.cmd` | Ya; program bantu tersebut menunggu status kesehatan server web. |
+| Alat bantu Docker di Linux/macOS | `sh scripts/docker-start.sh` | Ya; program bantu tersebut menunggu status kesehatan server web. |
 
 Proses startup asli membuat `.venv` pribadi dan menginstal dependensi yang disematkan. Docker membangunnya di dalam gambar, tanpa memerlukan Python host. Pengaturan pertama kali memerlukan akses internet. Jika Python 3.11+ tidak ditemukan, `Start.cmd` akan meminta konfirmasi sebelum menginstal Python 3.12 untuk pengguna Windows saat ini (menggunakan winget, atau penginstal python.org setelah memverifikasi tanda tangan Python Software Foundation); proses ini tidak pernah meminta hak akses administrator. Docker dan layanan sistem operasi tetap menjadi prasyarat.
 
@@ -34,7 +34,7 @@ Windows 11/Python 3.12 telah diverifikasi secara lokal. Definisi untuk Linux/mac
 
 ## Komputer lokal
 
-Gunakan `Start.cmd` di Windows atau `sh start.sh` di Linux/macOS. `Setup.cmd` atau `sh start.sh --setup-only` mempersiapkan lingkungan. Peluncur akan menginstal dependensi saat pertama kali digunakan; peluncuran berikutnya akan menggunakan kembali lingkungan tersebut. Akses internet diperlukan untuk pengaturan dan pengumpulan data Telegram, tetapi penelusuran catatan yang ada serta pembuatan ekspor dapat dilakukan secara offline.
+Gunakan `Start.cmd` di Windows atau `sh start.sh` di Linux/macOS. `scripts\Setup.cmd` atau `sh start.sh --setup-only` mempersiapkan lingkungan. Peluncur akan menginstal dependensi saat pertama kali digunakan; peluncuran berikutnya akan menggunakan kembali lingkungan tersebut. Akses internet diperlukan untuk pengaturan dan pengumpulan data Telegram, tetapi penelusuran catatan yang ada serta pembuatan ekspor dapat dilakukan secara offline.
 
 Jalankan `python start.py --check` setelah penyiapan untuk memeriksa dependensi lokal, Ed25519, penyimpanan, konfigurasi kunci, dan alamat pendengar tanpa memulai pengumpul. Gunakan `--json` untuk keluaran terstruktur. Masukkan `--data-dir`, `--host`, dan `--port` yang dimaksud. Pemeriksaan ini tidak menginstal paket, membuat jurnal, atau menghubungkan Telegram; ini bukan kualifikasi integritas atau cakupan. Proses startup memverifikasi jurnal yang sudah ada secara terpisah. `python start.py --help` juga menghindari proses instalasi.
 

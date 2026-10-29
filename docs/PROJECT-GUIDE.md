@@ -137,7 +137,7 @@
 
 | Windows | Linux / macOS |
 | --- | --- |
-| Double-click **`Demo.cmd`** | Run **`sh start.sh --demo`** |
+| Double-click **`scripts\Demo.cmd`** | Run **`sh start.sh --demo`** |
 
 From a source checkout, Python 3.11+ is required; the launcher prepares the environment
 and installs pinned dependencies on first use. Open **http://127.0.0.1:8787**.

@@ -26,7 +26,7 @@
 </p>
 
 > [!TIP]
-> **Hãy khám phá trước khi kết nối.** Vui lòng chạy `Demo.cmd` hoặc `sh start.sh --demo` để mở không gian làm việc với các cuộc trò chuyện giả định. Không cần tài khoản Telegram.
+> **Hãy khám phá trước khi kết nối.** Vui lòng chạy `scripts\Demo.cmd` hoặc `sh start.sh --demo` để mở không gian làm việc với các cuộc trò chuyện giả định. Không cần tài khoản Telegram.
 
 **Lần đầu ghé thăm?** [Bắt đầu →](QUICKSTART.md) · [Wiki →](../wiki/Home.md) · [Chọn hướng dẫn →](../README.md) · [Nhận trợ giúp →](../../.github/SUPPORT.md) · [Xem những gì đã được kiểm thử →](../VERIFICATION.md)
 
@@ -76,17 +76,17 @@
 | **Hệ điều hành Windows, chưa cài đặt bất kỳ phần mềm nào** | Tải xuống `TgWitness-<version>-windows-amd64-portable.zip` từ [mục Phát hành](../../../../releases), giải nén, nhấp đúp vào **`TgWitness.cmd`** | Không có gì; Python đã được tích hợp sẵn |
 | Windows, từ mã nguồn | Nhấp đúp vào **`Start.cmd`** | Python 3.11 trở lên; sẽ được cung cấp và cài đặt sẵn cho quý vị nếu chưa có |
 | Linux / macOS | `sh start.sh` | Yêu cầu Python 3.11 trở lên cùng với `venv`; nếu thiếu, tập lệnh sẽ hiển thị lệnh cài đặt phù hợp với hệ thống của quý vị |
-| Docker, mọi hệ điều hành | Nhấp đúp vào **`Docker.cmd`** hoặc chạy `sh docker-start.sh` | Docker Engine/Desktop với Compose phiên bản 2.20 trở lên |
+| Docker, mọi hệ điều hành | Nhấp đúp vào **`scripts\Docker.cmd`** hoặc chạy `sh scripts/docker-start.sh` | Docker Engine/Desktop với Compose phiên bản 2.20 trở lên |
 
 1. Mở **http://127.0.0.1:8787**.
 2. Dán mã thông báo truy cập bảng điều khiển vào đây:
    - Cài đặt phiên bản di động hoặc từ mã nguồn: nội dung của `data/live/panel-token.txt`
-   - Docker: được in bởi `Docker.cmd`/`docker-start.sh`, hoặc `docker compose exec tgwitness cat /data/panel-token.txt`
+   - Docker: được in bởi `scripts\Docker.cmd`/`scripts/docker-start.sh`, hoặc `docker compose exec tgwitness cat /data/panel-token.txt`
 3. Thêm tài khoản Telegram của quý vị, chọn các cuộc trò chuyện cần theo dõi và nhấn **“Bắt đầu theo dõi**”.
 
 Lần khởi chạy nguồn đầu tiên sẽ tạo ra một tài khoản riêng tư `.venv` và cài đặt các phụ thuộc bắt buộc (yêu cầu kết nối Internet). Các công cụ hỗ trợ Docker sẽ xây dựng hình ảnh, chờ cho đến khi bảng điều khiển hoạt động ổn định và hiển thị địa chỉ cùng mã thông báo của nó. `python start.py --check` (hoặc `TgWitness-Check.cmd` trong gói di động) sẽ cung cấp báo cáo sẵn sàng mà không cần tương tác với Telegram.
 
-> **Chỉ muốn xem thử?** Vui lòng truy cập **`Demo.cmd`** hoặc `sh start.sh --demo`. Một nhật ký giả định sẽ mở trực tiếp trên trình duyệt; không có tài khoản Telegram nào được kết nối và dữ liệu được lưu trữ riêng biệt tại `data/demo`.
+> **Chỉ muốn xem thử?** Vui lòng truy cập **`scripts\Demo.cmd`** hoặc `sh start.sh --demo`. Một nhật ký giả định sẽ mở trực tiếp trên trình duyệt; không có tài khoản Telegram nào được kết nối và dữ liệu được lưu trữ riêng biệt tại `data/demo`.
 
 <details>
 <summary><strong>Bên trong không gian làm việc: các cuộc trò chuyện, lịch sử và tính năng xuất dữ liệu</strong></summary></details>

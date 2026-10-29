@@ -12,12 +12,12 @@ Elija un método. Las descargas portátiles estarán disponibles una vez que se 
 
 | Servidor | No hay nada instalado | A partir de la versión: Python 3.11+ | Docker: Engine/Desktop con Compose 2.20 o superior |
 | --- | --- | --- | --- |
-| Windows | Extraiga `TgWitness-<version>-windows-amd64-portable.zip` de las versiones de GitHub y haga doble clic en `TgWitness.cmd` | Haga doble clic en `Start.cmd` | Haga doble clic en `Docker.cmd` |
-| Linux / macOS | — | `sh start.sh` | `sh docker-start.sh` |
+| Windows | Extraiga `TgWitness-<version>-windows-amd64-portable.zip` de las versiones de GitHub y haga doble clic en `TgWitness.cmd` | Haga doble clic en `Start.cmd` | Haga doble clic en `scripts\Docker.cmd` |
+| Linux / macOS | — | `sh start.sh` | `sh scripts/docker-start.sh` |
 
 Para acceder al código fuente, descargue y extraiga el archivo ZIP de GitHub Releases o clone el repositorio. `Start.cmd` le ofrece instalar Python 3.12 en su sistema Windows si no se encuentra una versión adecuada de Python (winget o el instalador firmado de python.org). `start.sh` muestra el comando de instalación exacto para su distribución de Linux o macOS si no dispone de Python. La primera ejecución del código fuente crea `.venv` e instala las dependencias automáticamente.
 
-Docker compila la aplicación y la inicia en segundo plano; no es necesario disponer de Python en el host. `Docker.cmd` y `docker-start.sh` muestran la dirección del panel y el token cuando el contenedor funciona correctamente. Los comandos de Docker equivalentes en todos los hosts compatibles son:
+Docker compila la aplicación y la inicia en segundo plano; no es necesario disponer de Python en el host. `scripts\Docker.cmd` y `scripts/docker-start.sh` muestran la dirección del panel y el token cuando el contenedor funciona correctamente. Los comandos de Docker equivalentes en todos los hosts compatibles son:
 
 ```sh
 docker compose up -d --build --wait
@@ -30,7 +30,7 @@ En el caso de un servidor, [la implementación](DEPLOYMENT.md) incluye HTTPS aut
 
 ## Explore la interfaz
 
-1. Ejecute **«TgWitness-Demo.cmd»** en el paquete portátil, **«Demo.cmd»** en una carpeta de origen de Windows o `sh start.sh --demo` en Linux/macOS. Al ejecutarlo desde la fuente, primero se crea `.venv` y se instalan las dependencias.
+1. Ejecute **«TgWitness-Demo.cmd»** en el paquete portátil, **«scripts\Demo.cmd»** en una carpeta de origen de Windows o `sh start.sh --demo` en Linux/macOS. Al ejecutarlo desde la fuente, primero se crea `.venv` y se instalan las dependencias.
 2. Abrir **http://127.0.0.1:8787**.
 3. La demostración local abre automáticamente el diario de muestra. No es necesario copiar ningún token para acceder directamente de forma local.
 

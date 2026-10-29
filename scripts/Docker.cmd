@@ -1,10 +1,11 @@
 @echo off
 setlocal EnableExtensions
-cd /d "%~dp0"
+rem Compose files and .env live in the project root, one level up.
+cd /d "%~dp0.."
 title TgWitness (Docker)
 docker info >nul 2>&1
 if errorlevel 1 (
-    echo Install and start Docker Desktop using Linux containers, then run Docker.cmd again.
+    echo Install and start Docker Desktop using Linux containers, then run scripts\Docker.cmd again.
     echo Download: https://www.docker.com/products/docker-desktop/
     pause
     exit /b 1

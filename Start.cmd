@@ -19,7 +19,7 @@ if defined PYCMD goto run
 echo.
 echo Install Python 3.11 or newer from https://www.python.org/downloads/
 echo Enable "Add python.exe to PATH" during setup, then run Start.cmd again.
-echo Alternatively, install Docker Desktop and run Docker.cmd,
+echo Alternatively, install Docker Desktop and run scripts\Docker.cmd,
 echo or download the Windows portable build, which includes Python.
 pause
 exit /b 1
