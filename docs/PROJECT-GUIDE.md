@@ -560,4 +560,4 @@ workflow has run yet. Read [CONTRIBUTING.md](../.github/CONTRIBUTING.md) before 
 | [Tools](../tools/README.md) | Local builds, browser checks, screenshots and packaging |
 | [Deployment](../deploy/README.md) | Service templates and HTTPS configuration |
 | [Website](../website/README.md) | Public pages, practical guides and language catalogues |
-| [GitHub configuration](../.github/README.md) | Automation, issue forms and dependency updates |
+| [GitHub configuration](../.github/AUTOMATION.md) | Automation, issue forms and dependency updates |

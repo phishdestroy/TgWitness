@@ -108,7 +108,7 @@ Telegram origin, complete capture or the truth of the content.
 | [`tests/`](tests/README.md) | Synthetic regression tests |
 | [`tools/`](tools/README.md) | Builds, checks, packaging and documentation tooling |
 | [`website/`](website/README.md) | Documentation website and translations |
-| [`.github/`](.github/README.md) | Workflows, issue forms and contribution guides |
+| [`.github/`](.github/AUTOMATION.md) | Workflows, issue forms and contribution guides |
 
 </details>
 
