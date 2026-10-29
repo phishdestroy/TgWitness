@@ -1800,7 +1800,7 @@
 "Choose where to publish": "اختر مكان النشر",
 "Create your bot with @BotFather and allow it to post in your channel.": "أنشئ البوت الخاص بك عبر @BotFather واسمح له بالنشر في قناتك.",
 "Your Telegram channel": "قناة Telegram الخاصة بك",
-"@your_proof_channel or -100…": "@قناة_الإثبات أو -100…",
+"@your_proof_channel or -100…": "@your_channel أو -100…",
 "Check every · minutes": "افحص كل · دقيقة",
 "Collector address reachable from the witness": "عنوان أداة التجميع الذي يمكن للشاهد الوصول إليه",
 "https://collector.example.org": "https://collector.example.org",
