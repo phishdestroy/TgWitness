@@ -9,7 +9,7 @@ button { color:inherit; }
 :is(a,button,input,summary,[tabindex]):focus-visible { outline:3px solid #245ce5; outline-offset:4px; }
 [hidden] { display:none!important; }
 img { display:block; max-width:100%; height:auto; }
-h1,h2,h3 { line-height:1.2; letter-spacing:-.035em; font-weight:650; }
+h1,h2,h3 { line-height:1.2; letter-spacing:-.035em; font-weight:650; overflow-wrap:anywhere; }
 h1 { margin:0 0 22px; font-size:clamp(34px,3.6vw,50px); }
 h2 { margin:44px 0 16px; font-size:27px; scroll-margin-top:24px; }
 h3 { font-size:19px; margin:20px 0 12px; }

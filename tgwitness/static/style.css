@@ -467,7 +467,7 @@ footer a:hover { color: var(--text); text-decoration: underline; }
 .notice.warning { background: var(--warning-soft); border-color: var(--warning-border); color: var(--warning); }
 .health-details { margin-left: auto; }
 .health-details > summary {
-  width: max-content; margin-left: auto; min-height: 36px; padding: 0 14px;
+  width: fit-content; max-width: 100%; margin-left: auto; min-height: 36px; padding: 0 14px;
   border: 1px solid var(--border); border-radius: 999px; background: var(--surface);
   color: var(--text-2); font-size: 13px; font-weight: 550; box-shadow: var(--shadow-xs);
 }
@@ -1234,7 +1234,9 @@ details[open] > :not(summary) { animation: unfold .22s ease-out; }
   .nav { gap: 9px; padding: 0 10px; font-size: 13.5px; }
   .nav.active::before { left: -10px; }
   .nav b { display: none; }
-  .topbar { gap: 10px; padding: 10px 18px; }
+  /* Wide fonts or long translations move the actions to a second row instead of past the edge. */
+  .topbar { flex-wrap: wrap; gap: 10px; padding: 10px 18px; }
+  .top-actions { flex-wrap: wrap; justify-content: flex-end; gap: 6px; min-width: 0; margin-left: auto; }
   .profile-switch select { width: 150px; }
   .content { padding: 22px 18px 12px; }
   footer { padding: 6px 18px 16px; }
@@ -1254,6 +1256,10 @@ details[open] > :not(summary) { animation: unfold .22s ease-out; }
   .evidence-symbol { display: none; }
   .two-columns { grid-template-columns: 1fr; }
   .limits-table > div { grid-template-columns: 1fr; gap: 4px; }
+}
+
+@media (max-width: 700px) {
+  .top-actions #status-chip { display: none; }
 }
 
 @media (max-width: 600px) {

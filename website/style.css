@@ -16,7 +16,8 @@ a, button, summary { -webkit-tap-highlight-color: transparent; }
 :is(a,button,summary,[tabindex]):focus-visible { outline: 3px solid #6e9dff; outline-offset: 5px; }
 img { display: block; max-width: 100%; height: auto; }
 h1, h2, h3, p, figure { margin: 0; }
-h1, h2, h3 { line-height: 1.12; font-weight: 650; }
+/* A long word in a large heading wraps instead of widening a narrow screen. */
+h1, h2, h3 { line-height: 1.12; font-weight: 650; overflow-wrap: anywhere; }
 h1, h2 { letter-spacing: -.045em; }
 h2 { font-size: clamp(32px, 3.4vw, 48px); }
 h3 { font-size: 22px; letter-spacing: -.025em; }
@@ -370,13 +371,14 @@ html:is(:lang(ar), :lang(fa), :lang(ur)) body { line-height: 1.95; }
   .record-events { margin-inline: 36px 18px; }
   .record-footer { padding-inline: 16px; font-size: 10px; }
   .record-controls button { font-size: 9px; padding-inline: 6px; }
+  .record-controls, .record-controls [role=group] { flex-wrap: wrap; }
   .record-caption { padding-inline: 14px; font-size: 10px; }
   .workflow ol { display: grid; grid-template-columns: 1fr 1fr; gap: 13px 20px; }
   .workflow li { font-size: 11px; }
   .section-heading h2 { font-size: 32px; }
   .switcher .tab-buttons { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; }
   .switcher .tab-buttons button { padding: 12px 3px; font-size: 0; }
-  .switcher .tab-buttons button span { font-size: 11px; margin: 0; }
+  .switcher .tab-buttons button span { font-size: 11px; margin: 0; overflow-wrap: anywhere; }
   .screen-mode { display: none; }
   .screen-bar { padding: 9px 12px; font-size: 10px; }
   .screen-frame { border-radius: 8px; }
