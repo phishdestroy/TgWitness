@@ -24,6 +24,15 @@ def main():
         browser = launch_browser(p)
         context = browser.new_context(viewport={"width":1440,"height":1060}, reduced_motion="reduce")
         context.add_init_script("""(() => {
+            window.acceptanceAuthTransitions = [];
+            window.addEventListener('DOMContentLoaded', () => {
+                const originalStep = window.setAuthStep;
+                window.setAuthStep = function(step) {
+                    window.acceptanceAuthTransitions.push({step, stack: new Error().stack});
+                    window.acceptanceAuthTransitions = window.acceptanceAuthTransitions.slice(-20);
+                    return originalStep(step);
+                };
+            });
             if (sessionStorage.getItem('acceptance-bootstrap-gated')) return;
             sessionStorage.setItem('acceptance-bootstrap-gated', '1');
             const original = window.fetch.bind(window);
@@ -114,7 +123,11 @@ def main():
         def begin_qr(api_id="123"):
             if page.locator("#authorized-state").is_visible():
                 page.locator("#change-account").click()
-            expect(page.locator("#credentials-form")).to_be_visible()
+            try:
+                expect(page.locator("#credentials-form")).to_be_visible()
+            except AssertionError:
+                print(json.dumps({"auth_transitions": page.evaluate("window.acceptanceAuthTransitions")}), flush=True)
+                raise
             # API settings are directly accessible in the sign-in form. Inspect
             # the details state instead of racing a layout change from Settings.
             if page.locator("#api-details").get_attribute("open") is None:
