@@ -6,6 +6,9 @@
 
 GitHub configuration for TgWitness: automation, issue forms and contribution prompts.
 
+Keep this guide named `AUTOMATION.md`: GitHub gives a `.github/README.md` priority
+over the project README at the repository root.
+
 | Directory or file | Purpose |
 | --- | --- |
 | [`workflows/`](workflows/README.md) | Checks, website, release and wiki workflows |

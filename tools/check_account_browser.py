@@ -102,9 +102,12 @@ def main():
         def begin_qr(api_id="123"):
             if page.locator("#authorized-state").is_visible():
                 page.locator("#change-account").click()
-            if not page.locator("#api-id").is_visible():
-                open_settings()
-                if not page.locator("#api-id").is_visible(): page.locator("#api-details summary").click()
+            expect(page.locator("#credentials-form")).to_be_visible()
+            # API settings are directly accessible in the sign-in form. Inspect
+            # the details state instead of racing a layout change from Settings.
+            if page.locator("#api-details").get_attribute("open") is None:
+                page.locator("#api-details summary").click()
+            expect(page.locator("#api-id")).to_be_visible()
             page.locator("#api-id").fill(api_id)
             page.locator("#api-hash").fill("a"*32)
             choose_method("qr")
