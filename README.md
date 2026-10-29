@@ -105,6 +105,7 @@ Telegram origin, complete capture or the truth of the content.
 | [`tgwitness/`](tgwitness/README.md) | Application, collector, journal, verifier and web panel |
 | [`docs/`](docs/README.md) | Guides, Wiki source, screenshots and verification record |
 | [`deploy/`](deploy/README.md) | Optional Compose configurations and service templates |
+| [`scripts/`](scripts/README.md) | Additional launchers: demo, setup only and Docker |
 | [`tests/`](tests/README.md) | Synthetic regression tests |
 | [`tools/`](tools/README.md) | Builds, checks, packaging and documentation tooling |
 | [`website/`](website/README.md) | Documentation website and translations |
@@ -120,6 +121,6 @@ Telegram origin, complete capture or the truth of the content.
 </details>
 
 TgWitness is a pre-release project. See the [verification record](docs/VERIFICATION.md)
-and [open audit findings](docs/internal/RECHECK-2026-10-29.md) for tested behavior and remaining work.
+and the [audit findings and their fixes](docs/internal/RECHECK-2026-10-29.md) for tested behavior and remaining work.
 
 [Get help](.github/SUPPORT.md) · [Contribute](.github/CONTRIBUTING.md) · [Report a vulnerability](.github/SECURITY.md) · [MIT license](LICENSE) · Built by [PhishDestroy](https://github.com/phishdestroy)

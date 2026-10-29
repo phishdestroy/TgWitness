@@ -119,6 +119,31 @@ def test_private_chat_profiles_include_the_other_person(journal):
     assert people == {ALICE, BOB}
 
 
+def test_repeat_observations_do_not_inflate_reply_and_cross_chat_counts(journal):
+    """Audit A9: snapshots, edits and recoveries are more records of one message, not more messages."""
+    store, _ = journal
+    say(store, CHAT, 1, ALICE, "Synthetic parent", "Alice")
+    reply = say(store, CHAT, 2, BOB, "Synthetic reply", "Bob", reply=1)
+    other = say(store, OTHER, 3, BOB, "Synthetic other chat", "Bob")
+
+    def bob():
+        people = {p["id"]: p for p in dossier.build(store, CHAT)["people"]}
+        return people[BOB]["relations"], people[ALICE]["relations"]
+
+    first, parent = bob()
+    assert first["replies_to"][0]["count"] == 1 and parent["replied_by"] == [{"id": BOB, "count": 1}]
+    for kind in ("message.snapshot", "message.snapshot", "message.edited", "message.recovered"):
+        store.append(kind, dict(reply["payload"]), CHAT, 2, BOB)
+    store.append("message.snapshot", dict(other["payload"]), OTHER, 3, BOB)
+    repeated, parent = bob()
+    assert repeated["replies_to"][0]["count"] == 1 and parent["replied_by"] == [{"id": BOB, "count": 1}]
+    assert len(repeated["replies_to"][0]["records"]) > 1  # every observation is still cited
+    assert repeated["other_chats"] == [{"chat_id": OTHER, "title": None, "messages": 1}]
+    say(store, CHAT, 4, BOB, "A second, different reply", "Bob", reply=1)
+    second, parent = bob()
+    assert second["replies_to"][0]["count"] == 2 and parent["replied_by"] == [{"id": BOB, "count": 2}]
+
+
 def test_switching_profiles_on_and_off_keeps_contents_out_of_the_journal(journal):
     store, vault = journal
     say(store, CHAT, 1, ALICE, "wallet " + GENESIS, "Alice")

@@ -42,7 +42,7 @@
 - **按需使用的附加功能。**[只需三步即可创建 Telegram](../WITNESS.md) 见证，另设独立的[公开证明](../PROOF.md)页面，并配有清晰的设置指南。打开**“附加功能”**进行选择；高级设置则保持折叠状态。
 
 <details>
-<summary>所有功能与技术细节</summary></details>
+<summary>所有功能与技术细节</summary>
 
 - **您的连接路径。****在“账户”→“代理设置**”中，可从内置的公共 MTProxy 列表中选择，从源头刷新列表，或粘贴您自己的 Telegram 代理链接。手动配置 SOCKS5/HTTP/MTProxy 以及运营商目录功能依然可用。公共列表已下载并经过筛选，但目前尚无账户通过列表中的服务器建立连接。 [公共列表的工作原理](../CONNECTION-SECURITY.md#public-proxies-supplied-by-your-installation)。
 
@@ -89,7 +89,7 @@
 > **只是想看看？**请运行 **`scripts\Demo.cmd`** 或 `sh start.sh --demo`。一个虚构的日志将直接在浏览器中打开；未关联任何 Telegram 账号，数据独立存储在 `data/demo` 中。
 
 <details>
-<summary><strong>工作区内部：聊天、历史记录和导出功能</strong></summary></details>
+<summary><strong>工作区内部：聊天、历史记录和导出功能</strong></summary>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../assets/chats-dark.png">

@@ -1875,5 +1875,6 @@
 "Unknown public proxy. Refresh the list.": "Proxy público desconocido. Actualice la lista.",
 "Invalid MTProxy link. Use a valid host, port 1-65535 and a 32-digit hex or dd secret; Fake TLS ee is unsupported.": "Enlace de MTProxy no válido. Use un host válido, un puerto 1-65535 y un secreto hexadecimal de 32 dígitos o dd; Fake TLS ee no es compatible.",
 "Refusing to delete a workspace through a filesystem link. Inspect its data directory.": "Se rechaza eliminar un espacio de trabajo a través de un enlace del sistema de archivos. Revise su directorio de datos.",
-"Could not delete all workspace files. Close programs using them and retry deleting this account. Its observation remains stopped.": "No se pudieron eliminar todos los archivos del espacio de trabajo. Cierre los programas que los usan y vuelva a intentar eliminar esta cuenta. Su observación sigue detenida."
+"Could not delete all workspace files. Close programs using them and retry deleting this account. Its observation remains stopped.": "No se pudieron eliminar todos los archivos del espacio de trabajo. Cierre los programas que los usan y vuelva a intentar eliminar esta cuenta. Su observación sigue detenida.",
+"This account is part of a running multi-account export. Cancel the export or wait for it to finish, then delete the account.": "Esta cuenta forma parte de una exportación de varias cuentas que se está llevando a cabo. Cancele la exportación o espere a que finalice y, a continuación, elimine la cuenta."
 }

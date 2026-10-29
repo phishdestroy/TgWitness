@@ -1864,5 +1864,6 @@
 "Unknown public proxy. Refresh the list.": "未知的公共代理。请刷新列表。",
 "Invalid MTProxy link. Use a valid host, port 1-65535 and a 32-digit hex or dd secret; Fake TLS ee is unsupported.": "MTProxy 链接无效。请使用有效的主机、1-65535 的端口以及 32 位十六进制或 dd 密钥；不支持 Fake TLS ee。",
 "Refusing to delete a workspace through a filesystem link. Inspect its data directory.": "拒绝通过文件系统链接删除工作区。请检查其数据目录。",
-"Could not delete all workspace files. Close programs using them and retry deleting this account. Its observation remains stopped.": "无法删除所有工作区文件。请关闭正在使用这些文件的程序，然后重试删除此账户。其观察仍处于停止状态。"
+"Could not delete all workspace files. Close programs using them and retry deleting this account. Its observation remains stopped.": "无法删除所有工作区文件。请关闭正在使用这些文件的程序，然后重试删除此账户。其观察仍处于停止状态。",
+"This account is part of a running multi-account export. Cancel the export or wait for it to finish, then delete the account.": "该账户是正在进行的多账户导出操作的一部分。请取消导出或等待导出完成，然后删除该账户。"
 }

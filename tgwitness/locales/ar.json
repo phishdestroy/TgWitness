@@ -1919,5 +1919,6 @@
 "Unknown public proxy. Refresh the list.": "وكيل عام غير معروف. حدّث القائمة.",
 "Invalid MTProxy link. Use a valid host, port 1-65535 and a 32-digit hex or dd secret; Fake TLS ee is unsupported.": "رابط MTProxy غير صالح. استخدم مضيفًا صالحًا ومنفذًا من 1 إلى 65535 وسرًّا سداسيًا عشريًا من 32 خانة أو سر dd؛ Fake TLS ee غير مدعوم.",
 "Refusing to delete a workspace through a filesystem link. Inspect its data directory.": "رُفض حذف مساحة عمل عبر رابط في نظام الملفات. افحص دليل بياناتها.",
-"Could not delete all workspace files. Close programs using them and retry deleting this account. Its observation remains stopped.": "تعذّر حذف كل ملفات مساحة العمل. أغلق البرامج التي تستخدمها وأعد محاولة حذف هذا الحساب. تبقى مراقبته متوقفة."
+"Could not delete all workspace files. Close programs using them and retry deleting this account. Its observation remains stopped.": "تعذّر حذف كل ملفات مساحة العمل. أغلق البرامج التي تستخدمها وأعد محاولة حذف هذا الحساب. تبقى مراقبته متوقفة.",
+"This account is part of a running multi-account export. Cancel the export or wait for it to finish, then delete the account.": "هذا الحساب جزء من عملية تصدير متعددة الحسابات جارية. قم بإلغاء التصدير أو انتظر حتى ينتهي، ثم احذف الحساب."
 }

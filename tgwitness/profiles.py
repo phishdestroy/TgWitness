@@ -96,6 +96,13 @@ class Profiles:
             directory = self.root / "profiles" / profile_id
             if not re.fullmatch(r"[a-f0-9]{32}", profile_id) or directory.resolve() != directory:
                 raise ValueError("Refusing to delete a workspace through a filesystem link. Inspect its data directory.")
+            # A multi-account export run by the main app keeps using this workspace's store,
+            # client and key until it ends; closing them underneath it would break both.
+            # No await separates this check from detaching the app below.
+            multi = getattr(self.app.state, "multi_export", None)
+            if multi and multi.uses(profile_id):
+                raise ValueError("This account is part of a running multi-account export. "
+                                 "Cancel the export or wait for it to finish, then delete the account.")
             # Persist intent before closing or removing anything, so interrupted
             # deletion remains visible and retryable after a process restart.
             if not entry.get("deleting"):

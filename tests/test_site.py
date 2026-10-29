@@ -184,3 +184,18 @@ def test_unlisted_guide_is_not_published(site_root):
     private.write_text("synthetic-private-guide", encoding="utf-8")
     output = build_site(site_root)
     assert all(b"synthetic-private-guide" not in p.read_bytes() for p in output.rglob("*") if p.is_file())
+
+
+def test_reference_source_links_open_the_document_on_github(site_root):
+    """Audit A10: the footer must lead to GitHub, never back to the same rendered page."""
+    from tools.build_site import REFERENCE, WIKI_HUB
+    output = build_site(site_root, repository="example/Journal")
+    checked = 0
+    for lang in LANGS:
+        prefix = "" if lang == "en" else lang + "/"
+        for slug, (_, _, _, source) in REFERENCE.items():
+            page = Page(output / (prefix + WIKI_HUB + slug + "/") / "index.html")
+            links = [a["href"] for a in page.find("a", **{"class": "reference"})]
+            assert links == ["https://github.com/example/Journal/edit/main/" + source], (lang, slug, links)
+            checked += 1
+    assert checked == len(LANGS) * len(REFERENCE)

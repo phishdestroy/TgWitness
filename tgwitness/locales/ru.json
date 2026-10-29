@@ -2004,5 +2004,6 @@
   "refused": "отклоняется",
   "signed": "подписано",
   "signed check": "подписанная проверка",
-  "signed post": "подписанная публикация"
+  "signed post": "подписанная публикация",
+  "This account is part of a running multi-account export. Cancel the export or wait for it to finish, then delete the account.": "Этот аккаунт участвует в идущем экспорте несколькими аккаунтами. Отмените экспорт или дождитесь его завершения, затем удалите аккаунт."
 }

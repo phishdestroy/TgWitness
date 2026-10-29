@@ -12,6 +12,9 @@ from python_socks import ProxyType
 from python_socks.async_.asyncio import Proxy
 
 
+PIECE = 64 * 1024  # largest single read from the peer
+
+
 class RouteError(Exception):
     pass
 
@@ -69,6 +72,12 @@ async def request(method, url, network, headers=None, body=b"", length=None, sin
         fields = {k.strip().lower(): v.strip() for k, _, v in (h.partition(":") for h in head[1:] if h)}
         ok = 200 <= status < 300
         received, data = 0, b""
+        # Only a successful response with a sink may exceed the limit; everything else is
+        # bounded before it is read, and no single read asks for more than one piece.
+        streaming = bool(sink and ok)
+
+        def room(wanted):
+            return min(wanted, PIECE) if streaming else min(wanted, PIECE, limit - received + 1)
 
         async def take(chunk):
             nonlocal received, data
@@ -85,19 +94,32 @@ async def request(method, url, network, headers=None, body=b"", length=None, sin
         elif fields.get("transfer-encoding", "").lower() == "chunked":
             while True:
                 count = int((await asyncio.wait_for(reader.readuntil(b"\r\n"), timeout)).split(b";")[0], 16)
+                if count < 0:
+                    raise ValueError("Malformed chunked response")
                 if count == 0:
                     break
-                await take((await asyncio.wait_for(reader.readexactly(count + 2), timeout))[:-2])
+                if not streaming and received + count > limit:
+                    raise ValueError("Response too large")
+                while count:
+                    piece = await asyncio.wait_for(reader.readexactly(min(count, PIECE)), timeout)
+                    count -= len(piece)
+                    await take(piece)
+                if await asyncio.wait_for(reader.readexactly(2), timeout) != b"\r\n":
+                    raise ValueError("Malformed chunked response")
         elif "content-length" in fields:
             remaining = int(fields["content-length"])
+            if remaining < 0:
+                raise ValueError("Malformed Content-Length")
+            if not streaming and remaining > limit:
+                raise ValueError("Response too large")
             while remaining:
-                chunk = await asyncio.wait_for(reader.read(min(remaining, 1024 * 1024)), timeout)
+                chunk = await asyncio.wait_for(reader.read(min(remaining, PIECE)), timeout)
                 if not chunk:
                     raise ValueError("Connection closed early")
                 remaining -= len(chunk)
                 await take(chunk)
         else:
-            while chunk := await asyncio.wait_for(reader.read(1024 * 1024), timeout):
+            while chunk := await asyncio.wait_for(reader.read(room(PIECE)), timeout):
                 await take(chunk)
         if not ok:
             raise HTTPError(status, data[:2000])

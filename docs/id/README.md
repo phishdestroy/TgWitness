@@ -42,7 +42,7 @@
 - **Fitur tambahan saat Anda membutuhkannya.** [Saksi Telegram dalam tiga langkah](../WITNESS.md), [halaman Bukti publik](../PROOF.md) terpisah, dan panduan pengaturan yang jelas. Buka **Ekstra** untuk memilih; pengaturan lanjutan tetap tersembunyi.
 
 <details>
-<summary>Semua fitur dan detail teknis</summary></details>
+<summary>Semua fitur dan detail teknis</summary>
 
 - **Rute koneksi Anda.** Di bawah **Akun → Pengaturan proxy**, pilih dari daftar MTProxy publik yang disertakan, perbarui dari sumbernya, atau tempelkan tautan proxy Telegram Anda sendiri. SOCKS5/HTTP/MTProxy manual dan katalog operator tetap tersedia. Daftar publik telah diunduh dan disaring, tetapi belum ada akun yang terhubung melalui server yang terdaftar. [Cara kerja daftar publik](../CONNECTION-SECURITY.md#public-proxies-supplied-by-your-installation).
 
@@ -89,7 +89,7 @@ Peluncuran sumber pertama akan membuat instance pribadi `.venv` dan menginstal d
 > **Hanya ingin melihat-lihat?** Jalankan **`scripts\Demo.cmd`** atau `sh start.sh --demo`. Jurnal fiktif akan terbuka langsung di browser; tidak ada akun Telegram yang terhubung dan datanya disimpan secara terpisah di `data/demo`.
 
 <details>
-<summary><strong>Di dalam ruang kerja: obrolan, riwayat, dan ekspor</strong></summary></details>
+<summary><strong>Di dalam ruang kerja: obrolan, riwayat, dan ekspor</strong></summary>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../assets/chats-dark.png">

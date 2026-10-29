@@ -1,5 +1,8 @@
 # Project and publication audit — 29 October 2026
 
+> **Status: findings A1–A7 are resolved**, each with a regression test; see the
+> resolution table at the top of the [audit recheck](RECHECK-2026-10-29.md).
+
 For changes made after this snapshot, see the
 [audit recheck](RECHECK-2026-10-29.md), including new findings A8–A11 and fresh
 validation of the revised interface and multilingual site. Counts and build

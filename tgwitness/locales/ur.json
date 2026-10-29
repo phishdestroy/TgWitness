@@ -1875,5 +1875,6 @@
 "Unknown public proxy. Refresh the list.": "نامعلوم عوامی پراکسی۔ فہرست ریفریش کریں۔",
 "Invalid MTProxy link. Use a valid host, port 1-65535 and a 32-digit hex or dd secret; Fake TLS ee is unsupported.": "غلط MTProxy لنک۔ درست ہوسٹ، پورٹ 1-65535 اور 32 ہندسوں کا ہیکس یا dd سیکرٹ استعمال کریں؛ Fake TLS ee معاون نہیں۔",
 "Refusing to delete a workspace through a filesystem link. Inspect its data directory.": "فائل سسٹم لنک کے ذریعے ورک اسپیس حذف کرنے سے انکار کر دیا گیا۔ اس کی ڈیٹا ڈائریکٹری جانچیں۔",
-"Could not delete all workspace files. Close programs using them and retry deleting this account. Its observation remains stopped.": "ورک اسپیس کی تمام فائلیں حذف نہیں ہو سکیں۔ انہیں استعمال کرنے والے پروگرام بند کریں اور اس اکاؤنٹ کو دوبارہ حذف کرنے کی کوشش کریں۔ اس کا مشاہدہ بند ہی رہے گا۔"
+"Could not delete all workspace files. Close programs using them and retry deleting this account. Its observation remains stopped.": "ورک اسپیس کی تمام فائلیں حذف نہیں ہو سکیں۔ انہیں استعمال کرنے والے پروگرام بند کریں اور اس اکاؤنٹ کو دوبارہ حذف کرنے کی کوشش کریں۔ اس کا مشاہدہ بند ہی رہے گا۔",
+"This account is part of a running multi-account export. Cancel the export or wait for it to finish, then delete the account.": "یہ اکاؤنٹ ایک جاری متعدد اکاؤنٹس کی برآمد کا حصہ ہے۔ برآمد منسوخ کریں یا مکمل ہونے تک انتظار کریں، پھر اکاؤنٹ حذف کر دیں۔"
 }

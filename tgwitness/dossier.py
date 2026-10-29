@@ -293,7 +293,8 @@ def build(store, chat_id, title=None):
                 pass
         reply = payload.get("reply_to_message_id")
         if reply:
-            person["replies_to"].setdefault(reply, []).append(event["seq"])
+            # Keyed by the replying message: its snapshots and edits add records, not replies.
+            person["replies_to"].setdefault(reply, {}).setdefault(message_id, []).append(event["seq"])
         for category, value, extra in mentions(payload, find, patterns):
             person["mentions"][category].add(value, event, extra)
     avatars = avatar_index(store.root)
@@ -301,14 +302,16 @@ def build(store, chat_id, title=None):
     titles = {t["chat_id"]: t["title"] for t in store.targets()}
     result, referenced = [], set()
     for person in people.values():
-        replies = {}
-        for message_id, seqs in person.pop("replies_to").items():
-            target = owner.get(message_id)
+        replies, replying = {}, {}
+        for parent, by_message in person.pop("replies_to").items():
+            target = owner.get(parent)
             if target is not None and target != person["id"]:
                 entry = replies.setdefault(target, {"id": target, "count": 0, "records": []})
-                entry["count"] += len(seqs)
-                entry["records"] = (entry["records"] + seqs)[:refs]
-                people[target]["replied_by"][person["id"]] = people[target]["replied_by"].get(person["id"], 0) + len(seqs)
+                replying.setdefault(target, set()).update(by_message)
+                entry["count"] = len(replying[target])  # each replying message once
+                entry["records"] = (entry["records"] + [seq for seqs in by_message.values() for seq in seqs])[:refs]
+        for target, entry in replies.items():
+            people[target]["replied_by"][person["id"]] = entry["count"]
         person["replies_to"] = sorted(replies.values(), key=lambda r: -r["count"])
     for person in people.values():
         ids = person.pop("messages")

@@ -42,7 +42,7 @@
 - **Recursos adicionais quando você precisar.** Um “[Telegram Witness em três etapas](../WITNESS.md)”, uma página [Página pública de demonstração](../PROOF.md) separada e guias de configuração claros. Abra **a seção “Extras”** para escolher; as configurações avançadas permanecem ocultas.
 
 <details>
-<summary>Todos os recursos e detalhes técnicos</summary></details>
+<summary>Todos os recursos e detalhes técnicos</summary>
 
 - **Sua rota de conexão.** Em **Conta → Configurações de proxy**, escolha entre as listas públicas integradas do MTProxy, atualize-as a partir de suas fontes ou cole seu próprio link de proxy do Telegram. As configurações manuais de SOCKS5/HTTP/MTProxy e um catálogo de operadores continuam disponíveis. As listas públicas são baixadas e filtradas, mas nenhuma conta foi conectada por meio de um servidor listado até o momento. [Como funcionam as listas públicas](../CONNECTION-SECURITY.md#public-proxies-supplied-by-your-installation).
 
@@ -89,7 +89,7 @@ A primeira execução do código-fonte cria um `.venv` privado e instala as depe
 > **Está apenas dando uma olhada?** Execute **`scripts\Demo.cmd`** ou `sh start.sh --demo`. Um diário fictício é aberto diretamente no navegador; nenhuma conta do Telegram está conectada e os dados ficam armazenados separadamente em `data/demo`.
 
 <details>
-<summary><strong>No interior do espaço de trabalho: conversas, histórico e exportações</strong></summary></details>
+<summary><strong>No interior do espaço de trabalho: conversas, histórico e exportações</strong></summary>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../assets/chats-dark.png">

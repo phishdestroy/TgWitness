@@ -194,8 +194,17 @@ ZIP separately with a trusted fingerprint/checkpoint.
    no deletions happened during the interruption.
 
 Evidence ZIPs exclude sessions/private keys and are not full service backups.
-Exports are not encrypted by TgWitness. Use protected storage and a deliberate
-transfer mechanism. Temporary server exports live in each workspace's
+Four things are protected differently:
+
+| What | Protection |
+| --- | --- |
+| Export files without a password (the default) | Not encrypted. Signed, so changes are detectable, but anyone holding the file can read it |
+| Export files with a password | If you set a password, the finished export goes unchanged into a WinZip AES-256 ZIP that 7-Zip and WinRAR open; the password is not stored ([evidence handling](EVIDENCE.md)) |
+| The journal database and saved attachments on disk | Not encrypted by TgWitness; use an encrypted disk or volume |
+| Telegram sessions and signing keys | Encrypted in the data directory (`credentials.enc`, `signing.enc`, `network.enc`) |
+
+A full service backup is the stopped data directory described above, not an export.
+Use protected storage and a deliberate transfer mechanism for both. Temporary server exports live in each workspace's
 `temporary-exports/`; completed responses are cleaned up, and interrupted export
 files are removed on the next startup while that workspace's instance lock is held.
 
@@ -217,8 +226,10 @@ groups alone. Synthetic local benchmarks do not guarantee Telegram delivery.
 There is no automatic retention deletion. Removing a journal tail invalidates its
 relationship to retained checkpoints.
 
-Live Telegram/proxy acceptance, durable replay, admin-log/reactor polling, priority
-polling, isolated workers, full application encryption, encrypted exports,
-user roles and independent review remain separate work. See
+Priority rechecks already exist: starred sources are rechecked every 15 minutes by default,
+others every 6 hours (see [recheck tiers](COLLECTION.md#recheck-tiers)). Password-protected
+exports exist as described above. Live Telegram/proxy acceptance, durable replay,
+admin-log and reaction polling, isolated workers, encryption of the local journal and media
+by TgWitness itself, user roles and independent review remain separate work. See
 [READINESS.md](internal/READINESS.md), [LIVE_ACCEPTANCE.md](internal/LIVE_ACCEPTANCE.md) and
 [VERIFICATION.md](VERIFICATION.md).

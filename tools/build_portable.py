@@ -15,6 +15,7 @@ import shutil
 import socket
 import subprocess
 import sys
+import tempfile
 import tomllib
 import urllib.request
 import zipfile
@@ -98,6 +99,57 @@ def sha256(path):
     return digest.hexdigest()
 
 
+# The only top-level entries a portable package may contain.
+TOP_LEVEL = {"python", "TgWitness.cmd", "TgWitness-Demo.cmd", "TgWitness-Check.cmd", "README.txt", "LICENSE"}
+# Names that only a running instance creates: sessions, keys, tokens and account files.
+PRIVATE_NAMES = {"vault.key", "panel-token.txt", "credentials.json", "account.json", "vault.external.json",
+                 ".instance.lock"}
+PRIVATE_SUFFIXES = (".session", ".session-journal", ".tgwitness-session", ".jsonl", ".sqlite", ".sqlite3",
+                    ".db", ".db-wal", ".db-shm")
+
+
+def release_problem(relative):
+    """Why a package-relative path must not be shipped, or None. Shared by the folder and ZIP checks."""
+    parts = relative.split("/")
+    if parts[0] not in TOP_LEVEL or (parts[0] != "python" and len(parts) > 1):
+        return "unexpected entry outside the package layout"
+    name = parts[-1].lower()
+    if any(part in ("data", "__pycache__") for part in parts[:-1]) or name in PRIVATE_NAMES or name.endswith(PRIVATE_SUFFIXES):
+        return "private or generated file"
+    return None
+
+
+def release_files(stage):
+    """Every file of the staged package, refusing links and anything outside the allowlist."""
+    files = []
+    for path in sorted(stage.rglob("*")):
+        relative = path.relative_to(stage).as_posix()
+        if path.is_symlink() or getattr(path, "is_junction", lambda: False)():
+            raise SystemExit("Refusing linked path in the portable package: " + relative)
+        if path.is_file():
+            problem = release_problem(relative)
+            if problem:
+                raise SystemExit("Refusing " + problem + " in the portable package: " + relative)
+            files.append(path)
+    return files
+
+
+def write_release(stage, target):
+    """Write the ZIP beside the target, check what it actually contains, then replace the target."""
+    files = release_files(stage)
+    partial = target.with_name(target.name + ".part")
+    with zipfile.ZipFile(partial, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
+        for path in files:
+            archive.write(path, stage.name + "/" + path.relative_to(stage).as_posix())
+    with zipfile.ZipFile(partial) as archive:
+        names = archive.namelist()
+    shipped = [name.split("/", 1)[1] for name in names if "/" in name and name.startswith(stage.name + "/")]
+    if len(shipped) != len(names) or len(names) != len(files) or any(release_problem(name) for name in shipped):
+        partial.unlink()
+        raise SystemExit("Portable ZIP failed its content check: " + str(target.name))
+    partial.replace(target)
+
+
 def embedded_runtime(arch, cache, supplied=None):
     archive = Path(supplied) if supplied else cache / ("python-" + PYTHON + "-embed-" + arch + ".zip")
     if not archive.exists():
@@ -124,8 +176,11 @@ def main():
 
     work = ROOT / "build/portable"
     name = "TgWitness-" + VERSION
-    stage = work / name
-    shutil.rmtree(stage, ignore_errors=True)
+    work.mkdir(parents=True, exist_ok=True)
+    # A new directory every time: files left by an earlier build or a portable instance
+    # started from it (data, sessions, locked files) can never reach this package.
+    build = Path(tempfile.mkdtemp(prefix="stage-", dir=work))
+    stage = build / name
     (stage / "python").mkdir(parents=True)
 
     with zipfile.ZipFile(embedded_runtime(arch, work / "cache", args.python_zip)) as runtime:
@@ -147,8 +202,7 @@ def main():
     shutil.copyfile(ROOT / "LICENSE", stage / "LICENSE")
 
     print("Checking the embedded runtime", flush=True)
-    probe = work / "readiness-probe"
-    shutil.rmtree(probe, ignore_errors=True)
+    probe = build / "readiness-probe"
     environment = {key: value for key, value in os.environ.items() if not key.startswith(("TGWITNESS_", "PYTHON"))}
     # Building a package must also work while a live panel owns the default port.
     with socket.socket() as port_probe:
@@ -165,15 +219,14 @@ def main():
         shutil.rmtree(compiled)
 
     if args.no_zip:
+        release_files(stage)
         print("Portable folder:", stage)
         return
     out = ROOT / "dist"
     out.mkdir(exist_ok=True)
     target = out / (name + "-windows-" + arch + "-portable.zip")
-    with zipfile.ZipFile(target, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
-        for path in sorted(stage.rglob("*")):
-            if path.is_file():
-                archive.write(path, path.relative_to(work).as_posix())
+    write_release(stage, target)
+    shutil.rmtree(build, ignore_errors=True)  # Only this build's own directory; the ZIP is already checked.
     digest = sha256(target)
     target.with_suffix(".zip.sha256").write_text(digest + "  " + target.name + "\n", encoding="ascii")
     print("Portable package:", target)

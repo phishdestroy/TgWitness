@@ -1875,5 +1875,6 @@
 "Unknown public proxy. Refresh the list.": "Bilinmeyen herkese açık proxy. Listeyi yenileyin.",
 "Invalid MTProxy link. Use a valid host, port 1-65535 and a 32-digit hex or dd secret; Fake TLS ee is unsupported.": "Geçersiz MTProxy bağlantısı. Geçerli bir ana bilgisayar, 1-65535 arası bağlantı noktası ve 32 haneli onaltılık veya dd gizli anahtarı kullanın; Fake TLS ee desteklenmez.",
 "Refusing to delete a workspace through a filesystem link. Inspect its data directory.": "Bir dosya sistemi bağlantısı üzerinden çalışma alanını silme reddedildi. Veri dizinini inceleyin.",
-"Could not delete all workspace files. Close programs using them and retry deleting this account. Its observation remains stopped.": "Tüm çalışma alanı dosyaları silinemedi. Bunları kullanan programları kapatın ve bu hesabı silmeyi yeniden deneyin. Gözlemi durdurulmuş olarak kalır."
+"Could not delete all workspace files. Close programs using them and retry deleting this account. Its observation remains stopped.": "Tüm çalışma alanı dosyaları silinemedi. Bunları kullanan programları kapatın ve bu hesabı silmeyi yeniden deneyin. Gözlemi durdurulmuş olarak kalır.",
+"This account is part of a running multi-account export. Cancel the export or wait for it to finish, then delete the account.": "Bu hesap, devam eden çoklu hesap dışa aktarımının bir parçasıdır. Dışa aktarmayı iptal edin veya tamamlanmasını bekleyin, ardından hesabı silin."
 }

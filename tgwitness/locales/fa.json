@@ -1875,5 +1875,6 @@
 "Unknown public proxy. Refresh the list.": "پروکسی عمومی ناشناخته. فهرست را تازه‌سازی کنید.",
 "Invalid MTProxy link. Use a valid host, port 1-65535 and a 32-digit hex or dd secret; Fake TLS ee is unsupported.": "پیوند MTProxy نامعتبر است. از میزبان معتبر، درگاه ۱ تا ۶۵۵۳۵ و رمز هگزادسیمال ۳۲ رقمی یا dd استفاده کنید؛ Fake TLS ee پشتیبانی نمی‌شود.",
 "Refusing to delete a workspace through a filesystem link. Inspect its data directory.": "حذف فضای کاری از طریق پیوند سیستم فایل رد شد. پوشهٔ داده‌های آن را بررسی کنید.",
-"Could not delete all workspace files. Close programs using them and retry deleting this account. Its observation remains stopped.": "حذف همهٔ فایل‌های فضای کاری ممکن نشد. برنامه‌هایی را که از آن‌ها استفاده می‌کنند ببندید و حذف این حساب را دوباره امتحان کنید. مشاهدهٔ آن همچنان متوقف است."
+"Could not delete all workspace files. Close programs using them and retry deleting this account. Its observation remains stopped.": "حذف همهٔ فایل‌های فضای کاری ممکن نشد. برنامه‌هایی را که از آن‌ها استفاده می‌کنند ببندید و حذف این حساب را دوباره امتحان کنید. مشاهدهٔ آن همچنان متوقف است.",
+"This account is part of a running multi-account export. Cancel the export or wait for it to finish, then delete the account.": "این حساب بخشی از یک خروجی‌گیری چندحسابی در حال اجرا است. خروجی‌گیری را لغو کنید یا صبر کنید تا کامل شود، سپس حساب را حذف کنید."
 }

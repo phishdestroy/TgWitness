@@ -1897,5 +1897,6 @@
 "Unknown public proxy. Refresh the list.": "Невідомий публічний проксі. Оновіть список.",
 "Invalid MTProxy link. Use a valid host, port 1-65535 and a 32-digit hex or dd secret; Fake TLS ee is unsupported.": "Недійсне посилання MTProxy. Потрібні коректний хост, порт 1-65535 і 32-значний шістнадцятковий секрет або секрет dd; Fake TLS ee не підтримується.",
 "Refusing to delete a workspace through a filesystem link. Inspect its data directory.": "Видалення робочої області через посилання файлової системи заборонено. Перевірте її каталог даних.",
-"Could not delete all workspace files. Close programs using them and retry deleting this account. Its observation remains stopped.": "Не вдалося видалити всі файли робочої області. Закрийте програми, що їх використовують, і повторіть видалення цього облікового запису. Спостереження за ним залишається зупиненим."
+"Could not delete all workspace files. Close programs using them and retry deleting this account. Its observation remains stopped.": "Не вдалося видалити всі файли робочої області. Закрийте програми, що їх використовують, і повторіть видалення цього облікового запису. Спостереження за ним залишається зупиненим.",
+"This account is part of a running multi-account export. Cancel the export or wait for it to finish, then delete the account.": "Цей обліковий запис є частиною поточного експорту декількох облікових записів. Скасуйте експорт або дочекайтеся його завершення, а потім видаліть обліковий запис."
 }

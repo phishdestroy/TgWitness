@@ -1864,5 +1864,6 @@
 "Unknown public proxy. Refresh the list.": "Proksi publik tidak dikenal. Muat ulang daftar.",
 "Invalid MTProxy link. Use a valid host, port 1-65535 and a 32-digit hex or dd secret; Fake TLS ee is unsupported.": "Tautan MTProxy tidak valid. Gunakan host yang valid, port 1-65535, dan rahasia heksadesimal 32 digit atau dd; Fake TLS ee tidak didukung.",
 "Refusing to delete a workspace through a filesystem link. Inspect its data directory.": "Menolak menghapus ruang kerja melalui tautan sistem berkas. Periksa direktori datanya.",
-"Could not delete all workspace files. Close programs using them and retry deleting this account. Its observation remains stopped.": "Tidak dapat menghapus semua berkas ruang kerja. Tutup program yang menggunakannya dan coba hapus akun ini lagi. Pengamatannya tetap berhenti."
+"Could not delete all workspace files. Close programs using them and retry deleting this account. Its observation remains stopped.": "Tidak dapat menghapus semua berkas ruang kerja. Tutup program yang menggunakannya dan coba hapus akun ini lagi. Pengamatannya tetap berhenti.",
+"This account is part of a running multi-account export. Cancel the export or wait for it to finish, then delete the account.": "Akun ini merupakan bagian dari proses ekspor multi-akun yang sedang berjalan. Batalkan ekspor atau tunggu hingga selesai, lalu hapus akun tersebut."
 }

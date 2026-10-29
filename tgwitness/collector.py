@@ -5,6 +5,7 @@ import json
 import shutil
 import time
 import secrets
+from contextlib import suppress
 from datetime import datetime, timezone
 from functools import wraps
 
@@ -1414,6 +1415,25 @@ class Collector:
     def export_busy(self):
         return bool(self.export_task and not self.export_task.done())
 
+    def reserve_export(self, owner):
+        """One export per account, individual or multi-account. Checked and taken with no await in
+        between, before the owner's first await; only the owner releases it."""
+        if self.export_busy() or self.export_claim:
+            return False
+        self.export_claim = owner
+        return True
+
+    def release_export(self, owner):
+        if self.export_claim == owner:
+            self.export_claim = None
+
+    def note(self, kind, payload, chat_id=None):
+        """A diagnostic journal record that must never mask the failure being recorded."""
+        try:
+            self.store.append(kind, payload, chat_id)
+        except Exception:
+            pass
+
     async def chat_scale(self, chat_id):
         """Exact current message count from Telegram (one request) and a full-download estimate."""
         await self.restore()
@@ -1436,33 +1456,41 @@ class Collector:
 
     async def start_export(self, chat_id):
         # Observation keeps running: export and live updates share this account's single client.
-        if self.export_busy() or self.export_claim:
+        export_id = secrets.token_urlsafe(18)
+        if not self.reserve_export(export_id):
             raise ValueError("A chat export is already running on this account. Wait for it or cancel it first.")
-        await self.restore()
-        entity = await self.resolve_target(chat_id)
-        info = self.dialog_cache.get(chat_id, {})
         try:
-            total = (await self.client.get_messages(entity, limit=0)).total
-        except Exception:
-            total = None  # progress is still reported, just without a percentage
-        record = {"id": secrets.token_urlsafe(18), "chat_id": chat_id, "title": info.get("title"),
-                  "phase": "running", "captured": 0, "total": total, "eta_seconds": None,
-                  "ready": False, "error": None, "started_at": utcnow()}
-        self.export_state = record
-        self.export_path = None
-        self.export_task = asyncio.create_task(self.run_export(entity, info, record))
+            await self.restore()
+            entity = await self.resolve_target(chat_id)
+            info = self.dialog_cache.get(chat_id, {})
+            try:
+                total = (await self.client.get_messages(entity, limit=0)).total
+            except Exception:
+                total = None  # progress is still reported, just without a percentage
+            record = {"id": export_id, "chat_id": chat_id, "title": info.get("title"),
+                      "phase": "running", "captured": 0, "total": total, "eta_seconds": None,
+                      "ready": False, "error": None, "started_at": utcnow()}
+            self.export_state = record
+            self.export_path = None
+            self.export_task = asyncio.create_task(self.run_export(entity, info, record))
+            # Released however the task ends, even if it is cancelled before its first step.
+            self.export_task.add_done_callback(lambda _: self.release_export(export_id))
+        except BaseException:
+            self.release_export(export_id)
+            raise
         await asyncio.sleep(0)
         return dict(record)
 
     async def run_export(self, entity, info, record):
         directory = self.store.root / "temporary-exports"
-        directory.mkdir(mode=0o700, exist_ok=True)
         scratch = directory / ("tgwitness-export-chat-" + record["id"] + ".jsonl")
         out_path = directory / ("tgwitness-export-chat-" + record["id"] + ".zip")
         chat_id = record["chat_id"]
-        self.store.append("chat_export.started", {"chat_id": chat_id, "title": info.get("title"),
-                                                  "meaning": "full visible history snapshot"}, chat_id)
         try:
+            # Setup is inside the lifecycle: a failure here still ends the export as failed.
+            directory.mkdir(mode=0o700, exist_ok=True)
+            self.store.append("chat_export.started", {"chat_id": chat_id, "title": info.get("title"),
+                                                      "meaning": "full visible history snapshot"}, chat_id)
             count = await self.stream_history(entity, scratch, record)
             meta = {"chat": {"id": chat_id, "title": info.get("title"), "kind": info.get("kind"),
                              "visibility": info.get("visibility")},
@@ -1477,17 +1505,20 @@ class Collector:
                 "reconstructed_missed_events": False}, chat_id)
         except asyncio.CancelledError:
             record.update(phase="cancelled")
-            self.store.append("chat_export.interrupted", {"chat_id": chat_id, "captured": record["captured"],
-                                                          "reason": "cancelled"}, chat_id)
-            out_path.unlink(missing_ok=True)
+            self.note("chat_export.interrupted", {"chat_id": chat_id, "captured": record["captured"],
+                                                  "reason": "cancelled"}, chat_id)
+            with suppress(OSError):
+                out_path.unlink(missing_ok=True)
             raise
         except BaseException as exc:
             record.update(phase="failed", error=type(exc).__name__)
-            self.store.append("chat_export.interrupted", {"chat_id": chat_id, "captured": record["captured"],
-                                                          "error_type": type(exc).__name__}, chat_id)
-            out_path.unlink(missing_ok=True)
+            self.note("chat_export.interrupted", {"chat_id": chat_id, "captured": record["captured"],
+                                                  "error_type": type(exc).__name__}, chat_id)
+            with suppress(OSError):
+                out_path.unlink(missing_ok=True)
         finally:
-            scratch.unlink(missing_ok=True)
+            with suppress(OSError):
+                scratch.unlink(missing_ok=True)
 
     async def iterate_history(self, entity, on_message, min_id=0, offset_id=0, on_wait=None):
         """Newest to oldest; after FloodWait or a brief connection loss, resume below the last message seen."""

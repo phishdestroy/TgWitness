@@ -42,7 +42,7 @@
 - **İhtiyacınız olduğunda kullanabileceğiniz ek özellikler. Üç adımda** bir "[Üç adımda Telegram tanığı](../WITNESS.md)", ayrı bir "[halka açık Test sayfası](../PROOF.md)" ve anlaşılır kurulum kılavuzları. "**Extras"ı** açarak seçim yapabilirsiniz; gelişmiş ayarlar ise gizli kalır.
 
 <details>
-<summary>Tüm özellikler ve teknik ayrıntılar</summary></details>
+<summary>Tüm özellikler ve teknik ayrıntılar</summary>
 
 - **Bağlantı yolunuz.** **Hesap → Proxy ayarları** altında, paketlenmiş genel MTProxy listelerinden seçim yapın, bunları kaynaklarından yenileyin veya kendi Telegram proxy bağlantınızı yapıştırın. Manuel SOCKS5/HTTP/MTProxy ve operatör kataloğu hâlâ kullanılabilir durumdadır. Genel listeler indirilmiş ve filtrelenmiştir, ancak henüz listelenen bir sunucu üzerinden bağlanan hesap bulunmamaktadır. [Genel listeler nasıl çalışır](../CONNECTION-SECURITY.md#public-proxies-supplied-by-your-installation)?
 
@@ -89,7 +89,7 @@
 > **Sadece bakmak mı istiyorsunuz?** **`scripts\Demo.cmd`** veya `sh start.sh --demo` komutunu çalıştırın. Tarayıcıda doğrudan kurgusal bir günlük açılır; herhangi bir Telegram hesabı bağlı değildir ve veriler `data/demo` içinde ayrı olarak depolanır.
 
 <details>
-<summary><strong>Çalışma alanında neler var: sohbetler, geçmiş ve dışa aktarma işlemleri</strong></summary></details>
+<summary><strong>Çalışma alanında neler var: sohbetler, geçmiş ve dışa aktarma işlemleri</strong></summary>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../assets/chats-dark.png">

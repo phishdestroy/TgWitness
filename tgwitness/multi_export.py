@@ -21,6 +21,7 @@ import hashlib
 import json
 import secrets
 import time
+from contextlib import suppress
 
 from . import chat_export
 from . import replica
@@ -56,64 +57,83 @@ class MultiExport:
             raise ValueError("A multi-account export is already running. Wait for it or cancel it.")
         lead_app = self.app_for(lead_id)
         lead = lead_app.state.collector
-        if lead.export_busy() or lead.export_claim:
+        export_id = secrets.token_urlsafe(18)
+        # Every participating account is reserved with a check-and-take that has no await in
+        # between, so an individual export can never start on it at the same time.
+        if not lead.reserve_export(export_id):
             raise ValueError("The starting account is already exporting. Wait for it or cancel it.")
-        entity = await lead.resolve_for_export(chat_id)
-        info = lead.dialog_cache.get(chat_id, {})
-        latest = await lead.client.get_messages(entity, limit=1)
-        total, newest = getattr(latest, "total", None) or 0, (latest[0].id if latest else 0)
-        basic_group = info.get("kind") == "group"
-        chosen = [lead_id] + [p for p in dict.fromkeys(profile_ids) if p != lead_id]
-        if basic_group:
-            chosen = [lead_id]
-        workers = []
-        for profile_id in chosen:
-            entry = self.profiles.entries.get(profile_id) or {}
-            app = entry.get("app")
-            worker = {"profile_id": profile_id, "label": entry.get("label", profile_id), "account_id": None,
-                      "state": "pending", "captured": 0, "ranges": 0, "error": None, "wait_until": None}
-            if app is None:
-                worker.update(state="skipped", error="Workspace unavailable.")
-            else:
-                worker["account_id"] = (app.state.store.get_setting("account", {}) or {}).get("id")
-                collector = app.state.collector
-                if not app.state.vault.read("credentials").get("session"):
-                    worker.update(state="skipped", error="No Telegram account connected.")
-                elif profile_id != lead_id and (collector.export_busy() or collector.export_claim):
-                    worker.update(state="skipped", error="Another export is running on this account.")
-            workers.append(worker)
-        active = sum(1 for w in workers if w["state"] == "pending")
-        pages = -(-total // 100)
-        self.state = {
-            "id": secrets.token_urlsafe(18), "chat_id": chat_id, "title": info.get("title"),
-            "kind": info.get("kind"), "basic_group": basic_group, "lead": lead_id, "phase": "running",
-            "total": total, "newest_message_id": newest, "captured": 0,
-            "ranges_total": -(-newest // CHUNK), "ranges_done": 0,
-            "eta_seconds": round(pages * (1 if total > 3000 else 0.3) / max(1, active)),
-            "workers": workers, "ready": False, "error": None, "started_at": utcnow()}
-        self.path = None
-        self.task = asyncio.create_task(self.run(lead_app, entity, getattr(entity, "username", None), info))
+        reserved = {lead_id: lead}
+        try:
+            entity = await lead.resolve_for_export(chat_id)
+            info = lead.dialog_cache.get(chat_id, {})
+            latest = await lead.client.get_messages(entity, limit=1)
+            total, newest = getattr(latest, "total", None) or 0, (latest[0].id if latest else 0)
+            basic_group = info.get("kind") == "group"
+            chosen = [lead_id] + [p for p in dict.fromkeys(profile_ids) if p != lead_id]
+            if basic_group:
+                chosen = [lead_id]
+            workers = []
+            for profile_id in chosen:
+                entry = self.profiles.entries.get(profile_id) or {}
+                app = entry.get("app")
+                worker = {"profile_id": profile_id, "label": entry.get("label", profile_id), "account_id": None,
+                          "state": "pending", "captured": 0, "ranges": 0, "error": None, "wait_until": None}
+                if app is None:
+                    worker.update(state="skipped", error="Workspace unavailable.")
+                else:
+                    worker["account_id"] = (app.state.store.get_setting("account", {}) or {}).get("id")
+                    collector = app.state.collector
+                    if not app.state.vault.read("credentials").get("session"):
+                        worker.update(state="skipped", error="No Telegram account connected.")
+                    elif profile_id != lead_id:
+                        if collector.reserve_export(export_id):
+                            reserved[profile_id] = collector
+                        else:
+                            worker.update(state="skipped", error="Another export is running on this account.")
+                workers.append(worker)
+            active = sum(1 for w in workers if w["state"] == "pending")
+            pages = -(-total // 100)
+            self.state = {
+                "id": export_id, "chat_id": chat_id, "title": info.get("title"),
+                "kind": info.get("kind"), "basic_group": basic_group, "lead": lead_id, "phase": "running",
+                "total": total, "newest_message_id": newest, "captured": 0,
+                "ranges_total": -(-newest // CHUNK), "ranges_done": 0,
+                "eta_seconds": round(pages * (1 if total > 3000 else 0.3) / max(1, active)),
+                "workers": workers, "ready": False, "error": None, "started_at": utcnow()}
+            self.path = None
+            self.task = asyncio.create_task(self.run(lead_app, entity, getattr(entity, "username", None), info))
+        except BaseException:
+            self.release(reserved, export_id)
+            raise
+        # Released however the task ends, even if it is cancelled before its first step.
+        self.task.add_done_callback(lambda _: self.release(reserved, export_id))
         await asyncio.sleep(0)
         return self.public()
+
+    @staticmethod
+    def release(reserved, export_id):
+        for collector in reserved.values():
+            collector.release_export(export_id)
+
+    def uses(self, profile_id):
+        """Whether a running export still depends on this workspace (its store, client or keys)."""
+        # A failed account's earlier ranges are still signed with its key when the export ends.
+        return self.busy() and any(w["profile_id"] == profile_id and w["state"] != "skipped"
+                                   and (w["state"] != "failed" or w["ranges"]) for w in self.state["workers"])
 
     async def run(self, lead_app, lead_entity, username, info):
         state, lead = self.state, lead_app.state.collector
         directory = lead.store.root / "temporary-exports"
-        directory.mkdir(mode=0o700, exist_ok=True)
         stem = "tgwitness-export-multi-" + state["id"]
         newest = state["newest_message_id"]
         ranges = [(low, min(low + CHUNK - 1, newest)) for low in range(1, newest + 1, CHUNK)]
         queue = asyncio.Queue()
         for item in reversed(ranges):  # newest messages first
             queue.put_nowait(item)
-        results, claimed, started = {}, [], time.monotonic()
+        results, started = {}, time.monotonic()
         in_flight = {"ranges": 0}  # ranges being fetched; a failure can return one to the queue
         out = directory / (stem + ".zip")
         scratch = directory / (stem + ".jsonl")
-        lead.store.append("chat_export.started", {
-            "chat_id": state["chat_id"], "title": info.get("title"), "mode": "multi_account",
-            "accounts": [w["account_id"] for w in state["workers"] if w["state"] == "pending"],
-            "newest_message_id": newest, "meaning": "full visible history snapshot"}, state["chat_id"])
 
         async def work(worker):
             app = self.app_for(worker["profile_id"])
@@ -123,9 +143,9 @@ class MultiExport:
                     await collector.resolve_for_export(state["chat_id"], username)
             except Exception as exc:
                 worker.update(state="skipped", error="This account cannot open the chat (" + type(exc).__name__ + ").")
+                if worker["profile_id"] != state["lead"]:
+                    collector.release_export(state["id"])  # free for its own exports again
                 return
-            collector.export_claim = state["id"]
-            claimed.append(collector)
             worker["state"] = "running"
             while True:
                 try:
@@ -174,6 +194,12 @@ class MultiExport:
             worker["state"] = "done"
 
         try:
+            # Setup is inside the lifecycle: a failure here still ends the export as failed.
+            directory.mkdir(mode=0o700, exist_ok=True)
+            lead.store.append("chat_export.started", {
+                "chat_id": state["chat_id"], "title": info.get("title"), "mode": "multi_account",
+                "accounts": [w["account_id"] for w in state["workers"] if w["state"] == "pending"],
+                "newest_message_id": newest, "meaning": "full visible history snapshot"}, state["chat_id"])
             await asyncio.gather(*(work(w) for w in state["workers"] if w["state"] == "pending"))
             if len(results) != len(ranges):
                 raise RuntimeError("Some message ranges could not be fetched by any selected account.")
@@ -199,24 +225,24 @@ class MultiExport:
                 state["chat_id"])
         except asyncio.CancelledError:
             state["phase"] = "cancelled"
-            lead.store.append("chat_export.interrupted", {"chat_id": state["chat_id"], "mode": "multi_account",
-                                                          "captured": state["captured"], "reason": "cancelled"},
-                              state["chat_id"])
-            out.unlink(missing_ok=True)
+            lead.note("chat_export.interrupted", {"chat_id": state["chat_id"], "mode": "multi_account",
+                                                  "captured": state["captured"], "reason": "cancelled"},
+                      state["chat_id"])
+            with suppress(OSError):
+                out.unlink(missing_ok=True)
             raise
         except BaseException as exc:
             state.update(phase="failed", error=str(exc) if isinstance(exc, (ValueError, RuntimeError)) else type(exc).__name__)
-            lead.store.append("chat_export.interrupted", {"chat_id": state["chat_id"], "mode": "multi_account",
-                                                          "captured": state["captured"],
-                                                          "error_type": type(exc).__name__}, state["chat_id"])
-            out.unlink(missing_ok=True)
+            lead.note("chat_export.interrupted", {"chat_id": state["chat_id"], "mode": "multi_account",
+                                                  "captured": state["captured"],
+                                                  "error_type": type(exc).__name__}, state["chat_id"])
+            with suppress(OSError):
+                out.unlink(missing_ok=True)
         finally:
-            for collector in claimed:
-                if collector.export_claim == state["id"]:
-                    collector.export_claim = None
-            for item in directory.glob(stem + "-*.jsonl"):
-                item.unlink(missing_ok=True)
-            scratch.unlink(missing_ok=True)
+            with suppress(OSError):
+                for item in directory.glob(stem + "-*.jsonl"):
+                    item.unlink(missing_ok=True)
+                scratch.unlink(missing_ok=True)
 
     @staticmethod
     def merge(parts, scratch):

@@ -1864,5 +1864,6 @@
 "Unknown public proxy. Refresh the list.": "Proxy công khai không xác định. Hãy làm mới danh sách.",
 "Invalid MTProxy link. Use a valid host, port 1-65535 and a 32-digit hex or dd secret; Fake TLS ee is unsupported.": "Liên kết MTProxy không hợp lệ. Hãy dùng máy chủ hợp lệ, cổng 1-65535 và khóa bí mật hex 32 chữ số hoặc dd; Fake TLS ee không được hỗ trợ.",
 "Refusing to delete a workspace through a filesystem link. Inspect its data directory.": "Từ chối xóa không gian làm việc qua liên kết hệ thống tệp. Hãy kiểm tra thư mục dữ liệu của nó.",
-"Could not delete all workspace files. Close programs using them and retry deleting this account. Its observation remains stopped.": "Không thể xóa toàn bộ tệp của không gian làm việc. Đóng các chương trình đang dùng chúng và thử xóa tài khoản này lại. Việc quan sát tài khoản vẫn dừng."
+"Could not delete all workspace files. Close programs using them and retry deleting this account. Its observation remains stopped.": "Không thể xóa toàn bộ tệp của không gian làm việc. Đóng các chương trình đang dùng chúng và thử xóa tài khoản này lại. Việc quan sát tài khoản vẫn dừng.",
+"This account is part of a running multi-account export. Cancel the export or wait for it to finish, then delete the account.": "Tài khoản này là một phần của quá trình xuất dữ liệu nhiều tài khoản đang diễn ra. Quý vị có thể hủy quá trình xuất hoặc chờ cho đến khi quá trình này hoàn tất, sau đó hãy xóa tài khoản."
 }

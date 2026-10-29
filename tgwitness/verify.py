@@ -33,7 +33,70 @@ FIELDS = ("seq", "observed_at", "source_at", "kind", "chat_id", "message_id",
 
 OTS_MAGIC = b"\x00OpenTimestamps\x00\x00Proof\x00\xbf\x89\xe2\xe8\x84\xe8\x92\x94"
 MAX_UNCOMPRESSED_GIB = 4  # archives above this size are refused unless --max-gib allows them
+# Checked before any member is read, for every archive kind: an export holds a journal, media
+# and proofs, a manifest lists one hash per member, and no single record is anywhere near this.
+MAX_MEMBERS = 500_000
+MAX_MANIFEST_BYTES = 64 * 1024**2
+MAX_SMALL_MEMBER_BYTES = 16 * 1024**2  # signatures, checkpoints, timestamp answers
+MAX_RECORD_BYTES = 64 * 1024**2  # one journal line or one chat export message
+MAX_JSON_BYTES = 256 * 1024**2  # profile, public proof and checkpoint files
 OTS_PENDING, OTS_BITCOIN = bytes.fromhex("83dfe30d2ef90c8e"), bytes.fromhex("0588960d73d71901")
+
+
+def open_archive(path):
+    """Open a ZIP and enforce member count, duplicates and total expanded size before any read."""
+    archive = zipfile.ZipFile(path)
+    try:
+        infos = archive.infolist()
+        if len(infos) > MAX_MEMBERS:
+            raise ValueError("Archive has more members than the verifier accepts")
+        names = [info.filename for info in infos]
+        if len(names) != len(set(names)):
+            raise ValueError("Duplicate ZIP members")
+        if sum(info.file_size for info in infos) > MAX_UNCOMPRESSED_GIB * 1024**3:
+            raise ValueError("Bundle exceeds the verifier's size limit; raise it with --max-gib")
+    except BaseException:
+        archive.close()
+        raise
+    return archive
+
+
+def read_member(archive, name, limit=MAX_SMALL_MEMBER_BYTES):
+    """A whole member, bounded by both its declared size and the bytes actually produced."""
+    if archive.getinfo(name).file_size > limit:
+        raise ValueError(name + " exceeds the verifier's size limit for this member")
+    with archive.open(name) as stream:
+        data = stream.read(limit + 1)
+    if len(data) > limit:
+        raise ValueError(name + " exceeds the verifier's size limit for this member")
+    return data
+
+
+def read_manifest(archive):
+    return json.loads(read_member(archive, "manifest.json", MAX_MANIFEST_BYTES))
+
+
+def member_digest(archive, name):
+    digest = hashlib.sha256()
+    with archive.open(name) as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def bounded_lines(stream):
+    """Lines of a journal or chat file, refusing one longer than any record could be."""
+    for line in iter(lambda: stream.readline(MAX_RECORD_BYTES + 1), stream.read(0)):
+        if len(line) > MAX_RECORD_BYTES:
+            raise ValueError("A record exceeds the verifier's size limit")
+        yield line
+
+
+def read_json_file(path):
+    path = Path(path)
+    if path.stat().st_size > MAX_JSON_BYTES:
+        raise ValueError(path.name + " exceeds the verifier's size limit")
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def der(data, offset):
@@ -125,22 +188,22 @@ def verify_anchors(archive, names, public_key, event_count, hash_at, tsa_ca=None
     """Checkpoints anchored in evidence mode: each checkpoint, then every answer stored for it."""
     results = []
     for name in sorted(n for n in names if n.startswith("anchors/") and n.endswith(".json")):
-        data = archive.read(name)
+        data = read_member(archive, name)
         verify_checkpoint(json.loads(data), public_key, event_count, hash_at)
         digest, stem = hashlib.sha256(data).digest(), name[:-len(".json")] + "."
         for proof_name in sorted(n for n in names if n.startswith(stem) and n != name):
             service = proof_name[len(stem):].rsplit(".", 1)[0]
             entry = {"checkpoint": name[len("anchors/"):], "service": service}
             if proof_name.endswith(".tsr"):
-                reply = archive.read(proof_name)
+                reply = read_member(archive, proof_name)
                 query_name = proof_name[:-4] + ".tsq"
-                query = archive.read(query_name) if query_name in names else None
+                query = read_member(archive, query_name) if query_name in names else None
                 entry.update(kind="rfc3161", **timestamp_reply_summary(reply, digest, query))
                 if tsa_ca:
                     openssl_verify_timestamp(data, reply, query, tsa_ca)
                 entry["signature"] = "checked against the given root" if tsa_ca else "not checked (use --tsa-ca)"
             elif proof_name.endswith(".ots"):
-                entry.update(kind="opentimestamps", **ots_summary(archive.read(proof_name), digest))
+                entry.update(kind="opentimestamps", **ots_summary(read_member(archive, proof_name), digest))
             else:
                 continue
             results.append(entry)
@@ -326,13 +389,9 @@ def verify_checkpoint(checkpoint, public_key, event_count, hash_at):
 
 
 def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None):
-    with zipfile.ZipFile(path) as archive:
+    with open_archive(path) as archive:
         names = archive.namelist()
-        if len(names) != len(set(names)):
-            raise ValueError("Duplicate ZIP members")
-        if sum(i.file_size for i in archive.infolist()) > MAX_UNCOMPRESSED_GIB * 1024**3:
-            raise ValueError("Bundle exceeds the verifier's size limit; raise it with --max-gib")
-        manifest = json.loads(archive.read("manifest.json"))
+        manifest = read_manifest(archive)
         if not is_format(manifest["format"], "evidence-v1"):
             raise ValueError("Unsupported evidence format")
         public = manifest["public_key"]
@@ -340,15 +399,11 @@ def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None)
         if expected_fingerprint and fp != expected_fingerprint:
             raise ValueError("Public key differs from the independently trusted fingerprint")
         Ed25519PublicKey.from_public_bytes(base64.b64decode(public, validate=True)).verify(
-            base64.b64decode(archive.read("manifest.sig"), validate=True), canonical(manifest))
+            base64.b64decode(read_member(archive, "manifest.sig"), validate=True), canonical(manifest))
         if set(names) != set(manifest["files"]) | {"manifest.json", "manifest.sig"}:
             raise ValueError("Unexpected or missing bundle members")
         for name, digest in manifest["files"].items():
-            h = hashlib.sha256()
-            with archive.open(name) as stream:
-                for chunk in iter(lambda: stream.read(1024 * 1024), b""):
-                    h.update(chunk)
-            if h.hexdigest() != digest:
+            if member_digest(archive, name) != digest:
                 raise ValueError("File hash mismatch: " + name)
         observed = Coverage()
 
@@ -358,7 +413,7 @@ def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None)
                 observed.add(event)
                 yield event
         with archive.open("events.jsonl") as stream:
-            result = verify_events(measured(stream), public)
+            result = verify_events(measured(bounded_lines(stream)), public)
         if result["events"] != manifest["event_count"] or result["head_hash"] != manifest["head_hash"]:
             raise ValueError("Manifest does not match journal")
         result["coverage"] = observed.result()
@@ -368,7 +423,7 @@ def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None)
             if seq == 0:
                 return "0" * 64
             with archive.open("events.jsonl") as stream:
-                for line in stream:
+                for line in bounded_lines(stream):
                     event = json.loads(line)
                     if event["seq"] == seq:
                         return event["hash"]
@@ -382,13 +437,9 @@ def verify_bundle(path, expected_fingerprint=None, checkpoint=None, tsa_ca=None)
 
 
 def verify_chat_export(path, expected_fingerprint=None):
-    with zipfile.ZipFile(path) as archive:
+    with open_archive(path) as archive:
         names = archive.namelist()
-        if len(names) != len(set(names)):
-            raise ValueError("Duplicate ZIP members")
-        if sum(i.file_size for i in archive.infolist()) > MAX_UNCOMPRESSED_GIB * 1024**3:
-            raise ValueError("Bundle exceeds the verifier's size limit; raise it with --max-gib")
-        manifest = json.loads(archive.read("manifest.json"))
+        manifest = read_manifest(archive)
         if not is_format(manifest["format"], "chat-export-v1"):
             raise ValueError("Unsupported chat export format")
         public = manifest["public_key"]
@@ -396,15 +447,11 @@ def verify_chat_export(path, expected_fingerprint=None):
         if expected_fingerprint and fp != expected_fingerprint:
             raise ValueError("Public key differs from the independently trusted fingerprint")
         Ed25519PublicKey.from_public_bytes(base64.b64decode(public, validate=True)).verify(
-            base64.b64decode(archive.read("manifest.sig"), validate=True), canonical(manifest))
+            base64.b64decode(read_member(archive, "manifest.sig"), validate=True), canonical(manifest))
         if set(names) != set(manifest["files"]) | {"manifest.json", "manifest.sig"}:
             raise ValueError("Unexpected or missing bundle members")
         for name, digest in manifest["files"].items():
-            h = hashlib.sha256()
-            with archive.open(name) as stream:
-                for chunk in iter(lambda: stream.read(1024 * 1024), b""):
-                    h.update(chunk)
-            if h.hexdigest() != digest:
+            if member_digest(archive, name) != digest:
                 raise ValueError("File hash mismatch: " + name)
         parts = verify_parts(archive, manifest) if manifest.get("parts") else None
         return {"format": manifest["format"], "fingerprint": fp,
@@ -416,7 +463,7 @@ def chat_messages(archive):
     """Stream messages from chat.json, written one message per line by TgWitness."""
     with archive.open("chat.json") as stream:
         inside = False
-        for raw in io.TextIOWrapper(stream, encoding="utf-8"):
+        for raw in bounded_lines(io.TextIOWrapper(stream, encoding="utf-8")):
             line = raw.strip()
             if not inside:
                 inside = line.endswith('"messages": [')
@@ -463,8 +510,8 @@ def verify_parts(archive, manifest):
 
 
 def bundle_format(path):
-    with zipfile.ZipFile(path) as archive:
-        return json.loads(archive.read("manifest.json")).get("format")
+    with open_archive(path) as archive:
+        return read_manifest(archive).get("format")
 
 
 def bundle_hashes(path, seqs):
@@ -472,8 +519,8 @@ def bundle_hashes(path, seqs):
     wanted, found = set(seqs), {}
     if not wanted:
         return found
-    with zipfile.ZipFile(path) as archive, archive.open("events.jsonl") as stream:
-        for line in stream:
+    with open_archive(path) as archive, archive.open("events.jsonl") as stream:
+        for line in bounded_lines(stream):
             event = json.loads(line)
             if event["seq"] in wanted:
                 found[event["seq"]] = event["hash"]
@@ -537,8 +584,8 @@ def bundle_capture_prefixes(bundle_path, boundaries):
     if not wanted:
         return result
     limit = max(wanted)
-    with zipfile.ZipFile(bundle_path) as archive, archive.open("events.jsonl") as stream:
-        for line in stream:
+    with open_archive(bundle_path) as archive, archive.open("events.jsonl") as stream:
+        for line in bounded_lines(stream):
             event = json.loads(line)
             if event["seq"] > limit:
                 break
@@ -593,11 +640,9 @@ def post_token(statement, signature_b64):
 
 def verify_witness(path, expected_fingerprint=None):
     """A witness journal export (tgwitness-witness-v1): signatures, chain, and what the witness saw."""
-    with zipfile.ZipFile(path) as archive:
+    with open_archive(path) as archive:
         names = archive.namelist()
-        if len(names) != len(set(names)):
-            raise ValueError("Duplicate ZIP members")
-        manifest = json.loads(archive.read("manifest.json"))
+        manifest = read_manifest(archive)
         if not is_format(manifest["format"], "witness-v1"):
             raise ValueError("Unsupported witness format")
         public = manifest["public_key"]
@@ -605,39 +650,48 @@ def verify_witness(path, expected_fingerprint=None):
         if expected_fingerprint and fp != expected_fingerprint:
             raise ValueError("Witness key differs from the independently trusted witness fingerprint")
         Ed25519PublicKey.from_public_bytes(base64.b64decode(public, validate=True)).verify(
-            base64.b64decode(archive.read("manifest.sig"), validate=True), canonical(manifest))
+            base64.b64decode(read_member(archive, "manifest.sig"), validate=True), canonical(manifest))
         if set(names) != set(manifest["files"]) | {"manifest.json", "manifest.sig"}:
             raise ValueError("Unexpected or missing witness bundle members")
         for name, digest in manifest["files"].items():
-            if hashlib.sha256(archive.read(name)).hexdigest() != digest:
+            if member_digest(archive, name) != digest:
                 raise ValueError("File hash mismatch: " + name)
-        events = [json.loads(line) for line in archive.read("events.jsonl").splitlines() if line.strip()]
-    result = verify_events(events, public)
+        anchors, silent, posted, failures, statements, interval = [], [], {}, [], {}, None
+
+        def observed(stream):
+            """One pass: each event is read when the chain check asks for it, then summarised."""
+            nonlocal interval
+            for line in bounded_lines(stream):
+                if not line.strip():
+                    continue
+                event = json.loads(line)
+                yield event  # resumed only after verify_events accepted this record
+                payload, kind = event["payload"], event["kind"]
+                if kind == "witness.started":
+                    interval = payload.get("interval_minutes")
+                elif kind == "witness.anchor":
+                    anchors.append({"seq": event["seq"], "at": event["observed_at"], "status": payload.get("status"),
+                                    "collector_fingerprint": payload.get("collector_fingerprint"),
+                                    "event_count": payload.get("event_count"), "head_hash": payload.get("head_hash")})
+                    if payload.get("capture"):
+                        captured = verify_capture(payload["capture"], payload["checkpoint"]["statement"])
+                        if (fingerprint(captured["public_key"]) != payload["collector_fingerprint"]
+                                or captured["event_count"] != payload["event_count"]
+                                or captured["head_hash"] != payload["head_hash"]):
+                            raise ValueError("Witness capture proof differs from its anchor")
+                        anchors[-1]["capture"] = payload["capture"]
+                    statements[event["seq"]] = post_statement(event, fp)
+                elif kind == "witness.no_response":
+                    silent.append({"seq": event["seq"], "at": event["observed_at"], "error": payload.get("error")})
+                    statements[event["seq"]] = post_statement(event, fp)
+                elif kind == "witness.posted":
+                    posted[payload.get("record")] = payload.get("message_id")
+                elif kind == "witness.post_failed":
+                    failures.append({"record": payload.get("record"), "error": payload.get("error")})
+        with archive.open("events.jsonl") as stream:
+            result = verify_events(observed(stream), public)
     if result["events"] != manifest["event_count"] or result["head_hash"] != manifest["head_hash"]:
         raise ValueError("Witness manifest does not match its journal")
-    anchors, silent, posted, failures, statements, interval = [], [], {}, [], {}, None
-    for event in events:
-        payload, kind = event["payload"], event["kind"]
-        if kind == "witness.started":
-            interval = payload.get("interval_minutes")
-        elif kind == "witness.anchor":
-            anchors.append({"seq": event["seq"], "at": event["observed_at"], "status": payload.get("status"),
-                            "collector_fingerprint": payload.get("collector_fingerprint"),
-                            "event_count": payload.get("event_count"), "head_hash": payload.get("head_hash")})
-            if payload.get("capture"):
-                captured = verify_capture(payload["capture"], payload["checkpoint"]["statement"])
-                if (fingerprint(captured["public_key"]) != payload["collector_fingerprint"]
-                        or captured["event_count"] != payload["event_count"] or captured["head_hash"] != payload["head_hash"]):
-                    raise ValueError("Witness capture proof differs from its anchor")
-                anchors[-1]["capture"] = payload["capture"]
-            statements[event["seq"]] = post_statement(event, fp)
-        elif kind == "witness.no_response":
-            silent.append({"seq": event["seq"], "at": event["observed_at"], "error": payload.get("error")})
-            statements[event["seq"]] = post_statement(event, fp)
-        elif kind == "witness.posted":
-            posted[payload.get("record")] = payload.get("message_id")
-        elif kind == "witness.post_failed":
-            failures.append({"record": payload.get("record"), "error": payload.get("error")})
     return {"format": manifest["format"], "fingerprint": fp, "public_key": public, "events": result["events"],
             "head_hash": result["head_hash"], "interval_minutes": interval, "channel": manifest.get("channel"),
             "producer": manifest.get("producer"), "anchors": anchors, "no_response": silent, "posted": posted,
@@ -711,13 +765,15 @@ def channel_texts(source):
         for _ in range(200):  # t.me/s shows about 20 posts per page
             url = source + (("&" if "?" in source else "?") + "before=" + str(before) if before else "")
             page = urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "TgWitness-verify"}),
-                                          timeout=30).read().decode("utf-8", "replace")
+                                          timeout=30).read(MAX_SMALL_MEMBER_BYTES).decode("utf-8", "replace")
             ids = [int(n) for n in re.findall(r'data-post="[^"/]+/(\d+)"', page)]
             posts += [(None, None, block) for block in re.split(r'data-post="', page)[1:]]
             if not ids or (before is not None and min(ids) >= before):
                 break
             before = min(ids)
         return posts
+    if Path(source).stat().st_size > MAX_JSON_BYTES:
+        raise ValueError(Path(source).name + " exceeds the verifier's size limit")
     text = Path(source).read_text(encoding="utf-8", errors="replace")
     if source.lower().endswith(".json"):
         data = json.loads(text)
@@ -764,7 +820,7 @@ def check_channel(witness, source):
 
 def verify_dossier(path, expected_fingerprint=None, bundle=None):
     """A people-profile file: signature, and optionally every referenced record against an evidence export."""
-    value = json.loads(Path(path).read_text(encoding="utf-8"))
+    value = read_json_file(path)
     statement = value["statement"]
     if not is_format(statement.get("format"), "dossier-v1"):
         raise ValueError("Unsupported profile format")
@@ -777,8 +833,8 @@ def verify_dossier(path, expected_fingerprint=None, bundle=None):
               "people": len(statement.get("people", [])), "built_at": statement.get("built_at"),
               "producer": statement.get("producer"), "key_pinned": bool(expected_fingerprint), "records_checked": 0}
     if bundle:
-        with zipfile.ZipFile(bundle) as archive:
-            if json.loads(archive.read("manifest.json"))["public_key"] != statement["public_key"]:
+        with open_archive(bundle) as archive:
+            if read_manifest(archive)["public_key"] != statement["public_key"]:
                 raise ValueError("The evidence export was signed by another workspace key")
         verify_bundle(bundle, fp)  # signature, hash chain and file hashes of the export itself
         wanted = {int(seq): digest for seq, digest in statement.get("record_hashes", {}).items()}
@@ -791,7 +847,7 @@ def verify_dossier(path, expected_fingerprint=None, bundle=None):
 
 
 def verify_public_proof(path, collector_fingerprint=None, witness_fingerprint=None, bundle=None):
-    value = json.loads(Path(path).read_text(encoding="utf-8"))
+    value = read_json_file(path)
     statement = value["statement"]
     if not is_format(statement.get("format"), "public-proof-v1"):
         raise ValueError("Unsupported public proof")
@@ -855,7 +911,7 @@ def main():
     pinned = bool(args.fingerprint or args.witness_fingerprint)
     try:
         if args.bundle.suffix.lower() == ".json":
-            kind = json.loads(args.bundle.read_text(encoding="utf-8")).get("statement", {}).get("format")
+            kind = read_json_file(args.bundle).get("statement", {}).get("format")
             if is_format(kind, "public-proof-v1"):
                 result = verify_public_proof(args.bundle, args.fingerprint, args.witness_fingerprint, args.evidence)
             else:
@@ -871,7 +927,7 @@ def main():
             result.pop("statements")
         else:
             result = verify_bundle(args.bundle, args.fingerprint,
-                                   json.loads(args.checkpoint.read_text()) if args.checkpoint else None, args.tsa_ca)
+                                   read_json_file(args.checkpoint) if args.checkpoint else None, args.tsa_ca)
             notes += coverage_lines(result["coverage"])
             pinned = bool(args.fingerprint)
             if args.witness:

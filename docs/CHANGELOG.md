@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- Fixed all eleven audit findings, each with a regression test. The portable builder
+  no longer reuses an earlier build directory and refuses private or unexpected files.
+  The verifier applies its archive limits at every entry point, including format
+  detection and witness journals. The HTTP client bounds chunked reads. Individual and
+  multi-account exports share one reservation per account; a workspace in a running
+  multi-account export cannot be deleted; setup failures end an export as failed.
+  People profiles count distinct replies and messages. Reference pages link to the
+  GitHub editor, translated README sections collapse again, and the operations guide
+  describes password-protected exports and priority rechecks correctly.
 - The additional launchers moved to `scripts/`: `scripts\Demo.cmd`, `scripts\Setup.cmd`,
   `scripts\Docker.cmd` and `sh scripts/docker-start.sh`. They still run from the project
   root; `Start.cmd`, `start.sh` and `start.py` stay where they were.

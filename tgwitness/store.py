@@ -536,7 +536,8 @@ class Store:
                 " ORDER BY seq", (chat_id, *kinds))]
 
     def sender_chats(self, sender_ids):
-        """{sender_id: {chat_id: saved message records}} across every chat in this journal."""
+        """{sender_id: {chat_id: distinct saved messages}} across every chat in this journal. Snapshots,
+        edits and recoveries of one message are further records of the same message, not new ones."""
         if not sender_ids:
             return {}
         marks = ",".join("?" * len(TEXT_KINDS))
@@ -544,7 +545,7 @@ class Store:
         result = {}
         with self.lock:
             for chat_id, sender, count in self.db.execute(
-                    "SELECT chat_id, json_extract(payload,'$.sender_id') AS sender, count(*) FROM events"
+                    "SELECT chat_id, json_extract(payload,'$.sender_id') AS sender, count(DISTINCT message_id) FROM events"
                     " WHERE kind IN (" + marks + ") AND chat_id IS NOT NULL GROUP BY chat_id, sender", TEXT_KINDS):
                 if sender in wanted:
                     result.setdefault(sender, {})[chat_id] = count

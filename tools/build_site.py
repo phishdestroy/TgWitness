@@ -460,7 +460,9 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
                        f'<p class="guide-outcome">{html.escape(description)}</p>'
                        f'<div class="wiki-body"{" lang=en dir=ltr" if english and lang != "en" else ""}>{rendered[slug]}</div>')
             following = order[(index + 1) % len(order)]
-            footer = (f'<a class="reference" href="{values["REPO_URL"]}/blob/{values["BRANCH"]}/{source}">{labels["source"]} ↗</a>'
+            # /edit/, not /blob/: the document-link rewriter keeps /blob/ links on the site,
+            # which would turn "Edit this page on GitHub" into a link to this same page.
+            footer = (f'<a class="reference" href="{values["REPO_URL"]}/edit/{values["BRANCH"]}/{source}">{labels["source"]} ↗</a>'
                       f'<a class="next-guide" href="{relative(path, wiki_hub + following + "/")}"><span>{labels["next"]}</span>'
                       f'<strong>{reference[following][0]} {arrow}</strong></a>')
             page(f"{WIKI_HUB}{slug}/", title, description,

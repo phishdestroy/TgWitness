@@ -8,6 +8,7 @@ on:
       - tools/site_content.py
       - tools/site_wiki.py
       - tools/site_diagrams.py
+      - tools/site_i18n.py
       - docs/*.md
       - docs/QUICKSTART.md
       - .github/SECURITY.md
@@ -26,6 +27,7 @@ on:
       - tools/site_content.py
       - tools/site_wiki.py
       - tools/site_diagrams.py
+      - tools/site_i18n.py
       - docs/*.md
       - docs/QUICKSTART.md
       - .github/SECURITY.md

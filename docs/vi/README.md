@@ -42,7 +42,7 @@
 - **Các tính năng bổ sung khi quý vị cần.** Một [chứng nhân Telegram chỉ trong ba bước](../WITNESS.md), một [trang Chứng minh công khai](../PROOF.md) riêng biệt và các hướng dẫn thiết lập rõ ràng. Mở **phần Tính năng bổ sung** để lựa chọn; các cài đặt nâng cao sẽ được ẩn đi.
 
 <details>
-<summary>Tất cả các tính năng và chi tiết kỹ thuật</summary></details>
+<summary>Tất cả các tính năng và chi tiết kỹ thuật</summary>
 
 - **Tuyến kết nối của quý vị.** Trong **phần** **Tài khoản → Cài đặt proxy**, quý vị có thể chọn từ các danh sách MTProxy công khai được tích hợp sẵn, làm mới chúng từ nguồn gốc hoặc dán liên kết proxy Telegram của riêng quý vị. Tính năng cấu hình thủ công SOCKS5/HTTP/MTProxy và danh mục nhà cung cấp vẫn được duy trì. Các danh sách công khai đã được tải xuống và lọc sẵn, nhưng hiện tại vẫn chưa có tài khoản nào kết nối qua máy chủ nào trong danh sách này. [Cách thức hoạt động của các danh sách công khai](../CONNECTION-SECURITY.md#public-proxies-supplied-by-your-installation).
 
@@ -89,7 +89,7 @@ Lần khởi chạy nguồn đầu tiên sẽ tạo ra một tài khoản riêng
 > **Chỉ muốn xem thử?** Vui lòng truy cập **`scripts\Demo.cmd`** hoặc `sh start.sh --demo`. Một nhật ký giả định sẽ mở trực tiếp trên trình duyệt; không có tài khoản Telegram nào được kết nối và dữ liệu được lưu trữ riêng biệt tại `data/demo`.
 
 <details>
-<summary><strong>Bên trong không gian làm việc: các cuộc trò chuyện, lịch sử và tính năng xuất dữ liệu</strong></summary></details>
+<summary><strong>Bên trong không gian làm việc: các cuộc trò chuyện, lịch sử và tính năng xuất dữ liệu</strong></summary>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../assets/chats-dark.png">
