@@ -71,7 +71,7 @@ python -m tgwitness.witness fingerprint --config witness.json
 При необходимости оператор заменяет публичные списки своим каталогом в `proxy-config/proxies.json` по
 [этому примеру](../../deploy/proxies.config.example). Для запуска без Docker нужен путь
 в `TGWITNESS_PROXY_CATALOG`, для Docker —
-[compose.proxies.yaml](../../compose.proxies.yaml). Формат записей и команды описаны
+[deploy/compose/compose.proxies.yaml](../../deploy/compose/compose.proxies.yaml). Формат записей и команды описаны
 в [инструкции подключения](../CONNECTION-SECURITY.md#public-proxies-supplied-by-your-installation).
 
 У бота отдельная сеть: Bot API работает по HTTPS. В форме свидетеля можно задать свой

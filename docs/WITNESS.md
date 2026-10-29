@@ -124,7 +124,7 @@ With a published image use `docker compose -f compose.image.yaml --profile witne
 in `.env`, then
 
 ```sh
-docker compose -f compose.witness.yaml up -d
+docker compose --project-directory . -f deploy/compose/compose.witness.yaml up -d
 ```
 
 or without Docker:
@@ -181,7 +181,7 @@ On the witness side, export its journal:
 
 ```sh
 python -m tgwitness.witness export --out witness.zip
-# Docker (add -f compose.witness.yaml on a witness server):
+# Docker (add -f deploy/compose/compose.witness.yaml on a witness server):
 docker compose exec witness python -m tgwitness.witness export --out /witness/witness.zip
 docker compose cp witness:/witness/witness.zip .
 ```

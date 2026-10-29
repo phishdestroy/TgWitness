@@ -2,7 +2,7 @@
 
 # Glossary
 
-[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../SUPPORT.md)
+[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../.github/SUPPORT.md)
 
 
 | Term | Meaning in TgWitness |

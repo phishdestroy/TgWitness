@@ -2,7 +2,7 @@
 
 # Issue forms
 
-[Project](../../README.md) · [Documentation](../../docs/README.md) · [Wiki](../../docs/wiki/Home.md) · [Support](../../SUPPORT.md)
+[Project](../../README.md) · [Documentation](../../docs/README.md) · [Wiki](../../docs/wiki/Home.md) · [Support](../SUPPORT.md)
 
 | File | Use |
 | --- | --- |
@@ -11,6 +11,6 @@
 | [`feature_request.yml`](feature_request.yml) | A proposed capability and its use case |
 | [`config.yml`](config.yml) | Issue chooser settings and support links |
 
-Keep field labels aligned with [Support](../../SUPPORT.md) and
-[Contributing](../../CONTRIBUTING.md). Vulnerability reports follow
-[Security](../../SECURITY.md). Examples and attachments should use synthetic data.
+Keep field labels aligned with [Support](../SUPPORT.md) and
+[Contributing](../CONTRIBUTING.md). Vulnerability reports follow
+[Security](../SECURITY.md). Examples and attachments should use synthetic data.

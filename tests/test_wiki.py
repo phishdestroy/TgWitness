@@ -11,6 +11,7 @@ from tools.build_wiki import FILES, PAGES, build_wiki
 @pytest.fixture
 def wiki_tree(tmp_path):
     for name in SOURCE_FILES:
+        (tmp_path / name).parent.mkdir(parents=True, exist_ok=True)
         (tmp_path / name).write_text("Public fixture\n", encoding="utf-8")
     (tmp_path / "pyproject.toml").write_text('[project]\nversion = "1.2.3"\n', encoding="utf-8")
     wiki = tmp_path / "docs/wiki"
@@ -55,7 +56,12 @@ def test_wiki_rewrites_page_document_and_image_links_for_forks(wiki_tree):
     page = (wiki_tree / "dist/wiki/Home.md").read_text(encoding="utf-8")
     assert "[Start](https://github.com/example/Project/wiki/Getting-Started#install)" in page
     assert "[Reference](https://github.com/example/Project/blob/release/docs/reference.md)" in page
-    assert '![Demo](https://raw.githubusercontent.com/example/Project/release/docs/assets/demo.png "Fictional data")' in page
+    assert '![Demo](https://github.com/example/Project/wiki/assets/demo.png "Fictional data")' in page
+    assert (wiki_tree / "dist/wiki/assets/demo.png").read_bytes() == b"synthetic image"
+    manifest = json.loads((wiki_tree / "dist/wiki-manifest.json").read_text())
+    assert manifest["assets"] == 1
+    with zipfile.ZipFile(wiki_tree / "dist" / manifest["archive"]) as archive:
+        assert archive.read("assets/demo.png") == b"synthetic image"
     assert "[External](https://example.org/docs)" in page
     assert "[Section](#section)" in page
     assert "~~~md\n[Example](missing.md)\n~~~" in page
@@ -89,6 +95,21 @@ def test_wiki_refuses_unrelated_output_without_overwriting_it(wiki_tree):
 def test_wiki_requires_every_navigation_page(wiki_tree):
     (wiki_tree / "docs/wiki/FAQ.md").unlink()
     with pytest.raises(ValueError, match="Missing or linked wiki input: FAQ.md"):
+        build_wiki(wiki_tree)
+
+
+def test_wiki_rejects_unreviewed_nested_asset_without_overwriting(wiki_tree):
+    output = wiki_tree / "dist/wiki/assets"
+    output.mkdir(parents=True)
+    (output / "private.svg").write_text("Keep this file", encoding="utf-8")
+    with pytest.raises(ValueError, match="Unexpected or linked"):
+        build_wiki(wiki_tree)
+    assert (output / "private.svg").read_text() == "Keep this file"
+
+
+def test_wiki_rejects_non_image_sources_used_as_images(wiki_tree):
+    (wiki_tree / "docs/wiki/Home.md").write_text("![Wrong](../../README.md)\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="reviewed documentation asset"):
         build_wiki(wiki_tree)
 
 

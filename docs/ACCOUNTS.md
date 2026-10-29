@@ -54,7 +54,7 @@ saved with the account and reused for it. An **API ID** and **API hash** identif
 do not authorize an account by themselves.
 
 To use your own application instead (the account that registers it is the one at risk; see
-[Why a built-in API pool?](../README.md#connect-a-telegram-account)):
+[Why a built-in API pool?](PROJECT-GUIDE.md#connect-a-telegram-account)):
 
 1. Open [my.telegram.org](https://my.telegram.org) and sign in with any phone number
    you own. The code arrives in the Telegram app, not by SMS.

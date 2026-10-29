@@ -2,7 +2,7 @@
 
 # TgWitness Wiki
 
-[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../SUPPORT.md)
+[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../.github/SUPPORT.md)
 
 
 **From your first demo to a verifiable handoff.** Practical guides for observing
@@ -43,6 +43,6 @@ A signature establishes integrity relative to a trusted key. It does not prove t
 
 ## Project and help
 
-[Project overview](../../README.md) · [Technical documentation](../README.md) · [Verification record](../VERIFICATION.md) · [Get help](../../SUPPORT.md) · [Contribute](../../CONTRIBUTING.md) · [Report a vulnerability](../../SECURITY.md)
+[Project overview](../../README.md) · [Complete project guide](../PROJECT-GUIDE.md) · [Technical documentation](../README.md) · [Verification record](../VERIFICATION.md) · [Get help](../../.github/SUPPORT.md) · [Contribute](../../.github/CONTRIBUTING.md) · [Report a vulnerability](../../.github/SECURITY.md)
 
 UI labels in this wiki follow the English interface. Labels may differ between releases.

@@ -2,7 +2,7 @@
 
 # Repository workflows
 
-[Project](../README.md) · [Documentation](../docs/README.md) · [Wiki](../docs/wiki/Home.md) · [Support](../SUPPORT.md)
+[Project](../README.md) · [Documentation](../docs/README.md) · [Wiki](../docs/wiki/Home.md) · [Support](SUPPORT.md)
 
 GitHub configuration for TgWitness: automation, issue forms and contribution prompts.
 

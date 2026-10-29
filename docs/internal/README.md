@@ -2,7 +2,7 @@
 
 # Maintainer notes
 
-[Project](../../README.md) · [Documentation](../README.md) · [Wiki](../wiki/Home.md) · [Support](../../SUPPORT.md)
+[Project](../../README.md) · [Documentation](../README.md) · [Wiki](../wiki/Home.md) · [Support](../../.github/SUPPORT.md)
 
 Maintainer-oriented documents for publishing, qualification and engineering review.
 For user-facing setup and workflows, start with the

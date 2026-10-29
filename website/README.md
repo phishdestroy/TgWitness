@@ -2,7 +2,7 @@
 
 # Public website
 
-[Project](../README.md) · [Documentation](../docs/README.md) · [Wiki](../docs/wiki/Home.md) · [Support](../SUPPORT.md)
+[Project](../README.md) · [Documentation](../docs/README.md) · [Wiki](../docs/wiki/Home.md) · [Support](../.github/SUPPORT.md)
 
 Source templates, styles, interactive examples and translations for the TgWitness
 project website. The authenticated application panel lives in

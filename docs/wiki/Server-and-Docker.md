@@ -2,7 +2,7 @@
 
 # Server and Docker
 
-[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../SUPPORT.md)
+[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../.github/SUPPORT.md)
 
 
 Start with one workspace and persistent storage. The default panel binds to localhost; remote access needs HTTPS or an SSH tunnel.
@@ -51,8 +51,8 @@ TGWITNESS_DOMAIN=watch.your-domain.org
 Then run:
 
 ~~~sh
-docker compose -f compose.yaml -f compose.https.yaml up -d --build --wait
-docker compose -f compose.yaml -f compose.https.yaml exec tgwitness cat /data/panel-token.txt
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt
 ~~~
 
 Open `https://watch.your-domain.org`. Keep both Compose file arguments for later status, logs, stop and update commands. Caddy obtains and renews the certificate; its state has a separate persistent volume.

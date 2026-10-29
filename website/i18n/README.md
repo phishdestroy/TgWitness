@@ -2,7 +2,7 @@
 
 # Website languages
 
-[Project](../../README.md) · [Documentation](../../docs/README.md) · [Wiki](../../docs/wiki/Home.md) · [Support](../../SUPPORT.md)
+[Project](../../README.md) · [Documentation](../../docs/README.md) · [Wiki](../../docs/wiki/Home.md) · [Support](../../.github/SUPPORT.md)
 
 Language catalogues for the public website, separate from the application's
 [`tgwitness/locales/`](../../tgwitness/locales/README.md) dictionaries.

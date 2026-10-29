@@ -2,7 +2,7 @@
 
 # Tests and verification
 
-[Project](../README.md) · [Documentation](../docs/README.md) · [Wiki](../docs/wiki/Home.md) · [Support](../SUPPORT.md)
+[Project](../README.md) · [Documentation](../docs/README.md) · [Wiki](../docs/wiki/Home.md) · [Support](../.github/SUPPORT.md)
 
 Automated checks for collection, account isolation, evidence, interface behavior and
 packaging. The suite uses synthetic accounts and fake Telegram transport; live
@@ -22,7 +22,7 @@ qualification is recorded separately in the [verification record](../docs/VERIFI
 
 ## Run from the project root
 
-After the [development setup](../CONTRIBUTING.md#development-setup):
+After the [development setup](../.github/CONTRIBUTING.md#development-setup):
 
 ```sh
 python -m pytest -q

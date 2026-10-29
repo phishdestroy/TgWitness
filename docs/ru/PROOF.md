@@ -29,9 +29,9 @@ Telegram-аккаунтов и канала с контрольными хеша
 3. Запустите проверку конфигурации и сервис:
 
 ```sh
-docker compose -f compose.yaml -f compose.proof.yaml run --rm --no-deps proof \
+docker compose -f compose.yaml -f deploy/compose/compose.proof.yaml run --rm --no-deps proof \
   python -m tgwitness.proof --config /proof-config/proof.json --check-config
-docker compose -f compose.yaml -f compose.proof.yaml up -d --build
+docker compose -f compose.yaml -f deploy/compose/compose.proof.yaml up -d --build
 ```
 
 Страница доступна на `127.0.0.1:8790`. Для публичного доступа используйте отдельный

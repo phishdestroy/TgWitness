@@ -81,7 +81,7 @@ for each workspace. vault.external.json must be retained for recovery. Missing o
 wrong master keys fail closed. Existing local vaults are not silently migrated.
 The running process can access the key; this is not HSM isolation. The panel reports
 the selected mode and explicitly states that message/media storage is not encrypted
-by the application. See [connection, proxies and data protection](docs/CONNECTION-SECURITY.md)
+by the application. See [connection, proxies and data protection](../docs/CONNECTION-SECURITY.md)
 for the full threat model.
 
 ## Proxies and network routes
@@ -132,7 +132,7 @@ they do not prevent a local administrator from rewriting and resigning the journ
 Retain signed checkpoints and the public-key fingerprint on a separate system.
 Evidence mode and the off-site copy (both off by default) send checkpoint hashes to
 timestamp services and encrypted copies to S3-compatible storage; see the
-[evidence format](docs/EVIDENCE.md). Transparency logs, HSM-backed signing and formal
+[evidence format](../docs/EVIDENCE.md). Transparency logs, HSM-backed signing and formal
 chain-of-custody certification are not implemented.
 
 ## If you suspect a problem

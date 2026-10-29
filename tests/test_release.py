@@ -5,6 +5,7 @@ from tools.build_source import FILES, public_sources
 
 def test_public_archive_excludes_runtime_artifacts_even_inside_source_trees(tmp_path):
     for name in FILES:
+        (tmp_path / name).parent.mkdir(parents=True, exist_ok=True)
         (tmp_path / name).write_text("Synthetic source file", encoding="utf-8")
     public = ["tgwitness/app.py", "tgwitness/static/app.js", "docs/assets/workspace.png",
               ".github/ISSUE_TEMPLATE/bug_report.yml", "deploy/tgwitness.service",
@@ -31,6 +32,7 @@ def test_public_archive_refuses_symlinked_source(tmp_path):
     root = tmp_path / "source"
     root.mkdir()
     for name in FILES:
+        (root / name).parent.mkdir(parents=True, exist_ok=True)
         (root / name).write_text("Synthetic source file", encoding="utf-8")
     outside = tmp_path / "private.txt"
     outside.write_text("Synthetic secret", encoding="utf-8")

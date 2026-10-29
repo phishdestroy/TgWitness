@@ -112,7 +112,7 @@ docker compose --profile witness up -d          # compose.image.yaml: same flag
 docker compose logs witness                     # witness key fingerprint
 ```
 
-Layanan ini terhubung ke kolektor di dalam jaringan Compose di `http://tgwitness:8787` (`TGWITNESS_WITNESS_COLLECTOR` menggantikannya, misalnya `/profiles/<workspace ID>` untuk ruang kerja lain). Untuk saksi di server terpisah yang dijalankan oleh pihak lain, gunakan `compose.witness.yaml` di sana dengan `TGWITNESS_WITNESS_COLLECTOR` disetel ke alamat HTTPS kolektor; berkas tersebut hanya berisi saksi.
+Layanan ini terhubung ke kolektor di dalam jaringan Compose di `http://tgwitness:8787` (`TGWITNESS_WITNESS_COLLECTOR` menggantikannya, misalnya `/profiles/<workspace ID>` untuk ruang kerja lain). Untuk saksi di server terpisah yang dijalankan oleh pihak lain, gunakan `deploy/compose/compose.witness.yaml` di sana dengan `TGWITNESS_WITNESS_COLLECTOR` disetel ke alamat HTTPS kolektor; berkas tersebut hanya berisi saksi.
 
 ## Instal gambar yang telah dipublikasikan
 
@@ -148,8 +148,8 @@ TGWITNESS_DOMAIN=watch.your-domain.org
 Mulai proses kompilasi kode sumber dengan overlay HTTPS:
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml up -d --build --wait
-docker compose -f compose.yaml -f compose.https.yaml exec tgwitness cat /data/panel-token.txt
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
 Untuk gambar yang telah dipublikasikan, gunakan `compose.image.yaml` sebagai file pertama. Pertahankan kedua argumen `-f` untuk perintah status, log, pembaruan, dan penghentian di kemudian hari.
@@ -159,7 +159,7 @@ Caddy memperoleh dan memperbarui sertifikat, mengalihkan HTTP ke HTTPS, serta me
 Buka `https://watch.your-domain.org` dan masukkan token panel. Kesiapan Compose tidak menjamin penerbitan sertifikat atau aksesibilitas eksternal. Jika HTTPS belum siap, periksa DNS, aturan firewall, dan:
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml logs --tail 100 caddy
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml logs --tail 100 caddy
 ```
 
 Gambar Caddy yang disediakan mengikuti tag `2-alpine`-nya. Melakukan pull akan memperbarui gambar tersebut; sematkan digest yang telah diuji dalam penyebaran Anda jika Anda memerlukan versi infrastruktur yang tetap.
@@ -205,7 +205,7 @@ Keberhasilan alur kerja jarak jauh belum dapat dipastikan melalui persiapan loka
 
 ## Server jarak jauh
 
-Pastikan layanan terikat ke loopback dan gunakan terowongan SSH, atau akhiri koneksi HTTPS di proxy terbalik. Berkas Compose dasar hanya berlaku secara lokal; overlay opsional `compose.https.yaml` menyediakan Caddy untuk domain yang telah dikonfigurasi. Jaga agar token bearer tidak muncul di URL maupun log proxy. Proxy terbalik harus membatasi ukuran permintaan dan laju koneksi. Jangan mengekspos HTTP biasa ke Internet.
+Pastikan layanan terikat ke loopback dan gunakan terowongan SSH, atau akhiri koneksi HTTPS di proxy terbalik. Berkas Compose dasar hanya berlaku secara lokal; overlay opsional `deploy/compose/compose.https.yaml` menyediakan Caddy untuk domain yang telah dikonfigurasi. Jaga agar token bearer tidak muncul di URL maupun log proxy. Proxy terbalik harus membatasi ukuran permintaan dan laju koneksi. Jangan mengekspos HTTP biasa ke Internet.
 
 Contoh untuk systemd, tugas masuk Windows, agen pengguna macOS, dan Caddy disediakan di [folder deploy/.](../../deploy/README.md) Periksa dan sesuaikan jalurnya sebelum instalasi. Contoh-contoh ini hanyalah templat, bukan konfigurasi platform yang dijalankan secara lokal. Tidak ada layanan latar belakang atau tugas yang didaftarkan oleh peluncur standar.
 

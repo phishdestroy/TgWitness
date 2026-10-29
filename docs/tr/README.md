@@ -28,7 +28,7 @@
 > [!TIP]
 > **Bağlanmadan önce keşfedin.** `Demo.cmd` veya `sh start.sh --demo` komutunu çalıştırarak kurgusal sohbetlerin bulunduğu bir çalışma alanını açın. Telegram hesabı gerekmez.
 
-**Buraya ilk kez mi geldiniz?** [Başlayın →](QUICKSTART.md) · [Wiki →](../wiki/Home.md) · [Bir kılavuz seçin →](../README.md) · [Yardım alın →](../../SUPPORT.md) · [Test edilmiş olanları görün →](../VERIFICATION.md)
+**Buraya ilk kez mi geldiniz?** [Başlayın →](QUICKSTART.md) · [Wiki →](../wiki/Home.md) · [Bir kılavuz seçin →](../README.md) · [Yardım alın →](../../.github/SUPPORT.md) · [Test edilmiş olanları görün →](../VERIFICATION.md)
 
 > [!WARNING]
 > **Kaybetmeyi göze alabileceğiniz, bu amaç için ayrılmış bir Telegram hesabı kullanın.** Kişisel veya değerli hesapları bağlamamanızı ya da bu hesaplarda API kimliği / API hash kimlik bilgileri oluşturmamanızı şiddetle tavsiye ederiz. Telegram, hesapları kısıtlayabilir veya kalıcı olarak engelleyebilir. [Hesap kılavuzunu okuyun](../ACCOUNTS.md).
@@ -235,7 +235,7 @@ Konteyner, salt okunur bir dosya sistemiyle root olmayan bir kullanıcı olarak 
 **Otomatik HTTPS (Caddy) özellikli genel sunucu:** `.env.example`'yi `.env`'ye kopyalayın, `TGWITNESS_DOMAIN`'yi ayarlayın, DNS'yi sunucuya yönlendirin, TCP 80/443 bağlantı noktalarını açın ve çalıştırın
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
 ```
 
 **Hiçbir şey yüklemeden Windows'ta çalıştırma:** Her sürüme ekli taşınabilir ZIP dosyası, resmi gömülü Python çalışma ortamını ve tüm bağımlılıkları içerir. Veriler `data` klasöründe kalır; güncellemek için yeni sürümü açın ve bu klasörü kopyalayın.
@@ -290,7 +290,7 @@ Halka açık çoklu hesap toplama pilotu için [Proof monitörü](../PROOF.md), 
 - Panel varsayılan olarak localhost üzerinde dinleme modundadır. Uzaktan erişim için HTTPS Compose profilini veya bir SSH tünelini kullanın; asla düz HTTP bağlantısını açık bırakmayın.
 - Telegram oturumları, API kimlik bilgileri, proxy kimlik bilgileri ve imzalama anahtarı, Fernet ile şifrelenmiş bir kasada saklanır. Varsayılan olarak anahtar aynı veri dizininde bulunur; harici bir ana anahtar kullanmak için `TGWITNESS_VAULT_KEY_FILE` ayarını yapın. Yerel mesaj içeriği ve medya dosyaları TgWitness tarafından şifrelenmez; veri dizinini şifrelenmiş bir disk veya birimde saklayın. İmzalı ZIP dışa aktarımları isteğe bağlı olarak parola ile şifrelenebilir.
 - Veri dosyaları, oturumlar, token'lar, anahtarlar ve dışa aktarımlar git ve Docker derlemelerinden hariç tutulmuştur.
-- [SECURITY.md](../../SECURITY.md) dosyasında açıklandığı şekilde güvenlik açıklarını gizli olarak bildirin.
+- [SECURITY.md](../../.github/SECURITY.md) dosyasında açıklandığı şekilde güvenlik açıklarını gizli olarak bildirin.
 
 ### Neler test edildi
 
@@ -328,7 +328,7 @@ python tools/build_site.py                             # static project site in 
 python tools/check_site.py                             # website browser acceptance
 ```
 
-Otomatik test paketi, sentetik Telegram nesnelerini kullanır ve hiçbir zaman gerçek hesaplara bağlanmaz; canlı test yukarıda açıklanmıştır. CI, Python 3.11–3.13 ile Windows, Linux ve macOS üzerinde test matrisini çalıştırmak, tarayıcı kontrollerini yapmak, kaynak kod paketlemeyi gerçekleştirmek, Windows taşınabilir derlemesini ve bir Docker derlemesini yapmak üzere yapılandırılmıştır. Sürüm yayınlama iş akışı, kaynak ZIP dosyasını, wheel dosyasını, Windows taşınabilir ZIP dosyasını ve çoklu mimari GHCR görüntüsünü yayınlanmış bir GitHub Sürümüne ekleyecek şekilde ayarlanmıştır. Her iki iş akışı da henüz çalıştırılmamıştır. Bir çekme isteği açmadan önce [CONTRIBUTING.md dosyasını](../../CONTRIBUTING.md) okuyun.
+Otomatik test paketi, sentetik Telegram nesnelerini kullanır ve hiçbir zaman gerçek hesaplara bağlanmaz; canlı test yukarıda açıklanmıştır. CI, Python 3.11–3.13 ile Windows, Linux ve macOS üzerinde test matrisini çalıştırmak, tarayıcı kontrollerini yapmak, kaynak kod paketlemeyi gerçekleştirmek, Windows taşınabilir derlemesini ve bir Docker derlemesini yapmak üzere yapılandırılmıştır. Sürüm yayınlama iş akışı, kaynak ZIP dosyasını, wheel dosyasını, Windows taşınabilir ZIP dosyasını ve çoklu mimari GHCR görüntüsünü yayınlanmış bir GitHub Sürümüne ekleyecek şekilde ayarlanmıştır. Her iki iş akışı da henüz çalıştırılmamıştır. Bir çekme isteği açmadan önce [CONTRIBUTING.md dosyasını](../../.github/CONTRIBUTING.md) okuyun.
 
 ## Belgeler
 
@@ -344,7 +344,7 @@ Otomatik test paketi, sentetik Telegram nesnelerini kullanır ve hiçbir zaman g
 | [Bağımsız tanık](../WITNESS.md) | Salt okunur tanık jetonları, Docker profili, kanal gönderileri, çapraz kontroller |
 | [Mimari](../ARCHITECTURE.md) ve [ürün modeli](../PRODUCT.md) | İç yapısı ve tasarım kararları |
 | [Doğrulama](../VERIFICATION.md) ve [hazırlık](../internal/READINESS.md) | Gerçekleştirilen kontroller ve kalan işler |
-| [Değişiklik günlüğü](../../CHANGELOG.md) | Sürüm geçmişi |
+| [Değişiklik günlüğü](../CHANGELOG.md) | Sürüm geçmişi |
 | [Web sitesi ve yayıncılık](../internal/PUBLISHING.md) | Yerel web sitesi önizlemesi, GitHub Pages, ilk yayın |
 
 

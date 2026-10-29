@@ -112,7 +112,7 @@ docker compose --profile witness up -d          # compose.image.yaml: same flag
 docker compose logs witness                     # witness key fingerprint
 ```
 
-该服务通过 `http://tgwitness:8787` 访问 Compose 网络内的收集器（`TGWITNESS_WITNESS_COLLECTOR` 会覆盖该地址，例如 `/profiles/<workspace ID>` 对应另一个工作区）。若要使用由他人运行的独立服务器上的见证文件，请在该处使用 `compose.witness.yaml`，并将 `TGWITNESS_WITNESS_COLLECTOR` 设置为收集器的 HTTPS 地址；该文件仅包含见证文件。
+该服务通过 `http://tgwitness:8787` 访问 Compose 网络内的收集器（`TGWITNESS_WITNESS_COLLECTOR` 会覆盖该地址，例如 `/profiles/<workspace ID>` 对应另一个工作区）。若要使用由他人运行的独立服务器上的见证文件，请在该处使用 `deploy/compose/compose.witness.yaml`，并将 `TGWITNESS_WITNESS_COLLECTOR` 设置为收集器的 HTTPS 地址；该文件仅包含见证文件。
 
 ## 安装已发布的镜像
 
@@ -148,8 +148,8 @@ TGWITNESS_DOMAIN=watch.your-domain.org
 使用 HTTPS 覆盖层开始源代码构建：
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml up -d --build --wait
-docker compose -f compose.yaml -f compose.https.yaml exec tgwitness cat /data/panel-token.txt
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
 对于已发布的图片，请改用`compose.image.yaml`作为第一个文件。请保留两个`-f`参数，以便后续使用状态、日志、更新和停止命令。
@@ -159,7 +159,7 @@ Caddy 负责获取和续期证书，将 HTTP 请求重定向至 HTTPS，并将�
 打开 `https://watch.your-domain.org` 并输入面板令牌。准备就绪状态并不意味着证书已签发或外部可达性已确认。如果 HTTPS 尚未就绪，请检查 DNS、防火墙规则以及：
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml logs --tail 100 caddy
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml logs --tail 100 caddy
 ```
 
 提供的 Caddy 镜像位于其 `2-alpine` 标签之后。拉取操作会刷新该镜像；若需固定基础设施版本，请在部署中固定一个经过测试的摘要。
@@ -205,7 +205,7 @@ docker compose -f compose.image.yaml up -d --wait
 
 ## 远程服务器
 
-请将服务绑定至回环接口并使用 SSH 隧道，或在反向代理处终止 HTTPS 连接。基础 Compose 文件仅限本地使用；可选的 `compose.https.yaml` 覆盖层为配置好的域名提供 Caddy 服务。请勿在 URL 和代理日志中暴露承载令牌。反向代理应限制请求大小和连接速率。 请勿将明文 HTTP 暴露到互联网上。
+请将服务绑定至回环接口并使用 SSH 隧道，或在反向代理处终止 HTTPS 连接。基础 Compose 文件仅限本地使用；可选的 `deploy/compose/compose.https.yaml` 覆盖层为配置好的域名提供 Caddy 服务。请勿在 URL 和代理日志中暴露承载令牌。反向代理应限制请求大小和连接速率。 请勿将明文 HTTP 暴露到互联网上。
 
 [deploy/](../../deploy/README.md) 目录中提供了 systemd、Windows 登录任务、macOS 用户代理和 Caddy 的示例。安装前请检查并调整其路径。这些仅为模板，并非本地执行的平台配置。普通启动器不会注册任何后台服务或任务。
 

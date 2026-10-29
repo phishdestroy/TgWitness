@@ -28,7 +28,7 @@
 > [!TIP]
 > **连接前请先探索。**运行 `Demo.cmd` 或 `sh start.sh --demo` 以打开包含虚构对话的工作区。无需 Telegram 账号。
 
-**初次访问？**[开始 →](QUICKSTART.md) · [维基 →](../wiki/Home.md) · [选择指南 →](../README.md) · [获取帮助 →](../../SUPPORT.md) · [查看已测试内容 →](../VERIFICATION.md)
+**初次访问？**[开始 →](QUICKSTART.md) · [维基 →](../wiki/Home.md) · [选择指南 →](../README.md) · [获取帮助 →](../../.github/SUPPORT.md) · [查看已测试内容 →](../VERIFICATION.md)
 
 > [!WARNING]
 > **请使用一个可以承受丢失风险的专用 Telegram 账号。**我们强烈建议不要关联个人或重要账号，也不要在这些账号上生成 API ID / API 哈希凭证。Telegram 可能会限制或永久封禁账号。[请阅读账号指南](../ACCOUNTS.md)。
@@ -235,7 +235,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 **支持自动 HTTPS（Caddy）的公共服务器：**将 `.env.example` 复制到 `.env`，配置 `TGWITNESS_DOMAIN`，将 DNS 指向该服务器，开放 TCP 80/443 端口并运行
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
 ```
 
 **Windows 系统无需安装任何软件：**每个版本附带的便携式 ZIP 文件中已包含官方嵌入式 Python 运行时及所有依赖项。数据保存在其 `data` 文件夹中；如需更新，请解压新版本并将该文件夹复制过去。
@@ -290,7 +290,7 @@ TgWitness 是一款工具。无论由谁运行，该运行者均决定收集哪�
 - 该面板默认监听 localhost。如需远程访问，请使用 HTTPS Compose 配置文件或 SSH 隧道；切勿暴露明文 HTTP 连接。
 - Telegram 会话、API 凭据、代理凭据和签名密钥均存储在采用 Fernet 加密的保险库中。默认情况下，其密钥位于同一数据目录中；若要使用外部主密钥，请设置 `TGWITNESS_VAULT_KEY_FILE`。 本地消息内容和媒体文件不会由 TgWitness 进行加密；请将数据目录保存在加密磁盘或卷上。已签名的 ZIP 导出文件可选地进行密码加密。
 - 数据文件、会话、令牌、密钥和导出文件均未包含在 Git 和 Docker 构建中。
-- 请按照 [SECURITY.md](../../SECURITY.md) 中的说明私下报告漏洞。
+- 请按照 [SECURITY.md](../../.github/SECURITY.md) 中的说明私下报告漏洞。
 
 ### 已测试内容
 
@@ -328,7 +328,7 @@ python tools/build_site.py                             # static project site in 
 python tools/check_site.py                             # website browser acceptance
 ```
 
-自动化测试套件使用合成 Telegram 对象，绝不会连接真实账户；实时测试已在上文描述。持续集成（CI）已配置为在 Windows、Linux 和 macOS 系统上运行测试矩阵，涵盖 Python 3.11–3.13 环境、浏览器兼容性检查、源代码打包、Windows 便携版构建以及 Docker 构建。 发布工作流已配置为将源代码 ZIP 包、wheel 包、Windows 便携版 ZIP 包以及多架构 GHCR 镜像附加到已发布的 GitHub 发布中。目前这两个工作流均尚未运行。在提交拉取请求前，请阅读 [CONTRIBUTING.md](../../CONTRIBUTING.md)。
+自动化测试套件使用合成 Telegram 对象，绝不会连接真实账户；实时测试已在上文描述。持续集成（CI）已配置为在 Windows、Linux 和 macOS 系统上运行测试矩阵，涵盖 Python 3.11–3.13 环境、浏览器兼容性检查、源代码打包、Windows 便携版构建以及 Docker 构建。 发布工作流已配置为将源代码 ZIP 包、wheel 包、Windows 便携版 ZIP 包以及多架构 GHCR 镜像附加到已发布的 GitHub 发布中。目前这两个工作流均尚未运行。在提交拉取请求前，请阅读 [CONTRIBUTING.md](../../.github/CONTRIBUTING.md)。
 
 ## 文档
 
@@ -344,7 +344,7 @@ python tools/check_site.py                             # website browser accepta
 | [独立见证者](../WITNESS.md) | 只读见证令牌、Docker 配置文件、频道帖子、交叉核对 |
 | [架构](../ARCHITECTURE.md)与[产品模型](../PRODUCT.md) | 内部实现与设计决策 |
 | [验证](../VERIFICATION.md)与[就绪状态](../internal/READINESS.md) | 已执行的检查项及待完成工作 |
-| [更新日志](../../CHANGELOG.md) | 版本历史 |
+| [更新日志](../CHANGELOG.md) | 版本历史 |
 | [网站与发布](../internal/PUBLISHING.md) | 本地网站预览、GitHub Pages、首篇发布 |
 
 

@@ -2,7 +2,7 @@
 
 # GitHub Actions
 
-[Project](../../README.md) · [Documentation](../../docs/README.md) · [Wiki](../../docs/wiki/Home.md) · [Support](../../SUPPORT.md)
+[Project](../../README.md) · [Documentation](../../docs/README.md) · [Wiki](../../docs/wiki/Home.md) · [Support](../SUPPORT.md)
 
 | Workflow | Purpose |
 | --- | --- |

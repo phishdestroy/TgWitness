@@ -4,7 +4,7 @@
 
 **Choose a workflow. Find the details. Keep a record you can explain.**
 
-[Project overview](../README.md) · [Project wiki](wiki/Home.md) · [Troubleshooting](wiki/Troubleshooting.md) · [FAQ](wiki/FAQ.md)
+[Project overview](../README.md) · [GitHub Wiki](https://github.com/phishdestroy/TgWitness/wiki) · [Offline handbook](wiki/Home.md) · [FAQ](wiki/FAQ.md)
 
 ![Observe, preserve and verify.](assets/presentation/workflow.svg)
 
@@ -13,7 +13,7 @@
 Start with a local demo, then connect one account and check a captured message.
 The proxy, witness bot and public status page are separate options.
 
-1. [Try the demo](../QUICKSTART.md#explore-the-interface) — explore the workspace with fictional data.
+1. [Try the demo](QUICKSTART.md#explore-the-interface) — explore the workspace with fictional data.
 2. [Connect and collect](wiki/Getting-Started.md) — capture a message from a chat you control.
 3. [Understand the record](HOW-IT-WORKS.md) — learn what signatures and coverage can establish.
 
@@ -21,7 +21,7 @@ The proxy, witness bot and public status page are separate options.
 
 | I want to… | Start here | What I should see |
 | --- | --- | --- |
-| Try the interface | [Quick start](../QUICKSTART.md#explore-the-interface) | Fictional conversations; no Telegram login |
+| Try the interface | [Quick start](QUICKSTART.md#explore-the-interface) | Fictional conversations; no Telegram login |
 | Connect my account | [Account setup](ACCOUNTS.md) | A new test message in the journal |
 | Investigate across the whole account | [Complete investigation walkthrough](INVESTIGATION.md) | A source register, cited cross-chat timeline, people/file connections and verified evidence per workspace |
 | Choose a connection route | [Proxy settings](CONNECTION-SECURITY.md) | A successful Telegram connection check |
@@ -43,6 +43,7 @@ For terminology, use the [glossary](wiki/Glossary.md).
 <summary>Technical reference</summary>
 
 - [Collection and visibility](COLLECTION.md)
+- [Complete project guide](PROJECT-GUIDE.md)
 - [Evidence format and trust boundaries](EVIDENCE.md)
 - [Architecture](ARCHITECTURE.md)
 - [Connection and secret storage](CONNECTION-SECURITY.md)

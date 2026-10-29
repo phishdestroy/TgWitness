@@ -2,7 +2,7 @@
 
 # Backup, updates and recovery
 
-[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../SUPPORT.md)
+[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../.github/SUPPORT.md)
 
 
 A signed evidence export is a handoff artifact. A restorable service backup must also retain authorizations, private keys and configuration.

@@ -2,7 +2,7 @@
 
 # Guide translation workspace
 
-[Project](../../../README.md) · [Documentation](../../../docs/README.md) · [Wiki](../../../docs/wiki/Home.md) · [Support](../../../SUPPORT.md)
+[Project](../../../README.md) · [Documentation](../../../docs/README.md) · [Wiki](../../../docs/wiki/Home.md) · [Support](../../../.github/SUPPORT.md)
 
 This directory currently has no Russian HTML guide fragments. The public website's
 Russian text is maintained in the language catalogue under

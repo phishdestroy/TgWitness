@@ -112,7 +112,7 @@ docker compose --profile witness up -d          # compose.image.yaml: same flag
 docker compose logs witness                     # witness key fingerprint
 ```
 
-این سرویس به جمع‌آورنده درون شبکه Compose در `http://tgwitness:8787` دسترسی پیدا می‌کند (`TGWITNESS_WITNESS_COLLECTOR` آن را override می‌کند؛ برای مثال `/profiles/<workspace ID>` برای فضای کاری دیگر). برای شاهد روی سرور جداگانه که توسط شخص دیگری اجرا می‌شود، از `compose.witness.yaml` در آنجا استفاده کنید و `TGWITNESS_WITNESS_COLLECTOR` را روی آدرس HTTPS جمع‌آورنده تنظیم کنید؛ آن فایل تنها شامل شاهد است.
+این سرویس به جمع‌آورنده درون شبکه Compose در `http://tgwitness:8787` دسترسی پیدا می‌کند (`TGWITNESS_WITNESS_COLLECTOR` آن را override می‌کند؛ برای مثال `/profiles/<workspace ID>` برای فضای کاری دیگر). برای شاهد روی سرور جداگانه که توسط شخص دیگری اجرا می‌شود، از `deploy/compose/compose.witness.yaml` در آنجا استفاده کنید و `TGWITNESS_WITNESS_COLLECTOR` را روی آدرس HTTPS جمع‌آورنده تنظیم کنید؛ آن فایل تنها شامل شاهد است.
 
 ## نصب یک ایمیج منتشرشده
 
@@ -148,8 +148,8 @@ TGWITNESS_DOMAIN=watch.your-domain.org
 ساخت سورس را با لایه HTTPS آغاز کنید:
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml up -d --build --wait
-docker compose -f compose.yaml -f compose.https.yaml exec tgwitness cat /data/panel-token.txt
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
 برای یک تصویر منتشرشده، به جای آن از `compose.image.yaml` به‌عنوان اولین فایل استفاده کنید. هر دو آرگومان `-f` را برای دستورات وضعیت، لاگ‌ها، به‌روزرسانی و توقف در مراحل بعدی نگه دارید.
@@ -159,7 +159,7 @@ Caddy گواهی را دریافت و تمدید می‌کند، درخواست�
 `https://watch.your-domain.org` را باز کنید و توکن پنل را وارد کنید. آمادگی Compose تأیید صدور گواهی یا دسترسی خارجی را تضمین نمی‌کند. اگر HTTPS آماده نیست، DNS، قوانین فایروال و موارد زیر را بررسی کنید:
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml logs --tail 100 caddy
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml logs --tail 100 caddy
 ```
 
 تصویر Caddy ارائه‌شده از تگ `2-alpine` خود پیروی می‌کند. کش کردن آن تصویر را تازه می‌کند؛ اگر به نسخه‌های ثابت زیرساخت نیاز دارید، هش آزمایش‌شده را در استقرار خود پین کنید.
@@ -205,7 +205,7 @@ docker compose -f compose.image.yaml up -d --wait
 
 ## سرور از راه دور
 
-سرویس را محدود به لوپ‌بک نگه دارید و از تونل SSH استفاده کنید، یا HTTPS را در یک پروکسی معکوس پایان دهید. فایل پایه Compose فقط محلی است؛ لایهٔ اختیاری `compose.https.yaml`، Caddy را برای دامنهٔ پیکربندی‌شده فراهم می‌کند. توکن حامل را از URLها و لاگ‌های پروکسی دور نگه دارید. یک پروکسی معکوس باید اندازهٔ درخواست و نرخ اتصال را محدود کند. HTTP خام را در معرض اینترنت قرار ندهید.
+سرویس را محدود به لوپ‌بک نگه دارید و از تونل SSH استفاده کنید، یا HTTPS را در یک پروکسی معکوس پایان دهید. فایل پایه Compose فقط محلی است؛ لایهٔ اختیاری `deploy/compose/compose.https.yaml`، Caddy را برای دامنهٔ پیکربندی‌شده فراهم می‌کند. توکن حامل را از URLها و لاگ‌های پروکسی دور نگه دارید. یک پروکسی معکوس باید اندازهٔ درخواست و نرخ اتصال را محدود کند. HTTP خام را در معرض اینترنت قرار ندهید.
 
 نمونه‌هایی برای systemd، یک وظیفه ورود به سیستم ویندوز، یک نماینده کاربری macOS و Caddy در [پوشه deploy](../../deploy/README.md) ارائه شده‌اند. قبل از نصب، مسیرهای آن‌ها را بررسی و در صورت نیاز تطبیق دهید. این‌ها قالب‌های از پیش‌تأمین‌شده هستند، نه واجد شرایط پلتفرم اجراشده به‌صورت محلی. هیچ سرویس یا وظیفه پس‌زمینه‌ای توسط راه‌انداز عادی ثبت نمی‌شود.
 

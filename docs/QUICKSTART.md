@@ -1,4 +1,4 @@
-**English** · [Русский](docs/ru/QUICKSTART.md) · [Українська](docs/uk/QUICKSTART.md) · [Español](docs/es/QUICKSTART.md) · [Português (Brasil)](docs/pt/QUICKSTART.md) · [Türkçe](docs/tr/QUICKSTART.md) · [العربية](docs/ar/QUICKSTART.md) · [فارسی](docs/fa/QUICKSTART.md) · [اردو](docs/ur/QUICKSTART.md) · [हिन्दी](docs/hi/QUICKSTART.md) · [Bahasa Indonesia](docs/id/QUICKSTART.md) · [Tiếng Việt](docs/vi/QUICKSTART.md) · [简体中文](docs/zh/QUICKSTART.md)
+**English** · [Русский](ru/QUICKSTART.md) · [Українська](uk/QUICKSTART.md) · [Español](es/QUICKSTART.md) · [Português (Brasil)](pt/QUICKSTART.md) · [Türkçe](tr/QUICKSTART.md) · [العربية](ar/QUICKSTART.md) · [فارسی](fa/QUICKSTART.md) · [اردو](ur/QUICKSTART.md) · [हिन्दी](hi/QUICKSTART.md) · [Bahasa Indonesia](id/QUICKSTART.md) · [Tiếng Việt](vi/QUICKSTART.md) · [简体中文](zh/QUICKSTART.md)
 
 # TgWitness quick start
 
@@ -6,7 +6,7 @@ TgWitness is a standalone application for observing Telegram groups and channels
 that your accounts can access. It runs locally with its own data directory.
 
 **First visit?** [Explore the demo](#explore-the-interface) before connecting an account.
-[Choose a guide](docs/README.md) for proxies, witnesses, exports or server setup.
+[Choose a guide](README.md) for proxies, witnesses, exports or server setup.
 
 ## Install and start
 
@@ -37,7 +37,7 @@ Docker command, or read **data/live/panel-token.txt** for a portable or source i
 **Connect Telegram** below. Native and Docker installations use separate storage;
 starting Docker does not import an existing native journal.
 
-For a server, [deployment](docs/DEPLOYMENT.md) covers automatic HTTPS, restart,
+For a server, [deployment](DEPLOYMENT.md) covers automatic HTTPS, restart,
 published images, updates, and backups.
 
 ## Explore the interface
@@ -79,7 +79,7 @@ Demo messages are fictional. Demo mode cannot connect a real Telegram account.
 API credentials identify your application; they do not authorize an account by
 themselves. Private groups need no public username, but your account must have access.
 
-For existing accounts, see [accounts and session formats](docs/ACCOUNTS.md): the
+For existing accounts, see [accounts and session formats](ACCOUNTS.md): the
 panel accepts Telethon StringSession, Telethon/Pyrogram SQLite, single-account TData
 ZIP, and supported account JSON. Select a session and its companion JSON together,
 press **Connect account**. QR login is also
@@ -111,7 +111,7 @@ directly accessed local demo gets automatic entry. A remote/proxied demo still u
 - **Save checkpoint:** keep the signed journal boundary outside the collector.
 - **Download signed run receipt:** preserve the collector's program/version record.
 - **Prepare timestamp request:** prepare an offline request for a timestamp authority;
-  follow [TIMESTAMP.md](docs/TIMESTAMP.md) to obtain and verify a response.
+  follow [TIMESTAMP.md](TIMESTAMP.md) to obtain and verify a response.
 - **Verify journal:** check event signatures and chain links. ZIP export also checks media.
 
 Supported browsers save large exports directly to a chosen file. Other browsers
@@ -150,13 +150,13 @@ unless that environment is already activated.
 A closed, consistent Telethon SQLite `.session` can be converted locally with
 `python -m tgwitness.sessions account.session --out account.tgwitness-session`, then
 loaded in Account. Direct file import and QR login are also available. See
-[CONNECTION-SECURITY.md](docs/CONNECTION-SECURITY.md) for login formats, SOCKS5,
+[CONNECTION-SECURITY.md](CONNECTION-SECURITY.md) for login formats, SOCKS5,
 HTTP CONNECT, MTProxy and external master keys.
 
 **Pause observation** stops collection. **Lock** only closes browser access.
 Closing a tab leaves the collector process running. Stopping the process interrupts
 collection; a history snapshot cannot reconstruct all missed edits or deletions.
-See [how collection works](docs/COLLECTION.md) for event policies, attachment queues,
+See [how collection works](COLLECTION.md) for event policies, attachment queues,
 account isolation, and restart behavior.
 
 Sessions and secrets are encrypted. Message content, media and exports require an
@@ -164,9 +164,9 @@ encrypted disk or volume. Signatures establish integrity relative to a trusted k
 they do not establish Telegram origin or prevent fabrication by an operator who
 controls the collector and its key.
 
-Read [OPERATIONS.md](docs/OPERATIONS.md) for backup/restore, [DEPLOYMENT.md](docs/DEPLOYMENT.md)
-for hosting, and [deploy/](deploy/README.md) for service examples. The installed
+Read [OPERATIONS.md](OPERATIONS.md) for backup/restore, [DEPLOYMENT.md](DEPLOYMENT.md)
+for hosting, and [deploy/](../deploy/README.md) for service examples. The installed
 panel also includes an offline setup guide at `/guide.html`.
 
 Actual verification and remaining boundaries are
-recorded in [VERIFICATION.md](docs/VERIFICATION.md) and [READINESS.md](docs/internal/READINESS.md).
+recorded in [VERIFICATION.md](VERIFICATION.md) and [READINESS.md](internal/READINESS.md).

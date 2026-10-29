@@ -114,9 +114,9 @@ jobs:
           TGWITNESS_DOMAIN: watch.example.org
           TGWITNESS_IMAGE: tgwitness:test
         run: |
-          docker compose -f compose.yaml -f compose.https.yaml config --quiet
-          docker compose -f compose.image.yaml -f compose.https.yaml config --quiet
-          docker compose -f compose.yaml -f compose.proof.yaml -f compose.proxies.yaml config --quiet
+          docker compose -f compose.yaml -f deploy/compose/compose.https.yaml config --quiet
+          docker compose -f compose.image.yaml -f deploy/compose/compose.https.yaml config --quiet
+          docker compose -f compose.yaml -f deploy/compose/compose.proof.yaml -f deploy/compose/compose.proxies.yaml config --quiet
           docker run --rm --network none -e TGWITNESS_DOMAIN=watch.example.org \
             --mount type=bind,source="${{ github.workspace }}/deploy/Caddyfile.docker",target=/etc/caddy/Caddyfile,readonly \
             caddy:2-alpine caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile

@@ -28,7 +28,7 @@ LINK = re.compile(r'(!?\[[^\]\n]*\]\()(<[^>\n]+>|[^)\s]+)((?:\s+"[^"\n]*")?\))')
 FENCE = re.compile(r"^ {0,3}(`{3,}|~{3,})(.*)$")
 
 
-def render_links(content, source, root, public, repository, branch):
+def render_links(content, source, root, public, repository, branch, assets):
     """Resolve local documentation links for GitHub's separate wiki repository."""
     repo_url = "https://github.com/" + repository
     wiki = root / "docs/wiki"
@@ -45,7 +45,13 @@ def render_links(content, source, root, public, repository, branch):
         else:
             name = quote(target.relative_to(root).as_posix(), safe="/")
             if match[1].startswith("!"):
-                url = "https://raw.githubusercontent.com/" + repository + "/" + branch + "/" + name
+                asset_root = root / "docs/assets"
+                if not target.is_relative_to(asset_root) or target.suffix not in {".svg", ".png", ".webp"}:
+                    raise ValueError("Wiki image must be a reviewed documentation asset: " + href.path)
+                asset = "assets/" + target.relative_to(asset_root).as_posix()
+                assets[asset] = target.read_bytes()
+                # Keep images in the wiki itself, including when the source repo is private.
+                url = repo_url + "/wiki/" + quote(asset, safe="/")
             else:
                 url = repo_url + "/blob/" + branch + "/" + name
         if href.query:
@@ -77,12 +83,16 @@ def build_wiki(root=ROOT, *, repository="phishdestroy/TgWitness", branch="main")
     if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9.+-]*", version):
         raise ValueError("Invalid package version")
     public = set(public_sources(root))
-    rendered = {}
+    rendered, assets = {}, {}
     for name in FILES:
         source = root / "docs/wiki" / name
         if source not in public or source.resolve() != source:
             raise ValueError("Missing or linked wiki input: " + name)
-        rendered[name] = render_links(source.read_text(encoding="utf-8"), source, root, public, repository, branch)
+        rendered[name] = render_links(source.read_text(encoding="utf-8"), source, root, public, repository, branch, assets)
+
+    bundle = {name: content.encode("utf-8") for name, content in rendered.items()}
+    bundle.update(assets)
+    directories = {parent.as_posix() for name in bundle for parent in Path(name).parents if parent != Path(".")}
 
     output = root / "dist/wiki"
     archive_path = root / "dist" / ("TgWitness-" + version + "-wiki.zip")
@@ -92,18 +102,21 @@ def build_wiki(root=ROOT, *, repository="phishdestroy/TgWitness", branch="main")
     if output.resolve() != output or (output.exists() and not output.is_dir()):
         raise ValueError("Wiki output must be an ordinary directory")
     if output.exists():
-        for path in output.iterdir():
-            if path.resolve() != path or not path.is_file() or path.name not in FILES:
-                raise ValueError("Unexpected or linked wiki output: " + path.name)
+        for path in output.rglob("*"):
+            name = path.relative_to(output).as_posix()
+            allowed = name in directories if path.is_dir() else path.is_file() and name in bundle
+            if path.resolve() != path or not allowed:
+                raise ValueError("Unexpected or linked wiki output: " + name)
     for path in (archive_path, checksum_path, manifest_path):
         if path.resolve() != path or (path.exists() and not path.is_file()):
             raise ValueError("Wiki artifact must be an ordinary file: " + path.name)
     output.mkdir(parents=True, exist_ok=True)
     hashes = {}
     with zipfile.ZipFile(archive_path, "w", compression=zipfile.ZIP_DEFLATED) as archive:
-        for name, content in rendered.items():
-            data = content.encode("utf-8")
-            (output / name).write_bytes(data)
+        for name, data in bundle.items():
+            destination = output / name
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(data)
             archive.writestr(name, data)
             hashes[name] = hashlib.sha256(data).hexdigest()
     digest = hashlib.sha256(archive_path.read_bytes()).hexdigest()
@@ -111,7 +124,7 @@ def build_wiki(root=ROOT, *, repository="phishdestroy/TgWitness", branch="main")
     manifest = {
         "format": "tgwitness-wiki-bundle-v1", "repository": repository,
         "source_branch": branch, "version": version, "language": "en",
-        "pages": len(PAGES), "files": hashes, "archive": archive_path.name, "sha256": digest,
+        "pages": len(PAGES), "assets": len(assets), "files": hashes, "archive": archive_path.name, "sha256": digest,
     }
     manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     return manifest

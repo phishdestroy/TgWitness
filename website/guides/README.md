@@ -2,7 +2,7 @@
 
 # Website guides
 
-[Project](../../README.md) · [Documentation](../../docs/README.md) · [Wiki](../../docs/wiki/Home.md) · [Support](../../SUPPORT.md)
+[Project](../../README.md) · [Documentation](../../docs/README.md) · [Wiki](../../docs/wiki/Home.md) · [Support](../../.github/SUPPORT.md)
 
 HTML source fragments for the public site's practical guides. The English source is
 in [`en/`](en/README.md); language handling is described in

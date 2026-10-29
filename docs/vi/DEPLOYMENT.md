@@ -112,7 +112,7 @@ docker compose --profile witness up -d          # compose.image.yaml: same flag
 docker compose logs witness                     # witness key fingerprint
 ```
 
-Dịch vụ này kết nối với bộ thu thập dữ liệu trong mạng Compose tại `http://tgwitness:8787` (`TGWITNESS_WITNESS_COLLECTOR` sẽ ghi đè lên địa chỉ này; ví dụ: `/profiles/<workspace ID>` dành cho một không gian làm việc khác). Đối với tệp chứng thực được lưu trữ trên một máy chủ riêng biệt do người khác quản lý, quý vị hãy sử dụng `compose.witness.yaml` tại đó và thiết lập `TGWITNESS_WITNESS_COLLECTOR` thành địa chỉ HTTPS của bộ thu thập dữ liệu; tệp này chỉ chứa nội dung chứng thực.
+Dịch vụ này kết nối với bộ thu thập dữ liệu trong mạng Compose tại `http://tgwitness:8787` (`TGWITNESS_WITNESS_COLLECTOR` sẽ ghi đè lên địa chỉ này; ví dụ: `/profiles/<workspace ID>` dành cho một không gian làm việc khác). Đối với tệp chứng thực được lưu trữ trên một máy chủ riêng biệt do người khác quản lý, quý vị hãy sử dụng `deploy/compose/compose.witness.yaml` tại đó và thiết lập `TGWITNESS_WITNESS_COLLECTOR` thành địa chỉ HTTPS của bộ thu thập dữ liệu; tệp này chỉ chứa nội dung chứng thực.
 
 ## Cài đặt hình ảnh đã được phát hành
 
@@ -148,8 +148,8 @@ TGWITNESS_DOMAIN=watch.your-domain.org
 Bắt đầu quá trình biên dịch mã nguồn với lớp phủ HTTPS:
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml up -d --build --wait
-docker compose -f compose.yaml -f compose.https.yaml exec tgwitness cat /data/panel-token.txt
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
 Đối với hình ảnh đã được đăng tải, vui lòng sử dụng thẻ `compose.image.yaml` làm tệp đầu tiên thay thế. Vui lòng giữ nguyên cả hai tham số `-f` để sử dụng cho các lệnh trạng thái, nhật ký, cập nhật và dừng sau này.
@@ -159,7 +159,7 @@ Caddy thực hiện việc lấy và gia hạn chứng chỉ, chuyển hướng 
 Mở `https://watch.your-domain.org` và nhập mã thông báo bảng điều khiển. Việc kiểm tra tính sẵn sàng không xác nhận việc cấp chứng chỉ hoặc khả năng kết nối từ bên ngoài. Nếu HTTPS chưa sẵn sàng, hãy kiểm tra DNS, các quy tắc tường lửa và:
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml logs --tail 100 caddy
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml logs --tail 100 caddy
 ```
 
 Hình ảnh Caddy được cung cấp nằm ngay sau thẻ `2-alpine`. Việc thực hiện lệnh pull sẽ làm mới hình ảnh đó; nếu quý vị cần các phiên bản hạ tầng cố định, vui lòng ghim một bản tóm tắt đã được kiểm thử vào hệ thống triển khai của quý vị.
@@ -205,7 +205,7 @@ Việc chuẩn bị tại địa phương này chưa đảm bảo thành công c
 
 ## Máy chủ từ xa
 
-Vui lòng giữ dịch vụ kết nối với loopback và sử dụng đường hầm SSH, hoặc kết thúc kết nối HTTPS tại một máy chủ proxy ngược. Tệp Compose cơ bản chỉ hoạt động trong mạng nội bộ; lớp phủ tùy chọn `compose.https.yaml` cung cấp Caddy cho một tên miền đã được cấu hình. Vui lòng không để mã thông báo bearer xuất hiện trong các URL và nhật ký proxy. Máy chủ proxy ngược nên giới hạn kích thước yêu cầu và tần suất kết nối. Không được để HTTP thuần túy tiếp xúc với Internet.
+Vui lòng giữ dịch vụ kết nối với loopback và sử dụng đường hầm SSH, hoặc kết thúc kết nối HTTPS tại một máy chủ proxy ngược. Tệp Compose cơ bản chỉ hoạt động trong mạng nội bộ; lớp phủ tùy chọn `deploy/compose/compose.https.yaml` cung cấp Caddy cho một tên miền đã được cấu hình. Vui lòng không để mã thông báo bearer xuất hiện trong các URL và nhật ký proxy. Máy chủ proxy ngược nên giới hạn kích thước yêu cầu và tần suất kết nối. Không được để HTTP thuần túy tiếp xúc với Internet.
 
 Các ví dụ về systemd, tác vụ đăng nhập trên Windows, trình duyệt người dùng trên macOS và Caddy được cung cấp trong [thư mục deploy/. Quý vị](../../deploy/README.md) vui lòng kiểm tra và điều chỉnh các đường dẫn tương ứng trước khi cài đặt. Đây chỉ là các mẫu được cung cấp sẵn, không phải là các cấu hình nền tảng được thực thi cục bộ. Trình khởi chạy thông thường sẽ không đăng ký bất kỳ dịch vụ nền hay tác vụ nào.
 

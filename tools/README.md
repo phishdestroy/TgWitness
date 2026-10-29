@@ -2,7 +2,7 @@
 
 # Build and review tools
 
-[Project](../README.md) · [Documentation](../docs/README.md) · [Wiki](../docs/wiki/Home.md) · [Support](../SUPPORT.md)
+[Project](../README.md) · [Documentation](../docs/README.md) · [Wiki](../docs/wiki/Home.md) · [Support](../.github/SUPPORT.md)
 
 Maintainer commands for public builds, documentation, browser acceptance and local
 verification. Run them from the project root in the development environment.
@@ -50,5 +50,5 @@ sequence in independently pinned exports; it sends nothing.
 [`check_capacity.py`](check_capacity.py) is a synthetic benchmark.
 [`research_sources.py`](research_sources.py) downloads public official references.
 
-See [Contributing](../CONTRIBUTING.md) for the review workflow and
+See [Contributing](../.github/CONTRIBUTING.md) for the review workflow and
 [wiki maintenance](../docs/internal/WIKI.md) for wiki publication steps.

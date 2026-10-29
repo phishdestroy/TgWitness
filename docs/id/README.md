@@ -28,7 +28,7 @@
 > [!TIP]
 > **Jelajahi terlebih dahulu sebelum terhubung.** Jalankan `Demo.cmd` atau `sh start.sh --demo` untuk membuka ruang kerja dengan percakapan fiktif. Tidak perlu akun Telegram.
 
-**Baru di sini?** [Mulai →](QUICKSTART.md) · [Wiki →](../wiki/Home.md) · [Pilih panduan →](../README.md) · [Dapatkan bantuan →](../../SUPPORT.md) · [Lihat apa yang sudah diuji →](../VERIFICATION.md)
+**Baru di sini?** [Mulai →](QUICKSTART.md) · [Wiki →](../wiki/Home.md) · [Pilih panduan →](../README.md) · [Dapatkan bantuan →](../../.github/SUPPORT.md) · [Lihat apa yang sudah diuji →](../VERIFICATION.md)
 
 > [!WARNING]
 > **Gunakan akun Telegram khusus yang tidak menjadi masalah jika hilang.** Kami sangat menyarankan agar Anda tidak menghubungkan akun pribadi atau akun yang berharga, atau membuat kredensial API ID / API hash di akun tersebut. Telegram dapat membatasi atau memblokir akun secara permanen. [Baca panduan akun](../ACCOUNTS.md).
@@ -235,7 +235,7 @@ Kontainer ini berjalan sebagai pengguna non-root dengan sistem berkas read-only,
 **Server publik dengan HTTPS otomatis (Caddy):** salin `.env.example` ke `.env`, atur `TGWITNESS_DOMAIN`, arahkan DNS ke server, buka port TCP 80/443, dan jalankan
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
 ```
 
 **Windows tanpa perlu menginstal apa pun:** berkas ZIP portabel yang disertakan dalam setiap rilis berisi runtime Python resmi yang tertanam serta semua dependensi. Data tetap berada di foldernya `data`; untuk memperbarui, ekstrak versi baru dan salin folder tersebut ke lokasi yang sama.
@@ -290,7 +290,7 @@ Untuk uji coba koleksi multi-akun publik, [monitor Proof](../PROOF.md) menampilk
 - Panel ini secara default mendengarkan pada localhost. Untuk akses jarak jauh, gunakan profil Compose HTTPS atau terowongan SSH; jangan pernah mengekspos HTTP biasa.
 - Sesi Telegram, kredensial API, kredensial proxy, dan kunci penandatanganan disimpan dalam brankas yang dienkripsi dengan Fernet. Secara default, kuncinya berada di direktori data yang sama; atur `TGWITNESS_VAULT_KEY_FILE` untuk kunci utama eksternal. Isi pesan dan media lokal **tidak** dienkripsi oleh TgWitness; simpan direktori data pada disk atau volume yang terenkripsi. Ekspor ZIP yang ditandatangani dapat dienkripsi dengan kata sandi secara opsional.
 - Berkas data, sesi, token, kunci, dan ekspor tidak disertakan dalam git dan build Docker.
-- Laporkan kerentanan secara pribadi sebagaimana dijelaskan dalam berkas [SECURITY.md](../../SECURITY.md).
+- Laporkan kerentanan secara pribadi sebagaimana dijelaskan dalam berkas [SECURITY.md](../../.github/SECURITY.md).
 
 ### Apa yang telah diuji
 
@@ -328,7 +328,7 @@ python tools/build_site.py                             # static project site in 
 python tools/check_site.py                             # website browser acceptance
 ```
 
-Rangkaian pengujian otomatis ini menggunakan objek Telegram sintetis dan tidak pernah menghubungkan akun asli; pengujian langsung dijelaskan di atas. CI dikonfigurasi untuk menjalankan matriks pengujian di Windows, Linux, dan macOS dengan Python 3.11–3.13, pemeriksaan browser, pengemasan sumber, build portabel Windows, dan build Docker. Alur kerja rilis telah diatur untuk melampirkan ZIP sumber, wheel, ZIP portabel Windows, dan gambar GHCR multi-arsitektur ke Rilis GitHub yang telah dipublikasikan. Kedua alur kerja tersebut belum dijalankan. Bacalah [CONTRIBUTING.md](../../CONTRIBUTING.md) sebelum membuka permintaan pull.
+Rangkaian pengujian otomatis ini menggunakan objek Telegram sintetis dan tidak pernah menghubungkan akun asli; pengujian langsung dijelaskan di atas. CI dikonfigurasi untuk menjalankan matriks pengujian di Windows, Linux, dan macOS dengan Python 3.11–3.13, pemeriksaan browser, pengemasan sumber, build portabel Windows, dan build Docker. Alur kerja rilis telah diatur untuk melampirkan ZIP sumber, wheel, ZIP portabel Windows, dan gambar GHCR multi-arsitektur ke Rilis GitHub yang telah dipublikasikan. Kedua alur kerja tersebut belum dijalankan. Bacalah [CONTRIBUTING.md](../../.github/CONTRIBUTING.md) sebelum membuka permintaan pull.
 
 ## Dokumentasi
 
@@ -344,7 +344,7 @@ Rangkaian pengujian otomatis ini menggunakan objek Telegram sintetis dan tidak p
 | [Saksi independen](../WITNESS.md) | Token saksi read-only, profil Docker, posting saluran, verifikasi silang |
 | [Arsitektur](../ARCHITECTURE.md) dan [model produk](../PRODUCT.md) | Detail internal dan keputusan desain |
 | [Verifikasi](../VERIFICATION.md) dan [kesiapan](../internal/READINESS.md) | Pemeriksaan yang telah dilakukan dan pekerjaan yang masih harus diselesaikan |
-| [Daftar Perubahan](../../CHANGELOG.md) | Riwayat rilis |
+| [Daftar Perubahan](../CHANGELOG.md) | Riwayat rilis |
 | [Situs web dan penerbitan](../internal/PUBLISHING.md) | Pratinjau situs web lokal, GitHub Pages, publikasi pertama |
 
 

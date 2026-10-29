@@ -149,7 +149,7 @@ explicit transport test. A malformed catalog leaves manual configuration availab
 Native launch: set `TGWITNESS_PROXY_CATALOG` to the local JSON path. Docker:
 
 ```sh
-docker compose -f compose.yaml -f compose.proxies.yaml up -d --build
+docker compose -f compose.yaml -f deploy/compose/compose.proxies.yaml up -d --build
 ```
 
 The overlay mounts `proxy-config` read-only; files must be readable by container UID 10001.

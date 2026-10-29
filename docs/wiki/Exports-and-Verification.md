@@ -2,7 +2,7 @@
 
 # Exports and verification
 
-[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../SUPPORT.md)
+[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../.github/SUPPORT.md)
 
 
 ## See why the checks fit together
@@ -70,6 +70,6 @@ python -m tgwitness.download --token-file data/live/panel-token.txt --out eviden
 
 For another workspace add `--profile ID`; obtain its ID from **Exports**. For a remote installation add `--url https://your-server`. The transfer checksum does not replace signature verification.
 
-The browser fallback is limited to 128 MiB; supported browsers can stream to a chosen file. The download CLI defaults to a 5 GiB transfer limit. Larger verification limits and per-workspace settings are described in the [quick start](../../QUICKSTART.md).
+The browser fallback is limited to 128 MiB; supported browsers can stream to a chosen file. The download CLI defaults to a 5 GiB transfer limit. Larger verification limits and per-workspace settings are described in the [quick start](../QUICKSTART.md).
 
 **Next:** [Trust and limitations](FAQ.md) · [Evidence reference](../EVIDENCE.md) · [External timestamps](../TIMESTAMP.md)

@@ -1,5 +1,5 @@
 # Optional operator-managed catalog; see docs/CONNECTION-SECURITY.md.
-# docker compose -f compose.yaml -f compose.proxies.yaml up -d --build
+# docker compose -f compose.yaml -f deploy/compose/compose.proxies.yaml up -d --build
 services:
   tgwitness:
     environment:

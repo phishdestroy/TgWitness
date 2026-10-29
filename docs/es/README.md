@@ -28,7 +28,7 @@
 > [!TIP]
 > **Explore la plataforma antes de conectarse.** Ejecute `Demo.cmd` o `sh start.sh --demo` para abrir un espacio de trabajo con conversaciones ficticias. No es necesario disponer de una cuenta de Telegram.
 
-**¿Es la primera vez que visita esta página?** [Inicio →](QUICKSTART.md) · [Wiki →](../wiki/Home.md) · [Elija una guía →](../README.md) · [Obtenga ayuda →](../../SUPPORT.md) · [Vea lo que se ha probado →](../VERIFICATION.md)
+**¿Es la primera vez que visita esta página?** [Inicio →](QUICKSTART.md) · [Wiki →](../wiki/Home.md) · [Elija una guía →](../README.md) · [Obtenga ayuda →](../../.github/SUPPORT.md) · [Vea lo que se ha probado →](../VERIFICATION.md)
 
 > [!WARNING]
 > **Utilice una cuenta de Telegram específica que pueda permitirse perder.** Le recomendamos encarecidamente que no vincule cuentas personales o de valor, ni cree credenciales de API ID o API hash en ellas. Telegram puede restringir o bloquear de forma permanente las cuentas. [Lea la guía sobre cuentas](../ACCOUNTS.md).
@@ -235,7 +235,7 @@ El contenedor se ejecuta como usuario no root con un sistema de archivos de solo
 **Servidor público con HTTPS automático (Caddy):** copie `.env.example` en `.env`, configure `TGWITNESS_DOMAIN`, apunte el DNS al servidor, abra los puertos TCP 80/443 y ejecute
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
 ```
 
 **En Windows, sin necesidad de instalar nada:** el archivo ZIP portátil adjunto a cada versión contiene el entorno de ejecución oficial de Python integrado y todas las dependencias. Los datos permanecen en su carpeta `data`; para actualizar, extraiga la nueva versión y copie dicha carpeta en su lugar.
@@ -290,7 +290,7 @@ En el marco de una prueba piloto pública de recopilación de múltiples cuentas
 - El panel escucha en localhost de forma predeterminada. Para el acceso remoto, utilice el perfil Compose de HTTPS o un túnel SSH; nunca exponga HTTP sin cifrar.
 - Las sesiones de Telegram, las credenciales de la API, las credenciales del proxy y la clave de firma se almacenan en un almacén cifrado con Fernet. De forma predeterminada, su clave se encuentra en el mismo directorio de datos; configure `TGWITNESS_VAULT_KEY_FILE` para utilizar una clave maestra externa. TgWitness **no** cifra el contenido de los mensajes locales ni los archivos multimedia; mantenga el directorio de datos en un disco o volumen cifrado. Las exportaciones ZIP firmadas pueden cifrarse opcionalmente con contraseña.
 - Los archivos de datos, las sesiones, los tokens, las claves y las exportaciones quedan excluidos de las compilaciones de Git y Docker.
-- Notifique las vulnerabilidades de forma privada tal y como se describe en [SECURITY.md](../../SECURITY.md).
+- Notifique las vulnerabilidades de forma privada tal y como se describe en [SECURITY.md](../../.github/SECURITY.md).
 
 ### Lo que se ha probado
 
@@ -328,7 +328,7 @@ python tools/build_site.py                             # static project site in 
 python tools/check_site.py                             # website browser acceptance
 ```
 
-El conjunto de pruebas automatizadas utiliza objetos sintéticos de Telegram y nunca se conecta a cuentas reales; la prueba en entorno real se describe más arriba. La integración continua (CI) está configurada para ejecutar la matriz de pruebas en Windows, Linux y macOS con Python 3.11–3.13, las comprobaciones del navegador, el empaquetado del código fuente, la compilación portátil para Windows y una compilación de Docker. El flujo de trabajo de lanzamiento está configurado para adjuntar el archivo ZIP con el código fuente, el archivo «wheel», el ZIP portátil para Windows y la imagen GHCR para múltiples arquitecturas a una versión publicada en GitHub. Ninguno de los dos flujos de trabajo se ha ejecutado todavía. Lea [el archivo CONTRIBUTING.md](../../CONTRIBUTING.md) antes de abrir una solicitud de incorporación de cambios.
+El conjunto de pruebas automatizadas utiliza objetos sintéticos de Telegram y nunca se conecta a cuentas reales; la prueba en entorno real se describe más arriba. La integración continua (CI) está configurada para ejecutar la matriz de pruebas en Windows, Linux y macOS con Python 3.11–3.13, las comprobaciones del navegador, el empaquetado del código fuente, la compilación portátil para Windows y una compilación de Docker. El flujo de trabajo de lanzamiento está configurado para adjuntar el archivo ZIP con el código fuente, el archivo «wheel», el ZIP portátil para Windows y la imagen GHCR para múltiples arquitecturas a una versión publicada en GitHub. Ninguno de los dos flujos de trabajo se ha ejecutado todavía. Lea [el archivo CONTRIBUTING.md](../../.github/CONTRIBUTING.md) antes de abrir una solicitud de incorporación de cambios.
 
 ## Documentación
 
@@ -344,7 +344,7 @@ El conjunto de pruebas automatizadas utiliza objetos sintéticos de Telegram y n
 | [Testigo independiente](../WITNESS.md) | Tokens de testigo de solo lectura, perfil de Docker, publicaciones en canales, comprobaciones cruzadas |
 | [Arquitectura](../ARCHITECTURE.md) y [modelo de producto](../PRODUCT.md) | Aspectos internos y decisiones de diseño |
 | [Verificación](../VERIFICATION.md) y [preparación](../internal/READINESS.md) | Comprobaciones realizadas y trabajo pendiente |
-| [Registro de cambios](../../CHANGELOG.md) | Historial de versiones |
+| [Registro de cambios](../CHANGELOG.md) | Historial de versiones |
 | [Página web y publicación](../internal/PUBLISHING.md) | Vista previa del sitio web local, GitHub Pages, primera publicación |
 
 

@@ -7,12 +7,14 @@ optional [automatic HTTPS overlay](../docs/DEPLOYMENT.md#automatic-https-on-a-se
 Set your domain in `.env`, then run from the project root:
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
 ```
 
 Docker must run at boot for the containers to resume. The overlay uses
 `Caddyfile.docker`; `Caddyfile.example` below is for an existing host Caddy service.
 For prebuilt images, updates, and backups, see [deployment](../docs/DEPLOYMENT.md).
+Optional configurations live in [`compose/`](compose/README.md): HTTPS, Proof,
+an operator proxy catalog and a standalone witness.
 
 ## Native service templates
 

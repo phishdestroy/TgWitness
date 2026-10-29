@@ -112,7 +112,7 @@ docker compose --profile witness up -d          # compose.image.yaml: same flag
 docker compose logs witness                     # witness key fingerprint
 ```
 
-تصل الخدمة إلى المجمع داخل شبكة Compose على `http://tgwitness:8787` (`TGWITNESS_WITNESS_COLLECTOR` يتجاوزها، على سبيل المثال `/profiles/<workspace ID>` لمساحة عمل أخرى). بالنسبة للشاهد الموجود على خادم منفصل، يديره شخص آخر، استخدم `compose.witness.yaml` هناك مع تعيين `TGWITNESS_WITNESS_COLLECTOR` على عنوان HTTPS الخاص بالمجمع؛ حيث يحتوي هذا الملف على الشاهد فقط.
+تصل الخدمة إلى المجمع داخل شبكة Compose على `http://tgwitness:8787` (`TGWITNESS_WITNESS_COLLECTOR` يتجاوزها، على سبيل المثال `/profiles/<workspace ID>` لمساحة عمل أخرى). بالنسبة للشاهد الموجود على خادم منفصل، يديره شخص آخر، استخدم `deploy/compose/compose.witness.yaml` هناك مع تعيين `TGWITNESS_WITNESS_COLLECTOR` على عنوان HTTPS الخاص بالمجمع؛ حيث يحتوي هذا الملف على الشاهد فقط.
 
 ## تثبيت صورة منشورة
 
@@ -148,8 +148,8 @@ TGWITNESS_DOMAIN=watch.your-domain.org
 ابدأ بناء المصدر باستخدام طبقة HTTPS:
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml up -d --build --wait
-docker compose -f compose.yaml -f compose.https.yaml exec tgwitness cat /data/panel-token.txt
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
 بالنسبة للصورة المنشورة، استخدم `compose.image.yaml` كملف أول بدلاً من ذلك. احتفظ بكل من حجتي `-f` لاستخدامهما لاحقًا في أوامر الحالة والسجلات والتحديث والإيقاف.
@@ -159,7 +159,7 @@ docker compose -f compose.yaml -f compose.https.yaml exec tgwitness cat /data/pa
 افتح `https://watch.your-domain.org` وأدخل رمز اللوحة. لا تعني جاهزية Compose تأكيد إصدار الشهادة أو إمكانية الوصول الخارجي. إذا لم يكن HTTPS جاهزًا، فافحص DNS وقواعد جدار الحماية، بالإضافة إلى:
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml logs --tail 100 caddy
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml logs --tail 100 caddy
 ```
 
 تتبع صورة Caddy المرفقة علامة `2-alpine` الخاصة بها. يؤدي سحب الصورة إلى تحديثها؛ قم بتثبيت ملخص تم اختباره في عملية النشر الخاصة بك إذا كنت بحاجة إلى إصدارات ثابتة من البنية التحتية.
@@ -205,7 +205,7 @@ docker compose -f compose.image.yaml up -d --wait
 
 ## الخادم البعيد
 
-احرص على إبقاء الخدمة مرتبطة بـ loopback واستخدم نفق SSH، أو قم بإنهاء HTTPS عند وكيل عكسي. ملف Compose الأساسي محلي فقط؛ أما التراكب الاختياري `compose.https.yaml` فيوفر Caddy لنطاق تم تكوينه. احرص على عدم ظهور رمز الحامل (bearer token) في عناوين URL وسجلات الوكيل. يجب أن يحد الوكيل العكسي من حجم الطلبات ومعدلات الاتصال. لا تكشف بروتوكول HTTP العادي على الإنترنت.
+احرص على إبقاء الخدمة مرتبطة بـ loopback واستخدم نفق SSH، أو قم بإنهاء HTTPS عند وكيل عكسي. ملف Compose الأساسي محلي فقط؛ أما التراكب الاختياري `deploy/compose/compose.https.yaml` فيوفر Caddy لنطاق تم تكوينه. احرص على عدم ظهور رمز الحامل (bearer token) في عناوين URL وسجلات الوكيل. يجب أن يحد الوكيل العكسي من حجم الطلبات ومعدلات الاتصال. لا تكشف بروتوكول HTTP العادي على الإنترنت.
 
 تتوفر أمثلة لـ systemd، ومهمة تسجيل الدخول إلى Windows، ووكيل مستخدم macOS، و Caddy في [المجلد deploy/.](../../deploy/README.md) يرجى مراجعة/تعديل مساراتها قبل التثبيت. فهي قوالب مقدمة، وليست متطلبات منصة يتم تنفيذها محليًا. لا يتم تسجيل أي خدمة أو مهمة في الخلفية بواسطة المشغل العادي.
 

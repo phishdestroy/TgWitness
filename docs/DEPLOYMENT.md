@@ -199,7 +199,7 @@ docker compose logs witness                     # witness key fingerprint
 The service reaches the collector inside the Compose network at `http://tgwitness:8787`
 (`TGWITNESS_WITNESS_COLLECTOR` overrides it, for example `/profiles/<workspace ID>` for
 another workspace). For a witness on a separate server, run by someone else, use
-`compose.witness.yaml` there with `TGWITNESS_WITNESS_COLLECTOR` set to the collector's HTTPS
+`deploy/compose/compose.witness.yaml` there with `TGWITNESS_WITNESS_COLLECTOR` set to the collector's HTTPS
 address; that file contains only the witness.
 
 ## Install a published image
@@ -246,8 +246,8 @@ TGWITNESS_DOMAIN=watch.your-domain.org
 Start the source build with the HTTPS overlay:
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml up -d --build --wait
-docker compose -f compose.yaml -f compose.https.yaml exec tgwitness cat /data/panel-token.txt
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
 For a published image, use `compose.image.yaml` as the first file instead. Keep
@@ -263,7 +263,7 @@ does not confirm certificate issuance or external reachability. If HTTPS is not
 ready, inspect DNS, firewall rules, and:
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml logs --tail 100 caddy
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml logs --tail 100 caddy
 ```
 
 The supplied Caddy image follows its `2-alpine` tag. Pulling refreshes that image;
@@ -341,7 +341,7 @@ upgraded or restarted when a release is published.
 
 Keep the service bound to loopback and use an SSH tunnel, or terminate HTTPS at a
 reverse proxy. The base Compose file is local-only; the optional
-`compose.https.yaml` overlay supplies Caddy for a configured domain.
+`deploy/compose/compose.https.yaml` overlay supplies Caddy for a configured domain.
 Keep the bearer token out of URLs and proxy logs. A reverse proxy should limit
 request size and connection rates. Do not expose plain HTTP to the Internet.
 

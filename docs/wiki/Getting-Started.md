@@ -2,7 +2,7 @@
 
 # Getting started
 
-[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../SUPPORT.md)
+[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../.github/SUPPORT.md)
 
 
 ## 1. Choose an installation
@@ -57,4 +57,4 @@ This checks local prerequisites without connecting to Telegram. If the environme
 
 Commands elsewhere in this wiki that begin with `python -m tgwitness` require the installed project environment. Activate `.venv`, or use `.venv\Scripts\python.exe` on Windows / `.venv/bin/python` on Linux and macOS.
 
-**Next:** [Connect an account](Accounts.md) · [Troubleshooting](Troubleshooting.md) · [Complete quick start](../../QUICKSTART.md)
+**Next:** [Connect an account](Accounts.md) · [Troubleshooting](Troubleshooting.md) · [Complete quick start](../QUICKSTART.md)

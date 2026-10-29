@@ -112,7 +112,7 @@ docker compose --profile witness up -d          # compose.image.yaml: same flag
 docker compose logs witness                     # witness key fingerprint
 ```
 
-O serviço acessa o coletor dentro da rede Compose em `http://tgwitness:8787` (`TGWITNESS_WITNESS_COLLECTOR` o substitui; por exemplo, `/profiles/<workspace ID>` para outro espaço de trabalho). Para uma testemunha em um servidor separado, administrado por outra pessoa, utilize `compose.witness.yaml` nesse local, com `TGWITNESS_WITNESS_COLLECTOR` definido como o endereço HTTPS do coletor; esse arquivo contém apenas a testemunha.
+O serviço acessa o coletor dentro da rede Compose em `http://tgwitness:8787` (`TGWITNESS_WITNESS_COLLECTOR` o substitui; por exemplo, `/profiles/<workspace ID>` para outro espaço de trabalho). Para uma testemunha em um servidor separado, administrado por outra pessoa, utilize `deploy/compose/compose.witness.yaml` nesse local, com `TGWITNESS_WITNESS_COLLECTOR` definido como o endereço HTTPS do coletor; esse arquivo contém apenas a testemunha.
 
 ## Instale uma imagem publicada
 
@@ -148,8 +148,8 @@ TGWITNESS_DOMAIN=watch.your-domain.org
 Inicie a compilação do código-fonte com a sobreposição HTTPS:
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml up -d --build --wait
-docker compose -f compose.yaml -f compose.https.yaml exec tgwitness cat /data/panel-token.txt
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
 Para uma imagem publicada, utilize `compose.image.yaml` como o primeiro arquivo. Mantenha ambos os argumentos `-f` para comandos posteriores de status, logs, atualização e parada.
@@ -159,7 +159,7 @@ O Caddy obtém e renova um certificado, redireciona HTTP para HTTPS e encaminha 
 Abra `https://watch.your-domain.org` e insira o token do painel. A verificação de prontidão não confirma a emissão do certificado nem a acessibilidade externa. Caso o HTTPS não esteja pronto, verifique o DNS, as regras do firewall e:
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml logs --tail 100 caddy
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml logs --tail 100 caddy
 ```
 
 A imagem do Caddy fornecida segue a tag `2-alpine`. A ação de “pull” atualiza essa imagem; fixe um resumo testado em sua implantação caso necessite de versões fixas da infraestrutura.
@@ -205,7 +205,7 @@ O sucesso do fluxo de trabalho remoto ainda não foi comprovado por esta prepara
 
 ## Servidor remoto
 
-Mantenha o serviço vinculado ao loopback e utilize um túnel SSH, ou termine a conexão HTTPS em um proxy reverso. O arquivo Compose básico é apenas local; a sobreposição opcional `compose.https.yaml` fornece o Caddy para um domínio configurado. Evite incluir o token de portador em URLs e nos registros do proxy. Um proxy reverso deve limitar o tamanho das solicitações e as taxas de conexão. Não exponha HTTP simples à Internet.
+Mantenha o serviço vinculado ao loopback e utilize um túnel SSH, ou termine a conexão HTTPS em um proxy reverso. O arquivo Compose básico é apenas local; a sobreposição opcional `deploy/compose/compose.https.yaml` fornece o Caddy para um domínio configurado. Evite incluir o token de portador em URLs e nos registros do proxy. Um proxy reverso deve limitar o tamanho das solicitações e as taxas de conexão. Não exponha HTTP simples à Internet.
 
 Exemplos para o systemd, uma tarefa de logon no Windows, um agente de usuário no macOS e o Caddy estão disponíveis na pasta [deploy/.](../../deploy/README.md) Verifique e adapte seus caminhos antes da instalação. Trata-se de modelos fornecidos, e não de configurações específicas para plataformas executadas localmente. Nenhum serviço ou tarefa em segundo plano é registrado pelo iniciador padrão.
 

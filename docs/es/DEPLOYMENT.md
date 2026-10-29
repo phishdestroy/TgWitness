@@ -112,7 +112,7 @@ docker compose --profile witness up -d          # compose.image.yaml: same flag
 docker compose logs witness                     # witness key fingerprint
 ```
 
-El servicio accede al colector dentro de la red Compose en `http://tgwitness:8787` (`TGWITNESS_WITNESS_COLLECTOR` lo anula; por ejemplo, `/profiles/<workspace ID>` para otro espacio de trabajo). Para un testigo en un servidor independiente, gestionado por otra persona, utilice allí `compose.witness.yaml` con `TGWITNESS_WITNESS_COLLECTOR` configurado con la dirección HTTPS del colector; dicho archivo contiene únicamente el testigo.
+El servicio accede al colector dentro de la red Compose en `http://tgwitness:8787` (`TGWITNESS_WITNESS_COLLECTOR` lo anula; por ejemplo, `/profiles/<workspace ID>` para otro espacio de trabajo). Para un testigo en un servidor independiente, gestionado por otra persona, utilice allí `deploy/compose/compose.witness.yaml` con `TGWITNESS_WITNESS_COLLECTOR` configurado con la dirección HTTPS del colector; dicho archivo contiene únicamente el testigo.
 
 ## Instalar una imagen publicada
 
@@ -148,8 +148,8 @@ TGWITNESS_DOMAIN=watch.your-domain.org
 Inicie la compilación del código fuente con la superposición HTTPS:
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml up -d --build --wait
-docker compose -f compose.yaml -f compose.https.yaml exec tgwitness cat /data/panel-token.txt
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
 En el caso de una imagen publicada, utilice en su lugar `compose.image.yaml` como primer archivo. Conserve ambos argumentos `-f` para futuros comandos de estado, registros, actualización y parada.
@@ -159,7 +159,7 @@ Caddy obtiene y renueva un certificado, redirige el tráfico HTTP a HTTPS y reen
 Abra `https://watch.your-domain.org` e introduzca el token del panel. La comprobación de la preparación no confirma la emisión del certificado ni la accesibilidad externa. Si HTTPS no está listo, compruebe el DNS, las reglas del cortafuegos y:
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml logs --tail 100 caddy
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml logs --tail 100 caddy
 ```
 
 La imagen de Caddy proporcionada se encuentra tras su etiqueta `2-alpine`. Al ejecutar el comando «pull», se actualiza dicha imagen; fije un resumen comprobado en su implementación si necesita versiones fijas de la infraestructura.
@@ -205,7 +205,7 @@ Esta preparación local no garantiza el éxito del flujo de trabajo remoto. La e
 
 ## Servidor remoto
 
-Mantenga el servicio vinculado al bucle de retorno y utilice un túnel SSH, o bien termine la conexión HTTPS en un proxy inverso. El archivo Compose base es de uso exclusivamente local; la superposición opcional `compose.https.yaml` proporciona Caddy para un dominio configurado. Mantenga el token de portador fuera de las URL y de los registros del proxy. Un proxy inverso debe limitar el tamaño de las solicitudes y la frecuencia de las conexiones. No exponga el protocolo HTTP sin cifrar a Internet.
+Mantenga el servicio vinculado al bucle de retorno y utilice un túnel SSH, o bien termine la conexión HTTPS en un proxy inverso. El archivo Compose base es de uso exclusivamente local; la superposición opcional `deploy/compose/compose.https.yaml` proporciona Caddy para un dominio configurado. Mantenga el token de portador fuera de las URL y de los registros del proxy. Un proxy inverso debe limitar el tamaño de las solicitudes y la frecuencia de las conexiones. No exponga el protocolo HTTP sin cifrar a Internet.
 
 En la carpeta «[deploy/](../../deploy/README.md)» se proporcionan ejemplos para systemd, una tarea de inicio de sesión en Windows, un agente de usuario de macOS y Caddy. Revise y adapte sus rutas antes de la instalación. Se trata de plantillas proporcionadas, no de configuraciones específicas de la plataforma ejecutadas localmente. El lanzador normal no registra ningún servicio ni tarea en segundo plano.
 

@@ -2,7 +2,7 @@
 
 # Investigations across chats
 
-[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../SUPPORT.md)
+[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../.github/SUPPORT.md)
 
 
 Use one dedicated account and a clearly defined question. Keep source observations, your interpretation and unresolved questions separate throughout the case.

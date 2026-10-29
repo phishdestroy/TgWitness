@@ -112,7 +112,7 @@ docker compose --profile witness up -d          # compose.image.yaml: same flag
 docker compose logs witness                     # witness key fingerprint
 ```
 
-Сервіс підключається до колектора в мережі Compose за адресою `http://tgwitness:8787` (`TGWITNESS_WITNESS_COLLECTOR` замінює її, наприклад, `/profiles/<workspace ID>` для іншої робочої області). Для свідка на окремому сервері, який адмініструє хтось інший, використовуйте там `compose.witness.yaml`, встановивши для `TGWITNESS_WITNESS_COLLECTOR` HTTPS-адресу колектора; цей файл містить лише свідка.
+Сервіс підключається до колектора в мережі Compose за адресою `http://tgwitness:8787` (`TGWITNESS_WITNESS_COLLECTOR` замінює її, наприклад, `/profiles/<workspace ID>` для іншої робочої області). Для свідка на окремому сервері, який адмініструє хтось інший, використовуйте там `deploy/compose/compose.witness.yaml`, встановивши для `TGWITNESS_WITNESS_COLLECTOR` HTTPS-адресу колектора; цей файл містить лише свідка.
 
 ## Встановіть опублікований образ
 
@@ -148,8 +148,8 @@ TGWITNESS_DOMAIN=watch.your-domain.org
 Запустіть збірку вихідного коду з накладенням HTTPS:
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml up -d --build --wait
-docker compose -f compose.yaml -f compose.https.yaml exec tgwitness cat /data/panel-token.txt
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
 Для опублікованого зображення замість цього використовуйте `compose.image.yaml` як перший файл. Збережіть обидва аргументи `-f` для подальших команд status, logs, update та stop.
@@ -159,7 +159,7 @@ Caddy отримує та оновлює сертифікат, перенапр�
 Відкрийте `https://watch.your-domain.org` та введіть токен панелі. Готовність до створення повідомлень не підтверджує видачу сертифіката або доступність іззовні. Якщо HTTPS не готовий, перевірте DNS, правила брандмауера та:
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml logs --tail 100 caddy
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml logs --tail 100 caddy
 ```
 
 Наданий образ Caddy відповідає тегу `2-alpine`. Виконання команди pull оновлює цей образ; якщо вам потрібні фіксовані версії інфраструктури, закріпіть перевірений дайджест у вашому розгортанні.
@@ -205,7 +205,7 @@ docker compose -f compose.image.yaml up -d --wait
 
 ## Віддалений сервер
 
-Забезпечте, щоб сервіс був прив’язаний до петлі зворотного зв’язку та використовував SSH-тунель, або завершуйте HTTPS на зворотньому проксі. Базовий файл Compose доступний лише локально; опціональний оверлей `compose.https.yaml` надає Caddy для налаштованого домену. Не вказуйте токен bearer в URL-адресах та журналах проксі. Зворотній проксі повинен обмежувати розмір запитів та частоту з’єднань. Не відкривайте доступ до простого HTTP в Інтернеті.
+Забезпечте, щоб сервіс був прив’язаний до петлі зворотного зв’язку та використовував SSH-тунель, або завершуйте HTTPS на зворотньому проксі. Базовий файл Compose доступний лише локально; опціональний оверлей `deploy/compose/compose.https.yaml` надає Caddy для налаштованого домену. Не вказуйте токен bearer в URL-адресах та журналах проксі. Зворотній проксі повинен обмежувати розмір запитів та частоту з’єднань. Не відкривайте доступ до простого HTTP в Інтернеті.
 
 Приклади для systemd, завдання входу в систему Windows, агента користувача macOS та Caddy наведено в папці [deploy/](../../deploy/README.md). Перед інсталяцією перегляньте та адаптуйте їхні шляхи. Це лише шаблони, а не локально виконані налаштування платформи. Звичайний запускач не реєструє жодних фонових служб чи завдань.
 

@@ -2,7 +2,7 @@
 
 Contributions to TgWitness should preserve the distinction
 between an observed Telegram update, an inference, and an unknown fact. Read the
-[evidence model](docs/EVIDENCE.md) before changing collection or export behavior.
+[evidence model](../docs/EVIDENCE.md) before changing collection or export behavior.
 
 ## Development setup
 
@@ -41,7 +41,7 @@ python tools/capture_screenshots.py --docs   # docs/assets used by the README
 Edit `website/`, run `python tools/build_site.py`, then `python tools/check_site.py`.
 The site check uses only a local static server and fictional screenshots; it needs
 Playwright Chromium but no Telegram credentials. Preview and publishing instructions
-are in [the publishing guide](docs/internal/PUBLISHING.md). Keep public assets separate from
+are in [the publishing guide](../docs/internal/PUBLISHING.md). Keep public assets separate from
 account data, and preserve the no-JavaScript fallback and keyboard navigation.
 
 ## Wiki and user support
@@ -49,7 +49,7 @@ account data, and preserve the no-JavaScript fallback and keyboard navigation.
 Edit the English pages in `docs/wiki/` and run `python tools/build_wiki.py`.
 The builder prepares a separate GitHub Wiki bundle and checks local link targets.
 Keep procedures consistent with the technical references; use fictional examples.
-The [wiki maintenance guide](docs/internal/WIKI.md) covers page additions, checks and publication.
+The [wiki maintenance guide](../docs/internal/WIKI.md) covers page additions, checks and publication.
 Use [SUPPORT.md](SUPPORT.md) for help requests and documentation issue reporting.
 
 ## Reporting issues
@@ -91,4 +91,4 @@ secret pasted into a source file. This command does not publish anything.
 
 GitHub Actions checks the Python/platform matrix, synthetic browser workflow,
 source packaging and container package. The workflow definitions are not a claim
-that those remote jobs have run. See [release readiness](docs/internal/READINESS.md).
+that those remote jobs have run. See [release readiness](../docs/internal/READINESS.md).

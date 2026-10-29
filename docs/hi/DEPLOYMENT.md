@@ -112,7 +112,7 @@ docker compose --profile witness up -d          # compose.image.yaml: same flag
 docker compose logs witness                     # witness key fingerprint
 ```
 
-यह सेवा Compose नेटवर्क के भीतर कलेक्टर तक `http://tgwitness:8787` पर पहुँचती है (`TGWITNESS_WITNESS_COLLECTOR` इसे ओवरराइड करता है, उदाहरण के लिए दूसरे वर्कस्पेस के लिए `/profiles/<workspace ID>`)। किसी अन्य व्यक्ति द्वारा चलाए जा रहे अलग सर्वर पर विटनेस के लिए, वहाँ `compose.witness.yaml` का उपयोग करें और `TGWITNESS_WITNESS_COLLECTOR` को कलेक्टर के HTTPS पते पर सेट करें; उस फ़ाइल में केवल विटनेस होता है।
+यह सेवा Compose नेटवर्क के भीतर कलेक्टर तक `http://tgwitness:8787` पर पहुँचती है (`TGWITNESS_WITNESS_COLLECTOR` इसे ओवरराइड करता है, उदाहरण के लिए दूसरे वर्कस्पेस के लिए `/profiles/<workspace ID>`)। किसी अन्य व्यक्ति द्वारा चलाए जा रहे अलग सर्वर पर विटनेस के लिए, वहाँ `deploy/compose/compose.witness.yaml` का उपयोग करें और `TGWITNESS_WITNESS_COLLECTOR` को कलेक्टर के HTTPS पते पर सेट करें; उस फ़ाइल में केवल विटनेस होता है।
 
 ## एक प्रकाशित इमेज इंस्टॉल करें
 
@@ -148,8 +148,8 @@ TGWITNESS_DOMAIN=watch.your-domain.org
 HTTPS ओवरले के साथ स्रोत बिल्ड शुरू करें:
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml up -d --build --wait
-docker compose -f compose.yaml -f compose.https.yaml exec tgwitness cat /data/panel-token.txt
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
 प्रकाशित छवि के लिए, इसके बजाय पहली फ़ाइल के रूप में `compose.image.yaml` का उपयोग करें। बाद में स्थिति, लॉग, अपडेट और स्टॉप कमांड के लिए दोनों `-f` आर्गुमेंट्स को बनाए रखें।
@@ -159,7 +159,7 @@ Caddy प्रमाणपत्र प्राप्त करता है �
 `https://watch.your-domain.org` खोलें और पैनल टोकन दर्ज करें। तैयार होने की स्थिति प्रमाणपत्र जारी होने या बाहरी पहुँच की पुष्टि नहीं करती। यदि HTTPS तैयार नहीं है, तो DNS, फ़ायरवॉल नियमों की जाँच करें, और:
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml logs --tail 100 caddy
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml logs --tail 100 caddy
 ```
 
 प्रदान की गई Caddy इमेज अपने `2-alpine` टैग का अनुसरण करती है। पुल करने पर वह इमेज रिफ्रेश हो जाती है; यदि आपको स्थिर इन्फ्रास्ट्रक्चर संस्करणों की आवश्यकता है तो अपनी डिप्लॉयमेंट में एक परीक्षणित डाइजेस्ट पिन करें।
@@ -205,7 +205,7 @@ docker compose -f compose.image.yaml up -d --wait
 
 ## रिमोट सर्वर
 
-सेवा को लूपबैक तक सीमित रखें और SSH टनल का उपयोग करें, या HTTPS को रिवर्स प्रॉक्सी पर टर्मिनेट करें। बेस Compose फ़ाइल केवल स्थानीय है; वैकल्पिक `compose.https.yaml` ओवरले कॉन्फ़िगर किए गए डोमेन के लिए Caddy प्रदान करता है। बेयरर टोकन को URLs और प्रॉक्सी लॉग्स से दूर रखें। रिवर्स प्रॉक्सी को अनुरोध आकार और कनेक्शन दरों को सीमित करना चाहिए। सादा HTTP को इंटरनेट पर न खोलें।
+सेवा को लूपबैक तक सीमित रखें और SSH टनल का उपयोग करें, या HTTPS को रिवर्स प्रॉक्सी पर टर्मिनेट करें। बेस Compose फ़ाइल केवल स्थानीय है; वैकल्पिक `deploy/compose/compose.https.yaml` ओवरले कॉन्फ़िगर किए गए डोमेन के लिए Caddy प्रदान करता है। बेयरर टोकन को URLs और प्रॉक्सी लॉग्स से दूर रखें। रिवर्स प्रॉक्सी को अनुरोध आकार और कनेक्शन दरों को सीमित करना चाहिए। सादा HTTP को इंटरनेट पर न खोलें।
 
 systemd, Windows लॉगऑन टास्क, macOS यूज़र एजेंट और Caddy के उदाहरण [deploy/](../../deploy/README.md) में दिए गए हैं। इंस्टॉलेशन से पहले उनके पथों की समीक्षा/अनुकूलन करें। ये प्रदान किए गए टेम्प्लेट हैं, स्थानीय रूप से निष्पादित प्लेटफ़ॉर्म क्वालिफिकेशन्स नहीं। सामान्य लॉन्चर द्वारा कोई बैकग्राउंड सर्विस या टास्क पंजीकृत नहीं किया जाता।
 

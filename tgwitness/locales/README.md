@@ -2,7 +2,7 @@
 
 # Interface languages
 
-[Project](../../README.md) · [Documentation](../../docs/README.md) · [Wiki](../../docs/wiki/Home.md) · [Support](../../SUPPORT.md)
+[Project](../../README.md) · [Documentation](../../docs/README.md) · [Wiki](../../docs/wiki/Home.md) · [Support](../../.github/SUPPORT.md)
 
 Translation dictionaries for the application interface. English is the source;
 the JSON files contain Arabic, Spanish, Persian, Hindi, Indonesian, Portuguese,

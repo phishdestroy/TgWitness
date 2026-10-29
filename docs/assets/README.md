@@ -2,7 +2,7 @@
 
 # Documentation assets
 
-[Project](../../README.md) · [Documentation](../README.md) · [Wiki](../wiki/Home.md) · [Support](../../SUPPORT.md)
+[Project](../../README.md) · [Documentation](../README.md) · [Wiki](../wiki/Home.md) · [Support](../../.github/SUPPORT.md)
 
 Screenshots and presentation artwork used by the repository and documentation.
 Application screenshots use fictional demonstration data.

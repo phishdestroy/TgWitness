@@ -9,6 +9,7 @@ from tools.check_publication import check_sources
 
 def public_tree(root):
     for name in FILES:
+        (root / name).parent.mkdir(parents=True, exist_ok=True)
         (root / name).write_text("Synthetic public source\n", encoding="utf-8")
 
 
@@ -27,7 +28,7 @@ def test_publication_checks_linked_files_are_actually_shipped(tmp_path):
     (tmp_path / "data").mkdir()
     (tmp_path / "data/private.md").write_text("Not public", encoding="utf-8")
     (tmp_path / "README.md").write_text(
-        "[Start](QUICKSTART.md) [Missing](missing.md) [Private](data/private.md) "
+        "[Start](docs/QUICKSTART.md) [Missing](missing.md) [Private](data/private.md) "
         "[Release](../../releases) [External](https://example.org)", encoding="utf-8")
     _, links, findings = check_sources(tmp_path)
     assert links == 3

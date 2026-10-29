@@ -28,7 +28,7 @@
 > [!TIP]
 > **Hãy khám phá trước khi kết nối.** Vui lòng chạy `Demo.cmd` hoặc `sh start.sh --demo` để mở không gian làm việc với các cuộc trò chuyện giả định. Không cần tài khoản Telegram.
 
-**Lần đầu ghé thăm?** [Bắt đầu →](QUICKSTART.md) · [Wiki →](../wiki/Home.md) · [Chọn hướng dẫn →](../README.md) · [Nhận trợ giúp →](../../SUPPORT.md) · [Xem những gì đã được kiểm thử →](../VERIFICATION.md)
+**Lần đầu ghé thăm?** [Bắt đầu →](QUICKSTART.md) · [Wiki →](../wiki/Home.md) · [Chọn hướng dẫn →](../README.md) · [Nhận trợ giúp →](../../.github/SUPPORT.md) · [Xem những gì đã được kiểm thử →](../VERIFICATION.md)
 
 > [!WARNING]
 > **Vui lòng sử dụng một tài khoản Telegram chuyên dụng mà quý vị có thể chấp nhận rủi ro mất mát.** Chúng tôi khuyến cáo mạnh mẽ không nên kết nối các tài khoản cá nhân hoặc có giá trị, cũng như không nên tạo thông tin đăng nhập API ID / API hash trên các tài khoản đó. Telegram có thể hạn chế hoặc cấm vĩnh viễn các tài khoản. [Vui lòng tham khảo hướng dẫn về tài khoản](../ACCOUNTS.md).
@@ -235,7 +235,7 @@ Container này chạy dưới quyền người dùng không phải root với h�
 **Máy chủ công khai với HTTPS tự động (Caddy):** sao chép `.env.example` vào `.env`, thiết lập `TGWITNESS_DOMAIN`, trỏ DNS đến máy chủ, mở cổng TCP 80/443 và khởi chạy
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
 ```
 
 **Trên Windows mà không cần cài đặt bất kỳ phần mềm nào:** tệp ZIP di động đính kèm trong mỗi bản phát hành đã chứa sẵn môi trường chạy Python chính thức cùng tất cả các thành phần phụ thuộc. Dữ liệu được lưu trữ trong thư mục `data`; để cập nhật, quý vị chỉ cần giải nén phiên bản mới và sao chép thư mục đó vào vị trí tương ứng.
@@ -290,7 +290,7 @@ TgWitness là một công cụ. Bất kỳ ai vận hành công cụ này đều
 - Theo mặc định, bảng điều khiển sẽ lắng nghe trên localhost. Để truy cập từ xa, quý vị hãy sử dụng cấu hình HTTPS Compose hoặc đường hầm SSH; tuyệt đối không được để lộ kết nối HTTP thuần túy.
 - Các phiên Telegram, thông tin đăng nhập API, thông tin đăng nhập proxy và khóa ký được lưu trữ trong một kho dữ liệu được mã hóa bằng Fernet. Theo mặc định, khóa này nằm trong cùng thư mục dữ liệu; hãy thiết lập `TGWITNESS_VAULT_KEY_FILE` để sử dụng khóa chính bên ngoài. Nội dung tin nhắn và tệp đa phương tiện cục bộ **không** được TgWitness mã hóa; quý vị nên lưu trữ thư mục dữ liệu trên một đĩa hoặc phân vùng đã được mã hóa. Các tệp ZIP xuất ra đã được ký có thể được mã hóa bằng mật khẩu (tùy chọn).
 - Các tệp dữ liệu, phiên làm việc, mã thông báo, khóa và tệp xuất dữ liệu không được bao gồm trong các bản dựng git và Docker.
-- Vui lòng báo cáo các lỗ hổng bảo mật một cách riêng tư theo hướng dẫn trong [tệp SECURITY.md](../../SECURITY.md).
+- Vui lòng báo cáo các lỗ hổng bảo mật một cách riêng tư theo hướng dẫn trong [tệp SECURITY.md](../../.github/SECURITY.md).
 
 ### Những nội dung đã được kiểm thử
 
@@ -328,7 +328,7 @@ python tools/build_site.py                             # static project site in 
 python tools/check_site.py                             # website browser acceptance
 ```
 
-Bộ kiểm thử tự động sử dụng các đối tượng Telegram tổng hợp và tuyệt đối không kết nối với các tài khoản thực; quy trình kiểm thử trực tiếp đã được mô tả ở phần trên. Hệ thống CI được cấu hình để chạy ma trận kiểm thử trên Windows, Linux và macOS với Python phiên bản 3.11–3.13, bao gồm các kiểm tra trình duyệt, đóng gói mã nguồn, bản dựng di động cho Windows và bản dựng Docker. Quy trình phát hành được thiết lập để đính kèm tệp ZIP mã nguồn, tệp wheel, tệp ZIP di động dành cho Windows và hình ảnh GHCR đa kiến trúc vào bản phát hành GitHub đã được công bố. Cả hai quy trình này đều chưa được thực thi. Vui lòng đọc [tệp CONTRIBUTING.md](../../CONTRIBUTING.md) trước khi gửi yêu cầu pull.
+Bộ kiểm thử tự động sử dụng các đối tượng Telegram tổng hợp và tuyệt đối không kết nối với các tài khoản thực; quy trình kiểm thử trực tiếp đã được mô tả ở phần trên. Hệ thống CI được cấu hình để chạy ma trận kiểm thử trên Windows, Linux và macOS với Python phiên bản 3.11–3.13, bao gồm các kiểm tra trình duyệt, đóng gói mã nguồn, bản dựng di động cho Windows và bản dựng Docker. Quy trình phát hành được thiết lập để đính kèm tệp ZIP mã nguồn, tệp wheel, tệp ZIP di động dành cho Windows và hình ảnh GHCR đa kiến trúc vào bản phát hành GitHub đã được công bố. Cả hai quy trình này đều chưa được thực thi. Vui lòng đọc [tệp CONTRIBUTING.md](../../.github/CONTRIBUTING.md) trước khi gửi yêu cầu pull.
 
 ## Tài liệu hướng dẫn
 
@@ -344,7 +344,7 @@ Bộ kiểm thử tự động sử dụng các đối tượng Telegram tổng 
 | [Nhân chứng độc lập](../WITNESS.md) | Mã thông báo chứng thực chỉ đọc, cấu hình Docker, bài đăng trên kênh, kiểm tra chéo |
 | [Kiến trúc](../ARCHITECTURE.md) và [mô hình sản phẩm](../PRODUCT.md) | Cơ chế hoạt động và các quyết định thiết kế |
 | [Xác minh](../VERIFICATION.md) và [sự sẵn sàng](../internal/READINESS.md) | Các kiểm tra đã thực hiện và công việc còn lại |
-| [Nhật ký thay đổi](../../CHANGELOG.md) | Lịch sử phát hành |
+| [Nhật ký thay đổi](../CHANGELOG.md) | Lịch sử phát hành |
 | [Trang web và xuất bản](../internal/PUBLISHING.md) | Xem trước trang web cục bộ, GitHub Pages, bài đăng đầu tiên |
 
 

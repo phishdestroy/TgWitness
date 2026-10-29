@@ -1,7 +1,7 @@
 # Version 0.6.1
 
 TgWitness is an MIT-licensed, self-hosted Telegram observation journal. The repository
-contains 0.6.1 plus the changes listed under **Unreleased** in the [changelog](../../CHANGELOG.md).
+contains 0.6.1 plus the changes listed under **Unreleased** in the [changelog](../CHANGELOG.md).
 Release downloads become available only after the GitHub release workflow succeeds.
 
 ## Included in this source tree
@@ -29,7 +29,7 @@ Release downloads become available only after the GitHub release workflow succee
   service templates. Demo mode uses synthetic data and does not connect to Telegram.
 
 See [collection](../COLLECTION.md), [accounts](../ACCOUNTS.md), [evidence](../EVIDENCE.md),
-[witness](../WITNESS.md) and [security](../../SECURITY.md) for behavior and limits. Parameter ranges
+[witness](../WITNESS.md) and [security](../../.github/SECURITY.md) for behavior and limits. Parameter ranges
 and effective defaults are shown in the panel; avoid relying on limits from older releases.
 
 ## Publication and validation

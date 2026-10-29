@@ -1,6 +1,6 @@
 # Get help with TgWitness
 
-Start with the [wiki](docs/wiki/Home.md), [troubleshooting](docs/wiki/Troubleshooting.md) or [FAQ](docs/wiki/FAQ.md). The [technical documentation](docs/README.md) covers formats, deployment and operation in more detail.
+Start with the [wiki](../docs/wiki/Home.md), [troubleshooting](../docs/wiki/Troubleshooting.md) or [FAQ](../docs/wiki/FAQ.md). The [technical documentation](../docs/README.md) covers formats, deployment and operation in more detail.
 
 ## Choose the right report
 
@@ -32,6 +32,6 @@ Security reports use the private process in [SECURITY.md](SECURITY.md). If priva
 
 ## Scope of support
 
-TgWitness is a self-hosted project. There is no hosted collector, managed account service or guaranteed response time. The [verification record](docs/VERIFICATION.md) distinguishes completed checks from remaining qualification work.
+TgWitness is a self-hosted project. There is no hosted collector, managed account service or guaranteed response time. The [verification record](../docs/VERIFICATION.md) distinguishes completed checks from remaining qualification work.
 
 For code or documentation changes, see [CONTRIBUTING.md](CONTRIBUTING.md).

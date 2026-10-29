@@ -7,9 +7,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))["project"]["version"]
 FILES = [
-    "README.md", "QUICKSTART.md", "LICENSE", "SECURITY.md", "SUPPORT.md", "CONTRIBUTING.md", "CHANGELOG.md", "pyproject.toml",
+    "README.md", "docs/QUICKSTART.md", "LICENSE", ".github/SECURITY.md", ".github/SUPPORT.md", ".github/CONTRIBUTING.md", "docs/CHANGELOG.md", "pyproject.toml",
     "start.py", "start.sh", "Start.cmd", "Demo.cmd", "Setup.cmd", "Docker.cmd", "docker-start.sh",
-    "Dockerfile", "compose.yaml", "compose.image.yaml", "compose.https.yaml", "compose.witness.yaml", "compose.proof.yaml", "compose.proxies.yaml",
+    "Dockerfile", "compose.yaml", "compose.image.yaml", "deploy/compose/compose.https.yaml", "deploy/compose/compose.witness.yaml", "deploy/compose/compose.proof.yaml", "deploy/compose/compose.proxies.yaml",
     ".gitignore", ".gitattributes", ".dockerignore", ".env.example", "constraints.txt",
 ]
 DIRECTORIES = {

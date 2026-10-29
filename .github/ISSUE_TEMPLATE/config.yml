@@ -4,5 +4,5 @@ contact_links:
     url: https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Home.md
     about: Start with the wiki, FAQ and troubleshooting steps.
   - name: Security reports
-    url: https://github.com/phishdestroy/TgWitness/blob/main/SECURITY.md
+    url: https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md
     about: Use the private reporting process for suspected vulnerabilities.

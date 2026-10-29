@@ -9,9 +9,9 @@ on:
       - tools/site_wiki.py
       - tools/site_diagrams.py
       - docs/*.md
-      - QUICKSTART.md
-      - SECURITY.md
-      - CHANGELOG.md
+      - docs/QUICKSTART.md
+      - .github/SECURITY.md
+      - docs/CHANGELOG.md
       - tools/check_site.py
       - tools/check_docs_site.py
       - tests/test_site.py
@@ -27,9 +27,9 @@ on:
       - tools/site_wiki.py
       - tools/site_diagrams.py
       - docs/*.md
-      - QUICKSTART.md
-      - SECURITY.md
-      - CHANGELOG.md
+      - docs/QUICKSTART.md
+      - .github/SECURITY.md
+      - docs/CHANGELOG.md
       - tools/check_site.py
       - tools/check_docs_site.py
       - tests/test_site.py

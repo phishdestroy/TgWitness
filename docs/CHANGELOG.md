@@ -150,7 +150,7 @@
 - Attachment limits per type (photos, videos, GIFs, round videos, voice, audio, stickers, files), up to 2,000 MiB.
 - Sources can be removed (their people profiles are deleted; saved records stay in the journal) and starred as priority.
 - People profiles per chat, opt-in: name and username history, Telegram flags, avatar SHA-256 and pHash with similar avatars, activity, replies, other observed chats and mentioned wallets, phones, usernames and links. Built only from saved records, each fact citing its record; exported as a separate signed file, optionally as an AES-256 ZIP; verify.py checks it against an evidence export.
-- Independent witness: a separate process or container with its own key, journal and bot fetches the signed journal head with a read-only token, posts it to a channel and records when the collector does not answer. Witness page in the panel, Docker profile, compose.witness.yaml for another server; verify.py checks evidence exports against the witness journal and channel posts.
+- Independent witness: a separate process or container with its own key, journal and bot fetches the signed journal head with a read-only token, posts it to a channel and records when the collector does not answer. Witness page in the panel, Docker profile, deploy/compose/compose.witness.yaml for another server; verify.py checks evidence exports against the witness journal and channel posts.
 - Reports and verify.py state continuous observation periods, gaps with their reason and message IDs that were never observed (not presented as deleted); signed ZIPs include coverage.json.
 - Evidence manifests, chat exports, witness journals and profile files name their producer (TgWitness, PhishDestroy) in the signed part; the report and verify.py show it.
 - Notifications: optional excerpts of deleted and edited messages (off by default), newly added chats, and a notification list in the panel.
@@ -266,8 +266,8 @@
 - Explain signature coverage for each export format and the investigation handoff
   workflow, including independently retained fingerprints and checkpoints.
 
-See [verification](docs/VERIFICATION.md) for executed checks and
-[readiness](docs/internal/READINESS.md) for remaining live-service and deployment work.
+See [verification](VERIFICATION.md) for executed checks and
+[readiness](internal/READINESS.md) for remaining live-service and deployment work.
 
 ## 0.5.0 · 26 October 2026
 
@@ -275,4 +275,4 @@ See [verification](docs/VERIFICATION.md) for executed checks and
 - Allow direct local entry to isolated synthetic demos without copying a token.
 
 Earlier preview capabilities and qualification history are described in
-[release status](docs/internal/RELEASE.md) and [verification](docs/VERIFICATION.md).
+[release status](internal/RELEASE.md) and [verification](VERIFICATION.md).

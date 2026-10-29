@@ -25,8 +25,9 @@
 
 **Project**
 
+- [Complete project guide](../PROJECT-GUIDE.md)
 - [Technical documentation](../README.md)
 - [What has been tested](../VERIFICATION.md)
-- [Get help](../../SUPPORT.md)
-- [Contribute](../../CONTRIBUTING.md)
-- [Security](../../SECURITY.md)
+- [Get help](../../.github/SUPPORT.md)
+- [Contribute](../../.github/CONTRIBUTING.md)
+- [Security](../../.github/SECURITY.md)

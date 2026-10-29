@@ -112,7 +112,7 @@ docker compose --profile witness up -d          # compose.image.yaml: same flag
 docker compose logs witness                     # witness key fingerprint
 ```
 
-Hizmet, Compose ağı içindeki toplayıcıya `http://tgwitness:8787` adresinden ulaşır (`TGWITNESS_WITNESS_COLLECTOR` bu adresi geçersiz kılar; örneğin, başka bir çalışma alanı için `/profiles/<workspace ID>`). Başka biri tarafından işletilen ayrı bir sunucudaki tanık için, orada `compose.witness.yaml` dosyasını kullanın ve `TGWITNESS_WITNESS_COLLECTOR` dosyasını toplayıcının HTTPS adresine ayarlayın; bu dosya yalnızca tanığı içerir.
+Hizmet, Compose ağı içindeki toplayıcıya `http://tgwitness:8787` adresinden ulaşır (`TGWITNESS_WITNESS_COLLECTOR` bu adresi geçersiz kılar; örneğin, başka bir çalışma alanı için `/profiles/<workspace ID>`). Başka biri tarafından işletilen ayrı bir sunucudaki tanık için, orada `deploy/compose/compose.witness.yaml` dosyasını kullanın ve `TGWITNESS_WITNESS_COLLECTOR` dosyasını toplayıcının HTTPS adresine ayarlayın; bu dosya yalnızca tanığı içerir.
 
 ## Yayınlanmış bir görüntüyü yükleyin
 
@@ -148,8 +148,8 @@ TGWITNESS_DOMAIN=watch.your-domain.org
 HTTPS overlay ile kaynak derlemesini başlatın:
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml up -d --build --wait
-docker compose -f compose.yaml -f compose.https.yaml exec tgwitness cat /data/panel-token.txt
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
 Yayınlanmış bir resim için, bunun yerine ilk dosya olarak `compose.image.yaml`'yi kullanın. `-f` argümanlarının her ikisini de daha sonraki durum, günlük, güncelleme ve durdurma komutları için saklayın.
@@ -159,7 +159,7 @@ Caddy, sertifikayı alır ve yeniler, HTTP'yi HTTPS'ye yönlendirir ve istekleri
 `https://watch.your-domain.org` dosyasını açın ve panel jetonunu girin. Hazırlık durumu, sertifika verilmesini veya harici erişilebilirliği teyit etmez. HTTPS hazır değilse, DNS'yi, güvenlik duvarı kurallarını ve aşağıdakileri kontrol edin:
 
 ```sh
-docker compose -f compose.yaml -f compose.https.yaml logs --tail 100 caddy
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml logs --tail 100 caddy
 ```
 
 Sağlanan Caddy görüntüsü, `2-alpine` etiketinin hemen ardından gelir. Pull işlemi bu görüntüyü yeniler; sabit altyapı sürümlerine ihtiyacınız varsa, dağıtımınıza test edilmiş bir özeti sabitleyin.
@@ -205,7 +205,7 @@ Bu yerel hazırlık ile uzaktan iş akışının başarısı henüz kanıtlanmam
 
 ## Uzak sunucu
 
-Hizmeti loopback'e bağlı tutun ve bir SSH tüneli kullanın ya da HTTPS'yi bir ters proxy'de sonlandırın. Temel Compose dosyası yalnızca yerel kullanım içindir; isteğe bağlı `compose.https.yaml` katmanı, yapılandırılmış bir etki alanı için Caddy sağlar. Bearer token'ını URL'lerden ve proxy günlüklerinden uzak tutun. Bir ters proxy, istek boyutunu ve bağlantı hızlarını sınırlamalıdır. Düz HTTP'yi İnternet'e maruz bırakmayın.
+Hizmeti loopback'e bağlı tutun ve bir SSH tüneli kullanın ya da HTTPS'yi bir ters proxy'de sonlandırın. Temel Compose dosyası yalnızca yerel kullanım içindir; isteğe bağlı `deploy/compose/compose.https.yaml` katmanı, yapılandırılmış bir etki alanı için Caddy sağlar. Bearer token'ını URL'lerden ve proxy günlüklerinden uzak tutun. Bir ters proxy, istek boyutunu ve bağlantı hızlarını sınırlamalıdır. Düz HTTP'yi İnternet'e maruz bırakmayın.
 
 [deploy/](../../deploy/README.md) dizininde systemd, bir Windows oturum açma görevi, bir macOS kullanıcı ajanı ve Caddy için örnekler sunulmaktadır. Kurulumdan önce bunların yollarını gözden geçirin ve uyarlayın. Bunlar, yerel olarak yürütülen platform yapılandırmaları değil, şablonlar olarak sağlanmıştır. Normal başlatıcı tarafından hiçbir arka plan hizmeti veya görevi kaydedilmez.
 

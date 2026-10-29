@@ -46,7 +46,7 @@ Homepage = "https://phishdestroy.github.io/TgWitness/"
 Documentation = "https://phishdestroy.github.io/TgWitness/docs/"
 Source = "https://github.com/phishdestroy/TgWitness"
 Issues = "https://github.com/phishdestroy/TgWitness/issues"
-Changelog = "https://github.com/phishdestroy/TgWitness/blob/main/CHANGELOG.md"
+Changelog = "https://github.com/phishdestroy/TgWitness/blob/main/docs/CHANGELOG.md"
 
 [project.scripts]
 tgwitness = "tgwitness.__main__:main"

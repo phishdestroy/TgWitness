@@ -2,7 +2,7 @@
 
 # Application source
 
-[Project](../README.md) · [Documentation](../docs/README.md) · [Wiki](../docs/wiki/Home.md) · [Support](../SUPPORT.md)
+[Project](../README.md) · [Documentation](../docs/README.md) · [Wiki](../docs/wiki/Home.md) · [Support](../.github/SUPPORT.md)
 
 TgWitness's Python package: the authenticated panel, account collectors, observation
 journal, exports and optional witness services. Start with the component map below;
@@ -25,7 +25,7 @@ the detailed data model lives in [Architecture](../docs/ARCHITECTURE.md).
 
 ## Work on the package
 
-Follow the [development setup](../CONTRIBUTING.md#development-setup), then use the
+Follow the [development setup](../.github/CONTRIBUTING.md#development-setup), then use the
 [tests](../tests/README.md) and [browser checks](../tools/README.md) for the affected
 workflow. Keep normalization in presentation/search separate from signed payloads.
 

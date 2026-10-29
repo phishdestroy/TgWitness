@@ -53,9 +53,9 @@ message changes/deletions; quiet sources can remain connected without new messag
 4. Check and start the overlay:
 
 ```sh
-docker compose -f compose.yaml -f compose.proof.yaml run --rm --no-deps proof \
+docker compose -f compose.yaml -f deploy/compose/compose.proof.yaml run --rm --no-deps proof \
   python -m tgwitness.proof --config /proof-config/proof.json --check-config
-docker compose -f compose.yaml -f compose.proof.yaml up -d --build
+docker compose -f compose.yaml -f deploy/compose/compose.proof.yaml up -d --build
 ```
 
 The monitor listens on `127.0.0.1:8790`, with its own keys/journals in `proof-data`.

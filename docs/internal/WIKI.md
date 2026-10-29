@@ -12,12 +12,12 @@ python tools/build_wiki.py
 
 Outputs:
 
-- `dist/wiki/`: 13 English pages, `_Sidebar.md` and `_Footer.md`.
-- `dist/TgWitness-<version>-wiki.zip`: the same Markdown files at the archive root.
+- `dist/wiki/`: 13 English pages, `_Sidebar.md`, `_Footer.md` and their `assets/`.
+- `dist/TgWitness-<version>-wiki.zip`: the same pages and assets, ready to copy into a wiki clone.
 - The matching `.zip.sha256` file.
 - `dist/wiki-manifest.json`: destination repository, source branch and file hashes.
 
-The builder reads public source files only. It converts local wiki links to GitHub Wiki page URLs, documentation links to repository URLs, and images to raw asset URLs. Code blocks are preserved. Missing/private link targets and unexpected output files stop the build.
+The builder reads allowlisted source files only. It converts local wiki links to GitHub Wiki page URLs and documentation links to repository URLs. Referenced images are bundled under `assets/` and linked through the Wiki, so they travel with it rather than depending on unauthenticated raw URLs from a private source repository. Code blocks are preserved. Missing/private link targets and unexpected output files stop the build.
 
 For a fork or a different source branch:
 
@@ -37,16 +37,18 @@ Build the bundle, authenticate your Git client, then clone the intended wiki nex
 git clone https://github.com/phishdestroy/TgWitness.wiki.git ../TgWitness.wiki
 ~~~
 
-Copy the built Markdown files into that clone. In PowerShell:
+Copy the built pages and assets into that clone. In PowerShell:
 
 ~~~powershell
 Copy-Item -Path .\dist\wiki\*.md -Destination ..\TgWitness.wiki\
+Copy-Item -Path .\dist\wiki\assets -Destination ..\TgWitness.wiki\ -Recurse -Force
 ~~~
 
 On Linux/macOS:
 
 ~~~sh
 cp dist/wiki/*.md ../TgWitness.wiki/
+cp -R dist/wiki/assets ../TgWitness.wiki/
 ~~~
 
 Review and publish:
@@ -54,7 +56,7 @@ Review and publish:
 ~~~sh
 git -C ../TgWitness.wiki status --short
 git -C ../TgWitness.wiki diff
-git -C ../TgWitness.wiki add -- "*.md"
+git -C ../TgWitness.wiki add -- "*.md" assets/
 git -C ../TgWitness.wiki commit -m "Update TgWitness wiki"
 git -C ../TgWitness.wiki push
 ~~~

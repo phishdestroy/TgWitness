@@ -2,7 +2,7 @@
 
 # Troubleshooting
 
-[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../SUPPORT.md)
+[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../.github/SUPPORT.md)
 
 
 Record the installation method, version, affected workspace and exact step before changing settings. Use a controlled test chat to check recovery.
@@ -59,6 +59,6 @@ If a send, join or bot action has an unknown outcome, inspect the chat and its a
 
 ## Still stuck?
 
-Follow [Get help](../../SUPPORT.md). Include redacted errors and a synthetic reproduction. Never attach a data directory, session, token, private key or real evidence archive. Send vulnerability reports through the [security process](../../SECURITY.md).
+Follow [Get help](../../.github/SUPPORT.md). Include redacted errors and a synthetic reproduction. Never attach a data directory, session, token, private key or real evidence archive. Send vulnerability reports through the [security process](../../.github/SECURITY.md).
 
 **Related:** [Account troubleshooting](../ACCOUNTS.md) · [Operations](../OPERATIONS.md) · [FAQ](FAQ.md)

@@ -2,7 +2,7 @@
 
 # Workspace interface
 
-[Project](../../README.md) · [Documentation](../../docs/README.md) · [Wiki](../../docs/wiki/Home.md) · [Support](../../SUPPORT.md)
+[Project](../../README.md) · [Documentation](../../docs/README.md) · [Wiki](../../docs/wiki/Home.md) · [Support](../../.github/SUPPORT.md)
 
 The bundled browser interface served by TgWitness. These are application files;
 the separate public documentation website lives in [`website/`](../../website/README.md).
@@ -21,7 +21,7 @@ the separate public documentation website lives in [`website/`](../../website/RE
 
 ## Review a change
 
-Use the [demo](../../QUICKSTART.md#explore-the-interface) for fictional content.
+Use the [demo](../../docs/QUICKSTART.md#explore-the-interface) for fictional content.
 Check both themes, keyboard navigation and a narrow viewport. Use the relevant
 [browser acceptance tool](../../tools/README.md) and refresh screenshots only from
 synthetic data. Interface strings belong in the [locale workflow](../locales/README.md).

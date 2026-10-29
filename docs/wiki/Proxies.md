@@ -2,7 +2,7 @@
 
 # Proxies and connection routes
 
-[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../SUPPORT.md)
+[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../.github/SUPPORT.md)
 
 
 Each account workspace has its own route. Configure it before signing in if direct access is unavailable.

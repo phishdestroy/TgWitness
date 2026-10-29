@@ -180,4 +180,4 @@ generate a global investigation graph or a merged case archive.
 
 [Completed validation and remaining work](VERIFICATION.md) ·
 [Export and verify](EVIDENCE.md#investigation-handoff) ·
-[Start with one account](../QUICKSTART.md)
+[Start with one account](QUICKSTART.md)

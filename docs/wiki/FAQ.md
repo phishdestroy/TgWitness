@@ -2,7 +2,7 @@
 
 # Frequently asked questions
 
-[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../SUPPORT.md)
+[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../.github/SUPPORT.md)
 
 
 ## Does TgWitness recover messages deleted before it started?
@@ -77,4 +77,4 @@ Consult the current [verification record](../VERIFICATION.md). Implemented launc
 
 ## How do I report a problem or contribute?
 
-Use [Support](../../SUPPORT.md) for help and bug reports, [Contributing](../../CONTRIBUTING.md) for development, and [Security](../../SECURITY.md) for vulnerabilities.
+Use [Support](../../.github/SUPPORT.md) for help and bug reports, [Contributing](../../.github/CONTRIBUTING.md) for development, and [Security](../../.github/SECURITY.md) for vulnerabilities.

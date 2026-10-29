@@ -4,10 +4,10 @@ on:
     paths:
       - docs/**
       - README.md
-      - QUICKSTART.md
-      - SUPPORT.md
-      - SECURITY.md
-      - CONTRIBUTING.md
+      - docs/QUICKSTART.md
+      - .github/SUPPORT.md
+      - .github/SECURITY.md
+      - .github/CONTRIBUTING.md
       - pyproject.toml
       - tools/build_wiki.py
       - tools/build_source.py
@@ -17,10 +17,10 @@ on:
     paths:
       - docs/**
       - README.md
-      - QUICKSTART.md
-      - SUPPORT.md
-      - SECURITY.md
-      - CONTRIBUTING.md
+      - docs/QUICKSTART.md
+      - .github/SUPPORT.md
+      - .github/SECURITY.md
+      - .github/CONTRIBUTING.md
       - pyproject.toml
       - tools/build_wiki.py
       - tools/build_source.py
