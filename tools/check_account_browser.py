@@ -23,6 +23,18 @@ def main():
     with RunningApp(run / "live", client_factory=QRClient) as server, sync_playwright() as p:
         browser = launch_browser(p)
         context = browser.new_context(viewport={"width":1440,"height":1060}, reduced_motion="reduce")
+        context.add_init_script("""(() => {
+            if (sessionStorage.getItem('acceptance-bootstrap-gated')) return;
+            sessionStorage.setItem('acceptance-bootstrap-gated', '1');
+            const original = window.fetch.bind(window);
+            window.fetch = async (...args) => {
+                const response = await original(...args);
+                if (String(args[0]) === '/api/demo-access') {
+                    await new Promise(resolve => { window.releaseAcceptanceBootstrap = resolve; });
+                }
+                return response;
+            };
+        })();""")
         page = context.new_page()
         page.on("pageerror", lambda error: errors.append(str(error)))
         page.on("request", lambda req: outbound.append(req.url) if urlsplit(req.url).hostname not in (None,"127.0.0.1") else None)
@@ -121,6 +133,12 @@ def main():
             candidate.loop.call_soon_threadsafe(candidate.scan.set)
 
         candidate = begin_qr()
+        page.wait_for_function("typeof window.releaseAcceptanceBootstrap === 'function'")
+        page.evaluate("window.releaseAcceptanceBootstrap()")
+        page.wait_for_load_state("networkidle")
+        expect(page.locator("#qr-state")).to_be_visible()
+        expect(page.locator("#authorized-state")).not_to_be_visible()
+        scenarios.append("late startup response cannot replace an active QR sign-in")
         page.screenshot(path=str(output / "qr-desktop.png"), full_page=True)
         page.set_viewport_size({"width":320,"height":844})
         check_layout(page)

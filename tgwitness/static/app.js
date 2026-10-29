@@ -84,6 +84,7 @@ function sourceTitle(id) { return state.status?.targets.find(x => x.chat_id === 
 let toastTimer;
 let networkLoadedFor=null;
 let qrPending=null,importExpectedId=null,accountImportRevision=0,authMethod="phone";
+let accessStarted=false;
 class StaleView extends Error {constructor(){super("");this.name="StaleView";}}
 function toast(message, error=false) { if(!message)return;const n = $("toast"); n.textContent = message; n.classList.toggle("error", error); show("toast", true); clearTimeout(toastTimer); toastTimer = setTimeout(() => leave("toast"), error ? 9000 : 5000); }
 async function api(path, body, options={}) {
@@ -135,6 +136,7 @@ function lock() {
   $("panel-token").value=""; show("workspace",false); show("gate",true);
 }
 async function unlock() {
+  accessStarted=true;
   await loadProfiles();
   if(!state.profiles.some(p=>p.id===state.profile && !p.error_type))state.profile="default";
   state.status = await json("status");
@@ -2491,9 +2493,12 @@ setInterval(async()=>{
   }catch(e){if(!(e instanceof StaleView))$("status-chip").textContent=tr("Panel connection unavailable");}
 },5000);
 async function bootstrap(){
+  const revision=state.workspaceRevision;
   try{
     const response=await fetch("/api/demo-access",{cache:"no-store",credentials:"omit"});
     const entry=response.ok?await response.json():{};
+    // A late startup response must not reopen an active sign-in or undo a lock.
+    if(accessStarted||revision!==state.workspaceRevision)return;
     if(entry.available){
       state.demoToken=entry.token;state.token=entry.token;state.profile="default";
       show("unlock-form",false);show("open-demo",true);
@@ -2501,6 +2506,7 @@ async function bootstrap(){
       $("gate-help").textContent=tr("For your own groups, run Start.cmd or python start.py using a separate data directory. Demo data cannot be converted into a real investigation.");
     }
   }catch(error){/* Manual access remains available if bootstrap cannot be reached. */}
-  if(state.token)await unlock().catch(error=>{if(!(error instanceof StaleView))lock();});
+  if(!accessStarted&&revision===state.workspaceRevision&&state.token)
+    await unlock().catch(error=>{if(!(error instanceof StaleView))lock();});
 }
 bootstrap();
