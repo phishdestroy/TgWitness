@@ -43,23 +43,7 @@ def quoted_html(text):
 
 
 def ethical_excerpt(ethical):
-    title, _, body = ethical.partition('\n')
-    return f'''#{title}
-
-**Taylor Wessing — Dr. Tobias Schelinski and Dr. Patrick Vincent Zurheide.**
-Our position as the authors of TgWitness. A signature does not make a false
-statement true; a visual redaction does not remove the underlying data.
-
-[MIT License](LICENSE) · [Author statement](docs/ETHICAL-NOTICE.md) · [Full dossier]({SOURCE})
-
-<details>
-<summary><strong>Read the statement</strong> — documents, historical context and MIT permissions</summary>
-
-{body.strip()}
-
-[Technical notice](docs/OPERATOR-INCOMPATIBILITY.md) · [Original NOTICE](NOTICE)
-
-</details>'''
+    return ethical + '\n\n[MIT License](LICENSE) · [Technical notice](docs/OPERATOR-INCOMPATIBILITY.md) · [Original NOTICE](NOTICE)'
 
 
 def excerpt(full, notice, licence, raw):
@@ -106,7 +90,7 @@ The notice adds no runtime access control and no condition to the MIT License.
 def outputs(root):
     full = quoted_html(statement(root))
     ethical = (root / 'docs/ETHICAL-NOTICE.md').read_text(encoding='utf-8').strip()
-    if not ethical.startswith('# ⚖️ Ethical Notice & Historical Continuity\n'):
+    if not ethical.startswith('## ⚖️ Ethical Notice & Historical Continuity\n'):
         raise ValueError('The ethical statement must start with its named heading')
     result = {
         'docs/OPERATOR-INCOMPATIBILITY.md': document(full),
