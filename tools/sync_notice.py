@@ -43,7 +43,16 @@ def quoted_html(text):
 
 
 def ethical_excerpt(ethical):
-    return ethical + '\n\n[MIT License](LICENSE) · [Technical notice](docs/OPERATOR-INCOMPATIBILITY.md) · [Original NOTICE](NOTICE)'
+    heading, body = ethical.split('\n', 1)
+    title = html.escape(heading.removeprefix('## '))
+    return f'''<details>
+<summary><strong>{title}</strong></summary>
+
+{body.strip()}
+
+[MIT License](LICENSE) · [Technical notice](docs/OPERATOR-INCOMPATIBILITY.md) · [Original NOTICE](NOTICE)
+
+</details>'''
 
 
 def excerpt(full, notice, licence, raw):

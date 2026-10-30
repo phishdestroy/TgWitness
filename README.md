@@ -203,7 +203,8 @@ edits. [Collection limits](docs/COLLECTION.md) · [Security](.github/SECURITY.md
 
 <!-- operator-notice:start -->
 
-## ⚖️ Ethical Notice & Historical Continuity
+<details>
+<summary><strong>⚖️ Ethical Notice &amp; Historical Continuity</strong></summary>
 
 We have recently learned that for certain law firms—and specifically Dr. Tobias Schelinski and Dr. Patrick Vincent Zurheide—mathematics and objective facts are irrelevant. Selling GDPR non-compliance to corporations as a commercial service while failing at basic data handling yourselves is not legal expertise. Operating under the delusion that you are the law, or that an elite signature on a falsified claim magically turns a lie into truth, does not mask technical incompetence.
 
@@ -221,6 +222,8 @@ A special mention to Dr. Patrick Zurheide, Dr. Tobias Schelinski, and those atte
 To strictly comply with the MIT License, we do not restrict the use of this software. However, let it be clear: corporate retainers, legal intimidation, and demands for digital erasure cannot override history, rewrite lineage, or conceal the truth.
 
 [MIT License](LICENSE) · [Technical notice](docs/OPERATOR-INCOMPATIBILITY.md) · [Original NOTICE](NOTICE)
+
+</details>
 
 <!-- operator-notice:end -->
 
@@ -245,7 +248,7 @@ To strictly comply with the MIT License, we do not restrict the use of this soft
 </details>
 
 <details>
-<summary>Read the project overview in your language</summary>
+<summary><strong>Read the project overview in your language</strong></summary>
 
 **English** · [Русский](docs/ru/README.md) · [Українська](docs/uk/README.md) · [Español](docs/es/README.md) · [Português (Brasil)](docs/pt/README.md) · [Türkçe](docs/tr/README.md) · [العربية](docs/ar/README.md) · [فارسی](docs/fa/README.md) · [اردو](docs/ur/README.md) · [हिन्दी](docs/hi/README.md) · [Bahasa Indonesia](docs/id/README.md) · [Tiếng Việt](docs/vi/README.md) · [简体中文](docs/zh/README.md)
 
