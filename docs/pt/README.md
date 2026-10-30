@@ -232,7 +232,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 O contêiner é executado como um usuário não root com um sistema de arquivos somente leitura, publica apenas em `127.0.0.1:8787` e mantém todos os dados em um volume nomeado.
 
-**Servidor público com HTTPS automático (Caddy):** copie `.env.example` para `.env`, configure `TGWITNESS_DOMAIN`, aponte o DNS para o servidor, abra as portas TCP 80/443 e execute
+**Servidor público com HTTPS automático (Caddy):** copie `deploy/env.example` para `.env`, configure `TGWITNESS_DOMAIN`, aponte o DNS para o servidor, abra as portas TCP 80/443 e execute
 
 ```sh
 docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
@@ -265,7 +265,7 @@ Os comandos auxiliares `python -m tgwitness…` devem ser executados dentro de `
 | `TGWITNESS_DATA` | Diretório de dados (padrão `data/live`) |
 | `TGWITNESS_TOKEN` | Token de painel fixo em vez do gerado (pelo menos 24 caracteres) |
 | `TGWITNESS_VAULT_KEY_FILE` | Chave mestra externa do cofre para novas instalações |
-| `TGWITNESS_DOMAIN`, `TGWITNESS_IMAGE` | Nome de host HTTPS do Docker e imagem publicada (consulte `.env.example`) |
+| `TGWITNESS_DOMAIN`, `TGWITNESS_IMAGE` | Nome de host HTTPS do Docker e imagem publicada (consulte `deploy/env.example`) |
 | `TGWITNESS_WITNESS_*` | Testemunha independente: coletor, tokens, canal, `_INTERVAL`, `_TIMEOUT`, `_POST` (todos, alterações, problemas), `_TITLE`, `_CONFIG` ([testemunha](../WITNESS.md#options)) |
 
 
@@ -316,7 +316,7 @@ Detalhes: [registro de verificação](../VERIFICATION.md), [status da versão](.
 
 ```sh
 python -m venv .venv && source .venv/bin/activate     # Windows: .venv\Scripts\Activate.ps1
-python -m pip install -c constraints.txt -e ".[dev]"
+python -m pip install -c deploy/constraints.txt -e ".[dev]"
 python -m pytest -q                                    # unit and integration tests
 python -m playwright install chromium
 python tools/check_browser.py                          # end-to-end UI acceptance

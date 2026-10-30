@@ -48,7 +48,7 @@ def main():
         # Repair an environment whose initial pip bootstrap was interrupted.
         step([str(python), "-m", "ensurepip", "--upgrade"], "Could not set up pip in .venv. " + VENV_HINT)
         print("Installing TgWitness dependencies…", flush=True)
-        step([str(python), "-m", "pip", "install", "--disable-pip-version-check", "-c", str(ROOT / "constraints.txt"),
+        step([str(python), "-m", "pip", "install", "--disable-pip-version-check", "-c", str(ROOT / "deploy/constraints.txt"),
               "-e", str(ROOT)],
              "Installing dependencies failed (details above). Check the Internet connection or proxy "
              "(pip honours HTTPS_PROXY) and run the launcher again.")

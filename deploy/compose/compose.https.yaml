@@ -1,4 +1,4 @@
-# Add to either compose.yaml or compose.image.yaml with a second -f argument.
+# Add to either compose.yaml or deploy/compose/compose.image.yaml with a second -f argument.
 services:
   caddy:
     image: caddy:2-alpine

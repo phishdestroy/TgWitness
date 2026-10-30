@@ -19,7 +19,7 @@ services:
     read_only: true
     tmpfs:
       - /tmp:size=512m,mode=1777
-  # Optional independent witness: docker compose -f compose.image.yaml --profile witness up -d
+  # Optional independent witness: docker compose --project-directory . -f deploy/compose/compose.image.yaml --profile witness up -d
   witness:
     image: ${TGWITNESS_IMAGE:?Set TGWITNESS_IMAGE to a published version or digest in .env}
     profiles: ["witness"]

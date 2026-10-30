@@ -232,7 +232,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 کانتینر با کاربر غیر ریشه و سیستم فایل فقط-خواندنی اجرا می‌شود، تنها در `127.0.0.1:8787` منتشر می‌کند و تمام داده‌ها را در یک حجم نام‌گذاری‌شده نگه می‌دارد.
 
-**سرور عمومی با HTTPS خودکار (Caddy):** `.env.example` را به `.env` کپی کنید، `TGWITNESS_DOMAIN` را تنظیم کنید، DNS را به سمت سرور نشانه کنید، پورت‌های TCP 80/443 را باز کنید و اجرا کنید
+**سرور عمومی با HTTPS خودکار (Caddy):** `deploy/env.example` را به `.env` کپی کنید، `TGWITNESS_DOMAIN` را تنظیم کنید، DNS را به سمت سرور نشانه کنید، پورت‌های TCP 80/443 را باز کنید و اجرا کنید
 
 ```sh
 docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
@@ -265,7 +265,7 @@ python start.py [--demo] [--setup-only] [--check [--json]] [--host HOST] [--port
 | `TGWITNESS_DATA` | پوشهٔ داده‌ها (پیش‌فرض `data/live`) |
 | `TGWITNESS_TOKEN` | توکن پنل ثابت به جای توکن تولیدشده (حداقل ۲۴ کاراکتر) |
 | `TGWITNESS_VAULT_KEY_FILE` | کلید اصلی گاوصندوق خارجی برای نصب‌های جدید |
-| `TGWITNESS_DOMAIN`, `TGWITNESS_IMAGE` | نام میزبان HTTPS داکر و تصویر منتشرشده (به `.env.example` مراجعه کنید) |
+| `TGWITNESS_DOMAIN`, `TGWITNESS_IMAGE` | نام میزبان HTTPS داکر و تصویر منتشرشده (به `deploy/env.example` مراجعه کنید) |
 | `TGWITNESS_WITNESS_*` | شاهد مستقل: گردآورنده، توکن‌ها، کانال، `_INTERVAL`، `_TIMEOUT`، `_POST` (تمام، تغییرات، مشکلات)، `_TITLE`، `_CONFIG` ([شاهد](../WITNESS.md#options)) |
 
 
@@ -316,7 +316,7 @@ TgWitness **۰.۶.۱** روی ویندوز ۱۱ با پایتون ۳.۱۲ اجر
 
 ```sh
 python -m venv .venv && source .venv/bin/activate     # Windows: .venv\Scripts\Activate.ps1
-python -m pip install -c constraints.txt -e ".[dev]"
+python -m pip install -c deploy/constraints.txt -e ".[dev]"
 python -m pytest -q                                    # unit and integration tests
 python -m playwright install chromium
 python tools/check_browser.py                          # end-to-end UI acceptance

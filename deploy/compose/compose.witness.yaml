@@ -6,7 +6,9 @@
 name: tgwitness-witness
 services:
   witness:
-    build: .
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile
     restart: unless-stopped
     command: ["python", "-m", "tgwitness.witness", "run"]
     environment:

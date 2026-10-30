@@ -1,8 +1,21 @@
-![Know what the terms mean — A shared vocabulary for observations and evidence.](../assets/presentation/wiki-glossary.svg)
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../assets/presentation/wiki-glossary-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/wiki-glossary-static.svg">
+  <source media="(max-width: 640px)" srcset="../assets/presentation/wiki-glossary-mobile.svg">
+  <img src="../assets/presentation/wiki-glossary.svg" width="1200" alt="Know what the terms mean. A shared vocabulary for observations and evidence.">
+</picture>
 
 # Glossary
 
-[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../.github/SUPPORT.md)
+**05 · FIND AN ANSWER** · [All guides](Home.md) · [Get help](../../.github/SUPPORT.md)
+
+<details>
+<summary>On this page</summary>
+
+
+
+</details>
+
 
 
 | Term | Meaning in TgWitness |

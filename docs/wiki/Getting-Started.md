@@ -1,8 +1,24 @@
-![Your first capture — Install. Explore the demo. Check one complete sequence.](../assets/presentation/wiki-getting-started.svg)
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../assets/presentation/wiki-getting-started-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/wiki-getting-started-static.svg">
+  <source media="(max-width: 640px)" srcset="../assets/presentation/wiki-getting-started-mobile.svg">
+  <img src="../assets/presentation/wiki-getting-started.svg" width="1200" alt="Your first capture. Install, explore the demo and connect your workspace.">
+</picture>
 
 # Getting started
 
-[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../.github/SUPPORT.md)
+**01 · START HERE** · [All guides](Home.md) · [Get help](../../.github/SUPPORT.md)
+
+<details>
+<summary>On this page</summary>
+
+- [1. Choose an installation](#1-choose-an-installation)
+- [2. Explore without an account](#2-explore-without-an-account)
+- [3. Start your real workspace](#3-start-your-real-workspace)
+- [4. Check your installation](#4-check-your-installation)
+
+</details>
+
 
 
 ## 1. Choose an installation

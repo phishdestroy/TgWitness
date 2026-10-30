@@ -1,13 +1,36 @@
 """Launch scripts must preserve arguments and fail before claiming readiness."""
 import json
 import os
+import runpy
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def test_native_setup_uses_shipped_deployment_constraints(tmp_path, monkeypatch):
+    project = tmp_path / "TgWitness source"
+    (project / "deploy").mkdir(parents=True)
+    shutil.copyfile(ROOT / "start.py", project / "start.py")
+    shutil.copyfile(ROOT / "deploy/constraints.txt", project / "deploy/constraints.txt")
+    (project / "pyproject.toml").write_text('[project]\nversion = "0.7.0"\n', encoding="utf-8")
+    python = project / ".venv" / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
+    python.parent.mkdir(parents=True)
+    python.touch()
+    launcher = runpy.run_path(str(project / "start.py"))
+    calls = []
+    monkeypatch.setitem(launcher["main"].__globals__, "step", lambda command, failure: calls.append(command))
+    monkeypatch.setattr(sys, "argv", [str(project / "start.py"), "--setup-only"])
+    launcher["main"]()
+    install = next(command for command in calls if "pip" in command)
+    constraints = Path(install[install.index("-c") + 1])
+    assert constraints == project / "deploy/constraints.txt"
+    assert constraints.is_file() and not (project / "constraints.txt").exists()
+    assert (project / ".venv/.tgwitness-ready").read_text() == "0.7.0"
 
 
 def shell():

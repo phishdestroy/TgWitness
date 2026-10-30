@@ -232,7 +232,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 Konteyner, salt okunur bir dosya sistemiyle root olmayan bir kullanıcı olarak çalışır, yalnızca `127.0.0.1:8787` adresine yayın yapar ve tüm verileri adlandırılmış bir birimde tutar.
 
-**Otomatik HTTPS (Caddy) özellikli genel sunucu:** `.env.example`'yi `.env`'ye kopyalayın, `TGWITNESS_DOMAIN`'yi ayarlayın, DNS'yi sunucuya yönlendirin, TCP 80/443 bağlantı noktalarını açın ve çalıştırın
+**Otomatik HTTPS (Caddy) özellikli genel sunucu:** `deploy/env.example`'yi `.env`'ye kopyalayın, `TGWITNESS_DOMAIN`'yi ayarlayın, DNS'yi sunucuya yönlendirin, TCP 80/443 bağlantı noktalarını açın ve çalıştırın
 
 ```sh
 docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
@@ -265,7 +265,7 @@ Yardımcı `python -m tgwitness…` komutları, `.venv` (Windows'ta `.venv\Scrip
 | `TGWITNESS_DATA` | Veri dizini (varsayılan `data/live`) |
 | `TGWITNESS_TOKEN` | Oluşturulan token yerine sabit panel tokeni (en az 24 karakter) |
 | `TGWITNESS_VAULT_KEY_FILE` | Yeni kurulumlar için harici kasa ana anahtarı |
-| `TGWITNESS_DOMAIN`, `TGWITNESS_IMAGE` | Docker HTTPS ana bilgisayar adı ve yayınlanan görüntü (`.env.example` adresine bakın) |
+| `TGWITNESS_DOMAIN`, `TGWITNESS_IMAGE` | Docker HTTPS ana bilgisayar adı ve yayınlanan görüntü (`deploy/env.example` adresine bakın) |
 | `TGWITNESS_WITNESS_*` | Bağımsız tanık: toplayıcı, jetonlar, kanal, `_INTERVAL`, `_TIMEOUT`, `_POST` (tümü, değişiklikler, sorunlar), `_TITLE`, `_CONFIG` ([tanık](../WITNESS.md#options)) |
 
 
@@ -316,7 +316,7 @@ Ayrıntılar: [doğrulama kaydı](../VERIFICATION.md), [sürüm durumu](../inter
 
 ```sh
 python -m venv .venv && source .venv/bin/activate     # Windows: .venv\Scripts\Activate.ps1
-python -m pip install -c constraints.txt -e ".[dev]"
+python -m pip install -c deploy/constraints.txt -e ".[dev]"
 python -m pytest -q                                    # unit and integration tests
 python -m playwright install chromium
 python tools/check_browser.py                          # end-to-end UI acceptance

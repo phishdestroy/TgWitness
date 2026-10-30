@@ -1,8 +1,25 @@
-![Hand over the evidence — Signed records, preserved files and a trusted fingerprint.](../assets/presentation/wiki-exports-and-verification.svg)
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../assets/presentation/wiki-exports-and-verification-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/wiki-exports-and-verification-static.svg">
+  <source media="(max-width: 640px)" srcset="../assets/presentation/wiki-exports-and-verification-mobile.svg">
+  <img src="../assets/presentation/wiki-exports-and-verification.svg" width="1200" alt="Hand over the evidence. Choose the output. Retain the key. Verify the record.">
+</picture>
 
 # Exports and verification
 
-[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../.github/SUPPORT.md)
+**02 · INVESTIGATE AND EXPORT** · [All guides](Home.md) · [Get help](../../.github/SUPPORT.md)
+
+<details>
+<summary>On this page</summary>
+
+- [See why the checks fit together](#see-why-the-checks-fit-together)
+- [Choose the right output](#choose-the-right-output)
+- [Make a handoff](#make-a-handoff)
+- [Verify independently](#verify-independently)
+- [Download a large export](#download-a-large-export)
+
+</details>
+
 
 
 ## See why the checks fit together

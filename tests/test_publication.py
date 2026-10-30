@@ -13,7 +13,7 @@ def public_tree(root):
         (root / name).write_text("Synthetic public source\n", encoding="utf-8")
 
 
-@pytest.mark.parametrize("filename", ["README.md", "Dockerfile", "constraints.txt"])
+@pytest.mark.parametrize("filename", ["README.md", "deploy/Dockerfile", "deploy/constraints.txt"])
 def test_publication_finds_secret_without_printing_its_value(tmp_path, filename):
     public_tree(tmp_path)
     secret = "ghp_" + "a" * 36

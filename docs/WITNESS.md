@@ -117,7 +117,7 @@ docker compose --profile witness up -d
 docker compose logs witness     # prints the witness key fingerprint
 ```
 
-With a published image use `docker compose -f compose.image.yaml --profile witness up -d`.
+With a published image use `docker compose --project-directory . -f deploy/compose/compose.image.yaml --profile witness up -d`.
 
 **On someone else's server** (a real independent witness): copy the repository there, set
 `TGWITNESS_WITNESS_COLLECTOR=https://your-collector.example.org` plus the three values above

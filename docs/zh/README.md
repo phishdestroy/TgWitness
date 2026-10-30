@@ -232,7 +232,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 该容器以非 root 用户身份运行，采用只读文件系统，仅发布至 `127.0.0.1:8787`，并将所有数据存储在命名卷中。
 
-**支持自动 HTTPS（Caddy）的公共服务器：**将 `.env.example` 复制到 `.env`，配置 `TGWITNESS_DOMAIN`，将 DNS 指向该服务器，开放 TCP 80/443 端口并运行
+**支持自动 HTTPS（Caddy）的公共服务器：**将 `deploy/env.example` 复制到 `.env`，配置 `TGWITNESS_DOMAIN`，将 DNS 指向该服务器，开放 TCP 80/443 端口并运行
 
 ```sh
 docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
@@ -265,7 +265,7 @@ python start.py [--demo] [--setup-only] [--check [--json]] [--host HOST] [--port
 | `TGWITNESS_DATA` | 数据目录（默认 `data/live`） |
 | `TGWITNESS_TOKEN` | 使用固定的面板令牌代替生成的令牌（至少 24 个字符） |
 | `TGWITNESS_VAULT_KEY_FILE` | 新安装所需的外部保险库主密钥 |
-| `TGWITNESS_DOMAIN`, `TGWITNESS_IMAGE` | Docker HTTPS 主机名及已发布的镜像（参见 `.env.example`） |
+| `TGWITNESS_DOMAIN`, `TGWITNESS_IMAGE` | Docker HTTPS 主机名及已发布的镜像（参见 `deploy/env.example`） |
 | `TGWITNESS_WITNESS_*` | 独立见证人：收集器、令牌、频道、`_INTERVAL`、`_TIMEOUT`、`_POST`（全部、变更、问题）、`_TITLE`、`_CONFIG`（[见证人](../WITNESS.md#options)） |
 
 
@@ -316,7 +316,7 @@ TgWitness **0.6.1** 可在搭载 Python 3.12 的 Windows 11 系统上运行。�
 
 ```sh
 python -m venv .venv && source .venv/bin/activate     # Windows: .venv\Scripts\Activate.ps1
-python -m pip install -c constraints.txt -e ".[dev]"
+python -m pip install -c deploy/constraints.txt -e ".[dev]"
 python -m pytest -q                                    # unit and integration tests
 python -m playwright install chromium
 python tools/check_browser.py                          # end-to-end UI acceptance

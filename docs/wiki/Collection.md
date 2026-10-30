@@ -1,11 +1,29 @@
-![Choose what to preserve — Sources, captured versions and the gaps between them.](../assets/presentation/wiki-collection.svg)
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../assets/presentation/wiki-collection-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/wiki-collection-static.svg">
+  <source media="(max-width: 640px)" srcset="../assets/presentation/wiki-collection-mobile.svg">
+  <img src="../assets/presentation/wiki-collection.svg" width="1200" alt="Choose what to preserve. Sources, captured changes and coverage.">
+</picture>
 
 # Collection and coverage
 
-[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../.github/SUPPORT.md)
+**01 · CONNECT AND CAPTURE** · [All guides](Home.md) · [Get help](../../.github/SUPPORT.md)
+
+<details>
+<summary>On this page</summary>
+
+- [Select the scope](#select-the-scope)
+- [Check capture with a controlled conversation](#check-capture-with-a-controlled-conversation)
+- [Understand the record](#understand-the-record)
+- [Pause, lock and restart](#pause-lock-and-restart)
+
+</details>
+
 
 
 Observation records updates available to the connected account. TgWitness cannot read chats the account cannot access or reconstruct content that disappeared before it was observed.
+
+<p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-feature-history-static.svg"><img src="../assets/presentation/readme-feature-history.svg" width="420" alt="Illustrated workflow: captured versions remain in the journal."></picture></p>
 
 ## Select the scope
 

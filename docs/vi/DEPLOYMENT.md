@@ -80,7 +80,7 @@ Quá trình này sẽ tạo ra một khối lượng lưu trữ cố định có
 
 Cả hai tệp Compose cơ sở đều sử dụng tên dự án `tgwitness`; do đó, việc giải nén bản phát hành mới vào một thư mục khác sẽ không tự động chọn một khối dữ liệu mới. Vui lòng chỉ duy trì một bản triển khai đang hoạt động cho dự án đó. Đối với các cài đặt độc lập, hãy sử dụng một `docker compose -p NAME ...` duy nhất và cổng máy chủ khác, đồng thời giữ nguyên cả hai khi cập nhật. Đối với bản triển khai cũ hơn sử dụng tên dự án khác, hãy tiếp tục sử dụng tên ban đầu của nó với `-p`; `docker compose ls` liệt kê các dự án hiện có.
 
-Vui lòng sao chép `.env.example` vào `.env` và thay đổi `TGWITNESS_PORT` để sử dụng cổng loopback khác. Ví dụ: `TGWITNESS_PORT=8788` sẽ hiển thị bảng điều khiển tại `http://127.0.0.1:8788`; container vẫn lắng nghe trên cổng 8787. `.env` bị Git bỏ qua.
+Vui lòng sao chép `deploy/env.example` vào `.env` và thay đổi `TGWITNESS_PORT` để sử dụng cổng loopback khác. Ví dụ: `TGWITNESS_PORT=8788` sẽ hiển thị bảng điều khiển tại `http://127.0.0.1:8788`; container vẫn lắng nghe trên cổng 8787. `.env` bị Git bỏ qua.
 
 Lấy mã thông báo ban đầu:
 
@@ -99,7 +99,7 @@ docker compose up -d --wait
 
 `restart: unless-stopped` sẽ khởi động lại trình thu thập dữ liệu sau khi xảy ra sự cố hoặc khi daemon Docker được khởi động lại. Trên máy chủ Linux, hãy kích hoạt Docker khi khởi động bằng trình quản lý dịch vụ của hệ điều hành, thường là `sudo systemctl enable --now docker`. Trên Windows/macOS, hãy bật cài đặt “khởi động khi đăng nhập” của Docker Desktop. Việc đăng xuất khỏi máy tính để bàn, chuyển sang chế độ ngủ hoặc daemon Docker bị dừng có thể làm gián đoạn quá trình thu thập dữ liệu. Một container bị dừng rõ ràng sẽ vẫn ở trạng thái dừng cho đến khi quý vị khởi động lại.
 
-Trong cấu hình ví dụ, dung lượng của phân vùng /tmp được giới hạn ở mức 512 MiB. Thay vào đó, quá trình xuất dữ liệu sử dụng `temporary-exports/` của từng không gian làm việc trên phân vùng /data lưu trữ vĩnh viễn. Vui lòng dành dung lượng tại đó cho các tác vụ xuất dữ liệu đồng thời, sự gia tăng dung lượng của nhật ký/WAL, tệp phương tiện và bản sao lưu. Trình khởi chạy và Docker sử dụng tệp constraints.txt để cố định các phiên bản phụ thuộc thời gian chạy đã được xác nhận. Đây không phải là chuỗi cung ứng được khóa bằng băm: hình ảnh cơ sở Python và các gói phần mềm vẫn cần phải trải qua quá trình xác nhận phiên bản độc lập.
+Trong cấu hình ví dụ, dung lượng của phân vùng /tmp được giới hạn ở mức 512 MiB. Thay vào đó, quá trình xuất dữ liệu sử dụng `temporary-exports/` của từng không gian làm việc trên phân vùng /data lưu trữ vĩnh viễn. Vui lòng dành dung lượng tại đó cho các tác vụ xuất dữ liệu đồng thời, sự gia tăng dung lượng của nhật ký/WAL, tệp phương tiện và bản sao lưu. Trình khởi chạy và Docker sử dụng tệp deploy/constraints.txt để cố định các phiên bản phụ thuộc thời gian chạy đã được xác nhận. Đây không phải là chuỗi cung ứng được khóa bằng băm: hình ảnh cơ sở Python và các gói phần mềm vẫn cần phải trải qua quá trình xác nhận phiên bản độc lập.
 
 Xin đừng sử dụng lệnh `docker compose down -v` trừ khi quý vị có ý định xóa sổ nhật ký và các khóa. Báo cáo tình trạng container phản ánh tính khả dụng của máy chủ web, chứ không phải việc thu thập dữ liệu Telegram thành công. Vui lòng kiểm tra trạng thái bộ thu thập, tín hiệu hoạt động, các lỗi và các sự kiện phạm vi phủ sóng trên bảng điều khiển.
 
@@ -108,7 +108,7 @@ Xin đừng sử dụng lệnh `docker compose down -v` trừ khi quý vị có 
 Dịch vụ tùy chọn `witness` sẽ chạy một [chứng nhân độc lập](../WITNESS.md) trong container riêng của nó, với khóa và nhật ký riêng trong khối lượng `witness-data` và chỉ có mã thông báo chứng nhân chỉ đọc dành cho bộ thu thập. Quý vị hãy tạo mã thông báo trên trang **Chứng nhân** của bảng điều khiển, thêm mã thông báo này cùng với mã thông báo bot và kênh vào `.env`, sau đó khởi động cấu hình:
 
 ```sh
-docker compose --profile witness up -d          # compose.image.yaml: same flag
+docker compose --profile witness up -d          # deploy/compose/compose.image.yaml: same flag
 docker compose logs witness                     # witness key fingerprint
 ```
 
@@ -118,7 +118,7 @@ Dịch vụ này kết nối với bộ thu thập dữ liệu trong mạng Comp
 
 Tài liệu này sẽ được cung cấp sau khi [quy trình phát hành](#các-bản-phát-hành-tự-động-trên-github) hoàn tất thành công và cấu hình gói GHCR công khai được thiết lập. Tên/chủ sở hữu của kho lưu trữ không được mã hóa cứng trong cây nguồn này. Vui lòng sử dụng hình ảnh được hiển thị trong phần tóm tắt quy trình phát hành của phiên bản đó.
 
-Sao chép `.env.example` vào `.env`. Đặt `TGWITNESS_IMAGE` thành phiên bản đã được xuất bản, sử dụng đường dẫn kho lưu trữ **viết thường**, ví dụ:
+Sao chép `deploy/env.example` vào `.env`. Đặt `TGWITNESS_IMAGE` thành phiên bản đã được xuất bản, sử dụng đường dẫn kho lưu trữ **viết thường**, ví dụ:
 
 ```dotenv
 TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.0
@@ -128,9 +128,9 @@ TGWITNESS_PORT=8787
 Vui lòng chạy tệp này một cách độc lập, thay vì sử dụng thẻ `compose.yaml`:
 
 ```sh
-docker compose -f compose.image.yaml pull
-docker compose -f compose.image.yaml up -d --wait
-docker compose -f compose.image.yaml exec tgwitness cat /data/panel-token.txt
+docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
 Không cần mã nguồn, Python hay trình biên dịch trên máy chủ. Quy trình phát hành nhắm đến các container Linux AMD64 và ARM64, bao gồm cả máy ảo Linux của Docker Desktop. Vui lòng sử dụng thẻ phiên bản hoặc thẻ `ghcr.io/owner/repository@sha256:...` từ phần tóm tắt quy trình. Không có cấu hình nào cho việc di chuyển thẻ `latest` hay nâng cấp ứng dụng tự động. Các biến thể hình ảnh và mã nguồn sẽ sử dụng cùng một khối lượng dữ liệu khi tên dự án của chúng trùng khớp.
@@ -139,7 +139,7 @@ Không cần mã nguồn, Python hay trình biên dịch trên máy chủ. Quy t
 
 Vui lòng sử dụng một máy chủ chạy Docker, một tên miền do quý vị quản lý và bộ nhớ cục bộ lâu dài. Hãy định hướng các bản ghi A/AAAA của tên miền đến máy chủ; chỉ công bố bản ghi AAAA nếu máy chủ đó hỗ trợ IPv6. Cho phép kết nối TCP đến qua cổng 80 và 443, cũng như kết nối ra ngoài qua DNS/HTTPS để cấp phát chứng chỉ. Các dịch vụ khác không được sử dụng các cổng này trước đó.
 
-Sao chép `.env.example` vào `.env` và thiết lập tên máy chủ, không kèm theo lược đồ hoặc đường dẫn:
+Sao chép `deploy/env.example` vào `.env` và thiết lập tên máy chủ, không kèm theo lược đồ hoặc đường dẫn:
 
 ```dotenv
 TGWITNESS_DOMAIN=watch.your-domain.org
@@ -152,7 +152,11 @@ docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --buil
 docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
-Đối với hình ảnh đã được đăng tải, vui lòng sử dụng thẻ `compose.image.yaml` làm tệp đầu tiên thay thế. Vui lòng giữ nguyên cả hai tham số `-f` để sử dụng cho các lệnh trạng thái, nhật ký, cập nhật và dừng sau này.
+```sh
+docker compose --project-directory . -f deploy/compose/compose.image.yaml -f deploy/compose/compose.https.yaml up -d --wait
+```
+
+Đối với hình ảnh đã được đăng tải, vui lòng sử dụng thẻ `deploy/compose/compose.image.yaml` làm tệp đầu tiên thay thế. Vui lòng giữ nguyên cả hai tham số `-f` để sử dụng cho các lệnh trạng thái, nhật ký, cập nhật và dừng sau này.
 
 Caddy thực hiện việc lấy và gia hạn chứng chỉ, chuyển hướng HTTP sang HTTPS, đồng thời chuyển tiếp các yêu cầu đến bộ thu thập trên mạng Compose riêng tư. Trạng thái chứng chỉ được lưu trữ trên một khối lượng lưu trữ bền vững riêng biệt. Cổng máy chủ trực tiếp của bộ thu thập vẫn chỉ hoạt động ở chế độ loopback. Cấu hình Caddy được cung cấp không kích hoạt tính năng ghi nhật ký truy cập.
 
@@ -184,8 +188,8 @@ docker compose up -d --build --wait
 Để triển khai bằng hình ảnh, quý vị hãy thay đổi `TGWITNESS_IMAGE` thành phiên bản mong muốn, sau đó thực thi lệnh:
 
 ```sh
-docker compose -f compose.image.yaml pull
-docker compose -f compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
 ```
 
 Vui lòng sử dụng (các) tệp Compose của bản cài đặt để thực hiện các lệnh dừng/sao chép nêu trên. Vui lòng giữ nguyên `.env`, cấu hình tùy chỉnh và tên dự án. `down` giữ lại các khối lượng có tên; **`down -v` sẽ xóa chúng**. Không sao chép `.venv` giữa các hệ điều hành hoặc các phiên bản Python. Để cập nhật bản gốc, hãy dừng TgWitness, sao lưu toàn bộ thư mục dữ liệu của nó, thay thế các tệp nguồn và chạy `python start.py --setup-only` trước khi khởi chạy.

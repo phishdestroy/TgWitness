@@ -1,8 +1,34 @@
-![Straight to the answer — Accounts, capture, evidence and everyday operation.](../assets/presentation/wiki-faq.svg)
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../assets/presentation/wiki-faq-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/wiki-faq-static.svg">
+  <source media="(max-width: 640px)" srcset="../assets/presentation/wiki-faq-mobile.svg">
+  <img src="../assets/presentation/wiki-faq.svg" width="1200" alt="Straight to the answer. Accounts, capture, evidence and everyday operation.">
+</picture>
 
 # Frequently asked questions
 
-[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../.github/SUPPORT.md)
+**05 · FIND AN ANSWER** · [All guides](Home.md) · [Get help](../../.github/SUPPORT.md)
+
+<details>
+<summary>On this page</summary>
+
+- [Does TgWitness recover messages deleted before it started?](#does-tgwitness-recover-messages-deleted-before-it-started)
+- [Does a valid signature prove Telegram sent the message?](#does-a-valid-signature-prove-telegram-sent-the-message)
+- [Is every Telegram event guaranteed to arrive?](#is-every-telegram-event-guaranteed-to-arrive)
+- [Can I use a bot token instead of a user account?](#can-i-use-a-bot-token-instead-of-a-user-account)
+- [Do I need my own API ID and API hash?](#do-i-need-my-own-api-id-and-api-hash)
+- [Can several people have separate access permissions?](#can-several-people-have-separate-access-permissions)
+- [Are messages and attachments encrypted on disk?](#are-messages-and-attachments-encrypted-on-disk)
+- [Does Lock stop collection?](#does-lock-stop-collection)
+- [Why can two accounts show different histories?](#why-can-two-accounts-show-different-histories)
+- [Does a public proxy failure switch me to a direct connection?](#does-a-public-proxy-failure-switch-me-to-a-direct-connection)
+- [Are an evidence export and a backup interchangeable?](#are-an-evidence-export-and-a-backup-interchangeable)
+- [Is a witness on my server independent?](#is-a-witness-on-my-server-independent)
+- [Is Linux, macOS or Docker support already fully qualified?](#is-linux-macos-or-docker-support-already-fully-qualified)
+- [How do I report a problem or contribute?](#how-do-i-report-a-problem-or-contribute)
+
+</details>
+
 
 
 ## Does TgWitness recover messages deleted before it started?

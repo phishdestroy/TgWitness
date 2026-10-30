@@ -263,7 +263,7 @@ git -C /opt/tgwitness/source fetch -q --depth 1 "$REPOSITORY" "$COMMIT"
 git -C /opt/tgwitness/source checkout -q --detach FETCH_HEAD
 test "$(git -C /opt/tgwitness/source rev-parse HEAD)" = "$COMMIT"
 python3 -m venv /opt/tgwitness/.venv
-/opt/tgwitness/.venv/bin/pip install --no-cache-dir -c /opt/tgwitness/source/constraints.txt /opt/tgwitness/source
+/opt/tgwitness/.venv/bin/pip install --no-cache-dir -c /opt/tgwitness/source/deploy/constraints.txt /opt/tgwitness/source
 """
 
 START = """\

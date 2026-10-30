@@ -1,8 +1,25 @@
-![Find the missing step — Check the symptom. Locate the cause. Verify recovery.](../assets/presentation/wiki-troubleshooting.svg)
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../assets/presentation/wiki-troubleshooting-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/wiki-troubleshooting-static.svg">
+  <source media="(max-width: 640px)" srcset="../assets/presentation/wiki-troubleshooting-mobile.svg">
+  <img src="../assets/presentation/wiki-troubleshooting.svg" width="1200" alt="Find the cause. Check the symptom, follow the record and confirm recovery.">
+</picture>
 
 # Troubleshooting
 
-[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../.github/SUPPORT.md)
+**05 · FIND AN ANSWER** · [All guides](Home.md) · [Get help](../../.github/SUPPORT.md)
+
+<details>
+<summary>On this page</summary>
+
+- [Find the failing step](#find-the-failing-step)
+- [Check local prerequisites](#check-local-prerequisites)
+- [Telegram asks for a pause](#telegram-asks-for-a-pause)
+- [Uncertain action result](#uncertain-action-result)
+- [Still stuck?](#still-stuck)
+
+</details>
+
 
 
 Record the installation method, version, affected workspace and exact step before changing settings. Use a controlled test chat to check recovery.

@@ -3,27 +3,36 @@
 - [Home](Home.md)
 - [Getting started](Getting-Started.md)
 
-**Your workspace**
+**01 · Connect and capture**
 
 - [Accounts](Accounts.md)
 - [Proxies](Proxies.md)
 - [Collection](Collection.md)
 
-**Your record**
+**02 · Investigate and export**
 
+- [Export one chat](Chat-Export.md)
 - [Investigations](Investigations.md)
 - [Exports and verification](Exports-and-Verification.md)
+
+**03 · Independent checks**
+
 - [Witness and Proof](Witness-and-Proof.md)
 
-**Run and maintain**
+**04 · Run and protect**
 
 - [Server and Docker](Server-and-Docker.md)
+- [Notifications](Notifications.md)
+- [Encrypted off-site copy](Off-site-Copy.md)
 - [Backup and recovery](Backup-and-Recovery.md)
+
+**05 · Find an answer**
+
 - [Troubleshooting](Troubleshooting.md)
 - [FAQ](FAQ.md)
 - [Glossary](Glossary.md)
 
-**Project**
+**Project and author**
 
 - [Ethical notice & historical continuity](Operator-Incompatibility.md)
 - [Our position on Taylor Wessing](../TAYLOR-WESSING-EXCLUSION.md)

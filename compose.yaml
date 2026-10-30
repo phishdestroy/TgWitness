@@ -1,7 +1,9 @@
 name: tgwitness
 services:
   tgwitness:
-    build: .
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile
     environment:
       TGWITNESS_PROXY_FEED_PROXY: ${TGWITNESS_PROXY_FEED_PROXY:-}
     restart: unless-stopped
@@ -21,7 +23,9 @@ services:
   # Optional independent witness: docker compose --profile witness up -d
   # Its own key and journal in its own volume; only a read-only witness token for the collector.
   witness:
-    build: .
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile
     profiles: ["witness"]
     restart: unless-stopped
     command: ["python", "-m", "tgwitness.witness", "run"]

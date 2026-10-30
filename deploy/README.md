@@ -2,6 +2,12 @@
 
 # Background services and HTTPS
 
+Deployment files live here: [`Dockerfile`](Dockerfile), the shared
+[`dependency constraints`](constraints.txt), the [`environment example`](env.example)
+and [`Compose configurations`](compose/README.md). Copy `deploy/env.example` to
+`.env` in the project root when configuration is needed. The root `compose.yaml`
+still supports `docker compose up -d --build --wait`.
+
 For the shortest server setup, use Docker Compose with automatic restart and the
 optional [automatic HTTPS overlay](../docs/DEPLOYMENT.md#automatic-https-on-a-server).
 Set your domain in `.env`, then run from the project root:

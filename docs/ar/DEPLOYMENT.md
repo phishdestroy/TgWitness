@@ -80,7 +80,7 @@ docker compose up -d --build --wait
 
 يستخدم كل من ملفَي Compose الأساسيين اسم المشروع `tgwitness`، لذا فإن استخراج إصدار جديد إلى دليل آخر لا يؤدي تلقائيًا إلى اختيار وحدة تخزين بيانات جديدة. احتفظ بنشر واحد نشط فقط لهذا المشروع. بالنسبة للتثبيتات المستقلة، استخدم `docker compose -p NAME ...` فريدًا ومنفذ مضيف مختلف، واحتفظ بكليهما عند التحديثات. بالنسبة لنشر أقدم يستخدم اسم مشروع مختلف، استمر في استخدام اسمه الأصلي مع `-p`؛ `docker compose ls` يسرد المشاريع الموجودة.
 
-انسخ `.env.example` إلى `.env` وقم بتغيير `TGWITNESS_PORT` لاستخدام منفذ loopback مختلف. على سبيل المثال، `TGWITNESS_PORT=8788` يعرض اللوحة على `http://127.0.0.1:8788`؛ ولا يزال الحاوية تستمع على المنفذ 8787. `.env` يتم تجاهله في Git.
+انسخ `deploy/env.example` إلى `.env` وقم بتغيير `TGWITNESS_PORT` لاستخدام منفذ loopback مختلف. على سبيل المثال، `TGWITNESS_PORT=8788` يعرض اللوحة على `http://127.0.0.1:8788`؛ ولا يزال الحاوية تستمع على المنفذ 8787. `.env` يتم تجاهله في Git.
 
 استرداد الرمز المميز الأولي:
 
@@ -99,7 +99,7 @@ docker compose up -d --wait
 
 `restart: unless-stopped` يعيد تشغيل المجمع بعد حدوث عطل أو إعادة تشغيل خدمة Docker الخلفية. على خادم Linux، قم بتمكين Docker عند بدء التشغيل باستخدام مدير الخدمات الخاص بنظام التشغيل الخاص بك، وعادةً ما يكون `sudo systemctl enable --now docker`. على أنظمة Windows/macOS، قم بتمكين إعداد «البدء عند تسجيل الدخول» في Docker Desktop. قد يؤدي تسجيل الخروج من سطح المكتب أو وضع السكون أو توقف خدمة Docker الخلفية إلى مقاطعة عملية التجميع. تظل الحاوية التي تم إيقافها بشكل صريح متوقفة حتى تقوم بتشغيلها مرة أخرى.
 
-يبلغ الحد الأقصى لحجم وحدة التخزين /tmp 512 ميغابايت في التكوين المثال. يستخدم بناء التصدير بدلاً من ذلك العنصر `temporary-exports/` الخاص بكل مساحة عمل في /data الدائمة. احجز مساحة هناك لعمليات التصدير المتزامنة، ونمو سجلات/WAL، والملفات الوسائطية والنسخ الاحتياطية. يستخدم المشغل وDocker ملف constraints.txt لتثبيت إصدارات التبعيات المؤهلة لوقت التشغيل. هذه ليست سلسلة توريد مقفلة بالتجزئة: لا تزال الصورة الأساسية لـ Python ومكونات الحزمة تتطلب تأهيلًا مستقلًا للإصدار.
+يبلغ الحد الأقصى لحجم وحدة التخزين /tmp 512 ميغابايت في التكوين المثال. يستخدم بناء التصدير بدلاً من ذلك العنصر `temporary-exports/` الخاص بكل مساحة عمل في /data الدائمة. احجز مساحة هناك لعمليات التصدير المتزامنة، ونمو سجلات/WAL، والملفات الوسائطية والنسخ الاحتياطية. يستخدم المشغل وDocker ملف deploy/constraints.txt لتثبيت إصدارات التبعيات المؤهلة لوقت التشغيل. هذه ليست سلسلة توريد مقفلة بالتجزئة: لا تزال الصورة الأساسية لـ Python ومكونات الحزمة تتطلب تأهيلًا مستقلًا للإصدار.
 
 لا تستخدم الأمر docker compose down -v إلا إذا كنت تنوي إتلاف المجلة والمفاتيح. تُبلغ حالة الحاوية عن توفر خادم الويب، وليس عن نجاح التقاط Telegram. افحص حالة المجمع في اللوحة، ونبضه، والأخطاء، وأحداث التغطية.
 
@@ -108,7 +108,7 @@ docker compose up -d --wait
 تعمل الخدمة الاختيارية `witness` على تشغيل [شاهد مستقل](../WITNESS.md) في حاوية خاصة بها، مع مفتاحها الخاص ودفترها في وحدة التخزين `witness-data`، مع وجود رمز شاهد للقارئ فقط. قم بإنشاء الرمز في صفحة **«Witness**» (الشاهد) باللوحة، وأضفه مع رمز الروبوت والقناة إلى `.env`، ثم ابدأ تشغيل الملف الشخصي:
 
 ```sh
-docker compose --profile witness up -d          # compose.image.yaml: same flag
+docker compose --profile witness up -d          # deploy/compose/compose.image.yaml: same flag
 docker compose logs witness                     # witness key fingerprint
 ```
 
@@ -118,7 +118,7 @@ docker compose logs witness                     # witness key fingerprint
 
 يصبح هذا متاحًا بعد إتمام [سير عمل الإصدار](#الإصدارات-الآلية-على-github) بنجاح وتكوين حزمة GHCR العامة. لا يتم ترميز اسم/مالك المستودع بشكل ثابت في شجرة المصدر هذه. استخدم الصورة الموضحة في ملخص سير عمل ذلك الإصدار.
 
-انسخ `.env.example` إلى `.env`. اضبط `TGWITNESS_IMAGE` على الإصدار المنشور، باستخدام مسار المستودع **بالأحرف الصغيرة**، على سبيل المثال:
+انسخ `deploy/env.example` إلى `.env`. اضبط `TGWITNESS_IMAGE` على الإصدار المنشور، باستخدام مسار المستودع **بالأحرف الصغيرة**، على سبيل المثال:
 
 ```dotenv
 TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.0
@@ -128,9 +128,9 @@ TGWITNESS_PORT=8787
 قم بتشغيل هذا الملف بمفرده، بدلاً من `compose.yaml`:
 
 ```sh
-docker compose -f compose.image.yaml pull
-docker compose -f compose.image.yaml up -d --wait
-docker compose -f compose.image.yaml exec tgwitness cat /data/panel-token.txt
+docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
 لا حاجة إلى بناء المصدر أو لغة Python أو مُجمِّع على المضيف. يستهدف سير عمل الإصدار حاويات Linux AMD64 وARM64، بما في ذلك الآلة الافتراضية Linux في Docker Desktop. استخدم علامة الإصدار أو `ghcr.io/owner/repository@sha256:...` من ملخص سير العمل. لم يتم تكوين أي علامة `latest` متحركة أو ترقية تطبيق غير مراقبة. تستخدم الصورة ومتغيرات المصدر نفس حجم البيانات عندما يتطابق اسم المشروع.
@@ -139,7 +139,7 @@ docker compose -f compose.image.yaml exec tgwitness cat /data/panel-token.txt
 
 استخدم خادمًا مزودًا بـ Docker، ونطاقًا تحت سيطرتك، ومساحة تخزين محلية دائمة. قم بتوجيه سجلات A/AAAA الخاصة بالنطاق إلى الخادم؛ ولا تنشر سجل AAAA إلا إذا كان IPv6 يصل إليه. اسمح بالاتصالات الواردة عبر TCP 80 و443، والاتصالات الصادرة عبر DNS/HTTPS لإصدار الشهادات. يجب ألا تكون هذه المنافذ مخصصة بالفعل لخدمات أخرى.
 
-انسخ `.env.example` إلى `.env` وقم بتعيين اسم مضيف، بدون مخطط أو مسار:
+انسخ `deploy/env.example` إلى `.env` وقم بتعيين اسم مضيف، بدون مخطط أو مسار:
 
 ```dotenv
 TGWITNESS_DOMAIN=watch.your-domain.org
@@ -152,7 +152,11 @@ docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --buil
 docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
-بالنسبة للصورة المنشورة، استخدم `compose.image.yaml` كملف أول بدلاً من ذلك. احتفظ بكل من حجتي `-f` لاستخدامهما لاحقًا في أوامر الحالة والسجلات والتحديث والإيقاف.
+```sh
+docker compose --project-directory . -f deploy/compose/compose.image.yaml -f deploy/compose/compose.https.yaml up -d --wait
+```
+
+بالنسبة للصورة المنشورة، استخدم `deploy/compose/compose.image.yaml` كملف أول بدلاً من ذلك. احتفظ بكل من حجتي `-f` لاستخدامهما لاحقًا في أوامر الحالة والسجلات والتحديث والإيقاف.
 
 يقوم Caddy بالحصول على شهادة وتجديدها، وإعادة توجيه HTTP إلى HTTPS، وإعادة توجيه الطلبات إلى المجمع على شبكة Compose الخاصة. وتحتوي حالة الشهادة على وحدة تخزين دائمة خاصة بها. ويظل منفذ المضيف المباشر للمجمع مخصصًا للاتصال الداخلي فقط. ولا تتيح تهيئة Caddy المُقدمة تسجيل الوصول.
 
@@ -184,8 +188,8 @@ docker compose up -d --build --wait
 لنشر الصورة، قم بتغيير `TGWITNESS_IMAGE` إلى الإصدار المطلوب، ثم قم بتشغيل:
 
 ```sh
-docker compose -f compose.image.yaml pull
-docker compose -f compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
 ```
 
 استخدم ملف (ملفات) Compose الخاص بالتثبيت الخاص بك لأوامر الإيقاف/النسخ السابقة أيضًا. احتفظ بـ `.env`، والتكوين المخصص، واسم المشروع نفسه. يحافظ `down` على المجلدات المسماة؛ بينما **يحذفها** **`down -v`**. لا تنسخ `.venv` بين أنظمة التشغيل أو إصدارات Python. للتحديثات الأصلية، أوقف TgWitness، وقم بعمل نسخة احتياطية من دليل البيانات الكامل الخاص به، واستبدل الملفات المصدرية، وقم بتشغيل `python start.py --setup-only` قبل التشغيل.

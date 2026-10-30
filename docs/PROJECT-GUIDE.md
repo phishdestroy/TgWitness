@@ -324,7 +324,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 The container runs as a non-root user with a read-only filesystem, publishes only to
 `127.0.0.1:8787` and keeps all data in a named volume.
 
-**Public server with automatic HTTPS (Caddy):** copy `.env.example` to `.env`, set
+**Public server with automatic HTTPS (Caddy):** copy `deploy/env.example` to `.env`, set
 `TGWITNESS_DOMAIN`, point DNS at the server, open TCP 80/443 and run
 
 ```sh
@@ -363,7 +363,7 @@ Windows, `.venv/bin/python` elsewhere).
 | `TGWITNESS_DATA` | Data directory (default `data/live`) |
 | `TGWITNESS_TOKEN` | Fixed panel token instead of the generated one (at least 24 characters) |
 | `TGWITNESS_VAULT_KEY_FILE` | External vault master key for new installations |
-| `TGWITNESS_DOMAIN`, `TGWITNESS_IMAGE` | Docker HTTPS hostname and published image (see `.env.example`) |
+| `TGWITNESS_DOMAIN`, `TGWITNESS_IMAGE` | Docker HTTPS hostname and published image (see `deploy/env.example`) |
 | `TGWITNESS_WITNESS_*` | Independent witness: collector, tokens, channel, `_INTERVAL`, `_TIMEOUT`, `_POST` (all, changes, problems), `_TITLE`, `_CONFIG` ([witness](WITNESS.md#options)) |
 
 </details>
@@ -503,7 +503,7 @@ Read the [contribution guide](../.github/CONTRIBUTING.md) and use fictional data
 
 ```sh
 python -m venv .venv && source .venv/bin/activate     # Windows: .venv\Scripts\Activate.ps1
-python -m pip install -c constraints.txt -e ".[dev]"
+python -m pip install -c deploy/constraints.txt -e ".[dev]"
 python -m pytest -q                                    # unit and integration tests
 python -m playwright install chromium
 python tools/check_browser.py                          # end-to-end UI acceptance

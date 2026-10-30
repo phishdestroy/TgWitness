@@ -16,7 +16,7 @@ Activate it with `.venv\Scripts\Activate.ps1` in PowerShell or
 `source .venv/bin/activate` in a POSIX shell, then run:
 
 ```sh
-python -m pip install -c constraints.txt -e ".[dev]"
+python -m pip install -c deploy/constraints.txt -e ".[dev]"
 python -m pytest -q
 python -m playwright install chromium
 python tools/check_browser.py

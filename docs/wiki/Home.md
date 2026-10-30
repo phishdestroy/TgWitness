@@ -12,6 +12,17 @@ the record, and keep the checks alongside the conclusions.
 
 [Explore the demo](https://phishdestroy.github.io/TgWitness/demo/) · [Start your first case](Getting-Started.md) · [How the record works](../HOW-IT-WORKS.md) · [Project](../../README.md)
 
+## From a chat to a case.
+
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-features-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-features-static.svg">
+  <source media="(max-width: 640px)" srcset="../assets/presentation/readme-features-mobile.svg">
+  <img src="../assets/presentation/readme-features.svg" width="1200" alt="Export a chat, follow leads across recorded chats and retain observed changes. Three illustrated workflows.">
+</picture>
+
+Illustrated workflows. [Export a chat](Chat-Export.md) · [Investigate](Investigations.md) · [Capture changes](Collection.md)
+
 ## Your first investigation
 
 1. **Set up** — [connect a dedicated account](Accounts.md).
@@ -24,7 +35,22 @@ journal; its captured edit becomes another version; its deletion notice leaves
 the captured content available. Verify the signed export as well. This checks
 that sequence, not every possible Telegram event.
 
-## Keep the investigation running
+## Pick your task
+
+| I want to… | Open |
+| --- | --- |
+| Try TgWitness and connect an account | [Getting started](Getting-Started.md) → [Accounts](Accounts.md) |
+| Choose chats and keep observed changes | [Collection and coverage](Collection.md) |
+| Save one conversation for offline reading | [Export one chat](Chat-Export.md) |
+| Investigate across conversations | [Investigations](Investigations.md) |
+| Hand over and verify evidence | [Exports and verification](Exports-and-Verification.md) |
+| Retain an independent checkpoint | [Witness and Proof](Witness-and-Proof.md) |
+| Send alerts or keep an encrypted remote copy | [Notifications](Notifications.md) · [Off-site copy](Off-site-Copy.md) |
+| Run on a server and recover after a problem | [Server and Docker](Server-and-Docker.md) · [Backup and recovery](Backup-and-Recovery.md) |
+| Fix a problem or understand a term | [Troubleshooting](Troubleshooting.md) · [FAQ](FAQ.md) · [Glossary](Glossary.md) |
+
+<details>
+<summary><strong>Workspace setup and advanced guides</strong></summary>
 
 <picture>
   <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-handbook-mobile-static.svg">
@@ -38,9 +64,6 @@ that sequence, not every possible Telegram event.
   <a href="https://github.com/phishdestroy/TgWitness/wiki/Investigations"><img src="../assets/presentation/readme-button-investigate.svg" height="34" alt="Investigation guide"></a>
   <a href="https://github.com/phishdestroy/TgWitness/wiki/Server-and-Docker"><img src="../assets/presentation/readme-button-maintain.svg" height="34" alt="Server and Docker deployment"></a>
 </p>
-
-<details>
-<summary><strong>All operating guides</strong> — connections, deployment, recovery and troubleshooting</summary>
 
 | Connect & deploy | Preserve & verify | Find an answer |
 | --- | --- | --- |

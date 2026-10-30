@@ -16,7 +16,7 @@ jobs:
           python-version: "3.12"
       - run: python -m pip install "pip-audit==2.10.1"
       - name: Audit pinned runtime dependencies against the advisory database
-        run: python -m pip_audit -r constraints.txt --no-deps --disable-pip --strict --progress-spinner off --format json --output dependency-audit.json
+        run: python -m pip_audit -r deploy/constraints.txt --no-deps --disable-pip --strict --progress-spinner off --format json --output dependency-audit.json
       - uses: actions/upload-artifact@v7
         if: always()
         with:
@@ -44,7 +44,7 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python }}
-      - run: python -m pip install -c constraints.txt -e ".[dev]"
+      - run: python -m pip install -c deploy/constraints.txt -e ".[dev]"
       - run: python -m pytest -q
       - run: python -m tgwitness --check --json --data-dir readiness-probe
       - name: Exercise the first-run installer in a fresh environment
@@ -59,7 +59,7 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
-      - run: python -m pip install -c constraints.txt -e ".[dev]"
+      - run: python -m pip install -c deploy/constraints.txt -e ".[dev]"
       - run: python -m playwright install --with-deps chromium
       - run: python tools/check_browser.py
       - run: python tools/check_account_browser.py
@@ -115,12 +115,12 @@ jobs:
           TGWITNESS_IMAGE: tgwitness:test
         run: |
           docker compose -f compose.yaml -f deploy/compose/compose.https.yaml config --quiet
-          docker compose -f compose.image.yaml -f deploy/compose/compose.https.yaml config --quiet
+          docker compose --project-directory . -f deploy/compose/compose.image.yaml -f deploy/compose/compose.https.yaml config --quiet
           docker compose -f compose.yaml -f deploy/compose/compose.proof.yaml -f deploy/compose/compose.proxies.yaml config --quiet
           docker run --rm --network none -e TGWITNESS_DOMAIN=watch.example.org \
             --mount type=bind,source="${{ github.workspace }}/deploy/Caddyfile.docker",target=/etc/caddy/Caddyfile,readonly \
             caddy:2-alpine caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
-      - run: docker build -t tgwitness:test .
+      - run: docker build -f deploy/Dockerfile -t tgwitness:test .
       - name: Exercise installed container package with synthetic data
         run: >-
           docker run --rm --network none --read-only --cap-drop=ALL

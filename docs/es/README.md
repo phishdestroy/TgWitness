@@ -232,7 +232,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 El contenedor se ejecuta como usuario no root con un sistema de archivos de solo lectura, publica únicamente en `127.0.0.1:8787` y almacena todos los datos en un volumen con nombre.
 
-**Servidor público con HTTPS automático (Caddy):** copie `.env.example` en `.env`, configure `TGWITNESS_DOMAIN`, apunte el DNS al servidor, abra los puertos TCP 80/443 y ejecute
+**Servidor público con HTTPS automático (Caddy):** copie `deploy/env.example` en `.env`, configure `TGWITNESS_DOMAIN`, apunte el DNS al servidor, abra los puertos TCP 80/443 y ejecute
 
 ```sh
 docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
@@ -265,7 +265,7 @@ Los comandos auxiliares `python -m tgwitness…` deben ejecutarse dentro de `.ve
 | `TGWITNESS_DATA` | Directorio de datos (`data/live` por defecto) |
 | `TGWITNESS_TOKEN` | Se ha corregido el token del panel en lugar del generado (mínimo 24 caracteres) |
 | `TGWITNESS_VAULT_KEY_FILE` | Clave maestra externa del almacén para nuevas instalaciones |
-| `TGWITNESS_DOMAIN`, `TGWITNESS_IMAGE` | Nombre de host HTTPS de Docker e imagen publicada (véase `.env.example`) |
+| `TGWITNESS_DOMAIN`, `TGWITNESS_IMAGE` | Nombre de host HTTPS de Docker e imagen publicada (véase `deploy/env.example`) |
 | `TGWITNESS_WITNESS_*` | Testigo independiente: recopilador, tokens, canal, `_INTERVAL`, `_TIMEOUT`, `_POST` (todo, cambios, problemas), `_TITLE`, `_CONFIG` ([testigo](../WITNESS.md#options)) |
 
 
@@ -316,7 +316,7 @@ Detalles: [registro de verificación](../VERIFICATION.md), [estado de la versió
 
 ```sh
 python -m venv .venv && source .venv/bin/activate     # Windows: .venv\Scripts\Activate.ps1
-python -m pip install -c constraints.txt -e ".[dev]"
+python -m pip install -c deploy/constraints.txt -e ".[dev]"
 python -m pytest -q                                    # unit and integration tests
 python -m playwright install chromium
 python tools/check_browser.py                          # end-to-end UI acceptance

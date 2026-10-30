@@ -1,8 +1,24 @@
-![Keep an independent check — Checkpoints, signed counters and observation continuity.](../assets/presentation/wiki-witness-and-proof.svg)
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../assets/presentation/wiki-witness-and-proof-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/wiki-witness-and-proof-static.svg">
+  <source media="(max-width: 640px)" srcset="../assets/presentation/wiki-witness-and-proof-mobile.svg">
+  <img src="../assets/presentation/wiki-witness-and-proof.svg" width="1200" alt="Keep an independent check. Retained checkpoints, witness records and public Proof.">
+</picture>
 
 # Witness and public Proof
 
-[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../.github/SUPPORT.md)
+**03 · INDEPENDENT CHECKS** · [All guides](Home.md) · [Get help](../../.github/SUPPORT.md)
+
+<details>
+<summary>On this page</summary>
+
+- [Keep a boundary you can compare](#keep-a-boundary-you-can-compare)
+- [Set up a witness](#set-up-a-witness)
+- [Add a public Proof monitor](#add-a-public-proof-monitor)
+- [Interpret the result](#interpret-the-result)
+
+</details>
+
 
 
 | Component | Purpose |

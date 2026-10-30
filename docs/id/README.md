@@ -232,7 +232,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 Kontainer ini berjalan sebagai pengguna non-root dengan sistem berkas read-only, hanya mempublikasikan ke `127.0.0.1:8787`, dan menyimpan semua data dalam volume bernama.
 
-**Server publik dengan HTTPS otomatis (Caddy):** salin `.env.example` ke `.env`, atur `TGWITNESS_DOMAIN`, arahkan DNS ke server, buka port TCP 80/443, dan jalankan
+**Server publik dengan HTTPS otomatis (Caddy):** salin `deploy/env.example` ke `.env`, atur `TGWITNESS_DOMAIN`, arahkan DNS ke server, buka port TCP 80/443, dan jalankan
 
 ```sh
 docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
@@ -265,7 +265,7 @@ Perintah tambahan `python -m tgwitness…` harus dijalankan di dalam `.venv` (`.
 | `TGWITNESS_DATA` | Direktori data (`data/live` secara default) |
 | `TGWITNESS_TOKEN` | Token panel tetap, bukan yang dihasilkan secara otomatis (minimal 24 karakter) |
 | `TGWITNESS_VAULT_KEY_FILE` | Kunci utama brankas eksternal untuk instalasi baru |
-| `TGWITNESS_DOMAIN`, `TGWITNESS_IMAGE` | Nama host HTTPS Docker dan gambar yang dipublikasikan (lihat `.env.example`) |
+| `TGWITNESS_DOMAIN`, `TGWITNESS_IMAGE` | Nama host HTTPS Docker dan gambar yang dipublikasikan (lihat `deploy/env.example`) |
 | `TGWITNESS_WITNESS_*` | Saksi independen: pengumpul, token, saluran, `_INTERVAL`, `_TIMEOUT`, `_POST` (semua, perubahan, masalah), `_TITLE`, `_CONFIG` ([saksi](../WITNESS.md#options)) |
 
 
@@ -316,7 +316,7 @@ Rincian: [catatan verifikasi](../VERIFICATION.md), [status rilis,](../internal/R
 
 ```sh
 python -m venv .venv && source .venv/bin/activate     # Windows: .venv\Scripts\Activate.ps1
-python -m pip install -c constraints.txt -e ".[dev]"
+python -m pip install -c deploy/constraints.txt -e ".[dev]"
 python -m pytest -q                                    # unit and integration tests
 python -m playwright install chromium
 python tools/check_browser.py                          # end-to-end UI acceptance

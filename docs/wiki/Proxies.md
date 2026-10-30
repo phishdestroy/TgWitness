@@ -1,8 +1,24 @@
-![Choose the connection — Review the route before connecting your account.](../assets/presentation/wiki-proxies.svg)
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../assets/presentation/wiki-proxies-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/wiki-proxies-static.svg">
+  <source media="(max-width: 640px)" srcset="../assets/presentation/wiki-proxies-mobile.svg">
+  <img src="../assets/presentation/wiki-proxies.svg" width="1200" alt="Choose the connection. Set the route before connecting your account.">
+</picture>
 
 # Proxies and connection routes
 
-[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../.github/SUPPORT.md)
+**01 · CONNECT AND CAPTURE** · [All guides](Home.md) · [Get help](../../.github/SUPPORT.md)
+
+<details>
+<summary>On this page</summary>
+
+- [Choose a route](#choose-a-route)
+- [Save and test](#save-and-test)
+- [Public lists](#public-lists)
+- [Other network traffic](#other-network-traffic)
+
+</details>
+
 
 
 Each account workspace has its own route. Configure it before signing in if direct access is unavailable.

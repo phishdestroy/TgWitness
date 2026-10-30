@@ -232,7 +232,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 Контейнер працює під обліковим записом користувача без прав суперкористувача з файловою системою, доступною лише для читання, публікує дані лише за адресою `127.0.0.1:8787` та зберігає всі дані в іменованому томі.
 
-**Публічний сервер з автоматичним HTTPS (Caddy):** скопіюйте `.env.example` у `.env`, налаштуйте `TGWITNESS_DOMAIN`, вкажіть DNS на сервер, відкрийте порти TCP 80/443 та запустіть
+**Публічний сервер з автоматичним HTTPS (Caddy):** скопіюйте `deploy/env.example` у `.env`, налаштуйте `TGWITNESS_DOMAIN`, вкажіть DNS на сервер, відкрийте порти TCP 80/443 та запустіть
 
 ```sh
 docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
@@ -265,7 +265,7 @@ python start.py [--demo] [--setup-only] [--check [--json]] [--host HOST] [--port
 | `TGWITNESS_DATA` | Каталог даних (за замовчуванням `data/live`) |
 | `TGWITNESS_TOKEN` | Фіксований токен панелі замість згенерованого (щонайменше 24 символи) |
 | `TGWITNESS_VAULT_KEY_FILE` | Зовнішній головний ключ сховища для нових інсталяцій |
-| `TGWITNESS_DOMAIN`, `TGWITNESS_IMAGE` | Ім’я хосту Docker HTTPS та опублікований образ (див. `.env.example`) |
+| `TGWITNESS_DOMAIN`, `TGWITNESS_IMAGE` | Ім’я хосту Docker HTTPS та опублікований образ (див. `deploy/env.example`) |
 | `TGWITNESS_WITNESS_*` | Незалежний свідок: колектор, токени, канал, `_INTERVAL`, `_TIMEOUT`, `_POST` (усе, зміни, проблеми), `_TITLE`, `_CONFIG` ([свідок](../WITNESS.md#options)) |
 
 
@@ -316,7 +316,7 @@ TgWitness **0.6.1** працює на Windows 11 з Python 3.12. Стан на 2
 
 ```sh
 python -m venv .venv && source .venv/bin/activate     # Windows: .venv\Scripts\Activate.ps1
-python -m pip install -c constraints.txt -e ".[dev]"
+python -m pip install -c deploy/constraints.txt -e ".[dev]"
 python -m pytest -q                                    # unit and integration tests
 python -m playwright install chromium
 python tools/check_browser.py                          # end-to-end UI acceptance

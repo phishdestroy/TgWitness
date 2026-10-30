@@ -22,6 +22,19 @@
 
 <p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-divider-static.svg"><img src="docs/assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
+## From a chat to a case.
+
+Export a conversation, follow leads across recorded chats, and keep the changes you observe.
+
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-features-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-features-static.svg">
+  <source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-features-mobile.svg">
+  <img src="docs/assets/presentation/readme-features.svg" width="1200" alt="Export a chat, follow leads across recorded chats and retain observed changes. Three illustrated workflows.">
+</picture>
+
+Illustrated workflows. [Export a chat](docs/wiki/Chat-Export.md) · [Investigate](docs/wiki/Investigations.md) · [Capture changes](docs/wiki/Collection.md)
+
 <a name="screenshots"></a>
 
 ## Keep the conversation. Keep the changes.
@@ -179,13 +192,13 @@ two workspaces on one machine do not provide that separation.
 <a name="layout-review"></a>
 
 <p align="center">
-  <a href="docs/OPERATIONS.md#notifications"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-card-apprise-static.svg"><img src="docs/assets/presentation/readme-card-apprise.svg" width="400" alt="Notifications · Apprise. Problem alerts, chat changes and daily summaries via messengers, email or JSON webhooks."></picture></a>
-  <a href="https://phishdestroy.github.io/TgWitness/docs/exports/#s3"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-card-s3-static.svg"><img src="docs/assets/presentation/readme-card-s3.svg" width="400" alt="Off-site copy · S3. Journal, files and checkpoints, encrypted with AES-256-GCM before upload to S3-compatible storage."></picture></a>
+  <a href="docs/wiki/Notifications.md"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-card-apprise-static.svg"><img src="docs/assets/presentation/readme-card-apprise.svg" width="440" alt="Apprise: events flow to your configured notification destinations."></picture></a>
+  <a href="docs/wiki/Off-site-Copy.md"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-card-s3-static.svg"><img src="docs/assets/presentation/readme-card-s3.svg" width="440" alt="Off-site copy: encrypt files, then upload them to S3-compatible storage."></picture></a>
 </p>
 
 <p align="center">
-  <a href="docs/OPERATIONS.md#notifications"><img src="docs/assets/presentation/readme-button-apprise.svg" height="34" alt="Set up notifications"></a>
-  <a href="https://phishdestroy.github.io/TgWitness/docs/exports/#s3"><img src="docs/assets/presentation/readme-button-s3.svg" height="34" alt="S3 setup and recovery"></a>
+  <a href="docs/wiki/Notifications.md"><img src="docs/assets/presentation/readme-button-apprise.svg" height="34" alt="Set up notifications"></a>
+  <a href="docs/wiki/Off-site-Copy.md"><img src="docs/assets/presentation/readme-button-s3.svg" height="34" alt="S3 setup and recovery"></a>
   <a href="docs/wiki/Backup-and-Recovery.md"><img src="docs/assets/presentation/readme-button-backup.svg" height="34" alt="Backup and recovery guide"></a>
 </p>
 

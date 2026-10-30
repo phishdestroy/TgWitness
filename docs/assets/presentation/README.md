@@ -7,15 +7,19 @@ large outlined type, blue signals, warm accents and linked observations. The
 application mark stays visible alongside the investigation sequence. The earlier dossier artwork
 was generated with Gemini and is retained with its SVG typography and animation.
 
-The service and handbook sections follow the PhishDestroy profile's charcoal
-cards, cyan/violet/red accents, compact split buttons and animated red/blue
-dividers. Detailed instructions and the complete page index expand below them.
+The service and handbook sections use TgWitness's navy surfaces, ice-blue signals
+and warm gold accents, matching the casework covers and diagrams. Compact cards,
+split buttons and animated dividers keep the page easy to scan. Detailed
+instructions and the complete page index expand below them.
 
 | Asset | Purpose |
 | --- | --- |
-| `readme-card-{apprise,s3}*.svg` | Linked service cards with the same visual structure as the PhishDestroy profile |
+| `readme-feature-{export,investigate,history}*.svg` | Animated workflows for per-chat export, investigation across recorded chats and saved versions; still variants retain the final state |
+| `readme-features*.svg` | Combined three-column desktop layout and a stacked phone layout; the group cannot wrap into two cards plus one |
+| `wiki-*-{mobile,static,mobile-static}.svg` | Matching chapter covers with readable phone compositions and still alternatives |
+| `readme-card-{apprise,s3}*.svg` | Animated notification routing and encrypt-before-upload diagrams in the repository's palette |
 | `readme-handbook*.svg` | Three handbook routes, with desktop, phone and still variants |
-| `readme-button-*.svg`, `readme-divider*.svg` | Compact navigation buttons and the profile's shared section divider |
+| `readme-button-*.svg`, `readme-divider*.svg` | Compact navigation buttons and matching blue-and-gold section dividers |
 | `casework-hero*.svg`, `casework-handbook*.svg` | Repository and handbook covers: a message, its captured edit and the retained record; desktop, phone and still variants |
 | `casework-nav-*.svg` | Three readable navigation buttons, with animated and still variants |
 | `casework-{chain,tamper,checkpoint}*.svg` | Matching evidence diagrams; stable labels, animated emphasis, vertical phone layouts and separate stills |
@@ -84,13 +88,25 @@ Regenerate the casework covers, buttons and responsive diagrams:
 python website/render_casework.py --display-font /path/to/SpaceGrotesk.ttf --text-font /path/to/Manrope.ttf
 ```
 
-Regenerate the service cards, handbook routes and compact profile-style buttons:
+Regenerate the feature workflows, service cards, handbook routes and compact navigation buttons:
 
 ```sh
 python website/render_readme_panels.py --font /path/to/Manrope.ttf
 ```
 
 Captions are outlined to prevent installed fonts from changing the card layout.
+
+Regenerate the fifteen practical handbook chapter covers:
+
+```sh
+python website/render_wiki_headers.py --font /path/to/Manrope.ttf
+```
+The workflow drawings explain existing functions; they are not screenshots or
+live status indicators. Investigation uses recorded content and source references;
+the illustrated connections do not imply an automatic graph interface. Chat
+export acquires the history visible at export time, while saved versions depend
+on what collection actually observed. The author statement and detailed evidence
+limits remain in the README and handbook.
 
 The renderer preserves the application's original mark. It reads no account data
 and makes no network requests. Metadata badges use the version in `pyproject.toml`;

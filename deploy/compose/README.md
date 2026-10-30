@@ -2,12 +2,14 @@
 
 [Project](../../README.md) · [Deployment guide](../../docs/DEPLOYMENT.md) · [Server Wiki](https://github.com/phishdestroy/TgWitness/wiki/Server-and-Docker)
 
-Run these commands from the **project root**. The main `compose.yaml` and
-`compose.image.yaml` stay there, so ordinary startup and persistent volumes keep
-their existing behavior. Relative paths in overlays resolve from that base file.
+Run these commands from the **project root**. The main `compose.yaml` stays there
+for ordinary startup. For the prebuilt image, use `--project-directory .` with
+`-f deploy/compose/compose.image.yaml`; this keeps `.env`, overlay paths and the
+existing named volumes rooted in the project directory.
 
 | Configuration | Purpose |
 | --- | --- |
+| [`compose.image.yaml`](compose.image.yaml) | Run a published image instead of building the source |
 | [`compose.https.yaml`](compose.https.yaml) | Add Caddy and automatic HTTPS |
 | [`compose.proof.yaml`](compose.proof.yaml) | Add the Proof monitor |
 | [`compose.proxies.yaml`](compose.proxies.yaml) | Mount an operator-managed proxy catalog |

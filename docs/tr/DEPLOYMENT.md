@@ -80,7 +80,7 @@ Bu, /data için adlandırılmış bir kalıcı birim oluşturur. Web bağlantı 
 
 Her iki temel Compose dosyası da proje adı `tgwitness` kullanır; bu nedenle, yeni bir sürümü başka bir dizine çıkardığınızda sistem otomatik olarak yeni bir veri birimi seçmez. O proje için yalnızca bir dağıtımı aktif tutun. Bağımsız kurulumlar için benzersiz bir `docker compose -p NAME ...` ve farklı bir ana bilgisayar bağlantı noktası kullanın ve güncellemelerde her ikisini de koruyun. Farklı bir proje adı kullanan eski bir dağıtım için, `-p` ile orijinal adını kullanmaya devam edin; `docker compose ls` mevcut projeleri listeler.
 
-`.env.example`'yi `.env`'ye kopyalayın ve `TGWITNESS_PORT`'yi farklı bir loopback bağlantı noktası kullanacak şekilde değiştirin. Örneğin, `TGWITNESS_PORT=8788` paneli `http://127.0.0.1:8788` adresinde gösterir; konteyner ise hala 8787 numaralı bağlantı noktasını dinler. `.env`, Git tarafından göz ardı edilir.
+`deploy/env.example`'yi `.env`'ye kopyalayın ve `TGWITNESS_PORT`'yi farklı bir loopback bağlantı noktası kullanacak şekilde değiştirin. Örneğin, `TGWITNESS_PORT=8788` paneli `http://127.0.0.1:8788` adresinde gösterir; konteyner ise hala 8787 numaralı bağlantı noktasını dinler. `.env`, Git tarafından göz ardı edilir.
 
 İlk jetonu alın:
 
@@ -99,7 +99,7 @@ docker compose up -d --wait
 
 `restart: unless-stopped`, bir çökme veya Docker arka plan hizmetinin yeniden başlatılmasından sonra toplayıcıyı yeniden başlatır. Linux sunucusunda, dağıtımınızın hizmet yöneticisini (genellikle `sudo systemctl enable --now docker`) kullanarak önyükleme sırasında Docker'ı etkinleştirin. Windows/macOS'ta, Docker Desktop'ın oturum açıldığında başlatma ayarını etkinleştirin. Masaüstünden çıkış, uyku modu veya durdurulmuş bir Docker arka plan hizmeti, veri toplama işlemini kesintiye uğratabilir. Açıkça durdurulmuş bir konteyner, siz onu yeniden başlatana kadar durdurulmuş halde kalır.
 
-Örnek yapılandırmada /tmp biriminin üst sınırı 512 MiB olarak belirlenmiştir. Dışa aktarma yapısı, bunun yerine her çalışma alanının `temporary-exports/` öğesini kalıcı /data dizininde kullanır. Eşzamanlı dışa aktarmalar, günlük/WAL büyümesi, medya ve yedeklemeler için burada yer ayırın. Başlatıcı ve Docker, qualified runtime bağımlılık sürümlerini sabitlemek için constraints.txt dosyasını kullanır. Bu, hash kilitli bir tedarik zinciri değildir: Python temel görüntüsü ve paket yapı öğeleri hâlâ bağımsız sürüm onayına tabidir.
+Örnek yapılandırmada /tmp biriminin üst sınırı 512 MiB olarak belirlenmiştir. Dışa aktarma yapısı, bunun yerine her çalışma alanının `temporary-exports/` öğesini kalıcı /data dizininde kullanır. Eşzamanlı dışa aktarmalar, günlük/WAL büyümesi, medya ve yedeklemeler için burada yer ayırın. Başlatıcı ve Docker, qualified runtime bağımlılık sürümlerini sabitlemek için deploy/constraints.txt dosyasını kullanır. Bu, hash kilitli bir tedarik zinciri değildir: Python temel görüntüsü ve paket yapı öğeleri hâlâ bağımsız sürüm onayına tabidir.
 
 Günlüğü ve anahtarları silmek niyetinde değilseniz, docker compose down -v komutunu kullanmayın. Konteyner durum raporu, web sunucusunun erişilebilirliğini gösterir; Telegram verilerinin başarılı bir şekilde yakalandığını göstermez. Panelin toplayıcı durumunu, kalp atışını, hatalarını ve kapsama olaylarını inceleyin.
 
@@ -108,7 +108,7 @@ Günlüğü ve anahtarları silmek niyetinde değilseniz, docker compose down -v
 İsteğe bağlı `witness` hizmeti, kendi konteynerinde [bağımsız tanık](../WITNESS.md) çalıştırır; bu hizmetin `witness-data` biriminde kendi anahtarı ve günlüğü bulunur ve toplayıcı için yalnızca salt okunur bir tanık jetonu vardır. Jetonu panelin **Witness** sayfasında oluşturun, bir bot jetonu ve kanal ile birlikte `.env` adresine ekleyin, ardından profili başlatın:
 
 ```sh
-docker compose --profile witness up -d          # compose.image.yaml: same flag
+docker compose --profile witness up -d          # deploy/compose/compose.image.yaml: same flag
 docker compose logs witness                     # witness key fingerprint
 ```
 
@@ -118,7 +118,7 @@ Hizmet, Compose ağı içindeki toplayıcıya `http://tgwitness:8787` adresinden
 
 Bu, başarılı bir [sürüm iş akışı](#otomatik-github-sürümleri) ve halka açık GHCR paketi yapılandırmasının ardından kullanıma sunulur. Deponun sahibi/adı bu kaynak ağacına sabit olarak kodlanmamıştır. İlgili sürümün iş akışı özetinde gösterilen görüntüyü kullanın.
 
-`.env.example` öğesini `.env` öğesine kopyalayın. `TGWITNESS_IMAGE` öğesini, **küçük harfli** depo yolunu kullanarak yayınlanan sürüme ayarlayın, örneğin:
+`deploy/env.example` öğesini `.env` öğesine kopyalayın. `TGWITNESS_IMAGE` öğesini, **küçük harfli** depo yolunu kullanarak yayınlanan sürüme ayarlayın, örneğin:
 
 ```dotenv
 TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.0
@@ -128,9 +128,9 @@ TGWITNESS_PORT=8787
 `compose.yaml` yerine bu dosyayı tek başına çalıştırın:
 
 ```sh
-docker compose -f compose.image.yaml pull
-docker compose -f compose.image.yaml up -d --wait
-docker compose -f compose.image.yaml exec tgwitness cat /data/panel-token.txt
+docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
 Ana bilgisayarda kaynak derleme, Python veya derleyici gerekmez. Sürüm iş akışı, Docker Desktop'ın Linux VM'si dahil olmak üzere Linux AMD64 ve ARM64 kapsayıcılarını hedefler. İş akışı özetinden bir sürüm etiketi veya `ghcr.io/owner/repository@sha256:...` kullanın. `latest` etiketinin taşınması veya gözetimsiz uygulama yükseltmesi yapılandırılmamıştır. Görüntü ve kaynak varyantları, proje adları eşleştiğinde aynı veri hacmini kullanır.
@@ -139,7 +139,7 @@ Ana bilgisayarda kaynak derleme, Python veya derleyici gerekmez. Sürüm iş ak�
 
 Docker yüklü bir sunucu, sizin kontrolünüz altındaki bir alan adı ve kalıcı yerel depolama alanı kullanın. Alan adının A/AAAA kayıtlarını sunucuya yönlendirin; yalnızca IPv6 erişimi varsa AAAA kaydını yayınlayın. Sertifika düzenlenmesi için gelen TCP 80 ve 443 bağlantılarına ve giden DNS/HTTPS bağlantılarına izin verin. Bu bağlantı noktaları başka hizmetler tarafından kullanılmamalıdır.
 
-`.env.example`'yi `.env`'ye kopyalayın ve şema veya yol olmadan bir ana bilgisayar adı belirleyin:
+`deploy/env.example`'yi `.env`'ye kopyalayın ve şema veya yol olmadan bir ana bilgisayar adı belirleyin:
 
 ```dotenv
 TGWITNESS_DOMAIN=watch.your-domain.org
@@ -152,7 +152,11 @@ docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --buil
 docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
-Yayınlanmış bir resim için, bunun yerine ilk dosya olarak `compose.image.yaml`'yi kullanın. `-f` argümanlarının her ikisini de daha sonraki durum, günlük, güncelleme ve durdurma komutları için saklayın.
+```sh
+docker compose --project-directory . -f deploy/compose/compose.image.yaml -f deploy/compose/compose.https.yaml up -d --wait
+```
+
+Yayınlanmış bir resim için, bunun yerine ilk dosya olarak `deploy/compose/compose.image.yaml`'yi kullanın. `-f` argümanlarının her ikisini de daha sonraki durum, günlük, güncelleme ve durdurma komutları için saklayın.
 
 Caddy, sertifikayı alır ve yeniler, HTTP'yi HTTPS'ye yönlendirir ve istekleri özel Compose ağındaki toplayıcıya iletir. Sertifika durumu kendi kalıcı biriminde bulunur. Toplayıcının doğrudan ana bilgisayar bağlantı noktası yalnızca döngü içi (loopback) olarak kalır. Sağlanan Caddy yapılandırması, erişim günlüğü kaydını etkinleştirmez.
 
@@ -184,8 +188,8 @@ docker compose up -d --build --wait
 Görüntü dağıtımı için `TGWITNESS_IMAGE`'yi istediğiniz sürüme değiştirin, ardından şunu çalıştırın:
 
 ```sh
-docker compose -f compose.image.yaml pull
-docker compose -f compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
 ```
 
 Yukarıdaki durdurma/kopyalama komutları için de kurulumunuzun Compose dosyalarını kullanın. `.env` öğesini, özel yapılandırmayı ve aynı proje adını koruyun. `down`, adlandırılmış birimleri korur; **`down -v`** ise **bunları siler**. `.venv` öğesini işletim sistemleri veya Python sürümleri arasında kopyalamayın. Yerel güncellemeler için TgWitness'i durdurun, tüm veri dizinini yedekleyin, kaynak dosyaları değiştirin ve başlatmadan önce `python start.py --setup-only` komutunu çalıştırın.

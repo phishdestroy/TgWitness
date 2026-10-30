@@ -80,7 +80,7 @@ docker compose up -d --build --wait
 
 هر دو فایل پایه Compose از نام پروژه `tgwitness` استفاده می‌کنند، بنابراین استخراج یک نسخه جدید در یک دایرکتوری دیگر به‌طور پنهانی حجم داده جدیدی را انتخاب نمی‌کند. برای آن پروژه تنها یک استقرار را فعال نگه دارید. برای نصب‌های مستقل، از یک نام پروژه منحصربه‌فرد <`docker compose -p NAME ...`img id="1"/> و یک پورت میزبان متفاوت استفاده کنید و هر دو را در به‌روزرسانی‌ها حفظ کنید. برای یک استقرار قدیمی‌تر که از نام پروژه متفاوتی استفاده می‌کند، به استفاده از نام اصلی آن با `-p` ادامه دهید؛ `docker compose ls` پروژه‌های موجود را فهرست می‌کند.
 
-فایل `.env.example` را به `.env` کپی کنید و در `TGWITNESS_PORT` پورت لوپ‌بک دیگری را مشخص کنید. برای مثال، `TGWITNESS_PORT=8788` پنل را در `http://127.0.0.1:8788` در دسترس قرار می‌دهد؛ کانتینر همچنان روی پورت 8787 گوش می‌دهد. `.env` توسط Git نادیده گرفته می‌شود.
+فایل `deploy/env.example` را به `.env` کپی کنید و در `TGWITNESS_PORT` پورت لوپ‌بک دیگری را مشخص کنید. برای مثال، `TGWITNESS_PORT=8788` پنل را در `http://127.0.0.1:8788` در دسترس قرار می‌دهد؛ کانتینر همچنان روی پورت 8787 گوش می‌دهد. `.env` توسط Git نادیده گرفته می‌شود.
 
 بازیابی توکن اولیه:
 
@@ -99,7 +99,7 @@ docker compose up -d --wait
 
 `restart: unless-stopped` پس از از کار افتادن یا راه‌اندازی مجدد Docker daemon، جمع‌آوری‌کننده را مجدداً راه‌اندازی می‌کند. در یک سرور لینوکس، با استفاده از مدیر سرویس توزیع خود (معمولاً `sudo systemctl enable --now docker`) Docker را در هنگام بوت فعال کنید. در ویندوز/macOS، گزینهٔ «شروع به محض ورود» (Start-at-sign-in) در Docker Desktop را فعال کنید. خروج از حساب کاربری دسکتاپ، حالت خواب (sleep) یا توقف دايمون Docker می‌تواند جمع‌آوری داده‌ها را مختل کند. یک کانتینر که به طور صریح متوقف شده باشد، تا زمانی که دوباره آن را راه‌اندازی نکنید، متوقف باقی می‌ماند.
 
-حجم /tmp در پیکربندی مثال به ۵۱۲ مگابایت محدود شده است. ساخت خروجی به جای آن از`temporary-exports/` فضای کاری هر کاربر در /data پایدار استفاده می‌کند. فضای لازم را برای خروجی‌گیری همزمان، رشد دفترچه خاطرات/WAL، رسانه‌ها و پشتیبان‌ها در آنجا رزرو کنید. لانچر و داکر از constraints.txt برای ثابت‌کردن نسخه‌های واجد شرایط وابستگی‌های زمان اجرا استفاده می‌کنند. این یک زنجیره تأمین قفل‌شده با هش نیست: تصویر پایه پایتون و آرتفکت‌های بسته همچنان به تأیید مستقل نسخه نیاز دارند.
+حجم /tmp در پیکربندی مثال به ۵۱۲ مگابایت محدود شده است. ساخت خروجی به جای آن از`temporary-exports/` فضای کاری هر کاربر در /data پایدار استفاده می‌کند. فضای لازم را برای خروجی‌گیری همزمان، رشد دفترچه خاطرات/WAL، رسانه‌ها و پشتیبان‌ها در آنجا رزرو کنید. لانچر و داکر از deploy/constraints.txt برای ثابت‌کردن نسخه‌های واجد شرایط وابستگی‌های زمان اجرا استفاده می‌کنند. این یک زنجیره تأمین قفل‌شده با هش نیست: تصویر پایه پایتون و آرتفکت‌های بسته همچنان به تأیید مستقل نسخه نیاز دارند.
 
 از دستور docker-compose down -v استفاده نکنید مگر اینکه قصد داشته باشید دفترچه یادداشت و کلیدها را نابود کنید. گزارش وضعیت کانتینر، در دسترس بودن وب‌سرور را نشان می‌دهد، نه ضبط موفق تلگرام. وضعیت جمع‌آوری‌کننده پنل، ضربان قلب، خطاها و رویدادهای پوشش را بررسی کنید.
 
@@ -108,7 +108,7 @@ docker compose up -d --wait
 سرویس اختیاری `witness` یک [شاهد مستقل](../WITNESS.md) را در کانتینر خود با کلید و دفترچه یادداشت اختصاصی در حجم `witness-data` اجرا می‌کند و تنها یک توکن شاهد فقط-خواندنی برای جمع‌آورنده فراهم می‌آورد. توکن را در صفحه **Witness** پنل ایجاد کنید، آن را با یک توکن بات و کانال به `.env` اضافه کنید، سپس پروفایل را راه‌اندازی کنید:
 
 ```sh
-docker compose --profile witness up -d          # compose.image.yaml: same flag
+docker compose --profile witness up -d          # deploy/compose/compose.image.yaml: same flag
 docker compose logs witness                     # witness key fingerprint
 ```
 
@@ -118,7 +118,7 @@ docker compose logs witness                     # witness key fingerprint
 
 این پس از یک [گردش کار انتشار](#انتشارهای-خودکار-گیتهاب) موفق و پیکربندی عمومی بسته GHCR در دسترس قرار می‌گیرد. مالک/نام مخزن در این درخت منبع به‌صورت سخت‌کد نشده است. از ایمیجی که در خلاصه گردش کار آن انتشار نشان داده شده است استفاده کنید.
 
-`.env.example` را به `.env` کپی کنید. `TGWITNESS_IMAGE` را با استفاده از مسیر مخزن **به** **صورت** **حروف کوچک** روی نسخه منتشرشده تنظیم کنید، برای مثال:
+`deploy/env.example` را به `.env` کپی کنید. `TGWITNESS_IMAGE` را با استفاده از مسیر مخزن **به** **صورت** **حروف کوچک** روی نسخه منتشرشده تنظیم کنید، برای مثال:
 
 ```dotenv
 TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.0
@@ -128,9 +128,9 @@ TGWITNESS_PORT=8787
 این فایل را به تنهایی اجرا کنید، به جای `compose.yaml`:
 
 ```sh
-docker compose -f compose.image.yaml pull
-docker compose -f compose.image.yaml up -d --wait
-docker compose -f compose.image.yaml exec tgwitness cat /data/panel-token.txt
+docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
 نیازی به ساخت سورس، پایتون یا کامپایلر روی میزبان نیست. گردش کار انتشار، کانتینرهای لینوکس AMD64 و ARM64، از جمله ماشین مجازی لینوکس Docker Desktop را هدف قرار می‌دهد. از یک تگ نسخه یا `ghcr.io/owner/repository@sha256:...` از خلاصه گردش کار استفاده کنید. هیچ برچسب `latest` متحرک یا به‌روزرسانی خودکار برنامه پیکربندی نشده است. نسخه‌های image و source هنگام مطابقت نام پروژه از یک حجم داده استفاده می‌کنند.
@@ -139,7 +139,7 @@ docker compose -f compose.image.yaml exec tgwitness cat /data/panel-token.txt
 
 از یک سرور با Docker، دامنه‌ای که کنترل آن با شماست و ذخیره‌سازی محلی پایدار استفاده کنید. رکوردهای A/AAAA دامنه را به سرور اشاره دهید؛ AAAA را تنها در صورتی منتشر کنید که IPv6 به آن برسد. برای صدور گواهی، دسترسی ورودی TCP بر روی پورت‌های 80 و 443 و خروجی DNS/HTTPS را مجاز کنید. سایر سرویس‌ها نباید قبلاً این پورت‌ها را اشغال کرده باشند.
 
-فایل `.env.example` را به `.env` کپی کنید و یک نام میزبان بدون طرح یا مسیر تنظیم کنید:
+فایل `deploy/env.example` را به `.env` کپی کنید و یک نام میزبان بدون طرح یا مسیر تنظیم کنید:
 
 ```dotenv
 TGWITNESS_DOMAIN=watch.your-domain.org
@@ -152,7 +152,11 @@ docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --buil
 docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
-برای یک تصویر منتشرشده، به جای آن از `compose.image.yaml` به‌عنوان اولین فایل استفاده کنید. هر دو آرگومان `-f` را برای دستورات وضعیت، لاگ‌ها، به‌روزرسانی و توقف در مراحل بعدی نگه دارید.
+```sh
+docker compose --project-directory . -f deploy/compose/compose.image.yaml -f deploy/compose/compose.https.yaml up -d --wait
+```
+
+برای یک تصویر منتشرشده، به جای آن از `deploy/compose/compose.image.yaml` به‌عنوان اولین فایل استفاده کنید. هر دو آرگومان `-f` را برای دستورات وضعیت، لاگ‌ها، به‌روزرسانی و توقف در مراحل بعدی نگه دارید.
 
 Caddy گواهی را دریافت و تمدید می‌کند، درخواست‌های HTTP را به HTTPS هدایت می‌کند و درخواست‌ها را به جمع‌آورنده در شبکه خصوصی Compose فوروارد می‌کند. وضعیت گواهی دارای حجم پایدار اختصاصی خود است. پورت میزبان مستقیم جمع‌آورنده همچنان فقط برای لوپ‌بک باقی می‌ماند. پیکربندی ارائه‌شده Caddy ثبت دسترسی را فعال نمی‌کند.
 
@@ -184,8 +188,8 @@ docker compose up -d --build --wait
 برای استقرار تصویری، `TGWITNESS_IMAGE` را به نسخهٔ دلخواه تغییر دهید، سپس اجرا کنید:
 
 ```sh
-docker compose -f compose.image.yaml pull
-docker compose -f compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
 ```
 
 برای دستورات توقف/کپی قبلی نیز از فایل(های) Compose نصب خود استفاده کنید. فایل‌های `.env`، پیکربندی سفارشی و نام پروژه را حفظ کنید. `down` حجم‌های نام‌گذاری‌شده را نگه می‌دارد؛ **`down -v`** **آن‌ها را حذف می‌کند**. `.venv` را بین سیستم‌های عامل یا نسخه‌های پایتون کپی نکنید. برای به‌روزرسانی‌های بومی، TgWitness را متوقف کنید، از کل دایرکتوری داده آن نسخه پشتیبان تهیه کنید، فایل‌های منبع را جایگزین کنید و قبل از راه‌اندازی، `python start.py --setup-only` را اجرا کنید.

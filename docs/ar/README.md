@@ -232,7 +232,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 تعمل الحاوية كمستخدم غير جذر مع نظام ملفات للقراءة فقط، وتنشر فقط على `127.0.0.1:8787`، وتحتفظ بجميع البيانات في وحدة تخزين مسماة.
 
-**خادم عام مزود ببروتوكول HTTPS التلقائي (Caddy):** انسخ `.env.example` إلى `.env`، واضبط `TGWITNESS_DOMAIN`، ووجه DNS إلى الخادم، وافتح منافذ TCP 80/443 وقم بتشغيل البرنامج
+**خادم عام مزود ببروتوكول HTTPS التلقائي (Caddy):** انسخ `deploy/env.example` إلى `.env`، واضبط `TGWITNESS_DOMAIN`، ووجه DNS إلى الخادم، وافتح منافذ TCP 80/443 وقم بتشغيل البرنامج
 
 ```sh
 docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
@@ -265,7 +265,7 @@ python start.py [--demo] [--setup-only] [--check [--json]] [--host HOST] [--port
 | `TGWITNESS_DATA` | دليل البيانات (`data/live` افتراضيًا) |
 | `TGWITNESS_TOKEN` | رمز لوحة ثابت بدلاً من الرمز الذي تم إنشاؤه (24 حرفًا على الأقل) |
 | `TGWITNESS_VAULT_KEY_FILE` | المفتاح الرئيسي الخارجي للخزينة للتثبيتات الجديدة |
-| `TGWITNESS_DOMAIN`, `TGWITNESS_IMAGE` | اسم مضيف Docker HTTPS والصورة المنشورة (انظر `.env.example`) |
+| `TGWITNESS_DOMAIN`, `TGWITNESS_IMAGE` | اسم مضيف Docker HTTPS والصورة المنشورة (انظر `deploy/env.example`) |
 | `TGWITNESS_WITNESS_*` | الشاهد المستقل: المجمع، الرموز المميزة، القناة، `_INTERVAL`، `_TIMEOUT`، `_POST` (الكل، التغييرات، المشاكل)، `_TITLE`، `_CONFIG` ([الشاهد](../WITNESS.md#options)) |
 
 
@@ -316,7 +316,7 @@ TgWitness هي أداة. ومن يديرها هو الذي يقرر ما يتم 
 
 ```sh
 python -m venv .venv && source .venv/bin/activate     # Windows: .venv\Scripts\Activate.ps1
-python -m pip install -c constraints.txt -e ".[dev]"
+python -m pip install -c deploy/constraints.txt -e ".[dev]"
 python -m pytest -q                                    # unit and integration tests
 python -m playwright install chromium
 python tools/check_browser.py                          # end-to-end UI acceptance

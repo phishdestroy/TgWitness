@@ -233,7 +233,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 کنٹینر ایک غیر روٹ صارف کے طور پر چلتا ہے، ریڈ-اونلی فائل سسٹم کے ساتھ، صرف `127.0.0.1:8787` پر شائع کرتا ہے اور تمام ڈیٹا کو ایک نامزد والیوم میں محفوظ رکھتا ہے۔
 
-**خودکار HTTPS (Caddy) کے ساتھ عوامی سرور:** `.env.example` کو `.env` میں کاپی کریں، `TGWITNESS_DOMAIN` سیٹ کریں، سرور کی طرف DNS پوائنٹ کریں، TCP پورٹ 80/443 کھولیں اور چلائیں
+**خودکار HTTPS (Caddy) کے ساتھ عوامی سرور:** `deploy/env.example` کو `.env` میں کاپی کریں، `TGWITNESS_DOMAIN` سیٹ کریں، سرور کی طرف DNS پوائنٹ کریں، TCP پورٹ 80/443 کھولیں اور چلائیں
 
 ```sh
 docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
@@ -266,7 +266,7 @@ python start.py [--demo] [--setup-only] [--check [--json]] [--host HOST] [--port
 | `TGWITNESS_DATA` | ڈیٹا ڈائریکٹری (ڈیفالٹ `data/live`) |
 | `TGWITNESS_TOKEN` | پیدا شدہ ٹوکن کی بجائے مقررہ پینل ٹوکن (کم از کم 24 حروف) |
 | `TGWITNESS_VAULT_KEY_FILE` | نئی تنصیبات کے لیے بیرونی والٹ ماسٹر کلید |
-| `TGWITNESS_DOMAIN`, `TGWITNESS_IMAGE` | Docker HTTPS ہوسٹ نیم اور شائع شدہ امیج (دیکھیں `.env.example`) |
+| `TGWITNESS_DOMAIN`, `TGWITNESS_IMAGE` | Docker HTTPS ہوسٹ نیم اور شائع شدہ امیج (دیکھیں `deploy/env.example`) |
 | `TGWITNESS_WITNESS_*` | آزاد شاہد: کلیکٹر، ٹوکنز، چینل، `_INTERVAL`، `_TIMEOUT`، `_POST` (تمام، تبدیلیاں، مسائل)، `_TITLE`، `_CONFIG` ([شاہد](../WITNESS.md#options)) |
 
 
@@ -317,7 +317,7 @@ TgWitness **0.6.1** ونڈوز 11 پر پائتھن 3.12 کے ساتھ چلتا 
 
 ```sh
 python -m venv .venv && source .venv/bin/activate     # Windows: .venv\Scripts\Activate.ps1
-python -m pip install -c constraints.txt -e ".[dev]"
+python -m pip install -c deploy/constraints.txt -e ".[dev]"
 python -m pytest -q                                    # unit and integration tests
 python -m playwright install chromium
 python tools/check_browser.py                          # end-to-end UI acceptance

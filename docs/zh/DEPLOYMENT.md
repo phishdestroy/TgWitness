@@ -80,7 +80,7 @@ docker compose up -d --build --wait
 
 两个基础 Compose 文件均使用项目名称 `tgwitness`，因此将新版本解压到另一个目录时，系统不会自动选择新的数据卷。 请确保该项目仅有一个部署处于活动状态。对于独立安装，请使用唯一的 `docker compose -p NAME ...` 和不同的主机端口，并在更新时保留两者。对于使用不同项目名称的旧部署，请继续使用其原始名称并配合 `-p`；`docker compose ls` 列出了现有项目。
 
-将 `.env.example` 复制到 `.env`，并将 `TGWITNESS_PORT` 修改为使用不同的回环端口。例如，`TGWITNESS_PORT=8788` 将控制面板暴露在 `http://127.0.0.1:8788`；容器仍监听 8787 端口。`.env` 被 Git 忽略。
+将 `deploy/env.example` 复制到 `.env`，并将 `TGWITNESS_PORT` 修改为使用不同的回环端口。例如，`TGWITNESS_PORT=8788` 将控制面板暴露在 `http://127.0.0.1:8788`；容器仍监听 8787 端口。`.env` 被 Git 忽略。
 
 获取初始令牌：
 
@@ -99,7 +99,7 @@ docker compose up -d --wait
 
 `restart: unless-stopped` 用于在崩溃或 Docker 守护进程重启后重启收集器。 在 Linux 服务器上，请使用您所用发行版的系统服务管理器（通常为 `sudo systemctl enable --now docker`）启用 Docker 自动启动。在 Windows/macOS 上，请启用 Docker Desktop 的“登录时启动”设置。桌面注销、休眠或 Docker 守护进程停止都可能中断数据采集。被显式停止的容器将保持停止状态，直到您再次启动它。
 
-在示例配置中，/tmp 分区的上限为 512 MiB。导出结构改用将每个工作区的 `temporary-exports/` 导出到持久化 /data 分区。 请在此处预留空间，以满足同时进行导出、日志/WAL增长、媒体文件及备份的需求。启动器和 Docker 通过 constraints.txt 文件锁定符合资格的运行时依赖项版本。这并非哈希锁定的供应链：Python 基础镜像和软件包工件仍需经过独立的发布资格认证。
+在示例配置中，/tmp 分区的上限为 512 MiB。导出结构改用将每个工作区的 `temporary-exports/` 导出到持久化 /data 分区。 请在此处预留空间，以满足同时进行导出、日志/WAL增长、媒体文件及备份的需求。启动器和 Docker 通过 deploy/constraints.txt 文件锁定符合资格的运行时依赖项版本。这并非哈希锁定的供应链：Python 基础镜像和软件包工件仍需经过独立的发布资格认证。
 
 除非您打算销毁日志和密钥，否则请勿使用 `docker compose down -v` 命令。容器健康状态报告反映的是 Web 服务器的可用性，而非 Telegram 抓取是否成功。请检查控制面板中的收集器状态、心跳、错误及覆盖事件。
 
@@ -108,7 +108,7 @@ docker compose up -d --wait
 可选的 `witness` 服务会在独立容器中运行一个[独立的见证](../WITNESS.md)节点，该节点在 `witness-data` 卷中拥有自己的密钥和日志，而收集器仅拥有一个只读的见证令牌。请在控制面板的“见证”页面创建该令牌，将其与机器人令牌和频道一起添加到 `.env`，然后启动该配置文件：
 
 ```sh
-docker compose --profile witness up -d          # compose.image.yaml: same flag
+docker compose --profile witness up -d          # deploy/compose/compose.image.yaml: same flag
 docker compose logs witness                     # witness key fingerprint
 ```
 
@@ -118,7 +118,7 @@ docker compose logs witness                     # witness key fingerprint
 
 在[发布工作流](#github-自动发布)成功完成并配置好公开的 GHCR 包后，该内容即可使用。此源代码树中并未硬编码存储库的所有者/名称。请使用该发布版工作流摘要中显示的图片。
 
-将 `.env.example` 复制到 `.env`。将 `TGWITNESS_IMAGE` 设置为已发布的版本，并使用**小写形式的**仓库路径，例如：
+将 `deploy/env.example` 复制到 `.env`。将 `TGWITNESS_IMAGE` 设置为已发布的版本，并使用**小写形式的**仓库路径，例如：
 
 ```dotenv
 TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.0
@@ -128,9 +128,9 @@ TGWITNESS_PORT=8787
 请单独运行此文件，而非 `compose.yaml`：
 
 ```sh
-docker compose -f compose.image.yaml pull
-docker compose -f compose.image.yaml up -d --wait
-docker compose -f compose.image.yaml exec tgwitness cat /data/panel-token.txt
+docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
 主机上无需源代码构建、Python 或编译器。发布工作流针对 Linux AMD64 和 ARM64 容器，包括 Docker Desktop 的 Linux 虚拟机。请使用工作流摘要中的版本标签或 `ghcr.io/owner/repository@sha256:...`。 未配置移动的 `latest` 标签或无人值守的应用程序升级。当项目名称相同时，镜像和源代码变体将使用相同的数据卷。
@@ -139,7 +139,7 @@ docker compose -f compose.image.yaml exec tgwitness cat /data/panel-token.txt
 
 请使用配备 Docker 的服务器、您控制的域名以及持久性本地存储。将域名的 A/AAAA 记录指向该服务器；仅当服务器支持 IPv6 时才发布 AAAA 记录。允许入站 TCP 80 和 443 端口，以及用于证书签发的出站 DNS/HTTPS 连接。 其他服务不得已占用这些端口。
 
-将 `.env.example` 复制到 `.env`，并设置主机名（不包含协议或路径）：
+将 `deploy/env.example` 复制到 `.env`，并设置主机名（不包含协议或路径）：
 
 ```dotenv
 TGWITNESS_DOMAIN=watch.your-domain.org
@@ -152,7 +152,11 @@ docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --buil
 docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
-对于已发布的图片，请改用`compose.image.yaml`作为第一个文件。请保留两个`-f`参数，以便后续使用状态、日志、更新和停止命令。
+```sh
+docker compose --project-directory . -f deploy/compose/compose.image.yaml -f deploy/compose/compose.https.yaml up -d --wait
+```
+
+对于已发布的图片，请改用`deploy/compose/compose.image.yaml`作为第一个文件。请保留两个`-f`参数，以便后续使用状态、日志、更新和停止命令。
 
 Caddy 负责获取和续期证书，将 HTTP 请求重定向至 HTTPS，并将请求转发至私有 Compose 网络上的收集器。证书状态拥有独立的持久卷。收集器的直接主机端口仅限回环连接。提供的 Caddy 配置未启用访问日志记录。
 
@@ -184,8 +188,8 @@ docker compose up -d --build --wait
 若要部署镜像，请将 `TGWITNESS_IMAGE` 更改为所需版本，然后运行：
 
 ```sh
-docker compose -f compose.image.yaml pull
-docker compose -f compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
 ```
 
 请也使用您安装环境中的 Compose 文件来执行前面的 stop/copy 命令。 请保留`.env`、自定义配置以及原有的项目名称。`down`用于保留命名卷；**`down -v`用于删除命名卷**。请勿在不同操作系统或 Python 版本之间复制`.venv`。若需进行原生更新，请先停止 TgWitness，备份其完整数据目录，替换源文件，并在启动前运行`python start.py --setup-only`。

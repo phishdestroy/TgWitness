@@ -80,7 +80,7 @@ Isso cria um volume persistente nomeado para /data. A porta da web é mapeada pa
 
 Ambos os arquivos Compose básicos utilizam o nome do projeto `tgwitness`; portanto, a extração de uma nova versão para outro diretório não seleciona automaticamente um novo volume de dados. Mantenha apenas uma implantação ativa para esse projeto. Para instalações independentes, utilize um `docker compose -p NAME ...` exclusivo e uma porta de host diferente, e mantenha ambos nas atualizações. Para uma implantação mais antiga que utilize um nome de projeto diferente, continue usando seu nome original com `-p`; `docker compose ls` lista os projetos existentes.
 
-Copie `.env.example` para `.env` e altere `TGWITNESS_PORT` para utilizar uma porta de loopback diferente. Por exemplo, `TGWITNESS_PORT=8788` expõe o painel em `http://127.0.0.1:8788`; o contêiner continua escutando na porta 8787. `.env` é ignorado pelo Git.
+Copie `deploy/env.example` para `.env` e altere `TGWITNESS_PORT` para utilizar uma porta de loopback diferente. Por exemplo, `TGWITNESS_PORT=8788` expõe o painel em `http://127.0.0.1:8788`; o contêiner continua escutando na porta 8787. `.env` é ignorado pelo Git.
 
 Recupere o token inicial:
 
@@ -99,7 +99,7 @@ docker compose up -d --wait
 
 `restart: unless-stopped` reinicia o coletor após uma falha ou reinicialização do daemon do Docker. Em um servidor Linux, habilite o Docker na inicialização usando o gerenciador de serviços da sua distribuição, geralmente o `sudo systemctl enable --now docker`. No Windows/macOS, habilite a configuração “iniciar ao fazer login” do Docker Desktop. O logout do desktop, o modo de suspensão ou um daemon do Docker parado podem interromper a coleta. Um contêiner explicitamente parado permanece parado até que você o inicie novamente.
 
-O volume /tmp está limitado a 512 MiB na configuração de exemplo. A construção da exportação utiliza, em vez disso, o `temporary-exports/` de cada espaço de trabalho no diretório persistente /data. Reserve espaço nesse local para exportações simultâneas, crescimento do diário/WAL, arquivos de mídia e backups. O iniciador e o Docker utilizam o arquivo constraints.txt para fixar versões qualificadas de dependências de tempo de execução. Esta não é uma cadeia de suprimentos com bloqueio por hash: a imagem base do Python e os artefatos de pacotes ainda exigem qualificação de versão independente.
+O volume /tmp está limitado a 512 MiB na configuração de exemplo. A construção da exportação utiliza, em vez disso, o `temporary-exports/` de cada espaço de trabalho no diretório persistente /data. Reserve espaço nesse local para exportações simultâneas, crescimento do diário/WAL, arquivos de mídia e backups. O iniciador e o Docker utilizam o arquivo deploy/constraints.txt para fixar versões qualificadas de dependências de tempo de execução. Esta não é uma cadeia de suprimentos com bloqueio por hash: a imagem base do Python e os artefatos de pacotes ainda exigem qualificação de versão independente.
 
 Não utilize o comando `docker compose down -v`, a menos que pretenda destruir o diário e as chaves. O relatório de integridade do contêiner informa a disponibilidade do servidor web, e não o sucesso da captura do Telegram. Verifique o estado do coletor do painel, o sinal de vida, os erros e os eventos de cobertura.
 
@@ -108,7 +108,7 @@ Não utilize o comando `docker compose down -v`, a menos que pretenda destruir o
 O serviço opcional `witness` executa uma [testemunha independente](../WITNESS.md) em seu próprio contêiner, com sua própria chave e diário no volume `witness-data` e apenas um token de testemunha somente leitura para o coletor. Crie o token na página **Testemunha** do painel, adicione-o com um token de bot e um canal ao `.env` e, em seguida, inicie o perfil:
 
 ```sh
-docker compose --profile witness up -d          # compose.image.yaml: same flag
+docker compose --profile witness up -d          # deploy/compose/compose.image.yaml: same flag
 docker compose logs witness                     # witness key fingerprint
 ```
 
@@ -118,7 +118,7 @@ O serviço acessa o coletor dentro da rede Compose em `http://tgwitness:8787` (`
 
 Isso fica disponível após a conclusão bem-sucedida [do fluxo de trabalho de lançamento](#lançamentos-automatizados-no-github) e da configuração pública do pacote no GHCR. O nome do proprietário do repositório não está codificado de forma rígida nesta árvore de código-fonte. Utilize a imagem exibida no resumo do fluxo de trabalho desse lançamento.
 
-Copie `.env.example` para `.env`. Defina `TGWITNESS_IMAGE` como a versão publicada, utilizando o caminho do repositório **em letras minúsculas**, por exemplo:
+Copie `deploy/env.example` para `.env`. Defina `TGWITNESS_IMAGE` como a versão publicada, utilizando o caminho do repositório **em letras minúsculas**, por exemplo:
 
 ```dotenv
 TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.0
@@ -128,9 +128,9 @@ TGWITNESS_PORT=8787
 Execute este arquivo por conta própria, em vez de `compose.yaml`:
 
 ```sh
-docker compose -f compose.image.yaml pull
-docker compose -f compose.image.yaml up -d --wait
-docker compose -f compose.image.yaml exec tgwitness cat /data/panel-token.txt
+docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
 Não é necessária nenhuma compilação de código-fonte, Python ou compilador no host. O fluxo de trabalho de lançamento é voltado para contêineres Linux AMD64 e ARM64, incluindo a máquina virtual Linux do Docker Desktop. Utilize uma tag de versão ou `ghcr.io/owner/repository@sha256:...` a partir do resumo do fluxo de trabalho. Não há configuração de tag `latest` móvel nem de atualização automática de aplicativos. As variantes de imagem e de código-fonte utilizam o mesmo volume de dados quando o nome do projeto coincide.
@@ -139,7 +139,7 @@ Não é necessária nenhuma compilação de código-fonte, Python ou compilador 
 
 Utilize um servidor com o Docker, um domínio sob seu controle e armazenamento local persistente. Direcione os registros A/AAAA do domínio para o servidor; publique o registro AAAA somente se o IPv6 tiver acesso a ele. Permita o tráfego de entrada nas portas TCP 80 e 443 e o tráfego de saída de DNS/HTTPS para emissão de certificados. Essas portas não devem já estar em uso por outros serviços.
 
-Copie `.env.example` para `.env` e defina um nome de host, sem esquema nem caminho:
+Copie `deploy/env.example` para `.env` e defina um nome de host, sem esquema nem caminho:
 
 ```dotenv
 TGWITNESS_DOMAIN=watch.your-domain.org
@@ -152,7 +152,11 @@ docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --buil
 docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
-Para uma imagem publicada, utilize `compose.image.yaml` como o primeiro arquivo. Mantenha ambos os argumentos `-f` para comandos posteriores de status, logs, atualização e parada.
+```sh
+docker compose --project-directory . -f deploy/compose/compose.image.yaml -f deploy/compose/compose.https.yaml up -d --wait
+```
+
+Para uma imagem publicada, utilize `deploy/compose/compose.image.yaml` como o primeiro arquivo. Mantenha ambos os argumentos `-f` para comandos posteriores de status, logs, atualização e parada.
 
 O Caddy obtém e renova um certificado, redireciona HTTP para HTTPS e encaminha as solicitações para o coletor na rede privada da Compose. O estado do certificado possui seu próprio volume persistente. A porta direta do host do coletor permanece restrita ao loopback. A configuração do Caddy fornecida não habilita o registro de acesso.
 
@@ -184,8 +188,8 @@ docker compose up -d --build --wait
 Para uma implantação por imagem, altere `TGWITNESS_IMAGE` para a versão desejada e, em seguida, execute:
 
 ```sh
-docker compose -f compose.image.yaml pull
-docker compose -f compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
 ```
 
 Utilize também os arquivos Compose da sua instalação para os comandos stop/copy anteriores. Mantenha `.env`, a configuração personalizada e o mesmo nome do projeto. `down` mantém os volumes nomeados; **`down -v`** **os exclui**. Não copie `.venv` entre sistemas operacionais ou versões do Python. Para atualizações nativas, interrompa o TgWitness, faça backup de todo o diretório de dados, substitua os arquivos de origem e execute `python start.py --setup-only` antes de iniciar.

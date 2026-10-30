@@ -232,7 +232,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 Container này chạy dưới quyền người dùng không phải root với hệ thống tệp chỉ đọc, chỉ đăng tải lên `127.0.0.1:8787` và lưu trữ toàn bộ dữ liệu trong một khối lượng có tên.
 
-**Máy chủ công khai với HTTPS tự động (Caddy):** sao chép `.env.example` vào `.env`, thiết lập `TGWITNESS_DOMAIN`, trỏ DNS đến máy chủ, mở cổng TCP 80/443 và khởi chạy
+**Máy chủ công khai với HTTPS tự động (Caddy):** sao chép `deploy/env.example` vào `.env`, thiết lập `TGWITNESS_DOMAIN`, trỏ DNS đến máy chủ, mở cổng TCP 80/443 và khởi chạy
 
 ```sh
 docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
@@ -265,7 +265,7 @@ Các lệnh phụ trợ `python -m tgwitness…` phải được thực thi bên
 | `TGWITNESS_DATA` | Thư mục dữ liệu (mặc định `data/live`) |
 | `TGWITNESS_TOKEN` | Đã sửa mã thông báo bảng điều khiển thay vì mã được tạo tự động (ít nhất 24 ký tự) |
 | `TGWITNESS_VAULT_KEY_FILE` | Khóa chính kho lưu trữ bên ngoài dành cho các cài đặt mới |
-| `TGWITNESS_DOMAIN`, `TGWITNESS_IMAGE` | Tên máy chủ HTTPS của Docker và hình ảnh đã được công bố (xem `.env.example`) |
+| `TGWITNESS_DOMAIN`, `TGWITNESS_IMAGE` | Tên máy chủ HTTPS của Docker và hình ảnh đã được công bố (xem `deploy/env.example`) |
 | `TGWITNESS_WITNESS_*` | Nhân chứng độc lập: trình thu thập, mã thông báo, kênh, `_INTERVAL`, `_TIMEOUT`, `_POST` (tất cả, thay đổi, sự cố), `_TITLE`, `_CONFIG` ([nhân chứng](../WITNESS.md#options)) |
 
 
@@ -316,7 +316,7 @@ Chi tiết: [bản ghi xác minh](../VERIFICATION.md), [tình trạng phát hàn
 
 ```sh
 python -m venv .venv && source .venv/bin/activate     # Windows: .venv\Scripts\Activate.ps1
-python -m pip install -c constraints.txt -e ".[dev]"
+python -m pip install -c deploy/constraints.txt -e ".[dev]"
 python -m pytest -q                                    # unit and integration tests
 python -m playwright install chromium
 python tools/check_browser.py                          # end-to-end UI acceptance

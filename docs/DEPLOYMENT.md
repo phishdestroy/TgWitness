@@ -151,7 +151,7 @@ deployment active for that project. For independent installations, use a unique
 For an older deployment using a different project name, continue using its original
 name with `-p`; `docker compose ls` lists existing projects.
 
-Copy `.env.example` to `.env` and change `TGWITNESS_PORT` to use a different loopback
+Copy `deploy/env.example` to `.env` and change `TGWITNESS_PORT` to use a different loopback
 port. For example, `TGWITNESS_PORT=8788` exposes the panel at
 `http://127.0.0.1:8788`; the container still listens on 8787. `.env` is Git-ignored.
 
@@ -180,7 +180,7 @@ stopped until you start it again.
 The /tmp volume is capped at 512 MiB in the example configuration. Export construction
 uses each workspace's `temporary-exports/` on persistent /data instead. Reserve space
 there for simultaneous exports, journal/WAL growth, media and backups.
-The launcher and Docker use constraints.txt to pin qualified runtime dependency
+The launcher and Docker use deploy/constraints.txt to pin qualified runtime dependency
 versions. This is not a hash-locked supply chain: the Python base image and package
 artifacts still require independent release qualification.
 
@@ -196,7 +196,7 @@ witness token for the collector. Create the token on the panel's **Witness** pag
 with a bot token and channel to `.env`, then start the profile:
 
 ```sh
-docker compose --profile witness up -d          # compose.image.yaml: same flag
+docker compose --profile witness up -d          # deploy/compose/compose.image.yaml: same flag
 docker compose logs witness                     # witness key fingerprint
 ```
 
@@ -212,7 +212,7 @@ This becomes available after a successful [release workflow](#automated-github-r
 and public GHCR package configuration. The repository's owner/name is not hardcoded
 into this source tree. Use the image shown in that release's workflow summary.
 
-Copy `.env.example` to `.env`. Set `TGWITNESS_IMAGE` to the published version, using
+Copy `deploy/env.example` to `.env`. Set `TGWITNESS_IMAGE` to the published version, using
 the **lowercase** repository path, for example:
 
 ```dotenv
@@ -223,9 +223,9 @@ TGWITNESS_PORT=8787
 Run this file on its own, instead of `compose.yaml`:
 
 ```sh
-docker compose -f compose.image.yaml pull
-docker compose -f compose.image.yaml up -d --wait
-docker compose -f compose.image.yaml exec tgwitness cat /data/panel-token.txt
+docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
 No source build, Python, or compiler is needed on the host. The release workflow
@@ -241,7 +241,7 @@ Point the domain's A/AAAA records at the server; publish AAAA only if IPv6 reach
 it. Allow inbound TCP 80 and 443 and outbound DNS/HTTPS for certificate issuance.
 Other services must not already own these ports.
 
-Copy `.env.example` to `.env` and set a hostname, without a scheme or path:
+Copy `deploy/env.example` to `.env` and set a hostname, without a scheme or path:
 
 ```dotenv
 TGWITNESS_DOMAIN=watch.your-domain.org
@@ -254,7 +254,11 @@ docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --buil
 docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
-For a published image, use `compose.image.yaml` as the first file instead. Keep
+```sh
+docker compose --project-directory . -f deploy/compose/compose.image.yaml -f deploy/compose/compose.https.yaml up -d --wait
+```
+
+For a published image, use `deploy/compose/compose.image.yaml` as the first file instead. Keep
 both `-f` arguments for later status, logs, update, and stop commands.
 
 Caddy obtains and renews a certificate, redirects HTTP to HTTPS, and forwards
@@ -299,8 +303,8 @@ docker compose up -d --build --wait
 For an image deployment, change `TGWITNESS_IMAGE` to the desired version, then run:
 
 ```sh
-docker compose -f compose.image.yaml pull
-docker compose -f compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
 ```
 
 Use your installation's Compose file(s) for the preceding stop/copy commands too.

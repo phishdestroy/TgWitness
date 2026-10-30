@@ -75,6 +75,7 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           context: .
+          file: deploy/Dockerfile
           platforms: linux/arm64
           load: true
           tags: tgwitness:arm64-check
@@ -94,6 +95,7 @@ jobs:
         id: image
         with:
           context: .
+          file: deploy/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ needs.version.outputs.image }}:${{ needs.version.outputs.version }}

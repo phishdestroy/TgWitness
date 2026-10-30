@@ -1,8 +1,25 @@
-![Protect the workspace — Retain the journal, its files and the keys that belong to it.](../assets/presentation/wiki-backup-and-recovery.svg)
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../assets/presentation/wiki-backup-and-recovery-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/wiki-backup-and-recovery-static.svg">
+  <source media="(max-width: 640px)" srcset="../assets/presentation/wiki-backup-and-recovery-mobile.svg">
+  <img src="../assets/presentation/wiki-backup-and-recovery.svg" width="1200" alt="Protect the workspace. Retain the data, configuration and keys that belong to it.">
+</picture>
 
 # Backup, updates and recovery
 
-[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../.github/SUPPORT.md)
+**04 · RUN AND PROTECT** · [All guides](Home.md) · [Get help](../../.github/SUPPORT.md)
+
+<details>
+<summary>On this page</summary>
+
+- [What to preserve](#what-to-preserve)
+- [Make a consistent backup](#make-a-consistent-backup)
+- [Restore deliberately](#restore-deliberately)
+- [Update the application](#update-the-application)
+- [Retention and deletion](#retention-and-deletion)
+
+</details>
+
 
 
 A signed evidence export is a handoff artifact. A restorable service backup must also retain authorizations, private keys and configuration.
@@ -34,7 +51,7 @@ docker compose stop
 docker compose cp tgwitness:/data ../tgwitness-backup-before-update
 ~~~
 
-Choose a new backup destination each time. If your deployment uses overlays or `compose.image.yaml`, use those same files for the backup commands.
+Choose a new backup destination each time. If your deployment uses overlays or `deploy/compose/compose.image.yaml`, use those same files for the backup commands.
 
 
 <picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>

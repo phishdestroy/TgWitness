@@ -1,11 +1,30 @@
-![Follow the connections — Sources. Timelines. People. Files. Cited observations.](../assets/presentation/wiki-investigations.svg)
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../assets/presentation/wiki-investigations-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/wiki-investigations-static.svg">
+  <source media="(max-width: 640px)" srcset="../assets/presentation/wiki-investigations-mobile.svg">
+  <img src="../assets/presentation/wiki-investigations.svg" width="1200" alt="Follow the connections. Search across chats and return to the source records.">
+</picture>
 
 # Investigations across chats
 
-[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../.github/SUPPORT.md)
+**02 · INVESTIGATE AND EXPORT** · [All guides](Home.md) · [Get help](../../.github/SUPPORT.md)
+
+<details>
+<summary>On this page</summary>
+
+- [Set up the case](#set-up-the-case)
+- [Keep a source register](#keep-a-source-register)
+- [Follow changes and connections](#follow-changes-and-connections)
+- [Record deliberate actions](#record-deliberate-actions)
+- [Hand over the case](#hand-over-the-case)
+
+</details>
+
 
 
 Use one dedicated account and a clearly defined question. Keep source observations, your interpretation and unresolved questions separate throughout the case.
+
+<p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-feature-investigate-static.svg"><img src="../assets/presentation/readme-feature-investigate.svg" width="420" alt="Illustrated workflow: follow a shared lead to its source records."></picture></p>
 
 ## Set up the case
 

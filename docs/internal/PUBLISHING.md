@@ -155,7 +155,7 @@ staged diff before committing, including newly added files. Local account-inspec
 scripts such as `_inspect_live.py` are outside the public allowlist and must stay local.
 
 CI also runs [pip-audit](https://github.com/pypa/pip-audit) against all runtime pins in
-`constraints.txt`, with strict dependency collection. Audit results are attached to the run;
+`deploy/constraints.txt`, with strict dependency collection. Audit results are attached to the run;
 known vulnerabilities or incomplete collection fail the job and block the release checks.
 
 The site check uses a temporary loopback server, blocks external requests, and checks

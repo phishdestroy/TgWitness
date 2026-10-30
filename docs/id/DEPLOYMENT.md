@@ -80,7 +80,7 @@ Ini akan membuat volume persisten bernama untuk /data. Port web dipetakan ke 127
 
 Kedua berkas Compose dasar menggunakan nama proyek `tgwitness`, sehingga mengekstrak rilis baru ke direktori lain tidak secara otomatis memilih volume data baru. Jaga agar hanya ada satu penerapan yang aktif untuk proyek tersebut. Untuk instalasi independen, gunakan `docker compose -p NAME ...` yang unik dan port host yang berbeda, serta pertahankan keduanya saat pembaruan. Untuk penerapan lama yang menggunakan nama proyek berbeda, lanjutkan menggunakan nama aslinya dengan `-p`; `docker compose ls` mencantumkan proyek-proyek yang ada.
 
-Salin `.env.example` ke `.env` dan ubah `TGWITNESS_PORT` agar menggunakan port loopback yang berbeda. Misalnya, `TGWITNESS_PORT=8788` menampilkan panel di `http://127.0.0.1:8788`; kontainer tetap mendengarkan di port 8787. `.env` diabaikan oleh Git.
+Salin `deploy/env.example` ke `.env` dan ubah `TGWITNESS_PORT` agar menggunakan port loopback yang berbeda. Misalnya, `TGWITNESS_PORT=8788` menampilkan panel di `http://127.0.0.1:8788`; kontainer tetap mendengarkan di port 8787. `.env` diabaikan oleh Git.
 
 Ambil token awal:
 
@@ -99,7 +99,7 @@ docker compose up -d --wait
 
 `restart: unless-stopped` memulai ulang pengumpul data setelah terjadi crash atau daemon Docker dimulai ulang. Pada server Linux, aktifkan Docker saat boot menggunakan pengelola layanan distribusi Anda, umumnya `sudo systemctl enable --now docker`. Pada Windows/macOS, aktifkan pengaturan "start-at-sign-in" di Docker Desktop. Keluar dari Desktop, mode tidur, atau daemon Docker yang dihentikan dapat mengganggu proses pengumpulan data. Kontainer yang dihentikan secara eksplisit akan tetap dalam keadaan berhenti hingga Anda memulainya kembali.
 
-Volume /tmp dibatasi hingga 512 MiB dalam konfigurasi contoh. Proses ekspor menggunakan elemen `temporary-exports/` dari setiap ruang kerja ke direktori /data yang persisten. Sediakan ruang di sana untuk ekspor simultan, pertumbuhan jurnal/WAL, media, dan cadangan. Peluncur dan Docker menggunakan constraints.txt untuk mengunci versi dependensi runtime yang memenuhi syarat. Ini bukanlah rantai pasokan yang terkunci dengan hash: gambar dasar Python dan artefak paket masih memerlukan kualifikasi rilis independen.
+Volume /tmp dibatasi hingga 512 MiB dalam konfigurasi contoh. Proses ekspor menggunakan elemen `temporary-exports/` dari setiap ruang kerja ke direktori /data yang persisten. Sediakan ruang di sana untuk ekspor simultan, pertumbuhan jurnal/WAL, media, dan cadangan. Peluncur dan Docker menggunakan deploy/constraints.txt untuk mengunci versi dependensi runtime yang memenuhi syarat. Ini bukanlah rantai pasokan yang terkunci dengan hash: gambar dasar Python dan artefak paket masih memerlukan kualifikasi rilis independen.
 
 Jangan gunakan perintah `docker compose down -v` kecuali Anda bermaksud menghapus jurnal dan kunci. Laporan kesehatan kontainer menunjukkan ketersediaan server web, bukan keberhasilan penangkapan pesan Telegram. Periksa status pengumpul, detak jantung, kesalahan, dan peristiwa cakupan pada panel.
 
@@ -108,7 +108,7 @@ Jangan gunakan perintah `docker compose down -v` kecuali Anda bermaksud menghapu
 Layanan opsional `witness` menjalankan [saksi independen](../WITNESS.md) dalam kontainernya sendiri, dengan kunci dan jurnal tersendiri di volume `witness-data` serta hanya token saksi yang hanya dapat dibaca untuk pengumpul. Buat token tersebut di halaman **Saksi** pada panel, tambahkan bersama token bot dan saluran ke `.env`, lalu mulai profil:
 
 ```sh
-docker compose --profile witness up -d          # compose.image.yaml: same flag
+docker compose --profile witness up -d          # deploy/compose/compose.image.yaml: same flag
 docker compose logs witness                     # witness key fingerprint
 ```
 
@@ -118,7 +118,7 @@ Layanan ini terhubung ke kolektor di dalam jaringan Compose di `http://tgwitness
 
 Ini akan tersedia setelah [alur kerja rilis](#rilis-github-otomatis) berhasil dan konfigurasi paket GHCR publik selesai. Nama pemilik repositori tidak terkodekan secara permanen dalam pohon sumber ini. Gunakan gambar yang ditampilkan dalam ringkasan alur kerja rilis tersebut.
 
-Salin `.env.example` ke `.env`. Atur `TGWITNESS_IMAGE` ke versi yang telah dipublikasikan, dengan menggunakan jalur repositori **dalam** **huruf** **kecil**, misalnya:
+Salin `deploy/env.example` ke `.env`. Atur `TGWITNESS_IMAGE` ke versi yang telah dipublikasikan, dengan menggunakan jalur repositori **dalam** **huruf** **kecil**, misalnya:
 
 ```dotenv
 TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.0
@@ -128,9 +128,9 @@ TGWITNESS_PORT=8787
 Jalankan berkas ini secara terpisah, bukan `compose.yaml`:
 
 ```sh
-docker compose -f compose.image.yaml pull
-docker compose -f compose.image.yaml up -d --wait
-docker compose -f compose.image.yaml exec tgwitness cat /data/panel-token.txt
+docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
 Tidak diperlukan build sumber, Python, atau kompiler di host. Alur kerja rilis ini ditujukan untuk kontainer Linux AMD64 dan ARM64, termasuk VM Linux di Docker Desktop. Gunakan tag versi atau `ghcr.io/owner/repository@sha256:...` dari ringkasan alur kerja. Tidak ada konfigurasi pemindahan tag `latest` atau pembaruan aplikasi tanpa pengawasan. Gambar dan varian sumber menggunakan volume data yang sama jika nama proyeknya sama.
@@ -139,7 +139,7 @@ Tidak diperlukan build sumber, Python, atau kompiler di host. Alur kerja rilis i
 
 Gunakan server dengan Docker, domain yang Anda kendalikan, dan penyimpanan lokal yang persisten. Arahkan catatan A/AAAA domain ke server; publikasikan AAAA hanya jika IPv6 dapat menjangkaunya. Izinkan lalu lintas masuk TCP 80 dan 443 serta lalu lintas keluar DNS/HTTPS untuk penerbitan sertifikat. Layanan lain tidak boleh sudah menggunakan port-port ini.
 
-Salin `.env.example` ke `.env` dan tentukan nama host, tanpa skema atau jalur:
+Salin `deploy/env.example` ke `.env` dan tentukan nama host, tanpa skema atau jalur:
 
 ```dotenv
 TGWITNESS_DOMAIN=watch.your-domain.org
@@ -152,7 +152,11 @@ docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --buil
 docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt
 ```
 
-Untuk gambar yang telah dipublikasikan, gunakan `compose.image.yaml` sebagai file pertama. Pertahankan kedua argumen `-f` untuk perintah status, log, pembaruan, dan penghentian di kemudian hari.
+```sh
+docker compose --project-directory . -f deploy/compose/compose.image.yaml -f deploy/compose/compose.https.yaml up -d --wait
+```
+
+Untuk gambar yang telah dipublikasikan, gunakan `deploy/compose/compose.image.yaml` sebagai file pertama. Pertahankan kedua argumen `-f` untuk perintah status, log, pembaruan, dan penghentian di kemudian hari.
 
 Caddy memperoleh dan memperbarui sertifikat, mengalihkan HTTP ke HTTPS, serta meneruskan permintaan ke pengumpul di jaringan Compose pribadi. Status sertifikat memiliki volume persisten tersendiri. Port host langsung pengumpul tetap hanya untuk loopback. Konfigurasi Caddy yang disediakan tidak mengaktifkan pencatatan akses.
 
@@ -184,8 +188,8 @@ docker compose up -d --build --wait
 Untuk penerapan berbasis gambar, ubah `TGWITNESS_IMAGE` menjadi versi yang diinginkan, lalu jalankan:
 
 ```sh
-docker compose -f compose.image.yaml pull
-docker compose -f compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
 ```
 
 Gunakan berkas Compose pada instalasi Anda untuk perintah stop/copy di atas juga. Pertahankan `.env`, konfigurasi khusus, dan nama proyek yang sama. `down` mempertahankan volume bernama; **`down -v` menghapusnya**. Jangan menyalin `.venv` antar sistem operasi atau versi Python. Untuk pembaruan asli, hentikan TgWitness, buat cadangan direktori datanya secara lengkap, ganti berkas sumber, dan jalankan `python start.py --setup-only` sebelum meluncurkan.
