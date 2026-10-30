@@ -321,12 +321,58 @@
     update();
   }
 
-  const setups = {journey, hash:hashChain, witness, delivery, investigation, security, hardening};
+  // Reuse the same canonical encoder and SHA-256 primitive as the full chain lab.
+  async function modesHash(lab) {
+    const status = lab.querySelector('[data-hash-status]');
+    if (!globalThis.crypto?.subtle) {
+      status.textContent = T('modes.hash.unavailable');
+      return;
+    }
+    const input = lab.querySelector('[data-edit-record]');
+    const original = input.value;
+    const records = [1, 2, 3].map(seq => ({seq, observed_at:'2026-01-01T10:00:00.000+00:00',
+      source_at:null, kind:seq === 1 ? 'message.new' : seq === 2 ? 'message.edited' : 'message.deleted',
+      chat_id:-100123, message_id:42, actor_id:null,
+      payload:seq === 3 ? {message_ids:[42]} : {text:seq === 2 ? original : 'Meet at 10:00'}, previous_hash:'0'.repeat(64)}));
+    const saved = [];
+    for (const event of records) {
+      if (saved.length) event.previous_hash = saved.at(-1);
+      saved.push(await digest(event));
+    }
+    saved.forEach((hash, index) => {
+      const node = lab.querySelector(`[data-digest="${index + 1}"]`);
+      node.textContent = hash.slice(0, 16) + '…';
+      node.title = hash;
+    });
+    lab.querySelector('[data-stored]').textContent = saved[1];
+    let revision = 0;
+    const update = async () => {
+      const current = ++revision;
+      const event = clone(records[1]);
+      event.payload.text = input.value;
+      const calculated = await digest(event);
+      if (current !== revision) return;
+      const broken = calculated !== saved[1];
+      lab.dataset.state = broken ? 'error' : 'ok';
+      lab.querySelector('[data-calculated]').textContent = calculated;
+      const node = lab.querySelector('[data-digest="2"]');
+      node.textContent = calculated.slice(0, 16) + '…';
+      node.title = calculated;
+      status.textContent = T(broken ? 'modes.hash.changed' : 'modes.hash.ok');
+    };
+    input.addEventListener('input', () => update().catch(() => {
+      status.textContent = T('modes.hash.unavailable');
+    }));
+    await update();
+    showControls(lab);
+  }
+
+  const setups = {journey, hash:hashChain, witness, delivery, investigation, security, hardening, modesHash};
   document.querySelectorAll('[data-lab]').forEach(lab => {
     Promise.resolve().then(() => setups[lab.dataset.lab](lab)).catch(() => {
       lab.querySelectorAll('[data-enhanced]').forEach(node => { node.hidden = true; });
       const status = lab.querySelector('[role=status]');
-      if (status) status.textContent = T('Interactive controls are unavailable in this browser. The static explanation and formulas remain available.');
+      if (status) status.textContent = T(lab.dataset.lab === 'modesHash' ? 'modes.hash.unavailable' : 'Interactive controls are unavailable in this browser. The static explanation and formulas remain available.');
     });
   });
 })();

@@ -7,9 +7,10 @@ import xml.etree.ElementTree as ET
 
 import pytest
 
-from tools.build_site import (DEMO_LOCALES, DEMO_PAGES, DEMO_STATIC, INPUTS, LANGS, LOCAL_PAGES, PAGES, ROOT, SEARCH_FILES,
+from tools.build_site import (DEMO_LOCALES, DEMO_PAGES, DEMO_STATIC, INPUTS, LANGS, LOCAL_PAGES, MODES_PAGES, PAGES, ROOT, SEARCH_FILES,
                               STATIC, TRANSLATIONS, build_site)
 from tools.site_i18n import LANGUAGES
+from tools import site_modes
 
 
 @pytest.fixture
@@ -31,7 +32,7 @@ def test_pages_uses_only_presentation_files_and_project_relative_assets(site_roo
     output = build_site(site_root, repository="example/Journal")
     assert {p.relative_to(output).as_posix() for p in output.rglob("*") if p.is_file()} == {
         *(page + "index.html" for page in PAGES), *SEARCH_FILES, *STATIC, ".nojekyll", "sitemap.xml", "robots.txt",
-        *DEMO_STATIC, *DEMO_PAGES, *DEMO_LOCALES,
+        *DEMO_STATIC, *DEMO_PAGES, *DEMO_LOCALES, *MODES_PAGES,
     }
     content = (output / "index.html").read_text(encoding="utf-8")
     assert "https://example.github.io/Journal/" in content
@@ -125,6 +126,7 @@ def test_every_page_has_distinct_metadata_and_valid_links(site_root, base_url):
     output = build_site(site_root, repository="example/Journal", base_url=base_url)
     pages = {base_url + "/" + path: Page(output / path / "index.html") for path in PAGES}
     assert len(pages) == len(PAGES) == len(LANGS) * len(LOCAL_PAGES) == 13 * 33
+    pages.update({base_url + "/" + path: Page(output / path) for path in MODES_PAGES})
     for lang in LANGS:
         prefix = "" if lang == "en" else lang + "/"
         local = [pages[base_url + "/" + prefix + path] for path in LOCAL_PAGES]
@@ -132,7 +134,8 @@ def test_every_page_has_distinct_metadata_and_valid_links(site_root, base_url):
         assert len({page.find("meta", name="description")[0]["content"] for page in local}) == len(local), lang
     for url, page in pages.items():
         path = url.removeprefix(base_url + "/")
-        lang = path.split("/")[0] if path.split("/")[0] in LANGUAGES and "/" in path else "en"
+        languages = site_modes.LANGUAGES if path in MODES_PAGES else LANGUAGES
+        lang = path.split("/")[0] if path.split("/")[0] in languages and "/" in path else "en"
         local = path.removeprefix(lang + "/") if lang != "en" else path
         assert page.h1, url
         assert len(page.find("h1")) == 1, url
@@ -140,10 +143,10 @@ def test_every_page_has_distinct_metadata_and_valid_links(site_root, base_url):
         assert page.find("link", rel="canonical") == [{"rel": "canonical", "href": url}]
         assert page.find("meta", property="og:url")[0]["content"] == url
         html_tag = page.find("html")[0]
-        assert html_tag["lang"] == LANGUAGES[lang][1] and html_tag["dir"] == LANGUAGES[lang][2], url
+        assert html_tag["lang"] == languages[lang][1] and html_tag["dir"] == languages[lang][2], url
         # Every page names all of its language versions, and each of them exists.
         alternates = {a["hreflang"]: a["href"] for a in page.find("link", rel="alternate")}
-        assert set(alternates) == {LANGUAGES[other][1] for other in LANGS} | {"x-default"}, url
+        assert set(alternates) == {value[1] for value in languages.values()} | {"x-default"}, url
         assert alternates["x-default"] == base_url + "/" + local
         assert all(href in pages for href in alternates.values()), url
         graphs = [script["@graph"] for script in page.scripts if "@graph" in script]
@@ -175,7 +178,7 @@ def test_every_page_has_distinct_metadata_and_valid_links(site_root, base_url):
     for name in SEARCH_FILES:
         index = json.loads((output / name).read_text(encoding="utf-8"))
         hub = base_url + "/" + name.removesuffix("search.json")
-        assert len(index["pages"]) == 30
+        assert len(index["pages"]) == 31
         for entry in index["pages"]:
             assert urljoin(hub, entry["url"]) in pages
             assert len(entry["text"]) > 300
@@ -233,3 +236,20 @@ def test_online_demo_is_read_only_relative_and_translated(site_root):
     russian = (output / "demo/locales/ru.js").read_text(encoding="utf-8")
     assert russian.startswith('window.TGW_LANG="ru";window.TGW_DICT={') and "Журнал" in russian
     assert 'href="../demo/?lang=ru"' in (output / "ru/index.html").read_text(encoding="utf-8")
+
+
+def test_modes_requires_complete_catalogues_and_escapes_translations():
+    from tools.build_site import render, seo, THEME_SCRIPT
+    reader = lambda name: (ROOT / name).read_bytes()
+    english = site_modes.catalogue(reader, "en")
+    for lang in site_modes.LANGUAGES:
+        assert set(site_modes.catalogue(reader, lang, english)) == set(english)
+    with pytest.raises(ValueError, match="Incomplete modes catalogue"):
+        site_modes.catalogue(lambda _: json.dumps({"modes": {}}).encode(), "ru", english)
+    attack = '<img src=x onerror=alert(1)>'
+    translated = {**english, "modes.title": attack}
+    _, page = site_modes.render_page(reader(site_modes.SOURCE).decode(), translated, lang="en",
+        base_url="https://example.github.io/Journal", values={"REPO_URL":"https://github.com/example/Journal", "BRANCH":"main", "VERSION":"0.6.1"},
+        dictionary={}, render=render, seo=seo, theme_script=THEME_SCRIPT)
+    assert attack not in page and "&lt;img src=x onerror=alert(1)&gt;" in page
+    assert "{{modes." not in page

@@ -123,7 +123,7 @@ if (record) {
 
 // Large screenshots remain useful on a phone. Native dialog supplies Escape,
 // focus containment, and focus restoration; no gallery library is needed.
-if ('HTMLDialogElement' in window) {
+if ('HTMLDialogElement' in window && document.querySelector('.screen-frame > img')) {
   const dialog = document.createElement('dialog');
   dialog.className = 'screenshot-dialog';
   dialog.setAttribute('aria-label', T('Full-size workspace screenshot'));

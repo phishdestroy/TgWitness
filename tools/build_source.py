@@ -23,7 +23,8 @@ DIRECTORIES = {
 LANGUAGES = ("ru", "uk", "es", "pt", "tr", "ar", "fa", "ur", "hi", "id", "vi", "zh")
 PACKAGE_JSON = {"english_fallbacks.json", "public_proxies.json", *("locales/" + language + ".json" for language in LANGUAGES)}
 # Site translations: without them every non-English page silently falls back to English.
-SITE_JSON = {"i18n/" + language + ".json" for language in LANGUAGES}
+SITE_JSON = {"i18n/" + language + ".json" for language in
+             ("en", *LANGUAGES, "fr", "de", "it", "uz", "ko", "zh-Hant", "ms", "pl", "ja", "th", "he", "am", "bn")}
 # Recorded answers of the fictional demo for the read-only online demo (tools/capture_demo.py).
 SITE_JSON.add("demo/fixtures.json")
 PRESENTATION_MEDIA = {

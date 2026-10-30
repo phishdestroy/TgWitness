@@ -18,12 +18,13 @@ from urllib.parse import urlsplit
 
 if __package__:
     from .site_content import GROUPS, GUIDES, LABELS, NEXT, REFERENCE, REFERENCE_GROUPS
-    from . import site_diagrams, site_i18n, site_wiki
+    from . import site_diagrams, site_i18n, site_wiki, site_modes
 else:
     from site_content import GROUPS, GUIDES, LABELS, NEXT, REFERENCE, REFERENCE_GROUPS
     import site_diagrams
     import site_i18n
     import site_wiki
+    import site_modes
 
 ROOT = Path(__file__).resolve().parents[1]
 LANGS = tuple(site_i18n.LANGUAGES)
@@ -57,7 +58,8 @@ STATIC = {"style.css": "website/style.css", "site.js": "website/site.js",
           "LICENSE": "LICENSE", "NOTICE": "NOTICE",
           "docs.css": "website/docs.css", "docs.js": "website/docs.js",
           "learn.css": "website/learn.css", "learn.js": "website/learn.js", **ASSETS, **WIKI_ASSETS}
-TRANSLATIONS = tuple(f"website/i18n/{lang}.json" for lang in LANGS if lang != "en")
+TRANSLATIONS = tuple(f"website/i18n/{lang}.json" for lang in site_modes.LANGUAGES)
+MODES_PAGES = site_modes.FILES
 # The read-only online demo: the panel's own files, answered from recorded demo records
 # (website/demo/mock.js, tools/capture_demo.py). Nothing on the website can change data.
 DEMO_STATIC = {"demo/" + name: "tgwitness/static/" + name
@@ -67,7 +69,7 @@ DEMO_PAGES = {"demo/index.html": "tgwitness/static/index.html", "demo/guide.html
               "demo/dedicated-account.html": "tgwitness/static/dedicated-account.html"}
 DEMO_LOCALES = {f"demo/locales/{lang}.js": lang for lang in LANGS}
 DEMO_DICTIONARIES = ("tgwitness/english_fallbacks.json", *(f"tgwitness/locales/{lang}.json" for lang in LANGS if lang != "en"))
-INPUTS = ("website/index.html", "website/docs.html", "website/guide_intro.html", *STATIC.values(),
+INPUTS = ("website/index.html", "website/docs.html", "website/guide_intro.html", site_modes.SOURCE, *STATIC.values(),
           *DEMO_STATIC.values(), *DEMO_PAGES.values(), *DEMO_DICTIONARIES,
           *(f"website/guides/en/{slug}.html" for slug in GUIDES),
           *dict.fromkeys(entry[3] for entry in REFERENCE.values()))
@@ -137,9 +139,9 @@ class PlainText(HTMLParser):
         return " ".join(" ".join(self.parts).split())
 
 
-def seo(base_url, path, title, description, lang, alternates, *, crumbs=(), extra_only=False):
+def seo(base_url, path, title, description, lang, alternates, *, crumbs=(), extra_only=False, languages=site_i18n.LANGUAGES):
     canonical = base_url + "/" + path
-    code = site_i18n.LANGUAGES[lang][1]
+    code = languages[lang][1]
     graph = [{"@type": "WebPage", "@id": canonical, "url": canonical, "name": title,
               "description": description, "inLanguage": code, "isPartOf": {"@id": base_url + "/#website"}}]
     if not path:
@@ -149,7 +151,7 @@ def seo(base_url, path, title, description, lang, alternates, *, crumbs=(), extr
         graph.append({"@type": "BreadcrumbList", "itemListElement": [
             {"@type": "ListItem", "position": i + 1, "name": name, "item": base_url + "/" + url}
             for i, (name, url) in enumerate(crumbs)]})
-    links = "".join(f'<link rel="alternate" hreflang="{site_i18n.LANGUAGES[other][1]}" '
+    links = "".join(f'<link rel="alternate" hreflang="{languages[other][1]}" '
                     f'href="{html.escape(base_url + "/" + other_path, quote=True)}">'
                     for other, other_path in alternates)
     links += f'<link rel="alternate" hreflang="x-default" href="{html.escape(base_url + "/" + alternates[0][1], quote=True)}">'
@@ -161,7 +163,7 @@ def seo(base_url, path, title, description, lang, alternates, *, crumbs=(), extr
             f'<meta name="theme-color" content="#0b1120"><title>{title}</title>\n'
             f'<meta name="description" content="{description}"><link rel="canonical" href="{canonical}">\n'
             f'<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">\n'
-            f'<meta property="og:locale" content="{site_i18n.LANGUAGES[lang][3]}">\n'
+            f'<meta property="og:locale" content="{languages[lang][3]}">\n'
             f'<meta property="og:title" content="{title}"><meta property="og:description" content="{description}">\n'
             f'<meta property="og:url" content="{canonical}"><meta property="og:image" content="{html.escape(base_url, quote=True)}/assets/tgwitness-social.png">\n'
             f'<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">\n'
@@ -236,7 +238,7 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
     # Never clean/copy a directory recursively: an unexpected file must block the
     # upload rather than be carried into the public Pages artifact.
     expected = {*(path + "index.html" for path in PAGES), *SEARCH_FILES, *STATIC, ".nojekyll", "robots.txt", "sitemap.xml",
-                *DEMO_STATIC, *DEMO_PAGES, *DEMO_LOCALES}
+                *DEMO_STATIC, *DEMO_PAGES, *DEMO_LOCALES, *MODES_PAGES}
     if output.resolve() != output:
         raise ValueError("Site output must not be a linked directory")
     if output.exists():
@@ -272,6 +274,8 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
     home_template = read_public("website/index.html").decode("utf-8")
     doc_template = read_public("website/docs.html").decode("utf-8")
     intro_template = read_public("website/guide_intro.html").decode("utf-8")
+    modes_template = read_public(site_modes.SOURCE).decode("utf-8")
+    modes_english = site_modes.catalogue(read_public, "en")
     fragments = {slug: read_public(f"website/guides/en/{slug}.html").decode("utf-8") for slug in GUIDES}
     script_keys = []
     for script in ("website/learn.js", "website/docs.js", "website/site.js"):
@@ -327,6 +331,12 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
                 return 'href="' + html.escape(relative(path, target) + fragment, quote=True) + '"'
             return github.sub(replace, content)
 
+        modes_words = site_modes.catalogue(read_public, lang, modes_english)
+        modes_path, modes_html = site_modes.render_page(
+            modes_template, modes_words, lang=lang, base_url=base_url, values=values, dictionary=dictionary,
+            render=render, seo=seo, theme_script=THEME_SCRIPT)
+        write(modes_path, links(modes_html, posixpath.dirname(modes_path)))
+
         def alternates(local):
             return [(other, prefix(other) + local) for other in LANGS]
 
@@ -379,13 +389,16 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
         search = {"labels": {k: labels[k] for k in ("empty", "results", "prompt")}, "pages": [
             *({"title": guides[key][0], "description": guides[key][1], "keywords": guides[key][2],
                "text": texts[hub + key + "/"][:SEARCH_TEXT], "url": key + "/"} for key in GUIDES),
+            {"title": modes_words["modes.eyebrow"], "description": modes_words["modes.seo"],
+             "keywords": modes_words["modes.title"], "text": PlainText(modes_html).text[:SEARCH_TEXT],
+             "url": "../" + site_modes.LOCAL},
             *({"title": labels["wiki"] + " · " + reference[key][0], "description": reference[key][1],
                "keywords": reference[key][2], "text": texts[f"{wiki_hub}{key}/"][:SEARCH_TEXT],
                "url": "reference/" + key + "/"} for key in REFERENCE)]}
         write(hub + "search.json", json.dumps(search, ensure_ascii=False, separators=(",", ":")))
 
         def sidebar(path):
-            items = []
+            items = [f'<a href="{relative_file(path, base + site_modes.LOCAL)}">{html.escape(modes_words["modes.eyebrow"])}</a>']
             for label, heading, keys in GROUPS:
                 items.append(f'<p class="nav-label">{t(label)}</p>')
                 for key in keys:
@@ -435,6 +448,10 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
         intro, intro_missing = localize(intro_template)
         content = (f'<p class="eyebrow">TGWITNESS / {labels["docs"].upper()}</p><h1>{labels["title"]}</h1>'
                    f'<p class="guide-outcome">{labels["intro"]}</p>' + render(intro, guide_values(hub)))
+        content += (f'<a class="guide-card" href="{relative_file(hub, base + site_modes.LOCAL)}">'
+                    f'<span class="card-number" aria-hidden="true">04 / 08 ↗</span>'
+                    f'<h2>{html.escape(modes_words["modes.eyebrow"])}</h2>'
+                    f'<p>{html.escape(modes_words["modes.seo"])}</p></a>')
         for index, (label, heading, keys) in enumerate(GROUPS):
             content += f'<h2 id="section-{index}">{t(heading)}</h2><div class="guide-grid">'
             content += "".join(card(hub, hub + key + "/", f"{list(GUIDES).index(key) + 1:02d}", *guides[key][:2]) for key in keys)
@@ -491,6 +508,18 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
                  [(labels["home"], base), (labels["docs"], hub), (labels["wiki"], wiki_hub), (title, path)],
                  content, headings(content), footer, notice(missing_by_page[path], english))
 
+    for lang in site_modes.EXTRA_LANGUAGES:
+        words = site_modes.catalogue(read_public, lang, modes_english)
+        path, content = site_modes.render_page(
+            modes_template, words, lang=lang, base_url=base_url, values=values, dictionary={},
+            render=render, seo=seo, theme_script=THEME_SCRIPT)
+        # A translated capability guide must not imply the detailed manual is translated too.
+        for key, filename in site_modes.DOCS.items():
+            slug = next(k for k, entry in REFERENCE.items() if entry[3] == "docs/" + filename)
+            source_url = values["REPO_URL"] + "/blob/" + values["BRANCH"] + "/docs/" + filename
+            content = content.replace('href="' + source_url + '"', 'href="' + relative(posixpath.dirname(path), WIKI_HUB + slug + "/") + '"')
+        write(path, content)
+
     for name, source in images.items():
         if WIKI_ASSETS.get(name) != source:
             raise ValueError("Reference page uses an unlisted image: " + source)
@@ -508,6 +537,10 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
             f'<xhtml:link rel="alternate" hreflang="{site_i18n.LANGUAGES[other][1]}" '
             f'href="{html.escape(base_url + "/" + prefix(other) + local)}"/>' for other in LANGS) + '</url>\n'
             for lang in LANGS for local in LOCAL_PAGES)
+        + ''.join('<url><loc>' + html.escape(base_url + '/' + path) + '</loc>' + ''.join(
+            f'<xhtml:link rel="alternate" hreflang="{site_modes.LANGUAGES[other][1]}" '
+            f'href="{html.escape(base_url + "/" + ("" if other == "en" else other + "/") + site_modes.LOCAL)}"/>'
+            for other in site_modes.LANGUAGES) + '</url>\n' for path in MODES_PAGES)
         + '</urlset>\n', encoding="utf-8")
     return output
 

@@ -228,7 +228,8 @@ def main():
                     if slug:
                         expect(page.locator('.sidebar [aria-current="page"]')).to_have_count(1)
                     else:
-                        expect(page.locator(".guide-card")).to_have_count(len(GUIDES))
+                        expect(page.locator(".guide-card")).to_have_count(len(GUIDES) + 1)
+                        expect(page.locator('.guide-card[href="../guides/modes.html"]')).to_be_visible()
                     for width in widths:
                         page.set_viewport_size({"width": width, "height": 1000})
                         assert page.evaluate("document.documentElement.scrollWidth <= innerWidth"), (path, width)
@@ -330,7 +331,7 @@ def main():
                     expect(fallback.locator(".search")).to_be_hidden()
                     assert not fallback.locator('[data-enhanced]:visible').count()
                     if not slug:
-                        expect(fallback.locator(".guide-card")).to_have_count(len(GUIDES))
+                        expect(fallback.locator(".guide-card")).to_have_count(len(GUIDES) + 1)
                     else:
                         expect(fallback.locator(".next-guide")).to_be_visible()
                     if slug == "concepts":
