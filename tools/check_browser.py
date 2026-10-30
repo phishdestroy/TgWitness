@@ -151,9 +151,16 @@ def check_languages(browser, server):
     page, errors, keys = context.new_page(), [], []
     page.on("pageerror", lambda exc: errors.append(str(exc)))
     page.route("**/app.js*", lambda route: route.abort())  # the static markup only, as shipped
-    for name in ("/", "/guide.html", "/dedicated-account.html"):
+    page.goto(server.url + "/")
+    keys += page.evaluate("pageKeys()")
+    # The guides rewrite their links after translating: list their markup before that, as
+    # tools/check_guide_languages.py does.
+    shipped = (ROOT / "tgwitness/static/i18n.js").read_text(encoding="utf-8").split("translatePage();\n")[0]
+    page.route("**/i18n.js*", lambda route: route.fulfill(body=shipped, content_type="text/javascript"))
+    for name in ("/guide.html", "/dedicated-account.html"):
         page.goto(server.url + name)
         keys += page.evaluate("pageKeys()")
+    page.unroute("**/i18n.js*")
     journal = page.locator('[data-view="observations"]').first
     page.goto(server.url)
     english = " ".join(journal.inner_text().split()[:-1])  # without the event counter
