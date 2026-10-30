@@ -23,7 +23,7 @@ GROUPS = (
 # The full reference, rendered from the repository's Markdown: slug -> (title, description, keywords, source).
 REFERENCE = {
     "notice": ("Operator incompatibility notice", "Our operator notice on Taylor Wessing and its source record.", "notice operator incompatibility Taylor Wessing statement licence", "docs/OPERATOR-INCOMPATIBILITY.md"),
-    "license": ("Our position on Taylor Wessing", "TgWitness is MIT-licensed. Our position on Taylor Wessing and why we hold it; it adds no licence condition.", "license licence MIT Taylor Wessing position statement", "docs/TAYLOR-WESSING-EXCLUSION.md"),
+    "license": ("Licence and architectural incompatibility notice", "TgWitness is MIT-licensed for everyone, and why it is architecturally incompatible with the Taylor Wessing workflow.", "license licence MIT Taylor Wessing position statement", "docs/TAYLOR-WESSING-EXCLUSION.md"),
     "quickstart": ("Quick start", "Every way to install and launch TgWitness: Windows package, Python, Docker and the synthetic demo, with first checks.", "install launch windows linux macos docker demo setup", "docs/QUICKSTART.md"),
     "accounts": ("Accounts and session formats", "Sign in by phone, QR code or auth key, import Telethon, Pyrogram or Telegram Desktop sessions, and run several accounts.", "login phone qr session tdata pyrogram telethon import api pair", "docs/ACCOUNTS.md"),
     "connection": ("Connection, proxies and data protection", "API pairs, sign-in methods, SOCKS5, HTTP and MTProxy routes, public proxy lists and what each route protects.", "proxy mtproxy socks5 http route api id hash network", "docs/CONNECTION-SECURITY.md"),
