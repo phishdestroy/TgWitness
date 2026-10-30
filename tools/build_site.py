@@ -35,6 +35,14 @@ ASSETS = {
     "assets/exports.png": "docs/assets/exports.png",
     "assets/tgwitness-social.png": "docs/assets/presentation/preview-social.png",
     "assets/public-proxies.png": "docs/assets/public-proxies.png",
+    # Home page films and their reduced-motion stills; the evidence explanations below.
+    "assets/investigation.mp4": "docs/assets/presentation/investigation.mp4",
+    "assets/investigation-static.png": "docs/assets/presentation/investigation-static.png",
+    "assets/message-history.mp4": "docs/assets/presentation/message-history.mp4",
+    "assets/message-history-static.png": "docs/assets/presentation/message-history-static.png",
+    "assets/evidence-chain-static.svg": "docs/assets/presentation/evidence-chain-static.svg",
+    "assets/evidence-tamper-static.svg": "docs/assets/presentation/evidence-tamper-static.svg",
+    "assets/evidence-checkpoint-static.svg": "docs/assets/presentation/evidence-checkpoint-static.svg",
 }
 # Screenshots that reference pages show; a reference page using any other image fails the build.
 WIKI_ASSETS = {
