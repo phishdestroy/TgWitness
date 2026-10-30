@@ -100,23 +100,8 @@ p { color: var(--muted); }
 
 /* Screenshots, kept large enough to read and inspect. */
 .workspace { padding-top: 86px; }
-/* Films after the hero: the same night background, two silent loops with stills for reduced motion. */
-.films { background: var(--night); color: #a9b8cf; padding-block: 18px 92px; }
-.films .section-heading h2 { color: #fff; }
-.films .section-heading > p { color: #a9b8cf; }
-.films .eyebrow { color: #8ea0bd; }
-.film-grid { display: grid; grid-template-columns: 1.12fr 1fr; gap: 22px; align-items: start; }
-.film { margin: 0; overflow: hidden; border: 1px solid #22324d; border-radius: 14px; background: #0d1626; box-shadow: 0 28px 70px #02061773; }
-.film video { display: block; width: 100%; height: auto; background: #0b1421; }
-.film figcaption { display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 4px; padding: 15px 19px 17px; color: #a9b8cf; font-size: 13px; line-height: 1.6; text-align: start; }
-.film figcaption { margin-top: 0; }
-.film figcaption > span { color: #a9b8cf; font-weight: 400; white-space: normal; }
-.film figcaption strong { color: #fff; font-size: 15px; font-weight: 650; }
-.film figcaption a { margin-top: 4px; color: #8fb4ff; font-size: 12px; font-weight: 600; }
-.film figcaption a:hover { color: #fff; }
 .proof { padding-top: 10px; padding-bottom: 86px; }
 .proof figure img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 14px; background: #0b1421; }
-@media (max-width: 800px) { .film-grid { grid-template-columns: 1fr; } .films { padding-bottom: 64px; } }
 
 .section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; margin-bottom: 30px; }
 .eyebrow, .feature-number, .step-label { font: 600 10px/1.5 var(--mono); letter-spacing: .1em; color: #586a85; }

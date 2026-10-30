@@ -201,15 +201,3 @@ if (languageMenu) {
     if (event.key === 'Escape') { languageMenu.open = false; languageMenu.querySelector('summary').focus(); }
   });
 }
-
-// Silent loops of fictional records. With reduced motion they stay on their still frame and
-// offer controls instead of playing on their own.
-document.querySelectorAll('.film-video').forEach(video => {
-  const calm = window.matchMedia('(prefers-reduced-motion: reduce)');
-  function apply() {
-    if (calm.matches) { video.pause(); video.removeAttribute('autoplay'); video.controls = true; }
-    else { video.controls = false; video.play().catch(() => { video.controls = true; }); }
-  }
-  apply();
-  calm.addEventListener('change', apply);
-});
