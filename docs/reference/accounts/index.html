@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Accounts and session formats | TgWitness</title>
+<meta name="description" content="Sign in by phone, QR code or auth key, import Telethon, Pyrogram or Telegram Desktop sessions, and run several accounts."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/docs/reference/accounts/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Accounts and session formats | TgWitness"><meta property="og:description" content="Sign in by phone, QR code or auth key, import Telethon, Pyrogram or Telegram Desktop sessions, and run several accounts.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/docs/reference/accounts/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/accounts/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/accounts/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/accounts/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/accounts/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/accounts/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/accounts/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/accounts/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/accounts/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/accounts/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/accounts/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/docs/reference/accounts/", "url": "https://phishdestroy.github.io/TgWitness/docs/reference/accounts/", "name": "Accounts and session formats | TgWitness", "description": "Sign in by phone, QR code or auth key, import Telethon, Pyrogram or Telegram Desktop sessions, and run several accounts.", "inLanguage": "en", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://phishdestroy.github.io/TgWitness/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://phishdestroy.github.io/TgWitness/docs/"}, {"@type": "ListItem", "position": 3, "name": "Reference", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Accounts and session formats", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/accounts/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../docs.css">
+<link rel="stylesheet" href="../../../learn.css">
+<script src="../../../docs.js" defer></script>
+<script src="../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Documentation</span></a>
+<nav aria-label="Guides"><a href="../../concepts/">Visual guide</a><a href="../../">All guides</a><a href="../">Reference</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Language"><span aria-hidden="true">◍</span> English</summary><div class="lang-list"><a href="./" hreflang="en" lang="en" aria-current="true">English</a><a href="../../../ru/docs/reference/accounts/" hreflang="ru" lang="ru">Русский</a><a href="../../../uk/docs/reference/accounts/" hreflang="uk" lang="uk">Українська</a><a href="../../../es/docs/reference/accounts/" hreflang="es" lang="es">Español</a><a href="../../../pt/docs/reference/accounts/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../tr/docs/reference/accounts/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../ar/docs/reference/accounts/" hreflang="ar" lang="ar">العربية</a><a href="../../../fa/docs/reference/accounts/" hreflang="fa" lang="fa">فارسی</a><a href="../../../ur/docs/reference/accounts/" hreflang="ur" lang="ur">اردو</a><a href="../../../hi/docs/reference/accounts/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../id/docs/reference/accounts/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../vi/docs/reference/accounts/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../zh/docs/reference/accounts/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Switch between light and dark theme"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Guides"><a href="../../../guides/modes.html">Modes, scenarios and evidence levels</a><p class="nav-label">First steps</p><a href="../../start/">Start in minutes</a><a href="../../accounts/">Connect an account</a><a href="../../proxies/">Choose a proxy</a><a href="../../exports/">Export and verify</a><p class="nav-label">Understand the evidence</p><a href="../../concepts/">See how evidence works</a><a href="../../cases/">Investigate across all chats</a><a href="../../security/">Keep it secure</a><p class="nav-label">Go further</p><a href="../../witness/">Set up a witness bot</a><a href="../../server/">Keep it running</a><a href="../../troubleshooting/">Find what went wrong</a></nav><nav class="wiki-nav" aria-label="Reference"><p class="nav-label"><a class="nav-label-link" href="../">Reference</a></p><details class="wiki-group" open><summary>Set up</summary><a href="../quickstart/">Quick start</a><a href="./" aria-current="page">Accounts and session formats</a><a href="../connection/">Connection, proxies and data protection</a><a href="../deployment/">Deployment</a></details><details class="wiki-group"><summary>Collect</summary><a href="../collection/">How collection works</a><a href="../operations/">Workflows and operations</a><a href="../investigation/">Investigation mode</a><a href="../features/">Features and limits</a></details><details class="wiki-group"><summary>Evidence</summary><a href="../how-it-works/">How the evidence works</a><a href="../evidence/">Evidence format</a><a href="../witness/">Independent witness</a><a href="../timestamp/">Timestamps</a></details><details class="wiki-group"><summary>Security & project</summary><a href="../security/">Security and data handling</a><a href="../architecture/">Architecture</a><a href="../verification/">What has been tested</a><a href="../license/">Licence and architectural incompatibility notice</a><a href="../notice/">Operator incompatibility notice</a><a href="../changelog/">Changelog</a></details></nav><p class="sidebar-note">v0.7.0<br>Open source · Runs on your machine</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Guides"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Documentation</a> <span aria-hidden="true">/</span> <a href="../">Reference</a> <span aria-hidden="true">/</span> <span aria-current="page">Accounts and session formats</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Search the documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Try proxy, hash chain, token or witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Clear search" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Type a word to search the guides and the reference. Search stays in your browser.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Reference / Set up</p><h1>Accounts and session formats</h1><p class="guide-outcome">Sign in by phone, QR code or auth key, import Telethon, Pyrogram or Telegram Desktop sessions, and run several accounts.</p><div class="wiki-body"><p>TgWitness signs in as a <strong>Telegram user account</strong> (not a bot) over MTProto, using
+Telethon. Each account lives in its own <strong>workspace</strong> (called a <em>workspace</em> in the
+API and command-line tools) with its own session, sources, journal and signing key.</p>
+<p>Session files, session strings and Auth Keys are <strong>account authorizations</strong>: whoever
+holds one can act as that account. They do not contain message history.</p>
+<blockquote class="callout">
+<p>[!WARNING]
+<strong>Do not use anything you cannot afford to lose.</strong> We strongly advise against connecting
+personal or otherwise valuable accounts, and against creating an API ID / API hash on an
+account you value. This is not about TgWitness being untested: Telegram restricts and
+permanently bans accounts unpredictably — for request volumes it happens to consider
+excessive, regardless of the client or purpose, with no adequate documentation. Many bans
+are irreversible. Use dedicated accounts. Smooth test runs depend on Telegram, not on the
+software, and guarantee nothing for later.</p>
+</blockquote>
+<ul>
+<li><a href="#at-a-glance">At a glance</a></li>
+<li><a href="#before-you-start-api-id-and-api-hash">Before you start: API ID and API hash</a></li>
+<li><a href="#phone-number">Phone number</a> · <a href="#qr-code">QR code</a> · <a href="#auth-key--dc-id">Auth Key + DC ID</a></li>
+<li><a href="#account-files">Account files</a>: <a href="#telethon-session">Telethon .session</a> ·
+    <a href="#pyrogram-session">Pyrogram .session</a> · <a href="#session--json-pair">Session + JSON pair</a> ·
+    <a href="#telegram-desktop-tdata">TData</a> · <a href="#telethon-stringsession">StringSession</a> ·
+    <a href="#account-json">Account JSON</a></li>
+<li><a href="#identify-what-you-have">Identify what you have</a> · <a href="#unsupported-formats">Unsupported formats</a></li>
+<li><a href="#multiple-accounts">Multiple accounts</a> · <a href="#keeping-account-files-safe">Keeping account files safe</a> ·
+    <a href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+<h2 id="at-a-glance">At a glance<a class="anchor" href="#at-a-glance" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you have</th>
+<th>Tab in <strong>Add account</strong></th>
+<th>You will also need</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The phone number and access to its login codes</td>
+<td><strong>Phone</strong></td>
+<td>2FA password if enabled</td>
+</tr>
+<tr>
+<td>Telegram open on another device</td>
+<td><strong>QR code</strong></td>
+<td>2FA password if enabled</td>
+</tr>
+<tr>
+<td>A <code>.session</code> file (Telethon or Pyrogram)</td>
+<td><strong>Files</strong></td>
+<td>Optional companion JSON for app settings</td>
+</tr>
+<tr>
+<td><code>.session</code> + <code>.json</code> with the same name</td>
+<td><strong>Files</strong> (select both)</td>
+<td>Usually nothing else</td>
+</tr>
+<tr>
+<td>A Telegram Desktop <code>tdata</code> folder</td>
+<td><strong>Files</strong> (as a ZIP)</td>
+<td>The Desktop local passcode if one is set</td>
+</tr>
+<tr>
+<td>A Telethon StringSession (text, <code>.txt</code>, <code>.tgwitness-session</code>)</td>
+<td><strong>Files</strong></td>
+<td>No separate API pair required</td>
+</tr>
+<tr>
+<td>A <code>.json</code> with a session or Auth Key</td>
+<td><strong>Files</strong></td>
+<td>No separate API pair required</td>
+</tr>
+<tr>
+<td>An Auth Key (512 hex characters) and its DC number</td>
+<td><strong>Auth key</strong></td>
+<td>Optional User ID</td>
+</tr>
+</tbody>
+</table></div>
+<p>TgWitness recognises files by their <strong>contents</strong>, not their names. Renaming a file
+never converts it.</p>
+<h2 id="before-you-start-api-id-and-api-hash">Before you start: API ID and API hash<a class="anchor" href="#before-you-start-api-id-and-api-hash" aria-label="Link to this section">#</a></h2>
+<p>You can sign in without creating a Telegram API application. When no pair is entered,
+imported or already saved in the workspace, TgWitness picks a pair from its built-in pool of
+50 public API pairs (<code>tgwitness/api_pool.py</code>) in random order. If Telegram refuses a pair
+(<code>API_ID_INVALID</code>, <code>API_ID_PUBLISHED_FLOOD</code>, <code>UPDATE_APP_TO_LOGIN</code>), the next one is tried,
+up to eight per sign-in; refused pairs are skipped until restart. The pair that signed in is
+saved with the account and reused for it. An <strong>API ID</strong> and <strong>API hash</strong> identify the application to Telegram; they
+do not authorize an account by themselves.</p>
+<p>To use your own application instead (the account that registers it is the one at risk; see
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/PROJECT-GUIDE.md#connect-a-telegram-account">Why a built-in API pool?</a>):</p>
+<ol>
+<li>Open <a href="https://my.telegram.org">my.telegram.org</a> and sign in with any phone number
+    you own. The code arrives in the Telegram app, not by SMS.</li>
+<li>Choose <strong>API development tools</strong>.</li>
+<li>Create an application: any title and short name (5–32 letters), platform <strong>Desktop</strong>.
+    URL and description can stay empty.</li>
+<li>Copy <strong>App api_id</strong> (a number) and <strong>App api_hash</strong> (32 hexadecimal characters).</li>
+</ol>
+<p>In the panel, open <strong>API ID + Hash</strong> under the sign-in form. You can paste a single
+<code>api_id:api_hash</code> pair into <strong>API ID</strong> and both fields are filled. One pair can be
+used for all of your accounts. After a successful login it is saved, encrypted, in
+that workspace only and is never sent back to the browser.</p>
+<p>Three different credentials are involved:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Secret</th>
+<th>Opens</th>
+<th>Where it lives</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Panel token</td>
+<td>The TgWitness web panel</td>
+<td><code>panel-token.txt</code> in the data directory, or <code>TGWITNESS_TOKEN</code></td>
+</tr>
+<tr>
+<td>API ID + hash</td>
+<td>Nothing by itself; identifies the app</td>
+<td>Built-in pair, imported settings, or your own app at my.telegram.org</td>
+</tr>
+<tr>
+<td>Account authorization</td>
+<td>The Telegram account</td>
+<td>Created by phone/QR login or brought in as a session</td>
+</tr>
+</tbody>
+</table></div>
+<p>If Telegram must be reached through a proxy, set it first under
+<strong>Account → Settings → Connection settings → Change connection route</strong>.</p>
+<h2 id="phone-number">Phone number<a class="anchor" href="#phone-number" aria-label="Link to this section">#</a></h2>
+<ol>
+<li>Open <strong>Account</strong>, tab <strong>Phone</strong>, and enter the number in international format,
+    for example <code>+44 7700 900123</code>. Spaces and dashes are removed automatically.</li>
+<li>Press <strong>Continue</strong>. API ID + Hash can stay empty.</li>
+<li>Enter the code Telegram sends (usually to the Telegram app; SMS is not guaranteed).</li>
+<li>If the account has two-step verification, enter that password. It is not the panel
+    token and not a device passcode.</li>
+<li>Check the account ID shown after login, then choose sources.</li>
+</ol>
+<p>Login codes and the 2FA password are never written to disk.</p>
+<h2 id="qr-code">QR code<a class="anchor" href="#qr-code" aria-label="Link to this section">#</a></h2>
+<p>Use this when the account is already signed in on a phone or another computer.</p>
+<ol>
+<li>Tab <strong>QR code</strong> → <strong>Show QR code</strong>. API ID + Hash can stay empty.</li>
+<li>On the signed-in device: <strong>Settings → Devices → Link Desktop Device</strong>, scan the code
+    and confirm.</li>
+<li>Enter the 2FA password in TgWitness if Telegram requests it.</li>
+</ol>
+<p>The QR image is generated locally. Codes expire; press <strong>Generate another QR code</strong>
+to retry. Locking the panel, switching workspace or starting another login cancels
+a pending code.</p>
+<h2 id="auth-key--dc-id">Auth Key + DC ID<a class="anchor" href="#auth-key--dc-id" aria-label="Link to this section">#</a></h2>
+<p>An Auth Key is the raw 256-byte authorization behind every Telegram session, written
+as <strong>512 hexadecimal characters</strong>, together with the data-centre number <strong>DC 1–5</strong>.</p>
+<ol>
+<li>Tab <strong>Auth key</strong>. Paste the complete key; a shortened key containing <code>…</code> cannot work.</li>
+<li>Select the DC ID supplied with the key.</li>
+<li>Optionally enter the <strong>User ID</strong>. TgWitness then refuses to connect if Telegram reports
+    a different account.</li>
+<li>Press <strong>Connect account</strong>.</li>
+</ol>
+<p>An Auth Key (512 characters) is not an API hash (32 characters). The same key can also
+be imported as JSON, see <a href="#account-json">Account JSON</a>.</p>
+<h2 id="account-files">Account files<a class="anchor" href="#account-files" aria-label="Link to this section">#</a></h2>
+<p>Open <strong>Add account → Files</strong> and select up to <strong>four files belonging to one account</strong>,
+<strong>8 MiB</strong> in total, then press <strong>Connect account</strong>.</p>
+<ul>
+<li>Files are converted <strong>in memory</strong> on your TgWitness server. Uploads are not stored,
+    ZIPs are not extracted to disk and no external service is contacted.</li>
+<li>The resulting session is then checked with Telegram. If a file states a user ID,
+    it must match the account Telegram reports.</li>
+<li>Files that describe different accounts or different API credentials are rejected
+    instead of picking one.</li>
+<li><strong>Passcode or session text</strong> holds the TData local passcode field, a box for pasting
+    a StringSession and <strong>Read files without signing in</strong> (fills the form without
+    contacting Telegram).</li>
+</ul>
+<h3 id="telethon-session">Telethon <code>.session</code><a class="anchor" href="#telethon-session" aria-label="Link to this section">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What it is</td>
+<td>The SQLite database Telethon-based tools create, for example <code>my_account.session</code></td>
+</tr>
+<tr>
+<td>Recognised by</td>
+<td>Tables <code>sessions</code> (with <code>dc_id</code>, <code>server_address</code>, <code>port</code>, <code>auth_key</code>) and <code>version</code> = 7 or 8</td>
+</tr>
+<tr>
+<td>Requirements</td>
+<td>Exactly one authorized session row; a closed, complete database</td>
+</tr>
+</tbody>
+</table></div>
+<p>Close the program that created the file first. If <code>my_account.session-journal</code> or
+<code>my_account.session-wal</code> exists next to it, the database is not finalised: open and
+close the original client cleanly. Deleting those sidecar files can leave a broken copy.</p>
+<h3 id="pyrogram-session">Pyrogram <code>.session</code><a class="anchor" href="#pyrogram-session" aria-label="Link to this section">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What it is</td>
+<td>The SQLite database Pyrogram-based tools create</td>
+</tr>
+<tr>
+<td>Recognised by</td>
+<td>Table <code>sessions</code> with <code>dc_id</code>, <code>auth_key</code>, <code>test_mode</code>, <code>user_id</code>, <code>is_bot</code>; <code>version</code> = 2 or 3</td>
+</tr>
+<tr>
+<td>Requirements</td>
+<td>One authorized <strong>user</strong> session on the production network. Bot and test-DC sessions are rejected</td>
+</tr>
+</tbody>
+</table></div>
+<p>The stored user ID is checked against Telegram during login.</p>
+<h3 id="session--json-pair">Session + JSON pair<a class="anchor" href="#session--json-pair" aria-label="Link to this section">#</a></h3>
+<p>Accounts are often distributed as two files with the same name, for example
+<code>447700900123.session</code> and <code>447700900123.json</code>. Select <strong>both</strong> at once.</p>
+<ul>
+<li>From the JSON, TgWitness uses <code>app_id</code>/<code>api_id</code> and <code>app_hash</code>/<code>api_hash</code>, so you
+    usually do not have to type API credentials.</li>
+<li>Other fields such as <code>phone</code>, <code>device</code>, <code>sdk</code>, <code>app_version</code>, <code>lang_pack</code> or a stored
+    <code>twoFA</code> password are <strong>ignored</strong>. If the account has 2FA, TgWitness asks for it.</li>
+<li>A JSON on its own is only metadata. Without the session file, continue with phone
+    or QR login.</li>
+</ul>
+<h3 id="telegram-desktop-tdata">Telegram Desktop (TData)<a class="anchor" href="#telegram-desktop-tdata" aria-label="Link to this section">#</a></h3>
+<p>TData is the <code>tdata</code> folder of the Telegram Desktop application (the cross-platform
+app from desktop.telegram.org).</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>System</th>
+<th>Default <code>tdata</code> location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td><code>%APPDATA%\Telegram Desktop\tdata</code> (portable Telegram: next to <code>Telegram.exe</code>)</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td><code>~/.local/share/TelegramDesktop/tdata</code></td>
+</tr>
+<tr>
+<td>macOS</td>
+<td><code>~/Library/Application Support/Telegram Desktop/tdata</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>To import it:</p>
+<blockquote class="callout">
+<p><strong>Parallel session warning.</strong> Importing TData reuses Telegram Desktop's authorization
+key; it does not create an independent login. Do not use that key in Desktop and
+TgWitness simultaneously. Telegram can invalidate the authorization with
+<code>AUTH_KEY_DUPLICATED</code>, leaving both copies unusable until a new login.</p>
+<p>Fully quit Desktop, including its tray process, and keep that copy closed while
+TgWitness uses the imported session. <strong>Quit, do not log out or revoke the session:</strong>
+revocation also invalidates the imported copy. If you need both clients running,
+sign in to TgWitness by phone or QR to create its own authorization. A dedicated
+account is recommended, but does not make cloned keys safe to use in parallel.</p>
+<p>This also applies to imported <code>.session</code> files, StringSession text and Auth Key HEX.
+Other clients with their own independently created authorizations can remain signed in.
+See <a href="https://core.telegram.org/api/errors#406-not-acceptable">Telegram's AUTH_KEY_DUPLICATED documentation</a>.</p>
+</blockquote>
+<ol>
+<li>Fully quit Telegram Desktop.</li>
+<li>
+<p>Create a ZIP containing <strong>only</strong> these two items from <code>tdata</code>:</p>
+<ul>
+<li><code>key_datas</code></li>
+<li>the 16-character file ending in <code>s</code> next to it, usually <code>D877F783D5D3EF8Cs</code></li>
+</ul>
+<p>Zipping the whole folder with its media cache usually exceeds the limits
+(512 entries, 32 MiB unpacked).
+3. Select the ZIP in <strong>Files</strong>. If Telegram Desktop has a <strong>local passcode</strong>, enter it
+under <strong>Passcode or session text</strong> first. This is not the 2FA password.</p>
+</li>
+</ol>
+<p>Supported: one account per archive, modern <code>key_datas</code>/<code>key_data0</code>/<code>key_data1</code> storage,
+local passcode. Not supported: folders with several logged-in accounts, older Desktop
+layouts, password-protected ZIPs, and the separate native macOS app "Telegram for macOS".</p>
+<h3 id="telethon-stringsession">Telethon StringSession<a class="anchor" href="#telethon-stringsession" aria-label="Link to this section">#</a></h3>
+<p>A single line of text, usually starting with <code>1</code> and about 350 characters long. Load
+it as a <code>.txt</code> or <code>.tgwitness-session</code> file (at most 4 KiB), or paste it under
+<strong>Passcode or session text</strong>. Only Telethon strings are accepted; Pyrogram and TDLib
+strings use different formats.</p>
+<h3 id="account-json">Account JSON<a class="anchor" href="#account-json" aria-label="Link to this section">#</a></h3>
+<p>One JSON object, at most <strong>64 KiB</strong>, in a file ending in <strong><code>.json</code></strong>.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Field (aliases)</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>api_id</code> (<code>app_id</code>)</td>
+<td>Application ID, a positive number</td>
+</tr>
+<tr>
+<td><code>api_hash</code> (<code>app_hash</code>)</td>
+<td>Application hash, 32 hexadecimal characters</td>
+</tr>
+<tr>
+<td><code>string_session</code> (<code>session_string</code>, <code>session</code>)</td>
+<td>Telethon StringSession text, not a file name</td>
+</tr>
+<tr>
+<td><code>auth_key</code> (<code>auth_key_hex</code>) + <code>dc_id</code></td>
+<td>Complete 512-character Auth Key and DC 1–5</td>
+</tr>
+<tr>
+<td><code>user_id</code> (<code>id</code>)</td>
+<td>Optional; checked against Telegram before the authorization is saved</td>
+</tr>
+</tbody>
+</table></div>
+<p>If both an alias and the main name are present, they must agree. Examples:</p>
+<pre><code class="language-json">{ &quot;app_id&quot;: 1234567, &quot;app_hash&quot;: &quot;0123456789abcdef0123456789abcdef&quot; }</code></pre>
+<pre><code class="language-json">{
+  &quot;api_id&quot;: 1234567,
+  &quot;api_hash&quot;: &quot;0123456789abcdef0123456789abcdef&quot;,
+  &quot;auth_key&quot;: &quot;REPLACE_WITH_ALL_512_HEXADECIMAL_CHARACTERS&quot;,
+  &quot;dc_id&quot;: 2,
+  &quot;user_id&quot;: 123456789
+}</code></pre>
+<p>The first example only fills API credentials; sign in by phone or QR, or add a session
+file. Bulk lists (a JSON array of accounts) are not accepted.</p>
+<h2 id="identify-what-you-have">Identify what you have<a class="anchor" href="#identify-what-you-have" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>You see</th>
+<th>It is</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*.session</code>; opening it in a text editor shows <code>SQLite format 3</code> at the top</td>
+<td>Telethon or Pyrogram SQLite</td>
+<td><strong>Files</strong> (detected automatically)</td>
+</tr>
+<tr>
+<td>A <code>tdata</code> folder containing <code>key_datas</code></td>
+<td>Telegram Desktop TData</td>
+<td>ZIP two files, then <strong>Files</strong></td>
+</tr>
+<tr>
+<td>One text line starting with <code>1</code>, ~350 characters</td>
+<td>Telethon StringSession</td>
+<td><strong>Files</strong></td>
+</tr>
+<tr>
+<td><code>*.json</code> with <code>app_id</code>/<code>app_hash</code></td>
+<td>Companion metadata</td>
+<td><strong>Files</strong>, together with its session</td>
+</tr>
+<tr>
+<td><code>*.json</code> with <code>auth_key</code> or <code>string_session</code></td>
+<td>Account JSON</td>
+<td><strong>Files</strong></td>
+</tr>
+<tr>
+<td>512 characters <code>0-9a-f</code></td>
+<td>Auth Key</td>
+<td><strong>Auth key</strong></td>
+</tr>
+<tr>
+<td>32 characters <code>0-9a-f</code></td>
+<td>API hash</td>
+<td><strong>API ID + Hash</strong></td>
+</tr>
+<tr>
+<td><code>td.binlog</code> or a <code>db.sqlite</code> from a TDLib app</td>
+<td>TDLib storage</td>
+<td>Not supported</td>
+</tr>
+<tr>
+<td><code>123456789:AA…</code></td>
+<td>Bot token</td>
+<td>Not supported</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="unsupported-formats">Unsupported formats<a class="anchor" href="#unsupported-formats" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Format</th>
+<th>Alternative</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TDLib storage (<code>td.binlog</code>) and TDLib exports</td>
+<td>Sign in by phone or QR</td>
+</tr>
+<tr>
+<td>Pyrogram session <strong>strings</strong></td>
+<td>Use the Pyrogram <code>.session</code> file, or phone/QR</td>
+</tr>
+<tr>
+<td>TData with several logged-in accounts</td>
+<td>Log out the other accounts in Telegram Desktop, or use each account's own session file</td>
+</tr>
+<tr>
+<td>Bot tokens</td>
+<td>Not supported: TgWitness observes as a user account</td>
+</tr>
+<tr>
+<td>CSV/JSON lists of many accounts</td>
+<td>Add one workspace per account</td>
+</tr>
+<tr>
+<td>Test-DC or bot sessions</td>
+<td>Use a production user account</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="multiple-accounts">Multiple accounts<a class="anchor" href="#multiple-accounts" aria-label="Link to this section">#</a></h2>
+<p>Press <strong>+</strong> beside the account selector, or open
+<strong>Account → Settings → Connection settings → Workspaces</strong>, enter a label and
+sign in.</p>
+<ul>
+<li>Any number of workspaces, including the main one. Each has its own session, proxy
+    route, sources, capture policy, journal, signing key, checkpoints and exports.</li>
+<li>Switching the displayed workspace does not pause the others.</li>
+<li>A journal stays bound to the account that created it. Signing in as a different
+    account requires another workspace, and one account cannot be assigned to two
+    workspaces.</li>
+<li>All workspaces share one panel token; they are not separate users.</li>
+<li><strong>Accounts</strong> renames a workspace and deletes an added one, with its session, journal,
+    sources and signing key. The main workspace cannot be deleted from the panel.</li>
+</ul>
+<h2 id="sign-out">Sign out<a class="anchor" href="#sign-out" aria-label="Link to this section">#</a></h2>
+<p><strong>Account → Sign out of Telegram</strong> (with observation paused) asks Telegram to end the
+session, so it also disappears from the account's <strong>Settings → Devices</strong>, and removes the
+session from the workspace vault. The journal, sources, settings and signing key stay, and
+the journal records the sign-out. The workspace still belongs to its account: only that
+account can connect to it again. If Telegram does not answer, the session is still removed
+here and the panel says so; end it in Telegram under <strong>Settings → Devices</strong>.</p>
+<h2 id="convert-a-telethon-session-offline">Convert a Telethon session offline<a class="anchor" href="#convert-a-telethon-session-offline" aria-label="Link to this section">#</a></h2>
+<p>The panel imports <code>.session</code> files directly. For an offline conversion to a
+StringSession file, run from the project folder:</p>
+<pre><code class="language-powershell">.venv\Scripts\python.exe -m tgwitness.sessions account.session --out account.tgwitness-session   # Windows</code></pre>
+<pre><code class="language-sh">.venv/bin/python -m tgwitness.sessions account.session --out account.tgwitness-session          # Linux/macOS</code></pre>
+<p>The converter reads Telethon SQLite only (up to 64 MiB), never modifies the input,
+makes no network request and refuses to overwrite an existing output file.</p>
+<h2 id="keeping-account-files-safe">Keeping account files safe<a class="anchor" href="#keeping-account-files-safe" aria-label="Link to this section">#</a></h2>
+<ul>
+<li>Treat every <code>.session</code>, TData ZIP, StringSession, Auth Key and account JSON like a
+    password. TgWitness keeps the imported authorization in its encrypted vault; you can
+    remove the original files afterwards.</li>
+<li>Do not run the same authorization in two programs at once. Telegram may revoke it
+    (<code>AUTH_KEY_DUPLICATED</code>), and both copies stop working.</li>
+<li>An expired or revoked session cannot be revived by conversion. Sign in again.</li>
+</ul>
+<h2 id="troubleshooting">Troubleshooting<a class="anchor" href="#troubleshooting" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Message or symptom</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Cannot read this session. Close its original client…</em></td>
+<td>The SQLite file is open or unfinished (<code>-journal</code>/<code>-wal</code> sidecar). Close the original program cleanly and copy the file again.</td>
+</tr>
+<tr>
+<td><em>Supported Telethon SQLite schemas: 7 and 8</em> / <em>Pyrogram … 2 and 3</em></td>
+<td>A very old or unknown library version created the file. Sign in by phone/QR instead.</td>
+</tr>
+<tr>
+<td><em>Only authorized production user sessions are supported</em></td>
+<td>The Pyrogram file belongs to a bot or the test network.</td>
+</tr>
+<tr>
+<td><em>TData archive exceeds 512 entries or 32 MiB</em></td>
+<td>ZIP only <code>key_datas</code> and <code>D877F783D5D3EF8Cs</code>, not the whole folder.</td>
+</tr>
+<tr>
+<td><em>Cannot decrypt TData. Check the Desktop local passcode</em></td>
+<td>Enter the Telegram Desktop local passcode under <strong>Passcode or session text</strong>.</td>
+</tr>
+<tr>
+<td><em>Import one TData account at a time</em></td>
+<td>Telegram Desktop had several accounts; see <a href="#unsupported-formats">Unsupported formats</a>.</td>
+</tr>
+<tr>
+<td><em>Selected files describe different accounts or API credentials</em></td>
+<td>Select files of one account only.</td>
+</tr>
+<tr>
+<td><em>JSON contains no supported API credentials or authorization</em></td>
+<td>Check the field names in <a href="#account-json">Account JSON</a>.</td>
+</tr>
+<tr>
+<td><em>API metadata only</em></td>
+<td>The JSON has no session. Add the <code>.session</code> file or use phone/QR.</td>
+</tr>
+<tr>
+<td><em>Auth Key HEX must contain all 512 hexadecimal characters</em></td>
+<td>The key is truncated or contains <code>…</code>.</td>
+</tr>
+<tr>
+<td>Account ID does not match the imported account</td>
+<td>The file's user ID differs from what Telegram reports; the file is for another account.</td>
+</tr>
+<tr>
+<td>Account already belongs to another workspace</td>
+<td>Open that workspace instead of adding the account twice.</td>
+</tr>
+<tr>
+<td>Connected, but a private group is missing from the chat list in <strong>Sources</strong></td>
+<td>Check membership. The picker inspects the first 1,000 dialogs; raise the limit under <strong>Parameters</strong>.</td>
+</tr>
+<tr>
+<td>Proxy connection fails</td>
+<td>Check host, port and credentials. TgWitness never falls back to a direct connection.</td>
+</tr>
+</tbody>
+</table></div>
+<p>See also: <a href="../connection/">connection and security</a> for proxies and encryption,
+and <a href="../collection/">how collection works</a> for what is captured after sign-in.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCOUNTS.md">Edit this page on GitHub ↗</a><a class="next-guide" href="../connection/"><span>Next step</span><strong>Connection, proxies and data protection →</strong></a><p>These guides describe the current implementation. Validation results and remaining gaps are documented separately. <a href="../verification/">What has been tested →</a></p></footer>
+</main>
+<aside class="toc" aria-label="On this page"><p class="nav-label">On this page</p><a href="#at-a-glance">At a glance</a><a href="#before-you-start-api-id-and-api-hash">Before you start: API ID and API hash</a><a href="#phone-number">Phone number</a><a href="#qr-code">QR code</a><a href="#auth-key--dc-id">Auth Key + DC ID</a><a href="#account-files">Account files</a><a href="#identify-what-you-have">Identify what you have</a><a href="#unsupported-formats">Unsupported formats</a><a href="#multiple-accounts">Multiple accounts</a><a href="#sign-out">Sign out</a><a href="#convert-a-telethon-session-offline">Convert a Telethon session offline</a><a href="#keeping-account-files-safe">Keeping account files safe</a><a href="#troubleshooting">Troubleshooting</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Open source · Runs on your machine</span><a href="../../../LICENSE">MIT license</a><a href="../notice/">Operator notice</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Security</a></footer>
+<script id="site-dict" type="application/json">{}</script>
+</body></html>

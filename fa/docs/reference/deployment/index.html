@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="fa" dir="rtl" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>راه‌اندازی | TgWitness</title>
+<meta name="description" content="TgWitness را به‌عنوان یک سرویس روی ویندوز، لینوکس، macOS یا Docker اجرا کنید، پشت HTTPS، همراه با پشتیبان‌گیری و به‌روزرسانی‌ها."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="fa_IR">
+<meta property="og:title" content="راه‌اندازی | TgWitness"><meta property="og:description" content="TgWitness را به‌عنوان یک سرویس روی ویندوز، لینوکس، macOS یا Docker اجرا کنید، پشت HTTPS، همراه با پشتیبان‌گیری و به‌روزرسانی‌ها.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/deployment/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/deployment/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/deployment/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/deployment/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/deployment/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/deployment/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/deployment/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/deployment/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/deployment/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/", "url": "https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/", "name": "راه‌اندازی | TgWitness", "description": "TgWitness را به‌عنوان یک سرویس روی ویندوز، لینوکس، macOS یا Docker اجرا کنید، پشت HTTPS، همراه با پشتیبان‌گیری و به‌روزرسانی‌ها.", "inLanguage": "fa", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "خانه", "item": "https://phishdestroy.github.io/TgWitness/fa/"}, {"@type": "ListItem", "position": 2, "name": "مستندسازی", "item": "https://phishdestroy.github.io/TgWitness/fa/docs/"}, {"@type": "ListItem", "position": 3, "name": "منبع", "item": "https://phishdestroy.github.io/TgWitness/fa/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "راه‌اندازی", "item": "https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">رفتن به محتوا</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / مستندسازی</span></a>
+<nav aria-label="راهنماها"><a href="../../concepts/">راهنمای تصویری</a><a href="../../">تمام راهنماها</a><a href="../">منبع</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="زبان"><span aria-hidden="true">◍</span> فارسی</summary><div class="lang-list"><a href="../../../../docs/reference/deployment/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/deployment/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/deployment/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/deployment/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/deployment/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/deployment/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/deployment/" hreflang="ar" lang="ar">العربية</a><a href="./" hreflang="fa" lang="fa" aria-current="true">فارسی</a><a href="../../../../ur/docs/reference/deployment/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/deployment/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/deployment/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/deployment/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/deployment/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="تغییر بین تم روشن و تاریک"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="راهنماها"><a href="../../../guides/modes.html">حالت‌ها، سناریوها و سطوح شواهد</a><p class="nav-label">قدم‌های اول</p><a href="../../start/">در چند دقیقه شروع کنید</a><a href="../../accounts/">اتصال یک حساب</a><a href="../../proxies/">یک پروکسی انتخاب کنید</a><a href="../../exports/">صادرات و تأیید</a><p class="nav-label">درک شواهد</p><a href="../../concepts/">ببینید مدرک چگونه کار می‌کند</a><a href="../../cases/">تحقیق در تمام چت‌ها</a><a href="../../security/">آن را امن نگه دارید</a><p class="nav-label">پیش‌تر بروید</p><a href="../../witness/">راه‌اندازی یک بات شاهد</a><a href="../../server/">آن را در حال اجرا نگه دارید</a><a href="../../troubleshooting/">مشخص کنید چه چیزی اشتباه پیش رفته است</a></nav><nav class="wiki-nav" aria-label="منبع"><p class="nav-label"><a class="nav-label-link" href="../">منبع</a></p><details class="wiki-group" open><summary>راه‌اندازی</summary><a href="../quickstart/">راه‌اندازی سریع</a><a href="../accounts/">فرمت‌های حساب کاربری و جلسه</a><a href="../connection/">اتصال، پروکسی‌ها و حفاظت از داده‌ها</a><a href="./" aria-current="page">راه‌اندازی</a></details><details class="wiki-group"><summary>جمع‌آوری</summary><a href="../collection/">نحوهٔ کارکرد جمع‌آوری</a><a href="../operations/">روندها و عملیات‌ها</a><a href="../investigation/">حالت تحقیق</a><a href="../features/">ویژگی‌ها و محدودیت‌ها</a></details><details class="wiki-group"><summary>شواهد</summary><a href="../how-it-works/">چگونگی کارکرد شواهد</a><a href="../evidence/">فرمت مدرک</a><a href="../witness/">شاهد مستقل</a><a href="../timestamp/">برچسب‌های زمانی</a></details><details class="wiki-group"><summary>امنیت و پروژه</summary><a href="../security/">امنیت و مدیریت داده‌ها</a><a href="../architecture/">معماری</a><a href="../verification/">آنچه آزمایش شده است</a><a href="../license/">اعلان عدم سازگاری مجوز و معماری</a><a href="../notice/">اعلان عدم سازگاری اپراتور</a><a href="../changelog/">فهرست تغییرات</a></details></nav><p class="sidebar-note">v0.7.0<br>کد باز · روی دستگاه شما اجرا می‌شود</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="راهنماها"><a href="../../../">خانه</a> <span aria-hidden="true">/</span> <a href="../../">مستندسازی</a> <span aria-hidden="true">/</span> <a href="../">منبع</a> <span aria-hidden="true">/</span> <span aria-current="page">راه‌اندازی</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">جستجو در مستندات</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="پراکسی، زنجیره هش، توکن یا ویسنس را امتحان کنید…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="جستجوی واضح" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">یک کلمه تایپ کنید تا در راهنماها و مرجع جستجو شود. جستجو در مرورگر شما باقی می‌ماند.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="language-notice">بخشی از این صفحه هنوز به زبان انگلیسی است: متن اصلی انگلیسی پس از ترجمه تغییر کرده است.</p><p class="eyebrow">منبع / راه‌اندازی</p><h1>راه‌اندازی</h1><p class="guide-outcome">TgWitness را به‌عنوان یک سرویس روی ویندوز، لینوکس، macOS یا Docker اجرا کنید، پشت HTTPS، همراه با پشتیبان‌گیری و به‌روزرسانی‌ها.</p><div class="wiki-body"><p><strong>انگلیسی</strong> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md">روسی</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md">اوکراینی</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md">اسپانیایی</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md">پرتغالی (برزیل)</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md">ترکی</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md">عربی</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md">فارسی</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md">اردو</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md">هندی</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md">بهاسا اندونزی</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md">تایلندی</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md">فونت ساده‌شدهٔ چینی</a></p>
+<h2 id="choose-an-installation">انتخاب نصب<a class="anchor" href="#choose-an-installation" aria-label="لینک به این بخش">#</a></h2>
+<p>برای بسته قابل حمل، فایل <code>TgWitness-&lt;version&gt;-windows-amd64-portable.zip</code> را از
+GitHub Releases استخراج کنید. برای سایر روش‌ها، فایل ZIP منبع را دانلود و استخراج کنید یا مخزن را کلون کنید، سپس دستور زیر را از دایرکتوری پروژه اجرا کنید:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>نصب</th>
+<th>شروع</th>
+<th>آیا در پس‌زمینه اجرا می‌شود؟</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>بسته قابل حمل ویندوز</td>
+<td><code>TgWitness.cmd</code></td>
+<td>نه؛ پنجره را باز نگه دارید.</td>
+</tr>
+<tr>
+<td>بومی ویندوز</td>
+<td><code>Start.cmd</code></td>
+<td>خیر؛ از وظیفهٔ اختیاری لاگین برای استفاده در پس‌زمینه استفاده کنید.</td>
+</tr>
+<tr>
+<td>بومی لینوکس/macOS</td>
+<td><code>sh start.sh</code></td>
+<td>خیر؛ برای استفاده در پس‌زمینه از systemd/launchd استفاده کنید.</td>
+</tr>
+<tr>
+<td>داکر روی هر میزبان پشتیبانی‌شده</td>
+<td><code>docker compose up -d --build --wait</code></td>
+<td>بله، در حالی که دیمون Docker در حال اجراست.</td>
+</tr>
+<tr>
+<td>راهنمای داکر در ویندوز</td>
+<td><code>scripts\Docker.cmd</code></td>
+<td>بله؛ دستیار منتظر سلامت وب‌سرور می‌ماند.</td>
+</tr>
+<tr>
+<td>راهنمای داکر در لینوکس/macOS</td>
+<td><code>sh scripts/docker-start.sh</code></td>
+<td>بله؛ دستیار منتظر سلامت وب‌سرور می‌ماند.</td>
+</tr>
+</tbody>
+</table></div>
+<p>برای یک سرور ابری که شخص ثالث باید بتواند آن را بررسی کند — ایجاد شده از طریق API ارائه‌دهنده، بدون SSH، و تنها از طریق تونل کلودفلر قابل دسترسی است — به
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md">استقرار با تضمین بالا</a> مراجعه کنید.</p>
+<p>راه‌اندازی بومی یک <code>.venv</code> خصوصی ایجاد می‌کند و وابستگی‌های پین‌شده را نصب می‌کند.
+داکر آن‌ها را داخل ایمیج می‌سازد، بدون اینکه به پایتون میزبان نیاز داشته باشد. راه‌اندازی اولیه
+نیاز به دسترسی به اینترنت دارد. هنگامی که هیچ Python 3.11+ یافت نشود، <code>Start.cmd</code> قبل از نصب Python 3.12 برای کاربر فعلی ویندوز (با استفاده از winget، در غیر این صورت با نصب‌کننده python.org پس از بررسی امضای بنیاد نرم‌افزار پایتون) سؤال می‌کند؛ این ابزار هرگز درخواست امتیازات ادمین نمی‌کند. Docker و سرویس‌های سیستم‌عامل همچنان از پیش‌نیازها هستند.</p>
+<p>نصب‌های بومی و قابل حمل از <code>data/live</code> در داخل پوشه خود استفاده می‌کنند. داکر از حجمی به نام <code>tgwitness-data</code> در <code>/data</code> استفاده می‌کند. این‌ها نصب‌های جداگانه‌ای هستند تا زمانی که شما عمداً دایرکتوری کامل داده را مهاجرت ندهید. انتظار نداشته باشید که یک کانتینر داکر جدید به طور خودکار حساب‌های بومی را کشف کند.</p>
+<h2 id="installation-requirements">نیازمندی‌های نصب<a class="anchor" href="#installation-requirements" aria-label="لینک به این بخش">#</a></h2>
+<p>نصب بومی به پایتون ۳.۱۱ یا جدیدتر با <code>venv</code> و <code>ensurepip</code>، دسترسی به اینترنت برای نصب اولین وابستگی، و یک دایرکتوری پروژه قابل نوشتن برای
+<code>.venv</code> نیاز دارد. پنل همراه نیازی به Node.js یا ساخت فرانت‌اند ندارد. لانچر را از حساب کاربری معمولی سیستم‌عامل خود اجرا کنید؛ TgWitness به امتیازات ادمین/روت نیاز ندارد.</p>
+<ul>
+<li><strong>ویندوز:</strong> <code>Start.cmd</code>، <code>py -3</code>، سپس <code>python</code> و سپس پوشه‌های نصب پیش‌فرض هر کاربر و Program Files را بررسی می‌کند و به نسخه ۳.۱۱ یا جدیدتر نیاز دارد. اگر هیچ‌کدام کار نکند، نصب خودکار بر اساس کاربر را که در بالا توضیح داده شد، ارائه می‌دهد. <code>py -3 start.py</code> نیز کار می‌کند. بسته قابل حمل به هیچ وجه به پایتون نیاز ندارد.</li>
+<li><strong>لینوکس:</strong> <code>start.sh</code> را امتحان می‌کند <code>python3.13</code>, <code>python3.12</code>, <code>python3.11</code>, <code>python3</code> و <code>python</code>, و زمانی که هیچ‌کدام مناسب نباشد، دستور نصب برای apt, dnf, pacman, zypper, apk یا Homebrew را چاپ می‌کند. نصب در دبیان/اوبونتو ممکن است به بسته
+    <code>python3-venv</code> متناسب با تفسیرگر انتخاب‌شده نیاز داشته باشد. پایتون پیش‌فرض قدیمی‌تر توزیع باید با پایتون ۳.۱۱+ جایگزین یا تکمیل شود.</li>
+<li><strong>macOS:</strong> یک توزیعٔ جاریٔ Python 3.11+ را نصب کنید؛ فرض نکنید که یک مفسر ارائه‌شده توسط سیستم‌عامل این نیاز را برآورده می‌کند. از <code>python3 start.py</code> در دایرکتوری پروژه استفاده کنید.</li>
+<li><strong>داکر:</strong> از Docker Engine/Desktop با Compose نسخه 2.20 یا جدیدتر استفاده کنید. Docker Desktop باید از کانتینرهای لینوکس روی ویندوز استفاده کند. کانتینر وابستگی‌های پایتون خود را نصب می‌کند؛ میزبان نیازی به نصب جداگانه پایتون ندارد.</li>
+</ul>
+<p>از ذخیره‌سازی محلی پایدار برای دایرکتوری داده استفاده کنید. ظرفیت را بر اساس پیام‌ها، رسانه‌ها، رشد WAL، خروجی‌ها و پشتیبان‌ها برنامه‌ریزی کنید؛ هیچ مشخصات حداقلی جهانی مبتنی بر شواهد برای دیسک/RAM برای هر بار کاری وجود ندارد. معماری‌های CPU و نسخه‌های Python بدون چرخ‌های وابستگی سازگار ممکن است به ابزارهای ساخت اضافی و صلاحیت‌سنجی خاص خود نیاز داشته باشند. «قابل حمل» به معنای پشتیبانی جهانی از سیستم‌عامل یا سخت‌افزار نیست.</p>
+<p>ویندوز ۱۱/پایتون ۳.۱۲ به‌صورت محلی تأیید شده است. تعاریف لینوکس/macOS/کانتینر و CI ارائه شده‌اند اما روی این میزبان توسعه اجرا نشده‌اند. برای اطلاع از دامنه دقیق، به
+<a href="../verification/">فایل VERIFICATION.md</a> مراجعه کنید.</p>
+<h2 id="local-computer">کامپیوتر محلی<a class="anchor" href="#local-computer" aria-label="لینک به این بخش">#</a></h2>
+<p>از <code>Start.cmd</code> در ویندوز یا <code>sh start.sh</code> در لینوکس/مک‌او‌اس استفاده کنید. <code>scripts\Setup.cmd</code> یا <code>sh start.sh --setup-only</code> محیط را آماده می‌کند. لانچر در اولین استفاده وابستگی‌ها را نصب می‌کند؛ راه‌اندازی‌های بعدی از محیط موجود استفاده مجدد می‌کنند. برای راه‌اندازی و جمع‌آوری تلگرام به دسترسی به اینترنت نیاز است، اما مرور سوابق موجود و ایجاد خروجی‌ها به صورت آفلاین انجام می‌شود.</p>
+<p>پس از راه‌اندازی، دستور <code>python start.py --check</code> را اجرا کنید تا وابستگی‌های محلی، Ed25519، ذخیره‌سازی، پیکربندی کلید و آدرس گوش‌دادن را بدون راه‌اندازی یک گردآورنده بررسی کنید.
+برای خروجی ساختاریافته از <code>--json</code> استفاده کنید. پارامترهای مورد نظر <code>--data-dir</code>، <code>--host</code> و <code>--port</code> را ارسال کنید. این بررسی، بسته‌ها را نصب، دفترچه یادداشتی ایجاد یا تلگرام را متصل نمی‌کند؛ این یک گواهی یکپارچگی یا پوشش نیست. دستور شروع به صورت جداگانه دفترچه‌های یادداشت موجود را تأیید می‌کند. <code>python start.py --help</code> نیز از نصب جلوگیری می‌کند.</p>
+<p>گزینه‌ها:</p>
+<p>پس از استفاده از start.py، دستورات کمکی را با <code>.venv\Scripts\python.exe</code> در ویندوز یا <code>.venv/bin/python</code> در لینوکس/macOS اجرا کنید، یا ابتدا آن محیط را فعال نمایید.
+مثال‌های <code>python -m ...</code> در زیر بر این فرض استوارند که محیط فعال است.</p>
+<pre><code class="language-sh">python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 8787</code></pre>
+<p>متغیرهای محیطی: TGWITNESS_DATA, TGWITNESS_HOST, TGWITNESS_PORT, TGWITNESS_TOKEN.
+TGWITNESS_VAULT_KEY_FILE حالت کلید خارجی را برای نصب جدید انتخاب می‌کند؛ به توضیحات زیر مراجعه کنید.
+TGWITNESS_TOKEN، در صورت ارائه، باید حاوی حداقل ۲۴ کاراکتر باشد؛ از یک مقدار تصادفی و رمزنگاری‌شده استفاده کنید. بدون آن، برنامه یک توکن تصادفی ۲۵۶ بیتی در فایل panel-token.txt ایجاد می‌کند.
+نابودی محیطی آن فایل را بازنویسی نمی‌کند. برای چرخاندن اعتبارنامه‌ها، برنامه را مجدداً راه‌اندازی کنید.</p>
+<p>دقیقاً یک فرآیند می‌تواند مالک یک دایرکتوری داده باشد. یک قفل فایل سیستم‌عاملی چندسکویی از نوشتار همزمان تصادفی جلوگیری می‌کند. از یک کارگر Uvicorn استفاده کنید. پنل می‌تواند هر تعداد فضای کاری را مدیریت کند، با دایرکتوری‌های فضای کاری اضافی در زیر profiles/&lt;id&gt;/.
+برای نمونه‌های مجزای سرویس، از دایرکتوری‌ها و پورت‌های مجزا استفاده کنید. فایل‌های WAL در SQLite باید در حافظه دائمی محلی ذخیره شوند، نه در یک سیستم فایل شبکه‌ای. یک حجم را بین نسخه‌ها (replicas) مشترک نکنید.</p>
+<h2 id="windows-portable-package">بسته قابل حمل ویندوز<a class="anchor" href="#windows-portable-package" aria-label="لینک به این بخش">#</a></h2>
+<p>هر نسخه گیت‌هاب حاوی <code>TgWitness-&lt;version&gt;-windows-amd64-portable.zip</code> و <code>.sha256</code> آن است. این نسخه شامل محیط اجرایی رسمی و قابل جاسازی پایتون ۳.۱۲ از python.org (با چک‌سام ثابت‌شده در <code>tools/build_portable.py</code>)، TgWitness و وابستگی‌های ثابت‌شده آن، و سه لانچر است:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>فایل</th>
+<th>هدف</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TgWitness.cmd</code></td>
+<td>پنل را راه‌اندازی کنید؛ گزینه‌های اضافی ارسال می‌شوند، مثلاً <code>TgWitness.cmd --port 8790</code></td>
+</tr>
+<tr>
+<td><code>TgWitness-Demo.cmd</code></td>
+<td>دموی مصنوعی را در <code>data\demo</code> آغاز کنید</td>
+</tr>
+<tr>
+<td><code>TgWitness-Check.cmd</code></td>
+<td>بدون راه‌اندازی، بررسی آمادگی را اجرا کنید</td>
+</tr>
+</tbody>
+</table></div>
+<p>کل آرشیو را در یک پوشه قابل نوشتن مانند <code>Documents\TgWitness</code> استخراج کنید؛ آن را از داخل فایل ZIP یا پوشه Program Files اجرا نکنید. محیط اجرای برنامه از یک مسیر ماژول ایزوله استفاده می‌کند، بنابراین نصب‌های دیگر پایتون و <code>PYTHONPATH</code> بر آن تأثیری ندارند. داده‌ها در پوشه <code>data</code> این بسته باقی می‌مانند. برای به‌روزرسانی، TgWitness را متوقف کنید، نسخه جدید را در یک پوشه جدید استخراج کرده و پوشه <code>data</code> را کپی کنید.</p>
+<p>خودتان آن را روی ویندوز ۶۴ بیتی با پایتون ۳.۱۲ بسازید:</p>
+<pre><code class="language-sh">python tools/build_portable.py</code></pre>
+<p>سازنده، چک‌سام زمان اجرا را تأیید می‌کند، وابستگی‌های محدود را در بسته نصب می‌کند، بررسی آمادگی را با مفسر تعبیه‌شده اجرا می‌کند و فایل ZIP و چک‌سام را در <code>dist/</code> می‌نویسد.</p>
+<h2 id="container">کانتینر<a class="anchor" href="#container" aria-label="لینک به این بخش">#</a></h2>
+<pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
+<p>این کار یک حجم دائمی با نام برای /data ایجاد می‌کند.
+پورت وب به 127.0.0.1:8787 نگاشت شده است. این فرآیند با UID 10001 و با قابلیت‌های محدودشده، یک سیستم فایل ریشه فقط-خواندنی، و دایرکتوری‌های قابل نوشتن /data و /tmp اجرا می‌شود.
+<code>--wait</code> قبل از بازگشت، سلامت وب‌سرور را بررسی می‌کند؛ این ابزار هیچ‌گونه تأیید اعتبار یا تحویل پیام تلگرام را انجام نمی‌دهد. کمک‌کننده‌های ارائه‌شده پس از ساخت، از یک تایم‌اوت آمادگی ۱۸۰ ثانیه‌ای استفاده می‌کنند. دانلودهای وابستگی اولیه ممکن است بیشتر از این زمان طول بکشد.</p>
+<p>هر دو فایل پایه Compose از نام پروژه <code>tgwitness</code> استفاده می‌کنند، بنابراین استخراج یک نسخه جدید در یک دایرکتوری دیگر، به‌طور پنهان یک حجم داده جدید را انتخاب نمی‌کند. تنها یک استقرار را برای آن پروژه فعال نگه دارید. برای نصب‌های مستقل، از یک
+<code>docker compose -p NAME ...</code> منحصربه‌فرد و یک پورت میزبان متفاوت استفاده کنید و هر دو را در به‌روزرسانی‌ها حفظ کنید.
+برای یک استقرار قدیمی‌تر که از نام پروژه متفاوتی استفاده می‌کند، به استفاده از نام اصلی آن با <code>-p</code> ادامه دهید؛ <code>docker compose ls</code> پروژه‌های موجود را فهرست می‌کند.</p>
+<p>مقدار <code>deploy/env.example</code> را به <code>.env</code> کپی کرده و <code>TGWITNESS_PORT</code> را برای استفاده از یک پورت لوپ‌بک متفاوت تغییر دهید. به عنوان مثال، <code>TGWITNESS_PORT=8788</code> پنل را در <code>http://127.0.0.1:8788</code> در دسترس قرار می‌دهد؛ کانتینر همچنان در پورت 8787 در حال گوش دادن است. <code>.env</code> توسط گیت (Git) نادیده گرفته می‌شود.</p>
+<p>بازیابی توکن اولیه:</p>
+<pre><code class="language-sh">docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
+<p>دستورهای مفید:</p>
+<pre><code class="language-sh">docker compose ps
+docker compose logs --tail 100 -f
+docker compose stop
+docker compose up -d --wait</code></pre>
+<p><code>restart: unless-stopped</code> پس از از کار افتادن یا راه‌اندازی مجدد Docker daemon، گردآورنده را مجدداً راه‌اندازی می‌کند. در یک سرور لینوکس، Docker را با استفاده از مدیر سرویس توزیع خود، که معمولاً <code>sudo systemctl enable --now docker</code> است، در هنگام بوت فعال کنید. در ویندوز/macOS، گزینه «شروع به محض ورود» (start-at-sign-in) در Docker Desktop را فعال کنید. خروج از حساب کاربری دسکتاپ، حالت خواب، یا یک وضعیت متوقف‌شده
+دمون داکر می‌تواند فرآیند جمع‌آوری را قطع کند. یک کانتینر که به صراحت متوقف شده باشد، تا زمانی که آن را دوباره راه‌اندازی نکنید، متوقف باقی می‌ماند.</p>
+<p>ولوم /tmp در پیکربندی مثال به ۵۱۲ مگابایت محدود شده است. ساخت خروجی از فضای /data پایدار، <code>temporary-exports/</code> هر workspace را به کار می‌گیرد. فضایی را در آنجا برای خروجی‌های همزمان، رشد ژورنال/WAL، رسانه‌ها و پشتیبان‌ها رزرو کنید.
+راه‌انداز و داکر از deploy/constraints.txt برای ثابت کردن نسخه‌های وابستگی‌های زمان اجرا (runtime) واجد شرایط استفاده می‌کنند. این یک زنجیره تأمین قفل‌شده با هش نیست: تصویر پایه پایتون و فایل‌های پکیج همچنان به تأیید مستقل نسخه نیاز دارند.</p>
+<p>از دستور docker compose down -v استفاده نکنید، مگر اینکه قصد دارید دفترچه شواهد و کلیدها را نابود کنید.
+گزارش وضعیت کانتینر، در دسترس بودن وب‌سرور را نشان می‌دهد، نه ضبط موفقیت‌آمیز تلگرام.
+وضعیت کالکتور پنل، ضربان قلب، خطاها و رویدادهای پوشش را بررسی کنید.</p>
+<h3 id="independent-witness-profile">پروفایل شاهد مستقل<a class="anchor" href="#independent-witness-profile" aria-label="لینک به این بخش">#</a></h3>
+<p>سرویس اختیاری <code>witness</code> یک <a href="../witness/">شاهد مستقل </a>را در کانتینر خود، با کلید و دفترچه خود در حجم <code>witness-data</code> اجرا می‌کند و فقط یک توکن شاهد فقط-خواندنی برای گردآورنده فراهم می‌آورد. توکن را در صفحه <strong>Witness</strong> پنل ایجاد کنید، آن را با یک توکن بات و کانال به <code>.env</code> اضافه کنید، سپس پروفایل را راه‌اندازی کنید:</p>
+<pre><code class="language-sh">docker compose --profile witness up -d          # deploy/compose/compose.image.yaml: same flag
+docker compose logs witness                     # witness key fingerprint</code></pre>
+<p>این سرویس به کالکتور داخل شبکه Compose در آدرس <code>http://tgwitness:8787</code>
+دسترسی پیدا می‌کند (برای مثال، <code>TGWITNESS_WITNESS_COLLECTOR</code>
+بر آن اولویت دارد و <code>/profiles/&lt;workspace ID&gt;</code>
+برای یک فضای کاری دیگر). برای یک شاهد روی سرور جداگانه که توسط شخص دیگری اجرا می‌شود، از <code>deploy/compose/compose.witness.yaml</code>
+در آنجا استفاده کنید و <code>TGWITNESS_WITNESS_COLLECTOR</code>
+را روی آدرس HTTPS کالکتور تنظیم کنید؛ آن فایل فقط شامل شاهد است.</p>
+<h2 id="install-a-published-image">نصب یک تصویر منتشرشده<a class="anchor" href="#install-a-published-image" aria-label="لینک به این بخش">#</a></h2>
+<p>این قابلیت پس از یک <a href="#automated-github-releases">گردش کار انتشار</a>
+موفق و پیکربندی بسته عمومی GHCR در دسترس قرار می‌گیرد. مالک/نام مخزن در این درخت کد منبع به صورت سخت‌کد نشده است. از ایمیج نشان داده شده در خلاصه گردش کار آن انتشار استفاده کنید.</p>
+<p>محتویات <code>deploy/env.example</code> را به <code>.env</code> کپی کنید. <code>TGWITNESS_IMAGE</code> را با استفاده از نسخه منتشرشده و مسیر مخزن <strong>با حروف کوچک</strong> تنظیم کنید، برای مثال:</p>
+<pre><code class="language-dotenv">TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.0
+TGWITNESS_PORT=8787</code></pre>
+<p>این فایل را به‌تنهایی اجرا کنید، به‌جای <code>compose.yaml</code>:</p>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml exec tgwitness cat /data/panel-token.txt</code></pre>
+<p>نیازی به نصب سورس، پایتون یا کامپایلر روی میزبان نیست. گردش کار انتشار، کانتینرهای لینوکس AMD64 و ARM64، از جمله ماشین مجازی لینوکس Docker Desktop را هدف قرار می‌دهد.
+از یک تگ نسخه یا <code>ghcr.io/owner/repository@sha256:...</code> از خلاصه گردش کار استفاده کنید.
+هیچ تگ متحرک <code>latest</code> یا ارتقای خودکار برنامه پیکربندی نشده است.
+نسخه‌های image و source هنگامی که نام پروژه آنها یکسان باشد، از همان حجم داده استفاده می‌کنند.</p>
+<h2 id="automatic-https-on-a-server">HTTPS خودکار روی یک سرور<a class="anchor" href="#automatic-https-on-a-server" aria-label="لینک به این بخش">#</a></h2>
+<p>از یک سرور با داکر، دامنه‌ای که شما کنترل می‌کنید، و ذخیره‌سازی محلی پایدار استفاده کنید.
+رکوردهای A/AAAA دامنه را به سمت سرور نشانه بروید؛ AAAA را فقط در صورتی که IPv6 به آن برسد، منتشر کنید. دسترسی ورودی TCP 80 و 443 و خروجی DNS/HTTPS را برای صدور گواهی‌نامه مجاز کنید. سایر سرویس‌ها نباید از قبل این پورت‌ها را اشغال کرده باشند.</p>
+<p>مقدار <code>deploy/env.example</code> را به <code>.env</code> کپی کرده و یک نام میزبان بدون طرح یا مسیر تنظیم کنید:</p>
+<pre><code class="language-dotenv">TGWITNESS_DOMAIN=watch.your-domain.org</code></pre>
+<p>ساخت سورس را با لایه HTTPS آغاز کنید:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt</code></pre>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml -f deploy/compose/compose.https.yaml up -d --wait</code></pre>
+<p>برای یک تصویر منتشرشده، به جای آن از <code>deploy/compose/compose.image.yaml</code> به عنوان اولین فایل استفاده کنید. هر دو آرگومان <code>-f</code> را برای دستورات وضعیت، لاگ، به‌روزرسانی و توقف بعدی نگه دارید.</p>
+<p>کدی گواهی‌نامه را دریافت و تمدید می‌کند، HTTP را به HTTPS هدایت مجدد می‌کند و درخواست‌ها را به جمع‌آورنده در شبکه خصوصی Compose فوروارد می‌کند. وضعیت گواهی‌نامه دارای حجم پایدار خود است. پورت میزبان مستقیم جمع‌آورنده فقط برای لوپ‌بک باقی می‌ماند. پیکربندی ارائه‌شده کدی، ثبت دسترسی را فعال نمی‌کند.</p>
+<p><code>https://watch.your-domain.org</code> را باز کنید و توکن پنل را وارد کنید. آمادگی برای اتصال تأیید صدور گواهی‌نامه یا دسترسی خارجی را تضمین نمی‌کند. اگر HTTPS آماده نیست، DNS، قوانین فایروال و موارد زیر را بررسی کنید:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.https.yaml logs --tail 100 caddy</code></pre>
+<p>تصویر Caddy ارائه‌شده با تگ <code>2-alpine</code> خود دنبال می‌شود. فراخوانی (Pull) آن تصویر را تازه می‌کند؛
+اگر به نسخه‌های ثابت زیرساخت نیاز دارید، یک هش آزمایش‌شده را در استقرار خود پین کنید.</p>
+<h2 id="updates-and-backups">به‌روزرسانی‌ها و پشتیبان‌گیری‌ها<a class="anchor" href="#updates-and-backups" aria-label="لینک به این بخش">#</a></h2>
+<p>حفظ نام پروژه Compose و حجم داده‌ها در طول به‌روزرسانی‌ها. ابتدا گردآورنده را متوقف کرده و یک نسخه پشتیبان کامل تهیه کنید. برای استقرار پیش‌فرض مبتنی بر منبع:</p>
+<pre><code class="language-sh">docker compose stop
+docker compose cp tgwitness:/data ../tgwitness-backup-before-update</code></pre>
+<p>هر بار از یک مقصد پشتیبان جدید، خارج از مخزن، استفاده کنید و آن را به عنوان
+ماده قابل دسترسی با حساب کاربری محافظت کنید. مسیر مثال صرفاً جهت نمایش است؛ از مکان پشتیبان
+خصوصی خود استفاده کنید. کل دایرکتوری، از جمله فایل‌های پنهان، تمام فضاهای کاری، کلیدها،
+ژورنال‌ها و رسانه‌ها را کپی کنید. در صورت پیکربندی، کلید اصلی گاوصندوق خارجی را به طور جداگانه پشتیبان‌گیری کنید.
+یک فایل ZIP مدرک، یک نسخه پشتیبان قابل بازیابی از برنامه نیست. برای HTTPS، همچنین در صورتی که نیاز به حفظ وضعیت گواهی/حساب دارید، حجم‌های Caddy را نیز حفظ کنید.</p>
+<p>برای استقرار در محیط تولید، فایل‌های نسخه جدید را تهیه کرده و اجرا کنید:</p>
+<pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
+<p>برای استقرار با استفاده از image، <code>TGWITNESS_IMAGE</code> را به نسخهٔ دلخواه تغییر دهید، سپس اجرا کنید:</p>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait</code></pre>
+<p>Use your installation's Compose file(s) for the preceding stop/copy commands too.
+Keep <code>.env</code>, custom configuration, and the same project name. <code>down</code> keeps named
+volumes; <strong><code>down -v</code> deletes them</strong>. Do not copy <code>.venv</code> between operating systems
+or Python versions. For native updates, stop TgWitness, back up its full data
+directory, replace source files, and run <code>python start.py --setup-only</code> before launch.</p>
+<p>دسترسی پنل، هویت حساب، وضعیت مشاهده و پوشش را پس از یک
+به‌روزرسانی بررسی کنید. راه‌اندازی مجدد، به‌روزرسانی‌های از دست رفته تلگرام را بازسازی نمی‌کند. در صورتی که یک نسخه آینده فرمت‌های ذخیره‌سازی را تغییر دهد، بازگشت به نسخه قبلی ممکن است به نسخه پشتیبان پیش از به‌روزرسانی نیاز داشته باشد.</p>
+<h2 id="automated-github-releases">انتشارهای خودکار گیت‌هاب<a class="anchor" href="#automated-github-releases" aria-label="لینک به این بخش">#</a></h2>
+<p><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml">روند انتشار</a> پس از ارسال این پروژه به یک مخزن گیت‌هاب با اکشن‌های فعال، آماده استفاده است. این روند هنگام <strong>انتشار</strong> یک نسخه گیت‌هاب، از جمله نسخه‌های پیش‌انتشار، اجرا می‌شود. پیش‌نویس‌ها و ارسال تگ‌ها به تنهایی، بسته‌ها را منتشر نمی‌کنند.</p>
+<ol>
+<li>نسخهٔ بسته و گزارش تغییرات را تنظیم کنید، سپس یک نسخه را با برچسب <code>v</code> منتشر کنید
+    به‌علاوه نسخهٔ دقیق <code>pyproject.toml</code>، مانند <code>v0.7.0</code>.</li>
+<li>جریان کاری تگ را اعتبارسنجی می‌کند و بررسی‌های مشترک پایتون ویندوز/لینوکس/macOS، مرورگر QR عمومی/واردات حساب، بستهٔ منبع و داکر را اجرا می‌کند. نصب بومی تازه نیز روی هر سه سیستم‌عامل با استفاده از پایتون ۳.۱۲ انجام می‌شود.</li>
+<li>پس از موفقیت این بررسی‌ها، یک ایمیج ARM64 را تحت QEMU به صورت تست دودی اجرا می‌کند، ایمیج‌های AMD64/ARM64 را در <code>ghcr.io/&lt;lowercase-owner&gt;/&lt;lowercase-repository&gt;:&lt;version&gt;</code> منتشر می‌نماید و فایل ZIP منبع، چک‌سام و چرخ (wheel) پایتون را به نسخه منتشرشده ضمیمه می‌کند. یک وظیفه جداگانه در ویندوز، فایل ZIP قابل حمل و چک‌سام آن را ساخته و ضمیمه می‌نماید.</li>
+<li>پس از اولین انتشار، تنظیمات بسته GHCR را باز کرده و در صورتی که قصد دریافت تصاویر ناشناس را دارید، گزینه «Visibility» را روی <strong>«Public»</strong> تنظیم کنید. یک مخزن سورس عمومی به تنهایی انتشار یک بسته کانتینری عمومی را تضمین نمی‌کند. سیاست‌های سازمان باید انتشار بسته را مجاز بدانند. این گردش کار از <code>GITHUB_TOKEN</code> استفاده می‌کند؛ هیچ رمز عبور رجیستری یا اعتبارنامه‌های VPS نباید در مخزن قرار داده شوند.</li>
+</ol>
+<p>موفقیت گردش کار از راه دور با این آماده‌سازی محلی تضمین نشده است. شبیه‌سازی ARM64 یک بررسی مقدماتی است، نه صلاحیت سخت‌افزار بومی یا تلگرام زنده.
+این کار بسته‌بندی نسخه را خودکار می‌کند؛ راه‌اندازی یک سرور همچنان به دستور Compose و پیش‌نیازهای دامنه/میزبان آن نیاز دارد. سرورها موجود هنگام انتشار یک نسخه به‌صورت بی‌صدا ارتقا یا مجدداً راه‌اندازی نمی‌شوند.</p>
+<h2 id="remote-server">سرور از راه دور<a class="anchor" href="#remote-server" aria-label="لینک به این بخش">#</a></h2>
+<p>سرویس را محدود به لوپ‌بک نگه دارید و از تونل SSH استفاده کنید، یا HTTPS را در یک پروکسی معکوس پایان دهید. فایل پایه Compose فقط برای استفاده محلی است؛ لایه اختیاری
+<code>deploy/compose/compose.https.yaml</code>، Caddy را برای یک دامنه پیکربندی‌شده فراهم می‌کند.
+توکن حامل را از URLها و لاگ‌های پروکسی دور نگه دارید. یک پروکسی معکوس باید اندازه درخواست و نرخ اتصال را محدود کند. HTTP ساده را در معرض اینترنت قرار ندهید.</p>
+<p>نمونه‌هایی برای systemd، یک وظیفه ورود به سیستم ویندوز، یک عامل کاربری macOS و Caddy در <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">پوشه deploy/</a> ارائه شده‌اند.
+مسیرهای آن‌ها را قبل از نصب بررسی/تطبیق دهید.
+آن‌ها قالب‌هایی هستند که ارائه شده‌اند، نه واجد شرایط بودن پلتفرم که به صورت محلی اجرا شوند. هیچ
+سرویس یا وظیفه پس‌زمینه‌ای توسط راه‌انداز عادی ثبت نمی‌شود.</p>
+<p>در ویندوز، اجرای بدون پنجره <code>pythonw.exe</code>، تشخیص‌های راه‌اندازی/سرور را در 
+<code>logs/server.log</code> زیر دایرکتوری داده (۵ مگابایت برای هر فایل، دو نسخه پشتیبان چرخشی) ذخیره می‌کند.
+اجرای کنسول، ثبت کنسول را حفظ می‌کند. ثبت دسترسی HTTP در هر دو حالت غیرفعال است.
+لاگ‌ها را با دایرکتوری داده محافظت کرده و قبل از اشتراک‌گذاری آنها را بررسی کنید.</p>
+<h2 id="restart-and-gaps">راه‌اندازی مجدد و فواصل<a class="anchor" href="#restart-and-gaps" aria-label="لینک به این بخش">#</a></h2>
+<p>آخرین وضعیت مشاهده‌ی درخواستی حفظ می‌شود. اگر مشاهده فعال بود،
+راه‌اندازی مجدد تلاش می‌کند تا منابع انتخاب‌شده را دوباره متصل کرده و از سر بگیرد. توقف دستی
+آن نیت را لغو می‌کند. یک راه‌اندازی مجدد ناموفق ثبت شده و در پنل نمایش داده می‌شود.</p>
+<p>StringSession مجوز را حفظ می‌کند اما وضعیت پایدار به‌روزرسانی/واحد تل‌هون را نه.
+دیالوگ‌ها در هنگام راه‌اندازی مجدد بارگذاری می‌شوند. تلگرام/تل‌هون می‌تواند برخی از وقفه‌های ارتباطی را در حین اجرا بازیابی کند، اما TgWitness ادعای بازپخش پایدار در سراسر راه‌اندازی مجدد فرآیندها را ندارد.
+هر بار راه‌اندازی، سرآیند ژورنال قبلی و مرز آفلاین را ثبت می‌کند.
+نظارتگر هر ۱۰ ثانیه اتصال را بررسی می‌کند و هر دقیقه یک تپش قلب اضافه می‌کند
+(<strong>پارامترها → رکورد زنده بودن هر بار</strong>).
+وقفه های کوتاه ممکن است از دست بروند؛ یک انتقال متصل، تحویل کامل
+به‌روزرسانی را تضمین نمی‌کند. اسنپ‌شات‌ها مشاهدات صریح تاریخچه فعلی هستند، نه ترمیم شکاف.</p>
+<p>صف رسانه در پایگاه داده SQLite هر فضای کاری ذخیره می‌شود. یک پیام و کار آن به‌صورت اتمیک ثبت می‌شوند. کارهای در حال اجرا که متوقف شده‌اند، در شروع مجدد برای تلاش دوباره بازیابی می‌شوند.
+هر دانلود دارای یک زمان انتظار پایه ۱۲۰ ثانیه‌ای به علاوه زمان لازم با سرعت ۲۵۶ کیلوبایت بر ثانیه برای اندازه‌اش، و یک محدودیت ۱ تا ۲۰۰۰ مگابایت برای هر نوع پیوست است؛ زمان انتظار، سرعت و تلاش‌های مجدد در <strong>بخش پارامترها</strong> قرار دارند. گردآورنده فایل‌هایی را که اندازه‌شان نامشخص است نادیده می‌گیرد. توقف، کارهای صف‌شده را حفظ می‌کند. امکان تکرار دانلود از توصیف‌گر فایل مشاهده‌شده اصلی استفاده می‌کند، نه از آخرین نسخه یک پیام که بعداً ویرایش شده است.
+خطاهای موقت دارای تعداد تکرار محدودی هستند؛ توقف حالت FloodWait رسانه‌ای پس از راه‌اندازی مجدد نیز ادامه می‌یابد.
+بازیابی رسانه از بازیابی به‌روزرسانی تلگرام جداست و نمی‌تواند فایل‌های ناپدیدشده را بازسازی کند.</p>
+<h2 id="backup-restore-and-capacity">پشتیبان‌گیری، بازیابی و ظرفیت<a class="anchor" href="#backup-restore-and-capacity" aria-label="لینک به این بخش">#</a></h2>
+<p>فرآیند را قبل از کپی کردن <strong>کل دایرکتوری داده</strong>، شامل vault.key، signing.enc، credentials.enc، فایل‌های پایگاه داده/WAL SQLite، رسانه، توکن، نقاط کنترل، و تمام پروفایل‌ها/زیرپوشه‌ها متوقف کنید. نسخه کامل را در حالی که سرویس مقصد متوقف شده است، بازیابی کنید. کلیدهای گنجینه (vault keys) گم‌شده یا عدم تطابق کلید امضا (signing-key) باعث عدم راه‌اندازی می‌شود؛ برای دسترسی اجباری، کلیدها را دوباره تولید نکنید.</p>
+<p>نسخه‌های پشتیبان مخفی را رمزگذاری‌شده و با کنترل دسترسی نگه دارید. فایل‌های فشرده مدرک قابل حمل هستند؛ بر روی آثار بررسی کنید، نه نسخه‌های پشتیبان اپلیکیشن یا نسخه‌های پشتیبان جلسه تلگرام. هیچ حذف خودکار مبتنی بر نگهداری وجود ندارد. فضای دیسک را برای تمام پیام‌ها، متادیتای خام، رسانه‌ها، خروجی‌های موقت و نسخه‌های پشتیبان برنامه‌ریزی کنید.</p>
+<p>تأیید راه‌اندازی و خروجی گرفتن سوابق جریان به جای بارگذاری کل دفترچه.
+یک خروجی، یک نمای کلی خواندنی را ثابت می‌کند در حالی که نوشته‌های جدید WAL می‌توانند ادامه یابند؛ خروجی‌های طولانی‌مدت
+می‌توانند صفحات WAL را حفظ کنند، بنابراین ظرفیت دیسک همچنان اهمیت دارد. فایل‌های ZIP به ۴ گیگابایت
+بدون فشرده‌سازی محدود می‌شوند تا با پیش‌فرض اعتبارسنج مستقل مطابقت داشته باشند؛ <strong>پارامترها → بزرگترین ZIP امضا شده</strong>
+محدودیت را افزایش می‌دهد، و چنین آرشیوهایی با <code>verify.py --max-gib N</code> تأیید می‌شوند. سایر فرمت‌ها محدودیت تعداد رویداد ندارند.
+مرورگرهای پشتیبانی‌شده، بلوک‌های پاسخ را به فایلی که کاربر انتخاب کرده است، استریم می‌کنند. سایر مرورگرها
+حداکثر ۱۲۸ مگابایت (MiB) را در بافر نگه می‌دارند و انتقال‌های بزرگتر را به CLI احراز هویت‌شده هدایت می‌کنند:</p>
+<pre><code class="language-sh">python -m tgwitness.download --token-file data/live/panel-token.txt --out evidence.zip</code></pre>
+<p>برای یک فضای کاری دیگر از <code>--profile ID</code> در <strong>بخش «صادرات → شناسه فضای کاری» (Exports → Workspace ID)</strong>، برای یک سرور راه دور از <code>--format zip|jsonl|csv|html</code>، <code>--url https://your-server</code>، یا برای تغییر محدودیت انتقال ۵ گیگابایتی از <code>--max-mib</code> استفاده کنید. HTTP ساده فقط برای لوپ‌بک مجاز است. توکن‌ها در هدرها جابجا می‌شوند، هدایت‌ها (redirects) رد می‌شوند، فایل‌های موجود بازنویسی نمی‌شوند و دانلودهای ناقص به عنوان فایل‌های کامل منتشر نمی‌شوند.
+اگر TGWITNESS_TOKEN توکن تولید شده را بازنویسی کند، از یک فایل جداگانه محافظت‌شده که حاوی آن مقدار فعال است استفاده کنید: panel-token.txt توسط این بازنویسی دوباره نوشته نمی‌شود. SHA-256 دستور فقط یک چک‌سام انتقال است؛ فایل ZIP امضا شده را به طور مستقل تأیید کنید.</p>
+<p>فایل‌های خروجی سرور در داخل فضای خصوصی هر workspace در <code>temporary-exports/</code> باقی می‌مانند.
+پاسخ‌های موفق فایل‌های خود را پاک می‌کنند. خروجی‌گیری‌های متوقف‌شده در شروع به کار بعدی فضای کاری، با قفل نمونه انحصاری خود، حذف می‌شوند. این دایرکتوری بخشی از مدل تهدید/ظرفیت ذخیره‌سازی است؛ از یک حجم داده رمزگذاری‌شده استفاده کنید. انتقال‌های چند گیگابایتی در مقیاس تولید همچنان به اعتبارسنجی روی سیستم مقصد شما نیاز دارند.</p>
+<p>پنل، رسانه‌های صف‌شده/ناموفق، قدیمی‌ترین رسانه‌های در انتظار، فضای آزاد دیسک، مکث‌های درخواست تلگرام و منابعی را که دسترسی‌شان تأیید نشده است، نمایش می‌دهد. این تشخیص‌ها یک مانیتور تحویل کامل از ابتدا تا انتها نیستند. فضاهای کاری یک فرآیند را به اشتراک می‌گذارند؛ یک حساب پر سر و صدا همچنان می‌تواند بر دیگران تأثیر بگذارد. فرآیندهای کارگر جداگانه، نگهداری/گردش، بازیابی پایدار به‌روزرسانی، لنگراندازی نقطه‌کنترل از راه دور، نقش‌ها و صلاحیت کامل استقرار باقی می‌مانند.</p>
+<h2 id="connection-and-protection-options">گزینه‌های اتصال و محافظت<a class="anchor" href="#connection-and-protection-options" aria-label="لینک به این بخش">#</a></h2>
+<p>مسیرهای اتصال به ازای هر فضای کاری هستند و باید قبل از اعطای مجوز پیکربندی شوند.
+SOCKS5/HTTP CONNECT از وابستگی ثابت python-socks استفاده می‌کنند. MTProxy از حمل‌ونقل واسط تصادفی آزمایشی Telethon استفاده می‌کند؛ رازهای TLS جعلی پشتیبانی نمی‌شوند.
+هیچ پشتیبان خودکار مستقیمی پیکربندی نشده است. این یک مسیر شبکه در سطح سیستم نیست.</p>
+<p>برای نصب‌های جدید، TGWITNESS_VAULT_KEY_FILE به یک فایل کلید اصلی تصادفی اشاره می‌کند که به طور جداگانه محافظت می‌شود. آن را به صورت فقط-خواندنی خارج از /data در یک کانتینر مونت کنید. متادیتای نمک public vault.external.json را به همراه هر فضای کاری و کلید اصلی به صورت جداگانه حفظ کنید.
+گنجینه‌های محلی موجود به یک مهاجرت برنامه‌ریزی‌شده نیاز دارند؛ تنظیم این متغیر آنها را به صورت خودکار و بی‌صدا تبدیل نمی‌کند. ذخیره‌سازی و صادرات پیام/رسانه به صورت رمزگذاری‌شده توسط برنامه نیست. از حجم‌های رمزگذاری‌شده و ذخیره‌سازی موقت خصوصی کافی در صورت لزوم استفاده کنید.</p>
+<p>روندهای دقیق: <a href="../connection/">اتصال/امنیت</a> و <a href="../operations/">حالت‌های عملیاتی</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/DEPLOYMENT.md">ویرایش این صفحه در گیت‌هاب ↗</a><a class="next-guide" href="../collection/"><span>مرحله بعدی</span><strong>نحوهٔ کارکرد جمع‌آوری ←</strong></a><p>این راهنماها پیاده‌سازی فعلی را توصیف می‌کنند. نتایج اعتبارسنجی و شکاف‌های باقی‌مانده به‌طور جداگانه مستند شده‌اند. <a href="../verification/">آنچه آزمایش شده است ←</a></p></footer>
+</main>
+<aside class="toc" aria-label="در این صفحه"><p class="nav-label">در این صفحه</p><a href="#choose-an-installation">انتخاب نصب</a><a href="#installation-requirements">نیازمندی‌های نصب</a><a href="#local-computer">کامپیوتر محلی</a><a href="#windows-portable-package">بسته قابل حمل ویندوز</a><a href="#container">کانتینر</a><a href="#install-a-published-image">نصب یک تصویر منتشرشده</a><a href="#automatic-https-on-a-server">HTTPS خودکار روی یک سرور</a><a href="#updates-and-backups">به‌روزرسانی‌ها و پشتیبان‌گیری‌ها</a><a href="#automated-github-releases">انتشارهای خودکار گیت‌هاب</a><a href="#remote-server">سرور از راه دور</a><a href="#restart-and-gaps">راه‌اندازی مجدد و فواصل</a><a href="#backup-restore-and-capacity">پشتیبان‌گیری، بازیابی و ظرفیت</a><a href="#connection-and-protection-options">گزینه‌های اتصال و محافظت</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>کد باز · روی دستگاه شما اجرا می‌شود</span><a href="../../../../LICENSE">مجوز MIT</a><a href="../notice/">اعلان اپراتور</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">امنیت</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "در انتظار پیام", "Step through a fictional send, edit and delete.": "مرحله‌به‌مرحله یک ارسال، ویرایش و حذف فرضی را دنبال کنید.", "No observations yet. Start the sequence or advance one event.": "هنوز هیچ مشاهده‌ای ثبت نشده است. توالی را آغاز کنید یا یک رویداد را جلو ببرید.", "Meet at 10:00": "ساعت ۱۰:۰۰ ملاقات کنید", "A new message is visible in the chat.": "یک پیام جدید در چت قابل مشاهده است.", "Record 1 appended: the collector observed the original message.": "سند ۱ ضمیمه شد: گردآورنده پیام اصلی را مشاهده کرد.", "Meet at 11:00": "ساعت ۱۱:۰۰ ملاقات کنید", "The current text changes. The earlier observation stays.": "متن فعلی تغییر می‌کند. مشاهدهٔ قبلی باقی می‌ماند.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "رکورد ۲ ضمیمه شد: ویرایش یک مشاهده جدید است. رکورد ۱ همچنان متن اصلی را حفظ می‌کند.", "Message deleted": "پیام حذف شد", "The message has disappeared from the chat view.": "پیام از نمای چت ناپدید شده است.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "سند شمارهٔ ۳ ضمیمه شد: اطلاعیهٔ حذف در کنار هر دو نسخهٔ مشاهده‌شده نگهداری می‌شود.", "0 records": "۰ رکورد", "1 record": "۱ رکورد", "2 records": "۲ رکورد", "3 records": "۳ رکورد", "Complete / {n} of 3": "کامل / {n} از ۳", "Step / {n} of 3": "مرحله / {n} از ۳", "Pause": "وقفه", "Replay sequence": "ترتیب بازپخش", "Play sequence": "پخش توالی", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "مثال ایستا در دسترس است. برای محاسبه هش‌ها به‌صورت تعاملی، این صفحه را از طریق HTTPS یا پیش‌نمایش localhost با پشتیبانی Web Crypto باز کنید.", "No record supplied": "هیچ سندی ارائه نشده است", "Tail removed": "پایان حذف شد", "≠ saved hash": "≠ هَش ذخیره شده", "Rebuilt · different hash": "بازسازی‌شده · هش متفاوت", "= saved hash": "= هَش ذخیره‌شده", "Same length and matching head.": "طول یکسان و سر هماهنگ.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "هر سه هش محاسبه‌شده با هش‌های ذخیره‌شده مطابقت دارند. این نمونه با مرز سه‌رکوردی که حفظ شده است، همخوانی دارد.", "Same saved head; the journal prefix fails verification.": "همان سر ذخیره شده؛ پیش‌وند دفترچه یادداشت در اعتبارسنجی شکست می‌خورد.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "رکورد شمارهٔ ۲ دیگر با هش ذخیره‌شدهٔ خود مطابقت ندارد. بررسی تنها هدر نهایی ذخیره‌شده این مورد را از قلم می‌اندازد؛ اعتبارسنج همهٔ رکوردها را بررسی می‌کند.", "Head differs from the retained checkpoint.": "سر با نقطهٔ کنترل نگه‌داشته‌شده تفاوت دارد.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "هش‌های بازسازی‌شده به هم متصل هستند، اما هِد نهایی تغییر کرده است. نقطه‌کنترل حفظ‌شده این تاریخچه را رد می‌کند. امضاهای اصلی نیز روی رکوردهای تغییر یافته ناموفق خواهند بود.", "Too short: 2 supplied records \u003c 3 retained records.": "خیلی کوتاه: ۲ رکورد ارائه‌شده \u003c ۳ رکورد نگهداری‌شده.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "دو هش باقی‌مانده هنوز با هم مطابقت دارند. نقطهٔ کنترل حفظ‌شده، انتهای گمشده را آشکار می‌کند. بدون آن مرز قبلی، این پیش‌وند کوتاه به‌تنهایی نمی‌توانست حذف را آشکار کند.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "محاسبه هش در این مرورگر در دسترس نیست. فرمول‌ها و توضیحات ثابت زیر همچنان در دسترس هستند.", "{n} records": "{n}یادداشت‌ها", "head {hash}": "سر {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "پذیرفته شد: شمارش افزایش می‌یابد، امضا تأیید می‌شود و کلید مطابقت دارد. شاهد این مرز جدید را حفظ می‌کند.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: پاسخ امضا‌شده تعداد سوابق کمتری نسبت به آخرین نقطهٔ کنترل پذیرفته‌شده گزارش می‌کند. شاهد مشکل را ثبت می‌کند و مرز پذیرفته‌شدهٔ قبلی را حفظ می‌کند.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "فورک: شمارش بدون تغییر است اما سر متفاوت است. شاهد اختلاف را ثبت می‌کند و مرز قبلاً پذیرفته‌شده را حفظ می‌کند.", "No answer": "پاسخ ندارد", "boundary unknown": "مرز نامشخص", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "بدون پاسخ: شاهد چک ناموفق را ثبت می‌کند. این نمی‌تواند وضعیت فعلی گردآورنده را تأیید کند. اگر شاهد همچنان بتواند به Bot API دسترسی پیدا کند و سیاست انتشار آن اجازه دهد، می‌تواند آن خطا را منتشر کند.", "Send {n}": "{n} ارسال کنید", "Edit {n}": "ویرایش {n}", "Delete {n}": "حذف {n}", "Both accounts captured all six expected observations in this example.": "هر دو حساب در این مثال تمام شش مشاهدهٔ مورد انتظار را ثبت کردند.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "حساب B همچنان ۶ از ۶ را ضبط کرد. دو رسید زمان بیشتری بردند. نسبت ضبط و تأخیر رسید به پرسش‌های متفاوتی پاسخ می‌دهند.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "حساب B از میان شش مورد، پنج مورد را تا زمان برش ضبط کرد (۸۳٫۳٪). ویرایش مفقودشده تأخیر قابل‌سنجی ندارد. این نتیجه تنها شش اقدام کنترل‌شده را توصیف می‌کند.", "not observed by cutoff": "توسط نقطه‌برش مشاهده نشده است", "{s} seconds": "{s} ثانیه", "Exact values follow in the table.": "مقادیر دقیق در جدول آمده است.", "{s} s": "{s}s", "Not observed": "مشاهده نشد", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "چهار چت مشاهدات متفاوتی ارائه می‌دهند. سوابق منبع هر ارتباط را دنبال کنید؛ بدون مشخص کردن فرستنده، پست کانال را به کاربر ۷۱۰۰۱ نسبت ندهید.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "سوابق شمارهٔ ۱۴۶ و شمارهٔ ۲۰۵ همان شناسهٔ فرستنده، ۷۱۰۰۱ را ارائه می‌کنند. این امر پست‌های مشاهده‌شدهٔ یک حساب تلگرام را در دو گفتگوی مختلف به هم مرتبط می‌سازد. این اطلاعات هویت یک فرد واقعی را مشخص نمی‌کند و پست کانال را به او نسبت نمی‌دهد.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "مقصد pay.example.invalid/new در رکورد گروه شمارهٔ ۱۴۶، کیبورد بات شمارهٔ ۱۷۳، ویرایش کانال شمارهٔ ۱۸۸ و پیام خصوصی شمارهٔ ۲۰۵ ظاهر می‌شود. یک مقصد تکراری مواد را به هم مرتبط می‌کند؛ اما اثبات کنترل مشترک آن حساب‌ها را نمی‌کند.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "رسیدهای رسانه‌ای تکمیل‌شده شمارهٔ ۱۵۱ و ۲۰۹ در این مورد فرضی مقادیر کامل یکسان SHA-256 دارند. بایت‌های واقعی و سوابق پیام مرتبط با آن‌ها را مقایسه کنید. فایل مطابقت‌یافته سازندهٔ خود را شناسایی نمی‌کند و ثابت نمی‌کند چه کسی آن را ارسال کرده است.", "the encrypted off-site copy": "نسخه رمزگذاری‌شده خارج از محل", "notifications": "اخطاریه‌ها", "checkpoint hashes for timestamps": "هش‌های نقطه‌کنترل برای مهرهای زمانی", "signed checkpoints for the witness": "نقاط کنترل امضا‌شده برای شاهد", "Switched on in this example": "در این مثال فعال شده است", "Optional · off by default": "اختیاری · به‌صورت پیش‌فرض غیرفعال", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "خروج از این دستگاه: اتصال تلگرام و {list}. هیچ چیز دیگر.", "Default: only the Telegram connection leaves this machine.": "پیش‌فرض: تنها اتصال تلگرام از این دستگاه خارج می‌شود.", "{done} of {total} done": "{done} از {total} انجام شده", "Mark step {n} as done": "مرحله {n} را به‌عنوان انجام‌شده علامت‌گذاری کنید", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "کپی", "Copied": "کپی شد", "Command copied.": "فرمان کپی شد.", "Selected — Ctrl/Cmd+C": "انتخاب شده — Ctrl/Cmd+C", "Command selected. Copy it manually.": "فرمان انتخاب شد. آن را به‌صورت دستی کپی کنید.", "Command copied to clipboard.": "فرمان به کلیپ‌بورد کپی شد.", "Select text": "انتخاب متن", "Clipboard unavailable. Command selected; copy it manually.": "پیشخوان کلیپ‌بورد در دسترس نیست. فرمان انتخاب شده است؛ آن را به‌صورت دستی کپی کنید.", "A message arrives. The first observation is saved.": "پیامی دریافت می‌شود. اولین مشاهده ذخیره می‌شود.", "The time changes. Both captured versions stay.": "زمان تغییر می‌کند. هر دو نسخه ضبط‌شده باقی می‌مانند.", "The message disappears. The captured history remains.": "پیام ناپدید می‌شود. تاریخچه ضبط‌شده باقی می‌ماند.", "Pause example animation": "انیمیشن مثال مکث", "Play example animation": "پخش انیمیشن نمونه", "Play": "پخش", "Full-size workspace screenshot": "اسکرین‌شات تمام‌صفحه از فضای کاری", "Workspace screenshot · fictional data": "اسکرین‌شات فضای کاری · داده‌های فرضی", "Close": "بستن", "Close screenshot": "پایان اسکرین‌شات", "Scrollable full-size screenshot": "اسکرین‌شات تمام‌صفحه قابل پیمایش", "Enlarge: {name}": "بزرگ‌نمایی: {name}", "View full size": "نمایش در اندازه کامل"}</script>
+</body></html>

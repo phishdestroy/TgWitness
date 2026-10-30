@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Timestamps | TgWitness</title>
+<meta name="description" content="RFC 3161 timestamps for signed checkpoints: what is sent to the authority and how a response is verified."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/docs/reference/timestamp/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Timestamps | TgWitness"><meta property="og:description" content="RFC 3161 timestamps for signed checkpoints: what is sent to the authority and how a response is verified.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/docs/reference/timestamp/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/timestamp/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/timestamp/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/timestamp/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/timestamp/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/timestamp/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/timestamp/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/timestamp/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/timestamp/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/timestamp/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/timestamp/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/timestamp/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/timestamp/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/timestamp/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/timestamp/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/docs/reference/timestamp/", "url": "https://phishdestroy.github.io/TgWitness/docs/reference/timestamp/", "name": "Timestamps | TgWitness", "description": "RFC 3161 timestamps for signed checkpoints: what is sent to the authority and how a response is verified.", "inLanguage": "en", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://phishdestroy.github.io/TgWitness/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://phishdestroy.github.io/TgWitness/docs/"}, {"@type": "ListItem", "position": 3, "name": "Reference", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Timestamps", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/timestamp/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../docs.css">
+<link rel="stylesheet" href="../../../learn.css">
+<script src="../../../docs.js" defer></script>
+<script src="../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Documentation</span></a>
+<nav aria-label="Guides"><a href="../../concepts/">Visual guide</a><a href="../../">All guides</a><a href="../">Reference</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Language"><span aria-hidden="true">◍</span> English</summary><div class="lang-list"><a href="./" hreflang="en" lang="en" aria-current="true">English</a><a href="../../../ru/docs/reference/timestamp/" hreflang="ru" lang="ru">Русский</a><a href="../../../uk/docs/reference/timestamp/" hreflang="uk" lang="uk">Українська</a><a href="../../../es/docs/reference/timestamp/" hreflang="es" lang="es">Español</a><a href="../../../pt/docs/reference/timestamp/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../tr/docs/reference/timestamp/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../ar/docs/reference/timestamp/" hreflang="ar" lang="ar">العربية</a><a href="../../../fa/docs/reference/timestamp/" hreflang="fa" lang="fa">فارسی</a><a href="../../../ur/docs/reference/timestamp/" hreflang="ur" lang="ur">اردو</a><a href="../../../hi/docs/reference/timestamp/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../id/docs/reference/timestamp/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../vi/docs/reference/timestamp/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../zh/docs/reference/timestamp/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Switch between light and dark theme"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Guides"><a href="../../../guides/modes.html">Modes, scenarios and evidence levels</a><p class="nav-label">First steps</p><a href="../../start/">Start in minutes</a><a href="../../accounts/">Connect an account</a><a href="../../proxies/">Choose a proxy</a><a href="../../exports/">Export and verify</a><p class="nav-label">Understand the evidence</p><a href="../../concepts/">See how evidence works</a><a href="../../cases/">Investigate across all chats</a><a href="../../security/">Keep it secure</a><p class="nav-label">Go further</p><a href="../../witness/">Set up a witness bot</a><a href="../../server/">Keep it running</a><a href="../../troubleshooting/">Find what went wrong</a></nav><nav class="wiki-nav" aria-label="Reference"><p class="nav-label"><a class="nav-label-link" href="../">Reference</a></p><details class="wiki-group"><summary>Set up</summary><a href="../quickstart/">Quick start</a><a href="../accounts/">Accounts and session formats</a><a href="../connection/">Connection, proxies and data protection</a><a href="../deployment/">Deployment</a></details><details class="wiki-group"><summary>Collect</summary><a href="../collection/">How collection works</a><a href="../operations/">Workflows and operations</a><a href="../investigation/">Investigation mode</a><a href="../features/">Features and limits</a></details><details class="wiki-group" open><summary>Evidence</summary><a href="../how-it-works/">How the evidence works</a><a href="../evidence/">Evidence format</a><a href="../witness/">Independent witness</a><a href="./" aria-current="page">Timestamps</a></details><details class="wiki-group"><summary>Security & project</summary><a href="../security/">Security and data handling</a><a href="../architecture/">Architecture</a><a href="../verification/">What has been tested</a><a href="../license/">Licence and architectural incompatibility notice</a><a href="../notice/">Operator incompatibility notice</a><a href="../changelog/">Changelog</a></details></nav><p class="sidebar-note">v0.7.0<br>Open source · Runs on your machine</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Guides"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Documentation</a> <span aria-hidden="true">/</span> <a href="../">Reference</a> <span aria-hidden="true">/</span> <span aria-current="page">Timestamps</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Search the documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Try proxy, hash chain, token or witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Clear search" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Type a word to search the guides and the reference. Search stays in your browser.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Reference / Evidence</p><h1>Timestamps</h1><p class="guide-outcome">RFC 3161 timestamps for signed checkpoints: what is sent to the authority and how a response is verified.</p><div class="wiki-body"><p>TgWitness prepares RFC 3161 requests and verifies timestamp authority (TSA) responses.
+This manual procedure neither selects a TSA nor submits data; evidence mode does both on a
+schedule (<a href="../evidence/#rfc-3161-preparation-and-response-verification-02">evidence format</a>). A prepared request is
+<strong>not yet a timestamp proof</strong>.</p>
+<h2 id="what-the-proof-binds">What the proof binds<a class="anchor" href="#what-the-proof-binds" aria-label="Link to this section">#</a></h2>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 691 290" width="691" height="290" role="img" aria-labelledby="flow-8-title flow-8-desc"><title id="flow-8-title">Flow diagram</title><desc id="flow-8-desc">Account observations → SHA-256 chain and Ed25519 signatures; SHA-256 chain and Ed25519 signatures → Signed checkpoint; Signed checkpoint → Exact-byte hash and random nonce; Exact-byte hash and random nonce → RFC 3161 request; RFC 3161 request → Independent TSA; Independent TSA → Signed TSA response; Signed checkpoint → Verify data, nonce and explicit CA trust; Signed TSA response → Verify data, nonce and explicit CA trust</desc><defs><marker id="flow-8-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M202.9 37.0C236.2 37.0 236.2 37.0 269.6 37.0" marker-end="url(#flow-8-arrow)" style="--i:0;--len:67" pathLength="67"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M202.9 37.0C236.2 37.0 236.2 37.0 269.6 37.0"/></circle><path class="flow-edge" d="M421.8 37.0C460.3 37.0 460.3 37.0 498.9 37.0" marker-end="url(#flow-8-arrow)" style="--i:1;--len:77" pathLength="77"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M421.8 37.0C460.3 37.0 460.3 37.0 498.9 37.0"/></circle><path class="flow-edge" d="M571.5 57.0C571.5 86.5 571.5 86.5 571.5 116.0" marker-end="url(#flow-8-arrow)" style="--i:2;--len:59" pathLength="59"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M571.5 57.0C571.5 86.5 571.5 86.5 571.5 116.0"/></circle><path class="flow-edge" d="M491.9 145.0C453.4 145.0 453.4 145.0 414.9 145.0" marker-end="url(#flow-8-arrow)" style="--i:3;--len:77" pathLength="77"/><circle class="flow-pulse" r="3.2" style="--i:3"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M491.9 145.0C453.4 145.0 453.4 145.0 414.9 145.0"/></circle><path class="flow-edge" d="M276.5 145.0C231.1 145.0 231.1 145.0 185.7 145.0" marker-end="url(#flow-8-arrow)" style="--i:4;--len:91" pathLength="91"/><circle class="flow-pulse" r="3.2" style="--i:4"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M276.5 145.0C231.1 145.0 231.1 145.0 185.7 145.0"/></circle><path class="flow-edge" d="M119.9 165.0C119.9 199.0 119.9 199.0 119.9 233.0" marker-end="url(#flow-8-arrow)" style="--i:5;--len:68" pathLength="68"/><circle class="flow-pulse" r="3.2" style="--i:5"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M119.9 165.0C119.9 199.0 119.9 199.0 119.9 233.0"/></circle><path class="flow-edge" d="M644.1 37.0L662.4 37.0Q672.4 37.0 672.4 47.0L672.4 243.0Q672.4 253.0 662.4 253.0L435.6 253.0" marker-end="url(#flow-8-arrow)" style="--i:2;--len:481" pathLength="481"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="5.3s" repeatCount="indefinite" path="M644.1 37.0L662.4 37.0Q672.4 37.0 672.4 47.0L672.4 243.0Q672.4 253.0 662.4 253.0L435.6 253.0"/></circle><path class="flow-edge" d="M199.4 253.0C227.6 253.0 227.6 253.0 255.8 253.0" marker-end="url(#flow-8-arrow)" style="--i:6;--len:56" pathLength="56"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M199.4 253.0C227.6 253.0 227.6 253.0 255.8 253.0"/></circle><g class="flow-node" style="--i:0"><rect x="36.9" y="17.0" width="166.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="37.0">Account observations</tspan></text></g><g class="flow-node" style="--i:1"><rect x="269.6" y="8.0" width="152.2" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="28.0">SHA-256 chain and</tspan><tspan x="345.7" y="46.0">Ed25519 signatures</tspan></text></g><g class="flow-node" style="--i:2"><rect x="498.9" y="17.0" width="145.3" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="37.0">Signed checkpoint</tspan></text></g><g class="flow-node" style="--i:3"><rect x="491.9" y="116.0" width="159.1" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="136.0">Exact-byte hash and</tspan><tspan x="571.5" y="154.0">random nonce</tspan></text></g><g class="flow-node" style="--i:4"><rect x="276.5" y="125.0" width="138.4" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="145.0">RFC 3161 request</tspan></text></g><g class="flow-node" style="--i:5"><rect x="54.2" y="125.0" width="131.5" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="145.0">Independent TSA</tspan></text></g><g class="flow-node" style="--i:6"><rect x="40.4" y="233.0" width="159.1" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="253.0">Signed TSA response</tspan></text></g><g class="flow-node" style="--i:7"><rect x="255.8" y="224.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="244.0">Verify data, nonce and</tspan><tspan x="345.7" y="262.0">explicit CA trust</tspan></text></g></svg></div><details class="flow-steps"><summary>Diagram as text</summary><ol><li>Account observations → SHA-256 chain and Ed25519 signatures</li><li>SHA-256 chain and Ed25519 signatures → Signed checkpoint</li><li>Signed checkpoint → Exact-byte hash and random nonce</li><li>Exact-byte hash and random nonce → RFC 3161 request</li><li>RFC 3161 request → Independent TSA</li><li>Independent TSA → Signed TSA response</li><li>Signed checkpoint → Verify data, nonce and explicit CA trust</li><li>Signed TSA response → Verify data, nonce and explicit CA trust</li></ol></details></figure>
+<p>The collector signature binds records to its key. A trusted TSA response can
+establish that a particular checkpoint existed by the TSA's stated time. The
+checkpoint can then bind the journal prefix. This does not establish the time of
+each Telegram action or the truth of the captured content.</p>
+<h2 id="procedure">Procedure<a class="anchor" href="#procedure" aria-label="Link to this section">#</a></h2>
+<ol>
+<li>Retain the collector key fingerprint through a separate trusted channel. A key
+    supplied only by the examined ZIP is insufficient to identify the collector.</li>
+<li>In <strong>Exports → Prepare timestamp request</strong>, download the selected workspace's
+    request ZIP. Extract <code>checkpoint.json</code>, <code>timestamp.tsq</code>, <code>SHA256SUMS</code> and
+    <code>README.txt</code>. Do not change the checkpoint bytes.</li>
+<li>Choose a TSA appropriate to the investigation. Submit <code>timestamp.tsq</code> using its
+    documented method, with <code>application/timestamp-query</code> for an HTTP service.
+    Save the original binary reply as <code>timestamp.tsr</code>, the endpoint, retrieval time
+    and request outcome. The request contains a hash and nonce rather than messages;
+    network metadata still reveals the request.</li>
+<li>Obtain the trusted root certificate independently of the reply, plus any
+    intermediates required. A certificate in the reply does not become trusted merely
+    because it is included there.</li>
+<li>From a trusted TgWitness installation, verify:</li>
+</ol>
+<pre><code class="language-sh">python -m tgwitness.anchor verify --checkpoint checkpoint.json --request timestamp.tsq --response timestamp.tsr --ca trusted-tsa-root.pem</code></pre>
+<p>Add <code>--intermediates tsa-intermediates.pem</code> or <code>--openssl /path/to/openssl</code> if needed.
+OpenSSL must support <code>ts</code>. On Windows the verifier also searches the standard Git
+installation. OpenSSL 3.5.9 was tested locally with a synthetic CA/TSA.</p>
+<ol start="6">
+<li>Export a signed journal ZIP after the checkpoint so it includes that prefix.
+    Verify using the independently known fingerprint:</li>
+</ol>
+<pre><code class="language-sh">python tgwitness/verify.py evidence.zip --fingerprint TRUSTED_SHA256 --checkpoint checkpoint.json</code></pre>
+<ol start="7">
+<li>Preserve the ZIP, checkpoint, request, reply, certificate chain, verification
+    results and handoff record outside the collector. Repeat verification at receipt.</li>
+</ol>
+<p>To prepare a request from a saved checkpoint:</p>
+<pre><code class="language-sh">python -m tgwitness.anchor prepare checkpoint.json --out timestamp-request.zip</code></pre>
+<p>Preparation canonicalizes JSON and includes the matching checkpoint in the archive.
+Use the <strong>checkpoint bytes from that archive</strong> for TSA verification, even if the
+input file had different whitespace.</p>
+<h2 id="verification-boundaries">Verification boundaries<a class="anchor" href="#verification-boundaries" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Current behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data</td>
+<td>SHA-256 of the exact checkpoint bytes must match the response</td>
+</tr>
+<tr>
+<td>Request</td>
+<td>With <code>--request</code>, the original query and nonce are verified</td>
+</tr>
+<tr>
+<td>TSA signature</td>
+<td>OpenSSL verifies the signature and chain to the explicit CA</td>
+</tr>
+<tr>
+<td>Collector signature</td>
+<td>Separately verified by the journal verifier with a pinned key</td>
+</tr>
+<tr>
+<td>Revocation</td>
+<td>No automatic OCSP/CRL retrieval</td>
+</tr>
+<tr>
+<td>Long-term validity</td>
+<td>No archival validation after certificate expiry</td>
+</tr>
+<tr>
+<td>Scheduled submission</td>
+<td>Evidence mode, off by default</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>--request</code> is technically optional, but omitting it prevents verification of the
+original nonce. For this full procedure, the result's <code>request_checked</code> must be true.
+Certificate verification follows the installed OpenSSL's rules and verification time.
+Long-term preservation needs a separate certificate/revocation evidence policy.</p>
+<p>A valid cryptographic signature is not automatically a qualified timestamp or a
+legal admissibility determination. If an operator fabricated observations before
+timestamping, the TSA anchors those bytes; it does not establish their truth.</p>
+<h2 id="handoff-record">Handoff record<a class="anchor" href="#handoff-record" aria-label="Link to this section">#</a></h2>
+<p>Record the case identifier, sender and recipient, UTC transfer time and its source,
+purpose, filenames/SHA-256 values, collector fingerprint, sequence range, known
+gaps, verifier version and verification outcome. Sign and independently retain this
+record through your organization's process. A multi-user custody-record system is
+not implemented in TgWitness.</p>
+<p>No independent live TSA was contacted during development. Local tests create a
+synthetic CA/TSA to check compatibility and rejection of changed data, nonce or CA.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/TIMESTAMP.md">Edit this page on GitHub ↗</a><a class="next-guide" href="../security/"><span>Next step</span><strong>Security and data handling →</strong></a><p>These guides describe the current implementation. Validation results and remaining gaps are documented separately. <a href="../verification/">What has been tested →</a></p></footer>
+</main>
+<aside class="toc" aria-label="On this page"><p class="nav-label">On this page</p><a href="#what-the-proof-binds">What the proof binds</a><a href="#procedure">Procedure</a><a href="#verification-boundaries">Verification boundaries</a><a href="#handoff-record">Handoff record</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Open source · Runs on your machine</span><a href="../../../LICENSE">MIT license</a><a href="../notice/">Operator notice</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Security</a></footer>
+<script id="site-dict" type="application/json">{}</script>
+</body></html>

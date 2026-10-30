@@ -1,0 +1,840 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>What has been tested | TgWitness</title>
+<meta name="description" content="The live Telegram test, automated checks, browser checks and what remains unverified."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/docs/reference/verification/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="What has been tested | TgWitness"><meta property="og:description" content="The live Telegram test, automated checks, browser checks and what remains unverified.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/docs/reference/verification/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/verification/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/verification/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/verification/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/verification/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/verification/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/verification/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/verification/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/verification/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/verification/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/verification/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/verification/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/verification/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/docs/reference/verification/", "url": "https://phishdestroy.github.io/TgWitness/docs/reference/verification/", "name": "What has been tested | TgWitness", "description": "The live Telegram test, automated checks, browser checks and what remains unverified.", "inLanguage": "en", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://phishdestroy.github.io/TgWitness/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://phishdestroy.github.io/TgWitness/docs/"}, {"@type": "ListItem", "position": 3, "name": "Reference", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "What has been tested", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/verification/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../docs.css">
+<link rel="stylesheet" href="../../../learn.css">
+<script src="../../../docs.js" defer></script>
+<script src="../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Documentation</span></a>
+<nav aria-label="Guides"><a href="../../concepts/">Visual guide</a><a href="../../">All guides</a><a href="../">Reference</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Language"><span aria-hidden="true">◍</span> English</summary><div class="lang-list"><a href="./" hreflang="en" lang="en" aria-current="true">English</a><a href="../../../ru/docs/reference/verification/" hreflang="ru" lang="ru">Русский</a><a href="../../../uk/docs/reference/verification/" hreflang="uk" lang="uk">Українська</a><a href="../../../es/docs/reference/verification/" hreflang="es" lang="es">Español</a><a href="../../../pt/docs/reference/verification/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../tr/docs/reference/verification/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../ar/docs/reference/verification/" hreflang="ar" lang="ar">العربية</a><a href="../../../fa/docs/reference/verification/" hreflang="fa" lang="fa">فارسی</a><a href="../../../ur/docs/reference/verification/" hreflang="ur" lang="ur">اردو</a><a href="../../../hi/docs/reference/verification/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../id/docs/reference/verification/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../vi/docs/reference/verification/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../zh/docs/reference/verification/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Switch between light and dark theme"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Guides"><a href="../../../guides/modes.html">Modes, scenarios and evidence levels</a><p class="nav-label">First steps</p><a href="../../start/">Start in minutes</a><a href="../../accounts/">Connect an account</a><a href="../../proxies/">Choose a proxy</a><a href="../../exports/">Export and verify</a><p class="nav-label">Understand the evidence</p><a href="../../concepts/">See how evidence works</a><a href="../../cases/">Investigate across all chats</a><a href="../../security/">Keep it secure</a><p class="nav-label">Go further</p><a href="../../witness/">Set up a witness bot</a><a href="../../server/">Keep it running</a><a href="../../troubleshooting/">Find what went wrong</a></nav><nav class="wiki-nav" aria-label="Reference"><p class="nav-label"><a class="nav-label-link" href="../">Reference</a></p><details class="wiki-group"><summary>Set up</summary><a href="../quickstart/">Quick start</a><a href="../accounts/">Accounts and session formats</a><a href="../connection/">Connection, proxies and data protection</a><a href="../deployment/">Deployment</a></details><details class="wiki-group"><summary>Collect</summary><a href="../collection/">How collection works</a><a href="../operations/">Workflows and operations</a><a href="../investigation/">Investigation mode</a><a href="../features/">Features and limits</a></details><details class="wiki-group"><summary>Evidence</summary><a href="../how-it-works/">How the evidence works</a><a href="../evidence/">Evidence format</a><a href="../witness/">Independent witness</a><a href="../timestamp/">Timestamps</a></details><details class="wiki-group" open><summary>Security & project</summary><a href="../security/">Security and data handling</a><a href="../architecture/">Architecture</a><a href="./" aria-current="page">What has been tested</a><a href="../license/">Licence and architectural incompatibility notice</a><a href="../notice/">Operator incompatibility notice</a><a href="../changelog/">Changelog</a></details></nav><p class="sidebar-note">v0.7.0<br>Open source · Runs on your machine</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Guides"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Documentation</a> <span aria-hidden="true">/</span> <a href="../">Reference</a> <span aria-hidden="true">/</span> <span aria-current="page">What has been tested</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Search the documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Try proxy, hash chain, token or witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Clear search" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Type a word to search the guides and the reference. Search stays in your browser.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Reference / Security &amp; project</p><h1>What has been tested</h1><p class="guide-outcome">The live Telegram test, automated checks, browser checks and what remains unverified.</p><div class="wiki-body"><h2 id="live-telegram-test-whole-account--29-october-2026">Live Telegram test, whole account · 29 October 2026<a class="anchor" href="#live-telegram-test-whole-account--29-october-2026" aria-label="Link to this section">#</a></h2>
+<p>The same account kept running after the test below. On 29 October at 12:10 UTC its scope
+was switched to the whole account (channels, groups, private chats and bots); the panel asked
+for confirmation and the signed journal recorded it. By 17:59 UTC the journal held:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Recorded, 27 October 21:36 to 29 October 17:59 UTC</th>
+<th style="text-align: right;">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Journal records</td>
+<td style="text-align: right;">9,968</td>
+</tr>
+<tr>
+<td>New messages</td>
+<td style="text-align: right;">5,308</td>
+</tr>
+<tr>
+<td>of them after the switch to the whole account</td>
+<td style="text-align: right;">3,878</td>
+</tr>
+<tr>
+<td>Deletions</td>
+<td style="text-align: right;">784</td>
+</tr>
+<tr>
+<td>of them deleted after TgWitness had saved the message</td>
+<td style="text-align: right;">596</td>
+</tr>
+<tr>
+<td>Edits</td>
+<td style="text-align: right;">41</td>
+</tr>
+<tr>
+<td>Messages added by rechecks</td>
+<td style="text-align: right;">2,273</td>
+</tr>
+<tr>
+<td>Messages a recheck could no longer find</td>
+<td style="text-align: right;">18</td>
+</tr>
+<tr>
+<td>Messages saved by history snapshots</td>
+<td style="text-align: right;">242</td>
+</tr>
+<tr>
+<td>Saved attachments</td>
+<td style="text-align: right;">247</td>
+</tr>
+<tr>
+<td>Collector starts</td>
+<td style="text-align: right;">19</td>
+</tr>
+<tr>
+<td>Telegram FloodWait pauses</td>
+<td style="text-align: right;">26</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>The panel's <strong>Verify</strong> check confirmed the signatures and hash chain of all 9,968 records.</li>
+<li>Messages came from 2 groups or channels and 3 private chats and bots. One message button was
+    pressed from <strong>Chats</strong>; the request and Telegram's answer are in the journal.</li>
+<li>New chats were added when the collector rescanned the account at a restart. Saving the
+    earlier messages of new chats was off (<code>history = 0</code>), so it is not covered here.</li>
+</ul>
+<p>Not covered: reactions, membership changes, people profiles, sending messages, joining by
+invitation, proxies, notifications, the witness bot and several accounts at once. Public files
+contain only counts.</p>
+<h2 id="password-protected-export-opened-with-libarchive--29-october-2026">Password-protected export opened with libarchive · 29 October 2026<a class="anchor" href="#password-protected-export-opened-with-libarchive--29-october-2026" aria-label="Link to this section">#</a></h2>
+<p>An archive written by the export encryption code (WinZip AES-256, the format 7-Zip and WinRAR
+read) was opened with Windows <code>tar</code> (bsdtar 3.6.2, libarchive). With the right password the
+extracted file matched the original SHA-256; a wrong password was refused with "Incorrect
+passphrase". 7-Zip and WinRAR themselves were not run.</p>
+<h2 id="live-telegram-test--27-to-29-october-2026">Live Telegram test · 27 to 29 October 2026<a class="anchor" href="#live-telegram-test--27-to-29-october-2026" aria-label="Link to this section">#</a></h2>
+<p>One real Telegram account, signed in through the built-in API pair pool, recorded one
+supergroup from <strong>27 October 21:36 UTC to 29 October 05:15 UTC</strong>. The collector was
+started 12 times in that period.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Recorded</th>
+<th style="text-align: right;">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Journal records, including heartbeats and service records</td>
+<td style="text-align: right;">2,385</td>
+</tr>
+<tr>
+<td>New messages</td>
+<td style="text-align: right;">1,291</td>
+</tr>
+<tr>
+<td>Deletions</td>
+<td style="text-align: right;">472</td>
+</tr>
+<tr>
+<td>of them deleted after TgWitness had saved the text</td>
+<td style="text-align: right;">347</td>
+</tr>
+<tr>
+<td>Edits</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr>
+<td>Messages missed while stopped, added by the recheck</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr>
+<td>Saved attachments</td>
+<td style="text-align: right;">17</td>
+</tr>
+<tr>
+<td>Attachments not downloaded (downloads off, or no file to download)</td>
+<td style="text-align: right;">14</td>
+</tr>
+<tr>
+<td>Telegram FloodWait pauses, 3 seconds each, during rechecks</td>
+<td style="text-align: right;">8</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>The signatures and the hash chain of all 2,385 records verify against the journal's
+    public key.</li>
+<li>After a restart the collector resumes from the saved update state (<code>pts</code>) and Telethon
+    catches up; the recheck then adds messages that are still missing.</li>
+<li>On every FloodWait the collector waited the requested time and continued.</li>
+<li>The account stayed signed in, and the same session reconnected on 29 October.</li>
+</ul>
+<p>Not covered by this test: several accounts at once, administrator roles, proxies, outages
+longer than a few hours and the full <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">live acceptance procedure</a>.
+Public files contain only these counts: no account or chat identifiers, messages or
+credentials.</p>
+<p>Older entries below describe their own runs; most of them used synthetic test clients.
+The latest automated results are below; <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PREPUBLICATION-2026-10-29.md">the pre-publication audit</a>
+records the earlier baseline.</p>
+<h2 id="built-in-public-mtproxy-lists--29-october-2026">Built-in public MTProxy lists · 29 October 2026<a class="anchor" href="#built-in-public-mtproxy-lists--29-october-2026" aria-label="Link to this section">#</a></h2>
+<p>Added a bundled public snapshot and explicit HTTPS refresh from SoliSpirit/mtproto and
+zakky8/mtproto-proxy-pro. On this host, the application downloader fetched both feeds
+successfully on 29 October 2026 at 12:58 UTC: <strong>118 unique compatible endpoints</strong> after
+filtering, deduplication and the 64-entry limit per source. This verifies list retrieval,
+not connectivity or message delivery through those endpoints. No real account was
+connected to a listed proxy during this work. <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/PROXIES.md">Operator and user guide</a>.</p>
+<p>Failed/empty/incompatible source responses retain previous entries and dates. Updates
+do not alter the selected route. Public addresses are validated and resolved IPs pinned
+on selection; operator/manual routes remain separate. The connection probe is now
+available in the panel before account login. Fake TLS ee and automatic proxy selection
+remain unsupported. The operator's catalog overrides subscriptions completely.</p>
+<ul>
+<li>Full suite: <strong>366 passed, 3 skipped</strong>, 287.94 seconds. Existing dependency warnings
+    and platform skips remain. Final public-list/localization regression: <strong>36 passed</strong>,
+    including rejection of invalid download-proxy ports; this overlaps the full suite.</li>
+<li>Browser acceptance passed in English/Russian, light/dark at 390/1440 pixels: bundled
+    choices, no external fetch on opening settings, explicit refresh, retained routes and
+    cache during failures, pre-login probe, late-response workspace isolation, source
+    details and layout/contrast. No JavaScript errors or external browser requests.</li>
+<li>Final static translation coverage passed for all 13 locales; new copy is translated
+    into Russian with explicit English fallbacks elsewhere. The updated built-in guide
+    passed layout/contrast checks in both themes.</li>
+<li>Ruff and publication checks passed (259 public files, 1,354 local links); updated
+    Compose and CI YAML parsed. Docker and remote CI were not executed here.</li>
+<li>The rebuilt wheel passed isolated installation, bundled-list loading and signed-export
+    verification. All 69 package resources matched the workspace; source hashes were checked.</li>
+</ul>
+<p>Receipts: <code>test-results/public-proxy-research/download-receipt.json</code>,
+<code>test-results/public-proxy-research/copy-receipt.json</code>,
+<code>test-results/public-proxies-full-suite.log</code>, <code>test-results/public-proxies-final-focused.log</code>,
+<code>test-results/public-proxies-browser/receipt.json</code> and <code>test-results/public-proxies-package.log</code>.
+Browser/account/transport fixtures are synthetic; the two feed downloads above are real HTTPS requests.</p>
+<h2 id="optional-extras-presentation--29-october-2026">Optional extras presentation · 29 October 2026<a class="anchor" href="#optional-extras-presentation--29-october-2026" aria-label="Link to this section">#</a></h2>
+<p>The former Proof bot destination is now <strong>Extras</strong>: a short overview followed by a
+separate setup page for the selected option. The witness form has three steps, with
+connection management, network options and deployment details folded away. GitHub is
+explicitly planned and has no credential form. <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/EXTRAS.md">Russian overview</a>.</p>
+<ul>
+<li>30 focused tests passed for localization, witness setup and publication checks.</li>
+<li>Chromium setup acceptance passed in English/Russian, light/dark, at 390/1440 pixels:
+    keyboard focus and return, no implicit connections when selecting extras, draft
+    retention, pinned configuration/token downloads, token clearing on lock, and working
+    local guide anchors. Layout and solid-background text contrast checks passed.</li>
+<li>Workspace-switch acceptance passed, including a delayed token response arriving
+    after a switch. Quick navigation finds the extras through bot, proof and GitHub terms;
+    its existing 320/390/1440-pixel and Russian/RTL checks also passed.</li>
+<li>No JavaScript errors or external browser requests were observed in the setup run.
+    These are synthetic UI checks, not new live Telegram or bot publication evidence.</li>
+<li>Final language loading and dictionary coverage passed for all 13 locales, preserving
+    explicit English fallbacks outside Russian. The expanded Proof guide also passed
+    layout/contrast checks at 320/768/1440 pixels in both themes.</li>
+<li>The rebuilt wheel passed isolated installation and signed-export verification. All
+    67 packaged resources matched the workspace; the source archive contains 253 public
+    files. Source/link checking passed for 1,346 local documentation links.</li>
+</ul>
+<p>Receipts: <code>test-results/setup-browser/receipt.json</code>,
+<code>test-results/quick-navigation/receipt.json</code>, <code>test-results/extras-final.json</code>,
+<code>test-results/extras-package.log</code> and <code>test-results/extras-artifacts.json</code>.
+Screenshot assets use synthetic workspaces.</p>
+<h2 id="witness-bot-and-proxy-setup-audit--29-october-2026">Witness bot and proxy setup audit · 29 October 2026<a class="anchor" href="#witness-bot-and-proxy-setup-audit--29-october-2026" aria-label="Link to this section">#</a></h2>
+<p>The witness setup (now <strong>Extras → A bot in your channel</strong>) prepares an independently deployed witness: pinned collector
+key, scoped token download, own channel, publication policy, HTTP/SOCKS5 route and custom
+Bot API. The bot token remains on the witness host. Its new <code>--check-config</code> validates
+configuration and files without opening a network connection or creating a key. JSON
+file paths resolve beside the configuration. All Compose witness variants now forward
+the HTTP proxy and Bot API settings.</p>
+<p>Account settings support an operator-managed public MTProxy catalog, custom Telegram
+proxy-link preview and the existing manual fields. Catalog responses omit secrets;
+selection stores the route in the workspace vault. Missing/malformed catalogs leave
+manual routes available. No project proxy addresses or hosted witness service are
+invented or enabled by default. A Caddy example exposes only the scoped head endpoint
+when an external witness must reach a collector whose panel stays private.</p>
+<p>Validation:</p>
+<ul>
+<li>Full suite: <strong>348 passed, 3 skipped</strong>, 195.81 seconds. Windows limitations account
+    for the skips; the two existing dependency deprecation warnings remain.</li>
+<li>Final witness/configuration/release regression run: <strong>11 passed, 1 skipped</strong>.
+    This overlaps the full suite. Tests include path resolution, offline preflight,
+    signing/publishing through an actual loopback HTTP Bot API fixture, recorded delivery
+    failure, channel-token verification and proxy-secret exclusion.</li>
+<li>Chromium setup acceptance passed in English/Russian at 390/1440 pixels: pinned config
+    and token downloads, token clearing on lock, catalog selection, custom-link preview
+    followed by explicit save, layout/contrast and no JavaScript errors or external
+    browser requests. Corrected narrow Russian account-heading and login-tab overflow.</li>
+<li>Ruff, source/link checks and Compose/workflow YAML parsing passed.</li>
+<li>The rebuilt wheel passed isolated installation, panel/static resource and API-auth
+    checks, plus independent verification of direct and streamed 32-event synthetic exports.</li>
+</ul>
+<p>Receipts: <code>test-results/setup-full-suite.log</code>, <code>setup-final-focused.log</code>,
+<code>setup-browser/receipt.json</code>, <code>setup-browser-final.log</code> and <code>setup-package.log</code>.
+These checks use synthetic accounts/proxies and a local Bot API fixture. They do not
+claim a real bot publication, working public MTProxy server, remote CI run or Docker
+deployment. The retained real Telegram observation history above remains a separate
+piece of evidence. <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/WITNESS.md">Setup instructions</a>.</p>
+<h2 id="presentation-and-documentation-review--29-october-2026">Presentation and documentation review · 29 October 2026<a class="anchor" href="#presentation-and-documentation-review--29-october-2026" aria-label="Link to this section">#</a></h2>
+<p>The product page, access screen, English/Russian READMEs and presentation images now share
+one visual style. Public screenshots use fictional demo data. The review also corrected
+the outdated live-validation and recovery descriptions above.</p>
+<ul>
+<li>Focused localization, site and publication tests: <strong>33 passed, 1 skipped</strong>. The skipped
+    test requires symlink creation unavailable on this host.</li>
+<li>General Chromium panel acceptance passed, including all language catalogs, RTL layout,
+    light/dark themes, solid text contrast and workspace switching. The profile-creation
+    check now waits for its actual HTTP response before checking the selected workspace.</li>
+<li>English/Russian access screens passed layout and contrast checks in both themes at
+    320, 390, 768, 850 and 1440 pixels; the submit button stays in the initial viewport.</li>
+<li>Public-site acceptance passed at 320, 390, 768, 1024 and 1440 pixels, including message
+    history controls, screenshot enlargement/Escape/focus return, keyboard tabs, clipboard
+    refusal, project subpaths, reduced motion and the no-JavaScript fallback. No failed
+    asset requests, external requests or JavaScript errors were observed.</li>
+<li>The rebuilt wheel passed an isolated installation check: panel resources and locales
+    load, API access requires authentication, and direct/streamed exports independently
+    verify all 32 synthetic events. Ruff and public-source/link checks passed.</li>
+</ul>
+<p>Local receipts: <code>test-results/design-tests.log</code>, <code>design-panel-final.log</code>,
+<code>design-review-final.log</code>, <code>design-site.log</code>, and <code>design-package/install-receipt.json</code>.
+The full backend suite was not rerun for this presentation/documentation change;
+its preceding result remains in the pre-publication audit.</p>
+<h2 id="version-061">Version 0.6.1<a class="anchor" href="#version-061" aria-label="Link to this section">#</a></h2>
+<p>0.6.1 changes the panel presentation, launchers, packaging and documentation;
+collection, storage, signing and export code is unchanged. On Windows 11 / Python 3.12.10
+with the pinned runtime:</p>
+<ul>
+<li>The full suite passed <strong>137 tests</strong> with <strong>2 skips</strong> and the existing Starlette warning.
+    New tests cover the launcher's Ctrl+C handling (the server gets 30 seconds for an
+    orderly stop) and actionable setup-step failures.</li>
+<li>Chromium (headless shell 156) passed all <strong>45 general scenarios</strong> and <strong>35
+    account-import/QR/Auth Key scenarios</strong>, including the solid-text contrast check, no
+    horizontal overflow at 320–1440 px and visible first login fields at 320/390 px.
+    No page JavaScript errors or external requests were observed.</li>
+<li><code>python start.py --setup-only</code> reinstalled the package as 0.6.1 and
+    <code>python start.py --check</code> reported ready. A real <code>python -m tgwitness --demo</code> server
+    returned the panel, stylesheet, script, logo, guide and <code>/api/status</code> version 0.6.1;
+    the removed <code>workspace.css</code> returned 404.</li>
+<li><code>Start.cmd</code> found a Python installation outside PATH. With no Python available it
+    showed the installation offer; declining printed manual instructions and exited 1.
+    The python.org download step fetched the 3.12.10 installer and passed the Python
+    Software Foundation Authenticode check; the installer itself was not run on this host.</li>
+<li><code>start.sh</code> without any Python printed the install hint and exited 1. <code>scripts\Docker.cmd</code> and
+    <code>scripts/docker-start.sh</code> were exercised against fake <code>docker</code> executables: correct call
+    sequence, panel address and token output, and no success message after a failure.</li>
+<li><code>python tools/build_portable.py</code> built an 18.8 MiB Windows package after verifying the
+    pinned embeddable-runtime checksum. Extracted to a path with spaces and started with only
+    <code>C:\Windows</code> directories on PATH, its embedded Python passed <code>TgWitness-Check.cmd</code>, served
+    the demo (32 events) and a live workspace, and Chromium rendered the journal and detail
+    drawer without JavaScript errors. Data was written to the package's <code>data</code> folder.</li>
+<li><code>python tools/build_preview.py</code> produced a 110-file source archive. A dry-run of
+    <code>git add</code> listed the same 110 files with no session, key, database, token, log or export
+    files, no local absolute paths and no secret-shaped strings.</li>
+</ul>
+<p>Not executed in this particular 27 October packaging run: the automatic Python
+installation itself, Docker build/Compose checks, Linux/macOS runs or a new live-account
+exercise. Real Telegram evidence is recorded above and in the earlier account checks
+below. CI definitions alone do not qualify platform execution.</p>
+<h2 id="version-060">Version 0.6.0<a class="anchor" href="#version-060" aria-label="Link to this section">#</a></h2>
+<p>The latest full pinned-runtime suite on Windows 11 / Python 3.12.10 passed <strong>135 tests</strong>,
+with <strong>1 skip</strong>, in 26.53 seconds and the existing Starlette warning. The skip
+requires POSIX permissions. After adding the QR
+renderer to readiness checks and process measurements, 8 affected readiness/workspace
+checks also passed.</p>
+<p>New coverage includes Telethon schemas 7/8, Pyrogram schemas 2/3, complete JSON
+keys and metadata-only JSON, matching/conflicting account files, TData passcodes,
+checksum tampering and unsafe paths, offline/authenticated in-memory conversion,
+online account-ID checks, QR success/2FA/expiry, stale cancellation, and account
+isolation. TData fixtures use a separate AES-IGE implementation for encryption.</p>
+<p>Chromium passed <strong>45 general scenarios</strong> and <strong>35 account-import/QR/Auth Key scenarios</strong>,
+with no page JavaScript errors or external requests observed. New browser checks
+cover all four input formats together, protected TData, API metadata, QR rendering,
+expiry/retry, 2FA, wrong-account rejection, lock/workspace cancellation, responsive
+layout, and late conversion responses after a newer file selection.</p>
+<p>Both browser suites passed again after the account-entry changes. Live setup opens
+the account form; demo mode opens its sample journal. The demo Account page shows
+live startup instructions and hides credential inputs.
+Focused checks at 320, 390, and 1440 pixels confirmed the number field and primary
+button fit without scrolling and API fields are initially collapsed,
+and text contrast remains readable. Capture and verification controls remain
+covered after opening their new expandable sections.</p>
+<p>The direct Auth Key flow was exercised with synthetic credentials through the real
+import and authorization endpoints. Checks cover incomplete keys, missing DC,
+imprecise User IDs, mismatched account identity, saved API credentials, visible
+request progress, secret clearing, and late responses after edits or method changes.
+All four sign-in methods were checked at 320, 390, and 1440 pixels. The file picker
+precedes format guidance, and the Connect button fits the initial 844-pixel viewport
+with API settings collapsed. No real Auth Key authorization was attempted in this
+UI acceptance run.</p>
+<p>The panel refresh was checked again with both browser suites: no page JavaScript
+errors or external requests were observed. The account suite now covers pasting
+one API ID/hash pair, rejecting malformed or multiple pairs without replacing
+fields, metadata-only guidance, and ignoring stale import responses after a
+sign-in method change or manual credential edit. Six additional focused checks
+passed for the setup guide, explicit start/pause, empty-search recovery, and final
+connection/local-guide layout and solid text contrast at 320, 390, and 1440 pixels.
+The direct-login update adds a single phone/code-request operation and reuses the
+current workspace's saved API pair for phone, QR, and session login. The full Python
+suite above includes new persistence, partial-credential rejection, and workspace
+isolation tests. Browser checks cover direct phone entry, saved-credential reuse,
+metadata-only routing, one-button file authorization, and duplicate-account rejection.
+The simplified panel-token and phone forms were also checked without initial scrolling
+at 320, 390, and 1440 pixels. A compatibility check confirmed the direct phone form
+can use the earlier configure/code endpoints while an older process is still running.</p>
+<p>One user-supplied account was checked separately, outside public test fixtures.
+Its Telethon, Pyrogram, and TData inputs resolved to the same authorization; the
+companion JSON supplied API credentials. All four files were loaded through the
+0.6.0 panel and Telegram confirmed the expected numeric account ID. Source files
+remained unchanged. No sources were selected and observation remained off. This
+qualifies one import/login example, not live collection, recovery, or capacity.</p>
+<p>Telegram also issued a real QR token, which was cancelled without scanning. The
+full QR confirmation and 2FA flows were exercised with synthetic clients; mobile
+confirmation against a real Telegram app remains a separate acceptance step.
+No real account identifiers, secrets, or screenshots are included in public files.</p>
+<p>The launcher upgrade completed; source, installed metadata, and readiness marker
+report 0.6.0, with qrcode 8.2 and a passing <code>pip check</code>. The installed wheel served
+the panel and guide, rejected unauthenticated API requests, and independently
+verified direct and streamed 32-event synthetic exports. The updated offline guide
+was checked at 320, 390, and 1440 pixels. Public screenshots remain synthetic.</p>
+<p>The source release contains 107 allowlisted files. Local documentation links resolve.
+Docker/Caddy execution, remote CI/package publication, ARM64 runtime, sustained
+collection, and the full live Telegram acceptance matrix remain unqualified here.</p>
+<h2 id="version-051">Version 0.5.1<a class="anchor" href="#version-051" aria-label="Link to this section">#</a></h2>
+<p>On Windows 11 / Python 3.12.10, the full project-environment suite passed:
+<strong>94 passed, 2 skipped</strong>, in 31.21 seconds, with the existing Starlette warning.
+The skips require POSIX permissions and symlink creation unavailable on this host.
+The download HTTP fixture printed a request-thread diagnostic; all assertions
+passed. This run does not establish absence of host transport issues.</p>
+<p>New regression coverage exercises rejected StringSession, code and 2FA account
+changes, cancelled identity lookup, pending login cancellation, and updates through
+registered handlers on active, rejected, superseded and probe clients. Only the
+active collector contributes events; saved credentials and signed history remain
+intact. Other new checks cover Unicode search after reopening a database, inclusion
+of monitoring-policy boundaries in Coverage, and public-source packaging exclusions.</p>
+<p>The actual project <code>pythonw.exe</code> launched an isolated synthetic panel, returned
+HTTP 200 and retained startup diagnostics in <code>logs/server.log</code>. The log did not
+contain the generated panel token or HTTP access records. The test terminated only
+its own synthetic process. No Task Scheduler task was registered; logon/sign-out,
+sleep and service recovery remain separate qualifications.</p>
+<p>Chromium acceptance passed <strong>45 scenarios</strong>, with no page JavaScript errors and
+no external requests observed. New checks cover 601/768/850-pixel timeline dates
+and times, attachment drafts across status refresh, newer edits made while saving,
+cleared verification results on account switch, late verification responses after
+switching away and back, and explicit verification boundaries when new events arrive.
+The search icon/text spacing was also corrected and the browser suite rerun.</p>
+<p>The browser run used the pinned runtime in <code>.venv</code> and the existing system-provided
+Playwright 1.62.0/Chromium, appended after the project environment on the import path.
+An optional development-dependency install was stopped during a slow Playwright
+download; no new browser-tool version was qualified. A normal
+<code>python start.py --setup-only</code> completed the application upgrade. Source, installed
+metadata and the launcher's marker report 0.5.1; <code>pip check</code> passed. Readiness checks
+passed on a fresh unused path, retaining the expected local-vault-key warning.</p>
+<p>The 0.5.1 wheel was separately installed and smoke-tested: all panel/guide assets
+were served, unauthenticated API access was rejected, and both direct and streamed
+32-event evidence ZIPs passed independent verification. The application files in
+the installed package were compared against source. The public source archive uses
+an explicit file-type allowlist and refuses linked source files; runtime material
+placed inside source directories is excluded by regression tests.</p>
+<p>During the code-fix run, the public-source selection and Git candidate set contained
+86 files, with no runtime data directories included. A scan for recognizable private-key, GitHub token,
+Telegram bot-token and StringSession patterns found no matches. This is a bounded
+pattern check, not a comprehensive secret audit. Ignore-rule probes cover twelve
+common account/data/export artifacts. Workflow/issue/Compose YAML and the Windows
+task script parsed successfully. Local documentation links resolve.</p>
+<p>All seven findings from the 27 October review are addressed. GitHub
+workflow execution, Linux/macOS/Docker runtime, real Telegram, outside proxy/TSA
+interoperability and sustained-load qualification remain outside this local run.
+No repository publication, service registration or real-account collection was
+performed.</p>
+<h3 id="english-documentation-update">English documentation update<a class="anchor" href="#english-documentation-update" aria-label="Link to this section">#</a></h3>
+<p>The README, account/session reference, collection workflow, and bundled guide now
+describe supported inputs, workspace behavior, event policies, and export formats
+in English. The three public screenshots were refreshed using synthetic data.
+At that point, the public-source selection contained 88 files, including the two new guides.
+All 131 local links across 23 Markdown documents resolve.</p>
+<p>After the interface and guide edits, Chromium acceptance again passed all
+45 scenarios, with no page JavaScript errors or external requests observed.
+The full Python suite was not rerun for this documentation and presentation update;
+the 94-pass result above belongs to the preceding code-fix run.</p>
+<p>The rebuilt wheel was installed into a fresh isolated target. Its panel and guide
+assets served successfully, unauthenticated API access was rejected, and both
+direct and streamed exports passed independent verification of 32 synthetic events.</p>
+<h3 id="installation-and-deployment-update">Installation and deployment update<a class="anchor" href="#installation-and-deployment-update" aria-label="Link to this section">#</a></h3>
+<p>The focused installer, packaging, and readiness checks passed <strong>14 tests</strong>, with
+one skip for unavailable symlink creation. Native wrapper checks cover paths with
+spaces, argument forwarding, setup/demo modes, and nonzero exit propagation.
+Git Bash checks exercise the Docker shell helper with a simulated daemon, including
+missing Docker, missing Compose, failed health wait, and a successful alternate-port
+startup. These simulated checks do not establish Docker runtime compatibility.</p>
+<p>A complete public-source copy was installed into a new Windows directory whose
+path contains spaces. <code>scripts\Setup.cmd</code> created a fresh environment and installed the
+pinned runtime; <code>Start.cmd --check --json</code> reported ready without creating its
+target data directory. <code>pip check</code> passed. The rebuilt wheel also passed the
+installed-package check, including direct and streamed 32-event exports.</p>
+<p>Shell syntax and five workflow/Compose YAML files parsed. Source and image Compose
+configurations agree on storage and runtime settings. At that stage, all 139 local
+links across 23 Markdown documents resolved. The public-source selection contains 99 files.</p>
+<p>The CI definitions now exercise fresh native setup on Windows/Linux/macOS, Compose
+health/access control/persistence across container recreation, and Caddy configuration.
+The release workflow gates publication on those checks and adds an emulated ARM64
+smoke check. Docker is unavailable on this host: actual Compose/Caddy execution,
+certificate issuance, ARM64 execution, and remote workflow/package publication
+remain unqualified locally. The application/UI code was unchanged by this update;
+the earlier full Python and browser results were not rerun.</p>
+<h2 id="version-050">Version 0.5.0<a class="anchor" href="#version-050" aria-label="Link to this section">#</a></h2>
+<p>The full pinned-runtime suite passed: <strong>81 passed, 1 skipped</strong>, in 22.00 seconds,
+with the existing Starlette warning. The POSIX permissions check is skipped on
+Windows. The new handler tests send messages, edits, scoped/unscoped deletions,
+reactions, participant updates and membership service messages through different
+policies. Disabled categories produce no corresponding live observations; coverage
+diagnostics and explicit snapshots remain available. Tests verify persisted policy,
+workspace separation, signed before/after audit records, unchanged-policy behavior,
+strict validation and inclusion in the next process receipt.</p>
+<p>Demo entry tests verify that its capability differs from the configured panel token,
+cannot authorize a live workspace, cannot change collection settings, and is not
+issued or accepted for remote, forwarded, cross-origin or invalid-Host requests.
+Opening a stored demo without the explicit demo flag does not enable automatic entry.</p>
+<p>Chromium acceptance passed <strong>39 scenarios</strong>, including local demo entry without
+token input, monitoring presets, the transition from source selection to policy,
+per-account independence and desktop/320/390-pixel layout and text contrast checks.
+There were no page JavaScript errors. The host's AdGuard-injected requests remain
+in the receipt. The download HTTP fixture logged a connection reset after a client
+closed its connection; assertions still passed. This is not a live-service result.</p>
+<p>The normal launcher upgraded the isolated environment to 0.5.0; source and installed
+versions match and pip check passed. Existing secret-vault encryption, wrong/missing
+key refusal and signature/media tamper checks passed in the full suite. No new
+application encryption of message content or attachments is claimed.</p>
+<p>The local demo is restarted to make the updated UI available. Existing synthetic
+records are retained; stopping the old background demo process creates an offline
+boundary on the next startup. No real Telegram session is used for these checks.</p>
+<p>The running localhost:8787 panel returned version 0.5.0, automatic demo access,
+the five monitoring controls and 33 retained synthetic journal events. The separate
+installed 0.5.0 wheel served all panel/guide assets, rejected unauthenticated API
+access, and produced a verified 32-event ZIP both directly and through the streaming
+download helper. Runtime package versions remain pinned as recorded for 0.4.</p>
+<h2 id="version-040">Version 0.4.0<a class="anchor" href="#version-040" aria-label="Link to this section">#</a></h2>
+<p>The full pinned-runtime suite passed: <strong>78 passed, 1 skipped</strong>, in 19.77 seconds.
+The skipped check requires POSIX permissions; the upstream Starlette TestClient
+deprecation warning remains. New tests cover streamed download/workspace routing,
+authorization headers, refusal to overwrite, redirects, truncated responses,
+advertised/actual size limits, bounded reads, cleanup, filesystems without hard
+links, readiness failures and launcher modes that must not install packages.
+Export tests confirm workspace-local temporary files and selective orphan cleanup.</p>
+<p>Chromium acceptance passed all 36 listed scenarios with no page JavaScript errors.
+It exercises mock phone/code/2FA login, converted sessions, two workspaces and separate
+routes/states, observations, signatures, checkpoints and timestamp requests, plus:</p>
+<ul>
+<li>Desktop and 320/390-pixel layouts, no horizontal overflow, visible navigation,
+    and the first login field within the initial 844-pixel viewport.</li>
+<li>Solid-background text contrast at WCAG AA text thresholds. Disabled controls,
+    opacity and image/gradient backgrounds are excluded; this is not a full WCAG audit.</li>
+<li>A real local export response written through a mocked OS file picker/writable,
+    followed by independent ZIP verification; cancellation sends no export request.</li>
+<li>Writable failure aborts the destination; the 128 MiB fallback rejects an oversized
+    advertised response without allocating a matching payload.</li>
+<li>The English local guide on desktop and both narrow widths.</li>
+</ul>
+<p>The OS save dialog and actual multi-gigabyte browser writes were not automated or
+qualified. Python download tests use bounded chunks and loopback fixtures. Full
+deployment acceptance with real Telegram remains separate.</p>
+<p>The normal installer upgraded <code>.venv</code> to 0.4.0. Source and installed metadata agree;
+<code>pip check</code> passed. <code>python start.py --check --json</code> reported ready on a fresh
+synthetic path without creating the data directory. Its local-key storage warning
+correctly remains: journals/media are not encrypted by the application.</p>
+<p>The 0.4.0 wheel was built and installed into a separate directory. All 23 application
+files match the source byte-for-byte. The installed package served the panel and
+English guide/assets, rejected unauthenticated API access, and exported a synthetic
+32-event ZIP that passed verification. Its streaming download command also fetched
+an independently verified ZIP from the running installed application.</p>
+<p>Public documentation and the local guide are English; local documentation links
+resolve. PowerShell parsed the Windows task template and Python parsed the macOS
+plist. These are syntax checks, not service execution. No task/service was registered.
+The CI configuration now includes readiness checks but remote CI has not run here.</p>
+<p>The 0.4 browser run again observed host AdGuard injection and Windows asyncio
+socket-cleanup OSError 10022. Browser assertions passed; these environmental
+observations are retained rather than treated as fixed application behavior.
+Initial OpenSSL/browser/pip sandbox attempts failed; the successful qualifying
+runs used approved execution outside the sandbox.</p>
+<h2 id="version-031-focused-readiness-fixes">Version 0.3.1 focused readiness fixes<a class="anchor" href="#version-031-focused-readiness-fixes" aria-label="Link to this section">#</a></h2>
+<p>The affected launcher, evidence/storage and API checks passed: <strong>31 passed,
+1 skipped</strong>, one upstream Starlette warning. The skipped check asserts POSIX
+directory permissions and cannot establish those permissions on this Windows host.
+The old-Python test simulates the version/import boundary; no Python 3.10 interpreter
+was installed or qualified. The previously passing 0.3 suite is recorded below;
+the entire suite and browser scenarios were not rerun for these focused changes.</p>
+<p>The normal launcher upgraded the local environment to 0.3.1; source and installed
+metadata agree, and pip check passed. A separately installed 0.3.1 wheel served
+the panel/assets, rejected unauthenticated API access and produced a verified
+32-event synthetic export. Workflow YAML parsed, but the new container runtime
+check was not executed: no usable local Docker/Podman/Linux runtime was available.</p>
+<p>See <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/READINESS.md">readiness findings</a> for remaining usability, live-service and
+platform gaps. This patch does not qualify additional operating systems.</p>
+<h2 id="version-030">Version 0.3.0<a class="anchor" href="#version-030" aria-label="Link to this section">#</a></h2>
+<p>The full pinned-runtime suite passed: <strong>61 tests</strong>, with one upstream Starlette
+TestClient deprecation warning. Runtime metadata reports TgWitness 0.3.0 and
+python-socks 2.8.2; pip check passed. The browser acceptance run passed with no
+page JavaScript errors.</p>
+<p>The 0.3.0 wheel was built and installed into a separate package directory. It
+served the panel and assets, rejected an unauthenticated API request, and exported
+a 32-event synthetic journal that passed independent verification. Local documentation
+links resolve. After the MTProxy bare-key normalization correction, all nine
+connection/security tests were rerun successfully.</p>
+<p>New coverage includes:</p>
+<ul>
+<li>SOCKS5 username/password and HTTP CONNECT through actual loopback test servers;
+    a dead configured proxy fails rather than falling back to the destination.</li>
+<li>Proxy validation, MTProxy transport selection, rejection of Fake TLS ee secrets,
+    persistence, workspace isolation, rejection of changes while observing, and secret
+    exclusion from API status and signed events.</li>
+<li>Read-only conversion of synthetic Telethon SQLite schemas 7 and 8; unchanged
+    source hash; rejection of other formats, SQL views, and an outstanding WAL file.</li>
+<li>External vault master key: different derived workspace keys, successful reopen,
+    wrong/missing key rejection, and no implicit migration of existing local vaults.</li>
+<li>Browser proxy settings, credential clearing, storage-protection disclosure,
+    mobile connection page, converted-session file authorization, separate routes,
+    and all previously covered collection/export scenarios with a fake Telegram client.</li>
+</ul>
+<p>During development a loopback test waited indefinitely for peer shutdown; another
+run observed a Windows connection reset after the handshake. The fixture now bounds
+the entire exchange and treats EOF/reset after a completed handshake as connection
+closure. Handshake/authentication assertions remain required. This does not qualify
+real proxy providers or imply a fixed Telegram transport defect.</p>
+<p>The host AdGuard request observation described below still applies. No real Telegram
+account, outside SOCKS/HTTP proxy, or live MTProxy server was used. MTProxy is
+experimental and its selected options/secret validation have been checked, not
+live interoperability. New external-key and session conversion commands were
+tested with synthetic secrets only. Linux/macOS/Docker remain unqualified here.</p>
+<p>The 0.2 throughput measurement below was not repeated and must not be presented
+as a new multi-account/proxy benchmark for 0.3.</p>
+<h2 id="version-020-baseline">Version 0.2.0 baseline<a class="anchor" href="#version-020-baseline" aria-label="Link to this section">#</a></h2>
+<p>Checked on Windows with Python 3.12.10. No real Telegram account was connected.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Python suite</td>
+<td>52 passed in the development environment and 52 passed with the pinned runtime; one upstream Starlette TestClient deprecation warning in each run</td>
+</tr>
+<tr>
+<td>JavaScript syntax</td>
+<td>Passed with Node.js</td>
+</tr>
+<tr>
+<td>Chromium acceptance</td>
+<td>Passed; no page JavaScript errors</td>
+</tr>
+<tr>
+<td>Desktop/mobile layout</td>
+<td>Checked at 1440 × 1060 and 390 × 844; no horizontal document overflow</td>
+</tr>
+<tr>
+<td>HTML-shaped message content</td>
+<td>Rendered as text; injected script did not execute</td>
+</tr>
+<tr>
+<td>Mock account flow</td>
+<td>API credentials → phone → code → 2FA → select group → start → snapshot → pause → reload</td>
+</tr>
+<tr>
+<td>Evidence in browser</td>
+<td>Edit comparison, prior content after deletion, filters, ZIP download, checkpoint, signed process receipt, RFC 3161 request download and checkpoint binding</td>
+</tr>
+<tr>
+<td>Multi-account</td>
+<td>Separate journals, keys, sources and live states; browser switch leaves the other collector running; workspaces reopen after restart; duplicate account and account reassignment rejected</td>
+</tr>
+<tr>
+<td>Cryptographic failures</td>
+<td>Changed signed fields, added unsigned fields, wrong key, corrupt archive member, changed/missing media, checkpoint-detected truncation rejected</td>
+</tr>
+<tr>
+<td>Storage</td>
+<td>Concurrent appends verify; update/delete triggers reject; startup refuses a changed journal without appending and releases its lock</td>
+</tr>
+<tr>
+<td>Media durability</td>
+<td>Atomic message/job writes; restart recovery; original version descriptors retained; queue substitution and existing-file corruption rejected; FloodWait persisted; source failures isolated</td>
+</tr>
+<tr>
+<td>Streaming</td>
+<td>Stable prefix exported while new records append; retained checkpoint detects truncated journal; export does not materialize the entire event stream</td>
+</tr>
+<tr>
+<td>RFC 3161</td>
+<td>OpenSSL 3.5.9 reads generated requests; locally generated synthetic CA/TSA response accepted; altered data, nonce and wrong CA rejected; ambient CA environment does not override explicit trust</td>
+</tr>
+<tr>
+<td>Local setup</td>
+<td>start.py --setup-only upgraded the isolated .venv to 0.2.0; source and installed metadata agree; pip check passed</td>
+</tr>
+<tr>
+<td>Wheel</td>
+<td>0.2.0 built and separately installed under test-results; served panel/assets, rejected unauthenticated API, exported and verified a 32-event synthetic archive</td>
+</tr>
+</tbody>
+</table></div>
+<p>The source tests used FastAPI 0.159.1, Uvicorn 0.54.0, Telethon 1.45.0,
+cryptography 50.0.2, pytest 9.1.1, and Playwright 1.62.0.
+The pinned runtime uses FastAPI 0.162.0, Starlette 1.10.0,
+Uvicorn 0.54.0, Telethon 1.45.0, and cryptography 50.0.2.
+deploy/constraints.txt records runtime version pins. This is not a package-hash lock or
+evidence of compatibility on every configured CI platform. Remote CI has not run.</p>
+<h2 id="synthetic-local-capacity-measurement">Synthetic local capacity measurement<a class="anchor" href="#synthetic-local-capacity-measurement" aria-label="Link to this section">#</a></h2>
+<p>Command: <code>python tools/check_capacity.py --events 10000 --chats 100</code></p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Observed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Input</td>
+<td>10,000 synthetic message events across 100 synthetic selected sources</td>
+</tr>
+<tr>
+<td>Message text</td>
+<td>400 characters; no media or network</td>
+</tr>
+<tr>
+<td>Ingestion</td>
+<td>53.273 seconds; 187.7 events/second</td>
+</tr>
+<tr>
+<td>Handler latency</td>
+<td>p50 4.162 ms; p95 7.784 ms; maximum 129.118 ms</td>
+</tr>
+<tr>
+<td>ZIP export</td>
+<td>19.868 seconds with tracemalloc enabled</td>
+</tr>
+<tr>
+<td>Peak traced Python export allocations</td>
+<td>0.51 MiB; not process RSS</td>
+</tr>
+<tr>
+<td>ZIP size</td>
+<td>4,610,962 bytes</td>
+</tr>
+<tr>
+<td>Independent verification</td>
+<td>All 10,000 events verified</td>
+</tr>
+</tbody>
+</table></div>
+<p>This measures the local serial recording/export path on this Windows host. It does
+not measure MTProto delivery, concurrent accounts, Telegram throttling, media, a
+long-running workload, or a guaranteed number of real chats. The measurement predates
+the final offline timestamp tooling, which does not change the measured message path.</p>
+<h2 id="environmental-observations">Environmental observations<a class="anchor" href="#environmental-observations" aria-label="Link to this section">#</a></h2>
+<p>Windows sandbox restrictions blocked the default pytest/pip temporary directories
+and the Playwright subprocess. Pytest used a new temporary directory inside the
+project; installation and browser processes required approved execution outside
+the sandbox.</p>
+<p>The machine's AdGuard injected requests to local.adguard.org into the browser.
+The browser receipt retains those requests. This run is <strong>not</strong> evidence of zero
+outbound requests in an unmodified browser environment; the app source itself
+contains no external asset/CDN/analytics requests. AdGuard settings were not changed.</p>
+<p>The final browser run also logged a Windows asyncio socket-cleanup OSError 10022.
+All browser assertions passed and no page JavaScript errors occurred. Its cause
+was not established and this run does not demonstrate absence of host transport issues.</p>
+<p>The first installed-package HTTP probe using urllib's connection-close requests
+encountered connection resets, both inside and outside the sandbox and with both
+dependency sets. The final probe used standard HTTP/1.1 persistent connections
+via http.client and passed. Browser requests also passed. The precise origin of
+the resets was not established; they were not labeled a fixed application defect.</p>
+<h2 id="remaining-qualification">Remaining qualification<a class="anchor" href="#remaining-qualification" aria-label="Link to this section">#</a></h2>
+<p>The retained live journal establishes real collection, edits, deletion notices, attachments,
+rechecks and rate-limit handling. It does not establish exhaustive delivery or a controlled
+matrix of role visibility, reaction actors, prolonged FloodWait, account bans and
+network/process interruption recovery. QR-token issuance remains distinct from completed
+mobile QR confirmation.</p>
+<p>Docker build/run, Linux/macOS installation, sustained high load, independent security
+review, a real independent TSA response, certificate revocation/archival validation and
+forensic certification remain outside the recorded qualification. Saved MTProto state
+and catch-up are implemented; atomic durable replay remains unestablished. Admin-log
+collection, extra reactor lists and priority short polling remain separate features.
+See <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">live acceptance</a> for the controlled qualification matrix.</p>
+<p>Local detailed receipts and screenshots are under test-results/ (Git-ignored).
+The public screenshot in docs/assets/ contains only fictional demonstration data.</p>
+<h2 id="public-website-and-publication-preparation--27-october-2026">Public website and publication preparation · 27 October 2026<a class="anchor" href="#public-website-and-publication-preparation--27-october-2026" aria-label="Link to this section">#</a></h2>
+<p>The separate <code>website/</code> presentation and Pages build were added after the panel
+checks above. No live account configuration or collection logic was changed.</p>
+<ul>
+<li>The existing application suite passed: 138 passed, 1 POSIX-only skip, and one
+    upstream Starlette/httpx deprecation warning. The 11 added site build tests passed
+    independently, including unexpected-output rejection and linked-input rejection.</li>
+<li>Both application browser scripts passed using project-venv Playwright and Chromium
+    headless shell 156. No page JavaScript errors or external requests were recorded.
+    All account scenarios used fake transport and fictional data.</li>
+<li><code>tools/check_site.py</code> passed at widths 320, 390, 768, 1024, and 1440, with a project
+    URL subpath, keyboard tabs, successful/denied clipboard access, reduced motion,
+    and disabled JavaScript. No failed asset requests or external requests occurred.</li>
+<li><code>tools/build_site.py</code> produced 10 allowlisted public files, about 460 KB total.
+    Browser screenshots and a receipt are in ignored <code>test-results/site/</code>.</li>
+<li>The wheel built successfully after installing the build-only setuptools/wheel
+    tools in the project environment. Installing it into an isolated target and
+    running <code>tools/check_install.py</code> passed: static assets, access control, a signed
+    32-event synthetic export, and independently verified streaming download.</li>
+<li><code>pip check</code> passed. A pattern scan of Git-selected public candidates found no
+    recognizable private-key blocks, GitHub/bot/AWS tokens, long literal secret
+    assignments, or merge-conflict markers. This is not proof that every possible
+    secret format is absent. Runtime-data/session/key probes were Git-ignored.</li>
+<li>GitHub CLI authentication was invalid; no remote was configured and no initial
+    commit existed. No push, hosted workflow, Pages deployment, or release was performed.
+    Docker and live Telegram/platform qualification remain outside this check.</li>
+</ul>
+<p>On this host the Playwright download lock failed on the E: workspace filesystem.
+Installing Chromium under <code>%LOCALAPPDATA%/tgwitness-playwright</code> and using that same
+<code>PLAYWRIGHT_BROWSERS_PATH</code> for the checks succeeded. This is an environment workaround,
+not a change to the application's runtime dependencies.</p>
+<h2 id="interactive-documentation-and-website-metadata--29-october-2026">Interactive documentation and website metadata · 29 October 2026<a class="anchor" href="#interactive-documentation-and-website-metadata--29-october-2026" aria-label="Link to this section">#</a></h2>
+<p>The public site builds 12 English HTML pages: a homepage, a guide index and ten
+guides. The artifact contains 28 explicitly listed presentation files,
+approximately 1.85 MB, and no collector data. The public website is English;
+application translations and translated repository guides are separate.</p>
+<ul>
+<li>Site, source-publication and release-boundary tests: <strong>18 passed, 2 skipped</strong>.
+    The skips concern symlink creation on this Windows filesystem. Tests check
+    unique page metadata, English-only public pages, canonical URLs, all sitemap
+    entries, local assets/anchors, structured navigation and private-file exclusion.</li>
+<li>Both <code>tools/check_site.py</code> and <code>tools/check_docs_site.py</code> passed in Chromium at
+    320, 390, 768, 1024 and 1440 pixels under a project URL subpath. The guide checks
+    cover all 11 documentation pages, search and keyboard navigation, clipboard
+    success/refusal and readable content without JavaScript.</li>
+<li>Five interactive examples passed: message playback/step/pause/reset with
+    reduced motion and off-screen suspension; original/altered/rebuilt/truncated
+    hash chains; witness acceptance/rollback/fork/no-response decisions; and
+    complete/delayed/missing delivery scenarios; and an investigation map linking
+    fictional cross-chat observations by sender ID, destination and attachment
+    hash. The investigation controls passed keyboard navigation and no-JavaScript
+    fallback checks. Browser SHA-256 results were
+    independently compared with Python's <code>hashlib</code> and canonical JSON. The hash
+    example also retained its readable fallback when Web Crypto was unavailable.</li>
+<li>Delivery ratios and chart markers matched the accessible table. Mobile axis
+    labels were enlarged after visual review. Every example is labeled as
+    illustrative or synthetic, and no browser example contacts Telegram.</li>
+<li>No external requests, failed HTTP requests or JavaScript errors were recorded.
+    Desktop/mobile screenshots and receipts are under ignored <code>test-results/site/</code>
+    and <code>test-results/docs-site/</code>. The documentation index, message/hash examples,
+    witness layout, delivery chart and investigation map were inspected at
+    desktop/mobile sizes.</li>
+<li>The publication scan passed for 282 public source files and 1,426 local
+    documentation links. Ruff passed for the modified Python site tools and tests.</li>
+<li><code>docs/HOW-IT-WORKS.md</code> provides a GitHub Markdown companion with Mermaid
+    diagrams and formulas. <code>docs/INVESTIGATION.md</code> covers whole-account scope,
+    per-chat history acquisition, people profiles, cross-chat references, timelines
+    and a verified case handoff. Its steps and limits were checked against the
+    current scope, collection, dossier, export, verifier and panel code. Hosted
+    GitHub rendering was not checked.</li>
+</ul>
+<p>This is a local website/documentation check. It does not add live Telegram
+qualification or establish hosted Pages deployment, remote CI success or search
+engine indexing. See <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md">the publishing procedure</a> and
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/SEO.md">the website metadata notes</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/VERIFICATION.md">Edit this page on GitHub ↗</a><a class="next-guide" href="../changelog/"><span>Next step</span><strong>Changelog →</strong></a><p>These guides describe the current implementation. Validation results and remaining gaps are documented separately. <a href="./">What has been tested →</a></p></footer>
+</main>
+<aside class="toc" aria-label="On this page"><p class="nav-label">On this page</p><a href="#live-telegram-test-whole-account--29-october-2026">Live Telegram test, whole account · 29 October 2026</a><a href="#password-protected-export-opened-with-libarchive--29-october-2026">Password-protected export opened with libarchive · 29 October 2026</a><a href="#live-telegram-test--27-to-29-october-2026">Live Telegram test · 27 to 29 October 2026</a><a href="#built-in-public-mtproxy-lists--29-october-2026">Built-in public MTProxy lists · 29 October 2026</a><a href="#optional-extras-presentation--29-october-2026">Optional extras presentation · 29 October 2026</a><a href="#witness-bot-and-proxy-setup-audit--29-october-2026">Witness bot and proxy setup audit · 29 October 2026</a><a href="#presentation-and-documentation-review--29-october-2026">Presentation and documentation review · 29 October 2026</a><a href="#version-061">Version 0.6.1</a><a href="#version-060">Version 0.6.0</a><a href="#version-051">Version 0.5.1</a><a href="#version-050">Version 0.5.0</a><a href="#version-040">Version 0.4.0</a><a href="#version-031-focused-readiness-fixes">Version 0.3.1 focused readiness fixes</a><a href="#version-030">Version 0.3.0</a><a href="#version-020-baseline">Version 0.2.0 baseline</a><a href="#synthetic-local-capacity-measurement">Synthetic local capacity measurement</a><a href="#environmental-observations">Environmental observations</a><a href="#remaining-qualification">Remaining qualification</a><a href="#public-website-and-publication-preparation--27-october-2026">Public website and publication preparation · 27 October 2026</a><a href="#interactive-documentation-and-website-metadata--29-october-2026">Interactive documentation and website metadata · 29 October 2026</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Open source · Runs on your machine</span><a href="../../../LICENSE">MIT license</a><a href="../notice/">Operator notice</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Security</a></footer>
+<script id="site-dict" type="application/json">{}</script>
+</body></html>

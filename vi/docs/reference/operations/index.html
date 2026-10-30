@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="vi" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Quy trình làm việc và hoạt động | TgWitness</title>
+<meta name="description" content="Hoạt động hàng ngày của bảng điều khiển: các chế độ, danh mục giám sát, thông số, thông báo, xuất dữ liệu, sao lưu và dung lượng."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/operations/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:title" content="Quy trình làm việc và hoạt động | TgWitness"><meta property="og:description" content="Hoạt động hàng ngày của bảng điều khiển: các chế độ, danh mục giám sát, thông số, thông báo, xuất dữ liệu, sao lưu và dung lượng.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/vi/docs/reference/operations/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/operations/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/operations/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/operations/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/operations/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/operations/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/operations/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/operations/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/operations/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/operations/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/operations/", "url": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/operations/", "name": "Quy trình làm việc và hoạt động | TgWitness", "description": "Hoạt động hàng ngày của bảng điều khiển: các chế độ, danh mục giám sát, thông số, thông báo, xuất dữ liệu, sao lưu và dung lượng.", "inLanguage": "vi", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "https://phishdestroy.github.io/TgWitness/vi/"}, {"@type": "ListItem", "position": 2, "name": "Tài liệu hướng dẫn", "item": "https://phishdestroy.github.io/TgWitness/vi/docs/"}, {"@type": "ListItem", "position": 3, "name": "Tham khảo", "item": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Quy trình làm việc và hoạt động", "item": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/operations/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Chuyển thẳng đến nội dung</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Tài liệu hướng dẫn</span></a>
+<nav aria-label="Hướng dẫn"><a href="../../concepts/">Hướng dẫn trực quan</a><a href="../../">Tất cả các hướng dẫn</a><a href="../">Tham khảo</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Ngôn ngữ"><span aria-hidden="true">◍</span> Tiếng Việt</summary><div class="lang-list"><a href="../../../../docs/reference/operations/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/operations/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/operations/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/operations/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/operations/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/operations/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/operations/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/operations/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/operations/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/operations/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/operations/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="./" hreflang="vi" lang="vi" aria-current="true">Tiếng Việt</a><a href="../../../../zh/docs/reference/operations/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Chuyển đổi giữa chế độ giao diện sáng và tối"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Hướng dẫn"><a href="../../../guides/modes.html">Các chế độ, kịch bản và mức độ bằng chứng</a><p class="nav-label">Các bước đầu tiên</p><a href="../../start/">Bắt đầu chỉ trong vài phút</a><a href="../../accounts/">Kết nối tài khoản</a><a href="../../proxies/">Chọn một máy chủ proxy</a><a href="../../exports/">Xuất và xác minh</a><p class="nav-label">Hiểu rõ về bằng chứng</p><a href="../../concepts/">Tìm hiểu cách thức hoạt động của bằng chứng</a><a href="../../cases/">Điều tra trên tất cả các cuộc trò chuyện</a><a href="../../security/">Hãy đảm bảo tính bảo mật</a><p class="nav-label">Tìm hiểu thêm</p><a href="../../witness/">Thiết lập bot chứng cứ</a><a href="../../server/">Hãy duy trì hoạt động của nó</a><a href="../../troubleshooting/">Tìm hiểu nguyên nhân sự cố</a></nav><nav class="wiki-nav" aria-label="Tham khảo"><p class="nav-label"><a class="nav-label-link" href="../">Tham khảo</a></p><details class="wiki-group"><summary>Thiết lập</summary><a href="../quickstart/">Hướng dẫn bắt đầu nhanh</a><a href="../accounts/">Các định dạng tài khoản và phiên làm việc</a><a href="../connection/">Kết nối, máy chủ trung gian và bảo vệ dữ liệu</a><a href="../deployment/">Triển khai</a></details><details class="wiki-group" open><summary>Thu thập</summary><a href="../collection/">Cách thức thu thập dữ liệu</a><a href="./" aria-current="page">Quy trình làm việc và hoạt động</a><a href="../investigation/">Chế độ điều tra</a><a href="../features/">Các tính năng và giới hạn</a></details><details class="wiki-group"><summary>Bằng chứng</summary><a href="../how-it-works/">Cách thức hoạt động của bằng chứng</a><a href="../evidence/">Định dạng bằng chứng</a><a href="../witness/">Nhân chứng độc lập</a><a href="../timestamp/">Dấu thời gian</a></details><details class="wiki-group"><summary>An ninh & dự án</summary><a href="../security/">An ninh và xử lý dữ liệu</a><a href="../architecture/">Kiến trúc</a><a href="../verification/">Những nội dung đã được kiểm thử</a><a href="../license/">Thông báo về sự không tương thích giữa giấy phép và kiến trúc</a><a href="../notice/">Thông báo về sự không tương thích giữa các nhà cung cấp dịch vụ</a><a href="../changelog/">Bản ghi thay đổi</a></details></nav><p class="sidebar-note">v0.7.0<br>Mã nguồn mở · Chạy trên máy tính của quý vị</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Hướng dẫn"><a href="../../../">Trang chủ</a> <span aria-hidden="true">/</span> <a href="../../">Tài liệu hướng dẫn</a> <span aria-hidden="true">/</span> <a href="../">Tham khảo</a> <span aria-hidden="true">/</span> <span aria-current="page">Quy trình làm việc và hoạt động</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Tìm kiếm trong tài liệu</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Hãy thử các thuật ngữ như proxy, chuỗi băm, token hoặc witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Tìm kiếm rõ ràng" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Hãy nhập một từ khóa để tìm kiếm trong các hướng dẫn và tài liệu tham khảo. Kết quả tìm kiếm sẽ được lưu lại trong trình duyệt của quý vị.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Tham khảo / Thu thập</p><h1>Quy trình làm việc và hoạt động</h1><p class="guide-outcome">Hoạt động hàng ngày của bảng điều khiển: các chế độ, danh mục giám sát, thông số, thông báo, xuất dữ liệu, sao lưu và dung lượng.</p><div class="wiki-body"><p>Đối với lần kết nối đầu tiên, vui lòng sử dụng <a href="../accounts/">các định dạng tài khoản và phiên làm việc</a>.
+Để tìm hiểu về các phiên bản đã lưu, chính sách sự kiện và các khoảng trống, xin tham khảo phần
+<a href="../collection/">giải
+thích
+về cơ chế thu thập dữ liệu</a>. Hướng dẫn này bao quát các hoạt động hàng ngày và quy trình khôi phục dữ liệu.</p>
+<h2 id="operator-workflow">Quy trình làm việc của người vận hành<a class="anchor" href="#operator-workflow" aria-label="Liên kết đến phần này">#</a></h2>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 691 470" width="691" height="470" role="img" aria-labelledby="flow-2-title flow-2-desc"><title id="flow-2-title">Sơ đồ quy trình</title><desc id="flow-2-desc">Chọn phương thức lưu trữ và bảo vệ khóa → Mở bảng điều khiển bằng mã thông báo của nó; Mở bảng điều khiển bằng mã thông báo của nó → Chọn không gian làm việc; Chọn không gian làm việc → Cấu hình đường dẫn trực tiếp hoặc qua proxy; Cấu hình đường dẫn trực tiếp hoặc qua proxy → Nhập số điện thoại hoặc chọn tệp / mã QR; Nhập số điện thoại hoặc chọn tệp / mã QR → Xác minh danh tính tài khoản và chọn các nhóm có thể truy cập; Xác minh danh tính tài khoản và chọn các nhóm có thể truy cập → Lưu các chính sách về sự kiện và tệp đính kèm, sau đó bắt đầu quá trình giám sát; Lưu các chính sách về sự kiện và tệp đính kèm, sau đó bắt đầu quá trình giám sát → Theo dõi lỗi, quyền truy cập, hàng đợi và dung lượng đĩa; Theo dõi lỗi, quyền truy cập, hàng đợi và dung lượng đĩa → Giữ lại các điểm kiểm tra độc lập; Giữ lại các điểm kiểm tra độc lập → Xuất và xác minh tài liệu</desc><defs><marker id="flow-2-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M202.9 46.0C231.1 46.0 231.1 46.0 259.3 46.0" marker-end="url(#flow-2-arrow)" style="--i:0;--len:56" pathLength="56"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M202.9 46.0C231.1 46.0 231.1 46.0 259.3 46.0"/></circle><path class="flow-edge" d="M432.2 46.0C462.1 46.0 462.1 46.0 491.9 46.0" marker-end="url(#flow-2-arrow)" style="--i:1;--len:60" pathLength="60"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M432.2 46.0C462.1 46.0 462.1 46.0 491.9 46.0"/></circle><path class="flow-edge" d="M571.5 75.0C571.5 104.5 571.5 104.5 571.5 134.0" marker-end="url(#flow-2-arrow)" style="--i:2;--len:59" pathLength="59"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M571.5 75.0C571.5 104.5 571.5 104.5 571.5 134.0"/></circle><path class="flow-edge" d="M495.4 172.0C463.8 172.0 463.8 172.0 432.2 172.0" marker-end="url(#flow-2-arrow)" style="--i:3;--len:63" pathLength="63"/><circle class="flow-pulse" r="3.2" style="--i:3"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M495.4 172.0C463.8 172.0 463.8 172.0 432.2 172.0"/></circle><path class="flow-edge" d="M259.3 172.0C234.5 172.0 234.5 172.0 209.8 172.0" marker-end="url(#flow-2-arrow)" style="--i:4;--len:49" pathLength="49"/><circle class="flow-pulse" r="3.2" style="--i:4"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M259.3 172.0C234.5 172.0 234.5 172.0 209.8 172.0"/></circle><path class="flow-edge" d="M119.9 210.0C119.9 235.0 119.9 235.0 119.9 260.0" marker-end="url(#flow-2-arrow)" style="--i:5;--len:50" pathLength="50"/><circle class="flow-pulse" r="3.2" style="--i:5"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M119.9 210.0C119.9 235.0 119.9 235.0 119.9 260.0"/></circle><path class="flow-edge" d="M206.4 307.0C232.8 307.0 232.8 307.0 259.3 307.0" marker-end="url(#flow-2-arrow)" style="--i:6;--len:53" pathLength="53"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M206.4 307.0C232.8 307.0 232.8 307.0 259.3 307.0"/></circle><path class="flow-edge" d="M432.2 307.0C458.6 307.0 458.6 307.0 485.1 307.0" marker-end="url(#flow-2-arrow)" style="--i:7;--len:53" pathLength="53"/><circle class="flow-pulse" r="3.2" style="--i:7"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M432.2 307.0C458.6 307.0 458.6 307.0 485.1 307.0"/></circle><path class="flow-edge" d="M571.5 336.0C571.5 370.0 571.5 370.0 571.5 404.0" marker-end="url(#flow-2-arrow)" style="--i:8;--len:68" pathLength="68"/><circle class="flow-pulse" r="3.2" style="--i:8"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M571.5 336.0C571.5 370.0 571.5 370.0 571.5 404.0"/></circle><g class="flow-node" style="--i:0"><rect x="36.9" y="17.0" width="166.0" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="37.0">Chọn phương thức lưu</tspan><tspan x="119.9" y="55.0">trữ và bảo vệ khóa</tspan></text></g><g class="flow-node" style="--i:1"><rect x="259.3" y="8.0" width="172.9" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="28.0">Mở bảng điều khiển</tspan><tspan x="345.7" y="46.0">bằng mã thông báo của</tspan><tspan x="345.7" y="64.0">nó</tspan></text></g><g class="flow-node" style="--i:2"><rect x="491.9" y="17.0" width="159.1" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="37.0">Chọn không gian làm</tspan><tspan x="571.5" y="55.0">việc</tspan></text></g><g class="flow-node" style="--i:3"><rect x="495.4" y="134.0" width="152.2" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="154.0">Cấu hình đường dẫn</tspan><tspan x="571.5" y="172.0">trực tiếp hoặc qua</tspan><tspan x="571.5" y="190.0">proxy</tspan></text></g><g class="flow-node" style="--i:4"><rect x="259.3" y="143.0" width="172.9" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="163.0">Nhập số điện thoại</tspan><tspan x="345.7" y="181.0">hoặc chọn tệp / mã QR</tspan></text></g><g class="flow-node" style="--i:5"><rect x="30.0" y="134.0" width="179.8" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="154.0">Xác minh danh tính tài</tspan><tspan x="119.9" y="172.0">khoản và chọn các nhóm</tspan><tspan x="119.9" y="190.0">có thể truy cập</tspan></text></g><g class="flow-node" style="--i:6"><rect x="33.5" y="260.0" width="172.9" height="94.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="280.0">Lưu các chính sách về</tspan><tspan x="119.9" y="298.0">sự kiện và tệp đính</tspan><tspan x="119.9" y="316.0">kèm, sau đó bắt đầu</tspan><tspan x="119.9" y="334.0">quá trình giám sát</tspan></text></g><g class="flow-node" style="--i:7"><rect x="259.3" y="269.0" width="172.9" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="289.0">Theo dõi lỗi, quyền</tspan><tspan x="345.7" y="307.0">truy cập, hàng đợi và</tspan><tspan x="345.7" y="325.0">dung lượng đĩa</tspan></text></g><g class="flow-node" style="--i:8"><rect x="485.1" y="278.0" width="172.9" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="298.0">Giữ lại các điểm kiểm</tspan><tspan x="571.5" y="316.0">tra độc lập</tspan></text></g><g class="flow-node" style="--i:9"><rect x="488.5" y="404.0" width="166.0" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="424.0">Xuất và xác minh tài</tspan><tspan x="571.5" y="442.0">liệu</tspan></text></g></svg></div><details class="flow-steps"><summary>Sơ đồ dưới dạng văn bản</summary><ol><li>Chọn phương thức lưu trữ và bảo vệ khóa → Mở bảng điều khiển bằng mã thông báo của nó</li><li>Mở bảng điều khiển bằng mã thông báo của nó → Chọn không gian làm việc</li><li>Chọn không gian làm việc → Cấu hình đường dẫn trực tiếp hoặc qua proxy</li><li>Cấu hình đường dẫn trực tiếp hoặc qua proxy → Nhập số điện thoại hoặc chọn tệp / mã QR</li><li>Nhập số điện thoại hoặc chọn tệp / mã QR → Xác minh danh tính tài khoản và chọn các nhóm có thể truy cập</li><li>Xác minh danh tính tài khoản và chọn các nhóm có thể truy cập → Lưu các chính sách về sự kiện và tệp đính kèm, sau đó bắt đầu quá trình giám sát</li><li>Lưu các chính sách về sự kiện và tệp đính kèm, sau đó bắt đầu quá trình giám sát → Theo dõi lỗi, quyền truy cập, hàng đợi và dung lượng đĩa</li><li>Theo dõi lỗi, quyền truy cập, hàng đợi và dung lượng đĩa → Giữ lại các điểm kiểm tra độc lập</li><li>Giữ lại các điểm kiểm tra độc lập → Xuất và xác minh tài liệu</li></ol></details></figure>
+<p>Quyền truy cập, kết nối truyền tải, quyền tham gia nhóm và tính đầy đủ của
+việc gửi tin nhắn là các thuộc tính khác nhau. Trạng thái kết nối màu xanh lá cây không có nghĩa là tất cả
+các sự kiện đã được ghi lại.</p>
+<h2 id="modes">Các chế độ<a class="anchor" href="#modes" aria-label="Liên kết đến phần này">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Chế độ</th>
+<th>Hành động</th>
+<th>Hành vi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bản demo</td>
+<td>scripts\Demo.cmd hoặc <code>--demo</code></td>
+<td>Dữ liệu tổng hợp; tính năng kết nối với tài khoản thực đã bị vô hiệu hóa</td>
+</tr>
+<tr>
+<td>Quan sát</td>
+<td>Bắt đầu quan sát</td>
+<td>Ghi lại các bản cập nhật đã được gửi cho các nguồn được chọn</td>
+</tr>
+<tr>
+<td>Bản chụp lịch sử</td>
+<td>Nguồn → ảnh chụp lịch sử</td>
+<td>Lưu trữ tối đa 500 tin nhắn hiện tại; không tái tạo lại tất cả các thay đổi trong quá khứ</td>
+</tr>
+<tr>
+<td>Tạm dừng</td>
+<td>Tạm dừng quan sát</td>
+<td>Tạm dừng thu thập dữ liệu trong khi vẫn lưu giữ dữ liệu và các tác vụ đang chờ xử lý</td>
+</tr>
+<tr>
+<td>Xem xét/Chuyển giao</td>
+<td>Xuất dữ liệu</td>
+<td>ZIP, JSONL/CSV/HTML, điểm kiểm tra, biên nhận quá trình và yêu cầu dấu thời gian</td>
+</tr>
+<tr>
+<td>Nhiều tài khoản</td>
+<td>Các không gian làm việc hoặc nút <strong>+</strong> ở trên cùng</td>
+<td>Có thể tạo bất kỳ số lượng không gian làm việc riêng biệt nào trong cùng một quy trình</td>
+</tr>
+</tbody>
+</table></div>
+<p>Quyền truy cập bản demo tại địa phương sẽ tự động mở mà không cần nhập mã thông báo thủ công. Tính năng này sử dụng
+khả năng tồn tại trong suốt quá trình xử lý, chỉ có hiệu lực đối với quyền truy cập vòng lặp trực tiếp vào một
+bản demo tổng hợp được cách ly; mã thông báo của bảng điều khiển chính không được tiết lộ. Các không gian làm việc thực tế cũng như quyền truy cập bản demo từ xa
+hoặc qua máy chủ proxy vẫn duy trì xác thực bằng mã thông báo. Việc truy cập bản demo không cấp bất kỳ quyền ủy quyền nào trên Telegram.</p>
+<h2 id="monitoring-categories">Các danh mục giám sát<a class="anchor" href="#monitoring-categories" aria-label="Liên kết đến phần này">#</a></h2>
+<p><img alt="Cài đặt giám sát theo từng tài khoản với dữ liệu nguồn tổng hợp" src="../../../../assets/sources.png" /></p>
+<p>Trong <strong>phần Nguồn → Cài đặt ghi lại → Chọn các thay đổi cần lưu giữ</strong>, quý vị có thể chọn riêng biệt các tin nhắn mới, nội dung chỉnh sửa,
+thông báo xóa, cập nhật phản ứng và các sự kiện liên quan đến thành viên. Cài đặt mặc định
+sẽ lưu giữ tất cả các danh mục. Tùy chọn <strong>“Tin nhắn, chỉnh sửa &amp; xóa”</strong> sẽ giữ nguyên bối cảnh ban đầu
+đồng thời vô hiệu hóa các cập nhật riêng biệt về phản ứng và thành viên. Tùy chọn <strong>“Tất cả hoạt động hiển thị”</strong> sẽ khôi phục
+cả năm loại. Các cài đặt sẵn sẽ thay đổi định dạng; nhấn <strong>“Lưu cài đặt giám sát”</strong> để áp dụng.</p>
+<p>Chính sách đã lưu sẽ áp dụng cho tất cả các nguồn được chọn trong không gian làm việc đó. Các
+không gian làm việc khác vẫn giữ nguyên cài đặt riêng của mình. Mỗi thay đổi thực tế đều được ghi lại kèm theo các giá trị trước và sau
+đã được ký xác thực; chính sách hiện tại cũng được bao gồm trong biên nhận quá trình và bản ghi
+bắt đầu quan sát. Việc vô hiệu hóa một danh mục sẽ không xóa các quan sát trước đó. Việc kích hoạt lại
+sẽ không khôi phục các thay đổi đã bỏ lỡ. Trong phiên bản này, không có tính năng ghi đè danh mục theo từng nhóm.</p>
+<p>Vui lòng duy trì tính năng ghi lại tin nhắn mới khi nội dung trước đó vẫn còn quan trọng: thông báo xóa tin nhắn không thể
+khôi phục lại văn bản chưa từng được ghi lại. Các bản ghi hoạt động/phạm vi phủ sóng cùng các sự kiện dịch vụ nhóm
+khác luôn được lưu giữ. Các bản chụp lịch sử rõ ràng là riêng biệt so với
+việc lựa chọn danh mục thời gian thực và có thể bao gồm các tin nhắn dịch vụ. Các tùy chọn này không
+che giấu siêu dữ liệu về phản ứng/thành viên được nhúng trong một đối tượng Telegram đã được ghi lại.</p>
+<p>Một bản chụp lịch sử có thể xếp các tệp đính kèm vào hàng đợi khi đang tạm dừng. Hãy bắt đầu quá trình quan sát để xử lý
+chúng. Việc được xếp vào hàng đợi không có nghĩa là đã được tải xuống. Một tệp gốc không khả dụng sẽ không bị thay thế
+bằng phiên bản đã chỉnh sửa mới hơn; các kết quả sẽ được ghi lại riêng biệt.</p>
+<p><strong>Nút “Lock”</strong> sẽ xóa quyền truy cập trình duyệt và các trường bí mật nhưng vẫn duy trì quá trình thu thập dữ liệu.
+Việc đóng tab cũng không làm dừng quá trình thu thập dữ liệu. Việc dừng tiến trình Python hoặc dịch vụ
+sẽ ngừng quá trình thu thập dữ liệu bất kể trạng thái của trình duyệt.</p>
+<p>Việc xóa một không gian làm việc bổ sung sẽ dừng trình thu thập dữ liệu của không gian đó và xóa dữ liệu cục bộ của nó. Nếu
+một tệp bị khóa hoặc lỗi hệ thống tệp làm gián đoạn quá trình xóa, bảng điều khiển sẽ báo cáo sự cố và
+giữ không gian làm việc đó trong danh sách là không khả dụng (<code>DeletionPending</code>). Vui lòng đóng các chương trình đang giữ
+các tệp của không gian làm việc đó và thử lại <strong>lệnh Xóa</strong>. Việc khởi động lại TgWitness sẽ khiến không gian làm việc đó vẫn ở trạng thái dừng và
+không khôi phục lại nhật ký hoặc các khóa đã bị xóa một phần. Việc xóa thành công chỉ được ghi lại
+sau khi thư mục đã được xóa; các bản sao được xuất hoặc sao lưu riêng biệt vẫn
+tuân theo chính sách lưu trữ riêng của chúng.</p>
+<h2 id="notifications">Thông báo<a class="anchor" href="#notifications" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Mở <strong>Nguồn → Thông báo → Cảnh báo và bản tóm tắt hàng ngày</strong>. TgWitness sử dụng
+Apprise để gửi cảnh báo đến Matrix, Telegram, Discord, Slack, ntfy, email và các
+dịch vụ được hỗ trợ khác. Quý vị có thể thêm nhiều điểm đến vào một không gian làm việc.</p>
+<ol>
+<li>Vui lòng nhập một URL đích Apprise trên mỗi dòng. Hãy sử dụng danh mục dịch vụ (
+    <a href="https://appriseit.com/services/">danh mục dịch vụ và các định dạng URL</a>) phù hợp với dịch vụ của quý vị.</li>
+<li>Vui lòng bật tùy chọn <strong>“Gửi thông báo”</strong>, sau đó chọn các cảnh báo sự cố, thay đổi trong các
+    cuộc trò chuyện được theo dõi và bản tóm tắt hàng ngày. Giờ trong bản tóm tắt sử dụng múi giờ của máy chủ.</li>
+<li>Vui lòng bật tùy chọn <strong>“Bao gồm các đoạn trích ngắn”</strong> nếu quý vị muốn văn bản được lưu trữ từ các tin nhắn đã bị xóa và đã chỉnh sửa
+    xuất hiện trong các thông báo.</li>
+<li>Nhấn vào <strong>“Lưu thông báo”</strong>, sau đó nhấn <strong>“Gửi thử nghiệm”</strong> để kiểm tra việc gửi đi.</li>
+</ol>
+<p>Đối với máy chủ nhận của riêng quý vị, vui lòng sử dụng <a href="https://appriseit.com/services/json/">webhook JSON</a> của Apprise.
+Ví dụ: <code>jsons://notify.example.org/tgwitness</code> gửi JSON qua HTTPS đến
+điểm cuối đó. Đây là một ví dụ hư cấu; quý vị hãy thay thế bằng điểm đến của riêng mình.</p>
+<p>Các đích đến và cài đặt thuộc về không gian làm việc đã chọn. Thông báo thay đổi
+bao gồm các nguồn được theo dõi, bao gồm cả các cuộc trò chuyện mới được thêm vào. Biểu tượng chuông trên thanh trên cùng
+cũng liệt kê các sự cố gần đây và những thay đổi trong cuộc trò chuyện.</p>
+<p>Trong bản demo, các điều khiển thông báo hiển thị nhưng chức năng gửi đã bị vô hiệu hóa. Vui lòng cấu hình
+việc gửi thông báo trong một không gian làm việc thực tế. Các thông báo sẽ sử dụng đường dẫn Direct, SOCKS5 hoặc
+HTTP của không gian làm việc đó; MTProxy không thể truyền tải chúng. Các điểm đến không phải HTTP như SMTP yêu cầu
+một đường dẫn trực tiếp.</p>
+<h2 id="panel-layout">Bố cục bảng điều khiển<a class="anchor" href="#panel-layout" aria-label="Liên kết đến phần này">#</a></h2>
+<p><img alt="Kết nối không gian làm việc bằng dữ liệu tổng hợp" src="../../../../assets/connection.png" /></p>
+<p><strong>Tạp chí này</strong> hiển thị các quan sát, chức năng tìm kiếm và bộ lọc. Khi có thao tác chỉnh sửa, các phiên bản đã được ghi lại sẽ được mở ra;
+khi có thao tác xóa, nội dung trước đó (nếu có) sẽ được hiển thị. Nguồn gốc không xác định vẫn được nêu rõ ràng.
+Số liệu thống kê có sẵn trong <strong>phần Tổng quan</strong>; chi tiết về quá trình thu thập được lưu giữ trong hướng dẫn cục bộ.</p>
+<p><strong>Phần “Nguồn”</strong> bao gồm phạm vi quan sát (các cuộc trò chuyện được chọn, một thư mục Telegram hoặc toàn bộ
+tài khoản), các cuộc trò chuyện có thể truy cập thuộc mọi loại, các nguồn được chọn kèm dấu sao ưu tiên, cài đặt
+về tệp đính kèm và kiểm tra lại, cùng các bản chụp lịch sử. Các nguồn riêng tư được chọn theo hộp thoại/ID
+mà không cần liên kết công khai. Trạng thái truy cập mô tả lần kiểm tra gần đây nhất, chứ không phải quyền truy cập vĩnh viễn.</p>
+<p><strong>Phần “Trò chuyện” → “Người dùng”</strong> liệt kê tất cả những người có tin nhắn được lưu trữ; khi tính năng hồ sơ người dùng được bật
+cho cuộc trò chuyện đó, chỉ cần nhấp chuột là hồ sơ của người đó sẽ mở ra kèm theo các liên kết đến các bản ghi trong sổ chứng cứ.</p>
+<p><strong>Witness</strong> tạo ra các mã chứng thực chỉ đọc, hiển thị thời điểm lần cuối mỗi mã chứng thực được kiểm tra và
+cung cấp các lệnh cùng tùy chọn để khởi chạy một <a href="../witness/">mã chứng thực độc lập</a>.</p>
+<p><strong>Phần “Tham số”</strong> chứa mọi giới hạn và tốc độ của không gian làm việc mà không được đề cập trên các trang khác:
+số lượng cuộc trò chuyện được đọc, tần suất danh sách trò chuyện được đọc lại, khoảng thời gian giữa các lần kiểm tra trạng thái và điểm kiểm tra
+, bộ đệm khởi động, cách các lần kiểm tra lại phân bổ yêu cầu của mình (thời gian trễ ban đầu, số cuộc trò chuyện trên mỗi
+lần quét, thời gian tạm dừng giữa các cuộc trò chuyện, số tin nhắn được khôi phục và yêu cầu lại), dung lượng đĩa dự trữ, thời gian chờ và
+số lần thử lại khi tải xuống, các tiêu chí tìm kiếm trong hồ sơ người dùng (bao gồm cả biểu thức chính quy do quý vị tự định nghĩa),
+kích thước và tần suất thông báo, giới hạn chụp nhanh, ZIP và tải xuống qua trình duyệt, cũng như
+thời gian chờ và số lần thử lại của ứng dụng Telegram. Mỗi trường hiển thị phạm vi và giá trị mặc định; các trường đã thay đổi được
+đánh dấu và có thể khôi phục từng trường một hoặc tất cả cùng lúc. Mọi thay đổi đều được ghi lại dưới dạng
+mã <code>parameters.changed</code> kèm theo các giá trị trước và sau khi thay đổi, đồng thời các bản ghi bắt đầu quan sát sẽ nêu rõ
+các giá trị hiện đang có hiệu lực. Các giá trị có hiệu lực kể từ lần sử dụng tiếp theo; thời gian chờ và số lần thử lại của ứng dụng khách sẽ áp dụng từ
+lần kết nối tiếp theo. Khoảng thời gian kiểm tra lại, loại và kích thước tệp đính kèm, bằng chứng cũng như khoảng thời gian sao lưu ngoài trang web
+vẫn được duy trì trên các trang riêng biệt và có thể nhận bất kỳ giá trị nào trong phạm vi cho phép, không chỉ giới hạn ở các thiết lập mặc định.</p>
+<p>Biểu tượng chuông ở thanh trên cùng liệt kê các sự cố và thay đổi gần đây trong các cuộc trò chuyện được theo dõi; các tin nhắn chưa đọc
+sẽ được tính cho đến khi được đánh dấu là đã đọc. Các thay đổi được nhóm theo từng cuộc trò chuyện và theo giờ (“12 tin nhắn đã bị xóa,
+1 tin nhắn đã được chỉnh sửa, 0 tin nhắn không tìm thấy”), và các sự cố như đăng xuất hoặc ổ đĩa đầy vẫn được giữ lại trong danh sách
+bất kể các cuộc trò chuyện có bận rộn đến mức nào.</p>
+<p><strong>Quá trình đăng ký</strong> bắt đầu từ trường số điện thoại. <strong>Tiếp tục</strong> sẽ dẫn trực tiếp đến
+bước nhập mã, chỉ yêu cầu thông tin đăng nhập API khi chưa có. Nhập qua mã QR và tệp tin là
+các tab thay thế. Thông tin đăng nhập API đã lưu chỉ được tái sử dụng trong chính không gian làm việc của chúng.
+Màn hình đăng nhập không có thanh bên, thống kê hay các phần hướng dẫn thiết lập. Biểu tượng <strong>Cài</strong> đặt
+mở ra các tùy chọn điều khiển API, proxy, bộ nhớ và tài khoản bổ sung. Các cài đặt mới
+bắt đầu từ đây; các tài khoản đã kết nối nhưng chưa chọn nguồn nào sẽ bắt đầu từ <strong>mục Chọn cuộc trò chuyện</strong>.
+Việc thay đổi lộ trình yêu cầu tạm dừng quá trình quan sát và sẽ hủy bỏ quá trình đăng nhập chưa hoàn tất. Một
+sổ nhật ký hiện có không thể được liên kết lại một cách im lặng với một tài khoản Telegram khác.</p>
+<p><strong>Tính năng xuất dữ liệu</strong> sẽ kiểm tra tính toàn vẹn của nhật ký và tạo ra các tệp có thể di chuyển được. Mã định danh không gian làm việc (workspace ID)
+của công cụ có thể được truyền vào lệnh CLI tải xuống. Mỗi lần xuất dữ liệu sẽ gắn một tiền tố nhật ký đầy đủ; các sự kiện xảy ra sau đó
+sẽ được đưa vào lần xuất tiếp theo. Các bộ lọc tìm kiếm không làm thay đổi phạm vi của gói dữ liệu.
+Thông tin chi tiết về việc ký xác thực và phạm vi bao phủ được trình bày trong phần <strong>“Xác minh &amp; giới hạn</strong>”.</p>
+<p>Bảng điều khiển hiển thị trạng thái bộ thu thập, các tệp phương tiện đang xếp hàng/bị lỗi, tệp phương tiện đang chờ xử lý lâu nhất, dung lượng
+đĩa trống, các yêu cầu tạm dừng và các nguồn chưa được xác nhận quyền truy cập trong <strong>phần
+Tình trạng bộ thu thập</strong>. Các chi tiết này ban đầu được thu gọn và ẩn đi trên trang Tài khoản. Một thẻ
+hướng dẫn thiết lập sẽ hiển thị bước tiếp theo: kết nối tài khoản, chọn nguồn hoặc bắt đầu theo dõi.
+Danh sách tài khoản là bản chụp nhanh tại thời điểm tải;
+không gian làm việc đã chọn sẽ được làm mới định kỳ. Đây không phải là công cụ giám sát SLA đa quy trình.</p>
+<p>Giao diện người dùng (UI) sử dụng các tài nguyên và cách hiển thị văn bản tại địa phương cho nội dung nguồn. Các bố cục dành cho máy tính để bàn và màn hình hẹp
+dựa trên Chromium đã được kiểm thử. Đây không phải là chứng nhận khả năng tiếp cận đầy đủ;
+việc đánh giá khả năng sử dụng đối với người dùng và trình đọc màn hình vẫn là các công việc riêng biệt.</p>
+<h2 id="deployment-environments">Môi trường triển khai<a class="anchor" href="#deployment-environments" aria-label="Liên kết đến phần này">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Môi trường</th>
+<th>Cài đặt</th>
+<th>Tình trạng xác minh</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Máy tính cá nhân/máy chủ Windows</td>
+<td>Python 3.11 trở lên, scripts\Setup.cmd/Start.cmd, thư mục dữ liệu riêng tư</td>
+<td>Đã được kiểm tra tại địa phương trên hệ điều hành Windows/Python 3.12</td>
+</tr>
+<tr>
+<td>Máy chủ Linux/VPS</td>
+<td>Môi trường ảo Python (venv), người dùng dịch vụ chuyên dụng, HTTPS/SSH</td>
+<td>Cung cấp mã nguồn, CI và ví dụ về systemd; không được thực thi trên máy chủ này</td>
+</tr>
+<tr>
+<td>macOS</td>
+<td>Môi trường ảo Python (venv), tiến trình nền trước hoặc trình duyệt</td>
+<td>Ví dụ về launchd được cung cấp; cần thực hiện kiểm tra cài đặt riêng biệt</td>
+</tr>
+<tr>
+<td>Docker/Compose</td>
+<td>Khối lượng dữ liệu ổn định, một nhân viên</td>
+<td>Cung cấp định nghĩa và tính năng kiểm tra thời gian chạy CI; Docker không khả dụng tại địa phương</td>
+</tr>
+<tr>
+<td>Trình duyệt trên điện thoại</td>
+<td>Kết nối với bảng điều khiển được bảo vệ trên máy chủ đang hoạt động</td>
+<td>Đã thử nghiệm với bố cục Chromium thu gọn; trình thu thập dữ liệu không hoạt động trên iOS/Android</td>
+</tr>
+</tbody>
+</table></div>
+<p>Khả năng di động có nghĩa là không bắt buộc phải sử dụng dịch vụ đám mây hay xây dựng giao diện người dùng. Mỗi hệ thống đích vẫn
+cần có các phụ thuộc Python/mã hóa tương thích, ổ đĩa cục bộ và quyền truy cập mạng. Vui lòng tham khảo
+<a href="../deployment/">tệp DEPLOYMENT.md</a> và <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">các mẫu dịch vụ</a>.</p>
+<p>Các không gian làm việc chia sẻ CPU, bộ nhớ và vòng lặp sự kiện. Để cách ly các tiến trình, hãy sử dụng các
+phiên bản, cổng, thư mục dữ liệu và quyền truy cập tài khoản riêng biệt. Không có
+bảng điều khiển thống nhất giữa các phiên bản riêng biệt. Tuyệt đối không được chỉ định nhiều tiến trình làm việc truy cập cùng một cơ sở dữ liệu.</p>
+<h2 id="startup-checks-and-exports">Kiểm tra và xuất dữ liệu ban đầu<a class="anchor" href="#startup-checks-and-exports" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Vui lòng chạy lệnh <code>python start.py --check</code> trước khi khởi động môi trường đã được chuẩn bị sẵn. Thêm <code>--json</code>
+để thực hiện các kiểm tra có thể đọc được bằng máy hoặc truyền các tham số <code>--data-dir</code>, <code>--host</code> và <code>--port</code> theo ý định.
+Lệnh này kiểm tra các điều kiện tiên quyết mà không yêu cầu đăng nhập Telegram hay tạo nhật ký.
+Lệnh này không xác minh nhật ký cũng như không chứng minh khả năng sẵn sàng ghi lại; quá trình xác minh nhật ký sẽ diễn ra
+trong quá trình khởi động ứng dụng. Cổng đang được sử dụng có thể chỉ đơn giản là một phiên bản hiện có.</p>
+<p>Các trình duyệt hỗ trợ API Truy cập Hệ thống Tệp sẽ lưu các tệp xuất thông qua một luồng dữ liệu có thể ghi
+. Các trình duyệt khác chỉ lưu trữ tạm thời tối đa 128 MiB. Vui lòng sử dụng CLI truyền luồng cho các tệp xuất có dung lượng lớn hơn
+hoặc đối với các trình duyệt không hỗ trợ truyền tệp:</p>
+<pre><code class="language-sh">python -m tgwitness.download --token-file data/live/panel-token.txt --out evidence.zip</code></pre>
+<p>Thêm mã <code>--profile ID</code>
+từ mục Xuất để tạo không gian làm việc con. Sử dụng mã <code>--url https://server</code>
+để truy cập từ xa. Giao thức HTTP thuần túy chỉ được chấp nhận đối với các đích loopback. Mã thông báo
+được đọc từ tệp và gửi trong tiêu đề, không được hiển thị trên màn hình hay đưa vào URL. Các yêu cầu chuyển hướng sẽ
+bị từ chối. Các đích hiện có sẽ không bị ghi đè. Các lần truyền dữ liệu thất bại sẽ xóa
+tệp tạm thời tương ứng. Giá trị SHA-256 được báo cáo là tổng kiểm tra của quá trình truyền; quý vị cần xác minh tệp ZIP đã ký
+một cách riêng biệt bằng dấu vân tay/điểm kiểm tra đáng tin cậy.</p>
+<h2 id="backup-restore-and-interruptions">Sao lưu, khôi phục và các sự cố gián đoạn<a class="anchor" href="#backup-restore-and-interruptions" aria-label="Liên kết đến phần này">#</a></h2>
+<ol>
+<li>Tạm dừng quá trình quan sát và dừng quy trình một cách triệt để.</li>
+<li>Sao chép toàn bộ thư mục dữ liệu: cơ sở dữ liệu, WAL/SHM (nếu có), tệp phương tiện,
+    <code>credentials.enc</code>, <code>signing.enc</code>, <code>network.enc</code>, khóa kho lưu trữ/siêu dữ liệu, mã thông báo,
+    các điểm kiểm tra và mọi thư mục <code>profiles/</code>.</li>
+<li>Đối với chế độ khóa bên ngoài, hãy bảo quản riêng biệt khóa chính và lưu giữ từng khóa
+    <code>vault.external.json</code>. Việc tạo khóa mới sẽ không thể khôi phục các thông tin bí mật cũ.</li>
+<li>Khôi phục dữ liệu trong khi đích đang bị tạm dừng; cấu hình khóa gốc, hạn chế
+    quyền truy cập và xác minh tính toàn vẹn trước khi tiếp tục.</li>
+<li>Ghi lại thời gian ngừng hoạt động và kết quả xác minh. Một bản chụp lịch sử không thể chứng minh rằng
+    không có hành vi xóa nào xảy ra trong thời gian gián đoạn.</li>
+</ol>
+<p>Các tệp ZIP chứa bằng chứng không bao gồm các phiên làm việc/khóa riêng tư và không phải là bản sao lưu toàn bộ dịch vụ.
+Có bốn loại dữ liệu được bảo vệ theo các cách khác nhau:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Nội dung</th>
+<th>Bảo vệ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tệp xuất không có mật khẩu (mặc định)</td>
+<td>Không được mã hóa. Đã được ký số, do đó mọi thay đổi đều có thể phát hiện được, nhưng bất kỳ ai sở hữu tệp tin này đều có thể đọc được nội dung.</td>
+</tr>
+<tr>
+<td>Tệp xuất có mật khẩu</td>
+<td>Nếu quý vị đặt mật khẩu, tệp xuất hoàn chỉnh sẽ được lưu nguyên vẹn dưới dạng tệp ZIP được mã hóa bằng AES-256 của WinZip mà 7-Zip và WinRAR đều có thể mở được; mật khẩu sẽ không được lưu trữ (<a href="../evidence/">quy trình xử lý bằng chứng</a>)</td>
+</tr>
+<tr>
+<td>Cơ sở dữ liệu nhật ký và các tệp đính kèm được lưu trữ trên đĩa</td>
+<td>Không được mã hóa bởi TgWitness; vui lòng sử dụng đĩa hoặc phân vùng được mã hóa</td>
+</tr>
+<tr>
+<td>Các phiên Telegram và khóa ký</td>
+<td>Được mã hóa trong thư mục dữ liệu (<code>credentials.enc</code>, <code>signing.enc</code>, <code>network.enc</code>)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Sao lưu toàn bộ dịch vụ là thư mục dữ liệu đã được lưu trữ như mô tả ở trên, chứ không phải là tệp xuất.
+Vui lòng sử dụng bộ nhớ được bảo vệ và cơ chế truyền tải có chủ đích cho cả hai trường hợp. Các tệp xuất tạm thời trên máy chủ được lưu trữ trong thư mục
+<code>temporary-exports/</code> của từng không gian làm việc; các phản hồi đã hoàn tất sẽ được xóa, còn các tệp xuất bị gián đoạn
+sẽ bị loại bỏ vào lần khởi động tiếp theo trong khi khóa phiên bản của không gian làm việc đó vẫn còn hiệu lực.</p>
+<p>Việc khôi phục kết nối không đảm bảo việc phục hồi các thay đổi xảy ra trong quá trình đó.
+Các tác vụ phương tiện lưu trữ liên tục và vị trí cập nhật của Telegram vẫn được duy trì sau khi khởi động lại; vui lòng tham khảo
+<a href="../evidence/#durable-collection-and-process-receipts-02">định dạng bằng chứng</a>.</p>
+<h2 id="capacity-and-retention">Dung lượng và thời gian lưu trữ<a class="anchor" href="#capacity-and-retention" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Các giới hạn mặc định, tất cả đều có thể thay đổi trong <strong>phần Thông số</strong>: 1.000 cuộc đối thoại đầu tiên, 500 tin nhắn
+cho mỗi bản chụp nhanh, 4 GiB nội dung ZIP đã ký không nén (các tệp lưu trữ lớn hơn cần
+<code>verify.py --max-gib N</code>) và dung lượng dự phòng 128 MiB cho trình duyệt. Các tệp đính kèm chiếm từ 1–2.000 MiB cho mỗi
+loại trong <strong>phần Nguồn → Tệp đính kèm</strong>. CLI tải xuống mặc định cho phép truyền tối đa 5 GiB. Dung lượng đĩa trống có thể là
+giới hạn thấp hơn. Hãy dành dung lượng cho các nhật ký, phương tiện truyền thông, WAL, các bản xuất tạm thời và bản sao lưu.
+Các bản xuất sử dụng dung lượng dữ liệu thay vì 512 MiB theo định dạng <code>/tmp</code> của Compose.</p>
+<p>Hãy đo lường số sự kiện mỗi giây, thời gian tồn tại của hàng đợi, dung lượng phương tiện và độ trễ đĩa thay vì chỉ đếm
+số lượng nhóm. Các bài kiểm tra hiệu năng tổng hợp tại địa phương không đảm bảo việc gửi tin nhắn trên Telegram.
+Không có cơ chế xóa tự động theo thời gian lưu trữ. Việc xóa phần cuối của nhật ký sẽ làm mất hiệu lực
+mối liên hệ của nó với các điểm kiểm tra đã được lưu giữ.</p>
+<p>Các quy trình kiểm tra lại ưu tiên đã được thiết lập sẵn: các nguồn được đánh dấu sao sẽ được kiểm tra lại mỗi 15 phút theo mặc định,
+các nguồn khác mỗi 6 giờ (xem <a href="../collection/#recheck-tiers">các cấp độ kiểm tra lại</a>). Các tệp xuất
+được bảo vệ bằng mật khẩu như đã mô tả ở trên. Chức năng chấp nhận dữ liệu trực tiếp từ Telegram/proxy, phát lại bền vững,
+nhật ký quản trị và thăm dò phản hồi, các công cụ làm việc độc lập, mã hóa nhật ký cục bộ và tệp phương tiện
+bởi chính TgWitness, các vai trò người dùng và quá trình đánh giá độc lập vẫn là các công việc riêng biệt. Vui lòng tham khảo
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/READINESS.md">các tệp READINESS.md</a>, <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">LIVE_ACCEPTANCE.md</a> và
+<a href="../verification/">VERIFICATION.md</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/OPERATIONS.md">Chỉnh sửa trang này trên GitHub ↗</a><a class="next-guide" href="../investigation/"><span>Bước tiếp theo</span><strong>Chế độ điều tra →</strong></a><p>Các hướng dẫn này mô tả cách triển khai hiện tại. Kết quả xác thực và những hạn chế còn tồn tại được ghi chép riêng biệt. <a href="../verification/">Những nội dung đã được kiểm thử →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Trên trang này"><p class="nav-label">Trên trang này</p><a href="#operator-workflow">Quy trình làm việc của người vận hành</a><a href="#modes">Các chế độ</a><a href="#monitoring-categories">Các danh mục giám sát</a><a href="#notifications">Thông báo</a><a href="#panel-layout">Bố cục bảng điều khiển</a><a href="#deployment-environments">Môi trường triển khai</a><a href="#startup-checks-and-exports">Kiểm tra và xuất dữ liệu ban đầu</a><a href="#backup-restore-and-interruptions">Sao lưu, khôi phục và các sự cố gián đoạn</a><a href="#capacity-and-retention">Dung lượng và thời gian lưu trữ</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Mã nguồn mở · Chạy trên máy tính của quý vị</span><a href="../../../../LICENSE">Giấy phép MIT</a><a href="../notice/">Thông báo dành cho người vận hành</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">An ninh</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Đang chờ tin nhắn", "Step through a fictional send, edit and delete.": "Hãy cùng tìm hiểu từng bước về một quy trình giả định bao gồm việc gửi, chỉnh sửa và xóa tin nhắn.", "No observations yet. Start the sequence or advance one event.": "Chưa có ghi chú nào. Bắt đầu chuỗi sự kiện hoặc chuyển sang sự kiện tiếp theo.", "Meet at 10:00": "Hẹn gặp lúc 10:00", "A new message is visible in the chat.": "Một tin nhắn mới đã xuất hiện trong cuộc trò chuyện.", "Record 1 appended: the collector observed the original message.": "Ghi chú 1 được đính kèm: bộ thu thập đã ghi nhận tin nhắn gốc.", "Meet at 11:00": "Hẹn gặp lúc 11:00", "The current text changes. The earlier observation stays.": "Nội dung văn bản hiện tại đã được điều chỉnh. Quan sát trước đó vẫn được giữ nguyên.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Bản ghi số 2 đã được bổ sung: nội dung chỉnh sửa là một quan sát mới. Bản ghi số 1 vẫn giữ nguyên văn bản gốc.", "Message deleted": "Tin nhắn đã bị xóa", "The message has disappeared from the chat view.": "Tin nhắn đã biến mất khỏi giao diện trò chuyện.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Ghi chú 3 được đính kèm: thông báo xóa được lưu giữ cùng với cả hai phiên bản đã quan sát được.", "0 records": "0 bản ghi", "1 record": "1 bản ghi", "2 records": "2 bản ghi", "3 records": "3 bản ghi", "Complete / {n} of 3": "Hoàn tất / {n}/3", "Step / {n} of 3": "Bước / {n}/3", "Pause": "Tạm dừng", "Replay sequence": "Trình tự phát lại", "Play sequence": "Trình tự phát lại", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Ví dụ tĩnh hiện đã có sẵn. Để tính toán các giá trị băm một cách tương tác, vui lòng truy cập trang này qua HTTPS hoặc xem bản xem trước trên localhost với sự hỗ trợ của Web Crypto.", "No record supplied": "Không có bản ghi nào được cung cấp", "Tail removed": "Phần cuối đã được loại bỏ", "≠ saved hash": "≠ băm đã lưu", "Rebuilt · different hash": "Đã được xây dựng lại · mã băm khác", "= saved hash": "= mã băm đã lưu", "Same length and matching head.": "Độ dài tương đương và tiêu đề phù hợp.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Cả ba giá trị băm được tính toán đều khớp với các giá trị băm đã lưu. Mẫu này phù hợp với giới hạn ba bản ghi được lưu giữ.", "Same saved head; the journal prefix fails verification.": "Cùng một tiêu đề đã lưu; tiền tố của sổ ghi chép không qua được quá trình xác minh.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Bản ghi số 2 hiện không còn khớp với giá trị băm đã lưu trữ của nó. Việc chỉ kiểm tra giá trị băm cuối cùng đã lưu trữ sẽ bỏ sót lỗi này; trình xác minh sẽ kiểm tra từng bản ghi một.", "Head differs from the retained checkpoint.": "Đầu trang khác với điểm kiểm tra được lưu giữ.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Các giá trị băm được tái tạo liên kết với nhau, nhưng phần đầu cuối cùng đã thay đổi. Điểm kiểm tra được lưu giữ từ chối lịch sử này. Các chữ ký gốc cũng sẽ không hợp lệ đối với các bản ghi đã bị thay đổi.", "Too short: 2 supplied records \u003c 3 retained records.": "Quá ngắn: 2 bản ghi được cung cấp \u003c 3 bản ghi được lưu giữ.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Hai giá trị băm còn lại vẫn khớp nhau. Điểm kiểm tra được lưu giữ đã tiết lộ phần cuối bị thiếu. Nếu không có ranh giới trước đó, chỉ riêng tiền tố ngắn hơn này sẽ không thể phát hiện ra sự thiếu sót.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Trình duyệt này không hỗ trợ tính toán hàm băm. Các công thức và phần giải thích tĩnh dưới đây vẫn có sẵn.", "{n} records": "{n} bản ghi", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Đã được chấp nhận: số lượng tăng lên, chữ ký đã được xác minh và khóa khớp. TgWitness duy trì ranh giới mới này.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: bản trả lời có chữ ký báo cáo số lượng bản ghi ít hơn so với điểm kiểm tra được chấp nhận gần nhất. Hệ thống TgWitness ghi nhận sự cố và giữ nguyên ranh giới đã được chấp nhận trước đó.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: số lượng không thay đổi nhưng nhánh chính khác biệt. TgWitness ghi lại sự bất đồng này và duy trì ranh giới đã được chấp nhận trước đó.", "No answer": "Không có câu trả lời", "boundary unknown": "giới hạn chưa xác định", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Không có phản hồi: TgWitness ghi lại kết quả kiểm tra không thành công. Công cụ này không thể xác định trạng thái hiện tại của bộ thu thập dữ liệu. Nếu TgWitness vẫn có thể kết nối với Bot API và chính sách xuất bản cho phép, công cụ này có thể công bố thông tin về sự cố đó.", "Send {n}": "Gửi {n}", "Edit {n}": "Chỉnh sửa {n}", "Delete {n}": "Xóa {n}", "Both accounts captured all six expected observations in this example.": "Cả hai tài khoản đều ghi lại đầy đủ cả sáu quan sát dự kiến trong ví dụ này.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Tài khoản B vẫn ghi lại được 6/6 tin nhắn. Hai biên nhận mất nhiều thời gian hơn. Tỷ lệ ghi lại và độ trễ của biên nhận trả lời cho những câu hỏi khác nhau.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Tài khoản B đã ghi lại được 5 trong số 6 hành động trước thời hạn (83,3%). Hành động chỉnh sửa còn thiếu không có độ trễ được đo lường. Kết quả này chỉ mô tả sáu hành động được kiểm soát.", "not observed by cutoff": "không được ghi nhận trước thời hạn", "{s} seconds": "{s} giây", "Exact values follow in the table.": "Các giá trị chính xác được trình bày trong bảng dưới đây.", "{s} s": "{s} s", "Not observed": "Chưa được quan sát thấy", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Bốn cuộc trò chuyện cung cấp các quan sát khác nhau. Vui lòng theo dõi các bản ghi nguồn cho từng kết nối; không gán bài đăng trên kênh cho người dùng 71001 nếu không có thông tin người gửi được xác định rõ.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Các bản ghi số 146 và 205 cung cấp cùng một ID người gửi, đó là 71001. Điều này giúp liên kết các bài đăng được quan sát thấy từ một tài khoản Telegram trên hai cuộc trò chuyện. Tuy nhiên, thông tin này không xác định danh tính của một cá nhân trong thế giới thực cũng như không quy thuộc bài đăng trên kênh đó cho bất kỳ ai.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Địa chỉ đích pay.example.invalid/new xuất hiện trong bản ghi nhóm số 146, bản ghi bàn phím bot số 173, bản ghi chỉnh sửa kênh số 188 và tin nhắn riêng tư số 205. Việc địa chỉ đích này xuất hiện lặp lại giúp liên kết các tài liệu với nhau; điều này không chứng minh rằng các tài khoản đó nằm dưới sự kiểm soát chung.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Trong trường hợp giả định này, các biên nhận phương tiện đã hoàn tất số #151 và #209 có các giá trị SHA-256 đầy đủ trùng khớp. Hãy so sánh các byte thực tế và các bản ghi tin nhắn liên quan. Tệp trùng khớp này không xác định được người tạo ra nó cũng như không chứng minh được ai là người đã chuyển tiếp nó.", "the encrypted off-site copy": "bản sao được mã hóa lưu trữ ngoài trang web", "notifications": "thông báo", "checkpoint hashes for timestamps": "Các giá trị băm điểm kiểm tra (checkpoint hashes) để xác định dấu thời gian", "signed checkpoints for the witness": "các mốc kiểm tra có chữ ký dành cho TgWitness", "Switched on in this example": "Đã kích hoạt trong ví dụ này", "Optional · off by default": "Tùy chọn · tắt theo mặc định", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Khi rời khỏi thiết bị này: kết nối Telegram và {list}. Không có gì khác.", "Default: only the Telegram connection leaves this machine.": "Mặc định: chỉ kết nối Telegram mới được truyền ra khỏi máy này.", "{done} of {total} done": "{done}/{total} đã hoàn thành", "Mark step {n} as done": "Đánh dấu bước {n} là đã hoàn thành", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Nội dung", "Copied": "Đã sao chép", "Command copied.": "Lệnh đã được sao chép.", "Selected — Ctrl/Cmd+C": "Đã chọn — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Lệnh đã được chọn. Vui lòng sao chép thủ công.", "Command copied to clipboard.": "Lệnh đã được sao chép vào khay nhớ tạm.", "Select text": "Chọn văn bản", "Clipboard unavailable. Command selected; copy it manually.": "Không thể truy cập khay nhớ tạm. Lệnh đã được chọn; vui lòng sao chép thủ công.", "A message arrives. The first observation is saved.": "Một tin nhắn được gửi đến. Quan sát đầu tiên được lưu lại.", "The time changes. Both captured versions stay.": "Thời gian có thể thay đổi. Cả hai phiên bản được lưu giữ đều được giữ nguyên.", "The message disappears. The captured history remains.": "Tin nhắn có thể biến mất. Nhưng lịch sử đã được ghi lại vẫn còn đó.", "Pause example animation": "Tạm dừng hình ảnh minh họa", "Play example animation": "Xem ví dụ về hình ảnh động", "Play": "Phát", "Full-size workspace screenshot": "Ảnh chụp màn hình toàn màn hình không gian làm việc", "Workspace screenshot · fictional data": "Ảnh chụp màn hình giao diện làm việc · dữ liệu giả định", "Close": "Đóng", "Close screenshot": "Đóng ảnh chụp màn hình", "Scrollable full-size screenshot": "Ảnh chụp màn hình toàn màn hình có thể cuộn", "Enlarge: {name}": "Phóng to: {name}", "View full size": "Xem kích thước đầy đủ"}</script>
+</body></html>

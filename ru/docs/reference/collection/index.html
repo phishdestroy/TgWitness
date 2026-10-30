@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="ru" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Как устроен сбор | TgWitness</title>
+<meta name="description" content="Объём наблюдения, обновления в режиме реального времени, повторные проверки, вложения, собственные действия и значение пробелов — запись за записью."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/collection/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Как устроен сбор | TgWitness"><meta property="og:description" content="Объём наблюдения, обновления в режиме реального времени, повторные проверки, вложения, собственные действия и значение пробелов — запись за записью.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/ru/docs/reference/collection/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/collection/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/collection/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/collection/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/collection/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/collection/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/collection/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/collection/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/collection/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/collection/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/collection/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/ru/docs/reference/collection/", "url": "https://phishdestroy.github.io/TgWitness/ru/docs/reference/collection/", "name": "Как устроен сбор | TgWitness", "description": "Объём наблюдения, обновления в режиме реального времени, повторные проверки, вложения, собственные действия и значение пробелов — запись за записью.", "inLanguage": "ru", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://phishdestroy.github.io/TgWitness/ru/"}, {"@type": "ListItem", "position": 2, "name": "Документация", "item": "https://phishdestroy.github.io/TgWitness/ru/docs/"}, {"@type": "ListItem", "position": 3, "name": "Справочник", "item": "https://phishdestroy.github.io/TgWitness/ru/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Как устроен сбор", "item": "https://phishdestroy.github.io/TgWitness/ru/docs/reference/collection/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Перейти к содержанию</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Документация</span></a>
+<nav aria-label="Руководства"><a href="../../concepts/">Наглядное руководство</a><a href="../../">Все руководства</a><a href="../">Справочник</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Язык"><span aria-hidden="true">◍</span> Русский</summary><div class="lang-list"><a href="../../../../docs/reference/collection/" hreflang="en" lang="en">English</a><a href="./" hreflang="ru" lang="ru" aria-current="true">Русский</a><a href="../../../../uk/docs/reference/collection/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/collection/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/collection/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/collection/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/collection/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/collection/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/collection/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/collection/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/collection/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/collection/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/collection/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Переключить светлую и тёмную тему"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Руководства"><a href="../../../guides/modes.html">Режимы, сценарии и уровни доказательства</a><p class="nav-label">Первые шаги</p><a href="../../start/">Запуск за несколько минут</a><a href="../../accounts/">Подключение аккаунта</a><a href="../../proxies/">Выбор прокси</a><a href="../../exports/">Экспорт и проверка</a><p class="nav-label">Разобраться в доказательствах</p><a href="../../concepts/">Как устроены доказательства</a><a href="../../cases/">Расследование по всем чатам</a><a href="../../security/">Безопасность установки</a><p class="nav-label">Дальше</p><a href="../../witness/">Бот-свидетель</a><a href="../../server/">Постоянная работа на сервере</a><a href="../../troubleshooting/">Поиск неисправностей</a></nav><nav class="wiki-nav" aria-label="Справочник"><p class="nav-label"><a class="nav-label-link" href="../">Справочник</a></p><details class="wiki-group"><summary>Установка</summary><a href="../quickstart/">Быстрый старт</a><a href="../accounts/">Аккаунты и форматы сессий</a><a href="../connection/">Подключение, прокси и защита данных</a><a href="../deployment/">Развёртывание</a></details><details class="wiki-group" open><summary>Сбор</summary><a href="./" aria-current="page">Как устроен сбор</a><a href="../operations/">Работа и обслуживание</a><a href="../investigation/">Режим расследования</a><a href="../features/">Возможности и ограничения</a></details><details class="wiki-group"><summary>Доказательства</summary><a href="../how-it-works/">Как устроены доказательства</a><a href="../evidence/">Формат доказательств</a><a href="../witness/">Независимый свидетель</a><a href="../timestamp/">Метки времени</a></details><details class="wiki-group"><summary>Безопасность и проект</summary><a href="../security/">Безопасность и обращение с данными</a><a href="../architecture/">Архитектура</a><a href="../verification/">Что проверено</a><a href="../license/">Уведомление о несовместимости лицензий и архитектуры</a><a href="../notice/">Уведомление о несовместимости с операторами</a><a href="../changelog/">Список изменений</a></details></nav><p class="sidebar-note">v0.7.0<br>Открытый исходный код · Работает на вашем компьютере</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Руководства"><a href="../../../">Главная</a> <span aria-hidden="true">/</span> <a href="../../">Документация</a> <span aria-hidden="true">/</span> <a href="../">Справочник</a> <span aria-hidden="true">/</span> <span aria-current="page">Как устроен сбор</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Поиск по документации</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Попробуйте «прокси», «цепочку хешей», «токен» или «свидетель»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Очистить поиск" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Введите слово для поиска в руководствах и справочнике. Результаты поиска остаются в вашем браузере.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Справочник / Сбор</p><h1>Как устроен сбор</h1><p class="guide-outcome">Объём наблюдения, обновления в режиме реального времени, повторные проверки, вложения, собственные действия и значение пробелов — запись за записью.</p><div class="wiki-body"><p>TgWitness фиксирует то, что наблюдает подключённая учётная запись Telegram. Журнал сохраняет
+эти наблюдения, их последовательность и сопутствующий контекст. Он
+не делает выводов о невидимых действиях на основании отсутствующего сообщения или факта подключения учётной записи.</p>
+<h2 id="from-login-to-a-journal">От входа в систему до журнала<a class="anchor" href="#from-login-to-a-journal" aria-label="Ссылка на раздел">#</a></h2>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 691 396" width="691" height="396" role="img" aria-labelledby="flow-1-title flow-1-desc"><title id="flow-1-title">Блок-схема</title><desc id="flow-1-desc">Авторизация учетной записи пользователя → Выберите доступные группы и каналы; Выберите доступные группы и каналы → Сохранить настройки событий и вложений; Сохранить настройки событий и вложений → Начать наблюдение; Начать наблюдение → Получайте обновления от активного клиента; Получайте обновления от активного клиента → Применяйте политику в отношении источников и событий; Применяйте политику в отношении источников и событий → Добавить подписанное наблюдение; Добавить подписанное наблюдение → Просмотр или экспорт журнала; Добавить подписанное наблюдение → Обработка любых вложений, находящихся в очереди; Обработка любых вложений, находящихся в очереди → Добавьте результат загрузки</desc><defs><marker id="flow-1-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M199.4 37.0C234.5 37.0 234.5 37.0 269.6 37.0" marker-end="url(#flow-1-arrow)" style="--i:0;--len:70" pathLength="70"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M199.4 37.0C234.5 37.0 234.5 37.0 269.6 37.0"/></circle><path class="flow-edge" d="M421.8 37.0C456.9 37.0 456.9 37.0 491.9 37.0" marker-end="url(#flow-1-arrow)" style="--i:1;--len:70" pathLength="70"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M421.8 37.0C456.9 37.0 456.9 37.0 491.9 37.0"/></circle><path class="flow-edge" d="M571.5 66.0C571.5 100.0 571.5 100.0 571.5 134.0" marker-end="url(#flow-1-arrow)" style="--i:2;--len:68" pathLength="68"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M571.5 66.0C571.5 100.0 571.5 100.0 571.5 134.0"/></circle><path class="flow-edge" d="M498.9 154.0C463.8 154.0 463.8 154.0 428.7 154.0" marker-end="url(#flow-1-arrow)" style="--i:3;--len:70" pathLength="70"/><circle class="flow-pulse" r="3.2" style="--i:3"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M498.9 154.0C463.8 154.0 463.8 154.0 428.7 154.0"/></circle><path class="flow-edge" d="M262.7 154.0C236.3 154.0 236.3 154.0 209.8 154.0" marker-end="url(#flow-1-arrow)" style="--i:4;--len:53" pathLength="53"/><circle class="flow-pulse" r="3.2" style="--i:4"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M262.7 154.0C236.3 154.0 236.3 154.0 209.8 154.0"/></circle><path class="flow-edge" d="M119.9 192.0C119.9 239.0 119.9 239.0 119.9 286.0" marker-end="url(#flow-1-arrow)" style="--i:5;--len:94" pathLength="94"/><circle class="flow-pulse" r="3.2" style="--i:5"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M119.9 192.0C119.9 239.0 119.9 239.0 119.9 286.0"/></circle><path class="flow-edge" d="M202.9 315.0C232.8 315.0 232.8 271.0 262.7 271.0" marker-end="url(#flow-1-arrow)" style="--i:6;--len:78" pathLength="78"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M202.9 315.0C232.8 315.0 232.8 271.0 262.7 271.0"/></circle><path class="flow-edge" d="M202.9 315.0C231.1 315.0 231.1 350.0 259.3 350.0" marker-end="url(#flow-1-arrow)" style="--i:6;--len:69" pathLength="69"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M202.9 315.0C231.1 315.0 231.1 350.0 259.3 350.0"/></circle><path class="flow-edge" d="M432.2 350.0C463.8 350.0 463.8 315.0 495.4 315.0" marker-end="url(#flow-1-arrow)" style="--i:7;--len:75" pathLength="75"/><circle class="flow-pulse" r="3.2" style="--i:7"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M432.2 350.0C463.8 350.0 463.8 315.0 495.4 315.0"/></circle><g class="flow-node" style="--i:0"><rect x="40.4" y="8.0" width="159.1" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="28.0">Авторизация учетной</tspan><tspan x="119.9" y="46.0">записи пользователя</tspan></text></g><g class="flow-node" style="--i:1"><rect x="269.6" y="8.0" width="152.2" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="28.0">Выберите доступные</tspan><tspan x="345.7" y="46.0">группы и каналы</tspan></text></g><g class="flow-node" style="--i:2"><rect x="491.9" y="8.0" width="159.1" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="28.0">Сохранить настройки</tspan><tspan x="571.5" y="46.0">событий и вложений</tspan></text></g><g class="flow-node" style="--i:3"><rect x="498.9" y="134.0" width="145.3" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="154.0">Начать наблюдение</tspan></text></g><g class="flow-node" style="--i:4"><rect x="262.7" y="125.0" width="166.0" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="145.0">Получайте обновления</tspan><tspan x="345.7" y="163.0">от активного клиента</tspan></text></g><g class="flow-node" style="--i:5"><rect x="30.0" y="116.0" width="179.8" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="136.0">Применяйте политику в</tspan><tspan x="119.9" y="154.0">отношении источников и</tspan><tspan x="119.9" y="172.0">событий</tspan></text></g><g class="flow-node" style="--i:6"><rect x="36.9" y="286.0" width="166.0" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="306.0">Добавить подписанное</tspan><tspan x="119.9" y="324.0">наблюдение</tspan></text></g><g class="flow-node" style="--i:7"><rect x="262.7" y="242.0" width="166.0" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="262.0">Просмотр или экспорт</tspan><tspan x="345.7" y="280.0">журнала</tspan></text></g><g class="flow-node" style="--i:7"><rect x="259.3" y="312.0" width="172.9" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="332.0">Обработка любых</tspan><tspan x="345.7" y="350.0">вложений, находящихся</tspan><tspan x="345.7" y="368.0">в очереди</tspan></text></g><g class="flow-node" style="--i:8"><rect x="495.4" y="286.0" width="152.2" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="306.0">Добавьте результат</tspan><tspan x="571.5" y="324.0">загрузки</tspan></text></g></svg></div><details class="flow-steps"><summary>Схема в текстовом формате</summary><ol><li>Авторизация учетной записи пользователя → Выберите доступные группы и каналы</li><li>Выберите доступные группы и каналы → Сохранить настройки событий и вложений</li><li>Сохранить настройки событий и вложений → Начать наблюдение</li><li>Начать наблюдение → Получайте обновления от активного клиента</li><li>Получайте обновления от активного клиента → Применяйте политику в отношении источников и событий</li><li>Применяйте политику в отношении источников и событий → Добавить подписанное наблюдение</li><li>Добавить подписанное наблюдение → Просмотр или экспорт журнала</li><li>Добавить подписанное наблюдение → Обработка любых вложений, находящихся в очереди</li><li>Обработка любых вложений, находящихся в очереди → Добавьте результат загрузки</li></ol></details></figure>
+<p>Авторизация, доступ к источнику, работающий сборщик данных и полная доставка — это
+разные вопросы. Успешный вход в систему не гарантирует доступ ко всем группам.
+Наличие подключенного канала передачи данных не означает, что все соответствующие обновления были доставлены.</p>
+<h2 id="observation-scope-chosen-chats-a-folder-or-the-whole-account">Область наблюдения: выбранные чаты, папка или весь аккаунт<a class="anchor" href="#observation-scope-chosen-chats-a-folder-or-the-whole-account" aria-label="Ссылка на раздел">#</a></h2>
+<p>Источники → <strong>Область наблюдения</strong> определяет, какие чаты фиксируются в рабочей среде.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Режим</th>
+<th>Записи</th>
+<th>Новые чаты</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Выбранные чаты (по умолчанию)</td>
+<td>Только те чаты, которые вы добавляете вручную</td>
+<td>Никогда не добавляется автоматически</td>
+</tr>
+<tr>
+<td>Папка Telegram</td>
+<td>Чаты в одной из папок аккаунта: чаты, включённые по названию, плюс категории данной папки (контакты, неконтакты, группы, каналы, боты), за вычетом исключённых чатов и, если это указано в настройках папки, заархивированных чатов</td>
+<td>Соответствующие чаты добавляются сразу же после их активации; чаты, которые вы добавляете в папку в Telegram, добавляются в течение часа</td>
+</tr>
+<tr>
+<td>Весь текст</td>
+<td>Каждый чат, доступный данному аккаунту</td>
+<td>Каждый новый чат, группа, личный чат или бот добавляется в момент поступления первого обновления</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>Типы источников</strong> (каналы, группы, личные чаты, боты) ограничивают возможности режимов «папка» и
+    «весь аккаунт». Выбранные чаты могут быть любого типа, включая личные чаты и ботов.</li>
+<li><strong>Исключённые чаты</strong> никогда не записываются, независимо от режима работы. В режимах «По папкам» и «Весь аккаунт»
+    нажатие кнопок <em>«Исключить»</em> и <em>«Удалить»</em> в источнике добавляет чат в этот список, благодаря чему система не добавляет его повторно.
+    Повторный выбор чата вручную (в разделе «Источники» или из списка «Чаты») удаляет его из списка. Список
+    вмещает до 5 000 чатов; при превышении этого лимита <em>команда «Удалить»</em> не выполняется, и вместо этого чат можно приостановить.</li>
+<li><strong>Собственные действия</strong> (включены по умолчанию): сообщения, отправляемые этим аккаунтом, его правки и
+    нажатия кнопок на клавиатуре при ответе. Если функция отключена, исходящие сообщения и правки пропускаются.</li>
+<li>При переключении на папку или на весь аккаунт запрашивается подтверждение: эти режимы записывают
+    личные чаты и сообщения третьих лиц и должны использоваться исключительно в специально выделенном аккаунте.
+    Подтверждение и каждое изменение области действия фиксируются в подписанных записях <code>scope.changed</code>.</li>
+<li>Чаты, добавленные в рамках настроек, отображаются как источники с пометкой <em>«auto»</em> и регистрируются как <code>scope.applied</code>
+    (в начале и ежечасно) или <code>source.discovered</code> (при появлении нового чата во время наблюдения). При возвращении
+    к выбранным чатам все автоматически добавленные источники приостанавливаются.</li>
+</ul>
+<p>Чего не могут сделать эти режимы:</p>
+<ul>
+<li><strong>Секретные чаты</strong> шифруются по принципу «от конца до конца» между двумя устройствами и ни при каких обстоятельствах не поступают
+    в TgWitness, независимо от режима работы.</li>
+<li><strong>Ничто не записывается, пока TgWitness не запущен.</strong> После перезапуска он запрашивает у Telegram
+    пропущенные обновления и повторно проверяет чаты, однако Telegram не возвращает всю информацию после длительных
+    перебоев в работе. В отчётах и файлах <code>verify.py</code> такие периоды отображаются как пробелы (см. <a href="../evidence/#coverage-continuity-gaps-and-unobserved-ids">раздел «Охват»</a>).</li>
+<li>Изначально отображаются только первые 1 000 диалогов (ограничение указано в <strong>разделе «Параметры»</strong>); более старые
+    чаты добавляются при их следующей активации. Более ранняя история добавленного чата не загружается — создайте
+    снимок истории или выполните полный экспорт чата, когда это понадобится.</li>
+<li>Условия папок, которые постоянно меняются (заглушенные, прочитанные), не применяются: такие чаты
+    остаются под наблюдением.</li>
+<li><strong>Кнопки бота,</strong> нажатые в другом приложении <strong>(с обратным вызовом)</strong>, невидимы для второго
+    сеанса; ответ или редактирование бота фиксируются. Нажатия клавиш при вводе ответа поступают в виде исходящих
+    сообщений и помечаются как <code>button_press</code>.</li>
+<li>Чем больше чатов, тем больше запросов. Telegram ограничивает аккаунты за объем, который считает
+    чрезмерным, что является ещё одной причиной использовать специальные аккаунты.</li>
+</ul>
+<h2 id="scope-and-event-selection">Объём и выбор событий<a class="anchor" href="#scope-and-event-selection" aria-label="Ссылка на раздел">#</a></h2>
+<p>Каждая рабочая область имеет собственные источники. TgWitness не вступает в группы, не принимает
+приглашения и не выявляет всех участников автоматически. Источники должны быть уже
+доступны для данной учётной записи. При запуске сборщик сверяет выбранные источники
+с видимыми диалогами учетной записи; проверяются первые 1 000 диалогов, если в разделе
+<strong>«Параметры → Чаты, считываемые из списка учетной записи</strong>» не указано иное.
+Отсутствующий источник помечается как <strong>«доступ не подтверждён</strong>»; не предполагается, что вас удалили из него.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Настройки</th>
+<th>Собирает</th>
+<th>Последствия при отключении</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Новые сообщения</td>
+<td>Обычные доставленные сообщения</td>
+<td>В случае последующих правок или удалений может отсутствовать ранее зафиксированный текст для сравнения.</td>
+</tr>
+<tr>
+<td>Редактирование</td>
+<td>Предоставляются отредактированные версии сообщений</td>
+<td>Промежуточные изменения впоследствии не восстанавливаются.</td>
+</tr>
+<tr>
+<td>Удаления</td>
+<td>Уведомления об удалении с указанием объёма данных и уведомления на уровне учётной записи без указания объёма данных</td>
+<td>Уведомления об удалении не добавляются в журнал.</td>
+</tr>
+<tr>
+<td>Реакции</td>
+<td>Предоставлены моментальные снимки реакций</td>
+<td>Отдельные обновления с реакциями не добавляются.</td>
+</tr>
+<tr>
+<td>Членство</td>
+<td>Рассылка сообщений о предоставлении услуг для членов сообщества и обновлений для участников</td>
+<td>Указанные замечания членов сообщества не включены.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Настройки применяются ко всем выбранным источникам в рабочей области. Сохраните форму, чтобы применить
+изменения; изменения фиксируются с подписанными значениями «до» и «после». Отключение категории
+не приводит к удалению ранее записанных данных. Повторное включение категории не восстанавливает пропущенные обновления.</p>
+<p>Операционные записи и другие события, связанные с обслуживанием групп, остаются отдельными от этих
+настроек. Сообщения службы членства могут создавать записи сообщений, когда функция членства
+включена, даже если обычная фиксация новых сообщений отключена. Зафиксированные объекты Telegram
+сохраняют встроенные метаданные; настройка не является правилом редактирования.</p>
+<p><strong>Удаления в личных чатах и обычных группах</strong> поступают в виде идентификаторов сообщений без указания чата.
+Эти чаты используют одну общую для всего аккаунта последовательность идентификаторов сообщений, поэтому, если сообщение с данным идентификатором было
+сохранено ранее, его чат известен: удаление фиксируется в этом чате, причём
+в <code>chat_resolution</code> объясняется, как именно. Идентификаторы, которые никогда не сохранялись, остаются <strong>удалениями без определённого контекста</strong> с
+явно указанным неизвестным источником; сборщик данных не делает предположений. Telegram никогда не указывает, кто удалил
+сообщение; если удалённое сообщение было отправлено с данной учётной записи, в записи это указывается
+(<code>deleted_message_was_outgoing</code>) без указания имени удаляющего пользователя.</p>
+<h2 id="own-actions">Собственные действия<a class="anchor" href="#own-actions" aria-label="Ссылка на раздел">#</a></h2>
+<p>Сообщения, отправленные наблюдаемым аккаунтом, помечаются как <code>outgoing</code>. При редактировании исходящего
+сообщения отмечается, что в личных чатах и группах его может редактировать только автор, тогда как сообщения в каналах
+могут редактироваться другими администраторами. Когда исходящее сообщение повторяет текст кнопки
+из последней сохраненной клавиатуры ответов в данном чате, оно помечается как «<code>button_press</code>» со ссылкой на
+запись этой клавиатуры.</p>
+<p>Исключение собственных действий также распространяется на фоновые повторные проверки и автоматическую историю новых чатов.
+Пропущенные исходящие сообщения сдвигают позицию повторной проверки вперед, чтобы они не могли блокировать последующие входящие
+сообщения. Явные действия на панели управления и снимки истории, запрошенные вручную, по-прежнему фиксируются.</p>
+<h2 id="investigation-mode-joining-teams-and-talking-to-bots">Режим расследования: присоединение к группам и общение с ботами<a class="anchor" href="#investigation-mode-joining-teams-and-talking-to-bots" aria-label="Ссылка на раздел">#</a></h2>
+<p><strong>Источники → Область наблюдения → Режим расследования</strong> настраивает область наблюдения для специальной
+учётной записи, которая присоединяется к групповым чатам, запускает ботов и отправляет им сообщения: вся учётная запись, каждый
+тип источника, собственные действия, а также для каждого появляющегося чата или бота — его профиль и последние
+200 видимых сообщений. Просмотрите форму и нажмите <strong>«Сохранить сферу»</strong>; при переходе к всему
+аккаунту потребуется обычное подтверждение.</p>
+<ul>
+<li><strong>Кнопки.</strong> Кнопки, расположенные под сообщением, сохраняются вместе с ним и отображаются в <strong>чатах</strong>: ссылки, веб-
+    приложения, ссылки для входа, текст для копирования, данные обратного вызова, встроенные запросы, запросы на указание
+    номера телефона или местоположения. Ссылки отображаются в виде текста и никогда не открываются панелью. Когда бот
+    изменяет только кнопки (например, новая ссылка для оплаты), это считается новой версией сообщения как
+    при оперативных обновлениях, так и при повторной проверке.</li>
+<li>
+<p><strong>Новые чаты и боты</strong>. В режимах «по папкам» и «весь аккаунт» <strong>при появлении нового чата или бота
+</strong>    сохранение происходит сразу же после его появления:</p>
+<ul>
+<li>его профиль в виде записи <code>source.profile</code>: описание бота и команды, текст «О себе»
+    пользователя, группы или канала, участники, связанный чат и ссылка для приглашения, если Telegram
+    её предоставляет;</li>
+<li>его последние видимые сообщения (до 1 000) в виде моментального снимка истории с меткой <code>new_chat</code>:
+    более ранние сообщения в групповом чате, к которому вы только что присоединились, или то, что сказал бот до того, как система наблюдения
+    зафиксировала этот чат. Сообщения, уже сохраненные в режиме реального времени, не дублируются.</li>
+</ul>
+<p>Чаты, уже присутствующие в списке на момент включения режима, добавляются без создания моментальных снимков.
+Функция FloodWait приостанавливает эту работу, которая возобновляется по завершении; сбои фиксируются, а
+регистрация чата в режиме реального времени продолжается.
+- <strong>Профили по запросу. В меню</strong> <strong>«Чаты» → «Профиль» → «Сохранить профиль» теперь</strong> сохраняется текущий профиль
+любого источника; самый новый профиль отображается над сообщениями.
+- <strong>Не отображается.</strong> Кнопки в тексте сообщения (с обратным вызовом), нажатые в другом приложении Telegram, всплывающее окно или
+ссылка, с помощью которой бот отвечает на такое нажатие, а также ссылки-приглашения, используемые в другом приложении, не поступают в
+TgWitness. То, что бот отправляет или редактирует впоследствии, фиксируется.</p>
+</li>
+</ul>
+<h3 id="act-from-the-panel">Действие с панели<a class="anchor" href="#act-from-the-panel" aria-label="Ссылка на раздел">#</a></h3>
+<p><strong>В разделе «Чаты»</strong> теперь доступен мини-клиент, использующий учётную запись Telegram выбранной рабочей среды:</p>
+<ul>
+<li>Напишите сообщение простым текстом или выберите <strong>«Ответить»</strong> под сохраненным сообщением. Отправленное
+    сообщение фиксируется даже в том случае, если в настройках исключены исходящие обновления.</li>
+<li>Нажмите <strong>кнопку «Пресс»</strong> под текущей кнопкой обратного вызова или текстовой кнопкой. Сервер повторно загрузит
+    сообщение и отклонит действие, если текст на клавиатуре отличается от сохраненной версии.
+    В подтверждениях обратного вызова сохраняются всплывающий текст Telegram, флаг оповещения и URL-адрес; ответ также отображается
+    под перепиской. URL-адреса остаются выделяемым текстом и не открываются автоматически.</li>
+<li>Раскройте <strong>ссылку «Открыть Telegram</strong>», введите <code>@username</code>, публичную ссылку <code>https://t.me/name</code>,
+    <code>https://t.me/+invite</code> / <code>joinchat/invite</code> или ссылку на бота с <code>?start=parameter</code> и нажмите
+    <strong>«Сохранить предварительный просмотр</strong>». Исходная ссылка и предварительный просмотр Telegram подписываются до присоединения.
+    <strong>Присоединение / открытие и наблюдение</strong>: после присоединения к группе/каналу или открытия профиля пользователя/бота добавьте
+    чат в качестве активного источника и отправьте боту <code>/start</code>, указав его стартовый параметр.
+    Запрос на присоединение, ожидающий одобрения администратора, регистрируется как «на рассмотрении», а не как членство.</li>
+</ul>
+<p>Включите функцию <strong>«Начать наблюдение»</strong>, чтобы фиксировать входящие ответы в режиме реального времени. Действия панели работают, когда
+наблюдение приостановлено, однако в этом случае гарантируется сохранение только их прямых ответов.
+Вновь добавленные источники используют настроенный профиль/историю приёма данных, когда наблюдение находится в активном состоянии.
+Если источник приостановлен, включите его в разделе <strong>«Источники»</strong> перед отправкой сообщения или нажатием соответствующих кнопок.</p>
+<p><code>interaction.preview</code>, <code>interaction.requested</code> и <code>interaction.result</code> — это обычные подписанные
+события журнала, включаемые в экспорт доказательств. Запросы идентифицируют аккаунт, сообщение/кнопку
+или запись предварительного просмотра, а также указывают, работала ли система наблюдения. Подтверждения различают успешное выполнение,
+отказ, ожидание одобрения и неизвестный результат. Прерванный запрос мог достичь
+Telegram: проверьте чат перед началом нового действия. Повторное использование идентификатора запроса позволяет получить его
+сохраненное подтверждение без повторного выполнения действия, в том числе после перезапуска. Панель сохраняет
+идентификатор после получения неоднозначного ответа на одно и то же действие в течение текущей сессии страницы.
+Она также сохраняет этот идентификатор, если обновление окна не удаётся после успешного выполнения действия: подтверждение
+остаётся видимым, и повторное нажатие позволяет его получить. RPC-вызовы обратного вызова и присоединения имеют одну попытку
+выполнения; чтения с возможностью повторной попытки сохраняют настроенную политику повторных попыток. Немедленное переключение между чатами
+очищает черновик и адресата ответа и отключает отправку до тех пор, пока не загрузится новый разговор.</p>
+<p>Данный мини-клиент поддерживает текстовые сообщения и кнопки обратного вызова. Для работы с веб-приложениями, запросами на вход в систему, указание номера телефона или местоположения,
+осуществление платежей, встроенных запросов и вложений по-прежнему требуется клиент Telegram; сохраненные метаданные кнопок
+остаются видимыми. В новых элементах управления используется текст на английском языке.</p>
+<h2 id="recheck-tiers">Уровни повторной проверки<a class="anchor" href="#recheck-tiers" aria-label="Ссылка на раздел">#</a></h2>
+<p>При повторной проверке Telegram запрашивается повторно на наличие пропущенных сообщений, изменений и сообщений, которые он больше не возвращает.
+Источники, помеченные звёздочкой, являются <strong>приоритетными</strong> и по умолчанию перепроверяются каждые 15 минут;
+все остальные источники — каждые 6 часов. Выбранные чаты изначально считаются приоритетными, а чаты, добавленные через
+папку или весь аккаунт, — обычными. За один проход перепроверяется не более 30 источников, а
+остальные ожидают следующей минуты; после повторного подключения приоритетные источники проверяются в первую очередь. Оба
+интервала настраиваются в разделе «Источники» → «Настройки записи» → «Перепроверка» (значение 0 отключает уровень) и
+регистрируются как «<code>recheck.changed</code>».</p>
+<p>Пропущенные сообщения извлекаются, начиная с того места, где остановился предыдущий проход, при этом максимальное количество
+<strong>новых сообщений </strong>на один проход определяется в разделе
+<strong>«Параметры» → «Количество новых сообщений при повторной
+проверке</strong>» (по умолчанию — 1 000). Поэтому после длительного перерыва
+повторная проверка заполняет весь пробел, даже если сообщения в режиме реального времени, более свежие, чем этот пробел, были сохранены
+в первую очередь. Чат, который всё ещё находится в процессе синхронизации, проверяется повторно в следующую минуту, а не
+в ожидании окончания интервала уровня; <code>recheck.completed</code> отображает <code>continues_after</code> до завершения процесса.</p>
+<p>Сравнения включают текст сообщений, объекты, клавиатурные вводы (в том числе удаления) и
+содержимое/идентификационные данные вложений. Само по себе изменение хэшей доступа к файлам или ссылок на файлы не считается
+редактированием, равно как и то, что Telegram заполняет самостоятельно: загрузка предварительного просмотра ссылки, просмотры историй, платные
+медиафайлы, разблокированные данной учётной записью, получение счёта-фактуры. Каждая сохранённая версия в «Чатах» содержит ссылку на полную запись в журнале, включая метаданные медиафайлов.</p>
+<h2 id="message-history-and-attribution">История сообщений и их авторство<a class="anchor" href="#message-history-and-attribution" aria-label="Ссылка на раздел">#</a></h2>
+<p>Предположим, что система сбора данных фиксирует сообщение «Встреча в 10:00», затем обнаруживает сообщение «Встреча в 11:00»,
+а после этого получает уведомление об удалении. В результате добавляются три отдельных записи:
+исходный текст сохраняется, отредактированная версия хранится отдельно, а уведомление фиксирует факт
+обнаружения удаления.</p>
+<p>Если сбор данных начался после исчезновения первой версии, этот текст недоступен.
+Если во время перерыва в работе произошло несколько изменений, сохраняются только
+версии, зафиксированные впоследствии. Уведомление об удалении не позволяет восстановить контент, который не был зафиксирован ранее.</p>
+<p>Отправитель сообщения не всегда является лицом, внесшим в него изменения. Telegram, как правило, не
+предоставляет информацию о том, кто удалил сообщение, или о точном времени удаления. Неизвестные участники
+остаются неизвестными. Снимки реакций и обновления участников содержат лишь данные о количестве
+и идентификационных данных, которые Telegram делает видимыми для данного аккаунта.</p>
+<p>Порядковые номера отражают последовательность наблюдений. Временная метка UTC сборщика соответствует его
+местному времени; временная метка источника Telegram хранится отдельно, если она предоставлена.
+Ни одна из них не является независимой достоверной временной меткой.</p>
+<h2 id="history-snapshots">Снимки истории<a class="anchor" href="#history-snapshots" aria-label="Ссылка на раздел">#</a></h2>
+<p>Запрос моментального снимка извлекает последние видимые сообщения из включённого источника, до
+500 сообщений за один запрос. Результаты обозначаются как наблюдения в истории. Они могут пересекаться
+с текущим сбором данных, а повторные наблюдения сохраняются в виде отдельных записей.</p>
+<p>Снимки соответствуют политике вложений, но сохраняют отдельность от переключений в режиме реального времени.
+Они не восстанавливают удалённые сообщения или пропущенные промежуточные версии. Вы можете
+запросить снимки во время паузы; любые вложения, находящиеся в очереди, ожидают начала наблюдения
+и запуска модуля загрузки.</p>
+<h2 id="attachment-handling">Обработка вложений<a class="anchor" href="#attachment-handling" aria-label="Ссылка на раздел">#</a></h2>
+<p>Загрузка вложений включена по умолчанию и приостанавливается при наличии свободного места на диске менее 1 ГиБ. Коллектор фиксирует
+наблюдение за сообщениями и задание на загрузку одновременно. Задание сохраняет исходный дескриптор мультимедиа
+и политику размера, поэтому вложение, отредактированное позднее, не заменяется незаметно.</p>
+<p>Загрузка запускается после захвата сообщения. По завершении загрузки создаётся запись формата <code>media.saved</code>
+с указанием SHA-256 и количества байтов. Пропущенные, неудачные, повторные и прерванные
+операции имеют отдельные результаты. Нахождение задания в очереди не является доказательством того, что файл был сохранен.
+Завершённый файл также должен соответствовать количеству байтов, указанному в исходном дескрипторе вложения.
+Короткий или неожиданно длинный ответ не регистрируется как сохранённый медиафайл.</p>
+<p>Ограничения устанавливаются <strong>для каждого типа</strong>: фотографии, видео, GIF-файлы и анимации, круговые видеосообщения,
+голосовые сообщения, музыка и аудиозаписи, стикеры и файлы. Каждый тип можно отключить, и для него установлено
+собственное ограничение по размеру от 1 до 2 000 MiB; новые рабочие пространства начинаются с 20 MiB для фотографий,
+100 MiB для видео, 50 MiB для файлов, аудио и круговых видео, 20 MiB для голосовых сообщений и GIF-файлов, а также
+5 МИБ для стикеров. <em>Максимальный размер файла</em> устанавливается для всех типов одновременно. Политики, сохраненные до
+введения ограничений по типам, сохраняют единое ограничение для всех типов. Отключение того или иного типа приводит к созданию
+записи <code>media.skipped</code>; файлы неизвестного размера или превышающие ограничение не загружаются. Для загрузки больших файлов
+устанавливается скорость не менее 256 КиБ/с. Задания сохраняются после перезапуска, однако просроченные ссылки, утраченный
+доступ или удалённые файлы по-прежнему могут препятствовать восстановлению. Существующие задания сохраняют политику, сохраненную
+вместе с ними.</p>
+<h2 id="pause-lock-disconnect-and-restart">Приостановка, блокировка, отключение и перезапуск<a class="anchor" href="#pause-lock-disconnect-and-restart" aria-label="Ссылка на раздел">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Действие или состояние</th>
+<th>Эффект</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Переключить рабочую область</td>
+<td>Изменяет вид панели; состояние других сборщиков данных сохраняется.</td>
+</tr>
+<tr>
+<td>Заблокируйте панель или закройте вкладку</td>
+<td>Сервер и процесс мониторинга продолжают работать.</td>
+</tr>
+<tr>
+<td>Наблюдение с паузой</td>
+<td>Останавливает работу данного сборщика и сохраняет в очереди вложения.</td>
+</tr>
+<tr>
+<td>Отключить источник</td>
+<td>Прекращает будущий захват в заданном диапазоне; задания по обработке мультимедиа, находящиеся в очереди, приостанавливаются на время отключения данного инструмента.</td>
+</tr>
+<tr>
+<td>Удалить источник</td>
+<td>Он игнорирует его как источник и удаляет профили пользователей; уже сохраненные записи остаются в журнале, доступном только для добавления данных. Вложения, которые все ещё находятся в очереди на обработку, регистрируются как неудачные (<code>source_removed</code>). В режимах «папка» и «весь аккаунт» они также исключаются.</td>
+</tr>
+<tr>
+<td>Измените маршрут подключения</td>
+<td>Требует паузы, закрывает старые клиенты и отменяет незавершённый вход в систему.</td>
+</tr>
+<tr>
+<td>Остановите процесс Python</td>
+<td>Приостанавливает работу всех рабочих пространств; в режиме офлайн наблюдения не ведутся.</td>
+</tr>
+<tr>
+<td>Перезапуск после активного наблюдения</td>
+<td>Попытка возобновить работу с сохраненным диапазоном с использованием сохраненной сессии. Ручная пауза отменяет эту попытку.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Коллектор фиксирует обнаруженные обрывы соединения, повторные попытки, ошибки, запуски/остановки и
+сигналы проверки работоспособности. Кратковременные перебои могут быть пропущены при периодической проверке подключения.
+После перезапуска запрашиваются пропущенные обновления, начиная с сохраненной позиции обновления, а
+наблюдаемые чаты периодически перепроверяются; см. <a href="../evidence/#durable-collection-and-process-receipts-02">формат доказательств</a>. Снимок экрана обеспечивает контекст;
+он не доказывает, что пробел был устранен.</p>
+<h2 id="account-isolation-and-verification">Изоляция и верификация учетных записей<a class="anchor" href="#account-isolation-and-verification" aria-label="Ссылка на раздел">#</a></h2>
+<p>Каждая рабочая область имеет собственный журнал, авторизацию, ключ подписи, политику и очередь.
+Только активный клиент данной рабочей области может вносить наблюдения в режиме реального времени. Клиенты со статусом «Отклонено», «В ожидании»,
+«Заменено» и «Тест соединения» не могут записывать обновления в режиме реального времени в журнал данной рабочей области.
+Различные учетные записи могут наблюдать за одной и той же группой, однако их журналы остаются отдельными.</p>
+<p>Каждое событие содержит предыдущий хеш и подпись Ed25519. Экспорт охватывает
+весь журнал рабочего пространства по фиксированному порядковому номеру. Панельные фильтры не влияют на
+содержание экспорта; сбор данных может продолжаться за пределами его границ во время подготовки экспорта.</p>
+<p><strong>Журнал проверки</strong> проверяет цепочку событий и подписи в пределах отображаемого
+диапазона. Его результаты очищаются при смене рабочей области, и панель выделяет
+новые записи, добавленные после проверки. Экспорт в формат ZIP также обеспечивает проверку собранных медиафайлов.</p>
+<p>Действительная подпись подтверждает целостность относительно доверенного ключа, а не происхождение из Telegram
+или достоверность содержания. Храните отпечатки и контрольные точки независимо друг от друга. Ознакомьтесь с
+<a href="../evidence/">моделью доказательств</a>, <a href="../operations/">повседневными операциями</a> и
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">процедурой приёма данных в режиме реального времени</a> для ознакомления с требованиями к доверию и доставке.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/COLLECTION.md">Исправить страницу на GitHub ↗</a><a class="next-guide" href="../operations/"><span>Дальше</span><strong>Работа и обслуживание →</strong></a><p>В данных руководствах описывается текущая реализация. Результаты валидации и остающиеся пробелы документируются отдельно. <a href="../verification/">Что проверено →</a></p></footer>
+</main>
+<aside class="toc" aria-label="На этой странице"><p class="nav-label">На этой странице</p><a href="#from-login-to-a-journal">От входа в систему до журнала</a><a href="#observation-scope-chosen-chats-a-folder-or-the-whole-account">Область наблюдения: выбранные чаты, папка или весь аккаунт</a><a href="#scope-and-event-selection">Объём и выбор событий</a><a href="#own-actions">Собственные действия</a><a href="#investigation-mode-joining-teams-and-talking-to-bots">Режим расследования: присоединение к группам и общение с ботами</a><a href="#recheck-tiers">Уровни повторной проверки</a><a href="#message-history-and-attribution">История сообщений и их авторство</a><a href="#history-snapshots">Снимки истории</a><a href="#attachment-handling">Обработка вложений</a><a href="#pause-lock-disconnect-and-restart">Приостановка, блокировка, отключение и перезапуск</a><a href="#account-isolation-and-verification">Изоляция и верификация учетных записей</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Открытый исходный код · Работает на вашем компьютере</span><a href="../../../../LICENSE">Лицензия MIT</a><a href="../notice/">Уведомление для оператора</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Безопасность</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Ожидание сообщения", "Step through a fictional send, edit and delete.": "Пошаговое руководство по отправке, редактированию и удалению вымышленного сообщения.", "No observations yet. Start the sequence or advance one event.": "Пока нет комментариев. Начните последовательность или перейдите к следующему событию.", "Meet at 10:00": "Встреча в 10:00", "A new message is visible in the chat.": "В чате отображается новое сообщение.", "Record 1 appended: the collector observed the original message.": "Добавлена запись № 1: сборщик данных зафиксировал исходное сообщение.", "Meet at 11:00": "Встреча в 11:00", "The current text changes. The earlier observation stays.": "Текущий текст изменяется. Предыдущее замечание остается в силе.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Запись № 2 добавлена: редактирование представляет собой новое наблюдение. В записи № 1 по-прежнему сохранен исходный текст.", "Message deleted": "Сообщение удалено", "The message has disappeared from the chat view.": "Сообщение исчезло из окна чата.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Приложение «Record 3»: уведомление об удалении сохраняется наряду с обеими зафиксированными версиями.", "0 records": "0 записей", "1 record": "1 запись", "2 records": "2 записи", "3 records": "3 записи", "Complete / {n} of 3": "Завершено / {n} из 3", "Step / {n} of 3": "Шаг / {n} из 3", "Pause": "Пауза", "Replay sequence": "Последовательность воспроизведения", "Play sequence": "Последовательность воспроизведения", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Доступен статический пример. Для интерактивного вычисления хэшей откройте эту страницу по протоколу HTTPS или в локальном превью с поддержкой Web Crypto.", "No record supplied": "Данные не предоставлены", "Tail removed": "Конец текста удалён", "≠ saved hash": "≠ сохраненный хеш", "Rebuilt · different hash": "Переработанная версия · другой хеш", "= saved hash": "= сохраненный хеш", "Same length and matching head.": "Одинаковый объем и соответствующий заголовок.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Все три вычисленных хеша совпадают с сохраненными хешами. Данный образец соответствует установленному ограничению в три записи.", "Same saved head; the journal prefix fails verification.": "Сохраненная заголовочная строка; префикс журнала не проходит проверку.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Запись № 2 больше не совпадает со своим сохраненным хешем. Проверка только конечного сохраненного указателя не позволила бы обнаружить это; верификатор проверяет каждую запись.", "Head differs from the retained checkpoint.": "Заголовок отличается от сохраненного контрольного пункта.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Восстановленные хэши связаны между собой, однако конечный хед изменился. Сохраненная контрольная точка отклоняет данную историю. Исходные подписи также не будут проверяться для измененных записей.", "Too short: 2 supplied records \u003c 3 retained records.": "Слишком мало: 2 предоставленных записи \u003c 3 сохраненных записей.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Два оставшихся хеша по-прежнему совпадают. Сохраненная контрольная точка показывает отсутствующую конечную часть. Без этой более ранней границы один лишь этот более короткий префикс не позволил бы выявить пропуск.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "В данном браузере расчёт хешей недоступен. Приведённые ниже формулы и статическое пояснение остаются доступными.", "{n} records": "{n} записей", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Принято: количество записей увеличивается, подпись подтверждается, а ключ совпадает. Свидетель сохраняет эту новую границу.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Откат: подписанный ответ содержит меньшее количество записей, чем последняя принятая контрольная точка. Система фиксирует проблему и сохраняет предыдущую принятую границу.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Форк: количество не изменилось, но вершина отличается. Свидетель фиксирует разногласие и сохраняет ранее принятую границу.", "No answer": "Ответ отсутствует", "boundary unknown": "предел неизвестен", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Отсутствие ответа: «Witness» фиксирует неудачную проверку. Он не может определить текущее состояние сборщика данных. Если «Witness» по-прежнему имеет доступ к Bot API и это разрешено его политикой публикации, он может опубликовать информацию об этой неудаче.", "Send {n}": "Отправить {n}", "Edit {n}": "Редактировать {n}", "Delete {n}": "Удалить {n}", "Both accounts captured all six expected observations in this example.": "Оба аккаунта зафиксировали все шесть ожидаемых наблюдений в данном примере.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Аккаунт B по-прежнему зафиксировал 6 из 6. Две квитанции были получены с задержкой. Коэффициент фиксации и задержка получения квитанций отвечают на разные вопросы.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Аккаунт B зафиксировал 5 из 6 действий к моменту окончания теста (83,3 %). Отсутствующее редактирование не сопровождалось зафиксированной задержкой. Данный результат отражает только шесть контролируемых действий.", "not observed by cutoff": "не соблюдено к моменту окончания срока", "{s} seconds": "{s} секунд", "Exact values follow in the table.": "Точные значения приведены в таблице ниже.", "{s} s": "{s} s", "Not observed": "Не соблюдается", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "В четырёх чатах приводятся различные наблюдения. Следуйте исходным записям для каждого соединения; не приписывайте сообщение в канале пользователю 71001 без указания отправителя.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Записи № 146 и № 205 содержат один и тот же идентификатор отправителя — 71001. Это позволяет установить связь между замеченными публикациями одного аккаунта Telegram в двух разных чатах. При этом не происходит идентификация реального лица или привязка публикации к конкретному каналу.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Адрес назначения pay.example.invalid/new фигурирует в записи группы № 146, введении с клавиатуры бота № 173, редактировании канала № 188 и личном сообщении № 205. Повторное упоминание адреса назначения связывает эти материалы между собой; однако это не доказывает наличия единого контроля над указанными учетными записями.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "В данном вымышленном деле завершённые квитанции о получении медиафайлов № 151 и № 209 имеют одинаковые полные значения SHA-256. Сравните фактические байты и связанные с ними записи сообщений. Соответствующий файл не позволяет установить его создателя и не подтверждает, кто его переслал.", "the encrypted off-site copy": "зашифрованная внешняя копия", "notifications": "уведомления", "checkpoint hashes for timestamps": "Хэши контрольных точек для временных меток", "signed checkpoints for the witness": "подписанные контрольные точки для TgWitness", "Switched on in this example": "В данном примере включено", "Optional · off by default": "Необязательно · по умолчанию отключено", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "С этого устройства удаляются: подключение к Telegram и {list}. Ничего больше.", "Default: only the Telegram connection leaves this machine.": "По умолчанию: с данного компьютера выходит только соединение с Telegram.", "{done} of {total} done": "{done} из {total} выполнено", "Mark step {n} as done": "Пометить шаг {n} как выполненный", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Текст", "Copied": "Скопировано", "Command copied.": "Команда скопирована.", "Selected — Ctrl/Cmd+C": "Выделено — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Команда выбрана. Скопируйте её вручную.", "Command copied to clipboard.": "Команда скопирована в буфер обмена.", "Select text": "Выделить текст", "Clipboard unavailable. Command selected; copy it manually.": "Буфер обмена недоступен. Команда выбрана; скопируйте её вручную.", "A message arrives. The first observation is saved.": "Поступает сообщение. Первое наблюдение сохраняется.", "The time changes. Both captured versions stay.": "Время меняется. Обе зафиксированные версии сохраняются.", "The message disappears. The captured history remains.": "Сообщение исчезает. Зафиксированная история сохраняется.", "Pause example animation": "Пример анимации «Пауза»", "Play example animation": "Просмотр примера анимации", "Play": "Воспроизвести", "Full-size workspace screenshot": "Снимок экрана рабочей области в полном размере", "Workspace screenshot · fictional data": "Снимок экрана рабочей области · вымышленные данные", "Close": "Закрыть", "Close screenshot": "Закрыть скриншот", "Scrollable full-size screenshot": "Прокручиваемый скриншот в полном размере", "Enlarge: {name}": "Увеличить: {name}", "View full size": "Посмотреть в полном размере"}</script>
+</body></html>

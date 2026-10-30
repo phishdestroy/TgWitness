@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Workflows and operations | TgWitness</title>
+<meta name="description" content="Daily operation of the panel: modes, monitoring categories, parameters, notifications, exports, backup and capacity."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/docs/reference/operations/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Workflows and operations | TgWitness"><meta property="og:description" content="Daily operation of the panel: modes, monitoring categories, parameters, notifications, exports, backup and capacity.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/docs/reference/operations/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/operations/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/operations/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/operations/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/operations/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/operations/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/operations/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/operations/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/operations/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/operations/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/docs/reference/operations/", "url": "https://phishdestroy.github.io/TgWitness/docs/reference/operations/", "name": "Workflows and operations | TgWitness", "description": "Daily operation of the panel: modes, monitoring categories, parameters, notifications, exports, backup and capacity.", "inLanguage": "en", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://phishdestroy.github.io/TgWitness/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://phishdestroy.github.io/TgWitness/docs/"}, {"@type": "ListItem", "position": 3, "name": "Reference", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Workflows and operations", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/operations/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../docs.css">
+<link rel="stylesheet" href="../../../learn.css">
+<script src="../../../docs.js" defer></script>
+<script src="../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Documentation</span></a>
+<nav aria-label="Guides"><a href="../../concepts/">Visual guide</a><a href="../../">All guides</a><a href="../">Reference</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Language"><span aria-hidden="true">◍</span> English</summary><div class="lang-list"><a href="./" hreflang="en" lang="en" aria-current="true">English</a><a href="../../../ru/docs/reference/operations/" hreflang="ru" lang="ru">Русский</a><a href="../../../uk/docs/reference/operations/" hreflang="uk" lang="uk">Українська</a><a href="../../../es/docs/reference/operations/" hreflang="es" lang="es">Español</a><a href="../../../pt/docs/reference/operations/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../tr/docs/reference/operations/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../ar/docs/reference/operations/" hreflang="ar" lang="ar">العربية</a><a href="../../../fa/docs/reference/operations/" hreflang="fa" lang="fa">فارسی</a><a href="../../../ur/docs/reference/operations/" hreflang="ur" lang="ur">اردو</a><a href="../../../hi/docs/reference/operations/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../id/docs/reference/operations/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../vi/docs/reference/operations/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../zh/docs/reference/operations/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Switch between light and dark theme"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Guides"><a href="../../../guides/modes.html">Modes, scenarios and evidence levels</a><p class="nav-label">First steps</p><a href="../../start/">Start in minutes</a><a href="../../accounts/">Connect an account</a><a href="../../proxies/">Choose a proxy</a><a href="../../exports/">Export and verify</a><p class="nav-label">Understand the evidence</p><a href="../../concepts/">See how evidence works</a><a href="../../cases/">Investigate across all chats</a><a href="../../security/">Keep it secure</a><p class="nav-label">Go further</p><a href="../../witness/">Set up a witness bot</a><a href="../../server/">Keep it running</a><a href="../../troubleshooting/">Find what went wrong</a></nav><nav class="wiki-nav" aria-label="Reference"><p class="nav-label"><a class="nav-label-link" href="../">Reference</a></p><details class="wiki-group"><summary>Set up</summary><a href="../quickstart/">Quick start</a><a href="../accounts/">Accounts and session formats</a><a href="../connection/">Connection, proxies and data protection</a><a href="../deployment/">Deployment</a></details><details class="wiki-group" open><summary>Collect</summary><a href="../collection/">How collection works</a><a href="./" aria-current="page">Workflows and operations</a><a href="../investigation/">Investigation mode</a><a href="../features/">Features and limits</a></details><details class="wiki-group"><summary>Evidence</summary><a href="../how-it-works/">How the evidence works</a><a href="../evidence/">Evidence format</a><a href="../witness/">Independent witness</a><a href="../timestamp/">Timestamps</a></details><details class="wiki-group"><summary>Security & project</summary><a href="../security/">Security and data handling</a><a href="../architecture/">Architecture</a><a href="../verification/">What has been tested</a><a href="../license/">Licence and architectural incompatibility notice</a><a href="../notice/">Operator incompatibility notice</a><a href="../changelog/">Changelog</a></details></nav><p class="sidebar-note">v0.7.0<br>Open source · Runs on your machine</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Guides"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Documentation</a> <span aria-hidden="true">/</span> <a href="../">Reference</a> <span aria-hidden="true">/</span> <span aria-current="page">Workflows and operations</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Search the documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Try proxy, hash chain, token or witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Clear search" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Type a word to search the guides and the reference. Search stays in your browser.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Reference / Collect</p><h1>Workflows and operations</h1><p class="guide-outcome">Daily operation of the panel: modes, monitoring categories, parameters, notifications, exports, backup and capacity.</p><div class="wiki-body"><p>For your first connection, use <a href="../accounts/">accounts and session formats</a>.
+For an explanation of saved versions, event policies, and gaps, see
+<a href="../collection/">how collection works</a>. This guide covers daily operation and recovery.</p>
+<h2 id="operator-workflow">Operator workflow<a class="anchor" href="#operator-workflow" aria-label="Link to this section">#</a></h2>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 691 434" width="691" height="434" role="img" aria-labelledby="flow-2-title flow-2-desc"><title id="flow-2-title">Flow diagram</title><desc id="flow-2-desc">Choose storage and key protection → Open the panel with its token; Open the panel with its token → Select a workspace; Select a workspace → Configure Direct or proxy route; Configure Direct or proxy route → Enter phone or choose files / QR; Enter phone or choose files / QR → Check account identity and select accessible groups; Check account identity and select accessible groups → Save event and attachment policies, then start observation; Save event and attachment policies, then start observation → Monitor errors, access, queues and disk; Monitor errors, access, queues and disk → Retain independent checkpoints; Retain independent checkpoints → Export and verify material</desc><defs><marker id="flow-2-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M209.8 37.0C238.0 37.0 238.0 37.0 266.2 37.0" marker-end="url(#flow-2-arrow)" style="--i:0;--len:56" pathLength="56"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M209.8 37.0C238.0 37.0 238.0 37.0 266.2 37.0"/></circle><path class="flow-edge" d="M425.3 37.0C460.3 37.0 460.3 37.0 495.4 37.0" marker-end="url(#flow-2-arrow)" style="--i:1;--len:70" pathLength="70"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M425.3 37.0C460.3 37.0 460.3 37.0 495.4 37.0"/></circle><path class="flow-edge" d="M571.5 57.0C571.5 91.0 571.5 91.0 571.5 125.0" marker-end="url(#flow-2-arrow)" style="--i:2;--len:68" pathLength="68"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M571.5 57.0C571.5 91.0 571.5 91.0 571.5 125.0"/></circle><path class="flow-edge" d="M491.9 154.0C462.1 154.0 462.1 154.0 432.2 154.0" marker-end="url(#flow-2-arrow)" style="--i:3;--len:60" pathLength="60"/><circle class="flow-pulse" r="3.2" style="--i:3"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M491.9 154.0C462.1 154.0 462.1 154.0 432.2 154.0"/></circle><path class="flow-edge" d="M259.3 154.0C234.5 154.0 234.5 154.0 209.8 154.0" marker-end="url(#flow-2-arrow)" style="--i:4;--len:49" pathLength="49"/><circle class="flow-pulse" r="3.2" style="--i:4"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M259.3 154.0C234.5 154.0 234.5 154.0 209.8 154.0"/></circle><path class="flow-edge" d="M119.9 192.0C119.9 217.0 119.9 217.0 119.9 242.0" marker-end="url(#flow-2-arrow)" style="--i:5;--len:50" pathLength="50"/><circle class="flow-pulse" r="3.2" style="--i:5"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M119.9 192.0C119.9 217.0 119.9 217.0 119.9 242.0"/></circle><path class="flow-edge" d="M209.8 280.0C239.7 280.0 239.7 280.0 269.6 280.0" marker-end="url(#flow-2-arrow)" style="--i:6;--len:60" pathLength="60"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M209.8 280.0C239.7 280.0 239.7 280.0 269.6 280.0"/></circle><path class="flow-edge" d="M421.8 280.0C458.6 280.0 458.6 280.0 495.4 280.0" marker-end="url(#flow-2-arrow)" style="--i:7;--len:74" pathLength="74"/><circle class="flow-pulse" r="3.2" style="--i:7"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M421.8 280.0C458.6 280.0 458.6 280.0 495.4 280.0"/></circle><path class="flow-edge" d="M571.5 309.0C571.5 338.5 571.5 338.5 571.5 368.0" marker-end="url(#flow-2-arrow)" style="--i:8;--len:59" pathLength="59"/><circle class="flow-pulse" r="3.2" style="--i:8"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M571.5 309.0C571.5 338.5 571.5 338.5 571.5 368.0"/></circle><g class="flow-node" style="--i:0"><rect x="30.0" y="8.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="28.0">Choose storage and key</tspan><tspan x="119.9" y="46.0">protection</tspan></text></g><g class="flow-node" style="--i:1"><rect x="266.2" y="8.0" width="159.1" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="28.0">Open the panel with</tspan><tspan x="345.7" y="46.0">its token</tspan></text></g><g class="flow-node" style="--i:2"><rect x="495.4" y="17.0" width="152.2" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="37.0">Select a workspace</tspan></text></g><g class="flow-node" style="--i:3"><rect x="491.9" y="125.0" width="159.1" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="145.0">Configure Direct or</tspan><tspan x="571.5" y="163.0">proxy route</tspan></text></g><g class="flow-node" style="--i:4"><rect x="259.3" y="125.0" width="172.9" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="145.0">Enter phone or choose</tspan><tspan x="345.7" y="163.0">files / QR</tspan></text></g><g class="flow-node" style="--i:5"><rect x="30.0" y="116.0" width="179.8" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="136.0">Check account identity</tspan><tspan x="119.9" y="154.0">and select accessible</tspan><tspan x="119.9" y="172.0">groups</tspan></text></g><g class="flow-node" style="--i:6"><rect x="30.0" y="242.0" width="179.8" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="262.0">Save event and</tspan><tspan x="119.9" y="280.0">attachment policies,</tspan><tspan x="119.9" y="298.0">then start observation</tspan></text></g><g class="flow-node" style="--i:7"><rect x="269.6" y="242.0" width="152.2" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="262.0">Monitor errors,</tspan><tspan x="345.7" y="280.0">access, queues and</tspan><tspan x="345.7" y="298.0">disk</tspan></text></g><g class="flow-node" style="--i:8"><rect x="495.4" y="251.0" width="152.2" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="271.0">Retain independent</tspan><tspan x="571.5" y="289.0">checkpoints</tspan></text></g><g class="flow-node" style="--i:9"><rect x="498.9" y="368.0" width="145.3" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="388.0">Export and verify</tspan><tspan x="571.5" y="406.0">material</tspan></text></g></svg></div><details class="flow-steps"><summary>Diagram as text</summary><ol><li>Choose storage and key protection → Open the panel with its token</li><li>Open the panel with its token → Select a workspace</li><li>Select a workspace → Configure Direct or proxy route</li><li>Configure Direct or proxy route → Enter phone or choose files / QR</li><li>Enter phone or choose files / QR → Check account identity and select accessible groups</li><li>Check account identity and select accessible groups → Save event and attachment policies, then start observation</li><li>Save event and attachment policies, then start observation → Monitor errors, access, queues and disk</li><li>Monitor errors, access, queues and disk → Retain independent checkpoints</li><li>Retain independent checkpoints → Export and verify material</li></ol></details></figure>
+<p>Authorization, transport connectivity, access to a group and completeness of
+delivery are different properties. A green connection status does not imply all
+events have been captured.</p>
+<h2 id="modes">Modes<a class="anchor" href="#modes" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Action</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Demo</td>
+<td>scripts\Demo.cmd or <code>--demo</code></td>
+<td>Synthetic data; real account connections disabled</td>
+</tr>
+<tr>
+<td>Observation</td>
+<td>Start observation</td>
+<td>Record delivered updates for selected sources</td>
+</tr>
+<tr>
+<td>History snapshot</td>
+<td>Sources → history snapshot</td>
+<td>Up to 500 current messages; no reconstruction of all past changes</td>
+</tr>
+<tr>
+<td>Pause</td>
+<td>Pause observation</td>
+<td>Stop collection while retaining data and queued jobs</td>
+</tr>
+<tr>
+<td>Review/handoff</td>
+<td>Exports</td>
+<td>ZIP, JSONL/CSV/HTML, checkpoint, process receipt and timestamp request</td>
+</tr>
+<tr>
+<td>Multiple accounts</td>
+<td>Workspaces or the top <strong>+</strong> button</td>
+<td>Any number of separate workspaces in one process</td>
+</tr>
+</tbody>
+</table></div>
+<p>Local demo access opens automatically without manual token entry. It uses a
+process-lifetime capability valid only for direct loopback access to an isolated
+synthetic demo; the main panel token is not disclosed. Real workspaces and remote
+or proxied demo access retain token authentication. Demo entry grants no Telegram authorization.</p>
+<h2 id="monitoring-categories">Monitoring categories<a class="anchor" href="#monitoring-categories" aria-label="Link to this section">#</a></h2>
+<p><img alt="Per-account monitoring settings with synthetic source data" src="../../../assets/sources.png" /></p>
+<p>In <strong>Sources → Capture settings → Choose which changes to preserve</strong>, select new messages, edits,
+deletion notices, reaction updates and membership events independently. The default
+retains all categories. <strong>Messages, edits &amp; deletions</strong> keeps the original context
+while disabling separate reaction/member updates. <strong>All visible activity</strong> restores
+all five. Presets change the form; press <strong>Save monitoring settings</strong> to apply.</p>
+<p>The saved policy applies to all selected sources in that workspace. Other
+workspaces retain their own settings. Each actual change records signed before/after
+values; the current policy is also included in process receipts and observation
+start records. Disabling a category does not delete earlier observations. Re-enabling
+does not retrieve missed changes. There is no per-group category override in this version.</p>
+<p>Keep new messages enabled when prior content matters: a deletion notice cannot
+recover text that was never captured. Operational/coverage records and other group
+service events are always retained. Explicit history snapshots are separate from
+live-category selection and may include service messages. These switches do not
+redact reaction/member metadata embedded in an otherwise captured Telegram object.</p>
+<p>A history snapshot may queue attachments while paused. Start observation to process
+them. Queued does not mean downloaded. An unavailable original file is not replaced
+with a newer edited version; outcomes are recorded separately.</p>
+<p><strong>Lock</strong> clears browser access and secret fields but leaves collection running.
+Closing a tab also leaves the process running. Stopping the Python process or service
+stops collection regardless of the browser state.</p>
+<p>Deleting an additional workspace stops its collector and removes its local data. If a
+locked file or filesystem error interrupts removal, the panel reports the failure and
+keeps the workspace listed as unavailable (<code>DeletionPending</code>). Close programs holding its
+files and retry <strong>Delete</strong>. Restarting TgWitness leaves that workspace stopped and does
+not recreate its partially removed journal or keys. A successful deletion is recorded
+only after the directory has been removed; separately exported or backed-up copies remain
+under their own retention policy.</p>
+<h2 id="notifications">Notifications<a class="anchor" href="#notifications" aria-label="Link to this section">#</a></h2>
+<p>Open <strong>Sources → Notifications → Alerts and a daily summary</strong>. TgWitness uses
+Apprise to send alerts to Matrix, Telegram, Discord, Slack, ntfy, email and other
+supported services. You can add several destinations to one workspace.</p>
+<ol>
+<li>Enter one Apprise destination URL per line. Use the
+    <a href="https://appriseit.com/services/">service catalogue and URL formats</a> for your service.</li>
+<li>Turn on <strong>Send notifications</strong>, then choose problem alerts, changes in observed
+    chats and a daily summary. The summary hour uses the server's time.</li>
+<li>Turn on <strong>Include short excerpts</strong> if you want saved text from deleted and edited
+    messages in the alerts.</li>
+<li>Press <strong>Save notifications</strong>, then <strong>Send test</strong> to check delivery.</li>
+</ol>
+<p>For your own receiver, use Apprise's <a href="https://appriseit.com/services/json/">JSON webhook</a>.
+For example, <code>jsons://notify.example.org/tgwitness</code> sends JSON over HTTPS to that
+endpoint. This is a fictional example; replace it with your own destination.</p>
+<p>Destinations and settings belong to the selected workspace. Change notifications
+cover its observed sources, including newly added chats. The bell in the top bar
+also lists recent problems and chat changes.</p>
+<p>In the demo, the notification controls are visible but sending is disabled. Configure
+delivery in a real workspace. Notifications use that workspace's Direct, SOCKS5 or
+HTTP route; MTProxy cannot carry them. Non-HTTP destinations such as SMTP require
+a direct route.</p>
+<h2 id="panel-layout">Panel layout<a class="anchor" href="#panel-layout" aria-label="Link to this section">#</a></h2>
+<p><img alt="Connection workspace using synthetic data" src="../../../assets/connection.png" /></p>
+<p><strong>Journal</strong> shows observations, search and filters. An edit opens captured versions;
+a deletion opens prior content if available. Unknown attribution remains explicit.
+Counts are available under <strong>Overview</strong>; acquisition details stay in the local guide.</p>
+<p><strong>Sources</strong> contains the observation scope (chosen chats, a Telegram folder or the whole
+account), accessible chats of every type, selected sources with priority stars, attachment
+and recheck settings and history snapshots. Private sources are selected by dialog/ID
+without a public link. Access status describes the most recent check, not permanent permissions.</p>
+<p><strong>Chats → People</strong> lists everyone with saved messages; with people profiles switched on
+for the chat, a click opens that person's profile with links to the journal records.</p>
+<p><strong>Witness</strong> creates read-only witness tokens, shows when each witness last checked and
+gives the commands and options to run one (<a href="../witness/">independent witness</a>).</p>
+<p><strong>Parameters</strong> holds every limit and pace of the workspace that is not on another page:
+how many dialogs are read, how often the chat list is re-read, heartbeat and checkpoint
+intervals, the startup buffer, how rechecks spread their requests (first delay, chats per
+pass, pause between chats, messages recovered and re-requested), disk reserve, timeouts and
+retries of downloads, what people profiles look for (including your own regular expressions),
+size and pace of notifications, snapshot, ZIP and browser-download limits, and Telegram
+client timeouts and retries. Each field shows its range and default; changed fields are
+marked and can be restored one by one or all together. Every change is recorded as
+<code>parameters.changed</code> with the values before and after, and observation start records name
+the values in force. Values apply from their next use; client timeouts and retries from the
+next connection. Recheck intervals, attachment types and sizes, evidence and off-site copy
+intervals stay on their own pages and take any value in their range, not only presets.</p>
+<p>The bell in the top bar lists recent problems and changes in observed chats; unread ones
+are counted until marked as read. Changes are grouped per chat and hour ("12 deleted,
+1 edited, 0 not found"), and problems such as a sign-out or a full disk stay in the list
+however busy the chats are.</p>
+<p><strong>Account</strong> starts on the phone-number field. <strong>Continue</strong> leads directly to
+code entry, asking for API credentials only when missing. QR and file import are
+alternative tabs. Saved API credentials are reused only within their own workspace.
+The entry screen has no sidebar, statistics, or setup paragraphs. The <strong>Settings</strong>
+icon opens API, proxy, storage, and additional-account controls. New installations
+start here; connected accounts with no selected sources start on <strong>Choose chats</strong>.
+Changing the route requires paused observation and cancels unfinished login. An existing
+journal cannot be silently rebound to a different Telegram account.</p>
+<p><strong>Exports</strong> checks journal integrity and produces portable files. Its workspace ID
+can be passed to the download CLI. Every export pins a full journal prefix; later
+events enter a subsequent export. Search filters do not change the package scope.
+Detailed signing and coverage information is under <strong>Verification &amp; limitations</strong>.</p>
+<p>The panel reports collector state, queued/failed media, oldest pending media, free
+disk, request pauses and sources whose access is unconfirmed under <strong>Collector
+health</strong>. These details are collapsed initially and hidden on Account. A setup
+card shows the next step: connect an account, choose sources, or start observation.
+The account list is a load-time snapshot;
+the selected workspace refreshes periodically. This is not a multi-process SLA monitor.</p>
+<p>The UI uses local assets and text rendering for source content. Desktop and narrow
+Chromium layouts are tested. This is not a complete accessibility certification;
+screen-reader and human usability evaluation remain separate work.</p>
+<h2 id="deployment-environments">Deployment environments<a class="anchor" href="#deployment-environments" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Environment</th>
+<th>Installation</th>
+<th>Verification status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows PC/server</td>
+<td>Python 3.11+, scripts\Setup.cmd/Start.cmd, private data directory</td>
+<td>Locally checked on Windows/Python 3.12</td>
+</tr>
+<tr>
+<td>Linux server/VPS</td>
+<td>Python venv, dedicated service user, HTTPS/SSH</td>
+<td>Code, CI and systemd example provided; not executed on this host</td>
+</tr>
+<tr>
+<td>macOS</td>
+<td>Python venv, foreground process or user agent</td>
+<td>launchd example provided; separate installation check needed</td>
+</tr>
+<tr>
+<td>Docker/Compose</td>
+<td>Persistent volume, one worker</td>
+<td>Definition and CI runtime check provided; Docker unavailable locally</td>
+</tr>
+<tr>
+<td>Phone browser</td>
+<td>Connect to the protected panel on a running server</td>
+<td>Narrow Chromium layout tested; collector does not run on iOS/Android</td>
+</tr>
+</tbody>
+</table></div>
+<p>Portability means no mandatory cloud service or frontend build. Each target still
+needs compatible Python/crypto dependencies, local disk and network access. See
+<a href="../deployment/">DEPLOYMENT.md</a> and <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">service templates</a>.</p>
+<p>Workspaces share CPU, memory and an event loop. For process isolation, use distinct
+instances, ports, data directories and account authorizations. There is no unified
+panel across separate instances. Never point several workers at one database.</p>
+<h2 id="startup-checks-and-exports">Startup checks and exports<a class="anchor" href="#startup-checks-and-exports" aria-label="Link to this section">#</a></h2>
+<p>Run <code>python start.py --check</code> before starting a prepared environment. Add <code>--json</code>
+for machine-readable checks or pass the intended <code>--data-dir</code>, <code>--host</code> and <code>--port</code>.
+The command checks prerequisites without Telegram login or creating a journal.
+It does not verify a journal or prove capture readiness; journal verification runs
+during application startup. An occupied port may simply be an existing instance.</p>
+<p>Browsers supporting the File System Access API save exports through a writable
+stream. Other browsers buffer at most 128 MiB. Use the streaming CLI for larger
+exports or browsers without file streaming:</p>
+<pre><code class="language-sh">python -m tgwitness.download --token-file data/live/panel-token.txt --out evidence.zip</code></pre>
+<p>Add <code>--profile ID</code> from Exports for a child workspace. Use <code>--url https://server</code>
+for remote access. Plain HTTP is accepted only for loopback destinations. The token
+is read from a file and sent in a header, not printed or put in a URL. Redirects are
+refused. Existing destinations are not overwritten. Failed transfers remove their
+temporary part file. The reported SHA-256 is a transfer checksum; verify the signed
+ZIP separately with a trusted fingerprint/checkpoint.</p>
+<h2 id="backup-restore-and-interruptions">Backup, restore and interruptions<a class="anchor" href="#backup-restore-and-interruptions" aria-label="Link to this section">#</a></h2>
+<ol>
+<li>Pause observation and stop the process cleanly.</li>
+<li>Copy the entire data directory: databases, WAL/SHM if present, media,
+    <code>credentials.enc</code>, <code>signing.enc</code>, <code>network.enc</code>, vault keys/metadata, token,
+    checkpoints and every <code>profiles/</code> directory.</li>
+<li>For external-key mode, separately preserve the master key and retain each
+    <code>vault.external.json</code>. Generating a new key cannot recover the old secrets.</li>
+<li>Restore while the destination is stopped; configure the original key, restrict
+    access, and verify integrity before resuming.</li>
+<li>Record downtime and verification results. A history snapshot cannot prove that
+    no deletions happened during the interruption.</li>
+</ol>
+<p>Evidence ZIPs exclude sessions/private keys and are not full service backups.
+Four things are protected differently:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>What</th>
+<th>Protection</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Export files without a password (the default)</td>
+<td>Not encrypted. Signed, so changes are detectable, but anyone holding the file can read it</td>
+</tr>
+<tr>
+<td>Export files with a password</td>
+<td>If you set a password, the finished export goes unchanged into a WinZip AES-256 ZIP that 7-Zip and WinRAR open; the password is not stored (<a href="../evidence/">evidence handling</a>)</td>
+</tr>
+<tr>
+<td>The journal database and saved attachments on disk</td>
+<td>Not encrypted by TgWitness; use an encrypted disk or volume</td>
+</tr>
+<tr>
+<td>Telegram sessions and signing keys</td>
+<td>Encrypted in the data directory (<code>credentials.enc</code>, <code>signing.enc</code>, <code>network.enc</code>)</td>
+</tr>
+</tbody>
+</table></div>
+<p>A full service backup is the stopped data directory described above, not an export.
+Use protected storage and a deliberate transfer mechanism for both. Temporary server exports live in each workspace's
+<code>temporary-exports/</code>; completed responses are cleaned up, and interrupted export
+files are removed on the next startup while that workspace's instance lock is held.</p>
+<p>A connection-restored event does not guarantee recovery of intermediate changes.
+Persistent media jobs and the Telegram update position survive restart; see
+<a href="../evidence/#durable-collection-and-process-receipts-02">evidence format</a>.</p>
+<h2 id="capacity-and-retention">Capacity and retention<a class="anchor" href="#capacity-and-retention" aria-label="Link to this section">#</a></h2>
+<p>Default limits, all changeable under <strong>Parameters</strong>: the first 1,000 dialogs, 500 messages
+per snapshot, 4 GiB uncompressed signed ZIP content (larger archives need
+<code>verify.py --max-gib N</code>) and a 128 MiB browser fallback. Attachments take 1–2,000 MiB per
+type under <strong>Sources → Attachments</strong>. The download CLI defaults to 5 GiB transferred. Available disk can be a
+lower limit. Reserve space for journals, media, WAL, temporary exports and backups.
+Exports use the data volume rather than Compose's 512 MiB <code>/tmp</code>.</p>
+<p>Measure events/second, queue age, media bytes and disk latency rather than counting
+groups alone. Synthetic local benchmarks do not guarantee Telegram delivery.
+There is no automatic retention deletion. Removing a journal tail invalidates its
+relationship to retained checkpoints.</p>
+<p>Priority rechecks already exist: starred sources are rechecked every 15 minutes by default,
+others every 6 hours (see <a href="../collection/#recheck-tiers">recheck tiers</a>). Password-protected
+exports exist as described above. Live Telegram/proxy acceptance, durable replay,
+admin-log and reaction polling, isolated workers, encryption of the local journal and media
+by TgWitness itself, user roles and independent review remain separate work. See
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/READINESS.md">READINESS.md</a>, <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">LIVE_ACCEPTANCE.md</a> and
+<a href="../verification/">VERIFICATION.md</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/OPERATIONS.md">Edit this page on GitHub ↗</a><a class="next-guide" href="../investigation/"><span>Next step</span><strong>Investigation mode →</strong></a><p>These guides describe the current implementation. Validation results and remaining gaps are documented separately. <a href="../verification/">What has been tested →</a></p></footer>
+</main>
+<aside class="toc" aria-label="On this page"><p class="nav-label">On this page</p><a href="#operator-workflow">Operator workflow</a><a href="#modes">Modes</a><a href="#monitoring-categories">Monitoring categories</a><a href="#notifications">Notifications</a><a href="#panel-layout">Panel layout</a><a href="#deployment-environments">Deployment environments</a><a href="#startup-checks-and-exports">Startup checks and exports</a><a href="#backup-restore-and-interruptions">Backup, restore and interruptions</a><a href="#capacity-and-retention">Capacity and retention</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Open source · Runs on your machine</span><a href="../../../LICENSE">MIT license</a><a href="../notice/">Operator notice</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Security</a></footer>
+<script id="site-dict" type="application/json">{}</script>
+</body></html>

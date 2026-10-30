@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="es" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Flujos de trabajo y operaciones | TgWitness</title>
+<meta name="description" content="Funcionamiento diario del panel: modos, categorías de supervisión, parámetros, notificaciones, exportaciones, copias de seguridad y capacidad."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/operations/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="Flujos de trabajo y operaciones | TgWitness"><meta property="og:description" content="Funcionamiento diario del panel: modos, categorías de supervisión, parámetros, notificaciones, exportaciones, copias de seguridad y capacidad.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/es/docs/reference/operations/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/operations/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/operations/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/operations/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/operations/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/operations/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/operations/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/operations/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/operations/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/operations/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/es/docs/reference/operations/", "url": "https://phishdestroy.github.io/TgWitness/es/docs/reference/operations/", "name": "Flujos de trabajo y operaciones | TgWitness", "description": "Funcionamiento diario del panel: modos, categorías de supervisión, parámetros, notificaciones, exportaciones, copias de seguridad y capacidad.", "inLanguage": "es", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://phishdestroy.github.io/TgWitness/es/"}, {"@type": "ListItem", "position": 2, "name": "Documentación", "item": "https://phishdestroy.github.io/TgWitness/es/docs/"}, {"@type": "ListItem", "position": 3, "name": "Referencia", "item": "https://phishdestroy.github.io/TgWitness/es/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Flujos de trabajo y operaciones", "item": "https://phishdestroy.github.io/TgWitness/es/docs/reference/operations/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Ir al contenido</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Documentación</span></a>
+<nav aria-label="Guías"><a href="../../concepts/">Guía visual</a><a href="../../">Todas las guías</a><a href="../">Referencia</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Idioma"><span aria-hidden="true">◍</span> Español</summary><div class="lang-list"><a href="../../../../docs/reference/operations/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/operations/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/operations/" hreflang="uk" lang="uk">Українська</a><a href="./" hreflang="es" lang="es" aria-current="true">Español</a><a href="../../../../pt/docs/reference/operations/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/operations/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/operations/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/operations/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/operations/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/operations/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/operations/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/operations/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/operations/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Cambiar entre el tema claro y el oscuro"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Guías"><a href="../../../guides/modes.html">Modos, escenarios y niveles de evidencia</a><p class="nav-label">Primeros pasos</p><a href="../../start/">Empiece en cuestión de minutos</a><a href="../../accounts/">Conecte una cuenta</a><a href="../../proxies/">Elija un proxy</a><a href="../../exports/">Exportar y verificar</a><p class="nav-label">Comprender las pruebas</p><a href="../../concepts/">Vea cómo funciona el registro de pruebas</a><a href="../../cases/">Investigue en todos los chats</a><a href="../../security/">Mantenga la seguridad</a><p class="nav-label">Más información</p><a href="../../witness/">Configurar un bot de TgWitness</a><a href="../../server/">Manténgala en funcionamiento</a><a href="../../troubleshooting/">Averigüe qué ha fallado</a></nav><nav class="wiki-nav" aria-label="Referencia"><p class="nav-label"><a class="nav-label-link" href="../">Referencia</a></p><details class="wiki-group"><summary>Configuración</summary><a href="../quickstart/">Inicio rápido</a><a href="../accounts/">Formatos de cuentas y sesiones</a><a href="../connection/">Conexión, servidores proxy y protección de datos</a><a href="../deployment/">Implementación</a></details><details class="wiki-group" open><summary>Recopilar</summary><a href="../collection/">Cómo funciona la recopilación</a><a href="./" aria-current="page">Flujos de trabajo y operaciones</a><a href="../investigation/">Modo de investigación</a><a href="../features/">Características y limitaciones</a></details><details class="wiki-group"><summary>Pruebas</summary><a href="../how-it-works/">Cómo funciona el registro de pruebas</a><a href="../evidence/">Formato de las pruebas</a><a href="../witness/">Testigo independiente</a><a href="../timestamp/">Marcas de tiempo</a></details><details class="wiki-group"><summary>Seguridad y proyecto</summary><a href="../security/">Seguridad y tratamiento de datos</a><a href="../architecture/">Arquitectura</a><a href="../verification/">Lo que se ha probado</a><a href="../license/">Aviso sobre incompatibilidades de licencia y arquitectura</a><a href="../notice/">Aviso de incompatibilidad con algunos operadores</a><a href="../changelog/">Registro de cambios</a></details></nav><p class="sidebar-note">v0.7.0<br>Código abierto · Se ejecuta en su equipo</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Guías"><a href="../../../">Inicio</a> <span aria-hidden="true">/</span> <a href="../../">Documentación</a> <span aria-hidden="true">/</span> <a href="../">Referencia</a> <span aria-hidden="true">/</span> <span aria-current="page">Flujos de trabajo y operaciones</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Buscar en la documentación</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Pruebe con «proxy», «cadena de hash», «token» o «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Búsqueda clara" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Escriba una palabra para buscar en las guías y en la documentación de referencia. La búsqueda se realiza en su navegador.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Referencia / Recopilar</p><h1>Flujos de trabajo y operaciones</h1><p class="guide-outcome">Funcionamiento diario del panel: modos, categorías de supervisión, parámetros, notificaciones, exportaciones, copias de seguridad y capacidad.</p><div class="wiki-body"><p>Para su primera conexión, utilice <a href="../accounts/">las cuentas y los formatos de sesión</a>.
+Para obtener una explicación sobre las versiones guardadas, las políticas de eventos y las lagunas, consulte
+<a href="../collection/">cómo funciona la recopilación</a>. Esta guía abarca el funcionamiento diario y la recuperación.</p>
+<h2 id="operator-workflow">Flujo de trabajo del operador<a class="anchor" href="#operator-workflow" aria-label="Enlace a esta sección">#</a></h2>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 691 506" width="691" height="506" role="img" aria-labelledby="flow-2-title flow-2-desc"><title id="flow-2-title">Diagrama de flujo</title><desc id="flow-2-desc">Elija el almacenamiento y la protección de claves → Abra el panel con su token; Abra el panel con su token → Seleccione un espacio de trabajo; Seleccione un espacio de trabajo → Configurar ruta directa o a través de un proxy; Configurar ruta directa o a través de un proxy → Introduzca su número de teléfono o seleccione archivos / código QR; Introduzca su número de teléfono o seleccione archivos / código QR → Compruebe la identidad de la cuenta y seleccione los grupos a los que tiene acceso; Compruebe la identidad de la cuenta y seleccione los grupos a los que tiene acceso → Guarde las políticas de eventos y archivos adjuntos y, a continuación, inicie la observación; Guarde las políticas de eventos y archivos adjuntos y, a continuación, inicie la observación → Supervisar errores, accesos, colas y espacio en disco; Supervisar errores, accesos, colas y espacio en disco → Mantener puntos de control independientes; Mantener puntos de control independientes → Exportar y verificar el material</desc><defs><marker id="flow-2-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M202.9 46.0C232.8 46.0 232.8 46.0 262.7 46.0" marker-end="url(#flow-2-arrow)" style="--i:0;--len:60" pathLength="60"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M202.9 46.0C232.8 46.0 232.8 46.0 262.7 46.0"/></circle><path class="flow-edge" d="M428.7 46.0C456.9 46.0 456.9 46.0 485.1 46.0" marker-end="url(#flow-2-arrow)" style="--i:1;--len:56" pathLength="56"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M428.7 46.0C456.9 46.0 456.9 46.0 485.1 46.0"/></circle><path class="flow-edge" d="M571.5 75.0C571.5 109.0 571.5 109.0 571.5 143.0" marker-end="url(#flow-2-arrow)" style="--i:2;--len:68" pathLength="68"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M571.5 75.0C571.5 109.0 571.5 109.0 571.5 143.0"/></circle><path class="flow-edge" d="M485.1 181.0C458.6 181.0 458.6 181.0 432.2 181.0" marker-end="url(#flow-2-arrow)" style="--i:3;--len:53" pathLength="53"/><circle class="flow-pulse" r="3.2" style="--i:3"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M485.1 181.0C458.6 181.0 458.6 181.0 432.2 181.0"/></circle><path class="flow-edge" d="M259.3 181.0C234.5 181.0 234.5 181.0 209.8 181.0" marker-end="url(#flow-2-arrow)" style="--i:4;--len:49" pathLength="49"/><circle class="flow-pulse" r="3.2" style="--i:4"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M259.3 181.0C234.5 181.0 234.5 181.0 209.8 181.0"/></circle><path class="flow-edge" d="M119.9 228.0C119.9 253.0 119.9 253.0 119.9 278.0" marker-end="url(#flow-2-arrow)" style="--i:5;--len:50" pathLength="50"/><circle class="flow-pulse" r="3.2" style="--i:5"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M119.9 228.0C119.9 253.0 119.9 253.0 119.9 278.0"/></circle><path class="flow-edge" d="M206.4 334.0C236.3 334.0 236.3 334.0 266.2 334.0" marker-end="url(#flow-2-arrow)" style="--i:6;--len:60" pathLength="60"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M206.4 334.0C236.3 334.0 236.3 334.0 266.2 334.0"/></circle><path class="flow-edge" d="M425.3 334.0C453.4 334.0 453.4 334.0 481.6 334.0" marker-end="url(#flow-2-arrow)" style="--i:7;--len:56" pathLength="56"/><circle class="flow-pulse" r="3.2" style="--i:7"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M425.3 334.0C453.4 334.0 453.4 334.0 481.6 334.0"/></circle><path class="flow-edge" d="M571.5 363.0C571.5 401.5 571.5 401.5 571.5 440.0" marker-end="url(#flow-2-arrow)" style="--i:8;--len:77" pathLength="77"/><circle class="flow-pulse" r="3.2" style="--i:8"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M571.5 363.0C571.5 401.5 571.5 401.5 571.5 440.0"/></circle><g class="flow-node" style="--i:0"><rect x="36.9" y="8.0" width="166.0" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="28.0">Elija el</tspan><tspan x="119.9" y="46.0">almacenamiento y la</tspan><tspan x="119.9" y="64.0">protección de claves</tspan></text></g><g class="flow-node" style="--i:1"><rect x="262.7" y="17.0" width="166.0" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="37.0">Abra el panel con su</tspan><tspan x="345.7" y="55.0">token</tspan></text></g><g class="flow-node" style="--i:2"><rect x="485.1" y="17.0" width="172.9" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="37.0">Seleccione un espacio</tspan><tspan x="571.5" y="55.0">de trabajo</tspan></text></g><g class="flow-node" style="--i:3"><rect x="485.1" y="143.0" width="172.9" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="163.0">Configurar ruta</tspan><tspan x="571.5" y="181.0">directa o a través de</tspan><tspan x="571.5" y="199.0">un proxy</tspan></text></g><g class="flow-node" style="--i:4"><rect x="259.3" y="134.0" width="172.9" height="94.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="154.0">Introduzca su número</tspan><tspan x="345.7" y="172.0">de teléfono o</tspan><tspan x="345.7" y="190.0">seleccione archivos /</tspan><tspan x="345.7" y="208.0">código QR</tspan></text></g><g class="flow-node" style="--i:5"><rect x="30.0" y="134.0" width="179.8" height="94.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="154.0">Compruebe la identidad</tspan><tspan x="119.9" y="172.0">de la cuenta y</tspan><tspan x="119.9" y="190.0">seleccione los grupos</tspan><tspan x="119.9" y="208.0">a los que tiene acceso</tspan></text></g><g class="flow-node" style="--i:6"><rect x="33.5" y="278.0" width="172.9" height="112.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="298.0">Guarde las políticas</tspan><tspan x="119.9" y="316.0">de eventos y archivos</tspan><tspan x="119.9" y="334.0">adjuntos y, a</tspan><tspan x="119.9" y="352.0">continuación, inicie</tspan><tspan x="119.9" y="370.0">la observación</tspan></text></g><g class="flow-node" style="--i:7"><rect x="266.2" y="296.0" width="159.1" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="316.0">Supervisar errores,</tspan><tspan x="345.7" y="334.0">accesos, colas y</tspan><tspan x="345.7" y="352.0">espacio en disco</tspan></text></g><g class="flow-node" style="--i:8"><rect x="481.6" y="305.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="325.0">Mantener puntos de</tspan><tspan x="571.5" y="343.0">control independientes</tspan></text></g><g class="flow-node" style="--i:9"><rect x="488.5" y="440.0" width="166.0" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="460.0">Exportar y verificar</tspan><tspan x="571.5" y="478.0">el material</tspan></text></g></svg></div><details class="flow-steps"><summary>Diagrama en formato de texto</summary><ol><li>Elija el almacenamiento y la protección de claves → Abra el panel con su token</li><li>Abra el panel con su token → Seleccione un espacio de trabajo</li><li>Seleccione un espacio de trabajo → Configurar ruta directa o a través de un proxy</li><li>Configurar ruta directa o a través de un proxy → Introduzca su número de teléfono o seleccione archivos / código QR</li><li>Introduzca su número de teléfono o seleccione archivos / código QR → Compruebe la identidad de la cuenta y seleccione los grupos a los que tiene acceso</li><li>Compruebe la identidad de la cuenta y seleccione los grupos a los que tiene acceso → Guarde las políticas de eventos y archivos adjuntos y, a continuación, inicie la observación</li><li>Guarde las políticas de eventos y archivos adjuntos y, a continuación, inicie la observación → Supervisar errores, accesos, colas y espacio en disco</li><li>Supervisar errores, accesos, colas y espacio en disco → Mantener puntos de control independientes</li><li>Mantener puntos de control independientes → Exportar y verificar el material</li></ol></details></figure>
+<p>La autorización, la conectividad de la red, el acceso a un grupo y la integridad de la
+entrega son propiedades distintas. Un estado de conexión verde no implica que se hayan capturado todos los
+eventos.</p>
+<h2 id="modes">Modos<a class="anchor" href="#modes" aria-label="Enlace a esta sección">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Modo</th>
+<th>Acción</th>
+<th>Comportamiento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Demostración</td>
+<td>scripts\Demo.cmd o <code>--demo</code></td>
+<td>Datos sintéticos; conexiones con cuentas reales desactivadas</td>
+</tr>
+<tr>
+<td>Observación</td>
+<td>Iniciar la observación</td>
+<td>Registre las actualizaciones recibidas de las fuentes seleccionadas</td>
+</tr>
+<tr>
+<td>Instantánea del historial</td>
+<td>Fuentes → instantánea del historial</td>
+<td>Hasta 500 mensajes actuales; no se reconstruyen todos los cambios anteriores.</td>
+</tr>
+<tr>
+<td>Pausa</td>
+<td>Observación de pausa</td>
+<td>Detener la recopilación conservando los datos y los trabajos en cola</td>
+</tr>
+<tr>
+<td>Revisión/entrega</td>
+<td>Exportaciones</td>
+<td>ZIP, JSONL/CSV/HTML, punto de control, acuse de recibo del proceso y solicitud de marca de tiempo</td>
+</tr>
+<tr>
+<td>Cuentas múltiples</td>
+<td>Espacios de trabajo o el botón superior «<strong>+</strong>»</td>
+<td>Cualquier número de espacios de trabajo independientes en un único proceso</td>
+</tr>
+</tbody>
+</table></div>
+<p>El acceso a la demostración local se abre automáticamente sin necesidad de introducir un token manualmente. Utiliza una
+capacidad válida durante la vida útil del proceso, exclusiva para el acceso directo de bucle cerrado a una
+demostración sintética aislada; el token del panel principal no se revela. Los espacios de trabajo reales y el acceso a la demostración de forma remota
+o a través de un proxy mantienen la autenticación mediante token. El acceso a la demostración no otorga ninguna autorización de Telegram.</p>
+<h2 id="monitoring-categories">Categorías de seguimiento<a class="anchor" href="#monitoring-categories" aria-label="Enlace a esta sección">#</a></h2>
+<p><img alt="Configuración de supervisión por cuenta con datos de origen sintéticos" src="../../../../assets/sources.png" /></p>
+<p>En <strong>Fuentes → Configuración de captura → Elegir qué cambios conservar</strong>, seleccione de forma independiente los mensajes nuevos, las modificaciones,
+los avisos de eliminación, las actualizaciones de reacciones y los eventos de pertenencia a grupos. La configuración predeterminada
+conserva todas las categorías. La opción <strong>«Mensajes, modificaciones y eliminaciones»</strong> mantiene el contexto original
+mientras desactiva las actualizaciones independientes de reacciones y miembros. <strong>«Toda la actividad visible</strong>» restaura
+las cinco opciones. Los ajustes preestablecidos modifican el formato; pulse <strong>«Guardar configuración de supervisión»</strong> para aplicarlos.</p>
+<p>La política guardada se aplica a todas las fuentes seleccionadas en ese espacio de trabajo. Los demás
+espacios de trabajo conservan su propia configuración. Cada cambio real registra los valores firmados «antes» y «después»
+; la política actual también se incluye en los recibos de proceso y en los registros de inicio de observación
+. Desactivar una categoría no elimina las observaciones anteriores. Volver a activarla
+no recupera los cambios que se hayan perdido. En esta versión no existe la posibilidad de anular las categorías por grupo.</p>
+<p>Mantenga activada la opción de nuevos mensajes cuando el contenido anterior sea relevante: un aviso de eliminación no puede
+recuperar texto que nunca se haya capturado. Los registros operativos y de cobertura, así como otros
+eventos del servicio de grupo, se conservan siempre. Las instantáneas explícitas del historial son independientes de la
+selección de categorías en tiempo real y pueden incluir mensajes de servicio. Estas opciones no
+ocultan los metadatos de reacciones o de miembros incrustados en un objeto de Telegram que, por lo demás, haya sido capturado.</p>
+<p>Una instantánea del historial puede poner en cola los archivos adjuntos mientras está en pausa. Inicie la observación para procesarlos.
+Estar en cola no significa que se hayan descargado. Un archivo original no disponible no se sustituye
+por una versión editada más reciente; los resultados se registran por separado.</p>
+<p><strong>Al bloquearse,</strong> se borra el acceso del navegador y los campos secretos, pero la recopilación sigue en marcha.
+Al cerrar una pestaña, el proceso también sigue en marcha. Al detener el proceso o el servicio de Python,
+se detiene la recopilación independientemente del estado del navegador.</p>
+<p>Al eliminar un espacio de trabajo adicional, se detiene su recopilador y se eliminan sus datos locales. Si un
+archivo bloqueado o un error del sistema de archivos interrumpe la eliminación, el panel informa del fallo y
+mantiene el espacio de trabajo en la lista como no disponible (<code>DeletionPending</code>). Cierre los programas que tengan abiertos sus
+archivos y vuelva a intentar <strong>la eliminación</strong>. Al reiniciar TgWitness, dicho espacio de trabajo permanece detenido y
+no se recrean su registro ni sus claves parcialmente eliminados. Una eliminación satisfactoria se registra
+solo después de que se haya eliminado el directorio; las copias exportadas o respaldadas por separado permanecen
+sujetas a su propia política de retención.</p>
+<h2 id="notifications">Notificaciones<a class="anchor" href="#notifications" aria-label="Enlace a esta sección">#</a></h2>
+<p>Abra <strong>«Fuentes» → «Notificaciones» → «Alertas» y un resumen diario</strong>. TgWitness utiliza
+Apprise para enviar alertas a Matrix, Telegram, Discord, Slack, ntfy, correo electrónico y otros
+servicios compatibles. Puede añadir varios destinos a un mismo espacio de trabajo.</p>
+<ol>
+<li>Introduzca una URL de destino de Apprise por línea. Utilice el
+    <a href="https://appriseit.com/services/">catálogo de servicios y los formatos de URL</a> correspondientes a su servicio.</li>
+<li>Active la opción <strong>«Enviar notificaciones</strong>» y, a continuación, seleccione las alertas de problemas, los cambios en los
+    chats supervisados y un resumen diario. La hora del resumen se basa en la hora del servidor.</li>
+<li>Active la opción <strong>«Incluir extractos breves»</strong> si desea que el texto guardado de los mensajes eliminados y editados
+    aparezca en las alertas.</li>
+<li>Pulse <strong>«Guardar notificaciones</strong>» y, a continuación, <strong>«Enviar prueba»</strong> para comprobar la entrega.</li>
+</ol>
+<p>Para su propio receptor, utilice <a href="https://appriseit.com/services/json/">el webhook JSON</a> de Apprise.
+Por ejemplo, <code>jsons://notify.example.org/tgwitness</code> envía JSON a través de HTTPS a ese
+punto final. Se trata de un ejemplo ficticio; sustitúyalo por su propio destino.</p>
+<p>Los destinos y la configuración pertenecen al espacio de trabajo seleccionado. Las notificaciones de cambios
+abarcan las fuentes supervisadas, incluidos los chats añadidos recientemente. La campana de la barra superior
+también muestra los problemas recientes y los cambios en los chats.</p>
+<p>En la demostración, los controles de notificación están visibles, pero el envío está desactivado. Configure
+el envío en un espacio de trabajo real. Las notificaciones utilizan la ruta Direct, SOCKS5 o
+HTTP de ese espacio de trabajo; MTProxy no puede transmitirlas. Los destinos que no sean HTTP, como SMTP, requieren
+una ruta directa.</p>
+<h2 id="panel-layout">Diseño de paneles<a class="anchor" href="#panel-layout" aria-label="Enlace a esta sección">#</a></h2>
+<p><img alt="Espacio de trabajo de conexión con datos sintéticos" src="../../../../assets/connection.png" /></p>
+<p><strong>El registro</strong> muestra observaciones, búsquedas y filtros. Al editar un mensaje, se abren las versiones capturadas;
+al borrar un mensaje, se muestra el contenido anterior, si está disponible. Las atribuciones desconocidas se indican de forma explícita.
+Los recuentos están disponibles en <strong>«Visión general»</strong>; los detalles de la adquisición se mantienen en la guía local.</p>
+<p><strong>La sección «Fuentes»</strong> incluye el ámbito de observación (chats seleccionados, una carpeta de Telegram o toda la
+cuenta), chats accesibles de todo tipo, fuentes seleccionadas con estrellas de prioridad, ajustes de
+archivos adjuntos y de reverificación, así como instantáneas del historial. Las fuentes privadas se seleccionan por diálogo o ID
+sin enlace público. El estado de acceso describe la última comprobación, no los permisos permanentes.</p>
+<p><strong>En «Chats → Personas»</strong> se muestra una lista de todas las personas cuyos mensajes se han guardado; si se han activado los perfiles de usuario
+para el chat, al hacer clic se abre el perfil de esa persona con enlaces a los registros del diario.</p>
+<p><strong>Witness</strong> crea tokens de testigo de solo lectura, muestra cuándo se comprobó por última vez cada testigo y
+proporciona los comandos y opciones para ejecutar uno (<a href="../witness/">testigo independiente</a>).</p>
+<p><strong>La sección «Parámetros»</strong> recoge todos los límites y ritmos del espacio de trabajo que no figuran en otras páginas:
+el número de diálogos leídos, la frecuencia con la que se vuelve a leer la lista de chats, los intervalos de
+latido y de puntos de control, el búfer de inicio, cómo se distribuyen las solicitudes en las revisiones (primer retraso, chats por
+paso, pausa entre chats, mensajes recuperados y solicitados de nuevo), reserva de disco, tiempos de espera y
+reintentos de descargas, qué buscan los perfiles de usuario (incluidas sus propias expresiones regulares),
+tamaño y frecuencia de las notificaciones, límites de instantáneas, archivos ZIP y descargas en el navegador, así como los
+tiempos de espera y reintentos del cliente de Telegram. Cada campo muestra su rango y su valor por defecto; los campos modificados
+quedan marcados y pueden restablecerse uno a uno o todos a la vez. Cada cambio se registra como
+«<code>parameters.changed</code>» con los valores anteriores y posteriores, y los registros de inicio de observación indican
+los valores vigentes. Los valores se aplican a partir de su próximo uso; los tiempos de espera y los reintentos del cliente, a partir de la
+próxima conexión. Los intervalos de revisión, los tipos y tamaños de archivos adjuntos, así como los intervalos de copia de seguridad y copia externa
+permanecen en sus propias páginas y pueden adoptar cualquier valor dentro de su rango, no solo los preestablecidos.</p>
+<p>La campana de la barra superior muestra los problemas y cambios recientes en los chats supervisados; los mensajes no leídos
+se contabilizan hasta que se marcan como leídos. Los cambios se agrupan por chat y por hora («12 eliminados,
+1 editado, 0 no encontrados»), y los problemas, como un cierre de sesión o un disco lleno, permanecen en la lista
+independientemente de lo activos que estén los chats.</p>
+<p><strong>La creación de la cuenta</strong> comienza en el campo del número de teléfono. <strong>Al continuar</strong>, se accede directamente a la
+introducción del código, solicitándose las credenciales de la API únicamente cuando faltan. El código QR y la importación de archivos son
+pestañas alternativas. Las credenciales de la API guardadas solo se reutilizan dentro de su propio espacio de trabajo.
+La pantalla de inicio no incluye barra lateral, estadísticas ni apartados de configuración. El icono de
+<strong>«Configuración»</strong> abre los controles de API, proxy, almacenamiento y cuentas adicionales. Las nuevas instalaciones
+comienzan aquí; las cuentas conectadas sin fuentes seleccionadas comienzan en <strong>«Elegir chats</strong>».
+Cambiar la ruta requiere una observación pausada y cancela cualquier inicio de sesión no finalizado. Un
+registro existente no puede vincularse de forma silenciosa a una cuenta de Telegram diferente.</p>
+<p><strong>La exportación</strong> comprueba la integridad del registro y genera archivos portátiles. Su identificador de espacio de trabajo
+puede introducirse en la línea de comandos de descarga. Cada exportación asigna un prefijo al registro completo; los
+eventos posteriores se incluyen en una exportación siguiente. Los filtros de búsqueda no modifican el ámbito del paquete.
+La información detallada sobre la firma y la cobertura se encuentra en la sección <strong>«Verificación y limitaciones</strong>».</p>
+<p>El panel muestra el estado del recopilador, los archivos multimedia en cola o fallidos, los archivos multimedia pendientes más antiguos, el
+espacio libre en disco, las pausas en las solicitudes y las fuentes cuyo acceso no está confirmado en <strong>la sección «Estado del recopilador</strong>».
+Estos detalles aparecen inicialmente ocultos y se ocultan en la pestaña «Cuenta». Una ficha de configuración
+muestra el siguiente paso: conectar una cuenta, elegir fuentes o iniciar la observación.
+La lista de cuentas es una instantánea en el momento de la carga;
+el espacio de trabajo seleccionado se actualiza periódicamente. No se trata de un monitor de SLA multiproceso.</p>
+<p>La interfaz de usuario utiliza recursos locales y renderización de texto para el contenido original. Se han probado los diseños para ordenador de sobremesa y los diseños estrechos
+basados en Chromium. No se trata de una certificación completa de accesibilidad;
+la evaluación de la usabilidad con lectores de pantalla y la evaluación de la usabilidad por parte de usuarios humanos siguen siendo tareas independientes.</p>
+<h2 id="deployment-environments">Entornos de implementación<a class="anchor" href="#deployment-environments" aria-label="Enlace a esta sección">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Entorno</th>
+<th>Instalación</th>
+<th>Estado de la verificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PC/servidor con Windows</td>
+<td>Python 3.11 o superior, scripts\Setup.cmd/Start.cmd, directorio de datos privado</td>
+<td>Comprobado localmente en Windows/Python 3.12</td>
+</tr>
+<tr>
+<td>Servidor Linux/VPS</td>
+<td>Entorno virtual de Python (venv), usuario de servicio dedicado, HTTPS/SSH</td>
+<td>Se proporcionan ejemplos de código, CI y systemd; no se ejecutan en este servidor.</td>
+</tr>
+<tr>
+<td>macOS</td>
+<td>Entorno virtual de Python (venv), proceso en primer plano o agente de usuario</td>
+<td>Se proporciona un ejemplo de «launchd»; es necesario realizar una comprobación de instalación por separado.</td>
+</tr>
+<tr>
+<td>Docker/Compose</td>
+<td>Volumen constante, un trabajador</td>
+<td>Se proporcionan la definición y la comprobación de tiempo de ejecución de la infraestructura de código (CI); Docker no está disponible localmente.</td>
+</tr>
+<tr>
+<td>Navegador del móvil</td>
+<td>Acceda al panel protegido en un servidor en funcionamiento</td>
+<td>Se ha probado un diseño estrecho basado en Chromium; el recopilador no funciona en iOS ni en Android.</td>
+</tr>
+</tbody>
+</table></div>
+<p>La portabilidad implica que no es obligatorio utilizar un servicio en la nube ni crear una interfaz de usuario. Cada sistema de destino sigue
+necesitando dependencias compatibles de Python y criptografía, así como acceso al disco local y a la red. Consulte
+<a href="../deployment/">el archivo DEPLOYMENT.md</a> y <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">las plantillas de servicio</a>.</p>
+<p>Los espacios de trabajo comparten CPU, memoria y un bucle de eventos. Para aislar los procesos, utilice
+instancias, puertos, directorios de datos y autorizaciones de cuenta distintos. No existe un
+panel unificado para las distintas instancias. Nunca asigne varios trabajadores a una misma base de datos.</p>
+<h2 id="startup-checks-and-exports">Comprobaciones iniciales y exportaciones<a class="anchor" href="#startup-checks-and-exports" aria-label="Enlace a esta sección">#</a></h2>
+<p>Ejecute «<code>python start.py --check</code>» antes de iniciar un entorno preparado. Añada «<code>--json</code>»
+para comprobaciones legibles por máquina o introduzca los valores previstos para «<code>--data-dir</code>», «<code>--host</code>» y «<code>--port</code>».
+El comando comprueba los requisitos previos sin necesidad de iniciar sesión en Telegram ni de crear un registro.
+No verifica el registro ni comprueba que esté listo para la captura; la verificación del registro se lleva a cabo
+durante el inicio de la aplicación. Un puerto ocupado puede deberse simplemente a la existencia de una instancia previa.</p>
+<p>Los navegadores compatibles con la API de acceso al sistema de archivos guardan las exportaciones a través de un flujo
+escribible. Otros navegadores almacenan en el búfer un máximo de 128 MiB. Utilice la CLI de streaming para exportaciones de mayor
+tamaño o para navegadores que no admitan streaming de archivos:</p>
+<pre><code class="language-sh">python -m tgwitness.download --token-file data/live/panel-token.txt --out evidence.zip</code></pre>
+<p>Añada «<code>--profile ID</code>
+» desde «Exportaciones» para un espacio de trabajo secundario. Utilice «<code>--url https://server</code>
+» para el acceso remoto. Solo se acepta HTTP sin cifrar para destinos de bucle invertido. El token
+se lee de un archivo y se envía en un encabezado; no se muestra ni se incluye en una URL. No se admiten
+redireccionamientos. Los destinos existentes no se sobrescriben. Las transferencias fallidas eliminan su
+archivo parcial temporal. El SHA-256 indicado es una suma de comprobación de la transferencia; verifique el archivo
+ZIP firmado por separado con una huella digital o un punto de control de confianza.</p>
+<h2 id="backup-restore-and-interruptions">Copias de seguridad, restauración e interrupciones<a class="anchor" href="#backup-restore-and-interruptions" aria-label="Enlace a esta sección">#</a></h2>
+<ol>
+<li>Pause la observación y detenga el proceso de forma limpia.</li>
+<li>Copie todo el directorio de datos: bases de datos, WAL/SHM si existen, archivos multimedia,
+    <code>credentials.enc</code>, <code>signing.enc</code>, <code>network.enc</code>, claves y metadatos del almacén, token,
+    puntos de control y todos los directorios <code>profiles/</code>.</li>
+<li>En el modo de clave externa, conserve por separado la clave maestra y guarde cada
+    <code>vault.external.json</code>. La generación de una nueva clave no permite recuperar los secretos anteriores.</li>
+<li>Restaure mientras el destino está detenido; configure la clave original, restrinja
+    el acceso y verifique la integridad antes de reanudar.</li>
+<li>Registre los periodos de inactividad y los resultados de la verificación. Una instantánea del historial no puede demostrar que
+    no se produjeran eliminaciones durante la interrupción.</li>
+</ol>
+<p>Los archivos ZIP de pruebas excluyen las claves de sesión y las claves privadas, y no constituyen copias de seguridad completas del servicio.
+Hay cuatro elementos que se protegen de forma diferente:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>¿Qué?</th>
+<th>Protección</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Archivos exportados sin contraseña (predeterminado)</td>
+<td>No está cifrado. Está firmado, por lo que los cambios son detectables, pero cualquier persona que tenga el archivo puede leerlo.</td>
+</tr>
+<tr>
+<td>Archivos exportados con contraseña</td>
+<td>Si establece una contraseña, la exportación final se guarda sin modificaciones en un archivo ZIP con cifrado AES-256 de WinZip que pueden abrir tanto 7-Zip como WinRAR; la contraseña no se almacena (<a href="../evidence/">manejo de pruebas</a>).</td>
+</tr>
+<tr>
+<td>La base de datos del registro y los archivos adjuntos guardados en el disco</td>
+<td>No está cifrado por TgWitness; utilice un disco o volumen cifrado</td>
+</tr>
+<tr>
+<td>Sesiones de Telegram y claves de firma</td>
+<td>Cifrado en el directorio de datos (<code>credentials.enc</code>, <code>signing.enc</code>, <code>network.enc</code>)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Una copia de seguridad completa es el directorio de datos congelados descrito anteriormente, no una exportación.
+Utilice almacenamiento protegido y un mecanismo de transferencia controlado para ambos. Las exportaciones temporales del servidor se almacenan en el directorio «
+<code>temporary-exports/</code>» de cada espacio de trabajo; las respuestas completadas se eliminan, y los archivos de exportación interrumpidos
+se eliminan en el siguiente inicio, mientras se mantiene el bloqueo de la instancia de ese espacio de trabajo.</p>
+<p>Un evento de restablecimiento de la conexión no garantiza la recuperación de los cambios intermedios.
+Las tareas de medios persistentes y la posición de actualización de Telegram se conservan tras el reinicio; véase
+<a href="../evidence/#durable-collection-and-process-receipts-02">el formato de las pruebas</a>.</p>
+<h2 id="capacity-and-retention">Capacidad y retención<a class="anchor" href="#capacity-and-retention" aria-label="Enlace a esta sección">#</a></h2>
+<p>Límites predeterminados, todos modificables en <strong>«Parámetros</strong>»: los primeros 1.000 diálogos, 500 mensajes
+por instantánea, 4 GiB de contenido ZIP firmado sin comprimir (los archivos más grandes requieren
+<code>verify.py --max-gib N</code>) y un límite de 128 MiB para el modo de navegador. Los archivos adjuntos ocupan entre 1 y 2.000 MiB por
+tipo en <strong>«Fuentes» → «Archivos adjuntos</strong>». La CLI de descarga tiene un valor predeterminado de 5 GiB transferidos. El espacio disponible en disco puede constituir un
+límite inferior. Reserve espacio para registros, archivos multimedia, WAL, exportaciones temporales y copias de seguridad.
+Las exportaciones utilizan el volumen de datos en lugar de los 512 MiB de «<code>/tmp</code>» de Compose.</p>
+<p>Mida los eventos por segundo, la antigüedad de la cola, los bytes de archivos multimedia y la latencia del disco, en lugar de limitarse a contar
+solo los grupos. Las pruebas de rendimiento locales sintéticas no garantizan la entrega de mensajes en Telegram.
+No existe una eliminación automática de los datos retenidos. La eliminación de la parte final de un registro invalida su
+relación con los puntos de control retenidos.</p>
+<p>Ya existen revisiones prioritarias: las fuentes marcadas con estrella se revisan cada 15 minutos de forma predeterminada,
+las demás, cada 6 horas (véanse <a href="../collection/#recheck-tiers">los niveles de revisión</a>). Existen exportaciones
+protegidas con contraseña, tal y como se ha descrito anteriormente. La aceptación en tiempo real de Telegram/proxy, la reproducción duradera,
+el registro de administración y el sondeo de reacciones, los trabajadores aislados, el cifrado del registro local y los archivos multimedia
+por parte del propio TgWitness, los roles de usuario y la revisión independiente siguen siendo tareas independientes. Véanse
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/READINESS.md">READINESS.md</a>, <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">LIVE_ACCEPTANCE.md</a> y
+<a href="../verification/">VERIFICATION.md</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/OPERATIONS.md">Edite esta página en GitHub ↗</a><a class="next-guide" href="../investigation/"><span>Siguiente paso</span><strong>Modo de investigación →</strong></a><p>Estas guías describen la implementación actual. Los resultados de la validación y las deficiencias pendientes se documentan por separado. <a href="../verification/">Lo que se ha probado →</a></p></footer>
+</main>
+<aside class="toc" aria-label="En esta página"><p class="nav-label">En esta página</p><a href="#operator-workflow">Flujo de trabajo del operador</a><a href="#modes">Modos</a><a href="#monitoring-categories">Categorías de seguimiento</a><a href="#notifications">Notificaciones</a><a href="#panel-layout">Diseño de paneles</a><a href="#deployment-environments">Entornos de implementación</a><a href="#startup-checks-and-exports">Comprobaciones iniciales y exportaciones</a><a href="#backup-restore-and-interruptions">Copias de seguridad, restauración e interrupciones</a><a href="#capacity-and-retention">Capacidad y retención</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Código abierto · Se ejecuta en su equipo</span><a href="../../../../LICENSE">Licencia MIT</a><a href="../notice/">Aviso del operador</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Seguridad</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "A la espera de un mensaje", "Step through a fictional send, edit and delete.": "Siga paso a paso un proceso ficticio de envío, edición y eliminación.", "No observations yet. Start the sequence or advance one event.": "Aún no hay observaciones. Inicie la secuencia o avance un evento.", "Meet at 10:00": "Nos vemos a las 10:00", "A new message is visible in the chat.": "Aparece un nuevo mensaje en el chat.", "Record 1 appended: the collector observed the original message.": "Se adjunta el registro n.º 1: el recopilador ha observado el mensaje original.", "Meet at 11:00": "Nos vemos a las 11:00", "The current text changes. The earlier observation stays.": "El texto actual cambia. La observación anterior se mantiene.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Se ha añadido el registro 2: la modificación constituye una nueva observación. El registro 1 sigue conteniendo el texto original.", "Message deleted": "Mensaje eliminado", "The message has disappeared from the chat view.": "El mensaje ha desaparecido de la vista del chat.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Se adjunta el registro n.º 3: el aviso de eliminación se conserva junto con ambas versiones observadas.", "0 records": "0 registros", "1 record": "1 registro", "2 records": "2 registros", "3 records": "3 registros", "Complete / {n} of 3": "Completo / {n} de 3", "Step / {n} of 3": "Paso / {n} de 3", "Pause": "Pausa", "Replay sequence": "Secuencia de reproducción", "Play sequence": "Secuencia de reproducción", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "El ejemplo estático está disponible. Para calcular los hash de forma interactiva, abra esta página a través de HTTPS o en una vista previa en localhost con soporte para Web Crypto.", "No record supplied": "No se ha facilitado ningún registro", "Tail removed": "Se ha eliminado la cola", "≠ saved hash": "≠ hash guardado", "Rebuilt · different hash": "Reconstruido · hash diferente", "= saved hash": "= hash guardado", "Same length and matching head.": "Misma extensión y encabezado a juego.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Los tres hash calculados coinciden con los hash guardados. Esta muestra se ajusta al límite de tres registros conservados.", "Same saved head; the journal prefix fails verification.": "Se ha guardado el mismo encabezado; el prefijo del registro no supera la verificación.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "El registro n.º 2 ya no coincide con su hash guardado. Si solo se comprobara el último registro almacenado, esto pasaría desapercibido; el verificador comprueba todos los registros.", "Head differs from the retained checkpoint.": "El encabezado difiere del punto de control conservado.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Los hash reconstruidos se enlazan entre sí, pero el encabezado final ha cambiado. El punto de control conservado rechaza este historial. Las firmas originales también fallarían en los registros modificados.", "Too short: 2 supplied records \u003c 3 retained records.": "Demasiado breve: 2 registros facilitados \u003c 3 registros conservados.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Los dos hash restantes siguen coincidiendo. El punto de control conservado revela la parte final que falta. Sin ese límite anterior, este prefijo más corto por sí solo no revelaría la omisión.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "El cálculo de hash no está disponible en este navegador. Las fórmulas y la explicación estática que figuran a continuación siguen estando disponibles.", "{n} records": "{n} registros", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Aceptado: el recuento aumenta, la firma se verifica y la clave coincide. El testigo conserva este nuevo límite.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Reversión: la respuesta firmada indica un número de registros inferior al del último punto de control aceptado. El sistema registra el problema y mantiene el límite aceptado anteriormente.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Bifurcación: el recuento no ha variado, pero la punta difiere. El testigo registra el desacuerdo y mantiene el límite aceptado anteriormente.", "No answer": "Sin respuesta", "boundary unknown": "límite desconocido", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Sin respuesta: el «witness» registra el fallo en la comprobación. No puede determinar el estado actual del recopilador. Si el «witness» sigue pudiendo acceder a la API del bot y su política de publicación lo permite, puede publicar dicho fallo.", "Send {n}": "Enviar {n}", "Edit {n}": "Editar {n}", "Delete {n}": "Eliminar {n}", "Both accounts captured all six expected observations in this example.": "Ambas cuentas han recogido las seis observaciones previstas en este ejemplo.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "La cuenta B volvió a capturar 6 de 6. Dos recibos tardaron más en aparecer. La tasa de captura y el retraso en la recepción de los recibos responden a cuestiones diferentes.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "La cuenta B capturó 5 de 6 antes del plazo límite (83,3 %). La edición que falta no presenta ningún retraso medido. Este resultado solo describe las seis acciones controladas.", "not observed by cutoff": "No se ha respetado el límite de caracteres.", "{s} seconds": "{s} segundos", "Exact values follow in the table.": "Los valores exactos figuran en la tabla.", "{s} s": "{s} s", "Not observed": "No se ha observado", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Cuatro chats aportan observaciones diferentes. Siga los registros originales de cada conexión; no asigne la publicación del canal al usuario 71001 sin un remitente identificado.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Los registros n.º 146 y n.º 205 presentan el mismo identificador de remitente, 71001. Esto permite relacionar las publicaciones observadas de una cuenta de Telegram en dos chats diferentes. No identifica a ninguna persona del mundo real ni atribuye la publicación al canal.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "La dirección de destino pay.example.invalid/new aparece en el registro del grupo n.º 146, en el teclado del bot n.º 173, en la edición del canal n.º 188 y en el mensaje privado n.º 205. Una dirección de destino repetida vincula el material; ello no demuestra que exista un control común de dichas cuentas.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Los recibos multimedia completados n.º 151 y n.º 209 presentan valores SHA-256 completos idénticos en este caso ficticio. Compare los bytes reales y sus registros de mensajes asociados. El archivo coincidente no identifica a su creador ni demuestra quién lo reenvió.", "the encrypted off-site copy": "la copia cifrada almacenada externamente", "notifications": "notificaciones", "checkpoint hashes for timestamps": "Hashes de puntos de control para marcas de tiempo", "signed checkpoints for the witness": "puntos de control firmados para TgWitness", "Switched on in this example": "Activado en este ejemplo", "Optional · off by default": "Opcional · desactivado por defecto", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Al salir de este equipo: la conexión a Telegram y {list}. Nada más.", "Default: only the Telegram connection leaves this machine.": "Por defecto: solo la conexión a Telegram sale de este equipo.", "{done} of {total} done": "{done} de {total} completado", "Mark step {n} as done": "Marcar el paso {n} como completado", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Texto", "Copied": "Copiado", "Command copied.": "Comando copiado.", "Selected — Ctrl/Cmd+C": "Seleccionado — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Comando seleccionado. Cópielo manualmente.", "Command copied to clipboard.": "Comando copiado en el portapapeles.", "Select text": "Seleccionar texto", "Clipboard unavailable. Command selected; copy it manually.": "El portapapeles no está disponible. Se ha seleccionado el comando; cópielo manualmente.", "A message arrives. The first observation is saved.": "Llega un mensaje. Se guarda la primera observación.", "The time changes. Both captured versions stay.": "La hora cambia. Ambas versiones capturadas se conservan.", "The message disappears. The captured history remains.": "El mensaje desaparece. El historial capturado permanece.", "Pause example animation": "Pausar la animación de ejemplo", "Play example animation": "Reproduzca la animación de ejemplo", "Play": "Reproducir", "Full-size workspace screenshot": "Captura de pantalla a pantalla completa del espacio de trabajo", "Workspace screenshot · fictional data": "Captura de pantalla del espacio de trabajo · datos ficticios", "Close": "Cerrar", "Close screenshot": "Cerrar captura de pantalla", "Scrollable full-size screenshot": "Captura de pantalla a tamaño completo con desplazamiento", "Enlarge: {name}": "Ampliar: {name}", "View full size": "Ver a tamaño completo"}</script>
+</body></html>

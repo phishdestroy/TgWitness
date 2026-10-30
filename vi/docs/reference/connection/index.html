@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="vi" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Kết nối, máy chủ trung gian và bảo vệ dữ liệu | TgWitness</title>
+<meta name="description" content="Các cặp API, phương thức đăng nhập, các tuyến SOCKS5, HTTP và MTProxy, danh sách proxy công khai cùng những thông tin mà mỗi tuyến bảo vệ."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:title" content="Kết nối, máy chủ trung gian và bảo vệ dữ liệu | TgWitness"><meta property="og:description" content="Các cặp API, phương thức đăng nhập, các tuyến SOCKS5, HTTP và MTProxy, danh sách proxy công khai cùng những thông tin mà mỗi tuyến bảo vệ.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/connection/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/connection/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/connection/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/connection/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/connection/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/connection/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/connection/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/", "url": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/", "name": "Kết nối, máy chủ trung gian và bảo vệ dữ liệu | TgWitness", "description": "Các cặp API, phương thức đăng nhập, các tuyến SOCKS5, HTTP và MTProxy, danh sách proxy công khai cùng những thông tin mà mỗi tuyến bảo vệ.", "inLanguage": "vi", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "https://phishdestroy.github.io/TgWitness/vi/"}, {"@type": "ListItem", "position": 2, "name": "Tài liệu hướng dẫn", "item": "https://phishdestroy.github.io/TgWitness/vi/docs/"}, {"@type": "ListItem", "position": 3, "name": "Tham khảo", "item": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Kết nối, máy chủ trung gian và bảo vệ dữ liệu", "item": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Chuyển thẳng đến nội dung</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Tài liệu hướng dẫn</span></a>
+<nav aria-label="Hướng dẫn"><a href="../../concepts/">Hướng dẫn trực quan</a><a href="../../">Tất cả các hướng dẫn</a><a href="../">Tham khảo</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Ngôn ngữ"><span aria-hidden="true">◍</span> Tiếng Việt</summary><div class="lang-list"><a href="../../../../docs/reference/connection/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/connection/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/connection/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/connection/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/connection/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/connection/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/connection/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/connection/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/connection/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/connection/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/connection/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="./" hreflang="vi" lang="vi" aria-current="true">Tiếng Việt</a><a href="../../../../zh/docs/reference/connection/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Chuyển đổi giữa chế độ giao diện sáng và tối"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Hướng dẫn"><a href="../../../guides/modes.html">Các chế độ, kịch bản và mức độ bằng chứng</a><p class="nav-label">Các bước đầu tiên</p><a href="../../start/">Bắt đầu chỉ trong vài phút</a><a href="../../accounts/">Kết nối tài khoản</a><a href="../../proxies/">Chọn một máy chủ proxy</a><a href="../../exports/">Xuất và xác minh</a><p class="nav-label">Hiểu rõ về bằng chứng</p><a href="../../concepts/">Tìm hiểu cách thức hoạt động của bằng chứng</a><a href="../../cases/">Điều tra trên tất cả các cuộc trò chuyện</a><a href="../../security/">Hãy đảm bảo tính bảo mật</a><p class="nav-label">Tìm hiểu thêm</p><a href="../../witness/">Thiết lập bot chứng cứ</a><a href="../../server/">Hãy duy trì hoạt động của nó</a><a href="../../troubleshooting/">Tìm hiểu nguyên nhân sự cố</a></nav><nav class="wiki-nav" aria-label="Tham khảo"><p class="nav-label"><a class="nav-label-link" href="../">Tham khảo</a></p><details class="wiki-group" open><summary>Thiết lập</summary><a href="../quickstart/">Hướng dẫn bắt đầu nhanh</a><a href="../accounts/">Các định dạng tài khoản và phiên làm việc</a><a href="./" aria-current="page">Kết nối, máy chủ trung gian và bảo vệ dữ liệu</a><a href="../deployment/">Triển khai</a></details><details class="wiki-group"><summary>Thu thập</summary><a href="../collection/">Cách thức thu thập dữ liệu</a><a href="../operations/">Quy trình làm việc và hoạt động</a><a href="../investigation/">Chế độ điều tra</a><a href="../features/">Các tính năng và giới hạn</a></details><details class="wiki-group"><summary>Bằng chứng</summary><a href="../how-it-works/">Cách thức hoạt động của bằng chứng</a><a href="../evidence/">Định dạng bằng chứng</a><a href="../witness/">Nhân chứng độc lập</a><a href="../timestamp/">Dấu thời gian</a></details><details class="wiki-group"><summary>An ninh & dự án</summary><a href="../security/">An ninh và xử lý dữ liệu</a><a href="../architecture/">Kiến trúc</a><a href="../verification/">Những nội dung đã được kiểm thử</a><a href="../license/">Thông báo về sự không tương thích giữa giấy phép và kiến trúc</a><a href="../notice/">Thông báo về sự không tương thích giữa các nhà cung cấp dịch vụ</a><a href="../changelog/">Bản ghi thay đổi</a></details></nav><p class="sidebar-note">v0.7.0<br>Mã nguồn mở · Chạy trên máy tính của quý vị</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Hướng dẫn"><a href="../../../">Trang chủ</a> <span aria-hidden="true">/</span> <a href="../../">Tài liệu hướng dẫn</a> <span aria-hidden="true">/</span> <a href="../">Tham khảo</a> <span aria-hidden="true">/</span> <span aria-current="page">Kết nối, máy chủ trung gian và bảo vệ dữ liệu</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Tìm kiếm trong tài liệu</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Hãy thử các thuật ngữ như proxy, chuỗi băm, token hoặc witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Tìm kiếm rõ ràng" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Hãy nhập một từ khóa để tìm kiếm trong các hướng dẫn và tài liệu tham khảo. Kết quả tìm kiếm sẽ được lưu lại trong trình duyệt của quý vị.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Tham khảo / Thiết lập</p><h1>Kết nối, máy chủ trung gian và bảo vệ dữ liệu</h1><p class="guide-outcome">Các cặp API, phương thức đăng nhập, các tuyến SOCKS5, HTTP và MTProxy, danh sách proxy công khai cùng những thông tin mà mỗi tuyến bảo vệ.</p><div class="wiki-body"><p>Tài liệu này mô tả cách thức hoạt động và các giới hạn của TgWitness phiên bản 0.7.0. Quá trình xác thực,
+quyền truy cập nguồn, kết nối mạng và tính đầy đủ của dữ liệu thu thập là các trạng thái độc lập.
+Để tìm hiểu về các bước đăng nhập, định dạng tệp và quản lý nhiều tài khoản, quý vị hãy bắt đầu từ phần
+<a href="../accounts/">“Tài khoản và định dạng phiên làm việc</a>”. Đối với chính sách sự kiện và
+hành vi khởi động lại, xin vui lòng tham khảo phần <a href="../collection/">“Cách thức thu thập dữ liệu hoạt động</a>”.</p>
+<h2 id="authentication-methods">Các phương thức xác thực<a class="anchor" href="#authentication-methods" aria-label="Liên kết đến phần này">#</a></h2>
+<p><strong>ID API và mã băm API dùng để xác định một ứng dụng; chúng không thay thế cho thông tin đăng nhập tài khoản.</strong>
+
+Chúng là tùy chọn trong TgWitness. Thứ tự ưu tiên: cặp được nhập vào biểu mẫu, tiếp theo là cặp từ
+tệp JSON tài khoản đã nhập, sau đó là cặp được lưu trong không gian làm việc, và cuối cùng là nhóm 50
+cặp công khai, được thử theo thứ tự ngẫu nhiên với cơ chế luân phiên tự động khi Telegram từ chối một cặp. Chỉ có
+cặp Telegram Desktop (2040) mới được gửi kèm theo mô tả ứng dụng Telegram Desktop tương ứng.
+Cặp thông tin của riêng quý vị từ Công cụ Phát triển API tại <a href="https://my.telegram.org">my.telegram.org</a>
+có thể được sử dụng cho tất cả các tài khoản của quý vị; mỗi tài khoản vẫn có quyền ủy quyền riêng.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Phương pháp</th>
+<th>Yêu cầu</th>
+<th>Hỗ trợ TgWitness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Số điện thoại, mã xác thực, xác thực hai yếu tố (2FA) tùy chọn</td>
+<td>Quyền truy cập tài khoản; cặp API là tùy chọn</td>
+<td>Đăng nhập vào bảng điều khiển</td>
+</tr>
+<tr>
+<td>Mã xác thực HEX + ID DC</td>
+<td>Khóa đầy đủ 512 ký tự và DC 1–5</td>
+<td>Tab <strong>“Khóa xác thực</strong> trực tiếp”; tùy chọn kiểm tra ID người dùng trước khi lưu thông tin xác thực</td>
+</tr>
+<tr>
+<td>Telethon StringSession</td>
+<td>Một chuỗi phiên làm việc hợp lệ</td>
+<td>Đăng nhập vào bảng điều khiển</td>
+</tr>
+<tr>
+<td>Telethon SQLite <code>.session</code></td>
+<td>Nội dung hoàn chỉnh, nhất quán</td>
+<td>Tính năng nhập trực tiếp các lược đồ qua bảng điều khiển 7/8; tùy chọn sử dụng CLI ngoại tuyến</td>
+</tr>
+<tr>
+<td>Pyrogram SQLite <code>.session</code></td>
+<td>Phiên làm việc của người dùng trong môi trường sản xuất đã đóng</td>
+<td>Nhập trực tiếp các lược đồ từ bảng điều khiển 2/3</td>
+</tr>
+<tr>
+<td>Tệp ZIP TData của Telegram Desktop</td>
+<td>Một tài khoản hiện đại; mã PIN cục bộ nếu được bảo vệ</td>
+<td>Chuyển đổi trong bộ nhớ kèm theo các kiểm tra tổng kiểm tra (checksum) và giải mã</td>
+</tr>
+<tr>
+<td>Tệp JSON tài khoản</td>
+<td>Các trường API/phiên làm việc/khóa được hỗ trợ</td>
+<td>Chỉ riêng siêu dữ liệu đã đủ để điền thông tin đăng nhập API; tuy nhiên, vẫn cần phải đăng nhập bằng phiên/khóa hoặc số điện thoại/mã QR</td>
+</tr>
+<tr>
+<td>Đăng nhập bằng mã QR</td>
+<td>Xác nhận từ ứng dụng Telegram được ủy quyền</td>
+<td>Tạo mã QR cục bộ, thiết lập thời hạn hiệu lực/thử lại, tùy chọn xác thực hai yếu tố (2FA)</td>
+</tr>
+<tr>
+<td>TDLib / Pyrogram StringSession</td>
+<td>Các định dạng khác dành riêng cho thư viện</td>
+<td>Không được hỗ trợ</td>
+</tr>
+<tr>
+<td>Mã thông báo bot</td>
+<td>Một bot có mô hình truy cập/cập nhật riêng</td>
+<td>Không được sử dụng bởi người thu thập này</td>
+</tr>
+</tbody>
+</table></div>
+<p>Telegram lựa chọn phương thức gửi mã xác thực; việc gửi qua SMS không được đảm bảo. Mã băm API không thể khôi phục
+một phiên đã bị thu hồi hoặc thay thế mật khẩu 2FA đã bị quên. TgWitness không lưu trữ
+mã đăng nhập hoặc mật khẩu 2FA của Telegram trên đĩa cứng.</p>
+<p>Đối với nguồn tin riêng tư, tài khoản đó phải đã có quyền truy cập. Tên người dùng nhóm là
+không cần thiết. Việc sử dụng proxy hoặc nhập phiên làm việc sẽ không cấp quyền thành viên cũng như quyền quản trị viên.
+Việc hiện đang là thành viên không đảm bảo quyền truy cập vào lịch sử trước khi tham gia.</p>
+<h2 id="import-a-telethon-session-file">Nhập tệp phiên làm việc Telethon<a class="anchor" href="#import-a-telethon-session-file" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Telethon SQLite, Pyrogram SQLite và Telegram Desktop TData sử dụng các định dạng khác nhau.
+Bảng điều khiển sẽ phát hiện và chuyển đổi các cấu trúc được hỗ trợ; việc đổi tên tệp không được coi là
+quá trình chuyển đổi. Vui lòng chọn một phiên và tệp JSON đi kèm trong mục <strong>Tệp</strong>, sau đó nhấn <strong>Kết nối tài khoản</strong>. Hệ thống chấp nhận tối đa bốn tệp khớp và
+tổng dung lượng tối đa là 8 MiB. Vui lòng tham khảo <a href="../accounts/">giới hạn định dạng</a> để biết chi tiết về TData/JSON.
+Không có tính năng khôi phục mật mã. Đăng nhập qua điện thoại/2FA hoặc mã QR sẽ tạo ra một quyền truy cập riêng biệt.</p>
+<p>Đường dẫn dòng lệnh tùy chọn dành riêng cho Telethon vẫn có sẵn:</p>
+<ol>
+<li>Hãy ngừng sử dụng phiên làm việc gốc trên ứng dụng khách và tạo một bản sao nhất quán. Trình
+    chuyển đổi sẽ từ chối các tệp có nhật ký WAL/journal chưa hoàn tất. Vui lòng đóng ứng dụng khách gốc
+    một cách đúng quy trình thay vì xóa các tệp đó để né tránh quá trình kiểm tra.</li>
+<li>Từ môi trường TgWitness, hãy thực thi lệnh:</li>
+</ol>
+<pre><code class="language-sh">python -m tgwitness.sessions account.session --out account.tgwitness-session</code></pre>
+<ol start="3">
+<li>Tại mục <strong>Thêm tài khoản → Tệp</strong>, hãy tải lên kết quả hoặc
+    dán chuỗi ký tự của nó, sau đó tiếp tục.</li>
+<li>Vui lòng kiểm tra ID tài khoản số được hiển thị, chọn các nguồn và bắt đầu quá trình theo dõi.</li>
+</ol>
+<p>Trình chuyển đổi mở SQLite ở chế độ chỉ đọc, không thực hiện nâng cấp lược đồ hay yêu cầu mạng,
+và không in ra phiên làm việc. Trình này kiểm tra phiên bản lược đồ, các loại bảng, một
+hàng phiên làm việc, IP/cổng/DC và độ dài khóa. Dữ liệu đầu vào CLI bị giới hạn ở 64 MiB; văn bản StringSession
+bị giới hạn ở 4 KiB. Quá trình chuyển đổi trên bảng điều khiển sẽ tải các tệp lên máy chủ TgWitness
+đã được xác thực, xử lý chúng trong bộ nhớ và trả về thông tin xác thực đã được chuẩn hóa cho
+trình duyệt đó mà không lưu lại các tệp gốc đã tải lên. Vui lòng sử dụng HTTPS khi kết nối với máy chủ từ xa.</p>
+<p><strong>Tệp đã chuyển đổi là một khóa truy cập tài khoản chưa được mã hóa.</strong> Hãy lưu giữ nó trong
+kho lưu trữ được bảo vệ và tuyệt đối không được đưa vào kho lưu trữ chung hay gửi cho bất kỳ dịch vụ chuyển đổi bên thứ ba nào. TgWitness
+lưu trữ phiên đăng nhập được ủy quyền trong kho lưu trữ được mã hóa của mình. Việc sao chép một phiên đăng nhập sẽ không
+tạo ra một ủy quyền riêng biệt: xin đừng chạy các ứng dụng khách đồng thời với các khóa xác thực đã được sao chép
+và cho rằng các bản cập nhật sẽ được phân phối độc lập.</p>
+<p>Quá trình chuyển đổi chỉ chuyển giao quyền truy cập, chứ không chuyển các tin nhắn gốc, bộ nhớ đệm của thực thể hay
+con trỏ cập nhật bền vững. Quá trình này không đảm bảo khả năng khôi phục cập nhật sau khi khởi động lại quy trình.</p>
+<h2 id="mtproto-telethon-and-proxies">MTProto, Telethon và các máy chủ proxy<a class="anchor" href="#mtproto-telethon-and-proxies" aria-label="Liên kết đến phần này">#</a></h2>
+<p>MTProto là giao thức của Telegram. Telethon là thư viện khách hàng Python mà TgWitness sử dụng.
+MTProxy là một proxy truyền tải Telegram; SOCKS5 và HTTP CONNECT cung cấp các
+đường hầm chung. Không có phương thức nào thay thế cho việc xác thực tài khoản.</p>
+<p>Vui lòng lưu đường dẫn kết nối cho từng không gian làm việc tại <strong>Tài khoản → Cài đặt → Cài đặt kết nối → Thay đổi đường dẫn kết nối</strong> trước khi
+đăng nhập nếu quý vị cần sử dụng máy chủ trung gian. Giá trị mặc định là Trực tiếp.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Lộ trình</th>
+<th>Cài đặt</th>
+<th>Phạm vi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Trực tiếp</td>
+<td>Không có</td>
+<td>Telethon kết nối trực tiếp với Telegram</td>
+</tr>
+<tr>
+<td>SOCKS5</td>
+<td>Máy chủ, cổng, tên người dùng/mật khẩu (tùy chọn)</td>
+<td>python-socks 2.8.2, đã kích hoạt rdns</td>
+</tr>
+<tr>
+<td>HTTP CONNECT</td>
+<td>Máy chủ, cổng, tên người dùng/mật khẩu (tùy chọn)</td>
+<td>Sử dụng kết nối HTTP CONNECT thuần túy; giao thức TLS đến chính máy chủ proxy chưa được triển khai</td>
+</tr>
+<tr>
+<td>MTProxy</td>
+<td>Máy chủ, cổng, khóa bí mật</td>
+<td>Phương thức truyền tải Telethon thử nghiệm; 32 chữ số thập lục phân hoặc <code>dd</code> + 32 chữ số thập lục phân</td>
+</tr>
+</tbody>
+</table></div>
+<p>Các khóa bí mật TLS giả mạo <code>ee</code> sẽ bị từ chối. Tính năng chuẩn hóa của Telethon 1.45 có thể loại bỏ tiền tố
+và tên miền, nhưng tính năng này không hỗ trợ TLS giả mạo. Vui lòng dán <code>tg://proxy?server=…&amp;port=…&amp;secret=…</code>
+hoặc <code>https://t.me/proxy?server=…&amp;port=…&amp;secret=…</code> và chọn <strong>“Điền trường từ liên kết</strong>”.
+Thao tác này sẽ xác thực và điền thông tin vào các trường mà không cần kết nối hay lưu lại; quý vị hãy kiểm tra và lưu
+đường dẫn đó riêng biệt. Các trường nhập liệu thủ công vẫn có sẵn. Vui lòng tham khảo <a href="https://core.telegram.org/api/links#proxy-links">các liên kết proxy Telegram</a>.</p>
+<h3 id="public-proxies-supplied-by-your-installation">Các máy chủ proxy công cộng do hệ thống cài đặt của quý vị cung cấp<a class="anchor" href="#public-proxies-supplied-by-your-installation" aria-label="Liên kết đến phần này">#</a></h3>
+<p>Các thiết lập kết nối bao gồm danh sách công khai sẵn có từ
+<a href="https://github.com/SoliSpirit/mtproto">SoliSpirit/mtproto</a> và
+<a href="https://github.com/zakky8/mtproto-proxy-pro">zakky8/mtproto-proxy-pro</a>. Bản chụp nhanh đi kèm
+chứa thông tin về điểm cuối công khai, nguồn gốc và ngày tải xuống, chứ không bao gồm
+các tuyên bố xác minh của bất kỳ dự án nào. Công cụ này hoạt động mà không cần tải bất kỳ dữ liệu nào khi khởi động. Vui lòng chọn
+một mục, lưu đường dẫn, sau đó kiểm tra kết nối Telegram trước khi đăng nhập.</p>
+<p><strong>Tính năng cập nhật danh sách công khai</strong> sẽ truy xuất hai nguồn cấp dữ liệu HTTPS cố định theo yêu cầu. Mỗi phản hồi
+bị giới hạn ở mức 1 MiB và 20 giây; các liên kết chuyển hướng sẽ bị từ chối. Tối đa 64 mục tương thích
+cho mỗi nguồn sẽ được lưu giữ, các mục trùng lặp giữa các nguồn sẽ được loại bỏ. Các liên kết không hợp lệ, các địa chỉ IP riêng tư/dành riêng
+, tên máy chủ cục bộ và các mục Fake TLS <code>ee</code> không được hỗ trợ sẽ bị bỏ qua. Tên máy chủ
+công khai sẽ được giải quyết khi được chọn; mọi kết quả trả về phải có khả năng định tuyến toàn cầu và
+địa chỉ IP đã chọn sẽ được cố định trong tuyến đường đã lưu. Điều này ngăn không cho tên máy chủ nguồn cấp dữ liệu sau này
+chuyển hướng kết nối đã lưu sang một địa chỉ riêng tư. Vui lòng áp dụng lại một mục để giải quyết nó một lần nữa.</p>
+<p>Mỗi không gian làm việc sẽ lưu giữ các bản chụp nguồn hợp lệ gần nhất dưới định dạng <code>public-proxies.json</code>. Trong trường hợp phản hồi từ nguồn bị lỗi,
+trống hoặc không tương thích, hệ thống sẽ giữ lại các mục nhập trước đó cùng dấu thời gian của nguồn đó.
+Các cập nhật diễn ra theo từng đơn vị, được tuần tự hóa và giới hạn ở một lần thử mỗi phút cho mỗi không gian làm việc.
+Việc cập nhật hay xem danh sách đều không làm thay đổi lộ trình đã chọn. Tính khả dụng vẫn
+cần phải qua kiểm tra truyền tải; việc nhà cung cấp hiển thị thông tin trong danh sách không phải là bằng chứng cho việc Telegram đã được gửi thành công hoàn toàn.</p>
+<p>Việc tải xuống danh sách sử dụng kết nối HTTPS riêng biệt, mặc định là kết nối trực tiếp. Hãy thiết lập
+<code>TGWITNESS_PROXY_FEED_PROXY</code> thành một URL HTTP/SOCKS5 để định tuyến các yêu cầu này qua một máy chủ proxy tải xuống;
+cả hai biến thể của trình thu thập Compose đều chuyển tiếp yêu cầu này. Không có phiên Telegram, thông tin đăng nhập API,
+mã thông báo bảng điều khiển hay mã thông báo bot nào được gửi đến các nhà cung cấp. MTProxy của không gian làm việc không thể xử lý
+các tác vụ tải xuống qua HTTP này. Tên nhà cung cấp, ngày lưu trữ và lộ trình tải xuống được công bố
+trong phần <strong>“Nguồn gốc của danh sách</strong>”.</p>
+<p>Để thay thế danh sách công khai bằng danh mục nhà mạng của riêng quý vị, vui lòng cấu hình tùy chọn ghi đè dưới đây.
+Tùy chọn này sẽ vô hiệu hóa hoàn toàn các đăng ký bên ngoài, kể cả khi mảng <code>proxies</code> của nó trống.</p>
+<p>Vui lòng sao chép <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/proxies.config.example">danh mục trống</a>
+vào <code>proxy-config/proxies.json</code>
+và thêm các điểm cuối công khai đã triển khai của quý vị:</p>
+<pre><code class="language-json">{&quot;format&quot;: &quot;tgwitness-proxy-catalog-v1&quot;, &quot;proxies&quot;: [
+  {&quot;id&quot;: &quot;project-eu&quot;, &quot;label&quot;: &quot;Project EU&quot;,
+   &quot;link&quot;: &quot;tg://proxy?server=REPLACE_HOST&amp;port=443&amp;secret=REPLACE_SECRET&quot;}
+]}</code></pre>
+<p>Các giá trị ví dụ phải được thay thế. Hệ thống chấp nhận tối đa 32 mục riêng biệt. Danh sách
+đã được xác thực sẽ trả về các nhãn/máy chủ/cổng mà không cần sử dụng khóa bí mật chung; việc chọn một mục
+sẽ lưu thông tin xác thực của mục đó vào kho lưu trữ của không gian làm việc. Tính khả dụng vẫn chưa được kiểm tra cho đến khi thực hiện
+một bài kiểm tra truyền tải rõ ràng. Trong trường hợp danh mục bị lỗi, người dùng vẫn có thể thực hiện cấu hình thủ công.</p>
+<p>Khởi chạy trên hệ điều hành gốc: thiết lập đường dẫn JSON cục bộ là <code>TGWITNESS_PROXY_CATALOG</code>. Docker:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.proxies.yaml up -d --build</code></pre>
+<p>Lớp phủ được gắn vào <code>proxy-config</code> ở chế độ chỉ đọc; các tệp phải có thể được đọc bởi UID 10001 của container.
+Thư mục đó bị loại trừ khỏi Git, bối cảnh xây dựng Docker và các kho lưu trữ nguồn. Danh mục này
+cấu hình các tài khoản thu thập; <a href="../witness/">bot chứng thực</a> sử dụng
+đường dẫn HTTP/SOCKS5 riêng của mình, không phải MTProxy.</p>
+<p>Nếu máy chủ proxy gặp sự cố, TgWitness sẽ không chuyển sang chế độ Direct. Vui lòng tạm dừng quá trình giám sát trước khi
+thay đổi lộ trình. Việc lưu lại sẽ ngắt kết nối các phiên bản khách hàng cũ và hủy bỏ các phiên đăng nhập chưa hoàn tất; một
+phiên bản khách hàng mới sẽ sử dụng lộ trình đã được lưu. Sự liên kết giữa nhật ký và phiên làm việc của tài khoản vẫn được duy trì.
+Các thiết lập sẽ thay thế lộ trình trước đó: vui lòng nhập lại thông tin đăng nhập máy chủ proxy khi chỉnh sửa.</p>
+<p>Thông tin đăng nhập được mã hóa theo tiêu chuẩn <code>network.enc</code>. API không trả về tên người dùng,
+mật khẩu hoặc khóa bí mật. Các bản ghi có chữ ký chứa loại đường dẫn và thông tin về việc
+có thông tin đăng nhập hay không, đồng thời loại trừ điểm cuối và các khóa bí mật. Người vận hành có thể xem điểm cuối
+trên bảng điều khiển. Các trường chứa khóa bí mật sẽ bị xóa sau khi lưu, khóa hoặc chuyển đổi không gian làm việc.</p>
+<p><strong>Tính năng Kiểm tra kết nối Telegram</strong>, cũng có sẵn trước khi đăng nhập, sẽ mở và đóng một kết nối
+Telegram tạm thời không được ủy quyền thông qua tuyến đường này. Tính năng này không liên hệ với bất kỳ trang web kiểm tra IP
+nào. Việc thực hiện thành công chỉ xác nhận kết nối truyền tải, chứ không phải quyền truy cập vào nhóm, việc gửi tin nhắn
+đến nơi hay tính ẩn danh.</p>
+<p>Proxy này áp dụng cho các kết nối của ứng dụng Telegram, bao gồm cả việc tải xuống phương tiện từ máy chủ phân phối (DC) của Telegram.
+Các công cụ TSA được khởi chạy qua trình duyệt, pip, SSH hoặc theo cách thủ công sẽ đi theo các đường dẫn riêng biệt.
+Tên máy chủ proxy có thể được giải quyết tại địa phương. <code>rdns</code> ảnh hưởng đến tên máy chủ đích;
+Telegram thường cung cấp các địa chỉ IP số của máy chủ phân phối (DC).</p>
+<p>SOCKS5 và HTTP CONNECT thuần túy bản thân chúng không mã hóa thông tin đăng nhập proxy hay
+kênh kết nối giữa máy khách và proxy. MTProto bảo vệ lưu lượng Telegram một cách riêng biệt. Hãy sử dụng một
+kênh bảo mật phù hợp để kết nối với máy chủ proxy khi ở trên mạng không đáng tin cậy. Các nhóm riêng tư
+là các cuộc trò chuyện trên đám mây; MTProto không biến chúng thành các Cuộc trò chuyện bí mật được mã hóa đầu cuối.</p>
+<h2 id="encryption-and-signatures">Mã hóa và chữ ký<a class="anchor" href="#encryption-and-signatures" aria-label="Liên kết đến phần này">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Lớp</th>
+<th>Đã triển khai</th>
+<th>Trách nhiệm của người vận hành</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lưu lượng Telegram</td>
+<td>Telethon MTProto</td>
+<td>Niềm tin vào nền tảng, lộ trình và tính sẵn sàng</td>
+</tr>
+<tr>
+<td>Bảng điều khiển web</td>
+<td>Token mang theo, cài đặt mặc định loopback, giới hạn yêu cầu</td>
+<td>Sử dụng HTTPS hoặc đường hầm SSH để truy cập từ xa</td>
+</tr>
+<tr>
+<td>Bí mật</td>
+<td>Fernet dùng để quản lý thông tin đăng nhập API, phiên làm việc, thông tin đăng nhập proxy và khóa riêng dùng để ký số</td>
+<td>Bảo vệ khóa giải mã và máy chủ đang chạy</td>
+</tr>
+<tr>
+<td>Khóa kho lưu trữ</td>
+<td>Khóa cục bộ hoặc khóa chính bên ngoài dành cho một cài đặt mới</td>
+<td>Lưu trữ được bảo vệ riêng biệt và sao lưu khóa</td>
+</tr>
+<tr>
+<td>Tin nhắn và tệp đính kèm</td>
+<td>Lưu trữ ứng dụng dưới dạng văn bản thuần túy</td>
+<td>Ổ đĩa/khối lượng được mã hóa</td>
+</tr>
+<tr>
+<td>ZIP/JSONL/CSV/HTML</td>
+<td>Kiểm tra tính toàn vẹn, không mã hóa nội dung</td>
+<td>Bảo vệ các bản sao đã xuất và quá trình chuyển giao</td>
+</tr>
+<tr>
+<td>Nguồn gốc và thời gian</td>
+<td>Nhật ký có chữ ký, biên nhận quá trình, các công cụ tuân thủ RFC 3161</td>
+<td>Khóa tin cậy, các điểm kiểm tra độc lập/TSA và quy trình lưu giữ</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Tính năng bảo vệ lưu trữ</strong> trong phần Tài khoản hiển thị các trạng thái này. Mã thông báo bảng điều khiển là một
+mã truy cập bí mật, không phải mật khẩu mã hóa. Một mã thông báo điều khiển tất cả các không gian làm việc;
+các không gian làm việc không phải là những người dùng riêng biệt hay các đơn vị thuê độc lập.</p>
+<p>Một bản demo tổng hợp được khởi chạy rõ ràng và cách ly có thể tự động mở qua một
+kết nối loopback trực tiếp. Tính năng này sử dụng khả năng tồn tại trong một quy trình riêng biệt; nó không
+tiết lộ mã thông báo bảng điều khiển đã được cấu hình cũng như không cấp quyền truy cập vào các không gian làm việc thực tế. Các yêu cầu từ xa,
+qua proxy hoặc giữa các nguồn gốc khác nhau không thể truy cập hoặc sử dụng khả năng truy cập tự động này.
+Tính năng tiện lợi này không loại bỏ rào cản xác thực đối với dữ liệu tài khoản thực.</p>
+<p>BitLocker, LUKS, FileVault hoặc một phân vùng được mã hóa và quản lý có thể bảo vệ bộ nhớ lưu trữ theo
+các mô hình đe dọa tương ứng của chúng. Quản trị viên của một máy tính đang hoạt động và không bị khóa
+vẫn có thể đọc được dữ liệu. Hãy bao gồm SQLite WAL/SHM, tệp đa phương tiện, tệp xuất tạm thời, vùng hoán đổi, bản sao lưu
+và các tệp tải xuống từ trình duyệt vào kế hoạch lưu trữ. Một phân vùng Docker không được mã hóa chỉ đơn thuần
+vì nó là một phân vùng. TgWitness không triển khai SQLCipher hay mã hóa đối tượng.</p>
+<h2 id="external-master-key">Khóa chính bên ngoài<a class="anchor" href="#external-master-key" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Đối với việc cài đặt <strong>mới</strong>, vui lòng đặt khóa chính bên ngoài thư mục dữ liệu.
+Thao tác này sẽ không tự động di chuyển kho khóa cục bộ hiện có. Hãy chuẩn bị một thư mục chứa khóa
+mà chỉ tài khoản dịch vụ mới có quyền truy cập, sau đó thực hiện lệnh:</p>
+<pre><code class="language-sh">python -m tgwitness.security create-master-key /private/keys/tgwitness-master.key
+export TGWITNESS_VAULT_KEY_FILE=/private/keys/tgwitness-master.key
+python -m tgwitness --data-dir /private/observations/new-case</code></pre>
+<p>PowerShell, sử dụng môi trường dự án đã được cài đặt:</p>
+<pre><code class="language-powershell">python -m tgwitness.security create-master-key E:\PrivateKeys\tgwitness-master.key
+$env:TGWITNESS_VAULT_KEY_FILE = &#x27;E:\PrivateKeys\tgwitness-master.key&#x27;
+python -m tgwitness --data-dir E:\PrivateData\new-case</code></pre>
+<p>Trong Docker, hãy gắn tệp ở chế độ chỉ đọc bên ngoài <code>/data</code>, ví dụ như tại
+<code>/run/secrets/tgwitness-master.key</code>, và thiết lập biến môi trường trỏ đến đường dẫn đó.
+UID của dịch vụ phải có quyền đọc tệp này. Vui lòng truyền đường dẫn, chứ không phải các byte khóa, thông qua
+các tệp môi trường/cấu hình.</p>
+<p>Mỗi không gian làm việc sẽ nhận được một giá trị salt công khai ngẫu nhiên cùng với khóa Fernet riêng của mình, được tạo ra thông qua
+HKDF-SHA256. <code>vault.external.json</code> lưu trữ siêu dữ liệu về quá trình tạo khóa, chứ không phải khóa chính.
+Nếu thiếu hoặc nhập sai khóa, hệ thống sẽ không khởi động được mà không tự động thay thế khóa đó. Vui lòng lưu giữ cả
+siêu dữ liệu về giá trị salt lẫn khóa chính để phục hồi hệ thống.</p>
+<p>Tất cả các không gian làm việc đều được tạo ra từ cùng một khóa chính; việc khóa này bị xâm phạm sẽ ảnh hưởng đến toàn bộ
+hệ thống cài đặt. Quá trình đang chạy có thể giải mã các thông tin bí mật. Đây không phải là HSM hay
+KDF mật khẩu. Không chấp nhận sử dụng mật khẩu do người dùng tự đặt thay thế cho khóa ngẫu nhiên.</p>
+<p>Vui lòng giữ lại khóa hiện có cho các bản cài đặt hiện tại cho đến khi quá trình di chuyển có chủ đích được
+triển khai và xác minh. Việc xóa <code>vault.key</code> hoặc thay thế khóa chính có thể làm mất
+quyền truy cập vào các phiên làm việc/khóa ký. Hãy lưu trữ các bản sao lưu được mã hóa và các khóa riêng biệt, đồng thời
+thử nghiệm quá trình khôi phục trong một môi trường cách ly.</p>
+<h2 id="sources-and-verification-scope">Nguồn thông tin và phạm vi xác minh<a class="anchor" href="#sources-and-verification-scope" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Được rà soát vào ngày 26 tháng 10 năm 2026:</p>
+<ul>
+<li>https://core.telegram.org/api/auth</li>
+<li>https://core.telegram.org/api/obtaining_api_id</li>
+<li>https://docs.telethon.dev/en/stable/basic/signing-in.html</li>
+<li>https://docs.telethon.dev/en/stable/concepts/sessions.html</li>
+<li>https://core.telegram.org/mtproto/mtproto-transports</li>
+<li>https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/SourceFiles/storage/storage_account.cpp</li>
+<li>Telethon 1.45.0: SQLiteSession, StringSession, <code>Connection._proxy_connect</code>,
+    <code>TcpMTProxy.normalize_secret</code> và các phương thức tải xuống.</li>
+</ul>
+<p>Các thử nghiệm cục bộ bao gồm các thiết bị mô phỏng SOCKS5/HTTP CONNECT vòng lặp, các phiên SQLite tổng hợp,
+cách ly tuyến đường, loại trừ thông tin bí mật và từ chối khi thiếu khóa. Các thử nghiệm này không xác định
+khả năng tương tác thực tế giữa Telegram và proxy cũng như hành vi hoạt động thực tế của MTProxy. Vui lòng tham khảo
+<a href="../verification/">các tệp VERIFICATION.md</a> và <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">LIVE_ACCEPTANCE.md</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/CONNECTION-SECURITY.md">Chỉnh sửa trang này trên GitHub ↗</a><a class="next-guide" href="../deployment/"><span>Bước tiếp theo</span><strong>Triển khai →</strong></a><p>Các hướng dẫn này mô tả cách triển khai hiện tại. Kết quả xác thực và những hạn chế còn tồn tại được ghi chép riêng biệt. <a href="../verification/">Những nội dung đã được kiểm thử →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Trên trang này"><p class="nav-label">Trên trang này</p><a href="#authentication-methods">Các phương thức xác thực</a><a href="#import-a-telethon-session-file">Nhập tệp phiên làm việc Telethon</a><a href="#mtproto-telethon-and-proxies">MTProto, Telethon và các máy chủ proxy</a><a href="#encryption-and-signatures">Mã hóa và chữ ký</a><a href="#external-master-key">Khóa chính bên ngoài</a><a href="#sources-and-verification-scope">Nguồn thông tin và phạm vi xác minh</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Mã nguồn mở · Chạy trên máy tính của quý vị</span><a href="../../../../LICENSE">Giấy phép MIT</a><a href="../notice/">Thông báo dành cho người vận hành</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">An ninh</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Đang chờ tin nhắn", "Step through a fictional send, edit and delete.": "Hãy cùng tìm hiểu từng bước về một quy trình giả định bao gồm việc gửi, chỉnh sửa và xóa tin nhắn.", "No observations yet. Start the sequence or advance one event.": "Chưa có ghi chú nào. Bắt đầu chuỗi sự kiện hoặc chuyển sang sự kiện tiếp theo.", "Meet at 10:00": "Hẹn gặp lúc 10:00", "A new message is visible in the chat.": "Một tin nhắn mới đã xuất hiện trong cuộc trò chuyện.", "Record 1 appended: the collector observed the original message.": "Ghi chú 1 được đính kèm: bộ thu thập đã ghi nhận tin nhắn gốc.", "Meet at 11:00": "Hẹn gặp lúc 11:00", "The current text changes. The earlier observation stays.": "Nội dung văn bản hiện tại đã được điều chỉnh. Quan sát trước đó vẫn được giữ nguyên.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Bản ghi số 2 đã được bổ sung: nội dung chỉnh sửa là một quan sát mới. Bản ghi số 1 vẫn giữ nguyên văn bản gốc.", "Message deleted": "Tin nhắn đã bị xóa", "The message has disappeared from the chat view.": "Tin nhắn đã biến mất khỏi giao diện trò chuyện.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Ghi chú 3 được đính kèm: thông báo xóa được lưu giữ cùng với cả hai phiên bản đã quan sát được.", "0 records": "0 bản ghi", "1 record": "1 bản ghi", "2 records": "2 bản ghi", "3 records": "3 bản ghi", "Complete / {n} of 3": "Hoàn tất / {n}/3", "Step / {n} of 3": "Bước / {n}/3", "Pause": "Tạm dừng", "Replay sequence": "Trình tự phát lại", "Play sequence": "Trình tự phát lại", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Ví dụ tĩnh hiện đã có sẵn. Để tính toán các giá trị băm một cách tương tác, vui lòng truy cập trang này qua HTTPS hoặc xem bản xem trước trên localhost với sự hỗ trợ của Web Crypto.", "No record supplied": "Không có bản ghi nào được cung cấp", "Tail removed": "Phần cuối đã được loại bỏ", "≠ saved hash": "≠ băm đã lưu", "Rebuilt · different hash": "Đã được xây dựng lại · mã băm khác", "= saved hash": "= mã băm đã lưu", "Same length and matching head.": "Độ dài tương đương và tiêu đề phù hợp.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Cả ba giá trị băm được tính toán đều khớp với các giá trị băm đã lưu. Mẫu này phù hợp với giới hạn ba bản ghi được lưu giữ.", "Same saved head; the journal prefix fails verification.": "Cùng một tiêu đề đã lưu; tiền tố của sổ ghi chép không qua được quá trình xác minh.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Bản ghi số 2 hiện không còn khớp với giá trị băm đã lưu trữ của nó. Việc chỉ kiểm tra giá trị băm cuối cùng đã lưu trữ sẽ bỏ sót lỗi này; trình xác minh sẽ kiểm tra từng bản ghi một.", "Head differs from the retained checkpoint.": "Đầu trang khác với điểm kiểm tra được lưu giữ.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Các giá trị băm được tái tạo liên kết với nhau, nhưng phần đầu cuối cùng đã thay đổi. Điểm kiểm tra được lưu giữ từ chối lịch sử này. Các chữ ký gốc cũng sẽ không hợp lệ đối với các bản ghi đã bị thay đổi.", "Too short: 2 supplied records \u003c 3 retained records.": "Quá ngắn: 2 bản ghi được cung cấp \u003c 3 bản ghi được lưu giữ.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Hai giá trị băm còn lại vẫn khớp nhau. Điểm kiểm tra được lưu giữ đã tiết lộ phần cuối bị thiếu. Nếu không có ranh giới trước đó, chỉ riêng tiền tố ngắn hơn này sẽ không thể phát hiện ra sự thiếu sót.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Trình duyệt này không hỗ trợ tính toán hàm băm. Các công thức và phần giải thích tĩnh dưới đây vẫn có sẵn.", "{n} records": "{n} bản ghi", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Đã được chấp nhận: số lượng tăng lên, chữ ký đã được xác minh và khóa khớp. TgWitness duy trì ranh giới mới này.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: bản trả lời có chữ ký báo cáo số lượng bản ghi ít hơn so với điểm kiểm tra được chấp nhận gần nhất. Hệ thống TgWitness ghi nhận sự cố và giữ nguyên ranh giới đã được chấp nhận trước đó.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: số lượng không thay đổi nhưng nhánh chính khác biệt. TgWitness ghi lại sự bất đồng này và duy trì ranh giới đã được chấp nhận trước đó.", "No answer": "Không có câu trả lời", "boundary unknown": "giới hạn chưa xác định", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Không có phản hồi: TgWitness ghi lại kết quả kiểm tra không thành công. Công cụ này không thể xác định trạng thái hiện tại của bộ thu thập dữ liệu. Nếu TgWitness vẫn có thể kết nối với Bot API và chính sách xuất bản cho phép, công cụ này có thể công bố thông tin về sự cố đó.", "Send {n}": "Gửi {n}", "Edit {n}": "Chỉnh sửa {n}", "Delete {n}": "Xóa {n}", "Both accounts captured all six expected observations in this example.": "Cả hai tài khoản đều ghi lại đầy đủ cả sáu quan sát dự kiến trong ví dụ này.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Tài khoản B vẫn ghi lại được 6/6 tin nhắn. Hai biên nhận mất nhiều thời gian hơn. Tỷ lệ ghi lại và độ trễ của biên nhận trả lời cho những câu hỏi khác nhau.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Tài khoản B đã ghi lại được 5 trong số 6 hành động trước thời hạn (83,3%). Hành động chỉnh sửa còn thiếu không có độ trễ được đo lường. Kết quả này chỉ mô tả sáu hành động được kiểm soát.", "not observed by cutoff": "không được ghi nhận trước thời hạn", "{s} seconds": "{s} giây", "Exact values follow in the table.": "Các giá trị chính xác được trình bày trong bảng dưới đây.", "{s} s": "{s} s", "Not observed": "Chưa được quan sát thấy", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Bốn cuộc trò chuyện cung cấp các quan sát khác nhau. Vui lòng theo dõi các bản ghi nguồn cho từng kết nối; không gán bài đăng trên kênh cho người dùng 71001 nếu không có thông tin người gửi được xác định rõ.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Các bản ghi số 146 và 205 cung cấp cùng một ID người gửi, đó là 71001. Điều này giúp liên kết các bài đăng được quan sát thấy từ một tài khoản Telegram trên hai cuộc trò chuyện. Tuy nhiên, thông tin này không xác định danh tính của một cá nhân trong thế giới thực cũng như không quy thuộc bài đăng trên kênh đó cho bất kỳ ai.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Địa chỉ đích pay.example.invalid/new xuất hiện trong bản ghi nhóm số 146, bản ghi bàn phím bot số 173, bản ghi chỉnh sửa kênh số 188 và tin nhắn riêng tư số 205. Việc địa chỉ đích này xuất hiện lặp lại giúp liên kết các tài liệu với nhau; điều này không chứng minh rằng các tài khoản đó nằm dưới sự kiểm soát chung.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Trong trường hợp giả định này, các biên nhận phương tiện đã hoàn tất số #151 và #209 có các giá trị SHA-256 đầy đủ trùng khớp. Hãy so sánh các byte thực tế và các bản ghi tin nhắn liên quan. Tệp trùng khớp này không xác định được người tạo ra nó cũng như không chứng minh được ai là người đã chuyển tiếp nó.", "the encrypted off-site copy": "bản sao được mã hóa lưu trữ ngoài trang web", "notifications": "thông báo", "checkpoint hashes for timestamps": "Các giá trị băm điểm kiểm tra (checkpoint hashes) để xác định dấu thời gian", "signed checkpoints for the witness": "các mốc kiểm tra có chữ ký dành cho TgWitness", "Switched on in this example": "Đã kích hoạt trong ví dụ này", "Optional · off by default": "Tùy chọn · tắt theo mặc định", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Khi rời khỏi thiết bị này: kết nối Telegram và {list}. Không có gì khác.", "Default: only the Telegram connection leaves this machine.": "Mặc định: chỉ kết nối Telegram mới được truyền ra khỏi máy này.", "{done} of {total} done": "{done}/{total} đã hoàn thành", "Mark step {n} as done": "Đánh dấu bước {n} là đã hoàn thành", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Nội dung", "Copied": "Đã sao chép", "Command copied.": "Lệnh đã được sao chép.", "Selected — Ctrl/Cmd+C": "Đã chọn — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Lệnh đã được chọn. Vui lòng sao chép thủ công.", "Command copied to clipboard.": "Lệnh đã được sao chép vào khay nhớ tạm.", "Select text": "Chọn văn bản", "Clipboard unavailable. Command selected; copy it manually.": "Không thể truy cập khay nhớ tạm. Lệnh đã được chọn; vui lòng sao chép thủ công.", "A message arrives. The first observation is saved.": "Một tin nhắn được gửi đến. Quan sát đầu tiên được lưu lại.", "The time changes. Both captured versions stay.": "Thời gian có thể thay đổi. Cả hai phiên bản được lưu giữ đều được giữ nguyên.", "The message disappears. The captured history remains.": "Tin nhắn có thể biến mất. Nhưng lịch sử đã được ghi lại vẫn còn đó.", "Pause example animation": "Tạm dừng hình ảnh minh họa", "Play example animation": "Xem ví dụ về hình ảnh động", "Play": "Phát", "Full-size workspace screenshot": "Ảnh chụp màn hình toàn màn hình không gian làm việc", "Workspace screenshot · fictional data": "Ảnh chụp màn hình giao diện làm việc · dữ liệu giả định", "Close": "Đóng", "Close screenshot": "Đóng ảnh chụp màn hình", "Scrollable full-size screenshot": "Ảnh chụp màn hình toàn màn hình có thể cuộn", "Enlarge: {name}": "Phóng to: {name}", "View full size": "Xem kích thước đầy đủ"}</script>
+</body></html>

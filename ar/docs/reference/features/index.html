@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>الميزات والقيود | TgWitness</title>
+<meta name="description" content="ما تنفذه TgWitness اليوم، وما تحد منه منصة Telegram، وما يبقى من عمل مستقبلي."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/features/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="ar_AR">
+<meta property="og:title" content="الميزات والقيود | TgWitness"><meta property="og:description" content="ما تنفذه TgWitness اليوم، وما تحد منه منصة Telegram، وما يبقى من عمل مستقبلي.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/ar/docs/reference/features/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/features/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/features/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/features/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/features/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/features/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/features/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/features/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/features/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/ar/docs/reference/features/", "url": "https://phishdestroy.github.io/TgWitness/ar/docs/reference/features/", "name": "الميزات والقيود | TgWitness", "description": "ما تنفذه TgWitness اليوم، وما تحد منه منصة Telegram، وما يبقى من عمل مستقبلي.", "inLanguage": "ar", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "الصفحة الرئيسية", "item": "https://phishdestroy.github.io/TgWitness/ar/"}, {"@type": "ListItem", "position": 2, "name": "التوثيق", "item": "https://phishdestroy.github.io/TgWitness/ar/docs/"}, {"@type": "ListItem", "position": 3, "name": "مرجع", "item": "https://phishdestroy.github.io/TgWitness/ar/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "الميزات والقيود", "item": "https://phishdestroy.github.io/TgWitness/ar/docs/reference/features/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">الانتقال إلى المحتوى</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / التوثيق</span></a>
+<nav aria-label="الأدلة الإرشادية"><a href="../../concepts/">دليل مرئي</a><a href="../../">جميع الأدلة الإرشادية</a><a href="../">مرجع</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="اللغة"><span aria-hidden="true">◍</span> العربية</summary><div class="lang-list"><a href="../../../../docs/reference/features/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/features/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/features/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/features/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/features/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/features/" hreflang="tr" lang="tr">Türkçe</a><a href="./" hreflang="ar" lang="ar" aria-current="true">العربية</a><a href="../../../../fa/docs/reference/features/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/features/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/features/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/features/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/features/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/features/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="التبديل بين السمة الفاتحة والداكنة"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="الأدلة الإرشادية"><a href="../../../guides/modes.html">الأوضاع، والسيناريوهات، ومستويات الأدلة</a><p class="nav-label">الخطوات الأولى</p><a href="../../start/">ابدأ في غضون دقائق</a><a href="../../accounts/">ربط حساب</a><a href="../../proxies/">اختر وكيلًا</a><a href="../../exports/">التصدير والتحقق</a><p class="nav-label">فهم الأدلة</p><a href="../../concepts/">تعرف على كيفية عمل الأدلة</a><a href="../../cases/">التحقيق في جميع الدردشات</a><a href="../../security/">حافظ على أمانها</a><p class="nav-label">اكتشف المزيد</p><a href="../../witness/">إعداد روبوت «Witness»</a><a href="../../server/">حافظ على استمرار عملها</a><a href="../../troubleshooting/">اكتشف ما الذي حدث</a></nav><nav class="wiki-nav" aria-label="مرجع"><p class="nav-label"><a class="nav-label-link" href="../">مرجع</a></p><details class="wiki-group"><summary>الإعداد</summary><a href="../quickstart/">البداية السريعة</a><a href="../accounts/">الحسابات وتنسيقات الجلسات</a><a href="../connection/">الاتصال، والوكلاء، وحماية البيانات</a><a href="../deployment/">النشر</a></details><details class="wiki-group" open><summary>جمع</summary><a href="../collection/">كيفية عمل عملية الجمع</a><a href="../operations/">سير العمل والعمليات</a><a href="../investigation/">وضع التحقيق</a><a href="./" aria-current="page">الميزات والقيود</a></details><details class="wiki-group"><summary>الأدلة</summary><a href="../how-it-works/">كيف تعمل الأدلة</a><a href="../evidence/">تنسيق الأدلة</a><a href="../witness/">شاهد مستقل</a><a href="../timestamp/">الطوابع الزمنية</a></details><details class="wiki-group"><summary>الأمن والمشروع</summary><a href="../security/">الأمن ومعالجة البيانات</a><a href="../architecture/">الهندسة</a><a href="../verification/">ما تم اختباره</a><a href="../license/">إشعار بشأن الترخيص وعدم التوافق المعماري</a><a href="../notice/">إشعار بعدم التوافق مع المشغل</a><a href="../changelog/">سجل التغييرات</a></details></nav><p class="sidebar-note">v0.7.0<br>مفتوحة المصدر · تعمل على جهازك</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="الأدلة الإرشادية"><a href="../../../">الصفحة الرئيسية</a> <span aria-hidden="true">/</span> <a href="../../">التوثيق</a> <span aria-hidden="true">/</span> <a href="../">مرجع</a> <span aria-hidden="true">/</span> <span aria-current="page">الميزات والقيود</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">البحث في الوثائق</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="جرب «proxy» أو «hash chain» أو «token» أو «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="بحث واضح" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">اكتب كلمة للبحث في الأدلة والمراجع. يبقى البحث في متصفحك.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="language-notice">لا تزال أجزاء من هذه الصفحة باللغة الإنجليزية: فقد تغير النص الأصلي باللغة الإنجليزية بعد ترجمته.</p><p class="eyebrow">مرجع / جمع</p><h1>الميزات والقيود</h1><p class="guide-outcome">ما تنفذه TgWitness اليوم، وما تحد منه منصة Telegram، وما يبقى من عمل مستقبلي.</p><div class="wiki-body"><p>مرجع التصميم: 26 أكتوبر 2026. حالة الاستخدام الأساسية هي مجموعات Telegram الخاصة
+والقنوات التي يمكن الوصول إليها من خلال الحسابات المتصلة. يفصل هذا المستند بين
+السلوك المنفذ، وحدود المنصة، والأعمال المستقبلية. لا يُعد عنصر البنية المستهدفة
+ادعاءً بأن الميزة موجودة بالفعل.</p>
+<h2 id="standalone-application">تطبيق مستقل<a class="anchor" href="#standalone-application" aria-label="رابط لهذا القسم">#</a></h2>
+<p>تمتلك TgWitness عملية تثبيت ودليل بيانات ودورة حياة إصدار خاصة بها. وتقوم
+واجهة الويب المدمجة بإدارة الإعداد والمراجعة؛ ويمكن استخدام السجلات المصدرة بشكل مستقل.</p>
+<p>يقوم المشغل بربط حساباته، واختيار المصادر المرئية لكل منها، والحصول على
+سجل ملاحظات محفوظ. تعرض اللوحة المحتوى، والتغييرات المحفوظة، ومصدر
+الملاحظات، والثغرات المعروفة. ويمكن لمحقق آخر التحقق من المواد المصدرة.</p>
+<p>هناك أربع حالات متميزة ذات أهمية: تفويض الحساب، والوصول إلى المصدر، ووجود
+أداة تجميع فعالة، ومدى إثبات اكتمال التسليم. ولا تثبت أي من
+الحالات الثلاث الأولى الحالة الرابعة تلقائيًا. فالمجموعة غير النشطة ليست بالضرورة
+أداة تجميع فاشلة.</p>
+<h2 id="optional-extras">إضافات اختيارية<a class="anchor" href="#optional-extras" aria-label="رابط لهذا القسم">#</a></h2>
+<p>Everyday setup is account → sources → observation. <strong>Extras</strong> is a separate destination
+with two cards: a Telegram witness bot and planned
+GitHub build verification. Each states its availability and requirements before showing
+settings. Choosing a card opens instructions; it does not enroll or start a service.</p>
+<p>يتكون إعداد البوت من ثلاث خطوات: إنشاء وصول للقراءة فقط، واختيار إعدادات النشر، و
+التشغيل على مضيف Witness. يتم الكشف عن خيارات الشبكة والنشر، والاتصالات الحالية، و
+أوامر التحقق عند الطلب. يختلف التكوين الذي تم تنزيله
+عن نسخة Witness قيد التشغيل. يؤدي تبديل الإضافات إلى الاحتفاظ بالمسودة؛ بينما تؤدي تغييرات الحساب وقفله
+إلى مسح الرمز المؤقت والنموذج. يتضمن الدليل المدمج تعليمات التشغيل.
+يظل GitHub خطة محددة، دون نموذج بيانات اعتماد أو حالة اتصال وهمية.</p>
+<h2 id="protocol-and-private-sources">بروتوكول ومصادر خاصة<a class="anchor" href="#protocol-and-private-sources" aria-label="رابط لهذا القسم">#</a></h2>
+<p><strong>MTProto هو بروتوكول Telegram؛ أما Telethon فهي مكتبة Python التي يستخدمها TgWitness
+للتواصل عبر MTProto.</strong> وهما ليسا طريقتين بديلتين للاتصال. تستخدم عملية التجميع بروتوكول MTProto؛
+بينما ينشر الشاهد الاختياري عمليات التحقق الموقعة عبر واجهة برمجة تطبيقات الروبوت (Bot API).</p>
+<p>لكل مساحة عمل عميلها المصرح له وتدفق تحديثات الحساب الخاص بها. تقوم TgWitness
+باختيار الملاحظات من المصادر المُعدة مسبقًا وتقديم طلبات صريحة منفصلة
+لوظائف مثل لقطات السجل وتنزيل الوسائط.</p>
+<p>لا يحتاج المصدر الخاص إلى اسم مستخدم عام. يُعد نوع النظير في Telegram والمعرف الرقمي
+هما معرّفي الهوية؛ أما الألقاب وأسماء المستخدمين فيمكن تغييرها. يعتمد الوصول على
+العضوية والأذونات الحالية. لا تقوم TgWitness تلقائيًّا بإضافة المصادر أو تجاوز
+موافقة الانضمام. ولا يُعد هاش الوصول من حساب آخر رمز وصول عالمي.</p>
+<p>يجب أن يأخذ نموذج التجميع في الاعتبار السجل المخفي قبل الانضمام، وأدوار المشاركين/المسؤولين
+، وإلغاء الجلسات، وإزالة الأذونات أو تغييرها، والانتقال من المجموعة إلى المجموعة الفائقة
+، والمواضيع/المنتديات، والمناقشات المرتبطة، وهويات القنوات، والمرفقات غير المتاحة
+. لم يتم اختبار كل تركيبة من هذه التركيبات في بيئة حية بعد.</p>
+<p>يتم التحقق من ظهور المصدر عند بدء تشغيل أداة التجميع. وغياب مصدر ما عن
+نتائج الحوار المحددة يعني أن <strong>الوصول إليه غير مؤكد،</strong> وليس إزالة مؤكدة. ولا يمنع عدم توفر
+مصدر واحد من مراقبة المصادر الأخرى التي يمكن الوصول إليها. لا تضع أبدًا روابط الدعوة
+أو الجلسات الحقيقية في الأماكن العامة.</p>
+<h2 id="multiple-accounts">حسابات متعددة<a class="anchor" href="#multiple-accounts" aria-label="رابط لهذا القسم">#</a></h2>
+<p>يدعم اللوحة أي عدد من <strong>مساحات العمل</strong>، ولكل منها ما يلي:</p>
+<ul>
+<li>التفويض، والخزينة المشفرة، ومسار الاتصال.</li>
+<li>سجل SQLite وهوية التوقيع Ed25519.</li>
+<li>المصادر المختارة، وقائمة انتظار الوسائط، وإعدادات الالتقاط.</li>
+<li>حالة المراقبة، والأخطاء، ونقاط التحقق، وعمليات التصدير.</li>
+</ul>
+<p>لا يؤدي تبديل مساحة العمل المعروضة إلى إيقاف عمل أداة تجميع أخرى. يتم رفض
+التفويض المزدوج للحساب عبر مساحات العمل. لا يمكن إعادة تخصيص سجل مرتبط بالفعل بحساب Telegram
+واحد لحساب آخر؛ لكن يُسمح بإعادة ربط الحساب نفسه.
+وهذا يحافظ على هوية الحساب ونطاق معرّف الرسالة ذي الصلة.</p>
+<p>لا يوجد عدد ثابت ولا ضمان محدد للإنتاجية. تتشارك مساحات العمل في
+عملية Python وحلقة الأحداث. ولا يزال إنشاء عمال حسابات منفصلين مهمة مستقبلية. ول
+عزل العملية حاليًا، استخدم تثبيتات منفصلة ومنافذ ودلائل بيانات منفصلة.</p>
+<p>قم بتعيين المصادر التي يمكن لكل حساب الوصول إليها. قد تراقب حسابات مختلفة نفس
+المجموعة، لكن ملاحظاتها تظل منفصلة وتحتفظ بمصدرها. لا يُعتبر حسابان
+على جهاز واحد يتحكم فيه مشغل واحد شاهدين مستقلين. تتم عمليات التصدير
+لكل مساحة عمل على حدة؛ ولا يتم تنفيذ حزمة قضايا مدمجة أو خط زمني شامل لـ Telegram.</p>
+<h2 id="capture-and-attribution">التسجيل وتحديد المصدر<a class="anchor" href="#capture-and-attribution" aria-label="رابط لهذا القسم">#</a></h2>
+<p>توفر «المصادر» خيارات لكل حساب على حدة للرسائل الجديدة، والتعديلات، والحذف، وردود الفعل
+والعضوية. تحتفظ الإعدادات المسبقة إما بجميع الفئات أو بالرسائل/التعديلات/الحذف.
+تنطبق السياسة على المجموعات المحددة في مساحة العمل، وتبقى سارية بعد إعادة التشغيل، وتكون موقعة
+مع التغييرات قبل وبعد. الإعدادات الافتراضية تحتفظ بجميع الفئات. إيقاف تشغيل فئة ما
+لا يؤدي إلى إزالة السجلات القديمة؛ كما أن إعادة تشغيلها لا تؤدي إلى إعادة بناء الأحداث الفائتة.
+السجلات التشغيلية، وأحداث خدمة المجموعة الأخرى، ولقطات السجل الصريحة هي
+أمر منفصل. قد تحتفظ كائنات Telegram الملتقطة بالبيانات الوصفية المضمنة بغض النظر عن
+أزرار التحديث المنفصلة. لا توجد حتى الآن أي تجاوزات للفئات لكل مجموعة.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>المواد</th>
+<th>تم التسجيل الآن</th>
+<th>الحدود</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>الرسالة</td>
+<td>النص، ومعرّفات الأقران/الرسائل، وبيانات المرسل الوصفية، والردود، ومغلف التحديث الأصلي</td>
+<td>لا يوجد توقيع Telegram قابل للتحقق منه علنًا لهذه الرسالة</td>
+</tr>
+<tr>
+<td>تحرير</td>
+<td>الإصدار الجديد الذي تمت ملاحظته وأي إصدارات تم حفظها سابقًا</td>
+<td>قد تُفقد التعديلات المؤقتة التي تتم أثناء فترات التعطل؛ والمرسل ليس بالضرورة هو المُعدِّل</td>
+</tr>
+<tr>
+<td>الحذف</td>
+<td>الإشعارات والمحتوى الذي تم تسجيله مسبقًا، إن وجد</td>
+<td>عادةً لا يُذكر من قام بالحذف أو الوقت الدقيق للعملية</td>
+</tr>
+<tr>
+<td>الحذف غير المحدد النطاق</td>
+<td>إشعار أصلي على مستوى الحساب دون التخمين بشأن الطرف المقابل</td>
+<td>يُعد الربط الدقيق مع معرّفات الحسابات المحفوظة مسبقًا من مهام العمل المستقبلية</td>
+</tr>
+<tr>
+<td>ردود الفعل</td>
+<td>عدد الزيارات والهويات الحديثة الظاهرة</td>
+<td>تتطلب الحصول على قائمة كاملة بالقنوات المتاحة إجراء استعلامات منفصلة؛ وقد تخفي القنوات هوياتها</td>
+</tr>
+<tr>
+<td>العضوية</td>
+<td>رسائل الخدمة وتحديثات المشاركين التي تم تسليمها</td>
+<td>يعتمد مستوى الظهور على الدور ونوع الدردشة؛ ولا يُعتبر غياب الأحداث دليلاً على عدم وجودها</td>
+</tr>
+<tr>
+<td>إجراءات المسؤول</td>
+<td>التحديثات ذات الصلة فقط</td>
+<td>لم يتم تنفيذ استقصاء منفصل لسجلات الإدارة</td>
+</tr>
+<tr>
+<td>مرفق</td>
+<td>وصف النسخة الأصلية، وعدد البايتات التي تم تنزيلها/SHA-256 ونتائج المحاولات</td>
+<td>قد يكون الملف المفقود غير قابل للاستعادة؛ ولا يتم استبدال أحدث إصدار</td>
+</tr>
+<tr>
+<td>التاريخ</td>
+<td>لقطة واضحة للرسائل المرئية الحالية</td>
+<td>لا يعيد بناء جميع التعديلات أو المحتوى المحذوف</td>
+</tr>
+<tr>
+<td>عملية التجميع</td>
+<td>التشغيل/الإيقاف، إشارة النبض، الأخطاء، الإعدادات، النطاق وإيصال البرنامج</td>
+<td>تقرير ذاتي، وليس شهادة مستقلة عن العملية</td>
+</tr>
+</tbody>
+</table></div>
+<p>لا يُنسب أي فعل إلى شخص ما إلا إذا أشار المصدر فعليًّا إلى ذلك الشخص.
+وإلا، فإن الواجهة تُبلغ عن عدم وجود الإسناد. وتُعتبر أسماء المستخدمين والأسماء
+سمات مُلاحظة، وليست دليلاً على الهوية في العالم الواقعي.</p>
+<h2 id="capacity-and-telegram-limits">السعة وحدود Telegram<a class="anchor" href="#capacity-and-telegram-limits" aria-label="رابط لهذا القسم">#</a></h2>
+<p>لا يوجد عدد محدد من الدردشات التي يمكن مراقبتها بجودة مضمونة.
+تعتمد السعة على عدد الأحداث في الثانية في أوقات الذروة، وحجم المرفقات وعددها، و
+RPCs الإضافية، والحسابات النشطة، وزمن استجابة القرص/المساحة الخالية، وظروف الشبكة، وحدود Telegram،
+والتأخير المقبول، وعمق قائمة الانتظار.</p>
+<p>يميز Telegram بين التسليم السلبي والاستقصاء القصير النشط. تصف وثائق التحديث الخاصة به
+استدعاءات <code>updates.getChannelDifference</code> إضافية للقنوات المفتوحة
+والمجموعات الفائقة، وتوصي بما لا يزيد عن <strong>عشرة مصادر يتم استقصاؤها بشكل قصير في وقت واحد
+</strong>. وهذا ليس حدًا أقصى يبلغ عشر مجموعات مختارة ولا ضمانًا للاكتمال.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>الوضع</th>
+<th>الغرض</th>
+<th>الحالة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ملاحظة قياسية</td>
+<td>تسجيل التحديثات الواردة من مصادر مختارة</td>
+<td>تم التنفيذ</td>
+</tr>
+<tr>
+<td>ملاحظة ذات أولوية</td>
+<td>فحوصات إضافية للتأكد من عدم وجود تباينات في مجموعة مصادر محددة</td>
+<td>لم يتم تنفيذه كوضع مستخدم</td>
+</tr>
+</tbody>
+</table></div>
+<p>لا يُعد الاستقصاء العشوائي عالي التردد، الذي يتجاهل FloodWait أو يفترض سعة خطية
+من الحسابات الإضافية، نموذجًا صالحًا لتحديد الحجم. الحدود الافتراضية هي
+أول 1,000 محادثة مدرجة، بحد أقصى 500 رسالة لكل لقطة سجل،
+1–2,000 ميبيت لكل ملف تم جمعه حسب النوع، و4 جيجابايت من محتوى ZIP الموقّع غير المضغوط؛ ويتم
+تغيير كل منها لكل مساحة عمل ضمن <strong>«المعلمات</strong>». لا يوجد حد أقصى ثابت لعدد الأحداث في عمليات التصدير.
+يقتصر الاستخدام الاحتياطي للمتصفح على 128 ميبيت (MiB) افتراضيًّا؛ أما واجهة سطر الأوامر (CLI) للبث المباشر فلها
+حد نقل قابل للتكوين، يبلغ 5 جيجابايت (GiB) افتراضيًّا.</p>
+<p>يقيس <code>tools/check_capacity.py</code> استيعاب وتصدير البيانات الاصطناعية المحلية. ولا تمثل نتائجه
+قياسات تسليم Telegram أو عددًا مضمونًا للمحادثات الحقيقية. انظر
+<a href="../verification/">ملف VERIFICATION.md</a> للاطلاع على الإصدار الذي تم قياسه وحجم العمل.</p>
+<h2 id="reliability-and-recovery">الموثوقية والاستعادة<a class="anchor" href="#reliability-and-recovery" aria-label="رابط لهذا القسم">#</a></h2>
+<p>تشمل السلوكيات المُنفَّذة: معاملات SQLite WAL/المتزامنة؛ عمليات الكتابة الذرية
+للرسائل ومهام الوسائط؛ المهام الدائمة وتأخيرات إعادة المحاولة؛ واصفات الإصدار الأصلي؛
+محاولات إعادة محدودة؛ وFloodWait للوسائط الدائمة؛ وتنزيلات الوسائط خارج
+فترة انتظار الشبكة الخاصة بحدث النص؛ وعمليات التصدير ذات البادئة الثابتة مع استمرار عمليات الكتابة اللاحقة؛ والإعدادات المتجانسة و
+سجلات التدقيق؛ والحفاظ على التفويض العامل بعد فشل تسجيل الدخول البديل؛
+عزل مساحة عمل إضافية تالفة؛ محاولات إعادة اتصال صريحة؛
+تقارير متميزة عن فقدان التفويض؛ وكشف التغييرات في الوقت الفعلي باستخدام ساعة أحادية الاتجاه.</p>
+<p>يتم حفظ نقاط البداية والنهاية (pts/qts) وتسلسل (seq) الحساب والقناة واستئنافها بعد إعادة التشغيل، كما يتم إعادة فحص الدردشات
+المراقبة بشكل دوري؛ انظر <a href="../evidence/#durable-collection-and-process-receipts-02">تنسيق الأدلة</a>. إن حفظ الموضع
+بشكل دوري لا يُعد إقرارًا فوريًا وخاليًا من الفقدان بقبول السجل.</p>
+<p>يتم تسجيل الرأس السابق والحد الفاصل بين الأوضاع المتصلة وغير المتصلة عند بدء كل عملية. ولا يُعامل السجل الحالي
+على أنه إصلاح للفجوات. سعة تخزين Telegram محدودة؛ ولا يمكن لـ
+<code>differenceTooLong</code> إعادة بناء كل المحتوى المختفي. ويجب أن
+تظل الفجوات التي لا يمكن استردادها واضحة حتى لو نجحت لقطة سجل لاحقة.</p>
+<h2 id="evidence-model">نموذج الأدلة<a class="anchor" href="#evidence-model" aria-label="رابط لهذا القسم">#</a></h2>
+<p>يُسجل كل حدث التسلسل، ووقت الملاحظة المحلي بتوقيت UTC، ووقت المصدر عند توفره،
+والنوع، والمصدر، والفاعل عند توفره، والحمولة الأصلية، والتجزئة السابقة، والتوقيع.
+كما تحتفظ ملاحظات الرسائل بسياق حساب المجمع/التشغيل.</p>
+<p>يحتوي إيصال العملية الموقّع على معرّف تشغيل عشوائي؛ وإصدارات TgWitness/Python/OS/التبعيات؛
+وقيم SHA-256 لملفات المصدر والبصمة المجمعة؛ والحساب الأولي،
+ونطاق العمل والإعدادات؛ وقراءات UTC/monotonic؛ ورأس السجل السابق.
+يتم تسجيل تغييرات الإعدادات، وعمليات البدء/الإيقاف، والأخطاء في نفس السجل. يتم الاحتفاظ بنقاط
+التحقق عند بدء التشغيل، كل خمس دقائق أثناء المراقبة (قابلة للتعديل)، وعند الإيقاف المنظم.
+يمكن لنقطة التحقق المحلية المحتفظ بها اكتشاف التراجع إلى بادئة سجل سابقة.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>الآلية</th>
+<th>ما يثبته</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ملف SHA-256</td>
+<td>تتطابق البايتات مع ملخص معروف</td>
+</tr>
+<tr>
+<td>سلسلة هاش الأحداث</td>
+<td>تسلسل التسجيلات/الربط بالنسبة لحدود معروفة</td>
+</tr>
+<tr>
+<td>Ed25519</td>
+<td>التوقيع باستخدام مفتاح معين</td>
+</tr>
+<tr>
+<td>نقطة تفتيش مستقلة</td>
+<td>وتتوافق المواد اللاحقة مع الحدود المحددة</td>
+</tr>
+<tr>
+<td>قياس حجم ملف البرنامج</td>
+<td>تقرير ذاتي من أداة التجميع حول الملفات التي تم قياسها</td>
+</tr>
+<tr>
+<td>رد مستقل وصحيح من إدارة أمن النقل (TSA)</td>
+<td>وجود بايتات معينة في وقت TSA في ظل افتراضات ثقة صريحة</td>
+</tr>
+</tbody>
+</table></div>
+<p>تم تنفيذ إعداد طلبات RFC 3161 والتحقق من استجابات OpenSSL.
+أما الإرسال التلقائي فلم يتم تنفيذه. ولا يُعد الطلب أو التوقيع المحلي الذي يحمل
+توقيت الجهاز طابعًا زمنيًا مستقلًا. انظر <a href="../timestamp/">TIMESTAMP.md</a>.</p>
+<p>يمكن للمشغل الذي يتحكم في أداة التجميع ومفتاح التوقيع أن يزور ملاحظات جديدة موقعة.
+ولا تثبت التوقيعات أصل الرسائل في Telegram أو صحتها أو
+مقبوليتها القانونية التلقائية. وتتطلب الحراسة الأكثر صرامة وجود نقطة تفتيش مستقلة/تخزين زمني،
+وضوابط وصول للمفاتيح، وسجلات نقل، والتحقق من برامج موثوقة.</p>
+<h2 id="export-deployment-and-handoff">التصدير والنشر والتسليم<a class="anchor" href="#export-deployment-and-handoff" aria-label="رابط لهذا القسم">#</a></h2>
+<p>يحتوي ملف ZIP الموقّع على ملفات JSONL و CSV و HTML الأصلية، والمرفقات المحفوظة، والتجزئات، و
+بيان محتويات موقّع، وأداة تحقق سهلة الاستخدام. ويغطي مساحة عمل واحدة وبادئة كاملة
+ثابتة للسجل. لا تقوم عوامل تصفية البحث في اللوحة بإزالة السجلات دون إشعار. يتم استبعاد المفاتيح السرية،
+والرموز المميزة، وجلسات Telegram؛ وقد تحتوي الملاحظات الأصلية مع ذلك على
+معلومات شخصية وبيانات وصفية لـ Telegram.</p>
+<p>احتفظ بملخص ملف ZIP، والبصمة الموثوقة، ونقطة الفحص، وإيصال المعالجة، وسجل التسليم
+بشكل منفصل. استخدم أداة تحقق من تثبيت موثوق به، بدلاً من الوثوق
+بالكود القابل للتنفيذ لمجرد ظهوره في ملف ZIP الذي تم فحصه.</p>
+<p>تُوزَّع واجهة المتصفح محليًّا دون الحاجة إلى Node.js أو شبكات توزيع المحتوى (CDNs) أو الخطوط الخارجية. يتحكم رمز
+مشغل واحد في عملية التثبيت. يتطلب الوصول عن بُعد استخدام بروتوكول HTTPS أو نفق SSH.
+يتم توفير تعريفات أصلية بلغة Python والحاويات، مع أمثلة للخدمات في
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">المجلد deploy/</a>؛ ويتم سرد فحوصات النظام الأساسي التي تم تنفيذها بشكل منفصل.</p>
+<p>تستخدم مساحة العمل الافتراضية جذر البيانات؛ بينما تستخدم مساحات العمل الإضافية <code>profiles/&lt;id&gt;/</code>.
+يتطلب النسخ الاحتياطي إيقاف العملية ومجموعة البيانات/المفاتيح الكاملة. ملفات ZIP الخاصة بالأدلة
+ليست نسخًا احتياطية للتطبيق. يمكن لـ Secrets استخدام مفتاح رئيسي خارجي لدليل بيانات جديد؛
+يتم توفير تشفير السجل/الوسائط بواسطة قرص/وحدة تخزين المشغل.
+انظر <a href="../connection/">CONNECTION-SECURITY.md</a> و <a href="../operations/">OPERATIONS.md</a>.</p>
+<h2 id="stable-release-criteria">معايير الإصدار المستقر<a class="anchor" href="#stable-release-criteria" aria-label="رابط لهذا القسم">#</a></h2>
+<p>قبل إصدار نسخة مستقرة، يجب توضيح ما يلي:</p>
+<ol>
+<li>مجموعات خاصة حقيقية، ومجموعات كبيرة، ومنتديات، وقنوات مع أدوار الأعضاء/المسؤولين و
+    سجل المحادثات المخفي/المرئي، بما في ذلك تسجيل الدخول/التوثيق الثنائي (2FA)، وإلغاء الترخيص، وفقدان حق الوصول.</li>
+<li>التعديلات والحذف وردود الفعل والعضوية والوسائط الخاضعة للرقابة مقابل الإجراءات المعروفة.</li>
+<li>تعطل العمليات/الخادم، أعطال الأقراص/امتلاء القرص، مراجع الملفات منتهية الصلاحية، FloodWait،
+    انقطاع الاتصال بالشبكة، الملفات التالفة، والتراجع عن التغييرات في قاعدة البيانات.</li>
+<li>استخدام متواصل لحسابات متعددة مع تأخير محسوب، وقوائم انتظار، وذاكرة، ومساحة قرص، بما في ذلك
+    المصادر الهادئة والصاخبة معًا.</li>
+<li>فجوة زمنية بين تقدم حالة MTProto وقبول السجل.</li>
+<li>تثبيت نظيف على مصفوفة نظام التشغيل/الحاوية المقصودة واستعادة النسخ الاحتياطي التي تم التحقق منها.</li>
+<li>مراجعة مستقلة للأمور المتعلقة بالأمن والتوقيعات وادعاءات الإسناد/الأدلة.</li>
+</ol>
+<p>لا يزال استقصاء سجلات الإدارة، وقوائم المفاعلات الإضافية، والاستقصاء ذو الأولوية، والعاملين المنفصلين،
+والتشفير على مستوى التطبيق بأكمله، وأدوار المستخدمين، من المهام المستقبلية. يدعم الإصدار 0.6
+TData المحدود لحساب واحد واستيراد ملف الحساب الموصوف في <a href="../accounts/">ACCOUNTS.md</a>.
+يرجى مراجعة شروط واجهة برمجة تطبيقات Telegram قبل النشر. توجد المراجع البحثية ونتائج البحث المتعلقة بالمنصة
+في <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/RESEARCH.md">ملف RESEARCH.md</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/PRODUCT.md">تحرير هذه الصفحة على GitHub ↗</a><a class="next-guide" href="../how-it-works/"><span>الخطوة التالية</span><strong>كيف تعمل الأدلة ←</strong></a><p>تصف هذه الأدلة طريقة التنفيذ الحالية. ويتم توثيق نتائج التحقق والثغرات المتبقية بشكل منفصل. <a href="../verification/">ما تم اختباره ←</a></p></footer>
+</main>
+<aside class="toc" aria-label="في هذه الصفحة"><p class="nav-label">في هذه الصفحة</p><a href="#standalone-application">تطبيق مستقل</a><a href="#optional-extras">إضافات اختيارية</a><a href="#protocol-and-private-sources">بروتوكول ومصادر خاصة</a><a href="#multiple-accounts">حسابات متعددة</a><a href="#capture-and-attribution">التسجيل وتحديد المصدر</a><a href="#capacity-and-telegram-limits">السعة وحدود Telegram</a><a href="#reliability-and-recovery">الموثوقية والاستعادة</a><a href="#evidence-model">نموذج الأدلة</a><a href="#export-deployment-and-handoff">التصدير والنشر والتسليم</a><a href="#stable-release-criteria">معايير الإصدار المستقر</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>مفتوحة المصدر · تعمل على جهازك</span><a href="../../../../LICENSE">رخصة MIT</a><a href="../notice/">إشعار المشغل</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">الأمن</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "في انتظار رسالة", "Step through a fictional send, edit and delete.": "تتبع خطوات عملية إرسال وتعديل وحذف افتراضية.", "No observations yet. Start the sequence or advance one event.": "لا توجد ملاحظات حتى الآن. ابدأ التسلسل أو انتقل إلى الحدث التالي.", "Meet at 10:00": "نلتقي الساعة 10:00", "A new message is visible in the chat.": "تظهر رسالة جديدة في الدردشة.", "Record 1 appended: the collector observed the original message.": "تم إرفاق السجل رقم 1: لاحظ المجمع الرسالة الأصلية.", "Meet at 11:00": "نلتقي الساعة 11:00", "The current text changes. The earlier observation stays.": "النص الحالي قد يتغير. أما الملاحظة السابقة فتبقى كما هي.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "تم إرفاق السجل 2: التعديل يمثل ملاحظة جديدة. ولا يزال السجل 1 يحتوي على النص الأصلي.", "Message deleted": "تم حذف الرسالة", "The message has disappeared from the chat view.": "لقد اختفت الرسالة من شاشة الدردشة.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "تم إرفاق السجل رقم 3: يتم الاحتفاظ بإشعار الحذف جنبًا إلى جنب مع كلا النسختين اللتين تمت ملاحظتهما.", "0 records": "0 سجل", "1 record": "سجل واحد", "2 records": "سجلان", "3 records": "3 سجلات", "Complete / {n} of 3": "كامل / {n} من 3", "Step / {n} of 3": "الخطوة / {n} من 3", "Pause": "توقف مؤقت", "Replay sequence": "تسلسل إعادة التشغيل", "Play sequence": "تشغيل التسلسل", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "يتوفر نموذج ثابت. لحساب التجزئات (هاش) تفاعليًّا، افتح هذه الصفحة عبر HTTPS أو معاينة localhost مع دعم Web Crypto.", "No record supplied": "لم يتم تقديم أي سجل", "Tail removed": "تم حذف الجزء الأخير", "≠ saved hash": "≠ التجزئة المحفوظة", "Rebuilt · different hash": "أعيد بناؤه · هاش مختلف", "= saved hash": "= التجزئة المحفوظة", "Same length and matching head.": "نفس الطول وعنوان مطابق.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "تتطابق جميع التجزئات الحسابية الثلاثة مع التجزئات المحفوظة. تتوافق هذه العينة مع الحد المحدد المتمثل في الاحتفاظ بثلاثة سجلات.", "Same saved head; the journal prefix fails verification.": "نفس العنوان المحفوظ؛ لم تجتز بادئة السجل عملية التحقق.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "لم يعد السجل رقم 2 مطابقًا لـ«هاش»ه المحفوظ. قد يفوت هذا الأمر عند التحقق من الرأس الأخير المخزن فقط؛ لذا يقوم المُحقق بفحص كل سجل.", "Head differs from the retained checkpoint.": "يختلف العنوان عن نقطة التحقق التي تم الاحتفاظ بها.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "ترتبط التجزئات المعاد بناؤها ببعضها البعض، لكن الرأس النهائي قد تغير. نقطة التحقق المحتفظ بها ترفض هذا السجل. كما أن التوقيعات الأصلية ستفشل أيضًا في السجلات التي تم تغييرها.", "Too short: 2 supplied records \u003c 3 retained records.": "قصير جدًا: 2 سجلات مقدمة \u003c 3 سجلات محفوظة.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "لا يزال التوافقيان المتبقيان متطابقين. ويكشف نقطة التحقق المحتفظ بها عن الجزء المفقود في نهاية السلسلة. وبدون ذلك الحد السابق، لما كشفت هذه البادئة الأقصر وحدها عن هذا الحذف.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "حساب التجزئة غير متاح في هذا المتصفح. تظل الصيغ والتفسيرات الثابتة أدناه متاحة.", "{n} records": "{n} سجل", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "تم القبول: يزداد العدد، ويتم التحقق من التوقيع، ويتطابق المفتاح. ويحتفظ الشاهد بهذا الحد الجديد.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "التراجع: يُظهر الرد الموقّع عددًا أقل من السجلات مقارنةً بنقطة التحقق الأخيرة المقبولة. تقوم الأداة بتسجيل المشكلة والاحتفاظ بحدود النسخة السابقة المقبولة.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "التفرع (Fork): العدد لم يتغير لكن الرأس يختلف. يقوم الشاهد بتسجيل الخلاف ويحتفظ بالحدود التي تم قبولها سابقًا.", "No answer": "لا توجد إجابة", "boundary unknown": "الحدود غير معروفة", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "عدم الاستجابة: يسجل «الشهود» فشل عملية التحقق. ولا يمكنه تأكيد الحالة الحالية لـ«المجمع». إذا كان «الشهود» لا يزال قادرًا على الوصول إلى واجهة برمجة تطبيقات الروبوت (Bot API) وكانت سياسة النشر الخاصة به تسمح بذلك، فيمكنه نشر هذا الفشل.", "Send {n}": "أرسل {n}", "Edit {n}": "تحرير {n}", "Delete {n}": "حذف {n}", "Both accounts captured all six expected observations in this example.": "وقد استوفى كلا الحسابين جميع الملاحظات الست المتوقعة في هذا المثال.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "لا يزال الحساب «ب» قد سجل 6 من أصل 6. استغرق تسجيل إيصالين وقتًا أطول. تعكس نسبة التسجيل وتأخير استلام الإيصالات إجابات مختلفة.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "سجل الحساب «ب» 5 من أصل 6 قبل الموعد النهائي (83.3٪). لا يوجد تأخير مقاس للتعديل المفقود. تصف هذه النتيجة فقط الإجراءات الستة الخاضعة للرقابة.", "not observed by cutoff": "لم يُلاحظ ذلك بحلول الموعد النهائي", "{s} seconds": "{s} ثانية", "Exact values follow in the table.": "ترد القيم الدقيقة في الجدول التالي.", "{s} s": "{s} s", "Not observed": "لم يُلاحظ", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "تقدم أربع محادثات ملاحظات مختلفة. اتبع السجلات المصدرية لكل اتصال؛ ولا تنسب منشور القناة إلى المستخدم 71001 دون وجود مرسل محدد.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "يقدم السجلان رقم 146 ورقم 205 نفس معرّف المرسل، 71001. وهذا يربط بين المنشورات الملحوظة لحساب Telegram عبر محادثتين. ولا يحدد هوية شخص حقيقي ولا ينسب المنشور إلى القناة.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "يظهر العنوان pay.example.invalid/new في سجل المجموعة رقم 146، ولوحة مفاتيح الروبوت رقم 173، وتعديل القناة رقم 188، والرسالة الخاصة رقم 205. وجود عنوان متكرر يربط بين المواد؛ لكنه لا يثبت وجود سيطرة مشتركة على تلك الحسابات.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "تحتوي إيصالات الوسائط المكتملة رقم #151 ورقم #209 على قيم SHA-256 كاملة متطابقة في هذه الحالة الافتراضية. قارن بين البايتات الفعلية وسجلات الرسائل المرتبطة بها. لا يحدد الملف المطابق هوية منشئه ولا يثبت هوية من قام بإعادة توجيهه.", "the encrypted off-site copy": "النسخة المشفرة خارج الموقع", "notifications": "الإشعارات", "checkpoint hashes for timestamps": "تجزئات نقاط التحقق (checkpoint hashes) للطوابع الزمنية", "signed checkpoints for the witness": "نقاط تحقق موقعة لـ «TgWitness»", "Switched on in this example": "تم تفعيلها في هذا المثال", "Optional · off by default": "اختياري · معطّل افتراضيًا", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "ما يُترك في هذا الجهاز: اتصال Telegram و{list}. لا شيء آخر.", "Default: only the Telegram connection leaves this machine.": "الإعداد الافتراضي: لا يغادر هذا الجهاز سوى اتصال Telegram.", "{done} of {total} done": "{done} من {total} تم إنجازها", "Mark step {n} as done": "وضع علامة «تم» على الخطوة {n}", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "نص", "Copied": "نسخ", "Command copied.": "تم نسخ الأمر.", "Selected — Ctrl/Cmd+C": "تم التحديد — Ctrl/Cmd+C", "Command selected. Copy it manually.": "تم تحديد الأمر. انسخه يدويًّا.", "Command copied to clipboard.": "تم نسخ الأمر إلى الحافظة.", "Select text": "حدد النص", "Clipboard unavailable. Command selected; copy it manually.": "الحافظة غير متاحة. تم تحديد الأمر؛ انسخه يدويًّا.", "A message arrives. The first observation is saved.": "تصل رسالة. يتم حفظ الملاحظة الأولى.", "The time changes. Both captured versions stay.": "يتغير الوقت. وتبقى النسختان المسجلتان كما هما.", "The message disappears. The captured history remains.": "تختفي الرسالة. لكن السجل المسجل يبقى.", "Pause example animation": "إيقاف الرسوم المتحركة التوضيحية مؤقتًا", "Play example animation": "تشغيل مثال للرسوم المتحركة", "Play": "تشغيل", "Full-size workspace screenshot": "لقطة شاشة لمساحة العمل بالحجم الكامل", "Workspace screenshot · fictional data": "لقطة شاشة لمساحة العمل · بيانات خيالية", "Close": "إغلاق", "Close screenshot": "إغلاق لقطة الشاشة", "Scrollable full-size screenshot": "لقطة شاشة كاملة الحجم قابلة للتمرير", "Enlarge: {name}": "تكبير: {name}", "View full size": "عرض بالحجم الكامل"}</script>
+</body></html>

@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="zh-Hans" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>快速入门 | TgWitness</title>
+<meta name="description" content="安装和启动 TgWitness 的所有方法：Windows 安装包、Python、Docker 以及综合演示，并附带初步测试。"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="快速入门 | TgWitness"><meta property="og:description" content="安装和启动 TgWitness 的所有方法：Windows 安装包、Python、Docker 以及综合演示，并附带初步测试。">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/quickstart/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/quickstart/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/quickstart/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/quickstart/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/quickstart/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/quickstart/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/quickstart/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/quickstart/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/quickstart/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/quickstart/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/quickstart/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/", "url": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/", "name": "快速入门 | TgWitness", "description": "安装和启动 TgWitness 的所有方法：Windows 安装包、Python、Docker 以及综合演示，并附带初步测试。", "inLanguage": "zh-Hans", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://phishdestroy.github.io/TgWitness/zh/"}, {"@type": "ListItem", "position": 2, "name": "文档", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/"}, {"@type": "ListItem", "position": 3, "name": "参考", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "快速入门", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">跳转至内容</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / 文档</span></a>
+<nav aria-label="指南"><a href="../../concepts/">图文指南</a><a href="../../">所有指南</a><a href="../">参考</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="语言"><span aria-hidden="true">◍</span> 简体中文</summary><div class="lang-list"><a href="../../../../docs/reference/quickstart/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/quickstart/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/quickstart/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/quickstart/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/quickstart/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/quickstart/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/quickstart/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/quickstart/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/quickstart/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/quickstart/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/quickstart/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/quickstart/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="./" hreflang="zh-Hans" lang="zh-Hans" aria-current="true">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="在浅色和深色主题之间切换"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="指南"><a href="../../../guides/modes.html">模式、场景和证据级别</a><p class="nav-label">入门指南</p><a href="../../start/">几分钟内即可开始使用</a><a href="../../accounts/">连接账户</a><a href="../../proxies/">选择代理</a><a href="../../exports/">导出与验证</a><p class="nav-label">了解证据</p><a href="../../concepts/">了解证据如何运作</a><a href="../../cases/">跨所有聊天记录进行调查</a><a href="../../security/">确保安全</a><p class="nav-label">了解更多</p><a href="../../witness/">设置 Witness 机器人</a><a href="../../server/">保持其运行</a><a href="../../troubleshooting/">查找问题所在</a></nav><nav class="wiki-nav" aria-label="参考"><p class="nav-label"><a class="nav-label-link" href="../">参考</a></p><details class="wiki-group" open><summary>设置</summary><a href="./" aria-current="page">快速入门</a><a href="../accounts/">账户与会话格式</a><a href="../connection/">连接、代理和数据保护</a><a href="../deployment/">部署</a></details><details class="wiki-group"><summary>收集</summary><a href="../collection/">数据采集原理</a><a href="../operations/">工作流程与操作</a><a href="../investigation/">调查模式</a><a href="../features/">功能与限制</a></details><details class="wiki-group"><summary>证据</summary><a href="../how-it-works/">证据的运作原理</a><a href="../evidence/">证据格式</a><a href="../witness/">独立见证者</a><a href="../timestamp/">时间戳</a></details><details class="wiki-group"><summary>安全与项目</summary><a href="../security/">安全与数据处理</a><a href="../architecture/">架构</a><a href="../verification/">已测试的内容</a><a href="../license/">许可协议与架构不兼容声明</a><a href="../notice/">运营商兼容性通知</a><a href="../changelog/">更新日志</a></details></nav><p class="sidebar-note">v0.7.0<br>开源 · 可在您的设备上运行</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="指南"><a href="../../../">首页</a> <span aria-hidden="true">/</span> <a href="../../">文档</a> <span aria-hidden="true">/</span> <a href="../">参考</a> <span aria-hidden="true">/</span> <span aria-current="page">快速入门</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">参考 / 设置</p><h1>快速入门</h1><p class="guide-outcome">安装和启动 TgWitness 的所有方法：Windows 安装包、Python、Docker 以及综合演示，并附带初步测试。</p><div class="wiki-body"><p><strong>英语</strong> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/QUICKSTART.md">俄语</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/QUICKSTART.md">乌克兰语</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/es/QUICKSTART.md">西班牙语</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/QUICKSTART.md">葡萄牙语（巴西）</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/QUICKSTART.md">土耳其语</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/QUICKSTART.md">阿拉伯语</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/QUICKSTART.md">فارسی</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/QUICKSTART.md">乌尔都语</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/QUICKSTART.md">हिन्दी</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/id/QUICKSTART.md">印尼语</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/QUICKSTART.md">越南语</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/QUICKSTART.md">简体中文</a></p>
+<p>TgWitness 是一款用于监控您账户可访问的 Telegram 群组和频道的独立应用程序，
+它在本地运行并拥有独立的数据目录。</p>
+<p><strong>初次访问？</strong>在连接账户前，<a href="#explore-the-interface">请先体验演示版</a>。
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">选择代理、Witness、数据导出或服务器设置的相关指南</a>。</p>
+<h2 id="install-and-start">安装并启动<a class="anchor" href="#install-and-start" aria-label="本节链接">#</a></h2>
+<p>请选择一种方式。发布版本发布后，即可获取便携版下载：</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>主机</th>
+<th>无需安装</th>
+<th>来源：Python 3.11+</th>
+<th>Docker：Engine/Desktop 搭配 Compose 2.20+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td>从 GitHub Releases 中提取 <code>TgWitness-&lt;version&gt;-windows-amd64-portable.zip</code>，双击 <code>TgWitness.cmd</code></td>
+<td>双击 <code>Start.cmd</code></td>
+<td>双击 <code>scripts\Docker.cmd</code></td>
+</tr>
+<tr>
+<td>Linux / macOS</td>
+<td>—</td>
+<td><code>sh start.sh</code></td>
+<td><code>sh scripts/docker-start.sh</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>如需获取源代码，请从 GitHub Releases 下载并解压源代码 ZIP 文件，或克隆
+该代码库。若未检测到合适的 Python 版本（winget 或 python.org 提供的签名安装程序），<code>Start.cmd</code> 将为您的 Windows 用户自动安装 Python 3.12。 <code>start.sh</code> 会
+在缺少 Python 时，显示适用于您的 Linux 发行版或 macOS 的精确安装命令。
+首次运行源代码会自动生成 <code>.venv</code> 并安装依赖项。</p>
+<p>Docker 负责构建应用程序并在后台启动它；无需在主机上安装 Python。当
+容器运行正常时，<code>scripts\Docker.cmd</code> 和 <code>scripts/docker-start.sh</code> 会输出控制面板地址和令牌。在所有受支持的主机上，相应的 Docker 命令如下：</p>
+<pre><code class="language-sh">docker compose up -d --build --wait
+docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
+<p>打开 <strong>http://127.0.0.1:8787</strong>。使用 Docker 辅助程序或第二个
+Docker 命令生成的令牌，或者在便携式或源代码安装中读取 <strong>data/live/panel-token.txt 文件</strong>。继续执行下方的
+<strong>“连接 Telegram</strong>”步骤。 原生安装和 Docker 安装使用独立的存储空间；
+启动 Docker 不会导入现有的原生日志。</p>
+<p>对于服务器，<a href="../deployment/">部署</a>涵盖自动 HTTPS、重启、
+发布图片、更新和备份。</p>
+<h2 id="explore-the-interface">探索界面<a class="anchor" href="#explore-the-interface" aria-label="本节链接">#</a></h2>
+<ol>
+<li>在便携包中运行 <strong>TgWitness-Demo.cmd</strong>
+    ，在 Windows 源
+    文件夹中运行 <strong>scripts\Demo.cmd</strong>
+    ，或在 Linux/macOS 上运行 <code>sh start.sh --demo</code>
+    。首次从源代码启动会先创建 <code>.venv</code>
+    并安装依赖项。</li>
+<li>访问 <strong>http://127.0.0.1:8787</strong>。</li>
+<li>本地演示会自动打开示例日志。无需复制令牌即可直接进行本地访问。</li>
+</ol>
+<p>演示消息均为虚构。演示模式无法连接真实的 Telegram 账户。</p>
+<h2 id="connect-telegram">连接 Telegram<a class="anchor" href="#connect-telegram" aria-label="本节链接">#</a></h2>
+<blockquote class="callout">
+<p>[!警告]
+<strong>请勿使用任何您无法承受损失的资源。</strong>我们强烈建议不要连接
+个人或重要账户，也不要在您珍视的账户上创建 API ID / 哈希值。
+Telegram 会不按规律且往往永久封禁账户，无论使用何种客户端。
+测试运行是否顺利取决于 Telegram 自身，而非 TgWitness，且无法保证后续效果。</p>
+</blockquote>
+<ol>
+<li>如果原生演示程序正在运行，请将其停止，并运行 <strong>Start.cmd</strong> 或 <code>sh start.sh</code>。
+    否则，请继续运行上文启动的实时安装程序。</li>
+<li>请使用与您的安装方式对应的面板令牌来打开面板。</li>
+<li>如果您需要使用代理，请在<strong>“账户”→“设置”→“连接设置”→“更改连接路径</strong>”中进行保存。</li>
+<li>在<strong>“账户</strong>”中，输入您的手机号码并点击<strong>“继续</strong>”，选择
+    <strong>“二维码”→“显示二维码</strong>”，或选择文件并点击<strong>“连接账户</strong>”。
+    <strong>API ID + 哈希</strong>为可选项：工作区将使用其已保存或导入的配对，
+    或来自内置池中的有效配对。若要使用您自己的应用程序，请将一组
+    <code>API ID:API Hash</code>配对粘贴到API ID中。
+    如需完整的授权密钥，请选择<strong>“授权密钥</strong>”，粘贴全部 512 个十六进制
+    字符，并选择提供的 DC ID。用户 ID 为可选项，若输入则会被勾选。</li>
+<li>请完成您选择的登录方式：手机/验证码/双因素认证（2FA），通过
+    已登录的 Telegram 应用确认二维码，或导入受支持的授权会话。</li>
+<li>请核对显示的账户 ID。开放<strong>来源</strong>：您的聊天记录会自动加载；请添加您的群组。</li>
+<li>在<strong>“选择要保留的更改</strong>”下，选择事件类别或
+    <strong>“消息、编辑和删除</strong>”预设，然后保存监控设置。</li>
+<li>请分别选择附件设置，然后点击<strong>“开始监控</strong>”。</li>
+</ol>
+<p>API 凭据用于识别您的应用程序；它们本身并不能
+授权任何账户。私人群组无需公开用户名，但您的账户必须具备访问权限。</p>
+<p>关于现有账户，请参<a href="../accounts/">阅账户和会话格式</a>：该
+面板支持 Telethon StringSession、Telethon/Pyrogram SQLite、单账户 TData
+ZIP 以及受支持的账户 JSON 格式。请同时选择一个会话及其对应的 JSON 文件，
+点击<strong>“连接账户</strong>”。还支持
+二维码登录，并可使用相同的可选 API 设置。 不支持 TDLib、机器人及批量账户列表。</p>
+<p>要添加另一个账户，请点击账户选择器旁边的 <strong>+</strong>，或打开
+<strong>“账户” → “设置” → “连接设置” → “工作区</strong>”，或使用<strong>“账户”功能</strong>。各个工作区拥有独立的会话、
+日志、密钥、来源和队列。切换视图时，其他采集器将继续运行。
+在此安装环境中，同一个 Telegram 账户不能分配给两个工作区。
+工作区数量没有限制；它们共享一个进程，因此容量取决于机器性能。</p>
+<p>实时面板令牌用于保护您对 Telegram 授权及已保存
+材料的访问权限；它与 Telegram API 凭据相互独立。只有明确启动的、
+直接访问的本地演示版本才会自动获得访问权限。远程/代理演示版本仍使用
+<code>data/demo/panel-token.txt</code>。</p>
+<h2 id="review-and-export">查看与导出<a class="anchor" href="#review-and-export" aria-label="本节链接">#</a></h2>
+<ul>
+<li><strong>日志：</strong>可按来源和事件类型搜索和筛选记录。</li>
+<li>选择一项事件，查看其原始记录、来源信息及保存的版本。</li>
+<li>编辑详情显示可用的编辑前/编辑后内容。删除详情显示
+    最后捕获的内容（如有）；未知行为者仍为未知。</li>
+<li><strong>导出格式：</strong>带签名的 ZIP、JSONL、CSV 以及离线 HTML。</li>
+<li><strong>完整聊天记录导出</strong>（来源 → 完整聊天记录导出）：将单个聊天窗口的全部可见
+    历史记录下载为包含 <code>chat.json</code>（Telegram-export 风格）和可读
+    <code>chat.html</code> 的签名包。私聊功能仅在该账户为群组成员时可用。此为当前
+    快照，并非对已删除或先前编辑过的消息的重建。 使用<code>python verify.py chat-export.zip --fingerprint TRUSTED_SHA256</code>
+    验证副本。</li>
+<li><strong>保存检查点：</strong>将签名日志的边界保持在收集器之外。</li>
+<li><strong>下载签名运行收据：</strong>保留收集器的程序/版本记录。</li>
+<li><strong>准备时间戳请求：</strong>向时间戳授权机构发起离线请求；
+    按照 <a href="../timestamp/">TIMESTAMP.md</a> 中的说明获取并验证响应。</li>
+<li><strong>验证日志：</strong>检查事件签名和链节。ZIP 导出功能还会检查媒体文件。</li>
+</ul>
+<p>支持的浏览器可将大型导出文件直接保存到指定文件中。其他浏览器
+最多缓存 128 MiB。在服务器运行期间，流式 CLI 支持
+更大规模的下载，而无需缓存整个响应：</p>
+<pre><code class="language-sh">python -m tgwitness.download --token-file data/live/panel-token.txt --out evidence.zip</code></pre>
+<p>若要添加另一个工作区，请通过<strong>“导出”→“工作区 ID</strong>”添加 <code>--profile ID</code>。
+若要添加远程服务器，请添加 <code>--url https://your-server</code>。默认传输限制为
+5 GiB；<code>--max-mib</code> 可更改该限制。带签名的 ZIP 内容默认另有 4 GiB 的未压缩
+验证限制（通过<strong>“参数</strong>”可提高该限制；请使用
+<code>verify.py --max-gib N</code> 验证此类存档）。请使用可信的验证器副本以及
+独立保存的密钥指纹/检查点来验证该存档。</p>
+<h2 id="check-the-installation">查看安装指南<a class="anchor" href="#check-the-installation" aria-label="本节链接">#</a></h2>
+<pre><code class="language-sh">python start.py --setup-only
+python start.py --check
+python start.py --check --json</code></pre>
+<p><code>--check</code>用于检测本地依赖项、签名支持、存储、密钥配置以及
+监听地址。该工具不会安装任何内容，也不会连接到Telegram。若端口
+已被占用，可能意味着已有另一个实例正在运行。请使用另一个<code>--port</code>实例，或先停止当前实例。</p>
+<p>启动程序将安装到<code>.venv</code>目录下。辅助的<code>python -m tgwitness...</code>命令必须
+在Windows系统上使用<code>.venv\Scripts\python.exe</code>，或在Linux/macOS系统上使用<code>.venv/bin/python</code>，
+除非该环境已激活。</p>
+<h2 id="sessions-protection-and-operation">会话、保护与操作<a class="anchor" href="#sessions-protection-and-operation" aria-label="本节链接">#</a></h2>
+<p>封闭且一致的 Telethon SQLite <code>.session</code> 文件可通过
+<code>python -m tgwitness.sessions account.session --out account.tgwitness-session</code> 在本地进行转换，随后
+加载到 Account 中。还支持直接文件导入和 QR 码登录。有关登录格式、SOCKS5、
+HTTP CONNECT、MTProxy 及外部主密钥的详细信息，请参阅
+<a href="../connection/">CONNECTION-SECURITY.md。</a></p>
+<p><strong>暂停观察</strong>将停止数据采集。<strong>锁定</strong>仅关闭浏览器访问权限。
+关闭标签页不会终止采集进程。停止该进程才会中断
+数据采集；历史快照无法还原所有遗漏的编辑或删除操作。
+了解<a href="../collection/">数据采集在事件策略、附件队列、
+账户隔离及重启行为方面的运作原理</a>。</p>
+<p>会话和密钥均经过加密。消息内容、媒体文件及导出数据需要存储在
+加密磁盘或卷上。签名基于可信密钥来验证数据完整性；
+但无法证明消息源自 Telegram，也无法防止由控制收集器及其密钥的操作员
+伪造数据。</p>
+<p>请阅读 <a href="../operations/">OPERATIONS.md</a> 了解备份/恢复操作，阅读 <a href="../deployment/">DEPLOYMENT.md</a>
+了解托管方案，并访问 <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/</a> 查看服务示例。已安装的
+控制面板还包含一份离线设置指南，地址为 <code>/guide.html</code>。</p>
+<p>实际验证情况及现有局限性
+记录在 <a href="../verification/">VERIFICATION.md</a> 和 <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/READINESS.md">READINESS.md</a> 中。</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/QUICKSTART.md">在 GitHub 上编辑此页面 ↗</a><a class="next-guide" href="../accounts/"><span>下一步</span><strong>账户与会话格式 →</strong></a><p>这些指南描述了当前的实现方案。验证结果和剩余缺陷在其他文档中单独记录。 <a href="../verification/">已测试的内容 →</a></p></footer>
+</main>
+<aside class="toc" aria-label="本页面内容"><p class="nav-label">本页面内容</p><a href="#install-and-start">安装并启动</a><a href="#explore-the-interface">探索界面</a><a href="#connect-telegram">连接 Telegram</a><a href="#review-and-export">查看与导出</a><a href="#check-the-installation">查看安装指南</a><a href="#sessions-protection-and-operation">会话、保护与操作</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>开源 · 可在您的设备上运行</span><a href="../../../../LICENSE">MIT 许可协议</a><a href="../notice/">操作员通知</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">安全</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "等待消息", "Step through a fictional send, edit and delete.": "通过一个虚构的发送、编辑和删除过程进行演示。", "No observations yet. Start the sequence or advance one event.": "尚无观察记录。开始序列或跳转至下一事件。", "Meet at 10:00": "10:00 见面", "A new message is visible in the chat.": "聊天中显示了一条新消息。", "Record 1 appended: the collector observed the original message.": "已附录记录 1 条：采集器已捕获原始消息。", "Meet at 11:00": "11:00 见面", "The current text changes. The earlier observation stays.": "当前文本内容有所变更。先前的观察结果仍然有效。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "记录 2 已追加：该编辑内容为新观察结果。记录 1 仍保留原始文本。", "Message deleted": "消息已删除", "The message has disappeared from the chat view.": "该消息已从聊天界面中消失。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "已添加记录 3：删除通知与两个被观察到的版本一同保留。", "0 records": "0 条记录", "1 record": "1 条记录", "2 records": "2 条记录", "3 records": "3 条记录", "Complete / {n} of 3": "已完成 / {n}/3", "Step / {n} of 3": "第 {n} 步（共 3 步）", "Pause": "暂停", "Replay sequence": "回放序列", "Play sequence": "播放序列", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "静态示例已上线。如需交互式计算哈希值，请通过 HTTPS 访问此页面，或在支持 Web Crypto 的本地预览环境中打开。", "No record supplied": "未提供记录", "Tail removed": "尾部内容已删除", "≠ saved hash": "≠ 已保存的哈希值", "Rebuilt · different hash": "重建 · 哈希值不同", "= saved hash": "= 已保存的哈希值", "Same length and matching head.": "篇幅相同且标题一致。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "这三个计算出的哈希值均与保存的哈希值一致。该样本符合保留的三个记录边界。", "Same saved head; the journal prefix fails verification.": "保存的头部信息相同；日志前缀验证失败。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "记录 2 与其保存的哈希值不再匹配。若仅检查最终存储的头部，则会遗漏此问题；验证器会检查每一条记录。", "Head differs from the retained checkpoint.": "标题与保留的检查点不同。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "重建的哈希值相互关联，但最终的头部已发生变化。保留的检查点拒绝接受这一历史记录。对于已更改的记录，原始签名也会验证失败。", "Too short: 2 supplied records \u003c 3 retained records.": "内容过短：提供的记录有 2 条，而保留的记录少于 3 条。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "剩下的两个哈希值仍然匹配。保留的检查点揭示了缺失的部分。如果没有那个早先的边界，仅凭这个较短的前缀是无法揭示这一遗漏的。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "此浏览器不支持哈希计算。下方的公式和静态说明仍可查看。", "{n} records": "{n}条记录", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "已接受：计数持续增加，签名已验证，密钥匹配。该见证者保留了这一新边界。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "回滚：签名后的结果报告的记录数量少于上次被接受的检查点。Witness 会记录该问题，并保留较早被接受的边界。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "分叉：计数保持不变，但分支头不同。见证者会记录该分歧，并保留先前被接受的分界点。", "No answer": "无回答", "boundary unknown": "边界未知", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "无响应：该工具会记录验证失败的情况。它无法确定收集器的当前状态。如果该工具仍能访问 Bot API 且其发布政策允许，则会发布该失败信息。", "Send {n}": "发送 {n}", "Edit {n}": "编辑 {n}", "Delete {n}": "删除 {n}", "Both accounts captured all six expected observations in this example.": "在这项示例中，这两个账户均捕获了预期的全部六项观察结果。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "账户 B 依然成功捕获了 6 条中的 6 条。其中两条收据的捕获耗时较长。捕获率和收据延迟反映的是不同的问题。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "账户 B 在截止时间前捕获了 6 条中的 5 条（83.3%）。缺失的编辑操作未测得延迟。此结果仅描述了这六项受控操作。", "not observed by cutoff": "未在截止时间前观察到", "{s} seconds": "{s}秒", "Exact values follow in the table.": "具体数值见下表。", "{s} s": "{s} s", "Not observed": "未发现", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "四个聊天群组提供了不同的观察结果。请追溯每条连接的源记录；在未确认发件人身份的情况下，请勿将该频道帖子归因于用户 71001。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "记录 #146 和 #205 显示相同的发件人 ID：71001。这将同一 Telegram 账号在两个聊天群组中发布的帖子关联起来。但这并不能识别现实世界中的具体个人，也无法确定该频道帖子的发布者。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "目标地址 pay.example.invalid/new 出现在群组记录 #146、机器人键盘 #173、频道编辑 #188 以及私信 #205 中。目标地址的重复出现表明这些内容之间存在关联；但这并不能证明这些账户受共同控制。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "在此虚构案例中，已完成的媒体收据 #151 和 #209 具有完全相同的 SHA-256 值。请对比实际字节内容及其关联的消息记录。该匹配文件既未标识其创建者，也无法证明是谁转发了该文件。", "the encrypted off-site copy": "加密的异地副本", "notifications": "通知", "checkpoint hashes for timestamps": "时间戳的检查点哈希值", "signed checkpoints for the witness": "TgWitness 的签名检查点", "Switched on in this example": "在此示例中已启用", "Optional · off by default": "可选 · 默认关闭", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "离开这台机器时：Telegram 连接和 {list}。除此之外别无他物。", "Default: only the Telegram connection leaves this machine.": "默认设置：仅 Telegram 连接会离开这台机器。", "{done} of {total} done": "已完成 {done}/{total}", "Mark step {n} as done": "将步骤 {n} 标记为已完成", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "文案", "Copied": "已复制", "Command copied.": "已复制该指令。", "Selected — Ctrl/Cmd+C": "选中 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "已选中命令。请手动复制。", "Command copied to clipboard.": "命令已复制到剪贴板。", "Select text": "选择文本", "Clipboard unavailable. Command selected; copy it manually.": "剪贴板不可用。已选中命令；请手动复制。", "A message arrives. The first observation is saved.": "一条消息送达。首次记录被保存。", "The time changes. Both captured versions stay.": "时间会改变，但两个记录版本都会保留下来。", "The message disappears. The captured history remains.": "消息虽已消失，但记录的历史依然存在。", "Pause example animation": "暂停示例动画", "Play example animation": "播放示例动画", "Play": "播放", "Full-size workspace screenshot": "全屏工作区截图", "Workspace screenshot · fictional data": "工作区截图 · 虚构数据", "Close": "关闭", "Close screenshot": "关闭截图", "Scrollable full-size screenshot": "可滚动全屏截图", "Enlarge: {name}": "放大：{name}", "View full size": "查看大图"}</script>
+</body></html>

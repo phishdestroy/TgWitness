@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>ما تم اختباره | TgWitness</title>
+<meta name="description" content="اختبار Telegram المباشر، والفحوصات الآلية، وفحوصات المتصفح، وما لم يتم التحقق منه بعد."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/verification/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="ar_AR">
+<meta property="og:title" content="ما تم اختباره | TgWitness"><meta property="og:description" content="اختبار Telegram المباشر، والفحوصات الآلية، وفحوصات المتصفح، وما لم يتم التحقق منه بعد.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/ar/docs/reference/verification/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/verification/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/verification/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/verification/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/verification/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/verification/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/verification/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/verification/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/verification/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/verification/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/verification/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/verification/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/verification/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/ar/docs/reference/verification/", "url": "https://phishdestroy.github.io/TgWitness/ar/docs/reference/verification/", "name": "ما تم اختباره | TgWitness", "description": "اختبار Telegram المباشر، والفحوصات الآلية، وفحوصات المتصفح، وما لم يتم التحقق منه بعد.", "inLanguage": "ar", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "الصفحة الرئيسية", "item": "https://phishdestroy.github.io/TgWitness/ar/"}, {"@type": "ListItem", "position": 2, "name": "التوثيق", "item": "https://phishdestroy.github.io/TgWitness/ar/docs/"}, {"@type": "ListItem", "position": 3, "name": "مرجع", "item": "https://phishdestroy.github.io/TgWitness/ar/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "ما تم اختباره", "item": "https://phishdestroy.github.io/TgWitness/ar/docs/reference/verification/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">الانتقال إلى المحتوى</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / التوثيق</span></a>
+<nav aria-label="الأدلة الإرشادية"><a href="../../concepts/">دليل مرئي</a><a href="../../">جميع الأدلة الإرشادية</a><a href="../">مرجع</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="اللغة"><span aria-hidden="true">◍</span> العربية</summary><div class="lang-list"><a href="../../../../docs/reference/verification/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/verification/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/verification/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/verification/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/verification/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/verification/" hreflang="tr" lang="tr">Türkçe</a><a href="./" hreflang="ar" lang="ar" aria-current="true">العربية</a><a href="../../../../fa/docs/reference/verification/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/verification/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/verification/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/verification/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/verification/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/verification/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="التبديل بين السمة الفاتحة والداكنة"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="الأدلة الإرشادية"><a href="../../../guides/modes.html">الأوضاع، والسيناريوهات، ومستويات الأدلة</a><p class="nav-label">الخطوات الأولى</p><a href="../../start/">ابدأ في غضون دقائق</a><a href="../../accounts/">ربط حساب</a><a href="../../proxies/">اختر وكيلًا</a><a href="../../exports/">التصدير والتحقق</a><p class="nav-label">فهم الأدلة</p><a href="../../concepts/">تعرف على كيفية عمل الأدلة</a><a href="../../cases/">التحقيق في جميع الدردشات</a><a href="../../security/">حافظ على أمانها</a><p class="nav-label">اكتشف المزيد</p><a href="../../witness/">إعداد روبوت «Witness»</a><a href="../../server/">حافظ على استمرار عملها</a><a href="../../troubleshooting/">اكتشف ما الذي حدث</a></nav><nav class="wiki-nav" aria-label="مرجع"><p class="nav-label"><a class="nav-label-link" href="../">مرجع</a></p><details class="wiki-group"><summary>الإعداد</summary><a href="../quickstart/">البداية السريعة</a><a href="../accounts/">الحسابات وتنسيقات الجلسات</a><a href="../connection/">الاتصال، والوكلاء، وحماية البيانات</a><a href="../deployment/">النشر</a></details><details class="wiki-group"><summary>جمع</summary><a href="../collection/">كيفية عمل عملية الجمع</a><a href="../operations/">سير العمل والعمليات</a><a href="../investigation/">وضع التحقيق</a><a href="../features/">الميزات والقيود</a></details><details class="wiki-group"><summary>الأدلة</summary><a href="../how-it-works/">كيف تعمل الأدلة</a><a href="../evidence/">تنسيق الأدلة</a><a href="../witness/">شاهد مستقل</a><a href="../timestamp/">الطوابع الزمنية</a></details><details class="wiki-group" open><summary>الأمن والمشروع</summary><a href="../security/">الأمن ومعالجة البيانات</a><a href="../architecture/">الهندسة</a><a href="./" aria-current="page">ما تم اختباره</a><a href="../license/">إشعار بشأن الترخيص وعدم التوافق المعماري</a><a href="../notice/">إشعار بعدم التوافق مع المشغل</a><a href="../changelog/">سجل التغييرات</a></details></nav><p class="sidebar-note">v0.7.0<br>مفتوحة المصدر · تعمل على جهازك</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="الأدلة الإرشادية"><a href="../../../">الصفحة الرئيسية</a> <span aria-hidden="true">/</span> <a href="../../">التوثيق</a> <span aria-hidden="true">/</span> <a href="../">مرجع</a> <span aria-hidden="true">/</span> <span aria-current="page">ما تم اختباره</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">البحث في الوثائق</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="جرب «proxy» أو «hash chain» أو «token» أو «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="بحث واضح" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">اكتب كلمة للبحث في الأدلة والمراجع. يبقى البحث في متصفحك.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">مرجع / الأمن والمشروع</p><h1>ما تم اختباره</h1><p class="guide-outcome">اختبار Telegram المباشر، والفحوصات الآلية، وفحوصات المتصفح، وما لم يتم التحقق منه بعد.</p><div class="wiki-body"><h2 id="live-telegram-test-whole-account--29-october-2026">اختبار Telegram مباشر، الحساب بالكامل · 29 أكتوبر 2026<a class="anchor" href="#live-telegram-test-whole-account--29-october-2026" aria-label="رابط لهذا القسم">#</a></h2>
+<p>استمر الحساب نفسه في العمل بعد الاختبار المذكور أدناه. في 29 أكتوبر الساعة 12:10 بالتوقيت العالمي المنسق (UTC)، تم تغيير نطاقه
+ليشمل الحساب بأكمله (القنوات، والمجموعات، والمحادثات الخاصة، والروبوتات)؛ وطلبت لوحة التحكم
+التأكيد، وسجلت السجلات الموقعة ذلك. بحلول الساعة 17:59 بالتوقيت العالمي المنسق (UTC)، كان السجل يحتوي على:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>تم التسجيل في الفترة من 27 أكتوبر الساعة 21:36 إلى 29 أكتوبر الساعة 17:59 بالتوقيت العالمي المنسق (UTC)</th>
+<th style="text-align: right;">العدد</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>سجلات السجل</td>
+<td style="text-align: right;">9,968</td>
+</tr>
+<tr>
+<td>رسائل جديدة</td>
+<td style="text-align: right;">5,308</td>
+</tr>
+<tr>
+<td>منها بعد الانتقال إلى الحساب الكامل</td>
+<td style="text-align: right;">3,878</td>
+</tr>
+<tr>
+<td>عمليات الحذف</td>
+<td style="text-align: right;">784</td>
+</tr>
+<tr>
+<td>تم حذفها بعد أن قام TgWitness بحفظ الرسالة</td>
+<td style="text-align: right;">596</td>
+</tr>
+<tr>
+<td>التعديلات</td>
+<td style="text-align: right;">41</td>
+</tr>
+<tr>
+<td>الرسائل المضافة بعد إعادة التحقق</td>
+<td style="text-align: right;">2,273</td>
+</tr>
+<tr>
+<td>الرسائل التي لم يعد بالإمكان العثور عليها عند إعادة الفحص</td>
+<td style="text-align: right;">18</td>
+</tr>
+<tr>
+<td>الرسائل المحفوظة عبر لقطات السجل</td>
+<td style="text-align: right;">242</td>
+</tr>
+<tr>
+<td>المرفقات المحفوظة</td>
+<td style="text-align: right;">247</td>
+</tr>
+<tr>
+<td>يبدأ برنامج التجميع</td>
+<td style="text-align: right;">19</td>
+</tr>
+<tr>
+<td>Telegram FloodWait في وضع الإيقاف المؤقت</td>
+<td style="text-align: right;">26</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>أكدت عملية التحقق <strong>«Verify»</strong> التي أجرتها اللجنة صحة التوقيعات وسلسلة التجزئة لجميع السجلات البالغ عددها 9,968 سجلاً.</li>
+<li>جاءت الرسائل من مجموعتين أو قناتين و3 محادثات خاصة وبوتات. تم الضغط على زر رسالة واحد
+    من <strong>قسم «المحادثات</strong>»؛ ويرد الطلب ورد Telegram في السجل.</li>
+<li>تمت إضافة محادثات جديدة عندما أعاد المجمع مسح الحساب عند إعادة التشغيل. كان خيار حفظ
+    الرسائل السابقة للمحادثات الجديدة معطلاً (<code>history = 0</code>)، لذا لم يتم تناوله هنا.</li>
+</ul>
+<p>لا يشمل الموقع: ردود الفعل، وتغييرات العضوية، وملفات تعريف الأشخاص، وإرسال الرسائل، والانضمام عن طريق
+الدعوة، والوكلاء، والإشعارات، وروبوت Witness، وعدة حسابات في آن واحد. الملفات العامة
+تحتوي على الأعداد فقط.</p>
+<h2 id="password-protected-export-opened-with-libarchive--29-october-2026">ملف تصدير محمي بكلمة مرور يُفتح باستخدام libarchive · 29 أكتوبر 2026<a class="anchor" href="#password-protected-export-opened-with-libarchive--29-october-2026" aria-label="رابط لهذا القسم">#</a></h2>
+<p>تم فتح أرشيف تم إنشاؤه بواسطة كود تشفير التصدير (WinZip AES-256، وهو التنسيق الذي يقرأه كل من 7-Zip وWinRAR
+) باستخدام Windows <code>tar</code> (bsdtar 3.6.2، libarchive). باستخدام كلمة المرور الصحيحة،
+تطابق الملف المستخرج مع قيمة SHA-256 الأصلية؛ أما كلمة المرور الخاطئة فقد تم رفضها بعبارة «عبارة مرور غير صحيحة
+». ولم يتم تشغيل برامج 7-Zip وWinRAR نفسها.</p>
+<h2 id="live-telegram-test--27-to-29-october-2026">اختبار Telegram المباشر · من 27 إلى 29 أكتوبر 2026<a class="anchor" href="#live-telegram-test--27-to-29-october-2026" aria-label="رابط لهذا القسم">#</a></h2>
+<p>قام حساب Telegram حقيقي واحد، تم تسجيل الدخول إليه عبر مجموعة أزواج واجهة برمجة التطبيقات (API) المدمجة، بتسجيل
+مجموعة كبيرة واحدة من <strong>27 أكتوبر الساعة 21:36 بالتوقيت العالمي المنسق (UTC) إلى 29 أكتوبر الساعة 05:15 بالتوقيت العالمي المنسق (UTC)</strong>. تم تشغيل أداة التجميع
+12 مرة خلال تلك الفترة.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>مسجلة</th>
+<th style="text-align: right;">العدد</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>سجلات السجل، بما في ذلك نبضات القلب وسجلات الخدمة</td>
+<td style="text-align: right;">2,385</td>
+</tr>
+<tr>
+<td>رسائل جديدة</td>
+<td style="text-align: right;">1,291</td>
+</tr>
+<tr>
+<td>عمليات الحذف</td>
+<td style="text-align: right;">472</td>
+</tr>
+<tr>
+<td>تم حذفها بعد أن قام TgWitness بحفظ النص</td>
+<td style="text-align: right;">347</td>
+</tr>
+<tr>
+<td>التعديلات</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr>
+<td>الرسائل التي فاتت أثناء التوقف، تمت إضافتها عند إعادة الفحص</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr>
+<td>المرفقات المحفوظة</td>
+<td style="text-align: right;">17</td>
+</tr>
+<tr>
+<td>المرفقات لم يتم تنزيلها (التنزيل معطل، أو لا يوجد ملف للتنزيل)</td>
+<td style="text-align: right;">14</td>
+</tr>
+<tr>
+<td>يقوم Telegram FloodWait بالتوقف مؤقتًا لمدة 3 ثوانٍ في كل مرة أثناء إعادة الفحص</td>
+<td style="text-align: right;">8</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>يتم التحقق من التوقيعات وسلسلة التجزئة لجميع السجلات البالغ عددها 2,385 سجلًا مقابل
+    المفتاح العام للسجل.</li>
+<li>بعد إعادة التشغيل، يستأنف المجمع العمل من حالة التحديث المحفوظة (<code>pts</code>) ويقوم Telethon
+    بملء الفجوات؛ ثم تضيف عملية إعادة الفحص الرسائل التي لا تزال مفقودة.</li>
+<li>في كل مرة يواجه فيها المجمع حالة «FloodWait»، ينتظر المجمع المدة المطلوبة ثم يواصل العمل.</li>
+<li>ظل الحساب مسجلاً للدخول، وأعيد الاتصال بنفس الجلسة في 29 أكتوبر.</li>
+</ul>
+<p>لا يشمل هذا الاختبار: التعامل مع عدة حسابات في آن واحد، وأدوار المسؤولين، والبروكسيات، وانقطاعات الخدمة
+التي تزيد مدتها عن بضع ساعات، وإ<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">جراءات القبول المباشرة</a> الكاملة.
+تحتوي الملفات العامة على هذه العناصر فقط: لا توجد معرّفات للحسابات أو الدردشات، ولا رسائل، ولا
+بيانات اعتماد.</p>
+<p>تصف الإدخالات الأقدم أدناه عملياتها الخاصة؛ وقد استخدم معظمها عملاء اختبار اصطناعيين.
+تجدون أدناه أحدث النتائج الآلية؛ وتسجل <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PREPUBLICATION-2026-10-29.md">عملية التدقيق السابقة للنشر</a>
+خط الأساس السابق.</p>
+<h2 id="built-in-public-mtproxy-lists--29-october-2026">قوائم MTProxy العامة المدمجة · 29 أكتوبر 2026<a class="anchor" href="#built-in-public-mtproxy-lists--29-october-2026" aria-label="رابط لهذا القسم">#</a></h2>
+<p>تمت إضافة لقطة عامة مجمعة وتحديث HTTPS صريح من SoliSpirit/mtproto و
+zakky8/mtproto-proxy-pro. على هذا المضيف، قام برنامج تنزيل التطبيق بجلب كلا الخلاصتين
+بنجاح في 29 أكتوبر 2026 الساعة 12:58 بالتوقيت العالمي المنسق (UTC): <strong>118 نقطة نهاية فريدة متوافقة</strong> بعد
+التصفية وإزالة التكرار والحد الأقصى المسموح به البالغ 64 إدخالًا لكل مصدر. وهذا يؤكد استرداد القائمة،
+وليس الاتصال أو تسليم الرسائل عبر نقاط النهاية تلك. لم يتم
+ربط أي حساب حقيقي بوكيل مدرج في القائمة خلال هذا العمل. <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/PROXIES.md">دليل المشغل والمستخدم</a>.</p>
+<p>تحتفظ استجابات المصدر الفاشلة/الفارغة/غير المتوافقة بالمدخلات والتواريخ السابقة. التحديثات
+لا تغير المسار المحدد. يتم التحقق من صحة العناوين العامة وتثبيت عناوين IP التي تم تحليلها
+عند الاختيار؛ بينما تظل مسارات المشغل/اليدوية منفصلة. أصبح اختبار الاتصال
+متاحًا الآن في اللوحة قبل تسجيل الدخول إلى الحساب. لا يزال TLS ee المزيف واختيار البروكسي التلقائي
+غير مدعومين. يتجاوز كتالوج المشغل الاشتراكات تمامًا.</p>
+<ul>
+<li>المجموعة الكاملة: <strong>366 اختبارًا ناجحًا، 3 اختبارات تم تخطيها</strong>، 287.94 ثانية. لا تزال تحذيرات التبعيات الحالية
+    وحالات تخطي المنصات قائمة. اختبار الانحدار النهائي للقائمة العامة/الترجمة: <strong>36 اختبارًا ناجحًا</strong>،
+    بما في ذلك رفض منافذ بروكسي التنزيل غير الصالحة؛ وهذا يتداخل مع المجموعة الكاملة.</li>
+<li>اجتياز اختبار التوافق مع المتصفحات باللغتين الإنجليزية والروسية، في الوضع الفاتح/الداكن بدقة 390/1440 بكسل: خيارات مدمجة،
+    لا يوجد استدعاء خارجي عند فتح الإعدادات، تحديث صريح، احتفاظ بالمسارات و
+    ذاكرة التخزين المؤقت أثناء الأعطال، فحص ما قبل تسجيل الدخول، عزل مساحة العمل في حالة الاستجابة المتأخرة، تفاصيل
+    المصدر والتخطيط/التباين. لا توجد أخطاء في JavaScript أو طلبات خارجية للمتصفح.</li>
+<li>تمت الموافقة على الترجمة النهائية الثابتة لجميع اللغات الـ13؛ وتم ترجمة النص الجديد
+    إلى الروسية مع توفير نصوص بديلة باللغة الإنجليزية في الأماكن الأخرى. وقد اجتاز الدليل المدمج المحدث
+    فحوصات التخطيط والتباين في كلا السمتين.</li>
+<li>تم اجتياز فحوصات Ruff والنشر (259 ملفًا عامًا، 1,354 رابطًا محليًّا)؛ تم تحديث
+    تحليل ملفات Compose و CI YAML. لم يتم تنفيذ Docker و CI عن بُعد هنا.</li>
+<li>اجتازت «العجلة المعاد بناؤها» اختبار التثبيت المنفصل، وتحميل قائمة الحزم، والتحقق من التصدير الموقّع
+    . تطابقت جميع موارد الحزمة البالغ عددها 69 مع مساحة العمل؛ وتم التحقق من تجزئات المصدر.</li>
+</ul>
+<p>الإيصالات: <code>test-results/public-proxy-research/download-receipt.json</code>،
+<code>test-results/public-proxy-research/copy-receipt.json</code>،
+<code>test-results/public-proxies-full-suite.log</code>، <code>test-results/public-proxies-final-focused.log</code>،
+<code>test-results/public-proxies-browser/receipt.json</code> و<code>test-results/public-proxies-package.log</code>.
+إعدادات المتصفح/الحساب/النقل مصطنعة؛ أما تنزيلتا الخلاصتين المذكورتين أعلاه فهما طلبات HTTPS حقيقية.</p>
+<h2 id="optional-extras-presentation--29-october-2026">عرض الإضافات الاختيارية · 29 أكتوبر 2026<a class="anchor" href="#optional-extras-presentation--29-october-2026" aria-label="رابط لهذا القسم">#</a></h2>
+<p>أصبح الموقع السابق الخاص بـ«Proof bot» يُعرف الآن باسم <strong>«Extras</strong>»: نظرة عامة موجزة تليها
+صفحة إعداد منفصلة للخيار المحدد. يتألف نموذج «Witness» من ثلاث خطوات، مع
+إخفاء أقسام إدارة الاتصال وخيارات الشبكة وتفاصيل النشر. تم التخطيط لاستخدام GitHub
+بشكل صريح ولا يحتوي على نموذج لبيانات الاعتماد. <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/EXTRAS.md">نظرة عامة باللغة الروسية</a>.</p>
+<ul>
+<li>اجتياز 30 اختبارًا مركّزًا للتوطين وإعداد Witness وفحوصات النشر.</li>
+<li>اجتياز اختبار قبول إعداد Chromium باللغتين الإنجليزية والروسية، في الوضع الفاتح/الداكن، بدقة 390/1440 بكسل:
+    تركيز لوحة المفاتيح وزر العودة، وعدم وجود اتصالات ضمنية عند اختيار الميزات الإضافية، والاحتفاظ
+    بالمسودات، وتنزيل الإعدادات المثبتة/الرموز المميزة، ومسح الرموز المميزة عند القفل، وعمل
+    روابط الدليل المحلي بشكل صحيح. اجتياز اختبارات التباين بين التخطيط والنص على خلفية صلبة.</li>
+<li>تمت الموافقة على ميزة تبديل مساحة العمل، بما في ذلك وصول استجابة الرمز المميز المتأخرة
+    بعد التبديل. يتيح التنقل السريع العثور على الميزات الإضافية من خلال مصطلحات «البوت» و«الدليل» و«GitHub»؛
+    كما اجتازت الاختبارات الحالية الخاصة بدقة 320/390/1440 بكسل واللغة الروسية/القراءة من اليمين إلى اليسار (RTL).</li>
+<li>لم تُلاحظ أي أخطاء في JavaScript أو طلبات خارجية من المتصفح أثناء عملية الإعداد.
+    هذه فحوصات اصطناعية لواجهة المستخدم، وليست أدلة حديثة من Telegram أو منشورات حية من الروبوتات.</li>
+<li>تم اجتياز اختبار التحميل النهائي للغات وتغطية القاموس لجميع اللغات الـ13، مع الحفاظ على
+    خيارات بديلة واضحة باللغة الإنجليزية خارج اللغة الروسية. كما اجتاز دليل Proof الموسع
+    اختبارات التخطيط والتباين عند 320/768/1440 بكسل في كلا السمتين.</li>
+<li>اجتازت النسخة المُعاد بناؤها اختبار التثبيت المنفصل والتحقق من التصدير الموقّع. جميع
+    الموارد المعبأة البالغ عددها 67 مطابقة لمساحة العمل؛ ويحتوي أرشيف المصدر على 253
+    ملفًا عامًا. اجتازت عملية التحقق من المصدر/الرابط 1,346 رابطًا محليًّا للتوثيق.</li>
+</ul>
+<p>الإيصالات: <code>test-results/setup-browser/receipt.json</code>،
+<code>test-results/quick-navigation/receipt.json</code>، <code>test-results/extras-final.json</code>،
+<code>test-results/extras-package.log</code> و<code>test-results/extras-artifacts.json</code>.
+تستخدم لقطات الشاشة مساحات عمل اصطناعية.</p>
+<h2 id="witness-bot-and-proxy-setup-audit--29-october-2026">تدقيق إعداد روبوت Witness والوكيل · 29 أكتوبر 2026<a class="anchor" href="#witness-bot-and-proxy-setup-audit--29-october-2026" aria-label="رابط لهذا القسم">#</a></h2>
+<p>يُعد إعداد الشاهد (الآن <strong>«Extras» → «A bot in your channel</strong>») شاهدًا يتم نشره بشكل مستقل: مفتاح جامع مثبت
+، وتنزيل رمز مميز محدد النطاق، وقناة خاصة، وسياسة النشر، ومسار HTTP/SOCKS5، وواجهة برمجة تطبيقات
+Bot API مخصصة. يظل رمز البوت على مضيف الشاهد. ويقوم رمزه الجديد <code>--check-config</code> بالتحقق من صحة
+التكوين والملفات دون فتح اتصال شبكي أو إنشاء مفتاح. يتم تحديد مسارات ملفات JSON
+بجانب التكوين. تقوم جميع متغيرات الشاهد في Compose الآن بإعادة توجيه
+إعدادات وكيل HTTP وواجهة برمجة تطبيقات البوت.</p>
+<p>تدعم إعدادات الحساب كتالوج MTProxy عامًا يديره المشغل، ومعاينة مخصصة لرابط بروكسي Telegram
+والحقول اليدوية الموجودة. تستبعد استجابات الكتالوج الأسرار؛
+ويؤدي الاختيار إلى تخزين المسار في خزينة مساحة العمل. تؤدي الكتالوجات المفقودة أو غير الصحيحة إلى
+إتاحة المسارات اليدوية. لا يتم إنشاء أو تمكين عناوين بروكسي للمشروع أو خدمة الشاهد المستضافة
+بشكل افتراضي. يعرض مثال Caddy نقطة النهاية الرئيسية المحددة النطاق فقط
+عندما يتعين على شاهد خارجي الوصول إلى جامع تظل لوحته خاصة.</p>
+<p>التحقق من الصحة:</p>
+<ul>
+<li>المجموعة الكاملة: <strong>348 اختبارًا ناجحًا، 3 اختبارات تم</strong> تخطيها، 195.81 ثانية. تعزى الاختبارات التي تم تخطيها
+    إلى قيود نظام Windows؛ ولا تزال التحذيرات المتعلقة بإلغاء دعم التبعيتين قائمتين.</li>
+<li>التشغيل النهائي لاختبار التراجع الخاص بالشاهد/التكوين/الإصدار: <strong>اجتاز 11 اختبارًا، وتخطى اختبارًا واحدًا</strong>.
+    وهذا يتداخل مع المجموعة الكاملة. تشمل الاختبارات تحديد المسار، والفحص المسبق دون اتصال بالإنترنت،
+    والتوقيع/النشر من خلال أداة اختبار فعلية لواجهة برمجة تطبيقات روبوت HTTP ذات حلقة مرتدة، وفشل التسليم المسجل،
+    والتحقق من رمز القناة، واستبعاد سر الوكيل.</li>
+<li>تم اجتياز اختبار قبول إعداد Chromium باللغتين الإنجليزية والروسية بدقة 390/1440 بكسل: التكوين المثبت
+    وتنزيل الرموز المميزة، ومسح الرموز المميزة عند القفل، واختيار الكتالوج، ومعاينة الروابط المخصصة
+    متبوعة بحفظ صريح، وتخطيط/تباين، وعدم وجود أخطاء في JavaScript أو طلبات خارجية
+    من المتصفح. تم تصحيح العرض الضيق لعنوان الحساب الروسي وتجاوز سعة علامة تبويب تسجيل الدخول.</li>
+<li>اجتاز الاختبارات الخاصة بـ Ruff والتحقق من المصادر/الروابط وتحليل YAML الخاص بـ Compose/سير العمل.</li>
+<li>اجتازت «العجلة المعاد بناؤها» اختبارات التثبيت المنعزل، والموارد الثابتة/لوحة التحكم، ومصادقة واجهة برمجة التطبيقات (API)
+، بالإضافة إلى التحقق المستقل من الصادرات الاصطناعية المباشرة والمتدفقة المكونة من 32 حدثًا.</li>
+</ul>
+<p>الإيصالات: <code>test-results/setup-full-suite.log</code>، <code>setup-final-focused.log</code>،
+<code>setup-browser/receipt.json</code>، <code>setup-browser-final.log</code> و<code>setup-package.log</code>.
+تستخدم هذه الاختبارات حسابات/بروكسيات اصطناعية ووحدة ثابتة محلية لواجهة برمجة تطبيقات الروبوت (Bot API). وهي لا
+تدعي وجود منشور حقيقي للروبوت، أو خادم MTProxy عام عامل، أو تشغيل CI عن بُعد، أو نشر Docker.
+ويظل سجل المراقبة الحقيقي لـ Telegram المذكور أعلاه دليلاً منفصلاً.
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/WITNESS.md">تعليمات الإعداد</a>.</p>
+<h2 id="presentation-and-documentation-review--29-october-2026">مراجعة العرض التقديمي والوثائق · 29 أكتوبر 2026<a class="anchor" href="#presentation-and-documentation-review--29-october-2026" aria-label="رابط لهذا القسم">#</a></h2>
+<p>أصبحت صفحة المنتج وشاشة الوصول وملفات README باللغتين الإنجليزية والروسية وصور العرض التقديمي تتبنى الآن
+نمطًا بصريًّا موحدًا. تستخدم لقطات الشاشة العامة بيانات تجريبية خيالية. كما تم خلال المراجعة تصحيح
+الأوصاف القديمة المتعلقة بالتحقق المباشر والاستعادة المذكورة أعلاه.</p>
+<ul>
+<li>اختبارات الترجمة المركزة واختبارات الموقع والنشر: <strong>اجتازت 33 اختبارًا، وتخطى اختبار واحد</strong>. الاختبار الذي تم تخطيه
+    يتطلب إنشاء رابط رمزي غير متاح على هذا المضيف.</li>
+<li>تمت الموافقة العامة على لوحة Chromium، بما في ذلك جميع قوائم اللغات، وتخطيط RTL،
+    والسمات الفاتحة/الداكنة، والتباين القوي للنص، والتبديل بين مساحات العمل. أصبح فحص إنشاء الملف الشخصي
+    ينتظر الآن استجابة HTTP الفعلية قبل التحقق من مساحة العمل المحددة.</li>
+<li>اجتازت شاشات الوصول باللغتين الإنجليزية والروسية اختبارات التخطيط والتباين في كلا السمتين عند
+    320 و390 و768 و850 و1440 بكسل؛ ويظل زر الإرسال ضمن نافذة العرض الأولية.</li>
+<li>تمت الموافقة على الموقع العام عند 320 و390 و768 و1024 و1440 بكسل، بما في ذلك
+    التحكم في سجل الرسائل، وتكبير لقطة الشاشة/مفتاح Escape/العودة للتركيز، وعلامات التبويب في لوحة المفاتيح، و
+    رفض الحافظة، والمسارات الفرعية للمشروع، والحركة المخففة، والبديل في حالة عدم وجود JavaScript. لم يُلاحظ أي
+    فشل في طلبات الموارد، أو الطلبات الخارجية، أو أخطاء JavaScript.</li>
+<li>اجتازت «العجلة المعاد بناؤها» فحص التثبيت المعزول: يتم تحميل موارد اللوحة والإعدادات المحلية
+    ، ويتطلب الوصول إلى واجهة برمجة التطبيقات (API) المصادقة، كما أن عمليات التصدير المباشرة/المتدفقة تتحقق بشكل مستقل
+    من جميع الأحداث الاصطناعية البالغ عددها 32 حدثًا. اجتازت الفحوصات الأولية وفحوصات المصادر العامة/الروابط.</li>
+</ul>
+<p>الإيصالات المحلية: <code>test-results/design-tests.log</code>، <code>design-panel-final.log</code>،
+<code>design-review-final.log</code>، <code>design-site.log</code>، و<code>design-package/install-receipt.json</code>.
+لم يتم إعادة تشغيل مجموعة الخلفية الكاملة من أجل هذا التغيير في العرض التقديمي/التوثيق؛
+وتبقى النتيجة السابقة لها في تدقيق ما قبل النشر.</p>
+<h2 id="version-061">الإصدار 0.6.1<a class="anchor" href="#version-061" aria-label="رابط لهذا القسم">#</a></h2>
+<p>الإصدار 0.6.1 يغير شكل لوحة العرض، ومشغلات التطبيق، وحزمة البرنامج، والوثائق؛
+أما كود الجمع والتخزين والتوقيع والتصدير فلم يتغير. على نظام Windows 11 / Python 3.12.10
+مع بيئة التشغيل المثبتة:</p>
+<ul>
+<li>اجتازت المجموعة الكاملة <strong>137 اختبارًا</strong> مع <strong>تخطي</strong> اختبار<strong>ين</strong> وظهور تحذير Starlette الحالي.
+    تغطي الاختبارات الجديدة معالجة المشغل لـ Ctrl+C (يُمنح الخادم 30 ثانية لإيقاف
+    التشغيل بشكل منظم) وحالات فشل خطوات الإعداد التي يمكن اتخاذ إجراء بشأنها.</li>
+<li>اجتاز Chromium (الصدفة بدون واجهة مستخدم 156) جميع <strong>السيناريوهات العامة البالغ عددها 45</strong> سيناريو <strong>و35
+    سيناريو استيراد الحساب/الرمز الاستجابي/مفتاح المصادقة،</strong> بما في ذلك فحص تباين النص الصلب، وعدم
+    حدوث تجاوز أفقي عند 320–1440 بكسل، وظهور حقول تسجيل الدخول الأولى عند 320/390 بكسل.
+    لم يُلاحظ أي أخطاء في جافا سكريبت للصفحة أو طلبات خارجية.</li>
+<li>أعاد <code>python start.py --setup-only</code> تثبيت الحزمة بإصدار 0.6.1 و
+    أبلغ <code>python start.py --check</code> عن جاهزيته. قام خادم <code>python -m tgwitness --demo</code> حقيقي
+    بإرجاع اللوحة، وورقة الأنماط، والنص البرمجي، والشعار، والدليل، وإصدار <code>/api/status</code> 0.6.1؛
+    أما <code>workspace.css</code> الذي تمت إزالته فقد أرجع خطأ 404.</li>
+<li>اكتشف <code>Start.cmd</code> تثبيتًا لـ Python خارج مسار PATH. ونظرًا لعدم توفر Python،
+    عرض عرض التثبيت؛ ورفض التعليمات اليدوية المطبوعة وخرج من الخطوة 1.
+    أدت خطوة التنزيل من python.org إلى جلب المثبت 3.12.10 واجتاز فحص Authenticode الخاص بمؤسسة برمجيات Python؛
+    ولم يتم تشغيل المثبت نفسه على هذا المضيف.</li>
+<li><code>start.sh</code>، دون استخدام أي لغة Python، طبع تلميح التثبيت ثم خرج 1. تم اختبار <code>scripts\Docker.cmd</code> و
+    <code>scripts/docker-start.sh</code> على ملفات تنفيذية مزيفة لـ <code>docker</code>: تسلسل الاستدعاء الصحيح
+    وعنوان اللوحة وإخراج الرمز المميز، وعدم ظهور رسالة نجاح بعد الفشل.</li>
+<li>قام <code>python tools/build_portable.py</code> بإنشاء حزمة Windows بحجم 18.8 MiB بعد التحقق من
+    مجموع التحقق المثبت القابل للتضمين في وقت التشغيل. تم استخراجها إلى مسار يحتوي على مسافات وبدأت فقط
+    بمجلدات <code>C:\Windows</code> في مسار PATH، ونجح لغة Python المدمجة في اجتياز اختبار <code>TgWitness-Check.cmd</code>، وقدمت
+    العرض التوضيحي (32 حدثًا) ومساحة عمل حية، وقام Chromium بعرض السجل ودرج التفاصيل
+    دون أخطاء في JavaScript. تمت كتابة البيانات إلى مجلد <code>data</code> الخاص بالحزمة.</li>
+<li>أنتج <code>python tools/build_preview.py</code> أرشيفًا مصدرًا مكونًا من 110 ملفًا. وأظهر اختبار تجريبي لـ
+    <code>git add</code> نفس الملفات الـ110 دون وجود ملفات للجلسات أو المفاتيح أو قواعد البيانات أو الرموز المميزة أو السجلات أو التصدير
+    ، ودون مسارات مطلقة محلية ودون سلاسل نصية تشبه الأسرار.</li>
+</ul>
+<p>لم يتم تنفيذ ما يلي في دورة التعبئة هذه بتاريخ 27 أكتوبر: التثبيت التلقائي لـ Python
+نفسه، وفحوصات Docker build/Compose، وعمليات التشغيل على Linux/macOS، أو تجربة جديدة على حساب فعلي
+. تم تسجيل أدلة Telegram الحقيقية أعلاه وفي فحوصات الحسابات السابقة
+أدناه. تعريفات CI وحدها لا تؤهل لتنفيذ المنصة.</p>
+<h2 id="version-060">الإصدار 0.6.0<a class="anchor" href="#version-060" aria-label="رابط لهذا القسم">#</a></h2>
+<p>اجتازت أحدث مجموعة كاملة من برامج التشغيل المثبتة على نظام Windows 11 / Python 3.12.10 <strong>135 اختبارًا</strong>،
+مع <strong>تخطي اختبار</strong> واحد، في 26.53 ثانية مع ظهور تحذير Starlette الحالي. يتطلب التخطي
+أذونات POSIX. بعد إضافة مُعالج QR
+إلى فحوصات الجاهزية وقياسات العمليات، اجتازت 8 فحوصات متأثرة تتعلق بالجاهزية/مساحة العمل
+الاختبارات أيضًا.</p>
+<p>تشمل التغطية الجديدة مخططات Telethon 7/8، ومخططات Pyrogram 2/3، ومفاتيح JSON
+وJSON الخاص بالبيانات الوصفية فقط، وملفات الحسابات المتطابقة/المتعارضة، ورموز مرور TData،
+والتلاعب بمجموعات التحقق والمسارات غير الآمنة، والتحويل في الذاكرة دون اتصال بالإنترنت/بعد المصادقة،
+وفحوصات معرّفات الحسابات عبر الإنترنت، ونجاح QR/التوثيق الثنائي/انتهاء الصلاحية، والإلغاء القديم، وعزل الحسابات.
+تستخدم تستخدم تجهيزات TData تطبيقًا منفصلاً لـ AES-IGE للتشفير.</p>
+<p>اجتاز Chromium <strong>45 سيناريو عامًا</strong> و<strong>35 سيناريوًّا لاستيراد الحسابات/رموز QR/مفاتيح المصادقة،</strong>
+دون ملاحظة أي أخطاء في JavaScript للصفحة أو طلبات خارجية. تغطي اختبارات المتصفح الجديدة
+جميع تنسيقات الإدخال الأربعة معًا، وTData المحمية، وبيانات تعريف واجهة برمجة التطبيقات (API)، وعرض رموز QR،
+وانتهاء الصلاحية/إعادة المحاولة، والتوثيق الثنائي (2FA)، ورفض الحساب الخاطئ، وإلغاء القفل/مساحة العمل، والتصميم
+المتجاوب، واستجابات التحويل المتأخرة بعد اختيار ملف أحدث.</p>
+<p>اجتازت مجموعتا المتصفحين الاختبار مرة أخرى بعد إجراء التغييرات على إدخال الحساب. يفتح الإعداد المباشر
+نموذج الحساب؛ بينما يفتح الوضع التجريبي دفتر السجل النموذجي الخاص به. تعرض صفحة الحساب التجريبية
+تعليمات بدء التشغيل المباشرة وتخفي حقول إدخال بيانات الاعتماد.
+وأكدت الفحوصات المركزة عند 320 و390 و1440 بكسل أن حقل الرقم والزر الرئيسي
+يتناسبان مع الشاشة دون الحاجة إلى التمرير، وأن حقول واجهة برمجة التطبيقات (API) مطوية في البداية،
+وأن تباين النص يظل قابلاً للقراءة. وتظل عناصر التحكم في الالتقاط والتحقق
+مغطاة بعد فتح أقسامها الجديدة القابلة للتوسيع.</p>
+<p>تم اختبار مسار مفتاح المصادقة المباشر باستخدام بيانات اعتماد اصطناعية عبر
+نقاط النهاية الحقيقية للاستيراد والتفويض. تشمل الفحوصات المفاتيح غير المكتملة، وغياب DC،
+ومعرفات المستخدم غير الدقيقة، وعدم تطابق هوية الحساب، وبيانات اعتماد API المحفوظة، وظهور
+تقدم الطلب، ومسح البيانات السرية، والاستجابات المتأخرة بعد عمليات التعديل أو تغيير الطريقة.
+تم فحص طرق تسجيل الدخول الأربع جميعها عند 320 و390 و1440 بكسل. يظهر منتقي الملفات
+قبل إرشادات التنسيق، ويتناسب زر «الاتصال» مع نافذة العرض الأولية البالغ حجمها 844 بكسل
+مع طي إعدادات واجهة برمجة التطبيقات (API). لم تتم محاولة أي تفويض حقيقي لمفتاح المصادقة في
+جولة اختبار قبول واجهة المستخدم هذه.</p>
+<p>تم فحص تحديث اللوحة مرة أخرى باستخدام مجموعتي المتصفحات: لم يُلاحظ أي أخطاء في جافا سكريبت
+للصفحة أو طلبات خارجية. تغطي مجموعة الحسابات الآن لصق
+زوج واحد من معرّف واجهة برمجة التطبيقات (API) والتجزئة (hash)، ورفض الأزواج غير الصحيحة أو المتعددة دون استبدال
+الحقول، وإرشادات تتعلق بالبيانات الوصفية فقط، وتجاهل استجابات الاستيراد القديمة بعد
+تغيير طريقة تسجيل الدخول أو التعديل اليدوي لبيانات الاعتماد. تم اجتياز ستة فحوصات مركزة إضافية
+لدليل الإعداد، وبدء/إيقاف مؤقت صريح، واستعادة البحث الفارغ، والتخطيط النهائي
+للاتصال/الدليل المحلي، وتباين النص القوي عند 320 و390 و1440 بكسل.
+يضيف تحديث تسجيل الدخول المباشر عملية واحدة لطلب الرقم الهاتفي/الرمز، ويعيد استخدام
+زوج API المحفوظ في مساحة العمل الحالية لتسجيل الدخول عبر الهاتف، ورمز الاستجابة السريعة (QR)، والجلسة. تتضمن مجموعة Python
+الكاملة المذكورة أعلاه اختبارات جديدة للثبات، ورفض بيانات الاعتماد الجزئية، وعزل
+مساحة العمل. تغطي فحوصات المتصفح الإدخال المباشر للرقم الهاتفي، وإعادة استخدام بيانات الاعتماد المحفوظة،
+والتوجيه القائم على البيانات الوصفية فقط، والتفويض بضغطة زر واحدة للملفات، ورفض الحسابات المكررة.
+كما تم فحص نماذج الرمز المميز للوحة والهاتف المبسطة دون التمرير الأولي
+عند 320 و390 و1440 بكسل. وأكد فحص التوافق أن نموذج الهاتف المباشر
+يمكنه استخدام نقاط النهاية السابقة للتكوين/الرمز أثناء استمرار تشغيل عملية أقدم.</p>
+<p>تم فحص حساب واحد مقدم من المستخدم بشكل منفصل، خارج نطاق اختبارات التثبيت العامة.
+أشارت مدخلات Telethon وPyrogram وTData إلى نفس التفويض؛ وقد
+قدمت ملف JSON المصاحب بيانات اعتماد واجهة برمجة التطبيقات (API). تم تحميل الملفات الأربعة جميعها عبر
+لوحة التحكم 0.6.0، وأكد Telegram رقم معرّف الحساب المتوقع. وظلت الملفات المصدرية
+دون تغيير. لم يتم اختيار أي مصادر وظلت ميزة المراقبة معطلة. وهذا
+يُعد مثالاً واحداً على الاستيراد/تسجيل الدخول، وليس جمعًا أو استردادًا أو سعةً في الوقت الفعلي.</p>
+<p>كما أصدر Telegram رمز QR حقيقي، تم إلغاؤه دون مسحه ضوئيًا. تم
+تجربة إجراءات تأكيد QR الكاملة وعمليات المصادقة الثنائية (2FA) باستخدام عملاء اصطناعيين؛ أما
+التأكيد عبر الهاتف المحمول باستخدام تطبيق Telegram الحقيقي فيظل خطوة قبول منفصلة.
+لا تتضمن الملفات العامة أي معرّفات حسابات حقيقية أو أسرار أو لقطات شاشة.</p>
+<p>اكتملت ترقية المشغل؛ المصدر، والبيانات الوصفية المثبتة، وعلامة الجاهزية
+تقرير 0.6.0، مع رمز الاستجابة السريعة 8.2 و<code>pip check</code> ناجح. عملت العجلة المثبتة
+على تشغيل اللوحة والدليل، ورفضت طلبات واجهة برمجة التطبيقات غير المصادق عليها، وقامت بشكل مستقل
+بالتحقق من الصادرات الاصطناعية المباشرة والمتدفقة المكونة من 32 حدثًا. تم فحص الدليل المحدث غير المتصل بالإنترنت
+عند 320 و390 و1440 بكسل. تظل لقطات الشاشة العامة اصطناعية.</p>
+<p>يحتوي إصدار المصدر على 107 ملفًا مدرجًا في قائمة المسموح بها. روابط التوثيق المحلية تعمل بشكل صحيح.
+لا يزال تنفيذ Docker/Caddy، ونشر CI/الحزم عن بُعد، ووقت تشغيل ARM64، والجمع المستمر،
+ومصفوفة قبول Telegram الحية الكاملة غير مؤهلة هنا.</p>
+<h2 id="version-051">الإصدار 0.5.1<a class="anchor" href="#version-051" aria-label="رابط لهذا القسم">#</a></h2>
+<p>على نظام Windows 11 / Python 3.12.10، اجتازت مجموعة بيئة المشروع بالكامل الاختبار:
+<strong>94 اختبارًا ناجحًا، و2 تم تخطيهما</strong>، في 31.21 ثانية، مع ظهور تحذير Starlette الحالي.
+تتطلب العناصر التي تم تخطيها أذونات POSIX وإنشاء روابط رمزية غير متوفرة على هذا المضيف.
+أظهرت أداة HTTP للتنزيل تشخيصًا لسلسلة طلبات؛ وقد اجتازت جميع الاختبارات
+. لا يؤكد هذا التشغيل عدم وجود مشكلات في نقل البيانات على المضيف.</p>
+<p>تضمنت تمارين تغطية الانحدار الجديدة رفض StringSession، وتغييرات في الكود وحسابات المصادقة الثنائية (2FA)،
+وإلغاء البحث عن الهوية، وإلغاء تسجيل الدخول المعلق، والتحديثات من خلال
+المعالجات المسجلة على العملاء النشطين والمرفوضين والمستبدلين وعملاء الاختبار. ولا يساهم في الأحداث سوى
+المجمع النشط؛ بينما تظل بيانات الاعتماد المحفوظة والسجل الموقّع
+سليمة. تغطي الفحوصات الجديدة الأخرى البحث باستخدام Unicode بعد إعادة فتح قاعدة البيانات، وإدراج
+حدود سياسة المراقبة في التغطية، واستثناءات حزم المصادر العامة.</p>
+<p>أطلق المشروع الفعلي <code>pythonw.exe</code> لوحة اصطناعية معزولة، وأرجع
+رمز حالة HTTP 200 واحتفظ بتشخيصات بدء التشغيل في <code>logs/server.log</code>. لم
+يحتوِ السجل على رمز اللوحة الذي تم إنشاؤه أو سجلات الوصول عبر HTTP. لم ينهِ الاختبار سوى
+عمليته الاصطناعية الخاصة. لم يتم تسجيل أي مهمة في «جدولة المهام»؛ ويظل تسجيل الدخول/تسجيل الخروج،
+ووضع السكون واستعادة الخدمة متطلبات منفصلة.</p>
+<p>اجتاز اختبار التوافق مع Chromium <strong>45 سيناريو</strong>، دون حدوث أخطاء في JavaScript بالصفحة و
+دون ملاحظة أي طلبات خارجية. تغطي الفحوصات الجديدة تواريخ وأوقات الخط الزمني بدقة 601/768/850 بكسل
+ومسودات المرفقات عبر تحديث الحالة، والتعديلات الأحدث التي تتم أثناء الحفظ،
+ونتائج التحقق التي تم مسحها عند تبديل الحساب، واستجابات التحقق المتأخرة بعد
+التبديل إلى تطبيق آخر ثم العودة، وحدود التحقق الصريحة عند وصول أحداث جديدة.
+كما تم تصحيح تباعد أيقونة البحث/النص وإعادة تشغيل مجموعة المتصفحات.</p>
+<p>استخدم تشغيل المتصفح بيئة التشغيل المثبتة في <code>.venv</code> و
+Playwright 1.62.0/Chromium المقدم من النظام، والذي أُضيف بعد بيئة المشروع في مسار الاستيراد.
+تم إيقاف تثبيت تابع تطويري اختياري أثناء بطء تنزيل Playwright؛
+ولم يتم تأهيل أي إصدار جديد لأداة المتصفح. أكمل
+<code>python start.py --setup-only</code> العادي ترقية التطبيق. تشير المصدر والبيانات الوصفية المثبتة
+وتقرير علامة المشغل إلى الإصدار 0.5.1؛ اجتاز <code>pip check</code> الاختبار. اجتازت اختبارات الجاهزية
+على مسار جديد غير مستخدم، مع الاحتفاظ بالتحذير المتوقع بشأن مفتاح الخزنة المحلية.</p>
+<p>تم تثبيت إصدار 0.5.1 بشكل منفصل وإجراء اختبار أولي عليه: تم تقديم جميع عناصر اللوحة/الدليل
+، وتم رفض الوصول غير المصادق عليه إلى واجهة برمجة التطبيقات (API)، واجتازت ملفات ZIP للأدلة المكونة من 32 حدثًا، سواء المباشرة أو المتدفقة
+، عملية التحقق المستقلة. تمت مقارنة ملفات التطبيق الموجودة
+في الحزمة المثبتة مع الملفات المصدرية. يستخدم أرشيف المصدر العام
+قائمة السماح الصريحة لأنواع الملفات ويرفض الملفات المصدرية المرتبطة؛ ويتم استبعاد المواد التي يتم إنشاؤها أثناء التشغيل
+الموجودة داخل دلائل المصدر من اختبارات الانحدار.</p>
+<p>أثناء عملية إصلاح الكود، احتوى اختيار المصدر المفتوح ومجموعة المرشحين في Git على
+86 ملفًا، دون تضمين أي دلائل بيانات وقت التشغيل. ولم يسفر الفحص عن أي تطابقات لأنماط المفاتيح الخاصة القابلة للتعرف عليها، ورموز GitHub،
+ورموز روبوتات Telegram، وأنماط StringSession. ويُعد هذا فحصًا محدودًا
+للأنماط، وليس تدقيقًا شاملاً للأسرار. تغطي اختبارات قواعد التجاهل اثني عشر
+عنصرًا شائعًا من الحسابات/البيانات/التصدير. تم تحليل ملفات YAML الخاصة بسير العمل/المشكلات/التأليف ونصوص مهام Windows
+بنجاح. تم حل روابط الوثائق المحلية.</p>
+<p>تمت معالجة جميع النتائج السبع المستخلصة من المراجعة التي أجريت في 27 أكتوبر. لا يزال تنفيذ
+سير العمل على GitHub، وبيئة التشغيل على Linux/macOS/Docker، والتطبيق الحقيقي لـ Telegram، والتوافق مع البروكسيات الخارجية/TSA،
+وكفاءة التحمل تحت الأحمال المستمرة خارج نطاق هذا التشغيل المحلي.
+لم يتم إجراء أي نشر للمستودع، أو تسجيل للخدمة، أو جمع لحسابات حقيقية.
+تم تنفيذ ذلك.</p>
+<h3 id="english-documentation-update">تحديث الوثائق باللغة الإنجليزية<a class="anchor" href="#english-documentation-update" aria-label="رابط لهذا القسم">#</a></h3>
+<p>يصف ملف README، ومرجع الحساب/الجلسة، وسير عمل التجميع، والدليل المرفق الآن
+المدخلات المدعومة، وسلوك مساحة العمل، وسياسات الأحداث، وتنسيقات التصدير
+باللغة الإنجليزية. تم تحديث اللقطات الثلاث العامة باستخدام بيانات اصطناعية.
+في تلك المرحلة، احتوى اختيار المصادر العامة على 88 ملفًا، بما في ذلك الدليلين الجديدين.
+جميع الروابط المحلية البالغ عددها 131 رابطًا عبر 23 مستندًا بتنسيق Markdown تعمل بشكل صحيح.</p>
+<p>بعد تعديلات الواجهة والدليل، اجتاز اختبار Chromium مرة أخرى جميع
+السيناريوهات الـ45، دون ملاحظة أي أخطاء في جافا سكريبت للصفحة أو طلبات خارجية.
+لم يتم إعادة تشغيل مجموعة Python الكاملة من أجل تحديث هذه الوثائق والعرض التقديمي؛
+وتنتمي نتيجة اجتياز الـ94 سيناريو المذكورة أعلاه إلى عملية إصلاح الكود السابقة.</p>
+<p>تم تثبيت العجلة المعاد بناؤها على هدف جديد معزول. وقد عملت لوحة التحكم وأدوات التوجيه
+بنجاح، وتم رفض الوصول غير المصادق عليه إلى واجهة برمجة التطبيقات (API)، كما اجتازت عمليات التصدير
+المباشرة والمتدفقة التحقق المستقل لـ 32 حدثًا اصطناعيًا.</p>
+<h3 id="installation-and-deployment-update">تحديث بشأن التثبيت والنشر<a class="anchor" href="#installation-and-deployment-update" aria-label="رابط لهذا القسم">#</a></h3>
+<p>اجتازت عمليات التثبيت المركزة والتعبئة وفحوصات الجاهزية <strong>14 اختبارًا</strong>، مع
+تخطي واحد لعدم توفر إنشاء رابط رمزي. تغطي فحوصات الغلاف الأصلي المسارات التي تحتوي على
+مسافات، وتوجيه الوسيطات، وأوضاع الإعداد/العرض التوضيحي، وانتشار الخروج غير الصفر.
+تختبر فحوصات Git Bash مساعد shell الخاص بـ Docker باستخدام برنامج خفي محاكى، بما في ذلك
+غياب Docker، وغياب Compose، وفشل انتظار حالة الصحة، ونجاح بدء التشغيل عبر منفذ بديل.
+لا تثبت هذه الفحوصات المحاكاة توافق وقت تشغيل Docker.</p>
+<p>تم تثبيت نسخة كاملة من المصدر المفتوح في دليل Windows جديد يحتوي
+مساره على مسافات. أنشأ <code>scripts\Setup.cmd</code> بيئة جديدة وقام بتثبيت
+بيئة التشغيل المثبتة؛ وأبلغ <code>Start.cmd --check --json</code> عن جاهزيته دون إنشاء
+دليل البيانات المستهدف. نجح <code>pip check</code>. كما اجتازت العجلة المعاد بناؤها
+فحص الحزمة المثبتة، بما في ذلك عمليات التصدير المباشرة والمتدفقة لـ 32 حدثًا.</p>
+<p>تم تحليل بناء جملة لغة Shell وخمسة ملفات YAML خاصة بسير العمل/Compose. تتوافق تكوينات Compose
+للمصدر والصور فيما يتعلق بإعدادات التخزين ووقت التشغيل. في تلك المرحلة، تم حل جميع الروابط المحلية البالغ عددها 139
+رابطًا موزعة على 23 مستندًا بتنسيق Markdown. يحتوي اختيار المصادر العامة على 99 ملفًا.</p>
+<p>تطبق تعريفات CI الآن إعدادات أصلية جديدة على أنظمة Windows/Linux/macOS، بالإضافة إلى
+التحقق من سلامة Compose والتحكم في الوصول والاستمرارية عبر إعادة إنشاء الحاويات، وتكوين Caddy.
+يعتمد سير عمل الإصدار على اجتياز هذه الفحوصات ويضيف اختبارًا أوليًا لمحاكاة ARM64. Docker غير متاح على هذا المضيف: التنفيذ الفعلي لـ Compose/Caddy،
+وإصدار الشهادات، وتنفيذ ARM64، وسير العمل عن بُعد/نشر الحزم
+لا تزال غير متاحة محليًّا. لم يتغير كود التطبيق/واجهة المستخدم في هذا التحديث؛
+ولم يتم إعادة تشغيل نتائج Python والمتصفح الكاملة السابقة.</p>
+<h2 id="version-050">الإصدار 0.5.0<a class="anchor" href="#version-050" aria-label="رابط لهذا القسم">#</a></h2>
+<p>اجتازت مجموعة اختبارات وقت التشغيل المثبتة بالكامل: <strong>81 اختبارًا ناجحًا، وتخطي اختبار واحد</strong>، في 22.00 ثانية،
+مع ظهور تحذير Starlette الحالي. يتم تخطي فحص أذونات POSIX في
+نظام Windows. تختبر المعالجات الجديدة إرسال الرسائل، والتعديلات، وعمليات الحذف المحددة النطاق/غير المحددة النطاق،
+والردود، وتحديثات المشاركين، ورسائل خدمة العضوية من خلال سياسات مختلفة. لا تنتج الفئات المعطلة أي ملاحظات حية مقابلة؛ وتظل
+تشخيصات التغطية واللقطات الصريحة متاحة. تتحقق الاختبارات من استمرار السياسة،
+وفصل مساحة العمل، وسجلات التدقيق الموقعة قبل/بعد، وسلوك السياسة غير المتغير،
+والتحقق الصارم، وإدراجها في إيصال العملية التالية.</p>
+<p>تتحقق اختبارات الدخول التجريبية من أن قدراتها تختلف عن رمز لوحة التحكم المُهيأ،
+ولا يمكنها منح الصلاحية لمساحة عمل حية، ولا يمكنها تغيير إعدادات التجميع، ولا يتم
+إصدارها أو قبولها لطلبات عن بُعد أو مُعادة توجيه أو عبر الأصول أو ذات مضيف غير صالح.
+لا يؤدي فتح نسخة تجريبية مخزنة دون علامة تجريبية صريحة إلى تمكين الدخول التلقائي.</p>
+<p>اجتاز اختبار قبول Chromium <strong>39 سيناريو</strong>، بما في ذلك الدخول إلى العرض التوضيحي المحلي دون
+إدخال رمز، وإعدادات المراقبة المسبقة، والانتقال من اختيار المصدر إلى السياسة،
+واستقلالية كل حساب على حدة، وفحص تخطيط سطح المكتب/320/390 بكسل وتباين النص.
+لم تكن هناك أخطاء في جافا سكريبت بالصفحة. تظل طلبات المضيف التي تم إدخالها بواسطة AdGuard
+في السجل. سجلت أداة HTTP للتنزيل إعادة تعيين الاتصال بعد أن قام العميل
+بإغلاق اتصاله؛ ولا تزال الاختبارات ناجحة. هذه النتيجة ليست من خدمة حية.</p>
+<p>قام المشغل العادي بترقية البيئة المعزولة إلى الإصدار 0.5.0؛ وتتطابق الإصدارات المصدرية والمثبتة،
+وقد اجتازت عملية التحقق باستخدام pip. اجتازت مجموعة الاختبارات الكاملة اختبارات تشفير خزينة الأسرار الحالية، ورفض المفاتيح الخاطئة أو المفقودة،
+واختبارات التلاعب بالتوقيعات والملفات الوسائطية. لم يُعلن عن أي تشفير جديد
+لمحتوى الرسائل أو المرفقات من قِبل التطبيق.</p>
+<p>يتم إعادة تشغيل العرض التوضيحي المحلي لإتاحة واجهة المستخدم المحدثة. يتم الاحتفاظ
+بالسجلات الاصطناعية الموجودة؛ ويؤدي إيقاف عملية العرض التوضيحي القديمة التي تعمل في الخلفية إلى إنشاء
+حدود للعمل دون اتصال بالإنترنت عند التشغيل التالي. لا يتم استخدام أي جلسة Telegram حقيقية لإجراء هذه الفحوصات.</p>
+<p>أظهرت لوحة localhost:8787 قيد التشغيل الإصدار 0.5.0، والوصول التلقائي إلى العرض التوضيحي،
+وعناصر التحكم الخمسة في المراقبة، و33 حدثًا محفوظًا في السجل الاصطناعي. أما
+عجلة الإصدار 0.5.0 المثبتة بشكل منفصل فقد قدمت جميع موارد اللوحة/الدليل، ورفضت الوصول غير المصادق عليه إلى واجهة برمجة التطبيقات (API)
+، وأنتجت ملف ZIP تم التحقق منه يحتوي على 32 حدثًا، سواء بشكل مباشر أو من خلال
+أداة المساعدة في التنزيل عبر البث. تظل إصدارات حزم وقت التشغيل مثبتة كما تم تسجيلها للإصدار 0.4.</p>
+<h2 id="version-040">الإصدار 0.4.0<a class="anchor" href="#version-040" aria-label="رابط لهذا القسم">#</a></h2>
+<p>اجتازت مجموعة الاختبارات الكاملة المثبتة أثناء التشغيل: <strong>78 اختبارًا ناجحًا، واختبار واحد تم تخطيه</strong>، في 19.77 ثانية.
+يتطلب الاختبار الذي تم تخطيه أذونات POSIX؛ ولا يزال تحذير إهمال Starlette TestClient
+من المصدر الأصلي قائمًا. تغطي الاختبارات الجديدة التنزيل المتدفق/توجيه مساحة العمل،
+رؤوس التفويض، رفض الكتابة فوق الملفات، عمليات إعادة التوجيه، الاستجابات المقطوعة،
+حدود الحجم المعلن/الفعلي، القراءات المحدودة، التنظيف، أنظمة الملفات بدون روابط
+ثابتة، حالات فشل الاستعداد، وأنماط المشغل التي يجب ألا تقوم بتثبيت الحزم.
+تؤكد اختبارات التصدير وجود الملفات المؤقتة المحلية لمساحة العمل والتنظيف الانتقائي للملفات اليتيمة.</p>
+<p>اجتاز اختبار التوافق مع Chromium جميع السيناريوهات الـ36 المدرجة دون أي أخطاء في جافا سكريبت بالصفحة.
+ويقوم بإجراء عمليات محاكاة لتسجيل الدخول عبر الهاتف/الرمز/التوثيق الثنائي (2FA)، والجلسات المحولة، ومساحتين عمل، و
+مسارات/حالات منفصلة، والملاحظات، والتوقيعات، ونقاط التفتيش، وطلبات الطابع الزمني، بالإضافة إلى:</p>
+<ul>
+<li>تصميمات لأجهزة سطح المكتب وبدقة 320/390 بكسل، دون تجاوز أفقي، مع عناصر تنقل واضحة،
+    وحقل تسجيل الدخول الأول ضمن نافذة العرض الأولية التي تبلغ 844 بكسل.</li>
+<li>تباين النص مع الخلفية الصلبة وفقًا لعتبات النص WCAG AA. تم استبعاد عناصر التحكم المعطلة،
+    والعتامة، وخلفيات الصور/التدرجات اللونية؛ فهذه ليست مراجعة كاملة لمعايير WCAG.</li>
+<li>استجابة تصدير محلية حقيقية تمت كتابتها من خلال محاكي لاختيار الملفات/الكتابة في نظام التشغيل (OS)،
+    تليها عملية تحقق مستقلة من ملف ZIP؛ ولا يؤدي الإلغاء إلى إرسال أي طلب تصدير.</li>
+<li>يؤدي فشل الكتابة إلى إيقاف العملية؛ حيث يرفض الخيار الاحتياطي سعة 128 ميغابايت الاستجابة المُعلنة ذات الحجم الزائد
+    دون تخصيص حمولة مطابقة.</li>
+<li>الدليل المحلي باللغة الإنجليزية على سطح المكتب وعلى كلا العرضين الضيقين.</li>
+</ul>
+<p>لم يتم أتمتة مربع حوار الحفظ في نظام التشغيل وعمليات الكتابة الفعلية على المتصفح التي تبلغ عدة غيغابايت، كما لم
+تخضع للتحقق. تستخدم اختبارات التنزيل بلغة Python أجزاء محدودة وتركيبات loopback. ولا يزال
+القبول الكامل للنشر باستخدام Telegram الحقيقي أمرًا منفصلاً.</p>
+<p>قام المثبت العادي بترقية <code>.venv</code> إلى الإصدار 0.4.0. تتطابق البيانات الوصفية المصدر والمثبتة؛
+اجتاز <code>pip check</code> الاختبار. أبلغ <code>python start.py --check --json</code> عن جاهزيته على
+مسار اصطناعي جديد دون إنشاء دليل البيانات. ويظل تحذير تخزين المفتاح المحلي
+صحيحًا: السجلات/الوسائط غير مشفرة بواسطة التطبيق.</p>
+<p>تم إنشاء حزمة الإصدار 0.4.0 وتثبيتها في دليل منفصل. تتطابق جميع ملفات التطبيق البالغ عددها 23 ملفًا
+مع المصدر بايتًا بايتًا. قدمت الحزمة المثبتة لوحة التحكم و
+الدليل/الموارد باللغة الإنجليزية، ورفضت الوصول غير المصادق عليه إلى واجهة برمجة التطبيقات (API)، وقامت بتصدير ملف ZIP مركب
+يحتوي على 32 حدثًا اجتاز عملية التحقق. كما جلب أمر التنزيل المتدفق الخاص بها
+ملف ZIP تم التحقق منه بشكل مستقل من التطبيق المثبت قيد التشغيل.</p>
+<p>التوثيق العام والدليل المحلي باللغة الإنجليزية؛ روابط التوثيق المحلي
+تعمل. قام PowerShell بتحليل قالب مهام Windows، وقامت Python بتحليل ملف plist الخاص بنظام macOS.
+هذه عمليات تدقيق في بناء الجملة، وليست تنفيذًا للخدمة. لم يتم تسجيل أي مهمة/خدمة.
+يتضمن تكوين CI الآن فحوصات الجاهزية، لكن CI عن بُعد لم يتم تشغيله هنا.</p>
+<p>أظهرت عملية تشغيل المتصفح 0.4 مرة أخرى حقن AdGuard في المضيف وخطأ OSError 10022 في عملية تنظيف مآخذ التوصيل asyncio
+في نظام Windows. تم اجتياز اختبارات المتصفح؛ ويتم الاحتفاظ بهذه الملاحظات البيئية
+بدلاً من التعامل معها على أنها سلوك ثابت للتطبيق.
+فشلت المحاولات الأولية في بيئة الحماية (sandbox) الخاصة بـ OpenSSL/المتصفح/pip؛ أما عمليات التشغيل المؤهلة الناجحة
+فقد استخدمت تنفيذًا معتمدًا خارج بيئة الحماية.</p>
+<h2 id="version-031-focused-readiness-fixes">الإصدار 0.3.1 يركز على إصلاحات الجاهزية<a class="anchor" href="#version-031-focused-readiness-fixes" aria-label="رابط لهذا القسم">#</a></h2>
+<p>اجتازت الفحوصات المتعلقة بالمشغل المتأثر، والأدلة/التخزين، وواجهة برمجة التطبيقات (API) ما يلي: <strong>31 فحصًا ناجحًا</strong>،<strong>
+1 فحص تم تخطيه</strong>، وتحذير واحد من Starlette في المصدر. الفحص الذي تم تخطيه يتحقق من أذونات الدليل وفقًا لمعايير POSIX
+ولا يمكنه تأسيس تلك الأذونات على مضيف Windows هذا.
+يحاكي اختبار Python القديم حدود الإصدار/الاستيراد؛ لم يتم تثبيت أو تأهيل أي مترجم لـ Python 3.10.
+تم تسجيل مجموعة الاختبارات 0.3 التي اجتازت الاختبار سابقًا أدناه؛
+ولم يتم إعادة تشغيل المجموعة الكاملة وسيناريوهات المتصفح لهذه التغييرات المحددة.</p>
+<p>قام المشغل العادي بترقية البيئة المحلية إلى الإصدار 0.3.1؛ وتتطابق البيانات الوصفية للمصدر والمثبتة،
+وقد اجتاز اختبار pip. وقد عملت عجلة الإصدار 0.3.1 المثبتة بشكل منفصل
+على توفير اللوحة/الأصول، ورفضت الوصول غير المصادق عليه إلى واجهة برمجة التطبيقات (API)، وأنتجت
+تصديرًا مركبًا تم التحقق منه مكونًا من 32 حدثًا. تم تحليل ملف YAML الخاص بسير العمل، لكن فحص وقت تشغيل الحاوية الجديد
+لم يتم تنفيذه: لم يتوفر وقت تشغيل محلي قابل للاستخدام لـ Docker/Podman/Linux.</p>
+<p>انظر <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/READINESS.md">نتائج تقييم الجاهزية</a> لمعرفة الثغرات المتبقية في قابلية الاستخدام، والخدمة الحية، و
+المنصة. لا يدعم هذا التصحيح أنظمة تشغيل إضافية.</p>
+<h2 id="version-030">الإصدار 0.3.0<a class="anchor" href="#version-030" aria-label="رابط لهذا القسم">#</a></h2>
+<p>اجتازت مجموعة برامج التشغيل المثبتة بالكامل: <strong>61 اختبارًا</strong>، مع تحذير واحد من Starlette
+TestClient في النسخة الأصلية بشأن إيقاف استخدامها. تشير بيانات التعريف الخاصة بوقت التشغيل إلى TgWitness 0.3.0 و
+python-socks 2.8.2؛ واجتازت عملية فحص pip. اجتازت عملية اختبار التوافق مع المتصفح دون أي
+أخطاء في جافا سكريبت بالصفحة.</p>
+<p>تم إنشاء عجلة الإصدار 0.3.0 وتثبيتها في دليل حزم منفصل. وقد
+قدمت الخدمة للوحة التحكم والأصول، ورفضت طلب API غير مصدق، وقامت بتصدير
+سجل تركيبي مكون من 32 حدثًا اجتاز التحقق المستقل. تم حل
+روابط الوثائق المحلية. بعد تصحيح تطبيع المفتاح العاري في MTProxy، أُعيد تشغيل جميع
+اختبارات الاتصال/الأمان التسعة بنجاح.</p>
+<p>تشمل التغطية الجديدة ما يلي:</p>
+<ul>
+<li>اسم المستخدم/كلمة المرور لـ SOCKS5 و HTTP CONNECT عبر خوادم اختبار loopback فعلية؛
+    يفشل الوكيل المُهيأ غير النشط بدلاً من اللجوء إلى الوجهة.</li>
+<li>التحقق من صحة الوكيل، واختيار وسيلة النقل MTProxy، ورفض أسرار TLS المزيفة،
+    والاستمرارية، وعزل مساحة العمل، ورفض التغييرات أثناء المراقبة، واستبعاد الأسرار
+    من حالة واجهة برمجة التطبيقات (API) والأحداث الموقعة.</li>
+<li>تحويل للقراءة فقط لمخططات Telethon SQLite الاصطناعية 7 و8؛ دون تغيير
+    في تجزئة المصدر؛ ورفض التنسيقات الأخرى، وطرق عرض SQL، وملف WAL المعلق.</li>
+<li>المفتاح الرئيسي للخزينة الخارجية: مفاتيح مساحة عمل مشتقة مختلفة، وإعادة فتح ناجحة،
+    ورفض المفاتيح الخاطئة أو المفقودة، وعدم وجود ترحيل ضمني للخزائن المحلية الموجودة.</li>
+<li>إعدادات الوكيل في المتصفح، ومسح بيانات الاعتماد، والإفصاح عن حماية التخزين،
+    وصفحة الاتصال عبر الهاتف المحمول، وتفويض ملفات الجلسات المحولة، والمسارات المنفصلة،
+    وجميع سيناريوهات التجميع/التصدير التي تمت تغطيتها سابقًا باستخدام عميل Telegram مزيف.</li>
+</ul>
+<p>أثناء التطوير، انتظر اختبار التكرار (loopback) إلى أجل غير مسمى إغلاق النظير؛ بينما لاحظت
+تجربة أخرى إعادة تعيين اتصال Windows بعد المصافحة. يقوم الجهاز الآن بتحديد
+التبادل بأكمله ويعامل EOF/إعادة التعيين بعد اكتمال المصافحة على أنه إغلاق
+للاتصال. لا تزال تأكيدات المصافحة/المصادقة مطلوبة. وهذا لا ينطبق على
+مزودي البروكسي الحقيقيين ولا يشير إلى وجود عيب ثابت في نقل Telegram.</p>
+<p>لا تزال ملاحظة طلب AdGuard الموضحة أدناه سارية. لم يتم استخدام أي حساب Telegram
+حقيقي، أو وكيل SOCKS/HTTP خارجي، أو خادم MTProxy نشط. MTProxy هو
+برنامج تجريبي وقد تم التحقق من خياراته المحددة/التحقق من صحة الأسرار، وليس
+التشغيل البيني الفعلي. تم اختبار أوامر جديدة لتحويل المفاتيح الخارجية والجلسات
+باستخدام أسرار اصطناعية فقط. لا تزال أنظمة Linux/macOS/Docker غير مؤهلة هنا.</p>
+<p>لم يتم تكرار قياس معدل النقل 0.2 الوارد أدناه ويجب عدم تقديمه
+كمقياس أداء جديد متعدد الحسابات/البروكسي للإصدار 0.3.</p>
+<h2 id="version-020-baseline">الإصدار 0.2.0 الأساسي<a class="anchor" href="#version-020-baseline" aria-label="رابط لهذا القسم">#</a></h2>
+<p>تم اختباره على نظام Windows باستخدام Python 3.12.10. لم يتم ربط أي حساب حقيقي على Telegram.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>تحقق</th>
+<th>النتيجة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>مجموعة أدوات Python</td>
+<td>تم اجتياز 52 اختبارًا في بيئة التطوير و52 اختبارًا مع وقت التشغيل المثبت؛ ظهر تحذير واحد بشأن إهمال Starlette TestClient في كل جولة اختبار</td>
+</tr>
+<tr>
+<td>بناء جملة JavaScript</td>
+<td>تم تطويره باستخدام Node.js</td>
+</tr>
+<tr>
+<td>قبول Chromium</td>
+<td>تمت الموافقة؛ لا توجد أخطاء في جافا سكريبت بالصفحة</td>
+</tr>
+<tr>
+<td>تصميم مخصص لأجهزة الكمبيوتر المكتبية/الأجهزة المحمولة</td>
+<td>تم التحقق عند دقة 1440 × 1060 و390 × 844؛ لا يوجد تجاوز أفقي للوثيقة</td>
+</tr>
+<tr>
+<td>محتوى الرسائل بتنسيق HTML</td>
+<td>تم عرضها كنص؛ لم يتم تنفيذ البرنامج النصي المُدرج</td>
+</tr>
+<tr>
+<td>نموذج لتدفق الحساب</td>
+<td>بيانات اعتماد واجهة برمجة التطبيقات (API) → الهاتف → الرمز → المصادقة الثنائية (2FA) → اختيار المجموعة → البدء → لقطة → إيقاف مؤقت → إعادة التحميل</td>
+</tr>
+<tr>
+<td>الأدلة في المتصفح</td>
+<td>مقارنة التعديلات، المحتوى السابق بعد الحذف، عوامل التصفية، التنزيل بصيغة ZIP، نقاط التحقق، إيصال العملية الموقّع، تنزيل الطلب وفقًا لمعيار RFC 3161 وربط نقاط التحقق</td>
+</tr>
+<tr>
+<td>حسابات متعددة</td>
+<td>سجلات منفصلة، ومفاتيح، ومصادر، وحالات تشغيلية؛ لا يؤثر تبديل المتصفح على استمرار تشغيل أداة التجميع الأخرى؛ تُعاد فتح مساحات العمل بعد إعادة التشغيل؛ يتم رفض الحسابات المكررة وإعادة تخصيص الحسابات</td>
+</tr>
+<tr>
+<td>أخطاء التشفير</td>
+<td>تم تغيير الحقول الموقعة، وإضافة حقول غير موقعة، ومفتاح خاطئ، وملف أرشيف تالف، ووسائط تم تغييرها أو مفقودة، ورفض اقتطاع تم اكتشافه عند نقطة التحقق</td>
+</tr>
+<tr>
+<td>التخزين</td>
+<td>يتم التحقق من الإضافات المتزامنة؛ وتؤدي عمليات التحديث/الحذف إلى الرفض؛ ويرفض البرنامج عند بدء التشغيل أي سجل تم تغييره دون إضافة، ويقوم بإلغاء قفله</td>
+</tr>
+<tr>
+<td>استمرارية الوسائط</td>
+<td>عمليات كتابة الرسائل/المهام الذرية؛ استعادة التشغيل بعد إعادة التشغيل؛ الاحتفاظ بوصفات الإصدار الأصلي؛ رفض استبدال قائمة الانتظار وتلف الملفات الموجودة؛ استمرار FloodWait؛ عزل أعطال المصادر</td>
+</tr>
+<tr>
+<td>البث المباشر</td>
+<td>يتم تصدير البادئة الثابتة أثناء إضافة السجلات الجديدة؛ وتكتشف نقطة التحقق المحتفظ بها أي سجل مقطوع؛ ولا يؤدي التصدير إلى تضمين مجمل تدفق الأحداث</td>
+</tr>
+<tr>
+<td>RFC 3161</td>
+<td>يقرأ OpenSSL 3.5.9 الطلبات التي تم إنشاؤها؛ ويتم قبول استجابات CA/TSA الاصطناعية التي تم إنشاؤها محليًّا؛ بينما يتم رفض البيانات المعدلة، ورموز nonce، وشهادات CA الخاطئة؛ ولا تتجاوز بيئة CA المحيطة الثقة الصريحة</td>
+</tr>
+<tr>
+<td>الإعداد المحلي</td>
+<td>أدى الأمر start.py --setup-only إلى ترقية بيئة .venv المعزولة إلى الإصدار 0.2.0؛ تتطابق البيانات الوصفية للمصدر والتثبيت؛ اجتاز اختبار pip</td>
+</tr>
+<tr>
+<td>Wheel</td>
+<td>تم إنشاء الإصدار 0.2.0 وتثبيته بشكل منفصل ضمن «نتائج الاختبار»؛ حيث تم تقديم اللوحات/الموارد، ورفض طلبات واجهة برمجة التطبيقات (API) غير المصادق عليها، وتصدير أرشيف مركب مكون من 32 حدثًا والتحقق منه</td>
+</tr>
+</tbody>
+</table></div>
+<p>استخدمت الاختبارات المصدرية FastAPI 0.159.1، وUvicorn 0.54.0، وTelethon 1.45.0،
+وcryptography 50.0.2، وpytest 9.1.1، وPlaywright 1.62.0.
+يستخدم وقت التشغيل المثبت FastAPI 0.162.0، وStarlette 1.10.0،
+وUvicorn 0.54.0، وTelethon 1.45.0، وcryptography 50.0.2.
+يسجل ملف deploy/constraints.txt إصدارات بيئات التشغيل المثبتة. هذا ليس قفلًا لتجزئة الحزمة أو
+دليلًا على التوافق مع كل منصة CI تم تكوينها. لم يتم تشغيل CI عن بُعد.</p>
+<h2 id="synthetic-local-capacity-measurement">قياس القدرات المحلية الاصطناعية<a class="anchor" href="#synthetic-local-capacity-measurement" aria-label="رابط لهذا القسم">#</a></h2>
+<p>الأمر: <code>python tools/check_capacity.py --events 10000 --chats 100</code></p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>المقاييس</th>
+<th>تمت الملاحظة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>المدخلات</td>
+<td>10,000 حدث رسالة اصطناعية عبر 100 مصدر اصطناعي مختار</td>
+</tr>
+<tr>
+<td>نص الرسالة</td>
+<td>400 حرف؛ بدون وسائط أو شبكة</td>
+</tr>
+<tr>
+<td>الاستيعاب</td>
+<td>53.273 ثانية؛ 187.7 حدثًا في الثانية</td>
+</tr>
+<tr>
+<td>زمن استجابة المعالج</td>
+<td>p50 4.162 مللي ثانية؛ p95 7.784 مللي ثانية؛ الحد الأقصى 129.118 مللي ثانية</td>
+</tr>
+<tr>
+<td>تصدير ملف ZIP</td>
+<td>19.868 ثانية مع تمكين tracemalloc</td>
+</tr>
+<tr>
+<td>ذروة تخصيصات تصدير Python التي تم تتبعها</td>
+<td>0.51 ميغابايت؛ لا يدعم RSS</td>
+</tr>
+<tr>
+<td>حجم ملف ZIP</td>
+<td>4,610,962 بايت</td>
+</tr>
+<tr>
+<td>التحقق المستقل</td>
+<td>تم التحقق من صحة جميع الأحداث البالغ عددها 10,000 حدث</td>
+</tr>
+</tbody>
+</table></div>
+<p>يقيس هذا مسار التسجيل/التصدير التسلسلي المحلي على مضيف Windows هذا. ولا
+يقيس تسليم MTProto، أو الحسابات المتزامنة، أو تقييد سرعة Telegram، أو الوسائط، أو
+أعباء العمل طويلة الأمد، أو عددًا مضمونًا من المحادثات الحقيقية. ويأتي هذا القياس قبل
+أدوات الطابع الزمني النهائية في وضع عدم الاتصال، والتي لا تغير مسار الرسائل المقاسة.</p>
+<h2 id="environmental-observations">ملاحظات بيئية<a class="anchor" href="#environmental-observations" aria-label="رابط لهذا القسم">#</a></h2>
+<p>أدت قيود بيئة الحماية (sandbox) في نظام Windows إلى حظر الدلائل المؤقتة الافتراضية لـ pytest/pip
+والعملية الفرعية لـ Playwright. استخدمت Pytest دليلًا مؤقتًا جديدًا داخل
+المشروع؛ وتطلبت عمليات التثبيت والمتصفح تنفيذًا معتمدًا خارج
+بيئة الحماية.</p>
+<p>قام برنامج AdGuard المثبت على الجهاز بإدخال طلبات إلى local.adguard.org في المتصفح.
+ويحتفظ سجل المتصفح بهذه الطلبات. <strong>ولا</strong> يُعد هذا الاختبار دليلاً على عدم وجود
+أي طلبات صادرة في بيئة متصفح غير معدلة؛ حيث لا يحتوي مصدر التطبيق نفسه
+على أي طلبات خارجية تتعلق بالموارد أو شبكات توزيع المحتوى (CDN) أو التحليلات. ولم يتم تغيير إعدادات AdGuard.</p>
+<p>كما سجل التشغيل النهائي للمتصفح خطأ OSError 10022 في عملية تنظيف مآخذ التوصيل asyncio في نظام Windows.
+اجتازت جميع اختبارات المتصفح ولم تحدث أية أخطاء في جافا سكريبت بالصفحة. لم يتم تحديد سبب
+هذا الخطأ، ولا يُثبت هذا التشغيل عدم وجود مشكلات في نقل البيانات من المضيف.</p>
+<p>واجه أول اختبار HTTP للحزمة المثبتة باستخدام طلبات إغلاق الاتصال في urllib
+عمليات إعادة تعيين للاتصال، سواء داخل صندوق الحماية أو خارجه، ومع كلتا
+مجموعتي التبعيات. استخدم الاختبار النهائي اتصالات HTTP/1.1 الدائمة القياسية
+عبر http.client ونجح. كما اجتازت طلبات المتصفح الاختبار. لم يتم تحديد السبب الدقيق
+لعمليات إعادة الضبط؛ ولم يتم تصنيفها على أنها عيب ثابت في التطبيق.</p>
+<h2 id="remaining-qualification">المؤهلات المتبقية<a class="anchor" href="#remaining-qualification" aria-label="رابط لهذا القسم">#</a></h2>
+<p>تثبت السجلات الحية المحفوظة عمليات التجميع الفعلية، وإشعارات التعديل والحذف، والمرفقات،
+عمليات إعادة التحقق، ومعالجة حدود معدل الاستخدام. ولا يثبت التسليم الشامل أو وجود
+مصفوفة خاضعة للرقابة لرؤية الأدوار، والجهات الفاعلة في الاستجابة، وFloodWait المطول، وحظر الحسابات، و
+استعادة الشبكة/العملية بعد الانقطاع. ويظل إصدار رمز QR منفصلاً عن
+التأكيد النهائي لرمز QR عبر الهاتف المحمول.</p>
+<p>يظل كل من بناء/تشغيل Docker، والتثبيت على Linux/macOS، وتحمل الأحمال العالية المستمرة، والمراجعة الأمنية المستقلة،
+والاستجابة الحقيقية والمستقلة لـ TSA، والتحقق من إبطال الشهادات/أرشفتها،
+والشهادة الجنائية خارج نطاق المؤهلات المسجلة. تم تنفيذ حفظ حالة MTProto
+واللحاق بالرسائل؛ ولا يزال إعادة التشغيل المتين الذري غير مؤكد. يظل جمع
+سجلات الإدارة، وقوائم المفاعلات الإضافية، والاستطلاع القصير ذو الأولوية ميزات منفصلة.
+انظر <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">القبول المباشر</a> لمصفوفة المؤهلات الخاضعة للرقابة.</p>
+<p>توجد الإيصالات المحلية التفصيلية ولقطات الشاشة في المجلد test-results/ (مهملة في Git).
+تحتوي لقطات الشاشة العامة الموجودة في المجلد docs/assets/ على بيانات توضيحية خيالية فقط.</p>
+<h2 id="public-website-and-publication-preparation--27-october-2026">إعداد الموقع الإلكتروني العام والمنشورات · 27 أكتوبر 2026<a class="anchor" href="#public-website-and-publication-preparation--27-october-2026" aria-label="رابط لهذا القسم">#</a></h2>
+<p>تمت إضافة العرض التقديمي المنفصل لـ <code>website/</code> وبنية Pages بعد
+عمليات الفحص المذكورة أعلاه. لم يتم تغيير أي إعدادات للحسابات الحية أو منطق جمع البيانات.</p>
+<ul>
+<li>اجتازت مجموعة التطبيقات الحالية الاختبارات: 138 اختبارًا ناجحًا، وتخطي واحد خاص بـ POSIX فقط، و
+    تحذير واحد بشأن إهمال Starlette/httpx في النسخة الأصلية. اجتازت اختبارات بناء الموقع الـ 11 المضافة
+    بشكل مستقل، بما في ذلك رفض المخرجات غير المتوقعة ورفض المدخلات المرتبطة.</li>
+<li>اجتازت كلتا نصوص برمجة متصفح التطبيق الاختبار باستخدام project-venv Playwright و Chromium
+    headless shell 156. لم يتم تسجيل أي أخطاء في جافا سكريبت للصفحة أو طلبات خارجية.
+    استخدمت جميع سيناريوهات الحسابات وسائل نقل مزيفة وبيانات خيالية.</li>
+<li>اجتاز <code>tools/check_site.py</code> الاختبار عند عرض 320 و390 و768 و1024 و1440، مع مسار فرعي
+    لعنوان URL الخاص بالمشروع، وعلامات تبويب لوحة المفاتيح، والوصول الناجح/المرفوض إلى الحافظة، والحركة المحدودة،
+    وتعطيل JavaScript. لم تحدث أي طلبات فاشلة للحصول على الموارد أو طلبات خارجية.</li>
+<li>أنتج <code>tools/build_site.py</code> 10 ملفات عامة مدرجة في قائمة المسموح بها، يبلغ حجمها الإجمالي حوالي 460 كيلوبايت.
+    توجد لقطات شاشة للمتصفح وإيصال في الملف <code>test-results/site/</code> الذي تم تجاهله.</li>
+<li>تم إنشاء ملف wheel بنجاح بعد تثبيت أدوات setuptools/wheel المخصصة للبناء فقط
+    في بيئة المشروع. تم تثبيته في هدف معزول و
+    تم اجتياز اختبار <code>tools/check_install.py</code>: الأصول الثابتة، والتحكم في الوصول، وتصدير
+    مركب موقّع مكون من 32 حدثًا، وتنزيل البث الذي تم التحقق منه بشكل مستقل.</li>
+<li>تم اجتياز اختبار <code>pip check</code>. لم يكشف الفحص النمطي للمرشحين العامين المختارين من Git عن أي
+    كتل مفاتيح خاصة يمكن التعرف عليها، أو رموز GitHub/bot/AWS، أو تعيينات سرية حرفية طويلة
+    ، أو علامات تعارض الدمج. وهذا لا يُعد دليلاً على غياب كل
+    تنسيق سري محتمل. تم تجاهل فحوصات بيانات وقت التشغيل/الجلسة/المفاتيح بواسطة Git.</li>
+<li>كانت مصادقة GitHub CLI غير صالحة؛ لم يتم تكوين أي خادم بعيد ولم يكن هناك
+    التزام أولي. لم يتم تنفيذ أي عملية دفع (push) أو سير عمل مستضاف أو نشر صفحات أو إصدار.
+    يظل Docker والتأهيل المباشر لـ Telegram/المنصة خارج نطاق هذا الفحص.</li>
+</ul>
+<p>على هذا المضيف، فشل قفل تنزيل Playwright على نظام ملفات مساحة العمل E:.
+نجح تثبيت Chromium تحت <code>%LOCALAPPDATA%/tgwitness-playwright</code> واستخدام نفس
+<code>PLAYWRIGHT_BROWSERS_PATH</code> لإجراء الفحوصات. هذا حل بديل متعلق بالبيئة،
+وليس تغييرًا في تبعيات وقت تشغيل التطبيق.</p>
+<h2 id="interactive-documentation-and-website-metadata--29-october-2026">التوثيق التفاعلي وبيانات تعريف الموقع · 29 أكتوبر 2026<a class="anchor" href="#interactive-documentation-and-website-metadata--29-october-2026" aria-label="رابط لهذا القسم">#</a></h2>
+<p>يتألف الموقع العام من 12 صفحة HTML باللغة الإنجليزية: صفحة رئيسية، وفهرس للأدلة الإرشادية، وعشرة
+أدلة إرشادية. يحتوي النموذج على 28 ملف عرض تقديمي مدرج صراحةً،
+بحجم 1.85 ميغابايت تقريبًا، ولا توجد بيانات خاصة بالمجمع. الموقع العام باللغة الإنجليزية؛
+أما ترجمات التطبيق وأدلة المستودع المترجمة فهي منفصلة.</p>
+<ul>
+<li>اختبارات الموقع، ونشر المصدر، وحدود الإصدار: <strong>اجتاز 18 اختبارًا، وتخطى 2</strong>.
+    تتعلق الاختبارات التي تم تخطيها بإنشاء الروابط الرمزية (symlink) على نظام ملفات Windows هذا. تتحقق الاختبارات من
+    بيانات وصف الصفحة الفريدة، والصفحات العامة باللغة الإنجليزية فقط، وعناوين URL القياسية، وجميع إدخالات خريطة الموقع
+    ، والأصول/الروابط المحلية، والتنقل المنظم، واستبعاد الملفات الخاصة.</li>
+<li>اجتاز كل من <code>tools/check_site.py</code> و<code>tools/check_docs_site.py</code> الاختبار في Chromium عند
+    320 و390 و768 و1024 و1440 بكسل ضمن مسار فرعي لعنوان URL الخاص بالمشروع. تغطي اختبارات الدليل
+    جميع صفحات الوثائق البالغ عددها 11 صفحة، والبحث والتنقل باستخدام لوحة المفاتيح، ونجاح/فشل الحافظة
+    والمحتوى القابل للقراءة بدون JavaScript.</li>
+<li>تم اجتياز خمسة أمثلة تفاعلية: تشغيل الرسائل/التقدم خطوة بخطوة/الإيقاف المؤقت/إعادة الضبط مع
+    حركة مخفضة وتعليق خارج الشاشة؛ سلاسل التجزئة الأصلية/المعدلة/المعاد بناؤها/المقطوعة
+    ؛ قرارات الشاهد بالقبول/التراجع/التفرع/عدم الرد؛ و
+    سيناريوهات التسليم الكاملة/المتأخرة/المفقودة؛ وخريطة تحقيق تربط
+    ملاحظات خيالية عبر الدردشات حسب معرّف المرسل والوجهة وملحق
+    التجزئة. اجتازت ضوابط التحقيق اختبارات التنقل عبر لوحة المفاتيح واختبارات
+    الاحتياطية بدون جافا سكريبت. تمت مقارنة نتائج SHA-256 في المتصفح
+    بشكل مستقل مع <code>hashlib</code> في Python وJSON القياسي. كما احتفظ مثال التجزئة
+    بخيار احتياطي قابل للقراءة عند عدم توفر Web Crypto.</li>
+<li>تطابقت نسب العرض وعلامات المخططات مع الجدول المتاح. تم تكبير
+    تسميات محاور الشاشة المحمولة بعد المراجعة البصرية. تم تصنيف كل مثال على أنه
+    توضيحي أو اصطناعي، ولا يتصل أي مثال متعلق بالمتصفح بـ Telegram.</li>
+<li>لم يتم تسجيل أي طلبات خارجية أو طلبات HTTP فاشلة أو أخطاء JavaScript.
+    لقطات الشاشة والإيصالات الخاصة بأجهزة سطح المكتب/الجوال موجودة تحت الرموز <code>test-results/site/</code>
+    و<code>test-results/docs-site/</code>. تم فحص فهرس الوثائق وأمثلة الرسائل/التجزئة
+    وتصميم Witness ومخطط التسليم وخريطة التحقيق
+    بأحجام أجهزة سطح المكتب/الجوال.</li>
+<li>اجتازت عملية فحص المنشورات 282 ملفًا من المصادر العامة و1,426 رابطًا محليًّا
+    للتوثيق. اجتاز Ruff اختبارات وأدوات الموقع المعدلة بلغة Python.</li>
+<li>يوفر <code>docs/HOW-IT-WORKS.md</code> أداة مساعدة لـ GitHub Markdown مع مخططات
+    وصيغ Mermaid. يغطي <code>docs/INVESTIGATION.md</code> نطاق الحساب بأكمله،
+    واستخراج سجل المحادثات لكل محادثة على حدة، وملفات تعريف الأشخاص، والمراجع المشتركة بين المحادثات، والجداول الزمنية
+    وعملية تسليم الحالات التي تم التحقق منها. تمت مراجعة خطواته وحدوده مقابل
+    النطاق الحالي، وعملية التجميع، والملف، والتصدير، وأداة التحقق، ورمز اللوحة. لم يتم فحص
+    عرض GitHub المستضاف.</li>
+</ul>
+<p>هذه عملية فحص محلية للموقع الإلكتروني/الوثائق. وهي لا تضيف تأهيلًا مباشرًا لـ Telegram
+ولا تثبت نشر الصفحات المستضافة، أو نجاح CI عن بُعد، أو
+فهرسة محركات البحث. انظر <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md">إجراءات النشر</a> و
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/SEO.md">ملاحظات بيانات التعريف الخاصة بالموقع الإلكتروني</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/VERIFICATION.md">تحرير هذه الصفحة على GitHub ↗</a><a class="next-guide" href="../changelog/"><span>الخطوة التالية</span><strong>سجل التغييرات ←</strong></a><p>تصف هذه الأدلة طريقة التنفيذ الحالية. ويتم توثيق نتائج التحقق والثغرات المتبقية بشكل منفصل. <a href="./">ما تم اختباره ←</a></p></footer>
+</main>
+<aside class="toc" aria-label="في هذه الصفحة"><p class="nav-label">في هذه الصفحة</p><a href="#live-telegram-test-whole-account--29-october-2026">اختبار Telegram مباشر، الحساب بالكامل · 29 أكتوبر 2026</a><a href="#password-protected-export-opened-with-libarchive--29-october-2026">ملف تصدير محمي بكلمة مرور يُفتح باستخدام libarchive · 29 أكتوبر 2026</a><a href="#live-telegram-test--27-to-29-october-2026">اختبار Telegram المباشر · من 27 إلى 29 أكتوبر 2026</a><a href="#built-in-public-mtproxy-lists--29-october-2026">قوائم MTProxy العامة المدمجة · 29 أكتوبر 2026</a><a href="#optional-extras-presentation--29-october-2026">عرض الإضافات الاختيارية · 29 أكتوبر 2026</a><a href="#witness-bot-and-proxy-setup-audit--29-october-2026">تدقيق إعداد روبوت Witness والوكيل · 29 أكتوبر 2026</a><a href="#presentation-and-documentation-review--29-october-2026">مراجعة العرض التقديمي والوثائق · 29 أكتوبر 2026</a><a href="#version-061">الإصدار 0.6.1</a><a href="#version-060">الإصدار 0.6.0</a><a href="#version-051">الإصدار 0.5.1</a><a href="#version-050">الإصدار 0.5.0</a><a href="#version-040">الإصدار 0.4.0</a><a href="#version-031-focused-readiness-fixes">الإصدار 0.3.1 يركز على إصلاحات الجاهزية</a><a href="#version-030">الإصدار 0.3.0</a><a href="#version-020-baseline">الإصدار 0.2.0 الأساسي</a><a href="#synthetic-local-capacity-measurement">قياس القدرات المحلية الاصطناعية</a><a href="#environmental-observations">ملاحظات بيئية</a><a href="#remaining-qualification">المؤهلات المتبقية</a><a href="#public-website-and-publication-preparation--27-october-2026">إعداد الموقع الإلكتروني العام والمنشورات · 27 أكتوبر 2026</a><a href="#interactive-documentation-and-website-metadata--29-october-2026">التوثيق التفاعلي وبيانات تعريف الموقع · 29 أكتوبر 2026</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>مفتوحة المصدر · تعمل على جهازك</span><a href="../../../../LICENSE">رخصة MIT</a><a href="../notice/">إشعار المشغل</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">الأمن</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "في انتظار رسالة", "Step through a fictional send, edit and delete.": "تتبع خطوات عملية إرسال وتعديل وحذف افتراضية.", "No observations yet. Start the sequence or advance one event.": "لا توجد ملاحظات حتى الآن. ابدأ التسلسل أو انتقل إلى الحدث التالي.", "Meet at 10:00": "نلتقي الساعة 10:00", "A new message is visible in the chat.": "تظهر رسالة جديدة في الدردشة.", "Record 1 appended: the collector observed the original message.": "تم إرفاق السجل رقم 1: لاحظ المجمع الرسالة الأصلية.", "Meet at 11:00": "نلتقي الساعة 11:00", "The current text changes. The earlier observation stays.": "النص الحالي قد يتغير. أما الملاحظة السابقة فتبقى كما هي.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "تم إرفاق السجل 2: التعديل يمثل ملاحظة جديدة. ولا يزال السجل 1 يحتوي على النص الأصلي.", "Message deleted": "تم حذف الرسالة", "The message has disappeared from the chat view.": "لقد اختفت الرسالة من شاشة الدردشة.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "تم إرفاق السجل رقم 3: يتم الاحتفاظ بإشعار الحذف جنبًا إلى جنب مع كلا النسختين اللتين تمت ملاحظتهما.", "0 records": "0 سجل", "1 record": "سجل واحد", "2 records": "سجلان", "3 records": "3 سجلات", "Complete / {n} of 3": "كامل / {n} من 3", "Step / {n} of 3": "الخطوة / {n} من 3", "Pause": "توقف مؤقت", "Replay sequence": "تسلسل إعادة التشغيل", "Play sequence": "تشغيل التسلسل", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "يتوفر نموذج ثابت. لحساب التجزئات (هاش) تفاعليًّا، افتح هذه الصفحة عبر HTTPS أو معاينة localhost مع دعم Web Crypto.", "No record supplied": "لم يتم تقديم أي سجل", "Tail removed": "تم حذف الجزء الأخير", "≠ saved hash": "≠ التجزئة المحفوظة", "Rebuilt · different hash": "أعيد بناؤه · هاش مختلف", "= saved hash": "= التجزئة المحفوظة", "Same length and matching head.": "نفس الطول وعنوان مطابق.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "تتطابق جميع التجزئات الحسابية الثلاثة مع التجزئات المحفوظة. تتوافق هذه العينة مع الحد المحدد المتمثل في الاحتفاظ بثلاثة سجلات.", "Same saved head; the journal prefix fails verification.": "نفس العنوان المحفوظ؛ لم تجتز بادئة السجل عملية التحقق.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "لم يعد السجل رقم 2 مطابقًا لـ«هاش»ه المحفوظ. قد يفوت هذا الأمر عند التحقق من الرأس الأخير المخزن فقط؛ لذا يقوم المُحقق بفحص كل سجل.", "Head differs from the retained checkpoint.": "يختلف العنوان عن نقطة التحقق التي تم الاحتفاظ بها.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "ترتبط التجزئات المعاد بناؤها ببعضها البعض، لكن الرأس النهائي قد تغير. نقطة التحقق المحتفظ بها ترفض هذا السجل. كما أن التوقيعات الأصلية ستفشل أيضًا في السجلات التي تم تغييرها.", "Too short: 2 supplied records \u003c 3 retained records.": "قصير جدًا: 2 سجلات مقدمة \u003c 3 سجلات محفوظة.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "لا يزال التوافقيان المتبقيان متطابقين. ويكشف نقطة التحقق المحتفظ بها عن الجزء المفقود في نهاية السلسلة. وبدون ذلك الحد السابق، لما كشفت هذه البادئة الأقصر وحدها عن هذا الحذف.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "حساب التجزئة غير متاح في هذا المتصفح. تظل الصيغ والتفسيرات الثابتة أدناه متاحة.", "{n} records": "{n} سجل", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "تم القبول: يزداد العدد، ويتم التحقق من التوقيع، ويتطابق المفتاح. ويحتفظ الشاهد بهذا الحد الجديد.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "التراجع: يُظهر الرد الموقّع عددًا أقل من السجلات مقارنةً بنقطة التحقق الأخيرة المقبولة. تقوم الأداة بتسجيل المشكلة والاحتفاظ بحدود النسخة السابقة المقبولة.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "التفرع (Fork): العدد لم يتغير لكن الرأس يختلف. يقوم الشاهد بتسجيل الخلاف ويحتفظ بالحدود التي تم قبولها سابقًا.", "No answer": "لا توجد إجابة", "boundary unknown": "الحدود غير معروفة", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "عدم الاستجابة: يسجل «الشهود» فشل عملية التحقق. ولا يمكنه تأكيد الحالة الحالية لـ«المجمع». إذا كان «الشهود» لا يزال قادرًا على الوصول إلى واجهة برمجة تطبيقات الروبوت (Bot API) وكانت سياسة النشر الخاصة به تسمح بذلك، فيمكنه نشر هذا الفشل.", "Send {n}": "أرسل {n}", "Edit {n}": "تحرير {n}", "Delete {n}": "حذف {n}", "Both accounts captured all six expected observations in this example.": "وقد استوفى كلا الحسابين جميع الملاحظات الست المتوقعة في هذا المثال.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "لا يزال الحساب «ب» قد سجل 6 من أصل 6. استغرق تسجيل إيصالين وقتًا أطول. تعكس نسبة التسجيل وتأخير استلام الإيصالات إجابات مختلفة.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "سجل الحساب «ب» 5 من أصل 6 قبل الموعد النهائي (83.3٪). لا يوجد تأخير مقاس للتعديل المفقود. تصف هذه النتيجة فقط الإجراءات الستة الخاضعة للرقابة.", "not observed by cutoff": "لم يُلاحظ ذلك بحلول الموعد النهائي", "{s} seconds": "{s} ثانية", "Exact values follow in the table.": "ترد القيم الدقيقة في الجدول التالي.", "{s} s": "{s} s", "Not observed": "لم يُلاحظ", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "تقدم أربع محادثات ملاحظات مختلفة. اتبع السجلات المصدرية لكل اتصال؛ ولا تنسب منشور القناة إلى المستخدم 71001 دون وجود مرسل محدد.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "يقدم السجلان رقم 146 ورقم 205 نفس معرّف المرسل، 71001. وهذا يربط بين المنشورات الملحوظة لحساب Telegram عبر محادثتين. ولا يحدد هوية شخص حقيقي ولا ينسب المنشور إلى القناة.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "يظهر العنوان pay.example.invalid/new في سجل المجموعة رقم 146، ولوحة مفاتيح الروبوت رقم 173، وتعديل القناة رقم 188، والرسالة الخاصة رقم 205. وجود عنوان متكرر يربط بين المواد؛ لكنه لا يثبت وجود سيطرة مشتركة على تلك الحسابات.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "تحتوي إيصالات الوسائط المكتملة رقم #151 ورقم #209 على قيم SHA-256 كاملة متطابقة في هذه الحالة الافتراضية. قارن بين البايتات الفعلية وسجلات الرسائل المرتبطة بها. لا يحدد الملف المطابق هوية منشئه ولا يثبت هوية من قام بإعادة توجيهه.", "the encrypted off-site copy": "النسخة المشفرة خارج الموقع", "notifications": "الإشعارات", "checkpoint hashes for timestamps": "تجزئات نقاط التحقق (checkpoint hashes) للطوابع الزمنية", "signed checkpoints for the witness": "نقاط تحقق موقعة لـ «TgWitness»", "Switched on in this example": "تم تفعيلها في هذا المثال", "Optional · off by default": "اختياري · معطّل افتراضيًا", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "ما يُترك في هذا الجهاز: اتصال Telegram و{list}. لا شيء آخر.", "Default: only the Telegram connection leaves this machine.": "الإعداد الافتراضي: لا يغادر هذا الجهاز سوى اتصال Telegram.", "{done} of {total} done": "{done} من {total} تم إنجازها", "Mark step {n} as done": "وضع علامة «تم» على الخطوة {n}", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "نص", "Copied": "نسخ", "Command copied.": "تم نسخ الأمر.", "Selected — Ctrl/Cmd+C": "تم التحديد — Ctrl/Cmd+C", "Command selected. Copy it manually.": "تم تحديد الأمر. انسخه يدويًّا.", "Command copied to clipboard.": "تم نسخ الأمر إلى الحافظة.", "Select text": "حدد النص", "Clipboard unavailable. Command selected; copy it manually.": "الحافظة غير متاحة. تم تحديد الأمر؛ انسخه يدويًّا.", "A message arrives. The first observation is saved.": "تصل رسالة. يتم حفظ الملاحظة الأولى.", "The time changes. Both captured versions stay.": "يتغير الوقت. وتبقى النسختان المسجلتان كما هما.", "The message disappears. The captured history remains.": "تختفي الرسالة. لكن السجل المسجل يبقى.", "Pause example animation": "إيقاف الرسوم المتحركة التوضيحية مؤقتًا", "Play example animation": "تشغيل مثال للرسوم المتحركة", "Play": "تشغيل", "Full-size workspace screenshot": "لقطة شاشة لمساحة العمل بالحجم الكامل", "Workspace screenshot · fictional data": "لقطة شاشة لمساحة العمل · بيانات خيالية", "Close": "إغلاق", "Close screenshot": "إغلاق لقطة الشاشة", "Scrollable full-size screenshot": "لقطة شاشة كاملة الحجم قابلة للتمرير", "Enlarge: {name}": "تكبير: {name}", "View full size": "عرض بالحجم الكامل"}</script>
+</body></html>

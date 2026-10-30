@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>وضع التحقيق | TgWitness</title>
+<meta name="description" content="تحقيقات شاملة للحساب بأكمله عبر القنوات والمجموعات والمحادثات الخاصة والروبوتات، بدءًا من تحديد نطاق التحقيق وصولًا إلى ملف قضية مُثبت."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="ar_AR">
+<meta property="og:title" content="وضع التحقيق | TgWitness"><meta property="og:description" content="تحقيقات شاملة للحساب بأكمله عبر القنوات والمجموعات والمحادثات الخاصة والروبوتات، بدءًا من تحديد نطاق التحقيق وصولًا إلى ملف قضية مُثبت.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/investigation/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/investigation/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/investigation/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/investigation/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/investigation/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/investigation/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/investigation/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/", "url": "https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/", "name": "وضع التحقيق | TgWitness", "description": "تحقيقات شاملة للحساب بأكمله عبر القنوات والمجموعات والمحادثات الخاصة والروبوتات، بدءًا من تحديد نطاق التحقيق وصولًا إلى ملف قضية مُثبت.", "inLanguage": "ar", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "الصفحة الرئيسية", "item": "https://phishdestroy.github.io/TgWitness/ar/"}, {"@type": "ListItem", "position": 2, "name": "التوثيق", "item": "https://phishdestroy.github.io/TgWitness/ar/docs/"}, {"@type": "ListItem", "position": 3, "name": "مرجع", "item": "https://phishdestroy.github.io/TgWitness/ar/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "وضع التحقيق", "item": "https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">الانتقال إلى المحتوى</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / التوثيق</span></a>
+<nav aria-label="الأدلة الإرشادية"><a href="../../concepts/">دليل مرئي</a><a href="../../">جميع الأدلة الإرشادية</a><a href="../">مرجع</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="اللغة"><span aria-hidden="true">◍</span> العربية</summary><div class="lang-list"><a href="../../../../docs/reference/investigation/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/investigation/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/investigation/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/investigation/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/investigation/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/investigation/" hreflang="tr" lang="tr">Türkçe</a><a href="./" hreflang="ar" lang="ar" aria-current="true">العربية</a><a href="../../../../fa/docs/reference/investigation/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/investigation/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/investigation/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/investigation/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/investigation/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/investigation/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="التبديل بين السمة الفاتحة والداكنة"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="الأدلة الإرشادية"><a href="../../../guides/modes.html">الأوضاع، والسيناريوهات، ومستويات الأدلة</a><p class="nav-label">الخطوات الأولى</p><a href="../../start/">ابدأ في غضون دقائق</a><a href="../../accounts/">ربط حساب</a><a href="../../proxies/">اختر وكيلًا</a><a href="../../exports/">التصدير والتحقق</a><p class="nav-label">فهم الأدلة</p><a href="../../concepts/">تعرف على كيفية عمل الأدلة</a><a href="../../cases/">التحقيق في جميع الدردشات</a><a href="../../security/">حافظ على أمانها</a><p class="nav-label">اكتشف المزيد</p><a href="../../witness/">إعداد روبوت «Witness»</a><a href="../../server/">حافظ على استمرار عملها</a><a href="../../troubleshooting/">اكتشف ما الذي حدث</a></nav><nav class="wiki-nav" aria-label="مرجع"><p class="nav-label"><a class="nav-label-link" href="../">مرجع</a></p><details class="wiki-group"><summary>الإعداد</summary><a href="../quickstart/">البداية السريعة</a><a href="../accounts/">الحسابات وتنسيقات الجلسات</a><a href="../connection/">الاتصال، والوكلاء، وحماية البيانات</a><a href="../deployment/">النشر</a></details><details class="wiki-group" open><summary>جمع</summary><a href="../collection/">كيفية عمل عملية الجمع</a><a href="../operations/">سير العمل والعمليات</a><a href="./" aria-current="page">وضع التحقيق</a><a href="../features/">الميزات والقيود</a></details><details class="wiki-group"><summary>الأدلة</summary><a href="../how-it-works/">كيف تعمل الأدلة</a><a href="../evidence/">تنسيق الأدلة</a><a href="../witness/">شاهد مستقل</a><a href="../timestamp/">الطوابع الزمنية</a></details><details class="wiki-group"><summary>الأمن والمشروع</summary><a href="../security/">الأمن ومعالجة البيانات</a><a href="../architecture/">الهندسة</a><a href="../verification/">ما تم اختباره</a><a href="../license/">إشعار بشأن الترخيص وعدم التوافق المعماري</a><a href="../notice/">إشعار بعدم التوافق مع المشغل</a><a href="../changelog/">سجل التغييرات</a></details></nav><p class="sidebar-note">v0.7.0<br>مفتوحة المصدر · تعمل على جهازك</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="الأدلة الإرشادية"><a href="../../../">الصفحة الرئيسية</a> <span aria-hidden="true">/</span> <a href="../../">التوثيق</a> <span aria-hidden="true">/</span> <a href="../">مرجع</a> <span aria-hidden="true">/</span> <span aria-current="page">وضع التحقيق</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">البحث في الوثائق</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="جرب «proxy» أو «hash chain» أو «token» أو «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="بحث واضح" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">اكتب كلمة للبحث في الأدلة والمراجع. يبقى البحث في متصفحك.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">مرجع / جمع</p><h1>وضع التحقيق</h1><p class="guide-outcome">تحقيقات شاملة للحساب بأكمله عبر القنوات والمجموعات والمحادثات الخاصة والروبوتات، بدءًا من تحديد نطاق التحقيق وصولًا إلى ملف قضية مُثبت.</p><div class="wiki-body"><p>تتبع القضية عبر القنوات والمجموعات والمحادثات الخاصة والروبوتات، بدءًا من
+الجمع الأولي وصولاً إلى الجدول الزمني المشار إليه والتسليم القابل للتحقق. النسخة التفاعلية من الموقع
+متوفرة على الرابط <code>/docs/cases/</code>؛ <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally">تعليمات المعاينة</a>.</p>
+<h2 id="worked-case-a-destination-changes-across-four-conversations">حالة تم العمل عليها: تغيير الوجهة عبر أربع محادثات<a class="anchor" href="#worked-case-a-destination-changes-across-four-conversations" aria-label="رابط لهذا القسم">#</a></h2>
+<p>يشير إعلان إلى روبوت. تناقش مجموعة عمليات وجهة دفع جديدة،
+ويعرضها لوحة مفاتيح الروبوت، ثم تكررها متابعة خاصة.
+بعد ذلك، يتم تعديل الإعلان وتختفي رسالة المجموعة.</p>
+<p>الأسئلة هي: ما الذي لوحظ قبل التغيير وبعده، وما هي حسابات Telegram
+التي نشرت كل عنصر، وأين ظهرت الوجهة، وما هي بايتات المرفقات
+التي تم الاحتفاظ بها، وما هي الفترات الزمنية التي لا تزال مجهولة؟</p>
+<p>جميع الأسماء وأرقام الهوية والتواريخ والإشارات المرجعية في السجل الواردة في هذا المثال خيالية.
+يستخدم سير العمل الميزات الحالية؛ وخريطة القضية هي مجرد توضيح، وليست
+رسمًا بيانيًّا تلقائيًّا تم إنشاؤه بواسطة التطبيق.</p>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 799 442" width="799" height="442" role="img" aria-labelledby="flow-3-title flow-3-desc"><title id="flow-3-title">مخطط تدفق</title><desc id="flow-3-desc">القنوات → سجل مساحة العمل; المجموعات → سجل مساحة العمل; المحادثات الخاصة → سجل مساحة العمل; الروبوتات → سجل مساحة العمل; سجل مساحة العمل → البحث في جميع المصادر; سجل مساحة العمل → ملفات تعريفية للأشخاص مع مراجع السجلات; سجل مساحة العمل → النسخ المحفوظة وإيصالات المرفقات; البحث في جميع المصادر → الخط الزمني للمحلل وسجل المصادر; ملفات تعريفية للأشخاص مع مراجع السجلات → الخط الزمني للمحلل وسجل المصادر; النسخ المحفوظة وإيصالات المرفقات → الخط الزمني للمحلل وسجل المصادر; سجل مساحة العمل → ملف ZIP للأدلة الموقعة; الخط الزمني للمحلل وسجل المصادر → تحويل القضايا مع أدلة تم التحقق منها بشكل منفصل; ملف ZIP للأدلة الموقعة → تحويل القضايا مع أدلة تم التحقق منها بشكل منفصل</desc><defs><marker id="flow-3-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M201.9 46.0C201.9 68.0 397.8 68.0 397.8 90.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:205" pathLength="205"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.3s" repeatCount="indefinite" path="M201.9 46.0C201.9 68.0 397.8 68.0 397.8 90.0"/></circle><path class="flow-edge" d="M323.9 46.0C323.9 68.0 397.8 68.0 397.8 90.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:91" pathLength="91"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M323.9 46.0C323.9 68.0 397.8 68.0 397.8 90.0"/></circle><path class="flow-edge" d="M463.1 46.0C463.1 68.0 397.8 68.0 397.8 90.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:83" pathLength="83"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M463.1 46.0C463.1 68.0 397.8 68.0 397.8 90.0"/></circle><path class="flow-edge" d="M602.3 46.0C602.3 68.0 397.8 68.0 397.8 90.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:213" pathLength="213"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.4s" repeatCount="indefinite" path="M602.3 46.0C602.3 68.0 397.8 68.0 397.8 90.0"/></circle><path class="flow-edge" d="M397.8 130.0C397.8 156.5 92.4 156.5 92.4 183.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:315" pathLength="315"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="3.5s" repeatCount="indefinite" path="M397.8 130.0C397.8 156.5 92.4 156.5 92.4 183.0"/></circle><path class="flow-edge" d="M397.8 130.0C397.8 152.0 293.7 152.0 293.7 174.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:118" pathLength="118"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M397.8 130.0C397.8 152.0 293.7 152.0 293.7 174.0"/></circle><path class="flow-edge" d="M397.8 130.0C397.8 152.0 501.9 152.0 501.9 174.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:118" pathLength="118"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M397.8 130.0C397.8 152.0 501.9 152.0 501.9 174.0"/></circle><path class="flow-edge" d="M92.4 223.0C92.4 249.5 296.0 249.5 296.0 276.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:216" pathLength="216"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="2.4s" repeatCount="indefinite" path="M92.4 223.0C92.4 249.5 296.0 249.5 296.0 276.0"/></circle><path class="flow-edge" d="M293.7 232.0C293.7 254.0 296.0 254.0 296.0 276.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:44" pathLength="44"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M293.7 232.0C293.7 254.0 296.0 254.0 296.0 276.0"/></circle><path class="flow-edge" d="M501.9 232.0C501.9 254.0 296.0 254.0 296.0 276.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:215" pathLength="215"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="2.4s" repeatCount="indefinite" path="M501.9 232.0C501.9 254.0 296.0 254.0 296.0 276.0"/></circle><path class="flow-edge" d="M397.8 130.0C397.8 156.5 703.1 156.5 703.1 183.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:315" pathLength="315"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="3.5s" repeatCount="indefinite" path="M397.8 130.0C397.8 156.5 703.1 156.5 703.1 183.0"/></circle><path class="flow-edge" d="M296.0 334.0C296.0 356.0 499.6 356.0 499.6 378.0" marker-end="url(#flow-3-arrow)" style="--i:3;--len:213" pathLength="213"/><circle class="flow-pulse" r="3.2" style="--i:3"><animateMotion begin="indefinite" dur="2.4s" repeatCount="indefinite" path="M296.0 334.0C296.0 356.0 499.6 356.0 499.6 378.0"/></circle><path class="flow-edge" d="M703.1 223.0C703.1 300.5 499.6 300.5 499.6 378.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:271" pathLength="271"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="3.0s" repeatCount="indefinite" path="M703.1 223.0C703.1 300.5 499.6 300.5 499.6 378.0"/></circle><g class="flow-node" style="--i:0"><rect x="149.9" y="6.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="201.9" y="26.0">القنوات</tspan></text></g><g class="flow-node" style="--i:0"><rect x="271.9" y="6.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="323.9" y="26.0">المجموعات</tspan></text></g><g class="flow-node" style="--i:0"><rect x="393.9" y="6.0" width="138.4" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="463.1" y="26.0">المحادثات الخاصة</tspan></text></g><g class="flow-node" style="--i:0"><rect x="550.3" y="6.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="602.3" y="26.0">الروبوتات</tspan></text></g><g class="flow-node" style="--i:1"><rect x="332.0" y="90.0" width="131.5" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="397.8" y="110.0">سجل مساحة العمل</tspan></text></g><g class="flow-node" style="--i:2"><rect x="6.0" y="183.0" width="172.9" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="92.4" y="203.0">البحث في جميع المصادر</tspan></text></g><g class="flow-node" style="--i:2"><rect x="196.9" y="174.0" width="193.6" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="293.7" y="194.0">ملفات تعريفية للأشخاص مع</tspan><tspan x="293.7" y="212.0">مراجع السجلات</tspan></text></g><g class="flow-node" style="--i:2"><rect x="408.5" y="174.0" width="186.7" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="501.9" y="194.0">النسخ المحفوظة وإيصالات</tspan><tspan x="501.9" y="212.0">المرفقات</tspan></text></g><g class="flow-node" style="--i:2"><rect x="613.2" y="183.0" width="179.8" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="703.1" y="203.0">ملف ZIP للأدلة الموقعة</tspan></text></g><g class="flow-node" style="--i:3"><rect x="202.6" y="276.0" width="186.7" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="296.0" y="296.0">الخط الزمني للمحلل وسجل</tspan><tspan x="296.0" y="314.0">المصادر</tspan></text></g><g class="flow-node" style="--i:4"><rect x="402.8" y="378.0" width="193.6" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="499.6" y="398.0">تحويل القضايا مع أدلة تم</tspan><tspan x="499.6" y="416.0">التحقق منها بشكل منفصل</tspan></text></g></svg></div><details class="flow-steps"><summary>الرسم التخطيطي كنص</summary><ol><li>القنوات → سجل مساحة العمل</li><li>المجموعات → سجل مساحة العمل</li><li>المحادثات الخاصة → سجل مساحة العمل</li><li>الروبوتات → سجل مساحة العمل</li><li>سجل مساحة العمل → البحث في جميع المصادر</li><li>سجل مساحة العمل → ملفات تعريفية للأشخاص مع مراجع السجلات</li><li>سجل مساحة العمل → النسخ المحفوظة وإيصالات المرفقات</li><li>البحث في جميع المصادر → الخط الزمني للمحلل وسجل المصادر</li><li>ملفات تعريفية للأشخاص مع مراجع السجلات → الخط الزمني للمحلل وسجل المصادر</li><li>النسخ المحفوظة وإيصالات المرفقات → الخط الزمني للمحلل وسجل المصادر</li><li>سجل مساحة العمل → ملف ZIP للأدلة الموقعة</li><li>الخط الزمني للمحلل وسجل المصادر → تحويل القضايا مع أدلة تم التحقق منها بشكل منفصل</li><li>ملف ZIP للأدلة الموقعة → تحويل القضايا مع أدلة تم التحقق منها بشكل منفصل</li></ol></details></figure>
+<h2 id="1-define-the-case-and-collect-the-whole-account">1. تحديد القضية وجمع الرواية الكاملة<a class="anchor" href="#1-define-the-case-and-collect-the-whole-account" aria-label="رابط لهذا القسم">#</a></h2>
+<ol>
+<li>قم بربط الحساب المخصص لجمع البيانات بمساحة العمل الخاصة به. في ملاحظات القضية الخارجية،
+    سجل رقم مرجع القضية، ومعرّف الحساب، ومساحة العمل، وتاريخ بدء المراقبة، و
+    بصمة مفتاح التوقيع الموثوق به.</li>
+<li><strong>المصادر</strong> المفتوحة <strong>→ نطاق المراقبة → وضع التحقيق</strong>. يختار الإعداد المسبق
+    <strong>«الحساب بالكامل</strong>»، والقنوات/المجموعات/المحادثات الخاصة/الروبوتات، والإجراءات الخاصة، وملفات تعريف المصادر
+    وأحدث 200 رسالة مرئية للمصادر المكتشفة حديثًا.
+    راجع الإعدادات، واضغط على <strong>«حفظ النطاق</strong>»، وأكمل تأكيد النطاق.</li>
+<li><strong>قم بتحميل المحادثات</strong> ومقارنة المصادر بقائمة المحادثات الخاصة بالحساب. تحقق من
+    الاستثناءات. <strong>المعلمات → عدد المحادثات التي تُقرأ من قائمة الحساب</strong> هو 1,000 بشكل افتراضي
+    ويسمح بما يصل إلى 20,000. تُضاف المصادر التي تتجاوز حد القائمة عندما
+    تصبح نشطة. سجل ما تم إحصاؤه فعليًّا.</li>
+<li>في <strong>إعدادات التسجيل</strong>، حدد <strong>«جميع الأنشطة المرئية</strong>» واحفظ
+    إعدادات المراقبة. راجع أنواع المرفقات/الحدود ومساحة القرص المتوفرة.</li>
+<li>ابدأ المراقبة. تحقق من صحة رسالة جديدة خاضعة للرقابة، وتعديل، وحذف، ثم
+    احتفظ بمراجع الاختبار وأي حالات فشل.</li>
+</ol>
+<p>يغطي نطاق الحساب بالكامل الأنشطة المرئية في الحساب ضمن الإعدادات المحفوظة.
+لا يصل إلى الدردشات السرية ولا ينضم تلقائيًا إلى كل مجموعة مرتبطة. كما أنه
+لا يستكمل كل المحادثات الموجودة. انظر <a href="../collection/#observation-scope-chosen-chats-a-folder-or-the-whole-account">نطاق التجميع</a>.</p>
+<h2 id="2-inventory-every-source-and-acquire-historical-context">2. جرد جميع المصادر واستخلاص السياق التاريخي<a class="anchor" href="#2-inventory-every-source-and-acquire-historical-context" aria-label="رابط لهذا القسم">#</a></h2>
+<p>احتفظ بسجل للمصادر بحيث يحتوي كل صف على محادثة واحدة:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>المجال</th>
+<th>تسجيل</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>الهوية</td>
+<td>مساحة العمل، معرّف الحساب، معرّف الدردشة الرقمي، العنوان والنوع</td>
+</tr>
+<tr>
+<td>الظهور</td>
+<td>العضوية/الدور، الوصول المؤكد أو غير المؤكد، الاستثناءات</td>
+</tr>
+<tr>
+<td>التسجيل المباشر</td>
+<td>وقت البدء، وأنواع الأحداث المحددة، والتغييرات اللاحقة في السياسة</td>
+</tr>
+<tr>
+<td>سجل السجلات</td>
+<td>طلب/إكمال اللقطة، والحد الأقصى، والوقت، ومراجع السجلات</td>
+</tr>
+<tr>
+<td>السجل الكامل</td>
+<td>اسم ملف التصدير الموقّع لكل محادثة، وحدود الملف، وإتمام العملية أو فشلها</td>
+</tr>
+<tr>
+<td>المرفقات</td>
+<td>إيصالات الوسائط المكتملة، والتجزئات، والأحجام، والنتائج التي تم تخطيها أو التي باءت بالفشل</td>
+</tr>
+<tr>
+<td>التغطية</td>
+<td>انقطاعات الخدمة، وبيانات غير مكتملة، ووضع FloodWait، والرسائل غير المتاحة، وغيرها من الثغرات</td>
+</tr>
+</tbody>
+</table></div>
+<p>استخدم طريقة التوثيق المناسبة لكل مصدر:</p>
+<ul>
+<li>تقوم <strong>«لقطة السجل»</strong> بحفظ الرسائل المرئية الحديثة في سجل المراقبة.
+    الحد الأقصى الافتراضي هو 500؛ ويمكن زيادة هذا العدد
+    إلى 10,000 من خلال <strong>«المعلمات» → «أكبر لقطة سجل</strong>». هذه هي ملاحظات السجل الحالية، وليست تعديلات مُعاد بناؤها.</li>
+<li><strong>تصدير المحادثة بالكامل → تصدير المحادثة بالكامل</strong>، أو <strong>المحادثات → تصدير المحادثة</strong>، يقوم باستخراج
+    السجل المرئي حاليًا لمحادثة واحدة إلى حزمة منفصلة موقعة من نوع <code>chat.json</code> /
+    <code>chat.html</code>. كرر هذه العملية لمصادر القضية واحتفظ بكل نتيجة.</li>
+<li><strong>عندما تظهر محادثة جديدة أو روبوت جديد،</strong> يمكن حفظ ملفه الشخصي وما يصل إلى 1,000
+    رسالة حديثة؛ بينما يختار «وضع التحقيق» 200 رسالة. لا يتم تضمين المحادثات الموجودة في هذا
+    العدد بأثر رجعي عند تمكين الوضع.</li>
+<li>يؤدي <strong>تنزيل المرفقات المرئية</strong> إلى الحفاظ على البايتات وفقًا للسياسة المُعدة مسبقًا.
+    يلزم وجود إيصال <code>media.saved</code> مكتمل مع SHA-256 وعدد البايتات. ولا يُعتبر
+    المهمة الموضوعة في قائمة الانتظار أو الصورة المصغرة أو اسم الملف مرفقًا محفوظًا.</li>
+</ul>
+<p><strong>لا</strong> يؤدي التصدير الكامل للمحادثة إلى ملء السجل أو ملفات تعريف الأشخاص بجميع
+رسائلها. استخدم لقطات السجل للحصول على السجل الذي تحتاج إلى تحليله داخل
+TgWitness. لا توجد ميزة استكمال تاريخ الحساب بالكامل بنقرة واحدة؛ حيث يتم الحصول على السجل الكامل
+لكل محادثة على حدة. ولا تستعيد أي من الطريقتين المواد التي لم يعد Telegram يعيدها.</p>
+<h2 id="3-preserve-the-evolving-case-and-deliberate-interactions">3. الحفاظ على تطورات القضية والتفاعلات المدروسة<a class="anchor" href="#3-preserve-the-evolving-case-and-deliberate-interactions" aria-label="رابط لهذا القسم">#</a></h2>
+<p>ضع علامة نجمة على محادثات القضايا النشطة كمصادر ذات أولوية. راجع فترات إعادة الفحص، ومتابعة
+التحديثات ونتائج الوسائط. حافظ على تشغيل أداة التجميع أثناء استخدام الحساب.
+استخدم <strong>«المحادثات» → «الملف الشخصي» → «حفظ الملف الشخصي الآن»</strong> للاحتفاظ ببيانات تعريف المصدر مثل
+الأوصاف وأوامر الروبوت. وهذا أمر منفصل عن الملفات الشخصية للأشخاص المستمدة
+من الرسائل المحفوظة.</p>
+<p>عندما تتضمن القضية تتبع مصدر أو التفاعل مع روبوت:</p>
+<ol>
+<li><strong>فتح رابط Telegram → «حفظ المعاينة»</strong> يسجل الرابط المقدم والمعاينة
+    التي تظهر قبل تنفيذ أي إجراء.</li>
+<li>تقوم وظيفة <strong>«الانضمام/الفتح والمراقبة»</strong> بتنفيذ عملية الانضمام/الفتح، وترسل معلمة بدء عمل البوت
+    عند توفيرها. يتم تسجيل طلب الانضمام الذي ينتظر الموافقة على أنه «معلق».</li>
+<li>تحتفظ الردود النصية الصادرة عن اللوحة وعمليات الضغط على الأزرار المدعومة بـ
+    <code>interaction.requested</code> و<code>interaction.result</code>. يمكن لإيصالات الاستدعاء الاحتفاظ
+    بالنص المنبثق المرتجع وحالة التنبيه وعنوان URL.</li>
+</ol>
+<p>هذه هي الإجراءات الحقيقية للحسابات. لا تظهر عمليات الضغط على زر «الرد» في تطبيق Telegram آخر
+للمجمع، على الرغم من أن الرسائل أو التعديلات الناتجة قد تظهر. لا
+يقوم «العميل المصغر» بتنفيذ سير عمل تطبيقات الويب أو الدفع أو الهاتف أو الموقع.
+لمعرفة السلوك الدقيق، انظر <a href="../collection/#act-from-the-panel">تفاعلات اللوحة</a>.</p>
+<h2 id="4-connect-observations-across-chats">4. ربط الملاحظات عبر الدردشات<a class="anchor" href="#4-connect-observations-across-chats" aria-label="رابط لهذا القسم">#</a></h2>
+<p>في <strong>«Journal</strong>»، حدد <strong>«All sources» (جميع المصادر</strong>) وابحث عن المحتوى المسجل. افتح السجلات المطابقة
+واحتفظ بمساحة العمل، والدردشة، ومعرّف الرسالة، والتسلسل، وتجزئة السجل.</p>
+<p>في محادثة ذات صلة، افتح <strong>«الأشخاص» → «تشغيل الملفات الشخصية»</strong> وتحقق من شخص ما:</p>
+<ul>
+<li>الأسماء/أسماء المستخدمين التي تم رصدها على مدار الوقت، بالإضافة إلى معرّف Telegram الرقمي.</li>
+<li>علاقات الردود مع إشارات مرجعية إلى السجلات الأصلية.</li>
+<li><strong>وكذلك في...</strong> المحادثات الأخرى في سجل مساحة العمل هذه التي كتب فيها ذلك المعرّف.</li>
+<li>النشاط، وعمليات التعديل/الحذف، والمحافظ والهواتف وأسماء المستخدمين والروابط المذكورة.</li>
+<li>بيانات تعريف الصور الرمزية المحفوظة والصور الرمزية المماثلة المخزنة في ذاكرة التخزين المؤقت، مع ذكر مصدر كل منها على حدة.</li>
+</ul>
+<p>افتح السجلات المشار إليها قبل استخدام ملف تعريف مشتق في أي استنتاج. تغطي ملفات التعريف
+الأشخاص الذين تم حفظ رسائلهم، وليس كل أعضاء المجموعة. <strong>المعلمات → السجلات
+المشار إليها لكل حقيقة</strong> تحد من قائمة المراجع، لا من عدد الأنشطة الأساسية.
+تعد الإشارات وتشابه الصور الرمزية أدلة أولية؛ فهي لا تثبت الملكية أو الهوية.</p>
+<p>في المثال المطبق:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>رابط</th>
+<th>السجلات</th>
+<th>ملاحظة مدعومة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>نفس حساب المرسل</td>
+<td>المجموعة رقم 146 والمتابعة الخاصة رقم 205</td>
+<td>كلاهما يوفر معرّف مرسل Telegram رقم 71001</td>
+</tr>
+<tr>
+<td>نفس الوجهة</td>
+<td>#146، لوحة مفاتيح الروبوت #173، تعديل القناة #188، رسالة خاصة #205</td>
+<td>تحتوي جميعها على الرمز <code>pay.example.invalid/new</code>؛ ولم يتم تحديد الملكية أو السيطرة عليها</td>
+</tr>
+<tr>
+<td>نفس الملف المحفوظ</td>
+<td>تم إكمال إيصالات الوسائط رقم #151 و#209</td>
+<td>تتطابق قيم SHA-256 الكاملة مع البايتات المحفوظة</td>
+</tr>
+<tr>
+<td>إسناد القناة</td>
+<td>#101 و#188</td>
+<td>لا تنسب أي منشور في القناة إلى المستخدم 71001 دون ذكر المرسل</td>
+</tr>
+</tbody>
+</table></div>
+<p>قارن هاشات المرفقات ومراجع الرسائل المرتبطة بها. لا تثبت الملفات المتطابقة
+وجود منشئ أو مُعيد إرسال أو مشغل مشترك. كما أن الأسماء المتطابقة
+والصور الرمزية المتشابهة وحدها لا تربط بين معرّفين على Telegram لتشير إلى شخص واحد.</p>
+<h2 id="5-build-the-cross-chat-timeline">5. إنشاء الخط الزمني الشامل لجميع الدردشات<a class="anchor" href="#5-build-the-cross-chat-timeline" aria-label="رابط لهذا القسم">#</a></h2>
+<p>استخدم النسخ المحفوظة في <strong>«الدردشات</strong>» وروابط <strong>سجل «Journal» رقم #...</strong> الخاصة بها. في
+<strong>«Journal</strong>»، ادمج <strong>«جميع المصادر»</strong> مع <strong>«التعديلات</strong>» <strong>و«عمليات الحذف</strong>» و<strong>«التغطية</strong>».
+احتفظ بكل من <code>source_at</code>، إن وُجد، و<code>observed_at</code>.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>فترة المراقبة التوضيحية</th>
+<th>مرجع</th>
+<th>ملاحظة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>09:00</td>
+<td>القناة رقم 101</td>
+<td>تم تسجيل الوجهة الأصلية</td>
+</tr>
+<tr>
+<td>09:12</td>
+<td>المجموعة رقم 146؛ الوسائط رقم 151</td>
+<td>تم نشر وجهة جديدة؛ اكتمل تنزيل الملف</td>
+</tr>
+<tr>
+<td>09:16</td>
+<td>الروبوت رقم 173</td>
+<td>توجيه لوحة المفاتيح إلى الوجهة الجديدة</td>
+</tr>
+<tr>
+<td>09:20</td>
+<td>القناة رقم 188</td>
+<td>تم تعديل الإعلان؛ ولا تزال النسختان المحفوظتان موجودتين</td>
+</tr>
+<tr>
+<td>09:24</td>
+<td>خاص #205؛ وسائل الإعلام #209</td>
+<td>يُكرر معرّف المرسل نفسه الوجهة؛ ويتم الحفاظ على نفس بايتات الملف</td>
+</tr>
+<tr>
+<td>09:28</td>
+<td>المجموعة رقم 231</td>
+<td>تم تلقي إشعار بالحذف؛ لا يُعرف من قام بالحذف ولا الوقت المحدد للحذف</td>
+</tr>
+</tbody>
+</table></div>
+<p>توجد سجلات أخرى بين هذه المراجع التوضيحية. ترتب الأرقام التسلسلية
+الملاحظات؛ وقد تحتوي لقطات السجل على تواريخ مصادر أقدم وتصل في وقت لاحق
+عن الأحداث الحية. قم بالتمييز بين اللقطات، والرسائل المستردة، وإشعارات الحذف، و
+نتائج «مفقود عند إعادة التحقق». ضع علامة على فجوات التغطية باعتبارها فترات غير معروفة. ولا يعني
+الحصول على السجلات في وقت لاحق إثبات المراقبة المستمرة بأثر رجعي.</p>
+<h2 id="6-add-account-perspectives-without-losing-their-origin">6. إضافة وجهات نظر الحسابات دون فقدان مصدرها<a class="anchor" href="#6-add-account-perspectives-without-losing-their-origin" aria-label="رابط لهذا القسم">#</a></h2>
+<p>استخدم مساحة عمل منفصلة لكل حساب على حدة وكرر عملية جردها.
+احتفظ بمعرف الحساب، والدور، وبصمة مفتاح التوقيع، ومراجع المصدر مع كل
+مقارنة. أرقام الرسائل ليست معرّفات عالمية عبر الدردشات/الحسابات.</p>
+<p>يتم إجراء الترابط عبر مساحات العمل في ملاحظات القضايا الخارجية أو أدوات التحليل.
+لا تتوفر في TgWitness حاليًا ميزة البحث الشامل عبر مساحات العمل، أو الخط الزمني المدمج،
+أو الرسم البياني للتحقيق، أو أرشيف القضايا المدمج. ويُعد تصدير حسابات متعددة من قناة <strong>واحدة</strong>
+أو مجموعة فائقة عملية مختلفة، وليست دمجًا لسجلات الحسابات.</p>
+<p>بالنسبة للأعمال الأطول، يجب الحفاظ على الحدود مع وجود <a href="../witness/">شاهد مستقل</a>.
+استخدم اختبارات التسليم الخاضعة للرقابة للتحقق من
+مسار التقاط كل حساب ومدى ظهوره.</p>
+<h2 id="7-assemble-and-verify-the-case-handoff">7. تجميع وتحقق من عملية تسليم القضية<a class="anchor" href="#7-assemble-and-verify-the-case-handoff" aria-label="رابط لهذا القسم">#</a></h2>
+<p>احتفظ بهذه العناصر معًا في دليل قضية أعده المحلل:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>المواد</th>
+<th>الغرض</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ملاحظات الحالة وسجل المصادر</td>
+<td>الأسئلة، وسياسة جمع البيانات، والوصول/الأدوار، والنتائج، والتفسيرات البديلة، والثغرات</td>
+</tr>
+<tr>
+<td>الخط الزمني</td>
+<td>مع الإشارة إلى التوقيت ومساحة العمل/الدردشة/الرسالة/التسلسل لكل إدخال</td>
+</tr>
+<tr>
+<td>ملف ZIP للأدلة الموقعة لكل مساحة عمل</td>
+<td>سجل مسجل كامل، وقائمة محتويات، ووسائط محفوظة مضمنة؛ ولا تضيق عوامل التصفية في اللوحة نطاق تصدير السجل</td>
+</tr>
+<tr>
+<td>ملفات ملفات تعريف الأشخاص الموقعة بشكل منفصل</td>
+<td>تمت مطابقة المراجع المستمدة مع الأدلة الموجودة في مساحة العمل المطابقة</td>
+</tr>
+<tr>
+<td>تصدير محادثات كاملة موقعة</td>
+<td>الحصول على السجل المرئي الحالي، بشكل منفصل عن سجل المراقبة</td>
+</tr>
+<tr>
+<td>بصمات موثوقة ونقاط تفتيش سابقة</td>
+<td>الهوية الرئيسية وحدود السجل المحفوظ</td>
+</tr>
+<tr>
+<td>أدلة Witness، في حالة تهيئتها</td>
+<td>سجل منفصل، ومنشورات موقعة، وبصمة الشاهد</td>
+</tr>
+<tr>
+<td>نتائج التحقق وتجزئات الملفات المرسلة</td>
+<td>ما الذي تم التحقق منه، وما هي وحدات البايت التي تم نقلها، وإلى من</td>
+</tr>
+</tbody>
+</table></div>
+<p>من تثبيت موثوق به، مع أسماء الملفات والبصمة الفعلية لكل مساحة عمل:</p>
+<pre><code class="language-sh">python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
+python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --evidence evidence.zip
+python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256</code></pre>
+<p>يتم الاحتفاظ بنتائج التحقق الفعلية والأدلة الأصلية. يتم الاحتفاظ بدليل الحالات
+الرئيسي، وسجل المصادر، واستنتاجات المحللين خارجيًا؛
+وتتمتع كل دليل من أدلة TgWitness بتوقيعها الخاص وإجراءات التحقق الخاصة بها.</p>
+<h2 id="adapt-the-investigation">تكييف التحقيق<a class="anchor" href="#adapt-the-investigation" aria-label="رابط لهذا القسم">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>الحالة</th>
+<th>تتبع</th>
+<th>تسليم</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>نزاع حول الطلب/الدفع مدفوع بواسطة روبوت</td>
+<td>إعلان الدخول → معاينة الرابط المحفوظ → معلمة بدء تشغيل البوت → إصدارات الرسائل ولوحة المفاتيح → إيصالات استدعاء اللوحة → متابعة الرسائل الخاصة/الجماعية</td>
+<td>تم رصد التسلسل الزمني للعروض/الردود والتحقق من المصادر؛ ولا يُعد رابط الدفع وحده دليلاً على إتمام عملية الدفع</td>
+</tr>
+<tr>
+<td>الرسائل التي تم حذفها بعد وقوع الحادث</td>
+<td>جميع المحادثات المعنية → النسخ الأصلية المحفوظة/التعديلات → نتائج الحذف أو الفقدان عند إعادة التحقق → الوسائط المحفوظة → التغطية ووجهات نظر الحسابات الأخرى</td>
+<td>إصدارات محفوظة وفترات زمنية مجهولة محددة بوضوح؛ لا توجد جهات محددة مفترضة مسؤولة عن الحذف</td>
+</tr>
+<tr>
+<td>أحد المشاركين يغير أسماءه عبر الدردشات</td>
+<td>معرّف المرسل الرقمي → سجل الأسماء/أسماء المستخدمين → الردود → المحادثات الأخرى التي تمت ملاحظتها → الوجهات/الملفات المذكورة</td>
+<td>خط زمني لنشاط حساب Telegram المذكور، مع الفصل بين الهوية الحقيقية وفرضيات العلاقات</td>
+</tr>
+</tbody>
+</table></div>
+<p><a href="../collection/">مرجع المجموعة</a> · <a href="../evidence/#people-profiles">التحقق من الهوية الشخصية</a> ·
+<a href="../evidence/#investigation-handoff">تسليم الأدلة</a> · <a href="../verification/">تم إتمام عملية التحقق من الصحة</a></p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/INVESTIGATION.md">تحرير هذه الصفحة على GitHub ↗</a><a class="next-guide" href="../features/"><span>الخطوة التالية</span><strong>الميزات والقيود ←</strong></a><p>تصف هذه الأدلة طريقة التنفيذ الحالية. ويتم توثيق نتائج التحقق والثغرات المتبقية بشكل منفصل. <a href="../verification/">ما تم اختباره ←</a></p></footer>
+</main>
+<aside class="toc" aria-label="في هذه الصفحة"><p class="nav-label">في هذه الصفحة</p><a href="#worked-case-a-destination-changes-across-four-conversations">حالة تم العمل عليها: تغيير الوجهة عبر أربع محادثات</a><a href="#1-define-the-case-and-collect-the-whole-account">1. تحديد القضية وجمع الرواية الكاملة</a><a href="#2-inventory-every-source-and-acquire-historical-context">2. جرد جميع المصادر واستخلاص السياق التاريخي</a><a href="#3-preserve-the-evolving-case-and-deliberate-interactions">3. الحفاظ على تطورات القضية والتفاعلات المدروسة</a><a href="#4-connect-observations-across-chats">4. ربط الملاحظات عبر الدردشات</a><a href="#5-build-the-cross-chat-timeline">5. إنشاء الخط الزمني الشامل لجميع الدردشات</a><a href="#6-add-account-perspectives-without-losing-their-origin">6. إضافة وجهات نظر الحسابات دون فقدان مصدرها</a><a href="#7-assemble-and-verify-the-case-handoff">7. تجميع وتحقق من عملية تسليم القضية</a><a href="#adapt-the-investigation">تكييف التحقيق</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>مفتوحة المصدر · تعمل على جهازك</span><a href="../../../../LICENSE">رخصة MIT</a><a href="../notice/">إشعار المشغل</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">الأمن</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "في انتظار رسالة", "Step through a fictional send, edit and delete.": "تتبع خطوات عملية إرسال وتعديل وحذف افتراضية.", "No observations yet. Start the sequence or advance one event.": "لا توجد ملاحظات حتى الآن. ابدأ التسلسل أو انتقل إلى الحدث التالي.", "Meet at 10:00": "نلتقي الساعة 10:00", "A new message is visible in the chat.": "تظهر رسالة جديدة في الدردشة.", "Record 1 appended: the collector observed the original message.": "تم إرفاق السجل رقم 1: لاحظ المجمع الرسالة الأصلية.", "Meet at 11:00": "نلتقي الساعة 11:00", "The current text changes. The earlier observation stays.": "النص الحالي قد يتغير. أما الملاحظة السابقة فتبقى كما هي.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "تم إرفاق السجل 2: التعديل يمثل ملاحظة جديدة. ولا يزال السجل 1 يحتوي على النص الأصلي.", "Message deleted": "تم حذف الرسالة", "The message has disappeared from the chat view.": "لقد اختفت الرسالة من شاشة الدردشة.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "تم إرفاق السجل رقم 3: يتم الاحتفاظ بإشعار الحذف جنبًا إلى جنب مع كلا النسختين اللتين تمت ملاحظتهما.", "0 records": "0 سجل", "1 record": "سجل واحد", "2 records": "سجلان", "3 records": "3 سجلات", "Complete / {n} of 3": "كامل / {n} من 3", "Step / {n} of 3": "الخطوة / {n} من 3", "Pause": "توقف مؤقت", "Replay sequence": "تسلسل إعادة التشغيل", "Play sequence": "تشغيل التسلسل", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "يتوفر نموذج ثابت. لحساب التجزئات (هاش) تفاعليًّا، افتح هذه الصفحة عبر HTTPS أو معاينة localhost مع دعم Web Crypto.", "No record supplied": "لم يتم تقديم أي سجل", "Tail removed": "تم حذف الجزء الأخير", "≠ saved hash": "≠ التجزئة المحفوظة", "Rebuilt · different hash": "أعيد بناؤه · هاش مختلف", "= saved hash": "= التجزئة المحفوظة", "Same length and matching head.": "نفس الطول وعنوان مطابق.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "تتطابق جميع التجزئات الحسابية الثلاثة مع التجزئات المحفوظة. تتوافق هذه العينة مع الحد المحدد المتمثل في الاحتفاظ بثلاثة سجلات.", "Same saved head; the journal prefix fails verification.": "نفس العنوان المحفوظ؛ لم تجتز بادئة السجل عملية التحقق.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "لم يعد السجل رقم 2 مطابقًا لـ«هاش»ه المحفوظ. قد يفوت هذا الأمر عند التحقق من الرأس الأخير المخزن فقط؛ لذا يقوم المُحقق بفحص كل سجل.", "Head differs from the retained checkpoint.": "يختلف العنوان عن نقطة التحقق التي تم الاحتفاظ بها.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "ترتبط التجزئات المعاد بناؤها ببعضها البعض، لكن الرأس النهائي قد تغير. نقطة التحقق المحتفظ بها ترفض هذا السجل. كما أن التوقيعات الأصلية ستفشل أيضًا في السجلات التي تم تغييرها.", "Too short: 2 supplied records \u003c 3 retained records.": "قصير جدًا: 2 سجلات مقدمة \u003c 3 سجلات محفوظة.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "لا يزال التوافقيان المتبقيان متطابقين. ويكشف نقطة التحقق المحتفظ بها عن الجزء المفقود في نهاية السلسلة. وبدون ذلك الحد السابق، لما كشفت هذه البادئة الأقصر وحدها عن هذا الحذف.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "حساب التجزئة غير متاح في هذا المتصفح. تظل الصيغ والتفسيرات الثابتة أدناه متاحة.", "{n} records": "{n} سجل", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "تم القبول: يزداد العدد، ويتم التحقق من التوقيع، ويتطابق المفتاح. ويحتفظ الشاهد بهذا الحد الجديد.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "التراجع: يُظهر الرد الموقّع عددًا أقل من السجلات مقارنةً بنقطة التحقق الأخيرة المقبولة. تقوم الأداة بتسجيل المشكلة والاحتفاظ بحدود النسخة السابقة المقبولة.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "التفرع (Fork): العدد لم يتغير لكن الرأس يختلف. يقوم الشاهد بتسجيل الخلاف ويحتفظ بالحدود التي تم قبولها سابقًا.", "No answer": "لا توجد إجابة", "boundary unknown": "الحدود غير معروفة", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "عدم الاستجابة: يسجل «الشهود» فشل عملية التحقق. ولا يمكنه تأكيد الحالة الحالية لـ«المجمع». إذا كان «الشهود» لا يزال قادرًا على الوصول إلى واجهة برمجة تطبيقات الروبوت (Bot API) وكانت سياسة النشر الخاصة به تسمح بذلك، فيمكنه نشر هذا الفشل.", "Send {n}": "أرسل {n}", "Edit {n}": "تحرير {n}", "Delete {n}": "حذف {n}", "Both accounts captured all six expected observations in this example.": "وقد استوفى كلا الحسابين جميع الملاحظات الست المتوقعة في هذا المثال.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "لا يزال الحساب «ب» قد سجل 6 من أصل 6. استغرق تسجيل إيصالين وقتًا أطول. تعكس نسبة التسجيل وتأخير استلام الإيصالات إجابات مختلفة.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "سجل الحساب «ب» 5 من أصل 6 قبل الموعد النهائي (83.3٪). لا يوجد تأخير مقاس للتعديل المفقود. تصف هذه النتيجة فقط الإجراءات الستة الخاضعة للرقابة.", "not observed by cutoff": "لم يُلاحظ ذلك بحلول الموعد النهائي", "{s} seconds": "{s} ثانية", "Exact values follow in the table.": "ترد القيم الدقيقة في الجدول التالي.", "{s} s": "{s} s", "Not observed": "لم يُلاحظ", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "تقدم أربع محادثات ملاحظات مختلفة. اتبع السجلات المصدرية لكل اتصال؛ ولا تنسب منشور القناة إلى المستخدم 71001 دون وجود مرسل محدد.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "يقدم السجلان رقم 146 ورقم 205 نفس معرّف المرسل، 71001. وهذا يربط بين المنشورات الملحوظة لحساب Telegram عبر محادثتين. ولا يحدد هوية شخص حقيقي ولا ينسب المنشور إلى القناة.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "يظهر العنوان pay.example.invalid/new في سجل المجموعة رقم 146، ولوحة مفاتيح الروبوت رقم 173، وتعديل القناة رقم 188، والرسالة الخاصة رقم 205. وجود عنوان متكرر يربط بين المواد؛ لكنه لا يثبت وجود سيطرة مشتركة على تلك الحسابات.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "تحتوي إيصالات الوسائط المكتملة رقم #151 ورقم #209 على قيم SHA-256 كاملة متطابقة في هذه الحالة الافتراضية. قارن بين البايتات الفعلية وسجلات الرسائل المرتبطة بها. لا يحدد الملف المطابق هوية منشئه ولا يثبت هوية من قام بإعادة توجيهه.", "the encrypted off-site copy": "النسخة المشفرة خارج الموقع", "notifications": "الإشعارات", "checkpoint hashes for timestamps": "تجزئات نقاط التحقق (checkpoint hashes) للطوابع الزمنية", "signed checkpoints for the witness": "نقاط تحقق موقعة لـ «TgWitness»", "Switched on in this example": "تم تفعيلها في هذا المثال", "Optional · off by default": "اختياري · معطّل افتراضيًا", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "ما يُترك في هذا الجهاز: اتصال Telegram و{list}. لا شيء آخر.", "Default: only the Telegram connection leaves this machine.": "الإعداد الافتراضي: لا يغادر هذا الجهاز سوى اتصال Telegram.", "{done} of {total} done": "{done} من {total} تم إنجازها", "Mark step {n} as done": "وضع علامة «تم» على الخطوة {n}", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "نص", "Copied": "نسخ", "Command copied.": "تم نسخ الأمر.", "Selected — Ctrl/Cmd+C": "تم التحديد — Ctrl/Cmd+C", "Command selected. Copy it manually.": "تم تحديد الأمر. انسخه يدويًّا.", "Command copied to clipboard.": "تم نسخ الأمر إلى الحافظة.", "Select text": "حدد النص", "Clipboard unavailable. Command selected; copy it manually.": "الحافظة غير متاحة. تم تحديد الأمر؛ انسخه يدويًّا.", "A message arrives. The first observation is saved.": "تصل رسالة. يتم حفظ الملاحظة الأولى.", "The time changes. Both captured versions stay.": "يتغير الوقت. وتبقى النسختان المسجلتان كما هما.", "The message disappears. The captured history remains.": "تختفي الرسالة. لكن السجل المسجل يبقى.", "Pause example animation": "إيقاف الرسوم المتحركة التوضيحية مؤقتًا", "Play example animation": "تشغيل مثال للرسوم المتحركة", "Play": "تشغيل", "Full-size workspace screenshot": "لقطة شاشة لمساحة العمل بالحجم الكامل", "Workspace screenshot · fictional data": "لقطة شاشة لمساحة العمل · بيانات خيالية", "Close": "إغلاق", "Close screenshot": "إغلاق لقطة الشاشة", "Scrollable full-size screenshot": "لقطة شاشة كاملة الحجم قابلة للتمرير", "Enlarge: {name}": "تكبير: {name}", "View full size": "عرض بالحجم الكامل"}</script>
+</body></html>

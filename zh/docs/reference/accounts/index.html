@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="zh-Hans" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>账户与会话格式 | TgWitness</title>
+<meta name="description" content="支持通过手机、二维码或授权密钥登录，可导入 Telethon、Pyrogram 或 Telegram Desktop 的会话数据，并同时管理多个账户。"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="账户与会话格式 | TgWitness"><meta property="og:description" content="支持通过手机、二维码或授权密钥登录，可导入 Telethon、Pyrogram 或 Telegram Desktop 的会话数据，并同时管理多个账户。">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/accounts/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/accounts/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/accounts/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/accounts/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/accounts/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/accounts/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/accounts/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/accounts/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/accounts/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/accounts/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/", "url": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/", "name": "账户与会话格式 | TgWitness", "description": "支持通过手机、二维码或授权密钥登录，可导入 Telethon、Pyrogram 或 Telegram Desktop 的会话数据，并同时管理多个账户。", "inLanguage": "zh-Hans", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://phishdestroy.github.io/TgWitness/zh/"}, {"@type": "ListItem", "position": 2, "name": "文档", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/"}, {"@type": "ListItem", "position": 3, "name": "参考", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "账户与会话格式", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">跳转至内容</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / 文档</span></a>
+<nav aria-label="指南"><a href="../../concepts/">图文指南</a><a href="../../">所有指南</a><a href="../">参考</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="语言"><span aria-hidden="true">◍</span> 简体中文</summary><div class="lang-list"><a href="../../../../docs/reference/accounts/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/accounts/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/accounts/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/accounts/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/accounts/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/accounts/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/accounts/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/accounts/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/accounts/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/accounts/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/accounts/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/accounts/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="./" hreflang="zh-Hans" lang="zh-Hans" aria-current="true">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="在浅色和深色主题之间切换"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="指南"><a href="../../../guides/modes.html">模式、场景和证据级别</a><p class="nav-label">入门指南</p><a href="../../start/">几分钟内即可开始使用</a><a href="../../accounts/">连接账户</a><a href="../../proxies/">选择代理</a><a href="../../exports/">导出与验证</a><p class="nav-label">了解证据</p><a href="../../concepts/">了解证据如何运作</a><a href="../../cases/">跨所有聊天记录进行调查</a><a href="../../security/">确保安全</a><p class="nav-label">了解更多</p><a href="../../witness/">设置 Witness 机器人</a><a href="../../server/">保持其运行</a><a href="../../troubleshooting/">查找问题所在</a></nav><nav class="wiki-nav" aria-label="参考"><p class="nav-label"><a class="nav-label-link" href="../">参考</a></p><details class="wiki-group" open><summary>设置</summary><a href="../quickstart/">快速入门</a><a href="./" aria-current="page">账户与会话格式</a><a href="../connection/">连接、代理和数据保护</a><a href="../deployment/">部署</a></details><details class="wiki-group"><summary>收集</summary><a href="../collection/">数据采集原理</a><a href="../operations/">工作流程与操作</a><a href="../investigation/">调查模式</a><a href="../features/">功能与限制</a></details><details class="wiki-group"><summary>证据</summary><a href="../how-it-works/">证据的运作原理</a><a href="../evidence/">证据格式</a><a href="../witness/">独立见证者</a><a href="../timestamp/">时间戳</a></details><details class="wiki-group"><summary>安全与项目</summary><a href="../security/">安全与数据处理</a><a href="../architecture/">架构</a><a href="../verification/">已测试的内容</a><a href="../license/">许可协议与架构不兼容声明</a><a href="../notice/">运营商兼容性通知</a><a href="../changelog/">更新日志</a></details></nav><p class="sidebar-note">v0.7.0<br>开源 · 可在您的设备上运行</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="指南"><a href="../../../">首页</a> <span aria-hidden="true">/</span> <a href="../../">文档</a> <span aria-hidden="true">/</span> <a href="../">参考</a> <span aria-hidden="true">/</span> <span aria-current="page">账户与会话格式</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">参考 / 设置</p><h1>账户与会话格式</h1><p class="guide-outcome">支持通过手机、二维码或授权密钥登录，可导入 Telethon、Pyrogram 或 Telegram Desktop 的会话数据，并同时管理多个账户。</p><div class="wiki-body"><p>TgWitness 通过 MTProto 协议以 <strong>Telegram 用户账户</strong>（而非机器人）身份登录，使用
+Telethon 实现。每个账户都位于独立的工作区中（在
+API 和命令行工具中称为“<em>工作区</em>”），并拥有独立的会话、消息源、日志和签名密钥。</p>
+<p>会话文件、会话字符串和认证密钥均属于<strong>账户授权凭证</strong>：任何
+持有者均可代表该账户进行操作。这些凭证不包含消息历史记录。</p>
+<blockquote class="callout">
+<p>[!警告]
+<strong>请勿使用任何您无法承受损失的内容。</strong>我们强烈建议不要连接
+个人账户或其他重要账户，也不建议在您珍视的账户上
+创建 API ID 或 API 哈希。 这并非因为 TgWitness 未经测试：Telegram 会以不可预测的方式限制并
+永久封禁账号——仅因其认为请求量
+过大，无论使用何种客户端或出于何种目的，且未提供充分的说明文档。许多封禁
+都是不可逆的。 请使用专用账号。测试能否顺利进行取决于 Telegram 自身，而非
+软件本身，且无法保证后续使用不会出现问题。</p>
+</blockquote>
+<ul>
+<li><a href="#at-a-glance">一览</a></li>
+<li><a href="#before-you-start-api-id-and-api-hash">开始之前：API ID 和 API 哈希值</a></li>
+<li><a href="#phone-number">电话号码</a> · <a href="#qr-code">二维码</a> · <a href="#auth-key--dc-id">认证密钥 + DC ID</a></li>
+<li><a href="#account-files">账户文件</a>: <a href="#telethon-session">Telethon .session</a> ·
+    <a href="#pyrogram-session">Pyrogram .session</a> · <a href="#session--json-pair">会话 + JSON 对</a> ·
+    <a href="#telegram-desktop-tdata">TData</a> · <a href="#telethon-stringsession">StringSession</a> ·
+    <a href="#account-json">账户 JSON</a></li>
+<li><a href="#identify-what-you-have">识别您拥有的内容</a> · <a href="#unsupported-formats">不受支持的格式</a></li>
+<li><a href="#multiple-accounts">多个账户</a> · <a href="#keeping-account-files-safe">确保账户文件的安全</a> ·
+    <a href="#troubleshooting">故障排除</a></li>
+</ul>
+<h2 id="at-a-glance">一览<a class="anchor" href="#at-a-glance" aria-label="本节链接">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>您拥有</th>
+<th><strong>“添加账户</strong>”选项卡</th>
+<th>您还需要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>电话号码及其登录码的获取方式</td>
+<td><strong>电话</strong></td>
+<td>若已启用双因素认证（2FA），请输入密码</td>
+</tr>
+<tr>
+<td>Telegram 在另一台设备上已打开</td>
+<td><strong>二维码</strong></td>
+<td>若已启用双因素认证（2FA），请输入密码</td>
+</tr>
+<tr>
+<td><code>.session</code>文件（Telethon 或 Pyrogram）</td>
+<td><strong>文件</strong></td>
+<td>可选的配套 JSON 文件，用于应用程序设置</td>
+</tr>
+<tr>
+<td><code>.session</code> + <code>.json</code>（同名）</td>
+<td><strong>文件</strong>（请同时选中）</td>
+<td>通常没有其他内容</td>
+</tr>
+<tr>
+<td>Telegram Desktop 中的 <code>tdata</code> 文件夹</td>
+<td><strong>文件</strong>（ZIP 压缩包）</td>
+<td>若已设置，则为桌面端本地密码</td>
+</tr>
+<tr>
+<td>Telethon StringSession（文本、<code>.txt</code>、<code>.tgwitness-session</code>）</td>
+<td><strong>文件</strong></td>
+<td>无需单独的 API 对</td>
+</tr>
+<tr>
+<td>包含会话或认证密钥的 <code>.json</code></td>
+<td><strong>文件</strong></td>
+<td>无需单独的 API 对</td>
+</tr>
+<tr>
+<td>一个授权密钥（512个十六进制字符）及其DC编号</td>
+<td><strong>认证密钥</strong></td>
+<td>可选用户 ID</td>
+</tr>
+</tbody>
+</table></div>
+<p>TgWitness 根据文件<strong>内容</strong>而非文件名来识别文件。重命名文件
+绝不会导致其被转换。</p>
+<h2 id="before-you-start-api-id-and-api-hash">开始之前：API ID 和 API 哈希值<a class="anchor" href="#before-you-start-api-id-and-api-hash" aria-label="本节链接">#</a></h2>
+<p>您无需创建 Telegram API 应用程序即可登录。当未输入、
+未导入或工作区中尚未保存任何密钥对时，TgWitness 会从其内置的
+50 组公开 API 密钥对（<code>tgwitness/api_pool.py</code>）中按随机顺序选取一组。 如果 Telegram 拒绝某对密钥
+（<code>API_ID_INVALID</code>、<code>API_ID_PUBLISHED_FLOOD</code>、<code>UPDATE_APP_TO_LOGIN</code>），则尝试下一对，
+每次登录最多尝试八对；被拒绝的密钥对将被跳过，直至重启。用于登录的密钥对将
+与该账户一同保存，并供该账户重复使用。<strong>API ID</strong> 和 <strong>API </strong>哈希用于向 Telegram 标识该应用程序；它们
+本身并不对账户进行授权。</p>
+<p>若要改用您自己的应用程序（注册该应用的账户将面临风险；
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/PROJECT-GUIDE.md#connect-a-telegram-account">参见
+“为何要使用内置 API 池？</a>”）：</p>
+<ol>
+<li>打开 <a href="https://my.telegram.org">my.telegram.org</a>，并使用您拥有的任意手机号码
+    登录。验证码将发送到 Telegram 应用中，而非通过短信。</li>
+<li>选择 <strong>API 开发工具</strong>。</li>
+<li>创建应用程序：任意标题和简称（5–32 个字母），平台为<strong>桌面版</strong>。
+    URL 和描述可留空。</li>
+<li>复制 <strong>App api_id</strong>（一个数字）和 <strong>App api_hash</strong>（32 个十六进制字符）。</li>
+</ol>
+<p>在登录表单下方的面板中，有“<strong>API ID + 哈希</strong>”字段。您可以在 <strong>API ID</strong> 字段中粘贴一组
+<code>api_id:api_hash</code>，两个字段将自动填充。一组
+即可用于您所有的账户。成功登录后，该信息将以加密形式保存在
+该工作区中，且绝不会发回浏览器。</p>
+<p>涉及三种不同的凭证：</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>秘密</th>
+<th>打开</th>
+<th>托管位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>面板令牌</td>
+<td>TgWitness 网页控制面板</td>
+<td>数据目录中的 <code>panel-token.txt</code>，或 <code>TGWITNESS_TOKEN</code></td>
+</tr>
+<tr>
+<td>API ID + 哈希值</td>
+<td>本身不包含任何内容；仅用于标识该应用程序</td>
+<td>可通过 my.telegram.org 进行内置配对、导入设置或使用您自己的应用程序</td>
+</tr>
+<tr>
+<td>账户授权</td>
+<td>Telegram 账号</td>
+<td>可通过手机/二维码登录创建，或作为会话导入</td>
+</tr>
+</tbody>
+</table></div>
+<p>如果必须通过代理访问 Telegram，请先在
+<strong>“账户”→“设置”→“连接设置”→“更改连接路径</strong>”中进行设置。</p>
+<h2 id="phone-number">电话号码<a class="anchor" href="#phone-number" aria-label="本节链接">#</a></h2>
+<ol>
+<li>打开<strong>“账户</strong>”选项卡，选择<strong>“手机</strong>”标签页，并以国际格式输入号码，
+    例如 <code>+44 7700 900123</code>。空格和连字符将被自动去除。</li>
+<li>点击<strong>“继续”</strong>。API ID 和哈希值可留空。</li>
+<li>输入 Telegram 发送的验证码（通常发送至 Telegram 应用；短信接收无法保证）。</li>
+<li>如果该账户启用了双重验证，请输入该密码。这并非控制面板
+    令牌，也不是设备密码。</li>
+<li>登录后查看显示的账户 ID，然后选择消息来源。</li>
+</ol>
+<p>登录凭据和双因素认证（2FA）密码绝不会写入磁盘。</p>
+<h2 id="qr-code">二维码<a class="anchor" href="#qr-code" aria-label="本节链接">#</a></h2>
+<p>当该账户已在手机或另一台计算机上登录时，请使用此功能。</p>
+<ol>
+<li>点击<strong>“QR 码</strong>”→ <strong>显示 QR 码</strong>。API ID 和哈希值可留空。</li>
+<li>在已登录的设备上：<strong>设置 → 设备 → 关联桌面设备</strong>，扫描二维码
+    并确认。</li>
+<li>若 Telegram 要求输入双因素认证（2FA）密码，请在 TgWitness 中输入该密码。</li>
+</ol>
+<p>该二维码是在本地生成的。二维码会过期；请点击<strong>“生成另一个二维码</strong>
+”重新尝试。锁定面板、切换工作区或开始另一轮登录操作将取消
+待处理的二维码。</p>
+<h2 id="auth-key--dc-id">认证密钥 + DC ID<a class="anchor" href="#auth-key--dc-id" aria-label="本节链接">#</a></h2>
+<p>授权密钥（Auth Key）是每个 Telegram 会话背后的 256 字节原始授权数据，以
+<strong>512 个十六进制字符</strong>的形式表示，并附带数据中心编号 <strong>DC 1–5</strong>。</p>
+<ol>
+<li><strong>“Auth key</strong>”选项卡。请粘贴完整的密钥；包含“<code>…</code>”的缩短版密钥无法使用。</li>
+<li>请选择随密钥提供的 DC ID。</li>
+<li>可选输入<strong>用户 ID</strong>。若 Telegram 报告的
+    账户信息不一致，TgWitness 将拒绝连接。</li>
+<li>Press <strong>Connect 账号</strong>。</li>
+</ol>
+<p>授权密钥（512 个字符）并非 API 哈希（32 个字符）。同一密钥也可
+以 JSON 格式导入，详见<a href="#account-json">“账户 JSON</a>”。</p>
+<h2 id="account-files">账户文件<a class="anchor" href="#account-files" aria-label="本节链接">#</a></h2>
+<p>打开<strong>“添加账户”→“文件</strong>”，选择最多<strong>四个属于同一账户的文件</strong>（总大小不超过
+<strong>8 MiB</strong>），然后点击<strong>“连接账户</strong>”。</p>
+<ul>
+<li>文件在您的 TgWitness 服务器<strong>内存中</strong>进行转换。上传内容不会被存储，
+    ZIP 文件不会解压到磁盘，也不会连接任何外部服务。</li>
+<li>生成的会话记录随后将与 Telegram 进行核对。如果文件中包含用户 ID，
+    则该 ID 必须与 Telegram 报告的账户信息一致。</li>
+<li>描述不同账户或不同 API 凭据的文件将被拒绝
+    而非仅选择其中一个。</li>
+<li><strong>“密码”或“会话文本</strong>”字段包含 TData 本地密码字段，该字段用于粘贴
+    StringSession 以及<strong>在未登录的情况下读取文件</strong>（无需
+    联系 Telegram 即可填写表单）。</li>
+</ul>
+<h3 id="telethon-session">Telethon <code>.session</code><a class="anchor" href="#telethon-session" aria-label="本节链接">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>产品简介</td>
+<td>基于 Telethon 的工具生成的 SQLite 数据库，例如 <code>my_account.session</code></td>
+</tr>
+<tr>
+<td>获得以下机构认可：</td>
+<td>表格 <code>sessions</code>（连同 <code>dc_id</code>、<code>server_address</code>、<code>port</code>、<code>auth_key</code>）和 <code>version</code> = 7 或 8</td>
+</tr>
+<tr>
+<td>要求</td>
+<td>仅有一行授权会话记录；一个封闭且完整的数据库</td>
+</tr>
+</tbody>
+</table></div>
+<p>请先关闭创建该文件的程序。如果其旁边存在 <code>my_account.session-journal</code> 或
+<code>my_account.session-wal</code>，则表示数据库尚未最终确定：请正常打开并
+关闭原始客户端。删除这些辅助文件可能会导致副本损坏。</p>
+<h3 id="pyrogram-session">Pyrogram <code>.session</code><a class="anchor" href="#pyrogram-session" aria-label="本节链接">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>产品简介</td>
+<td>基于 Pyrogram 的工具生成的 SQLite 数据库</td>
+</tr>
+<tr>
+<td>获得以下机构认可：</td>
+<td>表 <code>sessions</code> 包含 <code>dc_id</code>、<code>auth_key</code>、<code>test_mode</code>、<code>user_id</code>、<code>is_bot</code>；<code>version</code> = 2 或 3</td>
+</tr>
+<tr>
+<td>要求</td>
+<td>生产网络上仅允许一个授权<strong>用户</strong>会话。机器人和测试数据中心（test-DC）会话将被拒绝</td>
+</tr>
+</tbody>
+</table></div>
+<p>登录时，系统会将存储的用户 ID 与 Telegram 进行比对。</p>
+<h3 id="session--json-pair">会话 + JSON 对<a class="anchor" href="#session--json-pair" aria-label="本节链接">#</a></h3>
+<p>账户通常以两个同名文件的形式分发，例如
+<code>447700900123.session</code> 和 <code>447700900123.json</code>。请同时选中<strong>这两个文件</strong>。</p>
+<ul>
+<li>根据 JSON 信息，TgWitness 使用 <code>app_id</code>/<code>api_id</code> 和 <code>app_hash</code>/<code>api_hash</code>，因此您
+    通常无需手动输入 API 凭据。</li>
+<li>其他字段（如 <code>phone</code>、<code>device</code>、<code>sdk</code>、<code>app_version</code>、<code>lang_pack</code> 或已保存的
+    <code>twoFA</code> 密码）将被<strong>忽略</strong>。如果该账户启用了双因素认证（2FA），TgWitness 会要求输入验证码。</li>
+<li>单个 JSON 文件仅为元数据。若无会话文件，请继续通过手机
+    或 QR 码登录。</li>
+</ul>
+<h3 id="telegram-desktop-tdata">Telegram 桌面版 (TData)<a class="anchor" href="#telegram-desktop-tdata" aria-label="本节链接">#</a></h3>
+<p>TData 是 Telegram Desktop 应用程序（来自 desktop.telegram.org 的跨平台
+应用程序）中的 <code>tdata</code> 文件夹。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>系统</th>
+<th>默认位置：<code>tdata</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td><code>%APPDATA%\Telegram Desktop\tdata</code>（便携版 Telegram：位于 <code>Telegram.exe</code> 旁边）</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td><code>~/.local/share/TelegramDesktop/tdata</code></td>
+</tr>
+<tr>
+<td>macOS</td>
+<td><code>~/Library/Application Support/Telegram Desktop/tdata</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>导入方法：</p>
+<blockquote class="callout">
+<p><strong>并行会话警告。</strong>导入 TData 会复用 Telegram Desktop 的授权
+密钥；它不会创建独立的登录账号。请勿在 Desktop 和
+TgWitness 中同时使用该密钥。Telegram 可能会因
+<code>AUTH_KEY_DUPLICATED</code> 导致授权失效，使两个副本均无法使用，直至进行新的登录。</p>
+<p>请完全退出 Desktop 程序（包括其系统托盘进程），并在
+TgWitness 使用导入的会话期间保持该程序关闭。 <strong>请退出程序，切勿注销或撤销会话：</strong>
+撤销操作也会使导入的副本失效。如果您需要同时运行两个客户端，
+请通过手机或二维码登录 TgWitness 以创建其独立的授权。建议使用
+专用账户，但这并不能确保克隆密钥在并行使用时是安全的。</p>
+<p>这同样适用于导入的 <code>.session</code> 文件、StringSession文本及认证密钥十六进制值。
+其他拥有独立创建的授权的客户端可以保持登录状态。
+请参阅<a href="https://core.telegram.org/api/errors#406-not-acceptable">Telegram的AUTH_KEY_DUPLICATED文档</a>。</p>
+</blockquote>
+<ol>
+<li>完全退出 Telegram Desktop。</li>
+<li>
+<p>从 <code>tdata</code> 中提取仅包含以下两项内容的 ZIP 压缩包：</p>
+<ul>
+<li><code>key_datas</code></li>
+<li>其旁以 <code>s</code> 结尾的 16 个字符的文件，通常为 <code>D877F783D5D3EF8Cs</code></li>
+</ul>
+<p>将整个文件夹及其媒体缓存打包为 ZIP 文件通常会超出限制
+（512 条记录，解压后 32 MiB）。
+3. 在<strong>“文件</strong>”中选择该 ZIP 文件。如果 Telegram Desktop 设置了<strong>本地密码</strong>，请先在
+<strong>“密码”或“会话文本”栏</strong>中输入该密码。这并非双因素认证（2FA）密码。</p>
+</li>
+</ol>
+<p>支持功能：每个存档仅限一个账户，采用现代<code>key_datas</code>/<code>key_data0</code>/<code>key_data1</code>存储技术，
+本地密码保护。不支持功能：包含多个已登录账户的文件夹、旧版桌面
+布局、受密码保护的ZIP文件，以及独立的原生macOS应用“Telegram for macOS”。</p>
+<h3 id="telethon-stringsession">Telethon StringSession<a class="anchor" href="#telethon-stringsession" aria-label="本节链接">#</a></h3>
+<p>一行文本，通常以 <code>1</code> 开头，长度约为 350 个字符。请将其
+作为 <code>.txt</code> 或 <code>.tgwitness-session</code> 文件（最大 4 KiB）加载，或将其粘贴到
+<strong>“通行码”或“会话文本</strong>”下方。仅接受 Telethon 字符串；Pyrogram 和 TDLib
+字符串采用不同的格式。</p>
+<h3 id="account-json">账户 JSON<a class="anchor" href="#account-json" aria-label="本节链接">#</a></h3>
+<p>一个 JSON 对象，大小不超过 <strong>64 KiB</strong>，存储在以 <strong><code>.json</code></strong> 结尾的文件中。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>字段（别名）</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>api_id</code> (<code>app_id</code>)</td>
+<td>应用程序 ID，一个正数</td>
+</tr>
+<tr>
+<td><code>api_hash</code> (<code>app_hash</code>)</td>
+<td>应用程序哈希值，32个十六进制字符</td>
+</tr>
+<tr>
+<td><code>string_session</code> (<code>session_string</code>, <code>session</code>)</td>
+<td>Telethon StringSession 文本，并非文件名</td>
+</tr>
+<tr>
+<td><code>auth_key</code> (<code>auth_key_hex</code>) + <code>dc_id</code></td>
+<td>完整的 512 个字符的认证密钥和 DC 1–5</td>
+</tr>
+<tr>
+<td><code>user_id</code> (<code>id</code>)</td>
+<td>可选；在保存授权之前，需与 Telegram 进行比对验证</td>
+</tr>
+</tbody>
+</table></div>
+<p>如果同时存在别名和主名称，两者必须一致。示例：</p>
+<pre><code class="language-json">{ &quot;app_id&quot;: 1234567, &quot;app_hash&quot;: &quot;0123456789abcdef0123456789abcdef&quot; }</code></pre>
+<pre><code class="language-json">{
+  &quot;api_id&quot;: 1234567,
+  &quot;api_hash&quot;: &quot;0123456789abcdef0123456789abcdef&quot;,
+  &quot;auth_key&quot;: &quot;REPLACE_WITH_ALL_512_HEXADECIMAL_CHARACTERS&quot;,
+  &quot;dc_id&quot;: 2,
+  &quot;user_id&quot;: 123456789
+}</code></pre>
+<p>第一个示例仅需填写 API 凭据；您可通过手机或二维码登录，或添加会话
+文件。不支持批量列表（即账户的 JSON 数组）。</p>
+<h2 id="identify-what-you-have">识别您拥有的内容<a class="anchor" href="#identify-what-you-have" aria-label="本节链接">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>您会看到</th>
+<th>它是一个</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*.session</code>；在文本编辑器中打开后，顶部显示为 <code>SQLite format 3</code></td>
+<td>Telethon 或 Pyrogram SQLite</td>
+<td><strong>文件</strong>（自动检测）</td>
+</tr>
+<tr>
+<td>一个名为 <code>tdata</code> 的文件夹，其中包含 <code>key_datas</code></td>
+<td>Telegram 桌面版 TData</td>
+<td>将两个文件打包为 ZIP 文件，然后<strong>进入“文件”</strong></td>
+</tr>
+<tr>
+<td>以 <code>1</code> 开头的一行文本，约 350 个字符</td>
+<td>Telethon StringSession</td>
+<td><strong>文件</strong></td>
+</tr>
+<tr>
+<td><code>*.json</code> 搭配 <code>app_id</code>/<code>app_hash</code></td>
+<td>配套元数据</td>
+<td><strong>文件</strong>及其会话</td>
+</tr>
+<tr>
+<td><code>*.json</code> 搭配 <code>auth_key</code> 或 <code>string_session</code></td>
+<td>账户 JSON</td>
+<td><strong>文件</strong></td>
+</tr>
+<tr>
+<td>512 个字符 <code>0-9a-f</code></td>
+<td>授权密钥</td>
+<td><strong>认证密钥</strong></td>
+</tr>
+<tr>
+<td>32 个字符 <code>0-9a-f</code></td>
+<td>API 哈希值</td>
+<td><strong>API ID + 哈希值</strong></td>
+</tr>
+<tr>
+<td>来自 TDLib 应用的 <code>td.binlog</code> 或 <code>db.sqlite</code></td>
+<td>TDLib 存储</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td><code>123456789:AA…</code></td>
+<td>机器人令牌</td>
+<td>不支持</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="unsupported-formats">不受支持的格式<a class="anchor" href="#unsupported-formats" aria-label="本节链接">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>格式</th>
+<th>备选方案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TDLib 存储（<code>td.binlog</code>）和 TDLib 导出功能</td>
+<td>通过手机或二维码登录</td>
+</tr>
+<tr>
+<td>Pyrogram 会话<strong>字符串</strong></td>
+<td>请使用 Pyrogram <code>.session</code> 文件，或通过手机/二维码扫描</td>
+</tr>
+<tr>
+<td>TData 包含多个已登录账户</td>
+<td>请在 Telegram Desktop 中注销其他账户，或使用各账户各自的会话文件</td>
+</tr>
+<tr>
+<td>机器人令牌</td>
+<td>不支持：TgWitness 以用户账户身份进行监控</td>
+</tr>
+<tr>
+<td>包含大量账户的 CSV/JSON 列表</td>
+<td>每个账户添加一个工作区</td>
+</tr>
+<tr>
+<td>测试数据中心（Test-DC）或机器人会话</td>
+<td>请使用正式版用户账户</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="multiple-accounts">多个账户<a class="anchor" href="#multiple-accounts" aria-label="本节链接">#</a></h2>
+<p>点击账户选择器旁边的 <strong>+</strong>，或打开
+<strong>“账户” → “设置” → “连接设置” → “工作区</strong>”，输入标签并
+登录。</p>
+<ul>
+<li>支持任意数量的工作区，包括主工作区。每个工作区都有独立的会话、代理
+    路由、消息源、捕获策略、日志、签名密钥、检查点和导出功能。</li>
+<li>切换显示的工作区不会暂停其他工作区。</li>
+<li>日志始终与创建它的账户绑定。使用其他
+    账户登录需要另一个工作区，且一个账户不能分配给两个
+    工作区。</li>
+<li>所有工作区共享一个面板令牌；它们并非独立的用户。</li>
+<li><strong>账户会</strong>重命名一个工作区，并删除一个已添加的工作区，连同其会话、日志、
+    来源和签名密钥一并删除。主工作区无法从面板中删除。</li>
+</ul>
+<h2 id="sign-out">退出登录<a class="anchor" href="#sign-out" aria-label="本节链接">#</a></h2>
+<p><strong>“账户 → 退出 Telegram</strong>（暂停监控）”会要求 Telegram 结束该
+会话，因此该会话也会从账户的“<strong>设置 → 设备</strong>”中消失，并从
+工作区保险库中移除。日志、来源、设置和签名密钥将保留，且
+日志会记录此次退出操作。 该工作区仍归属于其账户：只有该
+账户才能再次连接到它。如果 Telegram 没有响应，该会话仍会在此处被移除，
+面板上也会显示相应提示；请在 Telegram 的<strong>“设置”→“设备</strong>”中结束该会话。</p>
+<h2 id="convert-a-telethon-session-offline">将 Telethon 会话转换为离线格式<a class="anchor" href="#convert-a-telethon-session-offline" aria-label="本节链接">#</a></h2>
+<p>该面板可直接导入 <code>.session</code> 文件。若需离线转换为
+StringSession 文件，请在项目文件夹中运行：</p>
+<pre><code class="language-powershell">.venv\Scripts\python.exe -m tgwitness.sessions account.session --out account.tgwitness-session   # Windows</code></pre>
+<pre><code class="language-sh">.venv/bin/python -m tgwitness.sessions account.session --out account.tgwitness-session          # Linux/macOS</code></pre>
+<p>该转换器仅读取 Telethon SQLite 文件（最大 64 MiB），绝不修改输入内容，
+不进行任何网络请求，且拒绝覆盖现有的输出文件。</p>
+<h2 id="keeping-account-files-safe">确保账户文件的安全<a class="anchor" href="#keeping-account-files-safe" aria-label="本节链接">#</a></h2>
+<ul>
+<li>请将每个 <code>.session</code>、TData ZIP、StringSession、Auth Key 和账户 JSON 视为
+    密码。TgWitness 会将导入的授权信息保存在其加密保险库中；您可以在
+    之后删除原始文件。</li>
+<li>请勿在两个程序中同时运行同一授权。Telegram 可能会撤销该授权
+    (<code>AUTH_KEY_DUPLICATED</code>)，导致两个程序均无法运行。</li>
+<li>已过期或被撤销的会话无法通过转换恢复。请重新登录。</li>
+</ul>
+<h2 id="troubleshooting">故障排除<a class="anchor" href="#troubleshooting" aria-label="本节链接">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>消息或症状</th>
+<th>操作指南</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>无法读取此会话。请关闭其原始客户端……</em></td>
+<td>SQLite 文件处于打开状态或未完成状态（<code>-journal</code>/<code>-wal</code> 旁路文件）。请正确关闭原始程序，然后重新复制该文件。</td>
+</tr>
+<tr>
+<td><em>支持的 Telethon SQLite 模式：7 和 8</em> / <em>Pyrogram … 2 和 3</em></td>
+<td>该文件由一个非常旧或未知版本的库生成。请改用手机/二维码登录。</td>
+</tr>
+<tr>
+<td><em>仅支持授权的生产环境用户会话</em></td>
+<td>该 Pyrogram 文件属于某个机器人或测试网络。</td>
+</tr>
+<tr>
+<td><em>TData 存档已超过 512 条记录或 32 MiB</em></td>
+<td>仅包含 ZIP 文件 <code>key_datas</code> 和 <code>D877F783D5D3EF8Cs</code>，不包含整个文件夹。</td>
+</tr>
+<tr>
+<td><em>无法解密 TData。请检查桌面本地密码</em></td>
+<td>在<strong>“密码”或“会话文本</strong>”栏中输入 Telegram 桌面版的本地密码。</td>
+</tr>
+<tr>
+<td><em>每次仅导入一个 TData 账户</em></td>
+<td>Telegram Desktop 包含多个账户；请参阅<a href="#unsupported-formats">“不受支持的格式”</a>。</td>
+</tr>
+<tr>
+<td><em>选定的文件描述了不同的账户或 API 凭据</em></td>
+<td>仅选择一个账户的文件。</td>
+</tr>
+<tr>
+<td><em>JSON 中未包含任何受支持的 API 凭据或授权信息</em></td>
+<td>请检查 <a href="#account-json">Account JSON</a> 中的字段名称。</td>
+</tr>
+<tr>
+<td><em>仅限 API 元数据</em></td>
+<td>该 JSON 文件中未包含会话信息。请添加 <code>.session</code> 文件，或使用手机/二维码。</td>
+</tr>
+<tr>
+<td><em>Auth Key HEX 必须包含全部 512 个十六进制字符</em></td>
+<td>密钥被截断或包含<code>…</code>。</td>
+</tr>
+<tr>
+<td>账户 ID 与导入的账户不匹配</td>
+<td>该文件的用户 ID 与 Telegram 报告的不一致；该文件属于另一个账户。</td>
+</tr>
+<tr>
+<td>该账户已属于另一个工作区</td>
+<td>请打开该工作区，而非重复添加该账户。</td>
+</tr>
+<tr>
+<td>已连接，但<strong>“来源</strong>”中的聊天列表中缺少一个私人群组</td>
+<td>检查成员资格。筛选器会检查前 1,000 个对话；请在<strong>“参数</strong>”下提高该限制。</td>
+</tr>
+<tr>
+<td>代理连接失败</td>
+<td>请检查主机、端口和凭据。TgWitness 绝不会退而采用直接连接。</td>
+</tr>
+</tbody>
+</table></div>
+<p>另请参阅：代理和加密的<a href="../connection/">连接与安全</a>设置，
+以及登录后数据采集的具体<a href="../collection/">工作原理</a>。</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCOUNTS.md">在 GitHub 上编辑此页面 ↗</a><a class="next-guide" href="../connection/"><span>下一步</span><strong>连接、代理和数据保护 →</strong></a><p>这些指南描述了当前的实现方案。验证结果和剩余缺陷在其他文档中单独记录。 <a href="../verification/">已测试的内容 →</a></p></footer>
+</main>
+<aside class="toc" aria-label="本页面内容"><p class="nav-label">本页面内容</p><a href="#at-a-glance">一览</a><a href="#before-you-start-api-id-and-api-hash">开始之前：API ID 和 API 哈希值</a><a href="#phone-number">电话号码</a><a href="#qr-code">二维码</a><a href="#auth-key--dc-id">认证密钥 + DC ID</a><a href="#account-files">账户文件</a><a href="#identify-what-you-have">识别您拥有的内容</a><a href="#unsupported-formats">不受支持的格式</a><a href="#multiple-accounts">多个账户</a><a href="#sign-out">退出登录</a><a href="#convert-a-telethon-session-offline">将 Telethon 会话转换为离线格式</a><a href="#keeping-account-files-safe">确保账户文件的安全</a><a href="#troubleshooting">故障排除</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>开源 · 可在您的设备上运行</span><a href="../../../../LICENSE">MIT 许可协议</a><a href="../notice/">操作员通知</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">安全</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "等待消息", "Step through a fictional send, edit and delete.": "通过一个虚构的发送、编辑和删除过程进行演示。", "No observations yet. Start the sequence or advance one event.": "尚无观察记录。开始序列或跳转至下一事件。", "Meet at 10:00": "10:00 见面", "A new message is visible in the chat.": "聊天中显示了一条新消息。", "Record 1 appended: the collector observed the original message.": "已附录记录 1 条：采集器已捕获原始消息。", "Meet at 11:00": "11:00 见面", "The current text changes. The earlier observation stays.": "当前文本内容有所变更。先前的观察结果仍然有效。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "记录 2 已追加：该编辑内容为新观察结果。记录 1 仍保留原始文本。", "Message deleted": "消息已删除", "The message has disappeared from the chat view.": "该消息已从聊天界面中消失。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "已添加记录 3：删除通知与两个被观察到的版本一同保留。", "0 records": "0 条记录", "1 record": "1 条记录", "2 records": "2 条记录", "3 records": "3 条记录", "Complete / {n} of 3": "已完成 / {n}/3", "Step / {n} of 3": "第 {n} 步（共 3 步）", "Pause": "暂停", "Replay sequence": "回放序列", "Play sequence": "播放序列", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "静态示例已上线。如需交互式计算哈希值，请通过 HTTPS 访问此页面，或在支持 Web Crypto 的本地预览环境中打开。", "No record supplied": "未提供记录", "Tail removed": "尾部内容已删除", "≠ saved hash": "≠ 已保存的哈希值", "Rebuilt · different hash": "重建 · 哈希值不同", "= saved hash": "= 已保存的哈希值", "Same length and matching head.": "篇幅相同且标题一致。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "这三个计算出的哈希值均与保存的哈希值一致。该样本符合保留的三个记录边界。", "Same saved head; the journal prefix fails verification.": "保存的头部信息相同；日志前缀验证失败。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "记录 2 与其保存的哈希值不再匹配。若仅检查最终存储的头部，则会遗漏此问题；验证器会检查每一条记录。", "Head differs from the retained checkpoint.": "标题与保留的检查点不同。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "重建的哈希值相互关联，但最终的头部已发生变化。保留的检查点拒绝接受这一历史记录。对于已更改的记录，原始签名也会验证失败。", "Too short: 2 supplied records \u003c 3 retained records.": "内容过短：提供的记录有 2 条，而保留的记录少于 3 条。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "剩下的两个哈希值仍然匹配。保留的检查点揭示了缺失的部分。如果没有那个早先的边界，仅凭这个较短的前缀是无法揭示这一遗漏的。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "此浏览器不支持哈希计算。下方的公式和静态说明仍可查看。", "{n} records": "{n}条记录", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "已接受：计数持续增加，签名已验证，密钥匹配。该见证者保留了这一新边界。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "回滚：签名后的结果报告的记录数量少于上次被接受的检查点。Witness 会记录该问题，并保留较早被接受的边界。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "分叉：计数保持不变，但分支头不同。见证者会记录该分歧，并保留先前被接受的分界点。", "No answer": "无回答", "boundary unknown": "边界未知", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "无响应：该工具会记录验证失败的情况。它无法确定收集器的当前状态。如果该工具仍能访问 Bot API 且其发布政策允许，则会发布该失败信息。", "Send {n}": "发送 {n}", "Edit {n}": "编辑 {n}", "Delete {n}": "删除 {n}", "Both accounts captured all six expected observations in this example.": "在这项示例中，这两个账户均捕获了预期的全部六项观察结果。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "账户 B 依然成功捕获了 6 条中的 6 条。其中两条收据的捕获耗时较长。捕获率和收据延迟反映的是不同的问题。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "账户 B 在截止时间前捕获了 6 条中的 5 条（83.3%）。缺失的编辑操作未测得延迟。此结果仅描述了这六项受控操作。", "not observed by cutoff": "未在截止时间前观察到", "{s} seconds": "{s}秒", "Exact values follow in the table.": "具体数值见下表。", "{s} s": "{s} s", "Not observed": "未发现", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "四个聊天群组提供了不同的观察结果。请追溯每条连接的源记录；在未确认发件人身份的情况下，请勿将该频道帖子归因于用户 71001。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "记录 #146 和 #205 显示相同的发件人 ID：71001。这将同一 Telegram 账号在两个聊天群组中发布的帖子关联起来。但这并不能识别现实世界中的具体个人，也无法确定该频道帖子的发布者。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "目标地址 pay.example.invalid/new 出现在群组记录 #146、机器人键盘 #173、频道编辑 #188 以及私信 #205 中。目标地址的重复出现表明这些内容之间存在关联；但这并不能证明这些账户受共同控制。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "在此虚构案例中，已完成的媒体收据 #151 和 #209 具有完全相同的 SHA-256 值。请对比实际字节内容及其关联的消息记录。该匹配文件既未标识其创建者，也无法证明是谁转发了该文件。", "the encrypted off-site copy": "加密的异地副本", "notifications": "通知", "checkpoint hashes for timestamps": "时间戳的检查点哈希值", "signed checkpoints for the witness": "TgWitness 的签名检查点", "Switched on in this example": "在此示例中已启用", "Optional · off by default": "可选 · 默认关闭", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "离开这台机器时：Telegram 连接和 {list}。除此之外别无他物。", "Default: only the Telegram connection leaves this machine.": "默认设置：仅 Telegram 连接会离开这台机器。", "{done} of {total} done": "已完成 {done}/{total}", "Mark step {n} as done": "将步骤 {n} 标记为已完成", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "文案", "Copied": "已复制", "Command copied.": "已复制该指令。", "Selected — Ctrl/Cmd+C": "选中 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "已选中命令。请手动复制。", "Command copied to clipboard.": "命令已复制到剪贴板。", "Select text": "选择文本", "Clipboard unavailable. Command selected; copy it manually.": "剪贴板不可用。已选中命令；请手动复制。", "A message arrives. The first observation is saved.": "一条消息送达。首次记录被保存。", "The time changes. Both captured versions stay.": "时间会改变，但两个记录版本都会保留下来。", "The message disappears. The captured history remains.": "消息虽已消失，但记录的历史依然存在。", "Pause example animation": "暂停示例动画", "Play example animation": "播放示例动画", "Play": "播放", "Full-size workspace screenshot": "全屏工作区截图", "Workspace screenshot · fictional data": "工作区截图 · 虚构数据", "Close": "关闭", "Close screenshot": "关闭截图", "Scrollable full-size screenshot": "可滚动全屏截图", "Enlarge: {name}": "放大：{name}", "View full size": "查看大图"}</script>
+</body></html>

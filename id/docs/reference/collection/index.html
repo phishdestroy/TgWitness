@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="id" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Cara kerja pengumpulan data | TgWitness</title>
+<meta name="description" content="Ruang lingkup pengamatan, pembaruan langsung, pemeriksaan ulang, lampiran, tindakan pengguna, dan arti dari &quot;gap&quot;, per catatan."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/collection/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="id_ID">
+<meta property="og:title" content="Cara kerja pengumpulan data | TgWitness"><meta property="og:description" content="Ruang lingkup pengamatan, pembaruan langsung, pemeriksaan ulang, lampiran, tindakan pengguna, dan arti dari &quot;gap&quot;, per catatan.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/id/docs/reference/collection/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/collection/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/collection/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/collection/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/collection/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/collection/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/collection/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/collection/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/collection/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/collection/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/collection/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/id/docs/reference/collection/", "url": "https://phishdestroy.github.io/TgWitness/id/docs/reference/collection/", "name": "Cara kerja pengumpulan data | TgWitness", "description": "Ruang lingkup pengamatan, pembaruan langsung, pemeriksaan ulang, lampiran, tindakan pengguna, dan arti dari \"gap\", per catatan.", "inLanguage": "id", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://phishdestroy.github.io/TgWitness/id/"}, {"@type": "ListItem", "position": 2, "name": "Dokumentasi", "item": "https://phishdestroy.github.io/TgWitness/id/docs/"}, {"@type": "ListItem", "position": 3, "name": "Referensi", "item": "https://phishdestroy.github.io/TgWitness/id/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Cara kerja pengumpulan data", "item": "https://phishdestroy.github.io/TgWitness/id/docs/reference/collection/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Lompat ke konten</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Dokumentasi</span></a>
+<nav aria-label="Panduan"><a href="../../concepts/">Panduan visual</a><a href="../../">Semua panduan</a><a href="../">Referensi</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Bahasa"><span aria-hidden="true">◍</span> Bahasa Indonesia</summary><div class="lang-list"><a href="../../../../docs/reference/collection/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/collection/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/collection/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/collection/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/collection/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/collection/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/collection/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/collection/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/collection/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/collection/" hreflang="hi" lang="hi">हिन्दी</a><a href="./" hreflang="id" lang="id" aria-current="true">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/collection/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/collection/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Beralih antara tema terang dan gelap"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Panduan"><a href="../../../guides/modes.html">Mode, skenario, dan tingkat bukti</a><p class="nav-label">Langkah-langkah awal</p><a href="../../start/">Mulai dalam hitungan menit</a><a href="../../accounts/">Hubungkan akun</a><a href="../../proxies/">Pilih proxy</a><a href="../../exports/">Ekspor dan verifikasi</a><p class="nav-label">Memahami bukti</p><a href="../../concepts/">Lihat cara kerja bukti ini</a><a href="../../cases/">Selidiki seluruh obrolan</a><a href="../../security/">Jaga keamanannya</a><p class="nav-label">Pelajari lebih lanjut</p><a href="../../witness/">Siapkan bot saksi</a><a href="../../server/">Jaga agar tetap berjalan</a><a href="../../troubleshooting/">Temukan apa yang salah</a></nav><nav class="wiki-nav" aria-label="Referensi"><p class="nav-label"><a class="nav-label-link" href="../">Referensi</a></p><details class="wiki-group"><summary>Pengaturan</summary><a href="../quickstart/">Panduan cepat</a><a href="../accounts/">Format akun dan sesi</a><a href="../connection/">Koneksi, proxy, dan perlindungan data</a><a href="../deployment/">Penerapan</a></details><details class="wiki-group" open><summary>Kumpulkan</summary><a href="./" aria-current="page">Cara kerja pengumpulan data</a><a href="../operations/">Alur kerja dan operasi</a><a href="../investigation/">Mode penyelidikan</a><a href="../features/">Fitur dan batasan</a></details><details class="wiki-group"><summary>Bukti</summary><a href="../how-it-works/">Cara kerja bukti tersebut</a><a href="../evidence/">Format bukti</a><a href="../witness/">Saksi independen</a><a href="../timestamp/">Cap waktu</a></details><details class="wiki-group"><summary>Keamanan & proyek</summary><a href="../security/">Keamanan dan penanganan data</a><a href="../architecture/">Arsitektur</a><a href="../verification/">Apa yang telah diuji</a><a href="../license/">Pemberitahuan mengenai lisensi dan ketidakcocokan arsitektur</a><a href="../notice/">Pemberitahuan ketidakcocokan operator</a><a href="../changelog/">Daftar Perubahan</a></details></nav><p class="sidebar-note">v0.7.0<br>Sumber terbuka · Dapat dijalankan di komputer Anda</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Panduan"><a href="../../../">Beranda</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentasi</a> <span aria-hidden="true">/</span> <a href="../">Referensi</a> <span aria-hidden="true">/</span> <span aria-current="page">Cara kerja pengumpulan data</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Cari di dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Coba gunakan proxy, rantai hash, token, atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Pencarian yang jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Ketik kata kunci untuk mencari panduan dan referensi. Hasil pencarian tetap tersimpan di browser Anda.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Referensi / Kumpulkan</p><h1>Cara kerja pengumpulan data</h1><p class="guide-outcome">Ruang lingkup pengamatan, pembaruan langsung, pemeriksaan ulang, lampiran, tindakan pengguna, dan arti dari &quot;gap&quot;, per catatan.</p><div class="wiki-body"><p>TgWitness merekam apa yang diamati oleh akun Telegram yang terhubung. Jurnal tersebut menyimpan
+pengamatan tersebut, urutannya, serta konteks yang menyertainya. Alat ini
+tidak menyimpulkan tindakan yang tidak terlihat berdasarkan pesan yang hilang atau akun yang sedang terhubung.</p>
+<h2 id="from-login-to-a-journal">Dari proses login hingga jurnal<a class="anchor" href="#from-login-to-a-journal" aria-label="Tautan ke bagian ini">#</a></h2>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 691 360" width="691" height="360" role="img" aria-labelledby="flow-1-title flow-1-desc"><title id="flow-1-title">Diagram alur</title><desc id="flow-1-desc">Otorisasi akun pengguna → Pilih grup dan saluran yang dapat diakses; Pilih grup dan saluran yang dapat diakses → Simpan pengaturan peristiwa dan lampiran; Simpan pengaturan peristiwa dan lampiran → Mulai pemantauan; Mulai pemantauan → Dapatkan pembaruan dari klien yang aktif; Dapatkan pembaruan dari klien yang aktif → Terapkan kebijakan sumber dan peristiwa; Terapkan kebijakan sumber dan peristiwa → Tambahkan pengamatan yang ditandatangani; Tambahkan pengamatan yang ditandatangani → Tinjau atau ekspor jurnal tersebut; Tambahkan pengamatan yang ditandatangani → Memproses lampiran yang ada dalam antrian; Memproses lampiran yang ada dalam antrian → Tambahkan hasil unduhan</desc><defs><marker id="flow-1-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M182.2 37.0C219.0 37.0 219.0 37.0 255.8 37.0" marker-end="url(#flow-1-arrow)" style="--i:0;--len:74" pathLength="74"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M182.2 37.0C219.0 37.0 219.0 37.0 255.8 37.0"/></circle><path class="flow-edge" d="M435.6 37.0C458.6 37.0 458.6 37.0 481.6 37.0" marker-end="url(#flow-1-arrow)" style="--i:1;--len:46" pathLength="46"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M435.6 37.0C458.6 37.0 458.6 37.0 481.6 37.0"/></circle><path class="flow-edge" d="M571.5 66.0C571.5 95.5 571.5 95.5 571.5 125.0" marker-end="url(#flow-1-arrow)" style="--i:2;--len:59" pathLength="59"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M571.5 66.0C571.5 95.5 571.5 95.5 571.5 125.0"/></circle><path class="flow-edge" d="M502.3 145.0C467.2 145.0 467.2 145.0 432.2 145.0" marker-end="url(#flow-1-arrow)" style="--i:3;--len:70" pathLength="70"/><circle class="flow-pulse" r="3.2" style="--i:3"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M502.3 145.0C467.2 145.0 467.2 145.0 432.2 145.0"/></circle><path class="flow-edge" d="M259.3 145.0C231.1 145.0 231.1 145.0 202.9 145.0" marker-end="url(#flow-1-arrow)" style="--i:4;--len:56" pathLength="56"/><circle class="flow-pulse" r="3.2" style="--i:4"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M259.3 145.0C231.1 145.0 231.1 145.0 202.9 145.0"/></circle><path class="flow-edge" d="M119.9 174.0C119.9 216.5 119.9 216.5 119.9 259.0" marker-end="url(#flow-1-arrow)" style="--i:5;--len:85" pathLength="85"/><circle class="flow-pulse" r="3.2" style="--i:5"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M119.9 174.0C119.9 216.5 119.9 216.5 119.9 259.0"/></circle><path class="flow-edge" d="M202.9 288.0C236.2 288.0 236.2 253.0 269.6 253.0" marker-end="url(#flow-1-arrow)" style="--i:6;--len:78" pathLength="78"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M202.9 288.0C236.2 288.0 236.2 253.0 269.6 253.0"/></circle><path class="flow-edge" d="M202.9 288.0C229.4 288.0 229.4 323.0 255.8 323.0" marker-end="url(#flow-1-arrow)" style="--i:6;--len:66" pathLength="66"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M202.9 288.0C229.4 288.0 229.4 323.0 255.8 323.0"/></circle><path class="flow-edge" d="M435.6 323.0C470.7 323.0 470.7 288.0 505.8 288.0" marker-end="url(#flow-1-arrow)" style="--i:7;--len:81" pathLength="81"/><circle class="flow-pulse" r="3.2" style="--i:7"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M435.6 323.0C470.7 323.0 470.7 288.0 505.8 288.0"/></circle><g class="flow-node" style="--i:0"><rect x="57.6" y="8.0" width="124.6" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="28.0">Otorisasi akun</tspan><tspan x="119.9" y="46.0">pengguna</tspan></text></g><g class="flow-node" style="--i:1"><rect x="255.8" y="8.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="28.0">Pilih grup dan saluran</tspan><tspan x="345.7" y="46.0">yang dapat diakses</tspan></text></g><g class="flow-node" style="--i:2"><rect x="481.6" y="8.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="28.0">Simpan pengaturan</tspan><tspan x="571.5" y="46.0">peristiwa dan lampiran</tspan></text></g><g class="flow-node" style="--i:3"><rect x="502.3" y="125.0" width="138.4" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="145.0">Mulai pemantauan</tspan></text></g><g class="flow-node" style="--i:4"><rect x="259.3" y="116.0" width="172.9" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="136.0">Dapatkan pembaruan</tspan><tspan x="345.7" y="154.0">dari klien yang aktif</tspan></text></g><g class="flow-node" style="--i:5"><rect x="36.9" y="116.0" width="166.0" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="136.0">Terapkan kebijakan</tspan><tspan x="119.9" y="154.0">sumber dan peristiwa</tspan></text></g><g class="flow-node" style="--i:6"><rect x="36.9" y="259.0" width="166.0" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="279.0">Tambahkan pengamatan</tspan><tspan x="119.9" y="297.0">yang ditandatangani</tspan></text></g><g class="flow-node" style="--i:7"><rect x="269.6" y="224.0" width="152.2" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="244.0">Tinjau atau ekspor</tspan><tspan x="345.7" y="262.0">jurnal tersebut</tspan></text></g><g class="flow-node" style="--i:7"><rect x="255.8" y="294.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="314.0">Memproses lampiran</tspan><tspan x="345.7" y="332.0">yang ada dalam antrian</tspan></text></g><g class="flow-node" style="--i:8"><rect x="505.8" y="259.0" width="131.5" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="279.0">Tambahkan hasil</tspan><tspan x="571.5" y="297.0">unduhan</tspan></text></g></svg></div><details class="flow-steps"><summary>Diagram dalam bentuk teks</summary><ol><li>Otorisasi akun pengguna → Pilih grup dan saluran yang dapat diakses</li><li>Pilih grup dan saluran yang dapat diakses → Simpan pengaturan peristiwa dan lampiran</li><li>Simpan pengaturan peristiwa dan lampiran → Mulai pemantauan</li><li>Mulai pemantauan → Dapatkan pembaruan dari klien yang aktif</li><li>Dapatkan pembaruan dari klien yang aktif → Terapkan kebijakan sumber dan peristiwa</li><li>Terapkan kebijakan sumber dan peristiwa → Tambahkan pengamatan yang ditandatangani</li><li>Tambahkan pengamatan yang ditandatangani → Tinjau atau ekspor jurnal tersebut</li><li>Tambahkan pengamatan yang ditandatangani → Memproses lampiran yang ada dalam antrian</li><li>Memproses lampiran yang ada dalam antrian → Tambahkan hasil unduhan</li></ol></details></figure>
+<p>Otorisasi, akses ke sumber, pengumpul yang sedang berjalan, dan pengiriman yang lengkap adalah
+masalah yang berbeda. Login yang berhasil tidak menjamin akses ke setiap grup.
+Koneksi transportasi yang terhubung tidak menjamin bahwa setiap pembaruan yang relevan telah diterima.</p>
+<h2 id="observation-scope-chosen-chats-a-folder-or-the-whole-account">Cakupan pemantauan: obrolan yang dipilih, sebuah folder, atau seluruh akun<a class="anchor" href="#observation-scope-chosen-chats-a-folder-or-the-whole-account" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Sumber → <strong>Ruang lingkup pengamatan</strong> menentukan obrolan mana saja yang direkam oleh ruang kerja.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Merekam</th>
+<th>Obrolan baru</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Obrolan yang dipilih (default)</td>
+<td>Hanya obrolan yang Anda tambahkan secara manual</td>
+<td>Tidak pernah ditambahkan secara otomatis</td>
+</tr>
+<tr>
+<td>Folder Telegram</td>
+<td>Percakapan dalam salah satu folder akun: percakapan yang disertakan berdasarkan nama, ditambah kategori folder tersebut (kontak, bukan kontak, grup, saluran, bot), dikurangi percakapan yang dikecualikan, dan, jika folder tersebut mencantumkannya, percakapan yang diarsipkan</td>
+<td>Obrolan yang sesuai akan ditambahkan segera setelah aktif; obrolan yang Anda tambahkan ke folder di Telegram akan terdeteksi dalam waktu satu jam</td>
+</tr>
+<tr>
+<td>Akun lengkap</td>
+<td>Setiap obrolan yang dilihat oleh akun tersebut</td>
+<td>Setiap obrolan baru, grup, obrolan pribadi, atau bot akan ditambahkan begitu pembaruan pertamanya tiba</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>Jenis sumber</strong> (saluran, grup, obrolan pribadi, bot) mempersempit mode folder dan
+    mode seluruh akun. Obrolan yang dipilih dapat berupa jenis apa pun, termasuk obrolan pribadi dan bot.</li>
+<li><strong>Obrolan yang dikecualikan</strong> tidak pernah direkam, dalam mode apa pun. Dalam mode folder dan seluruh akun,
+    opsi <em>&quot;Kecualikan&quot;</em> dan <em>&quot;Hapus&quot;</em> pada sumber akan memasukkannya ke dalam daftar ini, sehingga cakupan tidak akan menambahkannya lagi.
+    Memilih obrolan tersebut kembali secara manual (di bagian &quot;Sumber&quot; atau dari &quot;Obrolan&quot;) akan menghapusnya dari daftar. Daftar ini
+    dapat menampung hingga 5.000 obrolan; jika melebihi batas tersebut, <em>perintah &quot;Hapus&quot;</em> akan ditolak dan obrolan tersebut dapat dijeda sebagai gantinya.</li>
+<li><strong>Tindakan sendiri</strong> (aktif secara default): pesan yang dikirim oleh akun ini, pengeditannya, dan
+    penekanan tombol pada keyboard balasan. Jika dinonaktifkan, pesan keluar dan pengeditan akan dilewati.</li>
+<li>Beralih ke folder atau seluruh akun akan meminta konfirmasi: mode-mode ini merekam
+    obrolan pribadi dan pesan pihak ketiga, dan hanya boleh digunakan pada akun khusus.
+    Konfirmasi dan setiap perubahan cakupan merupakan catatan <code>scope.changed</code> yang ditandatangani.</li>
+<li>Obrolan yang ditambahkan oleh cakupan akan muncul sebagai sumber yang ditandai <em>&quot;auto&quot;</em>, direkam sebagai <code>scope.applied</code>
+    (pada awal dan setiap jam) atau <code>source.discovered</code> (obrolan baru saat pemantauan berlangsung). Kembali
+    ke obrolan yang dipilih akan menghentikan sementara semua sumber yang ditambahkan secara otomatis.</li>
+</ul>
+<p>Hal-hal yang tidak dapat dilakukan oleh mode-mode ini:</p>
+<ul>
+<li><strong>Obrolan rahasia</strong> dienkripsi ujung-ke-ujung antara dua perangkat dan tidak pernah sampai ke
+    TgWitness, dalam mode apa pun.</li>
+<li><strong>Tidak ada yang direkam saat TgWitness tidak berjalan.</strong> Setelah di-restart, TgWitness meminta Telegram
+    untuk pembaruan yang terlewat dan memeriksa ulang obrolan, tetapi Telegram tidak mengembalikan semua data setelah
+    gangguan yang lama. Laporan dan <code>verify.py</code> menampilkan periode tersebut sebagai celah (lihat <a href="../evidence/#coverage-continuity-gaps-and-unobserved-ids">cakupan</a>).</li>
+<li>Hanya 1.000 percakapan pertama yang ditampilkan pada awalnya (batasnya tercantum di <strong>bagian Parameter</strong>); percakapan yang lebih lama
+    akan ditambahkan saat percakapan tersebut aktif kembali. Riwayat awal dari percakapan yang ditambahkan tidak diambil — ambil
+    tangkapan layar riwayat atau ekspor percakapan lengkap saat Anda membutuhkannya.</li>
+<li>Kondisi folder yang terus berubah (dibisukan, telah dibaca) tidak diterapkan: obrolan semacam itu
+    tetap dipantau.</li>
+<li><strong>Tombol bot inline (callback)</strong> yang ditekan di aplikasi lain tidak terlihat oleh sesi kedua
+    ; balasan atau pengeditan bot dicatat. Tekan tombol balasan pada keyboard tiba sebagai pesan keluar
+    dan diberi label <code>button_press</code>.</li>
+<li>Semakin banyak obrolan berarti semakin banyak permintaan. Telegram membatasi akun yang dianggap memiliki volume
+    yang berlebihan, yang menjadi alasan tambahan untuk menggunakan akun khusus.</li>
+</ul>
+<h2 id="scope-and-event-selection">Ruang lingkup dan pemilihan peristiwa<a class="anchor" href="#scope-and-event-selection" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Setiap ruang kerja memiliki sumbernya sendiri. TgWitness tidak bergabung dengan grup, menerima
+undangan, atau menghitung setiap anggota secara otomatis. Sumber harus sudah
+dapat diakses oleh akun tersebut. Saat dimulai, pengumpul memeriksa sumber yang dipilih
+terhadap percakapan yang terlihat di akun; 1.000 percakapan pertama diperiksa kecuali jika
+<strong>Parameter → Obrolan yang dibaca dari daftar akun</strong> menyatakan sebaliknya.
+Sumber yang tidak ada ditandai sebagai <strong>akses belum dikonfirmasi</strong>, tidak diasumsikan telah menghapus Anda.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Pengaturan</th>
+<th>Mengumpulkan</th>
+<th>Dampak jika dinonaktifkan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pesan baru</td>
+<td>Pesan yang dikirim secara biasa</td>
+<td>Pengeditan atau penghapusan yang dilakukan kemudian mungkin tidak memiliki teks yang terekam sebelumnya untuk dibandingkan.</td>
+</tr>
+<tr>
+<td>Pengeditan</td>
+<td>Menyajikan versi pesan yang telah diedit</td>
+<td>Perubahan yang terjadi di antara proses tersebut tidak direkonstruksi kemudian.</td>
+</tr>
+<tr>
+<td>Penghapusan</td>
+<td>Pemberitahuan penghapusan yang terbatas cakupannya dan pemberitahuan tingkat akun yang tidak terbatas cakupannya</td>
+<td>Pemberitahuan penghapusan tidak ditambahkan ke jurnal.</td>
+</tr>
+<tr>
+<td>Reaksi</td>
+<td>Cuplikan reaksi yang ditampilkan</td>
+<td>Pembaruan reaksi terpisah tidak ditambahkan.</td>
+</tr>
+<tr>
+<td>Keanggotaan</td>
+<td>Penyampaian pesan layanan keanggotaan dan pembaruan bagi peserta</td>
+<td>Pengamatan keanggotaan tersebut tidak ditambahkan.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Pengaturan berlaku untuk semua sumber yang dipilih di ruang kerja. Simpan formulir untuk menerapkan
+perubahan; perubahan dicatat dengan nilai sebelum/sesudah yang ditandatangani. Menonaktifkan suatu kategori
+tidak akan menghapus catatan sebelumnya. Mengaktifkannya kembali tidak akan mengisi kembali pembaruan yang terlewat.</p>
+<p>Catatan operasional dan peristiwa layanan grup lainnya tetap terpisah dari pengaturan ini.
+Pesan layanan keanggotaan dapat membuat catatan pesan saat fitur keanggotaan
+diaktifkan, meskipun penangkapan pesan baru biasa dinonaktifkan. Objek Telegram
+yang ditangkap tetap mempertahankan metadata yang tertanam; pengaturan ini bukanlah aturan penyuntingan.</p>
+<p><strong>Penghapusan dalam obrolan pribadi dan grup biasa</strong> tercatat sebagai ID pesan tanpa obrolan.
+Obrolan-obrolan ini berbagi urutan ID pesan yang berlaku untuk seluruh akun, sehingga ketika pesan dengan ID tersebut
+telah disimpan sebelumnya, obrolannya diketahui: penghapusan tersebut dicatat dalam obrolan tersebut dengan
+penjelasan cara kerjanya oleh <code>chat_resolution</code>. ID yang tidak pernah disimpan tetap menjadi <strong>penghapusan tanpa cakupan</strong> dengan
+sumber yang secara eksplisit tidak diketahui; pengumpul data tidak membuat tebakan. Telegram tidak pernah menyebutkan siapa yang menghapus
+pesan; ketika pesan yang dihapus dikirim oleh akun ini, catatan tersebut mencantumkannya
+(<code>deleted_message_was_outgoing</code>) tanpa menyebutkan nama penghapus.</p>
+<h2 id="own-actions">Tindakan sendiri<a class="anchor" href="#own-actions" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Pesan yang dikirim oleh akun yang diamati diberi label <code>outgoing</code>. Pengeditan pesan keluar
+mencatat bahwa dalam obrolan pribadi dan grup, hanya penulisnya yang dapat mengeditnya, sedangkan
+posting saluran dapat diedit oleh admin lain. Ketika sebuah pesan keluar mengulang teks tombol
+dari papan ketik balasan terbaru yang disimpan dalam obrolan tersebut, pesan tersebut diberi label <code>button_press</code> dengan tautan ke
+catatan papan ketik tersebut.</p>
+<p>Pengecualian terhadap tindakan pengguna sendiri juga berlaku untuk pemeriksaan ulang latar belakang dan riwayat obrolan baru otomatis.
+Pesan keluar yang dilewati akan memajukan posisi pemeriksaan ulang sehingga tidak dapat menghalangi pesan masuk
+selanjutnya. Tindakan panel yang eksplisit dan cuplikan riwayat yang diminta secara manual tetap terekam.</p>
+<h2 id="investigation-mode-joining-teams-and-talking-to-bots">Mode investigasi: bergabung dengan tim dan berkomunikasi dengan bot<a class="anchor" href="#investigation-mode-joining-teams-and-talking-to-bots" aria-label="Tautan ke bagian ini">#</a></h2>
+<p><strong>Sumber → Cakupan pengamatan → Mode investigasi</strong> menyiapkan cakupan untuk
+akun khusus yang bergabung dengan obrolan grup, memulai bot, dan mengirim pesan ke bot tersebut: seluruh akun, setiap
+jenis sumber, tindakan sendiri, serta untuk setiap obrolan atau bot yang muncul, profilnya dan
+200 pesan terbaru yang terlihat. Tinjau formulir dan tekan <strong>Simpan cakupan</strong>; peralihan ke seluruh
+akun akan meminta konfirmasi seperti biasa.</p>
+<ul>
+<li><strong>Tombol.</strong> Tombol di bawah pesan tetap menyertai pesan tersebut dan ditampilkan di <strong>Obrolan</strong>: tautan, aplikasi web
+    , tautan masuk, teks untuk disalin, data panggilan balik, kueri sebaris, permintaan nomor telepon
+    atau lokasi. Tautan ditampilkan sebagai teks dan tidak pernah dibuka oleh panel. Ketika bot
+    hanya mengubah tombol-tombol tersebut (tautan pembayaran baru), hal itu dianggap sebagai versi baru dari pesan tersebut, baik
+    dari pembaruan langsung maupun dari pemeriksaan ulang.</li>
+<li>
+<p><strong>Obrolan dan bot baru.</strong> Dalam mode folder dan akun keseluruhan, <strong>ketika obrolan atau bot baru
+    muncul</strong>, data akan disimpan segera setelah muncul:</p>
+<ul>
+<li>profilnya sebagai catatan <code>source.profile</code>: deskripsi bot dan perintah, teks &quot;Tentang&quot;
+    dari pengguna, grup, atau saluran, anggota, obrolan yang tertaut, dan tautan undangan jika Telegram
+    menyediakannya;</li>
+<li>pesan-pesan terbarunya yang terlihat (hingga 1.000) sebagai cuplikan riwayat yang ditandai dengan <code>new_chat</code>:
+    pesan-pesan sebelumnya dari obrolan tim yang baru saja bergabung, atau apa yang dikatakan bot sebelum pengamatan
+    memperhatikan obrolan tersebut. Pesan yang sudah disimpan secara langsung tidak diulang.</li>
+</ul>
+<p>Obrolan yang sudah ada dalam daftar saat mode diaktifkan akan ditambahkan tanpa tangkapan layar.
+Fitur FloodWait akan menghentikan sementara proses ini dan dilanjutkan setelahnya; kegagalan dicatat dan
+perekaman obrolan secara langsung tetap berlanjut.
+- <strong>Profil berdasarkan permintaan. Obrolan → Profil → Simpan profil kini</strong> menyimpan profil saat ini
+dari sumber mana pun; profil terbaru ditampilkan di atas pesan.
+- <strong>Tidak terlihat.</strong> Tombol inline (callback) yang ditekan di aplikasi Telegram lain, popup atau
+tautan yang digunakan bot sebagai respons atas penekanan tersebut, serta tautan undangan yang digunakan di aplikasi lain tidak sampai ke
+TgWitness. Apa yang dikirim atau diedit oleh bot setelahnya akan dicatat.</p>
+</li>
+</ul>
+<h3 id="act-from-the-panel">Tindakan dari panel<a class="anchor" href="#act-from-the-panel" aria-label="Tautan ke bagian ini">#</a></h3>
+<p><strong>Obrolan</strong> kini mencakup klien mini yang menggunakan akun Telegram dari ruang kerja yang dipilih:</p>
+<ul>
+<li>Tulis pesan teks biasa atau pilih <strong>&quot;Balas&quot;</strong> di bawah pesan yang telah disimpan. Pesan keluar yang dikirimkan
+    akan terekam meskipun cakupan pengaturan tidak mencakup pembaruan pesan keluar.</li>
+<li>Tekan <strong>tombol &quot;Press&quot;</strong> di bawah tombol callback atau teks yang sedang aktif. Server akan mengambil
+    pesan tersebut kembali dan menolak tindakan tersebut jika teks yang dimasukkan berbeda dari versi yang tersimpan.
+    Tanda terima callback mempertahankan teks popup Telegram, bendera peringatan, dan URL; jawabannya juga ditampilkan
+    di bawah percakapan. URL tetap berupa teks yang dapat dipilih dan tidak dibuka secara otomatis.</li>
+<li>Buka <strong>tautan Telegram</strong>, masukkan <code>@username</code>, tautan <code>https://t.me/name</code> publik,
+    <code>https://t.me/+invite</code> / <code>joinchat/invite</code>, atau tautan bot dengan <code>?start=parameter</code>, lalu tekan
+    <strong>Simpan pratinjau</strong>. Tautan asli dan pratinjau Telegram akan ditandatangani sebelum bergabung.
+    <strong>Bergabung / buka dan amati</strong>, kemudian bergabung dengan grup/saluran atau membuka pengguna/bot, tambahkan
+    obrolan sebagai sumber yang diaktifkan, dan kirimkan <code>/start</code> ke bot, termasuk parameter awalnya.
+    Permintaan bergabung yang menunggu persetujuan administrator dicatat sebagai tertunda, bukan sebagai keanggotaan.</li>
+</ul>
+<p>Aktifkan &quot;<strong>Mulai Pengamatan</strong>&quot; untuk merekam balasan yang masuk secara langsung. Tindakan panel tetap berfungsi saat
+pengamatan dijeda, tetapi hanya respons langsungnya yang dijamin akan disimpan.
+Sumber yang baru ditambahkan menggunakan profil/riwayat yang telah dikonfigurasi saat pengamatan sedang berjalan.
+Saat sebuah sumber dijeda, aktifkan terlebih dahulu di bagian &quot;<strong>Sumber</strong>&quot; sebelum mengirim pesan atau menekan tombolnya.</p>
+<p><code>interaction.preview</code>, <code>interaction.requested</code>, dan <code>interaction.result</code> adalah peristiwa jurnal bertanda tangan biasa
+yang disertakan dalam ekspor bukti. Permintaan mengidentifikasi akun, pesan/tombol
+atau catatan pratinjau, serta apakah pengamatan sedang berjalan. Tanda terima membedakan antara keberhasilan,
+penolakan, persetujuan tertunda, dan hasil yang tidak diketahui. Permintaan yang terputus mungkin telah sampai
+ke Telegram: periksa obrolan sebelum memulai tindakan baru. Menggunakan kembali ID permintaan akan mengambil
+tanda terima yang tersimpan tanpa mengulangi tindakan, termasuk setelah restart. Panel mempertahankan
+ID tersebut setelah respons ambigu untuk tindakan yang sama selama sesi halaman saat ini.
+Panel juga mempertahankan ID tersebut ketika penyegaran tampilan gagal setelah tindakan berhasil: tanda terima
+tetap terlihat, dan mengklik lagi akan mengambilnya kembali. RPC callback dan join memiliki satu upaya
+aplikasi; pembacaan yang dapat dicoba ulang mempertahankan kebijakan percobaan ulang yang telah dikonfigurasi. Beralih obrolan secara langsung
+akan menghapus draf dan target balasan serta menonaktifkan pengiriman hingga percakapan baru dimuat.</p>
+<p>Mini-klien ini menangani teks dan tombol panggilan balik. Aplikasi web, permintaan login/nomor telepon/lokasi,
+pembayaran, kueri sebaris, dan lampiran masih memerlukan klien Telegram; metadata tombol yang disimpan
+tetap terlihat. Kontrol baru ini menggunakan teks dalam bahasa Inggris.</p>
+<h2 id="recheck-tiers">Tingkat verifikasi ulang<a class="anchor" href="#recheck-tiers" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Pemeriksaan ulang meminta Telegram kembali untuk pesan yang terlewat, pengeditan, dan pesan yang tidak lagi dikembalikan.
+Sumber yang ditandai dengan bintang adalah sumber <strong>prioritas</strong>, diperiksa ulang setiap 15 menit secara default;
+semua sumber lainnya setiap 6 jam. Obrolan yang dipilih dimulai sebagai sumber prioritas, sedangkan obrolan yang ditambahkan melalui
+folder atau seluruh akun sebagai sumber reguler. Paling banyak 30 sumber diperiksa ulang per siklus dan
+sisanya menunggu hingga menit berikutnya; setelah koneksi terhubung kembali, sumber prioritas diproses terlebih dahulu. Kedua
+interval tersebut diatur di Sumber → Pengaturan perekaman → Pemeriksaan Ulang (0 menonaktifkan tingkatan) dan
+dicatat sebagai <code>recheck.changed</code>.</p>
+<p>Pesan yang terlewat diambil mulai dari titik di mana proses sebelumnya berhenti, dengan batas maksimal yang ditentukan di
+<strong>Parameter → pesan baru per pemeriksaan ulang</strong> (1.000 secara default) per proses. Setelah jeda yang lama,
+proses pemeriksaan ulang ini akan mengisi seluruh celah tersebut, bahkan jika pesan-pesan langsung yang lebih baru daripada celah tersebut telah disimpan
+terlebih dahulu. Obrolan yang masih dalam proses penyesuaian akan diperiksa ulang pada menit berikutnya alih-alih
+menunggu interval tingkatan; <code>recheck.completed</code> akan menampilkan <code>continues_after</code> hingga proses selesai.</p>
+<p>Perbandingan mencakup teks pesan, entitas, papan ketik (termasuk penghapusan), serta
+konten/identitas lampiran. Mengubah hash akses berkas atau referensi berkas saja tidak dianggap sebagai
+pengeditan, begitu pula hal-hal yang diisi secara otomatis oleh Telegram: pemuatan pratinjau tautan, tampilan cerita,
+media berbayar yang dibuka oleh akun ini, serta tanda terima faktur. Setiap versi yang disimpan di Obrolan tertaut ke catatan jurnal lengkapnya, termasuk metadata media.</p>
+<h2 id="message-history-and-attribution">Riwayat pesan dan atribusi<a class="anchor" href="#message-history-and-attribution" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Misalkan pengumpul mengamati “Pertemuan pukul 10:00,” kemudian melihat “Pertemuan pukul 11:00,”
+dan kemudian menerima pemberitahuan penghapusan. Alat ini menambahkan tiga catatan terpisah. Teks
+asli tetap ada, suntingan menjadi versi terpisah, dan pemberitahuan tersebut mencatat bahwa
+telah terdeteksi adanya penghapusan.</p>
+<p>Jika pengumpulan dimulai setelah versi pertama menghilang, teks tersebut tidak tersedia.
+Jika terjadi beberapa pengeditan saat proses dalam keadaan offline, hanya versi yang diamati
+setelahnya yang dapat disimpan. Pemberitahuan penghapusan tidak dapat memulihkan konten yang tidak pernah terekam.</p>
+<p>Pengirim pesan tidak secara otomatis dianggap sebagai pengedit. Telegram biasanya tidak
+menyediakan informasi mengenai orang yang menghapus pesan atau waktu penghapusan yang tepat. Aktor yang tidak dikenal
+tetap tidak diketahui. Cuplikan reaksi dan pembaruan peserta hanya berisi jumlah
+serta identitas yang ditampilkan Telegram kepada akun tersebut.</p>
+<p>Nomor urut menunjukkan urutan pengamatan. Cap waktu UTC pengumpul adalah
+waktu lokalnya; cap waktu sumber Telegram disimpan secara terpisah jika tersedia.
+Keduanya bukanlah cap waktu tepercaya yang independen.</p>
+<h2 id="history-snapshots">Cuplikan riwayat<a class="anchor" href="#history-snapshots" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Sebuah snapshot meminta pesan-pesan terbaru yang terlihat dari sumber yang diaktifkan, hingga
+500 pesan per permintaan. Hasilnya diberi label sebagai pengamatan riwayat. Pengamatan ini dapat tumpang tindih
+dengan penangkapan langsung, dan pengamatan yang berulang disimpan sebagai catatan terpisah.</p>
+<p>Cuplikan mengikuti kebijakan lampiran tetapi tetap terpisah dari peralihan peristiwa langsung.
+Cuplikan tersebut tidak merekonstruksi pesan yang dihapus atau versi perantara yang terlewat. Anda dapat
+meminta cuplikan saat proses dijeda; lampiran apa pun yang masuk ke antrian akan menunggu hingga pengamatan dimulai
+dan proses pengunduhan berjalan.</p>
+<h2 id="attachment-handling">Penanganan lampiran<a class="anchor" href="#attachment-handling" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Pengunduhan lampiran diaktifkan secara default dan akan dihentikan sementara jika ruang disk kosong kurang dari 1 GiB. Pengumpul melakukan
+pengamatan pesan dan tugas pengunduhan secara bersamaan. Tugas tersebut mempertahankan deskriptor media
+asli dan kebijakan ukuran, sehingga lampiran yang diedit kemudian tidak akan diganti tanpa pemberitahuan.</p>
+<p>Pengunduhan dijalankan setelah penangkapan pesan. Pengunduhan yang selesai akan menghasilkan catatan <code>media.saved</code>
+beserta SHA-256 dan jumlah byte-nya. Pekerjaan yang dilewati, gagal, dicoba ulang, dan terputus
+memiliki hasil yang terpisah. Pekerjaan yang berada dalam antrian bukanlah bukti bahwa berkas tersebut telah disimpan.
+File yang telah selesai juga harus sesuai dengan jumlah byte dalam deskriptor lampiran asli yang diamati.
+Respons yang pendek atau panjang secara tak terduga tidak dicatat sebagai media yang telah disimpan.</p>
+<p>Batas disetel <strong>per jenis</strong>: foto, video, GIF dan animasi, pesan video bulat,
+pesan suara, musik dan audio, stiker, serta file. Setiap jenis dapat dinonaktifkan dan memiliki
+batas ukuran tersendiri mulai dari 1 hingga 2.000 MiB; ruang kerja baru dimulai dengan 20 MiB untuk foto,
+100 MiB untuk video, 50 MiB untuk file, audio, dan video bulat, 20 MiB untuk pesan suara dan GIF, serta
+5 MiB untuk stiker. <em>Batas ukuran file maksimum</em> berlaku untuk semua jenis sekaligus. Kebijakan yang disimpan sebelum
+penggunaan batas per jenis tetap mempertahankan batas tunggalnya untuk setiap jenis. Jenis yang dinonaktifkan menghasilkan
+catatan <code>media.skipped</code>; file dengan ukuran tidak diketahui atau melebihi batas tidak akan diunduh. File besar mendapatkan
+kecepatan unduh minimal 256 KiB/s. Tugas tetap berjalan setelah sistem di-restart, tetapi referensi yang kedaluwarsa, kehilangan
+akses, atau file yang dihapus tetap dapat menghalangi pemulihan. Tugas yang sudah ada mempertahankan kebijakan yang disimpan
+bersama tugas tersebut.</p>
+<h2 id="pause-lock-disconnect-and-restart">Jeda, kunci, putuskan sambungan, dan mulai ulang<a class="anchor" href="#pause-lock-disconnect-and-restart" aria-label="Tautan ke bagian ini">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Tindakan atau kondisi</th>
+<th>Efek</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Beralih ke ruang kerja</td>
+<td>Mengubah tampilan panel; pengumpul lainnya tetap mempertahankan statusnya.</td>
+</tr>
+<tr>
+<td>Kunci panel atau tutup tab</td>
+<td>Membiarkan server dan pemantauan tetap berjalan.</td>
+</tr>
+<tr>
+<td>Jeda pengamatan</td>
+<td>Menghentikan pengumpul tersebut dan mempertahankan pekerjaan lampiran yang sedang dalam antrian.</td>
+</tr>
+<tr>
+<td>Nonaktifkan sumber</td>
+<td>Menghentikan penangkapan berkala di masa mendatang; tugas media yang sedang dalam antrian akan ditunda selama fitur ini dinonaktifkan.</td>
+</tr>
+<tr>
+<td>Hapus sumber</td>
+<td>Mencatatnya sebagai sumber dan menghapus profil penggunanya; catatan yang sudah disimpan tetap berada di jurnal yang hanya dapat ditambahkan. Lampiran yang masih menunggu dicatat sebagai gagal (<code>source_removed</code>). Dalam mode folder dan akun keseluruhan, hal ini juga dikecualikan.</td>
+</tr>
+<tr>
+<td>Ubah rute koneksi</td>
+<td>Membutuhkan jeda, menutup klien lama, dan membatalkan proses login yang belum selesai.</td>
+</tr>
+<tr>
+<td>Hentikan proses Python</td>
+<td>Menghentikan semua ruang kerja; tidak ada pengamatan yang dilakukan saat alat ini dalam keadaan offline.</td>
+</tr>
+<tr>
+<td>Mulai ulang setelah pengamatan aktif</td>
+<td>Upaya untuk melanjutkan cakupan yang disimpan menggunakan sesi yang disimpan. Penundaan manual akan menghapus niat tersebut.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Pengumpul mencatat pemutusan koneksi yang terdeteksi, upaya ulang, kesalahan, proses mulai/berhenti, dan
+sinyal detak jantung. Gangguan singkat dapat terlewatkan oleh pemeriksaan konektivitas berkala.
+Setelah restart, pembaruan yang terlewat diminta mulai dari posisi pembaruan yang tersimpan dan
+obrolan yang dipantau diperiksa ulang secara berkala; lihat <a href="../evidence/#durable-collection-and-process-receipts-02">format bukti</a>. Sebuah snapshot memberikan konteks;
+hal ini tidak membuktikan bahwa celah tersebut telah diperbaiki.</p>
+<h2 id="account-isolation-and-verification">Isolasi dan verifikasi akun<a class="anchor" href="#account-isolation-and-verification" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Setiap ruang kerja memiliki jurnal, otorisasi, kunci penandatanganan, kebijakan, dan antrian tersendiri.
+Hanya klien yang aktif yang dapat menyumbangkan pengamatan secara langsung. Klien yang ditolak, dalam antrian,
+digantikan, dan sedang melakukan uji koneksi tidak dapat menulis pembaruan langsung ke dalam jurnalnya.
+Akun yang berbeda dapat mengamati grup yang sama, tetapi jurnal masing-masing tetap terpisah.</p>
+<p>Setiap peristiwa mencakup hash sebelumnya dan tanda tangan Ed25519. Ekspor mencakup
+seluruh jurnal ruang kerja melalui nomor urut tetap. Filter panel tidak menyaring
+ekspor; pengumpulan data mungkin berlanjut melampaui batasnya saat ekspor sedang disiapkan.</p>
+<p><strong>Jurnal verifikasi</strong> memeriksa rantai peristiwa dan tanda tangan melalui batas yang ditampilkan.
+Hasilnya akan dihapus saat ruang kerja berubah, dan panel akan mengidentifikasi
+catatan baru yang ditambahkan setelah pemeriksaan. Ekspor ZIP juga memverifikasi media yang dikumpulkan.</p>
+<p>Tanda tangan yang sah menjamin integritas relatif terhadap kunci tepercaya, bukan asal
+dari Telegram atau kebenaran isi pesan. Simpan sidik jari dan titik pemeriksaan secara terpisah. Lihat
+<a href="../evidence/">model bukti</a>, <a href="../operations/">operasi harian</a>, dan
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">prosedur penerimaan langsung</a> untuk persyaratan kepercayaan dan pengiriman.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/COLLECTION.md">Edit halaman ini di GitHub ↗</a><a class="next-guide" href="../operations/"><span>Langkah selanjutnya</span><strong>Alur kerja dan operasi →</strong></a><p>Panduan-panduan ini menjelaskan implementasi saat ini. Hasil validasi dan celah yang masih ada didokumentasikan secara terpisah. <a href="../verification/">Apa yang telah diuji →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Di halaman ini"><p class="nav-label">Di halaman ini</p><a href="#from-login-to-a-journal">Dari proses login hingga jurnal</a><a href="#observation-scope-chosen-chats-a-folder-or-the-whole-account">Cakupan pemantauan: obrolan yang dipilih, sebuah folder, atau seluruh akun</a><a href="#scope-and-event-selection">Ruang lingkup dan pemilihan peristiwa</a><a href="#own-actions">Tindakan sendiri</a><a href="#investigation-mode-joining-teams-and-talking-to-bots">Mode investigasi: bergabung dengan tim dan berkomunikasi dengan bot</a><a href="#recheck-tiers">Tingkat verifikasi ulang</a><a href="#message-history-and-attribution">Riwayat pesan dan atribusi</a><a href="#history-snapshots">Cuplikan riwayat</a><a href="#attachment-handling">Penanganan lampiran</a><a href="#pause-lock-disconnect-and-restart">Jeda, kunci, putuskan sambungan, dan mulai ulang</a><a href="#account-isolation-and-verification">Isolasi dan verifikasi akun</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Sumber terbuka · Dapat dijalankan di komputer Anda</span><a href="../../../../LICENSE">Lisensi MIT</a><a href="../notice/">Pemberitahuan operator</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Keamanan</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Menunggu pesan", "Step through a fictional send, edit and delete.": "Ikuti langkah demi langkah proses pengiriman, pengeditan, dan penghapusan fiktif.", "No observations yet. Start the sequence or advance one event.": "Belum ada catatan. Mulai urutan atau lanjutkan ke peristiwa berikutnya.", "Meet at 10:00": "Bertemu pukul 10.00", "A new message is visible in the chat.": "Sebuah pesan baru terlihat di obrolan.", "Record 1 appended: the collector observed the original message.": "Catatan 1 ditambahkan: pengumpul telah mengamati pesan asli.", "Meet at 11:00": "Bertemu pukul 11.00", "The current text changes. The earlier observation stays.": "Teks saat ini berubah. Pengamatan sebelumnya tetap berlaku.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Catatan 2 ditambahkan: pengeditan ini merupakan pengamatan baru. Catatan 1 masih memuat teks aslinya.", "Message deleted": "Pesan telah dihapus", "The message has disappeared from the chat view.": "Pesan tersebut telah menghilang dari tampilan obrolan.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Catatan 3 ditambahkan: pemberitahuan penghapusan disimpan bersama kedua versi yang teramati.", "0 records": "0 catatan", "1 record": "1 catatan", "2 records": "2 catatan", "3 records": "3 catatan", "Complete / {n} of 3": "Lengkap / {n} dari 3", "Step / {n} of 3": "Langkah / {n} dari 3", "Pause": "Jeda", "Replay sequence": "Urutan pemutaran ulang", "Play sequence": "Urutan pemutaran", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Contoh statis tersedia. Untuk menghitung hash secara interaktif, buka halaman ini melalui HTTPS atau pratinjau localhost yang mendukung Web Crypto.", "No record supplied": "Tidak ada catatan yang disediakan", "Tail removed": "Bagian akhir dihapus", "≠ saved hash": "≠ hash yang disimpan", "Rebuilt · different hash": "Dibangun ulang · hash berbeda", "= saved hash": "= hash yang disimpan", "Same length and matching head.": "Panjang yang sama dan judul yang sesuai.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Ketiga hash yang dihitung cocok dengan hash yang disimpan. Sampel ini sesuai dengan batas tiga catatan yang disimpan.", "Same saved head; the journal prefix fails verification.": "Header yang sama telah disimpan; awalan jurnal gagal diverifikasi.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Catatan 2 tidak lagi cocok dengan hash yang tersimpan. Memeriksa hanya head terakhir yang tersimpan akan melewatkan hal ini; verifikator memeriksa setiap catatan.", "Head differs from the retained checkpoint.": "Header berbeda dari checkpoint yang disimpan.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Hash yang dibangun ulang saling terhubung, tetapi header terakhir telah berubah. Titik pemeriksaan yang disimpan menolak riwayat ini. Tanda tangan asli juga akan gagal pada catatan yang diubah.", "Too short: 2 supplied records \u003c 3 retained records.": "Terlalu singkat: 2 catatan yang disediakan \u003c 3 catatan yang disimpan.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Kedua hash yang tersisa masih cocok. Titik pemeriksaan yang disimpan mengungkapkan bagian akhir yang hilang. Tanpa batas awal tersebut, awalan yang lebih pendek ini saja tidak akan mengungkapkan adanya penghilangan tersebut.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Perhitungan hash tidak tersedia di browser ini. Rumus dan penjelasan statis di bawah ini tetap tersedia.", "{n} records": "{n} catatan", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Diterima: jumlahnya bertambah, tanda tangan terverifikasi, dan kuncinya cocok. Saksi mempertahankan batas baru ini.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: jawaban yang ditandatangani melaporkan jumlah catatan yang lebih sedikit daripada titik pemeriksaan terakhir yang diterima. TgWitness mencatat masalah tersebut dan mempertahankan batas yang diterima sebelumnya.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: jumlahnya tidak berubah, tetapi cabangnya berbeda. Saksi mencatat ketidaksesuaian tersebut dan mempertahankan batas yang sebelumnya telah disetujui.", "No answer": "Tidak ada jawaban", "boundary unknown": "batas tidak diketahui", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Tidak ada respons: TgWitness mencatat kegagalan pemeriksaan tersebut. TgWitness tidak dapat memastikan status terkini dari pengumpul data. Jika TgWitness masih dapat mengakses Bot API dan kebijakan publikasinya mengizinkan, TgWitness dapat mempublikasikan kegagalan tersebut.", "Send {n}": "Kirim {n}", "Edit {n}": "Edit {n}", "Delete {n}": "Hapus {n}", "Both accounts captured all six expected observations in this example.": "Kedua akun tersebut berhasil menangkap keenam pengamatan yang diharapkan dalam contoh ini.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Akun B masih berhasil menangkap 6 dari 6 pesan. Dua tanda terima membutuhkan waktu lebih lama. Rasio penangkapan dan penundaan tanda terima menjawab pertanyaan yang berbeda.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Akun B berhasil menangkap 5 dari 6 pesan sebelum batas waktu (83,3%). Pengeditan yang hilang tidak memiliki penundaan yang terukur. Hasil ini hanya menggambarkan enam tindakan yang dikendalikan.", "not observed by cutoff": "tidak terdeteksi pada batas waktu", "{s} seconds": "{s} detik", "Exact values follow in the table.": "Nilai-nilai yang tepat tercantum dalam tabel berikut.", "{s} s": "{s} s", "Not observed": "Tidak teramati", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Empat obrolan memberikan pengamatan yang berbeda-beda. Ikuti catatan sumber untuk setiap koneksi; jangan mengaitkan posting saluran tersebut dengan pengguna 71001 tanpa pengirim yang teridentifikasi.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Catatan #146 dan #205 menunjukkan ID pengirim yang sama, yaitu 71001. Hal ini menghubungkan postingan yang teramati dari sebuah akun Telegram di dua obrolan. Catatan ini tidak mengidentifikasi orang di dunia nyata atau mengaitkan postingan tersebut dengan saluran tertentu.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Tautan tujuan pay.example.invalid/new muncul dalam catatan grup #146, keyboard bot #173, pengeditan saluran #188, dan pesan pribadi #205. Tautan tujuan yang berulang menghubungkan materi tersebut; hal ini tidak membuktikan adanya kendali bersama atas akun-akun tersebut.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Tanda terima media yang telah diselesaikan #151 dan #209 memiliki nilai SHA-256 lengkap yang sama dalam kasus fiktif ini. Bandingkan byte yang sebenarnya dan catatan pesan yang terkait. File yang cocok tersebut tidak mengidentifikasi pembuatnya atau membuktikan siapa yang meneruskannya.", "the encrypted off-site copy": "salinan terenkripsi di luar lokasi", "notifications": "pemberitahuan", "checkpoint hashes for timestamps": "hash checkpoint untuk cap waktu", "signed checkpoints for the witness": "titik pemeriksaan yang ditandatangani untuk saksi", "Switched on in this example": "Diaktifkan dalam contoh ini", "Optional · off by default": "Opsional · dinonaktifkan secara default", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Yang tersisa di mesin ini: koneksi Telegram dan {list}. Tidak ada yang lain.", "Default: only the Telegram connection leaves this machine.": "Pengaturan default: hanya koneksi Telegram yang keluar dari mesin ini.", "{done} of {total} done": "{done} dari {total} selesai", "Mark step {n} as done": "Tandai langkah {n} sebagai selesai", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Teks", "Copied": "Disalin", "Command copied.": "Perintah telah disalin.", "Selected — Ctrl/Cmd+C": "Pilih — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Perintah telah dipilih. Salin secara manual.", "Command copied to clipboard.": "Perintah telah disalin ke papan klip.", "Select text": "Pilih teks", "Clipboard unavailable. Command selected; copy it manually.": "Clipboard tidak tersedia. Perintah telah dipilih; salin secara manual.", "A message arrives. The first observation is saved.": "Sebuah pesan masuk. Pengamatan pertama disimpan.", "The time changes. Both captured versions stay.": "Waktu berubah. Kedua versi yang terekam tetap ada.", "The message disappears. The captured history remains.": "Pesan tersebut menghilang. Riwayat yang terekam tetap ada.", "Pause example animation": "Jeda animasi contoh", "Play example animation": "Putar animasi contoh", "Play": "Putar", "Full-size workspace screenshot": "Tangkapan layar ruang kerja ukuran penuh", "Workspace screenshot · fictional data": "Tangkapan layar ruang kerja · data fiktif", "Close": "Tutup", "Close screenshot": "Tutup tangkapan layar", "Scrollable full-size screenshot": "Tangkapan layar ukuran penuh yang dapat digulir", "Enlarge: {name}": "Perbesar: {name}", "View full size": "Lihat ukuran penuh"}</script>
+</body></html>

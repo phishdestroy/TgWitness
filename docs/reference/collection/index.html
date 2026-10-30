@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>How collection works | TgWitness</title>
+<meta name="description" content="Observation scope, live updates, rechecks, attachments, own actions and what a gap means, record by record."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/docs/reference/collection/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="How collection works | TgWitness"><meta property="og:description" content="Observation scope, live updates, rechecks, attachments, own actions and what a gap means, record by record.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/docs/reference/collection/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/collection/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/collection/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/collection/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/collection/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/collection/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/collection/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/collection/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/collection/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/collection/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/collection/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/docs/reference/collection/", "url": "https://phishdestroy.github.io/TgWitness/docs/reference/collection/", "name": "How collection works | TgWitness", "description": "Observation scope, live updates, rechecks, attachments, own actions and what a gap means, record by record.", "inLanguage": "en", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://phishdestroy.github.io/TgWitness/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://phishdestroy.github.io/TgWitness/docs/"}, {"@type": "ListItem", "position": 3, "name": "Reference", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "How collection works", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/collection/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../docs.css">
+<link rel="stylesheet" href="../../../learn.css">
+<script src="../../../docs.js" defer></script>
+<script src="../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Documentation</span></a>
+<nav aria-label="Guides"><a href="../../concepts/">Visual guide</a><a href="../../">All guides</a><a href="../">Reference</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Language"><span aria-hidden="true">◍</span> English</summary><div class="lang-list"><a href="./" hreflang="en" lang="en" aria-current="true">English</a><a href="../../../ru/docs/reference/collection/" hreflang="ru" lang="ru">Русский</a><a href="../../../uk/docs/reference/collection/" hreflang="uk" lang="uk">Українська</a><a href="../../../es/docs/reference/collection/" hreflang="es" lang="es">Español</a><a href="../../../pt/docs/reference/collection/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../tr/docs/reference/collection/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../ar/docs/reference/collection/" hreflang="ar" lang="ar">العربية</a><a href="../../../fa/docs/reference/collection/" hreflang="fa" lang="fa">فارسی</a><a href="../../../ur/docs/reference/collection/" hreflang="ur" lang="ur">اردو</a><a href="../../../hi/docs/reference/collection/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../id/docs/reference/collection/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../vi/docs/reference/collection/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../zh/docs/reference/collection/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Switch between light and dark theme"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Guides"><a href="../../../guides/modes.html">Modes, scenarios and evidence levels</a><p class="nav-label">First steps</p><a href="../../start/">Start in minutes</a><a href="../../accounts/">Connect an account</a><a href="../../proxies/">Choose a proxy</a><a href="../../exports/">Export and verify</a><p class="nav-label">Understand the evidence</p><a href="../../concepts/">See how evidence works</a><a href="../../cases/">Investigate across all chats</a><a href="../../security/">Keep it secure</a><p class="nav-label">Go further</p><a href="../../witness/">Set up a witness bot</a><a href="../../server/">Keep it running</a><a href="../../troubleshooting/">Find what went wrong</a></nav><nav class="wiki-nav" aria-label="Reference"><p class="nav-label"><a class="nav-label-link" href="../">Reference</a></p><details class="wiki-group"><summary>Set up</summary><a href="../quickstart/">Quick start</a><a href="../accounts/">Accounts and session formats</a><a href="../connection/">Connection, proxies and data protection</a><a href="../deployment/">Deployment</a></details><details class="wiki-group" open><summary>Collect</summary><a href="./" aria-current="page">How collection works</a><a href="../operations/">Workflows and operations</a><a href="../investigation/">Investigation mode</a><a href="../features/">Features and limits</a></details><details class="wiki-group"><summary>Evidence</summary><a href="../how-it-works/">How the evidence works</a><a href="../evidence/">Evidence format</a><a href="../witness/">Independent witness</a><a href="../timestamp/">Timestamps</a></details><details class="wiki-group"><summary>Security & project</summary><a href="../security/">Security and data handling</a><a href="../architecture/">Architecture</a><a href="../verification/">What has been tested</a><a href="../license/">Licence and architectural incompatibility notice</a><a href="../notice/">Operator incompatibility notice</a><a href="../changelog/">Changelog</a></details></nav><p class="sidebar-note">v0.7.0<br>Open source · Runs on your machine</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Guides"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Documentation</a> <span aria-hidden="true">/</span> <a href="../">Reference</a> <span aria-hidden="true">/</span> <span aria-current="page">How collection works</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Search the documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Try proxy, hash chain, token or witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Clear search" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Type a word to search the guides and the reference. Search stays in your browser.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Reference / Collect</p><h1>How collection works</h1><p class="guide-outcome">Observation scope, live updates, rechecks, attachments, own actions and what a gap means, record by record.</p><div class="wiki-body"><p>TgWitness records what a connected Telegram account observes. The journal preserves
+those observations, their sequence, and the context supplied with them. It does
+not infer unseen actions from a missing message or from an account being connected.</p>
+<h2 id="from-login-to-a-journal">From login to a journal<a class="anchor" href="#from-login-to-a-journal" aria-label="Link to this section">#</a></h2>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 691 360" width="691" height="360" role="img" aria-labelledby="flow-1-title flow-1-desc"><title id="flow-1-title">Flow diagram</title><desc id="flow-1-desc">Authorize a user account → Select accessible groups and channels; Select accessible groups and channels → Save event and attachment settings; Save event and attachment settings → Start observation; Start observation → Receive updates from the active client; Receive updates from the active client → Apply source and event policy; Apply source and event policy → Append a signed observation; Append a signed observation → Review or export the journal; Append a signed observation → Process any queued attachment; Process any queued attachment → Append the download outcome</desc><defs><marker id="flow-1-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M189.1 37.0C227.6 37.0 227.6 37.0 266.2 37.0" marker-end="url(#flow-1-arrow)" style="--i:0;--len:77" pathLength="77"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M189.1 37.0C227.6 37.0 227.6 37.0 266.2 37.0"/></circle><path class="flow-edge" d="M425.3 37.0C458.6 37.0 458.6 37.0 491.9 37.0" marker-end="url(#flow-1-arrow)" style="--i:1;--len:67" pathLength="67"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M425.3 37.0C458.6 37.0 458.6 37.0 491.9 37.0"/></circle><path class="flow-edge" d="M571.5 66.0C571.5 95.5 571.5 95.5 571.5 125.0" marker-end="url(#flow-1-arrow)" style="--i:2;--len:59" pathLength="59"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M571.5 66.0C571.5 95.5 571.5 95.5 571.5 125.0"/></circle><path class="flow-edge" d="M498.9 145.0C463.8 145.0 463.8 145.0 428.7 145.0" marker-end="url(#flow-1-arrow)" style="--i:3;--len:70" pathLength="70"/><circle class="flow-pulse" r="3.2" style="--i:3"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M498.9 145.0C463.8 145.0 463.8 145.0 428.7 145.0"/></circle><path class="flow-edge" d="M262.7 145.0C236.3 145.0 236.3 145.0 209.8 145.0" marker-end="url(#flow-1-arrow)" style="--i:4;--len:53" pathLength="53"/><circle class="flow-pulse" r="3.2" style="--i:4"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M262.7 145.0C236.3 145.0 236.3 145.0 209.8 145.0"/></circle><path class="flow-edge" d="M119.9 174.0C119.9 216.5 119.9 216.5 119.9 259.0" marker-end="url(#flow-1-arrow)" style="--i:5;--len:85" pathLength="85"/><circle class="flow-pulse" r="3.2" style="--i:5"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M119.9 174.0C119.9 216.5 119.9 216.5 119.9 259.0"/></circle><path class="flow-edge" d="M185.7 288.0C224.2 288.0 224.2 253.0 262.7 253.0" marker-end="url(#flow-1-arrow)" style="--i:6;--len:87" pathLength="87"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M185.7 288.0C224.2 288.0 224.2 253.0 262.7 253.0"/></circle><path class="flow-edge" d="M185.7 288.0C227.6 288.0 227.6 323.0 269.6 323.0" marker-end="url(#flow-1-arrow)" style="--i:6;--len:93" pathLength="93"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M185.7 288.0C227.6 288.0 227.6 323.0 269.6 323.0"/></circle><path class="flow-edge" d="M421.8 323.0C456.9 323.0 456.9 288.0 491.9 288.0" marker-end="url(#flow-1-arrow)" style="--i:7;--len:81" pathLength="81"/><circle class="flow-pulse" r="3.2" style="--i:7"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M421.8 323.0C456.9 323.0 456.9 288.0 491.9 288.0"/></circle><g class="flow-node" style="--i:0"><rect x="50.7" y="8.0" width="138.4" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="28.0">Authorize a user</tspan><tspan x="119.9" y="46.0">account</tspan></text></g><g class="flow-node" style="--i:1"><rect x="266.2" y="8.0" width="159.1" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="28.0">Select accessible</tspan><tspan x="345.7" y="46.0">groups and channels</tspan></text></g><g class="flow-node" style="--i:2"><rect x="491.9" y="8.0" width="159.1" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="28.0">Save event and</tspan><tspan x="571.5" y="46.0">attachment settings</tspan></text></g><g class="flow-node" style="--i:3"><rect x="498.9" y="125.0" width="145.3" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="145.0">Start observation</tspan></text></g><g class="flow-node" style="--i:4"><rect x="262.7" y="116.0" width="166.0" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="136.0">Receive updates from</tspan><tspan x="345.7" y="154.0">the active client</tspan></text></g><g class="flow-node" style="--i:5"><rect x="30.0" y="116.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="136.0">Apply source and event</tspan><tspan x="119.9" y="154.0">policy</tspan></text></g><g class="flow-node" style="--i:6"><rect x="54.2" y="259.0" width="131.5" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="279.0">Append a signed</tspan><tspan x="119.9" y="297.0">observation</tspan></text></g><g class="flow-node" style="--i:7"><rect x="262.7" y="224.0" width="166.0" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="244.0">Review or export the</tspan><tspan x="345.7" y="262.0">journal</tspan></text></g><g class="flow-node" style="--i:7"><rect x="269.6" y="294.0" width="152.2" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="314.0">Process any queued</tspan><tspan x="345.7" y="332.0">attachment</tspan></text></g><g class="flow-node" style="--i:8"><rect x="491.9" y="259.0" width="159.1" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="279.0">Append the download</tspan><tspan x="571.5" y="297.0">outcome</tspan></text></g></svg></div><details class="flow-steps"><summary>Diagram as text</summary><ol><li>Authorize a user account → Select accessible groups and channels</li><li>Select accessible groups and channels → Save event and attachment settings</li><li>Save event and attachment settings → Start observation</li><li>Start observation → Receive updates from the active client</li><li>Receive updates from the active client → Apply source and event policy</li><li>Apply source and event policy → Append a signed observation</li><li>Append a signed observation → Review or export the journal</li><li>Append a signed observation → Process any queued attachment</li><li>Process any queued attachment → Append the download outcome</li></ol></details></figure>
+<p>Authorization, access to a source, a running collector, and complete delivery are
+different questions. A successful login does not grant access to every group.
+A connected transport does not establish that every relevant update arrived.</p>
+<h2 id="observation-scope-chosen-chats-a-folder-or-the-whole-account">Observation scope: chosen chats, a folder or the whole account<a class="anchor" href="#observation-scope-chosen-chats-a-folder-or-the-whole-account" aria-label="Link to this section">#</a></h2>
+<p>Sources → <strong>Observation scope</strong> decides which chats a workspace records.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Records</th>
+<th>New chats</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chosen chats (default)</td>
+<td>Only the chats you add by hand</td>
+<td>Never added automatically</td>
+</tr>
+<tr>
+<td>Telegram folder</td>
+<td>Chats in one of the account's folders: chats included by name, plus the folder's categories (contacts, non-contacts, groups, channels, bots), minus its excluded chats and, if the folder says so, archived chats</td>
+<td>Matching chats are added as soon as they become active; chats you add to the folder in Telegram are picked up within an hour</td>
+</tr>
+<tr>
+<td>Whole account</td>
+<td>Every chat the account sees</td>
+<td>Every new chat, group, private chat or bot is added the moment its first update arrives</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>Source types</strong> (channels, groups, private chats, bots) narrow the folder and
+    whole-account modes. Chosen chats can be of any type, including private chats and bots.</li>
+<li><strong>Excluded chats</strong> are never recorded, in any mode. In folder and whole-account modes,
+    <em>Exclude</em> and <em>Remove</em> on a source put it on this list, so the scope does not add it again.
+    Choosing the chat again by hand (in Sources or from Chats) takes it off the list. The list
+    holds up to 5,000 chats; past that, <em>Remove</em> is refused and the chat can be paused instead.</li>
+<li><strong>Own actions</strong> (on by default): messages this account sends, its edits and its
+    reply-keyboard button presses. Turned off, outgoing messages and edits are skipped.</li>
+<li>Switching to a folder or the whole account asks for confirmation: these modes record
+    private chats and messages of third parties and belong on a dedicated account only.
+    The confirmation and every scope change are signed <code>scope.changed</code> records.</li>
+<li>Chats added by the scope appear as sources marked <em>auto</em>, recorded as <code>scope.applied</code>
+    (at start and hourly) or <code>source.discovered</code> (a new chat while observing). Switching back
+    to chosen chats pauses every automatically added source.</li>
+</ul>
+<p>What these modes cannot do:</p>
+<ul>
+<li><strong>Secret chats</strong> are end-to-end encrypted between two devices and never reach
+    TgWitness, in any mode.</li>
+<li><strong>Nothing is recorded while TgWitness is not running.</strong> After a restart it asks Telegram
+    for missed updates and rechecks chats, but Telegram does not return everything after long
+    outages. Reports and <code>verify.py</code> show such periods as gaps (see <a href="../evidence/#coverage-continuity-gaps-and-unobserved-ids">coverage</a>).</li>
+<li>Only the first 1,000 dialogs are listed at start (the limit is under <strong>Parameters</strong>); older
+    chats are added when they next become active. The earlier history of an added chat is not fetched — take a history
+    snapshot or a full chat export when you need it.</li>
+<li>Folder conditions that change all the time (muted, read) are not applied: such chats
+    stay observed.</li>
+<li><strong>Inline (callback) bot buttons</strong> pressed in another app are invisible to a second
+    session; the bot's reply or edit is recorded. Reply-keyboard presses arrive as outgoing
+    messages and are labeled <code>button_press</code>.</li>
+<li>More chats mean more requests. Telegram restricts accounts for volume it considers
+    excessive, which is one more reason to use dedicated accounts.</li>
+</ul>
+<h2 id="scope-and-event-selection">Scope and event selection<a class="anchor" href="#scope-and-event-selection" aria-label="Link to this section">#</a></h2>
+<p>Each workspace has its own sources. TgWitness does not join groups, accept
+invitations, or enumerate every member automatically. Sources must already be
+accessible to the account. At startup, the collector checks selected sources
+against the account's visible dialogs; the first 1,000 dialogs are inspected unless
+<strong>Parameters → Chats read from the account's list</strong> says otherwise.
+An absent source is marked <strong>access unconfirmed</strong>, not assumed to have removed you.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Collects</th>
+<th>Effect when disabled</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>New messages</td>
+<td>Ordinary delivered messages</td>
+<td>Later edits/deletions may have no earlier captured text to compare.</td>
+</tr>
+<tr>
+<td>Edits</td>
+<td>Delivered edited message versions</td>
+<td>Intermediate changes are not reconstructed later.</td>
+</tr>
+<tr>
+<td>Deletions</td>
+<td>Scoped deletion notices and unscoped account-level notices</td>
+<td>Deletion notices are not added to the journal.</td>
+</tr>
+<tr>
+<td>Reactions</td>
+<td>Delivered reaction snapshots</td>
+<td>Separate reaction updates are not added.</td>
+</tr>
+<tr>
+<td>Membership</td>
+<td>Delivered membership service messages and participant updates</td>
+<td>Those membership observations are not added.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Settings apply to all selected sources in the workspace. Save the form to apply
+changes; changes are recorded with signed before/after values. Disabling a category
+does not remove earlier records. Re-enabling it does not backfill missed updates.</p>
+<p>Operational records and other group service events remain separate from these
+switches. Membership service messages can create message records when membership
+is enabled even if ordinary new-message capture is disabled. Captured Telegram
+objects retain embedded metadata; a switch is not a redaction rule.</p>
+<p><strong>Deletions in private chats and ordinary groups</strong> arrive as message IDs without a chat.
+These chats share one account-wide message ID sequence, so when a message with that ID was
+saved earlier, its chat is known: the deletion is recorded in that chat with
+<code>chat_resolution</code> explaining how. IDs never saved stay an <strong>unscoped deletion</strong> with an
+explicit unknown source; the collector does not guess. Telegram never says who deleted a
+message; when the deleted message was sent by this account, the record says so
+(<code>deleted_message_was_outgoing</code>) without naming a deleter.</p>
+<h2 id="own-actions">Own actions<a class="anchor" href="#own-actions" aria-label="Link to this section">#</a></h2>
+<p>Messages sent by the observed account are labeled <code>outgoing</code>. An edit of an outgoing
+message notes that in private chats and groups only its author can edit it, while channel
+posts can be edited by other admins. When an outgoing message repeats the text of a button
+from the newest saved reply keyboard in that chat, it carries <code>button_press</code> with a link to
+the keyboard's record.</p>
+<p>Excluding own actions also applies to background rechecks and automatic new-chat history.
+Skipped outgoing messages advance the recheck position so they cannot block later incoming
+messages. Explicit panel actions and manually requested history snapshots remain recorded.</p>
+<h2 id="investigation-mode-joining-teams-and-talking-to-bots">Investigation mode: joining teams and talking to bots<a class="anchor" href="#investigation-mode-joining-teams-and-talking-to-bots" aria-label="Link to this section">#</a></h2>
+<p><strong>Sources → Observation scope → Investigation mode</strong> prepares the scope for a dedicated
+account that joins team chats, starts bots and writes to them: the whole account, every
+source type, own actions, and for every chat or bot that appears its profile and its latest
+200 visible messages. Review the form and press <strong>Save scope</strong>; the switch to the whole
+account asks for the usual confirmation.</p>
+<ul>
+<li><strong>Buttons.</strong> Buttons under a message are kept with it and shown in <strong>Chats</strong>: links, web
+    apps, login links, texts to copy, callback data, inline queries, requests for a phone
+    number or location. Links are shown as text and never opened by the panel. When a bot
+    changes only the buttons (a new payment link), that is a new version of the message, both
+    from live updates and from rechecks.</li>
+<li>
+<p><strong>New chats and bots.</strong> In folder and whole-account modes, <strong>When a new chat or bot
+    appears</strong> saves, right after it appears:</p>
+<ul>
+<li>its profile as a <code>source.profile</code> record: bot description and commands, the about text
+    of a user, group or channel, members, linked chat and invite link when Telegram returns
+    one;</li>
+<li>its latest visible messages (up to 1,000) as a history snapshot marked <code>new_chat</code>: the
+    earlier messages of a team chat just joined, or what a bot said before observation
+    noticed the chat. Messages already saved live are not repeated.</li>
+</ul>
+<p>Chats already in the list when the mode is switched on are added without snapshots.
+A FloodWait pauses this work and it resumes afterwards; failures are recorded and live
+recording of the chat continues.
+- <strong>Profiles on request.</strong> <strong>Chats → Profile → Save profile now</strong> saves the current profile
+of any source; the newest one is shown above the messages.
+- <strong>Not visible.</strong> Inline (callback) buttons pressed in another Telegram app, the popup or
+link a bot answers such a press with, and invite links used in another app do not reach
+TgWitness. What the bot sends or edits afterwards is recorded.</p>
+</li>
+</ul>
+<h3 id="act-from-the-panel">Act from the panel<a class="anchor" href="#act-from-the-panel" aria-label="Link to this section">#</a></h3>
+<p><strong>Chats</strong> now includes a mini-client using the selected workspace's Telegram account:</p>
+<ul>
+<li>Write a plain-text message or choose <strong>Reply</strong> under a saved message. The returned outgoing
+    message is recorded even when the scope excludes outgoing updates.</li>
+<li>Press <strong>Press button</strong> under a current callback or text button. The server fetches the
+    message again and refuses the action if the keyboard differs from the saved version.
+    Callback receipts retain Telegram's popup text, alert flag and URL; the answer is also shown
+    below the conversation. URLs remain selectable text and are not opened automatically.</li>
+<li>Expand <strong>Open Telegram link</strong>, enter <code>@username</code>, a public <code>https://t.me/name</code> link,
+    <code>https://t.me/+invite</code> / <code>joinchat/invite</code>, or a bot link with <code>?start=parameter</code>, and press
+    <strong>Save preview</strong>. The original link and Telegram's preview are signed before joining.
+    <strong>Join / open and observe</strong> then joins the group/channel or opens the user/bot, adds the
+    chat as an enabled source, and sends <code>/start</code> to a bot, including its start parameter.
+    A join request awaiting administrator approval is recorded as pending, not as membership.</li>
+</ul>
+<p>Turn on <strong>Start observation</strong> to capture incoming replies live. Panel actions work while
+observation is paused, but only their direct responses are then guaranteed to be saved.
+Newly added sources use the configured profile/history intake when observation is running.
+When a source is paused, enable it in <strong>Sources</strong> before sending or pressing its buttons.</p>
+<p><code>interaction.preview</code>, <code>interaction.requested</code> and <code>interaction.result</code> are ordinary signed
+journal events included in evidence exports. Requests identify the account, message/button
+or preview record and whether observation was running. Receipts distinguish success,
+rejection, approval pending and an unknown outcome. An interrupted request may have reached
+Telegram: check the chat before starting a new action. Reusing a request ID retrieves its
+saved receipt without repeating the action, including after restart. The panel retains the
+ID after an ambiguous response for the same action during the current page session.
+It also retains that ID when refreshing the view fails after a successful action: the receipt
+stays visible, and clicking again retrieves it. Callback and join RPCs have one application
+attempt; retryable reads keep their configured retry policy. Switching chats immediately
+clears the draft and reply target and disables sending until the new conversation loads.</p>
+<p>This mini-client handles text and callback buttons. Web apps, login/phone/location requests,
+payments, inline queries and attachments still require a Telegram client; their saved button
+metadata remains visible. The new controls use English text.</p>
+<h2 id="recheck-tiers">Recheck tiers<a class="anchor" href="#recheck-tiers" aria-label="Link to this section">#</a></h2>
+<p>Rechecks ask Telegram again for missed messages, edits and messages it no longer returns.
+Sources marked with a star are <strong>priority</strong> sources, rechecked every 15 minutes by default;
+all other sources every 6 hours. Chosen chats start as priority sources, chats added by a
+folder or the whole account as regular ones. At most 30 sources are rechecked per pass and
+the rest wait for the next minute; after a reconnect, priority sources go first. Both
+intervals are set under Sources → Recording settings → Recheck (0 turns a tier off) and are
+recorded as <code>recheck.changed</code>.</p>
+<p>Missed messages are fetched upward from where the previous pass stopped, at most
+<strong>Parameters → new messages per recheck</strong> (1,000 by default) per pass. After a long stop the
+recheck therefore fills the whole gap, even when live messages newer than the gap were saved
+first. A chat that is still catching up is rechecked again on the next minute instead of
+waiting for its tier interval; <code>recheck.completed</code> shows <code>continues_after</code> until it is done.</p>
+<p>Comparisons include message text, entities, keyboards (including removal), and attachment
+content/identity. Changing file access hashes or file references alone does not create an
+edit, nor does what Telegram fills in on its own: a link preview loading, story views, paid
+media unlocked by this account, an invoice's receipt. Each saved version in Chats links to its full journal record, including media metadata.</p>
+<h2 id="message-history-and-attribution">Message history and attribution<a class="anchor" href="#message-history-and-attribution" aria-label="Link to this section">#</a></h2>
+<p>Suppose the collector observes “Meeting at 10:00,” later sees “Meeting at 11:00,”
+and then receives a deletion notice. It appends three distinct observations. The
+original text remains, the edit is a separate version, and the notice records that
+a deletion was observed.</p>
+<p>If collection began after the first version disappeared, that text is unavailable.
+If several edits occurred while the process was offline, only subsequently observed
+versions can be saved. A deletion notice cannot recover content never captured.</p>
+<p>The message sender is not automatically the editor. Telegram usually does not
+supply the person who deleted a message or the exact deletion time. Unknown actors
+stay unknown. Reaction snapshots and participant updates contain only the counts
+and identities Telegram makes visible to the account.</p>
+<p>Sequence numbers express observation order. The collector's UTC timestamp is its
+local clock; a Telegram source timestamp is stored separately when supplied.
+Neither is an independent trusted timestamp.</p>
+<h2 id="history-snapshots">History snapshots<a class="anchor" href="#history-snapshots" aria-label="Link to this section">#</a></h2>
+<p>A snapshot requests the latest visible messages from an enabled source, up to
+500 per request. Results are labeled as history observations. They can overlap
+with live capture, and repeated observations are kept as separate records.</p>
+<p>Snapshots follow the attachment policy but remain separate from live-event switches.
+They do not reconstruct deleted messages or missed intermediate versions. You can
+request one while paused; any attachments it queues wait until observation starts
+and the download worker runs.</p>
+<h2 id="attachment-handling">Attachment handling<a class="anchor" href="#attachment-handling" aria-label="Link to this section">#</a></h2>
+<p>Attachment download is on by default and pauses below 1 GiB of free disk. The collector commits the
+message observation and download job together. The job retains the original media
+descriptor and size policy, so a later edited attachment is not silently substituted.</p>
+<p>Downloads run after message capture. A completed download creates a <code>media.saved</code>
+record with its SHA-256 and byte count. Skipped, failed, retried, and interrupted
+work has separate outcomes. A queued job is not proof that the file was preserved.
+The completed file must also match the byte count in the original observed attachment
+descriptor. A short or unexpectedly long response is not recorded as preserved media.</p>
+<p>Limits are set <strong>per type</strong>: photos, videos, GIFs and animations, round video messages,
+voice messages, music and audio, stickers, and files. Each type can be turned off and has
+its own size limit from 1 to 2,000 MiB; new workspaces start with 20 MiB for photos,
+100 MiB for videos, 50 MiB for files, audio and round videos, 20 MiB for voice and GIFs and
+5 MiB for stickers. <em>Maximum file size</em> sets every type at once. Policies saved before
+per-type limits keep their single limit for every type. A type turned off produces a
+<code>media.skipped</code> record; unknown-size or oversized files are not downloaded. Large files get
+download time for at least 256 KiB/s. Jobs survive restart, but expired references, lost
+access, or deleted files can still prevent recovery. Existing jobs retain the policy saved
+with them.</p>
+<h2 id="pause-lock-disconnect-and-restart">Pause, lock, disconnect, and restart<a class="anchor" href="#pause-lock-disconnect-and-restart" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Action or condition</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Switch workspace</td>
+<td>Changes the panel view; other collectors keep their state.</td>
+</tr>
+<tr>
+<td>Lock the panel or close a tab</td>
+<td>Leaves the server and observation running.</td>
+</tr>
+<tr>
+<td>Pause observation</td>
+<td>Stops that collector and preserves queued attachment work.</td>
+</tr>
+<tr>
+<td>Disable a source</td>
+<td>Stops future scoped capture; queued media jobs for it wait while it is disabled.</td>
+</tr>
+<tr>
+<td>Remove a source</td>
+<td>Forgets it as a source and deletes its people profiles; records already saved stay in the append-only journal. Its attachments still waiting are recorded as failed (<code>source_removed</code>). In folder and whole-account modes it is also excluded.</td>
+</tr>
+<tr>
+<td>Change the connection route</td>
+<td>Requires a pause, closes old clients, and cancels unfinished login.</td>
+</tr>
+<tr>
+<td>Stop the Python process</td>
+<td>Stops all workspaces; no observations are made while it is offline.</td>
+</tr>
+<tr>
+<td>Restart after active observation</td>
+<td>Attempts to resume the saved scope using the saved session. A manual pause clears that intent.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The collector records detected disconnects, retries, errors, starts/stops, and
+heartbeats. Short interruptions can be missed by periodic connectivity checks.
+After a restart, missed updates are requested from the saved update position and
+observed chats are rechecked periodically; see <a href="../evidence/#durable-collection-and-process-receipts-02">evidence format</a>. A snapshot provides context;
+it does not prove that a gap was repaired.</p>
+<h2 id="account-isolation-and-verification">Account isolation and verification<a class="anchor" href="#account-isolation-and-verification" aria-label="Link to this section">#</a></h2>
+<p>Each workspace has its own journal, authorization, signing key, policy, and queue.
+Only its active client can contribute live observations. Rejected, pending,
+superseded, and connection-test clients cannot write live updates into its journal.
+Different accounts can observe the same group, but their journals remain separate.</p>
+<p>Each event includes the previous hash and an Ed25519 signature. Exports cover the
+whole workspace journal through a fixed sequence number. Panel filters do not filter
+the export; collection may continue beyond its boundary while it is being prepared.</p>
+<p><strong>Verify journal</strong> checks the event chain and signatures through the displayed
+boundary. Its result is cleared when the workspace changes, and the panel identifies
+new records added after the check. ZIP export also verifies collected media.</p>
+<p>A valid signature establishes integrity relative to the trusted key, not Telegram
+origin or truthful content. Retain fingerprints and checkpoints independently. See
+the <a href="../evidence/">evidence model</a>, <a href="../operations/">daily operations</a>, and
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">live acceptance procedure</a> for trust and delivery requirements.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/COLLECTION.md">Edit this page on GitHub ↗</a><a class="next-guide" href="../operations/"><span>Next step</span><strong>Workflows and operations →</strong></a><p>These guides describe the current implementation. Validation results and remaining gaps are documented separately. <a href="../verification/">What has been tested →</a></p></footer>
+</main>
+<aside class="toc" aria-label="On this page"><p class="nav-label">On this page</p><a href="#from-login-to-a-journal">From login to a journal</a><a href="#observation-scope-chosen-chats-a-folder-or-the-whole-account">Observation scope: chosen chats, a folder or the whole account</a><a href="#scope-and-event-selection">Scope and event selection</a><a href="#own-actions">Own actions</a><a href="#investigation-mode-joining-teams-and-talking-to-bots">Investigation mode: joining teams and talking to bots</a><a href="#recheck-tiers">Recheck tiers</a><a href="#message-history-and-attribution">Message history and attribution</a><a href="#history-snapshots">History snapshots</a><a href="#attachment-handling">Attachment handling</a><a href="#pause-lock-disconnect-and-restart">Pause, lock, disconnect, and restart</a><a href="#account-isolation-and-verification">Account isolation and verification</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Open source · Runs on your machine</span><a href="../../../LICENSE">MIT license</a><a href="../notice/">Operator notice</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Security</a></footer>
+<script id="site-dict" type="application/json">{}</script>
+</body></html>

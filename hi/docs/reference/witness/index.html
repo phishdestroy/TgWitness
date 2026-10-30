@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="hi" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>स्वतंत्र गवाह | TgWitness</title>
+<meta name="description" content="अपनी कुंजी और बॉट के साथ एक विटनेस चलाएँ, एक चैनल पर हस्ताक्षरित चेकपॉइंट प्रकाशित करें और उनके विरुद्ध एक्सपोर्ट्स की जाँच करें।"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/witness/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="hi_IN">
+<meta property="og:title" content="स्वतंत्र गवाह | TgWitness"><meta property="og:description" content="अपनी कुंजी और बॉट के साथ एक विटनेस चलाएँ, एक चैनल पर हस्ताक्षरित चेकपॉइंट प्रकाशित करें और उनके विरुद्ध एक्सपोर्ट्स की जाँच करें।">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/hi/docs/reference/witness/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/witness/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/witness/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/witness/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/witness/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/witness/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/witness/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/witness/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/witness/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/witness/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/witness/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/witness/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/witness/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/hi/docs/reference/witness/", "url": "https://phishdestroy.github.io/TgWitness/hi/docs/reference/witness/", "name": "स्वतंत्र गवाह | TgWitness", "description": "अपनी कुंजी और बॉट के साथ एक विटनेस चलाएँ, एक चैनल पर हस्ताक्षरित चेकपॉइंट प्रकाशित करें और उनके विरुद्ध एक्सपोर्ट्स की जाँच करें।", "inLanguage": "hi", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "होम", "item": "https://phishdestroy.github.io/TgWitness/hi/"}, {"@type": "ListItem", "position": 2, "name": "दस्तावेज़ीकरण", "item": "https://phishdestroy.github.io/TgWitness/hi/docs/"}, {"@type": "ListItem", "position": 3, "name": "संदर्भ", "item": "https://phishdestroy.github.io/TgWitness/hi/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "स्वतंत्र गवाह", "item": "https://phishdestroy.github.io/TgWitness/hi/docs/reference/witness/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">सामग्री पर जाएँ</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / दस्तावेज़ीकरण</span></a>
+<nav aria-label="मार्गदर्शिकाएँ"><a href="../../concepts/">दृश्य मार्गदर्शिका</a><a href="../../">सभी गाइड</a><a href="../">संदर्भ</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="भाषा"><span aria-hidden="true">◍</span> हिन्दी</summary><div class="lang-list"><a href="../../../../docs/reference/witness/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/witness/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/witness/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/witness/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/witness/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/witness/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/witness/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/witness/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/witness/" hreflang="ur" lang="ur">اردو</a><a href="./" hreflang="hi" lang="hi" aria-current="true">हिन्दी</a><a href="../../../../id/docs/reference/witness/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/witness/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/witness/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="हल्के और गहरे थीम के बीच स्विच करें"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="मार्गदर्शिकाएँ"><a href="../../../guides/modes.html">मोड, परिदृश्य और साक्ष्य स्तर</a><p class="nav-label">पहले कदम</p><a href="../../start/">कुछ ही मिनटों में शुरू करें</a><a href="../../accounts/">एक खाता कनेक्ट करें</a><a href="../../proxies/">एक प्रॉक्सी चुनें</a><a href="../../exports/">निर्यात करें और सत्यापित करें</a><p class="nav-label">साक्ष्य को समझें</p><a href="../../concepts/">देखें कि सबूत कैसे काम करता है</a><a href="../../cases/">सभी चैट्स में जांच करें</a><a href="../../security/">इसे सुरक्षित रखें</a><p class="nav-label">और आगे बढ़ें</p><a href="../../witness/">एक विटनेस बॉट सेट अप करें</a><a href="../../server/">इसे चालू रखें</a><a href="../../troubleshooting/">खोजें कि क्या गलत हुआ</a></nav><nav class="wiki-nav" aria-label="संदर्भ"><p class="nav-label"><a class="nav-label-link" href="../">संदर्भ</a></p><details class="wiki-group"><summary>सेटअप</summary><a href="../quickstart/">त्वरित आरंभ</a><a href="../accounts/">खाते और सत्र प्रारूप</a><a href="../connection/">कनेक्शन, प्रॉक्सी और डेटा सुरक्षा</a><a href="../deployment/">तैनाती</a></details><details class="wiki-group"><summary>एकत्र करें</summary><a href="../collection/">संग्रह कैसे काम करता है</a><a href="../operations/">कार्यप्रवाह और संचालन</a><a href="../investigation/">जांच मोड</a><a href="../features/">विशेषताएँ और सीमाएँ</a></details><details class="wiki-group" open><summary>साक्ष्य</summary><a href="../how-it-works/">साक्ष्य कैसे काम करता है</a><a href="../evidence/">साक्ष्य प्रारूप</a><a href="./" aria-current="page">स्वतंत्र गवाह</a><a href="../timestamp/">टाइमस्टैम्प</a></details><details class="wiki-group"><summary>सुरक्षा और परियोजना</summary><a href="../security/">सुरक्षा और डेटा प्रबंधन</a><a href="../architecture/">वास्तुकला</a><a href="../verification/">क्या परीक्षण किया गया है</a><a href="../license/">लाइसेंस और वास्तुकला असंगति सूचना</a><a href="../notice/">ऑपरेटर असंगति सूचना</a><a href="../changelog/">बदलाव-लॉग</a></details></nav><p class="sidebar-note">v0.7.0<br>ओपन सोर्स · आपकी मशीन पर चलता है</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="मार्गदर्शिकाएँ"><a href="../../../">होम</a> <span aria-hidden="true">/</span> <a href="../../">दस्तावेज़ीकरण</a> <span aria-hidden="true">/</span> <a href="../">संदर्भ</a> <span aria-hidden="true">/</span> <span aria-current="page">स्वतंत्र गवाह</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">दस्तावेज़ीकरण में खोजें</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="प्रॉक्सी, हैश चेन, टोकन या विटनेस आज़माएँ…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="खोज साफ़ करें" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">गाइड और संदर्भ खोजने के लिए एक शब्द टाइप करें। खोज आपके ब्राउज़र में ही रहती है।</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">संदर्भ / साक्ष्य</p><h1>स्वतंत्र गवाह</h1><p class="guide-outcome">अपनी कुंजी और बॉट के साथ एक विटनेस चलाएँ, एक चैनल पर हस्ताक्षरित चेकपॉइंट प्रकाशित करें और उनके विरुद्ध एक्सपोर्ट्स की जाँच करें।</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/WITNESS.md">रूसी में बॉट और प्रॉक्सी की सेटिंग</a>।</p>
+<p>एक कलेक्टर अपने स्वयं के जर्नल पर हस्ताक्षर करता है, इसलिए जो कोई भी कलेक्टर और उसकी कुंजी को नियंत्रित करता है, वह सिद्धांत रूप में जर्नल को फिर से लिख या संक्षिप्त कर सकता है और फिर से हस्ताक्षर कर सकता है। एक गवाह इसे पता लगाने योग्य बनाता है। यह एक अलग प्रक्रिया है — एक और कंटेनर, या बेहतर कहें तो कोई और चलाया हुआ सर्वर — जो हर कुछ मिनटों में कलेक्टर के हस्ताक्षरित जर्नल हेड को प्राप्त करता है, जो उसने देखा उसे अपनी कुंजी से हस्ताक्षरित करता है, उसे अपने स्वयं के जर्नल में रखता है और एक टेलीग्राम चैनल पर पोस्ट करता है।</p>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 477 358" width="477" height="358" role="img" aria-labelledby="flow-7-title flow-7-desc"><title id="flow-7-title">प्रवाह आरेख</title><desc id="flow-7-desc">संग्रहकर्ता → गवाह (हस्ताक्षरित चेकपॉइंट: रिकॉर्ड की संख्या + हेड हैश); गवाह → विटनेस जर्नल, अपनी कुंजी; गवाह → टेलीग्राम चैनल (अपने स्वयं के बॉट के माध्यम से हस्ताक्षरित पोस्ट); साक्ष्य ज़िप → verify.py; विटनेस जर्नल, अपनी कुंजी → verify.py; टेलीग्राम चैनल → verify.py (टेलीग्राम डेस्कटॉप एक्सपोर्ट या t.me/s पृष्ठ)</desc><defs><marker id="flow-7-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M191.4 46.0C191.4 77.0 191.4 77.0 191.4 108.0" marker-end="url(#flow-7-arrow)" style="--i:0;--len:62" pathLength="62"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M191.4 46.0C191.4 77.0 191.4 77.0 191.4 108.0"/></circle><path class="flow-edge" d="M191.4 148.0C191.4 179.0 102.8 179.0 102.8 210.0" marker-end="url(#flow-7-arrow)" style="--i:1;--len:114" pathLength="114"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M191.4 148.0C191.4 179.0 102.8 179.0 102.8 210.0"/></circle><path class="flow-edge" d="M191.4 148.0C191.4 179.0 279.9 179.0 279.9 210.0" marker-end="url(#flow-7-arrow)" style="--i:1;--len:114" pathLength="114"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M191.4 148.0C191.4 179.0 279.9 179.0 279.9 210.0"/></circle><path class="flow-edge" d="M415.6 250.0C415.6 281.0 266.1 281.0 266.1 312.0" marker-end="url(#flow-7-arrow)" style="--i:2;--len:169" pathLength="169"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.9s" repeatCount="indefinite" path="M415.6 250.0C415.6 281.0 266.1 281.0 266.1 312.0"/></circle><path class="flow-edge" d="M102.8 250.0C102.8 281.0 266.1 281.0 266.1 312.0" marker-end="url(#flow-7-arrow)" style="--i:2;--len:181" pathLength="181"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="2.0s" repeatCount="indefinite" path="M102.8 250.0C102.8 281.0 266.1 281.0 266.1 312.0"/></circle><path class="flow-edge" d="M279.9 250.0C279.9 281.0 266.1 281.0 266.1 312.0" marker-end="url(#flow-7-arrow)" style="--i:2;--len:64" pathLength="64"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M279.9 250.0C279.9 281.0 266.1 281.0 266.1 312.0"/></circle><g class="flow-node" style="--i:0"><rect x="139.4" y="6.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="191.4" y="26.0">संग्रहकर्ता</tspan></text></g><g class="flow-node" style="--i:1"><rect x="139.4" y="108.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="191.4" y="128.0">गवाह</tspan></text></g><g class="flow-node" style="--i:2"><rect x="6.0" y="210.0" width="193.6" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="102.8" y="230.0">विटनेस जर्नल, अपनी कुंजी</tspan></text></g><g class="flow-node" style="--i:2"><rect x="217.6" y="210.0" width="124.6" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="279.9" y="230.0">टेलीग्राम चैनल</tspan></text></g><g class="flow-node" style="--i:2"><rect x="360.2" y="210.0" width="110.8" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="415.6" y="230.0">साक्ष्य ज़िप</tspan></text></g><g class="flow-node" style="--i:3"><rect x="214.1" y="312.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="266.1" y="332.0">verify.py</tspan></text></g><g class="flow-label" style="--i:0"><rect x="98.3" y="58.0" width="186.1" height="38.0" rx="6"/><text x="191.4" y="69.5" text-anchor="middle" dominant-baseline="central">हस्ताक्षरित चेकपॉइंट:</text><text x="191.4" y="84.5" text-anchor="middle" dominant-baseline="central">रिकॉर्ड की संख्या + हेड हैश</text></g><g class="flow-label" style="--i:1"><rect x="165.5" y="168.7" width="186.1" height="38.0" rx="6"/><text x="258.5" y="180.2" text-anchor="middle" dominant-baseline="central">अपने स्वयं के बॉट के माध्यम</text><text x="258.5" y="195.2" text-anchor="middle" dominant-baseline="central">से हस्ताक्षरित पोस्ट</text></g><g class="flow-label" style="--i:2"><rect x="180.4" y="253.3" width="192.4" height="38.0" rx="6"/><text x="276.6" y="264.8" text-anchor="middle" dominant-baseline="central">टेलीग्राम डेस्कटॉप एक्सपोर्ट</text><text x="276.6" y="279.8" text-anchor="middle" dominant-baseline="central">या t.me/s पृष्ठ</text></g></svg></div><details class="flow-steps"><summary>चित्र को पाठ के रूप में</summary><ol><li>संग्रहकर्ता → गवाह (हस्ताक्षरित चेकपॉइंट: रिकॉर्ड की संख्या + हेड हैश)</li><li>गवाह → विटनेस जर्नल, अपनी कुंजी</li><li>गवाह → टेलीग्राम चैनल (अपने स्वयं के बॉट के माध्यम से हस्ताक्षरित पोस्ट)</li><li>साक्ष्य ज़िप → verify.py</li><li>विटनेस जर्नल, अपनी कुंजी → verify.py</li><li>टेलीग्राम चैनल → verify.py (टेलीग्राम डेस्कटॉप एक्सपोर्ट या t.me/s पृष्ठ)</li></ol></details></figure>
+<h2 id="what-the-witness-gets-and-what-it-does-not">गवाह को क्या मिलता है, और क्या नहीं मिलता<a class="anchor" href="#what-the-witness-gets-and-what-it-does-not" aria-label="इस अनुभाग का लिंक">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>गवाह के पास है</th>
+<th>गवाह ने कभी नहीं</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>एक कार्यक्षेत्र के लिए केवल-पठन <strong>विटनेस टोकन</strong></td>
+<td>संग्रहकर्ता का टेलीग्राम सत्र या एपीआई क्रेडेंशियल्स</td>
+</tr>
+<tr>
+<td>अपनी Ed25519 कुंजी और जर्नल</td>
+<td>संग्रहकर्ता का तिजोरी, हस्ताक्षर कुंजी या पैनल टोकन</td>
+</tr>
+<tr>
+<td>इसका अपना टेलीग्राम बॉट टोकन</td>
+<td>संदेश सामग्री: हेडर में रिकॉर्ड की संख्या और एक हैश होता है</td>
+</tr>
+</tbody>
+</table></div>
+<p>टोकन पैनल के <strong>विटनेस</strong> पेज पर बनाया जाता है, एक बार दिखाया जाता है और केवल एक SHA-256 के रूप में संग्रहीत किया जाता है। यह ठीक एक एंडपॉइंट, <code>GET /api/witness/head</code>, खोलता है, जो एक ताज़ा हस्ताक्षरित चेकपॉइंट के साथ-साथ हस्ताक्षरित सामग्री-मुक्त संग्रह काउंटर और परिचालन स्वास्थ्य लौटाता है।
+यह पैनल नहीं खोल सकता, संदेश की सामग्री नहीं पढ़ सकता या सेटिंग्स नहीं बदल सकता, और पैनल टोकन वहां स्वीकार नहीं किया जाता है। उसी पेज पर टोकन को रद्द करें। कलेक्टर यह रिकॉर्ड करता है कि एक नई विटनेस कुंजी (<code>witness.seen</code>) कब जांच शुरू करती है और प्रति टोकन अंतिम जांच दिखाता है; एक विटनेस जो 2.5 अंतरालों के भीतर जांच नहीं करता है, उसे समय-सीमा समाप्त (overdue) के रूप में चिह्नित किया जाता है।</p>
+<p>नए गवाह प्रत्येक पोल पर एक यादृच्छिक चुनौती भेजते हैं; कैप्चर स्टेटमेंट इसे कलेक्टर के हस्ताक्षर के नीचे दोहराता है। काउंटर सटीक चेकपॉइंट से बंधे होते हैं और हस्ताक्षरित गवाह पोस्ट में शामिल किए जाते हैं। लेगसी हेड्स स्टैंडअलोन गवाह द्वारा स्वीकारे जाते रहते हैं। केवल जर्नल की वृद्धि को कभी भी नए संदेश के रूप में नहीं गिना जाता है।</p>
+<h2 id="what-it-checks-and-records">यह क्या जाँचता और रिकॉर्ड करता है<a class="anchor" href="#what-it-checks-and-records" aria-label="इस अनुभाग का लिंक">#</a></h2>
+<p>प्रत्येक अंतराल (डिफ़ॉल्ट रूप से 10 मिनट) पर गवाह:</p>
+<ol>
+<li>स्वयं हेड को प्राप्त करता है (कलेक्टर इसे धकेल या छोड़ नहीं सकता);</li>
+<li>संग्रहकर्ता के हस्ताक्षर, पिन किए गए संग्रहकर्ता कुंजी (<code>--collector-fingerprint</code>, या पहली देखी गई कुंजी), एक गैर-घटती गिनती और एक अपरिवर्तित गिनती पर अपरिवर्तित हेड का सत्यापन करता है;</li>
+<li>अपने स्वयं के जर्नल में एक हस्ताक्षरित रिकॉर्ड जोड़ता है: <code>witness.anchor</code> स्थिति <code>ok</code>,
+    <code>key_changed</code>, <code>rollback</code> (पहले से कम रिकॉर्ड), <code>fork</code> (लंबाई समान, अलग
+    हेडर) या <code>invalid</code> (उत्तर सत्यापन में विफल रहा), या <code>witness.no_response</code> जब
+    संग्रहकर्ता ने उत्तर नहीं दिया;</li>
+<li>परिणाम को चैनल पर पोस्ट करता है, हस्ताक्षरित, जिसमें &quot;कोई उत्तर नहीं&quot; भी शामिल है, जब तक कि गवाह चल रहा हो और बॉट एपीआई तक पहुँच सकता हो। पोस्ट आईडी रिकॉर्ड की जाती है (<code>witness.posted</code>), एक असफल पोस्ट भी (<code>witness.post_failed</code>)।</li>
+</ol>
+<p>एक पोस्ट इस प्रकार दिखती है; अंतिम पंक्ति में हस्ताक्षरित कथन होता है:</p>
+<pre><code class="language-text">TgWitness witness #42 · journal head
+Collector 3fa9c2d1e0b4a7f6: 18234 records
+Head 9b1f…c07e
+2026-10-28T19:40:00.123+00:00
+TGW1.eyJhdCI6…&lt;statement&gt;.&lt;signature&gt;</code></pre>
+<h2 id="run-a-witness">एक विटनेस चलाएँ<a class="anchor" href="#run-a-witness" aria-label="इस अनुभाग का लिंक">#</a></h2>
+<p>आपको एक टेलीग्राम बॉट (@BotFather से एक बनाएँ), एक चैनल जहाँ वह बॉट एक प्रशासक हो, और गवाह से पहुँच योग्य कलेक्टर का पता — निजी नेटवर्क के बाहर HTTPS के माध्यम से (<a href="../deployment/">परिनियोजन</a> में HTTPS प्रोफ़ाइल देखें)।</p>
+<p><strong>एक्स्ट्रा</strong>
+खोलें <strong>→ अपने चैनल में एक बॉट →</strong>
+पैनल में <strong>एक बॉट सेट करें</strong>
+। तीन चरणों में केवल-पढ़ने की पहुँच, आपके चैनल और अंतराल को कवर किया जाता है, फिर विटनेस लॉन्च किया जाता है। प्रकाशन नीति, वैकल्पिक HTTP/SOCKS5 प्रॉक्सी और कस्टम बॉट API पता <strong>उन्नत सेटिंग्स</strong>
+के अंतर्गत हैं। यह फ़ॉर्म इस वर्कस्पेस की कलेक्टर कुंजी को पिन करके <code>witness.json</code>
+डाउनलोड करता है। <strong>&#x27;Save access file</strong>
+as&#x27; को <code>witness-token.txt</code>
+के साथ नए बनाए गए केवल-पठनीय टोकन को डाउनलोड करें; उसे और विटनेस होस्ट पर बनाए गए <code>bot-token.txt</code>
+को उस JSON के बगल में रखें। कलेक्टर को कभी भी बॉट टोकन प्राप्त नहीं होता है।
+डाउनलोड करना कोई सेवा शुरू नहीं करता है और न ही कोई संदेश प्रकाशित करता है। कोई भी होस्टेड प्रोजेक्ट विटनेस स्वतः नामांकित नहीं होता है।</p>
+<pre><code class="language-sh">python -m tgwitness.witness run --config witness.json --check-config
+python -m tgwitness.witness run --config witness.json
+python -m tgwitness.witness fingerprint --config witness.json</code></pre>
+<p>पहली कमांड नेटवर्क अनुरोधों या कुंजी निर्माण के बिना कॉन्फ़िगरेशन और गुप्त फ़ाइलों की जाँच करती है। JSON में पथ उस फ़ाइल के सापेक्ष होते हैं; CLI/वातावरण पथ वर्किंग डायरेक्टरी के सापेक्ष होते हैं। गवाह फिंगरप्रिंट को उसके होस्ट के बाहर बनाए रखें। कलेक्टर का
+अंतिम-पोल संकेतक केवल अनुरोध की पुष्टि करता है; प्रकाशन की सूचना प्रूफ द्वारा दी जाती है या गवाह जर्नल और चैनल में जाँची जाती है।</p>
+<p>यदि पैनल एक SSH टनल के पीछे रहता है, तो <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/Caddyfile.witness.example">इस कैडी उदाहरण</a> के साथ एक अलग HTTPS होस्टनेम पर केवल स्कोप्ड विटनेस एंडपॉइंट को एक्सपोज़ करें।
+डिफ़ॉल्ट वर्कस्पेस फिर <code>https://witness.example.org</code> का उपयोग करता है, अन्य वर्कस्पेस
+<code>https://witness.example.org/profiles/ID</code> का उपयोग करते हैं। टोकन अभी भी आवश्यक हैं; उस वर्चुअल होस्ट द्वारा पैनल और इसके अन्य API रूट फॉरवर्ड नहीं किए जाते हैं।</p>
+<p>नियमित रूप से प्रकाशित चेकपॉइंट्स के लिए <code>all</code> चुनें। पांच मिनट के अंतराल का मतलब है प्रति कार्यक्षेत्र प्रति दिन लगभग 288 पोस्ट। <code>changes</code>/<code>problems</code> जानबूझकर कुछ जांचें अप्रकाशित छोड़ देते हैं।
+MTProxy कलेक्टर के टेलीग्राम क्लाइंट के लिए है। विटनेस HTTP पोलिंग और टेलीग्राम का HTTPS
+बॉट API अपने स्वयं के डायरेक्ट/HTTP/SOCKS5 रूट (<a href="https://core.telegram.org/bots/api">बॉट API</a>) का उपयोग करते हैं।</p>
+<p><strong>कलेक्टर के बगल में, Docker के साथ</strong> (एक ही होस्ट — स्वतंत्र प्रक्रिया और कुंजी, लेकिन वही ऑपरेटर): <code>.env</code> में मान डालें और प्रोफ़ाइल शुरू करें।</p>
+<pre><code class="language-sh">TGWITNESS_WITNESS_TOKEN=tgww_...
+TGWITNESS_WITNESS_BOT_TOKEN=123456:ABC...
+TGWITNESS_WITNESS_CHANNEL=@your_witness_channel
+# another workspace: TGWITNESS_WITNESS_COLLECTOR=http://tgwitness:8787/profiles/&lt;workspace ID&gt;
+
+docker compose --profile witness up -d
+docker compose logs witness     # prints the witness key fingerprint</code></pre>
+<p>प्रकाशित छवि के साथ <code>docker compose --project-directory . -f deploy/compose/compose.image.yaml --profile witness up -d</code> का उपयोग करें।</p>
+<p><strong>किसी और के सर्वर पर</strong> (एक वास्तविक स्वतंत्र गवाह): वहां रिपॉजिटरी की प्रतिलिपि बनाएँ, <code>TGWITNESS_WITNESS_COLLECTOR=https://your-collector.example.org</code> में उपरोक्त तीन मानों के साथ <code>.env</code> सेट करें, फिर</p>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.witness.yaml up -d</code></pre>
+<p>या डॉकर के बिना:</p>
+<pre><code class="language-sh">python -m tgwitness.witness run --collector https://your-collector.example.org \
+    --token-file witness-token.txt --bot-token-file bot-token.txt --channel @your_witness_channel</code></pre>
+<h3 id="options">विकल्प<a class="anchor" href="#options" aria-label="इस अनुभाग का लिंक">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>विकल्प</th>
+<th>पर्यावरण</th>
+<th>डिफ़ॉल्ट</th>
+<th>अर्थ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--interval</code></td>
+<td><code>TGWITNESS_WITNESS_INTERVAL</code></td>
+<td>10</td>
+<td>चेक के बीच के मिनट, 1–1440</td>
+</tr>
+<tr>
+<td><code>--timeout</code></td>
+<td><code>_TIMEOUT</code></td>
+<td>30</td>
+<td>कलेक्टर और बॉट एपीआई के लिए प्रतीक्षा समय, 5–600 सेकंड</td>
+</tr>
+<tr>
+<td><code>--post</code></td>
+<td><code>_POST</code></td>
+<td><code>all</code></td>
+<td><code>all</code>: हर जाँच; <code>changes</code>: एक नया सिर या एक समस्या; <code>problems</code>: केवल समस्याएँ और अनुत्तरित प्रश्न</td>
+</tr>
+<tr>
+<td><code>--title</code></td>
+<td><code>_TITLE</code></td>
+<td><code>TgWitness witness</code></td>
+<td>हर चैनल पोस्ट के पहले शब्द</td>
+</tr>
+<tr>
+<td><code>--collector-fingerprint</code></td>
+<td><code>_COLLECTOR_FINGERPRINT</code></td>
+<td>–</td>
+<td>पहले उत्तर पर भरोसा करने के बजाय कलेक्टर कुंजी को पिन करें</td>
+</tr>
+<tr>
+<td><code>--proxy</code></td>
+<td><code>_PROXY</code></td>
+<td>सीधा</td>
+<td><code>socks5://host:port</code> या <code>http://host:port</code></td>
+</tr>
+<tr>
+<td><code>--bot-api</code></td>
+<td><code>_BOT_API</code></td>
+<td><code>https://api.telegram.org</code></td>
+<td>बॉट एपीआई पता, उदाहरण के लिए एक स्थानीय बॉट एपीआई सर्वर</td>
+</tr>
+<tr>
+<td><code>--data-dir</code></td>
+<td><code>_DATA</code></td>
+<td><code>witness-data</code></td>
+<td>विटनेस कुंजी और जर्नल</td>
+</tr>
+<tr>
+<td><code>--config</code></td>
+<td><code>_CONFIG</code></td>
+<td>–</td>
+<td>उपरोक्त किसी भी विकल्प के साथ JSON फ़ाइल</td>
+</tr>
+</tbody>
+</table></div>
+<p>कलेक्टर एड्रेस, टोकन और चैनल <code>--collector</code>, <code>--token</code> या <code>--token-file</code>, <code>--bot-token</code> या <code>--bot-token-file</code> और <code>--channel</code>, या <code>_COLLECTOR</code>, <code>_TOKEN</code>,
+<code>_TOKEN_FILE</code>, <code>_BOT_TOKEN</code>, <code>_BOT_TOKEN_FILE</code> और <code>_CHANNEL</code> से आते हैं, जो प्रक्रिया सूची से रहस्यों को बाहर रखता है।</p>
+<p>एक कॉन्फ़िग फ़ाइल अंडरस्कोर वाले विकल्प नामों का उपयोग करती है, साथ ही <code>texts</code> भी, जो चैनल पोस्ट के शब्दों को बदल देता है:</p>
+<pre><code class="language-json">{&quot;collector&quot;: &quot;https://your-collector.example.org&quot;, &quot;token_file&quot;: &quot;witness-token.txt&quot;,
+ &quot;bot_token_file&quot;: &quot;bot-token.txt&quot;, &quot;channel&quot;: &quot;@your_witness_channel&quot;,
+ &quot;interval&quot;: 5, &quot;timeout&quot;: 30, &quot;post&quot;: &quot;changes&quot;, &quot;title&quot;: &quot;Partner witness&quot;,
+ &quot;texts&quot;: {&quot;ok&quot;: &quot;journal head&quot;, &quot;no_response&quot;: &quot;no answer from the collector&quot;, &quot;records&quot;: &quot;records&quot;}}</code></pre>
+<p><code>texts</code> कुंजियाँ: <code>ok</code>, <code>key_changed</code>, <code>rollback</code>, <code>fork</code>, <code>invalid</code>, <code>no_response</code>, <code>collector</code>,
+<code>records</code>, <code>head</code>. कमांड लाइन का प्रभाव वातावरण पर, और वातावरण का प्रभाव फ़ाइल पर होता है।
+अज्ञात विकल्प या टेक्स्ट कुंजियाँ अनदेखा किए जाने के बजाय एक संदेश के साथ विटनेस को रोक देती हैं।
+शब्दावली सत्यापन को कभी प्रभावित नहीं करती: verify.py हर पोस्ट के अंत में हस्ताक्षरित टोकन की जाँच करता है। <code>--post changes</code> या <code>problems</code> के साथ, जो जाँचें पोस्ट नहीं की गई थीं वे अभी भी विटनेस जर्नल में होती हैं और <code>verify.py</code> उन्हें कभी पोस्ट न किए गए के रूप में सूचीबद्ध करता है; स्टार्ट रिकॉर्ड नीति का नाम बताता है। हर जाँच अभी भी जर्नल में दिखाई देती है, इसलिए कम पोस्ट का मतलब कम स्वतंत्र टेलीग्राम समय होता है, न कि कम जाँचें।</p>
+<p>चैनल के बिना भी विटनेस अपना जर्नल रखता है। विटनेस की कीफिंगरप्रिंट
+(<code>python -m tgwitness.witness fingerprint</code>) को कहीं और रखें।</p>
+<h2 id="verify">सत्यापित करें<a class="anchor" href="#verify" aria-label="इस अनुभाग का लिंक">#</a></h2>
+<p>गवाह पक्ष से, इसका जर्नल निर्यात करें:</p>
+<pre><code class="language-sh">python -m tgwitness.witness export --out witness.zip
+# Docker (add -f deploy/compose/compose.witness.yaml on a witness server):
+docker compose exec witness python -m tgwitness.witness export --out /witness/witness.zip
+docker compose cp witness:/witness/witness.zip .</code></pre>
+<p>फिर, कहीं भी, कलेक्टर के हस्ताक्षरित ZIP और टेलीग्राम डेस्कटॉप से एक्सपोर्ट किए गए चैनल (<em>चैट इतिहास एक्सपोर्ट करें</em>
+→ JSON <code>result.json</code>
+देता है) या इसके सार्वजनिक <code>https://t.me/s/…</code>
+पेज के साथ:</p>
+<pre><code class="language-sh">python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
+    --witness witness.zip --witness-fingerprint WITNESS_SHA256 --channel result.json</code></pre>
+<p><code>verify.py</code> गवाह जर्नल (चेन और हस्ताक्षर) की जांच करता है, फिर यह जांचता है कि <strong>गवाह द्वारा देखा गया हर हेड निर्यात किए गए जर्नल का हिस्सा है</strong>: उस गिनती पर रिकॉर्ड में ठीक वही हैश होना चाहिए। जो हेड मेल नहीं खाता है, वह सत्यापन में विफल रहता है — गवाह द्वारा देखने के बाद जर्नल बदला गया था। यह एक्सपोर्ट के बाद देखे गए हेड्स, गवाह द्वारा दर्ज की गई विसंगतियों, असफल उत्तरों, गवाह द्वारा बिना रुकावट देखे गए अवधियों (&quot;X से Y तक गवाह द्वारा देखा गया&quot;) और अंतरालों की भी रिपोर्ट करता है। केवल उन्हीं उत्तरों की गिनती होती है जिन पर एक्सपोर्ट की अपनी कुंजी से हस्ताक्षर किए गए हों: एक एक्सपोर्ट जिस पर गवाह ने कभी न देखी गई कुंजी से हस्ताक्षर किए हों, उसे गवाह द्वारा न देखा गया बताया जाता है, और <code>--fingerprint</code> के बिना उसका हस्ताक्षरकर्ता अनपिन्ड रहता है। <code>--channel</code> के साथ हर हस्ताक्षरित पोस्ट को गवाह जर्नल से रिकॉर्ड-दर-रिकॉर्ड मिलना चाहिए: बदले गए पोस्ट सत्यापन में विफल हो जाते हैं, और गायब पोस्टों की सूची बनाई जाती है। चैनल पोस्ट की तारीखें टेलीग्राम, एक स्वतंत्र घड़ी से आती हैं।</p>
+<p>एक विटनेस यह दिखाता है कि कलेक्टर ने उन समयों पर क्या रिपोर्ट किया था और बाद के एक्सपोर्ट्स उससे मेल खाते हैं। यह नहीं दिखाता कि कलेक्टर ने टेलीग्राम द्वारा दी गई हर चीज़ को रिकॉर्ड किया, या कि संदेश की सामग्री सच है। एक ही ऑपरेटर द्वारा एक ही मशीन पर चलाया गया विटनेस, किसी और द्वारा चलाए गए विटनेस से कमजोर होता है।</p>
+<p>केवल बढ़ी हुई संख्या ऑनलाइन केवल-संलग्न निरंतरता स्थापित नहीं कर सकती: ऑफ़लाइन तुलना में प्रत्येक संरक्षित प्रीफ़िक्स हैश का मिलान पूर्ण कलेक्टर एक्सपोर्ट से होना चाहिए।
+विटनेस के डाउनटाइम और विफल प्रकाशन से बाहरी एंकर के बिना अंतराल रह जाते हैं। रखे गए विटनेस जर्नल के खिलाफ गायब पोस्टों की रिपोर्ट की जा सकती है; न तो एक चैनल और न ही उसी ऑपरेटर द्वारा नियंत्रित कोई सर्वर एक अपरिवर्तनीय तृतीय-पक्ष आर्काइव है।</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/WITNESS.md">GitHub पर इस पृष्ठ को संपादित करें ↗</a><a class="next-guide" href="../timestamp/"><span>अगला कदम</span><strong>टाइमस्टैम्प →</strong></a><p>ये मार्गदर्शिकाएँ वर्तमान कार्यान्वयन का वर्णन करती हैं। सत्यापन परिणाम और शेष अंतराल अलग से दस्तावेजीकृत किए गए हैं। <a href="../verification/">क्या परीक्षण किया गया है →</a></p></footer>
+</main>
+<aside class="toc" aria-label="इस पृष्ठ पर"><p class="nav-label">इस पृष्ठ पर</p><a href="#what-the-witness-gets-and-what-it-does-not">गवाह को क्या मिलता है, और क्या नहीं मिलता</a><a href="#what-it-checks-and-records">यह क्या जाँचता और रिकॉर्ड करता है</a><a href="#run-a-witness">एक विटनेस चलाएँ</a><a href="#verify">सत्यापित करें</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>ओपन सोर्स · आपकी मशीन पर चलता है</span><a href="../../../../LICENSE">MIT लाइसेंस</a><a href="../notice/">ऑपरेटर सूचना</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">सुरक्षा</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "संदेश की प्रतीक्षा", "Step through a fictional send, edit and delete.": "एक काल्पनिक भेजने, संपादित करने और हटाने की प्रक्रिया को चरण-दर-चरण देखें।", "No observations yet. Start the sequence or advance one event.": "अभी तक कोई अवलोकन नहीं। अनुक्रम शुरू करें या एक घटना आगे बढ़ाएँ।", "Meet at 10:00": "10:00 बजे मिलें", "A new message is visible in the chat.": "चैट में एक नया संदेश दिखाई दे रहा है।", "Record 1 appended: the collector observed the original message.": "रिकॉर्ड 1 संलग्न: संग्रहकर्ता ने मूल संदेश देखा।", "Meet at 11:00": "11:00 बजे मिलें", "The current text changes. The earlier observation stays.": "वर्तमान पाठ बदलता है। पूर्व अवलोकन बना रहता है।", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "रिकॉर्ड 2 संलग्न: यह संपादन एक नया अवलोकन है। रिकॉर्ड 1 में अभी भी मूल पाठ है।", "Message deleted": "संदेश हटाया गया", "The message has disappeared from the chat view.": "संदेश चैट दृश्य से गायब हो गया है।", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "रिकॉर्ड 3 संलग्न: हटाने की सूचना दोनों देखे गए संस्करणों के साथ रखी गई है।", "0 records": "0 रिकॉर्ड", "1 record": "1 रिकॉर्ड", "2 records": "2 रिकॉर्ड", "3 records": "3 रिकॉर्ड", "Complete / {n} of 3": "3 में से पूरा / {n}", "Step / {n} of 3": "3 में से कदम / {n}", "Pause": "विराम", "Replay sequence": "पुनःप्रसारण अनुक्रम", "Play sequence": "क्रम चलाएँ", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "स्थिर उदाहरण उपलब्ध है। हैश को इंटरैक्टिव रूप से गणना करने के लिए, इस पृष्ठ को HTTPS पर या Web Crypto समर्थन के साथ लोकलहोस्ट पूर्वावलोकन में खोलें।", "No record supplied": "कोई रिकॉर्ड प्रदान नहीं किया गया", "Tail removed": "टेल हटा दिया गया", "≠ saved hash": "≠ सहेजा गया हैश", "Rebuilt · different hash": "पुनर्निर्मित · अलग हैश", "= saved hash": "= सहेजा गया हैश", "Same length and matching head.": "एक ही लंबाई और मेल खाने वाला शीर्ष।", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "तीनों गणना किए गए हैश सहेजे गए हैश से मेल खाते हैं। यह नमूना रखे गए तीन-रिकॉर्ड सीमा से मेल खाता है।", "Same saved head; the journal prefix fails verification.": "वही सहेजा गया हेडर; जर्नल उपसर्ग सत्यापन में विफल।", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "रिकॉर्ड 2 अब अपने सहेजे गए हैश से मेल नहीं खाता। केवल अंतिम संग्रहीत हेड की जाँच करने पर यह पता नहीं चलेगा; सत्यापक प्रत्येक रिकॉर्ड की जाँच करता है।", "Head differs from the retained checkpoint.": "हेड रिटेन चेकपॉइंट से भिन्न है।", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "पुनर्निर्मित हैश एक-दूसरे से जुड़े हुए हैं, लेकिन अंतिम हेड बदल गया है। बनाए रखा गया चेकपॉइंट इस इतिहास को अस्वीकार करता है। परिवर्तित रिकॉर्ड्स पर मूल हस्ताक्षर भी विफल हो जाएंगे।", "Too short: 2 supplied records \u003c 3 retained records.": "बहुत कम: 2 प्रदान किए गए रिकॉर्ड \u003c 3 संरक्षित रिकॉर्ड।", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "दो बचे हुए हैश अभी भी मेल खाते हैं। बनाए रखा गया चेकपॉइंट गायब पूंछ को प्रकट करता है। उस पूर्व सीमा के बिना, यह छोटा प्रीफ़िक्स अकेले इस छूट को प्रकट नहीं कर सकता।", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "इस ब्राउज़र में हैश गणना उपलब्ध नहीं है। नीचे दिए गए सूत्र और स्थिर स्पष्टीकरण उपलब्ध हैं।", "{n} records": "{n} रिकॉर्ड", "head {hash}": "हेड{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "स्वीकार किया गया: गिनती बढ़ती है, हस्ताक्षर सत्यापित होता है और कुंजी मेल खाती है। गवाह इस नई सीमा को बनाए रखता है।", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "रोलबैक: हस्ताक्षरित उत्तर पिछले स्वीकृत चेकपॉइंट की तुलना में कम रिकॉर्ड रिपोर्ट करता है। गवाह समस्या को रिकॉर्ड करता है और पहले स्वीकृत सीमा को बनाए रखता है।", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "फ़ोर्क: गिनती अपरिवर्तित है लेकिन हेड भिन्न है। गवाह असहमति को दर्ज करता है और पहले स्वीकृत सीमा को बनाए रखता है।", "No answer": "कोई उत्तर नहीं", "boundary unknown": "सीमा अज्ञात", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "कोई प्रतिक्रिया नहीं: गवाह असफल जांच को रिकॉर्ड करता है। यह संग्रहकर्ता की वर्तमान स्थिति की पुष्टि नहीं कर सकता। यदि गवाह अभी भी Bot API तक पहुँच सकता है और उसकी प्रकाशन नीति अनुमति देती है, तो वह उस विफलता को प्रकाशित कर सकता है।", "Send {n}": "{n} भेजें", "Edit {n}": "संपादन{n}", "Delete {n}": "{n} हटाएँ", "Both accounts captured all six expected observations in this example.": "इस उदाहरण में दोनों खातों ने सभी छह अपेक्षित अवलोकनों को कैद किया।", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "अकाउंट B ने फिर भी 6 में से 6 कैप्चर किए। दो रसीदों में अधिक समय लगा। कैप्चर अनुपात और रसीद विलंब अलग-अलग प्रश्नों का उत्तर देते हैं।", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "खाता B ने कटऑफ़ तक 6 में से 5 (83.3%) कैप्चर किए। गायब संपादन में कोई मापी गई देरी नहीं है। यह परिणाम केवल छह नियंत्रित क्रियाओं का वर्णन करता है।", "not observed by cutoff": "कटऑफ़ द्वारा अवलोकित नहीं", "{s} seconds": "{s} सेकंड", "Exact values follow in the table.": "सटीक मान तालिका में दिए गए हैं।", "{s} s": "{s}s", "Not observed": "देखा नहीं गया", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "चार चैट विभिन्न अवलोकन प्रदान करती हैं। प्रत्येक कनेक्शन के लिए स्रोत रिकॉर्ड का पालन करें; बिना प्रेषक के निर्दिष्ट किए चैनल पोस्ट को उपयोगकर्ता 71001 से न जोड़ें।", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "रिकॉर्ड #146 और #205 एक ही प्रेषक आईडी, 71001, प्रदान करते हैं। यह दो चैट्स में एक टेलीग्राम खाते की देखी गई पोस्ट्स को जोड़ता है। यह किसी वास्तविक व्यक्ति की पहचान नहीं करता और न ही चैनल पोस्ट को किसी व्यक्ति से जोड़ता है।", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "गंतव्य pay.example.invalid/new समूह रिकॉर्ड #146, बॉट कीबोर्ड #173, चैनल संपादन #188 और निजी संदेश #205 में दिखाई देता है। एक दोहराया गया गंतव्य सामग्री को जोड़ता है; यह उन खातों के साझा नियंत्रण को साबित नहीं करता।", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "इस काल्पनिक मामले में पूर्ण SHA-256 मान वाले मीडिया रसीद #151 और #209 समान हैं। वास्तविक बाइट्स और उनके संबंधित संदेश रिकॉर्ड की तुलना करें। मेल खाने वाली फ़ाइल अपने निर्माता की पहचान नहीं करती और यह साबित नहीं करती कि इसे किसने फॉरवर्ड किया।", "the encrypted off-site copy": "एन्क्रिप्टेड ऑफ-साइट प्रति", "notifications": "सूचनाएं", "checkpoint hashes for timestamps": "टाइमस्टैम्प के लिए चेकपॉइंट हैश", "signed checkpoints for the witness": "गवाह के लिए हस्ताक्षरित चेकपॉइंट्स", "Switched on in this example": "इस उदाहरण में चालू", "Optional · off by default": "वैकल्पिक · डिफ़ॉल्ट रूप से बंद", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "इस मशीन से निकलते समय: टेलीग्राम कनेक्शन और {list}। और कुछ नहीं।", "Default: only the Telegram connection leaves this machine.": "डिफ़ॉल्ट: केवल टेलीग्राम कनेक्शन ही इस मशीन से बाहर जाता है।", "{done} of {total} done": "{done} में से {total} पूरा हुआ", "Mark step {n} as done": "{n} चरण को पूरा किया हुआ चिह्नित करें", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "प्रतिलिपि", "Copied": "प्रतिलिपि", "Command copied.": "कमांड कॉपी हो गया।", "Selected — Ctrl/Cmd+C": "चुना गया — Ctrl/Cmd+C", "Command selected. Copy it manually.": "कमांड चयनित। इसे मैन्युअली कॉपी करें।", "Command copied to clipboard.": "कमांड क्लिपबोर्ड में कॉपी हो गई।", "Select text": "टेक्स्ट चुनें", "Clipboard unavailable. Command selected; copy it manually.": "क्लिपबोर्ड अनुपलब्ध है। कमांड चयनित है; इसे मैन्युअल रूप से कॉपी करें।", "A message arrives. The first observation is saved.": "एक संदेश आता है। पहला अवलोकन सहेजा जाता है।", "The time changes. Both captured versions stay.": "समय बदलता है। दोनों कैप्चर किए गए संस्करण बने रहते हैं।", "The message disappears. The captured history remains.": "संदेश गायब हो जाता है। कैप्चर किया गया इतिहास बना रहता है।", "Pause example animation": "एनिमेशन को रोकें", "Play example animation": "उदाहरण एनिमेशन चलाएँ", "Play": "चलाएँ", "Full-size workspace screenshot": "पूर्ण आकार का कार्यक्षेत्र स्क्रीनशॉट", "Workspace screenshot · fictional data": "वर्कस्पेस स्क्रीनशॉट · काल्पनिक डेटा", "Close": "बंद करें", "Close screenshot": "स्क्रीनशॉट बंद करें", "Scrollable full-size screenshot": "स्क्रॉल करने योग्य पूर्ण आकार का स्क्रीनशॉट", "Enlarge: {name}": "बड़ा करें: {name}", "View full size": "पूरा आकार देखें"}</script>
+</body></html>

@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="tr" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Uygulama | TgWitness</title>
+<meta name="description" content="TgWitness&#x27;i Windows, Linux, macOS veya Docker üzerinde, HTTPS üzerinden, yedeklemeler ve güncellemelerle birlikte bir hizmet olarak çalıştırın."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="Uygulama | TgWitness"><meta property="og:description" content="TgWitness&#x27;i Windows, Linux, macOS veya Docker üzerinde, HTTPS üzerinden, yedeklemeler ve güncellemelerle birlikte bir hizmet olarak çalıştırın.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/deployment/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/deployment/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/deployment/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/deployment/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/deployment/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/deployment/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/deployment/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/deployment/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/deployment/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/", "url": "https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/", "name": "Uygulama | TgWitness", "description": "TgWitness'i Windows, Linux, macOS veya Docker üzerinde, HTTPS üzerinden, yedeklemeler ve güncellemelerle birlikte bir hizmet olarak çalıştırın.", "inLanguage": "tr", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": "https://phishdestroy.github.io/TgWitness/tr/"}, {"@type": "ListItem", "position": 2, "name": "Belgeler", "item": "https://phishdestroy.github.io/TgWitness/tr/docs/"}, {"@type": "ListItem", "position": 3, "name": "Referans", "item": "https://phishdestroy.github.io/TgWitness/tr/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Uygulama", "item": "https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">İçeriğe atla</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Belgeler</span></a>
+<nav aria-label="Kılavuzlar"><a href="../../concepts/">Görsel kılavuz</a><a href="../../">Tüm kılavuzlar</a><a href="../">Referans</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Dil"><span aria-hidden="true">◍</span> Türkçe</summary><div class="lang-list"><a href="../../../../docs/reference/deployment/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/deployment/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/deployment/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/deployment/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/deployment/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="./" hreflang="tr" lang="tr" aria-current="true">Türkçe</a><a href="../../../../ar/docs/reference/deployment/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/deployment/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/deployment/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/deployment/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/deployment/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/deployment/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/deployment/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Açık ve koyu tema arasında geçiş yapın"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Kılavuzlar"><a href="../../../guides/modes.html">Modlar, senaryolar ve kanıt düzeyleri</a><p class="nav-label">İlk adımlar</p><a href="../../start/">Birkaç dakika içinde başlayın</a><a href="../../accounts/">Hesap bağla</a><a href="../../proxies/">Bir proxy seçin</a><a href="../../exports/">Dışa aktarma ve doğrulama</a><p class="nav-label">Kanıtları anlamak</p><a href="../../concepts/">Kanıtların nasıl işlediğini görün</a><a href="../../cases/">Tüm sohbetleri inceleyin</a><a href="../../security/">Güvenliği sağlayın</a><p class="nav-label">Daha fazlasını öğrenin</p><a href="../../witness/">Witness botunu kurun</a><a href="../../server/">Çalışır durumda tutun</a><a href="../../troubleshooting/">Neyin yanlış gittiğini bulun</a></nav><nav class="wiki-nav" aria-label="Referans"><p class="nav-label"><a class="nav-label-link" href="../">Referans</a></p><details class="wiki-group" open><summary>Kurulum</summary><a href="../quickstart/">Hızlı başlangıç</a><a href="../accounts/">Hesaplar ve oturum biçimleri</a><a href="../connection/">Bağlantı, proxy'ler ve veri koruma</a><a href="./" aria-current="page">Uygulama</a></details><details class="wiki-group"><summary>Topla</summary><a href="../collection/">Veri toplama süreci nasıl işliyor?</a><a href="../operations/">İş akışları ve işlemler</a><a href="../investigation/">Soruşturma modu</a><a href="../features/">Özellikler ve sınırlamalar</a></details><details class="wiki-group"><summary>Kanıt</summary><a href="../how-it-works/">Kanıt sistemi nasıl çalışır?</a><a href="../evidence/">Kanıt formatı</a><a href="../witness/">Bağımsız tanık</a><a href="../timestamp/">Zaman damgaları</a></details><details class="wiki-group"><summary>Güvenlik ve proje</summary><a href="../security/">Güvenlik ve veri işleme</a><a href="../architecture/">Mimari</a><a href="../verification/">Neler test edildi</a><a href="../license/">Lisans ve mimari uyumsuzluk bildirimi</a><a href="../notice/">Operatör uyumsuzluğu bildirimi</a><a href="../changelog/">Değişiklik günlüğü</a></details></nav><p class="sidebar-note">v0.7.0<br>Açık kaynak · Kendi makinenizde çalışır</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Kılavuzlar"><a href="../../../">Ana Sayfa</a> <span aria-hidden="true">/</span> <a href="../../">Belgeler</a> <span aria-hidden="true">/</span> <a href="../">Referans</a> <span aria-hidden="true">/</span> <span aria-current="page">Uygulama</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Belgelere göz atın</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zinciri, token veya witness&#x27;i deneyin…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Net arama" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Kılavuzları ve referansları aramak için bir kelime yazın. Arama, tarayıcınızda kalır.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Referans / Kurulum</p><h1>Uygulama</h1><p class="guide-outcome">TgWitness&#x27;i Windows, Linux, macOS veya Docker üzerinde, HTTPS üzerinden, yedeklemeler ve güncellemelerle birlikte bir hizmet olarak çalıştırın.</p><div class="wiki-body"><p><strong>İngilizce</strong> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md">Русский</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md">Ukraynaca</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md">Español</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md">Portugizce (Brezilya)</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md">Türkçe</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md">العربية</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md">فارسی</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md">Urduca</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md">Hintçe</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md">Endonezyaca</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md">Tiếng Việt</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md">Basitleştirilmiş Çince</a></p>
+<h2 id="choose-an-installation">Bir kurulum seçeneği belirleyin<a class="anchor" href="#choose-an-installation" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Taşınabilir paket için, GitHub Releases&#x27;tan <code>TgWitness-&lt;version&gt;-windows-amd64-portable.zip</code> dosyasını
+çıkarın. Diğer yöntemler için, kaynak ZIP dosyasını indirip açın veya
+deposunu klonlayın, ardından proje dizininden aşağıdakileri çalıştırın:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Kurulum</th>
+<th>Başlangıç</th>
+<th>Arka planda çalışır mı?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows taşınabilir paketi</td>
+<td><code>TgWitness.cmd</code></td>
+<td>Hayır; pencereyi açık tutun.</td>
+</tr>
+<tr>
+<td>Windows için yerel sürüm</td>
+<td><code>Start.cmd</code></td>
+<td>Hayır; arka planda çalıştırmak için isteğe bağlı oturum açma görevini kullanın.</td>
+</tr>
+<tr>
+<td>Linux/macOS için yerel sürüm</td>
+<td><code>sh start.sh</code></td>
+<td>Hayır; arka planda çalıştırmak için systemd/launchd kullanın.</td>
+</tr>
+<tr>
+<td>Desteklenen herhangi bir ana bilgisayarda Docker</td>
+<td><code>docker compose up -d --build --wait</code></td>
+<td>Evet, Docker arka plan programı çalışırken.</td>
+</tr>
+<tr>
+<td>Windows&#x27;ta Docker yardımcısı</td>
+<td><code>scripts\Docker.cmd</code></td>
+<td>Evet; yardımcı program, web sunucusunun durumunu bekler.</td>
+</tr>
+<tr>
+<td>Linux/macOS üzerinde Docker yardımcısı</td>
+<td><code>sh scripts/docker-start.sh</code></td>
+<td>Evet; yardımcı program, web sunucusunun durumunu bekler.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Üçüncü tarafların kontrol edebilmesi gereken bir bulut sunucusu için —
+sağlayıcının API&#x27;si aracılığıyla, SSH olmadan oluşturulmuş, yalnızca Cloudflare Tüneli üzerinden erişilebilen —
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md">yüksek güvenilirlikli dağıtım bölümüne</a> bakınız.</p>
+<p>Yerel başlatma işlemi, özel bir <code>.venv</code> oluşturur ve sabitlenmiş bağımlılıkları yükler.
+Docker, ana bilgisayar Python&#x27;una ihtiyaç duymadan bunları görüntü içinde derler. İlk kez
+kurulum için İnternet erişimi gerekir. Python 3.11+ bulunmadığında, <code>Start.cmd</code>, mevcut Windows kullanıcısı için
+Python 3.12&#x27;yi yüklemeden önce izin ister (winget; aksi takdirde, Python Software Foundation imzasını kontrol ettikten sonra python.org
+yükleyicisi kullanılır); hiçbir zaman
+yönetici ayrıcalıkları talep etmez. Docker ve işletim sistemi hizmetleri ön koşul olarak kalır.</p>
+<p>Yerel ve taşınabilir kurulumlar, kendi klasörleri içinde <code>data/live</code> adını kullanır. Docker ise <code>/data</code> konumunda
+<code>tgwitness-data</code> adlı birim adını kullanır.
+Tüm veri dizinini kasıtlı olarak taşıyana kadar bunlar ayrı kurulumlardır. Yeni bir Docker konteynerinin yerel
+hesapları otomatik olarak algılamasını beklemeyin.</p>
+<h2 id="installation-requirements">Kurulum gereksinimleri<a class="anchor" href="#installation-requirements" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Yerel kurulum için Python 3.11 veya üstü sürümü (<code>venv</code> ve <code>ensurepip</code> ile birlikte), ilk bağımlılık kurulumunda İnternet
+erişimi ve
+<code>.venv</code> için yazılabilir bir proje dizini gereklidir. Pakete dahil olan panel için Node.js veya ön uç derlemesi gerekmez. Başlatıcıyı
+normal işletim sistemi hesabınızdan çalıştırın; TgWitness için yönetici/root ayrıcalıkları gerekmez.</p>
+<ul>
+<li><strong>Windows:</strong> <code>Start.cmd</code>, önce <code>py -3</code>&#x27;yi, ardından <code>python</code>&#x27;yi, sonra da kullanıcı başına varsayılan ve
+    Program Files kurulum klasörlerini kontrol eder ve 3.11 veya daha yeni bir sürümü gerektirir. Hiçbiri işe yaramazsa,
+    yukarıda açıklanan otomatik kullanıcı başına kurulum seçeneğini sunar. <code>py -3 start.py</code> de çalışır.
+    Taşınabilir paket için Python&#x27;a hiç gerek yoktur.</li>
+<li><strong>Linux:</strong> <code>start.sh</code>, <code>python3.13</code>, <code>python3.12</code>, <code>python3.11</code>, <code>python3</code> ve
+    <code>python</code>&#x27;yi dener ve uygun bir seçenek bulunmadığında apt, dnf, pacman, zypper, apk veya Homebrew için
+    yükleme komutunu görüntüler. Debian/Ubuntu kurulumlarında, seçilen yorumlayıcıyla eşleşen
+    <code>python3-venv</code> paketi gerekebilir. Dağıtımın eski
+    varsayılan Python sürümü, Python 3.11+ ile değiştirilmeli veya bu sürümle desteklenmelidir.</li>
+<li><strong>macOS:</strong> Güncel bir Python 3.11+ dağıtımını yükleyin; işletim sistemi tarafından sağlanan
+    yorumlayıcının gereksinimi karşıladığını varsaymayın. Proje dizininden <code>python3 start.py</code> dosyasını kullanın.</li>
+<li><strong>Docker:</strong> Compose v2.20 veya daha yeni bir sürümle birlikte Docker Engine/Desktop kullanın. Docker Desktop,
+    Windows üzerinde Linux konteynerleri kullanmalıdır. Konteyner,
+    kendi Python bağımlılıklarını yükler; ana bilgisayarda ayrı bir Python kurulumu gerekmez.</li>
+</ul>
+<p>Veri dizini için kalıcı yerel depolama alanı kullanın. Mesajlar,
+medya dosyaları, WAL büyümesi, dışa aktarmalar ve yedeklemelerden yola çıkarak kapasite planlaması yapın; her iş yükü için kanıta dayalı evrensel bir minimum
+disk/RAM spesifikasyonu bulunmamaktadır. Uyumlu bağımlılık tekerlekleri olmayan CPU mimarileri ve Python sürümleri,
+ek derleme araçları ve bunların
+kendi yeterlilik testlerini gerektirebilir. &quot;Taşınabilir&quot; ifadesi, evrensel işletim sistemi veya donanım desteği iddiası değildir.</p>
+<p>Windows 11/Python 3.12 yerel olarak doğrulanmıştır. Linux/macOS/konteyner tanımları ve CI
+sağlanmıştır ancak bu geliştirme sunucusunda çalıştırılmamıştır. Kesin kapsam için
+<a href="../verification/">VERIFICATION.md</a> dosyasına bakınız.</p>
+<h2 id="local-computer">Yerel bilgisayar<a class="anchor" href="#local-computer" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Windows&#x27;ta <code>Start.cmd</code>&#x27;yi, Linux/macOS&#x27;ta <code>sh start.sh</code>&#x27;yi kullanın. <code>scripts\Setup.cmd</code> veya
+<code>sh start.sh --setup-only</code>,
+ortamı hazırlar. Başlatıcı, ilk kullanımda bağımlılıkları yükler; sonraki başlatmalarda
+mevcut ortam yeniden kullanılır. Kurulum ve Telegram verilerinin toplanması için internet erişimi gereklidir,
+ancak mevcut kayıtlara göz atma ve dışa aktarma işlemleri çevrimdışı olarak gerçekleştirilebilir.</p>
+<p>Kurulumdan sonra <code>python start.py --check</code> komutunu çalıştırarak, bir toplayıcı başlatmadan yerel bağımlılıkları, Ed25519&#x27;u,
+depolama alanını, anahtar yapılandırmasını ve dinleme adresini kontrol edin.
+Yapılandırılmış çıktı için <code>--json</code> komutunu kullanın. İstenen <code>--data-dir</code>, <code>--host</code> ve
+<code>--port</code> komutlarını çalıştırın. Bu kontrol, paket yüklemez, günlük oluşturmaz veya Telegram&#x27;a bağlanmaz;
+bu, bütünlük veya kapsam yeterliliği değerlendirmesi değildir. Başlangıç işlemi, mevcut günlükleri
+ayrı olarak doğrular. <code>python start.py --help</code> komutu da yüklemeyi gerektirmez.</p>
+<p>Seçenekler:</p>
+<p>start.py dosyasını kullandıktan sonra, Windows&#x27;ta <code>.venv\Scripts\python.exe</code>, Linux/macOS&#x27;ta <code>.venv/bin/python</code> ile yardımcı komutları çalıştırın veya önce bu ortamı etkinleştirin.
+Aşağıdaki <code>python -m ...</code> örnekleri, ortamın etkin olduğunu varsaymaktadır.</p>
+<pre><code class="language-sh">python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 8787</code></pre>
+<p>Ortam değişkenleri: TGWITNESS_DATA, TGWITNESS_HOST, TGWITNESS_PORT, TGWITNESS_TOKEN.
+TGWITNESS_VAULT_KEY_FILE, yeni bir kurulum için harici anahtar modunu seçer; aşağıya bakınız.
+TGWITNESS_TOKEN, belirtilirse en az 24 karakter içermelidir; kriptografik olarak
+rastgele bir değer kullanın. Bu değer belirtilmezse, uygulama panel-token.txt dosyasında 256 bitlik rastgele bir token oluşturur.
+Ortam değişkeni geçersiz kılma işlemi bu dosyayı yeniden yazmaz. Kimlik bilgilerini yenilemek için yeniden başlatın.</p>
+<p>Bir veri dizinine tam olarak tek bir işlem sahip olabilir. Platformlar arası bir işletim sistemi dosya kilidi,
+kazara eşzamanlı yazma işlemlerini önler. Tek bir Uvicorn işçisi kullanın. Panel, profiller/&lt;id&gt;/ altındaki ek çalışma alanı dizinleriyle birlikte
+istediğiniz sayıda çalışma alanını yönetebilir.
+Ayrı hizmet örnekleri için ayrı dizinler ve bağlantı noktaları kullanın. SQLite WAL dosyaları, ağ dosya sisteminde değil, yerel kalıcı
+depolama alanında bulunmalıdır. Replikalar arasında tek bir birimi paylaşmayın.</p>
+<h2 id="windows-portable-package">Windows taşınabilir paketi<a class="anchor" href="#windows-portable-package" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Her GitHub sürümü, <code>TgWitness-&lt;version&gt;-windows-amd64-portable.zip</code> ve bunun
+<code>.sha256</code>&#x27;sini içerir. Bu sürüm, python.org&#x27;dan alınan resmi gömülebilir Python 3.12 çalışma zamanını
+(<code>tools/build_portable.py</code>&#x27;de sabitlenmiş sağlama toplamı), TgWitness&#x27;i ve sabitlenmiş bağımlılıklarını,
+ayrıca üç başlatıcıyı içerir:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Dosya</th>
+<th>Amaç</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TgWitness.cmd</code></td>
+<td>Paneli başlatın; ek seçenekler aktarılır, örneğin <code>TgWitness.cmd --port 8790</code></td>
+</tr>
+<tr>
+<td><code>TgWitness-Demo.cmd</code></td>
+<td><code>data\demo</code> adresinden sentetik demoyu başlatın</td>
+</tr>
+<tr>
+<td><code>TgWitness-Check.cmd</code></td>
+<td>Başlatmadan hazırlık kontrolünü çalıştırın</td>
+</tr>
+</tbody>
+</table></div>
+<p>Arşivin tamamını <code>Documents\TgWitness</code> gibi yazılabilir bir klasöre çıkarın;
+ZIP dosyasının içinden veya Program Files klasöründen çalıştırmayın. Çalışma ortamı izole bir modül yolu kullanır,
+bu nedenle diğer Python kurulumları ve <code>PYTHONPATH</code> onu etkilemez. Veriler,
+paketin <code>data</code> klasöründe kalır. Güncellemek için TgWitness’i durdurun, yeni sürümü yeni bir
+klasöre çıkarın ve <code>data</code> klasörünü buraya kopyalayın.</p>
+<p>Python 3.12 kullanarak 64 bit Windows üzerinde kendiniz derleyin:</p>
+<pre><code class="language-sh">python tools/build_portable.py</code></pre>
+<p>Derleyici, çalışma zamanı sağlama toplamını doğrular, kısıtlanmış bağımlılıkları
+pakete yükler, gömülü yorumlayıcıyla hazırlık kontrolünü çalıştırır ve ZIP dosyasını
+ile sağlama toplamını <code>dist/</code> dosyasına yazar.</p>
+<h2 id="container">Konteyner<a class="anchor" href="#container" aria-label="Bu bölüme bağlantı">#</a></h2>
+<pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
+<p>Bu, /data için adlandırılmış bir kalıcı birim oluşturur.
+Web bağlantı noktası 127.0.0.1:8787 adresine eşlenir. İşlem, yetkileri kaldırılmış UID 10001 olarak,
+salt okunur bir kök dosya sistemi ve yazılabilir /data ile /tmp ile çalışır.
+<code>--wait</code>, geri dönmeden önce web sunucusunun durumunu kontrol eder; Telegram
+yetkilendirme veya teslimatını gerçekleştirmez. Sağlanan yardımcı programlar, derlemeden sonra 180 saniyelik bir hazırlık zaman aşımı
+süresi kullanır. İlk bağımlılık indirmeleri bu süreden daha uzun sürebilir.</p>
+<p>Her iki temel Compose dosyası da <code>tgwitness</code> proje adını kullanır; bu nedenle, yeni bir sürümü
+başka bir dizine çıkardığınızda sistem otomatik olarak yeni bir veri birimi seçmez. O proje için yalnızca bir
+dağıtımı aktif tutun. Bağımsız kurulumlar için benzersiz bir
+<code>docker compose -p NAME ...</code> adı ve farklı bir ana bilgisayar bağlantı noktası kullanın ve güncellemelerde her ikisini de koruyun.
+Farklı bir proje adı kullanan eski bir dağıtım için, orijinal
+adını <code>-p</code> ile birlikte kullanmaya devam edin; <code>docker compose ls</code>, mevcut projeleri listeler.</p>
+<p><code>deploy/env.example</code>&#x27;yi <code>.env</code>&#x27;ye kopyalayın ve <code>TGWITNESS_PORT</code>&#x27;yi farklı bir loopback
+bağlantı noktası kullanacak şekilde değiştirin. Örneğin, <code>TGWITNESS_PORT=8788</code> paneli
+<code>http://127.0.0.1:8788</code> adresinde açar; konteyner ise hâlâ 8787 numaralı bağlantı noktasını dinler. <code>.env</code>, Git tarafından göz ardı edilir.</p>
+<p>İlk jetonu al:</p>
+<pre><code class="language-sh">docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
+<p>Yararlı komutlar:</p>
+<pre><code class="language-sh">docker compose ps
+docker compose logs --tail 100 -f
+docker compose stop
+docker compose up -d --wait</code></pre>
+<p><code>restart: unless-stopped</code>, bir çökme veya Docker arka plan programının
+yeniden başlatılmasından sonra toplayıcıyı yeniden başlatır. Linux sunucusunda, dağıtımınızın hizmet
+yöneticisini (genellikle <code>sudo systemctl enable --now docker</code>) kullanarak önyükleme sırasında Docker&#x27;ı etkinleştirin. Windows/macOS&#x27;ta,
+Docker Desktop&#x27;ın oturum açıldığında başlatma ayarını etkinleştirin. Masaüstü oturumunun kapatılması, uyku moduna geçilmesi veya durdurulmuş bir
+Docker arka plan hizmeti, toplama işlemini kesintiye uğratabilir. Açıkça durdurulmuş bir konteyner,
+siz onu yeniden başlatana kadar durdurulmuş halde kalır.</p>
+<p>Örnek yapılandırmada /tmp biriminin üst sınırı 512 MiB olarak belirlenmiştir. Dışa aktarma yapısı
+bunun yerine kalıcı /data dizininde her çalışma alanının <code>temporary-exports/</code>&#x27;sini kullanır. Eşzamanlı dışa aktarmalar,
+günlük/WAL büyümesi, medya ve yedeklemeler için burada yer ayırın.
+Başlatıcı ve Docker, deploy/constraints.txt dosyasını kullanarak uygun çalışma zamanı bağımlılık
+sürümlerini sabitler. Bu, hash kilitli bir tedarik zinciri değildir: Python temel görüntüsü ve paket
+artefaktları hâlâ bağımsız sürüm onayına tabidir.</p>
+<p>Günlüğü ve anahtarları silmek istemediğiniz sürece docker compose down -v komutunu kullanmayın.
+Konteyner durum raporu, web sunucusunun erişilebilirliğini bildirir; Telegram mesajlarının başarılı bir şekilde yakalandığını göstermez.
+Paneldeki toplayıcının durumunu, kalp atışını, hatalarını ve kapsama olaylarını inceleyin.</p>
+<h3 id="independent-witness-profile">Bağımsız tanık profili<a class="anchor" href="#independent-witness-profile" aria-label="Bu bölüme bağlantı">#</a></h3>
+<p>İsteğe bağlı <code>witness</code> hizmeti, kendi
+konteynerinde <a href="../witness/">bağımsız bir tanık</a> çalıştırır; bu tanığın <code>witness-data</code> biriminde kendi anahtarı ve günlüğü bulunur ve toplayıcı için yalnızca okunur
+bir tanık jetonu vardır. Jetonu panelin <strong>Tanık</strong> sayfasında oluşturun, bunu
+bir bot jetonu ve kanal ile birlikte <code>.env</code>&#x27;ye ekleyin, ardından profili başlatın:</p>
+<pre><code class="language-sh">docker compose --profile witness up -d          # deploy/compose/compose.image.yaml: same flag
+docker compose logs witness                     # witness key fingerprint</code></pre>
+<p>Hizmet, Compose ağı içindeki toplayıcıya <code>http://tgwitness:8787</code>
+adresinden ulaşır (<code>TGWITNESS_WITNESS_COLLECTOR</code>
+bu değeri geçersiz kılar; örneğin, <code>/profiles/&lt;workspace ID&gt;</code>
+başka bir
+çalışma alanı için). Başka biri tarafından işletilen ayrı bir sunucudaki tanık dosyası için,
+<code>deploy/compose/compose.witness.yaml</code>
+dosyasını kullanın ve <code>TGWITNESS_WITNESS_COLLECTOR</code>
+&#x27;yi toplayıcının HTTPS
+adresine ayarlayın; bu dosya yalnızca tanık dosyasını içerir.</p>
+<h2 id="install-a-published-image">Yayınlanmış bir görüntüyü yükleyin<a class="anchor" href="#install-a-published-image" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Bu, başarılı bir <a href="#automated-github-releases">sürüm yayın iş akışı</a>
+ve halka açık GHCR paketi yapılandırmasının ardından kullanıma açılır. Deponun sahibi/adı bu kaynak ağacına sabit olarak kodlanmamıştır.
+Söz konusu sürümün iş akışı özetinde gösterilen görüntüyü kullanın.</p>
+<p><code>deploy/env.example</code>&#x27;yi <code>.env</code>&#x27;ye kopyalayın. <code>TGWITNESS_IMAGE</code>&#x27;yi,
+<strong>küçük harfli</strong> depo yolunu kullanarak yayınlanan sürüme ayarlayın, örneğin:</p>
+<pre><code class="language-dotenv">TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.0
+TGWITNESS_PORT=8787</code></pre>
+<p><code>compose.yaml</code> yerine bu dosyayı tek başına çalıştırın:</p>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml exec tgwitness cat /data/panel-token.txt</code></pre>
+<p>Ana bilgisayarda kaynak derleme, Python veya derleyici gerekmez. Sürüm yayın iş akışı,
+Docker Desktop&#x27;ın Linux sanal makinesi dahil olmak üzere Linux AMD64 ve ARM64 kapsayıcılarını hedefler.
+İş akışı özetinden bir sürüm etiketi veya <code>ghcr.io/owner/repository@sha256:...</code> kullanın.
+<code>latest</code> etiketinin taşınması veya gözetimsiz uygulama yükseltmesi yapılandırılmamıştır.
+Proje adları eşleştiğinde, görüntü ve kaynak varyantları aynı veri hacmini kullanır.</p>
+<h2 id="automatic-https-on-a-server">Sunucuda otomatik HTTPS<a class="anchor" href="#automatic-https-on-a-server" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Docker yüklü bir sunucu, sizin kontrolünüz altındaki bir alan adı ve kalıcı yerel depolama alanı kullanın.
+Etki alanının A/AAAA kayıtlarını sunucuya yönlendirin; AAAA kaydını yalnızca IPv6 adresi
+sunucuya ulaşırsa yayınlayın. Sertifika düzenlenmesi için gelen TCP 80 ve 443 bağlantılarına ve giden DNS/HTTPS trafiğine izin verin.
+Bu bağlantı noktaları başka hizmetler tarafından zaten kullanılmamalıdır.</p>
+<p><code>deploy/env.example</code>&#x27;yi <code>.env</code>&#x27;ye kopyalayın ve şema veya yol olmadan bir ana bilgisayar adı belirleyin:</p>
+<pre><code class="language-dotenv">TGWITNESS_DOMAIN=watch.your-domain.org</code></pre>
+<p>HTTPS katmanıyla kaynak derlemesini başlatın:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt</code></pre>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml -f deploy/compose/compose.https.yaml up -d --wait</code></pre>
+<p>Yayınlanmış bir görüntü için, bunun yerine ilk dosya olarak <code>deploy/compose/compose.image.yaml</code>&#x27;yi kullanın.
+<code>-f</code> argümanlarının her ikisini de daha sonraki durum, günlük, güncelleme ve durdurma komutları için saklayın.</p>
+<p>Caddy, bir sertifika alır ve yeniler, HTTP&#x27;yi HTTPS&#x27;ye yönlendirir ve
+istekleri özel Compose ağındaki toplayıcıya iletir. Sertifika durumunun
+kendine ait kalıcı bir birimi vardır. Toplayıcının doğrudan ana bilgisayar bağlantı noktası yalnızca döngü içi (loopback) olarak kalır.
+Sağlanan Caddy yapılandırması, erişim günlüğü kaydını etkinleştirmez.</p>
+<p><code>https://watch.your-domain.org</code> dosyasını açın ve panel jetonunu girin. Hazırlık durumu,
+sertifika düzenlemesini veya harici erişilebilirliği teyit etmez. HTTPS
+hazır değilse, DNS&#x27;yi, güvenlik duvarı kurallarını ve aşağıdakileri kontrol edin:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.https.yaml logs --tail 100 caddy</code></pre>
+<p>Sağlanan Caddy görüntüsü, <code>2-alpine</code> etiketini takip eder. Pull komutu bu görüntüyü yeniler;
+sabit altyapı sürümlerine ihtiyacınız varsa, dağıtımınıza test edilmiş bir özeti sabitleyin.</p>
+<h2 id="updates-and-backups">Güncellemeler ve yedeklemeler<a class="anchor" href="#updates-and-backups" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Güncellemeler boyunca Compose proje adını ve veri hacmini koruyun. Öncelikle
+toplayıcıyı durdurun ve tam bir yedekleme yapın. Varsayılan kaynak tabanlı dağıtım için:</p>
+<pre><code class="language-sh">docker compose stop
+docker compose cp tgwitness:/data ../tgwitness-backup-before-update</code></pre>
+<p>Her seferinde, depo dışında yeni bir yedekleme hedefi kullanın ve bunu
+hesap erişim materyali olarak koruyun. Örnek yol sadece açıklayıcıdır; kendi özel yedekleme
+konumunuzu kullanın. Gizli dosyalar, tüm çalışma alanları, anahtarlar,
+günlükler ve medya dahil olmak üzere tüm dizini kopyalayın. Yapılandırılmışsa, harici kasa ana anahtarını ayrı olarak yedekleyin.
+Kanıt ZIP dosyası, geri yüklenebilir bir uygulama yedeği değildir. HTTPS için, sertifika/hesap durumunu
+korumak gerekiyorsa Caddy birimlerini de saklayın.</p>
+<p>Kaynak dağıtımı için yeni sürüm dosyalarını edinin ve şu komutu çalıştırın:</p>
+<pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
+<p>Görüntü dağıtımı için <code>TGWITNESS_IMAGE</code>&#x27;yi istediğiniz sürüme değiştirin, ardından şunu çalıştırın:</p>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait</code></pre>
+<p>Yukarıdaki durdurma/kopyalama komutları için de kurulumunuzun Compose dosyalarını kullanın.
+<code>.env</code>&#x27;yi, özel yapılandırmayı ve aynı proje adını koruyun. <code>down</code>, adlandırılmış
+hacimleri korur; <strong><code>down -v</code></strong> ise <strong>bunları siler</strong>. <code>.venv</code>&#x27;yi işletim sistemleri
+veya Python sürümleri arasında kopyalamayın. Yerel güncellemeler için TgWitness&#x27;i durdurun, tüm veri
+dizinini yedekleyin, kaynak dosyaları değiştirin ve başlatmadan önce <code>python start.py --setup-only</code>&#x27;yi çalıştırın.</p>
+<p>Güncellemeden sonra panel erişimini, hesap kimliğini, gözlem durumunu ve kapsama alanını
+kontrol edin. Yeniden başlatma, kaçırılan Telegram güncellemelerini geri getirmez. Gelecekteki bir sürümde depolama formatları değişirse,
+geri alma işlemi için güncelleme öncesi yedeğe ihtiyaç duyulabilir.</p>
+<h2 id="automated-github-releases">Otomatik GitHub sürümleri<a class="anchor" href="#automated-github-releases" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Bu proje, Actions özelliği etkinleştirilmiş bir GitHub deposuna
+yüklendikten sonra <a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml">sürüm yayınlama iş akışı</a> kullanıma hazır hale gelir. Bu iş akışı,
+ön sürüm dahil olmak üzere bir GitHub Sürümü yayınlandığında çalışır. Taslaklar ve etiket yüklemeleri
+tek başına paketlerin yayınlanmasına yol açmaz.</p>
+<ol>
+<li>Paket sürümünü ve değişiklik günlüğünü belirleyin, ardından <code>v</code> etiketiyle
+    ve <code>pyproject.toml</code>&#x27;nin tam sürümünü (örneğin <code>v0.7.0</code>) içeren bir sürüm yayınlayın.</li>
+<li>İş akışı, etiketi doğrular ve paylaşılan Windows/Linux/macOS Python,
+    general/account-import/QR tarayıcı, kaynak paket ve Docker kontrollerini çalıştırır. Ayrıca, Python 3.12 kullanılarak
+    üç işletim sisteminin tümünde yeni yerel kurulum da gerçekleştirilir.</li>
+<li>Bu kontrollerden geçtikten sonra, QEMU altında bir ARM64 görüntüsünü hızlı test eder,
+    AMD64/ARM64 görüntülerini <code>ghcr.io/&lt;lowercase-owner&gt;/&lt;lowercase-repository&gt;:&lt;version&gt;</code>&#x27;ye yayınlar
+    ve kaynak ZIP dosyasını, sağlama toplamını ve Python wheel dosyasını sürüme ekler. Ayrı bir
+    Windows görevi, taşınabilir ZIP dosyasını ve sağlama toplamını derler ve ekler.</li>
+<li>İlk yayınlamadan sonra, GHCR paket ayarlarını açın ve anonim görüntü alımları
+    planlanıyorsa görünürlüğü &quot;<strong>Herkese Açık</strong>&quot; olarak ayarlayın. Yalnızca herkese açık bir kaynak deposu
+    kendi başına herkese açık bir konteyner paketini garanti etmez. Kurum politikaları
+    paket yayınlamasına izin vermelidir. İş akışı <code>GITHUB_TOKEN</code> kullanır; depoda herhangi bir kayıt
+    şifresi veya VPS kimlik bilgileri bulunmamalıdır.</li>
+</ol>
+<p>Bu yerel hazırlık ile uzaktan iş akışının başarısı henüz kanıtlanmamıştır. ARM64
+emülasyonu, yerel donanım veya canlı Telegram yeterliliği değil, bir ön test niteliğindedir.
+Bu, sürüm paketlemeyi otomatikleştirir; bir sunucuyu başlatmak için hala Compose
+komutu ve bunun etki alanı/ana bilgisayar ön koşulları gereklidir. Bir sürüm yayınlandığında mevcut sunucular sessizce
+yükseltilmez veya yeniden başlatılmaz.</p>
+<h2 id="remote-server">Uzak sunucu<a class="anchor" href="#remote-server" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Hizmeti loopback ile sınırlı tutun ve bir SSH tüneli kullanın ya da HTTPS&#x27;yi bir
+ters proxy&#x27;de sonlandırın. Temel Compose dosyası yalnızca yerel kullanım içindir; isteğe bağlı
+<code>deploy/compose/compose.https.yaml</code> overlay&#x27;i, yapılandırılmış bir etki alanı için Caddy sağlar.
+Taşıyıcı belirtecini URL’lerden ve proxy günlüklerinden uzak tutun. Ters proxy,
+istek boyutunu ve bağlantı hızlarını sınırlamalıdır. Düz HTTP’yi İnternet’e maruz bırakmayın.</p>
+<p><a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/</a> dizininde systemd, bir Windows oturum açma görevi, bir macOS kullanıcı ajanı ve Caddy için örnekler
+sunulmaktadır. Kurulumdan önce bunların yollarını gözden geçirin ve uyarlayın.
+Bunlar, yerel olarak yürütülen platform yapılandırmaları değil, şablonlar olarak sağlanmaktadır. Normal başlatıcı tarafından
+hiçbir arka plan hizmeti veya görevi kaydedilmez.</p>
+<p>Windows&#x27;ta, penceresiz <code>pythonw.exe</code> başlatma işlemi, başlangıç/sunucu tanılama bilgilerini
+veri dizini altındaki <code>logs/server.log</code> dosyasına kaydeder (dosya başına 5 MiB, iki adet dönüşümlü yedek).
+Konsol başlatmalarında konsol günlüğü tutulur. HTTP erişim günlüğü her iki
+modda da devre dışıdır. Günlükleri veri diziniyle koruyun ve paylaşmadan önce gözden geçirin.</p>
+<h2 id="restart-and-gaps">Yeniden başlatma ve boşluklar<a class="anchor" href="#restart-and-gaps" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>En son istenen gözlem durumu korunur. Gözlem etkin durumdaysa,
+başlangıç sırasında seçilen kaynaklara yeniden bağlanılmaya ve izlemeye devam edilmeye çalışılır. Manuel duraklatma,
+bu niyeti siler. Başarısız bir yeniden başlatma kaydedilir ve panelde gösterilir.</p>
+<p>StringSession, yetkilendirmeyi korur ancak Telethon&#x27;un kalıcı güncelleme/varlık durumunu korumaz.
+Diyaloglar başlangıçta yeniden yüklenir. Telegram/Telethon, çalışırken bazı aktarım kesintilerini
+telafi edebilir, ancak TgWitness, işlem yeniden başlatmaları arasında kalıcı bir tekrar oynatma garantisi vermez.
+Her başlatma işleminde, önceki günlük başlığı ve çevrimdışı sınır kaydedilir.
+İzleyici, her 10 saniyede bir bağlantıyı kontrol eder ve her dakika bir kalp atışı ekler
+(<strong>Parametreler → Canlılık kaydı her</strong>).
+Kısa süreli kesintiler gözden kaçabilir; bağlı bir aktarım, güncellemelerin tam olarak
+iletilmesini garanti etmez. Anlık görüntüler, açıkça güncel geçmiş gözlemleridir; asla boşlukları doldurmaz.</p>
+<p>Medya kuyruğu, her çalışma alanının SQLite veritabanında saklanır. Bir mesaj ve ilgili iş
+atomik olarak kaydedilir. Yürütülmesi kesintiye uğrayan işler, başlangıçta yeniden deneme amacıyla kurtarılır.
+Her indirme işlemi için 120 saniyelik bir temel zaman aşımı süresi ile dosya boyutuna göre 256 KiB/s hızda hesaplanan süre ve
+ek türü başına 1–2.000 MiB sınırı vardır; zaman aşımı, hız ve yeniden deneme ayarları <strong>Parametreler</strong> bölümünde bulunur. Toplayıcı,
+boyutu bilinmeyen dosyaları atlar. Duraklatma işlemi, kuyrukta bekleyen işleri korur. Yeniden deneme, orijinal
+gözlemlenen dosya tanımlayıcısını kullanır; daha sonra düzenlenmiş bir mesajın en son sürümünü asla kullanmaz.
+Geçici arızalar için sınırlı sayıda yeniden deneme vardır; FloodWait duraklamaları yeniden başlatma sonrasında da korunur.
+Medya kurtarma, Telegram güncelleme kurtarmasından ayrıdır ve kaybolan dosyaları yeniden oluşturamaz.</p>
+<h2 id="backup-restore-and-capacity">Yedekleme, geri yükleme ve kapasite<a class="anchor" href="#backup-restore-and-capacity" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Vault.key,
+signing.enc, credentials.enc, SQLite veritabanı/WAL dosyaları, medya, token, kontrol noktaları
+ve tüm profiller/alt dizinler dahil olmak üzere <strong>tüm veri dizin</strong>ini kopyalamadan önce işlemi durdurun. Hedef hizmet durdurulmuşken
+kopyanın tamamını geri yükleyin. Eksik vault anahtarları veya
+imza anahtarı uyuşmazlığı, başlatma işleminin başarısız olmasına neden olur; erişimi zorlamak için anahtarları yeniden oluşturmayın.</p>
+<p>Gizli yedeklemeleri şifreli ve erişim kontrollü tutun. Kanıt ZIP dosyaları taşınabilirdir;
+uygulama yedeklemeleri veya Telegram oturum yedeklemeleri değil, inceleme artefaktlarıdır.
+Otomatik saklama süresi dolduktan sonra silme işlemi yoktur. Tüm mesajlar, ham
+meta veriler, medya dosyaları, geçici dışa aktarımlar ve yedeklemeler için disk alanı planlayın.</p>
+<p>Günlüğün tamamını yüklemek yerine, başlangıç doğrulaması ve akış kayıtlarının dışa aktarımı.
+Dışa aktarım, okunan bir anlık görüntüyü sabitlerken yeni WAL yazma işlemleri devam edebilir; uzun süren dışa aktarımlar
+WAL sayfalarını tutabilir, bu nedenle disk kapasitesi hâlâ önemlidir. ZIP dosyaları, bağımsız doğrulayıcının varsayılan ayarına uymak üzere
+sıkıştırılmamış halde 4 GiB ile sınırlandırılmıştır; <strong>Parametreler → En Büyük İmzalı ZIP</strong>
+seçeneği bu sınırı artırır ve bu tür arşivler <code>verify.py --max-gib N</code> ile doğrulanır. Diğer formatlarda olay sayısı sınırı yoktur.
+Desteklenen tarayıcılar, yanıt parçalarını kullanıcının seçtiği bir dosyaya akış olarak gönderir. Diğer tarayıcılar
+en fazla 128 MiB&#x27;lik tampon kullanır ve daha büyük aktarımları kimliği doğrulanmış CLI&#x27;ye yönlendirir:</p>
+<pre><code class="language-sh">python -m tgwitness.download --token-file data/live/panel-token.txt --out evidence.zip</code></pre>
+<p>Başka bir çalışma alanı için <strong>İhracat → Çalışma Alanı Kimliği</strong>&#x27;nden <code>--profile ID</code>&#x27;yi,
+uzak bir sunucu için <code>--format zip|jsonl|csv|html</code>, <code>--url https://your-server</code>&#x27;yi veya
+5 GiB aktarım sınırını değiştirmek için <code>--max-mib</code>&#x27;yi kullanın. Düz HTTP yalnızca
+loopback için izin verilir. Jetonlar başlıklarda iletilir, yönlendirmeler reddedilir, mevcut dosyalar
+üzerine yazılmaz ve tamamlanmamış indirmeler tamamlanmış dosyalar olarak yayınlanmaz.
+TGWITNESS_TOKEN, oluşturulan jetonu geçersiz kılarsa, bu aktif değeri içeren ayrı olarak korunan bir dosya kullanın:
+panel-token.txt dosyası, geçersiz kılma işlemiyle yeniden yazılmaz.
+Komutun SHA-256 değeri yalnızca bir aktarım sağlama toplamıdır; imzalı ZIP dosyasını bağımsız olarak doğrulayın.</p>
+<p>Sunucu dışa aktarım dosyaları, her çalışma alanının özel <code>temporary-exports/</code> dizininde kalır.
+Başarılı işlemler, dosyalarını temizler. Kesintiye uğrayan dışa aktarımlar,
+özel örnek kilidi tutulmuş haldeyken bir sonraki çalışma alanının başlatılması sırasında kaldırılır. Bu dizin,
+depolama tehdidi/kapasite modelinin bir parçasıdır; şifrelenmiş bir veri birimi kullanın. Üretim ölçeğindeki
+birkaç gigabaytlık aktarımlar için yine de hedef sisteminizde uygunluk değerlendirmesi gereklidir.</p>
+<p>Panel, kuyrukta bekleyen/başarısız medya öğelerini, en eski bekleyen medya öğelerini, boş disk alanını, Telegram
+istek duraklamalarını ve erişimi onaylanmamış kaynakları gösterir. Bu tanılama bilgileri,
+tam kapsamlı bir uçtan uca teslimat izleme sistemi değildir. Çalışma alanları aynı süreci paylaşır; gürültülü bir hesap,
+diğerlerini yine de etkileyebilir. Ayrı işçi süreçleri, saklama/dönüşüm, dayanıklı güncelleme
+kurtarma, uzaktan kontrol noktası sabitleme, roller ve tam dağıtım yeterliliği özellikleri korunmaktadır.</p>
+<h2 id="connection-and-protection-options">Bağlantı ve koruma seçenekleri<a class="anchor" href="#connection-and-protection-options" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Bağlantı yolları çalışma alanı bazındadır ve yetkilendirme öncesinde yapılandırılmalıdır.
+SOCKS5/HTTP CONNECT, sabitlenmiş python-socks bağımlılığını kullanır. MTProxy, Telethon&#x27;un
+deneysel rastgele ara aktarımını kullanır; Sahte TLS ee gizli anahtarları desteklenmez.
+Otomatik doğrudan yedekleme yapılandırılmamıştır. Bu, sistem genelinde geçerli bir ağ yolu değildir.</p>
+<p>Yeni kurulumlarda, TGWITNESS_VAULT_KEY_FILE değişkeni, ayrı olarak korunan rastgele bir
+ana anahtar dosyasına işaret eder. Bu dosyayı bir konteyner içinde /data dizininin dışında salt okunur olarak bağlayın. Her çalışma alanı ve ana anahtar için
+vault.external.json salt meta verilerini ayrı ayrı saklayın.
+Mevcut yerel kasalar için planlı bir geçiş gereklidir; bu değişkenin ayarlanması,
+kasaları otomatik olarak dönüştürmez. Mesaj/medya depolama ve dışa aktarımlar uygulama tarafından şifrelenmez.
+Gerektiğinde şifreli birimler ve yeterli miktarda özel geçici depolama alanı kullanın.</p>
+<p>Ayrıntılı prosedürler: <a href="../connection/">bağlantı/güvenlik</a> ve
+<a href="../operations/">çalışma modları</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/DEPLOYMENT.md">Bu sayfayı GitHub'da düzenle ↗</a><a class="next-guide" href="../collection/"><span>Sonraki adım</span><strong>Veri toplama süreci nasıl işliyor? →</strong></a><p>Bu kılavuzlar mevcut uygulamayı açıklamaktadır. Doğrulama sonuçları ve kalan eksiklikler ayrı olarak belgelenmiştir. <a href="../verification/">Neler test edildi →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Bu sayfada"><p class="nav-label">Bu sayfada</p><a href="#choose-an-installation">Bir kurulum seçeneği belirleyin</a><a href="#installation-requirements">Kurulum gereksinimleri</a><a href="#local-computer">Yerel bilgisayar</a><a href="#windows-portable-package">Windows taşınabilir paketi</a><a href="#container">Konteyner</a><a href="#install-a-published-image">Yayınlanmış bir görüntüyü yükleyin</a><a href="#automatic-https-on-a-server">Sunucuda otomatik HTTPS</a><a href="#updates-and-backups">Güncellemeler ve yedeklemeler</a><a href="#automated-github-releases">Otomatik GitHub sürümleri</a><a href="#remote-server">Uzak sunucu</a><a href="#restart-and-gaps">Yeniden başlatma ve boşluklar</a><a href="#backup-restore-and-capacity">Yedekleme, geri yükleme ve kapasite</a><a href="#connection-and-protection-options">Bağlantı ve koruma seçenekleri</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Açık kaynak · Kendi makinenizde çalışır</span><a href="../../../../LICENSE">MIT lisansı</a><a href="../notice/">Operatör bildirimi</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Güvenlik</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Mesaj bekleniyor", "Step through a fictional send, edit and delete.": "Kurgusal bir gönderme, düzenleme ve silme işlemini adım adım inceleyin.", "No observations yet. Start the sequence or advance one event.": "Henüz herhangi bir gözlem yok. Diziyi başlatın veya bir olay ilerletin.", "Meet at 10:00": "Saat 10:00'da buluşalım", "A new message is visible in the chat.": "Sohbette yeni bir mesaj görünüyor.", "Record 1 appended: the collector observed the original message.": "1 kayıt eklendi: toplayıcı, orijinal mesajı gözlemledi.", "Meet at 11:00": "Saat 11:00'da buluşalım", "The current text changes. The earlier observation stays.": "Mevcut metin değiştirilmiştir. Önceki gözlem geçerliliğini korumaktadır.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Kayıt 2 eklendi: düzenleme yeni bir gözlemdir. Kayıt 1'de hâlâ orijinal metin yer almaktadır.", "Message deleted": "Mesaj silindi", "The message has disappeared from the chat view.": "Mesaj, sohbet ekranından kayboldu.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Record 3 eklenmiştir: silme bildirimi, gözlemlenen her iki sürümün yanında da saklanmaktadır.", "0 records": "0 kayıt", "1 record": "1 kayıt", "2 records": "2 kayıt", "3 records": "3 kayıt", "Complete / {n} of 3": "Tamam / 3'ün {n}'si", "Step / {n} of 3": "Adım / 3'ün {n}'si", "Pause": "Duraklat", "Replay sequence": "Tekrar oynatma dizisi", "Play sequence": "Çalma sırası", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Statik örnek mevcuttur. Hash değerlerini etkileşimli olarak hesaplamak için bu sayfayı HTTPS üzerinden veya Web Crypto desteğine sahip bir localhost önizlemesinde açın.", "No record supplied": "Kayıt sağlanmadı", "Tail removed": "Son kısım kaldırıldı", "≠ saved hash": "≠ kaydedilmiş hash", "Rebuilt · different hash": "Yeniden oluşturuldu · farklı hash", "= saved hash": "= kaydedilen hash", "Same length and matching head.": "Aynı uzunlukta ve başlığıyla uyumlu.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Hesaplanan üç hash değeri de kaydedilen hash değerleriyle eşleşmektedir. Bu örnek, korunan üç kayıtlık sınırla uyumludur.", "Same saved head; the journal prefix fails verification.": "Aynı başlık kaydedildi; günlük ön eki doğrulamadan geçemedi.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Kayıt 2, kaydedilmiş hash değeriyle artık eşleşmiyor. Yalnızca son saklanan başlık kontrol edilseydi bu durum gözden kaçardı; doğrulayıcı her kaydı tek tek kontrol eder.", "Head differs from the retained checkpoint.": "Başlık, saklanan kontrol noktası ile farklılık göstermektedir.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Yeniden oluşturulan hash değerleri birbiriyle bağlantılıdır, ancak son başlık değişmiştir. Saklanan kontrol noktası bu geçmişi reddediyor. Değiştirilen kayıtlarda orijinal imzalar da geçersiz sayılır.", "Too short: 2 supplied records \u003c 3 retained records.": "Çok kısa: Sağlanan kayıt sayısı 2, saklanan kayıt sayısı 3'ten az.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Kalan iki hash değeri hâlâ eşleşiyor. Saklanan kontrol noktası, eksik olan son kısmı ortaya çıkarıyor. O önceki sınır olmasaydı, bu daha kısa önek tek başına eksikliği ortaya çıkarmazdı.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Bu tarayıcıda hash hesaplaması yapılamamaktadır. Aşağıdaki formüller ve statik açıklamalar yine de kullanılabilir durumdadır.", "{n} records": "{n} kayıt", "head {hash}": "başlık {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Kabul edildi: sayı artıyor, imza doğrulanıyor ve anahtar eşleşiyor. Tanık bu yeni sınırı koruyor.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Geri alma: İmzalı yanıt, en son kabul edilen kontrol noktasına göre daha az kayıt bildiriyor. Witness, sorunu kaydeder ve daha önce kabul edilen sınırı korur.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: sayım değişmez ancak başlık farklıdır. Tanık, bu uyuşmazlığı kaydeder ve daha önce kabul edilen sınırı korur.", "No answer": "Cevap yok", "boundary unknown": "sınır bilinmiyor", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Yanıt yok: tanık, başarısız kontrolü kaydeder. Toplayıcının mevcut durumunu belirleyemez. Tanık, Bot API’sine hâlâ erişebiliyorsa ve yayın politikası izin veriyorsa, bu başarısızlığı yayınlayabilir.", "Send {n}": "{n} gönder", "Edit {n}": "Düzenle {n}", "Delete {n}": "{n}'yi sil", "Both accounts captured all six expected observations in this example.": "Bu örnekte her iki hesap da beklenen altı gözlemin tamamını kaydetmiştir.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "B hesabı yine 6 mesajın 6'sını da yakaladı. İki makbuzun alınması daha uzun sürdü. Yakalama oranı ve makbuz gecikmesi farklı sorulara cevap verir.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Hesap B, son tarihe kadar 6 eylemden 5'ini yakaladı (%83,3). Eksik olan düzenleme için ölçülen bir gecikme yoktur. Bu sonuç yalnızca altı kontrollü eylemi açıklamaktadır.", "not observed by cutoff": "kesme tarihine kadar gözlemlenmemiştir", "{s} seconds": "{s} saniye", "Exact values follow in the table.": "Kesin değerler tabloda yer almaktadır.", "{s} s": "{s} s", "Not observed": "Gözlemlenmedi", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Dört sohbet, farklı gözlemler sunmaktadır. Her bağlantı için kaynak kayıtlarını takip edin; göndereni belirtilmemiş kanal gönderisini 71001 numaralı kullanıcıya atamayın.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "#146 ve #205 numaralı kayıtlar aynı gönderen kimliğini (71001) göstermektedir. Bu, iki sohbet üzerinden bir Telegram hesabının gözlemlenen gönderilerini birbirine bağlamaktadır. Bu bilgi, gerçek hayattaki bir kişiyi tanımlamaz veya kanal gönderisini bir kişiye atfetmez.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "pay.example.invalid/new adresi, grup kaydı #146, bot klavyesi #173, kanal düzenlemesi #188 ve özel mesaj #205'te geçmektedir. Tekrarlanan bir hedef, materyalleri birbirine bağlar; ancak bu, söz konusu hesapların ortak kontrol altında olduğunu kanıtlamaz.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Bu hayali vakada, tamamlanmış medya makbuzları #151 ve #209'un SHA-256 değerleri tamamen aynıdır. Gerçek baytları ve bunlara ait mesaj kayıtlarını karşılaştırın. Eşleşen dosya, yaratıcısını tanımlamaz veya kimin ilettiğini kanıtlamaz.", "the encrypted off-site copy": "şifrelenmiş, sunucu dışında tutulan kopya", "notifications": "bildirimler", "checkpoint hashes for timestamps": "zaman damgaları için kontrol noktası hash değerleri", "signed checkpoints for the witness": "tanık için imzalı kontrol noktaları", "Switched on in this example": "Bu örnekte etkinleştirilmiştir", "Optional · off by default": "İsteğe bağlı · varsayılan olarak kapalı", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Bu makineden ayrılırken: Telegram bağlantısı ve {list}. Başka hiçbir şey yok.", "Default: only the Telegram connection leaves this machine.": "Varsayılan ayar: Bu makineden yalnızca Telegram bağlantısı dışarıya çıkar.", "{done} of {total} done": "{done}/{total} tamamlandı", "Mark step {n} as done": "{n} numaralı adımı tamamlanmış olarak işaretle", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Metin", "Copied": "Kopyalandı", "Command copied.": "Komut kopyalandı.", "Selected — Ctrl/Cmd+C": "Seçildi — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Komut seçildi. Elle kopyalayın.", "Command copied to clipboard.": "Komut panoya kopyalandı.", "Select text": "Metni seç", "Clipboard unavailable. Command selected; copy it manually.": "Pano kullanılamıyor. Komut seçildi; manuel olarak kopyalayın.", "A message arrives. The first observation is saved.": "Bir mesaj gelir. İlk gözlem kaydedilir.", "The time changes. Both captured versions stay.": "Zaman değişir. Yakalanan her iki sürüm de kalır.", "The message disappears. The captured history remains.": "Mesaj kaybolur. Kaydedilen geçmiş kalır.", "Pause example animation": "Örnek animasyonu duraklat", "Play example animation": "Örnek animasyonu oynat", "Play": "Oynat", "Full-size workspace screenshot": "Çalışma alanının tam boyutlu ekran görüntüsü", "Workspace screenshot · fictional data": "Çalışma alanı ekran görüntüsü · hayali veriler", "Close": "Kapat", "Close screenshot": "Ekran görüntüsünü kapat", "Scrollable full-size screenshot": "Kaydırılabilir tam boyutlu ekran görüntüsü", "Enlarge: {name}": "Büyüt: {name}", "View full size": "Tam boyutta görüntüle"}</script>
+</body></html>

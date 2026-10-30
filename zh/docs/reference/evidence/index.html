@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="zh-Hans" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>证据格式 | TgWitness</title>
+<meta name="description" content="签名 ZIP 文件的内容、记录类型、操作收据、用户资料、异地副本及离线验证。"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="证据格式 | TgWitness"><meta property="og:description" content="签名 ZIP 文件的内容、记录类型、操作收据、用户资料、异地副本及离线验证。">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/evidence/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/evidence/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/evidence/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/", "url": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/", "name": "证据格式 | TgWitness", "description": "签名 ZIP 文件的内容、记录类型、操作收据、用户资料、异地副本及离线验证。", "inLanguage": "zh-Hans", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://phishdestroy.github.io/TgWitness/zh/"}, {"@type": "ListItem", "position": 2, "name": "文档", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/"}, {"@type": "ListItem", "position": 3, "name": "参考", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "证据格式", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">跳转至内容</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / 文档</span></a>
+<nav aria-label="指南"><a href="../../concepts/">图文指南</a><a href="../../">所有指南</a><a href="../">参考</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="语言"><span aria-hidden="true">◍</span> 简体中文</summary><div class="lang-list"><a href="../../../../docs/reference/evidence/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/evidence/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/evidence/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/evidence/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/evidence/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/evidence/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/evidence/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/evidence/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/evidence/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/evidence/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/evidence/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/evidence/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="./" hreflang="zh-Hans" lang="zh-Hans" aria-current="true">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="在浅色和深色主题之间切换"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="指南"><a href="../../../guides/modes.html">模式、场景和证据级别</a><p class="nav-label">入门指南</p><a href="../../start/">几分钟内即可开始使用</a><a href="../../accounts/">连接账户</a><a href="../../proxies/">选择代理</a><a href="../../exports/">导出与验证</a><p class="nav-label">了解证据</p><a href="../../concepts/">了解证据如何运作</a><a href="../../cases/">跨所有聊天记录进行调查</a><a href="../../security/">确保安全</a><p class="nav-label">了解更多</p><a href="../../witness/">设置 Witness 机器人</a><a href="../../server/">保持其运行</a><a href="../../troubleshooting/">查找问题所在</a></nav><nav class="wiki-nav" aria-label="参考"><p class="nav-label"><a class="nav-label-link" href="../">参考</a></p><details class="wiki-group"><summary>设置</summary><a href="../quickstart/">快速入门</a><a href="../accounts/">账户与会话格式</a><a href="../connection/">连接、代理和数据保护</a><a href="../deployment/">部署</a></details><details class="wiki-group"><summary>收集</summary><a href="../collection/">数据采集原理</a><a href="../operations/">工作流程与操作</a><a href="../investigation/">调查模式</a><a href="../features/">功能与限制</a></details><details class="wiki-group" open><summary>证据</summary><a href="../how-it-works/">证据的运作原理</a><a href="./" aria-current="page">证据格式</a><a href="../witness/">独立见证者</a><a href="../timestamp/">时间戳</a></details><details class="wiki-group"><summary>安全与项目</summary><a href="../security/">安全与数据处理</a><a href="../architecture/">架构</a><a href="../verification/">已测试的内容</a><a href="../license/">许可协议与架构不兼容声明</a><a href="../notice/">运营商兼容性通知</a><a href="../changelog/">更新日志</a></details></nav><p class="sidebar-note">v0.7.0<br>开源 · 可在您的设备上运行</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="指南"><a href="../../../">首页</a> <span aria-hidden="true">/</span> <a href="../../">文档</a> <span aria-hidden="true">/</span> <a href="../">参考</a> <span aria-hidden="true">/</span> <span aria-current="page">证据格式</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">参考 / 证据</p><h1>证据格式</h1><p class="guide-outcome">签名 ZIP 文件的内容、记录类型、操作收据、用户资料、异地副本及离线验证。</p><div class="wiki-body"><p>观察结果不等于结论。发件人 ID 不等同于现实世界中的身份。
+账户可见的服务更新是数据来源；Telegram 不会为第三方调查人员对这些保存的记录进行加密
+签名。</p>
+<h2 id="what-is-signed">什么是签名<a class="anchor" href="#what-is-signed" aria-label="本节链接">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>资料</th>
+<th>保护</th>
+<th>应保留的内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>日志中的每一项记录，包括操作事件</td>
+<td>每个事件均包含 SHA-256 链和一个 Ed25519 签名</td>
+<td>原始 <code>events.jsonl</code>（可信密钥指纹）及保留的检查点</td>
+</tr>
+<tr>
+<td>证据 ZIP 文件内容</td>
+<td><code>manifest.sig</code> 对规范清单进行签名，该清单列出了内容文件的哈希值</td>
+<td>完整的 ZIP 压缩包，包含其清单和签名</td>
+</tr>
+<tr>
+<td>保留的附件</td>
+<td>带签名的<code>media.saved</code>事件中包含SHA-256和字节计数；带签名的ZIP清单中包含文件哈希值</td>
+<td>经过验证的 ZIP 文件中的原始字节</td>
+</tr>
+<tr>
+<td>检查点</td>
+<td>对日志长度、头部哈希值、公钥及创建时间进行 Ed25519 签名</td>
+<td>在发生争议性更改前保留的独立副本</td>
+</tr>
+<tr>
+<td>运行收据</td>
+<td>单独签名的采集器测量数据；也包含在经过签名的<code>process.started</code>事件中</td>
+<td>收据及相关日志；相关数据均为用户自报</td>
+</tr>
+<tr>
+<td>独立的 CSV 或 HTML 文件</td>
+<td>不包含独立的加密签名；仅凭事件哈希值是不够的</td>
+<td>请使用经过验证的 ZIP 文件中的原文件进行完整性校验</td>
+</tr>
+<tr>
+<td>由浏览器生成的屏幕截图、打印件或 PDF 文件</td>
+<td>衍生作品上不包含 TgWitness 的签名</td>
+<td>保留原始的经过验证的软件包，并记录衍生版本的制作过程</td>
+</tr>
+</tbody>
+</table></div>
+<p>该采集器在生成每种导出格式之前，都会验证日志签名。
+该源数据验证不会在单独下载的 CSV 或
+HTML 文件上生成签名。同样，有效的 JSONL 事件签名也不会提供附件
+字节，也无法独立证明已提供了完整的观察日志。</p>
+<h2 id="investigation-handoff">调查移交<a class="anchor" href="#investigation-handoff" aria-label="本节链接">#</a></h2>
+<ol>
+<li>请在案件笔记中记录案件编号、操作员、Telegram 账号数字 ID、选定的
+    信息源、采集政策及采集时间段。TgWitness
+    负责保存观察记录；案件分配和证据保管记录则在
+    应用程序外部进行管理。请通过
+    <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">实时验收流程</a>确认预期的采集设置是否符合要求。</li>
+<li>在依赖
+    其导出数据之前，请独立保留工作区的公钥指纹。在收集过程中，将签名检查点保存至收集器之外。
+    记录中断情况以及该账户可见性的限制。</li>
+<li>导出<strong>带签名的 ZIP</strong> 文件并保留带签名的运行收据。请在
+    导出日志边界处或之前设置检查点。较晚的检查点会正确地拒绝
+    较早的导出，因为其长度不足。导出内容包含完整的工作区日志，
+    不受面板过滤器影响；请在分享前仔细审查相关材料。</li>
+<li>
+<p>请收件人使用可信的验证器副本以及
+    独立提供的指纹/检查点来验证 ZIP 文件。请在已激活 Python 环境的可信代码检出环境中：
+    </p>
+<pre><code class="language-sh">python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json</code></pre>
+<p>当两个输入均已提供且被接受时，成功生成的输出报告为 <code>key_pinned: true</code>
+和 <code>checkpoint_checked: true</code>
+。请保留验证结果。
+5. 在您的保管记录中记录归档文件的 SHA-256 值、导出边界、传输日期、发件人和
+收件人。保持原始包完整，并仅对
+副本进行操作。请分享证据文件，而非应用程序的私有数据
+目录——该目录还包含账户会话和签名密钥。
+传输时，可将导出文件放入受 AES-256 加密且设有密码保护的 ZIP 压缩包中。该
+密码仅用于保护机密性，且不会被存储；接收方解压
+归档文件后，需验证其中未被篡改的签名导出文件。
+6. 若需要独立的时间锚定，请遵循
+<a href="../timestamp/">RFC 3161</a>
+流程，并保留请求、检查点、可信
+CA 信息以及经过验证的权威机构响应。仅准备请求
+本身并不能获得时间戳。</p>
+</li>
+</ol>
+<p>成功的验证可确立相对于可信收集器
+密钥和保留边界的完整性。原始真实性、完整的 Telegram 消息传递、可信时间
+以及法律可采纳性均需单独证据支持。本版本尚未完成
+Telegram 实时环境认证或独立的法证/安全评估。</p>
+<p>通过 Apprise 发送的通知包含工作区和聊天群组名称及数量；已删除和已编辑消息的简短
+摘录仅在操作员启用该功能时才会添加
+（默认关闭）。这些仅作为便利提示，而非证据：无法保证消息送达，
+且只有日志及其签名导出文件才会记录实际观察到的内容。 若启用工作区
+代理，通知将通过相同路径传输；无法使用该路径的服务以及 MTProxy 路由将被拒绝。</p>
+<h2 id="event-canonicalization">事件规范化<a class="anchor" href="#event-canonicalization" aria-label="本节链接">#</a></h2>
+<p>哈希输入必须包含以下字段：</p>
+<pre><code class="language-text">seq, observed_at, source_at, kind, chat_id, message_id, actor_id, payload, previous_hash</code></pre>
+<p>使用与 Python 兼容的 JSON 格式进行序列化，采用 UTF-8 编码，对象键按顺序排列，不进行 ASCII
+转义，不包含无关的空白字符，且不包含 NaN/无穷大：</p>
+<pre><code class="language-python">json.dumps(value, ensure_ascii=False, sort_keys=True,
+           separators=(&quot;,&quot;, &quot;:&quot;), allow_nan=False).encode(&quot;utf-8&quot;)</code></pre>
+<p>这些字节的 SHA-256 值即为事件哈希。签名采用 Ed25519 对
+32 个原始哈希字节进行计算，随后进行 Base64 编码。第一个 previous_hash 由 64 个零组成。
+序列号从 1 开始，并以 1 为增量递增。所有事件（包括操作性
+事件）共用一条链。系统不抑制重复交付：重复
+的观测结果是独立的收据，而非对独立 Telegram 操作的声明。</p>
+<p>Telegram 的原始日期为 ISO 字符串；二进制字段将转换为包含
+bytes_base64 的对象。消息正文、实体、媒体描述符、回复元数据、点赞、
+以及服务操作（如有提供）均保留在原始消息元数据中。</p>
+<p>observed_at 是采集器的 UTC 墙钟时间。source_at 是提供的 Telegram 日期
+（如有）。删除通知不会提供确切的删除时间，因此
+source_at 保持为空。传输接收顺序不一定与源事件
+顺序一致。历史快照使用较早的源日期，但采用当前的观察时间。</p>
+<h2 id="actor-semantics">行为主体语义<a class="anchor" href="#actor-semantics" aria-label="本节链接">#</a></h2>
+<p>message.new 中的 actor_id 即为消息发送者。message.edited 未推断出
+编辑者；payload.sender_id 记录了被观察消息的发送者。 删除
+actor_id 保持为 null。成员服务消息保留发送者和操作
+类型，不会将每次移除都转换为自愿退出。原始参与者
+更新保留所提供的 actor_id。反应快照不会虚构变更操作者。</p>
+<p>私人聊天和普通群组的删除通知仅包含消息 ID。
+这些聊天共享一个全账户通用的 ID 序列，因此一个 ID 代表该账户中的一条
+消息。 当具有该 ID 的消息此前已保存在此日志中时，
+删除操作将在该聊天中记录为 message.deleted，并使用 payload.chat_resolution
+作为方法名称。从未被保存过的 ID 将作为 deletion.unscoped 保存，且不包含
+chat_id；系统不会进行任何推测。 频道和超级群组按聊天对消息进行编号，
+绝不会通过这种方式进行匹配。当被删除的消息是由被观察账户发送时，
+payload.deleted_message_was_outgoing 为 true；但仍未提供删除者信息。</p>
+<h2 id="coverage-continuity-gaps-and-unobserved-ids">覆盖范围：连续性、缺失内容及未被观察到的 ID<a class="anchor" href="#coverage-continuity-gaps-and-unobserved-ids" aria-label="本节链接">#</a></h2>
+<p>每个签名 ZIP 文件都包含 <code>coverage.json</code>，HTML 报告以相同的摘要开头，而
+<code>verify.py</code> 会根据 <code>events.jsonl</code> 重新计算该摘要，而非直接信任该文件：</p>
+<ul>
+<li><strong>从 X 到 Y 持续进行观察。</strong>一个时段以 <code>observation.started</code> 开始，
+    并以暂停、停止、Telegram 连接中断、注销、进程启动但未
+    有序停止，或在观察期间超过三分钟无任何记录而结束
+    （每分钟都会写入一次心跳记录，因此静默意味着进程停止、卡死或
+    计算机进入睡眠状态）。当在<strong>“参数</strong>”中更改心跳间隔时，每次心跳
+    都会记录该变更，且允许的静默时长变为三个间隔，但绝不少于三分钟。</li>
+<li><strong>“缺口”</strong>列出了各时段之间的时间间隔及原因。若最后
+    一条记录处仍存在缺口，则标记为 <code>not_resumed_by_last_record</code>。</li>
+<li><strong>未检测到的消息 ID。</strong>对于按
+    聊天计数的消息的频道和超级群组，已检测到的消息 ID 之间的缺失 ID 将以范围形式列出。这些消息会被报告为
+    “未<em>检测到</em>”——即已被删除、从未送达或超出保存的历史记录范围——绝不会被标记为
+    “已删除”。 私聊和普通群组共享全账户范围的序列号，因此其中的
+    缺口没有任何意义，故不予列出。</li>
+<li>聊天层面的数据缺失通知（例如 Telegram 在某个
+    频道中要求恢复差异数据）被计为注释；它们不会中断全局覆盖。</li>
+</ul>
+<p>“覆盖范围”描述了该采集器记录的内容。这并不证明 Telegram 在
+连续期间内发送了每一条更新。</p>
+<h2 id="producer">制作人<a class="anchor" href="#producer" aria-label="本节链接">#</a></h2>
+<p>证据 ZIP 包、聊天记录导出、Witness 日志以及
+人员档案文件的声明中包含的签名清单包含 <code>producer</code>
+：软件、版本、项目（PhishDestroy）、
+主页和源代码仓库。HTML 报告中显示了相同的行，<code>verify.py</code>
+将其作为已验证内容的一部分输出。 在此字段存在之前生成的归档文件仍按
+原有方式进行验证，并在报告中显示为未指明生成者。</p>
+<h2 id="people-profiles">人物简介<a class="anchor" href="#people-profiles" aria-label="本节链接">#</a></h2>
+<p>应请求，系统会基于日志中已有的
+某次聊天的记录生成个人资料文件（<code>tgwitness-dossier-v1</code>，JSON）；该文件不会从 Telegram 获取任何数据，且个人资料内容绝不会
+写入日志（个人资料的启用和停用将记录为 <code>dossier.changed</code>）。
+对于每位拥有已保存消息的用户，该文件会列出其姓名和用户名历史记录、Telegram标记
+（机器人、诈骗、虚假、高级、已验证、受限、已删除）——以保存时显示的状态为准，以及个人资料
+照片ID、来自本地头像缓存中与该头像相似的头像的SHA-256和感知哈希（pHash，与<code>imagehash.phash</code>兼容）
+、活动记录（首条和末条消息、
+数量、已编辑和已删除的分享、按UTC小时划分的消息）、谁回复了谁、该用户曾在此日志中参与的其他聊天
+中该用户曾发帖的聊天记录，以及被提及的钱包（BTC、EVM、TRON、TON、LTC、
+DOGE、XMR、SOL；Base58Check地址已通过校验和验证）、电话号码、用户名和
+链接，包括隐藏在文本背后的链接。</p>
+<p>每个事实都会列出其来源的日志记录（<code>seq</code>），而 <code>record_hashes</code> 则包含
+每个被引用的记录的哈希值。该声明使用工作区密钥进行签名：</p>
+<pre><code class="language-sh">python verify.py tgwitness-dossier-CHAT.json --fingerprint TRUSTED_SHA256 --evidence tgwitness-evidence.zip</code></pre>
+<p>该工具会检查签名，验证证据导出文件本身（包括签名、哈希链和文件），
+并确保每个被引用的记录在同一工作区的导出文件中完整无缺且未被修改。头像哈希值会被标注为来自本地缓存
+（而非日志记录）。提及内容属于模式匹配——仅为待核查的线索，而非已验证的事实。
+配置文件按聊天进行启用，可导出为带密码的 AES-256 压缩包，且
+在关闭配置文件或聊天从来源中移除时被删除。</p>
+<h2 id="independent-witness">独立见证者<a class="anchor" href="#independent-witness" aria-label="本节链接">#</a></h2>
+<p>将证人日志（<code>tgwitness-witness-v1</code>）及其频道帖子与
+通过 <code>verify.py --witness … --channel …</code> 导出的证据进行比对；参见<a href="../witness/">独立证人</a>。</p>
+<h2 id="manifest-and-checkpoints">清单与检查点<a class="anchor" href="#manifest-and-checkpoints" aria-label="本节链接">#</a></h2>
+<p>manifest.json 包含格式、导出时间、公钥、指纹、日志
+长度、头部哈希、范围、生成者、限制条件，以及除 <code>manifest.json</code> 和 <code>manifest.sig</code> 本身之外
+每个内容成员的 SHA-256 值。
+manifest.sig 是规范化 manifest JSON 的 Base64 编码 Ed25519 签名。
+验证器会拒绝处理意外/缺失的成员、名称重复、文件损坏、
+序列/链断裂、签名无效以及与提供的检查点不匹配的情况。
+它绝不会提取归档路径。它将声明的总未压缩大小限制为 4 GiB；
+若提高 <strong>Parameters</strong> 限制，<code>--max-gib N</code> 允许创建更大的归档文件。</p>
+<p>请从可信的代码检出或经过审核的独立副本中获取验证程序代码。位于不可信存档中的验证程序
+是由该存档作者提供的可执行内容；
+其存在仅是为了便于移植，而非独立的信任锚点。</p>
+<p>检查点会签署一份声明，其中包含公钥、日志长度、头部
+哈希值以及创建时间。验证者可以检查后续存档是否包含
+相同的前缀。在发生有争议的更改之前，请将检查点保留在收集器之外：
+如果攻击者同时控制了存档和检查点，则可能同时篡改两者。</p>
+<p>来自未固定密钥的有效签名仅能证明内部一致性。
+即使使用固定密钥，如果采集器或密钥在记录前已遭
+泄露，也无法证明源内容的真实性。外部时间戳和可信捕获是
+独立的要求。TgWitness 不保证证据的可采纳性或法证认证。</p>
+<h2 id="attachments">附件<a class="anchor" href="#attachments" aria-label="本节链接">#</a></h2>
+<p>文件在 media/ 目录下通过 SHA-256 哈希值进行标识。media.saved 事件将哈希值和
+字节长度与特定的消息事件相关联。原始文件名属于元数据，绝非本地
+路径。 媒体数据以异步方式下载，因此立即删除可能导致
+无法捕获。已禁用的采集、超大/未知大小的文件、下载失败
+以及下载中断等结果均会显示。进程崩溃可能会留下
+未被引用的部分文件；这些文件不会包含在导出数据中。</p>
+<p>ZIP 导出工具会根据文件名对存储的媒体文件进行验证。JSONL、CSV 和 HTML
+导出格式会验证事件签名，但不包含媒体文件数据。衍生报告
+仅供参考；events.jsonl 才是权威的事件表示形式。</p>
+<h2 id="durable-collection-and-process-receipts-02">持久的收集与处理收据 (0.2)<a class="anchor" href="#durable-collection-and-process-receipts-02" aria-label="本节链接">#</a></h2>
+<p>媒体任务及其消息事件提交在同一事务中完成。 该任务存储
+原始 TL 消息描述符；签名的观测记录将其 SHA-256 值、账户
+及大小策略进行绑定。恢复操作会在下载前验证该绑定。它绝不会获取
+当前消息，也不会悄无声息地替换为更新版本的附件。中断的任务
+会重试，而永久性失败则仍被视为明确的结果。</p>
+<p>每个工作区都有独立的日志和签名身份。process.started 事件包含
+运行 ID、本地时间、依赖项版本、源文件哈希值、初始账户/范围，
+以及捕获设置。心跳消息包含运行 ID、单调时间以及队列状态。
+该流程收据也可作为单独签名的声明下载。
+文件测量数据为自我报告数据，并非可信的硬件认证。</p>
+<p>自动检查点会在启动时、监控期间每五分钟（
+<strong>参见“参数 → 每隔</strong>”）、以及有序停止时本地保留。 启动验证和导出操作会将日志
+与最新保留的本地检查点进行比对。当检查点完好无损时，此机制可检测到数据库回滚；
+但若操作员同时控制两者，仍可将两者一并替换。
+独立的保留机制和外部可信时间戳仍是各自独立的要求。</p>
+<p>重启后，将恢复已保存的 Telegram 更新位置（<code>catch_up_from</code> 位于
+<code>observation.started</code>），并请求获取遗漏的更新。定期重新检查会记录
+<code>message.recovered</code> 以获取遗漏的消息，并在 Telegram 不再
+返回已保存消息时记录 <code>message.missing_on_recheck</code>；后者并非删除通知，且未指明删除者或时间。</p>
+<h3 id="off-site-copy-and-restore-s3">异地备份与恢复（S3）<a class="anchor" href="#off-site-copy-and-restore-s3" aria-label="本节链接">#</a></h3>
+<p>异地副本（“导出”，默认关闭）会将日志片段、保留文件、检查点
+及其时间戳，以及已完成的聊天记录导出上传至兼容 S3 的存储空间，上传前使用
+AES-256-GCM 加密，所用密钥存储于工作区保险库中；若存储桶支持，则应用
+对象锁定保留机制。若未下载密钥，则无法读取备份内容。请使用 <code>python -m tgwitness.replica restore --key-file KEY.json --out DIR</code> 进行恢复和验证。</p>
+<p>恢复操作需要一个空的普通目录。下载的文件和解密后的对象将保存在私有
+临时存储中，直至整个日志及所有保留的检查点均通过验证。不安全的对象
+路径、不一致的段范围以及长度短于检查点的日志将被拒绝；验证失败
+时，系统不会发布任何恢复文件。 保留性检查会将返回的“对象锁定”
+模式和日期与上传时发送的截止时间进行比对（允许一秒的四舍五入误差）。过期、
+无效或被缩短的截止时间均不视为已验证。状态报告将显示该上传批次中
+被读取保留状态的抽样对象。</p>
+<p>复制进度以目标位置和加密密钥为范围。更改端点、存储桶
+或前缀将触发将本地保留的日志、媒体文件和检查点完整复制到
+该目标位置。旧的未限定范围的进度将被保留，但在升级后会重放一次。历史
+聊天记录导出文件若已从本地发件箱中删除，仍会保留在其原目标位置。</p>
+<p>缺失或损坏的本地媒体文件将作为当前迭代的错误报告，并保持媒体光标停留在
+该文件之前，以便在下一次迭代中重新尝试处理该文件；其后的文件、检查点和导出内容仍将
+被复制。恢复过程会
+将所有已保存媒体的引用与解密后的哈希值及记录的大小进行比对。 来自中断上传的
+相同重叠日志段将被去重；冲突的重叠部分将被拒绝。
+上传过程中创建的检查点将推迟处理，直至其所涵盖的日志记录被
+复制完毕，因此一个完成的处理阶段不会在日志之前发布检查点。</p>
+<h3 id="streaming-export-snapshots">流式导出快照<a class="anchor" href="#streaming-export-snapshots" aria-label="本节链接">#</a></h3>
+<p>流式导出使用稳定的 SQLite 读取快照。当下载完成时，该快照的起始点可能早于
+当前的实时日志。在此快照之后创建的检查点
+可能会正确报告存档长度较短；请与位于导出前缀处或之前的检查点进行比较，
+而非任意的后续检查点。</p>
+<h2 id="rfc-3161-preparation-and-response-verification-02">RFC 3161 准备与响应验证 (0.2)<a class="anchor" href="#rfc-3161-preparation-and-response-verification-02" aria-label="本节链接">#</a></h2>
+<p>证据模式（默认关闭）仅通过工作区路径（绝不通过 MTProxy）将每个签名检查点的 SHA-256 哈希值发送至列出的
+RFC 3161 权威机构和 OpenTimestamps 日历。
+响应结果保存在 <code>checkpoints/anchors/</code> 中，经 <code>verify.py</code> 导出并验证（<code>--tsa-ca</code> 负责
+验证 TSA 签名；使用 <code>ots upgrade</code> 和 <code>ots verify</code> 确认 OpenTimestamps 证明）。</p>
+<p>该面板会准备一个请求存档，其中包含规范的 checkpoint.json 字节数据、
+SHA-256 消息指纹以及 timestamp.tsq 文件中的随机非ce值、校验和及操作说明。
+此过程不会发起任何网络请求。该准备过程不构成可信时间戳。</p>
+<p><code>python -m tgwitness.anchor verify</code> 会调用 OpenSSL 的 ts 函数两次：一次针对检查点
+字节，一次针对原始请求。必须显式指定受信任的 CA 文件；
+内置证书不会被自动信任。在命令行界面（CLI）中，请求验证为可选操作，
+因此请保留并提供 --request 参数以验证非ce。结果将表明
+是否已进行验证。收集器的检查点签名和日志仍需
+使用可信收集器指纹分别进行验证。</p>
+<p>当前的验证器不会获取吊销信息，也不支持证书过期后的长期
+归档验证。请勿将成功的签名
+验证等同于合格的时间戳或法律可采纳性。在开发过程中，尚未联系过真正的独立
+时间戳服务提供商（TSA）。请参阅<a href="../timestamp/">操作流程</a>。</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/EVIDENCE.md">在 GitHub 上编辑此页面 ↗</a><a class="next-guide" href="../witness/"><span>下一步</span><strong>独立见证者 →</strong></a><p>这些指南描述了当前的实现方案。验证结果和剩余缺陷在其他文档中单独记录。 <a href="../verification/">已测试的内容 →</a></p></footer>
+</main>
+<aside class="toc" aria-label="本页面内容"><p class="nav-label">本页面内容</p><a href="#what-is-signed">什么是签名</a><a href="#investigation-handoff">调查移交</a><a href="#event-canonicalization">事件规范化</a><a href="#actor-semantics">行为主体语义</a><a href="#coverage-continuity-gaps-and-unobserved-ids">覆盖范围：连续性、缺失内容及未被观察到的 ID</a><a href="#producer">制作人</a><a href="#people-profiles">人物简介</a><a href="#independent-witness">独立见证者</a><a href="#manifest-and-checkpoints">清单与检查点</a><a href="#attachments">附件</a><a href="#durable-collection-and-process-receipts-02">持久的收集与处理收据 (0.2)</a><a href="#rfc-3161-preparation-and-response-verification-02">RFC 3161 准备与响应验证 (0.2)</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>开源 · 可在您的设备上运行</span><a href="../../../../LICENSE">MIT 许可协议</a><a href="../notice/">操作员通知</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">安全</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "等待消息", "Step through a fictional send, edit and delete.": "通过一个虚构的发送、编辑和删除过程进行演示。", "No observations yet. Start the sequence or advance one event.": "尚无观察记录。开始序列或跳转至下一事件。", "Meet at 10:00": "10:00 见面", "A new message is visible in the chat.": "聊天中显示了一条新消息。", "Record 1 appended: the collector observed the original message.": "已附录记录 1 条：采集器已捕获原始消息。", "Meet at 11:00": "11:00 见面", "The current text changes. The earlier observation stays.": "当前文本内容有所变更。先前的观察结果仍然有效。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "记录 2 已追加：该编辑内容为新观察结果。记录 1 仍保留原始文本。", "Message deleted": "消息已删除", "The message has disappeared from the chat view.": "该消息已从聊天界面中消失。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "已添加记录 3：删除通知与两个被观察到的版本一同保留。", "0 records": "0 条记录", "1 record": "1 条记录", "2 records": "2 条记录", "3 records": "3 条记录", "Complete / {n} of 3": "已完成 / {n}/3", "Step / {n} of 3": "第 {n} 步（共 3 步）", "Pause": "暂停", "Replay sequence": "回放序列", "Play sequence": "播放序列", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "静态示例已上线。如需交互式计算哈希值，请通过 HTTPS 访问此页面，或在支持 Web Crypto 的本地预览环境中打开。", "No record supplied": "未提供记录", "Tail removed": "尾部内容已删除", "≠ saved hash": "≠ 已保存的哈希值", "Rebuilt · different hash": "重建 · 哈希值不同", "= saved hash": "= 已保存的哈希值", "Same length and matching head.": "篇幅相同且标题一致。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "这三个计算出的哈希值均与保存的哈希值一致。该样本符合保留的三个记录边界。", "Same saved head; the journal prefix fails verification.": "保存的头部信息相同；日志前缀验证失败。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "记录 2 与其保存的哈希值不再匹配。若仅检查最终存储的头部，则会遗漏此问题；验证器会检查每一条记录。", "Head differs from the retained checkpoint.": "标题与保留的检查点不同。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "重建的哈希值相互关联，但最终的头部已发生变化。保留的检查点拒绝接受这一历史记录。对于已更改的记录，原始签名也会验证失败。", "Too short: 2 supplied records \u003c 3 retained records.": "内容过短：提供的记录有 2 条，而保留的记录少于 3 条。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "剩下的两个哈希值仍然匹配。保留的检查点揭示了缺失的部分。如果没有那个早先的边界，仅凭这个较短的前缀是无法揭示这一遗漏的。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "此浏览器不支持哈希计算。下方的公式和静态说明仍可查看。", "{n} records": "{n}条记录", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "已接受：计数持续增加，签名已验证，密钥匹配。该见证者保留了这一新边界。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "回滚：签名后的结果报告的记录数量少于上次被接受的检查点。Witness 会记录该问题，并保留较早被接受的边界。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "分叉：计数保持不变，但分支头不同。见证者会记录该分歧，并保留先前被接受的分界点。", "No answer": "无回答", "boundary unknown": "边界未知", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "无响应：该工具会记录验证失败的情况。它无法确定收集器的当前状态。如果该工具仍能访问 Bot API 且其发布政策允许，则会发布该失败信息。", "Send {n}": "发送 {n}", "Edit {n}": "编辑 {n}", "Delete {n}": "删除 {n}", "Both accounts captured all six expected observations in this example.": "在这项示例中，这两个账户均捕获了预期的全部六项观察结果。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "账户 B 依然成功捕获了 6 条中的 6 条。其中两条收据的捕获耗时较长。捕获率和收据延迟反映的是不同的问题。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "账户 B 在截止时间前捕获了 6 条中的 5 条（83.3%）。缺失的编辑操作未测得延迟。此结果仅描述了这六项受控操作。", "not observed by cutoff": "未在截止时间前观察到", "{s} seconds": "{s}秒", "Exact values follow in the table.": "具体数值见下表。", "{s} s": "{s} s", "Not observed": "未发现", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "四个聊天群组提供了不同的观察结果。请追溯每条连接的源记录；在未确认发件人身份的情况下，请勿将该频道帖子归因于用户 71001。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "记录 #146 和 #205 显示相同的发件人 ID：71001。这将同一 Telegram 账号在两个聊天群组中发布的帖子关联起来。但这并不能识别现实世界中的具体个人，也无法确定该频道帖子的发布者。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "目标地址 pay.example.invalid/new 出现在群组记录 #146、机器人键盘 #173、频道编辑 #188 以及私信 #205 中。目标地址的重复出现表明这些内容之间存在关联；但这并不能证明这些账户受共同控制。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "在此虚构案例中，已完成的媒体收据 #151 和 #209 具有完全相同的 SHA-256 值。请对比实际字节内容及其关联的消息记录。该匹配文件既未标识其创建者，也无法证明是谁转发了该文件。", "the encrypted off-site copy": "加密的异地副本", "notifications": "通知", "checkpoint hashes for timestamps": "时间戳的检查点哈希值", "signed checkpoints for the witness": "TgWitness 的签名检查点", "Switched on in this example": "在此示例中已启用", "Optional · off by default": "可选 · 默认关闭", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "离开这台机器时：Telegram 连接和 {list}。除此之外别无他物。", "Default: only the Telegram connection leaves this machine.": "默认设置：仅 Telegram 连接会离开这台机器。", "{done} of {total} done": "已完成 {done}/{total}", "Mark step {n} as done": "将步骤 {n} 标记为已完成", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "文案", "Copied": "已复制", "Command copied.": "已复制该指令。", "Selected — Ctrl/Cmd+C": "选中 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "已选中命令。请手动复制。", "Command copied to clipboard.": "命令已复制到剪贴板。", "Select text": "选择文本", "Clipboard unavailable. Command selected; copy it manually.": "剪贴板不可用。已选中命令；请手动复制。", "A message arrives. The first observation is saved.": "一条消息送达。首次记录被保存。", "The time changes. Both captured versions stay.": "时间会改变，但两个记录版本都会保留下来。", "The message disappears. The captured history remains.": "消息虽已消失，但记录的历史依然存在。", "Pause example animation": "暂停示例动画", "Play example animation": "播放示例动画", "Play": "播放", "Full-size workspace screenshot": "全屏工作区截图", "Workspace screenshot · fictional data": "工作区截图 · 虚构数据", "Close": "关闭", "Close screenshot": "关闭截图", "Scrollable full-size screenshot": "可滚动全屏截图", "Enlarge: {name}": "放大：{name}", "View full size": "查看大图"}</script>
+</body></html>

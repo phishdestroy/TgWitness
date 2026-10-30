@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="uk" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Впровадження | TgWitness</title>
+<meta name="description" content="Запускайте TgWitness як службу на Windows, Linux, macOS або в Docker, через HTTPS, із резервним копіюванням та оновленнями."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/deployment/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="uk_UA">
+<meta property="og:title" content="Впровадження | TgWitness"><meta property="og:description" content="Запускайте TgWitness як службу на Windows, Linux, macOS або в Docker, через HTTPS, із резервним копіюванням та оновленнями.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/uk/docs/reference/deployment/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/deployment/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/deployment/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/deployment/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/deployment/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/deployment/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/deployment/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/deployment/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/deployment/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/deployment/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/uk/docs/reference/deployment/", "url": "https://phishdestroy.github.io/TgWitness/uk/docs/reference/deployment/", "name": "Впровадження | TgWitness", "description": "Запускайте TgWitness як службу на Windows, Linux, macOS або в Docker, через HTTPS, із резервним копіюванням та оновленнями.", "inLanguage": "uk", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Головна", "item": "https://phishdestroy.github.io/TgWitness/uk/"}, {"@type": "ListItem", "position": 2, "name": "Документація", "item": "https://phishdestroy.github.io/TgWitness/uk/docs/"}, {"@type": "ListItem", "position": 3, "name": "Довідка", "item": "https://phishdestroy.github.io/TgWitness/uk/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Впровадження", "item": "https://phishdestroy.github.io/TgWitness/uk/docs/reference/deployment/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Перейти до вмісту</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Документація</span></a>
+<nav aria-label="Посібники"><a href="../../concepts/">Ілюстрований посібник</a><a href="../../">Усі посібники</a><a href="../">Довідка</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Мова"><span aria-hidden="true">◍</span> Українська</summary><div class="lang-list"><a href="../../../../docs/reference/deployment/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/deployment/" hreflang="ru" lang="ru">Русский</a><a href="./" hreflang="uk" lang="uk" aria-current="true">Українська</a><a href="../../../../es/docs/reference/deployment/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/deployment/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/deployment/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/deployment/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/deployment/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/deployment/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/deployment/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/deployment/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/deployment/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/deployment/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Перемикання між світлою та темною темою"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Посібники"><a href="../../../guides/modes.html">Режими, сценарії та рівні доказовості</a><p class="nav-label">Перші кроки</p><a href="../../start/">Почніть за лічені хвилини</a><a href="../../accounts/">Підключити обліковий запис</a><a href="../../proxies/">Виберіть проксі-сервер</a><a href="../../exports/">Експорт та перевірка</a><p class="nav-label">Розуміння доказів</p><a href="../../concepts/">Дізнайтеся, як працює система збереження доказів</a><a href="../../cases/">Проведіть розслідування у всіх чатах</a><a href="../../security/">Забезпечте безпеку</a><p class="nav-label">Дізнайтеся більше</p><a href="../../witness/">Налаштування бота-свідка</a><a href="../../server/">Забезпечте його безперебійну роботу</a><a href="../../troubleshooting/">З’ясуйте, що пішло не так</a></nav><nav class="wiki-nav" aria-label="Довідка"><p class="nav-label"><a class="nav-label-link" href="../">Довідка</a></p><details class="wiki-group" open><summary>Налаштування</summary><a href="../quickstart/">Швидкий старт</a><a href="../accounts/">Формати облікових записів та сеансів</a><a href="../connection/">Підключення, проксі-сервери та захист даних</a><a href="./" aria-current="page">Впровадження</a></details><details class="wiki-group"><summary>Зібрати</summary><a href="../collection/">Як відбувається збір даних</a><a href="../operations/">Робочі процеси та операції</a><a href="../investigation/">Режим розслідування</a><a href="../features/">Можливості та обмеження</a></details><details class="wiki-group"><summary>Докази</summary><a href="../how-it-works/">Як працює система збереження доказів</a><a href="../evidence/">Формат доказів</a><a href="../witness/">Незалежний свідок</a><a href="../timestamp/">Часові мітки</a></details><details class="wiki-group"><summary>Безпека та проект</summary><a href="../security/">Безпека та обробка даних</a><a href="../architecture/">Архітектура</a><a href="../verification/">Що було протестовано</a><a href="../license/">Повідомлення про несумісність ліцензій та архітектури</a><a href="../notice/">Повідомлення про несумісність з певними операторами</a><a href="../changelog/">Журнал змін</a></details></nav><p class="sidebar-note">v0.7.0<br>З відкритим кодом · Працює на вашому комп’ютері</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Посібники"><a href="../../../">Головна</a> <span aria-hidden="true">/</span> <a href="../../">Документація</a> <span aria-hidden="true">/</span> <a href="../">Довідка</a> <span aria-hidden="true">/</span> <span aria-current="page">Впровадження</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Пошук у документації</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Спробуйте «проксі», «хеш-ланцюг», «токен» або «свідок»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Зручний пошук" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Введіть слово, щоб здійснити пошук у посібниках та довідковій інформації. Результати пошуку залишаються у вашому браузері.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Довідка / Налаштування</p><h1>Впровадження</h1><p class="guide-outcome">Запускайте TgWitness як службу на Windows, Linux, macOS або в Docker, через HTTPS, із резервним копіюванням та оновленнями.</p><div class="wiki-body"><p><strong>Англійська</strong> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md">Русский</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md">Українська</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md">Español</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md">Португальська (Бразилія)</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md">Türkçe</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md">العربية</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md">فارсі</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md">урду</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md">हिन्दी</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md">Індонезійська</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md">Tiếng Việt</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md">简体中文</a></p>
+<h2 id="choose-an-installation">Оберіть варіант встановлення<a class="anchor" href="#choose-an-installation" aria-label="Посилання на цей розділ">#</a></h2>
+<p>Для отримання портативного пакета розпакуйте файл <code>TgWitness-&lt;version&gt;-windows-amd64-portable.zip</code> з
+GitHub Releases. Для інших методів завантажте та розпакуйте ZIP-архів з вихідним кодом або клонуйте
+репозиторій, а потім виконайте наступну команду з каталогу проєкту:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Встановлення</th>
+<th>Початок</th>
+<th>Працює у фоновому режимі?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Портативний пакет для Windows</td>
+<td><code>TgWitness.cmd</code></td>
+<td>Ні; залиште вікно відкритим.</td>
+</tr>
+<tr>
+<td>Вбудована у Windows</td>
+<td><code>Start.cmd</code></td>
+<td>Ні; для роботи у фоновому режимі використовуйте додаткове завдання входу в систему.</td>
+</tr>
+<tr>
+<td>Вбудована підтримка Linux/macOS</td>
+<td><code>sh start.sh</code></td>
+<td>Ні; для роботи у фоновому режимі використовуйте systemd/launchd.</td>
+</tr>
+<tr>
+<td>Docker на будь-якому підтримуваному хості</td>
+<td><code>docker compose up -d --build --wait</code></td>
+<td>Так, поки працює демон Docker.</td>
+</tr>
+<tr>
+<td>Допоміжний інструмент для Docker у Windows</td>
+<td><code>scripts\Docker.cmd</code></td>
+<td>Так; допоміжна програма очікує на стан працездатності веб-сервера.</td>
+</tr>
+<tr>
+<td>Допоміжний інструмент для Docker на Linux/macOS</td>
+<td><code>sh scripts/docker-start.sh</code></td>
+<td>Так; допоміжна програма очікує на стан працездатності веб-сервера.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Щодо хмарного сервера, який має бути доступним для перевірки третьою стороною — створеного за допомогою
+API провайдера, без SSH, доступ до якого здійснюється виключно через Cloudflare Tunnel — див.
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md">розділ «Розгортання з високим рівнем надійності</a>».</p>
+<p>Вбудований запуск створює приватний файл <code>.venv</code> та встановлює закріплені залежності.
+Docker компілює їх усередині образу, не потребуючи Python на хості. Для первинного
+налаштування потрібен доступ до Інтернету. Якщо Python 3.11+ не знайдено, <code>Start.cmd</code> запитує до
+встановлення Python 3.12 для поточного користувача Windows (winget, інакше — інсталятор з python.org
+після перевірки підпису Python Software Foundation); він ніколи не вимагає
+прав адміністратора. Docker та служби ОС залишаються обов’язковими вимогами.</p>
+<p>Нативні та портативні інсталяції використовують <code>data/live</code> у своїй папці. Docker використовує том із назвою <code>tgwitness-data</code>,
+розташований за адресою <code>/data</code>. Це окремі інсталяції, доки ви свідомо не перенесете
+весь каталог даних. Не очікуйте, що новий контейнер Docker автоматично виявить нативні
+облікові записи.</p>
+<h2 id="installation-requirements">Вимоги до встановлення<a class="anchor" href="#installation-requirements" aria-label="Посилання на цей розділ">#</a></h2>
+<p>Для нативна інсталяція потрібні Python 3.11 або новішої версії з <code>venv</code> та <code>ensurepip</code>, доступ до Інтернету
+для інсталяції першої залежності, а також каталог проєкту з правом запису для
+<code>.venv</code>. Для панелі, що входить до комплекту, не потрібні Node.js чи фронтенд-збірка. Запустіть програму-запускач зі
+свого звичайного облікового запису в ОС; TgWitness не вимагає прав адміністратора/root.</p>
+<ul>
+<li><strong>Windows:</strong> <code>Start.cmd</code> перевіряє <code>py -3</code>, потім <code>python</code>, потім стандартні папки для кожного користувача та
+    папку «Program Files», і вимагає версії 3.11 або пізнішої. Якщо жодна з них не працює,
+    пропонується автоматична інсталяція для кожного користувача, описана вище. <code>py -3 start.py</code> також працює.
+    Портативний пакет взагалі не потребує Python.</li>
+<li><strong>Linux:</strong> <code>start.sh</code> перевіряє <code>python3.13</code>, <code>python3.12</code>, <code>python3.11</code>, <code>python3</code> та
+    <code>python</code> і виводить команду встановлення для apt, dnf, pacman, zypper, apk або Homebrew,
+    якщо жодна з них не підходить. Для встановлення в Debian/Ubuntu може знадобитися пакет
+    <code>python3-venv</code>, що відповідає обраному інтерпретатору. Стару версію
+    Python, встановлену за замовчуванням у дистрибутиві, необхідно замінити або доповнити Python 3.11+.</li>
+<li><strong>macOS:</strong> встановіть актуальну дистрибуцію Python 3.11+; не вважайте, що інтерпретатор, наданий ОС,
+    відповідає вимогам. Використовуйте файл <code>python3 start.py</code> із каталогу проєкту.</li>
+<li><strong>Docker:</strong> використовуйте Docker Engine/Desktop із Compose v2.20 або новішою версією. Docker Desktop
+    повинен використовувати контейнери Linux у Windows. Контейнер встановлює свої
+    власні залежності Python; на хості не потрібно окремо встановлювати Python.</li>
+</ul>
+<p>Використовуйте постійне локальне сховище для каталогу даних. Плануйте ємність з урахуванням обсягу повідомлень,
+медіафайлів, зростання WAL, експорту та резервних копій; не існує універсальних мінімальних вимог до
+дискового простору та оперативної пам’яті, що ґрунтуються на фактичних даних, для кожного навантаження. Архітектури процесорів та версії Python,
+для яких відсутні сумісні колеса залежностей, можуть вимагати додаткових інструментів збірки та їх
+власної кваліфікації. «Портативний» не означає універсальної підтримки будь-яких ОС чи апаратного забезпечення.</p>
+<p>Windows 11/Python 3.12 перевірено локально. Описи для Linux/macOS/контейнерів та CI
+надано, але на цьому хості розробки вони не виконувалися. Точний обсяг перевірки див. у файлі
+<a href="../verification/">VERIFICATION.md</a>.</p>
+<h2 id="local-computer">Локальний комп’ютер<a class="anchor" href="#local-computer" aria-label="Посилання на цей розділ">#</a></h2>
+<p>Використовуйте <code>Start.cmd</code> у Windows або <code>sh start.sh</code> у Linux/macOS. <code>scripts\Setup.cmd</code> або
+<code>sh start.sh --setup-only</code> готує
+середовище. Програма запуску встановлює залежності під час першого використання; подальші запуски
+використовують уже готове середовище. Для налаштування та збору даних Telegram потрібен доступ до Інтернету,
+але перегляд існуючих записів та створення експортних файлів працюють в автономному режимі.</p>
+<p>Після налаштування запустіть <code>python start.py --check</code>, щоб перевірити локальні залежності, Ed25519,
+сховище, конфігурацію ключів та адресу прослуховування без запуску колектора.
+Використовуйте <code>--json</code> для структурованого виводу. Передайте потрібні <code>--data-dir</code>, <code>--host</code> та
+<code>--port</code>. Ця перевірка не встановлює пакети, не створює журнал і не підключається до Telegram;
+вона не є перевіркою цілісності чи повноти охоплення. Під час запуску окремо перевіряються
+існуючі журнали. <code>python start.py --help</code> також дозволяє уникнути інсталяції.</p>
+<p>Варіанти:</p>
+<p>Після запуску start.py виконайте допоміжні команди з <code>.venv\Scripts\python.exe</code> у
+Windows або <code>.venv/bin/python</code> у Linux/macOS, або спочатку активуйте це середовище.
+Наведені нижче приклади <code>python -m ...</code> передбачають, що середовище вже активне.</p>
+<pre><code class="language-sh">python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 8787</code></pre>
+<p>Змінні середовища: TGWITNESS_DATA, TGWITNESS_HOST, TGWITNESS_PORT, TGWITNESS_TOKEN.
+TGWITNESS_VAULT_KEY_FILE вибирає режим зовнішнього ключа для нової інсталяції; див. нижче.
+TGWITNESS_TOKEN, якщо вказано, має містити щонайменше 24 символи; використовуйте криптографічно
+випадкове значення. Без нього програма генерує 256-бітний випадковий токен у файлі panel-token.txt.
+Перезапис змінних середовища не змінює цей файл. Перезапустіть програму, щоб змінити облікові дані.</p>
+<p>Каталог даних може належати лише одному процесу. Міжплатформова блокування файлів ОС запобігає
+випадковим одночасним операціям запису. Використовуйте один робочий процес Uvicorn. Панель може керувати будь-якою кількістю
+робочих просторів, з додатковими каталогами робочих просторів у профілях profiles/&lt;id&gt;/.
+Для окремих екземплярів служби використовуйте окремі каталоги та порти. Файли WAL SQLite мають зберігатися у локальному постійному
+сховищі, а не в мережевій файловій системі. Не використовуйте один том для декількох реплік.</p>
+<h2 id="windows-portable-package">Портативний пакет для Windows<a class="anchor" href="#windows-portable-package" aria-label="Посилання на цей розділ">#</a></h2>
+<p>Кожен реліз на GitHub містить <code>TgWitness-&lt;version&gt;-windows-amd64-portable.zip</code> та його
+<code>.sha256</code>. Він містить офіційне вбудовуване середовище виконання Python 3.12 з python.org
+(контрольна сума зафіксована в <code>tools/build_portable.py</code>), TgWitness та його зафіксовані залежності,
+а також три програми запуску:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Файл</th>
+<th>Мета</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TgWitness.cmd</code></td>
+<td>Запустіть панель; додаткові параметри передаються, наприклад, <code>TgWitness.cmd --port 8790</code></td>
+</tr>
+<tr>
+<td><code>TgWitness-Demo.cmd</code></td>
+<td>Запустіть синтетичну демонстрацію за посиланням <code>data\demo</code></td>
+</tr>
+<tr>
+<td><code>TgWitness-Check.cmd</code></td>
+<td>Виконайте перевірку готовності, не запускаючи програму</td>
+</tr>
+</tbody>
+</table></div>
+<p>Розпакуйте весь архів у папку з правами на запис, наприклад <code>Documents\TgWitness</code>; не запускайте
+програму зсередини ZIP-архіву або з папки «Program Files». Середовище виконання використовує ізольований шлях до модулів,
+тому інші інсталяції Python та <code>PYTHONPATH</code> не впливають на нього. Дані зберігаються у
+папці <code>data</code> цього пакету. Для оновлення зупиніть TgWitness, розпакуйте нову версію в нову
+папку та скопіюйте туди папку <code>data</code>.</p>
+<p>Створіть його самостійно на 64-бітній Windows із Python 3.12:</p>
+<pre><code class="language-sh">python tools/build_portable.py</code></pre>
+<p>Конфігуратор перевіряє контрольну суму під час виконання, встановлює обмежені залежності в
+пакет, запускає перевірку готовності за допомогою вбудованого інтерпретатора та записує ZIP-файл
+і контрольну суму в <code>dist/</code>.</p>
+<h2 id="container">Контейнер<a class="anchor" href="#container" aria-label="Посилання на цей розділ">#</a></h2>
+<pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
+<p>Це створює іменований постійний том для /data.
+Веб-порт прив’язано до 127.0.0.1:8787. Процес працює під UID 10001 із обмеженими
+правами, кореневою файловою системою, доступною лише для читання, та каталогами /data та /tmp, доступними для запису.
+<code>--wait</code> перевіряє працездатність веб-сервера перед поверненням; він не встановлює
+авторизацію чи доставку Telegram. Надані допоміжні програми використовують 180-секундний тайм-аут готовності
+після збірки. Початкове завантаження залежностей може зайняти більше часу.</p>
+<p>Обидва базові файли Compose використовують назву проєкту <code>tgwitness</code>, тому розпакування нового релізу
+в інший каталог не призведе до автоматичного вибору нового тома даних. Залишайте активним лише одне
+розгортання для цього проєкту. Для незалежних інсталяцій використовуйте унікальний
+<code>docker compose -p NAME ...</code> та інший порт хосту, і зберігайте обидва під час оновлень.
+Для старішого розгортання, що використовує іншу назву проєкту, продовжуйте використовувати його оригінальну
+назву разом із <code>-p</code>; <code>docker compose ls</code> перелічує існуючі проєкти.</p>
+<p>Скопіюйте <code>deploy/env.example</code> до <code>.env</code> та змініть <code>TGWITNESS_PORT</code>, щоб використовувати інший порт зворотного зв’язку.
+Наприклад, <code>TGWITNESS_PORT=8788</code> відкриває доступ до панелі за адресою
+<code>http://127.0.0.1:8788</code>; контейнер як і раніше прослуховує порт 8787. <code>.env</code> ігнорується Git.</p>
+<p>Отримати початковий токен:</p>
+<pre><code class="language-sh">docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
+<p>Корисні команди:</p>
+<pre><code class="language-sh">docker compose ps
+docker compose logs --tail 100 -f
+docker compose stop
+docker compose up -d --wait</code></pre>
+<p><code>restart: unless-stopped</code> перезапускає колектор після збою або перезапуску демона Docker.
+На сервері під управлінням Linux увімкніть Docker під час завантаження за допомогою менеджера служб вашого дистрибутива,
+зазвичай <code>sudo systemctl enable --now docker</code>. У Windows/macOS увімкніть
+параметр «запускати під час входу» у Docker Desktop. Вихід із системи, перехід у режим сну або зупинка
+демона Docker можуть перервати збір даних. Явно зупинений контейнер залишається
+зупиненим, доки ви його знову не запустите.</p>
+<p>У наведеному прикладі конфігурації обсяг тома /tmp обмежено до 512 Мб. Структура експорту
+замість цього використовує <code>temporary-exports/</code> кожного робочого простору на постійному томі /data. Зарезервуйте там місце
+для одночасних експортів, зростання журналу/WAL, мультимедіа та резервних копій.
+Програма запуску та Docker використовують файл deploy/constraints.txt для фіксації відповідних версій залежностей
+середовища виконання. Це не ланцюг постачання з фіксованими хешами: базовий образ Python та артефакти пакетів
+все ще потребують незалежної кваліфікації випуску.</p>
+<p>Не використовуйте команду `docker compose down -v`, якщо ви не маєте наміру знищити журнал та ключі.
+Звіт про стан контейнера відображає доступність веб-сервера, а не успішність збору даних Telegram.
+Перевіряйте стан колектора панелі, сигнал активності, помилки та події покриття.</p>
+<h3 id="independent-witness-profile">Профіль незалежного свідка<a class="anchor" href="#independent-witness-profile" aria-label="Посилання на цей розділ">#</a></h3>
+<p>Опціональний сервіс <code>witness</code> запускає <a href="../witness/">незалежний «witness»</a> у власному
+контейнері, з власним ключем та журналом у томі <code>witness-data</code> і лише токеном «witness»
+лише для читання для колектора. Створіть токен на сторінці <strong>«Witness»</strong> панелі, додайте його
+разом із токеном бота та каналом до <code>.env</code>, а потім запустіть профіль:</p>
+<pre><code class="language-sh">docker compose --profile witness up -d          # deploy/compose/compose.image.yaml: same flag
+docker compose logs witness                     # witness key fingerprint</code></pre>
+<p>Сервіс підключається до колектора в мережі Compose за адресою <code>http://tgwitness:8787</code>
+(<code>TGWITNESS_WITNESS_COLLECTOR</code>
+замінює її, наприклад, <code>/profiles/&lt;workspace ID&gt;</code>
+для
+іншого робочого простору). Для свідка на окремому сервері, яким керує хтось інший, використовуйте
+<code>deploy/compose/compose.witness.yaml</code>
+, встановивши для <code>TGWITNESS_WITNESS_COLLECTOR</code>
+HTTPS-адресу
+колектора; цей файл містить лише свідка.</p>
+<h2 id="install-a-published-image">Встановити опублікований образ<a class="anchor" href="#install-a-published-image" aria-label="Посилання на цей розділ">#</a></h2>
+<p>Доступ до нього надається після успішного проходження <a href="#automated-github-releases">робочого процесу випуску</a>
+та публічної конфігурації пакета GHCR. Ім’я власника репозиторію не вбудовано
+у це дерево вихідного коду. Використовуйте зображення, показане у підсумку робочого процесу цього випуску.</p>
+<p>Скопіюйте <code>deploy/env.example</code> у <code>.env</code>. Встановіть <code>TGWITNESS_IMAGE</code> на опубліковану версію, використовуючи
+шлях до репозиторію <strong>з малими літерами</strong>, наприклад:</p>
+<pre><code class="language-dotenv">TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.0
+TGWITNESS_PORT=8787</code></pre>
+<p>Запустіть цей файл окремо, замість <code>compose.yaml</code>:</p>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml exec tgwitness cat /data/panel-token.txt</code></pre>
+<p>На хості не потрібні збірка з вихідного коду, Python чи компілятор. Процес випуску
+орієнтований на контейнери Linux AMD64 та ARM64, включаючи віртуальну машину Linux у Docker Desktop.
+Використовуйте тег версії або <code>ghcr.io/owner/repository@sha256:...</code> із підсумку робочого процесу.
+Не налаштовано переміщення тегу <code>latest</code> або автоматичне оновлення додатка.
+Образ та варіанти вихідного коду використовують один і той самий том даних, якщо назви їхніх проєктів збігаються.</p>
+<h2 id="automatic-https-on-a-server">Автоматичне ввімкнення HTTPS на сервері<a class="anchor" href="#automatic-https-on-a-server" aria-label="Посилання на цей розділ">#</a></h2>
+<p>Використовуйте сервер із Docker, домен, який ви контролюєте, та постійне локальне сховище.
+Направте записи A/AAAA домену на сервер; публікуйте AAAA лише в тому випадку, якщо до нього досягає IPv6.
+Дозвольте вхідний трафік по TCP 80 та 443, а також вихідний трафік DNS/HTTPS для видачі сертифікатів.
+Ці порти не повинні бути зайняті іншими службами.</p>
+<p>Скопіюйте <code>deploy/env.example</code> у <code>.env</code> та вкажіть ім’я хосту без схеми та шляху:</p>
+<pre><code class="language-dotenv">TGWITNESS_DOMAIN=watch.your-domain.org</code></pre>
+<p>Запустіть збірку вихідного коду з накладенням HTTPS:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt</code></pre>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml -f deploy/compose/compose.https.yaml up -d --wait</code></pre>
+<p>Для опублікованого зображення замість цього використовуйте <code>deploy/compose/compose.image.yaml</code> як перший файл. Збережіть
+обидва аргументи <code>-f</code> для подальших команд status, logs, update та stop.</p>
+<p>Caddy отримує та поновлює сертифікат, перенаправляє HTTP на HTTPS та пересилає
+запити до колектора у приватній мережі Compose. Стан сертифіката зберігається
+у власному постійному томі. Порт прямого хосту колектора залишається лише для локального з’єднання.
+Надана конфігурація Caddy не вмикає реєстрацію доступу.</p>
+<p>Відкрийте <code>https://watch.your-domain.org</code> та введіть токен панелі. Готовність до створення
+не підтверджує видачу сертифіката або зовнішню доступність. Якщо HTTPS не
+готовий, перевірте DNS, правила брандмауера та:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.https.yaml logs --tail 100 caddy</code></pre>
+<p>Наданий образ Caddy відповідає тегу <code>2-alpine</code>. Виконання команди pull оновлює цей образ;
+якщо вам потрібні фіксовані версії інфраструктури, закріпіть перевірений дайджест у вашому розгортанні.</p>
+<h2 id="updates-and-backups">Оновлення та резервні копії<a class="anchor" href="#updates-and-backups" aria-label="Посилання на цей розділ">#</a></h2>
+<p>Зберігайте назву проєкту Compose та обсяг даних під час оновлень. Спочатку зупиніть
+колектор і створіть повну резервну копію. Для розгортання за замовчуванням на основі вихідного коду:</p>
+<pre><code class="language-sh">docker compose stop
+docker compose cp tgwitness:/data ../tgwitness-backup-before-update</code></pre>
+<p>Кожного разу використовуйте нове місце для резервного копіювання, поза межами репозиторію, та захищайте його як
+матеріал, що вимагає доступу до облікового запису. Наведений приклад шляху є ілюстративним; використовуйте своє власне місце
+для резервного копіювання. Скопіюйте весь каталог, включаючи приховані файли, усі робочі простори, ключі,
+журнали та мультимедійні файли. Окремо створіть резервну копію головного ключа зовнішнього сховища, якщо він налаштований.
+ZIP-архів з доказами не є резервною копією програми, яку можна відновити. Для HTTPS також збережіть
+томи Caddy, якщо вам потрібно зберегти стан його сертифіката/облікового запису.</p>
+<p>Для розгортання з вихідного коду завантажте файли нової версії та виконайте:</p>
+<pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
+<p>Для розгортання образу змініть <code>TGWITNESS_IMAGE</code> на бажану версію, а потім виконайте:</p>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait</code></pre>
+<p>Використовуйте файли Compose вашої інсталяції також для наведених вище команд stop/copy.
+Збережіть <code>.env</code>, власні налаштування та ту саму назву проєкту. <code>down</code> зберігає іменовані
+томи; <strong><code>down -v</code> видаляє їх</strong>. Не копіюйте <code>.venv</code> між операційними системами
+або версіями Python. Для оновлення з вихідного коду зупиніть TgWitness, створіть резервну копію всього каталогу даних
+, замініть вихідні файли та запустіть <code>python start.py --setup-only</code> перед запуском програми.</p>
+<p>Перевірте доступ до панелі, ідентифікацію облікового запису, стан спостереження та охоплення після
+оновлення. Перезапуск не відновлює пропущені оновлення Telegram. Для відкату може
+знадобитися резервна копія, створена до оновлення, якщо в майбутній версії зміниться формат зберігання даних.</p>
+<h2 id="automated-github-releases">Автоматизовані релізи на GitHub<a class="anchor" href="#automated-github-releases" aria-label="Посилання на цей розділ">#</a></h2>
+<p><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml">Процес випуску</a> готовий до використання після того, як цей
+проєкт буде відправлено до репозиторію GitHub із увімкненою функцією Actions. Він запускається, коли
+<strong>публікується</strong> випуск на GitHub, включаючи попередній випуск. Самі лише чернетки та відправлення тегів
+не призводять до публікації пакетів.</p>
+<ol>
+<li>Встановіть версію пакета та журнал змін, а потім опублікуйте реліз із тегом <code>v</code>
+    та точним позначенням версії <code>pyproject.toml</code>, наприклад <code>v0.7.0</code>.</li>
+<li>Робочий процес перевіряє тег і запускає спільні для Windows/Linux/macOS перевірки Python,
+    general/account-import/QR-браузера, вихідного пакету та Docker. Також проводиться
+    нова нативна інсталяція на всіх трьох операційних системах із використанням Python 3.12.</li>
+<li>Після успішного проходження цих перевірок виконується тестування образу ARM64 у середовищі QEMU, публікуються
+    образи AMD64/ARM64 на <code>ghcr.io/&lt;lowercase-owner&gt;/&lt;lowercase-repository&gt;:&lt;version&gt;</code>,
+    а також до релізу додаються ZIP-архів із вихідним кодом, контрольна сума та пакет Python wheel. Окреме
+    завдання для Windows збирає та додає портативний ZIP-архів та його контрольну суму.</li>
+<li>Після першої публікації відкрийте налаштування пакета GHCR і встановіть видимість
+    на <strong>«Публічна»</strong>, якщо передбачається анонімне завантаження зображень. Сам по собі публічний репозиторій
+    не гарантує публічності контейнерного пакета. Політика організації повинна
+    дозволяти публікацію пакетів. У робочому процесі використовується <code>GITHUB_TOKEN</code>; у репозиторії не
+    повинні міститися паролі до реєстру або облікові дані VPS.</li>
+</ol>
+<p>Ця локальна підготовка не гарантує успішної роботи в віддаленому режимі. Емуляція ARM64
+є лише попередньою перевіркою, а не кваліфікацією на нативному апаратному забезпеченні чи в реальному середовищі Telegram.
+Це автоматизує пакування релізу; для запуску сервера все ще потрібна команда Compose
+та відповідні вимоги до домену/хосту. Існуючі сервери не оновлюються
+і не перезапускаються автоматично після публікації релізу.</p>
+<h2 id="remote-server">Віддалений сервер<a class="anchor" href="#remote-server" aria-label="Посилання на цей розділ">#</a></h2>
+<p>Забезпечте, щоб сервіс працював у режимі loopback та використовував SSH-тунель, або завершуйте HTTPS на
+зворотному проксі. Базовий файл Compose доступний лише локально; опціональний оверлей
+<code>deploy/compose/compose.https.yaml</code> надає Caddy для налаштованого домену.
+Не допускайте появи токена носія в URL-адресах та журналах проксі-сервера. Зворотний проксі-сервер повинен обмежувати
+розмір запитів та частоту з’єднань. Не відкривайте доступ до простого HTTP в Інтернеті.</p>
+<p>Приклади для systemd, завдання входу в систему Windows, агента користувача macOS та Caddy наведено
+у <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">папці deploy/</a>. Перегляньте та адаптуйте їхні шляхи перед встановленням.
+Це лише шаблони, а не локально виконувані налаштування платформи. Звичайний запускач не
+реєструє жодних фонових служб чи завдань.</p>
+<p>У Windows безвіконний запуск <code>pythonw.exe</code> зберігає діагностичні дані запуску/сервера у файлі
+<code>logs/server.log</code> у каталозі даних (5 МіБ на файл, дві чергові резервні копії).
+Запуск у консолі зберігає консольні журнали. Реєстрація доступу по HTTP вимкнена в обох
+режимах. Захищайте журнали разом із каталогом даних та перевіряйте їх перед тим, як надавати доступ.</p>
+<h2 id="restart-and-gaps">Перезапуск та прогалини<a class="anchor" href="#restart-and-gaps" aria-label="Посилання на цей розділ">#</a></h2>
+<p>Останній запитуваний стан спостереження зберігається. Якщо спостереження було активним,
+під час запуску програма намагається відновити з’єднання та продовжити моніторинг вибраних джерел. Ручна пауза скасовує
+цю дію. Невдалий перезапуск фіксується та відображається на панелі.</p>
+<p>StringSession зберігає авторизацію, але не зберігає стійкий стан оновлень/об’єктів Telethon.
+Діалоги перезавантажуються під час запуску. Telegram/Telethon можуть відновлювати деякі переривання передачі даних
+під час роботи, але TgWitness не гарантує стійкого відтворення даних після перезапуску процесу.
+При кожному запуску записується попередня головка журналу та межа офлайн-режиму.
+Монітор перевіряє підключення кожні 10 секунд і додає сигнал активності щохвилини
+(<strong>Параметри → Запис активності кожні</strong>).
+Короткочасні переривання можуть бути пропущені; підключений канал передачі даних не гарантує повної
+доставки оновлень. Знімки — це явні спостереження поточної історії, а не відновлення пропусків.</p>
+<p>Черга мультимедіа зберігається в базі даних SQLite кожного робочого простору. Повідомлення та відповідне завдання
+фіксуються атомарно. Перервані завдання відновлюються для повторної спроби під час запуску.
+Кожне завантаження має базовий тайм-аут у 120 секунд плюс час, необхідний для завантаження файлу розміром 256 Кбайт/с, а також
+обмеження від 1 до 2 000 Мбайт на тип вкладення; тайм-аут, швидкість та кількість повторних спроб налаштовуються в розділі <strong>«Параметри</strong>». Колектор
+пропускає файли, розмір яких невідомий. При паузі роботи завдання в черзі зберігаються. Повторна спроба використовує оригінальний
+спостережуваний дескриптор файлу, а не останню версію повідомлення, яке було згодом відредаговано.
+Тимчасові збої мають обмежену кількість повторних спроб; паузи FloodWait для медіа зберігаються після перезапуску.
+Відновлення медіа є окремим від відновлення оновлень Telegram і не може відтворити зниклі файли.</p>
+<h2 id="backup-restore-and-capacity">Резервне копіювання, відновлення та ємність<a class="anchor" href="#backup-restore-and-capacity" aria-label="Посилання на цей розділ">#</a></h2>
+<p>Зупиніть процес перед копіюванням <strong>усього каталогу даних</strong>, включаючи файли vault.key,
+signing.enc, credentials.enc, базу даних SQLite/файли WAL, мультимедіа, токен, контрольні точки,
+а також усі профілі та підкаталоги. Відновіть
+повну копію, поки служба призначення зупинена. Відсутність ключів сховища або
+невідповідність ключів підпису призведе до збою запуску; не генеруйте ключі заново, щоб примусово отримати доступ.</p>
+<p>Зберігайте секретні резервні копії у зашифрованому вигляді з контролем доступу. ZIP-архіви з доказами є портативними
+артефактами для перегляду, а не резервними копіями додатків чи сеансів Telegram.
+Автоматичного видалення після закінчення терміну зберігання не відбувається. Заплануйте місце на диску для всіх повідомлень, необроблених
+метаданих, мультимедіа, тимчасових експортів та резервних копій.</p>
+<p>Перевірка запуску та експорт записів потоку замість завантаження всього журналу.
+Експорт фіксує знімок стану на момент зчитування, тоді як запис нових даних у WAL може продовжуватися; тривалі експорті
+можуть зберігати сторінки WAL, тому ємність диска все ще має значення. Розмір ZIP-архівів обмежено 4 ГіБ
+у нестисненому вигляді, щоб відповідати стандартним налаштуванням незалежного верифікатора; <strong>Параметри → Найбільший підписаний ZIP-архів</strong>
+підвищує обмеження, і такі архіви перевіряються за допомогою <code>verify.py --max-gib N</code>. Інші формати не мають обмеження на кількість подій.
+Підтримувані браузери передають фрагменти відповіді у потоковому режимі до файлу, обраного користувачем. Інші браузери
+буферизують не більше 128 MiB і перенаправляють більші передачі до автентифікованого CLI:</p>
+<pre><code class="language-sh">python -m tgwitness.download --token-file data/live/panel-token.txt --out evidence.zip</code></pre>
+<p>Використовуйте <code>--profile ID</code> з <strong>меню «Експорт» → «Ідентифікатор робочого простору»</strong> для іншого робочого простору,
+<code>--format zip|jsonl|csv|html</code>, <code>--url https://your-server</code> для віддаленого сервера або
+<code>--max-mib</code>, щоб змінити обмеження на передачу даних у 5 ГіБ. Простий HTTP дозволено лише для
+петлевого з’єднання. Токени передаються в заголовках, перенаправлення відхиляються, існуючі файли
+не перезаписуються, а незавершені завантаження не публікуються як завершені файли.
+Якщо TGWITNESS_TOKEN замінює згенерований токен, використовуйте окремо захищений файл,
+що містить це активне значення: файл panel-token.txt не перезаписується при заміщенні.
+SHA-256 команди є лише контрольною сумою передачі; незалежно перевірте підписаний ZIP-файл.</p>
+<p>Файли експорту сервера зберігаються у приватному каталозі <code>temporary-exports/</code> кожного робочого простору.
+У разі успішного виконання запиту файли видаляються. Перервані експорті видаляються під час
+наступного запуску робочого простору з утриманням ексклюзивної блокування екземпляра. Цей каталог є частиною
+моделі загроз/ємності сховища; використовуйте зашифрований том даних. Передача даних обсягом у
+кілька гігабайтів у виробничих умовах все ще вимагає перевірки на вашій цільовій системі.</p>
+<p>Панель відображає медіафайли в черзі/з помилками, найстаріші медіафайли в очікуванні, вільний простір на диску,
+паузи у запитах до Telegram та джерела, доступ до яких не підтверджено. Ці діагностичні дані не є
+повноцінним монітором доставки «від кінця до кінця». Робочі простори використовують спільний процес; обліковий запис із великим трафіком може
+все одно впливати на інші. Залишаються окремі робочі процеси, зберігання/ротація, відновлення стійких оновлень,
+закріплення віддалених контрольних точок, ролі та повна кваліфікація розгортання.</p>
+<h2 id="connection-and-protection-options">Параметри підключення та захисту<a class="anchor" href="#connection-and-protection-options" aria-label="Посилання на цей розділ">#</a></h2>
+<p>Маршрути підключення визначаються для кожного робочого простору окремо і повинні бути налаштовані до авторизації.
+SOCKS5/HTTP CONNECT використовують закріплену залежність python-socks. MTProxy використовує
+експериментальний рандомізований проміжний транспорт Telethon; підроблені секретні ключі TLS ee не підтримуються.
+Автоматичний прямий резервний маршрут не налаштований. Це не загальносистемний мережевий маршрут.</p>
+<p>Для нових інсталяцій змінна TGWITNESS_VAULT_KEY_FILE вказує на окремо захищений файл із випадковим
+головним ключем. Змонтуйте його у режимі «тільки для читання» поза каталогом /data у контейнері. Зберігайте відкриті
+метадані salt у файлі vault.external.json окремо для кожної робочої області та головного ключа.
+Існуючі локальні сховища потребують планової міграції; встановлення цієї змінної не
+призводить до їх автоматичного перетворення. Зберігання та експорт повідомлень/медіафайлів не шифруються на рівні додатка.
+За необхідності використовуйте зашифровані томи та достатній обсяг приватного тимчасового сховища.</p>
+<p>Детальні інструкції: <a href="../connection/">підключення/безпека</a> та
+<a href="../operations/">режими роботи</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/DEPLOYMENT.md">Редагувати цю сторінку на GitHub ↗</a><a class="next-guide" href="../collection/"><span>Наступний крок</span><strong>Як відбувається збір даних →</strong></a><p>Ці посібники описують поточну реалізацію. Результати перевірки та існуючі прогалини задокументовані окремо. <a href="../verification/">Що було протестовано →</a></p></footer>
+</main>
+<aside class="toc" aria-label="На цій сторінці"><p class="nav-label">На цій сторінці</p><a href="#choose-an-installation">Оберіть варіант встановлення</a><a href="#installation-requirements">Вимоги до встановлення</a><a href="#local-computer">Локальний комп’ютер</a><a href="#windows-portable-package">Портативний пакет для Windows</a><a href="#container">Контейнер</a><a href="#install-a-published-image">Встановити опублікований образ</a><a href="#automatic-https-on-a-server">Автоматичне ввімкнення HTTPS на сервері</a><a href="#updates-and-backups">Оновлення та резервні копії</a><a href="#automated-github-releases">Автоматизовані релізи на GitHub</a><a href="#remote-server">Віддалений сервер</a><a href="#restart-and-gaps">Перезапуск та прогалини</a><a href="#backup-restore-and-capacity">Резервне копіювання, відновлення та ємність</a><a href="#connection-and-protection-options">Параметри підключення та захисту</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>З відкритим кодом · Працює на вашому комп’ютері</span><a href="../../../../LICENSE">Ліцензія MIT</a><a href="../notice/">Повідомлення оператора</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Безпека</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Очікування повідомлення", "Step through a fictional send, edit and delete.": "Покроковий огляд вигаданого процесу надсилання, редагування та видалення повідомлення.", "No observations yet. Start the sequence or advance one event.": "Поки що немає коментарів. Почати послідовність або перейти до наступної події.", "Meet at 10:00": "Зустріч о 10:00", "A new message is visible in the chat.": "У чаті з’явилося нове повідомлення.", "Record 1 appended: the collector observed the original message.": "Додано запис № 1: збирач зафіксував оригінальне повідомлення.", "Meet at 11:00": "Зустріч о 11:00", "The current text changes. The earlier observation stays.": "Поточний текст змінюється. Попереднє зауваження залишається.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Додано запис 2: редагування є новим спостереженням. Запис 1 все ще містить оригінальний текст.", "Message deleted": "Повідомлення видалено", "The message has disappeared from the chat view.": "Повідомлення зникло з вікна чату.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Додано запис 3: повідомлення про видалення зберігається разом з обома зафіксованими версіями.", "0 records": "0 записів", "1 record": "1 запис", "2 records": "2 записи", "3 records": "3 записи", "Complete / {n} of 3": "Завершено / {n} з 3", "Step / {n} of 3": "Крок / {n} із 3", "Pause": "Пауза", "Replay sequence": "Послідовність відтворення", "Play sequence": "Послідовність відтворення", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Доступний статичний приклад. Щоб інтерактивно обчислити хеші, відкрийте цю сторінку через HTTPS або у локальному попередньому перегляді з підтримкою Web Crypto.", "No record supplied": "Записів не надано", "Tail removed": "Кінець видалено", "≠ saved hash": "≠ збережений хеш", "Rebuilt · different hash": "Перероблено · інший хеш", "= saved hash": "= збережений хеш", "Same length and matching head.": "Однакова довжина та відповідний заголовок.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Усі три обчислені хеші збігаються із збереженими хешами. Цей зразок відповідає збереженому обмеженню у три записи.", "Same saved head; the journal prefix fails verification.": "Збережено той самий заголовок; префікс журналу не пройшов перевірку.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Запис № 2 більше не збігається зі своїм збереженим хешем. Перевірка лише кінцевого збереженого заголовка не дозволила б виявити це; верифікатор перевіряє кожен запис.", "Head differs from the retained checkpoint.": "Заголовок відрізняється від збереженого контрольного пункту.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Відновлені хеші пов’язані між собою, але кінцевий хеш змінився. Збережений контрольний пункт відхиляє цю історію. Оригінальні підписи також не пройдуть перевірку для змінених записів.", "Too short: 2 supplied records \u003c 3 retained records.": "Занадто коротко: 2 надані записи \u003c 3 збережені записи.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Два решти хеші все ще збігаються. Збережений контрольний пункт розкриває відсутню кінцеву частину. Без цієї попередньої межі сам лише цей коротший префікс не виявив би пропуску.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "У цьому браузері неможливо обчислити хеш. Наведені нижче формули та пояснення залишаються доступними.", "{n} records": "{n} записів", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Прийнято: кількість зростає, підпис перевірено, а ключ збігається. Свідок зберігає цю нову межу.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Відкат: підписана відповідь повідомляє про меншу кількість записів, ніж останній прийнятий контрольний пункт. Witness фіксує проблему та зберігає попередню прийняту межу.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Форк: кількість не змінилася, але головна гілка відрізняється. Свідок фіксує розбіжність і зберігає раніше прийняту межу.", "No answer": "Немає відповіді", "boundary unknown": "межа невідома", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Відсутність відповіді: свідок фіксує невдалу перевірку. Він не може визначити поточний стан збирача. Якщо свідок все ще має доступ до Bot API і це дозволено його політикою публікації, він може опублікувати інформацію про цю невдачу.", "Send {n}": "Надіслати {n}", "Edit {n}": "Редагувати {n}", "Delete {n}": "Видалити {n}", "Both accounts captured all six expected observations in this example.": "Обидва акаунти відобразили всі шість очікуваних спостережень у цьому прикладі.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Акаунт B все одно зафіксував 6 із 6. Дві квитанції завантажилися довше. Коефіцієнт фіксації та затримка отримання квитанцій дають відповіді на різні питання.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Акаунт B зафіксував 5 із 6 до закінчення відведеного часу (83,3 %). Відсутнє редагування не має виміряної затримки. Цей результат описує лише шість контрольованих дій.", "not observed by cutoff": "не дотримано терміну подачі", "{s} seconds": "{s} секунд", "Exact values follow in the table.": "Точні значення наведено в таблиці.", "{s} s": "{s} s", "Not observed": "Не дотримано", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Чотири чати містять різні спостереження. Слідкуйте за вихідними записами для кожного з’єднання; не прив’язуйте публікацію в каналі до користувача 71001 без вказаного відправника.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Записи № 146 та № 205 містять однаковий ідентифікатор відправника — 71001. Це пов’язує виявлені публікації одного облікового запису Telegram у двох чатах. Це не дозволяє ідентифікувати реальну особу чи приписати публікацію каналу конкретній особі.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Адреса pay.example.invalid/new з’являється у записі групи № 146, на клавіатурі бота № 173, у редагуванні каналу № 188 та у приватному повідомленні № 205. Повторне згадування адресата пов’язує цей матеріал; це не доводить спільного контролю над цими акаунтами.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "У цьому вигаданому випадку завершені квитанції про отримання медіафайлів № 151 та № 209 мають однакові повні значення SHA-256. Порівняйте фактичні байти та пов’язані з ними записи повідомлень. Файл, що збігається, не ідентифікує його автора та не доводить, хто його переслав.", "the encrypted off-site copy": "зашифрована зовнішня копія", "notifications": "повідомлення", "checkpoint hashes for timestamps": "хеші контрольних точок для позначок часу", "signed checkpoints for the witness": "підписані контрольні точки для свідка", "Switched on in this example": "У цьому прикладі ввімкнено", "Optional · off by default": "Необов’язкове · за замовчуванням вимкнено", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Залишаючи цей пристрій: підключення до Telegram та {list}. Нічого іншого.", "Default: only the Telegram connection leaves this machine.": "За замовчуванням: з цього комп’ютера надходить лише з’єднання з Telegram.", "{done} of {total} done": "{done} з {total} виконано", "Mark step {n} as done": "Позначити крок {n} як виконаний", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Текст", "Copied": "Скопійовано", "Command copied.": "Команда скопійована.", "Selected — Ctrl/Cmd+C": "Виділити — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Команда вибрана. Скопіюйте її вручну.", "Command copied to clipboard.": "Команда скопійована до буфера обміну.", "Select text": "Виділити текст", "Clipboard unavailable. Command selected; copy it manually.": "Буфер обміну недоступний. Команда вибрана; скопіюйте її вручну.", "A message arrives. The first observation is saved.": "Надходить повідомлення. Перше спостереження збережено.", "The time changes. Both captured versions stay.": "Час змінюється. Обидві зафіксовані версії залишаються.", "The message disappears. The captured history remains.": "Повідомлення зникає. Зафіксована історія залишається.", "Pause example animation": "Приклад анімації паузи", "Play example animation": "Переглянути приклад анімації", "Play": "Відтворити", "Full-size workspace screenshot": "Знімок екрана робочої області у повному розмірі", "Workspace screenshot · fictional data": "Знімок екрана робочого простору · вигадані дані", "Close": "Закрити", "Close screenshot": "Закрити скріншот", "Scrollable full-size screenshot": "Повний знімок екрана з можливістю прокрутки", "Enlarge: {name}": "Збільшити: {name}", "View full size": "Переглянути у повному розмірі"}</script>
+</body></html>

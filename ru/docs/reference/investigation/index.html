@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="ru" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Режим расследования | TgWitness</title>
+<meta name="description" content="Комплексные расследования по всем учетным записям, включая каналы, группы, личные чаты и ботов — от определения объёма расследования до формирования подтверждённого пакета материалов по делу."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Режим расследования | TgWitness"><meta property="og:description" content="Комплексные расследования по всем учетным записям, включая каналы, группы, личные чаты и ботов — от определения объёма расследования до формирования подтверждённого пакета материалов по делу.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/investigation/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/investigation/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/investigation/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/investigation/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/investigation/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/investigation/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/investigation/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/", "url": "https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/", "name": "Режим расследования | TgWitness", "description": "Комплексные расследования по всем учетным записям, включая каналы, группы, личные чаты и ботов — от определения объёма расследования до формирования подтверждённого пакета материалов по делу.", "inLanguage": "ru", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://phishdestroy.github.io/TgWitness/ru/"}, {"@type": "ListItem", "position": 2, "name": "Документация", "item": "https://phishdestroy.github.io/TgWitness/ru/docs/"}, {"@type": "ListItem", "position": 3, "name": "Справочник", "item": "https://phishdestroy.github.io/TgWitness/ru/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Режим расследования", "item": "https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Перейти к содержанию</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Документация</span></a>
+<nav aria-label="Руководства"><a href="../../concepts/">Наглядное руководство</a><a href="../../">Все руководства</a><a href="../">Справочник</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Язык"><span aria-hidden="true">◍</span> Русский</summary><div class="lang-list"><a href="../../../../docs/reference/investigation/" hreflang="en" lang="en">English</a><a href="./" hreflang="ru" lang="ru" aria-current="true">Русский</a><a href="../../../../uk/docs/reference/investigation/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/investigation/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/investigation/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/investigation/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/investigation/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/investigation/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/investigation/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/investigation/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/investigation/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/investigation/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/investigation/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Переключить светлую и тёмную тему"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Руководства"><a href="../../../guides/modes.html">Режимы, сценарии и уровни доказательства</a><p class="nav-label">Первые шаги</p><a href="../../start/">Запуск за несколько минут</a><a href="../../accounts/">Подключение аккаунта</a><a href="../../proxies/">Выбор прокси</a><a href="../../exports/">Экспорт и проверка</a><p class="nav-label">Разобраться в доказательствах</p><a href="../../concepts/">Как устроены доказательства</a><a href="../../cases/">Расследование по всем чатам</a><a href="../../security/">Безопасность установки</a><p class="nav-label">Дальше</p><a href="../../witness/">Бот-свидетель</a><a href="../../server/">Постоянная работа на сервере</a><a href="../../troubleshooting/">Поиск неисправностей</a></nav><nav class="wiki-nav" aria-label="Справочник"><p class="nav-label"><a class="nav-label-link" href="../">Справочник</a></p><details class="wiki-group"><summary>Установка</summary><a href="../quickstart/">Быстрый старт</a><a href="../accounts/">Аккаунты и форматы сессий</a><a href="../connection/">Подключение, прокси и защита данных</a><a href="../deployment/">Развёртывание</a></details><details class="wiki-group" open><summary>Сбор</summary><a href="../collection/">Как устроен сбор</a><a href="../operations/">Работа и обслуживание</a><a href="./" aria-current="page">Режим расследования</a><a href="../features/">Возможности и ограничения</a></details><details class="wiki-group"><summary>Доказательства</summary><a href="../how-it-works/">Как устроены доказательства</a><a href="../evidence/">Формат доказательств</a><a href="../witness/">Независимый свидетель</a><a href="../timestamp/">Метки времени</a></details><details class="wiki-group"><summary>Безопасность и проект</summary><a href="../security/">Безопасность и обращение с данными</a><a href="../architecture/">Архитектура</a><a href="../verification/">Что проверено</a><a href="../license/">Уведомление о несовместимости лицензий и архитектуры</a><a href="../notice/">Уведомление о несовместимости с операторами</a><a href="../changelog/">Список изменений</a></details></nav><p class="sidebar-note">v0.7.0<br>Открытый исходный код · Работает на вашем компьютере</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Руководства"><a href="../../../">Главная</a> <span aria-hidden="true">/</span> <a href="../../">Документация</a> <span aria-hidden="true">/</span> <a href="../">Справочник</a> <span aria-hidden="true">/</span> <span aria-current="page">Режим расследования</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Поиск по документации</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Попробуйте «прокси», «цепочку хешей», «токен» или «свидетель»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Очистить поиск" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Введите слово для поиска в руководствах и справочнике. Результаты поиска остаются в вашем браузере.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Справочник / Сбор</p><h1>Режим расследования</h1><p class="guide-outcome">Комплексные расследования по всем учетным записям, включая каналы, группы, личные чаты и ботов — от определения объёма расследования до формирования подтверждённого пакета материалов по делу.</p><div class="wiki-body"><p>Отслеживайте ход дела по каналам, группам, личным чатам и ботам — от первоначального
+сбора данных до составления хронологии с указанием источников и проверяемой передачи материалов. Интерактивная версия веб-сайта
+доступна по адресу <code>/docs/cases/</code>; <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally">инструкции по предварительному просмотру</a>.</p>
+<h2 id="worked-case-a-destination-changes-across-four-conversations">Пример из практики: изменение пункта назначения в четырёх беседах<a class="anchor" href="#worked-case-a-destination-changes-across-four-conversations" aria-label="Ссылка на раздел">#</a></h2>
+<p>В одном из сообщений упоминается бот. Группа оперативников обсуждает новый адрес для платежа,
+он отображается на клавиатуре бота, а в частном сообщении, следующем за этим, он повторяется.
+Затем сообщение редактируется, и групповое сообщение исчезает.</p>
+<p>Вопросы заключаются в следующем: что наблюдалось до и после изменения, какие аккаунты в Telegram
+опубликовали каждый элемент, где появился адрес назначения, какие байты вложения
+сохранились и какие интервалы остаются неизвестными?</p>
+<p>Все имена, идентификаторы, временные отметки и ссылки на журнал в данном примере являются вымышленными. В
+рабочем процессе используются актуальные функции; схема дела представляет собой иллюстрацию, а не автоматический
+график, сгенерированный приложением.</p>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 847 478" width="847" height="478" role="img" aria-labelledby="flow-3-title flow-3-desc"><title id="flow-3-title">Блок-схема</title><desc id="flow-3-desc">Каналы → Журнал рабочей среды; Группы → Журнал рабочей среды; Частные чаты → Журнал рабочей среды; Боты → Журнал рабочей среды; Журнал рабочей среды → Поиск по всем источникам; Журнал рабочей среды → Профили лиц со ссылками на записи; Журнал рабочей среды → Сохраненные версии и подтверждения получения вложений; Поиск по всем источникам → Хронология аналитика и реестр источников; Профили лиц со ссылками на записи → Хронология аналитика и реестр источников; Сохраненные версии и подтверждения получения вложений → Хронология аналитика и реестр источников; Журнал рабочей среды → ZIP-архив с подписанными доказательствами; Хронология аналитика и реестр источников → Передача дела с отдельно проверенными доказательствами; ZIP-архив с подписанными доказательствами → Передача дела с отдельно проверенными доказательствами</desc><defs><marker id="flow-3-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M240.7 46.0C240.7 68.0 426.2 68.0 426.2 90.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:195" pathLength="195"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.2s" repeatCount="indefinite" path="M240.7 46.0C240.7 68.0 426.2 68.0 426.2 90.0"/></circle><path class="flow-edge" d="M362.7 46.0C362.7 68.0 426.2 68.0 426.2 90.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:82" pathLength="82"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M362.7 46.0C362.7 68.0 426.2 68.0 426.2 90.0"/></circle><path class="flow-edge" d="M488.1 46.0C488.1 68.0 426.2 68.0 426.2 90.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:80" pathLength="80"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M488.1 46.0C488.1 68.0 426.2 68.0 426.2 90.0"/></circle><path class="flow-edge" d="M613.5 46.0C613.5 68.0 426.2 68.0 426.2 90.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:197" pathLength="197"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.2s" repeatCount="indefinite" path="M613.5 46.0C613.5 68.0 426.2 68.0 426.2 90.0"/></circle><path class="flow-edge" d="M426.2 130.0C426.2 161.0 102.8 161.0 102.8 192.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:335" pathLength="335"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="3.7s" repeatCount="indefinite" path="M426.2 130.0C426.2 161.0 102.8 161.0 102.8 192.0"/></circle><path class="flow-edge" d="M426.2 130.0C426.2 156.5 321.3 156.5 321.3 183.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:123" pathLength="123"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M426.2 130.0C426.2 156.5 321.3 156.5 321.3 183.0"/></circle><path class="flow-edge" d="M426.2 130.0C426.2 152.0 536.4 152.0 536.4 174.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:123" pathLength="123"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M426.2 130.0C426.2 152.0 536.4 152.0 536.4 174.0"/></circle><path class="flow-edge" d="M102.8 232.0C102.8 263.0 320.1 263.0 320.1 294.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:233" pathLength="233"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="2.6s" repeatCount="indefinite" path="M102.8 232.0C102.8 263.0 320.1 263.0 320.1 294.0"/></circle><path class="flow-edge" d="M321.3 241.0C321.3 267.5 320.1 267.5 320.1 294.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:53" pathLength="53"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M321.3 241.0C321.3 267.5 320.1 267.5 320.1 294.0"/></circle><path class="flow-edge" d="M536.4 250.0C536.4 272.0 320.1 272.0 320.1 294.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:225" pathLength="225"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="2.5s" repeatCount="indefinite" path="M536.4 250.0C536.4 272.0 320.1 272.0 320.1 294.0"/></circle><path class="flow-edge" d="M426.2 130.0C426.2 156.5 744.5 156.5 744.5 183.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:327" pathLength="327"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="3.6s" repeatCount="indefinite" path="M426.2 130.0C426.2 156.5 744.5 156.5 744.5 183.0"/></circle><path class="flow-edge" d="M320.1 352.0C320.1 374.0 532.3 374.0 532.3 396.0" marker-end="url(#flow-3-arrow)" style="--i:3;--len:221" pathLength="221"/><circle class="flow-pulse" r="3.2" style="--i:3"><animateMotion begin="indefinite" dur="2.5s" repeatCount="indefinite" path="M320.1 352.0C320.1 374.0 532.3 374.0 532.3 396.0"/></circle><path class="flow-edge" d="M744.5 241.0C744.5 318.5 532.3 318.5 532.3 396.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:278" pathLength="278"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="3.1s" repeatCount="indefinite" path="M744.5 241.0C744.5 318.5 532.3 318.5 532.3 396.0"/></circle><g class="flow-node" style="--i:0"><rect x="188.7" y="6.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="240.7" y="26.0">Каналы</tspan></text></g><g class="flow-node" style="--i:0"><rect x="310.7" y="6.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="362.7" y="26.0">Группы</tspan></text></g><g class="flow-node" style="--i:0"><rect x="432.7" y="6.0" width="110.8" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="488.1" y="26.0">Частные чаты</tspan></text></g><g class="flow-node" style="--i:0"><rect x="561.5" y="6.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="613.5" y="26.0">Боты</tspan></text></g><g class="flow-node" style="--i:1"><rect x="343.2" y="90.0" width="166.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="426.2" y="110.0">Журнал рабочей среды</tspan></text></g><g class="flow-node" style="--i:2"><rect x="6.0" y="192.0" width="193.6" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="102.8" y="212.0">Поиск по всем источникам</tspan></text></g><g class="flow-node" style="--i:2"><rect x="217.6" y="183.0" width="207.4" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="321.3" y="203.0">Профили лиц со ссылками на</tspan><tspan x="321.3" y="221.0">записи</tspan></text></g><g class="flow-node" style="--i:2"><rect x="443.0" y="174.0" width="186.7" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="536.4" y="194.0">Сохраненные версии и</tspan><tspan x="536.4" y="212.0">подтверждения получения</tspan><tspan x="536.4" y="230.0">вложений</tspan></text></g><g class="flow-node" style="--i:2"><rect x="647.7" y="183.0" width="193.6" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="744.5" y="203.0">ZIP-архив с подписанными</tspan><tspan x="744.5" y="221.0">доказательствами</tspan></text></g><g class="flow-node" style="--i:3"><rect x="230.2" y="294.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="320.1" y="314.0">Хронология аналитика и</tspan><tspan x="320.1" y="332.0">реестр источников</tspan></text></g><g class="flow-node" style="--i:4"><rect x="435.5" y="396.0" width="193.6" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="532.3" y="416.0">Передача дела с отдельно</tspan><tspan x="532.3" y="434.0">проверенными</tspan><tspan x="532.3" y="452.0">доказательствами</tspan></text></g></svg></div><details class="flow-steps"><summary>Схема в текстовом формате</summary><ol><li>Каналы → Журнал рабочей среды</li><li>Группы → Журнал рабочей среды</li><li>Частные чаты → Журнал рабочей среды</li><li>Боты → Журнал рабочей среды</li><li>Журнал рабочей среды → Поиск по всем источникам</li><li>Журнал рабочей среды → Профили лиц со ссылками на записи</li><li>Журнал рабочей среды → Сохраненные версии и подтверждения получения вложений</li><li>Поиск по всем источникам → Хронология аналитика и реестр источников</li><li>Профили лиц со ссылками на записи → Хронология аналитика и реестр источников</li><li>Сохраненные версии и подтверждения получения вложений → Хронология аналитика и реестр источников</li><li>Журнал рабочей среды → ZIP-архив с подписанными доказательствами</li><li>Хронология аналитика и реестр источников → Передача дела с отдельно проверенными доказательствами</li><li>ZIP-архив с подписанными доказательствами → Передача дела с отдельно проверенными доказательствами</li></ol></details></figure>
+<h2 id="1-define-the-case-and-collect-the-whole-account">1. Определите суть дела и соберите полную информацию<a class="anchor" href="#1-define-the-case-and-collect-the-whole-account" aria-label="Ссылка на раздел">#</a></h2>
+<ol>
+<li>Подключите аккаунт для сбора данных в отдельном рабочем пространстве. Во внешних заметках по делу
+    укажите номер дела, идентификатор аккаунта, рабочее пространство, дату начала наблюдения и надежный
+    отпечаток ключа подписи.</li>
+<li>Открытые <strong>источники → Область наблюдения → Режим расследования</strong>. В настройках по умолчанию выбраны:
+    <strong>«Весь аккаунт»</strong>, «каналы/группы/личные чаты/боты», «собственные действия», «профили источников»
+    и последние 200 видимых сообщений для вновь обнаруженных источников.
+    Просмотрите настройки, нажмите <strong>«Сохранить область</strong>» и подтвердите выбор области.</li>
+<li><strong>Загрузите чаты</strong> и сравните источники со списком диалогов учетной записи. Проверьте
+    исключения. <strong>Параметр «Чаты, считываемые из списка учетной записи»</strong> по умолчанию установлен на
+    1 000 и допускает до 20 000. Источники, выходящие за пределы этого лимита, добавляются, когда
+    они становятся активными. Записывайте то, что было фактически перечислено.</li>
+<li>В <strong>настройках записи</strong> выберите <strong>«Вся видимая активность</strong>» и сохраните
+    настройки мониторинга. Проверьте типы вложений и ограничения, а также свободное место на диске.</li>
+<li>Начните наблюдение. Проверьте новое контролируемое сообщение, его редактирование и удаление, а затем
+    сохраните тестовые ссылки и информацию о любых сбоях.</li>
+</ol>
+<p>Режим «Весь аккаунт» фиксирует всю видимую пользователю активность в рамках сохраненных настроек.
+Он не получает доступ к секретным чатам и не присоединяется автоматически ко всем связанным группам. Кроме того,
+он не заполняет данные по всем существующим беседам. См. <a href="../collection/#observation-scope-chosen-chats-a-folder-or-the-whole-account">раздел «Объем сбора данных</a>».</p>
+<h2 id="2-inventory-every-source-and-acquire-historical-context">2. Составьте перечень всех источников и изучите исторический контекст<a class="anchor" href="#2-inventory-every-source-and-acquire-historical-context" aria-label="Ссылка на раздел">#</a></h2>
+<p>Ведите реестр источников, в котором каждая строка соответствует одному чату:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Область применения</th>
+<th>Запись</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Идентичность</td>
+<td>Рабочая область, идентификатор учётной записи, числовой идентификатор чата, название и тип</td>
+</tr>
+<tr>
+<td>Видимость</td>
+<td>Членство/роль, подтверждённый или неподтверждённый доступ, исключения</td>
+</tr>
+<tr>
+<td>Захват в режиме реального времени</td>
+<td>Время начала работы, выбранные типы событий и последующие изменения политики</td>
+</tr>
+<tr>
+<td>История журнала</td>
+<td>Запрошенные/выполненные снимки, ограничения, время и ссылки на записи</td>
+</tr>
+<tr>
+<td>Полная история</td>
+<td>Имя файла экспорта по каждому чату с подписью, границы и статус завершения/сбоя</td>
+</tr>
+<tr>
+<td>Вложения</td>
+<td>Завершённые подтверждения получения медиафайлов, хэши, размеры, а также результаты пропущенных или неудачных операций</td>
+</tr>
+<tr>
+<td>Область применения</td>
+<td>Сбои в работе, неполный сбор данных, функция FloodWait, недоступные сообщения и другие пробелы</td>
+</tr>
+</tbody>
+</table></div>
+<p>Используйте подходящий способ сбора данных для каждого источника:</p>
+<ul>
+<li><strong>Снимок истории</strong> сохраняет последние видимые сообщения в журнале наблюдений.
+    По умолчанию максимальное количество составляет 500; в разделе <strong>«Параметры» → «Максимальный объем снимка истории»</strong> это значение можно увеличить
+    до 10 000. Речь идет о текущих наблюдениях за историей, а не о реконструированных изменениях.</li>
+<li><strong>«Экспорт всего чата» → «Экспорт всего чата</strong>» или <strong>«Чаты» → «Экспорт чата</strong>» позволяет
+    извлечь видимую на данный момент историю одного чата в отдельный подписанный пакет формата <code>chat.json</code> /
+    <code>chat.html</code>. Повторите эту операцию для всех источников по данному делу и сохраните каждый результат.</li>
+<li><strong>При появлении нового чата или бота</strong> можно сохранить его профиль и до 1 000 последних
+    сообщений; в режиме расследования выбирается 200. Существующие чаты не получают эти
+    данные задним числом при включении данного режима.</li>
+<li><strong>Загрузка видимых вложений</strong> обеспечивает сохранение байтов в соответствии с настроенной политикой.
+    Требуется заполненная квитанция <code>media.saved</code> с SHA-256 и указанием количества байтов. Задание в очереди,
+    миниатюра или имя файла не являются сохраненным вложением.</li>
+</ul>
+<p>Полный экспорт чата <strong>не</strong> заполняет журнал или профили участников всеми
+соответствующими сообщениями. Для получения истории, необходимой для анализа в
+TgWitness, используйте моментальные снимки журнала. Функции заполнения всей истории аккаунта одним нажатием не существует; полное получение истории
+осуществляется по каждому чату отдельно. Ни один из этих способов не позволяет восстановить материалы, которые Telegram больше не предоставляет.</p>
+<h2 id="3-preserve-the-evolving-case-and-deliberate-interactions">3. Сохранение динамики дела и целенаправленного взаимодействия<a class="anchor" href="#3-preserve-the-evolving-case-and-deliberate-interactions" aria-label="Ссылка на раздел">#</a></h2>
+<p>Отметьте активные чаты по текущим делам в качестве приоритетных источников. Проверяйте интервалы повторной проверки,
+продолжайте наверстывать упущенное и анализируйте результаты работы с медиафайлами. Обеспечьте постоянное наблюдение за сбором данных во время использования аккаунта.
+Воспользуйтесь <strong>меню «Чаты» → «Профиль» → «Сохранить профиль сейчас»</strong>, чтобы сохранить метаданные источника, такие как
+описания и команды бота. Эти данные отличаются от профилей пользователей, сгенерированных
+на основе сохраненных сообщений.</p>
+<p>В случаях, когда речь идет о слежении за источником или взаимодействии с ботом:</p>
+<ol>
+<li><strong>«Открыть ссылку в Telegram» → «Сохранить предварительный просмотр»</strong> записывает предоставленную ссылку и
+    результат предварительного просмотра до выполнения действия.</li>
+<li><strong>Команда «Join / open and observe»</strong> выполняет присоединение/открытие и отправляет параметр запуска бота,
+    если он указан. Запрос на присоединение, ожидающий одобрения, регистрируется как «pending».</li>
+<li>Текстовые ответы, сгенерированные панелью, и нажатия поддерживаемых кнопок сохраняют значения
+    <code>interaction.requested</code> и <code>interaction.result</code>. Квитанции обратного вызова могут сохранять
+    возвращаемый текст всплывающего окна, состояние оповещения и URL-адрес.</li>
+</ol>
+<p>Это реальные действия учетных записей. Нажатия кнопки обратного вызова в другом приложении Telegram не
+видимы сборщику данных, хотя последующие сообщения или изменения могут быть зафиксированы.
+Мини-клиент не выполняет рабочие процессы, связанные с веб-приложениями, платежами, телефоном или местоположением.
+Точное поведение описано в разделе <a href="../collection/#act-from-the-panel">«Взаимодействие с панелями</a>».</p>
+<h2 id="4-connect-observations-across-chats">4. Установление связей между наблюдениями в разных чатах<a class="anchor" href="#4-connect-observations-across-chats" aria-label="Ссылка на раздел">#</a></h2>
+<p>В разделе <strong>«Журнал</strong>» выберите <strong>«Все источники</strong>» и выполните поиск по записанному контенту. Откройте соответствующие
+записи и сохраните рабочую область, чат, идентификатор сообщения, порядковый номер и хеш записи.</p>
+<p>В соответствующем чате откройте меню <strong>«Люди</strong>»<strong> → «Включить профили»</strong> и просмотрите информацию об одном из участников:</p>
+<ul>
+<li>Имена/имена пользователей, зафиксированные в течение определенного периода, а также числовой идентификатор Telegram.</li>
+<li>Связь между ответами с указанием ссылок на исходные записи.</li>
+<li><strong>Также в…</strong> других чатах данного рабочего пространства, где писал этот пользователь.</li>
+<li>Активность, изменения/удаления, а также упомянутые кошельки, телефоны, имена пользователей и ссылки.</li>
+<li>Сохраненные метаданные аватаров и аналогичные кэшированные аватары с указанием их отдельного источника.</li>
+</ul>
+<p>Перед использованием профиля, сформированного на основе данных, в выводах необходимо открыть указанные записи. Профили охватывают
+лиц, чьи сообщения сохранены, а не всех участников группы. <strong>Параметры → Количество записей,
+указанных для каждого факта</strong>, ограничивает список ссылок, но не влияет на количество базовых действий.
+Упоминания и сходство аватаров являются ориентирами; они не подтверждают принадлежность или личность.</p>
+<p>В приведённом примере:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Ссылка</th>
+<th>Записи</th>
+<th>Поддерживаемые наблюдения</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Один и тот же аккаунт отправителя</td>
+<td>Группа № 146 и частная переписка № 205</td>
+<td>Оба источника указывают идентификатор отправителя в Telegram: 71001</td>
+</tr>
+<tr>
+<td>Тот же адрес назначения</td>
+<td>№ 146, клавиатура бота № 173, редактирование канала № 188, личное сообщение № 205</td>
+<td>Все записи содержат код <code>pay.example.invalid/new</code>; владение/контроль не установлены</td>
+</tr>
+<tr>
+<td>Тот же сохраненный файл</td>
+<td>Завершено оформление квитанций № 151 и № 209</td>
+<td>Полные значения SHA-256 совпадают для сохраненных байтов</td>
+</tr>
+<tr>
+<td>Указание источника канала</td>
+<td>№ 101 и № 188</td>
+<td>Не приписывайте сообщение в канале пользователю 71001 без указания отправителя</td>
+</tr>
+</tbody>
+</table></div>
+<p>Сравните хэши вложений и связанные с ними ссылки на сообщения. Идентичные
+файлы не позволяют установить автора, пересылающего лицо или общего оператора. Одинаковые имена и
+похожие аватары сами по себе не позволяют сопоставить два идентификатора Telegram с одним и тем же лицом.</p>
+<h2 id="5-build-the-cross-chat-timeline">5. Создание хронологии событий, охватывающей несколько чатов<a class="anchor" href="#5-build-the-cross-chat-timeline" aria-label="Ссылка на раздел">#</a></h2>
+<p>Используйте ссылки на сохраненные версии в <strong>чатах</strong> и их <strong>записи в журнале №…</strong> В
+<strong>журнале</strong> объедините <strong>все источники</strong> с <strong>редактированиями</strong>, <strong>удалениями</strong> и <strong>охватом</strong>.
+Сохраняйте как <code>source_at</code> (если указан), так и <code>observed_at</code>.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Примерный период наблюдения</th>
+<th>Справочная информация</th>
+<th>Замечание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>09:00</td>
+<td>Канал № 101</td>
+<td>Зафиксирован исходный адрес назначения</td>
+</tr>
+<tr>
+<td>09:12</td>
+<td>Группа № 146; СМИ № 151</td>
+<td>Опубликован новый адрес; загрузка файла завершена</td>
+</tr>
+<tr>
+<td>09:16</td>
+<td>Бот № 173</td>
+<td>Клавиатура указывает на новый пункт назначения</td>
+</tr>
+<tr>
+<td>09:20</td>
+<td>Канал № 188</td>
+<td>Объявление отредактировано; обе сохраненные версии остаются</td>
+</tr>
+<tr>
+<td>09:24</td>
+<td>Частный #205; медиа #209</td>
+<td>Идентификатор отправителя, повторяющийся в поле получателя; байты файла сохранены без изменений</td>
+</tr>
+<tr>
+<td>09:28</td>
+<td>Группа № 231</td>
+<td>Получено уведомление об удалении; лицо, удалившее сообщение, и точное время удаления неизвестны</td>
+</tr>
+</tbody>
+</table></div>
+<p>Между приведёнными в примерах ссылками могут присутствовать и другие записи. Порядковые номера упорядочивают
+наблюдения; моментальные снимки истории могут содержать более ранние даты источников и поступать позже,
+чем текущие события. Разграничивайте моментальные снимки, восстановленные сообщения, уведомления об удалении и
+результаты, указывающие на отсутствие данных при повторной проверке. Обозначьте пробелы в охвате как неизвестные интервалы. Получение данных
+истории позднее не означает ретроактивного установления непрерывности наблюдения.</p>
+<h2 id="6-add-account-perspectives-without-losing-their-origin">6. Добавление точек зрения учетных записей без потери информации об их происхождении<a class="anchor" href="#6-add-account-perspectives-without-losing-their-origin" aria-label="Ссылка на раздел">#</a></h2>
+<p>Используйте отдельное рабочее пространство для каждой отдельной учетной записи и повторяйте процедуру инвентаризации.
+При каждом сравнении сохраняйте идентификатор учетной записи, роль, отпечаток ключа подписи и ссылки на источники.
+Номера сообщений не являются глобальными идентификаторами, общими для всех чатов и учетных записей.</p>
+<p>Корреляция данных между рабочими пространствами осуществляется во внешних заметках по делу или с помощью инструментов анализа.
+В настоящее время TgWitness не поддерживает глобальный поиск по всем рабочим пространствам, объединенную временную шкалу,
+график расследования или объединенный архив дел. Экспорт данных по нескольким аккаунтам из <strong>одного</strong>
+канала или супергруппы представляет собой отдельную операцию, а не объединение журналов этих аккаунтов.</p>
+<p>При работе с более объёмными материалами соблюдайте границы, прибегая к услугам <a href="../witness/">независимого свидетеля</a>.
+Используйте контролируемые проверки доставки для подтверждения
+пути захвата и видимости каждого аккаунта.</p>
+<h2 id="7-assemble-and-verify-the-case-handoff">7. Подготовка и проверка передачи дела<a class="anchor" href="#7-assemble-and-verify-the-case-handoff" aria-label="Ссылка на раздел">#</a></h2>
+<p>Сохраните эти материалы в едином каталоге дела, сформированном аналитиком:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Материалы</th>
+<th>Цель</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Заметки по делам и реестр источников</td>
+<td>Вопросы, политика сбора данных, доступ/роли, выводы, альтернативные объяснения и пробелы</td>
+</tr>
+<tr>
+<td>Хронология событий</td>
+<td>Для каждой записи указываются как время, так и ссылки на рабочую область, чат, сообщение и последовательность сообщений</td>
+</tr>
+<tr>
+<td>ZIP-архив с подписанными доказательствами для каждого рабочего пространства</td>
+<td>Полный журнал записей, манифест и включенные сохраненные медиафайлы; фильтры панели не ограничивают экспорт журнала</td>
+</tr>
+<tr>
+<td>Отдельно подписанные файлы с профилями пользователей</td>
+<td>Проверка полученных ссылок на соответствие доказательствам в рабочей области</td>
+</tr>
+<tr>
+<td>Подписанные полные экспорты чатов</td>
+<td>Сбор текущей видимой истории, отдельно от журнала наблюдений</td>
+</tr>
+<tr>
+<td>Достоверные отпечатки и предыдущие контрольные точки</td>
+<td>Ключевые идентификационные данные и границы сохраняемого журнала</td>
+</tr>
+<tr>
+<td>Артефакты Witness, при наличии соответствующей настройки</td>
+<td>Отдельный журнал, подписанные записи и «отпечаток» свидетеля</td>
+</tr>
+<tr>
+<td>Результаты проверки и хэши переданных файлов</td>
+<td>Что было проверено, какие байты были переданы и кому</td>
+</tr>
+</tbody>
+</table></div>
+<p>Из надёжной установки, с указанием имён файлов и фактических отпечатков каждого рабочего пространства:</p>
+<pre><code class="language-sh">python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
+python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --evidence evidence.zip
+python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256</code></pre>
+<p>Сохраняются фактические результаты проверки и исходные артефакты. Каталог дел верхнего уровня,
+реестр источников и выводы аналитиков хранятся во внешних хранилищах;
+каждый артефакт TgWitness имеет собственную подпись и процедуру проверки.</p>
+<h2 id="adapt-the-investigation">Адаптация к условиям расследования<a class="anchor" href="#adapt-the-investigation" aria-label="Ссылка на раздел">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Пример</th>
+<th>Trace</th>
+<th>Доставить</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Рассмотрение споров по заказам и оплате с помощью бота</td>
+<td>Уведомление о входе → предварительный просмотр сохраненной ссылки → параметр запуска бота → версии сообщений и клавиатурных вводов → подтверждения обратного вызова панели → последующие действия в личных переписках и группах</td>
+<td>Учтена хронология предложений и ответов, а также проверены источники; наличие одной лишь ссылки на оплату само по себе не является доказательством совершения платежа</td>
+</tr>
+<tr>
+<td>Удалённые сообщения после инцидента</td>
+<td>Все затронутые чаты → сохраненные оригиналы/изменения → результаты проверки на удаление или отсутствие при повторной проверке → сохраненные медиафайлы → охват и другие точки зрения участников</td>
+<td>Сохраненные версии и явно обозначенные промежутки времени; отсутствие вымышленных субъектов, удаляющих сообщения</td>
+</tr>
+<tr>
+<td>Участник использует разные имена в разных чатах</td>
+<td>Числовой идентификатор отправителя → история имен/имен пользователей → ответы → другие отслеженные чаты → упомянутые адреса/файлы</td>
+<td>Хронология активности указанного аккаунта в Telegram, в которой реальные личности и гипотезы о взаимосвязях представлены отдельно</td>
+</tr>
+</tbody>
+</table></div>
+<p><a href="../collection/">Ссылка на сборник</a> · <a href="../evidence/#people-profiles">Проверка личности</a> ·
+<a href="../evidence/#investigation-handoff">Передача доказательств</a> · <a href="../verification/">Проверка завершена</a></p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/INVESTIGATION.md">Исправить страницу на GitHub ↗</a><a class="next-guide" href="../features/"><span>Дальше</span><strong>Возможности и ограничения →</strong></a><p>В данных руководствах описывается текущая реализация. Результаты валидации и остающиеся пробелы документируются отдельно. <a href="../verification/">Что проверено →</a></p></footer>
+</main>
+<aside class="toc" aria-label="На этой странице"><p class="nav-label">На этой странице</p><a href="#worked-case-a-destination-changes-across-four-conversations">Пример из практики: изменение пункта назначения в четырёх беседах</a><a href="#1-define-the-case-and-collect-the-whole-account">1. Определите суть дела и соберите полную информацию</a><a href="#2-inventory-every-source-and-acquire-historical-context">2. Составьте перечень всех источников и изучите исторический контекст</a><a href="#3-preserve-the-evolving-case-and-deliberate-interactions">3. Сохранение динамики дела и целенаправленного взаимодействия</a><a href="#4-connect-observations-across-chats">4. Установление связей между наблюдениями в разных чатах</a><a href="#5-build-the-cross-chat-timeline">5. Создание хронологии событий, охватывающей несколько чатов</a><a href="#6-add-account-perspectives-without-losing-their-origin">6. Добавление точек зрения учетных записей без потери информации об их происхождении</a><a href="#7-assemble-and-verify-the-case-handoff">7. Подготовка и проверка передачи дела</a><a href="#adapt-the-investigation">Адаптация к условиям расследования</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Открытый исходный код · Работает на вашем компьютере</span><a href="../../../../LICENSE">Лицензия MIT</a><a href="../notice/">Уведомление для оператора</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Безопасность</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Ожидание сообщения", "Step through a fictional send, edit and delete.": "Пошаговое руководство по отправке, редактированию и удалению вымышленного сообщения.", "No observations yet. Start the sequence or advance one event.": "Пока нет комментариев. Начните последовательность или перейдите к следующему событию.", "Meet at 10:00": "Встреча в 10:00", "A new message is visible in the chat.": "В чате отображается новое сообщение.", "Record 1 appended: the collector observed the original message.": "Добавлена запись № 1: сборщик данных зафиксировал исходное сообщение.", "Meet at 11:00": "Встреча в 11:00", "The current text changes. The earlier observation stays.": "Текущий текст изменяется. Предыдущее замечание остается в силе.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Запись № 2 добавлена: редактирование представляет собой новое наблюдение. В записи № 1 по-прежнему сохранен исходный текст.", "Message deleted": "Сообщение удалено", "The message has disappeared from the chat view.": "Сообщение исчезло из окна чата.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Приложение «Record 3»: уведомление об удалении сохраняется наряду с обеими зафиксированными версиями.", "0 records": "0 записей", "1 record": "1 запись", "2 records": "2 записи", "3 records": "3 записи", "Complete / {n} of 3": "Завершено / {n} из 3", "Step / {n} of 3": "Шаг / {n} из 3", "Pause": "Пауза", "Replay sequence": "Последовательность воспроизведения", "Play sequence": "Последовательность воспроизведения", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Доступен статический пример. Для интерактивного вычисления хэшей откройте эту страницу по протоколу HTTPS или в локальном превью с поддержкой Web Crypto.", "No record supplied": "Данные не предоставлены", "Tail removed": "Конец текста удалён", "≠ saved hash": "≠ сохраненный хеш", "Rebuilt · different hash": "Переработанная версия · другой хеш", "= saved hash": "= сохраненный хеш", "Same length and matching head.": "Одинаковый объем и соответствующий заголовок.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Все три вычисленных хеша совпадают с сохраненными хешами. Данный образец соответствует установленному ограничению в три записи.", "Same saved head; the journal prefix fails verification.": "Сохраненная заголовочная строка; префикс журнала не проходит проверку.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Запись № 2 больше не совпадает со своим сохраненным хешем. Проверка только конечного сохраненного указателя не позволила бы обнаружить это; верификатор проверяет каждую запись.", "Head differs from the retained checkpoint.": "Заголовок отличается от сохраненного контрольного пункта.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Восстановленные хэши связаны между собой, однако конечный хед изменился. Сохраненная контрольная точка отклоняет данную историю. Исходные подписи также не будут проверяться для измененных записей.", "Too short: 2 supplied records \u003c 3 retained records.": "Слишком мало: 2 предоставленных записи \u003c 3 сохраненных записей.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Два оставшихся хеша по-прежнему совпадают. Сохраненная контрольная точка показывает отсутствующую конечную часть. Без этой более ранней границы один лишь этот более короткий префикс не позволил бы выявить пропуск.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "В данном браузере расчёт хешей недоступен. Приведённые ниже формулы и статическое пояснение остаются доступными.", "{n} records": "{n} записей", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Принято: количество записей увеличивается, подпись подтверждается, а ключ совпадает. Свидетель сохраняет эту новую границу.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Откат: подписанный ответ содержит меньшее количество записей, чем последняя принятая контрольная точка. Система фиксирует проблему и сохраняет предыдущую принятую границу.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Форк: количество не изменилось, но вершина отличается. Свидетель фиксирует разногласие и сохраняет ранее принятую границу.", "No answer": "Ответ отсутствует", "boundary unknown": "предел неизвестен", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Отсутствие ответа: «Witness» фиксирует неудачную проверку. Он не может определить текущее состояние сборщика данных. Если «Witness» по-прежнему имеет доступ к Bot API и это разрешено его политикой публикации, он может опубликовать информацию об этой неудаче.", "Send {n}": "Отправить {n}", "Edit {n}": "Редактировать {n}", "Delete {n}": "Удалить {n}", "Both accounts captured all six expected observations in this example.": "Оба аккаунта зафиксировали все шесть ожидаемых наблюдений в данном примере.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Аккаунт B по-прежнему зафиксировал 6 из 6. Две квитанции были получены с задержкой. Коэффициент фиксации и задержка получения квитанций отвечают на разные вопросы.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Аккаунт B зафиксировал 5 из 6 действий к моменту окончания теста (83,3 %). Отсутствующее редактирование не сопровождалось зафиксированной задержкой. Данный результат отражает только шесть контролируемых действий.", "not observed by cutoff": "не соблюдено к моменту окончания срока", "{s} seconds": "{s} секунд", "Exact values follow in the table.": "Точные значения приведены в таблице ниже.", "{s} s": "{s} s", "Not observed": "Не соблюдается", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "В четырёх чатах приводятся различные наблюдения. Следуйте исходным записям для каждого соединения; не приписывайте сообщение в канале пользователю 71001 без указания отправителя.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Записи № 146 и № 205 содержат один и тот же идентификатор отправителя — 71001. Это позволяет установить связь между замеченными публикациями одного аккаунта Telegram в двух разных чатах. При этом не происходит идентификация реального лица или привязка публикации к конкретному каналу.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Адрес назначения pay.example.invalid/new фигурирует в записи группы № 146, введении с клавиатуры бота № 173, редактировании канала № 188 и личном сообщении № 205. Повторное упоминание адреса назначения связывает эти материалы между собой; однако это не доказывает наличия единого контроля над указанными учетными записями.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "В данном вымышленном деле завершённые квитанции о получении медиафайлов № 151 и № 209 имеют одинаковые полные значения SHA-256. Сравните фактические байты и связанные с ними записи сообщений. Соответствующий файл не позволяет установить его создателя и не подтверждает, кто его переслал.", "the encrypted off-site copy": "зашифрованная внешняя копия", "notifications": "уведомления", "checkpoint hashes for timestamps": "Хэши контрольных точек для временных меток", "signed checkpoints for the witness": "подписанные контрольные точки для TgWitness", "Switched on in this example": "В данном примере включено", "Optional · off by default": "Необязательно · по умолчанию отключено", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "С этого устройства удаляются: подключение к Telegram и {list}. Ничего больше.", "Default: only the Telegram connection leaves this machine.": "По умолчанию: с данного компьютера выходит только соединение с Telegram.", "{done} of {total} done": "{done} из {total} выполнено", "Mark step {n} as done": "Пометить шаг {n} как выполненный", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Текст", "Copied": "Скопировано", "Command copied.": "Команда скопирована.", "Selected — Ctrl/Cmd+C": "Выделено — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Команда выбрана. Скопируйте её вручную.", "Command copied to clipboard.": "Команда скопирована в буфер обмена.", "Select text": "Выделить текст", "Clipboard unavailable. Command selected; copy it manually.": "Буфер обмена недоступен. Команда выбрана; скопируйте её вручную.", "A message arrives. The first observation is saved.": "Поступает сообщение. Первое наблюдение сохраняется.", "The time changes. Both captured versions stay.": "Время меняется. Обе зафиксированные версии сохраняются.", "The message disappears. The captured history remains.": "Сообщение исчезает. Зафиксированная история сохраняется.", "Pause example animation": "Пример анимации «Пауза»", "Play example animation": "Просмотр примера анимации", "Play": "Воспроизвести", "Full-size workspace screenshot": "Снимок экрана рабочей области в полном размере", "Workspace screenshot · fictional data": "Снимок экрана рабочей области · вымышленные данные", "Close": "Закрыть", "Close screenshot": "Закрыть скриншот", "Scrollable full-size screenshot": "Прокручиваемый скриншот в полном размере", "Enlarge: {name}": "Увеличить: {name}", "View full size": "Посмотреть в полном размере"}</script>
+</body></html>

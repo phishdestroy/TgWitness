@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="es" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Modo de investigación | TgWitness</title>
+<meta name="description" content="Investigaciones de cuentas completas en canales, grupos, chats privados y bots, desde la definición del alcance hasta la elaboración de un expediente de caso verificado."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/investigation/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="Modo de investigación | TgWitness"><meta property="og:description" content="Investigaciones de cuentas completas en canales, grupos, chats privados y bots, desde la definición del alcance hasta la elaboración de un expediente de caso verificado.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/es/docs/reference/investigation/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/investigation/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/investigation/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/investigation/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/investigation/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/investigation/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/investigation/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/investigation/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/es/docs/reference/investigation/", "url": "https://phishdestroy.github.io/TgWitness/es/docs/reference/investigation/", "name": "Modo de investigación | TgWitness", "description": "Investigaciones de cuentas completas en canales, grupos, chats privados y bots, desde la definición del alcance hasta la elaboración de un expediente de caso verificado.", "inLanguage": "es", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://phishdestroy.github.io/TgWitness/es/"}, {"@type": "ListItem", "position": 2, "name": "Documentación", "item": "https://phishdestroy.github.io/TgWitness/es/docs/"}, {"@type": "ListItem", "position": 3, "name": "Referencia", "item": "https://phishdestroy.github.io/TgWitness/es/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Modo de investigación", "item": "https://phishdestroy.github.io/TgWitness/es/docs/reference/investigation/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Ir al contenido</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Documentación</span></a>
+<nav aria-label="Guías"><a href="../../concepts/">Guía visual</a><a href="../../">Todas las guías</a><a href="../">Referencia</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Idioma"><span aria-hidden="true">◍</span> Español</summary><div class="lang-list"><a href="../../../../docs/reference/investigation/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/investigation/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/investigation/" hreflang="uk" lang="uk">Українська</a><a href="./" hreflang="es" lang="es" aria-current="true">Español</a><a href="../../../../pt/docs/reference/investigation/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/investigation/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/investigation/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/investigation/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/investigation/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/investigation/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/investigation/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/investigation/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/investigation/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Cambiar entre el tema claro y el oscuro"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Guías"><a href="../../../guides/modes.html">Modos, escenarios y niveles de evidencia</a><p class="nav-label">Primeros pasos</p><a href="../../start/">Empiece en cuestión de minutos</a><a href="../../accounts/">Conecte una cuenta</a><a href="../../proxies/">Elija un proxy</a><a href="../../exports/">Exportar y verificar</a><p class="nav-label">Comprender las pruebas</p><a href="../../concepts/">Vea cómo funciona el registro de pruebas</a><a href="../../cases/">Investigue en todos los chats</a><a href="../../security/">Mantenga la seguridad</a><p class="nav-label">Más información</p><a href="../../witness/">Configurar un bot de TgWitness</a><a href="../../server/">Manténgala en funcionamiento</a><a href="../../troubleshooting/">Averigüe qué ha fallado</a></nav><nav class="wiki-nav" aria-label="Referencia"><p class="nav-label"><a class="nav-label-link" href="../">Referencia</a></p><details class="wiki-group"><summary>Configuración</summary><a href="../quickstart/">Inicio rápido</a><a href="../accounts/">Formatos de cuentas y sesiones</a><a href="../connection/">Conexión, servidores proxy y protección de datos</a><a href="../deployment/">Implementación</a></details><details class="wiki-group" open><summary>Recopilar</summary><a href="../collection/">Cómo funciona la recopilación</a><a href="../operations/">Flujos de trabajo y operaciones</a><a href="./" aria-current="page">Modo de investigación</a><a href="../features/">Características y limitaciones</a></details><details class="wiki-group"><summary>Pruebas</summary><a href="../how-it-works/">Cómo funciona el registro de pruebas</a><a href="../evidence/">Formato de las pruebas</a><a href="../witness/">Testigo independiente</a><a href="../timestamp/">Marcas de tiempo</a></details><details class="wiki-group"><summary>Seguridad y proyecto</summary><a href="../security/">Seguridad y tratamiento de datos</a><a href="../architecture/">Arquitectura</a><a href="../verification/">Lo que se ha probado</a><a href="../license/">Aviso sobre incompatibilidades de licencia y arquitectura</a><a href="../notice/">Aviso de incompatibilidad con algunos operadores</a><a href="../changelog/">Registro de cambios</a></details></nav><p class="sidebar-note">v0.7.0<br>Código abierto · Se ejecuta en su equipo</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Guías"><a href="../../../">Inicio</a> <span aria-hidden="true">/</span> <a href="../../">Documentación</a> <span aria-hidden="true">/</span> <a href="../">Referencia</a> <span aria-hidden="true">/</span> <span aria-current="page">Modo de investigación</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Buscar en la documentación</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Pruebe con «proxy», «cadena de hash», «token» o «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Búsqueda clara" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Escriba una palabra para buscar en las guías y en la documentación de referencia. La búsqueda se realiza en su navegador.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Referencia / Recopilar</p><h1>Modo de investigación</h1><p class="guide-outcome">Investigaciones de cuentas completas en canales, grupos, chats privados y bots, desde la definición del alcance hasta la elaboración de un expediente de caso verificado.</p><div class="wiki-body"><p>Siga un caso a través de canales, grupos, chats privados y bots, desde la
+adquisición inicial hasta una cronología referenciada y un traspaso verificable. La versión interactiva del sitio web
+se encuentra en <code>/docs/cases/</code>; consulte <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally">las instrucciones de vista previa</a>.</p>
+<h2 id="worked-case-a-destination-changes-across-four-conversations">Caso práctico: un cambio de destino a lo largo de cuatro conversaciones<a class="anchor" href="#worked-case-a-destination-changes-across-four-conversations" aria-label="Enlace a esta sección">#</a></h2>
+<p>Un anuncio hace referencia a un bot. Un grupo operativo debate sobre un nuevo destino de pago,
+el teclado del bot lo muestra y un mensaje privado de seguimiento lo repite.
+A continuación, el anuncio se edita y un mensaje del grupo desaparece.</p>
+<p>Las preguntas son: ¿qué se observó antes y después del cambio?, ¿qué cuentas de Telegram
+publicaron cada elemento?, ¿dónde apareció el destino?, ¿qué bytes de los archivos adjuntos
+se conservaron? y ¿qué intervalos siguen sin conocerse?</p>
+<p>Todos los nombres, identificadores, horas y referencias del registro que aparecen en este ejemplo son ficticios. El
+flujo de trabajo utiliza las funciones actuales; el mapa del caso es una ilustración, no un
+gráfico automático generado por la aplicación.</p>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 771 514" width="771" height="514" role="img" aria-labelledby="flow-3-title flow-3-desc"><title id="flow-3-title">Diagrama de flujo</title><desc id="flow-3-desc">Canales → Registro del espacio de trabajo; Grupos → Registro del espacio de trabajo; Chats privados → Registro del espacio de trabajo; Bots → Registro del espacio de trabajo; Registro del espacio de trabajo → Buscar en todas las fuentes; Registro del espacio de trabajo → Perfiles de personas con referencias a los registros; Registro del espacio de trabajo → Versiones guardadas y confirmaciones de recepción de archivos adjuntos; Buscar en todas las fuentes → Cronología del analista y registro de fuentes; Perfiles de personas con referencias a los registros → Cronología del analista y registro de fuentes; Versiones guardadas y confirmaciones de recepción de archivos adjuntos → Cronología del analista y registro de fuentes; Registro del espacio de trabajo → Archivo ZIP de pruebas firmadas; Cronología del analista y registro de fuentes → Traspaso de casos con pruebas verificadas por separado; Archivo ZIP de pruebas firmadas → Traspaso de casos con pruebas verificadas por separado</desc><defs><marker id="flow-3-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M189.8 46.0C189.8 68.0 380.5 68.0 380.5 90.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:200" pathLength="200"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.2s" repeatCount="indefinite" path="M189.8 46.0C189.8 68.0 380.5 68.0 380.5 90.0"/></circle><path class="flow-edge" d="M311.8 46.0C311.8 68.0 380.5 68.0 380.5 90.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:86" pathLength="86"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M311.8 46.0C311.8 68.0 380.5 68.0 380.5 90.0"/></circle><path class="flow-edge" d="M444.1 46.0C444.1 68.0 380.5 68.0 380.5 90.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:82" pathLength="82"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M444.1 46.0C444.1 68.0 380.5 68.0 380.5 90.0"/></circle><path class="flow-edge" d="M576.4 46.0C576.4 68.0 380.5 68.0 380.5 90.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:205" pathLength="205"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.3s" repeatCount="indefinite" path="M576.4 46.0C576.4 68.0 380.5 68.0 380.5 90.0"/></circle><path class="flow-edge" d="M380.5 148.0C380.5 179.0 85.6 179.0 85.6 210.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:307" pathLength="307"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="3.4s" repeatCount="indefinite" path="M380.5 148.0C380.5 179.0 85.6 179.0 85.6 210.0"/></circle><path class="flow-edge" d="M380.5 148.0C380.5 174.5 279.9 174.5 279.9 201.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:119" pathLength="119"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M380.5 148.0C380.5 174.5 279.9 174.5 279.9 201.0"/></circle><path class="flow-edge" d="M380.5 148.0C380.5 170.0 481.2 170.0 481.2 192.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:115" pathLength="115"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M380.5 148.0C380.5 170.0 481.2 170.0 481.2 192.0"/></circle><path class="flow-edge" d="M85.6 268.0C85.6 299.0 282.2 299.0 282.2 330.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:213" pathLength="213"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="2.4s" repeatCount="indefinite" path="M85.6 268.0C85.6 299.0 282.2 299.0 282.2 330.0"/></circle><path class="flow-edge" d="M279.9 277.0C279.9 303.5 282.2 303.5 282.2 330.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:53" pathLength="53"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M279.9 277.0C279.9 303.5 282.2 303.5 282.2 330.0"/></circle><path class="flow-edge" d="M481.2 286.0C481.2 308.0 282.2 308.0 282.2 330.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:208" pathLength="208"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="2.3s" repeatCount="indefinite" path="M481.2 286.0C481.2 308.0 282.2 308.0 282.2 330.0"/></circle><path class="flow-edge" d="M380.5 148.0C380.5 179.0 675.5 179.0 675.5 210.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:307" pathLength="307"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="3.4s" repeatCount="indefinite" path="M380.5 148.0C380.5 179.0 675.5 179.0 675.5 210.0"/></circle><path class="flow-edge" d="M282.2 388.0C282.2 410.0 478.9 410.0 478.9 432.0" marker-end="url(#flow-3-arrow)" style="--i:3;--len:206" pathLength="206"/><circle class="flow-pulse" r="3.2" style="--i:3"><animateMotion begin="indefinite" dur="2.3s" repeatCount="indefinite" path="M282.2 388.0C282.2 410.0 478.9 410.0 478.9 432.0"/></circle><path class="flow-edge" d="M675.5 268.0C675.5 350.0 478.9 350.0 478.9 432.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:271" pathLength="271"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="3.0s" repeatCount="indefinite" path="M675.5 268.0C675.5 350.0 478.9 350.0 478.9 432.0"/></circle><g class="flow-node" style="--i:0"><rect x="137.8" y="6.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="189.8" y="26.0">Canales</tspan></text></g><g class="flow-node" style="--i:0"><rect x="259.8" y="6.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="311.8" y="26.0">Grupos</tspan></text></g><g class="flow-node" style="--i:0"><rect x="381.8" y="6.0" width="124.6" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="444.1" y="26.0">Chats privados</tspan></text></g><g class="flow-node" style="--i:0"><rect x="524.4" y="6.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="576.4" y="26.0">Bots</tspan></text></g><g class="flow-node" style="--i:1"><rect x="287.2" y="90.0" width="186.7" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="380.5" y="110.0">Registro del espacio de</tspan><tspan x="380.5" y="128.0">trabajo</tspan></text></g><g class="flow-node" style="--i:2"><rect x="6.0" y="210.0" width="159.1" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="85.6" y="230.0">Buscar en todas las</tspan><tspan x="85.6" y="248.0">fuentes</tspan></text></g><g class="flow-node" style="--i:2"><rect x="183.1" y="201.0" width="193.6" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="279.9" y="221.0">Perfiles de personas con</tspan><tspan x="279.9" y="239.0">referencias a los</tspan><tspan x="279.9" y="257.0">registros</tspan></text></g><g class="flow-node" style="--i:2"><rect x="394.7" y="192.0" width="172.9" height="94.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="481.2" y="212.0">Versiones guardadas y</tspan><tspan x="481.2" y="230.0">confirmaciones de</tspan><tspan x="481.2" y="248.0">recepción de archivos</tspan><tspan x="481.2" y="266.0">adjuntos</tspan></text></g><g class="flow-node" style="--i:2"><rect x="585.6" y="210.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="675.5" y="230.0">Archivo ZIP de pruebas</tspan><tspan x="675.5" y="248.0">firmadas</tspan></text></g><g class="flow-node" style="--i:3"><rect x="182.0" y="330.0" width="200.5" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="282.2" y="350.0">Cronología del analista y</tspan><tspan x="282.2" y="368.0">registro de fuentes</tspan></text></g><g class="flow-node" style="--i:4"><rect x="385.5" y="432.0" width="186.7" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="478.9" y="452.0">Traspaso de casos con</tspan><tspan x="478.9" y="470.0">pruebas verificadas por</tspan><tspan x="478.9" y="488.0">separado</tspan></text></g></svg></div><details class="flow-steps"><summary>Diagrama en formato de texto</summary><ol><li>Canales → Registro del espacio de trabajo</li><li>Grupos → Registro del espacio de trabajo</li><li>Chats privados → Registro del espacio de trabajo</li><li>Bots → Registro del espacio de trabajo</li><li>Registro del espacio de trabajo → Buscar en todas las fuentes</li><li>Registro del espacio de trabajo → Perfiles de personas con referencias a los registros</li><li>Registro del espacio de trabajo → Versiones guardadas y confirmaciones de recepción de archivos adjuntos</li><li>Buscar en todas las fuentes → Cronología del analista y registro de fuentes</li><li>Perfiles de personas con referencias a los registros → Cronología del analista y registro de fuentes</li><li>Versiones guardadas y confirmaciones de recepción de archivos adjuntos → Cronología del analista y registro de fuentes</li><li>Registro del espacio de trabajo → Archivo ZIP de pruebas firmadas</li><li>Cronología del analista y registro de fuentes → Traspaso de casos con pruebas verificadas por separado</li><li>Archivo ZIP de pruebas firmadas → Traspaso de casos con pruebas verificadas por separado</li></ol></details></figure>
+<h2 id="1-define-the-case-and-collect-the-whole-account">1. Defina el caso y recopile toda la información<a class="anchor" href="#1-define-the-case-and-collect-the-whole-account" aria-label="Enlace a esta sección">#</a></h2>
+<ol>
+<li>Conecte la cuenta de recopilación en su propio espacio de trabajo. En las notas externas del caso,
+    registre la referencia del caso, el ID de la cuenta, el espacio de trabajo, la fecha de inicio de la observación y la
+    huella digital de la clave de firma de confianza.</li>
+<li><strong>Fuentes</strong> abiertas <strong>→ Ámbito de observación → Modo de investigación</strong>. La configuración predeterminada selecciona
+    <strong>«Cuenta completa»</strong>, canales/grupos/chats privados/bots, acciones propias,
+    perfiles de origen y los últimos 200 mensajes visibles de las fuentes recién descubiertas.
+    Revíselo, pulse <strong>«Guardar ámbito</strong>» y complete la confirmación del ámbito.</li>
+<li><strong>Cargue los chats</strong> y compare las fuentes con la lista de diálogos de la cuenta. Compruebe
+    las exclusiones. <strong>El parámetro «Chats leídos de la lista de la cuenta»</strong> tiene un valor predeterminado de
+    1.000 y admite hasta 20.000. Las fuentes que superen el límite de la lista se añaden cuando
+    se activan. Registre lo que realmente se haya enumerado.</li>
+<li>En <strong>la configuración de grabación</strong>, seleccione <strong>«Toda la actividad visible»</strong> y guarde la
+    configuración de supervisión. Revise los tipos y límites de archivos adjuntos, así como el espacio libre en disco.</li>
+<li>Inicie la observación. Valide un nuevo mensaje controlado, así como su edición y eliminación, y a continuación
+    conserve las referencias de la prueba y cualquier error que se produzca.</li>
+</ol>
+<p>El alcance de toda la cuenta registra la actividad visible en la cuenta dentro de la configuración guardada.
+No accede a los chats secretos ni se une automáticamente a todos los grupos vinculados. Tampoco
+recopila retrospectivamente todas las conversaciones existentes. Consulte <a href="../collection/#observation-scope-chosen-chats-a-folder-or-the-whole-account">el alcance de la recopilación</a>.</p>
+<h2 id="2-inventory-every-source-and-acquire-historical-context">2. Realice un inventario de todas las fuentes y recopile el contexto histórico<a class="anchor" href="#2-inventory-every-source-and-acquire-historical-context" aria-label="Enlace a esta sección">#</a></h2>
+<p>Mantenga un registro de fuentes con una fila por cada chat:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Registrar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Identidad</td>
+<td>Espacio de trabajo, ID de cuenta, ID numérico del chat, título y tipo</td>
+</tr>
+<tr>
+<td>Visibilidad</td>
+<td>Afiliación/función, acceso confirmado o no confirmado, exclusiones</td>
+</tr>
+<tr>
+<td>Captura en tiempo real</td>
+<td>Fecha de inicio, tipos de eventos seleccionados y cambios posteriores en la política</td>
+</tr>
+<tr>
+<td>Historial del registro</td>
+<td>Instantáneas solicitadas/realizadas, límite, hora y referencias de los registros</td>
+</tr>
+<tr>
+<td>Historial completo</td>
+<td>Nombre del archivo de exportación firmado por chat, límites y estado de finalización o error</td>
+</tr>
+<tr>
+<td>Archivos adjuntos</td>
+<td>Recibos de archivos multimedia completados, hash, tamaños y resultados omitidos o fallidos</td>
+</tr>
+<tr>
+<td>Ámbito de aplicación</td>
+<td>Interrupciones del servicio, capturas incompletas, FloodWait, mensajes no disponibles y otras lagunas</td>
+</tr>
+</tbody>
+</table></div>
+<p>Utilice el método de adquisición adecuado para cada fuente:</p>
+<ul>
+<li><strong>La instantánea del historial</strong> guarda los mensajes visibles recientes en el registro de observación.
+    Su límite máximo por defecto es de 500; <strong>en Parámetros → Instantánea de historial más grande</strong> se puede aumentar
+    esa cifra hasta 10 000. Se trata de observaciones del historial actual, no de ediciones reconstruidas.</li>
+<li><strong>Exportación completa del chat → «Exportar chat completo</strong>», o <strong>«Chats» → «Exportar chat</strong>», extrae el
+    historial actualmente visible de un chat y lo guarda en un paquete independiente firmado <code>chat.json</code> /
+    <code>chat.html</code>. Repita este proceso con las fuentes del caso y conserve cada resultado.</li>
+<li><strong>Cuando aparece un nuevo chat o bot,</strong> se puede guardar su perfil y hasta 1.000
+    mensajes recientes; el modo de investigación selecciona 200. Los chats existentes no reciben esa
+    recopilación de forma retroactiva cuando se activa el modo.</li>
+<li><strong>La descarga de archivos adjuntos visibles</strong> conserva los bytes según la política configurada.
+    Se requiere un recibo <code>media.saved</code> completo con SHA-256 y recuento de bytes. Un
+    trabajo en cola, una miniatura o un nombre de archivo no constituyen el archivo adjunto conservado.</li>
+</ul>
+<p>La exportación completa de un chat <strong>no</strong> rellena el registro ni los perfiles de los usuarios con todos
+sus mensajes. Utilice las instantáneas del registro para obtener el historial que necesite analizar dentro de
+TgWitness. No existe una función de recuperación del historial completo de la cuenta con un solo clic; la adquisición del historial completo
+se realiza por chat. Ninguna de estas opciones recupera el material que Telegram ya no devuelve.</p>
+<h2 id="3-preserve-the-evolving-case-and-deliberate-interactions">3. Conservar la evolución del caso y las interacciones deliberadas<a class="anchor" href="#3-preserve-the-evolving-case-and-deliberate-interactions" aria-label="Enlace a esta sección">#</a></h2>
+<p>Marque los chats de casos activos como fuentes prioritarias. Revise los intervalos de reverificación, la
+puesta al día continua y los resultados multimedia. Mantenga el recopilador en funcionamiento mientras utiliza la cuenta.
+Utilice <strong>Chats → Perfil → Guardar perfil ahora</strong> para conservar los metadatos de origen, tales como
+descripciones y comandos de bot. Esto es independiente de los perfiles de personas derivados
+de los mensajes guardados.</p>
+<p>Cuando el caso implique el seguimiento de una fuente o la interacción con un bot:</p>
+<ol>
+<li><strong>Abrir enlace de Telegram → Guardar vista previa:</strong> registra el enlace facilitado y la
+    vista previa mostrada antes de realizar una acción.</li>
+<li><strong>La función «Join / open and observe</strong>» lleva a cabo la acción de unirse o abrir y envía el parámetro de inicio
+    del bot cuando se le proporciona. Una solicitud de unión pendiente de aprobación se registra como «pendiente».</li>
+<li>Las respuestas de texto emitidas por el panel y las pulsaciones de botones compatibles conservan
+    <code>interaction.requested</code> y <code>interaction.result</code>. Los acuses de recibo de devolución de llamada pueden conservar
+    el texto de la ventana emergente devuelta, el estado de la alerta y la URL.</li>
+</ol>
+<p>Se trata de acciones reales de la cuenta. Las pulsaciones de «Callback» en otra aplicación de Telegram no son
+visibles para el recopilador, aunque sí pueden serlo los mensajes o modificaciones resultantes. El
+minicliente no realiza flujos de trabajo relacionados con aplicaciones web, pagos, llamadas telefónicas ni ubicación.
+Para conocer el comportamiento exacto, consulte <a href="../collection/#act-from-the-panel">las interacciones con los paneles</a>.</p>
+<h2 id="4-connect-observations-across-chats">4. Relacionar las observaciones entre distintos chats<a class="anchor" href="#4-connect-observations-across-chats" aria-label="Enlace a esta sección">#</a></h2>
+<p>En <strong>«Journal»</strong>, seleccione <strong>«Todas las fuentes»</strong> y busque el contenido registrado. Abra los
+registros coincidentes y anote el espacio de trabajo, el chat, el ID del mensaje, la secuencia y el hash del registro.</p>
+<p>En un chat relevante, abra <strong>«Personas» → «Activar perfiles»</strong> y examine el perfil de una persona:</p>
+<ul>
+<li>Nombres o nombres de usuario observados a lo largo del tiempo y el identificador numérico de Telegram.</li>
+<li>Relaciones de respuesta con referencias a los registros originales.</li>
+<li><strong>También en…</strong> otros chats de este diario del espacio de trabajo en los que escribió ese ID.</li>
+<li>Actividad, modificaciones y eliminaciones, así como carteras, teléfonos, nombres de usuario y enlaces mencionados.</li>
+<li>Metadatos de avatares guardados y avatares similares almacenados en caché, con su origen respectivo.</li>
+</ul>
+<p>Abra los registros citados antes de utilizar un perfil derivado en una conclusión. Los perfiles abarcan
+a las personas cuyos mensajes se han guardado, no a todos los miembros del grupo. <strong>Parámetros → Los registros
+citados por hecho</strong> limitan la lista de referencias, no el recuento de actividades subyacentes.
+Las menciones y la similitud de avatares son pistas; no establecen la propiedad ni la identidad.</p>
+<p>En el ejemplo práctico:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Enlace</th>
+<th>Registros</th>
+<th>Observación contrastada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>La misma cuenta de remitente</td>
+<td>Grupo n.º 146 y seguimiento privado n.º 205</td>
+<td>Ambos proporcionan el ID de remitente de Telegram 71001</td>
+</tr>
+<tr>
+<td>Mismo destino</td>
+<td>N.º 146, teclado del bot n.º 173, edición del canal n.º 188, mensaje privado n.º 205</td>
+<td>Todos contienen <code>pay.example.invalid/new</code>; no se ha establecido la titularidad ni el control.</td>
+</tr>
+<tr>
+<td>El mismo archivo guardado</td>
+<td>Se han completado los recibos multimedia n.º 151 y n.º 209</td>
+<td>Los valores SHA-256 completos coinciden para los bytes conservados</td>
+</tr>
+<tr>
+<td>Atribución del canal</td>
+<td>N.º 101 y n.º 188</td>
+<td>No atribuya una publicación del canal al usuario 71001 sin indicar el remitente correspondiente.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Compare los hash de los archivos adjuntos y las referencias de los mensajes asociados. Los archivos idénticos
+no permiten determinar quién es el creador, el reenviador o un operador común. Los nombres iguales y
+los avatares similares, por sí solos, no permiten vincular dos ID de Telegram a una misma persona.</p>
+<h2 id="5-build-the-cross-chat-timeline">5. Crear la línea temporal entre chats<a class="anchor" href="#5-build-the-cross-chat-timeline" aria-label="Enlace a esta sección">#</a></h2>
+<p>Utilice las versiones guardadas en <strong>«Chats»</strong> y sus enlaces <strong>«Registro del diario n.º…</strong>». En
+<strong>el «Diario»</strong>, combine <strong>todas las fuentes</strong> con <strong>las modificaciones</strong>, <strong>las eliminaciones</strong> y <strong>la cobertura</strong>.
+Conserve tanto el <code>source_at</code>, cuando se facilite, como el <code>observed_at</code>.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Tiempo de observación ilustrativo</th>
+<th>Referencia</th>
+<th>Observación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>09:00</td>
+<td>Canal n.º 101</td>
+<td>Destino original capturado</td>
+</tr>
+<tr>
+<td>09:12</td>
+<td>Grupo n.º 146; medio n.º 151</td>
+<td>Se ha publicado un nuevo destino; descarga del archivo completada</td>
+</tr>
+<tr>
+<td>09:16</td>
+<td>Bot n.º 173</td>
+<td>El teclado señala el nuevo destino</td>
+</tr>
+<tr>
+<td>09:20</td>
+<td>Canal n.º 188</td>
+<td>Anuncio editado; se conservan ambas versiones guardadas</td>
+</tr>
+<tr>
+<td>09:24</td>
+<td>Privado #205; medios de comunicación #209</td>
+<td>El mismo ID de remitente se repite en el destinatario; se conservan los mismos bytes del archivo</td>
+</tr>
+<tr>
+<td>09:28</td>
+<td>Grupo n.º 231</td>
+<td>Se ha recibido un aviso de eliminación; se desconoce quién la ha eliminado y la hora exacta de la eliminación.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Entre estas referencias de ejemplo se producen otros registros. Los números de secuencia ordenan
+las observaciones; las instantáneas del historial pueden contener fechas de origen más antiguas y llegar más tarde
+que los eventos en tiempo real. Distinga entre instantáneas, mensajes recuperados, avisos de eliminación y
+resultados de «ausente tras nueva comprobación». Marque las lagunas de cobertura como intervalos desconocidos. La adquisición posterior
+del historial no establece de forma retroactiva una observación ininterrumpida.</p>
+<h2 id="6-add-account-perspectives-without-losing-their-origin">6. Añadir perspectivas de las cuentas sin perder su origen<a class="anchor" href="#6-add-account-perspectives-without-losing-their-origin" aria-label="Enlace a esta sección">#</a></h2>
+<p>Utilice un espacio de trabajo independiente para cada cuenta distinta y repita su inventario.
+Conserve el ID de la cuenta, la función, la huella digital de la clave de firma y las referencias de origen en cada
+comparación. Los números de mensaje no son identificadores globales válidos para todos los chats o cuentas.</p>
+<p>La correlación entre espacios de trabajo se lleva a cabo en notas de casos externas o en herramientas de análisis.
+Actualmente, TgWitness no dispone de búsqueda global entre espacios de trabajo, cronología fusionada,
+gráfico de investigación ni archivo de casos combinado. La exportación de varias cuentas de <strong>un mismo</strong>
+canal o supergrupo es una operación distinta, no una fusión de los registros de las cuentas.</p>
+<p>En el caso de trabajos de mayor envergadura, mantenga los límites con un <a href="../witness/">testigo independiente</a>.
+Utilice comprobaciones de entrega controladas para validar
+la ruta de captura y la visibilidad de cada cuenta.</p>
+<h2 id="7-assemble-and-verify-the-case-handoff">7. Recopilar y verificar el traspaso del caso<a class="anchor" href="#7-assemble-and-verify-the-case-handoff" aria-label="Enlace a esta sección">#</a></h2>
+<p>Mantenga todo esto reunido en un directorio de casos elaborado por un analista:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Material</th>
+<th>Objetivo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Notas de caso y registro de fuentes</td>
+<td>Pregunta, política de recopilación, acceso/funciones, conclusiones, explicaciones alternativas y lagunas</td>
+</tr>
+<tr>
+<td>Cronología</td>
+<td>En cada entrada se incluyen tanto las fechas como las referencias al espacio de trabajo, el chat, el mensaje y la secuencia.</td>
+</tr>
+<tr>
+<td>Archivo ZIP de pruebas firmadas por espacio de trabajo</td>
+<td>Registro completo, manifiesto y archivos multimedia conservados incluidos; los filtros del panel no limitan la exportación del registro.</td>
+</tr>
+<tr>
+<td>Archivos de perfiles de personas firmados por separado</td>
+<td>Las referencias derivadas se han cotejado con las pruebas correspondientes del espacio de trabajo.</td>
+</tr>
+<tr>
+<td>Exportaciones completas y firmadas de chats</td>
+<td>Captura del historial visible actual, independiente del registro de observación</td>
+</tr>
+<tr>
+<td>Huellas digitales fiables y puntos de control anteriores</td>
+<td>Identidad clave y límites del registro conservado</td>
+</tr>
+<tr>
+<td>Elementos de prueba, si se ha configurado</td>
+<td>Registro independiente, entradas firmadas y huella digital del testigo</td>
+</tr>
+<tr>
+<td>Resultados de la verificación y hash de los archivos entregados</td>
+<td>Qué se ha comprobado, qué bytes se han transferido y a quién</td>
+</tr>
+</tbody>
+</table></div>
+<p>Desde una instalación de confianza, con los nombres de los archivos y la huella digital real de cada espacio de trabajo:</p>
+<pre><code class="language-sh">python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
+python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --evidence evidence.zip
+python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256</code></pre>
+<p>Se conservan los resultados reales de la verificación y los artefactos originales. El directorio de casos de nivel superior,
+el registro de fuentes y las conclusiones de los analistas se mantienen externamente;
+cada artefacto de TgWitness cuenta con su propia firma y procedimiento de verificación.</p>
+<h2 id="adapt-the-investigation">Adaptar la investigación<a class="anchor" href="#adapt-the-investigation" aria-label="Enlace a esta sección">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Caso</th>
+<th>Trace</th>
+<th>Entregar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Disputa sobre pedidos o pagos gestionada por un bot</td>
+<td>Anuncio de entrada → vista previa del enlace guardado → parámetro de inicio del bot → versiones de mensajes y teclado → recibos de devolución de llamada del panel → seguimiento de mensajes privados y de grupo</td>
+<td>Se ha respectado la cronología de ofertas y respuestas y se han verificado las fuentes; un enlace de pago por sí solo no constituye prueba de que se haya realizado dicho pago.</td>
+</tr>
+<tr>
+<td>Mensajes eliminados tras un incidente</td>
+<td>Todos los chats afectados → originales y modificaciones guardados → resultados de eliminación o de ausencia tras una nueva comprobación → archivos multimedia conservados → cobertura y otras perspectivas de la cuenta</td>
+<td>Versiones conservadas e intervalos desconocidos explícitos; no se atribuye a nadie la autoría de las eliminaciones.</td>
+</tr>
+<tr>
+<td>Un participante cambia de nombre en los distintos chats</td>
+<td>ID numérico del remitente → historial de nombres/nombres de usuario → respuestas → otros chats observados → destinos/archivos citados</td>
+<td>Una cronología de la actividad de una cuenta de Telegram citada, en la que se mantienen separadas las hipótesis sobre la identidad real y las relaciones.</td>
+</tr>
+</tbody>
+</table></div>
+<p><a href="../collection/">Referencia de la recopilación</a> · <a href="../evidence/#people-profiles">Verificación de perfiles de personas</a> ·
+<a href="../evidence/#investigation-handoff">Entrega de pruebas</a> · <a href="../verification/">Validación completada</a></p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/INVESTIGATION.md">Edite esta página en GitHub ↗</a><a class="next-guide" href="../features/"><span>Siguiente paso</span><strong>Características y limitaciones →</strong></a><p>Estas guías describen la implementación actual. Los resultados de la validación y las deficiencias pendientes se documentan por separado. <a href="../verification/">Lo que se ha probado →</a></p></footer>
+</main>
+<aside class="toc" aria-label="En esta página"><p class="nav-label">En esta página</p><a href="#worked-case-a-destination-changes-across-four-conversations">Caso práctico: un cambio de destino a lo largo de cuatro conversaciones</a><a href="#1-define-the-case-and-collect-the-whole-account">1. Defina el caso y recopile toda la información</a><a href="#2-inventory-every-source-and-acquire-historical-context">2. Realice un inventario de todas las fuentes y recopile el contexto histórico</a><a href="#3-preserve-the-evolving-case-and-deliberate-interactions">3. Conservar la evolución del caso y las interacciones deliberadas</a><a href="#4-connect-observations-across-chats">4. Relacionar las observaciones entre distintos chats</a><a href="#5-build-the-cross-chat-timeline">5. Crear la línea temporal entre chats</a><a href="#6-add-account-perspectives-without-losing-their-origin">6. Añadir perspectivas de las cuentas sin perder su origen</a><a href="#7-assemble-and-verify-the-case-handoff">7. Recopilar y verificar el traspaso del caso</a><a href="#adapt-the-investigation">Adaptar la investigación</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Código abierto · Se ejecuta en su equipo</span><a href="../../../../LICENSE">Licencia MIT</a><a href="../notice/">Aviso del operador</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Seguridad</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "A la espera de un mensaje", "Step through a fictional send, edit and delete.": "Siga paso a paso un proceso ficticio de envío, edición y eliminación.", "No observations yet. Start the sequence or advance one event.": "Aún no hay observaciones. Inicie la secuencia o avance un evento.", "Meet at 10:00": "Nos vemos a las 10:00", "A new message is visible in the chat.": "Aparece un nuevo mensaje en el chat.", "Record 1 appended: the collector observed the original message.": "Se adjunta el registro n.º 1: el recopilador ha observado el mensaje original.", "Meet at 11:00": "Nos vemos a las 11:00", "The current text changes. The earlier observation stays.": "El texto actual cambia. La observación anterior se mantiene.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Se ha añadido el registro 2: la modificación constituye una nueva observación. El registro 1 sigue conteniendo el texto original.", "Message deleted": "Mensaje eliminado", "The message has disappeared from the chat view.": "El mensaje ha desaparecido de la vista del chat.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Se adjunta el registro n.º 3: el aviso de eliminación se conserva junto con ambas versiones observadas.", "0 records": "0 registros", "1 record": "1 registro", "2 records": "2 registros", "3 records": "3 registros", "Complete / {n} of 3": "Completo / {n} de 3", "Step / {n} of 3": "Paso / {n} de 3", "Pause": "Pausa", "Replay sequence": "Secuencia de reproducción", "Play sequence": "Secuencia de reproducción", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "El ejemplo estático está disponible. Para calcular los hash de forma interactiva, abra esta página a través de HTTPS o en una vista previa en localhost con soporte para Web Crypto.", "No record supplied": "No se ha facilitado ningún registro", "Tail removed": "Se ha eliminado la cola", "≠ saved hash": "≠ hash guardado", "Rebuilt · different hash": "Reconstruido · hash diferente", "= saved hash": "= hash guardado", "Same length and matching head.": "Misma extensión y encabezado a juego.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Los tres hash calculados coinciden con los hash guardados. Esta muestra se ajusta al límite de tres registros conservados.", "Same saved head; the journal prefix fails verification.": "Se ha guardado el mismo encabezado; el prefijo del registro no supera la verificación.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "El registro n.º 2 ya no coincide con su hash guardado. Si solo se comprobara el último registro almacenado, esto pasaría desapercibido; el verificador comprueba todos los registros.", "Head differs from the retained checkpoint.": "El encabezado difiere del punto de control conservado.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Los hash reconstruidos se enlazan entre sí, pero el encabezado final ha cambiado. El punto de control conservado rechaza este historial. Las firmas originales también fallarían en los registros modificados.", "Too short: 2 supplied records \u003c 3 retained records.": "Demasiado breve: 2 registros facilitados \u003c 3 registros conservados.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Los dos hash restantes siguen coincidiendo. El punto de control conservado revela la parte final que falta. Sin ese límite anterior, este prefijo más corto por sí solo no revelaría la omisión.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "El cálculo de hash no está disponible en este navegador. Las fórmulas y la explicación estática que figuran a continuación siguen estando disponibles.", "{n} records": "{n} registros", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Aceptado: el recuento aumenta, la firma se verifica y la clave coincide. El testigo conserva este nuevo límite.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Reversión: la respuesta firmada indica un número de registros inferior al del último punto de control aceptado. El sistema registra el problema y mantiene el límite aceptado anteriormente.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Bifurcación: el recuento no ha variado, pero la punta difiere. El testigo registra el desacuerdo y mantiene el límite aceptado anteriormente.", "No answer": "Sin respuesta", "boundary unknown": "límite desconocido", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Sin respuesta: el «witness» registra el fallo en la comprobación. No puede determinar el estado actual del recopilador. Si el «witness» sigue pudiendo acceder a la API del bot y su política de publicación lo permite, puede publicar dicho fallo.", "Send {n}": "Enviar {n}", "Edit {n}": "Editar {n}", "Delete {n}": "Eliminar {n}", "Both accounts captured all six expected observations in this example.": "Ambas cuentas han recogido las seis observaciones previstas en este ejemplo.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "La cuenta B volvió a capturar 6 de 6. Dos recibos tardaron más en aparecer. La tasa de captura y el retraso en la recepción de los recibos responden a cuestiones diferentes.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "La cuenta B capturó 5 de 6 antes del plazo límite (83,3 %). La edición que falta no presenta ningún retraso medido. Este resultado solo describe las seis acciones controladas.", "not observed by cutoff": "No se ha respetado el límite de caracteres.", "{s} seconds": "{s} segundos", "Exact values follow in the table.": "Los valores exactos figuran en la tabla.", "{s} s": "{s} s", "Not observed": "No se ha observado", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Cuatro chats aportan observaciones diferentes. Siga los registros originales de cada conexión; no asigne la publicación del canal al usuario 71001 sin un remitente identificado.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Los registros n.º 146 y n.º 205 presentan el mismo identificador de remitente, 71001. Esto permite relacionar las publicaciones observadas de una cuenta de Telegram en dos chats diferentes. No identifica a ninguna persona del mundo real ni atribuye la publicación al canal.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "La dirección de destino pay.example.invalid/new aparece en el registro del grupo n.º 146, en el teclado del bot n.º 173, en la edición del canal n.º 188 y en el mensaje privado n.º 205. Una dirección de destino repetida vincula el material; ello no demuestra que exista un control común de dichas cuentas.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Los recibos multimedia completados n.º 151 y n.º 209 presentan valores SHA-256 completos idénticos en este caso ficticio. Compare los bytes reales y sus registros de mensajes asociados. El archivo coincidente no identifica a su creador ni demuestra quién lo reenvió.", "the encrypted off-site copy": "la copia cifrada almacenada externamente", "notifications": "notificaciones", "checkpoint hashes for timestamps": "Hashes de puntos de control para marcas de tiempo", "signed checkpoints for the witness": "puntos de control firmados para TgWitness", "Switched on in this example": "Activado en este ejemplo", "Optional · off by default": "Opcional · desactivado por defecto", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Al salir de este equipo: la conexión a Telegram y {list}. Nada más.", "Default: only the Telegram connection leaves this machine.": "Por defecto: solo la conexión a Telegram sale de este equipo.", "{done} of {total} done": "{done} de {total} completado", "Mark step {n} as done": "Marcar el paso {n} como completado", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Texto", "Copied": "Copiado", "Command copied.": "Comando copiado.", "Selected — Ctrl/Cmd+C": "Seleccionado — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Comando seleccionado. Cópielo manualmente.", "Command copied to clipboard.": "Comando copiado en el portapapeles.", "Select text": "Seleccionar texto", "Clipboard unavailable. Command selected; copy it manually.": "El portapapeles no está disponible. Se ha seleccionado el comando; cópielo manualmente.", "A message arrives. The first observation is saved.": "Llega un mensaje. Se guarda la primera observación.", "The time changes. Both captured versions stay.": "La hora cambia. Ambas versiones capturadas se conservan.", "The message disappears. The captured history remains.": "El mensaje desaparece. El historial capturado permanece.", "Pause example animation": "Pausar la animación de ejemplo", "Play example animation": "Reproduzca la animación de ejemplo", "Play": "Reproducir", "Full-size workspace screenshot": "Captura de pantalla a pantalla completa del espacio de trabajo", "Workspace screenshot · fictional data": "Captura de pantalla del espacio de trabajo · datos ficticios", "Close": "Cerrar", "Close screenshot": "Cerrar captura de pantalla", "Scrollable full-size screenshot": "Captura de pantalla a tamaño completo con desplazamiento", "Enlarge: {name}": "Ampliar: {name}", "View full size": "Ver a tamaño completo"}</script>
+</body></html>

@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>الحسابات وتنسيقات الجلسات | TgWitness</title>
+<meta name="description" content="قم بتسجيل الدخول عبر الهاتف أو رمز الاستجابة السريعة (QR) أو مفتاح المصادقة، واستورد جلسات Telethon أو Pyrogram أو Telegram Desktop، وقم بتشغيل عدة حسابات."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/accounts/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="ar_AR">
+<meta property="og:title" content="الحسابات وتنسيقات الجلسات | TgWitness"><meta property="og:description" content="قم بتسجيل الدخول عبر الهاتف أو رمز الاستجابة السريعة (QR) أو مفتاح المصادقة، واستورد جلسات Telethon أو Pyrogram أو Telegram Desktop، وقم بتشغيل عدة حسابات.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/ar/docs/reference/accounts/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/accounts/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/accounts/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/accounts/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/accounts/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/accounts/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/accounts/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/accounts/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/accounts/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/accounts/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/accounts/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/ar/docs/reference/accounts/", "url": "https://phishdestroy.github.io/TgWitness/ar/docs/reference/accounts/", "name": "الحسابات وتنسيقات الجلسات | TgWitness", "description": "قم بتسجيل الدخول عبر الهاتف أو رمز الاستجابة السريعة (QR) أو مفتاح المصادقة، واستورد جلسات Telethon أو Pyrogram أو Telegram Desktop، وقم بتشغيل عدة حسابات.", "inLanguage": "ar", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "الصفحة الرئيسية", "item": "https://phishdestroy.github.io/TgWitness/ar/"}, {"@type": "ListItem", "position": 2, "name": "التوثيق", "item": "https://phishdestroy.github.io/TgWitness/ar/docs/"}, {"@type": "ListItem", "position": 3, "name": "مرجع", "item": "https://phishdestroy.github.io/TgWitness/ar/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "الحسابات وتنسيقات الجلسات", "item": "https://phishdestroy.github.io/TgWitness/ar/docs/reference/accounts/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">الانتقال إلى المحتوى</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / التوثيق</span></a>
+<nav aria-label="الأدلة الإرشادية"><a href="../../concepts/">دليل مرئي</a><a href="../../">جميع الأدلة الإرشادية</a><a href="../">مرجع</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="اللغة"><span aria-hidden="true">◍</span> العربية</summary><div class="lang-list"><a href="../../../../docs/reference/accounts/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/accounts/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/accounts/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/accounts/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/accounts/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/accounts/" hreflang="tr" lang="tr">Türkçe</a><a href="./" hreflang="ar" lang="ar" aria-current="true">العربية</a><a href="../../../../fa/docs/reference/accounts/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/accounts/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/accounts/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/accounts/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/accounts/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/accounts/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="التبديل بين السمة الفاتحة والداكنة"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="الأدلة الإرشادية"><a href="../../../guides/modes.html">الأوضاع، والسيناريوهات، ومستويات الأدلة</a><p class="nav-label">الخطوات الأولى</p><a href="../../start/">ابدأ في غضون دقائق</a><a href="../../accounts/">ربط حساب</a><a href="../../proxies/">اختر وكيلًا</a><a href="../../exports/">التصدير والتحقق</a><p class="nav-label">فهم الأدلة</p><a href="../../concepts/">تعرف على كيفية عمل الأدلة</a><a href="../../cases/">التحقيق في جميع الدردشات</a><a href="../../security/">حافظ على أمانها</a><p class="nav-label">اكتشف المزيد</p><a href="../../witness/">إعداد روبوت «Witness»</a><a href="../../server/">حافظ على استمرار عملها</a><a href="../../troubleshooting/">اكتشف ما الذي حدث</a></nav><nav class="wiki-nav" aria-label="مرجع"><p class="nav-label"><a class="nav-label-link" href="../">مرجع</a></p><details class="wiki-group" open><summary>الإعداد</summary><a href="../quickstart/">البداية السريعة</a><a href="./" aria-current="page">الحسابات وتنسيقات الجلسات</a><a href="../connection/">الاتصال، والوكلاء، وحماية البيانات</a><a href="../deployment/">النشر</a></details><details class="wiki-group"><summary>جمع</summary><a href="../collection/">كيفية عمل عملية الجمع</a><a href="../operations/">سير العمل والعمليات</a><a href="../investigation/">وضع التحقيق</a><a href="../features/">الميزات والقيود</a></details><details class="wiki-group"><summary>الأدلة</summary><a href="../how-it-works/">كيف تعمل الأدلة</a><a href="../evidence/">تنسيق الأدلة</a><a href="../witness/">شاهد مستقل</a><a href="../timestamp/">الطوابع الزمنية</a></details><details class="wiki-group"><summary>الأمن والمشروع</summary><a href="../security/">الأمن ومعالجة البيانات</a><a href="../architecture/">الهندسة</a><a href="../verification/">ما تم اختباره</a><a href="../license/">إشعار بشأن الترخيص وعدم التوافق المعماري</a><a href="../notice/">إشعار بعدم التوافق مع المشغل</a><a href="../changelog/">سجل التغييرات</a></details></nav><p class="sidebar-note">v0.7.0<br>مفتوحة المصدر · تعمل على جهازك</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="الأدلة الإرشادية"><a href="../../../">الصفحة الرئيسية</a> <span aria-hidden="true">/</span> <a href="../../">التوثيق</a> <span aria-hidden="true">/</span> <a href="../">مرجع</a> <span aria-hidden="true">/</span> <span aria-current="page">الحسابات وتنسيقات الجلسات</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">البحث في الوثائق</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="جرب «proxy» أو «hash chain» أو «token» أو «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="بحث واضح" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">اكتب كلمة للبحث في الأدلة والمراجع. يبقى البحث في متصفحك.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">مرجع / الإعداد</p><h1>الحسابات وتنسيقات الجلسات</h1><p class="guide-outcome">قم بتسجيل الدخول عبر الهاتف أو رمز الاستجابة السريعة (QR) أو مفتاح المصادقة، واستورد جلسات Telethon أو Pyrogram أو Telegram Desktop، وقم بتشغيل عدة حسابات.</p><div class="wiki-body"><p>تقوم TgWitness بتسجيل الدخول كحساب <strong>مستخدم Telegram</strong> (وليس كروبوت) عبر بروتوكول MTProto، باستخدام
+Telethon. ويوجد كل حساب في <strong>مساحة عمل</strong> خاصة به (تُسمى <em>«مساحة العمل</em>» في
+واجهة برمجة التطبيقات وأدوات سطر الأوامر) مع جلسة عمل ومصادر وسجل ومفتاح توقيع خاص به.</p>
+<p>ملفات الجلسة وسلاسل الجلسة ومفاتيح المصادقة هي <strong>تفويضات للحساب</strong>: فمن
+يمتلك أيًا منها يمكنه التصرف بصفته صاحب ذلك الحساب. ولا تحتوي هذه العناصر على سجل الرسائل.</p>
+<blockquote class="callout">
+<p>[!تحذير]
+<strong>لا تستخدم أي شيء لا يمكنك تحمل خسارته.</strong> ننصح بشدة بعدم ربط
+حسابات شخصية أو حسابات قيّمة بأي شكل آخر، وكذلك بعدم إنشاء معرّف API / تجزئة API على
+حساب تقدّره. لا يتعلق الأمر هنا بعدم اختبار TgWitness: فـ Telegram يقيد و
+يحظر الحسابات بشكل دائم وبطريقة غير متوقعة — وذلك بسبب حجم الطلبات الذي يعتبره
+مفرطًا، بغض النظر عن العميل أو الغرض، ودون توثيق كافٍ. العديد من حالات الحظر
+لا رجعة فيها. استخدم حسابات مخصصة. تعتمد سلاسة عمليات الاختبار على Telegram، وليس على
+البرنامج، ولا تضمن أي شيء في المستقبل.</p>
+</blockquote>
+<ul>
+<li><a href="#at-a-glance">لمحة عامة</a></li>
+<li><a href="#before-you-start-api-id-and-api-hash">قبل البدء: معرّف واجهة برمجة التطبيقات (API ID) وتجزئة واجهة برمجة التطبيقات (API hash)</a></li>
+<li><a href="#phone-number">رقم الهاتف</a> · <a href="#qr-code">رمز الاستجابة السريعة (QR)</a> · <a href="#auth-key--dc-id">مفتاح المصادقة + معرّف DC</a></li>
+<li><a href="#account-files">ملفات الحسابات</a>: <a href="#telethon-session">Telethon .session</a> ·
+    <a href="#pyrogram-session">Pyrogram .session</a> · <a href="#session--json-pair">زوج من الجلسة وملف JSON</a> ·
+    <a href="#telegram-desktop-tdata">TData</a> · <a href="#telethon-stringsession">StringSession</a> ·
+    <a href="#account-json">حساب JSON</a></li>
+<li><a href="#identify-what-you-have">حدد ما لديك</a> · <a href="#unsupported-formats">التنسيقات غير المدعومة</a></li>
+<li><a href="#multiple-accounts">حسابات متعددة</a> · <a href="#keeping-account-files-safe">الحفاظ على أمان ملفات الحسابات</a> ·
+    <a href="#troubleshooting">حل المشكلات</a></li>
+</ul>
+<h2 id="at-a-glance">لمحة عامة<a class="anchor" href="#at-a-glance" aria-label="رابط لهذا القسم">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>ما لديك</th>
+<th>علامة التبويب <strong>«إضافة حساب»</strong></th>
+<th>ستحتاج أيضًا إلى</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>رقم الهاتف والوصول إلى رموز تسجيل الدخول الخاصة به</td>
+<td><strong>الهاتف</strong></td>
+<td>كلمة مرور المصادقة الثنائية (2FA) في حالة تفعيلها</td>
+</tr>
+<tr>
+<td>Telegram مفتوح على جهاز آخر</td>
+<td><strong>رمز الاستجابة السريعة (QR)</strong></td>
+<td>كلمة مرور المصادقة الثنائية (2FA) في حالة تفعيلها</td>
+</tr>
+<tr>
+<td>ملف <code>.session</code> (Telethon أو Pyrogram)</td>
+<td><strong>الملفات</strong></td>
+<td>ملف JSON مصاحب اختياري لإعدادات التطبيق</td>
+</tr>
+<tr>
+<td><code>.session</code> + <code>.json</code> يحملان الاسم نفسه</td>
+<td><strong>الملفات</strong> (اختر كليهما)</td>
+<td>عادةً لا يوجد شيء آخر</td>
+</tr>
+<tr>
+<td>مجلد «<code>tdata</code>» في تطبيق Telegram Desktop</td>
+<td><strong>الملفات</strong> (بصيغة ZIP)</td>
+<td>رمز المرور المحلي لسطح المكتب، إن تم تعيينه</td>
+</tr>
+<tr>
+<td>جلسة Telethon StringSession (نص، <code>.txt</code>، <code>.tgwitness-session</code>)</td>
+<td><strong>الملفات</strong></td>
+<td>لا حاجة إلى زوج منفصل من واجهات برمجة التطبيقات (API)</td>
+</tr>
+<tr>
+<td><code>.json</code> مع جلسة أو مفتاح مصادقة</td>
+<td><strong>الملفات</strong></td>
+<td>لا حاجة إلى زوج منفصل من واجهات برمجة التطبيقات (API)</td>
+</tr>
+<tr>
+<td>مفتاح التوثيق (512 حرفًا سداسي عشري) ورقم DC الخاص به</td>
+<td><strong>مفتاح المصادقة</strong></td>
+<td>معرف المستخدم اختياري</td>
+</tr>
+</tbody>
+</table></div>
+<p>تتعرف TgWitness على الملفات من خلال محتوياتها، وليس من خلال أسمائها. ولا تؤدي إعادة تسمية الملف
+إلى تحويله أبدًا.</p>
+<h2 id="before-you-start-api-id-and-api-hash">قبل البدء: معرّف واجهة برمجة التطبيقات (API ID) وتجزئة واجهة برمجة التطبيقات (API hash)<a class="anchor" href="#before-you-start-api-id-and-api-hash" aria-label="رابط لهذا القسم">#</a></h2>
+<p>يمكنك تسجيل الدخول دون إنشاء تطبيق Telegram API. عندما لا يتم إدخال أي زوج،
+أو استيراده أو حفظه مسبقًا في مساحة العمل، تختار TgWitness زوجًا من مجموعتها المدمجة المكونة من
+50 زوجًا من أزواج API العامة (<code>tgwitness/api_pool.py</code>) بترتيب عشوائي. إذا رفض Telegram زوجًا
+(<code>API_ID_INVALID</code>، <code>API_ID_PUBLISHED_FLOOD</code>، <code>UPDATE_APP_TO_LOGIN</code>)، يتم تجربة الزوج التالي،
+بحد أقصى ثمانية أزواج لكل عملية تسجيل دخول؛ ويتم تخطي الأزواج المرفوضة حتى إعادة التشغيل. يتم حفظ الزوج الذي تم تسجيل الدخول به
+مع الحساب وإعادة استخدامه له. يعمل معرّف <strong>واجهة برمجة التطبيقات (API ID)</strong> وتجزئة <strong>واجهة برمجة التطبيقات (API hash)</strong> على تعريف التطبيق لدى Telegram؛ وهما
+لا يصرحان بتسجيل الدخول إلى الحساب بمفردهما.</p>
+<p>لاستخدام تطبيقك الخاص بدلاً من ذلك (الحساب الذي يسجله هو الذي يتعرض للخطر؛ انظر:
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/PROJECT-GUIDE.md#connect-a-telegram-account">لماذا توجد مجموعة واجهات برمجة تطبيقات (API) مدمجة؟</a>):</p>
+<ol>
+<li>افتح <a href="https://my.telegram.org">my.telegram.org</a> وقم بتسجيل الدخول باستخدام أي رقم هاتف
+    تمتلكه. سيصل الرمز إلى تطبيق Telegram، وليس عبر رسالة SMS.</li>
+<li>اختر <strong>أدوات تطوير واجهة برمجة التطبيقات (API)</strong>.</li>
+<li>إنشاء تطبيق: أي عنوان واسم مختصر (5–32 حرفًا)، منصة <strong>سطح المكتب</strong>.
+    يمكن ترك حقل عنوان URL والوصف فارغين.</li>
+<li>انسخ <strong>معرّف التطبيق</strong> (<strong>api_id)</strong> (رقم) وتجزئة <strong>التطبيق (api_hash)</strong> (32 حرفًا سداسي عشري).</li>
+</ol>
+<p>في اللوحة، يوجد <strong>«معرف API</strong> المفتوح <strong>+ التجزئة»</strong> أسفل نموذج تسجيل الدخول. يمكنك لصق زوج واحد
+من <code>api_id:api_hash</code> في <strong>حقل «معرف API</strong>» ليتم ملء كلا الحقلين تلقائيًا. يمكن استخدام زوج واحد
+لجميع حساباتك. بعد تسجيل الدخول بنجاح، يتم حفظ البيانات مشفرة في
+مساحة العمل تلك فقط ولا يتم إرسالها أبدًا إلى المتصفح.</p>
+<p>تتضمن هذه العملية ثلاثة أنواع مختلفة من بيانات الاعتماد:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>سري</th>
+<th>يفتح</th>
+<th>مكان وجوده</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>رمز اللوحة</td>
+<td>لوحة التحكم على الويب الخاصة بـ TgWitness</td>
+<td><code>panel-token.txt</code> في دليل البيانات، أو <code>TGWITNESS_TOKEN</code></td>
+</tr>
+<tr>
+<td>معرف واجهة برمجة التطبيقات (API) + التجزئة</td>
+<td>لا شيء بحد ذاته؛ يحدد هوية التطبيق</td>
+<td>إعدادات مدمجة، أو إعدادات مستوردة، أو تطبيقك الخاص على my.telegram.org</td>
+</tr>
+<tr>
+<td>تفويض الحساب</td>
+<td>حساب Telegram</td>
+<td>يتم إنشاؤها عن طريق تسجيل الدخول عبر الهاتف أو رمز الاستجابة السريعة (QR) أو إضافتها كجلسة</td>
+</tr>
+</tbody>
+</table></div>
+<p>إذا كان لا بد من الوصول إلى Telegram عبر وكيل (بروكسي)، فقم بتعيينه أولاً من خلال
+<strong>«الحساب» → «الإعدادات» → «إعدادات الاتصال» → «تغيير مسار الاتصال</strong>».</p>
+<h2 id="phone-number">رقم الهاتف<a class="anchor" href="#phone-number" aria-label="رابط لهذا القسم">#</a></h2>
+<ol>
+<li>افتح <strong>حسابًا</strong>، ثم انتقل إلى علامة التبويب <strong>«الهاتف</strong>»، وأدخل الرقم بالصيغة الدولية،
+    على سبيل المثال <code>+44 7700 900123</code>. تتم إزالة المسافات والشرطات تلقائيًا.</li>
+<li>اضغط على <strong>«متابعة</strong>». يمكن ترك حقل «معرف API» و«التجزئة» فارغين.</li>
+<li>أدخل الرمز الذي يرسله Telegram (عادةً إلى تطبيق Telegram؛ ولا يُضمن وصوله عبر الرسائل القصيرة).</li>
+<li>إذا كان الحساب مزودًا بالتحقق بخطوتين، فأدخل كلمة المرور تلك. فهي ليست رمز
+    اللوحة ولا رمز مرور الجهاز.</li>
+<li>تحقق من معرّف الحساب الذي يظهر بعد تسجيل الدخول، ثم اختر المصادر.</li>
+</ol>
+<p>لا يتم أبدًا تسجيل رموز تسجيل الدخول وكلمة مرور المصادقة الثنائية (2FA) على القرص.</p>
+<h2 id="qr-code">رمز الاستجابة السريعة (QR)<a class="anchor" href="#qr-code" aria-label="رابط لهذا القسم">#</a></h2>
+<p>استخدم هذه الميزة عندما يكون الحساب مسجلاً بالفعل على هاتف أو جهاز كمبيوتر آخر.</p>
+<ol>
+<li>انقر على <strong>رمز QR</strong> → <strong>اعرض رمز QR</strong>. يمكن ترك حقل معرّف API + التجزئة فارغًا.</li>
+<li>على الجهاز الذي قمت بتسجيل الدخول إليه: <strong>الإعدادات → الأجهزة → ربط جهاز سطح</strong> المكتب، امسح الرمز ضوئيًّا
+    ثم قم بالتأكيد.</li>
+<li>أدخل كلمة مرور المصادقة الثنائية (2FA) في TgWitness إذا طلبها Telegram.</li>
+</ol>
+<p>يتم إنشاء صورة رمز الاستجابة السريعة (QR) محليًّا. تنتهي صلاحية الرموز؛ اضغط على <strong>«إنشاء رمز QR آخر</strong>
+» لإعادة المحاولة. يؤدي قفل اللوحة أو التبديل بين مساحات العمل أو بدء عملية تسجيل دخول أخرى إلى إلغاء
+الرمز المعلق.</p>
+<h2 id="auth-key--dc-id">مفتاح المصادقة + معرّف DC<a class="anchor" href="#auth-key--dc-id" aria-label="رابط لهذا القسم">#</a></h2>
+<p>مفتاح المصادقة (Auth Key) هو مفتاح المصادقة الخام المكون من 256 بايت الذي يقف وراء كل جلسة Telegram، ويُكتب
+على شكل <strong>512 حرفًا سداسي عشريًّا</strong>، إلى جانب رقم مركز البيانات <strong>DC 1–5</strong>.</p>
+<ol>
+<li><strong>مفتاح المصادقة</strong> في علامة التبويب. الصق المفتاح كاملاً؛ فالمفتاح المختصر الذي يحتوي على <code>…</code> لا يعمل.</li>
+<li>اختر معرّف DC المرفق مع المفتاح.</li>
+<li>يمكنك إدخال <strong>معرّف المستخدم</strong> اختياريًّا. عندئذٍ يرفض TgWitness الاتصال إذا أبلغ Telegram
+    عن حساب مختلف.</li>
+<li><strong>حساب</strong> Press <strong>Connect</strong>.</li>
+</ol>
+<p>مفتاح المصادقة (512 حرفًا) ليس تجزئة واجهة برمجة التطبيقات (API) (32 حرفًا). يمكن أيضًا استيراد المفتاح نفسه
+بتنسيق JSON، انظر <a href="#account-json">JSON الحساب</a>.</p>
+<h2 id="account-files">ملفات الحسابات<a class="anchor" href="#account-files" aria-label="رابط لهذا القسم">#</a></h2>
+<p>افتح <strong>«إضافة حساب» → «الملفات</strong>» واختر ما يصل إلى <strong>أربعة ملفات تابعة لحساب واحد</strong>، بحد أقصى
+<strong>8 ميغابايت</strong>، ثم اضغط على <strong>«ربط الحساب</strong>».</p>
+<ul>
+<li>يتم تحويل الملفات <strong>في الذاكرة</strong> على خادم TgWitness الخاص بك. لا يتم تخزين الملفات التي يتم تحميلها،
+    ولا يتم استخراج ملفات ZIP إلى القرص، ولا يتم الاتصال بأي خدمة خارجية.</li>
+<li>ثم يتم التحقق من الجلسة الناتجة مع Telegram. إذا كان الملف يحتوي على معرّف مستخدم،
+    فيجب أن يتطابق مع الحساب الذي يبلغ عنه Telegram.</li>
+<li>يتم رفض الملفات التي تصف حسابات مختلفة أو بيانات اعتماد API مختلفة
+    بدلاً من اختيار واحدة منها.</li>
+<li>يحتوي حقل <strong>«رمز المرور» أو «نص الجلسة»</strong> على حقل «TData local passcode»، وهو مربع مخصص للصق
+    ملفات StringSession و<strong>Read دون تسجيل الدخول</strong> (يملأ النموذج دون
+    الاتصال بـ Telegram).</li>
+</ul>
+<h3 id="telethon-session">Telethon <code>.session</code><a class="anchor" href="#telethon-session" aria-label="رابط لهذا القسم">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ما هي هذه الأداة؟</td>
+<td>قاعدة بيانات SQLite التي تنشئها الأدوات القائمة على Telethon، على سبيل المثال <code>my_account.session</code></td>
+</tr>
+<tr>
+<td>معترف بها من قبل</td>
+<td>الجداول <code>sessions</code> (مع <code>dc_id</code>، <code>server_address</code>، <code>port</code>، <code>auth_key</code>) و<code>version</code> = 7 أو 8</td>
+</tr>
+<tr>
+<td>المتطلبات</td>
+<td>صف واحد فقط من الجلسات المصرح بها؛ قاعدة بيانات مغلقة وكاملة</td>
+</tr>
+</tbody>
+</table></div>
+<p>أغلق أولاً البرنامج الذي أنشأ الملف. إذا كان <code>my_account.session-journal</code> أو
+<code>my_account.session-wal</code> موجودًا بجانبه، فهذا يعني أن قاعدة البيانات لم تكتمل بعد: افتح
+العميل الأصلي وأغلقه بشكل صحيح. قد يؤدي حذف ملفات «sidecar» هذه إلى ترك نسخة تالفة.</p>
+<h3 id="pyrogram-session">Pyrogram <code>.session</code><a class="anchor" href="#pyrogram-session" aria-label="رابط لهذا القسم">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ما هي هذه الأداة؟</td>
+<td>قاعدة بيانات SQLite التي تنشئها الأدوات القائمة على Pyrogram</td>
+</tr>
+<tr>
+<td>معترف بها من قبل</td>
+<td>الجدول <code>sessions</code> مع <code>dc_id</code>، <code>auth_key</code>، <code>test_mode</code>، <code>user_id</code>، <code>is_bot</code>؛ <code>version</code> = 2 أو 3</td>
+</tr>
+<tr>
+<td>المتطلبات</td>
+<td>جلسة <strong>مستخدم</strong> واحدة مصرح بها على شبكة الإنتاج. يتم رفض جلسات الروبوتات وجلسات مراكز البيانات التجريبية</td>
+</tr>
+</tbody>
+</table></div>
+<p>يتم التحقق من معرّف المستخدم المخزّن مقابل Telegram أثناء تسجيل الدخول.</p>
+<h3 id="session--json-pair">زوج من الجلسة وملف JSON<a class="anchor" href="#session--json-pair" aria-label="رابط لهذا القسم">#</a></h3>
+<p>غالبًا ما يتم توزيع الحسابات على شكل ملفين يحملان الاسم نفسه، على سبيل المثال
+<code>447700900123.session</code> و<code>447700900123.json</code>. حدد <strong>كلا الملفين</strong> في آن واحد.</p>
+<ul>
+<li>من ملف JSON، تستخدم TgWitness <code>app_id</code>/<code>api_id</code> و<code>app_hash</code>/<code>api_hash</code>، لذا
+    لا يتعين عليك عادةً إدخال بيانات اعتماد واجهة برمجة التطبيقات (API).</li>
+<li>يتم <strong>تجاهل</strong> الحقول الأخرى مثل <code>phone</code> أو <code>device</code> أو <code>sdk</code> أو <code>app_version</code> أو <code>lang_pack</code> أو كلمة مرور
+    <code>twoFA</code> المخزنة. إذا كان الحساب مزودًا بمصادقة ثنائية (2FA)، فإن TgWitness يطلبها.</li>
+<li>ملف JSON بحد ذاته ليس سوى بيانات وصفية. في حالة عدم وجود ملف الجلسة، تابع باستخدام الهاتف
+    أو تسجيل الدخول عبر رمز الاستجابة السريعة (QR).</li>
+</ul>
+<h3 id="telegram-desktop-tdata">Telegram Desktop (TData)<a class="anchor" href="#telegram-desktop-tdata" aria-label="رابط لهذا القسم">#</a></h3>
+<p>TData هو المجلد <code>tdata</code> الخاص بتطبيق Telegram Desktop (التطبيق متعدد المنصات
+المتوفر على desktop.telegram.org).</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>النظام</th>
+<th>الموقع الافتراضي لـ <code>tdata</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td><code>%APPDATA%\Telegram Desktop\tdata</code> (Telegram المحمول: بجوار <code>Telegram.exe</code>)</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td><code>~/.local/share/TelegramDesktop/tdata</code></td>
+</tr>
+<tr>
+<td>macOS</td>
+<td><code>~/Library/Application Support/Telegram Desktop/tdata</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>لاستيرادها:</p>
+<blockquote class="callout">
+<p><strong>تحذير بشأن الجلسات المتوازية.</strong> يؤدي استيراد TData إلى إعادة استخدام مفتاح الترخيص الخاص بـ Telegram Desktop
+؛ ولا يؤدي إلى إنشاء تسجيل دخول مستقل. لا تستخدم هذا المفتاح في Desktop و
+TgWitness في آن واحد. يمكن لـ Telegram إبطال صلاحية الترخيص باستخدام
+<code>AUTH_KEY_DUPLICATED</code>، مما يجعل كلا النسختين غير قابلتين للاستخدام حتى إجراء تسجيل دخول جديد.</p>
+<p>أغلق Desktop تمامًا، بما في ذلك العملية الموجودة في علبة النظام، واحتفظ بهذه النسخة مغلقة أثناء
+استخدام TgWitness للجلسة المستوردة. <strong>أغلق التطبيق، ولا تقم بتسجيل الخروج أو إلغاء الجلسة:</strong>
+حيث يؤدي الإلغاء أيضًا إلى إبطال صلاحية النسخة المستوردة. إذا كنت بحاجة إلى تشغيل كلا العميلين،
+فقم بتسجيل الدخول إلى TgWitness عبر الهاتف أو رمز الاستجابة السريعة (QR) لإنشاء تفويض خاص به. يُنصح باستخدام
+حساب مخصص، ولكن هذا لا يجعل استخدام المفاتيح المستنسخة بالتوازي آمنًا.</p>
+<p>وينطبق هذا أيضًا على الملفات المستوردة <code>.session</code> والنصوص في StringSession ومفتاح المصادقة HEX.
+يمكن للعملاء الآخرين الذين لديهم تصاريح تم إنشاؤها بشكل مستقل أن يظلوا مسجلين الدخول.
+انظر <a href="https://core.telegram.org/api/errors#406-not-acceptable">وثائق Telegram الخاصة بـ AUTH_KEY_DUPLICATED</a>.</p>
+</blockquote>
+<ol>
+<li>أغلق تطبيق Telegram Desktop تمامًا.</li>
+<li>
+<p>قم بإنشاء ملف ZIP يحتوي <strong>فقط</strong> على هذين العنصرين من <code>tdata</code>:</p>
+<ul>
+<li><code>key_datas</code></li>
+<li>الملف المكون من 16 حرفًا الذي ينتهي بـ «<code>s</code>» بجانبه، وعادةً ما يكون «<code>D877F783D5D3EF8Cs</code>»</li>
+</ul>
+<p>عادةً ما يتجاوز ضغط المجلد بأكمله مع ذاكرة التخزين المؤقتة للوسائط الحدود المسموح بها
+(512 إدخالًا، 32 ميغابايت بعد فك الضغط).
+3. حدد ملف ZIP في <strong>قسم «الملفات</strong>». إذا كان لدى Telegram Desktop <strong>رمز مرور محلي</strong>، فأدخله
+أولاً في <strong>حقل «رمز المرور» أو نص الجلسة</strong>. هذه ليست كلمة مرور المصادقة الثنائية (2FA).</p>
+</li>
+</ol>
+<p>ميزات مدعومة: حساب واحد لكل أرشيف، تخزين حديث بنظام <code>key_datas</code>/<code>key_data0</code>/<code>key_data1</code>،
+ورمز مرور محلي. ميزات غير مدعومة: المجلدات التي تحتوي على عدة حسابات مسجلة الدخول، وتصميمات سطح المكتب القديمة،
+وملفات ZIP المحمية بكلمة مرور، والتطبيق الأصلي المنفصل لنظام macOS «Telegram for macOS».</p>
+<h3 id="telethon-stringsession">Telethon StringSession<a class="anchor" href="#telethon-stringsession" aria-label="رابط لهذا القسم">#</a></h3>
+<p>سطر واحد من النص، يبدأ عادةً بـ <code>1</code> ويبلغ طوله حوالي 350 حرفًا. قم بتحميله
+كملف <code>.txt</code> أو <code>.tgwitness-session</code> (بحد أقصى 4 كيلوبايت)، أو الصقه تحت
+<strong>«رمز المرور» أو «نص الجلسة</strong>». لا تُقبل سوى سلاسل Telethon؛ أما سلاسل Pyrogram وTDLib
+فتستخدم تنسيقات مختلفة.</p>
+<h3 id="account-json">حساب JSON<a class="anchor" href="#account-json" aria-label="رابط لهذا القسم">#</a></h3>
+<p>كائن JSON واحد، بحجم <strong>64 كيلوبايت</strong> كحد أقصى، في ملف ينتهي بـ <strong><code>.json</code></strong>.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>الحقل (الأسماء المستعارة)</th>
+<th>المعنى</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>api_id</code> (<code>app_id</code>)</td>
+<td>معرّف التطبيق، وهو عدد موجب</td>
+</tr>
+<tr>
+<td><code>api_hash</code> (<code>app_hash</code>)</td>
+<td>هاش التطبيق، 32 حرفًا سداسي عشريًّا</td>
+</tr>
+<tr>
+<td><code>string_session</code> (<code>session_string</code>, <code>session</code>)</td>
+<td>نص Telethon StringSession، وليس اسم ملف</td>
+</tr>
+<tr>
+<td><code>auth_key</code> (<code>auth_key_hex</code>) + <code>dc_id</code></td>
+<td>مفتاح المصادقة الكامل المكون من 512 حرفًا وDC 1–5</td>
+</tr>
+<tr>
+<td><code>user_id</code> (<code>id</code>)</td>
+<td>اختياري؛ تتم المقارنة مع Telegram قبل حفظ التفويض</td>
+</tr>
+</tbody>
+</table></div>
+<p>في حالة وجود اسم مستعار واسم رئيسي معًا، يجب أن يتطابقا. أمثلة:</p>
+<pre><code class="language-json">{ &quot;app_id&quot;: 1234567, &quot;app_hash&quot;: &quot;0123456789abcdef0123456789abcdef&quot; }</code></pre>
+<pre><code class="language-json">{
+  &quot;api_id&quot;: 1234567,
+  &quot;api_hash&quot;: &quot;0123456789abcdef0123456789abcdef&quot;,
+  &quot;auth_key&quot;: &quot;REPLACE_WITH_ALL_512_HEXADECIMAL_CHARACTERS&quot;,
+  &quot;dc_id&quot;: 2,
+  &quot;user_id&quot;: 123456789
+}</code></pre>
+<p>المثال الأول يملأ بيانات اعتماد واجهة برمجة التطبيقات (API) فقط؛ قم بتسجيل الدخول عبر الهاتف أو رمز الاستجابة السريعة (QR)، أو أضف ملف جلسة.
+لا تُقبل القوائم المجمعة (مصفوفة JSON للحسابات).</p>
+<h2 id="identify-what-you-have">حدد ما لديك<a class="anchor" href="#identify-what-you-have" aria-label="رابط لهذا القسم">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>كما ترى</th>
+<th>إنه</th>
+<th>الاستخدام</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*.session</code>؛ عند فتحه في محرر نصوص، يظهر <code>SQLite format 3</code> في الأعلى</td>
+<td>Telethon أو Pyrogram SQLite</td>
+<td><strong>الملفات</strong> (يتم اكتشافها تلقائيًا)</td>
+</tr>
+<tr>
+<td>مجلد «<code>tdata</code>» يحتوي على «<code>key_datas</code>»</td>
+<td>Telegram Desktop TData</td>
+<td>ضغط الملفين في ملف ZIP، ثم <strong>«الملفات»</strong></td>
+</tr>
+<tr>
+<td>سطر نصي واحد يبدأ بـ <code>1</code>، حوالي 350 حرفًا</td>
+<td>Telethon StringSession</td>
+<td><strong>الملفات</strong></td>
+</tr>
+<tr>
+<td><code>*.json</code> مع <code>app_id</code>/<code>app_hash</code></td>
+<td>البيانات الوصفية المصاحبة</td>
+<td><strong>الملفات</strong>، إلى جانب جلستها</td>
+</tr>
+<tr>
+<td><code>*.json</code> مع <code>auth_key</code> أو <code>string_session</code></td>
+<td>حساب JSON</td>
+<td><strong>الملفات</strong></td>
+</tr>
+<tr>
+<td>512 حرفًا <code>0-9a-f</code></td>
+<td>مفتاح المصادقة</td>
+<td><strong>مفتاح المصادقة</strong></td>
+</tr>
+<tr>
+<td>32 حرفًا <code>0-9a-f</code></td>
+<td>تجزئة واجهة برمجة التطبيقات (API)</td>
+<td><strong>معرف واجهة برمجة التطبيقات (API) + التجزئة</strong></td>
+</tr>
+<tr>
+<td><code>td.binlog</code> أو <code>db.sqlite</code> من تطبيق TDLib</td>
+<td>تخزين TDLib</td>
+<td>غير مدعوم</td>
+</tr>
+<tr>
+<td><code>123456789:AA…</code></td>
+<td>رمز البوت</td>
+<td>غير مدعوم</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="unsupported-formats">التنسيقات غير المدعومة<a class="anchor" href="#unsupported-formats" aria-label="رابط لهذا القسم">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>التنسيق</th>
+<th>بديل</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>تخزين TDLib (<code>td.binlog</code>) وعمليات تصدير TDLib</td>
+<td>تسجيل الدخول عبر الهاتف أو رمز الاستجابة السريعة (QR)</td>
+</tr>
+<tr>
+<td><strong>سلاسل</strong> جلسات Pyrogram</td>
+<td>استخدم ملف Pyrogram <code>.session</code>، أو الهاتف/رمز الاستجابة السريعة (QR)</td>
+</tr>
+<tr>
+<td>TData مع عدة حسابات مسجلة الدخول</td>
+<td>قم بتسجيل الخروج من الحسابات الأخرى في Telegram Desktop، أو استخدم ملف الجلسة الخاص بكل حساب</td>
+</tr>
+<tr>
+<td>رموز البوت</td>
+<td>غير مدعوم: تراقب TgWitness بصفتها حساب مستخدم</td>
+</tr>
+<tr>
+<td>قوائم CSV/JSON للعديد من الحسابات</td>
+<td>أضف مساحة عمل واحدة لكل حساب</td>
+</tr>
+<tr>
+<td>Test-DC أو جلسات البوت</td>
+<td>استخدم حساب مستخدم فعلي</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="multiple-accounts">حسابات متعددة<a class="anchor" href="#multiple-accounts" aria-label="رابط لهذا القسم">#</a></h2>
+<p>اضغط على <strong>+</strong> بجانب أداة اختيار الحساب، أو افتح
+<strong>الحساب → الإعدادات → إعدادات الاتصال → مساحات العمل</strong>، وأدخل تسمية ثم
+سجّل الدخول.</p>
+<ul>
+<li>عدد غير محدود من مساحات العمل، بما في ذلك المساحة الرئيسية. لكل منها جلستها الخاصة، ومسار الوكيل
+    ، ومصادرها، وسياسة التسجيل، والسجل، ومفتاح التوقيع، ونقاط التحقق، وعمليات التصدير.</li>
+<li>لا يؤدي تبديل مساحة العمل المعروضة إلى إيقاف المساحات الأخرى مؤقتًا.</li>
+<li>يظل السجل مرتبطًا بالحساب الذي أنشأه. ويتطلب تسجيل الدخول بحساب مختلف
+    مساحة عمل أخرى، ولا يمكن تخصيص حساب واحد لمساحتين
+    من مساحات العمل.</li>
+<li>تشترك جميع مساحات العمل في رمز لوحة واحد؛ فهي ليست مستخدمين منفصلين.</li>
+<li>تقوم <strong>الحسابات</strong> بإعادة تسمية مساحة العمل وحذف مساحة العمل المضافة، مع جلستها وسجلها
+    ومصادرها ومفتاح التوقيع الخاص بها. لا يمكن حذف مساحة العمل الرئيسية من اللوحة.</li>
+</ul>
+<h2 id="sign-out">تسجيل الخروج<a class="anchor" href="#sign-out" aria-label="رابط لهذا القسم">#</a></h2>
+<p><strong>الحساب → تسجيل الخروج من Telegram</strong> (مع إيقاف المراقبة مؤقتًا) يطلب من Telegram إنهاء
+الجلسة، وبالتالي تختفي أيضًا من <strong>«الإعدادات» → «الأجهزة»</strong> في الحساب، وتُزال
+الجلسة من خزينة مساحة العمل. ويبقى السجل والمصادر والإعدادات ومفتاح التوقيع، و
+يسجل السجل عملية تسجيل الخروج. لا تزال مساحة العمل مملوكة لحسابها: ولا يمكن إلا لهذا
+الحساب الاتصال بها مرة أخرى. إذا لم يستجب Telegram، تُزال الجلسة مع ذلك
+هنا وتشير اللوحة إلى ذلك؛ قم بإنهائها في Telegram ضمن <strong>الإعدادات → الأجهزة</strong>.</p>
+<h2 id="convert-a-telethon-session-offline">تحويل جلسة Telethon إلى وضع غير متصل بالإنترنت<a class="anchor" href="#convert-a-telethon-session-offline" aria-label="رابط لهذا القسم">#</a></h2>
+<p>تستورد اللوحة ملفات <code>.session</code> مباشرةً. للتحويل دون اتصال بالإنترنت إلى ملف
+StringSession، قم بتشغيل الأمر التالي من مجلد المشروع:</p>
+<pre><code class="language-powershell">.venv\Scripts\python.exe -m tgwitness.sessions account.session --out account.tgwitness-session   # Windows</code></pre>
+<pre><code class="language-sh">.venv/bin/python -m tgwitness.sessions account.session --out account.tgwitness-session          # Linux/macOS</code></pre>
+<p>يقوم المحول بقراءة ملفات Telethon SQLite فقط (حتى 64 ميغابايت)، ولا يقوم أبدًا بتعديل البيانات المدخلة،
+ولا يرسل أي طلبات إلى الشبكة، ويرفض الكتابة فوق ملف الإخراج الموجود.</p>
+<h2 id="keeping-account-files-safe">الحفاظ على أمان ملفات الحسابات<a class="anchor" href="#keeping-account-files-safe" aria-label="رابط لهذا القسم">#</a></h2>
+<ul>
+<li>تعامل مع كل <code>.session</code> وملف TData ZIP وStringSession ومفتاح المصادقة وملف JSON الخاص بالحساب كما لو كان
+    كلمة مرور. تحتفظ TgWitness بتفويضات الدخول المستوردة في خزينة مشفرة؛ ويمكنك
+    إزالة الملفات الأصلية بعد ذلك.</li>
+<li>لا تقم بتشغيل نفس التفويض في برنامجين في آن واحد. فقد يقوم Telegram بإلغائه
+    (<code>AUTH_KEY_DUPLICATED</code>)، وستتوقف النسختان عن العمل.</li>
+<li>لا يمكن إعادة تنشيط جلسة منتهية الصلاحية أو تم إلغاؤها عن طريق التحويل. يرجى تسجيل الدخول مرة أخرى.</li>
+</ul>
+<h2 id="troubleshooting">حل المشكلات<a class="anchor" href="#troubleshooting" aria-label="رابط لهذا القسم">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>رسالة أم أعراض</th>
+<th>ما يجب فعله</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>يتعذر قراءة هذه الجلسة. أغلق العميل الأصلي...</em></td>
+<td>ملف SQLite مفتوح أو غير مكتمل (ملف <code>-journal</code>/<code>-wal</code> المرافق). أغلق البرنامج الأصلي بشكل صحيح وانسخ الملف مرة أخرى.</td>
+</tr>
+<tr>
+<td><em>مخططات Telethon SQLite المدعومة: 7 و8</em> / <em>Pyrogram … 2 و 3</em></td>
+<td>تم إنشاء الملف باستخدام إصدار قديم جدًّا أو غير معروف من المكتبة. قم بتسجيل الدخول عبر الهاتف/رمز الاستجابة السريعة (QR) بدلاً من ذلك.</td>
+</tr>
+<tr>
+<td><em>لا يتم دعم سوى جلسات المستخدمين المصرح لهم بالإنتاج</em></td>
+<td>ينتمي ملف Pyrogram إلى روبوت أو إلى شبكة الاختبار.</td>
+</tr>
+<tr>
+<td><em>يتجاوز حجم أرشيف TData 512 إدخالًا أو 32 ميغابايت</em></td>
+<td>ملف ZIP يحتوي فقط على <code>key_datas</code> و<code>D877F783D5D3EF8Cs</code>، وليس المجلد بأكمله.</td>
+</tr>
+<tr>
+<td><em>يتعذر فك تشفير TData. تحقق من رمز المرور المحلي لسطح المكتب</em></td>
+<td>أدخل رمز المرور المحلي لـ Telegram Desktop في حقل <strong>«رمز المرور» أو نص الجلسة</strong>.</td>
+</tr>
+<tr>
+<td><em>استيراد حساب TData واحد في كل مرة</em></td>
+<td>كان لدى Telegram Desktop عدة حسابات؛ انظر <a href="#unsupported-formats">«التنسيقات غير المدعومة</a>».</td>
+</tr>
+<tr>
+<td><em>تصف الملفات المختارة حسابات مختلفة أو بيانات اعتماد واجهة برمجة التطبيقات (API)</em></td>
+<td>اختر ملفات حساب واحد فقط.</td>
+</tr>
+<tr>
+<td><em>لا يحتوي ملف JSON على أي بيانات اعتماد أو تفويضات مدعومة لواجهة برمجة التطبيقات (API)</em></td>
+<td>تحقق من أسماء الحقول في <a href="#account-json">ملف JSON الخاص بالحساب</a>.</td>
+</tr>
+<tr>
+<td><em>بيانات تعريف واجهة برمجة التطبيقات (API) فقط</em></td>
+<td>لا يحتوي ملف JSON على جلسة عمل. أضف الملف <code>.session</code> أو استخدم الهاتف/رمز الاستجابة السريعة (QR).</td>
+</tr>
+<tr>
+<td><em>يجب أن يحتوي مفتاح المصادقة HEX على جميع الأحرف الـ512 السداسية العشرية</em></td>
+<td>المفتاح مقطوع أو يحتوي على <code>…</code>.</td>
+</tr>
+<tr>
+<td>معرف الحساب لا يتطابق مع الحساب المستورد</td>
+<td>يختلف معرّف المستخدم الخاص بالملف عما أوردته Telegram؛ فالملف يخص حسابًا آخر.</td>
+</tr>
+<tr>
+<td>الحساب مملوك بالفعل لمساحة عمل أخرى</td>
+<td>افتح مساحة العمل تلك بدلاً من إضافة الحساب مرتين.</td>
+</tr>
+<tr>
+<td>متصل، لكن هناك مجموعة خاصة مفقودة من قائمة الدردشات في <strong>«المصادر»</strong></td>
+<td>تحقق من العضوية. يقوم أداة الاختيار بفحص أول 1,000 محادثة؛ قم برفع الحد الأقصى ضمن <strong>«المعلمات</strong>».</td>
+</tr>
+<tr>
+<td>فشل الاتصال عبر الوكيل</td>
+<td>تحقق من المضيف والمنفذ وبيانات الاعتماد. لا تلجأ TgWitness أبدًا إلى الاتصال المباشر.</td>
+</tr>
+</tbody>
+</table></div>
+<p>انظر أيضًا: <a href="../connection/">الاتصال والأمان</a> للوكلاء والتشفير،
+<a href="../collection/">وكيفية عمل عملية التجميع</a> لما يتم التقاطه بعد تسجيل الدخول.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCOUNTS.md">تحرير هذه الصفحة على GitHub ↗</a><a class="next-guide" href="../connection/"><span>الخطوة التالية</span><strong>الاتصال، والوكلاء، وحماية البيانات ←</strong></a><p>تصف هذه الأدلة طريقة التنفيذ الحالية. ويتم توثيق نتائج التحقق والثغرات المتبقية بشكل منفصل. <a href="../verification/">ما تم اختباره ←</a></p></footer>
+</main>
+<aside class="toc" aria-label="في هذه الصفحة"><p class="nav-label">في هذه الصفحة</p><a href="#at-a-glance">لمحة عامة</a><a href="#before-you-start-api-id-and-api-hash">قبل البدء: معرّف واجهة برمجة التطبيقات (API ID) وتجزئة واجهة برمجة التطبيقات (API hash)</a><a href="#phone-number">رقم الهاتف</a><a href="#qr-code">رمز الاستجابة السريعة (QR)</a><a href="#auth-key--dc-id">مفتاح المصادقة + معرّف DC</a><a href="#account-files">ملفات الحسابات</a><a href="#identify-what-you-have">حدد ما لديك</a><a href="#unsupported-formats">التنسيقات غير المدعومة</a><a href="#multiple-accounts">حسابات متعددة</a><a href="#sign-out">تسجيل الخروج</a><a href="#convert-a-telethon-session-offline">تحويل جلسة Telethon إلى وضع غير متصل بالإنترنت</a><a href="#keeping-account-files-safe">الحفاظ على أمان ملفات الحسابات</a><a href="#troubleshooting">حل المشكلات</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>مفتوحة المصدر · تعمل على جهازك</span><a href="../../../../LICENSE">رخصة MIT</a><a href="../notice/">إشعار المشغل</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">الأمن</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "في انتظار رسالة", "Step through a fictional send, edit and delete.": "تتبع خطوات عملية إرسال وتعديل وحذف افتراضية.", "No observations yet. Start the sequence or advance one event.": "لا توجد ملاحظات حتى الآن. ابدأ التسلسل أو انتقل إلى الحدث التالي.", "Meet at 10:00": "نلتقي الساعة 10:00", "A new message is visible in the chat.": "تظهر رسالة جديدة في الدردشة.", "Record 1 appended: the collector observed the original message.": "تم إرفاق السجل رقم 1: لاحظ المجمع الرسالة الأصلية.", "Meet at 11:00": "نلتقي الساعة 11:00", "The current text changes. The earlier observation stays.": "النص الحالي قد يتغير. أما الملاحظة السابقة فتبقى كما هي.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "تم إرفاق السجل 2: التعديل يمثل ملاحظة جديدة. ولا يزال السجل 1 يحتوي على النص الأصلي.", "Message deleted": "تم حذف الرسالة", "The message has disappeared from the chat view.": "لقد اختفت الرسالة من شاشة الدردشة.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "تم إرفاق السجل رقم 3: يتم الاحتفاظ بإشعار الحذف جنبًا إلى جنب مع كلا النسختين اللتين تمت ملاحظتهما.", "0 records": "0 سجل", "1 record": "سجل واحد", "2 records": "سجلان", "3 records": "3 سجلات", "Complete / {n} of 3": "كامل / {n} من 3", "Step / {n} of 3": "الخطوة / {n} من 3", "Pause": "توقف مؤقت", "Replay sequence": "تسلسل إعادة التشغيل", "Play sequence": "تشغيل التسلسل", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "يتوفر نموذج ثابت. لحساب التجزئات (هاش) تفاعليًّا، افتح هذه الصفحة عبر HTTPS أو معاينة localhost مع دعم Web Crypto.", "No record supplied": "لم يتم تقديم أي سجل", "Tail removed": "تم حذف الجزء الأخير", "≠ saved hash": "≠ التجزئة المحفوظة", "Rebuilt · different hash": "أعيد بناؤه · هاش مختلف", "= saved hash": "= التجزئة المحفوظة", "Same length and matching head.": "نفس الطول وعنوان مطابق.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "تتطابق جميع التجزئات الحسابية الثلاثة مع التجزئات المحفوظة. تتوافق هذه العينة مع الحد المحدد المتمثل في الاحتفاظ بثلاثة سجلات.", "Same saved head; the journal prefix fails verification.": "نفس العنوان المحفوظ؛ لم تجتز بادئة السجل عملية التحقق.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "لم يعد السجل رقم 2 مطابقًا لـ«هاش»ه المحفوظ. قد يفوت هذا الأمر عند التحقق من الرأس الأخير المخزن فقط؛ لذا يقوم المُحقق بفحص كل سجل.", "Head differs from the retained checkpoint.": "يختلف العنوان عن نقطة التحقق التي تم الاحتفاظ بها.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "ترتبط التجزئات المعاد بناؤها ببعضها البعض، لكن الرأس النهائي قد تغير. نقطة التحقق المحتفظ بها ترفض هذا السجل. كما أن التوقيعات الأصلية ستفشل أيضًا في السجلات التي تم تغييرها.", "Too short: 2 supplied records \u003c 3 retained records.": "قصير جدًا: 2 سجلات مقدمة \u003c 3 سجلات محفوظة.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "لا يزال التوافقيان المتبقيان متطابقين. ويكشف نقطة التحقق المحتفظ بها عن الجزء المفقود في نهاية السلسلة. وبدون ذلك الحد السابق، لما كشفت هذه البادئة الأقصر وحدها عن هذا الحذف.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "حساب التجزئة غير متاح في هذا المتصفح. تظل الصيغ والتفسيرات الثابتة أدناه متاحة.", "{n} records": "{n} سجل", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "تم القبول: يزداد العدد، ويتم التحقق من التوقيع، ويتطابق المفتاح. ويحتفظ الشاهد بهذا الحد الجديد.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "التراجع: يُظهر الرد الموقّع عددًا أقل من السجلات مقارنةً بنقطة التحقق الأخيرة المقبولة. تقوم الأداة بتسجيل المشكلة والاحتفاظ بحدود النسخة السابقة المقبولة.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "التفرع (Fork): العدد لم يتغير لكن الرأس يختلف. يقوم الشاهد بتسجيل الخلاف ويحتفظ بالحدود التي تم قبولها سابقًا.", "No answer": "لا توجد إجابة", "boundary unknown": "الحدود غير معروفة", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "عدم الاستجابة: يسجل «الشهود» فشل عملية التحقق. ولا يمكنه تأكيد الحالة الحالية لـ«المجمع». إذا كان «الشهود» لا يزال قادرًا على الوصول إلى واجهة برمجة تطبيقات الروبوت (Bot API) وكانت سياسة النشر الخاصة به تسمح بذلك، فيمكنه نشر هذا الفشل.", "Send {n}": "أرسل {n}", "Edit {n}": "تحرير {n}", "Delete {n}": "حذف {n}", "Both accounts captured all six expected observations in this example.": "وقد استوفى كلا الحسابين جميع الملاحظات الست المتوقعة في هذا المثال.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "لا يزال الحساب «ب» قد سجل 6 من أصل 6. استغرق تسجيل إيصالين وقتًا أطول. تعكس نسبة التسجيل وتأخير استلام الإيصالات إجابات مختلفة.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "سجل الحساب «ب» 5 من أصل 6 قبل الموعد النهائي (83.3٪). لا يوجد تأخير مقاس للتعديل المفقود. تصف هذه النتيجة فقط الإجراءات الستة الخاضعة للرقابة.", "not observed by cutoff": "لم يُلاحظ ذلك بحلول الموعد النهائي", "{s} seconds": "{s} ثانية", "Exact values follow in the table.": "ترد القيم الدقيقة في الجدول التالي.", "{s} s": "{s} s", "Not observed": "لم يُلاحظ", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "تقدم أربع محادثات ملاحظات مختلفة. اتبع السجلات المصدرية لكل اتصال؛ ولا تنسب منشور القناة إلى المستخدم 71001 دون وجود مرسل محدد.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "يقدم السجلان رقم 146 ورقم 205 نفس معرّف المرسل، 71001. وهذا يربط بين المنشورات الملحوظة لحساب Telegram عبر محادثتين. ولا يحدد هوية شخص حقيقي ولا ينسب المنشور إلى القناة.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "يظهر العنوان pay.example.invalid/new في سجل المجموعة رقم 146، ولوحة مفاتيح الروبوت رقم 173، وتعديل القناة رقم 188، والرسالة الخاصة رقم 205. وجود عنوان متكرر يربط بين المواد؛ لكنه لا يثبت وجود سيطرة مشتركة على تلك الحسابات.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "تحتوي إيصالات الوسائط المكتملة رقم #151 ورقم #209 على قيم SHA-256 كاملة متطابقة في هذه الحالة الافتراضية. قارن بين البايتات الفعلية وسجلات الرسائل المرتبطة بها. لا يحدد الملف المطابق هوية منشئه ولا يثبت هوية من قام بإعادة توجيهه.", "the encrypted off-site copy": "النسخة المشفرة خارج الموقع", "notifications": "الإشعارات", "checkpoint hashes for timestamps": "تجزئات نقاط التحقق (checkpoint hashes) للطوابع الزمنية", "signed checkpoints for the witness": "نقاط تحقق موقعة لـ «TgWitness»", "Switched on in this example": "تم تفعيلها في هذا المثال", "Optional · off by default": "اختياري · معطّل افتراضيًا", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "ما يُترك في هذا الجهاز: اتصال Telegram و{list}. لا شيء آخر.", "Default: only the Telegram connection leaves this machine.": "الإعداد الافتراضي: لا يغادر هذا الجهاز سوى اتصال Telegram.", "{done} of {total} done": "{done} من {total} تم إنجازها", "Mark step {n} as done": "وضع علامة «تم» على الخطوة {n}", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "نص", "Copied": "نسخ", "Command copied.": "تم نسخ الأمر.", "Selected — Ctrl/Cmd+C": "تم التحديد — Ctrl/Cmd+C", "Command selected. Copy it manually.": "تم تحديد الأمر. انسخه يدويًّا.", "Command copied to clipboard.": "تم نسخ الأمر إلى الحافظة.", "Select text": "حدد النص", "Clipboard unavailable. Command selected; copy it manually.": "الحافظة غير متاحة. تم تحديد الأمر؛ انسخه يدويًّا.", "A message arrives. The first observation is saved.": "تصل رسالة. يتم حفظ الملاحظة الأولى.", "The time changes. Both captured versions stay.": "يتغير الوقت. وتبقى النسختان المسجلتان كما هما.", "The message disappears. The captured history remains.": "تختفي الرسالة. لكن السجل المسجل يبقى.", "Pause example animation": "إيقاف الرسوم المتحركة التوضيحية مؤقتًا", "Play example animation": "تشغيل مثال للرسوم المتحركة", "Play": "تشغيل", "Full-size workspace screenshot": "لقطة شاشة لمساحة العمل بالحجم الكامل", "Workspace screenshot · fictional data": "لقطة شاشة لمساحة العمل · بيانات خيالية", "Close": "إغلاق", "Close screenshot": "إغلاق لقطة الشاشة", "Scrollable full-size screenshot": "لقطة شاشة كاملة الحجم قابلة للتمرير", "Enlarge: {name}": "تكبير: {name}", "View full size": "عرض بالحجم الكامل"}</script>
+</body></html>

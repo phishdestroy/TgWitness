@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="tr" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Soruşturma modu | TgWitness</title>
+<meta name="description" content="Kapsam belirlemeden doğrulanmış vaka dosyasına kadar, kanallar, gruplar, özel sohbetler ve botlar genelinde tüm hesaplara yönelik soruşturmalar."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="Soruşturma modu | TgWitness"><meta property="og:description" content="Kapsam belirlemeden doğrulanmış vaka dosyasına kadar, kanallar, gruplar, özel sohbetler ve botlar genelinde tüm hesaplara yönelik soruşturmalar.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/investigation/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/investigation/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/investigation/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/investigation/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/investigation/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/investigation/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/investigation/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/", "url": "https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/", "name": "Soruşturma modu | TgWitness", "description": "Kapsam belirlemeden doğrulanmış vaka dosyasına kadar, kanallar, gruplar, özel sohbetler ve botlar genelinde tüm hesaplara yönelik soruşturmalar.", "inLanguage": "tr", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": "https://phishdestroy.github.io/TgWitness/tr/"}, {"@type": "ListItem", "position": 2, "name": "Belgeler", "item": "https://phishdestroy.github.io/TgWitness/tr/docs/"}, {"@type": "ListItem", "position": 3, "name": "Referans", "item": "https://phishdestroy.github.io/TgWitness/tr/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Soruşturma modu", "item": "https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">İçeriğe atla</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Belgeler</span></a>
+<nav aria-label="Kılavuzlar"><a href="../../concepts/">Görsel kılavuz</a><a href="../../">Tüm kılavuzlar</a><a href="../">Referans</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Dil"><span aria-hidden="true">◍</span> Türkçe</summary><div class="lang-list"><a href="../../../../docs/reference/investigation/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/investigation/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/investigation/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/investigation/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/investigation/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="./" hreflang="tr" lang="tr" aria-current="true">Türkçe</a><a href="../../../../ar/docs/reference/investigation/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/investigation/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/investigation/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/investigation/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/investigation/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/investigation/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/investigation/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Açık ve koyu tema arasında geçiş yapın"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Kılavuzlar"><a href="../../../guides/modes.html">Modlar, senaryolar ve kanıt düzeyleri</a><p class="nav-label">İlk adımlar</p><a href="../../start/">Birkaç dakika içinde başlayın</a><a href="../../accounts/">Hesap bağla</a><a href="../../proxies/">Bir proxy seçin</a><a href="../../exports/">Dışa aktarma ve doğrulama</a><p class="nav-label">Kanıtları anlamak</p><a href="../../concepts/">Kanıtların nasıl işlediğini görün</a><a href="../../cases/">Tüm sohbetleri inceleyin</a><a href="../../security/">Güvenliği sağlayın</a><p class="nav-label">Daha fazlasını öğrenin</p><a href="../../witness/">Witness botunu kurun</a><a href="../../server/">Çalışır durumda tutun</a><a href="../../troubleshooting/">Neyin yanlış gittiğini bulun</a></nav><nav class="wiki-nav" aria-label="Referans"><p class="nav-label"><a class="nav-label-link" href="../">Referans</a></p><details class="wiki-group"><summary>Kurulum</summary><a href="../quickstart/">Hızlı başlangıç</a><a href="../accounts/">Hesaplar ve oturum biçimleri</a><a href="../connection/">Bağlantı, proxy'ler ve veri koruma</a><a href="../deployment/">Uygulama</a></details><details class="wiki-group" open><summary>Topla</summary><a href="../collection/">Veri toplama süreci nasıl işliyor?</a><a href="../operations/">İş akışları ve işlemler</a><a href="./" aria-current="page">Soruşturma modu</a><a href="../features/">Özellikler ve sınırlamalar</a></details><details class="wiki-group"><summary>Kanıt</summary><a href="../how-it-works/">Kanıt sistemi nasıl çalışır?</a><a href="../evidence/">Kanıt formatı</a><a href="../witness/">Bağımsız tanık</a><a href="../timestamp/">Zaman damgaları</a></details><details class="wiki-group"><summary>Güvenlik ve proje</summary><a href="../security/">Güvenlik ve veri işleme</a><a href="../architecture/">Mimari</a><a href="../verification/">Neler test edildi</a><a href="../license/">Lisans ve mimari uyumsuzluk bildirimi</a><a href="../notice/">Operatör uyumsuzluğu bildirimi</a><a href="../changelog/">Değişiklik günlüğü</a></details></nav><p class="sidebar-note">v0.7.0<br>Açık kaynak · Kendi makinenizde çalışır</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Kılavuzlar"><a href="../../../">Ana Sayfa</a> <span aria-hidden="true">/</span> <a href="../../">Belgeler</a> <span aria-hidden="true">/</span> <a href="../">Referans</a> <span aria-hidden="true">/</span> <span aria-current="page">Soruşturma modu</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Belgelere göz atın</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zinciri, token veya witness&#x27;i deneyin…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Net arama" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Kılavuzları ve referansları aramak için bir kelime yazın. Arama, tarayıcınızda kalır.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Referans / Topla</p><h1>Soruşturma modu</h1><p class="guide-outcome">Kapsam belirlemeden doğrulanmış vaka dosyasına kadar, kanallar, gruplar, özel sohbetler ve botlar genelinde tüm hesaplara yönelik soruşturmalar.</p><div class="wiki-body"><p>Bir vakayı, ilk
+toplamadan alıntılanan zaman çizelgesine ve doğrulanabilir devir teslimine kadar kanallar, gruplar, özel sohbetler ve botlar üzerinden takip edin. Etkileşimli web sitesi
+sürümü <code>/docs/cases/</code> adresinde bulunur; <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally">önizleme talimatları</a>.</p>
+<h2 id="worked-case-a-destination-changes-across-four-conversations">Örnek vaka: Dört farklı sohbet boyunca bir hedef adresin değişmesi<a class="anchor" href="#worked-case-a-destination-changes-across-four-conversations" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Bir duyuru bir botu işaret ediyor. Bir operasyon grubu yeni bir ödeme
+hedefini tartışıyor, botun klavyesi bunu gösteriyor ve özel bir takip mesajında bu bilgi tekrarlanıyor.
+Ardından duyuru düzenleniyor ve bir grup mesajı kayboluyor.</p>
+<p>Sorular şunlardır: Değişiklikten önce ve sonra neler gözlemlendi, her bir öğeyi hangi Telegram
+hesapları paylaştı, hedef nerede göründü, hangi ek baytları
+korundu ve hangi aralıklar bilinmiyor?</p>
+<p>Bu örnekteki tüm isimler, kimlik numaraları, zamanlar ve günlük referansları kurgusaldır.
+İş akışı mevcut özellikleri kullanır; vaka haritası bir örnektir, uygulama tarafından otomatik olarak
+oluşturulan bir grafik değildir.</p>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 861 442" width="861" height="442" role="img" aria-labelledby="flow-3-title flow-3-desc"><title id="flow-3-title">Akış şeması</title><desc id="flow-3-desc">Kanallar → Çalışma alanı günlüğü; Gruplar → Çalışma alanı günlüğü; Özel sohbetler → Çalışma alanı günlüğü; Botlar → Çalışma alanı günlüğü; Çalışma alanı günlüğü → Tüm kaynaklarda arama yap; Çalışma alanı günlüğü → Kayıt referansları içeren kişi profilleri; Çalışma alanı günlüğü → Kaydedilen sürümler ve ek alım belgeleri; Tüm kaynaklarda arama yap → Analist zaman çizelgesi ve kaynak kaydı; Kayıt referansları içeren kişi profilleri → Analist zaman çizelgesi ve kaynak kaydı; Kaydedilen sürümler ve ek alım belgeleri → Analist zaman çizelgesi ve kaynak kaydı; Çalışma alanı günlüğü → İmzalı kanıt ZIP dosyası; Analist zaman çizelgesi ve kaynak kaydı → Ayrı ayrı doğrulanmış kanıtlarla vaka devri; İmzalı kanıt ZIP dosyası → Ayrı ayrı doğrulanmış kanıtlarla vaka devri</desc><defs><marker id="flow-3-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M242.4 46.0C242.4 68.0 433.1 68.0 433.1 90.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:200" pathLength="200"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.2s" repeatCount="indefinite" path="M242.4 46.0C242.4 68.0 433.1 68.0 433.1 90.0"/></circle><path class="flow-edge" d="M364.4 46.0C364.4 68.0 433.1 68.0 433.1 90.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:86" pathLength="86"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M364.4 46.0C364.4 68.0 433.1 68.0 433.1 90.0"/></circle><path class="flow-edge" d="M496.7 46.0C496.7 68.0 433.1 68.0 433.1 90.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:82" pathLength="82"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M496.7 46.0C496.7 68.0 433.1 68.0 433.1 90.0"/></circle><path class="flow-edge" d="M629.0 46.0C629.0 68.0 433.1 68.0 433.1 90.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:205" pathLength="205"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.3s" repeatCount="indefinite" path="M629.0 46.0C629.0 68.0 433.1 68.0 433.1 90.0"/></circle><path class="flow-edge" d="M433.1 130.0C433.1 156.5 106.2 156.5 106.2 183.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:336" pathLength="336"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="3.7s" repeatCount="indefinite" path="M433.1 130.0C433.1 156.5 106.2 156.5 106.2 183.0"/></circle><path class="flow-edge" d="M433.1 130.0C433.1 152.0 324.8 152.0 324.8 174.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:122" pathLength="122"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M433.1 130.0C433.1 152.0 324.8 152.0 324.8 174.0"/></circle><path class="flow-edge" d="M433.1 130.0C433.1 152.0 543.2 152.0 543.2 174.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:123" pathLength="123"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M433.1 130.0C433.1 152.0 543.2 152.0 543.2 174.0"/></circle><path class="flow-edge" d="M106.2 223.0C106.2 249.5 324.8 249.5 324.8 276.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:230" pathLength="230"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="2.6s" repeatCount="indefinite" path="M106.2 223.0C106.2 249.5 324.8 249.5 324.8 276.0"/></circle><path class="flow-edge" d="M324.8 232.0C324.8 254.0 324.8 254.0 324.8 276.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:44" pathLength="44"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M324.8 232.0C324.8 254.0 324.8 254.0 324.8 276.0"/></circle><path class="flow-edge" d="M543.2 232.0C543.2 254.0 324.8 254.0 324.8 276.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:227" pathLength="227"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="2.5s" repeatCount="indefinite" path="M543.2 232.0C543.2 254.0 324.8 254.0 324.8 276.0"/></circle><path class="flow-edge" d="M433.1 130.0C433.1 156.5 758.3 156.5 758.3 183.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:334" pathLength="334"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="3.7s" repeatCount="indefinite" path="M433.1 130.0C433.1 156.5 758.3 156.5 758.3 183.0"/></circle><path class="flow-edge" d="M324.8 334.0C324.8 356.0 541.5 356.0 541.5 378.0" marker-end="url(#flow-3-arrow)" style="--i:3;--len:225" pathLength="225"/><circle class="flow-pulse" r="3.2" style="--i:3"><animateMotion begin="indefinite" dur="2.5s" repeatCount="indefinite" path="M324.8 334.0C324.8 356.0 541.5 356.0 541.5 378.0"/></circle><path class="flow-edge" d="M758.3 223.0C758.3 300.5 541.5 300.5 541.5 378.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:282" pathLength="282"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="3.1s" repeatCount="indefinite" path="M758.3 223.0C758.3 300.5 541.5 300.5 541.5 378.0"/></circle><g class="flow-node" style="--i:0"><rect x="190.4" y="6.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="242.4" y="26.0">Kanallar</tspan></text></g><g class="flow-node" style="--i:0"><rect x="312.4" y="6.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="364.4" y="26.0">Gruplar</tspan></text></g><g class="flow-node" style="--i:0"><rect x="434.4" y="6.0" width="124.6" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="496.7" y="26.0">Özel sohbetler</tspan></text></g><g class="flow-node" style="--i:0"><rect x="577.0" y="6.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="629.0" y="26.0">Botlar</tspan></text></g><g class="flow-node" style="--i:1"><rect x="346.7" y="90.0" width="172.9" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="433.1" y="110.0">Çalışma alanı günlüğü</tspan></text></g><g class="flow-node" style="--i:2"><rect x="6.0" y="183.0" width="200.5" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="106.2" y="203.0">Tüm kaynaklarda arama yap</tspan></text></g><g class="flow-node" style="--i:2"><rect x="224.5" y="174.0" width="200.5" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="324.8" y="194.0">Kayıt referansları içeren</tspan><tspan x="324.8" y="212.0">kişi profilleri</tspan></text></g><g class="flow-node" style="--i:2"><rect x="443.0" y="174.0" width="200.5" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="543.2" y="194.0">Kaydedilen sürümler ve ek</tspan><tspan x="543.2" y="212.0">alım belgeleri</tspan></text></g><g class="flow-node" style="--i:2"><rect x="661.5" y="183.0" width="193.6" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="758.3" y="203.0">İmzalı kanıt ZIP dosyası</tspan></text></g><g class="flow-node" style="--i:3"><rect x="221.1" y="276.0" width="207.4" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="324.8" y="296.0">Analist zaman çizelgesi ve</tspan><tspan x="324.8" y="314.0">kaynak kaydı</tspan></text></g><g class="flow-node" style="--i:4"><rect x="455.1" y="378.0" width="172.9" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="541.5" y="398.0">Ayrı ayrı doğrulanmış</tspan><tspan x="541.5" y="416.0">kanıtlarla vaka devri</tspan></text></g></svg></div><details class="flow-steps"><summary>Diyagramın metin olarak gösterimi</summary><ol><li>Kanallar → Çalışma alanı günlüğü</li><li>Gruplar → Çalışma alanı günlüğü</li><li>Özel sohbetler → Çalışma alanı günlüğü</li><li>Botlar → Çalışma alanı günlüğü</li><li>Çalışma alanı günlüğü → Tüm kaynaklarda arama yap</li><li>Çalışma alanı günlüğü → Kayıt referansları içeren kişi profilleri</li><li>Çalışma alanı günlüğü → Kaydedilen sürümler ve ek alım belgeleri</li><li>Tüm kaynaklarda arama yap → Analist zaman çizelgesi ve kaynak kaydı</li><li>Kayıt referansları içeren kişi profilleri → Analist zaman çizelgesi ve kaynak kaydı</li><li>Kaydedilen sürümler ve ek alım belgeleri → Analist zaman çizelgesi ve kaynak kaydı</li><li>Çalışma alanı günlüğü → İmzalı kanıt ZIP dosyası</li><li>Analist zaman çizelgesi ve kaynak kaydı → Ayrı ayrı doğrulanmış kanıtlarla vaka devri</li><li>İmzalı kanıt ZIP dosyası → Ayrı ayrı doğrulanmış kanıtlarla vaka devri</li></ol></details></figure>
+<h2 id="1-define-the-case-and-collect-the-whole-account">1. Vakayı tanımlayın ve olayın tüm ayrıntılarını toplayın<a class="anchor" href="#1-define-the-case-and-collect-the-whole-account" aria-label="Bu bölüme bağlantı">#</a></h2>
+<ol>
+<li>Toplama hesabını kendi çalışma alanına bağlayın. Harici vaka notlarında,
+    vaka referansını, hesap kimliğini, çalışma alanını, gözlem başlangıç tarihini ve güvenilir
+    imza anahtarı parmak izini kaydedin.</li>
+<li>Açık <strong>Kaynaklar → Gözlem kapsamı → Soruşturma modu</strong>. Ön ayar,
+    <strong>Tüm hesap</strong>, kanallar/gruplar/özel sohbetler/botlar, kendi eylemler, kaynak
+    profilleri ve yeni keşfedilen kaynaklara ait en son 200 görünür mesajı seçer.
+    İnceledikten sonra <strong>Kapsamı Kaydet </strong>düğmesine basın ve kapsam onayını tamamlayın.</li>
+<li><strong>Sohbetleri yükleyin</strong> ve kaynakları hesabın sohbet listesiyle karşılaştırın. Hariç tutulanları
+    kontrol edin. <strong>Parametreler → Hesabın listesinden okunan sohbet sayısı</strong> varsayılan olarak
+    1.000&#x27;dir ve en fazla 20.000&#x27;e kadar izin verilir. Liste sınırını aşan kaynaklar,
+    aktif hale geldiklerinde eklenir. Gerçekte sayılanları kaydedin.</li>
+<li><strong>Kayıt ayar</strong>larında, &quot;<strong>Görünür tüm etkinlikler&quot;</strong> seçeneğini seçin ve
+    izleme ayarlarını kaydedin. Ek türlerini/sınırlarını ve boş disk alanını kontrol edin.</li>
+<li>Gözlemi başlatın. Kontrollü bir yeni mesaj, düzenleme ve silme işlemini doğrulayın, ardından
+    test referanslarını ve olası hataları kaydedin.</li>
+</ol>
+<p>&quot;Tüm hesap&quot; kapsamı, kaydedilen ayarlar dahilinde hesapta görülebilen etkinlikleri kaydeder.
+Gizli sohbetlere erişmez veya bağlantılı her gruba otomatik olarak katılmamaktadır. Ayrıca
+mevcut tüm sohbetleri geriye dönük olarak doldurmaz. <a href="../collection/#observation-scope-chosen-chats-a-folder-or-the-whole-account">Toplama kapsamına</a> bakınız.</p>
+<h2 id="2-inventory-every-source-and-acquire-historical-context">2. Her kaynağı listeleyin ve tarihsel bağlamı belirleyin<a class="anchor" href="#2-inventory-every-source-and-acquire-historical-context" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Her sohbet için bir satır içeren bir kaynak kaydı tutun:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Alan</th>
+<th>Kaydet</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kimlik</td>
+<td>Çalışma alanı, hesap kimliği, sayısal sohbet kimliği, başlık ve tür</td>
+</tr>
+<tr>
+<td>Görünürlük</td>
+<td>Üyelik/rol, erişim onaylanmış veya onaylanmamış, hariç tutulanlar</td>
+</tr>
+<tr>
+<td>Canlı yakalama</td>
+<td>Başlangıç zamanı, seçilen olay türleri ve sonraki politika değişiklikleri</td>
+</tr>
+<tr>
+<td>Günlük geçmişi</td>
+<td>İstenen/tamamlanan anlık görüntü, sınır, zaman ve kayıt referansları</td>
+</tr>
+<tr>
+<td>Tam geçmiş</td>
+<td>Sohbet başına imzalı dışa aktarım dosya adı, sınır ve tamamlanma/başarısızlık durumu</td>
+</tr>
+<tr>
+<td>Ekler</td>
+<td>Tamamlanmış medya makbuzları, hash değerleri, boyutlar ve atlanan/başarısız sonuçlar</td>
+</tr>
+<tr>
+<td>Kapsam</td>
+<td>Kesintiler, eksik veri alımı, FloodWait, erişilemeyen mesajlar ve diğer eksiklikler</td>
+</tr>
+</tbody>
+</table></div>
+<p>Her kaynak için uygun veri toplama yöntemini kullanın:</p>
+<ul>
+<li><strong>Geçmiş anlık görüntüsü,</strong> son zamanlarda görünür olan mesajları gözlem günlüğüne kaydeder.
+    Varsayılan maksimum değer 500&#x27;dür; <strong>Parametreler → En büyük geçmiş anlık görüntüsü</strong> seçeneği ile
+    bu değer 10.000&#x27;e yükseltilebilir. Bunlar, yeniden oluşturulmuş düzenlemeler değil, güncel geçmiş gözlemleridir.</li>
+<li><strong>Sohbetin tamamını dışa aktar → Sohbetin tamamını dışa aktar</strong> veya <strong>Sohbetler → Sohbeti dışa aktar</strong> seçeneği,
+    bir sohbetin o anda görünür olan geçmişini ayrı bir imzalı <code>chat.json</code> /
+    <code>chat.html</code> paketine aktarır. Davanın kaynakları için bu işlemi tekrarlayın ve her sonucu saklayın.</li>
+<li><strong>Yeni bir sohbet veya bot ortaya çıktığında,</strong> profilini ve en fazla 1.000 adet son
+    mesajı kaydedebilir; Soruşturma modunda ise 200 mesaj seçilir. Mod etkinleştirildiğinde, mevcut sohbetler bu
+    verileri geriye dönük olarak almaz.</li>
+<li><strong>Görünür eklerin indirilmesi</strong>, yapılandırılan ilke kapsamında baytları korur.
+    SHA-256 ve bayt sayısını içeren, tamamlanmış bir <code>media.saved</code> makbuzu gereklidir. Kuyrukta bekleyen
+    bir iş, küçük resim veya dosya adı, korunan ek olarak kabul edilmez.</li>
+</ul>
+<p>Sohbetin tam olarak dışa aktarılması, günlüğe veya kişi profillerine tüm
+mesajları eklemez. TgWitness içinde analiz etmeniz gereken geçmiş için
+günlük anlık görüntülerini kullanın. Tek tıklamayla tüm hesap geçmişini geri yükleme özelliği yoktur; tam geçmiş
+alımı sohbet bazında yapılır. Her iki yöntem de Telegram&#x27;ın artık geri vermediği içerikleri kurtarmaz.</p>
+<h2 id="3-preserve-the-evolving-case-and-deliberate-interactions">3. Gelişen vakayı ve kasıtlı etkileşimleri kaydetmek<a class="anchor" href="#3-preserve-the-evolving-case-and-deliberate-interactions" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Aktif vaka sohbetlerini öncelikli kaynaklar olarak işaretleyin. Yeniden kontrol aralıklarını, devam eden
+takip işlemlerini ve medya çıktılarını gözden geçirin. Hesabı kullanırken toplayıcının gözlem yapmasını sağlayın.
+<strong>Sohbetler → Profil → Profili şimdi kaydet</strong> seçeneğini kullanarak açıklamalar ve bot komutları gibi
+kaynak meta verilerini koruyun. Bu, kaydedilmiş mesajlardan türetilen
+kişi profillerinden ayrıdır.</p>
+<p>Davanın bir kaynağı takip etmeyi veya bir botla etkileşime geçmeyi içerdiği durumlarda:</p>
+<ol>
+<li><strong>Telegram bağlantısını aç → Önizlemeyi kaydet</strong>, verilen bağlantıyı ve bir işlemden önce
+    görüntülenen önizlemeyi kaydeder.</li>
+<li><strong>Join / open ve observe komutları</strong>, join/open işlemini gerçekleştirir ve belirtildiğinde botun start
+    parametresini gönderir. Onay bekleyen bir katılma isteği, beklemede olarak kaydedilir.</li>
+<li>Panel tarafından gönderilen metin yanıtları ve desteklenen düğme tıklamaları,
+    <code>interaction.requested</code> ve <code>interaction.result</code> değerlerini korur. Geri arama makbuzları,
+    geri gönderilen açılır pencere metnini, uyarı durumunu ve URL&#x27;yi koruyabilir.</li>
+</ol>
+<p>Bunlar gerçek hesap eylemleridir. Başka bir Telegram uygulamasındaki geri arama tuşlamaları,
+toplayıcı tarafından görülemez; ancak bunlardan kaynaklanan mesajlar veya düzenlemeler görülebilir.
+Mini istemci, web uygulaması, ödeme, telefon veya konum iş akışlarını yürütmez.
+Kesin davranış için <a href="../collection/#act-from-the-panel">panel etkileşimlerine</a> bakın.</p>
+<h2 id="4-connect-observations-across-chats">4. Sohbetler arasındaki gözlemleri birbiriyle ilişkilendirin<a class="anchor" href="#4-connect-observations-across-chats" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>&quot;<strong>Günlük</strong>&quot; bölümünde &quot;<strong>Tüm kaynaklar</strong>&quot; seçeneğini seçin ve kaydedilmiş içeriği arayın. Eşleşen
+kayıtları açın ve çalışma alanını, sohbeti, mesaj kimliğini, sıra numarasını ve kayıt hash değerini not edin.</p>
+<p>İlgili bir sohbette, <strong>Kişiler → Profilleri aç seçeneğine gidin</strong> ve bir kişiyi inceleyin:</p>
+<ul>
+<li>Zaman içinde gözlemlenen isimler/kullanıcı adları ve sayısal Telegram kimliği.</li>
+<li>Kaynak kayıt referanslarıyla birlikte yanıt ilişkileri.</li>
+<li><strong>Ayrıca…</strong> bu çalışma alanı günlüğünde, söz konusu kullanıcı kimliğinin yazdığı diğer sohbetlerde de.</li>
+<li>Etkinlikler, düzenlemeler/silme işlemleri ve bahsedilen cüzdanlar, telefonlar, kullanıcı adları ve bağlantılar.</li>
+<li>Kaydedilmiş avatar meta verileri ve benzer önbelleğe alınmış avatarlar, ayrı kaynak bilgileriyle birlikte.</li>
+</ul>
+<p>Bir bulguda türetilmiş bir profili kullanmadan önce, alıntılanan kayıtları açın. Profiller,
+grubun her üyesini değil, kaydedilmiş mesajları olan kişileri kapsar. <strong>Parametreler → Her bir olaya göre
+alıntılanan kayıtlar</strong>, referans listesini sınırlar; altta yatan etkinlik sayısını sınırlamaz.
+Bahsetmeler ve avatar benzerliği ipucu niteliğindedir; sahiplik veya kimliği kanıtlamaz.</p>
+<p>Örnekte:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Bağlantı</th>
+<th>Kayıtlar</th>
+<th>Desteklenen gözlem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Aynı gönderen hesabı</td>
+<td>Grup #146 ve özel takip #205</td>
+<td>Her ikisi de Telegram gönderen kimliği 71001&#x27;i sağlar</td>
+</tr>
+<tr>
+<td>Aynı hedef</td>
+<td>#146, bot klavyesi #173, kanal düzenleme #188, özel mesaj #205</td>
+<td>Hepsinde <code>pay.example.invalid/new</code> bulunur; sahiplik/kontrol durumu belirlenmemiştir</td>
+</tr>
+<tr>
+<td>Aynı kaydedilmiş dosya</td>
+<td>#151 ve #209 numaralı medya makbuzları tamamlandı</td>
+<td>Korunan baytlar için tam SHA-256 değerleri birbiriyle uyumludur</td>
+</tr>
+<tr>
+<td>Kanal kaynağı</td>
+<td>#101 ve #188</td>
+<td>Göndereni belirtilmedikçe, bir kanal gönderisini 71001 numaralı kullanıcıya atfetmeyin.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Eklerin hash değerlerini ve bunlara ilişkin mesaj referanslarını karşılaştırın. Aynı
+dosyalar, bir dosyanın yaratıcısını, ileten kişiyi veya ortak bir operatörü kanıtlamaz. Aynı isimler ve
+benzer avatarlar tek başına iki Telegram kimliğini tek bir kişiye bağlamaz.</p>
+<h2 id="5-build-the-cross-chat-timeline">5. Sohbetler arası zaman çizelgesini oluşturun<a class="anchor" href="#5-build-the-cross-chat-timeline" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p><strong>Sohbetler&#x27;de</strong> kaydedilen sürümleri ve bunların <strong>Günlük kaydı #…</strong> bağlantılarını kullanın.
+<strong>Günlük</strong>&#x27;te, <strong>Tüm kaynakları Düzenlemeler</strong>, <strong>Silme işlemleri</strong> ve <strong>Kapsam</strong> ile birleştirin.
+Varsa hem <code>source_at</code>&#x27;yi hem de <code>observed_at</code>&#x27;yi koruyun.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Örnek gözlem süresi</th>
+<th>Referans</th>
+<th>Gözlem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>09:00</td>
+<td>Kanal #101</td>
+<td>Orijinal hedef yakalandı</td>
+</tr>
+<tr>
+<td>09:12</td>
+<td>Grup #146; medya #151</td>
+<td>Yeni hedef yayınlandı; dosya indirme işlemi tamamlandı</td>
+</tr>
+<tr>
+<td>09:16</td>
+<td>Bot #173</td>
+<td>Klavye, yeni hedefe yönlendirir</td>
+</tr>
+<tr>
+<td>09:20</td>
+<td>Kanal #188</td>
+<td>Duyuru düzenlendi; her iki kaydedilmiş sürüm de korunuyor</td>
+</tr>
+<tr>
+<td>09:24</td>
+<td>Özel #205; medya #209</td>
+<td>Aynı gönderen kimliği alıcıda da tekrarlanır; aynı dosya baytları korunur</td>
+</tr>
+<tr>
+<td>09:28</td>
+<td>Grup #231</td>
+<td>Silme bildirimi alındı; silen kişi ve kesin silme zamanı bilinmiyor</td>
+</tr>
+</tbody>
+</table></div>
+<p>Bu örnek referanslar arasında başka kayıtlar da yer alabilir. Sıra numaraları gözlemleri
+sıralar; geçmiş anlık görüntüleri daha eski kaynak tarihlerine sahip olabilir ve canlı olaylardan
+daha geç ulaşabilir. Anlık görüntüleri, kurtarılan mesajları, silme bildirimlerini ve
+yeniden kontrol edildiğinde eksik bulunan sonuçları birbirinden ayırın. Kapsam boşluklarını bilinmeyen aralıklar olarak işaretleyin. Daha sonra
+elde edilen geçmiş verileri, geriye dönük olarak kesintisiz gözlem sağladığını göstermez.</p>
+<h2 id="6-add-account-perspectives-without-losing-their-origin">6. Kaynaklarını kaybetmeden hesap bakış açılarını ekleyin<a class="anchor" href="#6-add-account-perspectives-without-losing-their-origin" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Her bir hesap için ayrı bir çalışma alanı kullanın ve envanterini tekrarlayın.
+Her karşılaştırmada hesap kimliğini, rolü, imza anahtarı parmak izini ve kaynak referanslarını saklayın.
+Mesaj numaraları, sohbetler/hesaplar arasında geçerli genel tanımlayıcılar değildir.</p>
+<p>Çalışma alanları arası korelasyon, harici vaka notlarında veya analiz
+araçlarında gerçekleştirilir. TgWitness&#x27;te şu anda çalışma alanları arası genel arama, birleştirilmiş zaman çizelgesi,
+soruşturma grafiği veya birleştirilmiş vaka arşivi bulunmamaktadır. <strong>Bir</strong>
+kanalın/süper grubun çoklu hesap olarak dışa aktarılması, hesap günlüklerinin birleştirilmesi değil, ayrı bir işlemdir.</p>
+<p>Daha uzun süreli çalışmalar için, <a href="../witness/">bağımsız bir tanık</a> aracılığıyla sınırları koruyun.
+Kontrollü teslimat kontrollerini kullanarak
+her hesabın yakalama yolunu ve görünürlüğünü doğrulayın.</p>
+<h2 id="7-assemble-and-verify-the-case-handoff">7. Vaka devrini düzenleyin ve doğrulayın<a class="anchor" href="#7-assemble-and-verify-the-case-handoff" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Bunları, bir analist tarafından derlenen vaka dizininde bir arada tutun:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Materyal</th>
+<th>Amaç</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vaka notları ve kaynak kaydı</td>
+<td>Soru, veri toplama politikası, erişim/rol, bulgular, alternatif açıklamalar ve eksiklikler</td>
+</tr>
+<tr>
+<td>Zaman çizelgesi</td>
+<td>Her bir giriş için hem zaman bilgisi hem de çalışma alanı/sohbet/mesaj/sıraya ilişkin referanslar</td>
+</tr>
+<tr>
+<td>Çalışma alanı başına imzalı kanıt ZIP dosyası</td>
+<td>Kaydedilen günlüğün tamamı, içerik listesi ve dahil edilen korunmuş medya dosyaları; panel filtreleri, günlüğün dışa aktarılmasını kısıtlamaz</td>
+</tr>
+<tr>
+<td>Ayrı ayrı imzalanmış kişi profil dosyaları</td>
+<td>Elde edilen referanslar, ilgili çalışma alanındaki kanıtlarla karşılaştırılarak kontrol edildi</td>
+</tr>
+<tr>
+<td>İmzalı tam sohbet dışa aktarımları</td>
+<td>Gözlem günlüğünden ayrı olarak, o anda görünür olan geçmişin toplanması</td>
+</tr>
+<tr>
+<td>Güvenilir parmak izleri ve önceki kontrol noktaları</td>
+<td>Ana kimlik ve saklanan günlük sınırları</td>
+</tr>
+<tr>
+<td>Yapılandırılmışsa, tanık verileri</td>
+<td>Ayrı günlük, imzalı gönderiler ve tanık parmak izi</td>
+</tr>
+<tr>
+<td>Doğrulama sonuçları ve teslim edilen dosyaların hash değerleri</td>
+<td>Neler kontrol edildi, hangi baytlar aktarıldı ve kime aktarıldı?</td>
+</tr>
+</tbody>
+</table></div>
+<p>Güvenilir bir kurulumdan, dosya adları ve her çalışma alanının gerçek parmak izi ile birlikte:</p>
+<pre><code class="language-sh">python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
+python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --evidence evidence.zip
+python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256</code></pre>
+<p>Gerçek doğrulama sonuçları ve orijinal kanıtlar korunur. Üst düzey vaka
+dizini, kaynak kaydı ve analistlerin sonuçları harici olarak tutulur;
+her bir TgWitness kanıtının kendine özgü bir imzası ve doğrulama prosedürü vardır.</p>
+<h2 id="adapt-the-investigation">Soruşturmaya uyarlama<a class="anchor" href="#adapt-the-investigation" aria-label="Bu bölüme bağlantı">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Örnek</th>
+<th>Trace</th>
+<th>Sun</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bot destekli sipariş/ödeme anlaşmazlığı</td>
+<td>Giriş duyurusu → kaydedilmiş bağlantı önizlemesi → bot başlatma parametresi → mesaj ve klavye sürümleri → panel geri arama makbuzları → özel/grup takibi</td>
+<td>Gözlemlenen teklif/yanıt zaman çizelgesi ve doğrulanmış kaynaklar; tek başına bir ödeme bağlantısı, ödeme yapıldığını kanıtlamaz</td>
+</tr>
+<tr>
+<td>Bir olayın ardından silinen mesajlar</td>
+<td>Etkilenen tüm sohbetler → kaydedilen orijinaller/düzenlemeler → silme veya yeniden kontrol edildiğinde eksiklik sonuçları → korunan medya → kapsam ve diğer hesap perspektifleri</td>
+<td>Korunmuş sürümler ve açıkça belirtilmiş bilinmeyen aralıklar; uydurma silme failleri yok</td>
+</tr>
+<tr>
+<td>Bir katılımcı, farklı sohbetlerde farklı isimler kullanıyor</td>
+<td>Sayısal gönderen kimliği → isim/kullanıcı adı geçmişi → yanıtlar → gözlemlenen diğer sohbetler → alıntılanan hedefler/dosyalar</td>
+<td>Alıntılanan bir Telegram hesabı etkinlik zaman çizelgesi; gerçek dünyadaki kimlik ve ilişki hipotezleri ayrı tutulmuştur</td>
+</tr>
+</tbody>
+</table></div>
+<p><a href="../collection/">Koleksiyon referansı</a> · <a href="../evidence/#people-profiles">Kişi profili doğrulama</a> ·
+<a href="../evidence/#investigation-handoff">Kanıt devri</a> · <a href="../verification/">Doğrulama tamamlandı</a></p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/INVESTIGATION.md">Bu sayfayı GitHub'da düzenle ↗</a><a class="next-guide" href="../features/"><span>Sonraki adım</span><strong>Özellikler ve sınırlamalar →</strong></a><p>Bu kılavuzlar mevcut uygulamayı açıklamaktadır. Doğrulama sonuçları ve kalan eksiklikler ayrı olarak belgelenmiştir. <a href="../verification/">Neler test edildi →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Bu sayfada"><p class="nav-label">Bu sayfada</p><a href="#worked-case-a-destination-changes-across-four-conversations">Örnek vaka: Dört farklı sohbet boyunca bir hedef adresin değişmesi</a><a href="#1-define-the-case-and-collect-the-whole-account">1. Vakayı tanımlayın ve olayın tüm ayrıntılarını toplayın</a><a href="#2-inventory-every-source-and-acquire-historical-context">2. Her kaynağı listeleyin ve tarihsel bağlamı belirleyin</a><a href="#3-preserve-the-evolving-case-and-deliberate-interactions">3. Gelişen vakayı ve kasıtlı etkileşimleri kaydetmek</a><a href="#4-connect-observations-across-chats">4. Sohbetler arasındaki gözlemleri birbiriyle ilişkilendirin</a><a href="#5-build-the-cross-chat-timeline">5. Sohbetler arası zaman çizelgesini oluşturun</a><a href="#6-add-account-perspectives-without-losing-their-origin">6. Kaynaklarını kaybetmeden hesap bakış açılarını ekleyin</a><a href="#7-assemble-and-verify-the-case-handoff">7. Vaka devrini düzenleyin ve doğrulayın</a><a href="#adapt-the-investigation">Soruşturmaya uyarlama</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Açık kaynak · Kendi makinenizde çalışır</span><a href="../../../../LICENSE">MIT lisansı</a><a href="../notice/">Operatör bildirimi</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Güvenlik</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Mesaj bekleniyor", "Step through a fictional send, edit and delete.": "Kurgusal bir gönderme, düzenleme ve silme işlemini adım adım inceleyin.", "No observations yet. Start the sequence or advance one event.": "Henüz herhangi bir gözlem yok. Diziyi başlatın veya bir olay ilerletin.", "Meet at 10:00": "Saat 10:00'da buluşalım", "A new message is visible in the chat.": "Sohbette yeni bir mesaj görünüyor.", "Record 1 appended: the collector observed the original message.": "1 kayıt eklendi: toplayıcı, orijinal mesajı gözlemledi.", "Meet at 11:00": "Saat 11:00'da buluşalım", "The current text changes. The earlier observation stays.": "Mevcut metin değiştirilmiştir. Önceki gözlem geçerliliğini korumaktadır.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Kayıt 2 eklendi: düzenleme yeni bir gözlemdir. Kayıt 1'de hâlâ orijinal metin yer almaktadır.", "Message deleted": "Mesaj silindi", "The message has disappeared from the chat view.": "Mesaj, sohbet ekranından kayboldu.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Record 3 eklenmiştir: silme bildirimi, gözlemlenen her iki sürümün yanında da saklanmaktadır.", "0 records": "0 kayıt", "1 record": "1 kayıt", "2 records": "2 kayıt", "3 records": "3 kayıt", "Complete / {n} of 3": "Tamam / 3'ün {n}'si", "Step / {n} of 3": "Adım / 3'ün {n}'si", "Pause": "Duraklat", "Replay sequence": "Tekrar oynatma dizisi", "Play sequence": "Çalma sırası", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Statik örnek mevcuttur. Hash değerlerini etkileşimli olarak hesaplamak için bu sayfayı HTTPS üzerinden veya Web Crypto desteğine sahip bir localhost önizlemesinde açın.", "No record supplied": "Kayıt sağlanmadı", "Tail removed": "Son kısım kaldırıldı", "≠ saved hash": "≠ kaydedilmiş hash", "Rebuilt · different hash": "Yeniden oluşturuldu · farklı hash", "= saved hash": "= kaydedilen hash", "Same length and matching head.": "Aynı uzunlukta ve başlığıyla uyumlu.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Hesaplanan üç hash değeri de kaydedilen hash değerleriyle eşleşmektedir. Bu örnek, korunan üç kayıtlık sınırla uyumludur.", "Same saved head; the journal prefix fails verification.": "Aynı başlık kaydedildi; günlük ön eki doğrulamadan geçemedi.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Kayıt 2, kaydedilmiş hash değeriyle artık eşleşmiyor. Yalnızca son saklanan başlık kontrol edilseydi bu durum gözden kaçardı; doğrulayıcı her kaydı tek tek kontrol eder.", "Head differs from the retained checkpoint.": "Başlık, saklanan kontrol noktası ile farklılık göstermektedir.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Yeniden oluşturulan hash değerleri birbiriyle bağlantılıdır, ancak son başlık değişmiştir. Saklanan kontrol noktası bu geçmişi reddediyor. Değiştirilen kayıtlarda orijinal imzalar da geçersiz sayılır.", "Too short: 2 supplied records \u003c 3 retained records.": "Çok kısa: Sağlanan kayıt sayısı 2, saklanan kayıt sayısı 3'ten az.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Kalan iki hash değeri hâlâ eşleşiyor. Saklanan kontrol noktası, eksik olan son kısmı ortaya çıkarıyor. O önceki sınır olmasaydı, bu daha kısa önek tek başına eksikliği ortaya çıkarmazdı.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Bu tarayıcıda hash hesaplaması yapılamamaktadır. Aşağıdaki formüller ve statik açıklamalar yine de kullanılabilir durumdadır.", "{n} records": "{n} kayıt", "head {hash}": "başlık {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Kabul edildi: sayı artıyor, imza doğrulanıyor ve anahtar eşleşiyor. Tanık bu yeni sınırı koruyor.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Geri alma: İmzalı yanıt, en son kabul edilen kontrol noktasına göre daha az kayıt bildiriyor. Witness, sorunu kaydeder ve daha önce kabul edilen sınırı korur.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: sayım değişmez ancak başlık farklıdır. Tanık, bu uyuşmazlığı kaydeder ve daha önce kabul edilen sınırı korur.", "No answer": "Cevap yok", "boundary unknown": "sınır bilinmiyor", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Yanıt yok: tanık, başarısız kontrolü kaydeder. Toplayıcının mevcut durumunu belirleyemez. Tanık, Bot API’sine hâlâ erişebiliyorsa ve yayın politikası izin veriyorsa, bu başarısızlığı yayınlayabilir.", "Send {n}": "{n} gönder", "Edit {n}": "Düzenle {n}", "Delete {n}": "{n}'yi sil", "Both accounts captured all six expected observations in this example.": "Bu örnekte her iki hesap da beklenen altı gözlemin tamamını kaydetmiştir.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "B hesabı yine 6 mesajın 6'sını da yakaladı. İki makbuzun alınması daha uzun sürdü. Yakalama oranı ve makbuz gecikmesi farklı sorulara cevap verir.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Hesap B, son tarihe kadar 6 eylemden 5'ini yakaladı (%83,3). Eksik olan düzenleme için ölçülen bir gecikme yoktur. Bu sonuç yalnızca altı kontrollü eylemi açıklamaktadır.", "not observed by cutoff": "kesme tarihine kadar gözlemlenmemiştir", "{s} seconds": "{s} saniye", "Exact values follow in the table.": "Kesin değerler tabloda yer almaktadır.", "{s} s": "{s} s", "Not observed": "Gözlemlenmedi", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Dört sohbet, farklı gözlemler sunmaktadır. Her bağlantı için kaynak kayıtlarını takip edin; göndereni belirtilmemiş kanal gönderisini 71001 numaralı kullanıcıya atamayın.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "#146 ve #205 numaralı kayıtlar aynı gönderen kimliğini (71001) göstermektedir. Bu, iki sohbet üzerinden bir Telegram hesabının gözlemlenen gönderilerini birbirine bağlamaktadır. Bu bilgi, gerçek hayattaki bir kişiyi tanımlamaz veya kanal gönderisini bir kişiye atfetmez.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "pay.example.invalid/new adresi, grup kaydı #146, bot klavyesi #173, kanal düzenlemesi #188 ve özel mesaj #205'te geçmektedir. Tekrarlanan bir hedef, materyalleri birbirine bağlar; ancak bu, söz konusu hesapların ortak kontrol altında olduğunu kanıtlamaz.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Bu hayali vakada, tamamlanmış medya makbuzları #151 ve #209'un SHA-256 değerleri tamamen aynıdır. Gerçek baytları ve bunlara ait mesaj kayıtlarını karşılaştırın. Eşleşen dosya, yaratıcısını tanımlamaz veya kimin ilettiğini kanıtlamaz.", "the encrypted off-site copy": "şifrelenmiş, sunucu dışında tutulan kopya", "notifications": "bildirimler", "checkpoint hashes for timestamps": "zaman damgaları için kontrol noktası hash değerleri", "signed checkpoints for the witness": "tanık için imzalı kontrol noktaları", "Switched on in this example": "Bu örnekte etkinleştirilmiştir", "Optional · off by default": "İsteğe bağlı · varsayılan olarak kapalı", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Bu makineden ayrılırken: Telegram bağlantısı ve {list}. Başka hiçbir şey yok.", "Default: only the Telegram connection leaves this machine.": "Varsayılan ayar: Bu makineden yalnızca Telegram bağlantısı dışarıya çıkar.", "{done} of {total} done": "{done}/{total} tamamlandı", "Mark step {n} as done": "{n} numaralı adımı tamamlanmış olarak işaretle", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Metin", "Copied": "Kopyalandı", "Command copied.": "Komut kopyalandı.", "Selected — Ctrl/Cmd+C": "Seçildi — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Komut seçildi. Elle kopyalayın.", "Command copied to clipboard.": "Komut panoya kopyalandı.", "Select text": "Metni seç", "Clipboard unavailable. Command selected; copy it manually.": "Pano kullanılamıyor. Komut seçildi; manuel olarak kopyalayın.", "A message arrives. The first observation is saved.": "Bir mesaj gelir. İlk gözlem kaydedilir.", "The time changes. Both captured versions stay.": "Zaman değişir. Yakalanan her iki sürüm de kalır.", "The message disappears. The captured history remains.": "Mesaj kaybolur. Kaydedilen geçmiş kalır.", "Pause example animation": "Örnek animasyonu duraklat", "Play example animation": "Örnek animasyonu oynat", "Play": "Oynat", "Full-size workspace screenshot": "Çalışma alanının tam boyutlu ekran görüntüsü", "Workspace screenshot · fictional data": "Çalışma alanı ekran görüntüsü · hayali veriler", "Close": "Kapat", "Close screenshot": "Ekran görüntüsünü kapat", "Scrollable full-size screenshot": "Kaydırılabilir tam boyutlu ekran görüntüsü", "Enlarge: {name}": "Büyüt: {name}", "View full size": "Tam boyutta görüntüle"}</script>
+</body></html>

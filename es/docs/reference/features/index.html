@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="es" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Características y limitaciones | TgWitness</title>
+<meta name="description" content="Lo que TgWitness ofrece en la actualidad, las limitaciones de la plataforma Telegram y lo que queda por desarrollar en el futuro."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/features/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="Características y limitaciones | TgWitness"><meta property="og:description" content="Lo que TgWitness ofrece en la actualidad, las limitaciones de la plataforma Telegram y lo que queda por desarrollar en el futuro.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/es/docs/reference/features/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/features/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/features/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/features/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/features/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/features/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/features/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/features/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/features/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/es/docs/reference/features/", "url": "https://phishdestroy.github.io/TgWitness/es/docs/reference/features/", "name": "Características y limitaciones | TgWitness", "description": "Lo que TgWitness ofrece en la actualidad, las limitaciones de la plataforma Telegram y lo que queda por desarrollar en el futuro.", "inLanguage": "es", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://phishdestroy.github.io/TgWitness/es/"}, {"@type": "ListItem", "position": 2, "name": "Documentación", "item": "https://phishdestroy.github.io/TgWitness/es/docs/"}, {"@type": "ListItem", "position": 3, "name": "Referencia", "item": "https://phishdestroy.github.io/TgWitness/es/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Características y limitaciones", "item": "https://phishdestroy.github.io/TgWitness/es/docs/reference/features/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Ir al contenido</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Documentación</span></a>
+<nav aria-label="Guías"><a href="../../concepts/">Guía visual</a><a href="../../">Todas las guías</a><a href="../">Referencia</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Idioma"><span aria-hidden="true">◍</span> Español</summary><div class="lang-list"><a href="../../../../docs/reference/features/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/features/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/features/" hreflang="uk" lang="uk">Українська</a><a href="./" hreflang="es" lang="es" aria-current="true">Español</a><a href="../../../../pt/docs/reference/features/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/features/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/features/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/features/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/features/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/features/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/features/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/features/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/features/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Cambiar entre el tema claro y el oscuro"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Guías"><a href="../../../guides/modes.html">Modos, escenarios y niveles de evidencia</a><p class="nav-label">Primeros pasos</p><a href="../../start/">Empiece en cuestión de minutos</a><a href="../../accounts/">Conecte una cuenta</a><a href="../../proxies/">Elija un proxy</a><a href="../../exports/">Exportar y verificar</a><p class="nav-label">Comprender las pruebas</p><a href="../../concepts/">Vea cómo funciona el registro de pruebas</a><a href="../../cases/">Investigue en todos los chats</a><a href="../../security/">Mantenga la seguridad</a><p class="nav-label">Más información</p><a href="../../witness/">Configurar un bot de TgWitness</a><a href="../../server/">Manténgala en funcionamiento</a><a href="../../troubleshooting/">Averigüe qué ha fallado</a></nav><nav class="wiki-nav" aria-label="Referencia"><p class="nav-label"><a class="nav-label-link" href="../">Referencia</a></p><details class="wiki-group"><summary>Configuración</summary><a href="../quickstart/">Inicio rápido</a><a href="../accounts/">Formatos de cuentas y sesiones</a><a href="../connection/">Conexión, servidores proxy y protección de datos</a><a href="../deployment/">Implementación</a></details><details class="wiki-group" open><summary>Recopilar</summary><a href="../collection/">Cómo funciona la recopilación</a><a href="../operations/">Flujos de trabajo y operaciones</a><a href="../investigation/">Modo de investigación</a><a href="./" aria-current="page">Características y limitaciones</a></details><details class="wiki-group"><summary>Pruebas</summary><a href="../how-it-works/">Cómo funciona el registro de pruebas</a><a href="../evidence/">Formato de las pruebas</a><a href="../witness/">Testigo independiente</a><a href="../timestamp/">Marcas de tiempo</a></details><details class="wiki-group"><summary>Seguridad y proyecto</summary><a href="../security/">Seguridad y tratamiento de datos</a><a href="../architecture/">Arquitectura</a><a href="../verification/">Lo que se ha probado</a><a href="../license/">Aviso sobre incompatibilidades de licencia y arquitectura</a><a href="../notice/">Aviso de incompatibilidad con algunos operadores</a><a href="../changelog/">Registro de cambios</a></details></nav><p class="sidebar-note">v0.7.0<br>Código abierto · Se ejecuta en su equipo</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Guías"><a href="../../../">Inicio</a> <span aria-hidden="true">/</span> <a href="../../">Documentación</a> <span aria-hidden="true">/</span> <a href="../">Referencia</a> <span aria-hidden="true">/</span> <span aria-current="page">Características y limitaciones</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Buscar en la documentación</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Pruebe con «proxy», «cadena de hash», «token» o «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Búsqueda clara" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Escriba una palabra para buscar en las guías y en la documentación de referencia. La búsqueda se realiza en su navegador.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="language-notice">Algunas partes de esta página siguen estando en inglés: el original en inglés se modificó tras su traducción.</p><p class="eyebrow">Referencia / Recopilar</p><h1>Características y limitaciones</h1><p class="guide-outcome">Lo que TgWitness ofrece en la actualidad, las limitaciones de la plataforma Telegram y lo que queda por desarrollar en el futuro.</p><div class="wiki-body"><p>Referencia de diseño: 26 de octubre de 2026. El principal caso de uso son los grupos privados de Telegram
+y los canales a los que tienen acceso las cuentas conectadas. Este documento distingue entre
+el comportamiento implementado, los límites de la plataforma y el trabajo futuro. Un elemento de la arquitectura objetivo
+no implica que la función ya exista.</p>
+<h2 id="standalone-application">Aplicación independiente<a class="anchor" href="#standalone-application" aria-label="Enlace a esta sección">#</a></h2>
+<p>TgWitness cuenta con su propia instalación, su propio directorio de datos y su propio ciclo de vida de versiones. La interfaz web incluida
+se encarga de la configuración y la revisión; los registros exportados pueden utilizarse de forma independiente.</p>
+<p>El operador vincula sus cuentas, selecciona las fuentes visibles para cada una de ellas y obtiene
+un registro de observaciones guardado. El panel muestra el contenido, los cambios guardados, la
+procedencia de las observaciones y las lagunas conocidas. Otro investigador puede verificar el material exportado.</p>
+<p>Hay cuatro estados distintos que son relevantes: la autorización de la cuenta, el acceso a una fuente, un
+recopilador operativo y el grado en que se establece la integridad de la entrega. Ninguno de
+los tres primeros demuestra automáticamente el cuarto. Un grupo inactivo no es necesariamente
+un recopilador defectuoso.</p>
+<h2 id="optional-extras">Extras opcionales<a class="anchor" href="#optional-extras" aria-label="Enlace a esta sección">#</a></h2>
+<p>Everyday setup is account → sources → observation. <strong>Extras</strong> is a separate destination
+with two cards: a Telegram witness bot and planned
+GitHub build verification. Each states its availability and requirements before showing
+settings. Choosing a card opens instructions; it does not enroll or start a service.</p>
+<p>La configuración del bot consta de tres pasos: crear un acceso de solo lectura, seleccionar los ajustes de publicación y
+iniciar el bot en el servidor de TgWitness. Las opciones de red y publicación, las conexiones existentes y
+los comandos de verificación se facilitan bajo demanda. La configuración descargada es distinta
+de un «witness» en ejecución. Al cambiar de extras se conserva el borrador; los cambios en la cuenta y el bloqueo
+borran el token temporal y el formulario. La guía integrada incluye instrucciones de puesta en marcha.
+GitHub sigue siendo un plan marcado, sin formulario de credenciales ni estado de conexión simulado.</p>
+<h2 id="protocol-and-private-sources">Protocolo y fuentes privadas<a class="anchor" href="#protocol-and-private-sources" aria-label="Enlace a esta sección">#</a></h2>
+<p><strong>MTProto es el protocolo de Telegram; Telethon es la biblioteca de Python que utiliza TgWitness para
+comunicarse mediante MTProto.</strong> No se trata de métodos de conexión alternativos. La recopilación utiliza MTProto;
+el «witness» opcional publica comprobaciones firmadas a través de la API del bot.</p>
+<p>Cada espacio de trabajo cuenta con su propio cliente autorizado y su propio flujo de actualizaciones de la cuenta. TgWitness
+selecciona las observaciones de las fuentes configuradas y realiza solicitudes explícitas independientes
+para funciones como instantáneas del historial y descargas de archivos multimedia.</p>
+<p>Una fuente privada no necesita un nombre de usuario público. El tipo de par de Telegram y el identificador numérico son
+los identificadores; los títulos y los nombres de usuario pueden cambiar. El acceso depende de la
+afiliación y los permisos existentes. TgWitness no se une automáticamente a las fuentes ni elude
+la aprobación de la adhesión. Un hash de acceso procedente de otra cuenta no constituye un token de acceso universal.</p>
+<p>El modelo de recopilación debe tener en cuenta el historial oculto previo a la incorporación, los roles de los participantes y administradores,
+la revocación de sesiones, la eliminación o modificación de permisos, la migración de grupos a supergrupos,
+los temas y foros, las discusiones vinculadas, las identidades de los canales y los archivos adjuntos no disponibles.
+No todas las combinaciones se han validado en tiempo real.</p>
+<p>La visibilidad de la fuente se comprueba al iniciar el recopilador. La ausencia de una fuente en el resultado delimitado
+del diálogo significa que <strong>el acceso no está confirmado</strong>, no que se haya demostrado su eliminación. Una fuente no disponible
+no impide observar otras fuentes accesibles. Nunca incluya enlaces de invitación
+ni sesiones reales en elementos públicos.</p>
+<h2 id="multiple-accounts">Cuentas múltiples<a class="anchor" href="#multiple-accounts" aria-label="Enlace a esta sección">#</a></h2>
+<p>El panel admite un número ilimitado de <strong>espacios de trabajo</strong>, cada uno con sus propios:</p>
+<ul>
+<li>Autorización, almacén cifrado y ruta de conexión.</li>
+<li>Registro SQLite e identidad de firma Ed25519.</li>
+<li>Fuentes seleccionadas, cola de medios y ajustes de captura.</li>
+<li>Estado de observación, errores, puntos de control y exportaciones.</li>
+</ul>
+<p>Cambiar el espacio de trabajo visible no detiene a otro recopilador. Se rechaza la autorización de cuentas
+duplicadas entre espacios de trabajo. Un registro ya vinculado a una cuenta de Telegram
+no puede reasignarse a otra; sí se permite volver a conectar la misma cuenta.
+De este modo se preserva la identidad de la cuenta y el ámbito de los ID de mensajes pertinentes.</p>
+<p>No existe un número fijo ni se garantiza un rendimiento medido. Los espacios de trabajo comparten un
+proceso de Python y un bucle de eventos. La implementación de trabajadores de cuentas independientes sigue siendo una tarea pendiente. Para
+aislar los procesos actuales, utilice instalaciones, puertos y directorios de datos independientes.</p>
+<p>Asigne a cada cuenta las fuentes a las que pueda acceder. Diferentes cuentas pueden observar el mismo
+grupo, pero sus observaciones permanecen separadas y conservan su origen. Dos cuentas
+en un mismo equipo controlado por un operador no constituyen dos testigos independientes. Las exportaciones se realizan
+por espacio de trabajo; no se ha implementado la posibilidad de generar un paquete de caso fusionado ni una cronología global de Telegram.</p>
+<h2 id="capture-and-attribution">Captura y atribución<a class="anchor" href="#capture-and-attribution" aria-label="Enlace a esta sección">#</a></h2>
+<p>La sección «Fuentes» ofrece opciones por cuenta para mensajes nuevos, modificaciones, eliminaciones, reacciones
+y pertenencia a grupos. Los ajustes preestablecidos conservan todas las categorías o bien los mensajes, las modificaciones y las eliminaciones.
+La política se aplica a los grupos seleccionados del espacio de trabajo, se mantiene tras el reinicio y está firmada
+con los cambios anteriores y posteriores. Los valores predeterminados conservan todas las categorías. Desactivar una categoría
+no elimina los registros antiguos; volver a activarla no reconstruye los eventos omitidos.
+Los registros operativos, otros eventos del servicio de grupo y las instantáneas explícitas del historial son
+independientes. Los objetos de Telegram capturados pueden conservar metadatos incrustados independientemente de los
+parámetros de actualización independiente. Todavía no existen anulaciones de categorías por grupo.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Material</th>
+<th>Capturado ahora</th>
+<th>Límites</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mensaje</td>
+<td>Texto, identificadores de interlocutor/mensaje, metadatos del remitente, respuestas y sobre de actualización original</td>
+<td>El mensaje no cuenta con una firma de Telegram verificable públicamente.</td>
+</tr>
+<tr>
+<td>Editar</td>
+<td>Nueva versión observada y cualquier versión guardada anteriormente</td>
+<td>Las modificaciones realizadas durante el tiempo de inactividad pueden perderse; el remitente no es necesariamente quien realiza la edición.</td>
+</tr>
+<tr>
+<td>Eliminación</td>
+<td>Notificación y contenido capturado previamente, si lo hubiera</td>
+<td>Por lo general, no se indica quién ha eliminado el mensaje ni la hora exacta de la acción.</td>
+</tr>
+<tr>
+<td>Eliminación sin alcance</td>
+<td>Notificación original a nivel de cuenta sin especular sobre el interlocutor</td>
+<td>La correlación estricta con los identificadores (ID) correspondientes a cuentas guardados previamente es una tarea pendiente.</td>
+</tr>
+<tr>
+<td>Reacción</td>
+<td>Contadores de mensajes enviados e identidades recientes visibles</td>
+<td>Para obtener una lista completa de los reactores disponibles es necesario realizar consultas por separado; los canales pueden ocultar identidades.</td>
+</tr>
+<tr>
+<td>Afiliación</td>
+<td>Mensajes de servicio y actualizaciones enviadas a los participantes</td>
+<td>La visibilidad depende del rol y del tipo de chat; la ausencia de eventos no implica que no se hayan producido.</td>
+</tr>
+<tr>
+<td>Acciones de administración</td>
+<td>Solo se incluyen las actualizaciones relevantes que se hayan publicado.</td>
+<td>No se ha implementado la consulta independiente del registro de administración.</td>
+</tr>
+<tr>
+<td>Archivo adjunto</td>
+<td>Descriptor de la versión original, bytes descargados/SHA-256 y resultados de los intentos</td>
+<td>Un archivo eliminado puede ser irrecuperable; la última versión no se sustituye.</td>
+</tr>
+<tr>
+<td>Historia</td>
+<td>Captura de pantalla explícita de los mensajes visibles en ese momento</td>
+<td>No reconstruye todas las modificaciones ni el contenido eliminado.</td>
+</tr>
+<tr>
+<td>Proceso de recopilación</td>
+<td>Inicio/parada, señal de actividad, errores, configuración, alcance y recepción de programas</td>
+<td>Autodeclaración, no certificación independiente del proceso</td>
+</tr>
+</tbody>
+</table></div>
+<p>Una acción se atribuye a una persona únicamente si la fuente indica efectivamente quién es el autor.
+De lo contrario, la interfaz señala la falta de atribución. Los nombres de usuario y los nombres propios son
+atributos observados, no una prueba de identidad en el mundo real.</p>
+<h2 id="capacity-and-telegram-limits">Capacidad y límites de Telegram<a class="anchor" href="#capacity-and-telegram-limits" aria-label="Enlace a esta sección">#</a></h2>
+<p>No existe un número universal de chats que puedan supervisarse con calidad garantizada.
+La capacidad depende de los picos de eventos por segundo, el volumen y el tamaño de los archivos adjuntos, los
+RPC adicionales, las cuentas activas, la latencia del disco y el espacio libre, las condiciones de la red, los límites de Telegram,
+el retraso aceptable y la profundidad de la cola.</p>
+<p>Telegram distingue entre la entrega pasiva y el sondeo activo breve. Su documentación de actualización
+describe llamadas <code>updates.getChannelDifference</code> adicionales para canales abiertos
+y supergrupos, y recomienda un máximo de <strong>diez fuentes sometidas a sondeo activo breve
+simultáneamente</strong>. Esto no supone un límite de diez grupos seleccionados ni una garantía de exhaustividad.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Modo</th>
+<th>Objetivo</th>
+<th>Estado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Observación estándar</td>
+<td>Registre las actualizaciones recibidas de fuentes seleccionadas</td>
+<td>Implementado</td>
+</tr>
+<tr>
+<td>Observación prioritaria</td>
+<td>Comprobaciones adicionales de diferencias para un conjunto de fuentes delimitado</td>
+<td>No se ha implementado como modo de usuario</td>
+</tr>
+</tbody>
+</table></div>
+<p>Las consultas arbitrarias de alta frecuencia, que ignoren FloodWait o asuman una capacidad lineal
+procedente de cuentas adicionales, no constituyen un modelo de dimensionamiento válido. Los límites predeterminados son los
+primeros 1.000 diálogos de la lista, hasta 500 mensajes por instantánea del historial,
+entre 1 y 2.000 MiB por archivo recopilado según el tipo, y 4 GiB de contenido ZIP firmado sin comprimir; cada uno
+de estos valores se modifica por espacio de trabajo en <strong>«Parámetros</strong>». Las exportaciones no tienen un límite fijo de recuento de eventos.
+El modo alternativo del navegador está limitado a 128 MiB de forma predeterminada; la CLI de transmisión tiene un
+límite de transferencia configurable, de 5 GiB de forma predeterminada.</p>
+<p><code>tools/check_capacity.py</code> mide la ingesta y exportación sintéticas a nivel local. Sus resultados
+no constituyen mediciones de entrega de Telegram ni un recuento garantizado de conversaciones reales. Consulte
+<a href="../verification/">VERIFICATION.md</a> para conocer la versión medida y la carga de trabajo.</p>
+<h2 id="reliability-and-recovery">Fiabilidad y recuperación<a class="anchor" href="#reliability-and-recovery" aria-label="Enlace a esta sección">#</a></h2>
+<p>Entre los comportamientos implementados se incluyen transacciones WAL/sincrónicas de SQLite;
+escrituras atómicas de mensajes y tareas multimedia; tareas persistentes y retrasos en los reintentos; descriptores de la versión original;
+reintentos limitados; FloodWait de archivos multimedia persistentes; descargas de archivos multimedia fuera de la
+espera de red del evento de texto; exportaciones con prefijo estable mientras continúan las escrituras posteriores; ajustes atómicos y
+registros de auditoría; conservación de la autorización de trabajo tras un fallo en el inicio de sesión de sustitución;
+aislamiento de un espacio de trabajo adicional dañado; intentos explícitos de reconexión; informes diferenciados
+de pérdida de autorización; y detección de cambios en el reloj real mediante un reloj monótono.</p>
+<p>Los puntos pts, qts y seq de las cuentas y los canales se guardan y se recuperan tras un reinicio, y los chats observados
+se vuelven a comprobar periódicamente; véase <a href="../evidence/#durable-collection-and-process-receipts-02">el formato de las pruebas</a>. Guardar la posición
+periódicamente no constituye una confirmación atómica y sin pérdidas de la aceptación del registro.</p>
+<p>Cada inicio de proceso registra el encabezado anterior y el límite fuera de línea. El historial actual
+no se trata como una reparación de lagunas. La retención de diferencias de Telegram es finita;
+<code>differenceTooLong</code> no puede reconstruir todo el contenido desaparecido. Las lagunas irrecuperables deben
+permanecer explícitas incluso si una instantánea posterior del historial tiene éxito.</p>
+<h2 id="evidence-model">Modelo de pruebas<a class="anchor" href="#evidence-model" aria-label="Enlace a esta sección">#</a></h2>
+<p>Cada evento registra una secuencia, la hora de observación local en UTC, la hora de origen (cuando se facilite),
+el tipo, la fuente, el autor (cuando se facilite), la carga útil original, el hash anterior y la firma.
+Las observaciones de mensajes también conservan la cuenta del recopilador y el contexto de ejecución.</p>
+<p>El recibo de proceso firmado contiene un identificador de ejecución aleatorio; las versiones de TgWitness/Python/OS y sus
+dependencias; los valores SHA-256 de los archivos fuente y la huella digital agregada; la cuenta inicial,
+el ámbito y la configuración; lecturas UTC/monotónicas; y el encabezado del registro anterior.
+Los cambios en la configuración, el inicio y la detención, así como los errores, se registran en el mismo registro. Los puntos de control se
+conservan al inicio, cada cinco minutos durante la observación (parámetro modificable) y al detener la herramienta de forma ordenada.
+Un punto de control local conservado permite detectar una reversión a un prefijo de registro anterior.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Mecanismo</th>
+<th>Qué establece</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SHA-256 del archivo</td>
+<td>Los bytes coinciden con un resumen conocido</td>
+</tr>
+<tr>
+<td>Cadena de hash de eventos</td>
+<td>Ordenación y vinculación de registros en relación con un límite conocido</td>
+</tr>
+<tr>
+<td>Ed25519</td>
+<td>Firma con una clave concreta</td>
+</tr>
+<tr>
+<td>Punto de control conservado de forma independiente</td>
+<td>El material posterior se ajusta a los límites establecidos.</td>
+</tr>
+<tr>
+<td>Análisis del archivo del programa</td>
+<td>Informe del propio recopilador sobre los archivos analizados</td>
+</tr>
+<tr>
+<td>Respuesta válida e independiente de la TSA</td>
+<td>Existencia de bytes concretos en el momento TSA bajo supuestos de confianza explícitos</td>
+</tr>
+</tbody>
+</table></div>
+<p>Se han implementado la preparación de solicitudes según el RFC 3161 y la verificación de respuestas mediante OpenSSL.
+El envío automático no está implementado. Una solicitud o una firma local que incluya la
+hora del equipo no constituye una marca de tiempo independiente. Véase <a href="../timestamp/">TIMESTAMP.md</a>.</p>
+<p>Un operador que controle el colector y la clave de firma puede falsificar nuevas
+observaciones firmadas. Las firmas no establecen el origen en Telegram, la veracidad ni la
+admisibilidad jurídica automática. Para garantizar una custodia más sólida, se requiere un almacenamiento independiente con puntos de control y registro temporal,
+controles de acceso a las claves, registros de transferencia y verificación mediante software de confianza.</p>
+<h2 id="export-deployment-and-handoff">Exportación, implementación y traspaso<a class="anchor" href="#export-deployment-and-handoff" aria-label="Enlace a esta sección">#</a></h2>
+<p>Un archivo ZIP firmado contiene los archivos originales en formato JSONL, CSV y HTML, los archivos adjuntos conservados, los hash, un
+manifiesto firmado y un verificador de conveniencia. Abarca un espacio de trabajo y un prefijo fijo para el
+registro completo. Los filtros de búsqueda del panel no eliminan registros de forma silenciosa. Se excluyen las claves secretas,
+los tokens y las sesiones de Telegram; las observaciones originales pueden seguir conteniendo
+información personal y metadatos de Telegram.</p>
+<p>Conserve por separado el resumen ZIP, la huella digital de confianza, el punto de control, el acuse de recibo del proceso y el registro de traspaso.
+Utilice un verificador procedente de una instalación de confianza, en lugar de confiar
+en el código ejecutable únicamente porque aparece en el archivo ZIP examinado.</p>
+<p>La interfaz del navegador se distribuye localmente sin necesidad de Node.js, CDN ni fuentes externas. Un
+token de operador controla la instalación. El acceso remoto requiere HTTPS o un túnel SSH.
+Se proporcionan definiciones nativas en Python y de contenedores, con ejemplos de servicios en
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">la carpeta «deploy/»</a>; las comprobaciones de plataforma ejecutadas se enumeran por separado.</p>
+<p>El espacio de trabajo predeterminado utiliza la raíz de datos; los espacios de trabajo adicionales utilizan <code>profiles/&lt;id&gt;/</code>.
+La copia de seguridad requiere que el proceso esté detenido y que se disponga del conjunto completo de datos y claves. Los archivos ZIP de pruebas
+no son copias de seguridad de la aplicación. Secrets puede utilizar una clave maestra externa para un nuevo
+directorio de datos; el cifrado del registro y los archivos multimedia lo proporciona el disco o volumen del operador.
+Consulte <a href="../connection/">CONNECTION-SECURITY.md</a> y <a href="../operations/">OPERATIONS.md</a>.</p>
+<h2 id="stable-release-criteria">Criterios de lanzamiento de la versión estable<a class="anchor" href="#stable-release-criteria" aria-label="Enlace a esta sección">#</a></h2>
+<p>Antes de una versión estable, especifique:</p>
+<ol>
+<li>Grupos privados reales, supergrupos, foros y canales con roles de miembro/administrador y
+    historial oculto/visible, incluyendo inicio de sesión/autenticación de dos factores (2FA), revocación y pérdida de acceso.</li>
+<li>Se controlan las modificaciones, las eliminaciones, las reacciones, la pertenencia a grupos y los archivos multimedia en relación con acciones conocidas.</li>
+<li>Fallos del proceso o del servidor, fallos del disco o disco lleno, referencias a archivos caducados, FloodWait,
+    pérdida de conexión, archivos dañados y reversión de la base de datos.</li>
+<li>Uso continuado de múltiples cuentas con retrasos, colas, memoria y disco controlados, incluyendo
+    fuentes silenciosas y ruidosas de forma conjunta.</li>
+<li>Interrupción entre el avance del estado de MTProto y la aceptación del registro.</li>
+<li>Instalación limpia en la matriz de sistemas operativos y contenedores prevista, y restauración de copias de seguridad verificada.</li>
+<li>Revisión independiente de la seguridad, las firmas y las afirmaciones relativas a la atribución y las pruebas.</li>
+</ol>
+<p>La consulta del registro de administración, las listas de reactores adicionales, la consulta prioritaria, los trabajadores independientes,
+el cifrado en toda la aplicación y los roles de usuario siguen siendo tareas pendientes. La versión 0.6 es compatible
+con el TData de una sola cuenta delimitada y la importación de archivos de cuenta descritos en <a href="../accounts/">ACCOUNTS.md</a>.
+Revise los términos de la API de Telegram antes de la publicación. Las referencias de investigación y los
+resultados sobre la plataforma se encuentran en <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/RESEARCH.md">RESEARCH.md</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/PRODUCT.md">Edite esta página en GitHub ↗</a><a class="next-guide" href="../how-it-works/"><span>Siguiente paso</span><strong>Cómo funciona el registro de pruebas →</strong></a><p>Estas guías describen la implementación actual. Los resultados de la validación y las deficiencias pendientes se documentan por separado. <a href="../verification/">Lo que se ha probado →</a></p></footer>
+</main>
+<aside class="toc" aria-label="En esta página"><p class="nav-label">En esta página</p><a href="#standalone-application">Aplicación independiente</a><a href="#optional-extras">Extras opcionales</a><a href="#protocol-and-private-sources">Protocolo y fuentes privadas</a><a href="#multiple-accounts">Cuentas múltiples</a><a href="#capture-and-attribution">Captura y atribución</a><a href="#capacity-and-telegram-limits">Capacidad y límites de Telegram</a><a href="#reliability-and-recovery">Fiabilidad y recuperación</a><a href="#evidence-model">Modelo de pruebas</a><a href="#export-deployment-and-handoff">Exportación, implementación y traspaso</a><a href="#stable-release-criteria">Criterios de lanzamiento de la versión estable</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Código abierto · Se ejecuta en su equipo</span><a href="../../../../LICENSE">Licencia MIT</a><a href="../notice/">Aviso del operador</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Seguridad</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "A la espera de un mensaje", "Step through a fictional send, edit and delete.": "Siga paso a paso un proceso ficticio de envío, edición y eliminación.", "No observations yet. Start the sequence or advance one event.": "Aún no hay observaciones. Inicie la secuencia o avance un evento.", "Meet at 10:00": "Nos vemos a las 10:00", "A new message is visible in the chat.": "Aparece un nuevo mensaje en el chat.", "Record 1 appended: the collector observed the original message.": "Se adjunta el registro n.º 1: el recopilador ha observado el mensaje original.", "Meet at 11:00": "Nos vemos a las 11:00", "The current text changes. The earlier observation stays.": "El texto actual cambia. La observación anterior se mantiene.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Se ha añadido el registro 2: la modificación constituye una nueva observación. El registro 1 sigue conteniendo el texto original.", "Message deleted": "Mensaje eliminado", "The message has disappeared from the chat view.": "El mensaje ha desaparecido de la vista del chat.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Se adjunta el registro n.º 3: el aviso de eliminación se conserva junto con ambas versiones observadas.", "0 records": "0 registros", "1 record": "1 registro", "2 records": "2 registros", "3 records": "3 registros", "Complete / {n} of 3": "Completo / {n} de 3", "Step / {n} of 3": "Paso / {n} de 3", "Pause": "Pausa", "Replay sequence": "Secuencia de reproducción", "Play sequence": "Secuencia de reproducción", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "El ejemplo estático está disponible. Para calcular los hash de forma interactiva, abra esta página a través de HTTPS o en una vista previa en localhost con soporte para Web Crypto.", "No record supplied": "No se ha facilitado ningún registro", "Tail removed": "Se ha eliminado la cola", "≠ saved hash": "≠ hash guardado", "Rebuilt · different hash": "Reconstruido · hash diferente", "= saved hash": "= hash guardado", "Same length and matching head.": "Misma extensión y encabezado a juego.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Los tres hash calculados coinciden con los hash guardados. Esta muestra se ajusta al límite de tres registros conservados.", "Same saved head; the journal prefix fails verification.": "Se ha guardado el mismo encabezado; el prefijo del registro no supera la verificación.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "El registro n.º 2 ya no coincide con su hash guardado. Si solo se comprobara el último registro almacenado, esto pasaría desapercibido; el verificador comprueba todos los registros.", "Head differs from the retained checkpoint.": "El encabezado difiere del punto de control conservado.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Los hash reconstruidos se enlazan entre sí, pero el encabezado final ha cambiado. El punto de control conservado rechaza este historial. Las firmas originales también fallarían en los registros modificados.", "Too short: 2 supplied records \u003c 3 retained records.": "Demasiado breve: 2 registros facilitados \u003c 3 registros conservados.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Los dos hash restantes siguen coincidiendo. El punto de control conservado revela la parte final que falta. Sin ese límite anterior, este prefijo más corto por sí solo no revelaría la omisión.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "El cálculo de hash no está disponible en este navegador. Las fórmulas y la explicación estática que figuran a continuación siguen estando disponibles.", "{n} records": "{n} registros", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Aceptado: el recuento aumenta, la firma se verifica y la clave coincide. El testigo conserva este nuevo límite.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Reversión: la respuesta firmada indica un número de registros inferior al del último punto de control aceptado. El sistema registra el problema y mantiene el límite aceptado anteriormente.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Bifurcación: el recuento no ha variado, pero la punta difiere. El testigo registra el desacuerdo y mantiene el límite aceptado anteriormente.", "No answer": "Sin respuesta", "boundary unknown": "límite desconocido", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Sin respuesta: el «witness» registra el fallo en la comprobación. No puede determinar el estado actual del recopilador. Si el «witness» sigue pudiendo acceder a la API del bot y su política de publicación lo permite, puede publicar dicho fallo.", "Send {n}": "Enviar {n}", "Edit {n}": "Editar {n}", "Delete {n}": "Eliminar {n}", "Both accounts captured all six expected observations in this example.": "Ambas cuentas han recogido las seis observaciones previstas en este ejemplo.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "La cuenta B volvió a capturar 6 de 6. Dos recibos tardaron más en aparecer. La tasa de captura y el retraso en la recepción de los recibos responden a cuestiones diferentes.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "La cuenta B capturó 5 de 6 antes del plazo límite (83,3 %). La edición que falta no presenta ningún retraso medido. Este resultado solo describe las seis acciones controladas.", "not observed by cutoff": "No se ha respetado el límite de caracteres.", "{s} seconds": "{s} segundos", "Exact values follow in the table.": "Los valores exactos figuran en la tabla.", "{s} s": "{s} s", "Not observed": "No se ha observado", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Cuatro chats aportan observaciones diferentes. Siga los registros originales de cada conexión; no asigne la publicación del canal al usuario 71001 sin un remitente identificado.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Los registros n.º 146 y n.º 205 presentan el mismo identificador de remitente, 71001. Esto permite relacionar las publicaciones observadas de una cuenta de Telegram en dos chats diferentes. No identifica a ninguna persona del mundo real ni atribuye la publicación al canal.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "La dirección de destino pay.example.invalid/new aparece en el registro del grupo n.º 146, en el teclado del bot n.º 173, en la edición del canal n.º 188 y en el mensaje privado n.º 205. Una dirección de destino repetida vincula el material; ello no demuestra que exista un control común de dichas cuentas.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Los recibos multimedia completados n.º 151 y n.º 209 presentan valores SHA-256 completos idénticos en este caso ficticio. Compare los bytes reales y sus registros de mensajes asociados. El archivo coincidente no identifica a su creador ni demuestra quién lo reenvió.", "the encrypted off-site copy": "la copia cifrada almacenada externamente", "notifications": "notificaciones", "checkpoint hashes for timestamps": "Hashes de puntos de control para marcas de tiempo", "signed checkpoints for the witness": "puntos de control firmados para TgWitness", "Switched on in this example": "Activado en este ejemplo", "Optional · off by default": "Opcional · desactivado por defecto", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Al salir de este equipo: la conexión a Telegram y {list}. Nada más.", "Default: only the Telegram connection leaves this machine.": "Por defecto: solo la conexión a Telegram sale de este equipo.", "{done} of {total} done": "{done} de {total} completado", "Mark step {n} as done": "Marcar el paso {n} como completado", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Texto", "Copied": "Copiado", "Command copied.": "Comando copiado.", "Selected — Ctrl/Cmd+C": "Seleccionado — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Comando seleccionado. Cópielo manualmente.", "Command copied to clipboard.": "Comando copiado en el portapapeles.", "Select text": "Seleccionar texto", "Clipboard unavailable. Command selected; copy it manually.": "El portapapeles no está disponible. Se ha seleccionado el comando; cópielo manualmente.", "A message arrives. The first observation is saved.": "Llega un mensaje. Se guarda la primera observación.", "The time changes. Both captured versions stay.": "La hora cambia. Ambas versiones capturadas se conservan.", "The message disappears. The captured history remains.": "El mensaje desaparece. El historial capturado permanece.", "Pause example animation": "Pausar la animación de ejemplo", "Play example animation": "Reproduzca la animación de ejemplo", "Play": "Reproducir", "Full-size workspace screenshot": "Captura de pantalla a pantalla completa del espacio de trabajo", "Workspace screenshot · fictional data": "Captura de pantalla del espacio de trabajo · datos ficticios", "Close": "Cerrar", "Close screenshot": "Cerrar captura de pantalla", "Scrollable full-size screenshot": "Captura de pantalla a tamaño completo con desplazamiento", "Enlarge: {name}": "Ampliar: {name}", "View full size": "Ver a tamaño completo"}</script>
+</body></html>

@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="ru" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Работа и обслуживание | TgWitness</title>
+<meta name="description" content="Ежедневная эксплуатация панели управления: режимы работы, категории мониторинга, параметры, уведомления, экспорт данных, резервное копирование и емкость хранилища."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Работа и обслуживание | TgWitness"><meta property="og:description" content="Ежедневная эксплуатация панели управления: режимы работы, категории мониторинга, параметры, уведомления, экспорт данных, резервное копирование и емкость хранилища.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/operations/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/operations/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/operations/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/operations/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/operations/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/operations/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/operations/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/operations/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/operations/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/", "url": "https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/", "name": "Работа и обслуживание | TgWitness", "description": "Ежедневная эксплуатация панели управления: режимы работы, категории мониторинга, параметры, уведомления, экспорт данных, резервное копирование и емкость хранилища.", "inLanguage": "ru", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://phishdestroy.github.io/TgWitness/ru/"}, {"@type": "ListItem", "position": 2, "name": "Документация", "item": "https://phishdestroy.github.io/TgWitness/ru/docs/"}, {"@type": "ListItem", "position": 3, "name": "Справочник", "item": "https://phishdestroy.github.io/TgWitness/ru/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Работа и обслуживание", "item": "https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Перейти к содержанию</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Документация</span></a>
+<nav aria-label="Руководства"><a href="../../concepts/">Наглядное руководство</a><a href="../../">Все руководства</a><a href="../">Справочник</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Язык"><span aria-hidden="true">◍</span> Русский</summary><div class="lang-list"><a href="../../../../docs/reference/operations/" hreflang="en" lang="en">English</a><a href="./" hreflang="ru" lang="ru" aria-current="true">Русский</a><a href="../../../../uk/docs/reference/operations/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/operations/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/operations/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/operations/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/operations/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/operations/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/operations/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/operations/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/operations/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/operations/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/operations/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Переключить светлую и тёмную тему"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Руководства"><a href="../../../guides/modes.html">Режимы, сценарии и уровни доказательства</a><p class="nav-label">Первые шаги</p><a href="../../start/">Запуск за несколько минут</a><a href="../../accounts/">Подключение аккаунта</a><a href="../../proxies/">Выбор прокси</a><a href="../../exports/">Экспорт и проверка</a><p class="nav-label">Разобраться в доказательствах</p><a href="../../concepts/">Как устроены доказательства</a><a href="../../cases/">Расследование по всем чатам</a><a href="../../security/">Безопасность установки</a><p class="nav-label">Дальше</p><a href="../../witness/">Бот-свидетель</a><a href="../../server/">Постоянная работа на сервере</a><a href="../../troubleshooting/">Поиск неисправностей</a></nav><nav class="wiki-nav" aria-label="Справочник"><p class="nav-label"><a class="nav-label-link" href="../">Справочник</a></p><details class="wiki-group"><summary>Установка</summary><a href="../quickstart/">Быстрый старт</a><a href="../accounts/">Аккаунты и форматы сессий</a><a href="../connection/">Подключение, прокси и защита данных</a><a href="../deployment/">Развёртывание</a></details><details class="wiki-group" open><summary>Сбор</summary><a href="../collection/">Как устроен сбор</a><a href="./" aria-current="page">Работа и обслуживание</a><a href="../investigation/">Режим расследования</a><a href="../features/">Возможности и ограничения</a></details><details class="wiki-group"><summary>Доказательства</summary><a href="../how-it-works/">Как устроены доказательства</a><a href="../evidence/">Формат доказательств</a><a href="../witness/">Независимый свидетель</a><a href="../timestamp/">Метки времени</a></details><details class="wiki-group"><summary>Безопасность и проект</summary><a href="../security/">Безопасность и обращение с данными</a><a href="../architecture/">Архитектура</a><a href="../verification/">Что проверено</a><a href="../license/">Уведомление о несовместимости лицензий и архитектуры</a><a href="../notice/">Уведомление о несовместимости с операторами</a><a href="../changelog/">Список изменений</a></details></nav><p class="sidebar-note">v0.7.0<br>Открытый исходный код · Работает на вашем компьютере</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Руководства"><a href="../../../">Главная</a> <span aria-hidden="true">/</span> <a href="../../">Документация</a> <span aria-hidden="true">/</span> <a href="../">Справочник</a> <span aria-hidden="true">/</span> <span aria-current="page">Работа и обслуживание</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Поиск по документации</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Попробуйте «прокси», «цепочку хешей», «токен» или «свидетель»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Очистить поиск" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Введите слово для поиска в руководствах и справочнике. Результаты поиска остаются в вашем браузере.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Справочник / Сбор</p><h1>Работа и обслуживание</h1><p class="guide-outcome">Ежедневная эксплуатация панели управления: режимы работы, категории мониторинга, параметры, уведомления, экспорт данных, резервное копирование и емкость хранилища.</p><div class="wiki-body"><p>При первом подключении используйте <a href="../accounts/">учетные записи и форматы сеансов</a>.
+Объяснение понятий «сохраненные версии», «политики событий» и «пробелы» см. в разделе
+<a href="../collection/">«Как работает сбор данных</a>». В данном руководстве рассматриваются вопросы повседневной эксплуатации и восстановления данных.</p>
+<h2 id="operator-workflow">Рабочий процесс оператора<a class="anchor" href="#operator-workflow" aria-label="Ссылка на раздел">#</a></h2>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 691 470" width="691" height="470" role="img" aria-labelledby="flow-2-title flow-2-desc"><title id="flow-2-title">Блок-схема</title><desc id="flow-2-desc">Выберите тип хранения и способ защиты ключей → Откройте панель с помощью токена; Откройте панель с помощью токена → Выберите рабочую область; Выберите рабочую область → Настройка прямого или прокси-маршрута; Настройка прямого или прокси-маршрута → Введите номер телефона или выберите файлы / QR-код; Введите номер телефона или выберите файлы / QR-код → Проверьте личность владельца аккаунта и выберите доступные группы; Проверьте личность владельца аккаунта и выберите доступные группы → Сохраните политики событий и вложений, после чего начните наблюдение; Сохраните политики событий и вложений, после чего начните наблюдение → Мониторинг ошибок, доступа, очередей и дискового пространства; Мониторинг ошибок, доступа, очередей и дискового пространства → Сохранение независимых контрольных точек; Сохранение независимых контрольных точек → Экспорт и проверка материалов</desc><defs><marker id="flow-2-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M209.8 37.0C241.4 37.0 241.4 37.0 273.1 37.0" marker-end="url(#flow-2-arrow)" style="--i:0;--len:63" pathLength="63"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M209.8 37.0C241.4 37.0 241.4 37.0 273.1 37.0"/></circle><path class="flow-edge" d="M418.4 37.0C460.3 37.0 460.3 37.0 502.3 37.0" marker-end="url(#flow-2-arrow)" style="--i:1;--len:84" pathLength="84"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M418.4 37.0C460.3 37.0 460.3 37.0 502.3 37.0"/></circle><path class="flow-edge" d="M571.5 66.0C571.5 100.0 571.5 100.0 571.5 134.0" marker-end="url(#flow-2-arrow)" style="--i:2;--len:68" pathLength="68"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M571.5 66.0C571.5 100.0 571.5 100.0 571.5 134.0"/></circle><path class="flow-edge" d="M485.1 163.0C460.3 163.0 460.3 163.0 435.6 163.0" marker-end="url(#flow-2-arrow)" style="--i:3;--len:49" pathLength="49"/><circle class="flow-pulse" r="3.2" style="--i:3"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M485.1 163.0C460.3 163.0 460.3 163.0 435.6 163.0"/></circle><path class="flow-edge" d="M255.8 163.0C229.4 163.0 229.4 163.0 202.9 163.0" marker-end="url(#flow-2-arrow)" style="--i:4;--len:53" pathLength="53"/><circle class="flow-pulse" r="3.2" style="--i:4"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M255.8 163.0C229.4 163.0 229.4 163.0 202.9 163.0"/></circle><path class="flow-edge" d="M119.9 210.0C119.9 235.0 119.9 235.0 119.9 260.0" marker-end="url(#flow-2-arrow)" style="--i:5;--len:50" pathLength="50"/><circle class="flow-pulse" r="3.2" style="--i:5"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M119.9 210.0C119.9 235.0 119.9 235.0 119.9 260.0"/></circle><path class="flow-edge" d="M199.4 307.0C227.6 307.0 227.6 307.0 255.8 307.0" marker-end="url(#flow-2-arrow)" style="--i:6;--len:56" pathLength="56"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M199.4 307.0C227.6 307.0 227.6 307.0 255.8 307.0"/></circle><path class="flow-edge" d="M435.6 307.0C458.6 307.0 458.6 307.0 481.6 307.0" marker-end="url(#flow-2-arrow)" style="--i:7;--len:46" pathLength="46"/><circle class="flow-pulse" r="3.2" style="--i:7"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M435.6 307.0C458.6 307.0 458.6 307.0 481.6 307.0"/></circle><path class="flow-edge" d="M571.5 336.0C571.5 370.0 571.5 370.0 571.5 404.0" marker-end="url(#flow-2-arrow)" style="--i:8;--len:68" pathLength="68"/><circle class="flow-pulse" r="3.2" style="--i:8"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M571.5 336.0C571.5 370.0 571.5 370.0 571.5 404.0"/></circle><g class="flow-node" style="--i:0"><rect x="30.0" y="8.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="28.0">Выберите тип хранения</tspan><tspan x="119.9" y="46.0">и способ защиты ключей</tspan></text></g><g class="flow-node" style="--i:1"><rect x="273.1" y="8.0" width="145.3" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="28.0">Откройте панель с</tspan><tspan x="345.7" y="46.0">помощью токена</tspan></text></g><g class="flow-node" style="--i:2"><rect x="502.3" y="8.0" width="138.4" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="28.0">Выберите рабочую</tspan><tspan x="571.5" y="46.0">область</tspan></text></g><g class="flow-node" style="--i:3"><rect x="485.1" y="134.0" width="172.9" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="154.0">Настройка прямого или</tspan><tspan x="571.5" y="172.0">прокси-маршрута</tspan></text></g><g class="flow-node" style="--i:4"><rect x="255.8" y="125.0" width="179.8" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="145.0">Введите номер телефона</tspan><tspan x="345.7" y="163.0">или выберите файлы /</tspan><tspan x="345.7" y="181.0">QR-код</tspan></text></g><g class="flow-node" style="--i:5"><rect x="36.9" y="116.0" width="166.0" height="94.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="136.0">Проверьте личность</tspan><tspan x="119.9" y="154.0">владельца аккаунта и</tspan><tspan x="119.9" y="172.0">выберите доступные</tspan><tspan x="119.9" y="190.0">группы</tspan></text></g><g class="flow-node" style="--i:6"><rect x="40.4" y="260.0" width="159.1" height="94.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="280.0">Сохраните политики</tspan><tspan x="119.9" y="298.0">событий и вложений,</tspan><tspan x="119.9" y="316.0">после чего начните</tspan><tspan x="119.9" y="334.0">наблюдение</tspan></text></g><g class="flow-node" style="--i:7"><rect x="255.8" y="269.0" width="179.8" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="289.0">Мониторинг ошибок,</tspan><tspan x="345.7" y="307.0">доступа, очередей и</tspan><tspan x="345.7" y="325.0">дискового пространства</tspan></text></g><g class="flow-node" style="--i:8"><rect x="481.6" y="278.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="298.0">Сохранение независимых</tspan><tspan x="571.5" y="316.0">контрольных точек</tspan></text></g><g class="flow-node" style="--i:9"><rect x="495.4" y="404.0" width="152.2" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="424.0">Экспорт и проверка</tspan><tspan x="571.5" y="442.0">материалов</tspan></text></g></svg></div><details class="flow-steps"><summary>Схема в текстовом формате</summary><ol><li>Выберите тип хранения и способ защиты ключей → Откройте панель с помощью токена</li><li>Откройте панель с помощью токена → Выберите рабочую область</li><li>Выберите рабочую область → Настройка прямого или прокси-маршрута</li><li>Настройка прямого или прокси-маршрута → Введите номер телефона или выберите файлы / QR-код</li><li>Введите номер телефона или выберите файлы / QR-код → Проверьте личность владельца аккаунта и выберите доступные группы</li><li>Проверьте личность владельца аккаунта и выберите доступные группы → Сохраните политики событий и вложений, после чего начните наблюдение</li><li>Сохраните политики событий и вложений, после чего начните наблюдение → Мониторинг ошибок, доступа, очередей и дискового пространства</li><li>Мониторинг ошибок, доступа, очередей и дискового пространства → Сохранение независимых контрольных точек</li><li>Сохранение независимых контрольных точек → Экспорт и проверка материалов</li></ol></details></figure>
+<p>Авторизация, транспортная связь, доступ к группе и полнота
+доставки являются разными свойствами. Зелёный статус соединения не означает, что все
+события были зафиксированы.</p>
+<h2 id="modes">Режимы работы<a class="anchor" href="#modes" aria-label="Ссылка на раздел">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Режим</th>
+<th>Действие</th>
+<th>Поведение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Демонстрационная версия</td>
+<td>scripts\Demo.cmd или <code>--demo</code></td>
+<td>Синтетические данные; подключение к реальным аккаунтам отключено</td>
+</tr>
+<tr>
+<td>Замечание</td>
+<td>Начать наблюдение</td>
+<td>Регистрация обновлений по выбранным источникам</td>
+</tr>
+<tr>
+<td>Снимок истории</td>
+<td>Источники → моментальный снимок истории</td>
+<td>До 500 текущих сообщений; реконструкция всех прошлых изменений не производится</td>
+</tr>
+<tr>
+<td>Пауза</td>
+<td>Наблюдение с паузой</td>
+<td>Остановка сбора данных с сохранением имеющихся данных и заданий в очереди</td>
+</tr>
+<tr>
+<td>Проверка/передача</td>
+<td>Экспорт</td>
+<td>Форматы ZIP, JSONL/CSV/HTML, контрольные точки, подтверждение обработки и запрос временных меток</td>
+</tr>
+<tr>
+<td>Наличие нескольких учётных записей</td>
+<td>Рабочие пространства или кнопка <strong>«+»</strong> вверху</td>
+<td>Неограниченное количество отдельных рабочих пространств в рамках одного процесса</td>
+</tr>
+</tbody>
+</table></div>
+<p>Доступ к локальной демо-версии открывается автоматически без ручного ввода токена. Используется
+возможность, действующая на протяжении всего срока жизни процесса и действительная только для прямого доступа по лупбэку к изолированной
+синтетической демо-версии; токен главной панели не раскрывается. Реальные рабочие пространства, а также удалённый
+или проксированный доступ к демо-версии сохраняют аутентификацию по токену. Вход в демо-версию не предоставляет авторизации в Telegram.</p>
+<h2 id="monitoring-categories">Категории мониторинга<a class="anchor" href="#monitoring-categories" aria-label="Ссылка на раздел">#</a></h2>
+<p><img alt="Настройки мониторинга для каждого аккаунта с использованием синтетических исходных данных" src="../../../../assets/sources.png" /></p>
+<p>В разделе <strong>«Источники» → «Настройки захвата» → «Выбор сохраняемых изменений»</strong> выберите отдельно новые сообщения, правки,
+уведомления об удалении, обновления реакций и события, связанные с членством. По умолчанию
+сохраняются все категории. Настройка <strong>«Сообщения, правки и удаления»</strong> сохраняет исходный контекст,
+отключая при этом отдельные обновления реакций и членства. Параметр <strong>«Вся видимая активность»</strong> восстанавливает
+все пять категорий. Предустановки изменяют форму; нажмите <strong>«Сохранить настройки мониторинга»</strong> для применения.</p>
+<p>Сохраненная политика применяется ко всем выбранным источникам в данном рабочем пространстве. Другие
+рабочие пространства сохраняют свои собственные настройки. Каждое фактическое изменение фиксируется с указанием подписанных значений «до» и «после»
+; текущая политика также включается в подтверждения процессов и записи о начале наблюдения
+. Отключение категории не приводит к удалению ранее зафиксированных наблюдений. Повторное включение
+не позволяет восстановить пропущенные изменения. В данной версии отсутствует возможность переопределения категорий на уровне отдельных групп.</p>
+<p>Оставьте функцию «Новые сообщения» включённой, если важно сохранить предыдущее содержимое: уведомление об удалении не позволяет
+восстановить текст, который никогда не был зафиксирован. Оперативные записи, записи об охвате и другие события, связанные с
+работой групп, всегда сохраняются. Откровенные моментальные снимки истории отделены от
+выбора категорий в режиме реального времени и могут включать служебные сообщения. Эти настройки не
+удаляют метаданные о реакциях/участниках, встроенные в иначе зафиксированный объект Telegram.</p>
+<p>При приостановке создания моментального снимка истории в очереди могут оставаться вложения. Начните наблюдение, чтобы обработать
+их. Нахождение в очереди не означает, что файл загружен. Недоступный исходный файл не заменяется
+более новой отредактированной версией; результаты фиксируются отдельно.</p>
+<p><strong>Функция «Lock»</strong> очищает доступ к браузеру и скрытые поля, но оставляет процесс сбора данных запущенным.
+Закрытие вкладки также оставляет процесс запущенным. Остановка процесса Python или службы
+прекращает сбор данных независимо от состояния браузера.</p>
+<p>Удаление дополнительного рабочего пространства останавливает работу его сборщика и удаляет локальные данные. Если
+удаление прерывается из-за заблокированного файла или ошибки файловой системы, панель сообщает об ошибке и
+сохраняет рабочее пространство в списке как недоступное (<code>DeletionPending</code>). Закройте программы, в которых открыты его
+файлы, и повторите попытку <strong>удаления</strong>. Перезапуск TgWitness оставляет данную рабочую область в остановленном состоянии и
+не восстанавливает её частично удалённый журнал или ключи. Успешное удаление фиксируется
+только после удаления каталога; отдельно экспортированные или резервные копии остаются
+в соответствии с собственной политикой хранения.</p>
+<h2 id="notifications">Уведомления<a class="anchor" href="#notifications" aria-label="Ссылка на раздел">#</a></h2>
+<p>Откройте <strong>Источники → Уведомления → Уведомления и ежедневный отчёт</strong>. TgWitness отправляет уведомления через Apprise в Matrix, Telegram, Discord, Slack, ntfy, на электронную почту и в другие поддерживаемые сервисы. В каждом рабочем пространстве можно настроить несколько получателей.</p>
+<ol>
+<li>Введите по одному адресу Apprise в каждой строке. Формат адреса для своего сервиса найдите в <a href="https://appriseit.com/services/">каталоге сервисов и форматов URL</a>.</li>
+<li>Включите <strong>Отправлять уведомления</strong> и выберите оповещения о проблемах, изменениях в наблюдаемых чатах и ежедневный отчёт. Время ежедневного отчёта задаётся по часовому поясу сервера.</li>
+<li>Включите <strong>Добавлять короткие выдержки</strong>, если хотите получать в уведомлениях сохранённый текст удалённых и отредактированных сообщений.</li>
+<li>Нажмите <strong>Сохранить уведомления</strong>, затем <strong>Отправить тест</strong>, чтобы проверить доставку.</li>
+</ol>
+<p>Для собственного сервера используйте <a href="https://appriseit.com/services/json/">JSON-вебхук</a> Apprise. Например, <code>jsons://notify.example.org/tgwitness</code> отправляет JSON по HTTPS на указанный адрес. Это вымышленный пример — замените его адресом своего получателя.</p>
+<p>Получатели и настройки относятся к выбранному рабочему пространству. Уведомления об изменениях охватывают его наблюдаемые источники, включая новые чаты. Колокольчик на верхней панели также показывает недавние проблемы и изменения в чатах.</p>
+<p>В демо настройки уведомлений видны, но отправка отключена. Настройте доставку в рабочем пространстве вне демо. Уведомления используют его прямое соединение, SOCKS5 или HTTP; MTProxy для них не подходит. Получателям без HTTP, например SMTP, требуется прямое соединение.</p>
+<h2 id="panel-layout">Структура панели<a class="anchor" href="#panel-layout" aria-label="Ссылка на раздел">#</a></h2>
+<p><img alt="Рабочая среда «Connection» с использованием синтетических данных" src="../../../../assets/connection.png" /></p>
+<p><strong>Журнал</strong> отображает наблюдения, функции поиска и фильтры. При редактировании открываются сохраненные версии;
+при удалении — предыдущее содержание, если оно доступно. Неизвестные источники указываются явно.
+Статистика доступна в разделе <strong>«Обзор»</strong>; подробности о сборе данных приводятся в локальном руководстве.</p>
+<p><strong>Раздел «Источники»</strong> содержит информацию о сфере наблюдения (выбранные чаты, папка Telegram или весь
+аккаунт), доступные чаты всех типов, выбранные источники с отметками приоритета, настройки вложений
+и повторной проверки, а также снимки истории. Частные источники выбираются по диалогу/ID
+без публичной ссылки. Статус доступа отражает результаты последней проверки, а не постоянные разрешения.</p>
+<p><strong>В разделе «Чаты» → «Участники»</strong> перечислены все пользователи, сообщения которых сохранены; если для данного чата включена функция отображения профилей участников,
+один клик открывает профиль данного пользователя со ссылками на записи в журнале.</p>
+<p><strong>Witness</strong> создаёт токены свидетелей, доступные только для чтения, отображает время последней проверки каждого свидетеля и
+предоставляет команды и параметры для запуска одного (<a href="../witness/">независимого</a>) <a href="../witness/">свидетеля</a>.</p>
+<p><strong>В разделе «Параметры»</strong> указаны все ограничения и темпы работы рабочей среды, которые не представлены на других страницах:
+количество прочитанных диалогов, частота повторного считывания списка чатов, интервалы
+проверки работоспособности и контрольных точек, буфер запуска, способ распределения запросов при повторной проверке (начальная задержка, количество чатов за
+проход, пауза между чатами, восстановленные и повторно запрашиваемые сообщения), резерв дискового пространства, таймауты и
+повторные попытки загрузки, критерии поиска профилей пользователей (включая ваши собственные регулярные выражения),
+размер и частота уведомлений, ограничения на создание снимков, ZIP-архивы и загрузку через браузер, а также таймауты и повторные попытки
+клиента Telegram. В каждом поле отображается диапазон значений и значение по умолчанию; изменённые поля
+отмечаются и могут быть восстановлены по отдельности или все сразу. Каждое изменение фиксируется как
+«<code>parameters.changed</code>» с указанием значений до и после, а записи о начале наблюдения содержат
+названия действующих значений. Значения вступают в силу при следующем использовании; таймауты и повторные попытки клиента — при
+следующем подключении. Интервалы повторной проверки, типы и размеры вложений, а также интервалы хранения доказательств и резервных копий
+за пределами сайта остаются на отдельных страницах и могут принимать любые значения в пределах своего диапазона, а не только предустановленные настройки.</p>
+<p>Звоночек в верхней панели отображает список недавних проблем и изменений в отслеживаемых чатах; непрочитанные сообщения
+подсчитываются до тех пор, пока не будут помечены как прочитанные. Изменения сгруппированы по чатам и часам («12 удалено,
+1 отредактировано, 0 не найдено»), а такие проблемы, как выход из системы или переполнение диска, остаются в списке
+независимо от интенсивности активности в чатах.</p>
+<p><strong>Регистрация</strong> начинается с поля ввода номера телефона. <strong>Нажатие кнопки «Продолжить»</strong> ведёт непосредственно к
+вводу кода; запрос учетных данных API происходит только в случае их отсутствия. Вкладки «QR» и «Импорт файла» являются
+альтернативными вариантами. Сохраненные учетные данные API используются повторно только в пределах собственной рабочей области.
+На экране ввода отсутствуют боковая панель, статистика и разделы настроек. Значок <strong>«Настройки</strong>»
+открывает управление API, прокси, хранилищем и дополнительными учётными записями. Новая установка
+начинается здесь; для подключённых учётных записей без выбранных источников процесс начинается со страницы <strong>«Выбрать чаты</strong>».
+Изменение маршрута требует приостановки наблюдения и отменяет незавершённый вход в систему. Существующий
+журнал не может быть незаметно привязан к другой учётной записи Telegram.</p>
+<p><strong>Функция экспорта</strong> проверяет целостность журнала и генерирует переносимые файлы. Идентификатор рабочей области
+можно передать в командную строку при загрузке. Каждый экспорт фиксирует префикс полного журнала; последующие
+события попадают в следующий экспорт. Фильтры поиска не изменяют область действия пакета.
+Подробная информация о подписании и охвате приведена в разделе <strong>«Проверка и ограничения</strong>».</p>
+<p>На панели отображается состояние коллектора, медиафайлы в очереди/с ошибками, самые старые медиафайлы в ожидании, свободное
+место на диске, паузы в запросах и источники, доступ к которым не подтверждён, в разделе <strong>«Состояние коллектора»
+</strong>. Изначально эти сведения свернуты и скрыты на вкладке «Учётная запись». На карточке настроек
+отображается следующий шаг: подключить учётную запись, выбрать источники или начать мониторинг.
+Список учётных записей представляет собой моментальный снимок на момент загрузки;
+выбранная рабочая область обновляется периодически. Это не многопроцессный монитор SLA.</p>
+<p>В пользовательском интерфейсе используются локальные ресурсы и рендеринг текста для исходного контента. Проведено тестирование макетов для настольных компьютеров и узких
+экранов на базе Chromium. Данная проверка не является полной сертификацией доступности;
+оценка удобства использования с помощью экранных считывателей и для пользователей остаётся отдельной задачей.</p>
+<h2 id="deployment-environments">Среды развертывания<a class="anchor" href="#deployment-environments" aria-label="Ссылка на раздел">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Среда</th>
+<th>Установка</th>
+<th>Статус проверки</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ПК/сервер под управлением Windows</td>
+<td>Python 3.11+, scripts\Setup.cmd/Start.cmd, каталог с конфиденциальными данными</td>
+<td>Проверено локально на Windows/Python 3.12</td>
+</tr>
+<tr>
+<td>Сервер Linux/VPS</td>
+<td>Python venv, выделенный сервер, HTTPS/SSH</td>
+<td>Приведены примеры кода, CI и systemd; на данном хосте не выполняются</td>
+</tr>
+<tr>
+<td>macOS</td>
+<td>Python venv, процесс в фоновом режиме или пользовательский агент</td>
+<td>Приведён пример с использованием launchd; требуется отдельная проверка установки</td>
+</tr>
+<tr>
+<td>Docker/Compose</td>
+<td>Постоянный объём данных, один рабочий узел</td>
+<td>Предоставляются определение и проверка работоспособности CI; Docker недоступен локально</td>
+</tr>
+<tr>
+<td>Мобильный браузер</td>
+<td>Войдите в защищённую панель управления на работающем сервере</td>
+<td>Проверена версия с узким макетом на базе Chromium; сборщик данных не работает на iOS/Android</td>
+</tr>
+</tbody>
+</table></div>
+<p>Переносимость означает отсутствие обязательного использования облачного сервиса или сборки интерфейса. Каждому целевому компьютеру по-прежнему
+требуются совместимые зависимости Python/crypto, а также доступ к локальному диску и сети. См.
+<a href="../deployment/">файл DEPLOYMENT.md</a> и <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">шаблоны сервисов</a>.</p>
+<p>Рабочие пространства совместно используют ЦП, память и цикл событий. Для изоляции процессов используйте отдельные
+экземпляры, порты, каталоги данных и авторизации учетных записей. Единой
+панели управления для отдельных экземпляров не существует. Ни в коем случае не направляйте несколько рабочих процессов на одну базу данных.</p>
+<h2 id="startup-checks-and-exports">Проверка и экспорт данных<a class="anchor" href="#startup-checks-and-exports" aria-label="Ссылка на раздел">#</a></h2>
+<p>Перед запуском подготовленной среды выполните команду <code>python start.py --check</code>. Добавьте <code>--json</code>
+для машинно-читаемых проверок или передайте необходимые параметры <code>--data-dir</code>, <code>--host</code> и <code>--port</code>.
+Данная команда проверяет наличие необходимых условий без входа в Telegram и без создания журнала.
+Она не проверяет журнал и не подтверждает готовность к записи; проверка журнала выполняется
+во время запуска приложения. Занятый порт может просто означать наличие существующего экземпляра.</p>
+<p>Браузеры, поддерживающие API доступа к файловой системе, сохраняют экспортированные данные через поток с правом записи.
+Другие браузеры буферизуют не более 128 MiB. Для экспорта больших объемов данных
+или при использовании браузеров без поддержки потоковой передачи файлов воспользуйтесь командной строкой потоковой передачи:</p>
+<pre><code class="language-sh">python -m tgwitness.download --token-file data/live/panel-token.txt --out evidence.zip</code></pre>
+<p>Добавьте <code>--profile ID</code>
+из раздела «Экспорт» для дочернего рабочего пространства. Для удалённого доступа используйте <code>--url https://server</code>
+. Простой HTTP допускается только для адресатов с обратной связью. Токен
+считывается из файла и отправляется в заголовке, а не выводится на экран или включается в URL-адрес. Перенаправления
+не допускаются. Существующие адресаты не перезаписываются. При сбое передачи удаляется
+её временный фрагмент файла. Указанный SHA-256 представляет собой контрольную сумму передачи; проверьте подписанный
+архив ZIP отдельно с помощью надёжного отпечатка/контрольной точки.</p>
+<h2 id="backup-restore-and-interruptions">Резервное копирование, восстановление и сбои в работе<a class="anchor" href="#backup-restore-and-interruptions" aria-label="Ссылка на раздел">#</a></h2>
+<ol>
+<li>Приостановите наблюдение и аккуратно завершите процесс.</li>
+<li>Скопируйте весь каталог данных: базы данных, файлы WAL/SHM (если имеются), мультимедиа, файлы
+    <code>credentials.enc</code>, <code>signing.enc</code>, <code>network.enc</code>, ключи хранилища/метаданные, токен,
+    контрольные точки и каждый каталог <code>profiles/</code>.</li>
+<li>В режиме внешнего ключа следует отдельно хранить мастер-ключ и сохранять каждый ключ
+    <code>vault.external.json</code>. Генерирование нового ключа не позволяет восстановить старые секретные данные.</li>
+<li>Выполните восстановление при остановленном целевом устройстве; настройте исходный ключ, ограничьте
+    доступ и проверьте целостность данных перед возобновлением работы.</li>
+<li>Фиксируйте время простоя и результаты проверки. Снимок истории не может служить доказательством того, что
+    во время перерыва в работе удаления не происходили.</li>
+</ol>
+<p>Архивы ZIP с доказательствами не содержат сеансов и закрытых ключей и не являются полными резервными копиями сервиса.
+Четыре вида данных защищаются по-разному:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Что</th>
+<th>Защита</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Файлы экспорта без пароля (по умолчанию)</td>
+<td>Не зашифровано. Подписано, поэтому изменения можно обнаружить, но любой, у кого есть этот файл, может его прочитать.</td>
+</tr>
+<tr>
+<td>Файлы экспорта с паролем</td>
+<td>Если вы установите пароль, готовый экспортный файл без изменений сохраняется в формате ZIP с шифрованием AES-256, который можно открыть с помощью программ 7-Zip и WinRAR; пароль не сохраняется (<a href="../evidence/">в целях обеспечения сохранности доказательств</a>)</td>
+</tr>
+<tr>
+<td>База данных журнала и сохраненные вложения на диске</td>
+<td>TgWitness не обеспечивает шифрование; используйте зашифрованный диск или том</td>
+</tr>
+<tr>
+<td>Сессии Telegram и ключи подписи</td>
+<td>Зашифровано в каталоге данных (<code>credentials.enc</code>, <code>signing.enc</code>, <code>network.enc</code>)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Полная резервная копия представляет собой описанный выше каталог остановленных данных, а не экспорт.
+Для обоих процессов следует использовать защищённое хранилище и специальный механизм передачи данных. Временные серверные экспорты хранятся в папке
+<code>temporary-exports/</code> каждого рабочего пространства; завершённые ответы очищаются, а прерванные файлы экспорта
+удаляются при следующем запуске, пока удерживается блокировка экземпляра данного рабочего пространства.</p>
+<p>Событие восстановления соединения не гарантирует восстановления промежуточных изменений.
+Постоянные задания обработки мультимедиа и состояние обновления Telegram сохраняются после перезапуска; см.
+<a href="../evidence/#durable-collection-and-process-receipts-02">формат доказательств</a>.</p>
+<h2 id="capacity-and-retention">Вместимость и срок хранения<a class="anchor" href="#capacity-and-retention" aria-label="Ссылка на раздел">#</a></h2>
+<p>Значения по умолчанию, все из которых можно изменить в разделе <strong>«Параметры</strong>»: первые 1 000 диалогов, 500 сообщений
+в каждом снимке, 4 ГиБ несжатого подписанного ZIP-содержимого (для архивов большего размера требуется
+<code>verify.py --max-gib N</code>) и резервный вариант для браузера объёмом 128 МиБ. Вложения занимают от 1 до 2 000 MiB на
+тип в разделе <strong>«Источники» → «Вложения</strong>». По умолчанию для CLI-загрузки предусмотрен лимит в 5 GiB переданных данных. Доступное дисковое пространство может служить
+нижним пределом. Зарезервируйте место для журналов, мультимедиа, WAL, временных экспортов и резервных копий.
+При экспорте используется объем данных, а не ограничение Compose в 512 MiB (<code>/tmp</code>).</p>
+<p>Измеряйте количество событий в секунду, время нахождения в очереди, объём мультимедиа в байтах и задержку диска, а не ограничивайтесь подсчётом
+только групп. Результаты синтетических локальных тестов не гарантируют доставку сообщений в Telegram.
+Автоматического удаления сохраненных данных не предусмотрено. Удаление конечной части журнала приводит к утрате его
+связи с сохраненными контрольными точками.</p>
+<p>Уже реализованы приоритетные повторные проверки: источники, отмеченные звёздочкой, по умолчанию перепроверяются каждые 15 минут,
+остальные — каждые 6 часов (см. <a href="../collection/#recheck-tiers">уровни повторной проверки</a>). Имеются защищённые паролем
+экспорты данных, как описано выше. Приём данных из Telegram в режиме реального времени/через прокси, долговечное воспроизведение,
+журнал администратора и опрос реакций, изолированные рабочие процессы, шифрование локального журнала и мультимедиа
+самим TgWitness, роли пользователей и независимая экспертиза остаются отдельными направлениями работы. См.
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/READINESS.md">файлы READINESS.md</a>, <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">LIVE_ACCEPTANCE.md</a> и
+<a href="../verification/">VERIFICATION.md</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/OPERATIONS.md">Исправить страницу на GitHub ↗</a><a class="next-guide" href="../investigation/"><span>Дальше</span><strong>Режим расследования →</strong></a><p>В данных руководствах описывается текущая реализация. Результаты валидации и остающиеся пробелы документируются отдельно. <a href="../verification/">Что проверено →</a></p></footer>
+</main>
+<aside class="toc" aria-label="На этой странице"><p class="nav-label">На этой странице</p><a href="#operator-workflow">Рабочий процесс оператора</a><a href="#modes">Режимы работы</a><a href="#monitoring-categories">Категории мониторинга</a><a href="#notifications">Уведомления</a><a href="#panel-layout">Структура панели</a><a href="#deployment-environments">Среды развертывания</a><a href="#startup-checks-and-exports">Проверка и экспорт данных</a><a href="#backup-restore-and-interruptions">Резервное копирование, восстановление и сбои в работе</a><a href="#capacity-and-retention">Вместимость и срок хранения</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Открытый исходный код · Работает на вашем компьютере</span><a href="../../../../LICENSE">Лицензия MIT</a><a href="../notice/">Уведомление для оператора</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Безопасность</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Ожидание сообщения", "Step through a fictional send, edit and delete.": "Пошаговое руководство по отправке, редактированию и удалению вымышленного сообщения.", "No observations yet. Start the sequence or advance one event.": "Пока нет комментариев. Начните последовательность или перейдите к следующему событию.", "Meet at 10:00": "Встреча в 10:00", "A new message is visible in the chat.": "В чате отображается новое сообщение.", "Record 1 appended: the collector observed the original message.": "Добавлена запись № 1: сборщик данных зафиксировал исходное сообщение.", "Meet at 11:00": "Встреча в 11:00", "The current text changes. The earlier observation stays.": "Текущий текст изменяется. Предыдущее замечание остается в силе.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Запись № 2 добавлена: редактирование представляет собой новое наблюдение. В записи № 1 по-прежнему сохранен исходный текст.", "Message deleted": "Сообщение удалено", "The message has disappeared from the chat view.": "Сообщение исчезло из окна чата.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Приложение «Record 3»: уведомление об удалении сохраняется наряду с обеими зафиксированными версиями.", "0 records": "0 записей", "1 record": "1 запись", "2 records": "2 записи", "3 records": "3 записи", "Complete / {n} of 3": "Завершено / {n} из 3", "Step / {n} of 3": "Шаг / {n} из 3", "Pause": "Пауза", "Replay sequence": "Последовательность воспроизведения", "Play sequence": "Последовательность воспроизведения", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Доступен статический пример. Для интерактивного вычисления хэшей откройте эту страницу по протоколу HTTPS или в локальном превью с поддержкой Web Crypto.", "No record supplied": "Данные не предоставлены", "Tail removed": "Конец текста удалён", "≠ saved hash": "≠ сохраненный хеш", "Rebuilt · different hash": "Переработанная версия · другой хеш", "= saved hash": "= сохраненный хеш", "Same length and matching head.": "Одинаковый объем и соответствующий заголовок.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Все три вычисленных хеша совпадают с сохраненными хешами. Данный образец соответствует установленному ограничению в три записи.", "Same saved head; the journal prefix fails verification.": "Сохраненная заголовочная строка; префикс журнала не проходит проверку.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Запись № 2 больше не совпадает со своим сохраненным хешем. Проверка только конечного сохраненного указателя не позволила бы обнаружить это; верификатор проверяет каждую запись.", "Head differs from the retained checkpoint.": "Заголовок отличается от сохраненного контрольного пункта.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Восстановленные хэши связаны между собой, однако конечный хед изменился. Сохраненная контрольная точка отклоняет данную историю. Исходные подписи также не будут проверяться для измененных записей.", "Too short: 2 supplied records \u003c 3 retained records.": "Слишком мало: 2 предоставленных записи \u003c 3 сохраненных записей.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Два оставшихся хеша по-прежнему совпадают. Сохраненная контрольная точка показывает отсутствующую конечную часть. Без этой более ранней границы один лишь этот более короткий префикс не позволил бы выявить пропуск.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "В данном браузере расчёт хешей недоступен. Приведённые ниже формулы и статическое пояснение остаются доступными.", "{n} records": "{n} записей", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Принято: количество записей увеличивается, подпись подтверждается, а ключ совпадает. Свидетель сохраняет эту новую границу.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Откат: подписанный ответ содержит меньшее количество записей, чем последняя принятая контрольная точка. Система фиксирует проблему и сохраняет предыдущую принятую границу.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Форк: количество не изменилось, но вершина отличается. Свидетель фиксирует разногласие и сохраняет ранее принятую границу.", "No answer": "Ответ отсутствует", "boundary unknown": "предел неизвестен", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Отсутствие ответа: «Witness» фиксирует неудачную проверку. Он не может определить текущее состояние сборщика данных. Если «Witness» по-прежнему имеет доступ к Bot API и это разрешено его политикой публикации, он может опубликовать информацию об этой неудаче.", "Send {n}": "Отправить {n}", "Edit {n}": "Редактировать {n}", "Delete {n}": "Удалить {n}", "Both accounts captured all six expected observations in this example.": "Оба аккаунта зафиксировали все шесть ожидаемых наблюдений в данном примере.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Аккаунт B по-прежнему зафиксировал 6 из 6. Две квитанции были получены с задержкой. Коэффициент фиксации и задержка получения квитанций отвечают на разные вопросы.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Аккаунт B зафиксировал 5 из 6 действий к моменту окончания теста (83,3 %). Отсутствующее редактирование не сопровождалось зафиксированной задержкой. Данный результат отражает только шесть контролируемых действий.", "not observed by cutoff": "не соблюдено к моменту окончания срока", "{s} seconds": "{s} секунд", "Exact values follow in the table.": "Точные значения приведены в таблице ниже.", "{s} s": "{s} s", "Not observed": "Не соблюдается", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "В четырёх чатах приводятся различные наблюдения. Следуйте исходным записям для каждого соединения; не приписывайте сообщение в канале пользователю 71001 без указания отправителя.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Записи № 146 и № 205 содержат один и тот же идентификатор отправителя — 71001. Это позволяет установить связь между замеченными публикациями одного аккаунта Telegram в двух разных чатах. При этом не происходит идентификация реального лица или привязка публикации к конкретному каналу.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Адрес назначения pay.example.invalid/new фигурирует в записи группы № 146, введении с клавиатуры бота № 173, редактировании канала № 188 и личном сообщении № 205. Повторное упоминание адреса назначения связывает эти материалы между собой; однако это не доказывает наличия единого контроля над указанными учетными записями.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "В данном вымышленном деле завершённые квитанции о получении медиафайлов № 151 и № 209 имеют одинаковые полные значения SHA-256. Сравните фактические байты и связанные с ними записи сообщений. Соответствующий файл не позволяет установить его создателя и не подтверждает, кто его переслал.", "the encrypted off-site copy": "зашифрованная внешняя копия", "notifications": "уведомления", "checkpoint hashes for timestamps": "Хэши контрольных точек для временных меток", "signed checkpoints for the witness": "подписанные контрольные точки для TgWitness", "Switched on in this example": "В данном примере включено", "Optional · off by default": "Необязательно · по умолчанию отключено", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "С этого устройства удаляются: подключение к Telegram и {list}. Ничего больше.", "Default: only the Telegram connection leaves this machine.": "По умолчанию: с данного компьютера выходит только соединение с Telegram.", "{done} of {total} done": "{done} из {total} выполнено", "Mark step {n} as done": "Пометить шаг {n} как выполненный", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Текст", "Copied": "Скопировано", "Command copied.": "Команда скопирована.", "Selected — Ctrl/Cmd+C": "Выделено — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Команда выбрана. Скопируйте её вручную.", "Command copied to clipboard.": "Команда скопирована в буфер обмена.", "Select text": "Выделить текст", "Clipboard unavailable. Command selected; copy it manually.": "Буфер обмена недоступен. Команда выбрана; скопируйте её вручную.", "A message arrives. The first observation is saved.": "Поступает сообщение. Первое наблюдение сохраняется.", "The time changes. Both captured versions stay.": "Время меняется. Обе зафиксированные версии сохраняются.", "The message disappears. The captured history remains.": "Сообщение исчезает. Зафиксированная история сохраняется.", "Pause example animation": "Пример анимации «Пауза»", "Play example animation": "Просмотр примера анимации", "Play": "Воспроизвести", "Full-size workspace screenshot": "Снимок экрана рабочей области в полном размере", "Workspace screenshot · fictional data": "Снимок экрана рабочей области · вымышленные данные", "Close": "Закрыть", "Close screenshot": "Закрыть скриншот", "Scrollable full-size screenshot": "Прокручиваемый скриншот в полном размере", "Enlarge: {name}": "Увеличить: {name}", "View full size": "Посмотреть в полном размере"}</script>
+</body></html>

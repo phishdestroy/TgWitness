@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="vi" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Triển khai | TgWitness</title>
+<meta name="description" content="Vui lòng chạy TgWitness dưới dạng dịch vụ trên Windows, Linux, macOS hoặc Docker, thông qua kết nối HTTPS, kèm theo tính năng sao lưu và cập nhật."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:title" content="Triển khai | TgWitness"><meta property="og:description" content="Vui lòng chạy TgWitness dưới dạng dịch vụ trên Windows, Linux, macOS hoặc Docker, thông qua kết nối HTTPS, kèm theo tính năng sao lưu và cập nhật.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/deployment/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/deployment/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/deployment/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/deployment/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/deployment/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/deployment/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/deployment/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/deployment/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/deployment/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/", "url": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/", "name": "Triển khai | TgWitness", "description": "Vui lòng chạy TgWitness dưới dạng dịch vụ trên Windows, Linux, macOS hoặc Docker, thông qua kết nối HTTPS, kèm theo tính năng sao lưu và cập nhật.", "inLanguage": "vi", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "https://phishdestroy.github.io/TgWitness/vi/"}, {"@type": "ListItem", "position": 2, "name": "Tài liệu hướng dẫn", "item": "https://phishdestroy.github.io/TgWitness/vi/docs/"}, {"@type": "ListItem", "position": 3, "name": "Tham khảo", "item": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Triển khai", "item": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Chuyển thẳng đến nội dung</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Tài liệu hướng dẫn</span></a>
+<nav aria-label="Hướng dẫn"><a href="../../concepts/">Hướng dẫn trực quan</a><a href="../../">Tất cả các hướng dẫn</a><a href="../">Tham khảo</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Ngôn ngữ"><span aria-hidden="true">◍</span> Tiếng Việt</summary><div class="lang-list"><a href="../../../../docs/reference/deployment/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/deployment/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/deployment/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/deployment/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/deployment/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/deployment/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/deployment/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/deployment/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/deployment/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/deployment/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/deployment/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="./" hreflang="vi" lang="vi" aria-current="true">Tiếng Việt</a><a href="../../../../zh/docs/reference/deployment/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Chuyển đổi giữa chế độ giao diện sáng và tối"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Hướng dẫn"><a href="../../../guides/modes.html">Các chế độ, kịch bản và mức độ bằng chứng</a><p class="nav-label">Các bước đầu tiên</p><a href="../../start/">Bắt đầu chỉ trong vài phút</a><a href="../../accounts/">Kết nối tài khoản</a><a href="../../proxies/">Chọn một máy chủ proxy</a><a href="../../exports/">Xuất và xác minh</a><p class="nav-label">Hiểu rõ về bằng chứng</p><a href="../../concepts/">Tìm hiểu cách thức hoạt động của bằng chứng</a><a href="../../cases/">Điều tra trên tất cả các cuộc trò chuyện</a><a href="../../security/">Hãy đảm bảo tính bảo mật</a><p class="nav-label">Tìm hiểu thêm</p><a href="../../witness/">Thiết lập bot chứng cứ</a><a href="../../server/">Hãy duy trì hoạt động của nó</a><a href="../../troubleshooting/">Tìm hiểu nguyên nhân sự cố</a></nav><nav class="wiki-nav" aria-label="Tham khảo"><p class="nav-label"><a class="nav-label-link" href="../">Tham khảo</a></p><details class="wiki-group" open><summary>Thiết lập</summary><a href="../quickstart/">Hướng dẫn bắt đầu nhanh</a><a href="../accounts/">Các định dạng tài khoản và phiên làm việc</a><a href="../connection/">Kết nối, máy chủ trung gian và bảo vệ dữ liệu</a><a href="./" aria-current="page">Triển khai</a></details><details class="wiki-group"><summary>Thu thập</summary><a href="../collection/">Cách thức thu thập dữ liệu</a><a href="../operations/">Quy trình làm việc và hoạt động</a><a href="../investigation/">Chế độ điều tra</a><a href="../features/">Các tính năng và giới hạn</a></details><details class="wiki-group"><summary>Bằng chứng</summary><a href="../how-it-works/">Cách thức hoạt động của bằng chứng</a><a href="../evidence/">Định dạng bằng chứng</a><a href="../witness/">Nhân chứng độc lập</a><a href="../timestamp/">Dấu thời gian</a></details><details class="wiki-group"><summary>An ninh & dự án</summary><a href="../security/">An ninh và xử lý dữ liệu</a><a href="../architecture/">Kiến trúc</a><a href="../verification/">Những nội dung đã được kiểm thử</a><a href="../license/">Thông báo về sự không tương thích giữa giấy phép và kiến trúc</a><a href="../notice/">Thông báo về sự không tương thích giữa các nhà cung cấp dịch vụ</a><a href="../changelog/">Bản ghi thay đổi</a></details></nav><p class="sidebar-note">v0.7.0<br>Mã nguồn mở · Chạy trên máy tính của quý vị</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Hướng dẫn"><a href="../../../">Trang chủ</a> <span aria-hidden="true">/</span> <a href="../../">Tài liệu hướng dẫn</a> <span aria-hidden="true">/</span> <a href="../">Tham khảo</a> <span aria-hidden="true">/</span> <span aria-current="page">Triển khai</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Tìm kiếm trong tài liệu</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Hãy thử các thuật ngữ như proxy, chuỗi băm, token hoặc witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Tìm kiếm rõ ràng" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Hãy nhập một từ khóa để tìm kiếm trong các hướng dẫn và tài liệu tham khảo. Kết quả tìm kiếm sẽ được lưu lại trong trình duyệt của quý vị.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Tham khảo / Thiết lập</p><h1>Triển khai</h1><p class="guide-outcome">Vui lòng chạy TgWitness dưới dạng dịch vụ trên Windows, Linux, macOS hoặc Docker, thông qua kết nối HTTPS, kèm theo tính năng sao lưu và cập nhật.</p><div class="wiki-body"><p><strong>Tiếng Anh</strong> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md">Tiếng Nga</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md">Tiếng Ukraina</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md">Tiếng Tây Ban Nha</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md">Tiếng Bồ Đào Nha (Brazil)</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md">Tiếng Thổ Nhĩ Kỳ</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md">Tiếng Ả Rập</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md">Tiếng Ba Tư</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md">Tiếng Urdu</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md">Tiếng Hindi</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md">Tiếng Indonesia</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md">Tiếng Việt</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md">Tiếng Trung giản thể</a></p>
+<h2 id="choose-an-installation">Chọn phương thức cài đặt<a class="anchor" href="#choose-an-installation" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Đối với gói phần mềm di động, vui lòng giải nén tệp <code>TgWitness-&lt;version&gt;-windows-amd64-portable.zip</code> từ
+GitHub Releases. Đối với các phương pháp khác, vui lòng tải xuống và giải nén tệp ZIP nguồn hoặc sao chép
+kho lưu trữ, sau đó thực thi lệnh sau từ thư mục dự án:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Cài đặt</th>
+<th>Bắt đầu</th>
+<th>Công cụ này có chạy ngầm không?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gói phần mềm di động dành cho Windows</td>
+<td><code>TgWitness.cmd</code></td>
+<td>Không; hãy giữ cửa sổ mở.</td>
+</tr>
+<tr>
+<td>Phiên bản dành riêng cho Windows</td>
+<td><code>Start.cmd</code></td>
+<td>Không; hãy sử dụng tác vụ đăng nhập tùy chọn để chạy nền.</td>
+</tr>
+<tr>
+<td>Hỗ trợ bản địa trên Linux/macOS</td>
+<td><code>sh start.sh</code></td>
+<td>Không; hãy sử dụng systemd/launchd để chạy nền.</td>
+</tr>
+<tr>
+<td>Docker trên bất kỳ máy chủ nào được hỗ trợ</td>
+<td><code>docker compose up -d --build --wait</code></td>
+<td>Đúng vậy, miễn là daemon Docker vẫn đang chạy.</td>
+</tr>
+<tr>
+<td>Trợ lý Docker trên Windows</td>
+<td><code>scripts\Docker.cmd</code></td>
+<td>Đúng vậy; trình trợ giúp sẽ chờ kiểm tra tình trạng hoạt động của máy chủ web.</td>
+</tr>
+<tr>
+<td>Trợ lý Docker trên Linux/macOS</td>
+<td><code>sh scripts/docker-start.sh</code></td>
+<td>Đúng vậy; trình trợ giúp sẽ chờ kiểm tra tình trạng hoạt động của máy chủ web.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Đối với máy chủ đám mây mà bên thứ ba có thể kiểm tra — được tạo thông qua
+API của nhà cung cấp, không sử dụng SSH và chỉ có thể truy cập qua Cloudflare Tunnel — xin tham khảo
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md">phần triển khai có độ tin cậy cao</a>.</p>
+<p>Quá trình khởi động gốc sẽ tạo ra một bản <code>.venv</code> riêng tư và cài đặt các phụ thuộc đã được ghim sẵn.
+Docker sẽ xây dựng chúng bên trong hình ảnh, mà không cần Python trên máy chủ. Lần
+cài đặt đầu tiên cần có kết nối Internet. Khi không tìm thấy Python 3.11 trở lên, <code>Start.cmd</code> sẽ hỏi ý kiến người dùng trước khi
+cài đặt Python 3.12 cho người dùng Windows hiện tại (sử dụng winget, hoặc trình cài đặt từ python.org
+sau khi xác minh chữ ký của Python Software Foundation); công cụ này tuyệt đối không yêu cầu
+quyền quản trị viên. Docker và các dịch vụ hệ điều hành vẫn là các điều kiện tiên quyết.</p>
+<p>Các bản cài đặt gốc và di động sử dụng <code>data/live</code> bên trong thư mục của chúng. Docker sử dụng khối lượng có tên <code>tgwitness-data</code>
+tại <code>/data</code>. Đây là các bản cài đặt riêng biệt cho đến khi quý vị chủ động di chuyển
+toàn bộ thư mục dữ liệu. Xin lưu ý rằng một container Docker mới sẽ không tự động phát hiện
+các tài khoản gốc.</p>
+<h2 id="installation-requirements">Yêu cầu cài đặt<a class="anchor" href="#installation-requirements" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Việc cài đặt bản gốc yêu cầu Python 3.11 trở lên cùng với <code>venv</code> và <code>ensurepip</code>, kết nối Internet
+để cài đặt các phụ thuộc ban đầu, và một thư mục dự án có quyền ghi cho
+<code>.venv</code>. Bảng điều khiển đi kèm không cần Node.js hay quá trình xây dựng giao diện người dùng. Vui lòng chạy trình khởi chạy từ
+tài khoản hệ điều hành thông thường của quý vị; TgWitness không yêu cầu quyền quản trị viên/root.</p>
+<ul>
+<li><strong>Hệ điều hành Windows:</strong> <code>Start.cmd</code> sẽ kiểm tra thư mục <code>py -3</code>, sau đó là <code>python</code>, tiếp theo là thư mục cài đặt mặc định theo từng người dùng và
+    thư mục Program Files, đồng thời yêu cầu phiên bản 3.11 trở lên. Nếu không có thư mục nào phù hợp, chương trình
+    sẽ đề xuất phương án cài đặt tự động theo từng người dùng như đã mô tả ở trên. <code>py -3 start.py</code> cũng hoạt động được.
+    Gói phần mềm di động hoàn toàn không cần Python.</li>
+<li><strong>Linux:</strong> <code>start.sh</code> sẽ thử các phiên bản <code>python3.13</code>, <code>python3.12</code>, <code>python3.11</code>, <code>python3</code> và
+    <code>python</code>, đồng thời hiển thị lệnh cài đặt tương ứng cho apt, dnf, pacman, zypper, apk hoặc Homebrew
+    nếu không có phiên bản nào đáp ứng yêu cầu. Các hệ thống Debian/Ubuntu có thể cần gói
+    <code>python3-venv</code> tương thích với trình thông dịch đã chọn. Phiên bản Python mặc định cũ hơn
+    của hệ điều hành phân phối đó phải được thay thế hoặc bổ sung bằng Python 3.11 trở lên.</li>
+<li><strong>macOS:</strong> hãy cài đặt bản phân phối Python 3.11+ mới nhất; không nên cho rằng trình thông dịch do hệ điều hành cung cấp
+    đáp ứng yêu cầu. Vui lòng sử dụng tệp <code>python3 start.py</code> từ thư mục dự án.</li>
+<li><strong>Docker:</strong> sử dụng Docker Engine/Desktop với Compose phiên bản 2.20 trở lên. Docker Desktop
+    phải sử dụng các container Linux trên Windows. Container sẽ tự cài đặt các
+    thành phần phụ thuộc Python của riêng mình; máy chủ không cần cài đặt Python riêng biệt.</li>
+</ul>
+<p>Vui lòng sử dụng bộ nhớ cục bộ lâu dài cho thư mục dữ liệu. Hãy lập kế hoạch dung lượng dựa trên số lượng tin nhắn,
+tệp đa phương tiện, tốc độ tăng trưởng của WAL, các bản xuất và bản sao lưu; không có tiêu chuẩn tối thiểu chung nào dựa trên bằng chứng
+về dung lượng đĩa/RAM áp dụng cho mọi khối lượng công việc. Các kiến trúc CPU và phiên bản Python
+không có các gói phụ thuộc tương thích có thể yêu cầu các công cụ biên dịch bổ sung cùng với
+quy trình kiểm định riêng. Thuật ngữ “di động” không phải là tuyên bố về khả năng hỗ trợ phổ quát cho mọi hệ điều hành hay phần cứng.</p>
+<p>Hệ điều hành Windows 11 và Python 3.12 đã được xác minh tại máy chủ cục bộ. Các định nghĩa dành cho Linux, macOS và môi trường container cùng quy trình CI
+đã được cung cấp nhưng chưa được thực thi trên máy chủ phát triển này. Vui lòng tham khảo
+<a href="../verification/">tệp VERIFICATION.md</a> để biết phạm vi cụ thể.</p>
+<h2 id="local-computer">Máy tính cục bộ<a class="anchor" href="#local-computer" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Vui lòng sử dụng <code>Start.cmd</code> trên Windows hoặc <code>sh start.sh</code> trên Linux/macOS. <code>scripts\Setup.cmd</code> hoặc
+<code>sh start.sh --setup-only</code> sẽ tiến hành
+chuẩn bị môi trường. Trình khởi chạy sẽ cài đặt các thành phần phụ thuộc khi sử dụng lần đầu; các lần khởi chạy sau đó
+sẽ tái sử dụng môi trường đã có sẵn. Cần có kết nối Internet để thiết lập và thu thập dữ liệu từ Telegram,
+tuy nhiên, việc duyệt qua các bản ghi hiện có và tạo tệp xuất vẫn có thể thực hiện ngoại tuyến.</p>
+<p>Vui lòng chạy lệnh `<code>python start.py --check</code>` sau khi thiết lập để kiểm tra các phụ thuộc cục bộ, Ed25519,
+bộ nhớ lưu trữ, cấu hình khóa và địa chỉ lắng nghe mà không cần khởi động trình thu thập dữ liệu.
+Sử dụng lệnh <code>--json</code> để nhận kết quả đầu ra có cấu trúc. Chuyển các lệnh <code>--data-dir</code>, <code>--host</code> và
+<code>--port</code> theo mục đích. Quá trình kiểm tra này không cài đặt gói phần mềm, không tạo nhật ký cũng như không kết nối với Telegram;
+đây không phải là quá trình đánh giá tính toàn vẹn hay phạm vi bao phủ. Quá trình khởi động sẽ xác minh riêng biệt
+các nhật ký hiện có. Lệnh <code>python start.py --help</code> cũng không yêu cầu cài đặt.</p>
+<p>Các tùy chọn:</p>
+<p>Sau khi chạy tệp start.py, quý vị hãy thực thi các lệnh phụ trợ bằng lệnh `<code>.venv\Scripts\python.exe</code>` trên
+Windows hoặc `<code>.venv/bin/python</code>` trên Linux/macOS, hoặc kích hoạt môi trường đó trước tiên.
+Các ví dụ `<code>python -m ...</code>` dưới đây giả định rằng môi trường đã được kích hoạt.</p>
+<pre><code class="language-sh">python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 8787</code></pre>
+<p>Các biến môi trường: TGWITNESS_DATA, TGWITNESS_HOST, TGWITNESS_PORT, TGWITNESS_TOKEN.
+TGWITNESS_VAULT_KEY_FILE chọn chế độ khóa bên ngoài cho một cài đặt mới; xem phần dưới đây.
+TGWITNESS_TOKEN, nếu được cung cấp, phải chứa ít nhất 24 ký tự; hãy sử dụng một
+giá trị ngẫu nhiên được tạo bằng thuật toán mã hóa. Nếu không có thông số này, ứng dụng sẽ tạo ra một mã thông báo ngẫu nhiên 256-bit trong tệp panel-token.txt.
+Việc ghi đè biến môi trường sẽ không ghi đè lên tệp đó. Vui lòng khởi động lại để luân chuyển thông tin xác thực.</p>
+<p>Chỉ có đúng một tiến trình được phép sở hữu một thư mục dữ liệu. Cơ chế khóa tệp trên nhiều nền tảng hệ điều hành sẽ ngăn chặn
+tình trạng ghi đồng thời vô tình xảy ra. Vui lòng sử dụng một công cụ Uvicorn. Bảng điều khiển có thể quản lý bất kỳ số lượng
+không gian làm việc nào, với các thư mục không gian làm việc bổ sung nằm trong thư mục profiles/&lt;id&gt;/.
+Đối với các phiên bản dịch vụ riêng biệt, hãy sử dụng các thư mục và cổng riêng biệt. Các tệp WAL của SQLite phải được lưu trữ trên bộ nhớ lưu trữ cục bộ lâu dài,
+chứ không phải trên hệ thống tệp mạng. Không được chia sẻ cùng một khối lưu trữ giữa các bản sao.</p>
+<h2 id="windows-portable-package">Gói phần mềm di động dành cho Windows<a class="anchor" href="#windows-portable-package" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Mỗi bản phát hành trên GitHub đều bao gồm <code>TgWitness-&lt;version&gt;-windows-amd64-portable.zip</code> và
+<code>.sha256</code> tương ứng. Bản phát hành này chứa phiên bản runtime Python 3.12 chính thức có thể nhúng từ python.org
+(tổng kiểm tra được cố định trong <code>tools/build_portable.py</code>), TgWitness cùng các phụ thuộc được cố định của nó,
+và ba trình khởi chạy:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Tệp</th>
+<th>Mục đích</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TgWitness.cmd</code></td>
+<td>Khởi chạy bảng điều khiển; các tùy chọn bổ sung sẽ được truyền vào, ví dụ: <code>TgWitness.cmd --port 8790</code></td>
+</tr>
+<tr>
+<td><code>TgWitness-Demo.cmd</code></td>
+<td>Khởi chạy bản demo tổng hợp tại <code>data\demo</code></td>
+</tr>
+<tr>
+<td><code>TgWitness-Check.cmd</code></td>
+<td>Vui lòng thực hiện kiểm tra sẵn sàng mà không cần khởi động</td>
+</tr>
+</tbody>
+</table></div>
+<p>Vui lòng giải nén toàn bộ tệp lưu trữ vào một thư mục có quyền ghi như <code>Documents\TgWitness</code>; không chạy
+chương trình từ bên trong tệp ZIP hoặc từ thư mục Program Files. Môi trường chạy sử dụng đường dẫn mô-đun cách ly,
+do đó các bản cài đặt Python khác và thư mục <code>PYTHONPATH</code> sẽ không ảnh hưởng đến nó. Dữ liệu được lưu trữ trong
+thư mục <code>data</code> của gói phần mềm. Để cập nhật, hãy dừng TgWitness, giải nén phiên bản mới vào một
+thư mục mới và sao chép thư mục <code>data</code> sang đó.</p>
+<p>Tự xây dựng trên hệ điều hành Windows 64-bit bằng Python 3.12:</p>
+<pre><code class="language-sh">python tools/build_portable.py</code></pre>
+<p>Trình xây dựng sẽ xác minh tổng kiểm tra thời gian chạy, cài đặt các phụ thuộc có giới hạn vào
+gói phần mềm, thực hiện kiểm tra sẵn sàng bằng trình thông dịch nhúng và ghi tệp ZIP
+cùng tổng kiểm tra vào tệp <code>dist/</code>.</p>
+<h2 id="container">Container<a class="anchor" href="#container" aria-label="Liên kết đến phần này">#</a></h2>
+<pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
+<p>Quá trình này sẽ tạo ra một khối lượng lưu trữ cố định có tên cho thư mục /data.
+Cổng web được ánh xạ đến địa chỉ 127.0.0.1:8787. Quá trình này chạy với UID 10001 cùng các
+quyền hạn bị giới hạn, hệ thống tệp gốc chỉ đọc, và các thư mục /data và /tmp có thể ghi.
+<code>--wait</code> sẽ kiểm tra tình trạng hoạt động của máy chủ web trước khi trả về kết quả; công cụ này không thiết lập
+quy trình xác thực hay gửi tin nhắn Telegram. Các hàm trợ giúp được cung cấp sử dụng thời gian chờ sẵn sàng là 180 giây
+sau khi xây dựng. Quá trình tải xuống các phụ thuộc ban đầu có thể mất nhiều thời gian hơn mức đó.</p>
+<p>Cả hai tệp Compose cơ sở đều sử dụng tên dự án <code>tgwitness</code>, do đó việc giải nén bản phát hành mới
+vào một thư mục khác sẽ không tự động chọn một khối dữ liệu mới. Chỉ duy trì một
+bản triển khai hoạt động cho dự án đó. Đối với các cài đặt độc lập, hãy sử dụng tên
+<code>docker compose -p NAME ...</code> duy nhất cùng cổng máy chủ khác, và giữ nguyên cả hai khi cập nhật.
+Đối với một bản triển khai cũ hơn sử dụng tên dự án khác, hãy tiếp tục sử dụng tên ban đầu
+của nó cùng với <code>-p</code>; <code>docker compose ls</code> liệt kê các dự án hiện có.</p>
+<p>Sao chép <code>deploy/env.example</code> vào <code>.env</code> và thay đổi <code>TGWITNESS_PORT</code> để sử dụng một cổng loopback
+khác. Ví dụ: <code>TGWITNESS_PORT=8788</code> hiển thị bảng điều khiển tại
+<code>http://127.0.0.1:8788</code>; container vẫn lắng nghe trên cổng 8787. <code>.env</code> bị Git bỏ qua.</p>
+<p>Lấy mã thông báo ban đầu:</p>
+<pre><code class="language-sh">docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
+<p>Các lệnh hữu ích:</p>
+<pre><code class="language-sh">docker compose ps
+docker compose logs --tail 100 -f
+docker compose stop
+docker compose up -d --wait</code></pre>
+<p><code>restart: unless-stopped</code> sẽ khởi động lại trình thu thập sau khi xảy ra sự cố hoặc khi daemon Docker
+được khởi động lại. Trên máy chủ Linux, hãy kích hoạt Docker khi khởi động bằng trình quản lý dịch vụ
+của bản phân phối hệ điều hành mà quý vị đang sử dụng, thường là <code>sudo systemctl enable --now docker</code>. Trên Windows/macOS, hãy kích hoạt
+cài đặt “khởi động khi đăng nhập” của Docker Desktop. Việc đăng xuất khỏi máy tính để bàn, chuyển sang chế độ ngủ hoặc khi daemon
+có thể làm gián đoạn quá trình thu thập dữ liệu. Một container bị dừng rõ ràng sẽ vẫn
+ở trạng thái dừng cho đến khi quý vị khởi động lại nó.</p>
+<p>Trong cấu hình ví dụ, dung lượng của phân vùng /tmp được giới hạn ở mức 512 MiB. Quá trình xuất dữ liệu
+sẽ sử dụng tệp <code>temporary-exports/</code> của từng không gian làm việc trên phân vùng /data lưu trữ vĩnh viễn thay thế. Hãy dành dung lượng
+tại đó cho các tác vụ xuất dữ liệu đồng thời, sự gia tăng của nhật ký/WAL, tệp phương tiện và bản sao lưu.
+Trình khởi chạy và Docker sử dụng tệp deploy/constraints.txt để cố định các phiên bản phụ thuộc thời gian chạy
+đáp ứng tiêu chuẩn. Đây không phải là chuỗi cung ứng được khóa bằng hàm băm: hình ảnh cơ sở Python và các
+tài liệu gói phần mềm vẫn cần phải trải qua quá trình kiểm định phiên bản độc lập.</p>
+<p>Không sử dụng lệnh `docker compose down -v` trừ khi quý vị có ý định xóa sổ nhật ký và các khóa mã hóa.
+Báo cáo tình trạng container phản ánh tính khả dụng của máy chủ web, chứ không phải việc ghi lại tin nhắn Telegram thành công.
+Kiểm tra trạng thái bộ thu thập, tín hiệu hoạt động, lỗi và các sự kiện phạm vi phủ sóng trên bảng điều khiển.</p>
+<h3 id="independent-witness-profile">Hồ sơ nhân chứng độc lập<a class="anchor" href="#independent-witness-profile" aria-label="Liên kết đến phần này">#</a></h3>
+<p>Dịch vụ <code>witness</code> tùy chọn sẽ chạy một <a href="../witness/">chứng nhân độc lập</a> trong
+container riêng, với khóa và nhật ký riêng trong khối lượng <code>witness-data</code>, đồng thời chỉ cung cấp
+một mã thông báo chứng nhân chỉ đọc cho bộ thu thập. Quý vị hãy tạo mã thông báo này trên trang <strong>Chứng nhân</strong> của bảng điều khiển, thêm mã thông báo này
+cùng với mã thông báo bot và kênh vào <code>.env</code>, sau đó khởi động cấu hình:</p>
+<pre><code class="language-sh">docker compose --profile witness up -d          # deploy/compose/compose.image.yaml: same flag
+docker compose logs witness                     # witness key fingerprint</code></pre>
+<p>Dịch vụ này kết nối với bộ thu thập (collector) trong mạng Compose tại địa chỉ <code>http://tgwitness:8787</code>
+(<code>TGWITNESS_WITNESS_COLLECTOR</code>
+sẽ ghi đè lên địa chỉ này; ví dụ: <code>/profiles/&lt;workspace ID&gt;</code>
+dành cho
+một không gian làm việc khác). Đối với tệp chứng cứ (witness) trên một máy chủ riêng biệt do người khác quản lý, quý vị hãy sử dụng
+<code>deploy/compose/compose.witness.yaml</code>
+tại đó và thiết lập <code>TGWITNESS_WITNESS_COLLECTOR</code>
+thành địa chỉ HTTPS
+của bộ thu thập; tệp này chỉ chứa duy nhất tệp chứng cứ.</p>
+<h2 id="install-a-published-image">Cài đặt hình ảnh đã được phát hành<a class="anchor" href="#install-a-published-image" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Tính năng này sẽ khả dụng sau khi <a href="#automated-github-releases">quy trình phát hành</a>
+hoàn tất thành công và cấu hình gói GHCR công khai được thiết lập. Tên/chủ sở hữu của kho lưu trữ không được mã hóa cứng
+trong cây nguồn này. Vui lòng sử dụng hình ảnh được hiển thị trong phần tóm tắt quy trình phát hành của phiên bản đó.</p>
+<p>Sao chép <code>deploy/env.example</code> vào <code>.env</code>. Đặt <code>TGWITNESS_IMAGE</code> thành phiên bản đã được phát hành, bằng cách sử dụng
+đường dẫn kho lưu trữ <strong>viết thường</strong>, ví dụ:</p>
+<pre><code class="language-dotenv">TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.0
+TGWITNESS_PORT=8787</code></pre>
+<p>Vui lòng chạy tệp này một cách độc lập, thay vì sử dụng tệp <code>compose.yaml</code>:</p>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml exec tgwitness cat /data/panel-token.txt</code></pre>
+<p>Không cần xây dựng mã nguồn, Python hay trình biên dịch trên máy chủ. Quy trình phát hành
+nhắm đến các container Linux AMD64 và ARM64, bao gồm cả máy ảo Linux của Docker Desktop.
+Vui lòng sử dụng thẻ phiên bản hoặc mã <code>ghcr.io/owner/repository@sha256:...</code> từ phần tóm tắt quy trình.
+Không có cấu hình nào cho việc di chuyển thẻ <code>latest</code> hay nâng cấp ứng dụng tự động. Các
+biến thể hình ảnh và mã nguồn sẽ sử dụng cùng một khối lượng dữ liệu khi tên dự án của chúng trùng khớp.</p>
+<h2 id="automatic-https-on-a-server">Tự động kích hoạt HTTPS trên máy chủ<a class="anchor" href="#automatic-https-on-a-server" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Vui lòng sử dụng máy chủ chạy Docker, một tên miền do quý vị quản lý và bộ nhớ cục bộ lâu dài.
+Hướng các bản ghi A/AAAA của tên miền đến máy chủ; chỉ công bố bản ghi AAAA nếu địa chỉ IPv6 truy cập được
+đến máy chủ đó. Cho phép kết nối TCP 80 và 443 từ bên ngoài vào, cũng như kết nối DNS/HTTPS ra bên ngoài để cấp chứng chỉ.
+Các dịch vụ khác không được chiếm dụng các cổng này trước đó.</p>
+<p>Sao chép <code>deploy/env.example</code> vào <code>.env</code> và thiết lập tên máy chủ, không kèm theo lược đồ hoặc đường dẫn:</p>
+<pre><code class="language-dotenv">TGWITNESS_DOMAIN=watch.your-domain.org</code></pre>
+<p>Bắt đầu quá trình biên dịch mã nguồn với lớp phủ HTTPS:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt</code></pre>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml -f deploy/compose/compose.https.yaml up -d --wait</code></pre>
+<p>Đối với hình ảnh đã được đăng tải, vui lòng sử dụng <code>deploy/compose/compose.image.yaml</code> làm tệp đầu tiên thay thế. Hãy giữ lại
+cả hai tham số <code>-f</code> để sử dụng cho các lệnh trạng thái, nhật ký, cập nhật và dừng sau này.</p>
+<p>Caddy thực hiện việc lấy và gia hạn chứng chỉ, chuyển hướng HTTP sang HTTPS, đồng thời chuyển tiếp
+các yêu cầu đến bộ thu thập trên mạng Compose riêng tư. Trạng thái chứng chỉ có
+khối lượng lưu trữ riêng biệt và bền vững. Cổng máy chủ trực tiếp của bộ thu thập vẫn chỉ hoạt động ở chế độ loopback.
+Cấu hình Caddy được cung cấp không kích hoạt tính năng ghi nhật ký truy cập.</p>
+<p>Mở <code>https://watch.your-domain.org</code> và nhập mã thông báo bảng điều khiển. Việc chuẩn bị sẵn sàng
+không xác nhận việc cấp chứng chỉ hoặc khả năng kết nối từ bên ngoài. Nếu HTTPS chưa
+sẵn sàng, hãy kiểm tra DNS, các quy tắc tường lửa và:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.https.yaml logs --tail 100 caddy</code></pre>
+<p>Hình ảnh Caddy được cung cấp đi kèm với thẻ <code>2-alpine</code>. Việc thực hiện lệnh `pull` sẽ cập nhật hình ảnh đó;
+quý vị có thể ghim một bản tóm tắt đã được kiểm thử vào môi trường triển khai của mình nếu cần sử dụng các phiên bản cơ sở hạ tầng cố định.</p>
+<h2 id="updates-and-backups">Cập nhật và sao lưu<a class="anchor" href="#updates-and-backups" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Giữ nguyên tên dự án Compose và dung lượng dữ liệu qua các bản cập nhật. Trước tiên, hãy dừng
+trình thu thập dữ liệu và thực hiện sao lưu toàn bộ. Đối với triển khai dựa trên nguồn mặc định:</p>
+<pre><code class="language-sh">docker compose stop
+docker compose cp tgwitness:/data ../tgwitness-backup-before-update</code></pre>
+<p>Hãy sử dụng một đích sao lưu mới mỗi lần, nằm bên ngoài kho lưu trữ, và bảo vệ nó như
+tài liệu truy cập tài khoản. Đường dẫn ví dụ chỉ mang tính minh họa; quý vị hãy sử dụng
+vị trí sao lưu riêng tư của mình. Sao chép toàn bộ thư mục, bao gồm các tệp ẩn, tất cả không gian làm việc, khóa,
+sổ nhật ký và phương tiện truyền thông. Nếu đã cấu hình, hãy sao lưu riêng khóa chính của kho lưu trữ bên ngoài.
+Tệp ZIP chứa bằng chứng không phải là bản sao lưu ứng dụng có thể khôi phục. Đối với HTTPS, hãy lưu giữ thêm
+các khối lượng Caddy nếu quý vị cần duy trì trạng thái chứng chỉ/tài khoản của nó.</p>
+<p>Để triển khai từ mã nguồn, quý vị hãy tải xuống các tệp bản phát hành mới và thực thi lệnh:</p>
+<pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
+<p>Để triển khai phiên bản hình ảnh, quý vị hãy thay đổi <code>TGWITNESS_IMAGE</code> thành phiên bản mong muốn, sau đó thực thi lệnh:</p>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait</code></pre>
+<p>Vui lòng sử dụng (các) tệp Compose của bản cài đặt của quý vị cho các lệnh dừng/sao chép nêu trên.
+Hãy giữ nguyên <code>.env</code>, cấu hình tùy chỉnh và tên dự án như cũ. <code>down</code> giữ lại các
+khối dữ liệu được đặt tên; <strong><code>down -v</code> sẽ xóa chúng</strong>. Không sao chép <code>.venv</code> giữa các hệ điều hành
+hoặc các phiên bản Python khác nhau. Để cập nhật bản gốc, hãy dừng TgWitness, sao lưu toàn bộ thư mục dữ liệu
+của nó, thay thế các tệp nguồn và chạy <code>python start.py --setup-only</code> trước khi khởi động.</p>
+<p>Vui lòng kiểm tra quyền truy cập bảng điều khiển, thông tin nhận dạng tài khoản, trạng thái quan sát và phạm vi bao phủ sau khi
+cập nhật. Việc khởi động lại sẽ không khôi phục các bản cập nhật Telegram bị bỏ lỡ. Việc khôi phục về phiên bản trước có thể
+yêu cầu bản sao lưu trước khi cập nhật nếu phiên bản trong tương lai thay đổi định dạng lưu trữ.</p>
+<h2 id="automated-github-releases">Các bản phát hành tự động trên GitHub<a class="anchor" href="#automated-github-releases" aria-label="Liên kết đến phần này">#</a></h2>
+<p><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml">Quy trình phát hành</a> đã sẵn sàng để sử dụng sau khi
+dự án này được đẩy lên kho lưu trữ GitHub có bật tính năng Actions. Quy trình này sẽ được thực thi khi
+một bản phát hành GitHub được <strong>công bố</strong>, bao gồm cả bản phát hành trước. Việc đẩy bản nháp và thẻ
+một mình sẽ không dẫn đến việc công bố các gói phần mềm.</p>
+<ol>
+<li>Vui lòng thiết lập phiên bản gói phần mềm và nhật ký thay đổi, sau đó phát hành bản cập nhật được gắn thẻ <code>v</code>
+    cùng với phiên bản <code>pyproject.toml</code> chính xác, chẳng hạn như <code>v0.7.0</code>.</li>
+<li>Quy trình làm việc này sẽ xác thực thẻ và thực thi các kiểm tra chung trên trình duyệt Python chia sẻ cho Windows/Linux/macOS,
+    kiểm tra thư mục general/account-import/QR, gói nguồn và Docker. Việc cài đặt bản gốc mới cũng
+    được thực hiện trên cả ba hệ điều hành này bằng Python 3.12.</li>
+<li>Sau khi vượt qua các bước kiểm tra này, hệ thống sẽ tiến hành kiểm tra sơ bộ (smoke test) hình ảnh ARM64 trên QEMU, đăng tải
+    các hình ảnh AMD64/ARM64 lên <code>ghcr.io/&lt;lowercase-owner&gt;/&lt;lowercase-repository&gt;:&lt;version&gt;</code>,
+    và đính kèm tệp ZIP nguồn, tổng kiểm tra (checksum) cùng gói Python wheel vào bản phát hành. Một tác vụ riêng biệt
+    trên Windows sẽ biên dịch và đính kèm tệp ZIP di động cùng tổng kiểm tra (checksum) của nó.</li>
+<li>Sau lần xuất bản đầu tiên, quý vị hãy mở cài đặt gói GHCR và thiết lập quyền truy cập
+    thành <strong>Công khai</strong> nếu có ý định tải xuống hình ảnh ẩn danh. Việc chỉ có kho lưu trữ nguồn công khai
+    thôi chưa đảm bảo gói container sẽ được công khai. Chính sách của tổ chức phải
+    cho phép việc xuất bản gói. Quy trình làm việc sử dụng <code>GITHUB_TOKEN</code>; không được lưu
+    mật khẩu đăng ký hoặc thông tin đăng nhập VPS trong kho lưu trữ.</li>
+</ol>
+<p>Sự thành công của quy trình làm việc từ xa chưa được xác nhận thông qua quá trình chuẩn bị tại địa phương này. Việc mô phỏng ARM64
+chỉ là bước kiểm tra sơ bộ, không phải là quá trình kiểm định trên phần cứng gốc hay kiểm định Telegram trong môi trường thực tế.
+Tính năng này tự động hóa quá trình đóng gói bản phát hành; việc khởi động máy chủ vẫn yêu cầu lệnh Compose
+cùng các điều kiện tiên quyết về tên miền/máy chủ. Các máy chủ hiện có sẽ không được
+nâng cấp hoặc khởi động lại tự động khi có bản phát hành mới.</p>
+<h2 id="remote-server">Máy chủ từ xa<a class="anchor" href="#remote-server" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Hãy giữ dịch vụ kết nối với loopback và sử dụng đường hầm SSH, hoặc kết thúc kết nối HTTPS tại một
+proxy ngược. Tệp Compose cơ bản chỉ hoạt động cục bộ; lớp phủ
+<code>deploy/compose/compose.https.yaml</code> (tùy chọn) cung cấp Caddy cho tên miền đã được cấu hình.
+Hãy đảm bảo token bearer không xuất hiện trong các URL và nhật ký proxy. Máy chủ proxy ngược nên giới hạn
+kích thước yêu cầu và tần suất kết nối. Không được để HTTP thuần túy tiếp xúc với Internet.</p>
+<p>Các ví dụ về systemd, tác vụ đăng nhập Windows, trình duyệt người dùng macOS và Caddy được cung cấp
+trong <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">thư mục deploy/.</a> Vui lòng kiểm tra và điều chỉnh các đường dẫn này trước khi cài đặt.
+Đây là các mẫu được cung cấp sẵn, không phải các cấu hình nền tảng được thực thi cục bộ. Không có
+dịch vụ nền hay tác vụ nào được đăng ký bởi trình khởi chạy thông thường.</p>
+<p>Trên hệ điều hành Windows, khi khởi chạy <code>pythonw.exe</code> ở chế độ không hiển thị cửa sổ, các thông tin chẩn đoán khởi động/máy chủ sẽ được lưu trữ trong
+thư mục <code>logs/server.log</code> thuộc thư mục dữ liệu (5 MiB mỗi tệp, kèm theo hai bản sao lưu luân phiên).
+Khi khởi chạy qua giao diện dòng lệnh, hệ thống sẽ lưu lại nhật ký dòng lệnh. Tính năng ghi nhật ký truy cập HTTP bị vô hiệu hóa trong cả
+hai chế độ. Quý vị cần bảo vệ các tệp nhật ký cùng với thư mục dữ liệu và kiểm tra kỹ lưỡng trước khi chia sẻ.</p>
+<h2 id="restart-and-gaps">Khởi động lại và các khoảng trống<a class="anchor" href="#restart-and-gaps" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Trạng thái quan sát được yêu cầu gần nhất sẽ được lưu giữ. Nếu quá trình quan sát đang hoạt động,
+hệ thống sẽ cố gắng kết nối lại và tiếp tục theo dõi các nguồn đã chọn khi khởi động. Việc tạm dừng thủ công sẽ xóa bỏ
+ý định đó. Các trường hợp khởi động lại không thành công sẽ được ghi lại và hiển thị trên bảng điều khiển.</p>
+<p>StringSession duy trì quyền truy cập nhưng không lưu giữ trạng thái cập nhật/thực thể bền vững của Telethon.
+Các cuộc hội thoại sẽ được tải lại khi khởi động. Telegram/Telethon có thể khôi phục một số sự gián đoạn truyền tải
+trong khi đang chạy, nhưng TgWitness không đảm bảo khả năng phát lại bền vững sau khi khởi động lại quy trình.
+Mỗi lần khởi động sẽ ghi lại đầu nhật ký trước đó và ranh giới ngoại tuyến.
+Trình giám sát kiểm tra kết nối cứ sau 10 giây và thêm tín hiệu kiểm tra hoạt động mỗi phút
+(<strong>Tham số → Ghi lại trạng thái hoạt động mỗi</strong>).
+Các sự gián đoạn ngắn có thể bị bỏ sót; việc kết nối kênh truyền tải không đảm bảo việc
+giao nhận cập nhật hoàn toàn. Các bản chụp nhanh là những quan sát rõ ràng về lịch sử hiện tại, tuyệt đối không phải là việc khôi phục khoảng trống.</p>
+<p>Hàng đợi phương tiện được lưu trữ trong cơ sở dữ liệu SQLite của từng không gian làm việc. Một tin nhắn và tác vụ liên quan
+được cam kết theo cơ chế nguyên tử. Các tác vụ đang chạy bị gián đoạn sẽ được khôi phục để thử lại khi khởi động.
+Mỗi lần tải xuống có thời gian chờ cơ bản là 120 giây cộng thêm thời gian tính theo tốc độ 256 KiB/s dựa trên kích thước tệp, và
+giới hạn từ 1–2.000 MiB cho mỗi loại tệp đính kèm; thời gian chờ, tốc độ và số lần thử lại được thiết lập trong <strong>phần Thông số</strong>. Trình thu thập
+sẽ bỏ qua các tệp có kích thước không xác định. Việc tạm dừng sẽ giữ nguyên các tác vụ đang xếp hàng. Quá trình thử lại sử dụng
+mã định danh tệp ban đầu đã được ghi nhận, chứ không bao giờ sử dụng phiên bản mới nhất của tin nhắn đã được chỉnh sửa sau đó.
+Các sự cố tạm thời có số lần thử lại giới hạn; việc tạm dừng FloodWait của phương tiện truyền thông vẫn được duy trì sau khi khởi động lại.
+Việc khôi phục phương tiện truyền thông là riêng biệt so với việc khôi phục cập nhật Telegram và không thể tái tạo các tệp đã biến mất.</p>
+<h2 id="backup-restore-and-capacity">Sao lưu, khôi phục và dung lượng<a class="anchor" href="#backup-restore-and-capacity" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Hãy dừng quá trình trước khi sao chép <strong>toàn bộ thư mục dữ liệu</strong>, bao gồm các tệp vault.key,
+signing.enc, credentials.enc, cơ sở dữ liệu SQLite/tệp WAL, phương tiện truyền thông, mã thông báo, điểm kiểm tra,
+cùng tất cả các hồ sơ người dùng và thư mục con. Khôi phục
+bản sao hoàn chỉnh trong khi dịch vụ đích đang bị dừng. Việc thiếu khóa vault hoặc
+không khớp khóa ký sẽ khiến quá trình khởi động thất bại; không được tái tạo khóa để ép buộc truy cập.</p>
+<p>Hãy bảo mật các bản sao lưu bằng cách mã hóa và kiểm soát quyền truy cập. Các tệp ZIP chứa bằng chứng có tính di động cao
+để xem xét các bằng chứng, chứ không phải là bản sao lưu ứng dụng hay bản sao lưu phiên Telegram.
+Hệ thống không có tính năng xóa tự động theo thời hạn lưu trữ. Quý vị cần lên kế hoạch về dung lượng đĩa cho tất cả tin nhắn,
+siêu dữ liệu thô, tệp đa phương tiện, các tệp xuất tạm thời và bản sao lưu.</p>
+<p>Khởi động quá trình xác minh và xuất các bản ghi luồng thay vì tải toàn bộ nhật ký.
+Quá trình xuất sẽ cố định một bản chụp nhanh đã đọc trong khi các thao tác ghi WAL mới vẫn có thể tiếp tục; các tác vụ xuất kéo dài
+có thể giữ lại các trang WAL, do đó dung lượng đĩa vẫn là yếu tố quan trọng. Các tệp ZIP bị giới hạn ở mức 4 GiB
+khi giải nén để phù hợp với cài đặt mặc định của bên xác minh độc lập; <strong>Tham số → Tệp ZIP có chữ ký lớn nhất</strong>
+sẽ nâng giới hạn này lên, và các tệp lưu trữ như vậy sẽ được xác minh bằng <code>verify.py --max-gib N</code>. Các định dạng khác không có giới hạn về số lượng sự kiện.
+Các trình duyệt được hỗ trợ sẽ truyền các khối phản hồi theo luồng vào tệp do người dùng chọn. Các trình duyệt khác
+sẽ lưu trữ tạm thời tối đa 128 MiB và chuyển các tệp có dung lượng lớn hơn trực tiếp đến CLI đã được xác thực:</p>
+<pre><code class="language-sh">python -m tgwitness.download --token-file data/live/panel-token.txt --out evidence.zip</code></pre>
+<p>Sử dụng <code>--profile ID</code> từ <strong>mục Xuất → ID Không gian làm việc</strong> cho một không gian làm việc khác,
+<code>--format zip|jsonl|csv|html</code>, <code>--url https://your-server</code> cho máy chủ từ xa, hoặc
+<code>--max-mib</code> để thay đổi giới hạn truyền tải 5 GiB. Giao thức HTTP thuần túy chỉ được phép sử dụng cho
+loopback. Các mã thông báo được truyền qua tiêu đề, các yêu cầu chuyển hướng sẽ bị từ chối, các tệp hiện có
+sẽ không bị ghi đè, và các tệp tải xuống chưa hoàn tất sẽ không được công bố như các tệp đã hoàn tất.
+Nếu TGWITNESS_TOKEN ghi đè lên mã thông báo đã tạo, hãy sử dụng một tệp được bảo vệ riêng biệt
+chứa giá trị đang hoạt động đó: tệp panel-token.txt sẽ không bị ghi đè bởi giá trị này.
+Giá trị SHA-256 của lệnh này chỉ là tổng kiểm tra truyền tải; quý vị cần xác minh độc lập tệp ZIP đã được ký.</p>
+<p>Các tệp xuất từ máy chủ vẫn được lưu trữ bên trong thư mục riêng tư <code>temporary-exports/</code> của từng không gian làm việc.
+Các tác vụ xuất dữ liệu thành công sẽ tự động xóa các tệp của mình. Các tác vụ xuất bị gián đoạn sẽ bị xóa khi
+khởi động không gian làm việc tiếp theo, khi khóa phiên bản độc quyền của nó vẫn được duy trì. Thư mục này là một phần
+của mô hình đe dọa/dung lượng lưu trữ; vui lòng sử dụng một khối dữ liệu được mã hóa. Các hoạt động truyền tải
+với quy mô sản xuất lên đến nhiều gigabyte vẫn cần được kiểm định trên hệ thống đích của quý vị.</p>
+<p>Bảng điều khiển hiển thị các tệp phương tiện đang xếp hàng/bị lỗi, tệp phương tiện đang chờ xử lý lâu nhất, dung lượng đĩa trống, các
+lần tạm dừng yêu cầu từ Telegram, cũng như các nguồn chưa được xác nhận quyền truy cập. Các chẩn đoán này không phải là
+một công cụ giám sát quá trình truyền tải từ đầu đến cuối hoàn chỉnh. Các không gian làm việc chia sẻ chung một tiến trình; do đó, một tài khoản gây nhiễu vẫn có thể
+ảnh hưởng đến các tài khoản khác. Các quy trình xử lý riêng biệt, chính sách lưu trữ/luân chuyển, khôi phục cập nhật bền vững,
+ghim điểm kiểm tra từ xa, phân quyền và quy trình đánh giá triển khai đầy đủ vẫn được duy trì.</p>
+<h2 id="connection-and-protection-options">Các tùy chọn kết nối và bảo vệ<a class="anchor" href="#connection-and-protection-options" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Các tuyến kết nối được thiết lập theo từng không gian làm việc và cần được cấu hình trước khi cấp quyền.
+SOCKS5/HTTP CONNECT sử dụng phụ thuộc python-socks đã được ghim. MTProxy sử dụng
+giao thức trung gian ngẫu nhiên đang trong giai đoạn thử nghiệm của Telethon; các khóa bí mật TLS giả mạo không được hỗ trợ.
+Không có tùy chọn chuyển sang phương án dự phòng trực tiếp tự động nào được cấu hình. Đây không phải là tuyến mạng áp dụng cho toàn hệ thống.</p>
+<p>Đối với các cài đặt mới, biến TGWITNESS_VAULT_KEY_FILE trỏ đến một tệp khóa chính ngẫu nhiên
+được bảo vệ riêng biệt. Hãy gắn tệp này ở chế độ chỉ đọc bên ngoài thư mục /data trong một container. Hãy bảo quản riêng biệt
+dữ liệu meta salt công khai trong tệp vault.external.json cho từng không gian làm việc cùng với khóa chính.
+Các kho lưu trữ cục bộ hiện có cần được di chuyển theo kế hoạch; việc thiết lập biến này sẽ không
+tự động chuyển đổi chúng. Việc lưu trữ và xuất tin nhắn/tệp đa phương tiện không được mã hóa bởi ứng dụng.
+Vui lòng sử dụng các phân vùng được mã hóa và không gian lưu trữ tạm thời riêng tư đủ dung lượng khi cần thiết.</p>
+<p>Các quy trình chi tiết: <a href="../connection/">kết nối/bảo mật</a> và
+<a href="../operations/">các chế độ hoạt động</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/DEPLOYMENT.md">Chỉnh sửa trang này trên GitHub ↗</a><a class="next-guide" href="../collection/"><span>Bước tiếp theo</span><strong>Cách thức thu thập dữ liệu →</strong></a><p>Các hướng dẫn này mô tả cách triển khai hiện tại. Kết quả xác thực và những hạn chế còn tồn tại được ghi chép riêng biệt. <a href="../verification/">Những nội dung đã được kiểm thử →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Trên trang này"><p class="nav-label">Trên trang này</p><a href="#choose-an-installation">Chọn phương thức cài đặt</a><a href="#installation-requirements">Yêu cầu cài đặt</a><a href="#local-computer">Máy tính cục bộ</a><a href="#windows-portable-package">Gói phần mềm di động dành cho Windows</a><a href="#container">Container</a><a href="#install-a-published-image">Cài đặt hình ảnh đã được phát hành</a><a href="#automatic-https-on-a-server">Tự động kích hoạt HTTPS trên máy chủ</a><a href="#updates-and-backups">Cập nhật và sao lưu</a><a href="#automated-github-releases">Các bản phát hành tự động trên GitHub</a><a href="#remote-server">Máy chủ từ xa</a><a href="#restart-and-gaps">Khởi động lại và các khoảng trống</a><a href="#backup-restore-and-capacity">Sao lưu, khôi phục và dung lượng</a><a href="#connection-and-protection-options">Các tùy chọn kết nối và bảo vệ</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Mã nguồn mở · Chạy trên máy tính của quý vị</span><a href="../../../../LICENSE">Giấy phép MIT</a><a href="../notice/">Thông báo dành cho người vận hành</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">An ninh</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Đang chờ tin nhắn", "Step through a fictional send, edit and delete.": "Hãy cùng tìm hiểu từng bước về một quy trình giả định bao gồm việc gửi, chỉnh sửa và xóa tin nhắn.", "No observations yet. Start the sequence or advance one event.": "Chưa có ghi chú nào. Bắt đầu chuỗi sự kiện hoặc chuyển sang sự kiện tiếp theo.", "Meet at 10:00": "Hẹn gặp lúc 10:00", "A new message is visible in the chat.": "Một tin nhắn mới đã xuất hiện trong cuộc trò chuyện.", "Record 1 appended: the collector observed the original message.": "Ghi chú 1 được đính kèm: bộ thu thập đã ghi nhận tin nhắn gốc.", "Meet at 11:00": "Hẹn gặp lúc 11:00", "The current text changes. The earlier observation stays.": "Nội dung văn bản hiện tại đã được điều chỉnh. Quan sát trước đó vẫn được giữ nguyên.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Bản ghi số 2 đã được bổ sung: nội dung chỉnh sửa là một quan sát mới. Bản ghi số 1 vẫn giữ nguyên văn bản gốc.", "Message deleted": "Tin nhắn đã bị xóa", "The message has disappeared from the chat view.": "Tin nhắn đã biến mất khỏi giao diện trò chuyện.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Ghi chú 3 được đính kèm: thông báo xóa được lưu giữ cùng với cả hai phiên bản đã quan sát được.", "0 records": "0 bản ghi", "1 record": "1 bản ghi", "2 records": "2 bản ghi", "3 records": "3 bản ghi", "Complete / {n} of 3": "Hoàn tất / {n}/3", "Step / {n} of 3": "Bước / {n}/3", "Pause": "Tạm dừng", "Replay sequence": "Trình tự phát lại", "Play sequence": "Trình tự phát lại", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Ví dụ tĩnh hiện đã có sẵn. Để tính toán các giá trị băm một cách tương tác, vui lòng truy cập trang này qua HTTPS hoặc xem bản xem trước trên localhost với sự hỗ trợ của Web Crypto.", "No record supplied": "Không có bản ghi nào được cung cấp", "Tail removed": "Phần cuối đã được loại bỏ", "≠ saved hash": "≠ băm đã lưu", "Rebuilt · different hash": "Đã được xây dựng lại · mã băm khác", "= saved hash": "= mã băm đã lưu", "Same length and matching head.": "Độ dài tương đương và tiêu đề phù hợp.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Cả ba giá trị băm được tính toán đều khớp với các giá trị băm đã lưu. Mẫu này phù hợp với giới hạn ba bản ghi được lưu giữ.", "Same saved head; the journal prefix fails verification.": "Cùng một tiêu đề đã lưu; tiền tố của sổ ghi chép không qua được quá trình xác minh.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Bản ghi số 2 hiện không còn khớp với giá trị băm đã lưu trữ của nó. Việc chỉ kiểm tra giá trị băm cuối cùng đã lưu trữ sẽ bỏ sót lỗi này; trình xác minh sẽ kiểm tra từng bản ghi một.", "Head differs from the retained checkpoint.": "Đầu trang khác với điểm kiểm tra được lưu giữ.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Các giá trị băm được tái tạo liên kết với nhau, nhưng phần đầu cuối cùng đã thay đổi. Điểm kiểm tra được lưu giữ từ chối lịch sử này. Các chữ ký gốc cũng sẽ không hợp lệ đối với các bản ghi đã bị thay đổi.", "Too short: 2 supplied records \u003c 3 retained records.": "Quá ngắn: 2 bản ghi được cung cấp \u003c 3 bản ghi được lưu giữ.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Hai giá trị băm còn lại vẫn khớp nhau. Điểm kiểm tra được lưu giữ đã tiết lộ phần cuối bị thiếu. Nếu không có ranh giới trước đó, chỉ riêng tiền tố ngắn hơn này sẽ không thể phát hiện ra sự thiếu sót.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Trình duyệt này không hỗ trợ tính toán hàm băm. Các công thức và phần giải thích tĩnh dưới đây vẫn có sẵn.", "{n} records": "{n} bản ghi", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Đã được chấp nhận: số lượng tăng lên, chữ ký đã được xác minh và khóa khớp. TgWitness duy trì ranh giới mới này.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: bản trả lời có chữ ký báo cáo số lượng bản ghi ít hơn so với điểm kiểm tra được chấp nhận gần nhất. Hệ thống TgWitness ghi nhận sự cố và giữ nguyên ranh giới đã được chấp nhận trước đó.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: số lượng không thay đổi nhưng nhánh chính khác biệt. TgWitness ghi lại sự bất đồng này và duy trì ranh giới đã được chấp nhận trước đó.", "No answer": "Không có câu trả lời", "boundary unknown": "giới hạn chưa xác định", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Không có phản hồi: TgWitness ghi lại kết quả kiểm tra không thành công. Công cụ này không thể xác định trạng thái hiện tại của bộ thu thập dữ liệu. Nếu TgWitness vẫn có thể kết nối với Bot API và chính sách xuất bản cho phép, công cụ này có thể công bố thông tin về sự cố đó.", "Send {n}": "Gửi {n}", "Edit {n}": "Chỉnh sửa {n}", "Delete {n}": "Xóa {n}", "Both accounts captured all six expected observations in this example.": "Cả hai tài khoản đều ghi lại đầy đủ cả sáu quan sát dự kiến trong ví dụ này.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Tài khoản B vẫn ghi lại được 6/6 tin nhắn. Hai biên nhận mất nhiều thời gian hơn. Tỷ lệ ghi lại và độ trễ của biên nhận trả lời cho những câu hỏi khác nhau.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Tài khoản B đã ghi lại được 5 trong số 6 hành động trước thời hạn (83,3%). Hành động chỉnh sửa còn thiếu không có độ trễ được đo lường. Kết quả này chỉ mô tả sáu hành động được kiểm soát.", "not observed by cutoff": "không được ghi nhận trước thời hạn", "{s} seconds": "{s} giây", "Exact values follow in the table.": "Các giá trị chính xác được trình bày trong bảng dưới đây.", "{s} s": "{s} s", "Not observed": "Chưa được quan sát thấy", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Bốn cuộc trò chuyện cung cấp các quan sát khác nhau. Vui lòng theo dõi các bản ghi nguồn cho từng kết nối; không gán bài đăng trên kênh cho người dùng 71001 nếu không có thông tin người gửi được xác định rõ.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Các bản ghi số 146 và 205 cung cấp cùng một ID người gửi, đó là 71001. Điều này giúp liên kết các bài đăng được quan sát thấy từ một tài khoản Telegram trên hai cuộc trò chuyện. Tuy nhiên, thông tin này không xác định danh tính của một cá nhân trong thế giới thực cũng như không quy thuộc bài đăng trên kênh đó cho bất kỳ ai.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Địa chỉ đích pay.example.invalid/new xuất hiện trong bản ghi nhóm số 146, bản ghi bàn phím bot số 173, bản ghi chỉnh sửa kênh số 188 và tin nhắn riêng tư số 205. Việc địa chỉ đích này xuất hiện lặp lại giúp liên kết các tài liệu với nhau; điều này không chứng minh rằng các tài khoản đó nằm dưới sự kiểm soát chung.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Trong trường hợp giả định này, các biên nhận phương tiện đã hoàn tất số #151 và #209 có các giá trị SHA-256 đầy đủ trùng khớp. Hãy so sánh các byte thực tế và các bản ghi tin nhắn liên quan. Tệp trùng khớp này không xác định được người tạo ra nó cũng như không chứng minh được ai là người đã chuyển tiếp nó.", "the encrypted off-site copy": "bản sao được mã hóa lưu trữ ngoài trang web", "notifications": "thông báo", "checkpoint hashes for timestamps": "Các giá trị băm điểm kiểm tra (checkpoint hashes) để xác định dấu thời gian", "signed checkpoints for the witness": "các mốc kiểm tra có chữ ký dành cho TgWitness", "Switched on in this example": "Đã kích hoạt trong ví dụ này", "Optional · off by default": "Tùy chọn · tắt theo mặc định", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Khi rời khỏi thiết bị này: kết nối Telegram và {list}. Không có gì khác.", "Default: only the Telegram connection leaves this machine.": "Mặc định: chỉ kết nối Telegram mới được truyền ra khỏi máy này.", "{done} of {total} done": "{done}/{total} đã hoàn thành", "Mark step {n} as done": "Đánh dấu bước {n} là đã hoàn thành", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Nội dung", "Copied": "Đã sao chép", "Command copied.": "Lệnh đã được sao chép.", "Selected — Ctrl/Cmd+C": "Đã chọn — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Lệnh đã được chọn. Vui lòng sao chép thủ công.", "Command copied to clipboard.": "Lệnh đã được sao chép vào khay nhớ tạm.", "Select text": "Chọn văn bản", "Clipboard unavailable. Command selected; copy it manually.": "Không thể truy cập khay nhớ tạm. Lệnh đã được chọn; vui lòng sao chép thủ công.", "A message arrives. The first observation is saved.": "Một tin nhắn được gửi đến. Quan sát đầu tiên được lưu lại.", "The time changes. Both captured versions stay.": "Thời gian có thể thay đổi. Cả hai phiên bản được lưu giữ đều được giữ nguyên.", "The message disappears. The captured history remains.": "Tin nhắn có thể biến mất. Nhưng lịch sử đã được ghi lại vẫn còn đó.", "Pause example animation": "Tạm dừng hình ảnh minh họa", "Play example animation": "Xem ví dụ về hình ảnh động", "Play": "Phát", "Full-size workspace screenshot": "Ảnh chụp màn hình toàn màn hình không gian làm việc", "Workspace screenshot · fictional data": "Ảnh chụp màn hình giao diện làm việc · dữ liệu giả định", "Close": "Đóng", "Close screenshot": "Đóng ảnh chụp màn hình", "Scrollable full-size screenshot": "Ảnh chụp màn hình toàn màn hình có thể cuộn", "Enlarge: {name}": "Phóng to: {name}", "View full size": "Xem kích thước đầy đủ"}</script>
+</body></html>

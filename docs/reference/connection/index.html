@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Connection, proxies and data protection | TgWitness</title>
+<meta name="description" content="API pairs, sign-in methods, SOCKS5, HTTP and MTProxy routes, public proxy lists and what each route protects."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Connection, proxies and data protection | TgWitness"><meta property="og:description" content="API pairs, sign-in methods, SOCKS5, HTTP and MTProxy routes, public proxy lists and what each route protects.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/connection/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/connection/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/connection/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/connection/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/connection/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/connection/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/connection/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/docs/reference/connection/", "url": "https://phishdestroy.github.io/TgWitness/docs/reference/connection/", "name": "Connection, proxies and data protection | TgWitness", "description": "API pairs, sign-in methods, SOCKS5, HTTP and MTProxy routes, public proxy lists and what each route protects.", "inLanguage": "en", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://phishdestroy.github.io/TgWitness/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://phishdestroy.github.io/TgWitness/docs/"}, {"@type": "ListItem", "position": 3, "name": "Reference", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Connection, proxies and data protection", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/connection/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../docs.css">
+<link rel="stylesheet" href="../../../learn.css">
+<script src="../../../docs.js" defer></script>
+<script src="../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Documentation</span></a>
+<nav aria-label="Guides"><a href="../../concepts/">Visual guide</a><a href="../../">All guides</a><a href="../">Reference</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Language"><span aria-hidden="true">◍</span> English</summary><div class="lang-list"><a href="./" hreflang="en" lang="en" aria-current="true">English</a><a href="../../../ru/docs/reference/connection/" hreflang="ru" lang="ru">Русский</a><a href="../../../uk/docs/reference/connection/" hreflang="uk" lang="uk">Українська</a><a href="../../../es/docs/reference/connection/" hreflang="es" lang="es">Español</a><a href="../../../pt/docs/reference/connection/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../tr/docs/reference/connection/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../ar/docs/reference/connection/" hreflang="ar" lang="ar">العربية</a><a href="../../../fa/docs/reference/connection/" hreflang="fa" lang="fa">فارسی</a><a href="../../../ur/docs/reference/connection/" hreflang="ur" lang="ur">اردو</a><a href="../../../hi/docs/reference/connection/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../id/docs/reference/connection/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../vi/docs/reference/connection/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../zh/docs/reference/connection/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Switch between light and dark theme"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Guides"><a href="../../../guides/modes.html">Modes, scenarios and evidence levels</a><p class="nav-label">First steps</p><a href="../../start/">Start in minutes</a><a href="../../accounts/">Connect an account</a><a href="../../proxies/">Choose a proxy</a><a href="../../exports/">Export and verify</a><p class="nav-label">Understand the evidence</p><a href="../../concepts/">See how evidence works</a><a href="../../cases/">Investigate across all chats</a><a href="../../security/">Keep it secure</a><p class="nav-label">Go further</p><a href="../../witness/">Set up a witness bot</a><a href="../../server/">Keep it running</a><a href="../../troubleshooting/">Find what went wrong</a></nav><nav class="wiki-nav" aria-label="Reference"><p class="nav-label"><a class="nav-label-link" href="../">Reference</a></p><details class="wiki-group" open><summary>Set up</summary><a href="../quickstart/">Quick start</a><a href="../accounts/">Accounts and session formats</a><a href="./" aria-current="page">Connection, proxies and data protection</a><a href="../deployment/">Deployment</a></details><details class="wiki-group"><summary>Collect</summary><a href="../collection/">How collection works</a><a href="../operations/">Workflows and operations</a><a href="../investigation/">Investigation mode</a><a href="../features/">Features and limits</a></details><details class="wiki-group"><summary>Evidence</summary><a href="../how-it-works/">How the evidence works</a><a href="../evidence/">Evidence format</a><a href="../witness/">Independent witness</a><a href="../timestamp/">Timestamps</a></details><details class="wiki-group"><summary>Security & project</summary><a href="../security/">Security and data handling</a><a href="../architecture/">Architecture</a><a href="../verification/">What has been tested</a><a href="../license/">Licence and architectural incompatibility notice</a><a href="../notice/">Operator incompatibility notice</a><a href="../changelog/">Changelog</a></details></nav><p class="sidebar-note">v0.7.0<br>Open source · Runs on your machine</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Guides"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Documentation</a> <span aria-hidden="true">/</span> <a href="../">Reference</a> <span aria-hidden="true">/</span> <span aria-current="page">Connection, proxies and data protection</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Search the documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Try proxy, hash chain, token or witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Clear search" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Type a word to search the guides and the reference. Search stays in your browser.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Reference / Set up</p><h1>Connection, proxies and data protection</h1><p class="guide-outcome">API pairs, sign-in methods, SOCKS5, HTTP and MTProxy routes, public proxy lists and what each route protects.</p><div class="wiki-body"><p>This document describes TgWitness 0.7.0 behavior and its limits. Authentication,
+source access, network connectivity and capture completeness are separate states.
+For sign-in steps, file formats, and multiple accounts, start with
+<a href="../accounts/">accounts and session formats</a>. For event policies and restart
+behavior, see <a href="../collection/">how collection works</a>.</p>
+<h2 id="authentication-methods">Authentication methods<a class="anchor" href="#authentication-methods" aria-label="Link to this section">#</a></h2>
+<p><strong>API ID and API hash identify an application; they do not replace account login.</strong>
+They are optional in TgWitness. Precedence: a pair entered in the form, then one from an
+imported account JSON, then the pair saved in the workspace, then the built-in pool of 50
+public pairs, tried in random order with automatic rotation when Telegram refuses one. Only the
+Telegram Desktop pair (2040) is sent with a matching Telegram Desktop client description.
+Your own pair from API Development Tools at <a href="https://my.telegram.org">my.telegram.org</a>
+can be used with all of your accounts; each account still has its own authorization.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Requirements</th>
+<th>TgWitness support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Phone, code, optional 2FA</td>
+<td>Account access; API pair optional</td>
+<td>Panel login</td>
+</tr>
+<tr>
+<td>Auth Key HEX + DC ID</td>
+<td>Full 512-character key and DC 1–5</td>
+<td>Direct <strong>Auth key</strong> tab; optional User ID checked before authorization is saved</td>
+</tr>
+<tr>
+<td>Telethon StringSession</td>
+<td>A valid session string</td>
+<td>Panel login</td>
+</tr>
+<tr>
+<td>Telethon SQLite <code>.session</code></td>
+<td>Closed, consistent copy</td>
+<td>Direct panel import of schemas 7/8; optional offline CLI</td>
+</tr>
+<tr>
+<td>Pyrogram SQLite <code>.session</code></td>
+<td>Closed production user session</td>
+<td>Direct panel import of schemas 2/3</td>
+</tr>
+<tr>
+<td>Telegram Desktop TData ZIP</td>
+<td>One modern account; local passcode if protected</td>
+<td>In-memory conversion with checksum/decryption checks</td>
+</tr>
+<tr>
+<td>Account JSON</td>
+<td>Supported API/session/key fields</td>
+<td>Metadata alone fills API credentials; a session/key or phone/QR login is still needed</td>
+</tr>
+<tr>
+<td>QR login</td>
+<td>Confirmation from an authorized Telegram app</td>
+<td>Local QR generation, expiry/retry, optional 2FA</td>
+</tr>
+<tr>
+<td>TDLib / Pyrogram StringSession</td>
+<td>Other library-specific formats</td>
+<td>Unsupported</td>
+</tr>
+<tr>
+<td>Bot token</td>
+<td>A bot with its own access/update model</td>
+<td>Not used by this collector</td>
+</tr>
+</tbody>
+</table></div>
+<p>Telegram chooses code delivery; SMS is not guaranteed. An API hash cannot repair
+a revoked session or replace a forgotten 2FA password. TgWitness does not persist
+login codes or the Telegram 2FA password to disk.</p>
+<p>For a private source, the account must already have access. A group username is
+unnecessary. A proxy or session import grants neither membership nor administrator
+rights. Current membership does not guarantee access to pre-join history.</p>
+<h2 id="import-a-telethon-session-file">Import a Telethon session file<a class="anchor" href="#import-a-telethon-session-file" aria-label="Link to this section">#</a></h2>
+<p>Telethon SQLite, Pyrogram SQLite, and Telegram Desktop TData use different formats.
+The panel detects and converts the supported structures; renaming a file is not
+conversion. Select one session and its companion JSON under <strong>Files</strong>, then press <strong>Connect account</strong>. Up to four matching files and
+8 MiB total are accepted. See <a href="../accounts/">format limits</a> for TData/JSON details.
+There is no passcode recovery. Phone/2FA or QR login creates a separate authorization.</p>
+<p>The optional Telethon-only command-line path remains available:</p>
+<ol>
+<li>Stop the client using the original session and make a consistent copy. The
+    converter rejects files with an unfinished WAL/journal. Close the original
+    client properly instead of deleting those files to bypass the check.</li>
+<li>From the TgWitness environment, run:</li>
+</ol>
+<pre><code class="language-sh">python -m tgwitness.sessions account.session --out account.tgwitness-session</code></pre>
+<ol start="3">
+<li>Under <strong>Add account → Files</strong>, load the result or
+    paste its string, and continue.</li>
+<li>Check the displayed numeric account ID, select sources and start observation.</li>
+</ol>
+<p>The converter opens SQLite read-only, performs no schema upgrade or network request,
+and does not print the session. It checks schema version, table types, a single
+session row, IP/port/DC and key length. CLI input is limited to 64 MiB; StringSession
+text is limited to 4 KiB. Panel conversion uploads files to the authenticated TgWitness
+server, processes them in memory, and returns the normalized credentials to that
+browser without saving the uploaded originals. Use HTTPS for a remote server.</p>
+<p><strong>The converted file is an unencrypted account-access secret.</strong> Keep it in protected
+storage and never commit it or send it to a third-party conversion service. TgWitness
+saves the authorized session in its encrypted vault. Copying a session does not
+create a separate authorization: do not run concurrent clients with cloned auth keys
+and assume independent update delivery.</p>
+<p>Conversion transfers authorization, not original messages, the entity cache or a
+durable update cursor. It does not fix update recovery across process restarts.</p>
+<h2 id="mtproto-telethon-and-proxies">MTProto, Telethon and proxies<a class="anchor" href="#mtproto-telethon-and-proxies" aria-label="Link to this section">#</a></h2>
+<p>MTProto is Telegram's protocol. Telethon is the Python client library TgWitness uses.
+MTProxy is a Telegram transport proxy; SOCKS5 and HTTP CONNECT provide general
+tunnels. None replaces account authentication.</p>
+<p>Save the route for each workspace in <strong>Account → Settings → Connection settings → Change connection route</strong> before
+signing in if you need a proxy. The default is Direct.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Settings</th>
+<th>Boundary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Direct</td>
+<td>None</td>
+<td>Telethon connects directly to Telegram</td>
+</tr>
+<tr>
+<td>SOCKS5</td>
+<td>Host, port, optional username/password</td>
+<td>python-socks 2.8.2, rdns enabled</td>
+</tr>
+<tr>
+<td>HTTP CONNECT</td>
+<td>Host, port, optional username/password</td>
+<td>Plain HTTP CONNECT; TLS to the proxy itself is not implemented</td>
+</tr>
+<tr>
+<td>MTProxy</td>
+<td>Host, port, secret</td>
+<td>Experimental Telethon transport; 32 hex digits or <code>dd</code> + 32 hex digits</td>
+</tr>
+</tbody>
+</table></div>
+<p>Fake TLS <code>ee</code> secrets are rejected. Telethon 1.45's normalization can strip a prefix
+and domain, but that does not implement Fake TLS. Paste <code>tg://proxy?server=…&amp;port=…&amp;secret=…</code>
+or <code>https://t.me/proxy?server=…&amp;port=…&amp;secret=…</code> and choose <strong>Fill fields from link</strong>.
+This validates and fills the fields without connecting or saving; review and save the
+route separately. Manual fields remain available. See <a href="https://core.telegram.org/api/links#proxy-links">Telegram proxy links</a>.</p>
+<h3 id="public-proxies-supplied-by-your-installation">Public proxies supplied by your installation<a class="anchor" href="#public-proxies-supplied-by-your-installation" aria-label="Link to this section">#</a></h3>
+<p>The connection settings include a ready-made public list from
+<a href="https://github.com/SoliSpirit/mtproto">SoliSpirit/mtproto</a> and
+<a href="https://github.com/zakky8/mtproto-proxy-pro">zakky8/mtproto-proxy-pro</a>. The bundled snapshot
+contains public endpoint facts, source attribution and download dates, not either
+project's verification claims. It works without fetching anything on startup. Choose
+an entry, save the route, then test the Telegram connection before signing in.</p>
+<p><strong>Update public lists</strong> fetches the two fixed HTTPS feeds on request. Each response is
+limited to 1 MiB and 20 seconds; redirects are rejected. At most 64 compatible entries
+per source are retained, deduplicated across sources. Invalid links, private/reserved
+IP literals, local hostnames and unsupported Fake TLS <code>ee</code> entries are skipped. Public
+hostnames are resolved on selection; every answer must be globally routable and the
+selected IP is pinned in the saved route. This prevents a feed hostname from later
+redirecting a saved connection to a private address. Reapply an entry to resolve it again.</p>
+<p>Each workspace retains its last good source snapshots in <code>public-proxies.json</code>. Failed,
+empty or incompatible source responses keep that source's previous entries and timestamp.
+Updates are atomic, serialized and limited to one attempt per minute per workspace.
+Neither updating nor viewing a list changes the selected route. Availability still
+requires a transport test; a provider's listing is not evidence of complete Telegram delivery.</p>
+<p>List downloads use a separate HTTPS connection, direct by default. Set
+<code>TGWITNESS_PROXY_FEED_PROXY</code> to an HTTP/SOCKS5 URL to route these requests through a download
+proxy; both collector Compose variants forward it. No Telegram session, API credentials,
+panel token or bot token is sent to the providers. The workspace's MTProxy cannot carry
+these HTTP downloads. Provider names, saved dates and the download route are disclosed
+under <strong>Where the list comes from</strong>.</p>
+<p>To replace the public list with your own operator catalog, configure the override below.
+It disables external subscriptions entirely, including when its <code>proxies</code> array is empty.</p>
+<p>Copy <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/proxies.config.example">the empty catalog</a> to <code>proxy-config/proxies.json</code>
+and add your deployed public endpoints:</p>
+<pre><code class="language-json">{&quot;format&quot;: &quot;tgwitness-proxy-catalog-v1&quot;, &quot;proxies&quot;: [
+  {&quot;id&quot;: &quot;project-eu&quot;, &quot;label&quot;: &quot;Project EU&quot;,
+   &quot;link&quot;: &quot;tg://proxy?server=REPLACE_HOST&amp;port=443&amp;secret=REPLACE_SECRET&quot;}
+]}</code></pre>
+<p>The example values must be replaced. Up to 32 distinct entries are accepted. The
+authenticated listing returns labels/hosts/ports without shared secrets; selecting one
+saves its credentials into the workspace vault. Availability remains untested until an
+explicit transport test. A malformed catalog leaves manual configuration available.</p>
+<p>Native launch: set <code>TGWITNESS_PROXY_CATALOG</code> to the local JSON path. Docker:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.proxies.yaml up -d --build</code></pre>
+<p>The overlay mounts <code>proxy-config</code> read-only; files must be readable by container UID 10001.
+That directory is excluded from Git, Docker build context and source archives. This
+catalog configures the collecting accounts; <a href="../witness/">the witness bot</a> uses its own
+HTTP/SOCKS5 route, not MTProxy.</p>
+<p>If the proxy fails, TgWitness does not fall back to Direct. Pause observation before
+changing a route. Saving disconnects old clients and cancels unfinished login; a
+new client uses the saved route. The account's journal/session binding remains.
+Settings replace the previous route: re-enter proxy credentials when editing it.</p>
+<p>Credentials are encrypted in <code>network.enc</code>. The API does not return the username,
+password or secret. Signed records contain the route type and whether credentials
+are present, excluding the endpoint and secrets. The operator can see the endpoint
+in the panel. Secret fields clear after saving, locking or switching workspaces.</p>
+<p><strong>Test Telegram connection</strong>, also available before login, opens and closes a temporary
+unauthorized Telegram connection through the route. It does not contact an IP-check
+website. Success establishes transport connectivity, not group access, complete
+delivery or anonymity.</p>
+<p>The proxy applies to the Telegram client's connections, including Telegram DC media
+downloads. Browser, pip, SSH and manually invoked TSA tools have separate routes.
+The proxy hostname may be resolved locally. <code>rdns</code> affects destination hostnames;
+Telegram often supplies numeric DC IPs.</p>
+<p>SOCKS5 and plain HTTP CONNECT do not themselves encrypt proxy credentials or the
+client-to-proxy tunnel. MTProto separately protects Telegram traffic. Use an
+appropriate secure channel to the proxy on an untrusted network. Private groups
+are cloud chats; MTProto does not turn them into end-to-end encrypted Secret Chats.</p>
+<h2 id="encryption-and-signatures">Encryption and signatures<a class="anchor" href="#encryption-and-signatures" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Implemented</th>
+<th>Operator responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Telegram traffic</td>
+<td>Telethon MTProto</td>
+<td>Platform trust, route and availability</td>
+</tr>
+<tr>
+<td>Web panel</td>
+<td>Bearer token, loopback default, request limits</td>
+<td>HTTPS or SSH tunnel for remote access</td>
+</tr>
+<tr>
+<td>Secrets</td>
+<td>Fernet for API credentials, session, proxy credentials and signing private key</td>
+<td>Protect the decryption key and running host</td>
+</tr>
+<tr>
+<td>Vault key</td>
+<td>Local key, or external master key for a new installation</td>
+<td>Separate protected storage and key backup</td>
+</tr>
+<tr>
+<td>Messages and attachments</td>
+<td>Plaintext application storage</td>
+<td>Encrypted disk/volume</td>
+</tr>
+<tr>
+<td>ZIP/JSONL/CSV/HTML</td>
+<td>Integrity checks, no content encryption</td>
+<td>Protect exported copies and transfers</td>
+</tr>
+<tr>
+<td>Provenance and time</td>
+<td>Signed journal, process receipt, RFC 3161 tools</td>
+<td>Trusted key, independent checkpoints/TSA and custody procedure</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Storage protection</strong> in Account shows these states. The panel token is an
+access secret, not an encryption password. One token controls all workspaces;
+workspaces are not separate users or isolated tenants.</p>
+<p>An explicitly started, isolated synthetic demo can open automatically over a direct
+loopback connection. This uses a separate process-lifetime capability; it neither
+reveals the configured panel token nor grants access to real workspaces. Remote,
+proxied or cross-origin requests cannot obtain/use this automatic-entry capability.
+This convenience does not remove the authentication boundary for real account data.</p>
+<p>BitLocker, LUKS, FileVault or a managed encrypted volume can protect storage under
+their respective threat models. An administrator of an unlocked running machine
+can still read data. Include SQLite WAL/SHM, media, temporary exports, swap, backups
+and browser downloads in storage planning. A Docker volume is not encrypted merely
+because it is a volume. TgWitness does not implement SQLCipher or object encryption.</p>
+<h2 id="external-master-key">External master key<a class="anchor" href="#external-master-key" aria-label="Link to this section">#</a></h2>
+<p>For a <strong>new</strong> installation, place the master key outside the data directory.
+This does not automatically migrate an existing local-key vault. Prepare a key
+directory accessible only to the service identity, then run:</p>
+<pre><code class="language-sh">python -m tgwitness.security create-master-key /private/keys/tgwitness-master.key
+export TGWITNESS_VAULT_KEY_FILE=/private/keys/tgwitness-master.key
+python -m tgwitness --data-dir /private/observations/new-case</code></pre>
+<p>PowerShell, using the installed project environment:</p>
+<pre><code class="language-powershell">python -m tgwitness.security create-master-key E:\PrivateKeys\tgwitness-master.key
+$env:TGWITNESS_VAULT_KEY_FILE = &#x27;E:\PrivateKeys\tgwitness-master.key&#x27;
+python -m tgwitness --data-dir E:\PrivateData\new-case</code></pre>
+<p>In Docker, mount the file read-only outside <code>/data</code>, for example at
+<code>/run/secrets/tgwitness-master.key</code>, and set the environment variable to that path.
+The service UID must be able to read it. Pass the path, not the key bytes, through
+environment/configuration files.</p>
+<p>Each workspace receives a random public salt and its own Fernet key derived through
+HKDF-SHA256. <code>vault.external.json</code> stores derivation metadata, not the master key.
+A missing/wrong key fails startup without silently replacing it. Retain both the
+salt metadata and master key for recovery.</p>
+<p>All workspaces derive from the same master key; its compromise affects the entire
+installation. The running process can decrypt secrets. This is not an HSM or
+password KDF. Arbitrary human passwords are not accepted in place of a random key.</p>
+<p>Keep the existing key for existing installations until a deliberate migration is
+implemented and verified. Deleting <code>vault.key</code> or replacing a master key can destroy
+access to sessions/signing keys. Keep encrypted backups and keys separately and
+test recovery in an isolated instance.</p>
+<h2 id="sources-and-verification-scope">Sources and verification scope<a class="anchor" href="#sources-and-verification-scope" aria-label="Link to this section">#</a></h2>
+<p>Reviewed on 26 October 2026:</p>
+<ul>
+<li>https://core.telegram.org/api/auth</li>
+<li>https://core.telegram.org/api/obtaining_api_id</li>
+<li>https://docs.telethon.dev/en/stable/basic/signing-in.html</li>
+<li>https://docs.telethon.dev/en/stable/concepts/sessions.html</li>
+<li>https://core.telegram.org/mtproto/mtproto-transports</li>
+<li>https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/SourceFiles/storage/storage_account.cpp</li>
+<li>Telethon 1.45.0: SQLiteSession, StringSession, <code>Connection._proxy_connect</code>,
+    <code>TcpMTProxy.normalize_secret</code> and download methods.</li>
+</ul>
+<p>Local tests cover loopback SOCKS5/HTTP CONNECT fixtures, synthetic SQLite sessions,
+route isolation, secret exclusion and missing-key refusal. They do not establish
+real Telegram/proxy interoperability or live MTProxy behavior. See
+<a href="../verification/">VERIFICATION.md</a> and <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">LIVE_ACCEPTANCE.md</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/CONNECTION-SECURITY.md">Edit this page on GitHub ↗</a><a class="next-guide" href="../deployment/"><span>Next step</span><strong>Deployment →</strong></a><p>These guides describe the current implementation. Validation results and remaining gaps are documented separately. <a href="../verification/">What has been tested →</a></p></footer>
+</main>
+<aside class="toc" aria-label="On this page"><p class="nav-label">On this page</p><a href="#authentication-methods">Authentication methods</a><a href="#import-a-telethon-session-file">Import a Telethon session file</a><a href="#mtproto-telethon-and-proxies">MTProto, Telethon and proxies</a><a href="#encryption-and-signatures">Encryption and signatures</a><a href="#external-master-key">External master key</a><a href="#sources-and-verification-scope">Sources and verification scope</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Open source · Runs on your machine</span><a href="../../../LICENSE">MIT license</a><a href="../notice/">Operator notice</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Security</a></footer>
+<script id="site-dict" type="application/json">{}</script>
+</body></html>

@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="tr" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Veri toplama süreci nasıl işliyor? | TgWitness</title>
+<meta name="description" content="Gözlem kapsamı, canlı güncellemeler, yeniden kontroller, ekler, kendi eylemler ve bir boşluğun ne anlama geldiği, kayıt bazında."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="Veri toplama süreci nasıl işliyor? | TgWitness"><meta property="og:description" content="Gözlem kapsamı, canlı güncellemeler, yeniden kontroller, ekler, kendi eylemler ve bir boşluğun ne anlama geldiği, kayıt bazında.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/collection/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/collection/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/collection/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/collection/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/collection/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/collection/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/collection/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/collection/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/collection/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/collection/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/", "url": "https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/", "name": "Veri toplama süreci nasıl işliyor? | TgWitness", "description": "Gözlem kapsamı, canlı güncellemeler, yeniden kontroller, ekler, kendi eylemler ve bir boşluğun ne anlama geldiği, kayıt bazında.", "inLanguage": "tr", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": "https://phishdestroy.github.io/TgWitness/tr/"}, {"@type": "ListItem", "position": 2, "name": "Belgeler", "item": "https://phishdestroy.github.io/TgWitness/tr/docs/"}, {"@type": "ListItem", "position": 3, "name": "Referans", "item": "https://phishdestroy.github.io/TgWitness/tr/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Veri toplama süreci nasıl işliyor?", "item": "https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">İçeriğe atla</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Belgeler</span></a>
+<nav aria-label="Kılavuzlar"><a href="../../concepts/">Görsel kılavuz</a><a href="../../">Tüm kılavuzlar</a><a href="../">Referans</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Dil"><span aria-hidden="true">◍</span> Türkçe</summary><div class="lang-list"><a href="../../../../docs/reference/collection/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/collection/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/collection/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/collection/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/collection/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="./" hreflang="tr" lang="tr" aria-current="true">Türkçe</a><a href="../../../../ar/docs/reference/collection/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/collection/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/collection/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/collection/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/collection/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/collection/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/collection/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Açık ve koyu tema arasında geçiş yapın"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Kılavuzlar"><a href="../../../guides/modes.html">Modlar, senaryolar ve kanıt düzeyleri</a><p class="nav-label">İlk adımlar</p><a href="../../start/">Birkaç dakika içinde başlayın</a><a href="../../accounts/">Hesap bağla</a><a href="../../proxies/">Bir proxy seçin</a><a href="../../exports/">Dışa aktarma ve doğrulama</a><p class="nav-label">Kanıtları anlamak</p><a href="../../concepts/">Kanıtların nasıl işlediğini görün</a><a href="../../cases/">Tüm sohbetleri inceleyin</a><a href="../../security/">Güvenliği sağlayın</a><p class="nav-label">Daha fazlasını öğrenin</p><a href="../../witness/">Witness botunu kurun</a><a href="../../server/">Çalışır durumda tutun</a><a href="../../troubleshooting/">Neyin yanlış gittiğini bulun</a></nav><nav class="wiki-nav" aria-label="Referans"><p class="nav-label"><a class="nav-label-link" href="../">Referans</a></p><details class="wiki-group"><summary>Kurulum</summary><a href="../quickstart/">Hızlı başlangıç</a><a href="../accounts/">Hesaplar ve oturum biçimleri</a><a href="../connection/">Bağlantı, proxy'ler ve veri koruma</a><a href="../deployment/">Uygulama</a></details><details class="wiki-group" open><summary>Topla</summary><a href="./" aria-current="page">Veri toplama süreci nasıl işliyor?</a><a href="../operations/">İş akışları ve işlemler</a><a href="../investigation/">Soruşturma modu</a><a href="../features/">Özellikler ve sınırlamalar</a></details><details class="wiki-group"><summary>Kanıt</summary><a href="../how-it-works/">Kanıt sistemi nasıl çalışır?</a><a href="../evidence/">Kanıt formatı</a><a href="../witness/">Bağımsız tanık</a><a href="../timestamp/">Zaman damgaları</a></details><details class="wiki-group"><summary>Güvenlik ve proje</summary><a href="../security/">Güvenlik ve veri işleme</a><a href="../architecture/">Mimari</a><a href="../verification/">Neler test edildi</a><a href="../license/">Lisans ve mimari uyumsuzluk bildirimi</a><a href="../notice/">Operatör uyumsuzluğu bildirimi</a><a href="../changelog/">Değişiklik günlüğü</a></details></nav><p class="sidebar-note">v0.7.0<br>Açık kaynak · Kendi makinenizde çalışır</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Kılavuzlar"><a href="../../../">Ana Sayfa</a> <span aria-hidden="true">/</span> <a href="../../">Belgeler</a> <span aria-hidden="true">/</span> <a href="../">Referans</a> <span aria-hidden="true">/</span> <span aria-current="page">Veri toplama süreci nasıl işliyor?</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Belgelere göz atın</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zinciri, token veya witness&#x27;i deneyin…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Net arama" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Kılavuzları ve referansları aramak için bir kelime yazın. Arama, tarayıcınızda kalır.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Referans / Topla</p><h1>Veri toplama süreci nasıl işliyor?</h1><p class="guide-outcome">Gözlem kapsamı, canlı güncellemeler, yeniden kontroller, ekler, kendi eylemler ve bir boşluğun ne anlama geldiği, kayıt bazında.</p><div class="wiki-body"><p>TgWitness, bağlı bir Telegram hesabının gözlemlediklerini kaydeder. Günlük,
+bu gözlemleri, sıralamalarını ve bunlarla birlikte sağlanan bağlamı korur. Eksik bir mesajdan veya hesabın bağlı olmasından yola çıkarak
+görülmemiş eylemler hakkında bir sonuca varmaz.</p>
+<h2 id="from-login-to-a-journal">Girişten günlüğe<a class="anchor" href="#from-login-to-a-journal" aria-label="Bu bölüme bağlantı">#</a></h2>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 691 360" width="691" height="360" role="img" aria-labelledby="flow-1-title flow-1-desc"><title id="flow-1-title">Akış şeması</title><desc id="flow-1-desc">Bir kullanıcı hesabını yetkilendirin → Erişilebilir grupları ve kanalları seçin; Erişilebilir grupları ve kanalları seçin → Olay ve ek ayarlarını kaydet; Olay ve ek ayarlarını kaydet → Gözlemi başlat; Gözlemi başlat → Aktif müşteriden güncellemeleri alın; Aktif müşteriden güncellemeleri alın → Kaynak ve olay politikasını uygulayın; Kaynak ve olay politikasını uygulayın → İmzalı bir gözlem ekleyin; İmzalı bir gözlem ekleyin → Günlüğü inceleyin veya dışa aktarın; İmzalı bir gözlem ekleyin → Kuyrukta bekleyen ekleri işleme; Kuyrukta bekleyen ekleri işleme → İndirme sonucunu ekleyin</desc><defs><marker id="flow-1-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M209.8 37.0C234.5 37.0 234.5 37.0 259.3 37.0" marker-end="url(#flow-1-arrow)" style="--i:0;--len:49" pathLength="49"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M209.8 37.0C234.5 37.0 234.5 37.0 259.3 37.0"/></circle><path class="flow-edge" d="M432.2 37.0C458.6 37.0 458.6 37.0 485.1 37.0" marker-end="url(#flow-1-arrow)" style="--i:1;--len:53" pathLength="53"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M432.2 37.0C458.6 37.0 458.6 37.0 485.1 37.0"/></circle><path class="flow-edge" d="M571.5 66.0C571.5 95.5 571.5 95.5 571.5 125.0" marker-end="url(#flow-1-arrow)" style="--i:2;--len:59" pathLength="59"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M571.5 66.0C571.5 95.5 571.5 95.5 571.5 125.0"/></circle><path class="flow-edge" d="M509.2 145.0C467.2 145.0 467.2 145.0 425.3 145.0" marker-end="url(#flow-1-arrow)" style="--i:3;--len:84" pathLength="84"/><circle class="flow-pulse" r="3.2" style="--i:3"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M509.2 145.0C467.2 145.0 467.2 145.0 425.3 145.0"/></circle><path class="flow-edge" d="M266.2 145.0C238.0 145.0 238.0 145.0 209.8 145.0" marker-end="url(#flow-1-arrow)" style="--i:4;--len:56" pathLength="56"/><circle class="flow-pulse" r="3.2" style="--i:4"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M266.2 145.0C238.0 145.0 238.0 145.0 209.8 145.0"/></circle><path class="flow-edge" d="M119.9 174.0C119.9 216.5 119.9 216.5 119.9 259.0" marker-end="url(#flow-1-arrow)" style="--i:5;--len:85" pathLength="85"/><circle class="flow-pulse" r="3.2" style="--i:5"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M119.9 174.0C119.9 216.5 119.9 216.5 119.9 259.0"/></circle><path class="flow-edge" d="M192.6 288.0C224.2 288.0 224.2 253.0 255.8 253.0" marker-end="url(#flow-1-arrow)" style="--i:6;--len:75" pathLength="75"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M192.6 288.0C224.2 288.0 224.2 253.0 255.8 253.0"/></circle><path class="flow-edge" d="M192.6 288.0C232.8 288.0 232.8 323.0 273.1 323.0" marker-end="url(#flow-1-arrow)" style="--i:6;--len:90" pathLength="90"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M192.6 288.0C232.8 288.0 232.8 323.0 273.1 323.0"/></circle><path class="flow-edge" d="M418.4 323.0C460.3 323.0 460.3 288.0 502.3 288.0" marker-end="url(#flow-1-arrow)" style="--i:7;--len:93" pathLength="93"/><circle class="flow-pulse" r="3.2" style="--i:7"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M418.4 323.0C460.3 323.0 460.3 288.0 502.3 288.0"/></circle><g class="flow-node" style="--i:0"><rect x="30.0" y="8.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="28.0">Bir kullanıcı hesabını</tspan><tspan x="119.9" y="46.0">yetkilendirin</tspan></text></g><g class="flow-node" style="--i:1"><rect x="259.3" y="8.0" width="172.9" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="28.0">Erişilebilir grupları</tspan><tspan x="345.7" y="46.0">ve kanalları seçin</tspan></text></g><g class="flow-node" style="--i:2"><rect x="485.1" y="8.0" width="172.9" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="28.0">Olay ve ek ayarlarını</tspan><tspan x="571.5" y="46.0">kaydet</tspan></text></g><g class="flow-node" style="--i:3"><rect x="509.2" y="125.0" width="124.6" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="145.0">Gözlemi başlat</tspan></text></g><g class="flow-node" style="--i:4"><rect x="266.2" y="116.0" width="159.1" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="136.0">Aktif müşteriden</tspan><tspan x="345.7" y="154.0">güncellemeleri alın</tspan></text></g><g class="flow-node" style="--i:5"><rect x="30.0" y="116.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="136.0">Kaynak ve olay</tspan><tspan x="119.9" y="154.0">politikasını uygulayın</tspan></text></g><g class="flow-node" style="--i:6"><rect x="47.2" y="259.0" width="145.3" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="279.0">İmzalı bir gözlem</tspan><tspan x="119.9" y="297.0">ekleyin</tspan></text></g><g class="flow-node" style="--i:7"><rect x="255.8" y="224.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="244.0">Günlüğü inceleyin veya</tspan><tspan x="345.7" y="262.0">dışa aktarın</tspan></text></g><g class="flow-node" style="--i:7"><rect x="273.1" y="294.0" width="145.3" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="314.0">Kuyrukta bekleyen</tspan><tspan x="345.7" y="332.0">ekleri işleme</tspan></text></g><g class="flow-node" style="--i:8"><rect x="502.3" y="259.0" width="138.4" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="279.0">İndirme sonucunu</tspan><tspan x="571.5" y="297.0">ekleyin</tspan></text></g></svg></div><details class="flow-steps"><summary>Diyagramın metin olarak gösterimi</summary><ol><li>Bir kullanıcı hesabını yetkilendirin → Erişilebilir grupları ve kanalları seçin</li><li>Erişilebilir grupları ve kanalları seçin → Olay ve ek ayarlarını kaydet</li><li>Olay ve ek ayarlarını kaydet → Gözlemi başlat</li><li>Gözlemi başlat → Aktif müşteriden güncellemeleri alın</li><li>Aktif müşteriden güncellemeleri alın → Kaynak ve olay politikasını uygulayın</li><li>Kaynak ve olay politikasını uygulayın → İmzalı bir gözlem ekleyin</li><li>İmzalı bir gözlem ekleyin → Günlüğü inceleyin veya dışa aktarın</li><li>İmzalı bir gözlem ekleyin → Kuyrukta bekleyen ekleri işleme</li><li>Kuyrukta bekleyen ekleri işleme → İndirme sonucunu ekleyin</li></ol></details></figure>
+<p>Yetkilendirme, kaynağa erişim, çalışan bir toplayıcı ve tam teslimat
+farklı konulardır. Başarılı bir oturum açma işlemi, her gruba erişim hakkı vermez.
+Bağlantılı bir aktarım, ilgili her güncellemenin ulaştığını garanti etmez.</p>
+<h2 id="observation-scope-chosen-chats-a-folder-or-the-whole-account">Gözlem kapsamı: seçilen sohbetler, bir klasör veya hesabın tamamı<a class="anchor" href="#observation-scope-chosen-chats-a-folder-or-the-whole-account" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Kaynaklar → <strong>Gözlem kapsamı,</strong> bir çalışma alanının hangi sohbetleri kaydedeceğini belirler.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Mod</th>
+<th>Kayıtlar</th>
+<th>Yeni sohbetler</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Seçili sohbetler (varsayılan)</td>
+<td>Yalnızca elle eklediğiniz sohbetler</td>
+<td>Asla otomatik olarak eklenmez</td>
+</tr>
+<tr>
+<td>Telegram klasörü</td>
+<td>Hesabın klasörlerinden birindeki sohbetler: isme göre dahil edilen sohbetler, ayrıca klasörün kategorileri (kişiler, kişiler dışındaki kişiler, gruplar, kanallar, botlar), hariç tutulan sohbetler ve klasörde belirtilmişse arşivlenmiş sohbetler</td>
+<td>Eşleşen sohbetler aktif hale gelir gelmez eklenir; Telegram&#x27;da klasöre eklediğiniz sohbetler bir saat içinde alınır.</td>
+</tr>
+<tr>
+<td>Hesabın tamamı</td>
+<td>Hesabın gördüğü her sohbet</td>
+<td>Her yeni sohbet, grup, özel sohbet veya bot, ilk güncellemesi geldiği anda eklenir.</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>Kaynak türleri</strong> (kanallar, gruplar, özel sohbetler, botlar), klasör ve
+    tüm hesap modlarını daraltır. Seçilen sohbetler, özel sohbetler ve botlar dahil olmak üzere herhangi bir türde olabilir.</li>
+<li><strong>Hariç tutulan sohbetler</strong> hiçbir modda kaydedilmez. Klasör ve tüm hesap modlarında,
+    bir kaynağa &quot;<em>Hariç Tut&quot;</em> veya &quot;<em>Kaldır&quot;</em> işlemi uygulandığında bu listeye eklenir, böylece kapsam onu tekrar eklemez.
+    Sohbeti manuel olarak yeniden seçmek (Kaynaklar&#x27;da veya Sohbetler&#x27;den), onu listeden çıkarır. Liste
+    en fazla 5.000 sohbeti barındırır; bu sayıyı aşarsa, <em>Kaldır işlemi</em> reddedilir ve bunun yerine sohbet duraklatılabilir.</li>
+<li><strong>Kendi eylemleri</strong> (varsayılan olarak açıktır): bu hesabın gönderdiği mesajlar, yaptığı düzenlemeler ve
+    yanıt klavyesi düğmesine basışları. Kapalıyken, giden mesajlar ve düzenlemeler atlanır.</li>
+<li>Bir klasöre veya tüm hesaba geçiş yapıldığında onay istenir: bu modlar
+    özel sohbetleri ve üçüncü şahısların mesajlarını kaydeder ve yalnızca bu amaca ayrılmış bir hesapta kullanılmalıdır.
+    Onay ve her kapsam değişikliği, <code>scope.changed</code> kayıtlarıyla imzalanır.</li>
+<li>Kapsam tarafından eklenen sohbetler, <em>&quot;auto&quot;</em> olarak işaretlenmiş kaynaklar olarak görünür ve <code>scope.applied</code>
+    (başlangıçta ve saat başı) veya <code>source.discovered</code> (gözlem sırasında yeni bir sohbet) olarak kaydedilir. Seçilen sohbetlere
+    geri dönülmesi, otomatik olarak eklenen tüm kaynakları duraklatır.</li>
+</ul>
+<p>Bu modların yapamadıkları şeyler:</p>
+<ul>
+<li><strong>Gizli sohbetler,</strong> iki cihaz arasında uçtan uca şifrelenir ve hiçbir şekilde,
+    hiçbir modda TgWitness&#x27;e ulaşmaz.</li>
+<li><strong>TgWitness çalışmadığı sürece hiçbir şey kaydedilmez.</strong> Yeniden başlatıldıktan sonra, Telegram’dan
+    kaçırılan güncellemeleri ister ve sohbetleri yeniden kontrol eder, ancak uzun süreli
+    kesintilerden sonra Telegram tüm verileri geri göndermez. Raporlar ve <code>verify.py</code>, bu tür dönemleri boşluklar olarak gösterir (bkz. <a href="../evidence/#coverage-continuity-gaps-and-unobserved-ids">kapsama alanı</a>).</li>
+<li>Başlangıçta yalnızca ilk 1.000 diyalog listelenir (sınır, <strong>Parametreler</strong> bölümünde belirtilmiştir); daha eski
+    sohbetler, bir sonraki aktif hale geldiklerinde eklenir. Eklenen bir sohbetin daha önceki geçmişi alınmaz — ihtiyaç duyduğunuzda bir geçmiş
+    anlık görüntüsü alın veya sohbeti tamamen dışa aktarın.</li>
+<li>Sürekli değişen klasör koşulları (sessize alınmış, okunmuş) uygulanmaz: bu tür sohbetler
+    gözlem altında kalır.</li>
+<li>Başka bir uygulamada basılan <strong>satır içi (geri arama) bot düğmeleri</strong>, ikinci bir
+    oturumda görünmez; botun yanıtı veya düzenlemesi kaydedilir. Yanıt klavyesi tuşlarına basıldığında, bunlar giden
+    mesajlar olarak gelir ve <code>button_press</code> etiketiyle işaretlenir.</li>
+<li>Sohbet sayısı arttıkça istek sayısı da artar. Telegram, aşırı olarak değerlendirdiği hacimlerde hesaplara kısıtlama uygular;
+    bu da özel hesaplar kullanmanın bir nedeni daha.</li>
+</ul>
+<h2 id="scope-and-event-selection">Kapsam ve olay seçimi<a class="anchor" href="#scope-and-event-selection" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Her çalışma alanının kendine ait kaynakları vardır. TgWitness gruplara katılmaz,
+davetleri kabul etmez veya her üyeyi otomatik olarak listelemez. Kaynaklar, hesap tarafından
+zaten erişilebilir durumda olmalıdır. Başlangıçta, toplayıcı seçilen kaynakları
+hesabın görünür sohbetleriyle karşılaştırır;
+<strong>Parametreler → Hesaptan okunan sohbetler listesinde</strong> aksi belirtilmedikçe ilk 1.000 sohbet incelenir.
+Yok olan bir kaynak, <strong>erişim onaylanmamış olarak</strong> işaretlenir; sizi kaldırdığı varsayılmaz.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Ayarlar</th>
+<th>Toplar</th>
+<th>Devre dışı bırakıldığında etkisi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Yeni mesajlar</td>
+<td>Normal olarak gönderilen mesajlar</td>
+<td>Daha sonra yapılan düzenlemeler/silme işlemleri için, karşılaştırma yapılabilecek daha önceki bir metin kaydı bulunmayabilir.</td>
+</tr>
+<tr>
+<td>Düzenlemeler</td>
+<td>Düzenlenmiş mesaj sürümleri sunulur</td>
+<td>Ara aşamadaki değişiklikler daha sonra yeniden oluşturulmaz.</td>
+</tr>
+<tr>
+<td>Silme işlemleri</td>
+<td>Kapsamlı silme bildirimleri ve kapsam dışı hesap düzeyinde bildirimler</td>
+<td>Silme bildirimleri günlüğe eklenmez.</td>
+</tr>
+<tr>
+<td>Tepkiler</td>
+<td>Anlık tepki görüntüleri sunuldu</td>
+<td>Ayrı tepki güncellemeleri eklenmez.</td>
+</tr>
+<tr>
+<td>Üyelik</td>
+<td>Üyelik hizmeti mesajları ve katılımcılara yönelik güncellemeler iletildi</td>
+<td>Bu üyelik gözlemleri eklenmemiştir.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Ayarlar, çalışma alanındaki tüm seçili kaynaklar için geçerlidir. Değişiklikleri uygulamak için formu kaydedin;
+değişiklikler, imzalı &quot;önce&quot; ve &quot;sonra&quot; değerleriyle kaydedilir. Bir kategoriyi devre dışı bırakmak,
+önceki kayıtları silmez. Kategoriyi yeniden etkinleştirmek, kaçırılan güncellemeleri geriye dönük olarak doldurmaz.</p>
+<p>Operasyonel kayıtlar ve diğer grup hizmeti olayları bu
+ayar değişikliklerinden bağımsız olarak kalır. Üyelik hizmeti mesajları, üyelik
+etkinleştirildiğinde, normal yeni mesaj yakalama devre dışı olsa bile mesaj kayıtları oluşturabilir. Yakalanan Telegram
+nesneleri gömülü meta verileri korur; bir ayar değişikliği, bir sansür kuralı değildir.</p>
+<p><strong>Özel sohbetlerdeki ve normal gruplardaki silme işlemleri</strong>, sohbet bilgisi olmadan mesaj kimlikleri olarak gelir.
+Bu sohbetler, hesap genelinde tek bir mesaj kimlik dizisini paylaşır; bu nedenle, o kimliğe sahip bir mesaj
+daha önce kaydedilmişse, ilgili sohbet bilinir: silme işlemi o sohbette kaydedilir ve
+nasıl yapıldığı <code>chat_resolution</code> ile açıklanır. Hiç kaydedilmemiş kimlik numaraları, kaynağı açıkça bilinmeyen,
+<strong>kapsamı belirlenmemiş </strong>bir <strong>silme</strong> işlemi olarak kalır; toplayıcı tahminde bulunmaz. Telegram, bir
+mesajı kimin sildiğini asla belirtmez; silinen mesaj bu hesap tarafından gönderilmişse, kayıtta
+(<code>deleted_message_was_outgoing</code>) silen kişinin adı belirtilmeden bu durum belirtilir.</p>
+<h2 id="own-actions">Kendi eylemleri<a class="anchor" href="#own-actions" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>İzlenen hesap tarafından gönderilen mesajlar <code>outgoing</code> olarak etiketlenir. Giden bir
+mesajın düzenlenmesi durumunda, özel sohbetlerde ve gruplarda yalnızca yazarın mesajı düzenleyebileceği, kanal
+gönderilerinin ise diğer yöneticiler tarafından düzenlenebileceği belirtilir. Giden bir mesaj, o sohbetteki en son kaydedilmiş yanıt klavyesindeki bir düğmenin
+metnini tekrar ettiğinde, klavyenin kaydına bir bağlantı içeren <code>button_press</code> etiketini
+taşır.</p>
+<p>Kendi eylemlerin hariç tutulması, arka plan yeniden kontrolleri ve otomatik yeni sohbet geçmişi için de geçerlidir.
+Atlanan giden mesajlar, yeniden kontrol konumunu ilerletir; böylece daha sonra gelen
+mesajları engelleyemezler. Açıkça belirtilen panel eylemleri ve manuel olarak talep edilen geçmiş anlık görüntüleri kaydedilmeye devam eder.</p>
+<h2 id="investigation-mode-joining-teams-and-talking-to-bots">Soruşturma modu: ekiplere katılma ve botlarla iletişim kurma<a class="anchor" href="#investigation-mode-joining-teams-and-talking-to-bots" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p><strong>Kaynaklar → Gözlem kapsamı → Soruşturma modu</strong>, takım sohbetlerine katılan, botları başlatan ve bunlara mesaj yazan özel bir
+hesap için kapsamı hazırlar: hesabın tamamı, her
+kaynak türü, kendi eylemleri ve görünen her sohbet veya bot için profil ve en son
+200 görünür mesaj. Formu gözden geçirip <strong>Kapsamı Kaydet</strong> düğmesine basın; tüm
+hesaba geçiş için her zamanki gibi onay istenir.</p>
+<ul>
+<li><strong>Düğmeler.</strong> Bir mesajın altındaki düğmeler o mesajla birlikte tutulur ve <strong>Sohbetler&#x27;</strong>de gösterilir: bağlantılar, web
+    uygulamaları, oturum açma bağlantıları, kopyalanacak metinler, geri arama verileri, satır içi sorgular, telefon
+    numarası veya konum talepleri. Bağlantılar metin olarak gösterilir ve panel tarafından asla açılmaz. Bir bot
+    yalnızca düğmeleri değiştirdiğinde (yeni bir ödeme bağlantısı gibi), bu hem
+    canlı güncellemeler hem de yeniden kontroller açısından mesajın yeni bir sürümüdür.</li>
+<li>
+<p><strong>Yeni sohbetler ve botlar.</strong> Klasör ve tüm hesap modlarında, <strong>yeni bir sohbet veya bot
+    ortaya çıktığında</strong>, ortaya çıkar çıkmaz kaydedilir:</p>
+<ul>
+<li><code>source.profile</code> kaydı olarak profili: bot açıklaması ve komutları, bir kullanıcı, grup veya kanalın
+    hakkında metni, üyeler, Telegram tarafından sağlandığında bağlantılı sohbet ve davet bağlantısı
+    ;</li>
+<li><code>new_chat</code> olarak işaretlenmiş bir geçmiş anlık görüntüsü olarak en son görünür mesajları (en fazla 1.000):
+    az önce katıldığınız bir grup sohbetinin önceki mesajları veya gözlem,
+    sohbeti fark etmeden önce bir botun söyledikleri. Canlı olarak zaten kaydedilmiş mesajlar tekrarlanmaz.</li>
+</ul>
+<p>Mod etkinleştirildiğinde listede zaten bulunan sohbetler, anlık görüntü alınmadan eklenir.
+Bir FloodWait bu işlemi duraklatır ve daha sonra devam ettirir; hatalar kaydedilir ve sohbetin
+canlı kaydı devam eder.
+- <strong>İsteğe bağlı profiller. Sohbetler → Profil → Profili Kaydet seçeneği artık</strong> herhangi bir kaynağın mevcut profilini
+kaydediyor; en yeni profil mesajların üzerinde gösterilir.
+- <strong>Görünmez.</strong> Başka bir Telegram uygulamasında basılan satır içi (geri arama) düğmeleri, bir botun
+bu tür bir basışa yanıt verdiği açılır pencere veya bağlantı ve başka bir uygulamada kullanılan davet bağlantıları
+TgWitness&#x27;e ulaşmaz. Botun daha sonra gönderdiği veya düzenlediği içerikler kaydedilir.</p>
+</li>
+</ul>
+<h3 id="act-from-the-panel">Panelden hareket edin<a class="anchor" href="#act-from-the-panel" aria-label="Bu bölüme bağlantı">#</a></h3>
+<p><strong>Sohbetler</strong> artık, seçilen çalışma alanının Telegram hesabını kullanan bir mini istemci içerir:</p>
+<ul>
+<li>Düz metin bir mesaj yazın veya kaydedilmiş bir mesajın altındaki <strong>&quot;Yanıtla&quot; seçeneğini</strong> seçin. Geri gönderilen
+    mesaj, kapsam giden güncellemeleri hariç tutsa bile kaydedilir.</li>
+<li>Mevcut bir geri arama veya metin düğmesinin altındaki <strong>Bas düğmesine</strong> basın. Sunucu,
+    mesajı tekrar alır ve klavye girişi kaydedilen sürümden farklıysa işlemi reddeder.
+    Geri arama makbuzları, Telegram&#x27;ın açılır pencere metnini, uyarı bayrağını ve URL&#x27;yi korur; yanıt ayrıca
+    sohbetin altında da gösterilir. URL&#x27;ler seçilebilir metin olarak kalır ve otomatik olarak açılmaz.</li>
+<li><strong>Telegram bağlantısını</strong> genişletin, <code>@username</code>, halka açık bir <code>https://t.me/name</code> bağlantısı,
+    <code>https://t.me/+invite</code> / <code>joinchat/invite</code> veya <code>?start=parameter</code> içeren bir bot bağlantısı girin ve &quot;
+    <strong>Önizlemeyi Kaydet</strong>&quot;e basın. Katılmadan önce orijinal bağlantı ve Telegram önizlemesi imzalanır.
+    <strong>Katıl / aç ve gözlemle</strong> seçeneği, gruba/kanala katılır veya kullanıcıyı/botu açar,
+    sohbeti etkin bir kaynak olarak ekler ve başlangıç parametresini de içeren <code>/start</code> kodunu bir bota gönderir.
+    Yönetici onayı bekleyen bir katılma isteği, üyelik olarak değil, beklemede olan bir istek olarak kaydedilir.</li>
+</ul>
+<p>Gelen yanıtları anlık olarak yakalamak için <strong>&quot;Gözlemi Başlat&quot;</strong> seçeneğini etkinleştirin. Gözlem duraklatıldığında panel eylemleri çalışmaya devam eder,
+ancak bu durumda yalnızca doğrudan yanıtların kaydedileceği garanti edilir.
+Gözlem çalışırken, yeni eklenen kaynaklar yapılandırılmış profil/geçmiş alımını kullanır.
+Bir kaynak duraklatıldığında, gönderim yapmadan veya düğmelerine basmadan önce &quot;<strong>Kaynaklar&quot;</strong> bölümünden bu kaynağı etkinleştirin.</p>
+<p><code>interaction.preview</code>, <code>interaction.requested</code> ve <code>interaction.result</code>, kanıt dışa aktarımlarına dahil edilen sıradan imzalı
+günlük olaylarıdır. İstekler, hesabı, mesajı/düğmeyi
+veya önizleme kaydını ve gözlemin çalışıp çalışmadığını belirtir. Makbuzlar, başarı,
+red, onay bekliyor ve bilinmeyen sonuç durumlarını ayırt eder. Kesintiye uğrayan bir istek Telegram&#x27;a ulaşmış olabilir:
+yeni bir eyleme başlamadan önce sohbeti kontrol edin. Bir istek kimliğini yeniden kullanmak,
+yeniden başlatma sonrası da dahil olmak üzere, eylemi tekrarlamadan kaydedilmiş makbuzu getirir. Panel,
+mevcut sayfa oturumu sırasında aynı eylem için belirsiz bir yanıt alındığında kimliği saklar.
+Ayrıca, başarılı bir eylemden sonra görünümün yenilenmesi başarısız olduğunda da bu kimliği saklar: makbuz
+görünür kalır ve tekrar tıklandığında geri getirilir. Geri arama ve katılma RPC’leri için tek bir uygulama
+denemesi vardır; yeniden denenebilir okumalar, yapılandırılmış yeniden deneme politikasını korur. Sohbetler arasında anında geçiş yapıldığında
+taslak ve yanıt hedefi silinir ve yeni sohbet yüklenene kadar gönderim devre dışı bırakılır.</p>
+<p>Bu mini istemci, metin ve geri arama düğmelerini yönetir. Web uygulamaları, oturum açma/telefon/konum istekleri,
+ödemeler, satır içi sorgular ve ekler için hâlâ bir Telegram istemcisi gereklidir; kaydedilen düğme
+meta verileri görünür kalır. Yeni denetimlerde İngilizce metin kullanılır.</p>
+<h2 id="recheck-tiers">Seviyeleri yeniden kontrol edin<a class="anchor" href="#recheck-tiers" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Yeniden kontrol işlemi, Telegram&#x27;dan kaçırılan mesajları, düzenlemeleri ve artık döndürülmeyen mesajları tekrar ister.
+Yıldız işaretli kaynaklar <strong>öncelikli</strong> kaynaklardır ve varsayılan olarak her 15 dakikada bir yeniden kontrol edilir;
+diğer tüm kaynaklar ise her 6 saatte bir kontrol edilir. Seçilen sohbetler öncelikli kaynaklar olarak başlar; bir
+klasör veya tüm hesap tarafından eklenen sohbetler ise normal kaynaklar olarak değerlendirilir. Her turda en fazla 30 kaynak yeniden kontrol edilir ve
+geri kalanı bir sonraki dakikayı bekler; yeniden bağlanmanın ardından öncelikli kaynaklar ilk sırada yer alır. Her iki
+aralık da Kaynaklar → Kayıt ayarları → Yeniden Kontrol altında ayarlanır (0, bir kademenin devre dışı bırakılması anlamına gelir) ve
+<code>recheck.changed</code> olarak kaydedilir.</p>
+<p>Kaçırılan mesajlar, önceki taramanın durduğu yerden itibaren, tarama başına en fazla
+<strong>Parametreler → yeniden kontrol başına yeni mesaj sayısı</strong> (varsayılan olarak 1.000) kadar alınır. Uzun bir duraklamadan sonra,
+yeniden kontrol işlemi bu nedenle tüm boşluğu doldurur; bu boşluktan daha yeni olan canlı mesajlar
+önce kaydedilmiş olsa bile. Hala geride kalan bir sohbet, kademeli aralığını beklemek yerine
+bir sonraki dakikada yeniden kontrol edilir; işlem tamamlanana kadar <code>recheck.completed</code>, <code>continues_after</code> olarak gösterilir.</p>
+<p>Karşılaştırmalar arasında mesaj metni, varlıklar, klavye girişleri (silme işlemleri dahil) ve ek
+içeriği/kimliği yer alır. Yalnızca dosya erişim hash&#x27;lerinin veya dosya referanslarının değiştirilmesi bir
+düzenleme oluşturmaz; Telegram&#x27;ın kendi kendine doldurduğu unsurlar da düzenleme sayılmaz: bir bağlantı önizlemesinin yüklenmesi, hikaye görüntülemeleri, bu hesap tarafından
+kilidi açılan ücretli medya içerikleri, bir faturanın makbuzu. Sohbetler&#x27;de kaydedilen her sürüm, medya meta verileri de dahil olmak üzere tam günlük kaydına bağlanır.</p>
+<h2 id="message-history-and-attribution">Mesaj geçmişi ve kaynak gösterimi<a class="anchor" href="#message-history-and-attribution" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Toplayıcının önce “10:00’da toplantı” ifadesini gözlemlediğini, daha sonra “11:00’da toplantı” ifadesini gördüğünü
+ve ardından bir silme bildirimi aldığını varsayalım. Bu durumda üç farklı gözlem eklenir.
+Orijinal metin kalır, düzenleme ayrı bir sürüm olarak kaydedilir ve bildirimde
+bir silme işleminin gözlemlendiği belirtilir.</p>
+<p>Toplama işlemi ilk sürümün ortadan kalkmasından sonra başlamışsa, o metne erişilemez.
+İşlem çevrimdışıyken birkaç düzenleme yapılmışsa, yalnızca daha sonra gözlemlenen
+sürümler kaydedilebilir. Silme bildirimi, hiç yakalanmamış içeriği geri getiremez.</p>
+<p>Mesajı gönderen kişi otomatik olarak düzenleyen kişi değildir. Telegram genellikle
+mesajı silen kişinin kimliğini veya tam silme zamanını belirtmez. Kimliği bilinmeyen kişiler
+bilinmeyen olarak kalır. Tepki anlık görüntüleri ve katılımcı güncellemeleri, yalnızca
+Telegram&#x27;ın hesaba gösterdiği sayı ve kimlikleri içerir.</p>
+<p>Sıra numaraları gözlem sırasını ifade eder. Toplayıcının UTC zaman damgası,
+yerel saatine aittir; Telegram kaynak zaman damgası, sağlandığında ayrı olarak saklanır.
+Her ikisi de bağımsız ve güvenilir bir zaman damgası değildir.</p>
+<h2 id="history-snapshots">Geçmiş anlık görüntüleri<a class="anchor" href="#history-snapshots" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Bir anlık görüntü, etkinleştirilmiş bir kaynaktan en son görünen mesajları ister;
+istek başına en fazla 500 adede kadar. Sonuçlar, geçmiş gözlemleri olarak etiketlenir. Bunlar,
+canlı yakalama ile çakışabilir ve tekrarlanan gözlemler ayrı kayıtlar olarak saklanır.</p>
+<p>Anlık görüntüler ek dosya politikasına uyar, ancak canlı olay anahtarlamalarından ayrı tutulur.
+Silinen mesajları veya kaçırılan ara sürümleri yeniden oluşturmazlar.
+Duraklatılmış durumdayken bir anlık görüntü talep edebilirsiniz; kuyruğa alınan ek dosyalar, gözlem başlayana
+ve indirme işleyicisi çalışana kadar bekler.</p>
+<h2 id="attachment-handling">Eklerin işlenmesi<a class="anchor" href="#attachment-handling" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Ek indirme özelliği varsayılan olarak etkindir ve 1 GiB&#x27;den az boş disk alanı kaldığında duraklatılır. Toplayıcı,
+mesaj gözlemleme ve indirme işini birlikte gerçekleştirir. İş, orijinal medya
+tanımlayıcısını ve boyut politikasını korur; böylece daha sonra düzenlenmiş bir ek, fark edilmeden değiştirilmez.</p>
+<p>İndirmeler, mesaj yakalandıktan sonra gerçekleştirilir. Tamamlanan bir indirme işlemi, SHA-256 değeri ve bayt sayısını içeren bir <code>media.saved</code>
+kaydı oluşturur. Atlanan, başarısız olan, yeniden denenen ve kesintiye uğrayan
+işlemlerin ayrı sonuçları vardır. Kuyruğa alınan bir iş, dosyanın korunduğunun kanıtı değildir.
+Tamamlanan dosya, gözlemlenen orijinal ek tanımlayıcısındaki bayt sayısıyla da
+eşleşmelidir. Kısa veya beklenmedik şekilde uzun bir yanıt, korunmuş medya olarak kaydedilmez.</p>
+<p>Sınırlar <strong>türlere göre</strong> belirlenmiştir: fotoğraflar, videolar, GIF&#x27;ler ve animasyonlar, yuvarlak video mesajları,
+sesli mesajlar, müzik ve ses dosyaları, çıkartmalar ve dosyalar. Her tür ayrı ayrı devre dışı bırakılabilir ve
+1 ila 2.000 MiB arasında kendi boyut sınırına sahiptir; yeni çalışma alanları fotoğraflar için 20 MiB,
+videolar için 100 MiB, dosyalar, ses ve yuvarlak videolar için 50 MiB, sesli mesajlar ve GIF&#x27;ler için 20 MiB ve
+çıkartmalar için 5 MiB ile başlar. <em>Maksimum dosya boyutu,</em> her türü aynı anda belirler. Tür bazında sınırlar
+belirlenmeden önce kaydedilen ilkeler, her tür için tek bir sınırını korur. Devre dışı bırakılan bir tür, bir
+<code>media.skipped</code> kaydı oluşturur; boyutu bilinmeyen veya boyut aşımı dosyalar indirilmez. Büyük dosyalar için
+en az 256 KiB/s indirme hızı sağlanır. İşler yeniden başlatma işleminden sonra da devam eder, ancak süresi dolmuş referanslar, kaybedilen
+erişim veya silinmiş dosyalar yine de kurtarmayı engelleyebilir. Mevcut işler, kendileriyle birlikte kaydedilen
+ilkeyi korur.</p>
+<h2 id="pause-lock-disconnect-and-restart">Duraklatma, kilitleme, bağlantıyı kesme ve yeniden başlatma<a class="anchor" href="#pause-lock-disconnect-and-restart" aria-label="Bu bölüme bağlantı">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Eylem veya durum</th>
+<th>Etki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Çalışma alanını değiştir</td>
+<td>Panel görünümünü değiştirir; diğer toplayıcılar durumlarını korur.</td>
+</tr>
+<tr>
+<td>Paneli kilitleyin veya sekmeyi kapatın</td>
+<td>Sunucu ve gözlem işlemi çalışır durumda kalır.</td>
+</tr>
+<tr>
+<td>Gözlemi duraklat</td>
+<td>Toplayıcıyı durdurur ve kuyrukta bekleyen ek işlemlerini korur.</td>
+</tr>
+<tr>
+<td>Bir kaynağı devre dışı bırak</td>
+<td>Gelecekteki kapsamlı yakalamayı durdurur; devre dışı bırakıldığı süre boyunca bunun için kuyruğa alınmış medya işleri beklemeye alınır.</td>
+</tr>
+<tr>
+<td>Bir kaynağı kaldır</td>
+<td>Kaynak olarak dikkate alınmaz ve kullanıcı profilleri silinir; önceden kaydedilmiş veriler yalnızca ekleme yapılabilen günlüğünde kalır. Hala beklemede olan ekler, başarısız (<code>source_removed</code>) olarak kaydedilir. Klasör ve tüm hesap modlarında da hariç tutulur.</td>
+</tr>
+<tr>
+<td>Bağlantı yolunu değiştirin</td>
+<td>Bir süre bekleme gerektirir, eski istemcileri kapatır ve tamamlanmamış oturum açma işlemlerini iptal eder.</td>
+</tr>
+<tr>
+<td>Python sürecini durdurun</td>
+<td>Tüm çalışma alanlarını durdurur; çevrimdışı olduğu sürece herhangi bir gözlem yapılmaz.</td>
+</tr>
+<tr>
+<td>Aktif gözlemden sonra yeniden başlat</td>
+<td>Kaydedilen oturumu kullanarak kaydedilen kapsamı devam ettirmeye çalışır. Manuel olarak duraklatma işlemi bu niyeti iptal eder.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Toplayıcı, algılanan bağlantı kesintilerini, yeniden denemeleri, hataları, başlatma/durdurma işlemlerini ve
+kalp atışlarını kaydeder. Kısa süreli kesintiler, periyodik bağlantı kontrolleri sırasında gözden kaçabilir.
+Yeniden başlatmanın ardından, kaçırılan güncellemeler kaydedilen güncelleme konumundan talep edilir ve
+izlenen sohbetler periyodik olarak yeniden kontrol edilir; <a href="../evidence/#durable-collection-and-process-receipts-02">kanıt formatına</a> bakınız. Anlık görüntü bağlam sağlar;
+bir boşluğun giderildiğini kanıtlamaz.</p>
+<h2 id="account-isolation-and-verification">Hesap izolasyonu ve doğrulama<a class="anchor" href="#account-isolation-and-verification" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Her çalışma alanının kendine ait bir günlüğü, yetkilendirme sistemi, imzalama anahtarı, politikası ve kuyruğu vardır.
+Yalnızca aktif istemcisi canlı gözlemler ekleyebilir. Reddedilen, beklemede olan,
+yerine yenisi gelen ve bağlantı testi yapan istemciler, günlüğüne canlı güncellemeler yazamaz.
+Farklı hesaplar aynı grubu gözlemleyebilir, ancak günlükleri ayrı kalır.</p>
+<p>Her olay, önceki hash değerini ve bir Ed25519 imzasını içerir. Dışa aktarımlar,
+sabit bir sıra numarası aracılığıyla tüm çalışma alanı günlüğünü kapsar. Panel filtreleri,
+dışa aktarımı filtrelemez; hazırlık aşamasındayken toplama işlemi sınırların ötesinde devam edebilir.</p>
+<p><strong>Doğrulama günlüğü,</strong> görüntülenen sınır aracılığıyla olay zincirini ve imzaları kontrol eder.
+Çalışma alanı değiştiğinde sonuç silinir ve panel, kontrolün ardından eklenen
+yeni kayıtları tanımlar. ZIP dışa aktarma işlemi, toplanan medya dosyalarını da doğrular.</p>
+<p>Geçerli bir imza, Telegram&#x27;ın
+kaynağı veya içeriğin doğruluğu değil, güvenilir anahtara göre bütünlüğü teyit eder. Parmak izlerini ve kontrol noktalarını bağımsız olarak saklayın. Güven ve teslimat gereklilikleri için
+<a href="../evidence/">kanıt model</a>ine, <a href="../operations/">günlük işlemlere</a> ve
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">canlı kabul prosedürüne</a> bakın.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/COLLECTION.md">Bu sayfayı GitHub'da düzenle ↗</a><a class="next-guide" href="../operations/"><span>Sonraki adım</span><strong>İş akışları ve işlemler →</strong></a><p>Bu kılavuzlar mevcut uygulamayı açıklamaktadır. Doğrulama sonuçları ve kalan eksiklikler ayrı olarak belgelenmiştir. <a href="../verification/">Neler test edildi →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Bu sayfada"><p class="nav-label">Bu sayfada</p><a href="#from-login-to-a-journal">Girişten günlüğe</a><a href="#observation-scope-chosen-chats-a-folder-or-the-whole-account">Gözlem kapsamı: seçilen sohbetler, bir klasör veya hesabın tamamı</a><a href="#scope-and-event-selection">Kapsam ve olay seçimi</a><a href="#own-actions">Kendi eylemleri</a><a href="#investigation-mode-joining-teams-and-talking-to-bots">Soruşturma modu: ekiplere katılma ve botlarla iletişim kurma</a><a href="#recheck-tiers">Seviyeleri yeniden kontrol edin</a><a href="#message-history-and-attribution">Mesaj geçmişi ve kaynak gösterimi</a><a href="#history-snapshots">Geçmiş anlık görüntüleri</a><a href="#attachment-handling">Eklerin işlenmesi</a><a href="#pause-lock-disconnect-and-restart">Duraklatma, kilitleme, bağlantıyı kesme ve yeniden başlatma</a><a href="#account-isolation-and-verification">Hesap izolasyonu ve doğrulama</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Açık kaynak · Kendi makinenizde çalışır</span><a href="../../../../LICENSE">MIT lisansı</a><a href="../notice/">Operatör bildirimi</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Güvenlik</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Mesaj bekleniyor", "Step through a fictional send, edit and delete.": "Kurgusal bir gönderme, düzenleme ve silme işlemini adım adım inceleyin.", "No observations yet. Start the sequence or advance one event.": "Henüz herhangi bir gözlem yok. Diziyi başlatın veya bir olay ilerletin.", "Meet at 10:00": "Saat 10:00'da buluşalım", "A new message is visible in the chat.": "Sohbette yeni bir mesaj görünüyor.", "Record 1 appended: the collector observed the original message.": "1 kayıt eklendi: toplayıcı, orijinal mesajı gözlemledi.", "Meet at 11:00": "Saat 11:00'da buluşalım", "The current text changes. The earlier observation stays.": "Mevcut metin değiştirilmiştir. Önceki gözlem geçerliliğini korumaktadır.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Kayıt 2 eklendi: düzenleme yeni bir gözlemdir. Kayıt 1'de hâlâ orijinal metin yer almaktadır.", "Message deleted": "Mesaj silindi", "The message has disappeared from the chat view.": "Mesaj, sohbet ekranından kayboldu.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Record 3 eklenmiştir: silme bildirimi, gözlemlenen her iki sürümün yanında da saklanmaktadır.", "0 records": "0 kayıt", "1 record": "1 kayıt", "2 records": "2 kayıt", "3 records": "3 kayıt", "Complete / {n} of 3": "Tamam / 3'ün {n}'si", "Step / {n} of 3": "Adım / 3'ün {n}'si", "Pause": "Duraklat", "Replay sequence": "Tekrar oynatma dizisi", "Play sequence": "Çalma sırası", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Statik örnek mevcuttur. Hash değerlerini etkileşimli olarak hesaplamak için bu sayfayı HTTPS üzerinden veya Web Crypto desteğine sahip bir localhost önizlemesinde açın.", "No record supplied": "Kayıt sağlanmadı", "Tail removed": "Son kısım kaldırıldı", "≠ saved hash": "≠ kaydedilmiş hash", "Rebuilt · different hash": "Yeniden oluşturuldu · farklı hash", "= saved hash": "= kaydedilen hash", "Same length and matching head.": "Aynı uzunlukta ve başlığıyla uyumlu.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Hesaplanan üç hash değeri de kaydedilen hash değerleriyle eşleşmektedir. Bu örnek, korunan üç kayıtlık sınırla uyumludur.", "Same saved head; the journal prefix fails verification.": "Aynı başlık kaydedildi; günlük ön eki doğrulamadan geçemedi.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Kayıt 2, kaydedilmiş hash değeriyle artık eşleşmiyor. Yalnızca son saklanan başlık kontrol edilseydi bu durum gözden kaçardı; doğrulayıcı her kaydı tek tek kontrol eder.", "Head differs from the retained checkpoint.": "Başlık, saklanan kontrol noktası ile farklılık göstermektedir.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Yeniden oluşturulan hash değerleri birbiriyle bağlantılıdır, ancak son başlık değişmiştir. Saklanan kontrol noktası bu geçmişi reddediyor. Değiştirilen kayıtlarda orijinal imzalar da geçersiz sayılır.", "Too short: 2 supplied records \u003c 3 retained records.": "Çok kısa: Sağlanan kayıt sayısı 2, saklanan kayıt sayısı 3'ten az.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Kalan iki hash değeri hâlâ eşleşiyor. Saklanan kontrol noktası, eksik olan son kısmı ortaya çıkarıyor. O önceki sınır olmasaydı, bu daha kısa önek tek başına eksikliği ortaya çıkarmazdı.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Bu tarayıcıda hash hesaplaması yapılamamaktadır. Aşağıdaki formüller ve statik açıklamalar yine de kullanılabilir durumdadır.", "{n} records": "{n} kayıt", "head {hash}": "başlık {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Kabul edildi: sayı artıyor, imza doğrulanıyor ve anahtar eşleşiyor. Tanık bu yeni sınırı koruyor.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Geri alma: İmzalı yanıt, en son kabul edilen kontrol noktasına göre daha az kayıt bildiriyor. Witness, sorunu kaydeder ve daha önce kabul edilen sınırı korur.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: sayım değişmez ancak başlık farklıdır. Tanık, bu uyuşmazlığı kaydeder ve daha önce kabul edilen sınırı korur.", "No answer": "Cevap yok", "boundary unknown": "sınır bilinmiyor", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Yanıt yok: tanık, başarısız kontrolü kaydeder. Toplayıcının mevcut durumunu belirleyemez. Tanık, Bot API’sine hâlâ erişebiliyorsa ve yayın politikası izin veriyorsa, bu başarısızlığı yayınlayabilir.", "Send {n}": "{n} gönder", "Edit {n}": "Düzenle {n}", "Delete {n}": "{n}'yi sil", "Both accounts captured all six expected observations in this example.": "Bu örnekte her iki hesap da beklenen altı gözlemin tamamını kaydetmiştir.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "B hesabı yine 6 mesajın 6'sını da yakaladı. İki makbuzun alınması daha uzun sürdü. Yakalama oranı ve makbuz gecikmesi farklı sorulara cevap verir.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Hesap B, son tarihe kadar 6 eylemden 5'ini yakaladı (%83,3). Eksik olan düzenleme için ölçülen bir gecikme yoktur. Bu sonuç yalnızca altı kontrollü eylemi açıklamaktadır.", "not observed by cutoff": "kesme tarihine kadar gözlemlenmemiştir", "{s} seconds": "{s} saniye", "Exact values follow in the table.": "Kesin değerler tabloda yer almaktadır.", "{s} s": "{s} s", "Not observed": "Gözlemlenmedi", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Dört sohbet, farklı gözlemler sunmaktadır. Her bağlantı için kaynak kayıtlarını takip edin; göndereni belirtilmemiş kanal gönderisini 71001 numaralı kullanıcıya atamayın.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "#146 ve #205 numaralı kayıtlar aynı gönderen kimliğini (71001) göstermektedir. Bu, iki sohbet üzerinden bir Telegram hesabının gözlemlenen gönderilerini birbirine bağlamaktadır. Bu bilgi, gerçek hayattaki bir kişiyi tanımlamaz veya kanal gönderisini bir kişiye atfetmez.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "pay.example.invalid/new adresi, grup kaydı #146, bot klavyesi #173, kanal düzenlemesi #188 ve özel mesaj #205'te geçmektedir. Tekrarlanan bir hedef, materyalleri birbirine bağlar; ancak bu, söz konusu hesapların ortak kontrol altında olduğunu kanıtlamaz.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Bu hayali vakada, tamamlanmış medya makbuzları #151 ve #209'un SHA-256 değerleri tamamen aynıdır. Gerçek baytları ve bunlara ait mesaj kayıtlarını karşılaştırın. Eşleşen dosya, yaratıcısını tanımlamaz veya kimin ilettiğini kanıtlamaz.", "the encrypted off-site copy": "şifrelenmiş, sunucu dışında tutulan kopya", "notifications": "bildirimler", "checkpoint hashes for timestamps": "zaman damgaları için kontrol noktası hash değerleri", "signed checkpoints for the witness": "tanık için imzalı kontrol noktaları", "Switched on in this example": "Bu örnekte etkinleştirilmiştir", "Optional · off by default": "İsteğe bağlı · varsayılan olarak kapalı", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Bu makineden ayrılırken: Telegram bağlantısı ve {list}. Başka hiçbir şey yok.", "Default: only the Telegram connection leaves this machine.": "Varsayılan ayar: Bu makineden yalnızca Telegram bağlantısı dışarıya çıkar.", "{done} of {total} done": "{done}/{total} tamamlandı", "Mark step {n} as done": "{n} numaralı adımı tamamlanmış olarak işaretle", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Metin", "Copied": "Kopyalandı", "Command copied.": "Komut kopyalandı.", "Selected — Ctrl/Cmd+C": "Seçildi — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Komut seçildi. Elle kopyalayın.", "Command copied to clipboard.": "Komut panoya kopyalandı.", "Select text": "Metni seç", "Clipboard unavailable. Command selected; copy it manually.": "Pano kullanılamıyor. Komut seçildi; manuel olarak kopyalayın.", "A message arrives. The first observation is saved.": "Bir mesaj gelir. İlk gözlem kaydedilir.", "The time changes. Both captured versions stay.": "Zaman değişir. Yakalanan her iki sürüm de kalır.", "The message disappears. The captured history remains.": "Mesaj kaybolur. Kaydedilen geçmiş kalır.", "Pause example animation": "Örnek animasyonu duraklat", "Play example animation": "Örnek animasyonu oynat", "Play": "Oynat", "Full-size workspace screenshot": "Çalışma alanının tam boyutlu ekran görüntüsü", "Workspace screenshot · fictional data": "Çalışma alanı ekran görüntüsü · hayali veriler", "Close": "Kapat", "Close screenshot": "Ekran görüntüsünü kapat", "Scrollable full-size screenshot": "Kaydırılabilir tam boyutlu ekran görüntüsü", "Enlarge: {name}": "Büyüt: {name}", "View full size": "Tam boyutta görüntüle"}</script>
+</body></html>

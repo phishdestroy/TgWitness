@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="zh-Hans" dir="ltr" class="home-page">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1120">
+  <title>Telegram 消息历史记录与签名导出 | TgWitness</title>
+  <meta name="description" content="一款自托管的 Telegram 观察日志工具。保存观察到的消息、比较编辑内容、追踪删除通知，并导出可供验证的签名记录。">
+  <link rel="canonical" href="https://phishdestroy.github.io/TgWitness/zh/">
+  <link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/zh/", "url": "https://phishdestroy.github.io/TgWitness/zh/", "name": "Telegram 消息历史记录与签名导出 | TgWitness", "description": "一款自托管的 Telegram 观察日志工具。保存观察到的消息、比较编辑内容、追踪删除通知，并导出可供验证的签名记录。", "inLanguage": "zh-Hans", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}]}</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Telegram 消息历史记录与签名导出 | TgWitness">
+  <meta property="og:site_name" content="TgWitness">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:description" content="您的账户。您的日志。可验证的记录。一个在您自己的机器上运行的开源 Telegram 工作区。">
+  <meta property="og:url" content="https://phishdestroy.github.io/TgWitness/zh/">
+  <meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="TgWitness — 追踪线索。保存证据。一个 Telegram 调查工作空间。">
+  <meta name="twitter:card" content="summary_large_image">
+  <script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+  <link rel="icon" href="../assets/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../site.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳转至内容</a>
+  <header class="site-header"><div class="header wrap">
+    <a class="brand" href="#" aria-label="TgWitness 主页"><img src="../assets/mark.svg" width="34" height="34" alt=""> TgWitness</a>
+    <nav aria-label="主导航">
+      <a href="guides/modes.html">功能</a><a href="#workspace">工作区</a><a href="#start">安装</a><a href="docs/">文档</a>
+      <a class="nav-source" href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a>
+    </nav>
+    <div class="header-tools"><details class="lang-menu"><summary aria-label="语言"><span aria-hidden="true">◍</span> 简体中文</summary><div class="lang-list"><a href="../" hreflang="en" lang="en">English</a><a href="../ru/" hreflang="ru" lang="ru">Русский</a><a href="../uk/" hreflang="uk" lang="uk">Українська</a><a href="../es/" hreflang="es" lang="es">Español</a><a href="../pt/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../tr/" hreflang="tr" lang="tr">Türkçe</a><a href="../ar/" hreflang="ar" lang="ar">العربية</a><a href="../fa/" hreflang="fa" lang="fa">فارسی</a><a href="../ur/" hreflang="ur" lang="ur">اردو</a><a href="../hi/" hreflang="hi" lang="hi">हिन्दी</a><a href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../vi/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="./" hreflang="zh-Hans" lang="zh-Hans" aria-current="true">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="在浅色和深色主题之间切换"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+  </div></header>
+  <main id="main">
+    <div class="hero-shell">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <a class="release-label" href="docs/reference/changelog/"><span class="status-dot"></span> 开源 <span class="label-divider">/</span> v0.7.0 <span aria-hidden="true">→</span></a>
+        <h1 id="hero-title">消息会变。<span>保留您所见的内容。</span></h1>
+        <p class="hero-description">捕获 Telegram 消息，保留其变更记录，并导出经签名的记录。</p>
+        <div class="actions"><a class="button primary" data-home-action="demo" href="../demo/?lang=zh">打开演示 <span aria-hidden="true">→</span></a><a class="button secondary" data-home-action="setup" href="../demo/guide.html?lang=zh">安装指南 <span aria-hidden="true">↗</span></a></div>
+        <p class="hero-footnote">演示中使用的是虚构数据。无需登录 Telegram 账号。</p>
+        <a class="hero-retention-link" href="#s3">S3 异地备份：设置与恢复 <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="record" aria-label="消息历史记录的图示示例，使用虚构数据">
+        <div class="record-heading"><span><span class="record-dot"></span> 穿越时空的一则消息</span><span class="mono">#0042</span></div>
+        <div class="record-source"><span class="source-icon" aria-hidden="true">N</span><div>Northstar · 研究<small>虚构来源 / 消息 42</small></div></div>
+        <ol class="record-events">
+          <li><div class="event-line"><strong>观察到的消息：</strong><time>09:41:02</time></div><p>简报从 <span class="old-time">14:00</span> 开始。</p></li>
+          <li><div class="event-line"><strong>编辑记录已保留</strong><time>09:43:18</time></div><p>简报从 <span class="new-time">15:00</span> 开始。</p><small>保留了旧版本</small></li>
+          <li><div class="event-line"><strong>删除通知 </strong><time>10:06:45</time></div><p class="deletion-text">捕获的内容将保存在您的日志中。</p></li>
+        </ol>
+        <div class="record-footer"><span aria-hidden="true">⌁</span> 三点观察。一段历史。<span class="sample-label">示例</span></div>
+        <div class="record-controls" hidden><div role="group" aria-label="探索虚构的消息记录"><button type="button" data-record-step="0" aria-pressed="false">01 <span>消息</span></button><button type="button" data-record-step="1" aria-pressed="false">02 <span>编辑</span></button><button type="button" data-record-step="2" aria-pressed="true">03 <span>删除</span></button></div><button class="motion-toggle" type="button" aria-label="暂停示例动画">暂停 <span aria-hidden="true">Ⅱ</span></button></div>
+        <p class="record-caption" id="record-caption">消息虽已消失，但记录的历史依然存在。</p>
+      </div>
+    </section>
+
+    <nav class="workflow wrap" aria-label="选择下一步操作">
+      <p class="workflow-label">选择您的下一步</p>
+      <ol>
+        <li><a href="guides/modes.html"><span class="workflow-number" aria-hidden="true">01</span><div><strong>探索功能</strong><small>模式、事件与限制</small></div><span class="workflow-arrow" aria-hidden="true">↗</span></a></li>
+        <li><a href="../demo/?lang=zh"><span class="workflow-number" aria-hidden="true">02</span><div><strong>试用工作区</strong><small>打开虚构案例</small></div><span class="workflow-arrow" aria-hidden="true">↗</span></a></li>
+        <li><a href="#start"><span class="workflow-number" aria-hidden="true">03</span><div><strong>本地部署</strong><small>Windows、macOS、Linux 或 Docker</small></div><span class="workflow-arrow" aria-hidden="true">↓</span></a></li>
+        <li><a href="docs/exports/"><span class="workflow-number" aria-hidden="true">04</span><div><strong>验证导出文件</strong><small>查看一份经过签名的交接记录</small></div><span class="workflow-arrow" aria-hidden="true">↗</span></a></li>
+      </ol>
+    </nav>
+    </div>
+
+    <section class="workspace wrap" id="workspace" aria-labelledby="workspace-title">
+      <div class="section-heading"><div><p class="eyebrow"><span class="section-index">01</span> 工作区</p><h2 id="workspace-title">每一处变更都清晰记录。随时随地触手可及。</h2></div><p>通过虚构的演示数据浏览界面。</p></div>
+      <div class="switcher" data-tabs aria-label="工作区截图">
+        <div class="tab-buttons" data-tab-buttons>
+          <button type="button" id="tour-chats" aria-controls="panel-chats">01 <span>已保存的聊天记录</span></button>
+          <button type="button" id="tour-journal" aria-controls="panel-journal">02 <span>日志</span></button>
+          <button type="button" id="tour-edits" aria-controls="panel-edits">03 <span>编辑历史</span></button>
+          <button type="button" id="tour-exports" aria-controls="panel-exports">04 <span>导出与 S3</span></button>
+        </div>
+        <figure id="panel-chats" aria-labelledby="tour-chats" data-tab-panel><div class="screen-frame screen-dark"><div class="screen-bar"><span class="window-dots" aria-hidden="true">● ● ●</span><span>TgWitness / 已保存的聊天记录</span><span class="screen-mode">您的观察工作区</span></div><img src="../assets/chats-dark.png" width="1440" height="900" alt="以深色主题保存 Telegram 对话记录，并完整保留编辑和已删除消息的上下文信息" loading="lazy"></div><figcaption><span>01 / 已保存的聊天记录</span> 熟悉的对话视图，消息旁会显示已捕获的编辑记录和删除通知。</figcaption></figure>
+        <figure id="panel-journal" aria-labelledby="tour-journal" data-tab-panel><div class="screen-frame"><div class="screen-bar"><span class="window-dots" aria-hidden="true">● ● ●</span><span>TgWitness / 日志</span><span class="screen-mode">本地工作区</span></div><img src="../assets/workspace.png" width="1440" height="900" alt="包含已观察到的消息、编辑记录、删除通知及覆盖事件的日志" fetchpriority="high"></div><figcaption><span>02 / 日志</span> 一个可搜索的时间线，记录您的账户所观察到的内容，包括中断情况。</figcaption></figure>
+        <figure id="panel-edits" aria-labelledby="tour-edits" data-tab-panel><div class="screen-frame"><div class="screen-bar"><span class="window-dots" aria-hidden="true">● ● ●</span><span>TgWitness / 编辑历史</span><span class="screen-mode">本地工作区</span></div><img src="../assets/detail.png" width="1440" height="900" alt="详细信息抽屉，用于对比消息的原始版本与编辑后的版本" loading="lazy"></div><figcaption><span>03 / 编辑历史记录：</span>在不覆盖先前记录的情况下，比较捕获的不同版本。</figcaption></figure>
+        <figure id="panel-exports" aria-labelledby="tour-exports" data-tab-panel><div class="screen-frame"><div class="screen-bar"><span class="window-dots" aria-hidden="true">● ● ●</span><span>TgWitness / 签名导出文件</span><span class="screen-mode">本地工作区</span></div><img src="../assets/exports.png" width="1440" height="900" alt="导出功能支持生成带签名的 ZIP、JSONL、CSV 文件以及离线 HTML 报告" loading="lazy"></div><figcaption><span>04 / 带签名的导出文件</span> 将日志随身携带，附带清单和独立验证器。</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="principles wrap" aria-label="围绕您的观察结果进行设计">
+      <article><svg class="feature-illustration" viewBox="0 0 300 112" fill="none" aria-hidden="true"><path d="M69 29h62l32 27h66M69 83h62l32-27" stroke="#b5c7e5" stroke-width="2"/><rect x="19" y="11" width="52" height="36" rx="9" fill="#edf3ff" stroke="#acc2ee"/><rect x="19" y="65" width="52" height="36" rx="9" fill="#edf3ff" stroke="#acc2ee"/><path d="M33 24h24M33 32h16M33 78h24M33 86h16" stroke="#5b7fbe" stroke-width="2" stroke-linecap="round"/><rect x="173" y="22" width="105" height="68" rx="12" fill="#fff" stroke="#b5c7e5"/><circle cx="193" cy="45" r="5" fill="#2563eb"/><path d="M207 44h48M207 53h33M188 71h67" stroke="#adc0df" stroke-width="3" stroke-linecap="round"/><circle class="route-signal" cx="145" cy="41" r="4" fill="#2563eb"/></svg><span class="feature-number">01 / 捕获</span><h3>范围由您决定。</h3><p>可选择特定聊天、Telegram 文件夹或整个账户。每个账户均拥有独立的工作区。</p><a class="text-link" href="guides/modes.html#scope">比较采集模式 <span aria-hidden="true">→</span></a></article>
+      <article><svg class="feature-illustration" viewBox="0 0 300 112" fill="none" aria-hidden="true"><rect x="31" y="10" width="168" height="78" rx="10" fill="#eff2f7" stroke="#c8d3e3"/><path d="M47 28h89M47 41h124M47 54h76" stroke="#aabbd3" stroke-width="3" stroke-linecap="round"/><rect class="version-layer" x="77" y="30" width="190" height="74" rx="10" fill="#fff" stroke="#adc3ea"/><path d="M94 48h103" stroke="#aabbd3" stroke-width="3" stroke-linecap="round"/><rect x="94" y="60" width="63" height="12" rx="3" fill="#f6e9e8"/><path d="M100 66h51" stroke="#b97770"/><rect x="164" y="60" width="77" height="12" rx="3" fill="#dcefe5"/><path d="M170 66h65" stroke="#2c7c56"/><path d="M94 86h92" stroke="#aabbd3" stroke-width="3" stroke-linecap="round"/></svg><span class="feature-number">02 / 保存</span><h3>变更内容丰富了故事。</h3><p>已捕获的版本、删除通知和观察缺口将保留在日志中。</p><a class="text-link" href="guides/modes.html#events">查看事件矩阵 <span aria-hidden="true">→</span></a></article>
+      <article><svg class="feature-illustration" viewBox="0 0 300 112" fill="none" aria-hidden="true"><rect x="35" y="19" width="59" height="75" rx="8" fill="#fff" stroke="#c1cde0"/><path d="M49 36h30M49 46h23M49 56h30" stroke="#afbed5" stroke-width="3" stroke-linecap="round"/><path d="M106 57h60m-8-8 8 8-8 8" stroke="#7896c8" stroke-width="2" stroke-linecap="round"/><rect x="178" y="15" width="88" height="82" rx="12" fill="#edf3ff" stroke="#acc2ee"/><path d="M222 31v28m-7-5 7 7 7-7M206 72h32" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="259" cy="85" r="14" fill="#e0f1e8" stroke="#98c5ae"/><path class="verified-tick" d="m252 85 5 5 9-10" stroke="#23734b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="feature-number">03 / 移交</span><h3>一份随行记录。</h3><p>包含签名 ZIP 文件、完整保留的文件以及离线报告。可选密码保护。</p><a class="text-link" href="docs/exports/">导出并验证 <span aria-hidden="true">→</span></a></article>
+    </section>
+
+    <section class="proof wrap" id="proof" aria-labelledby="proof-title">
+      <div class="section-heading"><div><p class="eyebrow">记录的整合机制</p><h2 id="proof-title">只要更改一个字节，区块链就会告诉你。</h2></div><p>每个事件均链接到前一个哈希值，并带有 Ed25519 签名。</p></div>
+      <div class="switcher" data-tabs aria-label="证据说明">
+        <div class="tab-buttons" data-tab-buttons>
+          <button type="button" id="proof-chain" aria-controls="panel-chain">01 <span>关联记录</span></button>
+          <button type="button" id="proof-tamper" aria-controls="panel-tamper">02 <span>被篡改的记录</span></button>
+          <button type="button" id="proof-checkpoint" aria-controls="panel-checkpoint">03 <span>保留的检查点</span></button>
+        </div>
+        <figure id="panel-chain" aria-labelledby="proof-chain" data-tab-panel><picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/evidence-chain-static.svg"><img src="../assets/evidence-chain-animated.svg" width="1200" height="560" loading="lazy" alt="捕获的事件会链接到之前的哈希值，附带签名，并以可验证的导出格式传输。"></picture></figure>
+        <figure id="panel-tamper" aria-labelledby="proof-tamper" data-tab-panel><picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/evidence-tamper-static.svg"><img src="../assets/evidence-tamper-animated.svg" width="1200" height="560" loading="lazy" alt="修改已捕获的记录会改变其哈希值，并导致关联记录的验证失效。"></picture></figure>
+        <figure id="panel-checkpoint" aria-labelledby="proof-checkpoint" data-tab-panel><picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/evidence-checkpoint-static.svg"><img src="../assets/evidence-checkpoint-animated.svg" width="1200" height="560" loading="lazy" alt="通过单独保留的检查点，接收方可将导出的日志与之前的记录进行比对。"></picture></figure>
+      </div>
+      <div class="section-actions"><p>了解每种验证机制的具体作用及其局限性所在。</p><a class="button outline" href="guides/modes.html#levels">探索八个证据等级 <span aria-hidden="true">→</span></a></div>
+    </section>
+
+    <section class="integrity" aria-labelledby="integrity-title"><div class="wrap integrity-layout">
+      <div><p class="eyebrow">供审阅使用</p><h2 id="integrity-title">欢迎其他审阅者提供<span>意见。</span></h2><p>将观察记录、文件和离线 HTML 报告整合为一个签名包进行交付。</p><a class="text-link" href="docs/reference/evidence/">阅读证据模型 <span aria-hidden="true">↗</span></a></div>
+      <div class="bundle"><div class="bundle-heading"><span class="mono">tgwitness-evidence.zip</span><span class="bundle-tag">带签名的软件包</span></div><ul><li><span>01</span><div>原始观察结果<small>JSONL 记录 + CSV 表格</small></div></li><li><span>02</span><div>易于理解的背景信息<small>离线 HTML 报告 + 保留的媒体文件</small></div></li><li><span>03</span><div>独立验证<small>带签名的清单 + 独立验证器</small></div></li></ul><p class="bundle-note">签名通过与可信密钥进行比对来检测篡改行为。它们既不能证明消息源自 Telegram，也不能保证完整捕获。日志内容和媒体文件需要由您提供加密存储。</p></div>
+    </div></section>
+
+    <section class="retention wrap" id="retention" aria-labelledby="retention-title">
+      <div class="section-heading"><div><p class="eyebrow">存储、连续性与验证</p><h2 id="retention-title">S3备份。外部验证。</h2></div><p>保留加密副本并添加独立校验机制。</p></div>
+      <article class="s3-overview" id="s3" aria-labelledby="s3-title">
+        <div class="s3-overview-heading"><p class="eyebrow">导出 → 异地备份</p><span class="retention-badge">默认处于关闭状态</span></div>
+        <h3 id="s3-title">将所有内容复制到兼容 S3 的存储中</h3>
+        <div class="s3-layout">
+          <div class="s3-copy">
+            <p>日志、文件、带时间戳的检查点和聊天记录导出——在上传至 AWS S3 或兼容存储之前均已加密。</p>
+            <details class="presentation-details"><summary>存储设置与恢复</summary>
+            <dl class="s3-features">
+              <div><dt>客户端加密</dt><dd><code>AES-256-GCM</code>对本机上的对象进行加密。服务提供商接收加密后的对象。</dd></div>
+              <div><dt>定时或手动备份</dt><dd>立即复制，或选择 1 至 1,440 分钟之间的间隔。在面板中查看进度。</dd></div>
+              <div><dt>Object Lock</dt><dd>在存储桶支持的情况下，选择保留天数和模式。该面板会报告已上传对象的保留状态是否已确认。</dd></div>
+              <div><dt>经过验证的恢复</dt><dd>请下载加密密钥并单独保存。在另一台机器上进行恢复；文件仅在验证通过后才会发布。</dd></div>
+            </dl>
+            </details>
+          </div>
+          <figure class="s3-preview"><div class="screen-frame"><img src="../assets/off-site-copy.png" width="1136" height="825" alt="完整的异地备份配置面板：端点、区域、存储桶、访问密钥、计划任务、对象锁定及恢复密钥控制" loading="lazy"></div><figcaption>展开后显示包含高级选项的完整面板。未显示任何存储凭据。</figcaption></figure>
+        </div>
+        <div class="replica-flow" aria-label="数据在上传前会进行加密"><span>日志与媒体</span><span aria-hidden="true">→</span><code translate="no">AES-256-GCM</code><span aria-hidden="true">→</span><span>兼容 S3 的存储服务</span></div>
+        <div class="s3-actions"><a class="button primary" href="docs/exports/#s3">配置 S3 并恢复副本 <span aria-hidden="true">→</span></a><a class="text-link" href="docs/reference/evidence/#off-site-copy-and-restore-s3">阅读验证详情 <span aria-hidden="true">↗</span></a></div>
+        <p class="retention-limit"><strong>不具备的能力</strong> 若无导出的解密密钥，该工具无法恢复数据，也无法替代独立见证人。</p>
+      </article>
+      <div class="retention-grid">
+        <article class="retention-card notification-overview" id="notifications" aria-labelledby="notifications-title">
+          <div class="retention-heading"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3 id="notifications-title">通知 · Apprise</h3>
+          <p>通过 Apprise 接收问题警报、聊天变更和每日摘要：支持即时通讯软件、电子邮件或您自己的 JSON Webhook。</p>
+          <p class="retention-limit"><strong>不执行</strong>：除非您启用了“摘要”功能，否则不会发送消息正文。</p>
+          <a class="text-link" href="docs/reference/operations/#notifications">配置通知接收端 <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="retention-card">
+          <div class="retention-heading"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 3" stroke-linecap="round"/></svg></div>
+          <h3>外部时间戳</h3>
+          <p>使用 RFC 3161 和 OpenTimestamps 对时间戳检查点进行哈希计算。</p>
+          <p class="retention-limit"><strong>不具备的能力</strong> 它不会将待处理的日历收据视为已确认的比特币时间戳。</p>
+          <a class="text-link" href="docs/reference/timestamp/">查看时间戳证明 <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="retention-card">
+          <div class="retention-heading"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8 12 3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>独立见证者</h3>
+          <p>一个独立的主机用于存储已签名的观察记录，并可发布 <code>TGW1</code> 检查点。</p>
+          <p class="retention-limit"><strong>不具备的能力</strong> 同一收集器主机上的两个工作区不会被视为独立的见证者。</p>
+          <a class="text-link" href="docs/witness/">设置见证器 <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="retention-card">
+          <div class="retention-heading"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 12h6m6 0h6M12 7v3m0 4v3" stroke-linecap="round"/><circle cx="5" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></div>
+          <h3>数据恢复与可见缺失</h3>
+          <p>重启后可继续操作。重新检查并 <code>coverage.json</code> 显示已恢复的消息及缺失部分。</p>
+          <p class="retention-limit"><strong>不具备的能力</strong> 该工具不会还原所有被遗漏的编辑操作或已消失的消息。</p>
+          <a class="text-link" href="guides/modes.html#continuity">检查连续性和缺失部分 <span aria-hidden="true">→</span></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="start wrap" id="start" aria-labelledby="start-title">
+      <div class="section-heading"><div><p class="eyebrow">在您的设备上</p><h2 id="start-title">您的首个工作区从这里开始。</h2></div><div class="section-intro"><p>请先体验演示版。准备就绪后，连接专用账户。支持 Windows、Linux、macOS 或 Docker。</p><a class="text-link" href="../demo/guide.html?lang=zh">阅读安装指南 <span aria-hidden="true">→</span></a></div></div>
+      <aside class="session-warning" id="session-warning" aria-labelledby="session-warning-title"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 4.2 2.6 17.5A2 2 0 0 0 4.3 20.5h15.4a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0Z"/><path d="M12 9.5v4M12 17h.01"/></svg><div><strong id="session-warning-title">一个导入的会话，一个正在运行的客户端。</strong><p>请勿在 Telegram Desktop 和 TgWitness 中同时运行同一组导入的 TData/会话密钥。Telegram 可能会使共享授权失效（AUTH_KEY_DUPLICATED）。如需并行使用，请通过手机或二维码创建一个独立的 TgWitness 登录账号。</p><a href="../demo/guide.html?lang=zh#session-warning">请阅读会话导入警告</a></div></aside>
+      <div class="demo-callout"><span class="demo-symbol" aria-hidden="true">↗</span><div><strong>连接前请先浏览。</strong><p>无需 Telegram 账号，即可体验这个虚构的工作区。</p><p><a class="demo-link" href="../demo/?lang=zh">打开在线演示 →</a></p></div><div class="demo-commands"><span>Windows <code>scripts\Demo.cmd</code></span><span>Linux / macOS <code>sh start.sh --demo</code></span></div></div>
+      <details class="presentation-details installation-details"><summary>本地安装命令</summary>
+      <div class="start-layout">
+        <div class="start-intro"><span class="step-label">步骤 01</span><h3>获取源代码。</h3><p><a class="download-link" href="https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip">下载源代码 ZIP</a> 文件并解压，或克隆代码库：</p><div class="code-block"><pre><code id="clone-command">git clone https://github.com/phishdestroy/TgWitness.git
+cd TgWitness</code></pre><button class="copy-button" type="button" data-copy="clone-command" hidden>文案</button></div><p class="small-note">运行该程序需要 Python 3.11 或更高版本。如果系统中缺少 Python，Windows 启动程序会提供安装选项。</p><a class="text-link" href="https://github.com/phishdestroy/TgWitness/releases">浏览版本 <span aria-hidden="true">↗</span></a><p class="small-note">Windows 上没有 Python？<a href="https://github.com/phishdestroy/TgWitness/releases/download/v0.7.0/TgWitness-0.7.0-windows-amd64-portable.zip">请下载便携版软件包</a>，解压后双击 <code>TgWitness.cmd</code>。</p></div>
+        <div class="start-run"><span class="step-label">步骤 02</span><h3>选择运行方式。</h3><div data-tabs aria-label="安装平台">
+          <div class="tab-buttons platform-tabs" data-tab-buttons><button type="button" id="tab-windows" aria-controls="setup-windows">Windows</button><button type="button" id="tab-unix" aria-controls="setup-unix">Linux / macOS</button><button type="button" id="tab-docker" aria-controls="setup-docker">Docker</button></div>
+          <div id="setup-windows" aria-labelledby="tab-windows" data-tab-panel><p>双击 <code>Start.cmd</code>，或在 PowerShell 中运行：</p><div class="code-block"><pre><code id="windows-command">.\Start.cmd</code></pre><button class="copy-button" type="button" data-copy="windows-command" hidden>文案</button></div><p>只是想了解一下？双击 <code>scripts\Demo.cmd</code> 即可体验独立演示。无需登录 Telegram。</p></div>
+          <div id="setup-unix" aria-labelledby="tab-unix" data-tab-panel><p>在支持 Python 3.11+ 及 <code>venv</code> 的环境下：</p><div class="code-block"><pre><code id="unix-command">sh start.sh</code></pre><button class="copy-button" type="button" data-copy="unix-command" hidden>文案</button></div><p>若要打开虚构的日志，请运行 <code>sh start.sh --demo</code>。</p></div>
+          <div id="setup-docker" aria-labelledby="tab-docker" data-tab-panel><p>在已运行 Docker 并安装 Compose 2.20+ 的情况下：</p><div class="code-block"><pre><code id="docker-command">docker compose up -d --build --wait
+docker compose exec tgwitness cat /data/panel-token.txt</code></pre><button class="copy-button" type="button" data-copy="docker-command" hidden>文案</button></div><p>第二个命令会显示您的私有面板令牌。请将其保存在您的设备上。</p></div>
+        </div><p class="panel-address">启动后，请访问 <a href="http://127.0.0.1:8787">127.0.0.1:8787 并输入 <span aria-hidden="true">↗</span></a>。</p><p class="small-note">对于源代码安装，令牌位于 <code>data/live/panel-token.txt</code>。Telegram 登录可使用内置的 API 设置，或使用您在 <a href="https://my.telegram.org">my.telegram.org</a> 上生成的密钥对。<a href="https://github.com/phishdestroy/TgWitness/blob/main/QUICKSTART.md">完整设置指南 ↗</a></p></div>
+      </div>
+      </details>
+      <p class="release-note"><strong>TgWitness 0.7.0</strong> <a href="docs/reference/changelog/">最新动态 →</a> · <a href="docs/reference/features/">功能与已知限制 →</a></p>
+    </section>
+
+    <section class="docs wrap" id="docs" aria-labelledby="docs-title"><div class="section-heading"><div><p class="eyebrow">一次只处理一项任务</p><h2 id="docs-title">清晰的说明。有用的下一步操作。</h2></div><a class="text-link" href="docs/">浏览指南 ↗</a></div><a class="capability-link" href="guides/modes.html"><svg viewBox="0 0 32 32" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="2"/><rect x="19" y="3" width="10" height="10" rx="2"/><rect x="3" y="19" width="10" height="10" rx="2"/><path d="m19 25 4 4 7-10" stroke-linecap="round" stroke-linejoin="round"/></svg><div><h3>模式、应用场景和证据等级</h3><p>四种采集模式。八个验证级别。为您的案件找到合适的工作流程。</p></div><span aria-hidden="true">↗</span></a><div class="doc-links"><a href="docs/accounts/"><span>01</span><div><h3>连接账户</h3><p>支持通过手机、二维码及会话导入数据。</p></div><span aria-hidden="true">↗</span></a><a href="docs/proxies/"><span>02</span><div><h3>选择代理</h3><p>公开的 MTProxy 列表或您自己的路由。</p></div><span aria-hidden="true">↗</span></a><a href="docs/witness/"><span>03</span><div><h3>设置 Witness 机器人</h3><p>您 Telegram 频道中的签名检查点。</p></div><span aria-hidden="true">↗</span></a><a href="docs/exports/"><span>04</span><div><h3>导出与验证</h3><p>分享捕获的历史记录并验证其完整性。</p></div><span aria-hidden="true">↗</span></a></div></section>
+
+    <section class="faq wrap" aria-labelledby="faq-title"><h2 id="faq-title">开始之前。</h2><div><details><summary>本页面是否与 Telegram 相关？</summary><p>不，这是一个包含虚构示例和截图的静态项目页面。实际应用程序运行在您的计算机或服务器上；登录操作也在那里进行。</p></details><details><summary>它能恢复在捕获前已被删除的消息吗？</summary><p>不。TgWitness 仅保留数据采集运行期间您的账户所观察到的内容。后续的历史快照无法还原未捕获的编辑操作或已删除的消息。</p></details><details><summary>我的整个日志是否都经过加密？</summary><p>账户凭据和签名密钥存储在加密保险库中。本地消息和附件需要存储在加密磁盘或卷中。导出文件可选配密码保护的 AES-256 ZIP 格式。</p></details><details><summary>该网站与 Telegram 有关联吗？</summary><p>不。TgWitness 是一个独立项目，基于 Telethon 构建，并根据 MIT 许可证发布。您可通过内置的 API 设置或您自己的 API 密钥对来授权您的账户。</p></details></div></section>
+    <section class="operator-notice wrap" aria-labelledby="operator-notice-title" lang="en" dir="ltr" translate="no">
+      <div class="operator-notice-copy">
+        <p class="operator-notice-label">PROJECT NOTICE / LICENCE</p>
+        <h2 id="operator-notice-title">Operator incompatibility.</h2>
+        <p><strong>Taylor Wessing PartG mbB — German core, Hamburg office.</strong></p>
+        <p>Our statement as the authors of TgWitness. It adds no condition to the MIT License. Read the complete notice and its source record.</p>
+      </div>
+      <div class="operator-notice-actions">
+        <a href="../docs/reference/notice/">Read the complete notice <span aria-hidden="true">→</span></a>
+        <a href="../NOTICE">Original text</a>
+      </div>
+    </section>
+    <section class="closing wrap" aria-labelledby="closing-title"><div><p class="eyebrow">您的下一步</p><h2 id="closing-title">先探索一下。准备就绪后再进行设置。</h2></div><div class="closing-actions"><a class="button primary" href="../demo/?lang=zh">打开演示 <span aria-hidden="true">→</span></a><a class="button outline" href="../demo/guide.html?lang=zh">安装指南 <span aria-hidden="true">↗</span></a></div></section>
+  </main>
+  <footer class="footer wrap"><a class="brand" href="#"><img src="../assets/mark.svg" width="26" height="26" alt=""> TgWitness</a><span>一个自托管的观察日志。</span><nav aria-label="页脚导航"><a href="https://github.com/phishdestroy/TgWitness">来源</a><a href="../LICENSE">MIT 许可协议</a><a href="../docs/reference/notice/">操作员须知</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">安全</a></nav></footer>
+  <div class="sr-only" id="copy-status" role="status" aria-live="polite"></div>
+<script id="site-dict" type="application/json">{"Waiting for a message": "等待消息", "Step through a fictional send, edit and delete.": "通过一个虚构的发送、编辑和删除过程进行演示。", "No observations yet. Start the sequence or advance one event.": "尚无观察记录。开始序列或跳转至下一事件。", "Meet at 10:00": "10:00 见面", "A new message is visible in the chat.": "聊天中显示了一条新消息。", "Record 1 appended: the collector observed the original message.": "已附录记录 1 条：采集器已捕获原始消息。", "Meet at 11:00": "11:00 见面", "The current text changes. The earlier observation stays.": "当前文本内容有所变更。先前的观察结果仍然有效。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "记录 2 已追加：该编辑内容为新观察结果。记录 1 仍保留原始文本。", "Message deleted": "消息已删除", "The message has disappeared from the chat view.": "该消息已从聊天界面中消失。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "已添加记录 3：删除通知与两个被观察到的版本一同保留。", "0 records": "0 条记录", "1 record": "1 条记录", "2 records": "2 条记录", "3 records": "3 条记录", "Complete / {n} of 3": "已完成 / {n}/3", "Step / {n} of 3": "第 {n} 步（共 3 步）", "Pause": "暂停", "Replay sequence": "回放序列", "Play sequence": "播放序列", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "静态示例已上线。如需交互式计算哈希值，请通过 HTTPS 访问此页面，或在支持 Web Crypto 的本地预览环境中打开。", "No record supplied": "未提供记录", "Tail removed": "尾部内容已删除", "≠ saved hash": "≠ 已保存的哈希值", "Rebuilt · different hash": "重建 · 哈希值不同", "= saved hash": "= 已保存的哈希值", "Same length and matching head.": "篇幅相同且标题一致。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "这三个计算出的哈希值均与保存的哈希值一致。该样本符合保留的三个记录边界。", "Same saved head; the journal prefix fails verification.": "保存的头部信息相同；日志前缀验证失败。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "记录 2 与其保存的哈希值不再匹配。若仅检查最终存储的头部，则会遗漏此问题；验证器会检查每一条记录。", "Head differs from the retained checkpoint.": "标题与保留的检查点不同。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "重建的哈希值相互关联，但最终的头部已发生变化。保留的检查点拒绝接受这一历史记录。对于已更改的记录，原始签名也会验证失败。", "Too short: 2 supplied records \u003c 3 retained records.": "内容过短：提供的记录有 2 条，而保留的记录少于 3 条。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "剩下的两个哈希值仍然匹配。保留的检查点揭示了缺失的部分。如果没有那个早先的边界，仅凭这个较短的前缀是无法揭示这一遗漏的。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "此浏览器不支持哈希计算。下方的公式和静态说明仍可查看。", "{n} records": "{n}条记录", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "已接受：计数持续增加，签名已验证，密钥匹配。该见证者保留了这一新边界。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "回滚：签名后的结果报告的记录数量少于上次被接受的检查点。Witness 会记录该问题，并保留较早被接受的边界。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "分叉：计数保持不变，但分支头不同。见证者会记录该分歧，并保留先前被接受的分界点。", "No answer": "无回答", "boundary unknown": "边界未知", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "无响应：该工具会记录验证失败的情况。它无法确定收集器的当前状态。如果该工具仍能访问 Bot API 且其发布政策允许，则会发布该失败信息。", "Send {n}": "发送 {n}", "Edit {n}": "编辑 {n}", "Delete {n}": "删除 {n}", "Both accounts captured all six expected observations in this example.": "在这项示例中，这两个账户均捕获了预期的全部六项观察结果。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "账户 B 依然成功捕获了 6 条中的 6 条。其中两条收据的捕获耗时较长。捕获率和收据延迟反映的是不同的问题。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "账户 B 在截止时间前捕获了 6 条中的 5 条（83.3%）。缺失的编辑操作未测得延迟。此结果仅描述了这六项受控操作。", "not observed by cutoff": "未在截止时间前观察到", "{s} seconds": "{s}秒", "Exact values follow in the table.": "具体数值见下表。", "{s} s": "{s} s", "Not observed": "未发现", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "四个聊天群组提供了不同的观察结果。请追溯每条连接的源记录；在未确认发件人身份的情况下，请勿将该频道帖子归因于用户 71001。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "记录 #146 和 #205 显示相同的发件人 ID：71001。这将同一 Telegram 账号在两个聊天群组中发布的帖子关联起来。但这并不能识别现实世界中的具体个人，也无法确定该频道帖子的发布者。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "目标地址 pay.example.invalid/new 出现在群组记录 #146、机器人键盘 #173、频道编辑 #188 以及私信 #205 中。目标地址的重复出现表明这些内容之间存在关联；但这并不能证明这些账户受共同控制。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "在此虚构案例中，已完成的媒体收据 #151 和 #209 具有完全相同的 SHA-256 值。请对比实际字节内容及其关联的消息记录。该匹配文件既未标识其创建者，也无法证明是谁转发了该文件。", "the encrypted off-site copy": "加密的异地副本", "notifications": "通知", "checkpoint hashes for timestamps": "时间戳的检查点哈希值", "signed checkpoints for the witness": "TgWitness 的签名检查点", "Switched on in this example": "在此示例中已启用", "Optional · off by default": "可选 · 默认关闭", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "离开这台机器时：Telegram 连接和 {list}。除此之外别无他物。", "Default: only the Telegram connection leaves this machine.": "默认设置：仅 Telegram 连接会离开这台机器。", "{done} of {total} done": "已完成 {done}/{total}", "Mark step {n} as done": "将步骤 {n} 标记为已完成", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "文案", "Copied": "已复制", "Command copied.": "已复制该指令。", "Selected — Ctrl/Cmd+C": "选中 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "已选中命令。请手动复制。", "Command copied to clipboard.": "命令已复制到剪贴板。", "Select text": "选择文本", "Clipboard unavailable. Command selected; copy it manually.": "剪贴板不可用。已选中命令；请手动复制。", "A message arrives. The first observation is saved.": "一条消息送达。首次记录被保存。", "The time changes. Both captured versions stay.": "时间会改变，但两个记录版本都会保留下来。", "The message disappears. The captured history remains.": "消息虽已消失，但记录的历史依然存在。", "Pause example animation": "暂停示例动画", "Play example animation": "播放示例动画", "Play": "播放", "Full-size workspace screenshot": "全屏工作区截图", "Workspace screenshot · fictional data": "工作区截图 · 虚构数据", "Close": "关闭", "Close screenshot": "关闭截图", "Scrollable full-size screenshot": "可滚动全屏截图", "Enlarge: {name}": "放大：{name}", "View full size": "查看大图"}</script>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="ur" dir="rtl" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>نفاذ | TgWitness</title>
+<meta name="description" content="TgWitness کو Windows، Linux، macOS یا Docker پر ایک سروس کے طور پر HTTPS کے پیچھے، بیک اپ اور اپ ڈیٹس کے ساتھ چلائیں۔"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="ur_PK">
+<meta property="og:title" content="نفاذ | TgWitness"><meta property="og:description" content="TgWitness کو Windows، Linux، macOS یا Docker پر ایک سروس کے طور پر HTTPS کے پیچھے، بیک اپ اور اپ ڈیٹس کے ساتھ چلائیں۔">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/deployment/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/deployment/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/deployment/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/deployment/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/deployment/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/deployment/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/deployment/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/deployment/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/deployment/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/", "url": "https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/", "name": "نفاذ | TgWitness", "description": "TgWitness کو Windows، Linux، macOS یا Docker پر ایک سروس کے طور پر HTTPS کے پیچھے، بیک اپ اور اپ ڈیٹس کے ساتھ چلائیں۔", "inLanguage": "ur", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "گھر", "item": "https://phishdestroy.github.io/TgWitness/ur/"}, {"@type": "ListItem", "position": 2, "name": "دستاویزات", "item": "https://phishdestroy.github.io/TgWitness/ur/docs/"}, {"@type": "ListItem", "position": 3, "name": "حوالہ", "item": "https://phishdestroy.github.io/TgWitness/ur/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "نفاذ", "item": "https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">مواد پر جائیں</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / دستاویزات</span></a>
+<nav aria-label="رہنما"><a href="../../concepts/">ویژول گائیڈ</a><a href="../../">تمام رہنما</a><a href="../">حوالہ</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="زبان"><span aria-hidden="true">◍</span> اردو</summary><div class="lang-list"><a href="../../../../docs/reference/deployment/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/deployment/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/deployment/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/deployment/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/deployment/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/deployment/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/deployment/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/deployment/" hreflang="fa" lang="fa">فارسی</a><a href="./" hreflang="ur" lang="ur" aria-current="true">اردو</a><a href="../../../../hi/docs/reference/deployment/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/deployment/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/deployment/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/deployment/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="ہلکے اور گہرے تھیم کے درمیان سوئچ کریں"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="رہنما"><a href="../../../guides/modes.html">مodes، منظرنامے اور شواہد کی سطحیں</a><p class="nav-label">ابتدائی اقدامات</p><a href="../../start/">چند منٹ میں شروع کریں</a><a href="../../accounts/">اکاؤنٹ منسلک کریں</a><a href="../../proxies/">ایک پروکسی منتخب کریں</a><a href="../../exports/">ایکسپورٹ اور تصدیق کریں</a><p class="nav-label">شواہد کو سمجھیں</p><a href="../../concepts/">دیکھیں کہ شواہد کیسے کام کرتا ہے</a><a href="../../cases/">تمام چیٹس میں تفتیش کریں</a><a href="../../security/">اسے محفوظ رکھیں</a><p class="nav-label">مزید آگے بڑھیں</p><a href="../../witness/">ویٹنس بوٹ قائم کریں</a><a href="../../server/">اسے چلتا رکھیں</a><a href="../../troubleshooting/">پتہ لگائیں کہ کیا غلط ہوا</a></nav><nav class="wiki-nav" aria-label="حوالہ"><p class="nav-label"><a class="nav-label-link" href="../">حوالہ</a></p><details class="wiki-group" open><summary>سیٹ اپ</summary><a href="../quickstart/">تیزی سے آغاز</a><a href="../accounts/">اکاؤنٹس اور سیشن فارمیٹس</a><a href="../connection/">کنیکشن، پراکسیز اور ڈیٹا کی حفاظت</a><a href="./" aria-current="page">نفاذ</a></details><details class="wiki-group"><summary>جمع کریں</summary><a href="../collection/">جمع کرنے کا طریقہ</a><a href="../operations/">ورک فلو اور آپریشنز</a><a href="../investigation/">تحقیقاتی موڈ</a><a href="../features/">خصوصیات اور حدود</a></details><details class="wiki-group"><summary>شواہد</summary><a href="../how-it-works/">شواہد کیسے کام کرتے ہیں</a><a href="../evidence/">شواہد کا فارمیٹ</a><a href="../witness/">آزاد شاہد</a><a href="../timestamp/">ٹائم اسٹیمپس</a></details><details class="wiki-group"><summary>سیکیورٹی اور پروجیکٹ</summary><a href="../security/">سیکیورٹی اور ڈیٹا ہینڈلنگ</a><a href="../architecture/">معمارِی</a><a href="../verification/">کیا جانچا گیا ہے</a><a href="../license/">لائسنس اور فنِ تعمیر کی عدم مطابقت کا نوٹس</a><a href="../notice/">آپریٹر کی عدم مطابقت کا نوٹس</a><a href="../changelog/">تبدیلیوں کا ریکارڈ</a></details></nav><p class="sidebar-note">v0.7.0<br>اوپن سورس · آپ کی مشین پر چلتا ہے</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="رہنما"><a href="../../../">گھر</a> <span aria-hidden="true">/</span> <a href="../../">دستاویزات</a> <span aria-hidden="true">/</span> <a href="../">حوالہ</a> <span aria-hidden="true">/</span> <span aria-current="page">نفاذ</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">دستاویزات میں تلاش کریں</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="پراکسی، ہیش چین، ٹوکن یا ویٹنس آزمائیں…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="خلاصہ تلاش" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">رہنما اور حوالہ جات میں تلاش کرنے کے لیے ایک لفظ ٹائپ کریں۔ تلاش آپ کے براؤزر میں ہی رہتی ہے۔</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">حوالہ / سیٹ اپ</p><h1>نفاذ</h1><p class="guide-outcome">TgWitness کو Windows، Linux، macOS یا Docker پر ایک سروس کے طور پر HTTPS کے پیچھے، بیک اپ اور اپ ڈیٹس کے ساتھ چلائیں۔</p><div class="wiki-body"><p><strong>انگریزی</strong> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md">روسی</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md">یوکرینی</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md">اسپینش</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md">پرتگالی (برازیل)</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md">ترکی</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md">عربی</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md">فارسی</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md">اردو</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md">ہندی</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md">انڈونیشیائی زبان</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md">ویتنام زبان</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md">سادہ چینی</a></p>
+<h2 id="choose-an-installation">انسٹالیشن منتخب کریں<a class="anchor" href="#choose-an-installation" aria-label="اس حصے کا لنک">#</a></h2>
+<p>پورٹیبل پیکیج کے لیے، GitHub Releases سے <code>TgWitness-&lt;version&gt;-windows-amd64-portable.zip</code> نکالیں۔ دوسرے طریقوں کے لیے، ماخذ ZIP ڈاؤن لوڈ اور نکالیں یا ریپوزیٹری کلون کریں، پھر پروجیکٹ ڈائریکٹری سے مندرجہ ذیل کمانڈ چلائیں:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>تنصیب</th>
+<th>شروع کریں</th>
+<th>کیا یہ پس منظر میں چلتا ہے؟</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ونڈوز پورٹیبل پیکیج</td>
+<td><code>TgWitness.cmd</code></td>
+<td>نہیں؛ ونڈو کھلی رکھیں۔</td>
+</tr>
+<tr>
+<td>اصلی ونڈوز</td>
+<td><code>Start.cmd</code></td>
+<td>نہیں؛ پس منظر میں استعمال کے لیے اختیاری لاگ آن ٹاسک استعمال کریں۔</td>
+</tr>
+<tr>
+<td>مقامی لینکس/میک او ایس</td>
+<td><code>sh start.sh</code></td>
+<td>نہیں؛ پسِ منظر میں استعمال کے لیے systemd/launchd استعمال کریں۔</td>
+</tr>
+<tr>
+<td>کسی بھی سپورٹڈ ہوسٹ پر ڈوکر</td>
+<td><code>docker compose up -d --build --wait</code></td>
+<td>جی ہاں، جب Docker ڈیمن چل رہا ہو۔</td>
+</tr>
+<tr>
+<td>ونڈوز پر ڈاکر ہیلپر</td>
+<td><code>scripts\Docker.cmd</code></td>
+<td>جی ہاں؛ مددگار ویب سرور کی صحت کا انتظار کرتا ہے۔</td>
+</tr>
+<tr>
+<td>Linux/macOS پر ڈاکر ہیلپر</td>
+<td><code>sh scripts/docker-start.sh</code></td>
+<td>جی ہاں؛ مددگار ویب سرور کی صحت کا انتظار کرتا ہے۔</td>
+</tr>
+</tbody>
+</table></div>
+<p>ایک کلاؤڈ سرور کے لیے جسے تیسری پارٹی چیک کر سکے — فراہم کنندہ کے API کے ذریعے تخلیق شدہ، SSH کے بغیر، صرف Cloudflare Tunnel کے ذریعے قابلِ رسائی —
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md">اعلیٰ یقین دہانی والی تعیناتی</a> دیکھیں۔</p>
+<p>نیٹیو اسٹارٹ اپ ایک نجی <code>.venv</code> بناتا ہے اور پن کی گئی ڈیپنڈنسیز انسٹال کرتا ہے۔
+ڈوکر انہیں ہوسٹ پائتھن کی ضرورت کے بغیر امیج کے اندر بناتا ہے۔ پہلی بار سیٹ اپ کے لیے انٹرنیٹ کنکشن درکار ہے۔ جب کوئی Python 3.11+ نہیں ملتا، تو <code>Start.cmd</code> موجودہ ونڈوز صارف کے لیے Python 3.12 انسٹال کرنے سے پہلے پوچھتا ہے (winget، ورنہ python.org انسٹالر اس کے Python Software Foundation سگنیچر کی جانچ کرنے کے بعد)؛ یہ کبھی بھی ایڈمنسٹریٹر کی اجازت نہیں مانگتا۔ Docker اور OS سروسز پہلے سے ضروری رہتی ہیں۔</p>
+<p>نیٹیو اور پورٹیبل انسٹالیشنز اپنے فولڈر کے اندر <code>data/live</code> استعمال کرتی ہیں۔ ڈاکر <code>tgwitness-data</code> نامی والیوم کو <code>/data</code> پر استعمال کرتا ہے۔ یہ الگ الگ انسٹالیشنز ہیں جب تک کہ آپ جان بوجھ کر مکمل ڈیٹا ڈائریکٹری کو منتقل نہ کریں۔ ایک نئے ڈاکر کنٹینر سے توقع نہ کریں کہ وہ نیٹیو اکاؤنٹس کو خودکار طور پر دریافت کر لے گا۔</p>
+<h2 id="installation-requirements">تنصیب کی ضروریات<a class="anchor" href="#installation-requirements" aria-label="اس حصے کا لنک">#</a></h2>
+<p>مقامی تنصیب کے لیے Python 3.11 یا اس کے بعد کا ورژن، <code>venv</code> اور <code>ensurepip</code> درکار ہیں، پہلی ڈیپنڈنسی کی تنصیب کے لیے انٹرنیٹ کنکشن، اور
+<code>.venv</code> کے لیے لکھنے کے قابل پروجیکٹ ڈائریکٹری۔ بنڈل شدہ پینل کے لیے Node.js یا فرنٹ اینڈ بلڈ کی ضرورت نہیں ہے۔ لانچر کو اپنے معمول کے OS اکاؤنٹ سے چلائیں؛ TgWitness کو ایڈمنسٹریٹر/روٹ حقوق کی ضرورت نہیں ہے۔</p>
+<ul>
+<li><strong>ونڈوز:</strong> <code>Start.cmd</code> پہلے <code>py -3</code> چیک کرتا ہے، پھر <code>python</code>، اور بعد ازاں ڈیفالٹ پر-یوزر اور پروگرام فائلز انسٹال فولڈرز، اور اسے ورژن 3.11 یا اس کے بعد کی ضرورت ہے۔ اگر ان میں سے کوئی کام نہ کرے تو یہ اوپر بیان کردہ خودکار پر-یوزر انسٹالیشن پیش کرتا ہے۔ <code>py -3 start.py</code> بھی کام کرتا ہے۔ پورٹیبل پیکج کو بالکل بھی پائتھن کی ضرورت نہیں۔</li>
+<li><strong>Linux:</strong> <code>start.sh</code> <code>python3.13</code>, <code>python3.12</code>, <code>python3.11</code>, <code>python3</code> اور <code>python</code> کو آزمائیں، اور جب کوئی موزوں نہ ہو تو apt، dnf، pacman، zypper، apk یا Homebrew کے لیے انسٹال کمانڈ پرنٹ کریں۔ Debian/Ubuntu تنصیبات کے لیے منتخب کردہ انٹرپریٹر سے مطابقت رکھنے والا
+    <code>python3-venv</code> پیکیج درکار ہو سکتا ہے۔ ڈسٹری بیوشن کے پرانے ڈیفالٹ پائتھن کو پائتھن 3.11+ سے تبدیل یا اس کے ساتھ ضمیمہ کرنا ضروری ہے۔</li>
+<li><strong>macOS:</strong> موجودہ Python 3.11+ کی تقسیم انسٹال کریں؛ یہ فرض نہ کریں کہ OS فراہم کردہ انٹرپریٹر اس شرط کو پورا کرتا ہے۔ پروجیکٹ ڈائریکٹری سے <code>python3 start.py</code> استعمال کریں۔</li>
+<li><strong>Docker:</strong> Compose v2.20 یا اس سے نئے کے ساتھ Docker Engine/Desktop استعمال کریں۔ Docker Desktop کو Windows پر Linux کنٹینرز استعمال کرنا ضروری ہے۔ کنٹینر اپنی Python ڈیپنڈنسیز انسٹال کرتا ہے؛ ہوسٹ کو الگ Python انسٹالیشن کی ضرورت نہیں۔</li>
+</ul>
+<p>ڈیٹا ڈائریکٹری کے لیے مستقل مقامی اسٹوریج استعمال کریں۔ پیغامات، میڈیا، WAL کی ترقی، ایکسپورٹس اور بیک اپ کی بنیاد پر گنجائش کا منصوبہ بنائیں؛ ہر ورک لوڈ کے لیے ثبوت پر مبنی کوئی یونیورسل کم از کم ڈسک/RAM کی وضاحت موجود نہیں ہے۔ CPU آرکیٹیکچرز اور Python ورژنز جن کے پاس مطابقت پذیر ڈیپینڈنسی وہیلز نہیں ہیں، انہیں اضافی بلڈ ٹولز اور اپنی مخصوص اہلیت کی ضرورت پڑ سکتی ہے۔ &quot;پورٹیبل&quot; کا مطلب یہ دعویٰ نہیں ہے کہ یہ ہر قسم کے آپریٹنگ سسٹم یا ہارڈویئر پر چلتا ہے۔</p>
+<p>Windows 11/Python 3.12 مقامی طور پر تصدیق شدہ ہیں۔ Linux/macOS/کنٹینر کی تعریفیں اور CI فراہم کیے گئے ہیں لیکن اس ڈیولپمنٹ ہوسٹ پر چلائے نہیں گئے ہیں۔ درست دائرہ کار کے لیے
+<a href="../verification/">VERIFICATION.md</a> دیکھیں۔</p>
+<h2 id="local-computer">مقامی کمپیوٹر<a class="anchor" href="#local-computer" aria-label="اس حصے کا لنک">#</a></h2>
+<p><code>Start.cmd</code> استعمال کریں ونڈوز پر یا <code>sh start.sh</code> لینکس/macOS پر۔ <code>scripts\Setup.cmd</code> یا <code>sh start.sh --setup-only</code> ماحول تیار کرتا ہے۔ لانچر پہلی بار استعمال پر انحصارات انسٹال کرتا ہے؛ بعد کے لانچ ماحول کو دوبارہ استعمال کرتے ہیں۔ سیٹ اپ اور ٹیلیگرام کلیکشن کے لیے انٹرنیٹ کنکشن ضروری ہے، لیکن موجودہ ریکارڈز براؤز کرنا اور ایکسپورٹس بنانا آف لائن کام کرتا ہے۔</p>
+<p>سیٹ اپ کے بعد <code>python start.py --check</code> چلائیں تاکہ مقامی انحصار، Ed25519، اسٹوریج، کلید کی تشکیلات اور سننے کے پتے کا معائنہ کیا جا سکے، بغیر کسی کلیکٹر کو شروع کیے۔
+ساختہ آؤٹ پٹ کے لیے <code>--json</code> استعمال کریں۔ مطلوبہ <code>--data-dir</code>، <code>--host</code> اور <code>--port</code> پاس کریں۔ یہ چیک پیکیجز انسٹال نہیں کرتا، جرنل نہیں بناتا یا ٹیلیگرام سے کنیکٹ نہیں کرتا؛ یہ سالمیت یا کوریج کی اہلیت نہیں ہے۔ اسٹارٹ اپ علیحدہ طور پر موجودہ جرنلز کی تصدیق کرتا ہے۔ <code>python start.py --help</code> بھی انسٹالیشن سے گریز کرتا ہے۔</p>
+<p>اختیارات:</p>
+<p>start.py استعمال کرنے کے بعد، Windows پر <code>.venv\Scripts\python.exe</code> یا Linux/macOS پر <code>.venv/bin/python</code> کے ساتھ ضمنی کمانڈز چلائیں، یا پہلے اس ماحول کو فعال کریں۔
+نیچے دیے گئے <code>python -m ...</code> کے مثالیں اس بات کا مفروضہ کرتی ہیں کہ ماحول فعال ہے۔</p>
+<pre><code class="language-sh">python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 8787</code></pre>
+<p>ماحولیاتی متغیرات: TGWITNESS_DATA, TGWITNESS_HOST, TGWITNESS_PORT, TGWITNESS_TOKEN.
+TGWITNESS_VAULT_KEY_FILE نئی تنصیب کے لیے بیرونی کلید موڈ منتخب کرتا ہے؛ ذیل دیکھیں۔
+TGWITNESS_TOKEN، اگر فراہم کیا جائے، تو اس میں کم از کم 24 حروف ہونے چاہئیں؛ ایک کرپٹوگرافک طور پر بے ترتیب (random) قدر استعمال کریں۔ اس کے بغیر، ایپ panel-token.txt میں ایک 256-بٹ بے ترتیب ٹوکن بناتی ہے۔ ماحول کی اووررائیڈ اس فائل کو دوبارہ نہیں لکھتی۔ کریڈنشلز کو تبدیل کرنے کے لیے دوبارہ شروع کریں۔</p>
+<p>بالکل ایک ہی عمل ڈیٹا ڈائریکٹری کا مالک ہو سکتا ہے۔ ایک کراس پلیٹ فارم آپریٹنگ سسٹم فائل لاک غیر ارادی متوازی لکھنے والوں کو روکتا ہے۔ ایک Uvicorn ورکر استعمال کریں۔ پینل کسی بھی تعداد میں ورک اسپیسز کا انتظام کر سکتا ہے، اضافی ورک اسپیس ڈائریکٹریز profiles/&lt;id&gt;/ کے تحت۔
+الگ سروس انسٹنسز کے لیے، الگ ڈائریکٹریاں اور پورٹس استعمال کریں۔ SQLite WAL فائلیں مقامی مستقل اسٹوریج پر ہونی چاہئیں، نیٹ ورک فائل سسٹم پر نہیں۔ ایک والیوم کو ریپلیکا کے درمیان شیئر نہ کریں۔</p>
+<h2 id="windows-portable-package">ونڈوز پورٹیبل پیکیج<a class="anchor" href="#windows-portable-package" aria-label="اس حصے کا لنک">#</a></h2>
+<p>ہر GitHub ریلیز میں <code>TgWitness-&lt;version&gt;-windows-amd64-portable.zip</code> اور اس کا <code>.sha256</code> شامل ہوتا ہے۔ اس میں python.org کا سرکاری ایمبیڈ ایبل Python 3.12 رن ٹائم (چیک سم <code>tools/build_portable.py</code> میں پن کی گئی)، TgWitness اور اس کی پن کی گئی ڈیپنڈنسیز، اور تین لانچرز شامل ہیں:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>فائل</th>
+<th>مقصد</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TgWitness.cmd</code></td>
+<td>پینل شروع کریں؛ اضافی اختیارات منتقل کیے جاتے ہیں، مثلاً <code>TgWitness.cmd --port 8790</code></td>
+</tr>
+<tr>
+<td><code>TgWitness-Demo.cmd</code></td>
+<td><code>data\demo</code> میں مصنوعی ڈیمو شروع کریں۔</td>
+</tr>
+<tr>
+<td><code>TgWitness-Check.cmd</code></td>
+<td>بغیر شروع کیے تیاری کی جانچ چلائیں</td>
+</tr>
+</tbody>
+</table></div>
+<p>پورے آرکائیو کو کسی لکھنے کے قابل فولڈر میں نکالیں، جیسے <code>Documents\TgWitness</code>؛ اسے ZIP کے اندر یا Program Files سے نہ چلائیں۔ رن ٹائم ایک الگ موڈیول پاتھ استعمال کرتا ہے، لہٰذا دیگر Python تنصیبات اور <code>PYTHONPATH</code> اس پر اثر نہیں ڈالتیں۔ ڈیٹا پیکج کے فولڈر <code>data</code> میں محفوظ رہتا ہے۔ اپ ڈیٹ کرنے کے لیے، TgWitness کو روک دیں، نیا ورژن ایک نئے فولڈر میں نکالیں اور فولڈر <code>data</code> کو منتقل کر دیں۔</p>
+<p>Python 3.12 کے ساتھ 64-بٹ ونڈوز پر خود بنائیں:</p>
+<pre><code class="language-sh">python tools/build_portable.py</code></pre>
+<p>بلڈر رن ٹائم چیک سم کی تصدیق کرتا ہے، محدود انحصاروں کو پیکیج میں انسٹال کرتا ہے، ضم شدہ انٹرپریٹر کے ساتھ تیاری کی جانچ چلاتا ہے اور ZIP اور چیک سم کو <code>dist/</code> پر لکھتا ہے۔</p>
+<h2 id="container">کنٹینر<a class="anchor" href="#container" aria-label="اس حصے کا لنک">#</a></h2>
+<pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
+<p>یہ /data کے لیے ایک نامزد مستقل والیوم بناتا ہے۔
+ویب پورٹ کو 127.0.0.1:8787 پر میپ کیا گیا ہے۔ یہ عمل UID 10001 کے طور پر چلتا ہے، جس کی صلاحیتیں محدود ہیں، ایک صرف-پڑھنے والا روٹ فائل سسٹم، اور لکھنے کے قابل /data اور /tmp کے ساتھ۔
+<code>--wait</code> واپس کرنے سے پہلے ویب سرور کی صحت چیک کرتا ہے؛ یہ ٹیلیگرام کی اجازت یا ترسیل قائم نہیں کرتا۔ فراہم کردہ ہیلپرز بلڈنگ کے بعد 180 سیکنڈ کا تیاری کا ٹائم آؤٹ استعمال کرتے ہیں۔ ابتدائی انحصار کی ڈاؤن لوڈنگ اس سے زیادہ وقت لے سکتی ہے۔</p>
+<p>دونوں بیس کمپوز فائلیں پروجیکٹ کا نام <code>tgwitness</code> استعمال کرتی ہیں، لہٰذا کسی دوسری ڈائریکٹری میں نیا ریلیز نکالنے سے خاموشی سے نیا ڈیٹا والیوم منتخب نہیں ہوتا۔ اس پروجیکٹ کے لیے صرف ایک تعیناتی فعال رکھیں۔ آزاد تنصیبات کے لیے، ایک منفرد
+<code>docker compose -p NAME ...</code> اور مختلف ہوسٹ پورٹ استعمال کریں، اور اپ ڈیٹس کے دوران دونوں کو برقرار رکھیں۔
+کسی پرانے ڈپلائمنٹ کے لیے جو مختلف پروجیکٹ نام استعمال کر رہا ہو، اس کے اصل نام کے ساتھ <code>-p</code> کا استعمال جاری رکھیں؛ <code>docker compose ls</code> موجودہ پروجیکٹس کی فہرست دیتا ہے۔</p>
+<p><code>deploy/env.example</code> کی کاپی <code>.env</code> میں کریں اور <code>TGWITNESS_PORT</code> کو مختلف لوپ بیک پورٹ استعمال کرنے کے لیے تبدیل کریں۔ مثال کے طور پر، <code>TGWITNESS_PORT=8788</code> پینل کو <code>http://127.0.0.1:8788</code> پر ظاہر کرتا ہے؛ کنٹینر اب بھی 8787 پر سنتا ہے۔ <code>.env</code> کو Git نے نظر انداز کیا ہے۔</p>
+<p>ابتدائی ٹوکن حاصل کریں:</p>
+<pre><code class="language-sh">docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
+<p>مفید کمانڈز:</p>
+<pre><code class="language-sh">docker compose ps
+docker compose logs --tail 100 -f
+docker compose stop
+docker compose up -d --wait</code></pre>
+<p><code>restart: unless-stopped</code> کریش یا Docker ڈیمون کے دوبارہ شروع ہونے کے بعد کلیکٹر کو دوبارہ شروع کرتا ہے۔ لینکس سرور پر، اپنے ڈسٹری بیوشن کے سروس مینیجر (عام طور پر <code>sudo systemctl enable --now docker</code>) کا استعمال کرتے ہوئے بوٹ پر Docker کو فعال کریں۔ Windows/macOS پر، Docker Desktop کی &#x27;start-at-sign-in&#x27; سیٹنگ کو فعال کریں۔ ڈیسک ٹاپ کے سائن آؤٹ، سلیپ، یا ایک روکے ہوئے
+Docker daemon کلیکشن کو روک سکتا ہے۔ ایک واضح طور پر روکا گیا کنٹینر اسی حالت میں رہتا ہے جب تک آپ اسے دوبارہ شروع نہ کریں۔</p>
+<p>مثال کے کنفیگریشن میں /tmp والیوم کو 512 MiB تک محدود کیا گیا ہے۔ ایکسپورٹ کی تشکیل اس کے بجائے ہر ورک اسپیس کے مستقل /data پر موجود <code>temporary-exports/</code> کا استعمال کرتی ہے۔ متوازی ایکسپورٹس، جرنل/WAL کی ترقی، میڈیا اور بیک اپ کے لیے وہاں جگہ محفوظ کریں۔
+لانچر اور ڈوکر deploy/constraints.txt کا استعمال کرتے ہیں تاکہ اہل رن ٹائم ڈیپنڈنسی ورژنز کو پن کیا جا سکے۔ یہ ایک ہیش-لاکڈ سپلائی چین نہیں ہے: پائتھن بیس امیج اور پیکیج آرٹیفیکٹس کو اب بھی آزادانہ ریلیز کی اہلیت کی ضرورت ہوتی ہے۔</p>
+<p>جب تک آپ جرنل اور کیز کو تباہ کرنے کا ارادہ نہ رکھتے ہوں، docker compose down -v استعمال نہ کریں۔
+کنٹینر ہیلتھ رپورٹس ویب سرور کی دستیابی، نہ کہ کامیاب ٹیلیگرام کیپچر۔
+پینل کے کلیکٹر کی حالت، ہارٹ بیٹ، غلطیاں، اور کورِیج ایونٹس کا معائنہ کریں۔</p>
+<h3 id="independent-witness-profile">آزاد شاہد کا پروفائل<a class="anchor" href="#independent-witness-profile" aria-label="اس حصے کا لنک">#</a></h3>
+<p>اختیاری <code>witness</code> سروس ایک <a href="../witness/">آزاد گواہ</a> کو اپنے کنٹینر میں چلاتی ہے، جس کے پاس اپنا الگ کلید اور جرنل ہوتا ہے <code>witness-data</code> والیوم میں، اور کلیکٹر کے لیے صرف ریڈ-اوْنلی گواہ ٹوکن ہوتا ہے۔ ٹوکن کو پینل کے <strong>Witness</strong> صفحے پر بنائیں، اسے ایک bot ٹوکن اور چینل کے ساتھ <code>.env</code> میں شامل کریں، پھر پروفائل شروع کریں:</p>
+<pre><code class="language-sh">docker compose --profile witness up -d          # deploy/compose/compose.image.yaml: same flag
+docker compose logs witness                     # witness key fingerprint</code></pre>
+<p>یہ سروس Compose نیٹ ورک کے اندر جمع کرنے والے تک <code>http://tgwitness:8787</code>
+پر پہنچتی ہے (<code>TGWITNESS_WITNESS_COLLECTOR</code>
+اسے اوور رائیڈ کرتا ہے، مثال کے طور پر کسی دوسرے ورک اسپیس کے لیے <code>/profiles/&lt;workspace ID&gt;</code>
+)۔ کسی الگ سرور پر چلنے والے ویٹنس کے لیے، جو کسی اور کے زیرِ انتظام ہو، وہاں <code>deploy/compose/compose.witness.yaml</code>
+استعمال کریں اور <code>TGWITNESS_WITNESS_COLLECTOR</code>
+کو جمع کرنے والے کے HTTPS ایڈریس پر سیٹ کریں؛ اس فائل میں صرف ویٹنس شامل ہوتی ہے۔</p>
+<h2 id="install-a-published-image">شائع شدہ تصویر انسٹال کریں<a class="anchor" href="#install-a-published-image" aria-label="اس حصے کا لنک">#</a></h2>
+<p>یہ ایک کامیاب <a href="#automated-github-releases">ریلیز ورک فلو</a>
+اور عوامی GHCR پیکیج کنفیگریشن کے بعد دستیاب ہوتا ہے۔ ریپوزیٹری کا مالک/نام اس سورس ٹری میں ہارڈ کوڈ نہیں کیا گیا ہے۔ اس ریلیز کے ورک فلو کے خلاصے میں دکھائی گئی تصویر استعمال کریں۔</p>
+<p><code>deploy/env.example</code> کی کاپی <code>.env</code> میں کریں۔ <code>TGWITNESS_IMAGE</code> کو شائع شدہ ورژن پر سیٹ کریں، <strong>چھوٹے حروف کے</strong> ریپوزیٹری راستے کا استعمال کرتے ہوئے، مثال کے طور پر:</p>
+<pre><code class="language-dotenv">TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.0
+TGWITNESS_PORT=8787</code></pre>
+<p><code>compose.yaml</code> کے بجائے اس فائل کو اکیلے چلائیں:</p>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml exec tgwitness cat /data/panel-token.txt</code></pre>
+<p>ہوسٹ پر کسی سورس بلڈ، پائتھن، یا کمپائلر کی ضرورت نہیں ہے۔ ریلیز ورک فلو لینکس AMD64 اور ARM64 کنٹینرز کو ہدف بناتا ہے، بشمول ڈاکر ڈیسک ٹاپ کے لینکس VM۔
+ورک فلو کے خلاصے سے ورژن ٹیگ یا <code>ghcr.io/owner/repository@sha256:...</code> استعمال کریں۔
+کوئی <code>latest</code> ٹیگ کی منتقلی یا بغیر نگرانی کے ایپلیکیشن اپ گریڈ ترتیب نہیں دیا گیا ہے۔
+جب ان کے پروجیکٹ کے نام مماثل ہوں تو امیج اور ماخذ کے ورژن ایک ہی ڈیٹا والیوم استعمال کرتے ہیں۔</p>
+<h2 id="automatic-https-on-a-server">سرور پر خودکار HTTPS<a class="anchor" href="#automatic-https-on-a-server" aria-label="اس حصے کا لنک">#</a></h2>
+<p>ایک سرور استعمال کریں جس میں ڈوکر، ایک ایسا ڈومین جو آپ کے کنٹرول میں ہو، اور مستقل مقامی اسٹوریج ہو۔
+ڈومین کے A/AAAA ریکارڈز کو سرور کی طرف پوائنٹ کریں؛ AAAA کو صرف اسی صورت میں شائع کریں جب IPv6 اسے حاصل کر لے۔ سرٹیفیکیٹ جاری کرنے کے لیے اندر آنے والی TCP 80 اور 443 اور باہر جانے والی DNS/HTTPS کی اجازت دیں۔ دیگر سروسز پہلے سے ان پورٹس پر موجود نہیں ہونی چاہئیں۔</p>
+<p><code>deploy/env.example</code> کی کاپی کریں اور اسے <code>.env</code> پر رکھیں، اور بغیر اسکیم یا راستے کے ہوسٹ نام سیٹ کریں:</p>
+<pre><code class="language-dotenv">TGWITNESS_DOMAIN=watch.your-domain.org</code></pre>
+<p>HTTPS اوورلے کے ساتھ سورس بلڈ شروع کریں:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt</code></pre>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml -f deploy/compose/compose.https.yaml up -d --wait</code></pre>
+<p>شائع شدہ تصویر کے لیے، اس کی بجائے پہلی فائل کے طور پر <code>deploy/compose/compose.image.yaml</code> استعمال کریں۔ دونوں <code>-f</code> آرگومنٹس کو بعد میں اسٹیٹس، لاگز، اپ ڈیٹ، اور اسٹاپ کمانڈز کے لیے برقرار رکھیں۔</p>
+<p>کیڈی سرٹیفیکیٹ حاصل کرتا اور اسے تجدید کرتا ہے، HTTP کو HTTPS پر ری ڈائریکٹ کرتا ہے، اور نجی Compose نیٹ ورک پر کلیکٹر کو درخواستیں فارورڈ کرتا ہے۔ سرٹیفیکیٹ کی حالت کا اپنا مستقل والیوم ہوتا ہے۔ کلیکٹر کا براہ راست ہوسٹ پورٹ صرف لوپ بیک کے لیے ہی رہتا ہے۔ فراہم کردہ کیڈی کنفیگریشن میں ایکسس لاگنگ فعال نہیں ہوتی۔</p>
+<p><code>https://watch.your-domain.org</code> کھولیں اور پینل ٹوکن درج کریں۔ تیاری کی حالت
+سرٹیفیکیٹ جاری ہونے یا بیرونی رسائی کی تصدیق نہیں کرتا۔ اگر HTTPS تیار نہیں ہے، تو DNS، فائر وال قواعد، اور:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.https.yaml logs --tail 100 caddy</code></pre>
+<p>دی گئی Caddy امیج اپنے &#x27;<code>2-alpine</code>&#x27; ٹیگ کی پیروی کرتی ہے۔ پُل کرنے سے وہ امیج ریفریش ہو جاتی ہے؛
+اگر آپ کو فکسڈ انفراسٹرکچر ورژنز کی ضرورت ہو تو اپنی ڈیپلائمنٹ میں ایک ٹیسٹ شدہ ڈائجسٹ پن کریں۔</p>
+<h2 id="updates-and-backups">اپ ڈیٹس اور بیک اپس<a class="anchor" href="#updates-and-backups" aria-label="اس حصے کا لنک">#</a></h2>
+<p>اپ ڈیٹس کے دوران Compose پروجیکٹ کا نام اور ڈیٹا والیوم محفوظ رکھیں۔ سب سے پہلے کلیکٹر کو روکیں اور مکمل بیک اپ بنائیں۔ ڈیفالٹ سورس پر مبنی تعیناتی کے لیے:</p>
+<pre><code class="language-sh">docker compose stop
+docker compose cp tgwitness:/data ../tgwitness-backup-before-update</code></pre>
+<p>ہر بار ایک نئی بیک اپ منزل استعمال کریں، جو ریپوزیٹری کے باہر ہو، اور اسے اکاؤنٹ تک رسائی کے قابل مواد کے طور پر محفوظ رکھیں۔ مثال کے راستے کا ذکر صرف وضاحت کے لیے ہے؛ اپنی نجی بیک اپ جگہ استعمال کریں۔ پوری ڈائریکٹری کاپی کریں، بشمول پوشیدہ فائلیں، تمام ورک اسپیسز، کیز، جرنلز، اور میڈیا۔ اگر ترتیب دیا گیا ہو تو بیرونی والٹ ماسٹر کی (vault master key) کا الگ سے بیک اپ لیں۔
+ایک ثبوت ZIP قابل بحالی ایپلیکیشن بیک اپ نہیں ہے۔ HTTPS کے لیے، اگر آپ کو اس کے سرٹیفیکیٹ/اکاؤنٹ کی حالت برقرار رکھنے کی ضرورت ہو تو Caddy والیومز کو بھی محفوظ کریں۔</p>
+<p>ماخذ تعیناتی کے لیے، نئی ریلیز فائلیں حاصل کریں اور چلائیں:</p>
+<pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
+<p>ایک امیج ڈیپلائمنٹ کے لیے، <code>TGWITNESS_IMAGE</code> کو مطلوبہ ورژن میں تبدیل کریں، پھر چلائیں:</p>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait</code></pre>
+<p>پچھلی stop/copy کمانڈز کے لیے اپنی تنصیب کی Compose فائل(یں) بھی استعمال کریں۔
+<code>.env</code>، کسٹم کنفیگریشن، اور اسی پروجیکٹ کے نام کو برقرار رکھیں۔ <code>down</code> نامزد والیومز کو برقرار رکھتا ہے؛ <strong><code>down -v</code> انہیں حذف کر دیتا ہے۔</strong> <code>.venv</code> کو آپریٹنگ سسٹمز یا پائتھن ورژنز کے درمیان کاپی نہ کریں۔ نیٹیو اپ ڈیٹس کے لیے، TgWitness کو روک دیں، اس کی مکمل ڈیٹا ڈائریکٹری کا بیک اپ بنائیں، ماخذ فائلوں کو تبدیل کریں، اور لانچ کرنے سے پہلے <code>python start.py --setup-only</code> چلائیں۔</p>
+<p>اپ ڈیٹ کے بعد پینل تک رسائی، اکاؤنٹ کی شناخت، مشاہداتی حالت اور کوریج چیک کریں۔ دوبارہ شروع کرنے سے رہ جانے والی ٹیلیگرام اپ ڈیٹس بحال نہیں ہوتیں۔ اگر مستقبل کا کوئی ورژن اسٹوریج فارمیٹس تبدیل کر دے تو رول بیک کے لیے اپ ڈیٹ سے پہلے کا بیک اپ درکار ہو سکتا ہے۔</p>
+<h2 id="automated-github-releases">خودکار گٹ ہب ریلیزز<a class="anchor" href="#automated-github-releases" aria-label="اس حصے کا لنک">#</a></h2>
+<p><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml">ریلیز کا ورک فلو</a> اس پروجیکٹ کو ایک GitHub ریپوزیٹری میں Actions فعال کر کے پش کرنے کے بعد استعمال کے لیے تیار ہوتا ہے۔ یہ اس وقت چلتا ہے جب ایک GitHub ریلیز <strong>شائع</strong> ہوتی ہے، بشمول پری ریلیز۔ صرف ڈرافٹس اور ٹیگ پشز پیکجز شائع نہیں کرتے۔</p>
+<ol>
+<li>پیکج کا ورژن اور تبدیلیوں کا لاگ سیٹ کریں، پھر <code>v</code> کے ٹیگ کے ساتھ ایک ریلیز شائع کریں
+    اس کے علاوہ بالکل درست <code>pyproject.toml</code> ورژن، جیسے <code>v0.7.0</code>۔</li>
+<li>ورک فلو ٹیگ کی توثیق کرتا ہے اور مشترکہ Windows/Linux/macOS Python، general/account-import/QR browser، source-package، اور Docker چیکس چلاتا ہے۔ تازہ نیٹیو انسٹالیشن بھی Python 3.12 استعمال کرتے ہوئے تینوں آپریٹنگ سسٹمز پر آزمائی جاتی ہے۔</li>
+<li>ان چیکس کے پاس ہونے کے بعد، یہ QEMU کے تحت ARM64 امیج کا اسموک ٹیسٹ کرتا ہے، AMD64/ARM64 امیجز کو <code>ghcr.io/&lt;lowercase-owner&gt;/&lt;lowercase-repository&gt;:&lt;version&gt;</code> پر شائع کرتا ہے، اور ریلیز کے ساتھ سورس ZIP، چیک سم، اور Python wheel منسلک کرتا ہے۔ ایک الگ Windows جاب پورٹیبل ZIP اور اس کا چیک سم تیار کر کے منسلک کرتا ہے۔</li>
+<li>پہلی اشاعت کے بعد، GHCR پیکیج کی ترتیبات کھولیں اور اگر گمنام تصویر کی بازیابی مقصود ہو تو ویزبلٹی کو <strong>Public</strong> پر سیٹ کریں۔ صرف ایک عوامی ماخذ ریپوزیٹری سے عوامی کنٹینر پیکیج کی ضمانت نہیں ملتی۔ تنظیم کی پالیسیاں پیکیج کی اشاعت کی اجازت ہونی چاہئیں۔ ورک فلو میں <code>GITHUB_TOKEN</code> استعمال ہوتا ہے؛ ریپوزیٹری میں کوئی رجسٹری پاس ورڈ یا VPS کی اسناد شامل نہیں کی جانی چاہئیں۔</li>
+</ol>
+<p>اس مقامی تیاری سے دور دراز ورک فلو کی کامیابی ثابت نہیں ہوئی۔ ARM64 ایمولیشن صرف ایک ابتدائی جانچ ہے، نہ کہ اصل ہارڈویئر یا لائیو ٹیلیگرام کے لیے اہلیت۔
+یہ ریلیز پیکجنگ کو خودکار کرتا ہے؛ سرور شروع کرنے کے لیے ابھی بھی Compose کمانڈ اور اس کے ڈومین/ہوسٹ کی ضروریات درکار ہیں۔ جب کوئی ریلیز شائع ہوتی ہے تو موجودہ سرورز خاموشی سے اپ گریڈ یا ری اسٹارٹ نہیں کیے جاتے۔</p>
+<h2 id="remote-server">دور دراز سرور<a class="anchor" href="#remote-server" aria-label="اس حصے کا لنک">#</a></h2>
+<p>سروس کو لوپ بیک پر محدود رکھیں اور SSH ٹنل استعمال کریں، یا HTTPS کو ریورس پراکسی پر ختم کریں۔ بنیادی Compose فائل صرف مقامی ہے؛ اختیاری
+<code>deploy/compose/compose.https.yaml</code> اوورلے ایک ترتیب شدہ ڈومین کے لیے Caddy فراہم کرتا ہے۔
+بیئرر ٹوکن کو URLs اور پروکسی لاگز سے دور رکھیں۔ ایک ریورس پروکسی کو درخواست کے سائز اور کنکشن کی شرحوں کو محدود کرنا چاہیے۔ سادہ HTTP کو انٹرنیٹ پر ظاہر نہ کریں۔</p>
+<p>systemd، ایک Windows logon ٹاسک، ایک macOS یوزر ایجنٹ اور Caddy کے لیے مثالیں <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy</a>/ میں فراہم کی گئی ہیں۔
+انسٹالیشن سے پہلے ان کے راستوں کا جائزہ لیں/انہیں ڈھالیں۔
+یہ فراہم کردہ ٹیمپلیٹس ہیں، نہ کہ مقامی طور پر چلائی جانے والی پلیٹ فارم کی اہلیت۔ عام لانچر کے ذریعے کوئی
+بیک گراؤنڈ سروس یا ٹاسک رجسٹر نہیں ہوتا۔</p>
+<p>ونڈوز پر، ایک بغیر ونڈو کے <code>pythonw.exe</code> لانچ، اسٹارٹ اپ/سرور کی تشخیص کو <code>logs/server.log</code> میں ڈیٹا ڈائریکٹری کے تحت محفوظ کرتا ہے (فی فائل 5 MiB، دو روٹیٹڈ بیک اپ)۔ کنسول لانچز کنسول لاگنگ کو برقرار رکھتی ہیں۔ HTTP ایکسس لاگنگ دونوں موڈز میں غیر فعال ہے۔ لاگز کو ڈیٹا ڈائریکٹری کے ساتھ محفوظ کریں اور شیئر کرنے سے پہلے ان کا جائزہ لیں۔</p>
+<h2 id="restart-and-gaps">دوبارہ شروع اور وقفے<a class="anchor" href="#restart-and-gaps" aria-label="اس حصے کا لنک">#</a></h2>
+<p>آخری درخواست کردہ مشاہداتی حالت برقرار رکھی جاتی ہے۔ اگر مشاہدہ فعال تھا، تو آغاز میں منتخب ذرائع سے دوبارہ کنکشن قائم کرنے اور انہیں دوبارہ شروع کرنے کی کوشش کی جاتی ہے۔ دستی طور پر وقفہ دینے سے یہ ارادہ ختم ہو جاتا ہے۔ ناکام دوبارہ آغاز ریکارڈ کیا جاتا ہے اور پینل میں دکھایا جاتا ہے۔</p>
+<p>StringSession اجازت برقرار رکھتا ہے لیکن Telethon کی پائیدار اپ ڈیٹ/انٹٹی کی حالت نہیں۔
+ڈائیلاگز شروع ہونے پر دوبارہ لوڈ کیے جاتے ہیں۔ Telegram/Telethon چلتے ہوئے کچھ ٹرانسپورٹ رکاوٹوں سے بحال ہو سکتے ہیں، لیکن TgWitness پراسیس ری اسٹارٹس کے دوران پائیدار ری پلے کا دعویٰ نہیں کرتا۔
+ہر آغاز پر پچھلا جرنل ہیڈ اور آف لائن حد ریکارڈ کی جاتی ہے۔
+مانیٹر ہر 10 سیکنڈ بعد کنیکٹیویٹی چیک کرتا ہے اور ہر منٹ میں ایک ہارٹ بیٹ شامل کرتا ہے
+(<strong>پیرامیٹرز → لِو نیس ریکارڈ ہر</strong>)۔
+مختصر وقفے رہ سکتے ہیں؛ ایک منسلک ٹرانسپورٹ مکمل اپ ڈیٹ کی ترسیل کی ضمانت نہیں دیتا۔
+سنیپ شاٹس واضح موجودہ-تاریخ کے مشاہدات ہیں، کبھی بھی خلا کی مرمت نہیں۔</p>
+<p>میڈیا قطار ہر ورک اسپیس کے SQLite ڈیٹا بیس میں محفوظ ہوتی ہے۔ ایک پیغام اور اس کا کام ایٹمی طور پر محفوظ کیے جاتے ہیں۔ منقطع شدہ چلنے والے کام دوبارہ شروع کرنے پر دوبارہ کوشش کے لیے بحال کیے جاتے ہیں۔
+ہر ڈاؤن لوڈ میں 120 سیکنڈ کا بنیادی ٹائم آؤٹ ہوتا ہے، اس کے علاوہ اس کے سائز کے لیے 256 KiB/s کی رفتار سے وقت بھی شامل ہوتا ہے، اور ہر اٹیچمنٹ کی قسم کے لیے 1–2,000 MiB کی حد ہوتی ہے۔ ٹائم آؤٹ، رفتار اور دوبارہ کوششیں <strong>پیرامیٹرز کے</strong> تحت آتی ہیں۔ کلیکٹر ان فائلوں کو چھوڑ دیتا ہے جن کا سائز معلوم نہ ہو۔ وقفہ کرنے سے قطار میں موجود کام برقرار رہتا ہے۔ دوبارہ کوشش اصل مشاہدہ شدہ فائل ڈسکرپٹر استعمال کرتی ہے، نہ کہ بعد میں ترمیم شدہ پیغام کے تازہ ترین ورژن کو۔ عارضی ناکامیوں کے لیے محدود دوبارہ کوششیں ہوتی ہیں؛ میڈیا فلڈ ویٹ پاؤزز ری اسٹارٹ سے محفوظ رہتی ہیں۔ میڈیا کی بحالی ٹیلیگرام اپ ڈیٹ کی بحالی سے الگ ہے اور غائب شدہ فائلوں کو دوبارہ پیدا نہیں کر سکتی۔</p>
+<h2 id="backup-restore-and-capacity">بیک اپ، بحالی، اور گنجائش<a class="anchor" href="#backup-restore-and-capacity" aria-label="اس حصے کا لنک">#</a></h2>
+<p><strong>پورے ڈیٹا ڈائریکٹری</strong> کی کاپی کرنے سے پہلے عمل کو روک دیں، جس میں vault.key، signing.enc، credentials.enc، SQLite ڈیٹا بیس/WAL فائلیں، میڈیا، ٹوکن، چیک پوائنٹس، اور تمام پروفائلز/سب ڈائریکٹریاں شامل ہیں۔ جب منزل کی سروس بند ہو تو مکمل کاپی کو بحال کریں۔ گمشدہ والٹ کیز یا سائننگ-کی کے عدم مطابقت کی وجہ سے آغاز ناکام ہو جاتا ہے؛ زبردستی رسائی کے لیے کیز دوبارہ پیدا نہ کریں۔</p>
+<p>خفیہ بیک اپ کو انکرپٹڈ اور رسائی کے کنٹرول کے ساتھ محفوظ رکھیں۔ ثبوت کے زپ قابلِ حمل ہوتے ہیں، یہ ایپلیکیشن بیک اپ یا ٹیلیگرام سیشن بیک اپ نہیں ہیں۔ خودکار طور پر برقرار رکھنے یا حذف کرنے کی کوئی سہولت نہیں ہے۔ تمام پیغامات، خام میٹا ڈیٹا، میڈیا، عارضی ایکسپورٹس، اور بیک اپ کے لیے ڈسک اسپیس کی منصوبہ بندی کریں۔</p>
+<p>پورے جرنل کو لوڈ کرنے کے بجائے اسٹارٹ اپ تصدیق اور ایکسپورٹ سٹریم ریکارڈز۔
+ایک ایکسپورٹ ریڈ سنپ شاٹ کو پن کرتا ہے جبکہ نئے WAL رائٹس جاری رہ سکتے ہیں؛ طویل چلنے والے ایکسپورٹس
+WAL صفحات کو برقرار رکھ سکتے ہیں، لہٰذا ڈسک کی گنجائش اب بھی اہم ہے۔ ZIPs 4 GiB تک محدود ہیں
+غیر کمپریسڈ تاکہ آزاد تصدیق کنندہ کے ڈیفالٹ سے مطابقت ہو؛ <strong>پیرامیٹرز → سب سے بڑا سائن شدہ ZIP</strong> حد بڑھاتا ہے، اور ایسے آرکائیوز کی تصدیق <code>verify.py --max-gib N</code> کے ساتھ کی جاتی ہے۔ دیگر فارمیٹس میں ایونٹ کی تعداد کی کوئی حد نہیں ہوتی۔
+مدد شدہ براؤزرز صارف کے منتخب کردہ فائل میں جوابی ٹکڑوں کو اسٹریم کرتے ہیں۔ دیگر براؤزرز زیادہ سے زیادہ 128 MiB کو بفر کرتے ہیں اور بڑے ٹرانسفرز کو تصدیق شدہ CLI کی طرف ہدایت کرتے ہیں:</p>
+<pre><code class="language-sh">python -m tgwitness.download --token-file data/live/panel-token.txt --out evidence.zip</code></pre>
+<p>کسی دوسرے ورک اسپیس کے لیے <strong>Exports → Workspace ID</strong> سے <code>--profile ID</code> استعمال کریں،
+ریموٹ سرور کے لیے <code>--format zip|jsonl|csv|html</code>، <code>--url https://your-server</code>، یا
+5 GiB ٹرانسفر کی حد تبدیل کرنے کے لیے <code>--max-mib</code> استعمال کریں۔ سادہ HTTP صرف
+لوپ بیک کے لیے اجازت ہے۔ ٹوکن ہیڈرز میں سفر کرتے ہیں، ری ڈائریکٹس مسترد کر دیے جاتے ہیں، موجودہ فائلیں
+اوور رائٹ نہیں ہوتیں، اور نامکمل ڈاؤن لوڈز کو مکمل فائلوں کے طور پر شائع نہیں کیا جاتا۔
+اگر TGWITNESS_TOKEN بنائے گئے ٹوکن کو اووررائڈ کرتا ہے، تو ایک علیحدہ محفوظ فائل استعمال کریں جس میں وہ فعال ویلیو موجود ہو: panel-token.txt اووررائیڈ کے ذریعے دوبارہ نہیں لکھا جاتا۔ کمانڈ کا SHA-256 صرف ایک ٹرانسفر چیک سم ہے؛ دستخط شدہ ZIP کی خود سے تصدیق کریں۔</p>
+<p>سرور ایکسپورٹ فائلیں ہر ورک اسپیس کے نجی <code>temporary-exports/</code> میں رہتی ہیں۔
+کامیاب جوابات اپنی فائلوں کو صاف کر دیتے ہیں۔ منقطع شدہ ایکسپورٹس کو اگلی ورک اسپیس کی شروعات پر ہٹا دیا جاتا ہے، جب اس کا خصوصی انسٹنس لاک برقرار ہوتا ہے۔ یہ ڈائریکٹری اسٹوریج تھریٹ/کیپیسٹی ماڈل کا حصہ ہے؛ ایک خفیہ شدہ ڈیٹا والیوم استعمال کریں۔ پروڈکشن کے پیمانے پر کثیر گیگا بائٹ ٹرانسفرز کے لیے اب بھی آپ کے ہدف سسٹم پر اہلیت کی ضرورت ہوتی ہے۔</p>
+<p>پینل قطار میں لگی/ناکام میڈیا، سب سے پرانی زیر التواء میڈیا، خالی ڈسک، ٹیلیگرام درخواستوں کی معطلی، اور ان ذرائع کو دکھاتا ہے جن کی رسائی کی تصدیق نہیں ہوئی۔ یہ تشخیصی ٹولز ایک مکمل اینڈ ٹو اینڈ ڈیلیوری مانیٹر نہیں ہیں۔ ورک اسپیسز ایک ہی عمل کو شیئر کرتے ہیں؛ ایک شور کرنے والا اکاؤنٹ پھر بھی دوسروں کو متاثر کر سکتا ہے۔ الگ ورکر پراسیسز، برقرار رکھنے/روٹیشن، پائیدار اپ ڈیٹ بازیابی، ریموٹ چیک پوائنٹ اینکرنگ، کردار، اور مکمل تعیناتی کی اہلیت برقرار رہتی ہے۔</p>
+<h2 id="connection-and-protection-options">کنیکشن اور تحفظ کے اختیارات<a class="anchor" href="#connection-and-protection-options" aria-label="اس حصے کا لنک">#</a></h2>
+<p>کنکشن کے راستے ہر ورک اسپیس کے لیے ہوتے ہیں اور انہیں اجازت سے پہلے ترتیب دیا جانا چاہیے۔
+SOCKS5/HTTP CONNECT پن کیے گئے python-socks انحصار کا استعمال کرتے ہیں۔ MTProxy Telethon کے تجرباتی رینڈمائزڈ انٹرمیڈیٹ ٹرانسپورٹ کا استعمال کرتا ہے؛ Fake TLS ee سیکرٹس کی حمایت نہیں کی جاتی۔
+کوئی خودکار براہ راست متبادل ترتیب نہیں دیا گیا ہے۔ یہ پورے نظام کا نیٹ ورک راستہ نہیں ہے۔</p>
+<p>نئی تنصیبات کے لیے، TGWITNESS_VAULT_KEY_FILE ایک علیحدہ محفوظ شدہ بے ترتیب ماسٹر کی فائل کی طرف اشارہ کرتا ہے۔ اسے ایک کنٹینر میں /data کے باہر صرف-پڑھنے کے لیے ماؤنٹ کریں۔ ہر ورک اسپیس کے ساتھ عوامی vault.external.json سالٹ میٹا ڈیٹا کو ماسٹر کی کے ساتھ علیحدہ طور پر محفوظ رکھیں۔
+موجودہ مقامی والٹس کے لیے ایک منصوبہ بند منتقلی درکار ہے؛ اس متغیر کو سیٹ کرنے سے یہ خاموشی سے تبدیل نہیں ہوتے۔ پیغام/میڈیا اسٹوریج اور ایکسپورٹس ایپلیکیشن سے محفوظ نہیں ہیں۔ جہاں ضرورت ہو، انکرپٹڈ والیومز اور کافی نجی عارضی اسٹوریج استعمال کریں۔</p>
+<p>تفصیلی طریقہ کار: <a href="../connection/">کنکشن/سیکیورٹی</a> اور <a href="../operations/">آپریٹنگ موڈز</a>۔</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/DEPLOYMENT.md">اس صفحے کو GitHub پر ترمیم کریں ↗</a><a class="next-guide" href="../collection/"><span>اگلا قدم</span><strong>جمع کرنے کا طریقہ ←</strong></a><p>یہ رہنما موجودہ نفاذ کو بیان کرتے ہیں۔ توثیق کے نتائج اور باقی ماندہ خلائیں علیحدہ طور پر دستاویزی شکل میں درج ہیں۔ <a href="../verification/">کیا جانچا گیا ہے ←</a></p></footer>
+</main>
+<aside class="toc" aria-label="اس صفحے پر"><p class="nav-label">اس صفحے پر</p><a href="#choose-an-installation">انسٹالیشن منتخب کریں</a><a href="#installation-requirements">تنصیب کی ضروریات</a><a href="#local-computer">مقامی کمپیوٹر</a><a href="#windows-portable-package">ونڈوز پورٹیبل پیکیج</a><a href="#container">کنٹینر</a><a href="#install-a-published-image">شائع شدہ تصویر انسٹال کریں</a><a href="#automatic-https-on-a-server">سرور پر خودکار HTTPS</a><a href="#updates-and-backups">اپ ڈیٹس اور بیک اپس</a><a href="#automated-github-releases">خودکار گٹ ہب ریلیزز</a><a href="#remote-server">دور دراز سرور</a><a href="#restart-and-gaps">دوبارہ شروع اور وقفے</a><a href="#backup-restore-and-capacity">بیک اپ، بحالی، اور گنجائش</a><a href="#connection-and-protection-options">کنیکشن اور تحفظ کے اختیارات</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>اوپن سورس · آپ کی مشین پر چلتا ہے</span><a href="../../../../LICENSE">ایم آئی ٹی لائسنس</a><a href="../notice/">آپریٹر نوٹس</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">سیکیورٹی</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "پیغام کا انتظار", "Step through a fictional send, edit and delete.": "ایک فرضی بھیجنے، ترمیم اور حذف کے مرحلے سے گزریں۔", "No observations yet. Start the sequence or advance one event.": "ابھی تک کوئی مشاہدات نہیں۔ سلسلہ شروع کریں یا ایک واقعہ آگے بڑھائیں۔", "Meet at 10:00": "10:00 بجے ملاقات کریں", "A new message is visible in the chat.": "چیٹ میں ایک نیا پیغام دکھائی دے رہا ہے۔", "Record 1 appended: the collector observed the original message.": "ریکارڈ 1 منسلک: جمع کرنے والے نے اصل پیغام کا مشاہدہ کیا۔", "Meet at 11:00": "11:00 بجے ملاقات کریں", "The current text changes. The earlier observation stays.": "موجودہ متن تبدیل ہوتا ہے۔ پچھلا مشاہدہ برقرار رہتا ہے۔", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "ریکارڈ 2 منسلک کیا گیا: ترمیم ایک نئی مشاہدہ ہے۔ ریکارڈ 1 اب بھی اصل متن کو برقرار رکھتا ہے۔", "Message deleted": "پیغام حذف شدہ", "The message has disappeared from the chat view.": "پیغام چیٹ کے منظر سے غائب ہو گیا ہے۔", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "ریکارڈ 3 منسلک: حذف کرنے کا نوٹس دونوں مشاہدہ شدہ ورژنز کے ساتھ برقرار رکھا گیا ہے۔", "0 records": "0 ریکارڈز", "1 record": "1 ریکارڈ", "2 records": "2 ریکارڈز", "3 records": "3 ریکارڈز", "Complete / {n} of 3": "مکمل / {n} میں سے 3", "Step / {n} of 3": "مرحلہ / {n} میں سے 3", "Pause": "وقفہ", "Replay sequence": "دوبارہ چلانے کا سلسلہ", "Play sequence": "سلسلہ چلائیں", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "جامد مثال دستیاب ہے۔ ہیشز کو انٹرایکٹو انداز میں کیلکولیٹ کرنے کے لیے، اس صفحے کو HTTPS پر یا Web Crypto سپورٹ کے ساتھ لوکل ہوسٹ پر پیش نظارہ کے طور پر کھولیں۔", "No record supplied": "کوئی ریکارڈ فراہم نہیں کیا گیا", "Tail removed": "ٹیل ہٹا دیا گیا", "≠ saved hash": "≠ محفوظ شدہ ہیش", "Rebuilt · different hash": "دوبارہ تعمیر شدہ · مختلف ہیش", "= saved hash": "= محفوظ شدہ ہیش", "Same length and matching head.": "ایک ہی لمبائی اور مماثل سر۔", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "تمام تینوں حساب شدہ ہیشز محفوظ شدہ ہیشز سے مطابقت رکھتے ہیں۔ یہ نمونہ برقرار رکھے گئے تین ریکارڈز کی حد سے مطابقت رکھتا ہے۔", "Same saved head; the journal prefix fails verification.": "یہی محفوظ شدہ سر؛ جرنل کا پیش نام تصدیق میں ناکام ہے۔", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "ریکارڈ 2 اب اپنے محفوظ شدہ ہیش سے مطابقت نہیں رکھتا۔ صرف آخری محفوظ شدہ ہیڈ کی جانچ کرنے سے یہ فرق نظر نہیں آئے گا؛ تصدیق کنندہ ہر ریکارڈ کی جانچ کرتا ہے۔", "Head differs from the retained checkpoint.": "ہیڈ برقرار رکھے گئے چیک پوائنٹ سے مختلف ہے۔", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "دوبارہ بنائے گئے ہیشز آپس میں جڑے ہوئے ہیں، لیکن آخری ہیڈ تبدیل ہو چکا ہے۔ محفوظ شدہ چیک پوائنٹ اس تاریخ کو مسترد کر دیتا ہے۔ اصل دستخط بھی تبدیل شدہ ریکارڈز پر ناکام ہوں گے۔", "Too short: 2 supplied records \u003c 3 retained records.": "بہت مختصر: فراہم کردہ ریکارڈز 2، محفوظ شدہ ریکارڈز 3 سے کم۔", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "باقی دو ہیشز اب بھی میل کھا رہے ہیں۔ محفوظ شدہ چیک پوائنٹ غائب شدہ ٹیل کو ظاہر کرتی ہے۔ اس ابتدائی حد کے بغیر، صرف یہ مختصر پری فکس حذف شدگی کو ظاہر نہیں کر سکتا تھا۔", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "اس براؤزر میں ہیش کی حساب کتاب دستیاب نہیں ہے۔ نیچے دیے گئے فارمولا اور جامد وضاحت دستیاب ہیں۔", "{n} records": "{n} ریکارڈز", "head {hash}": "ہیڈ {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "قبول شدہ: تعداد بڑھ رہی ہے، دستخط تصدیق شدہ ہیں اور کلید میل کھاتی ہے۔ گواہ اس نئی حد کو برقرار رکھتا ہے۔", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "رول بیک: دستخط شدہ جواب آخری منظور شدہ چیک پوائنٹ کے مقابلے میں کم ریکارڈز رپورٹ کرتا ہے۔ گواہ مسئلے کو ریکارڈ کرتا ہے اور پہلے منظور شدہ حد کو برقرار رکھتا ہے۔", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "فورک: تعداد میں کوئی تبدیلی نہیں ہوئی لیکن سربراہ مختلف ہے۔ گواہ اختلاف کو ریکارڈ کرتا ہے اور پہلے سے منظور شدہ حد کو برقرار رکھتا ہے۔", "No answer": "کوئی جواب نہیں", "boundary unknown": "حد نامعلوم", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "کوئی جواب نہیں: گواہ ناکام چیک کو ریکارڈ کرتا ہے۔ یہ جمع کرنے والے کی موجودہ حالت کا دعویٰ نہیں کر سکتا۔ اگر گواہ اب بھی Bot API تک پہنچ سکتا ہے اور اس کی اشاعت کی پالیسی اجازت دیتی ہے، تو یہ اس ناکامی کو شائع کر سکتا ہے۔", "Send {n}": "{n} بھیجیں", "Edit {n}": "{n} ترمیم", "Delete {n}": "{n} حذف کریں", "Both accounts captured all six expected observations in this example.": "دونوں اکاؤنٹس نے اس مثال میں تمام چھ متوقع مشاہدات کو ریکارڈ کیا۔", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "اکاؤنٹ B نے پھر بھی 6 میں سے 6 کو ریکارڈ کیا۔ دو رسیدیں زیادہ وقت لیں۔ کیپچر تناسب اور رسید میں تاخیر مختلف سوالات کے جواب دیتی ہیں۔", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "اکاؤنٹ B نے کٹ آف تک 6 میں سے 5 (83.3٪) ریکارڈ کیے۔ غائب ترمیم میں کوئی ناپے گئے تاخیر نہیں ہے۔ یہ نتیجہ صرف چھ کنٹرول شدہ کارروائیوں کو بیان کرتا ہے۔", "not observed by cutoff": "کٹ آف تک مشاہدہ نہیں ہوا", "{s} seconds": "{s} سیکنڈ", "Exact values follow in the table.": "درست اقدار جدول میں درج ہیں۔", "{s} s": "{s}s", "Not observed": "مشاہدہ نہیں ہوا", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "چار چیٹس مختلف مشاہدات پیش کرتی ہیں۔ ہر کنکشن کے لیے ماخذ ریکارڈز کی پیروی کریں؛ بغیر کسی منسوب کردہ بھیجنے والے کے چینل پوسٹ کو صارف 71001 سے منسوب نہ کریں۔", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "ریکارڈز #146 اور #205 ایک ہی بھیجنے والے کی شناخت، 71001، فراہم کرتے ہیں۔ یہ ایک ٹیلیگرام اکاؤنٹ کی دو چیٹس میں دیکھے گئے پوسٹس کو آپس میں جوڑتا ہے۔ یہ کسی حقیقی شخص کی شناخت نہیں کرتا اور نہ ہی چینل پوسٹ کو کسی فرد سے منسوب کرتا ہے۔", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "مقصد pay.example.invalid/new گروپ ریکارڈ #146، بوٹ کی بورڈ #173، چینل ایڈیٹ #188 اور نجی پیغام #205 میں ظاہر ہوتا ہے۔ ایک بار بار ظاہر ہونے والا مقصد مواد کو آپس میں جوڑتا ہے؛ یہ ان اکاؤنٹس کے مشترکہ کنٹرول کا ثبوت نہیں ہے۔", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "اس فرضی کیس میں مکمل میڈیا رسیدیں #151 اور #209 کے مکمل SHA-256 ویلیوز برابر ہیں۔ اصل بائٹس اور ان کے متعلقہ پیغام ریکارڈز کا موازنہ کریں۔ مطابقت پذیر فائل اپنے خالق کی شناخت نہیں بتاتی اور یہ ثابت نہیں کرتی کہ اسے کس نے فارورڈ کیا۔", "the encrypted off-site copy": "انکرپٹڈ آف سائٹ کاپی", "notifications": "اطلاعات", "checkpoint hashes for timestamps": "ٹائم اسٹیمپ کے لیے چیک پوائنٹ ہیشز", "signed checkpoints for the witness": "گواہ کے لیے دستخط شدہ چیک پوائنٹس", "Switched on in this example": "اس مثال میں فعال کیا گیا", "Optional · off by default": "اختیاری · ڈیفالٹ طور پر بند", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "اس مشین سے نکلتے ہوئے: ٹیلیگرام کنکشن اور {list}۔ بس اتنا ہی۔", "Default: only the Telegram connection leaves this machine.": "ڈیفالٹ: صرف ٹیلیگرام کنکشن اس مشین سے باہر جاتا ہے۔", "{done} of {total} done": "{done}   {total} مکمل", "Mark step {n} as done": "مرحلہ {n} کو مکمل شدہ کے طور پر نشان زد کریں", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "کاپی", "Copied": "کاپی شدہ", "Command copied.": "کمانڈ کاپی ہو گیا۔", "Selected — Ctrl/Cmd+C": "منتخب — Ctrl/Cmd+C", "Command selected. Copy it manually.": "کمانڈ منتخب کیا گیا۔ اسے دستی طور پر کاپی کریں۔", "Command copied to clipboard.": "کمانڈ کلپ بورڈ میں کاپی کر دی گئی۔", "Select text": "متن منتخب کریں", "Clipboard unavailable. Command selected; copy it manually.": "کلپ بورڈ دستیاب نہیں ہے۔ کمانڈ منتخب ہے؛ اسے دستی طور پر کاپی کریں۔", "A message arrives. The first observation is saved.": "ایک پیغام موصول ہوا۔ پہلی مشاہدہ محفوظ ہو گئی۔", "The time changes. Both captured versions stay.": "وقت بدل جاتا ہے۔ دونوں ریکارڈ شدہ ورژنز برقرار رہتے ہیں۔", "The message disappears. The captured history remains.": "پیغام غائب ہو جاتا ہے۔ محفوظ شدہ تاریخ باقی رہتی ہے۔", "Pause example animation": "مثال کے طور پر اینیمیشن کو روکیں", "Play example animation": "مثال کے طور پر اینیمیشن چلائیں", "Play": "چلائیں", "Full-size workspace screenshot": "مکمل سائز ورک اسپیس کا اسکرین شاٹ", "Workspace screenshot · fictional data": "ورک اسپیس کا اسکرین شاٹ · فرضی ڈیٹا", "Close": "بند کریں", "Close screenshot": "اسکرین شاٹ بند کریں", "Scrollable full-size screenshot": "اسکرول کرنے کے قابل مکمل سائز اسکرین شاٹ", "Enlarge: {name}": "بڑا کریں: {name}", "View full size": "مکمل سائز دیکھیں"}</script>
+</body></html>

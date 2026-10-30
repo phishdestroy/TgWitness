@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="tr" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Kanıt formatı | TgWitness</title>
+<meta name="description" content="İmzalı ZIP dosyasının içeriği, kayıt türleri, işlem makbuzları, kullanıcı profilleri, site dışı kopyalar ve çevrimdışı doğrulama."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="Kanıt formatı | TgWitness"><meta property="og:description" content="İmzalı ZIP dosyasının içeriği, kayıt türleri, işlem makbuzları, kullanıcı profilleri, site dışı kopyalar ve çevrimdışı doğrulama.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/evidence/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/evidence/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/evidence/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/", "url": "https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/", "name": "Kanıt formatı | TgWitness", "description": "İmzalı ZIP dosyasının içeriği, kayıt türleri, işlem makbuzları, kullanıcı profilleri, site dışı kopyalar ve çevrimdışı doğrulama.", "inLanguage": "tr", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": "https://phishdestroy.github.io/TgWitness/tr/"}, {"@type": "ListItem", "position": 2, "name": "Belgeler", "item": "https://phishdestroy.github.io/TgWitness/tr/docs/"}, {"@type": "ListItem", "position": 3, "name": "Referans", "item": "https://phishdestroy.github.io/TgWitness/tr/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Kanıt formatı", "item": "https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">İçeriğe atla</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Belgeler</span></a>
+<nav aria-label="Kılavuzlar"><a href="../../concepts/">Görsel kılavuz</a><a href="../../">Tüm kılavuzlar</a><a href="../">Referans</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Dil"><span aria-hidden="true">◍</span> Türkçe</summary><div class="lang-list"><a href="../../../../docs/reference/evidence/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/evidence/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/evidence/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/evidence/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/evidence/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="./" hreflang="tr" lang="tr" aria-current="true">Türkçe</a><a href="../../../../ar/docs/reference/evidence/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/evidence/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/evidence/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/evidence/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/evidence/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/evidence/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/evidence/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Açık ve koyu tema arasında geçiş yapın"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Kılavuzlar"><a href="../../../guides/modes.html">Modlar, senaryolar ve kanıt düzeyleri</a><p class="nav-label">İlk adımlar</p><a href="../../start/">Birkaç dakika içinde başlayın</a><a href="../../accounts/">Hesap bağla</a><a href="../../proxies/">Bir proxy seçin</a><a href="../../exports/">Dışa aktarma ve doğrulama</a><p class="nav-label">Kanıtları anlamak</p><a href="../../concepts/">Kanıtların nasıl işlediğini görün</a><a href="../../cases/">Tüm sohbetleri inceleyin</a><a href="../../security/">Güvenliği sağlayın</a><p class="nav-label">Daha fazlasını öğrenin</p><a href="../../witness/">Witness botunu kurun</a><a href="../../server/">Çalışır durumda tutun</a><a href="../../troubleshooting/">Neyin yanlış gittiğini bulun</a></nav><nav class="wiki-nav" aria-label="Referans"><p class="nav-label"><a class="nav-label-link" href="../">Referans</a></p><details class="wiki-group"><summary>Kurulum</summary><a href="../quickstart/">Hızlı başlangıç</a><a href="../accounts/">Hesaplar ve oturum biçimleri</a><a href="../connection/">Bağlantı, proxy'ler ve veri koruma</a><a href="../deployment/">Uygulama</a></details><details class="wiki-group"><summary>Topla</summary><a href="../collection/">Veri toplama süreci nasıl işliyor?</a><a href="../operations/">İş akışları ve işlemler</a><a href="../investigation/">Soruşturma modu</a><a href="../features/">Özellikler ve sınırlamalar</a></details><details class="wiki-group" open><summary>Kanıt</summary><a href="../how-it-works/">Kanıt sistemi nasıl çalışır?</a><a href="./" aria-current="page">Kanıt formatı</a><a href="../witness/">Bağımsız tanık</a><a href="../timestamp/">Zaman damgaları</a></details><details class="wiki-group"><summary>Güvenlik ve proje</summary><a href="../security/">Güvenlik ve veri işleme</a><a href="../architecture/">Mimari</a><a href="../verification/">Neler test edildi</a><a href="../license/">Lisans ve mimari uyumsuzluk bildirimi</a><a href="../notice/">Operatör uyumsuzluğu bildirimi</a><a href="../changelog/">Değişiklik günlüğü</a></details></nav><p class="sidebar-note">v0.7.0<br>Açık kaynak · Kendi makinenizde çalışır</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Kılavuzlar"><a href="../../../">Ana Sayfa</a> <span aria-hidden="true">/</span> <a href="../../">Belgeler</a> <span aria-hidden="true">/</span> <a href="../">Referans</a> <span aria-hidden="true">/</span> <span aria-current="page">Kanıt formatı</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Belgelere göz atın</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zinciri, token veya witness&#x27;i deneyin…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Net arama" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Kılavuzları ve referansları aramak için bir kelime yazın. Arama, tarayıcınızda kalır.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Referans / Kanıt</p><h1>Kanıt formatı</h1><p class="guide-outcome">İmzalı ZIP dosyasının içeriği, kayıt türleri, işlem makbuzları, kullanıcı profilleri, site dışı kopyalar ve çevrimdışı doğrulama.</p><div class="wiki-body"><p>Bir gözlem, bir sonuç değildir. Gönderen kimliği, gerçek dünyadaki bir kimlik değildir.
+Hesap tarafından görülebilen hizmet güncellemesi kaynaktır; Telegram, üçüncü taraf araştırmacılar için
+bu kaydedilmiş kayıtları kriptografik olarak imzalamaz.</p>
+<h2 id="what-is-signed">Neler imzalanır?<a class="anchor" href="#what-is-signed" aria-label="Bu bölüme bağlantı">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Materyal</th>
+<th>Koruma</th>
+<th>Neler saklanmalı</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Operasyonel olaylar dahil olmak üzere her günlük kaydı</td>
+<td>Her olay için bir SHA-256 zinciri ve bir Ed25519 imzası</td>
+<td>Orijinal <code>events.jsonl</code>, güvenilir anahtar parmak izi ve saklanan kontrol noktası</td>
+</tr>
+<tr>
+<td>Kanıt ZIP dosyasının içeriği</td>
+<td><code>manifest.sig</code>, içerik dosyalarının hash değerlerini listeleyen kanonik manifestoyu imzalar</td>
+<td>Manifestosu ve imzası dahil olmak üzere eksiksiz ZIP dosyası</td>
+</tr>
+<tr>
+<td>Ekler korunur</td>
+<td>İmzalı bir <code>media.saved</code> olayındaki SHA-256 ve bayt sayısı; imzalı ZIP manifestosundaki dosya hash değeri</td>
+<td>Doğrulanmış ZIP dosyasının içindeki orijinal baytlar</td>
+</tr>
+<tr>
+<td>Kontrol Noktası</td>
+<td>Günlük uzunluğu, başlık hash değeri, açık anahtar ve oluşturulma zamanı üzerinde Ed25519 imzası</td>
+<td>Tartışmalı bir değişiklikten önce saklanan bağımsız bir kopya</td>
+</tr>
+<tr>
+<td>Çalıştırma makbuzu</td>
+<td>Ayrı ayrı imzalanmış toplayıcı ölçümleri; ayrıca imzalanmış bir <code>process.started</code> olayına da dahil edilmiştir</td>
+<td>Kayıt ve ilgili günlük; ölçümler kendi beyanlarına dayanmaktadır</td>
+</tr>
+<tr>
+<td>Bağımsız CSV veya HTML</td>
+<td>Tek başına kriptografik imza yoktur; olay hash&#x27;leri tek başına yetersizdir</td>
+<td>Bütünlük kontrolü için doğrulanmış ZIP dosyasının içindeki metni aynen kullanın</td>
+</tr>
+<tr>
+<td>Tarayıcı tarafından oluşturulan ekran görüntüleri, çıktılar veya PDF dosyaları</td>
+<td>Türetilmiş sürümde TgWitness imzası bulunmamaktadır.</td>
+<td>Orijinal doğrulanmış paketi saklayın ve türev sürümün nasıl oluşturulduğunu belgelendirin</td>
+</tr>
+</tbody>
+</table></div>
+<p>Toplayıcı, her dışa aktarım formatını oluşturmadan önce günlük imzalarını doğrular.
+Bu kaynak kontrolü, ayrı olarak indirilen CSV veya
+HTML dosyası üzerinde bir imza oluşturmaz. Geçerli bir JSONL olay imzası da ek
+baytlarını sağlamaz veya gözlemlenen günlüğün tamamının sağlandığını bağımsız olarak teyit etmez.</p>
+<h2 id="investigation-handoff">Soruşturma devri<a class="anchor" href="#investigation-handoff" aria-label="Bu bölüme bağlantı">#</a></h2>
+<ol>
+<li>Vaka referansını, operatörü, sayısal Telegram hesap kimliğini, seçilen
+    kaynakları, toplama politikasını ve toplama süresini vaka notlarınıza kaydedin. TgWitness
+    gözlemleri korur; vaka ataması ve saklama kayıtları uygulama dışında
+    yönetilir.
+    <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">Canlı kabul </a>prosedürüyle amaçlanan toplama yapılandırmasını onaylayın.</li>
+<li>Çıkartmalara güvenmeden önce çalışma alanının açık anahtar parmak izini bağımsız olarak saklayın.
+    Toplama işlemi sırasında imzalı kontrol noktalarını toplayıcı dışında kaydedin.
+    Kesintileri ve hesabın görünürlük sınırlarını kaydedin.</li>
+<li><strong>İmzalı</strong> bir <strong>ZIP dosyası</strong> dışa aktarın ve imzalı çalıştırma makbuzunu saklayın. Dışa aktarılan günlük sınırında
+    veya öncesinde bir kontrol noktası kullanın. Daha sonraki bir kontrol noktası,
+    daha önceki bir dışa aktarmayı çok kısa olduğu gerekçesiyle doğru bir şekilde reddedebilir. Dışa aktarmalar, panel filtrelerinden bağımsız olarak
+    tam çalışma alanı günlüğünü içerir; paylaşmadan önce materyali gözden geçirin.</li>
+<li>
+<p>Alıcının, ZIP dosyasını güvenilir bir doğrulayıcı kopyası ve
+    bağımsız olarak sağlanan parmak izi/kontrol noktası ile doğrulamasını sağlayın. Python ortamı etkin olan
+    güvenilir bir çalışma ortamından:</p>
+<pre><code class="language-sh">python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json</code></pre>
+<p>Her iki girdi de sağlandığında ve kabul edildiğinde, başarılı çıktı raporları <code>key_pinned: true</code>
+ve <code>checkpoint_checked: true</code>
+&#x27;yi verir. Doğrulama sonucunu saklayın.
+5. Arşivin SHA-256 değerini, dışa aktarım sınırını, aktarım tarihini, göndereni ve
+alıcıyı muhafaza kaydınıza kaydedin. Orijinal paketi olduğu gibi koruyun ve
+kopyalar üzerinde çalışın. Uygulamanın özel veri
+dizinini (hesap oturumları ve imzalama gizli anahtarlarını da içerir) paylaşmak yerine kanıt dosyalarını paylaşın.
+Aktarım için, dışa aktarım dosyası parola korumalı bir AES-256 ZIP dosyasına yerleştirilebilir.
+Parola yalnızca gizliliği korur ve saklanmaz; alıcı,
+arşivi açar ve içindeki imzalanmış dışa aktarım dosyasını doğrular; bu dosya değiştirilmemiştir.
+6. Bağımsız zaman sabitlemesi gerekiyorsa,
+<a href="../timestamp/">RFC 3161 prosedür</a>
+ünü izleyin ve isteği, kontrol noktasını, güvenilir
+CA bilgilerini ve doğrulanmış yetki yanıtını saklayın. Yalnızca bir istek hazırlamak
+zaman damgası elde etmek için yeterli değildir.</p>
+</li>
+</ol>
+<p>Başarılı bir doğrulama, güvenilir toplayıcı anahtarı
+ve korunan sınırlarla ilgili bütünlüğü teyit eder. Kaynak doğruluğu, eksiksiz Telegram iletimi, güvenilir zaman bilgisi
+ve hukuki kabul edilebilirlik için ayrı kanıtlar gereklidir. Bu sürüm,
+canlı Telegram yeterlilik testini veya bağımsız bir adli/güvenlik değerlendirmesini henüz tamamlamamıştır.</p>
+<p>Apprise aracılığıyla gönderilen bildirimler, çalışma alanı ve sohbet adlarını ve sayılarını içerir; silinen ve düzenlenmiş mesajların kısa
+alıntıları yalnızca operatör bu özelliği etkinleştirdiğinde eklenir
+(varsayılan olarak kapalıdır). Bunlar bir kolaylık işaretidir, kanıt değildir: teslimat garanti edilmez
+ve yalnızca günlük ile imzalı dışa aktarımları gözlemlenenleri kaydeder. Bir çalışma alanı
+proxy’si kullanıldığında bildirimler aynı yolu izler; bu yolu kullanamayan hizmetler ve MTProxy yolları reddedilir.</p>
+<h2 id="event-canonicalization">Olay kanonikleştirme<a class="anchor" href="#event-canonicalization" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Hash girdisi tam olarak şu alanlardan oluşur:</p>
+<pre><code class="language-text">seq, observed_at, source_at, kind, chat_id, message_id, actor_id, payload, previous_hash</code></pre>
+<p>UTF-8 ile Python uyumlu JSON kullanarak serileştirin; nesne anahtarları sıralanmış, ASCII
+kaçış karakteri yok, önemsiz boşluklar yok ve NaN/sonsuzluk yok:</p>
+<pre><code class="language-python">json.dumps(value, ensure_ascii=False, sort_keys=True,
+           separators=(&quot;,&quot;, &quot;:&quot;), allow_nan=False).encode(&quot;utf-8&quot;)</code></pre>
+<p>Bu baytların SHA-256 değeri olay hash&#x27;i olur. İmza,
+32 ham hash baytı üzerinde Ed25519 ile oluşturulur, ardından base64 ile kodlanır. İlk previous_hash 64 sıfırdan oluşur.
+Sıra numaraları 1&#x27;den başlar ve 1&#x27;er artar. Operasyonel
+olaylar da dahil olmak üzere tüm olaylar tek bir zinciri paylaşır. Yinelenen teslimatların engellenmesi söz konusu değildir: tekrarlanan
+gözlemler, farklı Telegram eylemlerine dair bir iddia değil, ayrı ayrı alındıklar olarak kabul edilir.</p>
+<p>Ham Telegram verileri ISO dizeleridir; ikili alanlar,
+bytes_base64 içeren nesnelere dönüşür. Mesaj metni, varlıklar, medya tanımlayıcıları, yanıt meta verileri, tepkiler
+ve hizmet eylemleri, sağlandıkları takdirde ham mesaj meta verilerinde saklanır.</p>
+<p>observed_at, toplayıcının UTC duvar saatidir. source_at, mevcut olduğunda sağlanan Telegram tarihidir.
+Silme bildirimleri kesin bir silme zamanı sağlamadığından,
+source_at değeri boş kalır. Aktarım alım sırası, kaynak olay sırası ile
+mutlaka aynı değildir. Geçmiş anlık görüntüleri, daha eski kaynak tarihlerini ancak güncel gözlem zamanlarını kullanır.</p>
+<h2 id="actor-semantics">Aktör semantiği<a class="anchor" href="#actor-semantics" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>message.new actor_id, mesajın gönderenidir. message.edited&#x27;de çıkarılan bir
+düzenleyici yoktur; payload.sender_id, gözlemlenen mesajın gönderenini kaydeder. Silme
+işlemlerinde actor_id değeri null olarak kalır. Üyelik hizmeti mesajları, her silme işlemini gönüllü ayrılma olarak yorumlamadan
+göndereni ve eylem türünü korur. Ham katılımcı
+güncellemeleri, actor_id değerini sağlandığı şekilde korur. Tepki anlık görüntüleri, bir değişiklik aktörü uydurmaz.</p>
+<p>Özel sohbetler ve normal gruplar için silme bildirimleri yalnızca mesaj kimliklerini içerir.
+Bu sohbetler hesap genelinde tek bir kimlik dizisini paylaşır; dolayısıyla bir kimlik,
+bu hesaba ait tek bir mesajı tanımlar. Bu kimlik numarasına sahip bir mesaj daha önce bu günlüğe kaydedilmişse,
+silme işlemi o sohbette message.deleted olarak kaydedilir ve yöntem adı olarak payload.chat_resolution
+kullanılır. Hiç kaydedilmemiş kimlik numaraları, chat_id olmadan deletion.unscoped
+olarak tutulur; hiçbir şey tahmin edilmez. Kanallar ve süper gruplar, mesajları sohbet başına numaralandırır ve
+bu şekilde asla eşleştirilmez. Silinen mesaj gözlemlenen hesap tarafından gönderilmişse,
+payload.deleted_message_was_outgoing değeri true olur; silen kişinin bilgisi yine de sağlanmaz.</p>
+<h2 id="coverage-continuity-gaps-and-unobserved-ids">Kapsam: süreklilik, boşluklar ve gözlemlenmemiş kimlikler<a class="anchor" href="#coverage-continuity-gaps-and-unobserved-ids" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Her imzalı ZIP dosyası <code>coverage.json</code>&#x27;yi içerir; HTML raporu aynı özetle açılır ve
+<code>verify.py</code>, dosyaya güvenmek yerine <code>events.jsonl</code>&#x27;den bu özeti yeniden hesaplar:</p>
+<ul>
+<li><strong>X&#x27;ten Y&#x27;ye kadar sürekli olarak gözlemlenir.</strong> Bir dönem <code>observation.started</code> ile başlar ve
+    bir duraklama, bir durdurma, Telegram bağlantısının kesilmesi, oturumdan çıkış, düzgün bir durdurma olmaksızın
+    başlayan bir işlem veya gözlem sırasında herhangi bir kayıt olmaksızın üç dakikadan fazla süren bir süre ile
+    (her dakika bir kalp atışı kaydı yazılır; bu nedenle sessizlik, işlemin durduğu, donduğu veya
+    bilgisayarın uyku moduna geçtiği anlamına gelir). <strong>Parametreler</strong> bölümünde kalp atışı aralığı değiştirildiğinde, her kalp atışı
+    bu değişikliği kaydeder ve izin verilen sessizlik süresi üç aralığa çıkar; bu süre asla üç dakikadan az olamaz.</li>
+<li><strong>Boşluklar,</strong> dönemler arasındaki süreyi ve nedenini listeler. Son
+    kayıtta hâlâ açık olan bir boşluk, <code>not_resumed_by_last_record</code> olarak işaretlenir.</li>
+<li><strong>Mesaj kimlikleri gözlemlenmemiştir.</strong> Sohbet başına mesaj sayısını belirleyen kanallar ve süper gruplar için
+    gözlemlenen kimlikler arasındaki eksik kimlikler aralıklar halinde listelenmiştir. Bunlar,
+    <em>&quot;gözlemlenmemiş</em>&quot; — silinmiş, hiç teslim edilmemiş veya kaydedilmiş geçmişin dışında — olarak rapor edilir; asla
+    &quot;silinmiş&quot; olarak rapor edilmez. Özel sohbetler ve normal gruplar hesap genelinde ortak bir sıra numarası kullanır; bu nedenle buradaki boşluklar
+    anlam ifade etmez ve listelenmez.</li>
+<li>Sohbet düzeyindeki boşluk bildirimleri (örneğin, Telegram&#x27;ın bir
+    kanalda farkın telafi edilmesini istemesi gibi) not olarak sayılır; bunlar genel kapsamı kesintiye uğratmaz.</li>
+</ul>
+<p>Kapsam, bu toplayıcının neyi kaydettiğini açıklar. Bu, Telegram&#x27;ın
+sürekli bir süre boyunca her güncellemeyi ilettiğinin kanıtı değildir.</p>
+<h2 id="producer">Yapımcı<a class="anchor" href="#producer" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>İmzalı kanıt ZIP dosyaları, sohbet dışa aktarımları, tanık günlükleri ve
+kişi profili dosyalarının beyanı, <code>producer</code>
+bilgilerini içerir: yazılım, sürüm, proje (PhishDestroy),
+ana sayfa ve kaynak deposu. HTML raporu aynı satırı gösterir ve <code>verify.py</code>
+, bunu doğruladığı bilgilerin bir parçası olarak yazdırır. Bu alan oluşturulmadan önce oluşturulan arşivler,
+önceki gibi doğrulanır ve üretici adı belirtilmemiş olarak raporlanır.</p>
+<h2 id="people-profiles">Kişi profilleri<a class="anchor" href="#people-profiles" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Bir profil dosyası (<code>tgwitness-dossier-v1</code>, JSON), talep üzerine,
+bir sohbet için günlüğünde halihazırda bulunan kayıtlardan oluşturulur; Telegram&#x27;dan hiçbir şey alınmaz ve profil içeriği asla
+günlüğe yazılmaz (profillerin açılıp kapatılması <code>dossier.changed</code> olarak kaydedilir).
+Kaydedilmiş mesajı olan her kişi için, kaydetme anında görüldüğü şekliyle isim ve kullanıcı adı geçmişi, Telegram işaretleri
+(bot, dolandırıcılık, sahte, premium, doğrulanmış, kısıtlanmış, silinmiş) ile profil
+fotoğraf kimlikleri, yerel avatar önbelleğindeki benzer avatarların
+SHA-256 ve algısal hash (pHash, <code>imagehash.phash</code> ile uyumlu) değerleri, etkinlik (ilk ve son mesaj,
+sayılar, düzenlenmiş ve silinmiş paylaşımlar, UTC saatine göre mesajlar), kimin kime yanıt verdiği, kişinin yazdığı
+ve bahsedilen cüzdanlar (BTC, EVM, TRON, TON, LTC,
+DOGE, XMR, SOL; Base58Check adresleri sağlama toplamı ile doğrulanır), telefon numaraları, kullanıcı adları ve
+metin arkasında gizlenmiş bağlantılar dahil olmak üzere bağlantılar.</p>
+<p>Her bir gerçek, kaynaklandığı günlük kayıtlarını (<code>seq</code>) listeler ve <code>record_hashes</code>,
+bağlantı verilen her kaydın hash değerini içerir. Açıklama, çalışma alanı anahtarıyla imzalanmıştır:</p>
+<pre><code class="language-sh">python verify.py tgwitness-dossier-CHAT.json --fingerprint TRUSTED_SHA256 --evidence tgwitness-evidence.zip</code></pre>
+<p>imzayı kontrol eder, kanıt dışa aktarımının kendisini (imza, hash zinciri ve dosyalar) doğrular
+ve atıfta bulunulan her kaydın aynı çalışma alanının söz konusu dışa aktarımında değiştirilmemiş olarak mevcut olduğunu teyit eder. Avatar hash&#x27;leri yerel önbellekten geldiği şeklinde etiketlenir
+(günlük kayıtlarından değil). Bahsetmeler desen eşleşmeleridir — doğrulanmış gerçekler değil, kontrol edilmesi gereken ipuçlarıdır.
+Profiller sohbet bazında etkinleştirilir, şifreli bir AES-256 ZIP dosyası olarak dışa aktarılabilir ve
+devre dışı bırakıldığında veya sohbet kaynaklardan kaldırıldığında silinir.</p>
+<h2 id="independent-witness">Bağımsız tanık<a class="anchor" href="#independent-witness" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Bir tanık günlüğü (<code>tgwitness-witness-v1</code>) ve kanalındaki gönderiler,
+<code>verify.py --witness … --channel …</code> ile yapılan kanıt dışa aktarımına göre kontrol edilir; bkz. <a href="../witness/">bağımsız tanık</a>.</p>
+<h2 id="manifest-and-checkpoints">Manifest ve kontrol noktaları<a class="anchor" href="#manifest-and-checkpoints" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>manifest.json dosyası, formatı, dışa aktarım zamanını, açık anahtarı, parmak izini, günlüğün
+uzunluğunu, baş hash değerini, kapsamı, üreticiyi, sınırlamaları ve <code>manifest.json</code> ile <code>manifest.sig</code>&#x27;nin kendileri dışındaki
+her içerik elemanının SHA-256 değerini içerir.
+manifest.sig dosyası, kanonik manifest JSON dosyası üzerinde oluşturulan base64 Ed25519 imzasını içerir.
+Doğrulayıcı, beklenmeyen/eksik elemanları, yinelenen adları, bozuk dosyaları,
+kırık sıra/zinciri, geçersiz imzaları ve sağlanan kontrol noktasıyla uyuşmazlıkları reddeder.
+Arşiv yollarını asla ayıklamaz. Beyan edilen toplam sıkıştırılmamış boyutu 4 GiB ile sınırlar;
+ <code>--max-gib N</code>, artırılmış <strong>Parameters</strong> sınırıyla oluşturulan daha büyük arşivlere izin verir.</p>
+<p>Doğrulama kodunu, güvenilir bir kaynak veya incelenmiş bağımsız bir kopyadan edinin. Güvenilmeyen bir arşivin
+içindeki doğrulama kodu, o arşivin yazarı tarafından sağlanan çalıştırılabilir bir materyaldir;
+varlığı, taşınabilirlik açısından bir kolaylıktır, bağımsız bir güven kaynağı değildir.</p>
+<p>Bir kontrol noktası, açık anahtar, günlük uzunluğu, başlık
+hash&#x27;i ve oluşturulma zamanını içeren bir beyanı imzalar. Doğrulayıcı, daha sonraki bir arşivin
+aynı önek içerdiğini kontrol edebilir. Tartışmalı bir değişiklikten önce, toplayıcının dışında bir kontrol noktası saklayın:
+hem arşivi hem de kontrol noktasını kontrol eden bir saldırgan, her ikisini de değiştirebilir.</p>
+<p>Sabitlenmemiş bir anahtardan alınan geçerli bir imza, yalnızca iç tutarlılığı sağlar.
+Kayıt öncesinde veri toplayıcı veya anahtarın güvenliği ihlal edilmişse,
+sabitlenmiş bir anahtar bile kaynak içeriğinin doğruluğunu kanıtlayamaz. Harici zaman damgası ve güvenilir yakalama, ayrı
+gerekliliklerdir. TgWitness, delil kabul edilebilirliği veya adli sertifikasyon vaat etmez.</p>
+<h2 id="attachments">Ekler<a class="anchor" href="#attachments" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Dosyalar, media/ dizininde SHA-256 ile tanımlanır. Bir media.saved olayı, bir hash değerini ve
+bayt uzunluğunu belirli bir mesaj olayına bağlar. Ham dosya adları meta verilerdir, asla yerel
+yollar değildir. Medya baytları eşzamansız olarak indirilir; bu nedenle anında silme işlemi,
+yakalamayı engelleyebilir. Devre dışı bırakılmış toplama, aşırı büyük/boyutu bilinmeyen dosyalar, indirme hataları
+ve kesintiye uğrayan indirmeler sonuçlar olarak görüntülenir. Bir işlem çökmesi,
+referanssız kısmi dosyalar bırakabilir; bunlar dışa aktarımlara dahil edilmez.</p>
+<p>ZIP dışa aktarıcısı, depolanan medya dosyalarını adlarına göre doğrular. JSONL, CSV ve HTML
+dışa aktarımları olay imzalarını doğrular ancak medya baytlarını içermez. Türetilmiş raporlar
+kolaylık sağlar; events.jsonl dosyası, olayların resmi temsilidir.</p>
+<h2 id="durable-collection-and-process-receipts-02">Kalıcı toplama ve işlem makbuzları (0.2)<a class="anchor" href="#durable-collection-and-process-receipts-02" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Bir medya işi ve ilgili mesaj olayı, tek bir işlemde kaydedilir. İş,
+orijinal TL mesaj tanımlayıcısını depolar; imzalı gözlem, SHA-256 değerini, hesabı
+ve boyut politikasını bağlar. Kurtarma işlemi, indirme öncesinde bu bağlamayı doğrular. Asla
+mevcut mesajı almaz ve sessizce daha yeni bir eki ikame eder. Kesintiye uğrayan işler
+yeniden denenirken, kalıcı hata açık bir sonuç olarak kalır.</p>
+<p>Her çalışma alanının kendi günlüğü ve imzalama kimliği vardır. Bir process.started olayı şunları içerir:
+çalıştırma kimliği, yerel saatler, bağımlılık sürümleri, kaynak dosya hash&#x27;leri, başlangıç hesabı/kapsamı
+ve yakalama ayarları. Heartbeat&#x27;ler çalıştırma kimliğini, monotonik zamanı ve kuyruk durumunu içerir.
+İşlem makbuzu, ayrı olarak imzalanmış bir beyan olarak da indirilebilir.
+Dosya ölçümleri kendi beyanına dayalıdır ve güvenilir donanım doğrulaması değildir.</p>
+<p>Otomatik kontrol noktaları, başlangıçta, gözlem sırasında her beş dakikada bir
+(<strong>Parametreler → Her [süre] imzalı kontrol noktası</strong>) ve düzgün bir şekilde durdurulduğunda yerel olarak saklanır. Başlangıç doğrulaması ve dışa aktarma işlemi sırasında günlük,
+saklanan en son yerel kontrol noktasıyla karşılaştırılır. Bu, kontrol noktası kaybolmadığında bir veritabanı geri alma işlemini
+tespit edebilir; her ikisini de kontrol eden bir operatör, yine de her ikisini de değiştirebilir.
+Bağımsız saklama ve harici güvenilir zaman damgaları ayrı gereksinimler olarak kalır.</p>
+<p>Yeniden başlatmanın ardından, kaydedilmiş Telegram güncelleme konumu devam ettirilir (<code>catch_up_from</code>&#x27;den
+<code>observation.started</code>&#x27;ye) ve kaçırılan güncellemeler istenir. Periyodik bir yeniden kontrol, kaçırılan mesajlar için
+<code>message.recovered</code>&#x27;yi ve Telegram&#x27;ın artık
+kaydedilmiş bir mesajı döndürmemesi durumunda <code>message.missing_on_recheck</code>&#x27;yi kaydeder; ikincisi bir silme bildirimi değildir ve silen kişinin adını veya zamanı belirtmez.</p>
+<h3 id="off-site-copy-and-restore-s3">Site dışı yedekleme ve geri yükleme (S3)<a class="anchor" href="#off-site-copy-and-restore-s3" aria-label="Bu bölüme bağlantı">#</a></h3>
+<p>Site dışı kopya (Dışa Aktarımlar, varsayılan olarak kapalı), günlük bölümlerini, korunan dosyaları, kontrol noktalarını
+zaman damgalarıyla birlikte ve tamamlanmış sohbet dışa aktarımlarını, çalışma alanı kasasında saklanan bir anahtarla
+AES-256-GCM ile şifrelenir; depolama kovası bunu desteklediğinde Object Lock saklama kuralı geçerlidir.
+İndirilmiş anahtar olmadan kopya okunamaz. Geri yükleme ve doğrulama işlemleri
+<code>python -m tgwitness.replica restore --key-file KEY.json --out DIR</code> ile gerçekleştirilir.</p>
+<p>Geri yükleme işlemi için boş bir normal dizin gereklidir. İndirilen ve şifresi çözülmüş nesneler, tüm günlük ve saklanan her kontrol noktası doğrulanana kadar özel
+geçici depolama alanında kalır. Güvenli olmayan nesne
+yolları, tutarsız segment aralıkları ve bir kontrol noktasından daha kısa günlükler reddedilir; başarısız
+doğrulama durumunda geri yüklenen dosya yayınlanmaz. Saklama kontrolleri, geri döndürülen Nesne Kilidi
+modunu ve tarihini, yükleme sırasında gönderilen son tarihle karşılaştırır (bir saniyelik yuvarlama toleransı). Süresi dolmuş,
+geçersiz veya kısaltılmış son tarihler doğrulanmış olarak kabul edilmez. Durum raporu, o yükleme geçişi için
+saklama süresi okunan örnek nesneyi bildirir.</p>
+<p>Kopyalama işlemi, hedef konum ve şifreleme anahtarı ile sınırlıdır. Uç nokta, depolama alanı
+veya önek değiştirildiğinde, yerel olarak saklanan günlük, medya ve kontrol noktalarının
+söz konusu hedefe tam bir kopyası oluşturulur. Eski, kapsam dışı işlemler korunur ancak yükseltme sonrasında bir kez yeniden oynatılır. Yerel
+giden kutusundan zaten kaldırılmış olan geçmiş sohbet dışa aktarımları, önceki hedef konumlarında kalır.</p>
+<p>Eksik veya bozuk yerel medya, geçiş hatası olarak rapor edilir ve medya imleci bunun önünde
+tutulur, böylece dosya bir sonraki geçişte tekrar denenir; bundan sonraki dosyalar, kontrol noktaları ve dışa aktarımlar yine de
+kopyalanır. Geri yükleme,
+şifresi çözülmüş hash değerleri ve kaydedilen boyutlara göre tüm korunmuş medya referanslarını kontrol eder. Kesintiye uğrayan yüklemelerden kaynaklanan
+aynı çakışan günlük segmentleri tekilleştirilir; çakışan kısımlar reddedilir.
+Yükleme sırasında oluşturulan kontrol noktaları, kapsadıkları günlük kayıtları
+kopyalanana kadar ertelenir; böylece tamamlanan bir geçiş, kontrol noktasını günlükten önce yayınlamaz.</p>
+<h3 id="streaming-export-snapshots">Akış halinde dışa aktarma anlık görüntüleri<a class="anchor" href="#streaming-export-snapshots" aria-label="Bu bölüme bağlantı">#</a></h3>
+<p>Akışlı dışa aktarımlar, kararlı bir SQLite okuma anlık görüntüsü kullanır. İndirme işlemi tamamlandığında, bu anlık görüntünün başlangıcı
+mevcut canlı günlüğünden daha eski olabilir. Bu anlık görüntünün ardından oluşturulan bir kontrol noktası,
+arşivin daha kısa olduğunu doğru bir şekilde bildirebilir; bunu, dışa aktarılan önekle aynı veya ondan önceki bir kontrol noktasıyla karşılaştırın,
+keyfi olarak daha sonraki bir kontrol noktasıyla değil.</p>
+<h2 id="rfc-3161-preparation-and-response-verification-02">RFC 3161 hazırlığı ve yanıt doğrulaması (0.2)<a class="anchor" href="#rfc-3161-preparation-and-response-verification-02" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Kanıt modu (varsayılan olarak kapalı), her bir imzalı kontrol noktasının yalnızca SHA-256 değerini,
+çalışma alanı rotası üzerinden ve asla MTProxy üzerinden değil, listelenen RFC 3161 yetkililerine ve OpenTimestamps takvimlerine gönderir.
+Yanıtlar <code>checkpoints/anchors/</code>&#x27;de saklanır, dışa aktarılır ve <code>verify.py</code> tarafından kontrol edilir (<code>--tsa-ca</code>,
+TSA imzasını kontrol eder; OpenTimestamps kanıtlarını <code>ots upgrade</code> ve <code>ots verify</code> ile doğrular).</p>
+<p>Panel, kanonik checkpoint.json baytlarını,
+timestamp.tsq dosyasında yer alan SHA-256 mesaj parmak izini ve rastgele nonce değerini, sağlama toplamlarını ve talimatları içeren bir istek arşivi hazırlar.
+Herhangi bir ağ isteği yapılmaz. Hazırlanan dosya, güvenilir bir zaman damgası değildir.</p>
+<p><code>python -m tgwitness.anchor verify</code>, OpenSSL ts&#x27;yi iki kez çağırır: bir kez kontrol noktası
+baytlarına karşı, bir kez de orijinal isteğe karşı. Güvenilir bir CA dosyası açıkça gereklidir;
+dahil edilen sertifikalara otomatik olarak güvenilmez. İstek kontrolü,
+komut satırında isteğe bağlıdır; bu nedenle, nonce&#x27;yi kontrol etmek için --request seçeneğini koruyun ve sağlayın. Sonuç, kontrolün
+yapılıp yapılmadığını belirtir. Toplayıcı kontrol noktası imzası ve günlüğü, yine de
+güvenilir toplayıcı parmak izi ile ayrı olarak doğrulanmalıdır.</p>
+<p>Mevcut doğrulayıcı, iptal bilgilerini almamakta ve sertifikanın geçerlilik süresinin dolmasından sonra uzun vadeli
+arşiv doğrulamasını uygulamamaktadır. Başarılı imza
+doğrulamasını, nitelikli zaman damgası veya hukuki kabul edilebilirlikle eşdeğer görmeyiniz. Geliştirme sürecinde gerçek bir bağımsız
+TSA ile iletişime geçilmemiştir. <a href="../timestamp/">Prosedüre</a> bakınız.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/EVIDENCE.md">Bu sayfayı GitHub'da düzenle ↗</a><a class="next-guide" href="../witness/"><span>Sonraki adım</span><strong>Bağımsız tanık →</strong></a><p>Bu kılavuzlar mevcut uygulamayı açıklamaktadır. Doğrulama sonuçları ve kalan eksiklikler ayrı olarak belgelenmiştir. <a href="../verification/">Neler test edildi →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Bu sayfada"><p class="nav-label">Bu sayfada</p><a href="#what-is-signed">Neler imzalanır?</a><a href="#investigation-handoff">Soruşturma devri</a><a href="#event-canonicalization">Olay kanonikleştirme</a><a href="#actor-semantics">Aktör semantiği</a><a href="#coverage-continuity-gaps-and-unobserved-ids">Kapsam: süreklilik, boşluklar ve gözlemlenmemiş kimlikler</a><a href="#producer">Yapımcı</a><a href="#people-profiles">Kişi profilleri</a><a href="#independent-witness">Bağımsız tanık</a><a href="#manifest-and-checkpoints">Manifest ve kontrol noktaları</a><a href="#attachments">Ekler</a><a href="#durable-collection-and-process-receipts-02">Kalıcı toplama ve işlem makbuzları (0.2)</a><a href="#rfc-3161-preparation-and-response-verification-02">RFC 3161 hazırlığı ve yanıt doğrulaması (0.2)</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Açık kaynak · Kendi makinenizde çalışır</span><a href="../../../../LICENSE">MIT lisansı</a><a href="../notice/">Operatör bildirimi</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Güvenlik</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Mesaj bekleniyor", "Step through a fictional send, edit and delete.": "Kurgusal bir gönderme, düzenleme ve silme işlemini adım adım inceleyin.", "No observations yet. Start the sequence or advance one event.": "Henüz herhangi bir gözlem yok. Diziyi başlatın veya bir olay ilerletin.", "Meet at 10:00": "Saat 10:00'da buluşalım", "A new message is visible in the chat.": "Sohbette yeni bir mesaj görünüyor.", "Record 1 appended: the collector observed the original message.": "1 kayıt eklendi: toplayıcı, orijinal mesajı gözlemledi.", "Meet at 11:00": "Saat 11:00'da buluşalım", "The current text changes. The earlier observation stays.": "Mevcut metin değiştirilmiştir. Önceki gözlem geçerliliğini korumaktadır.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Kayıt 2 eklendi: düzenleme yeni bir gözlemdir. Kayıt 1'de hâlâ orijinal metin yer almaktadır.", "Message deleted": "Mesaj silindi", "The message has disappeared from the chat view.": "Mesaj, sohbet ekranından kayboldu.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Record 3 eklenmiştir: silme bildirimi, gözlemlenen her iki sürümün yanında da saklanmaktadır.", "0 records": "0 kayıt", "1 record": "1 kayıt", "2 records": "2 kayıt", "3 records": "3 kayıt", "Complete / {n} of 3": "Tamam / 3'ün {n}'si", "Step / {n} of 3": "Adım / 3'ün {n}'si", "Pause": "Duraklat", "Replay sequence": "Tekrar oynatma dizisi", "Play sequence": "Çalma sırası", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Statik örnek mevcuttur. Hash değerlerini etkileşimli olarak hesaplamak için bu sayfayı HTTPS üzerinden veya Web Crypto desteğine sahip bir localhost önizlemesinde açın.", "No record supplied": "Kayıt sağlanmadı", "Tail removed": "Son kısım kaldırıldı", "≠ saved hash": "≠ kaydedilmiş hash", "Rebuilt · different hash": "Yeniden oluşturuldu · farklı hash", "= saved hash": "= kaydedilen hash", "Same length and matching head.": "Aynı uzunlukta ve başlığıyla uyumlu.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Hesaplanan üç hash değeri de kaydedilen hash değerleriyle eşleşmektedir. Bu örnek, korunan üç kayıtlık sınırla uyumludur.", "Same saved head; the journal prefix fails verification.": "Aynı başlık kaydedildi; günlük ön eki doğrulamadan geçemedi.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Kayıt 2, kaydedilmiş hash değeriyle artık eşleşmiyor. Yalnızca son saklanan başlık kontrol edilseydi bu durum gözden kaçardı; doğrulayıcı her kaydı tek tek kontrol eder.", "Head differs from the retained checkpoint.": "Başlık, saklanan kontrol noktası ile farklılık göstermektedir.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Yeniden oluşturulan hash değerleri birbiriyle bağlantılıdır, ancak son başlık değişmiştir. Saklanan kontrol noktası bu geçmişi reddediyor. Değiştirilen kayıtlarda orijinal imzalar da geçersiz sayılır.", "Too short: 2 supplied records \u003c 3 retained records.": "Çok kısa: Sağlanan kayıt sayısı 2, saklanan kayıt sayısı 3'ten az.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Kalan iki hash değeri hâlâ eşleşiyor. Saklanan kontrol noktası, eksik olan son kısmı ortaya çıkarıyor. O önceki sınır olmasaydı, bu daha kısa önek tek başına eksikliği ortaya çıkarmazdı.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Bu tarayıcıda hash hesaplaması yapılamamaktadır. Aşağıdaki formüller ve statik açıklamalar yine de kullanılabilir durumdadır.", "{n} records": "{n} kayıt", "head {hash}": "başlık {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Kabul edildi: sayı artıyor, imza doğrulanıyor ve anahtar eşleşiyor. Tanık bu yeni sınırı koruyor.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Geri alma: İmzalı yanıt, en son kabul edilen kontrol noktasına göre daha az kayıt bildiriyor. Witness, sorunu kaydeder ve daha önce kabul edilen sınırı korur.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: sayım değişmez ancak başlık farklıdır. Tanık, bu uyuşmazlığı kaydeder ve daha önce kabul edilen sınırı korur.", "No answer": "Cevap yok", "boundary unknown": "sınır bilinmiyor", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Yanıt yok: tanık, başarısız kontrolü kaydeder. Toplayıcının mevcut durumunu belirleyemez. Tanık, Bot API’sine hâlâ erişebiliyorsa ve yayın politikası izin veriyorsa, bu başarısızlığı yayınlayabilir.", "Send {n}": "{n} gönder", "Edit {n}": "Düzenle {n}", "Delete {n}": "{n}'yi sil", "Both accounts captured all six expected observations in this example.": "Bu örnekte her iki hesap da beklenen altı gözlemin tamamını kaydetmiştir.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "B hesabı yine 6 mesajın 6'sını da yakaladı. İki makbuzun alınması daha uzun sürdü. Yakalama oranı ve makbuz gecikmesi farklı sorulara cevap verir.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Hesap B, son tarihe kadar 6 eylemden 5'ini yakaladı (%83,3). Eksik olan düzenleme için ölçülen bir gecikme yoktur. Bu sonuç yalnızca altı kontrollü eylemi açıklamaktadır.", "not observed by cutoff": "kesme tarihine kadar gözlemlenmemiştir", "{s} seconds": "{s} saniye", "Exact values follow in the table.": "Kesin değerler tabloda yer almaktadır.", "{s} s": "{s} s", "Not observed": "Gözlemlenmedi", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Dört sohbet, farklı gözlemler sunmaktadır. Her bağlantı için kaynak kayıtlarını takip edin; göndereni belirtilmemiş kanal gönderisini 71001 numaralı kullanıcıya atamayın.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "#146 ve #205 numaralı kayıtlar aynı gönderen kimliğini (71001) göstermektedir. Bu, iki sohbet üzerinden bir Telegram hesabının gözlemlenen gönderilerini birbirine bağlamaktadır. Bu bilgi, gerçek hayattaki bir kişiyi tanımlamaz veya kanal gönderisini bir kişiye atfetmez.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "pay.example.invalid/new adresi, grup kaydı #146, bot klavyesi #173, kanal düzenlemesi #188 ve özel mesaj #205'te geçmektedir. Tekrarlanan bir hedef, materyalleri birbirine bağlar; ancak bu, söz konusu hesapların ortak kontrol altında olduğunu kanıtlamaz.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Bu hayali vakada, tamamlanmış medya makbuzları #151 ve #209'un SHA-256 değerleri tamamen aynıdır. Gerçek baytları ve bunlara ait mesaj kayıtlarını karşılaştırın. Eşleşen dosya, yaratıcısını tanımlamaz veya kimin ilettiğini kanıtlamaz.", "the encrypted off-site copy": "şifrelenmiş, sunucu dışında tutulan kopya", "notifications": "bildirimler", "checkpoint hashes for timestamps": "zaman damgaları için kontrol noktası hash değerleri", "signed checkpoints for the witness": "tanık için imzalı kontrol noktaları", "Switched on in this example": "Bu örnekte etkinleştirilmiştir", "Optional · off by default": "İsteğe bağlı · varsayılan olarak kapalı", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Bu makineden ayrılırken: Telegram bağlantısı ve {list}. Başka hiçbir şey yok.", "Default: only the Telegram connection leaves this machine.": "Varsayılan ayar: Bu makineden yalnızca Telegram bağlantısı dışarıya çıkar.", "{done} of {total} done": "{done}/{total} tamamlandı", "Mark step {n} as done": "{n} numaralı adımı tamamlanmış olarak işaretle", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Metin", "Copied": "Kopyalandı", "Command copied.": "Komut kopyalandı.", "Selected — Ctrl/Cmd+C": "Seçildi — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Komut seçildi. Elle kopyalayın.", "Command copied to clipboard.": "Komut panoya kopyalandı.", "Select text": "Metni seç", "Clipboard unavailable. Command selected; copy it manually.": "Pano kullanılamıyor. Komut seçildi; manuel olarak kopyalayın.", "A message arrives. The first observation is saved.": "Bir mesaj gelir. İlk gözlem kaydedilir.", "The time changes. Both captured versions stay.": "Zaman değişir. Yakalanan her iki sürüm de kalır.", "The message disappears. The captured history remains.": "Mesaj kaybolur. Kaydedilen geçmiş kalır.", "Pause example animation": "Örnek animasyonu duraklat", "Play example animation": "Örnek animasyonu oynat", "Play": "Oynat", "Full-size workspace screenshot": "Çalışma alanının tam boyutlu ekran görüntüsü", "Workspace screenshot · fictional data": "Çalışma alanı ekran görüntüsü · hayali veriler", "Close": "Kapat", "Close screenshot": "Ekran görüntüsünü kapat", "Scrollable full-size screenshot": "Kaydırılabilir tam boyutlu ekran görüntüsü", "Enlarge: {name}": "Büyüt: {name}", "View full size": "Tam boyutta görüntüle"}</script>
+</body></html>

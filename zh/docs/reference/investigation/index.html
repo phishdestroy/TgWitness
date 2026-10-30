@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="zh-Hans" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>调查模式 | TgWitness</title>
+<meta name="description" content="涵盖频道、群组、私聊和机器人的全账户调查，从调查范围到经过验证的案件资料包。"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="调查模式 | TgWitness"><meta property="og:description" content="涵盖频道、群组、私聊和机器人的全账户调查，从调查范围到经过验证的案件资料包。">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/investigation/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/investigation/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/investigation/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/investigation/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/investigation/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/investigation/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/investigation/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/", "url": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/", "name": "调查模式 | TgWitness", "description": "涵盖频道、群组、私聊和机器人的全账户调查，从调查范围到经过验证的案件资料包。", "inLanguage": "zh-Hans", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://phishdestroy.github.io/TgWitness/zh/"}, {"@type": "ListItem", "position": 2, "name": "文档", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/"}, {"@type": "ListItem", "position": 3, "name": "参考", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "调查模式", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">跳转至内容</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / 文档</span></a>
+<nav aria-label="指南"><a href="../../concepts/">图文指南</a><a href="../../">所有指南</a><a href="../">参考</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="语言"><span aria-hidden="true">◍</span> 简体中文</summary><div class="lang-list"><a href="../../../../docs/reference/investigation/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/investigation/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/investigation/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/investigation/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/investigation/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/investigation/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/investigation/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/investigation/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/investigation/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/investigation/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/investigation/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/investigation/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="./" hreflang="zh-Hans" lang="zh-Hans" aria-current="true">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="在浅色和深色主题之间切换"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="指南"><a href="../../../guides/modes.html">模式、场景和证据级别</a><p class="nav-label">入门指南</p><a href="../../start/">几分钟内即可开始使用</a><a href="../../accounts/">连接账户</a><a href="../../proxies/">选择代理</a><a href="../../exports/">导出与验证</a><p class="nav-label">了解证据</p><a href="../../concepts/">了解证据如何运作</a><a href="../../cases/">跨所有聊天记录进行调查</a><a href="../../security/">确保安全</a><p class="nav-label">了解更多</p><a href="../../witness/">设置 Witness 机器人</a><a href="../../server/">保持其运行</a><a href="../../troubleshooting/">查找问题所在</a></nav><nav class="wiki-nav" aria-label="参考"><p class="nav-label"><a class="nav-label-link" href="../">参考</a></p><details class="wiki-group"><summary>设置</summary><a href="../quickstart/">快速入门</a><a href="../accounts/">账户与会话格式</a><a href="../connection/">连接、代理和数据保护</a><a href="../deployment/">部署</a></details><details class="wiki-group" open><summary>收集</summary><a href="../collection/">数据采集原理</a><a href="../operations/">工作流程与操作</a><a href="./" aria-current="page">调查模式</a><a href="../features/">功能与限制</a></details><details class="wiki-group"><summary>证据</summary><a href="../how-it-works/">证据的运作原理</a><a href="../evidence/">证据格式</a><a href="../witness/">独立见证者</a><a href="../timestamp/">时间戳</a></details><details class="wiki-group"><summary>安全与项目</summary><a href="../security/">安全与数据处理</a><a href="../architecture/">架构</a><a href="../verification/">已测试的内容</a><a href="../license/">许可协议与架构不兼容声明</a><a href="../notice/">运营商兼容性通知</a><a href="../changelog/">更新日志</a></details></nav><p class="sidebar-note">v0.7.0<br>开源 · 可在您的设备上运行</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="指南"><a href="../../../">首页</a> <span aria-hidden="true">/</span> <a href="../../">文档</a> <span aria-hidden="true">/</span> <a href="../">参考</a> <span aria-hidden="true">/</span> <span aria-current="page">调查模式</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">参考 / 收集</p><h1>调查模式</h1><p class="guide-outcome">涵盖频道、群组、私聊和机器人的全账户调查，从调查范围到经过验证的案件资料包。</p><div class="wiki-body"><p>可跨频道、群组、私聊和机器人追踪案件全过程，从最初的
+数据采集到带引用时间线及可验证的交接记录。交互式网站
+版本位于 <code>/docs/cases/</code>；<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally">预览说明</a>。</p>
+<h2 id="worked-case-a-destination-changes-across-four-conversations">案例分析：四个对话中目的地发生变化<a class="anchor" href="#worked-case-a-destination-changes-across-four-conversations" aria-label="本节链接">#</a></h2>
+<p>一条公告指向了一个机器人。一个行动小组讨论了一个新的付款
+目的地，该机器人的键盘上显示了该信息，随后在一次私下跟进中又重复了这一信息。
+随后该公告被编辑，一条群组消息消失了。</p>
+<p>需要弄清楚的问题包括：变更前后观察到了什么，哪些 Telegram
+账户发布了每条内容，目标出现在何处，哪些附件字节
+被保留下来，以及哪些时间间隔仍无法确定？</p>
+<p>本示例中的所有姓名、ID、时间及日志引用均为虚构。该
+工作流使用当前功能；案例图仅为示意图，并非由应用程序自动
+生成的图表。</p>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 723 406" width="723" height="406" role="img" aria-labelledby="flow-3-title flow-3-desc"><title id="flow-3-title">流程图</title><desc id="flow-3-desc">频道 → 工作区日志; 群组 → 工作区日志; 私聊 → 工作区日志; 机器人 → 工作区日志; 工作区日志 → 搜索所有来源; 工作区日志 → 附有记录参考信息的人物档案; 工作区日志 → 已保存版本和附件收据; 搜索所有来源 → 分析师时间线和来源登记册; 附有记录参考信息的人物档案 → 分析师时间线和来源登记册; 已保存版本和附件收据 → 分析师时间线和来源登记册; 工作区日志 → 带签名的证据 ZIP 文件; 分析师时间线和来源登记册 → 附带经单独验证的证据材料的案件移交; 带签名的证据 ZIP 文件 → 附带经单独验证的证据材料的案件移交</desc><defs><marker id="flow-3-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M160.4 46.0C160.4 68.0 343.4 68.0 343.4 90.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:193" pathLength="193"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.1s" repeatCount="indefinite" path="M160.4 46.0C160.4 68.0 343.4 68.0 343.4 90.0"/></circle><path class="flow-edge" d="M282.4 46.0C282.4 68.0 343.4 68.0 343.4 90.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:80" pathLength="80"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M282.4 46.0C282.4 68.0 343.4 68.0 343.4 90.0"/></circle><path class="flow-edge" d="M404.4 46.0C404.4 68.0 343.4 68.0 343.4 90.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:80" pathLength="80"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M404.4 46.0C404.4 68.0 343.4 68.0 343.4 90.0"/></circle><path class="flow-edge" d="M526.4 46.0C526.4 68.0 343.4 68.0 343.4 90.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:193" pathLength="193"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.1s" repeatCount="indefinite" path="M526.4 46.0C526.4 68.0 343.4 68.0 343.4 90.0"/></circle><path class="flow-edge" d="M343.4 130.0C343.4 152.0 61.4 152.0 61.4 174.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:289" pathLength="289"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="3.2s" repeatCount="indefinite" path="M343.4 130.0C343.4 152.0 61.4 152.0 61.4 174.0"/></circle><path class="flow-edge" d="M343.4 130.0C343.4 152.0 238.5 152.0 238.5 174.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:119" pathLength="119"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M343.4 130.0C343.4 152.0 238.5 152.0 238.5 174.0"/></circle><path class="flow-edge" d="M343.4 130.0C343.4 152.0 443.2 152.0 443.2 174.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:114" pathLength="114"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M343.4 130.0C343.4 152.0 443.2 152.0 443.2 174.0"/></circle><path class="flow-edge" d="M61.4 214.0C61.4 236.0 247.7 236.0 247.7 258.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:196" pathLength="196"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="2.2s" repeatCount="indefinite" path="M61.4 214.0C61.4 236.0 247.7 236.0 247.7 258.0"/></circle><path class="flow-edge" d="M238.5 214.0C238.5 236.0 247.7 236.0 247.7 258.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:45" pathLength="45"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M238.5 214.0C238.5 236.0 247.7 236.0 247.7 258.0"/></circle><path class="flow-edge" d="M443.2 214.0C443.2 236.0 247.7 236.0 247.7 258.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:205" pathLength="205"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="2.3s" repeatCount="indefinite" path="M443.2 214.0C443.2 236.0 247.7 236.0 247.7 258.0"/></circle><path class="flow-edge" d="M343.4 130.0C343.4 152.0 630.7 152.0 630.7 174.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:294" pathLength="294"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="3.3s" repeatCount="indefinite" path="M343.4 130.0C343.4 152.0 630.7 152.0 630.7 174.0"/></circle><path class="flow-edge" d="M247.7 298.0C247.7 320.0 439.2 320.0 439.2 342.0" marker-end="url(#flow-3-arrow)" style="--i:3;--len:201" pathLength="201"/><circle class="flow-pulse" r="3.2" style="--i:3"><animateMotion begin="indefinite" dur="2.2s" repeatCount="indefinite" path="M247.7 298.0C247.7 320.0 439.2 320.0 439.2 342.0"/></circle><path class="flow-edge" d="M630.7 214.0C630.7 278.0 439.2 278.0 439.2 342.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:243" pathLength="243"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="2.7s" repeatCount="indefinite" path="M630.7 214.0C630.7 278.0 439.2 278.0 439.2 342.0"/></circle><g class="flow-node" style="--i:0"><rect x="108.4" y="6.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="160.4" y="26.0">频道</tspan></text></g><g class="flow-node" style="--i:0"><rect x="230.4" y="6.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="282.4" y="26.0">群组</tspan></text></g><g class="flow-node" style="--i:0"><rect x="352.4" y="6.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="404.4" y="26.0">私聊</tspan></text></g><g class="flow-node" style="--i:0"><rect x="474.4" y="6.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="526.4" y="26.0">机器人</tspan></text></g><g class="flow-node" style="--i:1"><rect x="291.4" y="90.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="343.4" y="110.0">工作区日志</tspan></text></g><g class="flow-node" style="--i:2"><rect x="6.0" y="174.0" width="110.8" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="61.4" y="194.0">搜索所有来源</tspan></text></g><g class="flow-node" style="--i:2"><rect x="134.8" y="174.0" width="207.4" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="238.5" y="194.0">附有记录参考信息的人物档案</tspan></text></g><g class="flow-node" style="--i:2"><rect x="360.2" y="174.0" width="166.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="443.2" y="194.0">已保存版本和附件收据</tspan></text></g><g class="flow-node" style="--i:2"><rect x="544.2" y="174.0" width="172.9" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="630.7" y="194.0">带签名的证据 ZIP 文件</tspan></text></g><g class="flow-node" style="--i:3"><rect x="150.9" y="258.0" width="193.6" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="247.7" y="278.0">分析师时间线和来源登记册</tspan></text></g><g class="flow-node" style="--i:4"><rect x="335.5" y="342.0" width="207.4" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="439.2" y="362.0">附带经单独验证的证据材料的</tspan><tspan x="439.2" y="380.0">案件移交</tspan></text></g></svg></div><details class="flow-steps"><summary>图表转为文本</summary><ol><li>频道 → 工作区日志</li><li>群组 → 工作区日志</li><li>私聊 → 工作区日志</li><li>机器人 → 工作区日志</li><li>工作区日志 → 搜索所有来源</li><li>工作区日志 → 附有记录参考信息的人物档案</li><li>工作区日志 → 已保存版本和附件收据</li><li>搜索所有来源 → 分析师时间线和来源登记册</li><li>附有记录参考信息的人物档案 → 分析师时间线和来源登记册</li><li>已保存版本和附件收据 → 分析师时间线和来源登记册</li><li>工作区日志 → 带签名的证据 ZIP 文件</li><li>分析师时间线和来源登记册 → 附带经单独验证的证据材料的案件移交</li><li>带签名的证据 ZIP 文件 → 附带经单独验证的证据材料的案件移交</li></ol></details></figure>
+<h2 id="1-define-the-case-and-collect-the-whole-account">1. 界定案件并收集完整案情<a class="anchor" href="#1-define-the-case-and-collect-the-whole-account" aria-label="本节链接">#</a></h2>
+<ol>
+<li>在专属工作区中连接采集账户。在外部案件记录中，
+    记录案件编号、账户 ID、工作区、监控起始时间以及可信
+    签名密钥指纹。</li>
+<li>开放<strong>来源 → 监控范围 → 调查模式</strong>。该预设选项包括
+    <strong>“整个账户</strong>”、“频道/群组/私聊/机器人”、“自身操作”、“来源
+    资料”以及新发现来源的最新 200 条可见消息。
+    请仔细核对，点击<strong>“保存范围</strong>”，并完成范围确认。</li>
+<li><strong>加载聊天记录</strong>，并将来源与该账户的对话列表进行比对。 检查
+    排除项。<strong>参数 → 从账户列表中读取的聊天数量</strong>默认值为
+    1,000，最大支持 20,000。超出列表限制的来源会在
+    其变为活跃状态时被添加。记录实际枚举的内容。</li>
+<li>在<strong>“记录设置</strong>”中，选择<strong>“所有可见活动</strong>”，并保存
+    监控设置。请检查附件类型/限制及可用磁盘空间。</li>
+<li>开始观察。验证一条受控的新消息、编辑操作和删除操作，然后
+    保留测试参考信息及任何失败情况。</li>
+</ol>
+<p>“整个账户”范围会在保存的设置范围内记录账户可见的活动。
+该工具不会访问秘密聊天，也不会自动加入所有关联的群组。此外，
+它也不会补录所有现有对话。请参阅<a href="../collection/#observation-scope-chosen-chats-a-folder-or-the-whole-account">“采集范围”</a>。</p>
+<h2 id="2-inventory-every-source-and-acquire-historical-context">2. 盘点所有信息来源并获取历史背景<a class="anchor" href="#2-inventory-every-source-and-acquire-historical-context" aria-label="本节链接">#</a></h2>
+<p>维护一个来源登记表，每行记录一次聊天：</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>记录</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>品牌定位</td>
+<td>工作区、账户 ID、数字聊天 ID、标题和类型</td>
+</tr>
+<tr>
+<td>可见性</td>
+<td>成员身份/角色、访问权限（已确认或未确认）、排除项</td>
+</tr>
+<tr>
+<td>实时捕获</td>
+<td>开始时间、选定的事件类型及后续政策变更</td>
+</tr>
+<tr>
+<td>日志历史</td>
+<td>快照请求/完成情况、限制、时间及记录引用</td>
+</tr>
+<tr>
+<td>完整历史</td>
+<td>按聊天分组的导出文件名、边界及完成/失败状态均附有数字签名</td>
+</tr>
+<tr>
+<td>附件</td>
+<td>已完成的媒体接收记录、哈希值、大小以及跳过/失败的结果</td>
+</tr>
+<tr>
+<td>覆盖范围</td>
+<td>服务中断、数据采集不完整、FloodWait、消息不可用及其他缺失情况</td>
+</tr>
+</tbody>
+</table></div>
+<p>针对每个消息源，请选用合适的采集方式：</p>
+<ul>
+<li><strong>历史快照</strong>将最近可见的消息保存到观察日志中。
+    其默认上限为 500 条；<strong>通过“参数 → 最大历史快照</strong>”可将
+    该上限提高至 10,000 条。这些是当前的历史观察记录，而非重建的编辑记录。</li>
+<li><strong>“导出完整聊天记录”→“导出完整聊天记录</strong>”，或<strong>“聊天”→“导出聊天记录</strong>”，将
+    当前可见的某次聊天记录导出为一个独立的、经过签名的 <code>chat.json</code> /
+    <code>chat.html</code> 数据包。针对案件中的各个消息源重复此操作，并保留每个结果。</li>
+<li><strong>当出现新的聊天或机器人时</strong>，可保存其资料以及多达 1,000 条最近的
+    消息；调查模式下则保存 200 条。启用该模式后，现有聊天记录不会
+    追溯性地被纳入。</li>
+<li><strong>下载可见附件时</strong>，将根据配置的策略保留相应字节数。
+    必须提供包含 SHA-256 校验值和字节数的完整 <code>media.saved</code> 收据。队列中的
+    任务、缩略图或文件名均不视为已保留的附件。</li>
+</ul>
+<p>完整聊天记录导出不会将所有
+消息填入日志或联系人档案中。如需在
+TgWitness 中分析历史记录，请使用日志快照。本工具不提供一键式全账户历史数据补全功能；完整历史记录
+的获取需按聊天记录逐个进行。无论采用哪种方式，均无法恢复 Telegram 已不再返回的内容。</p>
+<h2 id="3-preserve-the-evolving-case-and-deliberate-interactions">3. 保留不断演变的案件及有预谋的互动<a class="anchor" href="#3-preserve-the-evolving-case-and-deliberate-interactions" aria-label="本节链接">#</a></h2>
+<p>将活跃案件聊天室标记为优先来源。审查复核间隔、持续
+补录及媒体结果。在使用该账户期间，请保持采集器处于监控状态。
+使用<strong>“聊天”→“个人资料”→“立即保存个人资料”</strong>以保留来源元数据，例如
+描述和机器人命令。这与从已保存消息中生成的
+联系人个人资料是分开的。</p>
+<p>当案件涉及追踪消息来源或与机器人交互时：</p>
+<ol>
+<li><strong>“打开 Telegram 链接 → 保存预览”</strong>功能会在执行操作前记录所提供的链接及返回的
+    预览内容。</li>
+<li><strong>“加入/打开并观察”</strong>操作将执行加入/打开操作，并在提供时发送机器人的 start
+    参数。待批准的加入请求将被记录为“待处理”。</li>
+<li>面板生成的文本回复和支持的按钮点击操作将保留
+    <code>interaction.requested</code> 和 <code>interaction.result</code>。回调收据可保留
+    返回的弹出文本、警报状态和 URL。</li>
+</ol>
+<p>这些是真实的账户操作。在另一款 Telegram 应用中点击回调按钮的行为
+对采集器不可见，尽管由此产生的消息或编辑操作可能被记录。该
+微型客户端不处理网页应用、支付、电话或位置相关的工作流。
+有关确切的行为，请参阅<a href="../collection/#act-from-the-panel">面板交互说明</a>。</p>
+<h2 id="4-connect-observations-across-chats">4. 关联不同聊天记录中的观察结果<a class="anchor" href="#4-connect-observations-across-chats" aria-label="本节链接">#</a></h2>
+<p>在<strong>“日志</strong>”中，选择<strong>“所有来源</strong>”并搜索已记录的内容。打开匹配的
+记录，并保留工作区、聊天、消息 ID、序列号和记录哈希值。</p>
+<p>在相关聊天中，打开<strong>“联系人”→“启用个人资料</strong>”，然后查看某人：</p>
+<ul>
+<li>随时间推移观察到的名称/用户名以及 Telegram 数字 ID。</li>
+<li>回复内容需包含源记录的引用信息。</li>
+<li><strong>此外……</strong>该 ID 曾在此工作区日志中的其他聊天记录中发过言。</li>
+<li>活动记录、编辑/删除操作，以及被提及的钱包、手机、用户名和链接。</li>
+<li>已保存的头像元数据及类似的缓存头像，并标注了各自的来源。</li>
+</ul>
+<p>在调查结论中使用衍生个人资料前，请先打开引用的记录。个人资料涵盖
+拥有已保存消息的人员，而非群组中的每位成员。<strong>参数 → “每个事实引用的记录数”
+</strong>仅限制引用列表的范围，而非底层活动数量。
+提及和头像相似度仅为线索；它们不能证明所有权或身份。</p>
+<p>在示例中：</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>链接</th>
+<th>记录</th>
+<th>支持的观察内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>同一发件人账号</td>
+<td>群组 #146 及后续私信 #205</td>
+<td>两者均提供 Telegram 发件人 ID 71001</td>
+</tr>
+<tr>
+<td>同一目标</td>
+<td>#146，机器人键盘 #173，频道编辑 #188，私信 #205</td>
+<td>所有内容均包含<code>pay.example.invalid/new</code>；所有权/控制权尚未确定</td>
+</tr>
+<tr>
+<td>相同的保存文件</td>
+<td>已完成媒体收据 #151 和 #209</td>
+<td>所保存字节的完整 SHA-256 值完全一致</td>
+</tr>
+<tr>
+<td>频道来源说明</td>
+<td>#101 和 #188</td>
+<td>若未注明发件人，请勿将频道帖子归因于用户 71001</td>
+</tr>
+</tbody>
+</table></div>
+<p>请对比附件哈希值及其关联的消息引用。文件完全相同
+并不能证明其创建者、转发者或共同操作者。仅凭相同的名称和
+相似的头像，不能将两个 Telegram ID 归为同一人。</p>
+<h2 id="5-build-the-cross-chat-timeline">5. 构建跨聊天室时间线<a class="anchor" href="#5-build-the-cross-chat-timeline" aria-label="本节链接">#</a></h2>
+<p>使用<strong>“聊天</strong>”中的已保存版本及其<strong>日志记录 #…</strong> 链接。在
+<strong>日志中</strong>，将<strong>所有来源</strong>与<strong>编辑</strong>、<strong>删除</strong>及<strong>覆盖内容</strong>合并。
+如已提供，请同时保留 <code>source_at</code> 和 <code>observed_at</code>。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>示例观察时间</th>
+<th>参考资料</th>
+<th>观察</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>09:00</td>
+<td>频道 #101</td>
+<td>原始目标已捕获</td>
+</tr>
+<tr>
+<td>09:12</td>
+<td>群组 #146；媒体 #151</td>
+<td>已发布新目标；文件下载完成</td>
+</tr>
+<tr>
+<td>09:16</td>
+<td>机器人 #173</td>
+<td>键盘指向新目的地</td>
+</tr>
+<tr>
+<td>09:20</td>
+<td>频道 #188</td>
+<td>公告已编辑；两个保存版本均保留</td>
+</tr>
+<tr>
+<td>09:24</td>
+<td>私有 #205; 媒体 #209</td>
+<td>同一发件人 ID 的收件人地址重复；文件字节内容保持不变</td>
+</tr>
+<tr>
+<td>09:28</td>
+<td>群组 #231</td>
+<td>已收到删除通知；删除者及确切删除时间不详</td>
+</tr>
+</tbody>
+</table></div>
+<p>其他记录发生在这些示例引用之间。序列号用于排序
+观察结果；历史快照可能包含更早的源日期，且到达时间
+晚于实时事件。请区分快照、恢复的消息、删除通知以及
+重新检查时缺失的结果。 将覆盖缺口标记为未知时间段。后续
+历史数据的获取并不意味着可以追溯性地确立不间断的观测记录。</p>
+<h2 id="6-add-account-perspectives-without-losing-their-origin">6. 添加账户视角，同时保留其来源信息<a class="anchor" href="#6-add-account-perspectives-without-losing-their-origin" aria-label="本节链接">#</a></h2>
+<p>为每个独立账户使用单独的工作区，并重复执行其清点操作。
+每次比对时，请保留账户 ID、角色、签名密钥指纹及来源参考信息。
+消息编号并非跨聊天/账户的全局标识符。</p>
+<p>跨工作区的关联分析需在外部案件笔记或分析
+工具中进行。TgWitness 目前不支持全局跨工作区搜索、合并时间线、
+调查图谱或综合案件档案。<strong>单个</strong>
+频道/超级群的多账户导出属于另一项操作，并非账户日志的合并。</p>
+<p>对于较长的操作，需通过<a href="../witness/">独立见证人</a>保持边界。
+使用受控投递检查来验证
+每个账户的捕获路径和可见性。</p>
+<h2 id="7-assemble-and-verify-the-case-handoff">7. 整理并核实案件移交<a class="anchor" href="#7-assemble-and-verify-the-case-handoff" aria-label="本节链接">#</a></h2>
+<p>请将以下内容整理到由分析师编制的案件目录中：</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>资料</th>
+<th>目的</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>案件笔记与来源登记册</td>
+<td>问题、数据收集政策、访问权限/角色、调查结果、替代解释及数据缺口</td>
+</tr>
+<tr>
+<td>时间线</td>
+<td>每条记录均包含时间信息以及工作区/聊天/消息/序列的引用信息</td>
+</tr>
+<tr>
+<td>每个工作区对应的签名证据 ZIP 文件</td>
+<td>完整的记录日志、清单及包含的保存媒体；面板过滤器不会缩小日志导出范围</td>
+</tr>
+<tr>
+<td>单独签名的用户资料文件</td>
+<td>已根据对应的工作区证据核查了引用的来源</td>
+</tr>
+<tr>
+<td>带签名的完整聊天记录导出</td>
+<td>当前可见历史记录的采集，与观察日志分开处理</td>
+</tr>
+<tr>
+<td>可信指纹和早期检查点</td>
+<td>关键身份信息与保留日志的边界</td>
+</tr>
+<tr>
+<td>若已配置，则生成Witness证据文件</td>
+<td>独立日志、签名条目和见证指纹</td>
+</tr>
+<tr>
+<td>验证结果和已交付文件的哈希值</td>
+<td>检查了什么内容、传输了哪些字节以及传输给了谁</td>
+</tr>
+</tbody>
+</table></div>
+<p>来自可信安装环境，包含文件名及每个工作区的实际指纹：</p>
+<pre><code class="language-sh">python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
+python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --evidence evidence.zip
+python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256</code></pre>
+<p>保留实际的验证结果和原始证据文件。顶级案件
+目录、来源登记册和分析师结论均在外部维护；
+每个 TgWitness 证据文件都有其独立的签名和验证流程。</p>
+<h2 id="adapt-the-investigation">调整调查<a class="anchor" href="#adapt-the-investigation" aria-label="本节链接">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>案例</th>
+<th>追踪</th>
+<th>交付</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>由机器人驱动的订单/支付纠纷</td>
+<td>条目公告 → 已保存链接预览 → 机器人启动参数 → 消息和键盘版本 → 面板回调收据 → 私信/群组跟进</td>
+<td>已观察到的报价/响应时间线及经过验证的来源；仅凭支付链接无法证明已发生支付</td>
+</tr>
+<tr>
+<td>事件发生后被删除的消息</td>
+<td>所有受影响的聊天记录 → 保存的原始内容/编辑记录 → 删除或复查时缺失的结果 → 保留的媒体文件 → 覆盖范围及其他账户视角</td>
+<td>保留版本及明确标注的未知时间段；不假设任何虚构的删除行为者</td>
+</tr>
+<tr>
+<td>某参与者在不同聊天群中使用了不同的名字</td>
+<td>发件人编号 → 姓名/用户名历史 → 回复 → 其他被观察到的聊天记录 → 提及的目标/文件</td>
+<td>所引用的 Telegram 账号活动时间线，其中现实世界中的身份信息与关系假设被明确区分开来</td>
+</tr>
+</tbody>
+</table></div>
+<p><a href="../collection/">收藏参考</a> · <a href="../evidence/#people-profiles">个人资料验证</a> ·
+<a href="../evidence/#investigation-handoff">证据移交</a> · <a href="../verification/">验证已完成</a></p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/INVESTIGATION.md">在 GitHub 上编辑此页面 ↗</a><a class="next-guide" href="../features/"><span>下一步</span><strong>功能与限制 →</strong></a><p>这些指南描述了当前的实现方案。验证结果和剩余缺陷在其他文档中单独记录。 <a href="../verification/">已测试的内容 →</a></p></footer>
+</main>
+<aside class="toc" aria-label="本页面内容"><p class="nav-label">本页面内容</p><a href="#worked-case-a-destination-changes-across-four-conversations">案例分析：四个对话中目的地发生变化</a><a href="#1-define-the-case-and-collect-the-whole-account">1. 界定案件并收集完整案情</a><a href="#2-inventory-every-source-and-acquire-historical-context">2. 盘点所有信息来源并获取历史背景</a><a href="#3-preserve-the-evolving-case-and-deliberate-interactions">3. 保留不断演变的案件及有预谋的互动</a><a href="#4-connect-observations-across-chats">4. 关联不同聊天记录中的观察结果</a><a href="#5-build-the-cross-chat-timeline">5. 构建跨聊天室时间线</a><a href="#6-add-account-perspectives-without-losing-their-origin">6. 添加账户视角，同时保留其来源信息</a><a href="#7-assemble-and-verify-the-case-handoff">7. 整理并核实案件移交</a><a href="#adapt-the-investigation">调整调查</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>开源 · 可在您的设备上运行</span><a href="../../../../LICENSE">MIT 许可协议</a><a href="../notice/">操作员通知</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">安全</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "等待消息", "Step through a fictional send, edit and delete.": "通过一个虚构的发送、编辑和删除过程进行演示。", "No observations yet. Start the sequence or advance one event.": "尚无观察记录。开始序列或跳转至下一事件。", "Meet at 10:00": "10:00 见面", "A new message is visible in the chat.": "聊天中显示了一条新消息。", "Record 1 appended: the collector observed the original message.": "已附录记录 1 条：采集器已捕获原始消息。", "Meet at 11:00": "11:00 见面", "The current text changes. The earlier observation stays.": "当前文本内容有所变更。先前的观察结果仍然有效。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "记录 2 已追加：该编辑内容为新观察结果。记录 1 仍保留原始文本。", "Message deleted": "消息已删除", "The message has disappeared from the chat view.": "该消息已从聊天界面中消失。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "已添加记录 3：删除通知与两个被观察到的版本一同保留。", "0 records": "0 条记录", "1 record": "1 条记录", "2 records": "2 条记录", "3 records": "3 条记录", "Complete / {n} of 3": "已完成 / {n}/3", "Step / {n} of 3": "第 {n} 步（共 3 步）", "Pause": "暂停", "Replay sequence": "回放序列", "Play sequence": "播放序列", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "静态示例已上线。如需交互式计算哈希值，请通过 HTTPS 访问此页面，或在支持 Web Crypto 的本地预览环境中打开。", "No record supplied": "未提供记录", "Tail removed": "尾部内容已删除", "≠ saved hash": "≠ 已保存的哈希值", "Rebuilt · different hash": "重建 · 哈希值不同", "= saved hash": "= 已保存的哈希值", "Same length and matching head.": "篇幅相同且标题一致。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "这三个计算出的哈希值均与保存的哈希值一致。该样本符合保留的三个记录边界。", "Same saved head; the journal prefix fails verification.": "保存的头部信息相同；日志前缀验证失败。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "记录 2 与其保存的哈希值不再匹配。若仅检查最终存储的头部，则会遗漏此问题；验证器会检查每一条记录。", "Head differs from the retained checkpoint.": "标题与保留的检查点不同。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "重建的哈希值相互关联，但最终的头部已发生变化。保留的检查点拒绝接受这一历史记录。对于已更改的记录，原始签名也会验证失败。", "Too short: 2 supplied records \u003c 3 retained records.": "内容过短：提供的记录有 2 条，而保留的记录少于 3 条。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "剩下的两个哈希值仍然匹配。保留的检查点揭示了缺失的部分。如果没有那个早先的边界，仅凭这个较短的前缀是无法揭示这一遗漏的。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "此浏览器不支持哈希计算。下方的公式和静态说明仍可查看。", "{n} records": "{n}条记录", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "已接受：计数持续增加，签名已验证，密钥匹配。该见证者保留了这一新边界。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "回滚：签名后的结果报告的记录数量少于上次被接受的检查点。Witness 会记录该问题，并保留较早被接受的边界。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "分叉：计数保持不变，但分支头不同。见证者会记录该分歧，并保留先前被接受的分界点。", "No answer": "无回答", "boundary unknown": "边界未知", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "无响应：该工具会记录验证失败的情况。它无法确定收集器的当前状态。如果该工具仍能访问 Bot API 且其发布政策允许，则会发布该失败信息。", "Send {n}": "发送 {n}", "Edit {n}": "编辑 {n}", "Delete {n}": "删除 {n}", "Both accounts captured all six expected observations in this example.": "在这项示例中，这两个账户均捕获了预期的全部六项观察结果。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "账户 B 依然成功捕获了 6 条中的 6 条。其中两条收据的捕获耗时较长。捕获率和收据延迟反映的是不同的问题。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "账户 B 在截止时间前捕获了 6 条中的 5 条（83.3%）。缺失的编辑操作未测得延迟。此结果仅描述了这六项受控操作。", "not observed by cutoff": "未在截止时间前观察到", "{s} seconds": "{s}秒", "Exact values follow in the table.": "具体数值见下表。", "{s} s": "{s} s", "Not observed": "未发现", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "四个聊天群组提供了不同的观察结果。请追溯每条连接的源记录；在未确认发件人身份的情况下，请勿将该频道帖子归因于用户 71001。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "记录 #146 和 #205 显示相同的发件人 ID：71001。这将同一 Telegram 账号在两个聊天群组中发布的帖子关联起来。但这并不能识别现实世界中的具体个人，也无法确定该频道帖子的发布者。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "目标地址 pay.example.invalid/new 出现在群组记录 #146、机器人键盘 #173、频道编辑 #188 以及私信 #205 中。目标地址的重复出现表明这些内容之间存在关联；但这并不能证明这些账户受共同控制。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "在此虚构案例中，已完成的媒体收据 #151 和 #209 具有完全相同的 SHA-256 值。请对比实际字节内容及其关联的消息记录。该匹配文件既未标识其创建者，也无法证明是谁转发了该文件。", "the encrypted off-site copy": "加密的异地副本", "notifications": "通知", "checkpoint hashes for timestamps": "时间戳的检查点哈希值", "signed checkpoints for the witness": "TgWitness 的签名检查点", "Switched on in this example": "在此示例中已启用", "Optional · off by default": "可选 · 默认关闭", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "离开这台机器时：Telegram 连接和 {list}。除此之外别无他物。", "Default: only the Telegram connection leaves this machine.": "默认设置：仅 Telegram 连接会离开这台机器。", "{done} of {total} done": "已完成 {done}/{total}", "Mark step {n} as done": "将步骤 {n} 标记为已完成", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "文案", "Copied": "已复制", "Command copied.": "已复制该指令。", "Selected — Ctrl/Cmd+C": "选中 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "已选中命令。请手动复制。", "Command copied to clipboard.": "命令已复制到剪贴板。", "Select text": "选择文本", "Clipboard unavailable. Command selected; copy it manually.": "剪贴板不可用。已选中命令；请手动复制。", "A message arrives. The first observation is saved.": "一条消息送达。首次记录被保存。", "The time changes. Both captured versions stay.": "时间会改变，但两个记录版本都会保留下来。", "The message disappears. The captured history remains.": "消息虽已消失，但记录的历史依然存在。", "Pause example animation": "暂停示例动画", "Play example animation": "播放示例动画", "Play": "播放", "Full-size workspace screenshot": "全屏工作区截图", "Workspace screenshot · fictional data": "工作区截图 · 虚构数据", "Close": "关闭", "Close screenshot": "关闭截图", "Scrollable full-size screenshot": "可滚动全屏截图", "Enlarge: {name}": "放大：{name}", "View full size": "查看大图"}</script>
+</body></html>

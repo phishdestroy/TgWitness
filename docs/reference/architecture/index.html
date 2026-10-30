@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Architecture | TgWitness</title>
+<meta name="description" content="Components of the collector, panel, journal, workers and witness, and how data moves between them."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/docs/reference/architecture/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Architecture | TgWitness"><meta property="og:description" content="Components of the collector, panel, journal, workers and witness, and how data moves between them.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/docs/reference/architecture/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/architecture/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/architecture/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/architecture/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/architecture/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/architecture/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/architecture/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/architecture/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/architecture/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/architecture/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/architecture/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/architecture/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/architecture/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/architecture/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/architecture/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/docs/reference/architecture/", "url": "https://phishdestroy.github.io/TgWitness/docs/reference/architecture/", "name": "Architecture | TgWitness", "description": "Components of the collector, panel, journal, workers and witness, and how data moves between them.", "inLanguage": "en", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://phishdestroy.github.io/TgWitness/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://phishdestroy.github.io/TgWitness/docs/"}, {"@type": "ListItem", "position": 3, "name": "Reference", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Architecture", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/architecture/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../docs.css">
+<link rel="stylesheet" href="../../../learn.css">
+<script src="../../../docs.js" defer></script>
+<script src="../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Documentation</span></a>
+<nav aria-label="Guides"><a href="../../concepts/">Visual guide</a><a href="../../">All guides</a><a href="../">Reference</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Language"><span aria-hidden="true">◍</span> English</summary><div class="lang-list"><a href="./" hreflang="en" lang="en" aria-current="true">English</a><a href="../../../ru/docs/reference/architecture/" hreflang="ru" lang="ru">Русский</a><a href="../../../uk/docs/reference/architecture/" hreflang="uk" lang="uk">Українська</a><a href="../../../es/docs/reference/architecture/" hreflang="es" lang="es">Español</a><a href="../../../pt/docs/reference/architecture/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../tr/docs/reference/architecture/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../ar/docs/reference/architecture/" hreflang="ar" lang="ar">العربية</a><a href="../../../fa/docs/reference/architecture/" hreflang="fa" lang="fa">فارسی</a><a href="../../../ur/docs/reference/architecture/" hreflang="ur" lang="ur">اردو</a><a href="../../../hi/docs/reference/architecture/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../id/docs/reference/architecture/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../vi/docs/reference/architecture/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../zh/docs/reference/architecture/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Switch between light and dark theme"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Guides"><a href="../../../guides/modes.html">Modes, scenarios and evidence levels</a><p class="nav-label">First steps</p><a href="../../start/">Start in minutes</a><a href="../../accounts/">Connect an account</a><a href="../../proxies/">Choose a proxy</a><a href="../../exports/">Export and verify</a><p class="nav-label">Understand the evidence</p><a href="../../concepts/">See how evidence works</a><a href="../../cases/">Investigate across all chats</a><a href="../../security/">Keep it secure</a><p class="nav-label">Go further</p><a href="../../witness/">Set up a witness bot</a><a href="../../server/">Keep it running</a><a href="../../troubleshooting/">Find what went wrong</a></nav><nav class="wiki-nav" aria-label="Reference"><p class="nav-label"><a class="nav-label-link" href="../">Reference</a></p><details class="wiki-group"><summary>Set up</summary><a href="../quickstart/">Quick start</a><a href="../accounts/">Accounts and session formats</a><a href="../connection/">Connection, proxies and data protection</a><a href="../deployment/">Deployment</a></details><details class="wiki-group"><summary>Collect</summary><a href="../collection/">How collection works</a><a href="../operations/">Workflows and operations</a><a href="../investigation/">Investigation mode</a><a href="../features/">Features and limits</a></details><details class="wiki-group"><summary>Evidence</summary><a href="../how-it-works/">How the evidence works</a><a href="../evidence/">Evidence format</a><a href="../witness/">Independent witness</a><a href="../timestamp/">Timestamps</a></details><details class="wiki-group" open><summary>Security & project</summary><a href="../security/">Security and data handling</a><a href="./" aria-current="page">Architecture</a><a href="../verification/">What has been tested</a><a href="../license/">Licence and architectural incompatibility notice</a><a href="../notice/">Operator incompatibility notice</a><a href="../changelog/">Changelog</a></details></nav><p class="sidebar-note">v0.7.0<br>Open source · Runs on your machine</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Guides"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Documentation</a> <span aria-hidden="true">/</span> <a href="../">Reference</a> <span aria-hidden="true">/</span> <span aria-current="page">Architecture</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Search the documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Try proxy, hash chain, token or witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Clear search" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Type a word to search the guides and the reference. Search stays in your browser.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Reference / Security &amp; project</p><h1>Architecture</h1><p class="guide-outcome">Components of the collector, panel, journal, workers and witness, and how data moves between them.</p><div class="wiki-body"><p>One Python process hosts the FastAPI panel and any number of isolated workspaces,
+each with a Telethon user-account client.
+SQLite holds an append-only signed event journal and mutable operational settings.
+An encrypted vault holds API credentials, the StringSession, and signing key.
+The frontend is plain bundled HTML/CSS/JavaScript: no Node build, CDNs, or runtime
+frontend downloads are needed.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>collector.py</td>
+<td>Authorization, dialog selection, updates, snapshots, media queue, connection monitoring</td>
+</tr>
+<tr>
+<td>interactions.py / telegram_client.py</td>
+<td>Explicit panel actions, signed receipts, persistent request IDs and task-local callback/join retry policy</td>
+</tr>
+<tr>
+<td>message_content.py</td>
+<td>Observable message comparison, excluding transport access metadata</td>
+</tr>
+<tr>
+<td>workers.py</td>
+<td>Wait for export file workers before cancellation cleanup</td>
+</tr>
+<tr>
+<td>store.py</td>
+<td>WAL transactions, ordered event chain, query filters, operational settings</td>
+</tr>
+<tr>
+<td>security.py</td>
+<td>Private-file creation, encrypted vault, Ed25519 signing, single-process lock</td>
+</tr>
+<tr>
+<td>evidence.py</td>
+<td>Complete-journal export, derivatives, checkpoints, attachment verification</td>
+</tr>
+<tr>
+<td>verify.py</td>
+<td>Standalone, read-only verifier (stdlib + cryptography): archives, coverage, witness journals and channel posts, profile files</td>
+</tr>
+<tr>
+<td>app.py</td>
+<td>Authenticated API, lifecycle, request validation, static panel</td>
+</tr>
+<tr>
+<td>profiles.py</td>
+<td>Multiple isolated account collectors, shared panel token, per-workspace lifecycle</td>
+</tr>
+<tr>
+<td>provenance.py</td>
+<td>Signed acquisition-run identity, code and dependency measurements</td>
+</tr>
+<tr>
+<td>network.py</td>
+<td>Validated per-workspace routes; redacted status and evidence; Telethon transport options</td>
+</tr>
+<tr>
+<td>sessions.py</td>
+<td>Offline read-only conversion of reviewed Telethon SQLite schemas</td>
+</tr>
+<tr>
+<td>account_import.py</td>
+<td>In-memory detection and normalization of supported account files and JSON</td>
+</tr>
+<tr>
+<td>tdata.py</td>
+<td>Bounded modern TData ZIP reader, checksum/decryption validation, no extraction</td>
+</tr>
+<tr>
+<td>doctor.py</td>
+<td>Local readiness checks without collection, login or package installation</td>
+</tr>
+<tr>
+<td>download.py</td>
+<td>Authenticated streaming export download with bounded reads and no overwrites</td>
+</tr>
+<tr>
+<td>monitoring.py</td>
+<td>Validated per-workspace event policy and per-type attachment rules, shared by handlers, status and signed receipts</td>
+</tr>
+<tr>
+<td>scope.py</td>
+<td>Observation scope (chosen chats, Telegram folder, whole account), source types, exclusions, recheck tiers</td>
+</tr>
+<tr>
+<td>dossier.py</td>
+<td>People profiles per chat built from saved records: facts with record references, avatar SHA-256/pHash, mention extraction</td>
+</tr>
+<tr>
+<td>witness_api.py</td>
+<td>Read-only witness tokens and the signed journal head they may fetch</td>
+</tr>
+<tr>
+<td>witness.py</td>
+<td>Independent witness process: own key and journal, head checks, signed channel posts, export</td>
+</tr>
+<tr>
+<td>alerts.py</td>
+<td>Apprise notifications and the panel's notification list</td>
+</tr>
+<tr>
+<td>logging_config.py</td>
+<td>Console logging and rotating server diagnostics for windowless launches</td>
+</tr>
+<tr>
+<td>static/</td>
+<td>Responsive interface, local access gate, filters, details, exports, account setup</td>
+</tr>
+<tr>
+<td>demo.py</td>
+<td>Clearly labeled synthetic journal, isolated from real collection</td>
+</tr>
+</tbody>
+</table></div>
+<p>Observation handlers are registered before connecting. Live collection is gated by
+the active client identity, explicit running state, enabled sources or the observation
+scope (folder or whole-account modes add a new chat as a source on its first update), and event
+policy. Rejected and superseded clients cannot contribute live updates. Raw reactions and membership updates
+preserve visibility limits. Incoming message content and its durable media job are
+committed together. Jobs preserve the original TL descriptor and bind its hash to
+the signed message observation. Sender/editor/deleter semantics are separated.</p>
+<p>Each workspace accepts one account and has its own directory and signing identity.
+The main workspace remains at the root for compatibility; additional workspaces live in
+profiles/&lt;id&gt;/. One bearer token controls the whole installation; workspaces are not
+separate authorization tenants. Process locks protect directories; database locks
+serialize event insertion. Each append commits synchronously
+to SQLite WAL with FULL synchronous mode. Event update/delete triggers prevent
+ordinary application edits; filesystem administrators remain inside the trust boundary.</p>
+<p>API authorization is a bearer token. Login operations are serialized and time-bounded.
+Account uploads use a dedicated 12 MiB encoded-body limit and an 8 MiB decoded-file
+limit; normal API requests retain the 16 KiB limit. Conversion runs in a worker
+thread, keeps uploads in memory, and returns normalized input to the authenticated
+browser. QR login has a per-workspace candidate, short-lived identifier, waiter task,
+and explicit cancellation. Only accepted authorization becomes the active client.
+Telegram FloodWait is returned with a Retry-After value; credentials and raw RPC
+error messages are not exposed in API errors. Exports run outside the async event
+loop and are serialized per workspace. They stream a stable read snapshot, and can
+coexist with continuing WAL writes. Workspace collectors share the process/event loop.</p>
+<p>Current history snapshots and live updates can overlap. Both are separate observations,
+labeled by source; duplicates are not silently collapsed. No inference from missing
+IDs, fabricated deleted text, forced member enumeration, or automatic group joining
+is implemented.</p>
+<p>For the operator-facing explanation, see <a href="../collection/">how collection works</a>
+and <a href="../accounts/">accounts and session formats</a>.</p>
+<p>Network configuration lives in the encrypted vault. Applying a route closes old
+clients and cancels unfinished login; later connections use that route with no
+direct fallback. A new external-key installation derives each workspace's Fernet key
+with HKDF-SHA256 from a master key file and a stored random salt. This protects
+secrets separately from the data directory, not plaintext journal/media contents.</p>
+<p>Local demo entry uses a separately generated process capability, never the configured
+panel token. Issuance and acceptance require explicit demo mode, a synthetic root
+without additional workspaces or an authorized session, loopback peer/Host, no proxy
+forwarding headers, and no cross-origin browser request. Live APIs retain bearer
+authentication and reject collection changes in demo mode.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ARCHITECTURE.md">Edit this page on GitHub ↗</a><a class="next-guide" href="../verification/"><span>Next step</span><strong>What has been tested →</strong></a><p>These guides describe the current implementation. Validation results and remaining gaps are documented separately. <a href="../verification/">What has been tested →</a></p></footer>
+</main>
+<aside class="toc" aria-label="On this page"></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Open source · Runs on your machine</span><a href="../../../LICENSE">MIT license</a><a href="../notice/">Operator notice</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Security</a></footer>
+<script id="site-dict" type="application/json">{}</script>
+</body></html>

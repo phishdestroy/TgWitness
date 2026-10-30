@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="ur" dir="rtl" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>اکاؤنٹس اور سیشن فارمیٹس | TgWitness</title>
+<meta name="description" content="فون، QR کوڈ یا auth کلید کے ذریعے سائن ان کریں، Telethon، Pyrogram یا Telegram Desktop سیشنز کو امپورٹ کریں، اور متعدد اکاؤنٹس چلائیں۔"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/accounts/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="ur_PK">
+<meta property="og:title" content="اکاؤنٹس اور سیشن فارمیٹس | TgWitness"><meta property="og:description" content="فون، QR کوڈ یا auth کلید کے ذریعے سائن ان کریں، Telethon، Pyrogram یا Telegram Desktop سیشنز کو امپورٹ کریں، اور متعدد اکاؤنٹس چلائیں۔">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/ur/docs/reference/accounts/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/accounts/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/accounts/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/accounts/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/accounts/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/accounts/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/accounts/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/accounts/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/accounts/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/accounts/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/accounts/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/ur/docs/reference/accounts/", "url": "https://phishdestroy.github.io/TgWitness/ur/docs/reference/accounts/", "name": "اکاؤنٹس اور سیشن فارمیٹس | TgWitness", "description": "فون، QR کوڈ یا auth کلید کے ذریعے سائن ان کریں، Telethon، Pyrogram یا Telegram Desktop سیشنز کو امپورٹ کریں، اور متعدد اکاؤنٹس چلائیں۔", "inLanguage": "ur", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "گھر", "item": "https://phishdestroy.github.io/TgWitness/ur/"}, {"@type": "ListItem", "position": 2, "name": "دستاویزات", "item": "https://phishdestroy.github.io/TgWitness/ur/docs/"}, {"@type": "ListItem", "position": 3, "name": "حوالہ", "item": "https://phishdestroy.github.io/TgWitness/ur/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "اکاؤنٹس اور سیشن فارمیٹس", "item": "https://phishdestroy.github.io/TgWitness/ur/docs/reference/accounts/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">مواد پر جائیں</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / دستاویزات</span></a>
+<nav aria-label="رہنما"><a href="../../concepts/">ویژول گائیڈ</a><a href="../../">تمام رہنما</a><a href="../">حوالہ</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="زبان"><span aria-hidden="true">◍</span> اردو</summary><div class="lang-list"><a href="../../../../docs/reference/accounts/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/accounts/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/accounts/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/accounts/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/accounts/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/accounts/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/accounts/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/accounts/" hreflang="fa" lang="fa">فارسی</a><a href="./" hreflang="ur" lang="ur" aria-current="true">اردو</a><a href="../../../../hi/docs/reference/accounts/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/accounts/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/accounts/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/accounts/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="ہلکے اور گہرے تھیم کے درمیان سوئچ کریں"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="رہنما"><a href="../../../guides/modes.html">مodes، منظرنامے اور شواہد کی سطحیں</a><p class="nav-label">ابتدائی اقدامات</p><a href="../../start/">چند منٹ میں شروع کریں</a><a href="../../accounts/">اکاؤنٹ منسلک کریں</a><a href="../../proxies/">ایک پروکسی منتخب کریں</a><a href="../../exports/">ایکسپورٹ اور تصدیق کریں</a><p class="nav-label">شواہد کو سمجھیں</p><a href="../../concepts/">دیکھیں کہ شواہد کیسے کام کرتا ہے</a><a href="../../cases/">تمام چیٹس میں تفتیش کریں</a><a href="../../security/">اسے محفوظ رکھیں</a><p class="nav-label">مزید آگے بڑھیں</p><a href="../../witness/">ویٹنس بوٹ قائم کریں</a><a href="../../server/">اسے چلتا رکھیں</a><a href="../../troubleshooting/">پتہ لگائیں کہ کیا غلط ہوا</a></nav><nav class="wiki-nav" aria-label="حوالہ"><p class="nav-label"><a class="nav-label-link" href="../">حوالہ</a></p><details class="wiki-group" open><summary>سیٹ اپ</summary><a href="../quickstart/">تیزی سے آغاز</a><a href="./" aria-current="page">اکاؤنٹس اور سیشن فارمیٹس</a><a href="../connection/">کنیکشن، پراکسیز اور ڈیٹا کی حفاظت</a><a href="../deployment/">نفاذ</a></details><details class="wiki-group"><summary>جمع کریں</summary><a href="../collection/">جمع کرنے کا طریقہ</a><a href="../operations/">ورک فلو اور آپریشنز</a><a href="../investigation/">تحقیقاتی موڈ</a><a href="../features/">خصوصیات اور حدود</a></details><details class="wiki-group"><summary>شواہد</summary><a href="../how-it-works/">شواہد کیسے کام کرتے ہیں</a><a href="../evidence/">شواہد کا فارمیٹ</a><a href="../witness/">آزاد شاہد</a><a href="../timestamp/">ٹائم اسٹیمپس</a></details><details class="wiki-group"><summary>سیکیورٹی اور پروجیکٹ</summary><a href="../security/">سیکیورٹی اور ڈیٹا ہینڈلنگ</a><a href="../architecture/">معمارِی</a><a href="../verification/">کیا جانچا گیا ہے</a><a href="../license/">لائسنس اور فنِ تعمیر کی عدم مطابقت کا نوٹس</a><a href="../notice/">آپریٹر کی عدم مطابقت کا نوٹس</a><a href="../changelog/">تبدیلیوں کا ریکارڈ</a></details></nav><p class="sidebar-note">v0.7.0<br>اوپن سورس · آپ کی مشین پر چلتا ہے</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="رہنما"><a href="../../../">گھر</a> <span aria-hidden="true">/</span> <a href="../../">دستاویزات</a> <span aria-hidden="true">/</span> <a href="../">حوالہ</a> <span aria-hidden="true">/</span> <span aria-current="page">اکاؤنٹس اور سیشن فارمیٹس</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">دستاویزات میں تلاش کریں</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="پراکسی، ہیش چین، ٹوکن یا ویٹنس آزمائیں…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="خلاصہ تلاش" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">رہنما اور حوالہ جات میں تلاش کرنے کے لیے ایک لفظ ٹائپ کریں۔ تلاش آپ کے براؤزر میں ہی رہتی ہے۔</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">حوالہ / سیٹ اپ</p><h1>اکاؤنٹس اور سیشن فارمیٹس</h1><p class="guide-outcome">فون، QR کوڈ یا auth کلید کے ذریعے سائن ان کریں، Telethon، Pyrogram یا Telegram Desktop سیشنز کو امپورٹ کریں، اور متعدد اکاؤنٹس چلائیں۔</p><div class="wiki-body"><p>TgWitness MTProto کے ذریعے ایک <strong>ٹیلیگرام صارف اکاؤنٹ</strong> (بوٹ نہیں) کے طور پر سائن ان کرتا ہے، Telethon استعمال کرتے ہوئے۔ ہر اکاؤنٹ اپنے مخصوص <strong>ورک اسپیس</strong> (جسے API اور کمانڈ لائن ٹولز میں ورک <em>اسپیس</em> کہا جاتا ہے) میں موجود ہوتا ہے، جس کا اپنا سیشن، ذرائع، جرنل اور دستخطی کلید ہوتی ہے۔</p>
+<p>سیشن فائلز، سیشن سٹرنگز اور آتھ کیز <strong>اکاؤنٹ کی اجازت نامے</strong> ہیں: جو بھی ان میں سے کسی کو اپنے پاس رکھے وہ اس اکاؤنٹ کے طور پر کام کر سکتا ہے۔ ان میں پیغامات کی تاریخ شامل نہیں ہوتی۔</p>
+<blockquote class="callout">
+<p>[!WARNING]
+<strong>ایسی کوئی بھی چیز استعمال نہ کریں جسے آپ کھونے کا متحمل نہ ہو سکیں۔</strong> ہم سختی سے مشورہ دیتے ہیں کہ ذاتی یا دیگر قیمتی اکاؤنٹس کو منسلک نہ کریں، اور کسی ایسے اکاؤنٹ پر API ID / API ہیش نہ بنائیں جسے آپ اہم سمجھتے ہوں۔ یہ اس بات کے بارے میں نہیں ہے کہ ٹی جی وٹنس (TgWitness) آزمایا ہوا نہیں ہے: ٹیلیگرام غیر متوقع طور پر اکاؤنٹس کو محدود اور مستقل طور پر بلاک کر دیتا ہے — ایسے درخواستوں کے حجم کے لیے جنہیں یہ ضرورت سے زیادہ سمجھتا ہے، چاہے کلائنٹ یا مقصد کچھ بھی ہو، اور اس کے لیے کوئی مناسب دستاویزات فراہم نہیں کرتا۔ بہت سے بلاک ناقابل واپسی ہوتے ہیں۔ مخصوص اکاؤنٹس استعمال کریں۔ ٹیسٹ رنز کا ہموار چلنا ٹیلیگرام پر منحصر ہے، نہ کہ سافٹ ویئر پر، اور مستقبل کے لیے کسی چیز کی ضمانت نہیں دیتا۔</p>
+</blockquote>
+<ul>
+<li><a href="#at-a-glance">ایک نظر میں</a></li>
+<li><a href="#before-you-start-api-id-and-api-hash">شروع کرنے سے پہلے: API ID اور API ہیش</a></li>
+<li><a href="#phone-number">فون نمبر</a> · <a href="#qr-code">کیو آر کوڈ</a> · <a href="#auth-key--dc-id">آتھ کی + ڈی سی آئی ڈی</a></li>
+<li><a href="#account-files">اکاؤنٹ فائلیں</a>: <a href="#telethon-session">ٹیلی تھون .سیشن</a> ·
+    <a href="#pyrogram-session">پائروگرام .سیشن</a> · <a href="#session--json-pair">سیشن + JSON جوڑا</a> ·
+    <a href="#telegram-desktop-tdata">TData</a> · <a href="#telethon-stringsession">اسٹرنگ سیشن</a> ·
+    <a href="#account-json">اکاؤنٹ JSON</a></li>
+<li><a href="#identify-what-you-have">پہچانیں کہ آپ کے پاس کیا ہے</a> · <a href="#unsupported-formats">غیر معاونت یافتہ فارمیٹس</a></li>
+<li><a href="#multiple-accounts">متعدد اکاؤنٹس</a> · <a href="#keeping-account-files-safe">اکاؤنٹ فائلوں کو محفوظ رکھنا</a> ·
+    <a href="#troubleshooting">مسئلہ حل کرنا</a></li>
+</ul>
+<h2 id="at-a-glance">ایک نظر میں<a class="anchor" href="#at-a-glance" aria-label="اس حصے کا لنک">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>آپ کے پاس کیا ہے</th>
+<th><strong>اکاؤنٹ شامل</strong> کریں ٹیب</th>
+<th>آپ کو یہ بھی درکار ہوگا</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>فون نمبر اور اس کے لاگ ان کوڈز تک رسائی</td>
+<td><strong>فون</strong></td>
+<td>اگر فعال ہو تو 2FA پاس ورڈ</td>
+</tr>
+<tr>
+<td>ٹیلیگرام دوسری ڈیوائس پر کھلا ہوا</td>
+<td><strong>کیو آر کوڈ</strong></td>
+<td>اگر فعال ہو تو 2FA پاس ورڈ</td>
+</tr>
+<tr>
+<td><code>.session</code>فائل (Telethon یا Pyrogram)</td>
+<td><strong>فائلیں</strong></td>
+<td>ایپ سیٹنگز کے لیے اختیاری JSON</td>
+</tr>
+<tr>
+<td><code>.session</code> + <code>.json</code> ایک ہی نام کے ساتھ</td>
+<td><strong>فائلیں</strong> (دونوں منتخب کریں)</td>
+<td>عام طور پر کچھ نہیں</td>
+</tr>
+<tr>
+<td>ٹیلیگرام ڈیسک ٹاپ کا <code>tdata</code> فولڈر</td>
+<td><strong>فائلیں</strong> (ZIP کے طور پر)</td>
+<td>اگر ڈیسک ٹاپ کا مقامی پاس کوڈ مقرر ہو تو</td>
+</tr>
+<tr>
+<td>ایک ٹیلی تھون سٹرنگ سیشن (متن، <code>.txt</code>، <code>.tgwitness-session</code>)</td>
+<td><strong>فائلیں</strong></td>
+<td>الگ API جوڑے کی ضرورت نہیں</td>
+</tr>
+<tr>
+<td><code>.json</code>، سیشن یا آتھ کی کے ساتھ</td>
+<td><strong>فائلیں</strong></td>
+<td>الگ API جوڑے کی ضرورت نہیں</td>
+</tr>
+<tr>
+<td>ایک آتھ کی (512 ہیکس اکر) اور اس کا ڈی سی نمبر</td>
+<td><strong>آتھ کی</strong></td>
+<td>اختیاری صارف شناختی نام</td>
+</tr>
+</tbody>
+</table></div>
+<p>TgWitness فائلوں کو ان کے ناموں کی بجائے ان کے <strong>مواد</strong> کی بنیاد پر پہچانتا ہے۔ فائل کا نام تبدیل کرنے سے وہ کبھی تبدیل نہیں ہوتی۔</p>
+<h2 id="before-you-start-api-id-and-api-hash">شروع کرنے سے پہلے: API ID اور API ہیش<a class="anchor" href="#before-you-start-api-id-and-api-hash" aria-label="اس حصے کا لنک">#</a></h2>
+<p>آپ ٹیلیگرام API ایپلیکیشن بنائے بغیر سائن ان کر سکتے ہیں۔ جب کوئی جوڑا داخل نہیں کیا گیا ہو، درآمد یا پہلے سے ورک اسپیس میں محفوظ نہ ہو، تو TgWitness اپنے اندرونی پول سے بے ترتیب ترتیب میں 50 عوامی API جوڑوں (<code>tgwitness/api_pool.py</code>) میں سے ایک جوڑا منتخب کرتا ہے۔ اگر ٹیلیگرام کوئی جوڑا مسترد کر دیتا ہے (<code>API_ID_INVALID</code>, <code>API_ID_PUBLISHED_FLOOD</code>, <code>UPDATE_APP_TO_LOGIN</code>)، تو اگلا جوڑا آزمایا جاتا ہے، ہر سائن ان پر آٹھ تک؛ مسترد شدہ جوڑوں کو دوبارہ شروع کرنے تک چھوڑ دیا جاتا ہے۔ سائن ان کرنے والا جوڑا اکاؤنٹ کے ساتھ محفوظ ہو جاتا ہے اور اسی کے لیے دوبارہ استعمال ہوتا ہے۔ ایک <strong>API ID</strong> اور <strong>API ہیش</strong> ٹیلیگرام کے پاس ایپلیکیشن کی شناخت کرتے ہیں؛ وہ خود بخود کسی اکاؤنٹ کو مجاز نہیں کرتے۔</p>
+<p>اپنی ایپلیکیشن استعمال کرنے کے لیے (اس اکاؤنٹ کو خطرہ ہے جس نے اسے رجسٹر کیا ہے؛ دیکھیں:
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/PROJECT-GUIDE.md#connect-a-telegram-account">بلٹ ان API پول کیوں؟</a>):</p>
+<ol>
+<li>اپنا <a href="https://my.telegram.org">my.telegram.org</a> کھولیں اور اپنے کسی بھی فون نمبر سے سائن ان کریں۔ کوڈ Telegram ایپ میں آتا ہے، SMS کے ذریعے نہیں۔</li>
+<li><strong>API ترقی کے اوزار</strong> منتخب کریں۔</li>
+<li>ایک ایپلیکیشن بنائیں: کوئی بھی عنوان اور مختصر نام (5–32 حروف)، پلیٹ فارم: <strong>ڈیسک ٹاپ</strong>۔
+    URL اور وضاحت خالی رہ سکتی ہیں۔</li>
+<li><strong>ایپ کا api_id</strong> (ایک عدد) اور <strong>api_hash</strong> (32 ہیکساڈیسمل حروف) کاپی کریں۔</li>
+</ol>
+<p>پینل میں، سائن ان فارم کے نیچے اوپن <strong>API ID + ہیش</strong>۔ آپ ایک واحد
+<code>api_id:api_hash</code> جوڑا <strong>API ID</strong> میں پیسٹ کر سکتے ہیں اور دونوں فیلڈز بھر جائیں گے۔ ایک جوڑا
+آپ کے تمام اکاؤنٹس کے لیے استعمال کیا جا سکتا ہے۔ کامیاب لاگ ان کے بعد یہ محفوظ، انکرپٹڈ،
+صرف اسی ورک اسپیس میں ہوتا ہے اور کبھی بھی براؤزر کو واپس نہیں بھیجا جاتا۔</p>
+<p>تین مختلف اسناد ملوث ہیں:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>خفیہ</th>
+<th>کھولتا ہے</th>
+<th>جہاں یہ موجود ہے</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>پینل ٹوکن</td>
+<td>ٹی جی وِٹنس ویب پینل</td>
+<td>ڈیٹا ڈائریکٹری میں <code>panel-token.txt</code> یا <code>TGWITNESS_TOKEN</code></td>
+</tr>
+<tr>
+<td>API آئی ڈی + ہیش</td>
+<td>اپنے آپ میں کچھ نہیں؛ ایپ کی شناخت کرتا ہے</td>
+<td>بلٹ ان جوڑا، درآمد شدہ ترتیبات، یا my.telegram.org پر آپ کی اپنی ایپ</td>
+</tr>
+<tr>
+<td>اکاؤنٹ کی اجازت</td>
+<td>ٹیلیگرام اکاؤنٹ</td>
+<td>فون/QR لاگ ان کے ذریعے تخلیق کیا گیا یا سیشن کے طور پر لایا گیا</td>
+</tr>
+</tbody>
+</table></div>
+<p>اگر ٹیلیگرام تک رسائی کے لیے پروکسی استعمال کرنا ضروری ہو تو پہلے
+<strong>اکاؤنٹ → ترتیبات → کنکشن کی ترتیبات → کنکشن کا راستہ تبدیل کریں</strong> میں سیٹ کریں۔</p>
+<h2 id="phone-number">فون نمبر<a class="anchor" href="#phone-number" aria-label="اس حصے کا لنک">#</a></h2>
+<ol>
+<li><strong>اکاؤنٹ</strong> کھولیں، <strong>فون</strong> ٹیب پر جائیں، اور نمبر بین الاقوامی فارمیٹ میں درج کریں،
+    مثال کے طور پر <code>+44 7700 900123</code>۔ خالی جگہیں اور ڈیشز خود بخود ہٹا دیے جاتے ہیں۔</li>
+<li><strong>جاری رکھیں پر</strong> کلک کریں۔ API ID + ہیش خالی رہ سکتے ہیں۔</li>
+<li>وہ کوڈ درج کریں جو ٹیلیگرام بھیجتا ہے (عموماً ٹیلیگرام ایپ میں؛ ایس ایم ایس کی ضمانت نہیں)۔</li>
+<li>اگر اکاؤنٹ میں دو مرحلوں کی توثیق فعال ہے تو وہ پاس ورڈ درج کریں۔ یہ پینل ٹوکن یا ڈیوائس پاس کوڈ نہیں ہے۔</li>
+<li>لاگ ان کے بعد دکھائی گئی اکاؤنٹ آئی ڈی چیک کریں، پھر ذرائع منتخب کریں۔</li>
+</ol>
+<p>لاگ ان کوڈز اور 2FA پاس ورڈ کبھی بھی ڈسک پر محفوظ نہیں کیے جاتے۔</p>
+<h2 id="qr-code">کیو آر کوڈ<a class="anchor" href="#qr-code" aria-label="اس حصے کا لنک">#</a></h2>
+<p>اس کا استعمال اس وقت کریں جب اکاؤنٹ پہلے ہی فون یا کسی دوسرے کمپیوٹر پر سائن ان ہو چکا ہو۔</p>
+<ol>
+<li><strong>QR کوڈ</strong> ٹیب → <strong>QR کوڈ دکھائیں۔</strong> API ID + ہیش خالی رہ سکتے ہیں۔</li>
+<li>سائن ان شدہ ڈیوائس پر: <strong>سیٹنگز → ڈیوائسز → ڈیسک ٹاپ ڈیوائس کو لنک کریں</strong>، کوڈ اسکین کریں اور تصدیق کریں۔</li>
+<li>اگر ٹیلیگرام درخواست کرے تو TgWitness میں 2FA پاس ورڈ درج کریں۔</li>
+</ol>
+<p>QR تصویر مقامی طور پر تیار کی جاتی ہے۔ کوڈز کی میعاد ختم ہو جاتی ہے؛ دوبارہ کوشش کے لیے <strong>&#x27;دوسرا QR کوڈ تیار کریں&#x27; پر</strong>
+کلک کریں۔ پینل کو لاک کرنے، ورک اسپیس تبدیل کرنے یا دوسرا لاگ ان شروع کرنے سے زیر التواء کوڈ منسوخ ہو جاتا ہے۔</p>
+<h2 id="auth-key--dc-id">آتھ کی + ڈی سی آئی ڈی<a class="anchor" href="#auth-key--dc-id" aria-label="اس حصے کا لنک">#</a></h2>
+<p>ایک آتھ کی ہر ٹیلیگرام سیشن کے پیچھے موجود خام 256 بائٹ کی اجازت ہے، جو <strong>512 ہیکساڈیسمل حروف</strong> میں لکھی جاتی ہے، ڈیٹا سینٹر نمبر <strong>DC 1–5</strong> کے ساتھ۔</p>
+<ol>
+<li>ٹیب <strong>&#x27;Auth key</strong>&#x27;۔ مکمل کلید چسپاں کریں؛ ایک مختصر کلید جس میں صرف &#x27;<code>…</code>&#x27; شامل ہو، کام نہیں کرے گی۔</li>
+<li>کلیدی کے ساتھ فراہم کردہ DC ID منتخب کریں۔</li>
+<li>اختیاری طور پر <strong>صارف</strong> کی<strong> شناخت</strong> درج کریں۔ اگر ٹیلیگرام مختلف اکاؤنٹ رپورٹ کرے تو TgWitness کنکشن سے انکار کر دے گا۔</li>
+<li>پریس <strong>کنیکٹ اکاؤنٹ</strong>۔</li>
+</ol>
+<p>ایک آتھ کی (512 حروف) API ہیش (32 حروف) نہیں ہے۔ اسی کلید کو JSON کے طور پر بھی درآمد کیا جا سکتا ہے، دیکھیں <a href="#account-json">اکاؤنٹ JSON</a>۔</p>
+<h2 id="account-files">اکاؤنٹ فائلیں<a class="anchor" href="#account-files" aria-label="اس حصے کا لنک">#</a></h2>
+<p>اوپن کریں، <strong>Add account → Files پر جائیں</strong> اور <strong>ایک اکاؤنٹ سے تعلق رکھنے والی</strong> زیادہ سے زیادہ <strong>چار فائلیں</strong> (کل
+<strong>8 MiB</strong>) منتخب کریں، پھر <strong>Connect account</strong> دبائیں۔</p>
+<ul>
+<li>فائلیں آپ کے TgWitness سرور کی <strong>میموری میں</strong> تبدیل کی جاتی ہیں۔ اپلوڈز محفوظ نہیں کیے جاتے،
+ZIP فائلیں ڈسک پر نکالی نہیں جاتیں اور کسی بیرونی سروس سے رابطہ نہیں کیا جاتا۔</li>
+<li>پیدا ہونے والے سیشن کو پھر ٹیلیگرام کے ساتھ چیک کیا جاتا ہے۔ اگر کسی فائل میں صارف کی شناخت (یوزر آئی ڈی) درج ہو، تو اسے ٹیلیگرام کے رپورٹ کردہ اکاؤنٹ سے میل کھانا چاہیے۔</li>
+<li>وہ فائلیں جو مختلف اکاؤنٹس یا مختلف API کریڈنلز کو بیان کرتی ہیں مسترد کر دی جاتی ہیں
+    ایک کو منتخب کرنے کے بجائے۔</li>
+<li><strong>پاس کوڈ یا سیشن ٹیکسٹ</strong> میں TData کا مقامی پاس کوڈ فیلڈ ہوتا ہے، ایک باکس جہاں آپ <strong>بغیر سائن ان کیے</strong> StringSession اور <strong>Read </strong>فائلیں پیسٹ کر سکتے ہیں (یہ فارم ٹیلیگرام سے رابطہ کیے بغیر مکمل کرتا ہے).</li>
+</ul>
+<h3 id="telethon-session">ٹیلی تھون <code>.session</code><a class="anchor" href="#telethon-session" aria-label="اس حصے کا لنک">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>یہ کیا ہے</td>
+<td>SQLite ڈیٹا بیس جو Telethon پر مبنی ٹولز بناتے ہیں، مثال کے طور پر <code>my_account.session</code></td>
+</tr>
+<tr>
+<td>کی طرف سے تسلیم شدہ</td>
+<td>جدول <code>sessions</code> (<code>dc_id</code>، <code>server_address</code>، <code>port</code>، <code>auth_key</code>) اور <code>version</code> = 7 یا 8</td>
+</tr>
+<tr>
+<td>ضروریات</td>
+<td>بالکل ایک مجاز سیشن قطار؛ ایک بند، مکمل ڈیٹا بیس</td>
+</tr>
+</tbody>
+</table></div>
+<p>سب سے پہلے اس پروگرام کو بند کریں جس نے فائل بنائی تھی۔ اگر اس کے ساتھ <code>my_account.session-journal</code> یا <code>my_account.session-wal</code> موجود ہے تو ڈیٹا بیس حتمی نہیں ہوا ہے: اصل کلائنٹ کو صاف طریقے سے کھولیں اور بند کریں۔ ان سائیڈ کار فائلوں کو حذف کرنے سے ایک خراب کاپی رہ سکتی ہے۔</p>
+<h3 id="pyrogram-session">پائروگرام <code>.session</code><a class="anchor" href="#pyrogram-session" aria-label="اس حصے کا لنک">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>یہ کیا ہے</td>
+<td>SQLite ڈیٹا بیس جو Pyrogram پر مبنی ٹولز بناتے ہیں</td>
+</tr>
+<tr>
+<td>کی طرف سے تسلیم شدہ</td>
+<td><code>sessions</code> کو <code>dc_id</code>، <code>auth_key</code>، <code>test_mode</code>، <code>user_id</code>، <code>is_bot</code> کے ساتھ جدول کریں؛ <code>version</code> = 2 یا 3</td>
+</tr>
+<tr>
+<td>ضروریات</td>
+<td>پروڈکشن نیٹ ورک پر ایک مجاز <strong>صارف</strong> سیشن۔ بوٹ اور ٹیسٹ-ڈی سی سیشنز مسترد کر دیے جاتے ہیں۔</td>
+</tr>
+</tbody>
+</table></div>
+<p>محفوظ شدہ صارف آئی ڈی کو لاگ ان کے دوران ٹیلیگرام کے خلاف چیک کیا جاتا ہے۔</p>
+<h3 id="session--json-pair">سیشن + JSON جوڑا<a class="anchor" href="#session--json-pair" aria-label="اس حصے کا لنک">#</a></h3>
+<p>اکاؤنٹس اکثر ایک ہی نام کی دو فائلوں کی صورت میں تقسیم کیے جاتے ہیں، مثال کے طور پر
+<code>447700900123.session</code> اور <code>447700900123.json</code>۔ <strong>دونوں کو</strong> ایک ساتھ منتخب کریں۔</p>
+<ul>
+<li>JSON سے، TgWitness <code>app_id</code>/<code>api_id</code> اور <code>app_hash</code>/<code>api_hash</code> استعمال کرتا ہے، لہٰذا آپ کو عام طور پر API کی کریڈینشلز ٹائپ کرنے کی ضرورت نہیں پڑتی۔</li>
+<li><code>phone</code>، <code>device</code>، <code>sdk</code>، <code>app_version</code>، <code>lang_pack</code> یا محفوظ شدہ <code>twoFA</code> پاس ورڈ جیسے دیگر فیلڈز کو <strong>نظر انداز</strong> کیا جاتا ہے۔ اگر اکاؤنٹ میں 2FA فعال ہو تو TgWitness اس کی درخواست کرتا ہے۔</li>
+<li>ایک JSON بذاتِ خود صرف میٹا ڈیٹا ہے۔ سیشن فائل کے بغیر، فون یا QR لاگ ان کے ساتھ جاری رکھیں۔</li>
+</ul>
+<h3 id="telegram-desktop-tdata">ٹیلیگرام ڈیسک ٹاپ (TData)<a class="anchor" href="#telegram-desktop-tdata" aria-label="اس حصے کا لنک">#</a></h3>
+<p>TData ٹیلیگرام ڈیسک ٹاپ ایپلیکیشن کا<code>tdata</code> فولڈر ہے (desktop.telegram.org سے دستیاب کراس پلیٹ فارم ایپ)۔</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>نظام</th>
+<th>ڈیفالٹ<code>tdata</code>مقام</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ونڈوز</td>
+<td><code>%APPDATA%\Telegram Desktop\tdata</code> (پورٹیبل ٹیلیگرام: <code>Telegram.exe</code> کے ساتھ)</td>
+</tr>
+<tr>
+<td>لینکس</td>
+<td><code>~/.local/share/TelegramDesktop/tdata</code></td>
+</tr>
+<tr>
+<td>macOS</td>
+<td><code>~/Library/Application Support/Telegram Desktop/tdata</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>اسے درآمد کرنے کے لیے:</p>
+<blockquote class="callout">
+<p><strong>متوازی سیشن کی وارننگ۔</strong> TData درآمد کرنے سے ٹیلیگرام ڈیسک ٹاپ کی اجازت نامہ کی کلید دوبارہ استعمال ہوتی ہے؛ یہ ایک آزاد لاگ ان نہیں بناتا۔ اس کلید کو ڈیسک ٹاپ اور TgWitness میں بیک وقت استعمال نہ کریں۔ ٹیلیگرام <code>AUTH_KEY_DUPLICATED</code> کے ساتھ اجازت نامہ کالعدم کر سکتا ہے، جس سے دونوں نقول نئے لاگ ان تک ناقابل استعمال ہو جائیں گی۔</p>
+<p>ڈیسک ٹاپ سے مکمل طور پر نکل جائیں، بشمول اس کے ٹرے پراسیس کے، اور جب تک TgWitness درآمد شدہ سیشن استعمال کر رہا ہو، اس کاپی کو بند رکھیں۔ <strong>بند کریں، لاگ آؤٹ نہ کریں یا سیشن منسوخ نہ کریں:</strong>
+منسوخی درآمد شدہ کاپی کو بھی باطل کر دیتی ہے۔ اگر آپ کو دونوں کلائنٹس چلانے کی ضرورت ہے، تو TgWitness میں فون یا QR کے ذریعے سائن ان کریں تاکہ اپنی الگ اجازت نامہ بنا سکیں۔ ایک مخصوص اکاؤنٹ کی سفارش کی جاتی ہے، لیکن یہ کلون شدہ چابیاں کو ایک ساتھ استعمال کرنے کے لیے محفوظ نہیں بناتا۔</p>
+<p>یہ درآمد شدہ پر بھی لاگو ہوتا ہے۔ <code>.session</code> فائلیں، StringSession ٹیکسٹ اور Auth Key HEX۔
+دیگر کلائنٹس جن کے پاس اپنی آزادانہ طور پر بنائی گئی اجازتیں ہیں، وہ سائن ان رہ سکتے ہیں۔
+<a href="https://core.telegram.org/api/errors#406-not-acceptable">Telegram کی AUTH_KEY_DUPLICATED دستاویزات</a> دیکھیں۔</p>
+</blockquote>
+<ol>
+<li>Telegram Desktop کو مکمل طور پر بند کر دیں۔</li>
+<li>
+<p><code>tdata</code> سے <strong>صرف</strong> ان دو آئٹمز پر مشتمل ایک ZIP بنائیں:</p>
+<ul>
+<li><code>key_datas</code></li>
+<li>16 حروف پر مشتمل فائل جو <code>s</code> پر ختم ہوتی ہے، اس کے ساتھ، عام طور پر <code>D877F783D5D3EF8Cs</code></li>
+</ul>
+<p>میڈیا کیش کے ساتھ پورے فولڈر کو زپ کرنے سے عام طور پر حدیں (512 اندراجات، 32 MiB بغیر پیک) پار ہو جاتی ہیں۔
+3. <strong>فائلز</strong> میں زپ کو منتخب کریں۔ اگر ٹیلیگرام ڈیسک ٹاپ کا کوئی <strong>مقامی پاس کوڈ</strong> ہے تو پہلے اسے <strong>پاس کوڈ یا سیشن ٹیکسٹ</strong> کے تحت درج کریں۔ یہ 2FA پاس ورڈ نہیں ہے۔</p>
+</li>
+</ol>
+<p>مدد یافتہ: ہر آرکائیو میں ایک اکاؤنٹ، جدید <code>key_datas</code>/<code>key_data0</code>/<code>key_data1</code> اسٹوریج،
+مقامی پاس کوڈ۔ غیر مدد یافتہ: متعدد لاگ ان شدہ اکاؤنٹس والے فولڈرز، پرانے ڈیسک ٹاپ
+لی آؤٹس، پاس ورڈ سے محفوظ شدہ ZIPs، اور الگ نیٹیو macOS ایپ &quot;Telegram for macOS&quot;۔</p>
+<h3 id="telethon-stringsession">ٹیلی تھون سٹرنگ سیشن<a class="anchor" href="#telethon-stringsession" aria-label="اس حصے کا لنک">#</a></h3>
+<p>ایک سطر پر مشتمل متن، عام طور پر <code>1</code> سے شروع ہوتا ہے اور تقریباً 350 حروف پر مشتمل ہوتا ہے۔ اسے <code>.txt</code> یا <code>.tgwitness-session</code> فائل (زیادہ سے زیادہ 4 KiB) کے طور پر لوڈ کریں، یا <strong>پاس کوڈ یا سیشن ٹیکسٹ</strong> کے تحت پیسٹ کریں۔ صرف Telethon سٹرنگز قبول کی جاتی ہیں؛ Pyrogram اور TDLib سٹرنگز مختلف فارمیٹس استعمال کرتی ہیں۔</p>
+<h3 id="account-json">اکاؤنٹ JSON<a class="anchor" href="#account-json" aria-label="اس حصے کا لنک">#</a></h3>
+<p>ایک JSON آبجیکٹ، زیادہ سے زیادہ <strong>64 KiB</strong>، ایک فائل میں جو <strong><code>.json</code></strong> پر ختم ہوتی ہے۔</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>میدان (عرف)</th>
+<th>معنی</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>api_id</code> (<code>app_id</code>)</td>
+<td>ایپلیکیشن آئی ڈی، ایک مثبت عدد</td>
+</tr>
+<tr>
+<td><code>api_hash</code> (<code>app_hash</code>)</td>
+<td>ایپلیکیشن ہیش، 32 ہیکساڈیسمل اعداد</td>
+</tr>
+<tr>
+<td><code>string_session</code> (<code>session_string</code>, <code>session</code>)</td>
+<td>Telethon StringSession متن ہے، فائل کا نام نہیں</td>
+</tr>
+<tr>
+<td><code>auth_key</code> (<code>auth_key_hex</code>) + <code>dc_id</code></td>
+<td>512 حروف پر مشتمل Auth Key اور DC 1–5 مکمل کریں۔</td>
+</tr>
+<tr>
+<td><code>user_id</code> (<code>id</code>)</td>
+<td>اختیاری؛ اجازت محفوظ ہونے سے پہلے ٹیلیگرام کے خلاف چیک کیا جاتا ہے۔</td>
+</tr>
+</tbody>
+</table></div>
+<p>اگر عرفی نام اور اصل نام دونوں موجود ہوں تو انہیں ایک جیسا ہونا چاہیے۔ مثالیں:</p>
+<pre><code class="language-json">{ &quot;app_id&quot;: 1234567, &quot;app_hash&quot;: &quot;0123456789abcdef0123456789abcdef&quot; }</code></pre>
+<pre><code class="language-json">{
+  &quot;api_id&quot;: 1234567,
+  &quot;api_hash&quot;: &quot;0123456789abcdef0123456789abcdef&quot;,
+  &quot;auth_key&quot;: &quot;REPLACE_WITH_ALL_512_HEXADECIMAL_CHARACTERS&quot;,
+  &quot;dc_id&quot;: 2,
+  &quot;user_id&quot;: 123456789
+}</code></pre>
+<p>پہلی مثال صرف API کی اسناد بھرتی ہے؛ فون یا QR کے ذریعے سائن ان کریں، یا سیشن فائل شامل کریں۔ بلک لسٹس (اکاؤنٹس کی JSON اری) قبول نہیں کی جاتیں۔</p>
+<h2 id="identify-what-you-have">پہچانیں کہ آپ کے پاس کیا ہے<a class="anchor" href="#identify-what-you-have" aria-label="اس حصے کا لنک">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>آپ دیکھتے ہیں</th>
+<th>یہ ہے</th>
+<th>استعمال کریں</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*.session</code>؛ اسے ٹیکسٹ ایڈیٹر میں کھولنے پر اوپر <code>SQLite format 3</code> دکھائی دیتا ہے</td>
+<td>Telethon یا Pyrogram SQLite</td>
+<td><strong>فائلیں</strong> (خودکار طور پر شناخت شدہ)</td>
+</tr>
+<tr>
+<td><code>tdata</code> فولڈر جس میں <code>key_datas</code> شامل ہے۔</td>
+<td>ٹیلیگرام ڈیسک ٹاپ ٹی ڈیٹا</td>
+<td>دو فائلوں کو ZIP کریں، پھر <strong>فائلیں</strong></td>
+</tr>
+<tr>
+<td><code>1</code> سے شروع ہونے والی ایک ٹیکسٹ لائن، تقریباً 350 حروف</td>
+<td>ٹیلی تھون سٹرنگ سیشن</td>
+<td><strong>فائلیں</strong></td>
+</tr>
+<tr>
+<td><code>*.json</code> کے ساتھ <code>app_id</code>/<code>app_hash</code></td>
+<td>متعلقہ میٹا ڈیٹا</td>
+<td><strong>فائلیں</strong>، اس کے سیشن کے ساتھ</td>
+</tr>
+<tr>
+<td><code>*.json</code> کے ساتھ <code>auth_key</code> یا <code>string_session</code></td>
+<td>اکاؤنٹ JSON</td>
+<td><strong>فائلیں</strong></td>
+</tr>
+<tr>
+<td>512 حروف <code>0-9a-f</code></td>
+<td>آتھ کی</td>
+<td><strong>آتھ کی</strong></td>
+</tr>
+<tr>
+<td>32 حروف <code>0-9a-f</code></td>
+<td>API ہیش</td>
+<td><strong>API آئی ڈی + ہیش</strong></td>
+</tr>
+<tr>
+<td><code>td.binlog</code> یا <code>db.sqlite</code>، TDLib ایپ سے</td>
+<td>TDLib اسٹوریج</td>
+<td>مدد فراہم نہیں کی جاتی</td>
+</tr>
+<tr>
+<td><code>123456789:AA…</code></td>
+<td>بوٹ ٹوکن</td>
+<td>مدد فراہم نہیں کی جاتی</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="unsupported-formats">غیر معاونت یافتہ فارمیٹس<a class="anchor" href="#unsupported-formats" aria-label="اس حصے کا لنک">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>فارمیٹ</th>
+<th>متبادل</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TDLib اسٹوریج (<code>td.binlog</code>) اور TDLib ایکسپورٹس</td>
+<td>فون یا QR کے ذریعے سائن ان کریں</td>
+</tr>
+<tr>
+<td>پائروگرام سیشن <strong>سٹرنگز</strong></td>
+<td>Pyrogram فائل <code>.session</code> استعمال کریں، یا فون/QR</td>
+</tr>
+<tr>
+<td>TData متعدد لاگ ان شدہ اکاؤنٹس کے ساتھ</td>
+<td>Telegram Desktop میں دوسرے اکاؤنٹس سے لاگ آؤٹ کریں، یا ہر اکاؤنٹ کی اپنی سیشن فائل استعمال کریں۔</td>
+</tr>
+<tr>
+<td>بوٹ ٹوکنز</td>
+<td>مدد نہیں کی جاتی: TgWitness صارف اکاؤنٹ کے طور پر مشاہدہ کرتا ہے</td>
+</tr>
+<tr>
+<td>متعدد اکاؤنٹس کی CSV/JSON فہرستیں</td>
+<td>ہر اکاؤنٹ کے لیے ایک ورک اسپیس شامل کریں</td>
+</tr>
+<tr>
+<td>ٹیسٹ-ڈی سی یا بوٹ سیشنز</td>
+<td>پروڈکشن صارف اکاؤنٹ استعمال کریں</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="multiple-accounts">متعدد اکاؤنٹس<a class="anchor" href="#multiple-accounts" aria-label="اس حصے کا لنک">#</a></h2>
+<p>اکاؤنٹ منتخب کرنے والے کے پاس <strong>+</strong> دبائیں، یا کھولیں
+<strong>اکاؤنٹ → ترتیبات → کنکشن کی ترتیبات → ورک اسپیسز</strong>، ایک لیبل درج کریں اور سائن ان کریں۔</p>
+<ul>
+<li>کسی بھی تعداد میں ورک اسپیسز، بشمول مرکزی ورک اسپیس۔ ہر ایک کا اپنا سیشن، پروکسی روٹ، ذرائع، کیپچر پالیسی، جرنل، دستخطی کلید، چیک پوائنٹس اور ایکسپورٹس ہوتے ہیں۔</li>
+<li>ڈسپلے شدہ ورک اسپیس تبدیل کرنے سے دوسرے ورک اسپیس معطل نہیں ہوتے۔</li>
+<li>ایک جرنل ہمیشہ اُس اکاؤنٹ سے منسلک رہتا ہے جس نے اسے تخلیق کیا۔ مختلف اکاؤنٹ کے طور پر سائن ان کرنے کے لیے ایک الگ ورک اسپیس درکار ہوتا ہے، اور ایک اکاؤنٹ دو ورک اسپیسز میں تفویض نہیں کیا جا سکتا۔</li>
+<li>تمام ورک اسپیسز ایک ہی پینل ٹوکن شیئر کرتے ہیں؛ یہ الگ صارفین نہیں ہیں۔</li>
+<li><strong>اکاؤنٹس</strong> ایک ورک اسپیس کا نام تبدیل کرتا ہے اور ایک اضافی ورک اسپیس کو اس کے سیشن، جرنل، ذرائع اور دستخطی کلید سمیت حذف کر دیتا ہے۔ مرکزی ورک اسپیس کو پینل سے حذف نہیں کیا جا سکتا۔</li>
+</ul>
+<h2 id="sign-out">سائن آؤٹ<a class="anchor" href="#sign-out" aria-label="اس حصے کا لنک">#</a></h2>
+<p><strong>اکاؤنٹ → ٹیلیگرام سے سائن آؤٹ کریں</strong> (مشاہدہ معطل کے ساتھ) ٹیلیگرام سے سیشن ختم کرنے کی درخواست کرتا ہے، لہٰذا یہ اکاؤنٹ کی <strong>سیٹنگز → ڈیوائسز</strong> سے بھی غائب ہو جاتا ہے، اور ورک اسپیس والٹ سے سیشن کو ہٹا دیتا ہے۔ جرنل، ذرائع، سیٹنگز اور سگننگ کی موجود رہتی ہیں، اور جرنل سائن آؤٹ کو ریکارڈ کرتا ہے۔ ورک اسپیس اب بھی اپنے اکاؤنٹ کا ہی ہے: صرف وہی اکاؤنٹ دوبارہ اس سے کنیکٹ ہو سکتا ہے۔ اگر ٹیلیگرام جواب نہیں دیتا، تو سیشن یہاں سے پھر بھی ہٹا دیا جاتا ہے اور پینل اس کی اطلاع دیتا ہے؛ اسے ٹیلیگرام میں <strong>Settings → Devices</strong> کے تحت ختم کریں۔</p>
+<h2 id="convert-a-telethon-session-offline">ٹیلی تھون سیشن کو آف لائن میں تبدیل کریں<a class="anchor" href="#convert-a-telethon-session-offline" aria-label="اس حصے کا لنک">#</a></h2>
+<p>پینل براہِ راست <code>.session</code> فائلیں درآمد کرتا ہے۔ آف لائن StringSession فائل میں تبدیلی کے لیے، پروجیکٹ فولڈر سے چلائیں:</p>
+<pre><code class="language-powershell">.venv\Scripts\python.exe -m tgwitness.sessions account.session --out account.tgwitness-session   # Windows</code></pre>
+<pre><code class="language-sh">.venv/bin/python -m tgwitness.sessions account.session --out account.tgwitness-session          # Linux/macOS</code></pre>
+<p>کنورٹر صرف Telethon SQLite (64 MiB تک) پڑھتا ہے، ان پٹ میں کبھی ترمیم نہیں کرتا، کوئی نیٹ ورک درخواست نہیں کرتا اور موجودہ آؤٹ پٹ فائل کو اووررائٹ کرنے سے انکار کرتا ہے۔</p>
+<h2 id="keeping-account-files-safe">اکاؤنٹ فائلوں کو محفوظ رکھنا<a class="anchor" href="#keeping-account-files-safe" aria-label="اس حصے کا لنک">#</a></h2>
+<ul>
+<li>ہر <code>.session</code>، TData ZIP، StringSession، Auth Key اور اکاؤنٹ JSON کو پاس ورڈ کی طرح سمجھیں۔ TgWitness درآمد شدہ اجازت کو اپنے خفیہ کردہ والٹ میں محفوظ رکھتا ہے؛ آپ بعد میں اصل فائلیں حذف کر سکتے ہیں۔</li>
+<li>ایک ہی اجازت نامہ ایک ساتھ دو پروگراموں میں چلانے کی کوشش نہ کریں۔ ٹیلیگرام اسے منسوخ کر سکتا ہے (<code>AUTH_KEY_DUPLICATED</code>)، اور دونوں نقول کام کرنا بند کر دیں گی۔</li>
+<li>ایک ختم شدہ یا منسوخ شدہ سیشن کو تبدیلی کے ذریعے دوبارہ بحال نہیں کیا جا سکتا۔ دوبارہ سائن ان کریں۔</li>
+</ul>
+<h2 id="troubleshooting">مسئلہ حل کرنا<a class="anchor" href="#troubleshooting" aria-label="اس حصے کا لنک">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>پیغام یا علامت</th>
+<th>کیا کرنا ہے</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>اس سیشن کو پڑھا نہیں جا سکتا۔ اس کے اصل کلائنٹ کو بند کریں…</em></td>
+<td>SQLite فائل کھلی یا نامکمل ہے (<code>-journal</code>/<code>-wal</code> سائیڈ کار). اصل پروگرام کو صاف طریقے سے بند کریں اور فائل کو دوبارہ کاپی کریں۔</td>
+</tr>
+<tr>
+<td><em>Telethon SQLite سکیمے جن کی حمایت کی جاتی ہے: 7 اور 8</em> / <em>پائروگرام … 2 اور 3</em></td>
+<td>فائل ایک بہت پرانی یا نامعلوم لائبریری ورژن نے بنائی۔ اس کے بجائے فون/QR کے ذریعے سائن ان کریں۔</td>
+</tr>
+<tr>
+<td><em>صرف مجاز پروڈکشن صارف سیشنز کی حمایت کی جاتی ہے۔</em></td>
+<td>Pyrogram فائل کسی بوٹ یا ٹیسٹ نیٹ ورک سے تعلق رکھتی ہے۔</td>
+</tr>
+<tr>
+<td><em>TData آرکائیو 512 اندراجات یا 32 MiB سے تجاوز کر گیا ہے۔</em></td>
+<td>صرف ZIP کریں <code>key_datas</code> اور <code>D877F783D5D3EF8Cs</code>، پورا فولڈر نہیں۔</td>
+</tr>
+<tr>
+<td><em>TData کو ڈیکرپٹ نہیں کیا جا سکتا۔ ڈیسک ٹاپ کا مقامی پاس کوڈ چیک کریں۔</em></td>
+<td>Telegram Desktop کا مقامی پاس کوڈ <strong>Passcode یا سیشن ٹیکسٹ</strong> کے تحت درج کریں۔</td>
+</tr>
+<tr>
+<td><em>ایک وقت میں ایک TData اکاؤنٹ درآمد کریں</em></td>
+<td>Telegram Desktop کے متعدد اکاؤنٹس تھے؛ <a href="#unsupported-formats">غیر معاونت یافتہ فارمیٹس</a> دیکھیں۔</td>
+</tr>
+<tr>
+<td><em>منتخب فائلیں مختلف اکاؤنٹس یا API کی اسناد بیان کرتی ہیں۔</em></td>
+<td>صرف ایک اکاؤنٹ کی فائلیں منتخب کریں۔</td>
+</tr>
+<tr>
+<td><em>JSON میں کوئی سپورٹڈ API کریڈینشلز یا اجازت نامہ شامل نہیں ہے۔</em></td>
+<td><a href="#account-json">اکاؤنٹ JSON</a> میں فیلڈ کے نام چیک کریں۔</td>
+</tr>
+<tr>
+<td><em>صرف API میٹا ڈیٹا</em></td>
+<td>JSON میں کوئی سیشن نہیں ہے۔<code>.session</code> فائل شامل کریں یا فون/QR استعمال کریں۔</td>
+</tr>
+<tr>
+<td><em>Auth Key HEX میں تمام 512 ہیکساڈیسمل اعداد شامل ہونے چاہئیں۔</em></td>
+<td>کلیدی ٹکڑے میں چھانٹی گئی ہے یا اس میں <code>…</code> شامل ہے۔</td>
+</tr>
+<tr>
+<td>اکاؤنٹ آئی ڈی درآمد شدہ اکاؤنٹ سے مطابقت نہیں رکھتی</td>
+<td>فائل کا صارف آئی ڈی ٹیلیگرام کی رپورٹ کردہ معلومات سے مختلف ہے؛ یہ فائل کسی دوسرے اکاؤنٹ کے لیے ہے۔</td>
+</tr>
+<tr>
+<td>اکاؤنٹ پہلے ہی کسی دوسرے ورک اسپیس کا حصہ ہے۔</td>
+<td>اکاؤنٹ کو دو بار شامل کرنے کے بجائے اس ورک اسپیس کو کھولیں۔</td>
+</tr>
+<tr>
+<td>منسلک ہے، لیکن <strong>Sources</strong> میں چیٹ لسٹ سے ایک نجی گروپ غائب ہے۔</td>
+<td>رکنیت چیک کریں۔ پِکر پہلے 1,000 ڈائیلاگز کا معائنہ کرتا ہے؛ <strong>پیرامیٹرز</strong> میں حد بڑھائیں۔</td>
+</tr>
+<tr>
+<td>پراکسی کنکشن ناکام</td>
+<td>ہوسٹ، پورٹ اور کریڈینشلز چیک کریں۔ TgWitness کبھی بھی براہِ راست کنکشن پر واپس نہیں جاتا۔</td>
+</tr>
+</tbody>
+</table></div>
+<p>مزید دیکھیں: پروکسیز اور انکرپشن کے لیے <a href="../connection/">کنکشن اور سیکیورٹی</a>، اور سائن ان کے بعد کیا جمع کیا جاتا ہے اس کے لیے <a href="../collection/">کلیکشن کیسے کام کرتی</a> ہے۔</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCOUNTS.md">اس صفحے کو GitHub پر ترمیم کریں ↗</a><a class="next-guide" href="../connection/"><span>اگلا قدم</span><strong>کنیکشن، پراکسیز اور ڈیٹا کی حفاظت ←</strong></a><p>یہ رہنما موجودہ نفاذ کو بیان کرتے ہیں۔ توثیق کے نتائج اور باقی ماندہ خلائیں علیحدہ طور پر دستاویزی شکل میں درج ہیں۔ <a href="../verification/">کیا جانچا گیا ہے ←</a></p></footer>
+</main>
+<aside class="toc" aria-label="اس صفحے پر"><p class="nav-label">اس صفحے پر</p><a href="#at-a-glance">ایک نظر میں</a><a href="#before-you-start-api-id-and-api-hash">شروع کرنے سے پہلے: API ID اور API ہیش</a><a href="#phone-number">فون نمبر</a><a href="#qr-code">کیو آر کوڈ</a><a href="#auth-key--dc-id">آتھ کی + ڈی سی آئی ڈی</a><a href="#account-files">اکاؤنٹ فائلیں</a><a href="#identify-what-you-have">پہچانیں کہ آپ کے پاس کیا ہے</a><a href="#unsupported-formats">غیر معاونت یافتہ فارمیٹس</a><a href="#multiple-accounts">متعدد اکاؤنٹس</a><a href="#sign-out">سائن آؤٹ</a><a href="#convert-a-telethon-session-offline">ٹیلی تھون سیشن کو آف لائن میں تبدیل کریں</a><a href="#keeping-account-files-safe">اکاؤنٹ فائلوں کو محفوظ رکھنا</a><a href="#troubleshooting">مسئلہ حل کرنا</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>اوپن سورس · آپ کی مشین پر چلتا ہے</span><a href="../../../../LICENSE">ایم آئی ٹی لائسنس</a><a href="../notice/">آپریٹر نوٹس</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">سیکیورٹی</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "پیغام کا انتظار", "Step through a fictional send, edit and delete.": "ایک فرضی بھیجنے، ترمیم اور حذف کے مرحلے سے گزریں۔", "No observations yet. Start the sequence or advance one event.": "ابھی تک کوئی مشاہدات نہیں۔ سلسلہ شروع کریں یا ایک واقعہ آگے بڑھائیں۔", "Meet at 10:00": "10:00 بجے ملاقات کریں", "A new message is visible in the chat.": "چیٹ میں ایک نیا پیغام دکھائی دے رہا ہے۔", "Record 1 appended: the collector observed the original message.": "ریکارڈ 1 منسلک: جمع کرنے والے نے اصل پیغام کا مشاہدہ کیا۔", "Meet at 11:00": "11:00 بجے ملاقات کریں", "The current text changes. The earlier observation stays.": "موجودہ متن تبدیل ہوتا ہے۔ پچھلا مشاہدہ برقرار رہتا ہے۔", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "ریکارڈ 2 منسلک کیا گیا: ترمیم ایک نئی مشاہدہ ہے۔ ریکارڈ 1 اب بھی اصل متن کو برقرار رکھتا ہے۔", "Message deleted": "پیغام حذف شدہ", "The message has disappeared from the chat view.": "پیغام چیٹ کے منظر سے غائب ہو گیا ہے۔", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "ریکارڈ 3 منسلک: حذف کرنے کا نوٹس دونوں مشاہدہ شدہ ورژنز کے ساتھ برقرار رکھا گیا ہے۔", "0 records": "0 ریکارڈز", "1 record": "1 ریکارڈ", "2 records": "2 ریکارڈز", "3 records": "3 ریکارڈز", "Complete / {n} of 3": "مکمل / {n} میں سے 3", "Step / {n} of 3": "مرحلہ / {n} میں سے 3", "Pause": "وقفہ", "Replay sequence": "دوبارہ چلانے کا سلسلہ", "Play sequence": "سلسلہ چلائیں", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "جامد مثال دستیاب ہے۔ ہیشز کو انٹرایکٹو انداز میں کیلکولیٹ کرنے کے لیے، اس صفحے کو HTTPS پر یا Web Crypto سپورٹ کے ساتھ لوکل ہوسٹ پر پیش نظارہ کے طور پر کھولیں۔", "No record supplied": "کوئی ریکارڈ فراہم نہیں کیا گیا", "Tail removed": "ٹیل ہٹا دیا گیا", "≠ saved hash": "≠ محفوظ شدہ ہیش", "Rebuilt · different hash": "دوبارہ تعمیر شدہ · مختلف ہیش", "= saved hash": "= محفوظ شدہ ہیش", "Same length and matching head.": "ایک ہی لمبائی اور مماثل سر۔", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "تمام تینوں حساب شدہ ہیشز محفوظ شدہ ہیشز سے مطابقت رکھتے ہیں۔ یہ نمونہ برقرار رکھے گئے تین ریکارڈز کی حد سے مطابقت رکھتا ہے۔", "Same saved head; the journal prefix fails verification.": "یہی محفوظ شدہ سر؛ جرنل کا پیش نام تصدیق میں ناکام ہے۔", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "ریکارڈ 2 اب اپنے محفوظ شدہ ہیش سے مطابقت نہیں رکھتا۔ صرف آخری محفوظ شدہ ہیڈ کی جانچ کرنے سے یہ فرق نظر نہیں آئے گا؛ تصدیق کنندہ ہر ریکارڈ کی جانچ کرتا ہے۔", "Head differs from the retained checkpoint.": "ہیڈ برقرار رکھے گئے چیک پوائنٹ سے مختلف ہے۔", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "دوبارہ بنائے گئے ہیشز آپس میں جڑے ہوئے ہیں، لیکن آخری ہیڈ تبدیل ہو چکا ہے۔ محفوظ شدہ چیک پوائنٹ اس تاریخ کو مسترد کر دیتا ہے۔ اصل دستخط بھی تبدیل شدہ ریکارڈز پر ناکام ہوں گے۔", "Too short: 2 supplied records \u003c 3 retained records.": "بہت مختصر: فراہم کردہ ریکارڈز 2، محفوظ شدہ ریکارڈز 3 سے کم۔", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "باقی دو ہیشز اب بھی میل کھا رہے ہیں۔ محفوظ شدہ چیک پوائنٹ غائب شدہ ٹیل کو ظاہر کرتی ہے۔ اس ابتدائی حد کے بغیر، صرف یہ مختصر پری فکس حذف شدگی کو ظاہر نہیں کر سکتا تھا۔", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "اس براؤزر میں ہیش کی حساب کتاب دستیاب نہیں ہے۔ نیچے دیے گئے فارمولا اور جامد وضاحت دستیاب ہیں۔", "{n} records": "{n} ریکارڈز", "head {hash}": "ہیڈ {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "قبول شدہ: تعداد بڑھ رہی ہے، دستخط تصدیق شدہ ہیں اور کلید میل کھاتی ہے۔ گواہ اس نئی حد کو برقرار رکھتا ہے۔", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "رول بیک: دستخط شدہ جواب آخری منظور شدہ چیک پوائنٹ کے مقابلے میں کم ریکارڈز رپورٹ کرتا ہے۔ گواہ مسئلے کو ریکارڈ کرتا ہے اور پہلے منظور شدہ حد کو برقرار رکھتا ہے۔", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "فورک: تعداد میں کوئی تبدیلی نہیں ہوئی لیکن سربراہ مختلف ہے۔ گواہ اختلاف کو ریکارڈ کرتا ہے اور پہلے سے منظور شدہ حد کو برقرار رکھتا ہے۔", "No answer": "کوئی جواب نہیں", "boundary unknown": "حد نامعلوم", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "کوئی جواب نہیں: گواہ ناکام چیک کو ریکارڈ کرتا ہے۔ یہ جمع کرنے والے کی موجودہ حالت کا دعویٰ نہیں کر سکتا۔ اگر گواہ اب بھی Bot API تک پہنچ سکتا ہے اور اس کی اشاعت کی پالیسی اجازت دیتی ہے، تو یہ اس ناکامی کو شائع کر سکتا ہے۔", "Send {n}": "{n} بھیجیں", "Edit {n}": "{n} ترمیم", "Delete {n}": "{n} حذف کریں", "Both accounts captured all six expected observations in this example.": "دونوں اکاؤنٹس نے اس مثال میں تمام چھ متوقع مشاہدات کو ریکارڈ کیا۔", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "اکاؤنٹ B نے پھر بھی 6 میں سے 6 کو ریکارڈ کیا۔ دو رسیدیں زیادہ وقت لیں۔ کیپچر تناسب اور رسید میں تاخیر مختلف سوالات کے جواب دیتی ہیں۔", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "اکاؤنٹ B نے کٹ آف تک 6 میں سے 5 (83.3٪) ریکارڈ کیے۔ غائب ترمیم میں کوئی ناپے گئے تاخیر نہیں ہے۔ یہ نتیجہ صرف چھ کنٹرول شدہ کارروائیوں کو بیان کرتا ہے۔", "not observed by cutoff": "کٹ آف تک مشاہدہ نہیں ہوا", "{s} seconds": "{s} سیکنڈ", "Exact values follow in the table.": "درست اقدار جدول میں درج ہیں۔", "{s} s": "{s}s", "Not observed": "مشاہدہ نہیں ہوا", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "چار چیٹس مختلف مشاہدات پیش کرتی ہیں۔ ہر کنکشن کے لیے ماخذ ریکارڈز کی پیروی کریں؛ بغیر کسی منسوب کردہ بھیجنے والے کے چینل پوسٹ کو صارف 71001 سے منسوب نہ کریں۔", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "ریکارڈز #146 اور #205 ایک ہی بھیجنے والے کی شناخت، 71001، فراہم کرتے ہیں۔ یہ ایک ٹیلیگرام اکاؤنٹ کی دو چیٹس میں دیکھے گئے پوسٹس کو آپس میں جوڑتا ہے۔ یہ کسی حقیقی شخص کی شناخت نہیں کرتا اور نہ ہی چینل پوسٹ کو کسی فرد سے منسوب کرتا ہے۔", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "مقصد pay.example.invalid/new گروپ ریکارڈ #146، بوٹ کی بورڈ #173، چینل ایڈیٹ #188 اور نجی پیغام #205 میں ظاہر ہوتا ہے۔ ایک بار بار ظاہر ہونے والا مقصد مواد کو آپس میں جوڑتا ہے؛ یہ ان اکاؤنٹس کے مشترکہ کنٹرول کا ثبوت نہیں ہے۔", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "اس فرضی کیس میں مکمل میڈیا رسیدیں #151 اور #209 کے مکمل SHA-256 ویلیوز برابر ہیں۔ اصل بائٹس اور ان کے متعلقہ پیغام ریکارڈز کا موازنہ کریں۔ مطابقت پذیر فائل اپنے خالق کی شناخت نہیں بتاتی اور یہ ثابت نہیں کرتی کہ اسے کس نے فارورڈ کیا۔", "the encrypted off-site copy": "انکرپٹڈ آف سائٹ کاپی", "notifications": "اطلاعات", "checkpoint hashes for timestamps": "ٹائم اسٹیمپ کے لیے چیک پوائنٹ ہیشز", "signed checkpoints for the witness": "گواہ کے لیے دستخط شدہ چیک پوائنٹس", "Switched on in this example": "اس مثال میں فعال کیا گیا", "Optional · off by default": "اختیاری · ڈیفالٹ طور پر بند", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "اس مشین سے نکلتے ہوئے: ٹیلیگرام کنکشن اور {list}۔ بس اتنا ہی۔", "Default: only the Telegram connection leaves this machine.": "ڈیفالٹ: صرف ٹیلیگرام کنکشن اس مشین سے باہر جاتا ہے۔", "{done} of {total} done": "{done}   {total} مکمل", "Mark step {n} as done": "مرحلہ {n} کو مکمل شدہ کے طور پر نشان زد کریں", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "کاپی", "Copied": "کاپی شدہ", "Command copied.": "کمانڈ کاپی ہو گیا۔", "Selected — Ctrl/Cmd+C": "منتخب — Ctrl/Cmd+C", "Command selected. Copy it manually.": "کمانڈ منتخب کیا گیا۔ اسے دستی طور پر کاپی کریں۔", "Command copied to clipboard.": "کمانڈ کلپ بورڈ میں کاپی کر دی گئی۔", "Select text": "متن منتخب کریں", "Clipboard unavailable. Command selected; copy it manually.": "کلپ بورڈ دستیاب نہیں ہے۔ کمانڈ منتخب ہے؛ اسے دستی طور پر کاپی کریں۔", "A message arrives. The first observation is saved.": "ایک پیغام موصول ہوا۔ پہلی مشاہدہ محفوظ ہو گئی۔", "The time changes. Both captured versions stay.": "وقت بدل جاتا ہے۔ دونوں ریکارڈ شدہ ورژنز برقرار رہتے ہیں۔", "The message disappears. The captured history remains.": "پیغام غائب ہو جاتا ہے۔ محفوظ شدہ تاریخ باقی رہتی ہے۔", "Pause example animation": "مثال کے طور پر اینیمیشن کو روکیں", "Play example animation": "مثال کے طور پر اینیمیشن چلائیں", "Play": "چلائیں", "Full-size workspace screenshot": "مکمل سائز ورک اسپیس کا اسکرین شاٹ", "Workspace screenshot · fictional data": "ورک اسپیس کا اسکرین شاٹ · فرضی ڈیٹا", "Close": "بند کریں", "Close screenshot": "اسکرین شاٹ بند کریں", "Scrollable full-size screenshot": "اسکرول کرنے کے قابل مکمل سائز اسکرین شاٹ", "Enlarge: {name}": "بڑا کریں: {name}", "View full size": "مکمل سائز دیکھیں"}</script>
+</body></html>
