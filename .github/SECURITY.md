@@ -144,14 +144,14 @@ security certification is claimed.
 ## Operator notice and licence scope
 
 The reporting channels and technical protections above describe the software's
-security model. The project's use restriction and maintainer's statement are below.
+security model. The maintainer's statement below adds no condition to the MIT License.
 
 <!-- operator-notice:start -->
 
 ### NOTICE — Operator Incompatibility
 
 > **Taylor Wessing PartG mbB — German core, Hamburg office.**
-> PhishDestroy's operator notice accompanies the [use restriction](../LICENSE).
+> PhishDestroy's operator notice is the copyright holder's position; TgWitness remains under the [MIT License](../LICENSE).
 > [Full notice and context](../docs/OPERATOR-INCOMPATIBILITY.md) · [Original text](../NOTICE) · [Source record](https://phishdestroy.io/steam_dossier/taylor_wessing)
 
 The following records the maintainer's statement and allegations, not an
@@ -171,7 +171,7 @@ independent judicial or regulatory finding.
 <ul><li>94.28 % of a GDPR Art. 15 disclosure (70,717 words) was transmitted under black overlays that did not delete the underlying text;</li><li>page 444, first visible row, carried the slur &quot;pidor&quot; in plain text, from a firm publicly ranked Stonewall Top 100;</li><li>50 retained &quot;reports&quot; were submitted as proof of user misconduct at Jaccard 1.000, joint probability 1e-153, dated after the account was already blocked;</li><li>on personal notice of the exposure, the response on record was: &quot;amusing&quot;;</li><li>twelve months later, no Art. 33 filing, no Art. 34 notice, no remediation;</li><li>GDPR Art. 17 was then invoked — not to protect a data subject, but to delist the reporting of the above.</li></ul>
 <p>The founder of the residual structure is documented in the Reichstags-Handbuch 1938, p. 223 — NSDAP № 1,033,215, member of the Criminal Law Commission that rewrote § 175, the statute under which men were sent to the camps with a pink triangle. The English heritage left on 1 June 2026 as Winston Taylor. What remains is addressed here.</p>
 <p>A workflow whose output is required to contradict its input has no use for this software. The only configuration in which this software behaves as designed in that environment is: unavailable.</p>
-<p>Mathematik verhandelt nicht. Diese Lizenz auch nicht.</p>
+<p>Mathematik verhandelt nicht.</p>
 </blockquote>
 
 </details>

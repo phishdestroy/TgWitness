@@ -23,7 +23,7 @@ Your accounts, on your own computer or server.
   <img src="docs/assets/presentation/readme-typing.svg" width="760" alt="Follow the sources. Preserve observed changes. Verify the signed handoff.">
 </picture></p>
 
-<p align="center"><sub><a href="docs/CHANGELOG.md">v0.6.1 · pre-release</a> &nbsp; / &nbsp; Python 3.11+ &nbsp; / &nbsp; 13 interface languages &nbsp; / &nbsp; <a href="LICENSE">Restricted license</a></sub></p>
+<p align="center"><sub><a href="docs/CHANGELOG.md">v0.6.1 · pre-release</a> &nbsp; / &nbsp; Python 3.11+ &nbsp; / &nbsp; 13 interface languages &nbsp; / &nbsp; <a href="LICENSE">MIT license</a></sub></p>
 
 ![Section divider](docs/assets/presentation/divider.svg)
 
@@ -143,7 +143,7 @@ Telegram origin, complete capture or the truth of the content.
 
 ## Licence and operator notice
 
-[TgWitness Restricted License](LICENSE) · [Taylor Wessing use restriction](docs/TAYLOR-WESSING-EXCLUSION.md)
+[MIT License](LICENSE) · [The maintainer's position on Taylor Wessing](docs/TAYLOR-WESSING-EXCLUSION.md)
 
 > **NOTICE — Operator Incompatibility**
 > PhishDestroy's statement concerning **Taylor Wessing PartG mbB — German core, Hamburg office.**
@@ -152,7 +152,7 @@ Telegram origin, complete capture or the truth of the content.
 <details>
 <summary><strong>Read the complete notice</strong> — statement by PhishDestroy</summary>
 
-<p>The following records the maintainer's statement and allegations, not an independent judicial or regulatory finding. The operative use restriction is in the licence linked above.</p>
+<p>The following records the maintainer's statement and allegations, not an independent judicial or regulatory finding. It is the copyright holder's position, not a condition of the MIT License.</p>
 
 <blockquote lang="en" dir="ltr" translate="no">
 <p>This software produces SHA-256 hash chains and Ed25519 signatures. Its output is designed to be verifiable by any third party, in any jurisdiction, without reference to the authority of the person who produced it.</p>
@@ -165,7 +165,7 @@ Telegram origin, complete capture or the truth of the content.
 <ul><li>94.28 % of a GDPR Art. 15 disclosure (70,717 words) was transmitted under black overlays that did not delete the underlying text;</li><li>page 444, first visible row, carried the slur &quot;pidor&quot; in plain text, from a firm publicly ranked Stonewall Top 100;</li><li>50 retained &quot;reports&quot; were submitted as proof of user misconduct at Jaccard 1.000, joint probability 1e-153, dated after the account was already blocked;</li><li>on personal notice of the exposure, the response on record was: &quot;amusing&quot;;</li><li>twelve months later, no Art. 33 filing, no Art. 34 notice, no remediation;</li><li>GDPR Art. 17 was then invoked — not to protect a data subject, but to delist the reporting of the above.</li></ul>
 <p>The founder of the residual structure is documented in the Reichstags-Handbuch 1938, p. 223 — NSDAP № 1,033,215, member of the Criminal Law Commission that rewrote § 175, the statute under which men were sent to the camps with a pink triangle. The English heritage left on 1 June 2026 as Winston Taylor. What remains is addressed here.</p>
 <p>A workflow whose output is required to contradict its input has no use for this software. The only configuration in which this software behaves as designed in that environment is: unavailable.</p>
-<p>Mathematik verhandelt nicht. Diese Lizenz auch nicht.</p>
+<p>Mathematik verhandelt nicht.</p>
 </blockquote>
 
 </details>

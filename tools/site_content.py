@@ -22,8 +22,8 @@ GROUPS = (
 
 # The full reference, rendered from the repository's Markdown: slug -> (title, description, keywords, source).
 REFERENCE = {
-    "notice": ("Operator incompatibility notice", "PhishDestroy's operator notice, source record and the scope of the TgWitness use restriction.", "notice operator incompatibility Taylor Wessing statement licence", "docs/OPERATOR-INCOMPATIBILITY.md"),
-    "license": ("Licence and use restriction", "The TgWitness Restricted License, the Taylor Wessing exclusion and the maintainer's statement.", "license licence restriction Taylor Wessing source available", "docs/TAYLOR-WESSING-EXCLUSION.md"),
+    "notice": ("Operator incompatibility notice", "PhishDestroy's operator notice, its source record and what it does and does not establish.", "notice operator incompatibility Taylor Wessing statement licence", "docs/OPERATOR-INCOMPATIBILITY.md"),
+    "license": ("The maintainer's position", "TgWitness is MIT-licensed. The copyright holder's position on Taylor Wessing and its reasons, which add no licence condition.", "license licence MIT Taylor Wessing position statement", "docs/TAYLOR-WESSING-EXCLUSION.md"),
     "quickstart": ("Quick start", "Every way to install and launch TgWitness: Windows package, Python, Docker and the synthetic demo, with first checks.", "install launch windows linux macos docker demo setup", "docs/QUICKSTART.md"),
     "accounts": ("Accounts and session formats", "Sign in by phone, QR code or auth key, import Telethon, Pyrogram or Telegram Desktop sessions, and run several accounts.", "login phone qr session tdata pyrogram telethon import api pair", "docs/ACCOUNTS.md"),
     "connection": ("Connection, proxies and data protection", "API pairs, sign-in methods, SOCKS5, HTTP and MTProxy routes, public proxy lists and what each route protects.", "proxy mtproxy socks5 http route api id hash network", "docs/CONNECTION-SECURITY.md"),
@@ -59,7 +59,7 @@ LABELS = {
     "empty": "No matches. Try a shorter term or choose a page below.",
     "results": "Pages found:", "prompt": "Type a word to search the guides and the reference. Search stays in your browser.",
     "clear": "Clear search", "toc": "On this page", "reference": "Full reference",
-    "next": "Next step", "index": "All guides", "about": "Source available · Runs on your machine",
+    "next": "Next step", "index": "All guides", "about": "Open source · Runs on your machine",
     "note": "These guides describe the current implementation. Validation results and remaining gaps are documented separately.",
     "verification": "What has been tested", "wiki": "Reference", "source": "Edit this page on GitHub",
     "wiki_title": "The complete reference",

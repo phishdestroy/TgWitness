@@ -86,8 +86,8 @@ Stop TgWitness, extract the new version into a new folder, copy the data folder
 from the old one, then start the new TgWitness.cmd.
 
 Documentation: README.md in the source repository and http://127.0.0.1:8787/guide.html
-License: TgWitness Restricted License with the Taylor Wessing exclusion (LICENSE).
-The maintainer's operator incompatibility statement is included in NOTICE.
+License: MIT (LICENSE). The maintainer's operator incompatibility statement
+is included in NOTICE and adds no licence condition.
 Python and bundled libraries keep their own
 licenses (python\\LICENSE.txt and the *.dist-info folders).
 """

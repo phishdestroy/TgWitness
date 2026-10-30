@@ -10,8 +10,8 @@
 
 ## Start here
 
-**Licence:** read the [Taylor Wessing use restriction](TAYLOR-WESSING-EXCLUSION.md)
-and [TgWitness Restricted License](../LICENSE) before use or redistribution.
+**Licence:** [MIT License](../LICENSE). The maintainer's
+[position on Taylor Wessing](TAYLOR-WESSING-EXCLUSION.md) adds no condition to it.
 
 > **NOTICE — Operator Incompatibility**
 > [Read PhishDestroy's complete operator statement](OPERATOR-INCOMPATIBILITY.md),

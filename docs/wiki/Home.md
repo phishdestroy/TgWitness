@@ -56,9 +56,8 @@ Need a term explained? Open the [glossary](Glossary.md).
 > [Read the complete project notice](Operator-Incompatibility.md): PhishDestroy's
 > statement concerning Taylor Wessing PartG mbB — German core, Hamburg office.
 
-TgWitness uses a [restricted licence](../../LICENSE), including the
-[Taylor Wessing exclusion and maintainer's statement](../TAYLOR-WESSING-EXCLUSION.md).
-Review the restriction before use, evaluation, integration or redistribution.
+TgWitness is [MIT-licensed](../../LICENSE). The maintainer's
+[position on Taylor Wessing](../TAYLOR-WESSING-EXCLUSION.md) is a statement, not a licence condition.
 
 Use a dedicated account you can afford to lose. A Telegram session grants access to that account; keep sessions, panel tokens and keys private. Local message content and attachments need disk encryption if you require protection at rest.
 

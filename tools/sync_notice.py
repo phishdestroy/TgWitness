@@ -46,7 +46,7 @@ def excerpt(full, notice, licence, raw, *, compact=False):
     if compact:
         return f'''## Licence and operator notice
 
-[TgWitness Restricted License]({licence}) · [Taylor Wessing use restriction](docs/TAYLOR-WESSING-EXCLUSION.md)
+[MIT License]({licence}) · [The maintainer's position on Taylor Wessing](docs/TAYLOR-WESSING-EXCLUSION.md)
 
 > **NOTICE — Operator Incompatibility**
 > PhishDestroy's statement concerning **Taylor Wessing PartG mbB — German core, Hamburg office.**
@@ -55,7 +55,7 @@ def excerpt(full, notice, licence, raw, *, compact=False):
 <details>
 <summary><strong>Read the complete notice</strong> — statement by PhishDestroy</summary>
 
-<p>The following records the maintainer's statement and allegations, not an independent judicial or regulatory finding. The operative use restriction is in the licence linked above.</p>
+<p>The following records the maintainer's statement and allegations, not an independent judicial or regulatory finding. It is the copyright holder's position, not a condition of the MIT License.</p>
 
 {full}
 
@@ -63,7 +63,7 @@ def excerpt(full, notice, licence, raw, *, compact=False):
     return f'''### NOTICE — Operator Incompatibility
 
 > **Taylor Wessing PartG mbB — German core, Hamburg office.**
-> PhishDestroy's operator notice accompanies the [use restriction]({licence}).
+> PhishDestroy's operator notice is the copyright holder's position; TgWitness remains under the [MIT License]({licence}).
 > [Full notice and context]({notice}) · [Original text]({raw}) · [Source record]({SOURCE})
 
 The following records the maintainer's statement and allegations, not an
@@ -85,10 +85,11 @@ def document(full, *, wiki=False):
 **Statement by PhishDestroy · TgWitness project notice**
 
 This page records the maintainer's statement and allegations. It does not present
-them as independent judicial or regulatory findings. The operative use restriction
-is in the [TgWitness Restricted License]({root}LICENSE).
+them as independent judicial or regulatory findings. It is the copyright holder's
+position, not a licence condition: TgWitness is distributed under the
+[MIT License]({root}LICENSE).
 
-[Original NOTICE]({root}NOTICE) · [Licence and use restriction]({prefix}TAYLOR-WESSING-EXCLUSION.md) · [Source record]({SOURCE})
+[Original NOTICE]({root}NOTICE) · [The maintainer's position]({prefix}TAYLOR-WESSING-EXCLUSION.md) · [Source record]({SOURCE})
 
 ## The statement
 
@@ -105,9 +106,9 @@ can establish integrity relative to that key, not the truth of an input, Telegra
 origin, complete capture, or its legal significance in any jurisdiction. See the
 [evidence model]({prefix}HOW-IT-WORKS.md) and [security and data handling]({root}.github/SECURITY.md).
 
-The notice does not introduce a runtime access-control mechanism or replace
-the licence. Existing third-party licences and previously distributed versions
-remain governed as described in the [licence notes]({prefix}TAYLOR-WESSING-EXCLUSION.md#scope-and-reference-notes).
+The notice adds no runtime access control and no condition to the MIT License.
+Third-party components keep their own licences; see the
+[scope notes]({prefix}TAYLOR-WESSING-EXCLUSION.md#scope-and-reference-notes).
 
 [Project]({root}README.md) · [Documentation]({prefix}README.md) · [Wiki]({'Home.md' if wiki else 'wiki/Home.md'})
 '''

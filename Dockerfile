@@ -1,7 +1,7 @@
 FROM python:3.12-slim
 LABEL org.opencontainers.image.title="TgWitness" \
       org.opencontainers.image.description="Self-hosted Telegram observation journal with signed exports" \
-      org.opencontainers.image.licenses="LicenseRef-TgWitness-Restricted"
+      org.opencontainers.image.licenses="MIT"
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PIP_DISABLE_PIP_VERSION_CHECK=1 TGWITNESS_DATA=/data
 WORKDIR /app
 COPY pyproject.toml README.md LICENSE NOTICE constraints.txt ./

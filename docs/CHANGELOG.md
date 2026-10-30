@@ -2,15 +2,16 @@
 
 ## Unreleased
 
+- Returned to the MIT License. A tool whose output third parties must be able to check
+  should not stumble over its licence. `LICENSE` is the standard MIT text again, the
+  package declares MIT with the OSI classifier, and the container, portable package,
+  website, Wiki and translated README labels say so. The maintainer's statement stays
+  in NOTICE and on the Taylor Wessing page as the copyright holder's position; it adds
+  no licence condition. The presentation artwork reads "open source" again.
 - Added the maintainer's Operator Incompatibility NOTICE to README, SECURITY,
   the documentation, Wiki and website. A single source keeps the complete statement
   consistent across those pages; source, Python and portable distributions include
-  NOTICE alongside the licence. The existing licence restriction remains in force.
-- Changed the current project licence to the TgWitness Restricted License, with
-  the Taylor Wessing exclusion. Added the maintainer's statement, source reference
-  and scope notes to the documentation; updated package, container, portable
-  distribution, website and translated README licence labels. Third-party notices
-  and licences attached to previously distributed versions are unchanged.
+  NOTICE alongside the licence.
 - The documentation website gains a read-only online demo: the real panel, answered from
   recorded records of the fictional demo, in all 13 interface languages. Every change is
   refused in the browser, nothing is sent anywhere, and `tools/capture_demo.py` regenerates

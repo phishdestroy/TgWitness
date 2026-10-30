@@ -1,51 +1,16 @@
-TgWitness Restricted License
-
-SPDX-License-Identifier: LicenseRef-TgWitness-Restricted
+MIT License
 
 Copyright (c) 2026 PhishDestroy
 
-Subject to the use restriction below, permission is hereby granted, free of
-charge, to any person obtaining a copy
+Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
-in the Software, including without limitation the rights
+in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
 
-The above copyright notice, this permission notice, the use restriction and
-the disclaimer below shall be included in all copies or substantial portions
-of the Software. No sublicense may remove or override the use restriction.
-
-## ⛔ Use Restriction: The Taylor Wessing Exclusion
-
-TgWitness may not be used, deployed, licensed, sublicensed, integrated,
-evaluated, or relied upon — in whole or in part — by:
-
-- Taylor Wessing PartG mbB and any of its successor, affiliated or
-  rebranded entities operating from its German core;
-- any natural person acting in their professional capacity as counsel,
-  partner, associate, of counsel, consultant or agent of the above,
-  including without limitation Dr. Tobias Schelinski and
-  Dr. Patrick Vincent Zurheide;
-- any client, mandate or proceeding in which the above act as
-  representatives, drafters, signatories, or reviewers of disclosures,
-  responses, redactions, or evidence submissions.
-
-This restriction is a condition of the licence. It survives any fork,
-re-packaging, or derivative distribution.
-
-This is a custom restricted licence based on the MIT permission and warranty
-terms; it is not the MIT License. The restriction applies to material the
-copyright holder is entitled to license. Third-party components retain their
-own licences and notices. Nothing in this licence retroactively changes the
-licences attached to previously distributed versions.
-
-The copyright holder's statements and source references are in NOTICE,
-docs/OPERATOR-INCOMPATIBILITY.md and docs/TAYLOR-WESSING-EXCLUSION.md.
-That commentary does not add to or replace
-the operative licence terms above.
-
-## Disclaimer
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,

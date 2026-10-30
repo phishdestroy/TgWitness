@@ -17,7 +17,7 @@
 <p align="center">
   <a href="CHANGELOG.md">v0.6.1</a> &nbsp; · &nbsp;
   <a href="QUICKSTART.md">Python 3.11+</a> &nbsp; · &nbsp;
-  <a href="../LICENSE">Restricted license</a>
+  <a href="../LICENSE">MIT license</a>
 </p>
 
 <p align="center">
@@ -547,9 +547,8 @@ workflow has run yet. Read [CONTRIBUTING.md](../.github/CONTRIBUTING.md) before 
 
 ## License
 
-[TgWitness Restricted License](../LICENSE), including the
-[Taylor Wessing use restriction](TAYLOR-WESSING-EXCLUSION.md).
-Read the terms before using, evaluating, integrating or redistributing the software.
+[MIT License](../LICENSE). The copyright holder's
+[position on Taylor Wessing](TAYLOR-WESSING-EXCLUSION.md) is a statement, not a licence condition.
 
 
 ## Repository map
