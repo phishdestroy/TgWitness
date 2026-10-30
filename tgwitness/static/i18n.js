@@ -61,11 +61,12 @@ function setLanguage(lang){
   const url=new URL(location.href);url.searchParams.set("lang",lang);location.assign(url.href);
 }
 translatePage();
-if(window.TGW_SCOPE==="guide")document.querySelectorAll('a[href]').forEach(link=>{
+if(window.TGW_SCOPE==="guide")document.querySelectorAll('a[href]:not([href^="#"])').forEach(link=>{
   const url=new URL(link.href,location.href);
   if(url.origin===location.origin&&/\/(?:guide|dedicated-account)\.html$/.test(url.pathname)){
     // Translated inline HTML keeps application-root links. Resolve both guides beside
     // the current page so the same dictionary also works under the Pages project path.
+    // In-page links are left alone: with a new query string they would reload the page.
     url.pathname=new URL(url.pathname.split("/").pop(),location.href).pathname;
     url.searchParams.set("lang",LANG);link.href=url.href;
   }

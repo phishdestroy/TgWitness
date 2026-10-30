@@ -67,9 +67,18 @@ Hetzner пишет в журнал запрос консоли. Recovery Console
 ## Что нужно заранее
 
 1. Зона в Cloudflare, ID аккаунта и API-токен с правами **Cloudflare Tunnel Edit**,
-   **Zone Read** и **DNS Edit**. Для проверяющего: **Cloudflare Tunnel Read**, **DNS Read**,
-   а для журнала аудита — **Account Settings Read**.
-2. Ключ провайдера с правом записи в отдельный проект.
+   **Zone Read** и **DNS Edit**; токен передаётся через `--cloudflare-token-file` или
+   `CLOUDFLARE_API_TOKEN`. Для проверяющего: **Cloudflare Tunnel Read**, **DNS Read**, а для
+   журнала аудита — **Account Settings Read**.
+2. Ключ провайдера с правом записи в отдельный проект; тот же ключ нужен для `lock`:
+   - Hetzner: API-токен с правом Read & Write;
+   - DigitalOcean: personal access token с правом записи;
+   - Linode: personal access token с правами `linodes`, `firewall` и `events` на чтение и запись;
+   - Vultr: API-ключ отдельного аккаунта или субаккаунта;
+   - AWS: IAM-ключи с разрешёнными `ec2:DescribeVpcs`, `ec2:DescribeImages`,
+     `ec2:CreateSecurityGroup`, `ec2:AuthorizeSecurityGroupIngress`, `ec2:RunInstances`,
+     `ec2:CreateTags`, `ec2:DescribeInstances`, `ec2:DescribeSecurityGroupRules` и
+     `ec2:RevokeSecurityGroupIngress`.
 3. Коммит, который будет работать. Тег релиза один раз превращается в коммит через
    `git ls-remote`; на сервер попадает только 40-символьный коммит.
 
@@ -96,6 +105,12 @@ python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server
 Типы серверов для начала: `cpx22` (Hetzner), `s-1vcpu-2gb` (DigitalOcean), `g6-standard-1`
 (Linode), `vc2-1c-2gb` (Vultr), `t3.small` (AWS). `--location` и `--image` по умолчанию —
 Ubuntu 24.04 соответствующего провайдера в европейском регионе.
+
+`--repository` берёт коммит из другого Git-репозитория по https, без учётных данных в адресе
+(по умолчанию `https://github.com/phishdestroy/TgWitness.git`). У `deploy` есть ещё `--out` —
+другой каталог развёртывания (по умолчанию `deployments/NAME`; каталог, где уже есть
+развёртывание, не принимается) — и `--wait`, сколько минут ждать подписанное заявление
+коллектора: от 1 до 240, по умолчанию 20, для `generic` — 60.
 
 Команда:
 
@@ -143,7 +158,11 @@ Vultr отдаёт его любому ключу, который может ч�
 ## Отладочное развёртывание и блокировка
 
 `--debug-ssh-key KEY --debug-ssh-from 198.51.100.4` оставляет SSH для одного ключа с одного
-адреса или небольшой сети. Такое развёртывание записывается как `debug` и **никогда** не
+адреса или небольшой сети, не шире /24 для IPv4 и /48 для IPv6. `KEY` уже должен быть у
+провайдера: имя или ID SSH-ключа в проекте Hetzner, ID или отпечаток SSH-ключа в команде
+DigitalOcean, имя пользователя Linode, SSH-ключи из профиля которого добавляются root, ID
+SSH-ключа в аккаунте Vultr или имя EC2 key pair в регионе. К `generic` эти параметры не
+применяются. Такое развёртывание записывается как `debug` и **никогда** не
 проходит как high-assurance. Закончив, выполните `sudo tgwitness-lock` последней командой в
 последней SSH-сессии, затем:
 

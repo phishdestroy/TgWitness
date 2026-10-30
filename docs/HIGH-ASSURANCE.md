@@ -66,9 +66,18 @@ address to any key that can read the instance; neither the record nor the report
 ## Before you start
 
 1. A Cloudflare zone, its account ID, and an API token with **Cloudflare Tunnel Edit**,
-   **Zone Read** and **DNS Edit**. For the verifier: **Cloudflare Tunnel Read**, **DNS Read**
-   and, for the audit log, **Account Settings Read**.
-2. Provider credentials with write access to a dedicated project.
+   **Zone Read** and **DNS Edit**, given with `--cloudflare-token-file` or
+   `CLOUDFLARE_API_TOKEN`. For the verifier: **Cloudflare Tunnel Read**, **DNS Read** and, for
+   the audit log, **Account Settings Read**.
+2. Provider credentials with write access to a dedicated project; `lock` uses the same:
+   - Hetzner: API token with Read & Write permission;
+   - DigitalOcean: personal access token with write access;
+   - Linode: personal access token with `linodes`, `firewall` and `events` read/write scopes;
+   - Vultr: API key of a dedicated account or sub-account;
+   - AWS: IAM credentials allowed `ec2:DescribeVpcs`, `ec2:DescribeImages`,
+     `ec2:CreateSecurityGroup`, `ec2:AuthorizeSecurityGroupIngress`, `ec2:RunInstances`,
+     `ec2:CreateTags`, `ec2:DescribeInstances`, `ec2:DescribeSecurityGroupRules` and
+     `ec2:RevokeSecurityGroupIngress`.
 3. The commit to run. A release tag is resolved once to its commit with `git ls-remote`;
    the server only ever receives the 40-character commit.
 
@@ -95,6 +104,12 @@ python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server
 Server types to start with: `cpx22` (Hetzner), `s-1vcpu-2gb` (DigitalOcean), `g6-standard-1`
 (Linode), `vc2-1c-2gb` (Vultr), `t3.small` (AWS). `--location` and `--image` default to each
 provider's Ubuntu 24.04 in a European region.
+
+`--repository` takes the commit from another https Git repository, without credentials in the
+URL (default `https://github.com/phishdestroy/TgWitness.git`). `deploy` also accepts `--out`
+for another deployment directory (default `deployments/NAME`; a directory that already holds a
+deployment is refused) and `--wait`, the minutes to wait for the collector's signed statement:
+1 to 240, default 20, or 60 for `generic`.
 
 The command:
 
@@ -144,7 +159,11 @@ both stay in the signed journal.
 ## Debug deployment and lock
 
 `--debug-ssh-key KEY --debug-ssh-from 198.51.100.4` keeps SSH for one key from one address
-or small network. Such a deployment is recorded as `debug` and is **never** reported as
+or small network, at most a /24 for IPv4 or a /48 for IPv6. `KEY` is already registered with
+the provider: the name or ID of an SSH key in the Hetzner project, the ID or fingerprint of an
+SSH key in the DigitalOcean team, a Linode username whose profile SSH keys are added to root,
+the ID of an SSH key in the Vultr account, or the name of an EC2 key pair in the region. These
+options do not apply to `generic`. Such a deployment is recorded as `debug` and is **never** reported as
 high-assurance. When you are done, run `sudo tgwitness-lock` as the last command of the last
 SSH session, then:
 
