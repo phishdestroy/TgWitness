@@ -9,8 +9,8 @@ and animation are SVG elements. The artwork illustrates a workflow, not an app s
 
 | Asset | Purpose |
 | --- | --- |
-| `readme-investigation-animated.svg`, `tgwitness-investigation-static.svg` | Current README, Wiki and gallery cover: the illustrated investigation with a 12-second sequence and a separate still |
-| `case-{demo,start,wiki,films}.svg` | Current navigation: demo, first case, investigation handbook and films |
+| `readme-investigation-animated.svg`, `tgwitness-investigation-static.svg` | Current README and Wiki cover: the illustrated investigation with a 12-second sequence and a separate still |
+| `case-{demo,start,wiki,evidence}.svg` | Current navigation: demo, first case, investigation handbook and evidence model |
 | `case-path*.svg` | The four-step case route, with separate desktop, phone and reduced-motion compositions |
 | `case-chain-mobile*.svg` | A vertical record-chain explanation with readable phone captions, exact digest/signature formulas and a separate still |
 | `repository-cover*.svg`, `repository-cover*.webp` | Earlier compact journal cover, retained for existing links |
@@ -46,14 +46,15 @@ and animation are SVG elements. The artwork illustrates a workflow, not an app s
 
 The main README opens with the investigation scene: sources connect to a dossier,
 records move into it, and a signed handoff appears. Four navigation images lead to
-the demo, setup, Wiki and films. The application recording follows immediately;
+the demo, setup, Wiki and evidence model. The application recording follows immediately;
 the illustration and the real interface have distinct captions.
 
 The case route keeps the investigation story visible. Core capability descriptions,
 setup commands and trust boundaries remain ordinary text. The record-chain
 animation is visible; tampering, checkpoints and extra screenshots expand on demand.
 S3 keeps a visible summary and links to the complete setup and recovery instructions.
-The Wiki and [film gallery](../../SHOWCASE.md) share the same investigation cover.
+The Wiki shares the same investigation cover. Motion is part of the page design;
+readers do not need to open a player or download a file to see it.
 
 Regenerate navigation and case-path diagrams with:
 
@@ -71,7 +72,7 @@ exports leave reduced-motion selection to the containing `picture`: another medi
 query inside the selected SVG can read the operating-system preference instead
 and unexpectedly freeze the animation. Standalone documentation SVGs retain their
 own reduced-motion behavior.
-The [gallery](../../SHOWCASE.md) links to the original animations and stills. Additional screenshots,
+The [illustrated reference](../../SHOWCASE.md) shows the diagrams inline. Additional screenshots,
 tamper/checkpoint explanations, the notice and the source map expand on demand.
 
 Use relative links inside the repository. The wiki builder copies referenced images
@@ -95,18 +96,17 @@ versions as a still.
 
 ## Films and animations
 
-[Watch the gallery](../../SHOWCASE.md). All three films are silent H.264 MP4s using
+The archived concept films are silent H.264 MP4s using
 fictional records. The investigation overview renders the illustrated SVG sequence
 at 24 frames per second. The two earlier concept films retain their original exports
 and GIF alternatives. These films illustrate the workflow; they are not recordings
 of a live account.
 
-The gallery uses GitHub's video players with playback controls and no
-autoplay. Each has a download link to its versioned MP4. To replace a film, upload
-the new MP4 as a repository attachment and update both the player URL and the
-versioned file. The publication builder allows only these three MP4s and the two
-named GIFs. SVG animations keep their static reduced-motion alternatives; the
-message-history still is [`message-history-static.png`](message-history-static.png).
+These files are retained as source assets for maintainers. The README and Wiki
+use inline animated illustrations, with no film navigation, player blocks or
+download prompts. The publication builder allows only these three MP4s and the
+two named GIFs. SVG animations keep their static reduced-motion alternatives;
+the message-history still is [`message-history-static.png`](message-history-static.png).
 
 ## Preview images
 

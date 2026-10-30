@@ -9,7 +9,7 @@
   <a href="https://phishdestroy.github.io/TgWitness/demo/"><img src="docs/assets/presentation/case-demo.svg" width="176" height="58" alt="Explore the demo"></a>
   <a href="https://phishdestroy.github.io/TgWitness/demo/guide.html"><img src="docs/assets/presentation/case-start.svg" width="176" height="58" alt="Start your first case"></a>
   <a href="https://github.com/phishdestroy/TgWitness/wiki"><img src="docs/assets/presentation/case-wiki.svg" width="176" height="58" alt="Investigation Wiki"></a>
-  <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/SHOWCASE.md"><img src="docs/assets/presentation/case-films.svg" width="176" height="58" alt="Watch the films"></a>
+  <a href="docs/HOW-IT-WORKS.md"><img src="docs/assets/presentation/case-evidence.svg" width="176" height="58" alt="Understand the proof"></a>
 </p>
 
 **Your Telegram investigation workspace.** Follow a lead across conversations,
@@ -38,7 +38,7 @@ source still in view. This is the actual app, recorded with fictional data.
 </picture>
 </a>
 
-<p align="center"><sub>Conversation → saved edits → deletion notices.<br><a href="https://phishdestroy.github.io/TgWitness/demo/">Explore the interactive workspace ↗</a> &nbsp; · &nbsp; <a href="docs/SHOWCASE.md">Watch the investigation films ↗</a></sub></p>
+<p align="center"><sub>Conversation → saved edits → deletion notices.<br><a href="https://phishdestroy.github.io/TgWitness/demo/">Explore the interactive workspace ↗</a></sub></p>
 
 <details>
 <summary><strong>More of the interface</strong> — sources, saved versions, exports and the journal</summary>
@@ -151,7 +151,7 @@ two workspaces on one machine do not provide that separation.
 
 </details>
 
-[Explore the interactive explanation →](https://phishdestroy.github.io/TgWitness/docs/concepts/) · [Read the formulas](docs/HOW-IT-WORKS.md) · [Films & animations](docs/SHOWCASE.md)
+[Explore the interactive explanation →](https://phishdestroy.github.io/TgWitness/docs/concepts/) · [Read the formulas](docs/HOW-IT-WORKS.md)
 
 ## Off-site copy · S3
 

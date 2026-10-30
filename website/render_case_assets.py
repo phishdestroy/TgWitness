@@ -33,7 +33,7 @@ def save(drawing, name, description):
     svg = re.sub(r'<path transform="(translate\([^"]+\))" d="([^"]+)"/>', share, svg)
     definitions = '<defs>' + ''.join(f'<path id="{ident}" d="{path}"/>' for path, ident in glyphs.items()) + '</defs>'
     svg = svg.replace('</desc>', '</desc>' + definitions, 1)
-    target.write_text(svg, encoding="utf-8")
+    target.write_bytes(svg.encode("utf-8"))
 
 
 def navigation(font):
@@ -41,7 +41,7 @@ def navigation(font):
         ("demo", "Explore the demo", "OPEN THE WORKSPACE"),
         ("start", "Start your first case", "INSTALL & CONNECT"),
         ("wiki", "Investigation Wiki", "THE FIELD GUIDE"),
-        ("films", "Watch the films", "12-SECOND STORIES"),
+        ("evidence", "Understand the proof", "THE EVIDENCE MODEL"),
     )
     for i, (name, title, caption) in enumerate(entries):
         d = Drawing(font, 176, 58, title)

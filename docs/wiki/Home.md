@@ -10,7 +10,7 @@
 **From your first capture to a verifiable handoff.** Pick a path below, work with
 the record, and keep the checks alongside the conclusions.
 
-[Explore the demo](https://phishdestroy.github.io/TgWitness/demo/) · [Start your first case](Getting-Started.md) · [Films & animations](../SHOWCASE.md) · [Project](../../README.md)
+[Explore the demo](https://phishdestroy.github.io/TgWitness/demo/) · [Start your first case](Getting-Started.md) · [How the record works](../HOW-IT-WORKS.md) · [Project](../../README.md)
 
 ## Your first investigation
 
@@ -41,7 +41,7 @@ that sequence, not every possible Telegram event.
   <img src="../assets/presentation/readme-evidence-chain-animated.svg" width="1200" alt="Captured events link through SHA-256 hashes and carry Ed25519 signatures. Verify the record against a separately trusted key.">
 </picture>
 
-[The evidence model and formulas](../HOW-IT-WORKS.md) · [Interactive explanation](https://phishdestroy.github.io/TgWitness/docs/concepts/) · [All films and diagrams](../SHOWCASE.md)
+[The evidence model and formulas](../HOW-IT-WORKS.md) · [Interactive explanation](https://phishdestroy.github.io/TgWitness/docs/concepts/)
 
 ## Read this before connecting
 

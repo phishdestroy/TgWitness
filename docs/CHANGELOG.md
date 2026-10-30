@@ -3,7 +3,7 @@
 ## Unreleased
 
 - Investigation presentation: the illustrated source-to-dossier animation now
-  leads the README, Wiki and film gallery. A clearer case route, direct film
+  leads the README and Wiki. A clearer case route, direct evidence-model
   navigation and a vertical phone diagram keep the workflow and verification
   formulas readable; all moving illustrations have reduced-motion alternatives.
 - High-assurance deployment (`python -m tgwitness.cloud`, [guide](HIGH-ASSURANCE.md)). It creates
