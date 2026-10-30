@@ -72,7 +72,11 @@ Open **http://127.0.0.1:8787**. Stop the demo before starting live mode. For a c
 account, the panel token is in `data/live/panel-token.txt`. Use a dedicated account
 you can afford to lose.
 
-[Setup guide →](https://phishdestroy.github.io/TgWitness/demo/guide.html) · [Dedicated account](https://phishdestroy.github.io/TgWitness/demo/dedicated-account.html) · [Docker & servers](docs/DEPLOYMENT.md)
+<p align="center">
+  <a href="https://phishdestroy.github.io/TgWitness/demo/guide.html"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/identity-action-setup-static.svg"><img src="docs/assets/presentation/identity-action-setup.svg" width="248" height="64" alt="Setup guide — Install, launch &amp; capture"></picture></a>
+  <a href="https://phishdestroy.github.io/TgWitness/demo/dedicated-account.html"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/identity-action-account-static.svg"><img src="docs/assets/presentation/identity-action-account.svg" width="248" height="64" alt="Dedicated account — Prepare your Telegram account"></picture></a>
+  <a href="docs/DEPLOYMENT.md"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/identity-action-deploy-static.svg"><img src="docs/assets/presentation/identity-action-deploy.svg" width="248" height="64" alt="Docker &amp; servers — Deploy your workspace"></picture></a>
+</p>
 
 <p><sub><a href="docs/CHANGELOG.md">v0.6.1 · pre-release</a> &nbsp; / &nbsp; <a href="docs/VERIFICATION.md">Tested environments</a> &nbsp; / &nbsp; 13 interface languages · 26 guide languages &nbsp; / &nbsp; <a href="LICENSE">MIT</a></sub></p>
 

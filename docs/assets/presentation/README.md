@@ -12,6 +12,7 @@ and animation are SVG elements. The artwork illustrates a workflow, not an app s
 | `identity-hero*.svg` | Current repository cover: a large wordmark, the original dossier illustration, travelling records and a drawn signature; separate phone and still compositions |
 | `identity-wiki.svg`, `identity-wiki-static.svg` | Wide handbook cover in the same investigation identity |
 | `identity-nav-{demo,start,wiki}.svg` | Three clear entrances: the workspace, local setup and handbook |
+| `identity-action-{setup,account,deploy}*.svg` | Setup, dedicated-account and server links in the PhishDestroy two-line button style; animated rims, highlights, icons and arrows, with separate stills |
 | `readme-investigation-animated.svg`, `tgwitness-investigation-static.svg` | Original investigation composition, retained as the source of the illustrated scene |
 | `case-{demo,start,wiki,evidence}.svg` | Earlier navigation assets retained for existing references |
 | `case-path*.svg` | The four-step case route, with separate desktop, phone and reduced-motion compositions |
@@ -51,6 +52,10 @@ The main README opens with a large wordmark and the investigation scene. Sources
 float, records travel into a dossier, and a signature draws itself. The composition
 keeps those movements in the artwork; type and navigation remain steady. The
 handbook has its own wide cover using the same artwork and typography.
+
+Setup actions use the icon, title, subtitle and accent-line structure shared with
+ShortDot, TrustName and the forensic toolkit. Motion runs inside each linked SVG;
+the labels remain still and a `picture` source selects a still when motion is reduced.
 
 Three navigation images lead to the real demo, local setup and handbook. The real
 application recording follows, with a clear caption distinguishing it from the

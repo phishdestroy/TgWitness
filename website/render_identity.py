@@ -152,6 +152,58 @@ def navigation(font):
         save(d, "identity-nav-"+name+".svg", title)
 
 
+def setup_actions(font, still=False):
+    """Two-line action buttons from the PhishDestroy repository family."""
+    actions = (
+        ("setup", "SETUP GUIDE", "Install, launch & capture", "#a7d7ff"),
+        ("account", "DEDICATED ACCOUNT", "Prepare your Telegram account", "#b9d8d0"),
+        ("deploy", "DOCKER & SERVERS", "Deploy your workspace", "#dcc294"),
+    )
+    icons = {
+        "setup": '<path d="M17 19h7q4 0 4 4v18q0-4-4-4h-7Zm22 0h-7q-4 0-4 4v18q0-4 4-4h7Z"/>'
+                 '<path class="detail" d="M20 25h4m-4 5h4m8-5h4m-4 5h4"/>',
+        "account": '<path d="m28 17 11 4v9c0 7-11 12-11 12S17 37 17 30v-9Z"/>'
+                   '<circle class="detail" cx="28" cy="26" r="3"/>'
+                   '<path d="M23 35c0-6 10-6 10 0"/>',
+        "deploy": '<rect x="17" y="18" width="22" height="10" rx="2"/>'
+                  '<rect x="17" y="32" width="22" height="10" rx="2"/>'
+                  '<path d="M27 23h8m-8 14h8"/>'
+                  '<circle class="detail" cx="22" cy="23" r="1"/>'
+                  '<circle class="detail" cx="22" cy="37" r="1"/>',
+    }
+    for index, (name, title, subtitle, accent) in enumerate(actions):
+        d = Drawing(font, 248, 64, title + ": " + subtitle)
+        d.add(f'''<defs>
+<linearGradient id="button-bg" x2="1" y2="1"><stop stop-color="#14263b"/><stop offset="1" stop-color="#0c1829"/></linearGradient>
+<linearGradient id="button-rim"><stop stop-color="{accent}" stop-opacity=".12"/><stop offset=".5" stop-color="{accent}" stop-opacity=".85"/><stop offset="1" stop-color="{accent}" stop-opacity=".12"/></linearGradient>
+<linearGradient id="button-light"><stop stop-color="{accent}" stop-opacity="0"/><stop offset=".5" stop-color="{accent}" stop-opacity=".07"/><stop offset="1" stop-color="{accent}" stop-opacity="0"/></linearGradient>
+<clipPath id="button-clip"><rect x="1" y="1" width="246" height="62" rx="7"/></clipPath>
+</defs>
+<rect x=".5" y=".5" width="247" height="63" rx="8" fill="url(#button-bg)" stroke="#3c536c"/>
+<rect class="rim" x=".75" y=".75" width="246.5" height="62.5" rx="8" fill="none" stroke="url(#button-rim)" opacity=".5"/>
+<g clip-path="url(#button-clip)"><path class="sheen" d="M-80 1h65L5 63h-65Z" fill="url(#button-light)"/></g>
+<path d="M17 1h36" stroke="{accent}" stroke-opacity=".85"/>
+<g fill="none" stroke="{accent}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">{icons[name]}</g>''')
+        d.text(title, 50, 27, 11.5, "#e7f2ff", 800, .2)
+        d.text(subtitle, 50, 46, 10.4, "#adc1d6", 500)
+        d.add(f'<path class="arrow" d="m229 26 5 6-5 6" fill="none" stroke="{accent}" '
+              'stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>')
+        if not still:
+            delay = -index * 2
+            d.add(f'''<style>
+.rim{{animation:rim 6s ease-in-out {delay}s infinite}}
+.arrow{{animation:arrow 6s ease-in-out {delay}s infinite}}
+.detail{{animation:detail 6s ease-in-out {delay}s infinite}}
+.sheen{{animation:sheen 9s ease-in-out {delay}s infinite}}
+@keyframes rim{{0%,100%{{opacity:.25}}50%{{opacity:.9}}}}
+@keyframes arrow{{0%,100%{{transform:translateX(0)}}50%{{transform:translateX(3px)}}}}
+@keyframes detail{{0%,100%{{opacity:.55}}50%{{opacity:1}}}}
+@keyframes sheen{{0%{{transform:translateX(0)}}45%,100%{{transform:translateX(350px)}}}}
+</style>''')
+        suffix = "-static" if still else ""
+        save(d, "identity-action-" + name + suffix + ".svg", title + ": " + subtitle)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--font", required=True)
@@ -162,8 +214,9 @@ def main():
         hero(font, original, still=still)
         hero(font, original, mobile=True, still=still)
         hero(font, original, wiki=True, still=still)
+        setup_actions(font, still=still)
     navigation(font)
-    print("Rendered six investigation identity covers and three navigation assets.")
+    print("Rendered six identity covers, three navigation assets and six setup action variants.")
 
 
 if __name__ == "__main__":
