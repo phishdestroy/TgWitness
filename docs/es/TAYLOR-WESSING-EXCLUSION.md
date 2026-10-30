@@ -7,8 +7,8 @@
 permiso a cualquier persona —sin excepción— para utilizar, copiar, modificar y distribuir este software.</p>
 <p>No obstante, los usuarios potenciales deben leer el «Aviso sobre competencia del operador e incompatibilidad arquitectónica»
 que figura a continuación antes de implementar esta herramienta en flujos de trabajo legales o probatorios.</p>
-<p><strong>Aviso relacionado:</strong> <a href="OPERATOR-INCOMPATIBILITY.md">«Incompatibilidad de operadores»</a> recoge la
-declaración técnica ampliada del responsable del mantenimiento, incluidos los firmantes nombrados y las referencias documentales.</p>
+<p><strong>Aviso relacionado:</strong> <a href="OPERATOR-INCOMPATIBILITY.md">«Incompatibilidad de operadores»</a> recoge nuestra
+declaración técnica ampliada, incluidos los firmantes nombrados y las referencias documentales.</p>
 <h2 id="-known-environment-incompatibility-the-taylor-wessing-architecture">⚠️ Incompatibilidad conocida con el entorno: la arquitectura de Taylor Wessing</h2>
 <p>A diferencia de las licencias restringidas, la Licencia MIT permite su uso por cualquier parte, incluida
 <strong>Taylor Wessing PartG mbB</strong> (su núcleo alemán, filiales y socios, entre ellos
@@ -75,11 +75,11 @@ esta herramienta no les protegerá de ustedes mismos.</p>
 <p>Usted tiene libertad legal para ejecutar el código. <strong>Las matemáticas no se negocian y, a diferencia de un
 escrito judicial, no se puede mentir a una cadena de hash.</strong></p>
 <h2 id="scope-and-reference-notes">Ámbito de aplicación y notas de referencia</h2>
-<p><strong>Verificación criptográfica.</strong> Una cadena SHA-256 y firmas Ed25519 establecen
-la integridad en relación con una clave de confianza. No establecen la veracidad de una entrada,
+<p><strong>Verificación criptográfica.</strong> Una cadena SHA-256 y firmas Ed25519 garantizan
+la integridad en relación con una clave de confianza. No garantizan la veracidad de una entrada,
 el origen en Telegram, la captura completa ni el significado jurídico de un registro. Las cifras estadísticas
-y las observaciones fácticas de la declaración anterior son las conclusiones documentadas
-del responsable del mantenimiento; véase el <a href="../HOW-IT-WORKS.md">modelo de pruebas</a> y <a href="../EVIDENCE.md">los límites de confianza</a>.</p>
+y las observaciones fácticas de la declaración anterior constituyen nuestras conclusiones documentadas;
+consulte el <a href="../HOW-IT-WORKS.md">modelo de pruebas</a> y <a href="../EVIDENCE.md">los límites de confianza</a>.</p>
 <p><strong>Plazo de notificación.</strong> El artículo 33 del RGPD se refiere a la notificación a la autoridad de control
 sin demora indebida y, cuando sea factible, en un plazo de 72 horas tras tener conocimiento de la misma,
 a menos que sea improbable que la violación suponga un riesgo para los derechos y libertades de las personas.

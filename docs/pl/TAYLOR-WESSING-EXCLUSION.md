@@ -7,8 +7,8 @@
 każdemu — bez wyjątku — na użytkowanie, kopiowanie, modyfikowanie i rozpowszechnianie niniejszego oprogramowania.</p>
 <p>Niemniej jednak potencjalni użytkownicy powinni zapoznać się z poniższą informacją dotyczącą kompetencji operatora oraz
 niezgodności architektonicznej przed wdrożeniem tego narzędzia w procesach prawnych lub dowodowych.</p>
-<p><strong>Powiązana informacja:</strong> <a href="OPERATOR-INCOMPATIBILITY.md">„Niezgodność operatorów”</a> zawiera
-rozszerzone oświadczenie techniczne opiekuna, w tym nazwiska sygnatariuszy i odniesienia do dokumentów.</p>
+<p><strong>Powiązana informacja: Dokument</strong> <a href="OPERATOR-INCOMPATIBILITY.md">„Operator Incompatibility”</a> zawiera nasze
+rozszerzone oświadczenie techniczne, w tym nazwiska sygnatariuszy oraz odniesienia do dokumentów.</p>
 <h2 id="-known-environment-incompatibility-the-taylor-wessing-architecture">⚠️ Znana niezgodność środowiskowa: architektura Taylor Wessing</h2>
 <p>W przeciwieństwie do licencji ograniczonych, licencja MIT zezwala na korzystanie z niej przez dowolną stronę, w tym przez
 <strong>Taylor Wessing PartG mbB</strong> (jej niemiecką część główną, podmioty stowarzyszone i partnerów, w tym
@@ -76,10 +76,10 @@ to niniejsze narzędzie nie ochroni Państwa przed samymi sobą.</p>
 pisma procesowego, łańcuch skrótów nie pozwala na wprowadzanie w błąd.</strong></p>
 <h2 id="scope-and-reference-notes">Zakres i uwagi referencyjne</h2>
 <p><strong>Weryfikacja kryptograficzna.</strong> Łańcuch SHA-256 oraz podpisy Ed25519 potwierdzają
-integralność w odniesieniu do zaufanego klucza. Nie potwierdzają one prawdziwości danych wejściowych,
+integralność w odniesieniu do zaufanego klucza. Nie potwierdzają one jednak prawdziwości wprowadzonych danych,
 pochodzenia z serwisu Telegram, kompletności zapisu ani znaczenia prawnego danego zapisu. Dane statystyczne
-i obserwacje oparte na faktach zawarte w powyższym oświadczeniu stanowią udokumentowane
-ustalenia opiekuna projektu; proszę zapoznać się z <a href="../HOW-IT-WORKS.md">modelem dowodowym</a> oraz <a href="../EVIDENCE.md">granicami zaufania</a>.</p>
+oraz obserwacje oparte na faktach zawarte w powyższym oświadczeniu stanowią nasze udokumentowane
+ustalenia; prosimy zapoznać się z <a href="../HOW-IT-WORKS.md">modelem dowodowym</a> oraz <a href="../EVIDENCE.md">granicami zaufania</a>.</p>
 <p><strong>Termin powiadomienia.</strong> Artykuł 33 RODO dotyczy powiadomienia organu nadzorczego
 bez zbędnej zwłoki oraz, w miarę możliwości, w ciągu 72 godzin od stwierdzenia naruszenia,
 chyba że naruszenie to prawdopodobnie nie stwarza ryzyka dla praw i wolności osób fizycznych.

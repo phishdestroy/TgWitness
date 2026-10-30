@@ -7,8 +7,8 @@
 concessa a chiunque — senza eccezioni — l’autorizzazione a utilizzare, copiare, modificare e distribuire questo software.</p>
 <p>Tuttavia, i potenziali utenti dovrebbero leggere l’«Avviso sulle competenze dell’operatore e sulle incompatibilità architetturali»
 riportato di seguito prima di implementare questo strumento in flussi di lavoro legali o probatori.</p>
-<p><strong>Avviso correlato:</strong> <a href="OPERATOR-INCOMPATIBILITY.md">«Incompatibilità dell’operatore»</a> riporta la
-dichiarazione tecnica estesa del responsabile della manutenzione, compresi i firmatari indicati e i riferimenti ai documenti.</p>
+<p><strong>Avviso correlato:</strong> <a href="OPERATOR-INCOMPATIBILITY.md">«Incompatibilità dell’operatore»</a> riporta la nostra
+dichiarazione tecnica estesa, compresi i firmatari indicati e i riferimenti documentali.</p>
 <h2 id="-known-environment-incompatibility-the-taylor-wessing-architecture">⚠️ Incompatibilità nota con l’ambiente: l’architettura Taylor Wessing</h2>
 <p>A differenza delle licenze soggette a restrizioni, la Licenza MIT consente l’utilizzo da parte di qualsiasi soggetto, ivi compreso
 <strong>Taylor Wessing PartG mbB</strong> (il suo nucleo tedesco, le affiliate e i partner, tra cui
@@ -76,10 +76,10 @@ questo strumento non vi proteggerà da voi stessi.</p>
 memoria legale, non si può mentire a una catena di hash.</strong></p>
 <h2 id="scope-and-reference-notes">Ambito di applicazione e note di riferimento</h2>
 <p><strong>Verifica crittografica.</strong> Una catena SHA-256 e le firme Ed25519 garantiscono
-l’integrità rispetto a una chiave attendibile. Esse non garantiscono la veridicità di un dato inserito,
+l’integrità rispetto a una chiave attendibile. Esse non attestano la veridicità di un dato immesso,
 l’origine da Telegram, la cattura completa o il significato giuridico di una registrazione. I dati
-statistici e le osservazioni fattuali contenuti nella dichiarazione sopra riportata costituiscono i risultati documentati
-del responsabile della manutenzione; si vedano il <a href="../HOW-IT-WORKS.md">modello probatorio</a> e <a href="../EVIDENCE.md">i limiti di affidabilità</a>.</p>
+statistici e le osservazioni fattuali contenuti nella dichiarazione sopra riportata costituiscono i nostri risultati
+documentati; si vedano il <a href="../HOW-IT-WORKS.md">modello probatorio</a> e <a href="../EVIDENCE.md">i limiti di affidabilità</a>.</p>
 <p><strong>Tempistica della notifica.</strong> L’articolo 33 del GDPR riguarda la notifica all’autorità di controllo
 senza indebito ritardo e, ove possibile, entro 72 ore dalla presa di conoscenza,
 a meno che la violazione non sia tale da comportare un rischio per i diritti e le libertà delle persone fisiche.

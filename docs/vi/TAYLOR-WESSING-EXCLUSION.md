@@ -7,8 +7,8 @@
 cấp phép sử dụng, sao chép, sửa đổi và phân phối phần mềm này.</p>
 <p>Tuy nhiên, những người dùng tiềm năng nên đọc Thông báo về Năng lực của Người vận hành &amp; Sự không tương thích về Kiến trúc
 dưới đây trước khi triển khai công cụ này trong các quy trình pháp lý hoặc thu thập bằng chứng.</p>
-<p><strong>Thông báo liên quan:</strong> <a href="OPERATOR-INCOMPATIBILITY.md">“Sự không tương thích của nhà điều hành”</a> ghi lại
-tuyên bố kỹ thuật mở rộng của người duy trì, bao gồm các bên ký tên được nêu tên và các tài liệu tham khảo.</p>
+<p><strong>Thông báo liên quan: Báo cáo về</strong> <a href="OPERATOR-INCOMPATIBILITY.md">Sự không tương thích của Nhà điều hành</a> ghi lại
+tuyên bố kỹ thuật chi tiết của chúng tôi, bao gồm danh sách các bên ký tên và các tài liệu tham khảo.</p>
 <h2 id="-known-environment-incompatibility-the-taylor-wessing-architecture">⚠️ Tình trạng không tương thích với môi trường đã biết: Kiến trúc Taylor Wessing</h2>
 <p>Không giống như các giấy phép có hạn chế, Giấy phép MIT cho phép bất kỳ bên nào sử dụng, bao gồm cả
 <strong>Taylor Wessing PartG mbB</strong> (cơ sở chính tại Đức, các chi nhánh và đối tác của công ty này, trong đó có
@@ -75,11 +75,11 @@ giả định rằng một chữ ký uy tín có thể che giấu sự rò rỉ 
 <p>Về mặt pháp lý, quý vị hoàn toàn tự do trong việc chạy mã nguồn này. <strong>Toán học không chấp nhận thương lượng, và không giống như một
 bản tóm tắt pháp lý, chuỗi băm không thể bị lừa dối.</strong></p>
 <h2 id="scope-and-reference-notes">Phạm vi và Ghi chú Tham khảo</h2>
-<p><strong>Xác minh mật mã.</strong> Chuỗi SHA-256 và chữ ký Ed25519 xác lập
-tính toàn vẹn so với một khóa đáng tin cậy. Chúng không xác lập tính xác thực của dữ liệu đầu vào,
-nguồn gốc từ Telegram, việc ghi lại đầy đủ, hay ý nghĩa pháp lý của một bản ghi. Các số liệu
-thống kê và quan sát thực tế trong tuyên bố trên là những phát hiện đã được ghi chép
-của người duy trì; xin tham khảo mô <a href="../HOW-IT-WORKS.md">hình bằng chứng</a> và <a href="../EVIDENCE.md">các ranh giới tin cậy</a>.</p>
+<p><strong>Xác minh mật mã.</strong> Chuỗi SHA-256 và chữ ký Ed25519 đảm bảo
+tính toàn vẹn dựa trên một khóa tin cậy. Chúng không xác nhận tính xác thực của dữ liệu đầu vào,
+nguồn gốc từ Telegram, việc ghi lại đầy đủ hay ý nghĩa pháp lý của một bản ghi. Các số liệu
+thống kê và quan sát thực tế trong tuyên bố trên là những phát hiện đã được chúng tôi ghi chép lại;
+xin tham khảo mô <a href="../HOW-IT-WORKS.md">hình bằng chứng</a> và <a href="../EVIDENCE.md">các ranh giới tin cậy</a>.</p>
 <p><strong>Thời điểm thông báo.</strong> Điều 33 của GDPR quy định việc thông báo cho cơ quan giám sát
 mà không được chậm trễ không cần thiết và, nếu khả thi, trong vòng 72 giờ kể từ khi phát hiện,
 trừ khi vi phạm đó không có khả năng gây ra rủi ro đối với các quyền và tự do của cá nhân.

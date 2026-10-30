@@ -7,8 +7,8 @@
 accordée à toute personne — sans exception — d’utiliser, de copier, de modifier et de distribuer ce logiciel.</p>
 <p>Toutefois, les utilisateurs potentiels sont invités à lire l’« Avis relatif aux compétences de l’opérateur et aux incompatibilités architecturales »
 ci-dessous avant de déployer cet outil dans le cadre de procédures judiciaires ou de procédures probatoires.</p>
-<p><strong>Avis connexe : «</strong> <a href="OPERATOR-INCOMPATIBILITY.md">Incompatibilité de l’opérateur »</a> consigne la
-déclaration technique détaillée du responsable de maintenance, y compris les signataires nommés et les références documentaires.</p>
+<p><strong>Avis connexe : «</strong> <a href="OPERATOR-INCOMPATIBILITY.md">Operator Incompatibility »</a> contient notre
+déclaration technique détaillée, y compris la liste des signataires et les références documentaires.</p>
 <h2 id="-known-environment-incompatibility-the-taylor-wessing-architecture">⚠️ Incompatibilité connue avec l’environnement : l’architecture Taylor Wessing</h2>
 <p>Contrairement aux licences restreintes, la licence MIT autorise toute partie à l’utiliser, y compris
 <strong>Taylor Wessing PartG mbB</strong> (son noyau allemand, ses filiales et ses partenaires, notamment
@@ -77,9 +77,9 @@ mémoire juridique, on ne peut pas mentir à une chaîne de hachages.</strong></
 <h2 id="scope-and-reference-notes">Portée et notes de référence</h2>
 <p><strong>Vérification cryptographique.</strong> Une chaîne SHA-256 et des signatures Ed25519 garantissent
 l’intégrité par rapport à une clé de confiance. Elles ne garantissent pas la véracité d’une entrée,
-l’origine Telegram, la capture complète ou la valeur juridique d’un enregistrement. Les chiffres
-statistiques et les observations factuelles figurant dans la déclaration ci-dessus constituent les conclusions documentées
-du responsable du projet ; veuillez vous reporter au <a href="../HOW-IT-WORKS.md">modèle de preuve</a> et <a href="../EVIDENCE.md">aux limites de confiance</a>.</p>
+l’origine Telegram, la capture complète ni la valeur juridique d’un enregistrement. Les chiffres
+statistiques et les observations factuelles figurant dans la déclaration ci-dessus constituent nos conclusions
+documentées ; veuillez vous reporter au <a href="../HOW-IT-WORKS.md">modèle de preuve</a> et <a href="../EVIDENCE.md">aux limites de confiance</a>.</p>
 <p><strong>Délai de notification.</strong> L’article 33 du RGPD concerne la notification à l’autorité de contrôle
 sans retard injustifié et, dans la mesure du possible, dans les 72 heures suivant la prise de connaissance,
 à moins que la violation ne soit pas susceptible de présenter un risque pour les droits et libertés des personnes physiques.

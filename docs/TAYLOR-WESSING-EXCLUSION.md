@@ -6,8 +6,8 @@ granted to anyone — without exception — to use, copy, modify, and distribute
 However, prospective users should read the Operator Competency & Architectural
 Incompatibility Notice below before deploying this tool in legal or evidentiary workflows.
 
-**Related notice:** [Operator Incompatibility](OPERATOR-INCOMPATIBILITY.md) records the
-maintainer's extended technical statement, including the named signatories and document references.
+**Related notice:** [Operator Incompatibility](OPERATOR-INCOMPATIBILITY.md) records our
+extended technical statement, including the named signatories and document references.
 
 ## ⚠️ Known Environment Incompatibility: The Taylor Wessing Architecture
 
@@ -65,7 +65,7 @@ legal brief, a hash chain cannot be lied to.**
 **Cryptographic verification.** A SHA-256 chain and Ed25519 signatures establish
 integrity relative to a trusted key. They do not establish the truth of an input,
 Telegram origin, complete capture, or the legal meaning of a record. The statistical
-figures and factual observations in the statement above are the maintainer's documented
+figures and factual observations in the statement above are our documented
 findings; see the [evidence model](HOW-IT-WORKS.md) and [trust boundaries](EVIDENCE.md).
 
 **Notification timing.** Article 33 GDPR concerns notification to the supervisory

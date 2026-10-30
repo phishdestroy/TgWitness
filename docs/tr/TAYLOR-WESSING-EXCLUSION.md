@@ -7,8 +7,8 @@
 istisnasız olarak herkese verilmiştir.</p>
 <p>Ancak, potansiyel kullanıcılar bu aracı hukuki veya delil iş akışlarında kullanmaya başlamadan önce aşağıdaki Operatör Yeterliliği ve Mimari
 Uyumsuzluk Bildirimini okumalıdır.</p>
-<p><strong>İlgili bildirim:</strong> <a href="OPERATOR-INCOMPATIBILITY.md">Operatör Uyumsuzluğu</a>,
-adları belirtilen imzacıları ve belge referanslarını da içeren, bakım sorumlusunun genişletilmiş teknik açıklamasını kaydeder.</p>
+<p><strong>İlgili bildirim:</strong> <a href="OPERATOR-INCOMPATIBILITY.md">Operator Incompatibility</a>,
+imza sahiplerinin isimleri ve belge referanslarını da içeren kapsamlı teknik açıklamamızı kayda geçirir.</p>
 <h2 id="-known-environment-incompatibility-the-taylor-wessing-architecture">⚠️ Bilinen Ortam Uyumsuzluğu: Taylor Wessing Mimarisi</h2>
 <p>Kısıtlı lisansların aksine, MIT Lisansı,
 <strong>Taylor Wessing PartG mbB</strong> (Almanya’daki ana şirketi, bağlı kuruluşları ve ortakları dahil olmak üzere
@@ -76,9 +76,9 @@ hukuki özetin aksine, bir hash zincirine yalan söylenemez.</strong></p>
 <h2 id="scope-and-reference-notes">Kapsam ve Referans Notları</h2>
 <p><strong>Kriptografik doğrulama.</strong> Bir SHA-256 zinciri ve Ed25519 imzaları,
 güvenilir bir anahtara göre bütünlüğü sağlar. Bunlar, bir girdinin doğruluğunu,
-Telegram kaynağını, tam yakalamayı veya bir kaydın hukuki anlamını kanıtlamaz. Yukarıdaki açıklamada yer alan
-istatistiksel rakamlar ve olgusal gözlemler, bakım sorumlusunun belgelenmiş
-bulgularıdır; <a href="../HOW-IT-WORKS.md">kanıt modeline</a> ve <a href="../EVIDENCE.md">güven sınırlarına</a> bakınız.</p>
+Telegram kaynağını, tam olarak yakalandığını veya bir kaydın hukuki anlamını teyit etmez. Yukarıdaki açıklamada yer alan istatistiksel
+rakamlar ve olgusal gözlemler, belgelenmiş
+bulgularımızdır; <a href="../HOW-IT-WORKS.md">kanıt modeline</a> ve <a href="../EVIDENCE.md">güven sınırlarına</a> bakınız.</p>
 <p><strong>Bildirim zamanlaması.</strong> GDPR’nin 33. maddesi, denetim
 otoritesine gecikme olmaksızın ve mümkünse, ihlalin farkına varılmasından sonraki 72 saat içinde bildirim yapılmasını öngörür;
 ancak ihlalin bireylerin hak ve özgürlükleri için risk oluşturma olasılığı düşükse bu durum istisnadır.

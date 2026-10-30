@@ -7,8 +7,8 @@
 concedida permissão a qualquer pessoa — sem exceção — para usar, copiar, modificar e distribuir este software.</p>
 <p>No entanto, os usuários em potencial devem ler o Aviso sobre Competência do Operador e Incompatibilidade Arquitetônica
 abaixo antes de implantar esta ferramenta em fluxos de trabalho jurídicos ou probatórios.</p>
-<p><strong>Aviso relacionado: O documento</strong> <a href="OPERATOR-INCOMPATIBILITY.md">“Incompatibilidade de Operadores”</a> registra a
-declaração técnica ampliada do mantenedor, incluindo os signatários nomeados e as referências aos documentos.</p>
+<p><strong>Aviso relacionado: O documento</strong> <a href="OPERATOR-INCOMPATIBILITY.md">“Incompatibilidade de Operadores”</a> contém nossa
+declaração técnica completa, incluindo os signatários identificados e as referências dos documentos.</p>
 <h2 id="-known-environment-incompatibility-the-taylor-wessing-architecture">⚠️ Incompatibilidade conhecida com o ambiente: a arquitetura Taylor Wessing</h2>
 <p>Ao contrário das licenças restritas, a Licença MIT permite o uso por qualquer parte, incluindo
 <strong>a Taylor Wessing PartG mbB</strong> (seu núcleo alemão, afiliadas e parceiros, incluindo
@@ -78,8 +78,8 @@ petição judicial, não se pode mentir para uma cadeia de hash.</strong></p>
 <p><strong>Verificação criptográfica.</strong> Uma cadeia SHA-256 e assinaturas Ed25519 estabelecem
 a integridade em relação a uma chave confiável. Elas não comprovam a veracidade de uma entrada,
 a origem no Telegram, a captura completa ou o significado jurídico de um registro. Os dados
-estatísticos e as observações factuais na declaração acima são as conclusões documentadas
-do mantenedor; consulte o <a href="../HOW-IT-WORKS.md">modelo de evidência</a> e <a href="../EVIDENCE.md">os limites de confiança</a>.</p>
+estatísticos e as observações factuais na declaração acima são nossas conclusões
+documentadas; consulte o <a href="../HOW-IT-WORKS.md">modelo de evidência</a> e <a href="../EVIDENCE.md">os limites de confiança</a>.</p>
 <p><strong>Prazo de notificação.</strong> O Artigo 33 do RGPD trata da notificação à autoridade supervisora
 sem demora injustificada e, quando viável, no prazo de 72 horas após a constatação,
 a menos que seja improvável que a violação represente um risco aos direitos e liberdades das pessoas físicas.

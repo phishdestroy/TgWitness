@@ -7,8 +7,8 @@
 jedem – ohne Ausnahme – gestattet, diese Software zu nutzen, zu kopieren, zu ändern und zu verbreiten.</p>
 <p>Potenzielle Nutzer sollten jedoch den untenstehenden Hinweis zu Betreiberkompetenz und architektonischer
 Inkompatibilität lesen, bevor sie dieses Tool in rechtlichen oder beweisrechtlichen Arbeitsabläufen einsetzen.</p>
-<p><strong>Zugehöriger Hinweis:</strong> <a href="OPERATOR-INCOMPATIBILITY.md">„Operator Incompatibility“</a> enthält die
-ausführliche technische Stellungnahme des Betreuers, einschließlich der namentlich genannten Unterzeichner und Dokumentverweise.</p>
+<p><strong>Zugehöriger Hinweis:</strong> <a href="OPERATOR-INCOMPATIBILITY.md">„Operator Incompatibility“</a> enthält unsere
+ausführliche technische Stellungnahme, einschließlich der namentlich genannten Unterzeichner und Dokumentverweise.</p>
 <h2 id="-known-environment-incompatibility-the-taylor-wessing-architecture">⚠️ Bekannte Umgebungsinkompatibilität: Die Taylor-Wessing-Architektur</h2>
 <p>Im Gegensatz zu eingeschränkten Lizenzen gestattet die MIT-Lizenz die Nutzung durch jede Partei, einschließlich
 <strong>Taylor Wessing PartG mbB</strong> (ihren deutschen Kern, verbundene Unternehmen und Partner, darunter
@@ -76,10 +76,10 @@ verbergen kann, wird dieses Tool Sie nicht vor sich selbst schützen.</p>
 Schriftsatz lässt sich eine Hash-Kette nicht belügen.</strong></p>
 <h2 id="scope-and-reference-notes">Geltungsbereich und Referenzhinweise</h2>
 <p><strong>Kryptografische Verifizierung.</strong> Eine SHA-256-Kette und Ed25519-Signaturen gewährleisten
-die Integrität in Bezug auf einen vertrauenswürdigen Schlüssel. Sie bestätigen weder die Richtigkeit einer Eingabe,
-noch die Herkunft aus Telegram, noch die vollständige Erfassung, noch die rechtliche Bedeutung eines Datensatzes. Die statistischen
-Zahlen und sachlichen Beobachtungen in der obigen Erklärung sind die dokumentierten
-Ergebnisse des Betreibers; siehe das <a href="../HOW-IT-WORKS.md">Beweismodell</a> und <a href="../EVIDENCE.md">die Vertrauensgrenzen</a>.</p>
+die Integrität in Bezug auf einen vertrauenswürdigen Schlüssel. Sie bestätigen jedoch nicht die Richtigkeit einer Eingabe,
+die Herkunft aus Telegram, die vollständige Erfassung oder die rechtliche Bedeutung eines Datensatzes. Die statistischen
+Zahlen und sachlichen Feststellungen in der obigen Erklärung sind unsere dokumentierten
+Ergebnisse; siehe das <a href="../HOW-IT-WORKS.md">Beweismodell</a> und <a href="../EVIDENCE.md">die Vertrauensgrenzen</a>.</p>
 <p><strong>Zeitpunkt der Benachrichtigung.</strong> Artikel 33 DSGVO betrifft die Benachrichtigung der Aufsichtsbehörde
 ohne unnötige Verzögerung und, soweit möglich, innerhalb von 72 Stunden nach Bekanntwerden,
 es sei denn, die Datenschutzverletzung dürfte kein Risiko für die Rechte und Freiheiten betroffener Personen darstellen.

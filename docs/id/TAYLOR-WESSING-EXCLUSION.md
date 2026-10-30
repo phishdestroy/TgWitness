@@ -8,7 +8,7 @@ diberikan kepada siapa pun — tanpa kecuali — untuk menggunakan, menyalin, me
 <p>Namun, calon pengguna disarankan untuk membaca Pemberitahuan Kompetensi Operator &amp; Ketidakcocokan Arsitektur
 di bawah ini sebelum menerapkan alat ini dalam alur kerja hukum atau pembuktian.</p>
 <p><strong>Pemberitahuan terkait:</strong> <a href="OPERATOR-INCOMPATIBILITY.md">Ketidakcocokan Operator</a> mencatat
-pernyataan teknis lengkap dari pengelola, termasuk nama-nama penandatangan dan referensi dokumen.</p>
+pernyataan teknis kami yang lebih lengkap, termasuk nama-nama penandatangan dan referensi dokumen.</p>
 <h2 id="-known-environment-incompatibility-the-taylor-wessing-architecture">⚠️ Ketidakcocokan Lingkungan yang Diketahui: Arsitektur Taylor Wessing</h2>
 <p>Tidak seperti lisensi yang dibatasi, Lisensi MIT mengizinkan penggunaan oleh pihak mana pun, termasuk
 <strong>Taylor Wessing PartG mbB</strong> (inti perusahaan di Jerman, afiliasi, dan mitranya, termasuk
@@ -75,11 +75,11 @@ alat ini tidak akan melindungi Anda dari diri Anda sendiri.</p>
 <p>Anda secara hukum bebas untuk menjalankan kode tersebut. <strong>Matematika tidak mengenal negosiasi, dan tidak seperti
 memo hukum, rantai hash tidak dapat dibohongi.</strong></p>
 <h2 id="scope-and-reference-notes">Catatan Ruang Lingkup dan Referensi</h2>
-<p><strong>Verifikasi kriptografis.</strong> Rantai SHA-256 dan tanda tangan Ed25519 menetapkan
-integritas relatif terhadap kunci tepercaya. Keduanya tidak menetapkan kebenaran suatu masukan,
-asal Telegram, pencatatan lengkap, atau makna hukum dari suatu catatan. Angka-angka
-statistik dan pengamatan faktual dalam pernyataan di atas merupakan temuan yang didokumentasikan
-oleh pengelola; lihat <a href="../HOW-IT-WORKS.md">model bukti</a> dan <a href="../EVIDENCE.md">batas-batas kepercayaan</a>.</p>
+<p><strong>Verifikasi kriptografis.</strong> Rantai SHA-256 dan tanda tangan Ed25519 memastikan
+integritas relatif terhadap kunci tepercaya. Verifikasi ini tidak menjamin kebenaran input,
+asal Telegram, pencatatan yang lengkap, atau makna hukum dari suatu catatan. Angka-angka
+statistik dan pengamatan faktual dalam pernyataan di atas merupakan temuan kami yang terdokumentasi;
+lihat <a href="../HOW-IT-WORKS.md">model bukti</a> dan <a href="../EVIDENCE.md">batas-batas kepercayaan</a>.</p>
 <p><strong>Waktu pemberitahuan.</strong> Pasal 33 GDPR mengatur pemberitahuan kepada otoritas pengawas
 tanpa penundaan yang tidak wajar dan, jika memungkinkan, dalam waktu 72 jam setelah diketahui,
 kecuali jika pelanggaran tersebut tidak mungkin menimbulkan risiko terhadap hak dan kebebasan individu.

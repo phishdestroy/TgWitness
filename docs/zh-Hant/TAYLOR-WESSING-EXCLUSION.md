@@ -7,8 +7,8 @@
 任何人——無一例外——均獲准使用、複製、修改及發行本軟體。</p>
 <p>然而，潛在使用者應在將此工具部署於法律或證據工作流程之前，先閱讀下方的《操作者能力與架構
 不相容性聲明》。</p>
-<p><strong>相關聲明：「</strong><a href="OPERATOR-INCOMPATIBILITY.md">操作者不相容性」</a>記錄了
-維護者的延伸技術聲明，包括具名簽署人及文件參考資料。</p>
+<p><strong>相關公告：《</strong><a href="OPERATOR-INCOMPATIBILITY.md">操作員不相容性》（Operator Incompatibility</a>）記錄了我們的
+擴充技術聲明，其中包含具名簽署人及文件參考資料。</p>
 <h2 id="-known-environment-incompatibility-the-taylor-wessing-architecture">⚠️ 已知環境不相容性：Taylor Wessing 架構</h2>
 <p>與限制性授權不同，MIT 授權允許任何方使用，包括
 <strong>Taylor Wessing PartG mbB</strong>（其德國核心團隊、附屬機構及合作夥伴，包括
@@ -74,11 +74,11 @@
 <p>您在法律上享有自由執行此程式碼的權利。<strong>數學不接受協商，且與
 法律辯護狀不同，哈希鏈無法被欺騙。</strong></p>
 <h2 id="scope-and-reference-notes">範圍與參考註釋</h2>
-<p><strong>加密驗證。</strong>SHA-256 鏈與 Ed25519 簽名可建立
-相對於可信密鑰的完整性。但無法證明輸入內容的真實性、
+<p><strong>加密驗證。</strong>透過 SHA-256 鏈與 Ed25519 簽名，可針對
+可信密鑰建立資料完整性。但這些機制並不能證明輸入內容的真實性、
 Telegram 來源、完整擷取，或記錄的法律意義。 上述聲明中的
-統計數據與事實觀察，均為維護者所記錄的
-調查結果；請參閱<a href="../HOW-IT-WORKS.md">證據模型</a>與<a href="../EVIDENCE.md">信任邊界</a>。</p>
+統計數據與事實觀察均為我們的
+經文件記錄之調查結果；請參閱<a href="../HOW-IT-WORKS.md">證據模型</a>與<a href="../EVIDENCE.md">信任邊界</a>。</p>
 <p><strong>通知時機。</strong>《一般資料保護條例》（GDPR）第 33 條規定，須在知悉後
 盡快且在可行情況下於 72 小時內向監督
 機關通報，除非該資料外洩事件極不可能對個人權利與自由造成風險。

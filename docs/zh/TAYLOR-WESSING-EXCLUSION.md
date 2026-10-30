@@ -7,8 +7,8 @@
 任何人——无一例外——使用、复制、修改和分发本软件。</p>
 <p>但是，潜在用户在将此工具部署于法律或取证工作流程之前，应阅读下文的《操作员能力与架构
 不兼容性通知》。</p>
-<p><strong>相关声明：</strong><a href="OPERATOR-INCOMPATIBILITY.md">《操作员不兼容性</a>》记录了
-维护者的扩展技术声明，包括具名签署人和文档参考。</p>
+<p><strong>相关声明：</strong><a href="OPERATOR-INCOMPATIBILITY.md">《运营商不兼容性</a>》记录了我们的
+扩展技术声明，其中包括具名签署方及文档参考资料。</p>
 <h2 id="-known-environment-incompatibility-the-taylor-wessing-architecture">⚠️ 已知环境不兼容问题：Taylor Wessing 架构</h2>
 <p>与限制性许可不同，MIT 许可允许任何方使用，包括
 <strong>Taylor Wessing PartG mbB</strong>（其德国核心团队、附属机构及合作伙伴，包括
@@ -74,11 +74,11 @@
 <p>您在法律上完全有权运行该代码。<strong>数学不讲妥协，而且与
 法律简报不同，哈希链是无法被欺骗的。</strong></p>
 <h2 id="scope-and-reference-notes">范围与参考说明</h2>
-<p><strong>加密验证。</strong>SHA-256 链和 Ed25519 签名基于可信密钥确立
-数据完整性。它们并不证明输入内容的真实性、
+<p><strong>加密验证。</strong>SHA-256 链和 Ed25519 签名基于可信密钥
+确保数据完整性。但它们无法证明输入内容的真实性、
 Telegram 来源、完整捕获情况，或记录的法律含义。 上述声明中的
-统计数据和事实观察结果均为维护者记录在案的
-调查结果；请参阅<a href="../HOW-IT-WORKS.md">证据模型</a>和<a href="../EVIDENCE.md">信任边界</a>。</p>
+统计数据和事实观察结果均为我们的
+有据可查的调查结果；请参阅<a href="../HOW-IT-WORKS.md">证据模型</a>和<a href="../EVIDENCE.md">信任边界</a>。</p>
 <p><strong>通知时限。</strong>《通用数据保护条例》（GDPR）第33条规定，应在知悉后
 不迟延地向监管
 机构通报，并在可行情况下于72小时内完成，
