@@ -570,7 +570,12 @@ html:is(:lang(ar), :lang(fa), :lang(ur)) body { line-height: 1.95; }
 .home-page .s3-overview h3 { max-width:760px; margin-bottom:28px; font-size:clamp(28px,3.1vw,40px); line-height:1.2; letter-spacing:-.025em; }
 .home-page .s3-layout { display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); align-items:start; gap:32px; }
 .home-page .s3-copy>p { margin-bottom:16px; font-size:14px; line-height:1.8; }
-.home-page .s3-features { margin:24px 0 0; display:grid; gap:16px; }
+.home-page .presentation-details { min-width:0; border-top:1px solid var(--line); }
+.home-page .presentation-details>summary { min-height:48px; padding:13px 0; cursor:pointer; color:var(--ink); font-size:14px; font-weight:650; }
+.home-page .presentation-details[open]>summary { margin-bottom:10px; }
+.home-page .installation-details { margin-top:28px; border-bottom:1px solid var(--line); }
+.home-page .installation-details[open] { padding-bottom:24px; }
+.home-page .s3-features { margin:12px 0 0; display:grid; gap:16px; }
 .home-page .s3-features>div { border-top:1px solid var(--line); padding-top:13px; }
 .home-page .s3-features dt { font-size:14px; font-weight:650; }
 .home-page .s3-features dd { margin:5px 0 0; color:var(--muted); font-size:13px; line-height:1.8; }

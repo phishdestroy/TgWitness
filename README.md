@@ -26,8 +26,7 @@
 
 ## Keep the conversation. Keep the changes.
 
-Read messages alongside their captured edits and deletion notices. Follow people,
-shared files and extracted leads back to the source record.
+Captured messages, edits, deletion notices, people and files — linked to their source.
 
 <a href="https://phishdestroy.github.io/TgWitness/demo/">
 <picture>
@@ -57,9 +56,8 @@ All screenshots use fictional demonstration data. Open an image for its full-siz
 
 </details>
 
-**Choose your scope:** selected chats, a Telegram folder or a dedicated account.
-Investigation mode adds source profiles and an initial history snapshot. Supported
-replies and bot-button actions also enter the signed journal.
+**Collection:** chosen chats · Telegram folder · whole account · investigation mode.
+Profiles, history snapshots and supported bot actions stay with the case.
 
 [Collection & scope](docs/COLLECTION.md) · [Investigation tools](docs/INVESTIGATION.md) · [Modes & evidence](https://phishdestroy.github.io/TgWitness/guides/modes.html)
 
@@ -75,18 +73,23 @@ replies and bot-button actions also enter the signed journal.
 extract it and double-click **`TgWitness.cmd`**. Python is included and the panel opens in your
 browser; **`TgWitness-Demo.cmd`** opens the fictional demo.
 
-[Explore the demo](https://phishdestroy.github.io/TgWitness/demo/) without an account,
-or [download the source](https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip)
-and run it with **Python 3.11+**. The launcher prepares the environment.
+[Download the source](https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip).
+Requires **Python 3.11+**; the launcher prepares the environment.
 
 | | Windows | Linux / macOS |
 | --- | --- | --- |
 | **Try fictional records** | `scripts\Demo.cmd` | `sh start.sh --demo` |
 | **Connect your account** | `Start.cmd` | `sh start.sh` |
 
-The launchers open **http://127.0.0.1:8787** in your browser. Stop the demo before starting live mode. For a connected
-account, the panel token is in `data/live/panel-token.txt`. Use a dedicated account
-you can afford to lose.
+The launchers open **http://127.0.0.1:8787**. Use a **dedicated account**.
+
+<details>
+<summary>Panel access</summary>
+
+Stop the demo before starting live mode. The live panel token is in
+`data/live/panel-token.txt`.
+
+</details>
 
 <p align="center">
   <a href="https://phishdestroy.github.io/TgWitness/demo/guide.html"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/identity-action-setup-static.svg"><img src="docs/assets/presentation/identity-action-setup.svg" width="248" height="64" alt="Setup guide — Install, launch &amp; capture"></picture></a>
@@ -100,9 +103,8 @@ you can afford to lose.
 
 ## Export and verify
 
-**Let the record speak for itself.** Export the captured events, preserved files
-and an offline report in one signed package. Each event links to the previous
-SHA-256 hash and carries an Ed25519 signature.
+Export observations, files and an offline report in a **signed ZIP**.
+Each record carries a SHA-256 link and an Ed25519 signature.
 
 <picture>
   <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/case-chain-mobile-static.svg">
@@ -167,21 +169,15 @@ two workspaces on one machine do not provide that separation.
 
 ## Notifications · Apprise
 
-Send problem alerts, changes in observed chats and a daily summary through
-**Apprise** to Matrix, Telegram, Discord, Slack, ntfy, email and other supported
-services. A JSON webhook connects your own notification endpoint; each workspace
-can have several destinations.
+Problem alerts, chat changes and daily summaries via **Apprise**: messengers,
+email or your own JSON webhook. Configure them in **Sources → Notifications**.
 
-Open **Sources → Notifications → Alerts and a daily summary**. Save the destination
-addresses and use **Send test**. Message excerpts are optional.
-
-[Configure notifications →](docs/OPERATIONS.md#notifications) · [Apprise services and URL formats](https://appriseit.com/services/)
+[Set up notifications →](docs/OPERATIONS.md#notifications)
 
 ## Off-site copy · S3
 
-Keep a second copy, encrypted with **AES-256-GCM before upload**. Optional S3-compatible
-storage preserves the journal, original files, checkpoints and completed chat exports.
-Keep the recovery key separately and verify the recovered record.
+Journal, files, checkpoints and chat exports — encrypted with **AES-256-GCM before upload**
+to S3-compatible storage. Keep the recovery key separately.
 
 [S3 setup & recovery →](https://phishdestroy.github.io/TgWitness/docs/exports/#s3)
 

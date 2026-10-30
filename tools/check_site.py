@@ -75,6 +75,9 @@ def main():
                 page.keyboard.press("Escape")
                 expect(page.locator(".screenshot-dialog")).to_be_hidden()
                 expect(screenshot).to_be_focused()
+                page.locator(".installation-details>summary").focus()
+                page.keyboard.press("Enter")
+                expect(page.locator(".installation-details")).to_have_attribute("open", "")
                 for tab, panel in (("tab-unix", "setup-unix"), ("tab-docker", "setup-docker"), ("tab-windows", "setup-windows")):
                     page.locator("#" + tab).click()
                     expect(page.locator("#" + panel)).to_be_visible()
@@ -85,8 +88,9 @@ def main():
                 page.locator('[data-copy="clone-command"]').click()
                 expect(page.locator("#copy-status")).to_contain_text("copy it manually")
                 assert page.evaluate("window.getSelection().toString()") == page.locator("#clone-command").text_content()
+                page.locator(".installation-details>summary").click()
                 page.get_by_text("Can it recover messages deleted before capture?", exact=True).click()
-                expect(page.locator("details[open]")).to_contain_text("cannot reconstruct")
+                expect(page.locator(".faq details[open]")).to_contain_text("cannot reconstruct")
                 page.get_by_text("Can it recover messages deleted before capture?", exact=True).click()
                 # Capture the normal page, not transient copy/failure test states.
                 page.reload(wait_until="networkidle")
@@ -104,6 +108,9 @@ def main():
                 nojs.route("**/*", route_request)
                 fallback = nojs.new_page()
                 fallback.goto(url)
+                fallback.locator(".installation-details>summary").click()
+                fallback.locator("#s3 .presentation-details>summary").click()
+                expect(fallback.locator("#s3 .s3-features")).to_be_visible()
                 for panel in ("panel-chats", "panel-journal", "panel-edits", "panel-exports", "setup-windows", "setup-unix", "setup-docker"):
                     expect(fallback.locator("#" + panel)).to_be_visible()
                 # The online demo: the real panel under the project path, answered from recorded
