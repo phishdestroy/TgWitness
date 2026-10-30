@@ -9,6 +9,9 @@ and animation are SVG elements. The artwork illustrates a workflow, not an app s
 
 | Asset | Purpose |
 | --- | --- |
+| [Repository cover](readme-cover.svg), [static cover](readme-cover-static.svg), [mobile cover](readme-cover-mobile.svg) | Compact TgWitness masthead with the original animated investigation scene and reduced-motion alternative |
+| [Workspace preview, light](workspace-preview-light.png), [dark](workspace-preview-dark.png) | Framed, unmodified Chats screenshots with fictional demo data |
+| `nav-*.svg` | Four equal-width navigation buttons; two per row on narrow screens |
 | [README hero](readme-hero.svg) | Compact animated repository cover |
 | [Shared brand cover](brand.svg) | Reduced-motion README alternative and translated introductions |
 | [Investigation artwork](tgwitness-investigation-static.svg) | Full-size static composition |
@@ -29,6 +32,13 @@ and animation are SVG elements. The artwork illustrates a workflow, not an app s
 | [Divider](divider.svg), `button-*.svg` | Shared section and navigation elements |
 
 ## Use and maintenance
+
+The main README leads with the compact cover and a workspace preview. Both video
+players remain visible in the films section. Additional screenshots and the
+source map expand on demand. The full illustrated investigation sequence is
+available as a film and in the presentation gallery.
+Use the animated cover inside the README's `picture` element: it selects the
+separate static cover for reduced motion and the compact cover on mobile.
 
 Use relative links inside the repository. The wiki builder copies referenced images
 into the separate Wiki repository and rewrites their links. Keep captions in image
