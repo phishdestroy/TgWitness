@@ -32,7 +32,7 @@ def test_private_or_unexpected_paths_are_refused(relative):
     assert build_portable.release_problem(relative)
 
 
-@pytest.mark.parametrize("relative", ["LICENSE", "TgWitness-Demo.cmd", "python/python.exe",
+@pytest.mark.parametrize("relative", ["LICENSE", "NOTICE", "TgWitness-Demo.cmd", "python/python.exe",
                                       "python/Lib/site-packages/certifi/cacert.pem"])
 def test_package_layout_is_accepted(relative):
     assert build_portable.release_problem(relative) is None
@@ -72,6 +72,7 @@ def test_linked_paths_are_refused(tmp_path):
 @pytest.mark.skipif(os.name != "nt" or sys.version_info[:2] != (3, 12), reason="the builder runs on Windows/Python 3.12")
 def test_rebuild_never_reuses_an_earlier_stage_with_a_locked_private_file(tmp_path):
     (tmp_path / "LICENSE").write_text("Synthetic license", encoding="ascii")
+    (tmp_path / "NOTICE").write_text("Synthetic maintainer notice", encoding="ascii")
     old = tmp_path / "build/portable" / ("TgWitness-" + build_portable.VERSION) / "data/private-marker.txt"
     old.parent.mkdir(parents=True)
     old.write_text("SYNTHETIC PRIVATE DATA - DO NOT SHIP", encoding="ascii")

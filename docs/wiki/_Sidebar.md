@@ -25,6 +25,7 @@
 
 **Project**
 
+- [Operator incompatibility notice](Operator-Incompatibility.md)
 - [Licence and use restriction](../TAYLOR-WESSING-EXCLUSION.md)
 - [Complete project guide](../PROJECT-GUIDE.md)
 - [Technical documentation](../README.md)

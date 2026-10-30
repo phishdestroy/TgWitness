@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Added the maintainer's Operator Incompatibility NOTICE to README, SECURITY,
+  the documentation, Wiki and website. A single source keeps the complete statement
+  consistent across those pages; source, Python and portable distributions include
+  NOTICE alongside the licence. The existing licence restriction remains in force.
 - Changed the current project licence to the TgWitness Restricted License, with
   the Taylor Wessing exclusion. Added the maintainer's statement, source reference
   and scope notes to the documentation; updated package, container, portable

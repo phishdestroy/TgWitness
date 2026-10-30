@@ -34,5 +34,10 @@ Follow the [local preview instructions](../docs/internal/PUBLISHING.md#preview-t
 for serving the generated pages. Edit these sources, not generated files in `dist/`.
 Preserve keyboard navigation, both themes and the no-JavaScript fallback.
 
+The homepage notice links to the complete, attributed [operator statement](../docs/OPERATOR-INCOMPATIBILITY.md).
+Its original text and the licence are included as local site downloads. Run
+`python tools/sync_notice.py --check` before building. Publish the checked output
+using the [Pages procedure](../docs/internal/PUBLISHING.md#publish-the-generated-static-branch).
+
 The examples use fictional data. Changes to explanatory diagrams should stay aligned
 with the [evidence model](../docs/EVIDENCE.md).

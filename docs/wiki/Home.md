@@ -52,6 +52,10 @@ Need a term explained? Open the [glossary](Glossary.md).
 
 ## Read this before connecting
 
+> **NOTICE — Operator Incompatibility**
+> [Read the complete project notice](Operator-Incompatibility.md): PhishDestroy's
+> statement concerning Taylor Wessing PartG mbB — German core, Hamburg office.
+
 TgWitness uses a [restricted licence](../../LICENSE), including the
 [Taylor Wessing exclusion and maintainer's statement](../TAYLOR-WESSING-EXCLUSION.md).
 Review the restriction before use, evaluation, integration or redistribution.

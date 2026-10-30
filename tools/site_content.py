@@ -22,6 +22,7 @@ GROUPS = (
 
 # The full reference, rendered from the repository's Markdown: slug -> (title, description, keywords, source).
 REFERENCE = {
+    "notice": ("Operator incompatibility notice", "PhishDestroy's operator notice, source record and the scope of the TgWitness use restriction.", "notice operator incompatibility Taylor Wessing statement licence", "docs/OPERATOR-INCOMPATIBILITY.md"),
     "license": ("Licence and use restriction", "The TgWitness Restricted License, the Taylor Wessing exclusion and the maintainer's statement.", "license licence restriction Taylor Wessing source available", "docs/TAYLOR-WESSING-EXCLUSION.md"),
     "quickstart": ("Quick start", "Every way to install and launch TgWitness: Windows package, Python, Docker and the synthetic demo, with first checks.", "install launch windows linux macos docker demo setup", "docs/QUICKSTART.md"),
     "accounts": ("Accounts and session formats", "Sign in by phone, QR code or auth key, import Telethon, Pyrogram or Telegram Desktop sessions, and run several accounts.", "login phone qr session tdata pyrogram telethon import api pair", "docs/ACCOUNTS.md"),
@@ -46,7 +47,7 @@ REFERENCE_GROUPS = (
     ("Set up", ("quickstart", "accounts", "connection", "deployment")),
     ("Collect", ("collection", "operations", "investigation", "features")),
     ("Evidence", ("how-it-works", "evidence", "witness", "timestamp", "proof")),
-    ("Security & project", ("security", "architecture", "verification", "license", "changelog")),
+    ("Security & project", ("security", "architecture", "verification", "license", "notice", "changelog")),
 )
 
 LABELS = {

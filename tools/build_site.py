@@ -46,6 +46,7 @@ WIKI_ASSETS = {
     "assets/proof.png": "docs/assets/proof.png",
 }
 STATIC = {"style.css": "website/style.css", "site.js": "website/site.js",
+          "LICENSE": "LICENSE", "NOTICE": "NOTICE",
           "docs.css": "website/docs.css", "docs.js": "website/docs.js",
           "learn.css": "website/learn.css", "learn.js": "website/learn.js", **ASSETS, **WIKI_ASSETS}
 TRANSLATIONS = tuple(f"website/i18n/{lang}.json" for lang in LANGS if lang != "en")
@@ -309,6 +310,8 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
             """Links to rendered documents on GitHub stay on the site, in this language."""
             def replace(match):
                 target = wiki_page.get(match.group(1))
+                if match.group(1) in ("LICENSE", "NOTICE"):
+                    return 'href="' + html.escape(relative_file(path, match.group(1)), quote=True) + '"'
                 if not target:
                     return match.group(0)
                 anchor = match.group(2)

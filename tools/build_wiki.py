@@ -21,7 +21,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PAGES = (
     "Home", "Getting-Started", "Accounts", "Collection", "Investigations",
     "Exports-and-Verification", "Proxies", "Witness-and-Proof", "Server-and-Docker",
-    "Backup-and-Recovery", "Troubleshooting", "FAQ", "Glossary",
+    "Backup-and-Recovery", "Troubleshooting", "FAQ", "Glossary", "Operator-Incompatibility",
 )
 FILES = tuple(name + ".md" for name in (*PAGES, "_Sidebar", "_Footer"))
 LINK = re.compile(r'(!?\[[^\]\n]*\]\()(<[^>\n]+>|[^)\s]+)((?:\s+"[^"\n]*")?\))')

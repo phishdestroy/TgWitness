@@ -11,6 +11,7 @@ verification. Run them from the project root in the development environment.
 
 | Command | Output or purpose |
 | --- | --- |
+| `python tools/sync_notice.py` / `--check` | Regenerate or verify the NOTICE copies in README, SECURITY, documentation and Wiki |
 | `python tools/build_source.py` | Public source ZIP and checksums in `dist/` |
 | `python tools/build_wiki.py` | Separate GitHub Wiki bundle and manifest in `dist/` |
 | `python tools/build_site.py` | Local public-site build |

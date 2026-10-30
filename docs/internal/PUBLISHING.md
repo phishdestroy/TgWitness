@@ -45,12 +45,34 @@ navigation remain available without JavaScript. [Metadata and SEO](SEO.md).
    files, keys, logs, builds, and test output must stay ignored. The source packager
    has an allowlist, but Git uses `.gitignore`; those are separate controls.
 4. Commit the reviewed source and push `main` to the new remote.
-5. In **Settings → Pages → Build and deployment**, choose **GitHub Actions**. Do not
-   use **Deploy from a branch**: it publishes the raw `docs/` folder through Jekyll,
-   including maintainer notes, instead of the checked website.
-6. Run **Actions → Project website → Run workflow** if the initial push ran before
-   Pages was enabled. The workflow checks the site before uploading `dist/site`.
-   It deploys only while the repository is public.
+5. Publish only the generated and checked `dist/site` directory. The maintained
+   deployment uses **Deploy from a branch → gh-pages → / (root)**, with `.nojekyll`.
+   Never select `main /docs`: that serves repository Markdown and maintainer notes
+   instead of the generated website.
+6. For an Actions deployment instead, choose **GitHub Actions** in Pages settings
+   and set the repository variable `TGWITNESS_PAGES_DEPLOYMENT` to `actions`.
+   Run **Actions → Project website → Run workflow**. The workflow checks the site
+   before uploading `dist/site`; deployment is disabled unless that variable is set.
+
+The site is public even when its source repository is private. Publishing the
+reviewed site does not require changing repository visibility. Account billing
+restrictions can prevent Actions jobs from starting; do not treat an unstarted job
+as a successful build. The static branch procedure below remains available when
+GitHub's branch-based Pages build is operational.
+
+### Publish the generated static branch
+
+Run the notice, site and browser checks below first. In a separate checkout of
+`gh-pages`, copy only the contents of the verified `dist/site` directory, including
+`.nojekyll`. Review the complete file list and remove obsolete generated files
+only within that checkout. Commit and push normally; do not force-push or copy
+the source repository, local account data or test results into this branch.
+
+After a first publication, select **gh-pages / (root)** in Pages settings. Check
+the Pages build status and open the public homepage, documentation and demo at
+the deployed commit. Verify `/NOTICE` and `/LICENSE` match the reviewed originals.
+Future source commits require rebuilding, checking and publishing the generated
+branch again. The source and deployment branches have separate histories.
 
 For `phishdestroy/TgWitness`, the default address is
 `https://phishdestroy.github.io/TgWitness/`. In Actions, the build derives the owner
@@ -81,6 +103,8 @@ The builder copies only these assets into `dist/site`:
 - The presentation styles and scripts from `website/`.
 - The application logo and explicitly listed synthetic workspace screenshots and diagrams.
 - The social-preview image from `docs/assets/presentation/preview-social.png`.
+- The read-only demonstration panel and its explicitly listed fictional records.
+- The original `LICENSE` and `NOTICE`, linked from the rendered reference pages.
 - `.nojekyll`, `robots.txt`, and `sitemap.xml`.
 
 It rejects linked inputs and unexpected files already present in the output.
@@ -96,6 +120,7 @@ does not configure hosting or DNS.
 From the project environment:
 
 ```sh
+python tools/sync_notice.py --check
 python -m pytest -q
 python tools/check_publication.py --git-index
 python tools/build_site.py
@@ -108,6 +133,10 @@ python tools/check_workspace_browser.py
 python tools/check_quick_browser.py
 python tools/build_source.py
 ```
+
+Edit the canonical root `NOTICE`, then run `python tools/sync_notice.py` to update
+its full-text copies in README, SECURITY, documentation and Wiki. Rebuild both the
+site and Wiki bundles before publishing; the check rejects inconsistent copies.
 
 Browser checks require Playwright Chromium (`python -m playwright install chromium`).
 The publication check scans the public source allowlist for recognizable secret formats

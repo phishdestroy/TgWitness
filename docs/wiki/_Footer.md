@@ -5,3 +5,5 @@
 Examples use fictional data. Keep account sessions, tokens, keys and real evidence out of public reports.
 
 [Taylor Wessing use restriction](../TAYLOR-WESSING-EXCLUSION.md) applies to the software under the current licence.
+
+[NOTICE — Operator Incompatibility](Operator-Incompatibility.md) · [Original statement](../../NOTICE)

@@ -124,7 +124,7 @@ class Page(HTMLParser):
 def test_every_page_has_distinct_metadata_and_valid_links(site_root, base_url):
     output = build_site(site_root, repository="example/Journal", base_url=base_url)
     pages = {base_url + "/" + path: Page(output / path / "index.html") for path in PAGES}
-    assert len(pages) == len(PAGES) == len(LANGS) * len(LOCAL_PAGES) == 13 * 32
+    assert len(pages) == len(PAGES) == len(LANGS) * len(LOCAL_PAGES) == 13 * 33
     for lang in LANGS:
         prefix = "" if lang == "en" else lang + "/"
         local = [pages[base_url + "/" + prefix + path] for path in LOCAL_PAGES]
@@ -175,7 +175,7 @@ def test_every_page_has_distinct_metadata_and_valid_links(site_root, base_url):
     for name in SEARCH_FILES:
         index = json.loads((output / name).read_text(encoding="utf-8"))
         hub = base_url + "/" + name.removesuffix("search.json")
-        assert len(index["pages"]) == 29
+        assert len(index["pages"]) == 30
         for entry in index["pages"]:
             assert urljoin(hub, entry["url"]) in pages
             assert len(entry["text"]) > 300
@@ -203,6 +203,19 @@ def test_reference_source_links_open_the_document_on_github(site_root):
             assert links == ["https://github.com/example/Journal/edit/main/" + source], (lang, slug, links)
             checked += 1
     assert checked == len(LANGS) * len(REFERENCE)
+
+
+def test_attributed_html_quote_closes_before_following_markdown():
+    """A closing quote must not become placeholder text and swallow the rest of the page."""
+    from tools.site_wiki import to_html
+    source = ('<blockquote lang="en" dir="ltr" translate="no">\n'
+              '<p>A maintainer statement.</p>\n</blockquote>\n\n'
+              '## Context\n\nA separate [reference](../LICENSE) and an <id> placeholder.\n')
+    body, _, _ = to_html(source)
+    assert '</blockquote>' in body and '&lt;/blockquote&gt;' not in body
+    assert body.index('</blockquote>') < body.index('<h2 id="context">')
+    assert '<a href="../LICENSE">reference</a>' in body
+    assert '&lt;id&gt;' in body
 
 
 def test_online_demo_is_read_only_relative_and_translated(site_root):

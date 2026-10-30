@@ -87,6 +87,7 @@ from the old one, then start the new TgWitness.cmd.
 
 Documentation: README.md in the source repository and http://127.0.0.1:8787/guide.html
 License: TgWitness Restricted License with the Taylor Wessing exclusion (LICENSE).
+The maintainer's operator incompatibility statement is included in NOTICE.
 Python and bundled libraries keep their own
 licenses (python\\LICENSE.txt and the *.dist-info folders).
 """
@@ -101,7 +102,7 @@ def sha256(path):
 
 
 # The only top-level entries a portable package may contain.
-TOP_LEVEL = {"python", "TgWitness.cmd", "TgWitness-Demo.cmd", "TgWitness-Check.cmd", "README.txt", "LICENSE"}
+TOP_LEVEL = {"python", "TgWitness.cmd", "TgWitness-Demo.cmd", "TgWitness-Check.cmd", "README.txt", "LICENSE", "NOTICE"}
 # Names that only a running instance creates: sessions, keys, tokens and account files.
 PRIVATE_NAMES = {"vault.key", "panel-token.txt", "credentials.json", "account.json", "vault.external.json",
                  ".instance.lock"}
@@ -201,6 +202,7 @@ def main():
                            ("README.txt", README.format(version=VERSION, python=PYTHON))):
         (stage / filename).write_bytes(text.replace("\n", "\r\n").encode("ascii"))
     shutil.copyfile(ROOT / "LICENSE", stage / "LICENSE")
+    shutil.copyfile(ROOT / "NOTICE", stage / "NOTICE")
 
     print("Checking the embedded runtime", flush=True)
     probe = build / "readiness-probe"

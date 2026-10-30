@@ -13,6 +13,10 @@
 **Licence:** read the [Taylor Wessing use restriction](TAYLOR-WESSING-EXCLUSION.md)
 and [TgWitness Restricted License](../LICENSE) before use or redistribution.
 
+> **NOTICE — Operator Incompatibility**
+> [Read PhishDestroy's complete operator statement](OPERATOR-INCOMPATIBILITY.md),
+> including the cited source record and the scope of cryptographic verification.
+
 Start with a local demo, then connect one account and check a captured message.
 The proxy, witness bot and public status page are separate options.
 

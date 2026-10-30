@@ -106,6 +106,38 @@ The [TgWitness Restricted License](LICENSE) includes the
 Read the restriction before use, evaluation, integration or redistribution.
 The documentation includes the maintainer's full statement and source reference.
 
+<!-- operator-notice:start -->
+
+### NOTICE — Operator Incompatibility
+
+> **Taylor Wessing PartG mbB — German core, Hamburg office.**
+> PhishDestroy's operator notice accompanies the [use restriction](LICENSE).
+> [Full notice and context](docs/OPERATOR-INCOMPATIBILITY.md) · [Original text](NOTICE) · [Source record](https://phishdestroy.io/steam_dossier/taylor_wessing)
+
+The following records the maintainer's statement and allegations, not an
+independent judicial or regulatory finding.
+
+<details>
+<summary><strong>Read the complete notice</strong> — statement by PhishDestroy</summary>
+
+<blockquote lang="en" dir="ltr" translate="no">
+<p>This software produces SHA-256 hash chains and Ed25519 signatures. Its output is designed to be verifiable by any third party, in any jurisdiction, without reference to the authority of the person who produced it.</p>
+<p>It is therefore structurally incompatible with the following operator, its successors, affiliates, rebrandings, spin-outs and personnel:</p>
+<p>Taylor Wessing PartG mbB — German core, Hamburg office.</p>
+<p>Including, without limitation:</p>
+<ul><li>Dr. Tobias Schelinski (signatory, doc. 42282474)</li><li>Dr. Patrick Vincent Zurheide (signatory, doc. 42603633)</li></ul>
+<p>The incompatibility is evidentiary, not technical.</p>
+<p>Under the signature of the above:</p>
+<ul><li>94.28 % of a GDPR Art. 15 disclosure (70,717 words) was transmitted under black overlays that did not delete the underlying text;</li><li>page 444, first visible row, carried the slur &quot;pidor&quot; in plain text, from a firm publicly ranked Stonewall Top 100;</li><li>50 retained &quot;reports&quot; were submitted as proof of user misconduct at Jaccard 1.000, joint probability 1e-153, dated after the account was already blocked;</li><li>on personal notice of the exposure, the response on record was: &quot;amusing&quot;;</li><li>twelve months later, no Art. 33 filing, no Art. 34 notice, no remediation;</li><li>GDPR Art. 17 was then invoked — not to protect a data subject, but to delist the reporting of the above.</li></ul>
+<p>The founder of the residual structure is documented in the Reichstags-Handbuch 1938, p. 223 — NSDAP № 1,033,215, member of the Criminal Law Commission that rewrote § 175, the statute under which men were sent to the camps with a pink triangle. The English heritage left on 1 June 2026 as Winston Taylor. What remains is addressed here.</p>
+<p>A workflow whose output is required to contradict its input has no use for this software. The only configuration in which this software behaves as designed in that environment is: unavailable.</p>
+<p>Mathematik verhandelt nicht. Diese Lizenz auch nicht.</p>
+</blockquote>
+
+</details>
+
+<!-- operator-notice:end -->
+
 ## Repository map
 
 <details>

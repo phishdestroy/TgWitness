@@ -4,7 +4,7 @@ LABEL org.opencontainers.image.title="TgWitness" \
       org.opencontainers.image.licenses="LicenseRef-TgWitness-Restricted"
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PIP_DISABLE_PIP_VERSION_CHECK=1 TGWITNESS_DATA=/data
 WORKDIR /app
-COPY pyproject.toml README.md LICENSE constraints.txt ./
+COPY pyproject.toml README.md LICENSE NOTICE constraints.txt ./
 COPY tgwitness ./tgwitness
 RUN pip install --no-cache-dir -c constraints.txt . && useradd --uid 10001 --create-home collector \
     && mkdir /data /witness && chown collector:collector /data /witness

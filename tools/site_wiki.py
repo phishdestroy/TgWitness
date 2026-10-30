@@ -18,7 +18,7 @@ else:
 
 FENCE = re.compile(r"^( {0,8})(`{3,}|~{3,})([^\n`]*)\n(.*?)^\1\2[ \t]*$", re.S | re.M)
 INLINE_CODE = re.compile(r"(`+)(.+?)\1", re.S)
-HTML_TAGS = {"a", "abbr", "b", "br", "code", "details", "div", "em", "i", "img", "kbd", "li", "ol", "p", "pre",
+HTML_TAGS = {"a", "abbr", "b", "blockquote", "br", "code", "details", "div", "em", "i", "img", "kbd", "li", "ol", "p", "pre",
              "span", "strong", "sub", "summary", "sup", "table", "tbody", "td", "th", "thead", "tr", "ul"}
 SLOT = "WIKISLOT{}X"
 NEWLINE = "\n"
@@ -189,6 +189,8 @@ def rewrite_links(body, source, page_path, pages, page_ids, relative, repo_url, 
             fragment = "#" + anchor if anchor and anchor in page_ids.get(target, set()) else ""
             url = "./" if target == page_path else relative(page_path, target).rstrip("/") + "/"
             return f'href="{html.escape(url + fragment, quote=True)}"'
+        if resolved in ("LICENSE", "NOTICE"):
+            return f'href="{html.escape(relative(page_path, resolved), quote=True)}"'
         kind = "tree" if (root / resolved).is_dir() else "blob"
         url = f"{repo_url}/{kind}/{branch}/{resolved}" + ("#" + anchor if anchor else "")
         return f'href="{html.escape(url, quote=True)}"'

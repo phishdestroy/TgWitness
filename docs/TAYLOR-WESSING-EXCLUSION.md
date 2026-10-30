@@ -4,6 +4,9 @@ TgWitness is distributed under the [TgWitness Restricted License](../LICENSE).
 The restriction below is an operative licence condition. The licence file is
 the controlling text; the maintainer's rationale is reproduced separately below.
 
+**Related notice:** [Operator Incompatibility](OPERATOR-INCOMPATIBILITY.md) records
+the maintainer's additional statement, including the named signatories and document references.
+
 ## ⛔ Use Restriction: The Taylor Wessing Exclusion
 
 **TgWitness may not be used, deployed, licensed, sublicensed, integrated,

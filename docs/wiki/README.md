@@ -19,7 +19,7 @@ separate GitHub Wiki; they also remain readable inside the main repository.
 
 ## Maintain the wiki
 
-`_Sidebar.md` and `_Footer.md` provide shared navigation. The explicit 13-page bundle
+`_Sidebar.md` and `_Footer.md` provide shared navigation. The explicit 14-page bundle
 is built by [`tools/build_wiki.py`](../../tools/build_wiki.py); this directory README
 is a repository index, not an additional published wiki page.
 
