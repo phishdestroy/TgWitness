@@ -246,7 +246,7 @@
 "modes.limits.telegram": "텔레그램은 요청량에 따라 계정을 제한할 수 있습니다.",
 "modes.limits.title": "증거와 함께 한계를 유지하십시오",
 "modes.limits.truth": "검증된 기록이 그 내용이 사실이라는 증거는 아닙니다.",
-"modes.linkedEnglish": "이 페이지는 번역본입니다. 링크된 설정 가이드와 상세 참조 페이지는 현재 영어로 제공됩니다.",
+"modes.linkedEnglish": "이 페이지와 설정 안내서는 번역되었습니다. 자세한 참조 페이지는 현재 영어로 제공됩니다.",
 "modes.login.hex": "인증 키 HEX + DC ID",
 "modes.login.hex.body": "계정 인증 정보를 데이터 센터 식별자와 함께 가져오십시오.",
 "modes.login.json": ".session + .json",

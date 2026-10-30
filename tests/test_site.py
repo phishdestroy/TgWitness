@@ -7,7 +7,7 @@ import xml.etree.ElementTree as ET
 
 import pytest
 
-from tools.build_site import (DEMO_LOCALES, DEMO_PAGES, DEMO_STATIC, INPUTS, LANGS, LOCAL_PAGES, MODES_PAGES,
+from tools.build_site import (DEMO_GUIDE_LOCALES, DEMO_LOCALES, DEMO_PAGES, DEMO_STATIC, INPUTS, LANGS, LOCAL_PAGES, MODES_PAGES,
                               NOTICE_LANGUAGES, NOTICE_PAGES, PAGES, ROOT, SEARCH_FILES,
                               STATIC, TRANSLATIONS, build_site, page_languages)
 from tools import site_modes
@@ -32,7 +32,7 @@ def test_pages_uses_only_presentation_files_and_project_relative_assets(site_roo
     output = build_site(site_root, repository="example/Journal")
     assert {p.relative_to(output).as_posix() for p in output.rglob("*") if p.is_file()} == {
         *(page + "index.html" for page in PAGES), *SEARCH_FILES, *STATIC, ".nojekyll", "sitemap.xml", "robots.txt",
-        *DEMO_STATIC, *DEMO_PAGES, *DEMO_LOCALES, *MODES_PAGES,
+        *DEMO_STATIC, *DEMO_PAGES, *DEMO_LOCALES, *DEMO_GUIDE_LOCALES, *MODES_PAGES,
     }
     content = (output / "index.html").read_text(encoding="utf-8")
     assert "https://example.github.io/Journal/" in content
@@ -47,6 +47,32 @@ def test_existing_unexpected_output_blocks_publication(site_root):
     output = build_site(site_root)
     (output / "account.session").write_text("synthetic", encoding="utf-8")
     with pytest.raises(ValueError, match="Unexpected file"):
+        build_site(site_root)
+
+
+def test_setup_and_account_guides_publish_all_26_language_catalogs(site_root):
+    output = build_site(site_root)
+    assert set(DEMO_GUIDE_LOCALES.values()) == set(site_modes.LANGUAGES)
+    for name, lang in DEMO_GUIDE_LOCALES.items():
+        body = (output / name).read_text(encoding="utf-8")
+        assert body.startswith('window.TGW_SCOPE="guide";window.TGW_LANG=' + json.dumps(lang) + ';')
+        words = json.loads(body.split("window.TGW_DICT=", 1)[1].strip().removesuffix(";"))
+        if lang != "en":
+            assert words["From account connection to a verifiable journal"] != "From account connection to a verifiable journal"
+    for name in ("guide.html", "dedicated-account.html"):
+        body = (output / "demo" / name).read_text(encoding="utf-8")
+        assert 'guide-locales/' in body and 'guide-locale.js' not in body
+    for lang in site_modes.EXTRA_LANGUAGES:
+        body = (output / lang / "guides/modes.html").read_text(encoding="utf-8")
+        assert 'demo/guide.html?lang=' + lang in body
+
+
+def test_missing_guide_translation_blocks_publication(site_root):
+    path = site_root / "tgwitness/guide_locales/de.json"
+    words = json.loads(path.read_text(encoding="utf-8"))
+    words.pop("From account connection to a verifiable journal")
+    path.write_text(json.dumps(words), encoding="utf-8")
+    with pytest.raises(ValueError, match="Incomplete setup-guide translation: de"):
         build_site(site_root)
 
 

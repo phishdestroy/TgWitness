@@ -246,7 +246,7 @@
 "modes.limits.telegram": "Telegram peut restreindre l’accès à certains comptes en raison du volume de requêtes.",
 "modes.limits.title": "Respectez les limites en vous appuyant sur les preuves",
 "modes.limits.truth": "Un enregistrement vérifié ne constitue pas une preuve de la véracité de son contenu.",
-"modes.linkedEnglish": "Cette page est traduite. Les guides de configuration et les pages de référence détaillées auxquels renvoient les liens sont actuellement en anglais.",
+"modes.linkedEnglish": "Cette page et les guides de configuration sont traduits. Les pages de référence détaillées sont actuellement en anglais.",
 "modes.login.hex": "Clé d'authentification HEX + DC ID",
 "modes.login.hex.body": "Importez l’autorisation du compte avec son identifiant de centre de données.",
 "modes.login.json": ".session + .json",

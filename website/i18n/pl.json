@@ -246,7 +246,7 @@
 "modes.limits.telegram": "Telegram może ograniczyć dostęp do kont ze względu na liczbę wysyłanych żądań.",
 "modes.limits.title": "Proszę zachować ograniczenia wraz z dowodami",
 "modes.limits.truth": "Zweryfikowany zapis nie stanowi dowodu na prawdziwość jego treści.",
-"modes.linkedEnglish": "Niniejsza strona została przetłumaczona. Podane linki do przewodników konfiguracyjnych oraz szczegółowych stron referencyjnych są obecnie dostępne w języku angielskim.",
+"modes.linkedEnglish": "Niniejsza strona oraz instrukcje konfiguracji zostały przetłumaczone. Szczegółowe strony referencyjne są obecnie dostępne w języku angielskim.",
 "modes.login.hex": "Klucz autoryzacyjny HEX + DC ID",
 "modes.login.hex.body": "Proszę zaimportować autoryzację konta wraz z identyfikatorem centrum danych.",
 "modes.login.json": ".session + .json",

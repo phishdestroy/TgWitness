@@ -2,9 +2,12 @@
 // Interface translation. Keys are the English interface strings. Telegram content and journal
 // records are never passed through here, so evidence is always shown exactly as saved.
 const LANG=window.TGW_LANG||"en",DICT=window.TGW_DICT||{};
-const LANGUAGES={en:"English",ru:"Русский",uk:"Українська",es:"Español",pt:"Português (Brasil)",tr:"Türkçe",
+const PANEL_LANGUAGES={en:"English",ru:"Русский",uk:"Українська",es:"Español",pt:"Português (Brasil)",tr:"Türkçe",
   ar:"العربية",fa:"فارسی",ur:"اردو",hi:"हिन्दी",id:"Bahasa Indonesia",vi:"Tiếng Việt",zh:"简体中文"};
-const RTL=new Set(["ar","fa","ur"]);
+const GUIDE_LANGUAGES={...PANEL_LANGUAGES,fr:"Français",de:"Deutsch",it:"Italiano",uz:"O‘zbekcha",ko:"한국어",
+  "zh-Hant":"繁體中文",ms:"Bahasa Melayu",pl:"Polski",ja:"日本語",th:"ไทย",he:"עברית",am:"አማርኛ",bn:"বাংলা"};
+const LANGUAGES=window.TGW_SCOPE==="guide"?GUIDE_LANGUAGES:PANEL_LANGUAGES;
+const RTL=new Set(["ar","fa","ur","he"]);
 function fill(text,vars){return vars?text.replace(/\{(\w+)\}/g,(m,k)=>k in vars?String(vars[k]):m):text;}
 function tr(text,vars){const out=DICT[text];return fill(typeof out==="string"?out:text,vars);}
 // One/other English forms; translations of the "other" form may give every plural category.
@@ -53,10 +56,20 @@ function translatePage(){
   walkPage(item=>{const text=DICT[item.key];if(typeof text!=="string")return false;item.apply(text);return true;});
 }
 function setLanguage(lang){
+  if(!Object.hasOwn(LANGUAGES,lang))return;
   document.cookie="tgwitness-lang="+encodeURIComponent(lang)+"; path=/; max-age=31536000; SameSite=Strict";
-  location.reload();
+  const url=new URL(location.href);url.searchParams.set("lang",lang);location.assign(url.href);
 }
 translatePage();
+if(window.TGW_SCOPE==="guide")document.querySelectorAll('a[href]').forEach(link=>{
+  const url=new URL(link.href,location.href);
+  if(url.origin===location.origin&&/\/(?:guide|dedicated-account)\.html$/.test(url.pathname)){
+    // Translated inline HTML keeps application-root links. Resolve both guides beside
+    // the current page so the same dictionary also works under the Pages project path.
+    url.pathname=new URL(url.pathname.split("/").pop(),location.href).pathname;
+    url.searchParams.set("lang",LANG);link.href=url.href;
+  }
+});
 document.querySelectorAll("select.language-select").forEach(select=>{
   for(const [code,name] of Object.entries(LANGUAGES)){const o=new Option(name,code);o.lang=code;select.append(o);}
   select.value=LANG;select.addEventListener("change",()=>setLanguage(select.value));

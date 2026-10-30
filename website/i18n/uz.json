@@ -246,7 +246,7 @@
 "modes.limits.telegram": "Telegram so'rov hajmi tufayli hisoblarni cheklashi mumkin.",
 "modes.limits.title": "Chegaralarni dalillar bilan saqlang",
 "modes.limits.truth": "Verifikatsiyalangan yozuv uning mazmuni rostligini isbotlamaydi.",
-"modes.linkedEnglish": "Ushbu sahifa tarjima qilingan. Bog'langan sozlash qo'llanmalari va batafsil ma'lumot sahifalari hozirda ingliz tilida.",
+"modes.linkedEnglish": "Ushbu sahifa va sozlash bo'yicha qo'llanmalar tarjima qilingan. Batafsil ma'lumot sahifalari hozirda ingliz tilida.",
 "modes.login.hex": "Avtorlik kaliti HEX + DC ID",
 "modes.login.hex.body": "Hisob ma'lumotlarini uning ma'lumotlar markazi identifikatori bilan import qiling.",
 "modes.login.json": ".session + .json",

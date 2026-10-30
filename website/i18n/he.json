@@ -246,7 +246,7 @@
 "modes.limits.telegram": "Telegram רשאית להגביל חשבונות בשל נפח הבקשות.",
 "modes.limits.title": "שמרו על הגבולות בהתאם לראיות",
 "modes.limits.truth": "רישום מאומת אינו מהווה הוכחה לכך שתוכנו נכון.",
-"modes.linkedEnglish": "דף זה תורגם. מדריכי ההתקנה המקושרים ודפי העזר המפורטים נמצאים כרגע באנגלית.",
+"modes.linkedEnglish": "דף זה ומדריכי ההתקנה תורגמו. דפי התיעוד המפורטים נמצאים כרגע באנגלית.",
 "modes.login.hex": "מפתח אימות HEX + DC ID",
 "modes.login.hex.body": "ייבאו את אישור החשבון עם מזהה מרכז הנתונים שלו.",
 "modes.login.json": ".session + .json",

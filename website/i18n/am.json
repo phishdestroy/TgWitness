@@ -246,7 +246,7 @@
 "modes.limits.telegram": "Telegram በጥያቄ ብዛት ምክንያት መለያዎችን ሊገድብ ይችላል።",
 "modes.limits.title": "ገደቦቹን ከማስረጃው ጋር ያስቀምጡ",
 "modes.limits.truth": "የተረጋገጠ መዝገብ ይዘቱ እውነት መሆኑን አያሳይም።",
-"modes.linkedEnglish": "ይህ ገጽ ተተርጉሟል። የተገናኙት የማዋቀሪያ መመሪያዎች እና ዝርዝር ማጣቀሻዎች በአሁኑ ጊዜ በእንግሊዝኛ ናቸው።",
+"modes.linkedEnglish": "ይህ ገጽ እና የማዋቀሪያ መመሪያዎች ተተርጉመዋል። ዝርዝር የማጣቀሻ ገጾች በአሁኑ ጊዜ በእንግሊዝኛ ናቸው።",
 "modes.login.hex": "Auth key HEX + DC ID",
 "modes.login.hex.body": "የመለያውን የፈቃድ ቁልፍ ከዳታ ማዕከሉ መለያ ጋር ያስገቡ።",
 "modes.login.json": ".session + .json",

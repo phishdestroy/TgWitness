@@ -246,7 +246,7 @@
 "modes.limits.telegram": "Telegram 可能會因請求量過大而限制帳戶。",
 "modes.limits.title": "將限制與證據一併保留",
 "modes.limits.truth": "經驗證的紀錄並不證明其內容屬實。",
-"modes.linkedEnglish": "本頁面為翻譯版本。相關的設定指南及詳細參考頁面目前仍為英文。",
+"modes.linkedEnglish": "本頁面及設定指南均已翻譯。詳細參考頁面目前仍為英文。",
 "modes.login.hex": "授權金鑰 HEX + DC ID",
 "modes.login.hex.body": "導入帳戶授權時，須一併包含其資料中心識別碼。",
 "modes.login.json": ".session + .json",

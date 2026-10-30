@@ -246,7 +246,7 @@
 "modes.limits.telegram": "Telegramは、リクエストの量に応じてアカウントを制限する場合があります。",
 "modes.limits.title": "制限事項は証拠とともに保持してください",
 "modes.limits.truth": "検証済みの記録は、その内容が真実であることの証明にはなりません。",
-"modes.linkedEnglish": "このページは翻訳されたものです。リンクされているセットアップガイドおよび詳細なリファレンスページは、現在英語版のみです。",
+"modes.linkedEnglish": "このページおよびセットアップガイドは翻訳されています。詳細なリファレンスページは現在、英語でのみ提供されています。",
 "modes.login.hex": "認証キー HEX + DC ID",
 "modes.login.hex.body": "アカウントの認証情報を、そのデータセンター識別子とともにインポートしてください。",
 "modes.login.json": ".session + .json",

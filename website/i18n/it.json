@@ -246,7 +246,7 @@
 "modes.limits.telegram": "Telegram può limitare gli account in base al volume delle richieste.",
 "modes.limits.title": "Rispettare i limiti con le prove",
 "modes.limits.truth": "Un record verificato non costituisce prova della veridicità del suo contenuto.",
-"modes.linkedEnglish": "Questa pagina è stata tradotta. Le guide di configurazione collegate e le pagine di riferimento dettagliate sono attualmente in inglese.",
+"modes.linkedEnglish": "Questa pagina e le guide alla configurazione sono state tradotte. Le pagine di riferimento dettagliate sono attualmente disponibili in inglese.",
 "modes.login.hex": "Chiave di autenticazione HEX + DC ID",
 "modes.login.hex.body": "Importare l’autorizzazione dell’account con il relativo identificatore del data center.",
 "modes.login.json": ".session + .json",

@@ -71,9 +71,11 @@ DEMO_STATIC.update({"demo/mock.js": "website/demo/mock.js", "demo/fixtures.json"
 DEMO_PAGES = {"demo/index.html": "tgwitness/static/index.html", "demo/guide.html": "tgwitness/static/guide.html",
               "demo/dedicated-account.html": "tgwitness/static/dedicated-account.html"}
 DEMO_LOCALES = {f"demo/locales/{lang}.js": lang for lang in LANGS}
+DEMO_GUIDE_LOCALES = {f"demo/guide-locales/{lang}.js": lang for lang in site_modes.LANGUAGES}
 DEMO_DICTIONARIES = ("tgwitness/english_fallbacks.json", *(f"tgwitness/locales/{lang}.json" for lang in LANGS if lang != "en"))
+GUIDE_DICTIONARIES = ("tgwitness/guide_locales/keys.json", *(f"tgwitness/guide_locales/{lang}.json" for lang in site_modes.EXTRA_LANGUAGES))
 INPUTS = ("website/index.html", "website/docs.html", "website/guide_intro.html", site_modes.SOURCE, *STATIC.values(),
-          *DEMO_STATIC.values(), *DEMO_PAGES.values(), *DEMO_DICTIONARIES,
+          *DEMO_STATIC.values(), *DEMO_PAGES.values(), *DEMO_DICTIONARIES, *GUIDE_DICTIONARIES,
           *(f"website/guides/en/{slug}.html" for slug in GUIDES),
           *dict.fromkeys(entry[3] for entry in REFERENCE.values()))
 WIKI_HUB = "docs/reference/"
@@ -254,7 +256,7 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
     # Never clean/copy a directory recursively: an unexpected file must block the
     # upload rather than be carried into the public Pages artifact.
     expected = {*(path + "index.html" for path in PAGES), *SEARCH_FILES, *STATIC, ".nojekyll", "robots.txt", "sitemap.xml",
-                *DEMO_STATIC, *DEMO_PAGES, *DEMO_LOCALES, *MODES_PAGES}
+                *DEMO_STATIC, *DEMO_PAGES, *DEMO_LOCALES, *DEMO_GUIDE_LOCALES, *MODES_PAGES}
     if output.resolve() != output:
         raise ValueError("Site output must not be a linked directory")
     if output.exists():
@@ -580,32 +582,50 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
     return output
 
 
-# Chooses the interface language the panel would: the saved choice, a ?lang= link from a
-# translated site page, then the browser's languages. Written before the deferred scripts.
-DEMO_LANGUAGE = ("<script>(function(){var known=%s,saved=(document.cookie.match(/(?:^|; )tgwitness-lang=([^;]+)/)||[])[1],"
-                 "asked=new URLSearchParams(location.search).get('lang'),"
-                 "browser=(navigator.languages||[navigator.language||'en']).map(function(x){return String(x).toLowerCase().split('-')[0];}),"
-                 "pick=[saved&&decodeURIComponent(saved),asked].concat(browser).filter(function(x){return known.indexOf(x)>=0;})[0]||'en';"
-                 "document.write('<script src=\"locales/'+pick+'.js\"><\\/script>');})();</script>")
+# An explicit ?lang= link takes precedence over the saved choice, then the browser's
+# languages. Written before the deferred scripts.
+def demo_language_script(languages, folder):
+    return ("<script>(function(){var known=" + json.dumps(list(languages)) + ","
+            "saved=(document.cookie.match(/(?:^|; )tgwitness-lang=([^;]+)/)||[])[1];"
+            "try{saved=saved&&decodeURIComponent(saved)}catch(e){saved=''}"
+            "function match(tag){tag=String(tag||'').toLowerCase().replace(/_/g,'-');"
+            "var exact=known.find(function(x){return x.toLowerCase()===tag});if(exact)return exact;"
+            "if(/^zh-/.test(tag)&&/(?:^|-)(?:hant|tw|hk|mo)(?:-|$)/.test(tag))return known.find(function(x){return x==='zh-Hant'});"
+            "return known.find(function(x){return x===tag.split('-')[0]})}"
+            "var asked=new URLSearchParams(location.search).get('lang'),"
+            "browser=navigator.languages||[navigator.language||'en'],"
+            "pick=[asked,saved].concat(browser).map(match).find(Boolean)||'en';"
+            "document.write('<script src=\"" + folder + "/'+pick+'.js\"><\\/script>');})();</script>")
 
 
 def build_demo(read_public, write):
     """Panel pages with relative paths, the request answering script and one dictionary per language."""
-    loader = DEMO_LANGUAGE % json.dumps(list(LANGS))
     for target, source in DEMO_PAGES.items():
         page = read_public(source).decode("utf-8").replace('href="/"', 'href="../"')
         page = re.sub(r'\b(src|href)="/(?=[A-Za-z])', r'\1="', page)
-        if '<script defer src="locale.js"></script>' not in page:
+        guide = target != "demo/index.html"
+        original_loader = '<script src="guide-locale.js"></script>' if guide else '<script defer src="locale.js"></script>'
+        if original_loader not in page:
             raise ValueError("Demo page no longer loads locale.js where expected: " + source)
         answering = '<script src="mock.js"></script>' if target == "demo/index.html" else ""
-        page = page.replace('<script defer src="locale.js"></script>', answering + loader)
+        loader = demo_language_script(site_modes.LANGUAGES if guide else LANGS, "guide-locales" if guide else "locales")
+        page = page.replace(original_loader, answering + loader)
         page = page.replace("<head>", '<head>\n<meta name="robots" content="noindex">', 1)
         write(target, page)
     fallbacks = json.loads(read_public("tgwitness/english_fallbacks.json"))
-    for target, lang in DEMO_LOCALES.items():
-        words = {} if lang == "en" else {**{text: text for text in fallbacks},
-                                         **json.loads(read_public(f"tgwitness/locales/{lang}.json"))}
-        write(target, "window.TGW_LANG=" + json.dumps(lang) + ";window.TGW_DICT="
+    required = json.loads(read_public("tgwitness/guide_locales/keys.json"))["keys"]
+    for target, lang in {**DEMO_LOCALES, **DEMO_GUIDE_LOCALES}.items():
+        guide = target in DEMO_GUIDE_LOCALES
+        if lang == "en":
+            words = {}
+        elif lang in site_modes.EXTRA_LANGUAGES:
+            words = json.loads(read_public(f"tgwitness/guide_locales/{lang}.json"))
+        else:
+            words = {**{text: text for text in fallbacks}, **json.loads(read_public(f"tgwitness/locales/{lang}.json"))}
+        if guide and lang != "en" and any(not words.get(key) for key in required):
+            raise ValueError("Incomplete setup-guide translation: " + lang)
+        scope = 'window.TGW_SCOPE="guide";' if guide else ''
+        write(target, scope + "window.TGW_LANG=" + json.dumps(lang) + ";window.TGW_DICT="
               + json.dumps(words, ensure_ascii=False, separators=(",", ":")) + ";\n")
 
 

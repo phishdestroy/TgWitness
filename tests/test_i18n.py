@@ -1,5 +1,7 @@
 import json
 import re
+from collections import Counter
+from html import unescape
 
 import pytest
 from fastapi.testclient import TestClient
@@ -56,8 +58,36 @@ def test_translations_keep_placeholders_and_markup(lang):
 
 def test_language_picker_lists_exactly_the_supported_languages():
     script = (STATIC / "i18n.js").read_text(encoding="utf-8")
-    listed = re.search(r"const LANGUAGES=\{(.*?)\};", script, re.S).group(1)
+    listed = re.search(r"const PANEL_LANGUAGES=\{(.*?)\};", script, re.S).group(1)
     assert re.findall(r"(\w+):\"", listed) == list(i18n.LANGUAGES)
+    extra = re.search(r"const GUIDE_LANGUAGES=\{\.\.\.PANEL_LANGUAGES,(.*?)\};", script, re.S).group(1)
+    codes = [a or b for a, b in re.findall(r'(?:"([\w-]+)"|(\w+)):"', extra)]
+    assert (*i18n.LANGUAGES, *codes) == i18n.GUIDE_LANGUAGES
+
+
+def test_guide_catalogs_cover_both_pages_and_preserve_commands_and_links():
+    inventory = json.loads((i18n.GUIDE_LOCALES / "keys.json").read_text(encoding="utf-8"))
+    required = set(inventory["keys"])
+    assert len(required) == len(inventory["keys"]) > 300
+    assert all(set(keys) <= required for keys in inventory["pages"].values())
+    for lang in i18n.GUIDE_LANGUAGES[1:]:
+        dictionary = i18n.guide_words(lang)
+        assert required <= dictionary.keys(), lang
+        if lang in i18n.LANGUAGES:
+            continue  # Existing panel dictionaries have their own markup checks.
+        assert dictionary.keys() == required, lang
+        for key, value in dictionary.items():
+            assert value.strip() and holes(value) == holes(key) and tags(value) == tags(key), (lang, key)
+            protected = lambda text: Counter(unescape(x) for x in re.findall(r'<(?:code|kbd)[^>]*>(.*?)</(?:code|kbd)>', text))
+            assert protected(value) == protected(key), (lang, key)
+            links = lambda text: Counter(re.findall(r'(?:href|src)="([^"]*)"', text))
+            assert links(value) == links(key), (lang, key)
+
+
+@pytest.mark.parametrize("tag,expected", [("de-DE", "de"), ("he-IL", "he"), ("zh-Hant", "zh-Hant"),
+                                        ("zh-TW", "zh-Hant"), ("zh-Hant-HK", "zh-Hant"), ("zh-CN", "zh")])
+def test_guide_browser_language_and_chinese_script_selection(tag, expected):
+    assert i18n.pick(None, tag + ",en;q=0.5", i18n.GUIDE_LANGUAGES) == expected
 
 
 def test_language_choice_order():
@@ -90,3 +120,18 @@ def test_notification_texts_use_the_chosen_language():
     assert "12.0 MB" in text and text != "Disk almost full: 12.0 MB free. Photo and file downloads are paused."
     assert alerts.tr({}, "{chat}: {deleted} deleted", chat="A", deleted=2) == "A: 2 deleted"
     assert alerts.tr({}, "Keep {unknown}") == "Keep {unknown}"
+
+
+def test_guide_locale_endpoint_has_all_translations_and_keeps_panel_scope(tmp_path, monkeypatch):
+    monkeypatch.delenv("TGWITNESS_TOKEN", raising=False)
+    with TestClient(create_app(tmp_path, demo=True)) as client:
+        client.cookies.set(i18n.COOKIE, "ru")
+        for lang in i18n.GUIDE_LANGUAGES:
+            response = client.get("/locale.js", params={"scope": "guide", "lang": lang})
+            assert response.status_code == 200
+            assert response.content == i18n.script(lang, guide=True)
+        # An old cookie cannot override an explicit shared link. Unknown input cannot select a file.
+        assert client.get("/locale.js?scope=guide&lang=../private").content == i18n.script("ru", guide=True)
+        assert client.get("/locale.js?lang=de").content == i18n.script("ru")
+        client.cookies.clear()
+        assert client.get("/locale.js?scope=guide", headers={"Accept-Language": "zh-TW"}).content == i18n.script("zh-Hant", guide=True)

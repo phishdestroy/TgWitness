@@ -180,7 +180,7 @@
 "modes.limits.telegram": "Telegram can restrict accounts for request volume.",
 "modes.limits.title": "Keep the limits with the evidence",
 "modes.limits.truth": "A verified record is not proof that its content is true.",
-"modes.linkedEnglish": "This page is translated. Linked setup guides and detailed reference pages are currently in English.",
+"modes.linkedEnglish": "This page and the setup guides are translated. Detailed reference pages are currently in English.",
 "modes.login.hex": "Auth key HEX + DC ID",
 "modes.login.hex.body": "Import account authorization with its data-center identifier.",
 "modes.login.json": ".session + .json",

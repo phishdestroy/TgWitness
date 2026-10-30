@@ -21,7 +21,9 @@ DIRECTORIES = {
     "website": {".md", ".html", ".css", ".js", ".py", ".json"},
 }
 LANGUAGES = ("ru", "uk", "es", "pt", "tr", "ar", "fa", "ur", "hi", "id", "vi", "zh")
-PACKAGE_JSON = {"english_fallbacks.json", "public_proxies.json", *("locales/" + language + ".json" for language in LANGUAGES)}
+GUIDE_LANGUAGES = ("fr", "de", "it", "uz", "ko", "zh-Hant", "ms", "pl", "ja", "th", "he", "am", "bn")
+PACKAGE_JSON = {"english_fallbacks.json", "public_proxies.json", *("locales/" + language + ".json" for language in LANGUAGES),
+                "guide_locales/keys.json", *("guide_locales/" + language + ".json" for language in GUIDE_LANGUAGES)}
 # Site translations: without them every non-English page silently falls back to English.
 SITE_JSON = {"i18n/" + language + ".json" for language in
              ("en", *LANGUAGES, "fr", "de", "it", "uz", "ko", "zh-Hant", "ms", "pl", "ja", "th", "he", "am", "bn")}

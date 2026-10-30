@@ -246,7 +246,7 @@
 "modes.limits.telegram": "Telegram kann Konten aufgrund des Anfragevolumens einschränken.",
 "modes.limits.title": "Halten Sie sich an die Grenzen der Beweislage",
 "modes.limits.truth": "Ein verifizierter Datensatz ist kein Beweis dafür, dass sein Inhalt wahr ist.",
-"modes.linkedEnglish": "Diese Seite ist übersetzt. Die verlinkten Einrichtungsanleitungen und detaillierten Referenzseiten sind derzeit auf Englisch verfügbar.",
+"modes.linkedEnglish": "Diese Seite und die Einrichtungsanleitungen sind übersetzt. Die detaillierten Referenzseiten sind derzeit auf Englisch verfügbar.",
 "modes.login.hex": "Authentifizierungsschlüssel HEX + DC ID",
 "modes.login.hex.body": "Importieren Sie die Kontoautorisierung zusammen mit ihrer Rechenzentrums-Kennung.",
 "modes.login.json": ".session + .json",

@@ -246,7 +246,7 @@
 "modes.limits.telegram": "Telegram boleh mengehadkan akaun kerana jumlah permintaan.",
 "modes.limits.title": "Pastikan had selari dengan bukti",
 "modes.limits.truth": "Rekod yang disahkan bukan bukti bahawa kandungannya benar.",
-"modes.linkedEnglish": "Halaman ini telah diterjemahkan. Panduan penyediaan berhubung dan halaman rujukan terperinci pada masa ini dalam Bahasa Inggeris.",
+"modes.linkedEnglish": "Halaman ini dan panduan pemasangan telah diterjemahkan. Halaman rujukan terperinci pada masa ini dalam bahasa Inggeris.",
 "modes.login.hex": "KunciAuth HEX + DC ID",
 "modes.login.hex.body": "Import kebenaran akaun dengan pengecam pusat data-nya.",
 "modes.login.json": ".session + .json",

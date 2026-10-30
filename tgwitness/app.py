@@ -297,8 +297,12 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
 
     @app.get("/locale.js")
     async def locale(request: Request):
-        lang = i18n.pick(request.cookies.get(i18n.COOKIE), request.headers.get("accept-language"))
-        return Response(i18n.script(lang), media_type="text/javascript; charset=utf-8")
+        guide = request.query_params.get("scope") == "guide"
+        languages = i18n.GUIDE_LANGUAGES if guide else i18n.LANGUAGES
+        requested = request.query_params.get("lang")
+        choice = requested if requested in languages else request.cookies.get(i18n.COOKIE)
+        lang = i18n.pick(choice, request.headers.get("accept-language"), languages)
+        return Response(i18n.script(lang, guide=guide), media_type="text/javascript; charset=utf-8")
 
     @app.get("/api/demo-access")
     async def demo_access(request: Request):
