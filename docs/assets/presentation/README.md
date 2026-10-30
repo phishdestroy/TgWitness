@@ -2,15 +2,25 @@
 
 # Investigation presentation kit
 
-The shared visual system for the repository and wiki: a dark technical grid,
-large outlined type, blue signals, warm accents and moving traces. The banners
-follow the PhishDestroy investigation repositories. The earlier dossier artwork
+The shared visual system for the repository and wiki: a dark casework panel,
+large outlined type, blue signals, warm accents and linked observations. The
+application mark stays visible alongside the investigation sequence. The earlier dossier artwork
 was generated with Gemini and is retained with its SVG typography and animation.
+
+The service and handbook sections follow the PhishDestroy profile's charcoal
+cards, cyan/violet/red accents, compact split buttons and animated red/blue
+dividers. Detailed instructions and the complete page index expand below them.
 
 | Asset | Purpose |
 | --- | --- |
-| `technical-hero*.svg` | Current technical repository banner: dark grid, large wordmark, moving traces and observation signals; desktop, phone and still variants |
-| `technical-wiki*.svg` | Matching handbook banners, including a dedicated phone composition and still variants |
+| `readme-card-{apprise,s3}*.svg` | Linked service cards with the same visual structure as the PhishDestroy profile |
+| `readme-handbook*.svg` | Three handbook routes, with desktop, phone and still variants |
+| `readme-button-*.svg`, `readme-divider*.svg` | Compact navigation buttons and the profile's shared section divider |
+| `casework-hero*.svg`, `casework-handbook*.svg` | Repository and handbook covers: a message, its captured edit and the retained record; desktop, phone and still variants |
+| `casework-nav-*.svg` | Three readable navigation buttons, with animated and still variants |
+| `casework-{chain,tamper,checkpoint}*.svg` | Matching evidence diagrams; stable labels, animated emphasis, vertical phone layouts and separate stills |
+| `technical-hero*.svg` | Earlier technical repository banner, retained for existing references |
+| `technical-wiki*.svg` | Earlier technical handbook banners, retained for existing references |
 | `identity-hero*.svg` | Earlier dossier cover, retained with its phone and still compositions |
 | `identity-wiki.svg`, `identity-wiki-static.svg` | Earlier illustrated handbook cover |
 | `identity-nav-{demo,start,wiki}*.svg` | Animated workspace, local setup and handbook buttons in the same family as the setup actions, with separate stills |
@@ -52,10 +62,11 @@ was generated with Gemini and is retained with its SVG typography and animation.
 
 ## Use and maintenance
 
-The README opens with the technical grid banner. The title remains readable from
-the first frame while signals, scanning lines and traces move. The handbook uses
-the same typography and grid, with a separate phone composition. Parent `picture`
-sources select still files for reduced motion.
+The README opens with the casework banner. The title and record labels remain
+readable while an observation moves along the chain. The handbook uses the same
+typography and record cards, with a separate phone composition. Parent `picture`
+sources select still files for reduced motion. Illustrative records are labelled;
+the workspace loop below them is captured from the actual fictional demo.
 
 Setup actions use the icon, title, subtitle and accent-line structure shared with
 ShortDot, TrustName and the forensic toolkit. Motion runs inside each linked SVG;
@@ -67,7 +78,25 @@ illustration. Feature copy stays concise; installation commands, the main eviden
 diagram and trust boundaries remain visible. Details expand where they are needed.
 Motion is part of the page design, with no players or download prompts.
 
-Regenerate the current banners with Space Grotesk, distributed under the
+Regenerate the casework covers, buttons and responsive diagrams:
+
+```sh
+python website/render_casework.py --display-font /path/to/SpaceGrotesk.ttf --text-font /path/to/Manrope.ttf
+```
+
+Regenerate the service cards, handbook routes and compact profile-style buttons:
+
+```sh
+python website/render_readme_panels.py --font /path/to/Manrope.ttf
+```
+
+Captions are outlined to prevent installed fonts from changing the card layout.
+
+The renderer preserves the application's original mark. It reads no account data
+and makes no network requests. Metadata badges use the version in `pyproject.toml`;
+regenerate them with `render_identity.py` after a version change.
+
+Regenerate the earlier technical banners with Space Grotesk, distributed under the
 [SIL Open Font License](OFL-SpaceGrotesk.txt):
 
 ```sh

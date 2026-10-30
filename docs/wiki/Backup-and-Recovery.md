@@ -37,7 +37,7 @@ docker compose cp tgwitness:/data ../tgwitness-backup-before-update
 Choose a new backup destination each time. If your deployment uses overlays or `compose.image.yaml`, use those same files for the backup commands.
 
 
-![Section divider](../assets/presentation/divider.svg)
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>
 
 ## Restore deliberately
 
@@ -62,7 +62,7 @@ docker compose up -d --build --wait
 Keep the same project name and volume. Check panel access, account identity and new events after the update. A restart does not reconstruct every event during downtime.
 
 
-![Section divider](../assets/presentation/divider.svg)
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>
 
 ## Retention and deletion
 

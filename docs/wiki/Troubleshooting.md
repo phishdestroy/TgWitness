@@ -44,7 +44,7 @@ docker compose logs --tail 100 tgwitness
 Add the same `-f` options used when starting an overlay deployment.
 
 
-![Section divider](../assets/presentation/divider.svg)
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>
 
 ## Telegram asks for a pause
 
@@ -55,7 +55,7 @@ Allow the reported FloodWait interval to expire. Check the account's backoff sta
 If a send, join or bot action has an unknown outcome, inspect the chat and its action receipt before retrying. A timeout does not prove Telegram rejected the action.
 
 
-![Section divider](../assets/presentation/divider.svg)
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>
 
 ## Still stuck?
 

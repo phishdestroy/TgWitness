@@ -32,7 +32,7 @@ MTProxy accepts a 32-digit hexadecimal secret or `dd` plus 32 digits. Fake TLS `
 There is no automatic direct fallback after a proxy failure. A successful transport test is not proof of authorization or complete collection.
 
 
-![Section divider](../assets/presentation/divider.svg)
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>
 
 ## Public lists
 

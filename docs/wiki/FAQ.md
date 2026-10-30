@@ -14,7 +14,7 @@ No. A deletion notice may be recorded without prior content. History acquisition
 No. It verifies integrity relative to a signing key. An operator controlling the collector and key can fabricate a journal. Separately retained checkpoints and independent witnesses constrain later rewriting, but do not establish Telegram origin by themselves.
 
 
-![Section divider](../assets/presentation/divider.svg)
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>
 
 ## Is every Telegram event guaranteed to arrive?
 
@@ -25,7 +25,7 @@ No. Account permissions, connection failures, service behavior and process inter
 The collector uses a Telegram user authorization through MTProto. A bot token is used separately by the optional witness or Proof broadcaster.
 
 
-![Section divider](../assets/presentation/divider.svg)
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>
 
 ## Do I need my own API ID and API hash?
 
@@ -36,7 +36,7 @@ They are optional in the normal sign-in flow. The workspace can reuse saved/impo
 Not in the current single-operator model. The panel token controls every workspace. A witness token has a separate, read-only capability; it is not a general user role.
 
 
-![Section divider](../assets/presentation/divider.svg)
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>
 
 ## Are messages and attachments encrypted on disk?
 
@@ -47,7 +47,7 @@ The vault encrypts sessions, credentials and signing secrets. The local journal 
 No. Lock clears browser access; the running collector continues. Pause observation stops collection. Closing the tab also leaves the process running.
 
 
-![Section divider](../assets/presentation/divider.svg)
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>
 
 ## Why can two accounts show different histories?
 
@@ -58,7 +58,7 @@ They may have different access, membership dates and visibility. Each workspace 
 No automatic direct fallback is configured. Other network functions, such as witness HTTP requests or feed downloads, have separate route settings.
 
 
-![Section divider](../assets/presentation/divider.svg)
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>
 
 ## Are an evidence export and a backup interchangeable?
 
@@ -69,7 +69,7 @@ No. An evidence export deliberately excludes login and signing secrets. A servic
 It has a separate process and key, but the same operator still controls that server. Independent custody requires a separate operator or system outside that control.
 
 
-![Section divider](../assets/presentation/divider.svg)
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>
 
 ## Is Linux, macOS or Docker support already fully qualified?
 

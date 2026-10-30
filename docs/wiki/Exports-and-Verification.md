@@ -7,13 +7,18 @@
 
 ## See why the checks fit together
 
-![Three observations become linked, individually signed records.](../assets/presentation/evidence-chain-animated.svg)
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../assets/presentation/casework-chain-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/casework-chain-static.svg">
+  <source media="(max-width: 640px)" srcset="../assets/presentation/casework-chain-mobile.svg">
+  <img src="../assets/presentation/casework-chain.svg" width="1200" alt="Three observations become linked, individually signed records.">
+</picture>
 
 1. **Encode the event.** Nine fields, including the previous hash, become one canonical UTF-8 JSON value.
 2. **Hash and sign.** SHA-256 describes those bytes; Ed25519 signs the 32 raw digest bytes.
 3. **Verify the handoff.** Recompute every hash, check every signature and compare the key fingerprint and retained checkpoint.
 
-[Open the full-size animation](../assets/presentation/evidence-chain-animated.svg) · [Static diagram](../assets/presentation/evidence-chain-static.svg) · [Formulas and change scenarios](../HOW-IT-WORKS.md)
+[Open the full-size animation](../assets/presentation/casework-chain.svg) · [Static diagram](../assets/presentation/casework-chain-static.svg) · [Formulas and change scenarios](../HOW-IT-WORKS.md)
 
 ## Choose the right output
 
@@ -29,7 +34,7 @@
 A full chat export is a snapshot of current visible history. It cannot recreate every earlier edit or deletion. An evidence ZIP excludes login secrets and is not a full application backup.
 
 
-![Section divider](../assets/presentation/divider.svg)
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>
 
 ## Make a handoff
 
@@ -58,7 +63,7 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --checkpoin
 Replace the placeholders with the actual files and trusted fingerprint. A successful check detects changes covered by the signatures, hash chain and manifest. Read the reported coverage and gaps too.
 
 
-![Section divider](../assets/presentation/divider.svg)
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>
 
 ## Download a large export
 

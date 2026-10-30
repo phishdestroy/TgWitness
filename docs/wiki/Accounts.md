@@ -32,7 +32,7 @@ API ID and API hash identify an application; they are not an account login. TgWi
 A connection test checks transport. Authorization and access to a particular chat are separate checks.
 
 
-![Section divider](../assets/presentation/divider.svg)
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>
 
 ## Add or remove a workspace
 

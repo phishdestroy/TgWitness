@@ -1,14 +1,14 @@
 <picture>
-  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/technical-hero-mobile-static.svg">
-  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/technical-hero-static.svg">
-  <source media="(max-width: 640px)" srcset="docs/assets/presentation/technical-hero-mobile.svg">
-  <img src="docs/assets/presentation/technical-hero.svg" width="1440" alt="TgWitness — Follow the trail. Preserve the evidence. An animated technical grid connects capture, investigation and verification.">
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/casework-hero-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/casework-hero-static.svg">
+  <source media="(max-width: 640px)" srcset="docs/assets/presentation/casework-hero-mobile.svg">
+  <img src="docs/assets/presentation/casework-hero.svg" width="1440" alt="TgWitness — Follow the trail. Preserve the evidence. An illustrated message, captured edit and retained record show the investigation workflow.">
 </picture>
 
 <p align="center">
-  <a href="https://phishdestroy.github.io/TgWitness/demo/"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/identity-nav-demo-static.svg"><img src="docs/assets/presentation/identity-nav-demo.svg" width="248" height="64" alt="Explore the workspace"></picture></a>
-  <a href="#quick-start"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/identity-nav-start-static.svg"><img src="docs/assets/presentation/identity-nav-start.svg" width="248" height="64" alt="Start your first case"></picture></a>
-  <a href="https://github.com/phishdestroy/TgWitness/wiki"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/identity-nav-wiki-static.svg"><img src="docs/assets/presentation/identity-nav-wiki.svg" width="248" height="64" alt="Open the handbook"></picture></a>
+  <a href="https://phishdestroy.github.io/TgWitness/demo/"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/casework-nav-demo-static.svg"><img src="docs/assets/presentation/casework-nav-demo.svg" width="296" height="76" alt="Explore the workspace"></picture></a>
+  <a href="#quick-start"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/casework-nav-start-static.svg"><img src="docs/assets/presentation/casework-nav-start.svg" width="296" height="76" alt="Start your first case"></picture></a>
+  <a href="https://github.com/phishdestroy/TgWitness/wiki"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/casework-nav-wiki-static.svg"><img src="docs/assets/presentation/casework-nav-wiki.svg" width="296" height="76" alt="Open the handbook"></picture></a>
 </p>
 
 <p align="center"><strong>Your Telegram investigation workspace.</strong><br>Capture what you observe. Follow the connections. Hand over a verifiable record.<br>Self-hosted, on your own computer or server.</p>
@@ -20,7 +20,7 @@
   <a href="LICENSE"><img src="docs/assets/presentation/identity-meta-license.svg" width="60" height="30" alt="MIT"></a>
 </p>
 
-<p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/identity-divider-static.svg"><img src="docs/assets/presentation/identity-divider.svg" width="1200" height="30" alt=""></picture></p>
+<p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-divider-static.svg"><img src="docs/assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
 <a name="screenshots"></a>
 
@@ -61,7 +61,7 @@ Profiles, history snapshots and supported bot actions stay with the case.
 
 [Collection & scope](docs/COLLECTION.md) · [Investigation tools](docs/INVESTIGATION.md) · [Modes & evidence](https://phishdestroy.github.io/TgWitness/guides/modes.html)
 
-<p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/identity-divider-static.svg"><img src="docs/assets/presentation/identity-divider.svg" width="1200" height="30" alt=""></picture></p>
+<p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-divider-static.svg"><img src="docs/assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
 <a name="quick-start"></a>
 <a name="run-it-on-your-machine"></a>
@@ -76,10 +76,10 @@ browser; **`TgWitness-Demo.cmd`** opens the fictional demo.
 [Download the source](https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip).
 Requires **Python 3.11+**; the launcher prepares the environment.
 
-| | Windows | Linux / macOS |
-| --- | --- | --- |
-| **Try fictional records** | `scripts\Demo.cmd` | `sh start.sh --demo` |
-| **Connect your account** | `Start.cmd` | `sh start.sh` |
+| Windows | Linux / macOS |
+| --- | --- |
+| **Try fictional records**<br>`scripts\Demo.cmd` | **Try fictional records**<br>`sh start.sh --demo` |
+| **Connect your account**<br>`Start.cmd` | **Connect your account**<br>`sh start.sh` |
 
 The launchers open **http://127.0.0.1:8787**. Use a **dedicated account**.
 
@@ -97,7 +97,7 @@ Stop the demo before starting live mode. The live panel token is in
   <a href="docs/DEPLOYMENT.md"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/identity-action-deploy-static.svg"><img src="docs/assets/presentation/identity-action-deploy.svg" width="248" height="64" alt="Docker &amp; servers — Deploy your workspace"></picture></a>
 </p>
 
-<p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/identity-divider-static.svg"><img src="docs/assets/presentation/identity-divider.svg" width="1200" height="30" alt=""></picture></p>
+<p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-divider-static.svg"><img src="docs/assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
 <a name="how-it-works"></a>
 
@@ -107,10 +107,10 @@ Export observations, files and an offline report in a **signed ZIP**.
 Each record carries a SHA-256 link and an Ed25519 signature.
 
 <picture>
-  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/case-chain-mobile-static.svg">
-  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/evidence-chain-static.svg">
-  <source media="(max-width: 640px)" srcset="docs/assets/presentation/case-chain-mobile.svg">
-  <img src="docs/assets/presentation/readme-evidence-chain-animated.svg" width="1200" alt="An observed message, its captured edit and a deletion notice become linked records with SHA-256 hashes and Ed25519 signatures.">
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/casework-chain-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/casework-chain-static.svg">
+  <source media="(max-width: 640px)" srcset="docs/assets/presentation/casework-chain-mobile.svg">
+  <img src="docs/assets/presentation/casework-chain.svg" width="1200" alt="An observed message, its captured edit and a deletion notice become linked records with SHA-256 hashes and Ed25519 signatures.">
 </picture>
 
 Verification establishes **integrity relative to a separately trusted key**.
@@ -137,8 +137,10 @@ reported coverage gaps stay alongside the record.
 <summary><strong>What happens when someone changes the record?</strong></summary>
 
 <picture>
-  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/evidence-tamper-static.svg">
-  <img src="docs/assets/presentation/readme-evidence-tamper-animated.svg" width="1200" alt="Changing a captured event changes its hash and breaks verification of the linked record.">
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/casework-tamper-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/casework-tamper-static.svg">
+  <source media="(max-width: 640px)" srcset="docs/assets/presentation/casework-tamper-mobile.svg">
+  <img src="docs/assets/presentation/casework-tamper.svg" width="1200" alt="Changing a captured event changes its hash and breaks verification of the linked record.">
 </picture>
 
 An operator who holds the signing key can sign fabricated input. A hash chain
@@ -150,8 +152,10 @@ alone cannot establish source truth. [Evidence model and trust boundaries →](d
 <summary><strong>Keep an independent point of comparison</strong> — checkpoints, timestamps and witnesses</summary>
 
 <picture>
-  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/evidence-checkpoint-static.svg">
-  <img src="docs/assets/presentation/readme-evidence-checkpoint-animated.svg" width="1200" alt="An independently retained checkpoint lets a recipient compare the export with an earlier observation.">
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/casework-checkpoint-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/casework-checkpoint-static.svg">
+  <source media="(max-width: 640px)" srcset="docs/assets/presentation/casework-checkpoint-mobile.svg">
+  <img src="docs/assets/presentation/casework-checkpoint.svg" width="1200" alt="An independently retained checkpoint lets a recipient compare the export with an earlier observation.">
 </picture>
 
 A separately retained checkpoint fixes a boundary to compare against. External
@@ -163,26 +167,45 @@ two workspaces on one machine do not provide that separation.
 </details>
 
 
-[Explore the interactive explanation →](https://phishdestroy.github.io/TgWitness/docs/concepts/) · [Read the evidence model](docs/HOW-IT-WORKS.md)
+<p align="center">
+  <a href="https://phishdestroy.github.io/TgWitness/docs/concepts/"><img src="docs/assets/presentation/readme-button-explain.svg" height="34" alt="Explore the interactive explanation"></a>
+  <a href="docs/HOW-IT-WORKS.md"><img src="docs/assets/presentation/readme-button-model.svg" height="34" alt="Read the evidence model"></a>
+</p>
 
-<p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/identity-divider-static.svg"><img src="docs/assets/presentation/identity-divider.svg" width="1200" height="30" alt=""></picture></p>
+<p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-divider-static.svg"><img src="docs/assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
-## Notifications · Apprise
+## Keep the investigation running
+
+<a name="layout-review"></a>
+
+<p align="center">
+  <a href="docs/OPERATIONS.md#notifications"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-card-apprise-static.svg"><img src="docs/assets/presentation/readme-card-apprise.svg" width="400" alt="Notifications · Apprise. Problem alerts, chat changes and daily summaries via messengers, email or JSON webhooks."></picture></a>
+  <a href="https://phishdestroy.github.io/TgWitness/docs/exports/#s3"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-card-s3-static.svg"><img src="docs/assets/presentation/readme-card-s3.svg" width="400" alt="Off-site copy · S3. Journal, files and checkpoints, encrypted with AES-256-GCM before upload to S3-compatible storage."></picture></a>
+</p>
+
+<p align="center">
+  <a href="docs/OPERATIONS.md#notifications"><img src="docs/assets/presentation/readme-button-apprise.svg" height="34" alt="Set up notifications"></a>
+  <a href="https://phishdestroy.github.io/TgWitness/docs/exports/#s3"><img src="docs/assets/presentation/readme-button-s3.svg" height="34" alt="S3 setup and recovery"></a>
+  <a href="docs/wiki/Backup-and-Recovery.md"><img src="docs/assets/presentation/readme-button-backup.svg" height="34" alt="Backup and recovery guide"></a>
+</p>
+
+<details>
+<summary><strong>Configure notifications</strong> — Apprise destinations and delivery</summary>
 
 Problem alerts, chat changes and daily summaries via **Apprise**: messengers,
 email or your own JSON webhook. Configure them in **Sources → Notifications**.
 
 [Set up notifications →](docs/OPERATIONS.md#notifications)
 
-## Off-site copy · S3
+</details>
+
+<details>
+<summary><strong>Storage settings and recovery</strong> — destination, schedule, retention and keys</summary>
 
 Journal, files, checkpoints and chat exports — encrypted with **AES-256-GCM before upload**
 to S3-compatible storage. Keep the recovery key separately.
 
 [S3 setup & recovery →](https://phishdestroy.github.io/TgWitness/docs/exports/#s3)
-
-<details>
-<summary><strong>Storage settings and recovery</strong> — destination, schedule, retention and keys</summary>
 
 ![Off-site copy controls: endpoint, region, bucket, schedule, Object Lock and recovery key. No credentials are shown.](docs/assets/off-site-copy.png)
 
@@ -196,9 +219,31 @@ sessions, configuration and signing secrets.
 </details>
 
 
-<p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/identity-divider-static.svg"><img src="docs/assets/presentation/identity-divider.svg" width="1200" height="30" alt=""></picture></p>
+<p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-divider-static.svg"><img src="docs/assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
 ## Follow your next lead
+
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-handbook-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-handbook-static.svg">
+  <source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-handbook-mobile.svg">
+  <img src="docs/assets/presentation/readme-handbook.svg" width="1200" alt="Set up: accounts, collection and proxies. Work a case: investigations, export and verification, Witness and Proof. Maintain: server, Docker, backup, recovery and troubleshooting.">
+</picture>
+
+<p align="center">
+  <a href="https://github.com/phishdestroy/TgWitness/wiki/Accounts"><img src="docs/assets/presentation/readme-button-accounts.svg" height="34" alt="Set up your account"></a>
+  <a href="docs/INVESTIGATION.md"><img src="docs/assets/presentation/readme-button-investigate.svg" height="34" alt="Investigation guide"></a>
+  <a href="docs/DEPLOYMENT.md"><img src="docs/assets/presentation/readme-button-maintain.svg" height="34" alt="Server and Docker deployment"></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/phishdestroy/TgWitness/wiki"><img src="docs/assets/presentation/readme-button-wiki.svg" height="34" alt="Investigation Wiki"></a>
+  <a href="docs/wiki/Home.md"><img src="docs/assets/presentation/readme-button-offline.svg" height="34" alt="Offline handbook"></a>
+  <a href="docs/README.md"><img src="docs/assets/presentation/readme-button-docs.svg" height="34" alt="Technical reference"></a>
+</p>
+
+<details>
+<summary><strong>All handbook pages</strong> — accounts, collection, investigations and maintenance</summary>
 
 | Set up | Work a case | Maintain |
 | --- | --- | --- |
@@ -206,13 +251,13 @@ sessions, configuration and signing secrets.
 | [Collection](docs/COLLECTION.md) | [Export & verify](docs/EVIDENCE.md) | [Backup & recovery](docs/wiki/Backup-and-Recovery.md) |
 | [Proxies](https://github.com/phishdestroy/TgWitness/wiki/Proxies) | [Witness & Proof](docs/wiki/Witness-and-Proof.md) | [Troubleshooting](https://github.com/phishdestroy/TgWitness/wiki/Troubleshooting) |
 
-[Investigation Wiki](https://github.com/phishdestroy/TgWitness/wiki) · [Offline handbook](docs/wiki/Home.md) · [Technical reference](docs/README.md)
+</details>
 
 **Capture has boundaries.** TgWitness observes what the connected account can
 access. No secret chats; downtime and catch-up can leave gaps and miss intermediate
 edits. [Collection limits](docs/COLLECTION.md) · [Security](.github/SECURITY.md)
 
-<p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/identity-divider-static.svg"><img src="docs/assets/presentation/identity-divider.svg" width="1200" height="30" alt=""></picture></p>
+<p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-divider-static.svg"><img src="docs/assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
 <!-- operator-notice:start -->
 
@@ -268,4 +313,9 @@ To strictly comply with the MIT License, we do not restrict the use of this soft
 </details>
 
 
-<p align="center"><sub>Built by <a href="https://github.com/phishdestroy">PhishDestroy</a> &nbsp; · &nbsp; <a href=".github/CONTRIBUTING.md">Contribute</a> &nbsp; · &nbsp; <a href=".github/SUPPORT.md">Get help</a> &nbsp; · &nbsp; <a href=".github/SECURITY.md">Security</a></sub></p>
+<p align="center">
+  <a href="https://github.com/phishdestroy"><img src="docs/assets/presentation/readme-button-project.svg" height="34" alt="Built by PhishDestroy"></a>
+  <a href=".github/CONTRIBUTING.md"><img src="docs/assets/presentation/readme-button-contribute.svg" height="34" alt="Contribute"></a>
+  <a href=".github/SUPPORT.md"><img src="docs/assets/presentation/readme-button-support.svg" height="34" alt="Get help"></a>
+  <a href=".github/SECURITY.md"><img src="docs/assets/presentation/readme-button-security.svg" height="34" alt="Report a vulnerability"></a>
+</p>

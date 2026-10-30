@@ -22,7 +22,7 @@ Investigation mode prepares collection of an account's visible chats and actions
 For each source, retain its workspace, numeric chat ID, observed title/username, reason for inclusion, acquisition method and time range. Add access changes and gaps. Names and usernames can change; do not use them as the sole identity of a source.
 
 
-![Section divider](../assets/presentation/divider.svg)
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>
 
 ## Follow changes and connections
 
@@ -44,7 +44,7 @@ The panel can save an invitation preview, join/open a supported Telegram link, s
 An unknown action outcome should be checked before retrying. Callback presses in another Telegram app are not themselves visible to the collector. Payment, phone/location and web-app workflows are outside the mini-client's supported actions.
 
 
-![Section divider](../assets/presentation/divider.svg)
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>
 
 ## Hand over the case
 

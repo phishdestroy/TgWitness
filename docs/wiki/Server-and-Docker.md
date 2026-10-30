@@ -38,7 +38,7 @@ ssh -L 8787:127.0.0.1:8787 user@your-server
 Open the local panel address while the tunnel is connected. Substitute your SSH user and server. Use another local port if 8787 is already occupied.
 
 
-![Section divider](../assets/presentation/divider.svg)
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>
 
 ## Add HTTPS
 

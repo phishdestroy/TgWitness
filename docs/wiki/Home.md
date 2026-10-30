@@ -1,8 +1,8 @@
 <picture>
-  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../assets/presentation/technical-wiki-mobile-static.svg">
-  <source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/technical-wiki-static.svg">
-  <source media="(max-width: 640px)" srcset="../assets/presentation/technical-wiki-mobile.svg">
-  <img src="../assets/presentation/technical-wiki.svg" width="1440" alt="TgWitness — Work the case. Keep the record. An animated technical grid introduces the investigation handbook.">
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../assets/presentation/casework-handbook-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/casework-handbook-static.svg">
+  <source media="(max-width: 640px)" srcset="../assets/presentation/casework-handbook-mobile.svg">
+  <img src="../assets/presentation/casework-handbook.svg" width="1440" alt="TgWitness — Work the case. Keep the record. An illustrated sequence follows a captured message, its edit and the retained record.">
 </picture>
 
 # The investigation handbook
@@ -26,19 +26,39 @@ that sequence, not every possible Telegram event.
 
 ## Keep the investigation running
 
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-handbook-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-handbook-static.svg">
+  <source media="(max-width: 640px)" srcset="../assets/presentation/readme-handbook-mobile.svg">
+  <img src="../assets/presentation/readme-handbook.svg" width="1200" alt="Set up your workspace, work a case and keep the investigation running.">
+</picture>
+
+<p align="center">
+  <a href="https://github.com/phishdestroy/TgWitness/wiki/Getting-Started"><img src="../assets/presentation/readme-button-accounts.svg" height="34" alt="Get started and connect your account"></a>
+  <a href="https://github.com/phishdestroy/TgWitness/wiki/Investigations"><img src="../assets/presentation/readme-button-investigate.svg" height="34" alt="Investigation guide"></a>
+  <a href="https://github.com/phishdestroy/TgWitness/wiki/Server-and-Docker"><img src="../assets/presentation/readme-button-maintain.svg" height="34" alt="Server and Docker deployment"></a>
+</p>
+
+<details>
+<summary><strong>All operating guides</strong> — connections, deployment, recovery and troubleshooting</summary>
+
 | Connect & deploy | Preserve & verify | Find an answer |
 | --- | --- | --- |
 | [Proxies and connection routes](Proxies.md) | [Witness and Proof](Witness-and-Proof.md) | [Troubleshooting](Troubleshooting.md) |
 | [Servers and Docker](Server-and-Docker.md) | [Backup and recovery](Backup-and-Recovery.md) | [Frequently asked questions](FAQ.md) |
 | [Hardened deployment](../HIGH-ASSURANCE.md) | [S3 off-site copy](https://phishdestroy.github.io/TgWitness/docs/exports/#s3) | [Glossary](Glossary.md) |
 
+</details>
+
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>
+
 ## Understand the evidence
 
 <picture>
-  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../assets/presentation/case-chain-mobile-static.svg">
-  <source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/evidence-chain-static.svg">
-  <source media="(max-width: 640px)" srcset="../assets/presentation/case-chain-mobile.svg">
-  <img src="../assets/presentation/readme-evidence-chain-animated.svg" width="1200" alt="Captured events link through SHA-256 hashes and carry Ed25519 signatures. Verify the record against a separately trusted key.">
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../assets/presentation/casework-chain-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/casework-chain-static.svg">
+  <source media="(max-width: 640px)" srcset="../assets/presentation/casework-chain-mobile.svg">
+  <img src="../assets/presentation/casework-chain.svg" width="1200" alt="Captured events link through SHA-256 hashes and carry Ed25519 signatures. Verify the record against a separately trusted key.">
 </picture>
 
 [The evidence model and formulas](../HOW-IT-WORKS.md) · [Interactive explanation](https://phishdestroy.github.io/TgWitness/docs/concepts/)
