@@ -243,6 +243,8 @@ After a restart the saved Telegram update position is resumed (`catch_up_from` i
 `message.recovered` for missed messages and `message.missing_on_recheck` when Telegram no
 longer returns a saved message; the latter is not a deletion notice and names no deleter or time.
 
+### Off-site copy and restore (S3)
+
 The off-site copy (Exports, off by default) uploads journal segments, preserved files, checkpoints
 with their timestamps and finished chat exports to S3-compatible storage, encrypted with
 AES-256-GCM before upload under a key kept in the workspace vault; Object Lock retention applies
@@ -269,6 +271,8 @@ all preserved-media references against decrypted hashes and recorded sizes. Iden
 journal segments from interrupted uploads are deduplicated; conflicting overlaps are rejected.
 Checkpoints created during an upload are deferred until their covered journal records have been
 copied, so a completed pass does not publish a checkpoint ahead of its journal.
+
+### Streaming export snapshots
 
 Streaming exports use a stable SQLite read snapshot. Its head may be older than the
 current live journal when download completes. A checkpoint created after that

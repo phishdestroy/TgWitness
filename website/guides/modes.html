@@ -80,7 +80,7 @@ ots verify checkpoint.ots</code></pre></details></article>
 </li><li><span class="m-rung" aria-hidden="true">06</span>
 <article><h3>{{modes.level.proof}}</h3><p>{{modes.level.proof.mechanism}}</p><p class="m-confirms"><strong>{{modes.confirms}}</strong> {{modes.level.proof.proves}}</p><p class="m-limit"><strong>{{modes.limit}}</strong> {{modes.level.proof.no}}</p>
 <details class="m-command"><summary>{{modes.command}}</summary><pre dir="ltr"><code translate="no">python -m tgwitness.verify proof.json --fingerprint TRUSTED_SHA256 --witness-fingerprint WITNESS_SHA256 --evidence evidence.zip</code></pre></details></article>
-</li><li><span class="m-rung" aria-hidden="true">07</span>
+</li><li id="replica"><span class="m-rung" aria-hidden="true">07</span>
 <article><h3>{{modes.level.replica}}</h3><p>{{modes.level.replica.mechanism}}</p><p class="m-confirms"><strong>{{modes.confirms}}</strong> {{modes.level.replica.proves}}</p><p class="m-limit"><strong>{{modes.limit}}</strong> {{modes.level.replica.no}}</p>
 <details class="m-command"><summary>{{modes.command}}</summary><pre dir="ltr"><code translate="no">python -m tgwitness.replica restore --key-file KEY.json --out EMPTY_DIR</code></pre></details></article>
 </li><li><span class="m-rung" aria-hidden="true">08</span>

@@ -23,6 +23,9 @@ def check_home(browser, url, output, route_request, errors):
         prefix = '' if lang == 'en' else lang + '/'
         page.goto(url + prefix, wait_until='networkidle')
         assert page.locator('video, #films').count() == 0
+        expect(page.locator('#s3')).to_be_visible()
+        assert page.locator('#s3 a').get_attribute('href') == 'docs/reference/evidence/#off-site-copy-and-restore-s3'
+        assert page.locator('.hero-retention-link').get_attribute('href') == '#retention'
         assert not page.evaluate('document.documentElement.scrollWidth > innerWidth'), (lang, width, theme)
         for action, path in [('demo', 'demo/'), ('setup', 'demo/guide.html')]:
             button = page.locator(f'[data-home-action="{action}"]')
