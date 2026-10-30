@@ -19,6 +19,8 @@ on:
       - docs/CHANGELOG.md
       - tools/check_site.py
       - tools/check_docs_site.py
+      - tools/check_home_browser.py
+      - tools/check_modes_browser.py
       - tests/test_site.py
       - docs/assets/**
       - tgwitness/static/**
