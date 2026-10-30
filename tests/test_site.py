@@ -122,7 +122,7 @@ class Page(HTMLParser):
 def test_every_page_has_distinct_metadata_and_valid_links(site_root, base_url):
     output = build_site(site_root, repository="example/Journal", base_url=base_url)
     pages = {base_url + "/" + path: Page(output / path / "index.html") for path in PAGES}
-    assert len(pages) == len(PAGES) == len(LANGS) * len(LOCAL_PAGES) == 13 * 31
+    assert len(pages) == len(PAGES) == len(LANGS) * len(LOCAL_PAGES) == 13 * 32
     for lang in LANGS:
         prefix = "" if lang == "en" else lang + "/"
         local = [pages[base_url + "/" + prefix + path] for path in LOCAL_PAGES]
@@ -171,7 +171,7 @@ def test_every_page_has_distinct_metadata_and_valid_links(site_root, base_url):
     for name in SEARCH_FILES:
         index = json.loads((output / name).read_text(encoding="utf-8"))
         hub = base_url + "/" + name.removesuffix("search.json")
-        assert len(index["pages"]) == 28
+        assert len(index["pages"]) == 29
         for entry in index["pages"]:
             assert urljoin(hub, entry["url"]) in pages
             assert len(entry["text"]) > 300

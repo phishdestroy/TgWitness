@@ -10,6 +10,9 @@
 
 ## Start here
 
+**Licence:** read the [Taylor Wessing use restriction](TAYLOR-WESSING-EXCLUSION.md)
+and [TgWitness Restricted License](../LICENSE) before use or redistribution.
+
 Start with a local demo, then connect one account and check a captured message.
 The proxy, witness bot and public status page are separate options.
 

@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Changed the current project licence to the TgWitness Restricted License, with
+  the Taylor Wessing exclusion. Added the maintainer's statement, source reference
+  and scope notes to the documentation; updated package, container, portable
+  distribution, website and translated README licence labels. Third-party notices
+  and licences attached to previously distributed versions are unchanged.
 - Put the workspace preview near the top of the repository landing page, simplified
   wiki entry links and connected the issue chooser to the live handbook. GitHub
   and website sharing images now have reproducible PNGs in the investigation style.

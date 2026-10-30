@@ -13,7 +13,7 @@
 <p align="center">
   <a href="docs/CHANGELOG.md">v0.6.1 · pre-release</a> &nbsp; · &nbsp;
   <a href="docs/QUICKSTART.md">Python 3.11+</a> &nbsp; · &nbsp;
-  <a href="LICENSE">MIT licensed</a>
+  <a href="LICENSE">Restricted license</a>
 </p>
 
 <p align="center">
@@ -129,6 +129,14 @@ Telegram origin, complete capture or the truth of the content.
 
 [All Wiki pages](https://github.com/phishdestroy/TgWitness/wiki) · [Offline handbook](docs/wiki/Home.md) · [Complete project guide](docs/PROJECT-GUIDE.md) · [Technical reference](docs/README.md)
 
+## Licence and use restriction
+
+The [TgWitness Restricted License](LICENSE) includes the
+[Taylor Wessing exclusion](docs/TAYLOR-WESSING-EXCLUSION.md).
+Read the restriction before using, evaluating, integrating or redistributing
+the software. The documentation includes the maintainer's full statement and
+source reference.
+
 ## Repository map
 
 <details>
@@ -156,4 +164,4 @@ Telegram origin, complete capture or the truth of the content.
 
 <sub>Pre-release. See the [verification record](docs/VERIFICATION.md) and the [audit findings and their fixes](docs/internal/RECHECK-2026-10-29.md) for tested behavior and remaining work. All screens and films use fictional data.</sub>
 
-<p align="center"><a href=".github/SUPPORT.md">Get help</a> · <a href=".github/CONTRIBUTING.md">Contribute</a> · <a href=".github/SECURITY.md">Report a vulnerability</a> · <a href="LICENSE">MIT license</a> · Built by <a href="https://github.com/phishdestroy">PhishDestroy</a></p>
+<p align="center"><a href=".github/SUPPORT.md">Get help</a> · <a href=".github/CONTRIBUTING.md">Contribute</a> · <a href=".github/SECURITY.md">Report a vulnerability</a> · <a href="LICENSE">Restricted license</a> · Built by <a href="https://github.com/phishdestroy">PhishDestroy</a></p>

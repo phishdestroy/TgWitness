@@ -12,7 +12,7 @@
   <img alt="Python 3.11+" src="https://img.shields.io/badge/python-3.11%2B-243a52?logo=python&amp;logoColor=white">
   <img alt="FastAPI + Telethon" src="https://img.shields.io/badge/FastAPI-Telethon-243a52?logo=fastapi&amp;logoColor=white">
   <img alt="Docker Compose" src="https://img.shields.io/badge/Docker-Compose-243a52?logo=docker&amp;logoColor=white">
-  <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-243a52">
+  <img alt="License: TgWitness Restricted License" src="https://img.shields.io/badge/license-Restricted-243a52">
   <img alt="Version: 0.6.1" src="https://img.shields.io/badge/version-0.6.1-243a52">
 </p>
 
@@ -352,7 +352,7 @@ python tools/check_site.py                             # website browser accepta
 
 ## 许可协议
 
-[MIT](../../LICENSE)
+[TgWitness Restricted License](../../LICENSE)
 
 ## 此文件夹中的指南
 
@@ -360,3 +360,5 @@ python tools/check_site.py                             # website browser accepta
 | --- | --- |
 | [DEPLOYMENT.md](DEPLOYMENT.md) | 部署与运维 |
 | [QUICKSTART.md](QUICKSTART.md) | TgWitness 快速入门 |
+
+[Licence and use restriction — Taylor Wessing exclusion](../TAYLOR-WESSING-EXCLUSION.md) · [Full licence](../../LICENSE)

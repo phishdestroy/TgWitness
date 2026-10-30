@@ -52,6 +52,10 @@ Need a term explained? Open the [glossary](Glossary.md).
 
 ## Read this before connecting
 
+TgWitness uses a [restricted licence](../../LICENSE), including the
+[Taylor Wessing exclusion and maintainer's statement](../TAYLOR-WESSING-EXCLUSION.md).
+Review the restriction before use, evaluation, integration or redistribution.
+
 Use a dedicated account you can afford to lose. A Telegram session grants access to that account; keep sessions, panel tokens and keys private. Local message content and attachments need disk encryption if you require protection at rest.
 
 A signature establishes integrity relative to a trusted key. It does not prove that Telegram created a message, that collection was complete, or that an operator could not fabricate a journal.

@@ -60,7 +60,7 @@ SEARCH_TEXT = 4000  # characters of each page in the search index
 HOME_TITLE = "Telegram message history & signed exports | TgWitness"
 HOME_DESCRIPTION = ("A self-hosted Telegram observation journal. Preserve observed messages, compare edits, "
                     "track deletion notices, and export signed records you can verify.")
-HOME_OG = "Your accounts. Your journal. A verifiable record. An open-source Telegram workspace that runs on your own machine."
+HOME_OG = "Your accounts. Your journal. A verifiable record. A source-available Telegram workspace that runs on your own machine."
 HOME_IMAGE_ALT = "TgWitness — Follow the trail. Preserve the evidence. A Telegram investigation workspace."
 WIKI_DESCRIPTION = ("The complete TgWitness reference: installation, accounts, proxies, collection, evidence format, "
                     "witnesses, timestamps, security, architecture and test results.")

@@ -32,8 +32,8 @@ LANGUAGES = {
     "vi": ("Tiếng Việt", "vi", "ltr", "vi_VN"),
     "zh": ("简体中文", "zh-Hans", "ltr", "zh_CN"),
 }
-# Kept in English on every language: release notes change daily and are written for maintainers.
-ENGLISH_ONLY = {"changelog"}
+# Keep release notes and the licence statement in their original English.
+ENGLISH_ONLY = {"changelog", "license"}
 ATTRIBUTES = ("aria-label", "title", "alt", "placeholder")
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"}
 # Inline markup a sentence may carry. <small> is left out: the pages set it as its own line.

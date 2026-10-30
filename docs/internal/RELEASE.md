@@ -1,6 +1,8 @@
 # Version 0.6.1
 
-TgWitness is an MIT-licensed, self-hosted Telegram observation journal. The repository
+TgWitness is a self-hosted Telegram observation journal under the
+[TgWitness Restricted License](../../LICENSE), including the
+[Taylor Wessing exclusion](../TAYLOR-WESSING-EXCLUSION.md). The repository
 contains 0.6.1 plus the changes listed under **Unreleased** in the [changelog](../CHANGELOG.md).
 Release downloads become available only after the GitHub release workflow succeeds.
 
