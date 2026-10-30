@@ -180,6 +180,21 @@ app from desktop.telegram.org).
 
 To import it:
 
+> **Parallel session warning.** Importing TData reuses Telegram Desktop's authorization
+> key; it does not create an independent login. Do not use that key in Desktop and
+> TgWitness simultaneously. Telegram can invalidate the authorization with
+> `AUTH_KEY_DUPLICATED`, leaving both copies unusable until a new login.
+>
+> Fully quit Desktop, including its tray process, and keep that copy closed while
+> TgWitness uses the imported session. **Quit, do not log out or revoke the session:**
+> revocation also invalidates the imported copy. If you need both clients running,
+> sign in to TgWitness by phone or QR to create its own authorization. A dedicated
+> account is recommended, but does not make cloned keys safe to use in parallel.
+>
+> This also applies to imported `.session` files, StringSession text and Auth Key HEX.
+> Other clients with their own independently created authorizations can remain signed in.
+> See [Telegram's AUTH_KEY_DUPLICATED documentation](https://core.telegram.org/api/errors#406-not-acceptable).
+
 1. Fully quit Telegram Desktop.
 2. Create a ZIP containing **only** these two items from `tdata`:
    - `key_datas`

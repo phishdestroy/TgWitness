@@ -151,6 +151,21 @@
     <div class="format unsupported"><dt><span aria-hidden="true" class="format-icon"><svg class="i"><use href="#i-ban"/></svg></span>Other formats</dt><dd>TDLib, Pyrogram StringSession, CSV/JSON bulk account lists, and bots are unsupported. Add each account in its own workspace.</dd></div>
   </dl>
 
+  <aside class="callout warning session-warning" id="session-warning" aria-labelledby="session-warning-title">
+    <svg aria-hidden="true" class="i"><use href="#i-alert"/></svg>
+    <div>
+      <h3 id="session-warning-title">Parallel session warning</h3>
+      <p>Importing TData, a session file, StringSession or Auth Key HEX reuses an existing authorization key. If Telegram detects parallel use of that key, it invalidates the authorization with <code>AUTH_KEY_DUPLICATED</code>. Both copies stop working and need a new login.</p>
+      <ul>
+        <li>Fully quit Telegram Desktop, including its tray process, before copying or importing TData. Keep that copy of Desktop closed while TgWitness uses the imported session. The same rule applies to any other client whose session you import.</li>
+        <li>Quit the application; do not log out or terminate the imported session in Telegram. Logging out or revoking that authorization also invalidates the copy used by TgWitness.</li>
+        <li>For parallel use, sign in to TgWitness by phone or QR to create a separate authorization. Other separately authorized Telegram clients can remain signed in.</li>
+      </ul>
+      <p>A dedicated account is still recommended. It does not make parallel use of a copied key safe.</p>
+      <p><a href="https://core.telegram.org/api/errors#406-not-acceptable" target="_blank" rel="noopener noreferrer">Telegram: duplicated authorization keys</a></p>
+    </div>
+  </aside>
+
   <h3 class="sub-title">Limits at a glance</h3>
   <ul class="limits">
     <li><div class="limit-num" data-no-translate>4</div><span>files per connection</span></li>

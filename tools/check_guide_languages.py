@@ -63,6 +63,12 @@ def check_guides(browser, base, output, label):
             expected = i18n.guide_words(lang).get(hero, hero)
             expected = page.evaluate("s=>{const p=document.createElement('div');p.innerHTML=s;return p.textContent}", expected)
             expect(page.locator("h1")).to_have_text(expected)
+            warning_title = "Parallel session warning" if name == "guide.html" else "Copied session keys can be revoked"
+            expect(page.locator("#session-warning h3")).to_have_text(i18n.guide_words(lang).get(warning_title, warning_title))
+            expect(page.locator("#session-warning code")).to_have_text("AUTH_KEY_DUPLICATED")
+            if name == "dedicated-account.html":
+                rental_title = "Rented +888 numbers (Fragment)"
+                expect(page.locator("#fragment-rental h3")).to_have_text(i18n.guide_words(lang).get(rental_title, rental_title))
             links = page.locator('a[href*="guide.html"], a[href*="dedicated-account.html"]').evaluate_all("nodes=>nodes.map(n=>n.href)")
             assert links and all(link.startswith(base) and "lang=" + lang in link for link in links), (label, lang, links)
             page.locator("details").evaluate_all("nodes=>nodes.forEach(n=>n.open=true)")
@@ -70,6 +76,12 @@ def check_guides(browser, base, output, label):
                 page.emulate_media(color_scheme=theme)
                 expect(page.locator("html")).to_have_attribute("data-theme", theme)
                 check_layout(page)
+            anchors = ("session-warning", "fragment-rental") if name == "dedicated-account.html" else ("session-warning",)
+            for anchor in anchors:
+                target = page.locator("#" + anchor)
+                target.evaluate("node=>node.scrollIntoView({block:'start'})")
+                heading, nav = target.locator("h3").bounding_box(), page.locator(".section-nav").bounding_box()
+                assert heading and nav and heading["y"] >= nav["y"] + nav["height"], (label, lang, anchor, "heading hidden by navigation")
             assert page.evaluate("getComputedStyle(document.documentElement).scrollBehavior") == "auto"
         print(label, lang, "both guides: translated, 320 px, light/dark, links", flush=True)
     # Picker interaction, persistent choice, and a real round trip between the guides.

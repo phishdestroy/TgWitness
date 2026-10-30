@@ -509,6 +509,13 @@ html:is(:lang(ar), :lang(fa), :lang(ur)) body { line-height: 1.95; }
 .home-page .start-layout h3 { font-size:25px; }
 .home-page .demo-callout { background:var(--surface); border-color:var(--line); border-radius:14px; padding:24px; }
 .home-page .demo-callout strong { color:var(--ink); }
+.home-page .session-warning { display:flex; align-items:flex-start; gap:14px; margin:24px 0; padding:20px 22px; border:1px solid var(--line); border-inline-start:3px solid #b77825; border-radius:12px; background:var(--surface); scroll-margin-top:112px; }
+.home-page .session-warning > svg { flex-shrink:0; color:#99550c; }
+.home-page .session-warning > div { min-width:0; }
+.home-page .session-warning strong { display:block; color:var(--ink); }
+.home-page .session-warning p { margin:6px 0 10px; font-size:14px; overflow-wrap:anywhere; }
+.home-page .session-warning a { font-size:14px; }
+[data-theme=dark] .home-page .session-warning > svg, .home-page[data-theme=dark] .session-warning > svg { color:#f2b35b; }
 .home-page .demo-symbol { border-color:var(--line); background:var(--paper); color:var(--blue); }
 .home-page .demo-commands,.home-page .demo-commands code { color:var(--muted); }
 .home-page p code { background:var(--paper); color:var(--ink); }

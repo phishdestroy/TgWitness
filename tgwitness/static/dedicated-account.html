@@ -58,6 +58,7 @@
 <ol class="reason-grid">
 <li class="reason"><div class="reason-top"><span class="reason-icon"><svg aria-hidden="true" class="i"><use href="#i-key"/></svg></span><h3>Your own app hash: 99% logged out</h3></div><p>Logging in to my.telegram.org from an account you have no access to, to get an app hash, and then any request through that app hash means a 99% chance the account is logged out. You can check it.</p></li>
 <li class="reason"><div class="reason-top"><span class="reason-icon"><svg aria-hidden="true" class="i"><use href="#i-ban"/></svg></span><h3>Bans just for low trust are frequent</h3></div><p>Accounts are banned simply because Telegram does not trust them, and such bans are frequent. You can check this too. Using your own account is a really stupid idea.</p></li>
+<li class="reason" id="session-warning"><div class="reason-top"><span class="reason-icon"><svg aria-hidden="true" class="i"><use href="#i-key"/></svg></span><h3>Copied session keys can be revoked</h3></div><p>Running an imported TData/session key in Telegram Desktop and TgWitness at the same time can trigger <code>AUTH_KEY_DUPLICATED</code>. Telegram invalidates that authorization, so both copies need a new login. A dedicated account does not prevent this.</p><p>Fully quit the original client and keep it closed while using its imported session. For parallel use, sign in to TgWitness by phone or QR to create a separate authorization; other separately authorized clients can remain signed in.</p><p><a href="/guide.html#session-warning">Read the session import warning</a></p></li>
 </ol>
 <div class="sources"><span class="sources-label">Telegram documentation</span><ul class="source-links">
 <li><a href="https://core.telegram.org/api/errors" rel="noopener noreferrer" target="_blank">Logout errors: AUTH_KEY_UNREGISTERED, SESSION_REVOKED<svg aria-hidden="true" class="i"><use href="#i-ext"/></svg></a></li>
@@ -123,6 +124,24 @@
 <li><a href="https://telegram.org/faq_spam" rel="noopener noreferrer" target="_blank">Spam FAQ: virtual numbers and previous owners<svg aria-hidden="true" class="i"><use href="#i-ext"/></svg></a></li>
 <li><a href="https://core.telegram.org/api/srp" rel="noopener noreferrer" target="_blank">Two-step verification<svg aria-hidden="true" class="i"><use href="#i-ext"/></svg></a></li>
 </ul></div>
+<article class="rental-card" id="fragment-rental" aria-labelledby="fragment-rental-title">
+<h3 id="fragment-rental-title">Rented +888 numbers (Fragment)</h3>
+<p>Marketplaces and rental services offer temporary access to Telegram's anonymous +888 numbers from Fragment. Renting access does not transfer ownership of the number.</p>
+<p>Illustrative budget: around US $20 per day. Actual rates and minimum rental periods vary by number and service. Check current offers before paying.</p>
+<ul>
+<li>You can create an account directly in Telegram Web or Telegram Desktop using the number's Fragment login-code flow, without a physical SIM or registering on a phone first. The rental service must give you access to the codes.</li>
+<li>While you still control the number, you can delete its Telegram account and register a new one. Deletion is permanent; Telegram may impose a waiting period or registration limits. Re-registration is not necessarily immediate or unlimited.</li>
+<li>Our practical observation is that +888 accounts can face fewer anti-fraud checks than disposable SMS accounts. This is not a published Telegram rule: they have no immunity from restrictions or bans and no special account privileges.</li>
+</ul>
+<p>The number is not yours. After the rental ends, the owner can reclaim access. Set a cloud password immediately, but do not treat the rented account as long-term or assume that the password gives you ownership.</p>
+<p>Owning the +888 number yourself or using a prepaid SIM you control gives you more control over long-term access.</p>
+<ul class="source-links">
+<li><a href="https://telegram.org/blog/ultimate-privacy-topics-2-0#sign-up-without-a-sim-card" target="_blank" rel="noopener noreferrer">Telegram: no-SIM signup</a></li>
+<li><a href="https://github.com/morethanwords/tweb/blob/master/CHANGELOG.md#170-273" target="_blank" rel="noopener noreferrer">Telegram Web: Fragment signup</a></li>
+<li><a href="https://telegram.org/faq#q-how-do-i-delete-my-account" target="_blank" rel="noopener noreferrer">Account deletion and re-registration</a></li>
+<li><a href="https://chunk.org/ru/rent?subtab=numbers&amp;tab=market" target="_blank" rel="noopener noreferrer">Example rental listings</a></li>
+</ul>
+</article>
 </section>
 
 <section id="setup">
