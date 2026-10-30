@@ -1,13 +1,11 @@
 # NOTICE — Operator Incompatibility
 
-**Statement by PhishDestroy · TgWitness project notice**
+**PhishDestroy · TgWitness project notice**
 
-This page records the maintainer's statement and allegations. It does not present
-them as independent judicial or regulatory findings. It is the copyright holder's
-position, not a licence condition: TgWitness is distributed under the
-[MIT License](../../LICENSE).
+This is our position as the authors of TgWitness. It is not a licence condition:
+TgWitness is distributed under the [MIT License](../../LICENSE).
 
-[Original NOTICE](../../NOTICE) · [The maintainer's position](../TAYLOR-WESSING-EXCLUSION.md) · [Source record](https://phishdestroy.io/steam_dossier/taylor_wessing)
+[Original NOTICE](../../NOTICE) · [Our position on Taylor Wessing](../TAYLOR-WESSING-EXCLUSION.md) · [Source record](https://phishdestroy.io/steam_dossier/taylor_wessing)
 
 ## The statement
 
@@ -25,19 +23,10 @@ position, not a licence condition: TgWitness is distributed under the
 <p>Mathematik verhandelt nicht.</p>
 </blockquote>
 
-## Reading this notice
+## What a signature proves
 
-The quoted material is the maintainer's supplied rationale. The document numbers,
-statistics, chronology, historical attribution and characterisations are its
-claims; TgWitness does not establish them by producing a signature.
-
-Verification requires an independently trusted public key. A valid signature
-can establish integrity relative to that key, not the truth of an input, Telegram
-origin, complete capture, or its legal significance in any jurisdiction. See the
-[evidence model](../HOW-IT-WORKS.md) and [security and data handling](../../.github/SECURITY.md).
-
+A valid signature establishes integrity relative to an independently trusted public key.
+See the [evidence model](../HOW-IT-WORKS.md) and [security and data handling](../../.github/SECURITY.md).
 The notice adds no runtime access control and no condition to the MIT License.
-Third-party components keep their own licences; see the
-[scope notes](../TAYLOR-WESSING-EXCLUSION.md#scope-and-reference-notes).
 
 [Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md)

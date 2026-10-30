@@ -547,7 +547,7 @@ workflow has run yet. Read [CONTRIBUTING.md](../.github/CONTRIBUTING.md) before 
 
 ## License
 
-[MIT License](../LICENSE). The copyright holder's
+[MIT License](../LICENSE). Our
 [position on Taylor Wessing](TAYLOR-WESSING-EXCLUSION.md) is a statement, not a licence condition.
 
 

@@ -10,12 +10,11 @@
 
 ## Start here
 
-**Licence:** [MIT License](../LICENSE). The maintainer's
+**Licence:** [MIT License](../LICENSE). Our
 [position on Taylor Wessing](TAYLOR-WESSING-EXCLUSION.md) adds no condition to it.
 
 > **NOTICE — Operator Incompatibility**
-> [Read PhishDestroy's complete operator statement](OPERATOR-INCOMPATIBILITY.md),
-> including the cited source record and the scope of cryptographic verification.
+> [Read our complete operator statement](OPERATOR-INCOMPATIBILITY.md) and its source record.
 
 Start with a local demo, then connect one account and check a captured message.
 The proxy, witness bot and public status page are separate options.

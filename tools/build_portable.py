@@ -57,10 +57,11 @@ Start
 -----
 1. Extract the whole ZIP into a folder you can write to, for example
    Documents\\TgWitness. Do not run it from inside the ZIP or from Program Files.
-2. Double-click TgWitness.cmd. Keep the window open while observing.
-3. Open http://127.0.0.1:8787 in your browser.
-4. Paste the panel token from data\\live\\panel-token.txt.
-5. Add your Telegram account, choose chats and start observation. No API ID/hash
+2. Double-click TgWitness.cmd. The panel opens in your browser by itself;
+   keep the window open while observing.
+3. Paste the panel token shown in that window (also in data\\live\\panel-token.txt).
+   TgWitness-Demo.cmd opens the demo without any token.
+4. Add your Telegram account, choose chats and start observation. No API ID/hash
    is needed: a built-in pool of public pairs is used; your own pair is optional.
 
 Other launchers
@@ -86,8 +87,8 @@ Stop TgWitness, extract the new version into a new folder, copy the data folder
 from the old one, then start the new TgWitness.cmd.
 
 Documentation: README.md in the source repository and http://127.0.0.1:8787/guide.html
-License: MIT (LICENSE). The maintainer's operator incompatibility statement
-is included in NOTICE and adds no licence condition.
+License: MIT (LICENSE). Our operator incompatibility statement is in NOTICE
+and adds no licence condition.
 Python and bundled libraries keep their own
 licenses (python\\LICENSE.txt and the *.dist-info folders).
 """

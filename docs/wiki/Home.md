@@ -53,10 +53,10 @@ Need a term explained? Open the [glossary](Glossary.md).
 ## Read this before connecting
 
 > **NOTICE — Operator Incompatibility**
-> [Read the complete project notice](Operator-Incompatibility.md): PhishDestroy's
-> statement concerning Taylor Wessing PartG mbB — German core, Hamburg office.
+> [Read the complete project notice](Operator-Incompatibility.md): our
+> statement on Taylor Wessing PartG mbB — German core, Hamburg office.
 
-TgWitness is [MIT-licensed](../../LICENSE). The maintainer's
+TgWitness is [MIT-licensed](../../LICENSE). Our
 [position on Taylor Wessing](../TAYLOR-WESSING-EXCLUSION.md) is a statement, not a licence condition.
 
 Use a dedicated account you can afford to lose. A Telegram session grants access to that account; keep sessions, panel tokens and keys private. Local message content and attachments need disk encryption if you require protection at rest.

@@ -1,4 +1,4 @@
-"""Render the maintainer's NOTICE consistently across documentation; no network access."""
+"""Render our NOTICE consistently across documentation; no network access."""
 import argparse
 import html
 from pathlib import Path
@@ -46,16 +46,16 @@ def excerpt(full, notice, licence, raw, *, compact=False):
     if compact:
         return f'''## Licence and operator notice
 
-[MIT License]({licence}) · [The maintainer's position on Taylor Wessing](docs/TAYLOR-WESSING-EXCLUSION.md)
+[MIT License]({licence}) · [Our position on Taylor Wessing](docs/TAYLOR-WESSING-EXCLUSION.md)
 
 > **NOTICE — Operator Incompatibility**
-> PhishDestroy's statement concerning **Taylor Wessing PartG mbB — German core, Hamburg office.**
-> [Full notice and context]({notice}) · [Original text]({raw}) · [Source record]({SOURCE})
+> Our statement on **Taylor Wessing PartG mbB — German core, Hamburg office.**
+> [Full notice]({notice}) · [Original text]({raw}) · [Source record]({SOURCE})
 
 <details>
-<summary><strong>Read the complete notice</strong> — statement by PhishDestroy</summary>
+<summary><strong>Read the complete notice</strong></summary>
 
-<p>The following records the maintainer's statement and allegations, not an independent judicial or regulatory finding. It is the copyright holder's position, not a condition of the MIT License.</p>
+<p>This is our position as the authors of TgWitness. It is not a condition of the MIT License.</p>
 
 {full}
 
@@ -63,14 +63,11 @@ def excerpt(full, notice, licence, raw, *, compact=False):
     return f'''### NOTICE — Operator Incompatibility
 
 > **Taylor Wessing PartG mbB — German core, Hamburg office.**
-> PhishDestroy's operator notice is the copyright holder's position; TgWitness remains under the [MIT License]({licence}).
-> [Full notice and context]({notice}) · [Original text]({raw}) · [Source record]({SOURCE})
-
-The following records the maintainer's statement and allegations, not an
-independent judicial or regulatory finding.
+> Our operator notice. TgWitness remains under the [MIT License]({licence}).
+> [Full notice]({notice}) · [Original text]({raw}) · [Source record]({SOURCE})
 
 <details>
-<summary><strong>Read the complete notice</strong> — statement by PhishDestroy</summary>
+<summary><strong>Read the complete notice</strong></summary>
 
 {full}
 
@@ -82,33 +79,22 @@ def document(full, *, wiki=False):
     root = '../../' if wiki else '../'
     return f'''# NOTICE — Operator Incompatibility
 
-**Statement by PhishDestroy · TgWitness project notice**
+**PhishDestroy · TgWitness project notice**
 
-This page records the maintainer's statement and allegations. It does not present
-them as independent judicial or regulatory findings. It is the copyright holder's
-position, not a licence condition: TgWitness is distributed under the
-[MIT License]({root}LICENSE).
+This is our position as the authors of TgWitness. It is not a licence condition:
+TgWitness is distributed under the [MIT License]({root}LICENSE).
 
-[Original NOTICE]({root}NOTICE) · [The maintainer's position]({prefix}TAYLOR-WESSING-EXCLUSION.md) · [Source record]({SOURCE})
+[Original NOTICE]({root}NOTICE) · [Our position on Taylor Wessing]({prefix}TAYLOR-WESSING-EXCLUSION.md) · [Source record]({SOURCE})
 
 ## The statement
 
 {full}
 
-## Reading this notice
+## What a signature proves
 
-The quoted material is the maintainer's supplied rationale. The document numbers,
-statistics, chronology, historical attribution and characterisations are its
-claims; TgWitness does not establish them by producing a signature.
-
-Verification requires an independently trusted public key. A valid signature
-can establish integrity relative to that key, not the truth of an input, Telegram
-origin, complete capture, or its legal significance in any jurisdiction. See the
-[evidence model]({prefix}HOW-IT-WORKS.md) and [security and data handling]({root}.github/SECURITY.md).
-
+A valid signature establishes integrity relative to an independently trusted public key.
+See the [evidence model]({prefix}HOW-IT-WORKS.md) and [security and data handling]({root}.github/SECURITY.md).
 The notice adds no runtime access control and no condition to the MIT License.
-Third-party components keep their own licences; see the
-[scope notes]({prefix}TAYLOR-WESSING-EXCLUSION.md#scope-and-reference-notes).
 
 [Project]({root}README.md) · [Documentation]({prefix}README.md) · [Wiki]({'Home.md' if wiki else 'wiki/Home.md'})
 '''

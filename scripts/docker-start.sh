@@ -26,3 +26,11 @@ else
 fi
 printf '%s\n' 'The collector runs in the background. Stop it with: docker compose stop'
 printf '%s\n' 'Follow logs with: docker compose logs -f'
+# Open the panel only in a desktop session; the token stays in this terminal.
+if [ -z "${TGWITNESS_NO_BROWSER:-}" ] && [ -n "$panel_address" ]; then
+    if [ "$(uname -s)" = Darwin ] && command -v open >/dev/null 2>&1; then
+        open "http://$panel_address" >/dev/null 2>&1 || true
+    elif [ -n "${DISPLAY:-}${WAYLAND_DISPLAY:-}" ] && command -v xdg-open >/dev/null 2>&1; then
+        xdg-open "http://$panel_address" >/dev/null 2>&1 || true
+    fi
+fi

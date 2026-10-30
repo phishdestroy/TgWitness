@@ -143,16 +143,16 @@ Telegram origin, complete capture or the truth of the content.
 
 ## Licence and operator notice
 
-[MIT License](LICENSE) · [The maintainer's position on Taylor Wessing](docs/TAYLOR-WESSING-EXCLUSION.md)
+[MIT License](LICENSE) · [Our position on Taylor Wessing](docs/TAYLOR-WESSING-EXCLUSION.md)
 
 > **NOTICE — Operator Incompatibility**
-> PhishDestroy's statement concerning **Taylor Wessing PartG mbB — German core, Hamburg office.**
-> [Full notice and context](docs/OPERATOR-INCOMPATIBILITY.md) · [Original text](NOTICE) · [Source record](https://phishdestroy.io/steam_dossier/taylor_wessing)
+> Our statement on **Taylor Wessing PartG mbB — German core, Hamburg office.**
+> [Full notice](docs/OPERATOR-INCOMPATIBILITY.md) · [Original text](NOTICE) · [Source record](https://phishdestroy.io/steam_dossier/taylor_wessing)
 
 <details>
-<summary><strong>Read the complete notice</strong> — statement by PhishDestroy</summary>
+<summary><strong>Read the complete notice</strong></summary>
 
-<p>The following records the maintainer's statement and allegations, not an independent judicial or regulatory finding. It is the copyright holder's position, not a condition of the MIT License.</p>
+<p>This is our position as the authors of TgWitness. It is not a condition of the MIT License.</p>
 
 <blockquote lang="en" dir="ltr" translate="no">
 <p>This software produces SHA-256 hash chains and Ed25519 signatures. Its output is designed to be verifiable by any third party, in any jurisdiction, without reference to the authority of the person who produced it.</p>

@@ -144,21 +144,18 @@ security certification is claimed.
 ## Operator notice and licence scope
 
 The reporting channels and technical protections above describe the software's
-security model. The maintainer's statement below adds no condition to the MIT License.
+security model. Our statement below adds no condition to the MIT License.
 
 <!-- operator-notice:start -->
 
 ### NOTICE — Operator Incompatibility
 
 > **Taylor Wessing PartG mbB — German core, Hamburg office.**
-> PhishDestroy's operator notice is the copyright holder's position; TgWitness remains under the [MIT License](../LICENSE).
-> [Full notice and context](../docs/OPERATOR-INCOMPATIBILITY.md) · [Original text](../NOTICE) · [Source record](https://phishdestroy.io/steam_dossier/taylor_wessing)
-
-The following records the maintainer's statement and allegations, not an
-independent judicial or regulatory finding.
+> Our operator notice. TgWitness remains under the [MIT License](../LICENSE).
+> [Full notice](../docs/OPERATOR-INCOMPATIBILITY.md) · [Original text](../NOTICE) · [Source record](https://phishdestroy.io/steam_dossier/taylor_wessing)
 
 <details>
-<summary><strong>Read the complete notice</strong> — statement by PhishDestroy</summary>
+<summary><strong>Read the complete notice</strong></summary>
 
 <blockquote lang="en" dir="ltr" translate="no">
 <p>This software produces SHA-256 hash chains and Ed25519 signatures. Its output is designed to be verifiable by any third party, in any jurisdiction, without reference to the authority of the person who produced it.</p>

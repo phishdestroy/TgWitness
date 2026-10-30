@@ -2,13 +2,18 @@
 
 ## Unreleased
 
+- Two clicks to start: a local start (TgWitness.cmd, Start.cmd, start.sh, the demo
+  launchers and the Docker helpers) opens the panel in the browser once it answers, and a
+  real workspace shows its panel token in the console instead of in the address bar.
+  Services, containers, scheduled and windowless starts never open a browser;
+  `--no-browser` or `TGWITNESS_NO_BROWSER` turns it off.
+- The operator notice and the Taylor Wessing page speak in our own voice.
 - Returned to the MIT License. A tool whose output third parties must be able to check
   should not stumble over its licence. `LICENSE` is the standard MIT text again, the
   package declares MIT with the OSI classifier, and the container, portable package,
-  website, Wiki and translated README labels say so. The maintainer's statement stays
-  in NOTICE and on the Taylor Wessing page as the copyright holder's position; it adds
-  no licence condition. The presentation artwork reads "open source" again.
-- Added the maintainer's Operator Incompatibility NOTICE to README, SECURITY,
+  website, Wiki and translated README labels say so. Our statement stays in NOTICE
+  and on the Taylor Wessing page as our position; it adds no licence condition. The presentation artwork reads "open source" again.
+- Added our Operator Incompatibility NOTICE to README, SECURITY,
   the documentation, Wiki and website. A single source keeps the complete statement
   consistent across those pages; source, Python and portable distributions include
   NOTICE alongside the licence.

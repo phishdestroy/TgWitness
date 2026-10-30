@@ -361,4 +361,4 @@ Otomatik test paketi, sentetik Telegram nesnelerini kullanır ve hiçbir zaman g
 | [DEPLOYMENT.md](DEPLOYMENT.md) | Dağıtım ve işletim |
 | [QUICKSTART.md](QUICKSTART.md) | TgWitness hızlı başlangıç |
 
-[Maintainer's position on Taylor Wessing](../TAYLOR-WESSING-EXCLUSION.md) · [MIT License](../../LICENSE)
+[Our position on Taylor Wessing](../TAYLOR-WESSING-EXCLUSION.md) · [MIT License](../../LICENSE)

@@ -37,5 +37,7 @@ if defined TOKEN (
 echo.
 echo The collector keeps running in the background, also after this window closes.
 echo Stop it with: docker compose stop     Logs: docker compose logs -f
+rem Opens the panel in the default browser; the token stays in this window.
+if not defined TGWITNESS_NO_BROWSER if defined PANEL start "" "http://%PANEL%"
 pause
 exit /b 0
