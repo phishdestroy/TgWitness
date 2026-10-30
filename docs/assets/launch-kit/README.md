@@ -2,6 +2,9 @@
 
 # TgWitness presentation kit
 
+This is the earlier presentation style. For the current repository, wiki and
+sharing images, use the [investigation presentation kit](../presentation/README.md).
+
 Repository artwork uses the application's own mark, ink-and-blue palette and
 fictional message history. The source is [artwork.html](../../../website/artwork.html);
 all text and shapes are editable HTML/CSS. No external fonts or image services are needed.

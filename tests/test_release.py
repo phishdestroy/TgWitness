@@ -10,13 +10,17 @@ def test_public_archive_excludes_runtime_artifacts_even_inside_source_trees(tmp_
     public = ["tgwitness/app.py", "tgwitness/static/app.js", "docs/assets/workspace.png",
               ".github/ISSUE_TEMPLATE/bug_report.yml", "deploy/tgwitness.service",
               "tgwitness/locales/ru.json", "tgwitness/english_fallbacks.json", "tgwitness/public_proxies.json",
-              "website/i18n/ru.json"]
+              "website/i18n/ru.json",
+              "docs/assets/presentation/investigation.mp4", "docs/assets/presentation/investigation.gif",
+              "docs/assets/presentation/message-history.mp4", "docs/assets/presentation/message-history.gif"]
     private = ["tgwitness/.env", "tgwitness/session.tgwitness-session", "docs/panel-token.txt",
                "tools/account.session", "tools/credentials.enc", "tests/secret.key",
                "docs/journal.sqlite3", "tgwitness/__pycache__/app.pyc", "data/app.py",
                "tgwitness/account.json", "tgwitness/vault.external.json",
                "tgwitness/locales/account.json", "tgwitness/static/credentials.json",
                "website/accounts.json", "website/i18n/account.json",
+               "docs/assets/account-recording.mp4", "docs/assets/presentation/private-capture.gif",
+               "docs/assets/presentation/investigation-copy.mp4", "website/investigation.mp4",
                "tgwitness/data/account.json", "tgwitness/data/notes.py",
                "docs/tgwitness-backup-old/report.md", "tools/.venv/helper.py",
                "tgwitness/proof-data/private.py", "docs/proof-config/secret.md", "tools/witness-data/private.py", "docs/proxy-config/private.md"]

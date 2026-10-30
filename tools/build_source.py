@@ -14,7 +14,7 @@ FILES = [
 ]
 DIRECTORIES = {
     "tgwitness": {".md", ".py", ".html", ".css", ".js", ".svg", ".json"},
-    "docs": {".md", ".png", ".webp", ".svg", ".txt"}, "tests": {".py", ".md"}, "tools": {".py", ".md"},
+    "docs": {".md", ".png", ".webp", ".svg", ".txt", ".gif", ".mp4"}, "tests": {".py", ".md"}, "tools": {".py", ".md"},
     "deploy": {".md", ".ps1", ".service", ".example", ".docker"},
     "scripts": {".md", ".cmd", ".sh"},
     ".github": {".md", ".yml", ".yaml"},
@@ -24,6 +24,10 @@ LANGUAGES = ("ru", "uk", "es", "pt", "tr", "ar", "fa", "ur", "hi", "id", "vi", "
 PACKAGE_JSON = {"english_fallbacks.json", "public_proxies.json", *("locales/" + language + ".json" for language in LANGUAGES)}
 # Site translations: without them every non-English page silently falls back to English.
 SITE_JSON = {"i18n/" + language + ".json" for language in LANGUAGES}
+PRESENTATION_MEDIA = {
+    "assets/presentation/investigation.mp4", "assets/presentation/investigation.gif",
+    "assets/presentation/message-history.mp4", "assets/presentation/message-history.gif",
+}
 PRIVATE_DIRECTORIES = {"data", "proof-data", "proof-config", "proxy-config", "witness-data", "__pycache__", ".venv", "venv", "test-results", ".pytest_cache", ".ruff_cache"}
 
 
@@ -32,6 +36,8 @@ def is_public_file(path, directory):
     relative = path.relative_to(directory)
     if any(part in PRIVATE_DIRECTORIES or part.startswith("tgwitness-backup") for part in relative.parts[:-1]):
         return False
+    if path.suffix in {".gif", ".mp4"}:
+        return directory.name == "docs" and relative.as_posix() in PRESENTATION_MEDIA
     if path.suffix == ".txt":
         return directory.name == "docs" and relative.as_posix() == "assets/presentation/OFL-Manrope.txt"
     if path.suffix == ".json":

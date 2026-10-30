@@ -17,6 +17,7 @@ project website. The authenticated application panel lives in
 | [`guide_intro.html`](guide_intro.html), [`guides/`](guides/README.md) | Practical guide content |
 | [`learn.css`](learn.css), [`learn.js`](learn.js) | Interactive explanatory examples |
 | [`i18n/`](i18n/README.md) | Public-site translation catalogues |
+| [`render_presentation.py`](render_presentation.py) | Current investigation-style PNGs for GitHub and website sharing |
 | [`artwork.html`](artwork.html), [`render_artwork.py`](render_artwork.py) | Original HTML/CSS presentation artwork and renderer |
 
 ## Build and inspect

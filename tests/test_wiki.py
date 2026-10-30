@@ -72,6 +72,26 @@ def test_wiki_rewrites_page_document_and_image_links_for_forks(wiki_tree):
     assert "~~~md\n[Example](missing.md)\n~~~" in page
 
 
+def test_wiki_bundles_film_preview_and_keeps_download_in_source_repository(wiki_tree):
+    assets = wiki_tree / "docs/assets/presentation"
+    assets.mkdir(parents=True)
+    preview = b"synthetic film preview"
+    (assets / "investigation.gif").write_bytes(preview)
+    (assets / "investigation.mp4").write_bytes(b"synthetic film")
+    (wiki_tree / "docs/wiki/Home.md").write_text(
+        "![Case preview](../assets/presentation/investigation.gif)\n"
+        "[Download MP4](../assets/presentation/investigation.mp4)\n", encoding="utf-8")
+
+    result = build_wiki(wiki_tree, repository="example/Project", branch="release")
+    page = (wiki_tree / "dist/wiki/Home.md").read_text(encoding="utf-8")
+    assert page == (
+        "![Case preview](https://github.com/example/Project/wiki/assets/presentation/investigation.gif)\n"
+        "[Download MP4](https://github.com/example/Project/blob/release/docs/assets/presentation/investigation.mp4)\n")
+    with zipfile.ZipFile(wiki_tree / "dist" / result["archive"]) as archive:
+        assert archive.read("assets/presentation/investigation.gif") == preview
+        assert not any(name.endswith(".mp4") for name in archive.namelist())
+
+
 @pytest.mark.parametrize("target", ["missing.md", "../../data/private.md", "../../../outside.md"])
 def test_wiki_refuses_missing_or_private_link_targets(wiki_tree, target):
     data = wiki_tree / "docs/data"

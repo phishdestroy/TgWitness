@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Put the workspace preview near the top of the repository landing page, simplified
+  wiki entry links and connected the issue chooser to the live handbook. GitHub
+  and website sharing images now have reproducible PNGs in the investigation style.
+  Added both 12-second presentation films to a gallery, with animated GIF previews
+  in README and wiki, MP4/GIF originals in the source archive, and animated evidence
+  explanations. README and gallery previews respect reduced-motion preferences.
 - Fixed all eleven audit findings, each with a regression test. The portable builder
   no longer reuses an earlier build directory and refuses private or unexpected files.
   The verifier applies its archive limits at every entry point, including format

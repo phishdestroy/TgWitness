@@ -20,7 +20,41 @@ or server, with your own accounts.
 
 <p align="center"><a href="docs/CHANGELOG.md">0.6.1 · pre-release</a> &nbsp; / &nbsp; Python 3.11+ &nbsp; / &nbsp; <a href="LICENSE">MIT</a> &nbsp; / &nbsp; Self-hosted · No telemetry</p>
 
-## Keep the context, not just a screenshot
+## The workspace
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/chats-dark.png">
+  <img src="docs/assets/chats.png" width="1200" alt="The TgWitness Chats workspace: conversations, observed edits and deletion notices. Fictional demo data.">
+</picture>
+
+<p align="center"><sub>Saved conversations in context. Light and dark themes. 13 interface languages. Fictional demo data.</sub></p>
+
+<details>
+<summary>See message history, collection settings and exports</summary>
+
+| Compare captured versions | Choose what to observe |
+| --- | --- |
+| [![Message history](docs/assets/detail.png)](docs/assets/detail.png) | [![Capture policy](docs/assets/sources.png)](docs/assets/sources.png) |
+| **Prepare a signed handoff** | **Review the journal** |
+| [![Export options](docs/assets/exports.png)](docs/assets/exports.png) | [![Observation journal](docs/assets/workspace-dark.png)](docs/assets/workspace-dark.png) |
+
+</details>
+
+## See it in motion
+
+**Follow the trail. Preserve the evidence.** A 12-second concept film connecting
+channels, groups, bots and private chats to one investigation. Fictional records.
+
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/tgwitness-investigation-static.svg">
+  <img src="docs/assets/presentation/investigation.gif" width="960" alt="Concept film: an announcement, a payment flow, an operations chat and a follow-up share one destination; the case connects the records and keeps them for a signed handoff. Fictional records.">
+</picture>
+
+[Watch both films and explore the animations →](docs/SHOWCASE.md) &nbsp; · &nbsp; [Download MP4](docs/assets/presentation/investigation.mp4)
+
+![Section divider](docs/assets/presentation/divider.svg)
+
+## Capture, investigate, verify
 
 | Follow the investigation | Preserve the record |
 | --- | --- |
@@ -44,28 +78,6 @@ The panel token is in `data/live/panel-token.txt`. Use a dedicated Telegram acco
 you can afford to lose; Telegram can restrict or ban accounts.
 
 [Installation and Docker →](docs/QUICKSTART.md) &nbsp; · &nbsp; [Tested environments and limits →](docs/VERIFICATION.md)
-
-![Section divider](docs/assets/presentation/divider.svg)
-
-## The workspace
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/chats-dark.png">
-  <img src="docs/assets/chats.png" width="1200" alt="The TgWitness Chats workspace: conversations, observed edits and deletion notices. Fictional demo data.">
-</picture>
-
-<p align="center"><sub>Saved conversations in context. Light and dark themes. 13 interface languages. Fictional demo data.</sub></p>
-
-<details>
-<summary>See message history, collection settings and exports</summary>
-
-| Compare captured versions | Choose what to observe |
-| --- | --- |
-| [![Message history](docs/assets/detail.png)](docs/assets/detail.png) | [![Capture policy](docs/assets/sources.png)](docs/assets/sources.png) |
-| **Prepare a signed handoff** | **Review the journal** |
-| [![Export options](docs/assets/exports.png)](docs/assets/exports.png) | [![Observation journal](docs/assets/workspace-dark.png)](docs/assets/workspace-dark.png) |
-
-</details>
 
 ## How it works
 

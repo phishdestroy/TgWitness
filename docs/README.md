@@ -4,7 +4,7 @@
 
 **Choose a workflow. Find the details. Keep a record you can explain.**
 
-[Project overview](../README.md) · [GitHub Wiki](https://github.com/phishdestroy/TgWitness/wiki) · [Offline handbook](wiki/Home.md) · [FAQ](wiki/FAQ.md)
+[Project overview](../README.md) · [GitHub Wiki](https://github.com/phishdestroy/TgWitness/wiki) · [Videos and animations](SHOWCASE.md) · [Offline handbook](wiki/Home.md) · [FAQ](wiki/FAQ.md)
 
 ![Observe, preserve and verify.](assets/presentation/workflow.svg)
 

@@ -2,13 +2,19 @@
 
 # TgWitness Wiki
 
-[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../.github/SUPPORT.md)
-
-
 **From your first demo to a verifiable handoff.** Practical guides for observing
 Telegram, reviewing captured changes and running your own workspace.
 
-[Get started](Getting-Started.md) · [Find an answer](FAQ.md) · [Solve a problem](Troubleshooting.md) · [Technical reference](../README.md)
+[Try the demo](Getting-Started.md) · [Work a case](Investigations.md) · [Verify a handoff](Exports-and-Verification.md) · [Find an answer](FAQ.md)
+
+## A case in motion
+
+A 12-second concept film: follow connections across sources and keep the captured
+record together. The examples are fictional.
+
+![Concept film: four sources share one destination and the case keeps the connected records for a signed handoff. Fictional records.](../assets/presentation/investigation.gif)
+
+[Download the film (MP4)](../assets/presentation/investigation.mp4) · [Both films and animated explanations](../SHOWCASE.md)
 
 ## Start here
 

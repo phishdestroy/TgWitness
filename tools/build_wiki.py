@@ -26,6 +26,8 @@ PAGES = (
 FILES = tuple(name + ".md" for name in (*PAGES, "_Sidebar", "_Footer"))
 LINK = re.compile(r'(!?\[[^\]\n]*\]\()(<[^>\n]+>|[^)\s]+)((?:\s+"[^"\n]*")?\))')
 FENCE = re.compile(r"^ {0,3}(`{3,}|~{3,})(.*)$")
+# Bundled into the Wiki repository; GIF carries the silent presentation films inline.
+IMAGES = {".svg", ".png", ".webp", ".gif"}
 
 
 def render_links(content, source, root, public, repository, branch, assets):
@@ -45,9 +47,9 @@ def render_links(content, source, root, public, repository, branch, assets):
         else:
             name = quote(target.relative_to(root).as_posix(), safe="/")
             asset_root = root / "docs/assets"
-            is_image = target.is_relative_to(asset_root) and target.suffix in {".svg", ".png", ".webp"}
+            is_image = target.is_relative_to(asset_root) and target.suffix in IMAGES
             if match[1].startswith("!") or is_image:
-                if not target.is_relative_to(asset_root) or target.suffix not in {".svg", ".png", ".webp"}:
+                if not target.is_relative_to(asset_root) or target.suffix not in IMAGES:
                     raise ValueError("Wiki image must be a reviewed documentation asset: " + href.path)
                 asset = "assets/" + target.relative_to(asset_root).as_posix()
                 assets[asset] = target.read_bytes()

@@ -3,9 +3,10 @@
 Publish TgWitness **0.6.1** with the project website and release packages. See
 [readiness](READINESS.md) for tested environments and known limitations.
 
-The [presentation kit](../assets/launch-kit/README.md) contains the repository cover,
-social preview, square artwork and workflow graphic, with reproducible rendering
-commands and the GitHub social-preview setup step.
+The [investigation presentation kit](../assets/presentation/README.md) contains the
+current repository and wiki covers, diagrams and sharing images. Rebuild the
+GitHub and website PNGs with `python website/render_presentation.py`. The earlier
+[launch kit](../assets/launch-kit/README.md) is retained as legacy artwork.
 
 The [project wiki](../wiki/Home.md) has its own GitHub repository and a separate
 [build and publishing procedure](WIKI.md). Run `python tools/build_wiki.py` to prepare
@@ -14,7 +15,7 @@ publishing Pages or the main repository does not publish the wiki.
 
 ## Preview the website locally
 
-The builder uses Python 3.11+ and the standard library. It does not import the
+The builder uses Python 3.11+ and the project's Markdown dependency. It does not import the
 application, open a journal, connect to Telegram, or require account credentials.
 
 ```sh
@@ -28,9 +29,9 @@ web server. Copying commands depends on the browser's clipboard permissions.
 Stop the preview server with Ctrl+C.
 
 Open `/docs/` for the English guides, `/docs/concepts/` for interactive explanations,
-or `/docs/cases/` for practical workflows. The 12-page site includes a screenshot
-tour, platform-specific setup, local search, diagrams, formulas and five interactive
-examples. It has no account
+or `/docs/cases/` for practical workflows. The multilingual site includes a screenshot
+tour, platform-specific setup, local search, reference documents, diagrams, formulas
+and interactive examples. It has no account
 form, telemetry, external scripts, fonts or runtime API calls. Content and
 navigation remain available without JavaScript. [Metadata and SEO](SEO.md).
 
@@ -54,14 +55,15 @@ and repository from `GITHUB_REPOSITORY`, so forks get their own URLs automatical
 It uses `main` for source links. A different default branch requires updating the
 workflow branch filter and passing `--branch NAME` to the builder.
 
-After the first successful deployment, set that URL in **About → Website** and
-add a Website link to the README navigation. Suggested About description:
+Use the published wiki URL in **About → Website** while Pages is unavailable. After
+a successful Pages deployment, the documentation website can replace it there.
+Suggested About description:
 
-> Self-hosted Telegram observation journal with edit history, deletion notices,
-> and signed, independently verifiable exports.
+> A self-hosted Telegram investigation workspace. Capture conversations, preserve
+> observed changes, trace connections, and share independently verifiable records.
 
 Suggested topics: `telegram`, `telethon`, `self-hosted`, `python`, `fastapi`,
-`digital-forensics`, `audit-log`.
+`digital-forensics`, `osint`, `investigation-tools`, `evidence`, `cryptography`.
 
 Pull requests build and test the site, but cannot deploy it. Only the deploy job has
 `pages: write` and `id-token: write`; no personal token is needed for Pages.
@@ -71,10 +73,11 @@ A workflow definition is not evidence of a successful hosted run.
 
 The builder copies only these assets into `dist/site`:
 
-- The English homepage, guide index and ten explicitly listed guides.
+- The homepage, guide index, explicitly listed guides and reference documents in
+  the languages declared by the website builder.
 - The presentation styles and scripts from `website/`.
-- The application logo, four synthetic workspace screenshots and the proxy-settings screenshot.
-- The social-preview image from `docs/assets/launch-kit`.
+- The application logo and explicitly listed synthetic workspace screenshots and diagrams.
+- The social-preview image from `docs/assets/presentation/preview-social.png`.
 - `.nojekyll`, `robots.txt`, and `sitemap.xml`.
 
 It rejects linked inputs and unexpected files already present in the output.

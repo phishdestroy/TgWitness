@@ -33,7 +33,7 @@ ASSETS = {
     "assets/workspace.png": "docs/assets/workspace.png",
     "assets/detail.png": "docs/assets/detail.png",
     "assets/exports.png": "docs/assets/exports.png",
-    "assets/tgwitness-social.png": "docs/assets/launch-kit/tgwitness-social.png",
+    "assets/tgwitness-social.png": "docs/assets/presentation/preview-social.png",
     "assets/public-proxies.png": "docs/assets/public-proxies.png",
 }
 # Screenshots that reference pages show; a reference page using any other image fails the build.
@@ -61,7 +61,7 @@ HOME_TITLE = "Telegram message history & signed exports | TgWitness"
 HOME_DESCRIPTION = ("A self-hosted Telegram observation journal. Preserve observed messages, compare edits, "
                     "track deletion notices, and export signed records you can verify.")
 HOME_OG = "Your accounts. Your journal. A verifiable record. An open-source Telegram workspace that runs on your own machine."
-HOME_IMAGE_ALT = "TgWitness — Messages change. Keep what you saw. Your Telegram observation workspace."
+HOME_IMAGE_ALT = "TgWitness — Follow the trail. Preserve the evidence. A Telegram investigation workspace."
 WIKI_DESCRIPTION = ("The complete TgWitness reference: installation, accounts, proxies, collection, evidence format, "
                     "witnesses, timestamps, security, architecture and test results.")
 # Words of the page frame that are not in LABELS.
