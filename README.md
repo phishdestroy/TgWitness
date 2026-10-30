@@ -9,8 +9,8 @@
 
 **Your Telegram investigation workspace.**
 
-Capture conversations your account observes, preserve their changes, follow connections
-and prepare a signed record another person can verify. On your computer or server, with your own accounts.
+Capture the conversations you observe, compare saved versions and prepare a signed handoff.
+Your accounts, on your own computer or server.
 
 <p align="center">
   <a href="https://phishdestroy.github.io/TgWitness/demo/"><img src="docs/assets/presentation/entry-demo.svg" width="248" height="56" alt="Open live demo — explore the workspace"></a>
@@ -25,11 +25,24 @@ and prepare a signed record another person can verify. On your computer or serve
 
 <p align="center"><sub><a href="docs/CHANGELOG.md">v0.6.1 · pre-release</a> &nbsp; / &nbsp; Python 3.11+ &nbsp; / &nbsp; 13 interface languages &nbsp; / &nbsp; <a href="LICENSE">Restricted license</a></sub></p>
 
-<p align="center"><sub><a href="docs/assets/presentation/readme-investigation-animated.svg">Open the animation</a> · <a href="docs/assets/presentation/tgwitness-investigation-static.svg">Static version</a> · <a href="docs/SHOWCASE.md">Films & animations</a></sub></p>
-
 ![Section divider](docs/assets/presentation/divider.svg)
 
-## What you can do
+## The workspace
+
+<a href="https://phishdestroy.github.io/TgWitness/demo/">
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="docs/assets/presentation/readme-workspace-mobile-dark-still.webp">
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-workspace-mobile-light-still.webp">
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="docs/assets/presentation/readme-workspace-dark-still.webp">
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-workspace-light-still.webp">
+  <source media="(max-width: 640px) and (prefers-color-scheme: dark)" srcset="docs/assets/presentation/readme-workspace-mobile-dark.webp">
+  <source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-workspace-mobile-light.webp">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/presentation/readme-workspace-dark.webp">
+  <img src="docs/assets/presentation/readme-workspace-light.webp" width="1440" alt="The actual TgWitness demo: a captured conversation, the saved 16:00 and 17:30 versions of an edited message, and messages retained after a deletion notice. All records are fictional.">
+</picture>
+</a>
+
+<p align="center"><sub>Conversation → saved versions → deletion notices. Recorded from the app with fictional data.<br><a href="https://phishdestroy.github.io/TgWitness/demo/">Explore the workspace ↗</a> &nbsp; · &nbsp; <a href="docs/SHOWCASE.md">Films & animations</a></sub></p>
 
 <picture>
   <source media="(max-width: 640px)" srcset="docs/assets/presentation/capabilities-mobile.svg">
@@ -37,6 +50,23 @@ and prepare a signed record another person can verify. On your computer or serve
 </picture>
 
 [Collection & scope](https://github.com/phishdestroy/TgWitness/wiki/Collection) · [Investigations](https://github.com/phishdestroy/TgWitness/wiki/Investigations) · [Capabilities & limits](docs/PROJECT-GUIDE.md)
+
+<a name="screenshots"></a>
+
+<details>
+<summary><strong>More screenshots</strong> — message history, sources, exports and the journal</summary>
+
+| Compare captured versions | Choose what to observe |
+| --- | --- |
+| [![Two observed versions of a message](docs/assets/detail.png)](docs/assets/detail.png) | [![Selected chats and capture policy](docs/assets/sources.png)](docs/assets/sources.png) |
+| **Prepare a signed handoff** | **Review the observation journal** |
+| [![Signed export options](docs/assets/exports.png)](docs/assets/exports.png) | [![Observation journal](docs/assets/workspace-dark.png)](docs/assets/workspace-dark.png) |
+
+All screenshots use fictional demonstration data. Open an image for its full-size view.
+
+</details>
+
+![Section divider](docs/assets/presentation/divider.svg)
 
 ## Quick start
 
@@ -55,33 +85,6 @@ Follow [account setup](https://github.com/phishdestroy/TgWitness/wiki/Accounts);
 Use a dedicated account you can afford to lose.
 
 [Installation & Docker →](docs/QUICKSTART.md) &nbsp; · &nbsp; [Tested environments →](docs/VERIFICATION.md)
-
-
-![Section divider](docs/assets/presentation/divider.svg)
-
-## The workspace
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/chats-dark.png">
-  <img src="docs/assets/chats.png" width="1440" alt="The actual TgWitness Chats workspace with fictional records: conversations, observed edits and deletion notices.">
-</picture>
-
-<p align="center"><sub>The conversation, its captured changes and the record behind it. <a href="https://phishdestroy.github.io/TgWitness/demo/">Explore the demo ↗</a></sub></p>
-
-<a name="screenshots"></a>
-
-<details>
-<summary><strong>More screenshots</strong> — message history, sources, exports and the journal</summary>
-
-| Compare captured versions | Choose what to observe |
-| --- | --- |
-| [![Two observed versions of a message](docs/assets/detail.png)](docs/assets/detail.png) | [![Selected chats and capture policy](docs/assets/sources.png)](docs/assets/sources.png) |
-| **Prepare a signed handoff** | **Review the observation journal** |
-| [![Signed export options](docs/assets/exports.png)](docs/assets/exports.png) | [![Observation journal](docs/assets/workspace-dark.png)](docs/assets/workspace-dark.png) |
-
-All screenshots use fictional demonstration data. Open an image for its full-size view.
-
-</details>
 
 ![Section divider](docs/assets/presentation/divider.svg)
 
@@ -128,11 +131,11 @@ Telegram origin, complete capture or the truth of the content.
 
 ## The investigation handbook
 
-**Get started** · [Install and try the demo](https://github.com/phishdestroy/TgWitness/wiki/Getting-Started) · [Connect an account](https://github.com/phishdestroy/TgWitness/wiki/Accounts) · [Configure a proxy](https://github.com/phishdestroy/TgWitness/wiki/Proxies)
-
-**Work a case** · [Choose sources](https://github.com/phishdestroy/TgWitness/wiki/Collection) · [Investigate across chats](https://github.com/phishdestroy/TgWitness/wiki/Investigations) · [Prepare a handoff](https://github.com/phishdestroy/TgWitness/wiki/Exports-and-Verification)
-
-**Keep it running** · [Server and Docker](https://github.com/phishdestroy/TgWitness/wiki/Server-and-Docker) · [Backup and recovery](https://github.com/phishdestroy/TgWitness/wiki/Backup-and-Recovery) · [Troubleshooting](https://github.com/phishdestroy/TgWitness/wiki/Troubleshooting)
+| Start | Investigate | Maintain |
+| --- | --- |
+| [Install & try the demo](https://github.com/phishdestroy/TgWitness/wiki/Getting-Started) | [Choose sources](https://github.com/phishdestroy/TgWitness/wiki/Collection) | [Server & Docker](https://github.com/phishdestroy/TgWitness/wiki/Server-and-Docker) |
+| [Connect an account](https://github.com/phishdestroy/TgWitness/wiki/Accounts) | [Work across chats](https://github.com/phishdestroy/TgWitness/wiki/Investigations) | [Backup & recovery](https://github.com/phishdestroy/TgWitness/wiki/Backup-and-Recovery) |
+| [Configure a proxy](https://github.com/phishdestroy/TgWitness/wiki/Proxies) | [Export & verify](https://github.com/phishdestroy/TgWitness/wiki/Exports-and-Verification) | [Troubleshooting](https://github.com/phishdestroy/TgWitness/wiki/Troubleshooting) |
 
 [All Wiki pages](https://github.com/phishdestroy/TgWitness/wiki) · [Offline handbook](docs/wiki/Home.md) · [Complete project guide](docs/PROJECT-GUIDE.md) · [Technical reference](docs/README.md)
 
@@ -169,7 +172,7 @@ Telegram origin, complete capture or the truth of the content.
 
 <!-- operator-notice:end -->
 
-## Repository map
+![Section divider](docs/assets/presentation/divider.svg)
 
 <details>
 <summary><strong>Repository map</strong> — source, deployment and contribution guides</summary>

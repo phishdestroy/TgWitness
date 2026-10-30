@@ -12,6 +12,7 @@ and animation are SVG elements. The artwork illustrates a workflow, not an app s
 | `tgwitness-investigation-mobile-{animated,static}.svg` | Mobile composition of the approved investigation scene, with motion and a separate still |
 | `entry-{demo,guides,wiki}.svg` | Three navigation cards matching the PhishDestroy repository family |
 | `readme-typing.svg`, `readme-typing-static.svg` | Animated typing line and its readable still |
+| `readme-workspace-*.webp` | Actual demo screenshots in a 13-second loop: conversation, saved versions and deletion notices; both themes, a readable phone crop and separate stills |
 | `readme-investigation-animated.svg`, `readme-evidence-*-animated.svg` | The approved SVG scenes exported for README's picture-controlled motion preference |
 | [Repository cover](readme-cover.svg), [static cover](readme-cover-static.svg), [mobile cover](readme-cover-mobile.svg) | Compact TgWitness masthead with the original animated investigation scene and reduced-motion alternative |
 | [Workspace preview, light](workspace-preview-light.png), [dark](workspace-preview-dark.png) | Framed, unmodified Chats screenshots with fictional demo data |
@@ -40,7 +41,8 @@ and animation are SVG elements. The artwork illustrates a workflow, not an app s
 The main README opens with the approved illustrated investigation scene: sources
 appear, captured records move into the dossier and a signed handoff is drawn.
 It uses inline SVG animations, navigation cards, a typing line, capability cards
-and shared dividers. The three MP4 players live in the [film gallery](../../SHOWCASE.md).
+and shared dividers. The workspace preview records the real application with
+fictional fixtures. The three concept MP4 players live in the [film gallery](../../SHOWCASE.md).
 
 Each animated `picture` selects a separate still for reduced motion. The mobile
 hero rearranges the original scene and its captions. The `readme-*` animation
@@ -48,7 +50,7 @@ exports leave reduced-motion selection to the containing `picture`: another medi
 query inside the selected SVG can read the operating-system preference instead
 and unexpectedly freeze the animation. Standalone documentation SVGs retain their
 own reduced-motion behavior.
-Animated and static versions also have direct links. Additional screenshots,
+The [gallery](../../SHOWCASE.md) links to the original animations and stills. Additional screenshots,
 tamper/checkpoint explanations, the notice and the source map expand on demand.
 
 Use relative links inside the repository. The wiki builder copies referenced images
@@ -61,6 +63,14 @@ outlined from Manrope for consistent rendering. The font licence is retained in
 themes and a narrow viewport before replacing an asset.
 
 The original artwork and renderer remain documented in [launch-kit](../launch-kit/README.md).
+
+To refresh the workspace loop, build the site with `python tools/build_site.py`,
+then run `python website/capture_readme.py` with Playwright Chromium and Pillow
+installed. The capture script opens only the local demo, performs the real UI
+actions and exports light/dark desktop and phone variants. Each state holds for
+3.5–5 seconds, with short dissolves between screenshots. It does not connect an
+account or synthesize application content. Reduced-motion sources show the saved
+versions as a still.
 
 ## Films and animations
 
