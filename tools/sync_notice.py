@@ -42,7 +42,24 @@ def quoted_html(text):
     return '<blockquote lang="en" dir="ltr" translate="no">\n' + '\n'.join(blocks) + '\n</blockquote>'
 
 
-def excerpt(full, notice, licence, raw):
+def excerpt(full, notice, licence, raw, *, compact=False):
+    if compact:
+        return f'''## Licence and operator notice
+
+[TgWitness Restricted License]({licence}) · [Taylor Wessing use restriction](docs/TAYLOR-WESSING-EXCLUSION.md)
+
+> **NOTICE — Operator Incompatibility**
+> PhishDestroy's statement concerning **Taylor Wessing PartG mbB — German core, Hamburg office.**
+> [Full notice and context]({notice}) · [Original text]({raw}) · [Source record]({SOURCE})
+
+<details>
+<summary><strong>Read the complete notice</strong> — statement by PhishDestroy</summary>
+
+<p>The following records the maintainer's statement and allegations, not an independent judicial or regulatory finding. The operative use restriction is in the licence linked above.</p>
+
+{full}
+
+</details>'''
     return f'''### NOTICE — Operator Incompatibility
 
 > **Taylor Wessing PartG mbB — German core, Hamburg office.**
@@ -111,7 +128,7 @@ def outputs(root):
             raise ValueError('Exactly one notice slot is required in ' + name)
         before, tail = source.split(START, 1)
         _, after = tail.split(END, 1)
-        result[name] = before + START + '\n\n' + excerpt(full, notice, licence, raw) + '\n\n' + END + after
+        result[name] = before + START + '\n\n' + excerpt(full, notice, licence, raw, compact=name == 'README.md') + '\n\n' + END + after
     return result
 
 

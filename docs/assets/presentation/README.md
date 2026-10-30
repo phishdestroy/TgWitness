@@ -9,6 +9,8 @@ and animation are SVG elements. The artwork illustrates a workflow, not an app s
 
 | Asset | Purpose |
 | --- | --- |
+| `readme-product-{light,dark}.png` | README opening: project identity and a crop of the actual fictional Chats workspace |
+| `readme-product-mobile-{light,dark}.png` | Mobile composition with a closer view of the conversation |
 | [Repository cover](readme-cover.svg), [static cover](readme-cover-static.svg), [mobile cover](readme-cover-mobile.svg) | Compact TgWitness masthead with the original animated investigation scene and reduced-motion alternative |
 | [Workspace preview, light](workspace-preview-light.png), [dark](workspace-preview-dark.png) | Framed, unmodified Chats screenshots with fictional demo data |
 | `nav-*.svg` | Four equal-width navigation buttons; two per row on narrow screens |
@@ -33,12 +35,18 @@ and animation are SVG elements. The artwork illustrates a workflow, not an app s
 
 ## Use and maintenance
 
-The main README leads with the compact cover and a workspace preview. Both video
-players remain visible in the films section. Additional screenshots and the
-source map expand on demand. The full illustrated investigation sequence is
-available as a film and in the presentation gallery.
-Use the animated cover inside the README's `picture` element: it selects the
-separate static cover for reduced motion and the compact cover on mobile.
+The main README combines its title and actual workspace in one opening image.
+Its `picture` selects a matching light/dark and desktop/mobile composition. Both
+native video players follow the introduction; playback is user-controlled.
+Additional screenshots and the source map expand on demand. The earlier animated
+covers remain available for other project pages, with separate static alternatives.
+
+Rebuild the current README images with `python website/render_readme.py`.
+For the committed Manrope typography, pass `--font /path/to/Manrope.ttf`; the font
+licence is retained below. Without a font file, the renderer uses Arial. It uses
+only the existing fictional-data screenshots and the application mark; it blocks
+network requests. The mobile image crops the desktop capture without changing its
+content. The full captures remain linked from the README.
 
 Use relative links inside the repository. The wiki builder copies referenced images
 into the separate Wiki repository and rewrites their links. Keep captions in image
