@@ -119,6 +119,8 @@ def main():
                 expect(demo.locator("#events-body tr").first).to_be_visible()
                 assert demo.evaluate("fetch('/api/collector/start', {method: 'POST'}).then(r => r.status)") == 403
                 demo.close()
+                from check_home_browser import check_home
+                check_home(browser, url, output, route_request, errors)
                 from check_modes_browser import check_modes
                 check_modes(browser, url, output, errors, external, failed)
                 assert errors == [], errors
