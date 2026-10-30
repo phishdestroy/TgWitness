@@ -1,56 +1,53 @@
 <picture>
-  <source media="(max-width: 600px)" srcset="docs/assets/presentation/mobile.svg">
+  <source media="(max-width: 640px)" srcset="docs/assets/presentation/mobile.svg">
   <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/tgwitness-investigation-static.svg">
-  <img src="docs/assets/presentation/tgwitness-investigation-animated.svg" width="1200" alt="TgWitness — Follow the trail. Preserve the evidence. An illustrated investigation connecting sources, preserved records and a signed handoff.">
+  <img src="docs/assets/presentation/tgwitness-investigation-animated.svg" width="1200" alt="TgWitness — follow the trail, preserve the evidence. Illustrated investigation sources, preserved records and a signed handoff.">
 </picture>
 
-<h1 align="center">TgWitness</h1>
+<p align="center">
+  <strong>Your Telegram observation workspace.</strong><br>
+  Captured conversations. Preserved changes. Independently verifiable exports.<br>
+  On your own computer or server. With your own accounts.
+</p>
 
-<p align="center"><b>The Telegram investigation workspace that keeps the record.</b><br>
-Capture conversations · keep every edit and deletion you saw · trace connections · hand over evidence anyone can verify</p>
+<p align="center">
+  <a href="docs/CHANGELOG.md">v0.6.1 · pre-release</a> &nbsp; · &nbsp;
+  <a href="docs/QUICKSTART.md">Python 3.11+</a> &nbsp; · &nbsp;
+  <a href="LICENSE">MIT licensed</a>
+</p>
 
 <p align="center">
   <a href="#quick-start"><img src="docs/assets/presentation/button-start.svg" alt="Quick start" height="40"></a>
-  <a href="https://github.com/phishdestroy/TgWitness/wiki"><img src="docs/assets/presentation/button-wiki.svg" alt="GitHub Wiki" height="40"></a>
-  <a href="docs/SHOWCASE.md"><img src="docs/assets/presentation/button-films.svg" alt="Watch the films" height="40"></a>
+  <a href="https://github.com/phishdestroy/TgWitness/wiki"><img src="docs/assets/presentation/button-wiki.svg" alt="Read the wiki" height="40"></a>
+  <a href="docs/README.md"><img src="docs/assets/presentation/button-docs.svg" alt="Documentation" height="40"></a>
   <a href="#repository-map"><img src="docs/assets/presentation/button-source.svg" alt="Repository map" height="40"></a>
 </p>
-
-<p align="center"><a href="docs/CHANGELOG.md">0.6.1 · pre-release</a> &nbsp;/&nbsp; Python 3.11+ &nbsp;/&nbsp; <a href="LICENSE">MIT</a> &nbsp;/&nbsp; Self-hosted &nbsp;/&nbsp; No telemetry &nbsp;/&nbsp; 13 languages</p>
-
-![Section divider](docs/assets/presentation/divider.svg)
-
-## Messages change. Keep what you saw.
-
-<picture>
-  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/message-history-static.png">
-  <img src="docs/assets/presentation/message-history.gif" width="1200" alt="A message reads 14:00, is edited to 16:30 and is deleted; the journal keeps both versions and the deletion notice. Fictional records.">
-</picture>
-
-[Download the film (MP4)](docs/assets/presentation/message-history.mp4) · [Watch both films and explore the animations](docs/SHOWCASE.md)
-
-<picture>
-  <source media="(max-width: 600px)" srcset="docs/assets/presentation/capabilities-mobile.svg">
-  <img src="docs/assets/presentation/capabilities.svg" width="1200" alt="Choose collection scope; preserve captured message versions and attachments; investigate across saved conversations; export signed records with an offline report and verifier.">
-</picture>
-
-## The workspace
+<p align="center"><a href="#screenshots">Take a look at the workspace</a> · <a href="docs/SHOWCASE.md">Films and animations</a> · <a href=".github/CONTRIBUTING.md">Contribute</a></p>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/chats-dark.png">
-  <img src="docs/assets/chats.png" width="1200" alt="The TgWitness Chats workspace: conversations, observed edits and deletion notices. Fictional demo data.">
+  <img src="docs/assets/chats.png" width="1200" alt="TgWitness Chats: captured conversations with edited and deleted messages, shown with fictional demo data.">
 </picture>
+<p align="center"><sub>The conversation, its changes, and the record behind it. Light and dark themes. Fictional demo data.</sub></p>
 
-<details>
-<summary><b>More screens:</b> message history, capture policy, exports, journal</summary>
+## Features
 
-| Compare captured versions | Choose what to observe |
-| --- | --- |
-| [![Message history](docs/assets/detail.png)](docs/assets/detail.png) | [![Capture policy](docs/assets/sources.png)](docs/assets/sources.png) |
-| **Prepare a signed handoff** | **Review the journal** |
-| [![Export options](docs/assets/exports.png)](docs/assets/exports.png) | [![Observation journal](docs/assets/workspace-dark.png)](docs/assets/workspace-dark.png) |
+<table>
+<tr>
+<td width="50%" valign="top"><h3>Conversations with a history</h3><p>Read saved messages in context. Compare captured edits. Keep content after a deletion notice.</p></td>
+<td width="50%" valign="top"><h3>Your scope, your workspace</h3><p>Observe selected chats, a folder, or the whole account. Separate accounts keep separate journals and settings.</p></td>
+</tr>
+<tr>
+<td valign="top"><h3>A handoff you can verify</h3><p>Signed records, preserved attachments, an offline report and a standalone verifier. Optional password protection.</p></td>
+<td valign="top"><h3>Follow the connections</h3><p>Search across saved conversations. Review cited timelines, people profiles and file connections within a workspace.</p></td>
+</tr>
+<tr>
+<td valign="top"><h3>A workspace for daily use</h3><p>Light and dark themes, 13 interface languages, keyboard navigation and actions directly from Chats.</p></td>
+<td valign="top"><h3>Go further when you need to</h3><p>Add a witness, external timestamps, notifications or a public Proof page. Each has its own setup guide.</p></td>
+</tr>
+</table>
 
-</details>
+[Collection and scope](https://github.com/phishdestroy/TgWitness/wiki/Collection) · [Investigations](https://github.com/phishdestroy/TgWitness/wiki/Investigations) · [All capabilities and limits](docs/PROJECT-GUIDE.md)
 
 ## Quick start
 
@@ -69,18 +66,36 @@ Then open **http://127.0.0.1:8787**.
 
 [Installation and Docker →](docs/QUICKSTART.md) &nbsp;·&nbsp; [Tested environments →](docs/VERIFICATION.md)
 
+![Section divider](docs/assets/presentation/divider.svg)
+
+## Screenshots
+
+| Compare captured edits | Choose what to observe |
+| --- | --- |
+| [![Compare two observed versions of a message](docs/assets/detail.png)](docs/assets/detail.png) | [![Selected chats and capture policy](docs/assets/sources.png)](docs/assets/sources.png) |
+| **Prepare a signed handoff** | **Review the observation journal** |
+| [![Signed export options](docs/assets/exports.png)](docs/assets/exports.png) | [![Observation journal in the dark theme](docs/assets/workspace-dark.png)](docs/assets/workspace-dark.png) |
+
+All screenshots use fictional demonstration data. Open any image for the full-size view.
+
 ## How it works
+
+Each observed change adds a record. The previous hash links it to the journal;
+a signature lets the recipient check its integrity against a trusted key.
 
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/evidence-chain-static.svg">
-  <img src="docs/assets/presentation/evidence-chain-animated.svg" width="1200" alt="Each captured event links to the previous hash and is signed. A recipient checks the export against a trusted key.">
+  <img src="docs/assets/presentation/evidence-chain-animated.svg" width="1200" alt="Observe sources, preserve captured versions and verify the hash chain and signatures against a trusted key.">
 </picture>
 
-Each record is chained with SHA-256 and signed with Ed25519. Anyone can verify an export
-against a fingerprint kept outside the collector. It proves integrity relative to that key,
-not Telegram origin or the truth of the content.
+1. **Observe** the sources your Telegram account can access.
+2. **Preserve** delivered events, captured versions and coverage gaps in a signed journal.
+3. **Verify** the export independently, using a key fingerprint retained outside the collector.
 
-[The evidence model →](docs/HOW-IT-WORKS.md) &nbsp;·&nbsp; [Export and verify →](https://github.com/phishdestroy/TgWitness/wiki/Exports-and-Verification) &nbsp;·&nbsp; [Witness and Proof →](https://github.com/phishdestroy/TgWitness/wiki/Witness-and-Proof) &nbsp;·&nbsp; [All animations →](docs/SHOWCASE.md)
+A signature establishes integrity relative to a trusted key. It does not prove
+Telegram origin, complete capture or the truth of the content.
+
+[The evidence model](docs/HOW-IT-WORKS.md) · [Animated explanations](docs/SHOWCASE.md#how-the-record-holds-together) · [Export and verify](https://github.com/phishdestroy/TgWitness/wiki/Exports-and-Verification)
 
 ![Section divider](docs/assets/presentation/divider.svg)
 

@@ -4,7 +4,7 @@
 
 Two short films and three animated explanations of the investigation workflow.
 The films are concept illustrations with fictional records; see the
-[workspace screenshots](../README.md#the-workspace) for the application itself.
+[workspace screenshots](../README.md#screenshots) for the application itself.
 
 [Try the demo](QUICKSTART.md#explore-the-interface) · [Read the handbook](https://github.com/phishdestroy/TgWitness/wiki) · [Presentation kit](assets/presentation/README.md)
 
