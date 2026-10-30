@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="fa" dir="rtl" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>اتصال، پروکسی‌ها و حفاظت از داده‌ها | TgWitness</title>
+<meta name="description" content="جفت‌های API، روش‌های ورود، مسیرهای SOCKS5، HTTP و MTProxy، فهرست‌های عمومی پروکسی و اینکه هر مسیر چه چیزی را محافظت می‌کند."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="fa_IR">
+<meta property="og:title" content="اتصال، پروکسی‌ها و حفاظت از داده‌ها | TgWitness"><meta property="og:description" content="جفت‌های API، روش‌های ورود، مسیرهای SOCKS5، HTTP و MTProxy، فهرست‌های عمومی پروکسی و اینکه هر مسیر چه چیزی را محافظت می‌کند.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/connection/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/connection/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/connection/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/connection/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/connection/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/connection/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/connection/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/", "url": "https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/", "name": "اتصال، پروکسی‌ها و حفاظت از داده‌ها | TgWitness", "description": "جفت‌های API، روش‌های ورود، مسیرهای SOCKS5، HTTP و MTProxy، فهرست‌های عمومی پروکسی و اینکه هر مسیر چه چیزی را محافظت می‌کند.", "inLanguage": "fa", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "خانه", "item": "https://phishdestroy.github.io/TgWitness/fa/"}, {"@type": "ListItem", "position": 2, "name": "مستندسازی", "item": "https://phishdestroy.github.io/TgWitness/fa/docs/"}, {"@type": "ListItem", "position": 3, "name": "منبع", "item": "https://phishdestroy.github.io/TgWitness/fa/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "اتصال، پروکسی‌ها و حفاظت از داده‌ها", "item": "https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">رفتن به محتوا</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / مستندسازی</span></a>
+<nav aria-label="راهنماها"><a href="../../concepts/">راهنمای تصویری</a><a href="../../">تمام راهنماها</a><a href="../">منبع</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="زبان"><span aria-hidden="true">◍</span> فارسی</summary><div class="lang-list"><a href="../../../../docs/reference/connection/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/connection/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/connection/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/connection/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/connection/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/connection/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/connection/" hreflang="ar" lang="ar">العربية</a><a href="./" hreflang="fa" lang="fa" aria-current="true">فارسی</a><a href="../../../../ur/docs/reference/connection/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/connection/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/connection/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/connection/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/connection/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="تغییر بین تم روشن و تاریک"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="راهنماها"><a href="../../../guides/modes.html">حالت‌ها، سناریوها و سطوح شواهد</a><p class="nav-label">قدم‌های اول</p><a href="../../start/">در چند دقیقه شروع کنید</a><a href="../../accounts/">اتصال یک حساب</a><a href="../../proxies/">یک پروکسی انتخاب کنید</a><a href="../../exports/">صادرات و تأیید</a><p class="nav-label">درک شواهد</p><a href="../../concepts/">ببینید مدرک چگونه کار می‌کند</a><a href="../../cases/">تحقیق در تمام چت‌ها</a><a href="../../security/">آن را امن نگه دارید</a><p class="nav-label">پیش‌تر بروید</p><a href="../../witness/">راه‌اندازی یک بات شاهد</a><a href="../../server/">آن را در حال اجرا نگه دارید</a><a href="../../troubleshooting/">مشخص کنید چه چیزی اشتباه پیش رفته است</a></nav><nav class="wiki-nav" aria-label="منبع"><p class="nav-label"><a class="nav-label-link" href="../">منبع</a></p><details class="wiki-group" open><summary>راه‌اندازی</summary><a href="../quickstart/">راه‌اندازی سریع</a><a href="../accounts/">فرمت‌های حساب کاربری و جلسه</a><a href="./" aria-current="page">اتصال، پروکسی‌ها و حفاظت از داده‌ها</a><a href="../deployment/">راه‌اندازی</a></details><details class="wiki-group"><summary>جمع‌آوری</summary><a href="../collection/">نحوهٔ کارکرد جمع‌آوری</a><a href="../operations/">روندها و عملیات‌ها</a><a href="../investigation/">حالت تحقیق</a><a href="../features/">ویژگی‌ها و محدودیت‌ها</a></details><details class="wiki-group"><summary>شواهد</summary><a href="../how-it-works/">چگونگی کارکرد شواهد</a><a href="../evidence/">فرمت مدرک</a><a href="../witness/">شاهد مستقل</a><a href="../timestamp/">برچسب‌های زمانی</a></details><details class="wiki-group"><summary>امنیت و پروژه</summary><a href="../security/">امنیت و مدیریت داده‌ها</a><a href="../architecture/">معماری</a><a href="../verification/">آنچه آزمایش شده است</a><a href="../license/">اعلان عدم سازگاری مجوز و معماری</a><a href="../notice/">اعلان عدم سازگاری اپراتور</a><a href="../changelog/">فهرست تغییرات</a></details></nav><p class="sidebar-note">v0.7.0<br>کد باز · روی دستگاه شما اجرا می‌شود</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="راهنماها"><a href="../../../">خانه</a> <span aria-hidden="true">/</span> <a href="../../">مستندسازی</a> <span aria-hidden="true">/</span> <a href="../">منبع</a> <span aria-hidden="true">/</span> <span aria-current="page">اتصال، پروکسی‌ها و حفاظت از داده‌ها</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">جستجو در مستندات</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="پراکسی، زنجیره هش، توکن یا ویسنس را امتحان کنید…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="جستجوی واضح" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">یک کلمه تایپ کنید تا در راهنماها و مرجع جستجو شود. جستجو در مرورگر شما باقی می‌ماند.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">منبع / راه‌اندازی</p><h1>اتصال، پروکسی‌ها و حفاظت از داده‌ها</h1><p class="guide-outcome">جفت‌های API، روش‌های ورود، مسیرهای SOCKS5، HTTP و MTProxy، فهرست‌های عمومی پروکسی و اینکه هر مسیر چه چیزی را محافظت می‌کند.</p><div class="wiki-body"><p>این سند رفتار و محدودیت‌های TgWitness 0.7.0 را توصیف می‌کند. احراز هویت، دسترسی به منبع، اتصال شبکه و کامل بودن ضبط، حالات جداگانه‌ای هستند. برای مراحل ورود، فرمت‌های فایل و حساب‌های متعدد، از بخش
+<a href="../accounts/">«حساب‌ها و فرمت‌های جلسه</a>» شروع کنید. برای سیاست‌های رویداد و رفتار راه‌اندازی مجدد، به بخش <a href="../collection/">«نحوه کارکرد جمع‌آوری»</a> مراجعه کنید.</p>
+<h2 id="authentication-methods">روش‌های احراز هویت<a class="anchor" href="#authentication-methods" aria-label="لینک به این بخش">#</a></h2>
+<p><strong>شناسه API و هش API یک برنامه را شناسایی می‌کنند؛ آنها جایگزین ورود به حساب کاربری نمی‌شوند.</strong>
+
+استفاده از آنها در TgWitness اختیاری است. اولویت‌بندی: یک جفت وارد شده در فرم، سپس یک جفت از JSON حساب کاربری وارد شده، سپس جفت ذخیره شده در فضای کاری، سپس استخر داخلی ۵۰ تایی
+فقط جفت تلگرام دسکتاپ (2040) همراه با توضیحات تطبیق‌یافتهٔ کلاینت تلگرام دسکتاپ ارسال می‌شود.
+شما می‌توانید از جفت اختصاصی خود از ابزارهای توسعهٔ API در <a href="https://my.telegram.org">my.telegram.org</a>
+با تمام حساب‌های خود استفاده کنید؛ هر حساب همچنان مجوز (authorization) خود را دارد.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>روش</th>
+<th>پیش‌نیازها</th>
+<th>پشتیبانی TgWitness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>تلفن، کد، احراز هویت دو مرحله‌ای اختیاری</td>
+<td>دسترسی به حساب؛ جفت API اختیاری</td>
+<td>ورود به پنل</td>
+</tr>
+<tr>
+<td>کلید رمزنگاری HEX + شناسه DC</td>
+<td>کلید کامل ۵۱۲ کاراکتری و DC 1–5</td>
+<td>زبانه‌ی <strong>کلید احراز هویت</strong> مستقیم؛ شناسهٔ کاربر اختیاری قبل از ذخیره‌ی احراز هویت بررسی می‌شود</td>
+</tr>
+<tr>
+<td>جلسه رشته‌ای تله‌تون</td>
+<td>یک رشته جلسه معتبر</td>
+<td>ورود به پنل</td>
+</tr>
+<tr>
+<td>تله‌تون اس‌کیوالایت <code>.session</code></td>
+<td>متن تبلیغاتی بسته و یکنواخت</td>
+<td>وارد کردن مستقیم اسکیماها از پنل ۷/۸؛ CLI آفلاین اختیاری</td>
+</tr>
+<tr>
+<td>پایروگرام اس‌کیوالایت <code>.session</code></td>
+<td>جلسه کاربری تولید بسته شد</td>
+<td>وارد کردن مستقیم اسکیماها از پنل ۲/۳</td>
+</tr>
+<tr>
+<td>Telegram Desktop TData ZIP</td>
+<td>یک حساب مدرن؛ رمز عبور محلی در صورت محافظت‌شده</td>
+<td>تبدیل در حافظه همراه با بررسی‌های چک‌سام و رمزگشایی</td>
+</tr>
+<tr>
+<td>JSON حساب</td>
+<td>میدان‌های پشتیبانی‌شدهٔ API/جلسه/کلید</td>
+<td>فقط متادیتا برای پر کردن اعتبارنامه‌های API کافی است؛ ورود با جلسه/کلید یا تلفن/QR همچنان لازم است</td>
+</tr>
+<tr>
+<td>ورود با QR</td>
+<td>تأیید از یک اپلیکیشن تلگرام مجاز</td>
+<td>تولید QR محلی، انقضا/تکرار تلاش، احراز هویت دو مرحله‌ای اختیاری</td>
+</tr>
+<tr>
+<td>TDLib / Pyrogram StringSession</td>
+<td>فرمت‌های دیگر مخصوص کتابخانه</td>
+<td>پشتیبانی‌نشده</td>
+</tr>
+<tr>
+<td>توکن بات</td>
+<td>یک ربات با مدل دسترسی/به‌روزرسانی اختصاصی خود</td>
+<td>توسط این گردآورنده استفاده نشده است</td>
+</tr>
+</tbody>
+</table></div>
+<p>تلگرام ارسال کد را انتخاب می‌کند؛ پیامک تضمین‌شده نیست. هش API نمی‌تواند یک جلسه لغو شده را ترمیم کند یا رمز عبور ۲FA فراموش‌شده را جایگزین نماید. TgWitness کدهای ورود یا رمز عبور ۲FA تلگرام را روی دیسک ذخیره نمی‌کند.</p>
+<p>برای یک منبع خصوصی، حساب کاربری باید از قبل دسترسی داشته باشد. نام کاربری گروه غیرضروری است. وارد کردن پروکسی یا جلسه، نه حق عضویت و نه حق ادمین را اعطا نمی‌کند. عضویت فعلی، دسترسی به تاریخچه پیش از پیوستن را تضمین نمی‌کند.</p>
+<h2 id="import-a-telethon-session-file">وارد کردن فایل جلسه تله‌تون<a class="anchor" href="#import-a-telethon-session-file" aria-label="لینک به این بخش">#</a></h2>
+<p>Telethon SQLite، Pyrogram SQLite و TData تلگرام دسکتاپ از فرمت‌های متفاوتی استفاده می‌کنند.
+پنل ساختارهای پشتیبانی‌شده را تشخیص داده و تبدیل می‌کند؛ تغییر نام یک فایل، تبدیل آن نیست. یک جلسه و JSON همراه آن را در بخش <strong>«فایل‌ها</strong>» (<strong>Files</strong>) انتخاب کرده، سپس روی <strong>«اتصال حساب» (Connect account</strong>) کلیک کنید. تا چهار فایل مطابقت‌دار و مجموعاً ۸ مگابایت (MiB) پذیرفته می‌شود. برای جزئیات فرمت‌های TData/JSON، <a href="../accounts/">محدودیت‌های فرمت را</a> ببینید.
+امکان بازیابی رمز عبور وجود ندارد. ورود با تلفن/2FA یا QR یک مجوز جداگانه ایجاد می‌کند.</p>
+<p>مسیر خط فرمان اختیاری مخصوص تله‌تون همچنان در دسترس است:</p>
+<ol>
+<li>کلاینت را با استفاده از جلسهٔ اصلی متوقف کرده و یک نسخهٔ یکسان بسازید.
+    مبدل فایل‌هایی را که WAL/ژورنال ناقص دارند رد می‌کند. به جای حذف آن فایل‌ها برای دور زدن بررسی، کلاینت اصلی را به درستی ببندید.</li>
+<li>از محیط TgWitness، اجرا کنید:</li>
+</ol>
+<pre><code class="language-sh">python -m tgwitness.sessions account.session --out account.tgwitness-session</code></pre>
+<ol start="3">
+<li>در بخش <strong>افزودن حساب → فایل‌ها</strong>، نتیجه را بارگذاری کنید یا رشتهٔ آن را چسبانده و ادامه دهید.</li>
+<li>شناسه عددی حساب نمایش‌داده‌شده را بررسی کنید، منابع را انتخاب کرده و مشاهده را آغاز کنید.</li>
+</ol>
+<p>این مبدل، SQLite را فقط برای خواندن باز می‌کند، هیچ‌گونه ارتقای طرحواره یا درخواست شبکه‌ای انجام نمی‌دهد و جلسه را چاپ نمی‌کند. این ابزار نسخه طرحواره، انواع جدول، یک سطر از جلسه، IP/پورت/DC و طول کلید را بررسی می‌کند. ورودی CLI به ۶۴ مگابایت محدود است؛ متن StringSession به ۴ کیلوبایت محدود است. تبدیل پنل فایل‌ها را به سرور احراز هویت‌شده TgWitness بارگذاری می‌کند، آن‌ها را در حافظه پردازش می‌کند و اعتبارنامه‌های نرمال‌شده را بدون ذخیره نسخه‌های اصلی بارگذاری‌شده، به همان مرورگر بازمی‌گرداند. برای سرور از راه دور از HTTPS استفاده کنید.</p>
+<p><strong>فایل تبدیل‌شده، رمز دسترسی به حساب کاربری رمزگذاری‌نشده است.</strong> آن را در یک مخزن محافظت‌شده نگه دارید و هرگز آن را در مخزن کد قرار ندهید یا برای یک سرویس تبدیل شخص ثالث ارسال نکنید. TgWitness جلسه مجاز را در گاوصندوق رمزگذاری‌شده خود ذخیره می‌کند. کپی کردن یک جلسه، مجوز جداگانه‌ای ایجاد نمی‌کند: همزمان کلاینت‌هایی را با کلیدهای دسترسی کلون‌شده اجرا نکنید و انتظار دریافت به‌روزرسانی مستقل را نداشته باشید.</p>
+<p>مبدل مجوز را منتقل می‌کند، نه پیام‌های اصلی، حافظهٔ موقت موجوده یا یک نشانگر به‌روزرسانی پایدار. این قابلیت بازیابی به‌روزرسانی را در صورت راه‌اندازی مجدد فرآیندها تضمین نمی‌کند.</p>
+<h2 id="mtproto-telethon-and-proxies">MTProto، تل‌تون و پروکسی‌ها<a class="anchor" href="#mtproto-telethon-and-proxies" aria-label="لینک به این بخش">#</a></h2>
+<p>MTProto پروتکل تلگرام است. Telethon کتابخانه کلاینت پایتونی است که TgWitness از آن استفاده می‌کند.
+MTProxy یک پروکسی حمل‌ونقل تلگرام است؛ SOCKS5 و HTTP CONNECT تونل‌های عمومی فراهم می‌کنند. هیچ‌کدام جایگزین احراز هویت حساب کاربری نمی‌شوند.</p>
+<p>مسیر را برای هر فضای کاری در <strong>حساب کاربری → تنظیمات → تنظیمات اتصال → تغییر مسیر اتصال</strong> ذخیره کنید. اگر به پروکسی نیاز دارید، این کار را قبل از ورود انجام دهید. مسیر پیش‌فرض «مستقیم» است.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>مسیر</th>
+<th>تنظیمات</th>
+<th>مرز</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>مستقیم</td>
+<td>هیچ</td>
+<td>تله‌تون مستقیماً به تلگرام متصل می‌شود</td>
+</tr>
+<tr>
+<td>SOCKS5</td>
+<td>میزبان، پورت، نام کاربری/رمز عبور اختیاری</td>
+<td>python-socks 2.8.2، rdns فعال</td>
+</tr>
+<tr>
+<td>اتصال HTTP</td>
+<td>میزبان، پورت، نام کاربری/رمز عبور اختیاری</td>
+<td>اتصال ساده HTTP CONNECT؛ TLS به خود پروکسی پیاده‌سازی نشده است</td>
+</tr>
+<tr>
+<td>MTProxy</td>
+<td>میزبان، پورت، مخفی</td>
+<td>انتقال آزمایشی تله‌تون؛ ۳۲ رقم هگزادسیمال یا <code>dd</code> + ۳۲ رقم هگزادسیمال</td>
+</tr>
+</tbody>
+</table></div>
+<p>اسرار Fake TLS <code>ee</code> رد می‌شوند. نرمال‌سازی Telethon 1.45 می‌تواند پیش‌وند و دامنه را حذف کند، اما این کار، Fake TLS را پیاده‌سازی نمی‌کند. <code>tg://proxy?server=…&amp;port=…&amp;secret=…</code> یا <code>https://t.me/proxy?server=…&amp;port=…&amp;secret=…</code> را الصاق کنید و <strong>از لینک، «پر کردن فیلدها» را</strong> انتخاب کنید.
+این کار فیلدها را بدون اتصال یا ذخیره کردن اعتبارسنجی و پر می‌کند؛ مسیر را به صورت جداگانه بررسی و ذخیره کنید. فیلدهای دستی همچنان در دسترس هستند. به <a href="https://core.telegram.org/api/links#proxy-links">لینک‌های پروکسی تلگرام</a> مراجعه کنید.</p>
+<h3 id="public-proxies-supplied-by-your-installation">پروکسی‌های عمومی ارائه‌شده توسط نصب شما<a class="anchor" href="#public-proxies-supplied-by-your-installation" aria-label="لینک به این بخش">#</a></h3>
+<p>تنظیمات اتصال شامل یک لیست عمومی آماده از
+<a href="https://github.com/SoliSpirit/mtproto">SoliSpirit/mtproto</a> و <a href="https://github.com/zakky8/mtproto-proxy-pro">zakky8/mtproto-proxy-pro</a> است. اسنپ‌شات ضمیمه‌شده حاوی اطلاعات انتهای عمومی، انتساب منبع و تاریخ‌های دانلود است، نه ادعاهای احراز هویت هیچ‌کدام از پروژه‌ها. این ابزار هنگام راه‌اندازی بدون دریافت هیچ‌چیز کار می‌کند. یک مورد را انتخاب کنید، مسیر را ذخیره کنید، سپس قبل از ورود به تلگرام، اتصال را آزمایش کنید.</p>
+<p><strong>به‌روزرسانی فهرست‌های عمومی،</strong> دو فید ثابت HTTPS را بنا به درخواست فراخوانی می‌کند. هر پاسخ محدود به ۱ مگابایت (MiB) و ۲۰ ثانیه است؛ هدایت‌ها (redirects) رد می‌شوند. حداکثر ۶۴ ورودی سازگار از هر منبع حفظ می‌شود و ورودی‌های تکراری در میان منابع حذف می‌گردند. لینک‌های نامعتبر، آدرس‌های IP خصوصی/محفوظ، نام‌های میزبان محلی و ورودی‌های Fake TLS <code>ee</code> پشتیبانی‌نشده نادیده گرفته می‌شوند. نام‌های میزبان عمومی هنگام انتخاب، حل (resolved) می‌شوند؛ هر پاسخ باید به طور جهانی قابل مسیریابی باشد و IP انتخاب‌شده در مسیر ذخیره شده، ثابت (pinned) می‌شود. این کار مانع از آن می‌شود که نام میزبان یک فید، بعداً یک اتصال ذخیره شده را به یک آدرس خصوصی هدایت کند. برای حل مجدد یک ورودی، آن را دوباره اعمال کنید.</p>
+<p>هر فضای کاری، آخرین اسنپ‌شات‌های سالم منبع خود را در <code>public-proxies.json</code> حفظ می‌کند. پاسخ‌های ناموفق، خالی یا ناسازگار، ورودی‌های قبلی و زمان‌مهر آن منبع را حفظ می‌کنند.
+به‌روزرسانی‌ها اتمیک، سریال‌شده و محدود به یک تلاش در هر دقیقه برای هر فضای کاری هستند.
+نه به‌روزرسانی و نه مشاهده یک لیست، مسیر انتخاب‌شده را تغییر نمی‌دهد. در دسترس بودن همچنان
+نیازمند یک تست حمل‌ونقل است؛ فهرست شدن یک ارائه‌دهنده مدرکی بر تحویل کامل تلگرام نیست.</p>
+<p>دانلودها از لیست‌ها از یک اتصال HTTPS جداگانه استفاده می‌کنند که به‌طور پیش‌فرض مستقیم است. مقدار
+<code>TGWITNESS_PROXY_FEED_PROXY</code> را روی یک URL HTTP/SOCKS5 تنظیم کنید تا این درخواست‌ها را از طریق یک پروکسی دانلود مسیریابی کنید؛ هر دو واریانت از Collector Compose آن را فوروارد می‌کنند. هیچ جلسه تلگرام، اعتبارنامه‌های API، توکن پنل یا توکن ربات به ارائه‌دهندگان ارسال نمی‌شود. MTProxy فضای کاری نمی‌تواند این دانلودهای HTTP را انجام دهد. نام ارائه‌دهندگان، تاریخ‌های ذخیره‌شده و مسیر دانلود تحت <strong>بخش «منبع فهرست»</strong> فاش می‌شوند.</p>
+<p>برای جایگزینی فهرست عمومی با کاتالوگ اپراتور خود، موارد زیر را برای بازنویسی پیکربندی کنید.
+این کار اشتراک‌های خارجی را به طور کامل غیرفعال می‌کند، حتی زمانی که آرایه <code>proxies</code> آن خالی باشد.</p>
+<p><a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/proxies.config.example">کاتالوگ خالی را</a>
+به <code>proxy-config/proxies.json</code>
+کپی کنید و انتهای‌های عمومی راه‌اندازی‌شده خود را اضافه کنید:</p>
+<pre><code class="language-json">{&quot;format&quot;: &quot;tgwitness-proxy-catalog-v1&quot;, &quot;proxies&quot;: [
+  {&quot;id&quot;: &quot;project-eu&quot;, &quot;label&quot;: &quot;Project EU&quot;,
+   &quot;link&quot;: &quot;tg://proxy?server=REPLACE_HOST&amp;port=443&amp;secret=REPLACE_SECRET&quot;}
+]}</code></pre>
+<p>مقادیر نمونه باید جایگزین شوند. تا ۳۲ ورودی متمایز پذیرفته می‌شود. فهرست احرازشده برچسب‌ها/میزبان‌ها/پورت‌ها را بدون رمزهای مشترک بازمی‌گرداند؛ انتخاب یکی، اعتبارنامه‌های آن را در گاوصندوق فضای کاری ذخیره می‌کند. در دسترس بودن تا زمان انجام آزمون صریح انتقال، آزمایش‌نشده باقی می‌ماند. یک کاتالوگ معیوب، پیکربندی دستی را ممکن می‌سازد.</p>
+<p>راه‌اندازی بومی: مسیر JSON محلی را روی <code>TGWITNESS_PROXY_CATALOG</code> تنظیم کنید. داکر:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.proxies.yaml up -d --build</code></pre>
+<p>لایهٔ رویین، فایل‌های قابل خواندن تنها (<code>proxy-config</code>) را نصب می‌کند؛ فایل‌ها باید برای UID مخزن 10001 قابل خواندن باشند.
+آن دایرکتوری از Git، زمینهٔ ساخت Docker و آرشیوهای منبع حذف شده است. این
+کاتالوگ، حساب‌های جمع‌آوری‌کننده را پیکربندی می‌کند؛ <a href="../witness/">بات شاهد</a> از مسیر HTTP/SOCKS5 خود استفاده می‌کند، نه MTProxy.</p>
+<p>اگر پروکسی از کار بیفتد، TgWitness به حالت مستقیم (Direct) بازنمی‌گردد. پیش از تغییر مسیر، مشاهده را متوقف کنید. ذخیره کردن، کلاینت‌های قدیمی را قطع ارتباط می‌کند و ورود ناکامل را لغو می‌کند؛ یک کلاینت جدید از مسیر ذخیره شده استفاده می‌کند. پیوند ژورنال/جلسه حساب کاربری باقی می‌ماند. تنظیمات، مسیر قبلی را جایگزین می‌کنند: هنگام ویرایش آن، اطلاعات پروکسی را مجدداً وارد کنید.</p>
+<p>اطلاعات ورود به سیستم در <code>network.enc</code> رمزگذاری می‌شود. این API نام کاربری، رمز عبور یا کلمه عبور مخفی را بازنمی‌گرداند. رکوردهای امضا شده حاوی نوع مسیر و اینکه آیا اطلاعات ورود به سیستم موجود است یا خیر هستند، بدون در نظر گرفتن نقطه پایانی و کلمات مخفی. اپراتور می‌تواند نقطه پایانی را در پنل مشاهده کند. فیلدهای مخفی پس از ذخیره، قفل کردن یا تعویض فضاهای کاری پاک می‌شوند.</p>
+<p><strong>آزمایش اتصال تلگرام</strong>، که پیش از ورود نیز در دسترس است، یک اتصال موقت و غیرمجاز تلگرام را از طریق مسیر باز و بسته می‌کند. این ابزار با هیچ وب‌سایت بررسی آی‌پی تماس نمی‌گیرد. موفقیت در این آزمایش، اتصال حمل‌ونقل را برقرار می‌کند، نه دسترسی به گروه، تحویل کامل پیام یا ناشناس‌بودن را.</p>
+<p>پراکسی بر روی اتصالات کلاینت تلگرام، از جمله دانلودهای رسانه‌ای DC تلگرام اعمال می‌شود. ابزارهای مرورگر، pip، SSH و TSA که به صورت دستی فراخوانی می‌شوند، مسیرهای جداگانه‌ای دارند. نام میزبان پراکسی ممکن است به صورت محلی حل شود. <code>rdns</code> بر روی نام‌های میزبان مقصد تأثیر می‌گذارد؛ تلگرام اغلب IPهای عددی DC را ارائه می‌دهد.</p>
+<p>پروتکل‌های SOCKS5 و HTTP CONNECT به خودی خود اعتبارنامه‌های پروکسی یا تونل ارتباطی بین کلاینت و پروکسی را رمزگذاری نمی‌کنند. MTProto ترافیک تلگرام را به طور جداگانه محافظت می‌کند. از یک کانال امن مناسب برای اتصال به پروکسی در یک شبکه ناامن استفاده کنید. گروه‌های خصوصی، چت‌های ابری هستند؛ MTProto آنها را به چت‌های مخفی رمزگذاری‌شده از سر تا سر تبدیل نمی‌کند.</p>
+<h2 id="encryption-and-signatures">رمزنگاری و امضاها<a class="anchor" href="#encryption-and-signatures" aria-label="لینک به این بخش">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>لایه</th>
+<th>پیاده‌سازی شد</th>
+<th>مسئولیت اپراتور</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ترافیک تلگرام</td>
+<td>تله‌تون MTProto</td>
+<td>اعتماد پلتفرم، مسیر و در دسترس بودن</td>
+</tr>
+<tr>
+<td>پنل وب</td>
+<td>توکن حامل، لوپ‌بک پیش‌فرض، محدودیت‌های درخواست</td>
+<td> تونل HTTPS یا SSH برای دسترسی از راه دور</td>
+</tr>
+<tr>
+<td>رازها</td>
+<td>فرنت برای اعتبارنامه‌های API، اعتبارنامه‌های جلسه، اعتبارنامه‌های پروکسی و کلید خصوصی امضا</td>
+<td>از کلید رمزگشایی و میزبان در حال اجرا محافظت کنید</td>
+</tr>
+<tr>
+<td>کلید گاوصندوق</td>
+<td>کلید محلی، یا کلید اصلی خارجی برای نصب جدید</td>
+<td>جداسازی ذخیره‌سازی محافظت‌شده و پشتیبان‌گیری کلید</td>
+</tr>
+<tr>
+<td>پیام‌ها و پیوست‌ها</td>
+<td>ذخیره‌سازی متن سادهٔ برنامه</td>
+<td>دیسک/حجم رمزگذاری‌شده</td>
+</tr>
+<tr>
+<td>ZIP/JSONL/CSV/HTML</td>
+<td>بررسی‌های یکپارچگی، عدم رمزنگاری محتوا</td>
+<td>حفاظت از نسخه‌های صادرشده و انتقال‌ها</td>
+</tr>
+<tr>
+<td>منشأ و زمان</td>
+<td>دفترچه ثبت امضا شده، رسید فرایند، ابزارهای RFC 3161</td>
+<td>کلید مورد اعتماد، نقاط بازرسی مستقل/TSA و رویهٔ نگهداری</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>حفاظت ذخیره‌سازی</strong> در حساب این وضعیت‌ها را نشان می‌دهد. توکن پنل یک رمز دسترسی است، نه رمز رمزگذاری. یک توکن تمام فضاهای کاری را کنترل می‌کند؛ فضاهای کاری کاربران جداگانه یا مستأجران ایزوله نیستند.</p>
+<p>یک دمو (نمایش) مصنوعی که به صراحت آغاز شده و ایزوله است، می‌تواند به طور خودکار از طریق یک اتصال لوپ‌بک مستقیم باز شود. این قابلیت از یک قابلیت مجزای چرخه عمر فرآیند استفاده می‌کند؛ این قابلیت نه توکن پنل پیکربندی‌شده را فاش می‌کند و نه دسترسی به فضاهای کاری واقعی را اعطا می‌کند. درخواست‌های از راه دور، پروکسی‌شده یا فرا-منشأ (cross-origin) نمی‌توانند این قابلیت ورود خودکار را دریافت/استفاده کنند.
+این سهولت، مرز احراز هویت برای داده‌های حساب واقعی را از بین نمی‌برد.</p>
+<p>BitLocker، LUKS، FileVault یا یک حجم رمزگذاری‌شده مدیریت‌شده می‌توانند از ذخیره‌سازی تحت مدل‌های تهدید مربوطه محافظت کنند. یک مدیر یک ماشین در حال اجرا که قفل نشده است، همچنان می‌تواند داده‌ها را بخواند. در برنامه‌ریزی ذخیره‌سازی، SQLite WAL/SHM، رسانه‌ها، خروجی‌های موقت، اسواپ، پشتیبان‌ها و دانلودهای مرورگر را نیز در نظر بگیرید. یک حجم داکر صرفاً به این دلیل که یک حجم است، رمزگذاری نمی‌شود. TgWitness، SQLCipher یا رمزگذاری اشیاء را پیاده‌سازی نمی‌کند.</p>
+<h2 id="external-master-key">کلید اصلی خارجی<a class="anchor" href="#external-master-key" aria-label="لینک به این بخش">#</a></h2>
+<p>برای یک نصب <strong>جدید</strong>، کلید اصلی را خارج از دایرکتوری داده قرار دهید.
+این کار به طور خودکار گاوصندوق کلید محلی موجود را مهاجرت نمی‌دهد. یک دایرکتوری کلید آماده کنید که فقط برای هویت سرویس قابل دسترسی باشد، سپس اجرا کنید:</p>
+<pre><code class="language-sh">python -m tgwitness.security create-master-key /private/keys/tgwitness-master.key
+export TGWITNESS_VAULT_KEY_FILE=/private/keys/tgwitness-master.key
+python -m tgwitness --data-dir /private/observations/new-case</code></pre>
+<p>PowerShell، با استفاده از محیط پروژه نصب‌شده:</p>
+<pre><code class="language-powershell">python -m tgwitness.security create-master-key E:\PrivateKeys\tgwitness-master.key
+$env:TGWITNESS_VAULT_KEY_FILE = &#x27;E:\PrivateKeys\tgwitness-master.key&#x27;
+python -m tgwitness --data-dir E:\PrivateData\new-case</code></pre>
+<p>در داکر، فایل را به صورت فقط-خواندنی در خارج از <code>/data</code>، برای مثال در
+<code>/run/secrets/tgwitness-master.key</code>، مونت کنید و متغیر محیط را روی آن مسیر تنظیم کنید.
+UID سرویس باید قادر به خواندن آن باشد. مسیر را، نه بایت‌های کلید، از طریق فایل‌های محیط/پیکربندی ارسال کنید.</p>
+<p>هر فضای کاری یک سالت عمومی تصادفی و کلید فرنت (Fernet) مخصوص به خود را که از طریق HKDF-SHA256 استخراج شده است، دریافت می‌کند. <code>vault.external.json</code>، متادیتای استخراج را ذخیره می‌کند، نه خود کلید اصلی را.
+در صورت گم شدن یا اشتباه بودن کلید، نرم‌افزار بدون جایگزینی بی‌سروصدا، از راه‌اندازی بازمی‌ماند.
+برای بازیابی، هم متادیتای سالت و هم کلید اصلی را حفظ کنید.</p>
+<p>تمام فضاهای کاری از یک کلید اصلی واحد مشتق می‌شوند؛ به خطر افتادن آن بر کل نصب تأثیر می‌گذارد. فرآیند در حال اجرا می‌تواند اسرار را رمزگشایی کند. این یک HSM یا KDF رمز عبور نیست. رمزهای عبور دلخواه انسانی به جای یک کلید تصادفی پذیرفته نمی‌شوند.</p>
+<p>کلید موجود را برای نصب‌های فعلی تا زمانی که یک مهاجرت عمدی
+پیاده‌سازی و تأیید شود، حفظ کنید. حذف <code>vault.key</code> یا جایگزینی یک کلید اصلی می‌تواند دسترسی
+به جلسات/کلیدهای امضا را از بین ببرد. پشتیبان‌های رمزگذاری‌شده و کلیدها را جداگانه نگه دارید و
+بازسازی را در یک محیط ایزوله آزمایش کنید.</p>
+<h2 id="sources-and-verification-scope">منابع و دامنهٔ اعتبارسنجی<a class="anchor" href="#sources-and-verification-scope" aria-label="لینک به این بخش">#</a></h2>
+<p>بازبینی‌شده در ۲۶ اکتبر ۲۰۲۶:</p>
+<ul>
+<li>https://core.telegram.org/api/auth</li>
+<li>https://core.telegram.org/api/obtaining_api_id</li>
+<li>https://docs.telethon.dev/en/stable/basic/signing-in.html</li>
+<li>https://docs.telethon.dev/en/stable/concepts/sessions.html</li>
+<li>https://core.telegram.org/mtproto/mtproto-transports</li>
+<li>https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/SourceFiles/storage/storage_account.cpp</li>
+<li>تله‌تون ۱.۴۵.۰: SQLiteSession، StringSession، <code>Connection._proxy_connect</code>،
+    <code>TcpMTProxy.normalize_secret</code> و روش‌های دانلود.</li>
+</ul>
+<p>تست‌های محلی شامل تست‌های پیکربندی لوپ‌بک SOCKS5/HTTP CONNECT، جلسات مصنوعی SQLite، ایزوله‌سازی مسیر، استثنای مخفی و رد درخواست به دلیل کلید مفقود هستند. این تست‌ها تعامل‌پذیری واقعی تلگرام/پراکسی یا رفتار زنده MTProxy را تضمین نمی‌کنند. به
+<a href="../verification/">فایل‌های VERIFICATION.md</a> و <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">LIVE_ACCEPTANCE.md</a> مراجعه کنید.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/CONNECTION-SECURITY.md">ویرایش این صفحه در گیت‌هاب ↗</a><a class="next-guide" href="../deployment/"><span>مرحله بعدی</span><strong>راه‌اندازی ←</strong></a><p>این راهنماها پیاده‌سازی فعلی را توصیف می‌کنند. نتایج اعتبارسنجی و شکاف‌های باقی‌مانده به‌طور جداگانه مستند شده‌اند. <a href="../verification/">آنچه آزمایش شده است ←</a></p></footer>
+</main>
+<aside class="toc" aria-label="در این صفحه"><p class="nav-label">در این صفحه</p><a href="#authentication-methods">روش‌های احراز هویت</a><a href="#import-a-telethon-session-file">وارد کردن فایل جلسه تله‌تون</a><a href="#mtproto-telethon-and-proxies">MTProto، تل‌تون و پروکسی‌ها</a><a href="#encryption-and-signatures">رمزنگاری و امضاها</a><a href="#external-master-key">کلید اصلی خارجی</a><a href="#sources-and-verification-scope">منابع و دامنهٔ اعتبارسنجی</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>کد باز · روی دستگاه شما اجرا می‌شود</span><a href="../../../../LICENSE">مجوز MIT</a><a href="../notice/">اعلان اپراتور</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">امنیت</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "در انتظار پیام", "Step through a fictional send, edit and delete.": "مرحله‌به‌مرحله یک ارسال، ویرایش و حذف فرضی را دنبال کنید.", "No observations yet. Start the sequence or advance one event.": "هنوز هیچ مشاهده‌ای ثبت نشده است. توالی را آغاز کنید یا یک رویداد را جلو ببرید.", "Meet at 10:00": "ساعت ۱۰:۰۰ ملاقات کنید", "A new message is visible in the chat.": "یک پیام جدید در چت قابل مشاهده است.", "Record 1 appended: the collector observed the original message.": "سند ۱ ضمیمه شد: گردآورنده پیام اصلی را مشاهده کرد.", "Meet at 11:00": "ساعت ۱۱:۰۰ ملاقات کنید", "The current text changes. The earlier observation stays.": "متن فعلی تغییر می‌کند. مشاهدهٔ قبلی باقی می‌ماند.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "رکورد ۲ ضمیمه شد: ویرایش یک مشاهده جدید است. رکورد ۱ همچنان متن اصلی را حفظ می‌کند.", "Message deleted": "پیام حذف شد", "The message has disappeared from the chat view.": "پیام از نمای چت ناپدید شده است.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "سند شمارهٔ ۳ ضمیمه شد: اطلاعیهٔ حذف در کنار هر دو نسخهٔ مشاهده‌شده نگهداری می‌شود.", "0 records": "۰ رکورد", "1 record": "۱ رکورد", "2 records": "۲ رکورد", "3 records": "۳ رکورد", "Complete / {n} of 3": "کامل / {n} از ۳", "Step / {n} of 3": "مرحله / {n} از ۳", "Pause": "وقفه", "Replay sequence": "ترتیب بازپخش", "Play sequence": "پخش توالی", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "مثال ایستا در دسترس است. برای محاسبه هش‌ها به‌صورت تعاملی، این صفحه را از طریق HTTPS یا پیش‌نمایش localhost با پشتیبانی Web Crypto باز کنید.", "No record supplied": "هیچ سندی ارائه نشده است", "Tail removed": "پایان حذف شد", "≠ saved hash": "≠ هَش ذخیره شده", "Rebuilt · different hash": "بازسازی‌شده · هش متفاوت", "= saved hash": "= هَش ذخیره‌شده", "Same length and matching head.": "طول یکسان و سر هماهنگ.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "هر سه هش محاسبه‌شده با هش‌های ذخیره‌شده مطابقت دارند. این نمونه با مرز سه‌رکوردی که حفظ شده است، همخوانی دارد.", "Same saved head; the journal prefix fails verification.": "همان سر ذخیره شده؛ پیش‌وند دفترچه یادداشت در اعتبارسنجی شکست می‌خورد.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "رکورد شمارهٔ ۲ دیگر با هش ذخیره‌شدهٔ خود مطابقت ندارد. بررسی تنها هدر نهایی ذخیره‌شده این مورد را از قلم می‌اندازد؛ اعتبارسنج همهٔ رکوردها را بررسی می‌کند.", "Head differs from the retained checkpoint.": "سر با نقطهٔ کنترل نگه‌داشته‌شده تفاوت دارد.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "هش‌های بازسازی‌شده به هم متصل هستند، اما هِد نهایی تغییر کرده است. نقطه‌کنترل حفظ‌شده این تاریخچه را رد می‌کند. امضاهای اصلی نیز روی رکوردهای تغییر یافته ناموفق خواهند بود.", "Too short: 2 supplied records \u003c 3 retained records.": "خیلی کوتاه: ۲ رکورد ارائه‌شده \u003c ۳ رکورد نگهداری‌شده.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "دو هش باقی‌مانده هنوز با هم مطابقت دارند. نقطهٔ کنترل حفظ‌شده، انتهای گمشده را آشکار می‌کند. بدون آن مرز قبلی، این پیش‌وند کوتاه به‌تنهایی نمی‌توانست حذف را آشکار کند.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "محاسبه هش در این مرورگر در دسترس نیست. فرمول‌ها و توضیحات ثابت زیر همچنان در دسترس هستند.", "{n} records": "{n}یادداشت‌ها", "head {hash}": "سر {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "پذیرفته شد: شمارش افزایش می‌یابد، امضا تأیید می‌شود و کلید مطابقت دارد. شاهد این مرز جدید را حفظ می‌کند.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: پاسخ امضا‌شده تعداد سوابق کمتری نسبت به آخرین نقطهٔ کنترل پذیرفته‌شده گزارش می‌کند. شاهد مشکل را ثبت می‌کند و مرز پذیرفته‌شدهٔ قبلی را حفظ می‌کند.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "فورک: شمارش بدون تغییر است اما سر متفاوت است. شاهد اختلاف را ثبت می‌کند و مرز قبلاً پذیرفته‌شده را حفظ می‌کند.", "No answer": "پاسخ ندارد", "boundary unknown": "مرز نامشخص", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "بدون پاسخ: شاهد چک ناموفق را ثبت می‌کند. این نمی‌تواند وضعیت فعلی گردآورنده را تأیید کند. اگر شاهد همچنان بتواند به Bot API دسترسی پیدا کند و سیاست انتشار آن اجازه دهد، می‌تواند آن خطا را منتشر کند.", "Send {n}": "{n} ارسال کنید", "Edit {n}": "ویرایش {n}", "Delete {n}": "حذف {n}", "Both accounts captured all six expected observations in this example.": "هر دو حساب در این مثال تمام شش مشاهدهٔ مورد انتظار را ثبت کردند.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "حساب B همچنان ۶ از ۶ را ضبط کرد. دو رسید زمان بیشتری بردند. نسبت ضبط و تأخیر رسید به پرسش‌های متفاوتی پاسخ می‌دهند.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "حساب B از میان شش مورد، پنج مورد را تا زمان برش ضبط کرد (۸۳٫۳٪). ویرایش مفقودشده تأخیر قابل‌سنجی ندارد. این نتیجه تنها شش اقدام کنترل‌شده را توصیف می‌کند.", "not observed by cutoff": "توسط نقطه‌برش مشاهده نشده است", "{s} seconds": "{s} ثانیه", "Exact values follow in the table.": "مقادیر دقیق در جدول آمده است.", "{s} s": "{s}s", "Not observed": "مشاهده نشد", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "چهار چت مشاهدات متفاوتی ارائه می‌دهند. سوابق منبع هر ارتباط را دنبال کنید؛ بدون مشخص کردن فرستنده، پست کانال را به کاربر ۷۱۰۰۱ نسبت ندهید.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "سوابق شمارهٔ ۱۴۶ و شمارهٔ ۲۰۵ همان شناسهٔ فرستنده، ۷۱۰۰۱ را ارائه می‌کنند. این امر پست‌های مشاهده‌شدهٔ یک حساب تلگرام را در دو گفتگوی مختلف به هم مرتبط می‌سازد. این اطلاعات هویت یک فرد واقعی را مشخص نمی‌کند و پست کانال را به او نسبت نمی‌دهد.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "مقصد pay.example.invalid/new در رکورد گروه شمارهٔ ۱۴۶، کیبورد بات شمارهٔ ۱۷۳، ویرایش کانال شمارهٔ ۱۸۸ و پیام خصوصی شمارهٔ ۲۰۵ ظاهر می‌شود. یک مقصد تکراری مواد را به هم مرتبط می‌کند؛ اما اثبات کنترل مشترک آن حساب‌ها را نمی‌کند.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "رسیدهای رسانه‌ای تکمیل‌شده شمارهٔ ۱۵۱ و ۲۰۹ در این مورد فرضی مقادیر کامل یکسان SHA-256 دارند. بایت‌های واقعی و سوابق پیام مرتبط با آن‌ها را مقایسه کنید. فایل مطابقت‌یافته سازندهٔ خود را شناسایی نمی‌کند و ثابت نمی‌کند چه کسی آن را ارسال کرده است.", "the encrypted off-site copy": "نسخه رمزگذاری‌شده خارج از محل", "notifications": "اخطاریه‌ها", "checkpoint hashes for timestamps": "هش‌های نقطه‌کنترل برای مهرهای زمانی", "signed checkpoints for the witness": "نقاط کنترل امضا‌شده برای شاهد", "Switched on in this example": "در این مثال فعال شده است", "Optional · off by default": "اختیاری · به‌صورت پیش‌فرض غیرفعال", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "خروج از این دستگاه: اتصال تلگرام و {list}. هیچ چیز دیگر.", "Default: only the Telegram connection leaves this machine.": "پیش‌فرض: تنها اتصال تلگرام از این دستگاه خارج می‌شود.", "{done} of {total} done": "{done} از {total} انجام شده", "Mark step {n} as done": "مرحله {n} را به‌عنوان انجام‌شده علامت‌گذاری کنید", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "کپی", "Copied": "کپی شد", "Command copied.": "فرمان کپی شد.", "Selected — Ctrl/Cmd+C": "انتخاب شده — Ctrl/Cmd+C", "Command selected. Copy it manually.": "فرمان انتخاب شد. آن را به‌صورت دستی کپی کنید.", "Command copied to clipboard.": "فرمان به کلیپ‌بورد کپی شد.", "Select text": "انتخاب متن", "Clipboard unavailable. Command selected; copy it manually.": "پیشخوان کلیپ‌بورد در دسترس نیست. فرمان انتخاب شده است؛ آن را به‌صورت دستی کپی کنید.", "A message arrives. The first observation is saved.": "پیامی دریافت می‌شود. اولین مشاهده ذخیره می‌شود.", "The time changes. Both captured versions stay.": "زمان تغییر می‌کند. هر دو نسخه ضبط‌شده باقی می‌مانند.", "The message disappears. The captured history remains.": "پیام ناپدید می‌شود. تاریخچه ضبط‌شده باقی می‌ماند.", "Pause example animation": "انیمیشن مثال مکث", "Play example animation": "پخش انیمیشن نمونه", "Play": "پخش", "Full-size workspace screenshot": "اسکرین‌شات تمام‌صفحه از فضای کاری", "Workspace screenshot · fictional data": "اسکرین‌شات فضای کاری · داده‌های فرضی", "Close": "بستن", "Close screenshot": "پایان اسکرین‌شات", "Scrollable full-size screenshot": "اسکرین‌شات تمام‌صفحه قابل پیمایش", "Enlarge: {name}": "بزرگ‌نمایی: {name}", "View full size": "نمایش در اندازه کامل"}</script>
+</body></html>

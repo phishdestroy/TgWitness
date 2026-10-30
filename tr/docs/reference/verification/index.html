@@ -1,0 +1,842 @@
+<!doctype html>
+<html lang="tr" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Neler test edildi | TgWitness</title>
+<meta name="description" content="Canlı Telegram testi, otomatik kontroller, tarayıcı kontrolleri ve henüz doğrulanmamış olan unsurlar."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/verification/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="Neler test edildi | TgWitness"><meta property="og:description" content="Canlı Telegram testi, otomatik kontroller, tarayıcı kontrolleri ve henüz doğrulanmamış olan unsurlar.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/tr/docs/reference/verification/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/verification/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/verification/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/verification/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/verification/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/verification/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/verification/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/verification/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/verification/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/verification/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/verification/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/verification/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/verification/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/tr/docs/reference/verification/", "url": "https://phishdestroy.github.io/TgWitness/tr/docs/reference/verification/", "name": "Neler test edildi | TgWitness", "description": "Canlı Telegram testi, otomatik kontroller, tarayıcı kontrolleri ve henüz doğrulanmamış olan unsurlar.", "inLanguage": "tr", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": "https://phishdestroy.github.io/TgWitness/tr/"}, {"@type": "ListItem", "position": 2, "name": "Belgeler", "item": "https://phishdestroy.github.io/TgWitness/tr/docs/"}, {"@type": "ListItem", "position": 3, "name": "Referans", "item": "https://phishdestroy.github.io/TgWitness/tr/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Neler test edildi", "item": "https://phishdestroy.github.io/TgWitness/tr/docs/reference/verification/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">İçeriğe atla</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Belgeler</span></a>
+<nav aria-label="Kılavuzlar"><a href="../../concepts/">Görsel kılavuz</a><a href="../../">Tüm kılavuzlar</a><a href="../">Referans</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Dil"><span aria-hidden="true">◍</span> Türkçe</summary><div class="lang-list"><a href="../../../../docs/reference/verification/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/verification/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/verification/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/verification/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/verification/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="./" hreflang="tr" lang="tr" aria-current="true">Türkçe</a><a href="../../../../ar/docs/reference/verification/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/verification/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/verification/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/verification/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/verification/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/verification/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/verification/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Açık ve koyu tema arasında geçiş yapın"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Kılavuzlar"><a href="../../../guides/modes.html">Modlar, senaryolar ve kanıt düzeyleri</a><p class="nav-label">İlk adımlar</p><a href="../../start/">Birkaç dakika içinde başlayın</a><a href="../../accounts/">Hesap bağla</a><a href="../../proxies/">Bir proxy seçin</a><a href="../../exports/">Dışa aktarma ve doğrulama</a><p class="nav-label">Kanıtları anlamak</p><a href="../../concepts/">Kanıtların nasıl işlediğini görün</a><a href="../../cases/">Tüm sohbetleri inceleyin</a><a href="../../security/">Güvenliği sağlayın</a><p class="nav-label">Daha fazlasını öğrenin</p><a href="../../witness/">Witness botunu kurun</a><a href="../../server/">Çalışır durumda tutun</a><a href="../../troubleshooting/">Neyin yanlış gittiğini bulun</a></nav><nav class="wiki-nav" aria-label="Referans"><p class="nav-label"><a class="nav-label-link" href="../">Referans</a></p><details class="wiki-group"><summary>Kurulum</summary><a href="../quickstart/">Hızlı başlangıç</a><a href="../accounts/">Hesaplar ve oturum biçimleri</a><a href="../connection/">Bağlantı, proxy'ler ve veri koruma</a><a href="../deployment/">Uygulama</a></details><details class="wiki-group"><summary>Topla</summary><a href="../collection/">Veri toplama süreci nasıl işliyor?</a><a href="../operations/">İş akışları ve işlemler</a><a href="../investigation/">Soruşturma modu</a><a href="../features/">Özellikler ve sınırlamalar</a></details><details class="wiki-group"><summary>Kanıt</summary><a href="../how-it-works/">Kanıt sistemi nasıl çalışır?</a><a href="../evidence/">Kanıt formatı</a><a href="../witness/">Bağımsız tanık</a><a href="../timestamp/">Zaman damgaları</a></details><details class="wiki-group" open><summary>Güvenlik ve proje</summary><a href="../security/">Güvenlik ve veri işleme</a><a href="../architecture/">Mimari</a><a href="./" aria-current="page">Neler test edildi</a><a href="../license/">Lisans ve mimari uyumsuzluk bildirimi</a><a href="../notice/">Operatör uyumsuzluğu bildirimi</a><a href="../changelog/">Değişiklik günlüğü</a></details></nav><p class="sidebar-note">v0.7.0<br>Açık kaynak · Kendi makinenizde çalışır</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Kılavuzlar"><a href="../../../">Ana Sayfa</a> <span aria-hidden="true">/</span> <a href="../../">Belgeler</a> <span aria-hidden="true">/</span> <a href="../">Referans</a> <span aria-hidden="true">/</span> <span aria-current="page">Neler test edildi</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Belgelere göz atın</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zinciri, token veya witness&#x27;i deneyin…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Net arama" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Kılavuzları ve referansları aramak için bir kelime yazın. Arama, tarayıcınızda kalır.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Referans / Güvenlik ve proje</p><h1>Neler test edildi</h1><p class="guide-outcome">Canlı Telegram testi, otomatik kontroller, tarayıcı kontrolleri ve henüz doğrulanmamış olan unsurlar.</p><div class="wiki-body"><h2 id="live-telegram-test-whole-account--29-october-2026">Canlı Telegram testi, tüm hesap · 29 Ekim 2026<a class="anchor" href="#live-telegram-test-whole-account--29-october-2026" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Aşağıdaki testin ardından aynı hesap çalışmaya devam etti. 29 Ekim saat 12:10 UTC&#x27;de kapsamı
+tüm hesaba (kanallar, gruplar, özel sohbetler ve botlar) genişletildi; panel
+onay istedi ve imzalı günlük bunu kaydetti. Saat 17:59 UTC itibarıyla günlükte şunlar yer alıyordu:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Kayıt tarihi: 27 Ekim 21:36 – 29 Ekim 17:59 UTC</th>
+<th style="text-align: right;">Sayım</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Günlük kayıtları</td>
+<td style="text-align: right;">9,968</td>
+</tr>
+<tr>
+<td>Yeni mesajlar</td>
+<td style="text-align: right;">5,308</td>
+</tr>
+<tr>
+<td>hesabın tamamına geçişten sonra bunların</td>
+<td style="text-align: right;">3,878</td>
+</tr>
+<tr>
+<td>Silme işlemleri</td>
+<td style="text-align: right;">784</td>
+</tr>
+<tr>
+<td>TgWitness mesajı kaydettikten sonra silinenler</td>
+<td style="text-align: right;">596</td>
+</tr>
+<tr>
+<td>Düzenlemeler</td>
+<td style="text-align: right;">41</td>
+</tr>
+<tr>
+<td>Yeniden kontrollerle eklenen mesajlar</td>
+<td style="text-align: right;">2,273</td>
+</tr>
+<tr>
+<td>Yeniden kontrol sonucunda artık bulunamayan mesajlar</td>
+<td style="text-align: right;">18</td>
+</tr>
+<tr>
+<td>Geçmiş anlık görüntüleri ile kaydedilen mesajlar</td>
+<td style="text-align: right;">242</td>
+</tr>
+<tr>
+<td>Kaydedilen ekler</td>
+<td style="text-align: right;">247</td>
+</tr>
+<tr>
+<td>Toplayıcı başlatılıyor</td>
+<td style="text-align: right;">19</td>
+</tr>
+<tr>
+<td>Telegram FloodWait duraklatılır</td>
+<td style="text-align: right;">26</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>Panelin <strong>Verify</strong> kontrolü, 9.968 kaydın tamamının imzalarını ve hash zincirini doğruladı.</li>
+<li>Mesajlar 2 grup veya kanaldan ve 3 özel sohbet ile botlardan geldi. <strong>Sohbetler</strong> bölümünden bir mesaj düğmesi
+    basıldı; istek ve Telegram&#x27;ın yanıtı günlüğünde yer almaktadır.</li>
+<li>Toplayıcı, yeniden başlatma sırasında hesabı yeniden taradığında yeni sohbetler eklendi.
+    Yeni sohbetlerin önceki mesajlarının kaydedilmesi devre dışıydı (<code>history = 0</code>), bu nedenle bu konuda burada yer almamaktadır.</li>
+</ul>
+<p>Kapsam dışı olanlar: tepkiler, üyelik değişiklikleri, kişi profilleri, mesaj gönderme,
+davet yoluyla katılma, vekiller, bildirimler, witness botu ve aynı anda birden fazla hesap. Genel dosyalar
+yalnızca sayı bilgilerini içerir.</p>
+<h2 id="password-protected-export-opened-with-libarchive--29-october-2026">Şifre korumalı dışa aktarım, libarchive ile açıldı · 29 Ekim 2026<a class="anchor" href="#password-protected-export-opened-with-libarchive--29-october-2026" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Dışa aktarma şifreleme kodu ile oluşturulmuş bir arşiv (WinZip AES-256, 7-Zip ve WinRAR
+tarafından okunabilen format), Windows <code>tar</code> (bsdtar 3.6.2, libarchive) ile açıldı. Doğru şifre girildiğinde
+çıkarılan dosyanın SHA-256 değeri orijinaliyle eşleşti; yanlış şifre girildiğinde ise &quot;Yanlış
+şifre&quot; uyarısı verildi. 7-Zip ve WinRAR programları çalıştırılmadı.</p>
+<h2 id="live-telegram-test--27-to-29-october-2026">Canlı Telegram testi · 27–29 Ekim 2026<a class="anchor" href="#live-telegram-test--27-to-29-october-2026" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Yerleşik API çift havuzu aracılığıyla oturum açılmış tek bir gerçek Telegram hesabı,
+<strong>27 Ekim 21:36 UTC</strong>&#x27;den <strong>29 Ekim 05:15 UTC&#x27;ye kadar</strong> bir süper grubu kaydetti. Toplayıcı,
+bu süre zarfında 12 kez başlatıldı.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Kaydedildi</th>
+<th style="text-align: right;">Sayım</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kalp atışları ve hizmet kayıtları dahil olmak üzere günlük kayıtları</td>
+<td style="text-align: right;">2,385</td>
+</tr>
+<tr>
+<td>Yeni mesajlar</td>
+<td style="text-align: right;">1,291</td>
+</tr>
+<tr>
+<td>Silme işlemleri</td>
+<td style="text-align: right;">472</td>
+</tr>
+<tr>
+<td>TgWitness metni kaydettikten sonra silinenler</td>
+<td style="text-align: right;">347</td>
+</tr>
+<tr>
+<td>Düzenlemeler</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr>
+<td>Durdurulmuşken kaçırılan mesajlar, yeniden kontrol sırasında eklenmiştir</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr>
+<td>Kaydedilen ekler</td>
+<td style="text-align: right;">17</td>
+</tr>
+<tr>
+<td>Ekler indirilmedi (indirme özelliği kapalı veya indirilecek dosya yok)</td>
+<td style="text-align: right;">14</td>
+</tr>
+<tr>
+<td>Telegram FloodWait, yeniden kontroller sırasında her seferinde 3 saniye ara verir</td>
+<td style="text-align: right;">8</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>Toplam 2.385 kaydın imzaları ve hash zinciri, günlüğün
+    açık anahtarıyla doğrulanır.</li>
+<li>Yeniden başlatmanın ardından toplayıcı, kaydedilmiş güncelleme durumundan (<code>pts</code>) devam eder ve Telethon
+    eksiklikleri giderir; ardından yeniden kontrol işlemi, hâlâ eksik olan mesajları ekler.</li>
+<li>Her FloodWait durumunda, toplayıcı istenen süreyi bekledikten sonra işleme devam etti.</li>
+<li>Hesap oturum açık kaldı ve aynı oturum 29 Ekim&#x27;de yeniden bağlandı.</li>
+</ul>
+<p>Bu test kapsamında olmayanlar: aynı anda birden fazla hesap, yönetici rolleri, proxy&#x27;ler,
+birkaç saatten uzun süren kesintiler ve tam <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">canlı kabul prosedürü</a>.
+Halka açık dosyalar yalnızca şu bilgileri içerir: hesap veya sohbet kimlikleri, mesajlar ya da
+kimlik bilgileri bulunmaz.</p>
+<p>Aşağıdaki eski girdiler kendi çalıştırma sonuçlarını açıklamaktadır; bunların çoğunda sentetik test istemcileri kullanılmıştır.
+En son otomatikleştirilmiş sonuçlar aşağıdadır; <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PREPUBLICATION-2026-10-29.md">yayın öncesi denetim,</a>
+önceki temel durumu kaydetmektedir.</p>
+<h2 id="built-in-public-mtproxy-lists--29-october-2026">Yerleşik genel MTProxy listeleri · 29 Ekim 2026<a class="anchor" href="#built-in-public-mtproxy-lists--29-october-2026" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>SoliSpirit/mtproto ve
+zakky8/mtproto-proxy-pro kaynaklarından bir paketlenmiş genel anlık görüntü ve açık HTTPS yenileme eklenmiştir. Bu sunucuda, uygulama indiricisi her iki beslemeyi de
+29 Ekim 2026 tarihinde saat 12:58 UTC&#x27;de başarıyla aldı: filtreleme,
+tekilleştirme ve kaynak başına 64 giriş sınırlamasından sonra <strong>118 benzersiz uyumlu uç nokta</strong>. Bu, liste alımını doğrular;
+bağlantı durumunu veya bu uç noktalar üzerinden mesaj iletimini doğrulamaz. Bu çalışma sırasında listelenen bir proxy’ye
+gerçek bir hesap bağlanmamıştır. <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/PROXIES.md">Operatör ve kullanıcı kılavuzu</a>.</p>
+<p>Başarısız/boş/uyumsuz kaynak yanıtları, önceki girişleri ve tarihleri korur. Güncellemeler
+seçilen rotayı değiştirmez. Genel adresler doğrulanır ve seçildiğinde IP&#x27;ler sabitlenir;
+operatör/manuel rotalar ayrı kalır. Bağlantı testi artık
+hesap girişinden önce panelde kullanılabilir. Sahte TLS ee ve otomatik proxy seçimi
+hala desteklenmemektedir. Operatör kataloğu, abonelikleri tamamen geçersiz kılar.</p>
+<ul>
+<li>Tam test paketi: <strong>366 başarılı, 3 atlandı</strong>, 287,94 saniye. Mevcut bağımlılık uyarıları
+    ve platform atlamaları devam ediyor. Son public-list/yerelleştirme regresyon testi: <strong>36 başarılı</strong>,
+    geçersiz indirme proxy bağlantı noktalarının reddedilmesi dahil; bu, tam test paketiyle örtüşmektedir.</li>
+<li>İngilizce/Rusça dillerinde, açık/koyu modda 390/1440 piksel çözünürlükte tarayıcı uyumluluğu testinden geçmiştir: bir arada sunulan
+    seçenekler, ayarların açılması sırasında harici veri alımı yok, açık yenileme, arızalar sırasında
+    yolların ve önbelleğin korunması, oturum açma öncesi denetimi, geç yanıt durumunda çalışma alanı yalıtımı, kaynak
+    ayrıntıları ve düzen/kontrast. JavaScript hatası veya harici tarayıcı isteği yok.</li>
+<li>13 dilin tümü için nihai statik çeviri kapsamı onaylandı; yeni metin
+    Rusçaya çevrildi ve diğer yerlerde açıkça belirtilmiş İngilizce yedek metinler kullanıldı. Güncellenen yerleşik kılavuz,
+    her iki temada da mizanpaj/kontrast kontrollerinden geçti.</li>
+<li>Ruff ve yayın kontrolleri başarıyla tamamlandı (259 genel dosya, 1.354 yerel bağlantı); güncellendi.
+    Compose ve CI YAML dosyaları ayrıştırıldı. Docker ve uzaktan CI burada çalıştırılmadı.</li>
+<li>Yeniden geliştirilen araç, tek başına kurulum, paket listesi yükleme ve imzalı dışa aktarım
+    doğrulama testlerini geçti. 69 paket kaynağının tamamı çalışma alanıyla eşleşti; kaynak hash değerleri kontrol edildi.</li>
+</ul>
+<p>Makbuzlar: <code>test-results/public-proxy-research/download-receipt.json</code>,
+<code>test-results/public-proxy-research/copy-receipt.json</code>,
+<code>test-results/public-proxies-full-suite.log</code>, <code>test-results/public-proxies-final-focused.log</code>,
+<code>test-results/public-proxies-browser/receipt.json</code> ve <code>test-results/public-proxies-package.log</code>.
+Tarayıcı/hesap/aktarım ayarları sentetiktir; yukarıdaki iki besleme indirme işlemi gerçek HTTPS istekleridir.</p>
+<h2 id="optional-extras-presentation--29-october-2026">İsteğe bağlı ek özelliklerin sunumu · 29 Ekim 2026<a class="anchor" href="#optional-extras-presentation--29-october-2026" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Eski Proof botu sayfası artık <strong>&quot;Extras&quot;</strong> olarak adlandırılıyor: kısa bir genel bakışın ardından
+seçilen seçenek için ayrı bir kurulum sayfası geliyor. Witness formu üç adımdan oluşuyor;
+bağlantı yönetimi, ağ seçenekleri ve dağıtım ayrıntıları ise katlanmış durumda. GitHub
+açıkça planlanmış ve kimlik bilgisi formu bulunmuyor. <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/EXTRAS.md">Rusça genel bakış</a>.</p>
+<ul>
+<li>Yerelleştirme, tanık kurulumu ve yayın denetimleri için 30 odaklanmış testten başarıyla geçilmiştir.</li>
+<li>Chromium kurulum kabul testi, İngilizce/Rusça, açık/koyu modda, 390/1440 piksel çözünürlükte başarıyla geçildi:
+    klavye odağı ve Enter tuşu, ek özellikler seçildiğinde örtük bağlantılar oluşmaması, taslak
+    saklama, sabitlenmiş yapılandırma/token indirmeleri, kilitlendiğinde token silme ve çalışan
+    yerel kılavuz bağlantıları. Mizanpaj ve düz arka plan metin kontrast kontrolleri başarıyla tamamlandı.</li>
+<li>Çalışma alanı geçişi kabul edildi; buna, geçişten sonra gecikmeli olarak gelen
+    token yanıtı da dahildir. Hızlı gezinme özelliği sayesinde bot, kanıt ve GitHub terimleri aracılığıyla ek özelliklere ulaşılabilir;
+    mevcut 320/390/1440 piksel ve Rusça/RTL kontrolleri de başarıyla geçildi.</li>
+<li>Kurulum çalışması sırasında herhangi bir JavaScript hatası veya harici tarayıcı isteği gözlemlenmedi.
+    Bunlar sentetik kullanıcı arayüzü kontrolleri olup, yeni canlı Telegram veya bot yayın kanıtları değildir.</li>
+<li>13 dil ayarının tümü için son dil yükleme ve sözlük kapsamı testleri başarıyla tamamlandı;
+    Rusça dışında açık İngilizce yedek metinler korunmuştur. Genişletilmiş Proof kılavuzu da her iki temada
+    320/768/1440 piksel çözünürlüklerde mizanpaj/kontrast kontrollerinden geçmiştir.</li>
+<li>Yeniden oluşturulan sürüm, izole kurulum ve imzalı dışa aktarım doğrulamasını geçti.
+    Paketlenmiş 67 kaynağın tümü çalışma alanıyla uyumluydu; kaynak arşivinde 253 adet genel erişime açık
+    dosya bulunmaktadır. 1.346 yerel dokümantasyon bağlantısı için kaynak/bağlantı kontrolü başarıyla tamamlandı.</li>
+</ul>
+<p>Makbuzlar: <code>test-results/setup-browser/receipt.json</code>,
+<code>test-results/quick-navigation/receipt.json</code>, <code>test-results/extras-final.json</code>,
+<code>test-results/extras-package.log</code> ve <code>test-results/extras-artifacts.json</code>.
+Ekran görüntülerinde sentetik çalışma alanları kullanılmıştır.</p>
+<h2 id="witness-bot-and-proxy-setup-audit--29-october-2026">Witness botu ve proxy kurulum denetimi · 29 Ekim 2026<a class="anchor" href="#witness-bot-and-proxy-setup-audit--29-october-2026" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Witness kurulumu (artık <strong>Ekstralar → Kanalınızda bir bot</strong>), bağımsız olarak dağıtılmış bir witness hazırlar: sabitlenmiş toplayıcı
+anahtarı, kapsamlı token indirme, kendi kanalı, yayın politikası, HTTP/SOCKS5 rotası ve özel
+Bot API. Bot belirteci tanık sunucusunda kalır. Yeni <code>--check-config</code>, bir ağ bağlantısı açmadan veya anahtar oluşturmadan
+yapılandırmayı ve dosyaları doğrular. JSON
+dosya yolları, yapılandırmanın yanında çözümlenir. Tüm Compose tanık varyantları artık
+HTTP proxy ve Bot API ayarlarını iletir.</p>
+<p>Hesap ayarları, operatör tarafından yönetilen genel bir MTProxy kataloğunu, özel Telegram
+proxy bağlantısı önizlemesini ve mevcut manuel alanları destekler. Katalog yanıtlarında gizli bilgiler yer almaz;
+seçim yapıldığında rota, çalışma alanı kasasına kaydedilir. Eksik veya hatalı biçimlendirilmiş kataloglar durumunda
+manuel rotalar kullanılabilir kalır. Varsayılan olarak hiçbir proje proxy adresi veya barındırılan tanık hizmeti
+oluşturulmaz veya etkinleştirilmez. Bir Caddy örneği, paneli gizli kalan bir toplayıcıya harici bir tanığın ulaşması gerektiğinde yalnızca kapsamlı baş uç noktasını
+gösterir.</p>
+<p>Doğrulama:</p>
+<ul>
+<li>Tam test paketi: <strong>348 test başarılı, 3 atlandı</strong>, 195,81 saniye. Atlamalar, Windows&#x27;un getirdiği kısıtlamalardan
+    kaynaklanmaktadır; mevcut iki bağımlılık kullanımdan kaldırılma uyarısı hâlâ devam etmektedir.</li>
+<li>Son tanık/yapılandırma/sürüm regresyon çalışması: <strong>11&#x27;i geçti, 1&#x27;i atlandı</strong>.
+    Bu, tam test paketiyle örtüşmektedir. Testler arasında yol çözümleme, çevrimdışı ön kontrol,
+    gerçek bir loopback HTTP Bot API fikstürü aracılığıyla imzalama/yayınlama, kaydedilmiş teslimat
+    hatası, kanal jetonu doğrulaması ve proxy gizli anahtarının hariç tutulması yer almaktadır.</li>
+<li>Chromium kurulum onayı, 390/1440 piksel çözünürlükte İngilizce/Rusça dillerinde başarıyla tamamlandı: sabitlenmiş yapılandırma
+    ve token indirmeleri, kilitlendiğinde token temizleme, katalog seçimi, özel bağlantı önizlemesi
+    ardından açık bir şekilde kaydetme, düzen/kontrast ve JavaScript hatası ya da harici
+    tarayıcı isteği yok. Rusça hesap başlığındaki darlık ve oturum açma sekmesindeki taşma sorunu düzeltildi.</li>
+<li>Ruff, kaynak/bağlantı kontrolleri ve Compose/iş akışı YAML ayrıştırması başarıyla geçildi.</li>
+<li>Yeniden geliştirilen araç, izole kurulum, panel/statik kaynak ve API kimlik doğrulama
+    kontrollerinin yanı sıra, doğrudan ve akış yoluyla gerçekleştirilen 32 olaylık sentetik dışa aktarımların bağımsız doğrulamasını da başarıyla geçti.</li>
+</ul>
+<p>Makbuzlar: <code>test-results/setup-full-suite.log</code>, <code>setup-final-focused.log</code>,
+<code>setup-browser/receipt.json</code>, <code>setup-browser-final.log</code> ve <code>setup-package.log</code>.
+Bu kontroller, sentetik hesaplar/proxy&#x27;ler ve yerel bir Bot API fikstürü kullanır. Bunlar,
+gerçek bir bot yayını, çalışan halka açık MTProxy sunucusu, uzaktan CI çalıştırması veya Docker
+dağıtımı olduğunu iddia etmez. Yukarıda tutulan gerçek Telegram gözlem geçmişi, ayrı bir
+delil parçası olarak kalır. <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/WITNESS.md">Kurulum talimatları</a>.</p>
+<h2 id="presentation-and-documentation-review--29-october-2026">Sunum ve dokümantasyon incelemesi · 29 Ekim 2026<a class="anchor" href="#presentation-and-documentation-review--29-october-2026" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Ürün sayfası, erişim ekranı, İngilizce/Rusça README dosyaları ve sunum görselleri artık
+tek bir görsel stile sahiptir. Halka açık ekran görüntülerinde kurgusal demo verileri kullanılmaktadır. Gözden geçirme sürecinde, yukarıdaki
+güncelliğini yitirmiş canlı doğrulama ve kurtarma açıklamaları da düzeltilmiştir.</p>
+<ul>
+<li>Odaklanmış yerelleştirme, site ve yayın testleri: <strong>33&#x27;ü geçildi, 1&#x27;i atlandı</strong>. Atlanan
+    test, bu sunucuda kullanılamayan sembolik bağlantı oluşturulmasını gerektiriyor.</li>
+<li>Tüm dil katalogları, RTL düzeni,
+    açık/koyu temalar, metin kontrastı ve çalışma alanı değiştirme dahil olmak üzere genel Chromium paneli onayı geçti. Profil oluşturma
+    kontrolü artık seçilen çalışma alanını kontrol etmeden önce gerçek HTTP yanıtını bekliyor.</li>
+<li>İngilizce/Rusça erişim ekranları, her iki temada da
+    320, 390, 768, 850 ve 1440 piksel çözünürlüklerde mizanpaj ve kontrast kontrollerinden geçmiştir; gönder düğmesi ilk görüntü alanında kalmaktadır.</li>
+<li>320, 390, 768, 1024 ve 1440 piksel çözünürlüklerde, mesaj
+    geçmişi denetimleri, ekran görüntüsü büyütme/Escape/odak geri dönüşü, klavye sekmeleri, panoya
+    kaydetme reddi, proje alt yolları, hareket azaltma ve JavaScript&#x27;siz yedekleme dahil olmak üzere 320, 390, 768, 1024 ve 1440 piksel çözünürlüklerde kabul edildi. Başarısız
+    varlık istekleri, harici istekler veya JavaScript hataları gözlemlenmedi.</li>
+<li>Yeniden oluşturulan tekerlek, izole kurulum kontrolünden geçti: panel kaynakları ve yerel ayarlar
+    yüklendi, API erişimi kimlik doğrulaması gerektiriyor ve doğrudan/akışlı dışa aktarımlar, 32 sentetik olayın tümünü bağımsız olarak
+    doğruladı. Ruff ve açık kaynak/bağlantı kontrolleri başarıyla geçti.</li>
+</ul>
+<p>Yerel makbuzlar: <code>test-results/design-tests.log</code>, <code>design-panel-final.log</code>,
+<code>design-review-final.log</code>, <code>design-site.log</code> ve <code>design-package/install-receipt.json</code>.
+Bu sunum/belgeleme değişikliği için arka uç paketinin tamamı yeniden çalıştırılmamıştır;
+önceki sonuç, yayın öncesi denetimde yer almaktadır.</p>
+<h2 id="version-061">Sürüm 0.6.1<a class="anchor" href="#version-061" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>0.6.1 sürümü, panel görünümü, başlatıcılar, paketleme ve belgelerde değişiklikler içerir;
+toplama, depolama, imzalama ve dışa aktarma kodunda değişiklik yoktur. Windows 11 / Python 3.12.10
+sürümünde, sabitlenmiş çalışma zamanı ile:</p>
+<ul>
+<li>Tam paket, <strong>2 atlama</strong> ve mevcut Starlette uyarısı ile birlikte <strong>137 testi</strong> geçti.
+    Yeni testler, başlatıcının Ctrl+C komutunu işleme biçimini (sunucuya düzgün bir şekilde durması için 30 saniye süre verilir)
+    ve eyleme geçirilebilir kurulum adımı hatalarını kapsamaktadır.</li>
+<li>Chromium (headless shell 156), <strong>45 genel senaryonun</strong> tamamını ve <strong>35
+    hesap içe aktarma/QR/Oturum Açma Anahtarı senaryosunu</strong> başarıyla geçti; bunlar arasında düz metin kontrast kontrolü,
+    320–1440 px&#x27;te yatay taşma olmaması ve 320/390 px&#x27;te ilk oturum açma alanlarının görünür olması da yer alıyor.
+    Sayfada herhangi bir JavaScript hatası veya harici istek gözlemlenmedi.</li>
+<li><code>python start.py --setup-only</code>, paketi 0.6.1 sürümü olarak yeniden yükledi ve
+    <code>python start.py --check</code> hazır olduğunu bildirdi. Gerçek bir <code>python -m tgwitness --demo</code> sunucusu
+    paneli, stil sayfasını, komut dosyasını, logoyu, kılavuzu ve <code>/api/status</code> 0.6.1 sürümünü döndürdü;
+    kaldırılan <code>workspace.css</code> ise 404 hatası verdi.</li>
+<li><code>Start.cmd</code>, PATH dışında bir Python kurulumu buldu. Kullanılabilir Python bulunmadığından
+    kurulum teklifi gösterildi; basılı kılavuz talimatları reddedildi ve 1&#x27;den çıkıldı.
+    python.org indirme adımı, 3.12.10 kurulum programını aldı ve Python
+    Software Foundation Authenticode kontrolünden geçti; kurulum programı bu ana bilgisayarda çalıştırılmadı.</li>
+<li>Python komutu olmadan <code>start.sh</code>, kurulum ipucunu yazdırdı ve çıktı. 1. <code>scripts\Docker.cmd</code> ve
+    <code>scripts/docker-start.sh</code>, sahte <code>docker</code> yürütülebilir dosyalarına karşı test edildi: doğru çağrı
+    sırası, panel adresi ve token çıktısı; hata durumunda başarı mesajı yok.</li>
+<li><code>python tools/build_portable.py</code>, sabitlenmiş embeddable-runtime sağlama toplamını doğruladıktan sonra
+    18,8 MiB boyutunda bir Windows paketi oluşturdu. Boşluk içeren bir yola açıldığında ve PATH&#x27;te yalnızca
+    <code>C:\Windows</code> dizinleriyle başlatıldığında, gömülü Python&#x27;u <code>TgWitness-Check.cmd</code>&#x27;yi geçti,
+    demoyu (32 olay) ve canlı çalışma alanını sundu; Chromium ise günlüğü ve ayrıntı
+    çekmecesini JavaScript hatası olmadan görüntüledi. Veriler, paketin <code>data</code> klasörüne yazıldı.</li>
+<li><code>python tools/build_preview.py</code>, 110 dosyadan oluşan bir kaynak arşivi oluşturdu.
+    <code>git add</code>&#x27;nin deneme çalıştırmasında, oturum, anahtar, veritabanı, jeton, günlük veya dışa aktarım
+    dosyaları, yerel mutlak yollar ve gizli bilgi içeren dizeler bulunmayan aynı 110 dosya listelendi.</li>
+</ul>
+<p>27 Ekim tarihli bu özel paketleme çalışmasında gerçekleştirilmeyenler: otomatik Python
+kurulumu, Docker derleme/Compose kontrolleri, Linux/macOS çalıştırmaları veya yeni bir canlı hesap
+denemesi. Gerçek Telegram kanıtları yukarıda ve aşağıdaki önceki hesap kontrollerinde
+kaydedilmiştir. CI tanımları tek başına platformun çalışır durumda olduğunu kanıtlamaz.</p>
+<h2 id="version-060">Sürüm 0.6.0<a class="anchor" href="#version-060" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Windows 11 / Python 3.12.10 üzerindeki en son tam sabitlenmiş çalışma zamanı paketi, <strong>135 testi
+1 atlama</strong> ile 26,53 saniyede geçti; mevcut Starlette uyarısı da mevcuttu. Atlanan test,
+POSIX izinlerini gerektiriyor. QR
+görüntüleyicisini hazırlık kontrollerine ve işlem ölçümlerine ekledikten sonra, etkilenen 8 hazırlık/çalışma alanı
+kontrolü de başarıyla geçti.</p>
+<p>Yeni kapsama alanları arasında Telethon şemaları 7/8, Pyrogram şemaları 2/3, eksiksiz JSON
+anahtarları ve yalnızca meta veriler içeren JSON, eşleşen/çakışan hesap dosyaları, TData şifreleri,
+sağlama toplamı tahrifatı ve güvenli olmayan yollar, çevrimdışı/kimlik doğrulamalı bellek içi dönüştürme,
+çevrimiçi hesap kimliği kontrolleri, QR başarısı/2FA/süre dolumu, eski iptal ve hesap
+izolasyonu. TData fikstürleri, şifreleme için ayrı bir AES-IGE uygulaması kullanır.</p>
+<p>Chromium, <strong>45 genel senaryoyu</strong> ve <strong>35 hesap içe aktarma/QR/Oturum Açma Anahtarı senaryosunu</strong> geçmiştir;
+bu süreçte herhangi bir sayfa JavaScript hatası veya harici istek gözlemlenmemiştir. Yeni tarayıcı kontrolleri,
+dört giriş formatının tümünü bir arada kapsıyor: korumalı TData, API meta verileri, QR görüntüleme,
+süre dolumu/yeniden deneme, 2FA, yanlış hesap reddi, kilitleme/çalışma alanı iptali, duyarlı
+düzen ve yeni bir dosya seçimi sonrasında gecikmeli dönüştürme yanıtları.</p>
+<p>Hesap girişi değişikliklerinin ardından her iki tarayıcı paketi de tekrar testi geçti. Canlı kurulumda
+hesap formu açılır; demo modunda ise örnek kayıt defteri açılır. Demo Hesap sayfası,
+canlı başlatma talimatlarını gösterir ve kimlik bilgisi giriş alanlarını gizler.
+320, 390 ve 1440 pikselde yapılan odaklanmış kontroller, sayı alanının ve ana
+düğmenin kaydırma gerektirmeden sığdığını, API alanlarının başlangıçta daraltılmış olduğunu
+ve metin kontrastının okunabilir kaldığını doğruladı. Yakalama ve doğrulama kontrolleri,
+yeni genişletilebilir bölümleri açıldıktan sonra da gizli kalır.</p>
+<p>Doğrudan Oturum Açma Anahtarı akışı, gerçek
+ithalat ve yetkilendirme uç noktaları üzerinden sentetik kimlik bilgileriyle test edildi. Kontroller, eksik anahtarlar, eksik DC,
+hatalı Kullanıcı Kimlikleri, uyuşmayan hesap kimliği, kaydedilmiş API kimlik bilgileri, görünür
+istek ilerlemesi, gizli bilgilerin silinmesi ve düzenlemeler veya yöntem değişikliklerinden sonra geciken yanıtları kapsamaktadır.
+Dört oturum açma yönteminin tümü 320, 390 ve 1440 piksel çözünürlüklerde kontrol edildi. Dosya seçici,
+biçim kılavuzundan önce gelir ve “Bağlan” düğmesi, API ayarları daraltılmış haldeyken
+ilk 844 piksel görüntü alanına sığar. Bu
+kullanıcı arayüzü kabul testinde gerçek bir Oturum Açma Anahtarı yetkilendirme denemesi yapılmadı.</p>
+<p>Panel yenilemesi her iki tarayıcı paketiyle tekrar kontrol edildi: sayfada JavaScript
+hatası veya harici istek gözlemlenmedi. Hesap paketi artık tek bir API kimliği/hash çiftinin yapıştırılmasını,
+alanları değiştirmeden hatalı biçimlendirilmiş veya birden fazla çiftin reddedilmesini,
+yalnızca meta veriye dayalı kılavuzluk ve oturum açma yönteminin değiştirilmesi veya
+kimlik bilgilerinin manuel olarak düzenlenmesinden sonra geçerliliğini yitirmiş içe aktarma yanıtlarının göz ardı edilmesini kapsamaktadır. Kurulum kılavuzu, açık başlatma/duraklatma, boş arama kurtarma ve son
+bağlantı/yerel kılavuz düzeni ile 320, 390 ve 1440 pikselde sağlam metin kontrastı için
+altı ek odaklanmış kontrol başarıyla geçildi.
+Doğrudan oturum açma güncellemesi, tek bir telefon/kod isteği işlemi ekler ve
+telefon, QR ve oturum açma için mevcut çalışma alanındaki kaydedilmiş API çiftini yeniden kullanır. Yukarıdaki tam Python
+paketi, yeni kalıcılık, kısmi kimlik bilgisi reddi ve çalışma alanı
+izolasyonu testlerini içerir. Tarayıcı kontrolleri, doğrudan telefon girişi, kaydedilmiş kimlik bilgilerinin yeniden kullanımı,
+yalnızca meta veriye dayalı yönlendirme, tek tuşla dosya yetkilendirme ve yinelenen hesap reddi konularını kapsamaktadır.
+Basitleştirilmiş panel jetonu ve telefon formları da 320, 390 ve 1440 piksel çözünürlüklerde
+başlangıçta kaydırma yapılmadan kontrol edildi. Bir uyumluluk kontrolü, doğrudan telefon formunun
+eski bir işlem hala çalışırken önceki yapılandırma/kod uç noktalarını kullanabileceğini doğruladı.</p>
+<p>Kullanıcı tarafından sağlanan bir hesap, genel test düzenekleri dışında ayrı olarak kontrol edildi.
+Telethon, Pyrogram ve TData girdileri aynı yetkilendirmeye karşılık geldi;
+eşlik eden JSON dosyası API kimlik bilgilerini sağladı. Dört dosyanın tümü
+0.6.0 paneli aracılığıyla yüklendi ve Telegram, beklenen sayısal hesap kimliğini doğruladı. Kaynak dosyalar
+değişmeden kaldı. Hiçbir kaynak seçilmedi ve gözlem özelliği kapalı kaldı. Bu,
+canlı veri toplama, kurtarma veya kapasite değil, yalnızca bir içe aktarma/giriş örneğini oluşturur.</p>
+<p>Telegram ayrıca gerçek bir QR jetonu da yayınladı; bu jeton taranmadan iptal edildi.
+QR onayı ve 2FA akışlarının tamamı sentetik istemcilerle test edildi; gerçek bir Telegram uygulamasına karşı mobil
+onay ise ayrı bir kabul adımı olarak kalmaktadır.
+Halka açık dosyalarda gerçek hesap tanımlayıcıları, gizli bilgiler veya ekran görüntüleri yer almamaktadır.</p>
+<p>Başlatıcı güncellemesi tamamlandı; kaynak, yüklü meta veriler ve hazırlık işaretçisi
+0.6.0 raporunda, qrcode 8.2 ve geçerli <code>pip check</code> değerleriyle belirtilmiştir. Yüklü tekerlek,
+panele ve kılavuza hizmet etti, kimliği doğrulanmamış API isteklerini reddetti ve bağımsız olarak
+doğrudan ve akış halinde 32 olaylık sentetik dışa aktarımları doğruladı. Güncellenen çevrimdışı kılavuz
+320, 390 ve 1440 piksel çözünürlüklerde kontrol edildi. Halka açık ekran görüntüleri sentetik olmaya devam ediyor.</p>
+<p>Kaynak sürüm, izin listesine alınmış 107 dosya içerir. Yerel dokümantasyon bağlantıları çalışır durumdadır.
+Docker/Caddy çalıştırma, uzaktan CI/paket yayınlama, ARM64 çalışma zamanı, sürekli
+veri toplama ve tam canlı Telegram kabul matrisi burada henüz desteklenmemektedir.</p>
+<h2 id="version-051">Sürüm 0.5.1<a class="anchor" href="#version-051" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Windows 11 / Python 3.12.10 üzerinde, tam proje ortamı paketi başarılı oldu:
+<strong>94 test başarılı, 2 atlandı</strong>, 31,21 saniyede tamamlandı; mevcut Starlette uyarısı ile.
+Atlanan testler, bu ana bilgisayarda mevcut olmayan POSIX izinleri ve sembolik bağlantı oluşturma gerektiriyor.
+İndirme HTTP fikstürü bir istek iş parçacığı tanılama çıktısı verdi; tüm doğrulamalar
+başarılı oldu. Bu çalıştırma, ana bilgisayarda aktarım sorunlarının bulunmadığını garanti etmez.</p>
+<p>Yeni regresyon kapsamı çalışmaları, StringSession, kod ve 2FA hesap
+değişikliklerini reddetti, kimlik aramasını iptal etti, bekleyen oturum açma iptallerini ve aktif, reddedilmiş,
+yerine geçirilmiş ve deneme istemcilerindeki kayıtlı işleyiciler aracılığıyla yapılan güncellemeleri
+kapsam dışına aldı. Yalnızca
+aktif toplayıcı olaylara katkıda bulunur; kaydedilmiş kimlik bilgileri ve imzalı geçmiş
+bozulmadan kalır. Diğer yeni kontroller arasında, veritabanının yeniden açılmasından sonra Unicode araması,
+Coverage’a izleme politikası sınırlarının dahil edilmesi ve açık kaynak paketleme hariç tutmaları yer almaktadır.</p>
+<p><code>pythonw.exe</code> adlı asıl proje, izole edilmiş bir sentetik panel başlattı,
+HTTP 200 yanıtı verdi ve başlangıç tanılama bilgilerini <code>logs/server.log</code>&#x27;de sakladı. Günlük dosyasında,
+oluşturulan panel jetonu veya HTTP erişim kayıtları yer almıyordu. Test, yalnızca
+kendi sentetik sürecini sonlandırdı. Görev Zamanlayıcı’da herhangi bir görev kaydedilmedi; oturum açma/kapatma,
+uyku modu ve hizmet kurtarma ayrı yeterlilikler olarak kalmaktadır.</p>
+<p>Chromium kabul testi <strong>45 senaryoyu</strong> başarıyla geçti; sayfada JavaScript hatası gözlemlenmedi ve
+harici istek de tespit edilmedi. Yeni kontroller arasında 601/768/850 piksel zaman çizelgesi tarih ve
+saatleri, durum güncellemesi sırasında ek taslakları, kaydetme sırasında yapılan yeni düzenlemeler,
+hesap değiştirme sırasında silinen doğrulama sonuçları, başka bir sayfaya geçip geri döndükten sonra
+geciken doğrulama yanıtları ve yeni olaylar geldiğinde belirgin doğrulama sınırları yer almaktadır.
+Arama simgesi/metin aralığı da düzeltildi ve tarayıcı paketi yeniden çalıştırıldı.</p>
+<p>Tarayıcı çalıştırmasında, <code>.venv</code>&#x27;deki sabitlenmiş çalışma zamanı ve mevcut sistem tarafından sağlanan
+Playwright 1.62.0/Chromium kullanıldı; bunlar, içe aktarma yolundaki proje ortamının sonuna eklendi.
+Playwright&#x27;ın yavaş
+indirme işlemi sırasında isteğe bağlı bir geliştirme bağımlılığı yüklemesi durduruldu; yeni bir tarayıcı aracı sürümü onaylanmadı. Normal bir
+<code>python start.py --setup-only</code> işlemi, uygulama yükseltmesini tamamladı. Kaynak, yüklü
+meta veriler ve başlatıcının işaretçisi 0.5.1 sürümünü bildirdi; <code>pip check</code> testi başarılı oldu. Hazırlık kontrolleri,
+beklenen yerel kasa anahtarı uyarısını koruyarak, yeni ve kullanılmamış bir yolda başarılı oldu.</p>
+<p>0.5.1 sürümü ayrı olarak kuruldu ve temel testlerden geçirildi: tüm panel/kılavuz öğeleri
+sunuldu, kimlik doğrulaması yapılmamış API erişimi reddedildi ve hem doğrudan hem de akış yoluyla
+alınan 32 olaylık kanıt ZIP dosyaları bağımsız doğrulamadan geçti. Yüklenen paketteki
+uygulama dosyaları kaynak kodla karşılaştırıldı. Halka açık kaynak arşivi,
+açık bir dosya türü izin listesi kullanır ve bağlantılı kaynak dosyalarını reddeder; kaynak dizinlerinin içine yerleştirilen
+çalışma zamanı materyalleri regresyon testleri tarafından hariç tutulur.</p>
+<p>Kod düzeltme çalışması sırasında, açık kaynak seçimi ve Git aday kümesi
+86 dosya içeriyordu; bunlara çalışma zamanı veri dizinleri dahil değildi. Tanınabilir özel anahtar, GitHub jetonu,
+Telegram bot jetonu ve StringSession kalıpları için yapılan taramada hiçbir eşleşme bulunamadı. Bu, sınırlı bir
+kalıp kontrolüdür; kapsamlı bir gizli bilgi denetimi değildir. Yoksayma kuralı denetimleri, on iki
+yaygın hesap/veri/dışa aktarma öğesini kapsamaktadır. İş akışı/sorun/Compose YAML ve Windows
+görev komut dosyası başarıyla ayrıştırılmıştır. Yerel belgeleme bağlantıları çözümlenmiştir.</p>
+<p>27 Ekim tarihli incelemeden elde edilen yedi bulgunun tümü ele alınmıştır. GitHub
+iş akışı yürütme, Linux/macOS/Docker çalışma ortamı, gerçek Telegram, harici proxy/TSA
+birlikte çalışabilirliği ve sürekli yük testi, bu yerel çalıştırmanın kapsamı dışında kalmaktadır.
+Herhangi bir depo yayını, hizmet kaydı veya gerçek hesap toplama işlemi
+gerçekleştirilmemiştir.</p>
+<h3 id="english-documentation-update">İngilizce dokümantasyon güncellemesi<a class="anchor" href="#english-documentation-update" aria-label="Bu bölüme bağlantı">#</a></h3>
+<p>README dosyası, hesap/oturum referansı, veri toplama iş akışı ve pakete dahil kılavuz artık
+desteklenen girdileri, çalışma alanı davranışını, olay politikalarını ve dışa aktarım formatlarını
+İngilizce olarak açıklamaktadır. Üç adet halka açık ekran görüntüsü, sentetik veriler kullanılarak güncellendi.
+Bu noktada, açık kaynak seçkisi, iki yeni kılavuz da dahil olmak üzere 88 dosya içeriyordu.
+23 Markdown belgesindeki 131 yerel bağlantının tümü çalışır durumda.</p>
+<p>Arayüz ve kılavuz düzenlemelerinin ardından, Chromium kabul testi yine tüm
+45 senaryoyu başarıyla geçti; sayfalarda JavaScript hatası veya harici istek gözlemlenmedi.
+Bu dokümantasyon ve sunum güncellemesi için tam Python test paketi yeniden çalıştırılmadı;
+yukarıdaki 94 başarılı test sonucu, önceki kod düzeltme çalıştırmasına aittir.</p>
+<p>Yeniden oluşturulan tekerlek, yeni ve izole edilmiş bir hedefe kuruldu. Panel ve kılavuz
+varlıkları başarıyla işlev gördü, kimliği doğrulanmamış API erişimi reddedildi ve hem
+doğrudan hem de akışlı dışa aktarımlar, 32 sentetik olaydan oluşan bağımsız doğrulama sürecini geçti.</p>
+<h3 id="installation-and-deployment-update">Kurulum ve devreye alma güncellemesi<a class="anchor" href="#installation-and-deployment-update" aria-label="Bu bölüme bağlantı">#</a></h3>
+<p>Odaklanmış yükleyici, paketleme ve hazırlık kontrolleri <strong>14 testi</strong> geçti;
+kullanılamayan sembolik bağlantı oluşturma nedeniyle bir test atlandı. Yerel sarmalayıcı kontrolleri,
+boşluk içeren yollar, argüman iletimi, kurulum/demo modları ve sıfırdan farklı çıkış yayılımını kapsar.
+Git Bash kontrolleri, simüle edilmiş bir arka plan hizmeti ile Docker kabuk yardımcısını test eder; bu testler arasında
+eksik Docker, eksik Compose, başarısız durum kontrolü beklemesi ve başarılı alternatif bağlantı noktası
+başlatma yer alır. Bu simüle edilmiş kontroller, Docker çalışma zamanı uyumluluğunu doğrulamaz.</p>
+<p>Tam bir açık kaynak kopyası, yolunda boşluklar bulunan yeni bir Windows dizinine
+yüklendi. <code>scripts\Setup.cmd</code> yeni bir ortam oluşturdu ve
+sabitlenmiş çalışma zamanını yükledi; <code>Start.cmd --check --json</code>, hedef veri
+dizini oluşturmadan hazır olduğunu bildirdi. <code>pip check</code> testi geçti. Yeniden derlenen tekerlek, doğrudan ve akışlı 32 olay dışa aktarımları da dahil olmak üzere
+yüklü paket kontrolünü de geçti.</p>
+<p>Shell sözdizimi ve beş iş akışı/Compose YAML dosyası ayrıştırıldı. Kaynak ve resim Compose
+yapılandırmaları, depolama ve çalışma zamanı ayarları açısından uyumludur. Bu aşamada, 23 Markdown belgesindeki toplam 139 yerel
+bağlantı çözümlendi. Açık kaynak seçkisi 99 dosya içermektedir.</p>
+<p>CI tanımları artık Windows/Linux/macOS üzerinde yeni yerel kurulum, konteyner
+yeniden oluşturulması sırasında Compose&#x27;un çalışırlığı/erişim kontrolü/kalıcılığı ve Caddy yapılandırmasını uyguluyor.
+Sürüm iş akışı, yayınlamayı bu kontrollerden geçirme şartına bağlıyor ve öykünülmüş bir ARM64
+hızlı testi ekliyor. Docker bu ana bilgisayarda kullanılamıyor: gerçek Compose/Caddy çalıştırması,
+sertifika düzenleme, ARM64 çalıştırması ve uzaktan iş akışı/paket yayınlama
+yerel olarak hâlâ desteklenmiyor. Uygulama/kullanıcı arayüzü kodu bu güncellemeyle değişmedi;
+önceki tam Python ve tarayıcı testleri yeniden çalıştırılmadı.</p>
+<h2 id="version-050">Sürüm 0.5.0<a class="anchor" href="#version-050" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Tam sabitlenmiş çalışma zamanı paketi başarılı oldu: <strong>81 başarılı, 1 atlandı</strong>, 22,00 saniyede,
+mevcut Starlette uyarısı ile. POSIX izin kontrolü,
+Windows&#x27;ta atlanmaktadır. Yeni işleyici testleri, mesajları, düzenlemeleri, kapsamlı/kapsam dışı silme işlemlerini,
+tepkileri, katılımcı güncellemelerini ve üyelik hizmeti mesajlarını farklı
+politikalar aracılığıyla gönderir. Devre dışı bırakılan kategoriler, karşılık gelen canlı gözlemler üretmez; kapsam
+tanılama ve açık anlık görüntüler kullanılabilir durumda kalır. Testler, kalıcı ilkeyi,
+çalışma alanı ayrımını, denetim kayıtlarından önce/sonra imzalanmış kayıtları, değişmemiş ilke davranışını,
+sıkı doğrulamayı ve bir sonraki işlem makbuzuna dahil edilmeyi doğrular.</p>
+<p>Demo giriş testleri, bu aracın yeteneklerinin yapılandırılmış panel jetonundan farklı olduğunu,
+canlı bir çalışma alanını yetkilendiremediğini, toplama ayarlarını değiştiremediğini ve
+uzaktan, yönlendirilmiş, kaynaklar arası veya geçersiz ana bilgisayar istekleri için
+verilmediğini veya kabul edilmediğini doğrular.
+Açıkça belirtilen bir demo bayrağı olmadan saklanmış bir demoyu açmak, otomatik girişi etkinleştirmez.</p>
+<p>Chromium kabul testi, token girişi olmadan yerel demo girişi,
+izleme ön ayarları, kaynak seçiminden politikaya geçiş,
+hesap başına bağımsızlık ve masaüstü/320/390 piksel düzeni ile metin kontrastı kontrolleri dahil olmak üzere <strong>39 senaryoyu</strong> geçmiştir.
+Sayfada JavaScript hatası görülmedi. Sunucunun AdGuard tarafından eklenen istekleri
+kayıtlarda yer almaktadır. İndirme HTTP fikstürü, bir istemcinin
+bağlantısını kapatmasının ardından bir bağlantı sıfırlaması kaydetti; doğrulamalar yine de başarılı oldu. Bu, canlı hizmet sonucu değildir.</p>
+<p>Normal başlatıcı, izole ortamı 0.5.0 sürümüne yükseltti; kaynak ve yüklü
+sürümler birbiriyle uyumlu ve pip kontrolü başarılı oldu. Mevcut gizli kasa şifreleme, hatalı/eksik
+anahtar reddi ve imza/medya tahrifat kontrolleri, tam test paketinde başarılı oldu. Mesaj içeriği veya ekler için yeni bir
+uygulama şifreleme özelliği iddia edilmiyor.</p>
+<p>Güncellenen kullanıcı arayüzünün kullanılabilir hale gelmesi için yerel demo yeniden başlatılır. Mevcut sentetik
+kayıtlar korunur; eski arka plan demo sürecinin durdurulması, bir sonraki başlatmada çevrimdışı
+bir sınır oluşturur. Bu kontroller için gerçek bir Telegram oturumu kullanılmaz.</p>
+<p>Çalışır durumdaki localhost:8787 paneli, 0.5.0 sürümünü, otomatik demo erişimini,
+beş izleme kontrolünü ve saklanan 33 sentetik günlük olayını gösterdi. Ayrı olarak
+yüklenen 0.5.0 wheel, tüm panel/kılavuz varlıklarını sundu, kimliği doğrulanmamış API
+erişimini reddetti ve hem doğrudan hem de akışlı
+indirme yardımcısı aracılığıyla doğrulanmış 32 olaylık bir ZIP dosyası oluşturdu. Çalışma zamanı paket sürümleri, 0.4 sürümünde kaydedildiği gibi sabitlenmiş durumda.</p>
+<h2 id="version-040">Sürüm 0.4.0<a class="anchor" href="#version-040" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Tam sabitlenmiş çalışma zamanı paketi başarılı oldu: <strong>78 başarılı, 1 atlandı</strong>, 19,77 saniyede.
+Atlanan kontrol POSIX izinleri gerektirir; üst akış Starlette TestClient
+kullanımdan kaldırılma uyarısı devam etmektedir. Yeni testler, akışlı indirme/çalışma alanı yönlendirmesini,
+yetkilendirme başlıklarını, üzerine yazma reddini, yönlendirmeleri, kesik yanıtları,
+ilan edilen/gerçek boyut sınırlarını, sınırlı okumaları, temizleme işlemlerini, sabit
+bağlantıları olmayan dosya sistemlerini, hazırlık hatalarını ve paket yüklememesi gereken başlatıcı modlarını kapsamaktadır.
+Dışa aktarma testleri, çalışma alanı yerel geçici dosyaları ve seçici yetim dosya temizliğini doğrular.</p>
+<p>Chromium kabul testi, sayfa JavaScript hatası olmaksızın listelenen 36 senaryonun tamamını başarıyla geçti.
+Simüle edilmiş telefon/kod/2FA oturum açma işlemleri, dönüştürülmüş oturumlar, iki çalışma alanı ve ayrı
+yollar/durumlar, gözlemler, imzalar, kontrol noktaları ve zaman damgası istekleri ile aşağıdakileri de test eder:</p>
+<ul>
+<li>Masaüstü ve 320/390 piksel düzenleri, yatay taşma olmaması, görünür gezinme menüsü
+    ve ilk 844 piksel görüntü alanında ilk oturum açma alanı.</li>
+<li>WCAG AA metin eşiklerine uygun, düz arka plan üzerinde metin kontrastı. Engelli kontrolleri,
+    opasite ve resim/gradyan arka planlar hariç tutulmuştur; bu, tam bir WCAG denetimi değildir.</li>
+<li>Sahte bir OS dosya seçici/yazılabilir aracılığıyla yazılmış gerçek bir yerel dışa aktarma yanıtı,
+    ardından bağımsız ZIP doğrulaması; iptal edildiğinde dışa aktarma isteği gönderilmez.</li>
+<li>Yazma hatası, hedefi iptal eder; 128 MiB yedekleme, eşleşen bir yük tahsis etmeden aşırı büyük
+    ilan edilmiş yanıtı reddeder.</li>
+<li>Masaüstü ve her iki dar ekran genişliği için İngilizce yerel kılavuz.</li>
+</ul>
+<p>İşletim sistemi kaydetme iletişim kutusu ve gerçekte birkaç gigabaytlık tarayıcı kayıtları otomatikleştirilmemiş veya
+doğrulanmamıştır. Python indirme testlerinde sınırlı parçalar ve döngü geri besleme düzenekleri kullanılmaktadır. Gerçek Telegram ile tam
+dağıtım kabulü ayrı bir konudur.</p>
+<p>Normal yükleyici, <code>.venv</code>&#x27;yi 0.4.0 sürümüne yükseltti. Kaynak ve yüklü meta veriler birbiriyle uyumludur;
+<code>pip check</code> testi geçti. <code>python start.py --check --json</code>, veri dizini oluşturmadan yeni bir
+sentetik yolda hazır olduğunu bildirdi. Yerel anahtar depolama uyarısı
+doğru şekilde devam ediyor: günlükler/medya, uygulama tarafından şifrelenmiyor.</p>
+<p>0.4.0 sürümü derlendi ve ayrı bir dizine kuruldu. 23 uygulama dosyasının tamamı
+kaynak dosyayla bayt bayt eşleşmektedir. Yüklenen paket, paneli ve
+İngilizce kılavuzu/varlıkları sunmuş, kimliği doğrulanmamış API erişimini reddetmiş ve doğrulamadan geçen sentetik
+32 olaylık bir ZIP dosyası dışa aktarmıştır. Akış indirme komutu ayrıca,
+çalışır durumdaki yüklü uygulamadan bağımsız olarak doğrulanmış bir ZIP dosyasını da almıştır.</p>
+<p>Genel belgeler ve yerel kılavuz İngilizce; yerel belge bağlantıları
+çözülür. PowerShell, Windows görev şablonunu, Python ise macOS
+plist dosyasını ayrıştırdı. Bunlar sözdizimi denetimleridir, hizmet yürütme değildir. Hiçbir görev/hizmet kaydedilmedi.
+CI yapılandırması artık hazırlık denetimlerini içeriyor ancak uzaktan CI burada çalıştırılmadı.</p>
+<p>0.4 tarayıcı çalıştırmasında yine AdGuard enjeksiyonu ve Windows asyncio
+socket-cleanup OSError 10022 gözlemlendi. Tarayıcı doğrulamaları başarılı; bu ortam
+gözlemleri, sabit bir uygulama davranışı olarak değerlendirilmek yerine kaydedildi.
+İlk OpenSSL/tarayıcı/pip sanal alan denemeleri başarısız oldu; başarılı olan
+denemelerde sanal alan dışında onaylanmış yürütme kullanıldı.</p>
+<h2 id="version-031-focused-readiness-fixes">0.3.1 sürümü, hazırlık aşamasındaki düzeltmelere odaklanmıştır<a class="anchor" href="#version-031-focused-readiness-fixes" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Etkilenen başlatıcı, kanıt/depolama ve API kontrolleri: 31&#x27;i başarılı,
+1&#x27;i atlandı, bir adet Starlette uyarısı. Atlanan kontrol, POSIX
+dizin izinlerini doğrular ve bu Windows sunucusunda söz konusu izinleri sağlayamaz.
+Eski Python testi, sürüm/ithalat sınırını simüle eder; Python 3.10 yorumlayıcısı
+yüklenmemiş veya onaylanmamıştır. Daha önce başarılı olan 0.3 test paketi aşağıda kaydedilmiştir;
+bu odaklanmış değişiklikler için test paketinin tamamı ve tarayıcı senaryoları yeniden çalıştırılmamıştır.</p>
+<p>Normal başlatıcı, yerel ortamı 0.3.1 sürümüne yükseltti; kaynak ve yüklü
+meta veriler birbiriyle uyumlu ve pip kontrolü başarılı oldu. Ayrı olarak yüklenen 0.3.1 wheel sürümü,
+panel/assets&#x27;i sundu, kimliği doğrulanmamış API erişimini reddetti ve doğrulanmış
+32 olaylık sentetik bir dışa aktarım oluşturdu. İş akışı YAML dosyası ayrıştırıldı, ancak yeni konteyner çalışma zamanı
+kontrolü yürütülmedi: kullanılabilir yerel Docker/Podman/Linux çalışma zamanı mevcut değildi.</p>
+<p>Kullanılabilirlik, canlı hizmet ve
+platform eksiklikleri konusunda <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/READINESS.md">hazırlık bulgularına</a> bakınız. Bu yama, ek işletim sistemlerini desteklemez.</p>
+<h2 id="version-030">Sürüm 0.3.0<a class="anchor" href="#version-030" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Tam sabitlenmiş çalışma zamanı paketi <strong>61 testi</strong> geçti; bunlardan birinde, Starlette
+TestClient&#x27;ın kullanımdan kaldırılacağına dair bir uyarı vardı. Çalışma zamanı meta verileri, TgWitness 0.3.0 ve
+python-socks 2.8.2 sürümlerini bildiriyor; pip kontrolü başarılı oldu. Tarayıcı uyumluluk testi,
+sayfada herhangi bir JavaScript hatası olmadan başarıyla tamamlandı.</p>
+<p>0.3.0 sürümü derlendi ve ayrı bir paket dizinine kuruldu. Bu sürüm,
+panele ve varlıklara hizmet verdi, kimliği doğrulanmamış bir API isteğini reddetti ve bağımsız doğrulamadan geçen
+32 olaylık sentetik bir günlüğü dışa aktardı. Yerel belgelerdeki
+bağlantılar çalışır durumda. MTProxy çıplak anahtar normalleştirme düzeltmesinden sonra, dokuz
+bağlantı/güvenlik testinin tamamı başarıyla yeniden çalıştırıldı.</p>
+<p>Yeni kapsama dahil olanlar:</p>
+<ul>
+<li>Gerçek loopback test sunucuları üzerinden SOCKS5 kullanıcı adı/şifre ve HTTP CONNECT;
+    yapılandırılmış bir proxy çalışmazsa, hedef sunucuya yönlendirilmek yerine hata verir.</li>
+<li>Proxy doğrulama, MTProxy aktarım seçimi, sahte TLS şifrelerinin reddedilmesi,
+    kalıcılık, çalışma alanı yalıtımı, gözlem sırasında yapılan değişikliklerin reddedilmesi ve API durumu ile imzalı olaylardan
+    gizli bilgilerin hariç tutulması.</li>
+<li>Sentetik Telethon SQLite şemaları 7 ve 8&#x27;in salt okunur dönüştürülmesi; değişmemiş
+    kaynak hash değeri; diğer biçimlerin, SQL görünümlerinin ve bekleyen bir WAL dosyasının reddedilmesi.</li>
+<li>Harici kasa ana anahtarı: farklı türetilmiş çalışma alanı anahtarları, başarılı yeniden açma,
+    yanlış/eksik anahtar reddi ve mevcut yerel kasaların örtük olarak taşınmaması.</li>
+<li>Tarayıcı proxy ayarları, kimlik bilgilerinin silinmesi, depolama koruması açıklaması,
+    mobil bağlantı sayfası, dönüştürülmüş oturum dosyası yetkilendirme, ayrı rotalar
+    ve sahte bir Telegram istemcisi kullanılarak daha önce ele alınan tüm toplama/dışa aktarma senaryoları.</li>
+</ul>
+<p>Geliştirme aşamasında, bir loopback testi eşin kapanmasını süresiz olarak bekledi; başka bir
+çalışmada ise el sıkışma işleminden sonra Windows bağlantısının sıfırlandığı gözlemlendi. Artık test düzeneği
+tüm veri alışverişini sınırlandırıyor ve tamamlanmış bir el sıkışma işleminden sonraki EOF/sıfırlamayı bağlantı
+kapanışı olarak değerlendiriyor. El sıkışma/kimlik doğrulama onayları hâlâ zorunludur. Bu durum,
+gerçek proxy sağlayıcılarını kapsamaz veya Telegram aktarımında sabit bir kusur olduğu anlamına gelmez.</p>
+<p>Aşağıda açıklanan AdGuard istek gözlemi hâlâ geçerlidir. Gerçek bir Telegram
+hesabı, SOCKS/HTTP proxy dışında veya canlı bir MTProxy sunucusu kullanılmamıştır. MTProxy
+deneysel bir araçtır ve seçilen seçenekleri/gizli anahtar doğrulaması kontrol edilmiştir, ancak
+canlı ortamda çalışabilirliği test edilmemiştir. Yeni harici anahtar ve oturum dönüştürme komutları
+yalnızca sentetik gizli anahtarlarla test edilmiştir. Linux/macOS/Docker platformları bu konuda henüz test edilmemiştir.</p>
+<p>Aşağıdaki 0.2 sürümüne ait verim ölçümü tekrarlanmamıştır ve 0.3 sürümü için yeni bir çoklu hesap/proxy karşılaştırma ölçütü
+olarak sunulmamalıdır.</p>
+<h2 id="version-020-baseline">0.2.0 sürümü temel versiyonu<a class="anchor" href="#version-020-baseline" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Windows üzerinde Python 3.12.10 ile test edilmiştir. Gerçek bir Telegram hesabı bağlanmamıştır.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Kontrol et</th>
+<th>Sonuç</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Python paketi</td>
+<td>Geliştirme ortamında 52 test başarılı, sabitlenmiş çalışma zamanında 52 test başarılı; her çalıştırmada bir adet Starlette TestClient&#x27;ın kullanımdan kaldırılacağına dair uyarı</td>
+</tr>
+<tr>
+<td>JavaScript sözdizimi</td>
+<td>Node.js ile geliştirilmiştir</td>
+</tr>
+<tr>
+<td>Chromium uyumluluğu</td>
+<td>Onaylandı; sayfada JavaScript hatası yok</td>
+</tr>
+<tr>
+<td>Masaüstü/mobil düzeni</td>
+<td>1440 × 1060 ve 390 × 844 çözünürlüklerde kontrol edilmiştir; yatay yönde belge taşması yoktur</td>
+</tr>
+<tr>
+<td>HTML biçiminde mesaj içeriği</td>
+<td>Metin olarak görüntülenmiştir; eklenen komut dosyası çalıştırılmamıştır</td>
+</tr>
+<tr>
+<td>Örnek hesap akışı</td>
+<td>API kimlik bilgileri → telefon → kod → 2FA → grup seç → başlat → anlık görüntü → duraklat → yeniden yükle</td>
+</tr>
+<tr>
+<td>Tarayıcıda kanıt</td>
+<td>Düzenleme karşılaştırması, silme işleminden önceki içerik, filtreler, ZIP indirme, kontrol noktası, imzalı işlem makbuzu, RFC 3161 isteği indirme ve kontrol noktası bağlama</td>
+</tr>
+<tr>
+<td>Çoklu hesap</td>
+<td>Ayrı günlükler, anahtarlar, kaynaklar ve canlı durumlar; tarayıcı değiştirildiğinde diğer toplayıcı çalışmaya devam eder; yeniden başlatma sonrasında çalışma alanları yeniden açılır; yinelenen hesaplar ve hesap yeniden atamaları reddedilir</td>
+</tr>
+<tr>
+<td>Kriptografik hatalar</td>
+<td>İmzalı alanlar değiştirildi, imzalanmamış alanlar eklendi, yanlış anahtar, bozuk arşiv öğesi, değiştirilmiş/eksik medya, kontrol noktasında tespit edilen kesinti reddedildi</td>
+</tr>
+<tr>
+<td>Depolama</td>
+<td>Eşzamanlı eklemeler doğrulanır; güncelleme/silme işlemleri reddedilir; başlangıç aşamasında, ekleme yapılmadan değiştirilmiş bir günlük reddedilir ve kilidi serbest bırakılır</td>
+</tr>
+<tr>
+<td>Medya dayanıklılığı</td>
+<td>Atomik mesaj/iş yazma işlemleri; yeniden başlatma kurtarma; orijinal sürüm tanımlayıcıları korunur; kuyruk değiştirme ve mevcut dosya bozulması reddedilir; FloodWait kalıcı hale getirildi; kaynak hataları izole edildi</td>
+</tr>
+<tr>
+<td>Canlı yayın</td>
+<td>Yeni kayıtlar eklendikçe sabit bir önek dışa aktarılır; saklanan kontrol noktası, kesik günlüğü algılar; dışa aktarım, olay akışının tamamını yansıtmaz</td>
+</tr>
+<tr>
+<td>RFC 3161</td>
+<td>OpenSSL 3.5.9, oluşturulan istekleri okur; yerel olarak oluşturulan sentetik CA/TSA yanıtları kabul edilir; değiştirilmiş veriler, nonce ve hatalı CA reddedilir; ortamdaki CA ortamı, açıkça belirtilmiş güveni geçersiz kılmaz</td>
+</tr>
+<tr>
+<td>Yerel kurulum</td>
+<td>start.py --setup-only komutu, izole edilmiş .venv ortamını 0.2.0 sürümüne yükseltti; kaynak ve yüklü meta veriler birbiriyle uyumlu; pip kontrolü başarılı</td>
+</tr>
+<tr>
+<td>Wheel</td>
+<td>0.2.0 sürümü derlendi ve test-results dizinine ayrı olarak kuruldu; panel/assets dosyaları sunuldu, kimlik doğrulaması yapılmamış API çağrıları reddedildi, 32 olaydan oluşan sentetik bir arşiv dışa aktarıldı ve doğrulandı</td>
+</tr>
+</tbody>
+</table></div>
+<p>Kaynak testlerinde FastAPI 0.159.1, Uvicorn 0.54.0, Telethon 1.45.0,
+cryptography 50.0.2, pytest 9.1.1 ve Playwright 1.62.0 kullanılmıştır.
+Sabitlenmiş çalışma zamanı, FastAPI 0.162.0, Starlette 1.10.0,
+Uvicorn 0.54.0, Telethon 1.45.0 ve cryptography 50.0.2 kullanır.
+constraints.txt dosyası, çalışma zamanı sürüm sabitlemelerini kaydeder. Bu, bir paket hash kilidi veya
+yapılandırılmış her CI platformunda uyumluluk kanıtı değildir. Uzak CI çalıştırılmamıştır.</p>
+<h2 id="synthetic-local-capacity-measurement">Sentetik yerel kapasite ölçümü<a class="anchor" href="#synthetic-local-capacity-measurement" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Komut: <code>python tools/check_capacity.py --events 10000 --chats 100</code></p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Metrik</th>
+<th>Gözlemlenen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Giriş</td>
+<td>Seçilen 100 sentetik kaynaktan elde edilen 10.000 sentetik mesaj olayı</td>
+</tr>
+<tr>
+<td>Mesaj metni</td>
+<td>400 karakter; medya veya ağ içermez</td>
+</tr>
+<tr>
+<td>Verilerin Alınması</td>
+<td>53,273 saniye; saniyede 187,7 olay</td>
+</tr>
+<tr>
+<td>İşleyici gecikmesi</td>
+<td>p50 4,162 ms; p95 7,784 ms; maksimum 129,118 ms</td>
+</tr>
+<tr>
+<td>ZIP olarak dışa aktarma</td>
+<td>tracemalloc etkinleştirildiğinde 19,868 saniye</td>
+</tr>
+<tr>
+<td>Python export tahsisatlarının en yüksek değerleri</td>
+<td>0,51 MiB; RSS işlenmiyor</td>
+</tr>
+<tr>
+<td>ZIP boyutu</td>
+<td>4.610.962 bayt</td>
+</tr>
+<tr>
+<td>Bağımsız doğrulama</td>
+<td>10.000 olayın tamamı doğrulanmıştır</td>
+</tr>
+</tbody>
+</table></div>
+<p>Bu ölçüm, bu Windows sunucusundaki yerel seri kayıt/dışa aktarma yolunu ölçer.
+MTProto teslimatı, eşzamanlı hesaplar, Telegram hız sınırlaması, medya,
+uzun süreli iş yükü veya garantili gerçek sohbet sayısını ölçmez. Bu ölçüm,
+ölçülen mesaj yolunu değiştirmeyen nihai çevrimdışı zaman damgası araçlarından önce gerçekleştirilmiştir.</p>
+<h2 id="environmental-observations">Çevresel gözlemler<a class="anchor" href="#environmental-observations" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Windows sanal ortam kısıtlamaları, varsayılan pytest/pip geçici dizinlerini
+ve Playwright alt sürecini engelledi. Pytest, proje içindeki yeni bir geçici dizin kullandı;
+kurulum ve tarayıcı işlemleri, sanal ortam dışında
+onaylanmış olarak çalıştırılmasını gerektirdi.</p>
+<p>Cihazdaki AdGuard, local.adguard.org adresine yönelik istekleri tarayıcıya enjekte etti.
+Tarayıcı kayıtlarında bu istekler saklanmaktadır. Bu çalışma, değiştirilmemiş bir tarayıcı ortamında
+dışa giden isteklerin sıfır olduğu anlamına gelmez; uygulamanın kaynak kodu
+harici varlık/CDN/analitik istekleri içermez. AdGuard ayarlarında herhangi bir değişiklik yapılmamıştır.</p>
+<p>Son tarayıcı çalıştırmasında ayrıca bir Windows asyncio soket temizleme OSError 10022 hatası kaydedildi.
+Tüm tarayıcı doğrulamaları başarılı oldu ve hiçbir sayfada JavaScript hatası meydana gelmedi. Nedeni
+tespit edilemedi ve bu çalıştırma, ana bilgisayar aktarım sorunlarının bulunmadığını göstermez.</p>
+<p>urllib&#x27;in connection-close isteklerini kullanan ilk kurulu paket HTTP testi,
+hem sanal ortam içinde hem de dışında ve her iki
+bağımlılık kümesinde bağlantı sıfırlamalarıyla karşılaştı. Son test, http.client aracılığıyla standart HTTP/1.1 kalıcı bağlantıları
+kullandı ve testi geçti. Tarayıcı istekleri de başarılı oldu. Sıfırlamaların kesin kaynağı
+tespit edilemedi; bunlar, düzeltilmiş bir uygulama hatası olarak nitelendirilmedi.</p>
+<h2 id="remaining-qualification">Kalan nitelikler<a class="anchor" href="#remaining-qualification" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Saklanan canlı günlük, gerçek toplama işlemlerini, düzenlemeleri, silme bildirimlerini, ekleri,
+yeniden kontrolleri ve hız sınırlaması yönetimini kaydeder. Bu günlük, kapsamlı teslimat bilgilerini veya
+rol görünürlüğü, tepki veren aktörler, uzatılmış FloodWait, hesap yasaklamaları ve
+ağ/işlem kesintisi kurtarma işlemlerini içeren kontrollü bir matris kaydetmez. QR jetonu düzenleme işlemi, tamamlanmış
+mobil QR onayı işleminden ayrıdır.</p>
+<p>Docker derleme/çalıştırma, Linux/macOS kurulumu, sürekli yüksek yük, bağımsız güvenlik
+incelemesi, gerçek bir bağımsız TSA yanıtı, sertifika iptal/arşivleme doğrulaması ve
+adli sertifikasyon, kaydedilen yeterlilik kapsamı dışında kalmaktadır. Kaydedilmiş MTProto durumu
+ve yakalama işlevleri uygulanmaktadır; atomik kalıcı tekrar oynatma ise henüz kurulmamıştır. Yönetici günlüğü
+toplama, ek reaktör listeleri ve öncelikli kısa sorgulama ayrı özellikler olarak kalmaktadır.
+Kontrollü yeterlilik matrisi için <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">canlı kabul</a> bölümüne bakınız.</p>
+<p>Yerel ayrıntılı makbuzlar ve ekran görüntüleri test-results/ dizininde bulunur (Git tarafından göz ardı edilir).
+docs/assets/ dizinindeki herkese açık ekran görüntüsü yalnızca kurgusal örnek veriler içerir.</p>
+<h2 id="public-website-and-publication-preparation--27-october-2026">Halka açık web sitesi ve yayın hazırlığı · 27 Ekim 2026<a class="anchor" href="#public-website-and-publication-preparation--27-october-2026" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p><code>website/</code> sunumu ve Pages yapısı, yukarıdaki panel
+kontrollerinden sonra eklenmiştir. Canlı hesap yapılandırması veya veri toplama mantığında herhangi bir değişiklik yapılmamıştır.</p>
+<ul>
+<li>Mevcut uygulama paketi testleri başarıyla geçti: 138&#x27;i geçti, 1&#x27;i POSIX&#x27;e özgü olduğu için atlandı ve bir
+    Starlette/httpx&#x27;in kullanımdan kaldırılacağına dair uyarı çıktı. Eklenen 11 site derleme testi,
+    beklenmeyen çıktı reddi ve bağlantılı girdi reddi dahil olmak üzere bağımsız olarak başarıyla geçti.</li>
+<li>Her iki uygulama tarayıcı komut dosyası da project-venv Playwright ve Chromium
+    headless shell 156 kullanılarak başarıyla çalıştırıldı. Sayfada herhangi bir JavaScript hatası veya harici istek kaydedilmedi.
+    Tüm hesap senaryolarında sahte aktarım ve kurgusal veriler kullanıldı.</li>
+<li><code>tools/check_site.py</code>, 320, 390, 768, 1024 ve 1440 genişliklerinde, proje
+    URL alt yolu, klavye sekmeleri, panoya erişim (başarılı/reddedildi), hareket azaltma
+    ve devre dışı bırakılmış JavaScript ile test edildi. Başarısız varlık istekleri veya harici istekler meydana gelmedi.</li>
+<li><code>tools/build_site.py</code>, toplamda yaklaşık 460 KB büyüklüğünde 10 adet izin listesine alınmış genel erişimli dosya oluşturdu.
+    Tarayıcı ekran görüntüleri ve bir makbuz, göz ardı edilen <code>test-results/site/</code> dosyasında bulunmaktadır.</li>
+<li>Proje ortamına yalnızca derleme amaçlı setuptools/wheel
+    araçları yüklendikten sonra wheel başarıyla oluşturuldu. Yalıtılmış bir hedefe kurulduktan ve
+    <code>tools/check_install.py</code> komutu çalıştırıldıktan sonra testler başarılı oldu: statik varlıklar, erişim kontrolü, imzalı
+    32 olaylık sentetik dışa aktarım ve bağımsız olarak doğrulanmış akış indirme.</li>
+<li><code>pip check</code>&#x27;den geçti. Git&#x27;te seçilen halka açık adayların desen taramasında,
+    tanınabilir özel anahtar blokları, GitHub/bot/AWS belirteçleri, uzun sabit gizli
+    atamalar veya birleştirme çakışması işaretçileri bulunamadı. Bu, olası her türlü
+    gizli biçimin bulunmadığının kanıtı değildir. Çalışma zamanı verileri/oturum/anahtar sondaları Git tarafından göz ardı edildi.</li>
+<li>GitHub CLI kimlik doğrulaması geçersizdi; herhangi bir uzak sunucu yapılandırılmamıştı ve ilk
+    commit mevcut değildi. Push, barındırılan iş akışı, Pages dağıtımı veya sürüm yayını gerçekleştirilmedi.
+    Docker ve canlı Telegram/platform yeterlilik kontrolleri bu kontrolün kapsamı dışındadır.</li>
+</ul>
+<p>Bu sunucuda, E: çalışma alanı dosya sisteminde Playwright indirme kilidi başarısız oldu.
+<code>%LOCALAPPDATA%/tgwitness-playwright</code> altında Chromium&#x27;u yüklemek ve aynı
+<code>PLAYWRIGHT_BROWSERS_PATH</code>&#x27;yi kontroller için kullanmak başarılı oldu. Bu, bir ortam geçici çözümü olup,
+uygulamanın çalışma zamanı bağımlılıklarında bir değişiklik değildir.</p>
+<h2 id="interactive-documentation-and-website-metadata--29-october-2026">Etkileşimli dokümantasyon ve web sitesi meta verileri · 29 Ekim 2026<a class="anchor" href="#interactive-documentation-and-website-metadata--29-october-2026" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Halka açık site, 12 İngilizce HTML sayfadan oluşur: bir ana sayfa, bir kılavuz dizini ve on
+kılavuz. Bu çalışma, açıkça listelenmiş 28 sunum dosyası içerir;
+boyutu yaklaşık 1,85 MB&#x27;dir ve hiçbir veri toplama bilgisi içermez. Halka açık web sitesi İngilizcedir;
+uygulama çevirileri ve çevrilmiş depo kılavuzları ayrıdır.</p>
+<ul>
+<li>Site, kaynak yayın ve sürüm sınırı testleri: <strong>18&#x27;i geçti, 2&#x27;si atlandı</strong>.
+    Atlanan testler, bu Windows dosya sisteminde sembolik bağlantı oluşturulmasıyla ilgilidir. Testler şunları kontrol eder:
+    benzersiz sayfa meta verileri, yalnızca İngilizce olan genel sayfalar, kanonik URL&#x27;ler, tüm site haritası
+    girdileri, yerel varlıklar/bağlantılar, yapılandırılmış gezinme ve özel dosyaların hariç tutulması.</li>
+<li>Hem <code>tools/check_site.py</code> hem de <code>tools/check_docs_site.py</code>, Chromium&#x27;da
+    320, 390, 768, 1024 ve 1440 piksel çözünürlüklerde proje URL&#x27;sinin alt yolu altında testleri geçti. Kontrol edilen kılavuz,
+    11 belgelerin tamamını, arama ve klavyeyle gezinmeyi, panoya
+    kopyalama/yapıştırma işlemlerinin başarılı/başarısız olmasını ve JavaScript olmadan okunabilir içeriği kapsamaktadır.</li>
+<li>Beş etkileşimli örnek başarıyla geçildi: hareketin azaltılması ve ekran dışı askıya alma ile
+    mesaj oynatma/adımlama/duraklatma/sıfırlama; orijinal/değiştirilmiş/yeniden oluşturulmuş/kesilmiş
+    hash zincirleri; tanık kabulü/geri alma/çatallanma/yanıt yok kararları; ve
+    tam/gecikmeli/eksik teslimat senaryoları; ve
+    gönderen kimliği, hedef ve ek
+    hash&#x27;ine göre kurgusal çapraz sohbet gözlemlerini birbirine bağlayan bir soruşturma haritası. Soruşturma kontrolleri, klavye gezinme ve JavaScript&#x27;siz
+    yedekleme kontrollerinden geçti. Tarayıcının SHA-256 sonuçları,
+    Python&#x27;un <code>hashlib</code>&#x27;si ve kanonik JSON ile bağımsız olarak karşılaştırıldı. Hash
+    örneği, Web Crypto kullanılamadığında da okunabilir yedek halini korudu.</li>
+<li>Teslim oranları ve grafik işaretçileri, erişilebilir tabloyla eşleştirildi. Mobil eksen
+    etiketleri, görsel incelemenin ardından büyütüldü. Her örnek,
+    açıklayıcı veya sentetik olarak etiketlenmiştir ve hiçbir tarayıcı örneği Telegram ile bağlantı kurmamaktadır.</li>
+<li>Herhangi bir harici istek, başarısız HTTP isteği veya JavaScript hatası kaydedilmedi.
+    Masaüstü/mobil ekran görüntüleri ve makbuzlar, <code>test-results/site/</code>
+    ve <code>test-results/docs-site/</code> altında göz ardı edilmiştir. Dokümantasyon dizini, mesaj/hash örnekleri,
+    witness düzeni, teslimat grafiği ve soruşturma haritası,
+    masaüstü/mobil boyutlarında incelenmiştir.</li>
+<li>Yayın taraması, 282 açık kaynak dosyası ve 1.426 yerel
+    belgeleme bağlantısı için başarılı sonuç verdi. Ruff, değiştirilmiş Python site araçları ve testleri için başarılı sonuç verdi.</li>
+<li><code>docs/HOW-IT-WORKS.md</code>, Mermaid
+    diyagramları ve formülleri içeren bir GitHub Markdown eklentisi sunar. <code>docs/INVESTIGATION.md</code>, hesap genelini,
+    sohbet bazında geçmiş verilerinin toplanmasını, kişi profillerini, sohbetler arası referansları, zaman çizelgelerini
+    ve doğrulanmış vaka devrini kapsar. Adımları ve sınırları,
+    mevcut kapsam, toplama, dosya, dışa aktarma, doğrulayıcı ve panel koduyla karşılaştırılarak kontrol edildi. Barındırılan
+    GitHub görüntüleme işlevi kontrol edilmedi.</li>
+</ul>
+<p>Bu, yerel bir web sitesi/belgeleme kontrolüdür. Canlı Telegram
+doğrulaması eklemez veya barındırılan Pages dağıtımını, uzaktan CI başarısını ya da arama
+motoru indekslemesini sağlamaz. <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md">Yayınlama prosedürüne</a> ve
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/SEO.md">web sitesi meta veri notlarına</a> bakınız.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/VERIFICATION.md">Bu sayfayı GitHub'da düzenle ↗</a><a class="next-guide" href="../changelog/"><span>Sonraki adım</span><strong>Değişiklik günlüğü →</strong></a><p>Bu kılavuzlar mevcut uygulamayı açıklamaktadır. Doğrulama sonuçları ve kalan eksiklikler ayrı olarak belgelenmiştir. <a href="./">Neler test edildi →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Bu sayfada"><p class="nav-label">Bu sayfada</p><a href="#live-telegram-test-whole-account--29-october-2026">Canlı Telegram testi, tüm hesap · 29 Ekim 2026</a><a href="#password-protected-export-opened-with-libarchive--29-october-2026">Şifre korumalı dışa aktarım, libarchive ile açıldı · 29 Ekim 2026</a><a href="#live-telegram-test--27-to-29-october-2026">Canlı Telegram testi · 27–29 Ekim 2026</a><a href="#built-in-public-mtproxy-lists--29-october-2026">Yerleşik genel MTProxy listeleri · 29 Ekim 2026</a><a href="#optional-extras-presentation--29-october-2026">İsteğe bağlı ek özelliklerin sunumu · 29 Ekim 2026</a><a href="#witness-bot-and-proxy-setup-audit--29-october-2026">Witness botu ve proxy kurulum denetimi · 29 Ekim 2026</a><a href="#presentation-and-documentation-review--29-october-2026">Sunum ve dokümantasyon incelemesi · 29 Ekim 2026</a><a href="#version-061">Sürüm 0.6.1</a><a href="#version-060">Sürüm 0.6.0</a><a href="#version-051">Sürüm 0.5.1</a><a href="#version-050">Sürüm 0.5.0</a><a href="#version-040">Sürüm 0.4.0</a><a href="#version-031-focused-readiness-fixes">0.3.1 sürümü, hazırlık aşamasındaki düzeltmelere odaklanmıştır</a><a href="#version-030">Sürüm 0.3.0</a><a href="#version-020-baseline">0.2.0 sürümü temel versiyonu</a><a href="#synthetic-local-capacity-measurement">Sentetik yerel kapasite ölçümü</a><a href="#environmental-observations">Çevresel gözlemler</a><a href="#remaining-qualification">Kalan nitelikler</a><a href="#public-website-and-publication-preparation--27-october-2026">Halka açık web sitesi ve yayın hazırlığı · 27 Ekim 2026</a><a href="#interactive-documentation-and-website-metadata--29-october-2026">Etkileşimli dokümantasyon ve web sitesi meta verileri · 29 Ekim 2026</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Açık kaynak · Kendi makinenizde çalışır</span><a href="../../../../LICENSE">MIT lisansı</a><a href="../notice/">Operatör bildirimi</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Güvenlik</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Mesaj bekleniyor", "Step through a fictional send, edit and delete.": "Kurgusal bir gönderme, düzenleme ve silme işlemini adım adım inceleyin.", "No observations yet. Start the sequence or advance one event.": "Henüz herhangi bir gözlem yok. Diziyi başlatın veya bir olay ilerletin.", "Meet at 10:00": "Saat 10:00'da buluşalım", "A new message is visible in the chat.": "Sohbette yeni bir mesaj görünüyor.", "Record 1 appended: the collector observed the original message.": "1 kayıt eklendi: toplayıcı, orijinal mesajı gözlemledi.", "Meet at 11:00": "Saat 11:00'da buluşalım", "The current text changes. The earlier observation stays.": "Mevcut metin değiştirilmiştir. Önceki gözlem geçerliliğini korumaktadır.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Kayıt 2 eklendi: düzenleme yeni bir gözlemdir. Kayıt 1'de hâlâ orijinal metin yer almaktadır.", "Message deleted": "Mesaj silindi", "The message has disappeared from the chat view.": "Mesaj, sohbet ekranından kayboldu.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Record 3 eklenmiştir: silme bildirimi, gözlemlenen her iki sürümün yanında da saklanmaktadır.", "0 records": "0 kayıt", "1 record": "1 kayıt", "2 records": "2 kayıt", "3 records": "3 kayıt", "Complete / {n} of 3": "Tamam / 3'ün {n}'si", "Step / {n} of 3": "Adım / 3'ün {n}'si", "Pause": "Duraklat", "Replay sequence": "Tekrar oynatma dizisi", "Play sequence": "Çalma sırası", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Statik örnek mevcuttur. Hash değerlerini etkileşimli olarak hesaplamak için bu sayfayı HTTPS üzerinden veya Web Crypto desteğine sahip bir localhost önizlemesinde açın.", "No record supplied": "Kayıt sağlanmadı", "Tail removed": "Son kısım kaldırıldı", "≠ saved hash": "≠ kaydedilmiş hash", "Rebuilt · different hash": "Yeniden oluşturuldu · farklı hash", "= saved hash": "= kaydedilen hash", "Same length and matching head.": "Aynı uzunlukta ve başlığıyla uyumlu.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Hesaplanan üç hash değeri de kaydedilen hash değerleriyle eşleşmektedir. Bu örnek, korunan üç kayıtlık sınırla uyumludur.", "Same saved head; the journal prefix fails verification.": "Aynı başlık kaydedildi; günlük ön eki doğrulamadan geçemedi.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Kayıt 2, kaydedilmiş hash değeriyle artık eşleşmiyor. Yalnızca son saklanan başlık kontrol edilseydi bu durum gözden kaçardı; doğrulayıcı her kaydı tek tek kontrol eder.", "Head differs from the retained checkpoint.": "Başlık, saklanan kontrol noktası ile farklılık göstermektedir.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Yeniden oluşturulan hash değerleri birbiriyle bağlantılıdır, ancak son başlık değişmiştir. Saklanan kontrol noktası bu geçmişi reddediyor. Değiştirilen kayıtlarda orijinal imzalar da geçersiz sayılır.", "Too short: 2 supplied records \u003c 3 retained records.": "Çok kısa: Sağlanan kayıt sayısı 2, saklanan kayıt sayısı 3'ten az.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Kalan iki hash değeri hâlâ eşleşiyor. Saklanan kontrol noktası, eksik olan son kısmı ortaya çıkarıyor. O önceki sınır olmasaydı, bu daha kısa önek tek başına eksikliği ortaya çıkarmazdı.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Bu tarayıcıda hash hesaplaması yapılamamaktadır. Aşağıdaki formüller ve statik açıklamalar yine de kullanılabilir durumdadır.", "{n} records": "{n} kayıt", "head {hash}": "başlık {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Kabul edildi: sayı artıyor, imza doğrulanıyor ve anahtar eşleşiyor. Tanık bu yeni sınırı koruyor.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Geri alma: İmzalı yanıt, en son kabul edilen kontrol noktasına göre daha az kayıt bildiriyor. Witness, sorunu kaydeder ve daha önce kabul edilen sınırı korur.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: sayım değişmez ancak başlık farklıdır. Tanık, bu uyuşmazlığı kaydeder ve daha önce kabul edilen sınırı korur.", "No answer": "Cevap yok", "boundary unknown": "sınır bilinmiyor", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Yanıt yok: tanık, başarısız kontrolü kaydeder. Toplayıcının mevcut durumunu belirleyemez. Tanık, Bot API’sine hâlâ erişebiliyorsa ve yayın politikası izin veriyorsa, bu başarısızlığı yayınlayabilir.", "Send {n}": "{n} gönder", "Edit {n}": "Düzenle {n}", "Delete {n}": "{n}'yi sil", "Both accounts captured all six expected observations in this example.": "Bu örnekte her iki hesap da beklenen altı gözlemin tamamını kaydetmiştir.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "B hesabı yine 6 mesajın 6'sını da yakaladı. İki makbuzun alınması daha uzun sürdü. Yakalama oranı ve makbuz gecikmesi farklı sorulara cevap verir.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Hesap B, son tarihe kadar 6 eylemden 5'ini yakaladı (%83,3). Eksik olan düzenleme için ölçülen bir gecikme yoktur. Bu sonuç yalnızca altı kontrollü eylemi açıklamaktadır.", "not observed by cutoff": "kesme tarihine kadar gözlemlenmemiştir", "{s} seconds": "{s} saniye", "Exact values follow in the table.": "Kesin değerler tabloda yer almaktadır.", "{s} s": "{s} s", "Not observed": "Gözlemlenmedi", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Dört sohbet, farklı gözlemler sunmaktadır. Her bağlantı için kaynak kayıtlarını takip edin; göndereni belirtilmemiş kanal gönderisini 71001 numaralı kullanıcıya atamayın.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "#146 ve #205 numaralı kayıtlar aynı gönderen kimliğini (71001) göstermektedir. Bu, iki sohbet üzerinden bir Telegram hesabının gözlemlenen gönderilerini birbirine bağlamaktadır. Bu bilgi, gerçek hayattaki bir kişiyi tanımlamaz veya kanal gönderisini bir kişiye atfetmez.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "pay.example.invalid/new adresi, grup kaydı #146, bot klavyesi #173, kanal düzenlemesi #188 ve özel mesaj #205'te geçmektedir. Tekrarlanan bir hedef, materyalleri birbirine bağlar; ancak bu, söz konusu hesapların ortak kontrol altında olduğunu kanıtlamaz.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Bu hayali vakada, tamamlanmış medya makbuzları #151 ve #209'un SHA-256 değerleri tamamen aynıdır. Gerçek baytları ve bunlara ait mesaj kayıtlarını karşılaştırın. Eşleşen dosya, yaratıcısını tanımlamaz veya kimin ilettiğini kanıtlamaz.", "the encrypted off-site copy": "şifrelenmiş, sunucu dışında tutulan kopya", "notifications": "bildirimler", "checkpoint hashes for timestamps": "zaman damgaları için kontrol noktası hash değerleri", "signed checkpoints for the witness": "tanık için imzalı kontrol noktaları", "Switched on in this example": "Bu örnekte etkinleştirilmiştir", "Optional · off by default": "İsteğe bağlı · varsayılan olarak kapalı", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Bu makineden ayrılırken: Telegram bağlantısı ve {list}. Başka hiçbir şey yok.", "Default: only the Telegram connection leaves this machine.": "Varsayılan ayar: Bu makineden yalnızca Telegram bağlantısı dışarıya çıkar.", "{done} of {total} done": "{done}/{total} tamamlandı", "Mark step {n} as done": "{n} numaralı adımı tamamlanmış olarak işaretle", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Metin", "Copied": "Kopyalandı", "Command copied.": "Komut kopyalandı.", "Selected — Ctrl/Cmd+C": "Seçildi — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Komut seçildi. Elle kopyalayın.", "Command copied to clipboard.": "Komut panoya kopyalandı.", "Select text": "Metni seç", "Clipboard unavailable. Command selected; copy it manually.": "Pano kullanılamıyor. Komut seçildi; manuel olarak kopyalayın.", "A message arrives. The first observation is saved.": "Bir mesaj gelir. İlk gözlem kaydedilir.", "The time changes. Both captured versions stay.": "Zaman değişir. Yakalanan her iki sürüm de kalır.", "The message disappears. The captured history remains.": "Mesaj kaybolur. Kaydedilen geçmiş kalır.", "Pause example animation": "Örnek animasyonu duraklat", "Play example animation": "Örnek animasyonu oynat", "Play": "Oynat", "Full-size workspace screenshot": "Çalışma alanının tam boyutlu ekran görüntüsü", "Workspace screenshot · fictional data": "Çalışma alanı ekran görüntüsü · hayali veriler", "Close": "Kapat", "Close screenshot": "Ekran görüntüsünü kapat", "Scrollable full-size screenshot": "Kaydırılabilir tam boyutlu ekran görüntüsü", "Enlarge: {name}": "Büyüt: {name}", "View full size": "Tam boyutta görüntüle"}</script>
+</body></html>

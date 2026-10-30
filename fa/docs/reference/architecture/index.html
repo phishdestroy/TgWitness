@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="fa" dir="rtl" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>معماری | TgWitness</title>
+<meta name="description" content="اجزای جمع‌آورنده، پنل، دفترچه، کارگران و شاهد، و نحوهٔ جابجایی داده‌ها بین آن‌ها."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/architecture/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="fa_IR">
+<meta property="og:title" content="معماری | TgWitness"><meta property="og:description" content="اجزای جمع‌آورنده، پنل، دفترچه، کارگران و شاهد، و نحوهٔ جابجایی داده‌ها بین آن‌ها.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/fa/docs/reference/architecture/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/architecture/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/architecture/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/architecture/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/architecture/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/architecture/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/architecture/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/architecture/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/architecture/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/architecture/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/architecture/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/architecture/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/architecture/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/architecture/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/architecture/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/fa/docs/reference/architecture/", "url": "https://phishdestroy.github.io/TgWitness/fa/docs/reference/architecture/", "name": "معماری | TgWitness", "description": "اجزای جمع‌آورنده، پنل، دفترچه، کارگران و شاهد، و نحوهٔ جابجایی داده‌ها بین آن‌ها.", "inLanguage": "fa", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "خانه", "item": "https://phishdestroy.github.io/TgWitness/fa/"}, {"@type": "ListItem", "position": 2, "name": "مستندسازی", "item": "https://phishdestroy.github.io/TgWitness/fa/docs/"}, {"@type": "ListItem", "position": 3, "name": "منبع", "item": "https://phishdestroy.github.io/TgWitness/fa/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "معماری", "item": "https://phishdestroy.github.io/TgWitness/fa/docs/reference/architecture/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">رفتن به محتوا</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / مستندسازی</span></a>
+<nav aria-label="راهنماها"><a href="../../concepts/">راهنمای تصویری</a><a href="../../">تمام راهنماها</a><a href="../">منبع</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="زبان"><span aria-hidden="true">◍</span> فارسی</summary><div class="lang-list"><a href="../../../../docs/reference/architecture/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/architecture/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/architecture/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/architecture/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/architecture/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/architecture/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/architecture/" hreflang="ar" lang="ar">العربية</a><a href="./" hreflang="fa" lang="fa" aria-current="true">فارسی</a><a href="../../../../ur/docs/reference/architecture/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/architecture/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/architecture/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/architecture/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/architecture/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="تغییر بین تم روشن و تاریک"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="راهنماها"><a href="../../../guides/modes.html">حالت‌ها، سناریوها و سطوح شواهد</a><p class="nav-label">قدم‌های اول</p><a href="../../start/">در چند دقیقه شروع کنید</a><a href="../../accounts/">اتصال یک حساب</a><a href="../../proxies/">یک پروکسی انتخاب کنید</a><a href="../../exports/">صادرات و تأیید</a><p class="nav-label">درک شواهد</p><a href="../../concepts/">ببینید مدرک چگونه کار می‌کند</a><a href="../../cases/">تحقیق در تمام چت‌ها</a><a href="../../security/">آن را امن نگه دارید</a><p class="nav-label">پیش‌تر بروید</p><a href="../../witness/">راه‌اندازی یک بات شاهد</a><a href="../../server/">آن را در حال اجرا نگه دارید</a><a href="../../troubleshooting/">مشخص کنید چه چیزی اشتباه پیش رفته است</a></nav><nav class="wiki-nav" aria-label="منبع"><p class="nav-label"><a class="nav-label-link" href="../">منبع</a></p><details class="wiki-group"><summary>راه‌اندازی</summary><a href="../quickstart/">راه‌اندازی سریع</a><a href="../accounts/">فرمت‌های حساب کاربری و جلسه</a><a href="../connection/">اتصال، پروکسی‌ها و حفاظت از داده‌ها</a><a href="../deployment/">راه‌اندازی</a></details><details class="wiki-group"><summary>جمع‌آوری</summary><a href="../collection/">نحوهٔ کارکرد جمع‌آوری</a><a href="../operations/">روندها و عملیات‌ها</a><a href="../investigation/">حالت تحقیق</a><a href="../features/">ویژگی‌ها و محدودیت‌ها</a></details><details class="wiki-group"><summary>شواهد</summary><a href="../how-it-works/">چگونگی کارکرد شواهد</a><a href="../evidence/">فرمت مدرک</a><a href="../witness/">شاهد مستقل</a><a href="../timestamp/">برچسب‌های زمانی</a></details><details class="wiki-group" open><summary>امنیت و پروژه</summary><a href="../security/">امنیت و مدیریت داده‌ها</a><a href="./" aria-current="page">معماری</a><a href="../verification/">آنچه آزمایش شده است</a><a href="../license/">اعلان عدم سازگاری مجوز و معماری</a><a href="../notice/">اعلان عدم سازگاری اپراتور</a><a href="../changelog/">فهرست تغییرات</a></details></nav><p class="sidebar-note">v0.7.0<br>کد باز · روی دستگاه شما اجرا می‌شود</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="راهنماها"><a href="../../../">خانه</a> <span aria-hidden="true">/</span> <a href="../../">مستندسازی</a> <span aria-hidden="true">/</span> <a href="../">منبع</a> <span aria-hidden="true">/</span> <span aria-current="page">معماری</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">جستجو در مستندات</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="پراکسی، زنجیره هش، توکن یا ویسنس را امتحان کنید…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="جستجوی واضح" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">یک کلمه تایپ کنید تا در راهنماها و مرجع جستجو شود. جستجو در مرورگر شما باقی می‌ماند.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">منبع / امنیت و پروژه</p><h1>معماری</h1><p class="guide-outcome">اجزای جمع‌آورنده، پنل، دفترچه، کارگران و شاهد، و نحوهٔ جابجایی داده‌ها بین آن‌ها.</p><div class="wiki-body"><p>یک فرآیند پایتون میزبان پنل FastAPI و هر تعداد فضای کاری ایزوله است، که هر کدام دارای یک کلاینت حساب کاربری تل‌هان (Telethon) هستند. SQLite یک دفترچه وقایع امضا شده با قابلیت الحاق تنها و تنظیمات عملیاتی قابل تغییر را در خود جای می‌دهد.
+یک گاوصندوق رمزگذاری‌شده حاوی اعتبارنامه‌های API، StringSession و کلید امضا است.
+فرانت‌اند، HTML/CSS/JavaScript بسته‌بندی‌شده و ساده‌ای است: نیازی به ساخت با Node، CDNها یا دانلودهای فرانت‌اند در زمان اجرا نیست.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>ماژول</th>
+<th>مسئولیت</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>collector.py</td>
+<td>مجوز، انتخاب دیالوگ، به‌روزرسانی‌ها، اسنپ‌شات‌ها، صف رسانه‌ای، نظارت بر اتصال</td>
+</tr>
+<tr>
+<td>interactions.py / telegram_client.py</td>
+<td>اقدامات واضح پنل، رسیدهای امضا‌شده، شناسه‌های درخواست پایدار و سیاست تلاش مجدد فراخوانی/پیوست‌شدن محلی وظیفه</td>
+</tr>
+<tr>
+<td>message_content.py</td>
+<td>مقایسهٔ قابل مشاهدهٔ پیام‌ها، بدون در نظر گرفتن متادیتای دسترسی به انتقال</td>
+</tr>
+<tr>
+<td>workers.py</td>
+<td>منتظر کارگران فایل خروجی قبل از پاکسازی لغو باشید</td>
+</tr>
+<tr>
+<td>store.py</td>
+<td>معاملات WAL، زنجیره رویداد مرتب‌شده، فیلترهای پرس‌وجو، تنظیمات عملیاتی</td>
+</tr>
+<tr>
+<td>security.py</td>
+<td>ایجاد فایل خصوصی، گاوصندوق رمزگذاری‌شده، امضای Ed25519، قفل تک‌فرآیندی</td>
+</tr>
+<tr>
+<td>evidence.py</td>
+<td>خروجی کامل دفترچه، مشتقات، نقاط کنترل، تأیید پیوست</td>
+</tr>
+<tr>
+<td>verify.py</td>
+<td>راست‌آزماین مستقل و فقط-خواندنی ( stdlib + رمزنگاری): آرشیوها، پوشش، دفترچه‌های شاهدی و پست‌های کانال، فایل‌های پروفایل</td>
+</tr>
+<tr>
+<td>app.py</td>
+<td>API احرازشده، چرخهٔ عمر، اعتبارسنجی درخواست، پنل ایستا</td>
+</tr>
+<tr>
+<td>profiles.py</td>
+<td>چندین جمع‌آورنده حساب ایزوله، توکن پنل مشترک، چرخه عمر برای هر فضای کاری</td>
+</tr>
+<tr>
+<td>provenance.py</td>
+<td>اندازه‌گیری‌های کد و وابستگی‌های هویت، اجراشده و امضا‌شده</td>
+</tr>
+<tr>
+<td>network.py</td>
+<td>مسیرهای تأییدشده برای هر فضای کاری؛ وضعیت و شواهد سانسور شده؛ گزینه‌های انتقال تله‌تون</td>
+</tr>
+<tr>
+<td>sessions.py</td>
+<td>تبدیل آفلاین فقط-خواندنی طرح‌های SQLite تله‌تون بررسی‌شده</td>
+</tr>
+<tr>
+<td>import_حساب.py</td>
+<td>تشخیص و نرمال‌سازی در حافظه‌ای فایل‌های حساب کاربری و JSON پشتیبانی‌شده</td>
+</tr>
+<tr>
+<td>tdata.py</td>
+<td>خوانندهٔ محدود مدرن TData ZIP، اعتبارسنجی چک‌سام/رمزگشایی، بدون استخراج</td>
+</tr>
+<tr>
+<td>doctor.py</td>
+<td>بررسی‌های آمادگی محلی بدون جمع‌آوری، ورود یا نصب بسته</td>
+</tr>
+<tr>
+<td>download.py</td>
+<td>دانلود خروجی استریمینگ احرازشده با خوانش‌های محدود و بدون بازنویسی</td>
+</tr>
+<tr>
+<td>monitoring.py</td>
+<td>سیاست رویداد تأییدشده برای هر فضای کاری و قواعد پیوست‌بندی بر اساس نوع، که توسط پردازشگرها، وضعیت و رسیدهای امضاشده به اشتراک گذاشته می‌شوند</td>
+</tr>
+<tr>
+<td>scope.py</td>
+<td>دامنهٔ مشاهده (گفت‌وگوهای انتخابی، پوشهٔ تلگرام، کل حساب)، انواع منابع، استثناها، سطوح بازبینی مجدد</td>
+</tr>
+<tr>
+<td>dossier.py</td>
+<td>پروفایل افراد در هر گفتگو بر اساس سوابق ذخیره شده ساخته شده است: حقایق با ارجاع به سوابق، SHA-256/pHash آواتار، استخراج ذکرها</td>
+</tr>
+<tr>
+<td>witness_api.py</td>
+<td>توکن‌های شاهد فقط-خواندنی و سرتیتر امضاشدهٔ دفترچهٔ یادداشت که ممکن است دریافت کنند</td>
+</tr>
+<tr>
+<td>witness.py</td>
+<td>فرآیند شاهد مستقل: کلید و دفترچه یادداشت اختصاصی، بررسی‌های سرانگشتی، پست‌های امضا‌شده کانال، خروجی‌گیری</td>
+</tr>
+<tr>
+<td>alerts.py</td>
+<td>اخطاریه‌های اپرایز و فهرست اعلان‌های پنل</td>
+</tr>
+<tr>
+<td>logging_config.py</td>
+<td>ثبت لاگ کنسول و تشخیص وضعیت سرورهای چرخشی برای راه‌اندازی‌های بدون پنجره</td>
+</tr>
+<tr>
+<td>ایستا/</td>
+<td>رابط کاربری واکنش‌گرا، دروازه دسترسی محلی، فیلترها، جزئیات، خروجی‌ها، تنظیم حساب</td>
+</tr>
+<tr>
+<td>demo.py</td>
+<td>دفترچهٔ مصنوعی به‌وضوح برچسب‌گذاری‌شده، جدا از مجموعهٔ واقعی</td>
+</tr>
+</tbody>
+</table></div>
+<p>پردازشگرهای مشاهده قبل از اتصال ثبت می‌شوند. جمع‌آوری زنده توسط هویت کلاینت فعال، وضعیت اجرای صریح، منابع فعال یا دامنه مشاهده (حالت‌های پوشه یا کل حساب، چت جدید را در اولین به‌روزرسانی خود به عنوان یک منبع اضافه می‌کنند) و سیاست رویداد کنترل می‌شود. کلاینت‌های رد شده و جایگزین شده نمی‌توانند در به‌روزرسانی‌های زنده مشارکت کنند. واکنش‌های خام و به‌روزرسانی‌های عضویت، محدودیت‌های دید را حفظ می‌کنند. محتوای پیام ورودی و وظیفه رسانه‌ای پایدار آن با هم ثبت می‌شوند. وظایف، توصیه‌گر اصلی TL را حفظ کرده و هش آن را به مشاهده پیام امضا شده پیوند می‌دهند. معنایی‌های فرستنده/ویرایشگر/حذف‌کننده از هم جدا شده‌اند.</p>
+<p>هر فضای کاری یک حساب کاربری را می‌پذیرد و دارای دایرکتوری و هویت امضای خود است. فضای کاری اصلی برای سازگاری در ریشه باقی می‌ماند؛ فضاهای کاری اضافی در
+profiles/&lt;id&gt;/ قرار دارند. یک توکن حامل کل نصب را کنترل می‌کند؛ فضاهای کاری
+اجزای مجزای مجوزدهی نیستند. قفل‌های فرآیند از دایرکتوری‌ها محافظت می‌کنند؛ قفل‌های پایگاه داده، درج رویدادها را به صورت سریالی انجام می‌دهند. هر افزودنی به طور همزمان در WAL (لاگ پیش‌رونده) SQLite با حالت همگام کامل commit می‌شود. رویدادهای به‌روزرسانی/حذف، ویرایش‌های عادی برنامه را متوقف می‌کنند؛ مدیران فایل‌سیستم در محدوده اعتماد باقی می‌مانند.</p>
+<p>مجوز API یک توکن حمل‌کننده است. عملیات ورود به سیستم به صورت سریالی و با محدودیت زمانی هستند. بارگذاری‌ها در حساب کاربری از محدودیت اختصاصی ۱۲ مگابایت برای بدنه رمزگذاری‌شده و ۸ مگابایت برای فایل رمزگشایی‌شده استفاده می‌کنند؛ درخواست‌های عادی API به محدودیت ۱۶ کیلوبایت خود پایبند هستند. فرآیند تبدیل در یک نخ کاری (worker thread) اجرا می‌شود، بارگذاری‌ها را در حافظه نگه می‌دارد و ورودی نرمال‌شده را به مرورگر احراز هویت‌شده بازمی‌گرداند. ورود با QR دارای یک شناسه موقت به ازای هر فضای کاری، یک وظیفه منتظر (waiter task) و لغو صریح است. تنها مجوز پذیرفته‌شده به مشتری فعال تبدیل می‌شود.
+Telegram FloodWait با یک مقدار Retry-After بازگشته می‌شود؛ اعتبارنامه‌ها و پیام‌های خطای خام RPC در خطاهای API فاش نمی‌شوند. خروجی‌ها خارج از حلقه رویداد غیرهمزمان اجرا می‌شوند و به ازای هر فضای کاری سریالی‌سازی می‌شوند. آنها یک اسنپ‌شات خواندن پایدار را استریم می‌کنند و می‌توانند با نوشته‌های WAL در حال انجام هم‌زیست باشند. جمع‌کننده‌های فضای کاری حلقه فرآیند/رویداد را به اشتراک می‌گذارند.</p>
+<p>اسنپ‌شات‌های تاریخچهٔ جاری و به‌روزرسانی‌های زنده می‌توانند هم‌پوشانی داشته باشند. هر دو مشاهدات جداگانه‌ای هستند که با برچسب منبع مشخص شده‌اند؛ موارد تکراری به‌صورت خودکار حذف نمی‌شوند. هیچ نتیجه‌گیری‌ای از روی شناسه‌های گمشده، متن‌های حذف‌شدهٔ ساختگی، فهرست‌کردن اجباری اعضا یا پیوستن خودکار به گروه‌ها اعمال نمی‌شود.</p>
+<p>برای توضیحات مربوط به اپراتور، <a href="../collection/">نحوه کارکرد جمع‌آوری</a> و <a href="../accounts/">فرمت‌های حساب‌ها و جلسات</a> را ببینید.</p>
+<p>پیکربندی شبکه در گاوصندوق رمزگذاری‌شده نگهداری می‌شود. اعمال یک مسیر، کلاینت‌های قدیمی را می‌بندد و ورود ناکامل را لغو می‌کند؛ اتصالات بعدی از آن مسیر استفاده می‌کنند و به هیچ‌گونه بازگشت مستقیم (fallback) دسترسی ندارند. یک نصب جدید کلید خارجی، کلید فرنت (Fernet) هر فضای کاری را با HKDF-SHA256 از یک فایل کلید اصلی و یک شور تصادفی (salt) ذخیره‌شده استخراج می‌کند. این کار، اسرار را به‌طور جداگانه از دایرکتوری داده‌ها محافظت می‌کند، نه از محتوای متن ساده (plaintext) دفترچه یادداشت/رسانه‌ها.</p>
+<p>ورودی دمو محلی از قابلیت فرآیندی که به‌طور جداگانه تولید شده است استفاده می‌کند، و هرگز از توکن پنل پیکربندی‌شده استفاده نمی‌کند. صدور و پذیرش آن نیازمند حالت دمو صریح، یک ریشه مصنوعی بدون فضای کاری اضافی یا جلسه مجاز، همتا/میزبان لوپ‌بک، بدون سربرگ‌های فوروارد پروکسی، و بدون درخواست مرورگر فرا-منشأ است. APIهای زنده احراز هویت حامل را حفظ می‌کنند و در حالت دمو تغییرات جمع‌آوری را رد می‌کنند.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ARCHITECTURE.md">ویرایش این صفحه در گیت‌هاب ↗</a><a class="next-guide" href="../verification/"><span>مرحله بعدی</span><strong>آنچه آزمایش شده است ←</strong></a><p>این راهنماها پیاده‌سازی فعلی را توصیف می‌کنند. نتایج اعتبارسنجی و شکاف‌های باقی‌مانده به‌طور جداگانه مستند شده‌اند. <a href="../verification/">آنچه آزمایش شده است ←</a></p></footer>
+</main>
+<aside class="toc" aria-label="در این صفحه"></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>کد باز · روی دستگاه شما اجرا می‌شود</span><a href="../../../../LICENSE">مجوز MIT</a><a href="../notice/">اعلان اپراتور</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">امنیت</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "در انتظار پیام", "Step through a fictional send, edit and delete.": "مرحله‌به‌مرحله یک ارسال، ویرایش و حذف فرضی را دنبال کنید.", "No observations yet. Start the sequence or advance one event.": "هنوز هیچ مشاهده‌ای ثبت نشده است. توالی را آغاز کنید یا یک رویداد را جلو ببرید.", "Meet at 10:00": "ساعت ۱۰:۰۰ ملاقات کنید", "A new message is visible in the chat.": "یک پیام جدید در چت قابل مشاهده است.", "Record 1 appended: the collector observed the original message.": "سند ۱ ضمیمه شد: گردآورنده پیام اصلی را مشاهده کرد.", "Meet at 11:00": "ساعت ۱۱:۰۰ ملاقات کنید", "The current text changes. The earlier observation stays.": "متن فعلی تغییر می‌کند. مشاهدهٔ قبلی باقی می‌ماند.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "رکورد ۲ ضمیمه شد: ویرایش یک مشاهده جدید است. رکورد ۱ همچنان متن اصلی را حفظ می‌کند.", "Message deleted": "پیام حذف شد", "The message has disappeared from the chat view.": "پیام از نمای چت ناپدید شده است.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "سند شمارهٔ ۳ ضمیمه شد: اطلاعیهٔ حذف در کنار هر دو نسخهٔ مشاهده‌شده نگهداری می‌شود.", "0 records": "۰ رکورد", "1 record": "۱ رکورد", "2 records": "۲ رکورد", "3 records": "۳ رکورد", "Complete / {n} of 3": "کامل / {n} از ۳", "Step / {n} of 3": "مرحله / {n} از ۳", "Pause": "وقفه", "Replay sequence": "ترتیب بازپخش", "Play sequence": "پخش توالی", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "مثال ایستا در دسترس است. برای محاسبه هش‌ها به‌صورت تعاملی، این صفحه را از طریق HTTPS یا پیش‌نمایش localhost با پشتیبانی Web Crypto باز کنید.", "No record supplied": "هیچ سندی ارائه نشده است", "Tail removed": "پایان حذف شد", "≠ saved hash": "≠ هَش ذخیره شده", "Rebuilt · different hash": "بازسازی‌شده · هش متفاوت", "= saved hash": "= هَش ذخیره‌شده", "Same length and matching head.": "طول یکسان و سر هماهنگ.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "هر سه هش محاسبه‌شده با هش‌های ذخیره‌شده مطابقت دارند. این نمونه با مرز سه‌رکوردی که حفظ شده است، همخوانی دارد.", "Same saved head; the journal prefix fails verification.": "همان سر ذخیره شده؛ پیش‌وند دفترچه یادداشت در اعتبارسنجی شکست می‌خورد.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "رکورد شمارهٔ ۲ دیگر با هش ذخیره‌شدهٔ خود مطابقت ندارد. بررسی تنها هدر نهایی ذخیره‌شده این مورد را از قلم می‌اندازد؛ اعتبارسنج همهٔ رکوردها را بررسی می‌کند.", "Head differs from the retained checkpoint.": "سر با نقطهٔ کنترل نگه‌داشته‌شده تفاوت دارد.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "هش‌های بازسازی‌شده به هم متصل هستند، اما هِد نهایی تغییر کرده است. نقطه‌کنترل حفظ‌شده این تاریخچه را رد می‌کند. امضاهای اصلی نیز روی رکوردهای تغییر یافته ناموفق خواهند بود.", "Too short: 2 supplied records \u003c 3 retained records.": "خیلی کوتاه: ۲ رکورد ارائه‌شده \u003c ۳ رکورد نگهداری‌شده.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "دو هش باقی‌مانده هنوز با هم مطابقت دارند. نقطهٔ کنترل حفظ‌شده، انتهای گمشده را آشکار می‌کند. بدون آن مرز قبلی، این پیش‌وند کوتاه به‌تنهایی نمی‌توانست حذف را آشکار کند.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "محاسبه هش در این مرورگر در دسترس نیست. فرمول‌ها و توضیحات ثابت زیر همچنان در دسترس هستند.", "{n} records": "{n}یادداشت‌ها", "head {hash}": "سر {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "پذیرفته شد: شمارش افزایش می‌یابد، امضا تأیید می‌شود و کلید مطابقت دارد. شاهد این مرز جدید را حفظ می‌کند.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: پاسخ امضا‌شده تعداد سوابق کمتری نسبت به آخرین نقطهٔ کنترل پذیرفته‌شده گزارش می‌کند. شاهد مشکل را ثبت می‌کند و مرز پذیرفته‌شدهٔ قبلی را حفظ می‌کند.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "فورک: شمارش بدون تغییر است اما سر متفاوت است. شاهد اختلاف را ثبت می‌کند و مرز قبلاً پذیرفته‌شده را حفظ می‌کند.", "No answer": "پاسخ ندارد", "boundary unknown": "مرز نامشخص", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "بدون پاسخ: شاهد چک ناموفق را ثبت می‌کند. این نمی‌تواند وضعیت فعلی گردآورنده را تأیید کند. اگر شاهد همچنان بتواند به Bot API دسترسی پیدا کند و سیاست انتشار آن اجازه دهد، می‌تواند آن خطا را منتشر کند.", "Send {n}": "{n} ارسال کنید", "Edit {n}": "ویرایش {n}", "Delete {n}": "حذف {n}", "Both accounts captured all six expected observations in this example.": "هر دو حساب در این مثال تمام شش مشاهدهٔ مورد انتظار را ثبت کردند.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "حساب B همچنان ۶ از ۶ را ضبط کرد. دو رسید زمان بیشتری بردند. نسبت ضبط و تأخیر رسید به پرسش‌های متفاوتی پاسخ می‌دهند.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "حساب B از میان شش مورد، پنج مورد را تا زمان برش ضبط کرد (۸۳٫۳٪). ویرایش مفقودشده تأخیر قابل‌سنجی ندارد. این نتیجه تنها شش اقدام کنترل‌شده را توصیف می‌کند.", "not observed by cutoff": "توسط نقطه‌برش مشاهده نشده است", "{s} seconds": "{s} ثانیه", "Exact values follow in the table.": "مقادیر دقیق در جدول آمده است.", "{s} s": "{s}s", "Not observed": "مشاهده نشد", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "چهار چت مشاهدات متفاوتی ارائه می‌دهند. سوابق منبع هر ارتباط را دنبال کنید؛ بدون مشخص کردن فرستنده، پست کانال را به کاربر ۷۱۰۰۱ نسبت ندهید.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "سوابق شمارهٔ ۱۴۶ و شمارهٔ ۲۰۵ همان شناسهٔ فرستنده، ۷۱۰۰۱ را ارائه می‌کنند. این امر پست‌های مشاهده‌شدهٔ یک حساب تلگرام را در دو گفتگوی مختلف به هم مرتبط می‌سازد. این اطلاعات هویت یک فرد واقعی را مشخص نمی‌کند و پست کانال را به او نسبت نمی‌دهد.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "مقصد pay.example.invalid/new در رکورد گروه شمارهٔ ۱۴۶، کیبورد بات شمارهٔ ۱۷۳، ویرایش کانال شمارهٔ ۱۸۸ و پیام خصوصی شمارهٔ ۲۰۵ ظاهر می‌شود. یک مقصد تکراری مواد را به هم مرتبط می‌کند؛ اما اثبات کنترل مشترک آن حساب‌ها را نمی‌کند.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "رسیدهای رسانه‌ای تکمیل‌شده شمارهٔ ۱۵۱ و ۲۰۹ در این مورد فرضی مقادیر کامل یکسان SHA-256 دارند. بایت‌های واقعی و سوابق پیام مرتبط با آن‌ها را مقایسه کنید. فایل مطابقت‌یافته سازندهٔ خود را شناسایی نمی‌کند و ثابت نمی‌کند چه کسی آن را ارسال کرده است.", "the encrypted off-site copy": "نسخه رمزگذاری‌شده خارج از محل", "notifications": "اخطاریه‌ها", "checkpoint hashes for timestamps": "هش‌های نقطه‌کنترل برای مهرهای زمانی", "signed checkpoints for the witness": "نقاط کنترل امضا‌شده برای شاهد", "Switched on in this example": "در این مثال فعال شده است", "Optional · off by default": "اختیاری · به‌صورت پیش‌فرض غیرفعال", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "خروج از این دستگاه: اتصال تلگرام و {list}. هیچ چیز دیگر.", "Default: only the Telegram connection leaves this machine.": "پیش‌فرض: تنها اتصال تلگرام از این دستگاه خارج می‌شود.", "{done} of {total} done": "{done} از {total} انجام شده", "Mark step {n} as done": "مرحله {n} را به‌عنوان انجام‌شده علامت‌گذاری کنید", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "کپی", "Copied": "کپی شد", "Command copied.": "فرمان کپی شد.", "Selected — Ctrl/Cmd+C": "انتخاب شده — Ctrl/Cmd+C", "Command selected. Copy it manually.": "فرمان انتخاب شد. آن را به‌صورت دستی کپی کنید.", "Command copied to clipboard.": "فرمان به کلیپ‌بورد کپی شد.", "Select text": "انتخاب متن", "Clipboard unavailable. Command selected; copy it manually.": "پیشخوان کلیپ‌بورد در دسترس نیست. فرمان انتخاب شده است؛ آن را به‌صورت دستی کپی کنید.", "A message arrives. The first observation is saved.": "پیامی دریافت می‌شود. اولین مشاهده ذخیره می‌شود.", "The time changes. Both captured versions stay.": "زمان تغییر می‌کند. هر دو نسخه ضبط‌شده باقی می‌مانند.", "The message disappears. The captured history remains.": "پیام ناپدید می‌شود. تاریخچه ضبط‌شده باقی می‌ماند.", "Pause example animation": "انیمیشن مثال مکث", "Play example animation": "پخش انیمیشن نمونه", "Play": "پخش", "Full-size workspace screenshot": "اسکرین‌شات تمام‌صفحه از فضای کاری", "Workspace screenshot · fictional data": "اسکرین‌شات فضای کاری · داده‌های فرضی", "Close": "بستن", "Close screenshot": "پایان اسکرین‌شات", "Scrollable full-size screenshot": "اسکرین‌شات تمام‌صفحه قابل پیمایش", "Enlarge: {name}": "بزرگ‌نمایی: {name}", "View full size": "نمایش در اندازه کامل"}</script>
+</body></html>

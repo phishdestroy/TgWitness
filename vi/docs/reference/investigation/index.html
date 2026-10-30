@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="vi" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Chế độ điều tra | TgWitness</title>
+<meta name="description" content="Các cuộc điều tra toàn diện về tài khoản trên các kênh, nhóm, cuộc trò chuyện riêng tư và bot, từ phạm vi điều tra cho đến bộ hồ sơ vụ việc đã được xác minh."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:title" content="Chế độ điều tra | TgWitness"><meta property="og:description" content="Các cuộc điều tra toàn diện về tài khoản trên các kênh, nhóm, cuộc trò chuyện riêng tư và bot, từ phạm vi điều tra cho đến bộ hồ sơ vụ việc đã được xác minh.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/investigation/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/investigation/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/investigation/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/investigation/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/investigation/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/investigation/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/investigation/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/", "url": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/", "name": "Chế độ điều tra | TgWitness", "description": "Các cuộc điều tra toàn diện về tài khoản trên các kênh, nhóm, cuộc trò chuyện riêng tư và bot, từ phạm vi điều tra cho đến bộ hồ sơ vụ việc đã được xác minh.", "inLanguage": "vi", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "https://phishdestroy.github.io/TgWitness/vi/"}, {"@type": "ListItem", "position": 2, "name": "Tài liệu hướng dẫn", "item": "https://phishdestroy.github.io/TgWitness/vi/docs/"}, {"@type": "ListItem", "position": 3, "name": "Tham khảo", "item": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Chế độ điều tra", "item": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Chuyển thẳng đến nội dung</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Tài liệu hướng dẫn</span></a>
+<nav aria-label="Hướng dẫn"><a href="../../concepts/">Hướng dẫn trực quan</a><a href="../../">Tất cả các hướng dẫn</a><a href="../">Tham khảo</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Ngôn ngữ"><span aria-hidden="true">◍</span> Tiếng Việt</summary><div class="lang-list"><a href="../../../../docs/reference/investigation/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/investigation/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/investigation/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/investigation/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/investigation/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/investigation/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/investigation/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/investigation/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/investigation/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/investigation/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/investigation/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="./" hreflang="vi" lang="vi" aria-current="true">Tiếng Việt</a><a href="../../../../zh/docs/reference/investigation/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Chuyển đổi giữa chế độ giao diện sáng và tối"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Hướng dẫn"><a href="../../../guides/modes.html">Các chế độ, kịch bản và mức độ bằng chứng</a><p class="nav-label">Các bước đầu tiên</p><a href="../../start/">Bắt đầu chỉ trong vài phút</a><a href="../../accounts/">Kết nối tài khoản</a><a href="../../proxies/">Chọn một máy chủ proxy</a><a href="../../exports/">Xuất và xác minh</a><p class="nav-label">Hiểu rõ về bằng chứng</p><a href="../../concepts/">Tìm hiểu cách thức hoạt động của bằng chứng</a><a href="../../cases/">Điều tra trên tất cả các cuộc trò chuyện</a><a href="../../security/">Hãy đảm bảo tính bảo mật</a><p class="nav-label">Tìm hiểu thêm</p><a href="../../witness/">Thiết lập bot chứng cứ</a><a href="../../server/">Hãy duy trì hoạt động của nó</a><a href="../../troubleshooting/">Tìm hiểu nguyên nhân sự cố</a></nav><nav class="wiki-nav" aria-label="Tham khảo"><p class="nav-label"><a class="nav-label-link" href="../">Tham khảo</a></p><details class="wiki-group"><summary>Thiết lập</summary><a href="../quickstart/">Hướng dẫn bắt đầu nhanh</a><a href="../accounts/">Các định dạng tài khoản và phiên làm việc</a><a href="../connection/">Kết nối, máy chủ trung gian và bảo vệ dữ liệu</a><a href="../deployment/">Triển khai</a></details><details class="wiki-group" open><summary>Thu thập</summary><a href="../collection/">Cách thức thu thập dữ liệu</a><a href="../operations/">Quy trình làm việc và hoạt động</a><a href="./" aria-current="page">Chế độ điều tra</a><a href="../features/">Các tính năng và giới hạn</a></details><details class="wiki-group"><summary>Bằng chứng</summary><a href="../how-it-works/">Cách thức hoạt động của bằng chứng</a><a href="../evidence/">Định dạng bằng chứng</a><a href="../witness/">Nhân chứng độc lập</a><a href="../timestamp/">Dấu thời gian</a></details><details class="wiki-group"><summary>An ninh & dự án</summary><a href="../security/">An ninh và xử lý dữ liệu</a><a href="../architecture/">Kiến trúc</a><a href="../verification/">Những nội dung đã được kiểm thử</a><a href="../license/">Thông báo về sự không tương thích giữa giấy phép và kiến trúc</a><a href="../notice/">Thông báo về sự không tương thích giữa các nhà cung cấp dịch vụ</a><a href="../changelog/">Bản ghi thay đổi</a></details></nav><p class="sidebar-note">v0.7.0<br>Mã nguồn mở · Chạy trên máy tính của quý vị</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Hướng dẫn"><a href="../../../">Trang chủ</a> <span aria-hidden="true">/</span> <a href="../../">Tài liệu hướng dẫn</a> <span aria-hidden="true">/</span> <a href="../">Tham khảo</a> <span aria-hidden="true">/</span> <span aria-current="page">Chế độ điều tra</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Tìm kiếm trong tài liệu</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Hãy thử các thuật ngữ như proxy, chuỗi băm, token hoặc witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Tìm kiếm rõ ràng" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Hãy nhập một từ khóa để tìm kiếm trong các hướng dẫn và tài liệu tham khảo. Kết quả tìm kiếm sẽ được lưu lại trong trình duyệt của quý vị.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Tham khảo / Thu thập</p><h1>Chế độ điều tra</h1><p class="guide-outcome">Các cuộc điều tra toàn diện về tài khoản trên các kênh, nhóm, cuộc trò chuyện riêng tư và bot, từ phạm vi điều tra cho đến bộ hồ sơ vụ việc đã được xác minh.</p><div class="wiki-body"><p>Theo dõi một vụ việc qua các kênh, nhóm, cuộc trò chuyện riêng tư và bot, từ giai đoạn
+thu thập ban đầu cho đến dòng thời gian được trích dẫn và quá trình chuyển giao có thể xác minh. Phiên bản trang web
+tương tác có tại <code>/docs/cases/</code>; <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally">hướng dẫn xem trước</a>.</p>
+<h2 id="worked-case-a-destination-changes-across-four-conversations">Ví dụ thực tế: sự thay đổi về điểm đến trong bốn cuộc trò chuyện<a class="anchor" href="#worked-case-a-destination-changes-across-four-conversations" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Một thông báo đề cập đến một bot. Một nhóm vận hành thảo luận về một địa chỉ thanh toán
+mới, bàn phím của bot hiển thị thông tin đó, và một tin nhắn riêng tư tiếp theo lặp lại nội dung này.
+Sau đó, thông báo này bị chỉnh sửa và một tin nhắn nhóm biến mất.</p>
+<p>Các câu hỏi đặt ra là: những gì đã được quan sát trước và sau khi thay đổi, tài khoản Telegram
+nào đã đăng từng nội dung, đích đến xuất hiện ở đâu, các byte tệp đính kèm
+nào đã được lưu giữ, và những khoảng thời gian nào vẫn chưa được xác định?</p>
+<p>Tất cả tên, ID, thời gian và các tham chiếu trong sổ ghi chép trong ví dụ này đều là hư cấu. Quy trình
+làm việc sử dụng các tính năng hiện có; sơ đồ vụ việc chỉ mang tính minh họa, không phải là
+biểu đồ tự động được tạo ra bởi ứng dụng.</p>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 861 532" width="861" height="532" role="img" aria-labelledby="flow-3-title flow-3-desc"><title id="flow-3-title">Sơ đồ quy trình</title><desc id="flow-3-desc">Các kênh → Nhật ký không gian làm việc; Các nhóm → Nhật ký không gian làm việc; Các cuộc trò chuyện riêng tư → Nhật ký không gian làm việc; Các bot → Nhật ký không gian làm việc; Nhật ký không gian làm việc → Tìm kiếm trên tất cả các nguồn; Nhật ký không gian làm việc → Hồ sơ cá nhân kèm theo các tham chiếu đến hồ sơ ghi chép; Nhật ký không gian làm việc → Các phiên bản đã lưu và biên nhận tệp đính kèm; Tìm kiếm trên tất cả các nguồn → Dòng thời gian của nhà phân tích và sổ đăng ký nguồn; Hồ sơ cá nhân kèm theo các tham chiếu đến hồ sơ ghi chép → Dòng thời gian của nhà phân tích và sổ đăng ký nguồn; Các phiên bản đã lưu và biên nhận tệp đính kèm → Dòng thời gian của nhà phân tích và sổ đăng ký nguồn; Nhật ký không gian làm việc → Tệp ZIP chứa bằng chứng đã được ký xác thực; Dòng thời gian của nhà phân tích và sổ đăng ký nguồn → Chuyển giao vụ việc kèm theo các bằng chứng đã được xác minh riêng biệt; Tệp ZIP chứa bằng chứng đã được ký xác thực → Chuyển giao vụ việc kèm theo các bằng chứng đã được xác minh riêng biệt</desc><defs><marker id="flow-3-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M208.8 55.0C208.8 81.5 428.0 81.5 428.0 108.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:231" pathLength="231"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.6s" repeatCount="indefinite" path="M208.8 55.0C208.8 81.5 428.0 81.5 428.0 108.0"/></circle><path class="flow-edge" d="M330.8 55.0C330.8 81.5 428.0 81.5 428.0 108.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:116" pathLength="116"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M330.8 55.0C330.8 81.5 428.0 81.5 428.0 108.0"/></circle><path class="flow-edge" d="M501.0 64.0C501.0 86.0 428.0 86.0 428.0 108.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:90" pathLength="90"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M501.0 64.0C501.0 86.0 428.0 86.0 428.0 108.0"/></circle><path class="flow-edge" d="M671.3 55.0C671.3 81.5 428.0 81.5 428.0 108.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:254" pathLength="254"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.8s" repeatCount="indefinite" path="M671.3 55.0C671.3 81.5 428.0 81.5 428.0 108.0"/></circle><path class="flow-edge" d="M428.0 166.0C428.0 192.5 102.8 192.5 102.8 219.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:334" pathLength="334"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="3.7s" repeatCount="indefinite" path="M428.0 166.0C428.0 192.5 102.8 192.5 102.8 219.0"/></circle><path class="flow-edge" d="M428.0 166.0C428.0 188.0 321.3 188.0 321.3 210.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:120" pathLength="120"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M428.0 166.0C428.0 188.0 321.3 188.0 321.3 210.0"/></circle><path class="flow-edge" d="M428.0 166.0C428.0 192.5 536.4 192.5 536.4 219.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:126" pathLength="126"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M428.0 166.0C428.0 192.5 536.4 192.5 536.4 219.0"/></circle><path class="flow-edge" d="M102.8 277.0C102.8 303.5 320.2 303.5 320.2 330.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:229" pathLength="229"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="2.5s" repeatCount="indefinite" path="M102.8 277.0C102.8 303.5 320.2 303.5 320.2 330.0"/></circle><path class="flow-edge" d="M321.3 286.0C321.3 308.0 320.2 308.0 320.2 330.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:44" pathLength="44"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M321.3 286.0C321.3 308.0 320.2 308.0 320.2 330.0"/></circle><path class="flow-edge" d="M536.4 277.0C536.4 303.5 320.2 303.5 320.2 330.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:228" pathLength="228"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="2.5s" repeatCount="indefinite" path="M536.4 277.0C536.4 303.5 320.2 303.5 320.2 330.0"/></circle><path class="flow-edge" d="M428.0 166.0C428.0 192.5 751.4 192.5 751.4 219.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:332" pathLength="332"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="3.7s" repeatCount="indefinite" path="M428.0 166.0C428.0 192.5 751.4 192.5 751.4 219.0"/></circle><path class="flow-edge" d="M320.2 406.0C320.2 428.0 535.8 428.0 535.8 450.0" marker-end="url(#flow-3-arrow)" style="--i:3;--len:224" pathLength="224"/><circle class="flow-pulse" r="3.2" style="--i:3"><animateMotion begin="indefinite" dur="2.5s" repeatCount="indefinite" path="M320.2 406.0C320.2 428.0 535.8 428.0 535.8 450.0"/></circle><path class="flow-edge" d="M751.4 277.0C751.4 363.5 535.8 363.5 535.8 450.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:293" pathLength="293"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="3.3s" repeatCount="indefinite" path="M751.4 277.0C751.4 363.5 535.8 363.5 535.8 450.0"/></circle><g class="flow-node" style="--i:0"><rect x="156.8" y="15.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="208.8" y="35.0">Các kênh</tspan></text></g><g class="flow-node" style="--i:0"><rect x="278.8" y="15.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="330.8" y="35.0">Các nhóm</tspan></text></g><g class="flow-node" style="--i:0"><rect x="400.8" y="6.0" width="200.5" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="501.0" y="26.0">Các cuộc trò chuyện riêng</tspan><tspan x="501.0" y="44.0">tư</tspan></text></g><g class="flow-node" style="--i:0"><rect x="619.3" y="15.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="671.3" y="35.0">Các bot</tspan></text></g><g class="flow-node" style="--i:1"><rect x="338.1" y="108.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="428.0" y="128.0">Nhật ký không gian làm</tspan><tspan x="428.0" y="146.0">việc</tspan></text></g><g class="flow-node" style="--i:2"><rect x="6.0" y="219.0" width="193.6" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="102.8" y="239.0">Tìm kiếm trên tất cả các</tspan><tspan x="102.8" y="257.0">nguồn</tspan></text></g><g class="flow-node" style="--i:2"><rect x="217.6" y="210.0" width="207.4" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="321.3" y="230.0">Hồ sơ cá nhân kèm theo các</tspan><tspan x="321.3" y="248.0">tham chiếu đến hồ sơ ghi</tspan><tspan x="321.3" y="266.0">chép</tspan></text></g><g class="flow-node" style="--i:2"><rect x="443.0" y="219.0" width="186.7" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="536.4" y="239.0">Các phiên bản đã lưu và</tspan><tspan x="536.4" y="257.0">biên nhận tệp đính kèm</tspan></text></g><g class="flow-node" style="--i:2"><rect x="647.7" y="219.0" width="207.4" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="751.4" y="239.0">Tệp ZIP chứa bằng chứng đã</tspan><tspan x="751.4" y="257.0">được ký xác thực</tspan></text></g><g class="flow-node" style="--i:3"><rect x="226.8" y="330.0" width="186.7" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="320.2" y="350.0">Dòng thời gian của nhà</tspan><tspan x="320.2" y="368.0">phân tích và sổ đăng ký</tspan><tspan x="320.2" y="386.0">nguồn</tspan></text></g><g class="flow-node" style="--i:4"><rect x="439.0" y="450.0" width="193.6" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="535.8" y="470.0">Chuyển giao vụ việc kèm</tspan><tspan x="535.8" y="488.0">theo các bằng chứng đã</tspan><tspan x="535.8" y="506.0">được xác minh riêng biệt</tspan></text></g></svg></div><details class="flow-steps"><summary>Sơ đồ dưới dạng văn bản</summary><ol><li>Các kênh → Nhật ký không gian làm việc</li><li>Các nhóm → Nhật ký không gian làm việc</li><li>Các cuộc trò chuyện riêng tư → Nhật ký không gian làm việc</li><li>Các bot → Nhật ký không gian làm việc</li><li>Nhật ký không gian làm việc → Tìm kiếm trên tất cả các nguồn</li><li>Nhật ký không gian làm việc → Hồ sơ cá nhân kèm theo các tham chiếu đến hồ sơ ghi chép</li><li>Nhật ký không gian làm việc → Các phiên bản đã lưu và biên nhận tệp đính kèm</li><li>Tìm kiếm trên tất cả các nguồn → Dòng thời gian của nhà phân tích và sổ đăng ký nguồn</li><li>Hồ sơ cá nhân kèm theo các tham chiếu đến hồ sơ ghi chép → Dòng thời gian của nhà phân tích và sổ đăng ký nguồn</li><li>Các phiên bản đã lưu và biên nhận tệp đính kèm → Dòng thời gian của nhà phân tích và sổ đăng ký nguồn</li><li>Nhật ký không gian làm việc → Tệp ZIP chứa bằng chứng đã được ký xác thực</li><li>Dòng thời gian của nhà phân tích và sổ đăng ký nguồn → Chuyển giao vụ việc kèm theo các bằng chứng đã được xác minh riêng biệt</li><li>Tệp ZIP chứa bằng chứng đã được ký xác thực → Chuyển giao vụ việc kèm theo các bằng chứng đã được xác minh riêng biệt</li></ol></details></figure>
+<h2 id="1-define-the-case-and-collect-the-whole-account">1. Xác định vụ việc và thu thập toàn bộ diễn biến sự việc<a class="anchor" href="#1-define-the-case-and-collect-the-whole-account" aria-label="Liên kết đến phần này">#</a></h2>
+<ol>
+<li>Kết nối tài khoản thu thập dữ liệu trong không gian làm việc riêng của nó. Trong các ghi chú vụ việc bên ngoài,
+    hãy ghi lại mã tham chiếu vụ việc, ID tài khoản, không gian làm việc, thời điểm bắt đầu quan sát và
+    dấu vân tay khóa ký đáng tin cậy.</li>
+<li><strong>Nguồn</strong> mở <strong>→ Phạm vi quan sát → Chế độ điều tra</strong>. Cài đặt sẵn sẽ chọn
+    <strong>Toàn bộ tài khoản</strong>, các kênh/nhóm/cuộc trò chuyện riêng tư/bot, các hành động của chính người dùng, hồ sơ nguồn
+    và 200 tin nhắn hiển thị gần nhất đối với các nguồn mới được phát hiện.
+    Hãy xem xét lại, nhấn <strong>Lưu phạm vi</strong> và hoàn tất việc xác nhận phạm vi.</li>
+<li><strong>Tải các cuộc trò chuyện</strong> và so sánh các nguồn với danh sách cuộc trò chuyện của tài khoản. Kiểm tra
+    các trường hợp loại trừ. Trong <strong>phần Thông số → Số lượng cuộc trò chuyện được đọc từ danh sách tài khoản</strong> mặc định là
+    1.000 và cho phép tối đa 20.000. Các nguồn vượt quá giới hạn danh sách sẽ được thêm vào khi
+    chúng trở nên hoạt động. Ghi lại những gì thực tế đã được liệt kê.</li>
+<li>Trong <strong>phần Cài đặt ghi lại</strong>, hãy chọn <strong>“Tất cả hoạt động hiển thị”</strong> và lưu
+    các cài đặt giám sát. Kiểm tra các loại tệp đính kèm/giới hạn và dung lượng đĩa trống.</li>
+<li>Bắt đầu quá trình quan sát. Xác thực một tin nhắn mới được kiểm soát, các thao tác chỉnh sửa và xóa, sau đó
+    lưu giữ các tham chiếu thử nghiệm cùng mọi lỗi phát sinh.</li>
+</ol>
+<p>Chế độ ghi lại toàn bộ tài khoản sẽ ghi lại các hoạt động hiển thị trên tài khoản theo các cài đặt đã lưu.
+Công cụ này không truy cập vào các cuộc trò chuyện bí mật cũng như không tự động tham gia vào mọi nhóm được liên kết. Ngoài ra,
+công cụ này cũng không khôi phục lại toàn bộ các cuộc trò chuyện hiện có. Vui lòng tham khảo <a href="../collection/#observation-scope-chosen-chats-a-folder-or-the-whole-account">phạm vi thu thập</a>.</p>
+<h2 id="2-inventory-every-source-and-acquire-historical-context">2. Lập danh mục tất cả các nguồn và thu thập bối cảnh lịch sử<a class="anchor" href="#2-inventory-every-source-and-acquire-historical-context" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Quản lý sổ đăng ký nguồn với mỗi cuộc trò chuyện được ghi vào một hàng riêng biệt:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Lĩnh vực</th>
+<th>Ghi lại</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Thông tin nhận diện</td>
+<td>Không gian làm việc, ID tài khoản, ID cuộc trò chuyện dạng số, tiêu đề và loại</td>
+</tr>
+<tr>
+<td>Khả năng hiển thị</td>
+<td>Tư cách thành viên/vai trò, quyền truy cập đã được xác nhận hoặc chưa được xác nhận, các trường hợp loại trừ</td>
+</tr>
+<tr>
+<td>Ghi lại theo thời gian thực</td>
+<td>Thời điểm bắt đầu, các loại sự kiện được chọn và những thay đổi về chính sách sau này</td>
+</tr>
+<tr>
+<td>Lịch sử nhật ký</td>
+<td>Yêu cầu/hoàn tất bản chụp nhanh, giới hạn, thời gian và các tham chiếu bản ghi</td>
+</tr>
+<tr>
+<td>Lịch sử đầy đủ</td>
+<td>Tên tệp xuất theo từng cuộc trò chuyện có chữ ký, phạm vi và trạng thái hoàn tất/thất bại</td>
+</tr>
+<tr>
+<td>Tệp đính kèm</td>
+<td>Các thông tin về biên nhận phương tiện truyền thông đã hoàn tất, mã băm, kích thước cũng như các kết quả bị bỏ qua hoặc không thành công</td>
+</tr>
+<tr>
+<td>Phạm vi bao quát</td>
+<td>Các sự cố ngừng hoạt động, dữ liệu thu thập không đầy đủ, FloodWait, tin nhắn không khả dụng và các lỗ hổng khác</td>
+</tr>
+</tbody>
+</table></div>
+<p>Sử dụng phương thức thu thập phù hợp cho từng nguồn:</p>
+<ul>
+<li><strong>Tính năng chụp nhanh lịch sử</strong> lưu các tin nhắn hiển thị gần đây vào nhật ký quan sát.
+    Giá trị mặc định tối đa là 500; quý vị có thể tăng
+    con số này lên 10.000 thông qua <strong>mục Thông số → Số lượng tin nhắn tối đa trong bản chụp nhanh lịch sử</strong>. Đây là các quan sát lịch sử hiện tại, không phải các thao tác chỉnh sửa được tái tạo.</li>
+<li><strong>Xuất toàn bộ cuộc trò chuyện → Xuất toàn bộ cuộc trò chuyện</strong>, hoặc <strong>Cuộc trò chuyện → Xuất cuộc trò chuyện</strong>, sẽ trích xuất
+    lịch sử hiện đang hiển thị của một cuộc trò chuyện vào một gói <code>chat.json</code> /
+    <code>chat.html</code> được ký số riêng biệt. Lặp lại thao tác này đối với các nguồn của vụ việc và lưu giữ từng kết quả.</li>
+<li><strong>Khi một cuộc trò chuyện hoặc bot mới xuất hiện,</strong> hệ thống có thể lưu lại hồ sơ của nó cùng tối đa 1.000
+    tin nhắn gần đây; chế độ Điều tra sẽ chọn 200 tin nhắn. Các cuộc trò chuyện hiện có sẽ không được
+    lưu lại các tin nhắn đó một cách hồi tố khi chế độ này được kích hoạt.</li>
+<li><strong>Việc tải xuống các tệp đính kèm hiển thị</strong> sẽ lưu giữ số byte theo chính sách đã cấu hình.
+    Yêu cầu phải có biên nhận <code>media.saved</code> hoàn chỉnh kèm theo mã SHA-256 và số byte. Một tác vụ đang chờ xử lý,
+    hình thu nhỏ hoặc tên tệp không được coi là tệp đính kèm được lưu giữ.</li>
+</ul>
+<p>Việc xuất toàn bộ cuộc trò chuyện sẽ <strong>không</strong> tự động điền đầy đủ tất cả
+các tin nhắn vào sổ ghi chép hoặc hồ sơ cá nhân. Vui lòng sử dụng các bản chụp nhanh sổ ghi chép để truy xuất lịch sử cần phân tích bên trong
+TgWitness. Không có tính năng khôi phục toàn bộ lịch sử tài khoản chỉ bằng một cú nhấp chuột; việc thu thập lịch sử đầy đủ
+được thực hiện theo từng cuộc trò chuyện. Cả hai phương pháp này đều không thể khôi phục các nội dung mà Telegram không còn cung cấp.</p>
+<h2 id="3-preserve-the-evolving-case-and-deliberate-interactions">3. Lưu giữ diễn biến của vụ việc và các tương tác có chủ đích<a class="anchor" href="#3-preserve-the-evolving-case-and-deliberate-interactions" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Đánh dấu các cuộc trò chuyện liên quan đến vụ việc đang diễn ra làm nguồn ưu tiên. Rà soát khoảng thời gian kiểm tra lại, quá trình
+bổ sung dữ liệu liên tục và kết quả liên quan đến phương tiện truyền thông. Duy trì hoạt động theo dõi của trình thu thập dữ liệu trong suốt quá trình sử dụng tài khoản.
+Sử dụng <strong>Chats → Profile → Save profile now</strong> để lưu giữ siêu dữ liệu nguồn như
+mô tả và lệnh bot. Thông tin này độc lập với hồ sơ cá nhân được trích xuất
+từ các tin nhắn đã lưu.</p>
+<p>Trong trường hợp liên quan đến việc theo dõi một nguồn tin hoặc tương tác với một bot:</p>
+<ol>
+<li><strong>Mở liên kết Telegram → Lưu bản xem trước</strong> sẽ ghi lại liên kết được cung cấp và
+    bản xem trước hiển thị trước khi thực hiện hành động.</li>
+<li><strong>Lệnh &quot;Join / open and observe&quot;</strong> thực hiện thao tác tham gia/mở và gửi tham số khởi động
+    của bot khi được cung cấp. Yêu cầu tham gia đang chờ phê duyệt sẽ được ghi lại với trạng thái &quot;đang chờ xử lý&quot;.</li>
+<li>Các phản hồi văn bản do bảng điều khiển phát ra và các thao tác nhấn nút được hỗ trợ sẽ giữ nguyên mã
+    <code>interaction.requested</code> và <code>interaction.result</code>. Biên nhận phản hồi có thể lưu giữ
+    văn bản cửa sổ bật lên được trả về, trạng thái cảnh báo và URL.</li>
+</ol>
+<p>Đó là các hành động thực tế trên tài khoản. Các thao tác nhấn nút gọi lại trong một ứng dụng Telegram khác sẽ không
+hiển thị với trình thu thập dữ liệu, mặc dù các tin nhắn hoặc thao tác chỉnh sửa phát sinh từ đó có thể được ghi lại.
+Ứng dụng khách thu nhỏ (mini-client) không thực hiện các quy trình liên quan đến ứng dụng web, thanh toán, điện thoại hoặc vị trí.
+Để biết chi tiết về cách thức hoạt động, vui lòng tham khảo <a href="../collection/#act-from-the-panel">phần tương tác với bảng điều khiển</a>.</p>
+<h2 id="4-connect-observations-across-chats">4. Liên kết các quan sát giữa các cuộc trò chuyện<a class="anchor" href="#4-connect-observations-across-chats" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Trong mục <strong>Journal</strong>, hãy chọn <strong>“Tất cả nguồn”</strong> và tìm kiếm nội dung đã được ghi lại. Mở các
+bản ghi phù hợp và lưu lại không gian làm việc, cuộc trò chuyện, ID tin nhắn, thứ tự cũng như mã băm của bản ghi.</p>
+<p>Trong một cuộc trò chuyện liên quan, hãy mở <strong>mục “Người dùng” → “Bật hồ sơ”</strong> và kiểm tra thông tin của một người dùng:</p>
+<ul>
+<li>Các tên/tên người dùng được ghi nhận theo thời gian và mã định danh số (ID) trên Telegram.</li>
+<li>Các mối quan hệ phản hồi kèm theo tham chiếu đến bản ghi nguồn.</li>
+<li><strong>Ngoài ra còn có…</strong> các cuộc trò chuyện khác trong nhật ký không gian làm việc này mà ID đó đã tham gia.</li>
+<li>Hoạt động, các thao tác chỉnh sửa/xóa cũng như các ví, số điện thoại, tên người dùng và liên kết được đề cập.</li>
+<li>Dữ liệu siêu dữ liệu của ảnh đại diện đã lưu và các ảnh đại diện tương tự được lưu trong bộ nhớ đệm, kèm theo nguồn gốc riêng biệt của từng ảnh.</li>
+</ul>
+<p>Vui lòng mở các bản ghi được trích dẫn trước khi sử dụng hồ sơ được tạo ra từ đó trong kết luận điều tra. Các hồ sơ này bao gồm
+những người có tin nhắn được lưu trữ, chứ không phải mọi thành viên trong nhóm. <strong>Thông số → Số lượng bản ghi
+được trích dẫn cho mỗi sự kiện</strong> sẽ giới hạn danh sách tham chiếu, chứ không phải số lượng hoạt động cơ bản.
+Các đề cập và mức độ tương đồng của ảnh đại diện chỉ là manh mối; chúng không xác định quyền sở hữu hay danh tính.</p>
+<p>Trong ví dụ minh họa:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Liên kết</th>
+<th>Ghi lại</th>
+<th>Quan sát được hỗ trợ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cùng một tài khoản người gửi</td>
+<td>Nhóm #146 và cuộc thảo luận riêng tư tiếp theo #205</td>
+<td>Cả hai đều cung cấp ID người gửi Telegram là 71001</td>
+</tr>
+<tr>
+<td>Cùng một đích đến</td>
+<td>#146, bàn phím bot #173, chỉnh sửa kênh #188, tin nhắn riêng tư #205</td>
+<td>Tất cả đều chứa mã <code>pay.example.invalid/new</code>; quyền sở hữu/quyền kiểm soát chưa được xác định</td>
+</tr>
+<tr>
+<td>Tệp lưu trữ tương tự</td>
+<td>Đã hoàn tất các biên nhận phương tiện truyền thông số #151 và #209</td>
+<td>Các giá trị SHA-256 đầy đủ trùng khớp với các byte được lưu giữ</td>
+</tr>
+<tr>
+<td>Nguồn thông tin kênh</td>
+<td>#101 và #188</td>
+<td>Không được quy cho người dùng 71001 là tác giả của bài đăng trên kênh nếu không có thông tin xác định người gửi</td>
+</tr>
+</tbody>
+</table></div>
+<p>So sánh các giá trị băm của tệp đính kèm và các tham chiếu tin nhắn liên quan. Các tệp
+giống hệt nhau không đủ để xác định người tạo, người chuyển tiếp hoặc người vận hành chung. Chỉ riêng việc có cùng tên và
+hình đại diện tương tự không đủ để kết luận rằng hai ID Telegram thuộc về cùng một người.</p>
+<h2 id="5-build-the-cross-chat-timeline">5. Xây dựng dòng thời gian liên cuộc trò chuyện<a class="anchor" href="#5-build-the-cross-chat-timeline" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Sử dụng các phiên bản đã lưu trong <strong>phần Trò chuyện</strong> cùng các liên kết <strong>bản ghi Nhật ký #…</strong> tương ứng. Trong
+<strong>Nhật ký</strong>, kết hợp <strong>Tất cả các nguồn</strong> với <strong>các thao tác Chỉnh sửa</strong>, <strong>Xóa bỏ</strong> và <strong>Phạm vi ghi nhận</strong>.
+Giữ lại cả mã <code>source_at</code> (nếu có) và mã <code>observed_at</code>.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Thời gian quan sát minh họa</th>
+<th>Tham khảo</th>
+<th>Quan sát</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>09:00</td>
+<td>Kênh #101</td>
+<td>Địa chỉ đích ban đầu đã được ghi lại</td>
+</tr>
+<tr>
+<td>09:12</td>
+<td>Nhóm #146; phương tiện truyền thông #151</td>
+<td>Đã đăng tải địa chỉ đích mới; quá trình tải xuống tệp đã hoàn tất</td>
+</tr>
+<tr>
+<td>09:16</td>
+<td>Bot số 173</td>
+<td>Bàn phím chỉ đến đích mới</td>
+</tr>
+<tr>
+<td>09:20</td>
+<td>Kênh #188</td>
+<td>Thông báo đã được chỉnh sửa; cả hai phiên bản đã lưu đều được giữ lại</td>
+</tr>
+<tr>
+<td>09:24</td>
+<td>Tư nhân #205; phương tiện truyền thông #209</td>
+<td>ID người gửi trùng khớp với địa chỉ nhận; các byte của tệp được giữ nguyên</td>
+</tr>
+<tr>
+<td>09:28</td>
+<td>Nhóm #231</td>
+<td>Đã nhận được thông báo xóa; người xóa và thời gian xóa chính xác hiện chưa được xác định</td>
+</tr>
+</tbody>
+</table></div>
+<p>Các bản ghi khác có thể xuất hiện giữa các tham chiếu ví dụ này. Số thứ tự sắp xếp
+các quan sát; các bản chụp lịch sử có thể chứa ngày nguồn cũ hơn và được gửi đến muộn hơn
+so với các sự kiện đang diễn ra. Hãy phân biệt rõ các bản chụp, tin nhắn đã khôi phục, thông báo xóa và
+kết quả “không tìm thấy khi kiểm tra lại”. Đánh dấu các khoảng trống trong phạm vi ghi nhận là các khoảng thời gian chưa xác định. Việc
+thu thập lịch sử sau này không có nghĩa là xác lập được việc quan sát liên tục một cách hồi tố.</p>
+<h2 id="6-add-account-perspectives-without-losing-their-origin">6. Thêm các góc nhìn từ tài khoản mà không làm mất nguồn gốc của chúng<a class="anchor" href="#6-add-account-perspectives-without-losing-their-origin" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Hãy sử dụng một không gian làm việc riêng biệt cho từng tài khoản khác nhau và lặp lại quy trình kiểm kê đối với từng tài khoản đó.
+Lưu giữ ID tài khoản, vai trò, dấu vân tay khóa ký và các tham chiếu nguồn trong mỗi
+lần so sánh. Số tin nhắn không phải là mã định danh chung cho tất cả các cuộc trò chuyện/tài khoản.</p>
+<p>Việc tương quan giữa các không gian làm việc được thực hiện trong các ghi chú vụ việc bên ngoài hoặc các công cụ phân tích.
+Hiện tại, TgWitness chưa hỗ trợ tính năng tìm kiếm toàn cầu xuyên không gian làm việc, dòng thời gian hợp nhất,
+sơ đồ điều tra hoặc kho lưu trữ vụ việc tổng hợp. Việc xuất dữ liệu từ nhiều tài khoản của <strong>một</strong>
+kênh/siêu nhóm là một thao tác riêng biệt, không phải là việc hợp nhất các nhật ký tài khoản.</p>
+<p>Đối với các công việc có quy mô lớn hơn, cần duy trì sự tách biệt với một <a href="../witness/">nhân chứng độc lập</a>.
+Sử dụng các kiểm tra giao nhận có kiểm soát để xác minh
+đường dẫn thu thập và phạm vi hiển thị của từng tài khoản.</p>
+<h2 id="7-assemble-and-verify-the-case-handoff">7. Tổng hợp và xác minh việc chuyển giao hồ sơ vụ việc<a class="anchor" href="#7-assemble-and-verify-the-case-handoff" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Vui lòng lưu giữ các tài liệu này cùng nhau trong một thư mục hồ sơ vụ việc do chuyên viên phân tích lập:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Nội dung</th>
+<th>Mục đích</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ghi chú vụ việc và sổ đăng ký nguồn</td>
+<td>Các câu hỏi, chính sách thu thập, quyền truy cập/vai trò, kết quả điều tra, các giải thích thay thế và những điểm còn thiếu sót</td>
+</tr>
+<tr>
+<td>Dòng thời gian</td>
+<td>Các thông tin về thời gian cũng như tham chiếu đến không gian làm việc/cuộc trò chuyện/tin nhắn/chuỗi tin nhắn cho từng mục ghi chép</td>
+</tr>
+<tr>
+<td>Tệp ZIP chứa bằng chứng đã được ký số cho từng không gian làm việc</td>
+<td>Bản ghi nhật ký hoàn chỉnh, bảng kê khai và các tệp phương tiện được lưu giữ kèm theo; các bộ lọc trên bảng điều khiển không làm thu hẹp phạm vi xuất nhật ký</td>
+</tr>
+<tr>
+<td>Các tệp hồ sơ cá nhân được ký xác thực riêng biệt</td>
+<td>Các tài liệu tham khảo được trích dẫn đã được đối chiếu với bằng chứng tương ứng trong không gian làm việc</td>
+</tr>
+<tr>
+<td>Các bản xuất toàn bộ cuộc trò chuyện đã được ký xác thực</td>
+<td>Việc thu thập lịch sử hiển thị hiện tại, tách biệt với sổ ghi chép quan sát</td>
+</tr>
+<tr>
+<td>Dấu vân tay đáng tin cậy và các điểm kiểm tra trước đó</td>
+<td>Các yếu tố nhận diện chính và phạm vi của sổ nhật ký được lưu giữ</td>
+</tr>
+<tr>
+<td>Các bằng chứng từ Witness, nếu được cấu hình</td>
+<td>Sổ nhật ký riêng biệt, các bài đăng có chữ ký và dấu vân tay chứng thực</td>
+</tr>
+<tr>
+<td>Kết quả xác minh và các giá trị băm của tệp đã được cung cấp</td>
+<td>Những nội dung nào đã được kiểm tra, những byte nào đã được chuyển và chuyển cho ai</td>
+</tr>
+</tbody>
+</table></div>
+<p>Từ một bản cài đặt đáng tin cậy, kèm theo tên tệp và dấu vân tay thực tế của từng không gian làm việc:</p>
+<pre><code class="language-sh">python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
+python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --evidence evidence.zip
+python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256</code></pre>
+<p>Lưu giữ kết quả xác minh thực tế và các bằng chứng gốc. Thư mục cấp cao nhất của vụ việc,
+sổ đăng ký nguồn và kết luận của nhà phân tích được lưu trữ bên ngoài;
+mỗi bằng chứng của TgWitness đều có chữ ký và quy trình xác minh riêng.</p>
+<h2 id="adapt-the-investigation">Thích ứng với quá trình điều tra<a class="anchor" href="#adapt-the-investigation" aria-label="Liên kết đến phần này">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Trường hợp</th>
+<th>Trace</th>
+<th>Gửi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tranh chấp về đơn hàng/thanh toán do bot xử lý</td>
+<td>Thông báo đăng ký → xem trước liên kết đã lưu → tham số khởi động bot → phiên bản tin nhắn và bàn phím → biên nhận gọi lại trên bảng điều khiển → theo dõi tin nhắn riêng tư/nhóm</td>
+<td>Dòng thời gian đề nghị/phản hồi được ghi nhận và các nguồn tin đã được xác minh; riêng một liên kết thanh toán không đủ để chứng minh việc thanh toán đã diễn ra</td>
+</tr>
+<tr>
+<td>Các tin nhắn đã bị xóa sau khi xảy ra sự cố</td>
+<td>Tất cả các cuộc trò chuyện bị ảnh hưởng → bản gốc/bản chỉnh sửa đã được lưu trữ → kết quả xóa hoặc không còn tồn tại khi kiểm tra lại → phương tiện truyền thông được bảo toàn → phạm vi bao quát và các góc nhìn khác từ tài khoản</td>
+<td>Các phiên bản được lưu giữ và các khoảng thời gian không xác định được nêu rõ; không có đối tượng xóa tin nhắn nào được giả định</td>
+</tr>
+<tr>
+<td>Một người tham gia thay đổi tên trong các cuộc trò chuyện</td>
+<td>ID người gửi dạng số → lịch sử tên/tên người dùng → các phản hồi → các cuộc trò chuyện khác được ghi nhận → các đích đến/tệp tin được trích dẫn</td>
+<td>Dòng thời gian hoạt động của tài khoản Telegram được trích dẫn, trong đó các giả thuyết về danh tính và mối quan hệ trong thế giới thực được tách biệt rõ ràng</td>
+</tr>
+</tbody>
+</table></div>
+<p><a href="../collection/">Tham chiếu bộ sưu tập</a> · <a href="../evidence/#people-profiles">Xác minh hồ sơ cá nhân</a> ·
+<a href="../evidence/#investigation-handoff">Việc chuyển giao bằng chứng</a> · <a href="../verification/">Đã hoàn tất quá trình xác thực</a></p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/INVESTIGATION.md">Chỉnh sửa trang này trên GitHub ↗</a><a class="next-guide" href="../features/"><span>Bước tiếp theo</span><strong>Các tính năng và giới hạn →</strong></a><p>Các hướng dẫn này mô tả cách triển khai hiện tại. Kết quả xác thực và những hạn chế còn tồn tại được ghi chép riêng biệt. <a href="../verification/">Những nội dung đã được kiểm thử →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Trên trang này"><p class="nav-label">Trên trang này</p><a href="#worked-case-a-destination-changes-across-four-conversations">Ví dụ thực tế: sự thay đổi về điểm đến trong bốn cuộc trò chuyện</a><a href="#1-define-the-case-and-collect-the-whole-account">1. Xác định vụ việc và thu thập toàn bộ diễn biến sự việc</a><a href="#2-inventory-every-source-and-acquire-historical-context">2. Lập danh mục tất cả các nguồn và thu thập bối cảnh lịch sử</a><a href="#3-preserve-the-evolving-case-and-deliberate-interactions">3. Lưu giữ diễn biến của vụ việc và các tương tác có chủ đích</a><a href="#4-connect-observations-across-chats">4. Liên kết các quan sát giữa các cuộc trò chuyện</a><a href="#5-build-the-cross-chat-timeline">5. Xây dựng dòng thời gian liên cuộc trò chuyện</a><a href="#6-add-account-perspectives-without-losing-their-origin">6. Thêm các góc nhìn từ tài khoản mà không làm mất nguồn gốc của chúng</a><a href="#7-assemble-and-verify-the-case-handoff">7. Tổng hợp và xác minh việc chuyển giao hồ sơ vụ việc</a><a href="#adapt-the-investigation">Thích ứng với quá trình điều tra</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Mã nguồn mở · Chạy trên máy tính của quý vị</span><a href="../../../../LICENSE">Giấy phép MIT</a><a href="../notice/">Thông báo dành cho người vận hành</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">An ninh</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Đang chờ tin nhắn", "Step through a fictional send, edit and delete.": "Hãy cùng tìm hiểu từng bước về một quy trình giả định bao gồm việc gửi, chỉnh sửa và xóa tin nhắn.", "No observations yet. Start the sequence or advance one event.": "Chưa có ghi chú nào. Bắt đầu chuỗi sự kiện hoặc chuyển sang sự kiện tiếp theo.", "Meet at 10:00": "Hẹn gặp lúc 10:00", "A new message is visible in the chat.": "Một tin nhắn mới đã xuất hiện trong cuộc trò chuyện.", "Record 1 appended: the collector observed the original message.": "Ghi chú 1 được đính kèm: bộ thu thập đã ghi nhận tin nhắn gốc.", "Meet at 11:00": "Hẹn gặp lúc 11:00", "The current text changes. The earlier observation stays.": "Nội dung văn bản hiện tại đã được điều chỉnh. Quan sát trước đó vẫn được giữ nguyên.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Bản ghi số 2 đã được bổ sung: nội dung chỉnh sửa là một quan sát mới. Bản ghi số 1 vẫn giữ nguyên văn bản gốc.", "Message deleted": "Tin nhắn đã bị xóa", "The message has disappeared from the chat view.": "Tin nhắn đã biến mất khỏi giao diện trò chuyện.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Ghi chú 3 được đính kèm: thông báo xóa được lưu giữ cùng với cả hai phiên bản đã quan sát được.", "0 records": "0 bản ghi", "1 record": "1 bản ghi", "2 records": "2 bản ghi", "3 records": "3 bản ghi", "Complete / {n} of 3": "Hoàn tất / {n}/3", "Step / {n} of 3": "Bước / {n}/3", "Pause": "Tạm dừng", "Replay sequence": "Trình tự phát lại", "Play sequence": "Trình tự phát lại", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Ví dụ tĩnh hiện đã có sẵn. Để tính toán các giá trị băm một cách tương tác, vui lòng truy cập trang này qua HTTPS hoặc xem bản xem trước trên localhost với sự hỗ trợ của Web Crypto.", "No record supplied": "Không có bản ghi nào được cung cấp", "Tail removed": "Phần cuối đã được loại bỏ", "≠ saved hash": "≠ băm đã lưu", "Rebuilt · different hash": "Đã được xây dựng lại · mã băm khác", "= saved hash": "= mã băm đã lưu", "Same length and matching head.": "Độ dài tương đương và tiêu đề phù hợp.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Cả ba giá trị băm được tính toán đều khớp với các giá trị băm đã lưu. Mẫu này phù hợp với giới hạn ba bản ghi được lưu giữ.", "Same saved head; the journal prefix fails verification.": "Cùng một tiêu đề đã lưu; tiền tố của sổ ghi chép không qua được quá trình xác minh.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Bản ghi số 2 hiện không còn khớp với giá trị băm đã lưu trữ của nó. Việc chỉ kiểm tra giá trị băm cuối cùng đã lưu trữ sẽ bỏ sót lỗi này; trình xác minh sẽ kiểm tra từng bản ghi một.", "Head differs from the retained checkpoint.": "Đầu trang khác với điểm kiểm tra được lưu giữ.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Các giá trị băm được tái tạo liên kết với nhau, nhưng phần đầu cuối cùng đã thay đổi. Điểm kiểm tra được lưu giữ từ chối lịch sử này. Các chữ ký gốc cũng sẽ không hợp lệ đối với các bản ghi đã bị thay đổi.", "Too short: 2 supplied records \u003c 3 retained records.": "Quá ngắn: 2 bản ghi được cung cấp \u003c 3 bản ghi được lưu giữ.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Hai giá trị băm còn lại vẫn khớp nhau. Điểm kiểm tra được lưu giữ đã tiết lộ phần cuối bị thiếu. Nếu không có ranh giới trước đó, chỉ riêng tiền tố ngắn hơn này sẽ không thể phát hiện ra sự thiếu sót.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Trình duyệt này không hỗ trợ tính toán hàm băm. Các công thức và phần giải thích tĩnh dưới đây vẫn có sẵn.", "{n} records": "{n} bản ghi", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Đã được chấp nhận: số lượng tăng lên, chữ ký đã được xác minh và khóa khớp. TgWitness duy trì ranh giới mới này.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: bản trả lời có chữ ký báo cáo số lượng bản ghi ít hơn so với điểm kiểm tra được chấp nhận gần nhất. Hệ thống TgWitness ghi nhận sự cố và giữ nguyên ranh giới đã được chấp nhận trước đó.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: số lượng không thay đổi nhưng nhánh chính khác biệt. TgWitness ghi lại sự bất đồng này và duy trì ranh giới đã được chấp nhận trước đó.", "No answer": "Không có câu trả lời", "boundary unknown": "giới hạn chưa xác định", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Không có phản hồi: TgWitness ghi lại kết quả kiểm tra không thành công. Công cụ này không thể xác định trạng thái hiện tại của bộ thu thập dữ liệu. Nếu TgWitness vẫn có thể kết nối với Bot API và chính sách xuất bản cho phép, công cụ này có thể công bố thông tin về sự cố đó.", "Send {n}": "Gửi {n}", "Edit {n}": "Chỉnh sửa {n}", "Delete {n}": "Xóa {n}", "Both accounts captured all six expected observations in this example.": "Cả hai tài khoản đều ghi lại đầy đủ cả sáu quan sát dự kiến trong ví dụ này.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Tài khoản B vẫn ghi lại được 6/6 tin nhắn. Hai biên nhận mất nhiều thời gian hơn. Tỷ lệ ghi lại và độ trễ của biên nhận trả lời cho những câu hỏi khác nhau.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Tài khoản B đã ghi lại được 5 trong số 6 hành động trước thời hạn (83,3%). Hành động chỉnh sửa còn thiếu không có độ trễ được đo lường. Kết quả này chỉ mô tả sáu hành động được kiểm soát.", "not observed by cutoff": "không được ghi nhận trước thời hạn", "{s} seconds": "{s} giây", "Exact values follow in the table.": "Các giá trị chính xác được trình bày trong bảng dưới đây.", "{s} s": "{s} s", "Not observed": "Chưa được quan sát thấy", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Bốn cuộc trò chuyện cung cấp các quan sát khác nhau. Vui lòng theo dõi các bản ghi nguồn cho từng kết nối; không gán bài đăng trên kênh cho người dùng 71001 nếu không có thông tin người gửi được xác định rõ.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Các bản ghi số 146 và 205 cung cấp cùng một ID người gửi, đó là 71001. Điều này giúp liên kết các bài đăng được quan sát thấy từ một tài khoản Telegram trên hai cuộc trò chuyện. Tuy nhiên, thông tin này không xác định danh tính của một cá nhân trong thế giới thực cũng như không quy thuộc bài đăng trên kênh đó cho bất kỳ ai.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Địa chỉ đích pay.example.invalid/new xuất hiện trong bản ghi nhóm số 146, bản ghi bàn phím bot số 173, bản ghi chỉnh sửa kênh số 188 và tin nhắn riêng tư số 205. Việc địa chỉ đích này xuất hiện lặp lại giúp liên kết các tài liệu với nhau; điều này không chứng minh rằng các tài khoản đó nằm dưới sự kiểm soát chung.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Trong trường hợp giả định này, các biên nhận phương tiện đã hoàn tất số #151 và #209 có các giá trị SHA-256 đầy đủ trùng khớp. Hãy so sánh các byte thực tế và các bản ghi tin nhắn liên quan. Tệp trùng khớp này không xác định được người tạo ra nó cũng như không chứng minh được ai là người đã chuyển tiếp nó.", "the encrypted off-site copy": "bản sao được mã hóa lưu trữ ngoài trang web", "notifications": "thông báo", "checkpoint hashes for timestamps": "Các giá trị băm điểm kiểm tra (checkpoint hashes) để xác định dấu thời gian", "signed checkpoints for the witness": "các mốc kiểm tra có chữ ký dành cho TgWitness", "Switched on in this example": "Đã kích hoạt trong ví dụ này", "Optional · off by default": "Tùy chọn · tắt theo mặc định", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Khi rời khỏi thiết bị này: kết nối Telegram và {list}. Không có gì khác.", "Default: only the Telegram connection leaves this machine.": "Mặc định: chỉ kết nối Telegram mới được truyền ra khỏi máy này.", "{done} of {total} done": "{done}/{total} đã hoàn thành", "Mark step {n} as done": "Đánh dấu bước {n} là đã hoàn thành", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Nội dung", "Copied": "Đã sao chép", "Command copied.": "Lệnh đã được sao chép.", "Selected — Ctrl/Cmd+C": "Đã chọn — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Lệnh đã được chọn. Vui lòng sao chép thủ công.", "Command copied to clipboard.": "Lệnh đã được sao chép vào khay nhớ tạm.", "Select text": "Chọn văn bản", "Clipboard unavailable. Command selected; copy it manually.": "Không thể truy cập khay nhớ tạm. Lệnh đã được chọn; vui lòng sao chép thủ công.", "A message arrives. The first observation is saved.": "Một tin nhắn được gửi đến. Quan sát đầu tiên được lưu lại.", "The time changes. Both captured versions stay.": "Thời gian có thể thay đổi. Cả hai phiên bản được lưu giữ đều được giữ nguyên.", "The message disappears. The captured history remains.": "Tin nhắn có thể biến mất. Nhưng lịch sử đã được ghi lại vẫn còn đó.", "Pause example animation": "Tạm dừng hình ảnh minh họa", "Play example animation": "Xem ví dụ về hình ảnh động", "Play": "Phát", "Full-size workspace screenshot": "Ảnh chụp màn hình toàn màn hình không gian làm việc", "Workspace screenshot · fictional data": "Ảnh chụp màn hình giao diện làm việc · dữ liệu giả định", "Close": "Đóng", "Close screenshot": "Đóng ảnh chụp màn hình", "Scrollable full-size screenshot": "Ảnh chụp màn hình toàn màn hình có thể cuộn", "Enlarge: {name}": "Phóng to: {name}", "View full size": "Xem kích thước đầy đủ"}</script>
+</body></html>

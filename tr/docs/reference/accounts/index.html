@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="tr" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Hesaplar ve oturum biçimleri | TgWitness</title>
+<meta name="description" content="Telefon, QR kodu veya kimlik anahtarıyla oturum açın, Telethon, Pyrogram veya Telegram Desktop oturumlarını içe aktarın ve birden fazla hesabı yönetin."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="Hesaplar ve oturum biçimleri | TgWitness"><meta property="og:description" content="Telefon, QR kodu veya kimlik anahtarıyla oturum açın, Telethon, Pyrogram veya Telegram Desktop oturumlarını içe aktarın ve birden fazla hesabı yönetin.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/accounts/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/accounts/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/accounts/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/accounts/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/accounts/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/accounts/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/accounts/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/accounts/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/accounts/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/accounts/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/", "url": "https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/", "name": "Hesaplar ve oturum biçimleri | TgWitness", "description": "Telefon, QR kodu veya kimlik anahtarıyla oturum açın, Telethon, Pyrogram veya Telegram Desktop oturumlarını içe aktarın ve birden fazla hesabı yönetin.", "inLanguage": "tr", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": "https://phishdestroy.github.io/TgWitness/tr/"}, {"@type": "ListItem", "position": 2, "name": "Belgeler", "item": "https://phishdestroy.github.io/TgWitness/tr/docs/"}, {"@type": "ListItem", "position": 3, "name": "Referans", "item": "https://phishdestroy.github.io/TgWitness/tr/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Hesaplar ve oturum biçimleri", "item": "https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">İçeriğe atla</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Belgeler</span></a>
+<nav aria-label="Kılavuzlar"><a href="../../concepts/">Görsel kılavuz</a><a href="../../">Tüm kılavuzlar</a><a href="../">Referans</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Dil"><span aria-hidden="true">◍</span> Türkçe</summary><div class="lang-list"><a href="../../../../docs/reference/accounts/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/accounts/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/accounts/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/accounts/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/accounts/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="./" hreflang="tr" lang="tr" aria-current="true">Türkçe</a><a href="../../../../ar/docs/reference/accounts/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/accounts/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/accounts/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/accounts/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/accounts/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/accounts/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/accounts/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Açık ve koyu tema arasında geçiş yapın"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Kılavuzlar"><a href="../../../guides/modes.html">Modlar, senaryolar ve kanıt düzeyleri</a><p class="nav-label">İlk adımlar</p><a href="../../start/">Birkaç dakika içinde başlayın</a><a href="../../accounts/">Hesap bağla</a><a href="../../proxies/">Bir proxy seçin</a><a href="../../exports/">Dışa aktarma ve doğrulama</a><p class="nav-label">Kanıtları anlamak</p><a href="../../concepts/">Kanıtların nasıl işlediğini görün</a><a href="../../cases/">Tüm sohbetleri inceleyin</a><a href="../../security/">Güvenliği sağlayın</a><p class="nav-label">Daha fazlasını öğrenin</p><a href="../../witness/">Witness botunu kurun</a><a href="../../server/">Çalışır durumda tutun</a><a href="../../troubleshooting/">Neyin yanlış gittiğini bulun</a></nav><nav class="wiki-nav" aria-label="Referans"><p class="nav-label"><a class="nav-label-link" href="../">Referans</a></p><details class="wiki-group" open><summary>Kurulum</summary><a href="../quickstart/">Hızlı başlangıç</a><a href="./" aria-current="page">Hesaplar ve oturum biçimleri</a><a href="../connection/">Bağlantı, proxy'ler ve veri koruma</a><a href="../deployment/">Uygulama</a></details><details class="wiki-group"><summary>Topla</summary><a href="../collection/">Veri toplama süreci nasıl işliyor?</a><a href="../operations/">İş akışları ve işlemler</a><a href="../investigation/">Soruşturma modu</a><a href="../features/">Özellikler ve sınırlamalar</a></details><details class="wiki-group"><summary>Kanıt</summary><a href="../how-it-works/">Kanıt sistemi nasıl çalışır?</a><a href="../evidence/">Kanıt formatı</a><a href="../witness/">Bağımsız tanık</a><a href="../timestamp/">Zaman damgaları</a></details><details class="wiki-group"><summary>Güvenlik ve proje</summary><a href="../security/">Güvenlik ve veri işleme</a><a href="../architecture/">Mimari</a><a href="../verification/">Neler test edildi</a><a href="../license/">Lisans ve mimari uyumsuzluk bildirimi</a><a href="../notice/">Operatör uyumsuzluğu bildirimi</a><a href="../changelog/">Değişiklik günlüğü</a></details></nav><p class="sidebar-note">v0.7.0<br>Açık kaynak · Kendi makinenizde çalışır</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Kılavuzlar"><a href="../../../">Ana Sayfa</a> <span aria-hidden="true">/</span> <a href="../../">Belgeler</a> <span aria-hidden="true">/</span> <a href="../">Referans</a> <span aria-hidden="true">/</span> <span aria-current="page">Hesaplar ve oturum biçimleri</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Belgelere göz atın</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zinciri, token veya witness&#x27;i deneyin…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Net arama" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Kılavuzları ve referansları aramak için bir kelime yazın. Arama, tarayıcınızda kalır.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Referans / Kurulum</p><h1>Hesaplar ve oturum biçimleri</h1><p class="guide-outcome">Telefon, QR kodu veya kimlik anahtarıyla oturum açın, Telethon, Pyrogram veya Telegram Desktop oturumlarını içe aktarın ve birden fazla hesabı yönetin.</p><div class="wiki-body"><p>TgWitness, Telethon kullanarak MTProto üzerinden bir <strong>Telegram kullanıcı hesabı</strong> (bot değil) olarak oturum açar.
+Her hesap, kendi oturumu, kaynakları, günlüğü ve imzalama anahtarı ile birlikte kendi <strong>çalışma</strong> alanında (API ve komut satırı araçlarında
+&quot;<em>çalışma alanı</em>&quot; olarak adlandırılır) bulunur.</p>
+<p>Oturum dosyaları, oturum dizeleri ve Oturum Açma Anahtarları <strong>hesap yetkilendirmeleridir</strong>: bunlardan
+birine sahip olan kişi, o hesap adına hareket edebilir. Bunlar mesaj geçmişini içermez.</p>
+<blockquote class="callout">
+<p>[!UYARI]
+<strong>Kaybetmeyi göze alamayacağınız hiçbir şeyi kullanmayın.</strong> Kişisel veya başka
+şekilde değerli hesapları bağlamamanızı ve değer verdiğiniz bir hesap üzerinde API
+kimliği / API hash&#x27;i oluşturmamanızı şiddetle tavsiye ederiz. Bu, TgWitness’in test edilmemiş olmasıyla ilgili değildir: Telegram, hesapları öngörülemez bir şekilde kısıtlar ve
+kalıcı olarak yasaklar — istem hacminin, istemci veya amaç ne olursa olsun,
+aşırı olduğunu düşündüğü durumlarda, yeterli bir dokümantasyon olmaksızın. Birçok yasaklama
+geri alınamaz. Yalnızca bu amaç için ayrılmış hesaplar kullanın. Testlerin sorunsuz geçmesi,
+yazılıma değil Telegram’a bağlıdır ve ileride herhangi bir garanti vermez.</p>
+</blockquote>
+<ul>
+<li><a href="#at-a-glance">Bir bakışta</a></li>
+<li><a href="#before-you-start-api-id-and-api-hash">Başlamadan önce: API kimliği ve API hash değeri</a></li>
+<li><a href="#phone-number">Telefon numarası</a> · <a href="#qr-code">QR kodu</a> · <a href="#auth-key--dc-id">Oturum Açma Anahtarı + DC Kimliği</a></li>
+<li><a href="#account-files">Hesap dosyaları</a>: <a href="#telethon-session">Telethon .session</a> ·
+    <a href="#pyrogram-session">Pyrogram .session</a> · <a href="#session--json-pair">Oturum + JSON çifti</a> ·
+    <a href="#telegram-desktop-tdata">TData</a> · <a href="#telethon-stringsession">StringSession</a> ·
+    <a href="#account-json">Hesap JSON&#x27;u</a></li>
+<li><a href="#identify-what-you-have">Elinizde ne olduğunu belirleyin</a> · <a href="#unsupported-formats">Desteklenmeyen formatlar</a></li>
+<li><a href="#multiple-accounts">Birden fazla hesap</a> · <a href="#keeping-account-files-safe">Hesap dosyalarını güvende tutma</a> ·
+    <a href="#troubleshooting">Sorun Giderme</a></li>
+</ul>
+<h2 id="at-a-glance">Bir bakışta<a class="anchor" href="#at-a-glance" aria-label="Bu bölüme bağlantı">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Elinizde olanlar</th>
+<th><strong>Hesap Ekle</strong> sekmesi</th>
+<th>Ayrıca şunlara da ihtiyacınız olacak:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Telefon numarası ve giriş kodlarına erişim</td>
+<td><strong>Telefon</strong></td>
+<td>Etkinleştirilmişse 2FA şifresi</td>
+</tr>
+<tr>
+<td>Telegram başka bir cihazda açık</td>
+<td><strong>QR kodu</strong></td>
+<td>Etkinleştirilmişse 2FA şifresi</td>
+</tr>
+<tr>
+<td>Bir <code>.session</code> dosyası (Telethon veya Pyrogram)</td>
+<td><strong>Dosyalar</strong></td>
+<td>Uygulama ayarları için isteğe bağlı eşlik eden JSON dosyası</td>
+</tr>
+<tr>
+<td><code>.session</code> + <code>.json</code> (aynı isimde)</td>
+<td><strong>Dosyalar</strong> (her ikisini de seçin)</td>
+<td>Genellikle başka bir şey yoktur</td>
+</tr>
+<tr>
+<td>Telegram Desktop&#x27;taki <code>tdata</code> klasörü</td>
+<td><strong>Dosyalar</strong> (ZIP olarak)</td>
+<td>Varsa, masaüstü için ayarlanmış yerel şifre</td>
+</tr>
+<tr>
+<td>Bir Telethon StringSession (metin, <code>.txt</code>, <code>.tgwitness-session</code>)</td>
+<td><strong>Dosyalar</strong></td>
+<td>Ayrı bir API çifti gerekmez</td>
+</tr>
+<tr>
+<td>Bir oturum veya Oturum Açma Anahtarı (Auth Key) içeren bir <code>.json</code></td>
+<td><strong>Dosyalar</strong></td>
+<td>Ayrı bir API çifti gerekmez</td>
+</tr>
+<tr>
+<td>Bir Oturum Açma Anahtarı (512 onaltılık karakter) ve buna ait DC numarası</td>
+<td><strong>Oturum açma anahtarı</strong></td>
+<td>İsteğe bağlı Kullanıcı Kimliği</td>
+</tr>
+</tbody>
+</table></div>
+<p>TgWitness, dosyaları adlarına göre değil, <strong>içerik</strong>lerine göre tanır. Bir dosyanın adının değiştirilmesi
+asla dosyanın dönüştürülmesine yol açmaz.</p>
+<h2 id="before-you-start-api-id-and-api-hash">Başlamadan önce: API kimliği ve API hash değeri<a class="anchor" href="#before-you-start-api-id-and-api-hash" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Telegram API uygulaması oluşturmadan oturum açabilirsiniz. Hiçbir çift girilmediğinde,
+ithal edilmediğinde veya çalışma alanında önceden kaydedilmediğinde, TgWitness yerleşik havuzundaki
+50 adet genel API çiftinden (<code>tgwitness/api_pool.py</code>) rastgele bir çift seçer. Telegram bir çifti reddederse
+(<code>API_ID_INVALID</code>, <code>API_ID_PUBLISHED_FLOOD</code>, <code>UPDATE_APP_TO_LOGIN</code>), bir sonraki çift denenir;
+her oturum açma işlemi için en fazla sekiz çift denenir; reddedilen çiftler yeniden başlatılana kadar atlanır. Oturum açmada kullanılan çift,
+hesapla birlikte kaydedilir ve o hesap için yeniden kullanılır. Bir <strong>API kimliği</strong> ve <strong>API hash&#x27;i</strong>, uygulamayı Telegram&#x27;a tanımlar; bunlar
+tek başlarına bir hesabı yetkilendirmez.</p>
+<p>Bunun yerine kendi uygulamanızı kullanmak isterseniz (uygulamayı kaydeden hesap risk altındadır; bkz.
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/PROJECT-GUIDE.md#connect-a-telegram-account">Neden yerleşik bir API havuzu?</a>):</p>
+<ol>
+<li><a href="https://my.telegram.org">my.telegram.org adresini</a> açın ve sahip olduğunuz herhangi bir telefon numarasıyla
+    giriş yapın. Kod, SMS yoluyla değil, Telegram uygulamasına gelir.</li>
+<li><strong>API geliştirme araçlarını</strong> seçin.</li>
+<li>Bir uygulama oluşturun: herhangi bir başlık ve kısa ad (5–32 harf), platform: <strong>Masaüstü</strong>.
+    URL ve açıklama alanları boş bırakılabilir.</li>
+<li><strong>App api_id</strong> (bir sayı) ve <strong>App api_hash</strong> (32 onaltılık karakter) değerlerini kopyalayın.</li>
+</ol>
+<p>Panelde, oturum açma formunun altında açık <strong>API Kimliği + Hash</strong> bulunur. <strong>API Kimliği</strong> alanına tek bir
+<code>api_id:api_hash</code> çifti yapıştırdığınızda her iki alan da doldurulur. Tek bir çift,
+tüm hesaplarınız için kullanılabilir. Başarılı bir oturum açma işleminden sonra bu bilgi, şifrelenmiş olarak
+yalnızca o çalışma alanında saklanır ve asla tarayıcıya geri gönderilmez.</p>
+<p>Burada üç farklı kimlik bilgisi söz konusudur:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Gizli</th>
+<th>Açılır</th>
+<th>Bulunduğu yer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Panel jetonu</td>
+<td>TgWitness web paneli</td>
+<td>Veri dizinindeki <code>panel-token.txt</code> veya <code>TGWITNESS_TOKEN</code></td>
+</tr>
+<tr>
+<td>API Kimliği + hash</td>
+<td>Tek başına bir anlam ifade etmez; uygulamayı tanımlar</td>
+<td>Yerleşik çift, içe aktarılan ayarlar veya my.telegram.org adresindeki kendi uygulamanız</td>
+</tr>
+<tr>
+<td>Hesap yetkilendirme</td>
+<td>Telegram hesabı</td>
+<td>Telefon/QR koduyla oturum açma yoluyla oluşturulur veya oturum olarak eklenir</td>
+</tr>
+</tbody>
+</table></div>
+<p>Telegram&#x27;a bir proxy üzerinden erişilmesi gerekiyorsa, önce
+<strong>Hesap → Ayarlar → Bağlantı ayarları → Bağlantı yolunu değiştir</strong> seçeneğinden ayarlayın.</p>
+<h2 id="phone-number">Telefon numarası<a class="anchor" href="#phone-number" aria-label="Bu bölüme bağlantı">#</a></h2>
+<ol>
+<li><strong>Hesap</strong> Aç seçeneğine tıklayın, <strong>Telefon</strong> sekmesine gidin ve numarayı uluslararası formatta girin,
+    örneğin <code>+44 7700 900123</code>. Boşluklar ve tireler otomatik olarak kaldırılır.</li>
+<li><strong>&quot;Devam&quot;</strong> düğmesine basın. API Kimliği + Hash alanları boş bırakılabilir.</li>
+<li>Telegram&#x27;ın gönderdiği kodu girin (genellikle Telegram uygulamasına gönderilir; SMS ile gönderilmesi garanti edilmez).</li>
+<li>Hesapta iki aşamalı doğrulama varsa, o şifreyi girin. Bu, panel
+    jetonu veya cihaz şifresi değildir.</li>
+<li>Giriş yaptıktan sonra gösterilen hesap kimliğini kontrol edin, ardından kaynakları seçin.</li>
+</ol>
+<p>Giriş kodları ve 2FA şifresi hiçbir zaman diske kaydedilmez.</p>
+<h2 id="qr-code">QR kodu<a class="anchor" href="#qr-code" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Hesap bir telefonda veya başka bir bilgisayarda zaten oturum açmışsa bunu kullanın.</p>
+<ol>
+<li><strong>QR kodu</strong> sekmesi → <strong>QR kodunu göster</strong>. API Kimliği + Hash alanları boş bırakılabilir.</li>
+<li>Oturum açılmış cihazda: <strong>Ayarlar → Cihazlar → Masaüstü Cihazını Bağla seçeneğine gidin</strong>, kodu tarayın
+    ve onaylayın.</li>
+<li>Telegram talep ederse, TgWitness&#x27;e 2FA şifresini girin.</li>
+</ol>
+<p>QR kodu görüntüsü yerel olarak oluşturulur. Kodların geçerlilik süresi dolabilir; yeniden denemek için &quot;<strong>Başka bir QR kodu oluştur&quot;</strong>
+düğmesine basın. Paneli kilitlemek, çalışma alanını değiştirmek veya başka bir oturum açma işlemi başlatmak,
+beklemede olan kodu iptal eder.</p>
+<h2 id="auth-key--dc-id">Oturum Açma Anahtarı + DC Kimliği<a class="anchor" href="#auth-key--dc-id" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Bir Oturum Açma Anahtarı (Auth Key), her Telegram oturumunun arkasında yatan 256 baytlık ham yetkilendirme verisidir ve
+<strong>512 onaltılık karakter</strong>den oluşur; buna veri merkezi numarası <strong>DC 1–5</strong> de eklenir.</p>
+<ol>
+<li><strong>&quot;Auth</strong>&quot; <strong>sekmesi</strong>. Anahtarın tamamını yapıştırın; <code>…</code> içeren kısaltılmış bir anahtar çalışmaz.</li>
+<li>Anahtarla birlikte sağlanan DC kimliğini seçin.</li>
+<li>İsteğe bağlı olarak <strong>Kullanıcı Kim</strong>liğini girin. Telegram farklı bir hesap bildirdiğinde TgWitness bağlantı kurmayı reddeder.
+    </li>
+<li>Press <strong>Connect hesabı</strong>.</li>
+</ol>
+<p>Bir Oturum Açma Anahtarı (512 karakter), bir API hash&#x27;i (32 karakter) değildir. Aynı anahtar ayrıca
+JSON olarak da içe aktarılabilir; bkz. <a href="#account-json">Hesap JSON&#x27;u</a>.</p>
+<h2 id="account-files">Hesap dosyaları<a class="anchor" href="#account-files" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p><strong>&quot;Hesap Ekle&quot; → &quot;Dosyalar&quot;</strong> seçeneğini açın ve <strong>bir hesaba ait</strong>, toplamda
+<strong>8 MiB</strong>&#x27;ye kadar <strong>dört dosyayı</strong> seçin, ardından &quot;<strong>Hesabı Bağla&quot;</strong> düğmesine basın.</p>
+<ul>
+<li>Dosyalar, TgWitness sunucunuzun <strong>belleğinde</strong> dönüştürülür. Yüklenen dosyalar depolanmaz,
+    ZIP dosyaları diske açılmaz ve hiçbir harici hizmetle bağlantı kurulmaz.</li>
+<li>Elde edilen oturum daha sonra Telegram ile karşılaştırılır. Bir dosyada bir kullanıcı kimliği belirtiliyorsa,
+    bu kimlik, Telegram&#x27;ın bildirdiği hesapla eşleşmelidir.</li>
+<li>Farklı hesapları veya farklı API kimlik bilgilerini açıklayan dosyalar reddedilir;
+    tek bir tanesini seçmek yerine.</li>
+<li><strong>Şifre veya oturum metni</strong>, TData yerel şifre alanını içerir; bu alan, <strong>oturum açmadan</strong>
+    StringSession ve <strong>Read </strong>dosyalarını yapıştırmak için bir kutudur (Telegram ile
+    iletişime geçmeden formu doldurur).</li>
+</ul>
+<h3 id="telethon-session">Telethon <code>.session</code><a class="anchor" href="#telethon-session" aria-label="Bu bölüme bağlantı">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nedir?</td>
+<td>Telethon tabanlı araçların oluşturduğu SQLite veritabanı; örneğin <code>my_account.session</code></td>
+</tr>
+<tr>
+<td>Tarafından tanınan</td>
+<td><code>sessions</code> tabloları (<code>dc_id</code>, <code>server_address</code>, <code>port</code>, <code>auth_key</code> ile birlikte) ve <code>version</code> = 7 veya 8</td>
+</tr>
+<tr>
+<td>Gereksinimler</td>
+<td>Tam olarak bir adet yetkili oturum satırı; kapalı, eksiksiz bir veritabanı</td>
+</tr>
+</tbody>
+</table></div>
+<p>Öncelikle dosyayı oluşturan programı kapatın. Yanında <code>my_account.session-journal</code> veya
+<code>my_account.session-wal</code> dosyası varsa, veritabanı henüz tamamlanmamıştır: orijinal istemciyi açın ve
+düzgün bir şekilde kapatın. Bu yan dosyaları silmek, bozuk bir kopya bırakabilir.</p>
+<h3 id="pyrogram-session">Pyrogram <code>.session</code><a class="anchor" href="#pyrogram-session" aria-label="Bu bölüme bağlantı">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nedir?</td>
+<td>Pyrogram tabanlı araçların oluşturduğu SQLite veritabanı</td>
+</tr>
+<tr>
+<td>Tarafından tanınan</td>
+<td><code>sessions</code> tablosu; <code>dc_id</code>, <code>auth_key</code>, <code>test_mode</code>, <code>user_id</code>, <code>is_bot</code>; <code>version</code> = 2 veya 3</td>
+</tr>
+<tr>
+<td>Gereksinimler</td>
+<td>Üretim ağında tek bir yetkili <strong>kullanıcı</strong> oturumu. Bot ve test-DC oturumları reddedilir.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Oturum açma sırasında saklanan kullanıcı kimliği, Telegram ile karşılaştırılarak doğrulanır.</p>
+<h3 id="session--json-pair">Oturum + JSON çifti<a class="anchor" href="#session--json-pair" aria-label="Bu bölüme bağlantı">#</a></h3>
+<p>Hesaplar genellikle aynı ada sahip iki dosya olarak dağıtılır; örneğin,
+<code>447700900123.session</code> ve <code>447700900123.json</code>. <strong>Her ikisini de</strong> aynı anda seçin.</p>
+<ul>
+<li>JSON&#x27;dan TgWitness, <code>app_id</code>/<code>api_id</code> ve <code>app_hash</code>/<code>api_hash</code> kullanır, bu nedenle
+    genellikle API kimlik bilgilerini girmeniz gerekmez.</li>
+<li><code>phone</code>, <code>device</code>, <code>sdk</code>, <code>app_version</code>, <code>lang_pack</code> gibi diğer alanlar veya kayıtlı bir
+    <code>twoFA</code> şifresi <strong>göz ardı</strong> edilir. Hesapta 2FA varsa, TgWitness bunu ister.</li>
+<li>Tek başına bir JSON dosyası yalnızca meta veridir. Oturum dosyası yoksa, telefon
+    veya QR koduyla oturum açmaya devam edin.</li>
+</ul>
+<h3 id="telegram-desktop-tdata">Telegram Masaüstü (TData)<a class="anchor" href="#telegram-desktop-tdata" aria-label="Bu bölüme bağlantı">#</a></h3>
+<p>TData, Telegram Desktop uygulamasının (desktop.telegram.org adresinden indirilebilen platformlar arası
+uygulama) <code>tdata</code> klasörüdür.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Sistem</th>
+<th>Varsayılan <code>tdata</code> konumu</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td><code>%APPDATA%\Telegram Desktop\tdata</code> (taşınabilir Telegram: <code>Telegram.exe</code>&#x27;nin yanında)</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td><code>~/.local/share/TelegramDesktop/tdata</code></td>
+</tr>
+<tr>
+<td>macOS</td>
+<td><code>~/Library/Application Support/Telegram Desktop/tdata</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>İçe aktarmak için:</p>
+<blockquote class="callout">
+<p><strong>Paralel oturum uyarısı.</strong> TData&#x27;yı içe aktarmak, Telegram Desktop&#x27;un yetkilendirme
+anahtarını yeniden kullanır; bağımsız bir oturum açma oluşturmaz. Bu anahtarı Desktop ve
+TgWitness&#x27;te aynı anda kullanmayın. Telegram,
+<code>AUTH_KEY_DUPLICATED</code> ile yetkilendirmeyi geçersiz kılabilir ve yeni bir oturum açılana kadar her iki kopyayı da kullanılamaz hale getirebilir.</p>
+<p>Desktop&#x27;u, sistem tepsisindeki işlemi de dahil olmak üzere tamamen kapatın ve
+TgWitness içe aktarılan oturumu kullanırken bu kopyayı kapalı tutun. <strong>Çıkın, oturumu kapatmayın veya oturumu iptal etmeyin:</strong>
+iptal etme işlemi, içe aktarılan kopyayı da geçersiz kılar. Her iki istemcinin de çalışması gerekiyorsa,
+telefon veya QR koduyla TgWitness&#x27;e giriş yaparak kendi yetkilendirme bilgilerinizi oluşturun. Ayrı bir
+hesap kullanılması önerilir, ancak bu, klonlanmış anahtarların paralel olarak güvenli bir şekilde kullanılmasını sağlamaz.</p>
+<p>Bu, içe aktarılan <code>.session</code> dosyalar, StringSession metni ve Auth Key HEX için de geçerlidir.
+Kendi bağımsız yetkilendirmelerine sahip diğer istemciler oturumda kalmaya devam edebilir.
+<a href="https://core.telegram.org/api/errors#406-not-acceptable">Telegram’ın AUTH_KEY_DUPLICATED belgelerine</a> bakın.</p>
+</blockquote>
+<ol>
+<li>Telegram Desktop&#x27;tan tamamen çıkın.</li>
+<li>
+<p><code>tdata</code>&#x27;den <strong>yalnızca</strong> bu iki öğeyi içeren bir ZIP dosyası oluşturun:</p>
+<ul>
+<li><code>key_datas</code></li>
+<li>Yanında <code>s</code> ile biten 16 karakterlik dosya, genellikle <code>D877F783D5D3EF8Cs</code></li>
+</ul>
+<p>Medya önbelleği ile birlikte tüm klasörü ZIP dosyasına sıkıştırmak genellikle sınırları aşar
+(512 giriş, sıkıştırılmamış haliyle 32 MiB).
+3. <strong>Dosyalar</strong> bölümünden ZIP dosyasını seçin. Telegram Desktop&#x27;ta <strong>yerel</strong> bir <strong>şifre</strong> varsa, bunu
+önce <strong>Şifre veya oturum metni</strong> alanına girin. Bu, 2FA şifresi değildir.</p>
+</li>
+</ol>
+<p>Desteklenenler: arşiv başına tek hesap, modern <code>key_datas</code>/<code>key_data0</code>/<code>key_data1</code> depolama,
+yerel şifre. Desteklenmeyenler: birden fazla oturum açılmış hesabın bulunduğu klasörler, eski Masaüstü
+düzenleri, şifre korumalı ZIP dosyaları ve ayrı bir yerel macOS uygulaması olan &quot;Telegram for macOS&quot;.</p>
+<h3 id="telethon-stringsession">Telethon StringSession<a class="anchor" href="#telethon-stringsession" aria-label="Bu bölüme bağlantı">#</a></h3>
+<p>Genellikle <code>1</code> ile başlayan ve yaklaşık 350 karakter uzunluğunda tek satırlık bir metin. Bunu
+<code>.txt</code> veya <code>.tgwitness-session</code> dosyası olarak yükleyin (en fazla 4 KiB) ya da
+<strong>Şifre veya oturum metni</strong> alanına yapıştırın. Yalnızca Telethon dizeleri kabul edilir; Pyrogram ve TDLib
+dizeleri farklı biçimler kullanır.</p>
+<h3 id="account-json">Hesap JSON&#x27;u<a class="anchor" href="#account-json" aria-label="Bu bölüme bağlantı">#</a></h3>
+<p><strong><code>.json</code></strong> ile biten bir dosyada, en fazla <strong>64 KiB</strong> boyutunda tek bir JSON nesnesi.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Alan (takma adlar)</th>
+<th>Anlam</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>api_id</code> (<code>app_id</code>)</td>
+<td>Uygulama Kimliği, pozitif bir sayı</td>
+</tr>
+<tr>
+<td><code>api_hash</code> (<code>app_hash</code>)</td>
+<td>Uygulama hash değeri, 32 onaltılık karakter</td>
+</tr>
+<tr>
+<td><code>string_session</code> (<code>session_string</code>, <code>session</code>)</td>
+<td>Telethon StringSession metni, dosya adı değil</td>
+</tr>
+<tr>
+<td><code>auth_key</code> (<code>auth_key_hex</code>) + <code>dc_id</code></td>
+<td>512 karakterlik tam Otorizasyon Anahtarı ve DC 1–5</td>
+</tr>
+<tr>
+<td><code>user_id</code> (<code>id</code>)</td>
+<td>İsteğe bağlı; yetkilendirme kaydedilmeden önce Telegram ile karşılaştırılarak kontrol edilir</td>
+</tr>
+</tbody>
+</table></div>
+<p>Hem takma ad hem de asıl ad mevcutsa, bunlar birbiriyle uyumlu olmalıdır. Örnekler:</p>
+<pre><code class="language-json">{ &quot;app_id&quot;: 1234567, &quot;app_hash&quot;: &quot;0123456789abcdef0123456789abcdef&quot; }</code></pre>
+<pre><code class="language-json">{
+  &quot;api_id&quot;: 1234567,
+  &quot;api_hash&quot;: &quot;0123456789abcdef0123456789abcdef&quot;,
+  &quot;auth_key&quot;: &quot;REPLACE_WITH_ALL_512_HEXADECIMAL_CHARACTERS&quot;,
+  &quot;dc_id&quot;: 2,
+  &quot;user_id&quot;: 123456789
+}</code></pre>
+<p>İlk örnekte yalnızca API kimlik bilgileri girilir; telefon veya QR koduyla oturum açın ya da bir oturum
+dosyası ekleyin. Toplu listeler (hesapların bulunduğu bir JSON dizisi) kabul edilmez.</p>
+<h2 id="identify-what-you-have">Elinizde ne olduğunu belirleyin<a class="anchor" href="#identify-what-you-have" aria-label="Bu bölüme bağlantı">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Görüyorsunuz</th>
+<th>Bu,</th>
+<th>Kullanım</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*.session</code>; bir metin düzenleyicide açıldığında en üstte <code>SQLite format 3</code> yazısı görünür</td>
+<td>Telethon veya Pyrogram SQLite</td>
+<td><strong>Dosyalar</strong> (otomatik olarak algılanır)</td>
+</tr>
+<tr>
+<td><code>key_datas</code> içeren bir <code>tdata</code> klasörü</td>
+<td>Telegram Masaüstü TData</td>
+<td>İki dosyayı ZIP&#x27;leyin, ardından <strong>Dosyalar</strong></td>
+</tr>
+<tr>
+<td><code>1</code> ile başlayan tek satırlık metin, yaklaşık 350 karakter</td>
+<td>Telethon StringSession</td>
+<td><strong>Dosyalar</strong></td>
+</tr>
+<tr>
+<td><code>*.json</code> ile <code>app_id</code>/<code>app_hash</code></td>
+<td>İlişkili meta veriler</td>
+<td><strong>Dosyalar</strong>, oturum bilgileriyle birlikte</td>
+</tr>
+<tr>
+<td><code>*.json</code> ile <code>auth_key</code> veya <code>string_session</code></td>
+<td>Hesap JSON&#x27;u</td>
+<td><strong>Dosyalar</strong></td>
+</tr>
+<tr>
+<td>512 karakter <code>0-9a-f</code></td>
+<td>Oturum Açma Anahtarı</td>
+<td><strong>Oturum açma anahtarı</strong></td>
+</tr>
+<tr>
+<td>32 karakter <code>0-9a-f</code></td>
+<td>API hash</td>
+<td><strong>API Kimliği + Hash</strong></td>
+</tr>
+<tr>
+<td>Bir TDLib uygulamasından <code>td.binlog</code> veya <code>db.sqlite</code></td>
+<td>TDLib depolama</td>
+<td>Desteklenmiyor</td>
+</tr>
+<tr>
+<td><code>123456789:AA…</code></td>
+<td>Bot jetonu</td>
+<td>Desteklenmiyor</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="unsupported-formats">Desteklenmeyen formatlar<a class="anchor" href="#unsupported-formats" aria-label="Bu bölüme bağlantı">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Biçim</th>
+<th>Alternatif</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TDLib depolama (<code>td.binlog</code>) ve TDLib dışa aktarımları</td>
+<td>Telefon veya QR koduyla giriş yapın</td>
+</tr>
+<tr>
+<td>Pyrogram oturum <strong>dizeleri</strong></td>
+<td>Pyrogram <code>.session</code> dosyasını veya telefon/QR kodunu kullanın</td>
+</tr>
+<tr>
+<td>Birkaç oturum açılmış hesap içeren TData</td>
+<td>Telegram Desktop&#x27;taki diğer hesaplardan çıkış yapın veya her hesabın kendi oturum dosyasını kullanın</td>
+</tr>
+<tr>
+<td>Bot jetonları</td>
+<td>Desteklenmez: TgWitness, bir kullanıcı hesabı olarak gözlem yapar</td>
+</tr>
+<tr>
+<td>Çok sayıda hesabın CSV/JSON listeleri</td>
+<td>Hesap başına bir çalışma alanı ekleyin</td>
+</tr>
+<tr>
+<td>Test-DC veya bot oturumları</td>
+<td>Üretim kullanıcı hesabı kullanın</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="multiple-accounts">Birden fazla hesap<a class="anchor" href="#multiple-accounts" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Hesap seçicinin yanındaki <strong>+</strong> tuşuna basın veya
+<strong>Hesap → Ayarlar → Bağlantı ayarları → Çalışma alanları&#x27;nı</strong> açın, bir etiket girin ve
+oturum açın.</p>
+<ul>
+<li>Ana çalışma alanı dahil olmak üzere sınırsız sayıda çalışma alanı. Her birinin kendine ait oturumu, proxy
+    yolu, kaynakları, yakalama politikası, günlüğü, imzalama anahtarı, kontrol noktaları ve dışa aktarımları vardır.</li>
+<li>Görüntülenen çalışma alanını değiştirmek, diğerlerini duraklatmaz.</li>
+<li>Bir günlük, onu oluşturan hesaba bağlı kalır. Farklı bir
+    hesapla oturum açmak için başka bir çalışma alanı gerekir ve bir hesap iki
+    çalışma alanına atanamaz.</li>
+<li>Tüm çalışma alanları tek bir panel jetonunu paylaşır; bunlar ayrı kullanıcılar değildir.</li>
+<li><strong>Hesaplar,</strong> bir çalışma alanının adını değiştirir ve eklenen bir çalışma alanını, oturumu, günlüğü,
+    kaynakları ve imzalama anahtarıyla birlikte siler. Ana çalışma alanı panelden silinemez.</li>
+</ul>
+<h2 id="sign-out">Çıkış<a class="anchor" href="#sign-out" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p><strong>Hesap → Telegram&#x27;dan çıkış yap</strong> (gözlem duraklatılmış halde), Telegram&#x27;dan oturumu sonlandırmasını ister;
+böylece oturum, hesabın <strong>Ayarlar → Cihazlar</strong> bölümünden de kaybolur ve
+çalışma alanı kasasından kaldırılır. Günlük, kaynaklar, ayarlar ve imzalama anahtarı kalır ve
+günlük, çıkış işlemini kaydeder. Çalışma alanı hâlâ ilgili hesaba aittir: yalnızca o
+hesap tekrar bağlanabilir. Telegram yanıt vermezse, oturum yine de buradan kaldırılır
+ve panelde bu durum belirtilir; Telegram’da <strong>Ayarlar → Cihazlar</strong> altından oturumu sonlandırın.</p>
+<h2 id="convert-a-telethon-session-offline">Bir Telethon oturumunu çevrimdışı ortama dönüştürün<a class="anchor" href="#convert-a-telethon-session-offline" aria-label="Bu bölüme bağlantı">#</a></h2>
+<p>Panel, <code>.session</code> dosyalarını doğrudan içe aktarır. Çevrimdışı olarak bir
+StringSession dosyasına dönüştürmek için proje klasöründen şu komutu çalıştırın:</p>
+<pre><code class="language-powershell">.venv\Scripts\python.exe -m tgwitness.sessions account.session --out account.tgwitness-session   # Windows</code></pre>
+<pre><code class="language-sh">.venv/bin/python -m tgwitness.sessions account.session --out account.tgwitness-session          # Linux/macOS</code></pre>
+<p>Dönüştürücü yalnızca Telethon SQLite dosyalarını okur (en fazla 64 MiB), girdiyi asla değiştirmez,
+ağ isteği göndermez ve mevcut bir çıktı dosyasının üzerine yazmayı reddeder.</p>
+<h2 id="keeping-account-files-safe">Hesap dosyalarını güvende tutma<a class="anchor" href="#keeping-account-files-safe" aria-label="Bu bölüme bağlantı">#</a></h2>
+<ul>
+<li>Her bir <code>.session</code>, TData ZIP, StringSession, Auth Key ve hesap JSON dosyasını bir
+    şifre gibi ele alın. TgWitness, içe aktarılan yetkilendirme bilgilerini şifreli kasasında saklar;
+    daha sonra orijinal dosyaları silebilirsiniz.</li>
+<li>Aynı yetkilendirmeyi aynı anda iki programda çalıştırmayın. Telegram bu yetkilendirmeyi iptal edebilir
+    (<code>AUTH_KEY_DUPLICATED</code>) ve her iki kopya da çalışmaz hale gelir.</li>
+<li>Süresi dolmuş veya iptal edilmiş bir oturum, dönüştürme yoluyla yeniden etkinleştirilemez. Lütfen tekrar oturum açın.</li>
+</ul>
+<h2 id="troubleshooting">Sorun Giderme<a class="anchor" href="#troubleshooting" aria-label="Bu bölüme bağlantı">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Mesaj veya belirti</th>
+<th>Ne yapılmalı</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Bu oturumu okuyamıyor. Orijinal istemcisini kapatın…</em></td>
+<td>SQLite dosyası açık veya tamamlanmamış durumda (<code>-journal</code>/<code>-wal</code> sidecar). Orijinal programı düzgün bir şekilde kapatın ve dosyayı yeniden kopyalayın.</td>
+</tr>
+<tr>
+<td><em>Desteklenen Telethon SQLite şemaları: 7 ve 8</em> / <em>Pyrogram … 2 ve 3</em></td>
+<td>Dosya, çok eski veya bilinmeyen bir kütüphane sürümüyle oluşturulmuştur. Bunun yerine telefon/QR koduyla giriş yapın.</td>
+</tr>
+<tr>
+<td><em>Yalnızca yetkili üretim kullanıcı oturumları desteklenmektedir</em></td>
+<td>Pyrogram dosyası bir bota veya test ağına aittir.</td>
+</tr>
+<tr>
+<td><em>TData arşivi 512 girdiyi veya 32 MiB&#x27;yi aşıyor</em></td>
+<td>Sadece <code>key_datas</code> ve <code>D877F783D5D3EF8Cs</code> ZIP dosyalarını ekleyin, klasörün tamamını değil.</td>
+</tr>
+<tr>
+<td><em>TData&#x27;nın şifresi çözülemiyor. Masaüstü yerel şifresini kontrol edin</em></td>
+<td><strong>&quot;Şifre&quot; veya &quot;oturum metni&quot;</strong> alanına Telegram Desktop yerel şifrenizi girin.</td>
+</tr>
+<tr>
+<td><em>Her seferinde tek bir TData hesabı içe aktarın</em></td>
+<td>Telegram Desktop&#x27;ta birkaç hesap vardı; bkz. <a href="#unsupported-formats">Desteklenmeyen biçimler</a>.</td>
+</tr>
+<tr>
+<td><em>Seçilen dosyalar, farklı hesapları veya API kimlik bilgilerini açıklamaktadır</em></td>
+<td>Yalnızca bir hesaba ait dosyaları seçin.</td>
+</tr>
+<tr>
+<td><em>JSON dosyasında desteklenen API kimlik bilgileri veya yetkilendirme bulunmamaktadır</em></td>
+<td><a href="#account-json">Hesap </a>JSON&#x27;undaki alan adlarını kontrol edin.</td>
+</tr>
+<tr>
+<td><em>Yalnızca API meta verileri</em></td>
+<td>JSON&#x27;da oturum bilgisi yoktur. <code>.session</code> dosyasını ekleyin veya telefon/QR kodunu kullanın.</td>
+</tr>
+<tr>
+<td><em>Auth Key HEX, 512 onaltılık karakterin tamamını içermelidir</em></td>
+<td>Anahtar kesik veya &quot;<code>…</code>&quot; ifadesini içeriyor.</td>
+</tr>
+<tr>
+<td>Hesap kimliği, içe aktarılan hesapla eşleşmiyor</td>
+<td>Dosyanın kullanıcı kimliği, Telegram&#x27;ın bildirdiğinden farklıdır; dosya başka bir hesaba aittir.</td>
+</tr>
+<tr>
+<td>Hesap zaten başka bir çalışma alanına ait</td>
+<td>Hesabı iki kez eklemek yerine o çalışma alanını açın.</td>
+</tr>
+<tr>
+<td>Bağlantı kurulmuş, ancak &quot;<strong>Kaynaklar&quot;</strong> bölümündeki sohbet listesinde bir özel grup eksik.</td>
+<td>Üyeliği kontrol edin. Seçici, ilk 1.000 diyaloğu inceler; <strong>Parametreler</strong> altından sınırı artırın.</td>
+</tr>
+<tr>
+<td>Proxy bağlantısı başarısız</td>
+<td>Sunucu, bağlantı noktası ve kimlik bilgilerini kontrol edin. TgWitness hiçbir zaman doğrudan bağlantıya başvurmaz.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Ayrıca bakınız: proxy&#x27;ler ve şifreleme için <a href="../connection/">bağlantı ve güvenlik</a>,
+ve oturum açıldıktan sonra yakalanan verilerin <a href="../collection/">nasıl toplandığı</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCOUNTS.md">Bu sayfayı GitHub'da düzenle ↗</a><a class="next-guide" href="../connection/"><span>Sonraki adım</span><strong>Bağlantı, proxy'ler ve veri koruma →</strong></a><p>Bu kılavuzlar mevcut uygulamayı açıklamaktadır. Doğrulama sonuçları ve kalan eksiklikler ayrı olarak belgelenmiştir. <a href="../verification/">Neler test edildi →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Bu sayfada"><p class="nav-label">Bu sayfada</p><a href="#at-a-glance">Bir bakışta</a><a href="#before-you-start-api-id-and-api-hash">Başlamadan önce: API kimliği ve API hash değeri</a><a href="#phone-number">Telefon numarası</a><a href="#qr-code">QR kodu</a><a href="#auth-key--dc-id">Oturum Açma Anahtarı + DC Kimliği</a><a href="#account-files">Hesap dosyaları</a><a href="#identify-what-you-have">Elinizde ne olduğunu belirleyin</a><a href="#unsupported-formats">Desteklenmeyen formatlar</a><a href="#multiple-accounts">Birden fazla hesap</a><a href="#sign-out">Çıkış</a><a href="#convert-a-telethon-session-offline">Bir Telethon oturumunu çevrimdışı ortama dönüştürün</a><a href="#keeping-account-files-safe">Hesap dosyalarını güvende tutma</a><a href="#troubleshooting">Sorun Giderme</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Açık kaynak · Kendi makinenizde çalışır</span><a href="../../../../LICENSE">MIT lisansı</a><a href="../notice/">Operatör bildirimi</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Güvenlik</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Mesaj bekleniyor", "Step through a fictional send, edit and delete.": "Kurgusal bir gönderme, düzenleme ve silme işlemini adım adım inceleyin.", "No observations yet. Start the sequence or advance one event.": "Henüz herhangi bir gözlem yok. Diziyi başlatın veya bir olay ilerletin.", "Meet at 10:00": "Saat 10:00'da buluşalım", "A new message is visible in the chat.": "Sohbette yeni bir mesaj görünüyor.", "Record 1 appended: the collector observed the original message.": "1 kayıt eklendi: toplayıcı, orijinal mesajı gözlemledi.", "Meet at 11:00": "Saat 11:00'da buluşalım", "The current text changes. The earlier observation stays.": "Mevcut metin değiştirilmiştir. Önceki gözlem geçerliliğini korumaktadır.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Kayıt 2 eklendi: düzenleme yeni bir gözlemdir. Kayıt 1'de hâlâ orijinal metin yer almaktadır.", "Message deleted": "Mesaj silindi", "The message has disappeared from the chat view.": "Mesaj, sohbet ekranından kayboldu.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Record 3 eklenmiştir: silme bildirimi, gözlemlenen her iki sürümün yanında da saklanmaktadır.", "0 records": "0 kayıt", "1 record": "1 kayıt", "2 records": "2 kayıt", "3 records": "3 kayıt", "Complete / {n} of 3": "Tamam / 3'ün {n}'si", "Step / {n} of 3": "Adım / 3'ün {n}'si", "Pause": "Duraklat", "Replay sequence": "Tekrar oynatma dizisi", "Play sequence": "Çalma sırası", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Statik örnek mevcuttur. Hash değerlerini etkileşimli olarak hesaplamak için bu sayfayı HTTPS üzerinden veya Web Crypto desteğine sahip bir localhost önizlemesinde açın.", "No record supplied": "Kayıt sağlanmadı", "Tail removed": "Son kısım kaldırıldı", "≠ saved hash": "≠ kaydedilmiş hash", "Rebuilt · different hash": "Yeniden oluşturuldu · farklı hash", "= saved hash": "= kaydedilen hash", "Same length and matching head.": "Aynı uzunlukta ve başlığıyla uyumlu.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Hesaplanan üç hash değeri de kaydedilen hash değerleriyle eşleşmektedir. Bu örnek, korunan üç kayıtlık sınırla uyumludur.", "Same saved head; the journal prefix fails verification.": "Aynı başlık kaydedildi; günlük ön eki doğrulamadan geçemedi.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Kayıt 2, kaydedilmiş hash değeriyle artık eşleşmiyor. Yalnızca son saklanan başlık kontrol edilseydi bu durum gözden kaçardı; doğrulayıcı her kaydı tek tek kontrol eder.", "Head differs from the retained checkpoint.": "Başlık, saklanan kontrol noktası ile farklılık göstermektedir.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Yeniden oluşturulan hash değerleri birbiriyle bağlantılıdır, ancak son başlık değişmiştir. Saklanan kontrol noktası bu geçmişi reddediyor. Değiştirilen kayıtlarda orijinal imzalar da geçersiz sayılır.", "Too short: 2 supplied records \u003c 3 retained records.": "Çok kısa: Sağlanan kayıt sayısı 2, saklanan kayıt sayısı 3'ten az.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Kalan iki hash değeri hâlâ eşleşiyor. Saklanan kontrol noktası, eksik olan son kısmı ortaya çıkarıyor. O önceki sınır olmasaydı, bu daha kısa önek tek başına eksikliği ortaya çıkarmazdı.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Bu tarayıcıda hash hesaplaması yapılamamaktadır. Aşağıdaki formüller ve statik açıklamalar yine de kullanılabilir durumdadır.", "{n} records": "{n} kayıt", "head {hash}": "başlık {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Kabul edildi: sayı artıyor, imza doğrulanıyor ve anahtar eşleşiyor. Tanık bu yeni sınırı koruyor.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Geri alma: İmzalı yanıt, en son kabul edilen kontrol noktasına göre daha az kayıt bildiriyor. Witness, sorunu kaydeder ve daha önce kabul edilen sınırı korur.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: sayım değişmez ancak başlık farklıdır. Tanık, bu uyuşmazlığı kaydeder ve daha önce kabul edilen sınırı korur.", "No answer": "Cevap yok", "boundary unknown": "sınır bilinmiyor", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Yanıt yok: tanık, başarısız kontrolü kaydeder. Toplayıcının mevcut durumunu belirleyemez. Tanık, Bot API’sine hâlâ erişebiliyorsa ve yayın politikası izin veriyorsa, bu başarısızlığı yayınlayabilir.", "Send {n}": "{n} gönder", "Edit {n}": "Düzenle {n}", "Delete {n}": "{n}'yi sil", "Both accounts captured all six expected observations in this example.": "Bu örnekte her iki hesap da beklenen altı gözlemin tamamını kaydetmiştir.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "B hesabı yine 6 mesajın 6'sını da yakaladı. İki makbuzun alınması daha uzun sürdü. Yakalama oranı ve makbuz gecikmesi farklı sorulara cevap verir.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Hesap B, son tarihe kadar 6 eylemden 5'ini yakaladı (%83,3). Eksik olan düzenleme için ölçülen bir gecikme yoktur. Bu sonuç yalnızca altı kontrollü eylemi açıklamaktadır.", "not observed by cutoff": "kesme tarihine kadar gözlemlenmemiştir", "{s} seconds": "{s} saniye", "Exact values follow in the table.": "Kesin değerler tabloda yer almaktadır.", "{s} s": "{s} s", "Not observed": "Gözlemlenmedi", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Dört sohbet, farklı gözlemler sunmaktadır. Her bağlantı için kaynak kayıtlarını takip edin; göndereni belirtilmemiş kanal gönderisini 71001 numaralı kullanıcıya atamayın.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "#146 ve #205 numaralı kayıtlar aynı gönderen kimliğini (71001) göstermektedir. Bu, iki sohbet üzerinden bir Telegram hesabının gözlemlenen gönderilerini birbirine bağlamaktadır. Bu bilgi, gerçek hayattaki bir kişiyi tanımlamaz veya kanal gönderisini bir kişiye atfetmez.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "pay.example.invalid/new adresi, grup kaydı #146, bot klavyesi #173, kanal düzenlemesi #188 ve özel mesaj #205'te geçmektedir. Tekrarlanan bir hedef, materyalleri birbirine bağlar; ancak bu, söz konusu hesapların ortak kontrol altında olduğunu kanıtlamaz.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Bu hayali vakada, tamamlanmış medya makbuzları #151 ve #209'un SHA-256 değerleri tamamen aynıdır. Gerçek baytları ve bunlara ait mesaj kayıtlarını karşılaştırın. Eşleşen dosya, yaratıcısını tanımlamaz veya kimin ilettiğini kanıtlamaz.", "the encrypted off-site copy": "şifrelenmiş, sunucu dışında tutulan kopya", "notifications": "bildirimler", "checkpoint hashes for timestamps": "zaman damgaları için kontrol noktası hash değerleri", "signed checkpoints for the witness": "tanık için imzalı kontrol noktaları", "Switched on in this example": "Bu örnekte etkinleştirilmiştir", "Optional · off by default": "İsteğe bağlı · varsayılan olarak kapalı", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Bu makineden ayrılırken: Telegram bağlantısı ve {list}. Başka hiçbir şey yok.", "Default: only the Telegram connection leaves this machine.": "Varsayılan ayar: Bu makineden yalnızca Telegram bağlantısı dışarıya çıkar.", "{done} of {total} done": "{done}/{total} tamamlandı", "Mark step {n} as done": "{n} numaralı adımı tamamlanmış olarak işaretle", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Metin", "Copied": "Kopyalandı", "Command copied.": "Komut kopyalandı.", "Selected — Ctrl/Cmd+C": "Seçildi — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Komut seçildi. Elle kopyalayın.", "Command copied to clipboard.": "Komut panoya kopyalandı.", "Select text": "Metni seç", "Clipboard unavailable. Command selected; copy it manually.": "Pano kullanılamıyor. Komut seçildi; manuel olarak kopyalayın.", "A message arrives. The first observation is saved.": "Bir mesaj gelir. İlk gözlem kaydedilir.", "The time changes. Both captured versions stay.": "Zaman değişir. Yakalanan her iki sürüm de kalır.", "The message disappears. The captured history remains.": "Mesaj kaybolur. Kaydedilen geçmiş kalır.", "Pause example animation": "Örnek animasyonu duraklat", "Play example animation": "Örnek animasyonu oynat", "Play": "Oynat", "Full-size workspace screenshot": "Çalışma alanının tam boyutlu ekran görüntüsü", "Workspace screenshot · fictional data": "Çalışma alanı ekran görüntüsü · hayali veriler", "Close": "Kapat", "Close screenshot": "Ekran görüntüsünü kapat", "Scrollable full-size screenshot": "Kaydırılabilir tam boyutlu ekran görüntüsü", "Enlarge: {name}": "Büyüt: {name}", "View full size": "Tam boyutta görüntüle"}</script>
+</body></html>

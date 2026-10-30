@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>النشر | TgWitness</title>
+<meta name="description" content="قم بتشغيل TgWitness كخدمة على أنظمة Windows أو Linux أو macOS أو Docker، عبر بروتوكول HTTPS، مع توفير النسخ الاحتياطية والتحديثات."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/deployment/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="ar_AR">
+<meta property="og:title" content="النشر | TgWitness"><meta property="og:description" content="قم بتشغيل TgWitness كخدمة على أنظمة Windows أو Linux أو macOS أو Docker، عبر بروتوكول HTTPS، مع توفير النسخ الاحتياطية والتحديثات.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/ar/docs/reference/deployment/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/deployment/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/deployment/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/deployment/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/deployment/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/deployment/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/deployment/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/deployment/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/deployment/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/deployment/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/ar/docs/reference/deployment/", "url": "https://phishdestroy.github.io/TgWitness/ar/docs/reference/deployment/", "name": "النشر | TgWitness", "description": "قم بتشغيل TgWitness كخدمة على أنظمة Windows أو Linux أو macOS أو Docker، عبر بروتوكول HTTPS، مع توفير النسخ الاحتياطية والتحديثات.", "inLanguage": "ar", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "الصفحة الرئيسية", "item": "https://phishdestroy.github.io/TgWitness/ar/"}, {"@type": "ListItem", "position": 2, "name": "التوثيق", "item": "https://phishdestroy.github.io/TgWitness/ar/docs/"}, {"@type": "ListItem", "position": 3, "name": "مرجع", "item": "https://phishdestroy.github.io/TgWitness/ar/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "النشر", "item": "https://phishdestroy.github.io/TgWitness/ar/docs/reference/deployment/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">الانتقال إلى المحتوى</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / التوثيق</span></a>
+<nav aria-label="الأدلة الإرشادية"><a href="../../concepts/">دليل مرئي</a><a href="../../">جميع الأدلة الإرشادية</a><a href="../">مرجع</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="اللغة"><span aria-hidden="true">◍</span> العربية</summary><div class="lang-list"><a href="../../../../docs/reference/deployment/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/deployment/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/deployment/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/deployment/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/deployment/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/deployment/" hreflang="tr" lang="tr">Türkçe</a><a href="./" hreflang="ar" lang="ar" aria-current="true">العربية</a><a href="../../../../fa/docs/reference/deployment/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/deployment/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/deployment/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/deployment/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/deployment/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/deployment/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="التبديل بين السمة الفاتحة والداكنة"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="الأدلة الإرشادية"><a href="../../../guides/modes.html">الأوضاع، والسيناريوهات، ومستويات الأدلة</a><p class="nav-label">الخطوات الأولى</p><a href="../../start/">ابدأ في غضون دقائق</a><a href="../../accounts/">ربط حساب</a><a href="../../proxies/">اختر وكيلًا</a><a href="../../exports/">التصدير والتحقق</a><p class="nav-label">فهم الأدلة</p><a href="../../concepts/">تعرف على كيفية عمل الأدلة</a><a href="../../cases/">التحقيق في جميع الدردشات</a><a href="../../security/">حافظ على أمانها</a><p class="nav-label">اكتشف المزيد</p><a href="../../witness/">إعداد روبوت «Witness»</a><a href="../../server/">حافظ على استمرار عملها</a><a href="../../troubleshooting/">اكتشف ما الذي حدث</a></nav><nav class="wiki-nav" aria-label="مرجع"><p class="nav-label"><a class="nav-label-link" href="../">مرجع</a></p><details class="wiki-group" open><summary>الإعداد</summary><a href="../quickstart/">البداية السريعة</a><a href="../accounts/">الحسابات وتنسيقات الجلسات</a><a href="../connection/">الاتصال، والوكلاء، وحماية البيانات</a><a href="./" aria-current="page">النشر</a></details><details class="wiki-group"><summary>جمع</summary><a href="../collection/">كيفية عمل عملية الجمع</a><a href="../operations/">سير العمل والعمليات</a><a href="../investigation/">وضع التحقيق</a><a href="../features/">الميزات والقيود</a></details><details class="wiki-group"><summary>الأدلة</summary><a href="../how-it-works/">كيف تعمل الأدلة</a><a href="../evidence/">تنسيق الأدلة</a><a href="../witness/">شاهد مستقل</a><a href="../timestamp/">الطوابع الزمنية</a></details><details class="wiki-group"><summary>الأمن والمشروع</summary><a href="../security/">الأمن ومعالجة البيانات</a><a href="../architecture/">الهندسة</a><a href="../verification/">ما تم اختباره</a><a href="../license/">إشعار بشأن الترخيص وعدم التوافق المعماري</a><a href="../notice/">إشعار بعدم التوافق مع المشغل</a><a href="../changelog/">سجل التغييرات</a></details></nav><p class="sidebar-note">v0.7.0<br>مفتوحة المصدر · تعمل على جهازك</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="الأدلة الإرشادية"><a href="../../../">الصفحة الرئيسية</a> <span aria-hidden="true">/</span> <a href="../../">التوثيق</a> <span aria-hidden="true">/</span> <a href="../">مرجع</a> <span aria-hidden="true">/</span> <span aria-current="page">النشر</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">البحث في الوثائق</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="جرب «proxy» أو «hash chain» أو «token» أو «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="بحث واضح" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">اكتب كلمة للبحث في الأدلة والمراجع. يبقى البحث في متصفحك.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">مرجع / الإعداد</p><h1>النشر</h1><p class="guide-outcome">قم بتشغيل TgWitness كخدمة على أنظمة Windows أو Linux أو macOS أو Docker، عبر بروتوكول HTTPS، مع توفير النسخ الاحتياطية والتحديثات.</p><div class="wiki-body"><p><strong>اللغة الإنجليزية</strong> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md">Русский</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md">الأوكرانية</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md">Español</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md">البرتغالية (البرازيل)</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md">Türkçe</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md">العربية</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md">فارسي</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md">الأردو</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md">الهندية</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md">اللغة الإندونيسية</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md">الفيتنامية</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md">الصينية المبسطة</a></p>
+<h2 id="choose-an-installation">اختر طريقة التثبيت<a class="anchor" href="#choose-an-installation" aria-label="رابط لهذا القسم">#</a></h2>
+<p>بالنسبة للحزمة المحمولة، قم باستخراج ملف <code>TgWitness-&lt;version&gt;-windows-amd64-portable.zip</code> من
+إصدارات GitHub. بالنسبة للطرق الأخرى، قم بتنزيل ملف ZIP المصدر واستخراجه أو انسخ
+المستودع، ثم قم بتشغيل الأمر التالي من دليل المشروع:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>التثبيت</th>
+<th>ابدأ</th>
+<th>هل يعمل في الخلفية؟</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>حزمة قابلة للتشغيل على نظام ويندوز</td>
+<td><code>TgWitness.cmd</code></td>
+<td>لا؛ اترك النافذة مفتوحة.</td>
+</tr>
+<tr>
+<td>متوافق مع نظام التشغيل Windows الأصلي</td>
+<td><code>Start.cmd</code></td>
+<td>لا؛ استخدم مهمة تسجيل الدخول الاختيارية للتشغيل في الخلفية.</td>
+</tr>
+<tr>
+<td>متوافق مع أنظمة تشغيل Linux و macOS</td>
+<td><code>sh start.sh</code></td>
+<td>لا؛ استخدم systemd/launchd للتشغيل في الخلفية.</td>
+</tr>
+<tr>
+<td>Docker على أي مضيف مدعوم</td>
+<td><code>docker compose up -d --build --wait</code></td>
+<td>نعم، أثناء تشغيل برنامج Docker الخفي.</td>
+</tr>
+<tr>
+<td>أداة مساعدة لـ Docker على نظام Windows</td>
+<td><code>scripts\Docker.cmd</code></td>
+<td>نعم؛ ينتظر المساعد حتى تتأكد سلامة خادم الويب.</td>
+</tr>
+<tr>
+<td>أداة مساعدة لـ Docker على أنظمة Linux/macOS</td>
+<td><code>sh scripts/docker-start.sh</code></td>
+<td>نعم؛ ينتظر المساعد حتى تتأكد سلامة خادم الويب.</td>
+</tr>
+</tbody>
+</table></div>
+<p>بالنسبة لخادم سحابي يمكن لطرف ثالث التحقق منه — تم إنشاؤه عبر
+واجهة برمجة تطبيقات (API) المزود، بدون SSH، ولا يمكن الوصول إليه إلا عبر نفق Cloudflare — انظر
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md">«النشر عالي الأمان</a>».</p>
+<p>تقوم عملية التشغيل الأصلية بإنشاء <code>.venv</code> خاص وتثبيت التبعيات المثبتة.
+يقوم Docker بإنشائها داخل الصورة، دون الحاجة إلى Python المضيف. يتطلب الإعداد
+للمرة الأولى اتصالاً بالإنترنت. عند عدم العثور على Python 3.11+، يسأل <code>Start.cmd</code> قبل
+تثبيت Python 3.12 للمستخدم الحالي لنظام Windows (winget، أو برنامج التثبيت الخاص بـ python.org
+بعد التحقق من توقيع مؤسسة برمجيات Python)؛ ولا يطلب أبدًا
+صلاحيات المسؤول. تظل خدمات Docker وخدمات نظام التشغيل متطلبات أساسية.</p>
+<p>تستخدم التثبيتات الأصلية والقابلة للنقل <code>data/live</code> داخل مجلدها. بينما يستخدم Docker وحدة التخزين المسماة <code>tgwitness-data</code>
+في <code>/data</code>. وتُعتبر هذه تثبيتات منفصلة إلى أن تقوم عمداً بترحيل
+دليل البيانات بالكامل. لا تتوقع أن تكتشف حاوية Docker جديدة الحسابات الأصلية
+تلقائياً.</p>
+<h2 id="installation-requirements">متطلبات التثبيت<a class="anchor" href="#installation-requirements" aria-label="رابط لهذا القسم">#</a></h2>
+<p>يتطلب التثبيت الأصلي Python 3.11 أو أحدث مع <code>venv</code> و<code>ensurepip</code>، ووصولًا إلى الإنترنت
+لتثبيت التبعية الأولى، ودليل مشروع قابل للكتابة لـ
+<code>.venv</code>. لا تحتاج اللوحة المدمجة إلى Node.js أو بناء واجهة مستخدم. قم بتشغيل المشغل من
+حساب نظام التشغيل العادي الخاص بك؛ لا يتطلب TgWitness امتيازات المسؤول/الجذر.</p>
+<ul>
+<li><strong>نظام Windows:</strong> يقوم <code>Start.cmd</code> بفحص <code>py -3</code>، ثم <code>python</code>، ثم المجلدات الافتراضية لكل مستخدم و
+    مجلدات التثبيت في «Program Files»، ويتطلب الإصدار 3.11 أو أحدث. إذا لم ينجح أي منها، فإنه
+    يقدم التثبيت التلقائي لكل مستخدم الموصوف أعلاه. يعمل <code>py -3 start.py</code> أيضًا.
+    لا تحتاج الحزمة المحمولة إلى لغة Python على الإطلاق.</li>
+<li><strong>Linux:</strong> يحاول <code>start.sh</code> استخدام <code>python3.13</code> و<code>python3.12</code> و<code>python3.11</code> و<code>python3</code> و
+    <code>python</code>، ويطبع أمر التثبيت لـ apt أو dnf أو pacman أو zypper أو apk أو Homebrew
+    عندما لا يكون أي منها مناسبًا. قد تتطلب عمليات التثبيت على Debian/Ubuntu حزمة
+    <code>python3-venv</code> المطابقة للمترجم المحدد. يجب استبدال إصدار
+    Python الافتراضي الأقدم في التوزيعة أو استكماله بـ Python 3.11 أو أحدث.</li>
+<li><strong>نظام macOS:</strong> قم بتثبيت إصدار حديث من Python 3.11+؛ لا تفترض أن المُترجم
+    المُوفَّر من نظام التشغيل يفي بالمتطلبات. استخدم <code>python3 start.py</code> من دليل المشروع.</li>
+<li><strong>Docker:</strong> استخدم Docker Engine/Desktop مع Compose الإصدار 2.20 أو أحدث. يجب أن يستخدم Docker Desktop
+    حاويات Linux على نظام Windows. تقوم الحاوية بتثبيت
+    تبعيات Python الخاصة بها؛ ولا يحتاج المضيف إلى تثبيت Python منفصل.</li>
+</ul>
+<p>استخدم تخزينًا محليًّا دائمًا لدليل البيانات. خطط للسعة بناءً على عدد الرسائل،
+والملفات الوسائطية، ونمو سجل WAL، وعمليات التصدير والنسخ الاحتياطي؛ فلا توجد مواصفات دنيا عالمية قائمة على الأدلة
+للسعة القرصية/ذاكرة الوصول العشوائي لكل حمل عمل. قد تتطلب بنى وحدة المعالجة المركزية وإصدارات Python
+التي تفتقر إلى عجلات التبعية المتوافقة أدوات بناء إضافية و
+تأهيلها الخاص. كلمة «قابل للنقل» لا تعني دعمًا شاملاً لجميع أنظمة التشغيل أو الأجهزة.</p>
+<p>تم التحقق محليًّا من Windows 11/Python 3.12. أما تعريفات Linux/macOS/الحاويات وCI
+فقد تم توفيرها ولكن لم يتم تنفيذها على مضيف التطوير هذا. انظر
+<a href="../verification/">ملف VERIFICATION.md</a> لمعرفة النطاق الدقيق.</p>
+<h2 id="local-computer">جهاز كمبيوتر محلي<a class="anchor" href="#local-computer" aria-label="رابط لهذا القسم">#</a></h2>
+<p>استخدم <code>Start.cmd</code> على نظام Windows أو <code>sh start.sh</code> على أنظمة Linux/macOS. يقوم <code>scripts\Setup.cmd</code> أو
+<code>sh start.sh --setup-only</code> بإعداد
+البيئة. يقوم المشغل بتثبيت التبعيات عند الاستخدام الأول؛ أما عمليات التشغيل اللاحقة
+فتعيد استخدام البيئة. يلزم الاتصال بالإنترنت لإجراء الإعداد وجمع رسائل Telegram،
+ولكن تصفح السجلات الموجودة وإنشاء ملفات التصدير يعملان دون اتصال بالإنترنت.</p>
+<p>قم بتشغيل <code>python start.py --check</code> بعد الإعداد لفحص التبعيات المحلية، و Ed25519،
+والتخزين، وتكوين المفتاح، وعنوان الاستماع دون تشغيل أداة التجميع.
+استخدم <code>--json</code> للحصول على مخرجات منظمة. قم بتمرير الأوامر المقصودة <code>--data-dir</code> و<code>--host</code> و
+<code>--port</code>. لا يقوم الفحص بتثبيت الحزم، أو إنشاء سجل، أو الاتصال بـ Telegram؛
+وهو ليس تقييمًا للسلامة أو التغطية. يقوم برنامج Startup بالتحقق بشكل منفصل
+من السجلات الموجودة. كما يتجنب <code>python start.py --help</code> التثبيت.</p>
+<p>الخيارات:</p>
+<p>بعد استخدام start.py، قم بتشغيل الأوامر المساعدة باستخدام <code>.venv\Scripts\python.exe</code> في
+نظام Windows أو <code>.venv/bin/python</code> في Linux/macOS، أو قم بتنشيط تلك البيئة أولاً.
+تفترض الأمثلة <code>python -m ...</code> أدناه أن البيئة نشطة.</p>
+<pre><code class="language-sh">python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 8787</code></pre>
+<p>متغيرات البيئة: TGWITNESS_DATA، TGWITNESS_HOST، TGWITNESS_PORT، TGWITNESS_TOKEN.
+يحدد TGWITNESS_VAULT_KEY_FILE وضع المفتاح الخارجي للتثبيت الجديد؛ انظر أدناه.
+يجب أن يحتوي TGWITNESS_TOKEN، إذا تم توفيره، على 24 حرفًا على الأقل؛ استخدم
+قيمة عشوائية مشفرة. وبدونه، يقوم التطبيق بإنشاء رمز عشوائي 256 بت في ملف panel-token.txt.
+لا يؤدي تجاوز متغيرات البيئة إلى إعادة كتابة هذا الملف. أعد التشغيل لتغيير بيانات الاعتماد.</p>
+<p>يمكن لعملية واحدة فقط أن تمتلك دليل البيانات. يمنع قفل الملفات عبر أنظمة التشغيل
+الكتابة المتزامنة غير المقصودة. استخدم عامل Uvicorn واحدًا. يمكن للوحة إدارة أي عدد من
+مساحات العمل، مع وجود أدلة إضافية لمساحات العمل ضمن profiles/&lt;id&gt;/.
+بالنسبة لمثيلات الخدمة المنفصلة، استخدم أدلة ومنافذ منفصلة. يجب أن تكون ملفات WAL الخاصة بـ SQLite موجودة في
+وحدة تخزين محلية دائمة، وليس في نظام ملفات شبكي. لا تشارك وحدة تخزين واحدة بين النسخ المتماثلة.</p>
+<h2 id="windows-portable-package">حزمة قابلة للتشغيل على نظام ويندوز<a class="anchor" href="#windows-portable-package" aria-label="رابط لهذا القسم">#</a></h2>
+<p>يحتوي كل إصدار على GitHub على <code>TgWitness-&lt;version&gt;-windows-amd64-portable.zip</code> و
+<code>.sha256</code>. ويشتمل على بيئة التشغيل الرسمية القابلة للتضمين لـ Python 3.12 من python.org
+(مجموع التحقق مثبت في <code>tools/build_portable.py</code>)، وTgWitness وتبعياته المثبتة،
+وثلاثة مشغلات:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>ملف</th>
+<th>الغرض</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TgWitness.cmd</code></td>
+<td>ابدأ تشغيل اللوحة؛ يتم تمرير الخيارات الإضافية، على سبيل المثال <code>TgWitness.cmd --port 8790</code></td>
+</tr>
+<tr>
+<td><code>TgWitness-Demo.cmd</code></td>
+<td>ابدأ العرض التوضيحي الاصطناعي في <code>data\demo</code></td>
+</tr>
+<tr>
+<td><code>TgWitness-Check.cmd</code></td>
+<td>قم بإجراء فحص الجاهزية دون بدء التشغيل</td>
+</tr>
+</tbody>
+</table></div>
+<p>قم باستخراج الأرشيف بالكامل إلى مجلد قابل للكتابة مثل <code>Documents\TgWitness</code>؛ لا تقم بتشغيله
+من داخل ملف ZIP أو من مجلد Program Files. يستخدم وقت التشغيل مسار وحدة معزولة،
+لذلك لا تؤثر عليه تثبيتات Python الأخرى ولا <code>PYTHONPATH</code>. تبقى البيانات في
+مجلد <code>data</code> الخاص بالحزمة. للتحديث، أوقف تشغيل TgWitness، ثم قم باستخراج الإصدار الجديد إلى
+مجلد جديد وانسخ مجلد <code>data</code> إليه.</p>
+<p>قم بتثبيتها بنفسك على نظام Windows 64 بت باستخدام Python 3.12:</p>
+<pre><code class="language-sh">python tools/build_portable.py</code></pre>
+<p>يقوم المُنشئ بالتحقق من المجموع الاختباري لوقت التشغيل، وتثبيت التبعيات المقيدة في
+الحزمة، وتشغيل فحص الجاهزية باستخدام المُترجم المدمج، وكتابة ملف ZIP
+والمجموع الاختباري إلى <code>dist/</code>.</p>
+<h2 id="container">الحاوية<a class="anchor" href="#container" aria-label="رابط لهذا القسم">#</a></h2>
+<pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
+<p>يؤدي هذا إلى إنشاء وحدة تخزين دائمة ذات اسم لمجلد /data.
+يتم تعيين منفذ الويب إلى 127.0.0.1:8787. تعمل العملية برقم UID 10001 مع
+إمكانيات محدودة، ونظام ملفات جذر للقراءة فقط، ومجلدين /data و/tmp قابلين للكتابة. يقوم
+<code>--wait</code> بفحص حالة خادم الويب قبل العودة؛ ولا يقوم بإجراء
+تخويل أو تسليم Telegram. تستخدم الأدوات المساعدة المتوفرة مهلة استعداد مدتها 180 ثانية
+بعد الإنشاء. قد يستغرق تنزيل التبعيات الأولية وقتًا أطول من ذلك.</p>
+<p>يستخدم كل من ملفَي Compose الأساسيين اسم المشروع <code>tgwitness</code>، لذا فإن استخراج إصدار جديد
+إلى دليل آخر لا يؤدي تلقائيًا إلى تحديد وحدة تخزين بيانات جديدة. احتفظ بنشر واحد فقط
+نشطًا لهذا المشروع. بالنسبة للتثبيتات المستقلة، استخدم
+<code>docker compose -p NAME ...</code> فريدًا ومنفذ مضيف مختلف، واحتفظ بكليهما عند التحديثات.
+بالنسبة لعملية نشر أقدم تستخدم اسم مشروع مختلف، استمر في استخدام اسمها الأصلي
+مع <code>-p</code>؛ حيث يسرد <code>docker compose ls</code> المشاريع الموجودة.</p>
+<p>انسخ <code>deploy/env.example</code> إلى <code>.env</code> وقم بتغيير <code>TGWITNESS_PORT</code> لاستخدام منفذ لوبباك
+مختلف. على سبيل المثال، يعرض <code>TGWITNESS_PORT=8788</code> اللوحة على
+<code>http://127.0.0.1:8788</code>؛ ولا يزال الحاوية تستمع على المنفذ 8787. يتم تجاهل <code>.env</code> في Git.</p>
+<p>استرداد الرمز المميز الأولي:</p>
+<pre><code class="language-sh">docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
+<p>الأوامر المفيدة:</p>
+<pre><code class="language-sh">docker compose ps
+docker compose logs --tail 100 -f
+docker compose stop
+docker compose up -d --wait</code></pre>
+<p><code>restart: unless-stopped</code> يعيد تشغيل أداة التجميع بعد حدوث عطل أو إعادة تشغيل خدمة Docker الخلفية
+. على خادم Linux، قم بتمكين Docker عند بدء التشغيل باستخدام مدير الخدمات الخاص بنظام التوزيع الخاص بك
+، والذي يُعرف عادةً باسم <code>sudo systemctl enable --now docker</code>. على أنظمة Windows/macOS، قم بتمكين
+إعداد «التشغيل عند تسجيل الدخول» في Docker Desktop. قد يؤدي تسجيل الخروج من سطح المكتب أو وضع السكون أو توقف
+قد يؤدي إيقاف تشغيل خادم Docker إلى مقاطعة عملية التجميع. تظل الحاوية التي تم إيقافها بشكل صريح
+متوقفة حتى تقوم بتشغيلها مرة أخرى.</p>
+<p>يبلغ الحد الأقصى لحجم وحدة التخزين /tmp 512 ميغابايت في التكوين المثال. يستخدم بناء التصدير
+<code>temporary-exports/</code> لكل مساحة عمل على وحدة التخزين الدائمة /data بدلاً من ذلك. احجز مساحة
+هناك للتصدير المتزامن، ونمو السجل/WAL، والوسائط، والنسخ الاحتياطية.
+يستخدم المشغل وDocker ملف deploy/constraints.txt لتثبيت إصدارات التبعيات المؤهلة لوقت التشغيل
+. هذه ليست سلسلة توريد مقفلة بالتجزئة: لا تزال الصورة الأساسية لـ Python وحزم
+المنتجات تتطلب تأهيلًا مستقلًا للإصدار.</p>
+<p>لا تستخدم الأمر docker compose down -v إلا إذا كنت تنوي إتلاف السجل والمفاتيح.
+تشير تقارير حالة الحاوية إلى توفر خادم الويب، وليس إلى نجاح عملية التقاط رسائل Telegram.
+افحص حالة المجمع في اللوحة، ونبضه، والأخطاء، وأحداث التغطية.</p>
+<h3 id="independent-witness-profile">ملف تعريفي للشاهد المستقل<a class="anchor" href="#independent-witness-profile" aria-label="رابط لهذا القسم">#</a></h3>
+<p>تقوم خدمة <code>witness</code> الاختيارية بتشغيل <a href="../witness/">شاهد مستقل</a> في
+حاوية خاصة بها، مع مفتاحها الخاص وسجلها في وحدة التخزين <code>witness-data</code>، مع وجود رمز شاهد للقارئ فقط
+للمجمع. قم بإنشاء الرمز على صفحة <strong>«Witness»</strong> (<strong>الشاهد</strong>) في اللوحة، وأضفه
+مع رمز بوت وقناة إلى <code>.env</code>، ثم ابدأ الملف الشخصي:</p>
+<pre><code class="language-sh">docker compose --profile witness up -d          # deploy/compose/compose.image.yaml: same flag
+docker compose logs witness                     # witness key fingerprint</code></pre>
+<p>تصل الخدمة إلى أداة التجميع داخل شبكة Compose على <code>http://tgwitness:8787</code>
+(<code>TGWITNESS_WITNESS_COLLECTOR</code>
+يتجاوزها، على سبيل المثال <code>/profiles/&lt;workspace ID&gt;</code>
+لمساحة عمل
+أخرى). بالنسبة لـ«شاهد» على خادم منفصل، يديره شخص آخر، استخدم
+<code>deploy/compose/compose.witness.yaml</code>
+هناك مع تعيين <code>TGWITNESS_WITNESS_COLLECTOR</code>
+على عنوان HTTPS
+لأداة التجميع؛ لا يحتوي هذا الملف سوى على «الشاهد».</p>
+<h2 id="install-a-published-image">تثبيت صورة منشورة<a class="anchor" href="#install-a-published-image" aria-label="رابط لهذا القسم">#</a></h2>
+<p>يصبح هذا متاحًا بعد إتمام <a href="#automated-github-releases">سير عمل الإصدار</a>
+بنجاح وتكوين حزمة GHCR العامة. لا يتم ترميز اسم/مالك المستودع بشكل ثابت
+في شجرة المصدر هذه. استخدم الصورة الموضحة في ملخص سير عمل ذلك الإصدار.</p>
+<p>انسخ <code>deploy/env.example</code> إلى <code>.env</code>. اضبط <code>TGWITNESS_IMAGE</code> على الإصدار المنشور، باستخدام
+مسار المستودع <strong>بالأحرف الصغيرة</strong>، على سبيل المثال:</p>
+<pre><code class="language-dotenv">TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.0
+TGWITNESS_PORT=8787</code></pre>
+<p>قم بتشغيل هذا الملف بمفرده، بدلاً من <code>compose.yaml</code>:</p>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml exec tgwitness cat /data/panel-token.txt</code></pre>
+<p>لا حاجة إلى بناء المصدر أو لغة Python أو مُجمِّع على المضيف. يستهدف سير عمل الإصدار
+حاويات Linux AMD64 وARM64، بما في ذلك الآلة الافتراضية Linux في Docker Desktop.
+استخدم علامة الإصدار أو <code>ghcr.io/owner/repository@sha256:...</code> من ملخص سير العمل.
+لم يتم تكوين علامة <code>latest</code> المتحركة أو ترقية التطبيق غير المراقبة. تستخدم
+الصورة ومتغيرات المصدر نفس حجم البيانات عندما يتطابق اسم المشروع.</p>
+<h2 id="automatic-https-on-a-server">تشغيل HTTPS تلقائيًا على الخادم<a class="anchor" href="#automatic-https-on-a-server" aria-label="رابط لهذا القسم">#</a></h2>
+<p>استخدم خادمًا مزودًا بـ Docker، ونطاقًا تحت سيطرتك، وتخزينًا محليًّا دائمًا.
+قم بتوجيه سجلات A/AAAA للنطاق إلى الخادم؛ وانشر سجل AAAA فقط إذا وصل IPv6
+إليه. اسمح بالاتصالات الواردة عبر TCP 80 و443 والاتصالات الصادرة عبر DNS/HTTPS لإصدار الشهادات.
+يجب ألا تكون هذه المنافذ مخصصة بالفعل لخدمات أخرى.</p>
+<p>انسخ <code>deploy/env.example</code> إلى <code>.env</code> وقم بتعيين اسم مضيف، بدون مخطط أو مسار:</p>
+<pre><code class="language-dotenv">TGWITNESS_DOMAIN=watch.your-domain.org</code></pre>
+<p>ابدأ بناء المصدر باستخدام طبقة HTTPS:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt</code></pre>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml -f deploy/compose/compose.https.yaml up -d --wait</code></pre>
+<p>بالنسبة للصورة المنشورة، استخدم <code>deploy/compose/compose.image.yaml</code> كملف أول بدلاً من ذلك. احتفظ
+بكل من معلمتي <code>-f</code> لاستخدامهما لاحقًا في أوامر الحالة والسجلات والتحديث والإيقاف.</p>
+<p>يقوم Caddy بالحصول على شهادة وتجديدها، وإعادة توجيه HTTP إلى HTTPS، وإعادة توجيه
+الطلبات إلى المجمع على شبكة Compose الخاصة. حالة الشهادة لها
+وحدة تخزين دائمة خاصة بها. يظل منفذ المضيف المباشر للمجمع مخصصًا للارتداد الداخلي فقط.
+لا تتيح تهيئة Caddy المُقدمة تسجيل الوصول.</p>
+<p>افتح <code>https://watch.your-domain.org</code> وأدخل رمز اللوحة. الاستعداد للكتابة
+لا يؤكد إصدار الشهادة أو إمكانية الوصول الخارجي. إذا لم يكن HTTPS
+جاهزًا، فافحص DNS وقواعد جدار الحماية، بالإضافة إلى:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.https.yaml logs --tail 100 caddy</code></pre>
+<p>صورة Caddy المرفقة تتبع علامة <code>2-alpine</code> الخاصة بها. يؤدي سحب الصورة إلى تحديثها؛
+قم بتثبيت ملخص تم اختباره في بيئتك إذا كنت بحاجة إلى إصدارات ثابتة من البنية التحتية.</p>
+<h2 id="updates-and-backups">التحديثات والنسخ الاحتياطية<a class="anchor" href="#updates-and-backups" aria-label="رابط لهذا القسم">#</a></h2>
+<p>الحفاظ على اسم مشروع Compose وحجم البيانات عبر التحديثات. قم أولاً بإيقاف
+أداة التجميع (collector) وعمل نسخة احتياطية كاملة. بالنسبة للنشر الافتراضي القائم على المصدر:</p>
+<pre><code class="language-sh">docker compose stop
+docker compose cp tgwitness:/data ../tgwitness-backup-before-update</code></pre>
+<p>استخدم وجهة نسخ احتياطي جديدة في كل مرة، خارج المستودع، وقم بحمايتها باعتبارها
+مواد تتطلب وصولاً إلى الحساب. المسار الموضح في المثال هو لأغراض التوضيح فقط؛ استخدم موقع النسخ الاحتياطي الخاص بك.
+انسخ الدليل بأكمله، بما في ذلك الملفات المخفية، وجميع مساحات العمل، والمفاتيح،
+والسجلات، والملفات الوسائطية. قم بعمل نسخة احتياطية من المفتاح الرئيسي للخزينة الخارجية بشكل منفصل إذا تم تكوينه.
+ملف ZIP الخاص بالأدلة ليس نسخة احتياطية قابلة للاستعادة للتطبيق. بالنسبة لـ HTTPS، احتفظ أيضًا
+بمجلدات Caddy إذا كنت بحاجة إلى الاحتفاظ بحالة الشهادة/الحساب.</p>
+<p>لنشر المصدر، احصل على ملفات الإصدار الجديد وقم بتشغيل:</p>
+<pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
+<p>لنشر الصورة، قم بتغيير <code>TGWITNESS_IMAGE</code> إلى الإصدار المطلوب، ثم قم بتشغيل:</p>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait</code></pre>
+<p>استخدم ملف (ملفات) Compose الخاص بتثبيتك لأوامر الإيقاف/النسخ السابقة أيضًا.
+احتفظ بـ <code>.env</code>، والتكوين المخصص، واسم المشروع نفسه. يحافظ <code>down</code> على
+المجلدات المسماة؛ <strong>بينما يحذفها <code>down -v</code></strong>. لا تنسخ <code>.venv</code> بين أنظمة التشغيل
+أو إصدارات Python. للتحديثات الأصلية، أوقف TgWitness، وقم بعمل نسخة احتياطية من
+دليل البيانات الكامل الخاص به، واستبدل الملفات المصدرية، وقم بتشغيل <code>python start.py --setup-only</code> قبل التشغيل.</p>
+<p>تحقق من الوصول إلى اللوحة، وهوية الحساب، وحالة المراقبة، والتغطية بعد إجراء
+تحديث. لا تؤدي إعادة التشغيل إلى استعادة تحديثات Telegram الفائتة. قد يتطلب التراجع
+النسخة الاحتياطية السابقة للتحديث إذا غيرت إصدارات مستقبلية تنسيقات التخزين.</p>
+<h2 id="automated-github-releases">إصدارات GitHub الآلية<a class="anchor" href="#automated-github-releases" aria-label="رابط لهذا القسم">#</a></h2>
+<p>يصبح <a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml">سير عمل الإصدار</a> جاهزًا للاستخدام بعد
+نقل هذا المشروع إلى مستودع GitHub مع تمكين ميزة Actions. ويتم تشغيله عند
+<strong>نشر</strong> إصدار GitHub، بما في ذلك الإصدارات التمهيدية. ولا تؤدي المسودات وعمليات دفع العلامات
+بحد ذاتها إلى نشر الحزم.</p>
+<ol>
+<li>قم بتعيين إصدار الحزمة وسجل التغييرات، ثم انشر إصدارًا مُعلَّمًا بـ <code>v</code>
+    بالإضافة إلى الإصدار الدقيق من <code>pyproject.toml</code>، مثل <code>v0.7.0</code>.</li>
+<li>يقوم سير العمل بالتحقق من صحة العلامة وتشغيل فحوصات Python المشتركة بين أنظمة التشغيل Windows/Linux/macOS،
+    وكذلك فحوصات general/account-import/QR browser، و source-package، و Docker. كما يتم إجراء تثبيت أصلي جديد
+    على جميع أنظمة التشغيل الثلاثة باستخدام Python 3.12.</li>
+<li>بعد اجتياز تلك الفحوصات، تُجرى اختبارات أولية لصورة ARM64 تحت بيئة QEMU، ويتم نشر
+    صور AMD64/ARM64 على <code>ghcr.io/&lt;lowercase-owner&gt;/&lt;lowercase-repository&gt;:&lt;version&gt;</code>،
+    ويتم إرفاق ملف ZIP المصدر، ومجموع التحقق، وملف Python wheel بالإصدار. وتقوم مهمة منفصلة
+    على نظام Windows بإنشاء ملف ZIP القابل للنقل وإرفاقه مع مجموع التحقق الخاص به.</li>
+<li>بعد النشر الأول، افتح إعدادات حزمة GHCR واضبط الرؤية
+    على <strong>«عام»</strong> إذا كان المقصود هو سحب الصور بشكل مجهول. لا يضمن مستودع المصدر العام
+    بمفرده أن تكون حزمة الحاوية عامة. يجب أن تسمح سياسات المؤسسة
+    بنشر الحزمة. يستخدم سير العمل <code>GITHUB_TOKEN</code>؛ ولا ينبغي أن يتضمن المستودع
+    كلمة مرور التسجيل أو بيانات اعتماد VPS.</li>
+</ol>
+<p>لم يتم إثبات نجاح سير العمل عن بُعد من خلال هذا الإعداد المحلي. محاكاة ARM64
+هي مجرد اختبار أولي، وليست تأهيلًا للأجهزة الأصلية أو لتطبيق Telegram في الوقت الفعلي.
+يؤدي هذا إلى أتمتة عملية تجميع الإصدارات؛ ولا يزال تشغيل الخادم يتطلب الأمر Compose
+ومتطلباته الأساسية المتعلقة بالمجال/المضيف. لا يتم ترقية الخوادم الحالية أو إعادة تشغيلها تلقائيًا
+عند نشر إصدار جديد.</p>
+<h2 id="remote-server">خادم بعيد<a class="anchor" href="#remote-server" aria-label="رابط لهذا القسم">#</a></h2>
+<p>حافظ على ربط الخدمة بـ loopback واستخدم نفق SSH، أو قم بإنهاء HTTPS عند
+بروكسي عكسي. ملف Compose الأساسي محلي فقط؛ بينما توفر طبقة
+<code>deploy/compose/compose.https.yaml</code> الاختيارية Caddy لنطاق تم تكوينه.
+احرص على عدم ظهور رمز الحامل في عناوين URL وسجلات الوكيل. يجب أن يحد الوكيل العكسي
+من حجم الطلبات ومعدلات الاتصال. لا تكشف بروتوكول HTTP العادي للإنترنت.</p>
+<p>تتوفر أمثلة لـ systemd، ومهمة تسجيل الدخول إلى Windows، ووكيل مستخدم macOS، و Caddy
+في <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">مجلد deploy/</a>. قم بمراجعة/تعديل مساراتها قبل التثبيت.
+هذه نماذج مقدمة، وليست إعدادات منصة يتم تنفيذها محليًّا. لا
+يتم تسجيل أي خدمة أو مهمة في الخلفية بواسطة المشغل العادي.</p>
+<p>في نظام Windows، يؤدي تشغيل <code>pythonw.exe</code> بدون نافذة إلى تخزين تشخيصات بدء التشغيل/الخادم في
+<code>logs/server.log</code> ضمن دليل البيانات (5 ميغابايت لكل ملف، ونسختان احتياطيتان يتم تناوبهما).
+يحتفظ تشغيل وحدة التحكم بسجلات وحدة التحكم. يتم تعطيل تسجيل الوصول عبر HTTP في كلا
+الوضعين. قم بحماية السجلات باستخدام دليل البيانات وراجعها قبل مشاركتها.</p>
+<h2 id="restart-and-gaps">إعادة التشغيل والثغرات<a class="anchor" href="#restart-and-gaps" aria-label="رابط لهذا القسم">#</a></h2>
+<p>يتم الاحتفاظ بحالة المراقبة الأخيرة المطلوبة. إذا كانت المراقبة نشطة،
+تحاول الأداة عند بدء التشغيل إعادة الاتصال واستئناف المصادر المحددة. يؤدي الإيقاف المؤقت اليدوي إلى
+إلغاء هذه النية. يتم تسجيل أي محاولة إعادة تشغيل فاشلة وعرضها في اللوحة.</p>
+<p>يحتفظ StringSession بالترخيص ولكنه لا يحتفظ بحالة التحديث/الكيان الدائمة لـ Telethon.
+يتم إعادة تحميل الحوارات عند البدء. يمكن لـ Telegram/Telethon استعادة بعض انقطاعات النقل
+أثناء التشغيل، لكن TgWitness لا يدعي إمكانية إعادة التشغيل الدائمة عبر عمليات إعادة تشغيل العملية.
+يتم عند كل عملية بدء تشغيل تسجيل رأس السجل السابق وحدود وضع عدم الاتصال.
+يقوم جهاز المراقبة بفحص الاتصال كل 10 ثوانٍ وإضافة إشارة نبض كل دقيقة
+(<strong>المعلمات → تسجيل النشاط كل</strong>).
+قد يتم تفويت الانقطاعات القصيرة؛ ولا يضمن الاتصال المستمر
+تسليم التحديثات بالكامل. اللقطات هي ملاحظات صريحة للتاريخ الحالي، وليست أبدًا إصلاحًا للفجوات.</p>
+<p>يتم تخزين قائمة انتظار الوسائط في قاعدة بيانات SQLite الخاصة بكل مساحة عمل. يتم تسجيل الرسالة ومهمتها
+بشكل متكامل. يتم استرداد المهام قيد التشغيل التي تمت مقاطعتها لإعادة المحاولة عند البدء.
+يتمتع كل تنزيل بمهلة انتظار أساسية مدتها 120 ثانية بالإضافة إلى الوقت اللازم لحجم الملف بمعدل 256 كيلوبايت في الثانية، و
+حد أقصى يتراوح بين 1 و2,000 ميغابايت لكل نوع مرفق؛ وتوجد إعدادات المهلة والسرعة والمحاولات المتكررة ضمن <strong>قسم «المعلمات</strong>». يقوم المجمع
+بتخطي الملفات التي يكون حجمها غير معروف. ويؤدي الإيقاف المؤقت إلى الاحتفاظ بالأعمال الموجودة في قائمة الانتظار. تستخدم إعادة المحاولة
+وصف الملف الأصلي الذي تمت ملاحظته، ولا تستخدم أبدًا أحدث إصدار من رسالة تم تعديلها لاحقًا.
+يتم تحديد عدد محاولات إعادة المحاولة في حالات الفشل المؤقت؛ وتبقى فترات توقف «FloodWait» للوسائط سارية بعد إعادة التشغيل.
+يتم استرداد الوسائط بشكل منفصل عن استرداد تحديثات Telegram ولا يمكن إعادة إنشاء الملفات المفقودة.</p>
+<h2 id="backup-restore-and-capacity">النسخ الاحتياطي والاستعادة والسعة<a class="anchor" href="#backup-restore-and-capacity" aria-label="رابط لهذا القسم">#</a></h2>
+<p>أوقف العملية قبل نسخ <strong>دليل البيانات</strong> بالكامل، بما في ذلك ملفات vault.key و
+signing.enc و credentials.enc وقاعدة بيانات SQLite وملفات WAL والوسائط والرمز المميز ونقاط الفحص،
+وجميع الملفات الشخصية/الدلائل الفرعية. استعد
+النسخة الكاملة أثناء توقف الخدمة الوجهة. يؤدي فقدان مفاتيح الخزينة أو
+عدم تطابق مفتاح التوقيع إلى فشل بدء التشغيل؛ لا تقم بإعادة إنشاء المفاتيح لفرض الوصول.</p>
+<p>احتفظ بالنسخ الاحتياطية السرية مشفرة وخاضعة للتحكم في الوصول. ملفات ZIP الخاصة بالأدلة قابلة للنقل
+وهي عبارة عن عناصر قابلة للمراجعة، وليست نسخًا احتياطية للتطبيق أو لجلسات Telegram.
+لا يوجد حذف تلقائي للبيانات المحتفظ بها. خصص مساحة على القرص لجميع الرسائل، والبيانات
+الوصفية الأولية، والملفات الوسائطية، وعمليات التصدير المؤقتة، والنسخ الاحتياطية.</p>
+<p>تقوم الأداة الناشئة بالتحقق وتصدير سجلات التدفق بدلاً من تحميل السجل بأكمله.
+يؤدي التصدير إلى تثبيت لقطة قراءة بينما يمكن أن تستمر عمليات الكتابة الجديدة في WAL؛ ويمكن أن تحتفظ عمليات التصدير طويلة الأمد
+بصفحات WAL، لذا تظل سعة القرص مهمة. يبلغ الحد الأقصى لملفات ZIP 4 جيجابايت
+غير مضغوطة لتتوافق مع الإعداد الافتراضي للمحقق المستقل؛ <strong>المعلمات → أكبر ملف ZIP موقّع</strong>
+يرفع الحد الأقصى، ويتم التحقق من هذه الأرشيفات باستخدام <code>verify.py --max-gib N</code>. لا يوجد حد أقصى لعدد الأحداث في التنسيقات الأخرى.
+تقوم المتصفحات المدعومة ببث أجزاء الاستجابة إلى ملف يختاره المستخدم. أما المتصفحات الأخرى
+فتخزن مؤقتًا 128 ميغابايت كحد أقصى وتوجه عمليات النقل الأكبر حجمًا إلى واجهة سطر الأوامر (CLI) المصادق عليها:</p>
+<pre><code class="language-sh">python -m tgwitness.download --token-file data/live/panel-token.txt --out evidence.zip</code></pre>
+<p>استخدم <code>--profile ID</code> من <strong>«التصدير» → «معرف مساحة العمل»</strong> لمساحة عمل أخرى،
+أو <code>--format zip|jsonl|csv|html</code> و<code>--url https://your-server</code> لخادم بعيد، أو
+<code>--max-mib</code> لتغيير حد النقل البالغ 5 جيجابايت. يُسمح باستخدام بروتوكول HTTP العادي فقط من أجل
+الارتداد الداخلي. تنتقل الرموز في الرؤوس، ويتم رفض عمليات إعادة التوجيه، ولا يتم
+الكتابة فوق الملفات الموجودة، ولا يتم نشر التنزيلات غير المكتملة كملفات مكتملة.
+إذا تجاوز TGWITNESS_TOKEN الرمز المميز الذي تم إنشاؤه، فاستخدم ملفًا محميًّا بشكل منفصل
+يحتوي على تلك القيمة النشطة: لا يتم إعادة كتابة ملف panel-token.txt بواسطة التجاوز.
+يُعد SHA-256 الخاص بالأمر مجرد مجموع اختباري للنقل؛ قم بالتحقق بشكل مستقل من ملف ZIP الموقّع.</p>
+<p>تظل ملفات التصدير من الخادم داخل مجلد <code>temporary-exports/</code> الخاص بكل مساحة عمل.
+تقوم العمليات الناجحة بمسح ملفاتها. أما عمليات التصدير المتوقفة فيتم إزالتها عند
+التشغيل التالي لمساحة العمل مع الاحتفاظ بقفل المثيل الحصري الخاص بها. هذا الدليل جزء
+من نموذج التهديدات/السعة التخزينية؛ استخدم وحدة تخزين بيانات مشفرة. عمليات النقل على نطاق الإنتاج
+التي تصل إلى عدة غيغابايت لا تزال تتطلب تأهيلًا على نظامك المستهدف.</p>
+<p>تعرض اللوحة الوسائط الموجودة في قائمة الانتظار/التي فشلت في التحميل، وأقدم الوسائط المعلقة، ومساحة القرص المتوفرة، و
+عمليات إيقاف طلبات Telegram مؤقتًا، والمصادر التي لم يتم تأكيد الوصول إليها. هذه التشخيصات ليست
+مراقبة كاملة للتسليم من البداية إلى النهاية. تشترك مساحات العمل في عملية واحدة؛ لذا يمكن للحساب المثير للضوضاء
+أن يؤثر على الآخرين. ولا تزال عمليات العمال المنفصلة، والاحتفاظ/التناوب، واستعادة التحديثات
+الدائمة، وتثبيت نقاط التحقق عن بُعد، والأدوار، وتأهيل النشر الكامل قائمة.</p>
+<h2 id="connection-and-protection-options">خيارات الاتصال والحماية<a class="anchor" href="#connection-and-protection-options" aria-label="رابط لهذا القسم">#</a></h2>
+<p>مسارات الاتصال خاصة بكل مساحة عمل ويجب تهيئتها قبل منح التفويض.
+يستخدم SOCKS5/HTTP CONNECT التبعية المثبتة python-socks. يستخدم MTProxy
+نظام النقل الوسيط العشوائي التجريبي من Telethon؛ ولا يتم دعم أسرار TLS ee المزيفة.
+لم يتم تكوين أي خطة بديلة تلقائية مباشرة. هذا ليس مسارًا شبكيًّا على مستوى النظام.</p>
+<p>بالنسبة للتثبيتات الجديدة، يشير TGWITNESS_VAULT_KEY_FILE إلى ملف مفتاح رئيسي عشوائي محمي بشكل منفصل.
+قم بتركيبه على أنه للقراءة فقط خارج /data في حاوية. احتفظ ببيانات التعريف العامة
+لملف salt الخاص بـ vault.external.json مع كل مساحة عمل والمفتاح الرئيسي بشكل منفصل.
+تتطلب الخزائن المحلية الحالية عملية ترحيل مخطط لها؛ ولا يؤدي تعيين هذا المتغير إلى
+تحويلها تلقائيًّا. لا يتم تشفير تخزين الرسائل/الوسائط وعمليات التصدير بواسطة التطبيق.
+استخدم وحدات تخزين مشفرة ومساحة تخزين مؤقتة خاصة كافية عند الحاجة.</p>
+<p>إجراءات تفصيلية: <a href="../connection/">الاتصال/الأمان</a> و
+<a href="../operations/">أوضاع التشغيل</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/DEPLOYMENT.md">تحرير هذه الصفحة على GitHub ↗</a><a class="next-guide" href="../collection/"><span>الخطوة التالية</span><strong>كيفية عمل عملية الجمع ←</strong></a><p>تصف هذه الأدلة طريقة التنفيذ الحالية. ويتم توثيق نتائج التحقق والثغرات المتبقية بشكل منفصل. <a href="../verification/">ما تم اختباره ←</a></p></footer>
+</main>
+<aside class="toc" aria-label="في هذه الصفحة"><p class="nav-label">في هذه الصفحة</p><a href="#choose-an-installation">اختر طريقة التثبيت</a><a href="#installation-requirements">متطلبات التثبيت</a><a href="#local-computer">جهاز كمبيوتر محلي</a><a href="#windows-portable-package">حزمة قابلة للتشغيل على نظام ويندوز</a><a href="#container">الحاوية</a><a href="#install-a-published-image">تثبيت صورة منشورة</a><a href="#automatic-https-on-a-server">تشغيل HTTPS تلقائيًا على الخادم</a><a href="#updates-and-backups">التحديثات والنسخ الاحتياطية</a><a href="#automated-github-releases">إصدارات GitHub الآلية</a><a href="#remote-server">خادم بعيد</a><a href="#restart-and-gaps">إعادة التشغيل والثغرات</a><a href="#backup-restore-and-capacity">النسخ الاحتياطي والاستعادة والسعة</a><a href="#connection-and-protection-options">خيارات الاتصال والحماية</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>مفتوحة المصدر · تعمل على جهازك</span><a href="../../../../LICENSE">رخصة MIT</a><a href="../notice/">إشعار المشغل</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">الأمن</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "في انتظار رسالة", "Step through a fictional send, edit and delete.": "تتبع خطوات عملية إرسال وتعديل وحذف افتراضية.", "No observations yet. Start the sequence or advance one event.": "لا توجد ملاحظات حتى الآن. ابدأ التسلسل أو انتقل إلى الحدث التالي.", "Meet at 10:00": "نلتقي الساعة 10:00", "A new message is visible in the chat.": "تظهر رسالة جديدة في الدردشة.", "Record 1 appended: the collector observed the original message.": "تم إرفاق السجل رقم 1: لاحظ المجمع الرسالة الأصلية.", "Meet at 11:00": "نلتقي الساعة 11:00", "The current text changes. The earlier observation stays.": "النص الحالي قد يتغير. أما الملاحظة السابقة فتبقى كما هي.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "تم إرفاق السجل 2: التعديل يمثل ملاحظة جديدة. ولا يزال السجل 1 يحتوي على النص الأصلي.", "Message deleted": "تم حذف الرسالة", "The message has disappeared from the chat view.": "لقد اختفت الرسالة من شاشة الدردشة.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "تم إرفاق السجل رقم 3: يتم الاحتفاظ بإشعار الحذف جنبًا إلى جنب مع كلا النسختين اللتين تمت ملاحظتهما.", "0 records": "0 سجل", "1 record": "سجل واحد", "2 records": "سجلان", "3 records": "3 سجلات", "Complete / {n} of 3": "كامل / {n} من 3", "Step / {n} of 3": "الخطوة / {n} من 3", "Pause": "توقف مؤقت", "Replay sequence": "تسلسل إعادة التشغيل", "Play sequence": "تشغيل التسلسل", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "يتوفر نموذج ثابت. لحساب التجزئات (هاش) تفاعليًّا، افتح هذه الصفحة عبر HTTPS أو معاينة localhost مع دعم Web Crypto.", "No record supplied": "لم يتم تقديم أي سجل", "Tail removed": "تم حذف الجزء الأخير", "≠ saved hash": "≠ التجزئة المحفوظة", "Rebuilt · different hash": "أعيد بناؤه · هاش مختلف", "= saved hash": "= التجزئة المحفوظة", "Same length and matching head.": "نفس الطول وعنوان مطابق.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "تتطابق جميع التجزئات الحسابية الثلاثة مع التجزئات المحفوظة. تتوافق هذه العينة مع الحد المحدد المتمثل في الاحتفاظ بثلاثة سجلات.", "Same saved head; the journal prefix fails verification.": "نفس العنوان المحفوظ؛ لم تجتز بادئة السجل عملية التحقق.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "لم يعد السجل رقم 2 مطابقًا لـ«هاش»ه المحفوظ. قد يفوت هذا الأمر عند التحقق من الرأس الأخير المخزن فقط؛ لذا يقوم المُحقق بفحص كل سجل.", "Head differs from the retained checkpoint.": "يختلف العنوان عن نقطة التحقق التي تم الاحتفاظ بها.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "ترتبط التجزئات المعاد بناؤها ببعضها البعض، لكن الرأس النهائي قد تغير. نقطة التحقق المحتفظ بها ترفض هذا السجل. كما أن التوقيعات الأصلية ستفشل أيضًا في السجلات التي تم تغييرها.", "Too short: 2 supplied records \u003c 3 retained records.": "قصير جدًا: 2 سجلات مقدمة \u003c 3 سجلات محفوظة.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "لا يزال التوافقيان المتبقيان متطابقين. ويكشف نقطة التحقق المحتفظ بها عن الجزء المفقود في نهاية السلسلة. وبدون ذلك الحد السابق، لما كشفت هذه البادئة الأقصر وحدها عن هذا الحذف.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "حساب التجزئة غير متاح في هذا المتصفح. تظل الصيغ والتفسيرات الثابتة أدناه متاحة.", "{n} records": "{n} سجل", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "تم القبول: يزداد العدد، ويتم التحقق من التوقيع، ويتطابق المفتاح. ويحتفظ الشاهد بهذا الحد الجديد.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "التراجع: يُظهر الرد الموقّع عددًا أقل من السجلات مقارنةً بنقطة التحقق الأخيرة المقبولة. تقوم الأداة بتسجيل المشكلة والاحتفاظ بحدود النسخة السابقة المقبولة.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "التفرع (Fork): العدد لم يتغير لكن الرأس يختلف. يقوم الشاهد بتسجيل الخلاف ويحتفظ بالحدود التي تم قبولها سابقًا.", "No answer": "لا توجد إجابة", "boundary unknown": "الحدود غير معروفة", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "عدم الاستجابة: يسجل «الشهود» فشل عملية التحقق. ولا يمكنه تأكيد الحالة الحالية لـ«المجمع». إذا كان «الشهود» لا يزال قادرًا على الوصول إلى واجهة برمجة تطبيقات الروبوت (Bot API) وكانت سياسة النشر الخاصة به تسمح بذلك، فيمكنه نشر هذا الفشل.", "Send {n}": "أرسل {n}", "Edit {n}": "تحرير {n}", "Delete {n}": "حذف {n}", "Both accounts captured all six expected observations in this example.": "وقد استوفى كلا الحسابين جميع الملاحظات الست المتوقعة في هذا المثال.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "لا يزال الحساب «ب» قد سجل 6 من أصل 6. استغرق تسجيل إيصالين وقتًا أطول. تعكس نسبة التسجيل وتأخير استلام الإيصالات إجابات مختلفة.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "سجل الحساب «ب» 5 من أصل 6 قبل الموعد النهائي (83.3٪). لا يوجد تأخير مقاس للتعديل المفقود. تصف هذه النتيجة فقط الإجراءات الستة الخاضعة للرقابة.", "not observed by cutoff": "لم يُلاحظ ذلك بحلول الموعد النهائي", "{s} seconds": "{s} ثانية", "Exact values follow in the table.": "ترد القيم الدقيقة في الجدول التالي.", "{s} s": "{s} s", "Not observed": "لم يُلاحظ", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "تقدم أربع محادثات ملاحظات مختلفة. اتبع السجلات المصدرية لكل اتصال؛ ولا تنسب منشور القناة إلى المستخدم 71001 دون وجود مرسل محدد.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "يقدم السجلان رقم 146 ورقم 205 نفس معرّف المرسل، 71001. وهذا يربط بين المنشورات الملحوظة لحساب Telegram عبر محادثتين. ولا يحدد هوية شخص حقيقي ولا ينسب المنشور إلى القناة.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "يظهر العنوان pay.example.invalid/new في سجل المجموعة رقم 146، ولوحة مفاتيح الروبوت رقم 173، وتعديل القناة رقم 188، والرسالة الخاصة رقم 205. وجود عنوان متكرر يربط بين المواد؛ لكنه لا يثبت وجود سيطرة مشتركة على تلك الحسابات.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "تحتوي إيصالات الوسائط المكتملة رقم #151 ورقم #209 على قيم SHA-256 كاملة متطابقة في هذه الحالة الافتراضية. قارن بين البايتات الفعلية وسجلات الرسائل المرتبطة بها. لا يحدد الملف المطابق هوية منشئه ولا يثبت هوية من قام بإعادة توجيهه.", "the encrypted off-site copy": "النسخة المشفرة خارج الموقع", "notifications": "الإشعارات", "checkpoint hashes for timestamps": "تجزئات نقاط التحقق (checkpoint hashes) للطوابع الزمنية", "signed checkpoints for the witness": "نقاط تحقق موقعة لـ «TgWitness»", "Switched on in this example": "تم تفعيلها في هذا المثال", "Optional · off by default": "اختياري · معطّل افتراضيًا", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "ما يُترك في هذا الجهاز: اتصال Telegram و{list}. لا شيء آخر.", "Default: only the Telegram connection leaves this machine.": "الإعداد الافتراضي: لا يغادر هذا الجهاز سوى اتصال Telegram.", "{done} of {total} done": "{done} من {total} تم إنجازها", "Mark step {n} as done": "وضع علامة «تم» على الخطوة {n}", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "نص", "Copied": "نسخ", "Command copied.": "تم نسخ الأمر.", "Selected — Ctrl/Cmd+C": "تم التحديد — Ctrl/Cmd+C", "Command selected. Copy it manually.": "تم تحديد الأمر. انسخه يدويًّا.", "Command copied to clipboard.": "تم نسخ الأمر إلى الحافظة.", "Select text": "حدد النص", "Clipboard unavailable. Command selected; copy it manually.": "الحافظة غير متاحة. تم تحديد الأمر؛ انسخه يدويًّا.", "A message arrives. The first observation is saved.": "تصل رسالة. يتم حفظ الملاحظة الأولى.", "The time changes. Both captured versions stay.": "يتغير الوقت. وتبقى النسختان المسجلتان كما هما.", "The message disappears. The captured history remains.": "تختفي الرسالة. لكن السجل المسجل يبقى.", "Pause example animation": "إيقاف الرسوم المتحركة التوضيحية مؤقتًا", "Play example animation": "تشغيل مثال للرسوم المتحركة", "Play": "تشغيل", "Full-size workspace screenshot": "لقطة شاشة لمساحة العمل بالحجم الكامل", "Workspace screenshot · fictional data": "لقطة شاشة لمساحة العمل · بيانات خيالية", "Close": "إغلاق", "Close screenshot": "إغلاق لقطة الشاشة", "Scrollable full-size screenshot": "لقطة شاشة كاملة الحجم قابلة للتمرير", "Enlarge: {name}": "تكبير: {name}", "View full size": "عرض بالحجم الكامل"}</script>
+</body></html>

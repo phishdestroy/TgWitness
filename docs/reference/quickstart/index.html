@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Quick start | TgWitness</title>
+<meta name="description" content="Every way to install and launch TgWitness: Windows package, Python, Docker and the synthetic demo, with first checks."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Quick start | TgWitness"><meta property="og:description" content="Every way to install and launch TgWitness: Windows package, Python, Docker and the synthetic demo, with first checks.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/quickstart/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/quickstart/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/quickstart/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/quickstart/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/quickstart/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/quickstart/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/quickstart/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/quickstart/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/quickstart/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/quickstart/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/quickstart/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/", "url": "https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/", "name": "Quick start | TgWitness", "description": "Every way to install and launch TgWitness: Windows package, Python, Docker and the synthetic demo, with first checks.", "inLanguage": "en", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://phishdestroy.github.io/TgWitness/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://phishdestroy.github.io/TgWitness/docs/"}, {"@type": "ListItem", "position": 3, "name": "Reference", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Quick start", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../docs.css">
+<link rel="stylesheet" href="../../../learn.css">
+<script src="../../../docs.js" defer></script>
+<script src="../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Documentation</span></a>
+<nav aria-label="Guides"><a href="../../concepts/">Visual guide</a><a href="../../">All guides</a><a href="../">Reference</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Language"><span aria-hidden="true">◍</span> English</summary><div class="lang-list"><a href="./" hreflang="en" lang="en" aria-current="true">English</a><a href="../../../ru/docs/reference/quickstart/" hreflang="ru" lang="ru">Русский</a><a href="../../../uk/docs/reference/quickstart/" hreflang="uk" lang="uk">Українська</a><a href="../../../es/docs/reference/quickstart/" hreflang="es" lang="es">Español</a><a href="../../../pt/docs/reference/quickstart/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../tr/docs/reference/quickstart/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../ar/docs/reference/quickstart/" hreflang="ar" lang="ar">العربية</a><a href="../../../fa/docs/reference/quickstart/" hreflang="fa" lang="fa">فارسی</a><a href="../../../ur/docs/reference/quickstart/" hreflang="ur" lang="ur">اردو</a><a href="../../../hi/docs/reference/quickstart/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../id/docs/reference/quickstart/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../vi/docs/reference/quickstart/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../zh/docs/reference/quickstart/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Switch between light and dark theme"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Guides"><a href="../../../guides/modes.html">Modes, scenarios and evidence levels</a><p class="nav-label">First steps</p><a href="../../start/">Start in minutes</a><a href="../../accounts/">Connect an account</a><a href="../../proxies/">Choose a proxy</a><a href="../../exports/">Export and verify</a><p class="nav-label">Understand the evidence</p><a href="../../concepts/">See how evidence works</a><a href="../../cases/">Investigate across all chats</a><a href="../../security/">Keep it secure</a><p class="nav-label">Go further</p><a href="../../witness/">Set up a witness bot</a><a href="../../server/">Keep it running</a><a href="../../troubleshooting/">Find what went wrong</a></nav><nav class="wiki-nav" aria-label="Reference"><p class="nav-label"><a class="nav-label-link" href="../">Reference</a></p><details class="wiki-group" open><summary>Set up</summary><a href="./" aria-current="page">Quick start</a><a href="../accounts/">Accounts and session formats</a><a href="../connection/">Connection, proxies and data protection</a><a href="../deployment/">Deployment</a></details><details class="wiki-group"><summary>Collect</summary><a href="../collection/">How collection works</a><a href="../operations/">Workflows and operations</a><a href="../investigation/">Investigation mode</a><a href="../features/">Features and limits</a></details><details class="wiki-group"><summary>Evidence</summary><a href="../how-it-works/">How the evidence works</a><a href="../evidence/">Evidence format</a><a href="../witness/">Independent witness</a><a href="../timestamp/">Timestamps</a></details><details class="wiki-group"><summary>Security & project</summary><a href="../security/">Security and data handling</a><a href="../architecture/">Architecture</a><a href="../verification/">What has been tested</a><a href="../license/">Licence and architectural incompatibility notice</a><a href="../notice/">Operator incompatibility notice</a><a href="../changelog/">Changelog</a></details></nav><p class="sidebar-note">v0.7.0<br>Open source · Runs on your machine</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Guides"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Documentation</a> <span aria-hidden="true">/</span> <a href="../">Reference</a> <span aria-hidden="true">/</span> <span aria-current="page">Quick start</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Search the documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Try proxy, hash chain, token or witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Clear search" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Type a word to search the guides and the reference. Search stays in your browser.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Reference / Set up</p><h1>Quick start</h1><p class="guide-outcome">Every way to install and launch TgWitness: Windows package, Python, Docker and the synthetic demo, with first checks.</p><div class="wiki-body"><p><strong>English</strong> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/QUICKSTART.md">Русский</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/QUICKSTART.md">Українська</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/es/QUICKSTART.md">Español</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/QUICKSTART.md">Português (Brasil)</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/QUICKSTART.md">Türkçe</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/QUICKSTART.md">العربية</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/QUICKSTART.md">فارسی</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/QUICKSTART.md">اردو</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/QUICKSTART.md">हिन्दी</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/id/QUICKSTART.md">Bahasa Indonesia</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/QUICKSTART.md">Tiếng Việt</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/QUICKSTART.md">简体中文</a></p>
+<p>TgWitness is a standalone application for observing Telegram groups and channels
+that your accounts can access. It runs locally with its own data directory.</p>
+<p><strong>First visit?</strong> <a href="#explore-the-interface">Explore the demo</a> before connecting an account.
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">Choose a guide</a> for proxies, witnesses, exports or server setup.</p>
+<h2 id="install-and-start">Install and start<a class="anchor" href="#install-and-start" aria-label="Link to this section">#</a></h2>
+<p>Choose one method. Portable downloads become available after a release build is published:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Host</th>
+<th>Nothing installed</th>
+<th>From source: Python 3.11+</th>
+<th>Docker: Engine/Desktop with Compose 2.20+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td>Extract <code>TgWitness-&lt;version&gt;-windows-amd64-portable.zip</code> from GitHub Releases, double-click <code>TgWitness.cmd</code></td>
+<td>Double-click <code>Start.cmd</code></td>
+<td>Double-click <code>scripts\Docker.cmd</code></td>
+</tr>
+<tr>
+<td>Linux / macOS</td>
+<td>—</td>
+<td><code>sh start.sh</code></td>
+<td><code>sh scripts/docker-start.sh</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>For the source methods, download and extract the source ZIP from GitHub Releases or clone
+the repository. <code>Start.cmd</code> offers to install Python 3.12 for your Windows user if no
+suitable Python is found (winget, or the signed python.org installer). <code>start.sh</code> prints
+the exact install command for your Linux distribution or macOS if Python is missing.
+The first source launch creates <code>.venv</code> and installs dependencies automatically.</p>
+<p>Docker builds the application and starts it in the background; host Python is
+unnecessary. <code>scripts\Docker.cmd</code> and <code>scripts/docker-start.sh</code> print the panel address and token when
+the container is healthy. The equivalent Docker commands on every supported host are:</p>
+<pre><code class="language-sh">docker compose up -d --build --wait
+docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
+<p>Open <strong>http://127.0.0.1:8787</strong>. Use the token printed by the Docker helper or the second
+Docker command, or read <strong>data/live/panel-token.txt</strong> for a portable or source installation. Continue at
+<strong>Connect Telegram</strong> below. Native and Docker installations use separate storage;
+starting Docker does not import an existing native journal.</p>
+<p>For a server, <a href="../deployment/">deployment</a> covers automatic HTTPS, restart,
+published images, updates, and backups.</p>
+<h2 id="explore-the-interface">Explore the interface<a class="anchor" href="#explore-the-interface" aria-label="Link to this section">#</a></h2>
+<ol>
+<li>Run <strong>TgWitness-Demo.cmd</strong> in the portable package, <strong>scripts\Demo.cmd</strong> in a Windows source
+    folder, or <code>sh start.sh --demo</code> on Linux/macOS. A source launch first creates <code>.venv</code>
+    and installs dependencies.</li>
+<li>Open <strong>http://127.0.0.1:8787</strong>.</li>
+<li>The local demo opens the sample journal automatically. No token copy is needed for direct local access.</li>
+</ol>
+<p>Demo messages are fictional. Demo mode cannot connect a real Telegram account.</p>
+<h2 id="connect-telegram">Connect Telegram<a class="anchor" href="#connect-telegram" aria-label="Link to this section">#</a></h2>
+<blockquote class="callout">
+<p>[!WARNING]
+<strong>Do not use anything you cannot afford to lose.</strong> We strongly advise against connecting
+personal or valuable accounts and against creating an API ID / hash on an account you value.
+Telegram bans accounts unpredictably and often permanently, regardless of the client.
+A smooth test run depends on Telegram, not on TgWitness, and guarantees nothing for later.</p>
+</blockquote>
+<ol>
+<li>If the native demo is running, stop it and run <strong>Start.cmd</strong> or <code>sh start.sh</code>.
+    Otherwise, keep the live installation started above running.</li>
+<li>Use the panel token for your installation method to open the panel.</li>
+<li>If you need a proxy, save it under <strong>Account → Settings → Connection settings → Change connection route</strong>.</li>
+<li>In <strong>Account</strong>, enter your phone number and press <strong>Continue</strong>, choose
+    <strong>QR code → Show QR code</strong>, or select files and press <strong>Connect account</strong>.
+    <strong>API ID + Hash</strong> is optional: the workspace uses its saved or imported pair,
+    or a working pair from the built-in pool. To use your own app, paste one
+    <code>API ID:API Hash</code> pair into API ID.
+    For a complete authorization key, choose <strong>Auth key</strong>, paste all 512 hexadecimal
+    characters, and select the supplied DC ID. User ID is optional and checked if entered.</li>
+<li>Complete your selected sign-in method: phone/code/2FA, confirmation from a
+    signed-in Telegram app for QR, or a supported authorized session import.</li>
+<li>Check the displayed account ID. Open <strong>Sources</strong>: your chats load automatically; add your groups.</li>
+<li>Under <strong>Choose which changes to preserve</strong>, select event categories or the
+    <strong>Messages, edits &amp; deletions</strong> preset, then save monitoring settings.</li>
+<li>Choose attachment settings separately, then press <strong>Start observation</strong>.</li>
+</ol>
+<p>API credentials identify your application; they do not authorize an account by
+themselves. Private groups need no public username, but your account must have access.</p>
+<p>For existing accounts, see <a href="../accounts/">accounts and session formats</a>: the
+panel accepts Telethon StringSession, Telethon/Pyrogram SQLite, single-account TData
+ZIP, and supported account JSON. Select a session and its companion JSON together,
+press <strong>Connect account</strong>. QR login is also
+available with the same optional API settings. TDLib, bots, and bulk account lists are unsupported.</p>
+<p>To add another account, press <strong>+</strong> beside the account selector or open
+<strong>Account → Settings → Connection settings → Workspaces</strong>, or use <strong>Accounts</strong>. Workspaces have separate sessions,
+journals, keys, sources and queues. Switching views leaves other collectors running.
+The same Telegram account cannot be assigned to two workspaces in this installation.
+There is no fixed number of workspaces; they share one process, so capacity depends on the machine.</p>
+<p>The live panel token protects access to your Telegram authorizations and saved
+material; it is separate from Telegram API credentials. Only an explicitly started,
+directly accessed local demo gets automatic entry. A remote/proxied demo still uses
+<code>data/demo/panel-token.txt</code>.</p>
+<h2 id="review-and-export">Review and export<a class="anchor" href="#review-and-export" aria-label="Link to this section">#</a></h2>
+<ul>
+<li><strong>Journal:</strong> search and filter observations by source and event type.</li>
+<li>Select an event to inspect its original record, attribution and saved versions.</li>
+<li>Edit details show the available before/after content. Deletion details show the
+    last captured content, if any; an unknown actor remains unknown.</li>
+<li><strong>Exports:</strong> signed ZIP, JSONL, CSV and offline HTML.</li>
+<li><strong>Full chat export</strong> (Sources → Full chat export): download one chat's entire visible
+    history as a signed bundle with <code>chat.json</code> (Telegram-export style) and a readable
+    <code>chat.html</code>. Private chats work when the account is a member. It is a current
+    snapshot, not a reconstruction of deleted or previously edited messages. Verify a
+    copy with <code>python verify.py chat-export.zip --fingerprint TRUSTED_SHA256</code>.</li>
+<li><strong>Save checkpoint:</strong> keep the signed journal boundary outside the collector.</li>
+<li><strong>Download signed run receipt:</strong> preserve the collector's program/version record.</li>
+<li><strong>Prepare timestamp request:</strong> prepare an offline request for a timestamp authority;
+    follow <a href="../timestamp/">TIMESTAMP.md</a> to obtain and verify a response.</li>
+<li><strong>Verify journal:</strong> check event signatures and chain links. ZIP export also checks media.</li>
+</ul>
+<p>Supported browsers save large exports directly to a chosen file. Other browsers
+buffer at most 128 MiB. While the server is running, the streaming CLI supports
+larger downloads without buffering the whole response:</p>
+<pre><code class="language-sh">python -m tgwitness.download --token-file data/live/panel-token.txt --out evidence.zip</code></pre>
+<p>For another workspace, add <code>--profile ID</code> using <strong>Exports → Workspace ID</strong>.
+For a remote server, add <code>--url https://your-server</code>. The default transfer limit is
+5 GiB; <code>--max-mib</code> changes it. Signed ZIP content has a separate 4 GiB uncompressed
+verification limit by default (<strong>Parameters</strong> raises it; verify such archives with
+<code>verify.py --max-gib N</code>). Verify the archive using a trusted copy of the verifier and
+an independently retained key fingerprint/checkpoint.</p>
+<h2 id="check-the-installation">Check the installation<a class="anchor" href="#check-the-installation" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-sh">python start.py --setup-only
+python start.py --check
+python start.py --check --json</code></pre>
+<p><code>--check</code> probes local dependencies, signing support, storage, key configuration and
+the listening address. It does not install anything or connect to Telegram. A busy
+port may mean another instance is running. Use a different <code>--port</code> or stop it first.</p>
+<p>The launcher installs into <code>.venv</code>. Auxiliary <code>python -m tgwitness...</code> commands must
+use <code>.venv\Scripts\python.exe</code> on Windows or <code>.venv/bin/python</code> on Linux/macOS,
+unless that environment is already activated.</p>
+<h2 id="sessions-protection-and-operation">Sessions, protection and operation<a class="anchor" href="#sessions-protection-and-operation" aria-label="Link to this section">#</a></h2>
+<p>A closed, consistent Telethon SQLite <code>.session</code> can be converted locally with
+<code>python -m tgwitness.sessions account.session --out account.tgwitness-session</code>, then
+loaded in Account. Direct file import and QR login are also available. See
+<a href="../connection/">CONNECTION-SECURITY.md</a> for login formats, SOCKS5,
+HTTP CONNECT, MTProxy and external master keys.</p>
+<p><strong>Pause observation</strong> stops collection. <strong>Lock</strong> only closes browser access.
+Closing a tab leaves the collector process running. Stopping the process interrupts
+collection; a history snapshot cannot reconstruct all missed edits or deletions.
+See <a href="../collection/">how collection works</a> for event policies, attachment queues,
+account isolation, and restart behavior.</p>
+<p>Sessions and secrets are encrypted. Message content, media and exports require an
+encrypted disk or volume. Signatures establish integrity relative to a trusted key;
+they do not establish Telegram origin or prevent fabrication by an operator who
+controls the collector and its key.</p>
+<p>Read <a href="../operations/">OPERATIONS.md</a> for backup/restore, <a href="../deployment/">DEPLOYMENT.md</a>
+for hosting, and <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/</a> for service examples. The installed
+panel also includes an offline setup guide at <code>/guide.html</code>.</p>
+<p>Actual verification and remaining boundaries are
+recorded in <a href="../verification/">VERIFICATION.md</a> and <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/READINESS.md">READINESS.md</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/QUICKSTART.md">Edit this page on GitHub ↗</a><a class="next-guide" href="../accounts/"><span>Next step</span><strong>Accounts and session formats →</strong></a><p>These guides describe the current implementation. Validation results and remaining gaps are documented separately. <a href="../verification/">What has been tested →</a></p></footer>
+</main>
+<aside class="toc" aria-label="On this page"><p class="nav-label">On this page</p><a href="#install-and-start">Install and start</a><a href="#explore-the-interface">Explore the interface</a><a href="#connect-telegram">Connect Telegram</a><a href="#review-and-export">Review and export</a><a href="#check-the-installation">Check the installation</a><a href="#sessions-protection-and-operation">Sessions, protection and operation</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Open source · Runs on your machine</span><a href="../../../LICENSE">MIT license</a><a href="../notice/">Operator notice</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Security</a></footer>
+<script id="site-dict" type="application/json">{}</script>
+</body></html>

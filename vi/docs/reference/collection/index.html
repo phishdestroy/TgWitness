@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="vi" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Cách thức thu thập dữ liệu | TgWitness</title>
+<meta name="description" content="Phạm vi quan sát, cập nhật trực tiếp, kiểm tra lại, tệp đính kèm, các hành động của người dùng và ý nghĩa của “khoảng trống”, được ghi lại theo từng bản ghi."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/collection/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:title" content="Cách thức thu thập dữ liệu | TgWitness"><meta property="og:description" content="Phạm vi quan sát, cập nhật trực tiếp, kiểm tra lại, tệp đính kèm, các hành động của người dùng và ý nghĩa của “khoảng trống”, được ghi lại theo từng bản ghi.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/vi/docs/reference/collection/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/collection/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/collection/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/collection/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/collection/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/collection/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/collection/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/collection/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/collection/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/collection/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/collection/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/collection/", "url": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/collection/", "name": "Cách thức thu thập dữ liệu | TgWitness", "description": "Phạm vi quan sát, cập nhật trực tiếp, kiểm tra lại, tệp đính kèm, các hành động của người dùng và ý nghĩa của “khoảng trống”, được ghi lại theo từng bản ghi.", "inLanguage": "vi", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "https://phishdestroy.github.io/TgWitness/vi/"}, {"@type": "ListItem", "position": 2, "name": "Tài liệu hướng dẫn", "item": "https://phishdestroy.github.io/TgWitness/vi/docs/"}, {"@type": "ListItem", "position": 3, "name": "Tham khảo", "item": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Cách thức thu thập dữ liệu", "item": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/collection/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Chuyển thẳng đến nội dung</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Tài liệu hướng dẫn</span></a>
+<nav aria-label="Hướng dẫn"><a href="../../concepts/">Hướng dẫn trực quan</a><a href="../../">Tất cả các hướng dẫn</a><a href="../">Tham khảo</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Ngôn ngữ"><span aria-hidden="true">◍</span> Tiếng Việt</summary><div class="lang-list"><a href="../../../../docs/reference/collection/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/collection/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/collection/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/collection/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/collection/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/collection/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/collection/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/collection/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/collection/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/collection/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/collection/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="./" hreflang="vi" lang="vi" aria-current="true">Tiếng Việt</a><a href="../../../../zh/docs/reference/collection/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Chuyển đổi giữa chế độ giao diện sáng và tối"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Hướng dẫn"><a href="../../../guides/modes.html">Các chế độ, kịch bản và mức độ bằng chứng</a><p class="nav-label">Các bước đầu tiên</p><a href="../../start/">Bắt đầu chỉ trong vài phút</a><a href="../../accounts/">Kết nối tài khoản</a><a href="../../proxies/">Chọn một máy chủ proxy</a><a href="../../exports/">Xuất và xác minh</a><p class="nav-label">Hiểu rõ về bằng chứng</p><a href="../../concepts/">Tìm hiểu cách thức hoạt động của bằng chứng</a><a href="../../cases/">Điều tra trên tất cả các cuộc trò chuyện</a><a href="../../security/">Hãy đảm bảo tính bảo mật</a><p class="nav-label">Tìm hiểu thêm</p><a href="../../witness/">Thiết lập bot chứng cứ</a><a href="../../server/">Hãy duy trì hoạt động của nó</a><a href="../../troubleshooting/">Tìm hiểu nguyên nhân sự cố</a></nav><nav class="wiki-nav" aria-label="Tham khảo"><p class="nav-label"><a class="nav-label-link" href="../">Tham khảo</a></p><details class="wiki-group"><summary>Thiết lập</summary><a href="../quickstart/">Hướng dẫn bắt đầu nhanh</a><a href="../accounts/">Các định dạng tài khoản và phiên làm việc</a><a href="../connection/">Kết nối, máy chủ trung gian và bảo vệ dữ liệu</a><a href="../deployment/">Triển khai</a></details><details class="wiki-group" open><summary>Thu thập</summary><a href="./" aria-current="page">Cách thức thu thập dữ liệu</a><a href="../operations/">Quy trình làm việc và hoạt động</a><a href="../investigation/">Chế độ điều tra</a><a href="../features/">Các tính năng và giới hạn</a></details><details class="wiki-group"><summary>Bằng chứng</summary><a href="../how-it-works/">Cách thức hoạt động của bằng chứng</a><a href="../evidence/">Định dạng bằng chứng</a><a href="../witness/">Nhân chứng độc lập</a><a href="../timestamp/">Dấu thời gian</a></details><details class="wiki-group"><summary>An ninh & dự án</summary><a href="../security/">An ninh và xử lý dữ liệu</a><a href="../architecture/">Kiến trúc</a><a href="../verification/">Những nội dung đã được kiểm thử</a><a href="../license/">Thông báo về sự không tương thích giữa giấy phép và kiến trúc</a><a href="../notice/">Thông báo về sự không tương thích giữa các nhà cung cấp dịch vụ</a><a href="../changelog/">Bản ghi thay đổi</a></details></nav><p class="sidebar-note">v0.7.0<br>Mã nguồn mở · Chạy trên máy tính của quý vị</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Hướng dẫn"><a href="../../../">Trang chủ</a> <span aria-hidden="true">/</span> <a href="../../">Tài liệu hướng dẫn</a> <span aria-hidden="true">/</span> <a href="../">Tham khảo</a> <span aria-hidden="true">/</span> <span aria-current="page">Cách thức thu thập dữ liệu</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Tìm kiếm trong tài liệu</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Hãy thử các thuật ngữ như proxy, chuỗi băm, token hoặc witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Tìm kiếm rõ ràng" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Hãy nhập một từ khóa để tìm kiếm trong các hướng dẫn và tài liệu tham khảo. Kết quả tìm kiếm sẽ được lưu lại trong trình duyệt của quý vị.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Tham khảo / Thu thập</p><h1>Cách thức thu thập dữ liệu</h1><p class="guide-outcome">Phạm vi quan sát, cập nhật trực tiếp, kiểm tra lại, tệp đính kèm, các hành động của người dùng và ý nghĩa của “khoảng trống”, được ghi lại theo từng bản ghi.</p><div class="wiki-body"><p>TgWitness ghi lại những gì mà một tài khoản Telegram được kết nối quan sát được. Nhật ký này lưu giữ
+những quan sát đó, trình tự của chúng cũng như bối cảnh đi kèm. Công cụ này
+không suy luận các hành động không được quan sát thấy từ một tin nhắn bị thiếu hoặc từ việc tài khoản đang được kết nối.</p>
+<h2 id="from-login-to-a-journal">Từ quá trình đăng nhập đến sổ ghi chép<a class="anchor" href="#from-login-to-a-journal" aria-label="Liên kết đến phần này">#</a></h2>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 691 378" width="691" height="378" role="img" aria-labelledby="flow-1-title flow-1-desc"><title id="flow-1-title">Sơ đồ quy trình</title><desc id="flow-1-desc">Xác thực tài khoản người dùng → Chọn các nhóm và kênh có thể truy cập; Chọn các nhóm và kênh có thể truy cập → Lưu cài đặt sự kiện và tệp đính kèm; Lưu cài đặt sự kiện và tệp đính kèm → Bắt đầu quan sát; Bắt đầu quan sát → Nhận thông tin cập nhật từ ứng dụng khách đang hoạt động; Nhận thông tin cập nhật từ ứng dụng khách đang hoạt động → Áp dụng chính sách về nguồn và sự kiện; Áp dụng chính sách về nguồn và sự kiện → Thêm một ghi chú có chữ ký; Thêm một ghi chú có chữ ký → Xem lại hoặc xuất sổ nhật ký; Thêm một ghi chú có chữ ký → Xử lý mọi tệp đính kèm đang chờ xử lý; Xử lý mọi tệp đính kèm đang chờ xử lý → Thêm kết quả tải xuống</desc><defs><marker id="flow-1-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M196.0 37.0C227.6 37.0 227.6 37.0 259.3 37.0" marker-end="url(#flow-1-arrow)" style="--i:0;--len:63" pathLength="63"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M196.0 37.0C227.6 37.0 227.6 37.0 259.3 37.0"/></circle><path class="flow-edge" d="M432.2 37.0C456.9 37.0 456.9 37.0 481.6 37.0" marker-end="url(#flow-1-arrow)" style="--i:1;--len:49" pathLength="49"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M432.2 37.0C456.9 37.0 456.9 37.0 481.6 37.0"/></circle><path class="flow-edge" d="M571.5 66.0C571.5 100.0 571.5 100.0 571.5 134.0" marker-end="url(#flow-1-arrow)" style="--i:2;--len:68" pathLength="68"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M571.5 66.0C571.5 100.0 571.5 100.0 571.5 134.0"/></circle><path class="flow-edge" d="M502.3 154.0C469.0 154.0 469.0 154.0 435.6 154.0" marker-end="url(#flow-1-arrow)" style="--i:3;--len:67" pathLength="67"/><circle class="flow-pulse" r="3.2" style="--i:3"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M502.3 154.0C469.0 154.0 469.0 154.0 435.6 154.0"/></circle><path class="flow-edge" d="M255.8 154.0C231.1 154.0 231.1 154.0 206.4 154.0" marker-end="url(#flow-1-arrow)" style="--i:4;--len:49" pathLength="49"/><circle class="flow-pulse" r="3.2" style="--i:4"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M255.8 154.0C231.1 154.0 231.1 154.0 206.4 154.0"/></circle><path class="flow-edge" d="M119.9 183.0C119.9 230.0 119.9 230.0 119.9 277.0" marker-end="url(#flow-1-arrow)" style="--i:5;--len:94" pathLength="94"/><circle class="flow-pulse" r="3.2" style="--i:5"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M119.9 183.0C119.9 230.0 119.9 230.0 119.9 277.0"/></circle><path class="flow-edge" d="M199.4 306.0C231.1 306.0 231.1 271.0 262.7 271.0" marker-end="url(#flow-1-arrow)" style="--i:6;--len:75" pathLength="75"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M199.4 306.0C231.1 306.0 231.1 271.0 262.7 271.0"/></circle><path class="flow-edge" d="M199.4 306.0C227.6 306.0 227.6 341.0 255.8 341.0" marker-end="url(#flow-1-arrow)" style="--i:6;--len:69" pathLength="69"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M199.4 306.0C227.6 306.0 227.6 341.0 255.8 341.0"/></circle><path class="flow-edge" d="M435.6 341.0C458.6 341.0 458.6 306.0 481.6 306.0" marker-end="url(#flow-1-arrow)" style="--i:7;--len:61" pathLength="61"/><circle class="flow-pulse" r="3.2" style="--i:7"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M435.6 341.0C458.6 341.0 458.6 306.0 481.6 306.0"/></circle><g class="flow-node" style="--i:0"><rect x="43.8" y="8.0" width="152.2" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="28.0">Xác thực tài khoản</tspan><tspan x="119.9" y="46.0">người dùng</tspan></text></g><g class="flow-node" style="--i:1"><rect x="259.3" y="8.0" width="172.9" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="28.0">Chọn các nhóm và kênh</tspan><tspan x="345.7" y="46.0">có thể truy cập</tspan></text></g><g class="flow-node" style="--i:2"><rect x="481.6" y="8.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="28.0">Lưu cài đặt sự kiện và</tspan><tspan x="571.5" y="46.0">tệp đính kèm</tspan></text></g><g class="flow-node" style="--i:3"><rect x="502.3" y="134.0" width="138.4" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="154.0">Bắt đầu quan sát</tspan></text></g><g class="flow-node" style="--i:4"><rect x="255.8" y="116.0" width="179.8" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="136.0">Nhận thông tin cập</tspan><tspan x="345.7" y="154.0">nhật từ ứng dụng khách</tspan><tspan x="345.7" y="172.0">đang hoạt động</tspan></text></g><g class="flow-node" style="--i:5"><rect x="33.5" y="125.0" width="172.9" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="145.0">Áp dụng chính sách về</tspan><tspan x="119.9" y="163.0">nguồn và sự kiện</tspan></text></g><g class="flow-node" style="--i:6"><rect x="40.4" y="277.0" width="159.1" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="297.0">Thêm một ghi chú có</tspan><tspan x="119.9" y="315.0">chữ ký</tspan></text></g><g class="flow-node" style="--i:7"><rect x="262.7" y="242.0" width="166.0" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="262.0">Xem lại hoặc xuất sổ</tspan><tspan x="345.7" y="280.0">nhật ký</tspan></text></g><g class="flow-node" style="--i:7"><rect x="255.8" y="312.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="332.0">Xử lý mọi tệp đính kèm</tspan><tspan x="345.7" y="350.0">đang chờ xử lý</tspan></text></g><g class="flow-node" style="--i:8"><rect x="481.6" y="286.0" width="179.8" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="306.0">Thêm kết quả tải xuống</tspan></text></g></svg></div><details class="flow-steps"><summary>Sơ đồ dưới dạng văn bản</summary><ol><li>Xác thực tài khoản người dùng → Chọn các nhóm và kênh có thể truy cập</li><li>Chọn các nhóm và kênh có thể truy cập → Lưu cài đặt sự kiện và tệp đính kèm</li><li>Lưu cài đặt sự kiện và tệp đính kèm → Bắt đầu quan sát</li><li>Bắt đầu quan sát → Nhận thông tin cập nhật từ ứng dụng khách đang hoạt động</li><li>Nhận thông tin cập nhật từ ứng dụng khách đang hoạt động → Áp dụng chính sách về nguồn và sự kiện</li><li>Áp dụng chính sách về nguồn và sự kiện → Thêm một ghi chú có chữ ký</li><li>Thêm một ghi chú có chữ ký → Xem lại hoặc xuất sổ nhật ký</li><li>Thêm một ghi chú có chữ ký → Xử lý mọi tệp đính kèm đang chờ xử lý</li><li>Xử lý mọi tệp đính kèm đang chờ xử lý → Thêm kết quả tải xuống</li></ol></details></figure>
+<p>Việc ủy quyền, quyền truy cập vào nguồn dữ liệu, bộ thu thập đang hoạt động và việc truyền tải đầy đủ là
+những vấn đề riêng biệt. Việc đăng nhập thành công không đồng nghĩa với việc được cấp quyền truy cập vào mọi nhóm.
+Việc kết nối kênh truyền tải không đảm bảo rằng mọi bản cập nhật liên quan đều đã được nhận.</p>
+<h2 id="observation-scope-chosen-chats-a-folder-or-the-whole-account">Phạm vi giám sát: các cuộc trò chuyện được chọn, một thư mục hoặc toàn bộ tài khoản<a class="anchor" href="#observation-scope-chosen-chats-a-folder-or-the-whole-account" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Nguồn → <strong>Phạm vi quan sát</strong> quyết định những cuộc trò chuyện nào sẽ được không gian làm việc ghi lại.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Chế độ</th>
+<th>Ghi lại</th>
+<th>Các cuộc trò chuyện mới</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Các cuộc trò chuyện được chọn (mặc định)</td>
+<td>Chỉ các cuộc trò chuyện mà quý vị thêm vào thủ công</td>
+<td>Không bao giờ được thêm tự động</td>
+</tr>
+<tr>
+<td>Thư mục Telegram</td>
+<td>Các cuộc trò chuyện trong một trong các thư mục của tài khoản: bao gồm các cuộc trò chuyện được liệt kê theo tên, cộng với các danh mục của thư mục (liên hệ, không phải liên hệ, nhóm, kênh, bot), trừ đi các cuộc trò chuyện bị loại trừ và, nếu thư mục có ghi rõ, các cuộc trò chuyện đã được lưu trữ</td>
+<td>Các cuộc trò chuyện phù hợp sẽ được thêm vào ngay khi chúng trở nên hoạt động; các cuộc trò chuyện mà quý vị thêm vào thư mục trong Telegram sẽ được hệ thống thu thập trong vòng một giờ</td>
+</tr>
+<tr>
+<td>Toàn bộ tài khoản</td>
+<td>Mọi cuộc trò chuyện mà tài khoản này tiếp nhận</td>
+<td>Mọi cuộc trò chuyện, nhóm, cuộc trò chuyện riêng tư hoặc bot mới đều được thêm vào ngay khi có bản cập nhật đầu tiên</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>Các loại nguồn</strong> (kênh, nhóm, cuộc trò chuyện riêng tư, bot) giúp thu hẹp phạm vi ở chế độ thư mục và
+    chế độ toàn tài khoản. Các cuộc trò chuyện được chọn có thể thuộc bất kỳ loại nào, bao gồm cả cuộc trò chuyện riêng tư và bot.</li>
+<li><strong>Các cuộc trò chuyện bị loại trừ</strong> sẽ không bao giờ được ghi lại, ở bất kỳ chế độ nào. Trong chế độ theo thư mục và toàn bộ tài khoản,
+    việc chọn <em>“Loại trừ”</em> và <em>“Xóa”</em> trên một nguồn sẽ đưa nguồn đó vào danh sách này, do đó phạm vi ghi lại sẽ không thêm lại nguồn đó nữa.
+    Việc chọn lại cuộc trò chuyện bằng tay (trong phần Nguồn hoặc từ danh sách Cuộc trò chuyện) sẽ loại bỏ nó khỏi danh sách. Danh sách
+    có thể chứa tối đa 5.000 cuộc trò chuyện; nếu vượt quá con số này, <em>thao tác Xóa</em> sẽ bị từ chối và thay vào đó, cuộc trò chuyện có thể được tạm dừng.</li>
+<li><strong>Các hành động của chính tài khoản</strong> (mặc định là bật): các tin nhắn mà tài khoản này gửi đi, các thao tác chỉnh sửa và các
+    lần nhấn phím trên bàn phím trả lời. Khi tắt tính năng này, các tin nhắn gửi đi và các thao tác chỉnh sửa sẽ bị bỏ qua.</li>
+<li>Việc chuyển sang một thư mục hoặc toàn bộ tài khoản sẽ yêu cầu xác nhận: các chế độ này ghi lại
+    các cuộc trò chuyện riêng tư và tin nhắn của bên thứ ba, và chỉ được phép thực hiện trên một tài khoản chuyên dụng.
+    Việc xác nhận cũng như mọi thay đổi về phạm vi đều là các bản ghi <code>scope.changed</code> đã được ký điện tử.</li>
+<li>Các cuộc trò chuyện được thêm vào theo phạm vi sẽ xuất hiện dưới dạng các nguồn được đánh dấu là <em>“auto”</em>, được ghi lại dưới dạng <code>scope.applied</code>
+    (khi bắt đầu và mỗi giờ) hoặc <code>source.discovered</code> (một cuộc trò chuyện mới trong quá trình theo dõi). Việc chuyển trở lại
+    các cuộc trò chuyện đã chọn sẽ tạm dừng mọi nguồn được thêm vào tự động.</li>
+</ul>
+<p>Những điều các chế độ này không thể thực hiện:</p>
+<ul>
+<li><strong>Các cuộc trò chuyện bí mật</strong> được mã hóa đầu cuối giữa hai thiết bị và tuyệt đối không bao giờ được truyền đến
+    TgWitness, dưới bất kỳ hình thức nào.</li>
+<li><strong>Không có dữ liệu nào được ghi lại khi TgWitness không hoạt động.</strong> Sau khi khởi động lại, công cụ sẽ yêu cầu Telegram
+    cung cấp các bản cập nhật bị bỏ lỡ và kiểm tra lại các cuộc trò chuyện; tuy nhiên, Telegram không trả về toàn bộ dữ liệu sau những lần
+    gián đoạn kéo dài. Các báo cáo và tệp <code>verify.py</code> sẽ hiển thị những khoảng thời gian này dưới dạng khoảng trống (xem <a href="../evidence/#coverage-continuity-gaps-and-unobserved-ids">phần phạm vi bao phủ</a>).</li>
+<li>Ban đầu chỉ hiển thị 1.000 cuộc trò chuyện đầu tiên (giới hạn này được thiết lập trong <strong>phần Thông số</strong>); các
+    cuộc trò chuyện cũ hơn sẽ được bổ sung khi chúng hoạt động trở lại. Lịch sử trước đó của một cuộc trò chuyện đã được thêm vào sẽ không được lấy về — quý vị nên tạo bản chụp nhanh
+    lịch sử hoặc xuất toàn bộ nội dung cuộc trò chuyện khi cần thiết.</li>
+<li>Các điều kiện của thư mục thay đổi liên tục (bị tắt tiếng, đã đọc) sẽ không được áp dụng: các cuộc trò chuyện đó
+    vẫn tiếp tục được theo dõi.</li>
+<li><strong>Các nút bot nhúng (callback)</strong> được nhấn trong một ứng dụng khác sẽ không hiển thị trong phiên làm việc thứ hai;
+    phản hồi hoặc thao tác chỉnh sửa của bot sẽ được ghi lại. Các thao tác nhấn phím trên bàn phím để trả lời sẽ được gửi dưới dạng
+    tin nhắn đi và được gắn nhãn <code>button_press</code>.</li>
+<li>Càng nhiều cuộc trò chuyện đồng nghĩa với việc càng có nhiều yêu cầu. Telegram sẽ hạn chế các tài khoản có khối lượng tin nhắn mà nền tảng này coi là
+    quá mức, đây chính là một lý do nữa để sử dụng các tài khoản chuyên dụng.</li>
+</ul>
+<h2 id="scope-and-event-selection">Phạm vi và việc lựa chọn sự kiện<a class="anchor" href="#scope-and-event-selection" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Mỗi không gian làm việc đều có các nguồn riêng. TgWitness không tham gia các nhóm, không chấp nhận
+lời mời, cũng như không tự động liệt kê từng thành viên. Các nguồn phải đã
+có sẵn và có thể truy cập được từ tài khoản. Khi khởi động, trình thu thập sẽ đối chiếu các nguồn đã chọn
+với các cuộc trò chuyện hiển thị trên tài khoản; 1.000 cuộc trò chuyện đầu tiên sẽ được kiểm tra trừ khi
+<strong>mục “Tham số → Trò chuyện” trong danh sách tài khoản</strong> có quy định khác.
+Nguồn không có mặt sẽ được đánh dấu <strong>là “chưa xác nhận quyền truy cập”</strong>, chứ không được coi là đã xóa quý vị khỏi danh sách.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Bối cảnh</th>
+<th>Thu thập</th>
+<th>Tác động khi bị vô hiệu hóa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tin nhắn mới</td>
+<td>Các tin nhắn đã được gửi đi thông thường</td>
+<td>Các thao tác chỉnh sửa/xóa sau này có thể không có văn bản đã được ghi lại trước đó để so sánh.</td>
+</tr>
+<tr>
+<td>Các chỉnh sửa</td>
+<td>Cung cấp các phiên bản tin nhắn đã được chỉnh sửa</td>
+<td>Các thay đổi ở giai đoạn trung gian sẽ không được tái tạo lại sau này.</td>
+</tr>
+<tr>
+<td>Các hành động xóa</td>
+<td>Thông báo xóa có phạm vi cụ thể và thông báo cấp tài khoản không có phạm vi cụ thể</td>
+<td>Các thông báo xóa tin nhắn sẽ không được thêm vào sổ ghi chép.</td>
+</tr>
+<tr>
+<td>Phản hồi</td>
+<td>Các bản chụp nhanh phản ứng đã được cung cấp</td>
+<td>Các bản cập nhật phản hồi riêng lẻ sẽ không được bổ sung.</td>
+</tr>
+<tr>
+<td>Thành viên</td>
+<td>Đã gửi các thông báo về dịch vụ thành viên và thông tin cập nhật cho người tham gia</td>
+<td>Các quan sát liên quan đến tư cách thành viên không được bổ sung vào đây.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Các cài đặt này áp dụng cho tất cả các nguồn đã chọn trong không gian làm việc. Vui lòng lưu biểu mẫu để áp dụng
+các thay đổi; các thay đổi sẽ được ghi lại kèm theo các giá trị trước và sau đã được ký xác thực. Việc vô hiệu hóa một danh mục
+sẽ không xóa các bản ghi trước đó. Việc kích hoạt lại danh mục này sẽ không khôi phục các bản cập nhật đã bỏ lỡ.</p>
+<p>Các bản ghi hoạt động và các sự kiện dịch vụ nhóm khác vẫn được tách biệt với các
+tùy chọn này. Các tin nhắn dịch vụ thành viên có thể tạo bản ghi tin nhắn khi tính năng
+thành viên được kích hoạt, ngay cả khi tính năng ghi lại tin nhắn mới thông thường bị tắt. Các đối tượng Telegram
+được ghi lại vẫn giữ nguyên siêu dữ liệu nhúng; một tùy chọn không phải là quy tắc che giấu thông tin.</p>
+<p><strong>Các hành động xóa trong các cuộc trò chuyện riêng tư và nhóm thông thường</strong> sẽ được ghi nhận dưới dạng ID tin nhắn mà không kèm theo cuộc trò chuyện.
+Các cuộc trò chuyện này chia sẻ chung một chuỗi ID tin nhắn trên toàn tài khoản; do đó, khi một tin nhắn có ID đó đã
+được lưu trước đó, cuộc trò chuyện chứa tin nhắn đó sẽ được xác định: hành động xóa sẽ được ghi lại trong cuộc trò chuyện đó cùng với
+giải thích của <code>chat_resolution</code> về cách thức thực hiện. Các ID chưa từng được lưu trữ sẽ được coi là hành <strong>vi xóa ngoài phạm vi</strong> với
+nguồn gốc không xác định rõ ràng; công cụ thu thập dữ liệu sẽ không đưa ra phỏng đoán. Telegram không bao giờ tiết lộ ai là người đã xóa
+tin nhắn; khi tin nhắn bị xóa được gửi từ tài khoản này, bản ghi sẽ ghi nhận điều đó
+(<code>deleted_message_was_outgoing</code>) mà không nêu tên người xóa.</p>
+<h2 id="own-actions">Các hành động của chính mình<a class="anchor" href="#own-actions" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Các tin nhắn được gửi từ tài khoản đang được theo dõi sẽ được gắn nhãn <code>outgoing</code>. Việc chỉnh sửa một
+tin nhắn gửi đi ghi chú rằng trong các cuộc trò chuyện riêng tư và nhóm, chỉ tác giả của tin nhắn đó mới có thể chỉnh sửa, trong khi các bài đăng trên kênh
+có thể được chỉnh sửa bởi các quản trị viên khác. Khi một tin nhắn gửi đi lặp lại nội dung của một nút
+từ bàn phím trả lời được lưu gần đây nhất trong cuộc trò chuyện đó, tin nhắn này sẽ mang mã <code>button_press</code> kèm theo liên kết đến
+bản ghi của bàn phím đó.</p>
+<p>Việc loại trừ các hành động do chính người dùng thực hiện cũng áp dụng cho việc kiểm tra lại nền và lịch sử cuộc trò chuyện mới tự động.
+Các tin nhắn gửi đi bị bỏ qua sẽ làm dịch chuyển vị trí kiểm tra lại, do đó chúng không thể chặn các tin nhắn đến sau đó.
+Các thao tác rõ ràng trên bảng điều khiển và các bản chụp lịch sử được yêu cầu thủ công vẫn được ghi lại.</p>
+<h2 id="investigation-mode-joining-teams-and-talking-to-bots">Chế độ điều tra: tham gia các nhóm và trao đổi với các bot<a class="anchor" href="#investigation-mode-joining-teams-and-talking-to-bots" aria-label="Liên kết đến phần này">#</a></h2>
+<p><strong>Nguồn → Phạm vi quan sát → Chế độ điều tra</strong> sẽ thiết lập phạm vi cho một
+tài khoản chuyên dụng tham gia các cuộc trò chuyện nhóm, khởi chạy các bot và gửi tin nhắn đến chúng: toàn bộ tài khoản, mọi
+loại nguồn, các hành động của chính tài khoản đó, cũng như hồ sơ và
+200 tin nhắn hiển thị gần nhất của mọi cuộc trò chuyện hoặc bot xuất hiện. Hãy xem lại biểu mẫu và nhấn <strong>“Lưu phạm vi”</strong>; việc chuyển sang chế độ toàn bộ
+tài khoản sẽ yêu cầu xác nhận thông thường.</p>
+<ul>
+<li><strong>Các nút.</strong> Các nút nằm dưới một tin nhắn sẽ được giữ nguyên cùng với tin nhắn đó và hiển thị trong <strong>phần Trò chuyện</strong>: các liên kết, ứng dụng web
+    , liên kết đăng nhập, văn bản cần sao chép, dữ liệu gọi lại, truy vấn nội tuyến, yêu cầu cung cấp số điện thoại
+    hoặc vị trí. Các liên kết được hiển thị dưới dạng văn bản và không bao giờ được bảng điều khiển mở ra. Khi một bot
+    chỉ thay đổi các nút (ví dụ: một liên kết thanh toán mới), đó được coi là một phiên bản mới của tin nhắn, áp dụng cho cả
+    các bản cập nhật trực tiếp lẫn các lần kiểm tra lại.</li>
+<li>
+<p><strong>Các cuộc trò chuyện và bot mới.</strong> Ở chế độ theo thư mục và toàn bộ tài khoản, <strong>khi một cuộc trò chuyện hoặc bot mới
+    xuất hiện</strong>, hệ thống sẽ lưu lại ngay lập tức sau khi nó xuất hiện:</p>
+<ul>
+<li>hồ sơ của nó dưới dạng bản ghi <code>source.profile</code>: mô tả bot và các lệnh, phần giới thiệu
+    về người dùng, nhóm hoặc kênh, danh sách thành viên, liên kết cuộc trò chuyện và liên kết mời khi Telegram cung cấp
+    liên kết đó;</li>
+<li>các tin nhắn hiển thị gần đây nhất (tối đa 1.000 tin nhắn) dưới dạng bản chụp lịch sử được đánh dấu là <code>new_chat</code>:
+    các tin nhắn trước đó trong một cuộc trò chuyện nhóm vừa tham gia, hoặc những gì bot đã nói trước khi hệ thống giám sát
+    phát hiện ra cuộc trò chuyện đó. Các tin nhắn đã được lưu trữ trực tiếp sẽ không được lặp lại.</li>
+</ul>
+<p>Các cuộc trò chuyện đã có trong danh sách khi chế độ được bật sẽ được thêm vào mà không kèm theo ảnh chụp màn hình.
+Tính năng FloodWait sẽ tạm dừng quá trình này và tiếp tục sau đó; các sự cố sẽ được ghi lại và việc
+ghi lại trực tiếp cuộc trò chuyện vẫn tiếp tục.
+- <strong>Hồ sơ theo yêu cầu. Cuộc trò chuyện → Hồ sơ → Lưu hồ sơ hiện</strong> sẽ lưu lại hồ sơ hiện tại
+của bất kỳ nguồn nào; hồ sơ mới nhất sẽ được hiển thị phía trên các tin nhắn.
+- <strong>Không hiển thị.</strong> Các nút nhúng (callback) được nhấn trong một ứng dụng Telegram khác, cửa sổ bật lên hoặc
+liên kết mà bot trả lời khi người dùng nhấn vào, cũng như các liên kết mời được sử dụng trong ứng dụng khác sẽ không được truyền đến
+TgWitness. Những nội dung mà bot gửi hoặc chỉnh sửa sau đó sẽ được ghi lại.</p>
+</li>
+</ul>
+<h3 id="act-from-the-panel">Hành động từ bảng điều khiển<a class="anchor" href="#act-from-the-panel" aria-label="Liên kết đến phần này">#</a></h3>
+<p><strong>Tính năng Trò chuyện</strong> hiện đã tích hợp một ứng dụng khách thu nhỏ sử dụng tài khoản Telegram của không gian làm việc đã chọn:</p>
+<ul>
+<li>Quý vị có thể soạn một tin nhắn dạng văn bản thuần túy hoặc chọn <strong>“Trả lời”</strong> bên dưới một tin nhắn đã lưu. Tin nhắn gửi đi
+    được trả về sẽ được ghi lại ngay cả khi phạm vi ghi lại không bao gồm các cập nhật tin nhắn gửi đi.</li>
+<li>Nhấn <strong>nút “Press”</strong> bên dưới nút gọi lại hoặc nút văn bản hiện tại. Máy chủ sẽ lấy lại
+    tin nhắn và từ chối thao tác nếu nội dung trên bàn phím khác với phiên bản đã lưu.
+    Biên nhận gọi lại vẫn giữ nguyên văn bản cửa sổ bật lên, cờ cảnh báo và URL của Telegram; câu trả lời cũng được hiển thị
+    bên dưới cuộc trò chuyện. Các URL vẫn là văn bản có thể chọn và không được mở tự động.</li>
+<li>Mở rộng <strong>liên kết Telegram</strong>, nhập <code>@username</code>, một liên kết <code>https://t.me/name</code> công khai,
+    <code>https://t.me/+invite</code> / <code>joinchat/invite</code>, hoặc một liên kết bot có <code>?start=parameter</code>, rồi nhấn
+    <strong>Lưu bản xem trước</strong>. Liên kết gốc và bản xem trước của Telegram sẽ được ký trước khi tham gia.
+    <strong>Tham gia / mở và quan sát,</strong> sau đó tham gia nhóm/kênh hoặc mở tài khoản người dùng/bot, thêm
+    cuộc trò chuyện làm nguồn được kích hoạt, và gửi mã <code>/start</code> đến bot, kèm theo tham số khởi động của nó.
+    Yêu cầu tham gia đang chờ phê duyệt từ quản trị viên sẽ được ghi nhận là “đang chờ xử lý”, chứ không phải là “đã tham gia”.</li>
+</ul>
+<p>Vui lòng bật tính năng <strong>“Bắt đầu quan sát”</strong> để ghi lại các phản hồi đến theo thời gian thực. Các thao tác trên bảng điều khiển vẫn hoạt động khi
+quá trình quan sát bị tạm dừng, nhưng lúc đó chỉ các phản hồi trực tiếp từ các thao tác đó mới được đảm bảo lưu lại.
+Các nguồn mới được thêm vào sẽ sử dụng cấu hình hồ sơ/lịch sử đã thiết lập khi quá trình quan sát đang diễn ra.
+Khi một nguồn bị tạm dừng, quý vị cần kích hoạt lại nguồn đó trong <strong>phần “Nguồn”</strong> trước khi gửi tin nhắn hoặc nhấn các nút tương ứng.</p>
+<p><code>interaction.preview</code>, <code>interaction.requested</code> và <code>interaction.result</code> là các sự kiện nhật ký có chữ ký thông thường
+được bao gồm trong các tệp xuất bằng chứng. Các yêu cầu xác định tài khoản, tin nhắn/nút
+hoặc bản ghi xem trước và liệu quá trình quan sát có đang chạy hay không. Các biên nhận phân biệt giữa thành công,
+bị từ chối, đang chờ phê duyệt và kết quả không xác định. Một yêu cầu bị gián đoạn có thể đã được gửi đến
+Telegram: vui lòng kiểm tra cuộc trò chuyện trước khi thực hiện hành động mới. Việc sử dụng lại ID yêu cầu sẽ truy xuất
+biên nhận đã lưu mà không cần lặp lại thao tác, kể cả sau khi khởi động lại. Bảng điều khiển sẽ giữ lại
+ID sau khi nhận được phản hồi không rõ ràng cho cùng một thao tác trong phiên trang hiện tại.
+Nó cũng giữ lại ID đó khi việc làm mới giao diện không thành công sau một thao tác thành công: biên nhận
+vẫn hiển thị, và việc nhấp lại sẽ truy xuất biên nhận đó. Các RPC gọi lại và tham gia chỉ có một lần
+thử; các thao tác đọc có thể thử lại sẽ giữ nguyên chính sách thử lại đã cấu hình. Việc chuyển sang cuộc trò chuyện khác ngay lập tức
+sẽ xóa bản nháp và mục tiêu trả lời, đồng thời vô hiệu hóa việc gửi tin nhắn cho đến khi cuộc trò chuyện mới được tải xong.</p>
+<p>Ứng dụng khách thu nhỏ này xử lý các nút văn bản và nút gọi lại. Các ứng dụng web, yêu cầu đăng nhập/số điện thoại/vị trí,
+thanh toán, truy vấn nội tuyến và tệp đính kèm vẫn yêu cầu phải có ứng dụng khách Telegram; siêu dữ liệu của các nút đã lưu
+vẫn hiển thị. Các điều khiển mới sử dụng văn bản tiếng Anh.</p>
+<h2 id="recheck-tiers">Các cấp độ kiểm tra lại<a class="anchor" href="#recheck-tiers" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Quá trình kiểm tra lại sẽ yêu cầu Telegram cung cấp lại các tin nhắn bị bỏ sót, các thao tác chỉnh sửa và những tin nhắn mà nền tảng này không còn trả về.
+Các nguồn được đánh dấu bằng dấu sao là nguồn <strong>ưu tiên</strong>, được kiểm tra lại mỗi 15 phút theo mặc định;
+tất cả các nguồn còn lại được kiểm tra lại mỗi 6 giờ. Các cuộc trò chuyện được chọn ban đầu sẽ là nguồn ưu tiên, trong khi các cuộc trò chuyện được thêm vào qua
+thư mục hoặc toàn bộ tài khoản sẽ được coi là nguồn thông thường. Tối đa 30 nguồn được kiểm tra lại trong mỗi lần và
+phần còn lại sẽ chờ đến phút tiếp theo; sau khi kết nối lại, các nguồn ưu tiên sẽ được xử lý trước. Cả hai
+khoảng thời gian này đều được thiết lập tại Nguồn → Cài đặt ghi chép → Kiểm tra lại (giá trị 0 sẽ tắt tính năng này) và được
+ghi lại dưới dạng <code>recheck.changed</code>.</p>
+<p>Các tin nhắn bị bỏ sót sẽ được lấy lại từ điểm mà lần quét trước đó dừng lại, tối đa là
+<strong>số tin nhắn mới cho mỗi lần kiểm tra lại</strong> (mặc định là 1.000) theo cài đặt
+<strong>tại mục Thông số → Số tin nhắn mới</strong> cho mỗi lần
+<strong>kiểm tra lại</strong>. Do đó, sau một khoảng thời gian ngừng hoạt động dài,
+quá trình kiểm tra lại sẽ lấp đầy toàn bộ khoảng trống, ngay cả khi các tin nhắn trực tiếp mới hơn khoảng trống đó đã được lưu
+trước. Một cuộc trò chuyện vẫn đang trong quá trình cập nhật sẽ được kiểm tra lại vào phút tiếp theo thay vì
+chờ đến khoảng thời gian định kỳ của nó; <code>recheck.completed</code> sẽ hiển thị <code>continues_after</code> cho đến khi quá trình hoàn tất.</p>
+<p>Các yếu tố được so sánh bao gồm nội dung tin nhắn, các thực thể, thao tác trên bàn phím (bao gồm cả việc xóa) và
+nội dung/thông tin nhận dạng của tệp đính kèm. Việc thay đổi mã băm truy cập tệp hoặc tham chiếu tệp đơn thuần không được coi là một
+hành động chỉnh sửa, cũng như những thông tin mà Telegram tự động điền vào: quá trình tải bản xem trước liên kết, số lượt xem bài đăng, nội dung đa phương tiện trả phí
+được mở khóa bởi tài khoản này, hoặc biên lai hóa đơn. Mỗi phiên bản được lưu trong mục “Trò chuyện” đều có liên kết đến bản ghi nhật ký đầy đủ của nó, bao gồm cả siêu dữ liệu phương tiện.</p>
+<h2 id="message-history-and-attribution">Lịch sử tin nhắn và nguồn gốc<a class="anchor" href="#message-history-and-attribution" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Giả sử công cụ thu thập ghi nhận “Cuộc họp lúc 10:00”, sau đó thấy “Cuộc họp lúc 11:00”,
+và tiếp theo nhận được thông báo xóa tin nhắn. Công cụ sẽ bổ sung ba ghi nhận riêng biệt.
+Nội dung gốc vẫn được giữ nguyên, bản chỉnh sửa là một phiên bản riêng biệt, và thông báo ghi lại rằng
+đã phát hiện hành vi xóa tin nhắn.</p>
+<p>Nếu quá trình thu thập bắt đầu sau khi phiên bản đầu tiên biến mất, thì nội dung văn bản đó sẽ không còn khả dụng.
+Nếu có nhiều lần chỉnh sửa xảy ra trong thời gian hệ thống ngừng hoạt động, thì chỉ những phiên bản được ghi nhận sau đó
+mới có thể được lưu lại. Thông báo xóa bỏ không thể khôi phục nội dung chưa từng được ghi lại.</p>
+<p>Người gửi tin nhắn không tự động được coi là người chỉnh sửa. Telegram thường không
+cung cấp thông tin về người đã xóa tin nhắn hoặc thời điểm xóa chính xác. Các đối tượng không xác định
+vẫn giữ nguyên trạng thái ẩn danh. Các bản chụp nhanh phản hồi và cập nhật về người tham gia chỉ chứa số lượng
+và danh tính mà Telegram hiển thị cho tài khoản đó.</p>
+<p>Các số thứ tự thể hiện thứ tự quan sát. Dấu thời gian UTC của bộ thu thập là
+thời gian theo đồng hồ địa phương của nó; dấu thời gian nguồn từ Telegram sẽ được lưu trữ riêng biệt khi có sẵn.
+Cả hai đều không phải là dấu thời gian đáng tin cậy độc lập.</p>
+<h2 id="history-snapshots">Các bản chụp lịch sử<a class="anchor" href="#history-snapshots" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Một yêu cầu chụp nhanh sẽ lấy các tin nhắn mới nhất hiện có từ một nguồn đã được kích hoạt, tối đa
+500 tin nhắn cho mỗi yêu cầu. Kết quả được gắn nhãn là các quan sát lịch sử. Chúng có thể trùng lặp
+với dữ liệu thu thập trực tiếp, và các quan sát lặp lại sẽ được lưu giữ dưới dạng các bản ghi riêng biệt.</p>
+<p>Các bản chụp nhanh tuân thủ chính sách đính kèm nhưng vẫn tách biệt với các chuyển đổi sự kiện trực tiếp.
+Chúng không khôi phục các tin nhắn đã bị xóa hoặc các phiên bản trung gian bị bỏ lỡ. Quý vị có thể
+yêu cầu tạo bản chụp nhanh khi quá trình đang tạm dừng; mọi tệp đính kèm được xếp hàng sẽ chờ cho đến khi quá trình quan sát bắt đầu
+và trình xử lý tải xuống được khởi chạy.</p>
+<h2 id="attachment-handling">Xử lý tệp đính kèm<a class="anchor" href="#attachment-handling" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Tính năng tải xuống tệp đính kèm được bật theo mặc định và sẽ tạm dừng khi dung lượng đĩa trống còn dưới 1 GiB. Trình thu thập sẽ thực hiện
+công việc quan sát tin nhắn và tải xuống cùng lúc. Công việc này giữ nguyên
+thông tin mô tả phương tiện gốc và chính sách về kích thước, do đó tệp đính kèm bị chỉnh sửa sau này sẽ không bị thay thế một cách âm thầm.</p>
+<p>Quá trình tải xuống diễn ra sau khi ghi lại tin nhắn. Một lần tải xuống hoàn tất sẽ tạo ra một bản ghi <code>media.saved</code>
+kèm theo mã SHA-256 và số byte tương ứng. Các tác vụ bị bỏ qua, thất bại, thử lại hoặc bị gián đoạn
+sẽ có kết quả riêng biệt. Một tác vụ đang chờ xử lý không phải là bằng chứng cho thấy tệp đã được bảo toàn.
+Tệp đã hoàn tất cũng phải khớp với số byte trong mô tả tệp đính kèm ban đầu
+được quan sát. Phản hồi ngắn hơn hoặc dài hơn dự kiến sẽ không được ghi nhận là phương tiện truyền thông đã được bảo toàn.</p>
+<p>Các giới hạn được thiết lập <strong>theo từng loại</strong>: ảnh, video, GIF và hình động, tin nhắn video dạng vòng lặp,
+tin nhắn thoại, nhạc và âm thanh, nhãn dán, và tệp tin. Mỗi loại có thể được tắt và có
+giới hạn dung lượng riêng từ 1 đến 2.000 MiB; các không gian làm việc mới bắt đầu với 20 MiB cho ảnh,
+100 MiB cho video, 50 MiB cho tệp tin, âm thanh và video tròn, 20 MiB cho tin nhắn thoại và GIF, cùng
+5 MiB cho nhãn dán. <em>Giới hạn kích thước tệp tối đa</em> sẽ áp dụng đồng thời cho mọi loại. Các chính sách được lưu trước khi
+áp dụng giới hạn theo từng loại sẽ vẫn giữ nguyên giới hạn riêng cho từng loại. Khi một loại bị tắt, hệ thống sẽ tạo ra
+bản ghi <code>media.skipped</code>; các tệp có kích thước không xác định hoặc vượt quá giới hạn sẽ không được tải xuống. Các tệp tin lớn sẽ được
+cấp tốc độ tải xuống tối thiểu 256 KiB/s. Các tác vụ vẫn tồn tại sau khi khởi động lại, nhưng các tham chiếu đã hết hạn, mất
+quyền truy cập hoặc tệp tin bị xóa vẫn có thể cản trở việc khôi phục. Các tác vụ hiện có sẽ giữ nguyên chính sách đã được lưu
+cùng với chúng.</p>
+<h2 id="pause-lock-disconnect-and-restart">Tạm dừng, khóa, ngắt kết nối và khởi động lại<a class="anchor" href="#pause-lock-disconnect-and-restart" aria-label="Liên kết đến phần này">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Hành động hoặc điều kiện</th>
+<th>Hiệu quả</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chuyển đổi không gian làm việc</td>
+<td>Thay đổi chế độ xem bảng điều khiển; các trình thu thập khác vẫn giữ nguyên trạng thái của chúng.</td>
+</tr>
+<tr>
+<td>Khóa bảng điều khiển hoặc đóng tab</td>
+<td>Giữ cho máy chủ và quá trình giám sát tiếp tục hoạt động.</td>
+</tr>
+<tr>
+<td>Tạm dừng quan sát</td>
+<td>Tạm dừng quá trình thu thập và bảo toàn các tệp đính kèm đang chờ xử lý.</td>
+</tr>
+<tr>
+<td>Vô hiệu hóa một nguồn</td>
+<td>Tính năng này sẽ ngừng việc ghi lại theo phạm vi trong tương lai; các tác vụ phương tiện đang chờ xử lý sẽ bị tạm dừng trong thời gian tính năng này bị vô hiệu hóa.</td>
+</tr>
+<tr>
+<td>Loại bỏ một nguồn</td>
+<td>Hệ thống sẽ loại bỏ nguồn này và xóa các hồ sơ người dùng liên quan; các bản ghi đã được lưu trữ vẫn được giữ lại trong sổ nhật ký chỉ ghi thêm. Các tệp đính kèm vẫn đang chờ xử lý sẽ được ghi nhận là thất bại (<code>source_removed</code>). Trong chế độ theo thư mục và chế độ toàn tài khoản, các tệp này cũng sẽ bị loại trừ.</td>
+</tr>
+<tr>
+<td>Thay đổi lộ trình kết nối</td>
+<td>Yêu cầu tạm dừng, đóng các phiên khách hàng cũ và hủy các phiên đăng nhập chưa hoàn tất.</td>
+</tr>
+<tr>
+<td>Dừng tiến trình Python</td>
+<td>Tạm dừng tất cả các không gian làm việc; không có bất kỳ ghi nhận nào được thực hiện trong thời gian công cụ này ở chế độ ngoại tuyến.</td>
+</tr>
+<tr>
+<td>Khởi động lại sau khi quan sát tích cực</td>
+<td>Hệ thống sẽ cố gắng khôi phục phạm vi đã lưu bằng cách sử dụng phiên làm việc đã lưu. Việc tạm dừng thủ công sẽ hủy bỏ ý định đó.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Trình thu thập ghi lại các sự cố ngắt kết nối, thử lại, lỗi, khởi động/dừng hoạt động và
+các tín hiệu kiểm tra kết nối. Các sự gián đoạn ngắn có thể bị bỏ sót trong quá trình kiểm tra kết nối định kỳ.
+Sau khi khởi động lại, các bản cập nhật bị bỏ lỡ sẽ được yêu cầu từ vị trí cập nhật đã lưu và
+các cuộc trò chuyện được theo dõi sẽ được kiểm tra lại định kỳ; xin tham khảo <a href="../evidence/#durable-collection-and-process-receipts-02">định dạng bằng chứng</a>. Một bản chụp nhanh cung cấp bối cảnh;
+nó không chứng minh rằng khoảng trống đó đã được khắc phục.</p>
+<h2 id="account-isolation-and-verification">Cách ly và xác minh tài khoản<a class="anchor" href="#account-isolation-and-verification" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Mỗi không gian làm việc đều có sổ nhật ký, quyền truy cập, khóa ký, chính sách và hàng đợi riêng.
+Chỉ khách hàng đang hoạt động của không gian làm việc đó mới có thể đóng góp các quan sát trực tiếp. Các khách hàng bị từ chối, đang chờ xử lý,
+bị thay thế và đang kiểm tra kết nối không thể ghi các cập nhật trực tiếp vào sổ nhật ký của không gian làm việc đó.
+Các tài khoản khác nhau có thể theo dõi cùng một nhóm, nhưng sổ nhật ký của họ vẫn được tách biệt.</p>
+<p>Mỗi sự kiện bao gồm mã băm trước đó và chữ ký Ed25519. Các tệp xuất bao quát
+toàn bộ nhật ký không gian làm việc thông qua một số thứ tự cố định. Các bộ lọc trên bảng điều khiển không lọc
+dữ liệu xuất; quá trình thu thập có thể tiếp tục vượt ra ngoài ranh giới của nhật ký trong khi tệp xuất đang được chuẩn bị.</p>
+<p><strong>Tính năng Xác minh Nhật ký</strong> sẽ kiểm tra chuỗi sự kiện và các chữ ký thông qua
+phạm vi hiển thị. Kết quả của tính năng này sẽ bị xóa khi không gian làm việc thay đổi, và bảng điều khiển sẽ xác định
+các bản ghi mới được thêm vào sau khi kiểm tra. Tính năng xuất dưới dạng ZIP cũng xác minh các tệp phương tiện đã thu thập.</p>
+<p>Một chữ ký hợp lệ xác nhận tính toàn vẹn liên quan đến khóa tin cậy, chứ không phải nguồn gốc từ Telegram
+hay tính xác thực của nội dung. Vui lòng lưu giữ các dấu vân tay và điểm kiểm tra một cách độc lập. Xin tham khảo
+<a href="../evidence/">mô hình bằng chứng</a>, <a href="../operations/">các hoạt động hàng ngày</a> và
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">quy trình chấp nhận trực tiếp</a> để biết các yêu cầu về độ tin cậy và việc chuyển giao.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/COLLECTION.md">Chỉnh sửa trang này trên GitHub ↗</a><a class="next-guide" href="../operations/"><span>Bước tiếp theo</span><strong>Quy trình làm việc và hoạt động →</strong></a><p>Các hướng dẫn này mô tả cách triển khai hiện tại. Kết quả xác thực và những hạn chế còn tồn tại được ghi chép riêng biệt. <a href="../verification/">Những nội dung đã được kiểm thử →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Trên trang này"><p class="nav-label">Trên trang này</p><a href="#from-login-to-a-journal">Từ quá trình đăng nhập đến sổ ghi chép</a><a href="#observation-scope-chosen-chats-a-folder-or-the-whole-account">Phạm vi giám sát: các cuộc trò chuyện được chọn, một thư mục hoặc toàn bộ tài khoản</a><a href="#scope-and-event-selection">Phạm vi và việc lựa chọn sự kiện</a><a href="#own-actions">Các hành động của chính mình</a><a href="#investigation-mode-joining-teams-and-talking-to-bots">Chế độ điều tra: tham gia các nhóm và trao đổi với các bot</a><a href="#recheck-tiers">Các cấp độ kiểm tra lại</a><a href="#message-history-and-attribution">Lịch sử tin nhắn và nguồn gốc</a><a href="#history-snapshots">Các bản chụp lịch sử</a><a href="#attachment-handling">Xử lý tệp đính kèm</a><a href="#pause-lock-disconnect-and-restart">Tạm dừng, khóa, ngắt kết nối và khởi động lại</a><a href="#account-isolation-and-verification">Cách ly và xác minh tài khoản</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Mã nguồn mở · Chạy trên máy tính của quý vị</span><a href="../../../../LICENSE">Giấy phép MIT</a><a href="../notice/">Thông báo dành cho người vận hành</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">An ninh</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Đang chờ tin nhắn", "Step through a fictional send, edit and delete.": "Hãy cùng tìm hiểu từng bước về một quy trình giả định bao gồm việc gửi, chỉnh sửa và xóa tin nhắn.", "No observations yet. Start the sequence or advance one event.": "Chưa có ghi chú nào. Bắt đầu chuỗi sự kiện hoặc chuyển sang sự kiện tiếp theo.", "Meet at 10:00": "Hẹn gặp lúc 10:00", "A new message is visible in the chat.": "Một tin nhắn mới đã xuất hiện trong cuộc trò chuyện.", "Record 1 appended: the collector observed the original message.": "Ghi chú 1 được đính kèm: bộ thu thập đã ghi nhận tin nhắn gốc.", "Meet at 11:00": "Hẹn gặp lúc 11:00", "The current text changes. The earlier observation stays.": "Nội dung văn bản hiện tại đã được điều chỉnh. Quan sát trước đó vẫn được giữ nguyên.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Bản ghi số 2 đã được bổ sung: nội dung chỉnh sửa là một quan sát mới. Bản ghi số 1 vẫn giữ nguyên văn bản gốc.", "Message deleted": "Tin nhắn đã bị xóa", "The message has disappeared from the chat view.": "Tin nhắn đã biến mất khỏi giao diện trò chuyện.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Ghi chú 3 được đính kèm: thông báo xóa được lưu giữ cùng với cả hai phiên bản đã quan sát được.", "0 records": "0 bản ghi", "1 record": "1 bản ghi", "2 records": "2 bản ghi", "3 records": "3 bản ghi", "Complete / {n} of 3": "Hoàn tất / {n}/3", "Step / {n} of 3": "Bước / {n}/3", "Pause": "Tạm dừng", "Replay sequence": "Trình tự phát lại", "Play sequence": "Trình tự phát lại", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Ví dụ tĩnh hiện đã có sẵn. Để tính toán các giá trị băm một cách tương tác, vui lòng truy cập trang này qua HTTPS hoặc xem bản xem trước trên localhost với sự hỗ trợ của Web Crypto.", "No record supplied": "Không có bản ghi nào được cung cấp", "Tail removed": "Phần cuối đã được loại bỏ", "≠ saved hash": "≠ băm đã lưu", "Rebuilt · different hash": "Đã được xây dựng lại · mã băm khác", "= saved hash": "= mã băm đã lưu", "Same length and matching head.": "Độ dài tương đương và tiêu đề phù hợp.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Cả ba giá trị băm được tính toán đều khớp với các giá trị băm đã lưu. Mẫu này phù hợp với giới hạn ba bản ghi được lưu giữ.", "Same saved head; the journal prefix fails verification.": "Cùng một tiêu đề đã lưu; tiền tố của sổ ghi chép không qua được quá trình xác minh.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Bản ghi số 2 hiện không còn khớp với giá trị băm đã lưu trữ của nó. Việc chỉ kiểm tra giá trị băm cuối cùng đã lưu trữ sẽ bỏ sót lỗi này; trình xác minh sẽ kiểm tra từng bản ghi một.", "Head differs from the retained checkpoint.": "Đầu trang khác với điểm kiểm tra được lưu giữ.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Các giá trị băm được tái tạo liên kết với nhau, nhưng phần đầu cuối cùng đã thay đổi. Điểm kiểm tra được lưu giữ từ chối lịch sử này. Các chữ ký gốc cũng sẽ không hợp lệ đối với các bản ghi đã bị thay đổi.", "Too short: 2 supplied records \u003c 3 retained records.": "Quá ngắn: 2 bản ghi được cung cấp \u003c 3 bản ghi được lưu giữ.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Hai giá trị băm còn lại vẫn khớp nhau. Điểm kiểm tra được lưu giữ đã tiết lộ phần cuối bị thiếu. Nếu không có ranh giới trước đó, chỉ riêng tiền tố ngắn hơn này sẽ không thể phát hiện ra sự thiếu sót.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Trình duyệt này không hỗ trợ tính toán hàm băm. Các công thức và phần giải thích tĩnh dưới đây vẫn có sẵn.", "{n} records": "{n} bản ghi", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Đã được chấp nhận: số lượng tăng lên, chữ ký đã được xác minh và khóa khớp. TgWitness duy trì ranh giới mới này.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: bản trả lời có chữ ký báo cáo số lượng bản ghi ít hơn so với điểm kiểm tra được chấp nhận gần nhất. Hệ thống TgWitness ghi nhận sự cố và giữ nguyên ranh giới đã được chấp nhận trước đó.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: số lượng không thay đổi nhưng nhánh chính khác biệt. TgWitness ghi lại sự bất đồng này và duy trì ranh giới đã được chấp nhận trước đó.", "No answer": "Không có câu trả lời", "boundary unknown": "giới hạn chưa xác định", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Không có phản hồi: TgWitness ghi lại kết quả kiểm tra không thành công. Công cụ này không thể xác định trạng thái hiện tại của bộ thu thập dữ liệu. Nếu TgWitness vẫn có thể kết nối với Bot API và chính sách xuất bản cho phép, công cụ này có thể công bố thông tin về sự cố đó.", "Send {n}": "Gửi {n}", "Edit {n}": "Chỉnh sửa {n}", "Delete {n}": "Xóa {n}", "Both accounts captured all six expected observations in this example.": "Cả hai tài khoản đều ghi lại đầy đủ cả sáu quan sát dự kiến trong ví dụ này.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Tài khoản B vẫn ghi lại được 6/6 tin nhắn. Hai biên nhận mất nhiều thời gian hơn. Tỷ lệ ghi lại và độ trễ của biên nhận trả lời cho những câu hỏi khác nhau.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Tài khoản B đã ghi lại được 5 trong số 6 hành động trước thời hạn (83,3%). Hành động chỉnh sửa còn thiếu không có độ trễ được đo lường. Kết quả này chỉ mô tả sáu hành động được kiểm soát.", "not observed by cutoff": "không được ghi nhận trước thời hạn", "{s} seconds": "{s} giây", "Exact values follow in the table.": "Các giá trị chính xác được trình bày trong bảng dưới đây.", "{s} s": "{s} s", "Not observed": "Chưa được quan sát thấy", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Bốn cuộc trò chuyện cung cấp các quan sát khác nhau. Vui lòng theo dõi các bản ghi nguồn cho từng kết nối; không gán bài đăng trên kênh cho người dùng 71001 nếu không có thông tin người gửi được xác định rõ.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Các bản ghi số 146 và 205 cung cấp cùng một ID người gửi, đó là 71001. Điều này giúp liên kết các bài đăng được quan sát thấy từ một tài khoản Telegram trên hai cuộc trò chuyện. Tuy nhiên, thông tin này không xác định danh tính của một cá nhân trong thế giới thực cũng như không quy thuộc bài đăng trên kênh đó cho bất kỳ ai.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Địa chỉ đích pay.example.invalid/new xuất hiện trong bản ghi nhóm số 146, bản ghi bàn phím bot số 173, bản ghi chỉnh sửa kênh số 188 và tin nhắn riêng tư số 205. Việc địa chỉ đích này xuất hiện lặp lại giúp liên kết các tài liệu với nhau; điều này không chứng minh rằng các tài khoản đó nằm dưới sự kiểm soát chung.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Trong trường hợp giả định này, các biên nhận phương tiện đã hoàn tất số #151 và #209 có các giá trị SHA-256 đầy đủ trùng khớp. Hãy so sánh các byte thực tế và các bản ghi tin nhắn liên quan. Tệp trùng khớp này không xác định được người tạo ra nó cũng như không chứng minh được ai là người đã chuyển tiếp nó.", "the encrypted off-site copy": "bản sao được mã hóa lưu trữ ngoài trang web", "notifications": "thông báo", "checkpoint hashes for timestamps": "Các giá trị băm điểm kiểm tra (checkpoint hashes) để xác định dấu thời gian", "signed checkpoints for the witness": "các mốc kiểm tra có chữ ký dành cho TgWitness", "Switched on in this example": "Đã kích hoạt trong ví dụ này", "Optional · off by default": "Tùy chọn · tắt theo mặc định", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Khi rời khỏi thiết bị này: kết nối Telegram và {list}. Không có gì khác.", "Default: only the Telegram connection leaves this machine.": "Mặc định: chỉ kết nối Telegram mới được truyền ra khỏi máy này.", "{done} of {total} done": "{done}/{total} đã hoàn thành", "Mark step {n} as done": "Đánh dấu bước {n} là đã hoàn thành", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Nội dung", "Copied": "Đã sao chép", "Command copied.": "Lệnh đã được sao chép.", "Selected — Ctrl/Cmd+C": "Đã chọn — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Lệnh đã được chọn. Vui lòng sao chép thủ công.", "Command copied to clipboard.": "Lệnh đã được sao chép vào khay nhớ tạm.", "Select text": "Chọn văn bản", "Clipboard unavailable. Command selected; copy it manually.": "Không thể truy cập khay nhớ tạm. Lệnh đã được chọn; vui lòng sao chép thủ công.", "A message arrives. The first observation is saved.": "Một tin nhắn được gửi đến. Quan sát đầu tiên được lưu lại.", "The time changes. Both captured versions stay.": "Thời gian có thể thay đổi. Cả hai phiên bản được lưu giữ đều được giữ nguyên.", "The message disappears. The captured history remains.": "Tin nhắn có thể biến mất. Nhưng lịch sử đã được ghi lại vẫn còn đó.", "Pause example animation": "Tạm dừng hình ảnh minh họa", "Play example animation": "Xem ví dụ về hình ảnh động", "Play": "Phát", "Full-size workspace screenshot": "Ảnh chụp màn hình toàn màn hình không gian làm việc", "Workspace screenshot · fictional data": "Ảnh chụp màn hình giao diện làm việc · dữ liệu giả định", "Close": "Đóng", "Close screenshot": "Đóng ảnh chụp màn hình", "Scrollable full-size screenshot": "Ảnh chụp màn hình toàn màn hình có thể cuộn", "Enlarge: {name}": "Phóng to: {name}", "View full size": "Xem kích thước đầy đủ"}</script>
+</body></html>

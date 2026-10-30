@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="id" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Koneksi, proxy, dan perlindungan data | TgWitness</title>
+<meta name="description" content="Pasangan API, metode masuk, SOCKS5, rute HTTP dan MTProxy, daftar proxy publik, serta apa yang dilindungi oleh masing-masing rute."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="id_ID">
+<meta property="og:title" content="Koneksi, proxy, dan perlindungan data | TgWitness"><meta property="og:description" content="Pasangan API, metode masuk, SOCKS5, rute HTTP dan MTProxy, daftar proxy publik, serta apa yang dilindungi oleh masing-masing rute.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/connection/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/connection/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/connection/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/connection/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/connection/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/connection/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/connection/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/", "url": "https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/", "name": "Koneksi, proxy, dan perlindungan data | TgWitness", "description": "Pasangan API, metode masuk, SOCKS5, rute HTTP dan MTProxy, daftar proxy publik, serta apa yang dilindungi oleh masing-masing rute.", "inLanguage": "id", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://phishdestroy.github.io/TgWitness/id/"}, {"@type": "ListItem", "position": 2, "name": "Dokumentasi", "item": "https://phishdestroy.github.io/TgWitness/id/docs/"}, {"@type": "ListItem", "position": 3, "name": "Referensi", "item": "https://phishdestroy.github.io/TgWitness/id/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Koneksi, proxy, dan perlindungan data", "item": "https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Lompat ke konten</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Dokumentasi</span></a>
+<nav aria-label="Panduan"><a href="../../concepts/">Panduan visual</a><a href="../../">Semua panduan</a><a href="../">Referensi</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Bahasa"><span aria-hidden="true">◍</span> Bahasa Indonesia</summary><div class="lang-list"><a href="../../../../docs/reference/connection/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/connection/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/connection/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/connection/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/connection/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/connection/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/connection/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/connection/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/connection/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/connection/" hreflang="hi" lang="hi">हिन्दी</a><a href="./" hreflang="id" lang="id" aria-current="true">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/connection/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/connection/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Beralih antara tema terang dan gelap"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Panduan"><a href="../../../guides/modes.html">Mode, skenario, dan tingkat bukti</a><p class="nav-label">Langkah-langkah awal</p><a href="../../start/">Mulai dalam hitungan menit</a><a href="../../accounts/">Hubungkan akun</a><a href="../../proxies/">Pilih proxy</a><a href="../../exports/">Ekspor dan verifikasi</a><p class="nav-label">Memahami bukti</p><a href="../../concepts/">Lihat cara kerja bukti ini</a><a href="../../cases/">Selidiki seluruh obrolan</a><a href="../../security/">Jaga keamanannya</a><p class="nav-label">Pelajari lebih lanjut</p><a href="../../witness/">Siapkan bot saksi</a><a href="../../server/">Jaga agar tetap berjalan</a><a href="../../troubleshooting/">Temukan apa yang salah</a></nav><nav class="wiki-nav" aria-label="Referensi"><p class="nav-label"><a class="nav-label-link" href="../">Referensi</a></p><details class="wiki-group" open><summary>Pengaturan</summary><a href="../quickstart/">Panduan cepat</a><a href="../accounts/">Format akun dan sesi</a><a href="./" aria-current="page">Koneksi, proxy, dan perlindungan data</a><a href="../deployment/">Penerapan</a></details><details class="wiki-group"><summary>Kumpulkan</summary><a href="../collection/">Cara kerja pengumpulan data</a><a href="../operations/">Alur kerja dan operasi</a><a href="../investigation/">Mode penyelidikan</a><a href="../features/">Fitur dan batasan</a></details><details class="wiki-group"><summary>Bukti</summary><a href="../how-it-works/">Cara kerja bukti tersebut</a><a href="../evidence/">Format bukti</a><a href="../witness/">Saksi independen</a><a href="../timestamp/">Cap waktu</a></details><details class="wiki-group"><summary>Keamanan & proyek</summary><a href="../security/">Keamanan dan penanganan data</a><a href="../architecture/">Arsitektur</a><a href="../verification/">Apa yang telah diuji</a><a href="../license/">Pemberitahuan mengenai lisensi dan ketidakcocokan arsitektur</a><a href="../notice/">Pemberitahuan ketidakcocokan operator</a><a href="../changelog/">Daftar Perubahan</a></details></nav><p class="sidebar-note">v0.7.0<br>Sumber terbuka · Dapat dijalankan di komputer Anda</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Panduan"><a href="../../../">Beranda</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentasi</a> <span aria-hidden="true">/</span> <a href="../">Referensi</a> <span aria-hidden="true">/</span> <span aria-current="page">Koneksi, proxy, dan perlindungan data</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Cari di dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Coba gunakan proxy, rantai hash, token, atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Pencarian yang jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Ketik kata kunci untuk mencari panduan dan referensi. Hasil pencarian tetap tersimpan di browser Anda.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Referensi / Pengaturan</p><h1>Koneksi, proxy, dan perlindungan data</h1><p class="guide-outcome">Pasangan API, metode masuk, SOCKS5, rute HTTP dan MTProxy, daftar proxy publik, serta apa yang dilindungi oleh masing-masing rute.</p><div class="wiki-body"><p>Dokumen ini menjelaskan perilaku TgWitness 0.7.0 dan batasannya. Otentikasi,
+akses sumber, konektivitas jaringan, dan kelengkapan penangkapan merupakan kondisi yang terpisah.
+Untuk langkah-langkah masuk, format berkas, dan pengelolaan beberapa akun, mulailah dengan
+<a href="../accounts/">bagian akun dan format sesi</a>. Untuk kebijakan peristiwa dan perilaku
+saat dimulai ulang, lihat <a href="../collection/">cara kerja pengumpulan data</a>.</p>
+<h2 id="authentication-methods">Metode otentikasi<a class="anchor" href="#authentication-methods" aria-label="Tautan ke bagian ini">#</a></h2>
+<p><strong>API ID dan API hash mengidentifikasi sebuah aplikasi; keduanya tidak menggantikan proses login akun.</strong>
+
+Keduanya bersifat opsional di TgWitness. Urutan prioritas: pasangan yang dimasukkan melalui formulir, kemudian pasangan dari
+berkas JSON akun yang diimpor, lalu pasangan yang disimpan di ruang kerja, kemudian kumpulan bawaan berisi 50
+pasangan publik, dicoba dalam urutan acak dengan rotasi otomatis saat Telegram menolak salah satunya. Hanya
+pasangan Telegram Desktop (2040) yang dikirim bersama deskripsi klien Telegram Desktop yang sesuai.
+Pasangan Anda sendiri dari Alat Pengembangan API di <a href="https://my.telegram.org">my.telegram.org</a>
+dapat digunakan dengan semua akun Anda; setiap akun tetap memiliki otorisasi tersendiri.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Metode</th>
+<th>Persyaratan</th>
+<th>Dukungan TgWitness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nomor telepon, kode, 2FA (opsional)</td>
+<td>Akses akun; pasangan API opsional</td>
+<td>Panel masuk</td>
+</tr>
+<tr>
+<td>Kunci Otentikasi HEX + ID DC</td>
+<td>Kunci lengkap 512 karakter dan DC 1–5</td>
+<td>Tab <strong>Kunci Otorisasi</strong> Langsung; ID Pengguna opsional diperiksa sebelum otorisasi disimpan</td>
+</tr>
+<tr>
+<td>Telethon StringSession</td>
+<td>String sesi yang valid</td>
+<td>Panel masuk</td>
+</tr>
+<tr>
+<td>Telethon SQLite <code>.session</code></td>
+<td>Teks yang tertutup dan konsisten</td>
+<td>Impor skema langsung melalui panel 7/8; CLI offline opsional</td>
+</tr>
+<tr>
+<td>Pyrogram SQLite <code>.session</code></td>
+<td>Sesi pengguna produksi telah ditutup</td>
+<td>Impor skema langsung melalui panel 2/3</td>
+</tr>
+<tr>
+<td>Telegram Desktop TData ZIP</td>
+<td>Satu akun modern; kode sandi lokal jika dilindungi</td>
+<td>Konversi dalam memori dengan pemeriksaan checksum dan dekripsi</td>
+</tr>
+<tr>
+<td>JSON Akun</td>
+<td>Bidang API/sesi/kunci yang didukung</td>
+<td>Metadata saja sudah cukup untuk mengisi kredensial API; namun, login menggunakan sesi/kunci atau nomor telepon/QR code tetap diperlukan</td>
+</tr>
+<tr>
+<td>Masuk dengan QR</td>
+<td>Konfirmasi dari aplikasi Telegram yang resmi</td>
+<td>Pembuatan QR lokal, masa berlaku/percobaan ulang, 2FA opsional</td>
+</tr>
+<tr>
+<td>TDLib / Pyrogram StringSession</td>
+<td>Format khusus perpustakaan lainnya</td>
+<td>Tidak didukung</td>
+</tr>
+<tr>
+<td>Token bot</td>
+<td>Sebuah bot dengan model akses/pembaruan tersendiri</td>
+<td>Tidak digunakan oleh pengumpul ini</td>
+</tr>
+</tbody>
+</table></div>
+<p>Telegram memilih pengiriman kode; pengiriman melalui SMS tidak dijamin. Hash API tidak dapat memperbaiki
+sesi yang dicabut atau menggantikan kata sandi 2FA yang terlupa. TgWitness tidak menyimpan
+kode login atau kata sandi 2FA Telegram ke disk.</p>
+<p>Untuk sumber pribadi, akun tersebut harus sudah memiliki akses. Nama pengguna grup
+tidak diperlukan. Penggunaan proxy atau impor sesi tidak memberikan hak keanggotaan maupun hak administrator.
+Keanggotaan saat ini tidak menjamin akses ke riwayat sebelum bergabung.</p>
+<h2 id="import-a-telethon-session-file">Impor berkas sesi Telethon<a class="anchor" href="#import-a-telethon-session-file" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Telethon SQLite, Pyrogram SQLite, dan Telegram Desktop TData menggunakan format yang berbeda.
+Panel ini mendeteksi dan mengonversi struktur yang didukung; mengganti nama file bukanlah
+proses konversi. Pilih satu sesi dan file JSON yang menyertainya di bawah <strong>&quot;Files</strong>&quot;, lalu tekan <strong>&quot;Connect account&quot;</strong>. Maksimal empat file yang cocok dan
+total 8 MiB diterima. Lihat <a href="../accounts/">batasan format</a> untuk detail TData/JSON.
+Tidak ada pemulihan kode sandi. Masuk melalui telepon/2FA atau QR akan membuat otorisasi terpisah.</p>
+<p>Jalur baris perintah opsional khusus Telethon tetap tersedia:</p>
+<ol>
+<li>Hentikan klien yang menggunakan sesi asli dan buat salinan yang konsisten.
+    Konverter akan menolak berkas dengan WAL/jurnal yang belum selesai. Tutup klien
+    asli dengan benar, bukan dengan menghapus berkas-berkas tersebut untuk menghindari pemeriksaan.</li>
+<li>Dari lingkungan TgWitness, jalankan:</li>
+</ol>
+<pre><code class="language-sh">python -m tgwitness.sessions account.session --out account.tgwitness-session</code></pre>
+<ol start="3">
+<li>Di bawah <strong>Tambahkan akun → File</strong>, unggah hasilnya atau
+    tempelkan stringnya, lalu lanjutkan.</li>
+<li>Periksa ID akun numerik yang ditampilkan, pilih sumber, dan mulailah pemantauan.</li>
+</ol>
+<p>Konverter ini membuka SQLite dalam mode baca saja, tidak melakukan pembaruan skema atau permintaan jaringan,
+dan tidak mencetak sesi tersebut. Konverter ini memeriksa versi skema, tipe tabel, satu
+baris sesi, IP/port/DC, dan panjang kunci. Masukan CLI dibatasi hingga 64 MiB; teks StringSession
+dibatasi hingga 4 KiB. Konversi panel mengunggah berkas ke server TgWitness
+yang terotentikasi, memprosesnya dalam memori, dan mengembalikan kredensial yang dinormalisasi ke
+browser tersebut tanpa menyimpan berkas asli yang diunggah. Gunakan HTTPS untuk server jarak jauh.</p>
+<p><strong>File yang dikonversi merupakan rahasia akses akun yang tidak terenkripsi.</strong> Simpanlah di tempat penyimpanan yang terlindungi
+dan jangan pernah mengunggahnya atau mengirimkannya ke layanan konversi pihak ketiga. TgWitness
+menyimpan sesi otorisasi di brankas terenkripsinya. Menyalin sesi tidak
+akan menciptakan otorisasi terpisah: jangan jalankan klien secara bersamaan dengan kunci otorisasi yang dikloning
+dan mengasumsikan pengiriman pembaruan yang independen.</p>
+<p>Konversi mentransfer otorisasi, bukan pesan asli, cache entitas, atau
+kursor pembaruan yang tahan lama. Konversi ini tidak memastikan pemulihan pembaruan saat proses dimulai ulang.</p>
+<h2 id="mtproto-telethon-and-proxies">MTProto, Telethon, dan proxy<a class="anchor" href="#mtproto-telethon-and-proxies" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>MTProto adalah protokol Telegram. Telethon adalah pustaka klien Python yang digunakan oleh TgWitness.
+MTProxy adalah proxy transportasi Telegram; SOCKS5 dan HTTP CONNECT menyediakan
+terowongan umum. Tidak ada yang menggantikan otentikasi akun.</p>
+<p>Simpan rute untuk setiap ruang kerja di <strong>Akun → Pengaturan → Pengaturan koneksi → Ubah rute koneksi</strong> sebelum
+masuk jika Anda memerlukan proxy. Pengaturan defaultnya adalah Langsung.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Rute</th>
+<th>Pengaturan</th>
+<th>Batasan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Langsung</td>
+<td>Tidak ada</td>
+<td>Telethon terhubung langsung ke Telegram</td>
+</tr>
+<tr>
+<td>SOCKS5</td>
+<td>Host, port, nama pengguna/kata sandi (opsional)</td>
+<td>python-socks 2.8.2, rdns diaktifkan</td>
+</tr>
+<tr>
+<td>HTTP CONNECT</td>
+<td>Host, port, nama pengguna/kata sandi (opsional)</td>
+<td>HTTP CONNECT biasa; TLS ke proxy itu sendiri belum diimplementasikan</td>
+</tr>
+<tr>
+<td>MTProxy</td>
+<td>Host, port, rahasia</td>
+<td>Transportasi Telethon eksperimental; 32 digit heksadesimal atau <code>dd</code> + 32 digit heksadesimal</td>
+</tr>
+</tbody>
+</table></div>
+<p>Rahasia TLS palsu <code>ee</code> ditolak. Normalisasi Telethon 1.45 dapat menghilangkan awalan
+dan domain, tetapi hal itu tidak mengimplementasikan TLS palsu. Tempelkan <code>tg://proxy?server=…&amp;port=…&amp;secret=…</code>
+atau <code>https://t.me/proxy?server=…&amp;port=…&amp;secret=…</code> dan pilih <strong>&quot;Isi bidang dari tautan</strong>&quot;.
+Ini akan memvalidasi dan mengisi kolom tanpa terhubung atau menyimpan; tinjau dan simpan
+rute secara terpisah. Kolom manual tetap tersedia. Lihat <a href="https://core.telegram.org/api/links#proxy-links">tautan proxy Telegram</a>.</p>
+<h3 id="public-proxies-supplied-by-your-installation">Proksi publik yang disediakan oleh instalasi Anda<a class="anchor" href="#public-proxies-supplied-by-your-installation" aria-label="Tautan ke bagian ini">#</a></h3>
+<p>Pengaturan koneksi mencakup daftar publik siap pakai dari
+<a href="https://github.com/SoliSpirit/mtproto">SoliSpirit/mtproto</a> dan
+<a href="https://github.com/zakky8/mtproto-proxy-pro">zakky8/mtproto-proxy-pro</a>. Snapshot yang disertakan
+berisi fakta titik akhir publik, atribusi sumber, dan tanggal unduhan, bukan
+klaim verifikasi dari kedua proyek tersebut. Alat ini berfungsi tanpa perlu mengambil data apa pun saat dimulai. Pilih
+satu entri, simpan rute, lalu uji koneksi Telegram sebelum masuk.</p>
+<p><strong>Pembaruan daftar publik</strong> mengambil dua umpan HTTPS tetap berdasarkan permintaan. Setiap respons
+dibatasi hingga 1 MiB dan 20 detik; pengalihan ditolak. Paling banyak 64 entri yang kompatibel
+per sumber disimpan, dengan deduplikasi antar sumber. Tautan yang tidak valid, literal IP pribadi/yang dicadangkan
+, nama host lokal, dan entri Fake TLS <code>ee</code> yang tidak didukung dilewati. Nama host
+publik akan diterjemahkan saat dipilih; setiap jawaban harus dapat dirutekan secara global dan
+IP yang dipilih akan dikunci dalam rute yang disimpan. Hal ini mencegah nama host umpan nantinya
+mengalihkan koneksi yang tersimpan ke alamat pribadi. Terapkan kembali sebuah entri untuk menerjemahkannya lagi.</p>
+<p>Setiap ruang kerja menyimpan snapshot sumber terakhir yang valid dalam format <code>public-proxies.json</code>. Respons sumber yang gagal,
+kosong, atau tidak kompatibel tetap mempertahankan entri dan cap waktu sebelumnya dari sumber tersebut.
+Pembaruan bersifat atomik, diserialisasikan, dan dibatasi satu upaya per menit per ruang kerja.
+Baik pembaruan maupun peninjauan daftar tidak mengubah rute yang dipilih. Ketersediaan masih
+memerlukan uji transportasi; pencantuman penyedia tidak menjadi bukti pengiriman Telegram yang lengkap.</p>
+<p>Unduhan daftar menggunakan koneksi HTTPS terpisah, secara default langsung. Atur
+<code>TGWITNESS_PROXY_FEED_PROXY</code> ke URL HTTP/SOCKS5 untuk merutekan permintaan ini melalui
+proksi unduhan; kedua varian pengumpul Compose meneruskannya. Tidak ada sesi Telegram, kredensial API,
+token panel, atau token bot yang dikirimkan ke penyedia layanan. MTProxy di ruang kerja tidak dapat menangani
+unduhan HTTP ini. Nama penyedia layanan, tanggal penyimpanan, dan rute unduhan diungkapkan
+di bagian <strong>&quot;Dari mana daftar ini berasal&quot;</strong>.</p>
+<p>Untuk mengganti daftar publik dengan katalog operator Anda sendiri, konfigurasikan pengaturan penggantian di bawah ini.
+Pengaturan ini menonaktifkan langganan eksternal sepenuhnya, termasuk ketika array <code>proxies</code>-nya kosong.</p>
+<p>Salin <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/proxies.config.example">katalog kosong</a>
+ke <code>proxy-config/proxies.json</code>
+dan tambahkan titik akhir publik yang telah Anda terapkan:</p>
+<pre><code class="language-json">{&quot;format&quot;: &quot;tgwitness-proxy-catalog-v1&quot;, &quot;proxies&quot;: [
+  {&quot;id&quot;: &quot;project-eu&quot;, &quot;label&quot;: &quot;Project EU&quot;,
+   &quot;link&quot;: &quot;tg://proxy?server=REPLACE_HOST&amp;port=443&amp;secret=REPLACE_SECRET&quot;}
+]}</code></pre>
+<p>Nilai-nilai contoh harus diganti. Maksimal 32 entri berbeda dapat diterima.
+Daftar yang terotentikasi mengembalikan label/host/port tanpa rahasia bersama; memilih salah satunya
+akan menyimpan kredensialnya ke dalam brankas ruang kerja. Ketersediaan belum diuji hingga
+dilakukan uji transportasi secara eksplisit. Katalog yang tidak valid memungkinkan konfigurasi manual.</p>
+<p>Peluncuran lokal: atur <code>TGWITNESS_PROXY_CATALOG</code> ke jalur JSON lokal. Docker:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.proxies.yaml up -d --build</code></pre>
+<p>Overlay dipasang sebagai <code>proxy-config</code> read-only; berkas harus dapat dibaca oleh UID kontainer 10001.
+Direktori tersebut dikecualikan dari Git, konteks build Docker, dan arsip sumber. Katalog ini
+mengonfigurasi akun-akun pengumpul; <a href="../witness/">bot saksi</a> menggunakan rute
+HTTP/SOCKS5-nya sendiri, bukan MTProxy.</p>
+<p>Jika proxy gagal, TgWitness tidak akan beralih ke Direct. Jeda pemantauan sebelum
+mengubah rute. Penyimpanan akan memutuskan koneksi klien lama dan membatalkan proses login yang belum selesai;
+klien baru akan menggunakan rute yang disimpan. Ikatan jurnal/sesi akun tetap berlaku.
+Pengaturan akan menggantikan rute sebelumnya: masukkan kembali kredensial proxy saat mengeditnya.</p>
+<p>Kredensial dienkripsi menggunakan <code>network.enc</code>. API tidak mengembalikan nama pengguna,
+kata sandi, atau rahasia. Catatan yang ditandatangani berisi jenis rute dan apakah kredensial
+terdapat di dalamnya, tanpa menyertakan titik akhir dan rahasia. Operator dapat melihat titik akhir
+di panel. Bidang rahasia akan dihapus setelah menyimpan, mengunci, atau beralih antar ruang kerja.</p>
+<p><strong>Uji koneksi Telegram</strong>, juga tersedia sebelum masuk, membuka dan menutup koneksi Telegram sementara
+yang tidak sah melalui rute tersebut. Fitur ini tidak menghubungi situs web pemeriksaan IP.
+Keberhasilan uji ini menunjukkan terjalinnya konektivitas transportasi, bukan akses ke grup,
+pengiriman yang lengkap, atau anonimitas.</p>
+<p>Proksi ini berlaku untuk koneksi klien Telegram, termasuk unduhan media dari server distribusi (DC) Telegram.
+Alat-alat seperti browser, pip, SSH, dan TSA yang dijalankan secara manual memiliki rute terpisah.
+Nama host proksi dapat diresolusi secara lokal. <code>rdns</code> memengaruhi nama host tujuan;
+Telegram sering kali menyediakan alamat IP numerik dari server distribusi (DC).</p>
+<p>SOCKS5 dan HTTP CONNECT biasa tidak mengenkripsi kredensial proxy atau
+terowongan klien-ke-proxy itu sendiri. MTProto secara terpisah melindungi lalu lintas Telegram. Gunakan
+saluran aman yang sesuai ke proxy pada jaringan yang tidak tepercaya. Grup pribadi
+adalah obrolan cloud; MTProto tidak mengubahnya menjadi Obrolan Rahasia yang dienkripsi ujung-ke-ujung.</p>
+<h2 id="encryption-and-signatures">Enkripsi dan tanda tangan<a class="anchor" href="#encryption-and-signatures" aria-label="Tautan ke bagian ini">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Lapisan</th>
+<th>Telah diterapkan</th>
+<th>Tanggung jawab operator</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lalu lintas Telegram</td>
+<td>Telethon MTProto</td>
+<td>Kepercayaan, rute, dan ketersediaan platform</td>
+</tr>
+<tr>
+<td>Panel web</td>
+<td>Token pembawa, pengaturan default loopback, batas permintaan</td>
+<td>HTTPS atau terowongan SSH untuk akses jarak jauh</td>
+</tr>
+<tr>
+<td>Rahasia</td>
+<td>Fernet untuk kredensial API, sesi, kredensial proxy, dan kunci pribadi penandatanganan</td>
+<td>Lindungi kunci dekripsi dan host yang sedang berjalan</td>
+</tr>
+<tr>
+<td>Kunci brankas</td>
+<td>Kunci lokal, atau kunci utama eksternal untuk instalasi baru</td>
+<td>Penyimpanan terpisah yang dilindungi dan cadangan kunci</td>
+</tr>
+<tr>
+<td>Pesan dan lampiran</td>
+<td>Penyimpanan aplikasi dalam bentuk teks biasa</td>
+<td>Disk/volume terenkripsi</td>
+</tr>
+<tr>
+<td>ZIP/JSONL/CSV/HTML</td>
+<td>Pemeriksaan integritas, tanpa enkripsi konten</td>
+<td>Lindungi salinan yang diekspor dan transfer</td>
+</tr>
+<tr>
+<td>Asal-usul dan waktu</td>
+<td>Jurnal yang ditandatangani, tanda terima proses, alat RFC 3161</td>
+<td>Kunci tepercaya, titik pemeriksaan independen/TSA, dan prosedur penyimpanan</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Perlindungan penyimpanan</strong> di Akun menampilkan status-status ini. Token panel adalah
+kunci akses, bukan kata sandi enkripsi. Satu token mengontrol semua ruang kerja;
+ruang kerja bukanlah pengguna terpisah atau penyewa yang terisolasi.</p>
+<p>Demo sintetis yang dimulai secara eksplisit dan terisolasi dapat terbuka secara otomatis melalui
+koneksi loopback langsung. Fitur ini menggunakan kemampuan masa hidup proses terpisah; fitur ini tidak
+mengungkapkan token panel yang dikonfigurasi maupun memberikan akses ke ruang kerja yang sebenarnya. Permintaan jarak jauh,
+melalui proxy, atau lintas asal tidak dapat memperoleh/menggunakan kemampuan masuk otomatis ini.
+Kemudahan ini tidak menghilangkan batasan otentikasi untuk data akun yang sebenarnya.</p>
+<p>BitLocker, LUKS, FileVault, atau volume terenkripsi yang dikelola dapat melindungi penyimpanan sesuai
+dengan model ancaman masing-masing. Seorang administrator pada mesin yang sedang berjalan dan tidak terkunci
+masih dapat membaca data. Sertakan SQLite WAL/SHM, media, ekspor sementara, swap, cadangan,
+dan unduhan browser dalam perencanaan penyimpanan. Volume Docker tidak otomatis terenkripsi
+hanya karena statusnya sebagai volume. TgWitness tidak mengimplementasikan SQLCipher atau enkripsi objek.</p>
+<h2 id="external-master-key">Kunci utama eksternal<a class="anchor" href="#external-master-key" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Untuk instalasi <strong>baru</strong>, letakkan kunci utama di luar direktori data.
+Hal ini tidak secara otomatis memigrasikan brankas kunci lokal yang sudah ada. Siapkan direktori kunci
+yang hanya dapat diakses oleh identitas layanan, lalu jalankan:</p>
+<pre><code class="language-sh">python -m tgwitness.security create-master-key /private/keys/tgwitness-master.key
+export TGWITNESS_VAULT_KEY_FILE=/private/keys/tgwitness-master.key
+python -m tgwitness --data-dir /private/observations/new-case</code></pre>
+<p>PowerShell, menggunakan lingkungan proyek yang telah diinstal:</p>
+<pre><code class="language-powershell">python -m tgwitness.security create-master-key E:\PrivateKeys\tgwitness-master.key
+$env:TGWITNESS_VAULT_KEY_FILE = &#x27;E:\PrivateKeys\tgwitness-master.key&#x27;
+python -m tgwitness --data-dir E:\PrivateData\new-case</code></pre>
+<p>Di Docker, pasang berkas tersebut sebagai read-only di luar <code>/data</code>, misalnya di
+<code>/run/secrets/tgwitness-master.key</code>, dan atur variabel lingkungan ke jalur tersebut.
+UID layanan harus memiliki izin baca terhadap berkas tersebut. Sampaikan jalurnya, bukan byte kunci, melalui
+berkas lingkungan/konfigurasi.</p>
+<p>Setiap ruang kerja menerima salt publik acak dan kunci Fernet-nya sendiri yang diturunkan melalui
+HKDF-SHA256. <code>vault.external.json</code> menyimpan metadata derivasi, bukan kunci utama.
+Kunci yang hilang atau salah akan menyebabkan kegagalan saat memulai tanpa menggantinya secara diam-diam. Simpan baik
+metadata salt maupun kunci utama untuk pemulihan.</p>
+<p>Semua ruang kerja berasal dari kunci utama yang sama; jika kunci tersebut bocor, hal itu akan memengaruhi seluruh
+instalasi. Proses yang sedang berjalan dapat mendekripsi rahasia. Ini bukanlah HSM atau
+KDF kata sandi. Kata sandi buatan manusia yang sembarangan tidak diterima sebagai pengganti kunci acak.</p>
+<p>Simpan kunci yang ada untuk instalasi yang sudah ada hingga migrasi yang disengaja
+dilaksanakan dan diverifikasi. Menghapus <code>vault.key</code> atau mengganti kunci utama dapat menghancurkan
+akses ke sesi/kunci penandatanganan. Simpan cadangan terenkripsi dan kunci secara terpisah, serta
+uji pemulihan di instance yang terisolasi.</p>
+<h2 id="sources-and-verification-scope">Sumber dan ruang lingkup verifikasi<a class="anchor" href="#sources-and-verification-scope" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Ditinjau pada 26 Oktober 2026:</p>
+<ul>
+<li>https://core.telegram.org/api/auth</li>
+<li>https://core.telegram.org/api/obtaining_api_id</li>
+<li>https://docs.telethon.dev/en/stable/basic/signing-in.html</li>
+<li>https://docs.telethon.dev/en/stable/concepts/sessions.html</li>
+<li>https://core.telegram.org/mtproto/mtproto-transports</li>
+<li>https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/SourceFiles/storage/storage_account.cpp</li>
+<li>Telethon 1.45.0: SQLiteSession, StringSession, <code>Connection._proxy_connect</code>,
+    <code>TcpMTProxy.normalize_secret</code>, dan metode pengunduhan.</li>
+</ul>
+<p>Pengujian lokal mencakup fixture loopback SOCKS5/HTTP CONNECT, sesi SQLite sintetis,
+isolasi rute, pengecualian rahasia, dan penolakan kunci yang hilang. Pengujian ini tidak memastikan
+interoperabilitas Telegram/proksi yang sebenarnya atau perilaku MTProxy secara langsung. Lihat
+<a href="../verification/">VERIFICATION.md</a> dan <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">LIVE_ACCEPTANCE.md</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/CONNECTION-SECURITY.md">Edit halaman ini di GitHub ↗</a><a class="next-guide" href="../deployment/"><span>Langkah selanjutnya</span><strong>Penerapan →</strong></a><p>Panduan-panduan ini menjelaskan implementasi saat ini. Hasil validasi dan celah yang masih ada didokumentasikan secara terpisah. <a href="../verification/">Apa yang telah diuji →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Di halaman ini"><p class="nav-label">Di halaman ini</p><a href="#authentication-methods">Metode otentikasi</a><a href="#import-a-telethon-session-file">Impor berkas sesi Telethon</a><a href="#mtproto-telethon-and-proxies">MTProto, Telethon, dan proxy</a><a href="#encryption-and-signatures">Enkripsi dan tanda tangan</a><a href="#external-master-key">Kunci utama eksternal</a><a href="#sources-and-verification-scope">Sumber dan ruang lingkup verifikasi</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Sumber terbuka · Dapat dijalankan di komputer Anda</span><a href="../../../../LICENSE">Lisensi MIT</a><a href="../notice/">Pemberitahuan operator</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Keamanan</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Menunggu pesan", "Step through a fictional send, edit and delete.": "Ikuti langkah demi langkah proses pengiriman, pengeditan, dan penghapusan fiktif.", "No observations yet. Start the sequence or advance one event.": "Belum ada catatan. Mulai urutan atau lanjutkan ke peristiwa berikutnya.", "Meet at 10:00": "Bertemu pukul 10.00", "A new message is visible in the chat.": "Sebuah pesan baru terlihat di obrolan.", "Record 1 appended: the collector observed the original message.": "Catatan 1 ditambahkan: pengumpul telah mengamati pesan asli.", "Meet at 11:00": "Bertemu pukul 11.00", "The current text changes. The earlier observation stays.": "Teks saat ini berubah. Pengamatan sebelumnya tetap berlaku.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Catatan 2 ditambahkan: pengeditan ini merupakan pengamatan baru. Catatan 1 masih memuat teks aslinya.", "Message deleted": "Pesan telah dihapus", "The message has disappeared from the chat view.": "Pesan tersebut telah menghilang dari tampilan obrolan.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Catatan 3 ditambahkan: pemberitahuan penghapusan disimpan bersama kedua versi yang teramati.", "0 records": "0 catatan", "1 record": "1 catatan", "2 records": "2 catatan", "3 records": "3 catatan", "Complete / {n} of 3": "Lengkap / {n} dari 3", "Step / {n} of 3": "Langkah / {n} dari 3", "Pause": "Jeda", "Replay sequence": "Urutan pemutaran ulang", "Play sequence": "Urutan pemutaran", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Contoh statis tersedia. Untuk menghitung hash secara interaktif, buka halaman ini melalui HTTPS atau pratinjau localhost yang mendukung Web Crypto.", "No record supplied": "Tidak ada catatan yang disediakan", "Tail removed": "Bagian akhir dihapus", "≠ saved hash": "≠ hash yang disimpan", "Rebuilt · different hash": "Dibangun ulang · hash berbeda", "= saved hash": "= hash yang disimpan", "Same length and matching head.": "Panjang yang sama dan judul yang sesuai.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Ketiga hash yang dihitung cocok dengan hash yang disimpan. Sampel ini sesuai dengan batas tiga catatan yang disimpan.", "Same saved head; the journal prefix fails verification.": "Header yang sama telah disimpan; awalan jurnal gagal diverifikasi.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Catatan 2 tidak lagi cocok dengan hash yang tersimpan. Memeriksa hanya head terakhir yang tersimpan akan melewatkan hal ini; verifikator memeriksa setiap catatan.", "Head differs from the retained checkpoint.": "Header berbeda dari checkpoint yang disimpan.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Hash yang dibangun ulang saling terhubung, tetapi header terakhir telah berubah. Titik pemeriksaan yang disimpan menolak riwayat ini. Tanda tangan asli juga akan gagal pada catatan yang diubah.", "Too short: 2 supplied records \u003c 3 retained records.": "Terlalu singkat: 2 catatan yang disediakan \u003c 3 catatan yang disimpan.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Kedua hash yang tersisa masih cocok. Titik pemeriksaan yang disimpan mengungkapkan bagian akhir yang hilang. Tanpa batas awal tersebut, awalan yang lebih pendek ini saja tidak akan mengungkapkan adanya penghilangan tersebut.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Perhitungan hash tidak tersedia di browser ini. Rumus dan penjelasan statis di bawah ini tetap tersedia.", "{n} records": "{n} catatan", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Diterima: jumlahnya bertambah, tanda tangan terverifikasi, dan kuncinya cocok. Saksi mempertahankan batas baru ini.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: jawaban yang ditandatangani melaporkan jumlah catatan yang lebih sedikit daripada titik pemeriksaan terakhir yang diterima. TgWitness mencatat masalah tersebut dan mempertahankan batas yang diterima sebelumnya.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: jumlahnya tidak berubah, tetapi cabangnya berbeda. Saksi mencatat ketidaksesuaian tersebut dan mempertahankan batas yang sebelumnya telah disetujui.", "No answer": "Tidak ada jawaban", "boundary unknown": "batas tidak diketahui", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Tidak ada respons: TgWitness mencatat kegagalan pemeriksaan tersebut. TgWitness tidak dapat memastikan status terkini dari pengumpul data. Jika TgWitness masih dapat mengakses Bot API dan kebijakan publikasinya mengizinkan, TgWitness dapat mempublikasikan kegagalan tersebut.", "Send {n}": "Kirim {n}", "Edit {n}": "Edit {n}", "Delete {n}": "Hapus {n}", "Both accounts captured all six expected observations in this example.": "Kedua akun tersebut berhasil menangkap keenam pengamatan yang diharapkan dalam contoh ini.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Akun B masih berhasil menangkap 6 dari 6 pesan. Dua tanda terima membutuhkan waktu lebih lama. Rasio penangkapan dan penundaan tanda terima menjawab pertanyaan yang berbeda.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Akun B berhasil menangkap 5 dari 6 pesan sebelum batas waktu (83,3%). Pengeditan yang hilang tidak memiliki penundaan yang terukur. Hasil ini hanya menggambarkan enam tindakan yang dikendalikan.", "not observed by cutoff": "tidak terdeteksi pada batas waktu", "{s} seconds": "{s} detik", "Exact values follow in the table.": "Nilai-nilai yang tepat tercantum dalam tabel berikut.", "{s} s": "{s} s", "Not observed": "Tidak teramati", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Empat obrolan memberikan pengamatan yang berbeda-beda. Ikuti catatan sumber untuk setiap koneksi; jangan mengaitkan posting saluran tersebut dengan pengguna 71001 tanpa pengirim yang teridentifikasi.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Catatan #146 dan #205 menunjukkan ID pengirim yang sama, yaitu 71001. Hal ini menghubungkan postingan yang teramati dari sebuah akun Telegram di dua obrolan. Catatan ini tidak mengidentifikasi orang di dunia nyata atau mengaitkan postingan tersebut dengan saluran tertentu.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Tautan tujuan pay.example.invalid/new muncul dalam catatan grup #146, keyboard bot #173, pengeditan saluran #188, dan pesan pribadi #205. Tautan tujuan yang berulang menghubungkan materi tersebut; hal ini tidak membuktikan adanya kendali bersama atas akun-akun tersebut.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Tanda terima media yang telah diselesaikan #151 dan #209 memiliki nilai SHA-256 lengkap yang sama dalam kasus fiktif ini. Bandingkan byte yang sebenarnya dan catatan pesan yang terkait. File yang cocok tersebut tidak mengidentifikasi pembuatnya atau membuktikan siapa yang meneruskannya.", "the encrypted off-site copy": "salinan terenkripsi di luar lokasi", "notifications": "pemberitahuan", "checkpoint hashes for timestamps": "hash checkpoint untuk cap waktu", "signed checkpoints for the witness": "titik pemeriksaan yang ditandatangani untuk saksi", "Switched on in this example": "Diaktifkan dalam contoh ini", "Optional · off by default": "Opsional · dinonaktifkan secara default", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Yang tersisa di mesin ini: koneksi Telegram dan {list}. Tidak ada yang lain.", "Default: only the Telegram connection leaves this machine.": "Pengaturan default: hanya koneksi Telegram yang keluar dari mesin ini.", "{done} of {total} done": "{done} dari {total} selesai", "Mark step {n} as done": "Tandai langkah {n} sebagai selesai", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Teks", "Copied": "Disalin", "Command copied.": "Perintah telah disalin.", "Selected — Ctrl/Cmd+C": "Pilih — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Perintah telah dipilih. Salin secara manual.", "Command copied to clipboard.": "Perintah telah disalin ke papan klip.", "Select text": "Pilih teks", "Clipboard unavailable. Command selected; copy it manually.": "Clipboard tidak tersedia. Perintah telah dipilih; salin secara manual.", "A message arrives. The first observation is saved.": "Sebuah pesan masuk. Pengamatan pertama disimpan.", "The time changes. Both captured versions stay.": "Waktu berubah. Kedua versi yang terekam tetap ada.", "The message disappears. The captured history remains.": "Pesan tersebut menghilang. Riwayat yang terekam tetap ada.", "Pause example animation": "Jeda animasi contoh", "Play example animation": "Putar animasi contoh", "Play": "Putar", "Full-size workspace screenshot": "Tangkapan layar ruang kerja ukuran penuh", "Workspace screenshot · fictional data": "Tangkapan layar ruang kerja · data fiktif", "Close": "Tutup", "Close screenshot": "Tutup tangkapan layar", "Scrollable full-size screenshot": "Tangkapan layar ukuran penuh yang dapat digulir", "Enlarge: {name}": "Perbesar: {name}", "View full size": "Lihat ukuran penuh"}</script>
+</body></html>

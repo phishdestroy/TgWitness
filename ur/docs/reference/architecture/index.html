@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="ur" dir="rtl" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>معمارِی | TgWitness</title>
+<meta name="description" content="جمع کرنے والے، پینل، جرنل، ورکرز اور ویٹنس کے اجزاء، اور ڈیٹا ان کے درمیان کیسے منتقل ہوتا ہے۔"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/architecture/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="ur_PK">
+<meta property="og:title" content="معمارِی | TgWitness"><meta property="og:description" content="جمع کرنے والے، پینل، جرنل، ورکرز اور ویٹنس کے اجزاء، اور ڈیٹا ان کے درمیان کیسے منتقل ہوتا ہے۔">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/ur/docs/reference/architecture/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/architecture/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/architecture/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/architecture/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/architecture/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/architecture/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/architecture/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/architecture/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/architecture/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/architecture/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/architecture/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/architecture/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/architecture/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/architecture/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/architecture/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/ur/docs/reference/architecture/", "url": "https://phishdestroy.github.io/TgWitness/ur/docs/reference/architecture/", "name": "معمارِی | TgWitness", "description": "جمع کرنے والے، پینل، جرنل، ورکرز اور ویٹنس کے اجزاء، اور ڈیٹا ان کے درمیان کیسے منتقل ہوتا ہے۔", "inLanguage": "ur", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "گھر", "item": "https://phishdestroy.github.io/TgWitness/ur/"}, {"@type": "ListItem", "position": 2, "name": "دستاویزات", "item": "https://phishdestroy.github.io/TgWitness/ur/docs/"}, {"@type": "ListItem", "position": 3, "name": "حوالہ", "item": "https://phishdestroy.github.io/TgWitness/ur/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "معمارِی", "item": "https://phishdestroy.github.io/TgWitness/ur/docs/reference/architecture/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">مواد پر جائیں</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / دستاویزات</span></a>
+<nav aria-label="رہنما"><a href="../../concepts/">ویژول گائیڈ</a><a href="../../">تمام رہنما</a><a href="../">حوالہ</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="زبان"><span aria-hidden="true">◍</span> اردو</summary><div class="lang-list"><a href="../../../../docs/reference/architecture/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/architecture/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/architecture/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/architecture/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/architecture/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/architecture/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/architecture/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/architecture/" hreflang="fa" lang="fa">فارسی</a><a href="./" hreflang="ur" lang="ur" aria-current="true">اردو</a><a href="../../../../hi/docs/reference/architecture/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/architecture/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/architecture/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/architecture/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="ہلکے اور گہرے تھیم کے درمیان سوئچ کریں"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="رہنما"><a href="../../../guides/modes.html">مodes، منظرنامے اور شواہد کی سطحیں</a><p class="nav-label">ابتدائی اقدامات</p><a href="../../start/">چند منٹ میں شروع کریں</a><a href="../../accounts/">اکاؤنٹ منسلک کریں</a><a href="../../proxies/">ایک پروکسی منتخب کریں</a><a href="../../exports/">ایکسپورٹ اور تصدیق کریں</a><p class="nav-label">شواہد کو سمجھیں</p><a href="../../concepts/">دیکھیں کہ شواہد کیسے کام کرتا ہے</a><a href="../../cases/">تمام چیٹس میں تفتیش کریں</a><a href="../../security/">اسے محفوظ رکھیں</a><p class="nav-label">مزید آگے بڑھیں</p><a href="../../witness/">ویٹنس بوٹ قائم کریں</a><a href="../../server/">اسے چلتا رکھیں</a><a href="../../troubleshooting/">پتہ لگائیں کہ کیا غلط ہوا</a></nav><nav class="wiki-nav" aria-label="حوالہ"><p class="nav-label"><a class="nav-label-link" href="../">حوالہ</a></p><details class="wiki-group"><summary>سیٹ اپ</summary><a href="../quickstart/">تیزی سے آغاز</a><a href="../accounts/">اکاؤنٹس اور سیشن فارمیٹس</a><a href="../connection/">کنیکشن، پراکسیز اور ڈیٹا کی حفاظت</a><a href="../deployment/">نفاذ</a></details><details class="wiki-group"><summary>جمع کریں</summary><a href="../collection/">جمع کرنے کا طریقہ</a><a href="../operations/">ورک فلو اور آپریشنز</a><a href="../investigation/">تحقیقاتی موڈ</a><a href="../features/">خصوصیات اور حدود</a></details><details class="wiki-group"><summary>شواہد</summary><a href="../how-it-works/">شواہد کیسے کام کرتے ہیں</a><a href="../evidence/">شواہد کا فارمیٹ</a><a href="../witness/">آزاد شاہد</a><a href="../timestamp/">ٹائم اسٹیمپس</a></details><details class="wiki-group" open><summary>سیکیورٹی اور پروجیکٹ</summary><a href="../security/">سیکیورٹی اور ڈیٹا ہینڈلنگ</a><a href="./" aria-current="page">معمارِی</a><a href="../verification/">کیا جانچا گیا ہے</a><a href="../license/">لائسنس اور فنِ تعمیر کی عدم مطابقت کا نوٹس</a><a href="../notice/">آپریٹر کی عدم مطابقت کا نوٹس</a><a href="../changelog/">تبدیلیوں کا ریکارڈ</a></details></nav><p class="sidebar-note">v0.7.0<br>اوپن سورس · آپ کی مشین پر چلتا ہے</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="رہنما"><a href="../../../">گھر</a> <span aria-hidden="true">/</span> <a href="../../">دستاویزات</a> <span aria-hidden="true">/</span> <a href="../">حوالہ</a> <span aria-hidden="true">/</span> <span aria-current="page">معمارِی</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">دستاویزات میں تلاش کریں</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="پراکسی، ہیش چین، ٹوکن یا ویٹنس آزمائیں…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="خلاصہ تلاش" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">رہنما اور حوالہ جات میں تلاش کرنے کے لیے ایک لفظ ٹائپ کریں۔ تلاش آپ کے براؤزر میں ہی رہتی ہے۔</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">حوالہ / سیکیورٹی اور پروجیکٹ</p><h1>معمارِی</h1><p class="guide-outcome">جمع کرنے والے، پینل، جرنل، ورکرز اور ویٹنس کے اجزاء، اور ڈیٹا ان کے درمیان کیسے منتقل ہوتا ہے۔</p><div class="wiki-body"><p>ایک پائتھن پراسیس FastAPI پینل اور کسی بھی تعداد میں الگ تھلگ ورک اسپیسز کو ہوسٹ کرتا ہے، جن میں سے ہر ایک میں Telethon یوزر اکاؤنٹ کلائنٹ ہوتا ہے۔
+SQLite ایک صرف-ضم (append-only) شدہ دستخط شدہ ایونٹ جرنل اور قابلِ تبدیلی آپریشنل ترتیبات کو محفوظ رکھتا ہے۔
+ایک انکرپٹڈ والٹ میں API کی تفصیلات، StringSession، اور دستخطی کلید محفوظ ہوتی ہے۔ فرنٹ اینڈ محض بنڈل شدہ HTML/CSS/JavaScript پر مشتمل ہے: Node بلڈ، CDNs، یا فرنٹ اینڈ ڈاؤن لوڈز کی ضرورت نہیں ہے۔</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>ماڈیول</th>
+<th>ذمہ داری</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>collector.py</td>
+<td>تصدیق، ڈائیلاگ کے انتخاب، اپ ڈیٹس، اسنیپ شاٹس، میڈیا قطار، کنکشن کی نگرانی</td>
+</tr>
+<tr>
+<td>interactions.py / telegram_client.py</td>
+<td>مخصوص پینل ایکشنز، دستخط شدہ رسیدیں، مستقل درخواست آئی ڈیز اور ٹاسک-مقامی کال بیک/جوائن ری ٹرائی پالیسی</td>
+</tr>
+<tr>
+<td>پیغام_مواد.پی ای وائی</td>
+<td>مشاہدہ کے قابل پیغامات کا موازنہ، ٹرانسپورٹ رسائی میٹا ڈیٹا کو خارج کرتے ہوئے</td>
+</tr>
+<tr>
+<td>workers.py</td>
+<td>منسوخی کی صفائی سے پہلے ایکسپورٹ فائل ورکرز کے مکمل ہونے کا انتظار کریں</td>
+</tr>
+<tr>
+<td>store.py</td>
+<td>WAL ٹرانزیکشنز، ترتیب وار واقعہ زنجیر، استفساری فلٹرز، عملیاتی ترتیبات</td>
+</tr>
+<tr>
+<td>security.py</td>
+<td>نجی فائل کی تخلیق، انکرپٹڈ والٹ، Ed25519 دستخط، سنگل پروسیس لاک</td>
+</tr>
+<tr>
+<td>evidence.py</td>
+<td>مکمل جرنل کی برآمد، مشتقات، چیک پوائنٹس، منسلکات کی تصدیق</td>
+</tr>
+<tr>
+<td>verify.py</td>
+<td>خودمختار، صرف پڑھنے کے لیے تصدیق کنندہ (stdlib + کرپٹوگرافی): آرکائیوز، کوریج، ویٹنس جرنلز اور چینل پوسٹس، پروفائل فائلیں</td>
+</tr>
+<tr>
+<td>app.py</td>
+<td>تصدیق شدہ API، لائف سائیکل، درخواست کی توثیق، جامد پینل</td>
+</tr>
+<tr>
+<td>profiles.py</td>
+<td>متعدد الگ الگ اکاؤنٹ کلیکٹرز، مشترکہ پینل ٹوکن، ہر ورک اسپیس کا الگ لائف سائیکل</td>
+</tr>
+<tr>
+<td>provenance.py</td>
+<td>دستخط شدہ حصولی-چلانے والی شناخت، کوڈ اور انحصار کی پیمائشیں</td>
+</tr>
+<tr>
+<td>network.py</td>
+<td>ہر ورک اسپیس کے لیے تصدیق شدہ راستے؛ حذف شدہ حیثیت اور شواہد؛ ٹیلی تھون ٹرانسپورٹ کے اختیارات</td>
+</tr>
+<tr>
+<td>sessions.py</td>
+<td>نظر ثانی شدہ Telethon SQLite خاکوں کی آف لائن صرف پڑھنے کے قابل تبدیلی</td>
+</tr>
+<tr>
+<td>account_import.py</td>
+<td>میکین میں سپورٹ کی جانے والی اکاؤنٹ فائلوں اور JSON کی شناخت اور معیاری کاری</td>
+</tr>
+<tr>
+<td>tdata.py</td>
+<td>حدود شدہ جدید TData ZIP ریڈر، چیک سم/ڈیکرپشن کی توثیق، کوئی استخراج نہیں</td>
+</tr>
+<tr>
+<td>doctor.py</td>
+<td>مقامی تیاری کی جانچ بغیر جمع، لاگ ان یا پیکیج انسٹالیشن کے</td>
+</tr>
+<tr>
+<td>download.py</td>
+<td>تصدیق شدہ اسٹریمنگ ایکسپورٹ ڈاؤن لوڈ محدود ریڈز کے ساتھ اور اوور رائٹس کے بغیر</td>
+</tr>
+<tr>
+<td>monitoring.py</td>
+<td>ورک اسپیس کی سطح پر ایونٹ پالیسی اور ہر قسم کے اٹیچمنٹ کے قواعد کی توثیق، ہینڈلرز، اسٹیٹس اور دستخط شدہ رسیدیں شیئر کی گئی ہیں۔</td>
+</tr>
+<tr>
+<td>scope.py</td>
+<td>مشاہدے کا دائرہ (منتخب چیٹس، ٹیلیگرام فولڈر، پورا اکاؤنٹ)، ماخذ کی اقسام، استثنا، دوبارہ جانچ کی سطحیں</td>
+</tr>
+<tr>
+<td>dossier.py</td>
+<td>ہر چیٹ کے لیے محفوظ شدہ ریکارڈز کی بنیاد پر افراد کے پروفائلز: حقائق ریکارڈ حوالہ جات کے ساتھ، اوتار کا SHA-256/pHash، ذکر کی استخراج</td>
+</tr>
+<tr>
+<td>witness_api.py</td>
+<td>صرف پڑھنے کے لیے وِٹنس ٹوکنز اور وہ دستخط شدہ جرنل ہیڈ جو وہ حاصل کر سکتے ہیں</td>
+</tr>
+<tr>
+<td>witness.py</td>
+<td>آزاد شاہد کا عمل: اپنی کلید اور جرنل، ہیڈ چیکس، دستخط شدہ چینل پوسٹس، برآمد</td>
+</tr>
+<tr>
+<td>alerts.py</td>
+<td>اطلاع رسانی کے نوٹیفیکیشنز اور پینل کی نوٹیفیکیشن فہرست</td>
+</tr>
+<tr>
+<td>logging_config.py</td>
+<td>کنسول لاگنگ اور بغیر ونڈو کے لانچز کے لیے گردش پذیر سرور تشخیصی ٹولز</td>
+</tr>
+<tr>
+<td>static/</td>
+<td>جوابی انٹرفیس، مقامی رسائی گیٹ، فلٹرز، تفصیلات، برآمدات، اکاؤنٹ سیٹ اپ</td>
+</tr>
+<tr>
+<td>demo.py</td>
+<td>صاف طور پر لیبل شدہ مصنوعی جرنل، حقیقی مجموعے سے الگ</td>
+</tr>
+</tbody>
+</table></div>
+<p>مشاہدے کے ہینڈلرز کنکشن سے پہلے رجسٹر کیے جاتے ہیں۔ لائیو کلیکشن فعال کلائنٹ شناختی نام، واضح چلنے والی حالت، فعال ذرائع یا مشاہدے کے دائرہ کار (فولڈر یا پورے اکاؤنٹ موڈز اپنی پہلی اپ ڈیٹ پر ایک نئے چیٹ کو بطور ماخذ شامل کرتے ہیں)، اور ایونٹ پالیسی کے ذریعے کنٹرول کی جاتی ہے۔ مسترد شدہ اور تبدیل شدہ کلائنٹس لائیو اپ ڈیٹس میں حصہ نہیں ڈال سکتے۔ خام ردعمل اور رکنیت کی اپ ڈیٹس
+نظر کی حد کو برقرار رکھتی ہیں۔ آنے والے پیغام کا مواد اور اس کا پائیدار میڈیا کام
+ایک ساتھ محفوظ کیا جاتا ہے۔ کام اصل TL ڈسکرپٹر کو برقرار رکھتے ہیں اور اس کے ہیش کو
+دستخط شدہ پیغام کے مشاہدے سے منسلک کرتے ہیں۔ بھیجنے والے/ایڈیٹر/مٹانے والے کے معنی الگ کیے جاتے ہیں۔</p>
+<p>ہر ورک اسپیس ایک اکاؤنٹ قبول کرتا ہے اور اس کی اپنی ڈائریکٹری اور دستخطی شناخت ہوتی ہے۔ مطابقت کے لیے مرکزی ورک اسپیس روٹ پر ہی رہتا ہے؛ اضافی ورک اسپیس profiles/&lt;id&gt;/ میں موجود ہوتے ہیں۔ ایک بیئرر ٹوکن پوری تنصیب کو کنٹرول کرتا ہے؛ ورک اسپیس علیحدہ اجازت نامہ یافتہ کرایہ دار نہیں ہیں۔ پروسیس لاکس ڈائریکٹریز کا تحفظ کرتے ہیں؛ ڈیٹا بیس لاکس ایونٹ داخل کرنے کو ترتیب وار انجام دیتے ہیں۔ ہر اپنڈ (append) ایک ساتھ (synchronously) SQLite WAL میں FULL ہم وقت موڈ کے ساتھ کمٹ ہوتا ہے۔ ایونٹ اپ ڈیٹ/ڈیلیٹ ٹریگرز عام ایپلیکیشن ترمیمات کو روکتے ہیں؛ فائل سسٹم کے منتظمین اعتماد کی حد کے اندر رہتے ہیں۔</p>
+<p>API کی اجازت ایک بیئرر ٹوکن ہے۔ لاگ ان کے عمل سیریلائزڈ اور وقتی حد کے پابند ہیں۔ اکاؤنٹ اپ لوڈز کے لیے ایک مخصوص 12 MiB انکوڈڈ باڈی کی حد اور 8 MiB ڈی کوڈڈ فائل کی حد استعمال ہوتی ہے؛ معمول کے API درخواستوں کے لیے 16 KiB کی حد برقرار رہتی ہے۔ کنورژن ایک ورکر تھریڈ میں چلتا ہے، اپ لوڈز کو میموری میں رکھتا ہے، اور تصدیق شدہ براؤزر کو معیاری کردہ ان پٹ واپس کرتا ہے۔ QR لاگ ان میں ہر ورک اسپیس کے لیے ایک عارضی شناخت کنندہ، مختصر المدتی ٹاسک، اور واضح منسوخی ہوتی ہے۔ صرف منظور شدہ اجازت نامہ فعال کلائنٹ بنتا ہے۔
+Telegram FloodWait ایک Retry-After ویلیو کے ساتھ واپس کیا جاتا ہے؛ کریڈینشلز اور خام RPC ایرر میسجز API ایررز میں ظاہر نہیں کیے جاتے۔ ایکسپورٹس async ایونٹ لوپ کے باہر چلتی ہیں اور ہر ورک اسپیس کے لیے سیریلائز کی جاتی ہیں۔ یہ ایک مستحکم ریڈ سنپ شاٹ اسٹریم کرتی ہیں، اور جاری WAL رائٹس کے ساتھ موجود رہ سکتی ہیں۔ ورک اسپیس کلیکٹرز پراسیس/ایونٹ لوپ شیئر کرتے ہیں۔</p>
+<p>موجودہ ہسٹری کے سنپ شاٹس اور لائیو اپ ڈیٹس ایک دوسرے میں شامل ہو سکتے ہیں۔ دونوں الگ مشاہدات ہیں، جنہیں ماخذ کے مطابق لیبل کیا گیا ہے؛ ڈپلیکیٹس کو خاموشی سے ضم نہیں کیا جاتا۔ غائب آئی ڈیز، من گھڑی ہوئی حذف شدہ عبارت، زبردستی ممبر کی فہرست سازی، یا خودکار گروپ شمولیت سے کوئی نتیجہ اخذ نہیں کیا جاتا۔</p>
+<p>آپریٹر کے لیے وضاحت کے لیے دیکھیں کہ<a href="../collection/"> کلیکشن کیسے کام کرتی ہے</a> اور <a href="../accounts/">اکاؤنٹس اور سیشن فارمیٹس</a>۔</p>
+<p>نیٹ ورک کی تشکیلات انکرپٹڈ والٹ میں محفوظ ہوتی ہیں۔ ایک روٹ لاگو کرنے سے پرانے کلائنٹس بند ہو جاتے ہیں اور نامکمل لاگ ان منسوخ ہو جاتا ہے؛ بعد کے کنکشنز اس روٹ کو بغیر کسی براہِ راست واپسی کے استعمال کرتے ہیں۔ ایک نئی بیرونی کلید کی تنصیب ہر ورک اسپیس کی فرنیٹ کلید کو ایک ماسٹر کلید فائل اور محفوظ شدہ بے ترتیب سالٹ سے HKDF-SHA256 کے ذریعے حاصل کرتی ہے۔ یہ رازوں کو ڈیٹا ڈائریکٹری سے الگ طور پر محفوظ رکھتی ہے، نہ کہ جर्नل/میڈیا کے غیر محفوظ مواد کو۔</p>
+<p>مقامی ڈیمو انٹری ایک علیحدہ طور پر تیار کردہ پراسیس کیپابلیٹی استعمال کرتی ہے، کبھی بھی ترتیب شدہ پینل ٹوکن استعمال نہیں کرتی۔ اجرا اور قبولیت کے لیے واضح ڈیمو موڈ درکار ہوتا ہے، ایک مصنوعی روٹ بغیر اضافی ورک اسپیسز یا کسی مجاز سیشن کے، لوپ بیک پیئر/ہوسٹ، بغیر پروکسی فارورڈنگ ہیڈرز کے، اور بغیر کراس-اورجن براؤزر درخواست کے۔ لائو APIز بیئرر کی تصدیق برقرار رکھتی ہیں اور ڈیمو موڈ میں کلیکشن کی تبدیلیوں کو مسترد کر دیتی ہیں۔</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ARCHITECTURE.md">اس صفحے کو GitHub پر ترمیم کریں ↗</a><a class="next-guide" href="../verification/"><span>اگلا قدم</span><strong>کیا جانچا گیا ہے ←</strong></a><p>یہ رہنما موجودہ نفاذ کو بیان کرتے ہیں۔ توثیق کے نتائج اور باقی ماندہ خلائیں علیحدہ طور پر دستاویزی شکل میں درج ہیں۔ <a href="../verification/">کیا جانچا گیا ہے ←</a></p></footer>
+</main>
+<aside class="toc" aria-label="اس صفحے پر"></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>اوپن سورس · آپ کی مشین پر چلتا ہے</span><a href="../../../../LICENSE">ایم آئی ٹی لائسنس</a><a href="../notice/">آپریٹر نوٹس</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">سیکیورٹی</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "پیغام کا انتظار", "Step through a fictional send, edit and delete.": "ایک فرضی بھیجنے، ترمیم اور حذف کے مرحلے سے گزریں۔", "No observations yet. Start the sequence or advance one event.": "ابھی تک کوئی مشاہدات نہیں۔ سلسلہ شروع کریں یا ایک واقعہ آگے بڑھائیں۔", "Meet at 10:00": "10:00 بجے ملاقات کریں", "A new message is visible in the chat.": "چیٹ میں ایک نیا پیغام دکھائی دے رہا ہے۔", "Record 1 appended: the collector observed the original message.": "ریکارڈ 1 منسلک: جمع کرنے والے نے اصل پیغام کا مشاہدہ کیا۔", "Meet at 11:00": "11:00 بجے ملاقات کریں", "The current text changes. The earlier observation stays.": "موجودہ متن تبدیل ہوتا ہے۔ پچھلا مشاہدہ برقرار رہتا ہے۔", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "ریکارڈ 2 منسلک کیا گیا: ترمیم ایک نئی مشاہدہ ہے۔ ریکارڈ 1 اب بھی اصل متن کو برقرار رکھتا ہے۔", "Message deleted": "پیغام حذف شدہ", "The message has disappeared from the chat view.": "پیغام چیٹ کے منظر سے غائب ہو گیا ہے۔", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "ریکارڈ 3 منسلک: حذف کرنے کا نوٹس دونوں مشاہدہ شدہ ورژنز کے ساتھ برقرار رکھا گیا ہے۔", "0 records": "0 ریکارڈز", "1 record": "1 ریکارڈ", "2 records": "2 ریکارڈز", "3 records": "3 ریکارڈز", "Complete / {n} of 3": "مکمل / {n} میں سے 3", "Step / {n} of 3": "مرحلہ / {n} میں سے 3", "Pause": "وقفہ", "Replay sequence": "دوبارہ چلانے کا سلسلہ", "Play sequence": "سلسلہ چلائیں", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "جامد مثال دستیاب ہے۔ ہیشز کو انٹرایکٹو انداز میں کیلکولیٹ کرنے کے لیے، اس صفحے کو HTTPS پر یا Web Crypto سپورٹ کے ساتھ لوکل ہوسٹ پر پیش نظارہ کے طور پر کھولیں۔", "No record supplied": "کوئی ریکارڈ فراہم نہیں کیا گیا", "Tail removed": "ٹیل ہٹا دیا گیا", "≠ saved hash": "≠ محفوظ شدہ ہیش", "Rebuilt · different hash": "دوبارہ تعمیر شدہ · مختلف ہیش", "= saved hash": "= محفوظ شدہ ہیش", "Same length and matching head.": "ایک ہی لمبائی اور مماثل سر۔", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "تمام تینوں حساب شدہ ہیشز محفوظ شدہ ہیشز سے مطابقت رکھتے ہیں۔ یہ نمونہ برقرار رکھے گئے تین ریکارڈز کی حد سے مطابقت رکھتا ہے۔", "Same saved head; the journal prefix fails verification.": "یہی محفوظ شدہ سر؛ جرنل کا پیش نام تصدیق میں ناکام ہے۔", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "ریکارڈ 2 اب اپنے محفوظ شدہ ہیش سے مطابقت نہیں رکھتا۔ صرف آخری محفوظ شدہ ہیڈ کی جانچ کرنے سے یہ فرق نظر نہیں آئے گا؛ تصدیق کنندہ ہر ریکارڈ کی جانچ کرتا ہے۔", "Head differs from the retained checkpoint.": "ہیڈ برقرار رکھے گئے چیک پوائنٹ سے مختلف ہے۔", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "دوبارہ بنائے گئے ہیشز آپس میں جڑے ہوئے ہیں، لیکن آخری ہیڈ تبدیل ہو چکا ہے۔ محفوظ شدہ چیک پوائنٹ اس تاریخ کو مسترد کر دیتا ہے۔ اصل دستخط بھی تبدیل شدہ ریکارڈز پر ناکام ہوں گے۔", "Too short: 2 supplied records \u003c 3 retained records.": "بہت مختصر: فراہم کردہ ریکارڈز 2، محفوظ شدہ ریکارڈز 3 سے کم۔", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "باقی دو ہیشز اب بھی میل کھا رہے ہیں۔ محفوظ شدہ چیک پوائنٹ غائب شدہ ٹیل کو ظاہر کرتی ہے۔ اس ابتدائی حد کے بغیر، صرف یہ مختصر پری فکس حذف شدگی کو ظاہر نہیں کر سکتا تھا۔", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "اس براؤزر میں ہیش کی حساب کتاب دستیاب نہیں ہے۔ نیچے دیے گئے فارمولا اور جامد وضاحت دستیاب ہیں۔", "{n} records": "{n} ریکارڈز", "head {hash}": "ہیڈ {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "قبول شدہ: تعداد بڑھ رہی ہے، دستخط تصدیق شدہ ہیں اور کلید میل کھاتی ہے۔ گواہ اس نئی حد کو برقرار رکھتا ہے۔", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "رول بیک: دستخط شدہ جواب آخری منظور شدہ چیک پوائنٹ کے مقابلے میں کم ریکارڈز رپورٹ کرتا ہے۔ گواہ مسئلے کو ریکارڈ کرتا ہے اور پہلے منظور شدہ حد کو برقرار رکھتا ہے۔", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "فورک: تعداد میں کوئی تبدیلی نہیں ہوئی لیکن سربراہ مختلف ہے۔ گواہ اختلاف کو ریکارڈ کرتا ہے اور پہلے سے منظور شدہ حد کو برقرار رکھتا ہے۔", "No answer": "کوئی جواب نہیں", "boundary unknown": "حد نامعلوم", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "کوئی جواب نہیں: گواہ ناکام چیک کو ریکارڈ کرتا ہے۔ یہ جمع کرنے والے کی موجودہ حالت کا دعویٰ نہیں کر سکتا۔ اگر گواہ اب بھی Bot API تک پہنچ سکتا ہے اور اس کی اشاعت کی پالیسی اجازت دیتی ہے، تو یہ اس ناکامی کو شائع کر سکتا ہے۔", "Send {n}": "{n} بھیجیں", "Edit {n}": "{n} ترمیم", "Delete {n}": "{n} حذف کریں", "Both accounts captured all six expected observations in this example.": "دونوں اکاؤنٹس نے اس مثال میں تمام چھ متوقع مشاہدات کو ریکارڈ کیا۔", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "اکاؤنٹ B نے پھر بھی 6 میں سے 6 کو ریکارڈ کیا۔ دو رسیدیں زیادہ وقت لیں۔ کیپچر تناسب اور رسید میں تاخیر مختلف سوالات کے جواب دیتی ہیں۔", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "اکاؤنٹ B نے کٹ آف تک 6 میں سے 5 (83.3٪) ریکارڈ کیے۔ غائب ترمیم میں کوئی ناپے گئے تاخیر نہیں ہے۔ یہ نتیجہ صرف چھ کنٹرول شدہ کارروائیوں کو بیان کرتا ہے۔", "not observed by cutoff": "کٹ آف تک مشاہدہ نہیں ہوا", "{s} seconds": "{s} سیکنڈ", "Exact values follow in the table.": "درست اقدار جدول میں درج ہیں۔", "{s} s": "{s}s", "Not observed": "مشاہدہ نہیں ہوا", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "چار چیٹس مختلف مشاہدات پیش کرتی ہیں۔ ہر کنکشن کے لیے ماخذ ریکارڈز کی پیروی کریں؛ بغیر کسی منسوب کردہ بھیجنے والے کے چینل پوسٹ کو صارف 71001 سے منسوب نہ کریں۔", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "ریکارڈز #146 اور #205 ایک ہی بھیجنے والے کی شناخت، 71001، فراہم کرتے ہیں۔ یہ ایک ٹیلیگرام اکاؤنٹ کی دو چیٹس میں دیکھے گئے پوسٹس کو آپس میں جوڑتا ہے۔ یہ کسی حقیقی شخص کی شناخت نہیں کرتا اور نہ ہی چینل پوسٹ کو کسی فرد سے منسوب کرتا ہے۔", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "مقصد pay.example.invalid/new گروپ ریکارڈ #146، بوٹ کی بورڈ #173، چینل ایڈیٹ #188 اور نجی پیغام #205 میں ظاہر ہوتا ہے۔ ایک بار بار ظاہر ہونے والا مقصد مواد کو آپس میں جوڑتا ہے؛ یہ ان اکاؤنٹس کے مشترکہ کنٹرول کا ثبوت نہیں ہے۔", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "اس فرضی کیس میں مکمل میڈیا رسیدیں #151 اور #209 کے مکمل SHA-256 ویلیوز برابر ہیں۔ اصل بائٹس اور ان کے متعلقہ پیغام ریکارڈز کا موازنہ کریں۔ مطابقت پذیر فائل اپنے خالق کی شناخت نہیں بتاتی اور یہ ثابت نہیں کرتی کہ اسے کس نے فارورڈ کیا۔", "the encrypted off-site copy": "انکرپٹڈ آف سائٹ کاپی", "notifications": "اطلاعات", "checkpoint hashes for timestamps": "ٹائم اسٹیمپ کے لیے چیک پوائنٹ ہیشز", "signed checkpoints for the witness": "گواہ کے لیے دستخط شدہ چیک پوائنٹس", "Switched on in this example": "اس مثال میں فعال کیا گیا", "Optional · off by default": "اختیاری · ڈیفالٹ طور پر بند", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "اس مشین سے نکلتے ہوئے: ٹیلیگرام کنکشن اور {list}۔ بس اتنا ہی۔", "Default: only the Telegram connection leaves this machine.": "ڈیفالٹ: صرف ٹیلیگرام کنکشن اس مشین سے باہر جاتا ہے۔", "{done} of {total} done": "{done}   {total} مکمل", "Mark step {n} as done": "مرحلہ {n} کو مکمل شدہ کے طور پر نشان زد کریں", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "کاپی", "Copied": "کاپی شدہ", "Command copied.": "کمانڈ کاپی ہو گیا۔", "Selected — Ctrl/Cmd+C": "منتخب — Ctrl/Cmd+C", "Command selected. Copy it manually.": "کمانڈ منتخب کیا گیا۔ اسے دستی طور پر کاپی کریں۔", "Command copied to clipboard.": "کمانڈ کلپ بورڈ میں کاپی کر دی گئی۔", "Select text": "متن منتخب کریں", "Clipboard unavailable. Command selected; copy it manually.": "کلپ بورڈ دستیاب نہیں ہے۔ کمانڈ منتخب ہے؛ اسے دستی طور پر کاپی کریں۔", "A message arrives. The first observation is saved.": "ایک پیغام موصول ہوا۔ پہلی مشاہدہ محفوظ ہو گئی۔", "The time changes. Both captured versions stay.": "وقت بدل جاتا ہے۔ دونوں ریکارڈ شدہ ورژنز برقرار رہتے ہیں۔", "The message disappears. The captured history remains.": "پیغام غائب ہو جاتا ہے۔ محفوظ شدہ تاریخ باقی رہتی ہے۔", "Pause example animation": "مثال کے طور پر اینیمیشن کو روکیں", "Play example animation": "مثال کے طور پر اینیمیشن چلائیں", "Play": "چلائیں", "Full-size workspace screenshot": "مکمل سائز ورک اسپیس کا اسکرین شاٹ", "Workspace screenshot · fictional data": "ورک اسپیس کا اسکرین شاٹ · فرضی ڈیٹا", "Close": "بند کریں", "Close screenshot": "اسکرین شاٹ بند کریں", "Scrollable full-size screenshot": "اسکرول کرنے کے قابل مکمل سائز اسکرین شاٹ", "Enlarge: {name}": "بڑا کریں: {name}", "View full size": "مکمل سائز دیکھیں"}</script>
+</body></html>

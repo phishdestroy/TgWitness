@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="id" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Penerapan | TgWitness</title>
+<meta name="description" content="Jalankan TgWitness sebagai layanan di Windows, Linux, macOS, atau Docker, melalui HTTPS, dengan fitur pencadangan dan pembaruan."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="id_ID">
+<meta property="og:title" content="Penerapan | TgWitness"><meta property="og:description" content="Jalankan TgWitness sebagai layanan di Windows, Linux, macOS, atau Docker, melalui HTTPS, dengan fitur pencadangan dan pembaruan.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/deployment/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/deployment/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/deployment/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/deployment/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/deployment/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/deployment/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/deployment/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/deployment/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/deployment/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/", "url": "https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/", "name": "Penerapan | TgWitness", "description": "Jalankan TgWitness sebagai layanan di Windows, Linux, macOS, atau Docker, melalui HTTPS, dengan fitur pencadangan dan pembaruan.", "inLanguage": "id", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://phishdestroy.github.io/TgWitness/id/"}, {"@type": "ListItem", "position": 2, "name": "Dokumentasi", "item": "https://phishdestroy.github.io/TgWitness/id/docs/"}, {"@type": "ListItem", "position": 3, "name": "Referensi", "item": "https://phishdestroy.github.io/TgWitness/id/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Penerapan", "item": "https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Lompat ke konten</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Dokumentasi</span></a>
+<nav aria-label="Panduan"><a href="../../concepts/">Panduan visual</a><a href="../../">Semua panduan</a><a href="../">Referensi</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Bahasa"><span aria-hidden="true">◍</span> Bahasa Indonesia</summary><div class="lang-list"><a href="../../../../docs/reference/deployment/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/deployment/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/deployment/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/deployment/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/deployment/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/deployment/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/deployment/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/deployment/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/deployment/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/deployment/" hreflang="hi" lang="hi">हिन्दी</a><a href="./" hreflang="id" lang="id" aria-current="true">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/deployment/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/deployment/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Beralih antara tema terang dan gelap"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Panduan"><a href="../../../guides/modes.html">Mode, skenario, dan tingkat bukti</a><p class="nav-label">Langkah-langkah awal</p><a href="../../start/">Mulai dalam hitungan menit</a><a href="../../accounts/">Hubungkan akun</a><a href="../../proxies/">Pilih proxy</a><a href="../../exports/">Ekspor dan verifikasi</a><p class="nav-label">Memahami bukti</p><a href="../../concepts/">Lihat cara kerja bukti ini</a><a href="../../cases/">Selidiki seluruh obrolan</a><a href="../../security/">Jaga keamanannya</a><p class="nav-label">Pelajari lebih lanjut</p><a href="../../witness/">Siapkan bot saksi</a><a href="../../server/">Jaga agar tetap berjalan</a><a href="../../troubleshooting/">Temukan apa yang salah</a></nav><nav class="wiki-nav" aria-label="Referensi"><p class="nav-label"><a class="nav-label-link" href="../">Referensi</a></p><details class="wiki-group" open><summary>Pengaturan</summary><a href="../quickstart/">Panduan cepat</a><a href="../accounts/">Format akun dan sesi</a><a href="../connection/">Koneksi, proxy, dan perlindungan data</a><a href="./" aria-current="page">Penerapan</a></details><details class="wiki-group"><summary>Kumpulkan</summary><a href="../collection/">Cara kerja pengumpulan data</a><a href="../operations/">Alur kerja dan operasi</a><a href="../investigation/">Mode penyelidikan</a><a href="../features/">Fitur dan batasan</a></details><details class="wiki-group"><summary>Bukti</summary><a href="../how-it-works/">Cara kerja bukti tersebut</a><a href="../evidence/">Format bukti</a><a href="../witness/">Saksi independen</a><a href="../timestamp/">Cap waktu</a></details><details class="wiki-group"><summary>Keamanan & proyek</summary><a href="../security/">Keamanan dan penanganan data</a><a href="../architecture/">Arsitektur</a><a href="../verification/">Apa yang telah diuji</a><a href="../license/">Pemberitahuan mengenai lisensi dan ketidakcocokan arsitektur</a><a href="../notice/">Pemberitahuan ketidakcocokan operator</a><a href="../changelog/">Daftar Perubahan</a></details></nav><p class="sidebar-note">v0.7.0<br>Sumber terbuka · Dapat dijalankan di komputer Anda</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Panduan"><a href="../../../">Beranda</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentasi</a> <span aria-hidden="true">/</span> <a href="../">Referensi</a> <span aria-hidden="true">/</span> <span aria-current="page">Penerapan</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Cari di dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Coba gunakan proxy, rantai hash, token, atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Pencarian yang jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Ketik kata kunci untuk mencari panduan dan referensi. Hasil pencarian tetap tersimpan di browser Anda.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Referensi / Pengaturan</p><h1>Penerapan</h1><p class="guide-outcome">Jalankan TgWitness sebagai layanan di Windows, Linux, macOS, atau Docker, melalui HTTPS, dengan fitur pencadangan dan pembaruan.</p><div class="wiki-body"><p><strong>Bahasa Inggris</strong> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md">Русский</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md">Ukraina</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md">Español</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md">Português (Brasil)</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md">Bahasa Turki</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md">العربية</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md">فارسی</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md">Urdu</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md">Hindi</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md">Bahasa Indonesia</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md">Bahasa Vietnam</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md">Bahasa Mandarin (Sederhana)</a></p>
+<h2 id="choose-an-installation">Pilih metode instalasi<a class="anchor" href="#choose-an-installation" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Untuk paket portabel, ekstrak <code>TgWitness-&lt;version&gt;-windows-amd64-portable.zip</code> dari
+GitHub Releases. Untuk metode lainnya, unduh dan ekstrak berkas ZIP sumber atau kloning
+repositori, lalu jalankan perintah berikut dari direktori proyek:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Instalasi</th>
+<th>Mulai</th>
+<th>Berjalan di latar belakang?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Paket portabel untuk Windows</td>
+<td><code>TgWitness.cmd</code></td>
+<td>Tidak; biarkan jendela tetap terbuka.</td>
+</tr>
+<tr>
+<td>Aplikasi asli Windows</td>
+<td><code>Start.cmd</code></td>
+<td>Tidak; gunakan tugas masuk opsional untuk penggunaan di latar belakang.</td>
+</tr>
+<tr>
+<td>Dukungan asli untuk Linux/macOS</td>
+<td><code>sh start.sh</code></td>
+<td>Tidak; gunakan systemd/launchd untuk penggunaan di latar belakang.</td>
+</tr>
+<tr>
+<td>Docker di host apa pun yang didukung</td>
+<td><code>docker compose up -d --build --wait</code></td>
+<td>Ya, selama daemon Docker sedang berjalan.</td>
+</tr>
+<tr>
+<td>Pembantu Docker di Windows</td>
+<td><code>scripts\Docker.cmd</code></td>
+<td>Ya; program bantu tersebut menunggu status kesehatan server web.</td>
+</tr>
+<tr>
+<td>Pembantu Docker di Linux/macOS</td>
+<td><code>sh scripts/docker-start.sh</code></td>
+<td>Ya; program bantu tersebut menunggu status kesehatan server web.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Untuk server cloud yang dapat diperiksa oleh pihak ketiga — dibuat melalui
+API penyedia layanan, tanpa SSH, dan hanya dapat diakses melalui Cloudflare Tunnel — lihat
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md">penerapan dengan jaminan tinggi</a>.</p>
+<p>Proses startup asli membuat <code>.venv</code> pribadi dan menginstal dependensi yang disematkan.
+Docker membangunnya di dalam gambar, tanpa memerlukan Python host. Pengaturan pertama kali
+memerlukan akses internet. Jika Python 3.11+ tidak ditemukan, <code>Start.cmd</code> akan meminta izin sebelum
+menginstal Python 3.12 untuk pengguna Windows saat ini (menggunakan winget, atau jika tidak, penginstal python.org
+setelah memeriksa tanda tangan Python Software Foundation-nya); alat ini tidak pernah meminta
+hak akses administrator. Docker dan layanan sistem operasi tetap menjadi prasyarat.</p>
+<p>Instalasi native dan portabel menggunakan <code>data/live</code> di dalam foldernya. Docker menggunakan volume bernama <code>tgwitness-data</code>
+di <code>/data</code>. Ini adalah instalasi terpisah hingga Anda secara sengaja memigrasikan
+direktori data secara keseluruhan. Jangan berharap kontainer Docker baru akan mendeteksi akun native
+secara otomatis.</p>
+<h2 id="installation-requirements">Persyaratan instalasi<a class="anchor" href="#installation-requirements" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Instalasi asli memerlukan Python 3.11 atau yang lebih baru dengan <code>venv</code> dan <code>ensurepip</code>, akses
+internet untuk instalasi dependensi pertama, serta direktori proyek yang dapat ditulis untuk
+<code>.venv</code>. Panel yang disertakan tidak memerlukan Node.js atau build frontend. Jalankan peluncur dari
+akun OS biasa Anda; TgWitness tidak memerlukan hak akses administrator/root.</p>
+<ul>
+<li><strong>Windows:</strong> <code>Start.cmd</code> memeriksa <code>py -3</code>, lalu <code>python</code>, kemudian folder instalasi default per-pengguna dan
+    Program Files, serta memerlukan versi 3.11 atau yang lebih baru. Jika tidak ada yang berhasil,
+    maka akan ditawarkan instalasi otomatis per-pengguna seperti yang dijelaskan di atas. <code>py -3 start.py</code> juga berfungsi.
+    Paket portabel sama sekali tidak memerlukan Python.</li>
+<li><strong>Linux:</strong> <code>start.sh</code> mencoba <code>python3.13</code>, <code>python3.12</code>, <code>python3.11</code>, <code>python3</code>, dan
+    <code>python</code>, serta menampilkan perintah instalasi untuk apt, dnf, pacman, zypper, apk, atau Homebrew
+    jika tidak ada yang memenuhi syarat. Instalasi Debian/Ubuntu mungkin memerlukan paket
+    <code>python3-venv</code> yang sesuai dengan interpreter yang dipilih. Python bawaan versi lama
+    pada suatu distribusi harus diganti atau dilengkapi dengan Python 3.11+.</li>
+<li><strong>macOS:</strong> instal distribusi Python 3.11+ terbaru; jangan berasumsi bahwa
+    interpreter yang disediakan sistem operasi sudah memenuhi persyaratan. Gunakan <code>python3 start.py</code> dari direktori proyek.</li>
+<li><strong>Docker:</strong> gunakan Docker Engine/Desktop dengan Compose v2.20 atau yang lebih baru. Docker Desktop
+    harus menggunakan kontainer Linux di Windows. Kontainer tersebut menginstal
+    ketergantungan Python-nya sendiri; host tidak memerlukan instalasi Python terpisah.</li>
+</ul>
+<p>Gunakan penyimpanan lokal yang persisten untuk direktori data. Rencanakan kapasitas berdasarkan pesan,
+media, pertumbuhan WAL, ekspor, dan cadangan; tidak ada spesifikasi minimum disk/RAM universal
+berdasarkan bukti untuk setiap beban kerja. Arsitektur CPU dan versi Python
+yang tidak memiliki roda dependensi yang kompatibel mungkin memerlukan alat pembangunan tambahan dan
+kualifikasi tersendiri. &quot;Portabel&quot; bukanlah klaim dukungan universal terhadap sistem operasi atau perangkat keras.</p>
+<p>Windows 11/Python 3.12 telah diverifikasi secara lokal. Definisi untuk Linux/macOS/kontainer serta CI
+telah disediakan, namun belum dijalankan di host pengembangan ini. Lihat
+<a href="../verification/">berkas VERIFICATION.md</a> untuk cakupan yang tepat.</p>
+<h2 id="local-computer">Komputer lokal<a class="anchor" href="#local-computer" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Gunakan <code>Start.cmd</code> di Windows atau <code>sh start.sh</code> di Linux/macOS. <code>scripts\Setup.cmd</code> atau
+<code>sh start.sh --setup-only</code> mempersiapkan
+lingkungan. Peluncur akan menginstal dependensi pada penggunaan pertama; peluncuran selanjutnya
+akan menggunakan kembali lingkungan tersebut. Akses internet diperlukan untuk pengaturan dan pengumpulan pesan Telegram,
+namun penelusuran catatan yang ada dan pembuatan ekspor dapat dilakukan secara offline.</p>
+<p>Jalankan <code>python start.py --check</code> setelah pengaturan untuk memeriksa dependensi lokal, Ed25519,
+penyimpanan, konfigurasi kunci, dan alamat pendengar tanpa memulai pengumpul.
+Gunakan <code>--json</code> untuk keluaran terstruktur. Jalankan <code>--data-dir</code>, <code>--host</code>, dan
+<code>--port</code> sesuai kebutuhan. Pemeriksaan ini tidak menginstal paket, membuat jurnal, atau menghubungkan Telegram;
+ini bukan penilaian integritas atau cakupan. Proses startup memverifikasi secara terpisah
+jurnal yang sudah ada. <code>python start.py --help</code> juga menghindari instalasi.</p>
+<p>Opsi:</p>
+<p>Setelah menjalankan start.py, jalankan perintah tambahan dengan <code>.venv\Scripts\python.exe</code> di
+Windows atau <code>.venv/bin/python</code> di Linux/macOS, atau aktifkan lingkungan tersebut terlebih dahulu.
+Contoh <code>python -m ...</code> di bawah ini mengasumsikan bahwa lingkungan tersebut sudah aktif.</p>
+<pre><code class="language-sh">python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 8787</code></pre>
+<p>Variabel lingkungan: TGWITNESS_DATA, TGWITNESS_HOST, TGWITNESS_PORT, TGWITNESS_TOKEN.
+TGWITNESS_VAULT_KEY_FILE memilih mode kunci eksternal untuk instalasi baru; lihat di bawah.
+TGWITNESS_TOKEN, jika disediakan, harus berisi setidaknya 24 karakter; gunakan nilai acak yang dihasilkan secara kriptografis.
+Tanpa itu, aplikasi akan menghasilkan token acak 256-bit di file panel-token.txt.
+Penggantian variabel lingkungan tidak akan menimpa file tersebut. Mulai ulang untuk merotasi kredensial.</p>
+<p>Tepat satu proses saja yang boleh mengelola direktori data. Kunci file lintas platform OS mencegah
+penulisan bersamaan yang tidak disengaja. Gunakan satu pekerja Uvicorn. Panel dapat mengelola sejumlah
+ruang kerja, dengan direktori ruang kerja tambahan di bawah profiles/&lt;id&gt;/.
+Untuk instance layanan yang terpisah, gunakan direktori dan port yang terpisah. File WAL SQLite harus disimpan di
+penyimpanan lokal yang persisten, bukan di sistem berkas jaringan. Jangan berbagi satu volume di antara replika.</p>
+<h2 id="windows-portable-package">Paket portabel untuk Windows<a class="anchor" href="#windows-portable-package" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Setiap Rilis GitHub menyertakan <code>TgWitness-&lt;version&gt;-windows-amd64-portable.zip</code> dan
+<code>.sha256</code>-nya. Rilis tersebut berisi runtime Python 3.12 resmi yang dapat disematkan dari python.org
+(checksum yang disematkan dalam <code>tools/build_portable.py</code>), TgWitness beserta dependensinya yang disematkan,
+serta tiga peluncur:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Berkas</th>
+<th>Tujuan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TgWitness.cmd</code></td>
+<td>Jalankan panel; opsi tambahan diteruskan, misalnya <code>TgWitness.cmd --port 8790</code></td>
+</tr>
+<tr>
+<td><code>TgWitness-Demo.cmd</code></td>
+<td>Jalankan demo sintetis di <code>data\demo</code></td>
+</tr>
+<tr>
+<td><code>TgWitness-Check.cmd</code></td>
+<td>Jalankan pemeriksaan kesiapan tanpa memulai</td>
+</tr>
+</tbody>
+</table></div>
+<p>Ekstrak seluruh arsip ke folder yang dapat ditulis seperti <code>Documents\TgWitness</code>; jangan jalankan
+dari dalam ZIP atau dari Program Files. Runtime menggunakan jalur modul yang terisolasi,
+sehingga instalasi Python lain dan <code>PYTHONPATH</code> tidak memengaruhinya. Data tetap berada di
+folder <code>data</code> dalam paket tersebut. Untuk memperbarui, hentikan TgWitness, ekstrak versi baru ke
+folder baru, lalu salin folder <code>data</code> ke sana.</p>
+<p>Buat sendiri di Windows 64-bit dengan Python 3.12:</p>
+<pre><code class="language-sh">python tools/build_portable.py</code></pre>
+<p>Pembangun memverifikasi checksum saat runtime, menginstal dependensi yang dibatasi ke dalam
+paket, menjalankan pemeriksaan kesiapan dengan interpreter tertanam, dan menulis berkas ZIP
+serta checksum ke <code>dist/</code>.</p>
+<h2 id="container">Kontainer<a class="anchor" href="#container" aria-label="Tautan ke bagian ini">#</a></h2>
+<pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
+<p>Ini membuat volume persisten bernama untuk /data.
+Port web dipetakan ke 127.0.0.1:8787. Proses ini berjalan sebagai UID 10001 dengan
+kapabilitas yang diturunkan, sistem file root yang hanya dapat dibaca, serta /data dan /tmp yang dapat ditulis.
+<code>--wait</code> memeriksa kesehatan server web sebelum kembali; ia tidak melakukan
+otentikasi atau pengiriman Telegram. Pembantu yang disediakan menggunakan batas waktu kesiapan 180 detik
+setelah proses pembangunan. Pengunduhan dependensi awal mungkin memakan waktu lebih lama dari itu.</p>
+<p>Kedua berkas Compose dasar menggunakan nama proyek <code>tgwitness</code>, sehingga mengekstrak rilis baru
+ke direktori lain tidak secara otomatis memilih volume data baru. Pertahankan hanya satu
+penyebaran yang aktif untuk proyek tersebut. Untuk instalasi independen, gunakan
+<code>docker compose -p NAME ...</code> yang unik dan port host yang berbeda, serta pertahankan keduanya saat pembaruan.
+Untuk penyebaran yang lebih lama yang menggunakan nama proyek berbeda, lanjutkan menggunakan
+nama aslinya dengan <code>-p</code>; <code>docker compose ls</code> mencantumkan proyek-proyek yang ada.</p>
+<p>Salin <code>deploy/env.example</code> ke <code>.env</code> dan ubah <code>TGWITNESS_PORT</code> agar menggunakan
+port loopback yang berbeda. Misalnya, <code>TGWITNESS_PORT=8788</code> menampilkan panel di
+<code>http://127.0.0.1:8788</code>; kontainer tersebut tetap mendengarkan di port 8787. <code>.env</code> diabaikan oleh Git.</p>
+<p>Ambil token awal:</p>
+<pre><code class="language-sh">docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
+<p>Perintah yang berguna:</p>
+<pre><code class="language-sh">docker compose ps
+docker compose logs --tail 100 -f
+docker compose stop
+docker compose up -d --wait</code></pre>
+<p><code>restart: unless-stopped</code> akan memulai ulang pengumpul setelah terjadi crash atau daemon Docker
+dimulai ulang. Pada server Linux, aktifkan Docker saat boot menggunakan pengelola layanan
+distribusi Anda, umumnya <code>sudo systemctl enable --now docker</code>. Pada Windows/macOS, aktifkan
+pengaturan &quot;start-at-sign-in&quot; di Docker Desktop. Keluar dari desktop, mode tidur, atau
+Docker daemon yang dihentikan dapat mengganggu proses pengumpulan data. Kontainer yang dihentikan secara eksplisit akan tetap
+dihentikan hingga Anda menjalankannya kembali.</p>
+<p>Volume /tmp dibatasi hingga 512 MiB dalam konfigurasi contoh. Proses ekspor
+menggunakan <code>temporary-exports/</code> dari setiap ruang kerja pada direktori /data yang persisten. Sediakan ruang
+di sana untuk ekspor simultan, pertumbuhan jurnal/WAL, media, dan cadangan.
+Launcher dan Docker menggunakan deploy/constraints.txt untuk mengunci versi dependensi runtime yang memenuhi syarat.
+Ini bukanlah rantai pasokan yang terkunci dengan hash: gambar dasar Python dan artefak paket
+masih memerlukan kualifikasi rilis secara independen.</p>
+<p>Jangan gunakan perintah `docker compose down -v` kecuali Anda bermaksud menghancurkan jurnal dan kunci tersebut.
+Laporan kesehatan kontainer menunjukkan ketersediaan server web, bukan keberhasilan penangkapan pesan Telegram.
+Periksa status pengumpul, detak jantung, kesalahan, dan peristiwa cakupan pada panel.</p>
+<h3 id="independent-witness-profile">Profil saksi independen<a class="anchor" href="#independent-witness-profile" aria-label="Tautan ke bagian ini">#</a></h3>
+<p>Layanan opsional <code>witness</code> menjalankan <a href="../witness/">saksi independen</a> di dalam
+kontainernya sendiri, dengan kunci dan jurnal tersendiri di volume <code>witness-data</code> serta hanya memiliki
+token saksi yang hanya dapat dibaca untuk pengumpul. Buat token tersebut di halaman <strong>Saksi</strong> pada panel, tambahkan
+bersama token bot dan saluran ke <code>.env</code>, lalu jalankan profil:</p>
+<pre><code class="language-sh">docker compose --profile witness up -d          # deploy/compose/compose.image.yaml: same flag
+docker compose logs witness                     # witness key fingerprint</code></pre>
+<p>Layanan ini terhubung ke pengumpul di dalam jaringan Compose di <code>http://tgwitness:8787</code>
+(<code>TGWITNESS_WITNESS_COLLECTOR</code>
+menggantikannya, misalnya <code>/profiles/&lt;workspace ID&gt;</code>
+untuk
+ruang kerja lain). Untuk saksi di server terpisah yang dijalankan oleh pihak lain, gunakan
+<code>deploy/compose/compose.witness.yaml</code>
+di sana dengan <code>TGWITNESS_WITNESS_COLLECTOR</code>
+disetel ke alamat HTTPS
+pengumpul; berkas tersebut hanya berisi saksi.</p>
+<h2 id="install-a-published-image">Instal gambar yang telah dipublikasikan<a class="anchor" href="#install-a-published-image" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Fitur ini tersedia setelah <a href="#automated-github-releases">alur kerja rilis</a>
+berhasil diselesaikan dan konfigurasi paket GHCR publik selesai. Nama pemilik repositori tidak terkodekan secara permanen
+dalam pohon sumber ini. Gunakan gambar yang ditampilkan dalam ringkasan alur kerja rilis tersebut.</p>
+<p>Salin <code>deploy/env.example</code> ke <code>.env</code>. Atur <code>TGWITNESS_IMAGE</code> ke versi yang telah dipublikasikan, dengan menggunakan
+jalur repositori <strong>huruf kecil</strong>, misalnya:</p>
+<pre><code class="language-dotenv">TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.0
+TGWITNESS_PORT=8787</code></pre>
+<p>Jalankan berkas ini secara mandiri, bukan <code>compose.yaml</code>:</p>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml exec tgwitness cat /data/panel-token.txt</code></pre>
+<p>Tidak diperlukan build sumber, Python, atau kompiler di host. Alur kerja rilis
+ditujukan untuk kontainer Linux AMD64 dan ARM64, termasuk VM Linux di Docker Desktop.
+Gunakan tag versi atau <code>ghcr.io/owner/repository@sha256:...</code> dari ringkasan alur kerja.
+Tidak ada konfigurasi untuk pemindahan tag <code>latest</code> atau pembaruan aplikasi tanpa pengawasan.
+Variasi gambar dan sumber menggunakan volume data yang sama jika nama proyeknya sama.</p>
+<h2 id="automatic-https-on-a-server">HTTPS otomatis di server<a class="anchor" href="#automatic-https-on-a-server" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Gunakan server dengan Docker, domain yang Anda kendalikan, dan penyimpanan lokal yang persisten.
+Arahkan catatan A/AAAA domain ke server; publikasikan AAAA hanya jika IPv6 menjangkau
+server tersebut. Izinkan lalu lintas masuk TCP 80 dan 443 serta lalu lintas keluar DNS/HTTPS untuk penerbitan sertifikat.
+Layanan lain tidak boleh sudah menggunakan port-port ini.</p>
+<p>Salin <code>deploy/env.example</code> ke <code>.env</code> dan tetapkan nama host, tanpa skema atau jalur:</p>
+<pre><code class="language-dotenv">TGWITNESS_DOMAIN=watch.your-domain.org</code></pre>
+<p>Mulai proses kompilasi sumber dengan overlay HTTPS:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt</code></pre>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml -f deploy/compose/compose.https.yaml up -d --wait</code></pre>
+<p>Untuk gambar yang dipublikasikan, gunakan <code>deploy/compose/compose.image.yaml</code> sebagai file pertama. Pertahankan
+kedua argumen <code>-f</code> untuk perintah status, log, pembaruan, dan hentikan di kemudian hari.</p>
+<p>Caddy memperoleh dan memperbarui sertifikat, mengalihkan HTTP ke HTTPS, serta meneruskan
+permintaan ke pengumpul di jaringan Compose pribadi. Status sertifikat memiliki
+volume persisten tersendiri. Port host langsung pengumpul tetap hanya untuk loopback.
+Konfigurasi Caddy yang disediakan tidak mengaktifkan pencatatan akses.</p>
+<p>Buka <code>https://watch.your-domain.org</code> dan masukkan token panel. Kesiapan pembuatan
+tidak menjamin penerbitan sertifikat atau aksesibilitas eksternal. Jika HTTPS belum
+siap, periksa DNS, aturan firewall, dan:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.https.yaml logs --tail 100 caddy</code></pre>
+<p>Gambar Caddy yang disediakan mengikuti tag <code>2-alpine</code>-nya. Melakukan pull akan memperbarui gambar tersebut;
+sematkan ringkasan yang telah diuji dalam deployment Anda jika Anda memerlukan versi infrastruktur yang tetap.</p>
+<h2 id="updates-and-backups">Pembaruan dan pencadangan<a class="anchor" href="#updates-and-backups" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Pertahankan nama proyek Compose dan volume data di seluruh pembaruan. Pertama, hentikan
+pengumpul dan buat cadangan lengkap. Untuk penyebaran berbasis sumber default:</p>
+<pre><code class="language-sh">docker compose stop
+docker compose cp tgwitness:/data ../tgwitness-backup-before-update</code></pre>
+<p>Gunakan tujuan cadangan baru setiap kali, di luar repositori, dan lindungi sebagai
+materi yang memerlukan akses akun. Jalur contoh hanya sebagai ilustrasi; gunakan lokasi cadangan pribadi
+Anda. Salin seluruh direktori, termasuk file tersembunyi, semua ruang kerja, kunci,
+jurnal, dan media. Cadangkan kunci utama brankas eksternal secara terpisah jika telah dikonfigurasi.
+File ZIP bukti bukanlah cadangan aplikasi yang dapat dipulihkan. Untuk HTTPS, simpan juga
+volume Caddy jika Anda perlu mempertahankan status sertifikat/akunnya.</p>
+<p>Untuk penerapan sumber, unduh berkas rilis terbaru dan jalankan:</p>
+<pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
+<p>Untuk penerapan gambar, ubah <code>TGWITNESS_IMAGE</code> menjadi versi yang diinginkan, lalu jalankan:</p>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait</code></pre>
+<p>Gunakan berkas Compose pada instalasi Anda untuk perintah stop/copy di atas juga.
+Pertahankan <code>.env</code>, konfigurasi khusus, dan nama proyek yang sama. <code>down</code> mempertahankan
+volume yang diberi nama; <strong><code>down -v</code> menghapusnya</strong>. Jangan menyalin <code>.venv</code> antar sistem operasi
+atau versi Python. Untuk pembaruan asli, hentikan TgWitness, buat cadangan direktori data lengkapnya
+, ganti berkas sumber, dan jalankan <code>python start.py --setup-only</code> sebelum meluncurkan.</p>
+<p>Periksa akses panel, identitas akun, status pemantauan, dan cakupan setelah
+pembaruan. Memulai ulang tidak akan memulihkan pembaruan Telegram yang terlewat. Pengembalian ke versi sebelumnya mungkin
+memerlukan cadangan sebelum pembaruan jika versi mendatang mengubah format penyimpanan.</p>
+<h2 id="automated-github-releases">Rilis otomatis di GitHub<a class="anchor" href="#automated-github-releases" aria-label="Tautan ke bagian ini">#</a></h2>
+<p><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml">Alur kerja rilis</a> siap digunakan setelah
+proyek ini di-push ke repositori GitHub dengan Actions diaktifkan. Alur kerja ini berjalan saat
+Rilis GitHub <strong>diterbitkan</strong>, termasuk prarilis. Draf dan push tag
+saja tidak akan menerbitkan paket.</p>
+<ol>
+<li>Tentukan versi paket dan catatan perubahan, lalu terbitkan rilis yang diberi tag <code>v</code>
+    ditambah versi <code>pyproject.toml</code> yang tepat, seperti <code>v0.7.0</code>.</li>
+<li>Alur kerja ini memvalidasi tag dan menjalankan pemeriksaan Python yang dapat digunakan di Windows/Linux/macOS,
+    general/account-import/QR browser, paket sumber, dan Docker. Instalasi asli yang baru juga
+    dilakukan pada ketiga sistem operasi tersebut menggunakan Python 3.12.</li>
+<li>Setelah pemeriksaan tersebut lulus, sistem ini melakukan uji coba awal (smoke test) terhadap gambar ARM64 di bawah QEMU, mempublikasikan
+    gambar AMD64/ARM64 ke <code>ghcr.io/&lt;lowercase-owner&gt;/&lt;lowercase-repository&gt;:&lt;version&gt;</code>,
+    serta melampirkan berkas ZIP sumber, checksum, dan Python wheel ke dalam rilis. Sebuah tugas terpisah
+    di Windows membangun dan melampirkan berkas ZIP portabel beserta checksum-nya.</li>
+<li>Setelah publikasi pertama, buka pengaturan paket GHCR dan atur visibilitas
+    menjadi <strong>Publik</strong> jika dimaksudkan untuk pengunduhan gambar secara anonim. Repositori sumber terbuka
+    saja tidak menjamin paket kontainer yang terbuka. Kebijakan organisasi harus
+    mengizinkan publikasi paket. Alur kerja ini menggunakan <code>GITHUB_TOKEN</code>; kata sandi registri
+    atau kredensial VPS tidak boleh disimpan di repositori.</li>
+</ol>
+<p>Keberhasilan alur kerja jarak jauh belum dapat dipastikan melalui persiapan lokal ini. Emulasi ARM64
+hanyalah uji coba awal, bukan kualifikasi perangkat keras asli atau Telegram yang berjalan secara langsung.
+Ini mengotomatiskan pengemasan rilis; memulai server masih memerlukan perintah Compose
+serta prasyarat domain/host-nya. Server yang sudah ada tidak akan
+di-upgrade atau di-restart secara otomatis saat rilis diterbitkan.</p>
+<h2 id="remote-server">Server jarak jauh<a class="anchor" href="#remote-server" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Jaga agar layanan tetap terikat pada loopback dan gunakan terowongan SSH, atau hentikan HTTPS di
+proksi terbalik. Berkas Compose dasar hanya berlaku secara lokal; overlay
+<code>deploy/compose/compose.https.yaml</code> opsional menyediakan Caddy untuk domain yang telah dikonfigurasi.
+Jaga agar token bearer tidak muncul di URL dan log proxy. Proksi terbalik harus membatasi
+ukuran permintaan dan laju koneksi. Jangan mengekspos HTTP biasa ke Internet.</p>
+<p>Contoh untuk systemd, tugas masuk Windows, agen pengguna macOS, dan Caddy disediakan
+di <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">folder deploy/.</a> Periksa/sesuaikan jalurnya sebelum instalasi.
+Ini adalah templat yang disediakan, bukan konfigurasi platform yang dijalankan secara lokal. Tidak ada
+layanan latar belakang atau tugas yang didaftarkan oleh peluncur standar.</p>
+<p>Di Windows, peluncuran <code>pythonw.exe</code> tanpa jendela menyimpan diagnostik startup/server di
+<code>logs/server.log</code> di bawah direktori data (5 MiB per file, dua cadangan yang digilir).
+Peluncuran konsol tetap menyimpan log konsol. Pencatatan akses HTTP dinonaktifkan di kedua
+mode tersebut. Lindungi log dengan direktori data dan tinjau terlebih dahulu sebelum membagikannya.</p>
+<h2 id="restart-and-gaps">Mulai ulang dan celah<a class="anchor" href="#restart-and-gaps" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Status pengamatan terakhir yang diminta akan disimpan. Jika pengamatan sedang aktif,
+saat startup akan mencoba terhubung kembali dan melanjutkan sumber-sumber yang dipilih. Penundaan manual akan menghapus
+niat tersebut. Kegagalan restart akan dicatat dan ditampilkan di panel.</p>
+<p>StringSession mempertahankan otorisasi tetapi tidak mempertahankan status pembaruan/entitas Telethon yang tahan lama.
+Dialog dimuat ulang saat dimulai. Telegram/Telethon dapat memulihkan beberapa gangguan transmisi
+saat berjalan, tetapi TgWitness tidak menjamin pemutaran ulang yang tahan lama setelah proses dimulai ulang.
+Setiap kali dimulai, sistem mencatat kepala jurnal sebelumnya dan batas offline.
+Monitor memeriksa konektivitas setiap 10 detik dan menambahkan sinyal detak jantung setiap menit
+(<strong>Parameter → Liveness record every</strong>).
+Gangguan singkat mungkin terlewatkan; koneksi transportasi yang terhubung tidak menjamin
+pengiriman pembaruan yang lengkap. Snapshot merupakan pengamatan riwayat terkini yang eksplisit, bukan perbaikan celah.</p>
+<p>Antrian media disimpan dalam basis data SQLite masing-masing ruang kerja. Sebuah pesan dan tugasnya
+dikerjakan secara atomik. Tugas yang sedang berjalan dan terputus akan dipulihkan untuk dicoba kembali saat dimulai.
+Setiap unduhan memiliki batas waktu dasar 120 detik ditambah waktu sesuai kecepatan 256 KiB/s berdasarkan ukurannya, serta
+batas 1–2.000 MiB per jenis lampiran; batas waktu, kecepatan, dan upaya ulang diatur di <strong>bagian Parameter</strong>. Pengumpul
+melewati berkas yang ukurannya tidak diketahui. Menjeda akan mempertahankan pekerjaan yang sedang dalam antrian. Percobaan ulang menggunakan
+deskriptor berkas asli yang teramati, bukan versi terbaru dari pesan yang telah diedit setelahnya.
+Kegagalan sementara memiliki batasan percobaan ulang; jeda FloodWait media tetap berlaku setelah restart.
+Pemulihan media terpisah dari pemulihan pembaruan Telegram dan tidak dapat membuat ulang berkas yang hilang.</p>
+<h2 id="backup-restore-and-capacity">Pencadangan, pemulihan, dan kapasitas<a class="anchor" href="#backup-restore-and-capacity" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Hentikan proses sebelum menyalin <strong>seluruh direktori data</strong>, termasuk vault.key,
+signing.enc, credentials.enc, file basis data SQLite/WAL, media, token, titik pemeriksaan,
+serta semua profil/subdirektori. Kembalikan
+salinan lengkap tersebut saat layanan tujuan dalam keadaan berhenti. Kunci vault yang hilang atau
+ketidaksesuaian kunci penandatanganan akan menyebabkan kegagalan saat memulai; jangan membuat ulang kunci untuk memaksa akses.</p>
+<p>Simpan cadangan rahasia dalam bentuk terenkripsi dan dengan kontrol akses. Berkas ZIP bukti bersifat portabel;
+tinjau artefak, bukan cadangan aplikasi atau cadangan sesi Telegram.
+Tidak ada penghapusan otomatis berdasarkan masa retensi. Rencanakan ruang disk untuk semua pesan,
+metadata mentah, media, ekspor sementara, dan cadangan.</p>
+<p>Memulai verifikasi dan mengekspor catatan aliran alih-alih memuat seluruh jurnal.
+Ekspor mengunci snapshot yang telah dibaca sementara penulisan WAL baru dapat terus berlanjut; ekspor yang berlangsung lama
+dapat menyimpan halaman WAL, sehingga kapasitas disk tetap menjadi pertimbangan. Ukuran ZIP dibatasi hingga 4 GiB
+dalam bentuk tidak terkompresi agar sesuai dengan pengaturan default verifikator independen; <strong>Parameter → ZIP Tertanda Terbesar</strong>
+meningkatkan batas tersebut, dan arsip semacam itu diverifikasi dengan <code>verify.py --max-gib N</code>. Format lain tidak memiliki batas jumlah peristiwa.
+Browser yang didukung mengalirkan potongan respons ke berkas yang dipilih pengguna. Browser lain
+menyimpan dalam buffer maksimal 128 MiB dan mengarahkan transfer yang lebih besar ke CLI yang terotentikasi:</p>
+<pre><code class="language-sh">python -m tgwitness.download --token-file data/live/panel-token.txt --out evidence.zip</code></pre>
+<p>Gunakan <code>--profile ID</code> dari <strong>Ekspor → ID Ruang Kerja</strong> untuk ruang kerja lain,
+<code>--format zip|jsonl|csv|html</code>, <code>--url https://your-server</code> untuk server jarak jauh, atau
+<code>--max-mib</code> untuk mengubah batas transfer 5 GiB. HTTP biasa hanya diizinkan untuk
+loopback. Token dikirim melalui header, pengalihan ditolak, file yang sudah ada
+tidak ditimpa, dan unduhan yang belum selesai tidak dipublikasikan sebagai file yang sudah selesai.
+Jika TGWITNESS_TOKEN menggantikan token yang dihasilkan, gunakan berkas yang dilindungi secara terpisah
+yang berisi nilai aktif tersebut: panel-token.txt tidak akan ditimpa oleh penggantian tersebut.
+SHA-256 perintah ini hanyalah checksum transfer; verifikasi ZIP yang ditandatangani secara independen.</p>
+<p>File ekspor server tetap berada di dalam direktori <code>temporary-exports/</code> pribadi masing-masing ruang kerja.
+Respons yang berhasil akan membersihkan berkas-berkasnya. Ekspor yang terputus akan dihapus pada
+pengaktifan ruang kerja berikutnya saat kunci instans eksklusifnya masih berlaku. Direktori ini merupakan bagian
+dari model ancaman/kapasitas penyimpanan; gunakan volume data terenkripsi. Transfer berskala produksi
+berukuran multi-gigabyte masih memerlukan pengujian pada sistem target Anda.</p>
+<p>Panel menampilkan media yang sedang dalam antrian/gagal, media tertunda tertua, ruang disk kosong,
+jeda permintaan Telegram, dan sumber yang aksesnya belum dikonfirmasi. Diagnostik ini bukanlah
+pemantau pengiriman end-to-end yang lengkap. Ruang kerja berbagi proses; akun yang aktif
+masih dapat memengaruhi yang lain. Proses pekerja terpisah, retensi/rotasi, pemulihan pembaruan yang tahan lama,
+penyambungan titik pemeriksaan jarak jauh, peran, dan kualifikasi penerapan penuh tetap berlaku.</p>
+<h2 id="connection-and-protection-options">Opsi koneksi dan perlindungan<a class="anchor" href="#connection-and-protection-options" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Rute koneksi ditentukan per ruang kerja dan harus dikonfigurasi sebelum otorisasi.
+SOCKS5/HTTP CONNECT menggunakan dependensi python-socks yang disematkan. MTProxy menggunakan
+transportasi perantara acak eksperimental dari Telethon; rahasia TLS palsu tidak didukung.
+Tidak ada pengalihan otomatis langsung yang dikonfigurasi. Ini bukan rute jaringan yang berlaku secara sistem.</p>
+<p>Untuk instalasi baru, TGWITNESS_VAULT_KEY_FILE mengarah ke berkas kunci utama acak
+yang dilindungi secara terpisah. Pasang berkas tersebut dalam mode baca-saja di luar direktori /data dalam sebuah kontainer. Simpan metadata salt publik
+vault.external.json secara terpisah untuk setiap ruang kerja dan kunci utama.
+Brankas lokal yang sudah ada memerlukan migrasi terencana; pengaturan variabel ini tidak
+akan mengonversinya secara otomatis. Penyimpanan pesan/media serta ekspornya tidak dienkripsi oleh aplikasi.
+Gunakan volume terenkripsi dan penyimpanan sementara pribadi yang memadai jika diperlukan.</p>
+<p>Prosedur terperinci: <a href="../connection/">koneksi/keamanan</a> dan
+<a href="../operations/">mode operasi</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/DEPLOYMENT.md">Edit halaman ini di GitHub ↗</a><a class="next-guide" href="../collection/"><span>Langkah selanjutnya</span><strong>Cara kerja pengumpulan data →</strong></a><p>Panduan-panduan ini menjelaskan implementasi saat ini. Hasil validasi dan celah yang masih ada didokumentasikan secara terpisah. <a href="../verification/">Apa yang telah diuji →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Di halaman ini"><p class="nav-label">Di halaman ini</p><a href="#choose-an-installation">Pilih metode instalasi</a><a href="#installation-requirements">Persyaratan instalasi</a><a href="#local-computer">Komputer lokal</a><a href="#windows-portable-package">Paket portabel untuk Windows</a><a href="#container">Kontainer</a><a href="#install-a-published-image">Instal gambar yang telah dipublikasikan</a><a href="#automatic-https-on-a-server">HTTPS otomatis di server</a><a href="#updates-and-backups">Pembaruan dan pencadangan</a><a href="#automated-github-releases">Rilis otomatis di GitHub</a><a href="#remote-server">Server jarak jauh</a><a href="#restart-and-gaps">Mulai ulang dan celah</a><a href="#backup-restore-and-capacity">Pencadangan, pemulihan, dan kapasitas</a><a href="#connection-and-protection-options">Opsi koneksi dan perlindungan</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Sumber terbuka · Dapat dijalankan di komputer Anda</span><a href="../../../../LICENSE">Lisensi MIT</a><a href="../notice/">Pemberitahuan operator</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Keamanan</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Menunggu pesan", "Step through a fictional send, edit and delete.": "Ikuti langkah demi langkah proses pengiriman, pengeditan, dan penghapusan fiktif.", "No observations yet. Start the sequence or advance one event.": "Belum ada catatan. Mulai urutan atau lanjutkan ke peristiwa berikutnya.", "Meet at 10:00": "Bertemu pukul 10.00", "A new message is visible in the chat.": "Sebuah pesan baru terlihat di obrolan.", "Record 1 appended: the collector observed the original message.": "Catatan 1 ditambahkan: pengumpul telah mengamati pesan asli.", "Meet at 11:00": "Bertemu pukul 11.00", "The current text changes. The earlier observation stays.": "Teks saat ini berubah. Pengamatan sebelumnya tetap berlaku.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Catatan 2 ditambahkan: pengeditan ini merupakan pengamatan baru. Catatan 1 masih memuat teks aslinya.", "Message deleted": "Pesan telah dihapus", "The message has disappeared from the chat view.": "Pesan tersebut telah menghilang dari tampilan obrolan.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Catatan 3 ditambahkan: pemberitahuan penghapusan disimpan bersama kedua versi yang teramati.", "0 records": "0 catatan", "1 record": "1 catatan", "2 records": "2 catatan", "3 records": "3 catatan", "Complete / {n} of 3": "Lengkap / {n} dari 3", "Step / {n} of 3": "Langkah / {n} dari 3", "Pause": "Jeda", "Replay sequence": "Urutan pemutaran ulang", "Play sequence": "Urutan pemutaran", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Contoh statis tersedia. Untuk menghitung hash secara interaktif, buka halaman ini melalui HTTPS atau pratinjau localhost yang mendukung Web Crypto.", "No record supplied": "Tidak ada catatan yang disediakan", "Tail removed": "Bagian akhir dihapus", "≠ saved hash": "≠ hash yang disimpan", "Rebuilt · different hash": "Dibangun ulang · hash berbeda", "= saved hash": "= hash yang disimpan", "Same length and matching head.": "Panjang yang sama dan judul yang sesuai.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Ketiga hash yang dihitung cocok dengan hash yang disimpan. Sampel ini sesuai dengan batas tiga catatan yang disimpan.", "Same saved head; the journal prefix fails verification.": "Header yang sama telah disimpan; awalan jurnal gagal diverifikasi.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Catatan 2 tidak lagi cocok dengan hash yang tersimpan. Memeriksa hanya head terakhir yang tersimpan akan melewatkan hal ini; verifikator memeriksa setiap catatan.", "Head differs from the retained checkpoint.": "Header berbeda dari checkpoint yang disimpan.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Hash yang dibangun ulang saling terhubung, tetapi header terakhir telah berubah. Titik pemeriksaan yang disimpan menolak riwayat ini. Tanda tangan asli juga akan gagal pada catatan yang diubah.", "Too short: 2 supplied records \u003c 3 retained records.": "Terlalu singkat: 2 catatan yang disediakan \u003c 3 catatan yang disimpan.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Kedua hash yang tersisa masih cocok. Titik pemeriksaan yang disimpan mengungkapkan bagian akhir yang hilang. Tanpa batas awal tersebut, awalan yang lebih pendek ini saja tidak akan mengungkapkan adanya penghilangan tersebut.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Perhitungan hash tidak tersedia di browser ini. Rumus dan penjelasan statis di bawah ini tetap tersedia.", "{n} records": "{n} catatan", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Diterima: jumlahnya bertambah, tanda tangan terverifikasi, dan kuncinya cocok. Saksi mempertahankan batas baru ini.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: jawaban yang ditandatangani melaporkan jumlah catatan yang lebih sedikit daripada titik pemeriksaan terakhir yang diterima. TgWitness mencatat masalah tersebut dan mempertahankan batas yang diterima sebelumnya.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: jumlahnya tidak berubah, tetapi cabangnya berbeda. Saksi mencatat ketidaksesuaian tersebut dan mempertahankan batas yang sebelumnya telah disetujui.", "No answer": "Tidak ada jawaban", "boundary unknown": "batas tidak diketahui", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Tidak ada respons: TgWitness mencatat kegagalan pemeriksaan tersebut. TgWitness tidak dapat memastikan status terkini dari pengumpul data. Jika TgWitness masih dapat mengakses Bot API dan kebijakan publikasinya mengizinkan, TgWitness dapat mempublikasikan kegagalan tersebut.", "Send {n}": "Kirim {n}", "Edit {n}": "Edit {n}", "Delete {n}": "Hapus {n}", "Both accounts captured all six expected observations in this example.": "Kedua akun tersebut berhasil menangkap keenam pengamatan yang diharapkan dalam contoh ini.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Akun B masih berhasil menangkap 6 dari 6 pesan. Dua tanda terima membutuhkan waktu lebih lama. Rasio penangkapan dan penundaan tanda terima menjawab pertanyaan yang berbeda.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Akun B berhasil menangkap 5 dari 6 pesan sebelum batas waktu (83,3%). Pengeditan yang hilang tidak memiliki penundaan yang terukur. Hasil ini hanya menggambarkan enam tindakan yang dikendalikan.", "not observed by cutoff": "tidak terdeteksi pada batas waktu", "{s} seconds": "{s} detik", "Exact values follow in the table.": "Nilai-nilai yang tepat tercantum dalam tabel berikut.", "{s} s": "{s} s", "Not observed": "Tidak teramati", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Empat obrolan memberikan pengamatan yang berbeda-beda. Ikuti catatan sumber untuk setiap koneksi; jangan mengaitkan posting saluran tersebut dengan pengguna 71001 tanpa pengirim yang teridentifikasi.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Catatan #146 dan #205 menunjukkan ID pengirim yang sama, yaitu 71001. Hal ini menghubungkan postingan yang teramati dari sebuah akun Telegram di dua obrolan. Catatan ini tidak mengidentifikasi orang di dunia nyata atau mengaitkan postingan tersebut dengan saluran tertentu.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Tautan tujuan pay.example.invalid/new muncul dalam catatan grup #146, keyboard bot #173, pengeditan saluran #188, dan pesan pribadi #205. Tautan tujuan yang berulang menghubungkan materi tersebut; hal ini tidak membuktikan adanya kendali bersama atas akun-akun tersebut.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Tanda terima media yang telah diselesaikan #151 dan #209 memiliki nilai SHA-256 lengkap yang sama dalam kasus fiktif ini. Bandingkan byte yang sebenarnya dan catatan pesan yang terkait. File yang cocok tersebut tidak mengidentifikasi pembuatnya atau membuktikan siapa yang meneruskannya.", "the encrypted off-site copy": "salinan terenkripsi di luar lokasi", "notifications": "pemberitahuan", "checkpoint hashes for timestamps": "hash checkpoint untuk cap waktu", "signed checkpoints for the witness": "titik pemeriksaan yang ditandatangani untuk saksi", "Switched on in this example": "Diaktifkan dalam contoh ini", "Optional · off by default": "Opsional · dinonaktifkan secara default", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Yang tersisa di mesin ini: koneksi Telegram dan {list}. Tidak ada yang lain.", "Default: only the Telegram connection leaves this machine.": "Pengaturan default: hanya koneksi Telegram yang keluar dari mesin ini.", "{done} of {total} done": "{done} dari {total} selesai", "Mark step {n} as done": "Tandai langkah {n} sebagai selesai", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Teks", "Copied": "Disalin", "Command copied.": "Perintah telah disalin.", "Selected — Ctrl/Cmd+C": "Pilih — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Perintah telah dipilih. Salin secara manual.", "Command copied to clipboard.": "Perintah telah disalin ke papan klip.", "Select text": "Pilih teks", "Clipboard unavailable. Command selected; copy it manually.": "Clipboard tidak tersedia. Perintah telah dipilih; salin secara manual.", "A message arrives. The first observation is saved.": "Sebuah pesan masuk. Pengamatan pertama disimpan.", "The time changes. Both captured versions stay.": "Waktu berubah. Kedua versi yang terekam tetap ada.", "The message disappears. The captured history remains.": "Pesan tersebut menghilang. Riwayat yang terekam tetap ada.", "Pause example animation": "Jeda animasi contoh", "Play example animation": "Putar animasi contoh", "Play": "Putar", "Full-size workspace screenshot": "Tangkapan layar ruang kerja ukuran penuh", "Workspace screenshot · fictional data": "Tangkapan layar ruang kerja · data fiktif", "Close": "Tutup", "Close screenshot": "Tutup tangkapan layar", "Scrollable full-size screenshot": "Tangkapan layar ukuran penuh yang dapat digulir", "Enlarge: {name}": "Perbesar: {name}", "View full size": "Lihat ukuran penuh"}</script>
+</body></html>

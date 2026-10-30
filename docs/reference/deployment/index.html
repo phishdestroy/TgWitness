@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Deployment | TgWitness</title>
+<meta name="description" content="Run TgWitness as a service on Windows, Linux, macOS or Docker, behind HTTPS, with backups and updates."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/docs/reference/deployment/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Deployment | TgWitness"><meta property="og:description" content="Run TgWitness as a service on Windows, Linux, macOS or Docker, behind HTTPS, with backups and updates.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/docs/reference/deployment/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/deployment/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/deployment/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/deployment/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/deployment/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/deployment/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/deployment/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/deployment/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/deployment/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/deployment/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/docs/reference/deployment/", "url": "https://phishdestroy.github.io/TgWitness/docs/reference/deployment/", "name": "Deployment | TgWitness", "description": "Run TgWitness as a service on Windows, Linux, macOS or Docker, behind HTTPS, with backups and updates.", "inLanguage": "en", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://phishdestroy.github.io/TgWitness/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://phishdestroy.github.io/TgWitness/docs/"}, {"@type": "ListItem", "position": 3, "name": "Reference", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Deployment", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/deployment/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../docs.css">
+<link rel="stylesheet" href="../../../learn.css">
+<script src="../../../docs.js" defer></script>
+<script src="../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Documentation</span></a>
+<nav aria-label="Guides"><a href="../../concepts/">Visual guide</a><a href="../../">All guides</a><a href="../">Reference</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Language"><span aria-hidden="true">◍</span> English</summary><div class="lang-list"><a href="./" hreflang="en" lang="en" aria-current="true">English</a><a href="../../../ru/docs/reference/deployment/" hreflang="ru" lang="ru">Русский</a><a href="../../../uk/docs/reference/deployment/" hreflang="uk" lang="uk">Українська</a><a href="../../../es/docs/reference/deployment/" hreflang="es" lang="es">Español</a><a href="../../../pt/docs/reference/deployment/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../tr/docs/reference/deployment/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../ar/docs/reference/deployment/" hreflang="ar" lang="ar">العربية</a><a href="../../../fa/docs/reference/deployment/" hreflang="fa" lang="fa">فارسی</a><a href="../../../ur/docs/reference/deployment/" hreflang="ur" lang="ur">اردو</a><a href="../../../hi/docs/reference/deployment/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../id/docs/reference/deployment/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../vi/docs/reference/deployment/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../zh/docs/reference/deployment/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Switch between light and dark theme"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Guides"><a href="../../../guides/modes.html">Modes, scenarios and evidence levels</a><p class="nav-label">First steps</p><a href="../../start/">Start in minutes</a><a href="../../accounts/">Connect an account</a><a href="../../proxies/">Choose a proxy</a><a href="../../exports/">Export and verify</a><p class="nav-label">Understand the evidence</p><a href="../../concepts/">See how evidence works</a><a href="../../cases/">Investigate across all chats</a><a href="../../security/">Keep it secure</a><p class="nav-label">Go further</p><a href="../../witness/">Set up a witness bot</a><a href="../../server/">Keep it running</a><a href="../../troubleshooting/">Find what went wrong</a></nav><nav class="wiki-nav" aria-label="Reference"><p class="nav-label"><a class="nav-label-link" href="../">Reference</a></p><details class="wiki-group" open><summary>Set up</summary><a href="../quickstart/">Quick start</a><a href="../accounts/">Accounts and session formats</a><a href="../connection/">Connection, proxies and data protection</a><a href="./" aria-current="page">Deployment</a></details><details class="wiki-group"><summary>Collect</summary><a href="../collection/">How collection works</a><a href="../operations/">Workflows and operations</a><a href="../investigation/">Investigation mode</a><a href="../features/">Features and limits</a></details><details class="wiki-group"><summary>Evidence</summary><a href="../how-it-works/">How the evidence works</a><a href="../evidence/">Evidence format</a><a href="../witness/">Independent witness</a><a href="../timestamp/">Timestamps</a></details><details class="wiki-group"><summary>Security & project</summary><a href="../security/">Security and data handling</a><a href="../architecture/">Architecture</a><a href="../verification/">What has been tested</a><a href="../license/">Licence and architectural incompatibility notice</a><a href="../notice/">Operator incompatibility notice</a><a href="../changelog/">Changelog</a></details></nav><p class="sidebar-note">v0.7.0<br>Open source · Runs on your machine</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Guides"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Documentation</a> <span aria-hidden="true">/</span> <a href="../">Reference</a> <span aria-hidden="true">/</span> <span aria-current="page">Deployment</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Search the documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Try proxy, hash chain, token or witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Clear search" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Type a word to search the guides and the reference. Search stays in your browser.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Reference / Set up</p><h1>Deployment</h1><p class="guide-outcome">Run TgWitness as a service on Windows, Linux, macOS or Docker, behind HTTPS, with backups and updates.</p><div class="wiki-body"><p><strong>English</strong> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md">Русский</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md">Українська</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md">Español</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md">Português (Brasil)</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md">Türkçe</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md">العربية</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md">فارسی</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md">اردو</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md">हिन्दी</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md">Bahasa Indonesia</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md">Tiếng Việt</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md">简体中文</a></p>
+<h2 id="choose-an-installation">Choose an installation<a class="anchor" href="#choose-an-installation" aria-label="Link to this section">#</a></h2>
+<p>For the portable package, extract <code>TgWitness-&lt;version&gt;-windows-amd64-portable.zip</code> from
+GitHub Releases. For the other methods, download and extract the source ZIP or clone the
+repository, then run the following from the project directory:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Installation</th>
+<th>Start</th>
+<th>Runs in the background?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows portable package</td>
+<td><code>TgWitness.cmd</code></td>
+<td>No; keep the window open.</td>
+</tr>
+<tr>
+<td>Native Windows</td>
+<td><code>Start.cmd</code></td>
+<td>No; use the optional logon task for background use.</td>
+</tr>
+<tr>
+<td>Native Linux/macOS</td>
+<td><code>sh start.sh</code></td>
+<td>No; use systemd/launchd for background use.</td>
+</tr>
+<tr>
+<td>Docker on any supported host</td>
+<td><code>docker compose up -d --build --wait</code></td>
+<td>Yes, while the Docker daemon runs.</td>
+</tr>
+<tr>
+<td>Docker helper on Windows</td>
+<td><code>scripts\Docker.cmd</code></td>
+<td>Yes; the helper waits for web-server health.</td>
+</tr>
+<tr>
+<td>Docker helper on Linux/macOS</td>
+<td><code>sh scripts/docker-start.sh</code></td>
+<td>Yes; the helper waits for web-server health.</td>
+</tr>
+</tbody>
+</table></div>
+<p>For a cloud server that a third party should be able to check — created through the
+provider's API, without SSH, reached only through a Cloudflare Tunnel — see
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md">high-assurance deployment</a>.</p>
+<p>Native startup creates a private <code>.venv</code> and installs the pinned dependencies.
+Docker builds them inside the image, without requiring host Python. First-time
+setup needs Internet access. When no Python 3.11+ is found, <code>Start.cmd</code> asks before
+installing Python 3.12 for the current Windows user (winget, otherwise the python.org
+installer after checking its Python Software Foundation signature); it never requests
+administrator privileges. Docker and OS services remain prerequisites.</p>
+<p>Native and portable installations use <code>data/live</code> inside their folder. Docker uses the <code>tgwitness-data</code> named volume
+at <code>/data</code>. These are separate installations until you deliberately migrate the
+complete data directory. Do not expect a new Docker container to discover native
+accounts automatically.</p>
+<h2 id="installation-requirements">Installation requirements<a class="anchor" href="#installation-requirements" aria-label="Link to this section">#</a></h2>
+<p>Native installation needs Python 3.11 or later with <code>venv</code> and <code>ensurepip</code>, Internet
+access for the first dependency installation, and a writable project directory for
+<code>.venv</code>. The bundled panel needs no Node.js or frontend build. Run the launcher from
+your normal OS account; administrator/root privileges are not required by TgWitness.</p>
+<ul>
+<li><strong>Windows:</strong> <code>Start.cmd</code> checks <code>py -3</code>, then <code>python</code>, then the default per-user and
+    Program Files install folders, and requires version 3.11 or later. If none works, it
+    offers the automatic per-user installation described above. <code>py -3 start.py</code> also works.
+    The portable package needs no Python at all.</li>
+<li><strong>Linux:</strong> <code>start.sh</code> tries <code>python3.13</code>, <code>python3.12</code>, <code>python3.11</code>, <code>python3</code> and
+    <code>python</code>, and prints the install command for apt, dnf, pacman, zypper, apk or Homebrew
+    when none qualifies. Debian/Ubuntu installations may require the
+    <code>python3-venv</code> package matching the selected interpreter. A distribution's older
+    default Python must be replaced or supplemented with Python 3.11+.</li>
+<li><strong>macOS:</strong> install a current Python 3.11+ distribution; do not assume an OS-provided
+    interpreter meets the requirement. Use <code>python3 start.py</code> from the project directory.</li>
+<li><strong>Docker:</strong> use Docker Engine/Desktop with Compose v2.20 or newer. Docker Desktop
+    must use Linux containers on Windows. The container installs its
+    own Python dependencies; the host does not need a separate Python installation.</li>
+</ul>
+<p>Use persistent local storage for the data directory. Plan capacity from messages,
+media, WAL growth, exports and backups; there is no evidence-based universal minimum
+disk/RAM specification for every workload. CPU architectures and Python versions
+without compatible dependency wheels may require additional build tools and their
+own qualification. "Portable" is not a claim of universal OS or hardware support.</p>
+<p>Windows 11/Python 3.12 is locally verified. Linux/macOS/container definitions and CI
+are supplied but have not been executed on this development host. See
+<a href="../verification/">VERIFICATION.md</a> for the exact scope.</p>
+<h2 id="local-computer">Local computer<a class="anchor" href="#local-computer" aria-label="Link to this section">#</a></h2>
+<p>Use <code>Start.cmd</code> on Windows or <code>sh start.sh</code> on Linux/macOS. <code>scripts\Setup.cmd</code> or
+<code>sh start.sh --setup-only</code> prepares
+the environment. The launcher installs dependencies on first use; later launches
+reuse the environment. Internet access is needed for setup and Telegram collection,
+but browsing existing records and creating exports work offline.</p>
+<p>Run <code>python start.py --check</code> after setup to inspect local dependencies, Ed25519,
+storage, key configuration and the listening address without starting a collector.
+Use <code>--json</code> for structured output. Pass the intended <code>--data-dir</code>, <code>--host</code> and
+<code>--port</code>. The check does not install packages, create a journal or connect Telegram;
+it is not an integrity or coverage qualification. Startup separately verifies
+existing journals. <code>python start.py --help</code> also avoids installation.</p>
+<p>Options:</p>
+<p>After using start.py, run auxiliary commands with <code>.venv\Scripts\python.exe</code> on
+Windows or <code>.venv/bin/python</code> on Linux/macOS, or activate that environment first.
+The <code>python -m ...</code> examples below assume the environment is active.</p>
+<pre><code class="language-sh">python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 8787</code></pre>
+<p>Environment variables: TGWITNESS_DATA, TGWITNESS_HOST, TGWITNESS_PORT, TGWITNESS_TOKEN.
+TGWITNESS_VAULT_KEY_FILE selects external-key mode for a new installation; see below.
+TGWITNESS_TOKEN, if supplied, must contain at least 24 characters; use a cryptographically
+random value. Without it, the app generates a 256-bit random token in panel-token.txt.
+The environment override does not rewrite that file. Restart to rotate credentials.</p>
+<p>Exactly one process may own a data directory. A cross-platform OS file lock prevents
+accidental concurrent writers. Use one Uvicorn worker. The panel can manage any number of
+workspaces, with additional workspace directories under profiles/&lt;id&gt;/.
+For separate service instances, use separate directories and ports. SQLite WAL files belong on local persistent
+storage, not a network filesystem. Do not share one volume between replicas.</p>
+<h2 id="windows-portable-package">Windows portable package<a class="anchor" href="#windows-portable-package" aria-label="Link to this section">#</a></h2>
+<p>Each GitHub Release carries <code>TgWitness-&lt;version&gt;-windows-amd64-portable.zip</code> and its
+<code>.sha256</code>. It contains the official embeddable Python 3.12 runtime from python.org
+(checksum pinned in <code>tools/build_portable.py</code>), TgWitness and its pinned dependencies,
+and three launchers:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TgWitness.cmd</code></td>
+<td>Start the panel; extra options are passed through, e.g. <code>TgWitness.cmd --port 8790</code></td>
+</tr>
+<tr>
+<td><code>TgWitness-Demo.cmd</code></td>
+<td>Start the synthetic demo in <code>data\demo</code></td>
+</tr>
+<tr>
+<td><code>TgWitness-Check.cmd</code></td>
+<td>Run the readiness check without starting</td>
+</tr>
+</tbody>
+</table></div>
+<p>Extract the whole archive to a writable folder such as <code>Documents\TgWitness</code>; do not run
+it from inside the ZIP or from Program Files. The runtime uses an isolated module path,
+so other Python installations and <code>PYTHONPATH</code> do not affect it. Data stays in the
+package's <code>data</code> folder. To update, stop TgWitness, extract the new version to a new
+folder and copy the <code>data</code> folder across.</p>
+<p>Build it yourself on 64-bit Windows with Python 3.12:</p>
+<pre><code class="language-sh">python tools/build_portable.py</code></pre>
+<p>The builder verifies the runtime checksum, installs the constrained dependencies into
+the package, runs the readiness check with the embedded interpreter and writes the ZIP
+and checksum to <code>dist/</code>.</p>
+<h2 id="container">Container<a class="anchor" href="#container" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
+<p>This creates a named persistent volume for /data.
+The web port is mapped to 127.0.0.1:8787. The process runs as UID 10001 with dropped
+capabilities, a read-only root filesystem, and writable /data and /tmp.
+<code>--wait</code> checks web-server health before returning; it does not establish Telegram
+authorization or delivery. The supplied helpers use a 180-second readiness timeout
+after building. Initial dependency downloads can take longer than that.</p>
+<p>Both base Compose files use the project name <code>tgwitness</code>, so extracting a new release
+into another directory does not silently select a new data volume. Keep only one
+deployment active for that project. For independent installations, use a unique
+<code>docker compose -p NAME ...</code> and a different host port, and retain both on updates.
+For an older deployment using a different project name, continue using its original
+name with <code>-p</code>; <code>docker compose ls</code> lists existing projects.</p>
+<p>Copy <code>deploy/env.example</code> to <code>.env</code> and change <code>TGWITNESS_PORT</code> to use a different loopback
+port. For example, <code>TGWITNESS_PORT=8788</code> exposes the panel at
+<code>http://127.0.0.1:8788</code>; the container still listens on 8787. <code>.env</code> is Git-ignored.</p>
+<p>Retrieve the initial token:</p>
+<pre><code class="language-sh">docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
+<p>Useful commands:</p>
+<pre><code class="language-sh">docker compose ps
+docker compose logs --tail 100 -f
+docker compose stop
+docker compose up -d --wait</code></pre>
+<p><code>restart: unless-stopped</code> restarts the collector after a crash or Docker daemon
+restart. On a Linux server, enable Docker at boot using your distribution's service
+manager, commonly <code>sudo systemctl enable --now docker</code>. On Windows/macOS, enable
+Docker Desktop's start-at-sign-in setting. Desktop sign-out, sleep, or a stopped
+Docker daemon can interrupt collection. An explicitly stopped container stays
+stopped until you start it again.</p>
+<p>The /tmp volume is capped at 512 MiB in the example configuration. Export construction
+uses each workspace's <code>temporary-exports/</code> on persistent /data instead. Reserve space
+there for simultaneous exports, journal/WAL growth, media and backups.
+The launcher and Docker use deploy/constraints.txt to pin qualified runtime dependency
+versions. This is not a hash-locked supply chain: the Python base image and package
+artifacts still require independent release qualification.</p>
+<p>Do not use docker compose down -v unless you intend to destroy the journal and keys.
+Container health reports web-server availability, not successful Telegram capture.
+Inspect the panel's collector state, heartbeat, errors, and coverage events.</p>
+<h3 id="independent-witness-profile">Independent witness profile<a class="anchor" href="#independent-witness-profile" aria-label="Link to this section">#</a></h3>
+<p>The optional <code>witness</code> service runs an <a href="../witness/">independent witness</a> in its own
+container, with its own key and journal in the <code>witness-data</code> volume and only a read-only
+witness token for the collector. Create the token on the panel's <strong>Witness</strong> page, add it
+with a bot token and channel to <code>.env</code>, then start the profile:</p>
+<pre><code class="language-sh">docker compose --profile witness up -d          # deploy/compose/compose.image.yaml: same flag
+docker compose logs witness                     # witness key fingerprint</code></pre>
+<p>The service reaches the collector inside the Compose network at <code>http://tgwitness:8787</code>
+(<code>TGWITNESS_WITNESS_COLLECTOR</code> overrides it, for example <code>/profiles/&lt;workspace ID&gt;</code> for
+another workspace). For a witness on a separate server, run by someone else, use
+<code>deploy/compose/compose.witness.yaml</code> there with <code>TGWITNESS_WITNESS_COLLECTOR</code> set to the collector's HTTPS
+address; that file contains only the witness.</p>
+<h2 id="install-a-published-image">Install a published image<a class="anchor" href="#install-a-published-image" aria-label="Link to this section">#</a></h2>
+<p>This becomes available after a successful <a href="#automated-github-releases">release workflow</a>
+and public GHCR package configuration. The repository's owner/name is not hardcoded
+into this source tree. Use the image shown in that release's workflow summary.</p>
+<p>Copy <code>deploy/env.example</code> to <code>.env</code>. Set <code>TGWITNESS_IMAGE</code> to the published version, using
+the <strong>lowercase</strong> repository path, for example:</p>
+<pre><code class="language-dotenv">TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.0
+TGWITNESS_PORT=8787</code></pre>
+<p>Run this file on its own, instead of <code>compose.yaml</code>:</p>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml exec tgwitness cat /data/panel-token.txt</code></pre>
+<p>No source build, Python, or compiler is needed on the host. The release workflow
+targets Linux AMD64 and ARM64 containers, including Docker Desktop's Linux VM.
+Use a version tag or <code>ghcr.io/owner/repository@sha256:...</code> from the workflow summary.
+No moving <code>latest</code> tag or unattended application upgrade is configured. The
+image and source variants use the same data volume when their project name matches.</p>
+<h2 id="automatic-https-on-a-server">Automatic HTTPS on a server<a class="anchor" href="#automatic-https-on-a-server" aria-label="Link to this section">#</a></h2>
+<p>Use a server with Docker, a domain you control, and persistent local storage.
+Point the domain's A/AAAA records at the server; publish AAAA only if IPv6 reaches
+it. Allow inbound TCP 80 and 443 and outbound DNS/HTTPS for certificate issuance.
+Other services must not already own these ports.</p>
+<p>Copy <code>deploy/env.example</code> to <code>.env</code> and set a hostname, without a scheme or path:</p>
+<pre><code class="language-dotenv">TGWITNESS_DOMAIN=watch.your-domain.org</code></pre>
+<p>Start the source build with the HTTPS overlay:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt</code></pre>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml -f deploy/compose/compose.https.yaml up -d --wait</code></pre>
+<p>For a published image, use <code>deploy/compose/compose.image.yaml</code> as the first file instead. Keep
+both <code>-f</code> arguments for later status, logs, update, and stop commands.</p>
+<p>Caddy obtains and renews a certificate, redirects HTTP to HTTPS, and forwards
+requests to the collector on the private Compose network. Certificate state has
+its own persistent volume. The collector's direct host port remains loopback-only.
+The supplied Caddy configuration does not enable access logging.</p>
+<p>Open <code>https://watch.your-domain.org</code> and enter the panel token. Compose readiness
+does not confirm certificate issuance or external reachability. If HTTPS is not
+ready, inspect DNS, firewall rules, and:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.https.yaml logs --tail 100 caddy</code></pre>
+<p>The supplied Caddy image follows its <code>2-alpine</code> tag. Pulling refreshes that image;
+pin a tested digest in your deployment if you need fixed infrastructure versions.</p>
+<h2 id="updates-and-backups">Updates and backups<a class="anchor" href="#updates-and-backups" aria-label="Link to this section">#</a></h2>
+<p>Preserve the Compose project name and data volume across updates. First stop the
+collector and make a complete backup. For the default source-based deployment:</p>
+<pre><code class="language-sh">docker compose stop
+docker compose cp tgwitness:/data ../tgwitness-backup-before-update</code></pre>
+<p>Use a new backup destination each time, outside the repository, and protect it as
+account-access material. The example path is illustrative; use your private backup
+location. Copy the entire directory, including hidden files, all workspaces, keys,
+journals, and media. Back up an external vault master key separately if configured.
+An evidence ZIP is not a restorable application backup. For HTTPS, also preserve
+the Caddy volumes if you need to retain its certificate/account state.</p>
+<p>For a source deployment, obtain the new release files and run:</p>
+<pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
+<p>For an image deployment, change <code>TGWITNESS_IMAGE</code> to the desired version, then run:</p>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait</code></pre>
+<p>Use your installation's Compose file(s) for the preceding stop/copy commands too.
+Keep <code>.env</code>, custom configuration, and the same project name. <code>down</code> keeps named
+volumes; <strong><code>down -v</code> deletes them</strong>. Do not copy <code>.venv</code> between operating systems
+or Python versions. For native updates, stop TgWitness, back up its full data
+directory, replace source files, and run <code>python start.py --setup-only</code> before launch.</p>
+<p>Check panel access, account identity, observation state, and coverage after an
+update. Restarting does not reconstruct missed Telegram updates. A rollback may
+require the pre-update backup if a future version changes storage formats.</p>
+<h2 id="automated-github-releases">Automated GitHub releases<a class="anchor" href="#automated-github-releases" aria-label="Link to this section">#</a></h2>
+<p>The <a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml">release workflow</a> is ready to use after this
+project is pushed to a GitHub repository with Actions enabled. It runs when a
+GitHub Release is <strong>published</strong>, including a prerelease. Drafts and tag pushes
+alone do not publish packages.</p>
+<ol>
+<li>Set the package version and changelog, then publish a release tagged with <code>v</code>
+    plus the exact <code>pyproject.toml</code> version, such as <code>v0.7.0</code>.</li>
+<li>The workflow validates the tag and runs the shared Windows/Linux/macOS Python,
+    general/account-import/QR browser, source-package, and Docker checks. Fresh native installation is also
+    exercised on all three operating systems using Python 3.12.</li>
+<li>After those checks pass, it smoke-tests an ARM64 image under QEMU, publishes
+    AMD64/ARM64 images to <code>ghcr.io/&lt;lowercase-owner&gt;/&lt;lowercase-repository&gt;:&lt;version&gt;</code>,
+    and attaches the source ZIP, checksum, and Python wheel to the release. A separate
+    Windows job builds and attaches the portable ZIP and its checksum.</li>
+<li>After the first publication, open the GHCR package settings and set visibility
+    to <strong>Public</strong> if anonymous image pulls are intended. A public source repository
+    alone does not guarantee a public container package. Organization policies must
+    permit package publication. The workflow uses <code>GITHUB_TOKEN</code>; no registry
+    password or VPS credentials belong in the repository.</li>
+</ol>
+<p>Remote workflow success has not been established by this local preparation. ARM64
+emulation is a smoke check, not native-hardware or live Telegram qualification.
+This automates release packaging; starting a server still requires the Compose
+command and its domain/host prerequisites. Existing servers are not silently
+upgraded or restarted when a release is published.</p>
+<h2 id="remote-server">Remote server<a class="anchor" href="#remote-server" aria-label="Link to this section">#</a></h2>
+<p>Keep the service bound to loopback and use an SSH tunnel, or terminate HTTPS at a
+reverse proxy. The base Compose file is local-only; the optional
+<code>deploy/compose/compose.https.yaml</code> overlay supplies Caddy for a configured domain.
+Keep the bearer token out of URLs and proxy logs. A reverse proxy should limit
+request size and connection rates. Do not expose plain HTTP to the Internet.</p>
+<p>Examples for systemd, a Windows logon task, a macOS user agent and Caddy are provided
+in <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/</a>. Review/adapt their paths before installation.
+They are supplied templates, not locally executed platform qualifications. No
+background service or task is registered by the normal launcher.</p>
+<p>On Windows, a windowless <code>pythonw.exe</code> launch stores startup/server diagnostics in
+<code>logs/server.log</code> under the data directory (5 MiB per file, two rotated backups).
+Console launches retain console logging. HTTP access logging is disabled in both
+modes. Protect logs with the data directory and review them before sharing.</p>
+<h2 id="restart-and-gaps">Restart and gaps<a class="anchor" href="#restart-and-gaps" aria-label="Link to this section">#</a></h2>
+<p>The last requested observation state is persisted. If observation was active,
+startup attempts to reconnect and resume selected sources. Manual pause clears
+that intention. A failed restart is recorded and shown in the panel.</p>
+<p>StringSession retains authorization but not Telethon's durable update/entity state.
+Dialogs are reloaded on start. Telegram/Telethon can recover some transport interruptions
+while running, but TgWitness does not claim durable replay across process restarts.
+Every startup records the preceding journal head and the offline boundary.
+The monitor checks connectivity every 10 seconds and adds a heartbeat every minute
+(<strong>Parameters → Liveness record every</strong>).
+Brief interruptions can be missed; a connected transport does not guarantee complete
+update delivery. Snapshots are explicit current-history observations, never gap repair.</p>
+<p>The media queue is stored in each workspace's SQLite database. A message and its job
+are committed atomically. Interrupted running jobs are recovered for retry on start.
+Each download has a 120-second base timeout plus time at 256 KiB/s for its size, and a
+1–2,000 MiB limit per attachment type; timeout, speed and retries are under <strong>Parameters</strong>. The collector
+skips files whose size is unknown. Pausing retains queued work. Retry uses the original
+observed file descriptor, never the latest version of a subsequently edited message.
+Temporary failures have bounded retries; media FloodWait pauses survive restart.
+Media recovery is separate from Telegram update recovery and cannot recreate vanished files.</p>
+<h2 id="backup-restore-and-capacity">Backup, restore, and capacity<a class="anchor" href="#backup-restore-and-capacity" aria-label="Link to this section">#</a></h2>
+<p>Stop the process before copying the <strong>entire data directory</strong>, including vault.key,
+signing.enc, credentials.enc, SQLite database/WAL files, media, token, checkpoints,
+and all profiles/ subdirectories. Restore
+the complete copy while the destination service is stopped. Missing vault keys or
+signing-key mismatch cause startup to fail; do not regenerate keys to force access.</p>
+<p>Keep secret backups encrypted and access-controlled. Evidence ZIPs are portable
+review artifacts, not application backups or Telegram-session backups.
+There is no automatic retention deletion. Plan disk space for all messages, raw
+metadata, media, temporary exports, and backups.</p>
+<p>Startup verification and export stream records instead of loading the whole journal.
+An export pins a read snapshot while new WAL writes can continue; long-running exports
+can retain WAL pages, so disk capacity still matters. ZIPs are capped at 4 GiB
+uncompressed to match the independent verifier's default; <strong>Parameters → Largest signed ZIP</strong>
+raises the cap, and such archives are verified with <code>verify.py --max-gib N</code>. Other formats have no event-count cap.
+Supported browsers stream response chunks to a user-selected file. Other browsers
+buffer at most 128 MiB and direct larger transfers to the authenticated CLI:</p>
+<pre><code class="language-sh">python -m tgwitness.download --token-file data/live/panel-token.txt --out evidence.zip</code></pre>
+<p>Use <code>--profile ID</code> from <strong>Exports → Workspace ID</strong> for another workspace,
+<code>--format zip|jsonl|csv|html</code>, <code>--url https://your-server</code> for a remote server, or
+<code>--max-mib</code> to change the 5 GiB transfer limit. Plain HTTP is allowed only for
+loopback. Tokens travel in headers, redirects are refused, existing files are
+not overwritten, and incomplete downloads are not published as finished files.
+If TGWITNESS_TOKEN overrides the generated token, use a separately protected file
+containing that active value: panel-token.txt is not rewritten by the override.
+The command's SHA-256 is only a transfer checksum; independently verify the signed ZIP.</p>
+<p>Server export files remain inside each workspace's private <code>temporary-exports/</code>.
+Successful responses clean up their files. Interrupted exports are removed at the
+next workspace startup with its exclusive instance lock held. This directory is part
+of the storage threat/capacity model; use an encrypted data volume. Production-scale
+multi-gigabyte transfers still require qualification on your target system.</p>
+<p>The panel displays queued/failed media, oldest pending media, free disk, Telegram
+request pauses, and sources whose access is unconfirmed. These diagnostics are not
+a complete end-to-end delivery monitor. Workspaces share a process; a noisy account can
+still affect others. Separate worker processes, retention/rotation, durable update
+recovery, remote checkpoint anchoring, roles, and full deployment qualification remain.</p>
+<h2 id="connection-and-protection-options">Connection and protection options<a class="anchor" href="#connection-and-protection-options" aria-label="Link to this section">#</a></h2>
+<p>Connection routes are per workspace and should be configured before authorization.
+SOCKS5/HTTP CONNECT use the pinned python-socks dependency. MTProxy uses Telethon's
+experimental randomized intermediate transport; Fake TLS ee secrets are unsupported.
+No automatic direct fallback is configured. This is not a system-wide network route.</p>
+<p>For new installations, TGWITNESS_VAULT_KEY_FILE points to a separately protected random
+master-key file. Mount it read-only outside /data in a container. Preserve the public
+vault.external.json salt metadata with each workspace and the master key separately.
+Existing local vaults require a planned migration; setting this variable does not
+silently convert them. Message/media storage and exports are not application-encrypted.
+Use encrypted volumes and sufficient private temporary storage where needed.</p>
+<p>Detailed procedures: <a href="../connection/">connection/security</a> and
+<a href="../operations/">operating modes</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/DEPLOYMENT.md">Edit this page on GitHub ↗</a><a class="next-guide" href="../collection/"><span>Next step</span><strong>How collection works →</strong></a><p>These guides describe the current implementation. Validation results and remaining gaps are documented separately. <a href="../verification/">What has been tested →</a></p></footer>
+</main>
+<aside class="toc" aria-label="On this page"><p class="nav-label">On this page</p><a href="#choose-an-installation">Choose an installation</a><a href="#installation-requirements">Installation requirements</a><a href="#local-computer">Local computer</a><a href="#windows-portable-package">Windows portable package</a><a href="#container">Container</a><a href="#install-a-published-image">Install a published image</a><a href="#automatic-https-on-a-server">Automatic HTTPS on a server</a><a href="#updates-and-backups">Updates and backups</a><a href="#automated-github-releases">Automated GitHub releases</a><a href="#remote-server">Remote server</a><a href="#restart-and-gaps">Restart and gaps</a><a href="#backup-restore-and-capacity">Backup, restore, and capacity</a><a href="#connection-and-protection-options">Connection and protection options</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Open source · Runs on your machine</span><a href="../../../LICENSE">MIT license</a><a href="../notice/">Operator notice</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Security</a></footer>
+<script id="site-dict" type="application/json">{}</script>
+</body></html>

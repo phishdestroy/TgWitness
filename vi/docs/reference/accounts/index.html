@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="vi" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Các định dạng tài khoản và phiên làm việc | TgWitness</title>
+<meta name="description" content="Đăng nhập bằng số điện thoại, mã QR hoặc khóa xác thực, nhập các phiên làm việc từ Telethon, Pyrogram hoặc Telegram Desktop, và quản lý nhiều tài khoản cùng lúc."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:title" content="Các định dạng tài khoản và phiên làm việc | TgWitness"><meta property="og:description" content="Đăng nhập bằng số điện thoại, mã QR hoặc khóa xác thực, nhập các phiên làm việc từ Telethon, Pyrogram hoặc Telegram Desktop, và quản lý nhiều tài khoản cùng lúc.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/accounts/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/accounts/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/accounts/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/accounts/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/accounts/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/accounts/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/accounts/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/accounts/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/accounts/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/accounts/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/", "url": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/", "name": "Các định dạng tài khoản và phiên làm việc | TgWitness", "description": "Đăng nhập bằng số điện thoại, mã QR hoặc khóa xác thực, nhập các phiên làm việc từ Telethon, Pyrogram hoặc Telegram Desktop, và quản lý nhiều tài khoản cùng lúc.", "inLanguage": "vi", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "https://phishdestroy.github.io/TgWitness/vi/"}, {"@type": "ListItem", "position": 2, "name": "Tài liệu hướng dẫn", "item": "https://phishdestroy.github.io/TgWitness/vi/docs/"}, {"@type": "ListItem", "position": 3, "name": "Tham khảo", "item": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Các định dạng tài khoản và phiên làm việc", "item": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Chuyển thẳng đến nội dung</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Tài liệu hướng dẫn</span></a>
+<nav aria-label="Hướng dẫn"><a href="../../concepts/">Hướng dẫn trực quan</a><a href="../../">Tất cả các hướng dẫn</a><a href="../">Tham khảo</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Ngôn ngữ"><span aria-hidden="true">◍</span> Tiếng Việt</summary><div class="lang-list"><a href="../../../../docs/reference/accounts/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/accounts/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/accounts/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/accounts/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/accounts/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/accounts/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/accounts/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/accounts/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/accounts/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/accounts/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/accounts/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="./" hreflang="vi" lang="vi" aria-current="true">Tiếng Việt</a><a href="../../../../zh/docs/reference/accounts/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Chuyển đổi giữa chế độ giao diện sáng và tối"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Hướng dẫn"><a href="../../../guides/modes.html">Các chế độ, kịch bản và mức độ bằng chứng</a><p class="nav-label">Các bước đầu tiên</p><a href="../../start/">Bắt đầu chỉ trong vài phút</a><a href="../../accounts/">Kết nối tài khoản</a><a href="../../proxies/">Chọn một máy chủ proxy</a><a href="../../exports/">Xuất và xác minh</a><p class="nav-label">Hiểu rõ về bằng chứng</p><a href="../../concepts/">Tìm hiểu cách thức hoạt động của bằng chứng</a><a href="../../cases/">Điều tra trên tất cả các cuộc trò chuyện</a><a href="../../security/">Hãy đảm bảo tính bảo mật</a><p class="nav-label">Tìm hiểu thêm</p><a href="../../witness/">Thiết lập bot chứng cứ</a><a href="../../server/">Hãy duy trì hoạt động của nó</a><a href="../../troubleshooting/">Tìm hiểu nguyên nhân sự cố</a></nav><nav class="wiki-nav" aria-label="Tham khảo"><p class="nav-label"><a class="nav-label-link" href="../">Tham khảo</a></p><details class="wiki-group" open><summary>Thiết lập</summary><a href="../quickstart/">Hướng dẫn bắt đầu nhanh</a><a href="./" aria-current="page">Các định dạng tài khoản và phiên làm việc</a><a href="../connection/">Kết nối, máy chủ trung gian và bảo vệ dữ liệu</a><a href="../deployment/">Triển khai</a></details><details class="wiki-group"><summary>Thu thập</summary><a href="../collection/">Cách thức thu thập dữ liệu</a><a href="../operations/">Quy trình làm việc và hoạt động</a><a href="../investigation/">Chế độ điều tra</a><a href="../features/">Các tính năng và giới hạn</a></details><details class="wiki-group"><summary>Bằng chứng</summary><a href="../how-it-works/">Cách thức hoạt động của bằng chứng</a><a href="../evidence/">Định dạng bằng chứng</a><a href="../witness/">Nhân chứng độc lập</a><a href="../timestamp/">Dấu thời gian</a></details><details class="wiki-group"><summary>An ninh & dự án</summary><a href="../security/">An ninh và xử lý dữ liệu</a><a href="../architecture/">Kiến trúc</a><a href="../verification/">Những nội dung đã được kiểm thử</a><a href="../license/">Thông báo về sự không tương thích giữa giấy phép và kiến trúc</a><a href="../notice/">Thông báo về sự không tương thích giữa các nhà cung cấp dịch vụ</a><a href="../changelog/">Bản ghi thay đổi</a></details></nav><p class="sidebar-note">v0.7.0<br>Mã nguồn mở · Chạy trên máy tính của quý vị</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Hướng dẫn"><a href="../../../">Trang chủ</a> <span aria-hidden="true">/</span> <a href="../../">Tài liệu hướng dẫn</a> <span aria-hidden="true">/</span> <a href="../">Tham khảo</a> <span aria-hidden="true">/</span> <span aria-current="page">Các định dạng tài khoản và phiên làm việc</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Tìm kiếm trong tài liệu</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Hãy thử các thuật ngữ như proxy, chuỗi băm, token hoặc witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Tìm kiếm rõ ràng" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Hãy nhập một từ khóa để tìm kiếm trong các hướng dẫn và tài liệu tham khảo. Kết quả tìm kiếm sẽ được lưu lại trong trình duyệt của quý vị.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Tham khảo / Thiết lập</p><h1>Các định dạng tài khoản và phiên làm việc</h1><p class="guide-outcome">Đăng nhập bằng số điện thoại, mã QR hoặc khóa xác thực, nhập các phiên làm việc từ Telethon, Pyrogram hoặc Telegram Desktop, và quản lý nhiều tài khoản cùng lúc.</p><div class="wiki-body"><p>TgWitness đăng nhập dưới dạng tài <strong>khoản người dùng Telegram</strong> (không phải bot) qua giao thức MTProto, sử dụng
+Telethon. Mỗi tài khoản tồn tại trong <strong>không gian</strong> làm việc riêng (được gọi là <em>“workspace”</em> trong
+API và các công cụ dòng lệnh) với phiên làm việc, nguồn dữ liệu, nhật ký và khóa ký riêng.</p>
+<p>Các tệp phiên làm việc, chuỗi phiên làm việc và Khóa xác thực là <strong>các thông tin ủy quyền tài khoản</strong>: bất kỳ ai
+sở hữu chúng đều có thể thực hiện các thao tác như chủ tài khoản đó. Chúng không chứa lịch sử tin nhắn.</p>
+<blockquote class="callout">
+<p>[!CẢNH BÁO]
+<strong>Không nên sử dụng bất kỳ thứ gì mà quý vị không thể chấp nhận mất mát.</strong> Chúng tôi khuyến cáo mạnh mẽ không nên kết nối
+các tài khoản cá nhân hoặc các tài khoản có giá trị khác, cũng như không nên tạo ID API / băm API trên
+một tài khoản mà quý vị coi trọng. Điều này không phải do TgWitness chưa được kiểm thử: Telegram hạn chế và
+cấm vĩnh viễn các tài khoản một cách khó lường — đối với khối lượng yêu cầu mà nền tảng này cho là
+quá mức, bất kể khách hàng hay mục đích là gì, mà không có tài liệu hướng dẫn đầy đủ. Nhiều trường hợp bị cấm
+là không thể đảo ngược. Hãy sử dụng các tài khoản chuyên dụng. Quá trình thử nghiệm diễn ra suôn sẻ phụ thuộc vào Telegram, không phải vào
+phần mềm, và không đảm bảo điều gì cho các giai đoạn sau này.</p>
+</blockquote>
+<ul>
+<li><a href="#at-a-glance">Tổng quan</a></li>
+<li><a href="#before-you-start-api-id-and-api-hash">Trước khi bắt đầu: ID API và mã băm API</a></li>
+<li><a href="#phone-number">Số điện thoại</a> · <a href="#qr-code">Mã QR</a> · <a href="#auth-key--dc-id">Khóa xác thực (Auth Key) + ID DC</a></li>
+<li><a href="#account-files">Tệp tài khoản</a>: <a href="#telethon-session">Telethon .session</a> ·
+    <a href="#pyrogram-session">Pyrogram .session</a> · <a href="#session--json-pair">Cặp phiên + JSON</a> ·
+    <a href="#telegram-desktop-tdata">TData</a> · <a href="#telethon-stringsession">StringSession</a> ·
+    <a href="#account-json">Tệp JSON tài khoản</a></li>
+<li><a href="#identify-what-you-have">Xác định những gì quý vị đang có</a> · <a href="#unsupported-formats">Các định dạng không được hỗ trợ</a></li>
+<li><a href="#multiple-accounts">Nhiều tài khoản</a> · <a href="#keeping-account-files-safe">Bảo vệ an toàn cho các tệp tài khoản</a> ·
+    <a href="#troubleshooting">Khắc phục sự cố</a></li>
+</ul>
+<h2 id="at-a-glance">Tổng quan<a class="anchor" href="#at-a-glance" aria-label="Liên kết đến phần này">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Những gì quý vị có</th>
+<th>Tab <strong>“Thêm tài khoản</strong>”</th>
+<th>Quý vị cũng sẽ cần</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Số điện thoại và quyền truy cập vào các mã đăng nhập của công cụ này</td>
+<td><strong>Điện thoại</strong></td>
+<td>Mật khẩu xác thực hai yếu tố (2FA) nếu tính năng này đã được kích hoạt</td>
+</tr>
+<tr>
+<td>Telegram đang mở trên một thiết bị khác</td>
+<td><strong>Mã QR</strong></td>
+<td>Mật khẩu xác thực hai yếu tố (2FA) nếu tính năng này đã được kích hoạt</td>
+</tr>
+<tr>
+<td>Một tệp <code>.session</code> (Telethon hoặc Pyrogram)</td>
+<td><strong>Tệp tin</strong></td>
+<td>Tệp JSON đi kèm (tùy chọn) dành cho cài đặt ứng dụng</td>
+</tr>
+<tr>
+<td><code>.session</code> + <code>.json</code> cùng tên</td>
+<td><strong>Tệp tin</strong> (chọn cả hai)</td>
+<td>Thông thường không có nội dung nào khác</td>
+</tr>
+<tr>
+<td>Thư mục <code>tdata</code> trên Telegram Desktop</td>
+<td><strong>Tệp tin</strong> (dạng ZIP)</td>
+<td>Mật mã cục bộ trên máy tính để bàn (nếu đã được thiết lập)</td>
+</tr>
+<tr>
+<td>Một phiên StringSession của Telethon (văn bản, <code>.txt</code>, <code>.tgwitness-session</code>)</td>
+<td><strong>Tệp tin</strong></td>
+<td>Không cần cặp API riêng biệt</td>
+</tr>
+<tr>
+<td>Một khóa <code>.json</code> kèm theo phiên làm việc hoặc Khóa xác thực (Auth Key)</td>
+<td><strong>Tệp tin</strong></td>
+<td>Không cần cặp API riêng biệt</td>
+</tr>
+<tr>
+<td>Một Khóa xác thực (512 ký tự hex) và số DC tương ứng</td>
+<td><strong>Khóa xác thực</strong></td>
+<td>ID người dùng (tùy chọn)</td>
+</tr>
+</tbody>
+</table></div>
+<p>TgWitness nhận diện các tệp dựa trên <strong>nội dung</strong> chứ không phải tên tệp. Việc đổi tên tệp
+sẽ không bao giờ làm thay đổi nội dung của tệp đó.</p>
+<h2 id="before-you-start-api-id-and-api-hash">Trước khi bắt đầu: ID API và mã băm API<a class="anchor" href="#before-you-start-api-id-and-api-hash" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Quý vị có thể đăng nhập mà không cần tạo ứng dụng API Telegram. Khi không có cặp nào được nhập,
+nhập khẩu hoặc đã được lưu sẵn trong không gian làm việc, TgWitness sẽ chọn một cặp ngẫu nhiên từ kho
+50 cặp API công khai (<code>tgwitness/api_pool.py</code>) có sẵn trong hệ thống. Nếu Telegram từ chối một cặp khóa
+(<code>API_ID_INVALID</code>, <code>API_ID_PUBLISHED_FLOOD</code>, <code>UPDATE_APP_TO_LOGIN</code>), hệ thống sẽ thử cặp tiếp theo,
+tối đa tám cặp cho mỗi lần đăng nhập; các cặp bị từ chối sẽ bị bỏ qua cho đến khi khởi động lại. Cặp khóa đã được sử dụng để đăng nhập sẽ
+được lưu cùng với tài khoản và tái sử dụng cho tài khoản đó. <strong>Mã API</strong> và <strong>băm API</strong> dùng để xác định ứng dụng với Telegram; chúng
+không tự thân cấp quyền truy cập cho tài khoản.</p>
+<p>Để sử dụng ứng dụng của riêng quý vị thay thế (tài khoản đăng ký ứng dụng đó sẽ là tài khoản chịu rủi ro; xem
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/PROJECT-GUIDE.md#connect-a-telegram-account">phần “Tại sao lại có nhóm API tích hợp sẵn?</a>”):</p>
+<ol>
+<li>Vui lòng truy cập <a href="https://my.telegram.org">my.telegram.org</a> và đăng nhập bằng bất kỳ số điện thoại nào
+    mà quý vị đang sở hữu. Mã xác minh sẽ được gửi đến ứng dụng Telegram, không phải qua tin nhắn SMS.</li>
+<li>Chọn <strong>các công cụ phát triển API</strong>.</li>
+<li>Tạo ứng dụng: bất kỳ tiêu đề và tên ngắn nào (5–32 ký tự), nền tảng <strong>Máy tính để bàn</strong>.
+    Các trường URL và mô tả có thể để trống.</li>
+<li>Vui lòng sao chép <strong>App api_id</strong> (một số) và <strong>App api_hash</strong> (32 ký tự thập lục phân).</li>
+</ol>
+<p>Trong bảng điều khiển, phần <strong>“API ID + Hash</strong>” nằm ngay dưới biểu mẫu đăng nhập. Quý vị có thể dán một
+cặp <code>api_id:api_hash</code> duy nhất vào <strong>ô “API ID”</strong> và cả hai trường sẽ được điền tự động. Một cặp này có thể
+được sử dụng cho tất cả các tài khoản của quý vị. Sau khi đăng nhập thành công, thông tin này sẽ được lưu trữ dưới dạng mã hóa, chỉ trong
+không gian làm việc đó và tuyệt đối không bao giờ được gửi trở lại trình duyệt.</p>
+<p>Có ba loại thông tin xác thực khác nhau liên quan đến vấn đề này:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Bí mật</th>
+<th>Mở</th>
+<th>Địa chỉ trang web</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mã thông báo bảng điều khiển</td>
+<td>Bảng điều khiển web TgWitness</td>
+<td><code>panel-token.txt</code> trong thư mục dữ liệu, hoặc <code>TGWITNESS_TOKEN</code></td>
+</tr>
+<tr>
+<td>ID API + mã băm</td>
+<td>Không có nội dung nào riêng lẻ; chỉ xác định ứng dụng</td>
+<td>Cặp tài khoản tích hợp sẵn, cài đặt được nhập vào hoặc ứng dụng của riêng quý vị tại my.telegram.org</td>
+</tr>
+<tr>
+<td>Xác thực tài khoản</td>
+<td>Tài khoản Telegram</td>
+<td>Được tạo thông qua đăng nhập bằng điện thoại/mã QR hoặc được nhập dưới dạng phiên làm việc</td>
+</tr>
+</tbody>
+</table></div>
+<p>Nếu cần truy cập Telegram qua máy chủ proxy, vui lòng thiết lập trước tại
+<strong>mục Tài khoản → Cài đặt → Cài đặt kết nối → Thay đổi đường dẫn kết nối</strong>.</p>
+<h2 id="phone-number">Số điện thoại<a class="anchor" href="#phone-number" aria-label="Liên kết đến phần này">#</a></h2>
+<ol>
+<li>Mở <strong>Tài khoản</strong>, chọn tab <strong>Điện thoại</strong> và nhập số theo định dạng quốc tế,
+    ví dụ: <code>+44 7700 900123</code>. Các khoảng trắng và dấu gạch ngang sẽ được tự động loại bỏ.</li>
+<li>Nhấn vào <strong>“Tiếp tục</strong>”. Các trường API ID và Hash có thể để trống.</li>
+<li>Vui lòng nhập mã mà Telegram gửi (thường được gửi đến ứng dụng Telegram; việc gửi qua tin nhắn SMS không được đảm bảo).</li>
+<li>Nếu tài khoản đã bật xác thực hai bước, vui lòng nhập mật khẩu đó. Đây không phải là mã
+    token trên bảng điều khiển và cũng không phải là mã khóa thiết bị.</li>
+<li>Vui lòng kiểm tra ID tài khoản hiển thị sau khi đăng nhập, sau đó chọn các nguồn.</li>
+</ol>
+<p>Mã đăng nhập và mật khẩu xác thực hai yếu tố (2FA) tuyệt đối không bao giờ được lưu trữ trên đĩa cứng.</p>
+<h2 id="qr-code">Mã QR<a class="anchor" href="#qr-code" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Vui lòng sử dụng tính năng này khi tài khoản đã được đăng nhập sẵn trên điện thoại hoặc máy tính khác.</p>
+<ol>
+<li>Nhấp vào tab <strong>Mã QR</strong> → <strong>Hiển thị mã QR</strong>. Các trường API ID và Hash có thể để trống.</li>
+<li>Trên thiết bị đã đăng nhập: <strong>Cài đặt → Thiết bị → Kết nối thiết bị máy tính để bàn</strong>, quét mã
+    và xác nhận.</li>
+<li>Vui lòng nhập mật khẩu xác thực hai yếu tố (2FA) vào TgWitness nếu Telegram yêu cầu.</li>
+</ol>
+<p>Hình ảnh mã QR được tạo tại địa phương. Mã có thời hạn sử dụng; vui lòng nhấn vào <strong>“Tạo mã QR khác”</strong>
+để thử lại. Việc khóa bảng điều khiển, chuyển sang không gian làm việc khác hoặc đăng nhập bằng tài khoản khác sẽ hủy bỏ
+mã đang chờ xử lý.</p>
+<h2 id="auth-key--dc-id">Khóa xác thực (Auth Key) + ID DC<a class="anchor" href="#auth-key--dc-id" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Khóa xác thực (Auth Key) là khóa ủy quyền thô dài 256 byte đằng sau mỗi phiên Telegram, được biểu diễn
+dưới dạng <strong>512 ký tự thập lục phân</strong>, kèm theo số trung tâm dữ liệu <strong>từ DC 1 đến DC 5</strong>.</p>
+<ol>
+<li>Tab <strong>Khóa xác thực</strong>. Vui lòng dán toàn bộ khóa; khóa rút gọn có chứa ký tự <code>…</code> sẽ không hoạt động.</li>
+<li>Vui lòng chọn ID DC được cung cấp kèm theo khóa.</li>
+<li>Quý vị có thể nhập <strong>ID người dùng (</strong>tùy chọn). TgWitness sẽ từ chối kết nối nếu Telegram báo cáo
+    một tài khoản khác.</li>
+<li><strong>Tài khoản</strong> Press <strong>Connect</strong>.</li>
+</ol>
+<p>Khóa xác thực (512 ký tự) không phải là mã băm API (32 ký tự). Cùng một khóa này cũng có thể
+được nhập dưới dạng JSON; vui lòng tham khảo <a href="#account-json">phần JSON tài khoản</a>.</p>
+<h2 id="account-files">Tệp tài khoản<a class="anchor" href="#account-files" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Mở mục <strong>Thêm tài khoản → Tệp</strong> và chọn tối đa <strong>bốn tệp thuộc về một tài khoản</strong>, tổng dung lượng
+<strong>8 MiB</strong>, sau đó nhấn <strong>Kết nối tài khoản</strong>.</p>
+<ul>
+<li>Các tệp tin được chuyển đổi trực tiếp <strong>trong bộ nhớ</strong> trên máy chủ TgWitness của quý vị. Các tệp tải lên không được lưu trữ,
+    các tệp ZIP không được giải nén ra đĩa và không có dịch vụ bên ngoài nào được liên hệ.</li>
+<li>Phiên ghi chép thu được sau đó sẽ được đối chiếu với Telegram. Nếu một tệp ghi nhận ID người dùng,
+    thì ID đó phải trùng khớp với thông tin tài khoản mà Telegram cung cấp.</li>
+<li>Các tệp mô tả các tài khoản khác nhau hoặc thông tin đăng nhập API khác nhau sẽ bị từ chối
+    thay vì chỉ chọn một tài khoản duy nhất.</li>
+<li>Trường <strong>“Mật khẩu hoặc văn bản phiên làm việc”</strong> chứa trường mật khẩu cục bộ TData, một ô để dán
+    StringSession và <strong>đọc tệp mà không cần đăng nhập</strong> (điền biểu mẫu mà không
+    cần liên hệ với Telegram).</li>
+</ul>
+<h3 id="telethon-session">Telethon <code>.session</code><a class="anchor" href="#telethon-session" aria-label="Liên kết đến phần này">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Đây là gì</td>
+<td>Cơ sở dữ liệu SQLite mà các công cụ dựa trên Telethon tạo ra, ví dụ như <code>my_account.session</code></td>
+</tr>
+<tr>
+<td>Được công nhận bởi</td>
+<td>Các bảng <code>sessions</code> (cùng với <code>dc_id</code>, <code>server_address</code>, <code>port</code>, <code>auth_key</code>) và <code>version</code> = 7 hoặc 8</td>
+</tr>
+<tr>
+<td>Yêu cầu</td>
+<td>Chính xác là một hàng phiên làm việc được ủy quyền; một cơ sở dữ liệu khép kín và hoàn chỉnh</td>
+</tr>
+</tbody>
+</table></div>
+<p>Trước tiên, hãy đóng chương trình đã tạo ra tệp đó. Nếu tệp <code>my_account.session-journal</code> hoặc
+<code>my_account.session-wal</code> vẫn tồn tại bên cạnh tệp chính, điều đó có nghĩa là cơ sở dữ liệu chưa được hoàn tất: hãy mở và
+đóng ứng dụng khách gốc một cách đúng quy trình. Việc xóa các tệp phụ này có thể để lại một bản sao bị hỏng.</p>
+<h3 id="pyrogram-session">Pyrogram <code>.session</code><a class="anchor" href="#pyrogram-session" aria-label="Liên kết đến phần này">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Đây là gì</td>
+<td>Các công cụ dựa trên Pyrogram tạo ra cơ sở dữ liệu SQLite</td>
+</tr>
+<tr>
+<td>Được công nhận bởi</td>
+<td>Bảng <code>sessions</code> với <code>dc_id</code>, <code>auth_key</code>, <code>test_mode</code>, <code>user_id</code>, <code>is_bot</code>; <code>version</code> = 2 hoặc 3</td>
+</tr>
+<tr>
+<td>Yêu cầu</td>
+<td>Chỉ chấp nhận một phiên đăng nhập <strong>của người dùng</strong> được ủy quyền trên mạng sản xuất. Các phiên của bot và máy chủ thử nghiệm (test-DC) sẽ bị từ chối</td>
+</tr>
+</tbody>
+</table></div>
+<p>ID người dùng được lưu trữ sẽ được đối chiếu với hệ thống Telegram trong quá trình đăng nhập.</p>
+<h3 id="session--json-pair">Cặp phiên + JSON<a class="anchor" href="#session--json-pair" aria-label="Liên kết đến phần này">#</a></h3>
+<p>Các tài khoản thường được phân phối dưới dạng hai tệp có cùng tên, ví dụ như
+<code>447700900123.session</code> và <code>447700900123.json</code>. Vui lòng chọn <strong>cả hai tệp</strong> cùng một lúc.</p>
+<ul>
+<li>Dựa trên dữ liệu JSON, TgWitness sử dụng các giao thức <code>app_id</code>/<code>api_id</code> và <code>app_hash</code>/<code>api_hash</code>, do đó quý vị
+    thường không cần phải nhập thông tin đăng nhập API.</li>
+<li>Các trường khác như <code>phone</code>, <code>device</code>, <code>sdk</code>, <code>app_version</code>, <code>lang_pack</code> hoặc mật khẩu
+    <code>twoFA</code> đã lưu sẽ bị <strong>bỏ qua</strong>. Nếu tài khoản có tính năng xác thực hai yếu tố (2FA), TgWitness sẽ yêu cầu xác thực.</li>
+<li>Một tệp JSON đơn lẻ chỉ là siêu dữ liệu. Nếu không có tệp phiên làm việc, vui lòng tiếp tục bằng cách đăng nhập qua điện thoại
+    hoặc mã QR.</li>
+</ul>
+<h3 id="telegram-desktop-tdata">Telegram Desktop (TData)<a class="anchor" href="#telegram-desktop-tdata" aria-label="Liên kết đến phần này">#</a></h3>
+<p>TData là thư mục <code>tdata</code> của ứng dụng Telegram Desktop (ứng dụng đa nền tảng
+từ desktop.telegram.org).</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Hệ thống</th>
+<th>Vị trí mặc định <code>tdata</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td><code>%APPDATA%\Telegram Desktop\tdata</code> (phiên bản Telegram di động: bên cạnh <code>Telegram.exe</code>)</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td><code>~/.local/share/TelegramDesktop/tdata</code></td>
+</tr>
+<tr>
+<td>macOS</td>
+<td><code>~/Library/Application Support/Telegram Desktop/tdata</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Để nhập dữ liệu:</p>
+<blockquote class="callout">
+<p><strong>Cảnh báo về phiên song song.</strong> Việc nhập TData sẽ tái sử dụng khóa ủy quyền của Telegram Desktop;
+nó không tạo ra một tài khoản đăng nhập độc lập. Không được sử dụng khóa đó trên Desktop và
+TgWitness cùng lúc. Telegram có thể vô hiệu hóa ủy quyền với
+<code>AUTH_KEY_DUPLICATED</code>, khiến cả hai bản sao đều không thể sử dụng cho đến khi đăng nhập lại.</p>
+<p>Tắt hoàn toàn ứng dụng Desktop, bao gồm cả tiến trình trong khay hệ thống, và giữ bản sao đó ở trạng thái đóng trong khi
+TgWitness sử dụng phiên đã nhập. <strong>Hãy thoát hoàn toàn, không đăng xuất hoặc thu hồi phiên làm việc:</strong>
+việc thu hồi cũng sẽ làm bản sao đã nhập mất hiệu lực. Nếu quý vị cần cả hai ứng dụng khách cùng hoạt động,
+hãy đăng nhập vào TgWitness bằng điện thoại hoặc mã QR để tạo quyền xác thực riêng. Nên sử dụng
+một tài khoản chuyên dụng, nhưng điều này không đảm bảo rằng các khóa nhân bản sẽ an toàn khi sử dụng song song.</p>
+<p>Quy định này cũng áp dụng cho các <code>.session</code> , văn bản StringSession và mã khóa xác thực (Auth Key) dưới dạng HEX.
+Các ứng dụng khách khác có các phiên xác thực được tạo độc lập vẫn có thể duy trì trạng thái đã đăng nhập.
+Xin tham khảo <a href="https://core.telegram.org/api/errors#406-not-acceptable">tài liệu về AUTH_KEY_DUPLICATED của Telegram</a>.</p>
+</blockquote>
+<ol>
+<li>Đóng hoàn toàn ứng dụng Telegram Desktop.</li>
+<li>
+<p>Vui lòng tạo một tệp ZIP <strong>chỉ</strong> chứa hai mục sau đây từ <code>tdata</code>:</p>
+<ul>
+<li><code>key_datas</code></li>
+<li>tệp gồm 16 ký tự kết thúc bằng <code>s</code> nằm ngay bên cạnh, thường là <code>D877F783D5D3EF8Cs</code></li>
+</ul>
+<p>Việc nén toàn bộ thư mục cùng bộ nhớ đệm phương tiện thường vượt quá giới hạn
+(512 mục, 32 MiB sau khi giải nén).
+3. Chọn tệp ZIP trong <strong>phần Tệp</strong>. Nếu Telegram Desktop có <strong>mã thông báo cục bộ</strong>, hãy nhập mã đó
+vào <strong>ô Mã thông báo hoặc văn bản phiên</strong> trước tiên. Đây không phải là mật khẩu xác thực hai yếu tố (2FA).</p>
+</li>
+</ol>
+<p>Hỗ trợ: một tài khoản cho mỗi kho lưu trữ, công nghệ lưu trữ hiện đại <code>key_datas</code>/<code>key_data0</code>/<code>key_data1</code>,
+mã thông báo cục bộ. Không hỗ trợ: các thư mục chứa nhiều tài khoản đã đăng nhập, các giao diện Desktop
+cũ, các tệp ZIP được bảo vệ bằng mật khẩu, và ứng dụng gốc riêng biệt trên macOS có tên “Telegram for macOS”.</p>
+<h3 id="telethon-stringsession">Telethon StringSession<a class="anchor" href="#telethon-stringsession" aria-label="Liên kết đến phần này">#</a></h3>
+<p>Một dòng văn bản duy nhất, thường bắt đầu bằng <code>1</code> và dài khoảng 350 ký tự. Vui lòng tải
+tệp này dưới dạng tệp <code>.txt</code> hoặc <code>.tgwitness-session</code> (tối đa 4 KiB), hoặc dán vào phần
+<strong>Mã thông báo hoặc văn bản phiên làm việc</strong>. Chỉ chấp nhận các chuỗi Telethon; các chuỗi Pyrogram và TDLib
+sử dụng các định dạng khác.</p>
+<h3 id="account-json">Tệp JSON tài khoản<a class="anchor" href="#account-json" aria-label="Liên kết đến phần này">#</a></h3>
+<p>Một đối tượng JSON, tối đa <strong>64 KiB</strong>, trong một tệp có phần mở rộng là <strong><code>.json</code></strong>.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Trường (tên gọi khác)</th>
+<th>Ý nghĩa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>api_id</code> (<code>app_id</code>)</td>
+<td>ID ứng dụng, một số dương</td>
+</tr>
+<tr>
+<td><code>api_hash</code> (<code>app_hash</code>)</td>
+<td>Băm ứng dụng, gồm 32 ký tự thập lục phân</td>
+</tr>
+<tr>
+<td><code>string_session</code> (<code>session_string</code>, <code>session</code>)</td>
+<td>Văn bản Telethon StringSession, không phải tên tệp</td>
+</tr>
+<tr>
+<td><code>auth_key</code> (<code>auth_key_hex</code>) + <code>dc_id</code></td>
+<td>Khóa xác thực (Auth Key) đầy đủ gồm 512 ký tự và DC 1–5</td>
+</tr>
+<tr>
+<td><code>user_id</code> (<code>id</code>)</td>
+<td>Tùy chọn; đã được đối chiếu với Telegram trước khi lưu thông tin ủy quyền</td>
+</tr>
+</tbody>
+</table></div>
+<p>Nếu cả biệt danh và tên chính đều có mặt, hai tên này phải trùng khớp với nhau. Ví dụ:</p>
+<pre><code class="language-json">{ &quot;app_id&quot;: 1234567, &quot;app_hash&quot;: &quot;0123456789abcdef0123456789abcdef&quot; }</code></pre>
+<pre><code class="language-json">{
+  &quot;api_id&quot;: 1234567,
+  &quot;api_hash&quot;: &quot;0123456789abcdef0123456789abcdef&quot;,
+  &quot;auth_key&quot;: &quot;REPLACE_WITH_ALL_512_HEXADECIMAL_CHARACTERS&quot;,
+  &quot;dc_id&quot;: 2,
+  &quot;user_id&quot;: 123456789
+}</code></pre>
+<p>Ví dụ đầu tiên chỉ yêu cầu điền thông tin đăng nhập API; quý vị có thể đăng nhập qua số điện thoại hoặc mã QR, hoặc thêm tệp phiên làm việc.
+Các danh sách hàng loạt (mảng JSON chứa danh sách tài khoản) sẽ không được chấp nhận.</p>
+<h2 id="identify-what-you-have">Xác định những gì quý vị đang có<a class="anchor" href="#identify-what-you-have" aria-label="Liên kết đến phần này">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Quý vị có thể thấy</th>
+<th>Đây là</th>
+<th>Cách sử dụng</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*.session</code>; khi mở tệp này trong trình soạn thảo văn bản, phần đầu sẽ hiển thị <code>SQLite format 3</code></td>
+<td>Telethon hoặc Pyrogram SQLite</td>
+<td><strong>Tệp tin</strong> (được phát hiện tự động)</td>
+</tr>
+<tr>
+<td>Một thư mục <code>tdata</code> chứa <code>key_datas</code></td>
+<td>Telegram Desktop TData</td>
+<td>Nén hai tệp thành định dạng ZIP, sau đó là <strong>các tệp</strong></td>
+</tr>
+<tr>
+<td>Một dòng văn bản bắt đầu bằng <code>1</code>, khoảng 350 ký tự</td>
+<td>Telethon StringSession</td>
+<td><strong>Tệp tin</strong></td>
+</tr>
+<tr>
+<td><code>*.json</code> cùng với <code>app_id</code>/<code>app_hash</code></td>
+<td>Siêu dữ liệu đi kèm</td>
+<td><strong>Các tệp tin</strong>, cùng với phiên làm việc tương ứng</td>
+</tr>
+<tr>
+<td><code>*.json</code> kết hợp với <code>auth_key</code> hoặc <code>string_session</code></td>
+<td>Tệp JSON tài khoản</td>
+<td><strong>Tệp tin</strong></td>
+</tr>
+<tr>
+<td>512 ký tự <code>0-9a-f</code></td>
+<td>Khóa xác thực</td>
+<td><strong>Khóa xác thực</strong></td>
+</tr>
+<tr>
+<td>32 ký tự <code>0-9a-f</code></td>
+<td>Băm API</td>
+<td><strong>ID API + Băm</strong></td>
+</tr>
+<tr>
+<td><code>td.binlog</code> hoặc <code>db.sqlite</code> từ ứng dụng TDLib</td>
+<td>Bộ lưu trữ TDLib</td>
+<td>Không được hỗ trợ</td>
+</tr>
+<tr>
+<td><code>123456789:AA…</code></td>
+<td>Mã thông báo bot</td>
+<td>Không được hỗ trợ</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="unsupported-formats">Các định dạng không được hỗ trợ<a class="anchor" href="#unsupported-formats" aria-label="Liên kết đến phần này">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Định dạng</th>
+<th>Lựa chọn thay thế</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bộ lưu trữ TDLib (<code>td.binlog</code>) và các tệp xuất từ TDLib</td>
+<td>Đăng nhập bằng số điện thoại hoặc mã QR</td>
+</tr>
+<tr>
+<td><strong>Các chuỗi</strong> phiên làm việc của Pyrogram</td>
+<td>Vui lòng sử dụng tệp Pyrogram <code>.session</code>, hoặc quét mã QR bằng điện thoại</td>
+</tr>
+<tr>
+<td>TData với nhiều tài khoản đã đăng nhập</td>
+<td>Vui lòng đăng xuất khỏi các tài khoản khác trên Telegram Desktop, hoặc sử dụng tệp phiên làm việc riêng của từng tài khoản</td>
+</tr>
+<tr>
+<td>Mã thông báo bot</td>
+<td>Không được hỗ trợ: TgWitness chỉ thực hiện quan sát với tư cách là một tài khoản người dùng</td>
+</tr>
+<tr>
+<td>Danh sách CSV/JSON của nhiều tài khoản</td>
+<td>Thêm một không gian làm việc cho mỗi tài khoản</td>
+</tr>
+<tr>
+<td>Các phiên thử nghiệm (Test-DC) hoặc phiên bot</td>
+<td>Vui lòng sử dụng tài khoản người dùng chính thức</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="multiple-accounts">Nhiều tài khoản<a class="anchor" href="#multiple-accounts" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Hãy nhấn vào mã <strong>+</strong> bên cạnh trình chọn tài khoản, hoặc truy cập
+<strong>Tài khoản → Cài đặt → Cài đặt kết nối → Không gian làm việc</strong>, nhập tên nhãn và
+đăng nhập.</p>
+<ul>
+<li>Bất kỳ số lượng không gian làm việc nào, bao gồm cả không gian làm việc chính. Mỗi không gian làm việc đều có phiên làm việc, tuyến đường proxy
+    , nguồn dữ liệu, chính sách ghi lại, sổ nhật ký, khóa ký, điểm kiểm tra và các tùy chọn xuất dữ liệu riêng biệt.</li>
+<li>Việc chuyển đổi không gian làm việc đang hiển thị sẽ không làm tạm dừng các không gian làm việc khác.</li>
+<li>Một sổ ghi chép luôn gắn liền với tài khoản đã tạo ra nó. Việc đăng nhập bằng một
+    tài khoản khác yêu cầu phải có một không gian làm việc riêng, và một tài khoản không thể được gán cho hai
+    không gian làm việc.</li>
+<li>Tất cả các không gian làm việc đều chia sẻ chung một mã thông báo bảng điều khiển; chúng không phải là các tài khoản người dùng riêng biệt.</li>
+<li><strong>Tài khoản</strong> sẽ đổi tên một không gian làm việc và xóa một không gian làm việc đã thêm vào, cùng với phiên làm việc, nhật ký,
+    các nguồn và khóa ký của không gian đó. Không gian làm việc chính không thể bị xóa khỏi bảng điều khiển.</li>
+</ul>
+<h2 id="sign-out">Đăng xuất<a class="anchor" href="#sign-out" aria-label="Liên kết đến phần này">#</a></h2>
+<p><strong>Tài khoản → Đăng xuất khỏi Telegram</strong> (với chế độ quan sát tạm dừng) sẽ yêu cầu Telegram kết thúc
+phiên làm việc, do đó phiên này cũng sẽ biến mất khỏi mục <strong>Cài đặt → Thiết bị</strong> của tài khoản, đồng thời xóa
+phiên làm việc khỏi kho lưu trữ không gian làm việc. Nhật ký, các nguồn, cài đặt và khóa ký vẫn được giữ lại, và
+nhật ký sẽ ghi lại thao tác đăng xuất này. Không gian làm việc vẫn thuộc về tài khoản đó: chỉ có
+tài khoản đó mới có thể kết nối lại với nó. Nếu Telegram không phản hồi, phiên làm việc vẫn sẽ bị xóa
+tại đây và bảng điều khiển sẽ hiển thị thông báo tương ứng; quý vị hãy kết thúc phiên làm việc trong Telegram tại <strong>Cài đặt → Thiết bị</strong>.</p>
+<h2 id="convert-a-telethon-session-offline">Chuyển đổi phiên Telethon sang chế độ ngoại tuyến<a class="anchor" href="#convert-a-telethon-session-offline" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Bảng điều khiển này nhập trực tiếp các tệp <code>.session</code>. Để chuyển đổi ngoại tuyến sang tệp
+StringSession, hãy chạy lệnh từ thư mục dự án:</p>
+<pre><code class="language-powershell">.venv\Scripts\python.exe -m tgwitness.sessions account.session --out account.tgwitness-session   # Windows</code></pre>
+<pre><code class="language-sh">.venv/bin/python -m tgwitness.sessions account.session --out account.tgwitness-session          # Linux/macOS</code></pre>
+<p>Trình chuyển đổi này chỉ đọc tệp Telethon SQLite (tối đa 64 MiB), không bao giờ sửa đổi dữ liệu đầu vào,
+không thực hiện bất kỳ yêu cầu mạng nào và từ chối ghi đè lên tệp đầu ra hiện có.</p>
+<h2 id="keeping-account-files-safe">Bảo vệ an toàn cho các tệp tài khoản<a class="anchor" href="#keeping-account-files-safe" aria-label="Liên kết đến phần này">#</a></h2>
+<ul>
+<li>Hãy coi mọi <code>.session</code>, TData ZIP, StringSession, Auth Key và tệp JSON tài khoản như một
+    mật khẩu. TgWitness lưu trữ thông tin ủy quyền đã nhập vào kho lưu trữ được mã hóa của mình; quý vị có thể
+    xóa các tệp gốc sau đó.</li>
+<li>Không được thực hiện cùng một quy trình ủy quyền trên hai chương trình cùng lúc. Telegram có thể thu hồi ủy quyền đó
+    (<code>AUTH_KEY_DUPLICATED</code>), và cả hai bản sao sẽ ngừng hoạt động.</li>
+<li>Một phiên làm việc đã hết hạn hoặc bị thu hồi không thể được khôi phục thông qua quá trình chuyển đổi. Vui lòng đăng nhập lại.</li>
+</ul>
+<h2 id="troubleshooting">Khắc phục sự cố<a class="anchor" href="#troubleshooting" aria-label="Liên kết đến phần này">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Tin nhắn hoặc triệu chứng</th>
+<th>Hướng dẫn thực hiện</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Không thể đọc phiên làm việc này. Vui lòng đóng ứng dụng gốc…</em></td>
+<td>Tệp SQLite hiện đang mở hoặc chưa hoàn tất (tệp phụ <code>-journal</code>/<code>-wal</code>). Vui lòng đóng chương trình gốc một cách đúng quy trình và sao chép lại tệp.</td>
+</tr>
+<tr>
+<td><em>Các lược đồ SQLite của Telethon được hỗ trợ: 7 và 8</em> / <em>Pyrogram … 2 và 3</em></td>
+<td>Tệp này được tạo ra bởi một phiên bản thư viện rất cũ hoặc không xác định. Vui lòng đăng nhập bằng số điện thoại hoặc mã QR thay thế.</td>
+</tr>
+<tr>
+<td><em>Chỉ hỗ trợ các phiên làm việc của người dùng được ủy quyền</em></td>
+<td>Tệp Pyrogram này thuộc về một bot hoặc mạng thử nghiệm.</td>
+</tr>
+<tr>
+<td><em>Kho lưu trữ TData đã vượt quá 512 mục hoặc 32 MiB</em></td>
+<td>Chỉ bao gồm các tệp ZIP <code>key_datas</code> và <code>D877F783D5D3EF8Cs</code>, không bao gồm toàn bộ thư mục.</td>
+</tr>
+<tr>
+<td><em>Không thể giải mã TData. Vui lòng kiểm tra mật mã cục bộ trên máy tính để bàn</em></td>
+<td>Vui lòng nhập mã mật khẩu cục bộ của Telegram Desktop vào ô <strong>“Mật khẩu” hoặc “Văn bản phiên làm việc</strong>”.</td>
+</tr>
+<tr>
+<td><em>Nhập từng tài khoản TData một</em></td>
+<td>Telegram Desktop hỗ trợ nhiều tài khoản; vui lòng tham khảo phần <a href="#unsupported-formats">“Các định dạng không được hỗ trợ</a>”.</td>
+</tr>
+<tr>
+<td><em>Các tệp được chọn mô tả các tài khoản hoặc thông tin đăng nhập API khác nhau</em></td>
+<td>Chỉ chọn các tệp tin từ một tài khoản duy nhất.</td>
+</tr>
+<tr>
+<td><em>Tệp JSON không chứa thông tin xác thực hoặc ủy quyền API nào được hỗ trợ</em></td>
+<td>Vui lòng kiểm tra các tên trường trong tệp <a href="#account-json">JSON Tài khoản</a>.</td>
+</tr>
+<tr>
+<td><em>Chỉ bao gồm siêu dữ liệu API</em></td>
+<td>Tệp JSON không có phiên làm việc. Vui lòng thêm tệp <code>.session</code> hoặc sử dụng số điện thoại/mã QR.</td>
+</tr>
+<tr>
+<td><em>Mã khóa xác thực (Auth Key) dưới dạng HEX phải chứa đầy đủ 512 ký tự thập lục phân</em></td>
+<td>Khóa đã bị cắt ngắn hoặc chứa chuỗi ký tự &quot;<code>…</code>&quot;.</td>
+</tr>
+<tr>
+<td>ID tài khoản không khớp với tài khoản đã nhập</td>
+<td>ID người dùng trong tệp này khác với thông tin mà Telegram báo cáo; tệp này thuộc về một tài khoản khác.</td>
+</tr>
+<tr>
+<td>Tài khoản này hiện đã thuộc về một không gian làm việc khác</td>
+<td>Vui lòng mở không gian làm việc đó thay vì thêm tài khoản hai lần.</td>
+</tr>
+<tr>
+<td>Đã kết nối, nhưng danh sách trò chuyện trong <strong>phần Nguồn</strong> còn thiếu một nhóm riêng tư</td>
+<td>Kiểm tra tư cách thành viên. Công cụ chọn lọc sẽ kiểm tra 1.000 cuộc đối thoại đầu tiên; quý vị có thể tăng giới hạn này trong <strong>phần Thông số</strong>.</td>
+</tr>
+<tr>
+<td>Kết nối proxy không thành công</td>
+<td>Vui lòng kiểm tra máy chủ, cổng và thông tin đăng nhập. TgWitness tuyệt đối không bao giờ chuyển sang kết nối trực tiếp.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Xem thêm: các vấn đề về <a href="../connection/">kết nối và bảo mật</a> liên quan đến máy chủ proxy và mã hóa,
+cũng như <a href="../collection/">cách thức thu thập dữ liệu</a> đối với những nội dung được ghi lại sau khi đăng nhập.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCOUNTS.md">Chỉnh sửa trang này trên GitHub ↗</a><a class="next-guide" href="../connection/"><span>Bước tiếp theo</span><strong>Kết nối, máy chủ trung gian và bảo vệ dữ liệu →</strong></a><p>Các hướng dẫn này mô tả cách triển khai hiện tại. Kết quả xác thực và những hạn chế còn tồn tại được ghi chép riêng biệt. <a href="../verification/">Những nội dung đã được kiểm thử →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Trên trang này"><p class="nav-label">Trên trang này</p><a href="#at-a-glance">Tổng quan</a><a href="#before-you-start-api-id-and-api-hash">Trước khi bắt đầu: ID API và mã băm API</a><a href="#phone-number">Số điện thoại</a><a href="#qr-code">Mã QR</a><a href="#auth-key--dc-id">Khóa xác thực (Auth Key) + ID DC</a><a href="#account-files">Tệp tài khoản</a><a href="#identify-what-you-have">Xác định những gì quý vị đang có</a><a href="#unsupported-formats">Các định dạng không được hỗ trợ</a><a href="#multiple-accounts">Nhiều tài khoản</a><a href="#sign-out">Đăng xuất</a><a href="#convert-a-telethon-session-offline">Chuyển đổi phiên Telethon sang chế độ ngoại tuyến</a><a href="#keeping-account-files-safe">Bảo vệ an toàn cho các tệp tài khoản</a><a href="#troubleshooting">Khắc phục sự cố</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Mã nguồn mở · Chạy trên máy tính của quý vị</span><a href="../../../../LICENSE">Giấy phép MIT</a><a href="../notice/">Thông báo dành cho người vận hành</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">An ninh</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Đang chờ tin nhắn", "Step through a fictional send, edit and delete.": "Hãy cùng tìm hiểu từng bước về một quy trình giả định bao gồm việc gửi, chỉnh sửa và xóa tin nhắn.", "No observations yet. Start the sequence or advance one event.": "Chưa có ghi chú nào. Bắt đầu chuỗi sự kiện hoặc chuyển sang sự kiện tiếp theo.", "Meet at 10:00": "Hẹn gặp lúc 10:00", "A new message is visible in the chat.": "Một tin nhắn mới đã xuất hiện trong cuộc trò chuyện.", "Record 1 appended: the collector observed the original message.": "Ghi chú 1 được đính kèm: bộ thu thập đã ghi nhận tin nhắn gốc.", "Meet at 11:00": "Hẹn gặp lúc 11:00", "The current text changes. The earlier observation stays.": "Nội dung văn bản hiện tại đã được điều chỉnh. Quan sát trước đó vẫn được giữ nguyên.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Bản ghi số 2 đã được bổ sung: nội dung chỉnh sửa là một quan sát mới. Bản ghi số 1 vẫn giữ nguyên văn bản gốc.", "Message deleted": "Tin nhắn đã bị xóa", "The message has disappeared from the chat view.": "Tin nhắn đã biến mất khỏi giao diện trò chuyện.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Ghi chú 3 được đính kèm: thông báo xóa được lưu giữ cùng với cả hai phiên bản đã quan sát được.", "0 records": "0 bản ghi", "1 record": "1 bản ghi", "2 records": "2 bản ghi", "3 records": "3 bản ghi", "Complete / {n} of 3": "Hoàn tất / {n}/3", "Step / {n} of 3": "Bước / {n}/3", "Pause": "Tạm dừng", "Replay sequence": "Trình tự phát lại", "Play sequence": "Trình tự phát lại", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Ví dụ tĩnh hiện đã có sẵn. Để tính toán các giá trị băm một cách tương tác, vui lòng truy cập trang này qua HTTPS hoặc xem bản xem trước trên localhost với sự hỗ trợ của Web Crypto.", "No record supplied": "Không có bản ghi nào được cung cấp", "Tail removed": "Phần cuối đã được loại bỏ", "≠ saved hash": "≠ băm đã lưu", "Rebuilt · different hash": "Đã được xây dựng lại · mã băm khác", "= saved hash": "= mã băm đã lưu", "Same length and matching head.": "Độ dài tương đương và tiêu đề phù hợp.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Cả ba giá trị băm được tính toán đều khớp với các giá trị băm đã lưu. Mẫu này phù hợp với giới hạn ba bản ghi được lưu giữ.", "Same saved head; the journal prefix fails verification.": "Cùng một tiêu đề đã lưu; tiền tố của sổ ghi chép không qua được quá trình xác minh.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Bản ghi số 2 hiện không còn khớp với giá trị băm đã lưu trữ của nó. Việc chỉ kiểm tra giá trị băm cuối cùng đã lưu trữ sẽ bỏ sót lỗi này; trình xác minh sẽ kiểm tra từng bản ghi một.", "Head differs from the retained checkpoint.": "Đầu trang khác với điểm kiểm tra được lưu giữ.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Các giá trị băm được tái tạo liên kết với nhau, nhưng phần đầu cuối cùng đã thay đổi. Điểm kiểm tra được lưu giữ từ chối lịch sử này. Các chữ ký gốc cũng sẽ không hợp lệ đối với các bản ghi đã bị thay đổi.", "Too short: 2 supplied records \u003c 3 retained records.": "Quá ngắn: 2 bản ghi được cung cấp \u003c 3 bản ghi được lưu giữ.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Hai giá trị băm còn lại vẫn khớp nhau. Điểm kiểm tra được lưu giữ đã tiết lộ phần cuối bị thiếu. Nếu không có ranh giới trước đó, chỉ riêng tiền tố ngắn hơn này sẽ không thể phát hiện ra sự thiếu sót.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Trình duyệt này không hỗ trợ tính toán hàm băm. Các công thức và phần giải thích tĩnh dưới đây vẫn có sẵn.", "{n} records": "{n} bản ghi", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Đã được chấp nhận: số lượng tăng lên, chữ ký đã được xác minh và khóa khớp. TgWitness duy trì ranh giới mới này.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: bản trả lời có chữ ký báo cáo số lượng bản ghi ít hơn so với điểm kiểm tra được chấp nhận gần nhất. Hệ thống TgWitness ghi nhận sự cố và giữ nguyên ranh giới đã được chấp nhận trước đó.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: số lượng không thay đổi nhưng nhánh chính khác biệt. TgWitness ghi lại sự bất đồng này và duy trì ranh giới đã được chấp nhận trước đó.", "No answer": "Không có câu trả lời", "boundary unknown": "giới hạn chưa xác định", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Không có phản hồi: TgWitness ghi lại kết quả kiểm tra không thành công. Công cụ này không thể xác định trạng thái hiện tại của bộ thu thập dữ liệu. Nếu TgWitness vẫn có thể kết nối với Bot API và chính sách xuất bản cho phép, công cụ này có thể công bố thông tin về sự cố đó.", "Send {n}": "Gửi {n}", "Edit {n}": "Chỉnh sửa {n}", "Delete {n}": "Xóa {n}", "Both accounts captured all six expected observations in this example.": "Cả hai tài khoản đều ghi lại đầy đủ cả sáu quan sát dự kiến trong ví dụ này.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Tài khoản B vẫn ghi lại được 6/6 tin nhắn. Hai biên nhận mất nhiều thời gian hơn. Tỷ lệ ghi lại và độ trễ của biên nhận trả lời cho những câu hỏi khác nhau.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Tài khoản B đã ghi lại được 5 trong số 6 hành động trước thời hạn (83,3%). Hành động chỉnh sửa còn thiếu không có độ trễ được đo lường. Kết quả này chỉ mô tả sáu hành động được kiểm soát.", "not observed by cutoff": "không được ghi nhận trước thời hạn", "{s} seconds": "{s} giây", "Exact values follow in the table.": "Các giá trị chính xác được trình bày trong bảng dưới đây.", "{s} s": "{s} s", "Not observed": "Chưa được quan sát thấy", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Bốn cuộc trò chuyện cung cấp các quan sát khác nhau. Vui lòng theo dõi các bản ghi nguồn cho từng kết nối; không gán bài đăng trên kênh cho người dùng 71001 nếu không có thông tin người gửi được xác định rõ.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Các bản ghi số 146 và 205 cung cấp cùng một ID người gửi, đó là 71001. Điều này giúp liên kết các bài đăng được quan sát thấy từ một tài khoản Telegram trên hai cuộc trò chuyện. Tuy nhiên, thông tin này không xác định danh tính của một cá nhân trong thế giới thực cũng như không quy thuộc bài đăng trên kênh đó cho bất kỳ ai.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Địa chỉ đích pay.example.invalid/new xuất hiện trong bản ghi nhóm số 146, bản ghi bàn phím bot số 173, bản ghi chỉnh sửa kênh số 188 và tin nhắn riêng tư số 205. Việc địa chỉ đích này xuất hiện lặp lại giúp liên kết các tài liệu với nhau; điều này không chứng minh rằng các tài khoản đó nằm dưới sự kiểm soát chung.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Trong trường hợp giả định này, các biên nhận phương tiện đã hoàn tất số #151 và #209 có các giá trị SHA-256 đầy đủ trùng khớp. Hãy so sánh các byte thực tế và các bản ghi tin nhắn liên quan. Tệp trùng khớp này không xác định được người tạo ra nó cũng như không chứng minh được ai là người đã chuyển tiếp nó.", "the encrypted off-site copy": "bản sao được mã hóa lưu trữ ngoài trang web", "notifications": "thông báo", "checkpoint hashes for timestamps": "Các giá trị băm điểm kiểm tra (checkpoint hashes) để xác định dấu thời gian", "signed checkpoints for the witness": "các mốc kiểm tra có chữ ký dành cho TgWitness", "Switched on in this example": "Đã kích hoạt trong ví dụ này", "Optional · off by default": "Tùy chọn · tắt theo mặc định", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Khi rời khỏi thiết bị này: kết nối Telegram và {list}. Không có gì khác.", "Default: only the Telegram connection leaves this machine.": "Mặc định: chỉ kết nối Telegram mới được truyền ra khỏi máy này.", "{done} of {total} done": "{done}/{total} đã hoàn thành", "Mark step {n} as done": "Đánh dấu bước {n} là đã hoàn thành", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Nội dung", "Copied": "Đã sao chép", "Command copied.": "Lệnh đã được sao chép.", "Selected — Ctrl/Cmd+C": "Đã chọn — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Lệnh đã được chọn. Vui lòng sao chép thủ công.", "Command copied to clipboard.": "Lệnh đã được sao chép vào khay nhớ tạm.", "Select text": "Chọn văn bản", "Clipboard unavailable. Command selected; copy it manually.": "Không thể truy cập khay nhớ tạm. Lệnh đã được chọn; vui lòng sao chép thủ công.", "A message arrives. The first observation is saved.": "Một tin nhắn được gửi đến. Quan sát đầu tiên được lưu lại.", "The time changes. Both captured versions stay.": "Thời gian có thể thay đổi. Cả hai phiên bản được lưu giữ đều được giữ nguyên.", "The message disappears. The captured history remains.": "Tin nhắn có thể biến mất. Nhưng lịch sử đã được ghi lại vẫn còn đó.", "Pause example animation": "Tạm dừng hình ảnh minh họa", "Play example animation": "Xem ví dụ về hình ảnh động", "Play": "Phát", "Full-size workspace screenshot": "Ảnh chụp màn hình toàn màn hình không gian làm việc", "Workspace screenshot · fictional data": "Ảnh chụp màn hình giao diện làm việc · dữ liệu giả định", "Close": "Đóng", "Close screenshot": "Đóng ảnh chụp màn hình", "Scrollable full-size screenshot": "Ảnh chụp màn hình toàn màn hình có thể cuộn", "Enlarge: {name}": "Phóng to: {name}", "View full size": "Xem kích thước đầy đủ"}</script>
+</body></html>

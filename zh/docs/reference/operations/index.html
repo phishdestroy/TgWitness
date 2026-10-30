@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="zh-Hans" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>工作流程与操作 | TgWitness</title>
+<meta name="description" content="控制面板的日常操作：模式、监控类别、参数、通知、导出、备份及容量。"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="工作流程与操作 | TgWitness"><meta property="og:description" content="控制面板的日常操作：模式、监控类别、参数、通知、导出、备份及容量。">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/operations/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/operations/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/operations/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/operations/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/operations/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/operations/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/operations/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/operations/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/operations/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/", "url": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/", "name": "工作流程与操作 | TgWitness", "description": "控制面板的日常操作：模式、监控类别、参数、通知、导出、备份及容量。", "inLanguage": "zh-Hans", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://phishdestroy.github.io/TgWitness/zh/"}, {"@type": "ListItem", "position": 2, "name": "文档", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/"}, {"@type": "ListItem", "position": 3, "name": "参考", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "工作流程与操作", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">跳转至内容</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / 文档</span></a>
+<nav aria-label="指南"><a href="../../concepts/">图文指南</a><a href="../../">所有指南</a><a href="../">参考</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="语言"><span aria-hidden="true">◍</span> 简体中文</summary><div class="lang-list"><a href="../../../../docs/reference/operations/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/operations/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/operations/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/operations/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/operations/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/operations/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/operations/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/operations/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/operations/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/operations/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/operations/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/operations/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="./" hreflang="zh-Hans" lang="zh-Hans" aria-current="true">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="在浅色和深色主题之间切换"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="指南"><a href="../../../guides/modes.html">模式、场景和证据级别</a><p class="nav-label">入门指南</p><a href="../../start/">几分钟内即可开始使用</a><a href="../../accounts/">连接账户</a><a href="../../proxies/">选择代理</a><a href="../../exports/">导出与验证</a><p class="nav-label">了解证据</p><a href="../../concepts/">了解证据如何运作</a><a href="../../cases/">跨所有聊天记录进行调查</a><a href="../../security/">确保安全</a><p class="nav-label">了解更多</p><a href="../../witness/">设置 Witness 机器人</a><a href="../../server/">保持其运行</a><a href="../../troubleshooting/">查找问题所在</a></nav><nav class="wiki-nav" aria-label="参考"><p class="nav-label"><a class="nav-label-link" href="../">参考</a></p><details class="wiki-group"><summary>设置</summary><a href="../quickstart/">快速入门</a><a href="../accounts/">账户与会话格式</a><a href="../connection/">连接、代理和数据保护</a><a href="../deployment/">部署</a></details><details class="wiki-group" open><summary>收集</summary><a href="../collection/">数据采集原理</a><a href="./" aria-current="page">工作流程与操作</a><a href="../investigation/">调查模式</a><a href="../features/">功能与限制</a></details><details class="wiki-group"><summary>证据</summary><a href="../how-it-works/">证据的运作原理</a><a href="../evidence/">证据格式</a><a href="../witness/">独立见证者</a><a href="../timestamp/">时间戳</a></details><details class="wiki-group"><summary>安全与项目</summary><a href="../security/">安全与数据处理</a><a href="../architecture/">架构</a><a href="../verification/">已测试的内容</a><a href="../license/">许可协议与架构不兼容声明</a><a href="../notice/">运营商兼容性通知</a><a href="../changelog/">更新日志</a></details></nav><p class="sidebar-note">v0.7.0<br>开源 · 可在您的设备上运行</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="指南"><a href="../../../">首页</a> <span aria-hidden="true">/</span> <a href="../../">文档</a> <span aria-hidden="true">/</span> <a href="../">参考</a> <span aria-hidden="true">/</span> <span aria-current="page">工作流程与操作</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">参考 / 收集</p><h1>工作流程与操作</h1><p class="guide-outcome">控制面板的日常操作：模式、监控类别、参数、通知、导出、备份及容量。</p><div class="wiki-body"><p>首次连接时，请<a href="../accounts/">使用账户和会话格式</a>。
+有关保存版本、事件策略和数据缺失的说明，请参阅
+<a href="../collection/">“数据采集原理</a>”。本指南涵盖日常操作和数据恢复。</p>
+<h2 id="operator-workflow">操作员工作流程<a class="anchor" href="#operator-workflow" aria-label="本节链接">#</a></h2>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 691 380" width="691" height="380" role="img" aria-labelledby="flow-2-title flow-2-desc"><title id="flow-2-title">流程图</title><desc id="flow-2-desc">选择存储方式和密钥保护方案 → 使用其令牌打开面板; 使用其令牌打开面板 → 选择工作区; 选择工作区 → 配置直连或代理路径; 配置直连或代理路径 → 输入手机号码或选择文件 / QR码; 输入手机号码或选择文件 / QR码 → 验证账户身份并选择可加入的群组; 验证账户身份并选择可加入的群组 → 保存事件和附件策略，然后开始监控; 保存事件和附件策略，然后开始监控 → 监控错误、访问、队列和磁盘; 监控错误、访问、队列和磁盘 → 保留独立检查点; 保留独立检查点 → 导出和验证材料</desc><defs><marker id="flow-2-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M209.8 37.0C239.7 37.0 239.7 37.0 269.6 37.0" marker-end="url(#flow-2-arrow)" style="--i:0;--len:60" pathLength="60"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M209.8 37.0C239.7 37.0 239.7 37.0 269.6 37.0"/></circle><path class="flow-edge" d="M421.8 37.0C470.7 37.0 470.7 37.0 519.5 37.0" marker-end="url(#flow-2-arrow)" style="--i:1;--len:98" pathLength="98"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M421.8 37.0C470.7 37.0 470.7 37.0 519.5 37.0"/></circle><path class="flow-edge" d="M571.5 57.0C571.5 91.0 571.5 91.0 571.5 125.0" marker-end="url(#flow-2-arrow)" style="--i:2;--len:68" pathLength="68"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M571.5 57.0C571.5 91.0 571.5 91.0 571.5 125.0"/></circle><path class="flow-edge" d="M495.4 145.0C465.5 145.0 465.5 145.0 435.6 145.0" marker-end="url(#flow-2-arrow)" style="--i:3;--len:60" pathLength="60"/><circle class="flow-pulse" r="3.2" style="--i:3"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M495.4 145.0C465.5 145.0 465.5 145.0 435.6 145.0"/></circle><path class="flow-edge" d="M255.8 145.0C232.8 145.0 232.8 145.0 209.8 145.0" marker-end="url(#flow-2-arrow)" style="--i:4;--len:46" pathLength="46"/><circle class="flow-pulse" r="3.2" style="--i:4"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M255.8 145.0C232.8 145.0 232.8 145.0 209.8 145.0"/></circle><path class="flow-edge" d="M119.9 174.0C119.9 199.0 119.9 199.0 119.9 224.0" marker-end="url(#flow-2-arrow)" style="--i:5;--len:50" pathLength="50"/><circle class="flow-pulse" r="3.2" style="--i:5"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M119.9 174.0C119.9 199.0 119.9 199.0 119.9 224.0"/></circle><path class="flow-edge" d="M209.8 253.0C232.8 253.0 232.8 253.0 255.8 253.0" marker-end="url(#flow-2-arrow)" style="--i:6;--len:46" pathLength="46"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M209.8 253.0C232.8 253.0 232.8 253.0 255.8 253.0"/></circle><path class="flow-edge" d="M435.6 253.0C472.4 253.0 472.4 253.0 509.2 253.0" marker-end="url(#flow-2-arrow)" style="--i:7;--len:74" pathLength="74"/><circle class="flow-pulse" r="3.2" style="--i:7"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M435.6 253.0C472.4 253.0 472.4 253.0 509.2 253.0"/></circle><path class="flow-edge" d="M571.5 273.0C571.5 302.5 571.5 302.5 571.5 332.0" marker-end="url(#flow-2-arrow)" style="--i:8;--len:59" pathLength="59"/><circle class="flow-pulse" r="3.2" style="--i:8"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M571.5 273.0C571.5 302.5 571.5 302.5 571.5 332.0"/></circle><g class="flow-node" style="--i:0"><rect x="30.0" y="8.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="28.0">选择存储方式和密钥保护</tspan><tspan x="119.9" y="46.0">方案</tspan></text></g><g class="flow-node" style="--i:1"><rect x="269.6" y="17.0" width="152.2" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="37.0">使用其令牌打开面板</tspan></text></g><g class="flow-node" style="--i:2"><rect x="519.5" y="17.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="37.0">选择工作区</tspan></text></g><g class="flow-node" style="--i:3"><rect x="495.4" y="125.0" width="152.2" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="145.0">配置直连或代理路径</tspan></text></g><g class="flow-node" style="--i:4"><rect x="255.8" y="116.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="136.0">输入手机号码或选择文件</tspan><tspan x="345.7" y="154.0">/ QR码</tspan></text></g><g class="flow-node" style="--i:5"><rect x="30.0" y="116.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="136.0">验证账户身份并选择可加</tspan><tspan x="119.9" y="154.0">入的群组</tspan></text></g><g class="flow-node" style="--i:6"><rect x="30.0" y="224.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="244.0">保存事件和附件策略，然</tspan><tspan x="119.9" y="262.0">后开始监控</tspan></text></g><g class="flow-node" style="--i:7"><rect x="255.8" y="224.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="244.0">监控错误、访问、队列和</tspan><tspan x="345.7" y="262.0">磁盘</tspan></text></g><g class="flow-node" style="--i:8"><rect x="509.2" y="233.0" width="124.6" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="253.0">保留独立检查点</tspan></text></g><g class="flow-node" style="--i:9"><rect x="509.2" y="332.0" width="124.6" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="352.0">导出和验证材料</tspan></text></g></svg></div><details class="flow-steps"><summary>图表转为文本</summary><ol><li>选择存储方式和密钥保护方案 → 使用其令牌打开面板</li><li>使用其令牌打开面板 → 选择工作区</li><li>选择工作区 → 配置直连或代理路径</li><li>配置直连或代理路径 → 输入手机号码或选择文件 / QR码</li><li>输入手机号码或选择文件 / QR码 → 验证账户身份并选择可加入的群组</li><li>验证账户身份并选择可加入的群组 → 保存事件和附件策略，然后开始监控</li><li>保存事件和附件策略，然后开始监控 → 监控错误、访问、队列和磁盘</li><li>监控错误、访问、队列和磁盘 → 保留独立检查点</li><li>保留独立检查点 → 导出和验证材料</li></ol></details></figure>
+<p>授权、传输连接、群组访问权限以及
+消息送达完整性是不同的属性。绿色连接状态并不意味着所有
+事件均已被捕获。</p>
+<h2 id="modes">模式<a class="anchor" href="#modes" aria-label="本节链接">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>模式</th>
+<th>操作</th>
+<th>行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>演示</td>
+<td>scripts\Demo.cmd 或 <code>--demo</code></td>
+<td>合成数据；已禁用真实账户关联功能</td>
+</tr>
+<tr>
+<td>观察</td>
+<td>开始监控</td>
+<td>记录所选来源的已发布更新</td>
+</tr>
+<tr>
+<td>历史快照</td>
+<td>来源 → 历史快照</td>
+<td>最多可记录 500 条当前消息；不重建所有历史变更</td>
+</tr>
+<tr>
+<td>暂停</td>
+<td>暂停观察</td>
+<td>在保留数据和队列任务的同时停止采集</td>
+</tr>
+<tr>
+<td>审核/交接</td>
+<td>导出功能</td>
+<td>ZIP、JSONL/CSV/HTML、检查点、处理回执和时间戳请求</td>
+</tr>
+<tr>
+<td>多个账户</td>
+<td>工作区或顶部的 <strong>+</strong> 按钮</td>
+<td>在一个进程中可创建任意数量的独立工作区</td>
+</tr>
+</tbody>
+</table></div>
+<p>本地演示访问将自动开启，无需手动输入令牌。该功能采用
+进程生命周期权限，仅适用于直接回环访问一个隔离的
+合成演示环境；主控制面板的令牌不会被披露。真实工作区以及远程
+或通过代理访问演示环境仍需进行令牌身份验证。进入演示环境并不授予任何 Telegram 授权。</p>
+<h2 id="monitoring-categories">监控类别<a class="anchor" href="#monitoring-categories" aria-label="本节链接">#</a></h2>
+<p><img alt="支持按账户设置监控参数，并提供合成源数据" src="../../../../assets/sources.png" /></p>
+<p>在<strong>“来源”→“捕获设置”→“选择要保留的更改”</strong>中，可独立选择新消息、编辑、
+删除通知、反应更新和成员事件。默认
+设置保留所有类别。<strong>“消息、编辑和删除</strong>”选项在保留原始上下文的同时，
+会禁用单独的反应/成员更新。 <strong>“所有可见活动</strong>”选项将恢复
+全部五类记录。预设会更改显示形式；点击<strong>“保存监控设置</strong>”以应用更改。</p>
+<p>保存的策略适用于该工作区中所有选定的消息源。其他
+工作区将保留各自的设置。每次实际变更都会记录带签名的变更前/变更后
+值；当前策略也会包含在处理收据和观察
+开始记录中。禁用某类别不会删除之前的观察记录。重新启用
+该类别也不会恢复已遗漏的变更。 此版本中不支持按组覆盖类别设置。</p>
+<p>当先前内容重要时，请保持“记录新消息”功能启用：删除通知无法
+恢复从未被捕获过的文本。操作/覆盖记录及其他群组
+服务事件将始终被保留。 明确的历史快照与
+实时分类选择相互独立，且可能包含服务消息。这些开关不会
+对嵌入在已捕获 Telegram 对象中的反应/成员元数据进行屏蔽。</p>
+<p>历史快照在暂停期间可能会将附件加入队列。开始监控以处理
+这些附件。“已加入队列”并不意味着已下载。若原始文件不可用，系统不会用
+较新的编辑版本进行替换；处理结果将分别记录。</p>
+<p><strong>点击“锁定”</strong>按钮将清除浏览器访问权限和密钥字段，但数据采集仍将继续运行。
+关闭标签页后，进程仍将继续运行。停止 Python 进程或服务
+将终止数据采集，无论浏览器状态如何。</p>
+<p>删除额外的工作区将停止其收集器并清除其本地数据。如果
+因文件被锁定或文件系统错误导致删除中断，控制面板将报告失败，并
+将该工作区标记为不可用（<code>DeletionPending</code>）。请关闭正在使用其
+文件的程序，然后重试<strong>“删除”操作</strong>。 重启 TgWitness 不会恢复该工作区的运行状态，也不会
+重建其部分已删除的日志或密钥。只有在目录被移除后，
+才会记录成功的删除操作；单独导出或备份的副本仍
+受其自身的保留策略约束。</p>
+<h2 id="notifications">通知<a class="anchor" href="#notifications" aria-label="本节链接">#</a></h2>
+<p>打开<strong>“来源”→“通知”→“警报”即可查看每日摘要</strong>。TgWitness 使用
+Apprise 将警报发送至 Matrix、Telegram、Discord、Slack、ntfy、电子邮件及其他
+受支持的服务。您可以在一个工作区中添加多个目标。</p>
+<ol>
+<li>每行输入一个 Apprise 目标 URL。请根据您使用的服务
+    <a href="https://appriseit.com/services/">，参考服务目录和 URL 格式</a>进行设置。</li>
+<li>开启“<strong>发送通知</strong>”功能，然后选择问题警报、受监控
+    聊天中的变化以及每日摘要。摘要显示的时间以服务器时间为准。</li>
+<li>若希望在警报中包含已删除和已编辑
+    消息中的保存文本，请开启<strong>“包含简短摘录</strong>”选项。</li>
+<li>点击<strong>“保存通知</strong>”，然后点击<strong>“发送测试</strong>”以检查送达情况。</li>
+</ol>
+<p>若要使用您自己的接收端，请使用 Apprise 的 <a href="https://appriseit.com/services/json/">JSON Webhook</a>。
+例如， <code>jsons://notify.example.org/tgwitness</code> 通过 HTTPS 将 JSON 发送至该
+端点。这是一个虚构的示例；请将其替换为您的实际目标地址。</p>
+<p>目标和设置属于所选工作区。变更通知
+涵盖其监视的来源，包括新添加的聊天。顶部栏中的铃铛图标
+还会列出最近的问题和聊天变更。</p>
+<p>在演示中，通知控件可见但发送功能已禁用。请在真实的工作区中配置
+发送设置。通知使用该工作区的 Direct、SOCKS5 或
+HTTP 路由；MTProxy 无法传输通知。SMTP 等非 HTTP 目标需要
+直接路由。</p>
+<h2 id="panel-layout">面板布局<a class="anchor" href="#panel-layout" aria-label="本节链接">#</a></h2>
+<p><img alt="使用合成数据连接工作区" src="../../../../assets/connection.png" /></p>
+<p><strong>日志</strong>显示观察结果、搜索和筛选结果。编辑操作会显示已捕获的版本；
+删除操作会显示先前内容（如有）。来源不明的信息将明确标注。
+统计数据可在<strong>“概览</strong>”中查看；采集详情保存在本地指南中。</p>
+<p><strong>“来源</strong>”部分包含监控范围（选定的聊天、Telegram文件夹或整个
+账户）、各类可访问的聊天、带有优先级星标标记的选定来源、附件
+及重新检查设置，以及历史快照。私有来源通过对话/ID
+进行选择，不包含公开链接。“访问状态”描述的是最近一次检查结果，而非永久权限。</p>
+<p><strong>“聊天”→“联系人”</strong>列出了所有已保存消息的联系人；若该聊天已启用联系人资料功能，
+点击即可打开该联系人的资料页面，其中包含指向日志记录的链接。</p>
+<p><strong>Witness</strong> 会生成只读的见证令牌，显示每个见证者最后一次检查的时间，并
+提供运行一个（<a href="../witness/">独立见证者</a>）所需的命令和选项。</p>
+<p><strong>“参数”</strong>部分包含工作区中所有未在其他页面列出的限制和速率设置：
+已读取的对话数量、聊天列表的重新读取频率、心跳和检查点
+间隔、启动缓冲区、重新检查如何分发请求（首次延迟、每次
+轮次、聊天间隔、已恢复和重新请求的消息），磁盘预留空间、下载的超时和
+重试，用户资料的搜索条件（包括您自定义的正则表达式），
+通知的大小和频率，快照、ZIP 文件及浏览器下载的限制，以及 Telegram
+客户端的超时和重试设置。 每个字段都会显示其范围和默认值；已修改的字段会
+被标记，并可逐个或全部恢复。每次更改都会以
+“<code>parameters.changed</code>”的形式记录，并附带更改前后的数值，而观察开始记录则会注明
+当前生效的数值。 这些值从下次使用时起生效；客户端超时和重试则从
+下次连接时起生效。重新检查间隔、附件类型和大小、证据以及异地备份
+间隔仍保留在各自的页面上，其取值范围不限于预设值，而是涵盖该范围内的任意数值。</p>
+<p>顶部栏中的铃铛图标列出了被监控聊天群组中的近期问题和变化；未读项
+会持续计数，直至被标记为已读。变化按聊天群组和小时分组显示（“12条已删除，
+1条已编辑，0条未找到”），而诸如注销或磁盘空间已满等问题将始终保留在列表中，
+无论聊天群组活动多么频繁。</p>
+<p><strong>账户</strong>注册从手机号码字段开始。<strong>继续操作</strong>将直接进入
+验证码输入环节，仅在缺少 API 凭据时才会要求输入。二维码和文件导入是
+其他选项卡。已保存的 API 凭据仅在所属工作区内重复使用。
+登录界面没有侧边栏、统计数据或设置说明。 <strong>“设置</strong>”
+图标可打开 API、代理、存储及附加账户控制选项。新安装
+从这里开始；已连接但未选择消息源的账户则从<strong>“选择聊天</strong>”开始。
+更改路径需要暂停监控，并会取消未完成的登录操作。现有
+日志无法在用户不知情的情况下重新绑定到其他 Telegram 账户。</p>
+<p><strong>导出功能会</strong>检查日志的完整性，并生成可移植文件。其工作区 ID
+可传递给下载命令行界面（CLI）。每次导出都会锁定完整的日志前缀；后续
+事件将进入下一次导出。搜索过滤器不会改变包的范围。
+详细的签名和覆盖范围信息请参见<strong>“验证与限制</strong>”部分。</p>
+<p>在“收集器状态”面板中，会显示收集器状态、排队/失败的媒体文件、最旧的待处理媒体文件、可用
+磁盘空间、请求暂停情况，以及访问状态未确认的来源。<strong>
+这些</strong>详细信息初始状态为折叠状态，并在“账户”页面中被隐藏。一个设置
+卡片会显示下一步操作：连接账户、选择来源或开始监控。
+账户列表为加载时的快照；
+所选工作区会定期刷新。这并非多进程 SLA 监控工具。</p>
+<p>用户界面采用本地资源和文本渲染来呈现源内容。已对桌面版和窄屏
+Chromium 布局进行了测试。这并非完整的无障碍认证；
+屏幕阅读器及人工可用性评估仍需另行进行。</p>
+<h2 id="deployment-environments">部署环境<a class="anchor" href="#deployment-environments" aria-label="本节链接">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>环境</th>
+<th>安装</th>
+<th>验证状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows 个人电脑/服务器</td>
+<td>Python 3.11+、scripts\Setup.cmd/Start.cmd、私有数据目录</td>
+<td>已在 Windows/Python 3.12 环境下本地测试</td>
+</tr>
+<tr>
+<td>Linux 服务器/VPS</td>
+<td>Python venv、专用服务用户、HTTPS/SSH</td>
+<td>提供了代码、持续集成（CI）及 systemd 示例；未在此主机上运行</td>
+</tr>
+<tr>
+<td>macOS</td>
+<td>Python venv、前台进程或用户代理</td>
+<td>提供了 launchd 示例；需单独进行安装验证</td>
+</tr>
+<tr>
+<td>Docker/Compose</td>
+<td>持久卷，一个工作节点</td>
+<td>提供定义和 CI 运行时检查；本地无法使用 Docker</td>
+</tr>
+<tr>
+<td>手机浏览器</td>
+<td>连接到正在运行的服务器上的受保护控制面板</td>
+<td>已测试窄屏 Chromium 布局；数据采集器不支持 iOS/Android 系统</td>
+</tr>
+</tbody>
+</table></div>
+<p>可移植性意味着无需强制使用云服务或构建前端。每个目标系统仍
+需要兼容的 Python/加密依赖项、本地磁盘及网络访问权限。请参阅
+<a href="../deployment/">DEPLOYMENT.md</a> 文件及<a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">服务模板</a>。</p>
+<p>工作区共享 CPU、内存和事件循环。为实现进程隔离，请使用不同的
+实例、端口、数据目录和账户授权。不同实例之间不存在统一的
+控制面板。切勿让多个工作进程指向同一个数据库。</p>
+<h2 id="startup-checks-and-exports">启动检查与导出<a class="anchor" href="#startup-checks-and-exports" aria-label="本节链接">#</a></h2>
+<p>在启动预配置环境之前，请运行 <code>python start.py --check</code>。添加 <code>--json</code>
+以进行机器可读的检查，或传入预期的 <code>--data-dir</code>、<code>--host</code> 和 <code>--port</code>。
+该命令会在无需登录 Telegram 或创建日志的情况下检查先决条件。
+它不会验证日志或证明捕获准备就绪；日志验证将在
+应用程序启动时进行。已占用的端口可能只是现有实例。</p>
+<p>支持文件系统访问 API（File System Access API）的浏览器会通过可写
+流保存导出数据。其他浏览器最多缓冲 128 MiB。若需导出更大容量的
+数据，或使用不支持文件流的浏览器，请使用流式 CLI：</p>
+<pre><code class="language-sh">python -m tgwitness.download --token-file data/live/panel-token.txt --out evidence.zip</code></pre>
+<p>从“Exports”中添加 <code>--profile ID</code>
+以创建子工作区。使用 <code>--url https://server</code>
+进行远程访问。仅允许将普通 HTTP 用于回环目标。令牌
+从文件中读取并作为标头发送，不会被打印或放入 URL 中。不接受
+重定向。现有目标不会被覆盖。 传输失败时将删除其
+临时部分文件。报告的 SHA-256 值是传输校验和；请使用可信的指纹/检查点单独验证该签名
+ZIP 文件。</p>
+<h2 id="backup-restore-and-interruptions">备份、恢复与中断<a class="anchor" href="#backup-restore-and-interruptions" aria-label="本节链接">#</a></h2>
+<ol>
+<li>暂停监控并干净利落地终止该进程。</li>
+<li>复制整个数据目录：数据库、WAL/SHM（如有）、媒体文件、
+    <code>credentials.enc</code>、<code>signing.enc</code>、<code>network.enc</code>、保险库密钥/元数据、令牌、
+    检查点以及所有<code>profiles/</code>目录。</li>
+<li>对于外部密钥模式，请将主密钥单独保存，并保留每个
+    <code>vault.external.json</code>。生成新密钥无法恢复旧的密钥。</li>
+<li>在目标端停止运行时进行恢复；配置原始密钥、限制
+    访问权限，并在恢复运行前验证完整性。</li>
+<li>记录系统停机时间及验证结果。历史快照无法证明
+    在中断期间未发生任何删除操作。</li>
+</ol>
+<p>证据 ZIP 文件不包含会话数据/私钥，且并非完整的服务备份。
+以下四类内容采用不同的保护方式：</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>保护</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>未设密码的导出文件（默认）</td>
+<td>未加密。文件经过签名，因此可检测到任何更改，但任何持有该文件的人均可阅读其内容。</td>
+</tr>
+<tr>
+<td>设有密码的导出文件</td>
+<td>如果您设置了密码，生成的导出文件将原样封装为 WinZip AES-256 压缩包，该压缩包可由 7-Zip 和 WinRAR 打开；密码不会被存储（<a href="../evidence/">符合证据处理规范</a>）</td>
+</tr>
+<tr>
+<td>日志数据库及存储在磁盘上的附件</td>
+<td>TgWitness 不会对数据进行加密；请使用加密磁盘或卷</td>
+</tr>
+<tr>
+<td>Telegram 会话与签名密钥</td>
+<td>数据目录中已加密（<code>credentials.enc</code>、<code>signing.enc</code>、<code>network.enc</code>）</td>
+</tr>
+</tbody>
+</table></div>
+<p>全量备份是指上述所述的已暂停数据目录，而非导出文件。
+两者均应使用受保护的存储空间和经过精心设计的传输机制。临时服务器导出文件存储在每个工作区的
+<code>temporary-exports/</code> 中；已完成的响应会被清理，而中断的导出
+文件将在下次启动时被移除，此时该工作区的实例锁处于持有状态。</p>
+<p>连接恢复事件并不保证能够恢复期间的更改。
+持久化媒体任务和 Telegram 更新位置在重启后仍会保留；请参阅
+<a href="../evidence/#durable-collection-and-process-receipts-02">证据格式</a>。</p>
+<h2 id="capacity-and-retention">容量与保留期限<a class="anchor" href="#capacity-and-retention" aria-label="本节链接">#</a></h2>
+<p>默认限制（均可在<strong>“参数”</strong>中修改）：前 1,000 个对话，每个快照 500 条消息
+，4 GiB 未压缩的签名 ZIP 内容（更大压缩包需使用
+<code>verify.py --max-gib N</code>），以及 128 MiB 的浏览器备用方案。 附件在<strong>“来源 → 附件</strong>”下，每种类型占用 1–2,000 MiB。
+下载 CLI 的默认传输量为 5 GiB。可用磁盘空间可能为
+下限。请为日志、媒体、WAL、临时导出和备份预留空间。
+导出使用数据卷，而非 Compose 的 512 MiB <code>/tmp</code>。</p>
+<p>应测量每秒事件数、队列年龄、媒体数据字节数和磁盘延迟，而非仅统计
+群组数量。合成本地基准测试无法保证 Telegram 的消息送达。
+系统不支持自动保留和删除。删除日志尾部将使其
+与已保留检查点之间的关联失效。</p>
+<p>优先级重新检查机制已存在：默认情况下，标星来源每 15 分钟重新检查一次，
+其他来源每 6 小时重新检查一次（参见<a href="../collection/#recheck-tiers">重新检查级别</a>）。如上所述，
+提供受密码保护的导出功能。 Telegram/代理实时接收、持久回放、
+管理员日志和反应轮询、隔离的工作进程、由 TgWitness 自身对本地日志和媒体
+进行的加密、用户角色以及独立审查仍属于独立的工作项。请参阅
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/READINESS.md">READINESS.md</a>、<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">LIVE_ACCEPTANCE.md</a> 和
+<a href="../verification/">VERIFICATION.md</a>。</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/OPERATIONS.md">在 GitHub 上编辑此页面 ↗</a><a class="next-guide" href="../investigation/"><span>下一步</span><strong>调查模式 →</strong></a><p>这些指南描述了当前的实现方案。验证结果和剩余缺陷在其他文档中单独记录。 <a href="../verification/">已测试的内容 →</a></p></footer>
+</main>
+<aside class="toc" aria-label="本页面内容"><p class="nav-label">本页面内容</p><a href="#operator-workflow">操作员工作流程</a><a href="#modes">模式</a><a href="#monitoring-categories">监控类别</a><a href="#notifications">通知</a><a href="#panel-layout">面板布局</a><a href="#deployment-environments">部署环境</a><a href="#startup-checks-and-exports">启动检查与导出</a><a href="#backup-restore-and-interruptions">备份、恢复与中断</a><a href="#capacity-and-retention">容量与保留期限</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>开源 · 可在您的设备上运行</span><a href="../../../../LICENSE">MIT 许可协议</a><a href="../notice/">操作员通知</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">安全</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "等待消息", "Step through a fictional send, edit and delete.": "通过一个虚构的发送、编辑和删除过程进行演示。", "No observations yet. Start the sequence or advance one event.": "尚无观察记录。开始序列或跳转至下一事件。", "Meet at 10:00": "10:00 见面", "A new message is visible in the chat.": "聊天中显示了一条新消息。", "Record 1 appended: the collector observed the original message.": "已附录记录 1 条：采集器已捕获原始消息。", "Meet at 11:00": "11:00 见面", "The current text changes. The earlier observation stays.": "当前文本内容有所变更。先前的观察结果仍然有效。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "记录 2 已追加：该编辑内容为新观察结果。记录 1 仍保留原始文本。", "Message deleted": "消息已删除", "The message has disappeared from the chat view.": "该消息已从聊天界面中消失。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "已添加记录 3：删除通知与两个被观察到的版本一同保留。", "0 records": "0 条记录", "1 record": "1 条记录", "2 records": "2 条记录", "3 records": "3 条记录", "Complete / {n} of 3": "已完成 / {n}/3", "Step / {n} of 3": "第 {n} 步（共 3 步）", "Pause": "暂停", "Replay sequence": "回放序列", "Play sequence": "播放序列", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "静态示例已上线。如需交互式计算哈希值，请通过 HTTPS 访问此页面，或在支持 Web Crypto 的本地预览环境中打开。", "No record supplied": "未提供记录", "Tail removed": "尾部内容已删除", "≠ saved hash": "≠ 已保存的哈希值", "Rebuilt · different hash": "重建 · 哈希值不同", "= saved hash": "= 已保存的哈希值", "Same length and matching head.": "篇幅相同且标题一致。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "这三个计算出的哈希值均与保存的哈希值一致。该样本符合保留的三个记录边界。", "Same saved head; the journal prefix fails verification.": "保存的头部信息相同；日志前缀验证失败。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "记录 2 与其保存的哈希值不再匹配。若仅检查最终存储的头部，则会遗漏此问题；验证器会检查每一条记录。", "Head differs from the retained checkpoint.": "标题与保留的检查点不同。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "重建的哈希值相互关联，但最终的头部已发生变化。保留的检查点拒绝接受这一历史记录。对于已更改的记录，原始签名也会验证失败。", "Too short: 2 supplied records \u003c 3 retained records.": "内容过短：提供的记录有 2 条，而保留的记录少于 3 条。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "剩下的两个哈希值仍然匹配。保留的检查点揭示了缺失的部分。如果没有那个早先的边界，仅凭这个较短的前缀是无法揭示这一遗漏的。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "此浏览器不支持哈希计算。下方的公式和静态说明仍可查看。", "{n} records": "{n}条记录", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "已接受：计数持续增加，签名已验证，密钥匹配。该见证者保留了这一新边界。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "回滚：签名后的结果报告的记录数量少于上次被接受的检查点。Witness 会记录该问题，并保留较早被接受的边界。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "分叉：计数保持不变，但分支头不同。见证者会记录该分歧，并保留先前被接受的分界点。", "No answer": "无回答", "boundary unknown": "边界未知", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "无响应：该工具会记录验证失败的情况。它无法确定收集器的当前状态。如果该工具仍能访问 Bot API 且其发布政策允许，则会发布该失败信息。", "Send {n}": "发送 {n}", "Edit {n}": "编辑 {n}", "Delete {n}": "删除 {n}", "Both accounts captured all six expected observations in this example.": "在这项示例中，这两个账户均捕获了预期的全部六项观察结果。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "账户 B 依然成功捕获了 6 条中的 6 条。其中两条收据的捕获耗时较长。捕获率和收据延迟反映的是不同的问题。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "账户 B 在截止时间前捕获了 6 条中的 5 条（83.3%）。缺失的编辑操作未测得延迟。此结果仅描述了这六项受控操作。", "not observed by cutoff": "未在截止时间前观察到", "{s} seconds": "{s}秒", "Exact values follow in the table.": "具体数值见下表。", "{s} s": "{s} s", "Not observed": "未发现", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "四个聊天群组提供了不同的观察结果。请追溯每条连接的源记录；在未确认发件人身份的情况下，请勿将该频道帖子归因于用户 71001。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "记录 #146 和 #205 显示相同的发件人 ID：71001。这将同一 Telegram 账号在两个聊天群组中发布的帖子关联起来。但这并不能识别现实世界中的具体个人，也无法确定该频道帖子的发布者。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "目标地址 pay.example.invalid/new 出现在群组记录 #146、机器人键盘 #173、频道编辑 #188 以及私信 #205 中。目标地址的重复出现表明这些内容之间存在关联；但这并不能证明这些账户受共同控制。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "在此虚构案例中，已完成的媒体收据 #151 和 #209 具有完全相同的 SHA-256 值。请对比实际字节内容及其关联的消息记录。该匹配文件既未标识其创建者，也无法证明是谁转发了该文件。", "the encrypted off-site copy": "加密的异地副本", "notifications": "通知", "checkpoint hashes for timestamps": "时间戳的检查点哈希值", "signed checkpoints for the witness": "TgWitness 的签名检查点", "Switched on in this example": "在此示例中已启用", "Optional · off by default": "可选 · 默认关闭", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "离开这台机器时：Telegram 连接和 {list}。除此之外别无他物。", "Default: only the Telegram connection leaves this machine.": "默认设置：仅 Telegram 连接会离开这台机器。", "{done} of {total} done": "已完成 {done}/{total}", "Mark step {n} as done": "将步骤 {n} 标记为已完成", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "文案", "Copied": "已复制", "Command copied.": "已复制该指令。", "Selected — Ctrl/Cmd+C": "选中 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "已选中命令。请手动复制。", "Command copied to clipboard.": "命令已复制到剪贴板。", "Select text": "选择文本", "Clipboard unavailable. Command selected; copy it manually.": "剪贴板不可用。已选中命令；请手动复制。", "A message arrives. The first observation is saved.": "一条消息送达。首次记录被保存。", "The time changes. Both captured versions stay.": "时间会改变，但两个记录版本都会保留下来。", "The message disappears. The captured history remains.": "消息虽已消失，但记录的历史依然存在。", "Pause example animation": "暂停示例动画", "Play example animation": "播放示例动画", "Play": "播放", "Full-size workspace screenshot": "全屏工作区截图", "Workspace screenshot · fictional data": "工作区截图 · 虚构数据", "Close": "关闭", "Close screenshot": "关闭截图", "Scrollable full-size screenshot": "可滚动全屏截图", "Enlarge: {name}": "放大：{name}", "View full size": "查看大图"}</script>
+</body></html>

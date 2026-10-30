@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="ru" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Подключение, прокси и защита данных | TgWitness</title>
+<meta name="description" content="Пары API, методы входа в систему, маршруты SOCKS5, HTTP и MTProxy, общедоступные списки прокси-серверов и информация о том, что защищает каждый из этих маршрутов."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/connection/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Подключение, прокси и защита данных | TgWitness"><meta property="og:description" content="Пары API, методы входа в систему, маршруты SOCKS5, HTTP и MTProxy, общедоступные списки прокси-серверов и информация о том, что защищает каждый из этих маршрутов.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/ru/docs/reference/connection/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/connection/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/connection/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/connection/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/connection/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/connection/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/connection/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/connection/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/ru/docs/reference/connection/", "url": "https://phishdestroy.github.io/TgWitness/ru/docs/reference/connection/", "name": "Подключение, прокси и защита данных | TgWitness", "description": "Пары API, методы входа в систему, маршруты SOCKS5, HTTP и MTProxy, общедоступные списки прокси-серверов и информация о том, что защищает каждый из этих маршрутов.", "inLanguage": "ru", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://phishdestroy.github.io/TgWitness/ru/"}, {"@type": "ListItem", "position": 2, "name": "Документация", "item": "https://phishdestroy.github.io/TgWitness/ru/docs/"}, {"@type": "ListItem", "position": 3, "name": "Справочник", "item": "https://phishdestroy.github.io/TgWitness/ru/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Подключение, прокси и защита данных", "item": "https://phishdestroy.github.io/TgWitness/ru/docs/reference/connection/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Перейти к содержанию</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Документация</span></a>
+<nav aria-label="Руководства"><a href="../../concepts/">Наглядное руководство</a><a href="../../">Все руководства</a><a href="../">Справочник</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Язык"><span aria-hidden="true">◍</span> Русский</summary><div class="lang-list"><a href="../../../../docs/reference/connection/" hreflang="en" lang="en">English</a><a href="./" hreflang="ru" lang="ru" aria-current="true">Русский</a><a href="../../../../uk/docs/reference/connection/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/connection/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/connection/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/connection/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/connection/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/connection/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/connection/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/connection/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/connection/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/connection/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/connection/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Переключить светлую и тёмную тему"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Руководства"><a href="../../../guides/modes.html">Режимы, сценарии и уровни доказательства</a><p class="nav-label">Первые шаги</p><a href="../../start/">Запуск за несколько минут</a><a href="../../accounts/">Подключение аккаунта</a><a href="../../proxies/">Выбор прокси</a><a href="../../exports/">Экспорт и проверка</a><p class="nav-label">Разобраться в доказательствах</p><a href="../../concepts/">Как устроены доказательства</a><a href="../../cases/">Расследование по всем чатам</a><a href="../../security/">Безопасность установки</a><p class="nav-label">Дальше</p><a href="../../witness/">Бот-свидетель</a><a href="../../server/">Постоянная работа на сервере</a><a href="../../troubleshooting/">Поиск неисправностей</a></nav><nav class="wiki-nav" aria-label="Справочник"><p class="nav-label"><a class="nav-label-link" href="../">Справочник</a></p><details class="wiki-group" open><summary>Установка</summary><a href="../quickstart/">Быстрый старт</a><a href="../accounts/">Аккаунты и форматы сессий</a><a href="./" aria-current="page">Подключение, прокси и защита данных</a><a href="../deployment/">Развёртывание</a></details><details class="wiki-group"><summary>Сбор</summary><a href="../collection/">Как устроен сбор</a><a href="../operations/">Работа и обслуживание</a><a href="../investigation/">Режим расследования</a><a href="../features/">Возможности и ограничения</a></details><details class="wiki-group"><summary>Доказательства</summary><a href="../how-it-works/">Как устроены доказательства</a><a href="../evidence/">Формат доказательств</a><a href="../witness/">Независимый свидетель</a><a href="../timestamp/">Метки времени</a></details><details class="wiki-group"><summary>Безопасность и проект</summary><a href="../security/">Безопасность и обращение с данными</a><a href="../architecture/">Архитектура</a><a href="../verification/">Что проверено</a><a href="../license/">Уведомление о несовместимости лицензий и архитектуры</a><a href="../notice/">Уведомление о несовместимости с операторами</a><a href="../changelog/">Список изменений</a></details></nav><p class="sidebar-note">v0.7.0<br>Открытый исходный код · Работает на вашем компьютере</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Руководства"><a href="../../../">Главная</a> <span aria-hidden="true">/</span> <a href="../../">Документация</a> <span aria-hidden="true">/</span> <a href="../">Справочник</a> <span aria-hidden="true">/</span> <span aria-current="page">Подключение, прокси и защита данных</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Поиск по документации</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Попробуйте «прокси», «цепочку хешей», «токен» или «свидетель»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Очистить поиск" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Введите слово для поиска в руководствах и справочнике. Результаты поиска остаются в вашем браузере.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Справочник / Установка</p><h1>Подключение, прокси и защита данных</h1><p class="guide-outcome">Пары API, методы входа в систему, маршруты SOCKS5, HTTP и MTProxy, общедоступные списки прокси-серверов и информация о том, что защищает каждый из этих маршрутов.</p><div class="wiki-body"><p>В данном документе описывается поведение TgWitness версии 0.7.0 и его ограничения. Аутентификация,
+доступ к источнику, сетевое соединение и полнота сбора данных представляют собой отдельные состояния.
+Для ознакомления с этапами входа в систему, форматами файлов и работой с несколькими учетными записями начните с раздела
+<a href="../accounts/">«Учетные записи и форматы сеансов</a>». Информацию о правилах обработки событий и поведении при перезапуске
+см. в разделе <a href="../collection/">«Как работает сбор данных</a>».</p>
+<h2 id="authentication-methods">Методы аутентификации<a class="anchor" href="#authentication-methods" aria-label="Ссылка на раздел">#</a></h2>
+<p><strong>Идентификатор API и хеш API служат для идентификации приложения; они не заменяют данные для входа в учётную запись.</strong>
+
+Их использование в TgWitness не является обязательным. Приоритет: сначала пара, введённая в форму, затем — из
+импортированного JSON-файла учётной записи, далее — пара, сохранённая в рабочей области, и, наконец, встроенный пул из 50
+общедоступных пар, которые пробуются в случайном порядке с автоматической ротацией в случае отказа Telegram. Только
+пара Telegram Desktop (2040) отправляется с соответствующим описанием клиента Telegram Desktop.
+Ваша собственная пара из инструментов разработки API на сайте <a href="https://my.telegram.org">my.telegram.org</a>
+может использоваться со всеми вашими учётными записями; при этом каждая учётная запись по-прежнему имеет собственную авторизацию.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Метод</th>
+<th>Требования</th>
+<th>Служба поддержки TgWitness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Номер телефона, код, двухфакторная аутентификация (2FA) — по желанию</td>
+<td>Доступ к учётной записи; пара API не обязательна</td>
+<td>Вход в панель управления</td>
+</tr>
+<tr>
+<td>HEX-код авторизационного ключа + DC-идентификатор</td>
+<td>Полный ключ длиной 512 символов и DC 1–5</td>
+<td>Вкладка <strong>«Ключ</strong> прямой <strong>авторизации»</strong>; при желании перед сохранением авторизации проверяется идентификатор пользователя</td>
+</tr>
+<tr>
+<td>Telethon StringSession</td>
+<td>Действительная строка сеанса</td>
+<td>Вход в панель управления</td>
+</tr>
+<tr>
+<td>Telethon SQLite <code>.session</code></td>
+<td>Закрытый, последовательный текст</td>
+<td>Прямой импорт схем через панель управления 7/8; опциональный автономный интерфейс командной строки (CLI)</td>
+</tr>
+<tr>
+<td>Pyrogram SQLite <code>.session</code></td>
+<td>Закрытая производственная сессия пользователя</td>
+<td>Прямой импорт схем через панель 2/3</td>
+</tr>
+<tr>
+<td>Telegram Desktop TData ZIP</td>
+<td>Одна современная учетная запись; локальный пароль, если учетная запись защищена</td>
+<td>Преобразование в памяти с проверкой контрольных сумм и расшифровки</td>
+</tr>
+<tr>
+<td>JSON-файл учетной записи</td>
+<td>Поддерживаемые поля API/сессии/ключа</td>
+<td>Метаданные сами по себе заполняют учетные данные API; по-прежнему требуется вход с помощью сеанса/ключа или номера телефона/QR-кода</td>
+</tr>
+<tr>
+<td>Вход с помощью QR-кода</td>
+<td>Подтверждение от официального приложения Telegram</td>
+<td>Локальное генерация QR-кодов, управление сроком действия и повторными попытками, опциональная двухфакторная аутентификация (2FA)</td>
+</tr>
+<tr>
+<td>TDLib / Pyrogram StringSession</td>
+<td>Другие форматы, специфичные для библиотек</td>
+<td>Не поддерживается</td>
+</tr>
+<tr>
+<td>Токен бота</td>
+<td>Бот с собственной моделью доступа и обновления</td>
+<td>Не используется данным сборщиком данных</td>
+</tr>
+</tbody>
+</table></div>
+<p>Telegram использует доставку кодов; доставка SMS не гарантируется. Хеш API не может восстановить
+отмененную сессию или заменить забытый пароль двухфакторной аутентификации. TgWitness не сохраняет
+коды входа или пароль двухфакторной аутентификации Telegram на диск.</p>
+<p>Для частного источника учетная запись должна уже иметь доступ. Имя пользователя группы
+не требуется. Использование прокси или импорт сеанса не предоставляют ни членства, ни прав администратора.
+Текущее членство не гарантирует доступ к истории, предшествующей вступлению в группу.</p>
+<h2 id="import-a-telethon-session-file">Импорт файла сеанса Telethon<a class="anchor" href="#import-a-telethon-session-file" aria-label="Ссылка на раздел">#</a></h2>
+<p>Telethon SQLite, Pyrogram SQLite и Telegram Desktop TData используют разные форматы.
+Панель обнаруживает и преобразует поддерживаемые структуры; переименование файла не является
+преобразованием. Выберите одну сессию и сопутствующий ей файл JSON в разделе <strong>«Файлы</strong>», затем нажмите <strong>«Подключить аккаунт</strong>». Допускается до четырёх совпадающих файлов и
+общий объём до 8 MiB. Подробности о <a href="../accounts/">форматах</a> TData/JSON см. в разделе <a href="../accounts/">«Ограничения форматов</a>».
+Восстановление пароля невозможно. Вход с помощью телефона/двухфакторной аутентификации (2FA) или QR-кода создаёт отдельную авторизацию.</p>
+<p>Дополнительный путь командной строки, доступный исключительно для Telethon, по-прежнему остается в использовании:</p>
+<ol>
+<li>Прекратите работу клиента, использующего исходную сессию, и создайте точную копию.
+    Конвертер отклоняет файлы с незавершённым журналом WAL. Закройте исходный
+    клиент надлежащим образом, а не удаляйте эти файлы, чтобы обойти проверку.</li>
+<li>Из среды TgWitness выполните следующую команду:</li>
+</ol>
+<pre><code class="language-sh">python -m tgwitness.sessions account.session --out account.tgwitness-session</code></pre>
+<ol start="3">
+<li>В разделе <strong>«Добавить аккаунт» → «Файлы</strong>» загрузите результат или
+    вставьте его строку и продолжайте.</li>
+<li>Проверьте отображаемый цифровой идентификатор аккаунта, выберите источники и начните наблюдение.</li>
+</ol>
+<p>Конвертер открывает базу данных SQLite только для чтения, не выполняет обновления схемы и не отправляет сетевых запросов,
+а также не выводит данные сеанса. Он проверяет версию схемы, типы таблиц, одну
+строку сеанса, IP-адрес/порт/дата-центр и длину ключа. Объём входных данных в командной строке ограничен 64 MiB; текст StringSession
+ограничен 4 KiB. Конвертация через панель управления загружает файлы на аутентифицированный сервер TgWitness,
+обрабатывает их в памяти и возвращает нормализованные учетные данные в тот же
+браузер без сохранения загруженных оригиналов. Для удаленного сервера используйте протокол HTTPS.</p>
+<p><strong>Преобразованный файл представляет собой незашифрованный секретный ключ доступа к учётной записи.</strong> Храните его в защищённом
+месте и ни в коем случае не фиксируйте его в репозитории и не отправляйте сторонним сервисам конвертации. TgWitness
+сохраняет авторизованную сессию в своём зашифрованном хранилище. Копирование сессии не
+приводит к созданию отдельной авторизации: не запускайте одновременно несколько клиентов с клонированными ключами авторизации
+и не предполагайте независимую доставку обновлений.</p>
+<p>Преобразование передаёт авторизацию, а не исходные сообщения, кэш объекта или
+постоянный курсор обновления. Оно не обеспечивает восстановление обновлений после перезапуска процессов.</p>
+<h2 id="mtproto-telethon-and-proxies">MTProto, Telethon и прокси-серверы<a class="anchor" href="#mtproto-telethon-and-proxies" aria-label="Ссылка на раздел">#</a></h2>
+<p>MTProto — это протокол Telegram. Telethon — это библиотека клиента на языке Python, которую использует TgWitness.
+MTProxy — это транспортный прокси Telegram; SOCKS5 и HTTP CONNECT обеспечивают общие
+туннели. Ни один из них не заменяет аутентификацию учетной записи.</p>
+<p>Если вам требуется прокси-сервер, сохраните маршрут для каждой рабочей области в разделе <strong>«Аккаунт» → «Настройки» → «Настройки подключения» → «Изменить маршрут подключения»</strong> перед
+входом в систему. По умолчанию установлено значение «Прямой».</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Маршрут</th>
+<th>Настройки</th>
+<th>Границы</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Прямой</td>
+<td>Нет</td>
+<td>Telethon подключается напрямую к Telegram</td>
+</tr>
+<tr>
+<td>SOCKS5</td>
+<td>Хост, порт, опционально — имя пользователя/пароль</td>
+<td>python-socks 2.8.2, rdns включен</td>
+</tr>
+<tr>
+<td>HTTP CONNECT</td>
+<td>Хост, порт, опционально — имя пользователя/пароль</td>
+<td>Используется простой HTTP-запрос CONNECT; поддержка TLS для самого прокси не реализована</td>
+</tr>
+<tr>
+<td>MTProxy</td>
+<td>Хост, порт, секретный ключ</td>
+<td>Экспериментальный формат передачи данных Telethon: 32 шестнадцатеричных цифры или «<code>dd</code>» + 32 шестнадцатеричных цифры</td>
+</tr>
+</tbody>
+</table></div>
+<p>Поддельные секретные ключи TLS <code>ee</code> отклоняются. Функция нормализации в Telethon 1.45 может удалять префикс
+и домен, однако это не реализует механизм Fake TLS. Вставьте <code>tg://proxy?server=…&amp;port=…&amp;secret=…</code>
+или <code>https://t.me/proxy?server=…&amp;port=…&amp;secret=…</code> и выберите <strong>«Заполнить поля из ссылки</strong>».
+При этом происходит проверка и заполнение полей без установления соединения или сохранения; проверьте и сохраните
+маршрут отдельно. Поля для ручного ввода остаются доступными. См. <a href="https://core.telegram.org/api/links#proxy-links">ссылки на прокси Telegram</a>.</p>
+<h3 id="public-proxies-supplied-by-your-installation">Общедоступные прокси-серверы, предоставляемые вашей установкой<a class="anchor" href="#public-proxies-supplied-by-your-installation" aria-label="Ссылка на раздел">#</a></h3>
+<p>Настройки подключения включают готовый список публичных адресов из
+<a href="https://github.com/SoliSpirit/mtproto">репозиториев SoliSpirit/mtproto</a> и
+<a href="https://github.com/zakky8/mtproto-proxy-pro">zakky8/mtproto-proxy-pro</a>. Входящий в комплект снэпшот
+содержит данные об общедоступных конечных точках, указание источников и даты загрузки, но не
+заявления об аутентификации ни одного из этих проектов. Система работает без загрузки каких-либо данных при запуске. Выберите
+запись, сохраните маршрут, а затем проверьте соединение с Telegram перед входом в систему.</p>
+<p><strong>Функция обновления публичных списков</strong> запрашивает два фиксированных HTTPS-канала по запросу. Каждый ответ
+ограничен размером 1 МБ и временем обработки 20 секунд; перенаправления отклоняются. Сохраняется не более 64 совместимых записей
+на каждый источник с устранением дубликатов между источниками. Недопустимые ссылки, частные/зарезервированные
+IP-адреса в явном виде, локальные имена хостов и неподдерживаемые записи Fake TLS <code>ee</code> пропускаются. Публичные
+имена хостов разрешаются при выборе; каждая запись должна быть глобально маршрутизируемой, а
+выбранный IP-адрес фиксируется в сохраненном маршруте. Это предотвращает последующее
+перенаправление сохраненного соединения с хоста канала на частный адрес. Чтобы повторно разрешить запись, примените её заново.</p>
+<p>Каждая рабочая область сохраняет последние исправные моментальные снимки источника в формате <code>public-proxies.json</code>. В случае неудачных,
+пустых или несовместимых ответов источника сохраняются предыдущие записи данного источника и временные метки.
+Обновления являются атомарными, сериализованными и ограничены одной попыткой в минуту на каждое рабочее пространство.
+Ни обновление, ни просмотр списка не изменяют выбранный маршрут. Подтверждение доступности по-прежнему
+требует проверки транспорта; наличие провайдера в списке не является доказательством полной доставки сообщений в Telegram.</p>
+<p>Загрузка списков осуществляется через отдельное HTTPS-соединение, по умолчанию — напрямую. Укажите
+<code>TGWITNESS_PROXY_FEED_PROXY</code> в качестве URL-адреса HTTP/SOCKS5, чтобы направлять эти запросы через прокси-сервер для загрузки;
+оба варианта сборщика Compose перенаправляют их. Ни сеансы Telegram, ни учетные данные API,
+ни токен панели, ни токен бота не передаются провайдерам. MTProxy рабочей области не может обрабатывать
+такие HTTP-загрузки. Названия провайдеров, даты сохранения и маршрут загрузки указаны
+в разделе <strong>«Откуда берётся список</strong>».</p>
+<p>Чтобы заменить общедоступный список на свой собственный каталог операторов, настройте приведённую ниже переопределение.
+Это полностью отключает внешние подписки, в том числе в случае, когда массив <code>proxies</code> пуст.</p>
+<p>Скопируйте <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/proxies.config.example">пустой каталог</a>
+в папку «<code>proxy-config/proxies.json</code>
+» и добавьте ваши развернутые публичные конечные точки:</p>
+<pre><code class="language-json">{&quot;format&quot;: &quot;tgwitness-proxy-catalog-v1&quot;, &quot;proxies&quot;: [
+  {&quot;id&quot;: &quot;project-eu&quot;, &quot;label&quot;: &quot;Project EU&quot;,
+   &quot;link&quot;: &quot;tg://proxy?server=REPLACE_HOST&amp;port=443&amp;secret=REPLACE_SECRET&quot;}
+]}</code></pre>
+<p>Примерные значения необходимо заменить. Допускается до 32 уникальных записей.
+Аутентифицированный список возвращает метки/хосты/порты без общих секретных ключей; при выборе одного из них
+его учетные данные сохраняются в хранилище рабочей среды. Доступность остается непроверенной до момента
+явно указанного теста транспорта. При наличии некорректно сформированного каталога допускается ручная настройка.</p>
+<p>Запуск в нативной среде: укажите <code>TGWITNESS_PROXY_CATALOG</code> в качестве локального пути к файлу JSON. Docker:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.proxies.yaml up -d --build</code></pre>
+<p>Накладка монтирует каталог <code>proxy-config</code> в режиме «только для чтения»; файлы должны быть доступны для чтения контейнеру с UID 10001.
+Данный каталог исключён из Git, контекста сборки Docker и архивов исходного кода. В этом
+каталоге настраиваются учётные записи для сбора данных; <a href="../witness/">бот-свидетель</a> использует собственный
+маршрут HTTP/SOCKS5, а не MTProxy.</p>
+<p>В случае сбоя прокси-сервера TgWitness не переключается на Direct. Приостановите наблюдение перед
+сменой маршрута. Сохранение маршрута приводит к отключению старых клиентов и отмене незавершённого входа в систему;
+новый клиент использует сохранённый маршрут. Связь между учётной записью и журналом/сессией сохраняется.
+Настройки заменяют предыдущий маршрут: при их редактировании необходимо повторно ввести учетные данные прокси-сервера.</p>
+<p>Учетные данные шифруются с использованием алгоритма <code>network.enc</code>. API не возвращает имя пользователя,
+пароль или секретный ключ. Подписанные записи содержат тип маршрута и информацию о наличии
+учетных данных, исключая конечную точку и секретные ключи. Оператор может увидеть конечную точку
+в панели управления. Поля с секретными данными очищаются после сохранения, блокировки или переключения рабочих пространств.</p>
+<p><strong>Функция «Проверить соединение с Telegram»</strong>, доступная также до входа в систему, открывает и закрывает временное
+неавторизованное соединение с Telegram через маршрут. Она не обращается к веб-сайту проверки IP-адресов.
+Успешное выполнение этой функции подтверждает наличие транспортного соединения, но не гарантирует доступ к группам, полную
+доставку сообщений или анонимность.</p>
+<p>Прокси применяется к соединениям клиента Telegram, включая загрузку медиафайлов из дата-центров Telegram.
+Для браузера, pip, SSH и запускаемых вручную инструментов TSA предусмотрены отдельные маршруты.
+Имя хоста прокси может разрешаться локально. <code>rdns</code> влияет на имена хостов назначения;
+Telegram часто предоставляет числовые IP-адреса дата-центров.</p>
+<p>Протоколы SOCKS5 и простой HTTP CONNECT сами по себе не шифруют учетные данные прокси-сервера или
+туннель «клиент-прокси». MTProto отдельно защищает трафик Telegram. Используйте
+соответствующий безопасный канал для подключения к прокси в ненадежной сети. Закрытые группы
+являются облачными чатами; протокол MTProto не преобразует их в секретные чаты с сквозным шифрованием.</p>
+<h2 id="encryption-and-signatures">Шифрование и подписи<a class="anchor" href="#encryption-and-signatures" aria-label="Ссылка на раздел">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Уровень</th>
+<th>Реализовано</th>
+<th>Ответственность оператора</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Трафик Telegram</td>
+<td>Telethon MTProto</td>
+<td>Доверие к платформе, маршрутизация и доступность</td>
+</tr>
+<tr>
+<td>Веб-панель</td>
+<td>Токен-носитель, настройка loopback по умолчанию, ограничения на количество запросов</td>
+<td>HTTPS или SSH-туннель для удалённого доступа</td>
+</tr>
+<tr>
+<td>Секреты</td>
+<td>Fernet для хранения учетных данных API, сеансов, учетных данных прокси и закрытого ключа для подписи</td>
+<td>Обеспечьте защиту ключа дешифрования и хоста, на котором работает система</td>
+</tr>
+<tr>
+<td>Ключ хранилища</td>
+<td>Локальный ключ или внешний мастер-ключ для новой установки</td>
+<td>Отдельное защищённое хранилище и резервное копирование ключей</td>
+</tr>
+<tr>
+<td>Сообщения и вложения</td>
+<td>Хранение приложений в виде открытого текста</td>
+<td>Зашифрованный диск/том</td>
+</tr>
+<tr>
+<td>ZIP/JSONL/CSV/HTML</td>
+<td>Проверка целостности данных, отсутствие шифрования содержимого</td>
+<td>Защита экспортированных копий и передач данных</td>
+</tr>
+<tr>
+<td>Происхождение и время</td>
+<td>Подписанный журнал, подтверждение обработки, инструменты в соответствии с RFC 3161</td>
+<td>Доверенный ключ, независимые контрольные точки/TSA и процедура хранения</td>
+</tr>
+</tbody>
+</table></div>
+<p>В разделе<strong> «Защита хранилища»</strong> в учетной записи отображаются следующие состояния. Токен панели представляет собой
+секретный ключ доступа, а не пароль для шифрования. Один токен управляет всеми рабочими пространствами;
+рабочие пространства не являются отдельными пользователями или изолированными арендаторами.</p>
+<p>Явно запущенная, изолированная синтетическая демонстрационная версия может открываться автоматически через прямое
+лупбэк-соединение. При этом используется отдельная функция, действующая в течение срока жизни процесса; она ни
+раскрывает настроенный токен панели, ни предоставляет доступ к реальным рабочим пространствам. Удалённые,
+проксированные или междоменные запросы не могут получить доступ к этой функции автоматического входа или использовать её.
+Данная удобная функция не снимает ограничений аутентификации в отношении данных реальных учетных записей.</p>
+<p>BitLocker, LUKS, FileVault или управляемый зашифрованный том могут обеспечить защиту хранилища в рамках
+соответствующих моделей угроз. Администратор разблокированного работающего компьютера
+по-прежнему может прочитать данные. При планировании хранилища учитывайте файлы WAL/SHM баз данных SQLite, мультимедиа, временные экспортные файлы, файлы подкачки, резервные копии
+и загрузки из браузера. Том Docker не шифруется только
+по той причине, что он является томом. TgWitness не реализует шифрование SQLCipher или объектное шифрование.</p>
+<h2 id="external-master-key">Внешний мастер-ключ<a class="anchor" href="#external-master-key" aria-label="Ссылка на раздел">#</a></h2>
+<p>При <strong>новой</strong> установке поместите главный ключ за пределами каталога данных.
+Это не приведёт к автоматическому переносу существующего хранилища с локальными ключами. Подготовьте каталог
+для ключей, доступный только для учетной записи службы, а затем выполните:</p>
+<pre><code class="language-sh">python -m tgwitness.security create-master-key /private/keys/tgwitness-master.key
+export TGWITNESS_VAULT_KEY_FILE=/private/keys/tgwitness-master.key
+python -m tgwitness --data-dir /private/observations/new-case</code></pre>
+<p>PowerShell с использованием установленной среды проекта:</p>
+<pre><code class="language-powershell">python -m tgwitness.security create-master-key E:\PrivateKeys\tgwitness-master.key
+$env:TGWITNESS_VAULT_KEY_FILE = &#x27;E:\PrivateKeys\tgwitness-master.key&#x27;
+python -m tgwitness --data-dir E:\PrivateData\new-case</code></pre>
+<p>В Docker смонтируйте файл в режиме «только для чтения» вне каталога <code>/data</code>, например, в каталоге
+<code>/run/secrets/tgwitness-master.key</code>, и задайте переменную среды с указанием этого пути.
+UID службы должен иметь права на чтение этого файла. Передавайте путь, а не байты ключа, через
+файлы среды/конфигурации.</p>
+<p>Каждое рабочее пространство получает случайный публичный солевой ключ (salt) и собственный ключ Fernet, полученный с помощью алгоритма
+HKDF-SHA256. В базе данных «<code>vault.external.json</code>» хранятся метаданные о выведении ключа, а не сам мастер-ключ.
+Отсутствие или неверность ключа приводит к сбою при запуске без автоматической замены. Сохраняйте как
+метаданные о солевом ключе, так и мастер-ключ для восстановления.</p>
+<p>Все рабочие пространства производятся от одного и того же мастер-ключа; его компрометация затрагивает всю
+инсталляцию. Запущенный процесс может расшифровывать секретные данные. Это не HSM и не
+KDF на основе пароля. Произвольные пароли, введенные пользователем, не допускаются вместо случайного ключа.</p>
+<p>Сохраняйте существующий ключ для действующих установок до тех пор, пока не будет
+осуществлена и проверена плановая миграция. Удаление <code>vault.key</code> или замена мастер-ключа может привести к
+потере доступа к сеансам/ключам подписи. Храните зашифрованные резервные копии и ключи отдельно и
+проверяйте возможность восстановления в изолированной среде.</p>
+<h2 id="sources-and-verification-scope">Источники и объем проверки<a class="anchor" href="#sources-and-verification-scope" aria-label="Ссылка на раздел">#</a></h2>
+<p>Проверено 26 октября 2026 года:</p>
+<ul>
+<li>https://core.telegram.org/api/auth</li>
+<li>https://core.telegram.org/api/obtaining_api_id</li>
+<li>https://docs.telethon.dev/en/stable/basic/signing-in.html</li>
+<li>https://docs.telethon.dev/en/stable/concepts/sessions.html</li>
+<li>https://core.telegram.org/mtproto/mtproto-transports</li>
+<li>https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/SourceFiles/storage/storage_account.cpp</li>
+<li>Telethon 1.45.0: SQLiteSession, StringSession, <code>Connection._proxy_connect</code>,
+    <code>TcpMTProxy.normalize_secret</code> и методы загрузки.</li>
+</ul>
+<p>Локальные тесты охватывают фикстуры SOCKS5/HTTP CONNECT с обратной связью, синтетические сессии SQLite,
+изоляцию маршрутов, исключение секретных данных и отказ при отсутствии ключа. Они не позволяют установить
+реальную совместимость Telegram и прокси-сервера, а также поведение MTProxy в реальных условиях. См.
+<a href="../verification/">файлы VERIFICATION.md</a> и <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">LIVE_ACCEPTANCE.md</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/CONNECTION-SECURITY.md">Исправить страницу на GitHub ↗</a><a class="next-guide" href="../deployment/"><span>Дальше</span><strong>Развёртывание →</strong></a><p>В данных руководствах описывается текущая реализация. Результаты валидации и остающиеся пробелы документируются отдельно. <a href="../verification/">Что проверено →</a></p></footer>
+</main>
+<aside class="toc" aria-label="На этой странице"><p class="nav-label">На этой странице</p><a href="#authentication-methods">Методы аутентификации</a><a href="#import-a-telethon-session-file">Импорт файла сеанса Telethon</a><a href="#mtproto-telethon-and-proxies">MTProto, Telethon и прокси-серверы</a><a href="#encryption-and-signatures">Шифрование и подписи</a><a href="#external-master-key">Внешний мастер-ключ</a><a href="#sources-and-verification-scope">Источники и объем проверки</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Открытый исходный код · Работает на вашем компьютере</span><a href="../../../../LICENSE">Лицензия MIT</a><a href="../notice/">Уведомление для оператора</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Безопасность</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Ожидание сообщения", "Step through a fictional send, edit and delete.": "Пошаговое руководство по отправке, редактированию и удалению вымышленного сообщения.", "No observations yet. Start the sequence or advance one event.": "Пока нет комментариев. Начните последовательность или перейдите к следующему событию.", "Meet at 10:00": "Встреча в 10:00", "A new message is visible in the chat.": "В чате отображается новое сообщение.", "Record 1 appended: the collector observed the original message.": "Добавлена запись № 1: сборщик данных зафиксировал исходное сообщение.", "Meet at 11:00": "Встреча в 11:00", "The current text changes. The earlier observation stays.": "Текущий текст изменяется. Предыдущее замечание остается в силе.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Запись № 2 добавлена: редактирование представляет собой новое наблюдение. В записи № 1 по-прежнему сохранен исходный текст.", "Message deleted": "Сообщение удалено", "The message has disappeared from the chat view.": "Сообщение исчезло из окна чата.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Приложение «Record 3»: уведомление об удалении сохраняется наряду с обеими зафиксированными версиями.", "0 records": "0 записей", "1 record": "1 запись", "2 records": "2 записи", "3 records": "3 записи", "Complete / {n} of 3": "Завершено / {n} из 3", "Step / {n} of 3": "Шаг / {n} из 3", "Pause": "Пауза", "Replay sequence": "Последовательность воспроизведения", "Play sequence": "Последовательность воспроизведения", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Доступен статический пример. Для интерактивного вычисления хэшей откройте эту страницу по протоколу HTTPS или в локальном превью с поддержкой Web Crypto.", "No record supplied": "Данные не предоставлены", "Tail removed": "Конец текста удалён", "≠ saved hash": "≠ сохраненный хеш", "Rebuilt · different hash": "Переработанная версия · другой хеш", "= saved hash": "= сохраненный хеш", "Same length and matching head.": "Одинаковый объем и соответствующий заголовок.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Все три вычисленных хеша совпадают с сохраненными хешами. Данный образец соответствует установленному ограничению в три записи.", "Same saved head; the journal prefix fails verification.": "Сохраненная заголовочная строка; префикс журнала не проходит проверку.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Запись № 2 больше не совпадает со своим сохраненным хешем. Проверка только конечного сохраненного указателя не позволила бы обнаружить это; верификатор проверяет каждую запись.", "Head differs from the retained checkpoint.": "Заголовок отличается от сохраненного контрольного пункта.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Восстановленные хэши связаны между собой, однако конечный хед изменился. Сохраненная контрольная точка отклоняет данную историю. Исходные подписи также не будут проверяться для измененных записей.", "Too short: 2 supplied records \u003c 3 retained records.": "Слишком мало: 2 предоставленных записи \u003c 3 сохраненных записей.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Два оставшихся хеша по-прежнему совпадают. Сохраненная контрольная точка показывает отсутствующую конечную часть. Без этой более ранней границы один лишь этот более короткий префикс не позволил бы выявить пропуск.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "В данном браузере расчёт хешей недоступен. Приведённые ниже формулы и статическое пояснение остаются доступными.", "{n} records": "{n} записей", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Принято: количество записей увеличивается, подпись подтверждается, а ключ совпадает. Свидетель сохраняет эту новую границу.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Откат: подписанный ответ содержит меньшее количество записей, чем последняя принятая контрольная точка. Система фиксирует проблему и сохраняет предыдущую принятую границу.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Форк: количество не изменилось, но вершина отличается. Свидетель фиксирует разногласие и сохраняет ранее принятую границу.", "No answer": "Ответ отсутствует", "boundary unknown": "предел неизвестен", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Отсутствие ответа: «Witness» фиксирует неудачную проверку. Он не может определить текущее состояние сборщика данных. Если «Witness» по-прежнему имеет доступ к Bot API и это разрешено его политикой публикации, он может опубликовать информацию об этой неудаче.", "Send {n}": "Отправить {n}", "Edit {n}": "Редактировать {n}", "Delete {n}": "Удалить {n}", "Both accounts captured all six expected observations in this example.": "Оба аккаунта зафиксировали все шесть ожидаемых наблюдений в данном примере.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Аккаунт B по-прежнему зафиксировал 6 из 6. Две квитанции были получены с задержкой. Коэффициент фиксации и задержка получения квитанций отвечают на разные вопросы.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Аккаунт B зафиксировал 5 из 6 действий к моменту окончания теста (83,3 %). Отсутствующее редактирование не сопровождалось зафиксированной задержкой. Данный результат отражает только шесть контролируемых действий.", "not observed by cutoff": "не соблюдено к моменту окончания срока", "{s} seconds": "{s} секунд", "Exact values follow in the table.": "Точные значения приведены в таблице ниже.", "{s} s": "{s} s", "Not observed": "Не соблюдается", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "В четырёх чатах приводятся различные наблюдения. Следуйте исходным записям для каждого соединения; не приписывайте сообщение в канале пользователю 71001 без указания отправителя.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Записи № 146 и № 205 содержат один и тот же идентификатор отправителя — 71001. Это позволяет установить связь между замеченными публикациями одного аккаунта Telegram в двух разных чатах. При этом не происходит идентификация реального лица или привязка публикации к конкретному каналу.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Адрес назначения pay.example.invalid/new фигурирует в записи группы № 146, введении с клавиатуры бота № 173, редактировании канала № 188 и личном сообщении № 205. Повторное упоминание адреса назначения связывает эти материалы между собой; однако это не доказывает наличия единого контроля над указанными учетными записями.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "В данном вымышленном деле завершённые квитанции о получении медиафайлов № 151 и № 209 имеют одинаковые полные значения SHA-256. Сравните фактические байты и связанные с ними записи сообщений. Соответствующий файл не позволяет установить его создателя и не подтверждает, кто его переслал.", "the encrypted off-site copy": "зашифрованная внешняя копия", "notifications": "уведомления", "checkpoint hashes for timestamps": "Хэши контрольных точек для временных меток", "signed checkpoints for the witness": "подписанные контрольные точки для TgWitness", "Switched on in this example": "В данном примере включено", "Optional · off by default": "Необязательно · по умолчанию отключено", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "С этого устройства удаляются: подключение к Telegram и {list}. Ничего больше.", "Default: only the Telegram connection leaves this machine.": "По умолчанию: с данного компьютера выходит только соединение с Telegram.", "{done} of {total} done": "{done} из {total} выполнено", "Mark step {n} as done": "Пометить шаг {n} как выполненный", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Текст", "Copied": "Скопировано", "Command copied.": "Команда скопирована.", "Selected — Ctrl/Cmd+C": "Выделено — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Команда выбрана. Скопируйте её вручную.", "Command copied to clipboard.": "Команда скопирована в буфер обмена.", "Select text": "Выделить текст", "Clipboard unavailable. Command selected; copy it manually.": "Буфер обмена недоступен. Команда выбрана; скопируйте её вручную.", "A message arrives. The first observation is saved.": "Поступает сообщение. Первое наблюдение сохраняется.", "The time changes. Both captured versions stay.": "Время меняется. Обе зафиксированные версии сохраняются.", "The message disappears. The captured history remains.": "Сообщение исчезает. Зафиксированная история сохраняется.", "Pause example animation": "Пример анимации «Пауза»", "Play example animation": "Просмотр примера анимации", "Play": "Воспроизвести", "Full-size workspace screenshot": "Снимок экрана рабочей области в полном размере", "Workspace screenshot · fictional data": "Снимок экрана рабочей области · вымышленные данные", "Close": "Закрыть", "Close screenshot": "Закрыть скриншот", "Scrollable full-size screenshot": "Прокручиваемый скриншот в полном размере", "Enlarge: {name}": "Увеличить: {name}", "View full size": "Посмотреть в полном размере"}</script>
+</body></html>

@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="id" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Format akun dan sesi | TgWitness</title>
+<meta name="description" content="Masuk menggunakan nomor telepon, kode QR, atau kunci otentikasi, impor sesi Telethon, Pyrogram, atau Telegram Desktop, dan kelola beberapa akun."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="id_ID">
+<meta property="og:title" content="Format akun dan sesi | TgWitness"><meta property="og:description" content="Masuk menggunakan nomor telepon, kode QR, atau kunci otentikasi, impor sesi Telethon, Pyrogram, atau Telegram Desktop, dan kelola beberapa akun.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/accounts/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/accounts/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/accounts/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/accounts/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/accounts/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/accounts/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/accounts/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/accounts/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/accounts/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/accounts/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/", "url": "https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/", "name": "Format akun dan sesi | TgWitness", "description": "Masuk menggunakan nomor telepon, kode QR, atau kunci otentikasi, impor sesi Telethon, Pyrogram, atau Telegram Desktop, dan kelola beberapa akun.", "inLanguage": "id", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://phishdestroy.github.io/TgWitness/id/"}, {"@type": "ListItem", "position": 2, "name": "Dokumentasi", "item": "https://phishdestroy.github.io/TgWitness/id/docs/"}, {"@type": "ListItem", "position": 3, "name": "Referensi", "item": "https://phishdestroy.github.io/TgWitness/id/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Format akun dan sesi", "item": "https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Lompat ke konten</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Dokumentasi</span></a>
+<nav aria-label="Panduan"><a href="../../concepts/">Panduan visual</a><a href="../../">Semua panduan</a><a href="../">Referensi</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Bahasa"><span aria-hidden="true">◍</span> Bahasa Indonesia</summary><div class="lang-list"><a href="../../../../docs/reference/accounts/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/accounts/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/accounts/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/accounts/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/accounts/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/accounts/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/accounts/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/accounts/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/accounts/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/accounts/" hreflang="hi" lang="hi">हिन्दी</a><a href="./" hreflang="id" lang="id" aria-current="true">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/accounts/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/accounts/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Beralih antara tema terang dan gelap"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Panduan"><a href="../../../guides/modes.html">Mode, skenario, dan tingkat bukti</a><p class="nav-label">Langkah-langkah awal</p><a href="../../start/">Mulai dalam hitungan menit</a><a href="../../accounts/">Hubungkan akun</a><a href="../../proxies/">Pilih proxy</a><a href="../../exports/">Ekspor dan verifikasi</a><p class="nav-label">Memahami bukti</p><a href="../../concepts/">Lihat cara kerja bukti ini</a><a href="../../cases/">Selidiki seluruh obrolan</a><a href="../../security/">Jaga keamanannya</a><p class="nav-label">Pelajari lebih lanjut</p><a href="../../witness/">Siapkan bot saksi</a><a href="../../server/">Jaga agar tetap berjalan</a><a href="../../troubleshooting/">Temukan apa yang salah</a></nav><nav class="wiki-nav" aria-label="Referensi"><p class="nav-label"><a class="nav-label-link" href="../">Referensi</a></p><details class="wiki-group" open><summary>Pengaturan</summary><a href="../quickstart/">Panduan cepat</a><a href="./" aria-current="page">Format akun dan sesi</a><a href="../connection/">Koneksi, proxy, dan perlindungan data</a><a href="../deployment/">Penerapan</a></details><details class="wiki-group"><summary>Kumpulkan</summary><a href="../collection/">Cara kerja pengumpulan data</a><a href="../operations/">Alur kerja dan operasi</a><a href="../investigation/">Mode penyelidikan</a><a href="../features/">Fitur dan batasan</a></details><details class="wiki-group"><summary>Bukti</summary><a href="../how-it-works/">Cara kerja bukti tersebut</a><a href="../evidence/">Format bukti</a><a href="../witness/">Saksi independen</a><a href="../timestamp/">Cap waktu</a></details><details class="wiki-group"><summary>Keamanan & proyek</summary><a href="../security/">Keamanan dan penanganan data</a><a href="../architecture/">Arsitektur</a><a href="../verification/">Apa yang telah diuji</a><a href="../license/">Pemberitahuan mengenai lisensi dan ketidakcocokan arsitektur</a><a href="../notice/">Pemberitahuan ketidakcocokan operator</a><a href="../changelog/">Daftar Perubahan</a></details></nav><p class="sidebar-note">v0.7.0<br>Sumber terbuka · Dapat dijalankan di komputer Anda</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Panduan"><a href="../../../">Beranda</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentasi</a> <span aria-hidden="true">/</span> <a href="../">Referensi</a> <span aria-hidden="true">/</span> <span aria-current="page">Format akun dan sesi</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Cari di dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Coba gunakan proxy, rantai hash, token, atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Pencarian yang jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Ketik kata kunci untuk mencari panduan dan referensi. Hasil pencarian tetap tersimpan di browser Anda.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Referensi / Pengaturan</p><h1>Format akun dan sesi</h1><p class="guide-outcome">Masuk menggunakan nomor telepon, kode QR, atau kunci otentikasi, impor sesi Telethon, Pyrogram, atau Telegram Desktop, dan kelola beberapa akun.</p><div class="wiki-body"><p>TgWitness masuk sebagai <strong>akun pengguna Telegram</strong> (bukan bot) melalui MTProto, menggunakan
+Telethon. Setiap akun berada di <strong>ruang</strong> kerja tersendiri (disebut <em>workspace</em> dalam
+API dan alat baris perintah) dengan sesi, sumber, jurnal, dan kunci penandatanganan tersendiri.</p>
+<p>Berkas sesi, string sesi, dan Kunci Otentikasi merupakan <strong>otorisasi akun</strong>: siapa pun
+yang memilikinya dapat bertindak sebagai akun tersebut. Ketiganya tidak berisi riwayat pesan.</p>
+<blockquote class="callout">
+<p>[!PERINGATAN]
+<strong>Jangan gunakan apa pun yang tidak boleh hilang.</strong> Kami sangat menyarankan agar Anda tidak menghubungkan
+akun pribadi atau akun berharga lainnya, serta tidak membuat ID API / hash API pada
+akun yang Anda hargai. Ini bukan soal TgWitness belum teruji: Telegram membatasi dan
+memblokir akun secara permanen tanpa peringatan — untuk volume permintaan yang dianggapnya
+berlebihan, terlepas dari klien atau tujuannya, tanpa dokumentasi yang memadai. Banyak pemblokiran
+tidak dapat dibatalkan. Gunakan akun khusus. Kelancaran uji coba bergantung pada Telegram, bukan pada
+perangkat lunak, dan tidak menjamin apa pun untuk masa mendatang.</p>
+</blockquote>
+<ul>
+<li><a href="#at-a-glance">Sekilas</a></li>
+<li><a href="#before-you-start-api-id-and-api-hash">Sebelum memulai: ID API dan hash API</a></li>
+<li><a href="#phone-number">Nomor telepon</a> · <a href="#qr-code">Kode QR</a> · <a href="#auth-key--dc-id">Kunci Otentikasi + ID DC</a></li>
+<li><a href="#account-files">Berkas akun</a>: <a href="#telethon-session">Telethon .session</a> ·
+    <a href="#pyrogram-session">Pyrogram .session</a> · <a href="#session--json-pair">Pasangan sesi + JSON</a> ·
+    <a href="#telegram-desktop-tdata">TData</a> · <a href="#telethon-stringsession">StringSession</a> ·
+    <a href="#account-json">JSON Akun</a></li>
+<li><a href="#identify-what-you-have">Identifikasi apa yang Anda miliki</a> · <a href="#unsupported-formats">Format yang tidak didukung</a></li>
+<li><a href="#multiple-accounts">Beberapa akun</a> · <a href="#keeping-account-files-safe">Menjaga keamanan berkas akun</a> ·
+    <a href="#troubleshooting">Pemecahan Masalah</a></li>
+</ul>
+<h2 id="at-a-glance">Sekilas<a class="anchor" href="#at-a-glance" aria-label="Tautan ke bagian ini">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Apa yang Anda miliki</th>
+<th>Tab di <strong>Tambahkan akun</strong></th>
+<th>Anda juga akan memerlukan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nomor telepon dan akses ke kode login-nya</td>
+<td><strong>Telepon</strong></td>
+<td>Kata sandi 2FA jika diaktifkan</td>
+</tr>
+<tr>
+<td>Telegram terbuka di perangkat lain</td>
+<td><strong>Kode QR</strong></td>
+<td>Kata sandi 2FA jika diaktifkan</td>
+</tr>
+<tr>
+<td>Berkas <code>.session</code> (Telethon atau Pyrogram)</td>
+<td><strong>Berkas</strong></td>
+<td>Berkas JSON pelengkap opsional untuk pengaturan aplikasi</td>
+</tr>
+<tr>
+<td><code>.session</code> + <code>.json</code> dengan nama yang sama</td>
+<td><strong>Berkas</strong> (pilih keduanya)</td>
+<td>Biasanya tidak ada yang lain</td>
+</tr>
+<tr>
+<td>Folder <code>tdata</code> di Telegram Desktop</td>
+<td><strong>Berkas</strong> (dalam format ZIP)</td>
+<td>Kode sandi lokal Desktop, jika ada yang ditetapkan</td>
+</tr>
+<tr>
+<td>Sebuah Telethon StringSession (teks, <code>.txt</code>, <code>.tgwitness-session</code>)</td>
+<td><strong>Berkas</strong></td>
+<td>Tidak diperlukan pasangan API terpisah</td>
+</tr>
+<tr>
+<td><code>.json</code> dengan sesi atau Kunci Otentikasi</td>
+<td><strong>Berkas</strong></td>
+<td>Tidak diperlukan pasangan API terpisah</td>
+</tr>
+<tr>
+<td>Kunci Otentikasi (512 karakter heksadesimal) dan nomor DC-nya</td>
+<td><strong>Kunci otentikasi</strong></td>
+<td>ID Pengguna (opsional)</td>
+</tr>
+</tbody>
+</table></div>
+<p>TgWitness mengenali berkas berdasarkan <strong>isinya</strong>, bukan namanya. Mengganti nama berkas
+tidak akan mengubah isinya.</p>
+<h2 id="before-you-start-api-id-and-api-hash">Sebelum memulai: ID API dan hash API<a class="anchor" href="#before-you-start-api-id-and-api-hash" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Anda dapat masuk tanpa perlu membuat aplikasi API Telegram. Jika tidak ada pasangan yang dimasukkan,
+diimpor, atau sudah disimpan di ruang kerja, TgWitness akan memilih pasangan dari kumpulan bawaan yang terdiri dari
+50 pasangan API publik (<code>tgwitness/api_pool.py</code>) secara acak. Jika Telegram menolak sebuah pasangan
+(<code>API_ID_INVALID</code>, <code>API_ID_PUBLISHED_FLOOD</code>, <code>UPDATE_APP_TO_LOGIN</code>), pasangan berikutnya akan dicoba,
+hingga delapan kali per proses masuk; pasangan yang ditolak akan dilewati hingga aplikasi dimulai ulang. Pasangan yang digunakan untuk masuk akan
+disimpan bersama akun dan digunakan kembali untuk akun tersebut. <strong>ID API</strong> dan <strong>hash API</strong> mengidentifikasi aplikasi kepada Telegram; keduanya
+tidak memberikan otorisasi akun secara mandiri.</p>
+<p>Untuk menggunakan aplikasi Anda sendiri sebagai gantinya (akun yang mendaftarkannya adalah yang berisiko; lihat
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/PROJECT-GUIDE.md#connect-a-telegram-account">Mengapa menggunakan kumpulan API bawaan?</a>):</p>
+<ol>
+<li>Buka <a href="https://my.telegram.org">my.telegram.org</a> dan masuk menggunakan nomor telepon apa pun
+    yang Anda miliki. Kode verifikasi akan dikirimkan melalui aplikasi Telegram, bukan melalui SMS.</li>
+<li>Pilih <strong>alat pengembangan API</strong>.</li>
+<li>Buat aplikasi: judul dan nama pendek apa saja (5–32 huruf), platform <strong>Desktop</strong>.
+    URL dan deskripsi dapat dikosongkan.</li>
+<li>Salin <strong>App api_id</strong> (sebuah angka) dan <strong>App api_hash</strong> (32 karakter heksadesimal).</li>
+</ol>
+<p>Di panel, buka bagian <strong>API ID + Hash</strong> di bawah formulir masuk. Anda dapat menempelkan satu
+pasangan <code>api_id:api_hash</code> ke kolom <strong>API ID</strong>, dan kedua kolom tersebut akan terisi otomatis. Satu pasangan dapat
+digunakan untuk semua akun Anda. Setelah login berhasil, data tersebut disimpan dalam bentuk terenkripsi,
+hanya di ruang kerja tersebut, dan tidak pernah dikirim kembali ke browser.</p>
+<p>Terdapat tiga jenis kredensial yang terlibat:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Rahasia</th>
+<th>Buka</th>
+<th>Lokasi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Token panel</td>
+<td>Panel web TgWitness</td>
+<td><code>panel-token.txt</code> di direktori data, atau <code>TGWITNESS_TOKEN</code></td>
+</tr>
+<tr>
+<td>ID API + hash</td>
+<td>Tidak ada yang berdiri sendiri; mengidentifikasi aplikasi tersebut</td>
+<td>Pasangan bawaan, pengaturan yang diimpor, atau aplikasi Anda sendiri di my.telegram.org</td>
+</tr>
+<tr>
+<td>Otorisasi akun</td>
+<td>Akun Telegram</td>
+<td>Dibuat melalui login via telepon/QR atau dimasukkan sebagai sesi</td>
+</tr>
+</tbody>
+</table></div>
+<p>Jika Telegram harus diakses melalui proxy, atur terlebih dahulu di
+<strong>Akun → Pengaturan → Pengaturan koneksi → Ubah rute koneksi</strong>.</p>
+<h2 id="phone-number">Nomor telepon<a class="anchor" href="#phone-number" aria-label="Tautan ke bagian ini">#</a></h2>
+<ol>
+<li>Buka <strong>Akun</strong>, pilih tab <strong>Telepon</strong>, lalu masukkan nomor dalam format internasional,
+    misalnya <code>+44 7700 900123</code>. Spasi dan tanda hubung akan dihapus secara otomatis.</li>
+<li>Tekan <strong>Lanjutkan</strong>. Kolom API ID + Hash dapat dibiarkan kosong.</li>
+<li>Masukkan kode yang dikirimkan oleh Telegram (biasanya ke aplikasi Telegram; pengiriman melalui SMS tidak dijamin).</li>
+<li>Jika akun tersebut memiliki verifikasi dua langkah, masukkan kata sandi tersebut. Ini bukanlah
+    token panel maupun kode sandi perangkat.</li>
+<li>Periksa ID akun yang ditampilkan setelah masuk, lalu pilih sumber.</li>
+</ol>
+<p>Kode login dan kata sandi 2FA tidak pernah disimpan ke disk.</p>
+<h2 id="qr-code">Kode QR<a class="anchor" href="#qr-code" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Gunakan ini jika akun sudah masuk (login) di ponsel atau komputer lain.</p>
+<ol>
+<li>Tab <strong>Kode QR</strong> → <strong>Tampilkan kode QR</strong>. Kolom API ID + Hash dapat dibiarkan kosong.</li>
+<li>Pada perangkat yang sudah masuk: <strong>Pengaturan → Perangkat → Hubungkan Perangkat Desktop</strong>, pindai kode
+    dan konfirmasi.</li>
+<li>Masukkan kata sandi 2FA di TgWitness jika Telegram memintanya.</li>
+</ol>
+<p>Gambar QR dihasilkan secara lokal. Kode memiliki masa berlaku; tekan &quot;<strong>Buat kode QR lain&quot;</strong>
+untuk mencoba lagi. Mengunci panel, berpindah ruang kerja, atau memulai sesi login baru akan membatalkan
+kode yang sedang diproses.</p>
+<h2 id="auth-key--dc-id">Kunci Otentikasi + ID DC<a class="anchor" href="#auth-key--dc-id" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Kunci Otorisasi (Auth Key) adalah otorisasi mentah berukuran 256 byte yang mendasari setiap sesi Telegram, ditulis
+dalam bentuk <strong>512 karakter heksadesimal</strong>, bersama dengan nomor pusat data <strong>DC 1–5</strong>.</p>
+<ol>
+<li>Tab <strong>Kunci Otentikasi</strong>. Tempelkan kunci secara lengkap; kunci yang dipersingkat yang mengandung <code>…</code> tidak akan berfungsi.</li>
+<li>Pilih DC ID yang disertakan bersama kunci tersebut.</li>
+<li>Masukkan <strong>ID Pengguna</strong> (opsional). TgWitness kemudian akan menolak terhubung jika Telegram melaporkan
+    akun yang berbeda.</li>
+<li><strong>Akun</strong> Press <strong>Connect</strong>.</li>
+</ol>
+<p>Kunci Otentikasi (512 karakter) bukanlah hash API (32 karakter). Kunci yang sama juga
+dapat diimpor sebagai JSON, lihat <a href="#account-json">JSON Akun</a>.</p>
+<h2 id="account-files">Berkas akun<a class="anchor" href="#account-files" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Buka <strong>Tambahkan akun → File</strong> dan pilih hingga <strong>empat file yang terkait dengan satu akun</strong>, dengan total ukuran
+<strong>8 MiB</strong>, lalu tekan <strong>Hubungkan akun</strong>.</p>
+<ul>
+<li>File dikonversi <strong>di memori</strong> pada server TgWitness Anda. Unggahan tidak disimpan,
+    file ZIP tidak diekstrak ke disk, dan tidak ada layanan eksternal yang dihubungi.</li>
+<li>Sesi yang dihasilkan kemudian diverifikasi dengan Telegram. Jika sebuah berkas mencantumkan ID pengguna,
+    ID tersebut harus sesuai dengan akun yang dilaporkan oleh Telegram.</li>
+<li>Berkas yang mendeskripsikan akun yang berbeda atau kredensial API yang berbeda akan ditolak
+    daripada memilih salah satunya.</li>
+<li><strong>Kolom &quot;Passcode&quot; atau &quot;session text&quot;</strong> berisi bidang &quot;TData local passcode&quot;, sebuah kotak untuk menempelkan
+    StringSession dan <strong>membaca berkas tanpa perlu masuk</strong> (mengisi formulir tanpa
+    menghubungi Telegram).</li>
+</ul>
+<h3 id="telethon-session">Telethon <code>.session</code><a class="anchor" href="#telethon-session" aria-label="Tautan ke bagian ini">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apa itu</td>
+<td>Basis data SQLite yang dibuat oleh alat berbasis Telethon, misalnya <code>my_account.session</code></td>
+</tr>
+<tr>
+<td>Diakui oleh</td>
+<td>Tabel <code>sessions</code> (bersama dengan <code>dc_id</code>, <code>server_address</code>, <code>port</code>, <code>auth_key</code>) dan <code>version</code> = 7 atau 8</td>
+</tr>
+<tr>
+<td>Persyaratan</td>
+<td>Tepat satu baris sesi yang diotorisasi; basis data yang tertutup dan lengkap</td>
+</tr>
+</tbody>
+</table></div>
+<p>Tutup terlebih dahulu program yang membuat berkas tersebut. Jika terdapat <code>my_account.session-journal</code> atau
+<code>my_account.session-wal</code> di sampingnya, berarti basis data belum diselesaikan: buka dan
+tutup klien aslinya dengan benar. Menghapus berkas-berkas sidecar tersebut dapat meninggalkan salinan yang rusak.</p>
+<h3 id="pyrogram-session">Pyrogram <code>.session</code><a class="anchor" href="#pyrogram-session" aria-label="Tautan ke bagian ini">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apa itu</td>
+<td>Alat berbasis Pyrogram yang menggunakan basis data SQLite</td>
+</tr>
+<tr>
+<td>Diakui oleh</td>
+<td>Tabel <code>sessions</code> dengan <code>dc_id</code>, <code>auth_key</code>, <code>test_mode</code>, <code>user_id</code>, <code>is_bot</code>; <code>version</code> = 2 atau 3</td>
+</tr>
+<tr>
+<td>Persyaratan</td>
+<td>Satu sesi <strong>pengguna</strong> yang berwenang di jaringan produksi. Sesi bot dan test-DC ditolak</td>
+</tr>
+</tbody>
+</table></div>
+<p>ID pengguna yang disimpan akan diverifikasi dengan Telegram saat login.</p>
+<h3 id="session--json-pair">Pasangan sesi + JSON<a class="anchor" href="#session--json-pair" aria-label="Tautan ke bagian ini">#</a></h3>
+<p>Akun sering kali didistribusikan dalam bentuk dua berkas dengan nama yang sama, misalnya
+<code>447700900123.session</code> dan <code>447700900123.json</code>. Pilih <strong>keduanya</strong> sekaligus.</p>
+<ul>
+<li>Dari JSON, TgWitness menggunakan <code>app_id</code>/<code>api_id</code> dan <code>app_hash</code>/<code>api_hash</code>, sehingga Anda
+    biasanya tidak perlu memasukkan kredensial API.</li>
+<li>Kolom lain seperti <code>phone</code>, <code>device</code>, <code>sdk</code>, <code>app_version</code>, <code>lang_pack</code>, atau kata sandi
+    <code>twoFA</code> yang tersimpan akan <strong>diabaikan</strong>. Jika akun tersebut memiliki 2FA, TgWitness akan memintanya.</li>
+<li>Sebuah berkas JSON itu sendiri hanyalah metadata. Tanpa berkas sesi, lanjutkan dengan login melalui ponsel
+    atau QR.</li>
+</ul>
+<h3 id="telegram-desktop-tdata">Telegram Desktop (TData)<a class="anchor" href="#telegram-desktop-tdata" aria-label="Tautan ke bagian ini">#</a></h3>
+<p>TData adalah folder <code>tdata</code> dari aplikasi Telegram Desktop (aplikasi lintas platform
+dari desktop.telegram.org).</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Sistem</th>
+<th>Lokasi default <code>tdata</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td><code>%APPDATA%\Telegram Desktop\tdata</code> (Telegram portabel: di sebelah <code>Telegram.exe</code>)</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td><code>~/.local/share/TelegramDesktop/tdata</code></td>
+</tr>
+<tr>
+<td>macOS</td>
+<td><code>~/Library/Application Support/Telegram Desktop/tdata</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Untuk mengimpornya:</p>
+<blockquote class="callout">
+<p><strong>Peringatan sesi paralel.</strong> Mengimpor TData akan menggunakan kembali kunci otorisasi Telegram Desktop;
+hal ini tidak membuat login yang independen. Jangan gunakan kunci tersebut di Desktop dan
+TgWitness secara bersamaan. Telegram dapat membatalkan otorisasi dengan
+<code>AUTH_KEY_DUPLICATED</code>, sehingga kedua salinan tersebut tidak dapat digunakan hingga login baru.</p>
+<p>Tutup Desktop sepenuhnya, termasuk prosesnya di baki sistem, dan biarkan salinan tersebut tetap tertutup selama
+TgWitness menggunakan sesi yang diimpor. <strong>Keluar, jangan logout atau mencabut sesi:</strong>
+pencabutan juga akan membatalkan salinan yang diimpor. Jika Anda memerlukan kedua klien untuk tetap berjalan,
+masuk ke TgWitness melalui ponsel atau QR untuk membuat otorisasi tersendiri. Disarankan untuk menggunakan
+akun khusus, tetapi hal ini tidak menjamin keamanan penggunaan kunci kloning secara paralel.</p>
+<p>Hal ini juga berlaku untuk berkas yang diimpor <code>.session</code> , teks StringSession, dan Auth Key HEX.
+Klien lain dengan otorisasi yang dibuat secara mandiri dapat tetap masuk.
+Lihat <a href="https://core.telegram.org/api/errors#406-not-acceptable">dokumentasi AUTH_KEY_DUPLICATED dari Telegram</a>.</p>
+</blockquote>
+<ol>
+<li>Keluar sepenuhnya dari Telegram Desktop.</li>
+<li>
+<p>Buatlah berkas ZIP yang <strong>hanya</strong> berisi dua item berikut dari <code>tdata</code>:</p>
+<ul>
+<li><code>key_datas</code></li>
+<li>file berhuruf 16 yang berakhiran <code>s</code> di sebelahnya, biasanya <code>D877F783D5D3EF8Cs</code></li>
+</ul>
+<p>Mengompres seluruh folder beserta cache medianya biasanya melebihi batas
+(512 entri, 32 MiB setelah diekstrak).
+3. Pilih berkas ZIP di bagian &quot;<strong>Files</strong>&quot;. Jika Telegram Desktop memiliki <strong>kode sandi lokal</strong>, masukkan kode tersebut
+di kolom <strong>&quot;Passcode&quot; atau &quot;session text&quot;</strong> terlebih dahulu. Ini bukanlah kata sandi 2FA.</p>
+</li>
+</ol>
+<p>Didukung: satu akun per arsip, penyimpanan modern <code>key_datas</code>/<code>key_data0</code>/<code>key_data1</code>,
+kode sandi lokal. Tidak didukung: folder dengan beberapa akun yang masuk, tata letak Desktop
+versi lama, file ZIP yang dilindungi kata sandi, dan aplikasi asli macOS terpisah &quot;Telegram for macOS&quot;.</p>
+<h3 id="telethon-stringsession">Telethon StringSession<a class="anchor" href="#telethon-stringsession" aria-label="Tautan ke bagian ini">#</a></h3>
+<p>Satu baris teks, biasanya dimulai dengan <code>1</code> dan panjangnya sekitar 350 karakter. Unggah
+berkas tersebut sebagai berkas <code>.txt</code> atau <code>.tgwitness-session</code> (maksimal 4 KiB), atau tempelkan di bawah
+<strong>kolom Kode Akses atau teks sesi</strong>. Hanya string Telethon yang diterima; string Pyrogram dan TDLib
+menggunakan format yang berbeda.</p>
+<h3 id="account-json">JSON Akun<a class="anchor" href="#account-json" aria-label="Tautan ke bagian ini">#</a></h3>
+<p>Satu objek JSON, maksimal <strong>64 KiB</strong>, dalam berkas dengan ekstensi <strong><code>.json</code></strong>.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Bidang (alias)</th>
+<th>Arti</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>api_id</code> (<code>app_id</code>)</td>
+<td>ID Aplikasi, sebuah bilangan positif</td>
+</tr>
+<tr>
+<td><code>api_hash</code> (<code>app_hash</code>)</td>
+<td>Hash aplikasi, 32 karakter heksadesimal</td>
+</tr>
+<tr>
+<td><code>string_session</code> (<code>session_string</code>, <code>session</code>)</td>
+<td>Teks Telethon StringSession, bukan nama file</td>
+</tr>
+<tr>
+<td><code>auth_key</code> (<code>auth_key_hex</code>) + <code>dc_id</code></td>
+<td>Kunci Otentikasi (Auth Key) lengkap berpanjang 512 karakter dan DC 1–5</td>
+</tr>
+<tr>
+<td><code>user_id</code> (<code>id</code>)</td>
+<td>Opsional; diverifikasi dengan Telegram sebelum otorisasi disimpan</td>
+</tr>
+</tbody>
+</table></div>
+<p>Jika alias dan nama utama keduanya ada, keduanya harus sama. Contoh:</p>
+<pre><code class="language-json">{ &quot;app_id&quot;: 1234567, &quot;app_hash&quot;: &quot;0123456789abcdef0123456789abcdef&quot; }</code></pre>
+<pre><code class="language-json">{
+  &quot;api_id&quot;: 1234567,
+  &quot;api_hash&quot;: &quot;0123456789abcdef0123456789abcdef&quot;,
+  &quot;auth_key&quot;: &quot;REPLACE_WITH_ALL_512_HEXADECIMAL_CHARACTERS&quot;,
+  &quot;dc_id&quot;: 2,
+  &quot;user_id&quot;: 123456789
+}</code></pre>
+<p>Contoh pertama hanya mengisi kredensial API; masuk dengan nomor telepon atau QR, atau tambahkan berkas sesi.
+Daftar massal (array JSON akun) tidak diterima.</p>
+<h2 id="identify-what-you-have">Identifikasi apa yang Anda miliki<a class="anchor" href="#identify-what-you-have" aria-label="Tautan ke bagian ini">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Anda melihat</th>
+<th>Ini adalah</th>
+<th>Penggunaan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*.session</code>; saat dibuka di editor teks, bagian atasnya menampilkan <code>SQLite format 3</code></td>
+<td>Telethon atau Pyrogram SQLite</td>
+<td><strong>Berkas</strong> (terdeteksi secara otomatis)</td>
+</tr>
+<tr>
+<td>Folder <code>tdata</code> yang berisi <code>key_datas</code></td>
+<td>Telegram Desktop TData</td>
+<td>Kompres dua berkas menjadi ZIP, lalu <strong>Berkas</strong></td>
+</tr>
+<tr>
+<td>Satu baris teks yang dimulai dengan <code>1</code>, ~350 karakter</td>
+<td>Telethon StringSession</td>
+<td><strong>Berkas</strong></td>
+</tr>
+<tr>
+<td><code>*.json</code> dengan <code>app_id</code>/<code>app_hash</code></td>
+<td>Metadata pendamping</td>
+<td><strong>Berkas</strong>, beserta sesi-nya</td>
+</tr>
+<tr>
+<td><code>*.json</code> dengan <code>auth_key</code> atau <code>string_session</code></td>
+<td>JSON Akun</td>
+<td><strong>Berkas</strong></td>
+</tr>
+<tr>
+<td>512 karakter <code>0-9a-f</code></td>
+<td>Kunci Otentikasi</td>
+<td><strong>Kunci otentikasi</strong></td>
+</tr>
+<tr>
+<td>32 karakter <code>0-9a-f</code></td>
+<td>Hash API</td>
+<td><strong>ID API + Hash</strong></td>
+</tr>
+<tr>
+<td><code>td.binlog</code> atau <code>db.sqlite</code> dari aplikasi TDLib</td>
+<td>Penyimpanan TDLib</td>
+<td>Tidak didukung</td>
+</tr>
+<tr>
+<td><code>123456789:AA…</code></td>
+<td>Token bot</td>
+<td>Tidak didukung</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="unsupported-formats">Format yang tidak didukung<a class="anchor" href="#unsupported-formats" aria-label="Tautan ke bagian ini">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Format</th>
+<th>Alternatif</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Penyimpanan TDLib (<code>td.binlog</code>) dan ekspor TDLib</td>
+<td>Masuk menggunakan nomor telepon atau QR</td>
+</tr>
+<tr>
+<td><strong>String</strong> sesi Pyrogram</td>
+<td>Gunakan berkas Pyrogram <code>.session</code>, atau ponsel/QR</td>
+</tr>
+<tr>
+<td>TData dengan beberapa akun yang telah masuk</td>
+<td>Keluar dari akun-akun lain di Telegram Desktop, atau gunakan berkas sesi masing-masing akun</td>
+</tr>
+<tr>
+<td>Token bot</td>
+<td>Tidak didukung: TgWitness beroperasi sebagai akun pengguna</td>
+</tr>
+<tr>
+<td>Daftar CSV/JSON dari banyak akun</td>
+<td>Tambahkan satu ruang kerja per akun</td>
+</tr>
+<tr>
+<td>Sesi Test-DC atau bot</td>
+<td>Gunakan akun pengguna produksi</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="multiple-accounts">Beberapa akun<a class="anchor" href="#multiple-accounts" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Tekan <strong>+</strong> di samping pemilih akun, atau buka
+<strong>Akun → Pengaturan → Pengaturan koneksi → Ruang kerja</strong>, masukkan label, dan
+masuk.</p>
+<ul>
+<li>Jumlah ruang kerja tidak terbatas, termasuk ruang kerja utama. Masing-masing memiliki sesi, rute proxy
+    , sumber, kebijakan penangkapan, jurnal, kunci penandatanganan, titik pemeriksaan, dan ekspor tersendiri.</li>
+<li>Mengganti ruang kerja yang ditampilkan tidak akan menghentikan ruang kerja lainnya.</li>
+<li>Sebuah jurnal tetap terikat pada akun yang membuatnya. Masuk dengan akun yang berbeda
+    memerlukan ruang kerja lain, dan satu akun tidak dapat ditugaskan ke dua
+    ruang kerja.</li>
+<li>Semua ruang kerja berbagi satu token panel; mereka bukanlah pengguna yang terpisah.</li>
+<li><strong>Akun</strong> mengganti nama ruang kerja dan menghapus ruang kerja yang ditambahkan, beserta sesi, jurnal,
+    sumber, dan kunci penandatanganan. Ruang kerja utama tidak dapat dihapus dari panel.</li>
+</ul>
+<h2 id="sign-out">Keluar<a class="anchor" href="#sign-out" aria-label="Tautan ke bagian ini">#</a></h2>
+<p><strong>Akun → Keluar dari Telegram</strong> (dengan pemantauan ditangguhkan) meminta Telegram untuk mengakhiri
+sesi, sehingga sesi tersebut juga menghilang dari <strong>Pengaturan → Perangkat</strong> akun, dan menghapus
+sesi tersebut dari brankas ruang kerja. Jurnal, sumber, pengaturan, dan kunci penandatanganan tetap ada, dan
+jurnal mencatat proses keluar tersebut. Ruang kerja tersebut masih milik akunnya: hanya
+akun tersebut yang dapat terhubung kembali ke sana. Jika Telegram tidak merespons, sesi tersebut tetap dihapus
+di sini dan panel akan menampilkannya; akhiri sesi tersebut di Telegram melalui <strong>Pengaturan → Perangkat</strong>.</p>
+<h2 id="convert-a-telethon-session-offline">Mengonversi sesi Telethon secara offline<a class="anchor" href="#convert-a-telethon-session-offline" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Panel ini mengimpor berkas <code>.session</code> secara langsung. Untuk konversi offline ke berkas
+StringSession, jalankan perintah berikut dari folder proyek:</p>
+<pre><code class="language-powershell">.venv\Scripts\python.exe -m tgwitness.sessions account.session --out account.tgwitness-session   # Windows</code></pre>
+<pre><code class="language-sh">.venv/bin/python -m tgwitness.sessions account.session --out account.tgwitness-session          # Linux/macOS</code></pre>
+<p>Konverter ini hanya membaca file Telethon SQLite (hingga 64 MiB), tidak pernah mengubah data masukan,
+tidak melakukan permintaan jaringan, dan menolak untuk menimpa berkas keluaran yang sudah ada.</p>
+<h2 id="keeping-account-files-safe">Menjaga keamanan berkas akun<a class="anchor" href="#keeping-account-files-safe" aria-label="Tautan ke bagian ini">#</a></h2>
+<ul>
+<li>Perlakukan setiap <code>.session</code>, TData ZIP, StringSession, Auth Key, dan JSON akun seperti
+    kata sandi. TgWitness menyimpan otorisasi yang diimpor di dalam brankas terenkripsinya; Anda dapat
+    menghapus file aslinya setelahnya.</li>
+<li>Jangan menjalankan otorisasi yang sama di dua program sekaligus. Telegram dapat mencabutnya
+    (<code>AUTH_KEY_DUPLICATED</code>), dan kedua salinan tersebut akan berhenti berfungsi.</li>
+<li>Sesi yang telah kedaluwarsa atau dicabut tidak dapat diaktifkan kembali melalui konversi. Silakan masuk kembali.</li>
+</ul>
+<h2 id="troubleshooting">Pemecahan Masalah<a class="anchor" href="#troubleshooting" aria-label="Tautan ke bagian ini">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Pesan atau gejala</th>
+<th>Apa yang harus dilakukan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Tidak dapat membaca sesi ini. Tutup klien aslinya…</em></td>
+<td>Berkas SQLite sedang terbuka atau belum selesai (sidecar <code>-journal</code>/<code>-wal</code>). Tutup program aslinya dengan benar, lalu salin kembali berkas tersebut.</td>
+</tr>
+<tr>
+<td><em>Skema SQLite Telethon yang didukung: 7 dan 8</em> / <em>Pyrogram … 2 dan 3</em></td>
+<td>File ini dibuat menggunakan versi pustaka yang sangat lama atau tidak dikenal. Silakan masuk menggunakan nomor telepon/QR.</td>
+</tr>
+<tr>
+<td><em>Hanya sesi pengguna produksi yang berwenang yang didukung</em></td>
+<td>Berkas Pyrogram tersebut milik bot atau jaringan uji coba.</td>
+</tr>
+<tr>
+<td><em>Arsip TData melebihi 512 entri atau 32 MiB</em></td>
+<td>Hanya berkas ZIP <code>key_datas</code> dan <code>D877F783D5D3EF8Cs</code>, bukan seluruh folder.</td>
+</tr>
+<tr>
+<td><em>Tidak dapat mendekripsi TData. Periksa kode sandi lokal Desktop</em></td>
+<td>Masukkan kode sandi lokal Telegram Desktop di kolom &quot;<strong>Passcode</strong>&quot; <strong>atau &quot;session text</strong>&quot;.</td>
+</tr>
+<tr>
+<td><em>Impor satu akun TData pada satu waktu</em></td>
+<td>Telegram Desktop memiliki beberapa akun; lihat <a href="#unsupported-formats">Format yang Tidak Didukung</a>.</td>
+</tr>
+<tr>
+<td><em>Berkas-berkas yang dipilih menjelaskan akun-akun yang berbeda atau kredensial API</em></td>
+<td>Pilih file dari satu akun saja.</td>
+</tr>
+<tr>
+<td><em>JSON tidak berisi kredensial API atau otorisasi yang didukung</em></td>
+<td>Periksa nama-nama bidang dalam <a href="#account-json">JSON Akun</a>.</td>
+</tr>
+<tr>
+<td><em>Hanya metadata API</em></td>
+<td>JSON ini tidak memiliki sesi. Tambahkan berkas <code>.session</code> atau gunakan nomor telepon/kode QR.</td>
+</tr>
+<tr>
+<td><em>Kunci Otorisasi HEX harus berisi seluruh 512 karakter heksadesimal</em></td>
+<td>Kunci tersebut terpotong atau mengandung <code>…</code>.</td>
+</tr>
+<tr>
+<td>ID akun tidak sesuai dengan akun yang diimpor</td>
+<td>ID pengguna pada berkas tersebut berbeda dengan yang dilaporkan oleh Telegram; berkas tersebut diperuntukkan bagi akun lain.</td>
+</tr>
+<tr>
+<td>Akun ini sudah terdaftar di ruang kerja lain</td>
+<td>Buka ruang kerja tersebut daripada menambahkan akun dua kali.</td>
+</tr>
+<tr>
+<td>Tersambung, tetapi ada grup pribadi yang hilang dari daftar obrolan di <strong>Sumber</strong></td>
+<td>Periksa keanggotaan. Alat pemilih memeriksa 1.000 percakapan pertama; tingkatkan batasnya di bagian <strong>Parameter</strong>.</td>
+</tr>
+<tr>
+<td>Koneksi proxy gagal</td>
+<td>Periksa host, port, dan kredensial. TgWitness tidak pernah beralih ke koneksi langsung.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Lihat juga: <a href="../connection/">koneksi dan keamanan</a> untuk proxy dan enkripsi,
+serta <a href="../collection/">cara kerja pengumpulan</a> data yang direkam setelah masuk.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCOUNTS.md">Edit halaman ini di GitHub ↗</a><a class="next-guide" href="../connection/"><span>Langkah selanjutnya</span><strong>Koneksi, proxy, dan perlindungan data →</strong></a><p>Panduan-panduan ini menjelaskan implementasi saat ini. Hasil validasi dan celah yang masih ada didokumentasikan secara terpisah. <a href="../verification/">Apa yang telah diuji →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Di halaman ini"><p class="nav-label">Di halaman ini</p><a href="#at-a-glance">Sekilas</a><a href="#before-you-start-api-id-and-api-hash">Sebelum memulai: ID API dan hash API</a><a href="#phone-number">Nomor telepon</a><a href="#qr-code">Kode QR</a><a href="#auth-key--dc-id">Kunci Otentikasi + ID DC</a><a href="#account-files">Berkas akun</a><a href="#identify-what-you-have">Identifikasi apa yang Anda miliki</a><a href="#unsupported-formats">Format yang tidak didukung</a><a href="#multiple-accounts">Beberapa akun</a><a href="#sign-out">Keluar</a><a href="#convert-a-telethon-session-offline">Mengonversi sesi Telethon secara offline</a><a href="#keeping-account-files-safe">Menjaga keamanan berkas akun</a><a href="#troubleshooting">Pemecahan Masalah</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Sumber terbuka · Dapat dijalankan di komputer Anda</span><a href="../../../../LICENSE">Lisensi MIT</a><a href="../notice/">Pemberitahuan operator</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Keamanan</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Menunggu pesan", "Step through a fictional send, edit and delete.": "Ikuti langkah demi langkah proses pengiriman, pengeditan, dan penghapusan fiktif.", "No observations yet. Start the sequence or advance one event.": "Belum ada catatan. Mulai urutan atau lanjutkan ke peristiwa berikutnya.", "Meet at 10:00": "Bertemu pukul 10.00", "A new message is visible in the chat.": "Sebuah pesan baru terlihat di obrolan.", "Record 1 appended: the collector observed the original message.": "Catatan 1 ditambahkan: pengumpul telah mengamati pesan asli.", "Meet at 11:00": "Bertemu pukul 11.00", "The current text changes. The earlier observation stays.": "Teks saat ini berubah. Pengamatan sebelumnya tetap berlaku.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Catatan 2 ditambahkan: pengeditan ini merupakan pengamatan baru. Catatan 1 masih memuat teks aslinya.", "Message deleted": "Pesan telah dihapus", "The message has disappeared from the chat view.": "Pesan tersebut telah menghilang dari tampilan obrolan.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Catatan 3 ditambahkan: pemberitahuan penghapusan disimpan bersama kedua versi yang teramati.", "0 records": "0 catatan", "1 record": "1 catatan", "2 records": "2 catatan", "3 records": "3 catatan", "Complete / {n} of 3": "Lengkap / {n} dari 3", "Step / {n} of 3": "Langkah / {n} dari 3", "Pause": "Jeda", "Replay sequence": "Urutan pemutaran ulang", "Play sequence": "Urutan pemutaran", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Contoh statis tersedia. Untuk menghitung hash secara interaktif, buka halaman ini melalui HTTPS atau pratinjau localhost yang mendukung Web Crypto.", "No record supplied": "Tidak ada catatan yang disediakan", "Tail removed": "Bagian akhir dihapus", "≠ saved hash": "≠ hash yang disimpan", "Rebuilt · different hash": "Dibangun ulang · hash berbeda", "= saved hash": "= hash yang disimpan", "Same length and matching head.": "Panjang yang sama dan judul yang sesuai.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Ketiga hash yang dihitung cocok dengan hash yang disimpan. Sampel ini sesuai dengan batas tiga catatan yang disimpan.", "Same saved head; the journal prefix fails verification.": "Header yang sama telah disimpan; awalan jurnal gagal diverifikasi.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Catatan 2 tidak lagi cocok dengan hash yang tersimpan. Memeriksa hanya head terakhir yang tersimpan akan melewatkan hal ini; verifikator memeriksa setiap catatan.", "Head differs from the retained checkpoint.": "Header berbeda dari checkpoint yang disimpan.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Hash yang dibangun ulang saling terhubung, tetapi header terakhir telah berubah. Titik pemeriksaan yang disimpan menolak riwayat ini. Tanda tangan asli juga akan gagal pada catatan yang diubah.", "Too short: 2 supplied records \u003c 3 retained records.": "Terlalu singkat: 2 catatan yang disediakan \u003c 3 catatan yang disimpan.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Kedua hash yang tersisa masih cocok. Titik pemeriksaan yang disimpan mengungkapkan bagian akhir yang hilang. Tanpa batas awal tersebut, awalan yang lebih pendek ini saja tidak akan mengungkapkan adanya penghilangan tersebut.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Perhitungan hash tidak tersedia di browser ini. Rumus dan penjelasan statis di bawah ini tetap tersedia.", "{n} records": "{n} catatan", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Diterima: jumlahnya bertambah, tanda tangan terverifikasi, dan kuncinya cocok. Saksi mempertahankan batas baru ini.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: jawaban yang ditandatangani melaporkan jumlah catatan yang lebih sedikit daripada titik pemeriksaan terakhir yang diterima. TgWitness mencatat masalah tersebut dan mempertahankan batas yang diterima sebelumnya.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: jumlahnya tidak berubah, tetapi cabangnya berbeda. Saksi mencatat ketidaksesuaian tersebut dan mempertahankan batas yang sebelumnya telah disetujui.", "No answer": "Tidak ada jawaban", "boundary unknown": "batas tidak diketahui", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Tidak ada respons: TgWitness mencatat kegagalan pemeriksaan tersebut. TgWitness tidak dapat memastikan status terkini dari pengumpul data. Jika TgWitness masih dapat mengakses Bot API dan kebijakan publikasinya mengizinkan, TgWitness dapat mempublikasikan kegagalan tersebut.", "Send {n}": "Kirim {n}", "Edit {n}": "Edit {n}", "Delete {n}": "Hapus {n}", "Both accounts captured all six expected observations in this example.": "Kedua akun tersebut berhasil menangkap keenam pengamatan yang diharapkan dalam contoh ini.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Akun B masih berhasil menangkap 6 dari 6 pesan. Dua tanda terima membutuhkan waktu lebih lama. Rasio penangkapan dan penundaan tanda terima menjawab pertanyaan yang berbeda.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Akun B berhasil menangkap 5 dari 6 pesan sebelum batas waktu (83,3%). Pengeditan yang hilang tidak memiliki penundaan yang terukur. Hasil ini hanya menggambarkan enam tindakan yang dikendalikan.", "not observed by cutoff": "tidak terdeteksi pada batas waktu", "{s} seconds": "{s} detik", "Exact values follow in the table.": "Nilai-nilai yang tepat tercantum dalam tabel berikut.", "{s} s": "{s} s", "Not observed": "Tidak teramati", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Empat obrolan memberikan pengamatan yang berbeda-beda. Ikuti catatan sumber untuk setiap koneksi; jangan mengaitkan posting saluran tersebut dengan pengguna 71001 tanpa pengirim yang teridentifikasi.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Catatan #146 dan #205 menunjukkan ID pengirim yang sama, yaitu 71001. Hal ini menghubungkan postingan yang teramati dari sebuah akun Telegram di dua obrolan. Catatan ini tidak mengidentifikasi orang di dunia nyata atau mengaitkan postingan tersebut dengan saluran tertentu.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Tautan tujuan pay.example.invalid/new muncul dalam catatan grup #146, keyboard bot #173, pengeditan saluran #188, dan pesan pribadi #205. Tautan tujuan yang berulang menghubungkan materi tersebut; hal ini tidak membuktikan adanya kendali bersama atas akun-akun tersebut.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Tanda terima media yang telah diselesaikan #151 dan #209 memiliki nilai SHA-256 lengkap yang sama dalam kasus fiktif ini. Bandingkan byte yang sebenarnya dan catatan pesan yang terkait. File yang cocok tersebut tidak mengidentifikasi pembuatnya atau membuktikan siapa yang meneruskannya.", "the encrypted off-site copy": "salinan terenkripsi di luar lokasi", "notifications": "pemberitahuan", "checkpoint hashes for timestamps": "hash checkpoint untuk cap waktu", "signed checkpoints for the witness": "titik pemeriksaan yang ditandatangani untuk saksi", "Switched on in this example": "Diaktifkan dalam contoh ini", "Optional · off by default": "Opsional · dinonaktifkan secara default", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Yang tersisa di mesin ini: koneksi Telegram dan {list}. Tidak ada yang lain.", "Default: only the Telegram connection leaves this machine.": "Pengaturan default: hanya koneksi Telegram yang keluar dari mesin ini.", "{done} of {total} done": "{done} dari {total} selesai", "Mark step {n} as done": "Tandai langkah {n} sebagai selesai", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Teks", "Copied": "Disalin", "Command copied.": "Perintah telah disalin.", "Selected — Ctrl/Cmd+C": "Pilih — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Perintah telah dipilih. Salin secara manual.", "Command copied to clipboard.": "Perintah telah disalin ke papan klip.", "Select text": "Pilih teks", "Clipboard unavailable. Command selected; copy it manually.": "Clipboard tidak tersedia. Perintah telah dipilih; salin secara manual.", "A message arrives. The first observation is saved.": "Sebuah pesan masuk. Pengamatan pertama disimpan.", "The time changes. Both captured versions stay.": "Waktu berubah. Kedua versi yang terekam tetap ada.", "The message disappears. The captured history remains.": "Pesan tersebut menghilang. Riwayat yang terekam tetap ada.", "Pause example animation": "Jeda animasi contoh", "Play example animation": "Putar animasi contoh", "Play": "Putar", "Full-size workspace screenshot": "Tangkapan layar ruang kerja ukuran penuh", "Workspace screenshot · fictional data": "Tangkapan layar ruang kerja · data fiktif", "Close": "Tutup", "Close screenshot": "Tutup tangkapan layar", "Scrollable full-size screenshot": "Tangkapan layar ukuran penuh yang dapat digulir", "Enlarge: {name}": "Perbesar: {name}", "View full size": "Lihat ukuran penuh"}</script>
+</body></html>

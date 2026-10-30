@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="uk" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Можливості та обмеження | TgWitness</title>
+<meta name="description" content="Що TgWitness реалізує на сьогодні, які обмеження накладає платформа Telegram і що залишається завданням на майбутнє."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/features/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="uk_UA">
+<meta property="og:title" content="Можливості та обмеження | TgWitness"><meta property="og:description" content="Що TgWitness реалізує на сьогодні, які обмеження накладає платформа Telegram і що залишається завданням на майбутнє.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/uk/docs/reference/features/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/features/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/features/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/features/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/features/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/features/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/features/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/features/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/features/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/uk/docs/reference/features/", "url": "https://phishdestroy.github.io/TgWitness/uk/docs/reference/features/", "name": "Можливості та обмеження | TgWitness", "description": "Що TgWitness реалізує на сьогодні, які обмеження накладає платформа Telegram і що залишається завданням на майбутнє.", "inLanguage": "uk", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Головна", "item": "https://phishdestroy.github.io/TgWitness/uk/"}, {"@type": "ListItem", "position": 2, "name": "Документація", "item": "https://phishdestroy.github.io/TgWitness/uk/docs/"}, {"@type": "ListItem", "position": 3, "name": "Довідка", "item": "https://phishdestroy.github.io/TgWitness/uk/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Можливості та обмеження", "item": "https://phishdestroy.github.io/TgWitness/uk/docs/reference/features/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Перейти до вмісту</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Документація</span></a>
+<nav aria-label="Посібники"><a href="../../concepts/">Ілюстрований посібник</a><a href="../../">Усі посібники</a><a href="../">Довідка</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Мова"><span aria-hidden="true">◍</span> Українська</summary><div class="lang-list"><a href="../../../../docs/reference/features/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/features/" hreflang="ru" lang="ru">Русский</a><a href="./" hreflang="uk" lang="uk" aria-current="true">Українська</a><a href="../../../../es/docs/reference/features/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/features/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/features/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/features/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/features/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/features/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/features/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/features/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/features/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/features/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Перемикання між світлою та темною темою"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Посібники"><a href="../../../guides/modes.html">Режими, сценарії та рівні доказовості</a><p class="nav-label">Перші кроки</p><a href="../../start/">Почніть за лічені хвилини</a><a href="../../accounts/">Підключити обліковий запис</a><a href="../../proxies/">Виберіть проксі-сервер</a><a href="../../exports/">Експорт та перевірка</a><p class="nav-label">Розуміння доказів</p><a href="../../concepts/">Дізнайтеся, як працює система збереження доказів</a><a href="../../cases/">Проведіть розслідування у всіх чатах</a><a href="../../security/">Забезпечте безпеку</a><p class="nav-label">Дізнайтеся більше</p><a href="../../witness/">Налаштування бота-свідка</a><a href="../../server/">Забезпечте його безперебійну роботу</a><a href="../../troubleshooting/">З’ясуйте, що пішло не так</a></nav><nav class="wiki-nav" aria-label="Довідка"><p class="nav-label"><a class="nav-label-link" href="../">Довідка</a></p><details class="wiki-group"><summary>Налаштування</summary><a href="../quickstart/">Швидкий старт</a><a href="../accounts/">Формати облікових записів та сеансів</a><a href="../connection/">Підключення, проксі-сервери та захист даних</a><a href="../deployment/">Впровадження</a></details><details class="wiki-group" open><summary>Зібрати</summary><a href="../collection/">Як відбувається збір даних</a><a href="../operations/">Робочі процеси та операції</a><a href="../investigation/">Режим розслідування</a><a href="./" aria-current="page">Можливості та обмеження</a></details><details class="wiki-group"><summary>Докази</summary><a href="../how-it-works/">Як працює система збереження доказів</a><a href="../evidence/">Формат доказів</a><a href="../witness/">Незалежний свідок</a><a href="../timestamp/">Часові мітки</a></details><details class="wiki-group"><summary>Безпека та проект</summary><a href="../security/">Безпека та обробка даних</a><a href="../architecture/">Архітектура</a><a href="../verification/">Що було протестовано</a><a href="../license/">Повідомлення про несумісність ліцензій та архітектури</a><a href="../notice/">Повідомлення про несумісність з певними операторами</a><a href="../changelog/">Журнал змін</a></details></nav><p class="sidebar-note">v0.7.0<br>З відкритим кодом · Працює на вашому комп’ютері</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Посібники"><a href="../../../">Головна</a> <span aria-hidden="true">/</span> <a href="../../">Документація</a> <span aria-hidden="true">/</span> <a href="../">Довідка</a> <span aria-hidden="true">/</span> <span aria-current="page">Можливості та обмеження</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Пошук у документації</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Спробуйте «проксі», «хеш-ланцюг», «токен» або «свідок»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Зручний пошук" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Введіть слово, щоб здійснити пошук у посібниках та довідковій інформації. Результати пошуку залишаються у вашому браузері.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="language-notice">Деякі частини цієї сторінки досі залишаються англійською мовою: англійський оригінал зазнав змін після перекладу.</p><p class="eyebrow">Довідка / Зібрати</p><h1>Можливості та обмеження</h1><p class="guide-outcome">Що TgWitness реалізує на сьогодні, які обмеження накладає платформа Telegram і що залишається завданням на майбутнє.</p><div class="wiki-body"><p>Орієнтаційний термін: 26 жовтня 2026 року. Основним сценарієм використання є приватні групи
+та канали Telegram, доступні для підключених облікових записів. У цьому документі розмежовано
+реалізовану поведінку, межі платформи та майбутні завдання. Пункт цільової архітектури
+не є твердженням про те, що ця функція вже існує.</p>
+<h2 id="standalone-application">Автономний додаток<a class="anchor" href="#standalone-application" aria-label="Посилання на цей розділ">#</a></h2>
+<p>TgWitness має власну процедуру встановлення, каталог даних та цикл випуску версій. Вбудований
+веб-інтерфейс забезпечує налаштування та перегляд; експортовані записи можна використовувати самостійно.</p>
+<p>Користувач підключає свої акаунти, обирає джерела, доступні для кожного з них, та отримує
+збережений журнал спостережень. Панель відображає вміст, збережені зміни, походження
+спостережень та відомі прогалини. Інший слідчий може перевірити експортовані матеріали.</p>
+<p>Важливими є чотири окремі стани: авторизація облікового запису, доступ до джерела, працездатний
+колектор та ступінь підтвердження повноти доставки. Жоден із
+перших трьох не доводить автоматично четвертого. Неактивна група не обов’язково
+означає несправний колектор.</p>
+<h2 id="optional-extras">Додаткові опції<a class="anchor" href="#optional-extras" aria-label="Посилання на цей розділ">#</a></h2>
+<p>Everyday setup is account → sources → observation. <strong>Extras</strong> is a separate destination
+with two cards: a Telegram witness bot and planned
+GitHub build verification. Each states its availability and requirements before showing
+settings. Choosing a card opens instructions; it does not enroll or start a service.</p>
+<p>Налаштування бота складається з трьох кроків: створення доступу тільки для читання, вибір налаштувань публікації та
+запуск на хості Witness. Параметри мережі та публікації, існуючі з’єднання та
+команди перевірки надаються за запитом. Завантажена конфігурація відрізняється
+від запущеного «witness». При зміні додаткових параметрів чернетка зберігається; зміни облікового запису та блокування
+очищають тимчасовий токен і форму. Вбудований посібник містить інструкції щодо запуску.
+GitHub залишається позначеним планом, без форми для введення облікових даних або імітації стану з’єднання.</p>
+<h2 id="protocol-and-private-sources">Протокол та приватні джерела<a class="anchor" href="#protocol-and-private-sources" aria-label="Посилання на цей розділ">#</a></h2>
+<p><strong>MTProto — це протокол Telegram; Telethon — це бібліотека Python, яку TgWitness використовує для
+роботи з MTProto.</strong> Це не альтернативні методи підключення. Функція «Збір» використовує MTProto;
+опціональний «свідок» публікує підписані перевірки через Bot API.</p>
+<p>Кожна робоча область має власного авторизованого клієнта та потік оновлень облікового запису. TgWitness
+відбирає спостереження з налаштованих джерел і надсилає окремі явні запити
+для таких функцій, як створення знімків історії та завантаження медіафайлів.</p>
+<p>Приватному джерелу не потрібне публічне ім’я користувача. Ідентифікаторами є тип вузла Telegram та числовий ідентифікатор;
+назви та імена користувачів можуть змінюватися. Доступ залежить від існуючого
+членства та дозволів. TgWitness не приєднується до джерел автоматично та не обходить
+процедуру затвердження приєднання. Хеш доступу з іншого облікового запису не є універсальним токеном доступу.</p>
+<p>Модель збору даних повинна враховувати приховану історію до приєднання, ролі учасників/адміністраторів,
+скасування сеансів, видалення або зміну дозволів, міграцію з групи до супергрупи,
+теми/форуми, пов’язані обговорення, ідентифікатори каналів та недоступні
+вкладення. Не кожна комбінація була перевірена в реальному часі.</p>
+<p>Видимість джерела перевіряється під час запуску колектора. Відсутність джерела у
+результаті обмеженого діалогу означає, що <strong>доступ не підтверджено</strong>, а не те, що видалення доведено. Одне недоступне
+джерело не заважає спостереженню за іншими доступними джерелами. Ніколи не розміщуйте посилання на запрошення
+або реальні сесії у публічних фіксаціях.</p>
+<h2 id="multiple-accounts">Кілька облікових записів<a class="anchor" href="#multiple-accounts" aria-label="Посилання на цей розділ">#</a></h2>
+<p>Панель підтримує будь-яку кількість <strong>робочих просторів</strong>, кожен із яких має:</p>
+<ul>
+<li>Авторизація, зашифроване сховище та маршрут з’єднання.</li>
+<li>Журнал на базі SQLite та ідентифікатор підпису Ed25519.</li>
+<li>Вибрані джерела, черга медіафайлів та налаштування збору даних.</li>
+<li>Стан спостереження, помилки, контрольні точки та експорт даних.</li>
+</ul>
+<p>Перемикання відображуваного робочого простору не зупиняє роботу іншого колектора. Дублювання авторизації облікового запису
+у різних робочих просторах не допускається. Журнал, який уже прив’язаний до одного облікового запису Telegram,
+не можна перепризначити іншому; дозволено повторне підключення того самого облікового запису.
+Це зберігає ідентичність облікового запису та відповідну область ідентифікаторів повідомлень.</p>
+<p>Немає фіксованої кількості та гарантії виміряної пропускної здатності. Робочі простори використовують спільний
+процес Python та цикл подій. Створення окремих робочих процесів для облікових записів залишається завданням на майбутнє. Для
+ізоляції поточних процесів використовуйте окремі інсталяції, порти та каталоги даних.</p>
+<p>Призначте кожному обліковому запису джерела, до яких він має доступ. Різні облікові записи можуть спостерігати за однією й тією ж
+групою, але їхні спостереження залишаються окремими та зберігають своє походження. Два облікові записи
+на одному комп’ютері, що контролюється оператором, не є двома незалежними свідками. Експорт здійснюється
+за робочим простором; об’єднаний пакет матеріалів справи або глобальна хронологія Telegram не реалізовані.</p>
+<h2 id="capture-and-attribution">Збір даних та вказівка джерел<a class="anchor" href="#capture-and-attribution" aria-label="Посилання на цей розділ">#</a></h2>
+<p>У розділі «Джерела» передбачені налаштування для кожного облікового запису щодо нових повідомлень, редагувань, видалень, реакцій
+та членства у групах. У пресетах зберігаються або всі категорії, або лише повідомлення/редагування/видалення.
+Ця політика застосовується до вибраних груп робочого простору, зберігається після перезапуску та підписується
+з зазначенням стану до та після змін. За замовчуванням зберігаються всі категорії. Вимкнення категорії
+не видаляє старі записи; повторне ввімкнення не відновлює пропущені події.
+Операційні записи, інші події групового сервісу та явні знімки історії є
+окремими. Зафіксовані об’єкти Telegram можуть зберігати вбудовані метадані незалежно від
+параметрів окремого оновлення. Наразі немає можливості заміни категорій для окремих груп.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Матеріал</th>
+<th>Зафіксовано зараз</th>
+<th>Межі</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Повідомлення</td>
+<td>Текст, ідентифікатори учасників/повідомлень, метадані відправника, відповіді та оригінальний конверт оновлення</td>
+<td>Відсутність публічно перевірюваного підпису Telegram для цього повідомлення</td>
+</tr>
+<tr>
+<td>Редагувати</td>
+<td>Нова виявлена версія та будь-які раніше збережені версії</td>
+<td>Зміни, внесені під час простою, можуть бути втрачені; відправник не обов’язково є редактором</td>
+</tr>
+<tr>
+<td>Видалення</td>
+<td>Повідомлення та раніше збережений вміст, якщо такий є</td>
+<td>Зазвичай не вказується, хто видалив повідомлення, або точний час дії</td>
+</tr>
+<tr>
+<td>Видалення без обмеження обсягу</td>
+<td>Оригінальне повідомлення на рівні облікового запису без припущень щодо співрозмовника</td>
+<td>Сувора кореляція з раніше збереженими ідентифікаторами на рівні облікового запису — завдання на майбутнє.</td>
+</tr>
+<tr>
+<td>Реакція</td>
+<td>Надані лічильники та видимі останні ідентифікатори</td>
+<td>Для отримання повного списку доступних реакторів потрібні окремі запити; канали можуть приховувати ідентифікаційні дані</td>
+</tr>
+<tr>
+<td>Членство</td>
+<td>Сервісні повідомлення та оновлення для учасників, яким було надіслано повідомлення</td>
+<td>Видимість залежить від ролі та типу чату; відсутність подій не свідчить про їхню відсутність</td>
+</tr>
+<tr>
+<td>Дії адміністратора</td>
+<td>Лише актуальні оновлення</td>
+<td>Окреме опитування журналу адміністратора не реалізовано</td>
+</tr>
+<tr>
+<td>Вкладення</td>
+<td>Опис оригінальної версії, завантажені байти/SHA-256 та результати спроб</td>
+<td>Зниклий файл може виявитися неможливим для відновлення; остання версія не замінюється</td>
+</tr>
+<tr>
+<td>Історія</td>
+<td>Чіткий знімок поточних видимих повідомлень</td>
+<td>Не відтворює всі редагування або видалений вміст</td>
+</tr>
+<tr>
+<td>Процес збору даних</td>
+<td>Запуск/зупинка, перевірка працездатності, помилки, налаштування, сфера застосування та отримання програми</td>
+<td>Самозвітування, а не незалежне підтвердження процесу</td>
+</tr>
+</tbody>
+</table></div>
+<p>Дія приписується особі лише в тому випадку, якщо джерело фактично вказує цю особу.
+В іншому випадку інтерфейс повідомляє про відсутність атрибуції. Імена користувачів та імена є
+спостережуваними атрибутами, а не доказом реальної ідентичності.</p>
+<h2 id="capacity-and-telegram-limits">Ємність та обмеження Telegram<a class="anchor" href="#capacity-and-telegram-limits" aria-label="Посилання на цей розділ">#</a></h2>
+<p>Не існує універсальної кількості чатів, які можна моніторити з гарантованою якістю.
+Пропускна здатність залежить від пікової кількості подій за секунду, обсягу та розміру вкладень, додаткових
+RPC, активних облікових записів, затримки/вільного місця на диску, стану мережі, обмежень Telegram,
+прийнятної затримки та глибини черги.</p>
+<p>Telegram розрізняє пасивну доставку та активне коротке опитування. У документації до оновлення
+описано додаткові виклики <code>updates.getChannelDifference</code> для відкритих
+каналів/супергруп та рекомендовано не більше <strong>десяти джерел</strong>, <strong>що одночасно підлягають короткому опитуванню
+</strong>. Це не обмеження у десять обраних груп і не гарантія повноти.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Режим</th>
+<th>Мета</th>
+<th>Статус</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Стандартне зауваження</td>
+<td>Запис оновлень, отриманих із вибраних джерел</td>
+<td>Реалізовано</td>
+</tr>
+<tr>
+<td>Пріоритетні спостереження</td>
+<td>Додаткові перевірки на відмінності для обмеженого набору джерел</td>
+<td>Не реалізовано в режимі користувача</td>
+</tr>
+</tbody>
+</table></div>
+<p>Довільне високочастотне опитування, ігнорування FloodWait або припущення про лінійну пропускну здатність
+додаткових облікових записів не є обґрунтованою моделлю визначення розміру. За замовчуванням обмеження становлять
+перші 1 000 діалогів у списку, до 500 повідомлень на знімок історії,
+1–2 000 МіБ на зібраний файл за типом та 4 ГіБ нестисненого підписаного вмісту ZIP; кожне
+значення змінюється для кожного робочого простору в розділі <strong>«Параметри</strong>». Експорт не має фіксованого обмеження кількості подій.
+За замовчуванням резервний режим браузера обмежений 128 Мб; для CLI-інтерфейсу потокової передачі встановлюється
+обмеження на передачу, яке за замовчуванням становить 5 Гб.</p>
+<p><code>tools/check_capacity.py</code> вимірює локальне синтетичне надходження та експорт даних. Його результати
+не є вимірами доставки Telegram або гарантованою кількістю реальних чатів. Див.
+<a href="../verification/">VERIFICATION.md</a> для ознайомлення з виміряною версією та навантаженням.</p>
+<h2 id="reliability-and-recovery">Надійність та відновлення<a class="anchor" href="#reliability-and-recovery" aria-label="Посилання на цей розділ">#</a></h2>
+<p>Реалізовані функції включають: транзакції SQLite WAL/синхронні; атомарні записи
+повідомлень та мультимедійних завдань; постійні завдання та затримки повторних спроб; дескриптори оригінальної версії;
+обмежені повторні спроби; збереження медіа-задачі FloodWait; завантаження медіа поза межами
+мережевого очікування текстової події; експорт зі стабільним префіксом під час продовження подальшого запису; атомарні налаштування та
+записи аудиту; збереження робочої авторизації після невдалого входу для заміни;
+ізоляцію пошкодженого додаткового робочого простору; явні спроби повторного підключення; чітке
+повідомлення про втрату авторизації; та виявлення змін за реальним часом за допомогою монотонного годинника.</p>
+<p>Параметри pts/qts/seq облікових записів та каналів зберігаються та відновлюються після перезапуску, а відстежувані чати
+періодично перевіряються повторно; див. <a href="../evidence/#durable-collection-and-process-receipts-02">формат доказів</a>. Періодичне збереження позиції
+не є атомарним підтвердженням прийняття журналу без втрат даних.</p>
+<p>На початку кожного процесу фіксуються попередній покажчик та межа офлайн-періоду. Поточна історія
+не розглядається як заповнення прогалин. Обсяг збережених даних у Telegram є обмеженим;
+<code>differenceTooLong</code> не може відтворити весь зниклий вміст. Невідновлювані прогалини повинні
+залишатися явно позначеними, навіть якщо пізніший знімок історії буде успішним.</p>
+<h2 id="evidence-model">Модель доказів<a class="anchor" href="#evidence-model" aria-label="Посилання на цей розділ">#</a></h2>
+<p>Кожна подія фіксує послідовність, місцевий час спостереження за UTC, час джерела (якщо вказано),
+тип, джерело, учасника (якщо вказано), оригінальний вміст, попередній хеш та підпис.
+Спостереження за повідомленнями також зберігають обліковий запис колектора та контекст запуску.</p>
+<p>Підписана квитанція про процес містить випадковий ідентифікатор запуску; версії залежностей TgWitness/Python/OS;
+значення SHA-256 вихідних файлів та сукупний відбиток; початковий обліковий запис,
+область дії та налаштування; показники UTC/монотонності; а також попередній заголовок журналу.
+Зміни налаштувань, запуск/зупинка та помилки заносяться до того самого журналу. Контрольні точки
+зберігаються під час запуску, кожні п’ять хвилин під час спостереження (параметр можна змінити) та при упорядкованій зупинці.
+Збережена локальна контрольна точка дозволяє виявити відкат до попереднього префікса журналу.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Механізм</th>
+<th>Що він встановлює</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SHA-256 файлу</td>
+<td>Байти збігаються з відомим дайджестом</td>
+</tr>
+<tr>
+<td>Ланцюжок хеш-кодів подій</td>
+<td>Запис упорядкування/взаємозв’язку відносно відомої межі</td>
+</tr>
+<tr>
+<td>Ed25519</td>
+<td>Підпис за допомогою певного ключа</td>
+</tr>
+<tr>
+<td>Незалежно збережений контрольний пункт</td>
+<td>Наступні матеріали відповідають встановленим межам</td>
+</tr>
+<tr>
+<td>Вимірювання розміру програмного файлу</td>
+<td>Звіт колектора про виміряні файли</td>
+</tr>
+<tr>
+<td>Дійсна незалежна відповідь TSA</td>
+<td>Наявність певних байтів на момент часу TSA за умови явних припущень щодо надійності</td>
+</tr>
+</tbody>
+</table></div>
+<p>Реалізовано підготовку запитів за стандартом RFC 3161 та перевірку відповідей за допомогою OpenSSL.
+Автоматичне надсилання не реалізовано. Запит або локальний підпис, що містить
+час роботи машини, не є незалежним часовим штампом. Див. <a href="../timestamp/">TIMESTAMP.md</a>.</p>
+<p>Оператор, який контролює колектор та ключ підпису, може сфабрикувати нові підписані
+записи. Підписи не підтверджують походження з Telegram, правдивість або автоматичну
+юридичну прийнятність. Для забезпечення більш надійного зберігання необхідні незалежні контрольні точки/зберігання за часом,
+контроль доступу до ключів, записи про передачу даних та перевірка за допомогою надійного програмного забезпечення.</p>
+<h2 id="export-deployment-and-handoff">Експорт, розгортання та передача<a class="anchor" href="#export-deployment-and-handoff" aria-label="Посилання на цей розділ">#</a></h2>
+<p>Підписаний ZIP-архів містить оригінальні файли у форматах JSONL, CSV, HTML, збережені вкладення, хеші,
+підписаний маніфест та зручний засіб перевірки. Він охоплює одну робочу область та фіксований повний
+префікс журналу. Фільтри пошуку на панелі не видаляють записи без попередження. Секретні ключі,
+токенів та сеансів Telegram виключаються; оригінальні записи все ще можуть містити
+особисту інформацію та метадані Telegram.</p>
+<p>Зберігайте дайджест ZIP-архіву, надійний відбиток, контрольну точку, підтвердження обробки та передачі
+окремо. Використовуйте верифікатор із надійної інсталяції, а не довіряйте
+виконуваному коду лише тому, що він міститься у перевіреному ZIP-архіві.</p>
+<p>Інтерфейс браузера поставляється локально без Node.js, CDN або зовнішніх шрифтів. Установкою керує один
+токен оператора. Для віддаленого доступу потрібен HTTPS або SSH-тунель.
+Надаються нативні визначення на Python та для контейнерів, а приклади служб містяться в
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">каталозі deploy/</a>; виконані перевірки платформи перелічені окремо.</p>
+<p>Робоча область за замовчуванням використовує кореневий каталог даних; додаткові робочі області використовують <code>profiles/&lt;id&gt;/</code>.
+Для створення резервної копії потрібно зупинити процес та мати повний набір даних/ключів. ZIP-файли з доказами
+не є резервними копіями програми. Для секретних даних можна використовувати зовнішній головний ключ для нового каталогу
+даних; шифрування журналу/медіа забезпечується диском/томом оператора.
+Див. <a href="../connection/">CONNECTION-SECURITY.md</a> та <a href="../operations/">OPERATIONS.md</a>.</p>
+<h2 id="stable-release-criteria">Критерії стабільного випуску<a class="anchor" href="#stable-release-criteria" aria-label="Посилання на цей розділ">#</a></h2>
+<p>До випуску стабільної версії слід зазначити:</p>
+<ol>
+<li>Реальні приватні групи, супергрупи, форуми та канали з ролями учасників/адміністраторів та
+    прихованою/видимою історією, включаючи дані про вхід/двофакторну автентифікацію, скасування доступу та втрату доступу.</li>
+<li>Контрольовані редагування, видалення, реакції, членство та медіа-матеріали у порівнянні з відомими діями.</li>
+<li>Збої процесів/хостингу, несправності диска/переповнення диска, посилання на файли, термін дії яких закінчився, FloodWait,
+    втрата мережевого з’єднання, пошкоджені файли та відкат бази даних.</li>
+<li>Тривале використання декількох облікових записів із контрольованими затримками, чергами, пам’яттю та дисковим простором, включаючи
+    як «тихі», так і «гучні» джерела разом.</li>
+<li>Перерва між переходом у наступний стан MTProto та прийняттям запису до журналу.</li>
+<li>Чиста інсталяція на передбаченій матриці ОС/контейнерів та перевірене відновлення резервної копії.</li>
+<li>Незалежний огляд питань безпеки, підписів та тверджень щодо авторства/доказів.</li>
+</ol>
+<p>Опитування журналу адміністратора, додаткові списки реакторів, опитування за пріоритетом, окремі робочі процеси,
+шифрування на рівні всього додатка та ролі користувачів залишаються завданнями на майбутнє. Версія 0.6 підтримує
+обмежений TData для одного облікового запису та імпорт файлів облікових записів, описані у <a href="../accounts/">файлі ACCOUNTS.md</a>.
+Перед публікацією ознайомтеся з умовами використання API Telegram. Дослідницькі посилання та висновки щодо платформи
+знаходяться у <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/RESEARCH.md">файлі RESEARCH.md</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/PRODUCT.md">Редагувати цю сторінку на GitHub ↗</a><a class="next-guide" href="../how-it-works/"><span>Наступний крок</span><strong>Як працює система збереження доказів →</strong></a><p>Ці посібники описують поточну реалізацію. Результати перевірки та існуючі прогалини задокументовані окремо. <a href="../verification/">Що було протестовано →</a></p></footer>
+</main>
+<aside class="toc" aria-label="На цій сторінці"><p class="nav-label">На цій сторінці</p><a href="#standalone-application">Автономний додаток</a><a href="#optional-extras">Додаткові опції</a><a href="#protocol-and-private-sources">Протокол та приватні джерела</a><a href="#multiple-accounts">Кілька облікових записів</a><a href="#capture-and-attribution">Збір даних та вказівка джерел</a><a href="#capacity-and-telegram-limits">Ємність та обмеження Telegram</a><a href="#reliability-and-recovery">Надійність та відновлення</a><a href="#evidence-model">Модель доказів</a><a href="#export-deployment-and-handoff">Експорт, розгортання та передача</a><a href="#stable-release-criteria">Критерії стабільного випуску</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>З відкритим кодом · Працює на вашому комп’ютері</span><a href="../../../../LICENSE">Ліцензія MIT</a><a href="../notice/">Повідомлення оператора</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Безпека</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Очікування повідомлення", "Step through a fictional send, edit and delete.": "Покроковий огляд вигаданого процесу надсилання, редагування та видалення повідомлення.", "No observations yet. Start the sequence or advance one event.": "Поки що немає коментарів. Почати послідовність або перейти до наступної події.", "Meet at 10:00": "Зустріч о 10:00", "A new message is visible in the chat.": "У чаті з’явилося нове повідомлення.", "Record 1 appended: the collector observed the original message.": "Додано запис № 1: збирач зафіксував оригінальне повідомлення.", "Meet at 11:00": "Зустріч о 11:00", "The current text changes. The earlier observation stays.": "Поточний текст змінюється. Попереднє зауваження залишається.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Додано запис 2: редагування є новим спостереженням. Запис 1 все ще містить оригінальний текст.", "Message deleted": "Повідомлення видалено", "The message has disappeared from the chat view.": "Повідомлення зникло з вікна чату.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Додано запис 3: повідомлення про видалення зберігається разом з обома зафіксованими версіями.", "0 records": "0 записів", "1 record": "1 запис", "2 records": "2 записи", "3 records": "3 записи", "Complete / {n} of 3": "Завершено / {n} з 3", "Step / {n} of 3": "Крок / {n} із 3", "Pause": "Пауза", "Replay sequence": "Послідовність відтворення", "Play sequence": "Послідовність відтворення", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Доступний статичний приклад. Щоб інтерактивно обчислити хеші, відкрийте цю сторінку через HTTPS або у локальному попередньому перегляді з підтримкою Web Crypto.", "No record supplied": "Записів не надано", "Tail removed": "Кінець видалено", "≠ saved hash": "≠ збережений хеш", "Rebuilt · different hash": "Перероблено · інший хеш", "= saved hash": "= збережений хеш", "Same length and matching head.": "Однакова довжина та відповідний заголовок.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Усі три обчислені хеші збігаються із збереженими хешами. Цей зразок відповідає збереженому обмеженню у три записи.", "Same saved head; the journal prefix fails verification.": "Збережено той самий заголовок; префікс журналу не пройшов перевірку.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Запис № 2 більше не збігається зі своїм збереженим хешем. Перевірка лише кінцевого збереженого заголовка не дозволила б виявити це; верифікатор перевіряє кожен запис.", "Head differs from the retained checkpoint.": "Заголовок відрізняється від збереженого контрольного пункту.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Відновлені хеші пов’язані між собою, але кінцевий хеш змінився. Збережений контрольний пункт відхиляє цю історію. Оригінальні підписи також не пройдуть перевірку для змінених записів.", "Too short: 2 supplied records \u003c 3 retained records.": "Занадто коротко: 2 надані записи \u003c 3 збережені записи.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Два решти хеші все ще збігаються. Збережений контрольний пункт розкриває відсутню кінцеву частину. Без цієї попередньої межі сам лише цей коротший префікс не виявив би пропуску.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "У цьому браузері неможливо обчислити хеш. Наведені нижче формули та пояснення залишаються доступними.", "{n} records": "{n} записів", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Прийнято: кількість зростає, підпис перевірено, а ключ збігається. Свідок зберігає цю нову межу.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Відкат: підписана відповідь повідомляє про меншу кількість записів, ніж останній прийнятий контрольний пункт. Witness фіксує проблему та зберігає попередню прийняту межу.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Форк: кількість не змінилася, але головна гілка відрізняється. Свідок фіксує розбіжність і зберігає раніше прийняту межу.", "No answer": "Немає відповіді", "boundary unknown": "межа невідома", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Відсутність відповіді: свідок фіксує невдалу перевірку. Він не може визначити поточний стан збирача. Якщо свідок все ще має доступ до Bot API і це дозволено його політикою публікації, він може опублікувати інформацію про цю невдачу.", "Send {n}": "Надіслати {n}", "Edit {n}": "Редагувати {n}", "Delete {n}": "Видалити {n}", "Both accounts captured all six expected observations in this example.": "Обидва акаунти відобразили всі шість очікуваних спостережень у цьому прикладі.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Акаунт B все одно зафіксував 6 із 6. Дві квитанції завантажилися довше. Коефіцієнт фіксації та затримка отримання квитанцій дають відповіді на різні питання.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Акаунт B зафіксував 5 із 6 до закінчення відведеного часу (83,3 %). Відсутнє редагування не має виміряної затримки. Цей результат описує лише шість контрольованих дій.", "not observed by cutoff": "не дотримано терміну подачі", "{s} seconds": "{s} секунд", "Exact values follow in the table.": "Точні значення наведено в таблиці.", "{s} s": "{s} s", "Not observed": "Не дотримано", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Чотири чати містять різні спостереження. Слідкуйте за вихідними записами для кожного з’єднання; не прив’язуйте публікацію в каналі до користувача 71001 без вказаного відправника.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Записи № 146 та № 205 містять однаковий ідентифікатор відправника — 71001. Це пов’язує виявлені публікації одного облікового запису Telegram у двох чатах. Це не дозволяє ідентифікувати реальну особу чи приписати публікацію каналу конкретній особі.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Адреса pay.example.invalid/new з’являється у записі групи № 146, на клавіатурі бота № 173, у редагуванні каналу № 188 та у приватному повідомленні № 205. Повторне згадування адресата пов’язує цей матеріал; це не доводить спільного контролю над цими акаунтами.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "У цьому вигаданому випадку завершені квитанції про отримання медіафайлів № 151 та № 209 мають однакові повні значення SHA-256. Порівняйте фактичні байти та пов’язані з ними записи повідомлень. Файл, що збігається, не ідентифікує його автора та не доводить, хто його переслав.", "the encrypted off-site copy": "зашифрована зовнішня копія", "notifications": "повідомлення", "checkpoint hashes for timestamps": "хеші контрольних точок для позначок часу", "signed checkpoints for the witness": "підписані контрольні точки для свідка", "Switched on in this example": "У цьому прикладі ввімкнено", "Optional · off by default": "Необов’язкове · за замовчуванням вимкнено", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Залишаючи цей пристрій: підключення до Telegram та {list}. Нічого іншого.", "Default: only the Telegram connection leaves this machine.": "За замовчуванням: з цього комп’ютера надходить лише з’єднання з Telegram.", "{done} of {total} done": "{done} з {total} виконано", "Mark step {n} as done": "Позначити крок {n} як виконаний", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Текст", "Copied": "Скопійовано", "Command copied.": "Команда скопійована.", "Selected — Ctrl/Cmd+C": "Виділити — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Команда вибрана. Скопіюйте її вручну.", "Command copied to clipboard.": "Команда скопійована до буфера обміну.", "Select text": "Виділити текст", "Clipboard unavailable. Command selected; copy it manually.": "Буфер обміну недоступний. Команда вибрана; скопіюйте її вручну.", "A message arrives. The first observation is saved.": "Надходить повідомлення. Перше спостереження збережено.", "The time changes. Both captured versions stay.": "Час змінюється. Обидві зафіксовані версії залишаються.", "The message disappears. The captured history remains.": "Повідомлення зникає. Зафіксована історія залишається.", "Pause example animation": "Приклад анімації паузи", "Play example animation": "Переглянути приклад анімації", "Play": "Відтворити", "Full-size workspace screenshot": "Знімок екрана робочої області у повному розмірі", "Workspace screenshot · fictional data": "Знімок екрана робочого простору · вигадані дані", "Close": "Закрити", "Close screenshot": "Закрити скріншот", "Scrollable full-size screenshot": "Повний знімок екрана з можливістю прокрутки", "Enlarge: {name}": "Збільшити: {name}", "View full size": "Переглянути у повному розмірі"}</script>
+</body></html>

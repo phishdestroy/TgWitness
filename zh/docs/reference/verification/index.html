@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="zh-Hans" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>已测试的内容 | TgWitness</title>
+<meta name="description" content="Telegram 实时测试、自动化检查、浏览器检查以及尚未经过验证的内容。"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/verification/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="已测试的内容 | TgWitness"><meta property="og:description" content="Telegram 实时测试、自动化检查、浏览器检查以及尚未经过验证的内容。">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/zh/docs/reference/verification/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/verification/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/verification/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/verification/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/verification/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/verification/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/verification/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/verification/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/verification/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/verification/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/verification/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/verification/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/verification/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/verification/", "url": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/verification/", "name": "已测试的内容 | TgWitness", "description": "Telegram 实时测试、自动化检查、浏览器检查以及尚未经过验证的内容。", "inLanguage": "zh-Hans", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://phishdestroy.github.io/TgWitness/zh/"}, {"@type": "ListItem", "position": 2, "name": "文档", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/"}, {"@type": "ListItem", "position": 3, "name": "参考", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "已测试的内容", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/verification/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">跳转至内容</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / 文档</span></a>
+<nav aria-label="指南"><a href="../../concepts/">图文指南</a><a href="../../">所有指南</a><a href="../">参考</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="语言"><span aria-hidden="true">◍</span> 简体中文</summary><div class="lang-list"><a href="../../../../docs/reference/verification/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/verification/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/verification/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/verification/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/verification/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/verification/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/verification/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/verification/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/verification/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/verification/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/verification/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/verification/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="./" hreflang="zh-Hans" lang="zh-Hans" aria-current="true">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="在浅色和深色主题之间切换"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="指南"><a href="../../../guides/modes.html">模式、场景和证据级别</a><p class="nav-label">入门指南</p><a href="../../start/">几分钟内即可开始使用</a><a href="../../accounts/">连接账户</a><a href="../../proxies/">选择代理</a><a href="../../exports/">导出与验证</a><p class="nav-label">了解证据</p><a href="../../concepts/">了解证据如何运作</a><a href="../../cases/">跨所有聊天记录进行调查</a><a href="../../security/">确保安全</a><p class="nav-label">了解更多</p><a href="../../witness/">设置 Witness 机器人</a><a href="../../server/">保持其运行</a><a href="../../troubleshooting/">查找问题所在</a></nav><nav class="wiki-nav" aria-label="参考"><p class="nav-label"><a class="nav-label-link" href="../">参考</a></p><details class="wiki-group"><summary>设置</summary><a href="../quickstart/">快速入门</a><a href="../accounts/">账户与会话格式</a><a href="../connection/">连接、代理和数据保护</a><a href="../deployment/">部署</a></details><details class="wiki-group"><summary>收集</summary><a href="../collection/">数据采集原理</a><a href="../operations/">工作流程与操作</a><a href="../investigation/">调查模式</a><a href="../features/">功能与限制</a></details><details class="wiki-group"><summary>证据</summary><a href="../how-it-works/">证据的运作原理</a><a href="../evidence/">证据格式</a><a href="../witness/">独立见证者</a><a href="../timestamp/">时间戳</a></details><details class="wiki-group" open><summary>安全与项目</summary><a href="../security/">安全与数据处理</a><a href="../architecture/">架构</a><a href="./" aria-current="page">已测试的内容</a><a href="../license/">许可协议与架构不兼容声明</a><a href="../notice/">运营商兼容性通知</a><a href="../changelog/">更新日志</a></details></nav><p class="sidebar-note">v0.7.0<br>开源 · 可在您的设备上运行</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="指南"><a href="../../../">首页</a> <span aria-hidden="true">/</span> <a href="../../">文档</a> <span aria-hidden="true">/</span> <a href="../">参考</a> <span aria-hidden="true">/</span> <span aria-current="page">已测试的内容</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">参考 / 安全与项目</p><h1>已测试的内容</h1><p class="guide-outcome">Telegram 实时测试、自动化检查、浏览器检查以及尚未经过验证的内容。</p><div class="wiki-body"><h2 id="live-telegram-test-whole-account--29-october-2026">Telegram 实时测试，完整账户 · 2026年10月29日<a class="anchor" href="#live-telegram-test-whole-account--29-october-2026" aria-label="本节链接">#</a></h2>
+<p>在以下测试结束后，该账户仍继续运行。10月29日12:10（UTC），其监控范围
+被切换为整个账户（频道、群组、私人聊天和机器人）；控制面板要求
+确认，经签名的日志记录了这一操作。截至17:59（UTC），日志中包含：</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>记录时间：10月27日 21:36 至 10月29日 17:59（UTC）</th>
+<th style="text-align: right;">计数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>日志记录</td>
+<td style="text-align: right;">9,968</td>
+</tr>
+<tr>
+<td>新消息</td>
+<td style="text-align: right;">5,308</td>
+</tr>
+<tr>
+<td>在切换到完整账户后，其中的一部分</td>
+<td style="text-align: right;">3,878</td>
+</tr>
+<tr>
+<td>删除操作</td>
+<td style="text-align: right;">784</td>
+</tr>
+<tr>
+<td>其中部分消息在 TgWitness 保存后被删除</td>
+<td style="text-align: right;">596</td>
+</tr>
+<tr>
+<td>编辑</td>
+<td style="text-align: right;">41</td>
+</tr>
+<tr>
+<td>经复核后添加的消息</td>
+<td style="text-align: right;">2,273</td>
+</tr>
+<tr>
+<td>经重新核查已无法找到的消息</td>
+<td style="text-align: right;">18</td>
+</tr>
+<tr>
+<td>通过历史快照保存的消息</td>
+<td style="text-align: right;">242</td>
+</tr>
+<tr>
+<td>已保存的附件</td>
+<td style="text-align: right;">247</td>
+</tr>
+<tr>
+<td>收集器启动</td>
+<td style="text-align: right;">19</td>
+</tr>
+<tr>
+<td>Telegram FloodWait 暂停</td>
+<td style="text-align: right;">26</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>该小组的<strong>“Verify”</strong>核查确认了全部 9,968 条记录的签名和哈希链。</li>
+<li>消息来自 2 个群组或频道以及 3 个私人聊天和机器人。在<strong>“聊天”界面</strong>中点击了一个消息按钮；
+    该请求及 Telegram 的响应均记录在日志中。</li>
+<li>当收集器在重启后重新扫描该账户时，新增了聊天记录。由于
+    保存新聊天记录中早期消息的功能处于关闭状态（<code>history = 0</code>），因此本文不作讨论。</li>
+</ul>
+<p>未涵盖内容：互动反应、成员变动、用户资料、发送消息、通过
+邀请加入、代理服务器、通知、witness 机器人以及同时管理多个账户。公开文件
+仅包含计数数据。</p>
+<h2 id="password-protected-export-opened-with-libarchive--29-october-2026">通过 libarchive 打开受密码保护的导出文件 · 2026年10月29日<a class="anchor" href="#password-protected-export-opened-with-libarchive--29-october-2026" aria-label="本节链接">#</a></h2>
+<p>由导出加密代码生成的归档文件（WinZip AES-256 格式，7-Zip 和 WinRAR
+均可读取）使用 Windows 版 <code>tar</code>（bsdtar 3.6.2，libarchive）打开。 输入正确密码后，
+解压后的文件与原始文件的 SHA-256 值一致；输入错误密码时，系统会显示“密码短语错误”
+并拒绝解压。7-Zip 和 WinRAR 本身并未被调用。</p>
+<h2 id="live-telegram-test--27-to-29-october-2026">Telegram 实时测试 · 2026年10月27日至29日<a class="anchor" href="#live-telegram-test--27-to-29-october-2026" aria-label="本节链接">#</a></h2>
+<p>一个真实的 Telegram 账户通过内置的 API 密钥对池登录，记录了
+一个超级群组从 <strong>10 月 27 日 21:36 UTC 至 10 月 29 日 05:15 UTC</strong> 期间的活动。在此期间，
+采集器共启动了 12 次。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>已记录</th>
+<th style="text-align: right;">计数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>日志记录，包括心跳信息和服务记录</td>
+<td style="text-align: right;">2,385</td>
+</tr>
+<tr>
+<td>新消息</td>
+<td style="text-align: right;">1,291</td>
+</tr>
+<tr>
+<td>删除操作</td>
+<td style="text-align: right;">472</td>
+</tr>
+<tr>
+<td>其中部分消息在 TgWitness 保存文本后被删除</td>
+<td style="text-align: right;">347</td>
+</tr>
+<tr>
+<td>编辑</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr>
+<td>暂停期间遗漏的消息，经重新检查后已补充</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr>
+<td>已保存的附件</td>
+<td style="text-align: right;">17</td>
+</tr>
+<tr>
+<td>未下载附件（下载功能已关闭，或无文件可下载）</td>
+<td style="text-align: right;">14</td>
+</tr>
+<tr>
+<td>Telegram FloodWait 在重新检查期间会暂停，每次暂停 3 秒</td>
+<td style="text-align: right;">8</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>所有 2,385 条记录的签名和哈希链均可通过日志的
+    公钥进行验证。</li>
+<li>重启后，收集器将从保存的更新状态（<code>pts</code>）继续运行，Telethon
+    会进行补全；随后，重新检查会添加仍缺失的消息。</li>
+<li>在每次 FloodWait 事件中，收集器都会等待指定时间，然后继续运行。</li>
+<li>该账户保持登录状态，同一会话于 10 月 29 日重新连接。</li>
+</ul>
+<p>本次测试未涵盖的内容包括：同时管理多个账户、管理员权限、代理服务器、
+持续数小时以上的服务中断以及完整的<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">实时验收流程</a>。
+公开文件仅包含以下统计数据：不包含任何账户或聊天标识符、消息内容或
+凭据信息。</p>
+<p>下方的旧条目描述了各自的运行情况；其中大部分使用了合成测试客户端。
+最新的自动化结果如下；<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PREPUBLICATION-2026-10-29.md">发布前的审计</a>
+记录了之前的基线数据。</p>
+<h2 id="built-in-public-mtproxy-lists--29-october-2026">内置的公共 MTProxy 列表 · 2026年10月29日<a class="anchor" href="#built-in-public-mtproxy-lists--29-october-2026" aria-label="本节链接">#</a></h2>
+<p>新增了来自 SoliSpirit/mtproto 和
+zakky8/mtproto-proxy-pro 的捆绑公共快照以及显式的 HTTPS 刷新功能。 在此主机上，应用程序下载器于 2026 年 10 月 29 日 12:58（UTC）
+成功获取了这两个数据源：经过过滤、去重以及每个来源 64 条记录的限制后，
+共获得 <strong>118 个唯一的兼容端点</strong>。 这验证了列表的检索功能，
+而非通过这些端点的连接性或消息传递。在此过程中，
+没有真实账户连接到列表中的代理。<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/PROXIES.md">操作员和用户指南</a>。</p>
+<p>源响应失败、为空或不兼容时，将保留之前的条目和日期。 更新
+不会更改所选路由。公共地址经验证后，其解析出的 IP 地址将在
+选中时被固定；运营商/手动路由仍保持独立。连接探测功能现已在
+账户登录前的面板中提供。虚假 TLS 扩展和自动代理选择
+仍不支持。运营商的目录将完全覆盖订阅设置。</p>
+<ul>
+<li>完整测试套件：<strong>366 项通过，3 项跳过</strong>，耗时 287.94 秒。现有的依赖项警告
+    和平台跳过项仍然存在。最终的 public-list/本地化回归测试：<strong>36 项通过</strong>，
+    包括对无效下载代理端口的拒绝；这与完整测试套件存在重叠。</li>
+<li>已通过英语/俄语、浅色/深色模式（390/1440 像素）的浏览器兼容性测试：内置
+    选项，打开设置时无需外部加载，支持显式刷新，故障期间保留路由和
+    缓存，登录前探测，对响应延迟的工作区进行隔离，源
+    代码详情以及布局/对比度。 无 JavaScript 错误或外部浏览器请求。</li>
+<li>所有 13 个语言版本的最终静态翻译覆盖率均已通过审核；新内容已翻译
+    为俄语，其他部分则明确保留英文作为备选。更新后的内置指南
+    在两种主题下均通过了版式/对比度检查。</li>
+<li>已通过初步检查和发布检查（259 个公开文件，1,354 个本地链接）；已更新
+    已解析 Compose 和 CI YAML。此处未执行 Docker 和远程 CI。</li>
+<li>该重构的组件已通过独立安装、捆绑列表加载以及签名导出
+    验证。全部 69 个包资源均与工作区匹配；源代码哈希值已通过核验。</li>
+</ul>
+<p>收据：<code>test-results/public-proxy-research/download-receipt.json</code>、
+<code>test-results/public-proxy-research/copy-receipt.json</code>、
+<code>test-results/public-proxies-full-suite.log</code>、<code>test-results/public-proxies-final-focused.log</code>、
+<code>test-results/public-proxies-browser/receipt.json</code> 和 <code>test-results/public-proxies-package.log</code>。
+浏览器/账户/传输环境均为模拟数据；上述两个数据流下载均为真实的 HTTPS 请求。</p>
+<h2 id="optional-extras-presentation--29-october-2026">可选附加功能演示 · 2026年10月29日<a class="anchor" href="#optional-extras-presentation--29-october-2026" aria-label="本节链接">#</a></h2>
+<p>原 Proof 机器人入口现已改为<strong>“扩展功能”（Extras）</strong>：先简要概述，随后是
+针对所选选项的独立设置页面。Witness 表单分为三个步骤，其中
+连接管理、网络选项和部署详情均以折叠形式呈现。GitHub 支持
+已明确规划，且无需填写凭据表单。<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/EXTRAS.md">俄语概述</a>。</p>
+<ul>
+<li>已通过 30 项针对本地化、Witness 配置及发布检查的专项测试。</li>
+<li>Chromium 设置验收测试通过（英语/俄语，浅色/深色模式，分辨率 390/1440 像素）：
+    键盘焦点与回车键响应正常，选择附加功能时无隐式关联，草稿
+    保留功能正常，已固定配置/令牌下载功能正常，锁屏时令牌清除功能正常，且
+    本地指南锚点正常工作。 布局及纯色背景下的文本对比度检查均通过。</li>
+<li>工作区切换测试通过，包括切换后延迟到达的令牌响应
+    。快速导航可通过“bot”、“proof”和“GitHub”等关键词找到相关扩展功能；
+    其现有的 320/390/1440 像素分辨率以及俄语/从右到左（RTL）文本检测也均通过测试。</li>
+<li>在设置运行过程中未观察到任何 JavaScript 错误或外部浏览器请求。
+    这些是合成 UI 检查，并非新的实时 Telegram 或机器人发布证据。</li>
+<li>所有 13 个语言环境的最终语言加载和词典覆盖率均已通过测试，同时保留了
+    除俄语以外的明确英语备用文本。扩充版的《Proof 指南》也通过了
+    两种主题下 320/768/1440 像素分辨率下的版式/对比度检查。</li>
+<li>该重构版本已通过独立安装和签名导出验证。所有
+    67 个打包资源均与工作区匹配；源代码存档包含 253 个公开
+    文件。1,346 个本地文档链接的源地址/链接检查均通过。</li>
+</ul>
+<p>收据编号：<code>test-results/setup-browser/receipt.json</code>、
+<code>test-results/quick-navigation/receipt.json</code>、<code>test-results/extras-final.json</code>、
+<code>test-results/extras-package.log</code> 和 <code>test-results/extras-artifacts.json</code>。
+截图素材使用的是合成工作区。</p>
+<h2 id="witness-bot-and-proxy-setup-audit--29-october-2026">Witness 机器人和代理设置审核 · 2026年10月29日<a class="anchor" href="#witness-bot-and-proxy-setup-audit--29-october-2026" aria-label="本节链接">#</a></h2>
+<p>Witness 设置（现<strong>位于“扩展”→“频道中的机器人</strong>”）将准备一个独立部署的 Witness：固定收集器
+密钥、范围限定令牌下载、专属频道、发布策略、HTTP/SOCKS5 路由以及自定义
+机器人 API。 机器人令牌保留在见证服务器上。其新的<code>--check-config</code>可在
+无需建立网络连接或生成密钥的情况下验证配置和文件。JSON
+文件路径在配置文件旁解析。所有Compose见证变体现均转发
+HTTP代理和机器人API设置。</p>
+<p>账户设置支持由操作员管理的公共 MTProxy 目录、自定义 Telegram
+代理链接预览以及现有的手动字段。目录响应中会省略机密信息；
+选择后，路由将存储在工作区保险库中。若目录缺失或格式错误，
+仍可使用手动路由。 默认情况下，不会生成或启用任何项目代理地址或托管见证服务。当外部见证方必须访问其控制面板保持私有的收集器时，Caddy 示例仅公开受范围限制的 head 端点。</p>
+<p>验证：</p>
+<ul>
+<li>完整测试套件：<strong>348 项通过，3 项跳过</strong>，耗时 195.81 秒。跳过项是由于 Windows 系统的限制所致；
+    现有的两条依赖项弃用警告仍然存在。</li>
+<li>最终的见证/配置/发布回归测试：<strong>11项通过，1项跳过</strong>。
+    这与全套测试重合。测试内容包括路径解析、离线预检、
+    通过实际的回环 HTTP Bot API 测试环境进行签名/发布、记录的投递
+    失败、频道令牌验证以及代理密钥排除。</li>
+<li>Chromium 设置验收测试（390/1440 像素分辨率下，英语/俄语版本）通过：固定配置
+    和令牌下载、锁屏时清除令牌、目录选择、自定义链接预览
+    随后进行显式保存，布局/对比度正常，且无 JavaScript 错误或外部
+    浏览器请求。 修复了俄语账户标题过窄及登录标签页内容溢出问题。</li>
+<li>已通过 Ruff 检查、来源/链接验证以及 Compose/工作流 YAML 解析。</li>
+<li>该重构版本通过了独立安装、面板/静态资源及 API 身份验证
+    检查，并完成了对直接导出和流式传输的 32 项事件合成导出数据的独立验证。</li>
+</ul>
+<p>收据：<code>test-results/setup-full-suite.log</code>、<code>setup-final-focused.log</code>、
+<code>setup-browser/receipt.json</code>、<code>setup-browser-final.log</code> 和 <code>setup-package.log</code>。
+这些测试使用了合成账户/代理以及本地 Bot API 测试环境。它们并不
+声称代表真实的机器人发布、可运行的公共 MTProxy 服务器、远程 CI 运行或 Docker
+部署。上述保留的真实 Telegram 观察记录仍作为一项独立的
+证据。<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/WITNESS.md">设置说明</a>。</p>
+<h2 id="presentation-and-documentation-review--29-october-2026">演示与文档评审 · 2026年10月29日<a class="anchor" href="#presentation-and-documentation-review--29-october-2026" aria-label="本节链接">#</a></h2>
+<p>产品页面、登录界面、英文/俄文版 README 文件以及演示图片现已采用
+统一的视觉风格。公开的截图使用了虚构的演示数据。此次修订还更正了
+上文中过时的实时验证和数据恢复说明。</p>
+<ul>
+<li>重点本地化、网站及发布测试：<strong>33项通过，1项跳过</strong>。被跳过的
+    测试需要创建符号链接，而该主机不支持此操作。</li>
+<li>Chromium 面板的总体验收已通过，包括所有语言目录、从右到左（RTL）布局、
+    浅色/深色主题、文本对比度以及工作区切换。配置文件创建
+    检查现会在获取实际 HTTP 响应后，再检查所选工作区。</li>
+<li>英语/俄语访问界面在两种主题下均通过了
+    320、390、768、850 和 1440 像素的布局与对比度检查；提交按钮始终位于初始视口内。</li>
+<li>该网站已通过 320、390、768、1024 和 1440 像素的公共站点兼容性测试，包括消息
+    历史记录控件、截图放大/Esc键/焦点恢复、键盘Tab键、剪贴板
+    拒绝、项目子路径、运动效果减弱以及无JavaScript的备用方案。未观察到任何
+    资源请求失败、外部请求失败或JavaScript错误。</li>
+<li>重建的轮子已通过隔离安装测试：面板资源和语言环境
+    已加载，API 访问需要身份验证，且直接导出和流式导出均可独立
+    验证所有 32 个合成事件。Ruff 及公开来源/链接检查均通过。</li>
+</ul>
+<p>本地收据：<code>test-results/design-tests.log</code>、<code>design-panel-final.log</code>、
+<code>design-review-final.log</code>、<code>design-site.log</code> 和 <code>design-package/install-receipt.json</code>。
+本次演示/文档更新未重新运行完整的后端套件；
+其先前结果仍保留在发布前审计中。</p>
+<h2 id="version-061">版本 0.6.1<a class="anchor" href="#version-061" aria-label="本节链接">#</a></h2>
+<p>0.6.1 版本更新了面板界面、启动器、打包方式及文档；
+消息收集、存储、签名和导出相关的代码保持不变。在 Windows 11 / Python 3.12.10
+环境下，使用已固定运行时：</p>
+<ul>
+<li>该完整套件通过了 <strong>137 项测试</strong>，其中有 2<strong> 项被跳过</strong>，并存在现有的 Starlette 警告。
+    新测试涵盖了启动器对 Ctrl+C 的处理（服务器有 30 秒时间进行
+    有序停止）以及可采取行动的设置步骤失败情况。</li>
+<li>Chromium（无头 shell 156）通过了全部 <strong>45 个通用场景</strong>和 <strong>35 个
+    账户导入/二维码/认证密钥场景</strong>，包括纯文本对比度检查，在
+    320–1440 像素范围内无水平溢出，且在 320/390 像素时首次登录字段可见。
+    未观察到页面 JavaScript 错误或外部请求。</li>
+<li><code>python start.py --setup-only</code> 将该软件包重新安装为 0.6.1 版本，
+    <code>python start.py --check</code> 报告已就绪。一个真实的 <code>python -m tgwitness --demo</code> 服务器
+    返回了控制面板、样式表、脚本、徽标、指南以及 <code>/api/status</code> 0.6.1 版本；
+    已被移除的 <code>workspace.css</code> 返回了 404 错误。</li>
+<li><code>Start.cmd</code> 发现了一个位于 PATH 路径之外的 Python 安装。由于系统中没有可用的 Python，
+    系统显示了安装提示；拒绝后，系统打印了手动安装说明并退出（1）。
+    python.org 的下载步骤获取了 3.12.10 安装程序，并通过了 Python
+    软件基金会的 Authenticode 验证；该安装程序本身并未在此主机上运行。</li>
+<li><code>start.sh</code> 在未执行任何 Python 代码的情况下打印了安装提示并退出。1. <code>scripts\Docker.cmd</code> 和
+    <code>scripts/docker-start.sh</code> 针对伪造的 <code>docker</code> 可执行文件进行了测试：调用
+    顺序、面板地址和令牌输出均正确，且失败后未显示成功消息。</li>
+<li><code>python tools/build_portable.py</code> 在验证了
+    固定嵌入式运行时校验和后，构建了一个 18.8 MiB 的 Windows 软件包。 将其解压至包含空格的路径，并在 PATH 环境变量中仅包含
+    <code>C:\Windows</code> 目录的情况下，其嵌入的 Python 通过了 <code>TgWitness-Check.cmd</code> 测试，成功运行了
+    演示（32 个事件）和实时工作区，且 Chromium 在渲染日志和详细信息
+    抽屉时未出现 JavaScript 错误。数据被写入该软件包的 <code>data</code> 文件夹中。</li>
+<li><code>python tools/build_preview.py</code> 生成了一个包含 110 个文件的源代码存档。对
+    <code>git add</code> 进行的干跑测试列出了相同的 110 个文件，其中不包含会话、密钥、数据库、令牌、日志或导出
+    文件，也没有本地绝对路径和类似密钥的字符串。</li>
+</ul>
+<p>本次 10 月 27 日的打包运行中未执行以下操作：Python 的自动
+安装、Docker 构建/Compose 检查、Linux/macOS 运行以及新的实时账户
+测试。真实的 Telegram 证据记录在上方以及下方的早期账户检查中。
+仅凭持续集成（CI）定义无法证明平台已成功运行。</p>
+<h2 id="version-060">版本 0.6.0<a class="anchor" href="#version-060" aria-label="本节链接">#</a></h2>
+<p>在 Windows 11 / Python 3.12.10 上的最新完整固定运行时套件通过了 <strong>135 项测试</strong>，
+其中 1<strong> 项被跳过</strong>，耗时 26.53 秒，并存在现有的 Starlette 警告。 该跳过项
+需要 POSIX 权限。在将 QR
+渲染器添加到就绪性检查和进程测量后，8 项受影响的就绪性/工作区
+检查也通过了。</p>
+<p>新增支持内容包括 Telethon 模式 7/8、Pyrogram 模式 2/3、完整的 JSON
+密钥及仅含元数据的 JSON、匹配/冲突的账户文件、TData 通行码、
+校验和篡改与不安全路径、离线/经身份验证的内存转换、
+在线账户 ID 验证、二维码成功/双因素认证/过期、过期取消以及账户
+隔离。 TData 测试数据集采用独立的 AES-IGE 实现方案进行加密。</p>
+<p>Chromium 通过了 <strong>45 个通用场景</strong>和 <strong>35 个账户导入/二维码/认证密钥场景</strong>的测试，
+未观察到页面 JavaScript 错误或外部请求。 新的浏览器检测
+涵盖了所有四种输入格式、受保护的 TData、API 元数据、二维码渲染、
+过期/重试、双因素认证、错误账户拒绝、锁定/工作区取消、响应式
+布局，以及在选择新文件后出现的延迟转换响应。</p>
+<p>在账户登录界面调整后，两套浏览器均再次通过测试。实时设置会打开
+账户注册表单；演示模式则打开其示例日志。演示版“账户”页面显示
+实时启动说明，并隐藏凭据输入框。
+针对 320、390 和 1440 像素的专项检测确认：数字输入框和主
+按钮在无需滚动的情况下能完全显示，API 字段初始状态为折叠，
+且文本对比度保持可读性。在打开新的可展开区域后，捕获和验证控件仍
+保持隐藏状态。</p>
+<p>通过真实的
+导入和授权端点，使用合成凭据测试了直接授权密钥流程。测试内容涵盖密钥不完整、DC缺失、
+用户 ID 不准确、账户身份不匹配、保存的 API 凭据、可见的
+请求进度、密钥清除，以及编辑或方法变更后的延迟响应。
+所有四种登录方式均在 320、390 和 1440 像素分辨率下进行了测试。文件选择器
+位于格式指引之前，“连接”按钮在 API 设置折叠状态下
+可适配初始 844 像素的视口。在此
+UI 验收测试中未尝试进行真实的认证密钥授权。</p>
+<p>已使用两套浏览器套件再次验证了面板刷新功能：未观察到页面 JavaScript
+错误或外部请求。该账户套件现已涵盖粘贴
+一组 API ID/哈希对、拒绝格式错误或多组对（不替换
+字段）、仅元数据指导，以及在
+登录方式变更或手动编辑凭据后忽略过期的导入响应。 另外六项针对性检查
+均已通过，涉及设置指南、明确的开始/暂停操作、空搜索恢复，以及最终
+连接/本地指南布局，并在 320、390 和 1440 像素分辨率下确保了稳固的文本对比度。
+直接登录更新新增了一项手机/验证码请求操作，并复用
+当前工作区中保存的 API 配对信息用于手机、二维码和会话登录。上述完整的 Python
+测试套件包含新的持久化、部分凭据拒绝以及工作区
+隔离测试。 浏览器测试涵盖直接手机号输入、已保存凭据复用、
+仅元数据路由、一键文件授权以及重复账户拒绝。
+还对简化的面板令牌和手机表单进行了测试，测试时未进行初始滚动，
+分辨率分别为 320、390 和 1440 像素。兼容性检查确认，当旧流程仍在运行时，
+直接手机表单可以使用早期的配置/验证码端点。</p>
+<p>对一个用户提供的账户进行了单独验证，该验证在公共测试环境之外进行。
+其 Telethon、Pyrogram 和 TData 输入均解析为相同的授权信息；
+随附的 JSON 文件提供了 API 凭据。这四个文件均通过
+0.6.0 控制面板加载，Telegram 确认了预期的数字账户 ID。源文件
+保持不变。 未选择任何数据源，且观察功能保持关闭状态。这
+仅构成一个导入/登录示例，不代表实时采集、恢复或处理能力。</p>
+<p>Telegram 还发布了一个真实的 QR 码令牌，该令牌在未被扫描的情况下已被撤销。
+完整的 QR 码确认和双因素认证流程已通过模拟客户端进行测试；针对真实 Telegram 应用的移动端
+确认仍需作为单独的验证步骤。
+公开文件中不包含任何真实的账户标识符、密钥或屏幕截图。</p>
+<p>启动器升级已完成；源代码、已安装元数据及就绪标记
+报告版本 0.6.0，QR 码 8.2，<code>pip check</code> 验证通过。已安装的 wheel 模块
+为控制面板和指南提供服务，拒绝未经身份验证的 API 请求，并独立
+验证了直接导出和流式导出的 32 项合成数据。 更新后的离线指南
+已在 320、390 和 1440 像素分辨率下经过验证。公开的截图仍为合成图像。</p>
+<p>源代码发布包包含 107 个白名单文件。本地文档链接均可正常访问。
+Docker/Caddy 运行环境、远程持续集成（CI）与软件包发布、ARM64 运行时、持续
+数据采集以及完整的 Telegram 实时兼容性矩阵，目前在此尚未得到验证。</p>
+<h2 id="version-051">版本 0.5.1<a class="anchor" href="#version-051" aria-label="本节链接">#</a></h2>
+<p>在 Windows 11 / Python 3.12.10 环境下，完整的项目环境测试套件通过：
+<strong>94 个通过，2 个跳过</strong>，耗时 31.21 秒，存在现有的 Starlette 警告。
+跳过的测试项需要 POSIX 权限和符号链接创建功能，而该主机不支持这些功能。
+HTTP 下载测试用例输出了一条请求线程诊断信息；所有断言
+均通过。本次运行并不能证明主机传输方面不存在问题。</p>
+<p>新的回归测试覆盖范围包括被拒绝的 StringSession、代码及双因素认证 (2FA) 账户
+变更、已取消的身份查询、待处理的登录取消，以及通过
+已注册处理程序对活动、被拒绝、被替换和探测客户端进行的更新。仅
+活动收集器会提交事件；已保存的凭据和签名历史记录保持
+完整。 其他新检查包括：数据库重新打开后的 Unicode 搜索、在 Coverage 中纳入
+监控策略边界，以及对公开来源打包的排除。</p>
+<p>实际项目 <code>pythonw.exe</code> 启动了一个隔离的合成面板，返回
+HTTP 200 状态码，并将启动诊断信息保留在 <code>logs/server.log</code> 中。日志中未
+包含生成的面板令牌或 HTTP 访问记录。该测试仅终止了
+其自身的合成进程。 未注册任何任务计划程序任务；登录/注销、
+休眠和服务恢复仍为独立的验证条件。</p>
+<p>Chromium 验收测试通过了 <strong>45 个场景</strong>，未发现页面 JavaScript 错误，
+也未观察到外部请求。 新增的检测项涵盖 601/768/850 像素时间轴的日期
+和时间、状态刷新期间的附件草稿、保存过程中进行的最新编辑、
+切换账户时清空的验证结果、切换至其他页面后返回时出现的
+延迟验证响应，以及新事件到达时的明确验证边界。
+此外，还修正了搜索图标/文本的间距问题，并重新运行了浏览器套件。</p>
+<p>本次浏览器运行使用了 <code>.venv</code> 中固定的运行时环境，以及系统提供的现有
+Playwright 1.62.0/Chromium，该环境在导入路径中位于项目环境之后。
+由于 Playwright 下载速度过慢，可选的开发依赖项安装被中止；
+未通过新版浏览器工具的资格认证。 一次常规的
+<code>python start.py --setup-only</code> 完成了应用程序升级。源代码、已安装的
+元数据以及启动器的标记均报告为 0.5.1；<code>pip check</code> 通过验证。就绪性检查
+在全新的未使用路径上通过，并保留了预期的本地保险库密钥警告。</p>
+<p>0.5.1 版本的 wheel 包已单独安装并进行了烟雾测试：所有面板/指南资源
+均已正常提供，未经过身份验证的 API 访问被拒绝，且直接生成和流式生成的
+32 个事件证据 ZIP 文件均通过了独立验证。 已将
+安装包中的应用程序文件与源代码进行了比对。公开的源代码存档采用
+明确的文件类型白名单机制，并拒绝包含链接的源文件；运行时素材
+若放置在源代码目录内，将被回归测试排除在外。</p>
+<p>在代码修复运行期间，公开源代码选择集和 Git 候选项集包含
+86 个文件，其中不包含任何运行时数据目录。对可识别的私钥、GitHub 令牌、
+Telegram 机器人令牌和 StringSession 模式的扫描未发现匹配项。这是一项有限的
+模式检查，而非全面的机密审计。 忽略规则检测涵盖了十二种
+常见的账户/数据/导出 artifacts。工作流/问题/Compose YAML 以及 Windows
+任务脚本均已成功解析。本地文档链接均可正常访问。</p>
+<p>10月27日审查中提出的全部七项发现均已得到处理。GitHub
+工作流执行、Linux/macOS/Docker 运行时、真实 Telegram 环境、外部代理/TSA
+互操作性以及持续负载认证仍不在本次本地运行范围内。
+未进行任何代码库发布、服务注册或真实账户收集
+操作。</p>
+<h3 id="english-documentation-update">英文文档更新<a class="anchor" href="#english-documentation-update" aria-label="本节链接">#</a></h3>
+<p>README、账户/会话参考、数据采集工作流以及捆绑指南现已
+以英文形式详细说明了支持的输入格式、工作区行为、事件策略及导出格式。
+三张公开截图已使用合成数据进行了更新。
+截至此时，公开源代码库共包含 88 个文件，其中包括两份新指南。
+分布于 23 个 Markdown 文档中的全部 131 个本地链接均可正常访问。</p>
+<p>在对界面和指南进行修改后，Chromium 验收测试再次通过了全部
+45 个测试场景，未观察到任何页面 JavaScript 错误或外部请求。
+本次文档和演示文稿更新未重新运行完整的 Python 测试套件；
+上文提到的 94 个测试通过的结果属于此前代码修复运行的结果。</p>
+<p>重建的组件已安装到一个全新的隔离目标环境中。其面板和引导
+组件运行正常，未经身份验证的 API 访问被拒绝，且
+直接导出和流式导出均通过了针对 32 个合成事件的独立验证。</p>
+<h3 id="installation-and-deployment-update">安装与部署更新<a class="anchor" href="#installation-and-deployment-update" aria-label="本节链接">#</a></h3>
+<p>针对性安装程序、打包及就绪性检查通过了 <strong>14 项测试</strong>，其中
+因无法创建符号链接而跳过一项。原生封装程序检查涵盖了包含
+空格的路径、参数转发、设置/演示模式以及非零退出状态的传播。
+Git Bash 检查通过模拟守护进程对 Docker shell 辅助程序进行测试，包括
+缺少 Docker、缺少 Compose、健康状态等待失败，以及通过备用端口
+成功启动。这些模拟检查并不验证 Docker 运行时的兼容性。</p>
+<p>一份完整的公开源代码副本被安装到一个新的 Windows 目录中，该目录的
+路径中包含空格。<code>scripts\Setup.cmd</code> 创建了一个全新的环境并安装了
+已固定的运行时；<code>Start.cmd --check --json</code> 报告已就绪，但未创建其
+目标数据目录。<code>pip check</code> 通过测试。重新构建的轮子也通过了
+已安装包的检查，包括直接和流式传输的 32 项事件导出。</p>
+<p>已解析 Shell 语法及五个工作流/Compose YAML 文件。源代码和图像的 Compose
+配置在存储和运行时设置上保持一致。在此阶段，23 个 Markdown 文档中的全部 139 个本地
+链接均已解析。公开源代码选集包含 99 个文件。</p>
+<p>CI 定义现已支持在 Windows/Linux/macOS 上的全新原生配置、Compose
+在容器重建过程中的健康状态/访问控制/持久化，以及 Caddy 配置。
+发布工作流将发布操作与这些检查挂钩，并新增了模拟 ARM64
+的烟雾测试。 该主机上无法使用 Docker：实际的 Compose/Caddy 执行、
+证书签发、ARM64 执行以及远程工作流/包发布
+在本地仍无法通过验证。本次更新未更改应用程序/UI 代码；
+先前的完整 Python 和浏览器测试结果未重新运行。</p>
+<h2 id="version-050">版本 0.5.0<a class="anchor" href="#version-050" aria-label="本节链接">#</a></h2>
+<p>完整的固定运行时套件测试通过：<strong>81项通过，1项跳过</strong>，耗时22.00秒，
+并存在现有的Starlette警告。 在 Windows 系统上，
+POSIX 权限检查被跳过。新的处理程序测试通过不同
+策略发送消息、编辑、范围内的/范围外的删除、
+反应、参与者更新以及成员服务消息。 已禁用的类别不会产生相应的实时观察结果；覆盖范围
+诊断和显式快照仍可用。测试验证了策略的持久化、
+工作区隔离、审计记录的“前/后”签名、策略不变行为、
+严格验证以及在下一过程接收中的包含情况。</p>
+<p>演示条目测试可验证其功能与配置的面板令牌不同，
+无法授权实时工作区，无法更改收集设置，且不
+针对远程、转发、跨源或 Host 无效的请求进行签发或接受。
+若未明确指定 demo 标志而打开已存储的演示，则不会启用自动条目功能。</p>
+<p>Chromium 验收测试通过了 <strong>39 个场景</strong>，包括无需
+输入令牌即可进入本地演示、监控预设、从源选择到策略的过渡、
+按账户独立性，以及桌面/320/390 像素布局和文本对比度检查。
+页面未出现 JavaScript 错误。主机中由 AdGuard 注入的请求仍
+保留在接收记录中。下载 HTTP 测试用例记录了客户端
+关闭连接后出现的连接重置；断言测试仍通过。此结果并非来自实际运行的服务。</p>
+<p>常规启动器已将隔离环境升级至 0.5.0 版；源代码与已安装
+版本一致，且 pip 检查通过。现有的密钥库加密、密钥错误/缺失
+时的拒绝机制，以及签名/媒体篡改检测均在完整测试套件中通过。声明中未提及
+对消息内容或附件进行新的应用程序级加密。</p>
+<p>本地演示已重启，以便提供更新后的用户界面。现有的合成
+记录将被保留；停止旧的后台演示进程将在下次启动时创建一个离线
+边界。这些检查不会使用真实的 Telegram 会话。</p>
+<p>正在运行的 localhost:8787 控制面板显示版本号为 0.5.0，提供自动演示访问，
+包含五个监控控件和 33 条保留的合成日志事件。 单独
+安装的 0.5.0 wheel 包提供了所有面板/指南资源，拒绝未经身份验证的 API
+访问，并直接或通过流式
+下载助手生成包含 32 个事件的经过验证的 ZIP 文件。运行时包版本仍固定为 0.4 版本，与记录一致。</p>
+<h2 id="version-040">版本 0.4.0<a class="anchor" href="#version-040" aria-label="本节链接">#</a></h2>
+<p>完整的固定运行时测试套件已通过：<strong>78项通过，1项跳过</strong>，耗时19.77秒。
+被跳过的检查需要 POSIX 权限；上游 Starlette TestClient
+的弃用警告仍然存在。 新增测试涵盖流式下载/工作区路由、
+授权标头、拒绝覆盖、重定向、截断响应、
+声明/实际大小限制、有界读取、清理、不支持硬
+链接的文件系统、就绪失败以及不得安装软件包的启动器模式。
+导出测试确认了工作区本地临时文件以及选择性孤立文件清理功能。</p>
+<p>Chromium 兼容性测试通过了列出的全部 36 个场景，且页面未出现任何 JavaScript 错误。
+该工具模拟了手机/代码/双因素认证登录、会话转换、两个工作区以及独立的
+路由/状态、观察项、签名、检查点和时间戳请求，此外还包括：</p>
+<ul>
+<li>支持桌面版及 320/390 像素布局，无水平溢出，导航栏清晰可见，
+    且首次登录表单位于初始 844 像素视口内。</li>
+<li>文本与纯色背景的对比度符合 WCAG AA 级文本阈值要求。已禁用控件、
+    不透明度以及图像/渐变背景；此处并非完整的 WCAG 审核。</li>
+<li>通过模拟的 OS 文件选择器/可写设备生成的真实本地导出响应，
+    随后进行独立的 ZIP 文件验证；取消操作不会发送导出请求。</li>
+<li>写入失败将中止目标操作；128 MiB 备用机制会拒绝超大尺寸的
+    已声明响应，且不会为此分配相应的数据负载。</li>
+<li>关于桌面版及两种窄屏版本的英文本地化指南。</li>
+</ul>
+<p>操作系统保存对话框以及实际的多吉字节级浏览器写入操作均未实现自动化，也未
+经过充分验证。Python 下载测试采用有限大小的数据块和环回测试环境。基于真实 Telegram 应用的
+完整部署验收测试仍需另行进行。</p>
+<p>常规安装程序已将 <code>.venv</code> 升级至 0.4.0 版。源代码与已安装的元数据一致；
+<code>pip check</code> 通过测试。<code>python start.py --check --json</code> 在一个全新的
+合成路径上报告已就绪，且未创建数据目录。其本地密钥存储警告
+仍正确显示：日志/媒体文件未由应用程序加密。</p>
+<p>已构建 0.4.0 版本的 wheel 包并将其安装到单独的目录中。 全部 23 个应用程序
+文件与源文件字节级完全一致。已安装的软件包提供了控制面板和
+英文指南/资源，拒绝了未经身份验证的 API 访问，并导出了一个包含
+32 个事件的合成 ZIP 文件，该文件通过了验证。其流式下载命令还从正在运行的已安装应用程序中获取了
+一个经过独立验证的 ZIP 文件。</p>
+<p>公开文档和本地指南均为英文；本地文档链接
+可正常访问。PowerShell 已解析 Windows 任务模板，Python 已解析 macOS
+plist 文件。这些仅为语法检查，并非服务执行。未注册任何任务/服务。
+CI 配置现已包含就绪性检查，但远程 CI 尚未在此处运行。</p>
+<p>在 0.4 版本的浏览器运行中，再次观察到 AdGuard 注入以及 Windows asyncio
+套接字清理时的 OSError 10022 错误。浏览器断言测试通过；这些环境
+观察结果被保留，而非被视为已修复的应用程序行为。
+最初的 OpenSSL/浏览器/pip 沙箱测试尝试失败；成功的
+合格运行是在沙箱外使用经批准的执行方式完成的。</p>
+<h2 id="version-031-focused-readiness-fixes">0.3.1 版本主要针对就绪性问题进行了修复<a class="anchor" href="#version-031-focused-readiness-fixes" aria-label="本节链接">#</a></h2>
+<p>受影响的启动器、证据/存储及 API 检查结果：<strong>31 项通过，
+1 项跳过，</strong>1 项上游 Starlette 警告。被跳过的检查用于验证 POSIX
+目录权限，但在该 Windows 主机上无法建立这些权限。
+旧版 Python 测试模拟了版本/导入边界；未安装或未通过验证的 Python 3.10 解释器。
+此前通过测试的 0.3 测试套件记录如下；
+针对这些重点变更，未重新运行完整的测试套件和浏览器场景。</p>
+<p>常规启动器已将本地环境升级至 0.3.1 版；源代码与已安装的
+元数据一致，且 pip 检查通过。 一个单独安装的 0.3.1 版本 wheel 文件提供了
+面板/资源支持，拒绝了未经身份验证的 API 访问，并生成了一份经过验证的
+包含 32 个事件的合成导出文件。工作流 YAML 文件已解析，但新的容器运行时
+检查未执行：未找到可用的本地 Docker/Podman/Linux 运行时。</p>
+<p>请参阅<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/READINESS.md">就绪性评估结果</a>，了解剩余的可用性、实时服务和
+平台方面的不足。此补丁不支持其他操作系统。</p>
+<h2 id="version-030">版本 0.3.0<a class="anchor" href="#version-030" aria-label="本节链接">#</a></h2>
+<p>完整的固定运行时套件测试通过：<strong>61项测试</strong>通过，仅有一个上游 Starlette
+TestClient 的弃用警告。运行时元数据报告显示 TgWitness 0.3.0 和
+python-socks 2.8.2；pip 检查通过。浏览器验收测试通过，未出现
+页面 JavaScript 错误。</p>
+<p>0.3.0 版本的 wheel 包已构建并安装到单独的软件包目录中。它
+提供了控制面板和资源，拒绝了未经身份验证的 API 请求，并导出了
+一个包含 32 个事件的合成日志，该日志通过了独立验证。 本地文档
+中的链接均可正常访问。在对 MTProxy 裸密钥规范化进行修正后，全部九项
+连接/安全测试均已成功重跑。</p>
+<p>新增内容包括：</p>
+<ul>
+<li>通过实际的回环测试服务器验证 SOCKS5 用户名/密码及 HTTP CONNECT 连接；
+    已配置但失效的代理将直接报错，而非回退至目标服务器。</li>
+<li>代理验证、MTProxy传输方式选择、拒绝伪造的TLS ee密钥、
+    数据持久化、工作区隔离、观察期间拒绝修改，以及将密钥
+    从API状态和签名事件中排除。</li>
+<li>对合成 Telethon SQLite 模式 7 和 8 进行只读转换；源文件哈希值保持不变；
+    拒绝其他格式、SQL 视图以及一个未处理的 WAL 文件。</li>
+<li>外部保险库主密钥：生成不同的工作区密钥，支持成功重新打开，
+    密钥错误或缺失时拒绝操作，且不会隐式迁移现有的本地保险库。</li>
+<li>浏览器代理设置、凭据清除、存储保护披露、
+    移动端连接页面、转换会话文件授权、独立路由，
+    以及此前通过假Telegram客户端涵盖的所有采集/导出场景。</li>
+</ul>
+<p>在开发过程中，一次环回测试曾无限期等待对端关闭连接；另一次
+测试则观察到，在握手完成后，Windows 连接被重置。该测试用例现将
+整个通信过程限定在固定范围内，并将握手完成后出现的 EOF/重置视为连接
+关闭。 握手/身份验证断言仍然是必需的。这并不意味着
+真实的代理提供商不符合要求，也不暗示 Telegram 传输存在固定缺陷。</p>
+<p>下文所述的 AdGuard 请求观察结果仍然适用。未使用真实的 Telegram
+账户、SOCKS/HTTP 代理之外的连接，或正在运行的 MTProxy 服务器。MTProxy 处于
+实验阶段，其选定的选项和密钥验证已通过检查，但未
+进行实际环境下的互操作性测试。 新的外部密钥和会话转换命令仅
+使用合成密钥进行了测试。Linux/macOS/Docker 平台在此仍未通过验证。</p>
+<p>下文中的 0.2 版本吞吐量测试结果未被重复验证，因此不得将其
+作为 0.3 版本的多账户/代理测试的新基准。</p>
+<h2 id="version-020-baseline">0.2.0 版本基线<a class="anchor" href="#version-020-baseline" aria-label="本节链接">#</a></h2>
+<p>已在 Windows 系统上使用 Python 3.12.10 进行测试。未连接任何真实的 Telegram 账户。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>检查</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Python 工具集</td>
+<td>开发环境中通过 52 项测试，使用固定运行时通过 52 项测试；每次运行中均出现一项来自上游的 Starlette TestClient 弃用警告</td>
+</tr>
+<tr>
+<td>JavaScript 语法</td>
+<td>通过 Node.js 开发</td>
+</tr>
+<tr>
+<td>Chromium 兼容性</td>
+<td>通过；页面无 JavaScript 错误</td>
+</tr>
+<tr>
+<td>桌面/移动端布局</td>
+<td>已在 1440 × 1060 和 390 × 844 分辨率下验证；文档内容未出现水平溢出</td>
+</tr>
+<tr>
+<td>HTML格式的消息内容</td>
+<td>已转换为文本；注入的脚本未执行</td>
+</tr>
+<tr>
+<td>模拟账户流程</td>
+<td>API 凭据 → 手机 → 代码 → 双因素认证 → 选择群组 → 开始 → 快照 → 暂停 → 重新加载</td>
+</tr>
+<tr>
+<td>浏览器中的证据</td>
+<td>编辑对比、删除前的内容、过滤器、ZIP 下载、检查点、签名处理收据、RFC 3161 请求下载及检查点绑定</td>
+</tr>
+<tr>
+<td>多账户</td>
+<td>日志、密钥、数据源和运行状态相互独立；切换浏览器时其他采集器仍会继续运行；重启后工作区可自动恢复；拒绝重复账户和账户重新分配</td>
+</tr>
+<tr>
+<td>加密故障</td>
+<td>已更改的签名字段、新增的未签名字段、错误的密钥、损坏的归档成员、已更改/缺失的媒体文件、检查点检测到的截断被拒绝</td>
+</tr>
+<tr>
+<td>存储</td>
+<td>并发追加操作将通过验证；更新/删除操作将触发拒绝；启动时若日志未追加且内容已更改，系统将拒绝该日志并释放其锁定</td>
+</tr>
+<tr>
+<td>媒体持久性</td>
+<td>原子级消息/任务写入；重启恢复；保留原始版本描述符；拒绝队列替换和现有文件损坏；FloodWait 功能得以保留；源端故障已隔离</td>
+</tr>
+<tr>
+<td>流式传输</td>
+<td>在导出稳定前缀的同时，新记录会追加到日志中；保留的检查点可检测日志是否被截断；导出操作不会将整个事件流完全呈现出来</td>
+</tr>
+<tr>
+<td>RFC 3161</td>
+<td>OpenSSL 3.5.9 可读取生成的请求；接受本地生成的合成 CA/TSA 响应；拒绝篡改的数据、随机数及错误的 CA；环境中的 CA 不会覆盖显式信任设置</td>
+</tr>
+<tr>
+<td>本地部署</td>
+<td>start.py --setup-only 将隔离的 .venv 升级至 0.2.0；源代码与已安装的元数据一致；pip 检查通过</td>
+</tr>
+<tr>
+<td>Wheel</td>
+<td>0.2.0 版本已构建并单独安装在 test-results 目录下；提供了面板/资源，拒绝了未经身份验证的 API 请求，导出并验证了一个包含 32 个事件的合成存档</td>
+</tr>
+</tbody>
+</table></div>
+<p>源代码测试使用了 FastAPI 0.159.1、Uvicorn 0.54.0、Telethon 1.45.0、
+cryptography 50.0.2、pytest 9.1.1 以及 Playwright 1.62.0。
+锁定的运行时环境使用 FastAPI 0.162.0、Starlette 1.10.0、
+Uvicorn 0.54.0、Telethon 1.45.0 以及 cryptography 50.0.2。
+constraints.txt 记录了运行时版本的锁定信息。这并非包哈希锁定，也
+不能作为在每个已配置的 CI 平台上均兼容的证据。远程 CI 尚未运行。</p>
+<h2 id="synthetic-local-capacity-measurement">合成本地能力测量<a class="anchor" href="#synthetic-local-capacity-measurement" aria-label="本节链接">#</a></h2>
+<p>命令：<code>python tools/check_capacity.py --events 10000 --chats 100</code></p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>指标</th>
+<th>已观察到</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入</td>
+<td>来自 100 个精选合成来源的 10,000 条合成消息事件</td>
+</tr>
+<tr>
+<td>消息正文</td>
+<td>400个字符；不含媒体或网络内容</td>
+</tr>
+<tr>
+<td>数据采集</td>
+<td>53.273 秒；187.7 次事件/秒</td>
+</tr>
+<tr>
+<td>处理程序延迟</td>
+<td>p50 4.162 毫秒；p95 7.784 毫秒；最大值 129.118 毫秒</td>
+</tr>
+<tr>
+<td>ZIP 导出</td>
+<td>启用 tracemalloc 后耗时 19.868 秒</td>
+</tr>
+<tr>
+<td>Python 导出分配的峰值追踪</td>
+<td>0.51 MiB；不处理 RSS</td>
+</tr>
+<tr>
+<td>ZIP 文件大小</td>
+<td>4,610,962 字节</td>
+</tr>
+<tr>
+<td>独立验证</td>
+<td>所有 10,000 条事件均已通过验证</td>
+</tr>
+</tbody>
+</table></div>
+<p>此工具测量的是该 Windows 主机上的本地序列化记录/导出路径。它
+不测量 MTProto 传输、并发账户、Telegram 流量限制、媒体文件、
+长期运行的工作负载，也不保证实际聊天数量。该测量结果早于
+最终版离线时间戳工具的发布，而该工具不会改变所测量的消息路径。</p>
+<h2 id="environmental-observations">环境观察<a class="anchor" href="#environmental-observations" aria-label="本节链接">#</a></h2>
+<p>Windows 沙箱限制导致默认的 pytest/pip 临时目录
+以及 Playwright 子进程被阻止。pytest 在项目内部使用了一个新的临时目录；
+安装和浏览器进程需要在沙箱外
+获得批准后才能执行。</p>
+<p>该设备上的 AdGuard 将对 local.adguard.org 的请求注入到了浏览器中。
+浏览器日志中保留了这些请求。本次测试结果并不能证明在未修改的浏览器环境中
+完全没有外发请求；该应用的源代码本身
+不包含任何外部资源/CDN/分析请求。AdGuard 的设置未被更改。</p>
+<p>最后一次浏览器运行还记录了一个 Windows asyncio 套接字清理相关的 OSError 10022 错误。
+所有浏览器断言均通过，且页面未发生任何 JavaScript 错误。其原因
+尚未查明，且本次运行并不能证明不存在主机传输问题。</p>
+<p>首个使用 urllib 的 connection-close 请求的已安装包 HTTP 探测
+在沙箱内外以及两种
+依赖项组合下均遭遇了连接重置。最后一次探测使用 http.client 建立标准的 HTTP/1.1 持久连接
+并通过了测试。 浏览器请求也通过了测试。重置现象的
+确切根源尚未查明；这些现象未被认定为应用程序的已知缺陷。</p>
+<h2 id="remaining-qualification">剩余资格要求<a class="anchor" href="#remaining-qualification" aria-label="本节链接">#</a></h2>
+<p>该保留的实时日志记录了实际的收集、编辑、删除通知、附件、
+复核以及速率限制处理。 它并不记录详尽的送达情况，也不记录受控的
+角色可见性矩阵、响应方、长时间的 FloodWait、账号封禁以及
+网络/进程中断恢复情况。QR 令牌的发放与已完成的
+移动端 QR 确认仍属不同流程。</p>
+<p>Docker 构建/运行、Linux/macOS 安装、持续高负载、独立安全
+审查、真正的独立 TSA 响应、证书撤销/归档验证以及
+取证认证仍不在记录的资质范围内。已实现 MTProto 状态
+保存和补录功能；原子级持久化重放功能尚未建立。 管理日志
+收集、额外反应堆列表以及优先级短轮询仍为独立功能。
+有关受控资格认证矩阵，请参阅<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">实时验收</a>报告。</p>
+<p>本地详细记录和截图位于 test-results/ 目录下（Git 已忽略）。
+docs/assets/ 目录中的公开截图仅包含虚构的演示数据。</p>
+<h2 id="public-website-and-publication-preparation--27-october-2026">公共网站及出版物筹备 · 2026年10月27日<a class="anchor" href="#public-website-and-publication-preparation--27-october-2026" aria-label="本节链接">#</a></h2>
+<p>在完成上述面板
+检查后，新增了独立的 <code>website/</code> 演示文稿和 Pages 构建版本。未更改任何实时账户配置或数据采集逻辑。</p>
+<ul>
+<li>现有应用程序套件通过测试：138 项通过，1 项仅限 POSIX 的跳过项，以及 1 项
+    上游 Starlette/httpx 的弃用警告。新增的 11 项站点构建测试均独立通过，
+    包括对意外输出的拒绝和对关联输入的拒绝。</li>
+<li>两段应用程序浏览器脚本均通过了基于 project-venv 的 Playwright 及 Chromium
+    无头 shell 156 的测试。未记录任何页面 JavaScript 错误或外部请求。
+    所有账户场景均使用了虚假传输协议和虚构数据。</li>
+<li><code>tools/check_site.py</code> 在 320、390、768、1024 和 1440 像素宽度下均通过测试，测试条件包括：
+    项目 URL 子路径、键盘 Tab 键、剪贴板访问成功/被拒、减少动画效果，
+    以及禁用 JavaScript。未发生任何资源请求失败或外部请求失败的情况。</li>
+<li><code>tools/build_site.py</code> 生成了 10 个白名单中的公开文件，总大小约为 460 KB。
+    浏览器截图和一张收据位于被忽略的 <code>test-results/site/</code> 中。</li>
+<li>在项目环境中安装了仅用于构建的 setuptools/wheel
+    工具后，成功构建了 wheel 文件。将其安装到隔离的目标环境中并
+    运行 <code>tools/check_install.py</code> 后，通过了以下测试：静态资源、访问控制、一个带签名的
+    32 个事件的合成导出，以及经过独立验证的流式下载。</li>
+<li><code>pip check</code> 通过验证。对 Git 筛选出的公开候选项进行模式扫描后，未发现
+    可识别的私钥块、GitHub/bot/AWS 令牌、长字符串密钥
+    赋值，或合并冲突标记。这并不证明所有可能的
+    密钥格式均不存在。 运行时数据/会话/密钥探针已被 Git 忽略。</li>
+<li>GitHub CLI 身份验证无效；未配置远程仓库，且不存在初始
+    提交。未执行推送、托管工作流、Pages 部署或发布操作。
+    Docker 以及 Telegram/平台的实时验证仍不在本次检查范围内。</li>
+</ul>
+<p>在此主机上，Playwright 在 E: 工作区文件系统上的下载锁定操作失败。
+在 <code>%LOCALAPPDATA%/tgwitness-playwright</code> 下安装 Chromium，并使用相同的
+<code>PLAYWRIGHT_BROWSERS_PATH</code> 进行验证时，操作成功。这是一种环境变通方案，
+并非对应用程序运行时依赖项的更改。</p>
+<h2 id="interactive-documentation-and-website-metadata--29-october-2026">交互式文档和网站元数据 · 2026年10月29日<a class="anchor" href="#interactive-documentation-and-website-metadata--29-october-2026" aria-label="本节链接">#</a></h2>
+<p>该公共网站包含 12 个英文 HTML 页面：一个主页、一个指南索引以及十篇
+指南。该成果包含 28 个明确列出的演示文件，
+总大小约为 1.85 MB，且不包含采集器数据。公共网站采用英文；
+应用程序的翻译版本及已翻译的代码库指南为独立内容。</p>
+<ul>
+<li>网站、源发布及发布边界测试：<strong>18 项通过，2 项跳过</strong>。
+    跳过的测试涉及在此 Windows 文件系统上创建符号链接。测试内容包括：
+    页面元数据的唯一性、仅限英语的公共页面、规范 URL、所有网站地图
+    条目、本地资源/锚点、结构化导航以及私有文件的排除。</li>
+<li><code>tools/check_site.py</code> 和 <code>tools/check_docs_site.py</code> 均在 Chromium 浏览器中通过了测试，
+    分辨率分别为 320、390、768、1024 和 1440 像素，测试环境为项目 URL 的子路径。 该指南的测试范围
+    涵盖全部 11 个文档页面、搜索和键盘导航、剪贴板
+    操作（成功/失败）以及在不使用 JavaScript 时内容的可读性。</li>
+<li>通过了五个交互式示例：消息回放/步进/暂停/重置（支持
+    减速播放和屏幕外暂停）；原始/修改/重建/截断的
+    哈希链；Witness 的接受/回滚/分叉/无响应决策；以及
+    完整/延迟/未送达的交付场景；还有一张调查地图，通过
+    基于发件人 ID、目的地和附件
+    哈希值的虚构跨聊天观察记录。调查控制功能通过了键盘导航和无 JavaScript
+    情况下的回退测试。 浏览器的 SHA-256 结果已
+    与 Python 的 <code>hashlib</code> 及规范 JSON 进行了独立比对。该哈希
+    示例在 Web Crypto 不可用时，仍保留了其可读的备用方案。</li>
+<li>展示比例和图表标记与可访问性表格保持一致。经视觉审查后，
+    移动轴标签已放大。每个示例均标注为
+    “示意”或“合成”，且浏览器示例均未与 Telegram 建立连接。</li>
+<li>未记录任何外部请求、失败的 HTTP 请求或 JavaScript 错误。
+    桌面/移动端截图和收据分别归类于被忽略的 <code>test-results/site/</code>
+    和 <code>test-results/docs-site/</code>。文档索引、消息/哈希示例、
+    Witness 布局、送达图表和调查地图已在
+    桌面/移动端尺寸下进行了检查。</li>
+<li>发布扫描已通过 282 个公开源文件和 1,426 个本地
+    文档链接的验证。Ruff 已通过针对修改后的 Python 站点工具和测试的验证。</li>
+<li><code>docs/HOW-IT-WORKS.md</code> 提供了一个支持 Mermaid
+    图表和公式的 GitHub Markdown 配套工具。<code>docs/INVESTIGATION.md</code> 涵盖了整个账户范围、
+    单个聊天记录的采集、用户资料、跨聊天引用、时间线
+    以及经验证的案件移交流程。 其操作步骤和限制已根据
+    当前的范围、采集、档案、导出、验证器及面板代码进行了核查。托管于
+    GitHub 的渲染效果未进行核查。</li>
+</ul>
+<p>这是一项本地网站/文档检查。它不会增加实时 Telegram
+验证，也不会建立托管 Pages 的部署、远程 CI 的成功或搜索引擎
+索引。请参阅<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md">发布流程</a>和
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/SEO.md">网站元数据说明</a>。</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/VERIFICATION.md">在 GitHub 上编辑此页面 ↗</a><a class="next-guide" href="../changelog/"><span>下一步</span><strong>更新日志 →</strong></a><p>这些指南描述了当前的实现方案。验证结果和剩余缺陷在其他文档中单独记录。 <a href="./">已测试的内容 →</a></p></footer>
+</main>
+<aside class="toc" aria-label="本页面内容"><p class="nav-label">本页面内容</p><a href="#live-telegram-test-whole-account--29-october-2026">Telegram 实时测试，完整账户 · 2026年10月29日</a><a href="#password-protected-export-opened-with-libarchive--29-october-2026">通过 libarchive 打开受密码保护的导出文件 · 2026年10月29日</a><a href="#live-telegram-test--27-to-29-october-2026">Telegram 实时测试 · 2026年10月27日至29日</a><a href="#built-in-public-mtproxy-lists--29-october-2026">内置的公共 MTProxy 列表 · 2026年10月29日</a><a href="#optional-extras-presentation--29-october-2026">可选附加功能演示 · 2026年10月29日</a><a href="#witness-bot-and-proxy-setup-audit--29-october-2026">Witness 机器人和代理设置审核 · 2026年10月29日</a><a href="#presentation-and-documentation-review--29-october-2026">演示与文档评审 · 2026年10月29日</a><a href="#version-061">版本 0.6.1</a><a href="#version-060">版本 0.6.0</a><a href="#version-051">版本 0.5.1</a><a href="#version-050">版本 0.5.0</a><a href="#version-040">版本 0.4.0</a><a href="#version-031-focused-readiness-fixes">0.3.1 版本主要针对就绪性问题进行了修复</a><a href="#version-030">版本 0.3.0</a><a href="#version-020-baseline">0.2.0 版本基线</a><a href="#synthetic-local-capacity-measurement">合成本地能力测量</a><a href="#environmental-observations">环境观察</a><a href="#remaining-qualification">剩余资格要求</a><a href="#public-website-and-publication-preparation--27-october-2026">公共网站及出版物筹备 · 2026年10月27日</a><a href="#interactive-documentation-and-website-metadata--29-october-2026">交互式文档和网站元数据 · 2026年10月29日</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>开源 · 可在您的设备上运行</span><a href="../../../../LICENSE">MIT 许可协议</a><a href="../notice/">操作员通知</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">安全</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "等待消息", "Step through a fictional send, edit and delete.": "通过一个虚构的发送、编辑和删除过程进行演示。", "No observations yet. Start the sequence or advance one event.": "尚无观察记录。开始序列或跳转至下一事件。", "Meet at 10:00": "10:00 见面", "A new message is visible in the chat.": "聊天中显示了一条新消息。", "Record 1 appended: the collector observed the original message.": "已附录记录 1 条：采集器已捕获原始消息。", "Meet at 11:00": "11:00 见面", "The current text changes. The earlier observation stays.": "当前文本内容有所变更。先前的观察结果仍然有效。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "记录 2 已追加：该编辑内容为新观察结果。记录 1 仍保留原始文本。", "Message deleted": "消息已删除", "The message has disappeared from the chat view.": "该消息已从聊天界面中消失。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "已添加记录 3：删除通知与两个被观察到的版本一同保留。", "0 records": "0 条记录", "1 record": "1 条记录", "2 records": "2 条记录", "3 records": "3 条记录", "Complete / {n} of 3": "已完成 / {n}/3", "Step / {n} of 3": "第 {n} 步（共 3 步）", "Pause": "暂停", "Replay sequence": "回放序列", "Play sequence": "播放序列", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "静态示例已上线。如需交互式计算哈希值，请通过 HTTPS 访问此页面，或在支持 Web Crypto 的本地预览环境中打开。", "No record supplied": "未提供记录", "Tail removed": "尾部内容已删除", "≠ saved hash": "≠ 已保存的哈希值", "Rebuilt · different hash": "重建 · 哈希值不同", "= saved hash": "= 已保存的哈希值", "Same length and matching head.": "篇幅相同且标题一致。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "这三个计算出的哈希值均与保存的哈希值一致。该样本符合保留的三个记录边界。", "Same saved head; the journal prefix fails verification.": "保存的头部信息相同；日志前缀验证失败。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "记录 2 与其保存的哈希值不再匹配。若仅检查最终存储的头部，则会遗漏此问题；验证器会检查每一条记录。", "Head differs from the retained checkpoint.": "标题与保留的检查点不同。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "重建的哈希值相互关联，但最终的头部已发生变化。保留的检查点拒绝接受这一历史记录。对于已更改的记录，原始签名也会验证失败。", "Too short: 2 supplied records \u003c 3 retained records.": "内容过短：提供的记录有 2 条，而保留的记录少于 3 条。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "剩下的两个哈希值仍然匹配。保留的检查点揭示了缺失的部分。如果没有那个早先的边界，仅凭这个较短的前缀是无法揭示这一遗漏的。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "此浏览器不支持哈希计算。下方的公式和静态说明仍可查看。", "{n} records": "{n}条记录", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "已接受：计数持续增加，签名已验证，密钥匹配。该见证者保留了这一新边界。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "回滚：签名后的结果报告的记录数量少于上次被接受的检查点。Witness 会记录该问题，并保留较早被接受的边界。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "分叉：计数保持不变，但分支头不同。见证者会记录该分歧，并保留先前被接受的分界点。", "No answer": "无回答", "boundary unknown": "边界未知", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "无响应：该工具会记录验证失败的情况。它无法确定收集器的当前状态。如果该工具仍能访问 Bot API 且其发布政策允许，则会发布该失败信息。", "Send {n}": "发送 {n}", "Edit {n}": "编辑 {n}", "Delete {n}": "删除 {n}", "Both accounts captured all six expected observations in this example.": "在这项示例中，这两个账户均捕获了预期的全部六项观察结果。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "账户 B 依然成功捕获了 6 条中的 6 条。其中两条收据的捕获耗时较长。捕获率和收据延迟反映的是不同的问题。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "账户 B 在截止时间前捕获了 6 条中的 5 条（83.3%）。缺失的编辑操作未测得延迟。此结果仅描述了这六项受控操作。", "not observed by cutoff": "未在截止时间前观察到", "{s} seconds": "{s}秒", "Exact values follow in the table.": "具体数值见下表。", "{s} s": "{s} s", "Not observed": "未发现", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "四个聊天群组提供了不同的观察结果。请追溯每条连接的源记录；在未确认发件人身份的情况下，请勿将该频道帖子归因于用户 71001。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "记录 #146 和 #205 显示相同的发件人 ID：71001。这将同一 Telegram 账号在两个聊天群组中发布的帖子关联起来。但这并不能识别现实世界中的具体个人，也无法确定该频道帖子的发布者。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "目标地址 pay.example.invalid/new 出现在群组记录 #146、机器人键盘 #173、频道编辑 #188 以及私信 #205 中。目标地址的重复出现表明这些内容之间存在关联；但这并不能证明这些账户受共同控制。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "在此虚构案例中，已完成的媒体收据 #151 和 #209 具有完全相同的 SHA-256 值。请对比实际字节内容及其关联的消息记录。该匹配文件既未标识其创建者，也无法证明是谁转发了该文件。", "the encrypted off-site copy": "加密的异地副本", "notifications": "通知", "checkpoint hashes for timestamps": "时间戳的检查点哈希值", "signed checkpoints for the witness": "TgWitness 的签名检查点", "Switched on in this example": "在此示例中已启用", "Optional · off by default": "可选 · 默认关闭", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "离开这台机器时：Telegram 连接和 {list}。除此之外别无他物。", "Default: only the Telegram connection leaves this machine.": "默认设置：仅 Telegram 连接会离开这台机器。", "{done} of {total} done": "已完成 {done}/{total}", "Mark step {n} as done": "将步骤 {n} 标记为已完成", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "文案", "Copied": "已复制", "Command copied.": "已复制该指令。", "Selected — Ctrl/Cmd+C": "选中 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "已选中命令。请手动复制。", "Command copied to clipboard.": "命令已复制到剪贴板。", "Select text": "选择文本", "Clipboard unavailable. Command selected; copy it manually.": "剪贴板不可用。已选中命令；请手动复制。", "A message arrives. The first observation is saved.": "一条消息送达。首次记录被保存。", "The time changes. Both captured versions stay.": "时间会改变，但两个记录版本都会保留下来。", "The message disappears. The captured history remains.": "消息虽已消失，但记录的历史依然存在。", "Pause example animation": "暂停示例动画", "Play example animation": "播放示例动画", "Play": "播放", "Full-size workspace screenshot": "全屏工作区截图", "Workspace screenshot · fictional data": "工作区截图 · 虚构数据", "Close": "关闭", "Close screenshot": "关闭截图", "Scrollable full-size screenshot": "可滚动全屏截图", "Enlarge: {name}": "放大：{name}", "View full size": "查看大图"}</script>
+</body></html>

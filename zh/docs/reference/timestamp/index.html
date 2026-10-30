@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh-Hans" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>时间戳 | TgWitness</title>
+<meta name="description" content="签名检查点采用 RFC 3161 时间戳：向认证机构发送的内容以及如何验证响应。"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/timestamp/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="时间戳 | TgWitness"><meta property="og:description" content="签名检查点采用 RFC 3161 时间戳：向认证机构发送的内容以及如何验证响应。">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/zh/docs/reference/timestamp/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/timestamp/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/timestamp/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/timestamp/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/timestamp/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/timestamp/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/timestamp/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/timestamp/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/timestamp/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/timestamp/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/timestamp/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/timestamp/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/timestamp/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/timestamp/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/timestamp/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/timestamp/", "url": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/timestamp/", "name": "时间戳 | TgWitness", "description": "签名检查点采用 RFC 3161 时间戳：向认证机构发送的内容以及如何验证响应。", "inLanguage": "zh-Hans", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://phishdestroy.github.io/TgWitness/zh/"}, {"@type": "ListItem", "position": 2, "name": "文档", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/"}, {"@type": "ListItem", "position": 3, "name": "参考", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "时间戳", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/timestamp/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">跳转至内容</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / 文档</span></a>
+<nav aria-label="指南"><a href="../../concepts/">图文指南</a><a href="../../">所有指南</a><a href="../">参考</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="语言"><span aria-hidden="true">◍</span> 简体中文</summary><div class="lang-list"><a href="../../../../docs/reference/timestamp/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/timestamp/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/timestamp/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/timestamp/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/timestamp/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/timestamp/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/timestamp/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/timestamp/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/timestamp/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/timestamp/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/timestamp/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/timestamp/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="./" hreflang="zh-Hans" lang="zh-Hans" aria-current="true">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="在浅色和深色主题之间切换"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="指南"><a href="../../../guides/modes.html">模式、场景和证据级别</a><p class="nav-label">入门指南</p><a href="../../start/">几分钟内即可开始使用</a><a href="../../accounts/">连接账户</a><a href="../../proxies/">选择代理</a><a href="../../exports/">导出与验证</a><p class="nav-label">了解证据</p><a href="../../concepts/">了解证据如何运作</a><a href="../../cases/">跨所有聊天记录进行调查</a><a href="../../security/">确保安全</a><p class="nav-label">了解更多</p><a href="../../witness/">设置 Witness 机器人</a><a href="../../server/">保持其运行</a><a href="../../troubleshooting/">查找问题所在</a></nav><nav class="wiki-nav" aria-label="参考"><p class="nav-label"><a class="nav-label-link" href="../">参考</a></p><details class="wiki-group"><summary>设置</summary><a href="../quickstart/">快速入门</a><a href="../accounts/">账户与会话格式</a><a href="../connection/">连接、代理和数据保护</a><a href="../deployment/">部署</a></details><details class="wiki-group"><summary>收集</summary><a href="../collection/">数据采集原理</a><a href="../operations/">工作流程与操作</a><a href="../investigation/">调查模式</a><a href="../features/">功能与限制</a></details><details class="wiki-group" open><summary>证据</summary><a href="../how-it-works/">证据的运作原理</a><a href="../evidence/">证据格式</a><a href="../witness/">独立见证者</a><a href="./" aria-current="page">时间戳</a></details><details class="wiki-group"><summary>安全与项目</summary><a href="../security/">安全与数据处理</a><a href="../architecture/">架构</a><a href="../verification/">已测试的内容</a><a href="../license/">许可协议与架构不兼容声明</a><a href="../notice/">运营商兼容性通知</a><a href="../changelog/">更新日志</a></details></nav><p class="sidebar-note">v0.7.0<br>开源 · 可在您的设备上运行</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="指南"><a href="../../../">首页</a> <span aria-hidden="true">/</span> <a href="../../">文档</a> <span aria-hidden="true">/</span> <a href="../">参考</a> <span aria-hidden="true">/</span> <span aria-current="page">时间戳</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">参考 / 证据</p><h1>时间戳</h1><p class="guide-outcome">签名检查点采用 RFC 3161 时间戳：向认证机构发送的内容以及如何验证响应。</p><div class="wiki-body"><p>TgWitness 会生成 RFC 3161 请求并验证时间戳授权机构（TSA）的响应。
+此手动流程既不选择 TSA，也不提交数据；而证据模式会根据
+预定时间表（<a href="../evidence/#rfc-3161-preparation-and-response-verification-02">证据格式</a>）自动完成这两项操作。生成的请求本身
+<strong>尚不</strong>构成
+<strong>时间戳证明</strong>。</p>
+<h2 id="what-the-proof-binds">证据的约束力<a class="anchor" href="#what-the-proof-binds" aria-label="本节链接">#</a></h2>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 691 272" width="691" height="272" role="img" aria-labelledby="flow-8-title flow-8-desc"><title id="flow-8-title">流程图</title><desc id="flow-8-desc">账户观察 → SHA-256 链和 Ed25519 签名; SHA-256 链和 Ed25519 签名 → 签名检查点; 签名检查点 → 精确字节哈希和随机非ce; 精确字节哈希和随机非ce → RFC 3161 请求; RFC 3161 请求 → 独立 TSA; 独立 TSA → 经 TSA 签名的回复; 签名检查点 → 验证数据、非ce值及明确的CA信任关系; 经 TSA 签名的回复 → 验证数据、非ce值及明确的CA信任关系</desc><defs><marker id="flow-8-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M171.9 37.0C217.3 37.0 217.3 37.0 262.7 37.0" marker-end="url(#flow-8-arrow)" style="--i:0;--len:91" pathLength="91"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M171.9 37.0C217.3 37.0 217.3 37.0 262.7 37.0"/></circle><path class="flow-edge" d="M428.7 37.0C474.1 37.0 474.1 37.0 519.5 37.0" marker-end="url(#flow-8-arrow)" style="--i:1;--len:91" pathLength="91"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M428.7 37.0C474.1 37.0 474.1 37.0 519.5 37.0"/></circle><path class="flow-edge" d="M571.5 57.0C571.5 86.5 571.5 86.5 571.5 116.0" marker-end="url(#flow-8-arrow)" style="--i:2;--len:59" pathLength="59"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M571.5 57.0C571.5 86.5 571.5 86.5 571.5 116.0"/></circle><path class="flow-edge" d="M481.6 136.0C443.1 136.0 443.1 136.0 404.6 136.0" marker-end="url(#flow-8-arrow)" style="--i:3;--len:77" pathLength="77"/><circle class="flow-pulse" r="3.2" style="--i:3"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M481.6 136.0C443.1 136.0 443.1 136.0 404.6 136.0"/></circle><path class="flow-edge" d="M286.9 136.0C229.4 136.0 229.4 136.0 171.9 136.0" marker-end="url(#flow-8-arrow)" style="--i:4;--len:115" pathLength="115"/><circle class="flow-pulse" r="3.2" style="--i:4"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M286.9 136.0C229.4 136.0 229.4 136.0 171.9 136.0"/></circle><path class="flow-edge" d="M119.9 156.0C119.9 185.5 119.9 185.5 119.9 215.0" marker-end="url(#flow-8-arrow)" style="--i:5;--len:59" pathLength="59"/><circle class="flow-pulse" r="3.2" style="--i:5"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M119.9 156.0C119.9 185.5 119.9 185.5 119.9 215.0"/></circle><path class="flow-edge" d="M623.5 37.0L662.4 37.0Q672.4 37.0 672.4 47.0L672.4 225.0Q672.4 235.0 662.4 235.0L435.6 235.0" marker-end="url(#flow-8-arrow)" style="--i:2;--len:484" pathLength="484"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="5.4s" repeatCount="indefinite" path="M623.5 37.0L662.4 37.0Q672.4 37.0 672.4 47.0L672.4 225.0Q672.4 235.0 662.4 235.0L435.6 235.0"/></circle><path class="flow-edge" d="M192.6 235.0C224.2 235.0 224.2 235.0 255.8 235.0" marker-end="url(#flow-8-arrow)" style="--i:6;--len:63" pathLength="63"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M192.6 235.0C224.2 235.0 224.2 235.0 255.8 235.0"/></circle><g class="flow-node" style="--i:0"><rect x="67.9" y="17.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="37.0">账户观察</tspan></text></g><g class="flow-node" style="--i:1"><rect x="262.7" y="8.0" width="166.0" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="28.0">SHA-256 链和 Ed25519</tspan><tspan x="345.7" y="46.0">签名</tspan></text></g><g class="flow-node" style="--i:2"><rect x="519.5" y="17.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="37.0">签名检查点</tspan></text></g><g class="flow-node" style="--i:3"><rect x="481.6" y="116.0" width="179.8" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="136.0">精确字节哈希和随机非ce</tspan></text></g><g class="flow-node" style="--i:4"><rect x="286.9" y="116.0" width="117.7" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="136.0">RFC 3161 请求</tspan></text></g><g class="flow-node" style="--i:5"><rect x="67.9" y="116.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="136.0">独立 TSA</tspan></text></g><g class="flow-node" style="--i:6"><rect x="47.2" y="215.0" width="145.3" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="235.0">经 TSA 签名的回复</tspan></text></g><g class="flow-node" style="--i:7"><rect x="255.8" y="206.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="226.0">验证数据、非ce值及明确</tspan><tspan x="345.7" y="244.0">的CA信任关系</tspan></text></g></svg></div><details class="flow-steps"><summary>图表转为文本</summary><ol><li>账户观察 → SHA-256 链和 Ed25519 签名</li><li>SHA-256 链和 Ed25519 签名 → 签名检查点</li><li>签名检查点 → 精确字节哈希和随机非ce</li><li>精确字节哈希和随机非ce → RFC 3161 请求</li><li>RFC 3161 请求 → 独立 TSA</li><li>独立 TSA → 经 TSA 签名的回复</li><li>签名检查点 → 验证数据、非ce值及明确的CA信任关系</li><li>经 TSA 签名的回复 → 验证数据、非ce值及明确的CA信任关系</li></ol></details></figure>
+<p>采集器的签名将记录与其密钥绑定。一份可信的 TSA 响应可
+证明某个检查点在 TSA 声明的时间点确实存在。该
+检查点随后可将日志前缀与之绑定。但这并不能确定
+每次 Telegram 操作的时间，也无法证明捕获内容的真实性。</p>
+<h2 id="procedure">操作流程<a class="anchor" href="#procedure" aria-label="本节链接">#</a></h2>
+<ol>
+<li>通过独立的可信通道保留采集器的密钥指纹。仅凭
+    被检查的 ZIP 文件提供的密钥不足以识别采集器。</li>
+<li>在<strong>“导出”→“准备时间戳请求</strong>”中，下载所选工作区的
+    请求 ZIP 文件。解压 <code>checkpoint.json</code>、<code>timestamp.tsq</code>、<code>SHA256SUMS</code> 和
+    <code>README.txt</code>。请勿更改检查点字节。</li>
+<li>选择适合该调查的 TSA。使用其
+    文档中记载的方法提交 <code>timestamp.tsq</code>，若为 HTTP 服务则使用 <code>application/timestamp-query</code>。
+    将原始二进制响应保存为 <code>timestamp.tsr</code>，并记录端点、检索时间
+    及请求结果。该请求包含哈希值和随机数而非消息内容；
+    网络元数据仍会暴露该请求。</li>
+<li>请独立于响应内容获取受信任的根证书，以及任何
+    所需的中间证书。响应中包含的证书并不仅因
+    被包含其中而自动成为受信任证书。</li>
+<li>通过可信的 TgWitness 安装实例，验证：</li>
+</ol>
+<pre><code class="language-sh">python -m tgwitness.anchor verify --checkpoint checkpoint.json --request timestamp.tsq --response timestamp.tsr --ca trusted-tsa-root.pem</code></pre>
+<p>如有需要，请添加 <code>--intermediates tsa-intermediates.pem</code> 或 <code>--openssl /path/to/openssl</code>。
+OpenSSL 必须支持 <code>ts</code>。在 Windows 系统上，验证器还会搜索标准的 Git
+安装目录。OpenSSL 3.5.9 已使用合成 CA/TSA 进行了本地测试。</p>
+<ol start="6">
+<li>在检查点之后导出带签名的日志 ZIP 文件，以便其中包含该前缀。
+    使用已知的独立指纹进行验证：</li>
+</ol>
+<pre><code class="language-sh">python tgwitness/verify.py evidence.zip --fingerprint TRUSTED_SHA256 --checkpoint checkpoint.json</code></pre>
+<ol start="7">
+<li>将 ZIP 文件、检查点、请求、响应、证书链、验证
+    结果以及交接记录保存在收集器之外。在接收时重复验证。</li>
+</ol>
+<p>从已保存的检查点准备请求：</p>
+<pre><code class="language-sh">python -m tgwitness.anchor prepare checkpoint.json --out timestamp-request.zip</code></pre>
+<p>该准备过程会规范化 JSON 格式，并将匹配的检查点包含在归档文件中。
+即使输入文件的空格格式不同，也请使用<strong>该归档文件中的检查点字节</strong>进行 TSA 验证。</p>
+<h2 id="verification-boundaries">验证范围<a class="anchor" href="#verification-boundaries" aria-label="本节链接">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>检查</th>
+<th>当前行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据</td>
+<td>检查点字节的精确 SHA-256 值必须与响应结果一致</td>
+</tr>
+<tr>
+<td>请求</td>
+<td>借助<code>--request</code>，可对原始查询和随机数进行验证</td>
+</tr>
+<tr>
+<td>TSA 签名</td>
+<td>OpenSSL 会验证该签名及其与指定证书颁发机构（CA）的证书链。</td>
+</tr>
+<tr>
+<td>采集器签名</td>
+<td>由日志验证器使用固定密钥进行独立验证</td>
+</tr>
+<tr>
+<td>撤销</td>
+<td>不支持自动检索 OCSP/CRL</td>
+</tr>
+<tr>
+<td>长期有效性</td>
+<td>证书过期后不进行归档验证</td>
+</tr>
+<tr>
+<td>计划提交</td>
+<td>证据模式，默认关闭</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>--request</code> 从技术上讲是可选的，但省略它将导致无法验证
+原始随机数。对于此完整流程，结果中的 <code>request_checked</code> 必须为真。
+证书验证遵循已安装 OpenSSL 的规则及验证时间。
+长期保存需要单独的证书/撤销证据政策。</p>
+<p>有效的加密签名并不自动等同于合格的时间戳，也不构成
+法律上的可采纳性认定。如果操作员在
+加盖时间戳之前伪造了记录，TSA 仅对这些字节进行锚定；并不能证明其真实性。</p>
+<h2 id="handoff-record">交接记录<a class="anchor" href="#handoff-record" aria-label="本节链接">#</a></h2>
+<p>记录案件标识符、发送方和接收方、UTC传输时间及其来源、
+目的、文件名/SHA-256值、收集器指纹、序列范围、已知
+缺失部分、验证器版本及验证结果。 通过贵组织的流程对该
+记录进行签名并独立保存。TgWitness中
+未实现多用户保管记录系统。</p>
+<p>开发过程中未联系任何独立的实时 TSA。本地测试会生成一个
+合成 CA/TSA，用于检查兼容性，并验证对已修改数据、随机数或 CA 的拒绝情况。</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/TIMESTAMP.md">在 GitHub 上编辑此页面 ↗</a><a class="next-guide" href="../security/"><span>下一步</span><strong>安全与数据处理 →</strong></a><p>这些指南描述了当前的实现方案。验证结果和剩余缺陷在其他文档中单独记录。 <a href="../verification/">已测试的内容 →</a></p></footer>
+</main>
+<aside class="toc" aria-label="本页面内容"><p class="nav-label">本页面内容</p><a href="#what-the-proof-binds">证据的约束力</a><a href="#procedure">操作流程</a><a href="#verification-boundaries">验证范围</a><a href="#handoff-record">交接记录</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>开源 · 可在您的设备上运行</span><a href="../../../../LICENSE">MIT 许可协议</a><a href="../notice/">操作员通知</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">安全</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "等待消息", "Step through a fictional send, edit and delete.": "通过一个虚构的发送、编辑和删除过程进行演示。", "No observations yet. Start the sequence or advance one event.": "尚无观察记录。开始序列或跳转至下一事件。", "Meet at 10:00": "10:00 见面", "A new message is visible in the chat.": "聊天中显示了一条新消息。", "Record 1 appended: the collector observed the original message.": "已附录记录 1 条：采集器已捕获原始消息。", "Meet at 11:00": "11:00 见面", "The current text changes. The earlier observation stays.": "当前文本内容有所变更。先前的观察结果仍然有效。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "记录 2 已追加：该编辑内容为新观察结果。记录 1 仍保留原始文本。", "Message deleted": "消息已删除", "The message has disappeared from the chat view.": "该消息已从聊天界面中消失。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "已添加记录 3：删除通知与两个被观察到的版本一同保留。", "0 records": "0 条记录", "1 record": "1 条记录", "2 records": "2 条记录", "3 records": "3 条记录", "Complete / {n} of 3": "已完成 / {n}/3", "Step / {n} of 3": "第 {n} 步（共 3 步）", "Pause": "暂停", "Replay sequence": "回放序列", "Play sequence": "播放序列", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "静态示例已上线。如需交互式计算哈希值，请通过 HTTPS 访问此页面，或在支持 Web Crypto 的本地预览环境中打开。", "No record supplied": "未提供记录", "Tail removed": "尾部内容已删除", "≠ saved hash": "≠ 已保存的哈希值", "Rebuilt · different hash": "重建 · 哈希值不同", "= saved hash": "= 已保存的哈希值", "Same length and matching head.": "篇幅相同且标题一致。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "这三个计算出的哈希值均与保存的哈希值一致。该样本符合保留的三个记录边界。", "Same saved head; the journal prefix fails verification.": "保存的头部信息相同；日志前缀验证失败。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "记录 2 与其保存的哈希值不再匹配。若仅检查最终存储的头部，则会遗漏此问题；验证器会检查每一条记录。", "Head differs from the retained checkpoint.": "标题与保留的检查点不同。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "重建的哈希值相互关联，但最终的头部已发生变化。保留的检查点拒绝接受这一历史记录。对于已更改的记录，原始签名也会验证失败。", "Too short: 2 supplied records \u003c 3 retained records.": "内容过短：提供的记录有 2 条，而保留的记录少于 3 条。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "剩下的两个哈希值仍然匹配。保留的检查点揭示了缺失的部分。如果没有那个早先的边界，仅凭这个较短的前缀是无法揭示这一遗漏的。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "此浏览器不支持哈希计算。下方的公式和静态说明仍可查看。", "{n} records": "{n}条记录", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "已接受：计数持续增加，签名已验证，密钥匹配。该见证者保留了这一新边界。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "回滚：签名后的结果报告的记录数量少于上次被接受的检查点。Witness 会记录该问题，并保留较早被接受的边界。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "分叉：计数保持不变，但分支头不同。见证者会记录该分歧，并保留先前被接受的分界点。", "No answer": "无回答", "boundary unknown": "边界未知", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "无响应：该工具会记录验证失败的情况。它无法确定收集器的当前状态。如果该工具仍能访问 Bot API 且其发布政策允许，则会发布该失败信息。", "Send {n}": "发送 {n}", "Edit {n}": "编辑 {n}", "Delete {n}": "删除 {n}", "Both accounts captured all six expected observations in this example.": "在这项示例中，这两个账户均捕获了预期的全部六项观察结果。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "账户 B 依然成功捕获了 6 条中的 6 条。其中两条收据的捕获耗时较长。捕获率和收据延迟反映的是不同的问题。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "账户 B 在截止时间前捕获了 6 条中的 5 条（83.3%）。缺失的编辑操作未测得延迟。此结果仅描述了这六项受控操作。", "not observed by cutoff": "未在截止时间前观察到", "{s} seconds": "{s}秒", "Exact values follow in the table.": "具体数值见下表。", "{s} s": "{s} s", "Not observed": "未发现", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "四个聊天群组提供了不同的观察结果。请追溯每条连接的源记录；在未确认发件人身份的情况下，请勿将该频道帖子归因于用户 71001。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "记录 #146 和 #205 显示相同的发件人 ID：71001。这将同一 Telegram 账号在两个聊天群组中发布的帖子关联起来。但这并不能识别现实世界中的具体个人，也无法确定该频道帖子的发布者。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "目标地址 pay.example.invalid/new 出现在群组记录 #146、机器人键盘 #173、频道编辑 #188 以及私信 #205 中。目标地址的重复出现表明这些内容之间存在关联；但这并不能证明这些账户受共同控制。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "在此虚构案例中，已完成的媒体收据 #151 和 #209 具有完全相同的 SHA-256 值。请对比实际字节内容及其关联的消息记录。该匹配文件既未标识其创建者，也无法证明是谁转发了该文件。", "the encrypted off-site copy": "加密的异地副本", "notifications": "通知", "checkpoint hashes for timestamps": "时间戳的检查点哈希值", "signed checkpoints for the witness": "TgWitness 的签名检查点", "Switched on in this example": "在此示例中已启用", "Optional · off by default": "可选 · 默认关闭", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "离开这台机器时：Telegram 连接和 {list}。除此之外别无他物。", "Default: only the Telegram connection leaves this machine.": "默认设置：仅 Telegram 连接会离开这台机器。", "{done} of {total} done": "已完成 {done}/{total}", "Mark step {n} as done": "将步骤 {n} 标记为已完成", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "文案", "Copied": "已复制", "Command copied.": "已复制该指令。", "Selected — Ctrl/Cmd+C": "选中 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "已选中命令。请手动复制。", "Command copied to clipboard.": "命令已复制到剪贴板。", "Select text": "选择文本", "Clipboard unavailable. Command selected; copy it manually.": "剪贴板不可用。已选中命令；请手动复制。", "A message arrives. The first observation is saved.": "一条消息送达。首次记录被保存。", "The time changes. Both captured versions stay.": "时间会改变，但两个记录版本都会保留下来。", "The message disappears. The captured history remains.": "消息虽已消失，但记录的历史依然存在。", "Pause example animation": "暂停示例动画", "Play example animation": "播放示例动画", "Play": "播放", "Full-size workspace screenshot": "全屏工作区截图", "Workspace screenshot · fictional data": "工作区截图 · 虚构数据", "Close": "关闭", "Close screenshot": "关闭截图", "Scrollable full-size screenshot": "可滚动全屏截图", "Enlarge: {name}": "放大：{name}", "View full size": "查看大图"}</script>
+</body></html>

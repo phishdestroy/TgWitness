@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Independent witness | TgWitness</title>
+<meta name="description" content="Run a witness with its own key and bot, publish signed checkpoints to a channel and check exports against it."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/docs/reference/witness/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Independent witness | TgWitness"><meta property="og:description" content="Run a witness with its own key and bot, publish signed checkpoints to a channel and check exports against it.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/docs/reference/witness/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/witness/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/witness/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/witness/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/witness/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/witness/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/witness/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/witness/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/witness/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/witness/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/witness/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/witness/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/witness/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/docs/reference/witness/", "url": "https://phishdestroy.github.io/TgWitness/docs/reference/witness/", "name": "Independent witness | TgWitness", "description": "Run a witness with its own key and bot, publish signed checkpoints to a channel and check exports against it.", "inLanguage": "en", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://phishdestroy.github.io/TgWitness/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://phishdestroy.github.io/TgWitness/docs/"}, {"@type": "ListItem", "position": 3, "name": "Reference", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Independent witness", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/witness/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../docs.css">
+<link rel="stylesheet" href="../../../learn.css">
+<script src="../../../docs.js" defer></script>
+<script src="../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Documentation</span></a>
+<nav aria-label="Guides"><a href="../../concepts/">Visual guide</a><a href="../../">All guides</a><a href="../">Reference</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Language"><span aria-hidden="true">◍</span> English</summary><div class="lang-list"><a href="./" hreflang="en" lang="en" aria-current="true">English</a><a href="../../../ru/docs/reference/witness/" hreflang="ru" lang="ru">Русский</a><a href="../../../uk/docs/reference/witness/" hreflang="uk" lang="uk">Українська</a><a href="../../../es/docs/reference/witness/" hreflang="es" lang="es">Español</a><a href="../../../pt/docs/reference/witness/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../tr/docs/reference/witness/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../ar/docs/reference/witness/" hreflang="ar" lang="ar">العربية</a><a href="../../../fa/docs/reference/witness/" hreflang="fa" lang="fa">فارسی</a><a href="../../../ur/docs/reference/witness/" hreflang="ur" lang="ur">اردو</a><a href="../../../hi/docs/reference/witness/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../id/docs/reference/witness/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../vi/docs/reference/witness/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../zh/docs/reference/witness/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Switch between light and dark theme"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Guides"><a href="../../../guides/modes.html">Modes, scenarios and evidence levels</a><p class="nav-label">First steps</p><a href="../../start/">Start in minutes</a><a href="../../accounts/">Connect an account</a><a href="../../proxies/">Choose a proxy</a><a href="../../exports/">Export and verify</a><p class="nav-label">Understand the evidence</p><a href="../../concepts/">See how evidence works</a><a href="../../cases/">Investigate across all chats</a><a href="../../security/">Keep it secure</a><p class="nav-label">Go further</p><a href="../../witness/">Set up a witness bot</a><a href="../../server/">Keep it running</a><a href="../../troubleshooting/">Find what went wrong</a></nav><nav class="wiki-nav" aria-label="Reference"><p class="nav-label"><a class="nav-label-link" href="../">Reference</a></p><details class="wiki-group"><summary>Set up</summary><a href="../quickstart/">Quick start</a><a href="../accounts/">Accounts and session formats</a><a href="../connection/">Connection, proxies and data protection</a><a href="../deployment/">Deployment</a></details><details class="wiki-group"><summary>Collect</summary><a href="../collection/">How collection works</a><a href="../operations/">Workflows and operations</a><a href="../investigation/">Investigation mode</a><a href="../features/">Features and limits</a></details><details class="wiki-group" open><summary>Evidence</summary><a href="../how-it-works/">How the evidence works</a><a href="../evidence/">Evidence format</a><a href="./" aria-current="page">Independent witness</a><a href="../timestamp/">Timestamps</a></details><details class="wiki-group"><summary>Security & project</summary><a href="../security/">Security and data handling</a><a href="../architecture/">Architecture</a><a href="../verification/">What has been tested</a><a href="../license/">Licence and architectural incompatibility notice</a><a href="../notice/">Operator incompatibility notice</a><a href="../changelog/">Changelog</a></details></nav><p class="sidebar-note">v0.7.0<br>Open source · Runs on your machine</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Guides"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Documentation</a> <span aria-hidden="true">/</span> <a href="../">Reference</a> <span aria-hidden="true">/</span> <span aria-current="page">Independent witness</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Search the documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Try proxy, hash chain, token or witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Clear search" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Type a word to search the guides and the reference. Search stays in your browser.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Reference / Evidence</p><h1>Independent witness</h1><p class="guide-outcome">Run a witness with its own key and bot, publish signed checkpoints to a channel and check exports against it.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/WITNESS.md">Настройка бота и прокси на русском</a>.</p>
+<p>A collector signs its own journal, so whoever controls the collector and its key could in
+principle rewrite or truncate the journal and sign it again. A witness makes that
+detectable. It is a separate process — another container, or better a server someone else
+runs — that every few minutes fetches the collector's signed journal head, signs what it
+saw with its own key, keeps it in its own journal and posts it to a Telegram channel.</p>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 491 343" width="491" height="343" role="img" aria-labelledby="flow-7-title flow-7-desc"><title id="flow-7-title">Flow diagram</title><desc id="flow-7-desc">Collector → Witness (signed checkpoint: record count + head hash); Witness → Witness journal, own key; Witness → Telegram channel (signed post via its own bot); Evidence ZIP → verify.py; Witness journal, own key → verify.py; Telegram channel → verify.py (Telegram Desktop export or t.me/s page)</desc><defs><marker id="flow-7-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M194.8 46.0C194.8 77.0 194.8 77.0 194.8 108.0" marker-end="url(#flow-7-arrow)" style="--i:0;--len:62" pathLength="62"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M194.8 46.0C194.8 77.0 194.8 77.0 194.8 108.0"/></circle><path class="flow-edge" d="M194.8 148.0C194.8 171.5 102.8 171.5 102.8 195.0" marker-end="url(#flow-7-arrow)" style="--i:1;--len:108" pathLength="108"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M194.8 148.0C194.8 171.5 102.8 171.5 102.8 195.0"/></circle><path class="flow-edge" d="M194.8 148.0C194.8 171.5 286.8 171.5 286.8 195.0" marker-end="url(#flow-7-arrow)" style="--i:1;--len:108" pathLength="108"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M194.8 148.0C194.8 171.5 286.8 171.5 286.8 195.0"/></circle><path class="flow-edge" d="M429.4 235.0C429.4 266.0 273.0 266.0 273.0 297.0" marker-end="url(#flow-7-arrow)" style="--i:2;--len:175" pathLength="175"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.9s" repeatCount="indefinite" path="M429.4 235.0C429.4 266.0 273.0 266.0 273.0 297.0"/></circle><path class="flow-edge" d="M102.8 235.0C102.8 266.0 273.0 266.0 273.0 297.0" marker-end="url(#flow-7-arrow)" style="--i:2;--len:188" pathLength="188"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="2.1s" repeatCount="indefinite" path="M102.8 235.0C102.8 266.0 273.0 266.0 273.0 297.0"/></circle><path class="flow-edge" d="M286.8 235.0C286.8 266.0 273.0 266.0 273.0 297.0" marker-end="url(#flow-7-arrow)" style="--i:2;--len:64" pathLength="64"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M286.8 235.0C286.8 266.0 273.0 266.0 273.0 297.0"/></circle><g class="flow-node" style="--i:0"><rect x="142.8" y="6.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="194.8" y="26.0">Collector</tspan></text></g><g class="flow-node" style="--i:1"><rect x="142.8" y="108.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="194.8" y="128.0">Witness</tspan></text></g><g class="flow-node" style="--i:2"><rect x="6.0" y="195.0" width="193.6" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="102.8" y="215.0">Witness journal, own key</tspan></text></g><g class="flow-node" style="--i:2"><rect x="217.6" y="195.0" width="138.4" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="286.8" y="215.0">Telegram channel</tspan></text></g><g class="flow-node" style="--i:2"><rect x="374.0" y="195.0" width="110.8" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="429.4" y="215.0">Evidence ZIP</tspan></text></g><g class="flow-node" style="--i:3"><rect x="221.0" y="297.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="273.0" y="317.0">verify.py</tspan></text></g><g class="flow-label" style="--i:0"><rect x="108.1" y="58.0" width="173.5" height="38.0" rx="6"/><text x="194.8" y="69.5" text-anchor="middle" dominant-baseline="central">signed checkpoint: record</text><text x="194.8" y="84.5" text-anchor="middle" dominant-baseline="central">count + head hash</text></g><g class="flow-label" style="--i:1"><rect x="171.5" y="166.6" width="186.1" height="23.0" rx="6"/><text x="264.6" y="178.1" text-anchor="middle" dominant-baseline="central">signed post via its own bot</text></g><g class="flow-label" style="--i:2"><rect x="193.6" y="238.3" width="179.8" height="38.0" rx="6"/><text x="283.5" y="249.8" text-anchor="middle" dominant-baseline="central">Telegram Desktop export or</text><text x="283.5" y="264.8" text-anchor="middle" dominant-baseline="central">t.me/s page</text></g></svg></div><details class="flow-steps"><summary>Diagram as text</summary><ol><li>Collector → Witness (signed checkpoint: record count + head hash)</li><li>Witness → Witness journal, own key</li><li>Witness → Telegram channel (signed post via its own bot)</li><li>Evidence ZIP → verify.py</li><li>Witness journal, own key → verify.py</li><li>Telegram channel → verify.py (Telegram Desktop export or t.me/s page)</li></ol></details></figure>
+<h2 id="what-the-witness-gets-and-what-it-does-not">What the witness gets, and what it does not<a class="anchor" href="#what-the-witness-gets-and-what-it-does-not" aria-label="Link to this section">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>The witness has</th>
+<th>The witness never has</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A read-only <strong>witness token</strong> for one workspace</td>
+<td>The collector's Telegram session or API credentials</td>
+</tr>
+<tr>
+<td>Its own Ed25519 key and journal</td>
+<td>The collector's vault, signing key or panel token</td>
+</tr>
+<tr>
+<td>Its own Telegram bot token</td>
+<td>Message content: the head is a record count and a hash</td>
+</tr>
+</tbody>
+</table></div>
+<p>The token is created on the panel's <strong>Witness</strong> page, shown once and stored only as a
+SHA-256. It opens exactly one endpoint, <code>GET /api/witness/head</code>, which returns a freshly
+signed checkpoint plus signed content-free collection counters and operational health.
+It cannot open the panel, read message content or change settings, and the
+panel token is not accepted there. Revoke a token on the same page. The collector records
+when a new witness key starts checking (<code>witness.seen</code>) and shows the last check per token;
+a witness that has not checked within 2.5 intervals is marked overdue.</p>
+<p>New witnesses send a random challenge on
+each poll; the capture statement echoes it under the collector signature. Counters are
+bound to the exact checkpoint and are included in signed witness posts. Legacy heads
+remain accepted by the standalone witness. Journal growth alone is never counted as a new message.</p>
+<h2 id="what-it-checks-and-records">What it checks and records<a class="anchor" href="#what-it-checks-and-records" aria-label="Link to this section">#</a></h2>
+<p>Every interval (10 minutes by default) the witness:</p>
+<ol>
+<li>fetches the head itself (the collector cannot push or skip it);</li>
+<li>verifies the collector's signature, the pinned collector key (<code>--collector-fingerprint</code>,
+    or the first key seen), a nondecreasing count and an unchanged head at an unchanged count;</li>
+<li>appends a signed record to its own journal: <code>witness.anchor</code> with status <code>ok</code>,
+    <code>key_changed</code>, <code>rollback</code> (fewer records than before), <code>fork</code> (same length, different
+    head) or <code>invalid</code> (the answer failed verification), or <code>witness.no_response</code> when the
+    collector did not answer;</li>
+<li>posts the result to the channel, signed, including "no answer" while the witness is
+    running and can reach the Bot API. The post ID is recorded (<code>witness.posted</code>),
+    a failed post too (<code>witness.post_failed</code>).</li>
+</ol>
+<p>A post looks like this; the last line carries the signed statement:</p>
+<pre><code class="language-text">TgWitness witness #42 · journal head
+Collector 3fa9c2d1e0b4a7f6: 18234 records
+Head 9b1f…c07e
+2026-10-28T19:40:00.123+00:00
+TGW1.eyJhdCI6…&lt;statement&gt;.&lt;signature&gt;</code></pre>
+<h2 id="run-a-witness">Run a witness<a class="anchor" href="#run-a-witness" aria-label="Link to this section">#</a></h2>
+<p>You need a Telegram bot (create one with @BotFather), a channel where that bot is an
+administrator, and the collector's address reachable from the witness — over HTTPS outside
+a private network (see the HTTPS profile in <a href="../deployment/">deployment</a>).</p>
+<p>Open <strong>Extras → A bot in your channel → Set up a bot</strong> in the panel. Three steps cover
+read-only access, your channel and interval, then launching the witness. Publication
+policy, optional HTTP/SOCKS5 proxy and custom Bot API address are under <strong>Advanced settings</strong>. The form
+downloads <code>witness.json</code> with this workspace's collector key pinned. Download the newly
+created read-only token with <strong>Save access file</strong> as <code>witness-token.txt</code>; place it and a <code>bot-token.txt</code>
+created on the witness host beside that JSON. The collector never receives the bot token.
+Downloading does not start a service or publish a message. No hosted project witness is
+implicitly enrolled.</p>
+<pre><code class="language-sh">python -m tgwitness.witness run --config witness.json --check-config
+python -m tgwitness.witness run --config witness.json
+python -m tgwitness.witness fingerprint --config witness.json</code></pre>
+<p>The first command checks configuration and secret files without network requests or key
+creation. Paths in JSON are relative to that file; CLI/environment paths are relative to
+the working directory. Retain the witness fingerprint outside its host. The collector's
+last-poll indicator confirms a request only; publication is reported by Proof or checked
+in the witness journal and channel.</p>
+<p>If the panel stays behind an SSH tunnel, expose only the scoped witness endpoint on a
+separate HTTPS hostname with <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/Caddyfile.witness.example">this Caddy example</a>.
+The default workspace then uses <code>https://witness.example.org</code>, other workspaces use
+<code>https://witness.example.org/profiles/ID</code>. Tokens are still required; the panel and its
+other API routes are not forwarded by that virtual host.</p>
+<p>Choose <code>all</code> for regularly published checkpoints. A five-minute interval means about 288
+posts per workspace per day. <code>changes</code>/<code>problems</code> deliberately leave some checks unpublished.
+MTProxy is for the collector's Telegram client. Witness HTTP polling and Telegram's HTTPS
+Bot API use their own direct/HTTP/SOCKS5 route (<a href="https://core.telegram.org/bots/api">Bot API</a>).</p>
+<p><strong>Next to the collector, with Docker</strong> (same host — independent process and key, but the
+same operator): put the values in <code>.env</code> and start the profile.</p>
+<pre><code class="language-sh">TGWITNESS_WITNESS_TOKEN=tgww_...
+TGWITNESS_WITNESS_BOT_TOKEN=123456:ABC...
+TGWITNESS_WITNESS_CHANNEL=@your_witness_channel
+# another workspace: TGWITNESS_WITNESS_COLLECTOR=http://tgwitness:8787/profiles/&lt;workspace ID&gt;
+
+docker compose --profile witness up -d
+docker compose logs witness     # prints the witness key fingerprint</code></pre>
+<p>With a published image use <code>docker compose --project-directory . -f deploy/compose/compose.image.yaml --profile witness up -d</code>.</p>
+<p><strong>On someone else's server</strong> (a real independent witness): copy the repository there, set
+<code>TGWITNESS_WITNESS_COLLECTOR=https://your-collector.example.org</code> plus the three values above
+in <code>.env</code>, then</p>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.witness.yaml up -d</code></pre>
+<p>or without Docker:</p>
+<pre><code class="language-sh">python -m tgwitness.witness run --collector https://your-collector.example.org \
+    --token-file witness-token.txt --bot-token-file bot-token.txt --channel @your_witness_channel</code></pre>
+<h3 id="options">Options<a class="anchor" href="#options" aria-label="Link to this section">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Environment</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--interval</code></td>
+<td><code>TGWITNESS_WITNESS_INTERVAL</code></td>
+<td>10</td>
+<td>Minutes between checks, 1–1440</td>
+</tr>
+<tr>
+<td><code>--timeout</code></td>
+<td><code>_TIMEOUT</code></td>
+<td>30</td>
+<td>Seconds to wait for the collector and the Bot API, 5–600</td>
+</tr>
+<tr>
+<td><code>--post</code></td>
+<td><code>_POST</code></td>
+<td><code>all</code></td>
+<td><code>all</code>: every check; <code>changes</code>: a new head or a problem; <code>problems</code>: only problems and missing answers</td>
+</tr>
+<tr>
+<td><code>--title</code></td>
+<td><code>_TITLE</code></td>
+<td><code>TgWitness witness</code></td>
+<td>First words of every channel post</td>
+</tr>
+<tr>
+<td><code>--collector-fingerprint</code></td>
+<td><code>_COLLECTOR_FINGERPRINT</code></td>
+<td>–</td>
+<td>Pin the collector key instead of trusting the first answer</td>
+</tr>
+<tr>
+<td><code>--proxy</code></td>
+<td><code>_PROXY</code></td>
+<td>direct</td>
+<td><code>socks5://host:port</code> or <code>http://host:port</code></td>
+</tr>
+<tr>
+<td><code>--bot-api</code></td>
+<td><code>_BOT_API</code></td>
+<td><code>https://api.telegram.org</code></td>
+<td>Bot API address, e.g. a local Bot API server</td>
+</tr>
+<tr>
+<td><code>--data-dir</code></td>
+<td><code>_DATA</code></td>
+<td><code>witness-data</code></td>
+<td>Witness key and journal</td>
+</tr>
+<tr>
+<td><code>--config</code></td>
+<td><code>_CONFIG</code></td>
+<td>–</td>
+<td>JSON file with any of the options above</td>
+</tr>
+</tbody>
+</table></div>
+<p>The collector address, tokens and channel come from <code>--collector</code>, <code>--token</code> or
+<code>--token-file</code>, <code>--bot-token</code> or <code>--bot-token-file</code> and <code>--channel</code>, or <code>_COLLECTOR</code>, <code>_TOKEN</code>,
+<code>_TOKEN_FILE</code>, <code>_BOT_TOKEN</code>, <code>_BOT_TOKEN_FILE</code> and <code>_CHANNEL</code>, which keeps secrets out of the
+process list.</p>
+<p>A config file uses the option names with underscores, plus <code>texts</code>, which replaces the words
+of the channel posts:</p>
+<pre><code class="language-json">{&quot;collector&quot;: &quot;https://your-collector.example.org&quot;, &quot;token_file&quot;: &quot;witness-token.txt&quot;,
+ &quot;bot_token_file&quot;: &quot;bot-token.txt&quot;, &quot;channel&quot;: &quot;@your_witness_channel&quot;,
+ &quot;interval&quot;: 5, &quot;timeout&quot;: 30, &quot;post&quot;: &quot;changes&quot;, &quot;title&quot;: &quot;Partner witness&quot;,
+ &quot;texts&quot;: {&quot;ok&quot;: &quot;journal head&quot;, &quot;no_response&quot;: &quot;no answer from the collector&quot;, &quot;records&quot;: &quot;records&quot;}}</code></pre>
+<p><code>texts</code> keys: <code>ok</code>, <code>key_changed</code>, <code>rollback</code>, <code>fork</code>, <code>invalid</code>, <code>no_response</code>, <code>collector</code>,
+<code>records</code>, <code>head</code>. The command line wins over the environment, the environment over the file.
+Unknown options or text keys stop the witness with a message instead of being ignored.
+Wording never affects verification: verify.py checks the signed token at the end of every
+post. With <code>--post changes</code> or <code>problems</code>, checks that were not posted are still in the
+witness journal and <code>verify.py</code> lists them as never posted; the start record names the
+policy. Every check still appears in the journal, so fewer posts mean fewer independent
+Telegram times, not fewer checks.</p>
+<p>Without a channel the witness still keeps its journal. Keep the witness key fingerprint
+(<code>python -m tgwitness.witness fingerprint</code>) somewhere else.</p>
+<h2 id="verify">Verify<a class="anchor" href="#verify" aria-label="Link to this section">#</a></h2>
+<p>On the witness side, export its journal:</p>
+<pre><code class="language-sh">python -m tgwitness.witness export --out witness.zip
+# Docker (add -f deploy/compose/compose.witness.yaml on a witness server):
+docker compose exec witness python -m tgwitness.witness export --out /witness/witness.zip
+docker compose cp witness:/witness/witness.zip .</code></pre>
+<p>Then, anywhere, with the collector's signed ZIP and the channel exported from Telegram
+Desktop (<em>Export chat history</em> → JSON gives <code>result.json</code>) or its public <code>https://t.me/s/…</code>
+page:</p>
+<pre><code class="language-sh">python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
+    --witness witness.zip --witness-fingerprint WITNESS_SHA256 --channel result.json</code></pre>
+<p><code>verify.py</code> checks the witness journal (chain and signatures), then that <strong>every head the
+witness saw is part of the exported journal</strong>: the record at that count must have exactly
+that hash. A head that does not match fails verification — the journal was changed after
+the witness saw it. It also reports heads seen after the export, anomalies the witness
+recorded, answers that failed, periods the witness saw without interruption ("Witnessed
+from X to Y") and gaps. Only answers signed by the export's own key count: an export signed
+by a key the witness never saw is reported as not witnessed, and without <code>--fingerprint</code> its
+signer stays unpinned. With <code>--channel</code> every signed post must match the witness journal
+record by record: changed posts fail verification, missing posts are listed. Dates of
+channel posts come from Telegram, an independent clock.</p>
+<p>A witness shows what the collector reported at those times and that later exports agree
+with it. It does not show that the collector recorded everything Telegram delivered, or
+that message content is true. A witness run by the same operator on the same machine is
+weaker than one run by someone else.</p>
+<p>An increased count alone cannot establish append-only continuity online: the offline
+comparison must match each retained prefix hash against the full collector export.
+Witness downtime and failed publication leave intervals without external anchors. Missing
+posts can be reported against a retained witness journal; neither a channel nor a server
+controlled by the same operator is an immutable third-party archive.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/WITNESS.md">Edit this page on GitHub ↗</a><a class="next-guide" href="../timestamp/"><span>Next step</span><strong>Timestamps →</strong></a><p>These guides describe the current implementation. Validation results and remaining gaps are documented separately. <a href="../verification/">What has been tested →</a></p></footer>
+</main>
+<aside class="toc" aria-label="On this page"><p class="nav-label">On this page</p><a href="#what-the-witness-gets-and-what-it-does-not">What the witness gets, and what it does not</a><a href="#what-it-checks-and-records">What it checks and records</a><a href="#run-a-witness">Run a witness</a><a href="#verify">Verify</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Open source · Runs on your machine</span><a href="../../../LICENSE">MIT license</a><a href="../notice/">Operator notice</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Security</a></footer>
+<script id="site-dict" type="application/json">{}</script>
+</body></html>

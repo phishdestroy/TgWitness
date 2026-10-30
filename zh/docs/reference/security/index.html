@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-Hans" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>安全与数据处理 | TgWitness</title>
+<meta name="description" content="威胁模型、访问模型、静态机密、网络暴露、会话导入以及如何报告漏洞。"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/security/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="安全与数据处理 | TgWitness"><meta property="og:description" content="威胁模型、访问模型、静态机密、网络暴露、会话导入以及如何报告漏洞。">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/zh/docs/reference/security/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/security/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/security/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/security/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/security/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/security/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/security/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/security/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/security/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/security/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/security/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/security/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/security/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/security/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/security/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/security/", "url": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/security/", "name": "安全与数据处理 | TgWitness", "description": "威胁模型、访问模型、静态机密、网络暴露、会话导入以及如何报告漏洞。", "inLanguage": "zh-Hans", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://phishdestroy.github.io/TgWitness/zh/"}, {"@type": "ListItem", "position": 2, "name": "文档", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/"}, {"@type": "ListItem", "position": 3, "name": "参考", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "安全与数据处理", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/security/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">跳转至内容</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / 文档</span></a>
+<nav aria-label="指南"><a href="../../concepts/">图文指南</a><a href="../../">所有指南</a><a href="../">参考</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="语言"><span aria-hidden="true">◍</span> 简体中文</summary><div class="lang-list"><a href="../../../../docs/reference/security/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/security/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/security/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/security/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/security/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/security/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/security/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/security/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/security/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/security/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/security/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/security/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="./" hreflang="zh-Hans" lang="zh-Hans" aria-current="true">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="在浅色和深色主题之间切换"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="指南"><a href="../../../guides/modes.html">模式、场景和证据级别</a><p class="nav-label">入门指南</p><a href="../../start/">几分钟内即可开始使用</a><a href="../../accounts/">连接账户</a><a href="../../proxies/">选择代理</a><a href="../../exports/">导出与验证</a><p class="nav-label">了解证据</p><a href="../../concepts/">了解证据如何运作</a><a href="../../cases/">跨所有聊天记录进行调查</a><a href="../../security/">确保安全</a><p class="nav-label">了解更多</p><a href="../../witness/">设置 Witness 机器人</a><a href="../../server/">保持其运行</a><a href="../../troubleshooting/">查找问题所在</a></nav><nav class="wiki-nav" aria-label="参考"><p class="nav-label"><a class="nav-label-link" href="../">参考</a></p><details class="wiki-group"><summary>设置</summary><a href="../quickstart/">快速入门</a><a href="../accounts/">账户与会话格式</a><a href="../connection/">连接、代理和数据保护</a><a href="../deployment/">部署</a></details><details class="wiki-group"><summary>收集</summary><a href="../collection/">数据采集原理</a><a href="../operations/">工作流程与操作</a><a href="../investigation/">调查模式</a><a href="../features/">功能与限制</a></details><details class="wiki-group"><summary>证据</summary><a href="../how-it-works/">证据的运作原理</a><a href="../evidence/">证据格式</a><a href="../witness/">独立见证者</a><a href="../timestamp/">时间戳</a></details><details class="wiki-group" open><summary>安全与项目</summary><a href="./" aria-current="page">安全与数据处理</a><a href="../architecture/">架构</a><a href="../verification/">已测试的内容</a><a href="../license/">许可协议与架构不兼容声明</a><a href="../notice/">运营商兼容性通知</a><a href="../changelog/">更新日志</a></details></nav><p class="sidebar-note">v0.7.0<br>开源 · 可在您的设备上运行</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="指南"><a href="../../../">首页</a> <span aria-hidden="true">/</span> <a href="../../">文档</a> <span aria-hidden="true">/</span> <a href="../">参考</a> <span aria-hidden="true">/</span> <span aria-current="page">安全与数据处理</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">参考 / 安全与项目</p><h1>安全与数据处理</h1><p class="guide-outcome">威胁模型、访问模型、静态机密、网络暴露、会话导入以及如何报告漏洞。</p><div class="wiki-body"><p>TgWitness 运行在您自己的计算机或服务器上。默认情况下，唯一向外发出的连接
+是该账户与 Telegram 之间的连接；通知、时间戳、异地副本和
+见证数据均需单独启用。本页面列出了受保护的内容、保护方式以及
+由操作员自行决定的事项。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>领域</th>
+<th>简而言之</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>访问</td>
+<td>一个面板令牌可控制所有工作区；该面板默认监听 127.0.0.1</td>
+</tr>
+<tr>
+<td>静态数据中的秘密</td>
+<td>会话、API 对、签名密钥和代理设置均采用 Fernet 算法进行加密</td>
+</tr>
+<tr>
+<td>消息和媒体文件</td>
+<td>数据以明文形式存储：请使用磁盘加密并设置严格的权限</td>
+</tr>
+<tr>
+<td>完整性</td>
+<td>每条记录均带有 SHA-256 哈希链和 Ed25519 签名</td>
+</tr>
+<tr>
+<td>未涵盖</td>
+<td>机器管理员、泄露的控制面板令牌、捕获的完整性</td>
+</tr>
+</tbody>
+</table></div>
+<p>有关漏洞报告，请参阅<a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">安全政策</a>。</p>
+<h2 id="access-model">访问模式<a class="anchor" href="#access-model" aria-label="本节链接">#</a></h2>
+<p>TgWitness 是一款单操作员采集工具。任何持有控制面板令牌的用户均可读取和
+导出日志、更改采集范围，以及授权 Telegram 账户。
+该工具不设角色、用户级权限或租户隔离机制。工作区可隔离
+会话和证据存储，但所有工作区均由同一控制面板令牌统一管理。</p>
+<p>该面板默认监听 localhost。数据和控制 API 端点需要
+一个承载令牌。不使用身份验证 Cookie。该令牌保存在浏览器的
+sessionStorage 中，并由“锁定工作区”功能移除。关闭浏览器或锁定面板不会
+暂停收集器。请使用“暂停观察”功能来停止它。</p>
+<p>每个客户端地址的令牌请求失败次数均受限。当同一代理地址下的另一个客户端达到该限制时，有效的面板令牌和见证令牌
+仍可继续使用。
+面板令牌和见证令牌仍分别赋予不同的权限。</p>
+<h3 id="demo-access">演示访问<a class="anchor" href="#demo-access" aria-label="本节链接">#</a></h3>
+<p><code>/api/demo-access</code> 是一个经过刻意设计的、无需身份验证的引导程序，用于明确
+启动的、隔离的合成演示。它仅颁发一个独立于进程生命周期的权限，
+绝不会颁发真实的面板令牌或 TGWITNESS_TOKEN 覆盖令牌。 其签发和使用需要
+一个回环对等方和主机，不允许转发标头，也不允许跨源请求。额外的
+工作区或授权会话将禁用此路径。实时工作区绝不会签发
+该权限。该演示无法关联账户或更改收集设置。</p>
+<h2 id="panel-content-and-exports">面板内容与导出功能<a class="anchor" href="#panel-content-and-exports" aria-label="本节链接">#</a></h2>
+<p>该面板不使用任何外部字体、分析工具、CDN资源或嵌入的远程媒体。
+来自Telegram的文本以纯文本形式插入，而非HTML格式。下载的附件以
+二进制附件形式提供。JSONL导出保留原始字符串；HTML导出则对
+这些字符串进行转义；可能包含公式的CSV单元格会在前面添加一个撇号。</p>
+<p>导出文件不包含身份验证和签名密钥，但会刻意保留
+收集到的源元数据、标识符，以及可能包含的个人或敏感内容。
+原始源元数据中可能包含 Telegram 访问哈希值和文件引用。</p>
+<h2 id="secrets-at-rest">静态数据中的秘密<a class="anchor" href="#secrets-at-rest" aria-label="本节链接">#</a></h2>
+<p>Telegram API 凭据、StringSession 以及 Ed25519 私钥均使用
+Fernet 进行加密。默认情况下，其密钥存储在同一受保护的数据目录中。
+这可减少明文意外泄露的风险；但无法防范能够读取整个目录的攻击者。
+TgWitness 不会对消息内容和媒体文件进行<strong>加密</strong>
+。请使用磁盘加密并设置严格的操作系统权限。Unix 私钥
+文件创建时采用 0600 权限模式；新创建的数据目录采用 0700 权限模式。
+现有目录的权限不会被更改。Windows 会继承目录的访问控制列表 (ACL)：请将其
+限制为服务账户和授权管理员。</p>
+<h3 id="external-master-key">外部主密钥<a class="anchor" href="#external-master-key" aria-label="本节链接">#</a></h3>
+<p>对于新的数据目录，TGWITNESS_VAULT_KEY_FILE 可提供一个外部随机
+主密钥。 系统会通过 HKDF-SHA256 及独立的随机盐值，为每个工作区生成不同的 Fernet 密钥。
+为确保恢复功能，必须保留 vault.external.json 文件。若主密钥缺失或
+错误，系统将无法启动。现有本地保险库不会被自动迁移。
+运行中的进程可以访问该密钥；这并非 HSM 隔离。控制面板会报告
+所选模式，并明确说明消息/媒体存储不会由应用程序
+进行加密。有关完整的威胁模型，请参阅<a href="../connection/">“连接”、“代理”和“数据保护”部分</a>
+。</p>
+<h2 id="proxies-and-network-routes">代理服务器与网络路由<a class="anchor" href="#proxies-and-network-routes" aria-label="本节链接">#</a></h2>
+<p>代理配置在 network.enc 中进行加密。代理密码、用户名和
+MTProxy 密钥不会由 API 返回，也不会写入证据事件中。每个
+工作区都有自己的路由。未配置自动直接备用方案。此规则
+仅适用于 Telegram 传输，不适用于所有机器流量或代理主机的 DNS 解析。
+SOCKS 和普通 HTTP CONNECT 代理认证本身并不受
+代理协议的 TLS 保护。伪造的 TLS MTProxy 密钥将被拒绝。</p>
+<h2 id="sign-in-and-session-imports">登录与会话导入<a class="anchor" href="#sign-in-and-session-imports" aria-label="本节链接">#</a></h2>
+<p>转换后的 .tgwitness-session 文件在
+加载并存储到保险库之前，其中包含明文授权密钥。离线命令行界面支持经过审核的 Telethon 模式。
+面板导入功能还支持 Pyrogram SQLite、现代单账户 TData ZIP
+以及文档中记载的 JSON 输入格式。该功能需经过身份验证，限制为 4 个文件 / 8 MiB，
+并在内存中处理上传内容，无需解压归档或保存原始文件。
+规范化的凭据仅返回给请求的已认证浏览器；
+在 Telegram 授权成功后，这些凭据将保存在加密保险库中。
+请保护原始文件和转换后的文件，并避免多个客户端同时克隆同一授权。</p>
+<p>数据处理过程会验证容器校验和、本地解密哈希值以及结构
+长度。系统会临时使用用户提供的 Desktop 本地密码，且不会将其存储。
+此有限解析器无法保证所有 Desktop 版本均兼容。
+QR 图像在本地生成，包含短效的 Telegram 登录令牌，且
+绝不会发送至外部渲染服务。锁屏、切换工作区、新登录
+以及路由变更都会取消待处理的 QR 尝试。刷新或关闭标签页可能会导致
+尝试处于待处理状态直至过期。成功的 QR 登录仍会强制执行账户绑定。
+普通 API 请求主体仍限制为 16 KiB；经过身份验证的导入路径接受
+最多 12 MiB 的编码 JSON，并单独执行较小的解码文件大小限制。</p>
+<p>登录码和 Telegram 两步验证密码不会被持久化存储。手机号码/验证码哈希状态在
+授权过程中仅保存在内存中。Telegram 会话授予账户访问权限；切勿
+将数据目录、会话、令牌、保险库密钥或私有签名密钥上传至 GitHub。</p>
+<h2 id="logs-and-transport">日志与传输<a class="anchor" href="#logs-and-transport" aria-label="本节链接">#</a></h2>
+<p>默认的 API 验证响应已被替换，因此不会回显凭据
+值。应用程序访问日志功能已禁用。请勿配置反向代理
+以记录 Authorization 头或请求正文。HTTP 以明文形式传输令牌和登录
+密钥：只要连接离开 localhost，请务必使用 HTTPS 或 SSH 隧道。</p>
+<h2 id="integrity-limits">完整性限制<a class="anchor" href="#integrity-limits" aria-label="本节链接">#</a></h2>
+<p>哈希链、数据库触发器和签名可检测到某些修改；
+但无法阻止本地管理员重写日志并重新签名。
+请将已签名的检查点和公钥指纹保存在独立系统中。
+证据模式和异地副本（默认均处于关闭状态）会将检查点哈希值发送至
+时间戳服务，并将加密副本发送至兼容 S3 的存储；请参阅
+<a href="../evidence/">证据格式</a>。透明度日志、基于 HSM 的签名以及正式的
+证据链认证尚未实现。</p>
+<h2 id="if-you-suspect-a-problem">如果您怀疑存在问题<a class="anchor" href="#if-you-suspect-a-problem" aria-label="本节链接">#</a></h2>
+<p>请保留原始数据目录，并使用另一份副本进行分析。请勿
+在公开问题中包含私人的 Telegram 数据或凭据。本工具不
+声称拥有任何独立的安全认证。</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/SECURITY-MODEL.md">在 GitHub 上编辑此页面 ↗</a><a class="next-guide" href="../architecture/"><span>下一步</span><strong>架构 →</strong></a><p>这些指南描述了当前的实现方案。验证结果和剩余缺陷在其他文档中单独记录。 <a href="../verification/">已测试的内容 →</a></p></footer>
+</main>
+<aside class="toc" aria-label="本页面内容"><p class="nav-label">本页面内容</p><a href="#access-model">访问模式</a><a href="#panel-content-and-exports">面板内容与导出功能</a><a href="#secrets-at-rest">静态数据中的秘密</a><a href="#proxies-and-network-routes">代理服务器与网络路由</a><a href="#sign-in-and-session-imports">登录与会话导入</a><a href="#logs-and-transport">日志与传输</a><a href="#integrity-limits">完整性限制</a><a href="#if-you-suspect-a-problem">如果您怀疑存在问题</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>开源 · 可在您的设备上运行</span><a href="../../../../LICENSE">MIT 许可协议</a><a href="../notice/">操作员通知</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">安全</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "等待消息", "Step through a fictional send, edit and delete.": "通过一个虚构的发送、编辑和删除过程进行演示。", "No observations yet. Start the sequence or advance one event.": "尚无观察记录。开始序列或跳转至下一事件。", "Meet at 10:00": "10:00 见面", "A new message is visible in the chat.": "聊天中显示了一条新消息。", "Record 1 appended: the collector observed the original message.": "已附录记录 1 条：采集器已捕获原始消息。", "Meet at 11:00": "11:00 见面", "The current text changes. The earlier observation stays.": "当前文本内容有所变更。先前的观察结果仍然有效。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "记录 2 已追加：该编辑内容为新观察结果。记录 1 仍保留原始文本。", "Message deleted": "消息已删除", "The message has disappeared from the chat view.": "该消息已从聊天界面中消失。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "已添加记录 3：删除通知与两个被观察到的版本一同保留。", "0 records": "0 条记录", "1 record": "1 条记录", "2 records": "2 条记录", "3 records": "3 条记录", "Complete / {n} of 3": "已完成 / {n}/3", "Step / {n} of 3": "第 {n} 步（共 3 步）", "Pause": "暂停", "Replay sequence": "回放序列", "Play sequence": "播放序列", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "静态示例已上线。如需交互式计算哈希值，请通过 HTTPS 访问此页面，或在支持 Web Crypto 的本地预览环境中打开。", "No record supplied": "未提供记录", "Tail removed": "尾部内容已删除", "≠ saved hash": "≠ 已保存的哈希值", "Rebuilt · different hash": "重建 · 哈希值不同", "= saved hash": "= 已保存的哈希值", "Same length and matching head.": "篇幅相同且标题一致。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "这三个计算出的哈希值均与保存的哈希值一致。该样本符合保留的三个记录边界。", "Same saved head; the journal prefix fails verification.": "保存的头部信息相同；日志前缀验证失败。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "记录 2 与其保存的哈希值不再匹配。若仅检查最终存储的头部，则会遗漏此问题；验证器会检查每一条记录。", "Head differs from the retained checkpoint.": "标题与保留的检查点不同。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "重建的哈希值相互关联，但最终的头部已发生变化。保留的检查点拒绝接受这一历史记录。对于已更改的记录，原始签名也会验证失败。", "Too short: 2 supplied records \u003c 3 retained records.": "内容过短：提供的记录有 2 条，而保留的记录少于 3 条。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "剩下的两个哈希值仍然匹配。保留的检查点揭示了缺失的部分。如果没有那个早先的边界，仅凭这个较短的前缀是无法揭示这一遗漏的。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "此浏览器不支持哈希计算。下方的公式和静态说明仍可查看。", "{n} records": "{n}条记录", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "已接受：计数持续增加，签名已验证，密钥匹配。该见证者保留了这一新边界。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "回滚：签名后的结果报告的记录数量少于上次被接受的检查点。Witness 会记录该问题，并保留较早被接受的边界。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "分叉：计数保持不变，但分支头不同。见证者会记录该分歧，并保留先前被接受的分界点。", "No answer": "无回答", "boundary unknown": "边界未知", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "无响应：该工具会记录验证失败的情况。它无法确定收集器的当前状态。如果该工具仍能访问 Bot API 且其发布政策允许，则会发布该失败信息。", "Send {n}": "发送 {n}", "Edit {n}": "编辑 {n}", "Delete {n}": "删除 {n}", "Both accounts captured all six expected observations in this example.": "在这项示例中，这两个账户均捕获了预期的全部六项观察结果。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "账户 B 依然成功捕获了 6 条中的 6 条。其中两条收据的捕获耗时较长。捕获率和收据延迟反映的是不同的问题。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "账户 B 在截止时间前捕获了 6 条中的 5 条（83.3%）。缺失的编辑操作未测得延迟。此结果仅描述了这六项受控操作。", "not observed by cutoff": "未在截止时间前观察到", "{s} seconds": "{s}秒", "Exact values follow in the table.": "具体数值见下表。", "{s} s": "{s} s", "Not observed": "未发现", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "四个聊天群组提供了不同的观察结果。请追溯每条连接的源记录；在未确认发件人身份的情况下，请勿将该频道帖子归因于用户 71001。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "记录 #146 和 #205 显示相同的发件人 ID：71001。这将同一 Telegram 账号在两个聊天群组中发布的帖子关联起来。但这并不能识别现实世界中的具体个人，也无法确定该频道帖子的发布者。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "目标地址 pay.example.invalid/new 出现在群组记录 #146、机器人键盘 #173、频道编辑 #188 以及私信 #205 中。目标地址的重复出现表明这些内容之间存在关联；但这并不能证明这些账户受共同控制。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "在此虚构案例中，已完成的媒体收据 #151 和 #209 具有完全相同的 SHA-256 值。请对比实际字节内容及其关联的消息记录。该匹配文件既未标识其创建者，也无法证明是谁转发了该文件。", "the encrypted off-site copy": "加密的异地副本", "notifications": "通知", "checkpoint hashes for timestamps": "时间戳的检查点哈希值", "signed checkpoints for the witness": "TgWitness 的签名检查点", "Switched on in this example": "在此示例中已启用", "Optional · off by default": "可选 · 默认关闭", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "离开这台机器时：Telegram 连接和 {list}。除此之外别无他物。", "Default: only the Telegram connection leaves this machine.": "默认设置：仅 Telegram 连接会离开这台机器。", "{done} of {total} done": "已完成 {done}/{total}", "Mark step {n} as done": "将步骤 {n} 标记为已完成", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "文案", "Copied": "已复制", "Command copied.": "已复制该指令。", "Selected — Ctrl/Cmd+C": "选中 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "已选中命令。请手动复制。", "Command copied to clipboard.": "命令已复制到剪贴板。", "Select text": "选择文本", "Clipboard unavailable. Command selected; copy it manually.": "剪贴板不可用。已选中命令；请手动复制。", "A message arrives. The first observation is saved.": "一条消息送达。首次记录被保存。", "The time changes. Both captured versions stay.": "时间会改变，但两个记录版本都会保留下来。", "The message disappears. The captured history remains.": "消息虽已消失，但记录的历史依然存在。", "Pause example animation": "暂停示例动画", "Play example animation": "播放示例动画", "Play": "播放", "Full-size workspace screenshot": "全屏工作区截图", "Workspace screenshot · fictional data": "工作区截图 · 虚构数据", "Close": "关闭", "Close screenshot": "关闭截图", "Scrollable full-size screenshot": "可滚动全屏截图", "Enlarge: {name}": "放大：{name}", "View full size": "查看大图"}</script>
+</body></html>

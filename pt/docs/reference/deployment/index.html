@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="pt-BR" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Implantação | TgWitness</title>
+<meta name="description" content="Execute o TgWitness como um serviço no Windows, Linux, macOS ou Docker, por meio de HTTPS, com backups e atualizações."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/deployment/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Implantação | TgWitness"><meta property="og:description" content="Execute o TgWitness como um serviço no Windows, Linux, macOS ou Docker, por meio de HTTPS, com backups e atualizações.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/pt/docs/reference/deployment/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/deployment/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/deployment/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/deployment/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/deployment/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/deployment/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/deployment/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/deployment/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/deployment/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/deployment/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/pt/docs/reference/deployment/", "url": "https://phishdestroy.github.io/TgWitness/pt/docs/reference/deployment/", "name": "Implantação | TgWitness", "description": "Execute o TgWitness como um serviço no Windows, Linux, macOS ou Docker, por meio de HTTPS, com backups e atualizações.", "inLanguage": "pt-BR", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Página inicial", "item": "https://phishdestroy.github.io/TgWitness/pt/"}, {"@type": "ListItem", "position": 2, "name": "Documentação", "item": "https://phishdestroy.github.io/TgWitness/pt/docs/"}, {"@type": "ListItem", "position": 3, "name": "Referência", "item": "https://phishdestroy.github.io/TgWitness/pt/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Implantação", "item": "https://phishdestroy.github.io/TgWitness/pt/docs/reference/deployment/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Ir para o conteúdo</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Documentação</span></a>
+<nav aria-label="Guias"><a href="../../concepts/">Guia visual</a><a href="../../">Todos os guias</a><a href="../">Referência</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Idioma"><span aria-hidden="true">◍</span> Português (Brasil)</summary><div class="lang-list"><a href="../../../../docs/reference/deployment/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/deployment/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/deployment/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/deployment/" hreflang="es" lang="es">Español</a><a href="./" hreflang="pt-BR" lang="pt-BR" aria-current="true">Português (Brasil)</a><a href="../../../../tr/docs/reference/deployment/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/deployment/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/deployment/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/deployment/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/deployment/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/deployment/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/deployment/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/deployment/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Alterne entre os temas claro e escuro"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Guias"><a href="../../../guides/modes.html">Modos, cenários e níveis de evidência</a><p class="nav-label">Primeiros passos</p><a href="../../start/">Comece em poucos minutos</a><a href="../../accounts/">Conecte uma conta</a><a href="../../proxies/">Escolha um proxy</a><a href="../../exports/">Exportar e verificar</a><p class="nav-label">Compreenda as evidências</p><a href="../../concepts/">Veja como funciona o registro de evidências</a><a href="../../cases/">Investigue em todos os chats</a><a href="../../security/">Mantenha a segurança</a><p class="nav-label">Saiba mais</p><a href="../../witness/">Configure um bot do Witness</a><a href="../../server/">Mantenha-o em funcionamento</a><a href="../../troubleshooting/">Descubra o que deu errado</a></nav><nav class="wiki-nav" aria-label="Referência"><p class="nav-label"><a class="nav-label-link" href="../">Referência</a></p><details class="wiki-group" open><summary>Configuração</summary><a href="../quickstart/">Introdução rápida</a><a href="../accounts/">Formatos de contas e sessões</a><a href="../connection/">Conexão, proxies e proteção de dados</a><a href="./" aria-current="page">Implantação</a></details><details class="wiki-group"><summary>Coletar</summary><a href="../collection/">Como funciona a coleta</a><a href="../operations/">Fluxos de trabalho e operações</a><a href="../investigation/">Modo de investigação</a><a href="../features/">Recursos e limitações</a></details><details class="wiki-group"><summary>Provas</summary><a href="../how-it-works/">Como funciona a evidência</a><a href="../evidence/">Formato das evidências</a><a href="../witness/">Testemunha independente</a><a href="../timestamp/">Registros de data e hora</a></details><details class="wiki-group"><summary>Segurança e projeto</summary><a href="../security/">Segurança e tratamento de dados</a><a href="../architecture/">Arquitetura</a><a href="../verification/">O que foi testado</a><a href="../license/">Aviso sobre incompatibilidade de licença e arquitetura</a><a href="../notice/">Aviso de incompatibilidade com operadoras</a><a href="../changelog/">Registro de alterações</a></details></nav><p class="sidebar-note">v0.7.0<br>Código aberto · Rodando em seu computador</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Guias"><a href="../../../">Página inicial</a> <span aria-hidden="true">/</span> <a href="../../">Documentação</a> <span aria-hidden="true">/</span> <a href="../">Referência</a> <span aria-hidden="true">/</span> <span aria-current="page">Implantação</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Pesquisar na documentação</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Experimente “proxy”, “cadeia de hash”, “token” ou “testemunha”…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Pesquisa clara" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Digite uma palavra para pesquisar nos guias e na referência. A pesquisa é realizada diretamente no seu navegador.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Referência / Configuração</p><h1>Implantação</h1><p class="guide-outcome">Execute o TgWitness como um serviço no Windows, Linux, macOS ou Docker, por meio de HTTPS, com backups e atualizações.</p><div class="wiki-body"><p><strong>Inglês</strong> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md">Русский</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md">Ucraniano</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md">Espanhol</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md">Português (Brasil)</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md">Türkçe</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md">العربية</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md">فارسی</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md">Urdu</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md">Hindi</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md">Bahasa Indonesia</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md">Tiếng Việt</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md">Chinês simplificado</a></p>
+<h2 id="choose-an-installation">Escolha uma opção de instalação<a class="anchor" href="#choose-an-installation" aria-label="Link para esta seção">#</a></h2>
+<p>Para o pacote portátil, extraia o arquivo <code>TgWitness-&lt;version&gt;-windows-amd64-portable.zip</code> do
+GitHub Releases. Para os demais métodos, baixe e extraia o ZIP com o código-fonte ou clone o
+repositório e, em seguida, execute o seguinte a partir do diretório do projeto:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Instalação</th>
+<th>Início</th>
+<th>Funciona em segundo plano?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pacote portátil para Windows</td>
+<td><code>TgWitness.cmd</code></td>
+<td>Não; mantenha a janela aberta.</td>
+</tr>
+<tr>
+<td>Nativo do Windows</td>
+<td><code>Start.cmd</code></td>
+<td>Não; utilize a tarefa opcional de logon para execução em segundo plano.</td>
+</tr>
+<tr>
+<td>Nativo para Linux/macOS</td>
+<td><code>sh start.sh</code></td>
+<td>Não; utilize o systemd/launchd para execução em segundo plano.</td>
+</tr>
+<tr>
+<td>Docker em qualquer host compatível</td>
+<td><code>docker compose up -d --build --wait</code></td>
+<td>Sim, enquanto o daemon do Docker estiver em execução.</td>
+</tr>
+<tr>
+<td>Auxiliar do Docker no Windows</td>
+<td><code>scripts\Docker.cmd</code></td>
+<td>Sim; o helper aguarda a verificação do estado do servidor web.</td>
+</tr>
+<tr>
+<td>Auxiliar do Docker no Linux/macOS</td>
+<td><code>sh scripts/docker-start.sh</code></td>
+<td>Sim; o helper aguarda a verificação do estado do servidor web.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Para um servidor em nuvem que possa ser verificado por terceiros — criado por meio da
+API do provedor, sem SSH, acessível apenas por meio de um Cloudflare Tunnel — consulte
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md">a implantação de alta segurança</a>.</p>
+<p>A inicialização nativa cria um <code>.venv</code> privado e instala as dependências fixadas.
+O Docker as compila dentro da imagem, sem a necessidade do Python do host. A configuração inicial
+requer acesso à Internet. Quando não é encontrado nenhum Python 3.11 ou superior, o <code>Start.cmd</code> solicita autorização antes de
+instalar o Python 3.12 para o usuário atual do Windows (winget; caso contrário, o instalador do python.org
+após verificar a assinatura da Python Software Foundation); ele nunca solicita
+privilégios de administrador. O Docker e os serviços do sistema operacional continuam sendo pré-requisitos.</p>
+<p>As instalações nativas e portáteis utilizam o <code>data/live</code> dentro de sua pasta. O Docker utiliza o volume denominado <code>tgwitness-data</code>
+em <code>/data</code>. Trata-se de instalações separadas até que o senhor migre deliberadamente o
+diretório de dados completo. Não espere que um novo contêiner do Docker detecte contas nativas
+automaticamente.</p>
+<h2 id="installation-requirements">Requisitos de instalação<a class="anchor" href="#installation-requirements" aria-label="Link para esta seção">#</a></h2>
+<p>A instalação nativa requer Python 3.11 ou posterior com <code>venv</code> e <code>ensurepip</code>, acesso à Internet
+para a instalação da primeira dependência e um diretório de projeto com permissão de gravação para
+<code>.venv</code>. O painel incluído não requer Node.js nem compilação de front-end. Execute o iniciador a partir de
+sua conta normal do sistema operacional; o TgWitness não exige privilégios de administrador/root.</p>
+<ul>
+<li><strong>Windows:</strong> O <code>Start.cmd</code> verifica o <code>py -3</code>, depois o <code>python</code>, em seguida as pastas padrão por usuário e
+    as pastas de instalação do Program Files, e requer a versão 3.11 ou posterior. Se nenhuma opção funcionar, ele
+    oferece a instalação automática por usuário descrita acima. O <code>py -3 start.py</code> também funciona.
+    O pacote portátil não requer Python.</li>
+<li><strong>Linux:</strong> o <code>start.sh</code> tenta <code>python3.13</code>, <code>python3.12</code>, <code>python3.11</code>, <code>python3</code> e
+    <code>python</code>, e exibe o comando de instalação para apt, dnf, pacman, zypper, apk ou Homebrew
+    quando nenhum deles for compatível. As instalações no Debian/Ubuntu podem exigir o pacote
+    <code>python3-venv</code> correspondente ao interpretador selecionado. O Python padrão mais antigo
+    de uma distribuição deve ser substituído ou complementado pelo Python 3.11+.</li>
+<li><strong>macOS:</strong> instale uma distribuição atual do Python 3.11 ou superior; não presuma que um
+    interpretador fornecido pelo sistema operacional atenda aos requisitos. Utilize o <code>python3 start.py</code> do diretório do projeto.</li>
+<li><strong>Docker:</strong> utilize o Docker Engine/Desktop com o Compose v2.20 ou mais recente. O Docker Desktop
+    deve utilizar contêineres Linux no Windows. O contêiner instala suas
+    próprias dependências do Python; o host não necessita de uma instalação separada do Python.</li>
+</ul>
+<p>Utilize armazenamento local persistente para o diretório de dados. Planeje a capacidade com base nas mensagens,
+mídia, crescimento do WAL, exportações e backups; não há uma especificação mínima universal, baseada em evidências,
+de disco/RAM para todas as cargas de trabalho. Arquiteturas de CPU e versões do Python
+sem pacotes de dependências compatíveis podem exigir ferramentas de compilação adicionais e sua
+própria qualificação. “Portátil” não é uma alegação de suporte universal a sistemas operacionais ou hardware.</p>
+<p>O Windows 11/Python 3.12 foi verificado localmente. As definições para Linux/macOS/contêineres e a infraestrutura de integração contínua (CI)
+são fornecidas, mas não foram executadas neste servidor de desenvolvimento. Consulte
+<a href="../verification/">o arquivo VERIFICATION.md</a> para conhecer o escopo exato.</p>
+<h2 id="local-computer">Computador local<a class="anchor" href="#local-computer" aria-label="Link para esta seção">#</a></h2>
+<p>Utilize <code>Start.cmd</code> no Windows ou <code>sh start.sh</code> no Linux/macOS. <code>scripts\Setup.cmd</code> ou
+<code>sh start.sh --setup-only</code> prepara
+o ambiente. O iniciador instala as dependências na primeira utilização; as execuções posteriores
+reutilizam o ambiente. É necessário acesso à Internet para a configuração e a coleta de dados do Telegram,
+mas a visualização de registros existentes e a criação de exportações funcionam offline.</p>
+<p>Execute o comando `<code>python start.py --check</code>` após a configuração para verificar as dependências locais, o Ed25519,
+o armazenamento, a configuração de chaves e o endereço de escuta sem iniciar um coletor.
+Utilize o <code>--json</code> para obter uma saída estruturada. Passe os comandos <code>--data-dir</code>, <code>--host</code> e
+<code>--port</code> pretendidos. A verificação não instala pacotes, não cria um registro nem se conecta ao Telegram;
+não se trata de uma qualificação de integridade ou cobertura. A inicialização verifica separadamente
+os registros existentes. O <code>python start.py --help</code> também evita a instalação.</p>
+<p>Opções:</p>
+<p>Após executar o start.py, execute comandos auxiliares com <code>.venv\Scripts\python.exe</code> no
+Windows ou <code>.venv/bin/python</code> no Linux/macOS, ou ative primeiro esse ambiente.
+Os exemplos <code>python -m ...</code> abaixo pressupõem que o ambiente esteja ativo.</p>
+<pre><code class="language-sh">python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 8787</code></pre>
+<p>Variáveis de ambiente: TGWITNESS_DATA, TGWITNESS_HOST, TGWITNESS_PORT, TGWITNESS_TOKEN.
+TGWITNESS_VAULT_KEY_FILE seleciona o modo de chave externa para uma nova instalação; consulte abaixo.
+TGWITNESS_TOKEN, se fornecido, deve conter pelo menos 24 caracteres; utilize um valor aleatório
+criptograficamente gerado. Sem ele, o aplicativo gera um token aleatório de 256 bits no arquivo panel-token.txt.
+A substituição da variável de ambiente não reescreve esse arquivo. Reinicie o sistema para alternar as credenciais.</p>
+<p>Exatamente um processo pode ser o proprietário de um diretório de dados. Um bloqueio de arquivos do sistema operacional multiplataforma impede
+gravações simultâneas acidentais. Utilize um worker do Uvicorn. O painel pode gerenciar qualquer número de
+espaços de trabalho, com diretórios adicionais de espaços de trabalho em profiles/&lt;id&gt;/.
+Para instâncias de serviço separadas, utilize diretórios e portas distintos. Os arquivos WAL do SQLite devem ser armazenados em um
+armazenamento local persistente, e não em um sistema de arquivos de rede. Não compartilhe um único volume entre réplicas.</p>
+<h2 id="windows-portable-package">Pacote portátil para Windows<a class="anchor" href="#windows-portable-package" aria-label="Link para esta seção">#</a></h2>
+<p>Cada versão do GitHub inclui o <code>TgWitness-&lt;version&gt;-windows-amd64-portable.zip</code> e seu
+<code>.sha256</code>. Ela contém o runtime oficial incorporável do Python 3.12, disponível em python.org
+(soma de verificação fixada no <code>tools/build_portable.py</code>), o TgWitness e suas dependências fixadas,
+além de três executáveis:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Arquivo</th>
+<th>Objetivo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TgWitness.cmd</code></td>
+<td>Inicie o painel; opções adicionais são repassadas, por exemplo, <code>TgWitness.cmd --port 8790</code></td>
+</tr>
+<tr>
+<td><code>TgWitness-Demo.cmd</code></td>
+<td>Inicie a demonstração sintética em <code>data\demo</code></td>
+</tr>
+<tr>
+<td><code>TgWitness-Check.cmd</code></td>
+<td>Execute a verificação de prontidão sem iniciar</td>
+</tr>
+</tbody>
+</table></div>
+<p>Extraia todo o arquivo compactado para uma pasta gravável, como <code>Documents\TgWitness</code>; não o execute
+de dentro do ZIP nem da pasta “Arquivos de Programas”. O ambiente de execução utiliza um caminho de módulo isolado,
+portanto, outras instalações do Python e a pasta <code>PYTHONPATH</code> não o afetam. Os dados permanecem na
+pasta “<code>data</code>” do pacote. Para atualizar, interrompa o TgWitness, extraia a nova versão para uma nova
+pasta e copie a pasta “<code>data</code>” para lá.</p>
+<p>Compile-o você mesmo no Windows de 64 bits com Python 3.12:</p>
+<pre><code class="language-sh">python tools/build_portable.py</code></pre>
+<p>O compilador verifica a soma de verificação de tempo de execução, instala as dependências restritas no
+pacote, executa a verificação de prontidão com o interpretador incorporado e grava o arquivo ZIP
+e a soma de verificação no <code>dist/</code>.</p>
+<h2 id="container">Contêiner<a class="anchor" href="#container" aria-label="Link para esta seção">#</a></h2>
+<pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
+<p>Isso cria um volume persistente nomeado para /data.
+A porta da web é mapeada para 127.0.0.1:8787. O processo é executado como UID 10001 com
+capacidades restritas, um sistema de arquivos raiz somente leitura e os diretórios /data e /tmp graváveis. O
+<code>--wait</code> verifica a integridade do servidor web antes de retornar; ele não estabelece
+autorização nem entrega do Telegram. Os auxiliares fornecidos utilizam um tempo limite de prontidão de 180 segundos
+após a compilação. Os downloads iniciais de dependências podem demorar mais do que isso.</p>
+<p>Ambos os arquivos Compose básicos utilizam o nome de projeto <code>tgwitness</code>; portanto, extrair uma nova versão
+para outro diretório não seleciona automaticamente um novo volume de dados. Mantenha apenas uma
+implantação ativa para esse projeto. Para instalações independentes, utilize um
+<code>docker compose -p NAME ...</code> exclusivo e uma porta de host diferente, e mantenha ambos nas atualizações.
+Para uma implantação mais antiga que utilize um nome de projeto diferente, continue usando seu nome original
+com <code>-p</code>; <code>docker compose ls</code> lista os projetos existentes.</p>
+<p>Copie <code>deploy/env.example</code> para <code>.env</code> e altere <code>TGWITNESS_PORT</code> para utilizar uma porta de loopback
+diferente. Por exemplo, <code>TGWITNESS_PORT=8788</code> expõe o painel em
+<code>http://127.0.0.1:8788</code>; o contêiner continua escutando na porta 8787. <code>.env</code> é ignorado pelo Git.</p>
+<p>Recupere o token inicial:</p>
+<pre><code class="language-sh">docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
+<p>Comandos úteis:</p>
+<pre><code class="language-sh">docker compose ps
+docker compose logs --tail 100 -f
+docker compose stop
+docker compose up -d --wait</code></pre>
+<p><code>restart: unless-stopped</code> reinicia o coletor após uma falha ou reinicialização do daemon do Docker
+. Em um servidor Linux, habilite o Docker na inicialização usando o gerenciador de serviços da sua distribuição
+, geralmente <code>sudo systemctl enable --now docker</code>. No Windows/macOS, habilite
+a configuração “iniciar ao fazer login” do Docker Desktop. O logout do desktop, o modo de suspensão ou um
+pode interromper a coleta. Um contêiner explicitamente parado permanece
+parado até que o senhor o inicie novamente.</p>
+<p>O volume /tmp está limitado a 512 MiB na configuração de exemplo. A construção da exportação
+utiliza, em vez disso, o <code>temporary-exports/</code> de cada espaço de trabalho no diretório persistente /data. Reserve espaço
+nesse local para exportações simultâneas, crescimento do diário/WAL, arquivos de mídia e backups.
+O lançador e o Docker utilizam o arquivo deploy/constraints.txt para fixar versões qualificadas de dependências de tempo de execução.
+Esta não é uma cadeia de suprimentos bloqueada por hash: a imagem base do Python e os artefatos de pacotes
+ainda exigem qualificação de lançamento independente.</p>
+<p>Não utilize o comando `docker compose down -v`, a menos que pretenda destruir o diário e as chaves.
+O relatório de integridade do contêiner informa a disponibilidade do servidor web, e não o sucesso na captura de mensagens do Telegram.
+Verifique o estado do coletor do painel, o sinal de vida, os erros e os eventos de cobertura.</p>
+<h3 id="independent-witness-profile">Perfil de testemunha independente<a class="anchor" href="#independent-witness-profile" aria-label="Link para esta seção">#</a></h3>
+<p>O serviço opcional <code>witness</code> executa uma <a href="../witness/">testemunha independente</a> em seu próprio
+contêiner, com sua própria chave e registro no volume <code>witness-data</code> e apenas um
+token de testemunha somente leitura para o coletor. Crie o token na página <strong>“Testemunha”</strong> do painel, adicione-o
+com um token de bot e um canal ao <code>.env</code> e, em seguida, inicie o perfil:</p>
+<pre><code class="language-sh">docker compose --profile witness up -d          # deploy/compose/compose.image.yaml: same flag
+docker compose logs witness                     # witness key fingerprint</code></pre>
+<p>O serviço acessa o coletor dentro da rede Compose em <code>http://tgwitness:8787</code>
+(<code>TGWITNESS_WITNESS_COLLECTOR</code>
+o substitui; por exemplo, <code>/profiles/&lt;workspace ID&gt;</code>
+para
+outro espaço de trabalho). Para uma testemunha em um servidor separado, administrado por outra pessoa, utilize
+<code>deploy/compose/compose.witness.yaml</code>
+nesse local, com <code>TGWITNESS_WITNESS_COLLECTOR</code>
+definido como o endereço HTTPS
+do coletor; esse arquivo contém apenas a testemunha.</p>
+<h2 id="install-a-published-image">Instale uma imagem publicada<a class="anchor" href="#install-a-published-image" aria-label="Link para esta seção">#</a></h2>
+<p>Isso fica disponível após a conclusão bem-sucedida <a href="#automated-github-releases">do fluxo de trabalho de lançamento</a>
+e da configuração pública do pacote GHCR. O nome do proprietário do repositório não está codificado de forma rígida
+nesta árvore de código-fonte. Utilize a imagem exibida no resumo do fluxo de trabalho desse lançamento.</p>
+<p>Copie <code>deploy/env.example</code> para <code>.env</code>. Defina <code>TGWITNESS_IMAGE</code> como a versão publicada, utilizando
+o caminho do repositório <strong>em letras minúsculas</strong>, por exemplo:</p>
+<pre><code class="language-dotenv">TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.0
+TGWITNESS_PORT=8787</code></pre>
+<p>Execute este arquivo sozinho, em vez de <code>compose.yaml</code>:</p>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml exec tgwitness cat /data/panel-token.txt</code></pre>
+<p>Não é necessária nenhuma compilação de código-fonte, Python ou compilador no servidor. O fluxo de trabalho de lançamento
+é voltado para contêineres Linux AMD64 e ARM64, incluindo a máquina virtual Linux do Docker Desktop.
+Utilize uma tag de versão ou “<code>ghcr.io/owner/repository@sha256:...</code>” do resumo do fluxo de trabalho.
+Não há configuração para a tag “<code>latest</code>” móvel nem para atualização autônoma do aplicativo. As
+variantes de imagem e código-fonte utilizam o mesmo volume de dados quando o nome do projeto coincide.</p>
+<h2 id="automatic-https-on-a-server">HTTPS automático em um servidor<a class="anchor" href="#automatic-https-on-a-server" aria-label="Link para esta seção">#</a></h2>
+<p>Utilize um servidor com o Docker, um domínio sob seu controle e armazenamento local persistente.
+Aponte os registros A/AAAA do domínio para o servidor; publique o registro AAAA somente se o IPv6 alcançar
+o servidor. Permita o tráfego de entrada nas portas TCP 80 e 443 e o tráfego de saída de DNS/HTTPS para emissão de certificados.
+Outros serviços não devem já estar utilizando essas portas.</p>
+<p>Copie <code>deploy/env.example</code> para <code>.env</code> e defina um nome de host, sem esquema nem caminho:</p>
+<pre><code class="language-dotenv">TGWITNESS_DOMAIN=watch.your-domain.org</code></pre>
+<p>Inicie a compilação do código-fonte com a sobreposição HTTPS:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt</code></pre>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml -f deploy/compose/compose.https.yaml up -d --wait</code></pre>
+<p>Para uma imagem publicada, utilize <code>deploy/compose/compose.image.yaml</code> como o primeiro arquivo. Mantenha
+ambos os argumentos <code>-f</code> para comandos posteriores de status, registros, atualização e parada.</p>
+<p>O Caddy obtém e renova um certificado, redireciona HTTP para HTTPS e encaminha
+as solicitações para o coletor na rede privada da Compose. O estado do certificado possui
+seu próprio volume persistente. A porta direta do host do coletor permanece restrita ao loopback.
+A configuração fornecida do Caddy não habilita o registro de acesso.</p>
+<p>Abra o <code>https://watch.your-domain.org</code> e insira o token do painel. A verificação de prontidão
+não confirma a emissão do certificado nem a acessibilidade externa. Caso o HTTPS não esteja
+pronto, verifique o DNS, as regras do firewall e:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.https.yaml logs --tail 100 caddy</code></pre>
+<p>A imagem do Caddy fornecida segue a tag “<code>2-alpine</code>”. A ação “Pull” atualiza essa imagem;
+fixe um resumo testado em sua implantação caso necessite de versões fixas da infraestrutura.</p>
+<h2 id="updates-and-backups">Atualizações e backups<a class="anchor" href="#updates-and-backups" aria-label="Link para esta seção">#</a></h2>
+<p>Mantenha o nome do projeto “Compose” e o volume de dados ao longo das atualizações. Primeiro, interrompa o
+coletor e faça um backup completo. Para a implantação padrão baseada no código-fonte:</p>
+<pre><code class="language-sh">docker compose stop
+docker compose cp tgwitness:/data ../tgwitness-backup-before-update</code></pre>
+<p>Utilize um novo destino de backup a cada vez, fora do repositório, e proteja-o como
+material de acesso à conta. O caminho de exemplo é meramente ilustrativo; utilize seu local de backup
+privado. Copie o diretório inteiro, incluindo arquivos ocultos, todas as áreas de trabalho, chaves,
+registros e arquivos de mídia. Faça backup da chave mestra do cofre externo separadamente, caso esteja configurada.
+Um ZIP de evidências não é um backup de aplicativo restaurável. Para HTTPS, preserve também
+os volumes do Caddy caso precise manter o estado do certificado/conta.</p>
+<p>Para uma implantação a partir do código-fonte, obtenha os arquivos da nova versão e execute:</p>
+<pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
+<p>Para a implantação da imagem, altere <code>TGWITNESS_IMAGE</code> para a versão desejada e, em seguida, execute:</p>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait</code></pre>
+<p>Utilize também o(s) arquivo(s) `Compose` da sua instalação para os comandos de parada/cópia anteriores.
+Mantenha o <code>.env</code>, a configuração personalizada e o mesmo nome do projeto. O <code>down</code> mantém os
+volumes nomeados; o <strong><code>down -v</code> os exclui</strong>. Não copie o <code>.venv</code> entre sistemas operacionais
+ou versões do Python. Para atualizações nativas, interrompa o TgWitness, faça backup de todo o seu diretório de dados,
+substitua os arquivos de origem e execute o <code>python start.py --setup-only</code> antes de iniciar o programa.</p>
+<p>Verifique o acesso ao painel, a identidade da conta, o estado de observação e a cobertura após uma
+atualização. Reiniciar o sistema não reconstrói as atualizações perdidas do Telegram. Uma reversão pode
+exigir o backup pré-atualização caso uma versão futura altere os formatos de armazenamento.</p>
+<h2 id="automated-github-releases">Lançamentos automatizados no GitHub<a class="anchor" href="#automated-github-releases" aria-label="Link para esta seção">#</a></h2>
+<p>O <a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml">fluxo de trabalho de lançamento</a> estará pronto para uso após este
+projeto ser enviado para um repositório do GitHub com o Actions habilitado. Ele é executado quando um
+lançamento no GitHub é <strong>publicado</strong>, incluindo um pré-lançamento. Rascunhos e envios de tags
+por si sós não publicam pacotes.</p>
+<ol>
+<li>Defina a versão do pacote e o registro de alterações e, em seguida, publique uma versão marcada com <code>v</code>
+    mais a versão exata de <code>pyproject.toml</code>, como <code>v0.7.0</code>.</li>
+<li>O fluxo de trabalho valida a tag e executa as verificações compartilhadas do Python para Windows/Linux/macOS,
+    do navegador geral/importação de conta/QR, do pacote-fonte e do Docker. A instalação nativa nova também é
+    realizada nos três sistemas operacionais utilizando o Python 3.12.</li>
+<li>Após a aprovação dessas verificações, o sistema realiza testes de funcionalidade em uma imagem ARM64 no QEMU, publica
+    imagens AMD64/ARM64 no <code>ghcr.io/&lt;lowercase-owner&gt;/&lt;lowercase-repository&gt;:&lt;version&gt;</code>,
+    e anexa o ZIP com o código-fonte, a soma de verificação e o pacote Python wheel à versão. Uma tarefa separada
+    no Windows compila e anexa o ZIP portátil e sua soma de verificação.</li>
+<li>Após a primeira publicação, abra as configurações do pacote no GHCR e defina a visibilidade
+    como <strong>Pública</strong>, caso se pretenda realizar baixas anônimas de imagens. Um repositório de código-fonte público
+    por si só não garante um pacote de contêiner público. As políticas da organização devem
+    permitir a publicação do pacote. O fluxo de trabalho utiliza <code>GITHUB_TOKEN</code>; nenhuma senha de registro
+    ou credenciais de VPS devem constar no repositório.</li>
+</ol>
+<p>O sucesso do fluxo de trabalho remoto ainda não foi comprovado por esta preparação local. A emulação ARM64
+é um teste preliminar, não uma qualificação em hardware nativo ou no Telegram em ambiente real.
+Isso automatiza a criação do pacote de lançamento; iniciar um servidor ainda requer o comando `Compose`
+e seus pré-requisitos de domínio/host. Os servidores existentes não são
+atualizados ou reiniciados automaticamente quando uma versão é publicada.</p>
+<h2 id="remote-server">Servidor remoto<a class="anchor" href="#remote-server" aria-label="Link para esta seção">#</a></h2>
+<p>Mantenha o serviço restrito ao loopback e utilize um túnel SSH, ou termine a conexão HTTPS em um
+proxy reverso. O arquivo Compose básico é apenas local; a sobreposição opcional
+<code>deploy/compose/compose.https.yaml</code> fornece o Caddy para um domínio configurado.
+Mantenha o token de portador fora de URLs e registros de proxy. Um proxy reverso deve limitar
+o tamanho das solicitações e as taxas de conexão. Não exponha HTTP simples à Internet.</p>
+<p>São fornecidos exemplos para o systemd, uma tarefa de logon do Windows, um agente de usuário do macOS e o Caddy
+na pasta <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/.</a> Revise/adapte seus caminhos antes da instalação.
+Trata-se de modelos fornecidos, e não de configurações de plataforma executadas localmente. Nenhum
+serviço ou tarefa em segundo plano é registrado pelo iniciador padrão.</p>
+<p>No Windows, uma execução do <code>pythonw.exe</code> sem janela armazena os diagnósticos de inicialização/servidor no
+<code>logs/server.log</code>, no diretório de dados (5 MiB por arquivo, dois backups alternados).
+As execuções no console mantêm o registro de log do console. O registro de acesso HTTP está desativado em ambos os
+modos. Proteja os logs com o diretório de dados e analise-os antes de compartilhá-los.</p>
+<h2 id="restart-and-gaps">Reinício e lacunas<a class="anchor" href="#restart-and-gaps" aria-label="Link para esta seção">#</a></h2>
+<p>O último estado de observação solicitado é mantido. Se a observação estava ativa,
+a inicialização tenta se reconectar e retomar as fontes selecionadas. A pausa manual cancela
+essa intenção. Uma tentativa de reinicialização malsucedida é registrada e exibida no painel.</p>
+<p>O StringSession mantém a autorização, mas não o estado durável de atualização/entidade do Telethon.
+As caixas de diálogo são recarregadas na inicialização. O Telegram/Telethon pode recuperar algumas interrupções de transporte
+durante a execução, mas o TgWitness não garante a reprodução durável após reinicializações do processo.
+A cada inicialização, é registrado o cabeçalho do diário anterior e o limite de conexão offline.
+O monitor verifica a conectividade a cada 10 segundos e adiciona um sinal de vida a cada minuto
+(<strong>Parâmetros → Registro de atividade a cada</strong>).
+Pequenas interrupções podem passar despercebidas; um canal de transporte conectado não garante a entrega completa
+das atualizações. Os instantâneos são observações explícitas do histórico atual, nunca uma correção de lacunas.</p>
+<p>A fila de mídia é armazenada no banco de dados SQLite de cada espaço de trabalho. Uma mensagem e sua tarefa
+são confirmadas de forma atômica. Tarefas em execução interrompidas são recuperadas para nova tentativa na inicialização.
+Cada download possui um tempo limite básico de 120 segundos, acrescido do tempo necessário para baixar o arquivo a uma taxa de 256 KiB/s, e um
+limite de 1 a 2.000 MiB por tipo de anexo; o tempo limite, a velocidade e as tentativas de repetição são definidos em <strong>“Parâmetros</strong>”. O coletor
+ignora arquivos cujo tamanho é desconhecido. A pausa mantém o trabalho na fila. A repetição utiliza o
+descritor de arquivo original observado, nunca a versão mais recente de uma mensagem editada posteriormente.
+Falhas temporárias têm um número limitado de repetições; as pausas do FloodWait de mídia sobrevivem à reinicialização.
+A recuperação de mídia é separada da recuperação de atualizações do Telegram e não pode recriar arquivos que tenham desaparecido.</p>
+<h2 id="backup-restore-and-capacity">Backup, restauração e capacidade<a class="anchor" href="#backup-restore-and-capacity" aria-label="Link para esta seção">#</a></h2>
+<p>Interrompa o processo antes de copiar <strong>todo</strong> o <strong>diretório de dados</strong>, incluindo vault.key,
+signing.enc, credentials.enc, arquivos do banco de dados SQLite/WAL, mídia, token, pontos de verificação,
+e todos os perfis/subdiretórios. Restaure
+a cópia completa enquanto o serviço de destino estiver parado. A falta de chaves do cofre ou
+a incompatibilidade da chave de assinatura causam falha na inicialização; não gere novas chaves para forçar o acesso.</p>
+<p>Mantenha os backups secretos criptografados e com acesso controlado. Os arquivos ZIP de evidências são portáteis
+e servem para análise de artefatos, não como backups do aplicativo ou de sessões do Telegram.
+Não há exclusão automática por retenção. Planeje espaço em disco para todas as mensagens,
+metadados brutos, mídia, exportações temporárias e backups.</p>
+<p>A verificação inicial e a exportação de registros de fluxo substituem o carregamento do diário completo.
+Uma exportação fixa um instantâneo de leitura enquanto novas gravações no WAL podem continuar; exportações de longa duração
+podem reter páginas do WAL, portanto, a capacidade do disco ainda é importante. Os arquivos ZIP têm limite máximo de 4 GiB
+descompactados, para corresponder ao padrão do verificador independente; <strong>Parâmetros → ZIP assinado maior</strong>
+aumenta o limite, e tais arquivos são verificados com o `<code>verify.py --max-gib N</code>`. Outros formatos não têm limite de contagem de eventos.
+Os navegadores compatíveis transmitem blocos de resposta para um arquivo selecionado pelo usuário. Outros navegadores
+armazenam em buffer no máximo 128 MiB e direcionam transferências maiores para a CLI autenticada:</p>
+<pre><code class="language-sh">python -m tgwitness.download --token-file data/live/panel-token.txt --out evidence.zip</code></pre>
+<p>Utilize <code>--profile ID</code> em <strong>Exportações → ID do Espaço de Trabalho</strong> para outro espaço de trabalho,
+<code>--format zip|jsonl|csv|html</code>, <code>--url https://your-server</code> para um servidor remoto ou
+<code>--max-mib</code> para alterar o limite de transferência de 5 GiB. O HTTP simples é permitido apenas para
+loopback. Os tokens são transmitidos nos cabeçalhos, redirecionamentos são recusados, arquivos existentes
+não são sobrescritos e downloads incompletos não são publicados como arquivos concluídos.
+Se TGWITNESS_TOKEN substituir o token gerado, utilize um arquivo protegido separadamente
+contendo esse valor ativo: o arquivo panel-token.txt não é reescrito pela substituição.
+O SHA-256 do comando é apenas uma soma de verificação da transferência; verifique independentemente o ZIP assinado.</p>
+<p>Os arquivos de exportação do servidor permanecem dentro do diretório privado <code>temporary-exports/</code> de cada espaço de trabalho.
+Respostas bem-sucedidas limpam seus arquivos. Exportações interrompidas são removidas na
+próxima inicialização do espaço de trabalho, com seu bloqueio de instância exclusivo mantido. Este diretório faz parte
+do modelo de ameaças/capacidade de armazenamento; utilize um volume de dados criptografado. Transferências em escala de produção
+de vários gigabytes ainda exigem qualificação em seu sistema de destino.</p>
+<p>O painel exibe mídias em fila/com falha, as mídias pendentes mais antigas, espaço livre em disco,
+pausas nas solicitações do Telegram e fontes cujo acesso não foi confirmado. Esses diagnósticos não constituem
+um monitor completo de entrega de ponta a ponta. Os espaços de trabalho compartilham um processo; uma conta com atividade intensa pode
+ainda assim afetar os demais. Processos de trabalho separados, retenção/rotação, recuperação durável de atualizações,
+ancoragem de pontos de verificação remotos, funções e qualificação completa da implantação permanecem.</p>
+<h2 id="connection-and-protection-options">Opções de conexão e proteção<a class="anchor" href="#connection-and-protection-options" aria-label="Link para esta seção">#</a></h2>
+<p>As rotas de conexão são específicas para cada espaço de trabalho e devem ser configuradas antes da autorização.
+SOCKS5/HTTP CONNECT utilizam a dependência fixada python-socks. O MTProxy utiliza o
+transporte intermediário aleatório experimental do Telethon; segredos TLS ee falsos não são suportados.
+Não há configuração de fallback direto automático. Esta não é uma rota de rede válida para todo o sistema.</p>
+<p>Para novas instalações, TGWITNESS_VAULT_KEY_FILE aponta para um arquivo de chave-mestra aleatória
+protegido separadamente. Monte-o como somente leitura fora do diretório /data em um contêiner. Preserve os metadados públicos
+do salt do arquivo vault.external.json para cada espaço de trabalho e a chave-mestra separadamente.
+Os cofres locais existentes exigem uma migração planejada; definir esta variável não
+os converte automaticamente. O armazenamento e as exportações de mensagens/mídia não são criptografados pelo aplicativo.
+Utilize volumes criptografados e armazenamento temporário privado suficiente, quando necessário.</p>
+<p>Procedimentos detalhados: <a href="../connection/">conexão/segurança</a> e
+<a href="../operations/">modos de operação</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/DEPLOYMENT.md">Edite esta página no GitHub ↗</a><a class="next-guide" href="../collection/"><span>Próxima etapa</span><strong>Como funciona a coleta →</strong></a><p>Estes guias descrevem a implementação atual. Os resultados da validação e as lacunas remanescentes estão documentados separadamente. <a href="../verification/">O que foi testado →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Nesta página"><p class="nav-label">Nesta página</p><a href="#choose-an-installation">Escolha uma opção de instalação</a><a href="#installation-requirements">Requisitos de instalação</a><a href="#local-computer">Computador local</a><a href="#windows-portable-package">Pacote portátil para Windows</a><a href="#container">Contêiner</a><a href="#install-a-published-image">Instale uma imagem publicada</a><a href="#automatic-https-on-a-server">HTTPS automático em um servidor</a><a href="#updates-and-backups">Atualizações e backups</a><a href="#automated-github-releases">Lançamentos automatizados no GitHub</a><a href="#remote-server">Servidor remoto</a><a href="#restart-and-gaps">Reinício e lacunas</a><a href="#backup-restore-and-capacity">Backup, restauração e capacidade</a><a href="#connection-and-protection-options">Opções de conexão e proteção</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Código aberto · Rodando em seu computador</span><a href="../../../../LICENSE">Licença MIT</a><a href="../notice/">Aviso ao operador</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Segurança</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Aguardando uma mensagem", "Step through a fictional send, edit and delete.": "Acompanhe passo a passo um processo fictício de envio, edição e exclusão.", "No observations yet. Start the sequence or advance one event.": "Ainda não há observações. Inicie a sequência ou avance um evento.", "Meet at 10:00": "Encontro às 10h", "A new message is visible in the chat.": "Uma nova mensagem está visível no chat.", "Record 1 appended: the collector observed the original message.": "Registro 1 anexado: o coletor observou a mensagem original.", "Meet at 11:00": "Encontro às 11h", "The current text changes. The earlier observation stays.": "O texto atual sofre alterações. A observação anterior permanece.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Registro 2 anexado: a edição constitui uma nova observação. O Registro 1 ainda contém o texto original.", "Message deleted": "Mensagem excluída", "The message has disappeared from the chat view.": "A mensagem desapareceu da visualização do chat.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Registro 3 anexado: o aviso de exclusão é mantido juntamente com ambas as versões observadas.", "0 records": "0 registros", "1 record": "1 registro", "2 records": "2 registros", "3 records": "3 registros", "Complete / {n} of 3": "Concluído / {n} de 3", "Step / {n} of 3": "Etapa / {n} de 3", "Pause": "Pausa", "Replay sequence": "Sequência de reprodução", "Play sequence": "Sequência de reprodução", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "O exemplo estático está disponível. Para calcular hashes de forma interativa, abra esta página via HTTPS ou em uma visualização no localhost com suporte ao Web Crypto.", "No record supplied": "Não foi fornecido nenhum registro", "Tail removed": "Parte final removida", "≠ saved hash": "≠ hash salvo", "Rebuilt · different hash": "Recriado · hash diferente", "= saved hash": "= hash salvo", "Same length and matching head.": "Mesmo comprimento e título correspondente.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Todos os três hashes calculados correspondem aos hashes salvos. Esta amostra está de acordo com o limite de três registros retidos.", "Same saved head; the journal prefix fails verification.": "O mesmo cabeçalho salvo; o prefixo do registro não passa na verificação.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "O registro 2 não corresponde mais ao seu hash salvo. Verificar apenas o cabeçalho final armazenado deixaria isso passar despercebido; o verificador examina todos os registros.", "Head differs from the retained checkpoint.": "O cabeçalho difere do ponto de verificação retido.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Os hashes reconstruídos estão interligados, mas o cabeçalho final foi alterado. O ponto de verificação retido rejeita esse histórico. As assinaturas originais também falhariam nos registros alterados.", "Too short: 2 supplied records \u003c 3 retained records.": "Muito curto: 2 registros fornecidos \u003c 3 registros retidos.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Os dois hashes restantes ainda coincidem. O ponto de verificação retido revela a parte final que faltava. Sem esse limite anterior, esse prefixo mais curto, por si só, não revelaria a omissão.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "O cálculo de hash não está disponível neste navegador. As fórmulas e a explicação estática abaixo permanecem disponíveis.", "{n} records": "{n} registros", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Aceito: a contagem aumenta, a assinatura é verificada e a chave corresponde. A testemunha mantém esse novo limite.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Reversão: a resposta assinada relata um número menor de registros do que o último ponto de verificação aceito. O TgWitness registra o problema e mantém o limite aceito anteriormente.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: a contagem permanece inalterada, mas o branch principal difere. O TgWitness registra a divergência e mantém o limite aceito anteriormente.", "No answer": "Sem resposta", "boundary unknown": "limite desconhecido", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Sem resposta: a ferramenta registra a falha na verificação. Ela não pode determinar o estado atual do coletor. Caso a ferramenta ainda consiga acessar a API do Bot e sua política de publicação permita, ela poderá publicar essa falha.", "Send {n}": "Enviar {n}", "Edit {n}": "Editar {n}", "Delete {n}": "Excluir {n}", "Both accounts captured all six expected observations in this example.": "Ambas as contas capturaram todas as seis observações esperadas neste exemplo.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "A conta B ainda capturou 6 de 6. Dois recibos demoraram mais tempo. A taxa de captura e o atraso no recebimento respondem a questões diferentes.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "A conta B capturou 5 de 6 até o prazo final (83,3%). A edição ausente não apresenta atraso medido. Este resultado descreve apenas as seis ações controladas.", "not observed by cutoff": "não observado até o prazo final", "{s} seconds": "{s} segundos", "Exact values follow in the table.": "Os valores exatos constam na tabela a seguir.", "{s} s": "{s} s", "Not observed": "Não observado", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Quatro conversas trazem observações diferentes. Siga os registros de origem para cada conexão; não atribua a postagem do canal ao usuário 71001 sem um remetente identificado.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Os registros nº 146 e nº 205 apresentam o mesmo ID de remetente, 71001. Isso estabelece uma conexão entre as publicações observadas de uma conta do Telegram em dois chats. Não identifica uma pessoa no mundo real nem atribui a autoria da publicação no canal.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "O endereço de destino pay.example.invalid/new aparece no registro do grupo nº 146, no teclado do bot nº 173, na edição do canal nº 188 e na mensagem privada nº 205. Um endereço de destino repetido conecta o material; isso não prova o controle comum dessas contas.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Os recibos de mídia concluídos nº 151 e nº 209 apresentam valores SHA-256 completos idênticos neste caso fictício. Compare os bytes reais e seus registros de mensagem associados. O arquivo correspondente não identifica seu criador nem comprova quem o encaminhou.", "the encrypted off-site copy": "a cópia criptografada armazenada externamente", "notifications": "notificações", "checkpoint hashes for timestamps": "hashes de pontos de verificação para registros de data e hora", "signed checkpoints for the witness": "pontos de verificação assinados para o TgWitness", "Switched on in this example": "Ativado neste exemplo", "Optional · off by default": "Opcional · desativado por padrão", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Ao sair deste dispositivo: a conexão com o Telegram e {list}. Nada mais.", "Default: only the Telegram connection leaves this machine.": "Padrão: apenas a conexão com o Telegram sai desta máquina.", "{done} of {total} done": "{done} de {total} concluído", "Mark step {n} as done": "Marque a etapa {n} como concluída", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Texto", "Copied": "Copiado", "Command copied.": "Comando copiado.", "Selected — Ctrl/Cmd+C": "Selecionado — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Comando selecionado. Copie-o manualmente.", "Command copied to clipboard.": "Comando copiado para a área de transferência.", "Select text": "Selecionar texto", "Clipboard unavailable. Command selected; copy it manually.": "Área de transferência indisponível. Comando selecionado; copie-o manualmente.", "A message arrives. The first observation is saved.": "Chega uma mensagem. A primeira observação é salva.", "The time changes. Both captured versions stay.": "A data e a hora mudam. Ambas as versões capturadas permanecem.", "The message disappears. The captured history remains.": "A mensagem desaparece. O histórico capturado permanece.", "Pause example animation": "Pausar animação de exemplo", "Play example animation": "Reproduzir animação de exemplo", "Play": "Reproduzir", "Full-size workspace screenshot": "Captura de tela da área de trabalho em tamanho real", "Workspace screenshot · fictional data": "Captura de tela da área de trabalho · dados fictícios", "Close": "Fechar", "Close screenshot": "Fechar captura de tela", "Scrollable full-size screenshot": "Captura de tela em tamanho real com rolagem", "Enlarge: {name}": "Ampliar: {name}", "View full size": "Ver em tamanho real"}</script>
+</body></html>

@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="vi" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Định dạng bằng chứng | TgWitness</title>
+<meta name="description" content="Nội dung của tệp ZIP đã được ký, các loại bản ghi, biên nhận giao dịch, hồ sơ người dùng, bản sao lưu ngoài trang web và xác minh ngoại tuyến."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:title" content="Định dạng bằng chứng | TgWitness"><meta property="og:description" content="Nội dung của tệp ZIP đã được ký, các loại bản ghi, biên nhận giao dịch, hồ sơ người dùng, bản sao lưu ngoài trang web và xác minh ngoại tuyến.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/evidence/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/evidence/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/evidence/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/", "url": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/", "name": "Định dạng bằng chứng | TgWitness", "description": "Nội dung của tệp ZIP đã được ký, các loại bản ghi, biên nhận giao dịch, hồ sơ người dùng, bản sao lưu ngoài trang web và xác minh ngoại tuyến.", "inLanguage": "vi", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "https://phishdestroy.github.io/TgWitness/vi/"}, {"@type": "ListItem", "position": 2, "name": "Tài liệu hướng dẫn", "item": "https://phishdestroy.github.io/TgWitness/vi/docs/"}, {"@type": "ListItem", "position": 3, "name": "Tham khảo", "item": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Định dạng bằng chứng", "item": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Chuyển thẳng đến nội dung</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Tài liệu hướng dẫn</span></a>
+<nav aria-label="Hướng dẫn"><a href="../../concepts/">Hướng dẫn trực quan</a><a href="../../">Tất cả các hướng dẫn</a><a href="../">Tham khảo</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Ngôn ngữ"><span aria-hidden="true">◍</span> Tiếng Việt</summary><div class="lang-list"><a href="../../../../docs/reference/evidence/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/evidence/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/evidence/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/evidence/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/evidence/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/evidence/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/evidence/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/evidence/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/evidence/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/evidence/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/evidence/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="./" hreflang="vi" lang="vi" aria-current="true">Tiếng Việt</a><a href="../../../../zh/docs/reference/evidence/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Chuyển đổi giữa chế độ giao diện sáng và tối"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Hướng dẫn"><a href="../../../guides/modes.html">Các chế độ, kịch bản và mức độ bằng chứng</a><p class="nav-label">Các bước đầu tiên</p><a href="../../start/">Bắt đầu chỉ trong vài phút</a><a href="../../accounts/">Kết nối tài khoản</a><a href="../../proxies/">Chọn một máy chủ proxy</a><a href="../../exports/">Xuất và xác minh</a><p class="nav-label">Hiểu rõ về bằng chứng</p><a href="../../concepts/">Tìm hiểu cách thức hoạt động của bằng chứng</a><a href="../../cases/">Điều tra trên tất cả các cuộc trò chuyện</a><a href="../../security/">Hãy đảm bảo tính bảo mật</a><p class="nav-label">Tìm hiểu thêm</p><a href="../../witness/">Thiết lập bot chứng cứ</a><a href="../../server/">Hãy duy trì hoạt động của nó</a><a href="../../troubleshooting/">Tìm hiểu nguyên nhân sự cố</a></nav><nav class="wiki-nav" aria-label="Tham khảo"><p class="nav-label"><a class="nav-label-link" href="../">Tham khảo</a></p><details class="wiki-group"><summary>Thiết lập</summary><a href="../quickstart/">Hướng dẫn bắt đầu nhanh</a><a href="../accounts/">Các định dạng tài khoản và phiên làm việc</a><a href="../connection/">Kết nối, máy chủ trung gian và bảo vệ dữ liệu</a><a href="../deployment/">Triển khai</a></details><details class="wiki-group"><summary>Thu thập</summary><a href="../collection/">Cách thức thu thập dữ liệu</a><a href="../operations/">Quy trình làm việc và hoạt động</a><a href="../investigation/">Chế độ điều tra</a><a href="../features/">Các tính năng và giới hạn</a></details><details class="wiki-group" open><summary>Bằng chứng</summary><a href="../how-it-works/">Cách thức hoạt động của bằng chứng</a><a href="./" aria-current="page">Định dạng bằng chứng</a><a href="../witness/">Nhân chứng độc lập</a><a href="../timestamp/">Dấu thời gian</a></details><details class="wiki-group"><summary>An ninh & dự án</summary><a href="../security/">An ninh và xử lý dữ liệu</a><a href="../architecture/">Kiến trúc</a><a href="../verification/">Những nội dung đã được kiểm thử</a><a href="../license/">Thông báo về sự không tương thích giữa giấy phép và kiến trúc</a><a href="../notice/">Thông báo về sự không tương thích giữa các nhà cung cấp dịch vụ</a><a href="../changelog/">Bản ghi thay đổi</a></details></nav><p class="sidebar-note">v0.7.0<br>Mã nguồn mở · Chạy trên máy tính của quý vị</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Hướng dẫn"><a href="../../../">Trang chủ</a> <span aria-hidden="true">/</span> <a href="../../">Tài liệu hướng dẫn</a> <span aria-hidden="true">/</span> <a href="../">Tham khảo</a> <span aria-hidden="true">/</span> <span aria-current="page">Định dạng bằng chứng</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Tìm kiếm trong tài liệu</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Hãy thử các thuật ngữ như proxy, chuỗi băm, token hoặc witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Tìm kiếm rõ ràng" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Hãy nhập một từ khóa để tìm kiếm trong các hướng dẫn và tài liệu tham khảo. Kết quả tìm kiếm sẽ được lưu lại trong trình duyệt của quý vị.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Tham khảo / Bằng chứng</p><h1>Định dạng bằng chứng</h1><p class="guide-outcome">Nội dung của tệp ZIP đã được ký, các loại bản ghi, biên nhận giao dịch, hồ sơ người dùng, bản sao lưu ngoài trang web và xác minh ngoại tuyến.</p><div class="wiki-body"><p>Một quan sát không phải là một kết luận. ID người gửi không phải là danh tính trong thế giới thực.
+Nguồn thông tin là bản cập nhật dịch vụ hiển thị trên tài khoản; Telegram không thực hiện việc
+ký số các bản ghi đã lưu này dành cho các nhà điều tra bên thứ ba.</p>
+<h2 id="what-is-signed">“Được ký” là gì<a class="anchor" href="#what-is-signed" aria-label="Liên kết đến phần này">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Nội dung</th>
+<th>Bảo vệ</th>
+<th>Những nội dung cần lưu giữ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mọi ghi nhận trong nhật ký, bao gồm các sự kiện hoạt động</td>
+<td>Chuỗi SHA-256 và chữ ký Ed25519 cho mỗi sự kiện</td>
+<td><code>events.jsonl</code> gốc, dấu vân tay khóa đáng tin cậy, và điểm kiểm tra được lưu giữ</td>
+</tr>
+<tr>
+<td>Nội dung tệp ZIP chứa bằng chứng</td>
+<td><code>manifest.sig</code> ký vào bản kê khai chuẩn, trong đó liệt kê các giá trị băm của các tệp nội dung</td>
+<td>Tệp ZIP đầy đủ, bao gồm tệp manifest và chữ ký</td>
+</tr>
+<tr>
+<td>Tệp đính kèm được lưu giữ</td>
+<td>Giá trị SHA-256 và số byte trong một sự kiện <code>media.saved</code> có chữ ký; băm tệp trong bản kê khai ZIP có chữ ký</td>
+<td>Các byte gốc bên trong tệp ZIP đã được xác minh</td>
+</tr>
+<tr>
+<td>Checkpoint</td>
+<td>Chữ ký Ed25519 trên độ dài sổ ghi chép, băm tiêu đề, khóa công khai và thời gian tạo</td>
+<td>Một bản sao độc lập được lưu giữ trước khi có thay đổi gây tranh cãi</td>
+</tr>
+<tr>
+<td>Biên lai giao dịch</td>
+<td>Các số liệu thu thập được ký riêng biệt; đồng thời cũng được bao gồm trong sự kiện <code>process.started</code> đã được ký</td>
+<td>Biên bản ghi nhận và sổ nhật ký liên quan; các số liệu được tự báo cáo</td>
+</tr>
+<tr>
+<td>Dạng tệp CSV hoặc HTML độc lập</td>
+<td>Không có chữ ký mật mã độc lập; chỉ riêng các giá trị băm sự kiện là chưa đủ</td>
+<td>Vui lòng sử dụng bản sao chính xác có trong tệp ZIP đã được xác minh để kiểm tra tính toàn vẹn</td>
+</tr>
+<tr>
+<td>Ảnh chụp màn hình, bản in hoặc tệp PDF được tạo ra từ trình duyệt</td>
+<td>Không có chữ ký của TgWitness trên bản sao</td>
+<td>Vui lòng giữ lại gói phần mềm gốc đã được xác minh và ghi chép lại quy trình tạo ra phiên bản phái sinh</td>
+</tr>
+</tbody>
+</table></div>
+<p>Công cụ thu thập sẽ xác minh chữ ký của nhật ký trước khi tạo ra mọi định dạng xuất dữ liệu.
+Việc kiểm tra nguồn này không tạo ra chữ ký trên tệp CSV hoặc
+HTML được tải xuống riêng biệt. Tương tự, một chữ ký sự kiện JSONL hợp lệ cũng không cung cấp các byte đính kèm
+hoặc độc lập xác nhận rằng toàn bộ nhật ký đã quan sát được đã được cung cấp đầy đủ.</p>
+<h2 id="investigation-handoff">Chuyển giao cuộc điều tra<a class="anchor" href="#investigation-handoff" aria-label="Liên kết đến phần này">#</a></h2>
+<ol>
+<li>Vui lòng ghi lại mã số vụ việc, người vận hành, ID tài khoản Telegram dạng số, các
+    nguồn đã chọn, chính sách thu thập và khoảng thời gian thu thập vào ghi chú vụ việc của quý vị. TgWitness
+    lưu giữ các quan sát; việc phân công vụ việc và hồ sơ lưu giữ được quản lý bên ngoài
+    ứng dụng. Hãy xác nhận cấu hình thu thập dự kiến thông qua
+    <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">quy trình chấp nhận trực tiếp</a>.</li>
+<li>Hãy lưu giữ riêng biệt dấu vân tay khóa công khai của không gian làm việc trước khi dựa vào
+    các tệp xuất của nó. Lưu các điểm kiểm tra đã được ký bên ngoài bộ thu thập trong quá trình thu thập.
+    Ghi lại các sự gián đoạn và giới hạn về khả năng hiển thị của tài khoản.</li>
+<li>Xuất tệp <strong>ZIP đã được ký</strong> và lưu giữ biên nhận thực thi đã được ký. Sử dụng điểm kiểm tra tại
+    hoặc trước ranh giới nhật ký đã xuất. Một điểm kiểm tra sau đó có thể từ chối chính xác
+    việc xuất trước đó do quá ngắn. Các tệp xuất bao gồm toàn bộ nhật ký không gian làm việc,
+    bất kể các bộ lọc trên bảng điều khiển; vui lòng xem xét kỹ tài liệu trước khi chia sẻ.</li>
+<li>
+<p>Yêu cầu người nhận xác minh tệp ZIP bằng một bản sao đáng tin cậy của trình xác minh cùng với
+    dấu vân tay/điểm kiểm tra được cung cấp độc lập. Từ một bản checkout đáng tin cậy với
+    môi trường Python đang hoạt động:</p>
+<pre><code class="language-sh">python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json</code></pre>
+<p>Báo cáo đầu ra thành công sẽ hiển thị mã <code>key_pinned: true</code>
+và <code>checkpoint_checked: true</code>
+khi cả hai đầu vào đều được cung cấp và chấp nhận. Lưu giữ kết quả xác minh.
+5. Ghi lại mã SHA-256 của tệp lưu trữ, phạm vi xuất, ngày chuyển, người gửi và
+người nhận vào hồ sơ lưu giữ của quý vị. Giữ nguyên vẹn gói tệp gốc và làm việc
+trên các bản sao. Chia sẻ các tệp bằng chứng thay vì thư mục dữ liệu riêng tư của ứng dụng,
+vì thư mục này còn chứa các phiên tài khoản và khóa bí mật ký số.
+Để chuyển giao, tệp xuất có thể được nén vào tệp ZIP được bảo vệ bằng mật khẩu theo tiêu chuẩn AES-256.
+Mật khẩu chỉ nhằm bảo vệ tính bảo mật và không được lưu trữ; người nhận sẽ giải nén
+tệp lưu trữ và xác minh tệp xuất đã được ký bên trong, đảm bảo tệp này không bị thay đổi.
+6. Nếu cần xác định thời gian độc lập, hãy tuân theo
+<a href="../timestamp/">quy trình RFC 3161</a>
+và lưu giữ yêu cầu, điểm kiểm tra, thông tin
+CA đáng tin cậy, cũng như phản hồi đã được xác minh từ cơ quan có thẩm quyền. Chỉ việc chuẩn bị yêu cầu
+thôi thì chưa đủ để có được dấu thời gian.</p>
+</li>
+</ol>
+<p>Việc xác minh thành công sẽ chứng minh tính toàn vẹn liên quan đến khóa thu thập đáng tin cậy
+và ranh giới được duy trì. Nguồn thông tin chính xác, việc gửi tin nhắn Telegram đầy đủ, thời gian đáng tin cậy,
+và tính hợp lệ về mặt pháp lý đòi hỏi các bằng chứng riêng biệt. Phiên bản này chưa hoàn tất
+quá trình kiểm định trên Telegram thực tế hoặc đánh giá pháp y/an ninh độc lập.</p>
+<p>Các thông báo được gửi qua Apprise bao gồm tên và số lượng không gian làm việc cũng như cuộc trò chuyện; các
+đoạn trích ngắn của tin nhắn đã bị xóa và chỉnh sửa chỉ được thêm vào khi người vận hành bật tính năng này
+(mặc định là tắt). Đây là tín hiệu tiện lợi, không phải bằng chứng: việc gửi đến không được đảm bảo,
+và chỉ có nhật ký cùng các bản xuất có chữ ký mới ghi lại những gì đã được quan sát. Khi có máy chủ trung gian
+cho không gian làm việc, các thông báo sẽ đi theo cùng một lộ trình; các dịch vụ không thể sử dụng lộ trình này, cũng như các lộ trình MTProxy, sẽ bị từ chối.</p>
+<h2 id="event-canonicalization">Tiêu chuẩn hóa sự kiện<a class="anchor" href="#event-canonicalization" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Dữ liệu đầu vào cho hàm băm bao gồm chính xác các trường sau:</p>
+<pre><code class="language-text">seq, observed_at, source_at, kind, chat_id, message_id, actor_id, payload, previous_hash</code></pre>
+<p>Hãy chuyển đổi dữ liệu sang định dạng JSON tương thích với Python, sử dụng mã hóa UTF-8, các khóa đối tượng được sắp xếp theo thứ tự, không sử dụng ký tự thoát ASCII,
+không chứa khoảng trắng không cần thiết và không chứa các giá trị NaN/vô cực:</p>
+<pre><code class="language-python">json.dumps(value, ensure_ascii=False, sort_keys=True,
+           separators=(&quot;,&quot;, &quot;:&quot;), allow_nan=False).encode(&quot;utf-8&quot;)</code></pre>
+<p>Giá trị SHA-256 của các byte đó sẽ trở thành hàm băm sự kiện. Chữ ký được tạo bằng thuật toán Ed25519 trên
+32 byte hàm băm thô, sau đó được mã hóa theo chuẩn base64. Giá trị previous_hash đầu tiên là 64 số 0.
+Số thứ tự bắt đầu từ 1 và tăng dần từng đơn vị 1. Tất cả các sự kiện, bao gồm cả các
+sự kiện vận hành, đều chia sẻ chung một chuỗi. Không có cơ chế loại bỏ các bản ghi trùng lặp: các
+quan sát lặp lại được coi là các biên nhận riêng biệt, chứ không phải là khẳng định về các hành động riêng biệt trên Telegram.</p>
+<p>Dữ liệu ngày tháng thô của Telegram là các chuỗi ISO; các trường nhị phân sẽ được chuyển đổi thành các đối tượng chứa
+bytes_base64. Nội dung tin nhắn, các thực thể, mô tả phương tiện, siêu dữ liệu phản hồi, phản ứng,
+và các hành động dịch vụ sẽ được lưu giữ trong siêu dữ liệu tin nhắn thô khi được cung cấp.</p>
+<p>observed_at là thời gian theo đồng hồ UTC của bộ thu thập. source_at là ngày trên Telegram được cung cấp
+khi có sẵn. Thông báo xóa không cung cấp thời gian xóa chính xác, do đó
+source_at vẫn là null. Thứ tự nhận dữ liệu truyền tải không nhất thiết phải trùng khớp với thứ tự sự kiện nguồn
+. Các bản chụp lịch sử sử dụng ngày nguồn cũ hơn nhưng thời gian quan sát hiện tại.</p>
+<h2 id="actor-semantics">Ngữ nghĩa về các chủ thể<a class="anchor" href="#actor-semantics" aria-label="Liên kết đến phần này">#</a></h2>
+<p>message.new actor_id là người gửi tin nhắn. message.edited không có thông tin suy luận về
+người chỉnh sửa; payload.sender_id ghi lại người gửi của tin nhắn được quan sát. Việc xóa
+actor_id vẫn giữ giá trị null. Các tin nhắn của dịch vụ thành viên vẫn giữ nguyên người gửi và loại hành động
+, mà không chuyển đổi mọi trường hợp xóa thành việc rời khỏi tự nguyện. Các bản cập nhật thô về người tham gia
+vẫn giữ nguyên actor_id như đã được cung cấp. Các bản chụp nhanh phản ứng không tạo ra một đối tượng thực hiện thay đổi.</p>
+<p>Các thông báo xóa đối với các cuộc trò chuyện riêng tư và các nhóm thông thường chỉ chứa ID tin nhắn.
+Các cuộc trò chuyện này chia sẻ một dãy ID chung cho toàn bộ tài khoản, do đó một ID xác định một tin nhắn duy nhất của
+tài khoản này. Khi một tin nhắn có ID đó đã được lưu trước đó trong sổ nhật ký này, việc
+xóa sẽ được ghi lại trong cuộc trò chuyện đó dưới dạng message.deleted với tên phương thức là payload.chat_resolution.
+Các ID chưa từng được lưu sẽ được lưu giữ dưới dạng deletion.unscoped mà không có
+chat_id; không có bất kỳ giả định nào được đưa ra. Các kênh và siêu nhóm đánh số tin nhắn theo từng cuộc trò chuyện và
+không bao giờ được khớp theo cách này. Khi tin nhắn bị xóa được gửi bởi tài khoản được theo dõi,
+payload.deleted_message_was_outgoing có giá trị true; người xóa vẫn chưa được cung cấp.</p>
+<h2 id="coverage-continuity-gaps-and-unobserved-ids">Phạm vi bao quát: tính liên tục, các khoảng trống và các ID không được ghi nhận<a class="anchor" href="#coverage-continuity-gaps-and-unobserved-ids" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Mỗi tệp ZIP được ký số đều chứa tệp <code>coverage.json</code>; báo cáo HTML mở đầu bằng cùng một bản tóm tắt; và tệp
+<code>verify.py</code> sẽ tính toán lại bản tóm tắt này dựa trên tệp <code>events.jsonl</code> thay vì tin tưởng vào nội dung của tệp:</p>
+<ul>
+<li><strong>Quá trình quan sát diễn ra liên tục từ X đến Y.</strong> Một khoảng thời gian bắt đầu bằng <code>observation.started</code> và
+    kết thúc khi có tạm dừng, ngừng hoạt động, mất kết nối Telegram, đăng xuất, quá trình khởi động mà không
+    có bước dừng đúng trình tự, hoặc khi không có bất kỳ bản ghi nào trong hơn ba phút trong quá trình quan sát
+    (các tín hiệu kiểm tra trạng thái được ghi lại mỗi phút, do đó sự im lặng có nghĩa là quá trình đã dừng lại, bị treo hoặc
+    máy tính đã chuyển sang chế độ ngủ). Khi khoảng thời gian giữa các tín hiệu kiểm tra trạng thái được thay đổi trong <strong>phần Cài đặt</strong>, mỗi tín hiệu kiểm tra trạng thái
+    sẽ ghi lại thay đổi này và khoảng thời gian im lặng được phép sẽ là ba khoảng thời gian, không bao giờ ít hơn ba phút.</li>
+<li><strong>Danh sách các khoảng trống</strong> liệt kê khoảng thời gian giữa các giai đoạn kèm theo lý do. Một khoảng trống vẫn còn tồn tại tại bản ghi cuối cùng
+    sẽ được đánh dấu là <code>not_resumed_by_last_record</code>.</li>
+<li><strong>ID tin nhắn không được ghi nhận.</strong> Đối với các kênh và siêu nhóm, nơi số lượng tin nhắn được tính theo
+    cuộc trò chuyện, các ID bị thiếu giữa các ID đã ghi nhận sẽ được liệt kê dưới dạng khoảng. Chúng được báo cáo là
+    không<em> được ghi nhận</em> — do đã bị xóa, chưa bao giờ được gửi đi hoặc nằm ngoài lịch sử đã lưu — chứ không bao giờ được ghi là
+    đã bị xóa. Các cuộc trò chuyện riêng tư và nhóm thông thường sử dụng chung một dãy số ID trên toàn tài khoản, do đó các khoảng trống ở đó
+    không có ý nghĩa gì và không được liệt kê.</li>
+<li>Các thông báo về khoảng trống ở cấp độ cuộc trò chuyện (ví dụ: Telegram yêu cầu khôi phục dữ liệu bị thiếu trong một
+    kênh) được tính là các ghi chú; chúng không làm gián đoạn phạm vi ghi lại toàn bộ.</li>
+</ul>
+<p>Phạm vi ghi nhận mô tả những nội dung mà công cụ thu thập này đã ghi lại. Điều này không phải là bằng chứng cho thấy Telegram đã gửi
+mọi bản cập nhật trong suốt một khoảng thời gian liên tục.</p>
+<h2 id="producer">Người sản xuất<a class="anchor" href="#producer" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Bản kê khai có chữ ký của các tệp ZIP bằng chứng, bản xuất cuộc trò chuyện, nhật ký chứng cứ và tuyên bố về
+các tệp hồ sơ cá nhân chứa thông tin <code>producer</code>
+: phần mềm, phiên bản, dự án (PhishDestroy),
+trang chủ và kho lưu trữ mã nguồn. Báo cáo HTML hiển thị dòng thông tin tương tự, và <code>verify.py</code>
+in thông tin này như một phần của nội dung đã được xác minh. Các tệp lưu trữ được tạo ra trước khi trường này tồn tại sẽ được xác minh như
+trước đây và được báo cáo là không nêu tên người tạo.</p>
+<h2 id="people-profiles">Hồ sơ cá nhân<a class="anchor" href="#people-profiles" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Một tệp hồ sơ (<code>tgwitness-dossier-v1</code>, JSON) được tạo theo yêu cầu từ các bản ghi đã có sẵn trong
+sổ nhật ký cho một cuộc trò chuyện; không có dữ liệu nào được lấy từ Telegram và nội dung hồ sơ không bao giờ
+được ghi vào sổ nhật ký (việc bật và tắt hồ sơ được ghi lại dưới dạng <code>dossier.changed</code>).
+Đối với mỗi người dùng có tin nhắn được lưu, công cụ sẽ liệt kê tên và lịch sử tên người dùng, các cờ cảnh báo của Telegram
+(bot, lừa đảo, giả mạo, tài khoản cao cấp, đã xác minh, bị hạn chế, đã xóa) như được hiển thị tại thời điểm lưu trữ,
+thẻ nhận dạng ảnh, mã băm SHA-256 và mã băm nhận thức (pHash, tương thích với <code>imagehash.phash</code>) của
+hình đại diện từ bộ nhớ đệm hình đại diện cục bộ cùng các hình đại diện tương tự, hoạt động (tin nhắn đầu tiên và cuối cùng,
+số lượng, các bài chia sẻ đã chỉnh sửa và xóa, tin nhắn theo giờ UTC), ai trả lời ai, các cuộc trò chuyện khác
+trong nhật ký này mà người đó đã viết, cùng các ví được đề cập (BTC, EVM, TRON, TON, LTC,
+DOGE, XMR, SOL; các địa chỉ Base58Check đã được xác thực tổng kiểm tra), số điện thoại, tên người dùng và
+các liên kết, bao gồm cả các liên kết ẩn sau văn bản.</p>
+<p>Mỗi sự kiện đều liệt kê các bản ghi trong sổ nhật ký (<code>seq</code>) mà nó xuất phát, và <code>record_hashes</code> chứa
+giá trị băm của từng bản ghi được tham chiếu. Tuyên bố này được ký bằng khóa không gian làm việc:</p>
+<pre><code class="language-sh">python verify.py tgwitness-dossier-CHAT.json --fingerprint TRUSTED_SHA256 --evidence tgwitness-evidence.zip</code></pre>
+<p>kiểm tra chữ ký, xác minh chính bản xuất bằng chứng (chữ ký, chuỗi băm và các tệp)
+cũng như đảm bảo mọi bản ghi được tham chiếu đều tồn tại nguyên vẹn trong bản xuất đó của cùng một không gian làm việc. Các giá trị băm của ảnh đại diện được ghi chú là lấy từ bộ nhớ đệm cục bộ
+(không phải bản ghi trong sổ nhật ký). Các đề cập là kết quả khớp mẫu — là manh mối cần kiểm tra, không phải sự thật đã được xác minh.
+Các hồ sơ được kích hoạt theo từng cuộc trò chuyện, có thể được xuất dưới dạng tệp ZIP mã hóa AES-256 kèm mật khẩu, và
+sẽ bị xóa khi bị tắt hoặc khi cuộc trò chuyện bị xóa khỏi các nguồn.</p>
+<h2 id="independent-witness">Nhân chứng độc lập<a class="anchor" href="#independent-witness" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Một sổ nhật ký chứng cứ (<code>tgwitness-witness-v1</code>) cùng các bài đăng trên kênh của nó sẽ được đối chiếu với
+tệp xuất chứng cứ bằng <code>verify.py --witness … --channel …</code>; xin tham khảo phần <a href="../witness/">“chứng cứ độc lập</a>”.</p>
+<h2 id="manifest-and-checkpoints">Bản kê khai và các điểm kiểm tra<a class="anchor" href="#manifest-and-checkpoints" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Tệp manifest.json bao gồm định dạng, thời gian xuất, khóa công khai, dấu vân tay, độ dài nhật ký,
+băm đầu, phạm vi, nhà sản xuất, các giới hạn và giá trị SHA-256 của mọi thành phần nội dung ngoại trừ
+chính các thành phần <code>manifest.json</code> và <code>manifest.sig</code>.
+Tệp manifest.sig là chữ ký Ed25519 mã hóa base64 trên tệp JSON manifest chuẩn.
+Công cụ xác minh sẽ từ chối các thành phần bất thường hoặc thiếu sót, tên trùng lặp, tệp bị hỏng,
+chuỗi/dãy bị gián đoạn, chữ ký không hợp lệ và sự không khớp với điểm kiểm tra được cung cấp.
+Công cụ này không bao giờ trích xuất đường dẫn lưu trữ. Công cụ này giới hạn tổng kích thước khai báo sau khi giải nén ở mức 4 GiB;
+tệp <code>--max-gib N</code> cho phép các tệp lưu trữ có kích thước lớn hơn được tạo ra nhờ giới hạn <strong>tham số</strong> được nâng cao.</p>
+<p>Vui lòng lấy mã xác minh từ một bản tải xuống đáng tin cậy hoặc bản sao độc lập đã được kiểm duyệt. Mã xác minh
+nằm trong một kho lưu trữ không đáng tin cậy là tài liệu có thể thực thi do tác giả của kho lưu trữ đó cung cấp;
+sự hiện diện của nó chỉ nhằm mục đích thuận tiện cho việc di chuyển, chứ không phải là một điểm neo tin cậy độc lập.</p>
+<p>Một điểm kiểm tra sẽ ký vào một tuyên bố chứa khóa công khai, độ dài nhật ký,
+băm đầu (head hash) và thời gian tạo. Người xác minh có thể kiểm tra xem một bản lưu trữ sau đó có chứa
+tiền tố tương tự hay không. Hãy lưu giữ một điểm kiểm tra bên ngoài bộ thu thập trước khi xảy ra thay đổi có tranh chấp:
+một kẻ tấn công kiểm soát cả bản lưu trữ lẫn điểm kiểm tra có thể thay thế cả hai.</p>
+<p>Một chữ ký hợp lệ từ khóa chưa được ghim chỉ đảm bảo tính nhất quán nội bộ mà thôi.
+Ngay cả khóa đã được ghim cũng không thể chứng minh tính xác thực của nội dung nguồn nếu người thu thập hoặc khóa đó
+đã bị xâm phạm trước khi ghi lại. Việc đóng dấu thời gian bên ngoài và việc thu thập dữ liệu đáng tin cậy là những
+yêu cầu riêng biệt. TgWitness không cam kết về tính chấp nhận được làm bằng chứng hoặc chứng nhận pháp y.</p>
+<h2 id="attachments">Tệp đính kèm<a class="anchor" href="#attachments" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Các tệp được định danh bằng mã băm SHA-256 trong thư mục media/. Một sự kiện media.saved liên kết mã băm và
+độ dài byte với một sự kiện tin nhắn cụ thể. Tên tệp gốc là siêu dữ liệu, không bao giờ là
+đường dẫn cục bộ. Các byte phương tiện được tải xuống theo cơ chế không đồng bộ, do đó việc xóa ngay lập tức có thể ngăn cản
+quá trình ghi lại. Các trường hợp như việc thu thập bị vô hiệu hóa, tệp quá lớn/không xác định kích thước, lỗi tải xuống,
+và quá trình tải xuống bị gián đoạn đều được hiển thị dưới dạng kết quả. Sự cố sập hệ thống có thể để lại
+các tệp không hoàn chỉnh không có tham chiếu; những tệp này sẽ không được bao gồm trong các bản xuất.</p>
+<p>Trình xuất ZIP sẽ xác minh các tệp phương tiện được lưu trữ dựa trên tên của chúng. Các định dạng xuất JSONL, CSV và HTML
+sẽ xác minh chữ ký sự kiện nhưng không chứa dữ liệu phương tiện. Các báo cáo phái sinh
+chỉ mang tính tiện lợi; tệp events.jsonl mới là bản ghi sự kiện chính thức.</p>
+<h2 id="durable-collection-and-process-receipts-02">Thu thập và xử lý bằng chứng bền vững (0.2)<a class="anchor" href="#durable-collection-and-process-receipts-02" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Một tác vụ phương tiện và sự kiện tin nhắn tương ứng được ghi lại trong một giao dịch duy nhất. Tác vụ này lưu trữ
+mô tả tin nhắn TL gốc; quan sát có chữ ký liên kết mã SHA-256, tài khoản
+và chính sách kích thước của nó. Quá trình khôi phục sẽ xác minh liên kết đó trước khi tải xuống. Hệ thống không bao giờ truy xuất
+tin nhắn hiện tại mà sẽ âm thầm thay thế bằng tệp đính kèm mới hơn. Các tác vụ bị gián đoạn
+sẽ được thử lại, trong khi lỗi vĩnh viễn vẫn là một kết quả rõ ràng.</p>
+<p>Mỗi không gian làm việc đều có sổ nhật ký và danh tính ký riêng. Sự kiện `process.started` bao gồm
+ID phiên chạy, thời gian theo đồng hồ cục bộ, phiên bản các thành phần phụ thuộc, băm tệp nguồn, tài khoản/phạm vi ban đầu,
+và cài đặt ghi lại. Các tín hiệu kiểm tra trạng thái (heartbeats) bao gồm ID phiên chạy, thời gian đơn điệu và trạng thái hàng đợi.
+Biên nhận quá trình cũng có thể được tải xuống dưới dạng một bản tuyên bố được ký riêng biệt.
+Các số liệu về tệp là do hệ thống tự báo cáo và không phải là chứng nhận phần cứng đáng tin cậy.</p>
+<p>Các điểm kiểm tra tự động được lưu giữ cục bộ khi khởi động, cứ sau năm phút trong quá trình
+theo dõi (<strong>Tham số → Điểm kiểm tra có chữ ký mỗi</strong>) và khi dừng hoạt động theo trình tự. Quá trình xác minh khi khởi động và xuất dữ liệu sẽ so sánh nhật ký
+với điểm kiểm tra cục bộ mới nhất được lưu giữ. Điều này có thể phát hiện tình trạng khôi phục cơ sở dữ liệu
+khi điểm kiểm tra vẫn còn tồn tại; tuy nhiên, người vận hành kiểm soát cả hai vẫn có thể thay thế cả hai.
+Việc lưu trữ độc lập và các dấu thời gian đáng tin cậy từ bên ngoài vẫn là các yêu cầu riêng biệt.</p>
+<p>Sau khi khởi động lại, vị trí cập nhật Telegram đã lưu sẽ được khôi phục (<code>catch_up_from</code> trong
+<code>observation.started</code>) và hệ thống sẽ yêu cầu các bản cập nhật bị bỏ lỡ. Quá trình kiểm tra lại định kỳ sẽ ghi lại
+<code>message.recovered</code> đối với các tin nhắn bị bỏ lỡ và <code>message.missing_on_recheck</code> khi Telegram không
+còn trả về tin nhắn đã lưu; trường hợp sau không phải là thông báo xóa và không nêu tên người xóa cũng như thời gian.</p>
+<h3 id="off-site-copy-and-restore-s3">Sao lưu và khôi phục ngoài trang web (S3)<a class="anchor" href="#off-site-copy-and-restore-s3" aria-label="Liên kết đến phần này">#</a></h3>
+<p>Bản sao ngoài trang web (Tính năng Xuất dữ liệu, mặc định là tắt) sẽ tải lên các phân đoạn nhật ký, tệp tin được lưu giữ, các điểm kiểm tra
+cùng với dấu thời gian của chúng và các bản xuất cuộc trò chuyện đã hoàn tất lên bộ lưu trữ tương thích với S3, được mã hóa bằng
+AES-256-GCM trước khi tải lên bằng khóa được lưu trữ trong kho lưu trữ của không gian làm việc; tính năng lưu giữ Object Lock sẽ được áp dụng
+khi bucket hỗ trợ tính năng này. Nếu không có khóa đã tải xuống, bản sao này sẽ không thể được đọc. Khôi phục và xác minh
+bằng <code>python -m tgwitness.replica restore --key-file KEY.json --out DIR</code>.</p>
+<p>Quá trình khôi phục yêu cầu một thư mục thông thường trống. Các tệp tải xuống và các đối tượng đã được giải mã sẽ được lưu giữ trong
+bộ nhớ tạm thời riêng tư cho đến khi toàn bộ nhật ký và mọi điểm kiểm tra được lưu giữ đều được xác minh. Các đường dẫn đối tượng không an toàn,
+phạm vi phân đoạn không nhất quán và các nhật ký ngắn hơn một điểm kiểm tra sẽ bị từ chối; nếu
+xác minh thất bại, hệ thống sẽ không công bố bất kỳ tệp nào đã được khôi phục. Các kiểm tra thời hạn lưu giữ sẽ so sánh chế độ Object Lock
+và ngày tháng được trả về với thời hạn được gửi khi tải lên (dung sai làm tròn là một giây). Thời hạn đã hết hạn,
+không hợp lệ hoặc bị rút ngắn sẽ không được coi là đã được xác minh. Trạng thái báo cáo đối tượng được lấy mẫu
+mà thời hạn lưu giữ của nó đã được đọc lại cho lần tải lên đó.</p>
+<p>Tiến trình sao chép được giới hạn trong phạm vi đích và khóa mã hóa. Việc thay đổi điểm cuối, thùng lưu trữ
+hoặc tiền tố sẽ khởi động quá trình sao chép hoàn toàn nhật ký, tệp phương tiện và các điểm kiểm tra được lưu giữ cục bộ sang
+đích đó. Tiến trình cũ chưa được giới hạn phạm vi sẽ được bảo toàn nhưng chỉ được tái thực thi một lần sau khi nâng cấp. Các bản xuất
+lịch sử trò chuyện đã bị xóa khỏi hộp thư đi cục bộ vẫn được giữ nguyên tại đích ban đầu của chúng.</p>
+<p>Các tệp phương tiện cục bộ bị thiếu hoặc bị hỏng sẽ được báo cáo là lỗi của lần xử lý và con trỏ phương tiện sẽ được giữ lại trước
+vị trí đó, để tệp này được thử lại trong lần xử lý tiếp theo; các tệp, điểm kiểm tra và tệp xuất sau đó vẫn
+được sao chép. Quá trình khôi phục sẽ kiểm tra
+tất cả các tham chiếu đến phương tiện được lưu giữ so với các hàm băm đã được giải mã và kích thước đã ghi lại. Các phân đoạn nhật ký trùng lặp
+giống hệt nhau từ các lần tải lên bị gián đoạn sẽ được loại bỏ trùng lặp; các phần trùng lặp mâu thuẫn sẽ bị từ chối.
+Các điểm kiểm tra được tạo ra trong quá trình tải lên sẽ được hoãn lại cho đến khi các bản ghi nhật ký liên quan đã được
+sao chép, do đó một lần quét hoàn tất sẽ không công bố điểm kiểm tra trước khi nhật ký tương ứng được hoàn tất.</p>
+<h3 id="streaming-export-snapshots">Xuất các bản chụp nhanh theo thời gian thực<a class="anchor" href="#streaming-export-snapshots" aria-label="Liên kết đến phần này">#</a></h3>
+<p>Việc xuất dữ liệu theo thời gian thực sử dụng một bản chụp nhanh đọc ổn định từ cơ sở dữ liệu SQLite. Phần đầu của bản chụp nhanh này có thể cũ hơn so với
+sổ nhật ký trực tiếp hiện tại khi quá trình tải xuống hoàn tất. Một điểm kiểm tra được tạo ra sau
+bản chụp nhanh đó có thể báo cáo chính xác rằng kho lưu trữ ngắn hơn; hãy so sánh với một điểm kiểm tra
+tại hoặc trước tiền tố đã xuất, chứ không phải một điểm kiểm tra ngẫu nhiên nào đó sau đó.</p>
+<h2 id="rfc-3161-preparation-and-response-verification-02">Chuẩn bị theo RFC 3161 và xác minh phản hồi (0.2)<a class="anchor" href="#rfc-3161-preparation-and-response-verification-02" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Chế độ bằng chứng (tắt theo mặc định) chỉ gửi mã SHA-256 của từng điểm kiểm tra đã được ký đến các
+cơ quan có thẩm quyền theo tiêu chuẩn RFC 3161 và các lịch OpenTimestamps đã liệt kê, thông qua tuyến đường không gian làm việc và tuyệt đối không qua MTProxy.
+Các kết quả được lưu trữ trong <code>checkpoints/anchors/</code>, xuất ra và kiểm tra bằng <code>verify.py</code> (<code>--tsa-ca</code> kiểm tra
+chữ ký TSA; xác nhận các bằng chứng OpenTimestamps bằng <code>ots upgrade</code> và <code>ots verify</code>).</p>
+<p>Bảng điều khiển sẽ chuẩn bị một kho lưu trữ yêu cầu chứa các byte chuẩn của tệp checkpoint.json,
+dấu vân tay tin nhắn SHA-256 và giá trị ngẫu nhiên (nonce) trong tệp timestamp.tsq, các tổng kiểm tra (checksums) cùng hướng dẫn.
+Không có yêu cầu mạng nào được thực hiện. Quá trình chuẩn bị này không phải là dấu thời gian đáng tin cậy.</p>
+<p><code>python -m tgwitness.anchor verify</code> gọi hàm OpenSSL ts hai lần: một lần đối với các byte điểm kiểm tra
+và một lần đối với yêu cầu ban đầu. Tệp CA đáng tin cậy phải được chỉ định rõ ràng;
+các chứng chỉ đi kèm sẽ không tự động được coi là đáng tin cậy. Việc kiểm tra yêu cầu là tùy chọn tại
+giao diện dòng lệnh (CLI), do đó quý vị cần giữ lại và cung cấp tham số --request để kiểm tra mã ngẫu nhiên (nonce). Kết quả sẽ cho biết liệu
+việc kiểm tra đã được thực hiện hay chưa. Chữ ký điểm kiểm tra của bộ thu thập và nhật ký vẫn phải được xác minh
+riêng biệt bằng dấu vân tay đáng tin cậy của bộ thu thập.</p>
+<p>Công cụ xác minh hiện tại không thu thập thông tin thu hồi cũng như không thực hiện
+việc xác thực lưu trữ dài hạn sau khi chứng chỉ hết hạn. Xin đừng nhầm lẫn việc xác minh chữ ký
+thành công với dấu thời gian đủ điều kiện hoặc tính hợp lệ về mặt pháp lý. Một tổ chức TSA độc lập thực sự
+chưa được liên hệ trong quá trình phát triển. Vui lòng tham khảo <a href="../timestamp/">quy trình</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/EVIDENCE.md">Chỉnh sửa trang này trên GitHub ↗</a><a class="next-guide" href="../witness/"><span>Bước tiếp theo</span><strong>Nhân chứng độc lập →</strong></a><p>Các hướng dẫn này mô tả cách triển khai hiện tại. Kết quả xác thực và những hạn chế còn tồn tại được ghi chép riêng biệt. <a href="../verification/">Những nội dung đã được kiểm thử →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Trên trang này"><p class="nav-label">Trên trang này</p><a href="#what-is-signed">“Được ký” là gì</a><a href="#investigation-handoff">Chuyển giao cuộc điều tra</a><a href="#event-canonicalization">Tiêu chuẩn hóa sự kiện</a><a href="#actor-semantics">Ngữ nghĩa về các chủ thể</a><a href="#coverage-continuity-gaps-and-unobserved-ids">Phạm vi bao quát: tính liên tục, các khoảng trống và các ID không được ghi nhận</a><a href="#producer">Người sản xuất</a><a href="#people-profiles">Hồ sơ cá nhân</a><a href="#independent-witness">Nhân chứng độc lập</a><a href="#manifest-and-checkpoints">Bản kê khai và các điểm kiểm tra</a><a href="#attachments">Tệp đính kèm</a><a href="#durable-collection-and-process-receipts-02">Thu thập và xử lý bằng chứng bền vững (0.2)</a><a href="#rfc-3161-preparation-and-response-verification-02">Chuẩn bị theo RFC 3161 và xác minh phản hồi (0.2)</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Mã nguồn mở · Chạy trên máy tính của quý vị</span><a href="../../../../LICENSE">Giấy phép MIT</a><a href="../notice/">Thông báo dành cho người vận hành</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">An ninh</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Đang chờ tin nhắn", "Step through a fictional send, edit and delete.": "Hãy cùng tìm hiểu từng bước về một quy trình giả định bao gồm việc gửi, chỉnh sửa và xóa tin nhắn.", "No observations yet. Start the sequence or advance one event.": "Chưa có ghi chú nào. Bắt đầu chuỗi sự kiện hoặc chuyển sang sự kiện tiếp theo.", "Meet at 10:00": "Hẹn gặp lúc 10:00", "A new message is visible in the chat.": "Một tin nhắn mới đã xuất hiện trong cuộc trò chuyện.", "Record 1 appended: the collector observed the original message.": "Ghi chú 1 được đính kèm: bộ thu thập đã ghi nhận tin nhắn gốc.", "Meet at 11:00": "Hẹn gặp lúc 11:00", "The current text changes. The earlier observation stays.": "Nội dung văn bản hiện tại đã được điều chỉnh. Quan sát trước đó vẫn được giữ nguyên.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Bản ghi số 2 đã được bổ sung: nội dung chỉnh sửa là một quan sát mới. Bản ghi số 1 vẫn giữ nguyên văn bản gốc.", "Message deleted": "Tin nhắn đã bị xóa", "The message has disappeared from the chat view.": "Tin nhắn đã biến mất khỏi giao diện trò chuyện.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Ghi chú 3 được đính kèm: thông báo xóa được lưu giữ cùng với cả hai phiên bản đã quan sát được.", "0 records": "0 bản ghi", "1 record": "1 bản ghi", "2 records": "2 bản ghi", "3 records": "3 bản ghi", "Complete / {n} of 3": "Hoàn tất / {n}/3", "Step / {n} of 3": "Bước / {n}/3", "Pause": "Tạm dừng", "Replay sequence": "Trình tự phát lại", "Play sequence": "Trình tự phát lại", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Ví dụ tĩnh hiện đã có sẵn. Để tính toán các giá trị băm một cách tương tác, vui lòng truy cập trang này qua HTTPS hoặc xem bản xem trước trên localhost với sự hỗ trợ của Web Crypto.", "No record supplied": "Không có bản ghi nào được cung cấp", "Tail removed": "Phần cuối đã được loại bỏ", "≠ saved hash": "≠ băm đã lưu", "Rebuilt · different hash": "Đã được xây dựng lại · mã băm khác", "= saved hash": "= mã băm đã lưu", "Same length and matching head.": "Độ dài tương đương và tiêu đề phù hợp.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Cả ba giá trị băm được tính toán đều khớp với các giá trị băm đã lưu. Mẫu này phù hợp với giới hạn ba bản ghi được lưu giữ.", "Same saved head; the journal prefix fails verification.": "Cùng một tiêu đề đã lưu; tiền tố của sổ ghi chép không qua được quá trình xác minh.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Bản ghi số 2 hiện không còn khớp với giá trị băm đã lưu trữ của nó. Việc chỉ kiểm tra giá trị băm cuối cùng đã lưu trữ sẽ bỏ sót lỗi này; trình xác minh sẽ kiểm tra từng bản ghi một.", "Head differs from the retained checkpoint.": "Đầu trang khác với điểm kiểm tra được lưu giữ.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Các giá trị băm được tái tạo liên kết với nhau, nhưng phần đầu cuối cùng đã thay đổi. Điểm kiểm tra được lưu giữ từ chối lịch sử này. Các chữ ký gốc cũng sẽ không hợp lệ đối với các bản ghi đã bị thay đổi.", "Too short: 2 supplied records \u003c 3 retained records.": "Quá ngắn: 2 bản ghi được cung cấp \u003c 3 bản ghi được lưu giữ.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Hai giá trị băm còn lại vẫn khớp nhau. Điểm kiểm tra được lưu giữ đã tiết lộ phần cuối bị thiếu. Nếu không có ranh giới trước đó, chỉ riêng tiền tố ngắn hơn này sẽ không thể phát hiện ra sự thiếu sót.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Trình duyệt này không hỗ trợ tính toán hàm băm. Các công thức và phần giải thích tĩnh dưới đây vẫn có sẵn.", "{n} records": "{n} bản ghi", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Đã được chấp nhận: số lượng tăng lên, chữ ký đã được xác minh và khóa khớp. TgWitness duy trì ranh giới mới này.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: bản trả lời có chữ ký báo cáo số lượng bản ghi ít hơn so với điểm kiểm tra được chấp nhận gần nhất. Hệ thống TgWitness ghi nhận sự cố và giữ nguyên ranh giới đã được chấp nhận trước đó.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: số lượng không thay đổi nhưng nhánh chính khác biệt. TgWitness ghi lại sự bất đồng này và duy trì ranh giới đã được chấp nhận trước đó.", "No answer": "Không có câu trả lời", "boundary unknown": "giới hạn chưa xác định", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Không có phản hồi: TgWitness ghi lại kết quả kiểm tra không thành công. Công cụ này không thể xác định trạng thái hiện tại của bộ thu thập dữ liệu. Nếu TgWitness vẫn có thể kết nối với Bot API và chính sách xuất bản cho phép, công cụ này có thể công bố thông tin về sự cố đó.", "Send {n}": "Gửi {n}", "Edit {n}": "Chỉnh sửa {n}", "Delete {n}": "Xóa {n}", "Both accounts captured all six expected observations in this example.": "Cả hai tài khoản đều ghi lại đầy đủ cả sáu quan sát dự kiến trong ví dụ này.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Tài khoản B vẫn ghi lại được 6/6 tin nhắn. Hai biên nhận mất nhiều thời gian hơn. Tỷ lệ ghi lại và độ trễ của biên nhận trả lời cho những câu hỏi khác nhau.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Tài khoản B đã ghi lại được 5 trong số 6 hành động trước thời hạn (83,3%). Hành động chỉnh sửa còn thiếu không có độ trễ được đo lường. Kết quả này chỉ mô tả sáu hành động được kiểm soát.", "not observed by cutoff": "không được ghi nhận trước thời hạn", "{s} seconds": "{s} giây", "Exact values follow in the table.": "Các giá trị chính xác được trình bày trong bảng dưới đây.", "{s} s": "{s} s", "Not observed": "Chưa được quan sát thấy", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Bốn cuộc trò chuyện cung cấp các quan sát khác nhau. Vui lòng theo dõi các bản ghi nguồn cho từng kết nối; không gán bài đăng trên kênh cho người dùng 71001 nếu không có thông tin người gửi được xác định rõ.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Các bản ghi số 146 và 205 cung cấp cùng một ID người gửi, đó là 71001. Điều này giúp liên kết các bài đăng được quan sát thấy từ một tài khoản Telegram trên hai cuộc trò chuyện. Tuy nhiên, thông tin này không xác định danh tính của một cá nhân trong thế giới thực cũng như không quy thuộc bài đăng trên kênh đó cho bất kỳ ai.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Địa chỉ đích pay.example.invalid/new xuất hiện trong bản ghi nhóm số 146, bản ghi bàn phím bot số 173, bản ghi chỉnh sửa kênh số 188 và tin nhắn riêng tư số 205. Việc địa chỉ đích này xuất hiện lặp lại giúp liên kết các tài liệu với nhau; điều này không chứng minh rằng các tài khoản đó nằm dưới sự kiểm soát chung.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Trong trường hợp giả định này, các biên nhận phương tiện đã hoàn tất số #151 và #209 có các giá trị SHA-256 đầy đủ trùng khớp. Hãy so sánh các byte thực tế và các bản ghi tin nhắn liên quan. Tệp trùng khớp này không xác định được người tạo ra nó cũng như không chứng minh được ai là người đã chuyển tiếp nó.", "the encrypted off-site copy": "bản sao được mã hóa lưu trữ ngoài trang web", "notifications": "thông báo", "checkpoint hashes for timestamps": "Các giá trị băm điểm kiểm tra (checkpoint hashes) để xác định dấu thời gian", "signed checkpoints for the witness": "các mốc kiểm tra có chữ ký dành cho TgWitness", "Switched on in this example": "Đã kích hoạt trong ví dụ này", "Optional · off by default": "Tùy chọn · tắt theo mặc định", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Khi rời khỏi thiết bị này: kết nối Telegram và {list}. Không có gì khác.", "Default: only the Telegram connection leaves this machine.": "Mặc định: chỉ kết nối Telegram mới được truyền ra khỏi máy này.", "{done} of {total} done": "{done}/{total} đã hoàn thành", "Mark step {n} as done": "Đánh dấu bước {n} là đã hoàn thành", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Nội dung", "Copied": "Đã sao chép", "Command copied.": "Lệnh đã được sao chép.", "Selected — Ctrl/Cmd+C": "Đã chọn — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Lệnh đã được chọn. Vui lòng sao chép thủ công.", "Command copied to clipboard.": "Lệnh đã được sao chép vào khay nhớ tạm.", "Select text": "Chọn văn bản", "Clipboard unavailable. Command selected; copy it manually.": "Không thể truy cập khay nhớ tạm. Lệnh đã được chọn; vui lòng sao chép thủ công.", "A message arrives. The first observation is saved.": "Một tin nhắn được gửi đến. Quan sát đầu tiên được lưu lại.", "The time changes. Both captured versions stay.": "Thời gian có thể thay đổi. Cả hai phiên bản được lưu giữ đều được giữ nguyên.", "The message disappears. The captured history remains.": "Tin nhắn có thể biến mất. Nhưng lịch sử đã được ghi lại vẫn còn đó.", "Pause example animation": "Tạm dừng hình ảnh minh họa", "Play example animation": "Xem ví dụ về hình ảnh động", "Play": "Phát", "Full-size workspace screenshot": "Ảnh chụp màn hình toàn màn hình không gian làm việc", "Workspace screenshot · fictional data": "Ảnh chụp màn hình giao diện làm việc · dữ liệu giả định", "Close": "Đóng", "Close screenshot": "Đóng ảnh chụp màn hình", "Scrollable full-size screenshot": "Ảnh chụp màn hình toàn màn hình có thể cuộn", "Enlarge: {name}": "Phóng to: {name}", "View full size": "Xem kích thước đầy đủ"}</script>
+</body></html>

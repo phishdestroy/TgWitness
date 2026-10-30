@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Security and data handling | TgWitness</title>
+<meta name="description" content="Threat model, access model, secrets at rest, network exposure, session imports and how to report a vulnerability."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/docs/reference/security/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Security and data handling | TgWitness"><meta property="og:description" content="Threat model, access model, secrets at rest, network exposure, session imports and how to report a vulnerability.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/docs/reference/security/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/security/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/security/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/security/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/security/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/security/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/security/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/security/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/security/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/security/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/security/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/security/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/security/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/security/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/security/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/docs/reference/security/", "url": "https://phishdestroy.github.io/TgWitness/docs/reference/security/", "name": "Security and data handling | TgWitness", "description": "Threat model, access model, secrets at rest, network exposure, session imports and how to report a vulnerability.", "inLanguage": "en", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://phishdestroy.github.io/TgWitness/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://phishdestroy.github.io/TgWitness/docs/"}, {"@type": "ListItem", "position": 3, "name": "Reference", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Security and data handling", "item": "https://phishdestroy.github.io/TgWitness/docs/reference/security/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../docs.css">
+<link rel="stylesheet" href="../../../learn.css">
+<script src="../../../docs.js" defer></script>
+<script src="../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Documentation</span></a>
+<nav aria-label="Guides"><a href="../../concepts/">Visual guide</a><a href="../../">All guides</a><a href="../">Reference</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Language"><span aria-hidden="true">◍</span> English</summary><div class="lang-list"><a href="./" hreflang="en" lang="en" aria-current="true">English</a><a href="../../../ru/docs/reference/security/" hreflang="ru" lang="ru">Русский</a><a href="../../../uk/docs/reference/security/" hreflang="uk" lang="uk">Українська</a><a href="../../../es/docs/reference/security/" hreflang="es" lang="es">Español</a><a href="../../../pt/docs/reference/security/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../tr/docs/reference/security/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../ar/docs/reference/security/" hreflang="ar" lang="ar">العربية</a><a href="../../../fa/docs/reference/security/" hreflang="fa" lang="fa">فارسی</a><a href="../../../ur/docs/reference/security/" hreflang="ur" lang="ur">اردو</a><a href="../../../hi/docs/reference/security/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../id/docs/reference/security/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../vi/docs/reference/security/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../zh/docs/reference/security/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Switch between light and dark theme"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Guides"><a href="../../../guides/modes.html">Modes, scenarios and evidence levels</a><p class="nav-label">First steps</p><a href="../../start/">Start in minutes</a><a href="../../accounts/">Connect an account</a><a href="../../proxies/">Choose a proxy</a><a href="../../exports/">Export and verify</a><p class="nav-label">Understand the evidence</p><a href="../../concepts/">See how evidence works</a><a href="../../cases/">Investigate across all chats</a><a href="../../security/">Keep it secure</a><p class="nav-label">Go further</p><a href="../../witness/">Set up a witness bot</a><a href="../../server/">Keep it running</a><a href="../../troubleshooting/">Find what went wrong</a></nav><nav class="wiki-nav" aria-label="Reference"><p class="nav-label"><a class="nav-label-link" href="../">Reference</a></p><details class="wiki-group"><summary>Set up</summary><a href="../quickstart/">Quick start</a><a href="../accounts/">Accounts and session formats</a><a href="../connection/">Connection, proxies and data protection</a><a href="../deployment/">Deployment</a></details><details class="wiki-group"><summary>Collect</summary><a href="../collection/">How collection works</a><a href="../operations/">Workflows and operations</a><a href="../investigation/">Investigation mode</a><a href="../features/">Features and limits</a></details><details class="wiki-group"><summary>Evidence</summary><a href="../how-it-works/">How the evidence works</a><a href="../evidence/">Evidence format</a><a href="../witness/">Independent witness</a><a href="../timestamp/">Timestamps</a></details><details class="wiki-group" open><summary>Security & project</summary><a href="./" aria-current="page">Security and data handling</a><a href="../architecture/">Architecture</a><a href="../verification/">What has been tested</a><a href="../license/">Licence and architectural incompatibility notice</a><a href="../notice/">Operator incompatibility notice</a><a href="../changelog/">Changelog</a></details></nav><p class="sidebar-note">v0.7.0<br>Open source · Runs on your machine</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Guides"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Documentation</a> <span aria-hidden="true">/</span> <a href="../">Reference</a> <span aria-hidden="true">/</span> <span aria-current="page">Security and data handling</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Search the documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Try proxy, hash chain, token or witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Clear search" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Type a word to search the guides and the reference. Search stays in your browser.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Reference / Security &amp; project</p><h1>Security and data handling</h1><p class="guide-outcome">Threat model, access model, secrets at rest, network exposure, session imports and how to report a vulnerability.</p><div class="wiki-body"><p>TgWitness runs on your own computer or server. By default the only connection that leaves
+it is the account's connection to Telegram; notifications, timestamps, an off-site copy and
+a witness are separate switches. This page lists what is protected, how, and what is left
+to the operator.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Area</th>
+<th>In short</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Access</td>
+<td>One panel token controls every workspace; the panel listens on 127.0.0.1 by default</td>
+</tr>
+<tr>
+<td>Secrets at rest</td>
+<td>Session, API pair, signing key and proxy settings are encrypted with Fernet</td>
+</tr>
+<tr>
+<td>Messages and media</td>
+<td>Stored unencrypted: use disk encryption and strict permissions</td>
+</tr>
+<tr>
+<td>Integrity</td>
+<td>SHA-256 hash chain and an Ed25519 signature on every record</td>
+</tr>
+<tr>
+<td>Not covered</td>
+<td>A machine administrator, a leaked panel token, completeness of capture</td>
+</tr>
+</tbody>
+</table></div>
+<p>For vulnerability reports, see the <a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">security policy</a>.</p>
+<h2 id="access-model">Access model<a class="anchor" href="#access-model" aria-label="Link to this section">#</a></h2>
+<p>TgWitness is a single-operator collector. Anyone holding the panel token can read and
+export the journal, change collection scope, and authorize a Telegram account.
+There are no roles, per-user permissions, or tenant isolation. Workspaces isolate
+sessions and evidence storage, but the same panel token controls every workspace.</p>
+<p>The panel listens on localhost by default. Data and control API endpoints require
+a bearer token. No authentication cookie is used. The token is kept in the browser's
+sessionStorage and removed by Lock workspace. A closed browser or locked panel does
+not pause the collector. Use Pause observation to stop it.</p>
+<p>Failed token requests are limited per client address. Valid panel and witness tokens
+remain usable when another client at the same proxy address reaches that limit. The
+panel token and witness tokens still grant separate capabilities.</p>
+<h3 id="demo-access">Demo access<a class="anchor" href="#demo-access" aria-label="Link to this section">#</a></h3>
+<p><code>/api/demo-access</code> is a deliberately unauthenticated bootstrap for an explicitly
+started, isolated synthetic demo. It issues a separate process-lifetime capability,
+never the real panel token or a TGWITNESS_TOKEN override. Issuance and use require a
+loopback peer and Host, no forwarded headers, and no cross-origin request. Additional
+workspaces or an authorized session disable this path. Live workspaces never issue
+the capability. The demo cannot connect accounts or change collection settings.</p>
+<h2 id="panel-content-and-exports">Panel content and exports<a class="anchor" href="#panel-content-and-exports" aria-label="Link to this section">#</a></h2>
+<p>The panel uses no external fonts, analytics, CDN resources, or embedded remote media.
+Telegram-sourced text is inserted as text, not HTML. Downloaded attachments are
+served as binary attachments. JSONL exports preserve original strings; HTML escapes
+them; CSV cells that could become formulas are prefixed with an apostrophe.</p>
+<p>Exports exclude authentication and signing secrets, but deliberately contain
+collected source metadata, identifiers, and possibly personal or sensitive content.
+Telegram access hashes and file references can occur in raw source metadata.</p>
+<h2 id="secrets-at-rest">Secrets at rest<a class="anchor" href="#secrets-at-rest" aria-label="Link to this section">#</a></h2>
+<p>Telegram API credentials, StringSession, and the Ed25519 private key are encrypted
+using Fernet. By default its key is stored in the same protected data directory.
+This reduces accidental plaintext exposure; it is not protection against an attacker
+who can read the whole directory. Message content and media are <strong>not encrypted</strong>
+by TgWitness. Use disk encryption and restrictive OS permissions. Unix private key
+files are created with mode 0600; newly created data directories use mode 0700.
+Existing directory permissions are not changed. Windows inherits directory ACLs: restrict them
+to the service account and authorized administrators.</p>
+<h3 id="external-master-key">External master key<a class="anchor" href="#external-master-key" aria-label="Link to this section">#</a></h3>
+<p>For a new data directory, TGWITNESS_VAULT_KEY_FILE can supply an external random
+master key. HKDF-SHA256 and a separate random salt derive a different Fernet key
+for each workspace. vault.external.json must be retained for recovery. Missing or
+wrong master keys fail closed. Existing local vaults are not silently migrated.
+The running process can access the key; this is not HSM isolation. The panel reports
+the selected mode and explicitly states that message/media storage is not encrypted
+by the application. See <a href="../connection/">connection, proxies and data protection</a>
+for the full threat model.</p>
+<h2 id="proxies-and-network-routes">Proxies and network routes<a class="anchor" href="#proxies-and-network-routes" aria-label="Link to this section">#</a></h2>
+<p>Proxy configuration is encrypted in network.enc. Proxy passwords, usernames and
+MTProxy secrets are not returned by the API or written to evidence events. Each
+workspace has its own route. No automatic direct fallback is configured. This applies
+to Telegram transport, not all machine traffic or DNS resolution of the proxy host.
+SOCKS and ordinary HTTP CONNECT proxy authentication are not TLS-protected by
+the proxy protocol itself. Fake TLS MTProxy secrets are rejected.</p>
+<h2 id="sign-in-and-session-imports">Sign-in and session imports<a class="anchor" href="#sign-in-and-session-imports" aria-label="Link to this section">#</a></h2>
+<p>Converted .tgwitness-session files contain a plaintext authorization secret until
+loaded and stored in the vault. The offline CLI accepts reviewed Telethon schemas.
+Panel import additionally accepts Pyrogram SQLite, modern single-account TData ZIP,
+and documented JSON inputs. It is authenticated, limited to four files / 8 MiB,
+and processes uploads in memory without archive extraction or saving original files.
+Normalized credentials are returned only to the requesting authenticated browser;
+they are saved in the encrypted vault after successful Telegram authorization.
+Protect originals and converted files, and avoid concurrent clients cloning an authorization.</p>
+<p>TData processing verifies container checksums, local decryption hashes, and structure
+lengths. A supplied Desktop local passcode is used transiently and is not stored.
+This bounded parser does not establish that every Desktop version is compatible.
+QR images are generated locally, contain short-lived Telegram login tokens, and
+are never sent to an external rendering service. Lock, workspace switch, new login,
+and route changes cancel pending QR attempts. Reload/closing a tab may leave an
+attempt pending until expiry. A successful QR login still enforces account binding.
+Ordinary API bodies remain limited to 16 KiB; the authenticated import route accepts
+up to 12 MiB of encoded JSON, enforcing the smaller decoded-file limit separately.</p>
+<p>Login codes and Telegram two-step verification passwords are not persisted. Phone number/code-hash state is
+held in memory during authorization. Telegram sessions grant account access; never
+upload a data directory, session, token, vault key, or private signing key to GitHub.</p>
+<h2 id="logs-and-transport">Logs and transport<a class="anchor" href="#logs-and-transport" aria-label="Link to this section">#</a></h2>
+<p>The default API validation response is replaced so it does not echo credential
+values. Application access logging is disabled. Do not configure a reverse proxy
+to log Authorization headers or request bodies. HTTP carries tokens and login
+secrets in plaintext: use HTTPS or an SSH tunnel whenever leaving localhost.</p>
+<h2 id="integrity-limits">Integrity limits<a class="anchor" href="#integrity-limits" aria-label="Link to this section">#</a></h2>
+<p>The hash chain, database triggers, and signatures detect certain modifications;
+they do not prevent a local administrator from rewriting and resigning the journal.
+Retain signed checkpoints and the public-key fingerprint on a separate system.
+Evidence mode and the off-site copy (both off by default) send checkpoint hashes to
+timestamp services and encrypted copies to S3-compatible storage; see the
+<a href="../evidence/">evidence format</a>. Transparency logs, HSM-backed signing and formal
+chain-of-custody certification are not implemented.</p>
+<h2 id="if-you-suspect-a-problem">If you suspect a problem<a class="anchor" href="#if-you-suspect-a-problem" aria-label="Link to this section">#</a></h2>
+<p>Preserve the original data directory and use a separate copy for analysis. Do not
+include private Telegram data or credentials in a public issue. No independent
+security certification is claimed.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/SECURITY-MODEL.md">Edit this page on GitHub ↗</a><a class="next-guide" href="../architecture/"><span>Next step</span><strong>Architecture →</strong></a><p>These guides describe the current implementation. Validation results and remaining gaps are documented separately. <a href="../verification/">What has been tested →</a></p></footer>
+</main>
+<aside class="toc" aria-label="On this page"><p class="nav-label">On this page</p><a href="#access-model">Access model</a><a href="#panel-content-and-exports">Panel content and exports</a><a href="#secrets-at-rest">Secrets at rest</a><a href="#proxies-and-network-routes">Proxies and network routes</a><a href="#sign-in-and-session-imports">Sign-in and session imports</a><a href="#logs-and-transport">Logs and transport</a><a href="#integrity-limits">Integrity limits</a><a href="#if-you-suspect-a-problem">If you suspect a problem</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Open source · Runs on your machine</span><a href="../../../LICENSE">MIT license</a><a href="../notice/">Operator notice</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Security</a></footer>
+<script id="site-dict" type="application/json">{}</script>
+</body></html>
