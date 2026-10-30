@@ -17,7 +17,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--format", choices=FORMATS, action="append")
     args = parser.parse_args()
-    source = ROOT / "docs/assets/presentation/tgwitness-investigation-static.svg"
+    source = ROOT / "docs/assets/presentation/identity-hero-static.svg"
     data = base64.b64encode(source.read_bytes()).decode("ascii")
     document = (
         '<!doctype html><html lang="en"><meta charset="utf-8">'

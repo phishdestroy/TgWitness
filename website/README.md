@@ -18,6 +18,7 @@ project website. The authenticated application panel lives in
 | [`learn.css`](learn.css), [`learn.js`](learn.js) | Interactive explanatory examples |
 | [`i18n/`](i18n/README.md) | Public-site translation catalogues |
 | [`render_presentation.py`](render_presentation.py) | Current investigation-style PNGs for GitHub and website sharing |
+| [`render_identity.py`](render_identity.py) | Repository and handbook covers: outlined wordmark, the original investigation illustration and inline motion |
 | [`render_case_assets.py`](render_case_assets.py) | Investigation navigation and case-path diagrams, with desktop, phone and still variants |
 | [`capture_readme.py`](capture_readme.py) | Real demo workflow for the README, with light/dark, phone and reduced-motion exports |
 | [`demo/`](demo/mock.js) | Read-only online demo: the request-answering script and the recorded fictional records |

@@ -9,8 +9,11 @@ and animation are SVG elements. The artwork illustrates a workflow, not an app s
 
 | Asset | Purpose |
 | --- | --- |
-| `readme-investigation-animated.svg`, `tgwitness-investigation-static.svg` | Current README and Wiki cover: the illustrated investigation with a 12-second sequence and a separate still |
-| `case-{demo,start,wiki,evidence}.svg` | Current navigation: demo, first case, investigation handbook and evidence model |
+| `identity-hero*.svg` | Current repository cover: a large wordmark, the original dossier illustration, travelling records and a drawn signature; separate phone and still compositions |
+| `identity-wiki.svg`, `identity-wiki-static.svg` | Wide handbook cover in the same investigation identity |
+| `identity-nav-{demo,start,wiki}.svg` | Three clear entrances: the workspace, local setup and handbook |
+| `readme-investigation-animated.svg`, `tgwitness-investigation-static.svg` | Original investigation composition, retained as the source of the illustrated scene |
+| `case-{demo,start,wiki,evidence}.svg` | Earlier navigation assets retained for existing references |
 | `case-path*.svg` | The four-step case route, with separate desktop, phone and reduced-motion compositions |
 | `case-chain-mobile*.svg` | A vertical record-chain explanation with readable phone captions, exact digest/signature formulas and a separate still |
 | `repository-cover*.svg`, `repository-cover*.webp` | Earlier compact journal cover, retained for existing links |
@@ -44,25 +47,30 @@ and animation are SVG elements. The artwork illustrates a workflow, not an app s
 
 ## Use and maintenance
 
-The main README opens with the investigation scene: sources connect to a dossier,
-records move into it, and a signed handoff appears. Four navigation images lead to
-the demo, setup, Wiki and evidence model. The application recording follows immediately;
-the illustration and the real interface have distinct captions.
+The main README opens with a large wordmark and the investigation scene. Sources
+float, records travel into a dossier, and a signature draws itself. The composition
+keeps those movements in the artwork; type and navigation remain steady. The
+handbook has its own wide cover using the same artwork and typography.
 
-The case route keeps the investigation story visible. Core capability descriptions,
-setup commands and trust boundaries remain ordinary text. The record-chain
-animation is visible; tampering, checkpoints and extra screenshots expand on demand.
-S3 keeps a visible summary and links to the complete setup and recovery instructions.
-The Wiki shares the same investigation cover. Motion is part of the page design;
-readers do not need to open a player or download a file to see it.
+Three navigation images lead to the real demo, local setup and handbook. The real
+application recording follows, with a clear caption distinguishing it from the
+illustration. Feature copy stays concise; installation commands, the main evidence
+diagram and trust boundaries remain visible. Details expand where they are needed.
+Motion is part of the page design, with no players or download prompts.
 
-Regenerate navigation and case-path diagrams with:
+Regenerate the identity covers and navigation with:
+
+```sh
+python website/render_identity.py --font /path/to/Manrope.ttf
+```
+
+Regenerate the supporting phone evidence diagram and earlier case-path assets with:
 
 ```sh
 python website/render_case_assets.py --font /path/to/Manrope.ttf
 ```
 
-This requires `fonttools`. Captions are outlined using the retained OFL-licensed
+Both renderers require `fonttools`. Captions are outlined using the retained OFL-licensed
 Manrope font. The images have no remote fonts or scripts. The previous compact
 journal cover remains reproducible with `website/render_readme.py` for older links.
 
@@ -110,7 +118,7 @@ the message-history still is [`message-history-static.png`](message-history-stat
 
 ## Preview images
 
-Both PNGs are rendered from the static investigation artwork, with the same
+Both PNGs are rendered from the static repository identity, with the same
 illustration and outlined typography as the repository. From the development
 environment with Playwright Chromium installed:
 

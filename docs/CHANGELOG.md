@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Repository identity: a larger wordmark and investigation scene, three direct
+  navigation choices, a dedicated handbook cover and a shorter README. Source
+  connections, travelling records and the signature animate inline; phone layouts
+  and reduced-motion alternatives retain the same visual hierarchy.
 - Investigation presentation: the illustrated source-to-dossier animation now
   leads the README and Wiki. A clearer case route, direct evidence-model
   navigation and a vertical phone diagram keep the workflow and verification
