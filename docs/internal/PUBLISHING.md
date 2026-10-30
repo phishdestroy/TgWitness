@@ -134,7 +134,9 @@ python tools/check_quick_browser.py
 python tools/build_source.py
 ```
 
-Edit the canonical root `NOTICE`, then run `python tools/sync_notice.py` to update
+Edit the author statement in `docs/ETHICAL-NOTICE.md` to update the README and
+Wiki statement. The canonical root `NOTICE` supplies the detailed technical notice.
+Run `python tools/sync_notice.py` after editing either source to update
 its full-text copies in README, SECURITY, documentation and Wiki. Rebuild both the
 site and Wiki bundles before publishing; the check rejects inconsistent copies.
 

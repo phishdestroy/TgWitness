@@ -1,4 +1,4 @@
-"""Render our NOTICE consistently across documentation; no network access."""
+"""Render the ethical statement and technical NOTICE consistently; no network access."""
 import argparse
 import html
 from pathlib import Path
@@ -42,24 +42,27 @@ def quoted_html(text):
     return '<blockquote>\n' + '\n'.join(blocks) + '\n</blockquote>'
 
 
-def excerpt(full, notice, licence, raw, *, compact=False):
-    if compact:
-        return f'''## Licence and operator notice
+def ethical_excerpt(ethical):
+    title, _, body = ethical.partition('\n')
+    return f'''#{title}
 
-[MIT License]({licence}) · [Our position on Taylor Wessing](docs/TAYLOR-WESSING-EXCLUSION.md)
+**Taylor Wessing — Dr. Tobias Schelinski and Dr. Patrick Vincent Zurheide.**
+Our position as the authors of TgWitness. A signature does not make a false
+statement true; a visual redaction does not remove the underlying data.
 
-> **NOTICE — Operator Incompatibility**
-> Our statement on **Taylor Wessing PartG mbB — German core, Hamburg office.**
-> [Full notice]({notice}) · [Original text]({raw}) · [Source record]({SOURCE})
+[MIT License](LICENSE) · [Author statement](docs/ETHICAL-NOTICE.md) · [Full dossier]({SOURCE})
 
 <details>
-<summary><strong>Read the complete notice</strong></summary>
+<summary><strong>Read the statement</strong> — documents, historical context and MIT permissions</summary>
 
-<p>This is our position as the authors of TgWitness. It is not a condition of the MIT License.</p>
+{body.strip()}
 
-{full}
+[Technical notice](docs/OPERATOR-INCOMPATIBILITY.md) · [Original NOTICE](NOTICE)
 
 </details>'''
+
+
+def excerpt(full, notice, licence, raw):
     return f'''### NOTICE — Operator Incompatibility
 
 > **Taylor Wessing PartG mbB — German core, Hamburg office.**
@@ -102,9 +105,19 @@ The notice adds no runtime access control and no condition to the MIT License.
 
 def outputs(root):
     full = quoted_html(statement(root))
+    ethical = (root / 'docs/ETHICAL-NOTICE.md').read_text(encoding='utf-8').strip()
+    if not ethical.startswith('# ⚖️ Ethical Notice & Historical Continuity\n'):
+        raise ValueError('The ethical statement must start with its named heading')
     result = {
         'docs/OPERATOR-INCOMPATIBILITY.md': document(full),
-        'docs/wiki/Operator-Incompatibility.md': document(full, wiki=True),
+        'docs/wiki/Operator-Incompatibility.md': ethical + '''
+
+---
+
+[MIT License](../../LICENSE) · [Technical notice](../OPERATOR-INCOMPATIBILITY.md) · [Original NOTICE](../../NOTICE)
+
+[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md)
+''',
     }
     for name, notice, licence, raw in (
         ('README.md', 'docs/OPERATOR-INCOMPATIBILITY.md', 'LICENSE', 'NOTICE'),
@@ -115,7 +128,8 @@ def outputs(root):
             raise ValueError('Exactly one notice slot is required in ' + name)
         before, tail = source.split(START, 1)
         _, after = tail.split(END, 1)
-        result[name] = before + START + '\n\n' + excerpt(full, notice, licence, raw, compact=name == 'README.md') + '\n\n' + END + after
+        content = ethical_excerpt(ethical) if name == 'README.md' else excerpt(full, notice, licence, raw)
+        result[name] = before + START + '\n\n' + content + '\n\n' + END + after
     return result
 
 

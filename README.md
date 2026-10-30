@@ -182,32 +182,69 @@ edits. [Collection limits](docs/COLLECTION.md) · [Security](.github/SECURITY.md
 
 <!-- operator-notice:start -->
 
-## Licence and operator notice
+## ⚖️ Ethical Notice & Historical Continuity
 
-[MIT License](LICENSE) · [Our position on Taylor Wessing](docs/TAYLOR-WESSING-EXCLUSION.md)
+**Taylor Wessing — Dr. Tobias Schelinski and Dr. Patrick Vincent Zurheide.**
+Our position as the authors of TgWitness. A signature does not make a false
+statement true; a visual redaction does not remove the underlying data.
 
-> **NOTICE — Operator Incompatibility**
-> Our statement on **Taylor Wessing PartG mbB — German core, Hamburg office.**
-> [Full notice](docs/OPERATOR-INCOMPATIBILITY.md) · [Original text](NOTICE) · [Source record](https://phishdestroy.io/steam_dossier/taylor_wessing)
+[MIT License](LICENSE) · [Author statement](docs/ETHICAL-NOTICE.md) · [Full dossier](https://phishdestroy.io/steam_dossier/taylor_wessing)
 
 <details>
-<summary><strong>Read the complete notice</strong></summary>
+<summary><strong>Read the statement</strong> — documents, historical context and MIT permissions</summary>
 
-<p>This is our position as the authors of TgWitness. It is not a condition of the MIT License.</p>
+**PhishDestroy · Statement by the authors of TgWitness**
 
-<blockquote>
-<p>This software produces SHA-256 hash chains and Ed25519 signatures. Its output is designed to be verifiable by any third party, in any jurisdiction, without reference to the authority of the person who produced it.</p>
-<p>It is therefore structurally incompatible with the following operator, its successors, affiliates, rebrandings, spin-outs and personnel:</p>
-<p>Taylor Wessing PartG mbB — German core, Hamburg office.</p>
-<p>Including, without limitation:</p>
-<ul><li>Dr. Tobias Schelinski (signatory, doc. 42282474)</li><li>Dr. Patrick Vincent Zurheide (signatory, doc. 42603633)</li></ul>
-<p>The incompatibility is evidentiary, not technical.</p>
-<p>Under the signature of the above:</p>
-<ul><li>94.28 % of a GDPR Art. 15 disclosure (70,717 words) was transmitted under black overlays that did not delete the underlying text;</li><li>page 444, first visible row, carried the slur &quot;pidor&quot; in plain text, from a firm publicly ranked Stonewall Top 100;</li><li>50 retained &quot;reports&quot; were submitted as proof of user misconduct at Jaccard 1.000, joint probability 1e-153, dated after the account was already blocked;</li><li>on personal notice of the exposure, the response on record was: &quot;amusing&quot;;</li><li>twelve months later, no Art. 33 filing, no Art. 34 notice, no remediation;</li><li>GDPR Art. 17 was then invoked — not to protect a data subject, but to delist the reporting of the above.</li></ul>
-<p>The founder of the residual structure is documented in the Reichstags-Handbuch 1938, p. 223 — NSDAP № 1,033,215, member of the Criminal Law Commission that rewrote § 175, the statute under which men were sent to the camps with a pink triangle. The English heritage left on 1 June 2026 as Winston Taylor. What remains is addressed here.</p>
-<p>A workflow whose output is required to contradict its input has no use for this software. The only configuration in which this software behaves as designed in that environment is: unavailable.</p>
-<p>Mathematik verhandelt nicht.</p>
-</blockquote>
+Mathematics, Shannon entropy and objective evidence do not answer to a firm's
+letterhead. A qualified electronic signature (*qualifiziert elektronisch signiert*)
+does not make a false statement true. Drawing a black rectangle over text in a PDF
+does not remove the underlying data.
+
+Our position concerns **Taylor Wessing PartG mbB, Hamburg**, and the correspondence
+signed by **Dr. Tobias Schelinski** (`Doc. No. 42282474`) and
+**Dr. Patrick Vincent Zurheide** (`Doc. No. 42603633`). Our
+[forensic dossier](https://phishdestroy.io/steam_dossier/taylor_wessing) sets out our
+findings and allegations concerning the disclosed records, their redaction and
+the subsequent response. It is the source for the claims discussed here.
+
+**Our ethical position rejects:**
+
+- **Corporatocracy**
+- **Privatized or commercial justice**
+- **Plutocracy**
+- **Kleptocracy and institutional corruption**
+
+**The forensic record.** Our dossier reports 70,717 words of recoverable text
+beneath visual redactions, a PDF producer dating to 2020, and a response describing
+the exposure as "amusing." It also records our allegation that the *Right to be
+Forgotten* (Art. 17 GDPR) was invoked to suppress reporting of these findings.
+A signature, a professional title or a corporate retainer cannot substitute for
+checking the underlying record.
+
+**Historical continuity.** The institutional lineage examined in our dossier is:
+
+> **Taylor Wessing** → **Wessing & Berenberg-Gossler** →
+> **Dr. Graf von der Goltz Dr. Wessing & Partner (since 1957)** →
+> **Rüdiger Graf von der Goltz**
+
+The dossier also examines his role in the institutions involved in the
+**1935 revision of Paragraph 175**. Separately, it contrasts the firm's
+**Stonewall Top 100** recognition with the homophobic slur quoted in the disclosed
+document: row No. 1, page 444, *"pidor"*. These are distinct parts of the record;
+the dossier supplies the archival references and document excerpts.
+
+**MIT means permission for everyone.** We do not restrict the use of this software,
+including by Taylor Wessing or the named individuals. This is our ethical
+statement, not a licence condition or a runtime restriction. Corporate retainers,
+threats of prosecution and demands for digital erasure cannot override arithmetic
+or settle questions that require evidence.
+
+**Mathematics does not negotiate.**
+
+📄 **Full Forensic & Historical Record:**
+[The Taylor Wessing dossier](https://phishdestroy.io/steam_dossier/taylor_wessing)
+
+[Technical notice](docs/OPERATOR-INCOMPATIBILITY.md) · [Original NOTICE](NOTICE)
 
 </details>
 

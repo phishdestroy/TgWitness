@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- The README and Wiki now present the authors' Ethical Notice & Historical
+  Continuity statement, with document references, historical context and an
+  explicit explanation that MIT permission applies to everyone.
 - Repository identity: a larger wordmark and investigation scene, three direct
   navigation choices, a dedicated handbook cover and a shorter README. Source
   connections, travelling records and the signature animate inline; phone layouts

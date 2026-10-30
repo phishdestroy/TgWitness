@@ -45,8 +45,8 @@ that sequence, not every possible Telegram event.
 
 ## Read this before connecting
 
-> **NOTICE — Operator Incompatibility**
-> [Read the complete project notice](Operator-Incompatibility.md): our
+> **Ethical Notice & Historical Continuity**
+> [Read the complete author statement](Operator-Incompatibility.md): our
 > statement on Taylor Wessing PartG mbB — German core, Hamburg office.
 
 TgWitness is [MIT-licensed](../../LICENSE). Our
