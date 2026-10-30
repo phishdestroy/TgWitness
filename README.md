@@ -6,12 +6,21 @@
 </picture>
 
 <p align="center">
-  <a href="https://phishdestroy.github.io/TgWitness/demo/"><img src="docs/assets/presentation/identity-nav-demo.svg" width="248" height="56" alt="Explore the workspace"></a>
-  <a href="#quick-start"><img src="docs/assets/presentation/identity-nav-start.svg" width="248" height="56" alt="Start your first case"></a>
-  <a href="https://github.com/phishdestroy/TgWitness/wiki"><img src="docs/assets/presentation/identity-nav-wiki.svg" width="248" height="56" alt="Open the handbook"></a>
+  <a href="https://phishdestroy.github.io/TgWitness/demo/"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/identity-nav-demo-static.svg"><img src="docs/assets/presentation/identity-nav-demo.svg" width="248" height="64" alt="Explore the workspace"></picture></a>
+  <a href="#quick-start"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/identity-nav-start-static.svg"><img src="docs/assets/presentation/identity-nav-start.svg" width="248" height="64" alt="Start your first case"></picture></a>
+  <a href="https://github.com/phishdestroy/TgWitness/wiki"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/identity-nav-wiki-static.svg"><img src="docs/assets/presentation/identity-nav-wiki.svg" width="248" height="64" alt="Open the handbook"></picture></a>
 </p>
 
 <p align="center"><strong>Your Telegram investigation workspace.</strong><br>Capture what you observe. Follow the connections. Hand over a verifiable record.<br>Self-hosted, on your own computer or server.</p>
+
+<p align="center">
+  <a href="docs/CHANGELOG.md"><img src="docs/assets/presentation/identity-meta-version.svg" width="144" height="30" alt="v0.6.1 · pre-release"></a>
+  <a href="docs/VERIFICATION.md"><img src="docs/assets/presentation/identity-meta-verification.svg" width="158" height="30" alt="Tested environments"></a>
+  <img src="docs/assets/presentation/identity-meta-languages.svg" width="279" height="30" alt="13 interface languages · 26 guide languages">
+  <a href="LICENSE"><img src="docs/assets/presentation/identity-meta-license.svg" width="60" height="30" alt="MIT"></a>
+</p>
+
+<p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/identity-divider-static.svg"><img src="docs/assets/presentation/identity-divider.svg" width="1200" height="30" alt=""></picture></p>
 
 <a name="screenshots"></a>
 
@@ -54,6 +63,8 @@ replies and bot-button actions also enter the signed journal.
 
 [Collection & scope](docs/COLLECTION.md) · [Investigation tools](docs/INVESTIGATION.md) · [Modes & evidence](https://phishdestroy.github.io/TgWitness/guides/modes.html)
 
+<p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/identity-divider-static.svg"><img src="docs/assets/presentation/identity-divider.svg" width="1200" height="30" alt=""></picture></p>
+
 <a name="quick-start"></a>
 <a name="run-it-on-your-machine"></a>
 
@@ -78,7 +89,7 @@ you can afford to lose.
   <a href="docs/DEPLOYMENT.md"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/identity-action-deploy-static.svg"><img src="docs/assets/presentation/identity-action-deploy.svg" width="248" height="64" alt="Docker &amp; servers — Deploy your workspace"></picture></a>
 </p>
 
-<p><sub><a href="docs/CHANGELOG.md">v0.6.1 · pre-release</a> &nbsp; / &nbsp; <a href="docs/VERIFICATION.md">Tested environments</a> &nbsp; / &nbsp; 13 interface languages · 26 guide languages &nbsp; / &nbsp; <a href="LICENSE">MIT</a></sub></p>
+<p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/identity-divider-static.svg"><img src="docs/assets/presentation/identity-divider.svg" width="1200" height="30" alt=""></picture></p>
 
 <a name="how-it-works"></a>
 
@@ -147,6 +158,8 @@ two workspaces on one machine do not provide that separation.
 
 [Explore the interactive explanation →](https://phishdestroy.github.io/TgWitness/docs/concepts/) · [Read the evidence model](docs/HOW-IT-WORKS.md)
 
+<p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/identity-divider-static.svg"><img src="docs/assets/presentation/identity-divider.svg" width="1200" height="30" alt=""></picture></p>
+
 ## Off-site copy · S3
 
 Keep a second copy, encrypted with **AES-256-GCM before upload**. Optional S3-compatible
@@ -170,6 +183,8 @@ sessions, configuration and signing secrets.
 </details>
 
 
+<p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/identity-divider-static.svg"><img src="docs/assets/presentation/identity-divider.svg" width="1200" height="30" alt=""></picture></p>
+
 ## Follow your next lead
 
 | Set up | Work a case | Maintain |
@@ -183,6 +198,8 @@ sessions, configuration and signing secrets.
 **Capture has boundaries.** TgWitness observes what the connected account can
 access. No secret chats; downtime and catch-up can leave gaps and miss intermediate
 edits. [Collection limits](docs/COLLECTION.md) · [Security](.github/SECURITY.md)
+
+<p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/identity-divider-static.svg"><img src="docs/assets/presentation/identity-divider.svg" width="1200" height="30" alt=""></picture></p>
 
 <!-- operator-notice:start -->
 

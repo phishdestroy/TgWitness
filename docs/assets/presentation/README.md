@@ -11,8 +11,10 @@ and animation are SVG elements. The artwork illustrates a workflow, not an app s
 | --- | --- |
 | `identity-hero*.svg` | Current repository cover: a large wordmark, the original dossier illustration, travelling records and a drawn signature; separate phone and still compositions |
 | `identity-wiki.svg`, `identity-wiki-static.svg` | Wide handbook cover in the same investigation identity |
-| `identity-nav-{demo,start,wiki}.svg` | Three clear entrances: the workspace, local setup and handbook |
+| `identity-nav-{demo,start,wiki}*.svg` | Animated workspace, local setup and handbook buttons in the same family as the setup actions, with separate stills |
 | `identity-action-{setup,account,deploy}*.svg` | Setup, dedicated-account and server links in the PhishDestroy two-line button style; animated rims, highlights, icons and arrows, with separate stills |
+| `identity-divider*.svg` | A blue and gold section rule with a moving trace and a still alternative |
+| `identity-meta-*.svg` | The existing version, tested-environment, language and MIT labels as local badges |
 | `readme-investigation-animated.svg`, `tgwitness-investigation-static.svg` | Original investigation composition, retained as the source of the illustrated scene |
 | `case-{demo,start,wiki,evidence}.svg` | Earlier navigation assets retained for existing references |
 | `case-path*.svg` | The four-step case route, with separate desktop, phone and reduced-motion compositions |

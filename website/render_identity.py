@@ -5,6 +5,7 @@ outlined type. No network, new image generation, account data or SVG scripts.
 """
 import argparse
 from copy import deepcopy
+from math import ceil
 from pathlib import Path
 import re
 import xml.etree.ElementTree as ET
@@ -142,23 +143,19 @@ def hero(font, original, mobile=False, still=False, wiki=False):
          "and a signature is drawn. Fictional records, not a screenshot of the application.")
 
 
-def navigation(font):
-    for name, title, primary in (("demo","Explore the workspace",True),("start","Start your first case",False),("wiki","Open the handbook",False)):
-        d = Drawing(font, 248, 56, title)
-        fill, stroke, ink = ("#c3e2ff","#c3e2ff","#112941") if primary else ("#102033","#355473","#d7e9fc")
-        d.add(f'<rect x=".5" y=".5" width="247" height="55" rx="8" fill="{fill}" stroke="{stroke}"/>')
-        d.text(title, 18, 34, 15, ink, 600, -.2)
-        d.add(f'<path d="M218 28h12m-5-5 5 5-5 5" fill="none" stroke="{ink}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>')
-        save(d, "identity-nav-"+name+".svg", title)
-
-
-def setup_actions(font, still=False):
+def setup_actions(font, still=False, navigation=False):
     """Two-line action buttons from the PhishDestroy repository family."""
     actions = (
         ("setup", "SETUP GUIDE", "Install, launch & capture", "#a7d7ff"),
         ("account", "DEDICATED ACCOUNT", "Prepare your Telegram account", "#b9d8d0"),
         ("deploy", "DOCKER & SERVERS", "Deploy your workspace", "#dcc294"),
     )
+    if navigation:
+        actions = (
+            ("demo", "EXPLORE THE WORKSPACE", "Fictional demonstration records", "#a7d7ff"),
+            ("start", "START YOUR FIRST CASE", "Install, launch & capture", "#b9d8d0"),
+            ("wiki", "OPEN THE HANDBOOK", "The investigation handbook", "#dcc294"),
+        )
     icons = {
         "setup": '<path d="M17 19h7q4 0 4 4v18q0-4-4-4h-7Zm22 0h-7q-4 0-4 4v18q0-4 4-4h7Z"/>'
                  '<path class="detail" d="M20 25h4m-4 5h4m8-5h4m-4 5h4"/>',
@@ -170,11 +167,17 @@ def setup_actions(font, still=False):
                   '<path d="M27 23h8m-8 14h8"/>'
                   '<circle class="detail" cx="22" cy="23" r="1"/>'
                   '<circle class="detail" cx="22" cy="37" r="1"/>',
+        "demo": '<rect x="16" y="18" width="24" height="20" rx="3"/>'
+                '<path d="M24 43h8m-4-5v5"/><path class="detail" d="m25 23 7 5-7 5Z"/>',
+        "start": '<path d="M20 20h14a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H20a3 3 0 0 1-3-3V23a3 3 0 0 1 3-3Z"/>'
+                 '<path class="detail" d="m23 30 3 3 7-8"/>',
     }
+    icons["wiki"] = icons["setup"]
     for index, (name, title, subtitle, accent) in enumerate(actions):
         d = Drawing(font, 248, 64, title + ": " + subtitle)
+        top, bottom = ("#23486d", "#142d46") if name == "demo" else ("#14263b", "#0c1829")
         d.add(f'''<defs>
-<linearGradient id="button-bg" x2="1" y2="1"><stop stop-color="#14263b"/><stop offset="1" stop-color="#0c1829"/></linearGradient>
+<linearGradient id="button-bg" x2="1" y2="1"><stop stop-color="{top}"/><stop offset="1" stop-color="{bottom}"/></linearGradient>
 <linearGradient id="button-rim"><stop stop-color="{accent}" stop-opacity=".12"/><stop offset=".5" stop-color="{accent}" stop-opacity=".85"/><stop offset="1" stop-color="{accent}" stop-opacity=".12"/></linearGradient>
 <linearGradient id="button-light"><stop stop-color="{accent}" stop-opacity="0"/><stop offset=".5" stop-color="{accent}" stop-opacity=".07"/><stop offset="1" stop-color="{accent}" stop-opacity="0"/></linearGradient>
 <clipPath id="button-clip"><rect x="1" y="1" width="246" height="62" rx="7"/></clipPath>
@@ -201,7 +204,43 @@ def setup_actions(font, still=False):
 @keyframes sheen{{0%{{transform:translateX(0)}}45%,100%{{transform:translateX(350px)}}}}
 </style>''')
         suffix = "-static" if still else ""
-        save(d, "identity-action-" + name + suffix + ".svg", title + ": " + subtitle)
+        prefix = "identity-nav-" if navigation else "identity-action-"
+        save(d, prefix + name + suffix + ".svg", title + ": " + subtitle)
+
+
+def separator(font, still=False):
+    d = Drawing(font, 1200, 30, "Section divider")
+    d.add('''<defs>
+<linearGradient id="left" gradientUnits="userSpaceOnUse" x1="0" y1="15" x2="550" y2="15"><stop stop-color="#7db9e6" stop-opacity="0"/><stop offset="1" stop-color="#c9ab77" stop-opacity=".7"/></linearGradient>
+<linearGradient id="right" gradientUnits="userSpaceOnUse" x1="650" y1="15" x2="1200" y2="15"><stop stop-color="#c9ab77" stop-opacity=".7"/><stop offset="1" stop-color="#7db9e6" stop-opacity="0"/></linearGradient>
+</defs>
+<path d="M0 15H550" stroke="url(#left)"/><path d="M650 15H1200" stroke="url(#right)"/>
+<path class="trace" d="M0 15H550" fill="none" stroke="url(#left)" stroke-width="2" stroke-dasharray="34 516"/>
+<path class="trace" d="M650 15H1200" fill="none" stroke="url(#right)" stroke-width="2" stroke-dasharray="34 516"/>
+<path class="pulse" d="m600 10 5 5-5 5-5-5Z" fill="#d1b47f"/>
+<g fill="#93bad8" opacity=".45"><circle cx="569" cy="15" r="1.8"/><circle cx="582" cy="15" r="1.8"/><circle cx="618" cy="15" r="1.8"/><circle cx="631" cy="15" r="1.8"/></g>''')
+    if not still:
+        d.add('''<style>.trace{animation:trace 9s linear infinite}.pulse{animation:pulse 6s ease-in-out infinite}
+@keyframes trace{to{stroke-dashoffset:-550}}@keyframes pulse{0%,100%{opacity:.45}50%{opacity:1}}</style>''')
+    save(d, "identity-divider" + ("-static" if still else "") + ".svg", "Decorative section divider")
+
+
+def metadata(font):
+    labels = (
+        ("version", "v0.6.1 · pre-release", "#a7d7ff", "#16304a"),
+        ("verification", "Tested environments", "#b9d8d0", "#16312f"),
+        ("languages", "13 interface languages · 26 guide languages", "#becbe4", "#252a40"),
+        ("license", "MIT", "#dcc294", "#332b1d"),
+    )
+    face = font[600]
+    glyphs, cmap = face.getGlyphSet(), face.getBestCmap()
+    for name, label, ink, fill in labels:
+        width = ceil(sum(glyphs[cmap[ord(c)]].width for c in label) / face['head'].unitsPerEm * 11.5) + 40
+        d = Drawing(font, width, 30, label)
+        d.add(f'<rect x=".5" y=".5" width="{width-1}" height="29" rx="4" fill="{fill}" stroke="{ink}" stroke-opacity=".25"/>'
+              f'<circle cx="13" cy="15" r="2" fill="{ink}"/>')
+        d.text(label, 23, 19, 11.5, ink, 600)
+        save(d, "identity-meta-" + name + ".svg", label)
 
 
 def main():
@@ -215,8 +254,10 @@ def main():
         hero(font, original, mobile=True, still=still)
         hero(font, original, wiki=True, still=still)
         setup_actions(font, still=still)
-    navigation(font)
-    print("Rendered six identity covers, three navigation assets and six setup action variants.")
+        setup_actions(font, still=still, navigation=True)
+        separator(font, still=still)
+    metadata(font)
+    print("Rendered identity covers, navigation and setup buttons, section dividers and metadata badges.")
 
 
 if __name__ == "__main__":
