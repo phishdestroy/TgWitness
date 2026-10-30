@@ -14,6 +14,8 @@ and animation are SVG elements. The artwork illustrates a workflow, not an app s
 | [Investigation artwork](tgwitness-investigation-static.svg) | Full-size static composition |
 | [Animated investigation](tgwitness-investigation-animated.svg) | Extended investigation sequence |
 | [Mobile cover](mobile.svg) | Legible narrow-screen composition |
+| [Capability cards](capabilities.svg), [mobile cards](capabilities-mobile.svg) | Collection, captured versions, investigation and verification |
+| [Film navigation](button-films.svg) | Direct access to the films and animation gallery |
 | [Investigation film](investigation.mp4), [GIF](investigation.gif) | 12-second concept film, 1280 × 672 MP4 |
 | [Message history film](message-history.mp4), [GIF](message-history.gif), [still](message-history-static.png) | 12-second concept film, 1280 × 576 MP4 |
 | [GitHub preview](preview-github.png) | 1280 × 640 repository sharing image |

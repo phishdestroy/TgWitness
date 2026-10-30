@@ -1,7 +1,8 @@
-<a href="docs/assets/presentation/investigation.mp4"><picture>
+<picture>
+  <source media="(max-width: 600px)" srcset="docs/assets/presentation/mobile.svg">
   <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/tgwitness-investigation-static.svg">
-  <img src="docs/assets/presentation/investigation.gif" width="1200" alt="TgWitness — Follow the trail. Preserve the evidence. Channels, groups, bots and private chats connected into one case. Fictional records.">
-</picture></a>
+  <img src="docs/assets/presentation/tgwitness-investigation-animated.svg" width="1200" alt="TgWitness — Follow the trail. Preserve the evidence. An illustrated investigation connecting sources, preserved records and a signed handoff.">
+</picture>
 
 <h1 align="center">TgWitness</h1>
 
@@ -11,7 +12,7 @@ Capture conversations · keep every edit and deletion you saw · trace connectio
 <p align="center">
   <a href="#quick-start"><img src="docs/assets/presentation/button-start.svg" alt="Quick start" height="40"></a>
   <a href="https://github.com/phishdestroy/TgWitness/wiki"><img src="docs/assets/presentation/button-wiki.svg" alt="GitHub Wiki" height="40"></a>
-  <a href="docs/README.md"><img src="docs/assets/presentation/button-docs.svg" alt="Technical documentation" height="40"></a>
+  <a href="docs/SHOWCASE.md"><img src="docs/assets/presentation/button-films.svg" alt="Watch the films" height="40"></a>
   <a href="#repository-map"><img src="docs/assets/presentation/button-source.svg" alt="Repository map" height="40"></a>
 </p>
 
@@ -21,15 +22,17 @@ Capture conversations · keep every edit and deletion you saw · trace connectio
 
 ## Messages change. Keep what you saw.
 
-<a href="docs/assets/presentation/message-history.mp4"><picture>
+<picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/message-history-static.png">
   <img src="docs/assets/presentation/message-history.gif" width="1200" alt="A message reads 14:00, is edited to 16:30 and is deleted; the journal keeps both versions and the deletion notice. Fictional records.">
-</picture></a>
+</picture>
 
-| Keep the record | Follow the case |
-| --- | --- |
-| **Every version stays.** Edits are saved as separate versions; a deletion notice never erases what was already captured. | **Work across chats.** Search saved conversations, build cited timelines, review people and shared files. |
-| **Your scope, your accounts.** Selected chats, a folder or a dedicated account, each with its own journal and keys. | **A handoff that proves itself.** Signed records, preserved attachments, coverage gaps and a standalone verifier. |
+[Download the film (MP4)](docs/assets/presentation/message-history.mp4) · [Watch both films and explore the animations](docs/SHOWCASE.md)
+
+<picture>
+  <source media="(max-width: 600px)" srcset="docs/assets/presentation/capabilities-mobile.svg">
+  <img src="docs/assets/presentation/capabilities.svg" width="1200" alt="Choose collection scope; preserve captured message versions and attachments; investigate across saved conversations; export signed records with an offline report and verifier.">
+</picture>
 
 ## The workspace
 
@@ -57,9 +60,10 @@ Capture conversations · keep every edit and deletion you saw · trace connectio
 | --- | --- |
 | Double-click **`scripts\Demo.cmd`** | Run **`sh start.sh --demo`** |
 
-Then open **http://127.0.0.1:8787**. The launcher prepares Python 3.11+ dependencies itself.
+Install **Python 3.11+** first. The launcher prepares the environment and dependencies.
+Then open **http://127.0.0.1:8787**.
 
-**Your own workspace:** run `Start.cmd` or `sh start.sh` and follow
+**Your own workspace:** stop the demo, run `Start.cmd` or `sh start.sh` and follow
 [account setup](https://github.com/phishdestroy/TgWitness/wiki/Accounts). The panel token is in
 `data/live/panel-token.txt`. Use a dedicated Telegram account you can afford to lose.
 
@@ -82,11 +86,11 @@ not Telegram origin or the truth of the content.
 
 ## The investigation handbook
 
-| Get started | Work a case | Keep it running |
-| --- | --- | --- |
-| [Install and try the demo](https://github.com/phishdestroy/TgWitness/wiki/Getting-Started) | [Choose sources](https://github.com/phishdestroy/TgWitness/wiki/Collection) | [Server and Docker](https://github.com/phishdestroy/TgWitness/wiki/Server-and-Docker) |
-| [Connect an account](https://github.com/phishdestroy/TgWitness/wiki/Accounts) | [Investigate across chats](https://github.com/phishdestroy/TgWitness/wiki/Investigations) | [Backup and recovery](https://github.com/phishdestroy/TgWitness/wiki/Backup-and-Recovery) |
-| [Configure a proxy](https://github.com/phishdestroy/TgWitness/wiki/Proxies) | [Prepare a handoff](https://github.com/phishdestroy/TgWitness/wiki/Exports-and-Verification) | [Troubleshooting](https://github.com/phishdestroy/TgWitness/wiki/Troubleshooting) |
+**Get started** · [Install and try the demo](https://github.com/phishdestroy/TgWitness/wiki/Getting-Started) · [Connect an account](https://github.com/phishdestroy/TgWitness/wiki/Accounts) · [Configure a proxy](https://github.com/phishdestroy/TgWitness/wiki/Proxies)
+
+**Work a case** · [Choose sources](https://github.com/phishdestroy/TgWitness/wiki/Collection) · [Investigate across chats](https://github.com/phishdestroy/TgWitness/wiki/Investigations) · [Prepare a handoff](https://github.com/phishdestroy/TgWitness/wiki/Exports-and-Verification)
+
+**Keep it running** · [Server and Docker](https://github.com/phishdestroy/TgWitness/wiki/Server-and-Docker) · [Backup and recovery](https://github.com/phishdestroy/TgWitness/wiki/Backup-and-Recovery) · [Troubleshooting](https://github.com/phishdestroy/TgWitness/wiki/Troubleshooting)
 
 [All Wiki pages](https://github.com/phishdestroy/TgWitness/wiki) · [Offline handbook](docs/wiki/Home.md) · [Complete project guide](docs/PROJECT-GUIDE.md) · [Technical reference](docs/README.md)
 
