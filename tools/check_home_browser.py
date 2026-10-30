@@ -24,8 +24,9 @@ def check_home(browser, url, output, route_request, errors):
         page.goto(url + prefix, wait_until='networkidle')
         assert page.locator('video, #films').count() == 0
         expect(page.locator('#s3')).to_be_visible()
-        assert page.locator('#s3 a').get_attribute('href') == 'docs/reference/evidence/#off-site-copy-and-restore-s3'
-        assert page.locator('.hero-retention-link').get_attribute('href') == '#retention'
+        assert page.locator('#s3 .button').get_attribute('href') == 'docs/exports/#s3'
+        expect(page.locator('#s3 img')).to_be_visible()
+        assert page.locator('.hero-retention-link').get_attribute('href') == '#s3'
         assert not page.evaluate('document.documentElement.scrollWidth > innerWidth'), (lang, width, theme)
         for action, path in [('demo', 'demo/'), ('setup', 'demo/guide.html')]:
             button = page.locator(f'[data-home-action="{action}"]')
@@ -61,6 +62,15 @@ def check_home(browser, url, output, route_request, errors):
         }''')
         assert not issues, (lang, width, theme, issues[:8])
         if javascript:
+            page.locator('#s3 .button').click()
+            expect(page).to_have_url(url + 'docs/exports/#s3')
+            expect(page.locator('h2#s3')).to_be_visible()
+            expect(page.locator('img[src$="off-site-copy.png"]')).to_be_visible()
+            assert 'python -m tgwitness.replica restore' in page.locator('main').inner_text()
+            page.go_back(wait_until='networkidle')
+            page.locator('#s3 .screenshot-open').click()
+            expect(page.locator('.screenshot-dialog')).to_be_visible()
+            page.keyboard.press('Escape')
             primary = page.locator('[data-home-action="demo"]')
             page.keyboard.press('Tab')
             primary.focus()

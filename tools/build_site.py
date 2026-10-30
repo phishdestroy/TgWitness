@@ -34,6 +34,7 @@ ASSETS = {
     "assets/workspace.png": "docs/assets/workspace.png",
     "assets/detail.png": "docs/assets/detail.png",
     "assets/exports.png": "docs/assets/exports.png",
+    "assets/off-site-copy.png": "docs/assets/off-site-copy.png",
     "assets/tgwitness-social.png": "docs/assets/presentation/preview-social.png",
     "assets/public-proxies.png": "docs/assets/public-proxies.png",
     # Home page films and their reduced-motion stills; the evidence explanations below.
