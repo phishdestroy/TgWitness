@@ -35,6 +35,7 @@ The proxy, witness bot and public status page are separate options.
 | Publish checkpoints to a channel | [Witness bot](WITNESS.md#run-a-witness) | A signed post from the running witness |
 | Monitor several accounts publicly | [Proof pilot](PROOF.md) | Signed counters and a checked send/edit/delete scenario |
 | Leave it running on a server | [Deployment](DEPLOYMENT.md) | Persistent storage and capture after a restart |
+| Let a third party check the server itself | [High-assurance deployment](HIGH-ASSURANCE.md) | A report from the provider, Cloudflare and the collector |
 | Diagnose a problem | [Operations](OPERATIONS.md) | A concrete cause and a way to check recovery |
 
 **What has actually been tested:** [verification record](VERIFICATION.md).

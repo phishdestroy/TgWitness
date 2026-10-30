@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- High-assurance deployment (`python -m tgwitness.cloud`, [guide](HIGH-ASSURANCE.md)). It creates
+  the collector through the API of Hetzner Cloud, DigitalOcean, Linode, Vultr or Amazon EC2:
+  no SSH key, a provider firewall without inbound rules, SSH masked from the first boot,
+  one fixed commit, and a panel reachable only through a Cloudflare Tunnel. The
+  `verify` command lets a third party compare the provider's own log and firewall, the
+  tunnel connector's address and the collector's signed `/api/assurance` statement. It
+  writes a Markdown/JSON report for evidence handover. `generic` installs on any server
+  with `install.sh` and is never reported as more than self-attested. With
+  `TGWITNESS_ASSURANCE` set, the collector signs host measurements (SSH, logins, boot,
+  metadata) into every process start and into `host.state` records whenever they change.
+  Ordinary installations are unchanged.
 - Two clicks to start: a local start (TgWitness.cmd, Start.cmd, start.sh, the demo
   launchers and the Docker helpers) opens the panel in the browser once it answers, and a
   real workspace shows its panel token in the console instead of in the address bar.

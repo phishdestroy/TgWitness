@@ -40,6 +40,7 @@ from .proxy_catalog import PublicCatalog
 from .monitoring import Capture, Monitoring, capture_settings, monitoring_settings
 from .scope import (EXCLUDE_LIMIT, WIDE_WARNING, Recheck, ScopeUpdate, recheck_settings, scope_settings,
                     unexclude)
+from . import assurance
 from . import dossier
 from . import tuning
 from . import witness_api
@@ -167,6 +168,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         anchor_task = None
         replica_task = None
         alert_task = None
+        host_task = None
         collector = None
         journal_ready = False
         profiles = None
@@ -189,6 +191,14 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             # It is accepted only for a directly accessed, isolated synthetic demo.
             app.state.local_demo_token = secrets.token_urlsafe(32)
             app.state.run_receipt = run_receipt(store, vault)
+            # High-assurance deployments only: the host measured into the signed start record.
+            selected = assurance.mode()
+            app.state.assurance = None
+            if selected and not demo:
+                provider = await asyncio.to_thread(assurance.provider_record, selected)
+                app.state.assurance = {"mode": selected, "provider": provider}
+                app.state.run_receipt["host"] = await asyncio.to_thread(
+                    assurance.snapshot, selected, provider, detail=True)
             collector.run_id = app.state.run_receipt["run_id"]
             previous = store.stats()["head"]
             process_event = store.append("process.started", {"version": __version__, "previous_observation": previous,
@@ -207,6 +217,9 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                     store, collector.network_config, app.state.anchor_wakeup, app.state.anchor_status))
                 replica_task = asyncio.create_task(replica.replica_loop(
                     store, vault, collector.network_config, app.state.replica_wakeup, app.state.replica_status))
+                if app.state.assurance:
+                    host_task = asyncio.create_task(assurance.assurance_loop(
+                        store, app.state.assurance["mode"], app.state.assurance["provider"]))
 
             async def resume():
                 try:
@@ -232,7 +245,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                     await app.state.multi_export.close()
                 if profiles:
                     await profiles.close()
-                for task in (resume_task, anchor_task, replica_task, alert_task):
+                for task in (resume_task, anchor_task, replica_task, alert_task, host_task):
                     if task:
                         task.cancel()
                         await asyncio.gather(task, return_exceptions=True)
@@ -1012,6 +1025,18 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                      "journal_event_seq": app.state.run_event_seq}
         return {"statement": statement, "signature": app.state.vault.sign(canonical(statement)),
                 "public_key": app.state.vault.public_key}
+
+    @app.get("/api/assurance")
+    async def assurance_statement(challenge: str = ""):
+        """Public in high-assurance mode only: the signing key and the host it was created on.
+        No message content, sources or account data; absent from ordinary installations."""
+        if not app.state.assurance:
+            raise HTTPException(404)
+        if challenge and (len(challenge) != 32 or any(c not in "0123456789abcdef" for c in challenge)):
+            raise HTTPException(422, "challenge must be 32 lowercase hexadecimal characters")
+        return await asyncio.to_thread(
+            assurance.statement, app.state.vault, app.state.run_receipt, app.state.run_event_seq,
+            app.state.assurance["mode"], app.state.assurance["provider"], challenge or None)
 
     @app.get("/api/anchor-request", dependencies=[Depends(authenticate)])
     async def anchor_request():

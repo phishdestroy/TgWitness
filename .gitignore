@@ -46,3 +46,4 @@ proof-data/
 witness-data/
 witness-key.json
 proxy-config/
+deployments/

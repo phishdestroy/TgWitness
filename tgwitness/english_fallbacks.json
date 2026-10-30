@@ -687,6 +687,7 @@
   "bot",
   "bot Telegram proof GitHub witness",
   "callback",
+  "challenge must be 32 lowercase hexadecimal characters",
   "characters",
   "chats",
   "copies text",

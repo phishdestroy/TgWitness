@@ -17,6 +17,10 @@ repository, then run the following from the project directory:
 | Docker helper on Windows | `scripts\Docker.cmd` | Yes; the helper waits for web-server health. |
 | Docker helper on Linux/macOS | `sh scripts/docker-start.sh` | Yes; the helper waits for web-server health. |
 
+For a cloud server that a third party should be able to check — created through the
+provider's API, without SSH, reached only through a Cloudflare Tunnel — see
+[high-assurance deployment](HIGH-ASSURANCE.md).
+
 Native startup creates a private `.venv` and installs the pinned dependencies.
 Docker builds them inside the image, without requiring host Python. First-time
 setup needs Internet access. When no Python 3.11+ is found, `Start.cmd` asks before
