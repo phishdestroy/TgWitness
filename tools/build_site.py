@@ -308,6 +308,8 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
             content, count, missing = site_wiki.to_html(
                 sources[slug], diagrams + 1, labels_map, None if (data is None or english) else localize,
                 None if data is None else data["strings"])
+            if lang != "en" and slug in {"license", "notice"} and missing:
+                raise ValueError(f"Incomplete notice translation: {lang}/{slug} ({missing} blocks)")
             diagrams += count
             rendered[slug] = content
             missing_by_page[f"{wiki_hub}{slug}/"] = missing

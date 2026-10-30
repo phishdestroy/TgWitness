@@ -409,4 +409,4 @@ Windows, Linux и macOS с Python 3.11–3.13, браузерные сценар
 | [TRUST-ROADMAP.md](TRUST-ROADMAP.md) | Проверяемая сборка, непрерывность и GitHub |
 | [WITNESS.md](WITNESS.md) | Бот-свидетель и свои прокси |
 
-[Our position on Taylor Wessing](../TAYLOR-WESSING-EXCLUSION.md) · [MIT License](../../LICENSE)
+[Уведомление о несовместимости лицензий и архитектур](TAYLOR-WESSING-EXCLUSION.md) · [MIT License](../../LICENSE)

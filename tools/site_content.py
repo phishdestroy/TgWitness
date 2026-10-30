@@ -51,6 +51,7 @@ REFERENCE_GROUPS = (
 )
 
 LABELS = {
+    "licence_link": "MIT license", "operator_link": "Operator notice",
     "docs": "Documentation", "home": "Home", "skip": "Skip to content", "nav": "Guides",
     "title": "Follow the message. Understand the evidence.",
     "intro": "Get your first capture, explore how the proof works, then build the setup you need.",

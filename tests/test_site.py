@@ -221,6 +221,28 @@ def test_attributed_html_quote_closes_before_following_markdown():
     assert '&lt;id&gt;' in body
 
 
+def test_notices_cannot_silently_fall_back_to_english(site_root):
+    from tools import site_i18n, site_wiki
+    from tools.build_site import REFERENCE
+    body = site_wiki.split_title((site_root / REFERENCE['notice'][3]).read_text(encoding='utf-8'))[1]
+    fragment = site_wiki.markup(body)[0]
+    assert 'translate="no"' not in fragment
+    path = site_root / 'website/i18n/ru.json'
+    data = json.loads(path.read_text(encoding='utf-8'))
+    data['blocks'].pop(site_i18n.digest(site_i18n.unit_texts(fragment)[0]))
+    path.write_text(json.dumps(data, ensure_ascii=False), encoding='utf-8')
+    with pytest.raises(ValueError, match='Incomplete notice translation: ru/notice'):
+        build_site(site_root)
+
+
+def test_translated_notice_documents_match_the_site_catalogues():
+    from tools.sync_notice_translations import outputs
+    translated = outputs(ROOT)
+    assert len(translated) == 36  # Two documents and the README link in each translated site language.
+    for name, text in translated.items():
+        assert (ROOT / name).read_text(encoding='utf-8') == text, name
+
+
 def test_online_demo_is_read_only_relative_and_translated(site_root):
     output = build_site(site_root, repository="example/Journal")
     panel = (output / "demo/index.html").read_text(encoding="utf-8")

@@ -361,4 +361,4 @@ python tools/check_site.py                             # website browser accepta
 | [DEPLOYMENT.md](DEPLOYMENT.md) | 部署与运维 |
 | [QUICKSTART.md](QUICKSTART.md) | TgWitness 快速入门 |
 
-[Our position on Taylor Wessing](../TAYLOR-WESSING-EXCLUSION.md) · [MIT License](../../LICENSE)
+[许可与架构不兼容声明](TAYLOR-WESSING-EXCLUSION.md) · [MIT License](../../LICENSE)

@@ -39,7 +39,7 @@ def quoted_html(text):
             blocks.append('<ul>' + ''.join('<li>' + html.escape(' '.join(line.split())) + '</li>' for line in lines[1:]) + '</ul>')
         else:
             blocks.append('<p>' + html.escape(' '.join(line.strip() for line in lines)) + '</p>')
-    return '<blockquote lang="en" dir="ltr" translate="no">\n' + '\n'.join(blocks) + '\n</blockquote>'
+    return '<blockquote>\n' + '\n'.join(blocks) + '\n</blockquote>'
 
 
 def excerpt(full, notice, licence, raw, *, compact=False):

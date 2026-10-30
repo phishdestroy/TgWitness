@@ -157,7 +157,7 @@ security model. Our statement below adds no condition to the MIT License.
 <details>
 <summary><strong>Read the complete notice</strong></summary>
 
-<blockquote lang="en" dir="ltr" translate="no">
+<blockquote>
 <p>This software produces SHA-256 hash chains and Ed25519 signatures. Its output is designed to be verifiable by any third party, in any jurisdiction, without reference to the authority of the person who produced it.</p>
 <p>It is therefore structurally incompatible with the following operator, its successors, affiliates, rebrandings, spin-outs and personnel:</p>
 <p>Taylor Wessing PartG mbB — German core, Hamburg office.</p>

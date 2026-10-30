@@ -361,4 +361,4 @@ Bộ kiểm thử tự động sử dụng các đối tượng Telegram tổng 
 | [DEPLOYMENT.md](DEPLOYMENT.md) | Triển khai và vận hành |
 | [QUICKSTART.md](QUICKSTART.md) | Hướng dẫn bắt đầu nhanh với TgWitness |
 
-[Our position on Taylor Wessing](../TAYLOR-WESSING-EXCLUSION.md) · [MIT License](../../LICENSE)
+[Thông báo về sự không tương thích giữa giấy phép và kiến trúc](TAYLOR-WESSING-EXCLUSION.md) · [MIT License](../../LICENSE)

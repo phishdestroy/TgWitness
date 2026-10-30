@@ -361,4 +361,4 @@ python tools/check_site.py                             # website browser accepta
 | [DEPLOYMENT.md](DEPLOYMENT.md) | तैनाती और संचालन |
 | [QUICKSTART.md](QUICKSTART.md) | TgWitness त्वरित आरंभ |
 
-[Our position on Taylor Wessing](../TAYLOR-WESSING-EXCLUSION.md) · [MIT License](../../LICENSE)
+[लाइसेंस और वास्तुशिल्प असंगति सूचना](TAYLOR-WESSING-EXCLUSION.md) · [MIT License](../../LICENSE)

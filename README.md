@@ -154,7 +154,7 @@ Telegram origin, complete capture or the truth of the content.
 
 <p>This is our position as the authors of TgWitness. It is not a condition of the MIT License.</p>
 
-<blockquote lang="en" dir="ltr" translate="no">
+<blockquote>
 <p>This software produces SHA-256 hash chains and Ed25519 signatures. Its output is designed to be verifiable by any third party, in any jurisdiction, without reference to the authority of the person who produced it.</p>
 <p>It is therefore structurally incompatible with the following operator, its successors, affiliates, rebrandings, spin-outs and personnel:</p>
 <p>Taylor Wessing PartG mbB — German core, Hamburg office.</p>

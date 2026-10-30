@@ -361,4 +361,4 @@ python tools/check_site.py                             # website browser accepta
 | [DEPLOYMENT.md](DEPLOYMENT.md) | Розгортання та експлуатація |
 | [QUICKSTART.md](QUICKSTART.md) | Швидкий старт TgWitness |
 
-[Our position on Taylor Wessing](../TAYLOR-WESSING-EXCLUSION.md) · [MIT License](../../LICENSE)
+[Повідомлення про несумісність ліцензії та архітектури](TAYLOR-WESSING-EXCLUSION.md) · [MIT License](../../LICENSE)

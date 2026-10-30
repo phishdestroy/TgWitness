@@ -32,8 +32,9 @@ LANGUAGES = {
     "vi": ("Tiếng Việt", "vi", "ltr", "vi_VN"),
     "zh": ("简体中文", "zh-Hans", "ltr", "zh_CN"),
 }
-# Keep release notes and the licence statement in their original English.
-ENGLISH_ONLY = {"changelog", "license", "notice"}
+# Release notes retain their original English. Project notices use the selected language;
+# the canonical MIT LICENSE and NOTICE files remain available through their original links.
+ENGLISH_ONLY = {"changelog"}
 ATTRIBUTES = ("aria-label", "title", "alt", "placeholder")
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"}
 # Inline markup a sentence may carry. <small> is left out: the pages set it as its own line.

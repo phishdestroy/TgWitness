@@ -283,7 +283,8 @@ def main():
 
                 # Every language: its own lang and direction, a working search and a menu of all languages.
                 for lang in [code for code in LANGUAGES if code != "en"]:
-                    for local in ("", "docs/", "docs/security/", "docs/reference/how-it-works/"):
+                    for local in ("", "docs/", "docs/security/", "docs/reference/how-it-works/",
+                                  "docs/reference/license/", "docs/reference/notice/"):
                         path = lang + "/" + local
                         page.set_viewport_size({"width": 1440, "height": 1000})
                         page.goto(base + path, wait_until="networkidle")
@@ -296,6 +297,10 @@ def main():
                         expect(page.locator('.lang-list a[aria-current]')).to_have_attribute("hreflang", LANGUAGES[lang][1])
                         if local:
                             expect(page.locator("#guide-search")).to_be_visible()
+                        if local in ("docs/reference/license/", "docs/reference/notice/"):
+                            expect(page.locator('.language-notice')).to_have_count(0)
+                            expect(page.locator('.wiki-body [translate="no"]')).to_have_count(0)
+                            assert page.locator('.wiki-body').evaluate('el => getComputedStyle(el).direction') == LANGUAGES[lang][2]
                         for width in (1440, 390, 320):
                             page.set_viewport_size({"width": width, "height": 1000})
                             assert page.evaluate("document.documentElement.scrollWidth <= innerWidth"), (path, width)
@@ -326,7 +331,7 @@ def main():
                 nojs.route("**/*", route_request)
                 fallback = nojs.new_page()
                 track(fallback)
-                for slug in ("", "start", "concepts", "cases", "witness", "proof"):
+                for slug in ("", "start", "concepts", "cases", "witness", "proof", "reference/license", "reference/notice"):
                     fallback.goto(base + "docs/" + (slug + "/" if slug else ""))
                     expect(fallback.locator(".search")).to_be_hidden()
                     assert not fallback.locator('[data-enhanced]:visible').count()

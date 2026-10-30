@@ -361,4 +361,4 @@ El conjunto de pruebas automatizadas utiliza objetos sintéticos de Telegram y n
 | [DEPLOYMENT.md](DEPLOYMENT.md) | Implementación y operaciones |
 | [QUICKSTART.md](QUICKSTART.md) | Guía de inicio rápido de TgWitness |
 
-[Our position on Taylor Wessing](../TAYLOR-WESSING-EXCLUSION.md) · [MIT License](../../LICENSE)
+[Aviso sobre incompatibilidad de licencia y arquitectura](TAYLOR-WESSING-EXCLUSION.md) · [MIT License](../../LICENSE)

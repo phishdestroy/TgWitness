@@ -361,4 +361,4 @@ Rangkaian pengujian otomatis ini menggunakan objek Telegram sintetis dan tidak p
 | [DEPLOYMENT.md](DEPLOYMENT.md) | Penerapan dan pengoperasian |
 | [QUICKSTART.md](QUICKSTART.md) | Panduan Memulai TgWitness |
 
-[Our position on Taylor Wessing](../TAYLOR-WESSING-EXCLUSION.md) · [MIT License](../../LICENSE)
+[Pemberitahuan Ketidakcocokan Lisensi dan Arsitektur](TAYLOR-WESSING-EXCLUSION.md) · [MIT License](../../LICENSE)
