@@ -24,6 +24,8 @@ LANGUAGES = ("ru", "uk", "es", "pt", "tr", "ar", "fa", "ur", "hi", "id", "vi", "
 PACKAGE_JSON = {"english_fallbacks.json", "public_proxies.json", *("locales/" + language + ".json" for language in LANGUAGES)}
 # Site translations: without them every non-English page silently falls back to English.
 SITE_JSON = {"i18n/" + language + ".json" for language in LANGUAGES}
+# Recorded answers of the fictional demo for the read-only online demo (tools/capture_demo.py).
+SITE_JSON.add("demo/fixtures.json")
 PRESENTATION_MEDIA = {
     "assets/presentation/investigation-overview.mp4",
     "assets/presentation/investigation.mp4", "assets/presentation/investigation.gif",

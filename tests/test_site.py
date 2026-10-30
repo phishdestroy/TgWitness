@@ -7,7 +7,8 @@ import xml.etree.ElementTree as ET
 
 import pytest
 
-from tools.build_site import INPUTS, LANGS, LOCAL_PAGES, PAGES, ROOT, SEARCH_FILES, STATIC, TRANSLATIONS, build_site
+from tools.build_site import (DEMO_LOCALES, DEMO_PAGES, DEMO_STATIC, INPUTS, LANGS, LOCAL_PAGES, PAGES, ROOT, SEARCH_FILES,
+                              STATIC, TRANSLATIONS, build_site)
 from tools.site_i18n import LANGUAGES
 
 
@@ -30,6 +31,7 @@ def test_pages_uses_only_presentation_files_and_project_relative_assets(site_roo
     output = build_site(site_root, repository="example/Journal")
     assert {p.relative_to(output).as_posix() for p in output.rglob("*") if p.is_file()} == {
         *(page + "index.html" for page in PAGES), *SEARCH_FILES, *STATIC, ".nojekyll", "sitemap.xml", "robots.txt",
+        *DEMO_STATIC, *DEMO_PAGES, *DEMO_LOCALES,
     }
     content = (output / "index.html").read_text(encoding="utf-8")
     assert "https://example.github.io/Journal/" in content
@@ -167,6 +169,8 @@ def test_every_page_has_distinct_metadata_and_valid_links(site_root, base_url):
                         assert unquote(resolved.fragment) in pages[target_url].ids, (url, href)
                 else:
                     relative = resolved.path.removeprefix(urlsplit(base_url).path + "/")
+                    if relative.endswith("/"):
+                        relative += "index.html"  # a directory such as the online demo
                     assert (output / relative).is_file(), (url, href)
     for name in SEARCH_FILES:
         index = json.loads((output / name).read_text(encoding="utf-8"))
@@ -199,3 +203,20 @@ def test_reference_source_links_open_the_document_on_github(site_root):
             assert links == ["https://github.com/example/Journal/edit/main/" + source], (lang, slug, links)
             checked += 1
     assert checked == len(LANGS) * len(REFERENCE)
+
+
+def test_online_demo_is_read_only_relative_and_translated(site_root):
+    output = build_site(site_root, repository="example/Journal")
+    panel = (output / "demo/index.html").read_text(encoding="utf-8")
+    assert '<script src="mock.js"></script>' in panel and 'name="robots" content="noindex"' in panel
+    assert not __import__("re").search(r'(src|href)="/[A-Za-z]', panel)  # works under the Pages project path
+    assert panel.index("mock.js") < panel.index('src="app.js')
+    mock = (output / "demo/mock.js").read_text(encoding="utf-8")
+    assert 'if (method !== "GET") return json(403' in mock
+    answers = json.loads((output / "demo/fixtures.json").read_text(encoding="utf-8"))
+    assert answers and all(key.startswith(("/api/", "/profiles/")) for key in answers)
+    assert json.loads(answers["/api/demo-access"]["text"]) == {"available": True, "token": "online-demo"}
+    assert json.loads(answers["/api/status"]["text"])["demo"] is True
+    russian = (output / "demo/locales/ru.js").read_text(encoding="utf-8")
+    assert russian.startswith('window.TGW_LANG="ru";window.TGW_DICT={') and "Журнал" in russian
+    assert 'href="../demo/?lang=ru"' in (output / "ru/index.html").read_text(encoding="utf-8")

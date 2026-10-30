@@ -49,7 +49,17 @@ STATIC = {"style.css": "website/style.css", "site.js": "website/site.js",
           "docs.css": "website/docs.css", "docs.js": "website/docs.js",
           "learn.css": "website/learn.css", "learn.js": "website/learn.js", **ASSETS, **WIKI_ASSETS}
 TRANSLATIONS = tuple(f"website/i18n/{lang}.json" for lang in LANGS if lang != "en")
+# The read-only online demo: the panel's own files, answered from recorded demo records
+# (website/demo/mock.js, tools/capture_demo.py). Nothing on the website can change data.
+DEMO_STATIC = {"demo/" + name: "tgwitness/static/" + name
+               for name in ("style.css", "theme.js", "i18n.js", "app.js", "mark.svg", "guide.css", "guide.js")}
+DEMO_STATIC.update({"demo/mock.js": "website/demo/mock.js", "demo/fixtures.json": "website/demo/fixtures.json"})
+DEMO_PAGES = {"demo/index.html": "tgwitness/static/index.html", "demo/guide.html": "tgwitness/static/guide.html",
+              "demo/dedicated-account.html": "tgwitness/static/dedicated-account.html"}
+DEMO_LOCALES = {f"demo/locales/{lang}.js": lang for lang in LANGS}
+DEMO_DICTIONARIES = ("tgwitness/english_fallbacks.json", *(f"tgwitness/locales/{lang}.json" for lang in LANGS if lang != "en"))
 INPUTS = ("website/index.html", "website/docs.html", "website/guide_intro.html", *STATIC.values(),
+          *DEMO_STATIC.values(), *DEMO_PAGES.values(), *DEMO_DICTIONARIES,
           *(f"website/guides/en/{slug}.html" for slug in GUIDES),
           *dict.fromkeys(entry[3] for entry in REFERENCE.values()))
 WIKI_HUB = "docs/reference/"
@@ -216,7 +226,8 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
     output = root / "dist/site"
     # Never clean/copy a directory recursively: an unexpected file must block the
     # upload rather than be carried into the public Pages artifact.
-    expected = {*(path + "index.html" for path in PAGES), *SEARCH_FILES, *STATIC, ".nojekyll", "robots.txt", "sitemap.xml"}
+    expected = {*(path + "index.html" for path in PAGES), *SEARCH_FILES, *STATIC, ".nojekyll", "robots.txt", "sitemap.xml",
+                *DEMO_STATIC, *DEMO_PAGES, *DEMO_LOCALES}
     if output.resolve() != output:
         raise ValueError("Site output must not be a linked directory")
     if output.exists():
@@ -328,7 +339,7 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
                     '<path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" '
                     'stroke-linejoin="round"/></svg></button>')
 
-        language_values = {"LANG": site_i18n.LANGUAGES[lang][1], "DIR": site_i18n.LANGUAGES[lang][2],
+        language_values = {"LANG": site_i18n.LANGUAGES[lang][1], "DIR": site_i18n.LANGUAGES[lang][2], "LANG_CODE": lang,
                            "THEME_SCRIPT": THEME_SCRIPT, "SITE_DICT": json_script(dictionary), "ARROW": arrow}
 
         # Home page.
@@ -472,10 +483,11 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
     for name, source in images.items():
         if WIKI_ASSETS.get(name) != source:
             raise ValueError("Reference page uses an unlisted image: " + source)
-    for target, source in STATIC.items():
+    for target, source in {**STATIC, **DEMO_STATIC}.items():
         destination = output / target
         destination.parent.mkdir(parents=True, exist_ok=True)
         destination.write_bytes(read_public(source))
+    build_demo(read_public, write)
     (output / ".nojekyll").write_text("", encoding="utf-8")
     (output / "robots.txt").write_text("User-agent: *\nAllow: /\nSitemap: " + base_url + "/sitemap.xml\n", encoding="utf-8")
     (output / "sitemap.xml").write_text(
@@ -487,6 +499,35 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
             for lang in LANGS for local in LOCAL_PAGES)
         + '</urlset>\n', encoding="utf-8")
     return output
+
+
+# Chooses the interface language the panel would: the saved choice, a ?lang= link from a
+# translated site page, then the browser's languages. Written before the deferred scripts.
+DEMO_LANGUAGE = ("<script>(function(){var known=%s,saved=(document.cookie.match(/(?:^|; )tgwitness-lang=([^;]+)/)||[])[1],"
+                 "asked=new URLSearchParams(location.search).get('lang'),"
+                 "browser=(navigator.languages||[navigator.language||'en']).map(function(x){return String(x).toLowerCase().split('-')[0];}),"
+                 "pick=[saved&&decodeURIComponent(saved),asked].concat(browser).filter(function(x){return known.indexOf(x)>=0;})[0]||'en';"
+                 "document.write('<script src=\"locales/'+pick+'.js\"><\\/script>');})();</script>")
+
+
+def build_demo(read_public, write):
+    """Panel pages with relative paths, the request answering script and one dictionary per language."""
+    loader = DEMO_LANGUAGE % json.dumps(list(LANGS))
+    for target, source in DEMO_PAGES.items():
+        page = read_public(source).decode("utf-8").replace('href="/"', 'href="../"')
+        page = re.sub(r'\b(src|href)="/(?=[A-Za-z])', r'\1="', page)
+        if '<script defer src="locale.js"></script>' not in page:
+            raise ValueError("Demo page no longer loads locale.js where expected: " + source)
+        answering = '<script src="mock.js"></script>' if target == "demo/index.html" else ""
+        page = page.replace('<script defer src="locale.js"></script>', answering + loader)
+        page = page.replace("<head>", '<head>\n<meta name="robots" content="noindex">', 1)
+        write(target, page)
+    fallbacks = json.loads(read_public("tgwitness/english_fallbacks.json"))
+    for target, lang in DEMO_LOCALES.items():
+        words = {} if lang == "en" else {**{text: text for text in fallbacks},
+                                         **json.loads(read_public(f"tgwitness/locales/{lang}.json"))}
+        write(target, "window.TGW_LANG=" + json.dumps(lang) + ";window.TGW_DICT="
+              + json.dumps(words, ensure_ascii=False, separators=(",", ":")) + ";\n")
 
 
 def main():

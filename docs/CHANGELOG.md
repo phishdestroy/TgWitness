@@ -7,6 +7,10 @@
   and scope notes to the documentation; updated package, container, portable
   distribution, website and translated README licence labels. Third-party notices
   and licences attached to previously distributed versions are unchanged.
+- The documentation website gains a read-only online demo: the real panel, answered from
+  recorded records of the fictional demo, in all 13 interface languages. Every change is
+  refused in the browser, nothing is sent anywhere, and `tools/capture_demo.py` regenerates
+  the recording. The home page and README link to it.
 - Put the workspace preview near the top of the repository landing page, simplified
   wiki entry links and connected the issue chooser to the live handbook. GitHub
   and website sharing images now have reproducible PNGs in the investigation style.

@@ -17,7 +17,9 @@ on:
       - tools/check_docs_site.py
       - tests/test_site.py
       - docs/assets/**
-      - tgwitness/static/mark.svg
+      - tgwitness/static/**
+      - tgwitness/locales/**
+      - tgwitness/english_fallbacks.json
       - pyproject.toml
       - .github/workflows/pages.yml
   pull_request:
@@ -36,7 +38,9 @@ on:
       - tools/check_docs_site.py
       - tests/test_site.py
       - docs/assets/**
-      - tgwitness/static/mark.svg
+      - tgwitness/static/**
+      - tgwitness/locales/**
+      - tgwitness/english_fallbacks.json
       - pyproject.toml
       - .github/workflows/pages.yml
   workflow_dispatch:

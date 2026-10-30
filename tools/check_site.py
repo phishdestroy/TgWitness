@@ -106,6 +106,19 @@ def main():
                 fallback.goto(url)
                 for panel in ("panel-chats", "panel-journal", "panel-edits", "panel-exports", "setup-windows", "setup-unix", "setup-docker"):
                     expect(fallback.locator("#" + panel)).to_be_visible()
+                # The online demo: the real panel under the project path, answered from recorded
+                # fictional records, translated, and refusing every change.
+                demo = context.new_page()
+                demo.on("pageerror", lambda error: errors.append("demo: " + str(error)))
+                demo.on("response", lambda response: failed.append(response.url) if response.status >= 400 else None)
+                demo.goto(url + "demo/?lang=ru", wait_until="networkidle")
+                expect(demo.locator("#workspace")).to_be_visible()
+                expect(demo.locator("#chats-list .chat-item")).to_have_count(3)
+                expect(demo.locator('[data-view="observations"]')).to_contain_text("Журнал")
+                demo.locator('[data-view="observations"]').click()
+                expect(demo.locator("#events-body tr").first).to_be_visible()
+                assert demo.evaluate("fetch('/api/collector/start', {method: 'POST'}).then(r => r.status)") == 403
+                demo.close()
                 assert errors == [], errors
                 assert external == [], external
                 assert failed == [], failed
@@ -116,7 +129,7 @@ def main():
             thread.join(timeout=5)
     receipt = {"result": "passed", "widths": [1440, 1024, 768, 390, 320], "project_subpath": True,
                "keyboard_tabs": True, "clipboard_and_denial": True, "no_javascript_fallback": True,
-               "reduced_motion": True, "message_history_controls": True, "screenshot_dialog": True,
+               "reduced_motion": True, "message_history_controls": True, "screenshot_dialog": True, "online_demo_read_only": True,
                "external_requests": external, "javascript_errors": errors, "failed_requests": failed}
     (output / "checks.json").write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(receipt, indent=2))

@@ -168,6 +168,7 @@ figcaption > span { color: #25344d; font-weight: 600; white-space: nowrap; }
 .demo-symbol { display: grid; place-items: center; width: 39px; height: 39px; flex-shrink: 0; border: 1px solid #b9cceb; border-radius: 10px; background: #f6f9ff; color: #2957a9; font-size: 22px; }
 .demo-callout strong { display: block; font-size: 14px; font-weight: 600; }
 .demo-callout p { margin-top: 3px; font-size: 12px; }
+.demo-callout .demo-link { display: inline-block; margin-top: 6px; font-size: 13px; font-weight: 650; color: var(--blue); }
 .demo-commands { display: grid; gap: 5px; margin-inline-start: auto; flex-shrink: 0; font-size: 10px; color: #4d6080; }
 .demo-commands code { margin-inline-start: 7px; font-size: 11px; color: #23477f; }
 .start-layout { display: grid; grid-template-columns: 1fr 1.2fr; border: 1px solid var(--line); background: #fff; border-radius: 13px; overflow: hidden; }

@@ -48,7 +48,9 @@ All screens use fictional demonstration data. Open an image for the full-size vi
 
 ## Quick start
 
-**Try the demo first:** fictional conversations, no Telegram account needed.
+**Try it in your browser:** the read-only [online demo](https://phishdestroy.github.io/TgWitness/demo/) runs the real panel on fictional records.
+
+**Or run the demo locally:** fictional conversations, no Telegram account needed.
 
 [Download the source](https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip), unpack it and install **Python 3.11+**.
 

@@ -27,6 +27,7 @@ These build commands prepare files. Publishing remains a separate workflow.
 | `python tools/check_docs_site.py` | Public guides and their visual examples |
 | `python tools/check_browser.py` | Synthetic end-to-end panel workflow |
 | `python tools/capture_screenshots.py` | Synthetic screenshot review set under `test-results/` |
+| `python tools/capture_demo.py` | Record the fictional demo's answers for the read-only online demo (`website/demo/fixtures.json`) |
 
 Account, workspace, quick-navigation, interaction, proxy and Proof browser checks
 have separate `check_*_browser.py` entry points. Inspect their usage before running;
