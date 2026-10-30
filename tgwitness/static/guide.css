@@ -247,7 +247,7 @@ details[open] > :not(summary) { animation: unfold .28s var(--ease); }
 .callout.warning { border-color: var(--warning-border); background: var(--warning-soft); }
 .callout.warning > .i { color: var(--warning); }
 .session-warning { font-weight: 400; }
-#session-warning, #fragment-rental { scroll-margin-top: 150px; }
+#session-warning, #fragment-rental, #marketplace-accounts { scroll-margin-top: 150px; }
 .session-warning > div { min-width: 0; }
 .session-warning h3 { margin-top: 0; }
 .session-warning p + p { margin-top: 12px; }
@@ -780,9 +780,10 @@ section :is(.method, .info-cards, .fix-cards, .step-cards, .api-text, .vault-car
 .split-card li { margin: 0; padding: 3px 10px; border-radius: 999px; background: var(--surface); color: var(--text); font-size: 13.5px; font-weight: 550; }
 .rental-card { margin-top: 26px; padding: clamp(18px, 3vw, 28px); border: 1px solid var(--border); border-radius: 20px; background: var(--surface); }
 .rental-card h3 { margin: 0 0 12px; font-size: 21px; line-height: 1.35; letter-spacing: -.02em; }
-.rental-card p, .rental-card > ul:not(.source-links) { font-size: 15px; line-height: 1.7; }
-.rental-card > ul:not(.source-links) { margin: 18px 0; padding-inline-start: 22px; }
-.rental-card > ul:not(.source-links) > li + li { margin-top: 12px; }
+.rental-card p, .rental-card > :is(ul, ol):not(.source-links) { font-size: 15px; line-height: 1.7; }
+.rental-card > :is(ul, ol):not(.source-links) { margin: 18px 0; padding-inline-start: 22px; }
+.rental-card > :is(ul, ol):not(.source-links) > li + li { margin-top: 12px; }
+.rental-card h4 { margin: 26px 0 10px; color: var(--text); font-size: 17px; }
 .rental-card .source-links { margin-top: 20px; }
 
 .table-wrap { margin: 16px 0; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
@@ -898,7 +899,7 @@ td:first-child { width: 30%; color: var(--text); font-weight: 600; }
   main > nav, .section-nav { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; scrollbar-width: none; }
   main > nav::-webkit-scrollbar { display: none; }
   main > nav a { flex-shrink: 0; }
-  #session-warning, #fragment-rental { scroll-margin-top: 74px; }
+  #session-warning, #fragment-rental, #marketplace-accounts { scroll-margin-top: 74px; }
   .methods { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .connect-grid { grid-template-columns: minmax(0, 1fr); }
   .mock { position: relative; top: auto; width: 100%; max-width: 440px; justify-self: center; }
@@ -976,6 +977,7 @@ td:first-child { width: 30%; color: var(--text); font-weight: 600; }
   main > section { padding: 24px 16px; border-radius: 18px; }
   .callout.session-warning { flex-direction: column; gap: 10px; padding: 16px; }
   .session-warning ul { padding-inline-start: 20px; }
+  .rental-card .tip { flex-direction: column; gap: 10px; padding: 16px; }
   .block-head { gap: 14px; }
   .block-icon { width: 46px; height: 46px; border-radius: 14px; }
   .block-icon .i { width: 23px; height: 23px; }
