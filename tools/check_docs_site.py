@@ -14,9 +14,11 @@ from urllib.parse import urlsplit
 from playwright.sync_api import expect, sync_playwright
 
 if __package__:
+    from .build_site import NOTICE_LANGUAGES, NOTICE_PAGES, page_languages
     from .site_content import GUIDES, REFERENCE
     from .site_i18n import LANGUAGES
 else:
+    from build_site import NOTICE_LANGUAGES, NOTICE_PAGES, page_languages
     from site_content import GUIDES, REFERENCE
     from site_i18n import LANGUAGES
 
@@ -221,7 +223,7 @@ def main():
                     expect(page.get_by_role("heading", level=1)).to_be_visible()
                     expect(page.locator("#guide-search")).to_be_visible()
                     assert not page.locator('input:not([type="search"]),form').count()
-                    expect(page.locator('link[rel=alternate][hreflang]')).to_have_count(len(LANGUAGES) + 1)
+                    expect(page.locator('link[rel=alternate][hreflang]')).to_have_count(len(page_languages(path)) + 1)
                     assert not page.evaluate("document.body.textContent.includes('@@')")
                     assert page.evaluate("getComputedStyle(document.documentElement).scrollBehavior") == "auto"
                     assert not page.locator(".will-reveal, .will-draw").count(), path  # reduced motion hides nothing
@@ -282,25 +284,28 @@ def main():
                 expect(page.locator("html")).to_have_attribute("data-theme", "light")
 
                 # Every language: its own lang and direction, a working search and a menu of all languages.
-                for lang in [code for code in LANGUAGES if code != "en"]:
-                    for local in ("", "docs/", "docs/security/", "docs/reference/how-it-works/",
-                                  "docs/reference/license/", "docs/reference/notice/"):
+                for lang in [code for code in NOTICE_LANGUAGES if code != "en"]:
+                    locales = ("", "docs/", "docs/security/", "docs/reference/how-it-works/", *NOTICE_PAGES) if lang in LANGUAGES else NOTICE_PAGES
+                    for local in locales:
                         path = lang + "/" + local
                         page.set_viewport_size({"width": 1440, "height": 1000})
                         page.goto(base + path, wait_until="networkidle")
                         html_tag = page.locator("html")
-                        expect(html_tag).to_have_attribute("lang", LANGUAGES[lang][1])
-                        expect(html_tag).to_have_attribute("dir", LANGUAGES[lang][2])
+                        expect(html_tag).to_have_attribute("lang", NOTICE_LANGUAGES[lang][1])
+                        expect(html_tag).to_have_attribute("dir", NOTICE_LANGUAGES[lang][2])
                         expect(page.get_by_role("heading", level=1)).to_be_visible()
                         assert not page.evaluate("document.body.textContent.includes('@@')"), path
-                        expect(page.locator(".lang-list a")).to_have_count(len(LANGUAGES))
-                        expect(page.locator('.lang-list a[aria-current]')).to_have_attribute("hreflang", LANGUAGES[lang][1])
+                        expect(page.locator(".lang-list a")).to_have_count(len(page_languages(local)))
+                        expect(page.locator('.lang-list a[aria-current]')).to_have_attribute("hreflang", NOTICE_LANGUAGES[lang][1])
                         if local:
                             expect(page.locator("#guide-search")).to_be_visible()
                         if local in ("docs/reference/license/", "docs/reference/notice/"):
-                            expect(page.locator('.language-notice')).to_have_count(0)
+                            expect(page.locator('.language-notice')).to_have_count(0 if lang in LANGUAGES else 1)
                             expect(page.locator('.wiki-body [translate="no"]')).to_have_count(0)
-                            assert page.locator('.wiki-body').evaluate('el => getComputedStyle(el).direction') == LANGUAGES[lang][2]
+                            assert page.locator('.wiki-body').evaluate('el => getComputedStyle(el).direction') == NOTICE_LANGUAGES[lang][2]
+                            page.locator('#guide-search').fill('Taylor')
+                            expect(page.locator('.search-result').first).to_be_visible()
+                            page.locator('#guide-search').fill('')
                         for width in (1440, 390, 320):
                             page.set_viewport_size({"width": width, "height": 1000})
                             assert page.evaluate("document.documentElement.scrollWidth <= innerWidth"), (path, width)
@@ -351,6 +356,21 @@ def main():
                         expect(fallback.locator('#scope')).to_be_visible()
                         expect(fallback.locator('.case-timeline li')).to_have_count(6)
                     assert fallback.evaluate("document.documentElement.scrollWidth <= innerWidth")
+                for lang in NOTICE_LANGUAGES:
+                    for local in NOTICE_PAGES:
+                        for scheme in ('light', 'dark'):
+                            fallback.emulate_media(color_scheme=scheme, reduced_motion='reduce')
+                            fallback.set_viewport_size({'width': 320, 'height': 844})
+                            fallback.goto(base + (lang + '/' if lang != 'en' else '') + local)
+                            expect(fallback.locator('h1')).to_be_visible()
+                            expect(fallback.locator('.wiki-body')).to_be_visible()
+                            expect(fallback.locator('.lang-list a')).to_have_count(len(NOTICE_LANGUAGES))
+                            expect(fallback.locator('.search')).to_be_hidden()
+                            assert fallback.evaluate('getComputedStyle(document.body).backgroundColor') == (
+                                'rgb(10, 17, 32)' if scheme == 'dark' else 'rgb(247, 248, 250)')
+                            assert fallback.evaluate('document.documentElement.scrollWidth <= innerWidth'), (lang, local, scheme)
+                            if lang in ('he', 'am', 'fr') and local.endswith('/notice/'):
+                                fallback.screenshot(path=str(output / f'{lang}-notice-320-{scheme}-nojs.png'), full_page=True)
                 browser.close()
         finally:
             server.shutdown()
@@ -367,7 +387,7 @@ def main():
                "witness_scenarios_keyboard": True, "delivery_chart_matches_table": True,
                "investigation_map_keyboard_and_static_fallback": True,
                "security_map_and_checklist_keyboard": True, "diagrams_drawn_and_described": True,
-               "languages": list(LANGUAGES), "theme_toggle_persists": True,
+               "languages": list(LANGUAGES), "notice_languages": list(NOTICE_LANGUAGES), "theme_toggle_persists": True,
                "external_requests": external, "javascript_errors": errors, "failed_requests": failed}
     (output / "receipt.json").write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(receipt, indent=2))

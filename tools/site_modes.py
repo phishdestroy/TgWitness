@@ -9,7 +9,7 @@ try:
 except ImportError:
     from site_i18n import LANGUAGES as SITE_LANGUAGES
 
-# These additions cover this guide. Other site/application dictionaries are separate.
+# These additions cover this guide and the two project notices. Other dictionaries are separate.
 EXTRA_LANGUAGES = {
     "fr": ("Français", "fr", "ltr", "fr_FR"), "de": ("Deutsch", "de", "ltr", "de_DE"),
     "it": ("Italiano", "it", "ltr", "it_IT"), "uz": ("O‘zbekcha", "uz", "ltr", "uz_UZ"),

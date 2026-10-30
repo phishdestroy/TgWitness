@@ -28,6 +28,8 @@ else:
 
 ROOT = Path(__file__).resolve().parents[1]
 LANGS = tuple(site_i18n.LANGUAGES)
+NOTICE_SLUGS = ("license", "notice")
+NOTICE_LANGUAGES = site_modes.LANGUAGES
 ASSETS = {
     "assets/mark.svg": "tgwitness/static/mark.svg",
     "assets/chats-dark.png": "docs/assets/chats-dark.png",
@@ -76,8 +78,11 @@ INPUTS = ("website/index.html", "website/docs.html", "website/guide_intro.html",
           *dict.fromkeys(entry[3] for entry in REFERENCE.values()))
 WIKI_HUB = "docs/reference/"
 LOCAL_PAGES = ("", "docs/", *(f"docs/{slug}/" for slug in GUIDES), WIKI_HUB, *(f"{WIKI_HUB}{slug}/" for slug in REFERENCE))
-PAGES = tuple(("" if lang == "en" else lang + "/") + path for lang in LANGS for path in LOCAL_PAGES)
-SEARCH_FILES = tuple(("" if lang == "en" else lang + "/") + "docs/search.json" for lang in LANGS)
+NOTICE_PAGES = tuple(f"{WIKI_HUB}{slug}/" for slug in NOTICE_SLUGS)
+PAGE_LOCALES = tuple((lang, local) for lang in NOTICE_LANGUAGES
+                     for local in (LOCAL_PAGES if lang in LANGS else NOTICE_PAGES))
+PAGES = tuple(("" if lang == "en" else lang + "/") + local for lang, local in PAGE_LOCALES)
+SEARCH_FILES = tuple(("" if lang == "en" else lang + "/") + "docs/search.json" for lang in NOTICE_LANGUAGES)
 SEARCH_TEXT = 4000  # characters of each page in the search index
 HOME_TITLE = "Telegram message history & signed exports | TgWitness"
 HOME_DESCRIPTION = ("A self-hosted Telegram observation journal. Preserve observed messages, compare edits, "
@@ -90,12 +95,20 @@ WIKI_DESCRIPTION = ("The complete TgWitness reference: installation, accounts, p
 FRAME = ("Visual guide", "Security", "Language", "Switch between light and dark theme", "Link to this section",
          "Parts of this page are still in English: the English original changed after it was translated.",
          "This page is available in English only.")
+NOTICE_LINK_NOTE = ("The two project notices and the capability guide are translated into this language. "
+                    "Other linked guides and reference pages are in English.")
+NOTICE_FRAME = (*LABELS.values(), *FRAME[:5], "Security & project", NOTICE_LINK_NOTE)
 THEME_SCRIPT = ("(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme="
                 "s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()")
 
 
 def prefix(lang):
     return "" if lang == "en" else lang + "/"
+
+
+def page_languages(local):
+    """Only the two notices share all 26 capability-guide languages."""
+    return NOTICE_LANGUAGES if local in NOTICE_PAGES else site_i18n.LANGUAGES
 
 
 def render(template, values):
@@ -187,7 +200,7 @@ def inventory(root=ROOT):
     """Everything that is translated: (UI strings, HTML fragments, diagram texts). The translation
     script and the build use this one list, so nothing is translated that the site does not show."""
     root = Path(root)
-    strings = list(LABELS.values()) + list(FRAME) + [HOME_TITLE, HOME_DESCRIPTION, HOME_OG, HOME_IMAGE_ALT, WIKI_DESCRIPTION]
+    strings = list(LABELS.values()) + list(FRAME) + [HOME_TITLE, HOME_DESCRIPTION, HOME_OG, HOME_IMAGE_ALT, WIKI_DESCRIPTION, NOTICE_LINK_NOTE]
     for title, description, keywords, _ in GUIDES.values():
         strings += [title, description, keywords]
     for label, heading, _ in GROUPS:
@@ -206,6 +219,8 @@ def inventory(root=ROOT):
         source = (root / entry[3]).read_text(encoding="utf-8")
         if slug in site_i18n.ENGLISH_ONLY:
             continue
+        if slug in NOTICE_SLUGS:
+            strings.append(site_wiki.split_title(source)[0])
         fragments["reference:" + slug] = site_wiki.markup(site_wiki.split_title(source)[1])[0]
         for block in site_wiki.diagram_sources(source):
             diagrams += site_diagrams.labels_of(block)
@@ -263,7 +278,7 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
         target.write_text(content, encoding="utf-8")
 
     translations = {}
-    for lang in LANGS:
+    for lang in NOTICE_LANGUAGES:
         if lang == "en":
             translations[lang] = None
             continue
@@ -283,38 +298,53 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
         script_keys += site_i18n.script_strings(read_public(script).decode("utf-8"))
     images = {}
 
-    for lang in LANGS:
+    english_page_ids = {}
+    for lang in NOTICE_LANGUAGES:
         data, base = translations[lang], prefix(lang)
-        rtl = site_i18n.LANGUAGES[lang][2] == "rtl"
+        full_site = lang in LANGS
+        page_slugs = tuple(REFERENCE) if full_site else NOTICE_SLUGS
+        rtl = NOTICE_LANGUAGES[lang][2] == "rtl"
         arrow = "←" if rtl else "→"
 
         def t(value, data=data):
             return site_i18n.text(data, value)
+        if lang != "en":
+            required = [value for slug in NOTICE_SLUGS for value in REFERENCE[slug][:3]]
+            if not full_site:
+                required += list(NOTICE_FRAME) + site_i18n.script_strings(read_public("website/docs.js").decode("utf-8"))
+            missing = [value for value in required if not data["strings"].get(value, "").strip()]
+            if missing:
+                raise ValueError(f"Incomplete notice labels: {lang}: {missing[0]}")
         labels = {key: t(value) for key, value in LABELS.items()}
         guides = {slug: (t(e[0]), t(e[1]), t(e[2]), e[3]) for slug, e in GUIDES.items()}
         reference = {slug: (t(e[0]), t(e[1]), t(e[2]), e[3]) for slug, e in REFERENCE.items()}
         hub, wiki_hub = base + "docs/", base + WIKI_HUB
-        wiki_page = {entry[3]: f"{wiki_hub}{slug}/" for slug, entry in REFERENCE.items()}
+        wiki_page = {entry[3]: f"{base if full_site or slug in NOTICE_SLUGS else ''}{WIKI_HUB}{slug}/"
+                     for slug, entry in REFERENCE.items()}
         dictionary = {key: data["strings"][key] for key in script_keys if data and key in data["strings"]}
 
         def localize(fragment, data=data):
             return site_i18n.localize(fragment, data)
 
         # Reference pages: render once to learn every heading, then fix the links between them.
-        rendered, page_ids, missing_by_page, diagrams = {}, {}, {}, 0
-        for slug in REFERENCE:
+        rendered, missing_by_page, diagrams = {}, {}, 0
+        page_ids = {} if full_site else dict(english_page_ids)
+        for slug in page_slugs:
             english = slug in site_i18n.ENGLISH_ONLY
             labels_map = None if (data is None or english) else data["strings"]
             content, count, missing = site_wiki.to_html(
                 sources[slug], diagrams + 1, labels_map, None if (data is None or english) else localize,
                 None if data is None else data["strings"])
-            if lang != "en" and slug in {"license", "notice"} and missing:
+            if lang != "en" and slug in NOTICE_SLUGS and missing:
                 raise ValueError(f"Incomplete notice translation: {lang}/{slug} ({missing} blocks)")
             diagrams += count
             rendered[slug] = content
             missing_by_page[f"{wiki_hub}{slug}/"] = missing
             page_ids[f"{wiki_hub}{slug}/"] = site_wiki.ids(content)
-        for slug, (_, _, _, source) in reference.items():
+        if lang == "en":
+            english_page_ids = dict(page_ids)
+        for slug in page_slugs:
+            source = reference[slug][3]
             rendered[slug] = site_wiki.rewrite_links(rendered[slug], source, f"{wiki_hub}{slug}/", wiki_page, page_ids,
                                                      relative_file, repo_url, branch, images, root)
 
@@ -341,14 +371,15 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
         write(modes_path, links(modes_html, posixpath.dirname(modes_path)))
 
         def alternates(local):
-            return [(other, prefix(other) + local) for other in LANGS]
+            return [(other, prefix(other) + local) for other in page_languages(local)]
 
         def language_menu(path, local):
-            current = site_i18n.LANGUAGES[lang]
+            languages = page_languages(local)
+            current = languages[lang]
             items = "".join(
-                f'<a href="{relative(path, prefix(other) + local)}" hreflang="{site_i18n.LANGUAGES[other][1]}" '
-                f'lang="{site_i18n.LANGUAGES[other][1]}"' + (' aria-current="true"' if other == lang else '')
-                + f'>{html.escape(site_i18n.LANGUAGES[other][0])}</a>' for other in LANGS)
+                f'<a href="{relative(path, prefix(other) + local)}" hreflang="{languages[other][1]}" '
+                f'lang="{languages[other][1]}"' + (' aria-current="true"' if other == lang else '')
+                + f'>{html.escape(languages[other][0])}</a>' for other in languages)
             return (f'<details class="lang-menu"><summary aria-label="{html.escape(t("Language"), quote=True)}">'
                     f'<span aria-hidden="true">◍</span> {html.escape(current[0])}</summary>'
                     f'<div class="lang-list">{items}</div></details>')
@@ -363,45 +394,51 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
                     '<path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" '
                     'stroke-linejoin="round"/></svg></button>')
 
-        language_values = {"LANG": site_i18n.LANGUAGES[lang][1], "DIR": site_i18n.LANGUAGES[lang][2], "LANG_CODE": lang,
+        language_values = {"LANG": NOTICE_LANGUAGES[lang][1], "DIR": NOTICE_LANGUAGES[lang][2], "LANG_CODE": lang,
                            "THEME_SCRIPT": THEME_SCRIPT, "SITE_DICT": json_script(dictionary), "ARROW": arrow}
 
-        # Home page.
-        body, _ = localize(home_body(home_template))
-        home = home_template[:home_template.index("<body>") + len("<body>")] + body + home_template[home_template.index("</body>"):]
-        write(base + "index.html", links(render(home, {
-            **values, **language_values, "ROOT": "" if not base else relative(base, ""), "TITLE": html.escape(t(HOME_TITLE), quote=True),
-            "DESCRIPTION": html.escape(t(HOME_DESCRIPTION), quote=True), "CANONICAL": html.escape(base_url + "/" + base, quote=True),
-            "OG_LOCALE": site_i18n.LANGUAGES[lang][3], "OG_DESCRIPTION": html.escape(t(HOME_OG), quote=True),
-            "OG_IMAGE_ALT": html.escape(t(HOME_IMAGE_ALT), quote=True),
-            "LANGUAGE_MENU": language_menu(base, ""), "THEME_TOGGLE": theme_toggle(),
-            "EXTRA_HEAD": seo(base_url, base, t(HOME_TITLE), t(HOME_DESCRIPTION), lang, alternates(""), extra_only=True)}), base))
+        if full_site:
+            # Home page.
+            body, _ = localize(home_body(home_template))
+            home = home_template[:home_template.index("<body>") + len("<body>")] + body + home_template[home_template.index("</body>"):]
+            write(base + "index.html", links(render(home, {
+                **values, **language_values, "ROOT": "" if not base else relative(base, ""), "TITLE": html.escape(t(HOME_TITLE), quote=True),
+                "DESCRIPTION": html.escape(t(HOME_DESCRIPTION), quote=True), "CANONICAL": html.escape(base_url + "/" + base, quote=True),
+                "OG_LOCALE": site_i18n.LANGUAGES[lang][3], "OG_DESCRIPTION": html.escape(t(HOME_OG), quote=True),
+                "OG_IMAGE_ALT": html.escape(t(HOME_IMAGE_ALT), quote=True),
+                "LANGUAGE_MENU": language_menu(base, ""), "THEME_TOGGLE": theme_toggle(),
+                "EXTRA_HEAD": seo(base_url, base, t(HOME_TITLE), t(HOME_DESCRIPTION), lang, alternates(""), extra_only=True)}), base))
 
         texts = {}
 
         def guide_values(path):
             return {**values, "ROOT": relative(path, ""),
-                    **{"GUIDE_" + key.upper(): relative(path, hub + key + "/") for key in GUIDES}}
+                    **{"GUIDE_" + key.upper(): relative(path, (hub if full_site else "docs/") + key + "/") for key in GUIDES}}
         guide_html, guide_missing = {}, {}
-        for slug in GUIDES:
+        for slug in (GUIDES if full_site else ()):
             translated, missing = localize(fragments[slug])
             guide_html[slug], guide_missing[slug] = translated, missing
             texts[hub + slug + "/"] = PlainText(render(translated, guide_values(hub + slug + "/"))).text
-        for slug in REFERENCE:
+        for slug in page_slugs:
             texts[f"{wiki_hub}{slug}/"] = PlainText(rendered[slug]).text
         search = {"labels": {k: labels[k] for k in ("empty", "results", "prompt")}, "pages": [
             *({"title": guides[key][0], "description": guides[key][1], "keywords": guides[key][2],
-               "text": texts[hub + key + "/"][:SEARCH_TEXT], "url": key + "/"} for key in GUIDES),
+               "text": texts[hub + key + "/"][:SEARCH_TEXT], "url": key + "/"} for key in (GUIDES if full_site else ())),
             {"title": modes_words["modes.eyebrow"], "description": modes_words["modes.seo"],
              "keywords": modes_words["modes.title"], "text": PlainText(modes_html).text[:SEARCH_TEXT],
              "url": "../" + site_modes.LOCAL},
             *({"title": labels["wiki"] + " · " + reference[key][0], "description": reference[key][1],
                "keywords": reference[key][2], "text": texts[f"{wiki_hub}{key}/"][:SEARCH_TEXT],
-               "url": "reference/" + key + "/"} for key in REFERENCE)]}
+               "url": "reference/" + key + "/"} for key in page_slugs)]}
         write(hub + "search.json", json.dumps(search, ensure_ascii=False, separators=(",", ":")))
 
         def sidebar(path):
             items = [f'<a href="{relative_file(path, base + site_modes.LOCAL)}">{html.escape(modes_words["modes.eyebrow"])}</a>']
+            if not full_site:
+                wiki = ''.join(f'<a href="{relative(path, wiki_hub + key + "/")}"'
+                               + (' aria-current="page"' if path == wiki_hub + key + '/' else '')
+                               + f'>{html.escape(reference[key][0])}</a>' for key in NOTICE_SLUGS)
+                return ''.join(items), wiki
             for label, heading, keys in GROUPS:
                 items.append(f'<p class="nav-label">{t(label)}</p>')
                 for key in keys:
@@ -426,12 +463,15 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
             toc_html = (f'<p class="nav-label">{labels["toc"]}</p>' + ''.join(f'<a href="#{id_}">{text}</a>' for id_, text in toc)
                         if toc else "")
             context = {**guide_values(path), **language_values,
+                       "PAGE_CLASS": "notice-page" if local in NOTICE_PAGES else "docs-root",
                        **{key.upper(): html.escape(value, quote=True) for key, value in labels.items()},
-                       "HOME": relative(path, base), "HUB": relative(path, hub), "WIKI_HUB": relative(path, wiki_hub),
+                       "HOME": relative(path, base if full_site else ""), "HUB": relative(path, hub if full_site else "docs/"),
+                       "WIKI_HUB": relative(path, wiki_hub if full_site else WIKI_HUB),
+                       "OPERATOR_URL": relative(path, wiki_hub + "notice/"),
                        "SIDEBAR": guides_nav, "WIKI_NAV": wiki_nav, "VISUAL": html.escape(t("Visual guide")),
                        "SECURITY": html.escape(t("Security")), "LANGUAGE_MENU": language_menu(path, local),
                        "THEME_TOGGLE": theme_toggle(), "SEARCH_URL": relative_file(path, hub + "search.json"),
-                       "HEAD": seo(base_url, path, title + " | TgWitness", description, lang, alternates(local), crumbs=crumbs),
+                       "HEAD": seo(base_url, path, title + " | TgWitness", description, lang, alternates(local), crumbs=crumbs, languages=page_languages(local)),
                        "BREADCRUMBS": breadcrumb, "NOTICE": notice, "CONTENT": content, "CONTENTS": toc_html,
                        "GUIDE_FOOTER": footer}
             write(path + "index.html", links(render(doc_template, context), path))
@@ -447,52 +487,53 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
                 return f'<p class="language-notice">{html.escape(t(FRAME[5]))}</p>'
             return ""
 
-        # Documentation hub: guides, then the reference.
-        intro, intro_missing = localize(intro_template)
-        content = (f'<p class="eyebrow">TGWITNESS / {labels["docs"].upper()}</p><h1>{labels["title"]}</h1>'
-                   f'<p class="guide-outcome">{labels["intro"]}</p>' + render(intro, guide_values(hub)))
-        content += (f'<a class="guide-card" href="{relative_file(hub, base + site_modes.LOCAL)}">'
-                    f'<span class="card-number" aria-hidden="true">04 / 08 ↗</span>'
-                    f'<h2>{html.escape(modes_words["modes.eyebrow"])}</h2>'
-                    f'<p>{html.escape(modes_words["modes.seo"])}</p></a>')
-        for index, (label, heading, keys) in enumerate(GROUPS):
-            content += f'<h2 id="section-{index}">{t(heading)}</h2><div class="guide-grid">'
-            content += "".join(card(hub, hub + key + "/", f"{list(GUIDES).index(key) + 1:02d}", *guides[key][:2]) for key in keys)
-            content += '</div>'
-        content += (f'<h2 id="reference">{labels["wiki_title"]}</h2><p>{labels["wiki_intro"]}</p>'
-                    f'<div class="wiki-index">' + "".join(
-                        f'<div class="wiki-column"><p class="nav-label">{t(label)}</p>' + "".join(
-                            f'<a href="{relative(hub, wiki_hub + key + "/")}">{reference[key][0]}</a>' for key in keys)
-                        + '</div>' for label, keys in REFERENCE_GROUPS) + '</div>')
-        page("docs/", labels["docs"], labels["description"], [(labels["home"], base), (labels["docs"], hub)], content, [], "",
-             notice(intro_missing))
+        if full_site:
+            # Documentation hub: guides, then the reference.
+            intro, intro_missing = localize(intro_template)
+            content = (f'<p class="eyebrow">TGWITNESS / {labels["docs"].upper()}</p><h1>{labels["title"]}</h1>'
+                       f'<p class="guide-outcome">{labels["intro"]}</p>' + render(intro, guide_values(hub)))
+            content += (f'<a class="guide-card" href="{relative_file(hub, base + site_modes.LOCAL)}">'
+                        f'<span class="card-number" aria-hidden="true">04 / 08 ↗</span>'
+                        f'<h2>{html.escape(modes_words["modes.eyebrow"])}</h2>'
+                        f'<p>{html.escape(modes_words["modes.seo"])}</p></a>')
+            for index, (label, heading, keys) in enumerate(GROUPS):
+                content += f'<h2 id="section-{index}">{t(heading)}</h2><div class="guide-grid">'
+                content += "".join(card(hub, hub + key + "/", f"{list(GUIDES).index(key) + 1:02d}", *guides[key][:2]) for key in keys)
+                content += '</div>'
+            content += (f'<h2 id="reference">{labels["wiki_title"]}</h2><p>{labels["wiki_intro"]}</p>'
+                        f'<div class="wiki-index">' + "".join(
+                            f'<div class="wiki-column"><p class="nav-label">{t(label)}</p>' + "".join(
+                                f'<a href="{relative(hub, wiki_hub + key + "/")}">{reference[key][0]}</a>' for key in keys)
+                            + '</div>' for label, keys in REFERENCE_GROUPS) + '</div>')
+            page("docs/", labels["docs"], labels["description"], [(labels["home"], base), (labels["docs"], hub)], content, [], "",
+                 notice(intro_missing))
 
-        for slug in GUIDES:
-            path = hub + slug + "/"
-            title, description = guides[slug][:2]
-            guide = render(guide_html[slug], guide_values(path))
-            content = f'<p class="eyebrow">{labels["docs"]} / {list(GUIDES).index(slug) + 1:02d}</p><h1>{title}</h1>' + guide
-            next_slug = NEXT[slug]
-            target = wiki_page.get(GUIDES[slug][3])
-            footer = ((f'<a class="reference" href="{relative(path, target)}">{labels["reference"]} {arrow}</a>' if target else "")
-                      + f'<a class="next-guide" href="{relative(path, hub + next_slug + "/")}"><span>{labels["next"]}</span>'
-                        f'<strong>{guides[next_slug][0]} {arrow}</strong></a>')
-            page(f"docs/{slug}/", title, description, [(labels["home"], base), (labels["docs"], hub), (title, path)],
-                 content, headings(content), footer, notice(guide_missing[slug]))
+            for slug in GUIDES:
+                path = hub + slug + "/"
+                title, description = guides[slug][:2]
+                guide = render(guide_html[slug], guide_values(path))
+                content = f'<p class="eyebrow">{labels["docs"]} / {list(GUIDES).index(slug) + 1:02d}</p><h1>{title}</h1>' + guide
+                next_slug = NEXT[slug]
+                target = wiki_page.get(GUIDES[slug][3])
+                footer = ((f'<a class="reference" href="{relative(path, target)}">{labels["reference"]} {arrow}</a>' if target else "")
+                          + f'<a class="next-guide" href="{relative(path, hub + next_slug + "/")}"><span>{labels["next"]}</span>'
+                            f'<strong>{guides[next_slug][0]} {arrow}</strong></a>')
+                page(f"docs/{slug}/", title, description, [(labels["home"], base), (labels["docs"], hub), (title, path)],
+                     content, headings(content), footer, notice(guide_missing[slug]))
 
-        # Reference hub and pages.
-        content = (f'<p class="eyebrow">TGWITNESS / {labels["wiki"].upper()}</p><h1>{labels["wiki_title"]}</h1>'
-                   f'<p class="guide-outcome">{labels["wiki_intro"]}</p>')
-        number = 0
-        for index, (label, keys) in enumerate(REFERENCE_GROUPS):
-            content += f'<h2 id="group-{index}">{t(label)}</h2><div class="guide-grid">'
-            for key in keys:
-                number += 1
-                content += card(wiki_hub, wiki_hub + key + "/", f"{number:02d}", *reference[key][:2])
-            content += '</div>'
-        page(WIKI_HUB, labels["wiki"], t(WIKI_DESCRIPTION),
-             [(labels["home"], base), (labels["docs"], hub), (labels["wiki"], wiki_hub)], content, headings(content), "")
-        order = list(REFERENCE)
+            # Reference hub and pages.
+            content = (f'<p class="eyebrow">TGWITNESS / {labels["wiki"].upper()}</p><h1>{labels["wiki_title"]}</h1>'
+                       f'<p class="guide-outcome">{labels["wiki_intro"]}</p>')
+            number = 0
+            for index, (label, keys) in enumerate(REFERENCE_GROUPS):
+                content += f'<h2 id="group-{index}">{t(label)}</h2><div class="guide-grid">'
+                for key in keys:
+                    number += 1
+                    content += card(wiki_hub, wiki_hub + key + "/", f"{number:02d}", *reference[key][:2])
+                content += '</div>'
+            page(WIKI_HUB, labels["wiki"], t(WIKI_DESCRIPTION),
+                 [(labels["home"], base), (labels["docs"], hub), (labels["wiki"], wiki_hub)], content, headings(content), "")
+        order = list(page_slugs)
         for index, slug in enumerate(order):
             path = f"{wiki_hub}{slug}/"
             title, description, keywords, source = reference[slug]
@@ -508,20 +549,11 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
                       f'<a class="next-guide" href="{relative(path, wiki_hub + following + "/")}"><span>{labels["next"]}</span>'
                       f'<strong>{reference[following][0]} {arrow}</strong></a>')
             page(f"{WIKI_HUB}{slug}/", title, description,
-                 [(labels["home"], base), (labels["docs"], hub), (labels["wiki"], wiki_hub), (title, path)],
-                 content, headings(content), footer, notice(missing_by_page[path], english))
-
-    for lang in site_modes.EXTRA_LANGUAGES:
-        words = site_modes.catalogue(read_public, lang, modes_english)
-        path, content = site_modes.render_page(
-            modes_template, words, lang=lang, base_url=base_url, values=values, dictionary={},
-            render=render, seo=seo, theme_script=THEME_SCRIPT)
-        # A translated capability guide must not imply the detailed manual is translated too.
-        for key, filename in site_modes.DOCS.items():
-            slug = next(k for k, entry in REFERENCE.items() if entry[3] == "docs/" + filename)
-            source_url = values["REPO_URL"] + "/blob/" + values["BRANCH"] + "/docs/" + filename
-            content = content.replace('href="' + source_url + '"', 'href="' + relative(posixpath.dirname(path), WIKI_HUB + slug + "/") + '"')
-        write(path, content)
+                 [(labels["home"], base if full_site else ""), (labels["docs"], hub if full_site else "docs/"),
+                  (labels["wiki"], wiki_hub if full_site else WIKI_HUB), (title, path)],
+                 content, headings(content), footer,
+                 notice(missing_by_page[path], english) if full_site else
+                 '<p class="language-notice">' + html.escape(t(NOTICE_LINK_NOTE)) + '</p>')
 
     for name, source in images.items():
         if WIKI_ASSETS.get(name) != source:
@@ -537,9 +569,9 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
         + ''.join('<url><loc>' + html.escape(base_url + '/' + prefix(lang) + local) + '</loc>' + ''.join(
-            f'<xhtml:link rel="alternate" hreflang="{site_i18n.LANGUAGES[other][1]}" '
-            f'href="{html.escape(base_url + "/" + prefix(other) + local)}"/>' for other in LANGS) + '</url>\n'
-            for lang in LANGS for local in LOCAL_PAGES)
+            f'<xhtml:link rel="alternate" hreflang="{page_languages(local)[other][1]}" '
+            f'href="{html.escape(base_url + "/" + prefix(other) + local)}"/>' for other in page_languages(local)) + '</url>\n'
+            for lang, local in PAGE_LOCALES)
         + ''.join('<url><loc>' + html.escape(base_url + '/' + path) + '</loc>' + ''.join(
             f'<xhtml:link rel="alternate" hreflang="{site_modes.LANGUAGES[other][1]}" '
             f'href="{html.escape(base_url + "/" + ("" if other == "en" else other + "/") + site_modes.LOCAL)}"/>'

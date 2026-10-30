@@ -7,9 +7,9 @@ import xml.etree.ElementTree as ET
 
 import pytest
 
-from tools.build_site import (DEMO_LOCALES, DEMO_PAGES, DEMO_STATIC, INPUTS, LANGS, LOCAL_PAGES, MODES_PAGES, PAGES, ROOT, SEARCH_FILES,
-                              STATIC, TRANSLATIONS, build_site)
-from tools.site_i18n import LANGUAGES
+from tools.build_site import (DEMO_LOCALES, DEMO_PAGES, DEMO_STATIC, INPUTS, LANGS, LOCAL_PAGES, MODES_PAGES,
+                              NOTICE_LANGUAGES, NOTICE_PAGES, PAGES, ROOT, SEARCH_FILES,
+                              STATIC, TRANSLATIONS, build_site, page_languages)
 from tools import site_modes
 
 
@@ -125,7 +125,7 @@ class Page(HTMLParser):
 def test_every_page_has_distinct_metadata_and_valid_links(site_root, base_url):
     output = build_site(site_root, repository="example/Journal", base_url=base_url)
     pages = {base_url + "/" + path: Page(output / path / "index.html") for path in PAGES}
-    assert len(pages) == len(PAGES) == len(LANGS) * len(LOCAL_PAGES) == 13 * 33
+    assert len(pages) == len(PAGES) == len(LANGS) * len(LOCAL_PAGES) + len(site_modes.EXTRA_LANGUAGES) * len(NOTICE_PAGES)
     pages.update({base_url + "/" + path: Page(output / path) for path in MODES_PAGES})
     for lang in LANGS:
         prefix = "" if lang == "en" else lang + "/"
@@ -134,9 +134,9 @@ def test_every_page_has_distinct_metadata_and_valid_links(site_root, base_url):
         assert len({page.find("meta", name="description")[0]["content"] for page in local}) == len(local), lang
     for url, page in pages.items():
         path = url.removeprefix(base_url + "/")
-        languages = site_modes.LANGUAGES if path in MODES_PAGES else LANGUAGES
-        lang = path.split("/")[0] if path.split("/")[0] in languages and "/" in path else "en"
+        lang = path.split("/")[0] if path.split("/")[0] in NOTICE_LANGUAGES and "/" in path else "en"
         local = path.removeprefix(lang + "/") if lang != "en" else path
+        languages = site_modes.LANGUAGES if path in MODES_PAGES else page_languages(local)
         assert page.h1, url
         assert len(page.find("h1")) == 1, url
         assert len(page.ids) == len(set(page.ids)), url
@@ -178,7 +178,7 @@ def test_every_page_has_distinct_metadata_and_valid_links(site_root, base_url):
     for name in SEARCH_FILES:
         index = json.loads((output / name).read_text(encoding="utf-8"))
         hub = base_url + "/" + name.removesuffix("search.json")
-        assert len(index["pages"]) == 31
+        assert len(index["pages"]) == (3 if name.split('/')[0] in site_modes.EXTRA_LANGUAGES else 31)
         for entry in index["pages"]:
             assert urljoin(hub, entry["url"]) in pages
             assert len(entry["text"]) > 300
@@ -221,24 +221,34 @@ def test_attributed_html_quote_closes_before_following_markdown():
     assert '&lt;id&gt;' in body
 
 
-def test_notices_cannot_silently_fall_back_to_english(site_root):
+@pytest.mark.parametrize('lang', ['ru', 'fr', 'he', 'am'])
+def test_notices_cannot_silently_fall_back_to_english(site_root, lang):
     from tools import site_i18n, site_wiki
     from tools.build_site import REFERENCE
     body = site_wiki.split_title((site_root / REFERENCE['notice'][3]).read_text(encoding='utf-8'))[1]
     fragment = site_wiki.markup(body)[0]
     assert 'translate="no"' not in fragment
-    path = site_root / 'website/i18n/ru.json'
+    path = site_root / f'website/i18n/{lang}.json'
     data = json.loads(path.read_text(encoding='utf-8'))
     data['blocks'].pop(site_i18n.digest(site_i18n.unit_texts(fragment)[0]))
     path.write_text(json.dumps(data, ensure_ascii=False), encoding='utf-8')
-    with pytest.raises(ValueError, match='Incomplete notice translation: ru/notice'):
+    with pytest.raises(ValueError, match=f'Incomplete notice translation: {lang}/notice'):
+        build_site(site_root)
+
+
+def test_notice_navigation_cannot_silently_fall_back_to_english(site_root):
+    path = site_root / 'website/i18n/he.json'
+    data = json.loads(path.read_text(encoding='utf-8'))
+    del data['strings']['Search the documentation']
+    path.write_text(json.dumps(data, ensure_ascii=False), encoding='utf-8')
+    with pytest.raises(ValueError, match='Incomplete notice labels: he'):
         build_site(site_root)
 
 
 def test_translated_notice_documents_match_the_site_catalogues():
     from tools.sync_notice_translations import outputs
     translated = outputs(ROOT)
-    assert len(translated) == 36  # Two documents and the README link in each translated site language.
+    assert len(translated) == 62  # Two documents in 25 languages, plus the 12 existing translated READMEs.
     for name, text in translated.items():
         assert (ROOT / name).read_text(encoding='utf-8') == text, name
 

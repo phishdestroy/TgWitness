@@ -17,23 +17,24 @@ format. Add or change a guide key in every language together. Translation text i
 escaped at build time and never inserted as executable markup. Code examples and
 fictional protocol fixtures remain language-neutral.
 
-[`site_modes.py`](../../tools/site_modes.py) defines the capability guide's additional
-languages; these do not imply translations of the entire site or application.
+[`site_modes.py`](../../tools/site_modes.py) defines the additional languages shared
+by the capability guide and both project notices. These do not imply translations
+of the entire site or application.
 Translations were prepared with DeepL, with a separate Amharic translation because
 the configured DeepL API does not offer Amharic. Russian terminology and limitations
 were additionally reviewed. These are not certified or native-speaker-reviewed
 translations; review technical limitations when editing a catalogue.
 
 The licence-position and operator-notice pages use the same `strings`/`blocks`
-catalogues as the rest of the site. All 13 site languages include their full text,
+catalogues as the rest of the site. All 26 languages include their full text,
 including quoted paragraphs. The original MIT `LICENSE` and plain-text `NOTICE`
 remain unchanged. A missing notice translation stops the site build.
 
 After updating notice translations, run `python tools/sync_notice_translations.py`
-to regenerate both documents under `docs/<language>/` and their README links.
+to regenerate both documents under `docs/<language>/` and links in existing READMEs.
 `python tools/sync_notice_translations.py --check` checks that these copies match
-the website catalogues. The additional capability-guide languages keep their
-existing scope.
+the website catalogues. The 13 additional languages have translated navigation,
+search and links between the notices; other detailed manuals link to English.
 
 ## Review a catalogue change
 

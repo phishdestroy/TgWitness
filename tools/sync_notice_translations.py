@@ -7,11 +7,12 @@ import re
 from urllib.parse import unquote, urlsplit, urlunsplit
 
 if __package__:
-    from . import site_i18n, site_wiki
+    from . import site_i18n, site_wiki, site_modes
     from .site_content import REFERENCE
 else:
     import site_i18n
     import site_wiki
+    import site_modes
     from site_content import REFERENCE
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -21,10 +22,10 @@ SLUGS = ('license', 'notice')
 def outputs(root=ROOT):
     root = Path(root).resolve()
     sources = {slug: REFERENCE[slug][3] for slug in SLUGS}
-    planned = {f'docs/{lang}/{Path(source).name}' for lang in site_i18n.LANGUAGES if lang != 'en'
+    planned = {f'docs/{lang}/{Path(source).name}' for lang in site_modes.LANGUAGES if lang != 'en'
                for source in sources.values()}
     result = {}
-    for lang, (_, code, direction, _) in site_i18n.LANGUAGES.items():
+    for lang, (_, code, direction, _) in site_modes.LANGUAGES.items():
         if lang == 'en':
             continue
         data = site_i18n.load(root, lang)
@@ -47,7 +48,7 @@ def outputs(root=ROOT):
                 target = (root / source).parent / unquote(url.path)
                 target = target.resolve().relative_to(root).as_posix()
                 localized = f'docs/{lang}/{Path(target).name}'
-                if target in ('README.md', 'docs/README.md'):
+                if target in ('README.md', 'docs/README.md') and (root / f'docs/{lang}/README.md').is_file():
                     target = f'docs/{lang}/README.md'
                 elif target.startswith('docs/') and (localized in planned or (root / localized).is_file()):
                     target = localized
@@ -65,6 +66,8 @@ def outputs(root=ROOT):
                 + translated + '\n</div>\n'
             )
         readme = f'docs/{lang}/README.md'
+        if not (root / readme).is_file():
+            continue
         content = (root / readme).read_text(encoding='utf-8')
         title = site_wiki.split_title((root / sources['license']).read_text(encoding='utf-8'))[0]
         label = data['strings'][title]

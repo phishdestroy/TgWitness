@@ -203,7 +203,7 @@ blockquote.callout p:last-child { margin:0; }
 .lang-menu summary::-webkit-details-marker { display:none; }
 .lang-menu summary::after { content:"▾"; font-size:10px; color:#8ea3c4; }
 .lang-menu summary:hover { border-color:#5b7299; }
-.lang-list { position:absolute; inset-inline-end:0; top:calc(100% + 8px); z-index:40; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:2px; width:330px; padding:8px; border:1px solid var(--line); border-radius:12px; background:var(--surface); box-shadow:0 18px 50px #0b11202e; animation:menu-in .18s ease-out both; }
+.lang-list { position:absolute; inset-inline-end:0; top:calc(100% + 8px); z-index:40; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:2px; width:330px; max-height:min(70vh,520px); overflow-y:auto; overscroll-behavior:contain; padding:8px; border:1px solid var(--line); border-radius:12px; background:var(--surface); box-shadow:0 18px 50px #0b11202e; animation:menu-in .18s ease-out both; }
 .lang-list a { display:block; padding:8px 10px; border-radius:7px; color:var(--ink); font-size:13px; text-decoration:none; }
 .lang-list a:hover { background:#edf1f7; }
 .lang-list a[aria-current] { background:#e8efff; color:#194abf; font-weight:600; }
@@ -257,6 +257,14 @@ html:lang(fa) { --font:"Segoe UI","Vazirmatn","Noto Sans Arabic",Tahoma,system-u
 html:lang(ur) { --font:"Noto Nastaliq Urdu","Segoe UI","Noto Sans Arabic",Tahoma,system-ui,sans-serif; }
 html:lang(hi) { --font:"Nirmala UI","Noto Sans Devanagari","Segoe UI",system-ui,sans-serif; }
 html:lang(zh-Hans) { --font:"Segoe UI","Microsoft YaHei","PingFang SC","Noto Sans CJK SC","Source Han Sans SC",system-ui,sans-serif; }
+html:lang(zh-Hant) { --font:"Microsoft JhengHei","PingFang TC","Noto Sans CJK TC","Segoe UI",system-ui,sans-serif; }
+html:lang(ja) { --font:"Yu Gothic UI","Hiragino Sans","Noto Sans CJK JP","Segoe UI",system-ui,sans-serif; }
+html:lang(ko) { --font:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans CJK KR","Segoe UI",system-ui,sans-serif; }
+html:lang(th) { --font:"Leelawadee UI","Noto Sans Thai","Segoe UI",system-ui,sans-serif; }
+html:lang(he) { --font:"Segoe UI","Noto Sans Hebrew",Arial,system-ui,sans-serif; }
+html:lang(am) { --font:"Nyala","Noto Sans Ethiopic","Segoe UI",system-ui,sans-serif; }
+html:lang(bn) { --font:"Nirmala UI","Noto Sans Bengali","Segoe UI",system-ui,sans-serif; }
+html:is(:lang(zh-Hant),:lang(ja),:lang(ko),:lang(th),:lang(he),:lang(am),:lang(bn)) :is(h1,h2,h3,.brand,.eyebrow,.nav-label,.table-wrap th) { letter-spacing:0; line-height:1.45; text-transform:none; }
 html:is(:lang(ar),:lang(fa),:lang(ur),:lang(hi),:lang(zh-Hans)) :is(h1,h2,h3,.brand,.eyebrow,.nav-label,.card-number,.table-wrap th) { letter-spacing:0; }
 html:is(:lang(ar),:lang(fa),:lang(ur)) body { line-height:1.95; }
 html:lang(ur) body { line-height:2.15; }
@@ -271,4 +279,21 @@ html:is(:lang(ar),:lang(fa),:lang(ur),:lang(hi),:lang(zh-Hans)) :is(.table-wrap 
 @media(max-width:800px) { .sidebar .wiki-nav { margin:10px 0 0; padding:0; overflow:visible; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:4px 10px; } .sidebar .wiki-nav>.nav-label { grid-column:1/-1; display:block; margin:6px 0 2px; } .wiki-group summary { padding:7px 10px; font-size:12px; border:1px solid var(--line); background:var(--surface); } .sidebar .wiki-group a { white-space:normal; display:block; border:0; background:transparent; font-size:12px; padding:6px 10px 6px 16px; } .sidebar .wiki-group a[aria-current] { background:#e8efff; } .sidebar .wiki-group[open] { grid-column:1/-1; } .flow-figure { padding:14px; } .search-key { display:none; } }
 @media(max-width:480px) { .wiki-index { grid-template-columns:minmax(0,1fr); } .table-wrap table { font-size:12px; } .table-wrap th,.table-wrap td { padding:9px 10px; } .flow-figure { padding:10px; border-radius:12px; } }
 @media(max-width:800px) { .docs-header .brand { order:1; } .header-tools { order:2; margin-inline-start:auto; } .docs-header nav { order:3; width:100%; } [data-theme=dark] .sidebar nav a { background:var(--surface); } [data-theme=dark] .sidebar .wiki-group a[aria-current] { background:#172a4d; } .lang-list { width:min(330px, calc(100vw - 40px)); } }
+@media(max-width:800px) { .sidebar .wiki-nav>a { white-space:normal; overflow-wrap:anywhere; } }
+/* Notice pages retain the system theme without the inline initializer. */
+@media(prefers-color-scheme:dark) {
+  :root.notice-page:not([data-theme]) { color-scheme:dark; --paper:#0a1120; --surface:#111b2d; --ink:#e4ebf7; --muted:#9dadc9; --line:#22314a; --blue:#8aadff; }
+  :root.notice-page:not([data-theme]) .docs-header { background:#060b16; }
+  :root.notice-page:not([data-theme]) :is(.sidebar nav a,.skip-link) { background:var(--surface); }
+  :root.notice-page:not([data-theme]) :is(.sidebar nav a,.wiki-group a,.lang-list a)[aria-current] { background:#172a4d; color:#b9d0ff; }
+  :root.notice-page:not([data-theme]) :is(.sidebar nav a,.wiki-group a,.lang-list a):hover { background:#16233a; }
+  :root.notice-page:not([data-theme]) code { background:#1b2842; color:#d8e4fb; }
+  :root.notice-page:not([data-theme]) pre { border-color:#25344f; background:#070d1a; }
+  :root.notice-page:not([data-theme]) pre code { background:transparent; }
+  :root.notice-page:not([data-theme]) .table-wrap th { background:#15213a; }
+  :root.notice-page:not([data-theme]) .table-wrap td { border-top-color:#1c2a42; }
+  :root.notice-page:not([data-theme]) .table-wrap tbody tr:hover { background:#131f35; }
+  :root.notice-page:not([data-theme]) .anchor { color:#5c7095; }
+  :root.notice-page:not([data-theme]) .language-notice { background:#2a2114; color:#f2c891; }
+}
 @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { transition:none!important; animation:none!important; } }
