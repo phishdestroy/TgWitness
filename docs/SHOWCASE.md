@@ -2,7 +2,7 @@
 
 # TgWitness in motion
 
-Two short films and three animated explanations of the investigation workflow.
+Three short films and three animated explanations of the investigation workflow.
 The films are concept illustrations with fictional records; see the
 [workspace screenshots](../README.md#screenshots) for the application itself.
 
@@ -13,10 +13,18 @@ The films are concept illustrations with fictional records; see the
 Channels, groups, bots and private chats become a connected investigation.
 Preserve the observed record, trace its context and prepare a verifiable handoff.
 
-<picture>
-  <source media="(prefers-reduced-motion: reduce)" srcset="assets/presentation/tgwitness-investigation-static.svg">
-  <img src="assets/presentation/investigation.gif" width="960" alt="Concept film: an announcement, a payment flow, an operations chat and a follow-up share one destination; the case connects the records and keeps them for a signed handoff. Fictional records.">
-</picture>
+https://github.com/user-attachments/assets/caeec3e4-6156-4f3e-a840-d4c2f346717e
+
+**12 seconds · Silent · MP4 1280 × 720**
+
+[Download MP4](assets/presentation/investigation-overview.mp4) · [Animated SVG](assets/presentation/tgwitness-investigation-animated.svg) · [Static illustration](assets/presentation/tgwitness-investigation-static.svg)
+
+## Connect the sources
+
+An announcement, a payment flow, an operations chat and a follow-up share one
+destination. Trace those links back to the captured messages.
+
+https://github.com/user-attachments/assets/c6ce5e2a-3d92-4d55-9bdb-fe6584d2c454
 
 **12 seconds · Silent · MP4 1280 × 672**
 
@@ -27,10 +35,7 @@ Preserve the observed record, trace its context and prepare a verifiable handoff
 A message changes from 14:00 to 16:30, then disappears from the chat. Versions
 captured before the deletion remain in the local record.
 
-<picture>
-  <source media="(prefers-reduced-motion: reduce)" srcset="assets/presentation/message-history-static.png">
-  <img src="assets/presentation/message-history.gif" width="960" alt="Concept film: a message reads 14:00, is edited to 16:30 and is then deleted from the chat; the observation journal keeps both captured versions and the deletion notice. Fictional records.">
-</picture>
+https://github.com/user-attachments/assets/ab0f56e8-1834-47ce-9fff-c88dc5887389
 
 **12 seconds · Silent · MP4 1280 × 576**
 

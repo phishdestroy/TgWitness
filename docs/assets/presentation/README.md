@@ -13,6 +13,7 @@ and animation are SVG elements. The artwork illustrates a workflow, not an app s
 | [Shared brand cover](brand.svg) | Reduced-motion README alternative and translated introductions |
 | [Investigation artwork](tgwitness-investigation-static.svg) | Full-size static composition |
 | [Animated investigation](tgwitness-investigation-animated.svg) | Extended investigation sequence |
+| [Investigation overview film](investigation-overview.mp4) | The illustrated SVG sequence as a 12-second, 1280 × 720 MP4 |
 | [Mobile cover](mobile.svg) | Legible narrow-screen composition |
 | [Capability cards](capabilities.svg), [mobile cards](capabilities-mobile.svg) | Collection, captured versions, investigation and verification |
 | [Film navigation](button-films.svg) | Direct access to the films and animation gallery |
@@ -42,16 +43,18 @@ The original artwork and renderer remain documented in [launch-kit](../launch-ki
 
 ## Films and animations
 
-[Watch the gallery](../../SHOWCASE.md). Both films are silent H.264 MP4s, with GIF
-alternatives, using fictional records. These are the original presentation exports,
-copied without recompression. They illustrate concepts rather than record a live account.
+[Watch the gallery](../../SHOWCASE.md). All three films are silent H.264 MP4s using
+fictional records. The investigation overview renders the illustrated SVG sequence
+at 24 frames per second. The two earlier concept films retain their original exports
+and GIF alternatives. These films illustrate the workflow; they are not recordings
+of a live account.
 
-README, gallery and wiki show GIF previews and provide the MP4 originals alongside
-them. Both formats are stored in the repository. With reduced motion, the README
-and gallery show a still instead: the static investigation artwork and
-[`message-history-static.png`](message-history-static.png), a frame of the finished
-sequence. Only the four named films are allowed by the publication builder; replacing
-one means replacing its MP4, GIF and still together.
+README, gallery and wiki use GitHub's video players with playback controls and no
+autoplay. Each has a download link to its versioned MP4. To replace a film, upload
+the new MP4 as a repository attachment and update both the player URL and the
+versioned file. The publication builder allows only these three MP4s and the two
+named GIFs. SVG animations keep their static reduced-motion alternatives; the
+message-history still is [`message-history-static.png`](message-history-static.png).
 
 ## Preview images
 

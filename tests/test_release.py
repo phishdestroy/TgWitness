@@ -11,6 +11,7 @@ def test_public_archive_excludes_runtime_artifacts_even_inside_source_trees(tmp_
               ".github/ISSUE_TEMPLATE/bug_report.yml", "deploy/tgwitness.service",
               "tgwitness/locales/ru.json", "tgwitness/english_fallbacks.json", "tgwitness/public_proxies.json",
               "website/i18n/ru.json",
+              "docs/assets/presentation/investigation-overview.mp4",
               "docs/assets/presentation/investigation.mp4", "docs/assets/presentation/investigation.gif",
               "docs/assets/presentation/message-history.mp4", "docs/assets/presentation/message-history.gif"]
     private = ["tgwitness/.env", "tgwitness/session.tgwitness-session", "docs/panel-token.txt",

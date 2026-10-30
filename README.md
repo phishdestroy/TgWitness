@@ -19,10 +19,21 @@
 <p align="center">
   <a href="#quick-start"><img src="docs/assets/presentation/button-start.svg" alt="Quick start" height="40"></a>
   <a href="https://github.com/phishdestroy/TgWitness/wiki"><img src="docs/assets/presentation/button-wiki.svg" alt="Read the wiki" height="40"></a>
-  <a href="docs/README.md"><img src="docs/assets/presentation/button-docs.svg" alt="Documentation" height="40"></a>
+  <a href="#watch-the-investigation"><img src="docs/assets/presentation/button-films.svg" alt="Watch the films" height="40"></a>
   <a href="#repository-map"><img src="docs/assets/presentation/button-source.svg" alt="Repository map" height="40"></a>
 </p>
 <p align="center"><a href="#screenshots">Take a look at the workspace</a> · <a href="docs/SHOWCASE.md">Films and animations</a> · <a href=".github/CONTRIBUTING.md">Contribute</a></p>
+
+## Watch the investigation
+
+**Follow the trail. Preserve the evidence.** Sources connect, records enter the
+case file, and a signed handoff preserves what was observed.
+
+https://github.com/user-attachments/assets/caeec3e4-6156-4f3e-a840-d4c2f346717e
+
+<sub>12 seconds · Silent · Illustrated workflow with fictional records · <a href="docs/assets/presentation/investigation-overview.mp4">Download MP4</a></sub>
+
+## Inside the workspace
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/chats-dark.png">
@@ -77,6 +88,15 @@ Then open **http://127.0.0.1:8787**.
 | [![Signed export options](docs/assets/exports.png)](docs/assets/exports.png) | [![Observation journal in the dark theme](docs/assets/workspace-dark.png)](docs/assets/workspace-dark.png) |
 
 All screenshots use fictional demonstration data. Open any image for the full-size view.
+
+## A message changes. The captured history stays.
+
+An announcement moves from **14:00** to **16:30**, then disappears. The local
+record keeps both captured versions and the deletion notice.
+
+https://github.com/user-attachments/assets/ab0f56e8-1834-47ce-9fff-c88dc5887389
+
+<sub>12 seconds · Silent · Concept film with fictional records · <a href="docs/assets/presentation/message-history.mp4">Download MP4</a> · <a href="docs/SHOWCASE.md">All three films</a></sub>
 
 ## How it works
 

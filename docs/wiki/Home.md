@@ -10,6 +10,15 @@ Telegram, reviewing captured changes and running your own workspace.
 
 [Get started](Getting-Started.md) · [Find an answer](FAQ.md) · [Solve a problem](Troubleshooting.md) · [Technical reference](../README.md) · [Films and animations](../SHOWCASE.md)
 
+## Watch the investigation
+
+Follow sources into a case file, preserve the observed record and prepare a signed
+handoff. A 12-second illustrated introduction with fictional records; no audio.
+
+https://github.com/user-attachments/assets/caeec3e4-6156-4f3e-a840-d4c2f346717e
+
+[Download MP4](../assets/presentation/investigation-overview.mp4) · [Watch all three films](../SHOWCASE.md)
+
 ## Start here
 
 1. [Try the demo and install](Getting-Started.md).
@@ -18,6 +27,12 @@ Telegram, reviewing captured changes and running your own workspace.
 4. [Export a record and verify it](Exports-and-Verification.md).
 
 **First successful check:** a new message from a chat you control appears in the journal; its edit becomes another version; its deletion notice leaves the captured content available. Check the signed export too. This checks that particular sequence, not every possible Telegram event.
+
+### See what stays after an edit or deletion
+
+https://github.com/user-attachments/assets/ab0f56e8-1834-47ce-9fff-c88dc5887389
+
+12 seconds · Silent · Fictional records · [Download MP4](../assets/presentation/message-history.mp4) · [Collection guide](Collection.md)
 
 ## Choose a guide
 
