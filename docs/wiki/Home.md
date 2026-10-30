@@ -1,8 +1,8 @@
 <picture>
-  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../assets/presentation/identity-hero-mobile-static.svg">
-  <source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/identity-wiki-static.svg">
-  <source media="(max-width: 640px)" srcset="../assets/presentation/identity-hero-mobile.svg">
-  <img src="../assets/presentation/identity-wiki.svg" width="1440" alt="TgWitness — Follow the trail. Preserve the evidence. An illustrated investigation: sources connect, captured records enter a dossier and a signature is drawn.">
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../assets/presentation/technical-wiki-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/technical-wiki-static.svg">
+  <source media="(max-width: 640px)" srcset="../assets/presentation/technical-wiki-mobile.svg">
+  <img src="../assets/presentation/technical-wiki.svg" width="1440" alt="TgWitness — Work the case. Keep the record. An animated technical grid introduces the investigation handbook.">
 </picture>
 
 # The investigation handbook

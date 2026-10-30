@@ -2,15 +2,17 @@
 
 # Investigation presentation kit
 
-The shared visual system for the repository and wiki: midnight blue, ice-blue
-headings, warm connection lines and the original TgWitness application mark.
-The approved investigation artwork was generated with Gemini; captions, typography
-and animation are SVG elements. The artwork illustrates a workflow, not an app screen.
+The shared visual system for the repository and wiki: a dark technical grid,
+large outlined type, blue signals, warm accents and moving traces. The banners
+follow the PhishDestroy investigation repositories. The earlier dossier artwork
+was generated with Gemini and is retained with its SVG typography and animation.
 
 | Asset | Purpose |
 | --- | --- |
-| `identity-hero*.svg` | Current repository cover: a large wordmark, the original dossier illustration, travelling records and a drawn signature; separate phone and still compositions |
-| `identity-wiki.svg`, `identity-wiki-static.svg` | Wide handbook cover in the same investigation identity |
+| `technical-hero*.svg` | Current technical repository banner: dark grid, large wordmark, moving traces and observation signals; desktop, phone and still variants |
+| `technical-wiki*.svg` | Matching handbook banners, including a dedicated phone composition and still variants |
+| `identity-hero*.svg` | Earlier dossier cover, retained with its phone and still compositions |
+| `identity-wiki.svg`, `identity-wiki-static.svg` | Earlier illustrated handbook cover |
 | `identity-nav-{demo,start,wiki}*.svg` | Animated workspace, local setup and handbook buttons in the same family as the setup actions, with separate stills |
 | `identity-action-{setup,account,deploy}*.svg` | Setup, dedicated-account and server links in the PhishDestroy two-line button style; animated rims, highlights, icons and arrows, with separate stills |
 | `identity-divider*.svg` | A blue and gold section rule with a moving trace and a still alternative |
@@ -50,10 +52,10 @@ and animation are SVG elements. The artwork illustrates a workflow, not an app s
 
 ## Use and maintenance
 
-The main README opens with a large wordmark and the investigation scene. Sources
-float, records travel into a dossier, and a signature draws itself. The composition
-keeps those movements in the artwork; type and navigation remain steady. The
-handbook has its own wide cover using the same artwork and typography.
+The README opens with the technical grid banner. The title remains readable from
+the first frame while signals, scanning lines and traces move. The handbook uses
+the same typography and grid, with a separate phone composition. Parent `picture`
+sources select still files for reduced motion.
 
 Setup actions use the icon, title, subtitle and accent-line structure shared with
 ShortDot, TrustName and the forensic toolkit. Motion runs inside each linked SVG;
@@ -65,7 +67,14 @@ illustration. Feature copy stays concise; installation commands, the main eviden
 diagram and trust boundaries remain visible. Details expand where they are needed.
 Motion is part of the page design, with no players or download prompts.
 
-Regenerate the identity covers and navigation with:
+Regenerate the current banners with Space Grotesk, distributed under the
+[SIL Open Font License](OFL-SpaceGrotesk.txt):
+
+```sh
+python website/render_repository_banner.py --font /path/to/SpaceGrotesk.ttf
+```
+
+Regenerate buttons, badges, dividers and the retained dossier covers with Manrope:
 
 ```sh
 python website/render_identity.py --font /path/to/Manrope.ttf

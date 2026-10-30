@@ -18,6 +18,7 @@ project website. The authenticated application panel lives in
 | [`learn.css`](learn.css), [`learn.js`](learn.js) | Interactive explanatory examples |
 | [`i18n/`](i18n/README.md) | Public-site translation catalogues |
 | [`render_presentation.py`](render_presentation.py) | Current investigation-style PNGs for GitHub and website sharing |
+| [`render_repository_banner.py`](render_repository_banner.py) | Technical grid banners matching the PhishDestroy repository family, with desktop, phone and still variants |
 | [`render_identity.py`](render_identity.py) | Repository and handbook covers: outlined wordmark, the original investigation illustration and inline motion |
 | [`render_case_assets.py`](render_case_assets.py) | Investigation navigation and case-path diagrams, with desktop, phone and still variants |
 | [`capture_readme.py`](capture_readme.py) | Real demo workflow for the README, with light/dark, phone and reduced-motion exports |

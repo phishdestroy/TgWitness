@@ -17,12 +17,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--format", choices=FORMATS, action="append")
     args = parser.parse_args()
-    source = ROOT / "docs/assets/presentation/identity-hero-static.svg"
+    source = ROOT / "docs/assets/presentation/technical-hero-static.svg"
     data = base64.b64encode(source.read_bytes()).decode("ascii")
     document = (
         '<!doctype html><html lang="en"><meta charset="utf-8">'
         '<title>TgWitness presentation preview</title><style>'
-        '*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:#0b1420}'
+        '*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:#050b12}'
         'img{display:block;width:100%;height:100%;object-fit:contain}</style>'
         '<img alt="TgWitness — Follow the trail. Preserve the evidence." '
         'src="data:image/svg+xml;base64,' + data + '"></html>'

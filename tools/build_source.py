@@ -45,7 +45,10 @@ def is_public_file(path, directory):
     if path.suffix in {".gif", ".mp4"}:
         return directory.name == "docs" and relative.as_posix() in PRESENTATION_MEDIA
     if path.suffix == ".txt":
-        return directory.name == "docs" and relative.as_posix() == "assets/presentation/OFL-Manrope.txt"
+        return directory.name == "docs" and relative.as_posix() in {
+            "assets/presentation/OFL-Manrope.txt",
+            "assets/presentation/OFL-SpaceGrotesk.txt",
+        }
     if path.suffix == ".json":
         return relative.as_posix() in {"tgwitness": PACKAGE_JSON, "website": SITE_JSON}.get(directory.name, ())
     return True
