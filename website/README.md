@@ -18,7 +18,6 @@ project website. The authenticated application panel lives in
 | [`learn.css`](learn.css), [`learn.js`](learn.js) | Interactive explanatory examples |
 | [`i18n/`](i18n/README.md) | Public-site translation catalogues |
 | [`render_presentation.py`](render_presentation.py) | Current investigation-style PNGs for GitHub and website sharing |
-| [`render_readme.py`](render_readme.py) | README artwork from the actual fictional workspace, in both themes and desktop/mobile compositions |
 | [`demo/`](demo/mock.js) | Read-only online demo: the request-answering script and the recorded fictional records |
 | [`artwork.html`](artwork.html), [`render_artwork.py`](render_artwork.py) | Original HTML/CSS presentation artwork and renderer |
 

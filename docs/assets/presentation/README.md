@@ -9,8 +9,10 @@ and animation are SVG elements. The artwork illustrates a workflow, not an app s
 
 | Asset | Purpose |
 | --- | --- |
-| `readme-product-{light,dark}.png` | README opening: project identity and a crop of the actual fictional Chats workspace |
-| `readme-product-mobile-{light,dark}.png` | Mobile composition with a closer view of the conversation |
+| `tgwitness-investigation-mobile-{animated,static}.svg` | Mobile composition of the approved investigation scene, with motion and a separate still |
+| `entry-{demo,guides,wiki}.svg` | Three navigation cards matching the PhishDestroy repository family |
+| `readme-typing.svg`, `readme-typing-static.svg` | Animated typing line and its readable still |
+| `readme-investigation-animated.svg`, `readme-evidence-*-animated.svg` | The approved SVG scenes exported for README's picture-controlled motion preference |
 | [Repository cover](readme-cover.svg), [static cover](readme-cover-static.svg), [mobile cover](readme-cover-mobile.svg) | Compact TgWitness masthead with the original animated investigation scene and reduced-motion alternative |
 | [Workspace preview, light](workspace-preview-light.png), [dark](workspace-preview-dark.png) | Framed, unmodified Chats screenshots with fictional demo data |
 | `nav-*.svg` | Four equal-width navigation buttons; two per row on narrow screens |
@@ -35,18 +37,19 @@ and animation are SVG elements. The artwork illustrates a workflow, not an app s
 
 ## Use and maintenance
 
-The main README combines its title and actual workspace in one opening image.
-Its `picture` selects a matching light/dark and desktop/mobile composition. Both
-native video players follow the introduction; playback is user-controlled.
-Additional screenshots and the source map expand on demand. The earlier animated
-covers remain available for other project pages, with separate static alternatives.
+The main README opens with the approved illustrated investigation scene: sources
+appear, captured records move into the dossier and a signed handoff is drawn.
+It uses inline SVG animations, navigation cards, a typing line, capability cards
+and shared dividers. The three MP4 players live in the [film gallery](../../SHOWCASE.md).
 
-Rebuild the current README images with `python website/render_readme.py`.
-For the committed Manrope typography, pass `--font /path/to/Manrope.ttf`; the font
-licence is retained below. Without a font file, the renderer uses Arial. It uses
-only the existing fictional-data screenshots and the application mark; it blocks
-network requests. The mobile image crops the desktop capture without changing its
-content. The full captures remain linked from the README.
+Each animated `picture` selects a separate still for reduced motion. The mobile
+hero rearranges the original scene and its captions. The `readme-*` animation
+exports leave reduced-motion selection to the containing `picture`: another media
+query inside the selected SVG can read the operating-system preference instead
+and unexpectedly freeze the animation. Standalone documentation SVGs retain their
+own reduced-motion behavior.
+Animated and static versions also have direct links. Additional screenshots,
+tamper/checkpoint explanations, the notice and the source map expand on demand.
 
 Use relative links inside the repository. The wiki builder copies referenced images
 into the separate Wiki repository and rewrites their links. Keep captions in image
@@ -67,7 +70,7 @@ at 24 frames per second. The two earlier concept films retain their original exp
 and GIF alternatives. These films illustrate the workflow; they are not recordings
 of a live account.
 
-README, gallery and wiki use GitHub's video players with playback controls and no
+The gallery and Wiki use GitHub's video players with playback controls and no
 autoplay. Each has a download link to its versioned MP4. To replace a film, upload
 the new MP4 as a repository attachment and update both the player URL and the
 versioned file. The publication builder allows only these three MP4s and the two
