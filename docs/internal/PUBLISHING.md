@@ -45,9 +45,12 @@ navigation remain available without JavaScript. [Metadata and SEO](SEO.md).
    files, keys, logs, builds, and test output must stay ignored. The source packager
    has an allowlist, but Git uses `.gitignore`; those are separate controls.
 4. Commit the reviewed source and push `main` to the new remote.
-5. In **Settings → Pages → Build and deployment**, choose **GitHub Actions**.
+5. In **Settings → Pages → Build and deployment**, choose **GitHub Actions**. Do not
+   use **Deploy from a branch**: it publishes the raw `docs/` folder through Jekyll,
+   including maintainer notes, instead of the checked website.
 6. Run **Actions → Project website → Run workflow** if the initial push ran before
    Pages was enabled. The workflow checks the site before uploading `dist/site`.
+   It deploys only while the repository is public.
 
 For `phishdestroy/TgWitness`, the default address is
 `https://phishdestroy.github.io/TgWitness/`. In Actions, the build derives the owner

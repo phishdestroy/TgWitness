@@ -1,15 +1,12 @@
-<picture>
-  <source media="(max-width: 600px)" srcset="docs/assets/presentation/mobile.svg">
-  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/brand.svg">
-  <img src="docs/assets/presentation/readme-hero.svg" width="1200" alt="TgWitness by PhishDestroy. Follow the trail. Preserve the evidence.">
-</picture>
+<a href="docs/assets/presentation/investigation.mp4"><picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/tgwitness-investigation-static.svg">
+  <img src="docs/assets/presentation/investigation.gif" width="1200" alt="TgWitness — Follow the trail. Preserve the evidence. Channels, groups, bots and private chats connected into one case. Fictional records.">
+</picture></a>
 
-# TgWitness
+<h1 align="center">TgWitness</h1>
 
-**A Telegram investigation workspace that keeps the record.** Capture conversations,
-preserve the edits and deletion notices you observe, follow connections across chats,
-and hand over a signed archive someone else can verify. Run it on your own computer
-or server, with your own accounts.
+<p align="center"><b>The Telegram investigation workspace that keeps the record.</b><br>
+Capture conversations · keep every edit and deletion you saw · trace connections · hand over evidence anyone can verify</p>
 
 <p align="center">
   <a href="#quick-start"><img src="docs/assets/presentation/button-start.svg" alt="Quick start" height="40"></a>
@@ -18,7 +15,21 @@ or server, with your own accounts.
   <a href="#repository-map"><img src="docs/assets/presentation/button-source.svg" alt="Repository map" height="40"></a>
 </p>
 
-<p align="center"><a href="docs/CHANGELOG.md">0.6.1 · pre-release</a> &nbsp; / &nbsp; Python 3.11+ &nbsp; / &nbsp; <a href="LICENSE">MIT</a> &nbsp; / &nbsp; Self-hosted · No telemetry</p>
+<p align="center"><a href="docs/CHANGELOG.md">0.6.1 · pre-release</a> &nbsp;/&nbsp; Python 3.11+ &nbsp;/&nbsp; <a href="LICENSE">MIT</a> &nbsp;/&nbsp; Self-hosted &nbsp;/&nbsp; No telemetry &nbsp;/&nbsp; 13 languages</p>
+
+![Section divider](docs/assets/presentation/divider.svg)
+
+## Messages change. Keep what you saw.
+
+<a href="docs/assets/presentation/message-history.mp4"><picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/message-history-static.png">
+  <img src="docs/assets/presentation/message-history.gif" width="1200" alt="A message reads 14:00, is edited to 16:30 and is deleted; the journal keeps both versions and the deletion notice. Fictional records.">
+</picture></a>
+
+| Keep the record | Follow the case |
+| --- | --- |
+| **Every version stays.** Edits are saved as separate versions; a deletion notice never erases what was already captured. | **Work across chats.** Search saved conversations, build cited timelines, review people and shared files. |
+| **Your scope, your accounts.** Selected chats, a folder or a dedicated account, each with its own journal and keys. | **A handoff that proves itself.** Signed records, preserved attachments, coverage gaps and a standalone verifier. |
 
 ## The workspace
 
@@ -27,10 +38,8 @@ or server, with your own accounts.
   <img src="docs/assets/chats.png" width="1200" alt="The TgWitness Chats workspace: conversations, observed edits and deletion notices. Fictional demo data.">
 </picture>
 
-<p align="center"><sub>Saved conversations in context. Light and dark themes. 13 interface languages. Fictional demo data.</sub></p>
-
 <details>
-<summary>See message history, collection settings and exports</summary>
+<summary><b>More screens:</b> message history, capture policy, exports, journal</summary>
 
 | Compare captured versions | Choose what to observe |
 | --- | --- |
@@ -40,60 +49,34 @@ or server, with your own accounts.
 
 </details>
 
-## See it in motion
-
-**Follow the trail. Preserve the evidence.** A 12-second concept film connecting
-channels, groups, bots and private chats to one investigation. Fictional records.
-
-<picture>
-  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/tgwitness-investigation-static.svg">
-  <img src="docs/assets/presentation/investigation.gif" width="960" alt="Concept film: an announcement, a payment flow, an operations chat and a follow-up share one destination; the case connects the records and keeps them for a signed handoff. Fictional records.">
-</picture>
-
-[Watch both films and explore the animations →](docs/SHOWCASE.md) &nbsp; · &nbsp; [Download MP4](docs/assets/presentation/investigation.mp4)
-
-![Section divider](docs/assets/presentation/divider.svg)
-
-## Capture, investigate, verify
-
-| Follow the investigation | Preserve the record |
-| --- | --- |
-| **Work across conversations.** Search saved chats, build cited timelines and review people and file connections. | **Keep observed changes.** Captured edits remain separate versions; a deletion notice does not erase content already saved. |
-| **Choose your scope.** Selected chats, a folder or a dedicated account. Each workspace has its own journal, keys and settings. | **Make a verifiable handoff.** Signed records, preserved attachments, coverage gaps, an offline report and a standalone verifier. |
-
 ## Quick start
 
-**Try the demo first.** It uses fictional conversations and needs no Telegram account.
+**Try the demo first:** fictional conversations, no Telegram account needed.
 
 | Windows | Linux / macOS |
 | --- | --- |
 | Double-click **`scripts\Demo.cmd`** | Run **`sh start.sh --demo`** |
 
-From a source checkout, install Python 3.11+ first. The launcher prepares the
-environment and pinned dependencies. Open **http://127.0.0.1:8787**.
+Then open **http://127.0.0.1:8787**. The launcher prepares Python 3.11+ dependencies itself.
 
-**Start your own workspace:** stop the demo, run `Start.cmd` or `sh start.sh`,
-then follow [account setup](https://github.com/phishdestroy/TgWitness/wiki/Accounts).
-The panel token is in `data/live/panel-token.txt`. Use a dedicated Telegram account
-you can afford to lose; Telegram can restrict or ban accounts.
+**Your own workspace:** run `Start.cmd` or `sh start.sh` and follow
+[account setup](https://github.com/phishdestroy/TgWitness/wiki/Accounts). The panel token is in
+`data/live/panel-token.txt`. Use a dedicated Telegram account you can afford to lose.
 
-[Installation and Docker →](docs/QUICKSTART.md) &nbsp; · &nbsp; [Tested environments and limits →](docs/VERIFICATION.md)
+[Installation and Docker →](docs/QUICKSTART.md) &nbsp;·&nbsp; [Tested environments →](docs/VERIFICATION.md)
 
 ## How it works
 
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/evidence-chain-static.svg">
-  <img src="docs/assets/presentation/evidence-chain-animated.svg" width="1200" alt="Observe → preserve → verify. Each captured event links to the previous hash and is signed. A recipient checks the export against a trusted key.">
+  <img src="docs/assets/presentation/evidence-chain-animated.svg" width="1200" alt="Each captured event links to the previous hash and is signed. A recipient checks the export against a trusted key.">
 </picture>
 
-Every captured event links to the previous record with SHA-256 and is signed with
-Ed25519. Export the journal and verify it against a fingerprint retained outside
-the collector. Add an independent witness when you need a separate checkpoint.
+Each record is chained with SHA-256 and signed with Ed25519. Anyone can verify an export
+against a fingerprint kept outside the collector. It proves integrity relative to that key,
+not Telegram origin or the truth of the content.
 
-**What this establishes:** integrity relative to a trusted key. It does not prove
-Telegram origin, complete capture or the truth of the content.
-
-[The evidence model →](docs/HOW-IT-WORKS.md) &nbsp; · &nbsp; [Export and verify →](https://github.com/phishdestroy/TgWitness/wiki/Exports-and-Verification) &nbsp; · &nbsp; [Witness and Proof →](https://github.com/phishdestroy/TgWitness/wiki/Witness-and-Proof)
+[The evidence model →](docs/HOW-IT-WORKS.md) &nbsp;·&nbsp; [Export and verify →](https://github.com/phishdestroy/TgWitness/wiki/Exports-and-Verification) &nbsp;·&nbsp; [Witness and Proof →](https://github.com/phishdestroy/TgWitness/wiki/Witness-and-Proof) &nbsp;·&nbsp; [All animations →](docs/SHOWCASE.md)
 
 ![Section divider](docs/assets/presentation/divider.svg)
 
@@ -132,7 +115,6 @@ Telegram origin, complete capture or the truth of the content.
 
 </details>
 
-TgWitness is a pre-release project. See the [verification record](docs/VERIFICATION.md)
-and the [audit findings and their fixes](docs/internal/RECHECK-2026-10-29.md) for tested behavior and remaining work.
+<sub>Pre-release. See the [verification record](docs/VERIFICATION.md) and the [audit findings and their fixes](docs/internal/RECHECK-2026-10-29.md) for tested behavior and remaining work. All screens and films use fictional data.</sub>
 
-[Get help](.github/SUPPORT.md) · [Contribute](.github/CONTRIBUTING.md) · [Report a vulnerability](.github/SECURITY.md) · [MIT license](LICENSE) · Built by [PhishDestroy](https://github.com/phishdestroy)
+<p align="center"><a href=".github/SUPPORT.md">Get help</a> · <a href=".github/CONTRIBUTING.md">Contribute</a> · <a href=".github/SECURITY.md">Report a vulnerability</a> · <a href="LICENSE">MIT license</a> · Built by <a href="https://github.com/phishdestroy">PhishDestroy</a></p>
