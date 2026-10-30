@@ -9,6 +9,9 @@ and animation are SVG elements. The artwork illustrates a workflow, not an app s
 
 | Asset | Purpose |
 | --- | --- |
+| `repository-cover.webp`, `repository-cover-mobile.webp` | Current README and Wiki: a six-second animated header, with separate desktop and phone compositions and no video player |
+| `repository-cover*.svg` | Vector animation sources and static reduced-motion alternatives |
+| `repository-{demo,setup,modes}.svg` | Current README actions: one primary demo button, setup and capability guides |
 | `tgwitness-investigation-mobile-{animated,static}.svg` | Mobile composition of the approved investigation scene, with motion and a separate still |
 | `entry-{demo,guides,wiki}.svg` | Three navigation cards matching the PhishDestroy repository family |
 | `readme-typing.svg`, `readme-typing-static.svg` | Animated typing line and its readable still |
@@ -38,14 +41,22 @@ and animation are SVG elements. The artwork illustrates a workflow, not an app s
 
 ## Use and maintenance
 
-The main README opens with the approved illustrated investigation scene: sources
-appear, captured records move into the dossier and a signed handoff is drawn.
-It uses inline SVG animations, navigation cards, a typing line, capability cards
-and shared dividers. The workspace preview records the real application with
-fictional fixtures. The three concept MP4 players live in the [film gallery](../../SHOWCASE.md).
+The main README uses a compact masthead, three navigation buttons and a recording
+of the real application with fictional fixtures. Features are native Markdown/HTML
+so they remain readable at phone widths and in either GitHub theme. S3 has its own
+visible section; detailed screenshots and verification animations expand on demand.
+The illustrated investigation scenes and three concept MP4 players remain in the
+[film gallery](../../SHOWCASE.md) and the Wiki.
+
+Regenerate the current cover and buttons with `python website/render_readme.py
+--font /path/to/Manrope.ttf --animate` from the repository root (requires `fonttools`,
+Playwright Chromium and Pillow). The SVGs contain outlined text and the existing
+application mark, with no remote fonts or scripts. The rendered WebP headers cycle
+through the collection steps. Each has a static reduced-motion source; the phone
+cover uses a separate composition rather than shrinking desktop text.
 
 Each animated `picture` selects a separate still for reduced motion. The mobile
-hero rearranges the original scene and its captions. The `readme-*` animation
+cover has a separate composition. The older `readme-*` animation
 exports leave reduced-motion selection to the containing `picture`: another media
 query inside the selected SVG can read the operating-system preference instead
 and unexpectedly freeze the animation. Standalone documentation SVGs retain their

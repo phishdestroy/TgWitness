@@ -1,4 +1,9 @@
-![The investigation handbook — From your first capture to a verifiable handoff.](../assets/presentation/wiki-home.svg)
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../assets/presentation/repository-cover-mobile.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/repository-cover-static.svg">
+  <source media="(max-width: 640px)" srcset="../assets/presentation/repository-cover-mobile.webp">
+  <img src="../assets/presentation/repository-cover.webp" width="1200" alt="TgWitness — your Telegram observation workspace. Capture, investigate and verify.">
+</picture>
 
 # TgWitness Wiki
 
@@ -8,31 +13,7 @@
 **From your first demo to a verifiable handoff.** Practical guides for observing
 Telegram, reviewing captured changes and running your own workspace.
 
-[Get started](Getting-Started.md) · [Find an answer](FAQ.md) · [Solve a problem](Troubleshooting.md) · [Technical reference](../README.md) · [Films and animations](../SHOWCASE.md)
-
-## Watch the investigation
-
-Follow sources into a case file, preserve the observed record and prepare a signed
-handoff. A 12-second illustrated introduction with fictional records; no audio.
-
-https://github.com/user-attachments/assets/caeec3e4-6156-4f3e-a840-d4c2f346717e
-
-[Download MP4](../assets/presentation/investigation-overview.mp4) · [Watch all three films](../SHOWCASE.md)
-
-## Start here
-
-1. [Try the demo and install](Getting-Started.md).
-2. [Connect a dedicated account](Accounts.md).
-3. [Choose sources and start observation](Collection.md).
-4. [Export a record and verify it](Exports-and-Verification.md).
-
-**First successful check:** a new message from a chat you control appears in the journal; its edit becomes another version; its deletion notice leaves the captured content available. Check the signed export too. This checks that particular sequence, not every possible Telegram event.
-
-### See what stays after an edit or deletion
-
-https://github.com/user-attachments/assets/ab0f56e8-1834-47ce-9fff-c88dc5887389
-
-12 seconds · Silent · Fictional records · [Download MP4](../assets/presentation/message-history.mp4) · [Collection guide](Collection.md)
+[Try the demo](https://phishdestroy.github.io/TgWitness/demo/) · [Setup guide](Getting-Started.md) · [Modes & evidence](https://phishdestroy.github.io/TgWitness/guides/modes.html) · [Find an answer](FAQ.md)
 
 ## Choose a guide
 
@@ -46,6 +27,8 @@ https://github.com/user-attachments/assets/ab0f56e8-1834-47ce-9fff-c88dc5887389
 ![Observe, preserve and verify.](../assets/presentation/workflow.svg)
 
 Need a term explained? Open the [glossary](Glossary.md).
+
+[S3 off-site copy and recovery](https://phishdestroy.github.io/TgWitness/docs/exports/#s3) · [Troubleshooting](Troubleshooting.md) · [Technical reference](../README.md)
 
 
 ![Section divider](../assets/presentation/divider.svg)

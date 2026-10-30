@@ -92,6 +92,41 @@ def test_wiki_bundles_film_preview_and_keeps_download_in_source_repository(wiki_
         assert not any(name.endswith(".mp4") for name in archive.namelist())
 
 
+def test_wiki_bundles_picture_sources_and_fallback_for_a_fork(wiki_tree):
+    assets = wiki_tree / "docs/assets"
+    assets.mkdir()
+    (assets / "still.svg").write_text('<svg xmlns="http://www.w3.org/2000/svg"/>', encoding="utf-8")
+    (assets / "motion.webp").write_bytes(b"synthetic animation")
+    source = (
+        '<picture>\n<source media="(prefers-reduced-motion: reduce)" srcset="../assets/still.svg">\n'
+        '<img src="../assets/motion.webp" alt="Observation journal">\n</picture>\n'
+        '<img src="https://example.org/external.webp">\n'
+        '```html\n<img src="missing.webp">\n```\n'
+    )
+    (wiki_tree / "docs/wiki/Home.md").write_text(source, encoding="utf-8")
+    result = build_wiki(wiki_tree, repository="example/Project")
+    rendered = (wiki_tree / "dist/wiki/Home.md").read_text(encoding="utf-8")
+    assert 'srcset="https://github.com/example/Project/wiki/assets/still.svg"' in rendered
+    assert 'src="https://github.com/example/Project/wiki/assets/motion.webp"' in rendered
+    assert 'src="https://example.org/external.webp"' in rendered
+    assert '```html\n<img src="missing.webp">\n```' in rendered
+    assert result["assets"] == 2
+    assert (wiki_tree / "dist/wiki/assets/motion.webp").read_bytes() == b"synthetic animation"
+
+
+@pytest.mark.parametrize("attribute", [
+    'src="../../data/private.webp"',
+    'srcset="../assets/missing.svg"',
+    'src="../../README.md"',
+    'srcset="../assets/one.webp 1x, ../assets/two.webp 2x"',
+])
+def test_wiki_picture_refuses_unreviewed_or_ambiguous_sources(wiki_tree, attribute):
+    (wiki_tree / "docs/wiki/Home.md").write_text('<picture><img ' + attribute + '></picture>', encoding="utf-8")
+    with pytest.raises(ValueError):
+        build_wiki(wiki_tree)
+    assert not (wiki_tree / "dist").exists()
+
+
 @pytest.mark.parametrize("target", ["missing.md", "../../data/private.md", "../../../outside.md"])
 def test_wiki_refuses_missing_or_private_link_targets(wiki_tree, target):
     data = wiki_tree / "docs/data"

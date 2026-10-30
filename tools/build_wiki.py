@@ -4,6 +4,7 @@ No Git operations, publication, application imports or network access.
 """
 import argparse
 import hashlib
+import html
 import json
 import os
 from pathlib import Path
@@ -26,6 +27,8 @@ PAGES = (
 FILES = tuple(name + ".md" for name in (*PAGES, "_Sidebar", "_Footer"))
 LINK = re.compile(r'(!?\[[^\]\n]*\]\()(<[^>\n]+>|[^)\s]+)((?:\s+"[^"\n]*")?\))')
 FENCE = re.compile(r"^ {0,3}(`{3,}|~{3,})(.*)$")
+HTML_IMAGE = re.compile(r"<(?:img|source)\b[^>]*>", re.IGNORECASE)
+IMAGE_URL = re.compile(r'''(?<![\w-])(src|srcset)\s*=\s*(["'])(.*?)\2''', re.IGNORECASE)
 # Bundled into the Wiki repository; GIF carries the silent presentation films inline.
 IMAGES = {".svg", ".png", ".webp", ".gif"}
 
@@ -63,6 +66,23 @@ def render_links(content, source, root, public, repository, branch, assets):
             url += "#" + quote(unquote(href.fragment), safe="-_.~")
         return match[1] + url + match[3]
 
+    def image_tag(match):
+        def image_url(attribute):
+            value = html.unescape(attribute[3])
+            parsed = urlsplit(value)
+            if parsed.scheme or parsed.netloc:
+                return attribute[0]
+            # Each picture source supplies one image; avoid silently misreading
+            # a srcset list or density descriptor as a filesystem path.
+            if attribute[1].lower() == "srcset" and ("," in value or any(c.isspace() for c in value)):
+                raise ValueError("Wiki picture srcset must contain one image URL")
+            link = LINK.fullmatch("![image](<" + value + ">)")
+            if link is None:
+                raise ValueError("Invalid wiki image URL")
+            rewritten = replace(link)[len("![image]("):-1]
+            return attribute[1] + "=" + attribute[2] + html.escape(rewritten, quote=True) + attribute[2]
+        return IMAGE_URL.sub(image_url, match[0])
+
     lines, fence = [], None
     for line in content.splitlines(keepends=True):
         marker = FENCE.match(line)
@@ -72,6 +92,7 @@ def render_links(content, source, root, public, repository, branch, assets):
             fence = None
         elif fence is None:
             line = LINK.sub(replace, line)
+            line = HTML_IMAGE.sub(image_tag, line)
         lines.append(line)
     return "".join(lines)
 
