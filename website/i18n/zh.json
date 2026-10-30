@@ -2381,7 +2381,20 @@
 "ffd568ea41fc6fe579ed40469bce58e14a3a48cdc265b0e9daa5b0cf92fa377e": "日志记录，包括心跳信息和服务记录",
 "ffdc2c6cb2146df58512903ca139ff2a7a36de6a75e04c88c8ee29ebfb3c2e96": "《通用数据保护条例》（GDPR）第33条和第34条要求在发生个人数据泄露后72小时内进行通报。",
 "ffe2dbd202adaeb8dda0bf5a96d25665d65bd2cb49c26aaaa92b539cfcaaeb0b": "选择发布频率",
-"ffeb4c9144b8f7aa47667c794f8e8ca27faf5f06676d78fb3f760cd9b9c43ccf": "Telegram 的原始日期为 ISO 字符串；二进制字段将转换为包含\nbytes_base64 的对象。消息正文、实体、媒体描述符、回复元数据、点赞、\n以及服务操作（如有提供）均保留在原始消息元数据中。"
+"ffeb4c9144b8f7aa47667c794f8e8ca27faf5f06676d78fb3f760cd9b9c43ccf": "Telegram 的原始日期为 ISO 字符串；二进制字段将转换为包含\nbytes_base64 的对象。消息正文、实体、媒体描述符、回复元数据、点赞、\n以及服务操作（如有提供）均保留在原始消息元数据中。",
+"298e9a5c08949c468f2e164c306e77521ea29aed8153a8b5d337a3fa842b674f": "通知 · Apprise",
+"347cfb75e15e3028bc33d1ac27df9e60b60000893d09bc33cf05b89cb9ba9bbb": "将有关问题、编辑、删除以及新观察到的聊天记录的警报发送至 Matrix、Telegram、Discord、Slack、ntfy、电子邮件或 JSON Webhook。可在同一工作区中添加多个 Apprise 接收端。",
+"0bb383e8f921181735f4d64cb2326ccd5e55e757ed52667f3205749524baf599": "在“来源”→“通知”中选择问题警报、聊天变更和每日摘要。",
+"5676cf78706ef4b042e3bd83ad3d2b0ad377693a59cffbb3fd8cd7c6a1d0950f": "<strong>不执行</strong>：除非您启用了“摘要”功能，否则不会发送消息正文。",
+"2a5376b94fcdfc0ff84b82bb696187986b07a646a69820804776ba5b3e4dbc93": "配置通知接收端 <span aria-hidden=\"true\">→</span>",
+"680808bdaac06335a4132c71a7bbaee3276b4123a52eea8611df82fcf80f945c": "打开<strong>“来源”→“通知”→“警报”即可查看每日摘要</strong>。TgWitness 使用\nApprise 将警报发送至 Matrix、Telegram、Discord、Slack、ntfy、电子邮件及其他\n受支持的服务。您可以在一个工作区中添加多个目标。",
+"3cf915f335389209ee617913cb0669ae392a22aeb6867d38bf0b1b56e87300f7": "每行输入一个 Apprise 目标 URL。请根据您使用的服务\n    <a href=\"https://appriseit.com/services/\">，参考服务目录和 URL 格式</a>进行设置。",
+"41d3c94c2fb7c243f1a88503e250e54925edbc48646846e4646a1a5d09880419": "开启“<strong>发送通知</strong>”功能，然后选择问题警报、受监控\n    聊天中的变化以及每日摘要。摘要显示的时间以服务器时间为准。",
+"1e5d8019b1b4b980382aede566cf42fd0fbd46090b71bcbaca96843d6a125d60": "若希望在警报中包含已删除和已编辑\n    消息中的保存文本，请开启<strong>“包含简短摘录</strong>”选项。",
+"e3cf19fe8955d56307d7bfdc5b19de4f783f5f5ccc2f87f17a326a551f7099a0": "点击<strong>“保存通知</strong>”，然后点击<strong>“发送测试</strong>”以检查送达情况。",
+"6debe7be62e4618924e4600b0f4ec6ab3fd589ae26bd9ddfc858d277d2adb96b": "若要使用您自己的接收端，请使用 Apprise 的 <a href=\"https://appriseit.com/services/json/\">JSON Webhook</a>。\n例如， <code>jsons://notify.example.org/tgwitness</code> 通过 HTTPS 将 JSON 发送至该\n端点。这是一个虚构的示例；请将其替换为您的实际目标地址。",
+"f93e2b8a7c9c89d070455a111b047d434170e1bb7d49453541ae1f050ab459a4": "目标和设置属于所选工作区。变更通知\n涵盖其监视的来源，包括新添加的聊天。顶部栏中的铃铛图标\n还会列出最近的问题和聊天变更。",
+"ee8f0996db9be6412e1653bd06ac7d3d6b56c455bb4cecae25a62b59f9874720": "在演示中，通知控件可见但发送功能已禁用。请在真实的工作区中配置\n发送设置。通知使用该工作区的 Direct、SOCKS5 或\nHTTP 路由；MTProxy 无法传输通知。SMTP 等非 HTTP 目标需要\n直接路由。"
 },
 "modes": {
 "modes.actions.body": "预览、请求和结果回执均经过签名。在按下按钮之前，服务器会再次获取消息，并拒绝已更改的键盘输入。返回的回调文本和 URL 仍作为记录上下文保留。",
@@ -3035,6 +3048,20 @@
 "{n} records": "{n}条记录",
 "{s} s": "{s} s",
 "{s} seconds": "{s}秒",
-"≠ saved hash": "≠ 已保存的哈希值"
+"≠ saved hash": "≠ 已保存的哈希值",
+"Notifications · Apprise": "通知 · Apprise",
+"Send alerts about problems, edits, deletions and newly observed chats to Matrix, Telegram, Discord, Slack, ntfy, email or a JSON webhook. Add several Apprise destinations to the same workspace.": "将有关问题、编辑、删除以及新观察到的聊天记录的警报发送至 Matrix、Telegram、Discord、Slack、ntfy、电子邮件或 JSON Webhook。可在同一工作区中添加多个 Apprise 接收端。",
+"Choose problem alerts, chat changes and a daily summary in Sources → Notifications.": "在“来源”→“通知”中选择问题警报、聊天变更和每日摘要。",
+"<strong>Does not do</strong> It does not send message text unless you enable excerpts.": "<strong>不执行</strong>：除非您启用了“摘要”功能，否则不会发送消息正文。",
+"Configure notification destinations <span aria-hidden=\"true\">→</span>": "配置通知接收端 <span aria-hidden=\"true\">→</span>",
+"Notifications": "通知",
+"Open <strong>Sources → Notifications → Alerts and a daily summary</strong>. TgWitness uses\nApprise to send alerts to Matrix, Telegram, Discord, Slack, ntfy, email and other\nsupported services. You can add several destinations to one workspace.": "打开<strong>“来源”→“通知”→“警报”即可查看每日摘要</strong>。TgWitness 使用\nApprise 将警报发送至 Matrix、Telegram、Discord、Slack、ntfy、电子邮件及其他\n受支持的服务。您可以在一个工作区中添加多个目标。",
+"Enter one Apprise destination URL per line. Use the\n    <a href=\"https://appriseit.com/services/\">service catalogue and URL formats</a> for your service.": "每行输入一个 Apprise 目标 URL。请根据您使用的服务\n    <a href=\"https://appriseit.com/services/\">，参考服务目录和 URL 格式</a>进行设置。",
+"Turn on <strong>Send notifications</strong>, then choose problem alerts, changes in observed\n    chats and a daily summary. The summary hour uses the server's time.": "开启“<strong>发送通知</strong>”功能，然后选择问题警报、受监控\n    聊天中的变化以及每日摘要。摘要显示的时间以服务器时间为准。",
+"Turn on <strong>Include short excerpts</strong> if you want saved text from deleted and edited\n    messages in the alerts.": "若希望在警报中包含已删除和已编辑\n    消息中的保存文本，请开启<strong>“包含简短摘录</strong>”选项。",
+"Press <strong>Save notifications</strong>, then <strong>Send test</strong> to check delivery.": "点击<strong>“保存通知</strong>”，然后点击<strong>“发送测试</strong>”以检查送达情况。",
+"For your own receiver, use Apprise's <a href=\"https://appriseit.com/services/json/\">JSON webhook</a>.\nFor example, <code>jsons://notify.example.org/tgwitness</code> sends JSON over HTTPS to that\nendpoint. This is a fictional example; replace it with your own destination.": "若要使用您自己的接收端，请使用 Apprise 的 <a href=\"https://appriseit.com/services/json/\">JSON Webhook</a>。\n例如， <code>jsons://notify.example.org/tgwitness</code> 通过 HTTPS 将 JSON 发送至该\n端点。这是一个虚构的示例；请将其替换为您的实际目标地址。",
+"Destinations and settings belong to the selected workspace. Change notifications\ncover its observed sources, including newly added chats. The bell in the top bar\nalso lists recent problems and chat changes.": "目标和设置属于所选工作区。变更通知\n涵盖其监视的来源，包括新添加的聊天。顶部栏中的铃铛图标\n还会列出最近的问题和聊天变更。",
+"In the demo, the notification controls are visible but sending is disabled. Configure\ndelivery in a real workspace. Notifications use that workspace's Direct, SOCKS5 or\nHTTP route; MTProxy cannot carry them. Non-HTTP destinations such as SMTP require\na direct route.": "在演示中，通知控件可见但发送功能已禁用。请在真实的工作区中配置\n发送设置。通知使用该工作区的 Direct、SOCKS5 或\nHTTP 路由；MTProxy 无法传输通知。SMTP 等非 HTTP 目标需要\n直接路由。"
 }
 }

@@ -673,6 +673,7 @@ footer a:hover { color: var(--text); text-decoration: underline; }
 #alerts-form { margin-top: 18px; }
 #alerts-form > .secondary { margin-top: 14px; }
 #alerts-form textarea { font-family: ui-monospace, Consolas, monospace; font-size: 13px; }
+#alerts-saved, #alerts-status { overflow-wrap: anywhere; }
 .alerts-daily { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
 .alerts-daily select { width: auto; min-height: 34px; margin-top: 18px; }
 .alerts-daily .hint { margin-top: 18px; }

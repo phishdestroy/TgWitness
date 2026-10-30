@@ -160,6 +160,18 @@ two workspaces on one machine do not provide that separation.
 
 <p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/identity-divider-static.svg"><img src="docs/assets/presentation/identity-divider.svg" width="1200" height="30" alt=""></picture></p>
 
+## Notifications · Apprise
+
+Send problem alerts, changes in observed chats and a daily summary through
+**Apprise** to Matrix, Telegram, Discord, Slack, ntfy, email and other supported
+services. A JSON webhook connects your own notification endpoint; each workspace
+can have several destinations.
+
+Open **Sources → Notifications → Alerts and a daily summary**. Save the destination
+addresses and use **Send test**. Message excerpts are optional.
+
+[Configure notifications →](docs/OPERATIONS.md#notifications) · [Apprise services and URL formats](https://appriseit.com/services/)
+
 ## Off-site copy · S3
 
 Keep a second copy, encrypted with **AES-256-GCM before upload**. Optional S3-compatible

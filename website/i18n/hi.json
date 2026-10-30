@@ -1095,7 +1095,7 @@
 "784a98d2987c39d2c734eaae97dc565a698cca3f52ffce6fb695106d5529a9fc": "WAL लेनदेन, क्रमिक घटना श्रृंखला, क्वेरी फ़िल्टर, परिचालन सेटिंग्स",
 "785d1f4224642f0846ef0028d3792e2e833cc6aa14d6084c79c352aea3bb20e6": "MTProto, Telethon और प्रॉक्सी",
 "787e4317691e701372109a6f33253e2feb1eda8da3466cae67adfede071f95a3": "यह मिनी-क्लाइंट टेक्स्ट और कॉलबैक बटनों को संभालता है। वेब ऐप्स, लॉगिन/फ़ोन/लोकेशन अनुरोध, भुगतान, इनलाइन क्वेरी और अटैचमेंट के लिए अभी भी टेलीग्राम क्लाइंट की आवश्यकता होती है; उनके सहेजे गए बटन मेटाडेटा दिखाई देते रहते हैं। नए नियंत्रण अंग्रेज़ी टेक्स्ट का उपयोग करते हैं।",
-"788011833a5a0f22db90c91e8eb7bd8e9f5cd423354ff5ef8c338e7895f44ba9": "सूचनाएँ",
+"788011833a5a0f22db90c91e8eb7bd8e9f5cd423354ff5ef8c338e7895f44ba9": "सूचनाएं",
 "78a91aaa3fad301b089b3759060a0884802bda5964e24f601cfcfcd490494f82": "उपरोक्त हस्ताक्षर के अंतर्गत:",
 "78aa95c51b27bb405c104f244204e0710e8b0e0e46b48642566f66cab82f18ae": "TgWitness की विश्वसनीय प्रति से सत्यापित करें",
 "78c8e0279482cf9b18b940b3aa3c0545ce00e70c45ad3ce08f1cab1ff7253f43": "जर्नल रिकॉर्ड",
@@ -2380,7 +2380,20 @@
 "ffd568ea41fc6fe579ed40469bce58e14a3a48cdc265b0e9daa5b0cf92fa377e": "जर्नल रिकॉर्ड, जिसमें हार्टबीट्स और सेवा रिकॉर्ड शामिल हैं",
 "ffdc2c6cb2146df58512903ca139ff2a7a36de6a75e04c88c8ee29ebfb3c2e96": "GDPR की धारा 33 और धारा 34 व्यक्तिगत डेटा उल्लंघन की 72 घंटों के भीतर सूचना की आवश्यकता करती हैं।",
 "ffe2dbd202adaeb8dda0bf5a96d25665d65bd2cb49c26aaaa92b539cfcaaeb0b": "प्रकाशन की आवृत्ति चुनें",
-"ffeb4c9144b8f7aa47667c794f8e8ca27faf5f06676d78fb3f760cd9b9c43ccf": "कच्ची टेलीग्राम तिथियाँ ISO स्ट्रिंग्स होती हैं; बाइनरी फ़ील्ड्स ऑब्जेक्ट्स बन जाते हैं जिनमें bytes_base64 होता है। जब प्रदान किया जाता है, तो संदेश का टेक्स्ट, इकाइयाँ, मीडिया वर्णनकर्ता, उत्तर मेटाडेटा, प्रतिक्रियाएँ, और सेवा क्रियाएँ कच्चे संदेश मेटाडेटा में बरकरार रखी जाती हैं।"
+"ffeb4c9144b8f7aa47667c794f8e8ca27faf5f06676d78fb3f760cd9b9c43ccf": "कच्ची टेलीग्राम तिथियाँ ISO स्ट्रिंग्स होती हैं; बाइनरी फ़ील्ड्स ऑब्जेक्ट्स बन जाते हैं जिनमें bytes_base64 होता है। जब प्रदान किया जाता है, तो संदेश का टेक्स्ट, इकाइयाँ, मीडिया वर्णनकर्ता, उत्तर मेटाडेटा, प्रतिक्रियाएँ, और सेवा क्रियाएँ कच्चे संदेश मेटाडेटा में बरकरार रखी जाती हैं।",
+"298e9a5c08949c468f2e164c306e77521ea29aed8153a8b5d337a3fa842b674f": "सूचनाएं · अप्राइज़",
+"347cfb75e15e3028bc33d1ac27df9e60b60000893d09bc33cf05b89cb9ba9bbb": "समस्याओं, संपादन, हटाने और नई देखी गई चैट के बारे में मैट्रिक्स, टेलीग्राम, डिस्कॉर्ड, स्लैक, ntfy, ईमेल या JSON वेबहुक पर अलर्ट भेजें। एक ही वर्कस्पेस में कई Apprise गंतव्य जोड़ें।",
+"0bb383e8f921181735f4d64cb2326ccd5e55e757ed52667f3205749524baf599": "सोर्सेज → नोटिफिकेशन्स में समस्या अलर्ट, चैट परिवर्तन और एक दैनिक सारांश चुनें।",
+"5676cf78706ef4b042e3bd83ad3d2b0ad377693a59cffbb3fd8cd7c6a1d0950f": "यह<strong> नहीं करता।</strong> यह संदेश पाठ तब तक नहीं भेजता जब तक आप अंश सक्षम नहीं करते।",
+"2a5376b94fcdfc0ff84b82bb696187986b07a646a69820804776ba5b3e4dbc93": "सूचना गंतव्यों को कॉन्फ़िगर करें <span aria-hidden=\"true\">→</span>",
+"680808bdaac06335a4132c71a7bbaee3276b4123a52eea8611df82fcf80f945c": "<strong>स्रोत → सूचनाएं → अलर्ट और एक दैनिक सारांश</strong> खोलें। TgWitness, Apprise का उपयोग करके Matrix, Telegram, Discord, Slack, ntfy, ईमेल और अन्य समर्थित सेवाओं पर अलर्ट भेजता है। आप एक वर्कस्पेस में कई गंतव्य जोड़ सकते हैं।",
+"3cf915f335389209ee617913cb0669ae392a22aeb6867d38bf0b1b56e87300f7": "प्रत्येक लाइन पर एक Apprise गंतव्य URL दर्ज करें। अपनी सेवा के लिए\n    <a href=\"https://appriseit.com/services/\">सेवा कैटलॉग और URL प्रारूपों</a> का उपयोग करें।",
+"41d3c94c2fb7c243f1a88503e250e54925edbc48646846e4646a1a5d09880419": "<strong>सूचनाएं भेजें</strong> चालू करें, फिर समस्या अलर्ट, देखी गई चैट में बदलाव और एक दैनिक सारांश चुनें। सारांश का समय सर्वर के समय का उपयोग करता है।",
+"1e5d8019b1b4b980382aede566cf42fd0fbd46090b71bcbaca96843d6a125d60": "यदि आप अलर्ट में हटाए गए और संपादित संदेशों से सहेजा गया टेक्स्ट चाहते हैं, तो <strong>&#x27;संक्षिप्त अंश शामिल करें&#x27;</strong> चालू करें।",
+"e3cf19fe8955d56307d7bfdc5b19de4f783f5f5ccc2f87f17a326a551f7099a0": "<strong>संदेशों को सहेजें</strong> पर क्लिक करें, फिर डिलीवरी की जाँच करने के लिए <strong>परीक्षण भेजें पर</strong> क्लिक करें।",
+"6debe7be62e4618924e4600b0f4ec6ab3fd589ae26bd9ddfc858d277d2adb96b": "अपने स्वयं के रिसीवर के लिए, Apprise के <a href=\"https://appriseit.com/services/json/\">JSON वेबहुक का</a> उपयोग करें।\nउदाहरण के लिए, <code>jsons://notify.example.org/tgwitness</code> HTTPS पर उस एंडपॉइंट पर JSON भेजता है। यह एक काल्पनिक उदाहरण है; इसे अपनी खुद की मंज़िल से बदलें।",
+"f93e2b8a7c9c89d070455a111b047d434170e1bb7d49453541ae1f050ab459a4": "डेस्टिनेशन और सेटिंग्स चयनित वर्कस्पेस से संबंधित हैं। सूचनाएं अपने अवलोकित स्रोतों को कवर करती हैं, जिसमें हाल ही में जोड़ी गई चैट भी शामिल हैं। टॉप बार में घंटी हाल की समस्याओं और चैट परिवर्तनों को भी सूचीबद्ध करती है।",
+"ee8f0996db9be6412e1653bd06ac7d3d6b56c455bb4cecae25a62b59f9874720": "डेमो में, सूचना नियंत्रण दिखाई देते हैं लेकिन भेजना अक्षम है। एक वास्तविक वर्कस्पेस में डिलीवरी कॉन्फ़िगर करें। सूचनाएं उस वर्कस्पेस के डायरेक्ट, SOCKS5 या HTTP रूट का उपयोग करती हैं; MTProxy उन्हें ले जा नहीं सकता। SMTP जैसे गैर-HTTP गंतव्यों के लिए एक सीधे रूट की आवश्यकता होती है।"
 },
 "modes": {
 "modes.actions.body": "प्रीव्यू, अनुरोध और परिणाम रसीदों पर हस्ताक्षर किए जाते हैं। बटन दबाने से पहले, सर्वर संदेश को फिर से प्राप्त करता है और बदले हुए कीबोर्ड को अस्वीकार कर देता है। लौटाया गया कॉलबैक टेक्स्ट और यूआरएल रिकॉर्ड किए गए संदर्भ के रूप में बने रहते हैं।",
@@ -3034,6 +3047,20 @@
 "{n} records": "{n} रिकॉर्ड",
 "{s} s": "{s}s",
 "{s} seconds": "{s} सेकंड",
-"≠ saved hash": "≠ सहेजा गया हैश"
+"≠ saved hash": "≠ सहेजा गया हैश",
+"Notifications · Apprise": "सूचनाएं · अप्राइज़",
+"Send alerts about problems, edits, deletions and newly observed chats to Matrix, Telegram, Discord, Slack, ntfy, email or a JSON webhook. Add several Apprise destinations to the same workspace.": "समस्याओं, संपादन, हटाने और नई देखी गई चैट के बारे में मैट्रिक्स, टेलीग्राम, डिस्कॉर्ड, स्लैक, ntfy, ईमेल या JSON वेबहुक पर अलर्ट भेजें। एक ही वर्कस्पेस में कई Apprise गंतव्य जोड़ें।",
+"Choose problem alerts, chat changes and a daily summary in Sources → Notifications.": "सोर्सेज → नोटिफिकेशन्स में समस्या अलर्ट, चैट परिवर्तन और एक दैनिक सारांश चुनें।",
+"<strong>Does not do</strong> It does not send message text unless you enable excerpts.": "यह<strong> नहीं करता।</strong> यह संदेश पाठ तब तक नहीं भेजता जब तक आप अंश सक्षम नहीं करते।",
+"Configure notification destinations <span aria-hidden=\"true\">→</span>": "सूचना गंतव्यों को कॉन्फ़िगर करें <span aria-hidden=\"true\">→</span>",
+"Notifications": "सूचनाएं",
+"Open <strong>Sources → Notifications → Alerts and a daily summary</strong>. TgWitness uses\nApprise to send alerts to Matrix, Telegram, Discord, Slack, ntfy, email and other\nsupported services. You can add several destinations to one workspace.": "<strong>स्रोत → सूचनाएं → अलर्ट और एक दैनिक सारांश</strong> खोलें। TgWitness, Apprise का उपयोग करके Matrix, Telegram, Discord, Slack, ntfy, ईमेल और अन्य समर्थित सेवाओं पर अलर्ट भेजता है। आप एक वर्कस्पेस में कई गंतव्य जोड़ सकते हैं।",
+"Enter one Apprise destination URL per line. Use the\n    <a href=\"https://appriseit.com/services/\">service catalogue and URL formats</a> for your service.": "प्रत्येक लाइन पर एक Apprise गंतव्य URL दर्ज करें। अपनी सेवा के लिए\n    <a href=\"https://appriseit.com/services/\">सेवा कैटलॉग और URL प्रारूपों</a> का उपयोग करें।",
+"Turn on <strong>Send notifications</strong>, then choose problem alerts, changes in observed\n    chats and a daily summary. The summary hour uses the server's time.": "<strong>सूचनाएं भेजें</strong> चालू करें, फिर समस्या अलर्ट, देखी गई चैट में बदलाव और एक दैनिक सारांश चुनें। सारांश का समय सर्वर के समय का उपयोग करता है।",
+"Turn on <strong>Include short excerpts</strong> if you want saved text from deleted and edited\n    messages in the alerts.": "यदि आप अलर्ट में हटाए गए और संपादित संदेशों से सहेजा गया टेक्स्ट चाहते हैं, तो <strong>&#x27;संक्षिप्त अंश शामिल करें&#x27;</strong> चालू करें।",
+"Press <strong>Save notifications</strong>, then <strong>Send test</strong> to check delivery.": "<strong>संदेशों को सहेजें</strong> पर क्लिक करें, फिर डिलीवरी की जाँच करने के लिए <strong>परीक्षण भेजें पर</strong> क्लिक करें।",
+"For your own receiver, use Apprise's <a href=\"https://appriseit.com/services/json/\">JSON webhook</a>.\nFor example, <code>jsons://notify.example.org/tgwitness</code> sends JSON over HTTPS to that\nendpoint. This is a fictional example; replace it with your own destination.": "अपने स्वयं के रिसीवर के लिए, Apprise के <a href=\"https://appriseit.com/services/json/\">JSON वेबहुक का</a> उपयोग करें।\nउदाहरण के लिए, <code>jsons://notify.example.org/tgwitness</code> HTTPS पर उस एंडपॉइंट पर JSON भेजता है। यह एक काल्पनिक उदाहरण है; इसे अपनी खुद की मंज़िल से बदलें।",
+"Destinations and settings belong to the selected workspace. Change notifications\ncover its observed sources, including newly added chats. The bell in the top bar\nalso lists recent problems and chat changes.": "डेस्टिनेशन और सेटिंग्स चयनित वर्कस्पेस से संबंधित हैं। सूचनाएं अपने अवलोकित स्रोतों को कवर करती हैं, जिसमें हाल ही में जोड़ी गई चैट भी शामिल हैं। टॉप बार में घंटी हाल की समस्याओं और चैट परिवर्तनों को भी सूचीबद्ध करती है।",
+"In the demo, the notification controls are visible but sending is disabled. Configure\ndelivery in a real workspace. Notifications use that workspace's Direct, SOCKS5 or\nHTTP route; MTProxy cannot carry them. Non-HTTP destinations such as SMTP require\na direct route.": "डेमो में, सूचना नियंत्रण दिखाई देते हैं लेकिन भेजना अक्षम है। एक वास्तविक वर्कस्पेस में डिलीवरी कॉन्फ़िगर करें। सूचनाएं उस वर्कस्पेस के डायरेक्ट, SOCKS5 या HTTP रूट का उपयोग करती हैं; MTProxy उन्हें ले जा नहीं सकता। SMTP जैसे गैर-HTTP गंतव्यों के लिए एक सीधे रूट की आवश्यकता होती है।"
 }
 }

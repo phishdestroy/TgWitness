@@ -77,6 +77,33 @@ not recreate its partially removed journal or keys. A successful deletion is rec
 only after the directory has been removed; separately exported or backed-up copies remain
 under their own retention policy.
 
+## Notifications
+
+Open **Sources → Notifications → Alerts and a daily summary**. TgWitness uses
+Apprise to send alerts to Matrix, Telegram, Discord, Slack, ntfy, email and other
+supported services. You can add several destinations to one workspace.
+
+1. Enter one Apprise destination URL per line. Use the
+   [service catalogue and URL formats](https://appriseit.com/services/) for your service.
+2. Turn on **Send notifications**, then choose problem alerts, changes in observed
+   chats and a daily summary. The summary hour uses the server's time.
+3. Turn on **Include short excerpts** if you want saved text from deleted and edited
+   messages in the alerts.
+4. Press **Save notifications**, then **Send test** to check delivery.
+
+For your own receiver, use Apprise's [JSON webhook](https://appriseit.com/services/json/).
+For example, `jsons://notify.example.org/tgwitness` sends JSON over HTTPS to that
+endpoint. This is a fictional example; replace it with your own destination.
+
+Destinations and settings belong to the selected workspace. Change notifications
+cover its observed sources, including newly added chats. The bell in the top bar
+also lists recent problems and chat changes.
+
+In the demo, the notification controls are visible but sending is disabled. Configure
+delivery in a real workspace. Notifications use that workspace's Direct, SOCKS5 or
+HTTP route; MTProxy cannot carry them. Non-HTTP destinations such as SMTP require
+a direct route.
+
 ## Panel layout
 
 ![Connection workspace using synthetic data](assets/connection.png)

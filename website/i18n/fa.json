@@ -2380,7 +2380,20 @@
 "ffd568ea41fc6fe579ed40469bce58e14a3a48cdc265b0e9daa5b0cf92fa377e": "سوابق دفترچه، شامل ضربان‌ها و سوابق سرویس",
 "ffdc2c6cb2146df58512903ca139ff2a7a36de6a75e04c88c8ee29ebfb3c2e96": "ماده ۳۳ و ماده ۳۴ GDPR مستلزم اطلاع‌رسانی ظرف ۷۲ ساعت پس از نقض داده‌های شخصی است.",
 "ffe2dbd202adaeb8dda0bf5a96d25665d65bd2cb49c26aaaa92b539cfcaaeb0b": "انتخاب کنید هر چند وقت یک‌بار منتشر شود",
-"ffeb4c9144b8f7aa47667c794f8e8ca27faf5f06676d78fb3f760cd9b9c43ccf": "تاریخ‌های خام تلگرام رشته‌های ISO هستند؛ فیلدهای باینری به اشیایی حاوی bytes_base64 تبدیل می‌شوند. متن پیام، انتیت‌ها، توصیف‌کننده‌های رسانه، متادیتای پاسخ، واکنش‌ها و اقدامات سرویس، در صورت ارائه، در متادیتای خام پیام حفظ می‌شوند."
+"ffeb4c9144b8f7aa47667c794f8e8ca27faf5f06676d78fb3f760cd9b9c43ccf": "تاریخ‌های خام تلگرام رشته‌های ISO هستند؛ فیلدهای باینری به اشیایی حاوی bytes_base64 تبدیل می‌شوند. متن پیام، انتیت‌ها، توصیف‌کننده‌های رسانه، متادیتای پاسخ، واکنش‌ها و اقدامات سرویس، در صورت ارائه، در متادیتای خام پیام حفظ می‌شوند.",
+"298e9a5c08949c468f2e164c306e77521ea29aed8153a8b5d337a3fa842b674f": "اخطاریه‌ها · اپرایز",
+"347cfb75e15e3028bc33d1ac27df9e60b60000893d09bc33cf05b89cb9ba9bbb": "هشدارهایی در مورد مشکلات، ویرایش‌ها، حذف‌ها و چت‌های تازه مشاهده‌شده را به ماترिक्स، تلگرام، دیسکورد، اسلک، ntfy، ایمیل یا یک وب‌هوک JSON ارسال کنید. چندین مقصد Apprise را به یک فضای کاری اضافه کنید.",
+"0bb383e8f921181735f4d64cb2326ccd5e55e757ed52667f3205749524baf599": "در Sources → Notifications، هشدارهای مشکل، تغییرات چت و خلاصه روزانه را انتخاب کنید.",
+"5676cf78706ef4b042e3bd83ad3d2b0ad377693a59cffbb3fd8cd7c6a1d0950f": "این کار را <strong>انجام نمی‌دهد.</strong> متن پیام را ارسال نمی‌کند مگر اینکه شما گزیده‌ها را فعال کنید.",
+"2a5376b94fcdfc0ff84b82bb696187986b07a646a69820804776ba5b3e4dbc93": "مقاصد اعلان را پیکربندی کنید <span aria-hidden=\"true\">→</span>",
+"680808bdaac06335a4132c71a7bbaee3276b4123a52eea8611df82fcf80f945c": "<strong>منابع → اعلان‌ها → هشدارها و یک خلاصه روزانه</strong>. TgWitness از Apprise برای ارسال هشدارها به Matrix، تلگرام، دیسکورد، اسلک، ntfy، ایمیل و سایر سرویس‌های پشتیبانی‌شده استفاده می‌کند. شما می‌توانید چندین مقصد را به یک فضای کاری اضافه کنید.",
+"3cf915f335389209ee617913cb0669ae392a22aeb6867d38bf0b1b56e87300f7": "در هر خط یک URL مقصد Apprise را وارد کنید. از\n    <a href=\"https://appriseit.com/services/\">کاتالوگ سرویس و فرمت‌های URL</a> برای سرویس خود استفاده کنید.",
+"41d3c94c2fb7c243f1a88503e250e54925edbc48646846e4646a1a5d09880419": "گزینه <strong>«ارسال اعلان‌ها»</strong> را فعال کنید، سپس هشدارهای مشکل، تغییرات در چت‌های مشاهده‌شده و یک خلاصه روزانه را انتخاب کنید. ساعت خلاصه بر اساس زمان سرور است.",
+"1e5d8019b1b4b980382aede566cf42fd0fbd46090b71bcbaca96843d6a125d60": "اگر می‌خواهید متن ذخیره شده از پیام‌های حذف‌شده و ویرایش‌شده در هشدارها نمایش داده شود، گزینه «<strong>شامل گزیده‌های کوتاه</strong>» را فعال کنید.",
+"e3cf19fe8955d56307d7bfdc5b19de4f783f5f5ccc2f87f17a326a551f7099a0": "روی <strong>«ذخیره اعلان‌ها»</strong> کلیک کنید، سپس <strong>«ارسال آزمایشی» را</strong> برای بررسی تحویل ارسال کنید.",
+"6debe7be62e4618924e4600b0f4ec6ab3fd589ae26bd9ddfc858d277d2adb96b": "برای گیرنده خودتان، از <a href=\"https://appriseit.com/services/json/\">وب‌هوک JSON</a> اپرایز استفاده کنید.\nبرای مثال، <code>jsons://notify.example.org/tgwitness</code> JSON را از طریق HTTPS به آن نقطه پایانی ارسال می‌کند. این یک مثال فرضی است؛ آن را با مقصد خود جایگزین کنید.",
+"f93e2b8a7c9c89d070455a111b047d434170e1bb7d49453541ae1f050ab459a4": "مقاصد و تنظیمات به فضای کاری انتخاب‌شده تعلق دارند. تغییر اعلان‌ها منابع تحت نظر آن، از جمله چت‌های جدیداً اضافه شده را پوشش می‌دهد. زنگ در نوار بالا همچنین مشکلات اخیر و تغییرات چت را فهرست می‌کند.",
+"ee8f0996db9be6412e1653bd06ac7d3d6b56c455bb4cecae25a62b59f9874720": "در نسخه نمایشی، کنترل‌های اعلان قابل مشاهده هستند اما ارسال غیرفعال است. تحویل را در یک فضای کاری واقعی پیکربندی کنید. اعلان‌ها از مسیر مستقیم، SOCKS5 یا HTTP آن فضای کاری استفاده می‌کنند؛ MTProxy قادر به انتقال آن‌ها نیست. مقاصد غیر HTTP مانند SMTP به یک مسیر مستقیم نیاز دارند."
 },
 "modes": {
 "modes.actions.body": "رسیدهای پیش‌نمایش، درخواست و نتیجه امضا می‌شوند. قبل از فشردن دکمه، سرور پیام را دوباره دریافت می‌کند و صفحه‌کلید تغییر یافته را رد می‌کند. متن و آدرس‌های بازگشتی کال‌بک همچنان به عنوان زمینه ثبت‌شده باقی می‌مانند.",
@@ -3034,6 +3047,20 @@
 "{n} records": "{n}یادداشت‌ها",
 "{s} s": "{s}s",
 "{s} seconds": "{s} ثانیه",
-"≠ saved hash": "≠ هَش ذخیره شده"
+"≠ saved hash": "≠ هَش ذخیره شده",
+"Notifications · Apprise": "اخطاریه‌ها · اپرایز",
+"Send alerts about problems, edits, deletions and newly observed chats to Matrix, Telegram, Discord, Slack, ntfy, email or a JSON webhook. Add several Apprise destinations to the same workspace.": "هشدارهایی در مورد مشکلات، ویرایش‌ها، حذف‌ها و چت‌های تازه مشاهده‌شده را به ماترिक्स، تلگرام، دیسکورد، اسلک، ntfy، ایمیل یا یک وب‌هوک JSON ارسال کنید. چندین مقصد Apprise را به یک فضای کاری اضافه کنید.",
+"Choose problem alerts, chat changes and a daily summary in Sources → Notifications.": "در Sources → Notifications، هشدارهای مشکل، تغییرات چت و خلاصه روزانه را انتخاب کنید.",
+"<strong>Does not do</strong> It does not send message text unless you enable excerpts.": "این کار را <strong>انجام نمی‌دهد.</strong> متن پیام را ارسال نمی‌کند مگر اینکه شما گزیده‌ها را فعال کنید.",
+"Configure notification destinations <span aria-hidden=\"true\">→</span>": "مقاصد اعلان را پیکربندی کنید <span aria-hidden=\"true\">→</span>",
+"Notifications": "اخطاریه‌ها",
+"Open <strong>Sources → Notifications → Alerts and a daily summary</strong>. TgWitness uses\nApprise to send alerts to Matrix, Telegram, Discord, Slack, ntfy, email and other\nsupported services. You can add several destinations to one workspace.": "<strong>منابع → اعلان‌ها → هشدارها و یک خلاصه روزانه</strong>. TgWitness از Apprise برای ارسال هشدارها به Matrix، تلگرام، دیسکورد، اسلک، ntfy، ایمیل و سایر سرویس‌های پشتیبانی‌شده استفاده می‌کند. شما می‌توانید چندین مقصد را به یک فضای کاری اضافه کنید.",
+"Enter one Apprise destination URL per line. Use the\n    <a href=\"https://appriseit.com/services/\">service catalogue and URL formats</a> for your service.": "در هر خط یک URL مقصد Apprise را وارد کنید. از\n    <a href=\"https://appriseit.com/services/\">کاتالوگ سرویس و فرمت‌های URL</a> برای سرویس خود استفاده کنید.",
+"Turn on <strong>Send notifications</strong>, then choose problem alerts, changes in observed\n    chats and a daily summary. The summary hour uses the server's time.": "گزینه <strong>«ارسال اعلان‌ها»</strong> را فعال کنید، سپس هشدارهای مشکل، تغییرات در چت‌های مشاهده‌شده و یک خلاصه روزانه را انتخاب کنید. ساعت خلاصه بر اساس زمان سرور است.",
+"Turn on <strong>Include short excerpts</strong> if you want saved text from deleted and edited\n    messages in the alerts.": "اگر می‌خواهید متن ذخیره شده از پیام‌های حذف‌شده و ویرایش‌شده در هشدارها نمایش داده شود، گزینه «<strong>شامل گزیده‌های کوتاه</strong>» را فعال کنید.",
+"Press <strong>Save notifications</strong>, then <strong>Send test</strong> to check delivery.": "روی <strong>«ذخیره اعلان‌ها»</strong> کلیک کنید، سپس <strong>«ارسال آزمایشی» را</strong> برای بررسی تحویل ارسال کنید.",
+"For your own receiver, use Apprise's <a href=\"https://appriseit.com/services/json/\">JSON webhook</a>.\nFor example, <code>jsons://notify.example.org/tgwitness</code> sends JSON over HTTPS to that\nendpoint. This is a fictional example; replace it with your own destination.": "برای گیرنده خودتان، از <a href=\"https://appriseit.com/services/json/\">وب‌هوک JSON</a> اپرایز استفاده کنید.\nبرای مثال، <code>jsons://notify.example.org/tgwitness</code> JSON را از طریق HTTPS به آن نقطه پایانی ارسال می‌کند. این یک مثال فرضی است؛ آن را با مقصد خود جایگزین کنید.",
+"Destinations and settings belong to the selected workspace. Change notifications\ncover its observed sources, including newly added chats. The bell in the top bar\nalso lists recent problems and chat changes.": "مقاصد و تنظیمات به فضای کاری انتخاب‌شده تعلق دارند. تغییر اعلان‌ها منابع تحت نظر آن، از جمله چت‌های جدیداً اضافه شده را پوشش می‌دهد. زنگ در نوار بالا همچنین مشکلات اخیر و تغییرات چت را فهرست می‌کند.",
+"In the demo, the notification controls are visible but sending is disabled. Configure\ndelivery in a real workspace. Notifications use that workspace's Direct, SOCKS5 or\nHTTP route; MTProxy cannot carry them. Non-HTTP destinations such as SMTP require\na direct route.": "در نسخه نمایشی، کنترل‌های اعلان قابل مشاهده هستند اما ارسال غیرفعال است. تحویل را در یک فضای کاری واقعی پیکربندی کنید. اعلان‌ها از مسیر مستقیم، SOCKS5 یا HTTP آن فضای کاری استفاده می‌کنند؛ MTProxy قادر به انتقال آن‌ها نیست. مقاصد غیر HTTP مانند SMTP به یک مسیر مستقیم نیاز دارند."
 }
 }

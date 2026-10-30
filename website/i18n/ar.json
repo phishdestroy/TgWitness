@@ -2381,7 +2381,20 @@
 "ffd568ea41fc6fe579ed40469bce58e14a3a48cdc265b0e9daa5b0cf92fa377e": "سجلات السجل، بما في ذلك نبضات القلب وسجلات الخدمة",
 "ffdc2c6cb2146df58512903ca139ff2a7a36de6a75e04c88c8ee29ebfb3c2e96": "تنص المادة 33 والمادة 34 من اللائحة العامة لحماية البيانات (GDPR) على وجوب الإبلاغ عن أي خرق للبيانات الشخصية في غضون 72 ساعة.",
 "ffe2dbd202adaeb8dda0bf5a96d25665d65bd2cb49c26aaaa92b539cfcaaeb0b": "اختر وتيرة النشر",
-"ffeb4c9144b8f7aa47667c794f8e8ca27faf5f06676d78fb3f760cd9b9c43ccf": "تكون تواريخ Telegram الأولية سلاسل ISO؛ وتصبح الحقول الثنائية كائنات تحتوي على\nbytes_base64. ويتم الاحتفاظ بنص الرسالة، والكيانات، ووصف الوسائط، وبيانات الرد الوصفية، وردود الفعل،\nوإجراءات الخدمة في البيانات الوصفية الأولية للرسالة عند توفرها."
+"ffeb4c9144b8f7aa47667c794f8e8ca27faf5f06676d78fb3f760cd9b9c43ccf": "تكون تواريخ Telegram الأولية سلاسل ISO؛ وتصبح الحقول الثنائية كائنات تحتوي على\nbytes_base64. ويتم الاحتفاظ بنص الرسالة، والكيانات، ووصف الوسائط، وبيانات الرد الوصفية، وردود الفعل،\nوإجراءات الخدمة في البيانات الوصفية الأولية للرسالة عند توفرها.",
+"298e9a5c08949c468f2e164c306e77521ea29aed8153a8b5d337a3fa842b674f": "الإشعارات · Apprise",
+"347cfb75e15e3028bc33d1ac27df9e60b60000893d09bc33cf05b89cb9ba9bbb": "أرسل تنبيهات حول المشكلات، والتعديلات، والحذف، والمحادثات التي تمت ملاحظتها حديثًا إلى Matrix، وTelegram، وDiscord، وSlack، وntfy، والبريد الإلكتروني، أو ويب هوك JSON. أضف عدة وجهات Apprise إلى نفس مساحة العمل.",
+"0bb383e8f921181735f4d64cb2326ccd5e55e757ed52667f3205749524baf599": "اختر تنبيهات المشكلات، وتغييرات الدردشة، والملخص اليومي في «المصادر» → «الإشعارات».",
+"5676cf78706ef4b042e3bd83ad3d2b0ad377693a59cffbb3fd8cd7c6a1d0950f": "<strong>لا يقوم</strong> بذلك: لا يرسل نص الرسالة ما لم تقم بتمكين المقتطفات.",
+"2a5376b94fcdfc0ff84b82bb696187986b07a646a69820804776ba5b3e4dbc93": "تكوين وجهات الإشعارات <span aria-hidden=\"true\">→</span>",
+"680808bdaac06335a4132c71a7bbaee3276b4123a52eea8611df82fcf80f945c": "افتح <strong>«المصادر» → «الإشعارات» → «التنبيهات» و«الملخص اليومي</strong>». يستخدم TgWitness\nApprise لإرسال التنبيهات إلى Matrix وTelegram وDiscord وSlack وntfy والبريد الإلكتروني وغيرها من\nالخدمات المدعومة. يمكنك إضافة عدة وجهات إلى مساحة عمل واحدة.",
+"3cf915f335389209ee617913cb0669ae392a22aeb6867d38bf0b1b56e87300f7": "أدخل عنوان URL واحد لوجهة Apprise في كل سطر. استخدم\n    <a href=\"https://appriseit.com/services/\">كتالوج الخدمات وتنسيقات عناوين URL</a> الخاصة بخدمتك.",
+"41d3c94c2fb7c243f1a88503e250e54925edbc48646846e4646a1a5d09880419": "قم بتشغيل <strong>«إرسال الإشعارات</strong>»، ثم اختر تنبيهات المشكلات، والتغييرات في\n    الدردشات التي تمت مراقبتها، والملخص اليومي. تستخدم ساعة الملخص توقيت الخادم.",
+"1e5d8019b1b4b980382aede566cf42fd0fbd46090b71bcbaca96843d6a125d60": "قم بتشغيل خيار <strong>«تضمين مقتطفات قصيرة»</strong> إذا كنت تريد تضمين النص المحفوظ من الرسائل المحذوفة والمعدلة\n    في التنبيهات.",
+"e3cf19fe8955d56307d7bfdc5b19de4f783f5f5ccc2f87f17a326a551f7099a0": "اضغط على <strong>«حفظ الإشعارات</strong>»، ثم <strong>«إرسال اختبار»</strong> للتحقق من التسليم.",
+"6debe7be62e4618924e4600b0f4ec6ab3fd589ae26bd9ddfc858d277d2adb96b": "بالنسبة للمستقبل الخاص بك، استخدم <a href=\"https://appriseit.com/services/json/\">webhook JSON</a> الخاص بـ Apprise.\nعلى سبيل المثال، <code>jsons://notify.example.org/tgwitness</code> يرسل JSON عبر HTTPS إلى تلك\nنقطة النهاية. هذا مثال خيالي؛ استبدله بوجهتك الخاصة.",
+"f93e2b8a7c9c89d070455a111b047d434170e1bb7d49453541ae1f050ab459a4": "تنتمي الوجهات والإعدادات إلى مساحة العمل المحددة. تغطي إشعارات التغيير\nالمصادر التي تتم مراقبتها، بما في ذلك الدردشات المضافة حديثًا. كما يعرض الجرس الموجود في الشريط العلوي\nقائمة بالمشكلات الأخيرة وتغييرات الدردشة.",
+"ee8f0996db9be6412e1653bd06ac7d3d6b56c455bb4cecae25a62b59f9874720": "في العرض التوضيحي، تظهر عناصر التحكم في الإشعارات ولكن الإرسال معطل. قم بتكوين\nالتسليم في مساحة عمل حقيقية. تستخدم الإشعارات مسار Direct أو SOCKS5 أو\nHTTP الخاص بمساحة العمل تلك؛ ولا يمكن لـ MTProxy نقلها. تتطلب الوجهات غير HTTP مثل SMTP\nمسارًا مباشرًا."
 },
 "modes": {
 "modes.actions.body": "يتم توقيع إيصالات المعاينة والطلب والنتائج. قبل الضغط على الزر، يقوم الخادم باسترداد الرسالة مرة أخرى ويرفض أي تغيير في لوحة المفاتيح. يظل نص الاستدعاء المرتد وعناوين URL مسجلة في السياق.",
@@ -3035,6 +3048,20 @@
 "{n} records": "{n} سجل",
 "{s} s": "{s} s",
 "{s} seconds": "{s} ثانية",
-"≠ saved hash": "≠ التجزئة المحفوظة"
+"≠ saved hash": "≠ التجزئة المحفوظة",
+"Notifications · Apprise": "الإشعارات · Apprise",
+"Send alerts about problems, edits, deletions and newly observed chats to Matrix, Telegram, Discord, Slack, ntfy, email or a JSON webhook. Add several Apprise destinations to the same workspace.": "أرسل تنبيهات حول المشكلات، والتعديلات، والحذف، والمحادثات التي تمت ملاحظتها حديثًا إلى Matrix، وTelegram، وDiscord، وSlack، وntfy، والبريد الإلكتروني، أو ويب هوك JSON. أضف عدة وجهات Apprise إلى نفس مساحة العمل.",
+"Choose problem alerts, chat changes and a daily summary in Sources → Notifications.": "اختر تنبيهات المشكلات، وتغييرات الدردشة، والملخص اليومي في «المصادر» → «الإشعارات».",
+"<strong>Does not do</strong> It does not send message text unless you enable excerpts.": "<strong>لا يقوم</strong> بذلك: لا يرسل نص الرسالة ما لم تقم بتمكين المقتطفات.",
+"Configure notification destinations <span aria-hidden=\"true\">→</span>": "تكوين وجهات الإشعارات <span aria-hidden=\"true\">→</span>",
+"Notifications": "الإشعارات",
+"Open <strong>Sources → Notifications → Alerts and a daily summary</strong>. TgWitness uses\nApprise to send alerts to Matrix, Telegram, Discord, Slack, ntfy, email and other\nsupported services. You can add several destinations to one workspace.": "افتح <strong>«المصادر» → «الإشعارات» → «التنبيهات» و«الملخص اليومي</strong>». يستخدم TgWitness\nApprise لإرسال التنبيهات إلى Matrix وTelegram وDiscord وSlack وntfy والبريد الإلكتروني وغيرها من\nالخدمات المدعومة. يمكنك إضافة عدة وجهات إلى مساحة عمل واحدة.",
+"Enter one Apprise destination URL per line. Use the\n    <a href=\"https://appriseit.com/services/\">service catalogue and URL formats</a> for your service.": "أدخل عنوان URL واحد لوجهة Apprise في كل سطر. استخدم\n    <a href=\"https://appriseit.com/services/\">كتالوج الخدمات وتنسيقات عناوين URL</a> الخاصة بخدمتك.",
+"Turn on <strong>Send notifications</strong>, then choose problem alerts, changes in observed\n    chats and a daily summary. The summary hour uses the server's time.": "قم بتشغيل <strong>«إرسال الإشعارات</strong>»، ثم اختر تنبيهات المشكلات، والتغييرات في\n    الدردشات التي تمت مراقبتها، والملخص اليومي. تستخدم ساعة الملخص توقيت الخادم.",
+"Turn on <strong>Include short excerpts</strong> if you want saved text from deleted and edited\n    messages in the alerts.": "قم بتشغيل خيار <strong>«تضمين مقتطفات قصيرة»</strong> إذا كنت تريد تضمين النص المحفوظ من الرسائل المحذوفة والمعدلة\n    في التنبيهات.",
+"Press <strong>Save notifications</strong>, then <strong>Send test</strong> to check delivery.": "اضغط على <strong>«حفظ الإشعارات</strong>»، ثم <strong>«إرسال اختبار»</strong> للتحقق من التسليم.",
+"For your own receiver, use Apprise's <a href=\"https://appriseit.com/services/json/\">JSON webhook</a>.\nFor example, <code>jsons://notify.example.org/tgwitness</code> sends JSON over HTTPS to that\nendpoint. This is a fictional example; replace it with your own destination.": "بالنسبة للمستقبل الخاص بك، استخدم <a href=\"https://appriseit.com/services/json/\">webhook JSON</a> الخاص بـ Apprise.\nعلى سبيل المثال، <code>jsons://notify.example.org/tgwitness</code> يرسل JSON عبر HTTPS إلى تلك\nنقطة النهاية. هذا مثال خيالي؛ استبدله بوجهتك الخاصة.",
+"Destinations and settings belong to the selected workspace. Change notifications\ncover its observed sources, including newly added chats. The bell in the top bar\nalso lists recent problems and chat changes.": "تنتمي الوجهات والإعدادات إلى مساحة العمل المحددة. تغطي إشعارات التغيير\nالمصادر التي تتم مراقبتها، بما في ذلك الدردشات المضافة حديثًا. كما يعرض الجرس الموجود في الشريط العلوي\nقائمة بالمشكلات الأخيرة وتغييرات الدردشة.",
+"In the demo, the notification controls are visible but sending is disabled. Configure\ndelivery in a real workspace. Notifications use that workspace's Direct, SOCKS5 or\nHTTP route; MTProxy cannot carry them. Non-HTTP destinations such as SMTP require\na direct route.": "في العرض التوضيحي، تظهر عناصر التحكم في الإشعارات ولكن الإرسال معطل. قم بتكوين\nالتسليم في مساحة عمل حقيقية. تستخدم الإشعارات مسار Direct أو SOCKS5 أو\nHTTP الخاص بمساحة العمل تلك؛ ولا يمكن لـ MTProxy نقلها. تتطلب الوجهات غير HTTP مثل SMTP\nمسارًا مباشرًا."
 }
 }

@@ -549,6 +549,7 @@ html:is(:lang(ar), :lang(fa), :lang(ur)) body { line-height: 1.95; }
 .home-page .hero-retention-link:hover { color:#fff; }
 .home-page .retention { padding-top:76px; scroll-margin-top:20px; }
 .home-page .retention-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+.home-page .notification-overview { grid-column:1 / -1; }
 .home-page .retention-card { display:flex; flex-direction:column; gap:16px; padding:28px; border:1px solid var(--line); border-radius:16px; background:var(--surface); min-width:0; }
 .home-page .retention-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:28px; color:var(--blue); }
 .home-page .retention-heading svg { flex-shrink:0; }
@@ -562,7 +563,7 @@ html:is(:lang(ar), :lang(fa), :lang(ur)) body { line-height: 1.95; }
 .home-page .replica-flow code { font-size:11px; }
 .home-page .replica-flow [aria-hidden] { color:var(--muted); }
 .home-page[dir=rtl] .replica-flow [aria-hidden] { transform:rotate(180deg); }
-.home-page #s3 { scroll-margin-top:112px; }
+.home-page :is(#s3, #notifications) { scroll-margin-top:112px; }
 .home-page .s3-overview { margin-bottom:20px; padding:32px; border:1px solid var(--muted); border-radius:16px; background:var(--surface); }
 .home-page .s3-overview-heading { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:18px; }
 .home-page .s3-overview-heading .eyebrow { margin:0; }
@@ -596,7 +597,7 @@ html:is(:lang(ar), :lang(fa), :lang(ur)) body { line-height: 1.95; }
   .home-page .s3-actions { align-items:stretch; flex-direction:column; }
   .home-page .replica-flow { flex-direction:column; align-items:flex-start; gap:8px; }
   .home-page .replica-flow [aria-hidden],.home-page[dir=rtl] .replica-flow [aria-hidden] { transform:rotate(90deg); }
-  .home-page #s3 { scroll-margin-top:20px; }
+  .home-page :is(#s3, #notifications) { scroll-margin-top:20px; }
 }
 @media(prefers-color-scheme:dark) {
   :root.home-page:not([data-theme]) { color-scheme:dark; --paper:#0a1120; --surface:#111b2d; --ink:#e4ebf7; --muted:#9dadc9; --line:#22314a; --blue:#8aadff; }
