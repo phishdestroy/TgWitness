@@ -1,9 +1,9 @@
-# Version 0.6.1
+# Version 0.7.0
 
 TgWitness is a self-hosted Telegram observation journal under the
-[MIT License](../../LICENSE). The repository
-contains 0.6.1 plus the changes listed under **Unreleased** in the [changelog](../CHANGELOG.md).
-Release downloads become available only after the GitHub release workflow succeeds.
+[MIT License](../../LICENSE). Version 0.7.0 is the first GitHub release; later changes are
+listed under **Unreleased** in the [changelog](../CHANGELOG.md). The release carries the
+Windows portable package, the wheel and the source archive, each with its SHA-256.
 
 ## Included in this source tree
 
@@ -39,6 +39,11 @@ The release workflow checks the version tag, invokes the checks workflow and bui
 wheel, Windows portable and GHCR packages. Public source and wheel assets use allowlists;
 the public site includes only presentation assets. Publication checks and dependency auditing
 run in CI. See [publishing](PUBLISHING.md) for commands and deployment steps.
+
+Version 0.7.0 was published by hand while hosted Actions were unavailable: its source archive,
+wheel and Windows portable package were built locally from the tagged commit with the same
+tools the workflow runs. No GHCR image exists for 0.7.0 yet; Docker users build locally with
+`scripts/Docker.cmd` or `scripts/docker-start.sh`.
 
 The [pre-publication audit](PREPUBLICATION-2026-10-29.md) records the latest local results.
 Earlier backend and recovery findings are in the [whole-tool review](FULL-REVIEW-2026-10-29.md).

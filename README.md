@@ -14,7 +14,7 @@
 <p align="center"><strong>Your Telegram investigation workspace.</strong><br>Capture what you observe. Follow the connections. Hand over a verifiable record.<br>Self-hosted, on your own computer or server.</p>
 
 <p align="center">
-  <a href="docs/CHANGELOG.md"><img src="docs/assets/presentation/identity-meta-version.svg" width="144" height="30" alt="v0.6.1 · pre-release"></a>
+  <a href="docs/CHANGELOG.md"><img src="docs/assets/presentation/identity-meta-version.svg" width="144" height="30" alt="v0.7.0 · pre-release"></a>
   <a href="docs/VERIFICATION.md"><img src="docs/assets/presentation/identity-meta-verification.svg" width="158" height="30" alt="Tested environments"></a>
   <img src="docs/assets/presentation/identity-meta-languages.svg" width="279" height="30" alt="13 interface languages · 26 guide languages">
   <a href="LICENSE"><img src="docs/assets/presentation/identity-meta-license.svg" width="60" height="30" alt="MIT"></a>
@@ -70,6 +70,11 @@ replies and bot-button actions also enter the signed journal.
 
 ## Your workspace. Your machine.
 
+**Windows in two clicks:** download the
+[portable package](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.0/TgWitness-0.7.0-windows-amd64-portable.zip),
+extract it and double-click **`TgWitness.cmd`**. Python is included and the panel opens in your
+browser; **`TgWitness-Demo.cmd`** opens the fictional demo.
+
 [Explore the demo](https://phishdestroy.github.io/TgWitness/demo/) without an account,
 or [download the source](https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip)
 and run it with **Python 3.11+**. The launcher prepares the environment.
@@ -79,7 +84,7 @@ and run it with **Python 3.11+**. The launcher prepares the environment.
 | **Try fictional records** | `scripts\Demo.cmd` | `sh start.sh --demo` |
 | **Connect your account** | `Start.cmd` | `sh start.sh` |
 
-Open **http://127.0.0.1:8787**. Stop the demo before starting live mode. For a connected
+The launchers open **http://127.0.0.1:8787** in your browser. Stop the demo before starting live mode. For a connected
 account, the panel token is in `data/live/panel-token.txt`. Use a dedicated account
 you can afford to lose.
 

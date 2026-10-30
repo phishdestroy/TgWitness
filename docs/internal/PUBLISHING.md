@@ -1,6 +1,6 @@
 # Publish the project and website
 
-Publish TgWitness **0.6.1** with the project website and release packages. See
+Publish TgWitness **0.7.0** with the project website and release packages. See
 [readiness](READINESS.md) for tested environments and known limitations.
 
 The [investigation presentation kit](../assets/presentation/README.md) contains the
@@ -172,10 +172,13 @@ running browser checks. Use the same value for both commands.
 
 ## Releases
 
-Publish the first release tagged `v0.6.1` after repository
+Publish a release tagged `v` plus the `pyproject.toml` version after repository
 checks succeed. The existing release workflow verifies the version, runs checks,
 and builds source, wheel, Windows portable, and GHCR artifacts.
-Release downloads do not exist until those jobs complete. The website provides
+When hosted Actions are unavailable, build the same downloads locally from the tagged
+commit (`pip wheel --no-deps`, `tools/build_source.py`, `tools/build_portable.py` on
+Windows) and attach them with their `.sha256` files; the first release, `v0.7.0`, was
+published this way. The website provides
 source-install instructions and links to the release listing instead of assuming
 that a `latest` release or a portable binary already exists.
 

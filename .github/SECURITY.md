@@ -22,7 +22,7 @@ directories or real evidence archives.
 
 If the private reporting option is unavailable, open a public issue asking for a
 private reporting channel, without disclosing exploit details or sensitive data.
-Security fixes target the latest version, currently 0.6.1. Older
+Security fixes target the latest version, currently 0.7.0. Older
 versions are not maintained separately. There is no independent security
 certification or guaranteed response time.
 

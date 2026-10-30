@@ -2,7 +2,7 @@
 
 This is an internal engineering assessment updated 29 October 2026, not an independent
 audit or certification. It records the tested scope and known limitations of
-TgWitness 0.6.1. Platform support and event completeness are assessed from actual tests.
+TgWitness 0.7.0. Platform support and event completeness are assessed from actual tests.
 
 ## Established scope
 

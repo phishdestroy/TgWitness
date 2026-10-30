@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 0.7.0 · 30 October 2026
+
+- First GitHub release, with the Windows portable package, the wheel and the source archive.
+  README and the website link the portable package directly: extract, double-click `TgWitness.cmd`.
+- The setup guide has an "Open to everyone" section: no country or sanctions blocks, and
+  Taylor Wessing as the only incompatibility we name. It is our position, not a licence condition.
+- The website's changelog links point to `docs/CHANGELOG.md`.
 - The README and Wiki now present the authors' Ethical Notice & Historical
   Continuity statement, with document references, historical context and an
   explicit explanation that MIT permission applies to everyone.

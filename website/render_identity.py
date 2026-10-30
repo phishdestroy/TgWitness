@@ -227,7 +227,7 @@ def separator(font, still=False):
 
 def metadata(font):
     labels = (
-        ("version", "v0.6.1 · pre-release", "#a7d7ff", "#16304a"),
+        ("version", "v0.7.0 · pre-release", "#a7d7ff", "#16304a"),
         ("verification", "Tested environments", "#b9d8d0", "#16312f"),
         ("languages", "13 interface languages · 26 guide languages", "#becbe4", "#252a40"),
         ("license", "MIT", "#dcc294", "#332b1d"),
