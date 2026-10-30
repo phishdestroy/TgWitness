@@ -1,25 +1,29 @@
 <picture>
-  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/repository-cover-mobile.svg">
-  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/repository-cover-static.svg">
-  <source media="(max-width: 640px)" srcset="docs/assets/presentation/repository-cover-mobile.webp">
-  <img src="docs/assets/presentation/repository-cover.webp" width="1200" alt="TgWitness — your Telegram observation workspace. Capture, investigate and verify.">
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/tgwitness-investigation-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/tgwitness-investigation-static.svg">
+  <source media="(max-width: 640px)" srcset="docs/assets/presentation/tgwitness-investigation-mobile-animated.svg">
+  <img src="docs/assets/presentation/readme-investigation-animated.svg" width="1376" alt="TgWitness — Follow the trail. Preserve the evidence. Sources connect to a case file; captured records are preserved and a signed handoff is prepared. Illustrated workflow with fictional records.">
 </picture>
 
 <p align="center">
-  <a href="https://phishdestroy.github.io/TgWitness/demo/"><img src="docs/assets/presentation/repository-demo.svg" width="248" height="64" alt="Open the demo — explore fictional records"></a>
-  <a href="https://phishdestroy.github.io/TgWitness/demo/guide.html"><img src="docs/assets/presentation/repository-setup.svg" width="248" height="64" alt="Set up TgWitness — connect a dedicated account"></a>
-  <a href="https://phishdestroy.github.io/TgWitness/guides/modes.html"><img src="docs/assets/presentation/repository-modes.svg" width="248" height="64" alt="Modes & evidence — choose scope and verification"></a>
+  <a href="https://phishdestroy.github.io/TgWitness/demo/"><img src="docs/assets/presentation/case-demo.svg" width="176" height="58" alt="Explore the demo"></a>
+  <a href="https://phishdestroy.github.io/TgWitness/demo/guide.html"><img src="docs/assets/presentation/case-start.svg" width="176" height="58" alt="Start your first case"></a>
+  <a href="https://github.com/phishdestroy/TgWitness/wiki"><img src="docs/assets/presentation/case-wiki.svg" width="176" height="58" alt="Investigation Wiki"></a>
+  <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/SHOWCASE.md"><img src="docs/assets/presentation/case-films.svg" width="176" height="58" alt="Watch the films"></a>
 </p>
 
-<p align="center">Capture conversations, preserve observed changes and hand over a verifiable record.<br>Your accounts, on your own computer or server.</p>
+**Your Telegram investigation workspace.** Follow a lead across conversations,
+keep the changes you captured and give someone else a record they can verify.
+Runs on your own computer or server, with your own accounts.
 
-<p align="center"><a href="https://phishdestroy.github.io/TgWitness/">Website</a> &nbsp; · &nbsp; <a href="docs/README.md">Documentation</a> &nbsp; · &nbsp; <a href="https://github.com/phishdestroy/TgWitness/wiki">Wiki</a> &nbsp; · &nbsp; <a href="#off-site-copy--s3">S3 & recovery</a></p>
+<p><sub><a href="docs/CHANGELOG.md">v0.6.1 · pre-release</a> &nbsp; / &nbsp; Python 3.11+ &nbsp; / &nbsp; 13 interface languages · 26 guide languages &nbsp; / &nbsp; <a href="LICENSE">MIT</a></sub></p>
 
-<p align="center"><sub><a href="docs/CHANGELOG.md">v0.6.1 · pre-release</a> &nbsp; / &nbsp; Python 3.11+ &nbsp; / &nbsp; 13 interface languages · 26 guide languages &nbsp; / &nbsp; <a href="LICENSE">MIT</a></sub></p>
+<a name="screenshots"></a>
 
-## Inside the workspace
+## One case. Every captured detail.
 
-Read a conversation, expand its saved versions and review deletion notices in context.
+Move from the conversation to its saved versions and deletion notices, with the
+source still in view. This is the actual app, recorded with fictional data.
 
 <a href="https://phishdestroy.github.io/TgWitness/demo/">
 <picture>
@@ -34,52 +38,7 @@ Read a conversation, expand its saved versions and review deletion notices in co
 </picture>
 </a>
 
-<p align="center"><sub>Recorded from the application with fictional data. Conversation → saved edits → deletion notices.<br><a href="https://phishdestroy.github.io/TgWitness/demo/">Open the interactive demo ↗</a></sub></p>
-
-## What you can do
-
-<table>
-<tr>
-<td width="50%" valign="top">
-<h3>01 &nbsp; Choose your scope</h3>
-<p>Observe chosen chats, a Telegram folder or a dedicated account. Investigation mode adds source profiles and an initial history snapshot.</p>
-<p><a href="docs/COLLECTION.md">Collection modes →</a></p>
-</td>
-<td width="50%" valign="top">
-<h3>02 &nbsp; Keep observed changes</h3>
-<p>Retain captured message versions, deletion notices and original attachment bytes. Review capture gaps alongside the record.</p>
-<p><a href="docs/EVIDENCE.md">Events and coverage →</a></p>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-<h3>03 &nbsp; Follow connections</h3>
-<p>Search saved conversations, inspect profiles across chats and trace shared files and extracted leads back to their source records.</p>
-<p><a href="docs/INVESTIGATION.md">Investigation tools →</a></p>
-</td>
-<td width="50%" valign="top">
-<h3>04 &nbsp; Record your actions</h3>
-<p>Send replies, follow supported bot buttons and preview Telegram links from the panel. Requests and results enter the signed journal.</p>
-<p><a href="docs/INVESTIGATION.md">Panel interactions →</a></p>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-<h3>05 &nbsp; Hand over a record</h3>
-<p>Export a signed ZIP with records, preserved files and an offline report. A recipient can check it with a separately trusted key and checkpoint.</p>
-<p><a href="#export-and-verify">Export and verify →</a></p>
-</td>
-<td width="50%" valign="top">
-<h3>06 &nbsp; Keep an off-site copy</h3>
-<p>Encrypt the journal and files before upload to S3-compatible storage. Retain the recovery key and verify the copy before restoring it.</p>
-<p><a href="#off-site-copy--s3">S3 and recovery →</a></p>
-</td>
-</tr>
-</table>
-
-**Four collection choices. Eight verification layers.** [Explore modes, scenarios and their limits →](https://phishdestroy.github.io/TgWitness/guides/modes.html)
-
-<a name="screenshots"></a>
+<p align="center"><sub>Conversation → saved edits → deletion notices.<br><a href="https://phishdestroy.github.io/TgWitness/demo/">Explore the interactive workspace ↗</a> &nbsp; · &nbsp; <a href="docs/SHOWCASE.md">Watch the investigation films ↗</a></sub></p>
 
 <details>
 <summary><strong>More of the interface</strong> — sources, saved versions, exports and the journal</summary>
@@ -94,45 +53,64 @@ All screenshots use fictional demonstration data. Open an image for its full-siz
 
 </details>
 
-## Off-site copy · S3
+## From a lead to a verifiable handoff
 
-**The storage provider receives encrypted objects.** The journal, preserved photos and
-files, checkpoints with their timestamps, and completed chat exports are encrypted
-on your machine with **AES-256-GCM** before upload.
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/case-path-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/case-path-static.svg">
+  <source media="(max-width: 640px)" srcset="docs/assets/presentation/case-path-mobile.svg">
+  <img src="docs/assets/presentation/case-path.svg" width="1200" alt="Choose sources → follow connections → preserve context → hand over signed evidence.">
+</picture>
 
-| Keep | Recover |
-| --- | --- |
-| AWS S3 or another S3-compatible service | Restore to an empty directory with the downloaded recovery key |
-| Separate destination and encryption key per workspace | Verify the journal, checkpoints and preserved media before publishing restored files |
-| Object Lock retention, where supported by the bucket | Reject inconsistent, incomplete or altered material |
+- **Choose the scope.** Selected chats, a Telegram folder or a dedicated account;
+  investigation mode adds source profiles and an initial history snapshot. [Collection →](docs/COLLECTION.md)
+- **Connect the records.** Search across conversations, inspect people and shared
+  files, then follow each lead back to its source. Supported replies and bot-button
+  actions are recorded in the journal. [Investigations →](docs/INVESTIGATION.md)
+- **Keep the context.** Captured versions, original attachment bytes and reported
+  collection gaps stay alongside the record. [Events & coverage →](docs/EVIDENCE.md)
+- **Prepare the handoff.** Export a signed ZIP with records, preserved files and
+  an offline report; the recipient verifies it against a separately trusted key.
+  [Export & verify →](#export-and-verify)
 
-Configure it under **Exports → Off-site copy**. It is off by default. Keep the
-downloaded key separately: the encrypted copy cannot be read without it.
+[Four collection choices, eight verification layers, and their limits →](https://phishdestroy.github.io/TgWitness/guides/modes.html)
 
-[**S3 setup and recovery →**](https://phishdestroy.github.io/TgWitness/docs/exports/#s3) · [Verification details](docs/EVIDENCE.md#off-site-copy-and-restore-s3) · [Full service backups](docs/wiki/Backup-and-Recovery.md)
+<a name="quick-start"></a>
+<a name="run-it-on-your-machine"></a>
 
-<details>
-<summary><strong>See the S3 controls</strong> — destination, schedule, retention and recovery key</summary>
+## Start your first case
 
-![Off-site copy settings, including endpoint, region, bucket, schedule, Object Lock and recovery key controls. No credentials are shown.](docs/assets/off-site-copy.png)
+**Try it first:** [open the demo](https://phishdestroy.github.io/TgWitness/demo/).
+No installation or Telegram login needed.
 
-The off-site copy preserves collected material. Keep a separate service backup for
-account sessions, configuration and signing secrets.
+**Run your own workspace:** [download the source](https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip),
+unpack it and install **Python 3.11+**. The launcher prepares the environment.
 
-</details>
+| | Windows | Linux / macOS |
+| --- | --- | --- |
+| Explore fictional records | Double-click `scripts\Demo.cmd` | `sh start.sh --demo` |
+| Connect your account | Double-click `Start.cmd` | `sh start.sh` |
+
+Open **http://127.0.0.1:8787**. For a connected account, the panel token is in
+`data/live/panel-token.txt`. Stop the demo before starting live mode.
+Use a dedicated account you can afford to lose.
+
+[Setup guide →](https://phishdestroy.github.io/TgWitness/demo/guide.html) · [Dedicated account](https://phishdestroy.github.io/TgWitness/demo/dedicated-account.html) · [Docker & servers](docs/DEPLOYMENT.md) · [Tested environments](docs/VERIFICATION.md)
+
+<a name="how-it-works"></a>
 
 ## Export and verify
 
-**One handoff, independently checked.** Each recorded event links to the previous
+**The record should stand up to a check.** Each captured event links to the previous
 SHA-256 hash and carries an Ed25519 signature. The signed ZIP manifest binds the
 exported files together.
 
-| Layer | What the recipient can check |
-| --- | --- |
-| **Record + package** | Event signatures, hash links, file hashes and the signed manifest |
-| **Retained checkpoint** | Whether the export agrees with a boundary previously kept outside the collector |
-| **External time + witness** | Timestamp proofs and observations signed by a separately operated witness |
-| **Coverage + provenance** | Reported gaps, captured counts and self-reported program measurements |
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/case-chain-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/evidence-chain-static.svg">
+  <source media="(max-width: 640px)" srcset="docs/assets/presentation/case-chain-mobile.svg">
+  <img src="docs/assets/presentation/readme-evidence-chain-animated.svg" width="1200" alt="An observed message, its captured edit and a deletion notice become linked records with SHA-256 hashes and Ed25519 signatures.">
+</picture>
 
 With a trusted copy of TgWitness installed:
 
@@ -140,67 +118,79 @@ With a trusted copy of TgWitness installed:
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --checkpoint checkpoint.json
 ```
 
-Use a fingerprint and checkpoint obtained independently. Take the verifier from a
-trusted copy, rather than the archive being checked.
-
-[Evidence model](docs/EVIDENCE.md) · [Timestamps](docs/TIMESTAMP.md) · [Independent witness](docs/WITNESS.md) · [Public Proof monitor](docs/PROOF.md) · [Hardened deployment](docs/HIGH-ASSURANCE.md)
+Obtain the fingerprint and checkpoint independently. Use a verifier from a trusted
+copy of the project. Verification establishes **integrity relative to that key**;
+it does not establish Telegram origin, complete capture or the truth of a message.
 
 <details>
-<summary><strong>See how verification works</strong> — linked events, changed content and retained checkpoints</summary>
-
-<picture>
-  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/evidence-chain-static.svg">
-  <img src="docs/assets/presentation/readme-evidence-chain-animated.svg" width="1200" alt="An observed message, a captured edit and a deletion notice become linked, signed records.">
-</picture>
+<summary><strong>What happens when someone changes the record?</strong></summary>
 
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/evidence-tamper-static.svg">
-  <img src="docs/assets/presentation/readme-evidence-tamper-animated.svg" width="1200" alt="Changing a recorded event changes its hash and breaks verification of the linked record.">
+  <img src="docs/assets/presentation/readme-evidence-tamper-animated.svg" width="1200" alt="Changing a captured event changes its hash and breaks verification of the linked record.">
 </picture>
 
-<picture>
-  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/evidence-checkpoint-static.svg">
-  <img src="docs/assets/presentation/readme-evidence-checkpoint-animated.svg" width="1200" alt="An independently retained checkpoint lets a recipient compare the journal with an earlier observation.">
-</picture>
-
-[Evidence model and formulas](docs/HOW-IT-WORKS.md) · [Interactive explanation](https://phishdestroy.github.io/TgWitness/docs/concepts/) · [Films and static alternatives](docs/SHOWCASE.md)
+An operator who holds the signing key can sign fabricated input. A hash chain
+alone cannot establish source truth. [Evidence model and trust boundaries →](docs/EVIDENCE.md)
 
 </details>
 
-## Run it on your machine
+<details>
+<summary><strong>Keep an independent point of comparison</strong> — checkpoints, timestamps and witnesses</summary>
 
-[Download the source](https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip),
-unpack it and install **Python 3.11+**. The launcher prepares the environment.
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/evidence-checkpoint-static.svg">
+  <img src="docs/assets/presentation/readme-evidence-checkpoint-animated.svg" width="1200" alt="An independently retained checkpoint lets a recipient compare the export with an earlier observation.">
+</picture>
 
-| | Windows | Linux / macOS |
+A separately retained checkpoint fixes a boundary to compare against. External
+timestamps and a separately operated witness add independent observations;
+two workspaces on one machine do not provide that separation.
+
+[Timestamps](docs/TIMESTAMP.md) · [Independent witness](docs/WITNESS.md) · [Public Proof monitor](docs/PROOF.md) · [Hardened deployment](docs/HIGH-ASSURANCE.md)
+
+</details>
+
+[Explore the interactive explanation →](https://phishdestroy.github.io/TgWitness/docs/concepts/) · [Read the formulas](docs/HOW-IT-WORKS.md) · [Films & animations](docs/SHOWCASE.md)
+
+## Off-site copy · S3
+
+**Keep a second copy, encrypted before it leaves your machine.** The journal,
+preserved photos and files, checkpoints with their timestamps, and completed chat
+exports use **AES-256-GCM** before upload to S3-compatible storage.
+
+Configure **Exports → Off-site copy**; it is off by default. Keep the recovery key
+separately. Restore into an empty directory and verify the recovered record.
+
+[S3 setup & recovery →](https://phishdestroy.github.io/TgWitness/docs/exports/#s3) · [Verification details](docs/EVIDENCE.md#off-site-copy-and-restore-s3)
+
+<details>
+<summary><strong>Storage settings and recovery</strong> — destination, schedule, retention and keys</summary>
+
+![Off-site copy controls: endpoint, region, bucket, schedule, Object Lock and recovery key. No credentials are shown.](docs/assets/off-site-copy.png)
+
+Each workspace has its own destination and encryption key. Object Lock retention
+depends on bucket support. Recovery rejects inconsistent, incomplete or altered
+material. Without the recovery key, the encrypted copy cannot be read.
+
+Keep a separate [service backup](docs/wiki/Backup-and-Recovery.md) for account
+sessions, configuration and signing secrets.
+
+</details>
+
+## The investigation handbook
+
+| Set up | Work a case | Maintain |
 | --- | --- | --- |
-| **Try fictional records** | Double-click `scripts\Demo.cmd` | `sh start.sh --demo` |
-| **Connect your account** | Double-click `Start.cmd` | `sh start.sh` |
-
-Open **http://127.0.0.1:8787**. For a connected account, the panel token is in
-`data/live/panel-token.txt`. Stop the demo before starting live mode.
-
-[**Setup guide →**](https://phishdestroy.github.io/TgWitness/demo/guide.html) · [Dedicated account](https://phishdestroy.github.io/TgWitness/demo/dedicated-account.html) · [Docker & servers](docs/DEPLOYMENT.md) · [Tested environments](docs/VERIFICATION.md)
-
-## Know the boundaries
-
-- **Visible to the connected account.** No secret chats or automatic access to private sources.
-- **Observed, not reconstructed.** No capture during downtime; recovery can leave gaps and miss intermediate edits.
-- **Integrity relative to a trusted key.** Signatures do not prove Telegram origin, complete delivery, the truth of a message or a person's identity.
-- **Separate trust where needed.** An operator with the signing key can sign fabricated input. Independent witnesses and timestamps constrain later changes; they do not establish source truth.
-- **Use a dedicated account.** Telegram can restrict accounts for request volume. Two workspaces on one machine are not two independent witnesses.
-
-[Collection limits](docs/COLLECTION.md) · [Evidence and trust boundaries](docs/EVIDENCE.md) · [Security](.github/SECURITY.md)
-
-## Find your next step
-
-| Start collecting | Investigate & verify | Operate & recover |
-| --- | --- | --- |
-| [Connect an account](https://github.com/phishdestroy/TgWitness/wiki/Accounts) | [Work across chats](docs/INVESTIGATION.md) | [Server & Docker](docs/DEPLOYMENT.md) |
-| [Choose sources](docs/COLLECTION.md) | [Export & verify](docs/EVIDENCE.md) | [S3 copy & recovery](https://phishdestroy.github.io/TgWitness/docs/exports/#s3) |
+| [Connect an account](https://github.com/phishdestroy/TgWitness/wiki/Accounts) | [Follow the sources](docs/INVESTIGATION.md) | [Server & Docker](docs/DEPLOYMENT.md) |
+| [Choose collection scope](docs/COLLECTION.md) | [Export & verify](docs/EVIDENCE.md) | [Back up & recover](docs/wiki/Backup-and-Recovery.md) |
 | [Configure a proxy](https://github.com/phishdestroy/TgWitness/wiki/Proxies) | [Witness & Proof](docs/wiki/Witness-and-Proof.md) | [Troubleshooting](https://github.com/phishdestroy/TgWitness/wiki/Troubleshooting) |
 
 [All Wiki pages](https://github.com/phishdestroy/TgWitness/wiki) · [Offline handbook](docs/wiki/Home.md) · [Technical reference](docs/README.md) · [Setup guides in 26 languages](https://phishdestroy.github.io/TgWitness/demo/guide.html)
+
+**Capture has boundaries.** TgWitness observes what the connected account can
+access. It does not support secret chats or recover every missed event: downtime
+and catch-up can leave gaps and omit intermediate edits. [Collection limits](docs/COLLECTION.md) · [Security](.github/SECURITY.md)
 
 <!-- operator-notice:start -->
 
@@ -234,6 +224,8 @@ Open **http://127.0.0.1:8787**. For a connected account, the panel token is in
 </details>
 
 <!-- operator-notice:end -->
+
+<a name="repository-map"></a>
 
 <details>
 <summary><strong>Repository map</strong> — source, deployment and contribution guides</summary>

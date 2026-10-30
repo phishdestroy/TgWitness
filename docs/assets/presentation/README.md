@@ -9,9 +9,12 @@ and animation are SVG elements. The artwork illustrates a workflow, not an app s
 
 | Asset | Purpose |
 | --- | --- |
-| `repository-cover.webp`, `repository-cover-mobile.webp` | Current README and Wiki: a six-second animated header, with separate desktop and phone compositions and no video player |
-| `repository-cover*.svg` | Vector animation sources and static reduced-motion alternatives |
-| `repository-{demo,setup,modes}.svg` | Current README actions: one primary demo button, setup and capability guides |
+| `readme-investigation-animated.svg`, `tgwitness-investigation-static.svg` | Current README, Wiki and gallery cover: the illustrated investigation with a 12-second sequence and a separate still |
+| `case-{demo,start,wiki,films}.svg` | Current navigation: demo, first case, investigation handbook and films |
+| `case-path*.svg` | The four-step case route, with separate desktop, phone and reduced-motion compositions |
+| `case-chain-mobile*.svg` | A vertical record-chain explanation with readable phone captions, exact digest/signature formulas and a separate still |
+| `repository-cover*.svg`, `repository-cover*.webp` | Earlier compact journal cover, retained for existing links |
+| `repository-{demo,setup,modes}.svg` | Earlier navigation assets, retained for existing links |
 | `tgwitness-investigation-mobile-{animated,static}.svg` | Mobile composition of the approved investigation scene, with motion and a separate still |
 | `entry-{demo,guides,wiki}.svg` | Three navigation cards matching the PhishDestroy repository family |
 | `readme-typing.svg`, `readme-typing-static.svg` | Animated typing line and its readable still |
@@ -41,22 +44,29 @@ and animation are SVG elements. The artwork illustrates a workflow, not an app s
 
 ## Use and maintenance
 
-The main README uses a compact masthead, three navigation buttons and a recording
-of the real application with fictional fixtures. Features are native Markdown/HTML
-so they remain readable at phone widths and in either GitHub theme. S3 has its own
-visible section; detailed screenshots and verification animations expand on demand.
-The illustrated investigation scenes and three concept MP4 players remain in the
-[film gallery](../../SHOWCASE.md) and the Wiki.
+The main README opens with the investigation scene: sources connect to a dossier,
+records move into it, and a signed handoff appears. Four navigation images lead to
+the demo, setup, Wiki and films. The application recording follows immediately;
+the illustration and the real interface have distinct captions.
 
-Regenerate the current cover and buttons with `python website/render_readme.py
---font /path/to/Manrope.ttf --animate` from the repository root (requires `fonttools`,
-Playwright Chromium and Pillow). The SVGs contain outlined text and the existing
-application mark, with no remote fonts or scripts. The rendered WebP headers cycle
-through the collection steps. Each has a static reduced-motion source; the phone
-cover uses a separate composition rather than shrinking desktop text.
+The case route keeps the investigation story visible. Core capability descriptions,
+setup commands and trust boundaries remain ordinary text. The record-chain
+animation is visible; tampering, checkpoints and extra screenshots expand on demand.
+S3 keeps a visible summary and links to the complete setup and recovery instructions.
+The Wiki and [film gallery](../../SHOWCASE.md) share the same investigation cover.
+
+Regenerate navigation and case-path diagrams with:
+
+```sh
+python website/render_case_assets.py --font /path/to/Manrope.ttf
+```
+
+This requires `fonttools`. Captions are outlined using the retained OFL-licensed
+Manrope font. The images have no remote fonts or scripts. The previous compact
+journal cover remains reproducible with `website/render_readme.py` for older links.
 
 Each animated `picture` selects a separate still for reduced motion. The mobile
-cover has a separate composition. The older `readme-*` animation
+cover has a separate composition. The `readme-*` animation
 exports leave reduced-motion selection to the containing `picture`: another media
 query inside the selected SVG can read the operating-system preference instead
 and unexpectedly freeze the animation. Standalone documentation SVGs retain their
@@ -91,7 +101,7 @@ at 24 frames per second. The two earlier concept films retain their original exp
 and GIF alternatives. These films illustrate the workflow; they are not recordings
 of a live account.
 
-The gallery and Wiki use GitHub's video players with playback controls and no
+The gallery uses GitHub's video players with playback controls and no
 autoplay. Each has a download link to its versioned MP4. To replace a film, upload
 the new MP4 as a repository attachment and update both the player URL and the
 versioned file. The publication builder allows only these three MP4s and the two

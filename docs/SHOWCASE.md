@@ -1,12 +1,23 @@
-![TgWitness — Follow the trail. Preserve the evidence.](assets/presentation/brand.svg)
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="assets/presentation/tgwitness-investigation-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/presentation/tgwitness-investigation-static.svg">
+  <source media="(max-width: 640px)" srcset="assets/presentation/tgwitness-investigation-mobile-animated.svg">
+  <img src="assets/presentation/readme-investigation-animated.svg" width="1376" alt="TgWitness — Follow the trail. Preserve the evidence. Sources connect to a case file; captured records are preserved and a signed handoff is prepared. Illustrated workflow with fictional records.">
+</picture>
 
 # TgWitness in motion
 
-Three short films and three animated explanations of the investigation workflow.
+**Follow the case, then inspect the record.** Three short films and three animated
+explanations of the investigation workflow.
 The films are concept illustrations with fictional records; see the
 [workspace screenshots](../README.md#screenshots) for the application itself.
 
 [Try the demo](QUICKSTART.md#explore-the-interface) · [Read the handbook](https://github.com/phishdestroy/TgWitness/wiki) · [Presentation kit](assets/presentation/README.md)
+
+| The investigation | The connections | The saved history |
+| --- | --- | --- |
+| [Follow the trail](#follow-the-trail) | [Connect the sources](#connect-the-sources) | [Keep the changes](#keep-the-changes) |
+| Sources → case file → handoff | Cross-chat leads → source records | Message → edit → deletion notice |
 
 ## Follow the trail
 
@@ -48,8 +59,10 @@ Each explanation has a static alternative and follows your reduced-motion settin
 ### Link the captured events
 
 <picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="assets/presentation/case-chain-mobile-static.svg">
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/presentation/evidence-chain-static.svg">
-  <img src="assets/presentation/evidence-chain-animated.svg" width="1200" alt="Observe, preserve, verify: captured events link to previous hashes, carry signatures and travel in a verifiable export.">
+  <source media="(max-width: 640px)" srcset="assets/presentation/case-chain-mobile.svg">
+  <img src="assets/presentation/readme-evidence-chain-animated.svg" width="1200" alt="Observe, preserve, verify: captured events link to previous hashes, carry signatures and travel in a verifiable export.">
 </picture>
 
 [Static diagram](assets/presentation/evidence-chain-static.svg) · [The evidence model](HOW-IT-WORKS.md)
@@ -58,7 +71,7 @@ Each explanation has a static alternative and follows your reduced-motion settin
 
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/presentation/evidence-tamper-static.svg">
-  <img src="assets/presentation/evidence-tamper-animated.svg" width="1200" alt="Changing a captured record changes its hash and breaks verification of the linked record.">
+  <img src="assets/presentation/readme-evidence-tamper-animated.svg" width="1200" alt="Changing a captured record changes its hash and breaks verification of the linked record.">
 </picture>
 
 [Static diagram](assets/presentation/evidence-tamper-static.svg) · [Export and verify](wiki/Exports-and-Verification.md)
@@ -67,7 +80,7 @@ Each explanation has a static alternative and follows your reduced-motion settin
 
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/presentation/evidence-checkpoint-static.svg">
-  <img src="assets/presentation/evidence-checkpoint-animated.svg" width="1200" alt="A separately retained witness checkpoint lets a recipient compare the exported journal with an earlier observation.">
+  <img src="assets/presentation/readme-evidence-checkpoint-animated.svg" width="1200" alt="A separately retained witness checkpoint lets a recipient compare the exported journal with an earlier observation.">
 </picture>
 
 [Static diagram](assets/presentation/evidence-checkpoint-static.svg) · [Witness and proof](wiki/Witness-and-Proof.md)

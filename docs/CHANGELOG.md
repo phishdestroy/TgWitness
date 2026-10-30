@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Investigation presentation: the illustrated source-to-dossier animation now
+  leads the README, Wiki and film gallery. A clearer case route, direct film
+  navigation and a vertical phone diagram keep the workflow and verification
+  formulas readable; all moving illustrations have reduced-motion alternatives.
 - High-assurance deployment (`python -m tgwitness.cloud`, [guide](HIGH-ASSURANCE.md)). It creates
   the collector through the API of Hetzner Cloud, DigitalOcean, Linode, Vultr or Amazon EC2:
   no SSH key, a provider firewall without inbound rules, SSH masked from the first boot,

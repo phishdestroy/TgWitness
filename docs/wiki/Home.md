@@ -1,37 +1,47 @@
 <picture>
-  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../assets/presentation/repository-cover-mobile.svg">
-  <source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/repository-cover-static.svg">
-  <source media="(max-width: 640px)" srcset="../assets/presentation/repository-cover-mobile.webp">
-  <img src="../assets/presentation/repository-cover.webp" width="1200" alt="TgWitness — your Telegram observation workspace. Capture, investigate and verify.">
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../assets/presentation/tgwitness-investigation-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/tgwitness-investigation-static.svg">
+  <source media="(max-width: 640px)" srcset="../assets/presentation/tgwitness-investigation-mobile-animated.svg">
+  <img src="../assets/presentation/readme-investigation-animated.svg" width="1376" alt="TgWitness — Follow the trail. Preserve the evidence. Sources connect to a case file; captured records are preserved and a signed handoff is prepared. Illustrated workflow with fictional records.">
 </picture>
 
-# TgWitness Wiki
+# The investigation handbook
 
-[Project](../../README.md) · [Documentation](../README.md) · [Wiki](Home.md) · [Support](../../.github/SUPPORT.md)
+**From your first capture to a verifiable handoff.** Pick a path below, work with
+the record, and keep the checks alongside the conclusions.
 
+[Explore the demo](https://phishdestroy.github.io/TgWitness/demo/) · [Start your first case](Getting-Started.md) · [Films & animations](../SHOWCASE.md) · [Project](../../README.md)
 
-**From your first demo to a verifiable handoff.** Practical guides for observing
-Telegram, reviewing captured changes and running your own workspace.
+## Your first investigation
 
-[Try the demo](https://phishdestroy.github.io/TgWitness/demo/) · [Setup guide](Getting-Started.md) · [Modes & evidence](https://phishdestroy.github.io/TgWitness/guides/modes.html) · [Find an answer](FAQ.md)
+1. **Set up** — [connect a dedicated account](Accounts.md).
+2. **Observe** — [choose your sources and capture scope](Collection.md).
+3. **Investigate** — [trace the saved records across conversations](Investigations.md).
+4. **Hand over** — [export the record and verify it](Exports-and-Verification.md).
 
-## Choose a guide
+**First successful check:** a test message from a chat you control appears in the
+journal; its captured edit becomes another version; its deletion notice leaves
+the captured content available. Verify the signed export as well. This checks
+that sequence, not every possible Telegram event.
 
-| Set up your workspace | Work with the record |
-| --- | --- |
-| [Accounts](Accounts.md) — phone, QR and session imports | [Collection](Collection.md) — chats, folders and capture policy |
-| [Proxies](Proxies.md) — choose a connection route | [Investigations](Investigations.md) — follow a case across chats |
-| [Server and Docker](Server-and-Docker.md) — leave a collector running | [Exports and verification](Exports-and-Verification.md) — prepare a signed handoff |
-| [Backup and recovery](Backup-and-Recovery.md) — protect your workspace | [Witness and Proof](Witness-and-Proof.md) — independent checkpoints and public status |
+## Keep the investigation running
 
-![Observe, preserve and verify.](../assets/presentation/workflow.svg)
+| Connect & deploy | Preserve & verify | Find an answer |
+| --- | --- | --- |
+| [Proxies and connection routes](Proxies.md) | [Witness and Proof](Witness-and-Proof.md) | [Troubleshooting](Troubleshooting.md) |
+| [Servers and Docker](Server-and-Docker.md) | [Backup and recovery](Backup-and-Recovery.md) | [Frequently asked questions](FAQ.md) |
+| [Hardened deployment](../HIGH-ASSURANCE.md) | [S3 off-site copy](https://phishdestroy.github.io/TgWitness/docs/exports/#s3) | [Glossary](Glossary.md) |
 
-Need a term explained? Open the [glossary](Glossary.md).
+## Understand the evidence
 
-[S3 off-site copy and recovery](https://phishdestroy.github.io/TgWitness/docs/exports/#s3) · [Troubleshooting](Troubleshooting.md) · [Technical reference](../README.md)
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../assets/presentation/case-chain-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/evidence-chain-static.svg">
+  <source media="(max-width: 640px)" srcset="../assets/presentation/case-chain-mobile.svg">
+  <img src="../assets/presentation/readme-evidence-chain-animated.svg" width="1200" alt="Captured events link through SHA-256 hashes and carry Ed25519 signatures. Verify the record against a separately trusted key.">
+</picture>
 
-
-![Section divider](../assets/presentation/divider.svg)
+[The evidence model and formulas](../HOW-IT-WORKS.md) · [Interactive explanation](https://phishdestroy.github.io/TgWitness/docs/concepts/) · [All films and diagrams](../SHOWCASE.md)
 
 ## Read this before connecting
 

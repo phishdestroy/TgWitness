@@ -14,6 +14,7 @@
 - [Investigations](Investigations.md)
 - [Exports and verification](Exports-and-Verification.md)
 - [Witness and Proof](Witness-and-Proof.md)
+- [Films and animated explanations](../SHOWCASE.md)
 
 **Run and maintain**
 
