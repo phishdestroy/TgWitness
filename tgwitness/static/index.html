@@ -28,6 +28,7 @@
 <script defer src="/review.js?v=1"></script>
 <script defer src="/live.js?v=2"></script>
 <script defer src="/cloud-capture-locales.js?v=1"></script><script defer src="/cloud-capture-story.js?v=4"></script><script defer src="/cloud-capture.js?v=6"></script>
+<link href="/views/exports.css?v=32" rel="stylesheet">
 </head>
 <body>
 <svg class="icon-sprite" aria-hidden="true" focusable="false">
@@ -364,6 +365,12 @@
     <button class="secondary" id="verify-journal"><svg aria-hidden="true" class="icon"><use href="#i-shield"/></svg> Verify journal</button>
   </div>
   <div id="verification-result" role="status"></div>
+  <div class="exports-tabs" role="tablist" aria-label="Export options">
+    <button type="button" role="tab" id="exports-tab-downloads" data-export-tab="downloads" aria-controls="exports-downloads" aria-selected="true">Downloads</button>
+    <button type="button" role="tab" id="exports-tab-settings" data-export-tab="settings" aria-controls="report-form" aria-selected="false" tabindex="-1">Report settings</button>
+  </div>
+  <div id="exports-progress" class="card padded" hidden role="status" aria-live="polite"><strong id="exports-progress-label"></strong><progress id="exports-progress-bar" aria-label="Download progress"></progress><span id="exports-progress-bytes" class="hint"></span></div>
+  <div id="exports-downloads" role="tabpanel" aria-labelledby="exports-tab-downloads">
   <div class="evidence-hero card">
     <div class="evidence-symbol"><svg aria-hidden="true" class="icon"><use href="#i-archive"/></svg></div>
     <div class="evidence-body">
@@ -391,7 +398,13 @@
   <details class="source-options" id="export-chat-tools"><summary>Capture or export one chat</summary>
     <form class="card padded" id="snapshot-form"><div class="eyebrow">History snapshot</div><h2>Start with visible context</h2><p class="muted">Save the latest visible messages as a labeled snapshot. This cannot reconstruct deleted messages or changes missed while offline.</p><label for="snapshot-source">Selected source</label><select id="snapshot-source" required></select><label for="snapshot-limit">Most recent messages</label><input id="snapshot-limit" max="500" min="1" required step="1" type="number" value="100"><p class="hint" id="snapshot-limit-hint"></p><button class="secondary" type="submit">Capture history snapshot</button></form>  <form class="card padded" id="chat-export-form"><div class="eyebrow">Full chat export</div><h2>Export a whole chat, signed</h2><p class="muted">Download the entire visible history of one chat as a signed bundle: <code>chat.json</code> (Telegram-style) and a readable <code>chat.html</code>, with an Ed25519 signature so a copy can be checked for changes against your key. Private chats work when the account is a member. A current snapshot only: deleted or past-edited messages are not reconstructed. Large chats can take a long time and depend on Telegram's rate limits.</p><label for="chat-export-source">Selected source</label><select id="chat-export-source" required></select><div class="chat-export-actions"><button class="secondary" type="submit">Export full chat</button><button class="quiet" hidden id="chat-export-cancel" type="button">Cancel</button><button class="primary" hidden id="chat-export-download" type="button"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Download signed bundle</button></div><p id="chat-export-progress" role="status"></p><p class="hint">Language and case details of <code>chat.html</code>: <a data-go-reports="settings" href="#">Exports → Report settings</a>.</p></form>
   </details>
-  <form class="card padded report-settings" id="report-form">
+  <section class="card padded exports-history" aria-labelledby="exports-history-title">
+    <div class="card-heading compact"><div><h2 id="exports-history-title">Prepared exports</h2><p id="exports-last" class="hint"></p></div><button class="quiet" type="button" id="exports-history-refresh">Refresh</button></div>
+    <p class="hint">The last 20 files prepared by this workspace. Compare a file with its SHA-256 below. This list does not store downloads or prove delivery.</p>
+    <div id="exports-history-list"></div><p id="exports-history-status" class="hint" role="status"></p>
+  </section>
+  </div>
+  <form class="card padded report-settings" id="report-form" role="tabpanel" aria-labelledby="exports-tab-settings" hidden>
     <div class="eyebrow">Readable reports</div><h2>Report settings</h2>
     <p class="muted">Language, case details and contents of the report in every signed archive and chat export. Case details are signed into the export; leave a field empty to omit it.</p>
     <fieldset class="report-fields" id="report-fields" disabled>

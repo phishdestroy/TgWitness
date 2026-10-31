@@ -67,6 +67,7 @@
     }
     if (method !== "GET") return json(403, {detail: READ_ONLY});
     const all = await answers;
+    if (path.endsWith("/api/exports/history")) return json(200, {exports: [], limit: 20});
     if (all[path + url.search]) return recorded(all[path + url.search]);
     if (path.endsWith("/api/events")) return json(200, events(all, url.searchParams));
     if (all[path]) return recorded(all[path]);

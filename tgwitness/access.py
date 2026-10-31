@@ -69,6 +69,7 @@ POLICY = {
     "GET /api/checkpoint": ("view", None),
     "GET /api/run-receipt": ("view", None),
     "POST /api/verify": ("view", None),
+    "GET /api/exports/history": ("export", None),
     "GET /api/export/{fmt}": ("export", None),
     "POST /api/export/{fmt}": ("export", None),
     "GET /api/anchor-request": ("export", None),

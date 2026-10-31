@@ -49,6 +49,7 @@ const viewReady=Promise.all([
         if(name==='integrations'){window.TgWitnessIntegrations?.clear();window.TgWitnessWebhooks?.clear();}
         if(name==='sealed')window.TgWitnessCaptureStory?.pause?.();
         if(name==='parameters')parametersView?.leave();
+        if(name==='evidence')exportsView?.leave();
       },
       resetSession(){top=0;scrolls=[];viewContexts.delete(name);resetViewContent(name);},
     });
@@ -60,6 +61,7 @@ function resetViewContent(view){
   if(view==='connection'){networkLoadedFor=null;policyOutsideDirty=false;policyFormDirty=false;state.policy=null;}
   if(view==='sources'){state.scope=null;state.scopeDirty=false;state.recheckDirty=false;}
   if(view==='parameters')parametersView?.resetSession();
+  if(view==='evidence')exportsView?.resetSession();
   if(view==='witness'){state.evidenceDirty=false;state.replicaDirty=false;state.alertsDirty=false;}
   if(view==='sealed')window.TgWitnessCapture?.reset();
   if(view==='access'){accessFormReady=false;adminLimitsReady=false;adminLimitsDirty=false;accessLoadSerial++;
@@ -78,7 +80,7 @@ async function loadPanelView(view){
   else if(view==='chats')await refreshChats(true);
   else if(view==='observations')await refreshEvents();
   else if(view==='access')await loadAccess();
-  else if(view==='evidence'){renderChatExportTools();await loadReportSettings();}
+  else if(view==='evidence'){renderChatExportTools();await Promise.all([loadReportSettings(),loadExports()]);}
   else if(view==='integrations')await window.TgWitnessIntegrations?.load();
   else if(view==='analysis')await window.TgWitnessAnalysis?.load();
   else if(view==='connection'){await loadProfiles();if(!state.status.demo)await loadPolicy();}
@@ -114,7 +116,7 @@ async function applyRouteToPanel(route,current){
   else if(view==="access")await loadAccess();
   else if(view==="integrations")await window.TgWitnessIntegrations?.load();
   else if(view==="analysis")await window.TgWitnessAnalysis?.load();
-  else if(view==="evidence"){renderChatExportTools();await loadReportSettings();}
+  else if(view==="evidence"){renderChatExportTools();await Promise.all([loadReportSettings(),loadExports()]);}
   else if(view==="witness"){await loadExtras();if(current())selectExtra(route.extra,{history:false});}
 }
 
@@ -1352,12 +1354,18 @@ function saveExport(button){return busy(button,async()=>{
   $("chat-export-progress").textContent=tr("Downloaded. Export another chat if needed.");
 });}
 $("chat-export-download").addEventListener("click",e=>saveExport(e.currentTarget));
-async function download(path,filename,stream=false,root=false,body=undefined){
+let exportsView=null;
+const exportsReady=import('./views/exports.js').then(({createExports})=>{
+  exportsView=createExports({root:$("view-evidence"),tr,json,getSession:()=>state.workspaceRevision+":"+state.profile,fmtTime,toast});
+  return exportsView;
+});
+async function loadExports(){return (await exportsReady).enter(viewOptions('evidence'));}
+async function download(path,filename,stream=false,root=false,body=undefined,progress=()=>{}){
   const profile=state.profile;
   let handle=null,writer=null,reader=null;
   if(stream&&typeof window.showSaveFilePicker==="function"){
     try{handle=await window.showSaveFilePicker({suggestedName:filename});}
-    catch(error){if(error.name==="AbortError")return false;throw error;}
+    catch(error){if(error.name==="AbortError"){progress({phase:"cancelled"});return false;}throw error;}
   }
   const response=await api(path,body,root?{root:true,allowStale:true}:{profile,allowStale:true});
   const expected=Number(response.headers.get("Content-Length")||0);
@@ -1372,12 +1380,13 @@ async function download(path,filename,stream=false,root=false,body=undefined){
       total+=value.byteLength;
       if(writer)await writer.write(value);
       else{if(total>limit)throw new Error(tr("Browser download limit reached. Use the streaming download command."));chunks.push(value);}
+      progress({phase:"saving",total,expected});
       if(stream){const size=(total/1024**2).toFixed(1)+" MiB"+(expected?" / "+(expected/1024**2).toFixed(1)+" MiB":"");toast(tr("Saving export: {size}",{size}));}
     }
     if(expected&&total!==expected)throw new Error(tr("Download was interrupted. Retry the export."));
     if(writer){await writer.close();writer=null;}
     else saveBlob(new Blob(chunks,{type:response.headers.get("Content-Type")||"application/octet-stream"}),filename);
-    return true;
+    progress({phase:"done",total,expected});return true;
   }catch(error){
     if(reader)await reader.cancel().catch(()=>{});else await response.body.cancel().catch(()=>{});
     if(writer)await writer.abort().catch(()=>{});
@@ -1391,10 +1400,11 @@ panelQueries("[data-export]").forEach(b=>b.addEventListener("click",()=>busy(b,a
   const fmt=b.dataset.export,password=$("export-password").value;
   const encrypt=!!b.closest("#view-evidence")&&$("export-encrypt-on").checked;
   if(encrypt&&password.length<12){$("export-password").focus();throw new Error(tr("Enter a password of at least 12 characters, or untick encryption."));}
-  toast(tr("Checking journal integrity and preparing the export…"));
-  if(!encrypt){if(await download("export/"+fmt,"tgwitness-evidence."+fmt,true))toast(tr("Evidence export saved."));return;}
-  if(await download("export/"+fmt,"tgwitness-evidence-"+fmt+"-encrypted.zip",true,false,{password}))
-    toast(tr("Encrypted export saved. Open it in 7-Zip or WinRAR with the password; the signed file inside is unchanged."));
+  const progress=(await exportsReady).begin();
+  try{
+    const saved=await download("export/"+fmt,encrypt?"tgwitness-evidence-"+fmt+"-encrypted.zip":"tgwitness-evidence."+fmt,true,false,encrypt?{password}:undefined,progress);
+    if(saved)toast(tr(encrypt?"Encrypted export saved. Open it in 7-Zip or WinRAR with the password; the signed file inside is unchanged.":"Evidence export saved."));
+  }catch(error){progress({phase:"failed",error:error.message});throw error;}
 })));
 // Report settings: language, case details and contents of the sealed report in every export.
 const REPORT_FIELDS={"report-language":"language","report-theme":"theme","report-case-title":"case_title",
@@ -1456,7 +1466,7 @@ $("report-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitt
   }finally{if(reportOwner===owner&&reportKey()===owner){reportSaving=false;reportControls();}}
 });});
 document.querySelectorAll("[data-go-reports]").forEach(link=>link.addEventListener("click",event=>{
-  event.preventDefault();navigate("evidence");$("report-form").scrollIntoView({block:"start"});
+  event.preventDefault();navigate("evidence");exportsReady.then(view=>{view.select("settings");$("report-form").scrollIntoView({block:"start"});});
 }));
 $("export-encrypt-on").addEventListener("change",()=>{
   const on=$("export-encrypt-on").checked;show("export-password-field",on);if(on)$("export-password").focus();else $("export-password").value="";

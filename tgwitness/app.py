@@ -1801,13 +1801,20 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             raise HTTPException(409, "Journal integrity verification failed. Preserve the directory for inspection.") from None
 
     async def build_export(fmt, request, password=None):
+        from . import export_history
+        receipt = {}
         options = report.resolved(app.state.store, panel_language(request))
 
         def build():
             path = export_file(app.state.store, app.state.vault, fmt, options)
-            if password is not None:
-                path = encrypt_export(path, fmt, password)
-            return path
+            try:
+                if password is not None:
+                    path = encrypt_export(path, fmt, password)
+                receipt.update(export_history.prepared(app.state.store, path, fmt, password is not None))
+                return path
+            except BaseException:
+                path.unlink(missing_ok=True)
+                raise
 
         async with export_lock:
             try:
@@ -1822,20 +1829,25 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         except BaseException:
             path.unlink(missing_ok=True)
             raise
-        return path
+        return path, export_history.headers(receipt)
 
     @app.get("/api/export/{fmt}", dependencies=[Depends(authenticate)])
     async def export(request: Request, fmt: Literal["zip", "jsonl", "csv", "html"]):
-        path = await build_export(fmt, request)
+        path, headers = await build_export(fmt, request)
         media_types = {"zip": "application/zip", "jsonl": "application/x-ndjson",
                        "csv": "text/csv", "html": "text/html"}
-        return TemporaryDownload(path, filename="tgwitness-evidence." + fmt, media_type=media_types[fmt])
+        return TemporaryDownload(path, filename="tgwitness-evidence." + fmt, media_type=media_types[fmt], headers=headers)
 
     @app.post("/api/export/{fmt}", dependencies=[Depends(authenticate)])
     async def export_encrypted(request: Request, fmt: Literal["zip", "jsonl", "csv", "html"], body: ExportPassword):
 
-        path = await build_export(fmt, request, body.password)
-        return TemporaryDownload(path, filename="tgwitness-evidence-" + fmt + "-encrypted.zip", media_type="application/zip")
+        path, headers = await build_export(fmt, request, body.password)
+        return TemporaryDownload(path, filename="tgwitness-evidence-" + fmt + "-encrypted.zip", media_type="application/zip", headers=headers)
+
+    @app.get("/api/exports/history", dependencies=[Depends(authenticate)])
+    async def prepared_exports():
+        from .export_history import listing
+        return listing(app.state.store)
 
     @app.get("/api/media/{digest}", dependencies=[Depends(authenticate)])
     async def media(request: Request, digest: str, inline: bool = False):
