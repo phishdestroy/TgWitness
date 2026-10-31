@@ -3126,14 +3126,20 @@
 "All countries": "所有國家",
 "All lists": "所有清單",
 "Checking every server. Results appear as they come in.": "檢查每個伺服器。結果會隨資料傳入即時顯示。",
-"Lists updated: {n} sources.": "清單已更新：{n} 個來源。",
+"Lists updated: {n} sources.": {
+"other": "已更新的清單：{n} 個來源。"
+},
 "List removed.": "清單已移除。",
 "List added. It is downloaded with the next list update.": "清單已新增。該清單將於下次清單更新時一併下載。",
 "{name}: a list may have at most 1 MiB.": "{name}：每個清單的最大容量為 1 MiB。",
-"{n} servers added from your files.": "從您的檔案中新增了 {n} 台伺服器。",
+"{n} servers added from your files.": {
+"other": "已從您的檔案中新增 {n} 台伺服器。"
+},
 "Paste at least one proxy link.": "請貼上至少一個代理伺服器連結。",
 "Pasted links": "貼上連結",
-"{n} servers added.": "新增 {n} 台伺服器。",
+"{n} servers added.": {
+"other": "已新增 {n} 台伺服器。"
+},
 "Paste a GitHub token first.": "請先貼上 GitHub 存取令牌。",
 "GitHub token saved in the encrypted vault.": "GitHub 存取憑證儲存於加密保管庫中。",
 "GitHub token removed.": "已移除 GitHub 存取令牌。",
@@ -3149,8 +3155,9 @@
 "These settings are copied from the chosen workspace to every other member when you press Apply. Each member records what it received in its signed journal; an observing workspace keeps its IP mode until it is paused.": "當您按下「套用」時，這些設定會從選定的工作區複製到每個其他成員。每個成員都會將接收到的內容記錄在其簽名日誌中；觀察工作區會維持其 IP 模式，直到被暫停為止。",
 "Choose what the group shares under Shared settings.": "請在「共用設定」中選擇該群組要共用的內容。",
 "Apply to members": "套用至成員",
-"Settings copied to {n} workspaces.": "設定已複製至 {n} 個工作區。",
-"{n} kept their IP mode while observing.": "{n} 個在觀察期間維持其 IP 模式。",
+"Settings copied to {n} workspaces.": {
+"other": "設定已複製至 {n} 個工作區。"
+},
 "New name for this group:": "此群組的新名稱：",
 "Delete group": "刪除群組",
 "Delete the group \"{name}\"? Its workspaces stay and lose only the grouping.": "刪除群組「{name}」嗎？其工作區將保留，僅解除群組歸屬。",
@@ -3166,7 +3173,9 @@
 "Enter the API pair as ID:Hash, or leave it empty.": "請以「ID:Hash」格式輸入 API 憑證對，或留空。",
 "Importing…": "正在匯入…",
 "{done} of {total} imported": "已匯入 {done} 個（共 {total} 個）",
-"{n} accounts imported.": "已匯入 {n} 個帳戶。",
+"{n} accounts imported.": {
+"other": "已匯入 {n} 個帳戶。"
+},
 "Name of the new group:": "新群組的名稱：",
 "Group created. Move workspaces into it or import accounts.": "群組已建立。請將工作區移入其中，或匯入帳戶。",
 "Unknown bundled list.": "未知捆綁清單。",
@@ -3308,5 +3317,14 @@
 "A country cannot be preferred and avoided at once.": "無法同時將某個國家設為首選與避開對象。",
 "Choose at least one preferred country to use only those.": "請選擇至少一個首選國家／地區，以便僅使用該國家／地區的伺服器。",
 "Country choices need country lookups. Switch on Look up server countries.": "國家/地區選項需要進行國家/地區查詢。請開啟「查詢伺服器所在國家/地區」功能。",
-"Save these settings": "儲存這些設定"
+"Save these settings": "儲存這些設定",
+"Lists updated: {n} source.": "已更新的清單：{n} 個來源。",
+"{n} server added from your files.": "已從您的檔案中新增 {n} 台伺服器。",
+"{n} server added.": "已新增 {n} 台伺服器。",
+"Settings copied to {n} workspace.": "設定已複製至 {n} 個工作區。",
+"{n} workspaces kept their IP mode while observing.": {
+"other": "{n} 個工作區在觀察期間保留了其 IP 模式。"
+},
+"{n} workspace kept its IP mode while observing.": "{n} 個工作區在觀察期間保留了其 IP 模式。",
+"{n} account imported.": "已匯入 {n} 個帳戶。"
 }

@@ -3126,14 +3126,20 @@
 "All countries": "Tất cả các quốc gia",
 "All lists": "Tất cả các danh sách",
 "Checking every server. Results appear as they come in.": "Kiểm tra từng máy chủ. Kết quả sẽ hiển thị ngay khi có.",
-"Lists updated: {n} sources.": "Danh sách đã được cập nhật: {n} nguồn.",
+"Lists updated: {n} sources.": {
+"other": "Danh sách đã được cập nhật: {n} nguồn."
+},
 "List removed.": "Danh sách đã bị xóa.",
 "List added. It is downloaded with the next list update.": "Danh sách đã được thêm vào. Danh sách này sẽ được tải xuống trong lần cập nhật danh sách tiếp theo.",
 "{name}: a list may have at most 1 MiB.": "{name}: một danh sách có dung lượng tối đa là 1 MiB.",
-"{n} servers added from your files.": "{n} máy chủ đã được thêm vào từ các tệp của quý vị.",
+"{n} servers added from your files.": {
+"other": "Đã thêm {n} máy chủ từ tệp của quý vị."
+},
 "Paste at least one proxy link.": "Vui lòng dán ít nhất một liên kết proxy.",
 "Pasted links": "Các liên kết được dán",
-"{n} servers added.": "Đã thêm {n} máy chủ.",
+"{n} servers added.": {
+"other": "Đã thêm {n} máy chủ."
+},
 "Paste a GitHub token first.": "Vui lòng dán mã thông báo GitHub trước tiên.",
 "GitHub token saved in the encrypted vault.": "Mã thông báo GitHub được lưu trữ trong kho lưu trữ được mã hóa.",
 "GitHub token removed.": "Mã thông báo GitHub đã bị xóa.",
@@ -3149,8 +3155,9 @@
 "These settings are copied from the chosen workspace to every other member when you press Apply. Each member records what it received in its signed journal; an observing workspace keeps its IP mode until it is paused.": "Các cài đặt này sẽ được sao chép từ không gian làm việc đã chọn sang tất cả các thành viên khác khi quý vị nhấn Áp dụng. Mỗi thành viên sẽ ghi lại những gì mình nhận được vào nhật ký có chữ ký của mình; một không gian làm việc quan sát sẽ duy trì chế độ IP của mình cho đến khi bị tạm dừng.",
 "Choose what the group shares under Shared settings.": "Vui lòng chọn những nội dung mà nhóm sẽ chia sẻ trong phần ‘Cài đặt chung’.",
 "Apply to members": "Áp dụng cho các thành viên",
-"Settings copied to {n} workspaces.": "Các cài đặt đã được sao chép vào {n} không gian làm việc.",
-"{n} kept their IP mode while observing.": "{n} người đã duy trì chế độ IP của mình trong quá trình quan sát.",
+"Settings copied to {n} workspaces.": {
+"other": "Các cài đặt đã được sao chép vào {n} không gian làm việc."
+},
 "New name for this group:": "Tên mới cho nhóm này:",
 "Delete group": "Xóa nhóm",
 "Delete the group \"{name}\"? Its workspaces stay and lose only the grouping.": "Xóa nhóm “{name}”? Các không gian làm việc của nhóm vẫn được giữ lại và chỉ mất đi mối liên kết nhóm.",
@@ -3166,7 +3173,9 @@
 "Enter the API pair as ID:Hash, or leave it empty.": "Vui lòng nhập cặp thông tin API theo định dạng ID:Hash, hoặc để trống.",
 "Importing…": "Đang nhập…",
 "{done} of {total} imported": "Đã nhập {done} trong tổng số {total}",
-"{n} accounts imported.": "Đã nhập {n} tài khoản.",
+"{n} accounts imported.": {
+"other": "Đã nhập {n} tài khoản."
+},
 "Name of the new group:": "Tên của nhóm mới:",
 "Group created. Move workspaces into it or import accounts.": "Nhóm đã được tạo. Quý vị có thể di chuyển các không gian làm việc vào nhóm này hoặc nhập các tài khoản.",
 "Unknown bundled list.": "Danh sách gói không xác định.",
@@ -3308,5 +3317,14 @@
 "A country cannot be preferred and avoided at once.": "Không thể vừa ưu tiên vừa tránh một quốc gia cùng một lúc.",
 "Choose at least one preferred country to use only those.": "Vui lòng chọn ít nhất một quốc gia ưa thích để chỉ sử dụng các máy chủ proxy từ quốc gia đó.",
 "Country choices need country lookups. Switch on Look up server countries.": "Việc lựa chọn quốc gia cần phải tra cứu quốc gia. Vui lòng bật tùy chọn “Tra cứu quốc gia máy chủ”.",
-"Save these settings": "Lưu các cài đặt này"
+"Save these settings": "Lưu các cài đặt này",
+"Lists updated: {n} source.": "Danh sách đã được cập nhật: {n} nguồn.",
+"{n} server added from your files.": "Đã thêm {n} máy chủ từ tệp của quý vị.",
+"{n} server added.": "Đã thêm {n} máy chủ.",
+"Settings copied to {n} workspace.": "Các cài đặt đã được sao chép vào {n} không gian làm việc.",
+"{n} workspaces kept their IP mode while observing.": {
+"other": "{n} không gian làm việc đã giữ nguyên chế độ IP trong khi đang ở chế độ quan sát."
+},
+"{n} workspace kept its IP mode while observing.": "{n} không gian làm việc đã giữ nguyên chế độ IP trong khi đang ở chế độ quan sát.",
+"{n} account imported.": "Đã nhập {n} tài khoản."
 }

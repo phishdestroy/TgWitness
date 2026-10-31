@@ -3177,14 +3177,29 @@
 "All countries": "Усі країни",
 "All lists": "Усі списки",
 "Checking every server. Results appear as they come in.": "Перевірка кожного сервера. Результати з’являються по мірі їх надходження.",
-"Lists updated: {n} sources.": "Оновлено списки: {n} джерел.",
+"Lists updated: {n} sources.": {
+"one": "Оновлено списки: {n} джерело.",
+"many": "Оновлено списки: {n} джерел.",
+"few": "Оновлено списки: {n} джерела.",
+"other": "Оновлено списки: {n} джерела."
+},
 "List removed.": "Список видалено.",
 "List added. It is downloaded with the next list update.": "Список додано. Він завантажується під час наступного оновлення списків.",
 "{name}: a list may have at most 1 MiB.": "{name}: розмір списку не може перевищувати 1 МіБ.",
-"{n} servers added from your files.": "Додано {n} серверів із ваших файлів.",
+"{n} servers added from your files.": {
+"one": "Додано {n} сервер із ваших файлів.",
+"many": "Додано {n} серверів із ваших файлів.",
+"few": "Додано {n} сервери з ваших файлів.",
+"other": "{n} Сервери, додані з ваших файлів."
+},
 "Paste at least one proxy link.": "Вставте принаймні одне посилання на проксі-сервер.",
 "Pasted links": "Вставлені посилання",
-"{n} servers added.": "Додано {n} серверів.",
+"{n} servers added.": {
+"one": "Додано {n} сервер.",
+"many": "Додано {n} серверів.",
+"few": "Додано {n} сервери.",
+"other": "Додано {n} сервера."
+},
 "Paste a GitHub token first.": "Спочатку вставте токен GitHub.",
 "GitHub token saved in the encrypted vault.": "Токен GitHub зберігається у зашифрованому сховищі.",
 "GitHub token removed.": "Токен GitHub видалено.",
@@ -3200,8 +3215,12 @@
 "These settings are copied from the chosen workspace to every other member when you press Apply. Each member records what it received in its signed journal; an observing workspace keeps its IP mode until it is paused.": "Ці налаштування копіюються з обраного робочого простору до кожного іншого учасника групи після натискання кнопки «Застосувати». Кожен учасник записує отримані дані у свій підписаний журнал; робочий простір-спостерігач зберігає свій режим IP, доки його не буде призупинено.",
 "Choose what the group shares under Shared settings.": "У розділі «Спільні налаштування» виберіть, що саме група буде надавати у спільний доступ.",
 "Apply to members": "Застосувати до членів",
-"Settings copied to {n} workspaces.": "Налаштування скопійовано до {n} робочих просторів.",
-"{n} kept their IP mode while observing.": "{n} зберегли свій режим IP під час спостереження.",
+"Settings copied to {n} workspaces.": {
+"one": "Налаштування скопійовано в {n} робочу область.",
+"many": "Налаштування скопійовано до {n} робочих просторів.",
+"few": "Налаштування скопійовано до {n} робочих просторів.",
+"other": "Налаштування скопійовано до {n} робочих просторів."
+},
 "New name for this group:": "Нова назва для цієї групи:",
 "Delete group": "Видалити групу",
 "Delete the group \"{name}\"? Its workspaces stay and lose only the grouping.": "Видалити групу «{name}»? Її робочі простори залишаться, а група буде лише розформована.",
@@ -3220,7 +3239,12 @@
 "Enter the API pair as ID:Hash, or leave it empty.": "Введіть пару даних API у форматі ID:Hash або залиште поле порожнім.",
 "Importing…": "Імпортується…",
 "{done} of {total} imported": "{done} із {total} імпортовано",
-"{n} accounts imported.": "Імпортовано {n} облікових записів.",
+"{n} accounts imported.": {
+"one": "Імпортовано {n} обліковий запис.",
+"many": "Імпортовано {n} облікових записів.",
+"few": "Імпортовано {n} облікові записи.",
+"other": "Імпортовано {n} облікових записів."
+},
 "Name of the new group:": "Назва нової групи:",
 "Group created. Move workspaces into it or import accounts.": "Група створена. Перемістіть робочі простори до неї або імпортуйте облікові записи.",
 "Unknown bundled list.": "Невідомий список у комплекті.",
@@ -3362,5 +3386,17 @@
 "Open Parameters": "Відкрити параметри",
 "Copies {list} from {name}": "Копіює {list} з {name}",
 "Add to group": "Додати до групи",
-"Save these settings": "Зберегти ці налаштування"
+"Save these settings": "Зберегти ці налаштування",
+"Lists updated: {n} source.": "Оновлено списки: {n} джерело.",
+"{n} server added from your files.": "Додано {n} сервер із ваших файлів.",
+"{n} server added.": "Додано {n} сервер.",
+"Settings copied to {n} workspace.": "Налаштування скопійовано в {n} робочу область.",
+"{n} workspaces kept their IP mode while observing.": {
+"one": "{n} робоча область зберегла свій IP-режим під час спостереження.",
+"many": "{n} робочих просторів зберегли свій IP-режим під час спостереження.",
+"few": "{n} робочі простори зберегли свій IP-режим під час спостереження.",
+"other": "{n} робочі простори зберегли свій IP-режим під час спостереження."
+},
+"{n} workspace kept its IP mode while observing.": "{n} робоча область зберегла свій IP-режим під час спостереження.",
+"{n} account imported.": "Імпортовано {n} обліковий запис."
 }

@@ -3160,14 +3160,26 @@
 "All countries": "כל המדינות",
 "All lists": "כל הרשימות",
 "Checking every server. Results appear as they come in.": "בדיקת כל השרתים. התוצאות מופיעות עם קבלתן.",
-"Lists updated: {n} sources.": "רשימות שעודכנו: {n} מקורות.",
+"Lists updated: {n} sources.": {
+"one": "רשימות שעודכנו: מקור {n}.",
+"other": "רשימות שעודכנו: {n} מקורות.",
+"two": "רשימות שעודכנו: {n} מקורות."
+},
 "List removed.": "הרשימה הוסרה.",
 "List added. It is downloaded with the next list update.": "הרשימה נוספה. היא תורד עם העדכון הבא של הרשימות.",
 "{name}: a list may have at most 1 MiB.": "{name}: רשימה יכולה להכיל לכל היותר 1 MiB.",
-"{n} servers added from your files.": "{n} שרתים נוספו מהקבצים שלכם.",
+"{n} servers added from your files.": {
+"one": "שרת {n} נוסף מהקבצים שלכם.",
+"other": "{n} שרתים שנוספו מהקבצים שלכם.",
+"two": "{n} שרתים שנוספו מהקבצים שלך."
+},
 "Paste at least one proxy link.": "הדבק לפחות קישור פרוקסי אחד.",
 "Pasted links": "קישורים שהודבקו",
-"{n} servers added.": "נוספו {n} שרתים.",
+"{n} servers added.": {
+"one": "נוסף שרת {n}.",
+"other": "נוספו {n} שרתים.",
+"two": "נוספו {n} שרתים."
+},
 "Paste a GitHub token first.": "הדבק תחילה אסימון GitHub.",
 "GitHub token saved in the encrypted vault.": "אסימון GitHub נשמר בכספת המוצפנת.",
 "GitHub token removed.": "אסימון GitHub הוסר.",
@@ -3183,8 +3195,11 @@
 "These settings are copied from the chosen workspace to every other member when you press Apply. Each member records what it received in its signed journal; an observing workspace keeps its IP mode until it is paused.": "הגדרות אלו מועתקות מסביבת העבודה הנבחרת לכל שאר החברים כאשר לוחצים על 'החל'. כל חבר מתעד את מה שקיבל ביומן החתום שלו; סביבת עבודה מתבוננת שומרת על מצב ה-IP שלה עד שהיא מושעית.",
 "Choose what the group shares under Shared settings.": "בחר מה הקבוצה חולקת תחת 'הגדרות משותפות'.",
 "Apply to members": "החל על חברים",
-"Settings copied to {n} workspaces.": "ההגדרות הועתקו ל-{n} סביבות עבודה.",
-"{n} kept their IP mode while observing.": "{n} שמרו על מצב ה-IP שלהם בזמן התצפית.",
+"Settings copied to {n} workspaces.": {
+"one": "ההגדרות הועתקו לסביבת עבודה {n}.",
+"other": "ההגדרות הועתקו ל-{n} סביבות עבודה.",
+"two": "ההגדרות הועתקו ל-{n} סביבות עבודה."
+},
 "New name for this group:": "שם חדש לקבוצה זו:",
 "Delete group": "מחיקת קבוצה",
 "Delete the group \"{name}\"? Its workspaces stay and lose only the grouping.": "האם למחוק את הקבוצה \"{name}\"? סביבות העבודה שלה יישארו, ורק השייכות לקבוצה תבוטל.",
@@ -3202,7 +3217,11 @@
 "Enter the API pair as ID:Hash, or leave it empty.": "הזן את צמד ה-API בפורמט ID:Hash, או השאר את השדה ריק.",
 "Importing…": "מייבא...",
 "{done} of {total} imported": "{done} מתוך {total} יובאו",
-"{n} accounts imported.": "{n} חשבונות יובאו.",
+"{n} accounts imported.": {
+"one": "יובא חשבון {n}.",
+"other": "{n} חשבונות יובאו.",
+"two": "{n} חשבונות יובאו."
+},
 "Name of the new group:": "שם הקבוצה החדשה:",
 "Group created. Move workspaces into it or import accounts.": "הקבוצה נוצרה. העבר סביבות עבודה לתוכה או ייבא חשבונות.",
 "Unknown bundled list.": "רשימה מצורפת לא ידועה.",
@@ -3344,5 +3363,16 @@
 "A country cannot be preferred and avoided at once.": "לא ניתן להגדיר מדינה כ\"מועדפת\" ו\"למנוע\" אותה בו-זמנית.",
 "Choose at least one preferred country to use only those.": "בחר לפחות מדינה מועדפת אחת כדי להשתמש רק בהן.",
 "Country choices need country lookups. Switch on Look up server countries.": "בחירת המדינות מצריכה חיפוש מדינות. הפעל את האפשרות \"חפש מדינות שרת\".",
-"Save these settings": "שמור את ההגדרות הללו"
+"Save these settings": "שמור את ההגדרות הללו",
+"Lists updated: {n} source.": "רשימות שעודכנו: מקור {n}.",
+"{n} server added from your files.": "שרת {n} נוסף מהקבצים שלכם.",
+"{n} server added.": "נוסף שרת {n}.",
+"Settings copied to {n} workspace.": "ההגדרות הועתקו לסביבת עבודה {n}.",
+"{n} workspaces kept their IP mode while observing.": {
+"one": "סביבת עבודה {n} שמרה על מצב ה-IP שלה בזמן המעקב.",
+"other": "{n} סביבות עבודה שמרו על מצב ה-IP שלהן בזמן הצפייה.",
+"two": "{n} סביבות עבודה שמרו על מצב ה-IP שלהן בזמן הצפייה."
+},
+"{n} workspace kept its IP mode while observing.": "סביבת עבודה {n} שמרה על מצב ה-IP שלה בזמן המעקב.",
+"{n} account imported.": "יובא חשבון {n}."
 }

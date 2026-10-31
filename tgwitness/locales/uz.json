@@ -3143,14 +3143,23 @@
 "All countries": "Barcha mamlakatlar",
 "All lists": "Barcha ro'yxatlar",
 "Checking every server. Results appear as they come in.": "Har bir server tekshiriladi. Natijalar kelib tushgani sayin paydo bo'ladi.",
-"Lists updated: {n} sources.": "Ro'yxatlar yangilandi: {n} manba.",
+"Lists updated: {n} sources.": {
+"one": "Ro'yxatlar yangilandi: {n} manba.",
+"other": "Ro'yxatlar yangilandi: {n} manba."
+},
 "List removed.": "Ro'yxat olib tashlandi.",
 "List added. It is downloaded with the next list update.": "Ro'yxat qo'shildi. U keyingi ro'yxatni yangilashda yuklanadi.",
 "{name}: a list may have at most 1 MiB.": "{name}: ro'yxat hajmi maksimal 1 MiB bo'lishi mumkin.",
-"{n} servers added from your files.": "{n} ta server sizning fayllaringizdan qo'shildi.",
+"{n} servers added from your files.": {
+"one": "{n} ta server fayllaringizdan qo'shildi.",
+"other": "Fayllaringizdan {n} ta server qo'shildi."
+},
 "Paste at least one proxy link.": "Kamida bitta proxy havolasini joylashtiring.",
 "Pasted links": "Joylangan havolalar",
-"{n} servers added.": "{n} ta server qo'shildi.",
+"{n} servers added.": {
+"one": "{n} ta server qo'shildi.",
+"other": "{n} ta server qo'shildi."
+},
 "Paste a GitHub token first.": "Avvalo GitHub tokenini joylashtiring.",
 "GitHub token saved in the encrypted vault.": "GitHub tokeni shifrlangan omborga saqlangan.",
 "GitHub token removed.": "GitHub tokeni olib tashlandi.",
@@ -3166,8 +3175,10 @@
 "These settings are copied from the chosen workspace to every other member when you press Apply. Each member records what it received in its signed journal; an observing workspace keeps its IP mode until it is paused.": "Ushbu sozlamalar Tanlash tugmasini bosganingizda tanlangan ish maydonidan guruhning boshqa barcha a'zolariga nusxalanadi. Har bir a'zo olgan narsalarni o'z imzolangan jurnalida qayd etadi; kuzatuvchi ish maydoni esa to'xtatilguncha IP-rejimida qoladi.",
 "Choose what the group shares under Shared settings.": "Ushlash sozlamalari bo'limida guruh nimani bo'lishishini tanlang.",
 "Apply to members": "A'zolarga qo'llash",
-"Settings copied to {n} workspaces.": "Sozlamalar {n} ta ish maydoniga nusxalandi.",
-"{n} kept their IP mode while observing.": "{n} kuzatuv paytida IP-rejimni saqlab qoldi.",
+"Settings copied to {n} workspaces.": {
+"one": "Sozlamalar {n} ish maydoniga nusxalandi.",
+"other": "Sozlamalar {n} ish maydoniga nusxalandi."
+},
 "New name for this group:": "Ushbu guruh uchun yangi nom:",
 "Delete group": "Guruhni o'chirish",
 "Delete the group \"{name}\"? Its workspaces stay and lose only the grouping.": "\"{name}\" guruhini o'chirib tashlashingiz mumkinmi? Uning ish maydonchalari saqlanib qoladi va faqat guruhlanishni yo'qotadi.",
@@ -3184,7 +3195,10 @@
 "Enter the API pair as ID:Hash, or leave it empty.": "API juftligini ID:Hash shaklida kiriting yoki bo'sh qoldiring.",
 "Importing…": "Import qilinmoqda…",
 "{done} of {total} imported": "{total} tadan {done} tasi import qilindi",
-"{n} accounts imported.": "{n} ta hisob import qilindi.",
+"{n} accounts imported.": {
+"one": "{n} ta hisob import qilindi.",
+"other": "{n} ta hisob import qilindi."
+},
 "Name of the new group:": "Yangi guruh nomi:",
 "Group created. Move workspaces into it or import accounts.": "Guruh yaratildi. Ish maydonlarini unga ko'chiring yoki hisoblarni import qiling.",
 "Unknown bundled list.": "Noma'lum biriktirilgan ro'yxat.",
@@ -3326,5 +3340,15 @@
 "A country cannot be preferred and avoided at once.": "Bir davlatni bir vaqtning o'zida afzal ko'rish va chetlab o'tish mumkin emas.",
 "Choose at least one preferred country to use only those.": "Faqat ularni ishlatish uchun kamida bitta afzal mamlakatni tanlang.",
 "Country choices need country lookups. Switch on Look up server countries.": "Davlat tanlovlari uchun mamlakatlarni qidirish kerak. \"Server mamlakatlarini qidirish\" funksiyasini yoqing.",
-"Save these settings": "Ushbu sozlamalarni saqlash"
+"Save these settings": "Ushbu sozlamalarni saqlash",
+"Lists updated: {n} source.": "Ro'yxatlar yangilandi: {n} manba.",
+"{n} server added from your files.": "{n} ta server fayllaringizdan qo'shildi.",
+"{n} server added.": "{n} ta server qo'shildi.",
+"Settings copied to {n} workspace.": "Sozlamalar {n} ish maydoniga nusxalandi.",
+"{n} workspaces kept their IP mode while observing.": {
+"one": "{n} ta ish maydoni kuzatish paytida o'z IP rejimini saqlab qoldi.",
+"other": "{n} ta ish maydoni kuzatish paytida o'z IP-režimini saqlab qoldi."
+},
+"{n} workspace kept its IP mode while observing.": "{n} ta ish maydoni kuzatish paytida o'z IP rejimini saqlab qoldi.",
+"{n} account imported.": "{n} ta hisob import qilindi."
 }

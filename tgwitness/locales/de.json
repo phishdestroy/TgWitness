@@ -3143,14 +3143,23 @@
 "All countries": "Alle Länder",
 "All lists": "Alle Listen",
 "Checking every server. Results appear as they come in.": "Prüfung aller Server. Die Ergebnisse werden fortlaufend angezeigt, sobald sie eintreffen.",
-"Lists updated: {n} sources.": "Aktualisierte Listen: {n} Quellen.",
+"Lists updated: {n} sources.": {
+"one": "Aktualisierte Listen: {n} Quelle.",
+"other": "Aktualisierte Listen: {n} Quellen."
+},
 "List removed.": "Liste entfernt.",
 "List added. It is downloaded with the next list update.": "Liste hinzugefügt. Sie wird bei der nächsten Listenaktualisierung heruntergeladen.",
 "{name}: a list may have at most 1 MiB.": "{name}: Eine Liste darf maximal 1 MiB groß sein.",
-"{n} servers added from your files.": "{n} Server wurden aus Ihren Dateien hinzugefügt.",
+"{n} servers added from your files.": {
+"one": "{n} Server wurde aus Ihren Dateien hinzugefügt.",
+"other": "{n} Server wurden aus Ihren Dateien hinzugefügt."
+},
 "Paste at least one proxy link.": "Fügen Sie mindestens einen Proxy-Link ein.",
 "Pasted links": "Eingefügte Links",
-"{n} servers added.": "{n} Server hinzugefügt.",
+"{n} servers added.": {
+"one": "{n} Server hinzugefügt.",
+"other": "{n} Server hinzugefügt."
+},
 "Paste a GitHub token first.": "Fügen Sie zunächst ein GitHub-Token ein.",
 "GitHub token saved in the encrypted vault.": "Das GitHub-Token wird im verschlüsselten Tresor gespeichert.",
 "GitHub token removed.": "GitHub-Token entfernt.",
@@ -3166,8 +3175,10 @@
 "These settings are copied from the chosen workspace to every other member when you press Apply. Each member records what it received in its signed journal; an observing workspace keeps its IP mode until it is paused.": "Diese Einstellungen werden beim Klicken auf „Übernehmen“ vom ausgewählten Arbeitsbereich auf alle anderen Mitglieder kopiert. Jedes Mitglied protokolliert die empfangenen Daten in seinem signierten Protokoll; ein beobachtender Arbeitsbereich behält seinen IP-Modus bei, bis er angehalten wird.",
 "Choose what the group shares under Shared settings.": "Wählen Sie unter „Gemeinsame Einstellungen“ aus, was die Gruppe gemeinsam nutzen soll.",
 "Apply to members": "Auf Mitglieder anwenden",
-"Settings copied to {n} workspaces.": "Einstellungen wurden in {n} Arbeitsbereiche kopiert.",
-"{n} kept their IP mode while observing.": "{n} behielten während der Beobachtung ihren IP-Modus bei.",
+"Settings copied to {n} workspaces.": {
+"one": "Einstellungen wurden in {n} Arbeitsbereich kopiert.",
+"other": "Einstellungen wurden in {n} Arbeitsbereiche kopiert."
+},
 "New name for this group:": "Neuer Name für diese Gruppe:",
 "Delete group": "Gruppe löschen",
 "Delete the group \"{name}\"? Its workspaces stay and lose only the grouping.": "Möchten Sie die Gruppe „{name}“ löschen? Ihre Arbeitsbereiche bleiben erhalten und verlieren lediglich die Gruppierung.",
@@ -3184,7 +3195,10 @@
 "Enter the API pair as ID:Hash, or leave it empty.": "Geben Sie das API-Paar im Format „ID:Hash“ ein oder lassen Sie das Feld leer.",
 "Importing…": "Import läuft…",
 "{done} of {total} imported": "{done} von {total} importiert",
-"{n} accounts imported.": "{n} Konten importiert.",
+"{n} accounts imported.": {
+"one": "{n} Konto importiert.",
+"other": "{n} Konten importiert."
+},
 "Name of the new group:": "Name der neuen Gruppe:",
 "Group created. Move workspaces into it or import accounts.": "Gruppe erstellt. Verschieben Sie Arbeitsbereiche in diese Gruppe oder importieren Sie Konten.",
 "Unknown bundled list.": "Unbekannte gebündelte Liste.",
@@ -3326,5 +3340,15 @@
 "Open Parameters": "Parameter öffnen",
 "Copies {list} from {name}": "Kopiert {list} aus {name}",
 "Add to group": "Zur Gruppe hinzufügen",
-"Save these settings": "Diese Einstellungen speichern"
+"Save these settings": "Diese Einstellungen speichern",
+"Lists updated: {n} source.": "Aktualisierte Listen: {n} Quelle.",
+"{n} server added from your files.": "{n} Server wurde aus Ihren Dateien hinzugefügt.",
+"{n} server added.": "{n} Server hinzugefügt.",
+"Settings copied to {n} workspace.": "Einstellungen wurden in {n} Arbeitsbereich kopiert.",
+"{n} workspaces kept their IP mode while observing.": {
+"one": "{n} Arbeitsbereich behielt seinen IP-Modus während der Beobachtung bei.",
+"other": "{n} Arbeitsbereiche haben ihren IP-Modus während der Beobachtung beibehalten."
+},
+"{n} workspace kept its IP mode while observing.": "{n} Arbeitsbereich behielt seinen IP-Modus während der Beobachtung bei.",
+"{n} account imported.": "{n} Konto importiert."
 }

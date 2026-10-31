@@ -3143,14 +3143,23 @@
 "All countries": "تمام ممالک",
 "All lists": "تمام فہرستیں",
 "Checking every server. Results appear as they come in.": "ہر سرور کی جانچ۔ نتائج آنے پر ظاہر ہوتے ہیں۔",
-"Lists updated: {n} sources.": "فہرستیں اپ ڈیٹ کی گئیں: {n} ذرائع۔",
+"Lists updated: {n} sources.": {
+"one": "فہرستیں اپ ڈیٹ: {n} ماخذ۔",
+"other": "فہرستیں اپ ڈیٹ: {n} ذرائع۔"
+},
 "List removed.": "فہرست ہٹا دی گئی۔",
 "List added. It is downloaded with the next list update.": "فہرست شامل کی گئی۔ یہ اگلی فہرست کی تازہ کاری کے ساتھ ڈاؤن لوڈ ہوتی ہے۔",
 "{name}: a list may have at most 1 MiB.": "{name}: ایک فہرست میں زیادہ سے زیادہ 1 MiB ہو سکتی ہے۔",
-"{n} servers added from your files.": "آپ کی فائلوں سے {n} سرورز شامل کیے گئے۔",
+"{n} servers added from your files.": {
+"one": "آپ کی فائلوں سے {n} سرور شامل کیا گیا۔",
+"other": "آپ کی فائلوں سے {n} سرورز شامل کیے گئے۔"
+},
 "Paste at least one proxy link.": "کم از کم ایک پروکسی لنک پیسٹ کریں۔",
 "Pasted links": "چسپاں شدہ روابط",
-"{n} servers added.": "{n} سرورز شامل کیے گئے۔",
+"{n} servers added.": {
+"one": "{n} سرور شامل کیا گیا۔",
+"other": "{n} سرورز شامل کیے گئے۔"
+},
 "Paste a GitHub token first.": "سب سے پہلے GitHub ٹوکن چسپاں کریں۔",
 "GitHub token saved in the encrypted vault.": "GitHub ٹوکن کو انکرپٹڈ والٹ میں محفوظ کیا گیا۔",
 "GitHub token removed.": "GitHub ٹوکن ہٹا دیا گیا۔",
@@ -3166,8 +3175,10 @@
 "These settings are copied from the chosen workspace to every other member when you press Apply. Each member records what it received in its signed journal; an observing workspace keeps its IP mode until it is paused.": "یہ ترتیبات منتخب کردہ ورک اسپیس سے دوسرے تمام اراکین کو کاپی کی جاتی ہیں جب آپ 'لاگو کریں' پر کلک کرتے ہیں۔ ہر رکن اپنی موصول شدہ ترتیبات کو اپنے دستخط شدہ جرنل میں ریکارڈ کرتا ہے؛ ایک مشاہداتی ورک اسپیس اپنی آئی پی موڈ کو تب تک برقرار رکھتا ہے جب تک اسے معطل نہیں کیا جاتا۔",
 "Choose what the group shares under Shared settings.": "مشترکہ ترتیبات کے تحت منتخب کریں کہ گروپ کیا شیئر کرے گا۔",
 "Apply to members": "ارکان پر لاگو کریں",
-"Settings copied to {n} workspaces.": "سیٹنگز {n} ورک اسپیسز میں کاپی کی گئیں۔",
-"{n} kept their IP mode while observing.": "{n} نے مشاہدے کے دوران اپنا آئی پی موڈ برقرار رکھا۔",
+"Settings copied to {n} workspaces.": {
+"one": "سیٹنگز کو {n} ورک اسپیس میں کاپی کیا گیا۔",
+"other": "{n} کام کی جگہوں میں ترتیبات کاپی کی گئیں۔"
+},
 "New name for this group:": "اس گروپ کے لیے نیا نام:",
 "Delete group": "گروپ حذف کریں",
 "Delete the group \"{name}\"? Its workspaces stay and lose only the grouping.": "کیا گروپ \"{name}\" کو حذف کیا جائے؟ اس کے ورک اسپیسز برقرار رہیں گے اور صرف گروپ بندی ختم ہو جائے گی۔",
@@ -3184,7 +3195,10 @@
 "Enter the API pair as ID:Hash, or leave it empty.": "API جوڑے کو ID:Hash کے طور پر درج کریں، یا اسے خالی چھوڑ دیں۔",
 "Importing…": "درآمد ہو رہا ہے…",
 "{done} of {total} imported": "{total} میں سے {done} درآمد شدہ",
-"{n} accounts imported.": "{n} اکاؤنٹس درآمد کیے گئے۔",
+"{n} accounts imported.": {
+"one": "{n} اکاؤنٹ درآمد کیا گیا۔",
+"other": "{n} اکاؤنٹس درآمد کیے گئے۔"
+},
 "Name of the new group:": "نئے گروپ کا نام:",
 "Group created. Move workspaces into it or import accounts.": "گروپ بن گیا۔ اس میں ورک اسپیس منتقل کریں یا اکاؤنٹس امپورٹ کریں۔",
 "Unknown bundled list.": "نامعلوم بنڈل شدہ فہرست۔",
@@ -3326,5 +3340,15 @@
 "A country cannot be preferred and avoided at once.": "ایک ملک کو ایک ہی وقت میں ترجیح اور اجتناب نہیں کیا جا سکتا۔",
 "Choose at least one preferred country to use only those.": "کم از کم ایک ترجیحی ملک منتخب کریں تاکہ صرف وہی استعمال ہوں۔",
 "Country choices need country lookups. Switch on Look up server countries.": "ملک کے انتخاب کے لیے ملک کی تلاش درکار ہے۔ سرور سے ممالک تلاش کرنے کی خصوصیت آن کریں۔",
-"Save these settings": "ان ترتیبات کو محفوظ کریں"
+"Save these settings": "ان ترتیبات کو محفوظ کریں",
+"Lists updated: {n} source.": "فہرستیں اپ ڈیٹ: {n} ماخذ۔",
+"{n} server added from your files.": "آپ کی فائلوں سے {n} سرور شامل کیا گیا۔",
+"{n} server added.": "{n} سرور شامل کیا گیا۔",
+"Settings copied to {n} workspace.": "سیٹنگز کو {n} ورک اسپیس میں کاپی کیا گیا۔",
+"{n} workspaces kept their IP mode while observing.": {
+"one": "{n} ورک اسپیس نے مشاہدہ کے دوران اپنا IP موڈ برقرار رکھا۔",
+"other": "{n} ورک اسپیسز نے مشاہدے کے دوران اپنا IP موڈ برقرار رکھا۔"
+},
+"{n} workspace kept its IP mode while observing.": "{n} ورک اسپیس نے مشاہدہ کے دوران اپنا IP موڈ برقرار رکھا۔",
+"{n} account imported.": "{n} اکاؤنٹ درآمد کیا گیا۔"
 }

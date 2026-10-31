@@ -3143,14 +3143,23 @@
 "All countries": "সমস্ত দেশ",
 "All lists": "সমস্ত তালিকা",
 "Checking every server. Results appear as they come in.": "প্রতিটি সার্ভার যাচাই করা হচ্ছে। ফলাফল আসা মাত্রই প্রদর্শিত হবে।",
-"Lists updated: {n} sources.": "তালিকা আপডেট হয়েছে: {n}টি উৎস।",
+"Lists updated: {n} sources.": {
+"one": "তালিকা আপডেট: {n}টি উৎস।",
+"other": "তালিকা আপডেট: {n}টি উৎস।"
+},
 "List removed.": "তালিকা সরানো হয়েছে।",
 "List added. It is downloaded with the next list update.": "তালিকা যোগ করা হয়েছে। এটি পরবর্তী তালিকা আপডেটের সাথে ডাউনলোড হবে।",
 "{name}: a list may have at most 1 MiB.": "{name}: একটি তালিকায় সর্বোচ্চ 1 MiB থাকতে পারে।",
-"{n} servers added from your files.": "{n} সার্ভারগুলো আপনার ফাইল থেকে যোগ করা হয়েছে।",
+"{n} servers added from your files.": {
+"one": "{n}টি আপনার ফাইল থেকে যোগ করা হয়েছে।",
+"other": "{n}টি সার্ভার আপনার ফাইল থেকে যোগ করা হয়েছে।"
+},
 "Paste at least one proxy link.": "অন্তত একটি প্রক্সি লিঙ্ক পেস্ট করুন।",
 "Pasted links": "পেস্ট করা লিঙ্কসমূহ",
-"{n} servers added.": "{n} সার্ভার যোগ করা হয়েছে।",
+"{n} servers added.": {
+"one": "{n}টি সার্ভার যোগ করা হয়েছে।",
+"other": "{n}টি সার্ভার যোগ করা হয়েছে।"
+},
 "Paste a GitHub token first.": "প্রথমে একটি GitHub টোকেন পেস্ট করুন।",
 "GitHub token saved in the encrypted vault.": "এনক্রিপ্টেড ভল্টে GitHub টোকেন সংরক্ষিত।",
 "GitHub token removed.": "GitHub টোকেন সরানো হয়েছে।",
@@ -3166,8 +3175,10 @@
 "These settings are copied from the chosen workspace to every other member when you press Apply. Each member records what it received in its signed journal; an observing workspace keeps its IP mode until it is paused.": "আপনি Apply চাপলে এই সেটিংসগুলো নির্বাচিত ওয়ার্কস্পেস থেকে গ্রুপের প্রতিটি সদস্যের কাছে অনুলিপি করা হয়। প্রতিটি সদস্য তার স্বাক্ষরিত জার্নালে যা পেয়েছে তা নথিভুক্ত করে; একটি পর্যবেক্ষণকারী ওয়ার্কস্পেস তার IP মোড বজায় রাখে যতক্ষণ না এটি বিরতি দেওয়া হয়।",
 "Choose what the group shares under Shared settings.": "Shared settings-এর অধীনে গ্রুপটি কী শেয়ার করবে তা নির্বাচন করুন।",
 "Apply to members": "সদস্যদের জন্য প্রয়োগ করুন",
-"Settings copied to {n} workspaces.": "{n}টি ওয়ার্কস্পেসে সেটিংস অনুলিপি করা হয়েছে।",
-"{n} kept their IP mode while observing.": "{n} পর্যবেক্ষণের সময় তাদের আইপি মোড রেখেছিল।",
+"Settings copied to {n} workspaces.": {
+"one": "{n}ওয়ার্কস্পেসে সেটিংস অনুলিপি করা হয়েছে।",
+"other": "{n}টি ওয়ার্কস্পেসে সেটিংস অনুলিপি করা হয়েছে।"
+},
 "New name for this group:": "এই গ্রুপের জন্য নতুন নাম:",
 "Delete group": "গ্রুপ মুছুন",
 "Delete the group \"{name}\"? Its workspaces stay and lose only the grouping.": "গ্রুপ \"{name}\" মুছে ফেলবেন? এর ওয়ার্কস্পেসগুলো থাকবে এবং শুধুমাত্র গ্রুপবদ্ধতা হারাবে।",
@@ -3184,7 +3195,10 @@
 "Enter the API pair as ID:Hash, or leave it empty.": "API জোড়া ID:Hash হিসেবে লিখুন, অথবা খালি রাখুন।",
 "Importing…": "আমদানি হচ্ছে…",
 "{done} of {total} imported": "{done}টি {total}মোটের মধ্যে আমদানি করা হয়েছে",
-"{n} accounts imported.": "{n}টি অ্যাকাউন্ট আমদানি করা হয়েছে।",
+"{n} accounts imported.": {
+"one": "{n}টি অ্যাকাউন্ট আমদানি করা হয়েছে।",
+"other": "{n}টি অ্যাকাউন্ট আমদানি করা হয়েছে।"
+},
 "Name of the new group:": "নতুন গ্রুপের নাম:",
 "Group created. Move workspaces into it or import accounts.": "গ্রুপ তৈরি হয়েছে। এতে ওয়ার্কস্পেসগুলো সরান বা অ্যাকাউন্ট আমদানি করুন।",
 "Unknown bundled list.": "অজানা সংযুক্ত তালিকা।",
@@ -3326,5 +3340,15 @@
 "A country cannot be preferred and avoided at once.": "একটি দেশকে একসঙ্গে অগ্রাধিকার এবং এড়িয়ে চলা যায় না।",
 "Choose at least one preferred country to use only those.": "কমপক্ষে একটি পছন্দের দেশ নির্বাচন করুন যাতে শুধুমাত্র সেটিই ব্যবহার করা হয়।",
 "Country choices need country lookups. Switch on Look up server countries.": "দেশ নির্বাচনগুলির জন্য দেশ অনুসন্ধান প্রয়োজন। 'সার্ভারে দেশ অনুসন্ধান' চালু করুন।",
-"Save these settings": "এই সেটিংস সংরক্ষণ করুন"
+"Save these settings": "এই সেটিংস সংরক্ষণ করুন",
+"Lists updated: {n} source.": "তালিকা আপডেট: {n}টি উৎস।",
+"{n} server added from your files.": "{n}টি আপনার ফাইল থেকে যোগ করা হয়েছে।",
+"{n} server added.": "{n}টি সার্ভার যোগ করা হয়েছে।",
+"Settings copied to {n} workspace.": "{n}ওয়ার্কস্পেসে সেটিংস অনুলিপি করা হয়েছে।",
+"{n} workspaces kept their IP mode while observing.": {
+"one": "{n}টি পর্যবেক্ষণের সময় তার IP মোড বজায় রেখেছে।",
+"other": "{n}টি ওয়ার্কস্পেস পর্যবেক্ষণের সময় তাদের IP মোড বজায় রেখেছে।"
+},
+"{n} workspace kept its IP mode while observing.": "{n}টি পর্যবেক্ষণের সময় তার IP মোড বজায় রেখেছে।",
+"{n} account imported.": "{n}টি অ্যাকাউন্ট আমদানি করা হয়েছে।"
 }

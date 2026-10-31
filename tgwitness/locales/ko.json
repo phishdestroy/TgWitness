@@ -3126,14 +3126,20 @@
 "All countries": "모든 국가",
 "All lists": "모든 목록",
 "Checking every server. Results appear as they come in.": "모든 서버 확인. 결과가 들어오는 대로 표시됩니다.",
-"Lists updated: {n} sources.": "업데이트된 목록: {n}개 소스.",
+"Lists updated: {n} sources.": {
+"other": "업데이트된 목록: {n}개 소스."
+},
 "List removed.": "목록이 제거되었습니다.",
 "List added. It is downloaded with the next list update.": "목록이 추가되었습니다. 다음 목록 업데이트 시 다운로드됩니다.",
 "{name}: a list may have at most 1 MiB.": "{name}: 목록의 최대 크기는 1 MiB입니다.",
-"{n} servers added from your files.": "사용자의 파일에서 {n}개의 서버가 추가되었습니다.",
+"{n} servers added from your files.": {
+"other": "사용자의 파일에서 {n}대의 서버가 추가되었습니다."
+},
 "Paste at least one proxy link.": "프록시 링크를 하나 이상 붙여넣으십시오.",
 "Pasted links": "붙여넣은 링크",
-"{n} servers added.": "서버 {n}대가 추가되었습니다.",
+"{n} servers added.": {
+"other": "서버 {n}대가 추가되었습니다."
+},
 "Paste a GitHub token first.": "먼저 GitHub 토큰을 붙여넣으세요.",
 "GitHub token saved in the encrypted vault.": "GitHub 토큰은 암호화된 볼트에 저장됩니다.",
 "GitHub token removed.": "GitHub 토큰이 제거되었습니다.",
@@ -3149,8 +3155,9 @@
 "These settings are copied from the chosen workspace to every other member when you press Apply. Each member records what it received in its signed journal; an observing workspace keeps its IP mode until it is paused.": "'적용'을 누르면 선택한 작업 공간의 이러한 설정이 다른 모든 구성원에게 복사됩니다. 각 구성원은 수신한 내용을 서명된 일지에 기록하며, 관찰 중인 작업 공간은 일시 중지될 때까지 IP 모드를 유지합니다.",
 "Choose what the group shares under Shared settings.": "'공유 설정'에서 그룹이 공유할 항목을 선택하십시오.",
 "Apply to members": "구성원에게 적용",
-"Settings copied to {n} workspaces.": "{n}개의 작업 공간에 설정이 복사되었습니다.",
-"{n} kept their IP mode while observing.": "{n}명은 관찰하는 동안 IP 모드를 유지했습니다.",
+"Settings copied to {n} workspaces.": {
+"other": "설정이 {n}개의 작업 공간으로 복사되었습니다."
+},
 "New name for this group:": "이 그룹의 새 이름:",
 "Delete group": "그룹 삭제",
 "Delete the group \"{name}\"? Its workspaces stay and lose only the grouping.": "\"{name}\" 그룹을 삭제하시겠습니까? 해당 그룹의 작업 공간은 그대로 유지되며, 그룹화만 해제됩니다.",
@@ -3166,7 +3173,9 @@
 "Enter the API pair as ID:Hash, or leave it empty.": "API 쌍을 ID:Hash 형식으로 입력하거나 비워 둡니다.",
 "Importing…": "가져오기 중…",
 "{done} of {total} imported": "{total}개 중 {done}개 가져옴",
-"{n} accounts imported.": "{n}개의 계정이 가져왔습니다.",
+"{n} accounts imported.": {
+"other": "계정 {n}개 가져옴."
+},
 "Name of the new group:": "새 그룹의 이름:",
 "Group created. Move workspaces into it or import accounts.": "그룹이 생성되었습니다. 워크스페이스를 이 그룹으로 이동하거나 계정을 가져오세요.",
 "Unknown bundled list.": "알 수 없는 번들 목록.",
@@ -3308,5 +3317,14 @@
 "A country cannot be preferred and avoided at once.": "한 국가를 선호 대상과 회피 대상으로 동시에 지정할 수는 없습니다.",
 "Choose at least one preferred country to use only those.": "선호하는 국가를 하나 이상 선택하면 해당 국가만 사용됩니다.",
 "Country choices need country lookups. Switch on Look up server countries.": "국가 선택 시 국가 조회 기능이 필요합니다. ‘서버 국가 조회’ 기능을 켜십시오.",
-"Save these settings": "이 설정 저장"
+"Save these settings": "이 설정 저장",
+"Lists updated: {n} source.": "업데이트된 목록: {n}개 소스.",
+"{n} server added from your files.": "사용자의 파일에서 {n}대의 서버가 추가되었습니다.",
+"{n} server added.": "서버 {n}대가 추가되었습니다.",
+"Settings copied to {n} workspace.": "설정이 {n}개의 작업 공간으로 복사되었습니다.",
+"{n} workspaces kept their IP mode while observing.": {
+"other": "{n}개의 작업 공간이 관찰 중에도 IP 모드를 유지했습니다."
+},
+"{n} workspace kept its IP mode while observing.": "{n}개의 작업 공간이 관찰 중에도 IP 모드를 유지했습니다.",
+"{n} account imported.": "계정 {n}개 가져옴."
 }

@@ -3143,14 +3143,23 @@
 "All countries": "Tous les pays",
 "All lists": "Toutes les listes",
 "Checking every server. Results appear as they come in.": "Vérification de chaque serveur. Les résultats s’affichent au fur et à mesure de leur réception.",
-"Lists updated: {n} sources.": "Listes mises à jour : {n} sources.",
+"Lists updated: {n} sources.": {
+"one": "Listes mises à jour : {n} source.",
+"other": "Listes mises à jour : {n} sources."
+},
 "List removed.": "Liste supprimée.",
 "List added. It is downloaded with the next list update.": "Liste ajoutée. Elle sera téléchargée lors de la prochaine mise à jour des listes.",
 "{name}: a list may have at most 1 MiB.": "{name} : une liste ne peut pas dépasser 1 Mio.",
-"{n} servers added from your files.": "{n} serveurs ajoutés à partir de vos fichiers.",
+"{n} servers added from your files.": {
+"one": "{n} serveur ajouté à partir de vos fichiers.",
+"other": "{n} serveurs ajoutés à partir de vos fichiers."
+},
 "Paste at least one proxy link.": "Collez au moins un lien de proxy.",
 "Pasted links": "Liens collés",
-"{n} servers added.": "{n} serveurs ajoutés.",
+"{n} servers added.": {
+"one": "{n} serveur ajouté.",
+"other": "Ajout de {n} serveurs."
+},
 "Paste a GitHub token first.": "Collez d’abord un jeton GitHub.",
 "GitHub token saved in the encrypted vault.": "Le jeton GitHub est enregistré dans le coffre-fort chiffré.",
 "GitHub token removed.": "Jeton GitHub supprimé.",
@@ -3166,8 +3175,10 @@
 "These settings are copied from the chosen workspace to every other member when you press Apply. Each member records what it received in its signed journal; an observing workspace keeps its IP mode until it is paused.": "Ces paramètres sont copiés de l’espace de travail sélectionné vers tous les autres membres lorsque vous cliquez sur « Appliquer ». Chaque membre enregistre ce qu’il a reçu dans son journal signé ; un espace de travail observateur conserve son mode IP jusqu’à ce qu’il soit mis en pause.",
 "Choose what the group shares under Shared settings.": "Choisissez ce que le groupe partage dans la section « Paramètres partagés ».",
 "Apply to members": "Appliquer aux membres",
-"Settings copied to {n} workspaces.": "Paramètres copiés dans {n} espaces de travail.",
-"{n} kept their IP mode while observing.": "{n} ont conservé leur mode IP tout en observant.",
+"Settings copied to {n} workspaces.": {
+"one": "Paramètres copiés dans {n} espace de travail.",
+"other": "Paramètres copiés dans {n} espaces de travail."
+},
 "New name for this group:": "Nouveau nom pour ce groupe :",
 "Delete group": "Supprimer un groupe",
 "Delete the group \"{name}\"? Its workspaces stay and lose only the grouping.": "Souhaitez-vous supprimer le groupe « {name} » ? Ses espaces de travail sont conservés et ne perdent que leur appartenance au groupe.",
@@ -3184,7 +3195,10 @@
 "Enter the API pair as ID:Hash, or leave it empty.": "Saisissez la paire d’identifiants API sous la forme ID:Hash, ou laissez ce champ vide.",
 "Importing…": "Importation en cours…",
 "{done} of {total} imported": "{done} sur {total} importés",
-"{n} accounts imported.": "{n} comptes importés.",
+"{n} accounts imported.": {
+"one": "{n} compte importé.",
+"other": "{n} comptes importés."
+},
 "Name of the new group:": "Nom du nouveau groupe :",
 "Group created. Move workspaces into it or import accounts.": "Groupe créé. Déplacez-y des espaces de travail ou importez des comptes.",
 "Unknown bundled list.": "Liste groupée inconnue.",
@@ -3326,5 +3340,15 @@
 "A country cannot be preferred and avoided at once.": "Il n’est pas possible de privilégier et d’éviter un même pays simultanément.",
 "Choose at least one preferred country to use only those.": "Choisissez au moins un pays préféré afin de n’utiliser que ceux-ci.",
 "Country choices need country lookups. Switch on Look up server countries.": "Le choix des pays nécessite une recherche par pays. Activez l’option « Rechercher les pays des serveurs ».",
-"Save these settings": "Enregistrer ces paramètres"
+"Save these settings": "Enregistrer ces paramètres",
+"Lists updated: {n} source.": "Listes mises à jour : {n} source.",
+"{n} server added from your files.": "{n} serveur ajouté à partir de vos fichiers.",
+"{n} server added.": "{n} serveur ajouté.",
+"Settings copied to {n} workspace.": "Paramètres copiés dans {n} espace de travail.",
+"{n} workspaces kept their IP mode while observing.": {
+"one": "{n} espace de travail a conservé son mode IP tout en étant en observation.",
+"other": "{n} espaces de travail ont conservé leur mode IP tout en étant en observation."
+},
+"{n} workspace kept its IP mode while observing.": "{n} espace de travail a conservé son mode IP tout en étant en observation.",
+"{n} account imported.": "{n} compte importé."
 }

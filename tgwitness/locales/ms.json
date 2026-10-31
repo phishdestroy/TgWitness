@@ -3126,14 +3126,20 @@
 "All countries": "Semua negara",
 "All lists": "Semua senarai",
 "Checking every server. Results appear as they come in.": "Menyemak setiap pelayan. Keputusan akan dipaparkan sebaik sahaja ia diterima.",
-"Lists updated: {n} sources.": "Senarai dikemas kini: {n} sumber.",
+"Lists updated: {n} sources.": {
+"other": "Senarai dikemas kini: {n} sumber."
+},
 "List removed.": "Senarai dialih keluar.",
 "List added. It is downloaded with the next list update.": "Senarai ditambah. Ia dimuat turun dengan kemas kini senarai seterusnya.",
 "{name}: a list may have at most 1 MiB.": "{name}: satu senarai boleh mempunyai maksimum 1 MiB.",
-"{n} servers added from your files.": "{n} pelayan ditambah daripada fail anda.",
+"{n} servers added from your files.": {
+"other": "{n} pelayan ditambah daripada fail anda."
+},
 "Paste at least one proxy link.": "Tampal sekurang-kurangnya satu pautan proksi.",
 "Pasted links": "Pautan yang ditampal",
-"{n} servers added.": "{n} pelayan ditambah.",
+"{n} servers added.": {
+"other": "{n} pelayan ditambah."
+},
 "Paste a GitHub token first.": "Tampal token GitHub terlebih dahulu.",
 "GitHub token saved in the encrypted vault.": "Token GitHub disimpan dalam peti besi yang disulitkan.",
 "GitHub token removed.": "Token GitHub telah dialih keluar.",
@@ -3149,8 +3155,9 @@
 "These settings are copied from the chosen workspace to every other member when you press Apply. Each member records what it received in its signed journal; an observing workspace keeps its IP mode until it is paused.": "Pengesetan ini disalin daripada ruang kerja yang dipilih ke setiap ahli lain apabila anda menekan Terapkan. Setiap ahli merekodkan apa yang diterimanya dalam jurnal yang ditandatangani; ruang kerja pemerhati mengekalkan mod IP sehingga ia dihentikan.",
 "Choose what the group shares under Shared settings.": "Pilih apa yang dikongsi oleh kumpulan di bawah Tetapan Bersama.",
 "Apply to members": "Terpakai kepada ahli",
-"Settings copied to {n} workspaces.": "Tetapan disalin ke {n} ruang kerja.",
-"{n} kept their IP mode while observing.": "{n} mengekalkan mod IP mereka semasa memerhati.",
+"Settings copied to {n} workspaces.": {
+"other": "Tetapan disalin ke {n} ruang kerja."
+},
 "New name for this group:": "Nama baru untuk kumpulan ini:",
 "Delete group": "Padam kumpulan",
 "Delete the group \"{name}\"? Its workspaces stay and lose only the grouping.": "Padam kumpulan \"{name}\"? Ruang kerjanya kekal dan hanya kehilangan pengelompokan.",
@@ -3166,7 +3173,9 @@
 "Enter the API pair as ID:Hash, or leave it empty.": "Masukkan pasangan API sebagai ID:Hash, atau biarkan kosong.",
 "Importing…": "Sedang mengimport…",
 "{done} of {total} imported": "{done} daripada {total} telah diimport",
-"{n} accounts imported.": "{n} akaun telah diimport.",
+"{n} accounts imported.": {
+"other": "{n} akaun diimport."
+},
 "Name of the new group:": "Nama kumpulan baru:",
 "Group created. Move workspaces into it or import accounts.": "Kumpulan telah dibuat. Pindahkan ruang kerja ke dalamnya atau import akaun.",
 "Unknown bundled list.": "Senarai bundel tidak diketahui.",
@@ -3308,5 +3317,14 @@
 "A country cannot be preferred and avoided at once.": "Sesebuah negara tidak boleh diutamakan dan dielakkan pada masa yang sama.",
 "Choose at least one preferred country to use only those.": "Pilih sekurang-kurangnya satu negara pilihan untuk digunakan sahaja.",
 "Country choices need country lookups. Switch on Look up server countries.": "Pilihan negara memerlukan carian negara. Aktifkan Carian Negara Pelayan.",
-"Save these settings": "Simpan tetapan ini"
+"Save these settings": "Simpan tetapan ini",
+"Lists updated: {n} source.": "Senarai dikemas kini: {n} sumber.",
+"{n} server added from your files.": "{n} pelayan ditambah daripada fail anda.",
+"{n} server added.": "{n} pelayan ditambah.",
+"Settings copied to {n} workspace.": "Tetapan disalin ke {n} ruang kerja.",
+"{n} workspaces kept their IP mode while observing.": {
+"other": "{n} ruang kerja mengekalkan mod IPnya semasa memerhati."
+},
+"{n} workspace kept its IP mode while observing.": "{n} ruang kerja mengekalkan mod IPnya semasa memerhati.",
+"{n} account imported.": "{n} akaun diimport."
 }

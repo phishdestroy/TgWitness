@@ -3143,14 +3143,23 @@
 "All countries": "Tüm ülkeler",
 "All lists": "Tüm listeler",
 "Checking every server. Results appear as they come in.": "Her sunucuyu kontrol etme. Sonuçlar geldikçe görüntülenir.",
-"Lists updated: {n} sources.": "Güncellenen listeler: {n} kaynak.",
+"Lists updated: {n} sources.": {
+"one": "Güncellenen listeler: {n} kaynak.",
+"other": "Güncellenen listeler: {n} kaynak."
+},
 "List removed.": "Liste kaldırıldı.",
 "List added. It is downloaded with the next list update.": "Liste eklendi. Bir sonraki liste güncellemesinde indirilecektir.",
 "{name}: a list may have at most 1 MiB.": "{name}: Bir listenin boyutu en fazla 1 MiB olabilir.",
-"{n} servers added from your files.": "Dosyalarınızdan {n} sunucu eklendi.",
+"{n} servers added from your files.": {
+"one": "Dosyalarınızdan {n} sunucu eklendi.",
+"other": "Dosyalarınızdan eklenen {n} sunucu."
+},
 "Paste at least one proxy link.": "En az bir proxy bağlantısı yapıştırın.",
 "Pasted links": "Yapıştırılan bağlantılar",
-"{n} servers added.": "{n} sunucu eklendi.",
+"{n} servers added.": {
+"one": "{n} sunucu eklendi.",
+"other": "{n} sunucu eklendi."
+},
 "Paste a GitHub token first.": "Önce bir GitHub jetonunu yapıştırın.",
 "GitHub token saved in the encrypted vault.": "GitHub jetonu şifreli kasada saklanır.",
 "GitHub token removed.": "GitHub jetonu kaldırıldı.",
@@ -3166,8 +3175,10 @@
 "These settings are copied from the chosen workspace to every other member when you press Apply. Each member records what it received in its signed journal; an observing workspace keeps its IP mode until it is paused.": "Uygula düğmesine bastığınızda bu ayarlar, seçilen çalışma alanından diğer tüm üyelere kopyalanır. Her üye, aldığı verileri imzalı günlüğüne kaydeder; gözlemci bir çalışma alanı, duraklatılana kadar IP modunu korur.",
 "Choose what the group shares under Shared settings.": "Grubun neyi paylaşacağını \"Paylaşılan ayarlar\" altında seçin.",
 "Apply to members": "Üyelere uygula",
-"Settings copied to {n} workspaces.": "Ayarlar {n} çalışma alanına kopyalandı.",
-"{n} kept their IP mode while observing.": "{n}, gözlem yaparken IP modunu korudu.",
+"Settings copied to {n} workspaces.": {
+"one": "Ayarlar {n} çalışma alanına kopyalandı.",
+"other": "Ayarlar {n} çalışma alanına kopyalandı."
+},
 "New name for this group:": "Bu grup için yeni ad:",
 "Delete group": "Grubu sil",
 "Delete the group \"{name}\"? Its workspaces stay and lose only the grouping.": "\"{name}\" grubunu silmek istiyor musunuz? Çalışma alanları kalır ve yalnızca gruplandırma kaldırılır.",
@@ -3184,7 +3195,10 @@
 "Enter the API pair as ID:Hash, or leave it empty.": "API çiftini ID:Hash biçiminde girin veya boş bırakın.",
 "Importing…": "İçe aktarılıyor…",
 "{done} of {total} imported": "{total}'ün {done}'si içe aktarıldı",
-"{n} accounts imported.": "{n} hesap içe aktarıldı.",
+"{n} accounts imported.": {
+"one": "{n} hesap içe aktarıldı.",
+"other": "{n} hesap içe aktarıldı."
+},
 "Name of the new group:": "Yeni grubun adı:",
 "Group created. Move workspaces into it or import accounts.": "Grup oluşturuldu. Çalışma alanlarını bu gruba taşıyın veya hesapları içe aktarın.",
 "Unknown bundled list.": "Bilinmeyen paketlenmiş liste.",
@@ -3326,5 +3340,15 @@
 "A country cannot be preferred and avoided at once.": "Bir ülke hem tercih edilebilir hem de kaçınılabilir olarak ayarlanamaz.",
 "Choose at least one preferred country to use only those.": "Yalnızca bunları kullanmak için en az bir tercih ettiğiniz ülke seçin.",
 "Country choices need country lookups. Switch on Look up server countries.": "Ülke seçimleri için ülke araması yapılması gerekir. \"Sunucu ülkelerini ara\" seçeneğini etkinleştirin.",
-"Save these settings": "Bu ayarları kaydet"
+"Save these settings": "Bu ayarları kaydet",
+"Lists updated: {n} source.": "Güncellenen listeler: {n} kaynak.",
+"{n} server added from your files.": "Dosyalarınızdan {n} sunucu eklendi.",
+"{n} server added.": "{n} sunucu eklendi.",
+"Settings copied to {n} workspace.": "Ayarlar {n} çalışma alanına kopyalandı.",
+"{n} workspaces kept their IP mode while observing.": {
+"one": "{n} çalışma alanı, gözlem sırasında IP modunu korumuştur.",
+"other": "{n} çalışma alanı, gözlem yaparken IP modunu korumuştur."
+},
+"{n} workspace kept its IP mode while observing.": "{n} çalışma alanı, gözlem sırasında IP modunu korumuştur.",
+"{n} account imported.": "{n} hesap içe aktarıldı."
 }

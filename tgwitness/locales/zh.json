@@ -3126,14 +3126,20 @@
 "All countries": "所有国家",
 "All lists": "所有列表",
 "Checking every server. Results appear as they come in.": "检查每个服务器。结果会随数据接收实时显示。",
-"Lists updated: {n} sources.": "已更新的列表：{n} 个来源。",
+"Lists updated: {n} sources.": {
+"other": "已更新的列表：{n} 个来源。"
+},
 "List removed.": "列表已删除。",
 "List added. It is downloaded with the next list update.": "列表已添加。该列表将在下次列表更新时下载。",
 "{name}: a list may have at most 1 MiB.": "{name}：一个列表的最大容量为 1 MiB。",
-"{n} servers added from your files.": "从您的文件中添加了{n}台服务器。",
+"{n} servers added from your files.": {
+"other": "从您的文件中添加了 {n} 台服务器。"
+},
 "Paste at least one proxy link.": "请粘贴至少一个代理链接。",
 "Pasted links": "粘贴的链接",
-"{n} servers added.": "已添加 {n} 台服务器。",
+"{n} servers added.": {
+"other": "已添加 {n} 台服务器。"
+},
 "Paste a GitHub token first.": "请先粘贴一个 GitHub 令牌。",
 "GitHub token saved in the encrypted vault.": "GitHub 令牌保存在加密保险库中。",
 "GitHub token removed.": "已移除 GitHub 令牌。",
@@ -3149,8 +3155,9 @@
 "These settings are copied from the chosen workspace to every other member when you press Apply. Each member records what it received in its signed journal; an observing workspace keeps its IP mode until it is paused.": "当您点击“应用”时，这些设置将从所选工作区复制到所有其他成员。每个成员都会将其接收的内容记录在其签名日志中；观察工作区将保持其 IP 模式，直到被暂停为止。",
 "Choose what the group shares under Shared settings.": "在“共享设置”下选择该组要共享的内容。",
 "Apply to members": "应用到成员",
-"Settings copied to {n} workspaces.": "已将设置复制到 {n} 个工作区。",
-"{n} kept their IP mode while observing.": "{n} 在观察期间保持了其 IP 模式。",
+"Settings copied to {n} workspaces.": {
+"other": "已将设置复制到 {n} 个工作区。"
+},
 "New name for this group:": "此组的新名称：",
 "Delete group": "删除组",
 "Delete the group \"{name}\"? Its workspaces stay and lose only the grouping.": "删除组“{name}”？其工作区将保留，仅解除分组关系。",
@@ -3166,7 +3173,9 @@
 "Enter the API pair as ID:Hash, or leave it empty.": "请以 ID:Hash 的格式输入 API 凭据对，或留空。",
 "Importing…": "正在导入……",
 "{done} of {total} imported": "已导入 {done} 个（共 {total} 个）",
-"{n} accounts imported.": "已导入 {n} 个账户。",
+"{n} accounts imported.": {
+"other": "已导入 {n} 个账户。"
+},
 "Name of the new group:": "新组的名称：",
 "Group created. Move workspaces into it or import accounts.": "组已创建。将工作区移入其中或导入账户。",
 "Unknown bundled list.": "未知捆绑列表。",
@@ -3308,5 +3317,14 @@
 "A country cannot be preferred and avoided at once.": "无法同时将某个国家设为首选和避开。",
 "Choose at least one preferred country to use only those.": "请至少选择一个首选国家/地区，以便仅使用该国家/地区的服务器。",
 "Country choices need country lookups. Switch on Look up server countries.": "国家/地区选择需要进行国家/地区查询。请开启“查询服务器所在国家/地区”功能。",
-"Save these settings": "保存这些设置"
+"Save these settings": "保存这些设置",
+"Lists updated: {n} source.": "已更新的列表：{n} 个来源。",
+"{n} server added from your files.": "从您的文件中添加了 {n} 台服务器。",
+"{n} server added.": "已添加 {n} 台服务器。",
+"Settings copied to {n} workspace.": "已将设置复制到 {n} 个工作区。",
+"{n} workspaces kept their IP mode while observing.": {
+"other": "{n} 个工作区在观察期间保留了其 IP 模式。"
+},
+"{n} workspace kept its IP mode while observing.": "{n} 个工作区在观察期间保留了其 IP 模式。",
+"{n} account imported.": "已导入 {n} 个账户。"
 }

@@ -3126,14 +3126,20 @@
 "All countries": "すべての国",
 "All lists": "すべてのリスト",
 "Checking every server. Results appear as they come in.": "すべてのサーバーのチェック。結果は入ってくる順に表示されます。",
-"Lists updated: {n} sources.": "リストの更新状況：{n}件のソース。",
+"Lists updated: {n} sources.": {
+"other": "更新されたリスト：{n}つのソース。"
+},
 "List removed.": "リストが削除されました。",
 "List added. It is downloaded with the next list update.": "リストが追加されました。次回のリスト更新時にダウンロードされます。",
 "{name}: a list may have at most 1 MiB.": "{name}：リストの最大サイズは 1 MiB です。",
-"{n} servers added from your files.": "ファイルから{n}台のサーバーが追加されました。",
+"{n} servers added from your files.": {
+"other": "ファイルから{n}台のサーバーが追加されました。"
+},
 "Paste at least one proxy link.": "少なくとも1つのプロキシリンクを貼り付けてください。",
 "Pasted links": "貼り付けられたリンク",
-"{n} servers added.": "{n}台のサーバーが追加されました。",
+"{n} servers added.": {
+"other": "サーバーが{n}台追加されました。"
+},
 "Paste a GitHub token first.": "まず、GitHubトークンを貼り付けてください。",
 "GitHub token saved in the encrypted vault.": "GitHubトークンは、暗号化された保管庫に保存されます。",
 "GitHub token removed.": "GitHubトークンが削除されました。",
@@ -3149,8 +3155,9 @@
 "These settings are copied from the chosen workspace to every other member when you press Apply. Each member records what it received in its signed journal; an observing workspace keeps its IP mode until it is paused.": "「適用」ボタンを押すと、選択したワークスペースの設定が他のすべてのメンバーにコピーされます。各メンバーは受け取った内容を署名付きジャーナルに記録します。また、観測用ワークスペースは、一時停止されるまでIPモードを維持します。",
 "Choose what the group shares under Shared settings.": "「共有設定」で、グループが共有する項目を選択してください。",
 "Apply to members": "メンバーに適用",
-"Settings copied to {n} workspaces.": "{n}のワークスペースに設定がコピーされました。",
-"{n} kept their IP mode while observing.": "{n}は、観察中もIPモードを維持していました。",
+"Settings copied to {n} workspaces.": {
+"other": "{n}つのワークスペースに設定がコピーされました。"
+},
 "New name for this group:": "このグループの新しい名前：",
 "Delete group": "グループの削除",
 "Delete the group \"{name}\"? Its workspaces stay and lose only the grouping.": "グループ「{name}」を削除しますか？そのワークスペースは残りますが、グループ化は解除されます。",
@@ -3166,7 +3173,9 @@
 "Enter the API pair as ID:Hash, or leave it empty.": "APIペアを「ID:Hash」の形式で入力するか、空欄のままにしてください。",
 "Importing…": "インポート中…",
 "{done} of {total} imported": "{total}件中{done}件がインポートされました",
-"{n} accounts imported.": "{n}件のアカウントがインポートされました。",
+"{n} accounts imported.": {
+"other": "{n}つのアカウントがインポートされました。"
+},
 "Name of the new group:": "新しいグループの名前：",
 "Group created. Move workspaces into it or import accounts.": "グループが作成されました。ワークスペースをこのグループに移動するか、アカウントをインポートしてください。",
 "Unknown bundled list.": "不明なバンドルリストです。",
@@ -3308,5 +3317,14 @@
 "A country cannot be preferred and avoided at once.": "1つの国を、優先対象と回避対象に同時に設定することはできません。",
 "Choose at least one preferred country to use only those.": "優先する国を少なくとも1つ選択すると、それらの国のみが使用されます。",
 "Country choices need country lookups. Switch on Look up server countries.": "国の選択には、国の検索が必要です。「サーバーの国を検索」をオンにしてください。",
-"Save these settings": "これらの設定を保存"
+"Save these settings": "これらの設定を保存",
+"Lists updated: {n} source.": "更新されたリスト：{n}つのソース。",
+"{n} server added from your files.": "ファイルから{n}台のサーバーが追加されました。",
+"{n} server added.": "サーバーが{n}台追加されました。",
+"Settings copied to {n} workspace.": "{n}つのワークスペースに設定がコピーされました。",
+"{n} workspaces kept their IP mode while observing.": {
+"other": "{n}つのワークスペースは、監視中にIPモードを維持しました。"
+},
+"{n} workspace kept its IP mode while observing.": "{n}つのワークスペースは、監視中にIPモードを維持しました。",
+"{n} account imported.": "{n}つのアカウントがインポートされました。"
 }

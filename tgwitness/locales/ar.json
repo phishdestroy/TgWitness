@@ -3211,14 +3211,35 @@
 "All countries": "جميع البلدان",
 "All lists": "جميع القوائم",
 "Checking every server. Results appear as they come in.": "فحص كل خادم. تظهر النتائج فور وصولها.",
-"Lists updated: {n} sources.": "القوائم التي تم تحديثها: {n} مصدرًا.",
+"Lists updated: {n} sources.": {
+"one": "القوائم التي تم تحديثها: مصدر واحد ({n}).",
+"few": "القوائم التي تم تحديثها: {n} مصادر.",
+"two": "القوائم التي تم تحديثها: مصدران ({n}).",
+"many": "القوائم التي تم تحديثها: {n} مصدرًا.",
+"other": "القوائم التي تم تحديثها: {n} مصدر.",
+"zero": "القوائم التي تم تحديثها: {n} مصدر."
+},
 "List removed.": "تمت إزالة القائمة.",
 "List added. It is downloaded with the next list update.": "تمت إضافة القائمة. وسيتم تنزيلها مع التحديث التالي للقائمة.",
 "{name}: a list may have at most 1 MiB.": "{name}: قد يصل حجم القائمة إلى 1 ميغابايت كحد أقصى.",
-"{n} servers added from your files.": "تمت إضافة {n} خادمًا من ملفاتك.",
+"{n} servers added from your files.": {
+"one": "تمت إضافة خادم {n} من ملفاتك.",
+"few": "تمت إضافة {n} خوادم من ملفاتك.",
+"two": "تمت إضافة خادمين {n} من ملفاتك.",
+"many": "تمت إضافة {n} خادمًا من ملفاتك.",
+"other": "تمت إضافة {n} خادم من ملفاتك.",
+"zero": "تمت إضافة {n} خادم من ملفاتك."
+},
 "Paste at least one proxy link.": "الصق رابط بروكسي واحدًا على الأقل.",
 "Pasted links": "الروابط الملصقة",
-"{n} servers added.": "تمت إضافة {n} خادمًا.",
+"{n} servers added.": {
+"one": "تمت إضافة خادم {n}.",
+"few": "تمت إضافة {n} خوادم.",
+"two": "تمت إضافة خادمين {n}.",
+"many": "تمت إضافة {n} خادمًا.",
+"other": "تمت إضافة {n} خادم.",
+"zero": "تمت إضافة {n} خادم."
+},
 "Paste a GitHub token first.": "الصق رمز GitHub أولاً.",
 "GitHub token saved in the encrypted vault.": "يتم حفظ رمز GitHub في الخزينة المشفرة.",
 "GitHub token removed.": "تمت إزالة رمز GitHub.",
@@ -3234,8 +3255,14 @@
 "These settings are copied from the chosen workspace to every other member when you press Apply. Each member records what it received in its signed journal; an observing workspace keeps its IP mode until it is paused.": "يتم نسخ هذه الإعدادات من مساحة العمل المختارة إلى كل عضو آخر عند الضغط على «تطبيق». يسجل كل عضو ما تلقّاه في سجله الموقّع؛ وتحتفظ مساحة العمل المراقبة بوضع IP الخاص بها حتى يتم إيقافها مؤقتًا.",
 "Choose what the group shares under Shared settings.": "اختر ما تشاركه المجموعة ضمن «الإعدادات المشتركة».",
 "Apply to members": "تطبيق على الأعضاء",
-"Settings copied to {n} workspaces.": "تم نسخ الإعدادات إلى {n} مساحة عمل.",
-"{n} kept their IP mode while observing.": "{n} احتفظوا بوضع IP الخاص بهم أثناء المراقبة.",
+"Settings copied to {n} workspaces.": {
+"one": "تم نسخ الإعدادات إلى مساحة عمل واحدة ({n}).",
+"few": "تم نسخ الإعدادات إلى {n} مساحات عمل.",
+"two": "تم نسخ الإعدادات إلى{n} مساحات عمل.",
+"many": "تم نسخ الإعدادات إلى {n} مساحة عمل.",
+"other": "تم نسخ الإعدادات إلى {n} مساحة عمل.",
+"zero": "تم نسخ الإعدادات إلى {n} مساحة عمل."
+},
 "New name for this group:": "الاسم الجديد لهذه المجموعة:",
 "Delete group": "حذف المجموعة",
 "Delete the group \"{name}\"? Its workspaces stay and lose only the grouping.": "هل تريد حذف المجموعة «{name}»؟ ستبقى مساحات العمل التابعة لها، وستفقد المجموعة تجميعها فقط.",
@@ -3256,7 +3283,14 @@
 "Enter the API pair as ID:Hash, or leave it empty.": "أدخل زوج بيانات اعتماد واجهة برمجة التطبيقات (API) بالصيغة ID:Hash، أو اتركه فارغًا.",
 "Importing…": "جاري الاستيراد…",
 "{done} of {total} imported": "تم استيراد {done} من أصل {total}",
-"{n} accounts imported.": "تم استيراد {n} حسابًا.",
+"{n} accounts imported.": {
+"one": "تم استيراد حساب {n}.",
+"few": "تم استيراد {n} حسابات.",
+"two": "تم استيراد حسابين {n}.",
+"many": "تم استيراد {n} حسابًا.",
+"other": "تم استيراد {n} حساب.",
+"zero": "تم استيراد {n} حساب."
+},
 "Name of the new group:": "اسم المجموعة الجديدة:",
 "Group created. Move workspaces into it or import accounts.": "تم إنشاء المجموعة. انقل مساحات العمل إليها أو استورد الحسابات.",
 "Unknown bundled list.": "قائمة مجمعة غير معروفة.",
@@ -3398,5 +3432,19 @@
 "A country cannot be preferred and avoided at once.": "لا يمكن تفضيل بلد ما وتجنبه في آن واحد.",
 "Choose at least one preferred country to use only those.": "اختر دولة مفضلة واحدة على الأقل لاستخدام تلك الدول فقط.",
 "Country choices need country lookups. Switch on Look up server countries.": "تتطلب خيارات البلد إجراء عمليات بحث عن البلدان. قم بتشغيل خيار «البحث عن بلدان الخوادم».",
-"Save these settings": "حفظ هذه الإعدادات"
+"Save these settings": "حفظ هذه الإعدادات",
+"Lists updated: {n} source.": "القوائم التي تم تحديثها: مصدر واحد ({n}).",
+"{n} server added from your files.": "تمت إضافة خادم {n} من ملفاتك.",
+"{n} server added.": "تمت إضافة خادم {n}.",
+"Settings copied to {n} workspace.": "تم نسخ الإعدادات إلى مساحة عمل واحدة ({n}).",
+"{n} workspaces kept their IP mode while observing.": {
+"one": "احتفظت مساحة العمل {n} بوضع IP الخاص بها أثناء المراقبة.",
+"few": "احتفظت {n} مساحات عمل بوضع IP الخاص بها أثناء المراقبة.",
+"two": "احتفظت {n} مساحات عمل بوضع IP الخاص بها أثناء المراقبة.",
+"many": "حافظت {n} مساحة عمل على وضع IP الخاص بها أثناء المراقبة.",
+"other": "احتفظت {n} مساحة عمل بوضع IP الخاص بها أثناء المراقبة.",
+"zero": "{n} مساحة عمل احتفظت بوضع IP الخاص بها أثناء المراقبة."
+},
+"{n} workspace kept its IP mode while observing.": "احتفظت مساحة العمل {n} بوضع IP الخاص بها أثناء المراقبة.",
+"{n} account imported.": "تم استيراد حساب {n}."
 }
