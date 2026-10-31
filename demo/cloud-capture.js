@@ -1,5 +1,3 @@
-/* Shared browser-only capture wizard for the workspace and the standalone page.
-   Keys stay in this closure. No fetch, telemetry, localStorage or Telegram credentials. */
 (() => {
   "use strict";
   const root = document.querySelector("[data-capture-wizard]");
@@ -44,8 +42,9 @@
       <h1>${t("Capture a chat through GitHub", "Выгрузка чата через GitHub")}</h1>
       <p class="page-description">${t("Collect a Telegram chat on a temporary runner. Receive an encrypted archive and GitHub provenance.", "Выгрузите чат Telegram на временной машине. Получите зашифрованный архив и аттестацию GitHub.")}</p></div>
       <label class="capture-language"><span>${t("Language", "Язык")}</span><select id="capture-language"><option value="en" ${lang === "en" ? "selected" : ""}>English</option><option value="ru" ${lang === "ru" ? "selected" : ""}>Русский</option></select></label></div>
+      <div data-capture-story></div><div class="capture-setup-heading" id="capture-setup" tabindex="-1"><h2>${t("Capture your chat", "Выгрузка чата")}</h2><p>${t("Follow these four steps. Keep this tab open.", "Четыре шага. Оставьте эту вкладку открытой.")}</p></div>
       <div class="capture-layout"><aside class="capture-rail"><ol class="capture-steps" aria-label="${t("Capture steps", "Шаги выгрузки")}">${titles.map((title, i) => `<li><button type="button" data-capture-step="${i+1}" ${state.busy || (i > 0 && !ready()) ? "disabled" : ""} ${state.step === i+1 ? 'aria-current="step"' : ""}><span class="capture-number">${i+1}</span><span><strong>${title}</strong><small>${subtitles[i]}</small></span></button></li>`).join("")}</ol>
-      <div class="capture-private">${icon("lock")}<p>${t("Your private key and decrypted files stay in this browser. Save the key file before continuing.", "Закрытый ключ и расшифрованные файлы остаются в этом браузере. Сохраните файл ключа перед продолжением.")}</p></div>
+      <div class="capture-private">${icon("lock")}<p>${t("Your private key stays here. Save it before continuing.", "Закрытый ключ остаётся здесь. Сохраните его перед продолжением.")}</p></div>
       <a id="instructions" class="text-link" href="https://github.com/phishdestroy/TgWitness/blob/main/docs/${lang === "ru" ? "ru/" : ""}SEALED-ACTIONS.md" target="_blank" rel="noopener noreferrer">${t("Full instructions", "Подробная инструкция")}</a></aside>
       <div class="capture-work"><section class="card capture-card" aria-labelledby="capture-step-title" aria-busy="${state.busy}"><div class="capture-step-heading"><span class="eyebrow">${t("STEP", "ШАГ")} ${state.step} / 4</span><h2 id="capture-step-title" tabindex="-1">${titles[state.step-1]}</h2></div>
       <p id="capture-error" class="notice error" role="alert" ${state.error ? "" : "hidden"}>${esc(state.error)}</p>
@@ -55,12 +54,13 @@
       ${state.key ? button("reset", t("Start a new capture", "Начать новую выгрузку"), "quiet capture-reset") : ""}</div></div>`;
     root.querySelector("#recipient")?.setAttribute("aria-label", t("Public encryption key", "Открытый ключ шифрования"));
     const recipient = root.querySelector("#recipient"); if (recipient) recipient.value = state.key?.recipient || "";
+    window.TgWitnessCaptureStory?.mount(root.querySelector("[data-capture-story]"), lang);
     if (focus) root.querySelector("#capture-step-title").focus({preventScroll:true});
   }
   function keyStep() {
-    return `<p class="capture-lead">${t("Only this key can open your connection and archive. Create it here, then keep the downloaded file somewhere safe.", "Только этот ключ откроет подключение и готовый архив. Создайте его здесь и сохраните скачанный файл в надёжном месте.")}</p>
+    return `<p class="capture-lead">${t("Save this key to open the connection and archive.", "Сохраните ключ: он нужен для подключения и расшифровки архива.")}</p>
       ${state.key ? `<div class="capture-success">${icon("check")}<div><strong>${t("Your key is ready", "Ключ готов")}</strong><p>sealed-key.json</p></div>${button("save-key", t("Save again", "Скачать ещё раз"), "secondary")}</div>
-      <label class="check-label capture-confirm"><input id="capture-key-saved" type="checkbox" ${state.saved ? "checked" : ""}>${t("I have saved sealed-key.json. I understand that a lost key cannot be recovered.", "Я сохранил sealed-key.json. Понимаю, что потерянный ключ нельзя восстановить.")}</label>` :
+      <label class="check-label capture-confirm"><input id="capture-key-saved" type="checkbox" ${state.saved ? "checked" : ""}>${t("I saved sealed-key.json. A lost key cannot be recovered.", "Я сохранил sealed-key.json. Потерянный ключ не восстановить.")}</label>` :
       `<div class="capture-key-hero">${icon("lock")}<div><strong>${t("A key just for this capture", "Ключ только для этой выгрузки")}</strong><p>${t("Created on your device. Never sent to GitHub.", "Создаётся на вашем устройстве. Не отправляется в GitHub.")}</p></div></div>
       ${button("generate", icon("lock") + t("Create and save key", "Создать и сохранить ключ"))}`}
       <div class="capture-import"><p>${t("Already have a key? Open the saved file.", "Ключ уже есть? Откройте сохранённый файл.")}</p><label class="capture-file-button secondary" for="key-file">${icon("file")}${t("Choose key file", "Выбрать файл ключа")}<input class="capture-file-input" id="key-file" type="file" accept=".json" ${state.busy ? "disabled" : ""}></label></div>
@@ -68,8 +68,8 @@
       ${state.key ? button("result", t("I already have an archive", "У меня уже есть архив"), "quiet", !ready()) : ""}</div>`;
   }
   function githubStep() {
-    return `<p class="capture-lead">${t("GitHub will run a temporary copy of the collector. Complete these steps in a new tab, then return here.", "GitHub запустит временную копию сборщика. Выполните эти действия в новой вкладке, затем вернитесь сюда.")}</p>
-      <ol class="capture-checklist"><li><strong>${t("Create your own fork", "Создайте свой форк")}</strong><p>${t("A fork is a copy of the project code in your GitHub account. Your chats are not copied into the repository.", "Форк — копия кода проекта в вашем GitHub-аккаунте. Переписка в репозиторий не копируется.")}</p>${link("https://github.com/phishdestroy/TgWitness/fork", t("Create a fork", "Создать форк"))}</li>
+    return `<p class="capture-lead">${t("Start the collector on GitHub, then return here.", "Запустите сборщик в GitHub и вернитесь сюда.")}</p>
+      <ol class="capture-checklist"><li><strong>${t("Create your own fork", "Создайте свой форк")}</strong><p>${t("Copy the code to your GitHub account. The repository contains no chats.", "Форк — копия кода в вашем GitHub. Переписка туда не попадает.")}</p>${link("https://github.com/phishdestroy/TgWitness/fork", t("Create a fork", "Создать форк"))}</li>
       <li><strong>${t("Copy the public key", "Скопируйте открытый ключ")}</strong><p>${t("Paste this value into recipient in the GitHub form. Keep sealed-key.json on your device.", "Вставьте это значение в поле recipient в GitHub. Файл sealed-key.json оставьте у себя.")}</p><div class="capture-copy"><textarea id="recipient" rows="3" readonly></textarea>${button("copy", t("Copy", "Копировать"), "secondary")}</div></li>
       <li><strong>${t("Run Sealed chat capture", "Запустите Sealed chat capture")}</strong><p>${t("Enable Actions in your fork. Open the workflow, press Run workflow, paste recipient and choose 30, 60 or 120 minutes.", "Включите Actions в своём форке. Откройте workflow, нажмите Run workflow, вставьте recipient и выберите 30, 60 или 120 минут.")}</p>
       <label for="capture-repository">${t("Your fork (optional shortcut)", "Ваш форк (для быстрого перехода)")}</label><input id="capture-repository" placeholder="username/TgWitness" value="${esc(state.repository)}" autocomplete="off" spellcheck="false" maxlength="160">
@@ -83,7 +83,7 @@
       <label class="capture-file-picker" for="connection-file">${icon("file")}<strong>${t("Open connection.tgwsealed", "Открыть connection.tgwsealed")}</strong><span>${t("The connection is decrypted on this device.", "Подключение расшифровывается на этом устройстве.")}</span><input class="capture-file-input" id="connection-file" type="file" accept=".tgwsealed" ${state.busy ? "disabled" : ""}></label>
       ${state.connection ? `<div class="capture-success">${icon("check")}<div><strong>${t("Your temporary panel is ready", "Временная панель готова")}</strong><p>${t("Open it, sign in to Telegram, select one chat and start capture.", "Откройте её, войдите в Telegram, выберите один чат и начните сбор.")}</p></div></div>
       ${link(state.connection.url, t("Sign in to Telegram and choose a chat", "Войти в Telegram и выбрать чат"), "primary", "open-connection")}
-      <p class="hint">${t("A new tab opens. When capture finishes, return to step 4 here. Keep the panel link private.", "Откроется новая вкладка. Когда сбор закончится, вернитесь сюда на шаг 4. Не передавайте ссылку на панель посторонним.")}</p>` : ""}
+      <p class="hint">${t("After capture, return to step 4. Keep the panel link private.", "После сбора вернитесь на шаг 4. Ссылку на панель держите в секрете.")}</p>` : ""}
       <div class="capture-actions">${button("next", t("Go to the result", "Перейти к получению архива") + icon("arrow"))}${button("back", t("Back", "Назад"), "quiet")}</div>`;
   }
   function resultStep() {
@@ -187,6 +187,6 @@
       return ()=>{save(value,"delivery.zip","application/zip");state.delivered=true;};
     });
   });
-  addEventListener("tgwitness:lock",()=>{epoch++;state=initial();render();});
+  addEventListener("tgwitness:lock",()=>{epoch++;state=initial();window.TgWitnessCaptureStory?.reset();render();});
   render();
 })();
