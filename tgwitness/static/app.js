@@ -50,6 +50,7 @@ const viewReady=Promise.all([
         if(name==='sealed')window.TgWitnessCaptureStory?.pause?.();
         if(name==='parameters')parametersView?.leave();
         if(name==='evidence')exportsView?.leave();
+        if(name==='system-log')systemLogView?.leave();
       },
       resetSession(){top=0;scrolls=[];viewContexts.delete(name);resetViewContent(name);},
     });
@@ -65,10 +66,11 @@ function resetViewContent(view){
   if(view==='accounts')accountsView?.resetSession();
   if(view==='witness'){state.evidenceDirty=false;state.replicaDirty=false;state.alertsDirty=false;}
   if(view==='sealed')window.TgWitnessCapture?.reset();
-  if(view==='access'){accessFormReady=false;adminLimitsReady=false;adminLimitsDirty=false;accessLoadSerial++;
+  if(view==='system-log')systemLogView?.resetSession();
+  if(view==='access'){accessView?.resetSession();accessFormVersion++;adminLimitsVersion++;accessFormReady=false;adminLimitsReady=false;adminLimitsDirty=false;accessLoadSerial++;
     state.access=null;state.accessEdit=null;state.accessChats={};state.consoleAfter=0;show('access-new',false);}
   const clear={observations:['events-body'],chats:['chats-list','chat-feed','chat-people','chat-about'],accounts:['accounts-list','fleet-groups'],
-    access:['access-console','access-list','access-sessions-list','access-token'],
+    access:['access-list','access-sessions-list','access-token'],'system-log':['access-console'],
     connection:['profiles-list'],witness:['witness-list','github-result','cloud-health','alerts-saved','evidence-status','replica-status'],
     integrations:['webhook-list','webhook-history','webhook-chats']}[view]||[];
   for(const id of clear)$(id)?.replaceChildren();
@@ -81,6 +83,7 @@ async function loadPanelView(view){
   else if(view==='chats')await refreshChats(true);
   else if(view==='observations')await refreshEvents();
   else if(view==='access')await loadAccess();
+  else if(view==='system-log')await loadConsole();
   else if(view==='evidence'){renderChatExportTools();await Promise.all([loadReportSettings(),loadExports()]);}
   else if(view==='integrations')await window.TgWitnessIntegrations?.load();
   else if(view==='analysis')await window.TgWitnessAnalysis?.load();
@@ -115,6 +118,7 @@ async function applyRouteToPanel(route,current){
   }else if(view==="accounts")await loadProfiles();
   else if(view==="connection"){await loadProfiles();if(current()&&!state.status.demo)await loadPolicy();}
   else if(view==="access")await loadAccess();
+  else if(view==="system-log")await loadConsole();
   else if(view==="integrations")await window.TgWitnessIntegrations?.load();
   else if(view==="analysis")await window.TgWitnessAnalysis?.load();
   else if(view==="evidence"){renderChatExportTools();await Promise.all([loadReportSettings(),loadExports()]);}
@@ -444,7 +448,7 @@ function viewAllowed(view){
   const limited=!!state.status?.chats_limited;
   return {sources:may("sources")&&!limited,evidence:may("export")&&!limited,sealed:may("export")&&!limited,witness:may("settings")&&!limited,
     parameters:may("settings")&&!limited,connection:may("account")&&!limited,accounts:!!state.me?.admin,
-    access:!!state.me?.admin,integrations:!!state.me?.admin,
+    access:!!state.me?.admin,"system-log":!!state.me?.admin,integrations:!!state.me?.admin,
     analysis:!!(state.status?.analysis?.enabled||state.status?.analysis?.media_available)}[view]??true;
 }
 function applyAccess(){
@@ -525,7 +529,7 @@ function navigate(view,options={}) {
     n.classList.toggle("active",selected);
     if(selected)n.setAttribute("aria-current","page");else n.removeAttribute("aria-current");
   });
-  $("view-label").textContent=tr({chats:"Chats",observations:"Journal",sources:"Sources",evidence:"Exports",sealed:"Exports",witness:"Extras",parameters:"Parameters",connection:"Account",accounts:"Accounts",access:"Access",integrations:"Integrations",analysis:state.status?.analysis?.enabled?"Ask the archive":"Machine recognition"}[view]);
+  $("view-label").textContent=tr({chats:"Chats",observations:"Journal",sources:"Sources",evidence:"Exports",sealed:"Exports",witness:"Extras",parameters:"Parameters",connection:"Account",accounts:"Accounts",access:"Access","system-log":"System log",integrations:"Integrations",analysis:state.status?.analysis?.enabled?"Ask the archive":"Machine recognition"}[view]);
   show("entry-header",view==="connection");
   if(view==="connection")connectionSettings(false);
   if(options.history!==false)window.TgWitnessRouter?.record();
@@ -3444,6 +3448,7 @@ function renderAccessWorkspaces(selected){
   }
 }
 function renderAccessForm(g){
+  accessFormVersion++;
   $("access-form-mode").textContent=g?tr("Edit access"):tr("New access");
   $("access-submit").textContent=g?tr("Save access"):tr("Create access");
   show("access-cancel",!!g);
@@ -3453,7 +3458,7 @@ function renderAccessForm(g){
   $("access-uses").value=g?.max_uses??"";$("access-expires").value=localInput(g?.expires_unix);
   $("access-idle").value=g?.session_minutes??720;
   $("access-ips").value=(g?.ips||[]).join("\n");$("access-bind").checked=!!g?.bind_first_ip;
-  renderAccessWorkspaces(g?g.workspaces:{[state.profile]:null});
+  renderAccessWorkspaces(g?g.workspaces:{[state.profile]:null});accessView?.syncForm();
 }
 function accessSettings(){
   const workspaces={},box=$("access-workspaces");
@@ -3515,25 +3520,24 @@ function renderAccess(){
   }
   placeChildren(sessions,sessionRows);
 }
-async function loadConsole(){
-  const r=await json("access/console?after="+state.consoleAfter,undefined,{root:true,...viewOptions('access')}),pre=$("access-console");
-  if(state.view!=='access')return;
-  if(r.lines.length&&r.lines[0].n<=state.consoleAfter)pre.replaceChildren();
-  for(const line of r.lines){
-    const item=node("span","console-line "+line.level.toLowerCase(),
-      fmtTime(line.at)+" "+line.level.padEnd(7)+" "+line.text+"\n");
-    pre.append(item);
-  }
-  while(pre.childElementCount>3000)pre.firstElementChild.remove();
-  state.consoleAfter=r.last;
-  if(r.lines.length&&$("console-follow").checked)pre.scrollTop=pre.scrollHeight;
-}
+let accessView=null,systemLogView=null;
+const accessReady=import("./views/access.js").then(({createAccessView})=>{
+  accessView=createAccessView({root:$("view-access"),tr,navigate,localInput,getState:()=>state});return accessView;
+});
+const systemLogReady=import("./views/system-log.js").then(({createSystemLog})=>{
+  systemLogView=createSystemLog({root:$("view-system-log"),tr,json,getState:()=>state,getSession:()=>state.workspaceRevision+":"+state.profile,
+    options:()=>viewOptions('system-log'),formatTime:fmtTime,toast});return systemLogView;
+});
+accessReady.catch(error=>toast(error.message,true));systemLogReady.catch(error=>toast(error.message,true));
+async function loadConsole(){return (await systemLogReady).load();}
+let accessFormVersion=0,adminLimitsVersion=0;
 let accessFormReady=false,adminLimitsReady=false,adminLimitsDirty=false,accessLoadSerial=0;
 async function loadAccess(quiet=false){
   if(!state.me?.admin)return;
   // Build a complete new-access form before the request yields; later responses only update saved data.
   if(!accessFormReady){renderAccessForm(state.accessEdit);accessFormReady=true;}
   if(!adminLimitsReady)$("access-admin-form").inert=true;
+  const view=await accessReady;if(state.view!=='access'||!state.me?.admin)return;view.enter();
   const serial=++accessLoadSerial,result=await json("access",undefined,{root:true,...viewOptions('access')});
   if(serial!==accessLoadSerial||state.view!=='access')return;
   state.access=result;
@@ -3543,16 +3547,18 @@ async function loadAccess(quiet=false){
   }
   adminLimitsReady=true;$("access-admin-form").inert=false;
   renderAccess();
-  await loadConsole();
 }
 $("access-refresh").addEventListener("click",e=>busy(e.currentTarget,()=>loadAccess()));
 $("access-all").addEventListener("change",()=>$("access-workspaces").querySelectorAll("input,select")
   .forEach(n=>n.disabled=$("access-all").checked));
 $("access-cancel").addEventListener("click",()=>{state.accessEdit=null;renderAccessForm(null);});
-for(const event of ['input','change'])$("access-admin-form").addEventListener(event,()=>{adminLimitsDirty=true;});
+for(const event of ['input','change']){
+  $("access-admin-form").addEventListener(event,()=>{adminLimitsDirty=true;adminLimitsVersion++;});
+  $("access-form").addEventListener(event,()=>{accessFormVersion++;});
+}
 $("access-form").addEventListener("submit",event=>{event.preventDefault();busy(event.submitter,async()=>{
   accessLoadSerial++;
-  const settings=accessSettings(),edit=state.accessEdit;
+  const settings=accessSettings(),edit=state.accessEdit,version=accessFormVersion;
   if(edit){
     state.access=await json("access/grants/"+encodeURIComponent(edit.id),settings,{root:true,method:"PATCH"});
     toast(tr("Access saved. Its open sessions follow the new settings."));
@@ -3560,17 +3566,17 @@ $("access-form").addEventListener("submit",event=>{event.preventDefault();busy(e
     const result=await json("access/grants",settings,{root:true});state.access=result;
     $("access-token").textContent=result.token;show("access-new",true);toast(tr("Access created. Copy its token now."));
   }
-  state.accessEdit=null;renderAccessForm(null);renderAccess();
+  if(version===accessFormVersion&&state.accessEdit===edit){state.accessEdit=null;renderAccessForm(null);}renderAccess();
 });});
 $("access-copy").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   await navigator.clipboard.writeText($("access-token").textContent);toast(tr("Token copied."));
 }));
 $("access-admin-form").addEventListener("submit",event=>{event.preventDefault();busy(event.submitter,async()=>{
   if(!adminLimitsReady)return;
-  accessLoadSerial++;
+  accessLoadSerial++;const version=adminLimitsVersion;
   state.access=await json("access/admin",{max_sessions:Number($("admin-sessions").value),on_limit:$("admin-on-limit").value,
     session_minutes:Number($("admin-idle").value)},{root:true});
-  adminLimitsDirty=false;renderAccess();toast(tr("Limits saved."));
+  if(version===adminLimitsVersion)adminLimitsDirty=false;renderAccess();toast(tr("Limits saved."));
 });});
 let notifyTick=0,pollRevision=null;
 async function pollWorkspace(){
@@ -3585,6 +3591,7 @@ async function pollWorkspace(){
     if(state.view==="accounts") await loadProfiles();
     if(state.view==="witness") await loadExtras();
     if(state.view==="access") await loadAccess(true);
+    if(state.view==="system-log") await loadConsole();
     if(++notifyTick%3===0) await loadNotifications();
   }catch(e){if(revision===state.workspaceRevision&&!(e instanceof StaleView))$("status-chip").textContent=tr("Panel connection unavailable");}
   finally{if(pollRevision===revision)pollRevision=null;}

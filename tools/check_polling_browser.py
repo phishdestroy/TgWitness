@@ -61,8 +61,9 @@ def main():
             release_api_response(page)
             page.wait_for_function("()=>state.access!==null")
             expect(page.locator('#access-label')).to_have_value("Unsaved analyst draft")
-            page.locator('#admin-idle').evaluate("element=>element.closest('details').open=true")
+            page.locator('[data-access-tab=limits]').click()
             page.locator('#admin-idle').fill("42")
+            page.locator('[data-access-tab=grants]').click()
             assert page.evaluate("""async()=>{const field=document.querySelector('#access-label');field.focus();field.setSelectionRange(3,9);
               await loadAccess();return document.activeElement===field&&field.selectionStart===3&&field.selectionEnd===9
                 &&field.value==='Unsaved analyst draft'&&document.querySelector('#admin-idle').value==='42';}"""), "Access refresh erased a draft or selection"

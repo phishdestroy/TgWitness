@@ -1,9 +1,9 @@
 const paths={chats:"chats",observations:"journal",sources:"sources",parameters:"parameters",accounts:"accounts",
-  access:"access",integrations:"integrations",evidence:"exports",witness:"extras",connection:"account",analysis:"analysis",sealed:"sealed"};
+  access:"access","system-log":"system-log",integrations:"integrations",evidence:"exports",witness:"extras",connection:"account",analysis:"analysis",sealed:"sealed"};
 const views=Object.fromEntries(Object.entries(paths).map(([view,path])=>[path,view]));
 const legacy={account:"connection",connection:"connection",journal:"observations",observations:"observations",
   exports:"evidence",evidence:"evidence",extras:"witness",witness:"witness",sealed:"sealed",chats:"chats",
-  sources:"sources",parameters:"parameters",accounts:"accounts",access:"access",integrations:"integrations",analysis:"analysis"};
+  sources:"sources",parameters:"parameters",accounts:"accounts",access:"access","system-log":"system-log",integrations:"integrations",analysis:"analysis"};
 const cards=new Set(["alerts","evidence","cloud","bot","github"]);
 const workspacePattern=/^(?:default|[a-f0-9]{32})$/;
 const integer=value=>/^-?\d+$/.test(value||"")&&Number.isSafeInteger(Number(value))&&Number(value)!==0?Number(value):null;
