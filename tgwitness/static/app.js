@@ -202,6 +202,7 @@ const timeReady=import("./core/time.js?v=1").then(({createTimeFormatter})=>{
     updateTimes();window.dispatchEvent(new CustomEvent("tgwitness:time-zone",{detail:{zone:panelTime.zone}}));
   });
 });
+const shellReady=import("./components/shell.js?v=1").then(({createResponsiveShell})=>createResponsiveShell({node,icon,tr}));
 function fmtTime(value,options){return panelTime?.fmtTime(value,options)??tr("Not supplied");}
 function formatTime(value){return fmtTime(value);}
 function timeNode(value,cls="",mode="relative"){
@@ -284,7 +285,7 @@ function lock() {
 }
 async function unlock() {
   accessStarted=true;
-  await timeReady;
+  await Promise.all([timeReady,shellReady]);
   const router=await ensureRouter(),requested=router.parse();
   state.me = await json("access/me",undefined,{root:true});
   await loadProfiles();
@@ -3598,7 +3599,7 @@ async function pollWorkspace(){
 }
 setInterval(pollWorkspace,5000);
 async function bootstrap(){
-  await timeReady;
+  await Promise.all([timeReady,shellReady]);
   await ensureRouter();
   const revision=state.workspaceRevision;
   try{
