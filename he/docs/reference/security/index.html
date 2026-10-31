@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="he" dir="rtl" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>אבטחה וטיפול בנתונים | TgWitness</title>
+<meta name="description" content="מודל איומים, מודל גישה, מידע סודי במאגר, חשיפה ברשת, ייבוא הפעלות וכיצד לדווח על פגיעות אבטחה."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/security/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="he_IL">
+<meta property="og:title" content="אבטחה וטיפול בנתונים | TgWitness"><meta property="og:description" content="מודל איומים, מודל גישה, מידע סודי במאגר, חשיפה ברשת, ייבוא הפעלות וכיצד לדווח על פגיעות אבטחה.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/he/docs/reference/security/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/security/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/security/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/security/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/security/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/security/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/security/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/security/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/security/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/security/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/security/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/security/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/security/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/security/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/security/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/security/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/security/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/security/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/security/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/security/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/security/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/security/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/security/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/security/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/security/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/security/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/security/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/he/docs/reference/security/", "url": "https://phishdestroy.github.io/TgWitness/he/docs/reference/security/", "name": "אבטחה וטיפול בנתונים | TgWitness", "description": "מודל איומים, מודל גישה, מידע סודי במאגר, חשיפה ברשת, ייבוא הפעלות וכיצד לדווח על פגיעות אבטחה.", "inLanguage": "he", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "דף הבית", "item": "https://phishdestroy.github.io/TgWitness/he/"}, {"@type": "ListItem", "position": 2, "name": "תיעוד", "item": "https://phishdestroy.github.io/TgWitness/he/docs/"}, {"@type": "ListItem", "position": 3, "name": "הפניה", "item": "https://phishdestroy.github.io/TgWitness/he/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "אבטחה וטיפול בנתונים", "item": "https://phishdestroy.github.io/TgWitness/he/docs/reference/security/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">דלג לתוכן</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / תיעוד</span></a>
+<nav aria-label="מדריכים"><a href="../../concepts/">מדריך חזותי</a><a href="../../">כל המדריכים</a><a href="../">הפניה</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="שפה"><span aria-hidden="true">◍</span> עברית</summary><div class="lang-list"><a href="../../../../docs/reference/security/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/security/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/security/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/security/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/security/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/security/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/security/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/security/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/security/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/security/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/security/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/security/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/security/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/security/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/security/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/security/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/security/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/security/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/security/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/security/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/security/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/security/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/security/" hreflang="th" lang="th">ไทย</a><a href="./" hreflang="he" lang="he" aria-current="true">עברית</a><a href="../../../../bn/docs/reference/security/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="החלפה בין ערכת נושא בהירה לכהה"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="מדריכים"><a href="../../../guides/modes.html">מצבים, תרחישים ורמות ראיות</a><p class="nav-label">צעדים ראשונים</p><a href="../../start/">התחילו תוך דקות ספורות</a><a href="../../accounts/">חבר חשבון</a><a href="../../proxies/">בחר פרוקסי</a><a href="../../exports/">ייצוא ואימות</a><p class="nav-label">הבנת הראיות</p><a href="../../concepts/">ראו כיצד הראיות פועלות</a><a href="../../cases/">חקור בכל הצ'אטים</a><a href="../../security/">שמרו על האבטחה</a><p class="nav-label">המשך לקרוא</p><a href="../../witness/">הגדרת בוט Witness</a><a href="../../server/">המשך להפעיל את האתר</a><a href="../../troubleshooting/">גלה מה השתבש</a></nav><nav class="wiki-nav" aria-label="הפניה"><p class="nav-label"><a class="nav-label-link" href="../">הפניה</a></p><details class="wiki-group"><summary>הגדרה</summary><a href="../quickstart/">התחלה מהירה</a><a href="../accounts/">חשבונות ופורמטים של הפעלות</a><a href="../connection/">חיבור, פרוקסי והגנה על נתונים</a><a href="../deployment/">פריסה</a></details><details class="wiki-group"><summary>אסף</summary><a href="../collection/">כיצד מתבצע האיסוף</a><a href="../operations/">תהליכי עבודה ותפעול</a><a href="../investigation/">מצב חקירה</a><a href="../features/">תכונות ומגבלות</a></details><details class="wiki-group"><summary>ראיות</summary><a href="../how-it-works/">כיצד פועלת הראיה</a><a href="../evidence/">פורמט הראיות</a><a href="../witness/">עד עצמאי</a><a href="../timestamp/">חותמות זמן</a></details><details class="wiki-group" open><summary>אבטחה ופרויקט</summary><a href="./" aria-current="page">אבטחה וטיפול בנתונים</a><a href="../architecture/">ארכיטקטורה</a><a href="../verification/">מה נבדק</a><a href="../license/">הודעה בנושא הרישיון ואי־תאימות ארכיטקטונית</a><a href="../notice/">הודעה על חוסר תאימות למפעיל</a><a href="../changelog/">יומן שינויים</a></details></nav><p class="sidebar-note">v0.7.0<br>קוד פתוח · פועל על המחשב שלכם</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="מדריכים"><a href="../../../">דף הבית</a> <span aria-hidden="true">/</span> <a href="../../">תיעוד</a> <span aria-hidden="true">/</span> <a href="../">הפניה</a> <span aria-hidden="true">/</span> <span aria-current="page">אבטחה וטיפול בנתונים</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">חפש בתיעוד</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="נסו להשתמש במונחים כמו &quot;פרוקסי&quot;, &quot;שרשרת האש&quot;, &quot;אסימון&quot; או &quot;עד&quot;..." autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="חיפוש ברור" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">הקלידו מילה כדי לחפש במדריכים ובמאגר המידע. החיפוש נשאר בדפדפן שלכם.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">הפניה / אבטחה ופרויקט</p><h1>אבטחה וטיפול בנתונים</h1><p class="guide-outcome">מודל איומים, מודל גישה, מידע סודי במאגר, חשיפה ברשת, ייבוא הפעלות וכיצד לדווח על פגיעות אבטחה.</p><div class="wiki-body"><p>TgWitness פועל על המחשב או השרת שלכם. כברירת מחדל, החיבור היחיד שיוצא
+מהמערכת הוא החיבור של החשבון ל-Telegram; התראות, חותמות זמן, עותק מחוץ לאתר ו
+עדים הם מתגים נפרדים. דף זה מפרט מה מוגן, כיצד, ומה נותר
+להחלטת המפעיל.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>תחום</th>
+<th>בקיצור</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>גישה</td>
+<td>אסימון לוח אחד שולט בכל סביבת עבודה; הלוח מאזין לכתובת 127.0.0.1 כברירת מחדל</td>
+</tr>
+<tr>
+<td>סודות במנוחה</td>
+<td>ההגדרות של ההפעלה, זוג ה-API, מפתח החתימה והגדרות ה-proxy מוצפנות באמצעות Fernet</td>
+</tr>
+<tr>
+<td>הודעות ומדיה</td>
+<td>מאוחסן ללא הצפנה: יש להשתמש בהצפנת דיסק ובהגבלות גישה קפדניות</td>
+</tr>
+<tr>
+<td>יושרה</td>
+<td>שרשרת חשיש SHA-256 וחתימת Ed25519 על כל רשומה</td>
+</tr>
+<tr>
+<td>לא נכלל</td>
+<td>מנהל מערכת, אסימון לוח בקרה שהודלף, שלמות התיעוד</td>
+</tr>
+</tbody>
+</table></div>
+<p>לדיווחים על פגיעויות, ראו את <a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">מדיניות האבטחה</a>.</p>
+<h2 id="access-model">מודל גישה<a class="anchor" href="#access-model" aria-label="קישור לסעיף זה">#</a></h2>
+<p>TgWitness הוא כלי איסוף המופעל על ידי מפעיל יחיד. כל מי שמחזיק באסימון הפאנל יכול לקרוא ו
+לייצא את היומן, לשנות את היקף האיסוף ולאשר חשבון טלגרם.
+אין תפקידים, הרשאות למשתמש או בידוד דיירים. סביבות העבודה מבודדות
+את ההפעלות ואת אחסון הראיות, אך אותו אסימון פאנל שולט בכל סביבת עבודה.</p>
+<p>הפאנל מאזין כברירת מחדל ב-localhost. נקודות קצה של API לנתונים ולבקרה דורשות
+אסימון נושא (bearer token). לא נעשה שימוש בעוגיית אימות. האסימון נשמר ב-
+sessionStorage של הדפדפן ומוסר על ידי נעילת סביבת העבודה. סגירת הדפדפן או נעילת הפאנל
+אינן עוצרות את האספן. השתמש ב&quot;השהיית תצפית&quot; כדי לעצור אותו.</p>
+<p>בקשות לאישור אסימונים שנכשלו מוגבלות לכל כתובת לקוח. אסימוני פאנל ואסימוני עדים תקפים
+נשארים שמישים כאשר לקוח אחר באותה כתובת פרוקסי מגיע למגבלה זו.
+אסימון הפאנל ואסימוני העדים עדיין מעניקים יכולות נפרדות.</p>
+<h3 id="demo-access">גישה לדמו<a class="anchor" href="#demo-access" aria-label="קישור לסעיף זה">#</a></h3>
+<p><code>/api/demo-access</code> הוא בוטסטראפ שלא אומת בכוונה, המיועד להדגמה סינתטית מבודדת
+שהופעלה במפורש. הוא מנפיק יכולת נפרדת לתקופת חיי התהליך,
+לעולם לא את אסימון הפאנל האמיתי או עקיפת TGWITNESS_TOKEN. ההנפקה והשימוש דורשים
+עמית לולאה אחורית (loopback) ומארח, ללא כותרות מועברות וללא בקשות בין-מקורות.
+סביבות עבודה נוספות או הפעלה מורשית מבטלות נתיב זה. סביבות עבודה פעילות לעולם אינן מנפיקות
+את היכולת. ההדגמה אינה יכולה לחבר חשבונות או לשנות הגדרות איסוף.</p>
+<h2 id="panel-content-and-exports">תוכן הלוח וייצוא נתונים<a class="anchor" href="#panel-content-and-exports" aria-label="קישור לסעיף זה">#</a></h2>
+<p>הפאנל אינו משתמש בגופנים חיצוניים, בניתוח נתונים, במשאבי CDN או במדיה מרוחקת משובצת.
+טקסט שמקורו ב-Telegram מוחדר כטקסט, ולא כ-HTML. קבצים מצורפים שהורדו
+מוצגים כקבצים בינאריים. ייצוא בפורמט JSONL משמר את המחרוזות המקוריות; HTML מבצע
+החלפה של תווים; לתאי CSV שעלולים להפוך לנוסחאות מתווסף קידומת של גרש.</p>
+<p>הייצוא אינו כולל סודות אימות וחתימה, אך מכיל במכוון
+מטא-נתוני מקור שנאספו, מזהים, וייתכן שגם תוכן אישי או רגיש.
+במטא-נתוני המקור הגולמיים עשויים להופיע חשישים של גישה ל-Telegram והפניות לקבצים.</p>
+<h2 id="secrets-at-rest">סודות במנוחה<a class="anchor" href="#secrets-at-rest" aria-label="קישור לסעיף זה">#</a></h2>
+<p>אמצעי הזיהוי של ממשק ה-API של טלגרם, StringSession והמפתח הפרטי Ed25519 מוצפנים
+באמצעות Fernet. כברירת מחדל, המפתח מאוחסן באותה ספריית נתונים מוגנת.
+דבר זה מצמצם חשיפה מקרית של טקסט רגיל; אין מדובר בהגנה מפני תוקף
+שיכול לקרוא את הספרייה כולה. תוכן ההודעות והמדיה <strong>אינם מוצפנים</strong>
+על ידי TgWitness. יש להשתמש בהצפנת דיסק ובהרשאות מערכת הפעלה מגבילות. קבצי המפתח הפרטי של Unix
+נוצרים במצב 0600; ספריות נתונים שנוצרו לאחרונה משתמשות במצב 0700.
+הרשאות הספריות הקיימות אינן משתנות. Windows יורש את רשימות ה-ACL של הספריות: הגבל אותן
+לחשבון השירות ולמנהלים מורשים.</p>
+<h3 id="external-master-key">מפתח ראשי חיצוני<a class="anchor" href="#external-master-key" aria-label="קישור לסעיף זה">#</a></h3>
+<p>עבור ספריית נתונים חדשה, TGWITNESS_VAULT_KEY_FILE יכול לספק מפתח ראשי אקראי חיצוני.
+מפתח ראשי. HKDF-SHA256 ומלח אקראי נפרד מפיקים מפתח Fernet שונה
+עבור כל סביבת עבודה. יש לשמור את הקובץ vault.external.json לצורך שחזור. מפתחות ראשיים חסרים או
+שגויים יגרמו לכישלון. כספות מקומיות קיימות אינן מועברות באופן אוטומטי.
+התהליך הפועל יכול לגשת למפתח; אין מדובר בבידוד HSM. הלוח מדווח
+על המצב הנבחר ומציין במפורש כי אחסון הודעות/מדיה אינו מוצפן
+על ידי היישום. ראו <a href="../connection/">חיבור, פרוקסי והגנת נתונים</a>
+לקבלת מודל האיומים המלא.</p>
+<h2 id="proxies-and-network-routes">פרוקסי ונתיבי רשת<a class="anchor" href="#proxies-and-network-routes" aria-label="קישור לסעיף זה">#</a></h2>
+<p>תצורת הפרוקסי מוצפנת ב-network.enc. סיסמאות פרוקסי, שמות משתמש ו
+סודות MTProxy אינם מוחזרים על ידי ה-API ואינם נכתבים לאירועי הראיות. לכל
+סביבת עבודה יש נתיב משלה. לא מוגדרת חלופה ישירה אוטומטית. זה חל
+על העברת טלגרם, ולא על כל תעבורת המכונה או על פתרון ה-DNS של מארח הפרוקסי.
+אימות פרוקסי SOCKS ו-HTTP CONNECT רגיל אינם מוגנים ב-TLS על ידי
+פרוטוקול הפרוקסי עצמו. סודות MTProxy מזויפים ב-TLS נדחים.</p>
+<h2 id="sign-in-and-session-imports">כניסה וייבוא נתוני הפעלה<a class="anchor" href="#sign-in-and-session-imports" aria-label="קישור לסעיף זה">#</a></h2>
+<p>קבצי .tgwitness-session שהומרו מכילים סוד אימות בטקסט רגיל עד
+לטעונם ואחסונם בכספת. ממשק ה-CLI המקוון מקבל סכמות Telethon שנבדקו.
+ייבוא הפאנל מקבל בנוסף Pyrogram SQLite, ZIP של TData מודרני לחשבון יחיד,
+וקבצי JSON מתועדים. הוא מאומת, מוגבל לארבעה קבצים / 8 MiB,
+ומעבד העלאות בזיכרון ללא חילוץ ארכיונים או שמירת קבצים מקוריים.
+אישורי הכניסה המנורמלים מוחזרים רק לדפדפן המאושר המבקש;
+הם נשמרים בכספת המוצפנת לאחר אימות מוצלח ב-Telegram.
+יש להגן על הקבצים המקוריים והקבצים שהומרו, ולמנוע מלקוחות מקבילים לשכפל אישור.</p>
+<p>עיבוד הנתונים מאמת סכומי ביקורת של קונטיינרים, חשישים של פענוח מקומי ואורכי מבנה.
+קוד גישה מקומי לשולחן העבודה שסופק משמש באופן זמני ואינו נשמר.
+מנתח תחבירי מוגבל זה אינו קובע שכל גרסת שולחן עבודה תואמת.
+תמונות QR נוצרות באופן מקומי, מכילות אסימוני כניסה לטלגרם בעלי תוקף קצר, ו
+לעולם אינן נשלחות לשירות עיבוד חיצוני. נעילה, מעבר בין סביבות עבודה, כניסה חדשה,
+ושינויי מסלול מבטלים ניסיונות QR הממתינים לאישור. טעינה מחדש/סגירת כרטיסייה עלולה להשאיר
+ניסיון הממתין לאישור עד לפקיעת תוקפו. כניסה מוצלחת באמצעות QR עדיין מחייבת קישור חשבון.
+גופי API רגילים נשארים מוגבלים ל-16 KiB; מסלול הייבוא המאומת מקבל
+עד 12 MiB של JSON מקודד, תוך אכיפה נפרדת של המגבלה הקטנה יותר על קובץ מפוענח.</p>
+<p>קודי כניסה וסיסמאות לאימות דו-שלבי ב-Telegram אינם נשמרים. מצב מספר הטלפון/ה-hash של הקוד
+נשמר בזיכרון במהלך תהליך האימות. הפעלות ב-Telegram מעניקות גישה לחשבון; לעולם
+אל תעלו ספריית נתונים, הפעלה, אסימון, מפתח כספת או מפתח חתימה פרטי ל-GitHub.</p>
+<h2 id="logs-and-transport">יומנים והעברה<a class="anchor" href="#logs-and-transport" aria-label="קישור לסעיף זה">#</a></h2>
+<p>תגובת אימות ה-API המוגדרת כברירת מחדל הוחלפה כך שלא תחזור על ערכי האישורים.
+רישום הגישה ליישום מושבת. אין להגדיר פרוקסי הפוך
+כדי לרשום כותרות אימות או גופי בקשות. פרוטוקול HTTP מעביר אסימונים ופרטי התחברות
+בטקסט גלוי: יש להשתמש ב-HTTPS או במנהרת SSH בכל פעם שיוצאים מ-localhost.</p>
+<h2 id="integrity-limits">מגבלות שלמות<a class="anchor" href="#integrity-limits" aria-label="קישור לסעיף זה">#</a></h2>
+<p>שרשרת ההאש, טריגרים של מסד הנתונים והחתימות מזהים שינויים מסוימים;
+הם אינם מונעים ממנהל מערכת מקומי לשכתב את היומן ולחתום עליו מחדש.
+יש לשמור נקודות ביקורת חתומות ואת טביעת האצבע של המפתח הציבורי במערכת נפרדת.
+מצב הראיות והעותק מחוץ לאתר (שניהם כבויים כברירת מחדל) שולחים חתימות נקודת ביקורת לשירותי
+תאריכי זמן ועותקים מוצפנים לאחסון תואם S3; ראו את
+<a href="../evidence/">פורמט הראיות</a>. יומני שקיפות, חתימה מגובה ב-HSM ואישור רשמי
+של שרשרת האחריות אינם מיושמים.</p>
+<h2 id="if-you-suspect-a-problem">אם אתם חושדים בבעיה<a class="anchor" href="#if-you-suspect-a-problem" aria-label="קישור לסעיף זה">#</a></h2>
+<p>יש לשמור על ספריית הנתונים המקורית ולהשתמש בעותק נפרד לצורך ניתוח. אין
+לכלול נתוני טלגרם פרטיים או פרטי הזדהות בפרסום פומבי. לא נטען כי קיימת
+הסמכת אבטחה עצמאית כלשהי.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/SECURITY-MODEL.md">ערוך דף זה ב-GitHub ↗</a><a class="next-guide" href="../architecture/"><span>השלב הבא</span><strong>ארכיטקטורה ←</strong></a><p>מדריכים אלה מתארים את היישום הנוכחי. תוצאות האימות והפערים הנותרים מתועדים בנפרד. <a href="../verification/">מה נבדק ←</a></p></footer>
+</main>
+<aside class="toc" aria-label="בעמוד זה"><p class="nav-label">בעמוד זה</p><a href="#access-model">מודל גישה</a><a href="#panel-content-and-exports">תוכן הלוח וייצוא נתונים</a><a href="#secrets-at-rest">סודות במנוחה</a><a href="#proxies-and-network-routes">פרוקסי ונתיבי רשת</a><a href="#sign-in-and-session-imports">כניסה וייבוא נתוני הפעלה</a><a href="#logs-and-transport">יומנים והעברה</a><a href="#integrity-limits">מגבלות שלמות</a><a href="#if-you-suspect-a-problem">אם אתם חושדים בבעיה</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>קוד פתוח · פועל על המחשב שלכם</span><a href="../../../../LICENSE">רישיון MIT</a><a href="../notice/">הודעת המפעיל</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">אבטחה</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "ממתין להודעה", "Step through a fictional send, edit and delete.": "עקבו אחר תהליך דמיוני של שליחה, עריכה ומחיקה.", "No observations yet. Start the sequence or advance one event.": "אין עדיין הערות. התחל את הרצף או עבור לאירוע הבא.", "Meet at 10:00": "נפגש בשעה 10:00", "A new message is visible in the chat.": "הודעה חדשה נראית בצ'אט.", "Record 1 appended: the collector observed the original message.": "הודעה מס' 1 מצורפת: האספן הבחין בהודעה המקורית.", "Meet at 11:00": "נפגש בשעה 11:00", "The current text changes. The earlier observation stays.": "הטקסט הנוכחי משתנה. ההערה הקודמת נשארת.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "רשומה 2 צורפה: העריכה מהווה תצפית חדשה. ברשומה 1 עדיין מופיע הטקסט המקורי.", "Message deleted": "ההודעה נמחקה", "The message has disappeared from the chat view.": "ההודעה נעלמה מתצוגת הצ'אט.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "הוספה של תיעוד 3: הודעת המחיקה נשמרת לצד שתי הגרסאות שנצפו.", "0 records": "0 רשומות", "1 record": "1 רשומה", "2 records": "2 רשומות", "3 records": "3 רשומות", "Complete / {n} of 3": "השלם / {n} מתוך 3", "Step / {n} of 3": "שלב / {n} מתוך 3", "Pause": "הפסקה", "Replay sequence": "רצף השמעה", "Play sequence": "רצף הפעלה", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "דוגמה סטטית זמינה. כדי לחשב חתימות hash באופן אינטראקטיבי, פתחו דף זה ב-HTTPS או בתצוגה מקדימה ב-localhost עם תמיכה ב-Web Crypto.", "No record supplied": "לא נמסר תיעוד", "Tail removed": "הזנב הוסר", "≠ saved hash": "≠ חתימת hash שנשמרה", "Rebuilt · different hash": "נבנה מחדש · חתימה שונה", "= saved hash": "= חתימת hash שנשמרה", "Same length and matching head.": "אורך זהה וכותרת תואמת.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "שלושת ההאשים שחושבו תואמים להאשים שנשמרו. דוגמה זו תואמת את הגבול של שלוש רשומות שנשמר.", "Same saved head; the journal prefix fails verification.": "אותו כותרת שמורה; קידומת היומן נכשלה באימות.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "הרשומה 2 כבר אינה תואמת את ה-hash השמור שלה. בדיקה של ה-head האחרון שנשמר בלבד עלולה לפספס זאת; המאמת בודק כל רשומה.", "Head differs from the retained checkpoint.": "הכותרת שונה מנקודת הבדיקה שנשמרה.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "ה-hash המשוחזרים מקושרים זה לזה, אך ה-head הסופי השתנה. נקודת הבדיקה שנשמרה דוחה היסטוריה זו. חתימות מקוריות גם הן לא יאושרו על רשומות ששונו.", "Too short: 2 supplied records \u003c 3 retained records.": "קצר מדי: 2 רשומות שסופקו \u003c 3 רשומות שנשמרו.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "שני ה-hash הנותרים עדיין תואמים. נקודת הבדיקה שנשמרה חושפת את החלק החסר. ללא הגבול הקודם הזה, הקידומת הקצרה הזו לבדה לא הייתה חושפת את ההשמטה.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "חישוב ה-Hash אינו זמין בדפדפן זה. הנוסחאות וההסבר הסטטי המופיעים להלן נותרים זמינים.", "{n} records": "{n} רשומות", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "התקבל: הספירה גדלה, החתימה מאומתת והמפתח תואם. העד שומר על הגבול החדש הזה.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "חזרה לאחור: התשובה החתומה מדווחת על פחות רשומות מאשר נקודת הבדיקה האחרונה שאושרה. ה-Witness מתעד את הבעיה ושומר על הגבול שאושר קודם לכן.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: הספירה נותרה ללא שינוי, אך הראש שונה. ה-witness מתעד את חילוקי הדעות ושומר על הגבול שהתקבל קודם לכן.", "No answer": "אין תשובה", "boundary unknown": "גבול לא ידוע", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "אין תגובה: ה-Witness מתעד את הבדיקה שנכשלה. הוא אינו יכול לקבוע את מצבו הנוכחי של האספן. אם ה-Witness עדיין יכול להגיע ל-Bot API ומדיניות הפרסום שלו מאפשרת זאת, הוא יכול לפרסם את הכישלון הזה.", "Send {n}": "שלח {n}", "Edit {n}": "ערוך {n}", "Delete {n}": "מחק {n}", "Both accounts captured all six expected observations in this example.": "שני החשבונות תיעדו את כל ששת הממצאים הצפויים בדוגמה זו.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "חשבון B עדיין תפס 6 מתוך 6. שתי קבלות לקחו יותר זמן. יחס הלכידה ועיכוב קבלת ההודעות עונים על שאלות שונות.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "חשבון B תפס 5 מתוך 6 עד למועד הסיום (83.3%). לעריכה החסרה אין עיכוב נמדד. תוצאה זו מתארת רק את שש הפעולות המבוקרות.", "not observed by cutoff": "לא נצפה עד למועד הסגירה", "{s} seconds": "{s} שניות", "Exact values follow in the table.": "הערכים המדויקים מופיעים בטבלה.", "{s} s": "{s} s", "Not observed": "לא נצפה", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "ארבעה צ'אטים מספקים תצפיות שונות. יש לעקוב אחר רשומות המקור עבור כל חיבור; אין לייחס את ההודעה בערוץ למשתמש 71001 ללא ציון השולח.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "הרשומות מס' 146 ו-205 מציגות את אותו מזהה שולח, 71001. דבר זה מקשר בין הפוסטים שנצפו בחשבון טלגרם בשני צ'אטים שונים. הוא אינו מזהה אדם אמיתי ואינו מייחס את הפוסט לערוץ.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "כתובת היעד pay.example.invalid/new מופיעה ברישום הקבוצה מס' 146, במקלדת הבוט מס' 173, בעריכת הערוץ מס' 188 ובהודעה פרטית מס' 205. כתובת יעד חוזרת מקשרת בין החומרים; היא אינה מהווה הוכחה לשליטה משותפת בחשבונות אלה.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "בקבלות המדיה המושלמות מס' 151 ו-209 יש ערכי SHA-256 מלאים זהים במקרה הבדיוני הזה. השוו את הבתים בפועל ואת רשומות ההודעות הקשורות אליהם. הקובץ התואם אינו מזהה את יוצרו ואינו מוכיח מי העביר אותו.", "the encrypted off-site copy": "העותק המוצפן מחוץ לאתר", "notifications": "התראות", "checkpoint hashes for timestamps": "חשישי checkpoint עבור חותמות זמן", "signed checkpoints for the witness": "נקודות ביקורת חתומות עבור ה-Witness", "Switched on in this example": "מופעל בדוגמה זו", "Optional · off by default": "אופציונלי · כבוי כברירת מחדל", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "יוצא מהמכשיר הזה: החיבור ל-Telegram ו-{list}. שום דבר אחר.", "Default: only the Telegram connection leaves this machine.": "ברירת מחדל: רק החיבור ל-Telegram יוצא ממחשב זה.", "{done} of {total} done": "{done} מתוך {total} הושלמו", "Mark step {n} as done": "סמן את השלב {n} כ\"בוצע\"", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "העתק", "Copied": "הועתק", "Command copied.": "הפקודה הועתקה.", "Selected — Ctrl/Cmd+C": "נבחר — Ctrl/Cmd+C", "Command selected. Copy it manually.": "הפקודה נבחרה. העתיקו אותה ידנית.", "Command copied to clipboard.": "הפקודה הועתקה ללוח.", "Select text": "בחר טקסט", "Clipboard unavailable. Command selected; copy it manually.": "הלוח אינו זמין. הפקודה נבחרה; העתק אותה ידנית.", "A message arrives. The first observation is saved.": "הודעה נכנסת. התצפית הראשונה נשמרת.", "The time changes. Both captured versions stay.": "הזמן משתנה. שתי הגרסאות שנשמרו נשארות.", "The message disappears. The captured history remains.": "ההודעה נעלמת. ההיסטוריה שנשמרה נשארת.", "Pause example animation": "השהה את האנימציה לדוגמה", "Play example animation": "הפעל אנימציה לדוגמה", "Play": "הפעל", "Full-size workspace screenshot": "צילום מסך של סביבת העבודה בגודל מלא", "Workspace screenshot · fictional data": "צילום מסך של סביבת העבודה · נתונים פיקטיביים", "Close": "סגור", "Close screenshot": "סגור צילום מסך", "Scrollable full-size screenshot": "צילום מסך בגודל מלא הניתן לגלילה", "Enlarge: {name}": "הגדל: {name}", "View full size": "הצג בגודל מלא"}</script>
+</body></html>

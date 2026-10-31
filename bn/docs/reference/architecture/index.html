@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="bn" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>আর্কিটেকচার | TgWitness</title>
+<meta name="description" content="সংগ্রাহক, প্যানেল, জার্নাল, ওয়ার্কার্স এবং উইটনেসের উপাদানসমূহ এবং কীভাবে ডেটা তাদের মধ্যে স্থানান্তরিত হয়।"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/architecture/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="bn_BD">
+<meta property="og:title" content="আর্কিটেকচার | TgWitness"><meta property="og:description" content="সংগ্রাহক, প্যানেল, জার্নাল, ওয়ার্কার্স এবং উইটনেসের উপাদানসমূহ এবং কীভাবে ডেটা তাদের মধ্যে স্থানান্তরিত হয়।">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/bn/docs/reference/architecture/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/architecture/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/architecture/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/architecture/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/architecture/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/architecture/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/architecture/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/architecture/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/architecture/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/architecture/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/architecture/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/architecture/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/architecture/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/architecture/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/architecture/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/architecture/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/architecture/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/architecture/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/architecture/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/architecture/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/architecture/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/architecture/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/architecture/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/architecture/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/architecture/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/architecture/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/architecture/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/bn/docs/reference/architecture/", "url": "https://phishdestroy.github.io/TgWitness/bn/docs/reference/architecture/", "name": "আর্কিটেকচার | TgWitness", "description": "সংগ্রাহক, প্যানেল, জার্নাল, ওয়ার্কার্স এবং উইটনেসের উপাদানসমূহ এবং কীভাবে ডেটা তাদের মধ্যে স্থানান্তরিত হয়।", "inLanguage": "bn", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "হোম", "item": "https://phishdestroy.github.io/TgWitness/bn/"}, {"@type": "ListItem", "position": 2, "name": "ডকুমেন্টেশন", "item": "https://phishdestroy.github.io/TgWitness/bn/docs/"}, {"@type": "ListItem", "position": 3, "name": "তথ্যসূত্র", "item": "https://phishdestroy.github.io/TgWitness/bn/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "আর্কিটেকচার", "item": "https://phishdestroy.github.io/TgWitness/bn/docs/reference/architecture/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">বিষয়ে সরাসরি যান</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / ডকুমেন্টেশন</span></a>
+<nav aria-label="গাইডসমূহ"><a href="../../concepts/">দৃশ্যমান গাইড</a><a href="../../">সমস্ত গাইড</a><a href="../">তথ্যসূত্র</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="ভাষা"><span aria-hidden="true">◍</span> বাংলা</summary><div class="lang-list"><a href="../../../../docs/reference/architecture/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/architecture/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/architecture/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/architecture/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/architecture/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/architecture/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/architecture/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/architecture/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/architecture/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/architecture/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/architecture/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/architecture/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/architecture/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/architecture/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/architecture/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/architecture/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/architecture/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/architecture/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/architecture/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/architecture/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/architecture/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/architecture/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/architecture/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/architecture/" hreflang="he" lang="he">עברית</a><a href="./" hreflang="bn" lang="bn" aria-current="true">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="হালকা ও গাঢ় থিমের মধ্যে পরিবর্তন করুন"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="গাইডসমূহ"><a href="../../../guides/modes.html">মোড, পরিস্থিতি এবং প্রমাণ স্তর</a><p class="nav-label">প্রাথমিক পদক্ষেপ</p><a href="../../start/">মিনিটখানেকের মধ্যে শুরু করুন</a><a href="../../accounts/">একটি অ্যাকাউন্ট সংযুক্ত করুন</a><a href="../../proxies/">একটি প্রক্সি নির্বাচন করুন</a><a href="../../exports/">রপ্তানি এবং যাচাই করুন</a><p class="nav-label">প্রমাণ বোঝা</p><a href="../../concepts/">প্রমাণ কীভাবে কাজ করে দেখুন</a><a href="../../cases/">সমস্ত চ্যাট জুড়ে তদন্ত করুন</a><a href="../../security/">এটি নিরাপদ রাখুন</a><p class="nav-label">আরও এগিয়ে যান</p><a href="../../witness/">একটি উইটনেস বট সেট আপ করুন</a><a href="../../server/">এটি চালু রাখুন</a><a href="../../troubleshooting/">কি ভুল হয়েছে তা খুঁজে বের করুন</a></nav><nav class="wiki-nav" aria-label="তথ্যসূত্র"><p class="nav-label"><a class="nav-label-link" href="../">তথ্যসূত্র</a></p><details class="wiki-group"><summary>সেটআপ</summary><a href="../quickstart/">দ্রুত শুরু</a><a href="../accounts/">অ্যাকাউন্ট এবং সেশন ফরম্যাটসমূহ</a><a href="../connection/">সংযোগ, প্রক্সি এবং ডেটা সুরক্ষা</a><a href="../deployment/">নিয়োগ</a></details><details class="wiki-group"><summary>সংগ্রহ করুন</summary><a href="../collection/">সংগ্রহ কীভাবে কাজ করে</a><a href="../operations/">ওয়ার্কফ্লো এবং অপারেশনসমূহ</a><a href="../investigation/">তদন্ত মোড</a><a href="../features/">বৈশিষ্ট্য এবং সীমাবদ্ধতা</a></details><details class="wiki-group"><summary>প্রমাণ</summary><a href="../how-it-works/">প্রমাণ কীভাবে কাজ করে</a><a href="../evidence/">প্রমাণের ফর্ম্যাট</a><a href="../witness/">স্বতন্ত্র সাক্ষী</a><a href="../timestamp/">টাইমস্ট্যাম্পস</a></details><details class="wiki-group" open><summary>নিরাপত্তা ও প্রকল্প</summary><a href="../security/">নিরাপত্তা এবং ডেটা হ্যান্ডলিং</a><a href="./" aria-current="page">আর্কিটেকচার</a><a href="../verification/">কি পরীক্ষা করা হয়েছে</a><a href="../license/">লাইসেন্স এবং স্থাপত্যগত অসামঞ্জস্যতার বিজ্ঞপ্তি</a><a href="../notice/">অপারেটর অসামঞ্জস্যতার বিজ্ঞপ্তি</a><a href="../changelog/">পরিবর্তনলগ</a></details></nav><p class="sidebar-note">v0.7.0<br>ওপেন সোর্স · আপনার মেশিনে চলে</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="গাইডসমূহ"><a href="../../../">হোম</a> <span aria-hidden="true">/</span> <a href="../../">ডকুমেন্টেশন</a> <span aria-hidden="true">/</span> <a href="../">তথ্যসূত্র</a> <span aria-hidden="true">/</span> <span aria-current="page">আর্কিটেকচার</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">ডকুমেন্টেশন অনুসন্ধান করুন</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="প্রক্সি, হ্যাশ চেইন, টোকেন বা উইটনেস চেষ্টা করুন…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="স্পষ্ট অনুসন্ধান" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">গাইড এবং রেফারেন্স অনুসন্ধান করতে একটি শব্দ টাইপ করুন। অনুসন্ধান আপনার ব্রাউজারেই থাকবে।</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">তথ্যসূত্র / নিরাপত্তা ও প্রকল্প</p><h1>আর্কিটেকচার</h1><p class="guide-outcome">সংগ্রাহক, প্যানেল, জার্নাল, ওয়ার্কার্স এবং উইটনেসের উপাদানসমূহ এবং কীভাবে ডেটা তাদের মধ্যে স্থানান্তরিত হয়।</p><div class="wiki-body"><p>একটি পাইথন প্রসেস FastAPI প্যানেল এবং যেকোনো সংখ্যক বিচ্ছিন্ন ওয়ার্কস্পেস হোস্ট করে, প্রতিটি একটি Telethon ব্যবহারকারী-অ্যাকাউন্ট ক্লায়েন্টসহ।
+SQLite একটি শুধুমাত্র সংযোজনযোগ্য স্বাক্ষরিত ইভেন্ট জার্নাল এবং পরিবর্তনযোগ্য অপারেশনাল সেটিংস ধারণ করে।
+একটি এনক্রিপ্ট করা ভল্টে API ক্রেডেনশিয়াল, StringSession, এবং স্বাক্ষর কী সংরক্ষিত থাকে।
+ফ্রন্টএন্ডটি হল সাধারণভাবে বান্ডেল করা HTML/CSS/JavaScript: কোনো Node বিল্ড, CDN, বা রানিটাইম
+ফ্রন্টএন্ড ডাউনলোডের প্রয়োজন নেই।</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>মডিউল</th>
+<th>দায়িত্ব</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>সংগ্রাহক.পিওয়াই</td>
+<td>অনুমতি, সংলাপ নির্বাচন, আপডেট, স্ন্যাপশট, মিডিয়া ক্যু, সংযোগ মনিটরিং</td>
+</tr>
+<tr>
+<td>ইন্টার‌অ্যাকশনস.পিওয়াই / টেলিগ্রাম_ক্লায়েন্ট.পিওয়াই</td>
+<td>স্পষ্ট প্যানেল অ্যাকশন, স্বাক্ষরিত রসিদ, স্থায়ী অনুরোধ আইডি এবং টাস্ক-স্থানীয় কলব্যাক/যোগদান পুনঃচেষ্টা নীতি</td>
+</tr>
+<tr>
+<td>বার্তার_বিষয়বস্তু.পিওয়াই</td>
+<td>পরিবহন অ্যাক্সেস মেটাডেটা বাদ দিয়ে পর্যবেক্ষণযোগ্য বার্তা তুলনা</td>
+</tr>
+<tr>
+<td>কর্মীরা.পিওয়াই</td>
+<td>বাতিলের পর পরিষ্কার করার আগে এক্সপোর্ট ফাইল ওয়ার্কারদের জন্য অপেক্ষা করুন</td>
+</tr>
+<tr>
+<td>স্টোর.পিওয়াই</td>
+<td>WAL লেনদেন, ক্রমবদ্ধ ইভেন্ট চেইন, কুয়েরি ফিল্টার, অপারেশনাল সেটিংস</td>
+</tr>
+<tr>
+<td>সিকিউরিটি.পিওয়াই</td>
+<td>ব্যক্তিগত ফাইল তৈরি, এনক্রিপ্ট করা ভল্ট, Ed25519 স্বাক্ষর, একক-প্রক্রিয়া লক</td>
+</tr>
+<tr>
+<td>প্রমাণ.পাই</td>
+<td>সম্পূর্ণ জার্নাল রপ্তানি, ডেরিভেটিভস, চেকপয়েন্ট, সংযুক্তি যাচাই</td>
+</tr>
+<tr>
+<td>verify.py</td>
+<td>স্বতন্ত্র, শুধুমাত্র-পঠনযোগ্য যাচাইকারী (স্ট্যান্ডার্ড লাইব্রেরি + ক্রিপ্টোগ্রাফি): আর্কাইভ, কভারেজ, সাক্ষী জার্নাল এবং চ্যানেল পোস্ট, প্রোফাইল ফাইল</td>
+</tr>
+<tr>
+<td>অ্যাপ.পিওয়াই</td>
+<td>প্রমাণিত API, জীবনচক্র, অনুরোধ যাচাইকরণ, স্থির প্যানেল</td>
+</tr>
+<tr>
+<td>প্রোফাইলসমূহ.পাই</td>
+<td>অনেকগুলি পৃথক অ্যাকাউন্ট কালেক্টর, ভাগ করা প্যানেল টোকেন, প্রতি ওয়ার্কস্পেসের জীবনচক্র</td>
+</tr>
+<tr>
+<td>উৎস-পরিচয়.পিওয়াই</td>
+<td>স্বাক্ষরিত অধিগ্রহণ-চালিত পরিচয়, কোড এবং নির্ভরতা পরিমাপ</td>
+</tr>
+<tr>
+<td>নেটওয়ার্ক.পিওয়াই</td>
+<td>প্রতি ওয়ার্কস্পেসের রুটগুলো যাচাই করা হয়েছে; অবস্থা ও প্রমাণাদি মুছে ফেলা হয়েছে; টেলিথন পরিবহন বিকল্পসমূহ</td>
+</tr>
+<tr>
+<td>সেশনসমূহ.পিওয়াই</td>
+<td>পর্যালোচিত টেলিথন SQLite স্কিমাগুলির অফলাইন শুধুমাত্র-পঠন রূপান্তর</td>
+</tr>
+<tr>
+<td>অ্যাকাউন্ট_আমদানি.পিওয়াই</td>
+<td>সমর্থিত অ্যাকাউন্ট ফাইল এবং JSON-এর ইন-মেমোরি সনাক্তকরণ ও স্বাভাবিকীকরণ</td>
+</tr>
+<tr>
+<td>টি-ডেটা.পিওয়াই</td>
+<td>সীমাবদ্ধ আধুনিক TData ZIP রিডার, চেকসাম/ডিক্রিপশন যাচাইকরণ, কোনো এক্সট্র্যাকশন নেই</td>
+</tr>
+<tr>
+<td>ডক্টর.পিওয়াই</td>
+<td>সংগ্রহ, লগইন বা প্যাকেজ ইনস্টলেশন ছাড়াই স্থানীয় প্রস্তুতি পরীক্ষা</td>
+</tr>
+<tr>
+<td>ডাউনলোড.পিওয়াই</td>
+<td>সীমিত রিড এবং কোনো ওভাররাইট ছাড়াই প্রমাণিত স্ট্রিমিং এক্সপোর্ট ডাউনলোড</td>
+</tr>
+<tr>
+<td>মনিটরিং.পিওয়াই</td>
+<td>প্রতি ওয়ার্কস্পেস ইভেন্ট নীতি এবং প্রতি-প্রকার সংযুক্তি নিয়ম যা হ্যান্ডলারদের দ্বারা যাচাই, স্থিতি এবং স্বাক্ষরিত রসিদ শেয়ার করা হয়</td>
+</tr>
+<tr>
+<td>স্‌কোপ.পিওয়াই</td>
+<td>পর্যবেক্ষণ পরিসর (নির্বাচিত চ্যাট, টেলিগ্রাম ফোল্ডার, পুরো অ্যাকাউন্ট), উৎস ধরন, বাদ, পুনরায় যাচাই স্তর</td>
+</tr>
+<tr>
+<td>ডসিয়ে.পিওয়াই</td>
+<td>সংরক্ষিত রেকর্ড থেকে নির্মিত প্রতি চ্যাটের ব্যবহারকারী প্রোফাইল: রেকর্ড রেফারেন্সসহ তথ্য, অবতারের SHA-256/pHash, উল্লেখ আহরণ</td>
+</tr>
+<tr>
+<td>witness_api.py</td>
+<td>পঠন-শুধুমাত্র সাক্ষী টোকেন এবং সেগুলি যে স্বাক্ষরিত জার্নাল হেড আনতে পারে</td>
+</tr>
+<tr>
+<td>সাক্ষী.পিওয়াই</td>
+<td>স্বতন্ত্র সাক্ষী প্রক্রিয়া: নিজস্ব কী এবং জার্নাল, হেড চেক, স্বাক্ষরিত চ্যানেল পোস্ট, রপ্তানি</td>
+</tr>
+<tr>
+<td>অ্যালার্টস.পিওয়াই</td>
+<td>অ্যাপ্রাইজ নোটিফিকেশন এবং প্যানেলের নোটিফিকেশন তালিকা</td>
+</tr>
+<tr>
+<td>লগিং কনফিগারেশন পিআই</td>
+<td>কনসোল লগিং এবং উইন্ডোবিহীন লঞ্চের জন্য ঘূর্ণায়মান সার্ভার ডায়াগনস্টিকস</td>
+</tr>
+<tr>
+<td>স্থির/</td>
+<td>প্রতিক্রিয়াশীল ইন্টারফেস, স্থানীয় অ্যাক্সেস গেট, ফিল্টার, বিবরণ, রপ্তানি, অ্যাকাউন্ট সেটআপ</td>
+</tr>
+<tr>
+<td>ডেমো.পিওয়াই</td>
+<td>স্পষ্টভাবে লেবেলকৃত সিন্থেটিক জার্নাল, প্রকৃত সংগ্রহ থেকে বিচ্ছিন্ন।</td>
+</tr>
+</tbody>
+</table></div>
+<p>সংযোগ করার আগে পর্যবেক্ষণ হ্যান্ডলারগুলো নিবন্ধিত হয়। লাইভ সংগ্রহ সক্রিয় ক্লায়েন্ট পরিচয়, স্পষ্ট চলমান অবস্থা, সক্ষম উত্স বা পর্যবেক্ষণ স্কোপ (ফোল্ডার বা পুরো-অ্যাকাউন্ট মোডগুলো প্রথম আপডেটে একটি নতুন চ্যাটকে উত্স হিসেবে যোগ করে) এবং ইভেন্ট নীতি দ্বারা নিয়ন্ত্রিত হয়। প্রত্যাখ্যাত এবং প্রতিস্থাপিত ক্লায়েন্টরা লাইভ আপডেট দিতে পারে না। কাঁচা প্রতিক্রিয়া এবং সদস্যতা আপডেট দৃশ্যমানতার সীমা বজায় রাখে। ইনকামিং বার্তার বিষয়বস্তু এবং এর স্থায়ী মিডিয়া জব একসঙ্গে কমিট করা হয়। জবগুলো মূল TL ডিসক্রিপ্টর সংরক্ষণ করে এবং এর হ্যাশকে স্বাক্ষরিত বার্তা পর্যবেক্ষণের সাথে বাইন্ড করে। প্রেরক/সম্পাদক/মোছার সেম্যান্টিকস পৃথক করা হয়েছে।</p>
+<p>প্রতিটি ওয়ার্কস্পেস একটি একাউন্ট গ্রহণ করে এবং এর নিজস্ব ডিরেক্টরি ও স্বাক্ষর পরিচয় থাকে।
+সামঞ্জস্যতার জন্য প্রধান ওয়ার্কস্পেস রুটে থাকে; অতিরিক্ত ওয়ার্কস্পেস profiles/&lt;id&gt;/ এ থাকে।
+একটি বেয়ারার টোকেন পুরো ইনস্টলেশন নিয়ন্ত্রণ করে; ওয়ার্কস্পেসগুলো আলাদা অনুমোদন টেন্যান্ট নয়। প্রক্রিয়া লক ডিরেক্টরিগুলোকে সুরক্ষিত রাখে; ডাটাবেস লক ইভেন্ট প্রবেশকে সিরিয়াল করে। প্রতিটি এপেন্ড FULL সিঙ্ক্রোনাস মোডে SQLite WAL-এ সিঙ্ক্রোনিকভাবে কমিট করে। ইভেন্ট আপডেট/ডিলিট ট্রিগার সাধারণ অ্যাপ্লিকেশন সম্পাদনা প্রতিরোধ করে; ফাইলসিস্টেম প্রশাসকরা ট্রাস্ট সীমানার মধ্যেই থাকে।</p>
+<p>API অনুমোদন একটি বহনকারী টোকেন। লগইন অপারেশনগুলো সিরিয়ালাইজড এবং সময়-সীমাবদ্ধ।
+অ্যাকাউন্ট আপলোডগুলো একটি নিবেদিত 12 MiB এনকোড-বডি সীমা এবং 8 MiB ডিকোড-ফাইল সীমা ব্যবহার করে; সাধারণ API অনুরোধগুলো 16 KiB সীমা বজায় রাখে। রূপান্তর একটি কর্মী থ্রেডে চলে, আপলোডগুলো মেমরিতে রাখে, এবং যাচাইকৃত ব্রাউজারে স্বাভাবিকীকৃত ইনপুট ফেরত দেয়। QR লগইনের জন্য প্রতিটি ওয়ার্কস্পেসে একটি প্রার্থী, স্বল্পস্থায়ী শনাক্তকারী, অপেক্ষমাণ টাস্ক এবং স্পষ্ট বাতিলকরণ থাকে। শুধুমাত্র গৃহীত অনুমোদনই সক্রিয় ক্লায়েন্ট হয়।
+Telegram FloodWait একটি Retry-After মানের সাথে ফেরত আসে; API ত্রুটিতে ক্রেডেনশিয়াল এবং কাঁচা RPC ত্রুটির বার্তাগুলো প্রকাশ করা হয় না। এক্সপোর্টগুলো অ্যাসিঙ্ক ইভেন্ট লুপের বাইরে চলে এবং প্রতিটি ওয়ার্কস্পেস অনুযায়ী সিরিয়ালাইজ করা হয়। এগুলো একটি স্থিতিশীল রিড স্ন্যাপশট স্ট্রিম করে, এবং চলমান WAL লেখার সাথে সহাবস্থান করতে পারে। ওয়ার্কস্পেস কালেক্টররা প্রসেস/ইভেন্ট লুপ শেয়ার করে।</p>
+<p>বর্তমান ইতিহাসের স্ন্যাপশট এবং লাইভ আপডেট একসঙ্গে থাকতে পারে। উভয়ই পৃথক পর্যবেক্ষণ, যেগুলো উৎস অনুযায়ী লেবেল করা হয়েছে; ডুপ্লিকেটগুলো নীরবে একত্রিত করা হয় না। অনুপস্থিত আইডি, মনগড়া মুছে ফেলা টেক্সট, জোরপূর্বক সদস্য তালিকাভুক্তি, বা স্বয়ংক্রিয় গ্রুপ যোগ করার ভিত্তিতে কোনো অনুমান প্রয়োগ করা হয়নি।</p>
+<p>অপারেটর-সংক্রান্ত ব্যাখ্যার জন্য দেখুন <a href="../collection/">সংগ্রহ কীভাবে কাজ করে</a> এবং <a href="../accounts/">অ্যাকাউন্ট ও সেশন ফরম্যাটসমূহ</a>।</p>
+<p>নেটওয়ার্ক কনফিগারেশন এনক্রিপ্টেড ভল্টে সংরক্ষিত থাকে। একটি রুট প্রয়োগ করলে পুরনো ক্লায়েন্ট বন্ধ হয়ে যায় এবং অসম্পূর্ণ লগইন বাতিল হয়ে যায়; পরবর্তী সংযোগগুলো সরাসরি কোনো ফ্যালব্যাক ছাড়াই সেই রুট ব্যবহার করে। একটি নতুন বাহ্যিক-কী ইনস্টলেশন প্রতিটি ওয়ার্কস্পেসের ফারনেট কী HKDF-SHA256 ব্যবহার করে একটি মাস্টার কী ফাইল এবং সংরক্ষিত র‍্যান্ডম সল্ট থেকে তৈরি করে। এটি গোপনীয়তাকে ডেটা ডিরেক্টরি থেকে আলাদাভাবে সুরক্ষিত রাখে, প্লেনটেক্সট জার্নাল/মিডিয়া বিষয়বস্তু নয়।</p>
+<p>স্থানীয় ডেমো এন্ট্রি আলাদাভাবে তৈরি করা একটি প্রক্রিয়া সক্ষমতা ব্যবহার করে, কখনোই কনফিগার করা প্যানেল টোকেন ব্যবহার করে না। ইস্যু এবং গ্রহণ করার জন্য স্পষ্ট ডেমো মোড, অতিরিক্ত ওয়ার্কস্পেস বা অনুমোদিত সেশনবিহীন একটি সিন্থেটিক রুট, লুপব্যাক পিয়ার/হোস্ট, কোনো প্রক্সি ফরওয়ার্ডিং হেডার এবং কোনো ক্রস-অরিজিন ব্রাউজার অনুরোধ ছাড়া প্রয়োজন। লাইভ API-গুলো বেয়ারার প্রমাণীকরণ বজায় রাখে এবং ডেমো মোডে সংগ্রহ পরিবর্তনের অনুরোধ প্রত্যাখ্যান করে।</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ARCHITECTURE.md">GitHub-এ এই পৃষ্ঠা সম্পাদনা করুন ↗</a><a class="next-guide" href="../verification/"><span>পরবর্তী ধাপ</span><strong>কি পরীক্ষা করা হয়েছে →</strong></a><p>এই গাইডগুলো বর্তমান বাস্তবায়ন বর্ণনা করে। যাচাইকরণ ফলাফল এবং অবশিষ্ট ফাঁকগুলো আলাদাভাবে নথিভুক্ত করা হয়েছে। <a href="../verification/">কি পরীক্ষা করা হয়েছে →</a></p></footer>
+</main>
+<aside class="toc" aria-label="এই পৃষ্ঠায়"></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>ওপেন সোর্স · আপনার মেশিনে চলে</span><a href="../../../../LICENSE">MIT লাইসেন্স</a><a href="../notice/">অপারেটর বিজ্ঞপ্তি</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">নিরাপত্তা</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "বার্তার অপেক্ষায়", "Step through a fictional send, edit and delete.": "একটি কাল্পনিক পাঠানো, সম্পাদনা এবং মুছে ফেলার ধাপ অনুসরণ করুন।", "No observations yet. Start the sequence or advance one event.": "এখন পর্যন্ত কোনো পর্যবেক্ষণ নেই। সিকোয়েন্স শুরু করুন অথবা একটি ইভেন্ট এগিয়ে নিন।", "Meet at 10:00": "১০:০০ টায় মিলিত হন", "A new message is visible in the chat.": "চ্যাটে একটি নতুন বার্তা দৃশ্যমান।", "Record 1 appended: the collector observed the original message.": "রেকর্ড ১ সংযুক্ত: সংগ্রাহক মূল বার্তাটি পর্যবেক্ষণ করেছেন।", "Meet at 11:00": "১১:০০ টায় মিলিত হোন", "The current text changes. The earlier observation stays.": "বর্তমান পাঠ্য পরিবর্তিত হয়। পূর্ববর্তী পর্যবেক্ষণ অপরিবর্তিত থাকে।", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "রেকর্ড ২ সংযুক্ত: সম্পাদনাটি একটি নতুন পর্যবেক্ষণ। রেকর্ড ১ এখনও মূল পাঠ্য সংরক্ষণ করে।", "Message deleted": "বার্তা মুছে ফেলা হয়েছে", "The message has disappeared from the chat view.": "বার্তাটি চ্যাট ভিউ থেকে অদৃশ্য হয়ে গেছে।", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "রেকর্ড ৩ সংযুক্ত: মুছে ফেলার বিজ্ঞপ্তিটি উভয় দেখা সংস্করণের পাশাপাশি সংরক্ষিত রয়েছে।", "0 records": "0টি রেকর্ড", "1 record": "১টি রেকর্ড", "2 records": "২টি রেকর্ড", "3 records": "৩টি রেকর্ড", "Complete / {n} of 3": "৩টির মধ্যে সম্পূর্ণ / {n}", "Step / {n} of 3": "৩-এর মধ্যে ধাপ / {n}", "Pause": "বিরতি", "Replay sequence": "পুনঃপ্রচার ক্রম", "Play sequence": "ক্রম বাজান", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "স্থির উদাহরণটি উপলব্ধ। হ্যাশগুলো ইন্টার‍্যাক্টিভভাবে গণনা করতে HTTPS-এ এই পৃষ্ঠাটি খুলুন অথবা Web Crypto সমর্থনসহ লোকালহোস্ট প্রিভিউ ব্যবহার করুন।", "No record supplied": "কোনও রেকর্ড সরবরাহ করা হয়নি", "Tail removed": "টেইল অপসারণ করা হয়েছে", "≠ saved hash": "≠ সংরক্ষিত হ্যাশ", "Rebuilt · different hash": "পুনর্নির্মিত · ভিন্ন হ্যাশ", "= saved hash": "= সংরক্ষিত হ্যাশ", "Same length and matching head.": "একই দৈর্ঘ্য এবং মিলিত শিরোনাম।", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "তিনটি গণনা করা হ্যাশ সংরক্ষিত হ্যাশের সাথে মিলছে। এই নমুনাটি রাখা তিনটি রেকর্ডের সীমানার সাথে সামঞ্জস্যপূর্ণ।", "Same saved head; the journal prefix fails verification.": "একই সংরক্ষিত হেড; জার্নাল প্রিফিক্স যাচাইকরণে ব্যর্থ।", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "রেকর্ড ২ আর তার সংরক্ষিত হ্যাশের সাথে মিলছে না। শুধুমাত্র সর্বশেষ সংরক্ষিত হেড যাচাই করলে এটি ধরা পড়বে না; যাচাইকারী প্রতিটি রেকর্ড পরীক্ষা করে।", "Head differs from the retained checkpoint.": "হেড সংরক্ষিত চেকপয়েন্ট থেকে পৃথক।", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "পুনর্নির্মিত হ্যাশগুলো একে অপরের সাথে সংযুক্ত, কিন্তু চূড়ান্ত হেডটি পরিবর্তিত হয়েছে। সংরক্ষিত চেকপয়েন্ট এই ইতিহাস প্রত্যাখ্যান করে। পরিবর্তিত রেকর্ডগুলিতেও মূল স্বাক্ষরগুলো ব্যর্থ হবে।", "Too short: 2 supplied records \u003c 3 retained records.": "খুব সংক্ষিপ্ত: ২টি সরবরাহিত রেকর্ড \u003c ৩টি সংরক্ষিত রেকর্ড।", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "বাকী থাকা দুইটি হ্যাশ এখনও মিলছে। সংরক্ষিত চেকপয়েন্ট অনুপস্থিত টেইল উন্মোচন করে। সেই পূর্বের সীমানা ছাড়া শুধুমাত্র এই সংক্ষিপ্ত প্রিফিক্সটি বাদ পড়া অংশটি প্রকাশ করতে পারত না।", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "এই ব্রাউজারে হ্যাশ গণনা অনুপলব্ধ। নীচের সূত্র এবং স্থির ব্যাখ্যাগুলো এখনও উপলব্ধ।", "{n} records": "{n} রেকর্ডস", "head {hash}": "হেড {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "গ্রহণ করা হয়েছে: গণনা বৃদ্ধি পাচ্ছে, স্বাক্ষর যাচাই হচ্ছে এবং কী মিলছে। সাক্ষী এই নতুন সীমা বজায় রাখে।", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "রোলব্যাক: স্বাক্ষরিত উত্তরটি শেষ গৃহীত চেকপয়েন্টের তুলনায় কম রেকর্ড রিপোর্ট করে। সাক্ষী সমস্যাটি রেকর্ড করে এবং পূর্বের গৃহীত সীমা বজায় রাখে।", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "ফর্ক: গণনা অপরিবর্তিত আছে কিন্তু হেড ভিন্ন। সাক্ষী মতবিরোধ রেকর্ড করে এবং পূর্বে গৃহীত সীমানা বজায় রাখে।", "No answer": "কোনও উত্তর নেই", "boundary unknown": "সীমা অজানা", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "কোনো প্রতিক্রিয়া নেই: সাক্ষী ব্যর্থ চেক রেকর্ড করে। এটি সংগ্রাহকের বর্তমান অবস্থা নিশ্চিত করতে পারে না। যদি সাক্ষী এখনও Bot API-এ পৌঁছাতে পারে এবং এর প্রকাশ নীতি অনুমতি দেয়, তবে এটি সেই ব্যর্থতা প্রকাশ করতে পারে।", "Send {n}": "{n} পাঠান", "Edit {n}": "{n}সম্পাদনা", "Delete {n}": "{n} মুছুন", "Both accounts captured all six expected observations in this example.": "উভয় অ্যাকাউন্টই এই উদাহরণে প্রত্যাশিত ছয়টি পর্যবেক্ষণই ধারণ করেছে।", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "অ্যাকাউন্ট B এখনও ৬টির মধ্যে ৬টিই ধারণ করেছে। দুটি রসিদ ধারণ করতে বেশি সময় লেগেছে। ধারণ অনুপাত এবং রসিদ বিলম্ব ভিন্ন প্রশ্নগুলোর উত্তর দেয়।", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "কাটঅফের সময়সীমার মধ্যে Account B ছয়টির মধ্যে পাঁচটি (৮৩.৩%) ধারণ করেছে। অনুপস্থিত সম্পাদনার কোনো পরিমাপযোগ্য বিলম্ব নেই। এই ফলাফল শুধুমাত্র ছয়টি নিয়ন্ত্রিত কর্মকাণ্ডকে বর্ণনা করে।", "not observed by cutoff": "কাটঅফের মাধ্যমে পর্যবেক্ষণ করা হয়নি", "{s} seconds": "{s} সেকেন্ড", "Exact values follow in the table.": "নির্দিষ্ট মানসমূহ টেবিলে অনুসরণ করা হয়েছে।", "{s} s": "{s}s", "Not observed": "পর্যবেক্ষণ করা হয়নি", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "চারটি চ্যাট বিভিন্ন পর্যবেক্ষণ প্রদান করে। প্রতিটি সংযোগের জন্য উৎস রেকর্ডগুলো অনুসরণ করুন; প্রেরক নির্ধারণ না করে চ্যানেল পোস্টটি ব্যবহারকারী ৭১০०১-এ বরাদ্দ করবেন না।", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "রেকর্ড #146 এবং #205 একই প্রেরক আইডি, 71001, সরবরাহ করে। এটি দুইটি চ্যাটে একটি টেলিগ্রাম অ্যাকাউন্টের পর্যবেক্ষিত পোস্টগুলোকে সংযুক্ত করে। এটি কোনো বাস্তব ব্যক্তিকে চিহ্নিত করে না বা চ্যানেল পোস্টের সাথে কোনো ব্যক্তিকে যুক্ত করে না।", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "pay.example.invalid/new গন্তব্যটি গ্রুপ রেকর্ড #146, বট কীবোর্ড #173, চ্যানেল সম্পাদনা #188 এবং ব্যক্তিগত বার্তা #205-এ প্রদর্শিত হয়েছে। একই গন্তব্যের পুনরাবৃত্তি বিষয়বস্তুকে সংযুক্ত করে; এটি সেই অ্যাকাউন্টগুলির সাধারণ নিয়ন্ত্রণের প্রমাণ দেয় না।", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "এই কাল্পনিক ক্ষেত্রে সম্পন্ন মিডিয়া রসিদ #151 এবং #209-এর পূর্ণ SHA-256 মান সমান। প্রকৃত বাইট এবং সংশ্লিষ্ট বার্তা রেকর্ডগুলো তুলনা করুন। মিলিত ফাইলটি এর নির্মাতাকে শনাক্ত করে না বা কে এটি ফরওয়ার্ড করেছে তা প্রমাণ করে না।", "the encrypted off-site copy": "এনক্রিপ্টকৃত অফ-সাইট কপি", "notifications": "অ্যালার্টসমূহ", "checkpoint hashes for timestamps": "টাইমস্ট্যাম্পের জন্য চেকপয়েন্ট হ্যাশ", "signed checkpoints for the witness": "সাক্ষীর স্বাক্ষরিত চেকপয়েন্টসমূহ", "Switched on in this example": "এই উদাহরণে চালু করা হয়েছে", "Optional · off by default": "ঐচ্ছিক · ডিফল্টভাবে বন্ধ", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "এই মেশিন থেকে যাওয়া: টেলিগ্রাম সংযোগ এবং {list}। আর কিছুই না।", "Default: only the Telegram connection leaves this machine.": "ডিফল্ট: শুধুমাত্র টেলিগ্রাম সংযোগই এই মেশিন থেকে বের হয়।", "{done} of {total} done": "{total}-এর মধ্যে {done} সম্পন্ন", "Mark step {n} as done": "{n} ধাপটি সম্পন্ন হিসেবে চিহ্নিত করুন", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "কপি", "Copied": "কপি করা হয়েছে", "Command copied.": "কমান্ড অনুলিপি করা হয়েছে।", "Selected — Ctrl/Cmd+C": "নির্বাচিত — Ctrl/Cmd+C", "Command selected. Copy it manually.": "কমান্ড নির্বাচিত। এটি ম্যানুয়ালি অনুলিপি করুন।", "Command copied to clipboard.": "কমান্ডটি ক্লিপবোর্ডে অনুলিপি করা হয়েছে।", "Select text": "টেক্সট নির্বাচন করুন", "Clipboard unavailable. Command selected; copy it manually.": "ক্লিপবোর্ড অনুপলব্ধ। কমান্ড নির্বাচিত; ম্যানুয়ালি অনুলিপি করুন।", "A message arrives. The first observation is saved.": "একটি বার্তা এসেছে। প্রথম পর্যবেক্ষণ সংরক্ষিত হয়েছে।", "The time changes. Both captured versions stay.": "সময় পরিবর্তিত হয়। উভয় ধারণকৃত সংস্করণই থাকে।", "The message disappears. The captured history remains.": "বার্তাটি অদৃশ্য হয়ে যায়। ধারণকৃত ইতিহাস রয়ে যায়।", "Pause example animation": "অ্যানিমেশন বিরতি উদাহরণ", "Play example animation": "উদাহরণ অ্যানিমেশন প্লে করুন", "Play": "চালু করুন", "Full-size workspace screenshot": "পূর্ণ-আকারের কর্মস্থলের স্ক্রিনশট", "Workspace screenshot · fictional data": "ওয়ার্কস্পেস স্ক্রিনশট · কাল্পনিক ডেটা", "Close": "বন্ধ করুন", "Close screenshot": "স্ক্রিনশট বন্ধ করুন", "Scrollable full-size screenshot": "স্ক্রলযোগ্য পূর্ণ-আকারের স্ক্রিনশট", "Enlarge: {name}": "বড় করুন: {name}", "View full size": "পূর্ণ আকারে দেখুন"}</script>
+</body></html>

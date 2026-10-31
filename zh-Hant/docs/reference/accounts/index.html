@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="zh-Hant" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>帳戶與會話格式 | TgWitness</title>
+<meta name="description" content="可透過手機、QR 碼或授權金鑰登入，匯入 Telethon、Pyrogram 或 Telegram Desktop 的會話紀錄，並同時管理多個帳戶。"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/accounts/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="帳戶與會話格式 | TgWitness"><meta property="og:description" content="可透過手機、QR 碼或授權金鑰登入，匯入 Telethon、Pyrogram 或 Telegram Desktop 的會話紀錄，並同時管理多個帳戶。">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/accounts/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/accounts/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/accounts/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/accounts/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/accounts/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/accounts/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/accounts/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/accounts/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/accounts/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/accounts/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/accounts/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/accounts/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/accounts/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/accounts/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/accounts/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/accounts/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/accounts/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/accounts/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/accounts/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/accounts/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/accounts/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/accounts/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/accounts/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/accounts/", "url": "https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/accounts/", "name": "帳戶與會話格式 | TgWitness", "description": "可透過手機、QR 碼或授權金鑰登入，匯入 Telethon、Pyrogram 或 Telegram Desktop 的會話紀錄，並同時管理多個帳戶。", "inLanguage": "zh-Hant", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首頁", "item": "https://phishdestroy.github.io/TgWitness/zh-Hant/"}, {"@type": "ListItem", "position": 2, "name": "文件說明", "item": "https://phishdestroy.github.io/TgWitness/zh-Hant/docs/"}, {"@type": "ListItem", "position": 3, "name": "參考資料", "item": "https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "帳戶與會話格式", "item": "https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/accounts/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">跳至內容</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / 文件說明</span></a>
+<nav aria-label="指南"><a href="../../concepts/">視覺指南</a><a href="../../">所有指南</a><a href="../">參考資料</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="語言"><span aria-hidden="true">◍</span> 繁體中文</summary><div class="lang-list"><a href="../../../../docs/reference/accounts/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/accounts/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/accounts/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/accounts/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/accounts/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/accounts/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/accounts/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/accounts/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/accounts/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/accounts/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/accounts/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/accounts/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/accounts/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/accounts/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/accounts/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/accounts/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/accounts/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/accounts/" hreflang="ko" lang="ko">한국어</a><a href="./" hreflang="zh-Hant" lang="zh-Hant" aria-current="true">繁體中文</a><a href="../../../../ms/docs/reference/accounts/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/accounts/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/accounts/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/accounts/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/accounts/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/accounts/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="在淺色與深色主題之間切換"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="指南"><a href="../../../guides/modes.html">模式、情境與證據等級</a><p class="nav-label">入門指南</p><a href="../../start/">幾分鐘內即可開始使用</a><a href="../../accounts/">連結帳戶</a><a href="../../proxies/">選擇代理伺服器</a><a href="../../exports/">匯出與驗證</a><p class="nav-label">了解證據</p><a href="../../concepts/">了解證據如何運作</a><a href="../../cases/">跨所有聊天室進行調查</a><a href="../../security/">確保安全</a><p class="nav-label">深入了解</p><a href="../../witness/">設定 Witness 機器人</a><a href="../../server/">讓它持續運作</a><a href="../../troubleshooting/">找出問題所在</a></nav><nav class="wiki-nav" aria-label="參考資料"><p class="nav-label"><a class="nav-label-link" href="../">參考資料</a></p><details class="wiki-group" open><summary>設定</summary><a href="../quickstart/">快速入門</a><a href="./" aria-current="page">帳戶與會話格式</a><a href="../connection/">連線、代理伺服器與資料保護</a><a href="../deployment/">部署</a></details><details class="wiki-group"><summary>收集</summary><a href="../collection/">資料蒐集原理</a><a href="../operations/">工作流程與操作</a><a href="../investigation/">調查模式</a><a href="../features/">功能與限制</a></details><details class="wiki-group"><summary>證據</summary><a href="../how-it-works/">證據的運作方式</a><a href="../evidence/">證據格式</a><a href="../witness/">獨立見證人</a><a href="../timestamp/">時間戳記</a></details><details class="wiki-group"><summary>安全性與專案</summary><a href="../security/">安全性與資料處理</a><a href="../architecture/">架構</a><a href="../verification/">已測試的內容</a><a href="../license/">授權說明及架構不相容聲明</a><a href="../notice/">操作員不相容通知</a><a href="../changelog/">更新紀錄</a></details></nav><p class="sidebar-note">v0.7.0<br>開源 · 可在您的機器上運行</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="指南"><a href="../../../">首頁</a> <span aria-hidden="true">/</span> <a href="../../">文件說明</a> <span aria-hidden="true">/</span> <a href="../">參考資料</a> <span aria-hidden="true">/</span> <span aria-current="page">帳戶與會話格式</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">搜尋文件</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="可嘗試使用「代理」、「雜湊鏈」、「代幣」或「見證者」等詞彙……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜尋" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">輸入關鍵字以搜尋指南與參考資料。搜尋結果僅保留於您的瀏覽器中。</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">參考資料 / 設定</p><h1>帳戶與會話格式</h1><p class="guide-outcome">可透過手機、QR 碼或授權金鑰登入，匯入 Telethon、Pyrogram 或 Telegram Desktop 的會話紀錄，並同時管理多個帳戶。</p><div class="wiki-body"><p>TgWitness 透過 MTProto 協議，使用
+Telethon 以 Telegram 用戶帳戶（而非機器人）身分登入。每個帳戶皆位於獨立的工作區中（在
+API 和命令列工具中稱為「工作區」），並擁有專屬的會話、來源、日誌及簽名金鑰。</p>
+<p>會話檔案、會話字串及認證金鑰均屬<strong>帳戶授權憑證</strong>：凡
+持有其中任何一項者，皆可代表該帳戶進行操作。這些資料不包含訊息歷史紀錄。</p>
+<blockquote class="callout">
+<p>[!警告]
+<strong>請勿使用任何您無法承受損失的資料。</strong>我們強烈建議不要連結
+個人帳戶或其他重要帳戶，也不要使用您重視的帳戶來建立
+API ID 或 API 雜湊值。 這並非因為 TgWitness 未經測試：Telegram 會以不可預測的方式限制並
+永久封禁帳號——只要其認為請求量
+過高，無論使用何種客戶端或出於何種目的，且未提供充分的文件說明。許多封禁
+措施皆無法撤銷。 請使用專用帳號。測試能否順利進行取決於 Telegram，而非
+軟體本身，且無法保證後續運作無虞。</p>
+</blockquote>
+<ul>
+<li><a href="#at-a-glance">一覽</a></li>
+<li><a href="#before-you-start-api-id-and-api-hash">開始之前：API ID 與 API 雜湊值</a></li>
+<li><a href="#phone-number">電話號碼</a> · <a href="#qr-code">QR 碼</a> · <a href="#auth-key--dc-id">授權金鑰 + DC 識別碼</a></li>
+<li><a href="#account-files">帳戶檔案</a>: <a href="#telethon-session">Telethon .session</a> ·
+    <a href="#pyrogram-session">Pyrogram .session</a> · <a href="#session--json-pair">會話 + JSON 對</a> ·
+    <a href="#telegram-desktop-tdata">TData</a> · <a href="#telethon-stringsession">StringSession</a> ·
+    <a href="#account-json">帳戶 JSON</a></li>
+<li><a href="#identify-what-you-have">釐清您所擁有的內容</a> · <a href="#unsupported-formats">不支援的格式</a></li>
+<li><a href="#multiple-accounts">多個帳戶</a> · <a href="#keeping-account-files-safe">確保帳戶檔案安全</a> ·
+    <a href="#troubleshooting">疑難排解</a></li>
+</ul>
+<h2 id="at-a-glance">一覽<a class="anchor" href="#at-a-glance" aria-label="此節的連結">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>您現有的內容</th>
+<th>「<strong>新增帳戶</strong>」分頁</th>
+<th>您還需要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>電話號碼及其登入代碼的存取權限</td>
+<td><strong>電話</strong></td>
+<td>若已啟用，則為雙因素驗證 (2FA) 密碼</td>
+</tr>
+<tr>
+<td>Telegram 已在另一台裝置上開啟</td>
+<td><strong>QR 碼</strong></td>
+<td>若已啟用，則為雙因素驗證 (2FA) 密碼</td>
+</tr>
+<tr>
+<td><code>.session</code> 檔案（Telethon 或 Pyrogram）</td>
+<td><strong>檔案</strong></td>
+<td>可選的 JSON 檔案，用於應用程式設定</td>
+</tr>
+<tr>
+<td><code>.session</code> + <code>.json</code>（名稱相同）</td>
+<td><strong>檔案</strong>（請選取兩者）</td>
+<td>通常沒有其他內容</td>
+</tr>
+<tr>
+<td>Telegram 桌面版中的「<code>tdata</code>」資料夾</td>
+<td><strong>檔案</strong>（ZIP 壓縮檔）</td>
+<td>若已設定，則為桌面版本機通行碼</td>
+</tr>
+<tr>
+<td>一場 Telethon StringSession（文字、<code>.txt</code>、<code>.tgwitness-session</code>）</td>
+<td><strong>檔案</strong></td>
+<td>無需額外配對的 API</td>
+</tr>
+<tr>
+<td>一個附帶會話或認證金鑰的 <code>.json</code></td>
+<td><strong>檔案</strong></td>
+<td>無需額外配對的 API</td>
+</tr>
+<tr>
+<td>一個授權金鑰（512 個十六進位字元）及其 DC 編號</td>
+<td><strong>授權金鑰</strong></td>
+<td>可選使用者 ID</td>
+</tr>
+</tbody>
+</table></div>
+<p>TgWitness 根據檔案<strong>內容</strong>而非檔案名稱來識別檔案。重新命名檔案
+絕不會導致其轉換。</p>
+<h2 id="before-you-start-api-id-and-api-hash">開始之前：API ID 與 API 雜湊值<a class="anchor" href="#before-you-start-api-id-and-api-hash" aria-label="此節的連結">#</a></h2>
+<p>您無需建立 Telegram API 應用程式即可登入。若未輸入、
+匯入或工作區中尚未儲存任何密鑰對，TgWitness 會從其內建的
+50 組公開 API 密鑰對（<code>tgwitness/api_pool.py</code>）中，以隨機順序選取一組。 若 Telegram 拒絕某組密鑰對
+（<code>API_ID_INVALID</code>、<code>API_ID_PUBLISHED_FLOOD</code>、<code>UPDATE_APP_TO_LOGIN</code>），則會嘗試下一組，
+每次登入最多嘗試八組；遭拒絕的密鑰對將被跳過，直至重新啟動為止。成功登入的密鑰對
+會與該帳戶一同儲存，並供該帳戶重複使用。<strong>API ID</strong> 與 <strong>API 雜湊</strong>值用於向 Telegram 識別該應用程式；它們
+本身並不會對帳戶進行授權。</p>
+<p>若要改用您自己的應用程式（註冊該應用程式的帳戶將面臨風險；請參閱「
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/PROJECT-GUIDE.md#connect-a-telegram-account">為何需要內建的 API 池？</a>」）：</p>
+<ol>
+<li>開啟 <a href="https://my.telegram.org">my.telegram.org</a> 並使用您擁有的任何電話號碼
+    登入。驗證碼將發送至 Telegram 應用程式，而非透過簡訊。</li>
+<li>選擇 <strong>API 開發工具</strong>。</li>
+<li>建立應用程式：任選標題與簡稱（5–32 個字母），平台選「<strong>桌面版</strong>」。
+    網址與描述欄位可留空。</li>
+<li>請複製 <strong>App api_id</strong>（一個數字）和 <strong>App api_hash</strong>（32 個十六進位字元）。</li>
+</ol>
+<p>在登入表單下方的面板中，會顯示「<strong>API ID + Hash</strong>」。您可將一組
+<code>api_id:api_hash</code> 組合貼上至 <strong>API ID</strong> 欄位，系統便會自動填入兩個欄位。同一組組合可
+適用於您所有的帳戶。成功登入後，該組合將以加密形式儲存於
+該工作區內，且絕不會傳回瀏覽器。</p>
+<p>涉及三種不同的憑證：</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>機密</th>
+<th>開啟</th>
+<th>存放位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>面板代幣</td>
+<td>TgWitness 網頁控制面板</td>
+<td>資料目錄中的 <code>panel-token.txt</code>，或 <code>TGWITNESS_TOKEN</code></td>
+</tr>
+<tr>
+<td>API ID + 雜湊值</td>
+<td>本身並無特殊含義；僅用於識別該應用程式</td>
+<td>可透過內建配對、匯入設定，或於 my.telegram.org 建立您專屬的應用程式</td>
+</tr>
+<tr>
+<td>帳戶授權</td>
+<td>Telegram 帳號</td>
+<td>可透過手機／QR 碼登入建立，或作為會話匯入</td>
+</tr>
+</tbody>
+</table></div>
+<p>若必須透過代理伺服器連線至 Telegram，請先前往「
+<strong>帳戶」→「設定」→「連線設定」→「變更連線路徑</strong>」進行設定。</p>
+<h2 id="phone-number">電話號碼<a class="anchor" href="#phone-number" aria-label="此節的連結">#</a></h2>
+<ol>
+<li>開啟「<strong>帳戶</strong>」頁面，切換至<strong>「電話」</strong>分頁，並以國際格式輸入號碼，
+    例如 <code>+44 7700 900123</code>。空格和連字號會自動移除。</li>
+<li>按下「<strong>繼續</strong>」。API ID + Hash 欄位可留空。</li>
+<li>請輸入 Telegram 發送的驗證碼（通常發送至 Telegram 應用程式；無法保證會透過簡訊發送）。</li>
+<li>若該帳號啟用了兩步驟驗證，請輸入該密碼。此密碼並非控制面板
+    代幣，亦非裝置通行碼。</li>
+<li>登入後請確認顯示的帳號 ID，然後選擇資料來源。</li>
+</ol>
+<p>登入代碼與雙因素驗證 (2FA) 密碼絕不會寫入磁碟。</p>
+<h2 id="qr-code">QR 碼<a class="anchor" href="#qr-code" aria-label="此節的連結">#</a></h2>
+<p>當該帳號已在手機或另一台電腦上登入時，請使用此功能。</p>
+<ol>
+<li>點擊「<strong>QR 碼」</strong>→ <strong>顯示 QR 碼</strong>。API ID + Hash 欄位可留空。</li>
+<li>在已登入的裝置上：<strong>設定 → 裝置 → 連結桌面裝置</strong>，掃描條碼
+    並確認。</li>
+<li>若 Telegram 要求，請在 TgWitness 中輸入雙因素驗證 (2FA) 密碼。</li>
+</ol>
+<p>此 QR 碼圖像係於本地端產生。QR 碼會過期；請按「<strong>產生另一個 QR 碼」</strong>
+以重新嘗試。若鎖定面板、切換工作區或啟動另一組登入程序，將取消
+待處理的 QR 碼。</p>
+<h2 id="auth-key--dc-id">授權金鑰 + DC 識別碼<a class="anchor" href="#auth-key--dc-id" aria-label="此節的連結">#</a></h2>
+<p>授權金鑰（Auth Key）是每個 Telegram 連線背後 256 位元的原始授權資料，以
+<strong>512 個十六進位字元</strong>表示，並附有資料中心編號 <strong>DC 1–5</strong>。</p>
+<ol>
+<li>「<strong>Auth key</strong>」分頁。請貼上完整的金鑰；若金鑰中包含「<code>…</code>」等縮寫，則無法正常運作。</li>
+<li>請選擇隨金鑰一併提供的 DC ID。</li>
+<li>可選擇輸入<strong>使用者 ID</strong>。若 Telegram 回報
+    帳戶不符，TgWitness 將拒絕連線。</li>
+<li>Press <strong>Connect 帳戶</strong>。</li>
+</ol>
+<p>授權金鑰（512 個字元）並非 API 雜湊值（32 個字元）。同一組金鑰亦可
+以 JSON 格式匯入，詳見「<a href="#account-json">帳戶 JSON</a>」。</p>
+<h2 id="account-files">帳戶檔案<a class="anchor" href="#account-files" aria-label="此節的連結">#</a></h2>
+<p>開啟<strong>「新增帳戶」→「檔案」</strong>，並選取最多<strong>四個屬於同一帳戶的檔案</strong>（總計
+<strong>8 MiB</strong>），然後按下「<strong>連線帳戶」</strong>。</p>
+<ul>
+<li>檔案會在您的 TgWitness 伺服器<strong>記憶體中</strong>進行轉換。上傳的檔案不會被儲存，
+    ZIP 檔案不會解壓縮至磁碟，也不會與任何外部服務進行連線。</li>
+<li>隨後會將生成的會話記錄與 Telegram 進行比對。若檔案中載明使用者 ID，
+    則該 ID 必須與 Telegram 回報的帳戶相符。</li>
+<li>描述不同帳戶或不同 API 憑證的檔案將被拒絕
+    而非僅選擇其中一個。</li>
+<li><strong>密碼或會話文字</strong>欄位包含 TData 的本地密碼欄位，此處可貼上
+    StringSession 並<strong>讀取檔案</strong>，<strong>無需登入</strong>（填寫表單時無需
+    聯繫 Telegram）。</li>
+</ul>
+<h3 id="telethon-session">Telethon <code>.session</code><a class="anchor" href="#telethon-session" aria-label="此節的連結">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>產品簡介</td>
+<td>由 Telethon 衍生工具所建立的 SQLite 資料庫，例如 <code>my_account.session</code></td>
+</tr>
+<tr>
+<td>獲以下機構認可</td>
+<td>表格 <code>sessions</code>（連同 <code>dc_id</code>、<code>server_address</code>、<code>port</code>、<code>auth_key</code>）及 <code>version</code> = 7 或 8</td>
+</tr>
+<tr>
+<td>要求</td>
+<td>僅有一筆授權會話記錄；一個封閉且完整的数据庫</td>
+</tr>
+</tbody>
+</table></div>
+<p>請先關閉建立該檔案的程式。若其旁邊存在 <code>my_account.session-journal</code> 或
+<code>my_account.session-wal</code>，表示資料庫尚未完成：請正常開啟並
+關閉原始客戶端。刪除這些輔助檔案可能會留下損壞的副本。</p>
+<h3 id="pyrogram-session">Pyrogram <code>.session</code><a class="anchor" href="#pyrogram-session" aria-label="此節的連結">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>產品簡介</td>
+<td>基於 Pyrogram 的工具所建立的 SQLite 資料庫</td>
+</tr>
+<tr>
+<td>獲以下機構認可</td>
+<td>表格 <code>sessions</code> 包含 <code>dc_id</code>、<code>auth_key</code>、<code>test_mode</code>、<code>user_id</code>、<code>is_bot</code>；<code>version</code> = 2 或 3</td>
+</tr>
+<tr>
+<td>要求</td>
+<td>生產環境網路中僅允許一個授權<strong>使用者</strong>會話。機器人及測試資料中心（test-DC）的會話將被拒絕</td>
+</tr>
+</tbody>
+</table></div>
+<p>登入時，系統會將儲存的用戶 ID 與 Telegram 進行比對。</p>
+<h3 id="session--json-pair">會話 + JSON 對<a class="anchor" href="#session--json-pair" aria-label="此節的連結">#</a></h3>
+<p>帳戶資料通常以兩個同名檔案的形式分發，例如
+<code>447700900123.session</code> 和 <code>447700900123.json</code>。請一次選取<strong>兩者</strong>。</p>
+<ul>
+<li>根據 JSON 資料，TgWitness 使用 <code>app_id</code>/<code>api_id</code> 及 <code>app_hash</code>/<code>api_hash</code>，因此您
+    通常無需手動輸入 API 憑證。</li>
+<li>其他欄位（例如 <code>phone</code>、<code>device</code>、<code>sdk</code>、<code>app_version</code>、<code>lang_pack</code> 或儲存的
+    <code>twoFA</code> 密碼）將被<strong>忽略</strong>。若該帳號啟用雙因素驗證（2FA），TgWitness 會要求輸入驗證碼。</li>
+<li>單獨的 JSON 檔案僅為元資料。若無會話檔案，請繼續透過手機
+    或 QR 碼登入。</li>
+</ul>
+<h3 id="telegram-desktop-tdata">Telegram 桌面版 (TData)<a class="anchor" href="#telegram-desktop-tdata" aria-label="此節的連結">#</a></h3>
+<p>TData 即是 Telegram Desktop 應用程式（來自 desktop.telegram.org 的跨平台
+應用程式）中的 <code>tdata</code> 資料夾。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>系統</th>
+<th>預設位置：<code>tdata</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td><code>%APPDATA%\Telegram Desktop\tdata</code>（可攜式 Telegram：位於 <code>Telegram.exe</code> 旁邊）</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td><code>~/.local/share/TelegramDesktop/tdata</code></td>
+</tr>
+<tr>
+<td>macOS</td>
+<td><code>~/Library/Application Support/Telegram Desktop/tdata</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>若要導入此工具：</p>
+<blockquote class="callout">
+<p><strong>並行會話警告。</strong>導入 TData 會重複使用 Telegram Desktop 的授權
+金鑰；此操作不會建立獨立的登入帳戶。請勿在 Desktop 和
+TgWitness 中同時使用該金鑰。Telegram 可能會透過
+<code>AUTH_KEY_DUPLICATED</code> 使授權失效，導致兩者皆無法使用，直至進行新的登入為止。</p>
+<p>請完全退出 Desktop 程式（包括其系統托盤進程），並在
+TgWitness 使用已匯入的會話期間保持該副本關閉。 <strong>請直接退出程式，切勿登出或撤銷該會話：</strong>
+撤銷操作也會使已匯入的副本失效。若您需要同時運行兩個客戶端，
+請透過手機或 QR 碼登入 TgWitness 以建立其專屬授權。建議使用專用
+帳戶，但這並不能確保複製的金鑰在並行使用時是安全的。</p>
+<p>此規則同樣適用於匯入的 <code>.session</code> 檔案、StringSession 文字及 Auth Key HEX。
+其他擁有獨立建立之授權的用戶仍可保持登入狀態。
+請參閱 <a href="https://core.telegram.org/api/errors#406-not-acceptable">Telegram 的 AUTH_KEY_DUPLICATED 文件</a>。</p>
+</blockquote>
+<ol>
+<li>完全退出 Telegram Desktop。</li>
+<li>
+<p>請從 <code>tdata</code> 中擷取僅包含以下兩項內容的 ZIP 檔案：</p>
+<ul>
+<li><code>key_datas</code></li>
+<li>其旁邊以 <code>s</code> 結尾的 16 字元檔案，通常為 <code>D877F783D5D3EF8Cs</code></li>
+</ul>
+<p>將整個資料夾連同其媒體快取一併壓縮為 ZIP 檔時，通常會超過限制
+（512 筆記錄，解壓縮後 32 MiB）。
+3. 在<strong>「檔案</strong>」中選取 ZIP 檔。若 Telegram Desktop 設有<strong>本機密碼</strong>，請先在
+<strong>「密碼」或「會話文字」</strong>欄位中輸入該密碼。此並非雙因素驗證 (2FA) 密碼。</p>
+</li>
+</ol>
+<p>支援功能：每個存檔僅限一個帳戶、現代化的 <code>key_datas</code>/<code>key_data0</code>/<code>key_data1</code> 儲存技術，
+以及本機密碼。不支援功能：包含多個已登入帳戶的資料夾、較舊的桌面版
+介面佈局、受密碼保護的 ZIP 檔案，以及獨立的原生 macOS 應用程式「Telegram for macOS」。</p>
+<h3 id="telethon-stringsession">Telethon StringSession<a class="anchor" href="#telethon-stringsession" aria-label="此節的連結">#</a></h3>
+<p>單行文字，通常以 <code>1</code> 開頭，長度約 350 個字元。請將其
+載入為 <code>.txt</code> 或 <code>.tgwitness-session</code> 檔案（最大 4 KiB），或貼至
+<strong>「密碼」或「會話文字」</strong>欄位下方。僅接受 Telethon 字串；Pyrogram 和 TDLib
+字串採用不同格式。</p>
+<h3 id="account-json">帳戶 JSON<a class="anchor" href="#account-json" aria-label="此節的連結">#</a></h3>
+<p>一個 JSON 物件，大小最多 <strong>64 KiB</strong>，存於副檔名為 <strong><code>.json</code></strong> 的檔案中。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>欄位（別名）</th>
+<th>含義</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>api_id</code> (<code>app_id</code>)</td>
+<td>應用程式 ID，一個正整數</td>
+</tr>
+<tr>
+<td><code>api_hash</code> (<code>app_hash</code>)</td>
+<td>應用程式雜湊值，32 個十六進位字元</td>
+</tr>
+<tr>
+<td><code>string_session</code> (<code>session_string</code>, <code>session</code>)</td>
+<td>Telethon StringSession 文字內容，並非檔案名稱</td>
+</tr>
+<tr>
+<td><code>auth_key</code> (<code>auth_key_hex</code>) + <code>dc_id</code></td>
+<td>完整的 512 字元授權金鑰及 DC 1–5</td>
+</tr>
+<tr>
+<td><code>user_id</code> (<code>id</code>)</td>
+<td>可選；在儲存授權前會與 Telegram 進行比對</td>
+</tr>
+</tbody>
+</table></div>
+<p>若同時存在別名與主要名稱，兩者必須一致。範例：</p>
+<pre><code class="language-json">{ &quot;app_id&quot;: 1234567, &quot;app_hash&quot;: &quot;0123456789abcdef0123456789abcdef&quot; }</code></pre>
+<pre><code class="language-json">{
+  &quot;api_id&quot;: 1234567,
+  &quot;api_hash&quot;: &quot;0123456789abcdef0123456789abcdef&quot;,
+  &quot;auth_key&quot;: &quot;REPLACE_WITH_ALL_512_HEXADECIMAL_CHARACTERS&quot;,
+  &quot;dc_id&quot;: 2,
+  &quot;user_id&quot;: 123456789
+}</code></pre>
+<p>第一個範例僅需填入 API 憑證；您可透過手機或 QR 碼登入，或新增一個會話
+檔案。系統不接受批次清單（帳戶的 JSON 陣列）。</p>
+<h2 id="identify-what-you-have">釐清您所擁有的內容<a class="anchor" href="#identify-what-you-have" aria-label="此節的連結">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>您會看到</th>
+<th>它是一項</th>
+<th>使用說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*.session</code>；在文字編輯器中開啟時，頂端顯示 <code>SQLite format 3</code></td>
+<td>Telethon 或 Pyrogram SQLite</td>
+<td><strong>檔案</strong>（自動偵測）</td>
+</tr>
+<tr>
+<td>一個名為 <code>tdata</code> 的資料夾，其中包含 <code>key_datas</code></td>
+<td>Telegram 桌面版 TData</td>
+<td>將兩個檔案壓縮為 ZIP 檔，然後前往「<strong>檔案」</strong></td>
+</tr>
+<tr>
+<td>以 <code>1</code> 開頭的一行文字，約 350 個字元</td>
+<td>Telethon StringSession</td>
+<td><strong>檔案</strong></td>
+</tr>
+<tr>
+<td><code>*.json</code> 搭配 <code>app_id</code>/<code>app_hash</code></td>
+<td>相關元資料</td>
+<td><strong>檔案</strong>及其對應的會話</td>
+</tr>
+<tr>
+<td><code>*.json</code> 搭配 <code>auth_key</code> 或 <code>string_session</code></td>
+<td>帳戶 JSON</td>
+<td><strong>檔案</strong></td>
+</tr>
+<tr>
+<td>512 個字元 <code>0-9a-f</code></td>
+<td>授權金鑰</td>
+<td><strong>授權金鑰</strong></td>
+</tr>
+<tr>
+<td>32 個字元 <code>0-9a-f</code></td>
+<td>API 雜湊值</td>
+<td><strong>API 識別碼 + 雜湊值</strong></td>
+</tr>
+<tr>
+<td>來自 TDLib 應用程式的 <code>td.binlog</code> 或 <code>db.sqlite</code></td>
+<td>TDLib 儲存</td>
+<td>不支援</td>
+</tr>
+<tr>
+<td><code>123456789:AA…</code></td>
+<td>機器人代幣</td>
+<td>不支援</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="unsupported-formats">不支援的格式<a class="anchor" href="#unsupported-formats" aria-label="此節的連結">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>格式</th>
+<th>替代版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TDLib 儲存 (<code>td.binlog</code>) 及 TDLib 匯出功能</td>
+<td>透過手機或 QR 碼登入</td>
+</tr>
+<tr>
+<td>Pyrogram 會話<strong>字串</strong></td>
+<td>請使用 Pyrogram <code>.session</code> 檔案，或透過手機/QR 碼</td>
+</tr>
+<tr>
+<td>TData 附帶多個已登入的帳戶</td>
+<td>請在 Telegram Desktop 中登出其他帳戶，或使用各帳戶專屬的會話檔案</td>
+</tr>
+<tr>
+<td>機器人代幣</td>
+<td>不支援：TgWitness 僅以使用者帳戶身分進行監測</td>
+</tr>
+<tr>
+<td>包含多個帳戶的 CSV/JSON 清單</td>
+<td>每個帳戶新增一個工作區</td>
+</tr>
+<tr>
+<td>Test-DC 或 機器人會話</td>
+<td>請使用正式運作的用戶帳戶</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="multiple-accounts">多個帳戶<a class="anchor" href="#multiple-accounts" aria-label="此節的連結">#</a></h2>
+<p>請按下帳戶選擇器旁的 <strong>+</strong>，或開啟
+<strong>帳戶 → 設定 → 連線設定 → 工作區</strong>，輸入標籤並
+登入。</p>
+<ul>
+<li>可建立任意數量的工作區，包含主工作區在內。每個工作區皆擁有獨立的會話、代理
+    路由、來源、擷取政策、日誌、簽名金鑰、檢查點及匯出設定。</li>
+<li>切換顯示中的工作區並不會暫停其他工作區的運作。</li>
+<li>日誌會與建立它的帳戶綁定。若以其他
+    帳戶登入，則需建立另一個工作區，且一個帳戶無法被指派至兩個
+    工作區。</li>
+<li>所有工作區共用一個面板代幣；它們並非獨立的使用者。</li>
+<li><strong>帳戶會</strong>重新命名一個工作區，並刪除已新增的工作區，連同其會話、日誌、
+    來源及簽名金鑰一併刪除。主工作區無法從控制面板中刪除。</li>
+</ul>
+<h2 id="sign-out">登出<a class="anchor" href="#sign-out" aria-label="此節的連結">#</a></h2>
+<p>「<strong>帳戶 → 登出 Telegram</strong>（暫停監測）」會要求 Telegram 終止該
+連線，因此該連線也會從帳戶的「<strong>設定 → 裝置</strong>」中消失，並將該
+連線從工作區金庫中移除。日誌、來源、設定和簽名金鑰仍會保留，且
+日誌會記錄此次登出操作。 該工作區仍歸屬於其帳戶：僅有該
+帳戶可再次連線至該工作區。若 Telegram 未回應，該連線仍會在此處被移除
+，且控制面板會顯示此訊息；請在 Telegram 的「<strong>設定」→「裝置」</strong>中結束該連線。</p>
+<h2 id="convert-a-telethon-session-offline">將 Telethon 會話轉換為離線格式<a class="anchor" href="#convert-a-telethon-session-offline" aria-label="此節的連結">#</a></h2>
+<p>此面板可直接匯入 <code>.session</code> 檔案。若要離線轉換為
+StringSession 檔案，請從專案資料夾執行：</p>
+<pre><code class="language-powershell">.venv\Scripts\python.exe -m tgwitness.sessions account.session --out account.tgwitness-session   # Windows</code></pre>
+<pre><code class="language-sh">.venv/bin/python -m tgwitness.sessions account.session --out account.tgwitness-session          # Linux/macOS</code></pre>
+<p>此轉換器僅讀取 Telethon SQLite 檔案（上限 64 MiB），絕不修改輸入內容，
+不會發出任何網路請求，且拒絕覆寫現有的輸出檔案。</p>
+<h2 id="keeping-account-files-safe">確保帳戶檔案安全<a class="anchor" href="#keeping-account-files-safe" aria-label="此節的連結">#</a></h2>
+<ul>
+<li>請將每個 <code>.session</code>、TData ZIP、StringSession、Auth Key 及帳戶 JSON 視同
+    密碼般嚴加保護。TgWitness 會將匯入的授權資訊儲存於其加密金庫中；您可
+    於事後刪除原始檔案。</li>
+<li>請勿同時在兩個程式中執行相同的授權。Telegram 可能會撤銷該授權
+    (<code>AUTH_KEY_DUPLICATED</code>)，屆時兩個程式都將無法運作。</li>
+<li>已過期或遭撤銷的連線無法透過轉換恢復。請重新登入。</li>
+</ul>
+<h2 id="troubleshooting">疑難排解<a class="anchor" href="#troubleshooting" aria-label="此節的連結">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>訊息或徵兆</th>
+<th>操作指南</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>無法讀取此會話。請關閉其原始客戶端……</em></td>
+<td>SQLite 檔案目前處於開啟狀態或尚未完成（<code>-journal</code>/<code>-wal</code> 輔助檔案）。請先正常關閉原始程式，然後重新複製該檔案。</td>
+</tr>
+<tr>
+<td><em>支援的 Telethon SQLite 資料結構：7 及 8</em> / <em>Pyrogram … 2 和 3</em></td>
+<td>此檔案是由非常舊或來源不明的函式庫版本所建立。請改用手機號碼／QR 碼登入。</td>
+</tr>
+<tr>
+<td><em>僅支援經授權的生產環境使用者會話</em></td>
+<td>該 Pyrogram 檔案屬於某個機器人或測試網路。</td>
+</tr>
+<tr>
+<td><em>TData 存檔已超過 512 筆記錄或 32 MiB</em></td>
+<td>僅包含 ZIP 檔案 <code>key_datas</code> 和 <code>D877F783D5D3EF8Cs</code>，而非整個資料夾。</td>
+</tr>
+<tr>
+<td><em>無法解密 TData。請檢查桌面本機密碼</em></td>
+<td>請在「<strong>密碼」或「會話文字」</strong>欄位中輸入 Telegram Desktop 的本地密碼。</td>
+</tr>
+<tr>
+<td><em>每次僅可匯入一個 TData 帳戶</em></td>
+<td>Telegram Desktop 擁有多個帳戶；請參閱「<a href="#unsupported-formats">不支援的格式</a>」。</td>
+</tr>
+<tr>
+<td><em>選定的檔案描述了不同的帳戶或 API 憑證</em></td>
+<td>僅選取單一帳戶的檔案。</td>
+</tr>
+<tr>
+<td><em>JSON 內容中未包含任何受支援的 API 憑證或授權資訊</em></td>
+<td>請檢查 <a href="#account-json">Account JSON</a> 中的欄位名稱。</td>
+</tr>
+<tr>
+<td><em>僅限 API 元資料</em></td>
+<td>該 JSON 檔案未包含會話資訊。請新增 <code>.session</code> 檔案，或使用手機/QR 碼。</td>
+</tr>
+<tr>
+<td><em>授權金鑰的十六進位值必須包含全部 512 個十六進位字元</em></td>
+<td>金鑰已被截斷或包含「<code>…</code>」。</td>
+</tr>
+<tr>
+<td>帳號 ID 與匯入的帳號不符</td>
+<td>該檔案的用戶 ID 與 Telegram 所顯示的不符；此檔案屬於另一個帳號。</td>
+</tr>
+<tr>
+<td>該帳號已屬於另一個工作區</td>
+<td>請開啟該工作區，而非重複新增該帳號兩次。</td>
+</tr>
+<tr>
+<td>已連線，但「<strong>來源」</strong>中的聊天清單缺少一個私人群組</td>
+<td>檢查會員資格。篩選器會檢查前 1,000 個對話；請在「<strong>參數」</strong>中提高此限制。</td>
+</tr>
+<tr>
+<td>代理連線失敗</td>
+<td>請檢查主機、埠號及憑證。TgWitness 絕不會退而採用直接連線。</td>
+</tr>
+</tbody>
+</table></div>
+<p>另請參閱：代理伺服器與加密的<a href="../connection/">連線及安全性</a>，
+以及登入後資料擷取的<a href="../collection/">運作方式</a>。</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCOUNTS.md">在 GitHub 上編輯此頁面 ↗</a><a class="next-guide" href="../connection/"><span>下一步</span><strong>連線、代理伺服器與資料保護 →</strong></a><p>這些指南描述了當前的實作方式。驗證結果與尚存的缺口將另行記錄。 <a href="../verification/">已測試的內容 →</a></p></footer>
+</main>
+<aside class="toc" aria-label="本頁內容"><p class="nav-label">本頁內容</p><a href="#at-a-glance">一覽</a><a href="#before-you-start-api-id-and-api-hash">開始之前：API ID 與 API 雜湊值</a><a href="#phone-number">電話號碼</a><a href="#qr-code">QR 碼</a><a href="#auth-key--dc-id">授權金鑰 + DC 識別碼</a><a href="#account-files">帳戶檔案</a><a href="#identify-what-you-have">釐清您所擁有的內容</a><a href="#unsupported-formats">不支援的格式</a><a href="#multiple-accounts">多個帳戶</a><a href="#sign-out">登出</a><a href="#convert-a-telethon-session-offline">將 Telethon 會話轉換為離線格式</a><a href="#keeping-account-files-safe">確保帳戶檔案安全</a><a href="#troubleshooting">疑難排解</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>開源 · 可在您的機器上運行</span><a href="../../../../LICENSE">MIT 授權條款</a><a href="../notice/">操作員公告</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">安全性</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "等待訊息", "Step through a fictional send, edit and delete.": "透過一個虛構的發送、編輯和刪除流程逐步了解操作。", "No observations yet. Start the sequence or advance one event.": "目前尚無觀察記錄。開始執行序列或跳至下一則事件。", "Meet at 10:00": "上午 10:00 見面", "A new message is visible in the chat.": "聊天室中顯示了一則新訊息。", "Record 1 appended: the collector observed the original message.": "新增記錄 1 筆：收集器已偵測到原始訊息。", "Meet at 11:00": "上午 11:00 見面", "The current text changes. The earlier observation stays.": "當前文本有所變更。先前的觀察結果維持不變。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "新增記錄 2：此編輯為一項新觀察結果。記錄 1 仍保留原始文字。", "Message deleted": "訊息已刪除", "The message has disappeared from the chat view.": "該訊息已從聊天視圖中消失。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "新增「Record 3」：刪除通知將與兩個被觀察到的版本一併保留。", "0 records": "0 筆記錄", "1 record": "1 筆記錄", "2 records": "2 筆記錄", "3 records": "3 筆記錄", "Complete / {n} of 3": "完成 / {n} 共 3 項", "Step / {n} of 3": "步驟 / 3 中的 {n}", "Pause": "暫停", "Replay sequence": "重播序列", "Play sequence": "播放順序", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "靜態範例已上線。若要互動式計算雜湊值，請透過 HTTPS 開啟此頁面，或使用支援 Web Crypto 的 localhost 預覽。", "No record supplied": "未提供記錄", "Tail removed": "尾部內容已移除", "≠ saved hash": "≠ 已儲存的雜湊值", "Rebuilt · different hash": "重新建置 · 不同雜湊值", "= saved hash": "= 儲存的雜湊值", "Same length and matching head.": "篇幅相同且標題一致。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "這三個計算出的雜湊值均與儲存的雜湊值相符。此樣本符合保留的三筆記錄邊界。", "Same saved head; the journal prefix fails verification.": "儲存的標題相同；但日誌前綴無法通過驗證。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "記錄 2 已與其儲存的雜湊值不符。若僅檢查最後儲存的「頭部」，將無法發現此問題；驗證器會檢查每一筆記錄。", "Head differs from the retained checkpoint.": "標題與保留的檢查點不同。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "重建的雜湊值彼此關聯，但最終的頭部已發生變更。保留的檢查點會拒絕此歷史記錄。若記錄內容遭變更，原始簽名亦將驗證失敗。", "Too short: 2 supplied records \u003c 3 retained records.": "過短：提供的 2 筆記錄 \u003c 保留的 3 筆記錄。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "剩餘的兩個雜湊值仍然匹配。保留的檢查點揭示了缺失的部分。若無該較早的邊界，僅憑這個較短的前綴是無法揭露此遺漏的。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "此瀏覽器無法進行雜湊運算。下方的公式與靜態說明仍可正常顯示。", "{n} records": "{n} 筆記錄", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "已接受：計數持續增加，簽名經驗證無誤，且金鑰匹配。該見證者保留此新界限。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "回滾：簽名答覆所報告的記錄數量少於最後一個被接受的檢查點。Witness 會記錄此問題，並保留較早的被接受邊界。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "分叉（Fork）：分支數量未變，但分支頭不同。該見證系統會記錄此分歧，並保留先前被接受的分支邊界。", "No answer": "無回應", "boundary unknown": "邊界未知", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "無回應：Witness 會記錄驗證失敗的狀況。它無法判定收集器的當前狀態。若 Witness 仍能連線至 Bot API，且其發布政策允許，則可發布該次失敗的紀錄。", "Send {n}": "傳送 {n}", "Edit {n}": "編輯 {n}", "Delete {n}": "刪除 {n}", "Both accounts captured all six expected observations in this example.": "在此範例中，兩個帳戶均完整記錄了預期的六項觀察結果。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "帳號 B 仍成功擷取了 6 則中的 6 則。其中兩則收據的擷取時間較長。擷取率與收據延遲反映的是不同的問題。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "帳戶 B 在截止時間前成功擷取了 6 項中的 5 項（83.3%）。遺漏的那項編輯操作未測得任何延遲。此結果僅描述這六項受控操作。", "not observed by cutoff": "未在截止時間前觀察到", "{s} seconds": "{s} 秒", "Exact values follow in the table.": "具體數值詳見下表。", "{s} s": "{s} s", "Not observed": "未觀察到", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "四個聊天室提供了不同的觀察結果。請追蹤每項連結的原始記錄；若未標明發送者，請勿將該頻道貼文歸屬於使用者 71001。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "記錄 #146 和 #205 顯示相同的發送者 ID：71001。這將兩個聊天室中觀察到的 Telegram 帳號貼文相互連結。此資訊並未識別任何現實世界中的人士，亦未歸屬該頻道貼文的來源。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "目的地 pay.example.invalid/new 出現在群組記錄 #146、機器人鍵盤 #173、頻道編輯 #188 以及私人訊息 #205 中。重複出現的目的地將這些資料連結起來；但這並不能證明這些帳戶受共同控制。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "在此虛構案例中，已完成的媒體收據 #151 與 #209 具有完全相同的 SHA-256 值。請比較實際位元組及其相關的訊息記錄。該匹配檔案並未標示其創建者，亦無法證明是由誰轉發的。", "the encrypted off-site copy": "加密的異地備份", "notifications": "通知", "checkpoint hashes for timestamps": "時間戳記的檢查點雜湊值", "signed checkpoints for the witness": "TgWitness 的簽名檢查點", "Switched on in this example": "此範例中已啟用", "Optional · off by default": "可選 · 預設為關閉", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "離開這台機器時：Telegram 連線及 {list}。除此之外別無他物。", "Default: only the Telegram connection leaves this machine.": "預設設定：僅 Telegram 連線會離開這台機器。", "{done} of {total} done": "已完成 {done}/{total}", "Mark step {n} as done": "將步驟 {n} 標記為已完成", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "複製", "Copied": "複製", "Command copied.": "指令已複製。", "Selected — Ctrl/Cmd+C": "選取 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "已選取指令。請手動複製。", "Command copied to clipboard.": "指令已複製至剪貼簿。", "Select text": "選取文字", "Clipboard unavailable. Command selected; copy it manually.": "剪貼簿無法使用。已選取指令；請手動複製。", "A message arrives. The first observation is saved.": "一則訊息送達。首項觀察記錄已儲存。", "The time changes. Both captured versions stay.": "時間雖變，但兩份記錄版本皆保留。", "The message disappears. The captured history remains.": "訊息雖已消失，但被擷取的歷史紀錄依然存在。", "Pause example animation": "暫停範例動畫", "Play example animation": "播放範例動畫", "Play": "播放", "Full-size workspace screenshot": "全螢幕工作區螢幕截圖", "Workspace screenshot · fictional data": "工作區螢幕截圖 · 虛構資料", "Close": "關閉", "Close screenshot": "關閉螢幕截圖", "Scrollable full-size screenshot": "可捲動的全螢幕截圖", "Enlarge: {name}": "放大：{name}", "View full size": "檢視完整尺寸"}</script>
+</body></html>

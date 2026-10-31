@@ -20,6 +20,7 @@ const labels = {
   "recheck.completed": [tr("Recheck completed"), "refresh", "system"],
   "replica.completed": [tr("Off-site copy"), "export", "system"], "replica.changed": [tr("Off-site copy settings changed"), "settings", "system"],
   "alerts.changed": [tr("Notification settings changed"), "settings", "system"],
+  "source.checked": [tr("Code checked against GitHub"), "shield", "system"],
   "anchor.completed": [tr("Checkpoint timestamped"), "clock", "system"], "evidence.changed": [tr("Evidence mode changed"), "settings", "system"],
   "storage.low": [tr("Disk almost full"), "alert", "coverage"], "storage.ok": [tr("Disk space available again"), "refresh", "system"],
   "reaction.snapshot": [tr("Reactions observed"), "heart", "reaction"], "membership.service": [tr("Membership service event"), "users", "member"],
@@ -188,12 +189,11 @@ function navigate(view) {
   $("view-label").textContent=tr({chats:"Chats",observations:"Journal",sources:"Sources",evidence:"Exports",witness:"Extras",parameters:"Parameters",connection:"Account",accounts:"Accounts"}[view]);
   show("entry-header",view==="connection");
   if(view==="connection")connectionSettings(false);
-  if (view==="sources") {renderTargets();loadAlerts().catch(e=>toast(e.message,true));loadScope().catch(e=>toast(e.message,true));}
-  if (view==="witness") loadWitness().catch(e=>toast(e.message,true));
+  if (view==="sources") {renderTargets();loadScope().catch(e=>toast(e.message,true));}
+  if (view==="witness") loadExtras().catch(e=>toast(e.message,true));
   if (view==="parameters") loadParameters().catch(e=>toast(e.message,true));
   if (view==="accounts") {renderAccounts();loadProfiles().catch(e=>toast(e.message,true));}
   if (view==="chats") refreshChats().catch(e=>toast(e.message,true));
-  if (view==="evidence") {loadEvidence().catch(e=>toast(e.message,true));loadReplica().catch(e=>toast(e.message,true));}
 }
 $("manage-profiles").addEventListener("click",()=>{
   navigate("connection");connectionSettings(true);$("profiles-details").open=true;$("profiles-details").scrollIntoView({block:"start"});
@@ -516,9 +516,8 @@ async function switchProfile(id){
   $("network-result").textContent="";
   await refreshStatus();await refreshEvents();await loadProfiles();
   if(state.view==="chats")await refreshChats();
-  if(state.view==="sources"){await loadScope();await loadAlerts();}
-  if(state.view==="evidence"){await loadEvidence();await loadReplica();}
-  if(state.view==="witness")await loadWitness();
+  if(state.view==="sources")await loadScope();
+  if(state.view==="witness")await loadExtras();
   if(state.view==="parameters")await loadParameters();
   await loadNotifications().catch(()=>{});
   if(revision!==state.workspaceRevision)return;
@@ -551,6 +550,7 @@ function excerpt(e) {
   if (e.kind==="alerts.changed") return p.enabled?tr("On · {n} destination(s)",{n:p.destinations}):tr("Off");
   if (e.kind==="replica.changed") return p.enabled?tr("On · {bucket} · every {n} min",{bucket:p.bucket,n:p.interval_minutes}):tr("Off");
   if (e.kind==="anchor.completed") return tr("{ok} of {total} services answered for the checkpoint of {n} records",{ok:p.results.filter(r=>r.ok).length,total:p.results.length,n:p.checkpoint.event_count});
+  if (e.kind==="source.checked") return (p.matches?tr("Matches"):tr("Differs"))+" · "+p.repository.replace("https://github.com/","")+" @ "+p.commit.slice(0,12);
   if (e.kind==="evidence.changed") return p.enabled?tr("On · every {n} min · {services} services",{n:p.interval_minutes,services:p.tsa_urls.length+p.ots_calendars.length}):tr("Off");
   if (e.kind==="storage.low") return tr("Photo & file downloads paused at {size} free; queued files are kept.",{size:humanSize(p.free_bytes)});
   if (e.kind==="storage.ok") return tr("Photo & file downloads resumed · {size} free",{size:humanSize(p.free_bytes)});
@@ -1009,6 +1009,7 @@ function evidenceText(e){
 function renderEvidence(e){
   const form=$("evidence-form"),status=$("evidence-status");
   form.querySelectorAll("input,select,textarea,button").forEach(n=>n.disabled=!e);
+  state.evidenceOn=!!e?.settings.enabled;renderEvidenceBadge();
   if(!e){status.textContent=tr("Evidence mode works in a real workspace, not in the demo.");return;}
   if(state.evidenceProfile!==state.profile){state.evidenceDirty=false;state.evidenceProfile=state.profile;}
   if(!state.evidenceDirty){
@@ -1055,6 +1056,7 @@ function lockText(lock){
 function renderReplica(r){
   const form=$("replica-form"),status=$("replica-status");
   form.querySelectorAll("input,select,button").forEach(n=>n.disabled=!r);
+  state.replicaOn=!!r?.settings.enabled;renderEvidenceBadge();
   if(!r){status.textContent=tr("The off-site copy works in a real workspace, not in the demo.");return;}
   if(state.replicaProfile!==state.profile){state.replicaDirty=false;state.replicaProfile=state.profile;}
   const s=r.settings;
@@ -1104,6 +1106,7 @@ function alertsText(a){
 function renderAlerts(a){
   const form=$("alerts-form"),status=$("alerts-status");
   form.querySelectorAll("input,select,textarea,button").forEach(n=>n.disabled=!a);
+  extraBadge("alerts",!!a?.settings.enabled,"On","Off");
   if(!a){status.textContent=tr("Notifications work in a real workspace, not in the demo.");return;}
   if(state.alertsProfile!==state.profile){state.alertsDirty=false;state.alertsProfile=state.profile;}
   const s=a.settings;
@@ -1119,9 +1122,9 @@ function renderAlerts(a){
 }
 for(let h=0;h<24;h++)$("alerts-hour").append(new Option(String(h).padStart(2,"0")+":00",String(h)));
 $("alerts-form").addEventListener("input",()=>{state.alertsDirty=true;});
-async function saveAlerts(urls){
+async function saveAlerts(urls,add=[]){
   const a=await json("alerts",{enabled:$("alerts-enabled").checked,problems:$("alerts-problems").checked,changes:$("alerts-changes").checked,
-    daily:$("alerts-daily").checked,daily_hour:Number($("alerts-hour").value),language:LANG,include_text:$("alerts-text").checked,urls});
+    daily:$("alerts-daily").checked,daily_hour:Number($("alerts-hour").value),language:LANG,include_text:$("alerts-text").checked,urls,add_urls:add});
   $("alerts-urls").value="";state.alertsDirty=false;renderAlerts(a);return a;
 }
 $("alerts-form").addEventListener("submit",event=>{event.preventDefault();busy(event.submitter,async()=>{
@@ -1135,6 +1138,52 @@ $("alerts-test").addEventListener("click",e=>busy(e.currentTarget,async()=>{
 $("alerts-clear").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   if(!window.confirm(tr("Remove every saved destination and turn notifications off?")))return;
   $("alerts-enabled").checked=false;await saveAlerts([]);toast(tr("Destinations removed. Notifications are off."));
+}));
+// ---- Destination builder: a service and one or two fields become an Apprise address ----
+const ALERT_SERVICES={
+  tgram:{fields:[["token","Bot token from @BotFather","123456789:AA…"],
+    ["chat","Chat ID · optional: empty sends to whoever last pressed Start in the bot","-1001234567890",true]],
+    hint:"Open the bot in Telegram and press Start, or add it to your group or channel, before adding it here.",
+    url:v=>/^\d+:[\w-]+$/.test(v.token)&&"tgram://"+v.token+"/"+(v.chat?encodeURIComponent(v.chat):"")},
+  discord:{fields:[["webhook","Webhook URL: channel settings → Integrations → Webhooks","https://discord.com/api/webhooks/…"]],
+    url:v=>{const m=/\/webhooks\/(\d+)\/([\w-]+)/.exec(v.webhook);return m&&"discord://"+m[1]+"/"+m[2];}},
+  slack:{fields:[["webhook","Incoming webhook URL","https://hooks.slack.com/services/…"]],
+    url:v=>{const m=/hooks\.slack\.com\/services\/(\w+)\/(\w+)\/(\w+)/.exec(v.webhook);return m&&"slack://"+m.slice(1).join("/");}},
+  ntfy:{fields:[["topic","Topic: a long name nobody can guess","tgwitness-7f3k2q9x"],["server","Own ntfy server · optional","ntfy.example.org",true]],
+    hint:"Subscribe to the same topic in the ntfy app on your phone.",
+    url:v=>/^[\w-]+$/.test(v.topic)&&"ntfys://"+(v.server?v.server.replace(/^https?:\/\//,"").replace(/\/+$/,"")+"/":"")+v.topic},
+  mailto:{fields:[["address","Your email address","you@gmail.com"],["password","App password, not the account password",""],
+    ["to","Send to · optional, yourself by default","",true]],
+    hint:"Gmail, Outlook, Yahoo, Fastmail and similar mailboxes are set up automatically; for others use an Apprise address.",
+    url:v=>{const at=v.address.lastIndexOf("@");return at>0&&"mailto://"+encodeURIComponent(v.address.slice(0,at))+":"+
+      encodeURIComponent(v.password)+"@"+v.address.slice(at+1)+(v.to?"?to="+encodeURIComponent(v.to):"");}},
+};
+function renderAlertService(){
+  const service=ALERT_SERVICES[$("alerts-service").value],box=$("alerts-service-fields");
+  box.replaceChildren();show("alerts-service-fields",!!service);show("alerts-service-add",!!service);
+  if(!service)return;
+  for(const [key,label,placeholder,optional] of service.fields){
+    const input=node("input");input.id="alerts-field-"+key;input.dataset.key=key;input.placeholder=placeholder;
+    input.spellcheck=false;input.autocomplete="off";input.required=!optional;
+    if(key==="token"||key==="password")input.type="password";
+    const name=node("label",null,tr(label));name.htmlFor=input.id;box.append(name,input);
+  }
+  if(service.hint)box.append(node("p","hint",tr(service.hint)));
+}
+$("alerts-service").addEventListener("change",renderAlertService);
+$("alerts-service-add").addEventListener("click",e=>busy(e.currentTarget,async()=>{
+  const service=ALERT_SERVICES[$("alerts-service").value],values={};
+  for(const input of $("alerts-service-fields").querySelectorAll("input")){
+    values[input.dataset.key]=input.value.trim();
+    if(input.required&&!values[input.dataset.key]){input.focus();throw new Error(tr("Fill in: {field}",{field:input.labels[0].textContent}));}
+  }
+  const url=service.url(values);
+  if(!url)throw new Error(tr("This does not look like what the service gives you. Check it and try again."));
+  const lines=$("alerts-urls").value.split("\n").map(v=>v.trim()).filter(Boolean);
+  $("alerts-enabled").checked=true;await saveAlerts(lines.length?lines:null,[url]);
+  $("alerts-service").value="";renderAlertService();
+  try{await json("alerts/test",{});toast(tr("Destination added and notifications are on. A test notification was sent."));}
+  catch(err){if(err instanceof StaleView)return;toast(tr("Destination added, but the test notification failed: {error}",{error:err.message}),true);}
 }));
 // ---- Observation scope: chosen chats, one Telegram folder, or the whole account ----
 const scopeName=mode=>tr({selected:"Chosen chats",folder:"Telegram folder",account:"Whole account"}[mode]||"Chosen chats");
@@ -1313,7 +1362,7 @@ $("parameters-reset").addEventListener("click",e=>busy(e.currentTarget,async()=>
 // ---- Independent witness: read-only tokens and how to run one ----
 function selectExtra(name){
   show("extras-overview",!name);
-  for(const key of ["bot","github"]){
+  for(const key of ["alerts","evidence","cloud","bot","github"]){
     show("extras-"+key,key===name);
     $("extras-open-"+key).setAttribute("aria-expanded",String(key===name));
   }
@@ -1324,6 +1373,98 @@ document.querySelectorAll("[data-extra]").forEach(button=>button.addEventListene
 }));
 document.querySelectorAll("[data-extra-close]").forEach(button=>button.addEventListener("click",()=>{
   const opener=$("extras-open-"+button.dataset.extraClose);selectExtra(null);opener.focus();
+}));
+// Links from Sources and Exports to the settings that moved to Extras.
+document.querySelectorAll("[data-go-extra]").forEach(link=>link.addEventListener("click",event=>{
+  event.preventDefault();navigate("witness");$("extras-open-"+link.dataset.goExtra).click();
+}));
+function extraBadge(name,on,onText,offText){
+  const badge=$("extra-"+name+"-badge");badge.textContent=tr(on?onText:offText);badge.classList.toggle("on",on);
+}
+function renderEvidenceBadge(){
+  const both=state.evidenceOn&&state.replicaOn;
+  extraBadge("evidence",state.evidenceOn||state.replicaOn,both?"On":state.evidenceOn?"Timestamps on":"Off-site copy on","Off");
+}
+// High-assurance deployments answer /api/assurance; ordinary installations return 404.
+async function loadAssurance(){
+  if(state.assurance===undefined){
+    const r=await fetch("/api/assurance").catch(()=>null);
+    state.assurance=r?.ok?(await r.json()).statement:null;
+  }
+  const s=state.assurance,on=!!s;
+  extraBadge("cloud",on,"Running here","Available");show("alerts-host",on);show("cloud-active",on);
+  if(on)$("cloud-active").textContent=tr("This collector runs on a sealed {provider} server, signing key {fingerprint}. An opened SSH port or a login there is recorded in the journal and sent as a problem notification.",
+    {provider:CLOUD[s.host?.mode]?.[0]||s.host?.mode||"",fingerprint:s.fingerprint});
+}
+async function loadExtras(){
+  await Promise.all([loadWitness(),loadAlerts(),loadEvidence(),loadReplica(),loadAssurance(),loadSourceCheck()]);
+}
+// ---- Verified code: the running program compared with one commit on GitHub ----
+async function loadSourceCheck(){
+  if(!state.status)return;
+  const profile=state.profile,r=await json("source-check");
+  if(profile===state.profile)renderSourceCheck(r);
+}
+function renderSourceCheck(r){
+  const l=r.last,box=$("github-result"),badge=$("extra-github-badge"),good=!!l&&r.current&&l.matches;
+  $("github-form").querySelectorAll("input,button").forEach(n=>n.disabled=!!state.status?.demo);
+  badge.textContent=tr(!l?"Not checked":!r.current?"Check again":l.matches?"Matches":"Differs");
+  badge.classList.toggle("on",good);badge.classList.toggle("warn",!!l&&!good);
+  if(l&&!state.githubDirty){$("github-repository").value=l.repository.replace("https://","");$("github-ref").value=l.ref;}
+  $("github-running").textContent=tr("Running: version {version}, {n} program files, source hash {hash}.",
+    {version:r.version,n:r.files,hash:r.source_tree_sha256.slice(0,16)+"…"});
+  box.replaceChildren();show("github-result",!!l);
+  if(!l)return;
+  const vars={repository:l.repository.replace("https://github.com/",""),commit:l.commit.slice(0,12),ref:l.ref,n:l.matches?l.files:l.differences};
+  box.className="github-result "+(good?"ok":"warn");
+  box.append(node("p","github-verdict",l.matches?tr("The code matches {repository} at {commit} ({ref}): all {n} program files are identical.",vars)
+    :tr("The code differs from {repository} at {commit} ({ref}): {n} file(s) are not the same.",vars)));
+  box.append(node("p","hint",r.current?tr("Checked {time} and saved in the signed journal.",{time:fmtFull(l.checked_at)})
+    :tr("The program has changed since this check of {time}. Check again to cover the running code.",{time:fmtFull(l.checked_at)})));
+  for(const [key,label] of [["changed","Changed"],["extra","Only here"],["missing","Only on GitHub"]]){
+    if(!l[key].length)continue;
+    const p=node("p","github-files");p.append(node("strong","",tr(label)+": "),node("code","",l[key].join(", ")));box.append(p);
+  }
+  const link=node("a","text-link",tr("Open the commit on GitHub ↗"));
+  link.href=l.repository+"/commit/"+l.commit;link.target="_blank";link.rel="noopener noreferrer";box.append(link);
+}
+$("github-form").addEventListener("input",()=>{state.githubDirty=true;});
+$("github-form").addEventListener("submit",event=>{event.preventDefault();busy(event.submitter,async()=>{
+  const r=await json("source-check",{repository:$("github-repository").value.trim(),ref:$("github-ref").value.trim()});
+  state.githubDirty=false;renderSourceCheck(r);
+  toast(tr(r.last.matches?"The code matches the commit. The check is saved in the signed journal."
+    :"The code differs from the commit. The check is saved in the signed journal."),!r.last.matches);
+});});
+// ---- 24/7 server: the panel writes the commands; tokens stay on the operator's computer ----
+const CLOUD={hetzner:["Hetzner Cloud","cpx22","nbg1"],digitalocean:["DigitalOcean","s-1vcpu-2gb","fra1"],
+  linode:["Akamai Cloud (Linode)","g6-standard-1","eu-central"],vultr:["Vultr","vc2-1c-2gb","fra"],
+  aws:["Amazon EC2","t3.small","eu-central-1"],generic:["Any server (self-attested)","",""]};
+for(const [key,[title]] of Object.entries(CLOUD))$("cloud-provider").append(new Option(key==="generic"?tr("Any server (self-attested)"):title,key));
+const shellWord=v=>/^[\w@%+=:,./-]+$/.test(v)?v:"'"+v.replaceAll("'","'\\''")+"'";
+function renderCloud(){
+  const provider=$("cloud-provider").value,[,type,location]=CLOUD[provider],generic=provider==="generic";
+  const v=id=>$(id).value.trim(),name=v("cloud-name")||"tgwitness-1";
+  $("cloud-type").placeholder=type;$("cloud-location").placeholder=location;
+  $("cloud-type").disabled=$("cloud-location").disabled=generic;
+  const target=["--provider",provider,"--name",name,
+    ...(generic?[]:["--server-type",v("cloud-type")||type,...(v("cloud-location")?["--location",v("cloud-location")]:[])]),
+    "--ref",v("cloud-ref")||"RELEASE_TAG","--zone",v("cloud-zone")||"example.org",
+    "--cloudflare-account",v("cloud-account")||"CLOUDFLARE_ACCOUNT_ID","--panel-host",v("cloud-panel")||"panel.example.org",
+    ...(v("cloud-witness")?["--witness-host",v("cloud-witness")]:[])];
+  const run=(command,args)=>"python -m tgwitness.cloud "+command+" "+args.map(shellWord).join(" ");
+  $("cloud-commands").textContent=[
+    "# "+tr("1. Preview: prints the installer and every API call, creates nothing"),run("plan",target),"",
+    "# "+tr("2. Create: Cloudflare Tunnel, a firewall without inbound rules and the server; waits for the collector key"),
+    run("deploy",[...target,...(generic?[]:["--provider-token-file",provider+"-token.txt"]),"--cloudflare-token-file","cloudflare-token.txt"]),"",
+    "# "+tr("3. Check at any time, also by someone else with read-only tokens"),
+    run("verify",["--record","deployments/"+name+"/deployment.json",...(generic?[]:["--provider-token-file",provider+"-readonly.txt"]),
+      "--fingerprint","COLLECTOR_FINGERPRINT"])].join("\n");
+}
+$("cloud-form").addEventListener("input",renderCloud);
+$("cloud-form").addEventListener("submit",e=>e.preventDefault());
+renderCloud();
+$("cloud-copy").addEventListener("click",e=>busy(e.currentTarget,async()=>{
+  await navigator.clipboard.writeText($("cloud-commands").textContent);toast(tr("Commands copied."));
 }));
 async function loadWitness(){
   if(!state.status)return;
@@ -1970,7 +2111,7 @@ function renderChat(){
 function renderChatStatus(){
   const box=$("chat-status"),s=state.status,info=state.chatInfo;if(!info||!s||$("chat-main").hidden)return;
   const c=s.collector;box.replaceChildren();
-  const state_=node("div","chat-state"),say=(cls,text)=>{state_.className="chat-state "+cls;state_.append(node("span","",text));};
+  const state_=node("div","chat-state"),say=(cls,text)=>{state_.className="chat-state "+cls;const t=node("span","",text);t.title=text;state_.append(t);};
   const action=(cls,label,work)=>{const b=node("button",cls+" small",label);b.type="button";b.addEventListener("click",()=>busy(b,work));state_.append(b);return b;};
   if(s.demo)say("info",tr("Demo with fictional messages. Deleted messages are red; edited ones keep every saved version."));
   else if(!info.enabled){say("warn",tr("This chat is paused — nothing in it is being saved."));action("secondary",tr("Choose chats"),async()=>navigate("sources"));}
@@ -1978,7 +2119,7 @@ function renderChatStatus(){
     action("primary",tr("Start observation"),async()=>{await json("collector/start",{});await refreshStatus();toast(tr("Observation started. New messages, edits and deletions will appear here."));}).disabled=!c.has_session;}
   else if(c.storage_low)say("warn",tr("Observing, but the disk is almost full ({size} free): photos & files are paused until space is freed. Messages are still saved.",{size:humanSize(c.disk_free_bytes)}));
   else say(c.connected?"ok":"warn",c.connected?tr("Observing — new messages, edits and deletions are saved as they happen.")+recheckText(c):tr("Reconnecting to Telegram — missed changes are requested again once connected."));
-  const mode=node("div","chat-mode");mode.append(node("span","",modeSummary(s)));
+  const mode=node("div","chat-mode"),summary=node("span","",modeSummary(s));summary.title=summary.textContent;mode.append(summary);
   if(!s.demo){const change=node("button","text-link",tr("Change"));change.type="button";change.addEventListener("click",()=>{navigate("sources");$("source-options").open=true;$("source-options").scrollIntoView({block:"start"});});mode.append(change);}
   const filters=node("div","chat-filters");filters.setAttribute("role","group");filters.setAttribute("aria-label",tr("Show messages"));
   for(const [key,label] of [["all",tr("All")],["deleted",tr("Deleted")],["edited",tr("Edited")],["people",tr("People")]]){
@@ -2488,9 +2629,7 @@ setInterval(async()=>{
         && state.status.stats.head?.seq!==head) await refreshEvents();
     if(state.view==="chats" && state.status.stats.head?.seq!==head) await refreshChats(true);
     if(state.view==="accounts") await loadProfiles();
-    if(state.view==="evidence") {await loadEvidence();await loadReplica();}
-    if(state.view==="sources") await loadAlerts();
-    if(state.view==="witness") await loadWitness();
+    if(state.view==="witness") await loadExtras();
     if(++notifyTick%3===0) await loadNotifications();
   }catch(e){if(!(e instanceof StaleView))$("status-chip").textContent=tr("Panel connection unavailable");}
 },5000);

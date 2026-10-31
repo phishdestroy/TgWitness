@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="ko" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>데이터 수집 방식 | TgWitness</title>
+<meta name="description" content="관찰 범위, 실시간 업데이트, 재확인, 첨부 파일, 사용자 작업 및 ‘갭(gap)’의 의미 등을 기록 단위로 상세히 설명합니다."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="데이터 수집 방식 | TgWitness"><meta property="og:description" content="관찰 범위, 실시간 업데이트, 재확인, 첨부 파일, 사용자 작업 및 ‘갭(gap)’의 의미 등을 기록 단위로 상세히 설명합니다.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/collection/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/collection/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/collection/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/collection/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/collection/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/collection/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/collection/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/collection/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/collection/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/collection/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/collection/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/collection/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/collection/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/collection/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/collection/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/collection/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/collection/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/collection/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/", "url": "https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/", "name": "데이터 수집 방식 | TgWitness", "description": "관찰 범위, 실시간 업데이트, 재확인, 첨부 파일, 사용자 작업 및 ‘갭(gap)’의 의미 등을 기록 단위로 상세히 설명합니다.", "inLanguage": "ko", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://phishdestroy.github.io/TgWitness/ko/"}, {"@type": "ListItem", "position": 2, "name": "문서", "item": "https://phishdestroy.github.io/TgWitness/ko/docs/"}, {"@type": "ListItem", "position": 3, "name": "참고 문헌", "item": "https://phishdestroy.github.io/TgWitness/ko/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "데이터 수집 방식", "item": "https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">본문으로 건너뛰기</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / 문서</span></a>
+<nav aria-label="가이드"><a href="../../concepts/">시각적 가이드</a><a href="../../">모든 가이드</a><a href="../">참고 문헌</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="언어"><span aria-hidden="true">◍</span> 한국어</summary><div class="lang-list"><a href="../../../../docs/reference/collection/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/collection/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/collection/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/collection/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/collection/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/collection/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/collection/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/collection/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/collection/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/collection/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/collection/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/collection/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/collection/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/collection/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/collection/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/collection/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/collection/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="./" hreflang="ko" lang="ko" aria-current="true">한국어</a><a href="../../../../zh-Hant/docs/reference/collection/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/collection/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/collection/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/collection/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/collection/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/collection/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/collection/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="밝은 테마와 어두운 테마 전환"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="가이드"><a href="../../../guides/modes.html">모드, 시나리오 및 증거 수준</a><p class="nav-label">시작하기</p><a href="../../start/">몇 분 만에 시작하세요</a><a href="../../accounts/">계정 연결</a><a href="../../proxies/">프록시 선택</a><a href="../../exports/">내보내기 및 검증</a><p class="nav-label">증거 이해하기</p><a href="../../concepts/">증거가 어떻게 활용되는지 확인하기</a><a href="../../cases/">모든 채팅을 대상으로 조사하기</a><a href="../../security/">보안을 유지하세요</a><p class="nav-label">더 알아보기</p><a href="../../witness/">Witness 봇 설정하기</a><a href="../../server/">계속 운영해 주세요</a><a href="../../troubleshooting/">문제가 발생한 원인을 파악하세요</a></nav><nav class="wiki-nav" aria-label="참고 문헌"><p class="nav-label"><a class="nav-label-link" href="../">참고 문헌</a></p><details class="wiki-group"><summary>설정</summary><a href="../quickstart/">빠른 시작</a><a href="../accounts/">계정 및 세션 형식</a><a href="../connection/">연결, 프록시 및 데이터 보호</a><a href="../deployment/">배포</a></details><details class="wiki-group" open><summary>수집</summary><a href="./" aria-current="page">데이터 수집 방식</a><a href="../operations/">워크플로우 및 운영</a><a href="../investigation/">조사 모드</a><a href="../features/">기능 및 제한 사항</a></details><details class="wiki-group"><summary>증거</summary><a href="../how-it-works/">증거 기록의 작동 방식</a><a href="../evidence/">증거 형식</a><a href="../witness/">독립적인 증인</a><a href="../timestamp/">타임스탬프</a></details><details class="wiki-group"><summary>보안 및 프로젝트</summary><a href="../security/">보안 및 데이터 처리</a><a href="../architecture/">아키텍처</a><a href="../verification/">테스트된 내용</a><a href="../license/">라이선스 안내 및 아키텍처 비호환성 공지</a><a href="../notice/">운영자 호환성 불일치 공지</a><a href="../changelog/">변경 내역</a></details></nav><p class="sidebar-note">v0.7.0<br>오픈 소스 · 사용자의 컴퓨터에서 실행됩니다</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="가이드"><a href="../../../">홈</a> <span aria-hidden="true">/</span> <a href="../../">문서</a> <span aria-hidden="true">/</span> <a href="../">참고 문헌</a> <span aria-hidden="true">/</span> <span aria-current="page">데이터 수집 방식</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">문서 검색</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="프록시, 해시 체인, 토큰 또는 위트니스 등을 고려해 보십시오…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="명확한 검색" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">가이드와 참조 자료를 검색하려면 단어를 입력하세요. 검색 기록은 브라우저에 저장됩니다.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">참고 문헌 / 수집</p><h1>데이터 수집 방식</h1><p class="guide-outcome">관찰 범위, 실시간 업데이트, 재확인, 첨부 파일, 사용자 작업 및 ‘갭(gap)’의 의미 등을 기록 단위로 상세히 설명합니다.</p><div class="wiki-body"><p>TgWitness는 연결된 텔레그램 계정이 감지한 내용을 기록합니다. 이 기록부는
+감지된 내용, 그 순서, 그리고 함께 제공된 맥락을 보존합니다. 이 도구는
+누락된 메시지나 계정이 연결된 사실만으로는 보이지 않는 행동을 추론하지 않습니다.</p>
+<h2 id="from-login-to-a-journal">로그인부터 기록부까지<a class="anchor" href="#from-login-to-a-journal" aria-label="이 섹션으로 이동">#</a></h2>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 650 324" width="650" height="324" role="img" aria-labelledby="flow-1-title flow-1-desc"><title id="flow-1-title">흐름도</title><desc id="flow-1-desc">사용자 계정 승인 → 접근 가능한 그룹 및 채널 선택; 접근 가능한 그룹 및 채널 선택 → 이벤트 및 첨부 파일 설정 저장; 이벤트 및 첨부 파일 설정 저장 → 관찰 시작; 관찰 시작 → 활성 클라이언트로부터 업데이트 받기; 활성 클라이언트로부터 업데이트 받기 → 출처 및 이벤트 정책 적용; 출처 및 이벤트 정책 적용 → 서명된 관찰 기록 추가; 서명된 관찰 기록 추가 → 저널 검토 또는 내보내기; 서명된 관찰 기록 추가 → 대기 중인 첨부 파일 처리; 대기 중인 첨부 파일 처리 → 다운로드 결과 추가</desc><defs><marker id="flow-1-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M175.3 37.0C208.7 37.0 208.7 37.0 242.0 37.0" marker-end="url(#flow-1-arrow)" style="--i:0;--len:67" pathLength="67"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M175.3 37.0C208.7 37.0 208.7 37.0 242.0 37.0"/></circle><path class="flow-edge" d="M408.0 37.0C431.0 37.0 431.0 37.0 454.0 37.0" marker-end="url(#flow-1-arrow)" style="--i:1;--len:46" pathLength="46"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M408.0 37.0C431.0 37.0 431.0 37.0 454.0 37.0"/></circle><path class="flow-edge" d="M537.0 66.0C537.0 95.5 537.0 95.5 537.0 125.0" marker-end="url(#flow-1-arrow)" style="--i:2;--len:59" pathLength="59"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M537.0 66.0C537.0 95.5 537.0 95.5 537.0 125.0"/></circle><path class="flow-edge" d="M485.0 145.0C446.5 145.0 446.5 145.0 408.0 145.0" marker-end="url(#flow-1-arrow)" style="--i:3;--len:77" pathLength="77"/><circle class="flow-pulse" r="3.2" style="--i:3"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M485.0 145.0C446.5 145.0 446.5 145.0 408.0 145.0"/></circle><path class="flow-edge" d="M242.0 145.0C219.0 145.0 219.0 145.0 196.0 145.0" marker-end="url(#flow-1-arrow)" style="--i:4;--len:46" pathLength="46"/><circle class="flow-pulse" r="3.2" style="--i:4"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M242.0 145.0C219.0 145.0 219.0 145.0 196.0 145.0"/></circle><path class="flow-edge" d="M113.0 165.0C113.0 207.5 113.0 207.5 113.0 250.0" marker-end="url(#flow-1-arrow)" style="--i:5;--len:85" pathLength="85"/><circle class="flow-pulse" r="3.2" style="--i:5"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M113.0 165.0C113.0 207.5 113.0 207.5 113.0 250.0"/></circle><path class="flow-edge" d="M189.1 270.0C215.6 270.0 215.6 244.0 242.0 244.0" marker-end="url(#flow-1-arrow)" style="--i:6;--len:61" pathLength="61"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M189.1 270.0C215.6 270.0 215.6 244.0 242.0 244.0"/></circle><path class="flow-edge" d="M189.1 270.0C215.6 270.0 215.6 296.0 242.0 296.0" marker-end="url(#flow-1-arrow)" style="--i:6;--len:61" pathLength="61"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M189.1 270.0C215.6 270.0 215.6 296.0 242.0 296.0"/></circle><path class="flow-edge" d="M408.0 296.0C437.9 296.0 437.9 270.0 467.8 270.0" marker-end="url(#flow-1-arrow)" style="--i:7;--len:67" pathLength="67"/><circle class="flow-pulse" r="3.2" style="--i:7"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M408.0 296.0C437.9 296.0 437.9 270.0 467.8 270.0"/></circle><g class="flow-node" style="--i:0"><rect x="50.7" y="17.0" width="124.6" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="113.0" y="37.0">사용자계정승인</tspan></text></g><g class="flow-node" style="--i:1"><rect x="242.0" y="8.0" width="166.0" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="325.0" y="28.0">접근가능한그룹및채널</tspan><tspan x="325.0" y="46.0">선택</tspan></text></g><g class="flow-node" style="--i:2"><rect x="454.0" y="8.0" width="166.0" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="537.0" y="28.0">이벤트및첨부파일설정</tspan><tspan x="537.0" y="46.0">저장</tspan></text></g><g class="flow-node" style="--i:3"><rect x="485.0" y="125.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="537.0" y="145.0">관찰시작</tspan></text></g><g class="flow-node" style="--i:4"><rect x="242.0" y="116.0" width="166.0" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="325.0" y="136.0">활성클라이언트로부터</tspan><tspan x="325.0" y="154.0">업데이트받기</tspan></text></g><g class="flow-node" style="--i:5"><rect x="30.0" y="125.0" width="166.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="113.0" y="145.0">출처및이벤트정책적용</tspan></text></g><g class="flow-node" style="--i:6"><rect x="36.9" y="250.0" width="152.2" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="113.0" y="270.0">서명된관찰기록추가</tspan></text></g><g class="flow-node" style="--i:7"><rect x="242.0" y="224.0" width="166.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="325.0" y="244.0">저널검토또는내보내기</tspan></text></g><g class="flow-node" style="--i:7"><rect x="242.0" y="276.0" width="166.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="325.0" y="296.0">대기중인첨부파일처리</tspan></text></g><g class="flow-node" style="--i:8"><rect x="467.8" y="250.0" width="138.4" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="537.0" y="270.0">다운로드결과추가</tspan></text></g></svg></div><details class="flow-steps"><summary>도표를 텍스트로 변환</summary><ol><li>사용자 계정 승인 → 접근 가능한 그룹 및 채널 선택</li><li>접근 가능한 그룹 및 채널 선택 → 이벤트 및 첨부 파일 설정 저장</li><li>이벤트 및 첨부 파일 설정 저장 → 관찰 시작</li><li>관찰 시작 → 활성 클라이언트로부터 업데이트 받기</li><li>활성 클라이언트로부터 업데이트 받기 → 출처 및 이벤트 정책 적용</li><li>출처 및 이벤트 정책 적용 → 서명된 관찰 기록 추가</li><li>서명된 관찰 기록 추가 → 저널 검토 또는 내보내기</li><li>서명된 관찰 기록 추가 → 대기 중인 첨부 파일 처리</li><li>대기 중인 첨부 파일 처리 → 다운로드 결과 추가</li></ol></details></figure>
+<p>인증, 소스 접근, 수집기 실행, 그리고 완전한 전달은
+서로 다른 문제입니다. 로그인에 성공했다고 해서 모든 그룹에 접근할 수 있는 것은 아닙니다.
+통신 경로가 연결되었다고 해서 모든 관련 업데이트가 도착했다는 것을 보장하지는 않습니다.</p>
+<h2 id="observation-scope-chosen-chats-a-folder-or-the-whole-account">모니터링 범위: 선택한 채팅, 특정 폴더 또는 전체 계정<a class="anchor" href="#observation-scope-chosen-chats-a-folder-or-the-whole-account" aria-label="이 섹션으로 이동">#</a></h2>
+<p>출처 → <strong>관찰 범위에</strong> 따라 워크스페이스가 기록할 채팅이 결정됩니다.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>모드</th>
+<th>기록</th>
+<th>새로운 대화</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>선택한 채팅 (기본값)</td>
+<td>직접 추가한 채팅만 포함됩니다</td>
+<td>절대 자동으로 추가되지 않음</td>
+</tr>
+<tr>
+<td>텔레그램 폴더</td>
+<td>계정의 폴더 중 하나에 포함된 채팅: 이름으로 포함된 채팅에 해당 폴더의 카테고리(연락처, 비연락처, 그룹, 채널, 봇)를 더하고, 제외된 채팅과 폴더에 명시된 경우 보관된 채팅을 뺀 것</td>
+<td>일치하는 채팅은 활성화되는 즉시 추가되며, 텔레그램의 폴더에 추가한 채팅은 1시간 이내에 반영됩니다.</td>
+</tr>
+<tr>
+<td>전체 설명</td>
+<td>해당 계정이 수신하는 모든 채팅</td>
+<td>새로운 채팅, 그룹, 비공개 채팅 또는 봇은 첫 번째 업데이트가 도착하는 즉시 추가됩니다.</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>소스 유형</strong>(채널, 그룹, 비공개 채팅, 봇)에 따라 폴더 모드 및
+    전체 계정 모드가 구분됩니다. 선택한 채팅은 비공개 채팅 및 봇을 포함하여 어떤 유형이든 가능합니다.</li>
+<li><strong>제외된 채팅은</strong> 어떤 모드에서도 절대 기록되지 않습니다. 폴더 모드 및 전체 계정 모드에서,
+    소스 항목에 대해 <em>‘제외’</em> 또는 <em>‘제거’를</em> 선택하면 해당 항목이 이 목록에 추가되므로, 범위 설정 시 다시 포함되지 않습니다.
+    &#x27;소스&#x27; 또는 &#x27;채팅&#x27;에서 해당 채팅을 수동으로 다시 선택하면 목록에서 제외됩니다. 이 목록은
+    최대 5,000개의 채팅을 저장할 수 있으며, 그 이상일 경우 <em>&#x27;제거&#x27;가</em> 거부되고 대신 채팅을 일시 중지할 수 있습니다.</li>
+<li><strong>자체 동작</strong>(기본값: 켜짐): 이 계정이 보내는 메시지, 수정 내역 및
+    답장 키보드 버튼 누름. 이 기능이 꺼져 있으면 발신 메시지와 수정 내역은 기록되지 않습니다.</li>
+<li>폴더 또는 전체 계정으로 전환할 때는 확인을 요청합니다. 이러한 모드에서는
+    비공개 채팅 및 제3자의 메시지가 기록되므로 전용 계정에서만 사용해야 합니다.
+    확인 절차 및 모든 범위 변경 사항은 <code>scope.changed</code> 서명 기록으로 저장됩니다.</li>
+<li>범위에 따라 추가된 채팅은 <em>‘auto’로</em> 표시된 소스로 나타나며, <code>scope.applied</code>
+    (시작 시 및 매시간) 또는 <code>source.discovered</code>(관찰 중 새로운 채팅 발생 시)로 기록됩니다. 선택한 채팅으로
+    다시 전환하면 자동으로 추가된 모든 소스의 기록이 일시 중지됩니다.</li>
+</ul>
+<p>다음과 같은 모드는 수행할 수 없습니다:</p>
+<ul>
+<li><strong>비밀 채팅은</strong> 두 기기 간에 종단 간 암호화가 적용되며, 어떤 모드에서도
+    TgWitness로 전송되지 않습니다.</li>
+<li><strong>TgWitness가 실행 중이지 않을 때는 아무것도 기록되지 않습니다.</strong> 재시작 후에는 텔레그램에
+    놓친 업데이트를 요청하고 채팅 내용을 재확인하지만, 장시간의
+    서비스 중단 후에는 텔레그램이 모든 데이터를 반환하지는 않습니다. 보고서 및 <code>verify.py</code>에서는 이러한 기간을 공백으로 표시합니다(<a href="../evidence/#coverage-continuity-gaps-and-unobserved-ids">커버리지</a> 참조).</li>
+<li>처음에는 첫 1,000개의 대화만 표시됩니다(한도는 <strong>‘매개변수’</strong> 항목에서 확인 가능). 그보다 오래된
+    채팅은 다음에 활성화될 때 추가됩니다. 추가된 채팅의 이전 기록은 불러오지 않으므로, 필요할 때
+    기록 스냅샷을 찍거나 전체 채팅 내역을 내보내십시오.</li>
+<li>수시로 변경되는 폴더 조건(알림 비활성화, 읽음)은 적용되지 않으며, 해당 채팅은
+    계속 모니터링됩니다.</li>
+<li>다른 앱에서 누른 <strong>인라인(콜백) 봇 버튼은</strong> 두 번째
+    세션에서는 표시되지 않으며, 봇의 응답이나 편집 내용은 기록됩니다. 응답 키보드 입력은 발신
+    메시지로 전송되며 ‘<code>button_press</code>’라는 라벨이 붙습니다.</li>
+<li>채팅이 많아지면 요청도 늘어납니다. 텔레그램은 특정 양을
+    과도하다고 판단할 경우 계정을 제한하므로, 전용 계정을 사용해야 하는 또 다른 이유가 됩니다.</li>
+</ul>
+<h2 id="scope-and-event-selection">범위 및 이벤트 선택<a class="anchor" href="#scope-and-event-selection" aria-label="이 섹션으로 이동">#</a></h2>
+<p>각 작업 공간에는 고유한 소스 목록이 있습니다. TgWitness는 그룹에 가입하거나,
+초대를 수락하거나, 모든 구성원을 자동으로 열거하지 않습니다. 소스는 해당 계정에서 이미
+접근 가능한 상태여야 합니다. 시작 시, 수집기는 선택된 소스를
+계정의 표시된 대화창과 대조하여 확인합니다.
+<strong>‘매개변수 → 계정 목록에서 읽은 채팅’에</strong> 다른 설정이 지정되지 않은 한, 처음 1,000개의 대화창이 검사됩니다.
+존재하지 않는 소스는 <strong>‘접근 미확인’으로</strong> 표시되며, 사용자가 제거된 것으로 간주되지 않습니다.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>설정</th>
+<th>수집합니다</th>
+<th>비활성화 시 효과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>새 메시지</td>
+<td>일반적으로 전송된 메시지</td>
+<td>나중에 이루어진 수정/삭제 내역의 경우, 비교할 수 있는 이전에 캡처된 텍스트가 없을 수 있습니다.</td>
+</tr>
+<tr>
+<td>수정 사항</td>
+<td>편집된 메시지 버전 제공</td>
+<td>중간 변경 내역은 나중에 재구성되지 않습니다.</td>
+</tr>
+<tr>
+<td>삭제 내역</td>
+<td>범위가 지정된 삭제 알림 및 범위가 지정되지 않은 계정 수준 알림</td>
+<td>삭제 알림은 기록부에 추가되지 않습니다.</td>
+</tr>
+<tr>
+<td>반응</td>
+<td>전달된 반응 스냅샷</td>
+<td>별도의 반응 업데이트는 추가되지 않습니다.</td>
+</tr>
+<tr>
+<td>회원 가입</td>
+<td>회원 서비스 알림 및 참가자 업데이트를 전달했습니다.</td>
+<td>이러한 회원 관련 관찰 내용은 포함되지 않습니다.</td>
+</tr>
+</tbody>
+</table></div>
+<p>설정은 작업 공간에서 선택한 모든 소스에 적용됩니다. 양식을 저장하면 변경 사항이 적용되며,
+변경 사항은 서명된 변경 전/후 값과 함께 기록됩니다. 카테고리를 비활성화하더라도
+이전 기록은 삭제되지 않습니다. 다시 활성화하더라도 누락된 업데이트는 소급 적용되지 않습니다.</p>
+<p>운영 기록 및 기타 그룹 서비스 이벤트는 이러한
+설정 변경 사항과 별도로 처리됩니다. 회원 가입 서비스가 활성화된 경우, 일반적인 새 메시지 캡처 기능이 비활성화되어 있더라도
+회원 가입 서비스 메시지를 통해 메시지 기록이 생성될 수 있습니다. 캡처된 텔레그램
+객체는 내장된 메타데이터를 유지하며, 설정 변경은 정보 삭제 규칙이 아닙니다.</p>
+<p><strong>비공개 채팅 및 일반 그룹에서 발생한 삭제 내역은</strong> 채팅 정보가 없는 메시지 ID 형태로 도착합니다.
+이러한 채팅들은 계정 전체에 걸쳐 하나의 메시지 ID 순서를 공유하므로, 해당 ID를 가진 메시지가
+이전에 저장된 적이 있다면 해당 채팅이 파악됩니다. 삭제 내역은 해당 채팅에 기록되며,
+그 방식은 <code>chat_resolution</code>에서 설명하고 있습니다. 저장된 적이 없는 ID는 출처가 명시적으로 알 수 없는
+<strong>범위가 지정되지 않은 삭제</strong> 상태로 남아 있으며, 수집기는 이를 추측하지 않습니다. 텔레그램은 누가 메시지를 삭제했는지
+절대 밝히지 않습니다. 삭제된 메시지가 해당 계정에서 전송된 경우, 기록에는 삭제자를 명시하지 않고
+(<code>deleted_message_was_outgoing</code>)라고만 표기됩니다.</p>
+<h2 id="own-actions">자신의 행동<a class="anchor" href="#own-actions" aria-label="이 섹션으로 이동">#</a></h2>
+<p>감시 대상 계정이 보낸 메시지에는 ‘<code>outgoing</code>’라는 라벨이 붙습니다. 발신
+메시지를 수정할 경우, 비공개 채팅 및 그룹 채팅에서는 작성자만 수정할 수 있는 반면, 채널
+게시물은 다른 관리자도 수정할 수 있습니다. 발신 메시지가 해당 채팅에서 가장 최근에 저장된 답장 키보드의 버튼
+텍스트를 반복할 경우, 해당 메시지에는 키보드 기록으로 연결되는 링크가 포함된
+<code>button_press</code> 태그가 부여됩니다.</p>
+<p>자신의 행동 제외 원칙은 배경 재확인 및 자동 신규 채팅 기록에도 적용됩니다.
+건너뛴 발신 메시지는 재확인 위치를 앞으로 이동시켜, 이후 수신되는
+메시지를 차단하지 않도록 합니다. 명시적인 패널 작업 및 수동으로 요청한 기록 스냅샷은 계속 기록됩니다.</p>
+<h2 id="investigation-mode-joining-teams-and-talking-to-bots">조사 모드: 팀에 합류하고 봇과 대화하기<a class="anchor" href="#investigation-mode-joining-teams-and-talking-to-bots" aria-label="이 섹션으로 이동">#</a></h2>
+<p><strong>소스 → 관찰 범위 → 조사 모드는</strong> 팀 채팅에 참여하고, 봇을 시작하며, 봇에 메시지를 작성하는 전용
+계정을 위한 범위를 설정합니다: 전체 계정, 모든
+소스 유형, 자체 작업, 그리고 표시되는 모든 채팅 또는 봇에 대한 프로필 및 최근
+200개의 표시 가능한 메시지. 양식을 검토한 후 <strong>‘범위 저장’을</strong> 누르십시오. 전체
+계정으로 전환할 경우 일반적인 확인 절차가 요청됩니다.</p>
+<ul>
+<li><strong>버튼.</strong> 메시지 하단의 버튼은 해당 메시지와 함께 유지되며 <strong>‘채팅’에</strong> 표시됩니다: 링크, 웹
+    앱, 로그인 링크, 복사할 텍스트, 콜백 데이터, 인라인 쿼리, 전화번호
+    또는 위치 요청 등. 링크는 텍스트로 표시되며 패널에 의해 절대 열리지 않습니다. 봇이
+    버튼만 변경할 경우(예: 새로운 결제 링크), 이는 실시간 업데이트 및 재확인 모두에서
+    메시지의 새 버전으로 간주됩니다.</li>
+<li>
+<p><strong>새로운 채팅 및 봇.</strong> 폴더 모드 및 전체 계정 모드에서, <strong>새로운 채팅이나 봇이
+    출현하면</strong>, 출현한 직후 다음과 같이 저장됩니다:</p>
+<ul>
+<li><code>source.profile</code> 기록으로서의 프로필: 봇 설명 및 명령어, 사용자·그룹·채널에 대한
+    소개 문구, 구성원, 연결된 채팅, 텔레그램에서 제공되는 경우
+    초대 링크;</li>
+<li><code>new_chat</code>로 표시된 기록 스냅샷 형태로 최신 가시 메시지(최대 1,000개)를 제공합니다. 여기에는
+    방금 가입한 팀 채팅의 초기 메시지나, 관찰자가 채팅을
+    인식하기 전에 봇이 남긴 내용이 포함됩니다. 이미 저장된 실시간 메시지는 중복되지 않습니다.</li>
+</ul>
+<p>모드가 켜질 때 이미 목록에 있는 채팅은 스냅샷 없이 추가됩니다.
+FloodWait가 발생하면 이 작업이 일시 중지되었다가 이후 재개되며, 오류는 기록되고 채팅의 실시간
+기록은 계속됩니다.
+- 요청 시 프로필 제공. 채팅 → 프로필 → 프로필 저장을 통해 모든 소스의 현재 프로필을
+저장할 수 있으며, 가장 최신 프로필이 메시지 상단에 표시됩니다.
+- 표시되지 않음. 다른 텔레그램 앱에서 누른 인라인(콜백) 버튼, 봇이 해당 버튼 누름에 응답하여 표시하는 팝업이나
+링크, 그리고 다른 앱에서 사용된 초대 링크는
+TgWitness에 전달되지 않습니다. 봇이 그 후 전송하거나 편집하는 내용은 기록됩니다.</p>
+</li>
+</ul>
+<h3 id="act-from-the-panel">패널에서 발언하기<a class="anchor" href="#act-from-the-panel" aria-label="이 섹션으로 이동">#</a></h3>
+<p>이제 <strong>‘채팅’ 기능에는</strong> 선택한 작업 공간의 텔레그램 계정을 사용하는 미니 클라이언트가 포함되어 있습니다:</p>
+<ul>
+<li>일반 텍스트 메시지를 작성하거나 저장된 메시지 아래의 <strong>‘답장’을</strong> 선택하세요. 반환된 발신
+    메시지는 발신 업데이트가 범위에서 제외된 경우에도 기록됩니다.</li>
+<li>현재 콜백 또는 텍스트 버튼 아래에 있는 <strong>‘Press’ 버튼을</strong> 누르십시오. 서버는
+    메시지를 다시 가져오며, 키보드 입력이 저장된 버전과 다를 경우 해당 작업을 거부합니다.
+    콜백 수신 확인에는 텔레그램의 팝업 텍스트, 알림 플래그 및 URL이 유지되며, 응답 내용도
+    대화창 하단에 표시됩니다. URL은 선택 가능한 텍스트로 유지되며 자동으로 열리지 않습니다.</li>
+<li><strong>&#x27;Telegram 링크 열기&#x27;를</strong> 확장하고, <code>@username</code>, 공개 <code>https://t.me/name</code> 링크,
+    <code>https://t.me/+invite</code> / <code>joinchat/invite</code> 또는 <code>?start=parameter</code>가 포함된 봇 링크를 입력한 후
+    <strong>&#x27;미리보기 저장&#x27;을</strong> 누르세요. 그룹/채팅에 가입하기 전에 원본 링크와 텔레그램 미리보기가 서명됩니다. 그룹/채널에
+    <strong>가입하거나</strong> 사용자/봇을 열고,
+    채팅을 활성화된 소스로 추가한 후, 시작 매개변수를 포함하여 <code>/start</code>를 봇에 전송합니다.
+    관리자의 승인을 기다리는 가입 요청은 회원 자격이 아닌 &#x27;보류 중&#x27;으로 기록됩니다.</li>
+</ul>
+<p><strong>&#x27;관찰 시작&#x27;을</strong> 켜면 수신되는 답장을 실시간으로 캡처할 수 있습니다. 패널 작업은
+관찰이 일시 중지된 상태에서도 작동하지만, 이 경우 직접적인 응답만 저장되는 것이 보장됩니다.
+새로 추가된 소스는 관찰이 실행 중일 때 구성된 프로필/이력 수집 방식을 사용합니다.
+소스가 일시 중지된 경우, 메시지를 보내거나 버튼을 누르기 전에 &#x27;소스&#x27;에서 해당 소스를 활성화하십시오.</p>
+<p><code>interaction.preview</code>, <code>interaction.requested</code> 및 <code>interaction.result</code>는 증거 내보내기 파일에 포함되는 일반적인 서명된
+저널 이벤트입니다. 요청은 계정, 메시지/버튼
+또는 미리보기 기록을 식별하며, 관찰 기능이 실행 중이었는지 여부를 나타냅니다. 수신 확인은 성공,
+거부, 승인 대기 및 알 수 없는 결과를 구분합니다. 중단된 요청이 텔레그램에 도달했을 수도 있으므로,
+새로운 작업을 시작하기 전에 채팅 내용을 확인하십시오. 요청 ID를 재사용하면,
+재시작 후를 포함하여 작업을 반복하지 않고도 저장된 수신 확인을 불러올 수 있습니다. 패널은 현재 페이지 세션 동안 동일한 작업에 대해 모호한 응답이 돌아온 후에도
+ID를 유지합니다.
+또한 작업이 성공적으로 완료된 후 뷰 새로 고침에 실패할 때도 해당 ID를 유지합니다. 수신 확인은
+계속 표시되며, 다시 클릭하면 해당 내용을 불러올 수 있습니다. 콜백 및 참여 RPC는 한 번의
+시도만 허용되며, 재시도 가능한 읽기 요청은 구성된 재시도 정책을 유지합니다. 채팅을 즉시 전환하면
+초안과 답장 대상이 즉시 지워지며, 새로운 대화가 로드될 때까지 메시지 전송이 비활성화됩니다.</p>
+<p>이 미니 클라이언트는 텍스트 및 콜백 버튼을 처리합니다. 웹 앱, 로그인/전화번호/위치 요청,
+결제, 인라인 쿼리 및 첨부 파일의 경우 여전히 텔레그램 클라이언트가 필요하며, 저장된 버튼의
+메타데이터는 계속 표시됩니다. 새로운 제어 요소에는 영어 텍스트가 사용됩니다.</p>
+<h2 id="recheck-tiers">계층 재확인<a class="anchor" href="#recheck-tiers" aria-label="이 섹션으로 이동">#</a></h2>
+<p>재확인 기능은 텔레그램에 누락된 메시지, 수정 내역 및 더 이상 반환되지 않는 메시지를 다시 요청합니다.
+별표로 표시된 소스는 <strong>우선순위</strong> 소스로, 기본적으로 15분마다 재확인되며;
+그 외 모든 소스는 6시간마다 재확인됩니다. 선택한 채팅은 우선순위 소스로 시작되며,
+폴더나 전체 계정을 통해 추가된 채팅은 일반 소스로 처리됩니다. 한 번의 재확인 주기당 최대 30개의 출처가 재확인되며,
+나머지는 다음 분까지 대기합니다. 재연결 후에는 우선순위 출처가 먼저 처리됩니다. 두
+간격 모두 ‘출처 → 기록 설정 → 재확인’(0으로 설정 시 해당 단계 비활성화)에서 설정되며,
+<code>recheck.changed</code>로 기록됩니다.</p>
+<p>놓친 메시지는 이전 처리 과정이 중단된 지점부터 위로 거슬러 올라가 가져오며, 한 번의 처리당 최대
+<strong>‘매개변수 → 재확인 시 새로운 메시지</strong> 수’(기본값 1,000개)까지 처리됩니다. 따라서 장기간 중단된 후에는
+그 간격보다 최신인 실시간 메시지가 먼저 저장되었더라도
+재검사가 전체 간격을 채웁니다. 아직 데이터 동기화가 진행 중인 채팅은 티어 간격을 기다리지 않고
+다음 분에 다시 재검사되며, <code>recheck.completed</code>는 작업이 완료될 때까지 <code>continues_after</code>를 표시합니다.</p>
+<p>비교 대상에는 메시지 본문, 엔티티, 키 입력 내역(삭제 내역 포함), 첨부 파일
+내용 및 식별 정보가 포함됩니다. 파일 액세스 해시나 파일 참조만 변경하는 것은
+수정으로 간주되지 않으며, 텔레그램이 자동으로 채우는 항목(링크 미리보기 로딩, 스토리 조회수, 해당 계정으로 잠금 해제된 유료
+미디어, 청구서 수령 확인 등)도 마찬가지입니다. ‘채팅’에 저장된 각 버전은 미디어 메타데이터를 포함한 전체 저널 기록으로 연결됩니다.</p>
+<h2 id="message-history-and-attribution">메시지 기록 및 출처 정보<a class="anchor" href="#message-history-and-attribution" aria-label="이 섹션으로 이동">#</a></h2>
+<p>수집기가 “10:00에 회의”라는 내용을 관찰한 후, “11:00에 회의”라는 내용을 확인하고,
+그 후 삭제 알림을 수신했다고 가정해 봅시다. 이때 세 가지 서로 다른 관찰 기록이 추가됩니다.
+원본 텍스트는 그대로 유지되고, 수정된 내용은 별도의 버전으로 저장되며, 알림은
+삭제가 감지되었음을 기록합니다.</p>
+<p>첫 번째 버전이 사라진 후에 수집이 시작된 경우, 해당 텍스트는 확인할 수 없습니다.
+프로세스가 오프라인 상태인 동안 여러 차례의 수정이 발생한 경우, 그 이후에 관찰된
+버전만 저장할 수 있습니다. 삭제 알림만으로는 캡처되지 않은 콘텐츠를 복구할 수 없습니다.</p>
+<p>메시지 발신자가 반드시 편집자인 것은 아닙니다. 텔레그램은 일반적으로
+메시지를 삭제한 사용자나 정확한 삭제 시간을 제공하지 않습니다. 신원이 확인되지 않은 사용자는
+계속 미확인 상태로 남습니다. 반응 스냅샷 및 참여자 업데이트에는 텔레그램이 해당 계정에
+표시하는 횟수와 신원 정보만 포함됩니다.</p>
+<p>순서 번호는 관찰 순서를 나타냅니다. 수집기의 UTC 타임스탬프는 해당
+장치의 현지 시간을 기준으로 하며, 텔레그램 소스의 타임스탬프가 제공될 경우 별도로 저장됩니다.
+두 타임스탬프 모두 독립적이고 신뢰할 수 있는 타임스탬프는 아닙니다.</p>
+<h2 id="history-snapshots">이력 스냅샷<a class="anchor" href="#history-snapshots" aria-label="이 섹션으로 이동">#</a></h2>
+<p>스냅샷은 활성화된 소스에서 가장 최근에 표시된 메시지를 요청하며, 요청당 최대
+500개까지 가져옵니다. 결과는 ‘이력 관측값’으로 표시됩니다. 이 관측값은
+실시간 캡처와 중복될 수 있으며, 반복된 관측값은 별도의 기록으로 보관됩니다.</p>
+<p>스냅샷은 첨부 파일 정책을 따르지만, 실시간 이벤트 전환과는 별도로 처리됩니다.
+스냅샷은 삭제된 메시지나 누락된 중간 버전을 복원하지 않습니다. 일시 정지 상태에서
+스냅샷을 요청할 수 있으며, 대기열에 추가된 첨부 파일은 관찰이 시작되고
+다운로드 작업자가 실행될 때까지 대기합니다.</p>
+<h2 id="attachment-handling">첨부 파일 처리<a class="anchor" href="#attachment-handling" aria-label="이 섹션으로 이동">#</a></h2>
+<p>첨부 파일 다운로드는 기본적으로 활성화되어 있으며, 사용 가능한 디스크 공간이 1 GiB 미만일 경우 일시 중지됩니다. 수집기는
+메시지 관찰 및 다운로드 작업을 함께 처리합니다. 이 작업은 원본 미디어
+설정 정보와 크기 정책을 유지하므로, 나중에 편집된 첨부 파일이 사용자 모르게 대체되는 일은 없습니다.</p>
+<p>다운로드는 메시지 캡처 후 실행됩니다. 다운로드가 완료되면 SHA-256 및 바이트 수를 포함한 <code>media.saved</code>
+레코드가 생성됩니다. 건너뛴 작업, 실패한 작업, 재시도된 작업 및 중단된
+작업은 각각 별도의 결과를 생성합니다. 대기열에 등록된 작업이 있다고 해서 파일이 보존되었다는 증거는 아닙니다.
+완료된 파일은 원래 관찰된 첨부 파일
+설명자에 명시된 바이트 수와도 일치해야 합니다. 응답이 짧거나 예기치 않게 긴 경우, 보존된 미디어로 기록되지 않습니다.</p>
+<p>제한은 <strong>유형별로</strong> 설정됩니다: 사진, 동영상, GIF 및 애니메이션, 원형 동영상 메시지,
+음성 메시지, 음악 및 오디오, 스티커, 파일. 각 유형은 비활성화할 수 있으며,
+1~2,000 MiB 범위의 개별 용량 제한이 적용됩니다. 새로 생성된 작업 공간의 초기 용량은 사진 20 MiB,
+동영상 100 MiB, 파일·오디오·라운드 동영상 50 MiB, 음성 및 GIF 20 MiB,
+스티커는 5 MiB로 설정됩니다. <em>최대 파일 크기를</em> 설정하면 모든 유형에 동시에 적용됩니다. 유형별 제한이 적용되기 전에 저장된
+정책은 모든 유형에 대해 단일 제한을 유지합니다. 비활성화된 유형은
+&#x27;<code>media.skipped</code>&#x27; 레코드를 생성하며, 크기가 알려지지 않았거나 용량을 초과한 파일은 다운로드되지 않습니다. 대용량 파일의 경우
+최소 256 KiB/s의 다운로드 속도가 보장됩니다. 작업은 시스템 재시작 후에도 유지되지만, 만료된 참조,
+접근 권한 상실 또는 파일 삭제로 인해 복구가 불가능할 수 있습니다. 기존 작업은 해당 작업과 함께 저장된
+정책을 유지합니다.</p>
+<h2 id="pause-lock-disconnect-and-restart">일시 중지, 잠금, 연결 해제 및 재시작<a class="anchor" href="#pause-lock-disconnect-and-restart" aria-label="이 섹션으로 이동">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>동사 또는 상태</th>
+<th>효과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>작업 공간 전환</td>
+<td>패널 보기를 변경합니다. 다른 수집기는 기존 상태를 유지합니다.</td>
+</tr>
+<tr>
+<td>패널을 잠그거나 탭을 닫으세요</td>
+<td>서버와 모니터링 기능을 계속 실행 상태로 유지합니다.</td>
+</tr>
+<tr>
+<td>관찰 일시 중지</td>
+<td>해당 수집기를 중지하고 대기 중인 첨부 파일 처리를 보존합니다.</td>
+</tr>
+<tr>
+<td>소스 비활성화</td>
+<td>향후 지정된 범위의 캡처를 중지합니다. 비활성화 상태인 동안 해당 캡처와 관련된 대기 중인 미디어 작업은 보류됩니다.</td>
+</tr>
+<tr>
+<td>출처 제거</td>
+<td>이 도구는 해당 소스를 잊어버리고 사용자 프로필을 삭제하지만, 이미 저장된 기록은 추가 전용 저널에 그대로 남아 있습니다. 아직 처리되지 않은 첨부 파일은 실패(<code>source_removed</code>)로 기록됩니다. 폴더 모드 및 전체 계정 모드에서도 해당 항목은 제외됩니다.</td>
+</tr>
+<tr>
+<td>연결 경로 변경</td>
+<td>일시 정지 상태를 요구하며, 오래된 클라이언트를 종료하고, 완료되지 않은 로그인을 취소합니다.</td>
+</tr>
+<tr>
+<td>Python 프로세스 중지</td>
+<td>모든 워크스페이스를 중지합니다. 오프라인 상태에서는 어떠한 관찰도 이루어지지 않습니다.</td>
+</tr>
+<tr>
+<td>활성 관찰 후 재시작</td>
+<td>저장된 세션을 사용하여 저장된 범위를 재개하려고 시도합니다. 수동으로 일시 중지하면 해당 시도가 취소됩니다.</td>
+</tr>
+</tbody>
+</table></div>
+<p>이 수집기는 감지된 연결 끊김, 재시도, 오류, 시작/중지 및
+하트비트를 기록합니다. 주기적인 연결 상태 확인으로는 짧은 중단 현상을 놓칠 수 있습니다.
+재시작 후, 누락된 업데이트는 저장된 업데이트 위치부터 요청되며
+관찰 대상 채팅은 주기적으로 재확인됩니다. <a href="../evidence/#durable-collection-and-process-receipts-02">증거 형식을</a> 참조하십시오. 스냅샷은 맥락을 제공하지만,
+누락된 부분이 복구되었음을 증명하지는 않습니다.</p>
+<h2 id="account-isolation-and-verification">계정 격리 및 검증<a class="anchor" href="#account-isolation-and-verification" aria-label="이 섹션으로 이동">#</a></h2>
+<p>각 작업 공간에는 고유한 저널, 권한, 서명 키, 정책 및 대기열이 있습니다.
+활성 상태인 클라이언트만 실시간 관측 데이터를 기록할 수 있습니다. 거부된, 대기 중인,
+대체된 클라이언트 및 연결 테스트 중인 클라이언트는 해당 저널에 실시간 업데이트를 기록할 수 없습니다.
+서로 다른 계정이 동일한 그룹을 관찰할 수 있지만, 각 계정의 저널은 별도로 유지됩니다.</p>
+<p>각 이벤트에는 이전 해시와 Ed25519 서명이 포함됩니다. 내보내기 파일은
+고정된 시퀀스 번호를 통해 전체 작업 공간 로그를 포함합니다. 패널 필터는
+내보내기 파일을 필터링하지 않으며, 내보내기 파일이 준비되는 동안에도 수집 작업은 해당 범위를 넘어 계속될 수 있습니다.</p>
+<p><strong>Verify 저널은</strong> 표시된
+경계를 통해 이벤트 체인과 서명을 확인합니다. 작업 공간이 변경되면 결과가 초기화되며, 패널은
+확인 후 추가된 새로운 기록을 식별합니다. ZIP 내보내기 기능은 수집된 미디어도 검증합니다.</p>
+<p>유효한 서명은 텔레그램의
+출처나 내용의 진실성과는 무관하게, 신뢰할 수 있는 키를 기준으로 무결성을 입증합니다. 지문과 체크포인트는 별도로 보관하십시오. 신뢰 및 전달 요건에 대해서는
+<a href="../evidence/">증거 모델</a>, <a href="../operations/">일상적인 운영</a>
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">절차,
+실시간 승인 절차를</a> 참조하십시오.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/COLLECTION.md">GitHub에서 이 페이지 편집하기 ↗</a><a class="next-guide" href="../operations/"><span>다음 단계</span><strong>워크플로우 및 운영 →</strong></a><p>이 가이드들은 현재 구현 내용을 설명합니다. 검증 결과와 남아 있는 미비 사항은 별도로 문서화되어 있습니다. <a href="../verification/">테스트된 내용 →</a></p></footer>
+</main>
+<aside class="toc" aria-label="이 페이지에서"><p class="nav-label">이 페이지에서</p><a href="#from-login-to-a-journal">로그인부터 기록부까지</a><a href="#observation-scope-chosen-chats-a-folder-or-the-whole-account">모니터링 범위: 선택한 채팅, 특정 폴더 또는 전체 계정</a><a href="#scope-and-event-selection">범위 및 이벤트 선택</a><a href="#own-actions">자신의 행동</a><a href="#investigation-mode-joining-teams-and-talking-to-bots">조사 모드: 팀에 합류하고 봇과 대화하기</a><a href="#recheck-tiers">계층 재확인</a><a href="#message-history-and-attribution">메시지 기록 및 출처 정보</a><a href="#history-snapshots">이력 스냅샷</a><a href="#attachment-handling">첨부 파일 처리</a><a href="#pause-lock-disconnect-and-restart">일시 중지, 잠금, 연결 해제 및 재시작</a><a href="#account-isolation-and-verification">계정 격리 및 검증</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>오픈 소스 · 사용자의 컴퓨터에서 실행됩니다</span><a href="../../../../LICENSE">MIT 라이선스</a><a href="../notice/">운영자 공지</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">보안</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "메시지를 기다리고 있습니다", "Step through a fictional send, edit and delete.": "가상의 메시지 전송, 수정 및 삭제 과정을 단계별로 살펴보세요.", "No observations yet. Start the sequence or advance one event.": "아직 관찰 내용이 없습니다. 시퀀스를 시작하거나 이벤트를 하나 앞으로 넘기세요.", "Meet at 10:00": "10:00에 만나요", "A new message is visible in the chat.": "채팅창에 새 메시지가 표시됩니다.", "Record 1 appended: the collector observed the original message.": "기록 1건 추가됨: 수집기가 원본 메시지를 감지했습니다.", "Meet at 11:00": "11:00에 만나요", "The current text changes. The earlier observation stays.": "현재 텍스트가 변경되었습니다. 이전의 관찰 내용은 그대로 유지됩니다.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "기록 2가 추가되었습니다: 이 수정은 새로운 관찰 내용입니다. 기록 1에는 여전히 원본 텍스트가 유지되어 있습니다.", "Message deleted": "메시지가 삭제되었습니다.", "The message has disappeared from the chat view.": "해당 메시지가 채팅 화면에서 사라졌습니다.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Record 3 추가: 삭제 알림은 확인된 두 버전의 메시지와 함께 보존됩니다.", "0 records": "0건", "1 record": "1건의 기록", "2 records": "2건의 기록", "3 records": "3건의 기록", "Complete / {n} of 3": "완료 / 3개 중 {n}개", "Step / {n} of 3": "3단계 중 {n}단계", "Pause": "일시 정지", "Replay sequence": "재생 순서", "Play sequence": "재생 순서", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "정적 예제 페이지를 확인할 수 있습니다. 해시를 대화형으로 계산하려면 HTTPS를 통해 이 페이지를 열거나, Web Crypto를 지원하는 로컬호스트 미리보기에서 열어보세요.", "No record supplied": "기록이 제공되지 않음", "Tail removed": "꼬리 부분 삭제됨", "≠ saved hash": "≠ 저장된 해시", "Rebuilt · different hash": "재구축 · 다른 해시", "= saved hash": "= 저장된 해시", "Same length and matching head.": "글의 길이는 동일하며, 제목도 일치해야 합니다.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "계산된 세 개의 해시 값이 모두 저장된 해시 값과 일치합니다. 이 샘플은 유지된 3개 레코드 경계와 일치합니다.", "Same saved head; the journal prefix fails verification.": "동일한 헤더가 저장되었으나, 저널 접두사가 검증에 실패했습니다.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "레코드 2가 저장된 해시와 더 이상 일치하지 않습니다. 최종 저장된 헤더만 확인하면 이 문제를 놓칠 수 있으므로, 검증자는 모든 레코드를 확인합니다.", "Head differs from the retained checkpoint.": "헤더가 유지된 체크포인트와 다릅니다.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "재구성된 해시 값들은 서로 연결되어 있지만, 최종 헤더가 변경되었습니다. 보존된 체크포인트는 이 변경 내역을 거부합니다. 변경된 기록의 경우 원본 서명도 유효하지 않을 것입니다.", "Too short: 2 supplied records \u003c 3 retained records.": "너무 짧음: 제공된 기록 2건 \u003c 보존된 기록 3건.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "남아 있는 두 해시는 여전히 일치합니다. 보존된 체크포인트는 누락된 끝부분을 드러냅니다. 그 이전의 경계 정보가 없었다면, 이 짧은 접두사만으로는 누락된 부분을 파악할 수 없었을 것입니다.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "이 브라우저에서는 해시 계산 기능을 사용할 수 없습니다. 아래의 공식과 정적 설명은 계속 확인할 수 있습니다.", "{n} records": "{n}건의 기록", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "승인됨: 카운트가 증가하고, 서명이 검증되며, 키가 일치합니다. 위트니스는 이 새로운 경계를 유지합니다.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "롤백: 서명된 응답에 포함된 기록 수가 마지막으로 승인된 체크포인트보다 적게 보고된 경우. 위트니스는 이 문제를 기록하고 이전에 승인된 경계를 유지합니다.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "포크(Fork): 카운트는 변하지 않았지만 헤드가 다릅니다. 위트니스는 이 불일치를 기록하고 이전에 승인된 경계를 유지합니다.", "No answer": "답변 없음", "boundary unknown": "경계 미상", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "응답 없음: 위트니스는 확인 실패를 기록합니다. 수집기의 현재 상태를 확인할 수는 없습니다. 위트니스가 여전히 봇 API에 접속할 수 있고 게시 정책이 허용하는 경우, 해당 실패 사실을 게시할 수 있습니다.", "Send {n}": "{n} 보내기", "Edit {n}": "{n} 편집", "Delete {n}": "{n} 삭제", "Both accounts captured all six expected observations in this example.": "이 예시에서 두 계정 모두 예상된 6가지 관찰 항목을 모두 포착했습니다.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "계정 B는 여전히 6건 중 6건을 모두 캡처했습니다. 두 건의 수신 확인은 더 오래 걸렸습니다. 캡처 비율과 수신 확인 지연은 서로 다른 문제를 나타냅니다.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "계정 B는 마감 시점까지 6건 중 5건(83.3%)을 포착했습니다. 누락된 편집 건에는 측정된 지연 시간이 없습니다. 이 결과는 6건의 통제된 동작에 대해서만 설명한 것입니다.", "not observed by cutoff": "마감 시점에 확인되지 않음", "{s} seconds": "{s}초", "Exact values follow in the table.": "정확한 수치는 아래 표에 나와 있습니다.", "{s} s": "{s} s", "Not observed": "확인되지 않음", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "네 개의 채팅에서 서로 다른 관찰 결과가 제시됩니다. 모든 연결에 대해 원본 기록을 따르십시오. 발신자가 명시되지 않은 경우 채널 게시물을 사용자 71001에게 귀속시키지 마십시오.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "기록 #146과 #205는 동일한 발신자 ID인 71001을 나타냅니다. 이를 통해 두 채팅에서 관찰된 텔레그램 계정의 게시물을 연결할 수 있습니다. 이는 실제 인물을 식별하거나 채널 게시물의 작성자를 특정하지는 않습니다.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "수신처 pay.example.invalid/new는 그룹 기록 #146, 봇 키보드 #173, 채널 편집 #188 및 비공개 메시지 #205에 나타납니다. 동일한 수신처가 반복적으로 등장한다는 사실은 해당 자료 간의 연관성을 시사할 뿐, 해당 계정들이 동일한 주체에 의해 통제된다는 것을 증명하지는 않습니다.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "이 가상의 사례에서, 완료된 미디어 수신 기록 #151과 #209는 동일한 SHA-256 전체 값을 가지고 있습니다. 실제 바이트와 관련 메시지 기록을 비교해 보십시오. 일치하는 파일은 작성자를 식별하지 않으며, 누가 이를 전달했는지도 증명하지 않습니다.", "the encrypted off-site copy": "암호화된 오프사이트 사본", "notifications": "알림", "checkpoint hashes for timestamps": "타임스탬프용 체크포인트 해시", "signed checkpoints for the witness": "증거를 위한 서명된 체크포인트", "Switched on in this example": "이 예시에서는 활성화됨", "Optional · off by default": "선택 사항 · 기본값은 비활성화됨", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "이 기기에서 남기는 것: 텔레그램 연결 정보와 {list}. 그 외에는 아무것도 없습니다.", "Default: only the Telegram connection leaves this machine.": "기본 설정: 텔레그램 연결만 이 기기를 통해 이루어집니다.", "{done} of {total} done": "{done}/{total} 완료", "Mark step {n} as done": "{n}번 단계를 완료로 표시", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "복사", "Copied": "복사됨", "Command copied.": "명령 복사 완료.", "Selected — Ctrl/Cmd+C": "선택 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "명령어가 선택되었습니다. 수동으로 복사하십시오.", "Command copied to clipboard.": "명령어가 클립보드에 복사되었습니다.", "Select text": "텍스트 선택", "Clipboard unavailable. Command selected; copy it manually.": "클립보드를 사용할 수 없습니다. 명령어가 선택되었습니다. 수동으로 복사하십시오.", "A message arrives. The first observation is saved.": "메시지가 도착합니다. 첫 번째 관측 결과가 저장됩니다.", "The time changes. Both captured versions stay.": "시간이 변경됩니다. 캡처된 두 버전 모두 그대로 유지됩니다.", "The message disappears. The captured history remains.": "메시지는 사라지지만, 캡처된 기록은 남습니다.", "Pause example animation": "예시 애니메이션 일시 정지", "Play example animation": "예시 애니메이션 재생", "Play": "재생", "Full-size workspace screenshot": "전체 화면 작업 공간 스크린샷", "Workspace screenshot · fictional data": "작업 공간 스크린샷 · 가상의 데이터", "Close": "닫기", "Close screenshot": "스크린샷 닫기", "Scrollable full-size screenshot": "스크롤 가능한 전체 화면 스크린샷", "Enlarge: {name}": "확대: {name}", "View full size": "전체 크기 보기"}</script>
+</body></html>

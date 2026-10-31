@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="ja" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>調査モード | TgWitness</title>
+<meta name="description" content="チャンネル、グループ、プライベートチャット、ボットにまたがるアカウント全体の調査について、調査範囲の設定から検証済みのケースパッケージの作成までを網羅しています。"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/investigation/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="調査モード | TgWitness"><meta property="og:description" content="チャンネル、グループ、プライベートチャット、ボットにまたがるアカウント全体の調査について、調査範囲の設定から検証済みのケースパッケージの作成までを網羅しています。">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/ja/docs/reference/investigation/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/investigation/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/investigation/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/investigation/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/investigation/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/investigation/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/investigation/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/investigation/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/investigation/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/investigation/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/investigation/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/investigation/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/investigation/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/investigation/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/investigation/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/investigation/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/investigation/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/investigation/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/investigation/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/investigation/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/investigation/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/investigation/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/investigation/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/ja/docs/reference/investigation/", "url": "https://phishdestroy.github.io/TgWitness/ja/docs/reference/investigation/", "name": "調査モード | TgWitness", "description": "チャンネル、グループ、プライベートチャット、ボットにまたがるアカウント全体の調査について、調査範囲の設定から検証済みのケースパッケージの作成までを網羅しています。", "inLanguage": "ja", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://phishdestroy.github.io/TgWitness/ja/"}, {"@type": "ListItem", "position": 2, "name": "ドキュメント", "item": "https://phishdestroy.github.io/TgWitness/ja/docs/"}, {"@type": "ListItem", "position": 3, "name": "参考文献", "item": "https://phishdestroy.github.io/TgWitness/ja/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "調査モード", "item": "https://phishdestroy.github.io/TgWitness/ja/docs/reference/investigation/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">コンテンツへスキップ</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / ドキュメント</span></a>
+<nav aria-label="ガイド"><a href="../../concepts/">ビジュアルガイド</a><a href="../../">すべてのガイド</a><a href="../">参考文献</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="言語"><span aria-hidden="true">◍</span> 日本語</summary><div class="lang-list"><a href="../../../../docs/reference/investigation/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/investigation/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/investigation/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/investigation/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/investigation/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/investigation/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/investigation/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/investigation/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/investigation/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/investigation/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/investigation/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/investigation/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/investigation/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/investigation/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/investigation/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/investigation/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/investigation/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/investigation/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/investigation/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/investigation/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/investigation/" hreflang="pl" lang="pl">Polski</a><a href="./" hreflang="ja" lang="ja" aria-current="true">日本語</a><a href="../../../../th/docs/reference/investigation/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/investigation/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/investigation/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="ライトテーマとダークテーマを切り替える"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="ガイド"><a href="../../../guides/modes.html">モード、シナリオ、および証拠レベル</a><p class="nav-label">はじめに</p><a href="../../start/">数分で始められます</a><a href="../../accounts/">アカウントを連携する</a><a href="../../proxies/">プロキシを選択してください</a><a href="../../exports/">エクスポートと検証</a><p class="nav-label">証拠について理解する</p><a href="../../concepts/">証拠の仕組みをご覧ください</a><a href="../../cases/">すべてのチャットを横断的に調査する</a><a href="../../security/">セキュリティを確保してください</a><p class="nav-label">さらに詳しく</p><a href="../../witness/">Witnessボットの設定</a><a href="../../server/">稼働を継続してください</a><a href="../../troubleshooting/">何が問題だったのかを確認する</a></nav><nav class="wiki-nav" aria-label="参考文献"><p class="nav-label"><a class="nav-label-link" href="../">参考文献</a></p><details class="wiki-group"><summary>セットアップ</summary><a href="../quickstart/">クイックスタート</a><a href="../accounts/">アカウントとセッション形式</a><a href="../connection/">接続、プロキシ、およびデータ保護</a><a href="../deployment/">導入</a></details><details class="wiki-group" open><summary>収集</summary><a href="../collection/">収集の仕組み</a><a href="../operations/">ワークフローと操作方法</a><a href="./" aria-current="page">調査モード</a><a href="../features/">機能と制限事項</a></details><details class="wiki-group"><summary>証拠</summary><a href="../how-it-works/">証拠の仕組み</a><a href="../evidence/">証拠の形式</a><a href="../witness/">独立した証人</a><a href="../timestamp/">タイムスタンプ</a></details><details class="wiki-group"><summary>セキュリティとプロジェクト</summary><a href="../security/">セキュリティおよびデータ取り扱い</a><a href="../architecture/">アーキテクチャ</a><a href="../verification/">テスト済みの内容</a><a href="../license/">ライセンスに関する説明とアーキテクチャ上の非互換性の通知</a><a href="../notice/">オペレーターの非互換性に関する通知</a><a href="../changelog/">変更履歴</a></details></nav><p class="sidebar-note">v0.7.0<br>オープンソース・お使いのマシン上で動作します</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="ガイド"><a href="../../../">ホーム</a> <span aria-hidden="true">/</span> <a href="../../">ドキュメント</a> <span aria-hidden="true">/</span> <a href="../">参考文献</a> <span aria-hidden="true">/</span> <span aria-current="page">調査モード</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">ドキュメントを検索する</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="「プロキシ」、「ハッシュチェーン」、「トークン」、または「ウィットネス」などを試してみてください…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="検索を明確にする" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">ガイドやリファレンスを検索するには、単語を入力してください。検索はブラウザ内で行われます。</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">参考文献 / 収集</p><h1>調査モード</h1><p class="guide-outcome">チャンネル、グループ、プライベートチャット、ボットにまたがるアカウント全体の調査について、調査範囲の設定から検証済みのケースパッケージの作成までを網羅しています。</p><div class="wiki-body"><p>チャンネル、グループ、プライベートチャット、ボットを横断して、事案を
+初期の取得段階から、引用されたタイムライン、検証可能な引き継ぎに至るまで追跡できます。インタラクティブなウェブサイト
+版は <code>/docs/cases/</code> にあります。<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md#preview-the-website-locally">プレビューの手順をご覧ください</a>。</p>
+<h2 id="worked-case-a-destination-changes-across-four-conversations">事例：4つの会話にわたって目的地が変更されたケース<a class="anchor" href="#worked-case-a-destination-changes-across-four-conversations" aria-label="このセクションへのリンク">#</a></h2>
+<p>ある告知がボットを指し示しています。運用グループが新しい送金先について議論し、
+ボットのキーボードにそれが表示され、非公開のフォローアップメッセージでそれが繰り返されます。
+その後、その告知が編集され、グループメッセージが消えます。</p>
+<p>疑問点は以下の通りです。変更の前後で何が確認されたか、どのTelegram
+アカウントが各項目を投稿したか、宛先がどこに表示されたか、どの添付ファイルのバイトが
+保存されたか、そしてどのような間隔が不明のままであるか、ということです。</p>
+<p>この例に登場するすべての名前、ID、時刻、およびジャーナルの参照情報は架空のものです。
+ワークフローでは現在の機能が使用されています。ケースマップはあくまで例示であり、アプリケーションによって自動的に
+生成されたグラフではありません。</p>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 813 442" width="813" height="442" role="img" aria-labelledby="flow-3-title flow-3-desc"><title id="flow-3-title">フローチャート</title><desc id="flow-3-desc">チャンネル → ワークスペース・ジャーナル; グループ → ワークスペース・ジャーナル; プライベートチャット → ワークスペース・ジャーナル; ボット → ワークスペース・ジャーナル; ワークスペース・ジャーナル → すべての情報源を検索する; ワークスペース・ジャーナル → 記録の参照先を含む人物プロフィール; ワークスペース・ジャーナル → 保存されたバージョンと添付ファイルの受信確認; すべての情報源を検索する → アナリストのタイムラインおよび情報源登録簿; 記録の参照先を含む人物プロフィール → アナリストのタイムラインおよび情報源登録簿; 保存されたバージョンと添付ファイルの受信確認 → アナリストのタイムラインおよび情報源登録簿; ワークスペース・ジャーナル → 署名付き証拠 ZIP; アナリストのタイムラインおよび情報源登録簿 → 個別に検証済みの証拠資料を用いた案件の引き継ぎ; 署名付き証拠 ZIP → 個別に検証済みの証拠資料を用いた案件の引き継ぎ</desc><defs><marker id="flow-3-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M220.9 46.0C220.9 68.0 427.1 68.0 427.1 90.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:215" pathLength="215"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.4s" repeatCount="indefinite" path="M220.9 46.0C220.9 68.0 427.1 68.0 427.1 90.0"/></circle><path class="flow-edge" d="M342.9 46.0C342.9 68.0 427.1 68.0 427.1 90.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:100" pathLength="100"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M342.9 46.0C342.9 68.0 427.1 68.0 427.1 90.0"/></circle><path class="flow-edge" d="M495.9 46.0C495.9 68.0 427.1 68.0 427.1 90.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:86" pathLength="86"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M495.9 46.0C495.9 68.0 427.1 68.0 427.1 90.0"/></circle><path class="flow-edge" d="M648.9 46.0C648.9 68.0 427.1 68.0 427.1 90.0" marker-end="url(#flow-3-arrow)" style="--i:0;--len:230" pathLength="230"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.6s" repeatCount="indefinite" path="M648.9 46.0C648.9 68.0 427.1 68.0 427.1 90.0"/></circle><path class="flow-edge" d="M427.1 130.0C427.1 156.5 102.8 156.5 102.8 183.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:333" pathLength="333"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="3.7s" repeatCount="indefinite" path="M427.1 130.0C427.1 156.5 102.8 156.5 102.8 183.0"/></circle><path class="flow-edge" d="M427.1 130.0C427.1 152.0 321.3 152.0 321.3 174.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:119" pathLength="119"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M427.1 130.0C427.1 152.0 321.3 152.0 321.3 174.0"/></circle><path class="flow-edge" d="M427.1 130.0C427.1 152.0 546.7 152.0 546.7 174.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:132" pathLength="132"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.5s" repeatCount="indefinite" path="M427.1 130.0C427.1 152.0 546.7 152.0 546.7 174.0"/></circle><path class="flow-edge" d="M102.8 223.0C102.8 249.5 323.6 249.5 323.6 276.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:232" pathLength="232"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="2.6s" repeatCount="indefinite" path="M102.8 223.0C102.8 249.5 323.6 249.5 323.6 276.0"/></circle><path class="flow-edge" d="M321.3 232.0C321.3 254.0 323.6 254.0 323.6 276.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:44" pathLength="44"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M321.3 232.0C321.3 254.0 323.6 254.0 323.6 276.0"/></circle><path class="flow-edge" d="M546.7 232.0C546.7 254.0 323.6 254.0 323.6 276.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:232" pathLength="232"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="2.6s" repeatCount="indefinite" path="M546.7 232.0C546.7 254.0 323.6 254.0 323.6 276.0"/></circle><path class="flow-edge" d="M427.1 130.0C427.1 156.5 737.6 156.5 737.6 183.0" marker-end="url(#flow-3-arrow)" style="--i:1;--len:320" pathLength="320"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="3.6s" repeatCount="indefinite" path="M427.1 130.0C427.1 156.5 737.6 156.5 737.6 183.0"/></circle><path class="flow-edge" d="M323.6 334.0C323.6 356.0 530.6 356.0 530.6 378.0" marker-end="url(#flow-3-arrow)" style="--i:3;--len:216" pathLength="216"/><circle class="flow-pulse" r="3.2" style="--i:3"><animateMotion begin="indefinite" dur="2.4s" repeatCount="indefinite" path="M323.6 334.0C323.6 356.0 530.6 356.0 530.6 378.0"/></circle><path class="flow-edge" d="M737.6 223.0C737.6 300.5 530.6 300.5 530.6 378.0" marker-end="url(#flow-3-arrow)" style="--i:2;--len:274" pathLength="274"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="3.0s" repeatCount="indefinite" path="M737.6 223.0C737.6 300.5 530.6 300.5 530.6 378.0"/></circle><g class="flow-node" style="--i:0"><rect x="168.9" y="6.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="220.9" y="26.0">チャンネル</tspan></text></g><g class="flow-node" style="--i:0"><rect x="290.9" y="6.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="342.9" y="26.0">グループ</tspan></text></g><g class="flow-node" style="--i:0"><rect x="412.9" y="6.0" width="166.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="495.9" y="26.0">プライベートチャット</tspan></text></g><g class="flow-node" style="--i:0"><rect x="596.9" y="6.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="648.9" y="26.0">ボット</tspan></text></g><g class="flow-node" style="--i:1"><rect x="323.4" y="90.0" width="207.4" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="427.1" y="110.0">ワークスペース・ジャーナル</tspan></text></g><g class="flow-node" style="--i:2"><rect x="6.0" y="183.0" width="193.6" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="102.8" y="203.0">すべての情報源を検索する</tspan></text></g><g class="flow-node" style="--i:2"><rect x="217.6" y="174.0" width="207.4" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="321.3" y="194.0">記録の参照先を含む人物プロ</tspan><tspan x="321.3" y="212.0">フィール</tspan></text></g><g class="flow-node" style="--i:2"><rect x="443.0" y="174.0" width="207.4" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="546.7" y="194.0">保存されたバージョンと添付</tspan><tspan x="546.7" y="212.0">ファイルの受信確認</tspan></text></g><g class="flow-node" style="--i:2"><rect x="668.4" y="183.0" width="138.4" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="737.6" y="203.0">署名付き証拠 ZIP</tspan></text></g><g class="flow-node" style="--i:3"><rect x="219.9" y="276.0" width="207.4" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="323.6" y="296.0">アナリストのタイムラインお</tspan><tspan x="323.6" y="314.0">よび情報源登録簿</tspan></text></g><g class="flow-node" style="--i:4"><rect x="426.9" y="378.0" width="207.4" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="530.6" y="398.0">個別に検証済みの証拠資料を</tspan><tspan x="530.6" y="416.0">用いた案件の引き継ぎ</tspan></text></g></svg></div><details class="flow-steps"><summary>図表をテキストで記述</summary><ol><li>チャンネル → ワークスペース・ジャーナル</li><li>グループ → ワークスペース・ジャーナル</li><li>プライベートチャット → ワークスペース・ジャーナル</li><li>ボット → ワークスペース・ジャーナル</li><li>ワークスペース・ジャーナル → すべての情報源を検索する</li><li>ワークスペース・ジャーナル → 記録の参照先を含む人物プロフィール</li><li>ワークスペース・ジャーナル → 保存されたバージョンと添付ファイルの受信確認</li><li>すべての情報源を検索する → アナリストのタイムラインおよび情報源登録簿</li><li>記録の参照先を含む人物プロフィール → アナリストのタイムラインおよび情報源登録簿</li><li>保存されたバージョンと添付ファイルの受信確認 → アナリストのタイムラインおよび情報源登録簿</li><li>ワークスペース・ジャーナル → 署名付き証拠 ZIP</li><li>アナリストのタイムラインおよび情報源登録簿 → 個別に検証済みの証拠資料を用いた案件の引き継ぎ</li><li>署名付き証拠 ZIP → 個別に検証済みの証拠資料を用いた案件の引き継ぎ</li></ol></details></figure>
+<h2 id="1-define-the-case-and-collect-the-whole-account">1. 事案を定義し、全容を把握する<a class="anchor" href="#1-define-the-case-and-collect-the-whole-account" aria-label="このセクションへのリンク">#</a></h2>
+<ol>
+<li>収集用アカウントを、専用のワークスペースに接続してください。外部のケースノートには、
+    ケース参照番号、アカウントID、ワークスペース、監視開始日時、および信頼できる
+    署名鍵のフィンガープリントを記録してください。</li>
+<li>「オープン<strong>ソース」→「監視範囲」→「調査モード</strong>」。このプリセットでは、「
+    <strong>アカウント全体</strong>」、「チャンネル／グループ／プライベートチャット／ボット」、「自身の操作」、「ソース
+    プロファイル」、および新たに発見されたソースの「表示可能な最新の200件のメッセージ」が選択されます。
+    内容を確認し、<strong>「範囲を保存</strong>」を押して、範囲の確認を完了してください。</li>
+<li><strong>チャットを読み込み</strong>、そのソースをアカウントのダイアログ一覧と比較します。 「除外設定」を確認してください。
+    <strong>「パラメータ」→「アカウントのリストから読み込むチャット数」は</strong>、デフォルトで
+    1,000件に設定されており、最大20,000件まで指定可能です。リストの制限を超えるソースは、
+    アクティブになった時点で追加されます。実際に列挙された内容を記録してください。</li>
+<li>「<strong>記録設定</strong>」で「<strong>表示されているすべてのアクティビティ</strong>」を選択し、
+    監視設定を保存してください。添付ファイルの種類や制限、および空きディスク容量を確認してください。</li>
+<li>監視を開始します。制御された新しいメッセージ、編集、削除を検証し、その後、
+    テストの参照情報および発生したエラーを記録します。</li>
+</ol>
+<p>「アカウント全体」の範囲では、保存された設定の範囲内で、アカウント上で確認可能なアクティビティを記録します。
+秘密チャットにはアクセスせず、リンクされたすべてのグループに自動的に参加することもありません。また、
+既存のすべての会話履歴を遡って記録することもありません。<a href="../collection/#observation-scope-chosen-chats-a-folder-or-the-whole-account">「収集範囲」</a>をご参照ください。</p>
+<h2 id="2-inventory-every-source-and-acquire-historical-context">2. すべての情報源を網羅し、歴史的背景を把握する<a class="anchor" href="#2-inventory-every-source-and-acquire-historical-context" aria-label="このセクションへのリンク">#</a></h2>
+<p>チャットごとに1行ずつ、ソース登録簿を作成してください：</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>分野</th>
+<th>記録</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>アイデンティティ</td>
+<td>ワークスペース、アカウントID、数値のチャットID、タイトル、およびタイプ</td>
+</tr>
+<tr>
+<td>可視性</td>
+<td>メンバーシップ／役割、アクセス権の確認の有無、除外事項</td>
+</tr>
+<tr>
+<td>リアルタイムキャプチャ</td>
+<td>開始時期、選択されたイベントの種類、およびその後のポリシー変更</td>
+</tr>
+<tr>
+<td>ジャーナルの履歴</td>
+<td>スナップショットの要求／完了状況、制限、時間、および記録の参照情報</td>
+</tr>
+<tr>
+<td>全履歴</td>
+<td>チャットごとの署名付きエクスポートファイル名、境界、および完了／失敗</td>
+</tr>
+<tr>
+<td>添付ファイル</td>
+<td>メディアの受信状況、ハッシュ値、サイズ、およびスキップ／失敗の結果</td>
+</tr>
+<tr>
+<td>対応範囲</td>
+<td>サービス停止、取り込みの不完全さ、FloodWait、利用できないメッセージ、その他の欠落</td>
+</tr>
+</tbody>
+</table></div>
+<p>各情報源に応じて適切な取得方法を使用してください：</p>
+<ul>
+<li><strong>履歴スナップショット</strong>は、最近表示されたメッセージを観察ログに保存します。
+    デフォルトの上限は500件ですが、<strong>「パラメータ」→「最大履歴スナップショット」</strong>で
+    これを10,000件まで増やすことができます。これらは現在の履歴の観察結果であり、編集履歴を再構築したものではありません。</li>
+<li><strong>「チャット全体をエクスポート」→「チャット全体をエクスポート」</strong>、または<strong>「チャット」→「チャットをエクスポート</strong>」を選択すると、
+    現在表示されている1つのチャットの履歴が、個別の署名付き<code>chat.json</code>／
+    <code>chat.html</code>バンドルとして取得されます。案件に関連する情報源についてこの操作を繰り返し、各結果を保存してください。</li>
+<li><strong>新しいチャットやボットが出現した際</strong>、そのプロフィールと最大1,000件の最近の
+    メッセージを保存できます。調査モードでは200件が選択されます。既存のチャットについては、
+    モードを有効にしても、遡ってそのデータを取り込むことはできません。</li>
+<li><strong>表示可能な添付ファイルをダウンロードすると</strong>、設定されたポリシーに基づきバイト数が保持されます。
+    SHA-256およびバイト数が記載された、完了済みの<code>media.saved</code>レシートが必要です。キューに入れられた
+    ジョブ、サムネイル、またはファイル名は、保持される添付ファイルには該当しません。</li>
+</ul>
+<p>チャット全体のエクスポートを行っても、ジャーナルやユーザープロフィールにはすべての
+メッセージが反映されるわけではありません。TgWitness内で分析が必要な履歴については、
+ジャーナルのスナップショットをご利用ください。ワンクリックでアカウント全体の履歴を遡って取得する機能はなく、
+履歴の完全な取得はチャット単位で行われます。いずれの方法でも、Telegramがもはや返さないデータは復元できません。</p>
+<h2 id="3-preserve-the-evolving-case-and-deliberate-interactions">3. 変化し続ける事案と意図的なやり取りを保存する<a class="anchor" href="#3-preserve-the-evolving-case-and-deliberate-interactions" aria-label="このセクションへのリンク">#</a></h2>
+<p>進行中の事件に関連するチャットを優先的な情報源としてマークしてください。再確認の間隔、継続的な
+追跡状況、およびメディアへの反映状況を確認してください。アカウントを使用中は、コレクターの監視を継続してください。
+<strong>「チャット」→「プロフィール」→「今すぐプロフィールを保存」</strong>を使用して、
+説明文やボットコマンドなどの情報源メタデータを保持してください。これは、保存されたメッセージから導き出される
+人物プロフィールとは別物です。</p>
+<p>情報源を追跡したり、ボットとやり取りしたりするケースについては：</p>
+<ol>
+<li><strong>「Telegramリンクを開く」→「プレビューを保存」は、</strong>指定されたリンクと、操作実行前の
+    プレビューを記録します。</li>
+<li><strong>「Join / open and observe」</strong>は、join/openを実行し、指定された場合はボットのstart
+    パラメータを送信します。承認待ちの参加リクエストは「pending」として記録されます。</li>
+<li>パネルから送信されたテキスト返信およびサポートされているボタンの押下操作については、
+    <code>interaction.requested</code>および<code>interaction.result</code>が保持されます。コールバックの受信確認では、
+    返されたポップアップテキスト、アラートの状態、およびURLを保持することができます。</li>
+</ol>
+<p>これらは実際のアカウント操作です。別のTelegramアプリでのコールバックの押下は、
+収集ツールからは確認できませんが、その結果として送信されたメッセージや編集内容は確認できる場合があります。
+ミニクライアントは、ウェブアプリ、決済、電話、位置情報のワークフローを実行しません。
+正確な動作については、「<a href="../collection/#act-from-the-panel">パネルの操作」</a>をご覧ください。</p>
+<h2 id="4-connect-observations-across-chats">4. チャット間の観察結果を関連付ける<a class="anchor" href="#4-connect-observations-across-chats" aria-label="このセクションへのリンク">#</a></h2>
+<p>「<strong>Journal</strong>」で「<strong>All sources</strong>」を選択し、記録されたコンテンツを検索してください。一致した
+レコードを開き、ワークスペース、チャット、メッセージID、シーケンス、およびレコードのハッシュを記録してください。</p>
+<p>関連するチャットで、「<strong>People」→「プロフィールを有効にする」</strong>を開き、対象者のプロフィールを確認してください：</p>
+<ul>
+<li>長期にわたり観測された名前／ユーザー名およびTelegramの数値ID。</li>
+<li>返信の関係性には、元の記録への参照を含めます。</li>
+<li><strong>また、</strong>このワークスペースのジャーナル内にある、そのIDが書き込みを行った他のチャットにも含まれています。</li>
+<li>アクティビティ、編集・削除履歴、および言及されたウォレット、電話番号、ユーザー名、リンク。</li>
+<li>保存されたアバターのメタデータおよび類似のキャッシュされたアバター、ならびにそれぞれの出典元。</li>
+</ul>
+<p>調査結果で派生プロファイルを使用する前に、引用された記録を開いてください。プロファイルの対象は、
+メッセージが保存されている人物であり、グループの全メンバーではありません。<strong>「パラメータ」→「事実ごとの引用記録数」
+は</strong>、参照リストの数を制限するものであり、基礎となるアクティビティの件数を制限するものではありません。
+言及やアバターの類似性は手がかりであり、所有権や身元を立証するものではありません。</p>
+<p>具体例：</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>リンク</th>
+<th>記録</th>
+<th>サポート対象の観測項目</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>同じ送信者アカウント</td>
+<td>グループ #146 および非公開のフォローアップ #205</td>
+<td>いずれもTelegramの送信者ID「71001」を提供しています。</td>
+</tr>
+<tr>
+<td>同じ宛先</td>
+<td>#146、ボットキーボード #173、チャンネル編集 #188、プライベートメッセージ #205</td>
+<td>すべてに<code>pay.example.invalid/new</code>が含まれていますが、所有権や管理権は特定されていません。</td>
+</tr>
+<tr>
+<td>保存されたファイルは同じです</td>
+<td>メディア受領書 #151 および #209 を完了しました</td>
+<td>保存されたバイトについて、SHA-256の値が完全に一致しています。</td>
+</tr>
+<tr>
+<td>チャンネルの出典</td>
+<td>#101 および #188</td>
+<td>送信者が明記されていない限り、チャンネルへの投稿をユーザー71001によるものと見なさないでください。</td>
+</tr>
+</tbody>
+</table></div>
+<p>添付ファイルのハッシュ値と、それに関連するメッセージの参照情報を比較してください。ファイルが同一である
+からといって、作成者、転送者、または共通の運営者が特定されるわけではありません。名前が同じで
+アバターが似ているというだけでは、2つのTelegram IDを1人の人物として結びつけることはできません。</p>
+<h2 id="5-build-the-cross-chat-timeline">5. チャット横断型のタイムラインを作成する<a class="anchor" href="#5-build-the-cross-chat-timeline" aria-label="このセクションへのリンク">#</a></h2>
+<p><strong>「チャット</strong>」に保存されたバージョンと、その<strong>ジャーナル記録の「#…」</strong>リンクをご利用ください。
+<strong>ジャーナル</strong>では、「<strong>すべてのソース</strong>」に「<strong>編集</strong>」「<strong>削除</strong>」「<strong>カバレッジ</strong>」を組み合わせてください。
+提供されている場合は「<code>source_at</code>」と「<code>observed_at</code>」の両方を保持してください。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>観察期間の例</th>
+<th>参考資料</th>
+<th>所見</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>09:00</td>
+<td>チャンネル #101</td>
+<td>元の送信先が記録されました</td>
+</tr>
+<tr>
+<td>09:12</td>
+<td>グループ #146; メディア #151</td>
+<td>新しい保存先が投稿されました。ファイルのダウンロードが完了しました。</td>
+</tr>
+<tr>
+<td>09:16</td>
+<td>ボット #173</td>
+<td>キーボードは新しい宛先を指しています</td>
+</tr>
+<tr>
+<td>09:20</td>
+<td>チャンネル #188</td>
+<td>告知文を編集しました。保存された両方のバージョンが残されています。</td>
+</tr>
+<tr>
+<td>09:24</td>
+<td>プライベート #205; メディア #209</td>
+<td>同じ送信者IDの宛先が繰り返され、同じファイルバイトが保持されています。</td>
+</tr>
+<tr>
+<td>09:28</td>
+<td>グループ #231</td>
+<td>削除通知を受信しました。削除者および正確な削除時刻は不明です。</td>
+</tr>
+</tbody>
+</table></div>
+<p>これらの例示された参照の間に、その他の記録が存在する場合があります。シーケンス番号によって
+観測順が定められますが、履歴のスナップショットにはより古いソース日付が含まれており、リアルタイムのイベントよりも
+遅れて到着する場合があります。スナップショット、復元されたメッセージ、削除通知、および
+再確認時に欠落していた結果については、それぞれ区別してください。 記録範囲の空白部分は「不明な期間」としてマークしてください。後から
+履歴を取得しても、遡及的に中断のない観測が確立されるわけではありません。</p>
+<h2 id="6-add-account-perspectives-without-losing-their-origin">6. アカウントの視点を、その出所を損なうことなく追加する<a class="anchor" href="#6-add-account-perspectives-without-losing-their-origin" aria-label="このセクションへのリンク">#</a></h2>
+<p>アカウントごとに個別のワークスペースを使用し、そのインベントリを繰り返し作成してください。
+比較を行う際は、毎回、アカウントID、役割、署名鍵のフィンガープリント、および出典情報を記録してください。
+メッセージ番号は、チャットやアカウントを跨ぐグローバルな識別子ではありません。</p>
+<p>ワークスペース間の相関分析は、外部の事件記録や分析
+ツールで行われます。TgWitnessには現在、ワークスペースを横断するグローバル検索、統合タイムライン、
+調査グラフ、または統合された事件アーカイブは備わっていません。<strong>1つの</strong>
+チャンネル／スーパーグループの複数アカウントへのエクスポートは、アカウントのジャーナルを統合するものではなく、別の操作となります。</p>
+<p>長期にわたる作業の場合は、<a href="../witness/">独立した証人</a>との境界を維持してください。
+制御された配信チェックを使用して、
+各アカウントのキャプチャ経路と可視性を確認してください。</p>
+<h2 id="7-assemble-and-verify-the-case-handoff">7. 案件の引き継ぎをまとめ、確認する<a class="anchor" href="#7-assemble-and-verify-the-case-handoff" aria-label="このセクションへのリンク">#</a></h2>
+<p>これらを、アナリストが作成したケースディレクトリにまとめて保管してください：</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>資料</th>
+<th>目的</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>事例ノートおよび情報源登録簿</td>
+<td>質問、収集方針、アクセス権限・役割、調査結果、代替説明、および不備</td>
+</tr>
+<tr>
+<td>タイムライン</td>
+<td>各エントリについて、日時およびワークスペース／チャット／メッセージ／シーケンスの参照情報を記載しています。</td>
+</tr>
+<tr>
+<td>ワークスペースごとの署名付き証拠ZIPファイル</td>
+<td>記録されたジャーナル、マニフェスト、および保存されたメディアの完全な内容が含まれます。パネルフィルターを使用しても、ジャーナルのエクスポート範囲は狭まりません。</td>
+</tr>
+<tr>
+<td>個別に署名されたユーザープロフィールファイル</td>
+<td>派生した参照情報は、対応するワークスペースの証拠と照合して確認されました</td>
+</tr>
+<tr>
+<td>署名付きチャット全記録のエクスポート</td>
+<td>観察ジャーナルとは別に、現在の表示履歴を取得します。</td>
+</tr>
+<tr>
+<td>信頼性の高いフィンガープリントと以前のチェックポイント</td>
+<td>主要な識別情報および保存されるジャーナルの範囲</td>
+</tr>
+<tr>
+<td>設定が行われている場合、Witnessのアーティファクト</td>
+<td>独立したジャーナル、署名付き投稿、およびウィットネスのフィンガープリント</td>
+</tr>
+<tr>
+<td>検証結果および納品ファイルのハッシュ値</td>
+<td>何が確認されたか、どのバイトが転送されたか、そして誰に転送されたか</td>
+</tr>
+</tbody>
+</table></div>
+<p>信頼できるインストール環境から、ファイル名および各ワークスペースの実際のフィンガープリントを記載しています：</p>
+<pre><code class="language-sh">python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
+python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --evidence evidence.zip
+python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256</code></pre>
+<p>実際の検証結果と元の証拠資料を保持します。最上位のケース
+ディレクトリ、ソースレジスタ、およびアナリストの結論は外部で管理されており、
+各TgWitnessの証拠資料には独自の署名と検証手順が設けられています。</p>
+<h2 id="adapt-the-investigation">調査の適応<a class="anchor" href="#adapt-the-investigation" aria-label="このセクションへのリンク">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>事例</th>
+<th>Trace</th>
+<th>配信</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ボットによる注文・支払いの紛争</td>
+<td>エントリーの告知 → 保存されたリンクのプレビュー → ボットの起動パラメータ → メッセージおよびキーボード版 → パネルコールバックの受信確認 → プライベート／グループのフォローアップ</td>
+<td>確認されたオファー／応答のタイムラインおよび検証済みの情報源；支払いリンクのみでは、支払いが行われたことを証明するものではありません</td>
+</tr>
+<tr>
+<td>インシデント発生後の削除されたメッセージ</td>
+<td>影響を受けたすべてのチャット → 保存されたオリジナル／編集履歴 → 削除または再確認時の欠落結果 → 保存されたメディア → カバー範囲およびその他のアカウントの視点</td>
+<td>保存されたバージョンと明示的な不明な期間；削除を行った主体を推測して記載することはありません</td>
+</tr>
+<tr>
+<td>ある参加者が、チャットごとに名前を変えています</td>
+<td>送信者ID（数値）→ 名前／ユーザー名の履歴 → 返信 → その他確認されたチャット → 引用された送信先／ファイル</td>
+<td>引用されたTelegramアカウントのアクティビティのタイムライン。実在の人物に関する身元や関係性の仮説は、これとは区別して記載されています。</td>
+</tr>
+</tbody>
+</table></div>
+<p><a href="../collection/">コレクション参照</a> · <a href="../evidence/#people-profiles">人物プロフィールの検証</a> ·
+<a href="../evidence/#investigation-handoff">証拠の引き渡し</a> · <a href="../verification/">検証完了</a></p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/INVESTIGATION.md">GitHubでこのページを編集する ↗</a><a class="next-guide" href="../features/"><span>次のステップ</span><strong>機能と制限事項 →</strong></a><p>これらのガイドは、現在の実装について説明しています。検証結果および残された課題については、別途文書化されています。 <a href="../verification/">テスト済みの内容 →</a></p></footer>
+</main>
+<aside class="toc" aria-label="このページについて"><p class="nav-label">このページについて</p><a href="#worked-case-a-destination-changes-across-four-conversations">事例：4つの会話にわたって目的地が変更されたケース</a><a href="#1-define-the-case-and-collect-the-whole-account">1. 事案を定義し、全容を把握する</a><a href="#2-inventory-every-source-and-acquire-historical-context">2. すべての情報源を網羅し、歴史的背景を把握する</a><a href="#3-preserve-the-evolving-case-and-deliberate-interactions">3. 変化し続ける事案と意図的なやり取りを保存する</a><a href="#4-connect-observations-across-chats">4. チャット間の観察結果を関連付ける</a><a href="#5-build-the-cross-chat-timeline">5. チャット横断型のタイムラインを作成する</a><a href="#6-add-account-perspectives-without-losing-their-origin">6. アカウントの視点を、その出所を損なうことなく追加する</a><a href="#7-assemble-and-verify-the-case-handoff">7. 案件の引き継ぎをまとめ、確認する</a><a href="#adapt-the-investigation">調査の適応</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>オープンソース・お使いのマシン上で動作します</span><a href="../../../../LICENSE">MITライセンス</a><a href="../notice/">オペレーター向け通知</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">セキュリティ</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "メッセージをお待ちしています", "Step through a fictional send, edit and delete.": "架空の送信、編集、削除のプロセスを順を追ってご説明します。", "No observations yet. Start the sequence or advance one event.": "まだ観察結果はありません。シーケンスを開始するか、1件先へ進めてください。", "Meet at 10:00": "10:00に集合してください。", "A new message is visible in the chat.": "チャットに新しいメッセージが表示されています。", "Record 1 appended: the collector observed the original message.": "記録1が追加されました：コレクターが元のメッセージを確認しました。", "Meet at 11:00": "11:00にお会いしましょう", "The current text changes. The earlier observation stays.": "現在のテキストは変更されます。以前の指摘はそのまま残ります。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "レコード2が追加されました：この編集は新たな観察結果です。レコード1には依然として元のテキストが保持されています。", "Message deleted": "メッセージが削除されました", "The message has disappeared from the chat view.": "そのメッセージはチャット画面から消えました。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "「Record 3」を追加しました：削除通知は、確認された両方のバージョンとともに保持されます。", "0 records": "0件の記録", "1 record": "1件の記録", "2 records": "2件の記録", "3 records": "3件の記録", "Complete / {n} of 3": "完了 / 3件中{n}件", "Step / {n} of 3": "ステップ / 3のうち{n}", "Pause": "一時停止", "Replay sequence": "再生シーケンス", "Play sequence": "再生順序", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "静的なサンプルが利用可能です。ハッシュをインタラクティブに計算するには、HTTPS経由でこのページを開くか、Web Cryptoをサポートするローカルホストのプレビューを開いてください。", "No record supplied": "記録は提供されていません", "Tail removed": "末尾を削除しました", "≠ saved hash": "≠ 保存されたハッシュ", "Rebuilt · different hash": "再構築済み・ハッシュ値が異なります", "= saved hash": "= 保存されたハッシュ", "Same length and matching head.": "同じ長さで、見出しも一致しています。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "計算された3つのハッシュ値はすべて、保存されているハッシュ値と一致しています。このサンプルは、保持されている3レコード単位の境界と一致しています。", "Same saved head; the journal prefix fails verification.": "保存されたヘッダーは同じですが、ジャーナルのプレフィックスが検証に失敗しました。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "レコード2は、保存されているハッシュと一致しなくなりました。最後に保存されたヘッドのみを確認していた場合、この不一致を見逃してしまいます。検証ツールはすべてのレコードを確認します。", "Head differs from the retained checkpoint.": "ヘッダーは、保持されているチェックポイントとは異なります。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "再構築されたハッシュは相互にリンクしていますが、最終ヘッドが変更されています。保持されているチェックポイントは、この履歴を拒否します。変更されたレコードに対しては、元の署名も検証に失敗します。", "Too short: 2 supplied records \u003c 3 retained records.": "記録数が少なすぎます：提供された記録が2件、保存された記録が3件未満です。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "残りの2つのハッシュは依然として一致しています。保持されているチェックポイントにより、欠落していた末尾部分が明らかになりました。その以前の境界情報がなければ、この短いプレフィックスだけでは欠落に気づくことはできなかったでしょう。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "このブラウザではハッシュ計算をご利用いただけません。以下の数式および説明文は引き続きご覧いただけます。", "{n} records": "{n}件の記録", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "承認済み：カウントが増加し、署名が検証され、鍵が一致しました。Witnessはこの新しい境界を保持します。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "ロールバック：署名付き回答で報告されたレコード数が、最後に承認されたチェックポイントのレコード数よりも少ない場合。Witnessはこの問題を記録し、以前に承認された境界を維持します。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "フォーク：カウントは変わりませんが、ヘッドが異なります。ウィットネスはこの不一致を記録し、以前に承認された境界を維持します。", "No answer": "回答なし", "boundary unknown": "境界不明", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "応答なし：Witnessはチェックの失敗を記録します。コレクターの現在の状態を特定することはできません。Witnessが依然としてBot APIにアクセスでき、かつ公開ポリシーが許可している場合、その失敗を公開することができます。", "Send {n}": "{n} を送信", "Edit {n}": "編集 {n}", "Delete {n}": "{n}を削除", "Both accounts captured all six expected observations in this example.": "この例では、両方のアカウントとも、想定されていた6つの観測項目すべてを捕捉しました。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "アカウントBでも6件中6件を正常に取得できました。2件の受信確認には時間がかかりました。取得率と受信確認の遅延は、それぞれ異なる問題を示しています。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "アカウントBは、締め切り時点までに6件中5件を捕捉しました（83.3％）。捕捉されなかった編集操作については、測定された遅延はありません。この結果は、6件の制御された操作についてのみ記述したものです。", "not observed by cutoff": "締め切りまでに確認されませんでした", "{s} seconds": "{s}秒", "Exact values follow in the table.": "具体的な数値は表に示されています。", "{s} s": "{s} s", "Not observed": "確認されませんでした", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "4つのチャットから、それぞれ異なる観察結果が得られています。すべての接続について、元の記録を追跡してください。送信者が特定されていない限り、チャンネルへの投稿をユーザー71001に割り当てないでください。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "記録#146と#205には、同じ送信者ID「71001」が記載されています。これにより、2つのチャットにまたがるTelegramアカウントの投稿が関連付けられます。ただし、実在の人物を特定したり、チャンネルへの投稿の作者を特定したりするものではありません。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "宛先「pay.example.invalid/new」は、グループ記録#146、ボットキーボード#173、チャンネル編集#188、およびプライベートメッセージ#205に登場します。宛先が繰り返し登場することは、これらの資料を結びつける要素ではありますが、それらのアカウントが共通の管理下にあることを証明するものではありません。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "この架空の事例において、完了済みのメディア受信記録 #151 と #209 は、完全な SHA-256 値が一致しています。実際のバイトデータと、それに関連するメッセージ記録を比較してください。一致したファイルからは、作成者が特定されることも、誰が転送したかを証明することもできません。", "the encrypted off-site copy": "暗号化されたオフサイトコピー", "notifications": "通知", "checkpoint hashes for timestamps": "タイムスタンプ用のチェックポイントハッシュ", "signed checkpoints for the witness": "Witness用の署名付きチェックポイント", "Switched on in this example": "この例では有効になっています", "Optional · off by default": "オプション・デフォルトではオフ", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "このマシンから削除されるもの：Telegramの接続情報と{list}。それ以外は一切ありません。", "Default: only the Telegram connection leaves this machine.": "デフォルト設定：Telegramへの接続のみがこのマシンから行われます。", "{done} of {total} done": "{done}/{total} 完了", "Mark step {n} as done": "ステップ{n}を「完了」としてマークする", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "コピー", "Copied": "コピー", "Command copied.": "コマンドをコピーしました。", "Selected — Ctrl/Cmd+C": "選択 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "コマンドが選択されました。手動でコピーしてください。", "Command copied to clipboard.": "コマンドがクリップボードにコピーされました。", "Select text": "テキストを選択", "Clipboard unavailable. Command selected; copy it manually.": "クリップボードが利用できません。コマンドが選択されています。手動でコピーしてください。", "A message arrives. The first observation is saved.": "メッセージが届きました。最初の記録が保存されました。", "The time changes. Both captured versions stay.": "時刻は変更されますが、キャプチャされた両方のバージョンはそのまま残ります。", "The message disappears. The captured history remains.": "メッセージは消えても、記録された履歴は残ります。", "Pause example animation": "アニメーションの一時停止例", "Play example animation": "サンプルアニメーションを再生する", "Play": "再生", "Full-size workspace screenshot": "ワークスペースのフルサイズスクリーンショット", "Workspace screenshot · fictional data": "ワークスペースのスクリーンショット・架空のデータ", "Close": "閉じる", "Close screenshot": "スクリーンショットを閉じる", "Scrollable full-size screenshot": "スクロール可能なフルサイズのスクリーンショット", "Enlarge: {name}": "拡大：{name}", "View full size": "フルサイズで表示"}</script>
+</body></html>

@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="fr" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Format des preuves | TgWitness</title>
+<meta name="description" content="Contenu du fichier ZIP signé, types d’enregistrements, accusés de réception, profils des utilisateurs, copies hors site et vérification hors ligne."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Format des preuves | TgWitness"><meta property="og:description" content="Contenu du fichier ZIP signé, types d’enregistrements, accusés de réception, profils des utilisateurs, copies hors site et vérification hors ligne.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/evidence/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/evidence/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/evidence/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/", "url": "https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/", "name": "Format des preuves | TgWitness", "description": "Contenu du fichier ZIP signé, types d’enregistrements, accusés de réception, profils des utilisateurs, copies hors site et vérification hors ligne.", "inLanguage": "fr", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://phishdestroy.github.io/TgWitness/fr/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://phishdestroy.github.io/TgWitness/fr/docs/"}, {"@type": "ListItem", "position": 3, "name": "Référence", "item": "https://phishdestroy.github.io/TgWitness/fr/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Format des preuves", "item": "https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Aller au contenu</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Documentation</span></a>
+<nav aria-label="Guides"><a href="../../concepts/">Guide visuel</a><a href="../../">Tous les guides</a><a href="../">Référence</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Langue"><span aria-hidden="true">◍</span> Français</summary><div class="lang-list"><a href="../../../../docs/reference/evidence/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/evidence/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/evidence/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/evidence/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/evidence/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/evidence/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/evidence/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/evidence/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/evidence/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/evidence/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/evidence/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/evidence/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/evidence/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="./" hreflang="fr" lang="fr" aria-current="true">Français</a><a href="../../../../de/docs/reference/evidence/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/evidence/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/evidence/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/evidence/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/evidence/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/evidence/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/evidence/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/evidence/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/evidence/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/evidence/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/evidence/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Basculer entre le thème clair et le thème sombre"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Guides"><a href="../../../guides/modes.html">Modes, scénarios et niveaux de preuve</a><p class="nav-label">Premiers pas</p><a href="../../start/">Commencez en quelques minutes</a><a href="../../accounts/">Connecter un compte</a><a href="../../proxies/">Choisissez un proxy</a><a href="../../exports/">Exporter et vérifier</a><p class="nav-label">Comprendre les preuves</p><a href="../../concepts/">Découvrez comment fonctionne la conservation des preuves</a><a href="../../cases/">Effectuez des recherches dans toutes les discussions</a><a href="../../security/">Assurez-en la sécurité</a><p class="nav-label">En savoir plus</p><a href="../../witness/">Configurer un bot TgWitness</a><a href="../../server/">Assurez son bon fonctionnement</a><a href="../../troubleshooting/">Découvrez ce qui n’a pas fonctionné</a></nav><nav class="wiki-nav" aria-label="Référence"><p class="nav-label"><a class="nav-label-link" href="../">Référence</a></p><details class="wiki-group"><summary>Configuration</summary><a href="../quickstart/">Mise en route rapide</a><a href="../accounts/">Formats des comptes et des sessions</a><a href="../connection/">Connexion, proxys et protection des données</a><a href="../deployment/">Déploiement</a></details><details class="wiki-group"><summary>Collecter</summary><a href="../collection/">Fonctionnement de la collecte</a><a href="../operations/">Workflows et opérations</a><a href="../investigation/">Mode enquête</a><a href="../features/">Fonctionnalités et limites</a></details><details class="wiki-group" open><summary>Preuves</summary><a href="../how-it-works/">Fonctionnement des preuves</a><a href="./" aria-current="page">Format des preuves</a><a href="../witness/">Témoin indépendant</a><a href="../timestamp/">Horodatages</a></details><details class="wiki-group"><summary>Sécurité et projet</summary><a href="../security/">Sécurité et traitement des données</a><a href="../architecture/">Architecture</a><a href="../verification/">Ce qui a été testé</a><a href="../license/">Avis relatif à la licence et à l’incompatibilité architecturale</a><a href="../notice/">Avis d’incompatibilité avec certains opérateurs</a><a href="../changelog/">Journal des modifications</a></details></nav><p class="sidebar-note">v0.7.0<br>Open source · Fonctionne sur votre machine</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Guides"><a href="../../../">Accueil</a> <span aria-hidden="true">/</span> <a href="../../">Documentation</a> <span aria-hidden="true">/</span> <a href="../">Référence</a> <span aria-hidden="true">/</span> <span aria-current="page">Format des preuves</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Rechercher dans la documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Essayez « proxy », « chaîne de hachage », « jeton » ou « témoin »…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Recherche claire" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Saisissez un mot pour effectuer une recherche dans les guides et la documentation de référence. La recherche s&#x27;effectue directement dans votre navigateur.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Référence / Preuves</p><h1>Format des preuves</h1><p class="guide-outcome">Contenu du fichier ZIP signé, types d’enregistrements, accusés de réception, profils des utilisateurs, copies hors site et vérification hors ligne.</p><div class="wiki-body"><p>Une observation n’est pas une conclusion. Un identifiant d’expéditeur n’est pas une identité dans le monde réel.
+La mise à jour du service visible sur le compte constitue la source ; Telegram ne signe pas cryptographiquement
+ces enregistrements sauvegardés à l’intention d’un enquêteur tiers.</p>
+<h2 id="what-is-signed">Qu&#x27;est-ce qui est signé ?<a class="anchor" href="#what-is-signed" aria-label="Lien vers cette section">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Contenu</th>
+<th>Protection</th>
+<th>Éléments à conserver</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chaque observation du journal, y compris les événements opérationnels</td>
+<td>Chaîne SHA-256 et signature Ed25519 par événement</td>
+<td><code>events.jsonl</code> d&#x27;origine, l&#x27;empreinte de la clé de confiance, et un point de contrôle conservé</td>
+</tr>
+<tr>
+<td>Contenu du fichier ZIP de preuves</td>
+<td><code>manifest.sig</code> signe le manifeste canonique, qui répertorie les hachages des fichiers de contenu</td>
+<td>Le fichier ZIP complet, comprenant son manifeste et sa signature</td>
+</tr>
+<tr>
+<td>Pièces jointes conservées</td>
+<td>SHA-256 et nombre d’octets dans un événement <code>media.saved</code> signé ; hachage du fichier dans le manifeste ZIP signé</td>
+<td>Les octets d&#x27;origine contenus dans le fichier ZIP vérifié</td>
+</tr>
+<tr>
+<td>Checkpoint</td>
+<td>Signature Ed25519 portant sur la longueur du journal, le hachage d&#x27;en-tête, la clé publique et l&#x27;heure de création</td>
+<td>Une copie indépendante conservée avant une modification contestée</td>
+</tr>
+<tr>
+<td>Reçu de transaction</td>
+<td>Mesures du collecteur signées séparément ; également incluses dans un événement signé « <code>process.started</code> »</td>
+<td>Le relevé et le journal associé ; les mesures sont déclarées par les utilisateurs eux-mêmes.</td>
+</tr>
+<tr>
+<td>Fichier CSV ou HTML autonome</td>
+<td>Pas de signature cryptographique autonome ; les hachages d’événements seuls ne suffisent pas</td>
+<td>Utilisez le fichier exact contenu dans l&#x27;archive ZIP vérifiée pour contrôler l&#x27;intégrité.</td>
+</tr>
+<tr>
+<td>Captures d’écran, impressions ou fichiers PDF générés par un navigateur</td>
+<td>Aucune signature TgWitness sur le document dérivé</td>
+<td>Conservez le paquet original vérifié et documentez la manière dont le dérivé a été créé.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Le collecteur vérifie les signatures du journal avant de générer chaque format d’exportation.
+Cette vérification à la source ne crée pas de signature sur un fichier CSV ou
+HTML téléchargé séparément. De même, une signature d’événement JSONL valide ne fournit pas les octets de la pièce jointe
+ni ne prouve de manière indépendante que l’intégralité du journal observé a été fournie.</p>
+<h2 id="investigation-handoff">Transfert de l&#x27;enquête<a class="anchor" href="#investigation-handoff" aria-label="Lien vers cette section">#</a></h2>
+<ol>
+<li>Consignez la référence du dossier, le nom de l’opérateur, l’identifiant numérique du compte Telegram, les
+    sources sélectionnées, la politique de collecte et la période de collecte dans vos notes de dossier. TgWitness
+    conserve les observations ; l’attribution des dossiers et les registres de conservation sont gérés en dehors
+    de l’application. Validez la configuration de collecte prévue à l’aide de la
+    <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">procédure d’acceptation en temps réel</a>.</li>
+<li>Conservez l&#x27;empreinte de la clé publique de l&#x27;espace de travail de manière indépendante avant de vous fier à
+    ses exportations. Enregistrez les points de contrôle signés en dehors du collecteur pendant la collecte.
+    Consignez les interruptions et les limites de visibilité du compte.</li>
+<li>Exportez un fichier <strong>ZIP signé</strong> et conservez le reçu d’exécution signé. Utilisez un point de contrôle situé
+    au niveau ou avant la limite du journal exporté. Un point de contrôle situé plus loin dans le journal peut rejeter à juste titre
+    une exportation antérieure en la jugeant trop courte. Les exportations incluent l’intégralité du journal de l’espace de travail,
+    indépendamment des filtres des panneaux ; veuillez examiner le contenu avant de le partager.</li>
+<li>
+<p>Demandez au destinataire de vérifier le fichier ZIP à l’aide d’une copie fiable du vérificateur et de l’
+    empreinte numérique/point de contrôle fourni séparément. À partir d’un environnement de développement fiable avec
+    son environnement Python actif :</p>
+<pre><code class="language-sh">python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json</code></pre>
+<p>Les rapports de sortie indiquent « <code>key_pinned: true</code>
+» et « <code>checkpoint_checked: true</code>
+» lorsque les deux entrées sont fournies et acceptées. Conservez le résultat de la vérification.
+5. Enregistrez la valeur SHA-256 de l’archive, la limite d’exportation, la date de transfert, l’expéditeur et
+le destinataire dans votre registre de conservation. Conservez le paquet d’origine intact et travaillez
+à partir de copies. Partagez les fichiers de preuves plutôt que le répertoire de données privées
+de l’application, qui contient également les sessions de compte et les secrets de signature.
+Pour le transfert, une archive peut être placée dans un fichier ZIP AES-256 protégé par mot de passe. Le
+mot de passe protège uniquement la confidentialité et n’est pas stocké ; le destinataire extrait
+l’archive et vérifie l’exportation signée qu’elle contient, laquelle est inchangée.
+6. Si un ancrage temporel indépendant est requis, suivez la
+<a href="../timestamp/">procédure de la RFC 3161</a>
+et conservez la requête, le point de contrôle, les
+informations relatives à l’autorité de certification de confiance et la réponse vérifiée de l’autorité. La simple préparation d’une requête
+ne permet pas d’obtenir un horodatage.</p>
+</li>
+</ol>
+<p>Une vérification réussie établit l’intégrité par rapport à la clé de collecte de confiance
+et aux limites définies. La véracité de la source, la transmission complète des messages Telegram, l’horodatage fiable
+et l’admissibilité juridique nécessitent des preuves distinctes. Cette version n’a pas encore fait l’objet
+d’une qualification en conditions réelles sur Telegram ni d’une évaluation indépendante en matière de criminalistique ou de sécurité.</p>
+<p>Les notifications envoyées via Apprise contiennent les noms et le nombre d’espaces de travail et de discussions ; de courts
+extraits des messages supprimés et modifiés ne sont ajoutés que lorsque l’opérateur active cette fonctionnalité
+(désactivée par défaut). Il s’agit d’un signal pratique, et non d’une preuve : la livraison n’est pas garantie,
+et seuls le journal et ses exportations signées consignent ce qui a été observé. Avec un proxy d’espace de travail,
+les notifications empruntent le même chemin ; les services qui ne peuvent pas l’utiliser, ainsi que les routes MTProxy, sont refusés.</p>
+<h2 id="event-canonicalization">Canonisation des événements<a class="anchor" href="#event-canonicalization" aria-label="Lien vers cette section">#</a></h2>
+<p>L&#x27;entrée de hachage se compose exactement des champs suivants :</p>
+<pre><code class="language-text">seq, observed_at, source_at, kind, chat_id, message_id, actor_id, payload, previous_hash</code></pre>
+<p>Sérialisation au format JSON compatible Python avec UTF-8, clés d’objets triées, sans échappement ASCII,
+sans espaces insignifiants et sans NaN/infini :</p>
+<pre><code class="language-python">json.dumps(value, ensure_ascii=False, sort_keys=True,
+           separators=(&quot;,&quot;, &quot;:&quot;), allow_nan=False).encode(&quot;utf-8&quot;)</code></pre>
+<p>Le SHA-256 de ces octets constitue le hachage de l’événement. La signature est générée à l’aide de l’algorithme Ed25519 sur les
+32 octets bruts du hachage, puis encodée en base64. Le premier « previous_hash » est constitué de 64 zéros.
+Les numéros de séquence commencent à 1 et augmentent de 1. Tous les événements, y compris les
+événements opérationnels, partagent une seule chaîne. Il n’y a pas de suppression des doublons : les
+observations répétées constituent des reçus distincts, et non une affirmation d’actions distinctes sur Telegram.</p>
+<p>Les dates brutes de Telegram sont des chaînes ISO ; les champs binaires deviennent des objets contenant
+des « bytes_base64 ». Le texte des messages, les entités, les descripteurs multimédias, les métadonnées de réponse, les réactions
+et les actions de service sont conservés dans les métadonnées brutes des messages lorsqu’ils sont fournis.</p>
+<p>« observed_at » correspond à l’heure UTC du collecteur. « source_at » correspond à la date fournie par Telegram,
+lorsqu’elle est disponible. Les notifications de suppression ne fournissent pas d’heure exacte de suppression ; par conséquent,
+« source_at » reste nul. L’ordre de réception des données n’est pas nécessairement le même que l’ordre chronologique des événements à la source.
+Les instantanés de l’historique utilisent des dates de source plus anciennes, mais des heures d’observation actuelles.</p>
+<h2 id="actor-semantics">Sémantique des acteurs<a class="anchor" href="#actor-semantics" aria-label="Lien vers cette section">#</a></h2>
+<p>message.new : actor_id correspond à l’expéditeur du message. message.edited ne comporte aucune
+inférence quant à l’auteur de la modification ; payload.sender_id enregistre l’expéditeur du message observé. Suppression
+L’`actor_id` reste nul. Les messages du service d’adhésion conservent l’expéditeur et le
+type d’action, sans considérer chaque suppression comme un départ volontaire. Les mises à jour brutes des participants
+conservent l’`actor_id` tel qu’il a été fourni. Les instantanés de réaction n’inventent pas d’acteur de modification.</p>
+<p>Les notifications de suppression pour les discussions privées et les groupes ordinaires ne contiennent que les identifiants de message.
+Ces discussions partagent une séquence d’identifiants unique à l’échelle du compte ; ainsi, un identifiant identifie un message unique de
+ce compte. Lorsqu’un message portant cet identifiant a été enregistré précédemment dans ce journal, la
+suppression est consignée dans cette conversation sous la forme message.deleted, avec payload.chat_resolution
+comme nom de la méthode. Les identifiants qui n’ont jamais été enregistrés sont conservés sous la forme deletion.unscoped, sans
+chat_id ; aucune supposition n’est faite. Les canaux et les supergroupes numérotent les messages par discussion et ne sont
+jamais mis en correspondance de cette manière. Lorsque le message supprimé a été envoyé par le compte observé,
+payload.deleted_message_was_outgoing est vrai ; l’auteur de la suppression n’est toujours pas indiqué.</p>
+<h2 id="coverage-continuity-gaps-and-unobserved-ids">Portée : continuité, lacunes et identifiants non observés<a class="anchor" href="#coverage-continuity-gaps-and-unobserved-ids" aria-label="Lien vers cette section">#</a></h2>
+<p>Chaque fichier ZIP signé porte la référence « <code>coverage.json</code> » ; le rapport HTML s&#x27;ouvre sur ce même résumé, et «
+<code>verify.py</code> » le recalcule à partir de « <code>events.jsonl</code> » au lieu de se fier au fichier :</p>
+<ul>
+<li><strong>Observation continue de X à Y.</strong> Une période commence par <code>observation.started</code> et
+    se termine par une pause, un arrêt, une perte de connexion Telegram, une déconnexion, un démarrage de processus sans
+    arrêt ordonné, ou plus de trois minutes sans aucun enregistrement pendant l’observation
+    (des signaux de présence sont enregistrés toutes les minutes ; par conséquent, le silence signifie que le processus s’est arrêté, s’est figé ou que l’
+    ordinateur est passé en veille). Lorsque l’intervalle entre les signaux de présence est modifié dans <strong>les paramètres</strong>, chaque signal
+    enregistre ce changement et le silence autorisé passe à trois intervalles, sans jamais être inférieur à trois minutes.</li>
+<li><strong>Les lacunes</strong> indiquent le délai entre deux périodes, accompagné de la raison. Une lacune toujours présente lors du dernier
+    enregistrement est signalée par le code « <code>not_resumed_by_last_record</code> ».</li>
+<li><strong>Les identifiants de messages non observés ne sont pas pris en compte.</strong> Pour les chaînes et les supergroupes, qui numérotent les messages par
+    discussion, les identifiants manquants entre ceux qui ont été observés sont répertoriés sous forme de plages. Ils sont signalés comme
+    « non<em> observés</em> » — supprimés, jamais remis ou hors de l’historique enregistré — et jamais comme
+    « supprimés ». Les discussions privées et les groupes ordinaires partagent une séquence commune à l’ensemble du compte ; par conséquent, les lacunes observées à cet égard
+    n’ont aucune signification et ne sont pas répertoriées.</li>
+<li>Les notifications de lacunes au niveau des conversations (par exemple, lorsque Telegram demande la récupération des différences dans un
+    canal) sont comptabilisées comme des notes ; elles n’interrompent pas la couverture globale.</li>
+</ul>
+<p>La couverture décrit ce que ce collecteur a enregistré. Elle ne constitue pas une preuve que Telegram a transmis
+toutes les mises à jour au cours d’une période continue.</p>
+<h2 id="producer">Producteur<a class="anchor" href="#producer" aria-label="Lien vers cette section">#</a></h2>
+<p>Le manifeste signé des fichiers ZIP de preuves, des exportations de discussions, des journaux de témoins et de la déclaration des
+fichiers de profil des personnes contient <code>producer</code>
+: logiciel, version, projet (PhishDestroy),
+page d’accueil et référentiel source. Le rapport HTML affiche la même ligne, et <code>verify.py</code>
+l’affiche dans le cadre de ce qu’il a vérifié. Les archives créées avant l’existence de ce champ sont validées comme
+auparavant et sont signalées comme ne mentionnant pas de producteur.</p>
+<h2 id="people-profiles">Profils de personnes<a class="anchor" href="#people-profiles" aria-label="Lien vers cette section">#</a></h2>
+<p>Un fichier de profil (<code>tgwitness-dossier-v1</code>, JSON) est généré sur demande à partir des enregistrements déjà présents
+dans le journal pour une conversation donnée ; aucune donnée n’est récupérée depuis Telegram et le contenu du profil n’est jamais
+enregistré dans le journal (l’activation et la désactivation des profils sont consignées sous la référence <code>dossier.changed</code>).
+Pour chaque personne dont un message a été enregistré, il répertorie l’historique des noms et des noms d’utilisateur, les indicateurs Telegram
+(bot, arnaque, faux, premium, vérifié, restreint, supprimé) tels qu’ils apparaissaient au moment de l’enregistrement, les
+identifiants de photo de profil, le hachage SHA-256 et le hachage perceptuel (pHash, compatible avec <code>imagehash.phash</code>) de l’
+avatar issu du cache local d’avatars contenant des avatars similaires, l’activité (premier et dernier message,
+nombre de messages, partages modifiés et supprimés, messages par heure UTC), qui répond à qui, les autres discussions
+de ce journal dans lesquels la personne a écrit, ainsi que les portefeuilles mentionnés (BTC, EVM, TRON, TON, LTC,
+DOGE, XMR, SOL ; les adresses Base58Check sont validées par somme de contrôle), les numéros de téléphone, les noms d’utilisateur et les
+liens, y compris les liens masqués derrière du texte.</p>
+<p>Chaque fait indique les entrées du journal (<code>seq</code>) dont il est issu, et <code>record_hashes</code> contient le
+hachage de chaque entrée référencée. La déclaration est signée avec la clé de l&#x27;espace de travail :</p>
+<pre><code class="language-sh">python verify.py tgwitness-dossier-CHAT.json --fingerprint TRUSTED_SHA256 --evidence tgwitness-evidence.zip</code></pre>
+<p>Vérifie la signature, valide l’exportation des preuves elle-même (signature, chaîne de hachages et fichiers)
+et s’assure que chaque enregistrement référencé existe tel quel dans cette exportation du même espace de travail. Les hachages des avatars sont signalés comme provenant du cache local
+(et non des enregistrements du journal). Les mentions correspondent à des correspondances de motifs — il s’agit de pistes à vérifier, et non de faits avérés.
+Les profils sont activés pour chaque discussion, peuvent être exportés sous forme de fichier ZIP chiffré en AES-256 avec un mot de passe, et
+sont supprimés lorsqu’ils sont désactivés ou lorsque la discussion est supprimée des sources.</p>
+<h2 id="independent-witness">Témoin indépendant<a class="anchor" href="#independent-witness" aria-label="Lien vers cette section">#</a></h2>
+<p>Un journal de témoin (<code>tgwitness-witness-v1</code>) et les publications de sa chaîne sont recoupés avec une
+exportation de preuves réalisée à l’aide de <code>verify.py --witness … --channel …</code> ; voir « <a href="../witness/">témoin indépendant</a> ».</p>
+<h2 id="manifest-and-checkpoints">Manifeste et points de contrôle<a class="anchor" href="#manifest-and-checkpoints" aria-label="Lien vers cette section">#</a></h2>
+<p>Le fichier `manifest.json` contient le format, l’heure d’exportation, la clé publique, l’empreinte digitale, la
+longueur du journal, le hachage d’en-tête, la portée, le producteur, les limitations et la valeur SHA-256 de chaque élément de contenu autre
+que <code>manifest.json</code> et <code>manifest.sig</code> eux-mêmes.
+Le fichier `manifest.sig` correspond à la signature Ed25519 en base64 du manifeste JSON canonique.
+Le vérificateur rejette les éléments inattendus ou manquants, les noms en double, les fichiers corrompus,
+les séquences ou chaînes brisées, les signatures non valides et les divergences par rapport à un point de contrôle fourni.
+Il n’extrait jamais les chemins d’accès aux archives. Il limite la taille totale déclarée non compressée à 4 GiB ;
+le <code>--max-gib N</code> permet des archives plus volumineuses créées avec une limite <strong>de paramètres</strong> augmentée.</p>
+<p>Procurez-vous le code de vérification à partir d’un checkout fiable ou d’une copie indépendante validée. Un vérificateur
+contenu dans une archive non fiable est un élément exécutable fourni par l’auteur de cette archive ;
+sa présence constitue un avantage en termes de portabilité, et non un gage de confiance indépendant.</p>
+<p>Un point de contrôle signe une déclaration contenant la clé publique, la longueur du journal, le
+hachage de tête et l’heure de création. Le vérificateur peut s’assurer qu’une archive ultérieure contient le
+même préfixe. Conservez un point de contrôle en dehors du collecteur avant toute modification contestée :
+un attaquant contrôlant à la fois l’archive et le point de contrôle peut remplacer les deux.</p>
+<p>Une signature valide provenant d’une clé non épinglée établit uniquement la cohérence interne.
+Même une clé épinglée ne peut garantir l’authenticité du contenu source si le collecteur ou la clé a été
+compromis avant l’enregistrement. L’horodatage externe et la capture fiable constituent des exigences distinctes.
+TgWitness ne garantit ni l’admissibilité en justice ni la certification médico-légale.</p>
+<h2 id="attachments">Pièces jointes<a class="anchor" href="#attachments" aria-label="Lien vers cette section">#</a></h2>
+<p>Les fichiers sont identifiés par leur hachage SHA-256 dans le répertoire « media/ ». Un événement « media.saved » associe un hachage et
+une longueur en octets à un événement de message spécifique. Les noms de fichiers bruts constituent des métadonnées, et ne correspondent jamais à des
+chemins d’accès locaux. Les octets multimédias sont téléchargés de manière asynchrone ; une suppression immédiate peut donc empêcher
+leur capture. La collecte désactivée, les fichiers trop volumineux ou de taille inconnue, les échecs de téléchargement
+et les téléchargements interrompus apparaissent comme des résultats. Un plantage du processus peut laisser
+des fichiers partiels non référencés ; ceux-ci ne sont pas inclus dans les exportations.</p>
+<p>L&#x27;exportateur ZIP vérifie la correspondance entre les fichiers multimédias stockés et leurs noms. Les exportations au format JSONL, CSV et HTML
+vérifient les signatures des événements mais ne contiennent pas les données multimédias. Les rapports dérivés
+sont fournis à titre pratique ; le fichier events.jsonl constitue la représentation officielle des événements.</p>
+<h2 id="durable-collection-and-process-receipts-02">Collecte et traitement durables des justificatifs (0,2)<a class="anchor" href="#durable-collection-and-process-receipts-02" aria-label="Lien vers cette section">#</a></h2>
+<p>Une tâche multimédia et la validation de l’événement de message s’effectuent en une seule transaction. La tâche stocke le
+descripteur du message TL d’origine ; l’observation signée associe son SHA-256, son compte
+et sa politique de taille. La récupération vérifie cette association avant le téléchargement. Elle ne récupère jamais
+le message actuel et ne le remplace pas silencieusement par une pièce jointe plus récente. Les tâches interrompues
+sont relancées, tandis qu’un échec permanent reste un résultat explicite.</p>
+<p>Chaque espace de travail dispose de son propre journal et de sa propre identité de signature. Un événement « process.started » comprend
+un identifiant d’exécution, les heures locales, les versions des dépendances, les hachages des fichiers source, le compte/champ d’application initial,
+ainsi que les paramètres de capture. Les signaux de contrôle comprennent l’identifiant d’exécution, le temps monotone et l’état de la file d’attente.
+Le reçu de processus peut également être téléchargé sous la forme d’une déclaration signée séparément.
+Les mesures des fichiers sont autodéclarées et ne constituent pas une attestation matérielle fiable.</p>
+<p>Des points de contrôle automatiques sont conservés localement au démarrage, toutes les cinq minutes pendant la
+surveillance (<strong>Paramètres → Point de contrôle signé toutes les</strong>), et lors d’un arrêt ordonné. La vérification au démarrage et l’exportation comparent le journal
+au dernier point de contrôle local conservé. Cela permet de détecter une restauration de la base de données
+lorsque le point de contrôle subsiste ; un opérateur contrôlant les deux éléments peut toutefois remplacer les deux.
+La conservation indépendante et les horodatages externes fiables restent des exigences distinctes.</p>
+<p>Après un redémarrage, la position de mise à jour enregistrée de Telegram est reprise (<code>catch_up_from</code> dans
+<code>observation.started</code>) et les mises à jour manquantes sont demandées. Une nouvelle vérification périodique enregistre
+<code>message.recovered</code> pour les messages manquants et <code>message.missing_on_recheck</code> lorsque Telegram ne
+renvoie plus de message enregistré ; ce dernier n’est pas un avis de suppression et ne mentionne ni l’auteur de la suppression ni l’heure.</p>
+<h3 id="off-site-copy-and-restore-s3">Sauvegarde et restauration hors site (S3)<a class="anchor" href="#off-site-copy-and-restore-s3" aria-label="Lien vers cette section">#</a></h3>
+<p>La copie hors site (Exportations, désactivée par défaut) transfère les segments de journal, les fichiers conservés, les points de contrôle
+avec leurs horodatages ainsi que les exportations de discussions terminées vers un stockage compatible S3, chiffrés avec
+AES-256-GCM avant leur transfert, à l’aide d’une clé conservée dans le coffre-fort de l’espace de travail ; la conservation par « Object Lock » s’applique
+lorsque le compartiment le prend en charge. Sans la clé téléchargée, la copie ne peut pas être lue. Restaurez et vérifiez
+à l’aide de <code>python -m tgwitness.replica restore --key-file KEY.json --out DIR</code>.</p>
+<p>La restauration nécessite un répertoire ordinaire vide. Les téléchargements et les objets déchiffrés restent dans un
+espace de stockage temporaire privé jusqu’à ce que l’intégralité du journal et chaque point de contrôle conservé soient vérifiés. Les chemins d’accès aux objets non sécurisés,
+les plages de segments incohérentes et les journaux plus courts qu’un point de contrôle sont rejetés ; en cas d’échec
+de la vérification, aucun fichier restauré n’est publié. Les contrôles de conservation comparent le mode « Object Lock »
+et la date renvoyés avec le délai envoyé lors du téléchargement (tolérance d’arrondi d’une seconde). Un délai expiré,
+non valide ou raccourci n’est pas considéré comme vérifié. Le statut indique l’objet échantillonné
+dont la conservation a été relue pour ce cycle de téléchargement.</p>
+<p>La progression de la copie est limitée à la destination et à la clé de chiffrement. La modification du point de terminaison, du compartiment
+ou du préfixe déclenche une copie complète du journal, des médias et des points de contrôle conservés localement vers
+cette destination. L’ancienne progression non limitée est conservée, mais n’est relancée qu’une seule fois après la mise à niveau. Les exportations historiques
+de discussions déjà supprimées de la boîte d’envoi locale restent à leur destination précédente.</p>
+<p>Les fichiers locaux manquants ou corrompus sont signalés comme une erreur du cycle et le curseur de fichier reste positionné avant
+ceux-ci, de sorte que le fichier soit réessayé lors du cycle suivant ; les fichiers, points de contrôle et exportations qui suivent sont tout de même
+copiés. La restauration vérifie
+toutes les références aux fichiers conservés par rapport aux hachages déchiffrés et aux tailles enregistrées. Les segments de journal identiques qui se chevauchent
+provenant de téléchargements interrompus sont dédupliqués ; les chevauchements conflictuels sont rejetés.
+Les points de contrôle créés au cours d’un téléchargement sont reportés jusqu’à ce que les enregistrements du journal qu’ils couvrent aient été
+copiés, de sorte qu’un passage terminé ne publie pas de point de contrôle avant son journal.</p>
+<h3 id="streaming-export-snapshots">Exportation en continu d’instantanés<a class="anchor" href="#streaming-export-snapshots" aria-label="Lien vers cette section">#</a></h3>
+<p>Les exportations en continu utilisent un instantané de lecture SQLite stable. Son début peut être antérieur au
+journal en ligne actuel une fois le téléchargement terminé. Un point de contrôle créé après cet
+instantané peut indiquer à juste titre que l’archive est plus courte ; comparez-le à un point de contrôle
+situé au niveau ou avant le préfixe exporté, et non à un point de contrôle ultérieur choisi arbitrairement.</p>
+<h2 id="rfc-3161-preparation-and-response-verification-02">Préparation de la norme RFC 3161 et vérification des réponses (0.2)<a class="anchor" href="#rfc-3161-preparation-and-response-verification-02" aria-label="Lien vers cette section">#</a></h2>
+<p>Le mode « Evidence » (désactivé par défaut) envoie uniquement la valeur SHA-256 de chaque point de contrôle signé aux
+autorités RFC 3161 et aux calendriers OpenTimestamps répertoriés, via la route de l’espace de travail et jamais via MTProxy.
+Les réponses sont conservées dans <code>checkpoints/anchors/</code>, exportées et vérifiées par <code>verify.py</code> (<code>--tsa-ca</code> vérifie
+la signature TSA ; confirmez les preuves OpenTimestamps avec <code>ots upgrade</code> et <code>ots verify</code>).</p>
+<p>Le module prépare une archive de requête contenant les octets canoniques du fichier checkpoint.json,
+une empreinte SHA-256 du message et un nonce aléatoire dans le fichier timestamp.tsq, ainsi que des sommes de contrôle et des instructions.
+Aucune requête réseau n’est effectuée. Cette préparation ne constitue pas un horodatage fiable.</p>
+<p><code>python -m tgwitness.anchor verify</code> appelle OpenSSL deux fois : une fois sur les octets de point de contrôle
+et une fois sur la requête d’origine. Un fichier CA de confiance est explicitement requis ;
+les certificats inclus ne sont pas automatiquement considérés comme fiables. La vérification de la requête est facultative via
+l’interface en ligne de commande ; veillez donc à conserver et à fournir l’option --request pour vérifier le nonce. Le résultat indique si
+la vérification a été effectuée. La signature du point de contrôle du collecteur et le journal doivent tout de même être vérifiés
+séparément à l’aide de l’empreinte digitale de confiance du collecteur.</p>
+<p>Le vérificateur actuel ne récupère pas les informations de révocation et ne met pas en œuvre de
+validation d’archivage à long terme après l’expiration du certificat. Ne confondez pas la vérification réussie de la signature
+avec un horodatage qualifié ou une admissibilité juridique. Aucune autorité de signature de temps (TSA) véritablement indépendante
+n’a été contactée au cours du développement. Voir <a href="../timestamp/">la procédure</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/EVIDENCE.md">Modifier cette page sur GitHub ↗</a><a class="next-guide" href="../witness/"><span>Étape suivante</span><strong>Témoin indépendant →</strong></a><p>Ces guides décrivent la mise en œuvre actuelle. Les résultats de validation et les lacunes restantes sont documentés séparément. <a href="../verification/">Ce qui a été testé →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Sur cette page"><p class="nav-label">Sur cette page</p><a href="#what-is-signed">Qu'est-ce qui est signé ?</a><a href="#investigation-handoff">Transfert de l'enquête</a><a href="#event-canonicalization">Canonisation des événements</a><a href="#actor-semantics">Sémantique des acteurs</a><a href="#coverage-continuity-gaps-and-unobserved-ids">Portée : continuité, lacunes et identifiants non observés</a><a href="#producer">Producteur</a><a href="#people-profiles">Profils de personnes</a><a href="#independent-witness">Témoin indépendant</a><a href="#manifest-and-checkpoints">Manifeste et points de contrôle</a><a href="#attachments">Pièces jointes</a><a href="#durable-collection-and-process-receipts-02">Collecte et traitement durables des justificatifs (0,2)</a><a href="#rfc-3161-preparation-and-response-verification-02">Préparation de la norme RFC 3161 et vérification des réponses (0.2)</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Open source · Fonctionne sur votre machine</span><a href="../../../../LICENSE">Licence MIT</a><a href="../notice/">Avis à l’opérateur</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Sécurité</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "En attente d'un message", "Step through a fictional send, edit and delete.": "Suivez pas à pas un scénario fictif d’envoi, de modification et de suppression.", "No observations yet. Start the sequence or advance one event.": "Aucune observation pour l'instant. Lancez la séquence ou passez à l'événement suivant.", "Meet at 10:00": "Rendez-vous à 10 h", "A new message is visible in the chat.": "Un nouveau message apparaît dans la conversation.", "Record 1 appended: the collector observed the original message.": "Enregistrement n° 1 joint : le collecteur a relevé le message d'origine.", "Meet at 11:00": "Rendez-vous à 11 h", "The current text changes. The earlier observation stays.": "Le texte actuel a été modifié. L’observation précédente reste valable.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Enregistrement n° 2 ajouté : la modification constitue une nouvelle observation. L'enregistrement n° 1 conserve toujours le texte d'origine.", "Message deleted": "Message supprimé", "The message has disappeared from the chat view.": "Le message a disparu de la vue de la conversation.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Enregistrement n° 3 joint : la notification de suppression est conservée aux côtés des deux versions observées.", "0 records": "0 enregistrement", "1 record": "1 enregistrement", "2 records": "2 entrées", "3 records": "3 entrées", "Complete / {n} of 3": "Terminé / {n} sur 3", "Step / {n} of 3": "Étape / {n} sur 3", "Pause": "Pause", "Replay sequence": "Séquence de relecture", "Play sequence": "Séquence de lecture", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Un exemple statique est disponible. Pour calculer des hachages de manière interactive, ouvrez cette page via HTTPS ou dans un aperçu localhost prenant en charge Web Crypto.", "No record supplied": "Aucun enregistrement fourni", "Tail removed": "Fin supprimée", "≠ saved hash": "≠ hachage enregistré", "Rebuilt · different hash": "Reconstruit · hachage différent", "= saved hash": "= hachage enregistré", "Same length and matching head.": "Même longueur et titre correspondant.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Les trois hachages calculés correspondent aux hachages enregistrés. Cet échantillon respecte la limite de trois enregistrements conservés.", "Same saved head; the journal prefix fails verification.": "Même en-tête enregistré ; le préfixe du journal ne passe pas la vérification.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "L'enregistrement n° 2 ne correspond plus à son hachage enregistré. Une vérification portant uniquement sur l'en-tête final stocké passerait cela inaperçu ; le vérificateur contrôle chaque enregistrement.", "Head differs from the retained checkpoint.": "L'en-tête diffère du point de contrôle conservé.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Les hachages reconstruits s’enchaînent, mais l’en-tête final a été modifié. Le point de contrôle conservé rejette cet historique. Les signatures d’origine échoueraient également sur les enregistrements modifiés.", "Too short: 2 supplied records \u003c 3 retained records.": "Trop court : 2 enregistrements fournis \u003c 3 enregistrements conservés.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Les deux hachages restants correspondent toujours. Le point de contrôle conservé révèle la partie manquante. Sans cette limite antérieure, ce préfixe plus court ne permettrait pas à lui seul de mettre en évidence l’omission.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Le calcul de hachage n'est pas disponible dans ce navigateur. Les formules et l'explication statique ci-dessous restent disponibles.", "{n} records": "{n} enregistrements", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Accepté : le décompte augmente, la signature est vérifiée et la clé correspond. Le témoin conserve cette nouvelle limite.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback : la réponse signée fait état d’un nombre d’enregistrements inférieur à celui du dernier point de contrôle accepté. Le témoin consigne le problème et conserve la limite acceptée précédemment.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork : le compteur reste inchangé, mais la tête diffère. Le témoin consigne le désaccord et conserve la limite acceptée précédemment.", "No answer": "Pas de réponse", "boundary unknown": "limite inconnue", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Absence de réponse : le témoin enregistre l’échec de la vérification. Il ne peut pas déterminer l’état actuel du collecteur. Si le témoin peut toujours accéder à l’API du bot et que sa politique de publication le permet, il peut publier cet échec.", "Send {n}": "Envoyer {n}", "Edit {n}": "Modifier {n}", "Delete {n}": "Supprimer {n}", "Both accounts captured all six expected observations in this example.": "Les deux comptes ont capturé l’ensemble des six observations attendues dans cet exemple.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Le compte B a tout de même capturé 6 messages sur 6. Deux reçus ont pris plus de temps. Le taux de capture et le délai de réception répondent à des questions différentes.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Le compte B a capturé 5 messages sur 6 avant l'heure limite (83,3 %). La modification manquante ne présente aucun délai mesurable. Ce résultat ne concerne que les six actions contrôlées.", "not observed by cutoff": "non respecté à la date limite", "{s} seconds": "{s} secondes", "Exact values follow in the table.": "Les valeurs exactes figurent dans le tableau ci-dessous.", "{s} s": "{s} s", "Not observed": "Non respecté", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Quatre discussions apportent des observations différentes. Suivez les enregistrements sources pour chaque connexion ; n’attribuez pas la publication de la chaîne à l’utilisateur 71001 en l’absence d’un expéditeur identifié.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Les enregistrements n° 146 et n° 205 indiquent le même identifiant d'expéditeur, 71001. Cela permet de relier les publications observées d'un compte Telegram sur deux discussions différentes. Cela ne permet pas d'identifier une personne dans la vie réelle ni d'attribuer la publication à une chaîne.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "L’adresse de destination pay.example.invalid/new apparaît dans l’enregistrement de groupe n° 146, le clavier du bot n° 173, la modification de la chaîne n° 188 et le message privé n° 205. Une destination récurrente relie ces éléments ; elle ne prouve pas pour autant l’existence d’un contrôle commun de ces comptes.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Dans ce cas fictif, les reçus multimédias n° 151 et n° 209 présentent des valeurs SHA-256 complètes identiques. Comparez les octets réels et les enregistrements de messages associés. Le fichier correspondant n’identifie pas son auteur et ne permet pas de déterminer qui l’a transmis.", "the encrypted off-site copy": "la copie cryptée hors site", "notifications": "notifications", "checkpoint hashes for timestamps": "Hachages de contrôle pour les horodatages", "signed checkpoints for the witness": "points de contrôle signés pour TgWitness", "Switched on in this example": "Activé dans cet exemple", "Optional · off by default": "Facultatif · désactivé par défaut", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "À quitter cet appareil : la connexion Telegram et {list}. Rien d’autre.", "Default: only the Telegram connection leaves this machine.": "Par défaut : seule la connexion Telegram sort de cette machine.", "{done} of {total} done": "{done} sur {total} terminé", "Mark step {n} as done": "Marquer l'étape {n} comme terminée", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Copier", "Copied": "Copié", "Command copied.": "Commande copiée.", "Selected — Ctrl/Cmd+C": "Sélectionné — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Commande sélectionnée. Copiez-la manuellement.", "Command copied to clipboard.": "Commande copiée dans le presse-papiers.", "Select text": "Sélectionner le texte", "Clipboard unavailable. Command selected; copy it manually.": "Presse-papiers indisponible. Commande sélectionnée ; veuillez la copier manuellement.", "A message arrives. The first observation is saved.": "Un message arrive. La première observation est enregistrée.", "The time changes. Both captured versions stay.": "L'heure change. Les deux versions capturées sont conservées.", "The message disappears. The captured history remains.": "Le message disparaît. L'historique enregistré demeure.", "Pause example animation": "Mettre en pause l'animation d'exemple", "Play example animation": "Lancer l'animation d'exemple", "Play": "Lire", "Full-size workspace screenshot": "Capture d'écran de l'espace de travail en plein écran", "Workspace screenshot · fictional data": "Capture d'écran de l'espace de travail · données fictives", "Close": "Fermer", "Close screenshot": "Fermer la capture d'écran", "Scrollable full-size screenshot": "Capture d'écran en plein écran défilable", "Enlarge: {name}": "Agrandir : {name}", "View full size": "Afficher en grand format"}</script>
+</body></html>

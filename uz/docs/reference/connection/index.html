@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="uz" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Ulanish, proksi va ma&#x27;lumotlarni himoya qilish | TgWitness</title>
+<meta name="description" content="API juftliklari, tizimga kirish usullari, SOCKS5, HTTP va MTProxy yo&#x27;nalishlari, ommaviy proxy ro&#x27;yxatlari va har bir yo&#x27;nalish qaysi xavfsizlikni ta&#x27;minlaydi."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="uz_UZ">
+<meta property="og:title" content="Ulanish, proksi va ma&#x27;lumotlarni himoya qilish | TgWitness"><meta property="og:description" content="API juftliklari, tizimga kirish usullari, SOCKS5, HTTP va MTProxy yo&#x27;nalishlari, ommaviy proxy ro&#x27;yxatlari va har bir yo&#x27;nalish qaysi xavfsizlikni ta&#x27;minlaydi.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/connection/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/connection/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/connection/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/connection/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/connection/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/connection/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/connection/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/connection/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/connection/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/connection/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/connection/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/connection/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/connection/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/connection/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/connection/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/", "url": "https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/", "name": "Ulanish, proksi va ma'lumotlarni himoya qilish | TgWitness", "description": "API juftliklari, tizimga kirish usullari, SOCKS5, HTTP va MTProxy yo'nalishlari, ommaviy proxy ro'yxatlari va har bir yo'nalish qaysi xavfsizlikni ta'minlaydi.", "inLanguage": "uz", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Bosh sahifa", "item": "https://phishdestroy.github.io/TgWitness/uz/"}, {"@type": "ListItem", "position": 2, "name": "Dokumentatsiya", "item": "https://phishdestroy.github.io/TgWitness/uz/docs/"}, {"@type": "ListItem", "position": 3, "name": "Manba", "item": "https://phishdestroy.github.io/TgWitness/uz/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Ulanish, proksi va ma'lumotlarni himoya qilish", "item": "https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Mavzuga o&#x27;tish</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Dokumentatsiya</span></a>
+<nav aria-label="Qo&#x27;llanmalar"><a href="../../concepts/">Vizual qo&#x27;llanma</a><a href="../../">Barcha qo&#x27;llanmalar</a><a href="../">Manba</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Til"><span aria-hidden="true">◍</span> O‘zbekcha</summary><div class="lang-list"><a href="../../../../docs/reference/connection/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/connection/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/connection/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/connection/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/connection/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/connection/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/connection/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/connection/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/connection/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/connection/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/connection/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/connection/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/connection/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/connection/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/connection/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/connection/" hreflang="it" lang="it">Italiano</a><a href="./" hreflang="uz" lang="uz" aria-current="true">O‘zbekcha</a><a href="../../../../ko/docs/reference/connection/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/connection/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/connection/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/connection/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/connection/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/connection/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/connection/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/connection/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Yengil va qorong&#x27;i mavzular o&#x27;rtasida almashtiring"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Qo&#x27;llanmalar"><a href="../../../guides/modes.html">Rejimlar, ssenariylar va dalillar darajalari</a><p class="nav-label">Birinchi qadamlar</p><a href="../../start/">Bir necha daqiqada boshlang</a><a href="../../accounts/">Hisobni bog'lang</a><a href="../../proxies/">Proxy tanlang</a><a href="../../exports/">Eksport va tekshirish</a><p class="nav-label">Dalillarni tushunish</p><a href="../../concepts/">Dalillar qanday ishlashini ko'ring</a><a href="../../cases/">Barcha suhbatlarni tergov qiling</a><a href="../../security/">Xavfsiz saqlang</a><p class="nav-label">Yana ham chuqurroq</p><a href="../../witness/">Witness botini sozlang</a><a href="../../server/">Uni ishlashda davom ettiring</a><a href="../../troubleshooting/">Nima noto'g'ri ketganini aniqlang</a></nav><nav class="wiki-nav" aria-label="Manba"><p class="nav-label"><a class="nav-label-link" href="../">Manba</a></p><details class="wiki-group" open><summary>Sozlash</summary><a href="../quickstart/">Tez boshlash</a><a href="../accounts/">Hisoblar va sessiya formatlari</a><a href="./" aria-current="page">Ulanish, proksi va ma'lumotlarni himoya qilish</a><a href="../deployment/">Joriy etish</a></details><details class="wiki-group"><summary>Yig'ish</summary><a href="../collection/">Yig'ish qanday ishlaydi</a><a href="../operations/">Ish jarayonlari va operatsiyalar</a><a href="../investigation/">Tergov rejimi</a><a href="../features/">Imkoniyatlar va cheklovlar</a></details><details class="wiki-group"><summary>Dalil</summary><a href="../how-it-works/">Dalil qanday ishlaydi</a><a href="../evidence/">Dalil formati</a><a href="../witness/">Mustaqil guvoh</a><a href="../timestamp/">Vaqt tamg'alari</a></details><details class="wiki-group"><summary>Xavfsizlik va loyiha</summary><a href="../security/">Xavfsizlik va ma'lumotlarni boshqarish</a><a href="../architecture/">Arxitektura</a><a href="../verification/">Nima sinovdan o'tkazilgan</a><a href="../license/">Litsenziya va arxitektura nomuvofiqligi to'g'risidagi ogohlantirish</a><a href="../notice/">Operator mos kelmasligi to'g'risida ogohlantirish</a><a href="../changelog/">O'zgarishlar tarixi</a></details></nav><p class="sidebar-note">v0.7.0<br>Ochiq manba · Sizning kompyuteringizda ishlaydi</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Qo&#x27;llanmalar"><a href="../../../">Bosh sahifa</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentatsiya</a> <span aria-hidden="true">/</span> <a href="../">Manba</a> <span aria-hidden="true">/</span> <span aria-current="page">Ulanish, proksi va ma&#x27;lumotlarni himoya qilish</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Dokumentatsiyani qidiring</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zanjiri, token yoki guvohni sinab ko&#x27;ring…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Aniq qidiruv" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Qo&#x27;llanmalar va ma&#x27;lumotnoma bo&#x27;ylab qidirish uchun so&#x27;z yozing. Qidiruv brauzeringizda saqlanadi.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Manba / Sozlash</p><h1>Ulanish, proksi va ma&#x27;lumotlarni himoya qilish</h1><p class="guide-outcome">API juftliklari, tizimga kirish usullari, SOCKS5, HTTP va MTProxy yo&#x27;nalishlari, ommaviy proxy ro&#x27;yxatlari va har bir yo&#x27;nalish qaysi xavfsizlikni ta&#x27;minlaydi.</p><div class="wiki-body"><p>Ushbu hujjat TgWitness 0.7.0 xatti-harakatlari va uning cheklovlarini tasvirlaydi. Avtorizatsiya, manbaga kirish, tarmoq ulanishi va yozib olish to&#x27;liqligi alohida holatlardir. Kirish bosqichlari, fayl formatlari va bir nechta hisoblar bo&#x27;yicha
+<a href="../accounts/">hisoblar va sessiya formatlari</a> bo&#x27;limidan boshlang. Hodisalar siyosati va qayta ishga tushirish xatti-harakatlari uchun <a href="../collection/">to&#x27;plash qanday ishlashini</a> ko&#x27;ring.</p>
+<h2 id="authentication-methods">Avtorizatsiya usullari<a class="anchor" href="#authentication-methods" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
+<p><strong>API ID va API xesh ilovani aniqlaydi; ular hisobga kirishni almashtirmaydi.</strong>
+
+Ular TgWitness&#x27;da ixtiyoriydir. Uстунлик tartibi: avval formaga kiritilgan juftlik, keyin import qilingan hisob JSON&#x27;idan olingan juftlik, keyin ish maydonida saqlangan juftlik, so&#x27;ngra 50 ta juftlikdan iborat o&#x27;rnatilgan bazadan
+juftlik (2040) mos Telegram Desktop mijoz tavsifi bilan yuboriladi. <a href="https://my.telegram.org">my.telegram.org</a>
+saytidagi API Development Tools bo&#x27;limidan olingan o&#x27;zingizning juftlikni barcha hisoblaringiz bilan ishlatishingiz mumkin; har bir hisobning alohida ruxsati saqlanadi.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Uslub</th>
+<th>Talablar</th>
+<th>TgWitness qo&#x27;llab-quvvatlashi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Telefon, kod, ixtiyoriy 2FA</td>
+<td>Hisobga kirish; API juftligi ixtiyoriy</td>
+<td>Panelga kirish</td>
+</tr>
+<tr>
+<td>Auth kaliti HEX + DC ID</td>
+<td>To&#x27;liq 512 belgili kalit va DC 1–5</td>
+<td><strong>Avtorizatsiya kaliti</strong> yorlig&#x27;i; avtorizatsiya saqlanishidan oldin ixtiyoriy Foydalanuvchi ID tekshiriladi</td>
+</tr>
+<tr>
+<td>Telethon StringSession</td>
+<td>Amaldagi sessiya satri</td>
+<td>Panelga kirish</td>
+</tr>
+<tr>
+<td>Telethon SQLite <code>.session</code></td>
+<td>Yopiq, izchil nusxa</td>
+<td>Sxemalarni 7/8 to&#x27;g&#x27;ridan-to&#x27;g&#x27;ri panel importi; ixtiyoriy oflayn CLI</td>
+</tr>
+<tr>
+<td>Pyrogram SQLite <code>.session</code></td>
+<td>Yopiq ishlab chiqarish foydalanuvchi sessiyasi</td>
+<td>Sxemalarni paneldan to&#x27;g&#x27;ridan-to&#x27;g&#x27;ri import qilish 2/3</td>
+</tr>
+<tr>
+<td>Telegram Desktop TData ZIP</td>
+<td>Bir zamonaviy hisob; mahalliy parol bilan himoyalangan</td>
+<td>Tekshirish summalari va dekripsiya tekshiruvlari bilan xotiradagi konvertatsiya</td>
+</tr>
+<tr>
+<td>Hisob JSON</td>
+<td>Qo&#x27;llab-quvvatlanadigan API/sessiya/kalit maydonlari</td>
+<td>Faqatgina metadata API ma&#x27;lumotlarini to&#x27;ldiradi; sessiya/kalit yoki telefon/QR orqali kirish hanuzgacha talab etiladi</td>
+</tr>
+<tr>
+<td>QR orqali kirish</td>
+<td>Ruxsat berilgan Telegram ilovasidan tasdiq</td>
+<td>Mahalliy QR kod yaratish, amal qilish muddati/qayta urinish, ixtiyoriy 2FA</td>
+</tr>
+<tr>
+<td>TDLib / Pyrogram StringSession</td>
+<td>Boshqa kutubxona-spetsifik formatlar</td>
+<td>Qo&#x27;llab-quvvatlanmaydi</td>
+</tr>
+<tr>
+<td>Bot tokeni</td>
+<td>O&#x27;zining kirish/yangilash modeliga ega bot</td>
+<td>Ushbu to&#x27;plovchi tomonidan ishlatilmagan</td>
+</tr>
+</tbody>
+</table></div>
+<p>Telegram kod yetkazib berishni tanlaydi; SMS kafolatlanmaydi. API xesh bekor qilingan sessiyani tiklay olmaydi yoki unutib qo&#x27;yilgan 2FA parolini almashtira olmaydi. TgWitness kirish kodlarini yoki Telegram 2FA parolini diskka saqlamaydi.</p>
+<p>Shaxsiy manba uchun hisob allaqachon kirish huquqiga ega bo&#x27;lishi kerak. Guruh foydalanuvchi nomi keraksiz. Proksi yoki sessiya importi na a&#x27;zolik, na administrator huquqlarini bermaydi. Joriy a&#x27;zolik oldingi a&#x27;zolik tarixiga kirishni kafolatlamaydi.</p>
+<h2 id="import-a-telethon-session-file">Telethon sessiya faylini import qiling<a class="anchor" href="#import-a-telethon-session-file" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
+<p>Telethon SQLite, Pyrogram SQLite va Telegram Desktop TData turli formatlardan foydalanadi.
+Panel qo&#x27;llab-quvvatlanadigan tuzilmalarni aniqlaydi va konvertatsiya qiladi; fayl nomini o&#x27;zgartirish konvertatsiya hisoblanmaydi. <strong>Fayllar</strong> bo&#x27;limida bir sessiyani va uning hamrohi JSON-ni tanlang, so&#x27;ngra <strong>&quot;Hisobni bog&#x27;lash&quot;</strong> tugmasini bosing. To&#x27;rtta mos keladigan fayl va jami 8 MiB gacha qabul qilinadi. TData/JSON tafsilotlari uchun <a href="../accounts/">format cheklovlariga</a> qarang.
+Parolni tiklash imkoni yo&#x27;q. Telefon/2FA yoki QR orqali kirish alohida ruxsatnoma yaratadi.</p>
+<p>Ixtiyoriy Telethon-ga xos buyruq qatori yo&#x27;li ham mavjud bo&#x27;lib qoladi:</p>
+<ol>
+<li>Asl sessiyani ishlatayotgan mijozni to&#x27;xtating va izchil nusxa yarating. Konverter yakunlanmagan WAL/jurnalga ega fayllarni rad etadi. Ushbu tekshiruvni chetlab o&#x27;tish uchun fayllarni o&#x27;chirish o&#x27;rniga asl mijozni to&#x27;g&#x27;ri yoping.</li>
+<li>TgWitness muhitidan quyidagini ishga tushiring:</li>
+</ol>
+<pre><code class="language-sh">python -m tgwitness.sessions account.session --out account.tgwitness-session</code></pre>
+<ol start="3">
+<li><strong>Hisob qo&#x27;shish → Fayllar</strong> bo&#x27;limida natijani yuklang yoki
+ uning satrini joylang va davom eting.</li>
+<li>Ko&#x27;rsatilgan raqamli akkaunt IDni tekshiring, manbalarni tanlang va kuzatuvni boshlang.</li>
+</ol>
+<p>Konverter SQLite&#x27;ni faqat o&#x27;qish rejimida ochadi, sxema yangilanishi yoki tarmoq so&#x27;rovini bajarmaydi va sessiyani chop etmaydi. U sxema versiyasini, jadvallar turini, bitta sessiya qatorini, IP/port/DC va kalit uzunligini tekshiradi. CLI kiritilishi 64 MiB bilan cheklangan; StringSession matni 4 KiB bilan cheklangan. Panel konversiyasi fayllarni autentifikatsiyalangan TgWitness serveriga yuklaydi, ularni xotirada qayta ishlaydi va yuklangan asl nusxalarni saqlamasdan, normalizatsiya qilingan ma&#x27;lumotlarni shu brauzerga qaytaradi. Masofaviy server uchun HTTPS dan foydalaning.</p>
+<p><strong>Konvertlangan fayl shifrlanmagan akkauntga kirish siridir.</strong> Uni himoyalangan saqlash joyida saqlang va hech qachon uni commit qilmang yoki uchinchi tomon konversiya xizmatiga yubormang. TgWitness ruxsat etilgan sessiyani o&#x27;zining shifrlangan omborida saqlaydi. Sessiyani nusxalash alohida ruxsatnoma yaratmaydi: klonlangan avtorizatsiya kalitlari bilan bir vaqtda bir nechta klientni ishga tushirmang va mustaqil yangilanish yetkazib berilishini kutmang.</p>
+<p>Konversiya vakolatni o&#x27;tkazadi, asl xabarlarni, ob&#x27;ekt keshini yoki doimiy yangilanish kursorini emas. U jarayon qayta ishga tushirilganda yangilanishlarni tiklashni ta&#x27;minlamaydi.</p>
+<h2 id="mtproto-telethon-and-proxies">MTProto, Telethon va proksi-serverlar<a class="anchor" href="#mtproto-telethon-and-proxies" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
+<p>MTProto – bu Telegramning protokoli. Telethon – bu TgWitness foydalanadigan Python klient kutubxonasi.
+MTProxy – bu Telegram transport proksi; SOCKS5 va HTTP CONNECT umumiy tunnelarni taqdim etadi. Hech biri akkaunt autentifikatsiyasini almashtirmaydi.</p>
+<p>Agar proksiga ehtiyoj bo&#x27;lsa, har bir ish maydoni uchun <strong>Hisob → Sozlamalar → Ulanish sozlamalari →</strong> Kirishdan oldin <strong>ulanish yo&#x27;nalishini o&#x27;zgartirish</strong> bo&#x27;limida yo&#x27;nalishni saqlang. Standart bo&#x27;yicha – To&#x27;g&#x27;ridan-to&#x27;g&#x27;ri.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Yo&#x27;nalish</th>
+<th>Sozlamalar</th>
+<th>Chegara</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>To&#x27;g&#x27;ridan-to&#x27;g&#x27;ri</td>
+<td>Yo&#x27;q</td>
+<td>Telethon bevosita Telegramga ulanadi</td>
+</tr>
+<tr>
+<td>SOCKS5</td>
+<td>Host, port, ixtiyoriy foydalanuvchi nomi/parol</td>
+<td>python-socks 2.8.2, rdns yoqilgan</td>
+</tr>
+<tr>
+<td>HTTP CONNECT</td>
+<td>Host, port, ixtiyoriy foydalanuvchi nomi/parol</td>
+<td>Oddiy HTTP CONNECT; proksiga o&#x27;zi TLS qo&#x27;llab-quvvatlanmaydi</td>
+</tr>
+<tr>
+<td>MTProxy</td>
+<td>Mehmondo&#x27;st, port, sir</td>
+<td>Eksperimental Telethon transporti; 32 geksaditsit yoki <code>dd</code> + 32 geksaditsit</td>
+</tr>
+</tbody>
+</table></div>
+<p>Fake TLS <code>ee</code> sirlarini rad etadi. Telethon 1.45 ning normallashtirishi prefiks va domenni olib tashlashi mumkin, lekin bu Fake TLS ni amalga oshirmaydi. <code>tg://proxy?server=…&amp;port=…&amp;secret=…</code> yoki <code>https://t.me/proxy?server=…&amp;port=…&amp;secret=…</code> ni joylashtiring va <strong>havoladan Maydonlarni to&#x27;ldirishni</strong> tanlang.
+Bu bog&#x27;lanish yoki saqlashsiz maydonlarni tasdiqlaydi va to&#x27;ldiradi; yo&#x27;nalishni alohida ko&#x27;rib chiqing va saqlang. Qo&#x27;lda to&#x27;ldiriladigan maydonlar mavjud bo&#x27;lib qoladi. <a href="https://core.telegram.org/api/links#proxy-links">Telegram proksi havolalarini</a> ko&#x27;ring.</p>
+<h3 id="public-proxies-supplied-by-your-installation">Sizning o&#x27;rnatishingiz taqdim etgan ommaviy proksilar<a class="anchor" href="#public-proxies-supplied-by-your-installation" aria-label="Ushbu bo&#x27;limga havola">#</a></h3>
+<p>Ulanish sozlamalariga
+<a href="https://github.com/SoliSpirit/mtproto">SoliSpirit/mtproto</a> va <a href="https://github.com/zakky8/mtproto-proxy-pro">zakky8/mtproto-proxy-pro</a> dan tayyor jamoat ro&#x27;yxati kiritilgan. Ilovaga kiritilgan snapshot jamoat endpoint ma&#x27;lumotlari, manbaa aniqligi va yuklab olish sanalarini o&#x27;z ichiga oladi, lekin hech bir loyihaning tasdiqlash da&#x27;volarini emas. U ishga tushirilganda hech narsa yuklamasdan ishlaydi. Yozuvni tanlang, marshrutni saqlang, so&#x27;ng kirishdan oldin Telegram ulanishini sinab ko&#x27;ring.</p>
+<p><strong>Jamoat ro&#x27;yxatlarini yangilash</strong> so&#x27;rov bo&#x27;yicha ikkita belgilangan HTTPS manbasini oladi. Har bir javob 1 MiB va 20 soniyaga cheklangan; yo&#x27;naltirishlar rad etiladi. Har bir manba bo&#x27;yicha ko&#x27;pi bilan 64 ta mos keladigan yozuv saqlanadi, manbalar bo&#x27;ylab takrorlari olib tashlanadi. Noto&#x27;g&#x27;ri havolalar, xususiy/zaxira IP-manzillar, mahalliy hostnomalar va qo&#x27;llab-quvvatlanmaydigan Fake TLS <code>ee</code> yozuvlari o&#x27;tkazib yuboriladi. Jamoat
+hostnomalari tanlovda aniqlanadi; har bir javob global yo&#x27;naltirilishi mumkin bo&#x27;lishi va
+tanlangan IP saqlangan marshrutga mahkamlanishi kerak. Bu feed hostnomasi keyinchalik
+saqlangan ulanishni xususiy manzilga yo&#x27;naltirishining oldini oladi. Kirishni qayta qo&#x27;llash uni yana aniqlash uchun.</p>
+<p>Har bir ish maydoni so&#x27;nggi yaxshi manba snapshotlarini <code>public-proxies.json</code>da saqlaydi. Muvaffaqiyatsiz, bo&#x27;sh yoki mos kelmaydigan manba javoblari o&#x27;sha manbaning avvalgi yozuvlari va vaqt tamg&#x27;asini saqlab qoladi.
+Yangilanishlar atomik, ketma-ket raqamlangan va har bir ish maydoni bo&#x27;yicha daqiqasiga bitta urinish bilan cheklangan.
+Ro&#x27;yxatni yangilash yoki ko&#x27;rish tanlangan yo&#x27;nalishni o&#x27;zgartirmaydi. Mavjudlik uchun hali ham
+transport testi talab etiladi; provayder ro&#x27;yxatga kiritilgani Telegram xabarlarining to&#x27;liq yetkazilganligi dalili emas.</p>
+<p>Ro&#x27;yxatdan yuklab olishlar alohida HTTPS ulanishidan foydalanadi, standart bo&#x27;yicha to&#x27;g&#x27;ridan-to&#x27;g&#x27;ri. Ushbu so&#x27;rovlarni yuklab olish proksi orqali yo&#x27;naltirish uchun
+<code>TGWITNESS_PROXY_FEED_PROXY</code> ni HTTP/SOCKS5 URL ga o&#x27;rnating; har ikkala collector Compose varianti uni yo&#x27;naltiradi. Provayderlarga Telegram sessiyasi, API ma&#x27;lumotlari, panel tokeni yoki bot tokeni yuborilmaydi. Ish maydonining MTProxy&#x27;si ushbu HTTP yuklab olishlarni amalga oshira olmaydi. Provayder nomlari, saqlangan sanalar va yuklab olish yo&#x27;li <strong>&quot;Ro&#x27;yxat qayerdan olinadi&quot;</strong> bo&#x27;limida keltirilgan.</p>
+<p>Ommaviy ro&#x27;yxatni o&#x27;zingizning operator katalogingiz bilan almashtirish uchun quyidagi ustunlikni sozlang.
+Bu tashqi obunalarni butunlay o&#x27;chirib qo&#x27;yadi, hatto uning <code>proxies</code> massivida hech narsa bo&#x27;lmaganida ham.</p>
+<p><a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/proxies.config.example">Bo&#x27;sh katalogni</a>
+<code>proxy-config/proxies.json</code>
+ga nusxalang va joylashtirilgan ommaviy endpointlaringizni qo&#x27;shing:</p>
+<pre><code class="language-json">{&quot;format&quot;: &quot;tgwitness-proxy-catalog-v1&quot;, &quot;proxies&quot;: [
+  {&quot;id&quot;: &quot;project-eu&quot;, &quot;label&quot;: &quot;Project EU&quot;,
+   &quot;link&quot;: &quot;tg://proxy?server=REPLACE_HOST&amp;port=443&amp;secret=REPLACE_SECRET&quot;}
+]}</code></pre>
+<p>Namuna qiymatlari almashtirilishi kerak. 32 tagacha alohida yozuv qabul qilinadi. Avtorizatsiyalangan ro&#x27;yxat sirli ma&#x27;lumotlarsiz labelar/mehmonlar/portlarni qaytaradi; birini tanlash uning kreditsialarini ish maydoni seyfiga saqlaydi. Mavjudlik aniq transport testi o&#x27;tkazilmaguncha sinovdan o&#x27;tmagan hisoblanadi. Noto&#x27;g&#x27;ri tuzilgan katalog qo&#x27;lda sozlashni talab qiladi.</p>
+<p>Mahalliy ishga tushirish: <code>TGWITNESS_PROXY_CATALOG</code> ni mahalliy JSON yo&#x27;liga o&#x27;rnating. Docker:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.proxies.yaml up -d --build</code></pre>
+<p>Qo&#x27;shimcha qatlam faqat o&#x27;qish uchun<code>proxy-config</code>ni o&#x27;rnatadi; fayllar konteyner UID 10001 tomonidan o&#x27;qilishi kerak.
+Ushbu papka Git, Docker build konteksti va manba arxivlaridan chiqarib tashlangan. Ushbu katalog ma&#x27;lumotlarni yig&#x27;uvchi akkauntlarni sozlaydi; <a href="../witness/">TgWitness boti</a> MTProxy emas, balki o&#x27;zining HTTP/SOCKS5 marshrutidan foydalanadi.</p>
+<p>Agar proksi ishlamasa, TgWitness Direct rejimiga qaytmaydi. Yo&#x27;nalishni o&#x27;zgartirishdan oldin kuzatuvni to&#x27;xtating. Saqlash eski mijozlarni uzib qo&#x27;yadi va yakunlanmagan tizimga kirishni bekor qiladi; yangi mijoz saqlangan yo&#x27;nalishdan foydalanadi. Hisobning jurnal/sessiya bog&#x27;lanishi saqlanib qoladi. Sozlamalar avvalgi yo&#x27;nalishni almashtiradi: uni tahrirlashda proksi ma&#x27;lumotlarini qayta kiriting.</p>
+<p>Kirish ma&#x27;lumotlari <code>network.enc</code>da shifrlangan. API foydalanuvchi nomi, parol yoki sirli kalitni qaytarmaydi. Imzolangan yozuvlarda yo&#x27;nalish turi va kirish ma&#x27;lumotlari mavjudligi ko&#x27;rsatiladi, manzil va sirli kalitlar kiritilmaydi. Operator paneldagi manzilni ko&#x27;rishi mumkin. Sirli maydonlar saqlash, qulflash yoki ish maydonlarini almashtirishdan so&#x27;ng tozalanadi.</p>
+<p><strong>Telegram ulanishini sinab ko&#x27;radi</strong>, shuningdek tizimga kirishdan oldin ham mavjud bo&#x27;lib, yo&#x27;nalish orqali vaqtinchalik ruxsatsiz Telegram ulanishini ochadi va yopadi. U IP-tekshiruv saytiga murojaat qilmaydi. Muvaffaqiyat transport ulanishini o&#x27;rnatadi, guruhga kirish, to&#x27;liq yetkazib berish yoki anonimlikni emas.</p>
+<p>Proxy Telegram klientining ulanishlariga, jumladan Telegram DC media yuklamalariga qo&#x27;llaniladi. Brauzer, pip, SSH va qo&#x27;lda ishga tushirilgan TSA vositalarining alohida yo&#x27;llari mavjud. Proxy host nomi mahalliy tarzda aniqlanishi mumkin. <code>rdns</code> manzil host nomlariga ta&#x27;sir qiladi; Telegram ko&#x27;pincha raqamli DC IP-manzillarini taqdim etadi.</p>
+<p>SOCKS5 va oddiy HTTP CONNECT proxy ma&#x27;lumotlarini yoki mijozdan proxyga bo&#x27;lgan tunnelni shifrlamaydi. MTProto Telegram trafigini alohida himoya qiladi. Ishonchsiz tarmoqdagi proksiga mos keladigan xavfsiz kanalni ishlating. Xususiy guruhlar bulutli suhbatlardir; MTProto ularni oxirigacha shifrlangan Sirli Suhbatlarga aylantirmaydi.</p>
+<h2 id="encryption-and-signatures">Shifrlash va imzo<a class="anchor" href="#encryption-and-signatures" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Qatlam</th>
+<th>Amalga oshirildi</th>
+<th>Operator mas&#x27;uliyati</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Telegram trafigi</td>
+<td>Telethon MTProto</td>
+<td>Platforma ishonchliligi, yo&#x27;nalish va mavjudlik</td>
+</tr>
+<tr>
+<td>Veb-panel</td>
+<td>Ega tokeni, loopback bo&#x27;yicha standart, so&#x27;rovlarga cheklovlar</td>
+<td>Masofaviy kirish uchun HTTPS yoki SSH tunneli</td>
+</tr>
+<tr>
+<td>Sirlar</td>
+<td>API akkount ma&#x27;lumotlari, sessiya, proksi akkount ma&#x27;lumotlari va imzolash uchun xususiy kalit uchun Fernet</td>
+<td>Dekripsiya kalitini va ishchi hostni himoya qiling</td>
+</tr>
+<tr>
+<td>Ombor kaliti</td>
+<td>Mahalliy kalit yoki yangi o&#x27;rnatish uchun tashqi bosh kalit</td>
+<td>Maxsus himoyalangan saqlash va kalit zaxira</td>
+</tr>
+<tr>
+<td>Xabarlar va ilovalar</td>
+<td>Oddiy matnli ilova saqlash</td>
+<td>Shifrlangan disk/hajm</td>
+</tr>
+<tr>
+<td>ZIP/JSONL/CSV/HTML</td>
+<td>Butunlik tekshiruvlari, kontentni shifrlash yo&#x27;q</td>
+<td>Eksport qilingan nusxalar va uzatmalarni himoya qiling</td>
+</tr>
+<tr>
+<td>Manba va vaqt</td>
+<td>Imzolangan jurnal, jarayon kviti, RFC 3161 vositalari</td>
+<td>Ishonchli kalit, mustaqil tekshiruv punktlari/TSA va saqlash tartibi</td>
+</tr>
+</tbody>
+</table></div>
+<p>Hisobdagi <strong>saqlash himoyasi</strong> ushbu holatlarni ko&#x27;rsatadi. Panel tokeni shifrlash paroli emas, balki kirish siridir. Bitta token barcha ish maydonlarini boshqaradi; ish maydonlari alohida foydalanuvchilar yoki izolyatsiyalangan ijarachilar emas.</p>
+<p>Ochiq-oydin boshlangan, izolyatsiyalangan sintetik demo to&#x27;g&#x27;ridan-to&#x27;g&#x27;ri loopback ulanishi orqali avtomatik ravishda ochilishi mumkin. Bu alohida jarayon umr-muddati imkoniyatidan foydalanadi; u sozlangan panel tokenini oshkor qilmaydi va haqiqiy ish maydonlariga kirish huquqini bermaydi. Masofaviy, proksi orqali yoki cross-origin so&#x27;rovlar ushbu avtomatik kirish imkoniyatini ololmaydi yoki undan foydalana olmaydi.
+Bu qulaylik haqiqiy hisob ma&#x27;lumotlari uchun autentifikatsiya chegarasini olib tashlamaydi.</p>
+<p>BitLocker, LUKS, FileVault yoki boshqariladigan shifrlangan hajm tegishli tahdid modellariga muvofiq saqlashni himoya qilishi mumkin. Yechilmagan holda ishlayotgan mashinaning ma&#x27;murchisi hanuzgacha ma&#x27;lumotlarni o&#x27;qishi mumkin. Saqlash rejalashtirishda SQLite WAL/SHM, media, vaqtinchalik eksportlar, swap, zaxira nusxalar va brauzer yuklamalarini hisobga oling. Docker hajmi faqatgina hajm bo&#x27;lgani uchun shifrlanmaydi. TgWitness SQLCipher yoki obyekt shifrlashni amalga oshirmaydi.</p>
+<h2 id="external-master-key">Tashqi bosh kalit<a class="anchor" href="#external-master-key" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
+<p><strong>Yangi</strong> o&#x27;rnatish uchun master kalitni ma&#x27;lumotlar katalogidan tashqariga joylashtiring.
+Bu mavjud mahalliy kalit omborini avtomatik ko&#x27;chirib o&#x27;tkazmaydi. Faqat xizmat identifikatori kirish huquqiga ega bo&#x27;lgan kalit katalogini tayyorlang, so&#x27;ngra quyidagi buyruqni ijro eting:</p>
+<pre><code class="language-sh">python -m tgwitness.security create-master-key /private/keys/tgwitness-master.key
+export TGWITNESS_VAULT_KEY_FILE=/private/keys/tgwitness-master.key
+python -m tgwitness --data-dir /private/observations/new-case</code></pre>
+<p>PowerShell, o&#x27;rnatilgan loyiha muhitidan foydalangan holda:</p>
+<pre><code class="language-powershell">python -m tgwitness.security create-master-key E:\PrivateKeys\tgwitness-master.key
+$env:TGWITNESS_VAULT_KEY_FILE = &#x27;E:\PrivateKeys\tgwitness-master.key&#x27;
+python -m tgwitness --data-dir E:\PrivateData\new-case</code></pre>
+<p>Docker&#x27;da faylni <code>/data</code> tashqarisida faqat o&#x27;qish uchun (read-only) joylashtiring, masalan
+<code>/run/secrets/tgwitness-master.key</code> ga, va muhit o&#x27;zgaruvchisini shu yo&#x27;lga o&#x27;rnating.
+Xizmatning UID&#x27;si uni o&#x27;qiy olishi kerak. Yo&#x27;lni, kalit baytlarni emas, muhit/sozlash fayllari orqali uzating.</p>
+<p>Har bir ish maydoni tasodifiy ommaviy salt va HKDF-SHA256 orqali hosil qilingan o&#x27;zining Fernet kalitini oladi. <code>vault.external.json</code> derivatsiya metama&#x27;lumotlarini saqlaydi, asosiy kalitni emas. Kalit yo&#x27;qolgan yoki noto&#x27;g&#x27;ri bo&#x27;lsa, u jimjit almashtirmasdan ishga tushishni rad etadi. Tiklash uchun ham salt metama&#x27;lumotlarini, ham asosiy kalitni saqlang.</p>
+<p>Barcha ish maydonchalari bitta asosiy kalitdan kelib chiqadi; uning buzilishi butun o&#x27;rnatishga ta&#x27;sir qiladi. Ish jarayoni sirlarni dekript qila oladi. Bu HSM yoki parol KDF emas. Tasodifiy kalit o&#x27;rniga ixtiyoriy inson parollari qabul qilinmaydi.</p>
+<p>Mavjud o&#x27;rnatmalarda maqsadli migratsiya amalga oshirilib, tekshirilguncha joriy kalitni saqlang. <code>vault.key</code>ni o&#x27;chirish yoki bosh kalitni almashtirish sessiyalarga/imzolash kalitlariga kirishni yo&#x27;qotishiga olib kelishi mumkin. Shifrlangan zaxira nusxalar va kalitlarni alohida saqlang hamda tiklashni izolyatsiyalangan muhitda sinab ko&#x27;ring.</p>
+<h2 id="sources-and-verification-scope">Manbalar va tekshiruv doirasi<a class="anchor" href="#sources-and-verification-scope" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
+<p>2026-yil 26-oktabrda ko&#x27;rib chiqilgan:</p>
+<ul>
+<li>https://core.telegram.org/api/auth</li>
+<li>https://core.telegram.org/api/obtaining_api_id</li>
+<li>https://docs.telethon.dev/en/stable/basic/signing-in.html</li>
+<li>https://docs.telethon.dev/en/stable/concepts/sessions.html</li>
+<li>https://core.telegram.org/mtproto/mtproto-transports</li>
+<li>https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/SourceFiles/storage/storage_account.cpp</li>
+<li>Telethon 1.45.0: SQLiteSession, StringSession, String<code>Connection._proxy_connect</code>, String
+    <code>TcpMTProxy.normalize_secret</code> va yuklab olish usullari.</li>
+</ul>
+<p>Mahalliy testlar loopback SOCKS5/HTTP CONNECT ulanishlari, sun&#x27;iy SQLite sessiyalari, yo&#x27;nalish izolyatsiyasi, maxfiy istisno va kalit yo&#x27;qligi rad etilishini qamrab oladi. Ular haqiqiy Telegram/proxy o&#x27;zaro mosligini yoki jonli MTProxy xulq-atvorini ta&#x27;minlamaydi.
+<a href="../verification/">VERIFICATION.md</a> va <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">LIVE_ACCEPTANCE.md</a> hujjatlariga qarang.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/CONNECTION-SECURITY.md">Ushbu sahifani GitHubda tahrirlang ↗</a><a class="next-guide" href="../deployment/"><span>Keyingi qadam</span><strong>Joriy etish →</strong></a><p>Ushbu qo&#x27;llanmalar joriy amalga oshirishni tasvirlaydi. Tasdiqlash natijalari va qolgan bo&#x27;shliqlar alohida hujjatlashtirilgan. <a href="../verification/">Nima sinovdan o&#x27;tkazilgan →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Ushbu sahifada"><p class="nav-label">Ushbu sahifada</p><a href="#authentication-methods">Avtorizatsiya usullari</a><a href="#import-a-telethon-session-file">Telethon sessiya faylini import qiling</a><a href="#mtproto-telethon-and-proxies">MTProto, Telethon va proksi-serverlar</a><a href="#encryption-and-signatures">Shifrlash va imzo</a><a href="#external-master-key">Tashqi bosh kalit</a><a href="#sources-and-verification-scope">Manbalar va tekshiruv doirasi</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Ochiq manba · Sizning kompyuteringizda ishlaydi</span><a href="../../../../LICENSE">MIT litsenziyasi</a><a href="../notice/">Operator bildirishi</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Xavfsizlik</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Xabarni kutish", "Step through a fictional send, edit and delete.": "Tasavvuriy jo'natish, tahrirlash va o'chirish jarayonini bosqichma-bosqich o'ting.", "No observations yet. Start the sequence or advance one event.": "Hali hech qanday kuzatuvlar yo'q. Ketma-ketlikni boshlang yoki bir voqeani oldinga suring.", "Meet at 10:00": "10:00 da uchrashing", "A new message is visible in the chat.": "Suhbatda yangi xabar ko'rinadi.", "Record 1 appended: the collector observed the original message.": "1-raqamli yozuv ilova qilindi: to'plovchi asl xabarni kuzatdi.", "Meet at 11:00": "11:00 da uchrashing", "The current text changes. The earlier observation stays.": "Joriy matn o'zgaradi. Avvalgi kuzatuv saqlanadi.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "2-yozuv ilova qilindi: tahrir yangi kuzatuvdir. 1-yozuv hanuzgacha asl matnni saqlab qolmoqda.", "Message deleted": "Xabar o'chirildi", "The message has disappeared from the chat view.": "Xabar suhbat ko'rinishidan yo'qoldi.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "3-raqamli yozuv ilova qilindi: o'chirish to'g'risidagi bildirishnoma kuzatilgan ikkala versiya bilan birga saqlanadi.", "0 records": "0 yozuv", "1 record": "1 yozuv", "2 records": "2 yozuv", "3 records": "3 yozuv", "Complete / {n} of 3": "3dan {n} to'liq", "Step / {n} of 3": "3 qadam / {n}dan 3", "Pause": "Tanaffus", "Replay sequence": "Qayta ijro etish ketma-ketligi", "Play sequence": "Sequensani ijro eting", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Statik misol mavjud. Hashlarni interaktiv tarzda hisoblash uchun ushbu sahifani HTTPS orqali yoki Web Crypto qo'llab-quvvatlanadigan localhost ko'rinishida oching.", "No record supplied": "Hech qanday yozuv taqdim etilmagan", "Tail removed": "Oxiri olib tashlandi", "≠ saved hash": "≠ saqlangan xesh", "Rebuilt · different hash": "Qayta qurilgan · boshqa xesh", "= saved hash": "= saqlangan xesh", "Same length and matching head.": "Bir xil uzunlik va mos keluvchi sarlavha.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Uchala hisoblangan xesh saqlangan xeshlarga mos keladi. Ushbu namunada saqlangan uch yozuv chegarasi bilan mos keladi.", "Same saved head; the journal prefix fails verification.": "Xuddi shu saqlangan sarlavha; jurnal prefiksi tasdiqdan o'tmaydi.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "2-yozuv saqlangan xeshga mos kelmaydi. Faqat oxirgi saqlangan headni tekshirish buni aniqlamaydi; verifikator har bir yozuvni tekshiradi.", "Head differs from the retained checkpoint.": "Head saqlangan tekshiruv nuqtasidan farq qiladi.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Qayta tuzilgan xeshlar bir-biriga bog'lanadi, lekin oxirgi bosh o'zgardi. Saqlangan tekshiruv nuqtasi bu tarixni rad etadi. O'zgartirilgan yozuvlarda asl imzolar ham muvaffaqiyatsiz bo'lardi.", "Too short: 2 supplied records \u003c 3 retained records.": "Juda qisqa: 2 ta taqdim etilgan yozuv \u003c 3 ta saqlangan yozuv.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Qolgan ikkita xesh hanuzgacha mos keladi. Saqlangan tekshiruv nuqtasi yo'qolgan oxirni ko'rsatadi. O'sha oldingi chegarasiz, bu qisqaroq prefiks o'zi o'chirib tashlangan qismni aniqlamas edi.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Hash hisoblash ushbu brauzerda mavjud emas. Quyidagi formulalar va statik izoh esa hanuzgacha mavjud.", "{n} records": "{n} yozuvlari", "head {hash}": "Zanjir boshi {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Qabul qilindi: hisob ortadi, imzo tasdiqlanadi va kalit mos keladi. Guvoh ushbu yangi chegarani saqlab qoladi.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: imzolangan javob oxirgi qabul qilingan tekshiruv nuqtasiga qaraganda kamroq yozuvlarni bildiradi. Guvoh muammoni qayd etadi va avvalgi qabul qilingan chegarani saqlab qoladi.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: hisob o'zgarmagan, lekin boshqasi boshqacha. Guvoh kelishmovchilikni qayd etadi va ilgari qabul qilingan chegarani saqlab qoladi.", "No answer": "Javob yo'q", "boundary unknown": "Chegara noma'lum", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Javob yo'q: guvoh muvaffaqiyatsiz tekshiruvni qayd etadi. Bu yig'uvchining joriy holatini aniqlay olmaydi. Agar guvoh hali ham Bot API ga ulanish imkoniga ega bo'lsa va uning nashr etish siyosati ruxsat etsa, u bu muvaffaqiyatsizlikni e'lon qilishi mumkin.", "Send {n}": "{n} yuboring", "Edit {n}": "Tahrir {n}", "Delete {n}": "{n}o'chirish", "Both accounts captured all six expected observations in this example.": "Bu misolda har ikkala akkaunt ham kutilgan oltita kuzatuvni to'liq qayd etdi.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Hisob B hanuzgacha 6 dan 6 tasini qayd etdi. Ikki kvitansiya esa ko'proq vaqt oldi. Qayd etish nisbatlari va kvitansiya kechikishlari turli savollarga javob beradi.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Account B kesish nuqtasigacha 6 ta harakatdan 5 tasini (83,3%) qayd etdi. Yo'qolgan tahrir uchun hech qanday o'lchangan kechikish yo'q. Ushbu natija faqat olti nazorat ostidagi harakatni tasvirlaydi.", "not observed by cutoff": "chegara nuqtasi tomonidan kuzatilmagan", "{s} seconds": "{s} soniya", "Exact values follow in the table.": "Jadvalda aniq qiymatlar keltirilgan.", "{s} s": "{s}s", "Not observed": "Kuzatilmagan", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "To'rtta suhbat turli kuzatuvlarni taqdim etadi. Har bir ulanish bo'yicha manba yozuvlarini kuzating; jo'natuvchi aniqlanmagan holda kanal postini 71001 foydalanuvchiga biriktirmang.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Yozuvlar #146 va #205 bir xil jo'natuvchi ID, 71001, ni ko'rsatadi. Bu Telegram hisobidagi kuzatilgan postlarni ikki chat bo'ylab bog'laydi. Bu haqiqiy shaxsni aniqlamaydi yoki kanal postini unga tegishli deb hisoblamaydi.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "pay.example.invalid/new manzili guruh yozuvi #146, bot klaviatura #173, kanal tahriri #188 va shaxsiy xabar #205 da uchraydi. Takroriy manzil materialni bog'laydi; bu hisoblarning umumiy nazorat ostida ekanligini isbotlamaydi.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Ushbu badiiy holatda #151 va #209 raqamli media kvitansiyalari to'liq SHA-256 qiymatlari bo'yicha teng. Haqiqiy baytlarni va ularga tegishli xabar yozuvlarini solishtiring. Mos keladigan fayl uning yaratuvchisini aniqlamaydi yoki uni kim jo'natganini isbotlamaydi.", "the encrypted off-site copy": "shifrlangan tashqi nusxa", "notifications": "bildirishnomalar", "checkpoint hashes for timestamps": "vaqt tamg'alari uchun tekshiruv nuqtasi xeshlari", "signed checkpoints for the witness": "guvoh uchun imzolangan tekshiruv nuqtalari", "Switched on in this example": "Ushbu misolda yoqilgan", "Optional · off by default": "Ixtiyoriy · standart bo'yicha o'chirilgan", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Ushbu mashinadan chiqishda: Telegram ulanishi va {list}. Boshqa hech narsa.", "Default: only the Telegram connection leaves this machine.": "Standart bo'yicha: faqat Telegram ulanishi ushbu mashinadan chiqadi.", "{done} of {total} done": "{done}dan {total} bajarildi", "Mark step {n} as done": "{n} bosqichini bajarilgan deb belgilash", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Ko'chirish", "Copied": "Ko'chirilgan", "Command copied.": "Buyruq nusxalandi.", "Selected — Ctrl/Cmd+C": "Tanlandi — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Buyruq tanlandi. Uni qo'lda nusxalash.", "Command copied to clipboard.": "Buyruq clipboardga nusxalandi.", "Select text": "Matnni tanlang", "Clipboard unavailable. Command selected; copy it manually.": "Klipbord mavjud emas. Buyruq tanlandi; uni qo'lda nusxalash.", "A message arrives. The first observation is saved.": "Xabar keladi. Birinchi kuzatuv saqlanadi.", "The time changes. Both captured versions stay.": "Vaqt o'zgaradi. Ikkala yozib olingan versiya ham saqlanadi.", "The message disappears. The captured history remains.": "Xabar yo'qoladi. Qayd etilgan tarix esa qoladi.", "Pause example animation": "Animatsiyani to'xtatish misoli", "Play example animation": "Namuna animatsiyasini ijro eting", "Play": "O'ynatish", "Full-size workspace screenshot": "To'liq o'lchamdagi ish maydoni skrinshoti", "Workspace screenshot · fictional data": "Ish maydoni skrinshoti · badiiy ma'lumotlar", "Close": "Yopish", "Close screenshot": "Ekran tasvirini yopish", "Scrollable full-size screenshot": "Haydaladigan to'liq o'lchamdagi skrinshot", "Enlarge: {name}": "Kengaytirish: {name}", "View full size": "To'liq o'lchamda ko'rish"}</script>
+</body></html>

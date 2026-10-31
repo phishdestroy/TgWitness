@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="ja" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>クイックスタート | TgWitness</title>
+<meta name="description" content="TgWitnessのインストールおよび起動方法のすべて：Windowsパッケージ、Python、Docker、および初期チェックを含む統合デモ。"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/quickstart/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="クイックスタート | TgWitness"><meta property="og:description" content="TgWitnessのインストールおよび起動方法のすべて：Windowsパッケージ、Python、Docker、および初期チェックを含む統合デモ。">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/ja/docs/reference/quickstart/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/quickstart/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/quickstart/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/quickstart/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/quickstart/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/quickstart/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/quickstart/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/quickstart/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/quickstart/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/quickstart/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/quickstart/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/quickstart/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/quickstart/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/quickstart/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/quickstart/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/quickstart/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/quickstart/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/quickstart/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/quickstart/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/quickstart/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/quickstart/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/quickstart/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/quickstart/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/quickstart/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/ja/docs/reference/quickstart/", "url": "https://phishdestroy.github.io/TgWitness/ja/docs/reference/quickstart/", "name": "クイックスタート | TgWitness", "description": "TgWitnessのインストールおよび起動方法のすべて：Windowsパッケージ、Python、Docker、および初期チェックを含む統合デモ。", "inLanguage": "ja", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://phishdestroy.github.io/TgWitness/ja/"}, {"@type": "ListItem", "position": 2, "name": "ドキュメント", "item": "https://phishdestroy.github.io/TgWitness/ja/docs/"}, {"@type": "ListItem", "position": 3, "name": "参考文献", "item": "https://phishdestroy.github.io/TgWitness/ja/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "クイックスタート", "item": "https://phishdestroy.github.io/TgWitness/ja/docs/reference/quickstart/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">コンテンツへスキップ</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / ドキュメント</span></a>
+<nav aria-label="ガイド"><a href="../../concepts/">ビジュアルガイド</a><a href="../../">すべてのガイド</a><a href="../">参考文献</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="言語"><span aria-hidden="true">◍</span> 日本語</summary><div class="lang-list"><a href="../../../../docs/reference/quickstart/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/quickstart/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/quickstart/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/quickstart/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/quickstart/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/quickstart/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/quickstart/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/quickstart/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/quickstart/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/quickstart/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/quickstart/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/quickstart/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/quickstart/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/quickstart/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/quickstart/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/quickstart/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/quickstart/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/quickstart/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/quickstart/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/quickstart/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/quickstart/" hreflang="pl" lang="pl">Polski</a><a href="./" hreflang="ja" lang="ja" aria-current="true">日本語</a><a href="../../../../th/docs/reference/quickstart/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/quickstart/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/quickstart/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="ライトテーマとダークテーマを切り替える"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="ガイド"><a href="../../../guides/modes.html">モード、シナリオ、および証拠レベル</a><p class="nav-label">はじめに</p><a href="../../start/">数分で始められます</a><a href="../../accounts/">アカウントを連携する</a><a href="../../proxies/">プロキシを選択してください</a><a href="../../exports/">エクスポートと検証</a><p class="nav-label">証拠について理解する</p><a href="../../concepts/">証拠の仕組みをご覧ください</a><a href="../../cases/">すべてのチャットを横断的に調査する</a><a href="../../security/">セキュリティを確保してください</a><p class="nav-label">さらに詳しく</p><a href="../../witness/">Witnessボットの設定</a><a href="../../server/">稼働を継続してください</a><a href="../../troubleshooting/">何が問題だったのかを確認する</a></nav><nav class="wiki-nav" aria-label="参考文献"><p class="nav-label"><a class="nav-label-link" href="../">参考文献</a></p><details class="wiki-group" open><summary>セットアップ</summary><a href="./" aria-current="page">クイックスタート</a><a href="../accounts/">アカウントとセッション形式</a><a href="../connection/">接続、プロキシ、およびデータ保護</a><a href="../deployment/">導入</a></details><details class="wiki-group"><summary>収集</summary><a href="../collection/">収集の仕組み</a><a href="../operations/">ワークフローと操作方法</a><a href="../investigation/">調査モード</a><a href="../features/">機能と制限事項</a></details><details class="wiki-group"><summary>証拠</summary><a href="../how-it-works/">証拠の仕組み</a><a href="../evidence/">証拠の形式</a><a href="../witness/">独立した証人</a><a href="../timestamp/">タイムスタンプ</a></details><details class="wiki-group"><summary>セキュリティとプロジェクト</summary><a href="../security/">セキュリティおよびデータ取り扱い</a><a href="../architecture/">アーキテクチャ</a><a href="../verification/">テスト済みの内容</a><a href="../license/">ライセンスに関する説明とアーキテクチャ上の非互換性の通知</a><a href="../notice/">オペレーターの非互換性に関する通知</a><a href="../changelog/">変更履歴</a></details></nav><p class="sidebar-note">v0.7.0<br>オープンソース・お使いのマシン上で動作します</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="ガイド"><a href="../../../">ホーム</a> <span aria-hidden="true">/</span> <a href="../../">ドキュメント</a> <span aria-hidden="true">/</span> <a href="../">参考文献</a> <span aria-hidden="true">/</span> <span aria-current="page">クイックスタート</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">ドキュメントを検索する</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="「プロキシ」、「ハッシュチェーン」、「トークン」、または「ウィットネス」などを試してみてください…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="検索を明確にする" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">ガイドやリファレンスを検索するには、単語を入力してください。検索はブラウザ内で行われます。</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">参考文献 / セットアップ</p><h1>クイックスタート</h1><p class="guide-outcome">TgWitnessのインストールおよび起動方法のすべて：Windowsパッケージ、Python、Docker、および初期チェックを含む統合デモ。</p><div class="wiki-body"><p><strong>英語</strong> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/QUICKSTART.md">Русский</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/QUICKSTART.md">ウクライナ語</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/es/QUICKSTART.md">Español</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/QUICKSTART.md">ポルトガル語（ブラジル）</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/QUICKSTART.md">Türkçe</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/QUICKSTART.md">アラビア語</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/QUICKSTART.md">فارسی</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/QUICKSTART.md">ウルドゥー語</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/QUICKSTART.md">ヒンディー語</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/id/QUICKSTART.md">インドネシア語</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/QUICKSTART.md">Tiếng Việt</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/QUICKSTART.md">簡体字中国語</a></p>
+<p>TgWitnessは、ご自身のアカウントがアクセス可能なTelegramのグループやチャンネルを監視するためのスタンドアロン型アプリケーションです。
+独自のデータディレクトリを使用して、ローカル上で動作します。</p>
+<p><strong>初めてのご訪問ですか？</strong>アカウントを連携する前に、<a href="#explore-the-interface">デモをご覧ください</a>。
+プロキシ、ウィットネス、エクスポート、サーバー設定に関する<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/README.md">ガイドをお選びください</a>。</p>
+<h2 id="install-and-start">インストールと起動<a class="anchor" href="#install-and-start" aria-label="このセクションへのリンク">#</a></h2>
+<p>いずれかの方法をお選びください。リリースビルドが公開されると、ポータブル版がダウンロード可能になります：</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>ホスト</th>
+<th>インストールは不要です</th>
+<th>出典：Python 3.11 以上</th>
+<th>Docker：Engine/Desktop（Compose 2.20 以降）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td>GitHub Releases から「<code>TgWitness-&lt;version&gt;-windows-amd64-portable.zip</code>」を抽出し、「<code>TgWitness.cmd</code>」をダブルクリックしてください。</td>
+<td><code>Start.cmd</code> をダブルクリックしてください</td>
+<td><code>scripts\Docker.cmd</code> をダブルクリックしてください</td>
+</tr>
+<tr>
+<td>Linux / macOS</td>
+<td>—</td>
+<td><code>sh start.sh</code></td>
+<td><code>sh scripts/docker-start.sh</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>ソースコードを入手するには、GitHub ReleasesからソースZIPファイルをダウンロードして解凍するか、
+リポジトリをクローンしてください。<code>Start.cmd</code>は、適切なPythonが見つからない場合、
+Windowsユーザー向けにPython 3.12のインストールを提案します（winget、またはpython.orgの署名付きインストーラー）。 <code>start.sh</code>は、
+Pythonがインストールされていない場合、お使いのLinuxディストリビューションまたはmacOS向けの正確なインストールコマンドを表示します。
+ソースコードを初めて実行すると、<code>.venv</code>が生成され、依存関係が自動的にインストールされます。</p>
+<p>Dockerがアプリケーションをビルドし、バックグラウンドで起動します。ホスト側のPythonは
+不要です。<code>scripts\Docker.cmd</code>および<code>scripts/docker-start.sh</code>は、
+コンテナが正常に動作している際に、パネルアドレスとトークンを表示します。サポートされているすべてのホストにおける対応するDockerコマンドは以下の通りです：</p>
+<pre><code class="language-sh">docker compose up -d --build --wait
+docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
+<p><strong>http://127.0.0.1:8787</strong> を開いてください。Docker ヘルパーまたは 2 番目の
+Docker コマンドによって出力されたトークンを使用するか、ポータブル版またはソースからのインストールの場合は <strong>data/live/panel-token.txt を</strong>参照してください。以下の
+「<strong>Telegram を接続</strong>」に進んでください。 ネイティブインストールとDockerインストールでは、それぞれ別々のストレージを使用します。
+Dockerを起動しても、既存のネイティブジャーナルはインポートされません。</p>
+<p>サーバーの<a href="../deployment/">デプロイメント</a>には、HTTPSの自動設定、再起動、
+公開画像、アップデート、およびバックアップが含まれます。</p>
+<h2 id="explore-the-interface">インターフェースをご覧ください<a class="anchor" href="#explore-the-interface" aria-label="このセクションへのリンク">#</a></h2>
+<ol>
+<li>ポータブルパッケージ内の<strong>「TgWitness-Demo.cmd</strong>
+    」、Windowsのソース
+    フォルダ内の「<strong>scripts\Demo.cmd</strong>
+    」、またはLinux/macOS上の「<code>sh start.sh --demo</code>
+    」を実行してください。ソースから起動すると、まず「<code>.venv</code>
+    」が作成され、依存関係がインストールされます。</li>
+<li><strong>http://127.0.0.1:8787</strong> を開いてください。</li>
+<li>ローカルデモでは、サンプルジャーナルが自動的に開かれます。ローカルから直接アクセスする場合、トークンのコピーは必要ありません。</li>
+</ol>
+<p>デモ用のメッセージは架空のものです。デモモードでは、実際のTelegramアカウントに接続することはできません。</p>
+<h2 id="connect-telegram">Telegramに接続する<a class="anchor" href="#connect-telegram" aria-label="このセクションへのリンク">#</a></h2>
+<blockquote class="callout">
+<p>[!警告]
+<strong>失っても構わないもの以外は使用しないでください。</strong>
+個人用や重要なアカウントを接続すること、および大切なアカウントでAPI IDやハッシュを作成することは、強くお勧めしません。
+Telegramは、使用するクライアントに関わらず、予測不能かつ多くの場合永久にアカウントを凍結することがあります。
+テスト運用が円滑に行われるかどうかは、TgWitnessではなくTelegram次第であり、今後の動作については一切保証いたしません。</p>
+</blockquote>
+<ol>
+<li>ネイティブのデモが実行中の場合は、それを停止し、<strong>Start.cmd</strong> または <code>sh start.sh</code> を実行してください。
+    そうでない場合は、上記で起動したライブインストールをそのまま実行し続けてください。</li>
+<li>ご利用のインストール方法に対応したパネルトークンを使用して、パネルを開いてください。</li>
+<li>プロキシが必要な場合は、「<strong>アカウント</strong>」<strong>→「設定」→「接続設定」→「接続経路の変更」</strong>から設定してください。</li>
+<li>「<strong>アカウント</strong>」で電話番号を入力し、<strong>「続行」</strong>を押すか、
+    <strong>「QRコード」→「QRコードを表示」</strong>を選択するか、ファイルを選択して<strong>「アカウントを接続」</strong>を押してください。
+    <strong>「API ID + ハッシュ」</strong>は任意です。ワークスペースは、保存またはインポートされたペア、
+    あるいは組み込みプールから取得した有効なペアを使用します。独自のアプリを使用する場合は、1組の
+    <code>API ID:API Hash</code>ペアを「API ID」に貼り付けてください。
+    完全な認証キーが必要な場合は、「<strong>認証キー」</strong>を選択し、512文字の16進数
+    文字列をすべて貼り付け、提供されたDC IDを選択してください。ユーザーIDは任意ですが、入力された場合はチェックされます。</li>
+<li>選択したログイン方法（電話番号／認証コード／2FA）の手続きを完了してください。QRコードの場合は、
+    ログイン済みのTelegramアプリからの確認、またはサポートされている認証済みセッションのインポートが必要です。</li>
+<li>表示されているアカウントIDをご確認ください。オープン<strong>ソース</strong>：チャットは自動的に読み込まれます。グループを追加してください。</li>
+<li>「<strong>保存する変更を選択</strong>」で、イベントカテゴリまたは「
+    <strong>メッセージ、編集、削除</strong>」のプリセットを選択し、監視設定を保存してください。</li>
+<li>添付ファイルの設定を個別に選択し、「<strong>監視開始」</strong>を押してください。</li>
+</ol>
+<p>API認証情報はアプリケーションを識別するものであり、それ自体ではアカウントへのアクセス権を付与するものではありません。
+非公開グループでは公開ユーザー名は必要ありませんが、アカウントにはアクセス権が必要です。</p>
+<p>既存のアカウントについては、<a href="../accounts/">アカウントおよびセッション形式をご</a>参照ください。本
+パネルでは、Telethon StringSession、Telethon/Pyrogram SQLite、単一アカウントの TData
+ZIP、およびサポート対象のアカウント JSON に対応しています。セッションとその対応する JSON を一緒に選択し、
+<strong>「アカウントを接続」</strong>を押してください。QR ログインも
+、同じオプションの API 設定で利用可能です。 TDLib、ボット、および一括アカウントリストはサポートされていません。</p>
+<p>別のアカウントを追加するには、アカウント選択ボタンの横にある「<strong>+</strong>」を押すか、
+<strong>[アカウント] → [設定] → [接続設定] → [ワークスペース]</strong> を開くか、<strong>[アカウント]</strong> を使用してください。ワークスペースごとに、
+セッション、ジャーナル、鍵、ソース、キューが個別に管理されます。ビューを切り替えても、他のコレクターは実行されたままになります。
+このインストール環境では、同じ Telegram アカウントを 2 つのワークスペースに割り当てることはできません。
+ワークスペースの数に制限はありません。ワークスペースは1つのプロセスを共有するため、処理能力はマシンの性能に依存します。</p>
+<p>ライブパネルトークンは、Telegramの認証情報および保存された
+データへのアクセスを保護するものであり、Telegram APIの認証情報とは別物です。明示的に起動され、
+直接アクセスされたローカルデモのみが自動的に登録されます。リモートまたはプロキシ経由のデモでは、引き続き
+<code>data/demo/panel-token.txt</code>が使用されます。</p>
+<h2 id="review-and-export">確認とエクスポート<a class="anchor" href="#review-and-export" aria-label="このセクションへのリンク">#</a></h2>
+<ul>
+<li><strong>ジャーナル：</strong>情報源やイベントの種類ごとに記録を検索・フィルタリングできます。</li>
+<li>イベントを選択すると、その元の記録、出典、および保存されたバージョンを確認できます。</li>
+<li>編集の詳細には、変更前後の利用可能なコンテンツが表示されます。削除の詳細には、
+    最後にキャプチャされたコンテンツ（存在する場合）が表示されます。身元不明の行為者は、引き続き不明のままとなります。</li>
+<li><strong>エクスポート形式：</strong>署名付きZIP、JSONL、CSV、およびオフライン用HTML。</li>
+<li><strong>チャットの完全エクスポート</strong>（[ソース] → [チャットの完全エクスポート]）：1つのチャットの表示可能な
+    履歴全体を、<code>chat.json</code>（Telegram-export形式）による署名付きバンドルと、読み取り可能な
+    <code>chat.html</code>としてダウンロードします。プライベートチャットは、そのアカウントがメンバーである場合に利用可能です。これは現在の
+    スナップショットであり、削除されたメッセージや過去に編集されたメッセージを復元したものではありません。 <code>python verify.py chat-export.zip --fingerprint TRUSTED_SHA256</code> を使用して
+    コピーを検証してください。</li>
+<li><strong>チェックポイントの保存：</strong>署名付きジャーナルの境界をコレクターの外側に保持してください。</li>
+<li><strong>署名付き実行レシートをダウンロード：</strong>コレクターのプログラムおよびバージョンの記録を保存します。</li>
+<li><strong>タイムスタンプのリクエストの準備：</strong>タイムスタンプ認証機関へのオフラインリクエストを準備します。
+    <a href="../timestamp/">TIMESTAMP.</a>mdの手順に従って、応答を取得し、検証してください。</li>
+<li><strong>ジャーナルの検証：</strong>イベントの署名とチェーンリンクを確認してください。ZIP形式でのエクスポートでは、メディアファイルもチェックされます。</li>
+</ul>
+<p>対応しているブラウザでは、大容量のエクスポートデータを指定したファイルに直接保存できます。その他のブラウザでは、
+最大 128 MiB までバッファリングされます。サーバーが稼働している間、ストリーミング CLI を使用すれば、
+レスポンス全体をバッファリングすることなく、より大容量のダウンロードが可能です：</p>
+<pre><code class="language-sh">python -m tgwitness.download --token-file data/live/panel-token.txt --out evidence.zip</code></pre>
+<p>別のワークスペースを追加する場合は、「<strong>エクスポート」→「ワークスペース ID」</strong>から <code>--profile ID</code> を追加してください。
+リモートサーバーの場合は、<code>--url https://your-server</code> を追加してください。デフォルトの転送制限は
+5 GiBですが、<code>--max-mib</code>を使用すると変更できます。署名付きZIPコンテンツには、デフォルトで別途4 GiBの非圧縮
+検証制限があります（<strong>Parameters</strong>でこの制限を引き上げることができます。そのようなアーカイブの検証には
+<code>verify.py --max-gib N</code>を使用してください）。検証には、信頼できる検証ツールのコピーと、
+独立して保管された鍵のフィンガープリント／チェックポイントを使用してください。</p>
+<h2 id="check-the-installation">インストール方法をご確認ください<a class="anchor" href="#check-the-installation" aria-label="このセクションへのリンク">#</a></h2>
+<pre><code class="language-sh">python start.py --setup-only
+python start.py --check
+python start.py --check --json</code></pre>
+<p><code>--check</code>は、ローカルの依存関係、署名機能のサポート状況、ストレージ、鍵の設定、および
+リスニングアドレスを調査します。何もインストールせず、Telegramにも接続しません。ポートが
+使用中の場合は、別のインスタンスが実行されている可能性があります。別の<code>--port</code>を使用するか、まずそれを停止してください。</p>
+<p>ランチャーは<code>.venv</code>にインストールされます。補助的な<code>python -m tgwitness...</code>コマンドは、
+その環境がすでに有効化されていない限り、Windowsでは<code>.venv\Scripts\python.exe</code>を、Linux/macOSでは<code>.venv/bin/python</code>を
+使用する必要があります。</p>
+<h2 id="sessions-protection-and-operation">セッション、保護、および運用<a class="anchor" href="#sessions-protection-and-operation" aria-label="このセクションへのリンク">#</a></h2>
+<p>TelethonのSQLite形式の<code>.session</code>ファイルは、ローカルで
+<code>python -m tgwitness.sessions account.session --out account.tgwitness-session</code>を使用して変換し、
+Accountに読み込むことができます。ファイルの直接インポートやQRコードによるログインも利用可能です。ログイン形式、SOCKS5、
+HTTP CONNECT、MTProxy、および外部マスターキーについては
+<a href="../connection/">、CONNECTION-SECURITY.md</a>をご参照ください。</p>
+<p><strong>「一時停止」を選択すると、</strong>収集が停止します。<strong>「ロック」を選択</strong>しても、ブラウザへのアクセスが遮断されるだけです。
+タブを閉じても、収集プロセスは実行されたままになります。プロセスを停止すると収集が中断されますが、
+履歴のスナップショットでは、見逃された編集や削除のすべてを復元することはできません。
+イベントポリシー、添付ファイルのキュー、
+アカウントの隔離、および再起動時の動作について、<a href="../collection/">収集の仕組み</a>をご確認ください。</p>
+<p>セッションとシークレットは暗号化されています。メッセージの内容、メディア、およびエクスポートには、
+暗号化されたディスクまたはボリュームが必要です。署名は、信頼できる鍵に対する完全性を保証するものであり、
+Telegramからの送信元を証明するものではなく、また、コレクターとその鍵を管理するオペレーターによる
+改ざんを防ぐものでもありません。</p>
+<p>バックアップ／復元については <a href="../operations/">OPERATIONS.md</a>、ホスティングについては <a href="../deployment/">DEPLOYMENT.md</a>、
+サービスの例については <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/</a> をご参照ください。インストールされた
+パネルには、<code>/guide.html</code> にオフライン設定ガイドも含まれています。</p>
+<p>実際の検証状況および残された課題については、
+<a href="../verification/">VERIFICATION.md</a> および <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/READINESS.md">READINESS.md</a> に記載されています。</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/QUICKSTART.md">GitHubでこのページを編集する ↗</a><a class="next-guide" href="../accounts/"><span>次のステップ</span><strong>アカウントとセッション形式 →</strong></a><p>これらのガイドは、現在の実装について説明しています。検証結果および残された課題については、別途文書化されています。 <a href="../verification/">テスト済みの内容 →</a></p></footer>
+</main>
+<aside class="toc" aria-label="このページについて"><p class="nav-label">このページについて</p><a href="#install-and-start">インストールと起動</a><a href="#explore-the-interface">インターフェースをご覧ください</a><a href="#connect-telegram">Telegramに接続する</a><a href="#review-and-export">確認とエクスポート</a><a href="#check-the-installation">インストール方法をご確認ください</a><a href="#sessions-protection-and-operation">セッション、保護、および運用</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>オープンソース・お使いのマシン上で動作します</span><a href="../../../../LICENSE">MITライセンス</a><a href="../notice/">オペレーター向け通知</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">セキュリティ</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "メッセージをお待ちしています", "Step through a fictional send, edit and delete.": "架空の送信、編集、削除のプロセスを順を追ってご説明します。", "No observations yet. Start the sequence or advance one event.": "まだ観察結果はありません。シーケンスを開始するか、1件先へ進めてください。", "Meet at 10:00": "10:00に集合してください。", "A new message is visible in the chat.": "チャットに新しいメッセージが表示されています。", "Record 1 appended: the collector observed the original message.": "記録1が追加されました：コレクターが元のメッセージを確認しました。", "Meet at 11:00": "11:00にお会いしましょう", "The current text changes. The earlier observation stays.": "現在のテキストは変更されます。以前の指摘はそのまま残ります。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "レコード2が追加されました：この編集は新たな観察結果です。レコード1には依然として元のテキストが保持されています。", "Message deleted": "メッセージが削除されました", "The message has disappeared from the chat view.": "そのメッセージはチャット画面から消えました。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "「Record 3」を追加しました：削除通知は、確認された両方のバージョンとともに保持されます。", "0 records": "0件の記録", "1 record": "1件の記録", "2 records": "2件の記録", "3 records": "3件の記録", "Complete / {n} of 3": "完了 / 3件中{n}件", "Step / {n} of 3": "ステップ / 3のうち{n}", "Pause": "一時停止", "Replay sequence": "再生シーケンス", "Play sequence": "再生順序", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "静的なサンプルが利用可能です。ハッシュをインタラクティブに計算するには、HTTPS経由でこのページを開くか、Web Cryptoをサポートするローカルホストのプレビューを開いてください。", "No record supplied": "記録は提供されていません", "Tail removed": "末尾を削除しました", "≠ saved hash": "≠ 保存されたハッシュ", "Rebuilt · different hash": "再構築済み・ハッシュ値が異なります", "= saved hash": "= 保存されたハッシュ", "Same length and matching head.": "同じ長さで、見出しも一致しています。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "計算された3つのハッシュ値はすべて、保存されているハッシュ値と一致しています。このサンプルは、保持されている3レコード単位の境界と一致しています。", "Same saved head; the journal prefix fails verification.": "保存されたヘッダーは同じですが、ジャーナルのプレフィックスが検証に失敗しました。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "レコード2は、保存されているハッシュと一致しなくなりました。最後に保存されたヘッドのみを確認していた場合、この不一致を見逃してしまいます。検証ツールはすべてのレコードを確認します。", "Head differs from the retained checkpoint.": "ヘッダーは、保持されているチェックポイントとは異なります。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "再構築されたハッシュは相互にリンクしていますが、最終ヘッドが変更されています。保持されているチェックポイントは、この履歴を拒否します。変更されたレコードに対しては、元の署名も検証に失敗します。", "Too short: 2 supplied records \u003c 3 retained records.": "記録数が少なすぎます：提供された記録が2件、保存された記録が3件未満です。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "残りの2つのハッシュは依然として一致しています。保持されているチェックポイントにより、欠落していた末尾部分が明らかになりました。その以前の境界情報がなければ、この短いプレフィックスだけでは欠落に気づくことはできなかったでしょう。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "このブラウザではハッシュ計算をご利用いただけません。以下の数式および説明文は引き続きご覧いただけます。", "{n} records": "{n}件の記録", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "承認済み：カウントが増加し、署名が検証され、鍵が一致しました。Witnessはこの新しい境界を保持します。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "ロールバック：署名付き回答で報告されたレコード数が、最後に承認されたチェックポイントのレコード数よりも少ない場合。Witnessはこの問題を記録し、以前に承認された境界を維持します。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "フォーク：カウントは変わりませんが、ヘッドが異なります。ウィットネスはこの不一致を記録し、以前に承認された境界を維持します。", "No answer": "回答なし", "boundary unknown": "境界不明", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "応答なし：Witnessはチェックの失敗を記録します。コレクターの現在の状態を特定することはできません。Witnessが依然としてBot APIにアクセスでき、かつ公開ポリシーが許可している場合、その失敗を公開することができます。", "Send {n}": "{n} を送信", "Edit {n}": "編集 {n}", "Delete {n}": "{n}を削除", "Both accounts captured all six expected observations in this example.": "この例では、両方のアカウントとも、想定されていた6つの観測項目すべてを捕捉しました。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "アカウントBでも6件中6件を正常に取得できました。2件の受信確認には時間がかかりました。取得率と受信確認の遅延は、それぞれ異なる問題を示しています。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "アカウントBは、締め切り時点までに6件中5件を捕捉しました（83.3％）。捕捉されなかった編集操作については、測定された遅延はありません。この結果は、6件の制御された操作についてのみ記述したものです。", "not observed by cutoff": "締め切りまでに確認されませんでした", "{s} seconds": "{s}秒", "Exact values follow in the table.": "具体的な数値は表に示されています。", "{s} s": "{s} s", "Not observed": "確認されませんでした", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "4つのチャットから、それぞれ異なる観察結果が得られています。すべての接続について、元の記録を追跡してください。送信者が特定されていない限り、チャンネルへの投稿をユーザー71001に割り当てないでください。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "記録#146と#205には、同じ送信者ID「71001」が記載されています。これにより、2つのチャットにまたがるTelegramアカウントの投稿が関連付けられます。ただし、実在の人物を特定したり、チャンネルへの投稿の作者を特定したりするものではありません。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "宛先「pay.example.invalid/new」は、グループ記録#146、ボットキーボード#173、チャンネル編集#188、およびプライベートメッセージ#205に登場します。宛先が繰り返し登場することは、これらの資料を結びつける要素ではありますが、それらのアカウントが共通の管理下にあることを証明するものではありません。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "この架空の事例において、完了済みのメディア受信記録 #151 と #209 は、完全な SHA-256 値が一致しています。実際のバイトデータと、それに関連するメッセージ記録を比較してください。一致したファイルからは、作成者が特定されることも、誰が転送したかを証明することもできません。", "the encrypted off-site copy": "暗号化されたオフサイトコピー", "notifications": "通知", "checkpoint hashes for timestamps": "タイムスタンプ用のチェックポイントハッシュ", "signed checkpoints for the witness": "Witness用の署名付きチェックポイント", "Switched on in this example": "この例では有効になっています", "Optional · off by default": "オプション・デフォルトではオフ", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "このマシンから削除されるもの：Telegramの接続情報と{list}。それ以外は一切ありません。", "Default: only the Telegram connection leaves this machine.": "デフォルト設定：Telegramへの接続のみがこのマシンから行われます。", "{done} of {total} done": "{done}/{total} 完了", "Mark step {n} as done": "ステップ{n}を「完了」としてマークする", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "コピー", "Copied": "コピー", "Command copied.": "コマンドをコピーしました。", "Selected — Ctrl/Cmd+C": "選択 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "コマンドが選択されました。手動でコピーしてください。", "Command copied to clipboard.": "コマンドがクリップボードにコピーされました。", "Select text": "テキストを選択", "Clipboard unavailable. Command selected; copy it manually.": "クリップボードが利用できません。コマンドが選択されています。手動でコピーしてください。", "A message arrives. The first observation is saved.": "メッセージが届きました。最初の記録が保存されました。", "The time changes. Both captured versions stay.": "時刻は変更されますが、キャプチャされた両方のバージョンはそのまま残ります。", "The message disappears. The captured history remains.": "メッセージは消えても、記録された履歴は残ります。", "Pause example animation": "アニメーションの一時停止例", "Play example animation": "サンプルアニメーションを再生する", "Play": "再生", "Full-size workspace screenshot": "ワークスペースのフルサイズスクリーンショット", "Workspace screenshot · fictional data": "ワークスペースのスクリーンショット・架空のデータ", "Close": "閉じる", "Close screenshot": "スクリーンショットを閉じる", "Scrollable full-size screenshot": "スクロール可能なフルサイズのスクリーンショット", "Enlarge: {name}": "拡大：{name}", "View full size": "フルサイズで表示"}</script>
+</body></html>
