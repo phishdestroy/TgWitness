@@ -4,6 +4,8 @@ on:
     paths:
       - 'tgwitness/sealed*'
       - 'tgwitness/static/sealed*'
+      - 'tgwitness/static/cloud-capture*'
+      - 'tgwitness/static/capture.html'
       - 'website/sealed*'
       - 'scripts/sealed_runner.py'
       - 'deploy/Dockerfile.sealed'
@@ -15,6 +17,8 @@ on:
     paths:
       - 'tgwitness/sealed*'
       - 'tgwitness/static/sealed*'
+      - 'tgwitness/static/cloud-capture*'
+      - 'tgwitness/static/capture.html'
       - 'website/sealed*'
       - 'scripts/sealed_runner.py'
       - 'deploy/Dockerfile.sealed'
