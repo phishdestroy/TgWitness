@@ -19,6 +19,10 @@
 #view-parameters .parameter-error { color: var(--danger); margin-top: 6px; font-size: 12px; }
 #view-parameters .parameter-row.invalid input { border-color: var(--danger); }
 #view-parameters .parameter-field .unit { font-size: 12px; }
+#view-parameters .parameter-impact { margin-top: 8px; padding: 8px 10px; border-inline-start: 2px solid var(--warning-border); background: var(--warning-soft); color: var(--text-2); font-size: 12px; line-height: 1.5; }
+#view-parameters .parameters-rate-note { margin: 12px 0; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-2); }
+#view-parameters .parameters-rate-note summary { font-size: 13px; }
+#view-parameters .parameters-rate-note p { margin-top: 8px; }
 #view-parameters .parameters-menu { position: relative; flex-shrink: 0; }
 #view-parameters .parameters-menu > summary { padding: 9px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; }
 #view-parameters .parameters-menu > button { position: absolute; inset-inline-end: 0; z-index: 5; top: 44px; width: 190px; border: 1px solid var(--border); background: var(--surface-popover); box-shadow: var(--shadow-md); text-align: start; }

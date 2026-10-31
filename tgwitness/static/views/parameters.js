@@ -37,6 +37,20 @@ export function createParameters(context) {
         low: entry.item.low.toLocaleString(), high: entry.item.high.toLocaleString()}) : "";
   }
 
+  function impact(entry) {
+    if (problem(entry)) return "";
+    const number = value(entry);
+    if (entry.item.key === "dialog_limit" && number > entry.item.default)
+      return tr("A larger chat list takes more Telegram requests and longer to refresh. This does not download message history.");
+    if (entry.item.key === "scope_refresh_minutes" && number < entry.item.default)
+      return tr("More frequent list refreshes mean more Telegram requests. Repeated manual refreshes add to that work.");
+    if (entry.item.key === "startup_buffer")
+      return tr("This is a memory buffer for updates arriving during startup, not a history-import limit. A larger buffer needs more RAM.");
+    if (entry.item.key === "proxy_rotate_hours" && number > 0)
+      return tr("Automatic MTProxy mode only. A planned switch reconnects the account even while its current proxy works. It does not remove Telegram rate limits.");
+    return "";
+  }
+
   function offset() {
     root.style.setProperty("--parameters-top", Math.max(0, context.headerOffset?.() || 0) + "px");
     root.style.setProperty("--parameters-group-top", ((context.headerOffset?.() || 0)
@@ -77,6 +91,7 @@ export function createParameters(context) {
       entry.field.disabled = !allowed();
       const error = problem(entry); invalid += Number(!!error);
       entry.error.textContent = error; entry.error.hidden = !error;
+      const effect = impact(entry); entry.impact.textContent = effect; entry.impact.hidden = !effect;
       entry.row.classList.toggle("invalid", !!error);
       if (error) entry.field.setAttribute("aria-invalid", "true"); else entry.field.removeAttribute("aria-invalid");
       if (!equal(value(entry), entry.item.value)) count++;
@@ -109,6 +124,12 @@ export function createParameters(context) {
       const card = make("section", "card padded parameters-group"), grid = make("div", "parameters-grid");
       card.id = "parameters-group-" + group.id;
       card.append(make("h2", "", tr(groupNames[group.id] || group.title)), make("p", "muted", tr(group.description)), grid);
+      if (group.id === "recheck") {
+        const note = make("details", "parameters-rate-note"); note.id = "parameters-floodwait";
+        note.append(make("summary", "", tr("What is FloodWait?")), make("p", "hint",
+          tr("FloodWait is Telegram asking the account to wait before another request. Larger batches and shorter pauses can cause more of these waits. Changing proxies does not remove the limit.")));
+        grid.before(note);
+      }
       const link = make("a", "", tr(groupNames[group.id] || group.title)), count = make("span", "parameters-nav-count");
       link.href = context.sectionHref?.(group.id) || "#" + card.id; link.dataset.parameterGroup = group.id;
       count.hidden = true; link.append(count); find("parameters-nav").append(link);
@@ -135,9 +156,10 @@ export function createParameters(context) {
         reset.setAttribute("aria-label", tr("Restore default for {name}", {name: tr(item.label)}));
         const resetWrap = make("span", "parameter-reset"); resetWrap.append(" · ", reset); meta.append(resetWrap);
         const error = make("p", "parameter-error"); error.id = id + "-parameter-error"; error.hidden = true; error.setAttribute("aria-live", "polite");
-        field.setAttribute("aria-describedby", [meta.id, item.help ? id + "-help" : "", error.id].filter(Boolean).join(" "));
-        row.append(meta, error); grid.append(row);
-        const entry = {item, field, row, reset, resetWrap, marker, error, serverError: "", search: [item.key, item.label, item.help, tr(item.label), tr(item.help || ""),
+        const effect = make("p", "parameter-impact"); effect.id = id + "-impact"; effect.hidden = true;
+        field.setAttribute("aria-describedby", [meta.id, item.help ? id + "-help" : "", error.id, effect.id].filter(Boolean).join(" "));
+        row.append(meta, error, effect); grid.append(row);
+        const entry = {item, field, row, reset, resetWrap, marker, error, impact: effect, serverError: "", search: [item.key, item.label, item.help, tr(item.label), tr(item.help || ""),
           group.id, tr(groupNames[group.id] || group.title)].join(" ").toLocaleLowerCase()};
         fields.set(item.key, entry); entryGroup.entries.push(entry); write(entry, item.value);
       }
