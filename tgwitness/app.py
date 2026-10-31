@@ -748,13 +748,25 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     @app.get("/api/events", dependencies=[Depends(authenticate)])
     async def get_events(request: Request, chat_id: int | None = None, message_id: int | None = None,
                          kind: str | None = None, before: int | None = None,
-                         search: str | None = None, limit: int = 100):
+                         search: str | None = None, limit: int = 100,
+                         since: str | None = None, until: str | None = None):
         if not 1 <= limit <= 500 or (search and len(search) > 200):
             raise HTTPException(422, "Limit must be 1–500; search must be at most 200 characters.")
         if chat_id is not None:
             require_chat(request, chat_id)
+        dates = []
+        for value in (since, until):
+            try:
+                date = datetime.fromisoformat(value) if value is not None and len(value) <= 64 else None
+                if value is not None and (date is None or date.tzinfo is None):
+                    raise ValueError()
+                dates.append(date.astimezone(timezone.utc) if date else None)
+            except (ValueError, OverflowError):
+                raise HTTPException(422, "Dates must be ISO timestamps with a timezone.") from None
+        if dates[0] is not None and dates[1] is not None and dates[0] > dates[1]:
+            raise HTTPException(422, "The start must precede the end of the selected period.")
         records = app.state.store.events(chat_id, message_id, kind, before, limit, search,
-                                         chat_ids=visible_chats(request))
+                                         chat_ids=visible_chats(request), since=dates[0], until=dates[1])
         return {"events": records, "next_before": records[-1]["seq"] if len(records) == limit else None}
 
     @app.get("/api/stream", dependencies=[Depends(authenticate)])
@@ -1799,5 +1811,8 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         from .media_analysis_api import register as register_media_analysis
         register_media_analysis(app, authenticate)
         app.mount("/profiles", ProfileDispatch(app), name="profiles")
-    app.mount("/", StaticFiles(directory=Path(__file__).parent / "static", html=True), name="panel")
+    from .panel_routes import register as register_panel
+    static = StaticFiles(directory=Path(__file__).parent / "static", html=True)
+    register_panel(app, static)
+    app.mount("/", static, name="panel")
     return app
