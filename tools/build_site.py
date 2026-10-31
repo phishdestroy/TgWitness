@@ -57,6 +57,7 @@ WIKI_ASSETS = {
     "assets/connection.png": "docs/assets/connection.png",
 }
 STATIC = {"style.css": "website/style.css", "site.js": "website/site.js",
+          "sealed.html": "website/sealed.html", "sealed.js": "website/sealed.js", "sealed.css": "website/sealed.css",
           "LICENSE": "LICENSE", "NOTICE": "NOTICE",
           "docs.css": "website/docs.css", "docs.js": "website/docs.js",
           "learn.css": "website/learn.css", "learn.js": "website/learn.js", **ASSETS, **WIKI_ASSETS}
