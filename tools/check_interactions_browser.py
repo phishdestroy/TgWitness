@@ -65,25 +65,38 @@ def main():
             expect(page.locator("#interaction-result")).to_contain_text("Recorded answer")
             expect(page.locator("#interaction-result")).to_contain_text("https://example.test/receipt")
             press = page.locator("#msg-10 .msg-button", has_text="I paid").get_by_role("button")
+            expect(page.locator("#chat-send")).to_be_enabled()
             expect(press).to_be_enabled()
             callbacks = len(server.app.state.collector.client.callbacks)
 
             page.evaluate("""() => {
               const original=window.fetch;let arm=true,fail=false;
+              window.interactionRefreshFailure={hits:0,backgroundFailed:false,
+                restore(){window.fetch=original;delete window.interactionRefreshFailure;}};
               window.fetch=async(...args)=>{
                 if(fail&&String(args[0]).endsWith('/api/status')){
-                  fail=false;throw new TypeError('Synthetic status connection failure');
+                  window.interactionRefreshFailure.hits++;
+                  throw new TypeError('Synthetic status connection failure');
                 }
                 const result=await original(...args);
-                if(arm&&String(args[0]).endsWith('/api/interactions')){arm=false;fail=true;}
+                if(arm&&String(args[0]).endsWith('/api/interactions')){
+                  arm=false;fail=true;
+                  // A competing poll must not consume the post-action outage fixture.
+                  await refreshStatus().catch(()=>{window.interactionRefreshFailure.backgroundFailed=true;});
+                }
                 return result;
               };
             }""")
             press.click()
-            expect(page.locator("#interaction-result")).to_contain_text("Action completed and recorded.")
-            expect(page.locator("#interaction-result")).to_contain_text("Chat refresh failed")
-            expect(page.locator("#toast")).to_be_hidden()
-            assert len(server.app.state.collector.client.callbacks) == callbacks + 1
+            try:
+                expect(page.locator("#interaction-result")).to_contain_text("Action completed and recorded.")
+                expect(page.locator("#interaction-result")).to_contain_text("Chat refresh failed")
+                expect(page.locator("#toast")).to_be_hidden()
+                assert page.evaluate("interactionRefreshFailure.backgroundFailed")
+                assert page.evaluate("interactionRefreshFailure.hits") >= 2
+                assert len(server.app.state.collector.client.callbacks) == callbacks + 1
+            finally:
+                page.evaluate("interactionRefreshFailure.restore()")
 
             expect(press).to_be_enabled()
             press.click()
