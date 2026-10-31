@@ -290,6 +290,12 @@ const timeReady=import("./core/time.js?v=1").then(({createTimeFormatter})=>{
   });
 });
 const shellReady=import("./components/shell.js?v=2").then(({createResponsiveShell})=>createResponsiveShell({node,icon,tr}));
+let connectionNotice=null;
+const connectionReady=import('./components/connection-notice.js').then(({createConnectionNotice})=>{
+  connectionNotice=createConnectionNotice({host:document.querySelector('.topbar').parentElement,tr,retry:()=>refreshStatus(),
+    active:()=>!!state.me&&!$("workspace").hidden});
+  const notice=$("panel-connection-notice");document.querySelector('.topbar').after(notice);
+});
 let formControls=null;
 const formsReady=import('./components/forms.js').then(({createFormControls})=>{
   formControls=createFormControls({roots:[...panelRoots.values()],tr,getSession:()=>state.workspaceRevision+':'+state.profile,toast,
@@ -325,12 +331,19 @@ async function api(path, body, options={}) {
   const revision=state.workspaceRevision;
   const {root=false,profile=state.profile,token=state.token,allowStale=false,...fetchOptions}=options;
   const prefix=root||profile==="default" ? "/api/" : "/profiles/"+encodeURIComponent(profile)+"/api/";
+  const deadline=path==='status'?AbortSignal.timeout(15000):null;
+  const requestSignal=deadline?(fetchOptions.signal?AbortSignal.any([deadline,fetchOptions.signal]):deadline):fetchOptions.signal;
   let response;try{response = await fetch(prefix + path, {method: body === undefined ? "GET" : "POST",
     headers: {Authorization: "Bearer " + token, ...(body !== undefined ? {"Content-Type":"application/json"} : {})},
-    ...(body !== undefined ? {body: JSON.stringify(body)} : {}), ...fetchOptions});
-  }catch(error){if(fetchOptions.signal?.aborted)throw new StaleView();throw error;}
+    ...(body !== undefined ? {body: JSON.stringify(body)} : {}), ...fetchOptions,...(requestSignal?{signal:requestSignal}:{})});
+  }catch(error){if(fetchOptions.signal?.aborted)throw new StaleView();
+    if(revision===state.workspaceRevision&&token===state.token)connectionNotice?.fail();
+    if(deadline?.aborted)throw new Error(tr("Panel status timed out. Try again."));throw error;}
   if(fetchOptions.signal?.aborted){await response.body?.cancel();throw new StaleView();}
   if(!allowStale&&revision!==state.workspaceRevision){await response.body?.cancel();throw new StaleView();}
+  if(revision===state.workspaceRevision&&token===state.token){
+    if(response.ok&&path==='status')connectionNotice?.clear();else if(response.status>=500)connectionNotice?.fail();
+  }
   if (!response.ok) {
     const result = await response.json().catch(() => ({detail: tr("Request failed")}));
     let detail = result.detail || tr("Request failed");const parameter=detail?.parameter;
@@ -366,7 +379,7 @@ async function busy(button, work) {
 }
 function lock() {
   window.TgWitnessRouter?.invalidate();
-  viewHost?.resetSession();formControls?.reset();state.permissionsStamp=null;
+  viewHost?.resetSession();formControls?.reset();connectionNotice?.clear();state.permissionsStamp=null;
   state.events=[];state.chats=[];state.chatMessages=[];state.chatInfo=null;state.chat=null;state.parameters=null;
   sourcesView?.resetSession();
   parametersView?.resetSession();
@@ -389,7 +402,7 @@ function lock() {
 }
 async function unlock() {
   accessStarted=true;
-  await Promise.all([timeReady,shellReady,viewReady,formsReady]);
+  await Promise.all([timeReady,shellReady,viewReady,formsReady,connectionReady]);
   const router=await ensureRouter(),requested=router.parse();
   state.me = await json("access/me",undefined,{root:true});
   await loadProfiles();
@@ -965,7 +978,7 @@ function renderAccounts(){
   window.TgWitnessFleet?.decorate();
 }
 async function switchProfile(id,options={}){
-  formControls?.reset();
+  formControls?.reset();connectionNotice?.clear();
   if(options.history!==false)window.TgWitnessRouter?.invalidate();
   parametersView?.resetSession();
   resetChatExportTools();
