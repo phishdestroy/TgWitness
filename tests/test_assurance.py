@@ -2,6 +2,8 @@
 import asyncio
 import base64
 import struct
+import threading
+import time
 
 import pytest
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
@@ -83,16 +85,40 @@ def test_redaction_replaces_only_the_two_secret_values():
                                                 "      TGWITNESS_TUNNEL_TOKEN=REDACTED\nprintf 'TGWITNESS_TOKEN=%s'\n")
 
 
-def test_assurance_loop_records_changes_only(journal, tmp_path):
+def test_assurance_loop_records_changes_only(journal, tmp_path, monkeypatch):
     store, _vault = journal
     root = host_root(tmp_path)
+    # The host files change as one step: a measurement never sees half of the new state.
+    lock, measure = threading.Lock(), assurance.host_state
+
+    def guarded(path):
+        with lock:
+            return measure(path)
+    monkeypatch.setattr(assurance, "host_state", guarded)
+
+    class Status(dict):
+        passes = 0
+
+        def update(self, *args, **kwargs):
+            self.passes += 1
+            super().update(*args, **kwargs)
+
+    async def until(condition):
+        deadline = time.monotonic() + 30
+        while not condition():
+            assert time.monotonic() < deadline, "the assurance loop did not measure in time"
+            await asyncio.sleep(0.01)
 
     async def run():
-        task = asyncio.create_task(assurance.assurance_loop(store, "hetzner", {"instance_id": 42}, 0.01, root))
-        await asyncio.sleep(0.1)
+        status = Status()
+        task = asyncio.create_task(assurance.assurance_loop(store, "hetzner", {"instance_id": 42}, 0.01, root, status))
+        await until(lambda: status.passes >= 3)
         assert store.events(kind="host.state") == []
-        host_root(tmp_path, listening=True, logins=1)
-        await asyncio.sleep(0.1)
+        with lock:
+            host_root(tmp_path, listening=True, logins=1)
+        await until(lambda: store.events(kind="host.state"))
+        passes = status.passes
+        await until(lambda: status.passes >= passes + 2)
         task.cancel()
         await asyncio.gather(task, return_exceptions=True)
     asyncio.run(run())

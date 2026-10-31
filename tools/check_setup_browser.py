@@ -95,6 +95,8 @@ def main():
             page.locator('[data-view="connection"]').click()
             page.locator("#entry-settings").click()
             page.locator("#network-details > summary").click()
+            # The catalog belongs to a manually chosen MTProxy; the automatic route has its own dashboard.
+            page.locator("#network-kind").select_option("mtproxy")
             expect(page.locator("#proxy-catalog-select")).to_have_value("project-a")
             assert page.locator("#network-secret").input_value() == ""
             page.locator("#proxy-catalog-apply").click()

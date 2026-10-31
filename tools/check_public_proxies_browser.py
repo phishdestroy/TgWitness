@@ -21,6 +21,13 @@ def settings(page):
         page.locator("#network-details > summary").click()
 
 
+def catalog(page):
+    """The public catalog belongs to a manually chosen MTProxy; the automatic route has its own dashboard."""
+    settings(page)
+    if page.locator("#network-kind").input_value() != "mtproxy":
+        page.locator("#network-kind").select_option("mtproxy")
+
+
 def main():
     output = ROOT / "test-results/public-proxies-browser"
     output.mkdir(parents=True, exist_ok=True)
@@ -59,7 +66,7 @@ def main():
                 }""")
                 for lang in i18n.LANGUAGES[1:]:
                     assert not (set(keys) - set(i18n.words(lang))), (lang, sorted(set(keys) - set(i18n.words(lang))))
-                settings(page)
+                catalog(page)
                 expect(page.locator("#proxy-catalog-status")).to_contain_text("compatible public proxies")
                 assert not calls, "Opening settings must not fetch external subscriptions"
                 assert page.locator("#proxy-catalog-select option").count() > 0
@@ -92,18 +99,18 @@ def main():
                 page.locator("#proxy-catalog-refresh").click()
                 expect(page.locator("html")).to_have_attribute("data-acceptance-held", "true")
                 page.locator("#profile-select").select_option(child)
-                settings(page)
+                catalog(page)
                 expect(page.locator("#proxy-catalog-status")).to_contain_text("compatible public proxies")
                 release_api_response(page)
                 expect(page.locator("#proxy-catalog-status")).to_contain_text("compatible public proxies")
-                expect(page.locator("#network-kind")).to_have_value("mtproxy_auto")
+                assert page.evaluate("state.status.collector.network.kind") == "mtproxy_auto"
                 assert page.locator("#proxy-catalog-select option").count() == 2
 
                 for lang in ("en", "ru"):
                     context.add_cookies([{"name": "tgwitness-lang", "value": lang, "url": server.url}])
                     page.reload()
                     expect(page.locator("#workspace")).to_be_visible()
-                    settings(page)
+                    catalog(page)
                     for width in (390, 1440):
                         page.set_viewport_size({"width": width, "height": 1060})
                         for theme in ("light", "dark"):
