@@ -79,7 +79,6 @@ and verify archives independently with `python -m tgwitness.verify`.
 Run from the repository root in the project environment:
 
 ```sh
-python -m pytest -q
 python -m ruff check .
 python tools/check_router_browser.py
 python tools/check_polling_browser.py
