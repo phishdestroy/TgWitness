@@ -453,7 +453,6 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
             {"title": modes_words["modes.eyebrow"], "description": modes_words["modes.seo"],
              "keywords": modes_words["modes.title"], "text": PlainText(modes_html).text[:SEARCH_TEXT],
              "url": "../" + site_modes.LOCAL},
-            # Keep canonical names/technical terms searchable after transliteration.
             *({"title": labels["wiki"] + " · " + reference[key][0], "description": reference[key][1],
                "keywords": reference[key][2] + (" " + REFERENCE[key][2] if lang != "en" else ""),
                "text": texts[f"{wiki_hub}{key}/"][:SEARCH_TEXT],
