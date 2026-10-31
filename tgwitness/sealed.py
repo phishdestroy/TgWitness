@@ -138,10 +138,12 @@ class Session:
         try:
             # Preserve a pending login client until its session can be revoked.
             pending = self.collector.login_client
-            if pending is not None:
-                await self.revoke()
+            before_stop = await self.revoke() if pending is not None else "no_session"
             await self.collector.stop(shutdown=True)
-            revoked = await self.revoke()
+            after_stop = await self.revoke()
+            outcomes = (before_stop, after_stop)
+            revoked = ("not_confirmed" if "not_confirmed" in outcomes else
+                       "revoked" if "revoked" in outcomes else "no_session")
             self.revocation = revoked
             self.store.append("sealed.finished", {"reason": reason, "revocation": revoked,
                 "history": self.collector.history.status(), "media": self.store.media_stats(),
