@@ -254,7 +254,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             if not store.get_setting("demo", False):
 
                 alert_task = asyncio.create_task(alerts.alert_loop(
-                    store, vault, collector.outside_route, app.state.alert_wakeup))
+                    store, vault, collector.outside_route, app.state.alert_wakeup, profile_id))
                 anchor_task = asyncio.create_task(anchor_loop(
                     store, collector.outside_route, app.state.anchor_wakeup, app.state.anchor_status))
                 replica_task = asyncio.create_task(replica.replica_loop(
@@ -289,6 +289,8 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             yield
         finally:
             try:
+                if getattr(app.state, "media_analysis", None):
+                    await app.state.media_analysis.close()
                 if getattr(app.state, "multi_export", None):
                     await app.state.multi_export.close()
                 if profiles:
@@ -1295,6 +1297,9 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             except Exception as exc:
                 app.state.store.append("export.failed", {"format": fmt, "error_type": type(exc).__name__})
                 raise HTTPException(409, "Export failed integrity, size, or file checks. Inspect local data and limits.") from None
+        from .webhooks import export_completed
+        await export_completed(app.state.store, app.state.vault, profile_id)
+        app.state.alert_wakeup.set()
         return path
 
     @app.get("/api/export/{fmt}", dependencies=[Depends(authenticate)])
@@ -1324,6 +1329,9 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             raise HTTPException(404)
 
         return FileResponse(path, media_type="application/octet-stream", filename=digest)
+
+    from .webhook_api import register as register_webhooks
+    register_webhooks(app, authenticate, profile_id)
 
     if allow_profiles:
 
@@ -1406,6 +1414,12 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             lines = console.after(after)
             return {"lines": lines, "last": lines[-1]["n"] if lines else after}
 
+        from .archive_api import register as register_archive
+        register_archive(app, authenticate)
+        from .analysis_api import register as register_analysis
+        register_analysis(app, authenticate)
+        from .media_analysis_api import register as register_media_analysis
+        register_media_analysis(app, authenticate)
         app.mount("/profiles", ProfileDispatch(app), name="profiles")
     app.mount("/", StaticFiles(directory=Path(__file__).parent / "static", html=True), name="panel")
     return app

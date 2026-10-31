@@ -68,6 +68,14 @@
   --ring: 0 0 0 3px rgb(37 99 235 / .22);
   color-scheme: light;
 }
+.analysis-source { padding: var(--space-4) 0; border-bottom: 1px solid var(--border); }
+.analysis-source .check-label { margin-top: 0; }
+.analysis-source blockquote { margin: var(--space-3) 0; padding: var(--space-2) var(--space-3); border-inline-start: 3px solid var(--border-strong); background: var(--surface-2); white-space: pre-wrap; overflow-wrap: anywhere; font: var(--type-message); max-width: 72ch; }
+.analysis-data { max-height: 320px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; padding: var(--space-3); font: 13px/18px var(--mono); background: var(--surface-2); }
+#ask-reports { display: grid; gap: var(--space-2); justify-items: start; }
+#ask-report-content p { white-space: pre-wrap; overflow-wrap: anywhere; }
+#media-analysis-target { overflow-wrap: anywhere; font-family: var(--mono); }
+#ai-status, #view-integrations > .notice { background: var(--surface-3); border-color: var(--border); color: var(--text-2); }
 [data-theme="dark"] {
   --surface-app: #0e131d; --surface-work: #151b27; --surface-popover: #202838;
   --surface-2: #191f2c;

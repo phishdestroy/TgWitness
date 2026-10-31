@@ -361,7 +361,9 @@ class Store:
                 "SELECT 1 FROM events WHERE chat_id IN (" + marks + ") AND message_id IS NOT NULL"
                 " AND json_extract(payload,'$.sender_id')=? LIMIT 1", (*sorted(chat_ids), sender_id)).fetchone() is not None
 
-    def events(self, chat_id=None, message_id=None, kind=None, before=None, limit=100, search=None, chat_ids=None):
+    def events(self, chat_id=None, message_id=None, kind=None, before=None, limit=100, search=None, chat_ids=None,
+               *, since=None, until=None, message_min=None, message_max=None, timeout_s=None,
+               text_only=False, message_only=False):
         filters, params = [], []
         if chat_ids is not None:
             filters.append("chat_id IN (" + ",".join("?" * len(chat_ids)) + ")")
@@ -384,14 +386,54 @@ class Store:
             filters.append("seq<?")
             params.append(before)
         if search:
-            filters.append("instr(search_text(payload), ?)>0")
+            value = "COALESCE(json_extract(payload,'$.text'),'')" if text_only else "payload"
+            filters.append("instr(search_text(" + value + "), ?)>0")
             params.append(search_text(search))
+        if message_only:
+            filters.append("kind IN (" + ",".join("?" * len(CHAT_KINDS)) + ")")
+            params.extend(CHAT_KINDS)
+        for comparison, value in (("observed_at>=?", since), ("observed_at<=?", until)):
+            if value is not None:
+                filters.append(comparison)
+                params.append(value.astimezone(timezone.utc).isoformat(timespec="milliseconds"))
+        for comparison, value in (("message_id>=?", message_min), ("message_id<=?", message_max)):
+            if value is not None:
+                filters.append(comparison)
+                params.append(value)
         sql = "SELECT * FROM events"
         if filters:
             sql += " WHERE " + " AND ".join(filters)
         sql += " ORDER BY seq DESC LIMIT ?"
-        with self.lock:
-            return [self.decode(r) for r in self.db.execute(sql, [*params, limit])]
+        return [self.decode(r) for r in self.bounded_read(sql, [*params, limit], timeout_s)]
+
+    def archive_chats(self, offset, limit, chat_ids):
+        sql = ("WITH known AS (SELECT chat_id,title,kind,enabled FROM targets UNION ALL "
+               "SELECT DISTINCT chat_id,NULL,NULL,0 FROM events WHERE chat_id IS NOT NULL "
+               "AND message_id IS NOT NULL AND chat_id NOT IN (SELECT chat_id FROM targets)) SELECT * FROM known")
+        params = []
+        if chat_ids is not None:
+            sql += " WHERE chat_id IN (" + ",".join("?" * len(chat_ids)) + ")"
+            params.extend(sorted(chat_ids))
+        sql += " ORDER BY chat_id LIMIT ? OFFSET ?"
+        return [dict(r) for r in self.bounded_read(sql, [*params, limit, offset], 3)]
+
+    def bounded_read(self, sql, params, timeout_s):
+        if timeout_s is None:
+            with self.lock:
+                return self.db.execute(sql, params).fetchall()
+        deadline = time.monotonic() + timeout_s
+        if not self.lock.acquire(timeout=timeout_s):
+            raise TimeoutError("Archive is busy. Retry shortly.")
+        try:
+            self.db.set_progress_handler(lambda: int(time.monotonic() >= deadline), 1000)
+            return self.db.execute(sql, params).fetchall()
+        except sqlite3.OperationalError as exc:
+            if time.monotonic() >= deadline:
+                raise TimeoutError("Archive search timed out. Narrow the query.") from None
+            raise exc
+        finally:
+            self.db.set_progress_handler(None, 0)
+            self.lock.release()
 
     def all_events(self):
         with self.lock:
