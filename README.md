@@ -54,42 +54,48 @@
   <a href="docs/COLLECTION.md"><picture><source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-nav-history-mobile.svg"><img src="docs/assets/presentation/readme-nav-history.svg" width="32%" alt="Collection and saved versions"></picture></a>
 </p>
 
-**Take the history with you.** Export readable HTML, JSON for analysis or a signed
-evidence ZIP. Search captured chats, connect people, replies and shared links,
-and return to the source record behind a lead.
+**Choose your scope:** selected chats, a Telegram folder or the whole account.
+Keep each account in its own workspace, with separate sources, session and signing key.
 
-**Keep what you observed.** Saved messages and media stay available alongside
-captured edits and deletion notices. Each account has its own session, sources
-and signing key.
+## Built for the rest of the investigation
 
-## More ways to work the archive
+<picture>
+  <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-capabilities-mobile-static.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-capabilities-static.svg">
+  <source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-capabilities-mobile.svg">
+  <img src="docs/assets/presentation/readme-capabilities.svg" width="1200" alt="Track names and usernames by Telegram ID. Record supported bot interactions with signed receipts. Search archived messages and connect read-only MCP clients. Deploy a collector with SSH masked and provider records for review. Illustrative workflows.">
+</picture>
 
-<table>
-<tr>
-<td width="50%" valign="top">
-<h3>Ask the archive</h3>
-<p>Search locally. Review sources before AI. Connect read-only MCP clients.</p>
-<p><a href="docs/ANALYSIS.md"><strong>Analysis ↗︎</strong></a> · <a href="docs/MCP.md"><strong>MCP ↗︎</strong></a></p>
-</td>
-<td width="50%" valign="top">
-<h3>Share a focused view</h3>
-<p>Share selected accounts and chats. Set permissions, expiry and IP restrictions.</p>
-<p><a href="docs/ACCESS.md"><strong>Access guide ↗︎</strong></a></p>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-<h3>Read beyond the text</h3>
-<p>Run optional OCR and transcription locally on captured files.</p>
-<p><a href="docs/MEDIA-ANALYSIS.md"><strong>Media guide ↗︎</strong></a></p>
-</td>
-<td width="50%" valign="top">
-<h3>Connect your workflow</h3>
-<p>Send signed webhooks, route alerts and keep encrypted S3 copies.</p>
-<p><a href="docs/WEBHOOKS.md"><strong>Webhooks ↗︎</strong></a> · <a href="#operations"><strong>Alerts and storage ↗︎</strong></a></p>
-</td>
-</tr>
-</table>
+<p align="center">
+  <a href="docs/INVESTIGATION.md#4-connect-observations-across-chats"><picture><source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-nav-people-mobile.svg"><img src="docs/assets/presentation/readme-nav-people.svg" width="48%" alt="People and dossiers"></picture></a>
+  <a href="docs/COLLECTION.md#act-from-the-panel"><picture><source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-nav-bots-mobile.svg"><img src="docs/assets/presentation/readme-nav-bots.svg" width="48%" alt="Bot investigation"></picture></a>
+</p>
+<p align="center">
+  <a href="https://phishdestroy.github.io/TgWitness/docs/archive/"><picture><source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-nav-archive-mobile.svg"><img src="docs/assets/presentation/readme-nav-archive.svg" width="48%" alt="Archive search, AI and MCP"></picture></a>
+  <a href="docs/HIGH-ASSURANCE.md"><picture><source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-nav-cloud-mobile.svg"><img src="docs/assets/presentation/readme-nav-cloud.svg" width="48%" alt="Sealed cloud deployment"></picture></a>
+</p>
+
+**Current source adds more:** load the history of enabled chats with pause/resume,
+review sources before asking AI, connect read-only MCP clients, run local OCR or
+transcription, and send HMAC-signed webhooks. The 0.7.0 portable preview predates
+these additions; use `main` to try them.
+
+<details>
+<summary><strong>Pick the tools for your case</strong> · history, accounts, media and integrations</summary>
+
+| Task | What you get |
+| --- | --- |
+| [Load older messages](docs/HISTORY.md) | Enabled sources → workspace history, with pause/resume and a signed progress report. |
+| [Export with several accounts](docs/ACCOUNTS.md#multiple-accounts) | Split one chat's acquisition across eligible accounts; each keeps its own session and signing key. |
+| [Bring an existing session](docs/ACCOUNTS.md) | Telegram Desktop TData, Telethon, Pyrogram, StringSession or an auth key. |
+| [Route through a proxy](docs/CONNECTION-SECURITY.md#ip-modes) | Per-workspace SOCKS5, HTTP CONNECT or MTProxy. **Hide IP** mode refuses direct fallback. |
+| [Search and review](docs/ANALYSIS.md) | Local search, optional AI, cited observations and separate analytical reports. |
+| [Connect via MCP](docs/MCP.md) | Seven read-only tools, selected workspaces/chats, expiry and revocation. |
+| [Read images and audio](docs/MEDIA-ANALYSIS.md) | Optional local OCR and transcription; original files stay unchanged. |
+| [Send webhooks](docs/WEBHOOKS.md) | Scoped outgoing events, HMAC signatures, retries and an n8n example. |
+| [Share a focused view](docs/ACCESS.md) | Selected accounts/chats, permissions, expiry and IP restrictions. |
+
+</details>
 
 <p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-divider-static.svg"><img src="docs/assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
