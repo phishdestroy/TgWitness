@@ -19,7 +19,8 @@ def test_replayed_response_never_advances_or_receives_an_ok_witness_post(journal
 
     async def request(method, url, network, headers, **kwargs):
         if not mode["replay"]:
-            answer = capture_head(store, vault, {}, headers["X-TgWitness-Challenge"])
+            answer = capture_head(store, vault, {}, headers["X-TgWitness-Challenge"],
+                                  int(headers["X-TgWitness-Consistency-From"]))
             replies.append(copy.deepcopy(answer))
         else:
             answer = copy.deepcopy(replies[0])
