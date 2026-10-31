@@ -3785,5 +3785,7 @@
 "one": "{n} लिंक बाहर रखा गया: फ़ेक TLS लिंक (ee से शुरू होने वाला सीक्रेट), निजी पते और टूटे हुए लिंक समर्थित नहीं हैं।",
 "other": "{n} लिंक बाहर रखे गए: फेक टीएलएस लिंक (ee से शुरू होने वाला सीक्रेट), निजी पते और टूटे हुए लिंक समर्थित नहीं हैं।"
 },
-"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} लिंक बाहर रखा गया: फ़ेक TLS लिंक (ee से शुरू होने वाला सीक्रेट), निजी पते और टूटे हुए लिंक समर्थित नहीं हैं।"
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} लिंक बाहर रखा गया: फ़ेक TLS लिंक (ee से शुरू होने वाला सीक्रेट), निजी पते और टूटे हुए लिंक समर्थित नहीं हैं।",
+"No collection while process was offline.": "प्रक्रिया ऑफ़लाइन होने के दौरान कोई संग्रह नहीं।",
+"the source was removed before this file was downloaded": "इस फ़ाइल को डाउनलोड करने से पहले स्रोत हटा दिया गया था"
 }

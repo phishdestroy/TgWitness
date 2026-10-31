@@ -3785,5 +3785,7 @@
 "one": "{n} لینک نادیده گرفته شده: لینک‌های Fake TLS (رمز عبور با شروع ee)، آدرس‌های خصوصی و لینک‌های خراب پشتیبانی نمی‌شوند.",
 "other": "{n} لینک نادیده گرفته شده: لینک‌های Fake TLS (رمز عبور شروع‌شده با ee)، آدرس‌های خصوصی و لینک‌های خراب پشتیبانی نمی‌شوند."
 },
-"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} لینک نادیده گرفته شده: لینک‌های Fake TLS (رمز عبور با شروع ee)، آدرس‌های خصوصی و لینک‌های خراب پشتیبانی نمی‌شوند."
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} لینک نادیده گرفته شده: لینک‌های Fake TLS (رمز عبور با شروع ee)، آدرس‌های خصوصی و لینک‌های خراب پشتیبانی نمی‌شوند.",
+"No collection while process was offline.": "هیچ جمع‌آوری در حالی که فرآیند آفلاین بود، انجام نشد.",
+"the source was removed before this file was downloaded": "منبع قبل از دانلود این فایل حذف شده بود"
 }

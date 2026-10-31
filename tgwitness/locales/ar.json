@@ -3893,5 +3893,7 @@
 "other": "تم استبعاد {n} رابط: لا يتم دعم روابط Fake TLS (السر الذي يبدأ بـ ee) والعناوين الخاصة والروابط المعطلة.",
 "zero": "تم استبعاد {n} رابط: لا يتم دعم روابط Fake TLS (السر الذي يبدأ بـ ee) والعناوين الخاصة والروابط المعطوبة."
 },
-"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "تم استبعاد رابط {n}: لا يتم دعم روابط Fake TLS (السر الذي يبدأ بـ ee) والعناوين الخاصة والروابط المعطلة."
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "تم استبعاد رابط {n}: لا يتم دعم روابط Fake TLS (السر الذي يبدأ بـ ee) والعناوين الخاصة والروابط المعطلة.",
+"No collection while process was offline.": "لم يتم التجميع أثناء انقطاع اتصال العملية بالإنترنت.",
+"the source was removed before this file was downloaded": "تمت إزالة المصدر قبل تنزيل هذا الملف"
 }

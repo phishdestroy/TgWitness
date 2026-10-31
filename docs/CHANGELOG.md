@@ -90,6 +90,10 @@
   their size limits, the last list update shows when lists were actually downloaded, and
   a blocked list download disables the update button and offers the proxy setting. Own
   lists say how many links were left out and why.
+- People and chats without a photo no longer fill the browser console with 404 errors,
+  and the panel asks for the high-assurance statement only where it exists. Sign-in tabs
+  wrap long labels instead of cutting them; the offline-gap note, size units and the
+  reason of attachments dropped with a removed source are shown in the panel language.
 - Added scoped, read-only MCP connections and local archive search with optional
   AI source review and separate analytical reports.
 - Added local OCR/transcription for saved attachments and signed outgoing webhooks

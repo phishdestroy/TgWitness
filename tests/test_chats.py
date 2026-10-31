@@ -98,7 +98,7 @@ def test_chats_api(tmp_path):
         messages = client.get("/api/chats/" + str(CHAT) + "/messages").json()["messages"]
         assert messages[0]["deleted"] and messages[0]["sender"]["username"] == "alice"
         assert client.get("/api/chats/" + str(CHAT) + "/messages?limit=0").status_code == 422
-        assert client.get("/api/avatar/44").status_code == 404
+        assert client.get("/api/avatar/44").status_code == 204
         assert client.get("/api/chats", headers={"Authorization": ""}).status_code == 401
         policy = client.get("/api/status").headers["content-security-policy"]
         assert "img-src 'self' data: blob:" in policy and "script-src 'self';" in policy

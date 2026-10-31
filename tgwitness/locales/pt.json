@@ -3785,5 +3785,7 @@
 "one": "{n} link excluído: links de TLS falso (chave secreta que começa com “ee”), endereços privados e links inválidos não são suportados.",
 "other": "{n} links excluídos: links de TLS falso (chave secreta começando com “ee”), endereços privados e links inválidos não são suportados."
 },
-"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} link excluído: links de TLS falso (chave secreta que começa com “ee”), endereços privados e links inválidos não são suportados."
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} link excluído: links de TLS falso (chave secreta que começa com “ee”), endereços privados e links inválidos não são suportados.",
+"No collection while process was offline.": "Não houve coleta enquanto o processo estava offline.",
+"the source was removed before this file was downloaded": "A fonte foi removida antes que este arquivo fosse baixado"
 }

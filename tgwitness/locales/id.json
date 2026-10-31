@@ -3758,5 +3758,7 @@
 "{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
 "other": "{n} tautan yang diabaikan: Tautan Fake TLS (kode rahasia yang dimulai dengan \"ee\"), alamat pribadi, dan tautan yang rusak tidak didukung."
 },
-"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} tautan yang diabaikan: Tautan Fake TLS (kode rahasia yang dimulai dengan \"ee\"), alamat pribadi, dan tautan yang rusak tidak didukung."
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} tautan yang diabaikan: Tautan Fake TLS (kode rahasia yang dimulai dengan \"ee\"), alamat pribadi, dan tautan yang rusak tidak didukung.",
+"No collection while process was offline.": "Tidak ada pengumpulan data saat proses dalam keadaan offline.",
+"the source was removed before this file was downloaded": "sumbernya telah dihapus sebelum berkas ini diunduh"
 }

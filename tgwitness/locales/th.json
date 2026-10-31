@@ -3758,5 +3758,7 @@
 "{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
 "other": "มีลิงก์ {n} ลิงก์ที่ถูกยกเว้น: ลิงก์ Fake TLS (รหัสลับที่เริ่มต้นด้วย ee), ที่อยู่เครือข่ายส่วนตัว และลิงก์ที่ผิดรูปแบบ ไม่ได้รับการสนับสนุน"
 },
-"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "มีลิงก์ {n} ลิงก์ที่ถูกยกเว้น: ลิงก์ Fake TLS (รหัสลับที่เริ่มต้นด้วย ee), ที่อยู่เครือข่ายส่วนตัว และลิงก์ที่ผิดรูปแบบ ไม่ได้รับการสนับสนุน"
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "มีลิงก์ {n} ลิงก์ที่ถูกยกเว้น: ลิงก์ Fake TLS (รหัสลับที่เริ่มต้นด้วย ee), ที่อยู่เครือข่ายส่วนตัว และลิงก์ที่ผิดรูปแบบ ไม่ได้รับการสนับสนุน",
+"No collection while process was offline.": "ไม่มีการเก็บข้อมูลขณะที่กระบวนการอยู่ในสถานะออฟไลน์",
+"the source was removed before this file was downloaded": "แหล่งข้อมูลถูกลบก่อนที่ไฟล์นี้จะถูกดาวน์โหลด"
 }

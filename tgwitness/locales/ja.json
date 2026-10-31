@@ -3758,5 +3758,7 @@
 "{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
 "other": "除外されるリンクは{n}つです：Fake TLSリンク（シークレットが「ee」で始まるもの）、プライベートアドレス、および不正な形式のリンクはサポートされていません。"
 },
-"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "除外されるリンクは{n}つです：Fake TLSリンク（シークレットが「ee」で始まるもの）、プライベートアドレス、および不正な形式のリンクはサポートされていません。"
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "除外されるリンクは{n}つです：Fake TLSリンク（シークレットが「ee」で始まるもの）、プライベートアドレス、および不正な形式のリンクはサポートされていません。",
+"No collection while process was offline.": "プロセスがオフラインだったため、収集は行われませんでした。",
+"the source was removed before this file was downloaded": "このファイルがダウンロードされる前にソースが削除されました"
 }

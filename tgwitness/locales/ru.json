@@ -3839,5 +3839,7 @@
 "few": "Исключены {n} ссылки: ссылки Fake TLS (секретный ключ, начинающийся с «ee»), частные адреса и некорректные ссылки не поддерживаются.",
 "other": "{n} Исключённые ссылки: ссылки с подделкой TLS (секретный ключ, начинающийся с «ee»), частные адреса и некорректные ссылки не поддерживаются."
 },
-"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "Исключена {n} ссылка: ссылки Fake TLS (секретный ключ, начинающийся с «ee»), частные адреса и некорректные ссылки не поддерживаются."
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "Исключена {n} ссылка: ссылки Fake TLS (секретный ключ, начинающийся с «ee»), частные адреса и некорректные ссылки не поддерживаются.",
+"No collection while process was offline.": "Сбор данных не производился, поскольку процесс находился в автономном режиме.",
+"the source was removed before this file was downloaded": "Источник был удалён до того, как этот файл был загружен"
 }

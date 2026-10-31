@@ -3758,5 +3758,7 @@
 "{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
 "other": "{n} 個連結未被納入：不支援偽 TLS 連結（密鑰以 ee 開頭）、私有網段位址及格式錯誤的連結。"
 },
-"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} 個連結未被納入：不支援偽 TLS 連結（密鑰以 ee 開頭）、私有網段位址及格式錯誤的連結。"
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} 個連結未被納入：不支援偽 TLS 連結（密鑰以 ee 開頭）、私有網段位址及格式錯誤的連結。",
+"No collection while process was offline.": "程序離線期間未進行收集。",
+"the source was removed before this file was downloaded": "此檔案下載前，來源已被移除"
 }

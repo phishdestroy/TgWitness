@@ -3785,5 +3785,7 @@
 "one": "{n}টি লিঙ্ক বাদ দেওয়া হয়েছে: Fake TLS লিঙ্ক (গোপনীয়তা ee দিয়ে শুরু), ব্যক্তিগত ঠিকানা এবং ভাঙা লিঙ্ক সমর্থিত নয়।",
 "other": "{n}টি লিঙ্ক বাদ দেওয়া হয়েছে: Fake TLS লিঙ্ক (গোপনীয়তা ee দিয়ে শুরু), ব্যক্তিগত ঠিকানা এবং ভাঙা লিঙ্ক সমর্থিত নয়।"
 },
-"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n}টি লিঙ্ক বাদ দেওয়া হয়েছে: Fake TLS লিঙ্ক (গোপনীয়তা ee দিয়ে শুরু), ব্যক্তিগত ঠিকানা এবং ভাঙা লিঙ্ক সমর্থিত নয়।"
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n}টি লিঙ্ক বাদ দেওয়া হয়েছে: Fake TLS লিঙ্ক (গোপনীয়তা ee দিয়ে শুরু), ব্যক্তিগত ঠিকানা এবং ভাঙা লিঙ্ক সমর্থিত নয়।",
+"No collection while process was offline.": "প্রক্রিয়া অফলাইনে থাকায় কোনো সংগ্রহ হয়নি।",
+"the source was removed before this file was downloaded": "এই ফাইলটি ডাউনলোড করার আগে উৎসটি মুছে ফেলা হয়েছে"
 }
