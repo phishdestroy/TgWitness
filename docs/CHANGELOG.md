@@ -69,6 +69,9 @@
   (about 0.3 MB/s on a small server): a busy MTProxy route no longer holds a whole CPU
   core and delays every panel answer by seconds. The chats list shows that it is loading,
   and journal rows explain skipped and failed attachments in the panel language.
+- The panel, proof, sealed and MCP servers keep idle connections for 150 seconds instead
+  of 5: Caddy and cloudflared reused connections the server had already closed, and the
+  browser received sporadic 502 answers.
 - Added scoped, read-only MCP connections and local archive search with optional
   AI source review and separate analytical reports.
 - Added local OCR/transcription for saved attachments and signed outgoing webhooks
