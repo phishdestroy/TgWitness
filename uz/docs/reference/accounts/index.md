@@ -224,6 +224,10 @@ Hisob tanlovchisining yonidagi **+** tugmasini bosing yoki **Hisob → Sozlamala
 - Asosiy panel tokeni barcha ish maydonlarini nazorat qiladi. [Berilgan kirish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/access/) boshqalarni tanlangan hisoblar va suhbatlarga, alohida ruxsatnomalar va sessiya cheklovlari bilan cheklashi mumkin.
 - **Hisoblar** ish maydonini qayta nomlaydi va qo'shilgan ish maydonini sessiyasi, jurnali, manbalari va imzolash kaliti bilan o'chirib tashlaydi. Asosiy ish maydoni paneldan o'chirilmaydi.
 
+### Ommaviy import va hisob guruhlari
+
+Bir nechta hisob qo‘shish, fayllarni asosiy nomi bo‘yicha juftlash va har bir kirish natijasini ko‘rish uchun **Hisoblar → Hisoblarni import qilish** bo‘limidan foydalaning. Har bir hisob alohida ish maydoniga ega. Guruhlar seanslar, kalitlar yoki dalillarni birlashtirmasdan namunadan tanlangan sozlamalarni nusxalashi mumkin. [import va guruhlar qo‘llanmasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) va [MTProxy havuzi boshqaruv paneli](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)ga qarang.
+
 ## Chiqish
 
 **Hisob → Telegramdan chiqish** (kuzatish to'xtatilgan holda) Telegramdan sessiyani yakunlashni so'raydi, shuning uchun u hisobning **Sozlamalar → Qurilmalar** bo'limidan ham yo'qoladi va ish maydoni shifri omboridan sessiyani o'chirib tashlaydi. Jurnal, manbalar, sozlamalar va imzolash kaliti saqlanib qoladi, va jurnal chiqishni qayd etadi. Ish maydoni hanuzgacha o'z hisobiga tegishli bo'lib qoladi: faqat shu hisob qayta ulanishi mumkin. Agar Telegram javob bermasa ham, sessiya bu yerda baribir o'chiriladi va panel bunga oid xabarni ko'rsatadi; Telegramda **Sozlamalar → Qurilmalar** bo'limida sessiyani yakunlang.

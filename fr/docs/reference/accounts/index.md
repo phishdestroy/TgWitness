@@ -224,6 +224,10 @@ Appuyez sur **+** à côté du sélecteur de compte, ou ouvrez **Compte → Para
 - Le jeton du panneau principal contrôle l’ensemble des espaces de travail. [Les droits d’accès accordés](https://phishdestroy.github.io/TgWitness/fr/docs/reference/access/) permettent de limiter l’accès d’autres personnes à certains comptes et discussions, avec des autorisations distinctes et des limites de session.
 - **La fonction « Comptes »** permet de renommer un espace de travail et d’en supprimer un ajouté, avec sa session, son journal, ses sources et sa clé de signature. L’espace de travail principal ne peut pas être supprimé depuis le panneau.
 
+### Importation par lots et groupes de comptes
+
+Ouvrez **Comptes → Importer des comptes** pour ajouter plusieurs comptes, associer les fichiers par nom et voir le résultat de chaque connexion. Chaque compte dispose de son propre espace de travail. Les groupes peuvent copier certains réglages depuis un modèle sans fusionner les sessions, les clés ni les preuves. Consultez [le guide d’importation et des groupes](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) et [le tableau de bord du pool MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
+
 ## Se déconnecter
 
 **Compte → Se déconnecter de Telegram** (avec la surveillance en pause) demande à Telegram de mettre fin à la session ; celle-ci disparaît donc également de la rubrique **Paramètres → Appareils** du compte, et la session est supprimée du coffre-fort de l’espace de travail. Le journal, les sources, les paramètres et la clé de signature sont conservés, et le journal enregistre la déconnexion. L’espace de travail appartient toujours à son compte : seul ce compte peut s’y reconnecter. Si Telegram ne répond pas, la session est tout de même supprimée ici et le panneau l’indique ; mettez-y fin dans Telegram sous **Paramètres → Appareils**.

@@ -224,6 +224,10 @@ Press **+** beside the account selector, or open **Account → Settings → Conn
 - The main panel token controls all workspaces. [Issued access](https://phishdestroy.github.io/TgWitness/docs/reference/access/) can restrict other people to selected accounts and chats, with separate permissions and session limits.
 - **Accounts** renames a workspace and deletes an added one, with its session, journal, sources and signing key. The main workspace cannot be deleted from the panel.
 
+### Bulk import and account groups
+
+Use **Accounts → Import accounts** to add several accounts, pair files by basename and see each login result. Each account gets its own workspace. Groups can copy selected settings from a template without merging sessions, keys or evidence. See [the import and groups guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) and [the MTProxy pool dashboard](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
+
 ## Sign out
 
 **Account → Sign out of Telegram** (with observation paused) asks Telegram to end the session, so it also disappears from the account's **Settings → Devices**, and removes the session from the workspace vault. The journal, sources, settings and signing key stay, and the journal records the sign-out. The workspace still belongs to its account: only that account can connect to it again. If Telegram does not answer, the session is still removed here and the panel says so; end it in Telegram under **Settings → Devices**.

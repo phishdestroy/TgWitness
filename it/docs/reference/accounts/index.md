@@ -224,6 +224,10 @@ Premere **+** accanto al selettore dell’account, oppure aprire **Account → I
 - Il token del pannello principale controlla tutte le aree di lavoro. [L’accesso concesso](https://phishdestroy.github.io/TgWitness/it/docs/reference/access/) può limitare l’accesso di altre persone ad account e chat selezionati, con autorizzazioni distinte e limiti di sessione.
 - **La voce «Accounts»** rinomina un’area di lavoro ed elimina quella aggiunta, insieme alla relativa sessione, al registro, alle fonti e alla chiave di firma. L’area di lavoro principale non può essere eliminata dal pannello.
 
+### Importazione in blocco e gruppi di account
+
+Usa **Account → Importazione degli account** per aggiungere più account, abbinare i file per nome e vedere l’esito di ogni accesso. Ogni account riceve un proprio spazio di lavoro. I gruppi possono copiare impostazioni selezionate da un modello senza unire sessioni, chiavi o prove. Consulta [la guida a importazione e gruppi](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) e [il pannello del pool MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
+
 ## Esci
 
 **Account → Esci da Telegram** (con il monitoraggio in pausa) richiede a Telegram di terminare la sessione, che quindi scompare anche dalla sezione **Impostazioni → Dispositivi** dell’account e viene rimossa dal vault dell’area di lavoro. Il registro, le fonti, le impostazioni e la chiave di firma rimangono, e il registro registra l’uscita. L’area di lavoro appartiene ancora al proprio account: solo quell’ account potrà riconnettersi ad essa. Se Telegram non risponde, la sessione viene comunque rimossa qui e il pannello lo segnala; la si può terminare in Telegram alla voce **Impostazioni → Dispositivi**.

@@ -6,6 +6,8 @@ Tutte le modifiche per versione, comprese quelle non ancora rilasciate.
 
 ## Unreleased
 
+- Added batch session import and account groups with template settings. Failed imports leave no empty workspace; locking or switching stops the remaining queue.
+- Added the MTProxy dashboard: ping, status, countries, filters, shared custom lists and optional GitHub search. Routes remain separate for each account.
 - Added scoped, read-only MCP connections and local archive search with optional AI source review and separate analytical reports.
 - Added local OCR/transcription for saved attachments and signed outgoing webhooks with delivery status, retries and an n8n example.
 - Connected the new workflows across README, Wiki and translated site reference. These additions require current source; the 0.7.0 portable preview predates them.

@@ -33,6 +33,10 @@
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Tìm kiếm trong tài liệu</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Hãy thử các thuật ngữ như proxy, chuỗi băm, token hoặc witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Tìm kiếm rõ ràng" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Hãy nhập một từ khóa để tìm kiếm trong các hướng dẫn và tài liệu tham khảo. Kết quả tìm kiếm sẽ được lưu lại trong trình duyệt của quý vị.</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="language-notice">Trang này chỉ có sẵn bằng tiếng Anh.</p><p class="eyebrow">Tham khảo / An ninh &amp; dự án</p><h1>Bản ghi thay đổi</h1><p class="guide-outcome">Mọi thay đổi theo từng phiên bản, bao gồm cả những thay đổi chưa được phát hành.</p><div class="wiki-body" lang=en dir=ltr><h2 id="unreleased">Unreleased<a class="anchor" href="#unreleased" aria-label="Liên kết đến phần này">#</a></h2>
 <ul>
+<li>Added batch session import and account groups with template settings. Failed
+    imports leave no empty workspace; locking or switching stops the remaining queue.</li>
+<li>Added the MTProxy dashboard: ping, status, countries, filters, shared custom
+    lists and optional GitHub search. Routes remain separate for each account.</li>
 <li>Added scoped, read-only MCP connections and local archive search with optional
     AI source review and separate analytical reports.</li>
 <li>Added local OCR/transcription for saved attachments and signed outgoing webhooks

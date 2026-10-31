@@ -224,6 +224,10 @@ Naciśnij przycisk **+** obok selektora konta lub otwórz **Konto → Ustawienia
 - Główny token panelu kontroluje wszystkie obszary robocze. [Przyznany dostęp](https://phishdestroy.github.io/TgWitness/pl/docs/reference/access/) może ograniczać innym osobom dostęp do wybranych kont i czatów, z oddzielnymi uprawnieniami i limitami sesji.
 - **Funkcja „Konta”** zmienia nazwę obszaru roboczego oraz usuwa dodany obszar wraz z jego sesją, dziennikiem, źródłami i kluczem podpisującym. Głównego obszaru roboczego nie można usunąć z panelu.
 
+### Import zbiorczy i grupy kont
+
+Otwórz **Konta → Importowanie kont**, aby dodać wiele kont, dopasować pliki według nazwy i sprawdzić wynik każdego logowania. Każde konto otrzymuje własny obszar roboczy. Grupy mogą kopiować wybrane ustawienia ze wzorca bez łączenia sesji, kluczy ani dowodów. Zobacz [przewodnik po imporcie i grupach](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) i [panel puli MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
+
 ## Wyloguj się
 
 **Konto → Wyloguj się z Telegrama** (z wstrzymanym monitorowaniem) powoduje, że Telegram kończy sesję, w związku z czym znika ona również z sekcji **Ustawienia → Urządzenia** danego konta oraz jest usuwana z magazynu obszaru roboczego. Dziennik, źródła, ustawienia i klucz podpisujący pozostają, a dziennik rejestruje fakt wylogowania. Obszar roboczy nadal należy do danego konta: tylko to konto może ponownie nawiązać z nim połączenie. Jeśli aplikacja Telegram nie odpowiada, sesja i tak zostanie usunięta w tym miejscu, a panel wyświetli odpowiedni komunikat; należy ją zakończyć w aplikacji Telegram w sekcji **Ustawienia → Urządzenia**.

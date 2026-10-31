@@ -33,6 +33,10 @@
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Rechercher dans la documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Essayez « proxy », « chaîne de hachage », « jeton » ou « témoin »…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Recherche claire" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Saisissez un mot pour effectuer une recherche dans les guides et la documentation de référence. La recherche s&#x27;effectue directement dans votre navigateur.</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="language-notice">Cette page est disponible uniquement en anglais.</p><p class="eyebrow">Référence / Sécurité et projet</p><h1>Journal des modifications</h1><p class="guide-outcome">Toutes les modifications par version, y compris celles qui n’ont pas encore été publiées.</p><div class="wiki-body" lang=en dir=ltr><h2 id="unreleased">Unreleased<a class="anchor" href="#unreleased" aria-label="Lien vers cette section">#</a></h2>
 <ul>
+<li>Added batch session import and account groups with template settings. Failed
+    imports leave no empty workspace; locking or switching stops the remaining queue.</li>
+<li>Added the MTProxy dashboard: ping, status, countries, filters, shared custom
+    lists and optional GitHub search. Routes remain separate for each account.</li>
 <li>Added scoped, read-only MCP connections and local archive search with optional
     AI source review and separate analytical reports.</li>
 <li>Added local OCR/transcription for saved attachments and signed outgoing webhooks

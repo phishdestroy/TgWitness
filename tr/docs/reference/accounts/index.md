@@ -224,6 +224,10 @@ Hesap seçicinin yanındaki **+** tuşuna basın veya **Hesap → Ayarlar → Ba
 - Ana panel jetonu tüm çalışma alanlarını kontrol eder. [Verilen erişim izni](https://phishdestroy.github.io/TgWitness/tr/docs/reference/access/), ayrı izinler ve oturum sınırlamalarıyla diğer kişilerin erişimini belirli hesaplar ve sohbetlerle sınırlayabilir.
 - **Hesaplar,** bir çalışma alanının adını değiştirir ve eklenen bir çalışma alanını, oturumu, günlüğü, kaynakları ve imzalama anahtarıyla birlikte siler. Ana çalışma alanı panelden silinemez.
 
+### Toplu içe aktarma ve hesap grupları
+
+Birden fazla hesap eklemek, dosyaları temel adlarına göre eşleştirmek ve her girişin sonucunu görmek için **Hesaplar → Hesapları içe aktar** bölümünü kullanın. Her hesabın kendi çalışma alanı vardır. Gruplar oturumları, anahtarları veya kanıtları birleştirmeden bir şablondan seçilen ayarları kopyalayabilir. Bkz. [içe aktarma ve grup kılavuzu](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) ve [MTProxy havuz paneli](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
+
 ## Çıkış
 
 **Hesap → Telegram'dan çıkış yap** (gözlem duraklatılmış halde), Telegram'dan oturumu sonlandırmasını ister; böylece oturum, hesabın **Ayarlar → Cihazlar** bölümünden de kaybolur ve çalışma alanı kasasından kaldırılır. Günlük, kaynaklar, ayarlar ve imzalama anahtarı kalır ve günlük, çıkış işlemini kaydeder. Çalışma alanı hâlâ ilgili hesaba aittir: yalnızca o hesap tekrar bağlanabilir. Telegram yanıt vermezse, oturum yine de buradan kaldırılır ve panelde bu durum belirtilir; Telegram’da **Ayarlar → Cihazlar** altından oturumu sonlandırın.

@@ -224,6 +224,10 @@ Tekan **+** di samping pemilih akun, atau buka **Akun → Pengaturan → Pengatu
 - Token panel utama mengontrol semua ruang kerja. [Akses yang diberikan](https://phishdestroy.github.io/TgWitness/id/docs/reference/access/) dapat membatasi orang lain hanya pada akun dan obrolan tertentu, dengan izin dan batas sesi yang terpisah.
 - **Akun** mengganti nama ruang kerja dan menghapus ruang kerja yang ditambahkan, beserta sesi, jurnal, sumber, dan kunci penandatanganan. Ruang kerja utama tidak dapat dihapus dari panel.
 
+### Impor massal dan grup akun
+
+Gunakan **Akun → Impor akun** untuk menambahkan beberapa akun, memasangkan berkas berdasarkan nama dasar, dan melihat hasil setiap login. Setiap akun mendapat ruang kerja sendiri. Grup dapat menyalin pengaturan terpilih dari templat tanpa menggabungkan sesi, kunci, atau bukti. Lihat [panduan impor dan grup](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) dan [dasbor kumpulan MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
+
 ## Keluar
 
 **Akun → Keluar dari Telegram** (dengan pemantauan ditangguhkan) meminta Telegram untuk mengakhiri sesi, sehingga sesi tersebut juga menghilang dari **Pengaturan → Perangkat** akun, dan menghapus sesi tersebut dari brankas ruang kerja. Jurnal, sumber, pengaturan, dan kunci penandatanganan tetap ada, dan jurnal mencatat proses keluar tersebut. Ruang kerja tersebut masih milik akunnya: hanya akun tersebut yang dapat terhubung kembali ke sana. Jika Telegram tidak merespons, sesi tersebut tetap dihapus di sini dan panel akan menampilkannya; akhiri sesi tersebut di Telegram melalui **Pengaturan → Perangkat**.

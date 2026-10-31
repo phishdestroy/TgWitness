@@ -224,6 +224,10 @@ Hãy nhấn vào mã **+** bên cạnh trình chọn tài khoản, hoặc truy c
 - Token bảng điều khiển chính quản lý tất cả các không gian làm việc. [Quyền truy cập được cấp](https://phishdestroy.github.io/TgWitness/vi/docs/reference/access/) có thể giới hạn quyền của người khác đối với các tài khoản và cuộc trò chuyện đã chọn, kèm theo các quyền truy cập riêng biệt và giới hạn phiên làm việc.
 - **Tài khoản** sẽ đổi tên một không gian làm việc và xóa một không gian làm việc đã thêm vào, cùng với phiên làm việc, nhật ký, các nguồn và khóa ký của không gian đó. Không gian làm việc chính không thể bị xóa khỏi bảng điều khiển.
 
+### Nhập hàng loạt và nhóm tài khoản
+
+Dùng **Tài khoản → Nhập tài khoản** để thêm nhiều tài khoản, ghép tệp theo tên gốc và xem kết quả từng lần đăng nhập. Mỗi tài khoản có không gian làm việc riêng. Nhóm có thể sao chép các thiết lập đã chọn từ mẫu mà không gộp phiên, khóa hay bằng chứng. Xem [hướng dẫn nhập và nhóm](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) và [bảng điều khiển nhóm MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
+
 ## Đăng xuất
 
 **Tài khoản → Đăng xuất khỏi Telegram** (với chế độ quan sát tạm dừng) sẽ yêu cầu Telegram kết thúc phiên làm việc, do đó phiên này cũng sẽ biến mất khỏi mục **Cài đặt → Thiết bị** của tài khoản, đồng thời xóa phiên làm việc khỏi kho lưu trữ không gian làm việc. Nhật ký, các nguồn, cài đặt và khóa ký vẫn được giữ lại, và nhật ký sẽ ghi lại thao tác đăng xuất này. Không gian làm việc vẫn thuộc về tài khoản đó: chỉ có tài khoản đó mới có thể kết nối lại với nó. Nếu Telegram không phản hồi, phiên làm việc vẫn sẽ bị xóa tại đây và bảng điều khiển sẽ hiển thị thông báo tương ứng; quý vị hãy kết thúc phiên làm việc trong Telegram tại **Cài đặt → Thiết bị**.

@@ -224,6 +224,10 @@ TData 即是 Telegram Desktop 應用程式（來自 desktop.telegram.org 的跨�
 - 主面板中的「代幣」功能可控制所有工作區。[所發出的存取權限](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/access/)可將其他使用者限制在選定的帳戶和聊天室中，並可設定獨立的權限與會話限制。
 - **帳戶會**重新命名一個工作區，並刪除已新增的工作區，連同其會話、日誌、 來源及簽名金鑰一併刪除。主工作區無法從控制面板中刪除。
 
+### 批次匯入和帳戶群組
+
+使用 **帳戶 → 匯入帳戶** 新增多個帳戶，依基本檔名配對檔案，並查看每次登入的結果。每個帳戶都有獨立的工作區。群組可從範本複製選定的設定，而不會合併工作階段、金鑰或證據。請參閱[匯入和群組指南](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings)和[MTProxy 集區控制台](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)。
+
 ## 登出
 
 「**帳戶 → 登出 Telegram**（暫停監測）」會要求 Telegram 終止該 連線，因此該連線也會從帳戶的「**設定 → 裝置**」中消失，並將該 連線從工作區金庫中移除。日誌、來源、設定和簽名金鑰仍會保留，且 日誌會記錄此次登出操作。 該工作區仍歸屬於其帳戶：僅有該 帳戶可再次連線至該工作區。若 Telegram 未回應，該連線仍會在此處被移除 ，且控制面板會顯示此訊息；請在 Telegram 的「**設定」→「裝置」**中結束該連線。

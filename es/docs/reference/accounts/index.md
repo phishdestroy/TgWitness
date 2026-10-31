@@ -224,6 +224,10 @@ Pulse **+** junto al selector de cuentas, o bien abra **Cuenta → Ajustes → A
 - El token del panel principal controla todos los espacios de trabajo. [El acceso concedido](https://phishdestroy.github.io/TgWitness/es/docs/reference/access/) puede limitar el acceso de otras personas a cuentas y chats seleccionados, con permisos y límites de sesión independientes.
 - **La función «Cuentas»** cambia el nombre de un espacio de trabajo y elimina uno añadido, junto con su sesión, su registro, sus fuentes y su clave de firma. El espacio de trabajo principal no se puede eliminar desde el panel.
 
+### Importación masiva y grupos de cuentas
+
+Usa **Cuentas → Importar cuentas** para añadir varias cuentas, emparejar archivos por nombre y ver el resultado de cada inicio de sesión. Cada cuenta tiene su propio espacio de trabajo. Los grupos pueden copiar ajustes seleccionados de una plantilla sin combinar sesiones, claves ni pruebas. Consulta [la guía de importación y grupos](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) y [el panel del conjunto MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
+
 ## Cerrar sesión
 
 **Cuenta → Cerrar sesión en Telegram** (con la observación en pausa) solicita a Telegram que finalice la sesión, por lo que también desaparece de **Ajustes → Dispositivos** de la cuenta y elimina la sesión del almacén del espacio de trabajo. El registro, las fuentes, los ajustes y la clave de firma permanecen, y el registro recoge el cierre de sesión. El espacio de trabajo sigue perteneciendo a su cuenta: solo esa cuenta puede volver a conectarse a él. Si Telegram no responde, la sesión se elimina igualmente aquí y el panel lo indica; finalícela en Telegram en **Ajustes → Dispositivos**.

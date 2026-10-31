@@ -224,6 +224,10 @@ Drücken Sie **+** neben der Kontoauswahl oder öffnen Sie **Konto → Einstellu
 - Das Haupt-Panel-Token steuert alle Arbeitsbereiche. [Durch die Erteilung von Zugriffsrechten](https://phishdestroy.github.io/TgWitness/de/docs/reference/access/) können andere Personen auf ausgewählte Konten und Chats beschränkt werden, wobei separate Berechtigungen und Sitzungslimits gelten.
 - **„Accounts“** benennt einen Arbeitsbereich um und löscht einen hinzugefügten Arbeitsbereich samt dessen Sitzung, Protokoll, Quellen und Signaturschlüssel. Der Hauptarbeitsbereich kann nicht über das Bedienfeld gelöscht werden.
 
+### Stapelimport und Kontogruppen
+
+Unter **Konten → Konten importieren** können Sie mehrere Konten hinzufügen, Dateien nach Basisnamen zuordnen und jedes Anmeldeergebnis sehen. Jedes Konto erhält einen eigenen Arbeitsbereich. Gruppen können ausgewählte Einstellungen aus einer Vorlage kopieren, ohne Sitzungen, Schlüssel oder Belege zusammenzuführen. Siehe [die Anleitung für Import und Gruppen](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) und [das MTProxy-Pool-Dashboard](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
+
 ## Abmelden
 
 **„Konto → Bei Telegram abmelden“** (bei pausierter Überwachung) fordert Telegram auf, die Sitzung zu beenden, sodass diese auch aus den **„Einstellungen → Geräte**“ des Kontos verschwindet und die Sitzung aus dem Arbeitsbereich-Tresor entfernt wird. Das Protokoll, die Quellen, die Einstellungen und der Signaturschlüssel bleiben erhalten, und das Protokoll zeichnet die Abmeldung auf. Der Arbeitsbereich gehört weiterhin zu seinem Konto: Nur dieses Konto kann sich erneut damit verbinden. Wenn Telegram nicht antwortet, wird die Sitzung dennoch hier entfernt und dies wird im Bedienfeld angezeigt; beenden Sie sie in Telegram unter **„Einstellungen“ → „Geräte**“.
