@@ -7,6 +7,7 @@ import uuid
 from starlette.responses import JSONResponse
 
 from . import health
+from .account_import import session_key
 
 
 # What a group shares, copied from its template workspace: setting keys in each workspace's store.
@@ -28,16 +29,34 @@ class Profiles:
         label = app.state.store.get_setting("profile_label", "Main account")
         self.entries = {"default": {"id": "default", "label": label, "app": app, "cm": None}}
         self.opening = {}
+        self.importing = set()  # authorization keys of imports still connecting
         self.lock = asyncio.Lock()
         app.state.collector.account_guard = self.check_account
 
-    def check_account(self, account_id, collector):
+    def holder(self, account_id=None, key=None, collector=None):
+        """The workspace that already holds this Telegram account, by its ID once signed in or by the
+        authorization key of its session, or None."""
         for entry in self.entries.values():
             other = entry["app"]
-            if other and other.state.collector is not collector:
-                account = other.state.store.get_setting("account", {}) or {}
-                if account.get("id") == account_id:
-                    raise ValueError("This Telegram account already belongs to another profile. Use its existing workspace.")
+            if not other or other.state.collector is collector:
+                continue
+            account = other.state.store.get_setting("account", {}) or {}
+            if account_id is not None and account.get("id") == account_id:
+                return entry
+            if key:
+                try:
+                    held = session_key(other.state.vault.read("credentials").get("session"))
+                except Exception:
+                    held = None
+                if held == key:
+                    return entry
+        return None
+
+    def check_account(self, account_id, collector, key=None):
+        """Refuse an account another workspace holds. An imported session is checked by its key before it
+        connects: the same key from a second address can make Telegram revoke it (AUTH_KEY_DUPLICATED)."""
+        if self.holder(account_id, key, collector):
+            raise ValueError("This Telegram account already belongs to another profile. Use its existing workspace.")
 
     async def open(self):
         try:

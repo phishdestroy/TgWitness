@@ -245,7 +245,7 @@ def test_endpoints_require_auth_reject_demo_and_isolate_workspaces(tmp_path):
         prefix = f"/profiles/{second['id']}/api/"
         assert client.post(prefix + "interactions", json=body).status_code == 400
         assert client.post(prefix + "auth/configure", json={"api_id": 124, "api_hash": "b" * 32,
-                                                           "session": saved_session()}).status_code == 200
+                                                           "session": saved_session(b"y")}).status_code == 200
         child = app.state.profiles.entries[second["id"]]["app"]
         child.state.store.set_target(SHOP_BOT, "Shop", "bot", True)
         assert client.post(prefix + "interactions", json={**body, "text": "from other"}).json()["status"] == "succeeded"

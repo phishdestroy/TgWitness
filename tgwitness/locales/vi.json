@@ -3336,5 +3336,22 @@
 "The downloaded size differs from the observed attachment": "Kích thước tệp tải xuống khác với kích thước tệp đính kèm được ghi nhận",
 "The queued file differs from the signed observation": "Tệp đang chờ xử lý khác với bản ghi quan sát đã được ký xác thực",
 "The saved copy of this file is damaged": "Bản sao đã lưu của tệp này bị hỏng",
-"Telegram account not identified yet": "Tài khoản Telegram chưa được xác định"
+"Telegram account not identified yet": "Tài khoản Telegram chưa được xác định",
+"Stop after this account": "Dừng lại sau tài khoản này",
+"This Telegram account already has a workspace: {label}.": "Tài khoản Telegram này đã có một không gian làm việc: {label}.",
+"This Telegram account is being imported right now.": "Tài khoản Telegram này hiện đang được nhập.",
+"Telegram did not answer in time. Try again later.": "Telegram chưa phản hồi kịp thời. Vui lòng thử lại sau.",
+"Start all": "Bắt đầu tất cả",
+"Pause all": "Tạm dừng tất cả",
+"Capture and monitoring": "Ghi lại và giám sát",
+"Recheck schedule": "Kiểm tra lại lịch trình",
+"IP protection mode": "Chế độ bảo vệ IP",
+"{n} workspaces started.": {
+"other": "{n} không gian làm việc đã bắt đầu."
+},
+"{n} workspace started.": "{n} không gian làm việc đã bắt đầu.",
+"{n} workspaces paused.": {
+"other": "{n} không gian làm việc đã bị tạm dừng."
+},
+"{n} workspace paused.": "{n} không gian làm việc đã bị tạm dừng."
 }

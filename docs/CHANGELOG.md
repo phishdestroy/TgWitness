@@ -50,6 +50,12 @@
 - Public proxy lists are parsed once, and again only after a list, a source setting or the
   GitHub token changes. Every status read of every workspace parsed them on the event loop
   that also carries Telegram traffic; with 10 workspaces the account list took 690 ms, now 7 ms.
+- Bulk import refuses a session another workspace already holds before it connects: the same
+  key from a second proxy address can make Telegram revoke it. An imported workspace
+  disconnects until its sources are chosen, imports no longer hold the other workspaces'
+  operations, an import can be stopped after the current account, files that are not
+  account files are shown as such, and import errors appear in the panel language.
+  Account groups can start or pause all their workspaces at once.
 - Added scoped, read-only MCP connections and local archive search with optional
   AI source review and separate analytical reports.
 - Added local OCR/transcription for saved attachments and signed outgoing webhooks

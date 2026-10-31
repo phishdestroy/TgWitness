@@ -3336,5 +3336,22 @@
 "The downloaded size differs from the observed attachment": "다운로드된 크기는 확인된 첨부 파일의 크기와 다릅니다.",
 "The queued file differs from the signed observation": "대기 중인 파일은 서명된 관찰 기록과 다릅니다.",
 "The saved copy of this file is damaged": "이 파일의 저장된 사본이 손상되었습니다.",
-"Telegram account not identified yet": "텔레그램 계정이 아직 확인되지 않았습니다"
+"Telegram account not identified yet": "텔레그램 계정이 아직 확인되지 않았습니다",
+"Stop after this account": "이 계정 이후 중지",
+"This Telegram account already has a workspace: {label}.": "이 텔레그램 계정에는 이미 {label}이라는 작업 공간이 있습니다.",
+"This Telegram account is being imported right now.": "이 텔레그램 계정은 현재 가져오기 중입니다.",
+"Telegram did not answer in time. Try again later.": "Telegram에서 제때 응답하지 않았습니다. 나중에 다시 시도해 주세요.",
+"Start all": "모두 시작",
+"Pause all": "모두 일시 중지",
+"Capture and monitoring": "캡처 및 모니터링",
+"Recheck schedule": "일정 재확인",
+"IP protection mode": "IP 보호 모드",
+"{n} workspaces started.": {
+"other": "{n}개의 작업 공간이 시작되었습니다."
+},
+"{n} workspace started.": "{n}개의 작업 공간이 시작되었습니다.",
+"{n} workspaces paused.": {
+"other": "{n}개의 작업 공간이 일시 중지되었습니다."
+},
+"{n} workspace paused.": "{n}개의 작업 공간이 일시 중지되었습니다."
 }

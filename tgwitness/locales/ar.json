@@ -3456,5 +3456,32 @@
 "The downloaded size differs from the observed attachment": "يختلف حجم الملف الذي تم تنزيله عن حجم المرفق المرصود",
 "The queued file differs from the signed observation": "يختلف الملف الموجود في قائمة الانتظار عن الملاحظة الموقعة",
 "The saved copy of this file is damaged": "النسخة المحفوظة من هذا الملف تالفة",
-"Telegram account not identified yet": "لم يتم تحديد حساب Telegram بعد"
+"Telegram account not identified yet": "لم يتم تحديد حساب Telegram بعد",
+"Stop after this account": "التوقف بعد هذا الحساب",
+"This Telegram account already has a workspace: {label}.": "يحتوي حساب Telegram هذا بالفعل على مساحة عمل: {label}.",
+"This Telegram account is being imported right now.": "يتم استيراد حساب Telegram هذا في الوقت الحالي.",
+"Telegram did not answer in time. Try again later.": "لم يرد Telegram في الوقت المحدد. حاول مرة أخرى لاحقًا.",
+"Start all": "بدء الكل",
+"Pause all": "إيقاف كل شيء مؤقتًا",
+"Capture and monitoring": "التسجيل والمراقبة",
+"Recheck schedule": "إعادة التحقق من الجدول",
+"IP protection mode": "وضع حماية IP",
+"{n} workspaces started.": {
+"one": "بدأت مساحة عمل {n}.",
+"few": "بدأت {n} مساحات عمل.",
+"two": "بدأت مساحة عمل {n}.",
+"many": "تم بدء المراقبة في {n} مساحة عمل.",
+"other": "بدأت {n} مساحة عمل.",
+"zero": "تم بدء المراقبة في {n} مساحة عمل."
+},
+"{n} workspace started.": "بدأت مساحة عمل {n}.",
+"{n} workspaces paused.": {
+"one": "تم إيقاف المراقبة في مساحة عمل {n}.",
+"few": "تم إيقاف المراقبة في {n} مساحات عمل.",
+"two": "تم إيقاف المراقبة في {n} مساحات عمل.",
+"many": "تم إيقاف المراقبة في {n} مساحة عمل.",
+"other": "تم إيقاف المراقبة في {n} مساحة عمل.",
+"zero": "تم إيقاف المراقبة في {n} مساحة عمل."
+},
+"{n} workspace paused.": "تم إيقاف المراقبة في مساحة عمل {n}."
 }

@@ -33,14 +33,14 @@ from .profiles import GROUP_SECTIONS, Profiles, ProfileDispatch
 from .multi_export import MultiExport
 from .provenance import run_receipt
 from .middleware import RequestLimit, request_limit
-from .account_import import import_accounts, IMPORT_REQUEST_LIMIT
+from .account_import import import_accounts, IMPORT_REQUEST_LIMIT, session_key
 from .anchor import request_archive
 from .anchoring import EvidenceMode, anchor_loop, evidence_settings, request_anchor
 from . import replica
 from . import alerts
 from .network import NetworkConfig, RoutePolicy, parse_mtproxy_link
 from . import proxy_catalog, proxy_sources
-from .proxy_catalog import ProxyPool, PublicCatalog, feed_network
+from .proxy_catalog import NoProxyAvailable, ProxyPool, PublicCatalog, feed_network
 from .monitoring import Capture, Monitoring, capture_settings, monitoring_settings
 from .scope import (EXCLUDE_LIMIT, WIDE_WARNING, Recheck, ScopeUpdate, recheck_settings, scope_settings,
                     unexclude)
@@ -650,33 +650,47 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             if not account.get("session"):
                 raise HTTPException(400, "These files hold no login session. Add the .session or TData of the account.")
             registry = app.state.profiles
-            expected = account.get("expected_user_id")
-            for entry in registry.entries.values():
-                known = entry["app"].state.store.get_setting("account", {}) if entry.get("app") else {}
-                if expected and (known or {}).get("id") == expected:
-                    raise HTTPException(409, "This Telegram account already has a workspace: " + entry["label"] + ".")
+            expected, key = account.get("expected_user_id"), session_key(account["session"])
+            # Before any connection: the same key from a second proxy address while its workspace is
+            # connected can make Telegram revoke it (AUTH_KEY_DUPLICATED)
+            holder = registry.holder(expected, key)
+            if holder:
+                raise HTTPException(409, "This Telegram account already has a workspace: " + holder["label"] + ".")
+            if key in registry.importing:
+                raise HTTPException(409, "This Telegram account is being imported right now.")
             label = body.label.strip() or (body.files[0].name.rsplit(".", 1)[0][:80] or "Imported account")
             try:
                 entry = await registry.create(label, body.group)
             except ValueError as exc:
                 raise HTTPException(400, str(exc)) from None
+            registry.importing.add(key)
             try:
+                # Only the new workspace is involved: the registry and the main workspace stay usable meanwhile
                 async with registry.lock:
                     child = registry.entries[entry["id"]]["app"]
-                    if child is None:
-                        raise ValueError("The new workspace could not start.")
-                    async with op_lock:
-                        await asyncio.wait_for(child.state.collector.configure(
-                            body.api_id or account.get("api_id"), body.api_hash or account.get("api_hash"),
-                            account["session"], expected), tuning.value(app.state.store, "operation_timeout_seconds"))
-                    account_info = child.state.store.get_setting("account", {}) or {}
+                if child is None:
+                    raise ValueError("The new workspace could not start.")
+                collector = child.state.collector
+                await asyncio.wait_for(collector.configure(
+                    body.api_id or account.get("api_id"), body.api_hash or account.get("api_hash"),
+                    account["session"], expected), tuning.value(app.state.store, "operation_timeout_seconds"))
+                account_info = child.state.store.get_setting("account", {}) or {}
+                # Until its sources are chosen the workspace need not receive every update of the account:
+                # its photo is kept for the account list, then it disconnects
+                with suppress(Exception):
+                    await asyncio.wait_for(collector.avatar(account_info.get("id")), 20)
+                await collector.stop()
             except (Exception, asyncio.CancelledError) as exc:
                 with suppress(Exception):
                     await registry.delete(entry["id"])
                 if isinstance(exc, asyncio.CancelledError):
                     raise
-                reason = str(exc) if isinstance(exc, ValueError) else type(exc).__name__
+                reason = (str(exc) if isinstance(exc, (ValueError, NoProxyAvailable)) else
+                          "Telegram did not answer in time. Try again later." if isinstance(exc, TimeoutError)
+                          else type(exc).__name__)
                 raise HTTPException(400, "Not imported: " + reason) from None
+            finally:
+                registry.importing.discard(key)
             return {"profile": entry, "account": {"id": account_info.get("id"), "username": account_info.get("username"),
                                                   "name": account_info.get("name")},
                     "formats": account.get("formats", [])}

@@ -3360,5 +3360,24 @@
 "The downloaded size differs from the observed attachment": "La dimensione del file scaricato differisce da quella dell’allegato osservato",
 "The queued file differs from the signed observation": "Il file in coda differisce dall’osservazione firmata",
 "The saved copy of this file is damaged": "La copia salvata di questo file è danneggiata",
-"Telegram account not identified yet": "Account Telegram non ancora identificato"
+"Telegram account not identified yet": "Account Telegram non ancora identificato",
+"Stop after this account": "Interrompi dopo questo account",
+"This Telegram account already has a workspace: {label}.": "Questo account Telegram dispone già di un’area di lavoro: {label}.",
+"This Telegram account is being imported right now.": "Questo account Telegram è attualmente in fase di importazione.",
+"Telegram did not answer in time. Try again later.": "Telegram non ha risposto in tempo. Riprovi più tardi.",
+"Start all": "Avvia tutto",
+"Pause all": "Metti tutto in pausa",
+"Capture and monitoring": "Acquisizione e monitoraggio",
+"Recheck schedule": "Ricontrolla la pianificazione",
+"IP protection mode": "Modalità di protezione IP",
+"{n} workspaces started.": {
+"one": "È stato avviato {n} spazio di lavoro.",
+"other": "Sono stati avviati {n} spazi di lavoro."
+},
+"{n} workspace started.": "È stato avviato {n} spazio di lavoro.",
+"{n} workspaces paused.": {
+"one": "{n} spazio di lavoro messo in pausa.",
+"other": "{n} spazi di lavoro sono stati messi in pausa."
+},
+"{n} workspace paused.": "{n} spazio di lavoro messo in pausa."
 }

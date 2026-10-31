@@ -12,10 +12,11 @@ from tgwitness.collector import Collector
 CHAT = -1000000000123
 
 
-def saved_session():
+def saved_session(key=b"x"):
+    """An authorized session; another key byte stands for another account (one key per workspace)."""
     session = StringSession()
     session.set_dc(2, "149.154.167.51", 443)
-    session.auth_key = AuthKey(b"x" * 256)
+    session.auth_key = AuthKey(key * 256)
     return session.save()
 
 

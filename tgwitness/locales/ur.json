@@ -3360,5 +3360,24 @@
 "The downloaded size differs from the observed attachment": "ڈاؤن لوڈ شدہ سائز مشاہدہ شدہ اٹیچمنٹ سے مختلف ہے۔",
 "The queued file differs from the signed observation": "قطار میں شامل فائل دستخط شدہ مشاہدے سے مختلف ہوتی ہے۔",
 "The saved copy of this file is damaged": "اس فائل کی محفوظ شدہ کاپی خراب ہے",
-"Telegram account not identified yet": "ٹیلیگرام اکاؤنٹ ابھی تک شناخت نہیں ہوا"
+"Telegram account not identified yet": "ٹیلیگرام اکاؤنٹ ابھی تک شناخت نہیں ہوا",
+"Stop after this account": "اس اکاؤنٹ کے بعد روک دیں",
+"This Telegram account already has a workspace: {label}.": "اس ٹیلیگرام اکاؤنٹ کے پاس پہلے ہی ایک ورک اسپیس موجود ہے: {label}۔",
+"This Telegram account is being imported right now.": "یہ ٹیلیگرام اکاؤنٹ اس وقت درآمد ہو رہا ہے۔",
+"Telegram did not answer in time. Try again later.": "ٹیلیگرام نے بروقت جواب نہیں دیا۔ بعد میں دوبارہ کوشش کریں۔",
+"Start all": "سب شروع کریں",
+"Pause all": "سب کو معطل کریں",
+"Capture and monitoring": "کیپچر اور مانیٹرنگ",
+"Recheck schedule": "دوبارہ شیڈول چیک کریں",
+"IP protection mode": "آئی پی تحفظ کا موڈ",
+"{n} workspaces started.": {
+"one": "{n} ورک اسپیس نے مشاہدہ شروع کیا۔",
+"other": "{n} ورک اسپیسز نے مشاہدہ شروع کیا۔"
+},
+"{n} workspace started.": "{n} ورک اسپیس نے مشاہدہ شروع کیا۔",
+"{n} workspaces paused.": {
+"one": "{n} ورک اسپیس نے مشاہدہ معطل کیا۔",
+"other": "{n} ورک اسپیسز نے مشاہدہ معطل کیا۔"
+},
+"{n} workspace paused.": "{n} ورک اسپیس نے مشاہدہ معطل کیا۔"
 }

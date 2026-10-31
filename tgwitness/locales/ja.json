@@ -3336,5 +3336,22 @@
 "The downloaded size differs from the observed attachment": "ダウンロードされたサイズは、確認された添付ファイルのサイズとは異なります",
 "The queued file differs from the signed observation": "キューに入れられたファイルは、署名付き観測データとは異なります",
 "The saved copy of this file is damaged": "このファイルの保存されたコピーが破損しています",
-"Telegram account not identified yet": "Telegramアカウントがまだ特定されていません"
+"Telegram account not identified yet": "Telegramアカウントがまだ特定されていません",
+"Stop after this account": "このアカウントの後に停止する",
+"This Telegram account already has a workspace: {label}.": "このTelegramアカウントには、すでに{label}というワークスペースが存在します。",
+"This Telegram account is being imported right now.": "現在、このTelegramアカウントがインポートされています。",
+"Telegram did not answer in time. Try again later.": "Telegramからの応答が間に合いませんでした。後ほど再度お試しください。",
+"Start all": "すべて開始",
+"Pause all": "すべてを一時停止",
+"Capture and monitoring": "キャプチャとモニタリング",
+"Recheck schedule": "スケジュールの再確認",
+"IP protection mode": "IP保護モード",
+"{n} workspaces started.": {
+"other": "{n}つのワークスペースが開始されました。"
+},
+"{n} workspace started.": "{n}つのワークスペースが開始されました。",
+"{n} workspaces paused.": {
+"other": "{n}つのワークスペースが一時停止されました。"
+},
+"{n} workspace paused.": "{n}つのワークスペースが一時停止されました。"
 }

@@ -3384,5 +3384,26 @@
 "The downloaded size differs from the observed attachment": "גודל הקובץ שהורד שונה מגודל הקובץ הנצפה",
 "The queued file differs from the signed observation": "הקובץ בתור שונה מהתצפית החתומה",
 "The saved copy of this file is damaged": "העותק השמור של קובץ זה פגום",
-"Telegram account not identified yet": "חשבון טלגרם טרם זוהה"
+"Telegram account not identified yet": "חשבון טלגרם טרם זוהה",
+"Stop after this account": "עצור אחרי החשבון הזה",
+"This Telegram account already has a workspace: {label}.": "לחשבון Telegram זה כבר יש סביבת עבודה: {label}.",
+"This Telegram account is being imported right now.": "חשבון Telegram זה מיובא כרגע.",
+"Telegram did not answer in time. Try again later.": "Telegram לא הגיב בזמן. נסה שוב מאוחר יותר.",
+"Start all": "התחל הכל",
+"Pause all": "השהה הכל",
+"Capture and monitoring": "לכידה וניטור",
+"Recheck schedule": "בדיקה חוזרת של לוח הזמנים",
+"IP protection mode": "מצב הגנת IP",
+"{n} workspaces started.": {
+"one": "סביבת עבודה אחת {n} החלה.",
+"other": "{n} סביבות עבודה החלו.",
+"two": "{n} סביבות עבודה החלו."
+},
+"{n} workspace started.": "סביבת עבודה אחת {n} החלה.",
+"{n} workspaces paused.": {
+"one": "סביבת עבודה אחת הושעתה.{n}",
+"other": "{n} סביבות עבודה הושעו.",
+"two": "{n} סביבות עבודה הושעו."
+},
+"{n} workspace paused.": "סביבת עבודה אחת הושעתה.{n}"
 }

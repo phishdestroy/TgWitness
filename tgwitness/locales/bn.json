@@ -3360,5 +3360,24 @@
 "The downloaded size differs from the observed attachment": "ডাউনলোডকৃত আকার পর্যবেক্ষিত সংযুক্তির আকারের থেকে ভিন্ন",
 "The queued file differs from the signed observation": "কুইয়েড ফাইলটি স্বাক্ষরিত পর্যবেক্ষণের থেকে পৃথক।",
 "The saved copy of this file is damaged": "এই ফাইলের সংরক্ষিত অনুলিপি ক্ষতিগ্রস্ত",
-"Telegram account not identified yet": "টেলিগ্রাম অ্যাকাউন্ট এখনও শনাক্ত হয়নি"
+"Telegram account not identified yet": "টেলিগ্রাম অ্যাকাউন্ট এখনও শনাক্ত হয়নি",
+"Stop after this account": "এই অ্যাকাউন্টের পর থামুন",
+"This Telegram account already has a workspace: {label}.": "এই টেলিগ্রাম অ্যাকাউন্টের ইতিমধ্যেই একটি ওয়ার্কস্পেস আছে: {label}।",
+"This Telegram account is being imported right now.": "এই টেলিগ্রাম অ্যাকাউন্টটি এই মুহূর্তে আমদানি হচ্ছে।",
+"Telegram did not answer in time. Try again later.": "টেলিগ্রাম সময়মতো উত্তর দেয়নি। পরে আবার চেষ্টা করুন।",
+"Start all": "সব শুরু করুন",
+"Pause all": "সবই বিরতি",
+"Capture and monitoring": "রেকর্ড এবং মনিটরিং",
+"Recheck schedule": "পুনরায় সময়সূচি যাচাই",
+"IP protection mode": "আইপি সুরক্ষা মোড",
+"{n} workspaces started.": {
+"one": "{n}টি ওয়ার্কস্পেস শুরু হয়েছে।",
+"other": "{n}টি ওয়ার্কস্পেস পর্যবেক্ষণ শুরু করেছে।"
+},
+"{n} workspace started.": "{n}টি ওয়ার্কস্পেস শুরু হয়েছে।",
+"{n} workspaces paused.": {
+"one": "{n}টি ওয়ার্কস্পেস পর্যবেক্ষণ স্থগিত করেছে।",
+"other": "{n}টি ওয়ার্কস্পেস পর্যবেক্ষণ স্থগিত করেছে।"
+},
+"{n} workspace paused.": "{n}টি ওয়ার্কস্পেস পর্যবেক্ষণ স্থগিত করেছে।"
 }

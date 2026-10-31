@@ -51,6 +51,36 @@ def test_bulk_import_gives_each_account_a_workspace_in_a_group_and_rolls_back_fa
         client.__exit__(None, None, None)
 
 
+def test_same_session_again_is_refused_before_it_connects_and_imports_disconnect(tmp_path, monkeypatch):
+    from tgwitness.collector import Collector
+    connected, connect = [], Collector.connect_client
+
+    async def counted(self, client):
+        connected.append(self)
+        return await connect(self, client)
+    monkeypatch.setattr(Collector, "connect_client", counted)
+    start = FakeClient.__init__
+
+    def real_session(self, session, *args, **kwargs):  # as in Telethon, the saved session is the imported one
+        start(self, session, *args, **kwargs)
+        self.session = session
+    monkeypatch.setattr(FakeClient, "__init__", real_session)
+    app, client = panel(tmp_path)
+    try:
+        files = [session_file("alpha.txt")]
+        first = client.post("/api/profiles/import", json={"files": files, "api_id": 501, "api_hash": "a" * 32})
+        assert first.status_code == 200, first.text
+        child = app.state.profiles.entries[first.json()["profile"]["id"]]["app"].state.collector
+        assert not child.client.is_connected() and not child.running
+        attempts, events = len(connected), len(app.state.store.events(kind="profile.created"))
+        again = client.post("/api/profiles/import", json={"files": files, "label": "Again"})
+        assert again.status_code == 409 and "alpha" in again.json()["detail"]
+        assert len(connected) == attempts and len(app.state.store.events(kind="profile.created")) == events
+        assert app.state.profiles.importing == set()
+    finally:
+        client.__exit__(None, None, None)
+
+
 def test_group_settings_come_from_the_template_and_each_member_journals_them(tmp_path):
     app, client = panel(tmp_path)
     try:
