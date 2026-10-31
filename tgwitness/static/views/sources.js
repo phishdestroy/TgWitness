@@ -452,7 +452,7 @@ export function createSources(context) {
     context.setDirty({...dirty}); form.reset(); clearValidation(); find("recording-result").textContent = "";
     find("recording-save").disabled = find("recording-discard").disabled = true;
     find("recording-tab-dirty").hidden = true;
-    for (const id of ["target-list", "dialog-list", "scope-exclude", "snapshot-source", "chat-export-source"])
+    for (const id of ["target-list", "dialog-list", "scope-exclude"])
       find(id)?.replaceChildren();
     for (const id of ["sources-scope-summary", "sources-count-summary", "sources-recording-summary"])
       find(id).textContent = "";

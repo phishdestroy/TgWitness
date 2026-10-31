@@ -73,7 +73,7 @@ async function loadPanelView(view){
   else if(view==='chats')await refreshChats(true);
   else if(view==='observations')await refreshEvents();
   else if(view==='access')await loadAccess();
-  else if(view==='evidence')await loadReportSettings();
+  else if(view==='evidence'){renderChatExportTools();await loadReportSettings();}
   else if(view==='integrations')await window.TgWitnessIntegrations?.load();
   else if(view==='analysis')await window.TgWitnessAnalysis?.load();
   else if(view==='connection'){await loadProfiles();if(!state.status.demo)await loadPolicy();}
@@ -108,7 +108,7 @@ async function applyRouteToPanel(route,current){
   else if(view==="access")await loadAccess();
   else if(view==="integrations")await window.TgWitnessIntegrations?.load();
   else if(view==="analysis")await window.TgWitnessAnalysis?.load();
-  else if(view==="evidence")await loadReportSettings();
+  else if(view==="evidence"){renderChatExportTools();await loadReportSettings();}
   else if(view==="witness"){await loadExtras();if(current())selectExtra(route.extra,{history:false});}
 }
 
@@ -339,6 +339,7 @@ function lock() {
   state.events=[];state.chats=[];state.chatMessages=[];state.chatInfo=null;state.chat=null;state.parameters=null;
   selectedDialogs.clear();sourceBatchBusy=false;
   sourcesView?.resetSession();
+  resetChatExportTools();
   resetReportSettings();
   window.dispatchEvent(new Event("tgwitness:lock"));
   $("quick-dialog").close();
@@ -716,7 +717,7 @@ function renderViewStatus(view){
     renderComposer();renderChatStatus();renderMulti();
   }else if(view==='evidence'){
     $("fingerprint").textContent=s.fingerprint;$("export-profile-id").textContent=state.profile;
-    renderVerification();
+    renderVerification();renderChatExportTools();
   }else if(view==='sources'){
     sourcesView?.updateStatus(s);renderHistory();renderRecheck();renderTargets();
   }else if(view==='connection'){
@@ -904,6 +905,7 @@ function renderAccounts(){
 async function switchProfile(id,options={}){
   if(options.history!==false)window.TgWitnessRouter?.invalidate();
   selectedDialogs.clear();sourceBatchBusy=false;
+  resetChatExportTools();
   resetReportSettings();
   window.TgWitnessIntegrations?.clear(true);
   window.TgWitnessLive?.stop();window.TgWitnessReview?.clear();
@@ -1212,12 +1214,8 @@ function renderSourceTools(){
 function renderTargets() {
   const s=state.status;if(!s)return;
   sourcesView?.renderTargets();
-  fillSourceSelect("snapshot-source",$("snapshot-source").value);
-  fillSourceSelect("chat-export-source",$("chat-export-source").value,true);
-  syncExport(s);
   $("load-dialogs").disabled=s.demo||!s.collector.has_session;
   $("load-dialogs").title=!s.collector.has_session&&!s.demo?tr("Connect your Telegram account first"):"";
-  $("snapshot-form").querySelector("button").disabled=s.demo||!s.targets.some(t=>t.enabled);
   autoLoadDialogs();
 }
 const kindType={channel:"channels",supergroup:"groups",group:"groups",private:"private",bot:"bots"};
@@ -1294,6 +1292,21 @@ for(const action of ["start","pause","resume","cancel"]){
 }
 $("history-report").addEventListener("click",e=>busy(e.currentTarget,()=>download("history/report","tgwitness-history-report.json")));
 
+function resetChatExportTools(){
+  for(const id of ["snapshot-source","chat-export-source"])$(id).replaceChildren();
+  $("export-chat-tools").open=false;
+  $("chat-export-progress").textContent="";
+  show("chat-export-download",false);show("chat-export-cancel",false);
+}
+function renderChatExportTools(){
+  const s=state.status;if(!s||state.view!=="evidence")return;
+  show("snapshot-form",may("sources"));show("chat-export-form",may("export"));
+  fillSourceSelect("snapshot-source",$("snapshot-source").value);
+  fillSourceSelect("chat-export-source",$("chat-export-source").value,true);
+  $("chat-export-source").options[0].textContent=tr("Choose a chat");
+  $("snapshot-form").querySelector("button").disabled=s.demo||!may("sources")||!s.collector.has_session||!s.targets.some(t=>t.enabled);
+  renderRecheck();syncExport(s);
+}
 $("snapshot-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
   toast(tr("Capturing visible history. This may take a minute."));
   const limit=Number($("snapshot-limit").value),most=state.status?.parameters?.snapshot_max||500;

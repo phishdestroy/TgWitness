@@ -127,6 +127,38 @@ def check_targets(page, server):
     (output / "checks.json").write_text(json.dumps(checks, indent=2) + "\n", encoding="utf-8")
 
 
+def check_export_location(page):
+    output = ROOT / "build" / "ux-review" / "after" / "19"
+    output.mkdir(parents=True, exist_ok=True)
+    page.locator('[data-view="evidence"]').click()
+    expect(page.locator("#view-sources #snapshot-form")).to_have_count(0)
+    expect(page.locator("#view-sources #chat-export-form")).to_have_count(0)
+    page.locator("#export-chat-tools > summary").click()
+    expect(page.locator("#snapshot-form")).to_be_visible()
+    expect(page.locator("#chat-export-source option").first).to_have_text("Choose a chat")
+    requests = []
+
+    def snapshot(route):
+        requests.append(route.request.post_data_json)
+        route.fulfill(content_type="application/json", body='{"captured":3}')
+
+    page.route("**/api/snapshot", snapshot, times=1)
+    source = page.locator("#snapshot-source").input_value()
+    page.locator("#snapshot-limit").fill("17")
+    page.locator("#snapshot-form button").click()
+    expect(page.locator("#toast")).to_contain_text("Saved 3 history observations")
+    assert requests == [{"chat_id": int(source), "limit": 17}]
+    page.locator("#chat-export-source").select_option(source)
+    page.evaluate("refreshStatus()")
+    expect(page.locator("#chat-export-source")).to_have_value(source)
+    for width in (1440, 390):
+        page.set_viewport_size({"width": width, "height": 844})
+        page.locator("#export-chat-tools").scroll_into_view_if_needed()
+        assert page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1")
+        page.locator("#export-chat-tools").screenshot(path=str(output / f"chat-tools-{width}.png"))
+    page.locator('[data-view="sources"]').click()
+
+
 def main():
     output = ROOT / "build" / "ux-review" / "after" / "17"
     output.mkdir(parents=True, exist_ok=True)
@@ -212,6 +244,7 @@ def main():
                     checks.append({"theme": theme, "width": width, "tab": tab, "height": height})
 
         check_targets(page, server)
+        check_export_location(page)
         page.set_viewport_size({"width": 1440, "height": 1000})
         page.locator("#sources-tab-recording").click()
         second = page.evaluate("json('profiles',{label:'Independent workspace'}).then(value=>value.id)")
