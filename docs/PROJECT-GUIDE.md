@@ -402,8 +402,7 @@ The panel listens on localhost by default. Sessions, credentials and signing key
 use an encrypted vault; local messages and attachments require disk encryption
 if you need protection at rest. [Security model](CONNECTION-SECURITY.md) · [Report a vulnerability](../.github/SECURITY.md)
 
-This is a pre-release project. Review the [verification record](VERIFICATION.md)
-and [open audit findings](internal/RECHECK-2026-10-29.md) before distributing a build.
+This is a pre-release project. Review the [verification record](VERIFICATION.md) before distributing a build.
 Executed checks and remaining qualification work are recorded explicitly.
 
 <details>
