@@ -233,7 +233,12 @@
 <section class="view" hidden id="view-sources">
   <div class="page-heading">
     <div><h1 id="sources-title">Sources</h1><p class="page-description" id="sources-description">Choose the conversations to record and what to keep.</p></div>
-    <button class="secondary" id="load-dialogs">Load chats</button>
+    <button class="secondary" id="load-dialogs" type="button" aria-describedby="dialog-refresh-description">Refresh chat list</button>
+  </div>
+  <div class="source-refresh-info">
+    <p id="dialog-refresh-description" class="hint">Read the chats and folders available to this account. This refreshes the list; it does not download messages.</p>
+    <div class="source-refresh-status"><span class="hint" id="dialog-refresh-status" role="status" aria-live="polite">Not refreshed in this session.</span><button type="button" class="text-link" id="dialog-refresh-retry" hidden>Retry</button></div>
+    <progress id="dialog-refresh-progress" aria-label="Refreshing chat list" hidden></progress>
   </div>
   <div class="sources-summary" aria-label="Source overview"><span id="sources-scope-summary"></span><span id="sources-count-summary"></span><span id="sources-recording-summary"></span></div>
   <div class="sources-tabs" role="tablist" aria-label="Source settings">
@@ -290,7 +295,14 @@
     <div class="source-pagination"><button type="button" class="quiet" id="target-select-matching">Select all matching</button><span id="target-page-count" class="hint" role="status"></span><div><button type="button" class="quiet" id="target-prev">Previous</button><button type="button" class="quiet" id="target-next">Next</button></div></div>
     <p id="source-action-result" class="hint source-action-result" role="status"></p>
   </section>
-  <div class="card padded" hidden id="available-card"><h2>Available chats</h2><div class="dialog-filters"><input aria-label="Find an available chat" id="dialog-search" placeholder="Find a chat…" type="search"><select aria-label="Chat type" id="dialog-kind"><option value="">All types</option><option value="channels">Channels</option><option value="groups">Groups</option><option value="private">Private chats</option><option value="bots">Bots</option></select></div><p class="hint" id="dialog-limit"></p><div id="dialog-list"></div><button class="primary" id="finish-source-selection" type="button">Done</button></div>
+  <section class="card padded" hidden id="available-card" aria-labelledby="dialog-list-title">
+    <h2 id="dialog-list-title">Available chats</h2>
+    <div class="dialog-filters"><input aria-label="Find an available chat" id="dialog-search" placeholder="Find a chat…" type="search"><select aria-label="Chat type" id="dialog-kind"><option value="">All types</option><option value="channels">Channels</option><option value="groups">Groups</option><option value="private">Private chats</option><option value="bots">Bots</option></select></div>
+    <p class="hint" id="dialog-limit"></p>
+    <div id="dialog-bulk-actions" class="source-bulk"><button type="button" class="secondary small" id="dialog-add-selected">Add selected</button><button type="button" class="secondary small" id="dialog-add-matching">Add all matching</button></div>
+    <div id="dialog-list"></div>
+    <div class="source-pagination"><span class="hint" id="dialog-page-count" role="status"></span><div><button type="button" class="quiet" id="dialog-prev">Previous</button><button type="button" class="quiet" id="dialog-next">Next</button></div><button class="secondary" id="finish-source-selection" type="button">Done</button></div>
+  </section>
   <section class="card padded" id="history-card" aria-labelledby="history-heading">
     <div class="eyebrow">Full history</div><h2 id="history-heading">Bring past messages into this workspace</h2>
     <p class="muted">Load the available history of every enabled source into Chats and the signed journal. Progress survives a restart. Attachments follow your media settings. Deleted messages and unseen past edits cannot be recovered.</p>

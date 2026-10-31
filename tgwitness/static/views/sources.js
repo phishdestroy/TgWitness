@@ -14,7 +14,7 @@ function changes(before, after) {
   return before === after ? 0 : 1;
 }
 
-/** Sources owns its tabs and recording drafts. All state and actions come from the host. */
+/** Sources keeps drafts, selection and chat-list requests within one workspace. */
 export function createSources(context) {
   const {root, tr, getState, getSession, may, json, refreshStatus, toast} = context;
   const find = id => root.querySelector("#" + id);
@@ -25,6 +25,9 @@ export function createSources(context) {
   const selection = new Set(), pageSize = 10;
   const kindType = {channel: "channels", supergroup: "groups", group: "groups", private: "private", bot: "bots"};
   let sourcePage = 0, sourceBusy = false, sourceAttempt = 0, rowsVersion = "";
+  const selectedDialogs = new Set();
+  let dialogPage = 0, dialogVersion = "", dialogOpen = false, dialogAttempt = 0;
+  let dialogLoading = false, dialogError = "", dialogResult = null, dialogRefreshedAt = null, autoRequested = false;
   const on = (element, event, handler) => element.addEventListener(event, handler, {signal: listeners.signal});
   const allowed = group => !getState().status?.demo && may(group === "recheck" ? "sources" : "settings");
   const permission = group => may(group === "recheck" ? "sources" : "settings");
@@ -40,6 +43,7 @@ export function createSources(context) {
       if (selected && focus) button.focus();
     }
     if (name === "recording") updateStatus(getState().status);
+    if (name === "chats") {renderTargets(); renderDialogs();}
   }
   for (const button of tabs) {
     on(button, "click", () => showTab(button.dataset.sourceTab));
@@ -240,7 +244,7 @@ export function createSources(context) {
       if (active) [...body.querySelectorAll("[data-source-focus]")].find(node => node.dataset.sourceFocus === active)
         ?.focus({preventScroll: true});
     }
-    const blocked = sourceBusy || status.demo || !may("sources");
+    const blocked = sourceBusy || dialogLoading || status.demo || !may("sources");
     find("target-card").setAttribute("aria-busy", String(sourceBusy));
     body.querySelectorAll("input,button").forEach(node => node.disabled = blocked);
     body.querySelectorAll("input.source-select").forEach(node => node.checked = selection.has(Number(node.dataset.chatId)));
@@ -274,7 +278,7 @@ export function createSources(context) {
 
   async function runSourceAction(ids, action) {
     const state = getState(), status = state.status;
-    if (sourceBusy || !status || status.demo || !may("sources") || !ids.length) return;
+    if (sourceBusy || dialogLoading || !status || status.demo || !may("sources") || !ids.length) return;
     if (ids.length > 500) {toast(tr("Choose up to 500 sources at a time."), true); return;}
     const wide = (status.scope?.mode || "selected") !== "selected";
     if (action === "remove" && !context.confirm(tr(ids.length === 1
@@ -282,7 +286,7 @@ export function createSources(context) {
       : "Remove {n} sources? Saved messages and files stay. Cached people profiles are removed.", {n: ids.length})
       + (wide ? " " + tr("These chats are also excluded so the scope does not add them again.") : ""))) return;
     const current = getSession(), attempt = ++sourceAttempt, profile = state.profile;
-    sourceBusy = true; renderTargets();
+    sourceBusy = true; renderTargets(); renderDialogs(); renderDialogRefresh();
     try {
       let result;
       if (action === "exclude") {
@@ -296,7 +300,7 @@ export function createSources(context) {
         result = await json("targets/batch", {chat_ids: ids, ...change}, {profile});
       }
       if (current !== getSession() || attempt !== sourceAttempt) return;
-      for (const id of ids) selection.delete(id);
+      for (const id of ids) {selection.delete(id); selectedDialogs.delete(id);}
       if (action === "enable") context.scopeExclusions(ids, false);
       if (action === "exclude" || action === "remove" && wide) context.scopeExclusions(ids, true);
       await refreshStatus();
@@ -313,7 +317,9 @@ export function createSources(context) {
       if (current !== getSession() || attempt !== sourceAttempt) return;
       find("source-action-result").textContent = error.message; toast(error.message, true);
     } finally {
-      if (current === getSession() && attempt === sourceAttempt) {sourceBusy = false; renderTargets();}
+      if (current === getSession() && attempt === sourceAttempt) {
+        sourceBusy = false; renderTargets(); renderDialogs(); renderDialogRefresh();
+      }
     }
   }
   for (const id of ["target-search", "target-filter", "target-kind", "target-sort"])
@@ -359,6 +365,141 @@ export function createSources(context) {
     runSourceAction([target.chat_id], action);
   });
 
+  function matchingDialogs() {
+    const term = find("dialog-search").value.trim().toLocaleLowerCase(), kind = find("dialog-kind").value;
+    return getState().dialogs.filter(item => (item.title + " " + item.chat_id).toLocaleLowerCase().includes(term)
+      && (!kind || kindType[item.kind] === kind));
+  }
+
+  function renderDialogRefresh() {
+    const status = getState().status;
+    if (!status || getState().view !== "sources") return;
+    const button = find("load-dialogs"), disabled = status.demo || !may("sources") || !status.collector.has_session;
+    button.disabled = disabled || dialogLoading || sourceBusy;
+    button.textContent = tr(dialogLoading ? "Refreshing…" : "Refresh chat list");
+    button.setAttribute("aria-busy", String(dialogLoading));
+    button.title = !status.collector.has_session && !status.demo ? tr("Connect your Telegram account first") : "";
+    const note = find("dialog-refresh-status");
+    note.textContent = dialogLoading ? tr("Refreshing chat list… Saved sources remain available.")
+      : dialogError ? tr("Chat list could not be refreshed: {error}", {error: dialogError})
+        : dialogRefreshedAt ? tr("Last refreshed in this session: {time}", {time: context.formatTime(dialogRefreshedAt)})
+          : tr("Not refreshed in this session.");
+    note.classList.toggle("source-refresh-error", !!dialogError && !dialogLoading);
+    find("dialog-refresh-progress").hidden = !dialogLoading;
+    find("dialog-refresh-retry").hidden = !dialogError || dialogLoading;
+    find("dialog-refresh-retry").disabled = disabled || sourceBusy;
+  }
+
+  function renderDialogs() {
+    const state = getState(), status = state.status;
+    if (!status || state.view !== "sources") return;
+    find("available-card").hidden = !dialogOpen;
+    find("target-card").hidden = dialogOpen;
+    if (!dialogOpen) return;
+    const enabled = new Set(status.targets.filter(target => target.enabled
+      && !status.scope?.exclude.includes(target.chat_id)).map(target => target.chat_id));
+    const available = new Set(state.dialogs.map(item => item.chat_id));
+    for (const id of selectedDialogs) if (!available.has(id) || enabled.has(id)) selectedDialogs.delete(id);
+    const matches = matchingDialogs();
+    dialogPage = Math.min(dialogPage, Math.max(0, Math.ceil(matches.length / pageSize) - 1));
+    const visible = matches.slice(dialogPage * pageSize, (dialogPage + 1) * pageSize);
+    const version = JSON.stringify(visible.map(item => ({...item, selected: enabled.has(item.chat_id)})));
+    const list = find("dialog-list");
+    if (version !== dialogVersion) {
+      const focused = list.contains(root.ownerDocument.activeElement)
+        ? root.ownerDocument.activeElement.dataset.dialogFocus : null;
+      const fragment = root.ownerDocument.createDocumentFragment();
+      for (const item of visible) {
+        const row = element("div", "target-row"), chosen = enabled.has(item.chat_id);
+        const checkbox = element("input", "source-select");
+        checkbox.type = "checkbox"; checkbox.dataset.chatId = String(item.chat_id);
+        checkbox.dataset.dialogFocus = item.chat_id + ":select";
+        checkbox.setAttribute("aria-label", tr("Select {name}", {name: item.title}));
+        checkbox.hidden = chosen;
+        const info = element("div", "available-source-name");
+        info.append(element("strong", "", item.title), element("p", "hint",
+          context.termText(item.kind) + " · " + item.chat_id));
+        const add = element("button", "secondary small", tr(chosen ? "Selected" : "Add source"));
+        add.type = "button"; add.dataset.dialogAdd = String(item.chat_id);
+        add.dataset.dialogFocus = item.chat_id + ":add"; add.dataset.chosen = String(chosen);
+        row.append(checkbox, info, add); fragment.append(row);
+      }
+      if (!visible.length) fragment.append(element("p", "hint", tr("No available chats match this search.")));
+      list.replaceChildren(fragment); dialogVersion = version;
+      if (focused) [...list.querySelectorAll("[data-dialog-focus]")].find(node => node.dataset.dialogFocus === focused)
+        ?.focus({preventScroll: true});
+    }
+    const blocked = status.demo || !may("sources") || sourceBusy || dialogLoading;
+    list.querySelectorAll("input").forEach(node => {
+      node.checked = selectedDialogs.has(Number(node.dataset.chatId)); node.disabled = blocked;
+    });
+    list.querySelectorAll("button").forEach(node => node.disabled = blocked || node.dataset.chosen === "true");
+    const addable = matches.filter(item => !enabled.has(item.chat_id));
+    find("dialog-add-selected").disabled = blocked || !selectedDialogs.size;
+    find("dialog-add-selected").textContent = tr("Add selected") + " · " + selectedDialogs.size;
+    find("dialog-add-matching").disabled = blocked || !addable.length || addable.length > 500;
+    find("dialog-add-matching").textContent = tr("Add all matching") + " · " + addable.length;
+    find("dialog-limit").textContent = (dialogResult?.may_be_truncated
+      ? tr("First {n} chats inspected; more may exist.", {n: dialogResult.limit})
+      : tr("Showing the chats already available to this account."))
+      + (addable.length > 500 ? " " + tr("Narrow the filters to add up to 500 sources at a time.") : "");
+    find("dialog-page-count").textContent = matches.length ? tr("{from}–{to} of {total}", {
+      from: dialogPage * pageSize + 1, to: Math.min((dialogPage + 1) * pageSize, matches.length), total: matches.length}) : "";
+    find("dialog-prev").disabled = blocked || dialogPage === 0;
+    find("dialog-next").disabled = blocked || (dialogPage + 1) * pageSize >= matches.length;
+  }
+
+  async function loadDialogs() {
+    const status = getState().status;
+    if (!status || status.demo || !may("sources") || !status.collector.has_session || dialogLoading || sourceBusy) return;
+    const current = getSession(), attempt = ++dialogAttempt, profile = getState().profile;
+    dialogLoading = true; dialogError = ""; autoRequested = true;
+    showTab("chats"); renderDialogRefresh(); renderDialogs(); renderTargets();
+    try {
+      const result = await json("dialogs", undefined, {profile});
+      if (current !== getSession() || attempt !== dialogAttempt) return;
+      context.setDialogs(result); dialogResult = result; dialogRefreshedAt = new Date().toISOString(); dialogOpen = true;
+      if (getState().view === "sources") {renderDialogs(); context.renderScope();}
+      await refreshStatus();
+    } catch (error) {
+      if (current !== getSession() || attempt !== dialogAttempt || error.name === "StaleView") return;
+      dialogError = error.message;
+    } finally {
+      if (current === getSession() && attempt === dialogAttempt) {
+        dialogLoading = false; renderDialogRefresh(); renderDialogs(); renderTargets();
+      }
+    }
+  }
+  on(find("load-dialogs"), "click", loadDialogs);
+  on(find("dialog-refresh-retry"), "click", loadDialogs);
+  for (const id of ["dialog-search", "dialog-kind"])
+    on(find(id), id === "dialog-search" ? "input" : "change", () => {dialogPage = 0; renderDialogs();});
+  on(find("dialog-prev"), "click", () => {dialogPage--; renderDialogs();});
+  on(find("dialog-next"), "click", () => {dialogPage++; renderDialogs();});
+  on(find("dialog-add-selected"), "click", () => runSourceAction([...selectedDialogs], "enable"));
+  on(find("dialog-add-matching"), "click", () => {
+    const status = getState().status;
+    const enabled = new Set(status.targets.filter(item => item.enabled && !status.scope?.exclude.includes(item.chat_id))
+      .map(item => item.chat_id));
+    runSourceAction(matchingDialogs().filter(item => !enabled.has(item.chat_id)).map(item => item.chat_id), "enable");
+  });
+  on(find("dialog-list"), "change", event => {
+    const checkbox = event.target.closest("input.source-select");
+    if (!checkbox) return;
+    const id = Number(checkbox.dataset.chatId);
+    if (!checkbox.checked) selectedDialogs.delete(id);
+    else if (selectedDialogs.size < 500) selectedDialogs.add(id);
+    else toast(tr("Choose up to 500 sources at a time."), true);
+    renderDialogs();
+  });
+  on(find("dialog-list"), "click", event => {
+    const button = event.target.closest("button[data-dialog-add]");
+    if (button) runSourceAction([Number(button.dataset.dialogAdd)], "enable");
+  });
+  on(find("finish-source-selection"), "click", () => {
+    dialogOpen = false; renderDialogs(); context.focusObservation();
+  });
+
   function updateStatus(status) {
     if (!status) return;
     if (session !== getSession()) resetSession();
@@ -385,7 +526,10 @@ export function createSources(context) {
     if (status.demo) note.textContent = tr("This demo is read-only. Recording settings can be changed in your own workspace.");
     else if (!permission("monitoring") && !permission("recheck")) note.textContent = tr("This access cannot change recording settings.");
     renderDraft();
-    if (getState().view === "sources") renderTargets();
+    if (getState().view === "sources") {
+      renderTargets(); renderDialogRefresh(); renderDialogs();
+      if (!autoRequested && !status.demo && status.collector.has_session && !status.targets.length) loadDialogs();
+    }
   }
 
   on(form, "input", event => {
@@ -446,8 +590,17 @@ export function createSources(context) {
     generation++; session = getSession(); baseline = null; saving = false;
     dirty = {monitoring: false, capture: false, recheck: false};
     selection.clear(); sourcePage = 0; sourceBusy = false; sourceAttempt++; rowsVersion = "";
+    selectedDialogs.clear(); dialogPage = 0; dialogVersion = ""; dialogOpen = false; dialogAttempt++;
+    dialogLoading = false; dialogError = ""; dialogResult = null; dialogRefreshedAt = null; autoRequested = false;
     for (const id of ["target-search", "target-filter", "target-kind"]) find(id).value = "";
     find("target-sort").value = "name"; find("target-bulk-actions").hidden = true;
+    find("dialog-search").value = ""; find("dialog-kind").value = ""; find("available-card").hidden = true;
+    find("target-card").hidden = false;
+    find("dialog-refresh-status").textContent = tr("Not refreshed in this session.");
+    find("dialog-refresh-retry").hidden = find("dialog-refresh-progress").hidden = true;
+    find("target-card").setAttribute("aria-busy", "false");
+    for (const id of ["target-match-count", "target-selection-count", "target-page-count", "dialog-page-count", "dialog-limit"])
+      find(id).textContent = "";
     find("source-action-result").textContent = "";
     context.setDirty({...dirty}); form.reset(); clearValidation(); find("recording-result").textContent = "";
     find("recording-save").disabled = find("recording-discard").disabled = true;
@@ -461,7 +614,7 @@ export function createSources(context) {
   }
   return {
     enter({params} = {}) {showTab(params?.tab || tab); updateStatus(getState().status);},
-    updateStatus, showTab, renderTargets,
+    updateStatus, showTab, renderTargets, loadDialogs,
     leave() {},
     resetSession,
     destroy() {generation++; listeners.abort();},

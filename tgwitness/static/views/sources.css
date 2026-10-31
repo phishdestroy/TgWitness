@@ -64,6 +64,18 @@
 #view-sources .source-pagination .hint { margin: 0; white-space: nowrap; font-size: 12px; }
 #view-sources .source-action-result { margin: 0; padding: 10px 20px; }
 #view-sources .source-action-result:empty { display: none; }
+#view-sources .source-refresh-info { margin: -6px 0 18px; max-width: 78ch; }
+#view-sources .source-refresh-info .hint { margin: 0; font-size: 12px; }
+#view-sources .source-refresh-status { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; margin-top: 4px; }
+#view-sources .source-refresh-error { color: var(--danger); }
+#view-sources #dialog-refresh-progress { width: 180px; height: 5px; margin-top: 8px; accent-color: var(--accent); }
+#view-sources #available-card .target-row { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 10px; padding: 10px 0; }
+#view-sources #available-card .target-row input[hidden] { display: block !important; visibility: hidden; }
+#view-sources .available-source-name { min-width: 0; overflow-wrap: anywhere; }
+#view-sources .available-source-name strong { font-weight: 550; font-size: 13px; }
+#view-sources .available-source-name .hint { font-size: 11px; margin: 2px 0 0; }
+#view-sources #available-card .source-pagination { padding-inline: 0; }
+#view-sources #available-card .source-pagination > div { margin-inline-start: auto; }
 @media (max-width: 600px) {
   #view-sources .sources-summary { gap: 6px 12px; margin-bottom: 12px; }
   #view-sources .sources-summary span + span::before { margin-inline-end: 10px; }

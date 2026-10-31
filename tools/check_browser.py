@@ -552,7 +552,7 @@ def main():
             page.get_by_role("button", name="Choose sources").click()
 
             expect(page.locator("#available-card")).to_be_visible()
-            expect(page.locator("#load-dialogs")).to_have_text("Reload chats")
+            expect(page.locator("#load-dialogs")).to_have_text("Refresh chat list")
             page.get_by_role("button", name="Add source").first.click()
             expect(page.locator("#target-list .target-row")).to_have_count(1)
             page.locator("#finish-source-selection").click()

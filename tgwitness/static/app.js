@@ -337,7 +337,6 @@ function lock() {
   window.TgWitnessRouter?.invalidate();
   viewHost?.resetSession();state.permissionsStamp=null;
   state.events=[];state.chats=[];state.chatMessages=[];state.chatInfo=null;state.chat=null;state.parameters=null;
-  selectedDialogs.clear();sourceBatchBusy=false;
   sourcesView?.resetSession();
   resetChatExportTools();
   resetReportSettings();
@@ -904,7 +903,6 @@ function renderAccounts(){
 }
 async function switchProfile(id,options={}){
   if(options.history!==false)window.TgWitnessRouter?.invalidate();
-  selectedDialogs.clear();sourceBatchBusy=false;
   resetChatExportTools();
   resetReportSettings();
   window.TgWitnessIntegrations?.clear(true);
@@ -1175,7 +1173,9 @@ document.addEventListener("keydown",e=>{
 let sourcesView=null;
 const sourcesReady=import("./views/sources.js").then(({createSources})=>{
   sourcesView=createSources({root:$("view-sources"),tr,getState:()=>state,
-    getSession:()=>state.workspaceRevision+":"+state.profile,may,json,refreshStatus,toast,termText,scopeName,icon,loadScope,
+    getSession:()=>state.workspaceRevision+":"+state.profile,may,json,refreshStatus,toast,termText,scopeName,icon,loadScope,formatTime,
+    setDialogs:result=>{state.dialogs=result.dialogs;if(state.scope)state.scope.folders=result.folders||[];},
+    renderScope,focusObservation:()=>$("collector-toggle").focus({preventScroll:true}),
     confirm:message=>window.confirm(message),
     scopeExclusions:(ids,excluded)=>{if(state.scopeDirty)state.scopeExclude=excluded?
       [...new Set([...state.scopeExclude,...ids])]:state.scopeExclude.filter(id=>!ids.includes(id));},
@@ -1184,80 +1184,7 @@ const sourcesReady=import("./views/sources.js").then(({createSources})=>{
   if(state.view==="sources"&&!$("workspace").hidden)sourcesView.enter();
   return sourcesView;
 }).catch(error=>{toast(error.message,true);throw error;});
-const selectedDialogs=new Set();let sourceBatchBusy=false;
-async function updateSources(ids,changes){
-  if(sourceBatchBusy||!ids.length)return;
-  const revision=state.workspaceRevision;sourceBatchBusy=true;renderSourceTools();
-  try{
-    await json("targets/batch",{chat_ids:ids,...changes});
-    if(revision!==state.workspaceRevision)return;
-    ids.forEach(id=>selectedDialogs.delete(id));await refreshStatus();renderDialogs();
-  }finally{if(revision===state.workspaceRevision){sourceBatchBusy=false;renderSourceTools();}}
-}
-function sourceCheck(id,selected,title){
-  const check=node("input","source-select");check.type="checkbox";check.checked=selected.has(id);check.disabled=sourceBatchBusy||state.status.demo;
-  check.setAttribute("aria-label",tr("Select {name}",{name:title}));
-  check.addEventListener("change",()=>{if(check.checked)selected.add(id);else selected.delete(id);renderSourceTools();});return check;
-}
-function matchingDialogs(){const term=$("dialog-search").value.toLowerCase(),type=$("dialog-kind").value;
-  return state.dialogs.filter(d=>(d.title+" "+d.chat_id).toLowerCase().includes(term)&&(!type||kindType[d.kind]===type));}
-function renderSourceTools(){
-  if(!$("dialog-bulk-actions")){const actions=node("div","source-bulk");actions.id="dialog-bulk-actions";$("dialog-list").before(actions);}
-  const available=$("dialog-bulk-actions");available.replaceChildren();
-  const enabled=new Set(state.status.targets.filter(t=>t.enabled).map(t=>t.chat_id));
-  const matching=matchingDialogs().filter(d=>!enabled.has(d.chat_id)).map(d=>d.chat_id);
-  for(const [label,ids] of [["Add selected",[...selectedDialogs]],["Add all matching",matching]]){
-    const button=node("button","secondary small",tr(label)+" · "+ids.length);button.type="button";button.disabled=sourceBatchBusy||!ids.length||ids.length>500||state.status.demo;
-    button.addEventListener("click",()=>busy(button,()=>updateSources(ids,{enabled:true})));available.append(button);
-  }
-}
-function renderTargets() {
-  const s=state.status;if(!s)return;
-  sourcesView?.renderTargets();
-  $("load-dialogs").disabled=s.demo||!s.collector.has_session;
-  $("load-dialogs").title=!s.collector.has_session&&!s.demo?tr("Connect your Telegram account first"):"";
-  autoLoadDialogs();
-}
-const kindType={channel:"channels",supergroup:"groups",group:"groups",private:"private",bot:"bots"};
-function renderDialogs(){
-  if(state.view!=="sources"||!state.status)return;
-  const list=$("dialog-list");list.replaceChildren();renderSourceTools();
-  $("finish-source-selection").disabled=!state.status.targets.some(t=>t.enabled);
-  matchingDialogs().forEach(d=>{
-    const row=node("div","target-row"),info=node("div");
-    info.append(node("h3","",d.title),node("p","",termText(d.kind)+" · "+d.chat_id+(d.visibility?" · "+termText(d.visibility):"")));
-    const chosen=state.status.targets.some(t=>t.chat_id===d.chat_id&&t.enabled);
-    const b=node("button","secondary",tr(chosen?"Selected":"Add source"));b.disabled=chosen;
-    b.addEventListener("click",()=>busy(b,async()=>{await json("targets",{chat_id:d.chat_id,enabled:true});await refreshStatus();renderDialogs();}));
-    if(!chosen)row.append(sourceCheck(d.chat_id,selectedDialogs,d.title));row.append(info,b);list.append(row);
-  });
-  if(!list.children.length)list.append(node("p","hint",tr("No available chats match this search.")));
-}
-const loadDialogs=button=>busy(button,async()=>{
-  const revision=state.workspaceRevision,result=await json("dialogs");
-  if(revision!==state.workspaceRevision)return;
-  state.dialogs=result.dialogs;
-  if(state.scope)state.scope.folders=result.folders||[];
-  if(state.view!=="sources")return;
-  show("available-card",true);sourcesView?.showTab("chats");
-  $("dialog-limit").textContent=tr(result.may_be_truncated?"First 1,000 dialogs inspected; more may exist.":"Showing the chats already available to this account.");
-  if(state.scope)renderScope();
-  $("load-dialogs").textContent=tr("Reload chats");
-  renderDialogs();
-});
-$("load-dialogs").addEventListener("click",e=>loadDialogs(e.currentTarget));
-
-function autoLoadDialogs(){
-  const s=state.status;
-  if(state.view!=="sources"||!s||s.demo||!s.collector.has_session||hasSources(s))return;
-  if(state.dialogs.length||state.dialogsRequested===state.workspaceRevision)return;
-  state.dialogsRequested=state.workspaceRevision;loadDialogs($("load-dialogs"));
-}
-$("dialog-search").addEventListener("input",renderDialogs);
-$("dialog-kind").addEventListener("change",renderDialogs);
-$("finish-source-selection").addEventListener("click",()=>{
-  show("available-card",false);$("collector-toggle").focus({preventScroll:true});
-});
+function renderTargets() { sourcesView?.renderTargets(); }
 const mediaLimit=c=>Math.max(0,...Object.values(c?.types||{}).filter(r=>r.enabled).map(r=>r.max_mb))||c?.max_media_mb;
 function renderHistory(){
   const s=state.status,h=s?.history||{phase:"none"},phase=h.phase;
@@ -1778,7 +1705,7 @@ function renderScope(){
   if(saved.folder_id!==null&&!sc.folders.some(f=>f.id===saved.folder_id))select.append(new Option(tr("Folder {id}",{id:saved.folder_id}),String(saved.folder_id)));
   select.value=chosen;
   $("scope-folder-hint").textContent=tr(sc.folders.length?"Chats added to this folder in Telegram are picked up within an hour; new chats that match its rules at once.":
-    "Press Load chats above to list this account's folders.");
+    "Press Refresh chat list above to list this account's folders.");
   const draft=scopeDraft();
   show("scope-folder-field",draft.mode==="folder");show("scope-types",draft.mode!=="selected");show("scope-new",draft.mode!=="selected");
   const box=$("scope-exclude");box.replaceChildren();

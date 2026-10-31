@@ -159,6 +159,83 @@ def check_export_location(page):
     page.locator('[data-view="sources"]').click()
 
 
+def check_dialog_refresh(page, server):
+    output = ROOT / "build" / "ux-review" / "after" / "20"
+    output.mkdir(parents=True, exist_ok=True)
+    requests = []
+    page.on("request", lambda request: requests.append(request.url)
+            if request.method == "POST" and "/api/snapshot" in request.url else None)
+    page.route("**/api/dialogs", lambda route: route.fulfill(status=503,
+               content_type="application/json", body='{"detail":"Synthetic refresh failure"}'), times=1)
+    page.locator("#load-dialogs").click()
+    expect(page.locator("#dialog-refresh-status")).to_contain_text("Synthetic refresh failure")
+    expect(page.locator("#dialog-refresh-retry")).to_be_visible()
+    dialogs = [{"chat_id": -1000000090000 - number, "title": f"Available source {number + 1:02}",
+                "kind": "supergroup", "visibility": "private_or_unlisted"} for number in range(21)]
+    server.app.state.collector.dialog_cache = {item["chat_id"]: item for item in dialogs}
+    body = {"dialogs": dialogs, "folders": [], "limit": 1000, "may_be_truncated": False}
+    page.route("**/api/dialogs", lambda route: route.fulfill(content_type="application/json",
+                                                           body=json.dumps(body)))
+    hold_api_response(page, "/api/dialogs")
+    page.locator("#dialog-refresh-retry").click()
+    expect(page.locator("html")).to_have_attribute("data-acceptance-held", "true")
+    expect(page.locator("#load-dialogs")).to_be_disabled()
+    expect(page.locator("#dialog-refresh-progress")).to_be_visible()
+    page.locator("#sources-tab-recording").click()
+    release_api_response(page)
+    expect(page.locator("#sources-panel-recording")).to_be_visible()
+    expect(page.locator("#dialog-refresh-progress")).to_be_hidden()
+    expect(page.locator("#dialog-refresh-status")).to_contain_text("Last refreshed in this session:")
+    expect(page.locator("#dialog-refresh-retry")).to_be_hidden()
+    assert not requests, requests
+    page.locator("#sources-tab-chats").click()
+    expect(page.locator("#target-card")).to_be_hidden()
+    expect(page.locator("#dialog-list .target-row")).to_have_count(10)
+    page.locator("#dialog-next").click()
+    expect(page.locator("#dialog-page-count")).to_have_text("11–20 of 21")
+    page.locator("#dialog-next").click()
+    expect(page.locator("#dialog-list .target-row")).to_have_count(1)
+    page.locator("#dialog-prev").click()
+    page.locator("#dialog-prev").click()
+    page.locator("#dialog-list .source-select").nth(1).check()
+    selected = page.locator("#dialog-list .source-select").nth(1)
+    selected.focus()
+    page.evaluate("refreshStatus()")
+    expect(selected).to_be_checked()
+    expect(selected).to_be_focused()
+    page.locator("#dialog-add-selected").click()
+    expect(page.locator("#dialog-list button").nth(1)).to_have_text("Selected")
+    expect(page.locator("#dialog-list button").nth(1)).to_be_disabled()
+    expect(page.locator("#sources-tab-count")).to_have_text("21")
+
+    # A late refresh cannot navigate away from the journal or discard the old list on failure.
+    hold_api_response(page, "/api/dialogs")
+    page.locator("#load-dialogs").click()
+    expect(page.locator("html")).to_have_attribute("data-acceptance-held", "true")
+    page.locator('[data-view="observations"]').click()
+    release_api_response(page)
+    expect(page.locator("#view-observations")).to_be_visible()
+    page.locator('[data-view="sources"]').click()
+    expect(page.locator("#available-card")).to_be_visible()
+    page.route("**/api/dialogs", lambda route: route.fulfill(status=503,
+               content_type="application/json", body='{"detail":"Retry later"}'), times=1)
+    page.locator("#load-dialogs").click()
+    expect(page.locator("#dialog-refresh-status")).to_contain_text("Retry later")
+    expect(page.locator("#dialog-list .target-row")).to_have_count(10)
+    page.locator("#dialog-refresh-retry").click()
+    expect(page.locator("#dialog-refresh-retry")).to_be_hidden()
+    expect(page.locator("#dialog-refresh-progress")).to_be_hidden()
+    expect(page.locator("#toast")).not_to_be_visible(timeout=10000)
+    for width in (1440, 390):
+        page.set_viewport_size({"width": width, "height": 844})
+        page.evaluate("scrollTo(0,0)")
+        assert page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1")
+        assert page.locator("#view-sources").bounding_box()["height"] <= 3 * 844
+        page.screenshot(path=str(output / f"refresh-{width}.png"), full_page=True)
+    page.locator("#finish-source-selection").click()
+    expect(page.locator("#target-card")).to_be_visible()
+
+
 def main():
     output = ROOT / "build" / "ux-review" / "after" / "17"
     output.mkdir(parents=True, exist_ok=True)
@@ -245,6 +322,7 @@ def main():
 
         check_targets(page, server)
         check_export_location(page)
+        check_dialog_refresh(page, server)
         page.set_viewport_size({"width": 1440, "height": 1000})
         page.locator("#sources-tab-recording").click()
         second = page.evaluate("json('profiles',{label:'Independent workspace'}).then(value=>value.id)")
