@@ -1,6 +1,6 @@
 # Sealed capture from a personal fork
 
-**Unreleased preview.** A fork launches a pinned reusable workflow from
+**Preview available from `main`.** A fork launches a pinned reusable workflow from
 `phishdestroy/TgWitness`. The workflow reads one selected chat using a newly
 created Telegram session, attests the resulting evidence ZIP, and uploads only
 recipient-encrypted handoffs. The normal administration panel is not exposed.
@@ -13,9 +13,11 @@ establish historical completeness, or certify that nobody accessed the host.
 
 ## User flow
 
-1. Obtain a trusted TgWitness checkout. Open `website/sealed.html` locally in a
-   modern browser, or use the official site's `/TgWitness/sealed.html` page once
-   that version is published. The helper makes no network requests for key or
+1. Choose **GitHub Actions capture (preview)** on the project homepage, the
+   workspace login screen, or **Exports → Open capture helper**. You can also
+   open the [official helper](https://phishdestroy.github.io/TgWitness/sealed.html?lang=en)
+   or `website/sealed.html` from a trusted checkout in a modern browser.
+   The helper makes no network requests for key or
    file processing. It is available in English and Russian.
 2. Generate a key and save **sealed-key.json**. This is the only private
    decryption key. Copy the separate public **recipient** value. Losing the
@@ -49,6 +51,57 @@ establish historical completeness, or certify that nobody accessed the host.
 
 The repository must contain the published pinned source and reusable-workflow
 commits. A local branch alone cannot be invoked by another GitHub repository.
+
+## Choose this mode or a persistent workspace
+
+| Need | Mode |
+| --- | --- |
+| Collect one accessible chat during a limited session and give a reviewer an externally attested archive | GitHub Actions capture (preview) |
+| Observe several chats continuously, manage accounts, search and read a growing archive | Local or Docker workspace |
+| Prove that messages were never fabricated, recover unseen deletions, or hide live processing from the hosting provider | Neither mode establishes this |
+
+This starts a separate capture with a new login. It does not upload your existing
+local journal, export the currently open workspace, or reuse its Telegram session.
+An unfinished cloud capture cannot resume after its runner is destroyed; a new
+workflow starts a new capture. The helper is English/Russian; its entry points
+are translated with the rest of the interface.
+
+## What is public, and what must stay private
+
+Forking copies project code into your repository. It does **not** export your
+Telegram account. The recipient workflow input is a public encryption key.
+Keep `sealed-key.json`, Telegram credentials, login codes, 2FA passwords and the
+decrypted connection URL out of commits, workflow inputs and public logs.
+
+The workflow publishes encrypted connection/result artifacts for one day.
+Download both in time; GitHub Actions availability, account limits and billing
+apply. A public fork is not a promise of unlimited free compute. No payment or
+GitHub access token is entered into the helper.
+
+The private decryption key stays in your browser/file. Telegram session material
+and plaintext observations necessarily exist inside the temporary collector.
+GitHub and the HTTPS tunnel remain trusted infrastructure. Attestation may make
+the archive digest and workflow identity public; the archive contents are not
+placed in the attestation. The attestation timestamp is not a message timestamp.
+
+## Troubleshooting
+
+| Symptom | Next step |
+| --- | --- |
+| No **Run workflow** button | Open your own fork, enable Actions, and sync it with upstream `main`. Do not edit the approved upstream pins to bypass a failure. |
+| No `sealed-connection` artifact | Check whether the job started and completed its startup/upload step. Queue, runner, image download, tunnel or repository policy failures can prevent startup. |
+| Cannot open the connection | Load the saved key for this run, unzip the downloaded artifact and select `connection.tgwsealed`. The runner must still be active. |
+| History is paused | Check the panel's status and use Resume while the session remains active, or finish with the data already collected. Telegram limits and inaccessible content can leave gaps. |
+| No `sealed-result` | Cancellation or expiry before selecting a chat produces no archive. A failed collection, attestation or packaging step also prevents delivery. Inspect the failed step without posting credentials. |
+| Browser cannot decrypt a large archive | Use the streaming CLI below for packages larger than 256 MiB. A wrong or lost private key cannot decrypt the result. |
+| Verification rejects the signer | Use a trusted current TgWitness installation and the exact caller `OWNER/REPOSITORY`. Do not accept a replacement policy supplied with the archive. |
+| Telegram still lists the temporary session | End it in Settings → Devices. Logout can fail and a forcibly terminated workflow may not run cleanup. |
+
+Before relying on this preview, try a small chat you control: create a message
+and attachment, collect them, decrypt the result, run the verifier, check the
+coverage/media outcomes and confirm Telegram session revocation. Automated
+checks use a synthetic Telegram client plus a separate real GitHub certificate
+test; they do not establish live account acceptance.
 
 ## Local decryption and verification
 

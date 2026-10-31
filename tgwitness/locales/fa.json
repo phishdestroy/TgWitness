@@ -2365,5 +2365,8 @@
   "process_shutdown": "process_shutdown",
   "source_disabled": "source_disabled",
   "{messages} messages · {done} of {total} sources": "{messages} messages · {done} of {total} sources",
-  "{n} enabled sources. Start observation before loading history.": "{n} enabled sources. Start observation before loading history."
+  "{n} enabled sources. Start observation before loading history.": "{n} enabled sources. Start observation before loading history.",
+"GitHub Actions capture (preview)": "ثبت با GitHub Actions (پیش‌نمایش)",
+"A fresh Telegram login, one chat, an encrypted archive and GitHub provenance.": "ورود جدید به Telegram، یک گفتگو، آرشیو رمزگذاری‌شده و گواهی منشأ GitHub.",
+"Open capture helper": "باز کردن دستیار ثبت"
 }

@@ -41,8 +41,10 @@ def main():
         page.on("pageerror", lambda error: errors.append(str(error)))
         server = thread = sock = None
         try:
-            page.goto(f"http://127.0.0.1:{files.server_port}/sealed.html")
-            page.locator("#language").select_option("ru")
+            page.goto(f"http://127.0.0.1:{files.server_port}/sealed.html?lang=ru")
+            expect(page.locator("html")).to_have_attribute("lang", "ru")
+            expect(page.locator("#instructions")).to_have_attribute("href",
+                "https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/SEALED-ACTIONS.md")
             with page.expect_download() as download:
                 page.locator("#generate").click()
             key_path = root / "sealed-key.json"

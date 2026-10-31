@@ -2349,5 +2349,8 @@
   "process_shutdown": "process_shutdown",
   "source_disabled": "source_disabled",
   "{messages} messages · {done} of {total} sources": "{messages} messages · {done} of {total} sources",
-  "{n} enabled sources. Start observation before loading history.": "{n} enabled sources. Start observation before loading history."
+  "{n} enabled sources. Start observation before loading history.": "{n} enabled sources. Start observation before loading history.",
+"GitHub Actions capture (preview)": "GitHub Actions で収集（プレビュー）",
+"A fresh Telegram login, one chat, an encrypted archive and GitHub provenance.": "新しい Telegram ログイン、1つのチャット、暗号化アーカイブ、GitHub による出所の証明。",
+"Open capture helper": "収集アシスタントを開く"
 }

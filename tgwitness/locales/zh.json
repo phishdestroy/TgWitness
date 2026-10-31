@@ -2349,5 +2349,8 @@
   "process_shutdown": "process_shutdown",
   "source_disabled": "source_disabled",
   "{messages} messages · {done} of {total} sources": "{messages} messages · {done} of {total} sources",
-  "{n} enabled sources. Start observation before loading history.": "{n} enabled sources. Start observation before loading history."
+  "{n} enabled sources. Start observation before loading history.": "{n} enabled sources. Start observation before loading history.",
+"GitHub Actions capture (preview)": "通过 GitHub Actions 采集（预览版）",
+"A fresh Telegram login, one chat, an encrypted archive and GitHub provenance.": "新建 Telegram 登录会话、一个聊天、加密归档和 GitHub 来源证明。",
+"Open capture helper": "打开采集助手"
 }
