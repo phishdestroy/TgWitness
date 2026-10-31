@@ -46,6 +46,7 @@ from . import assurance
 from . import netclient
 from . import source_check
 from . import dossier
+from . import report
 from . import tuning
 from . import witness_api
 from . import interactions
@@ -169,6 +170,11 @@ class RoutePolicyUpdate(RoutePolicy):
 
 class AccessLogin(BaseModel):
     token: str = Field(min_length=1, max_length=512)
+
+
+def panel_language(request):
+    """The language the panel is shown in; reports set to "Same as the panel" use it."""
+    return i18n.pick(request.cookies.get(i18n.COOKIE), request.headers.get("accept-language"))
 
 
 def create_app(data_dir=None, demo=False, client_factory=None, token_override=None, allow_profiles=True,
@@ -523,7 +529,8 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         async def multi_export_start(request: Request, body: MultiExportStart):
             if not opens_chat_everywhere(request.state.principal, body.chat_id, [body.lead, *body.profiles]):
                 raise HTTPException(403, "This access does not open this chat in every chosen account.")
-            return await operation(app.state.multi_export.start, body.chat_id, body.profiles, body.lead)
+            return await operation(app.state.multi_export.start, body.chat_id, body.profiles, body.lead,
+                                   panel_language(request))
 
         @app.get("/api/multi-export/current", dependencies=[Depends(authenticate)])
         async def multi_export_current(request: Request):
@@ -1228,7 +1235,17 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     @app.post("/api/chat-export/start", dependencies=[Depends(authenticate)])
     async def chat_export_start(request: Request, body: ChatExport):
         require_chat(request, body.chat_id)
-        return await operation(app.state.collector.start_export, body.chat_id)
+        return await operation(app.state.collector.start_export, body.chat_id,
+                               report.resolved(app.state.store, panel_language(request)))
+
+    @app.get("/api/report-options", dependencies=[Depends(authenticate)])
+    async def get_report_options():
+        return report.saved(app.state.store).model_dump()
+
+    @app.post("/api/report-options", dependencies=[Depends(authenticate)])
+    async def set_report_options(body: report.ReportOptions):
+        # Recorded, signed, in every export manifest and report seal; not a journal event of its own.
+        return report.save(app.state.store, body).model_dump()
 
     def export_visible(request):
         state, allowed = app.state.collector.export_state, visible_chats(request)
@@ -1288,10 +1305,11 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         except Exception:
             raise HTTPException(409, "Journal integrity verification failed. Preserve the directory for inspection.") from None
 
-    async def build_export(fmt, password=None):
+    async def build_export(fmt, request, password=None):
+        options = report.resolved(app.state.store, panel_language(request))
         async with export_lock:
             try:
-                path = await asyncio.to_thread(export_file, app.state.store, app.state.vault, fmt)
+                path = await asyncio.to_thread(export_file, app.state.store, app.state.vault, fmt, options)
                 if password is not None:
                     path = await asyncio.to_thread(encrypt_export, path, fmt, password)
             except Exception as exc:
@@ -1303,17 +1321,17 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         return path
 
     @app.get("/api/export/{fmt}", dependencies=[Depends(authenticate)])
-    async def export(fmt: Literal["zip", "jsonl", "csv", "html"]):
-        path = await build_export(fmt)
+    async def export(request: Request, fmt: Literal["zip", "jsonl", "csv", "html"]):
+        path = await build_export(fmt, request)
         media_types = {"zip": "application/zip", "jsonl": "application/x-ndjson",
                        "csv": "text/csv", "html": "text/html"}
         return FileResponse(path, filename="tgwitness-evidence." + fmt, media_type=media_types[fmt],
                             background=BackgroundTask(path.unlink, missing_ok=True))
 
     @app.post("/api/export/{fmt}", dependencies=[Depends(authenticate)])
-    async def export_encrypted(fmt: Literal["zip", "jsonl", "csv", "html"], body: ExportPassword):
+    async def export_encrypted(request: Request, fmt: Literal["zip", "jsonl", "csv", "html"], body: ExportPassword):
 
-        path = await build_export(fmt, body.password)
+        path = await build_export(fmt, request, body.password)
         return FileResponse(path, filename="tgwitness-evidence-" + fmt + "-encrypted.zip", media_type="application/zip",
                             background=BackgroundTask(path.unlink, missing_ok=True))
 

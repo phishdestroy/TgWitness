@@ -69,6 +69,8 @@ POLICY = {
     "GET /api/export/{fmt}": ("export", None),
     "POST /api/export/{fmt}": ("export", None),
     "GET /api/anchor-request": ("export", None),
+    "GET /api/report-options": ("view", None),
+    "POST /api/report-options": ("export", None),
     "GET /api/chats/{chat_id}/dossier/export": ("export", "path"),
     "POST /api/chats/{chat_id}/dossier/export": ("export", "path"),
     "POST /api/chat-export/start": ("export", "body"),

@@ -657,6 +657,14 @@ footer a:hover { color: var(--text); text-decoration: underline; }
 .alerts-daily select { width: auto; min-height: 34px; margin-top: 18px; }
 .alerts-daily .hint { margin-top: 18px; }
 #export-encrypt input[type=password] { max-width: 420px; }
+.report-settings { margin-top: 18px; }
+.report-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; }
+.report-parts { border: 0; padding: 0; margin: 18px 0 0; min-width: 0; }
+.report-parts legend { padding: 0; font-weight: 600; }
+.report-parts .check-label { margin-top: 10px; }
+.report-parts .check-label:has(input:disabled) { opacity: .55; cursor: default; }
+.report-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 18px; }
+@media (max-width: 700px) { .report-grid { grid-template-columns: 1fr; } }
 #replica-form > .secondary { margin-top: 14px; }
 .replica-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; }
 @media (max-width: 700px) { .replica-fields { grid-template-columns: 1fr; } }

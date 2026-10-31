@@ -319,6 +319,7 @@ function navigate(view) {
   if (view==="accounts") {renderAccounts();loadProfiles().catch(e=>toast(e.message,true));}
   if (view==="chats") refreshChats().catch(e=>toast(e.message,true));
   if (view==="access") loadAccess().catch(e=>toast(e.message,true));
+  if (view==="evidence") loadReportSettings().catch(e=>toast(e.message,true));
   if (view==="integrations") window.TgWitnessIntegrations?.load();
   else {window.TgWitnessIntegrations?.clear();window.TgWitnessWebhooks?.clear();}
   if(view==="analysis")window.TgWitnessAnalysis?.load();
@@ -1152,6 +1153,34 @@ document.querySelectorAll("[data-export]").forEach(b=>b.addEventListener("click"
   if(await download("export/"+fmt,"tgwitness-evidence-"+fmt+"-encrypted.zip",true,false,{password}))
     toast(tr("Encrypted export saved. Open it in 7-Zip or WinRAR with the password; the signed file inside is unchanged."));
 })));
+// Report settings: language, case details and contents of the sealed report in every export.
+const REPORT_FIELDS={"report-language":"language","report-theme":"theme","report-case-title":"case_title",
+  "report-case-id":"case_id","report-examiner":"examiner","report-organization":"organization","report-notes":"notes"};
+const REPORT_CHECKS={"report-timeline":"timeline","report-raw":"raw_records","report-media":"media_previews"};
+async function loadReportSettings(){
+  if(!state.status)return;
+  const profile=state.profile,options=await json("report-options"),select=$("report-language");
+  if(profile!==state.profile)return;
+  if(!select.options.length){
+    select.append(new Option(tr("Same as the panel"),"auto"));
+    for(const [code,name] of Object.entries(PANEL_LANGUAGES)){const o=new Option(name,code);o.lang=code;select.append(o);}
+  }
+  for(const [id,key] of Object.entries(REPORT_FIELDS))$(id).value=options[key];
+  for(const [id,key] of Object.entries(REPORT_CHECKS))$(id).checked=options[key];
+  syncReportParts();$("report-status").textContent="";
+}
+function syncReportParts(){$("report-raw").disabled=$("report-media").disabled=!$("report-timeline").checked;}
+$("report-timeline").addEventListener("change",syncReportParts);
+$("report-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
+  const body={};
+  for(const [id,key] of Object.entries(REPORT_FIELDS))body[key]=$(id).value;
+  for(const [id,key] of Object.entries(REPORT_CHECKS))body[key]=$(id).checked;
+  await json("report-options",body);
+  $("report-status").textContent=tr("Saved. The next export uses these settings.");toast(tr("Report settings saved."));
+});});
+document.querySelectorAll("[data-go-reports]").forEach(link=>link.addEventListener("click",event=>{
+  event.preventDefault();navigate("evidence");$("report-form").scrollIntoView({block:"start"});
+}));
 $("export-encrypt-on").addEventListener("change",()=>{
   const on=$("export-encrypt-on").checked;show("export-password-field",on);if(on)$("export-password").focus();else $("export-password").value="";
 });
