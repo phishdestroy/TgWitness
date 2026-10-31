@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Added a five-stage capture animation and examples of message/collector
+  substitution to the helper and Exports.
+
 - Replaced the separate capture form with a four-step wizard shared by Exports
   and the standalone page. It uses workspace themes and controls, explains each
   file handoff, confirms key saving and clears its key when the workspace locks.

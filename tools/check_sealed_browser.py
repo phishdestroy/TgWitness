@@ -1,8 +1,3 @@
-"""Browser-generated keys -> fresh login -> capture -> encrypted download -> browser decrypt.
-
-All Telegram messages and the attestation fixture are synthetic. A real GitHub
-certificate is deliberately not claimed by this offline test.
-"""
 import functools
 import json
 import socket
@@ -47,6 +42,27 @@ def main():
             expect(page.locator("html")).to_have_attribute("lang", "ru")
             expect(page.locator("#instructions")).to_have_attribute("href",
                 "https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/SEALED-ACTIONS.md")
+            expect(page.locator("[data-capture-story]")).to_have_attribute("data-running", "false")
+            for scene in range(5):
+                page.locator(f'[data-story-frame="{scene}"]').click()
+                expect(page.locator(".story-visual")).to_have_attribute("data-scene", str(scene))
+            for scenario, valid in (("message", "false"), ("collector", "false"), ("original", "true")):
+                page.locator(f'[data-story-scenario="{scenario}"]').click()
+                expect(page.locator(".story-verdict")).to_have_attribute("data-valid", valid)
+            page.locator('[data-story-frame="0"]').click()
+            page.locator(".story-player").scroll_into_view_if_needed()
+            page.clock.install()
+            page.locator("[data-story-play]").click()
+            expect(page.locator("[data-capture-story]")).to_have_attribute("data-running", "true")
+            page.clock.run_for(7600)
+            expect(page.locator(".story-visual")).to_have_attribute("data-scene", "1")
+            page.locator("[data-story-play]").click()
+            page.clock.run_for(8000)
+            expect(page.locator(".story-visual")).to_have_attribute("data-scene", "1")
+            page.clock.resume()
+            page.locator("[data-story-start]").click()
+            expect(page.locator("#capture-setup")).to_be_focused()
+            page.locator('[data-story-frame="0"]').click()
             for theme in ("light", "dark"):
                 page.locator(f'[data-theme-choice="{theme}"]').click()
                 expect(page.locator("html")).to_have_attribute("data-theme", theme)
@@ -112,7 +128,6 @@ def main():
             fixture = root / "synthetic-attestation.jsonl"
             fixture.write_text('{"synthetic":true}\n')
             package(cfg, root / "out", fixture)
-            # A reloaded helper can recover using only the previously saved private key.
             page.reload()
             page.locator("#key-file").set_input_files(key_path)
             expect(page.locator("#capture-key-saved")).to_be_checked()
