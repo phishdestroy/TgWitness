@@ -10,7 +10,7 @@ from pathlib import Path
 from . import keyboard
 from . import message_content
 from . import continuity
-from .journal_index import CHAT_KINDS, MEDIA_KINDS, TEXT_KINDS, JournalIndex, migrate_media, search_text
+from .journal_index import CHAT_KINDS, MEDIA_KINDS, TEXT_KINDS, JournalIndex, migrate_media, nul_text, search_text
 from .journal_index import GONE_KINDS as GONE_KINDS
 
 ZERO = "0" * 64
@@ -36,6 +36,7 @@ class Store:
         self.lock = threading.RLock()
         self.db = sqlite3.connect(root / "journal.sqlite3", check_same_thread=False)
         self.db.create_function("search_text", 1, search_text, deterministic=True)
+        self.db.create_function("nul_text", 1, nul_text, deterministic=True)
         self.db.row_factory = sqlite3.Row
         self.db.executescript("""
             PRAGMA journal_mode=WAL;
@@ -375,6 +376,11 @@ class Store:
                 filters.append(table + " MATCH ?")
                 params.append(candidate)
             value = "COALESCE(json_extract(payload,'$.text'),'')" if text_only else "payload"
+            if text_only:
+                # Keep the fast path and scalar semantics. Only escaped-NUL text
+                # needs Python extraction on SQLite versions with JSON1 truncation.
+                value = ("CASE WHEN instr(payload,'\\u0000')>0 AND json_type(payload,'$.text')='text' "
+                         "THEN nul_text(payload) ELSE " + value + " END")
             filters.append("instr(search_text(" + value + "), ?)>0")
             params.append(search_text(search))
         if message_only:

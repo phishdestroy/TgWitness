@@ -145,7 +145,7 @@ def review_drawer(page, fixture, output):
     assert page.evaluate("navigator.clipboard.readText()") == fixture["edited"]["hash"]
     drawer.get_by_role("button", name="Link to this record", exact=True).click()
     copied = page.evaluate("navigator.clipboard.readText()")
-    assert "event=" + str(fixture["edited"]["seq"]) in copied and "workspace=default" in copied
+    assert "/journal/event/" + str(fixture["edited"]["seq"]) in copied and "ws=default" in copied
     current = fixture["edited"]["seq"]
     next_seq = page.evaluate("state.events[state.events.findIndex(e=>e.seq===state.drawerSeq)+1].seq")
     page.keyboard.press("j")
