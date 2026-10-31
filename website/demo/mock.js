@@ -66,6 +66,25 @@
       matched: counted ? matches.length : null, count_exact: counted};
   }
 
+  function chatMessages(all, path, params) {
+    const known = new Map(); let included = false;
+    for (const [key, answer] of Object.entries(all)) {
+      if (key.split('?')[0] !== path) continue;
+      included = true;
+      for (const message of JSON.parse(answer.text).messages) known.set(message.message_id, message);
+    }
+    if (!included) return null;
+    const before = params.get('before_id'), after = params.get('after_id');
+    const limit = Math.min(200, Math.max(1, Number(params.get('limit')) || 60));
+    const ordered = [...known.values()].sort((a, b) => a.message_id - b.message_id);
+    const matching = ordered.filter(message => (before === null || message.message_id < Number(before))
+      && (after === null || message.message_id > Number(after)));
+    const messages = after === null ? matching.slice(-limit) : matching.slice(0, limit);
+    const first = messages[0]?.message_id, last = messages.at(-1)?.message_id;
+    return {messages, next_before: ordered.some(message => message.message_id < first) ? first : null,
+      next_after: ordered.some(message => message.message_id > last) ? last : null};
+  }
+
   window.fetch = async (input, init = {}) => {
     const url = new URL(typeof input === "string" ? input : input.url, location.href);
     const found = url.pathname.match(/\/((?:profiles\/[a-f0-9]{32}\/)?api\/.*)$/);
@@ -79,6 +98,10 @@
     if (method !== "GET") return json(403, {detail: READ_ONLY});
     const all = await answers;
     if (path.endsWith("/api/exports/history")) return json(200, {exports: [], limit: 20});
+    if (/\/api\/chats\/-?\d+\/messages$/.test(path)) {
+      const messages = chatMessages(all, path, url.searchParams);
+      return messages ? json(200, messages) : json(404, {detail: MISSING});
+    }
     if (all[path + url.search]) return recorded(all[path + url.search]);
     if (path.endsWith("/api/events")) return json(200, events(all, url.searchParams));
     if (all[path]) return recorded(all[path]);

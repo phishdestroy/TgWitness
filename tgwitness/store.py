@@ -238,19 +238,31 @@ class Store:
                 "SELECT message_id FROM message_state_index INDEXED BY message_alive WHERE " + where +
                 " ORDER BY message_id DESC LIMIT ?", (*params, limit))]
 
-    def chat_messages(self, chat_id, before_id=None, limit=60):
+    def chat_messages(self, chat_id, before_id=None, limit=60, *, after_id=None):
         """Readable view of one chat: every saved version, deletion and attachment per message."""
+        if before_id is not None and after_id is not None:
+            raise ValueError("Choose one message cursor.")
+        if not 1 <= limit <= 200:
+            raise ValueError("Limit must be 1–200.")
         marks = ",".join("?" * len(CHAT_KINDS))
         where, params = "chat_id=?", [chat_id]
         if before_id is not None:
             where += " AND message_id<?"
             params.append(before_id)
+        if after_id is not None:
+            where += " AND message_id>?"
+            params.append(after_id)
+        direction = "ASC" if after_id is not None else "DESC"
         with self.lock:
             ids = [r[0] for r in self.db.execute(
-                "SELECT message_id FROM message_state_index WHERE " + where + " ORDER BY message_id DESC LIMIT ?",
+                "SELECT message_id FROM message_state_index WHERE " + where + " ORDER BY message_id " + direction + " LIMIT ?",
                 (*params, limit))]
             if not ids:
-                return {"messages": [], "next_before": None}
+                return {"messages": [], "next_before": None, "next_after": None}
+            older = self.db.execute(
+                "SELECT 1 FROM message_state_index WHERE chat_id=? AND message_id<? LIMIT 1", (chat_id, min(ids))).fetchone()
+            newer = self.db.execute(
+                "SELECT 1 FROM message_state_index WHERE chat_id=? AND message_id>? LIMIT 1", (chat_id, max(ids))).fetchone()
             rows = self.db.execute(
                 "SELECT seq, observed_at, source_at, kind, message_id, payload FROM events"
                 " WHERE chat_id=? AND message_id IN (" + ",".join("?" * len(ids)) + ") AND kind IN (" + marks + ")"
@@ -304,7 +316,8 @@ class Store:
             item["buttons"] = item["versions"][-1]["buttons"] if item["versions"] else None
             item["edited"] = len(item["versions"]) > 1 or bool(item["telegram_edited_at"])
             result.append(item)
-        return {"messages": result, "next_before": min(ids) if len(ids) == limit else None}
+        return {"messages": result, "next_before": min(ids) if older else None,
+                "next_after": max(ids) if newer else None}
 
     def events_after(self, seq, limit):
         """Consecutive journal records after seq, as stored (for the off-site copy)."""

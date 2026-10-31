@@ -38,8 +38,8 @@
 #notify-panel .notice-action { min-height: 30px; padding: 3px 0; border: 0; background: transparent;
   color: var(--accent-text); font-size: 12px; font-weight: 600; }
 #notify-panel .secondary-action { color: var(--muted); font-weight: 500; }
-#notify-panel button:hover:not(:disabled) { color: var(--accent-hover); }
-#notify-panel button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+#notify-panel button:hover:not(:disabled) { color: var(--link-hover); }
+#notify-panel button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 .notice-footer { border-top: 1px solid var(--border); padding: 10px 16px; }
 .notice-footer-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .notice-footer button { min-height: 32px; padding: 4px 0; border: 0; background: transparent; font-size: 12px; color: var(--accent-text); }

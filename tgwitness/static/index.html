@@ -7,7 +7,7 @@
 <meta name="color-scheme" content="light dark">
 <title>TgWitness · Observation workspace</title>
 <link rel="icon" type="image/svg+xml" href="/mark.svg">
-<link rel="stylesheet" href="/style.css?v=0.7.0-polling1">
+<link rel="stylesheet" href="/style.css?v=0.7.0-chats11">
 <link rel="stylesheet" href="/components/shell.css?v=1">
 <link rel="stylesheet" href="/components/health.css?v=1">
 <link rel="stylesheet" href="/components/collection.css?v=1">
@@ -17,11 +17,13 @@
 <link rel="stylesheet" href="/views/accounts.css?v=29">
 <link rel="stylesheet" href="/views/access.css?v=30">
 <link rel="stylesheet" href="/components/journal.css?v=4">
+<link rel="stylesheet" href="/views/chats.css?v=11">
+<link rel="stylesheet" href="/views/chat-list.css?v=12">
 <link rel="stylesheet" href="/cloud-capture.css?v=5"><link rel="stylesheet" href="/cloud-capture-story.css?v=3">
 <script src="/theme.js?v=0.7.0"></script>
 <script src="/guide-locale.js" data-scope="panel"></script>
 <script defer src="/i18n.js?v=0.7.0"></script>
-<script defer src="/app.js?v=0.7.0-journal28"></script>
+<script defer src="/app.js?v=0.7.0-chats12"></script>
 <script defer src="/integrations.js?v=2"></script>
 <script defer src="/analysis.js?v=3"></script>
 <script defer src="/media-analysis.js?v=2"></script>
@@ -845,14 +847,14 @@
           <div class="chat-title"><span class="avatar lg" id="chat-avatar"></span><div><h2 id="chat-name"></h2><p id="chat-sub"></p></div></div>
           <div class="chat-actions">
             <button class="quiet" id="chat-pattern" type="button" aria-pressed="false" aria-label="Dotted background" title="Dotted background"><svg aria-hidden="true" class="icon"><use href="#i-settings"/></svg></button>
-            <button class="primary" id="chat-export-start" title="Download the whole chat as a signed archive (chat.json + chat.html)" type="button"><svg aria-hidden="true" class="icon"><use href="#i-archive"/></svg> <span class="label" id="chat-export-label">Export chat</span></button>
+            <button class="primary" id="chat-export-start" aria-label="Export chat" title="Download the whole chat as a signed archive (chat.json + chat.html)" type="button"><svg aria-hidden="true" class="icon"><use href="#i-archive"/></svg> <span class="label" id="chat-export-label">Export chat</span></button>
             <button class="primary" hidden id="chat-export-get" type="button"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Save export</button>
           </div>
         </header>
         <div class="chat-toolbar" aria-label="Chat tools">
           <div class="chat-history-tools"><select aria-label="How many recent messages to load" id="chat-history-limit"><option value="100">Last 100</option><option value="250">Last 250</option><option value="500">Last 500</option></select><button class="quiet" id="chat-load-history" title="Download recent messages from Telegram into this view" type="button"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Load history</button></div>
         </div>
-        <div class="chat-status" id="chat-status" role="status"></div>
+        <div class="chat-status" id="chat-status"></div>
         <div class="export-box" hidden id="export-box" role="status"></div>
         <div class="chat-feed" id="chat-feed"></div>
         <form class="chat-compose" id="chat-compose">

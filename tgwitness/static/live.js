@@ -23,7 +23,7 @@
   async function flush(force=false){
     if(!context||flushing||!pending||(!force&&(paused||!context.canRefresh())))return;
     const rev=generation,count=pending;flushing=true;let success=false;
-    try{await context.refresh();success=true;if(rev===generation)pending=Math.max(0,pending-count);}
+    try{await context.refresh({force});success=true;if(rev===generation)pending=Math.max(0,pending-count);}
     catch{}finally{if(rev===generation){flushing=false;render();
       if(pending&&!paused&&context?.canRefresh()){clearTimeout(flushTimer);flushTimer=setTimeout(()=>flush(),success?200:3000);}
     }}

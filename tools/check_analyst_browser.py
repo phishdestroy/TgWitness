@@ -288,8 +288,7 @@ def palette_checks(page):
     expect(page.locator("#quick-option-workspace-default")).to_be_visible()
     page.locator("#quick-option-workspace-default").click()
     expect(page.locator("#profile-select")).to_have_value("default")
-    # The selector updates before the transition's final syncLive(). Starting the
-    # synthetic stream now would let that real transition replace the fixture.
+    # Wait for the final syncLive before installing the synthetic stream.
     page.wait_for_function("()=>state.profile==='default'&&!document.querySelector('#workspace').inert")
 
 

@@ -173,5 +173,14 @@
     try{await pending;}catch(error){if(current(turn)){$("ai-status").textContent=error.message;loaded=false;}}
     finally{if(loading===pending)loading=null;}
   }
-  window.TgWitnessAnalysis={clear,syncStatus,loadSettings,load};
+  async function focusChat(id){
+    if(!syncStatus().enabled||state.view!=='analysis')return false;
+    const turn=generation;await load();
+    if(!current(turn)||!loaded||state.view!=='analysis'||!capabilities().enabled)return false;
+    const choices=[...$("ask-chats").querySelectorAll('input[type="checkbox"]')];
+    if(!choices.some(input=>input.value===String(id)))return false;
+    for(const input of choices)input.checked=input.value===String(id);
+    $("ask-question").focus({preventScroll:true});return true;
+  }
+  window.TgWitnessAnalysis={clear,syncStatus,loadSettings,load,focusChat};
 })();
