@@ -270,6 +270,11 @@ function viewAllowed(view){
 }
 function applyAccess(){
   document.querySelectorAll(".sidebar .nav[data-view]").forEach(n=>n.hidden=!viewAllowed(n.dataset.view));
+  document.querySelectorAll(".nav-section").forEach(heading=>{
+    let next=heading.nextElementSibling,visible=false;
+    while(next&&!next.classList.contains("nav-section")){visible=visible||!next.hidden;next=next.nextElementSibling;}
+    heading.hidden=!visible;
+  });
   document.querySelectorAll("[data-open]").forEach(n=>n.hidden=!viewAllowed(n.dataset.open));
   $("collector-toggle").hidden=!may("collect")||!!state.status?.chats_limited;
   $("manage-profiles").hidden=!state.me?.admin;
@@ -505,6 +510,8 @@ function renderStatus() {
   renderHistory();
   renderComposer();
   const s=state.status,c=s.collector,counts=s.stats.counts;
+  $("workspace").dataset.demo=String(!!s.demo);
+  $("workspace").dataset.onlineDemo=String(!!window.TGW_ONLINE_DEMO);
   show("demo-banner",s.demo);
   renderChatStatus();
   $("app-version").textContent=s.version?"TgWitness "+s.version:"";
@@ -648,16 +655,16 @@ function renderAccounts(){
     const head=node("div","account-head"),who=node("div","account-who"),account=c&&c.account;
     const title=node("div");title.append(node("h2","",p.label));
     // The badge sums up every part (health.py); the observation phase alone is listed below it.
-    const badge=!down&&p.health?stateBadge(p.health.state,"account-badge"):
+    const badge=s.demo?node("span","account-badge sample",tr("Sample data")):!down&&p.health?stateBadge(p.health.state,"account-badge"):
       node("span","account-badge "+(c&&c.running?"on":down?"down":"off"),accountPhaseLabel(p));
-    title.append(node("p","account-id",accountIdentity(p)));
+    title.append(node("p","account-id",s.demo?tr("Demo workspace"):accountIdentity(p)));
     who.append(avatarNode(account?account.id:null,account&&account.username?account.username:p.label,"lg",p.id),title);
     head.append(who,badge);card.append(head);
     if(!down){
       const meta=node("dl","account-meta");
       const pair=(k,v)=>{meta.append(node("dt","",k),node("dd","",v));};
-      pair(tr("Observation"),accountPhaseLabel(p));
-      const attention=p.health?Object.keys(healthPartNames).filter(name=>needsLook(p.health[name]?.state)):[];
+      pair(tr("Observation"),s.demo?tr("Sample data"):accountPhaseLabel(p));
+      const attention=!s.demo&&p.health?Object.keys(healthPartNames).filter(name=>needsLook(p.health[name]?.state)):[];
       if(attention.length)pair(tr("Needs attention"),attention.map(name=>healthPartNames[name]+" — "+healthStates[healthKnown(p.health[name].state)][0]).join(" · "));
       pair(tr("Sources"),tr("{n} active",{n:p.sources_enabled||0})+(p.sources_total?" / "+p.sources_total:""));
       pair(tr("Journal"),trn("{n} event","{n} events",p.stats&&p.stats.total||0));
@@ -1258,6 +1265,10 @@ async function loadReportSettings(){
   for(const [id,key] of Object.entries(REPORT_FIELDS))$(id).value=options[key];
   for(const [id,key] of Object.entries(REPORT_CHECKS))$(id).checked=options[key];
   syncReportParts();$("report-status").textContent="";
+  if(window.TGW_ONLINE_DEMO){
+    $("report-form").querySelectorAll("input,select,textarea,button").forEach(control=>control.disabled=true);
+    $("report-status").textContent=tr("Sample data");
+  }
 }
 function syncReportParts(){$("report-raw").disabled=$("report-media").disabled=!$("report-timeline").checked;}
 $("report-timeline").addEventListener("change",syncReportParts);
@@ -2481,7 +2492,9 @@ async function refreshChats(refresh=false){
 }
 function renderChatsList(){
   const list=$("chats-list");list.replaceChildren();
+  const query=$("chat-search").value.trim().toLocaleLowerCase();
   for(const c of state.chats){
+    if(query&&!`${c.title||""} ${c.chat_id}`.toLocaleLowerCase().includes(query))continue;
     const title=c.title||tr("Chat {id}",{id:c.chat_id}),row=node("button","chat-item"+(c.chat_id===state.chat?" active":""));row.type="button";
     const body=node("span","chat-item-body"),top=node("span","chat-item-top"),bottom=node("span","chat-item-bottom");
     top.append(node("span","chat-item-title",title),node("span","chat-item-time",fmtShort(c.last_observed_at)));
@@ -2492,11 +2505,31 @@ function renderChatsList(){
     if(c.edited)badges.append(node("span","pill pill-edited",tr("{n} edited",{n:c.edited})));
     if(!c.enabled)badges.append(node("span","pill",tr("paused")));
     body.append(top,bottom,badges);row.append(avatarNode(c.chat_id,title),body);
+    row.setAttribute("aria-pressed",String(c.chat_id===state.chat));
     row.addEventListener("click",()=>openChat(c.chat_id).catch(e=>toast(e.message,true)));
     list.append(row);
   }
   if(!state.chats.length)list.append(node("p","hint chats-none",tr("No chats chosen yet.")));
+  else if(!list.children.length)list.append(node("p","hint chats-none",tr("No chats match your search.")));
 }
+$("chat-search").addEventListener("input",renderChatsList);
+$("chat-search").addEventListener("keydown",e=>{if(e.key==="Escape"){$("chat-search").value="";renderChatsList();}});
+$("chat-back").addEventListener("click",()=>{
+  document.querySelector(".chats-shell").dataset.panel="list";
+  $("chat-search").focus({preventScroll:true});
+});
+document.querySelectorAll("[data-demo-filter]").forEach(button=>button.addEventListener("click",()=>busy(button,async()=>{
+  if(!state.status?.demo)return;
+  const revision=state.workspaceRevision;
+  state.chatFilter=button.dataset.demoFilter;state.chatAuthor=null;
+  document.querySelector(".chats-shell").dataset.panel="chat";
+  if(state.view!=="chats")navigate("chats");
+  await refreshChats();
+  if(revision!==state.workspaceRevision||state.view!=="chats")return;
+  const version=$("chat-feed").querySelector("button.pill-edited");
+  if(state.chatFilter==="edited"&&version&&!version.closest(".bubble").querySelector(".versions"))version.click();
+  $("chat-feed").scrollTop=0;
+})));
 function beginChat(id){
   $("export-dialog").close("cancel");
   chatGeneration++;chatReady=false;state.chat=id;state.chatInfo=null;state.chatMessages=[];
@@ -2505,6 +2538,7 @@ function beginChat(id){
   renderComposer();renderChat();renderChatsList();
 }
 async function openChat(id){
+  document.querySelector(".chats-shell").dataset.panel="chat";
   beginChat(id);const loaded=await loadChatMessages("open");
   if(loaded)loadChatProfile().catch(()=>{});
   return loaded;
@@ -2543,6 +2577,7 @@ async function loadChatMessages(mode){
   return true;
 }
 function renderChatEmpty(){
+  document.querySelector(".chats-shell").dataset.panel="chat";
   const box=$("chat-empty"),s=state.status;show("chat-main",false);show("chat-empty",true);box.replaceChildren();
   if(!s)return;
   const add=(title,text,label,view)=>{box.append(node("h2","",title),node("p","",text));
@@ -2563,7 +2598,7 @@ function renderChat(){
 }
 function renderChatStatus(){
   const box=$("chat-status"),s=state.status,info=state.chatInfo;if(!info||!s||$("chat-main").hidden)return;
-  const c=s.collector;box.replaceChildren();
+  const c=s.collector,contextOpen=!!box.querySelector(".chat-context[open]");box.replaceChildren();
   const state_=node("div","chat-state"),say=(cls,text)=>{state_.className="chat-state "+cls;const t=node("span","",text);t.title=text;state_.append(t);};
   const action=(cls,label,work)=>{const b=node("button",cls+" small",label);b.type="button";b.addEventListener("click",()=>busy(b,work));state_.append(b);return b;};
   if(s.demo)say("info",tr("Demo with fictional messages. Deleted messages are red; edited ones keep every saved version."));
@@ -2577,9 +2612,18 @@ function renderChatStatus(){
   const filters=node("div","chat-filters");filters.setAttribute("role","group");filters.setAttribute("aria-label",tr("Show messages"));
   for(const [key,label] of [["all",tr("All")],["deleted",tr("Deleted")],["edited",tr("Edited")],["people",tr("People")]]){
     const f=node("button","filter"+(state.chatFilter===key?" active":""),label);f.type="button";
+    f.setAttribute("aria-pressed",String(state.chatFilter===key));
     f.addEventListener("click",()=>{state.chatFilter=key;if(key==="people")state.chatAuthor=null;renderChatStatus();renderChatFeed();});filters.append(f);
   }
-  mode.append(filters);box.append(state_,mode,profileNode());
+  const details=node("details","chat-context"),contextTitle=node("summary","",tr("Collection"));
+  details.open=contextOpen;details.append(contextTitle,mode,profileNode());
+  const toolbar=node("div","chat-filter-row");toolbar.append(filters);
+  if(!s.demo){box.append(state_);toolbar.append(details);}
+  else {
+    const hint=node("span","visually-hidden",tr("Demo with fictional messages. Deleted messages are red; edited ones keep every saved version."));
+    box.append(hint);
+  }
+  box.append(toolbar);
   if(state.chatAuthor!==null&&state.chatFilter!=="people"){
     const who=state.chatMessages.find(m=>m.sender?.id===state.chatAuthor),chip=node("div","chat-author-chip");
     const author=who?senderName(who):"ID "+state.chatAuthor;chip.append(node("span","",tr("Showing only messages from {name}",{name:author})));
@@ -2844,6 +2888,8 @@ function resetInteractions(){
   composeContext=null;composeReply=null;linkPreview=null;
   chatGeneration++;chatReady=false;composeDestination=null;
   $("chat-message").value="";$("chat-link").value="";$("chat-link-preview").replaceChildren();
+  $("chat-search").value="";
+  document.querySelector(".chats-shell").dataset.panel="chat";
   show("interaction-result",false);show("chat-reply",false);
 }
 function renderComposer(){
