@@ -14,6 +14,7 @@ instructions and the complete page index expand below them.
 
 | Asset | Purpose |
 | --- | --- |
+| `readme-nav-*.svg` | Compact README navigation in equal-width rows; separate phone labels keep all three actions readable without wrapping into two plus one. Regenerate with `python website/render_readme_navigation.py --font /path/to/Manrope.ttf`. |
 | `readme-feature-{export,investigate,history}*.svg` | Animated workflows for per-chat export, investigation across recorded chats and saved versions; still variants retain the final state |
 | `readme-features*.svg` | Combined three-column desktop layout and a stacked phone layout; the group cannot wrap into two cards plus one |
 | `wiki-*-{mobile,static,mobile-static}.svg` | Matching chapter covers with readable phone compositions and still alternatives |
