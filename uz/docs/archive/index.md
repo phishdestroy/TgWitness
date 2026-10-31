@@ -22,7 +22,7 @@ Yozib olingan yozuvlar, tan olingan matn va tahlilchi xulosalari alohida saqlana
 
 ## Avvalgi xabarlarni yuklash
 
-1. Ochiq **manbalar** bo'limida yoqilgan suhbatlarni ko'rib chiqing va kuzatuvni boshlang.
+1. **Manbalar → Qamrovdagi chatlar** bo'limini oching, yoqilgan chatlarni ko'rib chiqing va kuzatuvni boshlang.
 2. **To'liq tarixni yuklashni** tanlang. Jarayon o'sha paytda tanlangan manba ro'yxatidan foydalanadi.
 3. Zarur bo'lganda "**Pause history"** va "**Continue history" funksiyalaridan** foydalaning. Qayta ishga tushirgandan so'ng, davom ettirishni aniq ko'rsatib amalga oshiring.
 4. Har bir manba bo'yicha natija va ilovalar navbatini tekshiring. Dalillar eksporti bilan imzolangan ish jarayoni hisobotini saqlang.
@@ -31,9 +31,9 @@ Bu ish maydonini mavjud xabarlardan to'ldiradi. Sohbet bo'yicha HTML/JSON ekspor
 
 ## Avvalo qidiring, keyin sun'iy intellekt haqida qaror qiling
 
-1. Ochiq. **Arxivni so'rang**. Ish maydonini, suhbatlarni va kuzatuv davrini tanlang.
-2. Iborani, domenni yoki xabar ID-ni qidiring. Mos keladigan yozuvni va uning saqlangan versiyalarini oching.
-3. AI tahlili uchun administrator avvalo provayderni sozlaydi. **Modelga yuboriladigan ma'lumotlarni** ko'rib chiqing va so'rovni tasdiqlashdan oldin keraksiz parchalarni belgilashni bekor qiling.
+1. Mahalliy qidiruv uchun **Jurnal** bo'limini oching. Ish maydonini tanlang va manba hamda vaqt filtrlaridan foydalaning.
+2. Iborani yoki domenni qidiring. Mos keladigan yozuvni va uning saqlangan versiyalarini oching.
+3. AI tahlili uchun administrator **Integratsiyalar** bo'limida provayderni yoqadi va sozlaydi. **Arxivdan so'rang** bo'limini oching hamda chatlar va davrni tanlang. So'rovni tasdiqlashdan oldin **Modelga yuborilgan ma'lumotlar** bo'limini ko'rib chiqing va keraksiz parchalardan belgini olib tashlang.
 4. Qaytarilgan manbalarni tekshiring. Javobni hisobot sifatida saqlang va o'zingizning tahriringiz yoki izohlaringizni qo'shing.
 
 Qidiruv mahalliy tarzda, sun'iy intellektisiz amalga oshiriladi. Analitik hisobotlar manba havolalari va tahrir tarixini saqlaydi; ular imzolangan jurnalga alohida. [Provayderni sozlash va hisobotlar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/analysis/).

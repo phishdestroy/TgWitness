@@ -22,7 +22,7 @@ Les enregistrements capturés, le texte reconnu et les conclusions des analystes
 
 ## Charger les messages antérieurs
 
-1. **Sources** ouvertes : passez en revue les discussions activées et commencez l'observation.
+1. Ouvrez **Sources → Discussions incluses**, passez en revue les discussions activées et commencez l’observation.
 2. Sélectionnez « **Charger l'historique complet** ». L'exécution utilise la liste de sources sélectionnée à ce moment-là.
 3. Utilisez les options « **Pause de l'historique »** et « **Reprise de l'historique »** selon les besoins. Après un redémarrage, reprenez explicitement l'enregistrement.
 4. Vérifiez les résultats par source et la file d'attente des pièces jointes. Enregistrez le rapport d'avancement signé avec l'exportation des preuves.
@@ -31,9 +31,9 @@ Cette opération remplit l'espace de travail avec les messages disponibles. L'ex
 
 ## Commencez par effectuer une recherche, puis décidez de recourir ou non à l'IA
 
-1. Ouvrez « **Ask the archive** ». Choisissez un espace de travail, des discussions et une période d'observation.
-2. Recherchez une expression, un domaine ou un identifiant de message. Ouvrez l'enregistrement correspondant et ses versions sauvegardées.
-3. Pour l'analyse par IA, l'administrateur doit d'abord configurer un fournisseur. Il doit ensuite examiner **les données envoyées au modèle** et décocher les extraits indésirables avant d'approuver la demande.
+1. Ouvrez **Journal** pour effectuer une recherche locale. Choisissez un espace de travail et utilisez les filtres de source et de période.
+2. Recherchez une expression ou un domaine. Ouvrez l'enregistrement correspondant et ses versions sauvegardées.
+3. Pour l’analyse par IA, l’administrateur active et configure un fournisseur dans **Intégrations**. Ouvrez **Consultez les archives** et choisissez des discussions et une période. Vérifiez la section **Données envoyées au modèle** et décochez les extraits indésirables avant d’approuver la demande.
 4. Vérifiez les citations renvoyées. Enregistrez la réponse sous forme de rapport et ajoutez-y vos propres corrections ou remarques.
 
 Les recherches s'effectuent localement, sans IA. Les rapports analytiques conservent les références des sources et l'historique des révisions ; ils sont distincts du journal signé. [Configuration du fournisseur et rapports](https://phishdestroy.github.io/TgWitness/fr/docs/reference/analysis/).

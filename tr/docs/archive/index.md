@@ -22,7 +22,7 @@ Kaydedilen veriler, tanınan metinler ve analistlerin sonuçları birbirinden ay
 
 ## Geçmiş mesajları yükle
 
-1. Açık **Kaynaklar'a gidin**, etkinleştirilmiş sohbetleri inceleyin ve gözlemi başlatın.
+1. **Kaynaklar → Kapsamdaki sohbetler** bölümünü açın, etkinleştirilmiş sohbetleri inceleyin ve gözlemi başlatın.
 2. **"Tüm geçmişi yükle**" seçeneğini seçin. İşlem, o anda seçili olan kaynak listesini kullanır.
 3. Gerektiğinde "**Geçmişi Duraklat"** ve "**Geçmişe Devam Et" seçeneklerini** kullanın. Yeniden başlatmanın ardından, işlemi açıkça devam ettirin.
 4. Kaynak bazında sonuçları ve ek kuyruğunu kontrol edin. Kanıt dışa aktarımıyla birlikte imzalı ilerleme raporunu kaydedin.
@@ -31,9 +31,9 @@ Bu işlem, çalışma alanını mevcut mesajlarla doldurur. Sohbet başına HTML
 
 ## Önce araştırın, sonra yapay zeka konusunda karar verin
 
-1. **Arşivi** açın. Bir çalışma alanı, sohbetler ve gözlem dönemi seçin.
-2. Bir ifadeyi, etki alanını veya mesaj kimliğini arayın. Eşleşen kaydı ve kaydedilmiş sürümlerini açın.
-3. AI analizi için, yönetici önce bir sağlayıcıyı yapılandırır. **Modele gönderilen verileri** inceler ve isteği onaylamadan önce istenmeyen alıntıların işaretini kaldırır.
+1. Yerel arama için **Günlük** bölümünü açın. Bir çalışma alanı seçin ve kaynak ile zaman filtrelerini kullanın.
+2. Bir ifadeyi veya etki alanını arayın. Eşleşen kaydı ve kaydedilmiş sürümlerini açın.
+3. Yapay zekâ analizi için yönetici, **Entegrasyonlar** bölümünde bir sağlayıcıyı etkinleştirir ve yapılandırır. **Arşive sor** bölümünü açın, sohbetleri ve bir dönem seçin. İsteği onaylamadan önce **Modele gönderilen veriler** bölümünü inceleyin ve istenmeyen alıntıların işaretini kaldırın.
 4. Geri dönen alıntıları kontrol edin. Cevabı rapor olarak kaydedin ve kendi düzeltmelerinizi veya notlarınızı ekleyin.
 
 Arama işlemi yapay zeka kullanılmadan yerel olarak gerçekleştirilir. Analitik raporlar kaynak referanslarını ve revizyon geçmişini saklar; bu raporlar imzalı kayıt defterinden ayrıdır. [Sağlayıcı kurulumu ve raporlar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/analysis/).

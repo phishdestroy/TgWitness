@@ -22,7 +22,7 @@ Los registros capturados, el texto reconocido y las conclusiones de los analista
 
 ## Cargar mensajes anteriores
 
-1. **Fuentes** abiertas: revisa los chats habilitados y comienza la observación.
+1. Abra **Fuentes → Chats en alcance**, revise los chats habilitados e inicie la observación.
 2. Selecciona **«Cargar historial completo**». La ejecución utiliza la lista de fuentes seleccionada en ese momento.
 3. Utiliza **«Pausar historial»** y **«Continuar historial»** según sea necesario. Tras un reinicio, reanuda explícitamente.
 4. Comprueba los resultados por fuente y la cola de archivos adjuntos. Guarda el informe de progreso firmado junto con la exportación de pruebas.
@@ -31,9 +31,9 @@ Esto llena el espacio de trabajo con los mensajes disponibles. La exportación e
 
 ## Busca primero y luego decide sobre la IA
 
-1. Accede**al archivo**. Elige un espacio de trabajo, los chats y el periodo de observación.
-2. Busca una frase, un dominio o un ID de mensaje. Abre el registro correspondiente y sus versiones guardadas.
-3. Para el análisis mediante IA, el administrador debe configurar primero un proveedor. Revisa **los datos enviados al modelo** y desmarca los fragmentos no deseados antes de aprobar la solicitud.
+1. Abra **Registro** para realizar búsquedas locales. Elija un espacio de trabajo y use los filtros de fuente y de tiempo.
+2. Busca una frase o un dominio. Abre el registro correspondiente y sus versiones guardadas.
+3. Para el análisis con IA, el administrador habilita y configura un proveedor en **Integraciones**. Abra **Consulte el archivo** y elija los chats y un periodo. Revise **Datos enviados al modelo** y desmarque los extractos no deseados antes de aprobar la solicitud.
 4. Comprueba las citas obtenidas. Guarda la respuesta como un informe y añade tus propias revisiones o notas.
 
 Las búsquedas se realizan de forma local, sin IA. Los informes analíticos conservan las referencias de las fuentes y el historial de revisiones; están separados del registro firmado. [Configuración del proveedor e informes](https://phishdestroy.github.io/TgWitness/es/docs/reference/analysis/).

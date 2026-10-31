@@ -8,7 +8,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 [工作流程指南](https://phishdestroy.github.io/TgWitness/docs/archive/) · [維基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-在面板中開啟**「查詢存檔」功能**。工作區選擇器用於選擇帳戶； 表單則用於選擇聊天室及觀察期間。搜尋在本地執行，不 使用 AI。輸入精確短語或網域可縮小檢索範圍；輸入訊息 ID 可查詢已儲存的 版本。檢視搜尋結果的摘錄，並開啟其日誌記錄或上下文。 本工具不包含向量資料庫，亦不會自動執行任何 Telegram 操作。
+使用**日誌**可進行本地搜尋，無需使用 AI。若要使用**查詢檔案庫**，請先在**整合功能**中啟用並設定服務供應商。工作區選擇器用於選擇帳戶； 表單則用於選擇聊天室及觀察期間。檢索在本地執行。 輸入精確短語或網域可縮小檢索範圍；輸入訊息 ID 可查詢已儲存的 版本。請檢視摘錄，並開啟其日誌記錄或上下文。 本工具不包含向量資料庫，亦不會自動執行任何 Telegram 操作。
 
 ## 服務提供者與同意聲明
 

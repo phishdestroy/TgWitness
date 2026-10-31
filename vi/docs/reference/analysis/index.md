@@ -8,7 +8,7 @@ Tìm kiếm các tin nhắn đã lưu, xem lại các đầu vào từ AI và l�
 
 [Hướng dẫn quy trình làm việc](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-Mở **"Ask the archive**" trong bảng điều khiển. Trình chọn không gian làm việc chọn tài khoản; biểu mẫu chọn các cuộc trò chuyện và khoảng thời gian quan sát. Tìm kiếm được thực hiện cục bộ, không sử dụng AI. Một cụm từ chính xác hoặc tên miền sẽ thu hẹp kết quả tìm kiếm; ID tin nhắn yêu cầu các phiên bản đã lưu. Xem lại các đoạn trích được trả về và mở bản ghi nhật ký hoặc bối cảnh của chúng. Không có cơ sở dữ liệu vectơ hay hành động tự động trên Telegram.
+Dùng **Sổ nhật ký** để tìm kiếm cục bộ mà không cần AI. Để dùng **Hỏi kho lưu trữ**, trước tiên hãy bật và cấu hình một nhà cung cấp trong **Tích hợp**. Trình chọn không gian làm việc dùng để chọn tài khoản; biểu mẫu dùng để chọn các cuộc trò chuyện và khoảng thời gian quan sát. Việc truy xuất được thực hiện cục bộ. Một cụm từ chính xác hoặc tên miền sẽ thu hẹp phạm vi truy xuất; ID tin nhắn sẽ yêu cầu các phiên bản đã lưu. Hãy xem lại các đoạn trích và mở bản ghi nhật ký hoặc ngữ cảnh của chúng. Không có cơ sở dữ liệu vectơ hay hành động tự động nào trên Telegram.
 
 ## Nhà cung cấp và sự đồng ý
 

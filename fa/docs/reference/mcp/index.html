@@ -31,37 +31,134 @@
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="راهنماها"><a href="../../../">خانه</a> <span aria-hidden="true">/</span> <a href="../../">مستندسازی</a> <span aria-hidden="true">/</span> <a href="../">منبع</a> <span aria-hidden="true">/</span> <span aria-current="page">MCP فقط-خواندنی</span></nav>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">جستجو در مستندات</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="پراکسی، زنجیره هش، توکن یا ویسنس را امتحان کنید…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="جستجوی واضح" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">یک کلمه تایپ کنید تا در راهنماها و مرجع جستجو شود. جستجو در مرورگر شما باقی می‌ماند.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">منبع / آرشیو و یکپارچه‌سازی‌ها</p><h1>MCP فقط-خواندنی</h1><p class="guide-outcome">یک کلاینت MCP را به فضاهای کاری و چت‌های منتخب با دسترسی منقضی‌شونده و قابل فسخ متصل کنید.</p><div class="wiki-body"><p><strong>نسخهٔ اصلی کنونی:</strong> از نسخهٔ سورس استفاده کنید؛ پیش‌نمایش قابل‌حمل نسخهٔ ۰.۷.۰ پیش از این قابلیت عرضه شده است.</p>
+<article class="guide-content"><p class="eyebrow">منبع / آرشیو و یکپارچه‌سازی‌ها</p><h1>MCP فقط-خواندنی</h1><p class="guide-outcome">یک کلاینت MCP را به فضاهای کاری و چت‌های منتخب با دسترسی منقضی‌شونده و قابل فسخ متصل کنید.</p><div class="wiki-body"><p>یک کلاینت تحلیل‌گر را به محیط‌های کاری و چت‌های انتخاب‌شده متصل کنید. TgWitness <strong>پروتکل Streamable HTTP را در مسیر <code>/mcp</code> در فرآیند پنل</strong> ارائه می‌دهد. هر اتصال دارای توکن، تاریخ انقضا و ابزارهای مجاز مخصوص به خود است. MCP نمی‌تواند پیام‌های تلگرام را ارسال کند، تنظیمات را تغییر دهد یا ژورنال امضاشده را ویرایش کند.</p>
 <p><a href="https://phishdestroy.github.io/TgWitness/docs/archive/">راهنمای گردش کار</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">ویکی</a></p>
-<p>سرور اختیاری را از دایرکتوری پروژه TgWitness نصب کنید:</p>
-<pre><code class="language-sh">python -m pip install &#x27;.[mcp]&#x27;</code></pre>
-<p>در پنل، <strong>«ادغام‌ها» → «MCP» </strong>را باز کنید. برای اتصال یک نام انتخاب کنید، فضای کاری‌ها و چت‌های آن را مشخص کرده و یک تاریخ انقضا تعیین کنید. توکن آرشیو را یک‌بار کپی کنید؛ زیرا بعداً قابل بازیابی نخواهد بود. توکن‌های گم‌شده را لغو کرده و جایگزین‌های جدیدی صادر کنید. توکن‌های پنل و اطلاعات ورود به تلگرام، اطلاعات ورود به MCP محسوب نمی‌شوند.</p>
-<h2 id="connect-a-client">اتصال یک کلاینت<a class="anchor" href="#connect-a-client" aria-label="لینک به این بخش">#</a></h2>
-<p>پنل با استفاده از <a href="https://code.visualstudio.com/docs/agents/reference/mcp-configuration">پیکربندی مستندشده</a> خود، توکن <code>.vscode/mcp.json</code> را برای <strong>محیط Local VS Code</strong> تولید می‌کند.
-فایل دانلود شده را در آن مکان ذخیره کنید، <strong>دستور MCP: List Servers را</strong> اجرا کرده و TgWitness را راه‌اندازی کنید. VS Code از طریق ورودی رمز عبور، توکن را درخواست می‌کند. فایل JSON دانلود شده حاوی یک شناسه درخواست است، نه خود توکن. از فایل اجرایی پایتون موجود در محیطی که MCP extra در آن نصب شده است، استفاده کنید.</p>
-<p>برای سایر مشتریان stdio، اجرا کنید:</p>
-<pre><code class="language-sh">python -m tgwitness.mcp_server --api-url http://127.0.0.1:8787</code></pre>
-<p><code>TGWITNESS_ARCHIVE_TOKEN</code> را در محیط محافظت‌شده کلاینت تنظیم کنید. آن را در آرگومان‌های فرمان یا URLها قرار ندهید. پل از طریق API آرشیو مجاز پنل می‌خواند؛ دسترسی مستقیمی به پایگاه داده ندارد. خروجی استاندارد (Stdout) فقط پیام‌های MCP را منتقل می‌کند.</p>
-<p>برای مشتریان راه دور، سرویس را در کنار پنل اجرا کنید:</p>
-<pre><code class="language-sh">python -m tgwitness.mcp_server --transport streamable-http \
-  --api-url http://127.0.0.1:8787 --port 8766 \
-  --public-url https://archive.example.org/mcp</code></pre>
-<p>ترافیک <code>/mcp</code> را از طریق یک پروکسی معکوس HTTPS به <code>127.0.0.1:8766/mcp</code> فوروارد کنید و هدر <code>Authorization: Bearer …</code> را حفظ نمایید. ثبت‌گذاری (لگینگ) هدرهای احراز هویت و بدنه درخواست/پاسخ را غیرفعال کنید. اتصال به خارج از لوپ‌بک (loopback) را تنها در صورت لزوم با استفاده از <code>--host</code> و <code>--public-url</code> برقرار کنید. این نقطه پایانی از Streamable HTTP در
-<a href="https://github.com/modelcontextprotocol/python-sdk">SDK پایتون رسمی
-MCP</a> استفاده می‌کند.
-این قابلیت، اعتبارنامه‌های حمل‌کننده‌ی پیکربندی‌شده به صورت صریح را پشتیبانی می‌کند، نه کشف OAuth؛ کلاینت‌هایی که تنها به OAuth نیاز دارند، پشتیبانی نمی‌شوند.</p>
-<p><strong>پروتکل بررسی و دسترسی،</strong> یک کلاینت واقعی MCP را راه‌اندازی کرده و ابزارها را فهرست می‌کند. این کار پیام‌ها را دریافت نمی‌کند. برای بررسی از راه دور، سرور MCP انتخاب‌شده توکن آرشیو را دریافت می‌کند. تنها سروری را پیکربندی کنید که خودتان اداره می‌کنید یا در آن با این دامنه اعتماد دارید.</p>
-<h2 id="scope-and-results">دامنه و نتایج<a class="anchor" href="#scope-and-results" aria-label="لینک به این بخش">#</a></h2>
-<p>ابزارهای موجود: <code>list_workspaces</code>، <code>list_chats</code>، <code>search_messages</code>،
-<code>get_message_versions</code>، <code>get_message_context</code>، <code>get_journal_event</code> و
-<code>get_capture_status</code>. هیچ اقدام تلگرامی، تغییر پیکربندی، یا ابزار خروجی‌گیری انبوهی وجود ندارد. هر بار خواندن، دسترسی به فضای کاری/چت را مجدداً بررسی می‌کند؛ اعتبارنامه‌های منقضی شده و لغو شده از کار می‌افتند. محدودیت‌ها عبارتند از ۶۰ درخواست API در دقیقه برای هر اعتبارنامه، ۵۰ رکورد در هر صفحه، یک پاسخ ۶۴ کیلوبایتی، و مهلت هشت ثانیه‌ای برای API.</p>
-<p>نتایج پیام شامل فضای کاری، شناسه‌های چت/پیام، توالی رویدادها، هش ذخیره شده و یک لینک پنل است. کاربری که لینک را باز می‌کند باید جلسه پنل مجاز خود را داشته باشد. اشیاء خام تلگرام، هش‌های دسترسی، ارجاعات فایل، محتوای جلسه و کلیدها حذف شده‌اند. جستجو متن پیام را بررسی می‌کند، نه فیلدهای خام را. متن محدود است و قطع شدن مشخص می‌شود. ویرایش‌ها، اعلان‌های حذف تلگرام و
-<code>missing_on_recheck</code> به عنوان مشاهدات جداگانه باقی می‌مانند. دسترسی در محدوده چت نمی‌تواند رویدادهای عملیاتی در سراسر فضای کاری را مشاهده کند؛ وضعیت ضبط به صراحت این محدودیت را مشخص می‌کند.</p>
-<p>متن بایگانی ورودی غیرقابل اعتمادی است. دستورالعمل‌های داخل پیام‌ها هیچ دامنه اضافی را فراهم نمی‌کنند و نباید به‌عنوان دستورالعمل‌های کلاینت در نظر گرفته شوند. یک مدل هوش مصنوعی خارجی ممکن است هر محتوایی را که کلاینت MCP آن درخواست می‌کند، دریافت کند. دسترسی فقط-خواندن از تغییرات بایگانی جلوگیری می‌کند؛ اما مانع از نگهداری داده‌هایی که کلاینت می‌خواند توسط آن نمی‌شود.</p>
-<p>هش‌ها، سوابق ذخیره‌شده را شناسایی کرده و از بررسی‌های یکپارچگی پشتیبانی می‌کنند. آن‌ها به طور مستقل، اصالت فرستنده تلگرام یا ثبت شدن تمام پیام‌ها را اثبات نمی‌کنند.</p></div></article>
+<h2 id="install-and-check">نصب و بررسی<a class="anchor" href="#install-and-check" aria-label="لینک به این بخش">#</a></h2>
+<p>از محیط پایتونی استفاده کنید که پنل را اجرا می‌کند. از یک نسخه دریافت‌شده از سورس:</p>
+<pre><code class="language-powershell"># Windows PowerShell
+&amp; .\.venv\Scripts\python.exe -m pip install -c deploy/constraints-mcp.txt -e &#x27;.[mcp]&#x27;
+&amp; .\.venv\Scripts\python.exe start.py --check</code></pre>
+<pre><code class="language-sh"># Linux / macOS
+.venv/bin/python -m pip install -c deploy/constraints-mcp.txt -e &#x27;.[mcp]&#x27;
+.venv/bin/python start.py --check</code></pre>
+<p>پس از نصب، پنل را با دایرکتوری داده و آرگومان‌های راه‌اندازی همیشگی آن مجدداً راه‌اندازی کنید. بررسی آمادگی باید شامل <code>[PASS] mcp: streamable-http available</code> باشد.
+مسیر <strong>Integrations → MCP</strong> وضعیت زمان اجرا و دستور نصب را با استفاده از فایل اجرایی واقعی پایتون آن سرور نشان می‌دهد. گزینه <strong>Re-check</strong> این وضعیت را بدون بارگذاری مجدد صفحه به‌روزرسانی می‌کند؛ این گزینه بسته‌ها را نصب نمی‌کند و سرور را مجدداً راه‌اندازی نمی‌کند.</p>
+<p>افزونه MCP از <a href="https://github.com/modelcontextprotocol/python-sdk">MCP Python SDK</a> رسمی استفاده می‌کند.
+فایل <code>deploy/constraints-mcp.txt</code> نسخه تست‌شده SDK و وابستگی‌ها را ثابت نگه می‌دارد. این قابلیت‌ها نیازمند سورس فعلی هستند؛ پیش‌نمایش قابل حمل 0.7.0 پیش از آن‌ها منتشر شده است.</p>
+<h2 id="issue-a-connection">صدور یک اتصال<a class="anchor" href="#issue-a-connection" aria-label="لینک به این بخش">#</a></h2>
+<ol>
+<li>یک برچسب وارد کنید و محیط‌های کاری و چت‌هایی را که کلاینت مجاز به خواندن آن‌هاست انتخاب کنید.</li>
+<li>ابزارها را به‌صورت تکی انتخاب کنید یا از یک پیش‌تنظیم استفاده کنید. تنها ابزارهای پیاده‌سازی‌شده ارائه می‌شوند.</li>
+<li>مدت 1، 7، 30 یا 90 روز، یا یک زمان انقضای سفارشی بین یک دقیقه تا 90 روز را انتخاب کنید.</li>
+<li>دکمه <strong>Create connection</strong> را فشار دهید. توکن یک بار در کنار پیکربندی کلاینت ظاهر می‌شود.</li>
+<li>توکن و پیکربندی را کپی کنید، سپس <strong>Check connection</strong> را اجرا کنید. این کار MCP را مقداردهی اولیه کرده و ابزارهای مجاز را فهرست می‌کند؛ <strong>هیچ پیامی خوانده نمی‌شود</strong>. نتیجه، نسخه پروتکل، نام ابزارها، تعداد و زمان سپری‌شده را نشان می‌دهد.</li>
+<li>زمانی که اطلاعات احراز هویت ذخیره شد، <strong>Done</strong> را فشار دهید. بررسی دوره‌ای (Polling) فرم و کارت یک‌بارمصرف نمایش‌داده‌شده را حفظ می‌کند. قفل کردن پنل، اطلاعات محرمانه نمایش‌داده‌شده را پاک می‌کند.</li>
+</ol>
+<p>این فهرست استفاده اخیر، آخرین ابزار، آدرس و درخواست‌ها در دقیقه گذشته را نشان می‌دهد.
+گزینه <strong>Revoke</strong> دسترسی را پایان می‌دهد. گزینه <strong>Rotate token</strong> اعتبارنامه قدیمی را باطل کرده و یک جایگزین با همان محدوده، ابزارها و تاریخ انقضا صادر می‌کند؛ جایگزین را یک بار کپی کنید.
+توکن‌های ورود به پنل و اعتبارنامه‌های تلگرام به‌عنوان توکن‌های MCP کار نمی‌کنند.</p>
+<h2 id="connect-your-client">اتصال کلاینت شما<a class="anchor" href="#connect-your-client" aria-label="لینک به این بخش">#</a></h2>
+<p>کلاینت را در پنل انتخاب کنید و پیکربندی تولیدشده آن را کپی کنید. پیکربندی‌ها از ارجاعات محرمانه یا متغیرهای جایگزین صریح استفاده می‌کنند؛ توکن به‌صورت جداگانه کپی می‌شود.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>کلاینت</th>
+<th>پیکربندی</th>
+<th>اتصال</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude Code</td>
+<td><code>.mcp.json</code></td>
+<td>HTTP، <code>type: "http"</code>، هدر bearer</td>
+</tr>
+<tr>
+<td>Claude Desktop</td>
+<td><code>claude_desktop_config.json</code></td>
+<td>پل محلی stdio</td>
+</tr>
+<tr>
+<td>Cursor</td>
+<td><code>.cursor/mcp.json</code></td>
+<td>HTTP با یک هدر متغیر محیطی</td>
+</tr>
+<tr>
+<td>VS Code Local</td>
+<td><code>.vscode/mcp.json</code></td>
+<td>HTTP با یک ورودی رمز عبور <code>promptString</code></td>
+</tr>
+<tr>
+<td>Windsurf</td>
+<td><code>mcp_config.json</code></td>
+<td>HTTP با یک متغیر جایگزین هدر bearer</td>
+</tr>
+<tr>
+<td>سایر کلاینت‌ها</td>
+<td>URL و هدر Authorization</td>
+<td>Streamable HTTP</td>
+</tr>
+</tbody>
+</table></div>
+<p>TgWitness از توکن‌های bearer بدون اکتشاف OAuth استفاده می‌کند. برای کلاینت‌هایی که اتصال‌دهنده راه‌دور آن‌ها نیازمند OAuth است، از پل محلی stdio استفاده کنید. برای VS Code، متغیرهای ورودی روی بستر <strong>Local</strong> اعمال می‌شوند و به نشست‌های Copilot ارسال نمی‌گردند.
+مراجع پیکربندی: <a href="https://code.claude.com/docs/en/mcp">Claude Code</a>،
+<a href="https://prod.cursor.com/docs/mcp">Cursor</a>،
+<a href="https://code.visualstudio.com/docs/agents/reference/mcp-configuration">VS Code</a>.</p>
+<p>نقطه ورود استاندارد برای یک پل محلی عبارت است از:</p>
+<pre><code class="language-sh">python -m tgwitness.mcp_server --url https://your-panel.example/mcp</code></pre>
+<p>از پایتون محلی کلاینت که افزونه MCP روی آن نصب شده است استفاده کنید. متغیر <code>TGWITNESS_MCP_TOKEN</code> را در محیط حفاظت‌شده آن تنظیم کنید. اطلاعات احراز هویت را خارج از آرگومان‌های دستور و URLها نگه دارید. دستور <code>tgwitness-mcp</code> همان نقطه ورود است. ماژول قدیمی <code>tgwitness.mcp_bridge</code> و نام <code>TGWITNESS_ARCHIVE_TOKEN</code> به‌عنوان مسیرهای سازگاری همراه با یک هشدار باقی می‌مانند؛ پیکربندی‌های جدید از <code>mcp_server</code> و <code>TGWITNESS_MCP_TOKEN</code> استفاده می‌کنند.</p>
+<h2 id="cloudflare-tunnel">Cloudflare Tunnel<a class="anchor" href="#cloudflare-tunnel" aria-label="لینک به این بخش">#</a></h2>
+<p>مسیر <code>/mcp</code> پنل را فوروارد کرده و هدر bearer را حفظ کنید. باز کردن تنظیمات MCP به‌عنوان مدیر، مبدأ (Origin) فعلی پنل را برای این نوبت اجرا ثبت می‌کند.
+برای داشتن یک آدرس پایدار که بلافاصله پس از راه‌اندازی مجدد در دسترس باشد، پیش از شروع پنل، متغیر <code>TGWITNESS_PUBLIC_URL</code> را با مبدأ HTTPS پنل پیکربندی کنید.
+هدرهای دلخواه Host و فورواردشده، یک آدرس مورد اعتماد را ثبت نمی‌کنند.
+بررسی‌های Host و Origin، مبدأهای مرورگر نامرتبط را رد می‌کنند. پاسخ‌ها از <code>Cache-Control: no-store</code> استفاده می‌کنند؛ مقادیر احراز هویت هرگز در گزارش‌ها (لاگ) ثبت نمی‌شوند.</p>
+<p>یک آدرس <code>*.trycloudflare.com</code> موقتی است. هنگامی که راه‌اندازی مجدد تونل نام میزبان (hostname) را تغییر می‌دهد، URL عمومی پیکربندی‌شده و URL مربوط به MCP هر کلاینت را به‌روزرسانی کنید. برای پیکربندی‌های ذخیره‌شده کلاینت، از یک نام میزبان پایدار استفاده کنید.</p>
+<h2 id="tools-and-boundaries">ابزارها و مرزها<a class="anchor" href="#tools-and-boundaries" aria-label="لینک به این بخش">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>ابزار</th>
+<th>موارد قابل خواندن</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list_workspaces</code></td>
+<td>محیط‌های کاری مجاز</td>
+</tr>
+<tr>
+<td><code>list_chats</code></td>
+<td>چت‌های مجاز</td>
+</tr>
+<tr>
+<td><code>search_messages</code></td>
+<td>متن پیام‌های ذخیره‌شده در بازه زمانی انتخاب‌شده</td>
+</tr>
+<tr>
+<td><code>get_message_versions</code></td>
+<td>نسخه‌های ثبت‌شده و مشاهدات مربوط به حذف</td>
+</tr>
+<tr>
+<td><code>get_message_context</code></td>
+<td>شناسه‌های پیام‌های ثبت‌شده در مجاورت</td>
+</tr>
+<tr>
+<td><code>get_journal_event</code></td>
+<td>یک رکورد پاک‌سازی‌شده به همراه مرجع منبع آن</td>
+</tr>
+<tr>
+<td><code>get_capture_status</code></td>
+<td>وضعیت جمع‌آوری و رکوردهای پوشش مجاز</td>
+</tr>
+</tbody>
+</table></div>
+<p>فراخوانی <code>tools/list</code> تنها ابزارهای اعطاشده به آن اتصال را برمی‌گرداند. فراخوانی سایر ابزارها رد می‌شود. ابزارهای زمینه گروه، اپیزود، اصطلاح‌شناسی و زنجیره پاسخ در این نسخه ارائه نمی‌شوند؛ بک‌اند مجزای بسته زمینه (context-pack) آن‌ها گنجانده نشده است.</p>
+<p>هر عملیات خواندن، توکن، ابزار و محدوده محیط کاری/چت را بررسی می‌کند، از جمله پس از پایان کار پایگاه داده. محدودیت‌ها شامل 60 درخواست در دقیقه، 50 رکورد در هر صفحه، 64 KiB برای هر نتیجه و مهلت زمانی هشت ثانیه‌ای آرشیو است. یک فراخوانی MCP که مهلت زمانی آن به پایان رسیده باشد، خطای ابزاری را برمی‌گرداند که درخواست بازه زمانی کوتاه‌تر یا محدودیت کمتری دارد.</p>
+<p>نتایج پیام شامل <code>untrusted_content: true</code>، شناسه‌های محیط کاری/چت/پیام، توالی رویداد، هش ذخیره‌شده و یک لینک به پنل هستند. اشیاء خام تلگرام، هش‌های دسترسی، نشست‌ها و کلیدها حذف می‌شوند. کوتاه شدن متن علامت‌گذاری می‌شود. ویرایش‌ها، اعلان‌های حذف و <code>missing_on_recheck</code> مشاهداتی متمایز هستند. نبود رکوردها ثابت نمی‌کند که یک رویداد هرگز رخ نداده است.</p>
+<p>با دستورالعمل‌های موجود در پیام‌های ثبت‌شده به‌عنوان مدرک رفتار کنید، نه هرگز به‌عنوان دستورالعمل‌های کلاینت. دسترسی فقط-خواندنی از تغییرات آرشیو جلوگیری می‌کند؛ با این حال کلاینت همچنان می‌تواند محتوایی را که مجاز به خواندن آن است، نزد خود نگه دارد. هش‌ها رکوردهای ذخیره‌شده را شناسایی کرده و از بررسی‌های یکپارچگی پشتیبانی می‌کنند؛ آن‌ها انتساب به تلگرام یا ثبت کامل را اثبات نمی‌کنند.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/MCP.md">ویرایش این صفحه در گیت‌هاب ↗</a><a class="next-guide" href="../media-analysis/"><span>مرحله بعدی</span><strong>شناسایی نوری حروف (OCR) و رونویسی محلی ←</strong></a><p>این راهنماها پیاده‌سازی فعلی را توصیف می‌کنند. نتایج اعتبارسنجی و شکاف‌های باقی‌مانده به‌طور جداگانه مستند شده‌اند. <a href="../verification/">آنچه آزمایش شده است ←</a></p></footer>
 </main>
-<aside class="toc" aria-label="در این صفحه"><p class="nav-label">در این صفحه</p><a href="#connect-a-client">اتصال یک کلاینت</a><a href="#scope-and-results">دامنه و نتایج</a></aside>
+<aside class="toc" aria-label="در این صفحه"><p class="nav-label">در این صفحه</p><a href="#install-and-check">نصب و بررسی</a><a href="#issue-a-connection">صدور یک اتصال</a><a href="#connect-your-client">اتصال کلاینت شما</a><a href="#cloudflare-tunnel">Cloudflare Tunnel</a><a href="#tools-and-boundaries">ابزارها و مرزها</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>کد باز · روی دستگاه شما اجرا می‌شود</span><a href="../../../../LICENSE">مجوز MIT</a><a href="../notice/">اعلان اپراتور</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">امنیت</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "در انتظار پیام", "Step through a fictional send, edit and delete.": "مرحله‌به‌مرحله یک ارسال، ویرایش و حذف فرضی را دنبال کنید.", "No observations yet. Start the sequence or advance one event.": "هنوز هیچ مشاهده‌ای ثبت نشده است. توالی را آغاز کنید یا یک رویداد را جلو ببرید.", "Meet at 10:00": "ساعت ۱۰:۰۰ ملاقات کنید", "A new message is visible in the chat.": "یک پیام جدید در چت قابل مشاهده است.", "Record 1 appended: the collector observed the original message.": "سند ۱ ضمیمه شد: گردآورنده پیام اصلی را مشاهده کرد.", "Meet at 11:00": "ساعت ۱۱:۰۰ ملاقات کنید", "The current text changes. The earlier observation stays.": "متن فعلی تغییر می‌کند. مشاهدهٔ قبلی باقی می‌ماند.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "رکورد ۲ ضمیمه شد: ویرایش یک مشاهده جدید است. رکورد ۱ همچنان متن اصلی را حفظ می‌کند.", "Message deleted": "پیام حذف شد", "The message has disappeared from the chat view.": "پیام از نمای چت ناپدید شده است.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "سند شمارهٔ ۳ ضمیمه شد: اطلاعیهٔ حذف در کنار هر دو نسخهٔ مشاهده‌شده نگهداری می‌شود.", "0 records": "۰ رکورد", "1 record": "۱ رکورد", "2 records": "۲ رکورد", "3 records": "۳ رکورد", "Complete / {n} of 3": "کامل / {n} از ۳", "Step / {n} of 3": "مرحله / {n} از ۳", "Pause": "وقفه", "Replay sequence": "ترتیب بازپخش", "Play sequence": "پخش توالی", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "مثال ایستا در دسترس است. برای محاسبه هش‌ها به‌صورت تعاملی، این صفحه را از طریق HTTPS یا پیش‌نمایش localhost با پشتیبانی Web Crypto باز کنید.", "No record supplied": "هیچ سندی ارائه نشده است", "Tail removed": "پایان حذف شد", "≠ saved hash": "≠ هَش ذخیره شده", "Rebuilt · different hash": "بازسازی‌شده · هش متفاوت", "= saved hash": "= هَش ذخیره‌شده", "Same length and matching head.": "طول یکسان و سر هماهنگ.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "هر سه هش محاسبه‌شده با هش‌های ذخیره‌شده مطابقت دارند. این نمونه با مرز سه‌رکوردی که حفظ شده است، همخوانی دارد.", "Same saved head; the journal prefix fails verification.": "همان سر ذخیره شده؛ پیش‌وند دفترچه یادداشت در اعتبارسنجی شکست می‌خورد.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "رکورد شمارهٔ ۲ دیگر با هش ذخیره‌شدهٔ خود مطابقت ندارد. بررسی تنها هدر نهایی ذخیره‌شده این مورد را از قلم می‌اندازد؛ اعتبارسنج همهٔ رکوردها را بررسی می‌کند.", "Head differs from the retained checkpoint.": "سر با نقطهٔ کنترل نگه‌داشته‌شده تفاوت دارد.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "هش‌های بازسازی‌شده به هم متصل هستند، اما هِد نهایی تغییر کرده است. نقطه‌کنترل حفظ‌شده این تاریخچه را رد می‌کند. امضاهای اصلی نیز روی رکوردهای تغییر یافته ناموفق خواهند بود.", "Too short: 2 supplied records \u003c 3 retained records.": "خیلی کوتاه: ۲ رکورد ارائه‌شده \u003c ۳ رکورد نگهداری‌شده.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "دو هش باقی‌مانده هنوز با هم مطابقت دارند. نقطهٔ کنترل حفظ‌شده، انتهای گمشده را آشکار می‌کند. بدون آن مرز قبلی، این پیش‌وند کوتاه به‌تنهایی نمی‌توانست حذف را آشکار کند.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "محاسبه هش در این مرورگر در دسترس نیست. فرمول‌ها و توضیحات ثابت زیر همچنان در دسترس هستند.", "{n} records": "{n}یادداشت‌ها", "head {hash}": "سر {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "پذیرفته شد: شمارش افزایش می‌یابد، امضا تأیید می‌شود و کلید مطابقت دارد. شاهد این مرز جدید را حفظ می‌کند.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: پاسخ امضا‌شده تعداد سوابق کمتری نسبت به آخرین نقطهٔ کنترل پذیرفته‌شده گزارش می‌کند. شاهد مشکل را ثبت می‌کند و مرز پذیرفته‌شدهٔ قبلی را حفظ می‌کند.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "فورک: شمارش بدون تغییر است اما سر متفاوت است. شاهد اختلاف را ثبت می‌کند و مرز قبلاً پذیرفته‌شده را حفظ می‌کند.", "No answer": "پاسخ ندارد", "boundary unknown": "مرز نامشخص", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "بدون پاسخ: شاهد چک ناموفق را ثبت می‌کند. این نمی‌تواند وضعیت فعلی گردآورنده را تأیید کند. اگر شاهد همچنان بتواند به Bot API دسترسی پیدا کند و سیاست انتشار آن اجازه دهد، می‌تواند آن خطا را منتشر کند.", "Send {n}": "{n} ارسال کنید", "Edit {n}": "ویرایش {n}", "Delete {n}": "حذف {n}", "Both accounts captured all six expected observations in this example.": "هر دو حساب در این مثال تمام شش مشاهدهٔ مورد انتظار را ثبت کردند.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "حساب B همچنان ۶ از ۶ را ضبط کرد. دو رسید زمان بیشتری بردند. نسبت ضبط و تأخیر رسید به پرسش‌های متفاوتی پاسخ می‌دهند.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "حساب B از میان شش مورد، پنج مورد را تا زمان برش ضبط کرد (۸۳٫۳٪). ویرایش مفقودشده تأخیر قابل‌سنجی ندارد. این نتیجه تنها شش اقدام کنترل‌شده را توصیف می‌کند.", "not observed by cutoff": "توسط نقطه‌برش مشاهده نشده است", "{s} seconds": "{s} ثانیه", "Exact values follow in the table.": "مقادیر دقیق در جدول آمده است.", "{s} s": "{s}s", "Not observed": "مشاهده نشد", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "چهار چت مشاهدات متفاوتی ارائه می‌دهند. سوابق منبع هر ارتباط را دنبال کنید؛ بدون مشخص کردن فرستنده، پست کانال را به کاربر ۷۱۰۰۱ نسبت ندهید.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "سوابق شمارهٔ ۱۴۶ و شمارهٔ ۲۰۵ همان شناسهٔ فرستنده، ۷۱۰۰۱ را ارائه می‌کنند. این امر پست‌های مشاهده‌شدهٔ یک حساب تلگرام را در دو گفتگوی مختلف به هم مرتبط می‌سازد. این اطلاعات هویت یک فرد واقعی را مشخص نمی‌کند و پست کانال را به او نسبت نمی‌دهد.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "مقصد pay.example.invalid/new در رکورد گروه شمارهٔ ۱۴۶، کیبورد بات شمارهٔ ۱۷۳، ویرایش کانال شمارهٔ ۱۸۸ و پیام خصوصی شمارهٔ ۲۰۵ ظاهر می‌شود. یک مقصد تکراری مواد را به هم مرتبط می‌کند؛ اما اثبات کنترل مشترک آن حساب‌ها را نمی‌کند.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "رسیدهای رسانه‌ای تکمیل‌شده شمارهٔ ۱۵۱ و ۲۰۹ در این مورد فرضی مقادیر کامل یکسان SHA-256 دارند. بایت‌های واقعی و سوابق پیام مرتبط با آن‌ها را مقایسه کنید. فایل مطابقت‌یافته سازندهٔ خود را شناسایی نمی‌کند و ثابت نمی‌کند چه کسی آن را ارسال کرده است.", "the encrypted off-site copy": "نسخه رمزگذاری‌شده خارج از محل", "notifications": "اخطاریه‌ها", "checkpoint hashes for timestamps": "هش‌های نقطه‌کنترل برای مهرهای زمانی", "signed checkpoints for the witness": "نقاط کنترل امضا‌شده برای شاهد", "Switched on in this example": "در این مثال فعال شده است", "Optional · off by default": "اختیاری · به‌صورت پیش‌فرض غیرفعال", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "خروج از این دستگاه: اتصال تلگرام و {list}. هیچ چیز دیگر.", "Default: only the Telegram connection leaves this machine.": "پیش‌فرض: تنها اتصال تلگرام از این دستگاه خارج می‌شود.", "{done} of {total} done": "{done} از {total} انجام شده", "Mark step {n} as done": "مرحله {n} را به‌عنوان انجام‌شده علامت‌گذاری کنید", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "کپی", "Copied": "کپی شد", "Command copied.": "فرمان کپی شد.", "Selected — Ctrl/Cmd+C": "انتخاب شده — Ctrl/Cmd+C", "Command selected. Copy it manually.": "فرمان انتخاب شد. آن را به‌صورت دستی کپی کنید.", "Command copied to clipboard.": "فرمان به کلیپ‌بورد کپی شد.", "Select text": "انتخاب متن", "Clipboard unavailable. Command selected; copy it manually.": "پیشخوان کلیپ‌بورد در دسترس نیست. فرمان انتخاب شده است؛ آن را به‌صورت دستی کپی کنید.", "A message arrives. The first observation is saved.": "پیامی دریافت می‌شود. اولین مشاهده ذخیره می‌شود.", "The time changes. Both captured versions stay.": "زمان تغییر می‌کند. هر دو نسخه ضبط‌شده باقی می‌مانند.", "The message disappears. The captured history remains.": "پیام ناپدید می‌شود. تاریخچه ضبط‌شده باقی می‌ماند.", "Pause example animation": "انیمیشن مثال مکث", "Play example animation": "پخش انیمیشن نمونه", "Play": "پخش", "Full-size workspace screenshot": "اسکرین‌شات تمام‌صفحه از فضای کاری", "Workspace screenshot · fictional data": "اسکرین‌شات فضای کاری · داده‌های فرضی", "Close": "بستن", "Close screenshot": "پایان اسکرین‌شات", "Scrollable full-size screenshot": "اسکرین‌شات تمام‌صفحه قابل پیمایش", "Enlarge: {name}": "بزرگ‌نمایی: {name}", "View full size": "نمایش در اندازه کامل"}</script>

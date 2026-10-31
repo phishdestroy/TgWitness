@@ -8,7 +8,7 @@ Busca mensajes guardados, revisa las aportaciones de la IA y conserva informes a
 
 [Guía de flujo de trabajo](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-Abre **«Consultar el archivo»** en el panel. El selector de espacio de trabajo elige la cuenta; el formulario selecciona los chats y el periodo de observación. La búsqueda se realiza localmente, sin IA. Una frase exacta o un dominio restringe los resultados; un ID de mensaje solicita las versiones guardadas. Revisa los extractos obtenidos y abre sus registros en el diario o su contexto. No hay ninguna base de datos vectorial ni acción automática en Telegram.
+Use **Registro** para realizar búsquedas locales sin IA. Para usar **Consulte el archivo**, primero habilite y configure un proveedor en **Integraciones**. El selector de espacio de trabajo elige la cuenta; el formulario selecciona los chats y el periodo de observación. La recuperación se realiza localmente. Una frase exacta o un dominio restringe la recuperación; un ID de mensaje solicita las versiones guardadas. Revise los extractos y abra sus registros en el diario o su contexto. No hay ninguna base de datos vectorial ni acción automática en Telegram.
 
 ## Proveedores y consentimiento
 

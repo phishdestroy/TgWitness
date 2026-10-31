@@ -31,63 +31,134 @@
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="가이드"><a href="../../../">홈</a> <span aria-hidden="true">/</span> <a href="../../">문서</a> <span aria-hidden="true">/</span> <a href="../">참고 문헌</a> <span aria-hidden="true">/</span> <span aria-current="page">읽기 전용 MCP</span></nav>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">문서 검색</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="프록시, 해시 체인, 토큰 또는 위트니스 등을 고려해 보십시오…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="명확한 검색" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">가이드와 참조 자료를 검색하려면 단어를 입력하세요. 검색 기록은 브라우저에 저장됩니다.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">참고 문헌 / 아카이브 및 연동 기능</p><h1>읽기 전용 MCP</h1><p class="guide-outcome">만료 및 취소 가능한 액세스 권한을 통해 MCP 클라이언트를 선택한 작업 공간 및 채팅에 연결합니다.</p><div class="wiki-body"><p><strong>현재 메인 버전:</strong> 소스 체크아웃을 사용하십시오. 0.7.0 휴대용 미리보기 버전은 이 기능이 구현되기 전의 버전입니다.</p>
+<article class="guide-content"><p class="eyebrow">참고 문헌 / 아카이브 및 연동 기능</p><h1>읽기 전용 MCP</h1><p class="guide-outcome">만료 및 취소 가능한 액세스 권한을 통해 MCP 클라이언트를 선택한 작업 공간 및 채팅에 연결합니다.</p><div class="wiki-body"><p>선택한 워크스페이스와 채팅에 분석가 클라이언트를 연결합니다. TgWitness는 <strong>패널 프로세스의 <code>/mcp</code>에서 Streamable HTTP</strong>를 제공합니다. 각 연결에는 고유한 토큰, 만료 시간 및 허용된 도구가 지정됩니다. MCP는 텔레그램 메시지를 전송하거나 설정을 변경하거나 서명된 저널을 수정할 수 없습니다.</p>
 <p><a href="https://phishdestroy.github.io/TgWitness/docs/archive/">워크플로우 가이드</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">위키</a></p>
-<p>TgWitness 프로젝트 디렉터리에서 선택적 서버를 설치하십시오:</p>
-<pre><code class="language-sh">python -m pip install &#x27;.[mcp]&#x27;</code></pre>
-<p>패널에서 <strong>‘통합(Integrations)’ → ‘MCP’를</strong> 엽니다. 연결 이름을 지정하고, 해당
-워크스페이스 및 채팅을 선택한 다음, 만료 기간을 설정합니다. 아카이브 토큰은 한 번만 복사하십시오. 나중에
-다시 불러올 수 없습니다. 분실한 토큰은 취소하고 새 토큰을 발급받으십시오. 패널 토큰과
-텔레그램 인증 정보는 MCP 인증 정보와 다릅니다.</p>
-<h2 id="connect-a-client">클라이언트 연결<a class="anchor" href="#connect-a-client" aria-label="이 섹션으로 이동">#</a></h2>
-<p>이 패널은 <a href="https://code.visualstudio.com/docs/agents/reference/mcp-configuration">문서화된 구성</a> 설정을 사용하여 <strong>VS Code 로컬 </strong>하네스용 <code>.vscode/mcp.json</code>를 생성합니다.
-다운로드한 파일을 해당 <strong>위치에 저장하고, MCP: List Servers를 실행한 후</strong>
-다운로드한 파일을 해당 위치에 저장하고, <strong>MCP: List Servers를</strong> 실행한 후
-TgWitness를 시작하십시오. VS Code는 비밀번호 입력 창을 통해 토큰 입력을 요청합니다. 다운로드한
-JSON 파일에는 토큰이 아닌 프롬프트 참조 정보가 포함되어 있습니다. MCP 엑스트라가 설치된
-환경에서 Python 실행 파일을 사용하십시오.</p>
-<p>다른 stdio 클라이언트의 경우 다음 명령을 실행하십시오:</p>
-<pre><code class="language-sh">python -m tgwitness.mcp_server --api-url http://127.0.0.1:8787</code></pre>
-<p>클라이언트의 보호된 환경에 <code>TGWITNESS_ARCHIVE_TOKEN</code>를 설정하십시오. 이를
-명령어 인자나 URL에 포함하지 마십시오. 브리지는 패널의 인증된
-아카이브 API를 통해 데이터를 읽으며, 데이터베이스에 직접 접근할 수 없습니다. 표준 출력(stdou)에는 MCP 메시지만 전송됩니다.</p>
-<p>원격 클라이언트의 경우, 패널과 함께 서비스를 실행하십시오:</p>
-<pre><code class="language-sh">python -m tgwitness.mcp_server --transport streamable-http \
-  --api-url http://127.0.0.1:8787 --port 8766 \
-  --public-url https://archive.example.org/mcp</code></pre>
-<p>HTTPS 리버스 프록시를 통해 <code>/mcp</code>를 <code>127.0.0.1:8766/mcp</code>로 전달하되,
-<code>Authorization: Bearer …</code> 헤더는 유지합니다. 인증 헤더 및
-요청/응답 본문의 로깅을 비활성화합니다. 필요한 경우에만
-<code>--host</code> 및 <code>--public-url</code>를 사용하여 루프백 외부의 주소에 바인딩합니다. 이 엔드포인트는 공식
-<a href="https://github.com/modelcontextprotocol/python-sdk">MCP Python </a>SDK의 Streamable HTTP를 사용합니다.
-이 엔드포인트는 OAuth 탐색이 아닌 명시적으로 구성된 베어러 자격 증명을 지원하며,
-OAuth만 요구하는 클라이언트는 지원되지 않습니다.</p>
-<p><strong>프로토콜 확인 및 액세스</strong> 단계에서는 실제 MCP 클라이언트를 초기화하고 도구를 나열합니다. 이 단계에서는
-메시지를 가져오지 않습니다. 원격 확인의 경우, 선택된 MCP 서버가
-아카이브 토큰을 수신합니다. 해당 권한 범위 내에서 본인이 운영하거나 신뢰하는 서버만 구성하십시오.</p>
-<h2 id="scope-and-results">범위 및 결과<a class="anchor" href="#scope-and-results" aria-label="이 섹션으로 이동">#</a></h2>
-<p>사용 가능한 도구: <code>list_workspaces</code>, <code>list_chats</code>, <code>search_messages</code>,
-<code>get_message_versions</code>, <code>get_message_context</code>, <code>get_journal_event</code> 및
-<code>get_capture_status</code>. 텔레그램 내 작업, 설정 변경 또는
-대량 내보내기 도구는 제공되지 않습니다. 읽기 작업 시마다 작업 공간/채팅 접근 권한을 재확인하며, 만료되거나 취소된
-인증 정보는 더 이상 작동하지 않습니다. 제한 사항은 인증 정보당 분당 60회의 API 요청,
-페이지당 50건의 기록, 64 KiB 응답 크기, 8초의 API 응답 시간입니다.</p>
-<p>메시지 결과에는 작업 공간, 채팅/메시지 ID, 이벤트 순서, 저장된 해시,
-및 패널 링크가 포함됩니다. 링크를 여는 뷰어는 자체적으로 인증된 패널
-세션을 보유하고 있어야 합니다. 원시 텔레그램 객체, 액세스 해시, 파일 참조, 세션 자료,
-및 키는 생략됩니다. 검색은 원시 필드가 아닌 메시지 텍스트를 대상으로 합니다. 텍스트는
-범위가 제한되며, 잘린 부분은 표시됩니다. 수정 내역, 텔레그램 삭제 알림 및
-<code>missing_on_recheck</code>는 별도의 관측 항목으로 처리됩니다. 채팅 범위 내 접근 권한으로는
-워크스페이스 전체의 운영 이벤트를 볼 수 없으며, 캡처 상태가 이 제한을 명확히 표시합니다.</p>
-<p>아카이브 텍스트는 신뢰할 수 없는 입력 데이터입니다. 메시지 내의 지침은 어떠한 추가적인
-권한도 부여하지 않으며, 클라이언트의 지침으로 간주되어서는 안 됩니다. 외부 AI 모델은
-MCP 클라이언트가 요청하는 모든 콘텐츠를 수신할 수 있습니다. 읽기 전용 액세스 권한은
-아카이브의 변경을 방지할 뿐이며, 클라이언트가 읽은 데이터를 보유하는 것을 막지는 않습니다.</p>
-<p>해시 값은 저장된 기록을 식별하고 무결성 검사를 지원합니다. 해시 값 자체만으로는
-텔레그램의 작성자 신원을 입증하거나 모든 메시지가 캡처되었음을 입증할 수는 없습니다.</p></div></article>
+<h2 id="install-and-check">설치 및 확인<a class="anchor" href="#install-and-check" aria-label="이 섹션으로 이동">#</a></h2>
+<p>패널을 실행하는 Python 환경을 사용하세요. 소스 체크아웃 디렉터리에서 다음을 실행합니다:</p>
+<pre><code class="language-powershell"># Windows PowerShell
+&amp; .\.venv\Scripts\python.exe -m pip install -c deploy/constraints-mcp.txt -e &#x27;.[mcp]&#x27;
+&amp; .\.venv\Scripts\python.exe start.py --check</code></pre>
+<pre><code class="language-sh"># Linux / macOS
+.venv/bin/python -m pip install -c deploy/constraints-mcp.txt -e &#x27;.[mcp]&#x27;
+.venv/bin/python start.py --check</code></pre>
+<p>설치 후 기존 데이터 디렉터리 및 실행 인수를 사용하여 패널을 재시작합니다. 준비 상태(Readiness) 결과에 <code>[PASS] mcp: streamable-http available</code>이 포함되어야 합니다.
+<strong>Integrations → MCP</strong>에서는 해당 서버의 실제 Python 실행 파일을 사용하는 설치 명령어와 런타임 상태를 확인할 수 있습니다. <strong>Re-check</strong>를 누르면 페이지를 새로고침하지 않고 이 상태를 갱신하며, 패키지를 설치하거나 서버를 재시작하지는 않습니다.</p>
+<p>MCP 추가 기능(extra)은 공식 <a href="https://github.com/modelcontextprotocol/python-sdk">MCP Python SDK</a>를 사용합니다.
+<code>deploy/constraints-mcp.txt</code>에는 테스트를 거친 SDK 및 의존성 버전이 고정되어 있습니다. 이 기능을 사용하려면 최신 소스 코드가 필요하며, 0.7.0 포터블 프리뷰 버전은 이 기능이 추가되기 전에 출시되었습니다.</p>
+<h2 id="issue-a-connection">연결 발급<a class="anchor" href="#issue-a-connection" aria-label="이 섹션으로 이동">#</a></h2>
+<ol>
+<li>레이블을 입력하고 클라이언트가 읽을 수 있는 워크스페이스와 채팅을 선택합니다.</li>
+<li>도구를 개별적으로 선택하거나 프리셋을 사용합니다. 구현된 도구만 제공됩니다.</li>
+<li>만료 기간을 1일, 7일, 30일, 90일 중에서 선택하거나 1분에서 90일 사이의 사용자 지정 기간으로 설정합니다.</li>
+<li><strong>Create connection</strong>을 누릅니다. 클라이언트 설정 옆에 토큰이 한 번 표시됩니다.</li>
+<li>토큰과 설정을 복사한 다음 <strong>Check connection</strong>을 실행합니다. 이 작업은 MCP를 초기화하고 허용된 도구 목록을 가져오며, <strong>메시지는 읽지 않습니다</strong>. 결과에는 프로토콜 버전, 도구 이름, 개수 및 소요 시간이 표시됩니다.</li>
+<li>자격 증명을 저장했으면 <strong>Done</strong>을 누릅니다. 폴링 중에도 입력 폼과 일회성 표시 카드는 유지됩니다. 패널을 잠그면 화면에 표시된 비밀 정보가 지워집니다.</li>
+</ol>
+<p>목록에는 최근 사용 시간, 마지막으로 사용한 도구, 주소 및 최근 1분간의 요청 수가 표시됩니다.
+<strong>Revoke</strong>는 접근 권한을 종료합니다. <strong>Rotate token</strong>은 기존 자격 증명을 폐기하고 동일한 범위, 도구 및 만료 시간을 가진 새 토큰을 발급합니다. 새로 발급된 토큰도 한 번만 표시되므로 복사해 두어야 합니다.
+패널 로그인 토큰과 텔레그램 자격 증명은 MCP 토큰으로 사용할 수 없습니다.</p>
+<h2 id="connect-your-client">클라이언트 연결<a class="anchor" href="#connect-your-client" aria-label="이 섹션으로 이동">#</a></h2>
+<p>패널에서 클라이언트를 선택하고 생성된 구성을 복사합니다. 구성에는 시크릿 참조 또는 명시적 플레이스홀더가 사용되며, 토큰은 별도로 복사해야 합니다.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>클라이언트</th>
+<th>구성</th>
+<th>연결</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude Code</td>
+<td><code>.mcp.json</code></td>
+<td>HTTP, <code>type: "http"</code>, Bearer 헤더</td>
+</tr>
+<tr>
+<td>Claude Desktop</td>
+<td><code>claude_desktop_config.json</code></td>
+<td>로컬 stdio 브리지</td>
+</tr>
+<tr>
+<td>Cursor</td>
+<td><code>.cursor/mcp.json</code></td>
+<td>환경 변수 헤더를 사용하는 HTTP</td>
+</tr>
+<tr>
+<td>VS Code Local</td>
+<td><code>.vscode/mcp.json</code></td>
+<td>비밀번호 <code>promptString</code> 입력을 사용하는 HTTP</td>
+</tr>
+<tr>
+<td>Windsurf</td>
+<td><code>mcp_config.json</code></td>
+<td>Bearer 헤더 플레이스홀더를 사용하는 HTTP</td>
+</tr>
+<tr>
+<td>기타 클라이언트</td>
+<td>URL 및 Authorization 헤더</td>
+<td>Streamable HTTP</td>
+</tr>
+</tbody>
+</table></div>
+<p>TgWitness는 OAuth 검색(discovery) 없이 Bearer 토큰을 사용합니다. 원격 커넥터에 OAuth가 필요한 클라이언트의 경우 로컬 stdio 브리지를 사용하세요. VS Code의 경우 입력 변수는 <strong>Local</strong> 하네스에 적용되며 Copilot 세션으로 전달되지 않습니다.
+구성 참고 자료: <a href="https://code.claude.com/docs/en/mcp">Claude Code</a>,
+<a href="https://prod.cursor.com/docs/mcp">Cursor</a>,
+<a href="https://code.visualstudio.com/docs/agents/reference/mcp-configuration">VS Code</a>.</p>
+<p>로컬 브리지의 표준 진입점(entry point)은 다음과 같습니다:</p>
+<pre><code class="language-sh">python -m tgwitness.mcp_server --url https://your-panel.example/mcp</code></pre>
+<p>MCP 추가 기능이 설치된 클라이언트의 로컬 Python을 사용하세요. 보호된 환경에 <code>TGWITNESS_MCP_TOKEN</code>을 설정합니다. 명령줄 인수나 URL에는 자격 증명을 포함하지 마세요. <code>tgwitness-mcp</code>도 동일한 진입점입니다. 기존의 <code>tgwitness.mcp_bridge</code> 모듈과 <code>TGWITNESS_ARCHIVE_TOKEN</code> 이름은 경고를 표시하며 호환성 경로로 유지되지만, 새로운 구성에서는 <code>mcp_server</code>와 <code>TGWITNESS_MCP_TOKEN</code>을 사용합니다.</p>
+<h2 id="cloudflare-tunnel">Cloudflare Tunnel<a class="anchor" href="#cloudflare-tunnel" aria-label="이 섹션으로 이동">#</a></h2>
+<p>패널의 <code>/mcp</code> 경로를 포워딩하고 Bearer 헤더를 유지합니다. 관리자로 MCP 설정을 열면 현재 실행 세션에 대해 패널의 현재 오리진(origin)이 등록됩니다.
+재시작 직후에도 즉시 사용할 수 있는 고정 주소를 원한다면, 패널을 시작하기 전에 패널의 HTTPS 오리진으로 <code>TGWITNESS_PUBLIC_URL</code>을 구성하세요.
+임의의 Host 및 포워딩된 헤더는 신뢰할 수 있는 주소로 등록되지 않습니다.
+Host 및 Origin 검사는 관련 없는 브라우저 오리진을 거부합니다. 응답은 <code>Cache-Control: no-store</code>를 사용하며, 인증 값은 절대 로그에 기록되지 않습니다.</p>
+<p><code>*.trycloudflare.com</code> 주소는 임시 주소입니다. 터널 재시작으로 호스트 이름이 변경되면 구성된 공개 URL과 각 클라이언트의 MCP URL을 업데이트해야 합니다. 저장된 클라이언트 구성에는 고정 호스트 이름을 사용하세요.</p>
+<h2 id="tools-and-boundaries">도구 및 권한 경계<a class="anchor" href="#tools-and-boundaries" aria-label="이 섹션으로 이동">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>도구</th>
+<th>읽기 대상</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list_workspaces</code></td>
+<td>권한이 부여된 워크스페이스</td>
+</tr>
+<tr>
+<td><code>list_chats</code></td>
+<td>권한이 부여된 채팅</td>
+</tr>
+<tr>
+<td><code>search_messages</code></td>
+<td>선택한 기간 내에 저장된 메시지 텍스트</td>
+</tr>
+<tr>
+<td><code>get_message_versions</code></td>
+<td>수집된 버전 및 삭제 관측 기록</td>
+</tr>
+<tr>
+<td><code>get_message_context</code></td>
+<td>인접한 수집 메시지 ID</td>
+</tr>
+<tr>
+<td><code>get_journal_event</code></td>
+<td>소스 참조가 포함된 정제된(sanitized) 단일 레코드</td>
+</tr>
+<tr>
+<td><code>get_capture_status</code></td>
+<td>수집 상태 및 허용된 범위(coverage) 레코드</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>tools/list</code>는 해당 연결에 권한이 부여된 도구만 반환합니다. 다른 도구에 대한 호출은 거부됩니다. 그룹 컨텍스트, 에피소드, 용어 및 답장 체인 도구는 이 빌드에서 제공되지 않으며, 별도의 컨텍스트 팩 백엔드가 포함되어 있지 않습니다.</p>
+<p>모든 읽기 작업은 데이터베이스 작업이 완료된 후를 포함하여 토큰, 도구 및 워크스페이스/채팅 범위를 확인합니다. 제한 사항은 분당 요청 60회, 페이지당 레코드 50개, 결과당 64 KiB 및 아카이브 처리 기한 8초입니다. 시간 초과된 MCP 호출은 더 좁은 기간이나 더 낮은 제한 값을 요청하는 도구 오류를 반환합니다.</p>
+<p>메시지 결과에는 <code>untrusted_content: true</code>, 워크스페이스/채팅/메시지 ID, 이벤트 시퀀스, 저장된 해시 및 패널 링크가 포함됩니다. 원시 텔레그램 객체, 액세스 해시, 세션 및 키는 생략됩니다. 잘린 텍스트는 표시됩니다. 수정, 삭제 알림 및 <code>missing_on_recheck</code>는 서로 구분되는 관측 기록입니다. 레코드가 누락되었다고 해서 이벤트가 발생하지 않았음을 증명하는 것은 아닙니다.</p>
+<p>수집된 메시지 내부의 지시 사항은 증거로만 취급해야 하며, 절대 클라이언트에 대한 지시 사항으로 처리해서는 안 됩니다. 읽기 전용 권한은 아카이브 변경을 방지하지만, 클라이언트는 읽기가 허용된 콘텐츠를 자체적으로 보관할 수 있습니다. 해시는 저장된 레코드를 식별하고 무결성 검사를 지원할 뿐, 텔레그램 작성자 신원이나 완전한 수집을 증명하지는 않습니다.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/MCP.md">GitHub에서 이 페이지 편집하기 ↗</a><a class="next-guide" href="../media-analysis/"><span>다음 단계</span><strong>로컬 OCR 및 텍스트 변환 →</strong></a><p>이 가이드들은 현재 구현 내용을 설명합니다. 검증 결과와 남아 있는 미비 사항은 별도로 문서화되어 있습니다. <a href="../verification/">테스트된 내용 →</a></p></footer>
 </main>
-<aside class="toc" aria-label="이 페이지에서"><p class="nav-label">이 페이지에서</p><a href="#connect-a-client">클라이언트 연결</a><a href="#scope-and-results">범위 및 결과</a></aside>
+<aside class="toc" aria-label="이 페이지에서"><p class="nav-label">이 페이지에서</p><a href="#install-and-check">설치 및 확인</a><a href="#issue-a-connection">연결 발급</a><a href="#connect-your-client">클라이언트 연결</a><a href="#cloudflare-tunnel">Cloudflare Tunnel</a><a href="#tools-and-boundaries">도구 및 권한 경계</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>오픈 소스 · 사용자의 컴퓨터에서 실행됩니다</span><a href="../../../../LICENSE">MIT 라이선스</a><a href="../notice/">운영자 공지</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">보안</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "메시지를 기다리고 있습니다", "Step through a fictional send, edit and delete.": "가상의 메시지 전송, 수정 및 삭제 과정을 단계별로 살펴보세요.", "No observations yet. Start the sequence or advance one event.": "아직 관찰 내용이 없습니다. 시퀀스를 시작하거나 이벤트를 하나 앞으로 넘기세요.", "Meet at 10:00": "10:00에 만나요", "A new message is visible in the chat.": "채팅창에 새 메시지가 표시됩니다.", "Record 1 appended: the collector observed the original message.": "기록 1건 추가됨: 수집기가 원본 메시지를 감지했습니다.", "Meet at 11:00": "11:00에 만나요", "The current text changes. The earlier observation stays.": "현재 텍스트가 변경되었습니다. 이전의 관찰 내용은 그대로 유지됩니다.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "기록 2가 추가되었습니다: 이 수정은 새로운 관찰 내용입니다. 기록 1에는 여전히 원본 텍스트가 유지되어 있습니다.", "Message deleted": "메시지가 삭제되었습니다.", "The message has disappeared from the chat view.": "해당 메시지가 채팅 화면에서 사라졌습니다.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Record 3 추가: 삭제 알림은 확인된 두 버전의 메시지와 함께 보존됩니다.", "0 records": "0건", "1 record": "1건의 기록", "2 records": "2건의 기록", "3 records": "3건의 기록", "Complete / {n} of 3": "완료 / 3개 중 {n}개", "Step / {n} of 3": "3단계 중 {n}단계", "Pause": "일시 정지", "Replay sequence": "재생 순서", "Play sequence": "재생 순서", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "정적 예제 페이지를 확인할 수 있습니다. 해시를 대화형으로 계산하려면 HTTPS를 통해 이 페이지를 열거나, Web Crypto를 지원하는 로컬호스트 미리보기에서 열어보세요.", "No record supplied": "기록이 제공되지 않음", "Tail removed": "꼬리 부분 삭제됨", "≠ saved hash": "≠ 저장된 해시", "Rebuilt · different hash": "재구축 · 다른 해시", "= saved hash": "= 저장된 해시", "Same length and matching head.": "글의 길이는 동일하며, 제목도 일치해야 합니다.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "계산된 세 개의 해시 값이 모두 저장된 해시 값과 일치합니다. 이 샘플은 유지된 3개 레코드 경계와 일치합니다.", "Same saved head; the journal prefix fails verification.": "동일한 헤더가 저장되었으나, 저널 접두사가 검증에 실패했습니다.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "레코드 2가 저장된 해시와 더 이상 일치하지 않습니다. 최종 저장된 헤더만 확인하면 이 문제를 놓칠 수 있으므로, 검증자는 모든 레코드를 확인합니다.", "Head differs from the retained checkpoint.": "헤더가 유지된 체크포인트와 다릅니다.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "재구성된 해시 값들은 서로 연결되어 있지만, 최종 헤더가 변경되었습니다. 보존된 체크포인트는 이 변경 내역을 거부합니다. 변경된 기록의 경우 원본 서명도 유효하지 않을 것입니다.", "Too short: 2 supplied records \u003c 3 retained records.": "너무 짧음: 제공된 기록 2건 \u003c 보존된 기록 3건.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "남아 있는 두 해시는 여전히 일치합니다. 보존된 체크포인트는 누락된 끝부분을 드러냅니다. 그 이전의 경계 정보가 없었다면, 이 짧은 접두사만으로는 누락된 부분을 파악할 수 없었을 것입니다.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "이 브라우저에서는 해시 계산 기능을 사용할 수 없습니다. 아래의 공식과 정적 설명은 계속 확인할 수 있습니다.", "{n} records": "{n}건의 기록", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "승인됨: 카운트가 증가하고, 서명이 검증되며, 키가 일치합니다. 위트니스는 이 새로운 경계를 유지합니다.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "롤백: 서명된 응답에 포함된 기록 수가 마지막으로 승인된 체크포인트보다 적게 보고된 경우. 위트니스는 이 문제를 기록하고 이전에 승인된 경계를 유지합니다.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "포크(Fork): 카운트는 변하지 않았지만 헤드가 다릅니다. 위트니스는 이 불일치를 기록하고 이전에 승인된 경계를 유지합니다.", "No answer": "답변 없음", "boundary unknown": "경계 미상", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "응답 없음: 위트니스는 확인 실패를 기록합니다. 수집기의 현재 상태를 확인할 수는 없습니다. 위트니스가 여전히 봇 API에 접속할 수 있고 게시 정책이 허용하는 경우, 해당 실패 사실을 게시할 수 있습니다.", "Send {n}": "{n} 보내기", "Edit {n}": "{n} 편집", "Delete {n}": "{n} 삭제", "Both accounts captured all six expected observations in this example.": "이 예시에서 두 계정 모두 예상된 6가지 관찰 항목을 모두 포착했습니다.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "계정 B는 여전히 6건 중 6건을 모두 캡처했습니다. 두 건의 수신 확인은 더 오래 걸렸습니다. 캡처 비율과 수신 확인 지연은 서로 다른 문제를 나타냅니다.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "계정 B는 마감 시점까지 6건 중 5건(83.3%)을 포착했습니다. 누락된 편집 건에는 측정된 지연 시간이 없습니다. 이 결과는 6건의 통제된 동작에 대해서만 설명한 것입니다.", "not observed by cutoff": "마감 시점에 확인되지 않음", "{s} seconds": "{s}초", "Exact values follow in the table.": "정확한 수치는 아래 표에 나와 있습니다.", "{s} s": "{s} s", "Not observed": "확인되지 않음", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "네 개의 채팅에서 서로 다른 관찰 결과가 제시됩니다. 모든 연결에 대해 원본 기록을 따르십시오. 발신자가 명시되지 않은 경우 채널 게시물을 사용자 71001에게 귀속시키지 마십시오.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "기록 #146과 #205는 동일한 발신자 ID인 71001을 나타냅니다. 이를 통해 두 채팅에서 관찰된 텔레그램 계정의 게시물을 연결할 수 있습니다. 이는 실제 인물을 식별하거나 채널 게시물의 작성자를 특정하지는 않습니다.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "수신처 pay.example.invalid/new는 그룹 기록 #146, 봇 키보드 #173, 채널 편집 #188 및 비공개 메시지 #205에 나타납니다. 동일한 수신처가 반복적으로 등장한다는 사실은 해당 자료 간의 연관성을 시사할 뿐, 해당 계정들이 동일한 주체에 의해 통제된다는 것을 증명하지는 않습니다.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "이 가상의 사례에서, 완료된 미디어 수신 기록 #151과 #209는 동일한 SHA-256 전체 값을 가지고 있습니다. 실제 바이트와 관련 메시지 기록을 비교해 보십시오. 일치하는 파일은 작성자를 식별하지 않으며, 누가 이를 전달했는지도 증명하지 않습니다.", "the encrypted off-site copy": "암호화된 오프사이트 사본", "notifications": "알림", "checkpoint hashes for timestamps": "타임스탬프용 체크포인트 해시", "signed checkpoints for the witness": "증거를 위한 서명된 체크포인트", "Switched on in this example": "이 예시에서는 활성화됨", "Optional · off by default": "선택 사항 · 기본값은 비활성화됨", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "이 기기에서 남기는 것: 텔레그램 연결 정보와 {list}. 그 외에는 아무것도 없습니다.", "Default: only the Telegram connection leaves this machine.": "기본 설정: 텔레그램 연결만 이 기기를 통해 이루어집니다.", "{done} of {total} done": "{done}/{total} 완료", "Mark step {n} as done": "{n}번 단계를 완료로 표시", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "복사", "Copied": "복사됨", "Command copied.": "명령 복사 완료.", "Selected — Ctrl/Cmd+C": "선택 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "명령어가 선택되었습니다. 수동으로 복사하십시오.", "Command copied to clipboard.": "명령어가 클립보드에 복사되었습니다.", "Select text": "텍스트 선택", "Clipboard unavailable. Command selected; copy it manually.": "클립보드를 사용할 수 없습니다. 명령어가 선택되었습니다. 수동으로 복사하십시오.", "A message arrives. The first observation is saved.": "메시지가 도착합니다. 첫 번째 관측 결과가 저장됩니다.", "The time changes. Both captured versions stay.": "시간이 변경됩니다. 캡처된 두 버전 모두 그대로 유지됩니다.", "The message disappears. The captured history remains.": "메시지는 사라지지만, 캡처된 기록은 남습니다.", "Pause example animation": "예시 애니메이션 일시 정지", "Play example animation": "예시 애니메이션 재생", "Play": "재생", "Full-size workspace screenshot": "전체 화면 작업 공간 스크린샷", "Workspace screenshot · fictional data": "작업 공간 스크린샷 · 가상의 데이터", "Close": "닫기", "Close screenshot": "스크린샷 닫기", "Scrollable full-size screenshot": "스크롤 가능한 전체 화면 스크린샷", "Enlarge: {name}": "확대: {name}", "View full size": "전체 크기 보기"}</script>

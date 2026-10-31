@@ -8,7 +8,7 @@ Pesquise mensagens salvas, analise contribuições de IA e mantenha relatórios 
 
 [Guia de fluxo de trabalho](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-Abra **o “Ask the archive”** no painel. O seletor de área de trabalho escolhe a conta; o formulário seleciona os chats e o período de observação. A pesquisa é executada localmente, sem IA. Uma frase exata ou um domínio restringe os resultados; um ID de mensagem solicita versões salvas. Analise os trechos retornados e abra seus registros no diário ou o contexto. Não há banco de dados vetorial nem ação automática no Telegram.
+Use o **Diário** para pesquisa local sem IA. Para usar **Consulte o arquivo**, primeiro habilite e configure um provedor em **Integrações**. O seletor de área de trabalho escolhe a conta; o formulário seleciona os chats e o período de observação. A recuperação é executada localmente. Uma frase exata ou um domínio restringe a recuperação; um ID de mensagem solicita versões salvas. Analise os trechos e abra seus registros no diário ou o contexto. Não há banco de dados vetorial nem ação automática no Telegram.
 
 ## Provedores e consentimento
 

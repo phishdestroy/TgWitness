@@ -4,48 +4,86 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/mcp/
 
 MCP mijozini tanlangan ish maydonlari va suhbatlarga muddati tugaydigan, bekor qilinishi mumkin bo'lgan kirish huquqi bilan ulashing.
 
-**Hozirgi asosiy:** manbani chiqarib olishdan foydalaning; 0.7.0 portativ ko'rinishi ushbu xususiyatdan oldin yaratilgan.
+Tahlilchi mijozini tanlangan ish maydonlari va chatlarga ulang. TgWitness **panel jarayonida `/mcp` manzilida Streamable HTTP** xizmatini ko‘rsatadi. Har bir ulanish o‘zining tokeni, amal qilish muddati va ruxsat etilgan vositalariga ega. MCP Telegram xabarlarini yubora olmaydi, sozlamalarni o‘zgartira olmaydi yoki imzolangan jurnalni tahrirlay olmaydi.
 
 [Ish jarayoni bo'yicha qo'llanma](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-TgWitness loyihasi katalogidan ixtiyoriy serverni o'rnating:
+## O‘rnatish va tekshirish
+
+Panelni ishga tushiradigan Python muhitidan foydalaning. Manba kodlari yuklab olingan katalogdan:
 
 ```
-python -m pip install '.[mcp]'
+# Windows PowerShell
+& .\.venv\Scripts\python.exe -m pip install -c deploy/constraints-mcp.txt -e '.[mcp]'
+& .\.venv\Scripts\python.exe start.py --check
 ```
 
-Panelda **Integratsiyalar → MCP** bo'limini oching. Ulanish nomini kiriting, uning ish maydonchalari va suhbatlarini tanlang va amal qilish muddatini belgilang. Arxiv tokenini bir marta nusxalang; uni keyin qayta tiklab bo'lmaydi. Yo'qolgan tokenlarni bekor qiling va ularni yangilari bilan almashtiring. Panel tokenlari va Telegram kirish ma'lumotlari MCP kirish ma'lumotlari hisoblanmaydi.
-
-## Klientni ulanish
-
-Panel o'zining [hujjatlangan konfiguratsiyasidan](https://code.visualstudio.com/docs/agents/reference/mcp-configuration) foydalangan holda **VS Code Local harness** uchun`.vscode/mcp.json` ni yaratadi. Yuklab olingan faylni shu joyga saqlang, **MCP: List Servers ni** ishga tushiring va TgWitness ni ishga tushiring. VS Code parol kirish oynasi orqali tokenni so'raydi. Yuklab olingan JSON token emas, balki so'rov havolasini o'z ichiga oladi. MCP extra o'rnatilgan muhitdan Python ijro etiladigan faylni ishlating.
-
-Boshqa stdio mijozlari uchun quyidagilarni bajaring:
-
 ```
-python -m tgwitness.mcp_server --api-url http://127.0.0.1:8787
+# Linux / macOS
+.venv/bin/python -m pip install -c deploy/constraints-mcp.txt -e '.[mcp]'
+.venv/bin/python start.py --check
 ```
 
-`TGWITNESS_ARCHIVE_TOKEN` ni mijozning himoyalangan muhitida o'rnating. Uni buyruq argumentlariga yoki URL manzillariga kiritmang. Ko'prik panelning ruxsat berilgan arxiv API orqali o'qiydi; u bevosita ma'lumotlar bazasiga ulanmaydi. Stdout faqat MCP xabarlarini uzatadi.
+O‘rnatishdan so‘ng panelni odatdagi ma’lumotlar katalogi va ishga tushirish argumentlari bilan qayta ishga tushiring. Tayyorlik holatida `[PASS] mcp: streamable-http available` bo‘lishi kerak. **Integrations → MCP** bo‘limida ish vaqti (runtime) holati va ushbu serverning haqiqiy Python bajariladigan faylidan foydalangan holda o‘rnatish buyrug‘i ko‘rsatiladi. **Re-check** tugmasi sahifani qayta yuklamasdan ushbu holatni yangilaydi; u paketlarni o‘rnatmaydi yoki serverni qayta ishga tushirmaydi.
 
-Masofaviy mijozlar uchun panel yonida xizmatni ishga tushiring:
+MCP qo‘shimcha paketi rasmiy [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk) dan foydalanadi. `deploy/constraints-mcp.txt` sinovdan o‘tgan SDK va bog‘liqliklarni qat’iy belgilaydi. Ushbu imkoniyatlar joriy manba kodini talab qiladi; 0.7.0 portativ dastlabki talqini ulardan oldin chiqqan.
+
+## Ulanish yaratish
+
+1. Yorliq kiriting va mijoz o‘qishi mumkin bo‘lgan ish maydonlari hamda chatlarni tanlang.
+2. Vositalarni alohida-alohida tanlang yoki tayyor shablondan foydalaning. Faqat amalga oshirilgan vositalar taklif etiladi.
+3. 1, 7, 30 yoki 90 kunni, yoxud bir daqiqadan 90 kungacha bo‘lgan maxsus amal qilish muddatini tanlang.
+4. **Create connection** tugmasini bosing. Token mijoz konfiguratsiyasi yonida bir marta ko‘rinadi.
+5. Token va konfiguratsiyani nusxalab oling, so‘ngra **Check connection** tugmasini bosing. U MCP ni ishga tushiradi va ruxsat etilgan vositalar ro‘yxatini chiqaradi; **hech qanday xabar o‘qilmaydi**. Natijada protokol talqini, vosita nomlari, ularning soni va sarflangan vaqt ko‘rsatiladi.
+6. Hisob ma’lumotlari saqlanganidan so‘ng **Done** tugmasini bosing. Davriy so‘rovlar (polling) shaklni va bir marta ko‘rsatiladigan kartani saqlab qoladi. Panelni qulflash ekranda ko‘rsatilgan maxfiy ma’lumotlarni tozalaydi.
+
+Ro‘yxatda so‘nggi foydalanish, oxirgi vosita, manzil va so‘nggi daqiqadagi so‘rovlar soni ko‘rsatiladi. **Revoke** kirish huquqini to‘xtatadi. **Rotate token** eski hisob ma’lumotlarini bekor qiladi va xuddi shu qamrov, vositalar hamda amal qilish muddati bilan yangisini yaratadi; yangisini bir marta nusxalab oling. Panelga kirish tokenlari va Telegram hisob ma’lumotlari MCP tokenlari sifatida ishlamaydi.
+
+## Mijozingizni ulash
+
+Panelda mijozni tanlang va yaratilgan konfiguratsiyani nusxalab oling. Konfiguratsiyalarda maxfiy havolalar yoki aniq o‘rinbosarlar (placeholders) ishlatiladi; token alohida nusxalanadi.
+
+| Mijoz | Konfiguratsiya | Ulanish |
+| --- | --- | --- |
+| Claude Code | `.mcp.json` | HTTP, `type: "http"`, bearer sarlavhasi |
+| Claude Desktop | `claude_desktop_config.json` | Lokal stdio ko‘prigi |
+| Cursor | `.cursor/mcp.json` | Muhit o‘zgaruvchisi sarlavhasiga ega HTTP |
+| VS Code Local | `.vscode/mcp.json` | Parolli `promptString` kiritmasiga ega HTTP |
+| Windsurf | `mcp_config.json` | Bearer sarlavhasi o‘rinbosariga ega HTTP |
+| Boshqa mijozlar | URL va Authorization sarlavhasi | Streamable HTTP |
+
+TgWitness OAuth aniqlashisiz bearer tokenlardan foydalanadi. Masofaviy ulagichi OAuth talab qiladigan mijozlar uchun lokal stdio ko‘prigidan foydalaning. VS Code uchun kiritish o‘zgaruvchilari **Local** muhitiga taalluqli bo‘lib, Copilot sessiyalariga uzatilmaydi. Konfiguratsiya bo‘yicha ma’lumotnomalar: [Claude Code](https://code.claude.com/docs/en/mcp), [Cursor](https://prod.cursor.com/docs/mcp), [VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration).
+
+Lokal ko‘prik uchun standart kirish nuqtasi:
 
 ```
-python -m tgwitness.mcp_server --transport streamable-http \
-  --api-url http://127.0.0.1:8787 --port 8766 \
-  --public-url https://archive.example.org/mcp
+python -m tgwitness.mcp_server --url https://your-panel.example/mcp
 ```
 
-`/mcp` ni HTTPS teskari proxy orqali `127.0.0.1:8766/mcp` ga uzating, `Authorization: Bearer …` sarlavhasini saqlagan holda. Avtorizatsiya sarlavhalari va so'rov/javob tanalarini loglashni o'chirib qo'ying. Loopbackdan tashqariga bog'lanishni faqat kerak bo'lganda, `--host` va `--public-url` ni ishlatib yoqing. Endpoint rasmiy [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk) dasturidagi Streamable HTTP dan foydalanadi. U aniq sozlangan bearer kreditsiyalarini qo'llab-quvvatlaydi, OAuth kashfiyotini emas; faqat OAuth talab qiladigan mijozlar qo'llab-quvvatlanmaydi.
+Mijozning MCP qo‘shimcha paketi o‘rnatilgan lokal Python muhitidan foydalaning. Uning himoyalangan muhitida `TGWITNESS_MCP_TOKEN` o‘zgaruvchisini o‘rnating. Hisob ma’lumotlarini buyruq argumentlari va URL manzillariga kiritmang. `tgwitness-mcp` xuddi shu kirish nuqtasidir. Eski `tgwitness.mcp_bridge` moduli va `TGWITNESS_ARCHIVE_TOKEN` nomi ogohlantirish bilan moslik yo‘llari sifatida saqlanib qolgan; yangi konfiguratsiyalarda `mcp_server` va `TGWITNESS_MCP_TOKEN` ishlatiladi.
 
-**Tekshiruv protokoli va kirish** haqiqiy MCP mijozini ishga tushiradi va vositalarni ro'yxatlaydi. U xabarlarni olib kelmaydi. Masofaviy tekshiruv uchun tanlangan MCP server arxiv tokenini oladi. Faqat o'zingiz boshqaradigan yoki ishonadigan serverni sozlang.
+## Cloudflare Tunnel
 
-## Doira va natijalar
+Panelning `/mcp` yo‘nalishini yo‘naltiring va bearer sarlavhasini saqlab qoling. Administrator sifatida MCP sozlamalarini ochish ushbu ishga tushirish jarayoni uchun panelning joriy manbasini (origin) ro‘yxatdan o‘tkazadi. Qayta ishga tushirilgandan so‘ng darhol mavjud bo‘ladigan barqaror manzil uchun, panelni ishga tushirishdan oldin `TGWITNESS_PUBLIC_URL` o‘zgaruvchisini panelning HTTPS manbasi bilan sozlang. Ixtiyoriy Host va yo‘naltirilgan sarlavhalar ishonchli manzilni ro‘yxatdan o‘tkazmaydi. Host va Origin tekshiruvlari aloqador bo‘lmagan brauzer manbalarini rad etadi. Javoblarda `Cache-Control: no-store` ishlatiladi; avtorizatsiya qiymatlari hech qachon jurnalga yozilmaydi.
 
-Mavjud vositalar: `list_workspaces`, `list_chats`, `search_messages`, `get_message_versions`, `get_message_context`, `get_journal_event` va `get_capture_status`. Telegram harakatlari, sozlamalarni o'zgartirish yoki ommaviy eksport vositalari mavjud emas. Har bir o'qish ish maydoni/suhbatga kirishni qayta tekshiradi; muddati tugagan va bekor qilingan ma'lumotlar ishlashni to'xtatadi. Cheklovlar: har bir ma'lumotnoma bo'yicha daqiqada 60 API so'rovi, har bir sahifada 50 yozuv, 64 KiB javob va sakkiz soniyalik API muddati.
+`*.trycloudflare.com` manzili vaqtinchalik hisoblanadi. Tunnelni qayta ishga tushirish xost nomini o‘zgartirganda, sozlangan ommaviy URL va har bir mijozning MCP URL manzilini yangilang. Saqlangan mijoz konfiguratsiyalari uchun barqaror xost nomidan foydalaning.
 
-Xabar natijalariga ish maydoni, suhbat/xabar IDlari, voqealar ketma-ketligi, saqlangan xesh va panel havolasi kiradi. Havolani ochadigan ko'ruvchida o'zining ruxsat etilgan panel sessiyasi bo'lishi kerak. Xom Telegram obyektlari, kirish xeshlari, fayl havolalari, sessiya materiallari va kalitlar kiritilmagan. Qidiruv xabar matnini tekshiradi, xom maydonlarni emas. Matn chegaralangan va qisqartirilgan joylar belgilanadi. Tahrirlar, Telegram o'chirish bildirishnomalari va `missing_on_recheck` alohida kuzatuvlar sifatida qoladi. Sohaga oid kirish butun ish maydonidagi operatsion voqealarni ko'ra olmaydi; yozib olish holati bu cheklovni aniq belgilaydi.
+## Vositalar va chegaralar
 
-Arxiv matni ishonchsiz kirish hisoblanadi. Xabarlardagi ko'rsatmalar qo'shimcha imtiyoz bermaydi va ularni mijoz ko'rsatmalari deb hisoblash mumkin emas. Tashqi sun'iy intellekt modeli MCP-mijoz so'raydigan har qanday kontentni qabul qilishi mumkin. Faqat o'qish huquqi arxivni o'zgartirishni oldini oladi; ammo bu mijozning o'qigan ma'lumotlarini saqlashiga to'sqinlik qilmaydi.
+| Vosita | O‘qiydi |
+| --- | --- |
+| `list_workspaces` | Ruxsat berilgan ish maydonlari |
+| `list_chats` | Ruxsat berilgan chatlar |
+| `search_messages` | Tanlangan davr ichida saqlangan xabar matni |
+| `get_message_versions` | Qayd etilgan talqinlar va o‘chirish kuzatuvlari |
+| `get_message_context` | Yaqin atrofdagi qayd etilgan xabar ID lari |
+| `get_journal_event` | Manba havolasiga ega bitta tozalangan (sanitized) yozuv |
+| `get_capture_status` | Yig‘ish holati va ruxsat etilgan qamrov yozuvlari |
 
-Hashlar saqlangan yozuvlarni aniqlaydi va yaxlitlik tekshiruvlarini qo'llab-quvvatlaydi. Ular mustaqil ravishda Telegram muallifligini yoki har bir xabar qabul qilinganini isbotlamaydi.
+`tools/list` faqat ushbu ulanishga ruxsat berilgan vositalarni qaytaradi. Boshqa vositalarga chaqiruvlar rad etiladi. Guruh konteksti, epizod, terminologiya va javoblar zanjiri vositalari ushbu yig‘mada taklif etilmaydi; ularning alohida kontekst-paket bekendi kiritilmagan.
+
+Har bir o‘qish amali token, vosita va ish maydoni/chat qamrovini, jumladan ma’lumotlar bazasi ishi tugaganidan keyin ham tekshiradi. Cheklovlar: daqiqasiga 60 ta so‘rov, har bir sahifada 50 ta yozuv, har bir natija uchun 64 KiB va arxiv uchun sakkiz soniyalik yakuniy muddat. Vaqti tugagan MCP chaqiruvi torroq davrni yoki kamroq cheklovni so‘rab vosita xatosini qaytaradi.
+
+Xabar natijalari `untrusted_content: true`, ish maydoni/chat/xabar ID lari, hodisa ketma-ketligi, saqlangan xesh va panel havolasini o‘z ichiga oladi. Xom Telegram obyektlari, kirish xeshlari, sessiyalar va kalitlar tushirib qoldiriladi. Matn qisqartirilganligi belgilanadi. Tahrirlar, o‘chirish bildirishnomalari va `missing_on_recheck` alohida kuzatuvlar hisoblanadi. Yozuvlarning yo‘qligi hodisa hech qachon sodir bo‘lmaganligini isbotlamaydi.
+
+Qayd etilgan xabarlar ichidagi ko‘rsatmalarga hech qachon mijoz ko‘rsatmalari sifatida emas, balki dalil sifatida qarang. Faqat o‘qish uchun kirish huquqi arxiv o‘zgarishlarining oldini oladi; biroq mijoz o‘ziga o‘qishga ruxsat berilgan kontentni saqlab qolishi mumkin. Xeshlar saqlangan yozuvlarni aniqlaydi va yaxlitlikni tekshirishni qo‘llab-quvvatlaydi; ular Telegram muallifligini yoki to‘liq qayd etilganlikni isbotlamaydi.

@@ -31,63 +31,169 @@
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="คู่มือ"><a href="../../../">หน้าหลัก</a> <span aria-hidden="true">/</span> <a href="../../">เอกสาร</a> <span aria-hidden="true">/</span> <a href="../">อ้างอิง</a> <span aria-hidden="true">/</span> <span aria-current="page">MCP แบบอ่านเท่านั้น</span></nav>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">ค้นหาในเอกสาร</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="ลองใช้ proxy, hash chain, token หรือ witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="ค้นหาอย่างชัดเจน" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">พิมพ์คำเพื่อค้นหาในคู่มือและเอกสารอ้างอิง การค้นหาจะเก็บไว้ในเบราว์เซอร์ของคุณ</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">อ้างอิง / การเก็บรักษาข้อมูลและการบูรณาการ</p><h1>MCP แบบอ่านเท่านั้น</h1><p class="guide-outcome">เชื่อมต่อไคลเอนต์ MCP กับพื้นที่ทำงานและห้องสนทนาที่เลือกไว้ โดยให้สิทธิ์การเข้าถึงที่มีระยะเวลาจำกัดและสามารถเพิกถอนได้</p><div class="wiki-body"><p><strong>เนื้อหาหลักปัจจุบัน:</strong> ใช้การเช็คเอาต์จากแหล่งที่มา; เวอร์ชัน 0.7.0 portable preview ยังไม่มีคุณสมบัตินี้</p>
+<article class="guide-content"><p class="eyebrow">อ้างอิง / การเก็บรักษาข้อมูลและการบูรณาการ</p><h1>MCP แบบอ่านเท่านั้น</h1><p class="guide-outcome">เชื่อมต่อไคลเอนต์ MCP กับพื้นที่ทำงานและห้องสนทนาที่เลือกไว้ โดยให้สิทธิ์การเข้าถึงที่มีระยะเวลาจำกัดและสามารถเพิกถอนได้</p><div class="wiki-body"><p>เชื่อมต่อไคลเอนต์ของนักวิเคราะห์เข้ากับเวิร์กสเปซและแชตที่เลือก TgWitness ให้บริการ
+<strong>Streamable HTTP ที่ <code>/mcp</code> ในโปรเซสของพาเนล</strong> การเชื่อมต่อแต่ละรายการจะมี
+โทเค็น วันหมดอายุ และเครื่องมือที่ได้รับอนุญาตเป็นของตัวเอง MCP ไม่สามารถส่งข้อความ Telegram เปลี่ยน
+การตั้งค่า หรือแก้ไขบันทึกประจำวัน (journal) ที่ลงนามแล้วได้</p>
 <p><a href="https://phishdestroy.github.io/TgWitness/docs/archive/">คู่มือขั้นตอนการทำงาน</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
-<p>ติดตั้งเซิร์ฟเวอร์แบบเลือกใช้ได้จากไดเรกทอรีโครงการ TgWitness:</p>
-<pre><code class="language-sh">python -m pip install &#x27;.[mcp]&#x27;</code></pre>
-<p>ในแผงควบคุม ให้เปิด <strong>Integrations → MCP</strong> ตั้งชื่อการเชื่อมต่อ เลือก
-พื้นที่ทำงานและแชท และกำหนดระยะเวลาหมดอายุ คัดลอกโทเค็นการเก็บถาวรเพียงครั้งเดียว เนื่องจากไม่สามารถ
-เรียกคืนได้ในภายหลัง ยกเลิกโทเค็นที่สูญหายและออกโทเค็นทดแทน โทเค็นในแผงควบคุมและ
-ข้อมูลรับรอง Telegram ไม่ใช่ข้อมูลรับรอง MCP</p>
-<h2 id="connect-a-client">เชื่อมต่อไคลเอนต์<a class="anchor" href="#connect-a-client" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
-<p>แผงควบคุมจะสร้าง<code>.vscode/mcp.json</code> สำหรับ <strong>VS Code Local harness</strong> โดยใช้
-<a href="https://code.visualstudio.com/docs/agents/reference/mcp-configuration">การตั้งค่าที่ระบุไว้ในเอกสาร</a>
-บันทึกไฟล์ที่ดาวน์โหลดมาไว้ในตำแหน่งนั้น แล้วเรียกใช้ <strong>MCP: List Servers</strong> และเริ่ม
-TgWitness VS Code จะขอโทเค็นผ่านการป้อนรหัสผ่าน ไฟล์ JSON ที่ดาวน์โหลดมา
-มีเพียงการอ้างอิงคำสั่ง ไม่ใช่โทเค็น ใช้ไฟล์ Python ที่สามารถเรียกใช้งานได้จาก
-สภาพแวดล้อมที่ติดตั้ง MCP extra ไว้</p>
-<p>สำหรับลูกค้า stdio อื่นๆ ให้รัน:</p>
-<pre><code class="language-sh">python -m tgwitness.mcp_server --api-url http://127.0.0.1:8787</code></pre>
-<p>ตั้งค่า <code>TGWITNESS_ARCHIVE_TOKEN</code> ในสภาพแวดล้อมที่ได้รับการป้องกันของลูกค้า อย่าใส่
-ในอาร์กิวเมนต์คำสั่งหรือ URL บริดจ์จะอ่านผ่าน API การเก็บถาวร
-ที่ได้รับอนุญาตจากแผงควบคุม; มันไม่มีการเข้าถึงฐานข้อมูลโดยตรง Stdout ส่งเฉพาะข้อความ MCP เท่านั้น</p>
-<p>สำหรับลูกค้าที่ทำงานจากระยะไกล ให้เรียกใช้บริการนี้ผ่านแผงควบคุม:</p>
-<pre><code class="language-sh">python -m tgwitness.mcp_server --transport streamable-http \
-  --api-url http://127.0.0.1:8787 --port 8766 \
-  --public-url https://archive.example.org/mcp</code></pre>
-<p>ส่งต่อ <code>/mcp</code> ผ่านพร็อกซีแบบย้อนกลับ HTTPS ไปยัง <code>127.0.0.1:8766/mcp</code> โดยรักษา
-ส่วนหัว <code>Authorization: Bearer …</code> ไว้ ปิดการบันทึกส่วนหัวการอนุญาต
-และเนื้อหาคำขอ/การตอบกลับ ให้ผูกการเชื่อมต่อนอกเหนือจาก loopback เฉพาะเมื่อจำเป็น โดยใช้
-<code>--host</code> และ <code>--public-url</code> จุดปลายทางนี้ใช้ Streamable HTTP จาก
-<a href="https://github.com/modelcontextprotocol/python-sdk">MCP Python SDK</a> อย่างเป็นทางการ
-มันสนับสนุนข้อมูลรับรองแบบ bearer ที่กำหนดไว้อย่างชัดเจน ไม่ใช่การค้นพบ OAuth;
-ลูกค้าที่ต้องการใช้ OAuth เท่านั้นไม่ได้รับการสนับสนุน</p>
-<p><strong>การตรวจสอบโปรโตคอลและการเข้าถึง</strong>จะเริ่มต้นไคลเอนต์ MCP ที่แท้จริงและแสดงรายการเครื่องมือ
-แต่ไม่ดึงข้อความมา สำหรับการตรวจสอบจากระยะไกล เซิร์ฟเวอร์ MCP ที่เลือกจะรับ
-โทเค็นอาร์ไคฟ์ ให้กำหนดค่าเฉพาะเซิร์ฟเวอร์ที่คุณดำเนินการเองหรือเชื่อถือได้เท่านั้นในขอบเขตนั้น</p>
-<h2 id="scope-and-results">ขอบเขตและผลลัพธ์<a class="anchor" href="#scope-and-results" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
-<p>เครื่องมือที่มีอยู่: <code>list_workspaces</code>, <code>list_chats</code>, <code>search_messages</code>,
-<code>get_message_versions</code>, <code>get_message_context</code>, <code>get_journal_event</code> และ
-<code>get_capture_status</code> ไม่มีเครื่องมือสำหรับดำเนินการใน Telegram การเปลี่ยนแปลงการตั้งค่า หรือ
-เครื่องมือส่งออกข้อมูลแบบกลุ่ม ทุกครั้งที่อ่านจะตรวจสอบสิทธิ์การเข้าถึงพื้นที่ทำงาน/แชทอีกครั้ง; ข้อมูลรับรองที่หมดอายุหรือถูกเพิกถอน
-จะหยุดทำงานทันที ข้อจำกัดคือ 60 คำขอ API ต่อนาทีต่อข้อมูลรับรอง,
-50 รายการต่อหน้า, ขนาดการตอบกลับ 64 KiB และเวลาจำกัด API 8 วินาที</p>
-<p>ผลลัพธ์ข้อความรวมถึงพื้นที่ทำงาน (workspace), ID ของการสนทนา/ข้อความ, ลำดับเหตุการณ์, ค่าแฮชที่บันทึกไว้,
-และลิงก์ไปยังแผงควบคุม (panel) ผู้ดูที่เปิดลิงก์ต้องมีเซสชันแผงควบคุม
-ที่ได้รับอนุญาตของตนเอง อ็อบเจกต์ Telegram แบบดิบ, ค่าแฮชการเข้าถึง, การอ้างอิงไฟล์, ข้อมูลเซสชัน,
-และกุญแจจะถูกตัดออก การค้นหาจะตรวจสอบข้อความ ไม่ใช่ฟิลด์แบบดิบ ข้อความถูก
-จำกัดขอบเขตและส่วนที่ถูกตัดสั้นจะถูกทำเครื่องหมาย การแก้ไข, การแจ้งเตือนการลบของ Telegram, และ
-<code>missing_on_recheck</code> ยังคงเป็นข้อมูลสังเกตการณ์ที่แยกต่างหาก การเข้าถึงในขอบเขตการสนทนาไม่สามารถเห็น
-เหตุการณ์การดำเนินงานทั่วทั้งพื้นที่ทำงานได้; สถานะการบันทึกจะระบุข้อจำกัดนี้อย่างชัดเจน</p>
-<p>ข้อความในคลังข้อมูลถือเป็นข้อมูลป้อนเข้าที่ไม่น่าเชื่อถือ คำสั่งภายในข้อความไม่มอบ
-ขอบเขตเพิ่มเติม และต้องไม่ถูกพิจารณาเป็นคำสั่งจากลูกค้า โมเดล AI ภายนอกอาจ
-รับเนื้อหาใดก็ตามที่ลูกค้า MCP ของมันร้องขอ สิทธิ์การเข้าถึงแบบอ่านอย่างเดียวป้องกัน
-การเปลี่ยนแปลงในคลังข้อมูล แต่ไม่ป้องกันไม่ให้ลูกค้าเก็บรักษาข้อมูลที่มันอ่านได้</p>
-<p>ค่าแฮชใช้เพื่อระบุบันทึกที่เก็บไว้และสนับสนุนการตรวจสอบความสมบูรณ์ แต่ค่าแฮชเหล่านี้
-ไม่สามารถพิสูจน์ได้ด้วยตัวเองว่าผู้ส่งข้อความใน Telegram เป็นผู้เขียนจริง หรือว่าข้อความทุกข้อความได้ถูกบันทึกไว้ทั้งหมด</p></div></article>
+<h2 id="install-and-check">การติดตั้งและการตรวจสอบ<a class="anchor" href="#install-and-check" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
+<p>ใช้สภาพแวดล้อม Python ที่รันพาเนล จากซอร์สโค้ดที่เช็กเอาต์ออกมา:</p>
+<pre><code class="language-powershell"># Windows PowerShell
+&amp; .\.venv\Scripts\python.exe -m pip install -c deploy/constraints-mcp.txt -e &#x27;.[mcp]&#x27;
+&amp; .\.venv\Scripts\python.exe start.py --check</code></pre>
+<pre><code class="language-sh"># Linux / macOS
+.venv/bin/python -m pip install -c deploy/constraints-mcp.txt -e &#x27;.[mcp]&#x27;
+.venv/bin/python start.py --check</code></pre>
+<p>รีสตาร์ตพาเนลโดยใช้ไดเรกทอรีข้อมูลและอาร์กิวเมนต์การรันตามปกติหลังจากการติดตั้ง
+การตรวจสอบความพร้อมควรแสดงผลรวมถึง <code>[PASS] mcp: streamable-http available</code>
+<strong>Integrations → MCP</strong> จะแสดงสถานะรันไทม์และคำสั่งติดตั้งโดยใช้
+ไฟล์ปฏิบัติการ Python จริงของเซิร์ฟเวอร์นั้น ปุ่ม <strong>Re-check</strong> จะรีเฟรชสถานะนี้โดยไม่ต้อง
+โหลดหน้าเว็บใหม่ โดยจะไม่ติดตั้งแพ็กเกจหรือรีสตาร์ตเซิร์ฟเวอร์</p>
+<p>ส่วนเสริม MCP ใช้ <a href="https://github.com/modelcontextprotocol/python-sdk">MCP Python SDK</a> อย่างเป็นทางการ
+ไฟล์ <code>deploy/constraints-mcp.txt</code> จะล็อกรุ่นของ SDK และดีเพนเดนซีที่ผ่านการทดสอบแล้ว ฟีเจอร์เหล่านี้
+ต้องใช้ซอร์สโค้ดปัจจุบัน เนื่องจากรุ่นพรีวิวแบบพกพา 0.7.0 ออกมาก่อนฟีเจอร์เหล่านี้</p>
+<h2 id="issue-a-connection">ออกการเชื่อมต่อ<a class="anchor" href="#issue-a-connection" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
+<ol>
+<li>ป้อนป้ายกำกับและเลือกเวิร์กสเปซและแชตที่อนุญาตให้ไคลเอนต์อ่านได้</li>
+<li>เลือกเครื่องมือทีละรายการหรือใช้ค่าที่ตั้งไว้ล่วงหน้า มีเฉพาะเครื่องมือที่พัฒนาเสร็จแล้วเท่านั้นให้เลือก</li>
+<li>เลือกวันหมดอายุ 1, 7, 30 หรือ 90 วัน หรือกำหนดวันหมดอายุเองระหว่าง 1 นาทีถึง 90 วัน</li>
+<li>กด <strong>Create connection</strong> โทเค็นจะแสดงเพียงครั้งเดียวข้างการกำหนดค่าของไคลเอนต์</li>
+<li>คัดลอกโทเค็นและการกำหนดค่า จากนั้นรัน <strong>Check connection</strong> ระบบจะเริ่มต้นการทำงานของ MCP
+    และแสดงรายการเครื่องมือที่ได้รับอนุญาต <strong>โดยไม่มีการอ่านข้อความใดๆ</strong> ผลลัพธ์จะแสดงรุ่นของโปรโตคอล
+    ชื่อเครื่องมือ จำนวน และเวลาที่ใช้</li>
+<li>กด <strong>Done</strong> เมื่อบันทึกข้อมูลรับรองแล้ว การโพลจะรักษาข้อมูลในแบบฟอร์มและ
+    การ์ดที่แสดงเพียงครั้งเดียวไว้ การล็อกพาเนลจะล้างข้อมูลลับที่แสดงอยู่</li>
+</ol>
+<p>รายการจะแสดงการใช้งานล่าสุด เครื่องมือล่าสุด ที่อยู่ และจำนวนคำขอในนาทีที่ผ่านมา
+<strong>Revoke</strong> จะยุติการเข้าถึง <strong>Rotate token</strong> จะเพิกถอนข้อมูลรับรองเดิมและออก
+โทเค็นใหม่ทดแทนโดยมีขอบเขต เครื่องมือ และวันหมดอายุเหมือนเดิม โปรดคัดลอกโทเค็นทดแทนที่แสดงเพียงครั้งเดียว
+โทเค็นการเข้าสู่ระบบพาเนลและข้อมูลรับรอง Telegram ไม่สามารถใช้เป็นโทเค็น MCP ได้</p>
+<h2 id="connect-your-client">เชื่อมต่อไคลเอนต์ของคุณ<a class="anchor" href="#connect-your-client" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
+<p>เลือกไคลเอนต์ในพาเนลและคัดลอกการกำหนดค่าที่สร้างขึ้น การกำหนดค่าจะใช้
+การอ้างอิงข้อมูลลับหรือตัวยึดตำแหน่งที่ระบุไว้ชัดเจน โดยจะต้องคัดลอกโทเค็นแยกต่างหาก</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>ไคลเอนต์</th>
+<th>การกำหนดค่า</th>
+<th>การเชื่อมต่อ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude Code</td>
+<td><code>.mcp.json</code></td>
+<td>HTTP, <code>type: "http"</code>, เฮดเดอร์ Bearer</td>
+</tr>
+<tr>
+<td>Claude Desktop</td>
+<td><code>claude_desktop_config.json</code></td>
+<td>บริดจ์ stdio ภายในเครื่อง</td>
+</tr>
+<tr>
+<td>Cursor</td>
+<td><code>.cursor/mcp.json</code></td>
+<td>HTTP พร้อมเฮดเดอร์ตัวแปรสภาพแวดล้อม</td>
+</tr>
+<tr>
+<td>VS Code Local</td>
+<td><code>.vscode/mcp.json</code></td>
+<td>HTTP พร้อมอินพุตรหัสผ่าน <code>promptString</code></td>
+</tr>
+<tr>
+<td>Windsurf</td>
+<td><code>mcp_config.json</code></td>
+<td>HTTP พร้อมตัวยึดตำแหน่งเฮดเดอร์ Bearer</td>
+</tr>
+<tr>
+<td>ไคลเอนต์อื่นๆ</td>
+<td>URL และเฮดเดอร์ Authorization</td>
+<td>Streamable HTTP</td>
+</tr>
+</tbody>
+</table></div>
+<p>TgWitness ใช้โทเค็น Bearer โดยไม่มีการค้นหา OAuth โปรดใช้บริดจ์ stdio ภายในเครื่อง
+สำหรับไคลเอนต์ที่ตัวเชื่อมต่อระยะไกลต้องใช้ OAuth สำหรับ VS Code ตัวแปรอินพุต
+จะมีผลกับฮาร์เนส <strong>Local</strong> เท่านั้น และจะไม่ถูกส่งต่อไปยังเซสชัน Copilot
+ข้อมูลอ้างอิงการกำหนดค่า: <a href="https://code.claude.com/docs/en/mcp">Claude Code</a>,
+<a href="https://prod.cursor.com/docs/mcp">Cursor</a>,
+<a href="https://code.visualstudio.com/docs/agents/reference/mcp-configuration">VS Code</a></p>
+<p>จุดเข้าใช้งานมาตรฐานสำหรับบริดจ์ภายในเครื่องคือ:</p>
+<pre><code class="language-sh">python -m tgwitness.mcp_server --url https://your-panel.example/mcp</code></pre>
+<p>ใช้ Python ภายในเครื่องของไคลเอนต์ที่ติดตั้งส่วนเสริม MCP แล้ว ตั้งค่า
+<code>TGWITNESS_MCP_TOKEN</code> ในสภาพแวดล้อมที่มีการป้องกัน เก็บข้อมูลรับรองไว้ภายนอกอาร์กิวเมนต์คำสั่ง
+และ URL <code>tgwitness-mcp</code> คือจุดเข้าใช้งานเดียวกัน โมดูล
+<code>tgwitness.mcp_bridge</code> และชื่อ <code>TGWITNESS_ARCHIVE_TOKEN</code> แบบเก่ายังคงเป็นพาธที่รองรับความเข้ากันได้
+แต่จะมีคำเตือน การกำหนดค่าใหม่จะใช้ <code>mcp_server</code> และ <code>TGWITNESS_MCP_TOKEN</code></p>
+<h2 id="cloudflare-tunnel">Cloudflare Tunnel<a class="anchor" href="#cloudflare-tunnel" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
+<p>ส่งต่อเส้นทาง <code>/mcp</code> ของพาเนลและรักษาเฮดเดอร์ Bearer ไว้ การเปิดการตั้งค่า MCP
+ในฐานะผู้ดูแลระบบจะลงทะเบียนต้นทางปัจจุบันของพาเนลสำหรับการรันครั้งนี้
+หากต้องการที่อยู่ที่เสถียรและพร้อมใช้งานทันทีหลังการรีสตาร์ต ให้กำหนดค่า
+<code>TGWITNESS_PUBLIC_URL</code> ด้วยต้นทาง HTTPS ของพาเนลก่อนเริ่มทำงานพาเนล
+เฮดเดอร์ Host และเฮดเดอร์ที่ส่งต่อแบบทั่วไปจะไม่ลงทะเบียนที่อยู่ที่เชื่อถือได้
+การตรวจสอบ Host และ Origin จะปฏิเสธต้นทางของเบราว์เซอร์ที่ไม่เกี่ยวข้อง การตอบกลับจะใช้
+<code>Cache-Control: no-store</code> และจะไม่มีการบันทึกค่าการให้สิทธิ์ลงในล็อกเด็ดขาด</p>
+<p>ที่อยู่ <code>*.trycloudflare.com</code> เป็นแบบชั่วคราว เมื่อการรีสตาร์ตทันเนลทำให้
+ชื่อโฮสต์เปลี่ยนไป ให้ปรับปรุง URL สาธารณะที่กำหนดค่าไว้และ URL ของ MCP ในแต่ละไคลเอนต์ โปรดใช้
+ชื่อโฮสต์ที่เสถียรสำหรับการกำหนดค่าไคลเอนต์ที่บันทึกไว้</p>
+<h2 id="tools-and-boundaries">เครื่องมือและขอบเขตการทำงาน<a class="anchor" href="#tools-and-boundaries" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>เครื่องมือ</th>
+<th>สิ่งที่อ่าน</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list_workspaces</code></td>
+<td>เวิร์กสเปซที่ได้รับอนุญาต</td>
+</tr>
+<tr>
+<td><code>list_chats</code></td>
+<td>แชตที่ได้รับอนุญาต</td>
+</tr>
+<tr>
+<td><code>search_messages</code></td>
+<td>ข้อความที่บันทึกไว้ภายในช่วงเวลาที่เลือก</td>
+</tr>
+<tr>
+<td><code>get_message_versions</code></td>
+<td>รุ่นที่บันทึกไว้และการตรวจพบการลบ</td>
+</tr>
+<tr>
+<td><code>get_message_context</code></td>
+<td>ID ข้อความที่บันทึกไว้ในบริเวณใกล้เคียง</td>
+</tr>
+<tr>
+<td><code>get_journal_event</code></td>
+<td>ระเบียนที่คัดกรองข้อมูลแล้วหนึ่งรายการพร้อมข้อมูลอ้างอิงต้นทาง</td>
+</tr>
+<tr>
+<td><code>get_capture_status</code></td>
+<td>สถานะการรวบรวมข้อมูลและระเบียนความครอบคลุมที่ได้รับอนุญาต</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>tools/list</code> จะส่งคืนเฉพาะเครื่องมือที่ได้รับอนุญาตสำหรับการเชื่อมต่อนั้น การเรียกใช้เครื่องมืออื่น
+จะถูกปฏิเสธ เครื่องมือสำหรับบริบทกลุ่ม เหตุการณ์ย่อย คำศัพท์เฉพาะ และสายการตอบกลับยังไม่มีให้ใช้งาน
+ในบิลด์นี้ เนื่องจากยังไม่ได้รวมแบ็กเอนด์ context-pack แยกต่างหากเข้ามา</p>
+<p>การอ่านทุกครั้งจะตรวจสอบโทเค็น เครื่องมือ และขอบเขตของเวิร์กสเปซ/แชต รวมถึงหลังจากที่
+การทำงานกับฐานข้อมูลเสร็จสิ้น ขีดจำกัดคือ 60 คำขอต่อนาที 50 ระเบียนต่อหน้า
+64 KiB ต่อผลลัพธ์ และกำหนดเวลาค้นคืนคลังข้อมูลที่แปดวินาที การเรียกใช้ MCP ที่หมดเวลา
+จะส่งคืนข้อผิดพลาดของเครื่องมือเพื่อขอให้ระบุช่วงเวลาที่แคบลงหรือลดขีดจำกัดลง</p>
+<p>ผลลัพธ์ข้อความจะมี <code>untrusted_content: true</code>, ID ของเวิร์กสเปซ/แชต/ข้อความ,
+ลำดับเหตุการณ์, แฮชที่บันทึกไว้ และลิงก์ไปยังพาเนล ออบเจกต์ดิบของ Telegram, แฮชการเข้าถึง,
+เซสชัน และคีย์จะถูกตัดออก การตัดทอนข้อความจะถูกทำเครื่องหมายไว้ การแก้ไข การแจ้งเตือนการลบ
+และ <code>missing_on_recheck</code> ถือเป็นข้อมูลการสังเกตที่แยกจากกัน การไม่มีระเบียนไม่ได้พิสูจน์ว่า
+เหตุการณ์นั้นไม่เคยเกิดขึ้น</p>
+<p>ให้ปฏิบัติต่อคำสั่งที่อยู่ภายในข้อความที่บันทึกไว้ในฐานะหลักฐานเท่านั้น ห้ามปฏิบัติตามในฐานะคำสั่งของไคลเอนต์เด็ดขาด
+การเข้าถึงแบบอ่านอย่างเดียวจะป้องกันการเปลี่ยนแปลงคลังข้อมูล แต่ไคลเอนต์ยังคงสามารถ
+เก็บรักษาเนื้อหาที่ได้รับอนุญาตให้อ่านไว้ได้ ค่าแฮชใช้ระบุระเบียนที่บันทึกไว้และ
+รองรับการตรวจสอบความถูกต้องของข้อมูล แต่ไม่ได้พิสูจน์ความเป็นผู้เขียนบน Telegram หรือความสมบูรณ์ของการบันทึกข้อมูลทั้งหมด</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/MCP.md">แก้ไขหน้านี้บน GitHub ↗</a><a class="next-guide" href="../media-analysis/"><span>ขั้นตอนต่อไป</span><strong>OCR และแปลงข้อความเป็นข้อความแบบท้องถิ่น →</strong></a><p>คู่มือเหล่านี้อธิบายการนำไปใช้ในปัจจุบัน ผลการตรวจสอบความถูกต้องและช่องว่างที่ยังเหลืออยู่ได้รับการบันทึกไว้อย่างแยกต่างหาก <a href="../verification/">สิ่งที่ได้รับการทดสอบแล้ว →</a></p></footer>
 </main>
-<aside class="toc" aria-label="บนหน้านี้"><p class="nav-label">บนหน้านี้</p><a href="#connect-a-client">เชื่อมต่อไคลเอนต์</a><a href="#scope-and-results">ขอบเขตและผลลัพธ์</a></aside>
+<aside class="toc" aria-label="บนหน้านี้"><p class="nav-label">บนหน้านี้</p><a href="#install-and-check">การติดตั้งและการตรวจสอบ</a><a href="#issue-a-connection">ออกการเชื่อมต่อ</a><a href="#connect-your-client">เชื่อมต่อไคลเอนต์ของคุณ</a><a href="#cloudflare-tunnel">Cloudflare Tunnel</a><a href="#tools-and-boundaries">เครื่องมือและขอบเขตการทำงาน</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>โอเพนซอร์ส · ทำงานบนเครื่องของคุณ</span><a href="../../../../LICENSE">ใบอนุญาต MIT</a><a href="../notice/">ประกาศจากผู้ดำเนินการ</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">ความปลอดภัย</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "กำลังรอข้อความ", "Step through a fictional send, edit and delete.": "ลองทำตามขั้นตอนการส่ง แก้ไข และลบข้อความในสถานการณ์สมมติ", "No observations yet. Start the sequence or advance one event.": "ยังไม่มีความคิดเห็นใด ๆ เริ่มลำดับเหตุการณ์หรือเลื่อนไปหนึ่งเหตุการณ์", "Meet at 10:00": "พบกันเวลา 10:00", "A new message is visible in the chat.": "มีข้อความใหม่ปรากฏในแชท", "Record 1 appended: the collector observed the original message.": "บันทึก 1 แนบมาด้วย: ผู้เก็บข้อมูลได้สังเกตเห็นข้อความต้นฉบับ", "Meet at 11:00": "พบกันเวลา 11:00", "The current text changes. The earlier observation stays.": "ข้อความปัจจุบันมีการเปลี่ยนแปลง แต่ข้อสังเกตก่อนหน้านี้ยังคงอยู่", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "บันทึก 2 ได้ถูกเพิ่มเข้ามา: การแก้ไขนี้ถือเป็นการสังเกตการณ์ใหม่ บันทึก 1 ยังคงเก็บข้อความต้นฉบับไว้", "Message deleted": "ข้อความถูกลบ", "The message has disappeared from the chat view.": "ข้อความดังกล่าวได้หายไปแล้วจากหน้าจอสนทนา", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "บันทึก 3 ที่แนบมา: ประกาศการลบถูกรักษาไว้พร้อมกับทั้งสองเวอร์ชันที่สังเกตได้", "0 records": "0 รายการ", "1 record": "1 รายการ", "2 records": "2 รายการ", "3 records": "3 รายการ", "Complete / {n} of 3": "เสร็จสมบูรณ์ / {n} จาก 3", "Step / {n} of 3": "ขั้นตอน / {n} จาก 3", "Pause": "หยุดชั่วคราว", "Replay sequence": "ลำดับการเล่นซ้ำ", "Play sequence": "ลำดับการเล่น", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "มีตัวอย่างแบบคงที่ให้ใช้งานได้ หากต้องการคำนวณค่าแฮชแบบโต้ตอบ ให้เปิดหน้านี้ผ่าน HTTPS หรือดูตัวอย่างบน localhost ที่รองรับ Web Crypto", "No record supplied": "ไม่มีบันทึกที่ให้มา", "Tail removed": "ส่วนท้ายถูกลบ", "≠ saved hash": "≠ ค่าแฮชที่บันทึกไว้", "Rebuilt · different hash": "สร้างใหม่ · ค่าแฮชที่ต่างกัน", "= saved hash": "= hash ที่บันทึกไว้", "Same length and matching head.": "ความยาวเท่ากันและส่วนหัวที่สอดคล้องกัน", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "แฮชที่คำนวณได้ทั้งสามค่าตรงกับแฮชที่เก็บไว้ ตัวอย่างนี้สอดคล้องกับขอบเขตสามบันทึกที่เก็บไว้", "Same saved head; the journal prefix fails verification.": "ส่วนหัวที่บันทึกไว้เหมือนเดิม; ส่วนนำหน้าของบันทึกไม่ผ่านการตรวจสอบ", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "บันทึกที่ 2 ไม่ตรงกับค่าแฮชที่เก็บไว้แล้ว การตรวจสอบเพียงส่วนหัวสุดท้ายที่เก็บไว้จะไม่สามารถตรวจพบข้อผิดพลาดนี้ได้; ผู้ตรวจสอบจะตรวจสอบทุกบันทึก", "Head differs from the retained checkpoint.": "ส่วนหัวแตกต่างจากจุดตรวจสอบที่เก็บไว้", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "ค่าแฮชที่สร้างใหม่เชื่อมโยงกัน แต่ส่วนหัวสุดท้ายได้เปลี่ยนแปลงไปแล้ว จุดตรวจสอบที่เก็บไว้จะปฏิเสธประวัติการเปลี่ยนแปลงนี้ ลายเซ็นต้นฉบับก็จะล้มเหลวเมื่อใช้กับบันทึกที่เปลี่ยนแปลงแล้ว", "Too short: 2 supplied records \u003c 3 retained records.": "สั้นเกินไป: 2 รายการที่ส่งมา \u003c 3 รายการที่เก็บไว้", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "แฮชสองตัวที่เหลือยังคงตรงกัน จุดตรวจสอบที่เก็บไว้เผยให้เห็นส่วนท้ายที่หายไป หากไม่มีขอบเขตก่อนหน้านี้ ส่วนนำหน้าสั้นกว่านี้เพียงอย่างเดียวจะไม่สามารถเปิดเผยการขาดหายได้", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "การคำนวณแฮชไม่สามารถใช้งานได้ในเบราว์เซอร์นี้ แต่สูตรและคำอธิบายแบบคงที่ด้านล่างยังคงใช้งานได้", "{n} records": "{n} บันทึก", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "ได้รับการยอมรับ: จำนวนเพิ่มขึ้น ลายเซ็นได้รับการยืนยัน และกุญแจตรงกัน ผู้เป็นพยานจะเก็บรักษาขอบเขตใหม่นี้ไว้", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: คำตอบที่ลงนามแสดงจำนวนบันทึกน้อยกว่าจุดตรวจสอบที่ได้รับการยอมรับล่าสุด Witness จะบันทึกปัญหาและรักษาขอบเขตที่ได้รับการยอมรับก่อนหน้านี้", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: จำนวนไม่เปลี่ยนแปลง แต่หัว (head) แตกต่างกัน ผู้เป็นพยานบันทึกความไม่เห็นพ้องและรักษาขอบเขตที่ได้รับการยอมรับก่อนหน้านี้", "No answer": "ไม่มีคำตอบ", "boundary unknown": "ขอบเขตไม่ทราบ", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "ไม่มีการตอบสนอง: TgWitness จะบันทึกการตรวจสอบที่ล้มเหลว และไม่สามารถยืนยันสถานะปัจจุบันของผู้เก็บข้อมูลได้ หาก TgWitness ยังสามารถติดต่อกับ Bot API ได้ และนโยบายการเผยแพร่ของมันอนุญาต ก็สามารถเผยแพร่การล้มเหลวนั้นได้", "Send {n}": "ส่ง {n}", "Edit {n}": "แก้ไข{n}", "Delete {n}": "ลบ{n}", "Both accounts captured all six expected observations in this example.": "ทั้งสองบัญชีได้บันทึกการสังเกตทั้งหกข้อที่คาดการณ์ไว้ในตัวอย่างนี้", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "บัญชี B ยังคงบันทึกได้ 6 จาก 6 ข้อความ สองใบเสร็จใช้เวลานานกว่า อัตราการบันทึกและความล่าช้าของใบเสร็จให้คำตอบที่ต่างกัน", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "บัญชี B ได้บันทึก 5 จาก 6 การดำเนินการก่อนถึงจุดตัด (83.3%) การแก้ไขที่ขาดหายไปไม่มีการวัดความล่าช้า ผลลัพธ์นี้อธิบายเฉพาะการดำเนินการ 6 ครั้งที่ได้รับการควบคุมเท่านั้น", "not observed by cutoff": "ไม่ถูกตัดออก", "{s} seconds": "{s} วินาที", "Exact values follow in the table.": "ค่าที่แม่นยำจะปรากฏในตารางต่อไป", "{s} s": "{s} s", "Not observed": "ไม่พบ", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "สี่การสนทนาให้ข้อมูลสังเกตการณ์ที่แตกต่างกัน ให้ติดตามบันทึกต้นทางสำหรับทุกการเชื่อมต่อ; อย่ากำหนดโพสต์ในช่องให้กับผู้ใช้ 71001 โดยไม่มีผู้ส่งที่ระบุ", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "บันทึก #146 และ #205 มี ID ผู้ส่งเดียวกัน คือ 71001 ซึ่งเชื่อมโยงโพสต์ที่สังเกตได้จากบัญชี Telegram ในสองห้องสนทนา แต่ไม่ระบุตัวบุคคลจริงหรือระบุเจ้าของโพสต์ในช่องนั้น", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "ที่อยู่ปลายทาง pay.example.invalid/new ปรากฏในบันทึกกลุ่ม #146, คีย์บอร์ดบอท #173, การแก้ไขช่อง #188 และข้อความส่วนตัว #205 ที่อยู่ปลายทางที่ปรากฏซ้ำๆ นี้ช่วยเชื่อมโยงข้อมูลเข้าด้วยกัน แต่ไม่ได้เป็นหลักฐานว่าบัญชีเหล่านั้นอยู่ภายใต้การควบคุมร่วมกัน", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "ใบเสร็จสื่อที่เสร็จสมบูรณ์ #151 และ #209 มีค่า SHA-256 เต็มที่เท่ากันในคดีสมมตินี้ โปรดเปรียบเทียบไบต์จริงและบันทึกข้อความที่เกี่ยวข้อง ไฟล์ที่ตรงกันนี้ไม่ระบุผู้สร้างหรือพิสูจน์ว่าใครเป็นผู้ส่งต่อ", "the encrypted off-site copy": "สำเนาที่เข้ารหัสและเก็บไว้นอกเว็บไซต์", "notifications": "การแจ้งเตือน", "checkpoint hashes for timestamps": "ค่าแฮชจุดตรวจสอบสำหรับเวลา", "signed checkpoints for the witness": "จุดตรวจสอบที่ลงนามสำหรับ TgWitness", "Switched on in this example": "เปิดใช้งานในตัวอย่างนี้", "Optional · off by default": "เลือกได้ · ปิดตามค่าเริ่มต้น", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "ข้อมูลที่ส่งออกจากเครื่องนี้: การเชื่อมต่อ Telegram และ{list} ไม่มีข้อมูลอื่นใดอีก", "Default: only the Telegram connection leaves this machine.": "ค่าเริ่มต้น: มีเพียงการเชื่อมต่อ Telegram เท่านั้นที่ออกจากเครื่องนี้", "{done} of {total} done": "{done} จาก {total} เสร็จแล้ว", "Mark step {n} as done": "ทำเครื่องหมายขั้นตอน{n} ว่าเสร็จแล้ว", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "คัดลอก", "Copied": "คัดลอก", "Command copied.": "คำสั่งถูกคัดลอกแล้ว", "Selected — Ctrl/Cmd+C": "คัดลอก — Ctrl/Cmd+C", "Command selected. Copy it manually.": "คำสั่งถูกเลือกแล้ว คัดลอกด้วยมือ", "Command copied to clipboard.": "คำสั่งได้ถูกคัดลอกไปยังคลิปบอร์ดแล้ว", "Select text": "เลือกข้อความ", "Clipboard unavailable. Command selected; copy it manually.": "คลิปบอร์ดไม่สามารถใช้งานได้ คำสั่งถูกเลือกแล้ว; คัดลอกด้วยมือ", "A message arrives. The first observation is saved.": "มีข้อความเข้ามา ข้อสังเกตแรกถูกบันทึกไว้", "The time changes. Both captured versions stay.": "เวลาเปลี่ยนแปลง แต่ทั้งสองเวอร์ชันที่บันทึกไว้ยังคงอยู่", "The message disappears. The captured history remains.": "ข้อความจะหายไป แต่ประวัติที่ถูกบันทึกไว้จะยังคงอยู่", "Pause example animation": "หยุดตัวอย่างแอนิเมชัน", "Play example animation": "ดูตัวอย่างแอนิเมชัน", "Play": "เล่น", "Full-size workspace screenshot": "ภาพหน้าจอพื้นที่ทำงานขนาดเต็ม", "Workspace screenshot · fictional data": "ภาพหน้าจอพื้นที่ทำงาน · ข้อมูลสมมติ", "Close": "ปิด", "Close screenshot": "ปิดภาพหน้าจอ", "Scrollable full-size screenshot": "ภาพหน้าจอขนาดเต็มที่สามารถเลื่อนดูได้", "Enlarge: {name}": "ขยาย: {name}", "View full size": "ดูขนาดเต็ม"}</script>

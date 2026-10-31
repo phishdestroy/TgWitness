@@ -8,7 +8,7 @@ Recherchez des messages enregistrés, examinez les contributions de l'IA et cons
 
 [Guide des procédures](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-Ouvrez **« Ask the archive »** dans le panneau. Le sélecteur d’espace de travail permet de choisir le compte ; le formulaire permet de sélectionner les discussions et la période d’observation. La recherche s’effectue localement, sans IA. Une expression exacte ou un domaine permet d’affiner les résultats ; un identifiant de message permet de récupérer les versions enregistrées. Passez en revue les extraits renvoyés et ouvrez leurs entrées de journal ou leur contexte. Il n’y a ni base de données vectorielle ni action automatique sur Telegram.
+Utilisez **Journal** pour effectuer une recherche locale sans IA. Pour utiliser **Consultez les archives**, activez et configurez d’abord un fournisseur dans **Intégrations**. Le sélecteur d’espace de travail permet de choisir le compte ; le formulaire permet de sélectionner les discussions et la période d’observation. La récupération s’effectue localement. Une expression exacte ou un domaine permet d’affiner la récupération ; un identifiant de message permet de demander les versions enregistrées. Passez en revue les extraits et ouvrez leurs entrées de journal ou leur contexte. Il n’y a ni base de données vectorielle ni action automatique sur Telegram.
 
 ## Fournisseurs et consentement
 

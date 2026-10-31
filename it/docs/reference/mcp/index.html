@@ -31,64 +31,169 @@
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="Guide"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Documentazione</a> <span aria-hidden="true">/</span> <a href="../">Riferimento</a> <span aria-hidden="true">/</span> <span aria-current="page">MCP di sola lettura</span></nav>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Cerca nella documentazione</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Si provi con «proxy», «catena di hash», «token» o «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Ricerca chiara" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Digiti una parola per effettuare una ricerca nelle guide e nella documentazione di riferimento. La ricerca rimane nel Suo browser.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Riferimento / Archivio e integrazioni</p><h1>MCP di sola lettura</h1><p class="guide-outcome">Collega un client MCP agli spazi di lavoro e alle chat selezionati con un accesso a scadenza e revocabile.</p><div class="wiki-body"><p><strong>Versione principale attuale:</strong> utilizzare un checkout dal codice sorgente; l’anteprima portatile 0.7.0 è precedente a questa funzionalità.</p>
+<article class="guide-content"><p class="eyebrow">Riferimento / Archivio e integrazioni</p><h1>MCP di sola lettura</h1><p class="guide-outcome">Collega un client MCP agli spazi di lavoro e alle chat selezionati con un accesso a scadenza e revocabile.</p><div class="wiki-body"><p>Connetti un client per analisti agli spazi di lavoro e alle chat selezionate. TgWitness eroga
+<strong>Streamable HTTP su <code>/mcp</code> nel processo del pannello</strong>. Ogni connessione ha il proprio
+token, la propria scadenza e gli strumenti consentiti. MCP non può inviare messaggi Telegram, modificare
+le impostazioni o alterare il registro firmato.</p>
 <p><a href="https://phishdestroy.github.io/TgWitness/docs/archive/">Guida al flusso di lavoro</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
-<p>Installare il server opzionale dalla directory del progetto TgWitness:</p>
-<pre><code class="language-sh">python -m pip install &#x27;.[mcp]&#x27;</code></pre>
-<p>Nel pannello, aprire <strong>Integrazioni → MCP</strong>. Assegnare un nome alla connessione, selezionare i relativi
-spazi di lavoro e chat e scegliere una scadenza. Copiare il token di archiviazione una sola volta; non potrà
-essere recuperato in seguito. Revocare i token smarriti ed emetterne di sostitutivi. I token del pannello e le
-credenziali di Telegram non sono credenziali MCP.</p>
-<h2 id="connect-a-client">Collegare un client<a class="anchor" href="#connect-a-client" aria-label="Collegamento a questa sezione">#</a></h2>
-<p>Il pannello genera <code>.vscode/mcp.json</code> per l’<strong>harness locale di VS Code</strong> utilizzando
-<a href="https://code.visualstudio.com/docs/agents/reference/mcp-configuration">la sua configurazione documentata</a>.
-Salvare il file scaricato in quella posizione, eseguire <strong>MCP: List Servers</strong> e avviare
-TgWitness. VS Code richiede il token tramite l’inserimento di una password. Il file
-JSON scaricato contiene un riferimento alla richiesta, non il token. Utilizzare l’eseguibile Python dall’
-ambiente in cui è installato l’extra MCP.</p>
-<p>Per altri clienti di stdio, eseguire:</p>
-<pre><code class="language-sh">python -m tgwitness.mcp_server --api-url http://127.0.0.1:8787</code></pre>
-<p>Impostare <code>TGWITNESS_ARCHIVE_TOKEN</code> nell’ambiente protetto del cliente. Non inserirlo
-negli argomenti dei comandi o negli URL. Il bridge legge tramite l’API di archiviazione autorizzata
-del pannello; non ha accesso diretto al database. Lo stdout trasporta solo messaggi MCP.</p>
-<p>Per i client remoti, eseguire il servizio accanto al pannello:</p>
-<pre><code class="language-sh">python -m tgwitness.mcp_server --transport streamable-http \
-  --api-url http://127.0.0.1:8787 --port 8766 \
-  --public-url https://archive.example.org/mcp</code></pre>
-<p>Inoltra <code>/mcp</code> tramite un proxy inverso HTTPS a <code>127.0.0.1:8766/mcp</code>, conservando
-l’intestazione <code>Authorization: Bearer …</code>. Disattiva la registrazione delle intestazioni di autorizzazione
-e dei corpi delle richieste/risposte. Effettua il binding oltre il loopback solo quando necessario, utilizzando
-<code>--host</code> e <code>--public-url</code>. L’endpoint utilizza Streamable HTTP dall’SDK
-<a href="https://github.com/modelcontextprotocol/python-sdk">Python ufficiale
-di MCP</a>.
-Supporta credenziali bearer configurate esplicitamente, non il discovery OAuth;
-i client che richiedono esclusivamente OAuth non sono supportati.</p>
-<p><strong>Il controllo del protocollo e l’accesso</strong> avviano un vero client MCP ed elencano gli strumenti. Non
-recupera i messaggi. Per un controllo remoto, il server MCP scelto riceve il
-token di archivio. Configurare solo un server gestito dall’utente stesso o di cui ci si fida per tale scopo.</p>
-<h2 id="scope-and-results">Ambito e risultati<a class="anchor" href="#scope-and-results" aria-label="Collegamento a questa sezione">#</a></h2>
-<p>Strumenti disponibili: <code>list_workspaces</code>, <code>list_chats</code>, <code>search_messages</code>,
-<code>get_message_versions</code>, <code>get_message_context</code>, <code>get_journal_event</code> e
-<code>get_capture_status</code>. Non sono disponibili azioni su Telegram, modifiche alla configurazione né
-strumenti di esportazione in blocco. Ad ogni lettura viene ricontrollato l’accesso all’area di lavoro/alla chat; le credenziali scadute e revocate
-smettono di funzionare. I limiti sono 60 richieste API al minuto per credenziale,
-50 record per pagina, una risposta di 64 KiB e un tempo massimo di risposta API di otto secondi.</p>
-<p>I risultati dei messaggi includono l’area di lavoro, gli ID delle chat/dei messaggi, la sequenza degli eventi, l’hash salvato
-e un link al pannello. L’utente che apre un link deve disporre di una propria sessione autorizzata
-nel pannello. Gli oggetti Telegram grezzi, gli hash di accesso, i riferimenti ai file, il materiale della sessione
-e le chiavi sono omessi. La ricerca esamina il testo dei messaggi, non i campi grezzi. Il testo è
-delimitato e il troncamento è contrassegnato. Modifiche, notifiche di cancellazione di Telegram e
-<code>missing_on_recheck</code> rimangono osservazioni separate. L’accesso limitato alla chat non può visualizzare
-gli eventi operativi a livello dell’area di lavoro; lo stato di acquisizione indica esplicitamente questo limite.</p>
-<p>Il testo dell’archivio è un input non attendibile. Le istruzioni contenute nei messaggi non conferiscono alcuna
-competenza aggiuntiva e non devono essere trattate come istruzioni del cliente. Un modello di IA esterno può
-ricevere qualsiasi contenuto richiesto dal proprio client MCP. L’accesso in sola lettura impedisce
-modifiche all’archivio; non impedisce tuttavia a un client di conservare i dati che legge.</p>
-<p>Gli hash identificano i record salvati e supportano i controlli di integrità. Non
-dimostrano in modo autonomo la paternità del messaggio su Telegram né che ogni messaggio sia stato acquisito.</p></div></article>
+<h2 id="install-and-check">Installa e verifica<a class="anchor" href="#install-and-check" aria-label="Collegamento a questa sezione">#</a></h2>
+<p>Usa l'ambiente Python che esegue il pannello. Da un checkout dei sorgenti:</p>
+<pre><code class="language-powershell"># Windows PowerShell
+&amp; .\.venv\Scripts\python.exe -m pip install -c deploy/constraints-mcp.txt -e &#x27;.[mcp]&#x27;
+&amp; .\.venv\Scripts\python.exe start.py --check</code></pre>
+<pre><code class="language-sh"># Linux / macOS
+.venv/bin/python -m pip install -c deploy/constraints-mcp.txt -e &#x27;.[mcp]&#x27;
+.venv/bin/python start.py --check</code></pre>
+<p>Dopo l'installazione, riavvia il pannello con la consueta directory dei dati e gli argomenti di avvio.
+La verifica di prontezza dovrebbe includere <code>[PASS] mcp: streamable-http available</code>.
+<strong>Integrations → MCP</strong> mostra lo stato di runtime e un comando di installazione che utilizza
+l'effettivo eseguibile Python di quel server. <strong>Re-check</strong> aggiorna questo stato senza
+ricaricare la pagina; non installa pacchetti né riavvia il server.</p>
+<p>L'extra MCP utilizza l'<a href="https://github.com/modelcontextprotocol/python-sdk">MCP Python SDK</a> ufficiale.
+<code>deploy/constraints-mcp.txt</code> fissa le versioni testate dell'SDK e delle dipendenze. Queste funzionalità
+richiedono il codice sorgente attuale; l'anteprima portatile 0.7.0 è antecedente a esse.</p>
+<h2 id="issue-a-connection">Emetti una connessione<a class="anchor" href="#issue-a-connection" aria-label="Collegamento a questa sezione">#</a></h2>
+<ol>
+<li>Inserisci un'etichetta e scegli gli spazi di lavoro e le chat che il client può leggere.</li>
+<li>Seleziona gli strumenti singolarmente o usa un preset. Vengono offerti solo gli strumenti implementati.</li>
+<li>Scegli 1, 7, 30 o 90 giorni, oppure una scadenza personalizzata compresa tra un minuto e 90 giorni.</li>
+<li>Premi <strong>Create connection</strong>. Il token viene mostrato una sola volta accanto alla configurazione del client.</li>
+<li>Copia il token e la configurazione, quindi esegui <strong>Check connection</strong>. Questo inizializza MCP
+    ed elenca gli strumenti consentiti; <strong>non viene letto alcun messaggio</strong>. Il risultato mostra la versione
+    del protocollo, i nomi degli strumenti, il conteggio e il tempo trascorso.</li>
+<li>Premi <strong>Done</strong> una volta salvata la credenziale. Il polling preserva il modulo e
+    la scheda mostrata una sola volta. Il blocco del pannello cancella i segreti visualizzati.</li>
+</ol>
+<p>L'elenco mostra l'utilizzo recente, l'ultimo strumento, l'indirizzo e le richieste nell'ultimo minuto.
+<strong>Revoke</strong> interrompe l'accesso. <strong>Rotate token</strong> revoca la vecchia credenziale e ne emette
+una sostitutiva con lo stesso ambito, gli stessi strumenti e la stessa scadenza; copia il token sostitutivo quando viene mostrato.
+I token di accesso al pannello e le credenziali di Telegram non funzionano come token MCP.</p>
+<h2 id="connect-your-client">Connetti il tuo client<a class="anchor" href="#connect-your-client" aria-label="Collegamento a questa sezione">#</a></h2>
+<p>Seleziona il client nel pannello e copia la configurazione generata. Le configurazioni utilizzano
+riferimenti a segreti o segnaposto espliciti; il token viene copiato separatamente.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Client</th>
+<th>Configurazione</th>
+<th>Collegamento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude Code</td>
+<td><code>.mcp.json</code></td>
+<td>HTTP, <code>type: "http"</code>, header bearer</td>
+</tr>
+<tr>
+<td>Claude Desktop</td>
+<td><code>claude_desktop_config.json</code></td>
+<td>Bridge stdio locale</td>
+</tr>
+<tr>
+<td>Cursor</td>
+<td><code>.cursor/mcp.json</code></td>
+<td>HTTP con header tramite variabile d'ambiente</td>
+</tr>
+<tr>
+<td>VS Code Local</td>
+<td><code>.vscode/mcp.json</code></td>
+<td>HTTP con un input password <code>promptString</code></td>
+</tr>
+<tr>
+<td>Windsurf</td>
+<td><code>mcp_config.json</code></td>
+<td>HTTP con segnaposto per l'header bearer</td>
+</tr>
+<tr>
+<td>Altri client</td>
+<td>URL e header Authorization</td>
+<td>Streamable HTTP</td>
+</tr>
+</tbody>
+</table></div>
+<p>TgWitness utilizza token bearer, senza rilevamento OAuth. Usa il bridge stdio locale
+per i client il cui connettore remoto richiede OAuth. Per VS Code, le variabili di input
+si applicano all'ambiente <strong>Local</strong> e non vengono inoltrate alle sessioni di Copilot.
+Riferimenti per la configurazione: <a href="https://code.claude.com/docs/en/mcp">Claude Code</a>,
+<a href="https://prod.cursor.com/docs/mcp">Cursor</a>,
+<a href="https://code.visualstudio.com/docs/agents/reference/mcp-configuration">VS Code</a>.</p>
+<p>Il punto di ingresso canonico per un bridge locale è:</p>
+<pre><code class="language-sh">python -m tgwitness.mcp_server --url https://your-panel.example/mcp</code></pre>
+<p>Usa il Python locale del client con l'extra MCP installato. Imposta
+<code>TGWITNESS_MCP_TOKEN</code> nel suo ambiente protetto. Mantieni le credenziali fuori dagli
+argomenti dei comandi e dagli URL. <code>tgwitness-mcp</code> è lo stesso punto di ingresso. Il vecchio
+modulo <code>tgwitness.mcp_bridge</code> e il nome <code>TGWITNESS_ARCHIVE_TOKEN</code> rimangono percorsi
+di compatibilità che generano un avviso; le nuove configurazioni usano <code>mcp_server</code> e <code>TGWITNESS_MCP_TOKEN</code>.</p>
+<h2 id="cloudflare-tunnel">Cloudflare Tunnel<a class="anchor" href="#cloudflare-tunnel" aria-label="Collegamento a questa sezione">#</a></h2>
+<p>Inoltra la rotta <code>/mcp</code> del pannello e preserva l'header bearer. L'apertura delle impostazioni
+MCP come amministratore registra l'origine corrente del pannello per l'esecuzione in corso.
+Per avere un indirizzo stabile immediatamente disponibile dopo il riavvio, configura
+<code>TGWITNESS_PUBLIC_URL</code> con l'origine HTTPS del pannello prima di avviarlo.
+Header Host e di inoltro arbitrari non registrano un indirizzo attendibile.
+I controlli su Host e Origin rifiutano origini del browser non correlate. Le risposte usano
+<code>Cache-Control: no-store</code>; i valori di autorizzazione non vengono mai registrati nei log.</p>
+<p>Un indirizzo <code>*.trycloudflare.com</code> è temporaneo. Quando il riavvio di un tunnel modifica
+l'hostname, aggiorna l'URL pubblico configurato e l'URL MCP di ciascun client. Usa un
+hostname stabile per le configurazioni salvate dei client.</p>
+<h2 id="tools-and-boundaries">Strumenti e limiti<a class="anchor" href="#tools-and-boundaries" aria-label="Collegamento a questa sezione">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Strumento</th>
+<th>Cosa legge</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list_workspaces</code></td>
+<td>Spazi di lavoro autorizzati</td>
+</tr>
+<tr>
+<td><code>list_chats</code></td>
+<td>Chat autorizzate</td>
+</tr>
+<tr>
+<td><code>search_messages</code></td>
+<td>Testo dei messaggi salvati nel periodo selezionato</td>
+</tr>
+<tr>
+<td><code>get_message_versions</code></td>
+<td>Versioni acquisite e osservazioni di eliminazione</td>
+</tr>
+<tr>
+<td><code>get_message_context</code></td>
+<td>ID dei messaggi acquisiti circostanti</td>
+</tr>
+<tr>
+<td><code>get_journal_event</code></td>
+<td>Un record sanificato con il relativo riferimento alla fonte</td>
+</tr>
+<tr>
+<td><code>get_capture_status</code></td>
+<td>Stato della raccolta e record di copertura consentiti</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>tools/list</code> restituisce solo gli strumenti concessi a quella connessione. Le chiamate ad altri
+strumenti vengono rifiutate. Gli strumenti per contesto di gruppo, episodi, terminologia e catene di risposte non
+sono offerti in questa build; il relativo backend separato per i context-pack non è incluso.</p>
+<p>Ogni lettura verifica il token, lo strumento e l'ambito di spazio di lavoro/chat, anche al termine
+dell'operazione sul database. I limiti sono di 60 richieste al minuto, 50 record per pagina,
+64 KiB per risultato e una scadenza di otto secondi per l'archivio. Una chiamata MCP scaduta
+restituisce un errore dello strumento richiedendo un periodo più ristretto o un limite inferiore.</p>
+<p>I risultati dei messaggi riportano <code>untrusted_content: true</code>, gli ID di spazio di lavoro/chat/messaggio,
+la sequenza dell'evento, l'hash salvato e un link al pannello. Gli oggetti Telegram grezzi, gli access hash,
+le sessioni e le chiavi vengono omessi. Il troncamento del testo viene segnalato. Modifiche, avvisi di eliminazione
+e <code>missing_on_recheck</code> sono osservazioni distinte. L'assenza di record non dimostra
+che un evento non sia mai accaduto.</p>
+<p>Tratta le istruzioni contenute nei messaggi acquisiti come prove, mai come istruzioni per il
+client. L'accesso in sola lettura impedisce modifiche all'archivio; il client può comunque
+conservare i contenuti che è autorizzato a leggere. Gli hash identificano i record salvati e
+supportano i controlli di integrità; non dimostrano la paternità su Telegram né la completezza dell'acquisizione.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/MCP.md">Modifichi questa pagina su GitHub ↗</a><a class="next-guide" href="../media-analysis/"><span>Passo successivo</span><strong>OCR locale e trascrizione →</strong></a><p>Le presenti linee guida descrivono l’attuale implementazione. I risultati della convalida e le lacune residue sono documentati separatamente. <a href="../verification/">Cosa è stato testato →</a></p></footer>
 </main>
-<aside class="toc" aria-label="In questa pagina"><p class="nav-label">In questa pagina</p><a href="#connect-a-client">Collegare un client</a><a href="#scope-and-results">Ambito e risultati</a></aside>
+<aside class="toc" aria-label="In questa pagina"><p class="nav-label">In questa pagina</p><a href="#install-and-check">Installa e verifica</a><a href="#issue-a-connection">Emetti una connessione</a><a href="#connect-your-client">Connetti il tuo client</a><a href="#cloudflare-tunnel">Cloudflare Tunnel</a><a href="#tools-and-boundaries">Strumenti e limiti</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Open source · Funziona sul Suo computer</span><a href="../../../../LICENSE">Licenza MIT</a><a href="../notice/">Avviso per gli operatori</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Sicurezza</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "In attesa di un messaggio", "Step through a fictional send, edit and delete.": "Segua passo dopo passo un processo fittizio di invio, modifica ed eliminazione.", "No observations yet. Start the sequence or advance one event.": "Non ci sono ancora osservazioni. Avviare la sequenza o passare all’evento successivo.", "Meet at 10:00": "Appuntamento alle ore 10:00", "A new message is visible in the chat.": "Nella chat è visibile un nuovo messaggio.", "Record 1 appended: the collector observed the original message.": "Allegato n. 1: il programma di raccolta ha rilevato il messaggio originale.", "Meet at 11:00": "Appuntamento alle ore 11:00", "The current text changes. The earlier observation stays.": "Il testo attuale viene modificato. L’osservazione precedente rimane invariata.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Record 2 aggiunto: la modifica costituisce una nuova osservazione. Il Record 1 conserva ancora il testo originale.", "Message deleted": "Messaggio cancellato", "The message has disappeared from the chat view.": "Il messaggio è scomparso dalla schermata della chat.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Allegato n. 3: la notifica di cancellazione viene conservata insieme a entrambe le versioni osservate.", "0 records": "0 record", "1 record": "1 registrazione", "2 records": "2 record", "3 records": "3 record", "Complete / {n} of 3": "Completo / {n} di 3", "Step / {n} of 3": "Fase / {n} di 3", "Pause": "Pausa", "Replay sequence": "Sequenza di riproduzione", "Play sequence": "Sequenza di riproduzione", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "È disponibile un esempio statico. Per calcolare gli hash in modo interattivo, apra questa pagina tramite HTTPS o un’anteprima su localhost con supporto Web Crypto.", "No record supplied": "Nessuna registrazione fornita", "Tail removed": "Parte finale omessa", "≠ saved hash": "≠ hash salvato", "Rebuilt · different hash": "Ricostruito · hash diverso", "= saved hash": "= hash salvato", "Same length and matching head.": "Stessa lunghezza e intestazione corrispondente.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Tutti e tre gli hash calcolati corrispondono agli hash salvati. Questo campione è conforme al limite di tre record previsto.", "Same saved head; the journal prefix fails verification.": "Stesso intestatore salvato; il prefisso del registro non supera la verifica.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Il record n. 2 non corrisponde più al proprio hash salvato. Verificando solo l’intestazione finale memorizzata, questo dato sfuggirebbe; il verificatore controlla ogni singolo record.", "Head differs from the retained checkpoint.": "L’intestazione differisce dal checkpoint conservato.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Gli hash ricostruiti sono collegati tra loro, ma l’intestazione finale è cambiata. Il checkpoint conservato rifiuta questa cronologia. Anche le firme originali risulterebbero non valide sui record modificati.", "Too short: 2 supplied records \u003c 3 retained records.": "Troppo breve: 2 record forniti \u003c 3 record conservati.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "I due hash rimanenti continuano a corrispondere. Il checkpoint conservato rivela la parte finale mancante. Senza quel limite precedente, questo prefisso più breve da solo non avrebbe rivelato l’omissione.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Il calcolo dell’hash non è disponibile in questo browser. Le formule e la spiegazione statica riportate di seguito rimangono disponibili.", "{n} records": "{n} registrazioni", "head {hash}": "intestazione {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Accettato: il conteggio aumenta, la firma viene verificata e la chiave corrisponde. Il testimone mantiene questo nuovo limite.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: la risposta firmata riporta un numero di record inferiore rispetto all’ultimo checkpoint accettato. Il sistema registra il problema e mantiene il limite precedentemente accettato.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: il conteggio rimane invariato, ma il ramo principale è diverso. Il testimone registra la divergenza e mantiene il confine precedentemente accettato.", "No answer": "Nessuna risposta", "boundary unknown": "limite sconosciuto", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Nessuna risposta: il «witness» registra il controllo non riuscito. Non è in grado di determinare lo stato attuale del «collector». Se il «witness» è ancora in grado di raggiungere l’API del bot e la sua politica di pubblicazione lo consente, può pubblicare tale errore.", "Send {n}": "Inviare {n}", "Edit {n}": "Modifica {n}", "Delete {n}": "Elimina {n}", "Both accounts captured all six expected observations in this example.": "Entrambi gli account hanno rilevato tutte e sei le osservazioni previste in questo esempio.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "L’account B ha comunque acquisito 6 su 6. Due ricevute hanno richiesto più tempo. Il tasso di acquisizione e il ritardo nella ricezione rispondono a domande diverse.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "L’account B ha rilevato 5 su 6 entro il termine previsto (83,3%). La modifica mancante non presenta alcun ritardo rilevabile. Questo risultato descrive esclusivamente le sei azioni controllate.", "not observed by cutoff": "non rispettato entro la scadenza", "{s} seconds": "{s} secondi", "Exact values follow in the table.": "I valori esatti sono riportati nella tabella.", "{s} s": "{s} s", "Not observed": "Non rispettato", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Quattro chat forniscono osservazioni diverse. Si prega di seguire i registri originali per ogni connessione; non attribuire il post del canale all’utente 71001 in assenza di un mittente identificato.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Le registrazioni n. 146 e n. 205 riportano lo stesso ID mittente, 71001. Ciò consente di collegare i post osservati di un account Telegram in due diverse chat. Non identifica una persona reale né attribuisce il post al canale.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "L’indirizzo di destinazione pay.example.invalid/new compare nel registro del gruppo n. 146, nella digitazione del bot n. 173, nella modifica del canale n. 188 e nel messaggio privato n. 205. La presenza ricorrente di una stessa destinazione collega il materiale; ciò non dimostra tuttavia l’esistenza di un controllo comune su tali account.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "In questo caso fittizio, le ricevute multimediali completate n. 151 e n. 209 presentano valori SHA-256 completi identici. Si confrontino i byte effettivi e i relativi record dei messaggi. Il file corrispondente non identifica il suo autore né dimostra chi lo abbia inoltrato.", "the encrypted off-site copy": "la copia crittografata conservata in sede esterna", "notifications": "notifiche", "checkpoint hashes for timestamps": "hash di controllo per i timestamp", "signed checkpoints for the witness": "punti di controllo firmati per TgWitness", "Switched on in this example": "Attivato in questo esempio", "Optional · off by default": "Opzionale · disattivato per impostazione predefinita", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Lasciando questo dispositivo: la connessione a Telegram e {list}. Nient’altro.", "Default: only the Telegram connection leaves this machine.": "Impostazione predefinita: solo la connessione a Telegram esce da questo dispositivo.", "{done} of {total} done": "{done} su {total} completato", "Mark step {n} as done": "Contrassegnare il passaggio {n} come completato", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Copia", "Copied": "Copiato", "Command copied.": "Comando copiato.", "Selected — Ctrl/Cmd+C": "Selezionato — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Comando selezionato. Copiatelo manualmente.", "Command copied to clipboard.": "Comando copiato negli appunti.", "Select text": "Selezionare il testo", "Clipboard unavailable. Command selected; copy it manually.": "Appunti non disponibili. Comando selezionato; copiatelo manualmente.", "A message arrives. The first observation is saved.": "Arriva un messaggio. Viene salvata la prima osservazione.", "The time changes. Both captured versions stay.": "L’ora cambia. Entrambe le versioni acquisite rimangono.", "The message disappears. The captured history remains.": "Il messaggio scompare. La cronologia acquisita rimane.", "Pause example animation": "Esempio di animazione “Pausa”", "Play example animation": "Riproduca l’animazione di esempio", "Play": "Riproduci", "Full-size workspace screenshot": "Screenshot a schermo intero dell’area di lavoro", "Workspace screenshot · fictional data": "Schermata dell’area di lavoro · dati fittizi", "Close": "Chiudi", "Close screenshot": "Chiudi screenshot", "Scrollable full-size screenshot": "Screenshot a schermo intero scorrevole", "Enlarge: {name}": "Ingrandisci: {name}", "View full size": "Visualizza a schermo intero"}</script>

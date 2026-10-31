@@ -22,7 +22,7 @@ Captured records, recognized text and analyst conclusions stay distinct.
 
 ## Load past messages
 
-1. Open **Sources**, review the enabled chats and start observation.
+1. Open **Sources → Chats in scope**, review the enabled chats and start observation.
 2. Choose **Load full history**. The run uses the source list selected at that moment.
 3. Use **Pause history** and **Continue history** as needed. After a restart, resume explicitly.
 4. Check the per-source result and attachment queue. Save the signed progress report with the evidence export.
@@ -31,9 +31,9 @@ This fills the workspace with available messages. A per-chat HTML/JSON export is
 
 ## Search first, then decide about AI
 
-1. Open **Ask the archive**. Choose a workspace, chats and observation period.
-2. Search a phrase, domain or message ID. Open the matching record and its saved versions.
-3. For AI analysis, the administrator first configures a provider. Review **Data sent to the model** and uncheck unwanted excerpts before approving the request.
+1. Open **Journal** for local search. Choose a workspace and use the source and time filters.
+2. Search a phrase or domain. Open the matching record and its saved versions.
+3. For AI analysis, the administrator enables and configures a provider in **Integrations**. Open **Ask the archive** and choose chats and a period. Review **Data sent to the model** and uncheck unwanted excerpts before approving the request.
 4. Check the returned citations. Save the answer as a report and add your own revision or notes.
 
 Search runs locally without AI. Analytical reports keep source references and revision history; they are separate from the signed journal. [Provider setup and reports](https://phishdestroy.github.io/TgWitness/docs/reference/analysis/).

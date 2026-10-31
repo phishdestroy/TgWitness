@@ -22,7 +22,7 @@ Zarejestrowane dane, rozpoznany tekst oraz wnioski analityków pozostają wyraź
 
 ## Wczytaj poprzednie wiadomości
 
-1. **Źródła** otwarte – przejrzyj aktywne czaty i rozpocznij obserwację.
+1. Otwórz **Źródła → Czaty w zakresie**, przejrzyj włączone czaty i rozpocznij obserwację.
 2. Wybierz opcję **„Załaduj pełną historię**”. Proces wykorzystuje listę źródeł wybraną w danym momencie.
 3. W razie potrzeby należy korzystać z funkcji **„Wstrzymaj historię”** i **„Wznów historię**”. Po ponownym uruchomieniu należy wyraźnie wznowić działanie.
 4. Sprawdź wyniki dla poszczególnych źródeł oraz kolejkę załączników. Zapisz podpisany raport z postępów wraz z eksportem dowodów.
@@ -31,9 +31,9 @@ Spowoduje to wypełnienie obszaru roboczego dostępnymi wiadomościami. Eksport 
 
 ## Najpierw wyszukaj, a potem zdecyduj o wykorzystaniu sztucznej inteligencji
 
-1. Otwórz **opcję „Zapytaj archiwum**”. Wybierz obszar roboczy, czaty i okres obserwacji.
-2. Wyszukaj frazę, domenę lub identyfikator wiadomości. Otwórz pasujący wpis wraz z jego zapisanymi wersjami.
-3. W przypadku analizy opartej na sztucznej inteligencji administrator najpierw konfiguruje dostawcę. Należy przejrzeć **dane wysyłane do modelu** i odznaczyć niepotrzebne fragmenty przed zatwierdzeniem żądania.
+1. Aby wyszukiwać lokalnie, otwórz widok **Dziennik**. Wybierz obszar roboczy i użyj filtrów źródła oraz czasu.
+2. Wyszukaj frazę lub domenę. Otwórz pasujący wpis wraz z jego zapisanymi wersjami.
+3. Aby korzystać z analizy AI, administrator musi włączyć i skonfigurować dostawcę w sekcji **Integracje**. Otwórz **Zapytaj archiwum** i wybierz czaty oraz okres. Przed zatwierdzeniem żądania przejrzyj sekcję **Dane przesłane do modelu** i odznacz niepożądane fragmenty.
 4. Sprawdź zwrócone cytaty. Zapisz odpowiedź jako raport i dodaj własne poprawki lub uwagi.
 
 Wyszukiwanie odbywa się lokalnie, bez wykorzystania sztucznej inteligencji. Raporty analityczne zawierają odniesienia do źródeł oraz historię zmian; są one oddzielone od podpisanego dziennika. [Konfiguracja dostawcy i raporty](https://phishdestroy.github.io/TgWitness/pl/docs/reference/analysis/).

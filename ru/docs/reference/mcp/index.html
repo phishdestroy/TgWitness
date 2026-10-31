@@ -31,63 +31,169 @@
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="Руководства"><a href="../../../">Главная</a> <span aria-hidden="true">/</span> <a href="../../">Документация</a> <span aria-hidden="true">/</span> <a href="../">Справочник</a> <span aria-hidden="true">/</span> <span aria-current="page">MCP только для чтения</span></nav>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Поиск по документации</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Попробуйте «прокси», «цепочку хешей», «токен» или «свидетель»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Очистить поиск" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Введите слово для поиска в руководствах и справочнике. Результаты поиска остаются в вашем браузере.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Справочник / Архив и интеграции</p><h1>MCP только для чтения</h1><p class="guide-outcome">Подключите клиент MCP к выбранным рабочим пространствам и чатам с ограниченным по времени и отзывным доступом.</p><div class="wiki-body"><p><strong>Текущая версия:</strong> используйте репозиторий исходного кода; в портативной предварительной версии 0.7.0 эта функция ещё не реализована.</p>
+<article class="guide-content"><p class="eyebrow">Справочник / Архив и интеграции</p><h1>MCP только для чтения</h1><p class="guide-outcome">Подключите клиент MCP к выбранным рабочим пространствам и чатам с ограниченным по времени и отзывным доступом.</p><div class="wiki-body"><p>Подключайте клиент аналитика к выбранным рабочим пространствам и чатам. TgWitness обслуживает
+<strong>Streamable HTTP по пути <code>/mcp</code> в процессе панели</strong>. У каждого подключения свой
+токен, срок действия и разрешенные инструменты. MCP не может отправлять сообщения в Telegram, менять
+настройки или изменять подписанный журнал.</p>
 <p><a href="https://phishdestroy.github.io/TgWitness/docs/archive/">Руководство по рабочему процессу</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Вики</a></p>
-<p>Установите дополнительный сервер из каталога проекта TgWitness:</p>
-<pre><code class="language-sh">python -m pip install &#x27;.[mcp]&#x27;</code></pre>
-<p>В панели управления откройте <strong>«Интеграции» → «MCP</strong>». Назовите подключение, выберите его
-рабочие пространства и чаты, а также установите срок действия. Скопируйте токен архива один раз; его нельзя
-восстановить позже. Отзывайте утерянные токены и выдавайте новые. Токены панели управления и
-учетные данные Telegram не являются учетными данными MCP.</p>
-<h2 id="connect-a-client">Подключить клиент<a class="anchor" href="#connect-a-client" aria-label="Ссылка на раздел">#</a></h2>
-<p>Панель генерирует <code>.vscode/mcp.json</code> для <strong>локальной среды VS Code</strong> с использованием
-её <a href="https://code.visualstudio.com/docs/agents/reference/mcp-configuration">задокументированной конфигурации</a>.
-Сохраните загруженный файл в этом месте, запустите <strong>MCP: List Servers</strong> и запустите
-TgWitness. VS Code запросит токен через окно ввода пароля. Загруженный
-файл JSON содержит справочную информацию по запросу, а не сам токен. Используйте исполняемый файл Python из
-среды, в которой установлен MCP extra.</p>
-<p>Для других клиентов stdio выполните:</p>
-<pre><code class="language-sh">python -m tgwitness.mcp_server --api-url http://127.0.0.1:8787</code></pre>
-<p>Установите <code>TGWITNESS_ARCHIVE_TOKEN</code> в защищённой среде клиента. Не указывайте его
-в аргументах команд или URL-адресах. Мост получает данные через авторизованный
-API архива панели управления; он не имеет прямого доступа к базе данных. Stdout передаёт только сообщения MCP.</p>
-<p>Для удаленных клиентов запустите сервис рядом с панелью:</p>
-<pre><code class="language-sh">python -m tgwitness.mcp_server --transport streamable-http \
-  --api-url http://127.0.0.1:8787 --port 8766 \
-  --public-url https://archive.example.org/mcp</code></pre>
-<p>Перенаправьте <code>/mcp</code> через обратный прокси HTTPS на <code>127.0.0.1:8766/mcp</code>, сохраняя
-заголовок <code>Authorization: Bearer …</code>. Отключите регистрацию заголовков авторизации
-и тел запросов/ответов. Привязывайте за пределы loopback только при необходимости, используя
-<code>--host</code> и <code>--public-url</code>. Конечная точка использует Streamable HTTP из официального
-<a href="https://github.com/modelcontextprotocol/python-sdk">MCP Python SDK</a>.
-Он поддерживает явно настроенные учетные данные bearer, а не обнаружение OAuth;
-клиенты, требующие исключительно OAuth, не поддерживаются.</p>
-<p><strong>Проверка протокола и доступ</strong> инициируют запуск реального клиента MCP и отображают список инструментов. При этом
-сообщения не загружаются. Для удаленной проверки выбранный сервер MCP получает
-токен архива. Настраивайте только тот сервер, которым вы управляете или которому доверяете в данном контексте.</p>
-<h2 id="scope-and-results">Объем и результаты<a class="anchor" href="#scope-and-results" aria-label="Ссылка на раздел">#</a></h2>
-<p>Доступные инструменты: <code>list_workspaces</code>, <code>list_chats</code>, <code>search_messages</code>,
-<code>get_message_versions</code>, <code>get_message_context</code>, <code>get_journal_event</code> и
-<code>get_capture_status</code>. Не предусмотрены действия в Telegram, изменения настроек или
-инструменты для массового экспорта. При каждом прочтении повторно проверяется доступ к рабочему пространству/чату; просроченные и отозванные
-учетные данные перестают действовать. Ограничения: 60 запросов к API в минуту на одну учетную запись,
-50 записей на страницу, размер ответа 64 КиБ и восьмисекундный тайм-аут API.</p>
-<p>Результаты поиска сообщений включают рабочую область, идентификаторы чатов/сообщений, последовательность событий, сохраненный хеш
-и ссылку на панель. Пользователь, открывающий ссылку, должен иметь собственную авторизованную сессию панели
-. Исходные объекты Telegram, хеши доступа, ссылки на файлы, материалы сессии
-и ключи опущены. Поиск осуществляется по тексту сообщений, а не по исходным полям. Текст
-ограничен, а места усечения отмечены. Редактирования, уведомления Telegram об удалении и
-<code>missing_on_recheck</code> остаются отдельными наблюдениями. Доступ в пределах чата не позволяет просматривать
-операционные события, относящиеся ко всему рабочему пространству; статус записи явно обозначает это ограничение.</p>
-<p>Текст архива является недоверенным входным данными. Инструкции, содержащиеся в сообщениях, не предоставляют дополнительных
-полномочий и не должны рассматриваться как инструкции клиента. Внешняя модель искусственного интеллекта может
-получать любой контент, который запрашивает её клиент MCP. Доступ только для чтения предотвращает
-изменения в архиве; он не препятствует клиенту сохранять прочитанные данные.</p>
-<p>Хэши идентифицируют сохраненные записи и обеспечивают проверку целостности. Они не
-являются самостоятельным доказательством авторства в Telegram или того, что каждое сообщение было зафиксировано.</p></div></article>
+<h2 id="install-and-check">Установка и проверка<a class="anchor" href="#install-and-check" aria-label="Ссылка на раздел">#</a></h2>
+<p>Используйте окружение Python, в котором запущена панель. Из каталога с исходным кодом выполните:</p>
+<pre><code class="language-powershell"># Windows PowerShell
+&amp; .\.venv\Scripts\python.exe -m pip install -c deploy/constraints-mcp.txt -e &#x27;.[mcp]&#x27;
+&amp; .\.venv\Scripts\python.exe start.py --check</code></pre>
+<pre><code class="language-sh"># Linux / macOS
+.venv/bin/python -m pip install -c deploy/constraints-mcp.txt -e &#x27;.[mcp]&#x27;
+.venv/bin/python start.py --check</code></pre>
+<p>После установки перезапустите панель с ее обычным каталогом данных и аргументами запуска.
+Проверка готовности должна содержать строку <code>[PASS] mcp: streamable-http available</code>.
+Раздел <strong>Интеграции → MCP</strong> показывает статус выполнения и команду установки с использованием
+фактического исполняемого файла Python этого сервера. <strong>Повторная проверка</strong> обновляет этот статус без
+перезагрузки страницы; она не устанавливает пакеты и не перезапускает сервер.</p>
+<p>Дополнение MCP использует официальный <a href="https://github.com/modelcontextprotocol/python-sdk">MCP Python SDK</a>.
+Файл <code>deploy/constraints-mcp.txt</code> фиксирует протестированные версии SDK и зависимостей. Эти функции
+требуют актуального исходного кода; портативная предварительная сборка 0.7.0 была выпущена до их появления.</p>
+<h2 id="issue-a-connection">Выпуск подключения<a class="anchor" href="#issue-a-connection" aria-label="Ссылка на раздел">#</a></h2>
+<ol>
+<li>Введите метку и выберите рабочие пространства и чаты, которые клиент может читать.</li>
+<li>Выберите инструменты по отдельности или используйте пресет. Предлагаются только реализованные инструменты.</li>
+<li>Выберите 1, 7, 30 или 90 дней либо укажите собственный срок действия от одной минуты до 90 дней.</li>
+<li>Нажмите <strong>Создать подключение</strong>. Токен отобразится один раз рядом с конфигурацией клиента.</li>
+<li>Скопируйте токен и конфигурацию, затем запустите <strong>Проверить подключение</strong>. Это инициализирует MCP
+    и выводит список разрешенных инструментов; <strong>сообщения при этом не читаются</strong>. В результате отображаются версия
+    протокола, имена инструментов, их количество и затраченное время.</li>
+<li>Нажмите <strong>Готово</strong>, когда учетные данные будут сохранены. Фоновый опрос не сбрасывает форму и
+    карточку однократного показа. Блокировка панели очищает отображаемые секреты.</li>
+</ol>
+<p>В списке отображаются недавнее использование, последний инструмент, адрес и количество запросов за последнюю минуту.
+<strong>Отозвать</strong> прекращает доступ. <strong>Ротация токена</strong> отзывает старые учетные данные и выпускает
+замену с теми же областью доступа, инструментами и сроком действия; скопируйте новый токен при единственном показе.
+Токены входа в панель и учетные данные Telegram не работают как токены MCP.</p>
+<h2 id="connect-your-client">Подключение клиента<a class="anchor" href="#connect-your-client" aria-label="Ссылка на раздел">#</a></h2>
+<p>Выберите клиент в панели и скопируйте сгенерированную для него конфигурацию. В конфигурациях используются
+ссылки на секреты или явные заполнители; сам токен копируется отдельно.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Клиент</th>
+<th>Конфигурация</th>
+<th>Связь</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude Code</td>
+<td><code>.mcp.json</code></td>
+<td>HTTP, <code>type: "http"</code>, заголовок Bearer</td>
+</tr>
+<tr>
+<td>Claude Desktop</td>
+<td><code>claude_desktop_config.json</code></td>
+<td>Локальный stdio-мост</td>
+</tr>
+<tr>
+<td>Cursor</td>
+<td><code>.cursor/mcp.json</code></td>
+<td>HTTP с заголовком из переменной окружения</td>
+</tr>
+<tr>
+<td>VS Code Local</td>
+<td><code>.vscode/mcp.json</code></td>
+<td>HTTP с вводом пароля через <code>promptString</code></td>
+</tr>
+<tr>
+<td>Windsurf</td>
+<td><code>mcp_config.json</code></td>
+<td>HTTP с заполнителем для заголовка Bearer</td>
+</tr>
+<tr>
+<td>Другие клиенты</td>
+<td>URL и заголовок Authorization</td>
+<td>Streamable HTTP</td>
+</tr>
+</tbody>
+</table></div>
+<p>TgWitness использует Bearer-токены без обнаружения OAuth. Используйте локальный stdio-мост
+для клиентов, чей удаленный коннектор требует OAuth. В VS Code переменные ввода
+применяются к окружению <strong>Local</strong> и не передаются в сессии Copilot.
+Справочники по конфигурации: <a href="https://code.claude.com/docs/en/mcp">Claude Code</a>,
+<a href="https://prod.cursor.com/docs/mcp">Cursor</a>,
+<a href="https://code.visualstudio.com/docs/agents/reference/mcp-configuration">VS Code</a>.</p>
+<p>Каноническая точка входа для локального моста:</p>
+<pre><code class="language-sh">python -m tgwitness.mcp_server --url https://your-panel.example/mcp</code></pre>
+<p>Используйте локальный Python клиента с установленным дополнением MCP. Задайте
+переменную <code>TGWITNESS_MCP_TOKEN</code> в его защищенном окружении. Не передавайте учетные данные в аргументах
+командной строки и URL. <code>tgwitness-mcp</code> — это та же самая точка входа. Старый
+модуль <code>tgwitness.mcp_bridge</code> и имя <code>TGWITNESS_ARCHIVE_TOKEN</code> сохранены для обратной совместимости
+и выводят предупреждение; в новых конфигурациях используются <code>mcp_server</code> и <code>TGWITNESS_MCP_TOKEN</code>.</p>
+<h2 id="cloudflare-tunnel">Cloudflare Tunnel<a class="anchor" href="#cloudflare-tunnel" aria-label="Ссылка на раздел">#</a></h2>
+<p>Пробросьте маршрут панели <code>/mcp</code> и сохраните заголовок Bearer. Открытие настроек MCP
+под учетной записью администратора регистрирует текущий источник (origin) панели для текущего запуска.
+Чтобы получить стабильный адрес, доступный сразу после перезапуска, укажите HTTPS-источник панели в
+<code>TGWITNESS_PUBLIC_URL</code> перед ее запуском.
+Произвольные заголовки Host и заголовки пересылки не регистрируют доверенный адрес.
+Проверки Host и Origin отклоняют сторонние браузерные источники. В ответах используется
+<code>Cache-Control: no-store</code>; значения авторизации никогда не записываются в журнал.</p>
+<p>Адрес вида <code>*.trycloudflare.com</code> является временным. Если при перезапуске туннеля меняется
+имя хоста, обновите настроенный публичный URL и URL MCP в каждом клиенте. Используйте
+стабильное имя хоста для сохраненных клиентских конфигураций.</p>
+<h2 id="tools-and-boundaries">Инструменты и ограничения<a class="anchor" href="#tools-and-boundaries" aria-label="Ссылка на раздел">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Инструмент</th>
+<th>Что читает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list_workspaces</code></td>
+<td>Разрешенные рабочие пространства</td>
+</tr>
+<tr>
+<td><code>list_chats</code></td>
+<td>Разрешенные чаты</td>
+</tr>
+<tr>
+<td><code>search_messages</code></td>
+<td>Сохраненный текст сообщений за выбранный период</td>
+</tr>
+<tr>
+<td><code>get_message_versions</code></td>
+<td>Зафиксированные версии и наблюдения об удалении</td>
+</tr>
+<tr>
+<td><code>get_message_context</code></td>
+<td>Идентификаторы соседних зафиксированных сообщений</td>
+</tr>
+<tr>
+<td><code>get_journal_event</code></td>
+<td>Одна очищенная запись со ссылкой на источник</td>
+</tr>
+<tr>
+<td><code>get_capture_status</code></td>
+<td>Состояние сбора и разрешенные записи о покрытии</td>
+</tr>
+</tbody>
+</table></div>
+<p>Вызов <code>tools/list</code> возвращает только те инструменты, которые предоставлены этому подключению. Вызовы других
+инструментов отклоняются. Инструменты для работы с групповым контекстом, эпизодами, терминологией и цепочками ответов
+в этой сборке не предлагаются; их отдельный бэкенд контекстных пакетов не включен.</p>
+<p>Каждая операция чтения проверяет токен, инструмент и область доступа к рабочему пространству или чату, в том числе после
+завершения работы с базой данных. Действуют ограничения: 60 запросов в минуту, 50 записей на страницу,
+64 КиБ на результат и восьмисекундный лимит времени на обращение к архиву. При превышении времени ожидания вызов MCP
+возвращает ошибку инструмента с просьбой сузить период или уменьшить лимит.</p>
+<p>Результаты с сообщениями содержат флаг <code>untrusted_content: true</code>, идентификаторы рабочего пространства, чата и сообщения,
+порядковый номер события, сохраненный хеш и ссылку на панель. Необработанные объекты Telegram, хеши доступа,
+сессии и ключи опускаются. Усечение текста помечается. Редактирования, уведомления об удалении
+и статус <code>missing_on_recheck</code> представляют собой отдельные наблюдения. Отсутствие записей не доказывает,
+что событие никогда не происходило.</p>
+<p>Рассматривайте инструкции внутри зафиксированных сообщений исключительно как исследуемые данные, а не как указания для
+клиента. Доступ только для чтения предотвращает изменение архива, однако клиент все равно может
+сохранять у себя содержимое, которое ему разрешено читать. Хеши идентифицируют сохраненные записи и
+поддерживают проверку целостности; они не доказывают авторство в Telegram или полноту фиксации.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/MCP.md">Исправить страницу на GitHub ↗</a><a class="next-guide" href="../media-analysis/"><span>Дальше</span><strong>Локальное распознавание текста (OCR) и транскрипция →</strong></a><p>В данных руководствах описывается текущая реализация. Результаты валидации и остающиеся пробелы документируются отдельно. <a href="../verification/">Что проверено →</a></p></footer>
 </main>
-<aside class="toc" aria-label="На этой странице"><p class="nav-label">На этой странице</p><a href="#connect-a-client">Подключить клиент</a><a href="#scope-and-results">Объем и результаты</a></aside>
+<aside class="toc" aria-label="На этой странице"><p class="nav-label">На этой странице</p><a href="#install-and-check">Установка и проверка</a><a href="#issue-a-connection">Выпуск подключения</a><a href="#connect-your-client">Подключение клиента</a><a href="#cloudflare-tunnel">Cloudflare Tunnel</a><a href="#tools-and-boundaries">Инструменты и ограничения</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Открытый исходный код · Работает на вашем компьютере</span><a href="../../../../LICENSE">Лицензия MIT</a><a href="../notice/">Уведомление для оператора</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Безопасность</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "Ожидание сообщения", "Step through a fictional send, edit and delete.": "Пошаговое руководство по отправке, редактированию и удалению вымышленного сообщения.", "No observations yet. Start the sequence or advance one event.": "Пока нет комментариев. Начните последовательность или перейдите к следующему событию.", "Meet at 10:00": "Встреча в 10:00", "A new message is visible in the chat.": "В чате отображается новое сообщение.", "Record 1 appended: the collector observed the original message.": "Добавлена запись № 1: сборщик данных зафиксировал исходное сообщение.", "Meet at 11:00": "Встреча в 11:00", "The current text changes. The earlier observation stays.": "Текущий текст изменяется. Предыдущее замечание остается в силе.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Запись № 2 добавлена: редактирование представляет собой новое наблюдение. В записи № 1 по-прежнему сохранен исходный текст.", "Message deleted": "Сообщение удалено", "The message has disappeared from the chat view.": "Сообщение исчезло из окна чата.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Приложение «Record 3»: уведомление об удалении сохраняется наряду с обеими зафиксированными версиями.", "0 records": "0 записей", "1 record": "1 запись", "2 records": "2 записи", "3 records": "3 записи", "Complete / {n} of 3": "Завершено / {n} из 3", "Step / {n} of 3": "Шаг / {n} из 3", "Pause": "Пауза", "Replay sequence": "Последовательность воспроизведения", "Play sequence": "Последовательность воспроизведения", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Доступен статический пример. Для интерактивного вычисления хэшей откройте эту страницу по протоколу HTTPS или в локальном превью с поддержкой Web Crypto.", "No record supplied": "Данные не предоставлены", "Tail removed": "Конец текста удалён", "≠ saved hash": "≠ сохраненный хеш", "Rebuilt · different hash": "Переработанная версия · другой хеш", "= saved hash": "= сохраненный хеш", "Same length and matching head.": "Одинаковый объем и соответствующий заголовок.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Все три вычисленных хеша совпадают с сохраненными хешами. Данный образец соответствует установленному ограничению в три записи.", "Same saved head; the journal prefix fails verification.": "Сохраненная заголовочная строка; префикс журнала не проходит проверку.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Запись № 2 больше не совпадает со своим сохраненным хешем. Проверка только конечного сохраненного указателя не позволила бы обнаружить это; верификатор проверяет каждую запись.", "Head differs from the retained checkpoint.": "Заголовок отличается от сохраненного контрольного пункта.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Восстановленные хэши связаны между собой, однако конечный хед изменился. Сохраненная контрольная точка отклоняет данную историю. Исходные подписи также не будут проверяться для измененных записей.", "Too short: 2 supplied records \u003c 3 retained records.": "Слишком мало: 2 предоставленных записи \u003c 3 сохраненных записей.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Два оставшихся хеша по-прежнему совпадают. Сохраненная контрольная точка показывает отсутствующую конечную часть. Без этой более ранней границы один лишь этот более короткий префикс не позволил бы выявить пропуск.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "В данном браузере расчёт хешей недоступен. Приведённые ниже формулы и статическое пояснение остаются доступными.", "{n} records": "{n} записей", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Принято: количество записей увеличивается, подпись подтверждается, а ключ совпадает. Свидетель сохраняет эту новую границу.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Откат: подписанный ответ содержит меньшее количество записей, чем последняя принятая контрольная точка. Система фиксирует проблему и сохраняет предыдущую принятую границу.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Форк: количество не изменилось, но вершина отличается. Свидетель фиксирует разногласие и сохраняет ранее принятую границу.", "No answer": "Ответ отсутствует", "boundary unknown": "предел неизвестен", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Отсутствие ответа: «Witness» фиксирует неудачную проверку. Он не может определить текущее состояние сборщика данных. Если «Witness» по-прежнему имеет доступ к Bot API и это разрешено его политикой публикации, он может опубликовать информацию об этой неудаче.", "Send {n}": "Отправить {n}", "Edit {n}": "Редактировать {n}", "Delete {n}": "Удалить {n}", "Both accounts captured all six expected observations in this example.": "Оба аккаунта зафиксировали все шесть ожидаемых наблюдений в данном примере.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Аккаунт B по-прежнему зафиксировал 6 из 6. Две квитанции были получены с задержкой. Коэффициент фиксации и задержка получения квитанций отвечают на разные вопросы.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Аккаунт B зафиксировал 5 из 6 действий к моменту окончания теста (83,3 %). Отсутствующее редактирование не сопровождалось зафиксированной задержкой. Данный результат отражает только шесть контролируемых действий.", "not observed by cutoff": "не соблюдено к моменту окончания срока", "{s} seconds": "{s} секунд", "Exact values follow in the table.": "Точные значения приведены в таблице ниже.", "{s} s": "{s} s", "Not observed": "Не соблюдается", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "В четырёх чатах приводятся различные наблюдения. Следуйте исходным записям для каждого соединения; не приписывайте сообщение в канале пользователю 71001 без указания отправителя.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Записи № 146 и № 205 содержат один и тот же идентификатор отправителя — 71001. Это позволяет установить связь между замеченными публикациями одного аккаунта Telegram в двух разных чатах. При этом не происходит идентификация реального лица или привязка публикации к конкретному каналу.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Адрес назначения pay.example.invalid/new фигурирует в записи группы № 146, введении с клавиатуры бота № 173, редактировании канала № 188 и личном сообщении № 205. Повторное упоминание адреса назначения связывает эти материалы между собой; однако это не доказывает наличия единого контроля над указанными учетными записями.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "В данном вымышленном деле завершённые квитанции о получении медиафайлов № 151 и № 209 имеют одинаковые полные значения SHA-256. Сравните фактические байты и связанные с ними записи сообщений. Соответствующий файл не позволяет установить его создателя и не подтверждает, кто его переслал.", "the encrypted off-site copy": "зашифрованная внешняя копия", "notifications": "уведомления", "checkpoint hashes for timestamps": "Хэши контрольных точек для временных меток", "signed checkpoints for the witness": "подписанные контрольные точки для TgWitness", "Switched on in this example": "В данном примере включено", "Optional · off by default": "Необязательно · по умолчанию отключено", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "С этого устройства удаляются: подключение к Telegram и {list}. Ничего больше.", "Default: only the Telegram connection leaves this machine.": "По умолчанию: с данного компьютера выходит только соединение с Telegram.", "{done} of {total} done": "{done} из {total} выполнено", "Mark step {n} as done": "Пометить шаг {n} как выполненный", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Текст", "Copied": "Скопировано", "Command copied.": "Команда скопирована.", "Selected — Ctrl/Cmd+C": "Выделено — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Команда выбрана. Скопируйте её вручную.", "Command copied to clipboard.": "Команда скопирована в буфер обмена.", "Select text": "Выделить текст", "Clipboard unavailable. Command selected; copy it manually.": "Буфер обмена недоступен. Команда выбрана; скопируйте её вручную.", "A message arrives. The first observation is saved.": "Поступает сообщение. Первое наблюдение сохраняется.", "The time changes. Both captured versions stay.": "Время меняется. Обе зафиксированные версии сохраняются.", "The message disappears. The captured history remains.": "Сообщение исчезает. Зафиксированная история сохраняется.", "Pause example animation": "Пример анимации «Пауза»", "Play example animation": "Просмотр примера анимации", "Play": "Воспроизвести", "Full-size workspace screenshot": "Снимок экрана рабочей области в полном размере", "Workspace screenshot · fictional data": "Снимок экрана рабочей области · вымышленные данные", "Close": "Закрыть", "Close screenshot": "Закрыть скриншот", "Scrollable full-size screenshot": "Прокручиваемый скриншот в полном размере", "Enlarge: {name}": "Увеличить: {name}", "View full size": "Посмотреть в полном размере"}</script>

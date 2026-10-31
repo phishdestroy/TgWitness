@@ -22,7 +22,7 @@ Catatan yang direkam, teks yang dikenali, dan kesimpulan analis tetap terpisah.
 
 ## Muat pesan-pesan sebelumnya
 
-1. Open **Sources**, tinjau obrolan yang diaktifkan dan mulailah pemantauan.
+1. Buka **Sumber → Chat dalam cakupan**, tinjau chat yang diaktifkan, lalu mulai pengamatan.
 2. Pilih "**Muat riwayat lengkap**". Proses ini menggunakan daftar sumber yang dipilih pada saat itu.
 3. Gunakan "**Riwayat Jeda"** dan "**Riwayat Lanjutkan"** sesuai kebutuhan. Setelah restart, lanjutkan secara eksplisit.
 4. Periksa hasil per sumber dan antrian lampiran. Simpan laporan kemajuan yang telah ditandatangani bersama ekspor bukti.
@@ -31,9 +31,9 @@ Fitur ini mengisi ruang kerja dengan pesan-pesan yang tersedia. Ekspor HTML/JSON
 
 ## Cari dulu, baru putuskan soal AI
 
-1. Buka **"Ask the archive**". Pilih ruang kerja, obrolan, dan periode pengamatan.
-2. Cari frasa, domain, atau ID pesan. Buka catatan yang sesuai beserta versi-versi yang tersimpan.
-3. Untuk analisis AI, administrator terlebih dahulu mengonfigurasi penyedia layanan. Periksa **data yang dikirim ke model** dan hapus centang pada cuplikan yang tidak diinginkan sebelum menyetujui permintaan.
+1. Buka **Jurnal** untuk pencarian lokal. Pilih ruang kerja dan gunakan filter sumber serta waktu.
+2. Cari frasa atau domain. Buka catatan yang sesuai beserta versi-versi yang tersimpan.
+3. Untuk analisis AI, administrator mengaktifkan dan mengonfigurasi penyedia di **Integrasi**. Buka **Tanyakan ke arsip**, lalu pilih chat dan periode. Tinjau **Data yang dikirim ke model** dan hapus centang pada cuplikan yang tidak diinginkan sebelum menyetujui permintaan.
 4. Periksa kutipan yang ditampilkan. Simpan jawaban sebagai laporan dan tambahkan revisi atau catatan Anda sendiri.
 
 Pencarian dijalankan secara lokal tanpa AI. Laporan analitis menyimpan referensi sumber dan riwayat revisi; laporan tersebut terpisah dari jurnal yang telah ditandatangani. [Pengaturan penyedia dan laporan](https://phishdestroy.github.io/TgWitness/id/docs/reference/analysis/).

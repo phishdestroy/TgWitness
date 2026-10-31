@@ -22,7 +22,7 @@ Erfasste Datensätze, erkannter Text und Schlussfolgerungen der Analysten bleibe
 
 ## Frühere Nachrichten laden
 
-1. Öffnen Sie „Open **Sources“**, überprüfen Sie die aktivierten Chats und beginnen Sie mit der Beobachtung.
+1. Öffnen Sie **Quellen → Erfasste Chats**, überprüfen Sie die aktivierten Chats und starten Sie die Beobachtung.
 2. Wählen Sie **„Vollständigen Verlauf laden**“. Der Durchlauf verwendet die zu diesem Zeitpunkt ausgewählte Quellenliste.
 3. Verwenden Sie **„Pause-Verlauf“** und **„Weiter-Verlauf“** nach Bedarf. Setzen Sie nach einem Neustart die Arbeit explizit fort.
 4. Überprüfen Sie die Ergebnisse pro Quelle und die Warteschlange der Anhänge. Speichern Sie den signierten Fortschrittsbericht zusammen mit dem Beweismittelexport.
@@ -31,9 +31,9 @@ Dadurch wird der Arbeitsbereich mit den verfügbaren Nachrichten gefüllt. Ein H
 
 ## Erst suchen, dann über KI entscheiden
 
-1. Öffnen **Sie das Archiv**. Wählen Sie einen Arbeitsbereich, Chats und einen Beobachtungszeitraum aus.
-2. Suchen Sie nach einem Begriff, einer Domain oder einer Nachrichten-ID. Öffnen Sie den entsprechenden Datensatz und seine gespeicherten Versionen.
-3. Für die KI-Analyse konfiguriert der Administrator zunächst einen Anbieter. Überprüfen Sie **die an das Modell gesendeten Daten** und deaktivieren Sie unerwünschte Auszüge, bevor Sie die Anfrage genehmigen.
+1. Öffnen Sie **Journal** für die lokale Suche. Wählen Sie einen Arbeitsbereich und verwenden Sie die Quellen- und Zeitfilter.
+2. Suchen Sie nach einem Begriff oder einer Domain. Öffnen Sie den entsprechenden Datensatz und seine gespeicherten Versionen.
+3. Für die KI-Analyse aktiviert und konfiguriert der Administrator einen Anbieter unter **Integrationen**. Öffnen Sie **Fragen Sie das Archiv** und wählen Sie Chats und einen Zeitraum aus. Überprüfen Sie **An das Modell gesendete Daten** und entfernen Sie die Häkchen bei unerwünschten Auszügen, bevor Sie die Anfrage genehmigen.
 4. Überprüfen Sie die angezeigten Quellenangaben. Speichern Sie die Antwort als Bericht und fügen Sie Ihre eigenen Überarbeitungen oder Anmerkungen hinzu.
 
 Die Suche erfolgt lokal ohne KI. Analytische Berichte enthalten Quellenangaben und einen Revisionsverlauf; sie sind vom signierten Protokoll getrennt. [Einrichtung durch den Anbieter und Berichte](https://phishdestroy.github.io/TgWitness/de/docs/reference/analysis/).

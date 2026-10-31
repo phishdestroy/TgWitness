@@ -33,11 +33,12 @@
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">문서 검색</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="프록시, 해시 체인, 토큰 또는 위트니스 등을 고려해 보십시오…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="명확한 검색" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">가이드와 참조 자료를 검색하려면 단어를 입력하세요. 검색 기록은 브라우저에 저장됩니다.</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="eyebrow">참고 문헌 / 아카이브 및 연동 기능</p><h1>아카이브 분석</h1><p class="guide-outcome">저장된 메시지를 검색하고, AI 입력 내용을 검토하며, 출처 참조 정보가 포함된 분석 보고서를 보관할 수 있습니다.</p><div class="wiki-body"><p><strong>현재 메인 버전:</strong> 소스 체크아웃을 사용하십시오. 0.7.0 휴대용 미리보기 버전은 이 기능이 구현되기 전의 버전입니다.</p>
 <p><a href="https://phishdestroy.github.io/TgWitness/docs/archive/">워크플로우 가이드</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">위키</a></p>
-<p>패널에서 <strong>‘아카이브 검색(Ask the archive</strong>)’을 엽니다. 작업 공간 선택기를 통해 계정을 선택하고,
-양식을 통해 채팅과 관찰 기간을 선택합니다. 검색은 AI를 사용하지 않고
-로컬에서 실행됩니다. 정확한 문구나 도메인을 입력하면 검색 결과를 좁힐 수 있으며, 메시지 ID를 입력하면 저장된
-버전을 조회할 수 있습니다. 반환된 발췌문을 검토하고 해당 저널 기록이나 맥락을 열어볼 수 있습니다.
-벡터 데이터베이스나 텔레그램에 대한 자동 실행 기능은 없습니다.</p>
+<p>AI 없이 로컬 검색을 하려면 <strong>저널</strong>을 사용하세요. <strong>아카이브에 문의하기</strong>를 사용하려면 먼저
+<strong>연동 기능</strong>에서 제공업체를 활성화하고 설정해야 합니다. 작업 공간 선택기에서
+계정을 선택하고, 양식에서 대화와 관찰 기간을 선택합니다. 검색은 로컬에서
+실행됩니다. 정확한 문구나 도메인을 입력하면 검색 범위가 좁혀지고, 메시지 ID를 입력하면 저장된
+버전을 요청합니다. 발췌문을 검토하고 해당 저널 기록이나 맥락을 열어 보세요.
+벡터 데이터베이스나 텔레그램 자동 작업 기능은 없습니다.</p>
 <h2 id="providers-and-consent">제공업체 및 동의<a class="anchor" href="#providers-and-consent" aria-label="이 섹션으로 이동">#</a></h2>
 <p>모든 작업 공간에서 AI 기능은 기본적으로 비활성화되어 있습니다. 주 관리자만이 모델,
 엔드포인트, 암호화된 API 키, 컨텍스트/출력 제한, 타임아웃 및 일일

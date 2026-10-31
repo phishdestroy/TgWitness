@@ -4,48 +4,86 @@ Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/mcp/
 
 Verbinden Sie einen MCP-Client mit ausgewählten Arbeitsbereichen und Chats mit zeitlich begrenztem, widerrufbarem Zugriff.
 
-**Aktueller Hauptpunkt:** Verwenden Sie einen Source-Checkout; die portable Vorschauversion 0.7.0 stammt aus einer Zeit vor der Einführung dieser Funktion.
+Verbinden Sie einen Analyst-Client mit ausgewählten Workspaces und Chats. TgWitness stellt **Streamable HTTP unter `/mcp` im Panel-Prozess** bereit. Jede Verbindung verfügt über ein eigenes Token, ein eigenes Ablaufdatum und eigene freigegebene Tools. MCP kann keine Telegram-Nachrichten senden, keine Einstellungen ändern und das signierte Journal nicht modifizieren.
 
 [Anleitung zum Arbeitsablauf](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-Installieren Sie den optionalen Server aus dem TgWitness-Projektverzeichnis:
+## Installation und Prüfung
+
+Verwenden Sie die Python-Umgebung, in der das Panel ausgeführt wird. Aus einem Quellcode-Checkout:
 
 ```
-python -m pip install '.[mcp]'
+# Windows PowerShell
+& .\.venv\Scripts\python.exe -m pip install -c deploy/constraints-mcp.txt -e '.[mcp]'
+& .\.venv\Scripts\python.exe start.py --check
 ```
 
-Öffnen Sie im Panel **„Integrationen“ → „MCP**“. Benennen Sie die Verbindung, wählen Sie die Arbeitsbereiche und Chats aus und legen Sie eine Gültigkeitsdauer fest. Kopieren Sie das Archiv-Token einmalig; es kann später nicht mehr abgerufen werden. Widerrufen Sie verlorene Token und stellen Sie Ersatz-Token aus. Panel-Token und Telegram-Anmeldedaten sind keine MCP-Anmeldedaten.
+```
+# Linux / macOS
+.venv/bin/python -m pip install -c deploy/constraints-mcp.txt -e '.[mcp]'
+.venv/bin/python start.py --check
+```
+
+Starten Sie das Panel nach der Installation mit dem üblichen Datenverzeichnis und den gewohnten Startargumenten neu. Die Bereitschaftsprüfung sollte `[PASS] mcp: streamable-http available` enthalten. **Integrations → MCP** zeigt den Laufzeitstatus sowie einen Installationsbefehl an, der die tatsächliche Python-Programmdatei des Servers verwendet. **Re-check** aktualisiert diesen Status ohne erneutes Laden der Seite; es werden dabei keine Pakete installiert und der Server wird nicht neu gestartet.
+
+Das MCP-Extra nutzt das offizielle [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk). `deploy/constraints-mcp.txt` legt das getestete SDK und dessen Abhängigkeiten fest. Diese Funktionen erfordern aktuellen Quellcode; die portable Vorschauversion 0.7.0 ist älter als diese Funktionen.
+
+## Verbindung erstellen
+
+1. Geben Sie eine Bezeichnung ein und wählen Sie die Workspaces und Chats aus, die der Client lesen darf.
+2. Wählen Sie Tools einzeln aus oder nutzen Sie eine Voreinstellung. Es werden nur implementierte Tools angeboten.
+3. Wählen Sie 1, 7, 30 oder 90 Tage oder eine benutzerdefinierte Gültigkeitsdauer zwischen einer Minute und 90 Tagen.
+4. Klicken Sie auf **Create connection**. Das Token wird einmalig neben der Client-Konfiguration angezeigt.
+5. Kopieren Sie das Token und die Konfiguration und führen Sie anschließend **Check connection** aus. Dadurch wird MCP initialisiert und die freigegebenen Tools werden aufgelistet; **es werden keine Nachrichten gelesen**. Das Ergebnis zeigt die Protokollversion, die Tool-Namen, deren Anzahl und die verstrichene Zeit.
+6. Klicken Sie auf **Done**, sobald die Zugangsdaten gespeichert sind. Das Polling behält das Formular und die einmalig angezeigte Karte bei. Das Sperren des Panels löscht angezeigte Geheimnisse.
+
+Die Liste zeigt die letzte Nutzung, das zuletzt verwendete Tool, die Adresse und die Anfragen der letzten Minute. **Revoke** beendet den Zugriff. **Rotate token** widerruft die alten Zugangsdaten und stellt einen Ersatz mit demselben Geltungsbereich, denselben Tools und derselben Gültigkeitsdauer aus; kopieren Sie das Ersatz-Token sofort, da es nur einmalig angezeigt wird. Panel-Login-Tokens und Telegram-Zugangsdaten funktionieren nicht als MCP-Tokens.
 
 ## Client verbinden
 
-Das Panel generiert „`.vscode/mcp.json`“ für das **VS Code Local-Harness** unter Verwendung der [dokumentierten Konfiguration](https://code.visualstudio.com/docs/agents/reference/mcp-configuration). Speichern Sie die heruntergeladene Datei an diesem Speicherort, führen Sie **„MCP: List Servers“** aus und starten Sie TgWitness. VS Code fordert Sie über eine Passworteingabe zur Eingabe des Tokens auf. Die heruntergeladene JSON-Datei enthält einen Hinweis zur Eingabeaufforderung, nicht das Token selbst. Verwenden Sie die ausführbare Python-Datei aus der Umgebung, in der das MCP-Extra installiert ist.
+Wählen Sie den Client im Panel aus und kopieren Sie die generierte Konfiguration. Konfigurationen verwenden Secret-Referenzen oder explizite Platzhalter; das Token wird separat kopiert.
 
-Für andere stdio-Clients führen Sie folgenden Befehl aus:
+| Client | Konfiguration | Zusammenhang |
+| --- | --- | --- |
+| Claude Code | `.mcp.json` | HTTP, `type: "http"`, Bearer-Header |
+| Claude Desktop | `claude_desktop_config.json` | Lokale stdio-Bridge |
+| Cursor | `.cursor/mcp.json` | HTTP mit Umgebungsvariablen-Header |
+| VS Code Local | `.vscode/mcp.json` | HTTP mit Passwort-Eingabe über `promptString` |
+| Windsurf | `mcp_config.json` | HTTP mit Platzhalter für Bearer-Header |
+| Andere Clients | URL und Authorization-Header | Streamable HTTP |
+
+TgWitness verwendet Bearer-Tokens ohne OAuth-Discovery. Verwenden Sie die lokale stdio-Bridge für Clients, deren Remote-Connector OAuth voraussetzt. Bei VS Code gelten Eingabevariablen für die **Local**-Umgebung und werden nicht an Copilot-Sitzungen weitergeleitet. Konfigurationsreferenzen: [Claude Code](https://code.claude.com/docs/en/mcp), [Cursor](https://prod.cursor.com/docs/mcp), [VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration).
+
+Der kanonische Einstiegspunkt für eine lokale Bridge lautet:
 
 ```
-python -m tgwitness.mcp_server --api-url http://127.0.0.1:8787
+python -m tgwitness.mcp_server --url https://your-panel.example/mcp
 ```
 
-Legen Sie „`TGWITNESS_ARCHIVE_TOKEN`“ in der geschützten Umgebung des Clients fest. Geben Sie es nicht in Befehlsargumenten oder URLs an. Die Bridge liest über die autorisierte Archiv-API des Panels; sie hat keinen direkten Datenbankzugriff. Stdout überträgt ausschließlich MCP-Nachrichten.
+Verwenden Sie die lokale Python-Installation des Clients, in der das MCP-Extra installiert ist. Setzen Sie `TGWITNESS_MCP_TOKEN` in dessen geschützter Umgebung. Halten Sie Zugangsdaten aus Befehlsargumenten und URLs heraus. `tgwitness-mcp` ist derselbe Einstiegspunkt. Das alte Modul `tgwitness.mcp_bridge` und der Name `TGWITNESS_ARCHIVE_TOKEN` bleiben als Kompatibilitätspfade mit einer Warnung erhalten; neue Konfigurationen verwenden `mcp_server` und `TGWITNESS_MCP_TOKEN`.
 
-Für Remote-Clients führen Sie den Dienst neben dem Panel aus:
+## Cloudflare Tunnel
 
-```
-python -m tgwitness.mcp_server --transport streamable-http \
-  --api-url http://127.0.0.1:8787 --port 8766 \
-  --public-url https://archive.example.org/mcp
-```
+Leiten Sie die Route `/mcp` des Panels weiter und behalten Sie den Bearer-Header bei. Das Öffnen der MCP-Einstellungen als Administrator registriert die aktuelle Origin des Panels für diesen Durchlauf. Für eine stabile Adresse, die sofort nach einem Neustart verfügbar ist, konfigurieren Sie `TGWITNESS_PUBLIC_URL` vor dem Starten des Panels mit der HTTPS-Origin des Panels. Beliebige Host- und Weiterleitungs-Header registrieren keine vertrauenswürdige Adresse. Host- und Origin-Prüfungen weisen fremde Browser-Origins ab. Antworten verwenden `Cache-Control: no-store`; Autorisierungswerte werden niemals protokolliert.
 
-Leite `/mcp` über einen HTTPS-Reverse-Proxy an `127.0.0.1:8766/mcp` weiter, wobei der `Authorization: Bearer …`-Header beibehalten wird. Deaktiviere die Protokollierung von Autorisierungs-Headern sowie von Request- und Response-Inhalten. Führe eine Bindung über den Loopback hinaus nur bei Bedarf durch, unter Verwendung von `--host` und `--public-url`. Der Endpunkt nutzt „Streamable HTTP“ aus dem offiziellen [MCP-Python-SDK](https://github.com/modelcontextprotocol/python-sdk). Es unterstützt explizit konfigurierte Bearer-Anmeldedaten, jedoch keine OAuth-Erkennung; Clients, die ausschließlich OAuth benötigen, werden nicht unterstützt.
+Eine `*.trycloudflare.com`-Adresse ist temporär. Wenn ein Tunnel-Neustart den Hostnamen ändert, aktualisieren Sie die konfigurierte öffentliche URL sowie die MCP-URL jedes Clients. Verwenden Sie einen stabilen Hostnamen für gespeicherte Client-Konfigurationen.
 
-**Der Check-Vorgang und der Zugriff** initialisieren einen echten MCP-Client und listen die Tools auf. Dabei werden keine Nachrichten abgerufen. Bei einer Remote-Prüfung erhält der ausgewählte MCP-Server das Archiv-Token. Konfigurieren Sie in diesem Zusammenhang nur einen Server, den Sie selbst betreiben oder dem Sie vertrauen.
+## Tools und Systemgrenzen
 
-## Umfang und Ergebnisse
+| Tool | Liest |
+| --- | --- |
+| `list_workspaces` | Freigegebene Workspaces |
+| `list_chats` | Freigegebene Chats |
+| `search_messages` | Gespeicherter Nachrichtentext innerhalb des ausgewählten Zeitraums |
+| `get_message_versions` | Erfasste Versionen und Löschbeobachtungen |
+| `get_message_context` | Benachbarte erfasste Nachrichten-IDs |
+| `get_journal_event` | Einen bereinigten Datensatz mit seiner Quellreferenz |
+| `get_capture_status` | Erfassungsstatus und zulässige Abdeckungsdatensätze |
 
-Verfügbare Tools: `list_workspaces`, `list_chats`, `search_messages`, `get_message_versions`, `get_message_context`, `get_journal_event` und `get_capture_status`. Es gibt keine Telegram-Aktionen, Konfigurationsänderungen oder Tools für den Massenexport. Bei jedem Lesevorgang wird der Zugriff auf den Arbeitsbereich/Chat erneut überprüft; abgelaufene und widerrufene Zugangsdaten funktionieren nicht mehr. Die Limits betragen 60 API-Anfragen pro Minute und Zugangsdaten, 50 Datensätze pro Seite, eine Antwortgröße von 64 KiB und eine API-Zeitüberschreitung von acht Sekunden.
+`tools/list` gibt nur die Tools zurück, die für diese Verbindung freigegeben wurden. Aufrufe anderer Tools werden abgewiesen. Gruppenkontext-, Episoden-, Terminologie- und Antwortketten-Tools werden in diesem Build nicht angeboten; deren separates Context-Pack-Backend ist nicht enthalten.
 
-Die Nachrichtenergebnisse umfassen den Arbeitsbereich, Chat-/Nachrichten-IDs, die Abfolge der Ereignisse, den gespeicherten Hash sowie einen Panel-Link. Der Betrachter, der einen Link öffnet, muss über eine eigene autorisierte Panel- Sitzung verfügen. Rohe Telegram-Objekte, Zugriffs-Hashes, Dateiverweise, Sitzungsmaterial und Schlüssel werden weggelassen. Die Suche untersucht den Nachrichtentext, nicht die Rohfelder. Der Text wird begrenzt und Kürzungen werden gekennzeichnet. Bearbeitungen, Telegram-Löschhinweise und „ `missing_on_recheck`“ bleiben separate Beobachtungen. Bei einem auf den Chat beschränkten Zugriff sind arbeitsbereichsweite operative Ereignisse nicht einsehbar; der Erfassungsstatus kennzeichnet diese Einschränkung ausdrücklich.
+Jeder Lesevorgang prüft das Token, das Tool sowie den Workspace-/Chat-Geltungsbereich – auch nach Abschluss der Datenbankabfrage. Die Limits betragen 60 Anfragen pro Minute, 50 Datensätze pro Seite, 64 KiB pro Ergebnis und ein Zeitlimit von acht Sekunden für Archivabfragen. Ein abgelaufener MCP-Aufruf gibt einen Tool-Fehler zurück, der einen engeren Zeitraum oder ein niedrigeres Limit anfordert.
 
-Archivtext gilt als nicht vertrauenswürdige Eingabe. Anweisungen innerhalb von Nachrichten gewähren keinen zusätzlichen Spielraum und dürfen nicht als Anweisungen des Clients behandelt werden. Ein externes KI-Modell kann jeden Inhalt erhalten, den sein MCP-Client anfordert. Der schreibgeschützte Zugriff verhindert Änderungen am Archiv; er hindert einen Client jedoch nicht daran, die gelesenen Daten zu speichern.
+Nachrichtenergebnisse enthalten `untrusted_content: true`, Workspace-/Chat-/Nachrichten-IDs, die Ereignissequenz, den gespeicherten Hash und einen Panel-Link. Rohe Telegram-Objekte, Access-Hashes, Sitzungen und Schlüssel werden weggelassen. Textkürzungen werden markiert. Bearbeitungen, Löschhinweise und `missing_on_recheck` sind eigenständige Beobachtungen. Fehlende Datensätze beweisen nicht, dass ein Ereignis nie stattgefunden hat.
 
-Die Hashes identifizieren gespeicherte Datensätze und unterstützen Integritätsprüfungen. Sie beweisen jedoch nicht unabhängig die Urheberschaft durch Telegram oder, dass jede Nachricht erfasst wurde.
+Behandeln Sie Anweisungen innerhalb erfasster Nachrichten stets als Beweismaterial und niemals als Anweisungen für den Client. Der schreibgeschützte Zugriff verhindert Änderungen am Archiv; der Client kann die Inhalte, zu deren Lesezugriff er berechtigt ist, dennoch speichern. Hashes identifizieren gespeicherte Datensätze und unterstützen Integritätsprüfungen; sie beweisen weder die Telegram-Urheberschaft noch eine vollständige Erfassung.
