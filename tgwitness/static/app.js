@@ -66,7 +66,7 @@ function resetViewContent(view){
   if(view==='parameters')parametersView?.resetSession();
   if(view==='evidence')exportsView?.resetSession();
   if(view==='accounts')accountsView?.resetSession();
-  if(view==='witness'){state.evidenceDirty=false;state.replicaDirty=false;state.alertsDirty=false;}
+  if(view==='witness'){state.evidenceDirty=false;state.replicaDirty=false;state.alertsDirty=false;state.githubDirty=false;}
   if(view==='sealed')window.TgWitnessCapture?.reset();
   if(view==='system-log')systemLogView?.resetSession();
   if(view==='access'){accessView?.resetSession();accessFormVersion++;adminLimitsVersion++;accessFormReady=false;adminLimitsReady=false;adminLimitsDirty=false;accessLoadSerial++;
