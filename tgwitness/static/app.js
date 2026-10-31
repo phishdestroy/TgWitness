@@ -48,6 +48,7 @@ const viewReady=Promise.all([
         if(name==='connection')window.TgWitnessProxies?.stop?.();
         if(name==='integrations'){window.TgWitnessIntegrations?.clear();window.TgWitnessWebhooks?.clear();}
         if(name==='sealed')window.TgWitnessCaptureStory?.pause?.();
+        if(name==='parameters')parametersView?.leave();
       },
       resetSession(){top=0;scrolls=[];viewContexts.delete(name);resetViewContent(name);},
     });
@@ -58,12 +59,13 @@ function resetViewContent(view){
   for(const field of root.querySelectorAll('input,textarea'))if(!field.form){field.value=field.defaultValue;field.checked=field.defaultChecked;}
   if(view==='connection'){networkLoadedFor=null;policyOutsideDirty=false;policyFormDirty=false;state.policy=null;}
   if(view==='sources'){state.scope=null;state.scopeDirty=false;state.recheckDirty=false;}
+  if(view==='parameters')parametersView?.resetSession();
   if(view==='witness'){state.evidenceDirty=false;state.replicaDirty=false;state.alertsDirty=false;}
   if(view==='sealed')window.TgWitnessCapture?.reset();
   if(view==='access'){accessFormReady=false;adminLimitsReady=false;adminLimitsDirty=false;accessLoadSerial++;
     state.access=null;state.accessEdit=null;state.accessChats={};state.consoleAfter=0;show('access-new',false);}
   const clear={observations:['events-body'],chats:['chats-list','chat-feed','chat-people','chat-about'],accounts:['accounts-list','fleet-groups'],
-    parameters:['parameters-groups','parameters-nav'],access:['access-console','access-list','access-sessions-list','access-token'],
+    access:['access-console','access-list','access-sessions-list','access-token'],
     connection:['profiles-list'],witness:['witness-list','github-result','cloud-health','alerts-saved','evidence-status','replica-status'],
     integrations:['webhook-list','webhook-history','webhook-chats']}[view]||[];
   for(const id of clear)$(id)?.replaceChildren();
@@ -358,6 +360,7 @@ function lock() {
   viewHost?.resetSession();state.permissionsStamp=null;
   state.events=[];state.chats=[];state.chatMessages=[];state.chatInfo=null;state.chat=null;state.parameters=null;
   sourcesView?.resetSession();
+  parametersView?.resetSession();
   resetChatExportTools();
   resetReportSettings();
   window.dispatchEvent(new Event("tgwitness:lock"));
@@ -745,6 +748,8 @@ function renderViewStatus(view){
   }else if(view==='evidence'){
     $("fingerprint").textContent=s.fingerprint;$("export-profile-id").textContent=state.profile;
     renderVerification();renderChatExportTools();
+  }else if(view==='parameters'){
+    parametersView?.updateStatus();
   }else if(view==='sources'){
     sourcesView?.updateStatus(s);renderHistory();renderRecheck();renderTargets();
   }else if(view==='connection'){
@@ -952,6 +957,7 @@ function renderAccounts(){
 }
 async function switchProfile(id,options={}){
   if(options.history!==false)window.TgWitnessRouter?.invalidate();
+  parametersView?.resetSession();
   resetChatExportTools();
   resetReportSettings();
   window.TgWitnessIntegrations?.clear(true);
@@ -1791,110 +1797,23 @@ function renderRecheck(){
 }
 
 const parameterItems=()=>(state.parameters?.groups||[]).flatMap(g=>g.items);
-const sameValue=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 function parameterLabel(key){const item=parameterItems().find(i=>i.key===key);return item?tr(item.label):key.replaceAll("_"," ");}
 function parameterValue(value){
   if(Array.isArray(value))return trn("{n} line","{n} lines",value.length);
   return typeof value==="boolean"?tr(value?"On":"Off"):Number(value).toLocaleString();
 }
-async function loadParameters(){
-  if(!state.status)return;
-  const profile=state.profile,r=await json("parameters",undefined,viewOptions('parameters'));
-  if(profile!==state.profile)return;
-  state.parameters=r;
-  if(state.view==='parameters'&&!state.parametersDirty)renderParameters();
-}
-function setParameterField(item,value){
-  const field=$("parameter-"+item.key);
-  if(item.kind==="bool")field.checked=value;else field.value=item.kind==="lines"?value.join("\n"):String(value);
-}
-function renderParameters(){
-  const box=$("parameters-groups"),demo=!!state.status?.demo,nav=$("parameters-nav");box.replaceChildren();nav.replaceChildren();
-  for(const group of state.parameters.groups){
-    const card=node("section","card padded parameters-group"),fields=node("div","parameters-grid");card.id="parameters-group-"+group.id;
-    card.append(node("h2","",tr(group.title)),node("p","muted",tr(group.description)),fields);
-    const link=node("a","",tr(group.title)),changedCount=group.items.filter(i=>!sameValue(i.value,i.default)).length;
-    link.href=window.TgWitnessRouter?.href({view:"parameters",section:group.id})||"#parameters-group-"+group.id;link.addEventListener("click",e=>{e.preventDefault();state.parameterSection=group.id;window.TgWitnessRouter?.record();card.scrollIntoView({block:"start",behavior:"smooth"});});
-    if(changedCount)link.append(node("span","parameters-nav-count",String(changedCount)));
-    nav.append(link);
-    for(const item of group.items){
-      const changed=!sameValue(item.value,item.default),row=node("div","parameter-row"+(changed?" changed":"")),id="parameter-"+item.key;
-      let field;
-      if(item.kind==="bool"){
-        const label=node("label","check-label");field=node("input");field.type="checkbox";field.checked=item.value;
-        label.append(field," "+tr(item.label));row.append(label);
-      }else{
-        const label=node("label","",tr(item.label)),line=node("div","parameter-field");label.htmlFor=id;
-        if(item.kind==="lines"){field=node("textarea");field.rows=3;field.spellcheck=false;field.value=item.value.join("\n");}
-        else{field=node("input");Object.assign(field,{type:"number",min:item.low,max:item.high,step:1,required:true,value:String(item.value)});}
-        line.append(item.unit?unitField(field,tr(item.unit)):field);row.append(label,line);
-      }
-      field.id=id;field.dataset.parameter=item.key;field.disabled=demo;
-      if(item.help)row.append(node("p","hint",tr(item.help)));
-      const meta=node("p","hint parameter-meta",[item.kind==="int"?tr("{low} to {high}",{low:item.low.toLocaleString(),high:item.high.toLocaleString()}):"",
-        tr("Default: {value}",{value:parameterValue(item.default)})].filter(Boolean).join(" · "));
-      if(changed){
-        const reset=node("button","text-link",tr("Restore default"));reset.type="button";reset.disabled=demo;
-        reset.addEventListener("click",()=>{setParameterField(item,item.default);state.parametersDirty=true;renderParametersDraft();});
-        meta.append(" · ",reset);
-      }
-      row.append(meta);row.dataset.search=[item.key,tr(item.label),tr(item.help||""),item.label].join(" ").toLowerCase();fields.append(row);
-    }
-    box.append(card);
-  }
-  filterParameters();
-  $("parameters-form").querySelector("button[type=submit]").disabled=demo;$("parameters-reset").disabled=demo;
-  renderParametersDraft();
-}
-function filterParameters(){
-  const query=$("parameters-search").value.trim().toLowerCase(),changed=$("parameters-changed").checked;
-  for(const card of $("parameters-groups").querySelectorAll(".parameters-group")){
-    let visible=0;
-    for(const row of card.querySelectorAll(".parameter-row")){
-      const show_=(!query||row.dataset.search.includes(query))&&(!changed||row.classList.contains("changed"));
-      row.hidden=!show_;if(show_)visible++;
-    }
-    card.hidden=!visible;
-    const link=$("parameters-nav").querySelector('a[href="#'+card.id+'"]');if(link)link.hidden=!visible;
-  }
-}
-$("parameters-search").addEventListener("input",filterParameters);
-$("parameters-changed").addEventListener("change",filterParameters);
-function parametersDraft(){
-  const changes={};
-  for(const item of parameterItems()){
-    const field=$("parameter-"+item.key);if(!field)continue;
-    const value=item.kind==="bool"?field.checked:item.kind==="lines"?field.value.split("\n").map(s=>s.trim()).filter(Boolean):Number(field.value);
-    if(!sameValue(value,item.value))changes[item.key]=value;
-  }
-  return changes;
-}
-function renderParametersDraft(){
-  $("parameters-unsaved").textContent=state.parametersDirty&&Object.keys(parametersDraft()).length?tr("Unsaved changes — press Save parameters to apply."):"";
-}
-$("parameters-form").addEventListener("input",()=>{state.parametersDirty=true;renderParametersDraft();});
-$("parameters-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
-  for(const field of $("parameters-form").querySelectorAll("input[type=number]")){
-    if(field.value.trim()===""||!field.checkValidity()){
-      field.focus();
-      throw new Error(tr("{name}: enter a whole number from {low} to {high}.",{name:parameterLabel(field.dataset.parameter),low:Number(field.min).toLocaleString(),high:Number(field.max).toLocaleString()}));
-    }
-  }
-  const changes=parametersDraft();
-  if(!Object.keys(changes).length){state.parametersDirty=false;renderParametersDraft();toast(tr("No changes to save."));return;}
-  const profile=state.profile,r=await json("parameters",{values:changes},{profile});
-  if(profile!==state.profile)return;
-  state.parameters=r;state.parametersDirty=false;renderParameters();await refreshStatus();
-  toast(tr("Parameters saved and recorded in the signed journal."));
-});});
-$("parameters-reset").addEventListener("click",e=>busy(e.currentTarget,async()=>{
-  if(!state.parameters||!window.confirm(tr("Restore every parameter of this workspace to its default?")))return;
-  const profile=state.profile,values=Object.fromEntries(parameterItems().map(i=>[i.key,null]));
-  const r=await json("parameters",{values},{profile});
-  if(profile!==state.profile)return;
-  state.parameters=r;state.parametersDirty=false;renderParameters();await refreshStatus();
-  toast(tr("Defaults restored and recorded in the signed journal."));
-}));
+let parametersView=null;
+const parametersReady=import("./views/parameters.js").then(({createParameters})=>{
+  parametersView=createParameters({root:$("view-parameters"),tr,getState:()=>state,
+    getSession:()=>state.workspaceRevision+":"+state.profile,may,json,refreshStatus,toast,
+    confirm:message=>window.confirm(message),
+    headerOffset:()=>{const header=document.querySelector(".topbar");return header&&["sticky","fixed"].includes(getComputedStyle(header).position)?header.getBoundingClientRect().height:0;},
+    sectionHref:id=>window.TgWitnessRouter?.href({view:"parameters",section:id})||"#parameters-group-"+id,
+    sectionChanged:id=>{state.parameterSection=id;window.TgWitnessRouter?.record();},
+    setDirty:value=>state.parametersDirty=value,saved:value=>state.parameters=value});
+  return parametersView;
+}).catch(error=>{toast(error.message,true);throw error;});
+async function loadParameters(){if(state.view==="parameters")return (await parametersReady).enter(viewContexts.get("parameters")||{});}
 
 function selectExtra(name,options={}){
   state.extra=name;

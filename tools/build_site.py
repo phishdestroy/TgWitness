@@ -78,7 +78,7 @@ DEMO_STATIC.update({"demo/core/" + name: "tgwitness/static/core/" + name
 DEMO_STATIC.update({"demo/components/" + name: "tgwitness/static/components/" + name
                     for name in ("shell.js", "shell.css", "health.js", "health.css", "health-actions.js", "collection.js", "collection.css", "workspaces.js")})
 DEMO_STATIC.update({"demo/views/" + name: "tgwitness/static/views/" + name
-                    for name in ("sources.js", "sources.css")})
+                    for name in ("sources.js", "sources.css", "parameters.js", "parameters.css")})
 DEMO_STATIC.update({"demo/mock.js": "website/demo/mock.js", "demo/fixtures.json": "website/demo/fixtures.json"})
 DEMO_STATIC.update({"demo/components/" + name: "tgwitness/static/components/" + name
                     for name in ("notifications.js", "notifications.css")})
