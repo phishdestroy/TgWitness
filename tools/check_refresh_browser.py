@@ -55,9 +55,12 @@ def main():
         server.app.state.store.append("message.new", {"text": "Newer observation", "synthetic": True},
                                       chat_id=-100100002, message_id=900)
         page.evaluate("refreshStatus()")
-        expect(page.locator("#stat-messages")).to_have_text("19")
+        assert page.evaluate("()=>state.status.stats.counts['message.new']+state.status.stats.counts['message.snapshot']") == 19
         release(page)
+        assert page.evaluate("()=>state.status.stats.counts['message.new']+state.status.stats.counts['message.snapshot']") == 19
+        page.evaluate("()=>navigate('observations')")
         expect(page.locator("#stat-messages")).to_have_text("19")
+        page.evaluate("()=>navigate('chats')")
 
         page.evaluate("delete document.documentElement.dataset.refreshHeld")
         hold_once(page, "/api/status")

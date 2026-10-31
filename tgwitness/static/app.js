@@ -56,13 +56,16 @@ const viewReady=Promise.all([
 function resetViewContent(view){
   const root=panelRoots.get(view);for(const form of root.querySelectorAll('form'))form.reset();
   for(const field of root.querySelectorAll('input,textarea'))if(!field.form){field.value=field.defaultValue;field.checked=field.defaultChecked;}
-  if(view==='connection'){networkLoadedFor=null;policyOutsideDirty=false;state.policy=null;}
+  if(view==='connection'){networkLoadedFor=null;policyOutsideDirty=false;policyFormDirty=false;state.policy=null;}
   if(view==='sources'){state.scope=null;state.scopeDirty=false;state.recheckDirty=false;}
   if(view==='witness'){state.evidenceDirty=false;state.replicaDirty=false;state.alertsDirty=false;}
   if(view==='sealed')window.TgWitnessCapture?.reset();
+  if(view==='access'){accessFormReady=false;adminLimitsReady=false;adminLimitsDirty=false;accessLoadSerial++;
+    state.access=null;state.accessEdit=null;state.accessChats={};state.consoleAfter=0;show('access-new',false);}
   const clear={observations:['events-body'],chats:['chats-list','chat-feed','chat-people','chat-about'],accounts:['accounts-list','fleet-groups'],
     parameters:['parameters-groups','parameters-nav'],access:['access-console','access-list','access-sessions-list','access-token'],
-    connection:['profiles-list'],integrations:['webhook-list','webhook-history','webhook-chats']}[view]||[];
+    connection:['profiles-list'],witness:['witness-list','github-result','cloud-health','alerts-saved','evidence-status','replica-status'],
+    integrations:['webhook-list','webhook-history','webhook-chats']}[view]||[];
   for(const id of clear)$(id)?.replaceChildren();
 }
 async function loadPanelView(view){
@@ -105,6 +108,7 @@ async function applyRouteToPanel(route,current){
   else if(view==="parameters"){
     await loadParameters();if(current()){state.parameterSection=route.section;if(route.section)$("parameters-group-"+route.section)?.scrollIntoView({block:"start"});}
   }else if(view==="accounts")await loadProfiles();
+  else if(view==="connection"){await loadProfiles();if(current()&&!state.status.demo)await loadPolicy();}
   else if(view==="access")await loadAccess();
   else if(view==="integrations")await window.TgWitnessIntegrations?.load();
   else if(view==="analysis")await window.TgWitnessAnalysis?.load();
@@ -179,6 +183,16 @@ const labels = {
   "access.admin_changed": [tr("Administrator session limits changed"), "settings", "system"],
 };
 function node(tag, cls, text) { const n = document.createElement(tag); if (cls) n.className = cls; if (text !== undefined) n.textContent = text; return n; }
+function placeChildren(parent,children){
+  const keep=new Set(children);for(const child of [...parent.childNodes])if(!keep.has(child))child.remove();
+  children.forEach((child,index)=>{if(parent.childNodes[index]!==child)parent.insertBefore(child,parent.childNodes[index]||null);});
+}
+function syncOptions(select,choices,fallback=""){
+  const selected=select.value,existing=new Map([...select.options].map(option=>[option.value,option]));
+  placeChildren(select,choices.map(([value,label])=>{const option=existing.get(value)||new Option(label,value);
+    if(option.textContent!==label)option.textContent=label;return option;}));
+  select.value=choices.some(([value])=>value===selected)?selected:fallback;
+}
 function viewState(kind,title,text="",label="",action=null){
   const box=node("div","ui-state");box.dataset.state=kind;
   box.setAttribute("role",kind==="error"?"alert":"status");
@@ -271,7 +285,7 @@ const timeReady=import("./core/time.js?v=1").then(({createTimeFormatter})=>{
     updateTimes();window.dispatchEvent(new CustomEvent("tgwitness:time-zone",{detail:{zone:panelTime.zone}}));
   });
 });
-const shellReady=import("./components/shell.js?v=1").then(({createResponsiveShell})=>createResponsiveShell({node,icon,tr}));
+const shellReady=import("./components/shell.js?v=2").then(({createResponsiveShell})=>createResponsiveShell({node,icon,tr}));
 function fmtTime(value,options){return panelTime?.fmtTime(value,options)??tr("Not supplied");}
 function formatTime(value){return fmtTime(value);}
 function timeNode(value,cls="",mode="relative"){
@@ -300,23 +314,29 @@ async function api(path, body, options={}) {
   const revision=state.workspaceRevision;
   const {root=false,profile=state.profile,token=state.token,allowStale=false,...fetchOptions}=options;
   const prefix=root||profile==="default" ? "/api/" : "/profiles/"+encodeURIComponent(profile)+"/api/";
-  const response = await fetch(prefix + path, {method: body === undefined ? "GET" : "POST",
+  let response;try{response = await fetch(prefix + path, {method: body === undefined ? "GET" : "POST",
     headers: {Authorization: "Bearer " + token, ...(body !== undefined ? {"Content-Type":"application/json"} : {})},
     ...(body !== undefined ? {body: JSON.stringify(body)} : {}), ...fetchOptions});
+  }catch(error){if(fetchOptions.signal?.aborted)throw new StaleView();throw error;}
+  if(fetchOptions.signal?.aborted){await response.body?.cancel();throw new StaleView();}
   if(!allowStale&&revision!==state.workspaceRevision){await response.body?.cancel();throw new StaleView();}
   if (!response.ok) {
     const result = await response.json().catch(() => ({detail: tr("Request failed")}));
-    let detail = result.detail || tr("Request failed");
+    let detail = result.detail || tr("Request failed");const parameter=detail?.parameter;
     if (Array.isArray(detail)) detail = detail.map(x => x.field + ": " + x.message).join("; ");
     if (typeof detail === "object") detail = tr(detail.message) + (detail.retry_after ? " " + tr("Retry after {n} seconds.", {n: detail.retry_after}) : "");
     if(!allowStale&&revision!==state.workspaceRevision)throw new StaleView();
     if (response.status === 401 && revision===state.workspaceRevision && token===state.token && !$("workspace").hidden) lock();
-    const error=new Error(tr(detail));error.status=response.status;throw error;
+    if(fetchOptions.signal?.aborted)throw new StaleView();
+    const error=new Error(tr(detail));error.status=response.status;if(parameter)error.parameter=parameter;throw error;
   }
   return response;
 }
 async function json(path, body, options) {
-  const revision=state.workspaceRevision,result=await (await api(path, body, options)).json();
+  const revision=state.workspaceRevision;let result;
+  try{result=await (await api(path, body, options)).json();}
+  catch(error){if(options?.signal?.aborted)throw new StaleView();throw error;}
+  if(options?.signal?.aborted)throw new StaleView();
   if(!options?.allowStale&&revision!==state.workspaceRevision)throw new StaleView();
   return result;
 }
@@ -668,6 +688,7 @@ function collectorLines(name,p){
 let healthUI=null;
 const healthReady=import("./components/health.js?v=1").then(({createHealthBar})=>{
   healthUI=createHealthBar({node,icon,tr,stateNames:healthStates,partNames:healthPartNames,lines:collectorLines,
+    actionContext:{getState:()=>state,getSession:()=>state.workspaceRevision+':'+state.profile,may,json,refreshStatus,toast,getSources:()=>sourcesReady,navigate},
     diagnose:openDiagnostics,canDiagnose:name=>viewAllowed(healthDiagnostics[name]?.view),workspace:$("workspace")});
   if(state.status)renderCollectorHealth(state.status.health);
   return healthUI;
@@ -799,7 +820,7 @@ async function loadProfiles(){
 
   for(const profile of state.profiles)if(profile.id==="default"&&profile.label==="Main account")profile.label=tr("Main account");
   const select=$("profile-select");updateWorkspaceOptions(select,state.profiles,state.profile,tr);
-  const list=$("profiles-list"),showList=state.view==='connection';if(showList)list.replaceChildren();
+  const list=$("profiles-list"),showList=state.view==='connection',oldRows=new Map([...list.children].map(row=>[row.dataset.profile,row])),rows=[];
   for(const profile of state.profiles){
     if(!showList)continue;
     const row=node("div","target-row"),info=node("div");
@@ -808,8 +829,13 @@ async function loadProfiles(){
     const button=node("button","secondary",tr(profile.id===state.profile?"Current workspace":"Open workspace"));
     button.disabled=!!profile.error_type||profile.id===state.profile;
     button.addEventListener("click",()=>busy(button,()=>switchProfile(profile.id)));
-    row.append(info,button);list.append(row);
+    row.dataset.profile=profile.id;row.append(info,button);
+    const existing=oldRows.get(profile.id);
+    if(existing){if(existing.firstElementChild.outerHTML!==info.outerHTML)existing.firstElementChild.replaceWith(info);
+      const control=existing.lastElementChild;control.textContent=button.textContent;if(!control.hasAttribute('aria-busy'))control.disabled=button.disabled;rows.push(existing);
+    }else rows.push(row);
   }
+  if(showList)placeChildren(list,rows);
   select.value=state.profile;
   $("nav-accounts").textContent=String(state.profiles.length);
   if(state.view==='accounts')await window.TgWitnessFleet?.load();
@@ -832,14 +858,15 @@ function renderAccounts(){
   if(state.view!=='accounts')return;
   const grid=$("accounts-list"),s=state.status;if(!grid||!s)return;
   window.TgWitnessFleet?.beforeRender?.();
-  grid.replaceChildren();$("fleet-groups")?.replaceChildren();
+  const cards=new Map(viewQueries('accounts','.account-card[data-profile]').map(card=>[card.dataset.profile,card]));
   const list=state.profiles||[];
   $("accounts-limit").textContent=trn("{n} workspace. Add as many as you need — each uses its own Telegram account.",
     "{n} workspaces. Add as many as you need — each uses its own Telegram account.",list.length);
   $("account-add-form").querySelector("button").disabled=s.demo;
-  for(const p of list){
+  for(const value of list){
+    const existing=cards.get(value.id),p=existing?Object.assign(existing.profileData,value):value;
     const c=p.collector,current=p.id===state.profile,down=!!p.error_type||!c;
-    const card=node("div","card padded account-card"+(current?" current":""));card.dataset.profile=p.id;
+    const card=node("div","card padded account-card"+(current?" current":""));card.dataset.profile=p.id;card.profileData=p;
     const head=node("div","account-head"),who=node("div","account-who"),account=c&&c.account;
     const title=node("div");title.append(node("h2","",p.label));
     // The badge sums up every part (health.py); the observation phase alone is listed below it.
@@ -865,20 +892,21 @@ function renderAccounts(){
         tr("This workspace could not start. Its data directory is preserved for inspection.")));
     }
     const actions=node("div","account-actions");
-    const open=node("button","secondary",tr(current?"Current":"Open"));open.disabled=down||current;
+    const open=node("button","secondary",tr(current?"Current":"Open"));open.dataset.action='open';open.disabled=down||current;
     open.addEventListener("click",()=>busy(open,()=>switchProfile(p.id)));
     actions.append(open);
     if(!down){
-      const toggle=node("button","quiet",tr(c.running?"Pause":"Start"));toggle.disabled=state.status.demo||(!c.running&&!c.has_session);
+      const toggle=node("button","quiet",tr(c.running?"Pause":"Start"));toggle.dataset.action='toggle';toggle.disabled=state.status.demo||(!c.running&&!c.has_session);
       toggle.addEventListener("click",()=>busy(toggle,async()=>{
-        if(c.running&&!(await collectionReady).confirmPause(p.label))return;
-        await json("collector/"+(c.running?"stop":"start"),{},{profile:p.id});
-        toast(tr(c.running?"Paused collection for {name}.":"Started collection for {name}.",{name:p.label}));
+        const running=!!p.collector?.running;
+        if(running&&!(await collectionReady).confirmPause(p.label))return;
+        await json("collector/"+(running?"stop":"start"),{},{profile:p.id});
+        toast(tr(running?"Paused collection for {name}.":"Started collection for {name}.",{name:p.label}));
         await loadProfiles();if(p.id===state.profile)await refreshStatus();
       }));
       actions.append(toggle);
     }
-    const rename=node("button","quiet",tr("Rename"));rename.disabled=state.status.demo;
+    const rename=node("button","quiet",tr("Rename"));rename.dataset.action='rename';rename.disabled=state.status.demo;
     rename.addEventListener("click",()=>busy(rename,async()=>{
       const label=(window.prompt(tr("New name for this workspace:"),p.label)||"").trim();
       if(!label||label===p.label)return;
@@ -887,7 +915,7 @@ function renderAccounts(){
     }));
     actions.append(rename);
     if(p.id!=="default"){
-      const del=node("button","danger",tr("Delete"));del.disabled=state.status.demo;
+      const del=node("button","danger",tr("Delete"));del.dataset.action='delete';del.disabled=state.status.demo;
       del.addEventListener("click",()=>busy(del,async()=>{
         if(!window.confirm(tr("Delete \"{name}\" permanently? This stops its collector and erases its session, journal, sources and signing key. This cannot be undone.",{name:p.label})))return;
         const revision=state.workspaceRevision;
@@ -906,8 +934,20 @@ function renderAccounts(){
       }));
       actions.append(del);
     }
-    card.append(actions);grid.append(card);
+    card.append(actions);
+    if(!existing){grid.append(card);continue;}
+    existing.className=card.className;
+    for(const selector of ['.account-head','.account-meta','.access-warning']){
+      const old=existing.querySelector(':scope > '+selector),fresh=card.querySelector(':scope > '+selector);
+      if(!fresh)old?.remove();else if(!old)existing.insertBefore(fresh,existing.querySelector('.account-actions'));
+      else if(old.outerHTML!==fresh.outerHTML)old.replaceWith(fresh);
+    }
+    const retained=existing.querySelector('.account-actions'),buttons=new Map([...retained.children].map(button=>[button.dataset.action,button]));
+    placeChildren(retained,[...actions.children].map(button=>{const old=buttons.get(button.dataset.action);if(!old)return button;
+      if(old.textContent!==button.textContent)old.textContent=button.textContent;
+      if(!old.hasAttribute('aria-busy'))old.disabled=button.disabled;return old;}));
   }
+  for(const [id,card] of cards)if(!list.some(profile=>profile.id===id))card.remove();
   window.TgWitnessFleet?.decorate();
 }
 async function switchProfile(id,options={}){
@@ -1160,7 +1200,7 @@ async function openDetail(e,options={}) {
     } catch(error) {if(state.drawerSeq===e.seq)lineage.append(node("p","hint",error.message));}
   }
 }
-function closeDetail(options={}){const opened=state.drawerSeq!==null;state.drawerSeq=null;leave("detail-drawer");leave("drawer-backdrop");if(previouslyFocused?.isConnected)previouslyFocused.focus();if(opened&&options.history!==false)window.TgWitnessRouter?.record({seq:null},{replace:true});}
+function closeDetail(options={}){const opened=state.drawerSeq!==null;state.drawerSeq=null;leave("detail-drawer");leave("drawer-backdrop");$("detail-content").replaceChildren();if(opened&&previouslyFocused?.isConnected)previouslyFocused.focus();previouslyFocused=null;if(opened&&options.history!==false)window.TgWitnessRouter?.record({seq:null},{replace:true});}
 $("close-detail").addEventListener("click",closeDetail);$("drawer-backdrop").addEventListener("click",closeDetail);
 document.addEventListener("keydown",e=>{
   if($("detail-drawer").hidden)return;
@@ -1681,14 +1721,14 @@ async function loadScope(){
   if(state.view==="sources")renderScope();
 }
 function scopeDraft(){
-  const mode=document.querySelector("[name=scope-mode]:checked")?.value||"selected",folder=$("scope-folder").value;
+  const mode=viewQuery("sources","[name=scope-mode]:checked")?.value||"selected",folder=$("scope-folder").value;
   return {mode,folder_id:mode==="folder"&&folder!==""?Number(folder):null,
     types:Object.fromEntries(scopeTypes.map(k=>[k,$("scope-"+k).checked])),exclude:state.scopeExclude||[],own_actions:$("scope-own").checked,
     new_chats:{profile:$("scope-new-profile").checked,history:Math.max(0,Math.min(1000,Math.floor(Number($("scope-new-history").value)||0)))}};
 }
 
 $("scope-investigation").addEventListener("click",()=>{
-  document.querySelectorAll("[name=scope-mode]").forEach(r=>{r.checked=r.value==="account";});
+  viewQueries("sources","[name=scope-mode]").forEach(r=>{r.checked=r.value==="account";});
   for(const k of scopeTypes)$("scope-"+k).checked=true;
   $("scope-own").checked=true;$("scope-new-profile").checked=true;
   if(Number($("scope-new-history").value)<200)$("scope-new-history").value="200";
@@ -2146,7 +2186,8 @@ function renderNotifications(){
 }
 function closeNotifications(){if(noticeUI)noticeUI.close();else{$("notify-panel").hidden=true;$("notify-toggle").setAttribute("aria-expanded","false");}}
 async function openRecord(seq,options={}){
-  const r=await json("events?"+new URLSearchParams({before:String(seq+1),limit:"1"}));
+  const context=viewContexts.get(state.view),r=await json("events?"+new URLSearchParams({before:String(seq+1),limit:"1"}),undefined,{signal:context?.signal});
+  if(context&&!context.current())return;
   if(r.events[0]?.seq===seq)await openDetail(r.events[0],options);
   else toast(tr("Record is unavailable to this access."),true);
 }
@@ -2368,10 +2409,10 @@ $("network-import").addEventListener("click",e=>busy(e.currentTarget,async()=>{
 
 const exposureNames={hide:tr("Hide this server's address"),fallback:tr("Direct connection as a last resort"),
   tunnel:tr("Server behind a tunnel or VPN")};
-let policyOutsideDirty=false;
+let policyOutsideDirty=false,policyFormDirty=false;
 function renderPolicy(p){
   if(state.view!=='connection')return;
-  state.policy=p;policyOutsideDirty=false;
+  state.policy=p;policyOutsideDirty=false;policyFormDirty=false;
   $("policy-summary").textContent=exposureNames[p.exposure];
   viewQueries("connection",'input[name="exposure"]').forEach(n=>n.checked=n.value===p.exposure);
   $("outside-enabled").checked=p.outside_enabled;
@@ -2396,8 +2437,9 @@ function outsideFields(){
 }
 async function loadPolicy(){
   const profile=state.profile,p=await json("network/policy",undefined,viewOptions('connection'));
-  if(profile===state.profile)renderPolicy(p);
+  if(profile===state.profile){if(policyFormDirty)state.policy=p;else renderPolicy(p);}
 }
+for(const event of ['input','change'])$("policy-form").addEventListener(event,()=>{policyFormDirty=true;});
 for(const id of ["outside-kind","outside-host","outside-port","outside-username","outside-password"])
   $(id).addEventListener("input",()=>{policyOutsideDirty=true;outsideFields();});
 $("outside-enabled").addEventListener("change",outsideFields);
@@ -2652,11 +2694,14 @@ async function refreshChats(refresh=false){
 }
 function renderChatsList(){
   if(state.view!=='chats')return;
-  const list=$("chats-list");list.replaceChildren();
+  const list=$("chats-list"),oldRows=new Map([...list.children].map(row=>[row.dataset.chat,row])),rows=[];
   const query=$("chat-search").value.trim().toLocaleLowerCase();
   for(const c of state.chats){
     if(query&&!`${c.title||""} ${c.chat_id}`.toLocaleLowerCase().includes(query))continue;
+    const existing=oldRows.get(String(c.chat_id)),key=JSON.stringify([c,state.profile]);
+    if(existing?.renderKey===key){existing.classList.toggle('active',c.chat_id===state.chat);existing.setAttribute('aria-pressed',String(c.chat_id===state.chat));rows.push(existing);continue;}
     const title=c.title||tr("Chat {id}",{id:c.chat_id}),row=node("button","chat-item"+(c.chat_id===state.chat?" active":""));row.type="button";
+    row.dataset.chat=String(c.chat_id);row.renderKey=key;
     const body=node("span","chat-item-body"),top=node("span","chat-item-top"),bottom=node("span","chat-item-bottom");
     top.append(node("span","chat-item-title",title),timeNode(c.last_observed_at,"chat-item-time"));
     bottom.append(node("span","chat-item-preview",c.last_text?(c.last_sender?c.last_sender+": ":"")+c.last_text:tr(c.messages?"Media or service message":"No messages saved yet")));
@@ -2668,10 +2713,11 @@ function renderChatsList(){
     body.append(top,bottom,badges);row.append(avatarNode(c.chat_id,title),body);
     row.setAttribute("aria-pressed",String(c.chat_id===state.chat));
     row.addEventListener("click",()=>openChat(c.chat_id).catch(e=>toast(e.message,true)));
-    list.append(row);
+    if(existing){existing.replaceChildren(...row.childNodes);existing.className=row.className;existing.setAttribute('aria-pressed',row.getAttribute('aria-pressed'));existing.renderKey=key;rows.push(existing);}else rows.push(row);
   }
-  if(!state.chats.length)list.append(node("p","hint chats-none",tr("No chats chosen yet.")));
-  else if(!list.children.length)list.append(node("p","hint chats-none",tr("No chats match your search.")));
+  if(!state.chats.length)rows.push(node("p","hint chats-none",tr("No chats chosen yet.")));
+  else if(!rows.length)rows.push(node("p","hint chats-none",tr("No chats match your search.")));
+  placeChildren(list,rows);
 }
 $("chat-search").addEventListener("input",renderChatsList);
 $("chat-search").addEventListener("keydown",e=>{if(e.key==="Escape"){$("chat-search").value="";renderChatsList();}});
@@ -2761,6 +2807,10 @@ function renderChat(){
 function renderChatStatus(){
   if(state.view!=='chats')return;
   const box=$("chat-status"),s=state.status,info=state.chatInfo;if(!info||!s||$("chat-main").hidden)return;
+  const current=s.collector,key=JSON.stringify([state.workspaceRevision,chatGeneration,info.enabled,s.demo,s.chats_limited,state.me?.permissions,
+    current.has_session,current.running,current.connected,current.storage_low,current.storage_low&&current.disk_free_bytes,
+    modeSummary(s),recheckText(current),state.chatFilter,state.chatAuthor,state.chatProfile,exportRunning()]);
+  if(box.renderKey===key)return;box.renderKey=key;
   const focusedFilter=box.contains(document.activeElement)?document.activeElement.dataset.chatFilter:null;
   const c=s.collector,contextOpen=!!box.querySelector(".chat-context[open]");box.replaceChildren();
   const state_=node("div","chat-state"),say=(cls,text)=>{state_.className="chat-state "+cls;const t=node("span","",text);t.title=text;state_.append(t);};
@@ -2772,7 +2822,7 @@ function renderChatStatus(){
   else if(c.storage_low)say("warn",tr("Observing, but the disk is almost full ({size} free): photos & files are paused until space is freed. Messages are still saved.",{size:humanSize(c.disk_free_bytes)}));
   else say(c.connected?"ok":"warn",c.connected?tr("Observing — new messages, edits and deletions are saved as they happen.")+recheckText(c):tr("Reconnecting to Telegram — missed changes are requested again once connected."));
   const mode=node("div","chat-mode"),summary=node("span","",modeSummary(s));summary.title=summary.textContent;mode.append(summary);
-  if(!s.demo&&viewAllowed("sources")){const change=node("button","text-link",tr("Change"));change.type="button";change.addEventListener("click",()=>{navigate("sources");$("source-options").open=true;$("source-options").scrollIntoView({block:"start"});});mode.append(change);}
+  if(!s.demo&&viewAllowed("sources")){const change=node("button","text-link",tr("Change"));change.type="button";change.addEventListener("click",()=>busy(change,async()=>{await navigate("sources");sourcesView?.showTab('recording');$("capture-form").scrollIntoView({block:"start"});}));mode.append(change);}
   const filters=node("div","chat-filters");filters.setAttribute("role","group");filters.setAttribute("aria-label",tr("Show messages"));
   for(const [key,label] of [["all",tr("All")],["deleted",tr("Deleted")],["edited",tr("Edited")],["people",tr("People")]]){
     const f=node("button","filter"+(state.chatFilter===key?" active":""),label);f.type="button";
@@ -2819,29 +2869,33 @@ function renderChatFeed(){
   const active=document.activeElement,focusRow=feed.contains(active)?active.closest(".msg")?.id:null;
   const focusSelector=active.matches("button.pill-edited")?"button.pill-edited":
     active.matches(".sender-details > summary")?".sender-details > summary":null;
-  feed.replaceChildren();
-  if(!chatReady){feed.append(viewState("loading",tr("Loading…")));return;}
+  const oldRows=new Map([...feed.querySelectorAll('.msg')].map(row=>[row.id,row])),days=new Map([...feed.querySelectorAll('.chat-day')].map(day=>[day.dataset.day,day])),next=[],replaced=new Set();
+  if(!chatReady){feed.replaceChildren(viewState("loading",tr("Loading…")));return;}
   const shown=state.chatMessages.filter(m=>(state.chatFilter==="all"||(state.chatFilter==="deleted"?m.deleted||m.missing:m.edited))
     &&(state.chatAuthor===null||m.sender?.id===state.chatAuthor));
-  if(state.chatNextBefore){const older=node("button","quiet chat-older",tr("Show older messages"));older.type="button";
-    older.addEventListener("click",()=>busy(older,()=>loadChatMessages("older")));feed.append(older);}
+  if(state.chatNextBefore){let older=feed.querySelector('.chat-older');if(!older){older=node("button","quiet chat-older",tr("Show older messages"));older.type="button";
+    older.addEventListener("click",()=>busy(older,()=>loadChatMessages("older")));}next.push(older);}
   if(!shown.length){
     const filtered=state.chatFilter!=="all"||state.chatAuthor!==null;
     const empty=filtered?viewState("filtered-empty",tr("No messages match these filters"),tr(state.chatNextBefore?"Older messages are not loaded yet — use “Show older messages”.":"Try another filter or show all saved messages."),tr("Clear filters"),()=>{state.chatFilter="all";state.chatAuthor=null;renderChatStatus();renderChatFeed();}):
       viewState("empty",tr("No messages saved for this chat yet"),tr(s.demo?"This demo chat has no messages.":"Load recent messages from Telegram to see the conversation. Keep observation on to catch new messages, edits and deletions."),tr("Load last 100 messages"),!s.demo&&s.collector.has_session&&info.enabled?b=>loadHistory(b,100):null);
     empty.classList.add("chat-feed-empty");
-    feed.append(empty);return;
+    next.push(empty);placeChildren(feed,next);return;
   }
   const byId=new Map(state.chatMessages.map(m=>[m.message_id,m]));
   let lastDay=null,lastSender=null,lastTime=0;
   for(const m of shown){
     const when=m.sent_at||m.versions[0]?.observed_at||m.deleted_observed_at,day=panelTime.dayKey(when);
-    if(day!==lastDay){feed.append(node("div","chat-day",fmtDay(when)));lastDay=day;lastSender=null;}
-    if(m.service_action){const service=node("div","chat-service",senderName(m)+" "+serviceText(m.service_action)+" · ");service.append(timeNode(when));feed.append(service);lastSender=null;continue;}
+    if(day!==lastDay){const chip=days.get(day)||node("div","chat-day",fmtDay(when));chip.dataset.day=day;next.push(chip);lastDay=day;lastSender=null;}
+    if(m.service_action){const service=node("div","chat-service",senderName(m)+" "+serviceText(m.service_action)+" · ");service.append(timeNode(when));next.push(service);lastSender=null;continue;}
     const sid=m.sender?.id??null,t=when?new Date(when).getTime():0,grouped=sid!==null&&sid===lastSender&&t>=lastTime&&t-lastTime<300000;
-    lastSender=sid;lastTime=t;feed.append(messageRow(m,grouped,byId));
+    lastSender=sid;lastTime=t;
+    const old=oldRows.get('msg-'+m.message_id),key=JSON.stringify([chatGeneration,m,grouped,m.reply_to&&byId.get(m.reply_to),may('interact'),s.demo]);
+    if(old?.renderKey===key)next.push(old);else{const row=messageRow(m,grouped,byId);row.renderKey=key;next.push(row);replaced.add(row.id);}
   }
+  placeChildren(feed,next);
   for(const row of feed.querySelectorAll(".msg")){
+    if(!replaced.has(row.id))continue;
     const previous=expanded.get(row.id);if(!previous)continue;
     if(previous.versions)row.querySelector("button.pill-edited")?.click();
     if(previous.author&&row.querySelector(".sender-details"))row.querySelector(".sender-details").open=true;
@@ -2884,16 +2938,19 @@ function messageRow(m,grouped,byId){
       composeReply=m.message_id;renderComposer();$("chat-message").focus();});meta.append(reply);}
   bubble.append(meta);row.append(bubble);return row;
 }
+let peopleRequest=0;
 async function renderPeople(feed){
-  const id=state.chat,generation=chatGeneration,result=await json("chats/"+encodeURIComponent(id)+"/authors");
-  if(id!==state.chat||generation!==chatGeneration||state.chatFilter!=="people")return;
-  feed.replaceChildren();
+  const id=state.chat,generation=chatGeneration,request=++peopleRequest,result=await json("chats/"+encodeURIComponent(id)+"/authors",undefined,viewOptions('chats'));
+  if(request!==peopleRequest||state.view!=='chats'||id!==state.chat||generation!==chatGeneration||state.chatFilter!=="people")return;
+  const old=feed.querySelector('.people'),profiled=(state.status.dossiers||[]).includes(id),key=JSON.stringify([result,profiled]);
+  if(old?.renderKey===key&&old.chat===id){feed.querySelector('.refresh-notice')?.remove();return;}
   const box=node("div","people");
+  box.chat=id;box.profiled=profiled;box.renderKey=key;
   box.append(node("h3","",trn("{n} person with saved messages","{n} people with saved messages",result.authors.length)),
     node("p","hint",tr("Counted from messages saved in this workspace. Load history or export the chat for the full list. Names are the profile seen when the message was saved.")));
   if(result.deleted_without_author)box.append(node("p","hint",tr("{n} deleted message(s) were never saved, so their author is unknown.",{n:result.deleted_without_author})));
-  const profiled=(state.status.dossiers||[]).includes(id);
-  box.append(dossierBar(id,profiled));
+  const keepBar=old?.chat===id&&old.profiled===profiled?old.querySelector('.dossier-bar'):null;
+  if(!keepBar)box.append(dossierBar(id,profiled));
   const table=node("table","people-table"),head=node("tr");
   [tr("Person"),tr("Messages"),tr("Deleted"),tr("Edited"),tr("First"),tr("Last")].forEach((h,i)=>head.append(node("th",i>0&&i<4?"num":"",h)));
   const thead=node("thead");thead.append(head);table.append(thead);
@@ -2912,7 +2969,9 @@ async function renderPeople(feed){
       row.addEventListener("click",open);row.addEventListener("keydown",e=>{if(e.key==="Enter")open();});}
     body.append(row);
   }
-  table.append(body);box.append(table);feed.append(box);
+  table.append(body);box.append(table);
+  if(keepBar){placeChildren(old,[...box.children].filter(child=>child!==table).concat(keepBar,table));old.renderKey=key;feed.querySelector('.refresh-notice')?.remove();}
+  else feed.replaceChildren(box);
 }
 
 function dossierBar(chat,profiled){
@@ -2968,9 +3027,9 @@ function factSection(title,items,describe=item=>String(item.value)){
   section.append(list);return section;
 }
 async function openDossier(personId){
-  const generation=chatGeneration,revision=state.workspaceRevision;
+  const generation=chatGeneration,revision=state.workspaceRevision,context=viewContexts.get('chats');
   const value=await dossierData(state.chat),statement=value.statement;
-  if(generation!==chatGeneration||revision!==state.workspaceRevision)return;
+  if(generation!==chatGeneration||revision!==state.workspaceRevision||state.view!=='chats'||context?.signal.aborted)return;
   const person=statement.people.find(p=>p.id===personId);
   if(!person)throw new Error(tr("No profile for this person: they have no saved message in this chat."));
   const nameOf=id=>{const other=statement.people.find(p=>p.id===id);return other?.names.at(-1)?.value||tr("User {id}",{id});};
@@ -3444,10 +3503,12 @@ function accessSettings(){
 function sessionOwner(s){return s.admin?tr("Main administrator"):s.label;}
 function renderAccess(){
   const a=state.access;if(!a)return;
-  const list=$("access-list");list.replaceChildren();
-  if(!a.grants.length)list.append(node("p","hint",tr("No access issued yet. Only the panel token opens this panel.")));
-  for(const g of a.grants){
+  const list=$("access-list"),grants=new Map([...list.children].map(row=>[row.dataset.id,row])),grantRows=[];
+  if(!a.grants.length)grantRows.push(list.querySelector('p.hint')||node("p","hint",tr("No access issued yet. Only the panel token opens this panel.")));
+  for(const value of a.grants){
+    const old=grants.get(value.id),g=old?Object.assign(old.record,value):value;
     const row=node("div","access-row"),info=node("div"),actions=node("div","access-actions");
+    row.dataset.id=g.id;row.record=g;
     const condition=g.expired?tr("expired"):g.used_up?tr("used up"):trn("{n} open session","{n} open sessions",g.sessions);
     const last=g.last_login_at?" · "+tr("last sign-in {time} from {address}",{time:formatTime(g.last_login_at),address:g.last_address}):"";
     info.append(node("h3","",g.label+" · "+condition),node("p","",accessScope(g)),
@@ -3456,25 +3517,32 @@ function renderAccess(){
     edit.addEventListener("click",()=>{state.accessEdit=g;show("access-new",false);renderAccessForm(g);$("access-form").scrollIntoView({block:"start"});});
     revoke.addEventListener("click",()=>busy(revoke,async()=>{
       if(!window.confirm(tr("Revoke the access of \"{name}\"? Its open sessions end at once.",{name:g.label})))return;
+      accessLoadSerial++;
       state.access=await json("access/grants/"+encodeURIComponent(g.id),undefined,{root:true,method:"DELETE"});
       if(state.accessEdit?.id===g.id){state.accessEdit=null;renderAccessForm(null);}
       renderAccess();
     }));
-    actions.append(edit,revoke);row.append(info,actions);list.append(row);
+    actions.append(edit,revoke);row.append(info,actions);
+    if(old){if(old.firstElementChild.outerHTML!==info.outerHTML)old.firstElementChild.replaceWith(info);grantRows.push(old);}else grantRows.push(row);
   }
-  const sessions=$("access-sessions-list");sessions.replaceChildren();
-  if(!a.sessions.length)sessions.append(node("p","hint",tr("No open sessions.")));
-  for(const s of a.sessions){
+  placeChildren(list,grantRows);
+  const sessions=$("access-sessions-list"),existing=new Map([...sessions.children].map(row=>[row.dataset.id,row])),sessionRows=[];
+  if(!a.sessions.length)sessionRows.push(sessions.querySelector('p.hint')||node("p","hint",tr("No open sessions.")));
+  for(const value of a.sessions){
+    const old=existing.get(value.id),s=old?Object.assign(old.record,value):value;
     const row=node("div","access-row"),info=node("div"),end=node("button","quiet",tr("End session"));
+    row.dataset.id=s.id;row.record=s;
     info.append(node("h3","",sessionOwner(s)+(s.current?" · "+tr("this browser"):"")),
       node("p","",[s.address,tr("since {time}",{time:formatTime(s.started_at)}),
         tr("last activity {time}",{time:formatTime(s.last_seen_at)}),trn("{n} request","{n} requests",s.requests)].join(" · ")),
       node("p","hint",s.agent.slice(0,120)));
     end.addEventListener("click",()=>busy(end,async()=>{
+      accessLoadSerial++;
       state.access=await json("access/sessions/"+encodeURIComponent(s.id),undefined,{root:true,method:"DELETE"});renderAccess();
     }));
-    row.append(info,end);sessions.append(row);
+    row.append(info,end);if(old){if(old.firstElementChild.outerHTML!==info.outerHTML)old.firstElementChild.replaceWith(info);sessionRows.push(old);}else sessionRows.push(row);
   }
+  placeChildren(sessions,sessionRows);
 }
 async function loadConsole(){
   const r=await json("access/console?after="+state.consoleAfter,undefined,{root:true}),pre=$("access-console");
@@ -3488,15 +3556,20 @@ async function loadConsole(){
   state.consoleAfter=r.last;
   if(r.lines.length&&$("console-follow").checked)pre.scrollTop=pre.scrollHeight;
 }
+let accessFormReady=false,adminLimitsReady=false,adminLimitsDirty=false,accessLoadSerial=0;
 async function loadAccess(quiet=false){
   if(!state.me?.admin)return;
-  state.access=await json("access",undefined,{root:true,...viewOptions('access')});
-  if(state.view!=='access')return;
-  if(!quiet){
-    renderAccessForm(state.accessEdit);
+  // Build a complete new-access form before the request yields; later responses only update saved data.
+  if(!accessFormReady){renderAccessForm(state.accessEdit);accessFormReady=true;}
+  if(!adminLimitsReady)$("access-admin-form").inert=true;
+  const serial=++accessLoadSerial,result=await json("access",undefined,{root:true,...viewOptions('access')});
+  if(serial!==accessLoadSerial||state.view!=='access')return;
+  state.access=result;
+  if(!adminLimitsDirty){
     $("admin-sessions").value=state.access.admin.max_sessions;$("admin-on-limit").value=state.access.admin.on_limit;
     $("admin-idle").value=state.access.admin.session_minutes;
   }
+  adminLimitsReady=true;$("access-admin-form").inert=false;
   renderAccess();
   await loadConsole();
 }
@@ -3504,7 +3577,9 @@ $("access-refresh").addEventListener("click",e=>busy(e.currentTarget,()=>loadAcc
 $("access-all").addEventListener("change",()=>$("access-workspaces").querySelectorAll("input,select")
   .forEach(n=>n.disabled=$("access-all").checked));
 $("access-cancel").addEventListener("click",()=>{state.accessEdit=null;renderAccessForm(null);});
+for(const event of ['input','change'])$("access-admin-form").addEventListener(event,()=>{adminLimitsDirty=true;});
 $("access-form").addEventListener("submit",event=>{event.preventDefault();busy(event.submitter,async()=>{
+  accessLoadSerial++;
   const settings=accessSettings(),edit=state.accessEdit;
   if(edit){
     state.access=await json("access/grants/"+encodeURIComponent(edit.id),settings,{root:true,method:"PATCH"});
@@ -3519,9 +3594,11 @@ $("access-copy").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   await navigator.clipboard.writeText($("access-token").textContent);toast(tr("Token copied."));
 }));
 $("access-admin-form").addEventListener("submit",event=>{event.preventDefault();busy(event.submitter,async()=>{
+  if(!adminLimitsReady)return;
+  accessLoadSerial++;
   state.access=await json("access/admin",{max_sessions:Number($("admin-sessions").value),on_limit:$("admin-on-limit").value,
     session_minutes:Number($("admin-idle").value)},{root:true});
-  renderAccess();toast(tr("Limits saved."));
+  adminLimitsDirty=false;renderAccess();toast(tr("Limits saved."));
 });});
 let notifyTick=0,pollRevision=null;
 async function pollWorkspace(){

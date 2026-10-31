@@ -31,6 +31,7 @@ export function createResponsiveShell({node, icon, tr}) {
     } else {
       sidebar.removeAttribute("role"); sidebar.removeAttribute("aria-modal");
       if (restore && previousFocus?.isConnected && !previousFocus.closest("[inert]")) previousFocus.focus();
+      else if (mobile.matches && sidebar.contains(document.activeElement)) toggle.focus({preventScroll: true});
       previousFocus = null;
     }
   }
