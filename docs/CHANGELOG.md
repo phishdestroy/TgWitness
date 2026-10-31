@@ -1,8 +1,32 @@
 # Changelog
 
-## Unreleased
+## 0.7.0 preview · 31 October 2026
 
-## 0.7.0 · 30 October 2026
+- OpenTimestamps summaries now parse bounded operation trees and attestation
+  payloads, rejecting truncated, malformed and excessive proofs. Marker bytes in
+  arguments or opaque payloads cannot produce a Bitcoin status. Parsed Bitcoin
+  attestations are explicitly `bitcoin-unverified`; run `ots verify` for validation.
+- Source releases include the exact public TSA fixtures used by the evidence tests.
+  The synthetic calendar fixture now carries correct serialized URI lengths.
+- Added the [delivery roadmap](ROADMAP.md), separating release acceptance, the
+  external controller prototype and future independent-observer integrations.
+- Evidence verification now reports the exact prefix covered by witness checkpoints and
+  any unwitnessed tail. `--require-witness` requires a pinned witness and a matching final
+  exported record; requested channel checks also reject missing claimed posts.
+- Cloud journal checks reject missing startup records or expected collector keys and
+  report unavailable host measurements. Deployment reports distinguish configuration
+  checks from independent runtime attestation; supplied channel dates are not authenticated
+  by witness signatures.
+- Added access and permissions guides with reviewer/analyst examples, session limits,
+  IP restrictions and revocation. Updated routing guides for automatic MTProxy,
+  IP modes and external requests; connected the README, Wiki, website and bundled guide.
+- Expanded the panel and complete documentation site to 25 languages, including German,
+  French, Italian, Japanese, Korean and Hebrew. Language switches preserve the current
+  documentation page; the static demo includes the new panel dictionaries. Existing
+  Amharic guides and notices remain available separately.
+- Site publication now rejects missing translations in a full-site language.
+
+### Initial preview contents · 30 October 2026
 
 - First GitHub release, with the Windows portable package, the wheel and the source archive.
   README and the website link the portable package directly: extract, double-click `TgWitness.cmd`.

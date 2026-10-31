@@ -11,7 +11,7 @@ from tgwitness.app import create_app
 from tgwitness.network import NetworkConfig
 from test_collector import FakeClient
 
-DIRECT = NetworkConfig()
+DIRECT = NetworkConfig(kind="direct")
 
 
 class Receiver:
@@ -173,6 +173,11 @@ def test_api_keeps_destinations_write_only_and_masked(tmp_path, monkeypatch, rec
         secret_url = "json://user:supersecret@127.0.0.1:%d/hook" % receiver.port
         assert c.post("/api/alerts", json={"enabled": True, "urls": ["notaservice://x"]}).status_code == 422
         assert c.post("/api/alerts", json={"enabled": True, "urls": []}).status_code == 422
+        refused = c.post("/api/alerts", json={"enabled": True, "daily": False, "urls": [secret_url]})
+        # Hide IP, the default, sends nothing outside Telegram without a proxy set for it.
+        assert refused.status_code == 422 and "Hide IP" in refused.text
+        assert c.post("/api/network/policy", json={"exposure": "tunnel", "outside_enabled": True}).status_code == 200
+        assert c.post("/api/network", json={"kind": "direct"}).status_code == 200
         saved = c.post("/api/alerts", json={"enabled": True, "daily": False, "urls": [secret_url]})
         assert saved.status_code == 200
         assert len(saved.json()["destinations"]) == 1
@@ -188,3 +193,18 @@ def test_api_keeps_destinations_write_only_and_masked(tmp_path, monkeypatch, rec
         assert len(c.post("/api/alerts", json={"enabled": True, "daily": False, "urls": [secret_url]}).json()["destinations"]) == 1
         assert c.post("/api/alerts/test").json()["sent"] == 1
         assert receiver.requests[-1]["body"]["message"] == "Notifications from this workspace reach this destination."
+
+
+def test_notifications_never_reach_this_machine_or_its_network(monkeypatch, receiver):
+    monkeypatch.delenv("TGWITNESS_ALLOW_PRIVATE_DESTINATIONS", raising=False)
+    for url in (receiver.url(), "json://localhost:%d/hook" % receiver.port, "json://169.254.169.254/latest"):
+        result = alerts.deliver([url], "Title", "Body", DIRECT)
+        assert result["sent"] == 0 and "public internet" in result["error"], (url, result)
+    # The proxy itself may be local when the main administrator set it (local_proxy).
+    proxy = NetworkConfig(kind="http", host="127.0.0.1", port=receiver.port, local_proxy=True)
+    result = alerts.deliver(["json://169.254.169.254/latest"], "Title", "Body", proxy)
+    assert result["sent"] == 0 and "public internet" in result["error"]
+    assert receiver.requests == []
+    # The guard is only on while sending: another connection to a local address afterwards still works.
+    import requests
+    assert requests.post("http://127.0.0.1:%d/after" % receiver.port, json={}).status_code == 200

@@ -39,8 +39,10 @@ import zipfile
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
-from cryptography.hazmat.primitives import serialization
+from cryptography.fernet import Fernet, InvalidToken
+from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey, Ed25519PublicKey
+from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 
 from . import __version__
 from .evidence import producer
@@ -49,6 +51,7 @@ from .network import NetworkConfig
 from .security import InstanceLock, private_write
 from .store import Store, canonical, utcnow
 from .verify import fingerprint, is_format, post_statement, post_token, verify_events, verify_capture
+from .verify import verify_continuity
 
 DEFAULT_INTERVAL = 10
 TIMEOUT = 30
@@ -64,18 +67,48 @@ OPTIONS = ("collector", "token", "token_file", "bot_token", "bot_token_file", "c
            "post", "title", "texts", "collector_fingerprint", "proxy", "bot_api", "data_dir")
 
 
+def key_cipher(root):
+    """Seals the witness key as the collector's vault seals its own: with TGWITNESS_VAULT_KEY_FILE's master
+    key when set (kept away from this directory, the protective form), else a local key file beside it."""
+    external = os.environ.get("TGWITNESS_VAULT_KEY_FILE")
+    if external:
+        source = Path(external).resolve(strict=True)
+        if source.is_relative_to(Path(root).resolve()) or source.stat().st_size > 128:
+            raise RuntimeError("Provide a small master-key file outside the witness data directory.")
+        master = source.read_bytes().strip()
+        Fernet(master)
+        derived = HKDF(algorithm=hashes.SHA256(), length=32, salt=None,
+                       info=b"TgWitness witness key v1").derive(base64.urlsafe_b64decode(master))
+        return Fernet(base64.urlsafe_b64encode(derived))
+    path = Path(root) / "witness-vault.key"
+    if not path.exists():
+        if (Path(root) / "witness-key.enc").exists():
+            raise RuntimeError("The witness key file is sealed with a key that is missing here. Restore "
+                               "witness-vault.key or set TGWITNESS_VAULT_KEY_FILE; a new key is never made over it.")
+        private_write(path, Fernet.generate_key())
+    return Fernet(path.read_bytes())
+
+
 class WitnessKey:
-    """The witness's own signing key, kept in its data directory only."""
+    """The witness's own signing key, encrypted in its data directory (key_cipher)."""
     def __init__(self, root):
         root = Path(root)
         root.mkdir(parents=True, exist_ok=True, mode=0o700)
-        path = root / "witness-key.json"
-        if not path.exists():
+        sealed, plain = root / "witness-key.enc", root / "witness-key.json"
+        cipher = key_cipher(root)
+        if plain.exists() and not sealed.exists():  # kept in the clear by earlier versions
+            private_write(sealed, cipher.encrypt(plain.read_bytes()))
+            plain.write_bytes(b"\0" * plain.stat().st_size)
+            plain.unlink()
+        if not sealed.exists():
             key = Ed25519PrivateKey.generate()
-            private_write(path, json.dumps({"format": "tgwitness-witness-key-v1", "private_key": base64.b64encode(
-                key.private_bytes(serialization.Encoding.Raw, serialization.PrivateFormat.Raw,
-                                  serialization.NoEncryption())).decode()}).encode())
-        data = json.loads(path.read_bytes())
+            private_write(sealed, cipher.encrypt(json.dumps({"format": "tgwitness-witness-key-v1", "private_key":
+                base64.b64encode(key.private_bytes(serialization.Encoding.Raw, serialization.PrivateFormat.Raw,
+                                                   serialization.NoEncryption())).decode()}).encode()))
+        try:
+            data = json.loads(cipher.decrypt(sealed.read_bytes()))
+        except InvalidToken:
+            raise RuntimeError("The witness key cannot be opened with this key; restore the original key file") from None
         self.signer = Ed25519PrivateKey.from_private_bytes(base64.b64decode(data["private_key"]))
         self.public_key = base64.b64encode(self.signer.public_key().public_bytes(
             serialization.Encoding.Raw, serialization.PublicFormat.Raw)).decode()
@@ -91,7 +124,7 @@ class InvalidAnswer(ValueError):
 def proxy_config(url):
     """NetworkConfig from socks5://user:pass@host:port or http://host:port; direct when empty."""
     if not url:
-        return NetworkConfig()
+        return NetworkConfig(kind="direct")
     try:
         if not isinstance(url, str) or len(url) > 2048:
             raise ValueError
@@ -158,7 +191,7 @@ class Witness:
         self.channel, self.bot_token, self.bot_api = channel, bot_token, bot_api.rstrip("/")
         self.interval, self.timeout = interval, timeout
         self.post, self.title, self.texts = post, title, {**TEXTS, **(texts or {})}
-        self.network = network or NetworkConfig()
+        self.network = network or NetworkConfig(kind="direct")
         if pinned and self.store.get_setting("collector_fingerprint") not in (None, pinned):
             self.close()
             raise ValueError("This witness already follows another collector key. Use a new data directory.")
@@ -175,20 +208,29 @@ class Witness:
 
     async def http_fetch(self):
         challenge = secrets.token_hex(16)
+        previous = self.store.get_setting("last_seen") or {"event_count": 0}
         _, _, data = await request("GET", self.collector + "/api/witness/head", self.network, {
             "Authorization": "Bearer " + self.token, "Accept": "application/json",
             "X-TgWitness-Witness": self.fingerprint, "X-TgWitness-Interval": str(self.interval),
-            "X-TgWitness-Challenge": challenge},
-            timeout=self.timeout, limit=64 * 1024)
+            "X-TgWitness-Challenge": challenge,
+            "X-TgWitness-Consistency-From": str(previous["event_count"])},
+            timeout=self.timeout, limit=64 * 1024, private=True)  # its operator chose the collector, often next door
         answer = json.loads(data)
-        if answer.get("capture") and answer["capture"].get("statement", {}).get("challenge") != challenge:
+        capture = answer.get("capture") if isinstance(answer, dict) else None
+        statement = capture.get("statement") if isinstance(capture, dict) else None
+        if not isinstance(statement, dict):
+            raise InvalidAnswer("collector did not provide a signed freshness proof; update the collector")
+        if statement.get("challenge") != challenge:
             raise InvalidAnswer("capture answer did not echo this check's challenge")
+        if not isinstance(answer.get("continuity"), dict):
+            raise InvalidAnswer("collector did not provide a journal continuity proof; update the collector")
         return answer
 
     async def bot_send(self, text):
         body = json.dumps({"chat_id": self.channel, "text": text, "disable_web_page_preview": True}).encode()
         _, _, data = await request("POST", self.bot_api + "/bot" + self.bot_token + "/sendMessage", self.network,
-                                   {"Content-Type": "application/json"}, body, timeout=self.timeout, limit=256 * 1024)
+                                   {"Content-Type": "application/json"}, body, timeout=self.timeout, limit=256 * 1024,
+                                   private=True)  # a self-hosted Bot API server may be local
         answer = json.loads(data)
         if not answer.get("ok"):
             raise InvalidAnswer(answer.get("description") or "The Bot API refused the message.")
@@ -204,7 +246,9 @@ class Witness:
             Ed25519PublicKey.from_public_bytes(base64.b64decode(statement["public_key"], validate=True)).verify(
                 base64.b64decode(value["signature"], validate=True), canonical(statement))
             count, head = statement["event_count"], statement["head_hash"]
-            if type(count) is not int or count < 0 or not isinstance(head, str) or len(head) != 64:
+            if (type(count) is not int or count < 0 or not isinstance(head, str)
+                    or re.fullmatch(r"[0-9a-f]{64}", head) is None
+                    or (count == 0) != (head == "0" * 64)):
                 raise InvalidAnswer("malformed record count or head hash")
         except InvalidAnswer:
             raise
@@ -230,12 +274,30 @@ class Witness:
                         raise ValueError("capture counters decreased in a growing journal")
             except Exception as exc:
                 raise InvalidAnswer("capture proof failed verification: " + type(exc).__name__) from None
+        continuity = answer.get("continuity")
+        tree = self.store.get_setting("last_tree")
+        committed = None
+        if status == "ok":
+            if tree is not None and (last is None or any(tree[k] != last[k] for k in ("event_count", "head_hash"))):
+                raise InvalidAnswer("retained journal and tree boundaries differ")
+            if tree is not None and continuity is None:
+                raise InvalidAnswer("collector removed the required journal continuity proof")
+            if continuity is not None:
+                try:
+                    if capture is None:
+                        raise ValueError("continuity requires a fresh capture proof")
+                    previous = {**last, **({"root": tree["root"]} if tree else {})} if last else None
+                    committed = verify_continuity(continuity, statement, previous, captured["challenge"])
+                except Exception as exc:
+                    raise InvalidAnswer("journal continuity failed verification: " + type(exc).__name__) from None
         if status == "ok":
             if self.pinned is None:
                 self.pinned = key  # Trust on first fully validated answer, unless explicitly pinned.
                 self.store.set_setting("collector_fingerprint", key)
             self.store.set_setting("last_seen", {"event_count": count, "head_hash": head})
             self.store.set_setting("last_capture_counts", captured["counts"] if capture is not None else None)
+            if committed is not None:
+                self.store.set_setting("last_tree", {"root": committed["root"], "event_count": count, "head_hash": head})
         payload = {"status": status, "collector": self.host, "collector_fingerprint": key,
                 "pinned_fingerprint": self.pinned, "event_count": count, "head_hash": head,
                 "checkpoint_created_at": statement.get("created_at"),
@@ -243,6 +305,8 @@ class Witness:
         if capture is not None:
             payload.update(checkpoint={"statement": statement, "signature": value["signature"], "fingerprint": key},
                            capture=capture, capture_delta=delta)
+        if committed is not None:
+            payload.update(continuity=continuity, continuity_status="extended" if tree is not None else "baseline")
         return payload
 
     def post_text(self, event):
@@ -288,9 +352,11 @@ class Witness:
             with self.store.transaction():
                 event = self.store.append("witness.anchor", self.check(answer))
         except InvalidAnswer as exc:
+            self.pinned = self.store.get_setting("collector_fingerprint")
             event = self.store.append("witness.anchor", {"status": "invalid", "collector": self.host,
                                                          "collector_fingerprint": None, "error": describe(exc)})
         except Exception as exc:
+            self.pinned = self.store.get_setting("collector_fingerprint")
             event = self.store.append("witness.no_response", {"collector": self.host, "error": describe(exc)})
         if self.send and self.worth_posting(event):
             try:

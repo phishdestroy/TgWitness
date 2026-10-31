@@ -29,6 +29,7 @@ The proxy and witness bot are separate options.
 | --- | --- | --- |
 | Try the interface | [Quick start](QUICKSTART.md#explore-the-interface) | Fictional conversations; no Telegram login |
 | Connect my account | [Account setup](ACCOUNTS.md) | A new test message in the journal |
+| Give a reviewer or analyst access | [Access and permissions](ACCESS.md) | Only the chosen accounts, chats and permitted actions |
 | Investigate across the whole account | [Complete investigation walkthrough](INVESTIGATION.md) | A source register, cited cross-chat timeline, people/file connections and verified evidence per workspace |
 | Choose a connection route | [Proxy settings](CONNECTION-SECURITY.md) | A successful Telegram connection check |
 | Share a verifiable record | [Export and verify](EVIDENCE.md#investigation-handoff) | Valid signatures and the expected key fingerprint |
@@ -53,6 +54,7 @@ For terminology, use the [glossary](wiki/Glossary.md).
 - [Evidence format and trust boundaries](EVIDENCE.md)
 - [Architecture](ARCHITECTURE.md)
 - [Security model and data handling](SECURITY-MODEL.md)
+- [Access scopes, permissions and sessions](ACCESS.md)
 - [Connection and secret storage](CONNECTION-SECURITY.md)
 - [Readiness and known limits](internal/READINESS.md)
 - [Live acceptance procedure](internal/LIVE_ACCEPTANCE.md)
@@ -61,7 +63,7 @@ For terminology, use the [glossary](wiki/Glossary.md).
 
 </details>
 
-The project also includes a documentation website in 13 languages, with light and dark
+The project also includes a documentation website in 25 languages, with light and dark
 themes and local search,
 animated message history, an interactive hash-chain sandbox, witness scenarios,
 a delivery chart, a complete investigation across channels, groups, private

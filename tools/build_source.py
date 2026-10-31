@@ -10,8 +10,22 @@ FILES = [
     "README.md", "docs/QUICKSTART.md", "LICENSE", "NOTICE", ".github/SECURITY.md", ".github/SUPPORT.md", ".github/CONTRIBUTING.md", "docs/CHANGELOG.md", "pyproject.toml",
     "start.py", "start.sh", "Start.cmd",
     "deploy/Dockerfile", "compose.yaml", "deploy/compose/compose.image.yaml", "deploy/compose/compose.https.yaml", "deploy/compose/compose.witness.yaml", "deploy/compose/compose.proof.yaml", "deploy/compose/compose.proxies.yaml",
-    ".gitignore", ".gitattributes", ".dockerignore", "deploy/env.example", "deploy/constraints.txt",
+    ".gitignore", ".gitattributes", ".dockerignore", "deploy/env.example", "deploy/constraints.txt", "deploy/requirements.lock", "deploy/build.lock",
 ]
+# A bounded service manifest: never recurse through node_modules, .dev.vars,
+# controller state, browser profiles or locally exported receipts.
+FILES.extend("services/witness-controller/" + name for name in (
+    ".gitignore", "README.md", "package.json", "package-lock.json", "wrangler.jsonc",
+    "src/dashboard.mjs", "src/engine.mjs", "src/protocol.mjs", "src/worker.mjs",
+    "test/actions.test.mjs", "test/engine.test.mjs", "test/helpers.mjs", "test/worker.test.mjs",
+    "tools/demo.mjs", "tools/local-keys.mjs", "tools/synthetic.mjs", "tools/verify.mjs",
+))
+# Public timestamp responses for the synthetic tests/tsa/data.bin digest. Keep
+# this exact allowlist: arbitrary binary fixtures and account data stay excluded.
+FILES.extend("tests/tsa/" + name for name in (
+    "data.bin", "dfn.tsq", "dfn.tsr", "digicert-http.tsq", "digicert-http.tsr",
+    "freetsa.tsq", "freetsa.tsr", "sectigo.tsq", "sectigo.tsr",
+))
 DIRECTORIES = {
     "tgwitness": {".md", ".py", ".html", ".css", ".js", ".svg", ".json"},
     "docs": {".md", ".png", ".webp", ".svg", ".txt", ".gif", ".mp4"}, "tests": {".py", ".md"}, "tools": {".py", ".md"},
@@ -20,7 +34,8 @@ DIRECTORIES = {
     ".github": {".md", ".yml", ".yaml"},
     "website": {".md", ".html", ".css", ".js", ".py", ".json"},
 }
-LANGUAGES = ("ru", "uk", "es", "pt", "tr", "ar", "fa", "ur", "hi", "id", "vi", "zh")
+LANGUAGES = ("ru", "uk", "es", "pt", "tr", "ar", "fa", "ur", "hi", "id", "vi", "zh",
+             "fr", "de", "it", "uz", "ko", "zh-Hant", "ms", "pl", "ja", "th", "he", "bn")
 GUIDE_LANGUAGES = ("fr", "de", "it", "uz", "ko", "zh-Hant", "ms", "pl", "ja", "th", "he", "am", "bn")
 PACKAGE_JSON = {"english_fallbacks.json", "public_proxies.json", *("locales/" + language + ".json" for language in LANGUAGES),
                 "guide_locales/keys.json", *("guide_locales/" + language + ".json" for language in GUIDE_LANGUAGES)}

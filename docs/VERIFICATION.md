@@ -74,6 +74,8 @@ records the earlier baseline.
 
 ## Built-in public MTProxy lists · 29 October 2026
 
+This is the historical test record of the original manual-selection build. For the current automatic pool and IP modes, see [connection settings](CONNECTION-SECURITY.md#ip-modes). Counts and unsupported features below belong to that tested revision.
+
 Added a bundled public snapshot and explicit HTTPS refresh from SoliSpirit/mtproto and
 zakky8/mtproto-proxy-pro. On this host, the application downloader fetched both feeds
 successfully on 29 October 2026 at 12:58 UTC: **118 unique compatible endpoints** after
@@ -590,8 +592,10 @@ The source tests used FastAPI 0.159.1, Uvicorn 0.54.0, Telethon 1.45.0,
 cryptography 50.0.2, pytest 9.1.1, and Playwright 1.62.0.
 The pinned runtime uses FastAPI 0.162.0, Starlette 1.10.0,
 Uvicorn 0.54.0, Telethon 1.45.0, and cryptography 50.0.2.
-deploy/constraints.txt records runtime version pins. This is not a package-hash lock or
-evidence of compatibility on every configured CI platform. Remote CI has not run.
+deploy/constraints.txt records runtime version pins; deploy/requirements.lock and
+deploy/build.lock add the SHA-256 of every package file, and Docker and high-assurance
+servers install only from them (pip --require-hashes). Neither is evidence of compatibility
+on every configured CI platform. Remote CI has not run.
 
 ## Synthetic local capacity measurement
 
