@@ -1,4 +1,4 @@
-"""Publication boundary checks: the Pages artifact must never include live data."""
+"""Keep live data out of the Pages build."""
 import shutil
 import json
 import re
