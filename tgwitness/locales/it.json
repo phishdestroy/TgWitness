@@ -2312,7 +2312,7 @@
 "one": "{n} richiesta",
 "other": "{n} richieste"
 },
-"{n} sign-in": "Accesso {n}",
+"{n} sign-in": "{n} accesso",
 "{n} sign-ins": {
 "one": "{n} accesso",
 "other": "{n} accessi"
@@ -3750,5 +3750,15 @@
 "other": "{n} spazi di lavoro hanno mantenuto la propria modalità IP durante l’osservazione."
 },
 "{n} workspace kept its IP mode while observing.": "{n} area di lavoro ha mantenuto la propria modalità IP durante l’osservazione.",
-"{n} account imported.": "{n} account importato."
+"{n} account imported.": "{n} account importato.",
+"Not collected by the attachment settings: {type}": "Non raccolto in base alle impostazioni degli allegati: {type}",
+"No file to download": "Nessun file da scaricare",
+"Download failed": "Download non riuscito",
+"Larger than the size limit": "Supera il limite di dimensione",
+"Size unknown or above the limit": "Dimensione sconosciuta o superiore al limite",
+"Telegram did not provide the file": "Telegram non ha fornito il file",
+"The downloaded size differs from the observed attachment": "La dimensione del file scaricato differisce da quella dell’allegato osservato",
+"The queued file differs from the signed observation": "Il file in coda differisce dall’osservazione firmata",
+"The saved copy of this file is damaged": "La copia salvata di questo file è danneggiata",
+"Telegram account not identified yet": "Account Telegram non ancora identificato"
 }

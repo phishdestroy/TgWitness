@@ -3750,5 +3750,15 @@
 "other": "{n} वर्कस्पेस ने निरीक्षण करते समय अपना IP मोड बनाए रखा।"
 },
 "{n} workspace kept its IP mode while observing.": "{n} वर्कस्पेस ने निरीक्षण करते समय अपना IP मोड बनाए रखा।",
-"{n} account imported.": "{n} खाता आयातित।"
+"{n} account imported.": "{n} खाता आयातित।",
+"Not collected by the attachment settings: {type}": "अटैचमेंट सेटिंग्स द्वारा एकत्र नहीं किया गया: {type}",
+"No file to download": "डाउनलोड करने के लिए कोई फ़ाइल नहीं",
+"Download failed": "डाउनलोड विफल",
+"Larger than the size limit": "आकार सीमा से बड़ा",
+"Size unknown or above the limit": "आकार अज्ञात या सीमा से अधिक",
+"Telegram did not provide the file": "टेलीग्राम ने फ़ाइल प्रदान नहीं की",
+"The downloaded size differs from the observed attachment": "डाउनलोड किया गया आकार देखे गए अटैचमेंट से भिन्न होता है",
+"The queued file differs from the signed observation": "कतारबद्ध फ़ाइल हस्ताक्षरित अवलोकन से भिन्न होती है",
+"The saved copy of this file is damaged": "इस फ़ाइल की सहेजी गई प्रति क्षतिग्रस्त है",
+"Telegram account not identified yet": "टेलीग्राम खाता अभी तक पहचाना नहीं गया है"
 }

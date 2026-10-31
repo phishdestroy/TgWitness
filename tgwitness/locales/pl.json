@@ -2340,11 +2340,11 @@
 "few": "{n} wnioski",
 "other": "{n} zgłoszenia"
 },
-"{n} sign-in": "Logowanie {n}",
+"{n} sign-in": "{n} logowanie",
 "{n} sign-ins": {
 "one": "{n} logowanie",
 "many": "{n} logowań",
-"few": "{n} opcje logowania",
+"few": "{n} logowania",
 "other": "{n} logowania"
 },
 "{workspace}: every chat": "{workspace}: każda rozmowa",
@@ -3798,5 +3798,15 @@
 "other": "{n} obszarów roboczych zachowało swój tryb IP podczas obserwacji."
 },
 "{n} workspace kept its IP mode while observing.": "{n} obszar roboczy zachował swój tryb IP podczas obserwacji.",
-"{n} account imported.": "Zaimportowano {n} konto."
+"{n} account imported.": "Zaimportowano {n} konto.",
+"Not collected by the attachment settings: {type}": "Nie zebrano zgodnie z ustawieniami załączników: {type}",
+"No file to download": "Brak pliku do pobrania",
+"Download failed": "Pobieranie nie powiodło się",
+"Larger than the size limit": "Pojemność przekracza limit",
+"Size unknown or above the limit": "Rozmiar nieznany lub przekracza limit",
+"Telegram did not provide the file": "Telegram nie udostępnił pliku",
+"The downloaded size differs from the observed attachment": "Rozmiar pobranego pliku różni się od rozmiaru zaobserwowanego załącznika",
+"The queued file differs from the signed observation": "Plik w kolejce różni się od podpisanej obserwacji",
+"The saved copy of this file is damaged": "Zapisana kopia tego pliku jest uszkodzona",
+"Telegram account not identified yet": "Konto Telegram nie zostało jeszcze zidentyfikowane"
 }

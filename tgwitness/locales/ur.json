@@ -2163,7 +2163,7 @@
 "new sign-ins refused at the limit": "نئی سائن ان درخواستیں حد پر مسترد کر دی گئی ہیں",
 "the oldest session ends at the limit": "سب سے پرانا سیشن حد پر ختم ہو جاتا ہے",
 "sign-ins: {used} of {max}": "سائن انز: {used} of {max}",
-"{n} sign-in": "{n} میں سائن ان",
+"{n} sign-in": "{n} سائن ان",
 "{n} sign-ins": {
 "one": "{n} سائن ان",
 "other": "{n} سائن ان"
@@ -3750,5 +3750,15 @@
 "other": "{n} ورک اسپیسز نے مشاہدے کے دوران اپنا IP موڈ برقرار رکھا۔"
 },
 "{n} workspace kept its IP mode while observing.": "{n} ورک اسپیس نے مشاہدہ کے دوران اپنا IP موڈ برقرار رکھا۔",
-"{n} account imported.": "{n} اکاؤنٹ درآمد کیا گیا۔"
+"{n} account imported.": "{n} اکاؤنٹ درآمد کیا گیا۔",
+"Not collected by the attachment settings: {type}": "ضمیمہ کی ترتیبات کے مطابق جمع نہیں کیا گیا: {type}",
+"No file to download": "ڈاؤن لوڈ کے لیے کوئی فائل نہیں",
+"Download failed": "ڈاؤن لوڈ ناکام",
+"Larger than the size limit": "سائز کی حد سے بڑا",
+"Size unknown or above the limit": "سائز نامعلوم یا حد سے زیادہ",
+"Telegram did not provide the file": "ٹیلیگرام نے فائل فراہم نہیں کی",
+"The downloaded size differs from the observed attachment": "ڈاؤن لوڈ شدہ سائز مشاہدہ شدہ اٹیچمنٹ سے مختلف ہے۔",
+"The queued file differs from the signed observation": "قطار میں شامل فائل دستخط شدہ مشاہدے سے مختلف ہوتی ہے۔",
+"The saved copy of this file is damaged": "اس فائل کی محفوظ شدہ کاپی خراب ہے",
+"Telegram account not identified yet": "ٹیلیگرام اکاؤنٹ ابھی تک شناخت نہیں ہوا"
 }

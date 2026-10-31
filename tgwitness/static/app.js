@@ -1119,6 +1119,18 @@ function excerpt(e) {
     case "interaction.result": return [p.status,p.answer?.message,p.answer?.url,p.error_type].filter(Boolean).join(" · ");
     case "account.authorized": return tr("Telegram account ID {id}",{id:p.account_id});
     case "account.signed_out": return tr("Telegram account ID {id}",{id:p.account_id})+(p.telegram_session_ended?"":" · "+tr("Telegram did not confirm the end of the session"))+failure;
+    case "media.skipped": {
+      const type=/^attachment type not collected by policy: (\w+)$/.exec(p.reason||"")?.[1];
+      if(type)return tr("Not collected by the attachment settings: {type}",{type:Object.fromEntries(mediaTypes)[type]||termText(type)});
+      if(p.reason==="media download disabled")return tr("Attachment downloads off");
+      if(p.reason==="authorized account identity unavailable")return tr("Telegram account not identified yet");
+      return String(p.reason||"").startsWith("metadata-only")?tr("No file to download"):p.reason||"";
+    }
+    case "media.failed": return p.reason==="download failed"?tr("Download failed")+failure:tr({above_limit:"Larger than the size limit",
+      unknown_size_or_above_limit:"Size unknown or above the limit",download_unavailable:"Telegram did not provide the file",
+      download_size_differs_from_observed_attachment:"The downloaded size differs from the observed attachment",
+      queue_descriptor_differs_from_signed_observation:"The queued file differs from the signed observation",
+      existing_content_addressed_file_is_corrupt:"The saved copy of this file is damaged"}[p.reason]||p.reason||"");
     case "target.changed": return (p.title||tr("Source"))+" · "+tr(p.enabled?"observed":"paused");
     case "capture.changed": return p.download_media ? tr("Attachments on · up to {n} MiB per file",{n:mediaLimit(p)}) : tr("Attachment downloads off");
     case "connection.retry": return tr("Attempt {n}",{n:p.attempt});

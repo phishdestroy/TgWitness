@@ -2,6 +2,7 @@ import asyncio
 import hashlib
 import json
 import logging
+import os
 import sqlite3
 from collections import defaultdict
 
@@ -9,11 +10,13 @@ import pytest
 from cryptography.fernet import Fernet, InvalidToken
 from fastapi.testclient import TestClient
 from pydantic import ValidationError
+from telethon.crypto.aesctr import AESModeCTR as PythonCTR
 from telethon.network.connection import ConnectionTcpFull, ConnectionTcpMTProxyRandomizedIntermediate
+from telethon.network.connection import tcpmtproxy, tcpobfuscated
 from telethon.sessions import StringSession
 
 from tgwitness.app import create_app
-from tgwitness.network import NetworkConfig
+from tgwitness.network import NetworkConfig, OpenSSLCTR
 from tgwitness.security import Vault
 from tgwitness.sessions import convert_telethon
 from test_collector import FakeClient, saved_session, CHAT
@@ -33,6 +36,28 @@ def test_route_validation_and_mtproxy_boundaries():
                    {"kind":"http", "host":"host", "secret":"a"*32}):
         with pytest.raises(ValidationError):
             NetworkConfig(**kwargs)
+
+
+def test_mtproxy_stream_is_ciphered_by_openssl_byte_for_byte_like_telethon(monkeypatch):
+    assert tcpmtproxy.AESModeCTR is OpenSSLCTR and tcpobfuscated.AESModeCTR is OpenSSLCTR
+    key, iv = os.urandom(32), os.urandom(8) + b"\xff" * 7 + b"\xfe"  # the counter carries past 64 bits
+    reference, fast = PythonCTR(key, iv), OpenSSLCTR(key, iv)
+    for size in (64, 1, 15, 16, 17, 255, 4096, 3, 70000):
+        chunk = os.urandom(size)
+        assert fast.encrypt(chunk) == reference.encrypt(chunk)
+        assert fast.decrypt(chunk) == reference.decrypt(chunk)
+
+    # The MTProxy header and the first frames, with the same random start as Telethon's own cipher.
+    start, frame = b"\x01" + os.urandom(63), os.urandom(1000)
+    monkeypatch.setattr(tcpmtproxy.os, "urandom", lambda n: start)
+    codec = ConnectionTcpMTProxyRandomizedIntermediate.packet_codec
+    secret = bytes.fromhex("dd" + "a1" * 16)
+    header, encryptor, decryptor = tcpmtproxy.MTProxyIO.init_header(secret, 2, codec)
+    monkeypatch.setattr(tcpmtproxy, "AESModeCTR", PythonCTR)
+    expected, python_encryptor, python_decryptor = tcpmtproxy.MTProxyIO.init_header(secret, 2, codec)
+    assert header == expected
+    assert encryptor.encrypt(frame) == python_encryptor.encrypt(frame)
+    assert decryptor.encrypt(frame) == python_decryptor.encrypt(frame)
 
 
 def test_route_survives_restart_isolated_and_redacted(tmp_path):

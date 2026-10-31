@@ -2189,12 +2189,12 @@
 "new sign-ins refused at the limit": "новые попытки входа отклонены в связи с достижением лимита",
 "the oldest session ends at the limit": "Самая старая сессия завершается по истечении установленного лимита",
 "sign-ins: {used} of {max}": "Количество входов: {used} из {max}",
-"{n} sign-in": "Вход {n}",
+"{n} sign-in": "{n} вход",
 "{n} sign-ins": {
-"one": "{n} вход в систему",
+"one": "{n} вход",
 "many": "{n} входов в систему",
-"few": "{n} варианта входа в систему",
-"other": "{n} входы в систему"
+"few": "{n} входа в систему",
+"other": "{n} Входы в систему"
 },
 "valid until {time}": "действительно до {time}",
 "addresses: {list}": "адреса: {list}",
@@ -3798,5 +3798,15 @@
 "other": "{n} рабочих пространств сохранили свой режим IP во время наблюдения."
 },
 "{n} workspace kept its IP mode while observing.": "{n} рабочая область сохранила свой режим IP во время наблюдения.",
-"{n} account imported.": "Импортирована {n} учетная запись."
+"{n} account imported.": "Импортирована {n} учетная запись.",
+"Not collected by the attachment settings: {type}": "Не собрано в соответствии с настройками вложений: {type}",
+"No file to download": "Файл для скачивания отсутствует",
+"Download failed": "Сбой загрузки",
+"Larger than the size limit": "Превышает ограничение по размеру",
+"Size unknown or above the limit": "Размер неизвестен или превышает лимит",
+"Telegram did not provide the file": "Telegram не предоставил файл",
+"The downloaded size differs from the observed attachment": "Размер загруженного файла отличается от размера наблюдаемого вложения",
+"The queued file differs from the signed observation": "Файл, находящийся в очереди, отличается от подписанного наблюдения",
+"The saved copy of this file is damaged": "Сохраненная копия этого файла повреждена",
+"Telegram account not identified yet": "Учётная запись Telegram пока не идентифицирована"
 }

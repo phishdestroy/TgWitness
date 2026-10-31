@@ -2298,7 +2298,7 @@
 "{n} requests": {
 "other": "요청 {n}건"
 },
-"{n} sign-in": "{n} 로그인",
+"{n} sign-in": "{n}회 로그인",
 "{n} sign-ins": {
 "other": "{n}회 로그인"
 },
@@ -3726,5 +3726,15 @@
 "other": "{n}개의 작업 공간이 관찰 중에도 IP 모드를 유지했습니다."
 },
 "{n} workspace kept its IP mode while observing.": "{n}개의 작업 공간이 관찰 중에도 IP 모드를 유지했습니다.",
-"{n} account imported.": "계정 {n}개 가져옴."
+"{n} account imported.": "계정 {n}개 가져옴.",
+"Not collected by the attachment settings: {type}": "첨부 파일 설정에 따라 수집되지 않음: {type}",
+"No file to download": "다운로드할 파일이 없습니다",
+"Download failed": "다운로드 실패",
+"Larger than the size limit": "크기 제한 초과",
+"Size unknown or above the limit": "크기 미상 또는 제한 초과",
+"Telegram did not provide the file": "텔레그램에서 파일을 제공하지 않았습니다",
+"The downloaded size differs from the observed attachment": "다운로드된 크기는 확인된 첨부 파일의 크기와 다릅니다.",
+"The queued file differs from the signed observation": "대기 중인 파일은 서명된 관찰 기록과 다릅니다.",
+"The saved copy of this file is damaged": "이 파일의 저장된 사본이 손상되었습니다.",
+"Telegram account not identified yet": "텔레그램 계정이 아직 확인되지 않았습니다"
 }

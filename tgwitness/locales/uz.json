@@ -2312,10 +2312,10 @@
 "one": "{n} so'rov",
 "other": "{n} ta so'rov"
 },
-"{n} sign-in": "{n}ga kirish",
+"{n} sign-in": "{n} marta tizimga kirish",
 "{n} sign-ins": {
-"one": "{n} ta tizimga kirish",
-"other": "{n} ta tizimga kirish"
+"one": "{n} marta tizimga kirish",
+"other": "{n} marta tizimga kirish"
 },
 "{workspace}: every chat": "{workspace}: har bir suhbat",
 "{workspace}: {n} chat": "{workspace}: {n} suhbat",
@@ -3750,5 +3750,15 @@
 "other": "{n} ta ish maydoni kuzatish paytida o'z IP-režimini saqlab qoldi."
 },
 "{n} workspace kept its IP mode while observing.": "{n} ta ish maydoni kuzatish paytida o'z IP rejimini saqlab qoldi.",
-"{n} account imported.": "{n} ta hisob import qilindi."
+"{n} account imported.": "{n} ta hisob import qilindi.",
+"Not collected by the attachment settings: {type}": "Ilova sozlamalari bo'yicha yig'ilmagan: {type}",
+"No file to download": "Yuklab olinadigan fayl yo'q",
+"Download failed": "Yuklab olish muvaffaqiyatsiz tugadi",
+"Larger than the size limit": "O'lcham chegarasidan katta",
+"Size unknown or above the limit": "O'lchami noma'lum yoki limitdan yuqori",
+"Telegram did not provide the file": "Telegram faylni taqdim etmadi",
+"The downloaded size differs from the observed attachment": "Yuklab olingan hajm kuzatilgan ilovadan farq qiladi",
+"The queued file differs from the signed observation": "Navbatga qo'yilgan fayl imzolangan kuzatuvdan farq qiladi",
+"The saved copy of this file is damaged": "Ushbu faylning saqlangan nusxasi shikastlangan",
+"Telegram account not identified yet": "Telegram hisobi hali aniqlanmagan"
 }

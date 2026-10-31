@@ -2312,9 +2312,9 @@
 "one": "{n}টি অনুরোধ",
 "other": "{n}টি অনুরোধ"
 },
-"{n} sign-in": "{n}-এ সাইন-ইন",
+"{n} sign-in": "{n}টি সাইন-ইন",
 "{n} sign-ins": {
-"one": "{n} সাইন-ইন",
+"one": "{n}টি সাইন-ইন",
 "other": "{n}টি সাইন-ইন"
 },
 "{workspace}: every chat": "{workspace}: প্রতিটি চ্যাট",
@@ -3750,5 +3750,15 @@
 "other": "{n}টি ওয়ার্কস্পেস পর্যবেক্ষণের সময় তাদের IP মোড বজায় রেখেছে।"
 },
 "{n} workspace kept its IP mode while observing.": "{n}টি পর্যবেক্ষণের সময় তার IP মোড বজায় রেখেছে।",
-"{n} account imported.": "{n}টি অ্যাকাউন্ট আমদানি করা হয়েছে।"
+"{n} account imported.": "{n}টি অ্যাকাউন্ট আমদানি করা হয়েছে।",
+"Not collected by the attachment settings: {type}": "সংযুক্তি সেটিংসের কারণে সংগৃহীত হয়নি: {type}",
+"No file to download": "ডাউনলোডের জন্য কোনো ফাইল নেই",
+"Download failed": "ডাউনলোড ব্যর্থ হয়েছে",
+"Larger than the size limit": "আকার সীমার চেয়ে বড়",
+"Size unknown or above the limit": "আকার অজানা বা সীমার বাইরে",
+"Telegram did not provide the file": "টেলিগ্রাম ফাইলটি প্রদান করেনি",
+"The downloaded size differs from the observed attachment": "ডাউনলোডকৃত আকার পর্যবেক্ষিত সংযুক্তির আকারের থেকে ভিন্ন",
+"The queued file differs from the signed observation": "কুইয়েড ফাইলটি স্বাক্ষরিত পর্যবেক্ষণের থেকে পৃথক।",
+"The saved copy of this file is damaged": "এই ফাইলের সংরক্ষিত অনুলিপি ক্ষতিগ্রস্ত",
+"Telegram account not identified yet": "টেলিগ্রাম অ্যাকাউন্ট এখনও শনাক্ত হয়নি"
 }
