@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Added a shared animated explanation of GitHub capture: local keys, temporary
+  collection, attestation, encrypted delivery and independent verification.
+  Interactive examples show archive and collector substitution, with playback
+  controls, reduced motion, mobile layouts and English/Russian text.
+
 - Replaced the separate capture form with a four-step wizard shared by Exports
   and the standalone page. It uses workspace themes and controls, explains each
   file handoff, confirms key saving and clears its key when the workspace locks.
