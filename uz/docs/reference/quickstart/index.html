@@ -62,8 +62,17 @@ Proxylar, guvohlar, eksportlar yoki server sozlamalari bo&#x27;yicha <a href="ht
 </tr>
 </tbody>
 </table></div>
-<p>Manba kod usullari uchun GitHub Releases&#x27;dan manba ZIP faylini yuklab oling va arxivdan chiqarib oling yoki omborni klonlang. Agar mos Python topilmasa (winget yoki imzolangan python.org o&#x27;rnatuvchisi), <code>Start.cmd</code> Windows foydalanuvchingiz uchun Python 3.12 o&#x27;rnatishni taklif etadi. <code>start.sh</code> Python yo&#x27;q bo&#x27;lsa, Linux distributivi yoki macOS uchun aniq o&#x27;rnatish buyrug&#x27;ini chiqaradi.
-Birinchi manba ishga tushirilganda <code>.venv</code> yaratiladi va bog&#x27;liqliklar avtomatik o&#x27;rnatiladi.</p>
+<p>Manba kodidan foydalanish usullari uchun <a href="https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip">joriy <code>main</code> tarmog‘ini yuklab oling va arxivdan chiqaring</a>
+yoki repozitoriyni klonlang:</p>
+<pre><code class="language-sh">git clone https://github.com/phishdestroy/TgWitness.git
+cd TgWitness</code></pre>
+<p>Joriy manba kodiga hisoblarni ommaviy import qilish, MTProxy boshqaruv paneli va davom ettiriladigan
+tarixni yuklash kiradi. 0.7.0 portativ sinov talqini va uning reliz manba arxivi ushbu
+qo‘shimchalardan oldin chiqarilgan. Versiyalar chegarasini bilish uchun <a href="../changelog/">o‘zgarishlar jurnalini</a> ko‘ring.</p>
+<p>Agar mos Python topilmasa, <code>Start.cmd</code> Windows foydalanuvchingiz uchun Python 3.12 ni o‘rnatishni taklif qiladi
+(winget yoki imzolangan python.org o‘rnatuvchisi orqali). Agar Python mavjud bo‘lmasa, <code>start.sh</code>
+Linux distributivingiz yoki macOS uchun aniq o‘rnatish buyrug‘ini chiqaradi.
+Manbadan birinchi marta ishga tushirilganda <code>.venv</code> yaratiladi va bog‘liqliklar avtomatik ravishda o‘rnatiladi.</p>
 <p>Docker ilovani kompilyatsiya qilib, uni fon rejimida ishga tushiradi; host Python keraksiz. <code>scripts\Docker.cmd</code> va <code>scripts/docker-start.sh</code> konteyner sog&#x27;lom holatda bo&#x27;lganda panel manzili va tokenni chop etadi. Har bir qo&#x27;llab-quvvatlanadigan hostdagi ekvivalent Docker buyruqlari quyidagilardan iborat:</p>
 <pre><code class="language-sh">docker compose up -d --build --wait
 docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
@@ -105,7 +114,15 @@ Sinovning muammosiz o&#x27;tishi Telegramga bog&#x27;liq, TgWitnessga emas, va k
 <li>Ilovalar sozlamalarini alohida tanlang, so&#x27;ngra <strong>Kuzatuvni boshlash</strong> tugmasini bosing.</li>
 </ol>
 <p>API ma&#x27;lumotlari sizning ilovangizni aniqlaydi; ular o&#x27;zlari hech qanday hisobni ruxsat etmaydi. Xususiy guruhlarga ommaviy foydalanuvchi nomi kerak emas, lekin sizning hisobingizda kirish huquqi bo&#x27;lishi kerak.</p>
-<p>Mavjud hisoblar uchun <a href="../accounts/">hisoblar va sessiya formatlariga</a> qarang: panel Telethon StringSession, Telethon/Pyrogram SQLite, yagona hisobli TData ZIP va qo&#x27;llab-quvvatlanadigan hisob JSON formatlarini qabul qiladi. Sessiyani va uning hamroh JSON faylini birgalikda tanlang, <strong>&quot;Hisobni ulash&quot;</strong> tugmasini bosing. QR orqali kirish ham xuddi shu ixtiyoriy API sozlamalari bilan mavjud. TDLib, botlar va ommaviy hisob ro&#x27;yxatlari qo&#x27;llab-quvvatlanmaydi.</p>
+<p>Mavjud hisoblar uchun <a href="../accounts/">hisoblar va sessiya formatlari</a> bo‘limiga qarang:
+panel Telethon StringSession, Telethon/Pyrogram SQLite, bitta hisobli TData
+ZIP va qo‘llab-quvvatlanadigan hisob JSON fayllarini qabul qiladi. Sessiya va unga tegishli JSON faylini birgalikda tanlab,
+<strong>Hisobni bog'lash</strong> tugmasini bosing. Xuddi shu ixtiyoriy API sozlamalari bilan QR orqali kirish ham
+mavjud. TDLib, bot sessiyalari va CSV/JSON
+hisoblar ro‘yxati qo‘llab-quvvatlanmaydi.</p>
+<p>Bir nechta hisob uchun <strong>Hisoblar → Hisoblarni import qilish</strong> bo‘limidan foydalaning va ularning qo‘llab-quvvatlanadigan
+sessiya fayllarini tanlang. Qo‘shimcha JSON fayllar asosiy nom bo‘yicha juftlanadi; har bir import qilingan hisob
+o‘z ishchi maydoniga ega bo‘ladi. <a href="../accounts/#bulk-import-and-account-groups">Ommaviy import va hisob guruhlari</a> bo‘limiga qarang.</p>
 <p>Yana bir akkaunt qo&#x27;shish uchun akkaunt tanlovchisining yonidagi <strong>+</strong> tugmasini bosing yoki
 <strong>Akkaunt → Sozlamalar → Ulanish sozlamalari → Ish maydonchalari bo&#x27;limini</strong> oching, yoki <strong>Akkauntlar bo&#x27;lim</strong>idan foydalaning. Ish maydonchalari alohida sessiyalarga, jurnalarga, kalitlarga, manbalarga va navbatlarga ega. Ko&#x27;rinishlarni almashtirish boshqa yig&#x27;uvchilarni ishlashda davom ettiradi.
 Ushbu o&#x27;rnatishda bir xil Telegram akkaunti ikki ish maydonchasiga tayinlanishi mumkin emas.

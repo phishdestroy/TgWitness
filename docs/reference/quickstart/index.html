@@ -63,8 +63,14 @@ that your accounts can access. It runs locally with its own data directory.</p>
 </tr>
 </tbody>
 </table></div>
-<p>For the source methods, download and extract the source ZIP from GitHub Releases or clone
-the repository. <code>Start.cmd</code> offers to install Python 3.12 for your Windows user if no
+<p>For the source methods, <a href="https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip">download and extract current <code>main</code></a>
+or clone the repository:</p>
+<pre><code class="language-sh">git clone https://github.com/phishdestroy/TgWitness.git
+cd TgWitness</code></pre>
+<p>The current source includes batch account import, the MTProxy dashboard and resumable
+history loading. The 0.7.0 portable preview and its release source archive predate
+these additions. See <a href="../changelog/">the changelog</a> for the version boundary.</p>
+<p><code>Start.cmd</code> offers to install Python 3.12 for your Windows user if no
 suitable Python is found (winget, or the signed python.org installer). <code>start.sh</code> prints
 the exact install command for your Linux distribution or macOS if Python is missing.
 The first source launch creates <code>.venv</code> and installs dependencies automatically.</p>
@@ -121,7 +127,11 @@ themselves. Private groups need no public username, but your account must have a
 panel accepts Telethon StringSession, Telethon/Pyrogram SQLite, single-account TData
 ZIP, and supported account JSON. Select a session and its companion JSON together,
 press <strong>Connect account</strong>. QR login is also
-available with the same optional API settings. TDLib, bots, and bulk account lists are unsupported.</p>
+available with the same optional API settings. TDLib, bot sessions and CSV/JSON
+account inventories are unsupported.</p>
+<p>For several accounts, use <strong>Accounts → Import accounts</strong> and select their supported
+session files. Companion JSON files are paired by basename; each imported account
+gets its own workspace. See <a href="../accounts/#bulk-import-and-account-groups">bulk import and account groups</a>.</p>
 <p>To add another account, press <strong>+</strong> beside the account selector or open
 <strong>Account → Settings → Connection settings → Workspaces</strong>, or use <strong>Accounts</strong>. Workspaces have separate sessions,
 journals, keys, sources and queues. Switching views leaves other collectors running.

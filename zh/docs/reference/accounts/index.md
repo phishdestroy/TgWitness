@@ -211,7 +211,7 @@ TData 是 Telegram Desktop 应用程序（来自 desktop.telegram.org 的跨平�
 | Pyrogram 会话**字符串** | 请使用 Pyrogram `.session` 文件，或通过手机/二维码扫描 |
 | TData 包含多个已登录账户 | 请在 Telegram Desktop 中注销其他账户，或使用各账户各自的会话文件 |
 | 机器人令牌 | 不支持：TgWitness 以用户账户身份进行监控 |
-| 包含大量账户的 CSV/JSON 列表 | 每个账户添加一个工作区 |
+| 包含大量账户的 CSV/JSON 列表 | 通过**账户 → 导入账户**导入受支持的会话文件，或在独立的工作区中通过手机号/二维码登录 |
 | 测试数据中心（Test-DC）或机器人会话 | 请使用正式版用户账户 |
 
 ## 多个账户
@@ -223,6 +223,10 @@ TData 是 Telegram Desktop 应用程序（来自 desktop.telegram.org 的跨平�
 - 日志始终与创建它的账户绑定。使用其他 账户登录需要另一个工作区，且一个账户不能分配给两个 工作区。
 - 主面板令牌可控制所有工作区。[授予的访问权限](https://phishdestroy.github.io/TgWitness/zh/docs/reference/access/)可将其他用户的访问范围限制在选定的账户和聊天群组内，并可设置独立的权限和会话限制。
 - **账户会**重命名一个工作区，并删除一个已添加的工作区，连同其会话、日志、 来源和签名密钥一并删除。主工作区无法从面板中删除。
+
+### 批量导入和账户分组
+
+使用 **账户 → 导入账户** 添加多个账户，按基本文件名配对文件，并查看每次登录的结果。每个账户都有独立的工作区。分组可从模板复制选定的设置，而不会合并会话、密钥或证据。请参阅[导入和分组指南](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings)和[MTProxy 池控制面板](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)。
 
 ## 退出登录
 

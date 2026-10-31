@@ -211,7 +211,7 @@ Contoh pertama hanya mengisi kredensial API; masuk dengan nomor telepon atau QR,
 | **String** sesi Pyrogram | Gunakan berkas Pyrogram `.session`, atau ponsel/QR |
 | TData dengan beberapa akun yang telah masuk | Keluar dari akun-akun lain di Telegram Desktop, atau gunakan berkas sesi masing-masing akun |
 | Token bot | Tidak didukung: TgWitness beroperasi sebagai akun pengguna |
-| Daftar CSV/JSON dari banyak akun | Tambahkan satu ruang kerja per akun |
+| Daftar CSV/JSON dari banyak akun | Impor file sesi yang didukung melalui **Akun → Impor akun**, atau masuk melalui telepon/QR di ruang kerja terpisah |
 | Sesi Test-DC atau bot | Gunakan akun pengguna produksi |
 
 ## Beberapa akun
@@ -223,6 +223,10 @@ Tekan **+** di samping pemilih akun, atau buka **Akun → Pengaturan → Pengatu
 - Sebuah jurnal tetap terikat pada akun yang membuatnya. Masuk dengan akun yang berbeda memerlukan ruang kerja lain, dan satu akun tidak dapat ditugaskan ke dua ruang kerja.
 - Token panel utama mengontrol semua ruang kerja. [Akses yang diberikan](https://phishdestroy.github.io/TgWitness/id/docs/reference/access/) dapat membatasi orang lain hanya pada akun dan obrolan tertentu, dengan izin dan batas sesi yang terpisah.
 - **Akun** mengganti nama ruang kerja dan menghapus ruang kerja yang ditambahkan, beserta sesi, jurnal, sumber, dan kunci penandatanganan. Ruang kerja utama tidak dapat dihapus dari panel.
+
+### Impor massal dan grup akun
+
+Gunakan **Akun → Impor akun** untuk menambahkan beberapa akun, memasangkan berkas berdasarkan nama dasar, dan melihat hasil setiap login. Setiap akun mendapat ruang kerja sendiri. Grup dapat menyalin pengaturan terpilih dari templat tanpa menggabungkan sesi, kunci, atau bukti. Lihat [panduan impor dan grup](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) dan [dasbor kumpulan MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
 
 ## Keluar
 

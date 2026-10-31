@@ -211,7 +211,7 @@ Ví dụ đầu tiên chỉ yêu cầu điền thông tin đăng nhập API; qu�
 | **Các chuỗi** phiên làm việc của Pyrogram | Vui lòng sử dụng tệp Pyrogram `.session`, hoặc quét mã QR bằng điện thoại |
 | TData với nhiều tài khoản đã đăng nhập | Vui lòng đăng xuất khỏi các tài khoản khác trên Telegram Desktop, hoặc sử dụng tệp phiên làm việc riêng của từng tài khoản |
 | Mã thông báo bot | Không được hỗ trợ: TgWitness chỉ thực hiện quan sát với tư cách là một tài khoản người dùng |
-| Danh sách CSV/JSON của nhiều tài khoản | Thêm một không gian làm việc cho mỗi tài khoản |
+| Danh sách CSV/JSON của nhiều tài khoản | Nhập các tệp phiên được hỗ trợ qua **Tài khoản → Nhập tài khoản**, hoặc đăng nhập bằng số điện thoại/mã QR trong các không gian làm việc riêng biệt |
 | Các phiên thử nghiệm (Test-DC) hoặc phiên bot | Vui lòng sử dụng tài khoản người dùng chính thức |
 
 ## Nhiều tài khoản
@@ -223,6 +223,10 @@ Hãy nhấn vào mã **+** bên cạnh trình chọn tài khoản, hoặc truy c
 - Một sổ ghi chép luôn gắn liền với tài khoản đã tạo ra nó. Việc đăng nhập bằng một tài khoản khác yêu cầu phải có một không gian làm việc riêng, và một tài khoản không thể được gán cho hai không gian làm việc.
 - Token bảng điều khiển chính quản lý tất cả các không gian làm việc. [Quyền truy cập được cấp](https://phishdestroy.github.io/TgWitness/vi/docs/reference/access/) có thể giới hạn quyền của người khác đối với các tài khoản và cuộc trò chuyện đã chọn, kèm theo các quyền truy cập riêng biệt và giới hạn phiên làm việc.
 - **Tài khoản** sẽ đổi tên một không gian làm việc và xóa một không gian làm việc đã thêm vào, cùng với phiên làm việc, nhật ký, các nguồn và khóa ký của không gian đó. Không gian làm việc chính không thể bị xóa khỏi bảng điều khiển.
+
+### Nhập hàng loạt và nhóm tài khoản
+
+Dùng **Tài khoản → Nhập tài khoản** để thêm nhiều tài khoản, ghép tệp theo tên gốc và xem kết quả từng lần đăng nhập. Mỗi tài khoản có không gian làm việc riêng. Nhóm có thể sao chép các thiết lập đã chọn từ mẫu mà không gộp phiên, khóa hay bằng chứng. Xem [hướng dẫn nhập và nhóm](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) và [bảng điều khiển nhóm MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
 
 ## Đăng xuất
 

@@ -211,7 +211,7 @@ Hem takma ad hem de asıl ad mevcutsa, bunlar birbiriyle uyumlu olmalıdır. Ör
 | Pyrogram oturum **dizeleri** | Pyrogram `.session` dosyasını veya telefon/QR kodunu kullanın |
 | Birkaç oturum açılmış hesap içeren TData | Telegram Desktop'taki diğer hesaplardan çıkış yapın veya her hesabın kendi oturum dosyasını kullanın |
 | Bot jetonları | Desteklenmez: TgWitness, bir kullanıcı hesabı olarak gözlem yapar |
-| Çok sayıda hesabın CSV/JSON listeleri | Hesap başına bir çalışma alanı ekleyin |
+| Çok sayıda hesabın CSV/JSON listeleri | Desteklenen oturum dosyalarını **Hesaplar → Hesapları içe aktar** üzerinden içe aktarın veya ayrı çalışma alanlarında telefon/QR ile giriş yapın |
 | Test-DC veya bot oturumları | Üretim kullanıcı hesabı kullanın |
 
 ## Birden fazla hesap
@@ -223,6 +223,10 @@ Hesap seçicinin yanındaki **+** tuşuna basın veya **Hesap → Ayarlar → Ba
 - Bir günlük, onu oluşturan hesaba bağlı kalır. Farklı bir hesapla oturum açmak için başka bir çalışma alanı gerekir ve bir hesap iki çalışma alanına atanamaz.
 - Ana panel jetonu tüm çalışma alanlarını kontrol eder. [Verilen erişim izni](https://phishdestroy.github.io/TgWitness/tr/docs/reference/access/), ayrı izinler ve oturum sınırlamalarıyla diğer kişilerin erişimini belirli hesaplar ve sohbetlerle sınırlayabilir.
 - **Hesaplar,** bir çalışma alanının adını değiştirir ve eklenen bir çalışma alanını, oturumu, günlüğü, kaynakları ve imzalama anahtarıyla birlikte siler. Ana çalışma alanı panelden silinemez.
+
+### Toplu içe aktarma ve hesap grupları
+
+Birden fazla hesap eklemek, dosyaları temel adlarına göre eşleştirmek ve her girişin sonucunu görmek için **Hesaplar → Hesapları içe aktar** bölümünü kullanın. Her hesabın kendi çalışma alanı vardır. Gruplar oturumları, anahtarları veya kanıtları birleştirmeden bir şablondan seçilen ayarları kopyalayabilir. Bkz. [içe aktarma ve grup kılavuzu](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) ve [MTProxy havuz paneli](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
 
 ## Çıkış
 

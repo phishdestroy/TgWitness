@@ -21,7 +21,16 @@ Scegliete un metodo. I download portatili diventano disponibili dopo la pubblica
 | Windows | Estrarre `TgWitness-<version>-windows-amd64-portable.zip` dai rilasci di GitHub, fare doppio clic su `TgWitness.cmd` | Fare doppio clic su `Start.cmd` | Fare doppio clic su `scripts\Docker.cmd` |
 | Linux / macOS | — | `sh start.sh` | `sh scripts/docker-start.sh` |
 
-Per i metodi di compilazione, scarichi ed estragga il file ZIP contenente il codice sorgente da GitHub Releases oppure cloni il repository. `Start.cmd` propone di installare Python 3.12 per il Suo utente Windows qualora non venga individuata una versione adeguata di Python (winget o il programma di installazione firmato da python.org). `start.sh` visualizza il comando di installazione esatto per la Sua distribuzione Linux o per macOS qualora Python non fosse presente. Il primo avvio del codice sorgente crea `.venv` e installa automaticamente le dipendenze.
+Per i metodi basati sul codice sorgente, [scarica ed estrai il ramo `main` corrente](https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip) oppure clona il repository:
+
+```
+git clone https://github.com/phishdestroy/TgWitness.git
+cd TgWitness
+```
+
+Il codice sorgente attuale include l'importazione in blocco degli account, la dashboard MTProxy e il caricamento della cronologia ripristinabile. L'anteprima portatile 0.7.0 e il relativo archivio sorgente di rilascio sono antecedenti a queste aggiunte. Consulta [il changelog](https://phishdestroy.github.io/TgWitness/it/docs/reference/changelog/) per i dettagli sulle versioni.
+
+`Start.cmd` propone di installare Python 3.12 per il tuo utente Windows se non viene trovato un Python adatto (tramite winget o il programma di installazione firmato di python.org). `start.sh` mostra il comando di installazione esatto per la tua distribuzione Linux o macOS se Python è assente. Il primo avvio da sorgente crea `.venv` e installa automaticamente le dipendenze.
 
 Docker compila l’applicazione e la avvia in background; non è necessario un host Python. `scripts\Docker.cmd` e `scripts/docker-start.sh` visualizzano l’indirizzo del pannello e il token quando il container è in stato di funzionamento. I comandi Docker equivalenti su ogni host supportato sono:
 
@@ -57,7 +66,9 @@ I messaggi di dimostrazione sono fittizi. La modalità demo non consente di coll
 
 Le credenziali API identificano la vostra applicazione; di per sé non autorizzano un account. I gruppi privati non richiedono un nome utente pubblico, ma il vostro account deve disporre dei diritti di accesso.
 
-Per gli account esistenti, consultare [i formati degli account e delle sessioni](https://phishdestroy.github.io/TgWitness/it/docs/reference/accounts/): il pannello accetta Telethon StringSession, Telethon/Pyrogram SQLite, TData ZIP per account singolo e JSON degli account supportati. Selezionare una sessione e il relativo file JSON associato, quindi premere **«Connetti account**». È inoltre disponibile l’accesso tramite codice QR con le stesse impostazioni API opzionali. TDLib, i bot e gli elenchi di account in blocco non sono supportati.
+Per gli account esistenti, consulta [account e formati di sessione](https://phishdestroy.github.io/TgWitness/it/docs/reference/accounts/): il pannello accetta Telethon StringSession, SQLite Telethon/Pyrogram, file ZIP TData a singolo account e file JSON di account supportati. Seleziona insieme una sessione e il relativo file JSON associato, quindi premi **Collegare l’account**. È disponibile anche l'accesso tramite QR con le stesse impostazioni API opzionali. TDLib, sessioni bot e inventari di account CSV/JSON non sono supportati.
+
+Per più account, usa **Account → Importazione degli account** e seleziona i relativi file di sessione supportati. I file JSON associati vengono abbinati in base al nome base; ogni account importato ottiene il proprio spazio di lavoro. Consulta [importazione in blocco e gruppi di account](https://phishdestroy.github.io/TgWitness/it/docs/reference/accounts/#bulk-import-and-account-groups).
 
 Per aggiungere un altro account, prema **+** accanto al selettore di account oppure apra **Account → Impostazioni → Impostazioni di connessione → Spazi di lavoro**, oppure utilizzi **la sezione Account**. Gli spazi di lavoro dispongono di sessioni, registri, chiavi, fonti e code separati. Il cambio di vista lascia in esecuzione gli altri collettori. Lo stesso account Telegram non può essere assegnato a due spazi di lavoro in questa installazione. Non esiste un numero fisso di spazi di lavoro; essi condividono un unico processo, pertanto la capacità dipende dalla macchina.
 

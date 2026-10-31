@@ -80,7 +80,13 @@ W wersji demonstracyjnej elementy sterujące powiadomieniami są widoczne, ale w
 
 **Dziennik** zawiera obserwacje, funkcje wyszukiwania i filtry. Edycja powoduje wyświetlenie zarejestrowanych wersji; usunięcie powoduje wyświetlenie poprzedniej treści, o ile jest ona dostępna. Nieznane źródła są wyraźnie zaznaczone. Liczby są dostępne w **sekcji „Przegląd”**; szczegóły dotyczące pozyskiwania danych znajdują się w lokalnym przewodniku.
 
+Otwórz edytowaną wiadomość, aby porównać jej wersje w widoku **Zmiany w tekście** lub **Obok siebie**; widok **Dane surowe** pokazuje zapisane pola. Zmiany w ukrytych linkach i przyciskach botów są wyświetlane osobno. Otwórz podgląd załącznika, aby sprawdzić zapisane obrazy, pliki audio lub wideo; przycisk pobierania zapewnia stały dostęp do zachowanego oryginału.
+
+Tryb **Live** aktualizuje dziennik i czaty w miarę napływania rekordów. Wstrzymaj go podczas przeglądania lub użyj przycisku nowych zdarzeń, gdy będziesz gotowy; gromadzenie danych działa nadal w tle. Skrót **Ctrl/Cmd+K** wyszukuje akcje panelu i przeszukuje dziennik.
+
 **Sekcja „Źródła”** zawiera zakres monitorowania (wybrane czaty, folder w aplikacji Telegram lub całe konto), dostępne czaty każdego typu, wybrane źródła oznaczone gwiazdkami priorytetowymi, ustawienia dotyczące załączników i ponownej weryfikacji oraz migawki historii. Źródła prywatne wybiera się na podstawie dialogu/identyfikatora bez publicznego linku. Status dostępu opisuje wynik ostatniej weryfikacji, a nie stałe uprawnienia.
+
+Filtruj źródła, zaznacz ich pola wyboru, a następnie wspólnie je włącz, wstrzymaj lub oznacz jako priorytetowe. Na liście dostępnych czatów opcja **Dodaj wybrane** wykorzystuje bieżące zaznaczenie, natomiast **Dodaj wszystkie wyniki** korzysta z aktualnego wyszukiwania i filtra typu.
 
 **W sekcji „Czat” → „Osoby”** wyświetlana jest lista wszystkich osób, których wiadomości zostały zapisane; jeśli w danym czacie włączono wyświetlanie profili użytkowników, kliknięcie otwiera profil danej osoby wraz z linkami do wpisów w dzienniku.
 

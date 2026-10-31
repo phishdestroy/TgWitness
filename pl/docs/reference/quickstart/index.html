@@ -63,11 +63,11 @@ do których mają Państwo dostęp za pośrednictwem swoich kont. Działa ona lo
 </tr>
 </tbody>
 </table></div>
-<p>Aby uzyskać kod źródłowy, proszę pobrać i rozpakować plik ZIP z sekcji „GitHub Releases” lub sklonować
-repozytorium. Skrypt <code>Start.cmd</code> proponuje zainstalowanie Pythona 3.12 dla użytkownika systemu Windows, jeśli nie
-zostanie znaleziona odpowiednia wersja Pythona (winget lub podpisany instalator z python.org). <code>start.sh</code> wyświetla
-dokładne polecenie instalacyjne dla Państwa dystrybucji systemu Linux lub systemu macOS, jeśli brakuje środowiska Python.
-Pierwsze uruchomienie kodu źródłowego tworzy plik <code>.venv</code> i automatycznie instaluje zależności.</p>
+<p>W przypadku metod opartych na kodzie źródłowym <a href="https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip">pobierz i rozpakuj bieżącą gałąź <code>main</code></a> lub sklonuj repozytorium:</p>
+<pre><code class="language-sh">git clone https://github.com/phishdestroy/TgWitness.git
+cd TgWitness</code></pre>
+<p>Bieżący kod źródłowy obejmuje zbiorczy import kont, panel MTProxy oraz wznawiane ładowanie historii. Wersja przenośna 0.7.0 preview oraz jej archiwum kodu źródłowego powstały przed wprowadzeniem tych funkcji. Zobacz <a href="../changelog/">dziennik zmian</a>, aby sprawdzić granice wersji.</p>
+<p>Skrypt <code>Start.cmd</code> proponuje instalację Pythona 3.12 dla użytkownika systemu Windows, jeśli nie zostanie znaleziony odpowiedni Python (przez winget lub podpisany instalator z python.org). Skrypt <code>start.sh</code> wypisuje dokładne polecenie instalacyjne dla danej dystrybucji systemu Linux lub systemu macOS, jeśli brakuje Pythona. Pierwsze uruchomienie ze źródeł automatycznie tworzy środowisko <code>.venv</code> i instaluje zależności.</p>
 <p>Docker kompiluje aplikację i uruchamia ją w tle; nie jest wymagane środowisko Python na
 hostie. Polecenia `<code>scripts\Docker.cmd</code>` i `<code>scripts/docker-start.sh</code>` wyświetlają adres panelu oraz token, gdy
 kontener działa poprawnie. Odpowiednie polecenia Docker na każdym obsługiwanym hoście to:</p>
@@ -121,11 +121,8 @@ Płynny przebieg testu zależy od serwisu Telegram, a nie od TgWitness, i nie gw
 </ol>
 <p>Dane uwierzytelniające API identyfikują Państwa aplikację; same w sobie nie uprawniają one do korzystania z konta.
 Grupy prywatne nie wymagają publicznej nazwy użytkownika, jednak Państwa konto musi posiadać do nich dostęp.</p>
-<p>W przypadku istniejących kont prosimy zapoznać się z <a href="../accounts/">formatami kont i sesji</a>:
-panel obsługuje Telethon StringSession, Telethon/Pyrogram SQLite, pliki TData
-ZIP dla pojedynczych kont oraz obsługiwane pliki JSON kont. Proszę wybrać sesję wraz z towarzyszącym jej plikiem JSON,
-a następnie nacisnąć przycisk <strong>„Połącz konto</strong>”. Dostępne jest również
-logowanie za pomocą kodu QR przy tych samych opcjonalnych ustawieniach API. TDLib, boty oraz zbiorcze listy kont nie są obsługiwane.</p>
+<p>W przypadku istniejących kont zobacz <a href="../accounts/">konta i formaty sesji</a>: panel obsługuje Telethon StringSession, Telethon/Pyrogram SQLite, archiwa ZIP TData pojedynczych kont oraz obsługiwane pliki JSON kont. Wybierz jednocześnie plik sesji i towarzyszący mu plik JSON, a następnie naciśnij <strong>Połącz konto</strong>. Logowanie kodem QR jest również dostępne z tymi samymi opcjonalnymi ustawieniami API. Sesje TDLib, sesje botów oraz wykazy kont w formatach CSV/JSON nie są obsługiwane.</p>
+<p>W przypadku kilku kont użyj opcji <strong>Konta → Importowanie kont</strong> i wybierz obsługiwane pliki sesji. Towarzyszące pliki JSON są parowane na podstawie nazwy bazowej; każde zaimportowane konto otrzymuje własny obszar roboczy. Zobacz <a href="../accounts/#bulk-import-and-account-groups">import zbiorczy i grupy kont</a>.</p>
 <p>Aby dodać kolejne konto, proszę nacisnąć przycisk <strong>+</strong> obok selektora kont lub otworzyć
 <strong>Konto → Ustawienia → Ustawienia połączenia → Obszary robocze</strong>, albo skorzystać z <strong>opcji Konta</strong>. Obszary robocze mają oddzielne sesje,
 dzienniki, klucze, źródła i kolejki. Przełączanie widoków nie powoduje zatrzymania działania pozostałych modułów zbierających dane.

@@ -63,11 +63,17 @@ yang dapat diakses oleh akun Anda. Aplikasi ini berjalan secara lokal dengan dir
 </tr>
 </tbody>
 </table></div>
-<p>Untuk metode sumber, unduh dan ekstrak berkas ZIP sumber dari GitHub Releases atau kloning
-repositori. <code>Start.cmd</code> menawarkan untuk menginstal Python 3.12 bagi pengguna Windows jika tidak
-ditemukan Python yang sesuai (winget, atau penginstal python.org yang ditandatangani). <code>start.sh</code> menampilkan
-perintah instalasi yang tepat untuk distribusi Linux atau macOS Anda jika Python tidak terpasang.
-Saat dijalankan pertama kali, <code>.venv</code> akan dibuat dan dependensinya diinstal secara otomatis.</p>
+<p>Untuk metode kode sumber, <a href="https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip">unduh dan ekstrak <code>main</code> saat ini</a>
+atau kloning repositori:</p>
+<pre><code class="language-sh">git clone https://github.com/phishdestroy/TgWitness.git
+cd TgWitness</code></pre>
+<p>Kode sumber saat ini mencakup impor akun massal, dasbor MTProxy, dan pemuatan
+riwayat yang dapat dilanjutkan. Pratinjau portabel 0.7.0 dan arsip kode sumber rilisnya diterbitkan sebelum
+penambahan ini. Lihat <a href="../changelog/">log perubahan</a> untuk batas versinya.</p>
+<p><code>Start.cmd</code> menawarkan untuk menginstal Python 3.12 bagi pengguna Windows Anda jika tidak
+ditemukan Python yang sesuai (winget, atau penginstal python.org bertanda tangan). <code>start.sh</code> mencetak
+perintah instalasi yang tepat untuk distribusi Linux atau macOS Anda jika Python belum ada.
+Peluncuran kode sumber pertama akan membuat <code>.venv</code> dan menginstal dependensi secara otomatis.</p>
 <p>Docker membangun aplikasi dan menjalankannya di latar belakang; Python di host
 tidak diperlukan. <code>scripts\Docker.cmd</code> dan <code>scripts/docker-start.sh</code> menampilkan alamat panel dan token saat
 kontainer dalam kondisi baik. Perintah Docker yang setara di setiap host yang didukung adalah:</p>
@@ -121,11 +127,15 @@ Kelancaran uji coba bergantung pada Telegram, bukan pada TgWitness, dan tidak me
 </ol>
 <p>Kredensial API mengidentifikasi aplikasi Anda; kredensial tersebut tidak secara
 otomatis memberikan otorisasi atas akun. Grup pribadi tidak memerlukan nama pengguna publik, tetapi akun Anda harus memiliki akses.</p>
-<p>Untuk akun yang sudah ada, lihat <a href="../accounts/">format akun dan sesi</a>:
-panel ini mendukung Telethon StringSession, Telethon/Pyrogram SQLite, TData ZIP
-untuk satu akun, dan JSON akun yang didukung. Pilih sesi dan file JSON pendampingnya secara bersamaan,
-lalu tekan <strong>&quot;Hubungkan Akun</strong>&quot;. Masuk melalui QR juga
-tersedia dengan pengaturan API opsional yang sama. TDLib, bot, dan daftar akun massal tidak didukung.</p>
+<p>Untuk akun yang sudah ada, lihat <a href="../accounts/">akun dan format sesi</a>: panel
+menerima Telethon StringSession, SQLite Telethon/Pyrogram, ZIP TData
+akun tunggal, dan JSON akun yang didukung. Pilih sesi beserta JSON pendampingnya sekaligus,
+lalu tekan <strong>Hubungkan akun</strong>. Login QR juga
+tersedia dengan pengaturan API opsional yang sama. TDLib, sesi bot, dan inventaris akun
+CSV/JSON tidak didukung.</p>
+<p>Untuk beberapa akun, gunakan <strong>Akun → Impor akun</strong> dan pilih file sesi
+yang didukung. File JSON pendamping dipasangkan berdasarkan nama dasar (basename); setiap akun yang diimpor
+mendapatkan ruang kerjanya sendiri. Lihat <a href="../accounts/#bulk-import-and-account-groups">impor massal dan grup akun</a>.</p>
 <p>Untuk menambahkan akun lain, tekan <strong>+</strong> di samping pemilih akun atau buka
 <strong>Akun → Pengaturan → Pengaturan koneksi → Ruang kerja</strong>, atau gunakan <strong>Akun</strong>. Ruang kerja memiliki sesi,
 jurnal, kunci, sumber, dan antrian yang terpisah. Mengganti tampilan tidak akan menghentikan pengumpul lainnya.

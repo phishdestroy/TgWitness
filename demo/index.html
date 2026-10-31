@@ -8,16 +8,20 @@
 <meta name="color-scheme" content="light dark">
 <title>TgWitness · Observation workspace</title>
 <link rel="icon" type="image/svg+xml" href="mark.svg">
-<link rel="stylesheet" href="style.css?v=0.7.0">
+<link rel="stylesheet" href="style.css?v=0.7.0-analyst1">
 <link rel="stylesheet" href="cloud-capture.css?v=5"><link rel="stylesheet" href="cloud-capture-story.css?v=3">
 <script src="theme.js?v=0.7.0"></script>
 <script src="mock.js"></script><script>(function(){var known=["en", "ru", "uk", "es", "pt", "tr", "ar", "fa", "ur", "hi", "id", "vi", "zh", "fr", "de", "it", "uz", "ko", "zh-Hant", "ms", "pl", "ja", "th", "he", "bn"],saved=(document.cookie.match(/(?:^|; )tgwitness-lang=([^;]+)/)||[])[1];try{saved=saved&&decodeURIComponent(saved)}catch(e){saved=''}function match(tag){tag=String(tag||'').toLowerCase().replace(/_/g,'-');var exact=known.find(function(x){return x.toLowerCase()===tag});if(exact)return exact;if(/^zh-/.test(tag)&&/(?:^|-)(?:hant|tw|hk|mo)(?:-|$)/.test(tag))return known.find(function(x){return x==='zh-Hant'});return known.find(function(x){return x===tag.split('-')[0]})}var asked=new URLSearchParams(location.search).get('lang'),browser=navigator.languages||[navigator.language||'en'],pick=[asked,saved].concat(browser).map(match).find(Boolean)||'en';document.write('<script src="locales/'+pick+'.js"><\/script>');})();</script>
 <script defer src="i18n.js?v=0.7.0"></script>
-<script defer src="app.js?v=0.7.0-capture2"></script>
+<script defer src="app.js?v=0.7.0-analyst1"></script>
 <script defer src="integrations.js?v=1"></script>
-<script defer src="analysis.js?v=1"></script>
-<script defer src="media-analysis.js?v=1"></script>
+<script defer src="analysis.js?v=3"></script>
+<script defer src="media-analysis.js?v=2"></script>
 <script defer src="webhooks.js?v=1"></script>
+<script defer src="proxies.js?v=3"></script>
+<script defer src="fleet.js?v=2"></script>
+<script defer src="review.js?v=1"></script>
+<script defer src="live.js?v=1"></script>
 <script defer src="cloud-capture-locales.js?v=1"></script><script defer src="cloud-capture-story.js?v=3"></script><script defer src="cloud-capture.js?v=5"></script>
 </head>
 <body>
@@ -109,17 +113,19 @@
   <div class="sidebar-caption">Observation workspace</div>
   <button class="quick-open" id="quick-open" data-quick-open type="button" aria-haspopup="dialog" aria-controls="quick-dialog" aria-keyshortcuts="Control+k Meta+k"><svg aria-hidden="true" class="icon"><use href="#i-search"/></svg><span>Go to…</span><kbd data-no-translate id="quick-shortcut">Ctrl K</kbd></button>
   <nav aria-label="Main navigation">
+    <div class="nav-section">Investigation</div>
     <button class="nav" data-view="chats"><svg aria-hidden="true" class="nav-icon"><use href="#i-message"/></svg> Chats</button>
     <button class="nav active" data-view="observations"><svg aria-hidden="true" class="nav-icon"><use href="#i-journal"/></svg> Journal <b id="nav-count">0</b></button>
     <button class="nav" data-view="sources"><svg aria-hidden="true" class="nav-icon"><use href="#i-sources"/></svg> Sources</button>
     <button class="nav" data-view="evidence"><svg aria-hidden="true" class="nav-icon"><use href="#i-export"/></svg> Exports</button>
     <button class="nav" data-view="witness"><svg aria-hidden="true" class="nav-icon"><use href="#i-sparkle"/></svg> Extras</button>
+    <button class="nav" data-view="analysis"><svg aria-hidden="true" class="nav-icon"><use href="#i-search"/></svg> Ask the archive</button>
+    <div class="nav-section">Workspace</div>
     <button class="nav" data-view="parameters"><svg aria-hidden="true" class="nav-icon"><use href="#i-settings"/></svg> Parameters</button>
     <button class="nav" data-view="connection"><svg aria-hidden="true" class="nav-icon"><use href="#i-account"/></svg> Account</button>
     <button class="nav" data-view="accounts"><svg aria-hidden="true" class="nav-icon"><use href="#i-users"/></svg> Accounts <b id="nav-accounts">1</b></button>
     <button class="nav" data-view="access" hidden><svg aria-hidden="true" class="nav-icon"><use href="#i-lock"/></svg> Access</button>
     <button class="nav" data-view="integrations" hidden><svg aria-hidden="true" class="nav-icon"><use href="#i-link"/></svg> Integrations</button>
-    <button class="nav" data-view="analysis"><svg aria-hidden="true" class="nav-icon"><use href="#i-search"/></svg> Ask the archive</button>
   </nav>
   <div class="sidebar-bottom">
     <a class="sidebar-help" href="guide.html" target="_blank" rel="noopener"><svg aria-hidden="true" class="nav-icon"><use href="#i-help"/></svg> Help &amp; documentation</a>
@@ -159,7 +165,14 @@
 
 <div class="content">
 <div class="context-bar">
-  <div class="notice demo" hidden id="demo-banner"><svg aria-hidden="true" class="icon"><use href="#i-sparkle"/></svg><span><strong>Demo workspace</strong> · Fictional records for exploring the interface. Telegram is not connected.</span></div>
+  <div class="notice demo" hidden id="demo-banner">
+    <div class="demo-intro"><strong>Demo workspace</strong><span id="demo-caption">Fictional messages. No Telegram connection.</span></div>
+    <div class="demo-actions">
+      <button class="secondary" data-demo-filter="deleted" type="button"><svg aria-hidden="true" class="icon"><use href="#i-journal"/></svg> Review deletions</button>
+      <button class="secondary" data-demo-filter="edited" type="button"><svg aria-hidden="true" class="icon"><use href="#i-clock"/></svg> Compare edits</button>
+      <button class="primary" data-export="zip" type="button"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Export signed ZIP</button>
+    </div>
+  </div>
   <details class="health-details"><summary>Collector health <span>Storage &amp; attachment queue</span></summary><div class="health-strip" id="health-strip"></div></details>
   <span aria-live="polite" class="visually-hidden" id="health-announce"></span>
 </div>
@@ -293,6 +306,7 @@
     <div><h1>Export records</h1><p class="page-description">Workspace ID: <code id="export-profile-id">default</code> · <a href="guide.html#export" rel="noopener" target="_blank">Large downloads &amp; verification</a></p></div>
     <button class="secondary" id="verify-journal"><svg aria-hidden="true" class="icon"><use href="#i-shield"/></svg> Verify journal</button>
   </div>
+  <div id="verification-result" role="status"></div>
   <div class="evidence-hero card">
     <div class="evidence-symbol"><svg aria-hidden="true" class="icon"><use href="#i-archive"/></svg></div>
     <div class="evidence-body">
@@ -343,7 +357,6 @@
       <div class="card-heading compact"><div><h2>Your signing identity</h2><p>Ed25519 · SHA-256 public-key fingerprint</p></div><button class="secondary" id="save-checkpoint"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Save checkpoint</button></div>
       <code class="fingerprint" id="fingerprint"></code>
       <p class="hint">Retain this fingerprint and signed checkpoints outside the collector. A self-contained archive can verify its internal consistency; independently retained records help detect replacement or truncation.</p>
-      <div id="verification-result" role="status"></div>
     </div>
     <div class="two-columns">
       <div class="card padded"><h2>Acquisition process receipt</h2><p class="muted">The signed journal records program hashes, dependency versions, starting scope, account, settings, run identifier, and periodic heartbeats. Local checkpoints are saved at startup, every five minutes while observing (changeable in Parameters), and on orderly stop.</p><button class="secondary" id="save-run-receipt"><svg aria-hidden="true" class="icon"><use href="#i-receipt"/></svg> Download signed run receipt</button><p class="hint">This is a collector-signed process record. It is not independent attestation or a trusted timestamp. Copy checkpoints to a separately controlled location for a stronger chain of custody.</p></div>
@@ -558,8 +571,9 @@
     <div><h1>Parameters</h1><p class="page-description">Limits and pace of collection, rechecks, downloads, people profiles, notifications and exports for this workspace. Each change applies from the next use of the value and is recorded in the signed journal.</p></div>
     <button class="secondary" id="parameters-reset" type="button"><svg aria-hidden="true" class="icon"><use href="#i-refresh"/></svg> Restore all defaults</button>
   </div>
+  <div class="parameters-tools"><input aria-label="Search parameters" id="parameters-search" placeholder="Search parameters" type="search"><label class="check-label"><input id="parameters-changed" type="checkbox"> Only changed</label></div>
   <form class="parameters-form" id="parameters-form" novalidate>
-    <div id="parameters-groups"></div>
+    <div class="parameters-layout"><nav aria-label="Parameter groups" class="parameters-nav" id="parameters-nav"></nav><div id="parameters-groups"></div></div>
     <div class="parameters-actions"><button class="primary" type="submit">Save parameters</button><span id="parameters-unsaved" role="status"></span></div>
   </form>
 </section>
@@ -592,12 +606,7 @@
       <div hidden id="import-details">
         <label class="account-file-picker" for="session-file"><svg aria-hidden="true" class="icon"><use href="#i-upload"/></svg><strong id="file-picker-title">Choose account files</strong><span id="file-picker-caption">One account · up to 4 files · 8 MiB total</span><input accept=".session,.zip,.json,.tgwitness-session,.tgwatch-session,.txt" aria-label="Choose account files" id="session-file" multiple type="file"></label>
         <p class="hint selected-files" hidden id="selected-files" role="status"></p>
-        <dl class="import-formats" aria-label="Supported account files">
-          <div><dt><code>.session</code></dt><dd><strong>Telethon or Pyrogram</strong></dd></div>
-          <div><dt><code>.zip</code></dt><dd><strong>Telegram Desktop · TData</strong></dd></div>
-          <div><dt><code>.json</code></dt><dd><strong>Settings or authorization</strong><span>Often only API settings. Add it with the session.</span></dd></div>
-          <div><dt><code>.txt</code></dt><dd><strong>Telethon StringSession</strong></dd></div>
-        </dl>
+
         <details class="import-advanced"><summary>Passcode or session text</summary>
           <label for="tdata-passcode">TData local passcode</label><input autocomplete="off" id="tdata-passcode" maxlength="512" type="password">
           <label for="session-string">Telethon StringSession</label><textarea autocomplete="off" id="session-string" maxlength="4096" placeholder="Paste a StringSession" rows="3" spellcheck="false"></textarea>
@@ -614,6 +623,12 @@
       </details>
       <div class="auth-actions"><button class="primary" id="auth-continue" type="submit">Continue</button><button class="primary" hidden id="start-qr" type="button">Show QR code</button></div>
       <p class="auth-progress hint" hidden id="auth-progress" role="status"></p>
+        <dl class="import-formats" aria-label="Supported account files">
+          <div><dt><code>.session</code></dt><dd><strong>Telethon or Pyrogram</strong></dd></div>
+          <div><dt><code>.zip</code></dt><dd><strong>Telegram Desktop · TData</strong></dd></div>
+          <div><dt><code>.json</code></dt><dd><strong>Settings or authorization</strong><span>Often only API settings. Add it with the session.</span></dd></div>
+          <div><dt><code>.txt</code></dt><dd><strong>Telethon StringSession</strong></dd></div>
+        </dl>
     </form>
     <div hidden id="qr-state"><h2>Scan with Telegram</h2><p class="hint">Settings → Devices → Link Desktop Device</p><img alt="Telegram sign-in QR code" class="qr-image" height="256" id="qr-image" width="256"><p id="qr-status" role="status"></p><div class="auth-actions"><button class="primary" hidden id="qr-retry" type="button">Generate another QR code</button><button class="quiet" id="qr-cancel" type="button">Back</button></div></div>
     <form hidden id="code-form"><h2>Enter your login code</h2><label for="code">Code from Telegram</label><input autocomplete="one-time-code" id="code" inputmode="numeric" pattern="[0-9 -]{3,12}" required><button class="primary" type="submit">Confirm code</button></form>
@@ -635,6 +650,7 @@
     <div class="guide-foot"><svg aria-hidden="true" class="icon"><use href="#i-lock"/></svg> Your installation. Your records.</div>
   </aside>
   <details hidden id="connection-options"><summary>Connection settings</summary>
+
     <div class="card padded route-card"><div class="eyebrow">Connection route</div><h2 id="route-summary">Direct connection</h2><p class="muted" id="route-detail">Choose a route before signing in.</p>
       <details id="network-details"><summary>Change connection route</summary>
         <p class="notice route-running" hidden id="network-running">Pause observation to change the route. Until then, observation keeps using the current one.</p>
@@ -646,9 +662,45 @@
           <details class="proxy-sources"><summary>Where the list comes from</summary><div id="proxy-catalog-sources"></div><p class="hint" id="proxy-catalog-download"></p><p class="hint">Only compatible public addresses are included. Fake TLS ee entries are skipped. A listed server has not necessarily been tested from your network.</p></details>
         </div>
         <form id="network-form">
-          <div class="proxy-link"><label for="network-link">Your MTProxy link · optional</label><input id="network-link" type="password" autocomplete="off" maxlength="2048" placeholder="tg://proxy?server=… or https://t.me/proxy?…">
-          <button class="quiet" id="network-import" type="button">Fill fields from link</button><p class="hint" id="network-link-result" role="status"></p></div><label for="network-kind">Connection route</label><select id="network-kind"><option value="mtproxy_auto">Automatic MTProxy · public lists</option><option value="direct">Direct connection</option><option value="socks5">SOCKS5 proxy</option><option value="http">HTTP CONNECT proxy</option><option value="mtproxy">MTProxy · experimental</option></select><div hidden id="network-endpoint"><label for="network-host">Proxy host or IP</label><input autocomplete="off" id="network-host" maxlength="253" placeholder="proxy.example.org"><label for="network-port">Port</label><input id="network-port" max="65535" min="1" type="number" value="1080"><div id="network-login"><label for="network-username">Username · optional</label><input autocomplete="off" id="network-username" maxlength="255"><label for="network-password">Password · optional</label><input autocomplete="off" id="network-password" maxlength="255" type="password"></div><div hidden id="network-mtproxy"><label for="network-secret">MTProxy secret</label><input autocomplete="off" id="network-secret" maxlength="512" type="password"><p class="hint">32 hex digits or dd + 32 digits. Fake TLS ee secrets are unsupported by this transport.</p></div></div><p class="hint">Automatic MTProxy, the default, picks a working proxy from the public lists, keeps it while it works and moves to the next one when it fails; different workspaces get different proxies. When it moves on is set in Parameters → Automatic MTProxy.</p><p class="hint">Saving replaces this workspace's route and cancels unfinished login. Re-enter any proxy credentials when changing it. A direct connection is used only where IP protection below allows it.</p><div class="route-actions"><button class="secondary" type="submit">Save connection route</button><button class="quiet" id="network-test" type="button">Test Telegram connection</button></div><p class="hint" id="network-result" role="status"></p></form></details>
+          <label for="network-kind">Connection route</label><select id="network-kind"><option value="mtproxy_auto">Automatic MTProxy · public lists</option><option value="direct">Direct connection</option><option value="socks5">SOCKS5 proxy</option><option value="http">HTTP CONNECT proxy</option><option value="mtproxy">MTProxy · experimental</option></select><div class="proxy-link"><label for="network-link">Your MTProxy link · optional</label><input id="network-link" type="password" autocomplete="off" maxlength="2048" placeholder="tg://proxy?server=… or https://t.me/proxy?…">
+          <button class="quiet" id="network-import" type="button">Fill fields from link</button><p class="hint" id="network-link-result" role="status"></p></div><div hidden id="network-endpoint"><label for="network-host">Proxy host or IP</label><input autocomplete="off" id="network-host" maxlength="253" placeholder="proxy.example.org"><label for="network-port">Port</label><input id="network-port" max="65535" min="1" type="number" value="1080"><div id="network-login"><label for="network-username">Username · optional</label><input autocomplete="off" id="network-username" maxlength="255"><label for="network-password">Password · optional</label><input autocomplete="off" id="network-password" maxlength="255" type="password"></div><div hidden id="network-mtproxy"><label for="network-secret">MTProxy secret</label><input autocomplete="off" id="network-secret" maxlength="512" type="password"><p class="hint">32 hex digits or dd + 32 digits. Fake TLS ee secrets are unsupported by this transport.</p></div></div><p class="hint" id="network-auto-help">Automatic MTProxy, the default, picks a working proxy from the public lists, keeps it while it works and moves to the next one when it fails; different workspaces get different proxies. When it moves on is set in Parameters → Automatic MTProxy.</p><p class="hint">Saving replaces this workspace's route and cancels unfinished login. Re-enter any proxy credentials when changing it. A direct connection is used only where IP protection below allows it.</p><div class="route-actions"><button class="secondary" type="submit">Save connection route</button><button class="quiet" id="network-test" type="button">Test Telegram connection</button></div><p class="hint" id="network-result" role="status"></p></form></details>
     </div>
+    <details class="card padded proxy-pool" id="proxy-pool"><summary>Proxy servers</summary>
+      <div class="pool-head">
+        <div><div class="eyebrow">Automatic MTProxy</div><p class="muted">Every server the automatic route can use: whether it answers, how fast, its country and list. A workspace keeps its server while it works and moves to the next one when it fails.</p></div>
+        <div class="pool-actions"><button class="secondary" id="pool-check" type="button"><svg aria-hidden="true" class="icon"><use href="#i-refresh"/></svg> Check all now</button><button class="quiet" id="pool-update" type="button">Update lists</button></div>
+      </div>
+      <div class="pool-stats" id="pool-stats"></div>
+      <div class="pool-tools">
+        <input aria-label="Search servers" id="pool-search" placeholder="Search server, country or list" type="search">
+        <select aria-label="Country" id="pool-country"></select>
+        <select aria-label="List" id="pool-source"></select>
+        <div aria-label="Status" class="segmented" id="pool-status" role="group"><button aria-pressed="true" data-status="" type="button">All</button><button aria-pressed="false" data-status="ok" type="button">Answering</button><button aria-pressed="false" data-status="resting" type="button">Resting</button><button aria-pressed="false" data-status="untested" type="button">Not checked</button></div>
+      </div>
+      <div class="pool-table-wrap"><table class="pool-table"><thead><tr><th>Country</th><th>Server</th><th>Ping</th><th>Status</th><th>List</th><th>Used by</th><th><span class="sr-only" id="pool-action-heading">Action</span></th></tr></thead><tbody id="pool-rows"></tbody></table></div>
+      <div class="pool-more"><span class="hint" id="pool-count"></span><button class="quiet" hidden id="pool-more" type="button">Show more</button></div>
+      <details class="pool-sources" id="pool-sources"><summary>Lists and sources</summary>
+        <div class="pool-source-grid">
+          <div><h3>Bundled lists</h3><p class="hint">Public lists maintained on GitHub. Switch off the ones you do not trust.</p><div class="pool-source-list" id="pool-bundled"></div></div>
+          <div><h3>Your lists</h3><p class="hint">Add a list address, upload files or paste links. Lists are read for <code>tg://proxy</code> and <code>t.me/proxy</code> links anywhere in the text.</p>
+            <div class="pool-source-list" id="pool-own"></div>
+            <form class="pool-inline" id="pool-add-url"><input aria-label="List address" id="pool-url" placeholder="https://… list of proxy links" required type="url"><select aria-label="List format" id="pool-url-format"><option value="text">Links</option><option value="json">JSON</option></select><button class="secondary" type="submit">Add list</button></form>
+            <label class="pool-drop" id="pool-drop"><input accept=".txt,.json,.md,.csv,.html,.htm" id="pool-files" multiple type="file"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg><span>Drop list files here or choose them</span></label>
+            <details class="pool-paste"><summary>Paste links</summary><textarea aria-label="Proxy links" id="pool-paste" placeholder="tg://proxy?server=…" rows="4" spellcheck="false"></textarea><button class="secondary" id="pool-paste-add" type="button">Add pasted links</button></details>
+          </div>
+        </div>
+        <div class="pool-github">
+          <h3>GitHub</h3><p class="hint">With a token, downloads from GitHub are authenticated and TgWitness can search GitHub for newly published MTProxy lists whenever the lists update. The token is kept encrypted and is sent only to GitHub.</p>
+          <div class="pool-inline"><input aria-label="GitHub token" autocomplete="off" id="pool-token" placeholder="ghp_… or github_pat_…" spellcheck="false" type="password"><button class="secondary" id="pool-token-save" type="button">Save token</button><button class="quiet" id="pool-token-remove" type="button">Remove token</button><span class="pool-pill" id="pool-token-state"></span></div>
+          <label class="check-label"><input id="pool-github-search" type="checkbox"> Search GitHub for MTProxy lists</label>
+          <div class="pool-search-fields"><div><label for="pool-github-query">Search query</label><input id="pool-github-query" maxlength="200" spellcheck="false"></div><div><label for="pool-github-max">Files per search</label><input id="pool-github-max" max="60" min="1" type="number"></div></div>
+          <p class="hint" id="pool-github-status" role="status"></p>
+          <label class="check-label"><input id="pool-countries" type="checkbox"> Look up server countries</label>
+          <p class="hint">Country lookups ask a public GeoIP service about the server addresses only, through the same route as list downloads.</p>
+          <div class="pool-save"><button class="primary" id="pool-save" type="button">Save source settings</button><span class="hint" id="pool-save-state" role="status"></span></div>
+        </div>
+      </details>
+    </details>
     <form class="card padded route-card policy-card" id="policy-form"><div class="eyebrow">IP protection</div><h2 id="policy-summary">Hide this server's address</h2>
       <p class="muted">Who may see the address of the machine TgWitness runs on: Telegram, and the services outside Telegram it contacts.</p>
       <div aria-label="IP protection" class="scope-modes" role="radiogroup">
@@ -678,9 +730,10 @@
 </section>
 
 <section class="view" hidden id="view-chats">
-  <div class="chats-shell">
+  <div class="chats-shell" data-panel="chat">
     <aside class="chats-sidebar card">
       <div class="chats-sidebar-head"><h2>Chats</h2><button class="quiet" id="chats-manage" type="button" title="Add or remove chats to watch"><svg aria-hidden="true" class="icon"><use href="#i-plus"/></svg> Choose</button></div>
+      <div class="chat-search"><svg aria-hidden="true" class="icon"><use href="#i-search"/></svg><input aria-label="Search chats" id="chat-search" placeholder="Search chats" type="search" autocomplete="off"></div>
       <details class="chat-open"><summary>Open Telegram link</summary>
         <form id="chat-open-form"><label for="chat-link">Username or invite link</label><input id="chat-link" maxlength="512" placeholder="https://t.me/…" required><button class="secondary" id="chat-preview-button" type="submit">Save preview</button></form>
         <div id="chat-link-preview" aria-live="polite"></div>
@@ -691,15 +744,17 @@
       <div class="chat-empty" id="chat-empty"></div>
       <div hidden id="chat-main">
         <header class="chat-header">
+          <button class="quiet chat-back" id="chat-back" type="button"><svg aria-hidden="true" class="icon"><use href="#i-chevron"/></svg> Chats</button>
           <div class="chat-title"><span class="avatar lg" id="chat-avatar"></span><div><h2 id="chat-name"></h2><p id="chat-sub"></p></div></div>
           <div class="chat-actions">
-            <button class="quiet" id="chat-pattern" type="button" aria-pressed="false">Dotted background</button>
-            <select aria-label="How many recent messages to load" id="chat-history-limit"><option value="100">Last 100</option><option value="250">Last 250</option><option value="500">Last 500</option></select>
-            <button class="secondary" id="chat-load-history" title="Download recent messages from Telegram into this view" type="button"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> <span class="label">Load history</span></button>
-            <button class="secondary" id="chat-export-start" title="Download the whole chat as a signed archive (chat.json + chat.html)" type="button"><svg aria-hidden="true" class="icon"><use href="#i-archive"/></svg> <span class="label" id="chat-export-label">Export chat</span></button>
+            <button class="quiet" id="chat-pattern" type="button" aria-pressed="false" aria-label="Dotted background" title="Dotted background"><svg aria-hidden="true" class="icon"><use href="#i-settings"/></svg></button>
+            <button class="primary" id="chat-export-start" title="Download the whole chat as a signed archive (chat.json + chat.html)" type="button"><svg aria-hidden="true" class="icon"><use href="#i-archive"/></svg> <span class="label" id="chat-export-label">Export chat</span></button>
             <button class="primary" hidden id="chat-export-get" type="button"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Save export</button>
           </div>
         </header>
+        <div class="chat-toolbar" aria-label="Chat tools">
+          <div class="chat-history-tools"><select aria-label="How many recent messages to load" id="chat-history-limit"><option value="100">Last 100</option><option value="250">Last 250</option><option value="500">Last 500</option></select><button class="quiet" id="chat-load-history" title="Download recent messages from Telegram into this view" type="button"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Load history</button></div>
+        </div>
         <div class="chat-status" id="chat-status" role="status"></div>
         <div class="export-box" hidden id="export-box" role="status"></div>
         <div class="chat-feed" id="chat-feed"></div>
@@ -731,31 +786,30 @@
 <section class="view" hidden id="view-accounts">
   <div class="page-heading">
     <div><h1>Accounts</h1><p class="page-description">Isolated workspaces — add as many as you need. Each has its own session, sources, journal and signing key, and runs its own collector. Several accounts can export one chat together.</p></div>
-    <button class="secondary" id="accounts-refresh"><svg aria-hidden="true" class="icon"><use href="#i-refresh"/></svg> Refresh</button>
+    <div class="fleet-actions"><button class="primary" id="fleet-import-open" type="button"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Import accounts</button><button class="secondary" id="fleet-group-new" type="button">New group</button><button class="secondary" id="accounts-refresh"><svg aria-hidden="true" class="icon"><use href="#i-refresh"/></svg> Refresh</button></div>
   </div>
+  <section class="card padded fleet-import" hidden id="fleet-import">
+    <div class="fleet-import-head"><div><div class="eyebrow">Bulk import</div><h2>Import many accounts at once</h2><p class="muted">Each account gets its own workspace, signing key and proxy. Files with the same name form one account, for example <code>name.session</code> with <code>name.json</code>. A session that does not sign in is not kept.</p></div><button class="quiet" id="fleet-import-close" type="button">Close</button></div>
+    <label class="pool-drop fleet-drop" id="fleet-drop"><input accept=".session,.json,.zip,.txt" id="fleet-files" multiple type="file"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg><span>Drop account files here or choose them: .session, .json, TData .zip, StringSession .txt</span></label>
+    <div class="fleet-import-grid">
+      <div><label for="fleet-group">Put them in</label><select id="fleet-group"></select></div>
+      <div><label for="fleet-group-name">New group name</label><input id="fleet-group-name" maxlength="80" placeholder="e.g. Scam monitors"></div>
+      <div><label for="fleet-passcode">TData passcode · optional</label><input autocomplete="off" id="fleet-passcode" maxlength="512" type="password"></div>
+      <div><label for="fleet-api">API ID:Hash · optional</label><input autocomplete="off" id="fleet-api" placeholder="Built-in pool when empty" spellcheck="false"></div>
+    </div>
+    <div class="fleet-import-run"><button class="primary" disabled id="fleet-import-start" type="button">Import accounts</button><span class="hint" id="fleet-import-summary" role="status"></span></div>
+    <ol class="fleet-results" id="fleet-results"></ol>
+  </section>
+  <div id="fleet-groups"></div>
   <div id="accounts-list" class="accounts-grid"></div>
-  <form class="card padded profile-create" id="account-add-form"><div class="eyebrow">Add account</div><h2>New workspace</h2><p class="muted">Create an isolated workspace, then connect a distinct Telegram account inside it. Importing the same session into two workspaces can disrupt update delivery.</p><label for="account-add-label">Workspace name</label><input id="account-add-label" maxlength="80" placeholder="e.g. Research account 2" required><button class="secondary" type="submit">Add workspace</button><p class="hint" id="accounts-limit"></p></form>
+  <form class="card padded profile-create" id="account-add-form"><div class="eyebrow">Add account</div><h2>New workspace</h2><p class="muted">Create an isolated workspace, then connect a distinct Telegram account inside it. Importing the same session into two workspaces can disrupt update delivery.</p><label for="account-add-label">Workspace name</label><input id="account-add-label" maxlength="80" placeholder="e.g. Research account 2" required><label for="account-add-group">Group · optional</label><select id="account-add-group"></select><button class="secondary" type="submit">Add workspace</button><p class="hint" id="accounts-limit"></p></form>
 </section>
 
 <section class="view" hidden id="view-analysis">
-  <div class="page-heading"><div><h1>Ask the archive</h1><p class="page-description">Search saved observations, review the sources, then choose whether to use AI.</p></div></div>
-  <p id="ai-status" class="notice" role="status"></p>
+  <div class="page-heading"><div><h1>Ask the archive</h1><p class="page-description" id="analysis-description">Search saved observations, review the sources, then choose whether to use AI.</p></div></div>
+  <p id="ask-provider-status" class="notice" role="status" hidden></p>
   <p class="hint"><a id="analysis-help" data-site-doc="analysis" href="https://phishdestroy.github.io/TgWitness/docs/reference/analysis/" target="_blank" rel="noopener noreferrer">Help &amp; documentation</a></p>
-  <details class="card padded" id="ai-settings"><summary>AI provider settings</summary>
-    <form id="ai-settings-form">
-      <label class="check-label"><input id="ai-enabled" type="checkbox"> Enable AI for this workspace</label>
-      <div class="two-columns"><div><label for="ai-provider">Provider</label><select id="ai-provider"><option value="ollama">Ollama</option><option value="compatible">OpenAI-compatible endpoint</option></select></div><div><label for="ai-model">Model name</label><input id="ai-model" maxlength="160" autocomplete="off"></div></div>
-      <label for="ai-endpoint">Processing endpoint</label><input id="ai-endpoint" type="url" required>
-      <p class="hint">For local Ollama, the server administrator sets TGWITNESS_AI_LOCAL_ENDPOINT. The default is http://127.0.0.1:11434.</p>
-      <label for="ai-key">API key</label><input id="ai-key" type="password" autocomplete="new-password" data-sensitive><p class="hint" id="ai-key-state"></p>
-      <label class="check-label"><input id="ai-clear-key" type="checkbox"> Remove the stored API key</label>
-      <div class="two-columns"><div><label for="ai-context">Maximum context characters</label><input id="ai-context" type="number" min="2000" max="64000" required></div><div><label for="ai-output">Maximum output tokens</label><input id="ai-output" type="number" min="128" max="4096" required></div><div><label for="ai-timeout">Request timeout, seconds</label><input id="ai-timeout" type="number" min="5" max="180" required></div><div><label for="ai-budget">Maximum requests per day</label><input id="ai-budget" type="number" min="1" max="1000" required></div></div>
-      <details><summary>Optional cost estimate</summary><div class="two-columns"><div><label for="ai-input-price">Price per million input tokens</label><input id="ai-input-price" type="number" min="0" max="10000" step="any"></div><div><label for="ai-output-price">Price per million output tokens</label><input id="ai-output-price" type="number" min="0" max="10000" step="any"></div></div><label for="ai-currency">Currency code</label><input id="ai-currency" maxlength="3" pattern="[A-Z]{3}" value="USD"></details>
-      <p class="hint">External providers may retain submitted data according to their own policies. TgWitness does not make a retention guarantee for them.</p>
-      <div class="route-actions"><button type="submit" class="primary">Save provider settings</button><button id="ai-test" type="button" class="secondary">Test with synthetic text</button></div>
-      <p id="ai-test-result" role="status"></p>
-    </form>
-  </details>
+
   <form class="card padded" id="ask-form">
     <h2>Find sources</h2><p class="hint" id="ask-workspace"></p>
     <fieldset class="access-group"><legend>Choose chats</legend><div id="ask-chats" class="access-chats"></div></fieldset>
@@ -786,7 +840,24 @@
 </section>
 
 <section class="view" hidden id="view-integrations">
-  <div class="page-heading"><div><h1>Integrations</h1><p class="page-description">MCP · Read your selected archive from an AI client.</p></div></div>
+  <div class="page-heading"><div><h1>Integrations</h1></div></div>
+  <details class="card padded" id="ai-settings"><summary>AI provider settings</summary>
+  <p id="ai-status" class="notice" role="status"></p>
+
+    <form id="ai-settings-form">
+      <label class="check-label"><input id="ai-enabled" type="checkbox"> Enable AI for this workspace</label>
+      <div class="two-columns"><div><label for="ai-provider">Provider</label><select id="ai-provider"><option value="ollama">Ollama</option><option value="compatible">OpenAI-compatible endpoint</option></select></div><div><label for="ai-model">Model name</label><input id="ai-model" maxlength="160" autocomplete="off"></div></div>
+      <label for="ai-endpoint">Processing endpoint</label><input id="ai-endpoint" type="url" required>
+      <p class="hint">For local Ollama, the server administrator sets TGWITNESS_AI_LOCAL_ENDPOINT. The default is http://127.0.0.1:11434.</p>
+      <label for="ai-key">API key</label><input id="ai-key" type="password" autocomplete="new-password" data-sensitive><p class="hint" id="ai-key-state"></p>
+      <label class="check-label"><input id="ai-clear-key" type="checkbox"> Remove the stored API key</label>
+      <div class="two-columns"><div><label for="ai-context">Maximum context characters</label><input id="ai-context" type="number" min="2000" max="64000" required></div><div><label for="ai-output">Maximum output tokens</label><input id="ai-output" type="number" min="128" max="4096" required></div><div><label for="ai-timeout">Request timeout, seconds</label><input id="ai-timeout" type="number" min="5" max="180" required></div><div><label for="ai-budget">Maximum requests per day</label><input id="ai-budget" type="number" min="1" max="1000" required></div></div>
+      <details><summary>Optional cost estimate</summary><div class="two-columns"><div><label for="ai-input-price">Price per million input tokens</label><input id="ai-input-price" type="number" min="0" max="10000" step="any"></div><div><label for="ai-output-price">Price per million output tokens</label><input id="ai-output-price" type="number" min="0" max="10000" step="any"></div></div><label for="ai-currency">Currency code</label><input id="ai-currency" maxlength="3" pattern="[A-Z]{3}" value="USD"></details>
+      <p class="hint">External providers may retain submitted data according to their own policies. TgWitness does not make a retention guarantee for them.</p>
+      <div class="route-actions"><button type="submit" class="primary">Save provider settings</button><button id="ai-test" type="button" class="secondary">Test with synthetic text</button></div>
+      <p id="ai-test-result" role="status"></p>
+    </form>
+  </details>
   <p class="notice">The external model can receive messages requested by its client. Choose the workspaces and chats you want to share.</p>
   <p class="hint"><a id="mcp-help" data-site-doc="mcp" href="https://phishdestroy.github.io/TgWitness/docs/reference/mcp/" target="_blank" rel="noopener noreferrer">Help &amp; documentation</a></p>
   <form class="card padded" id="mcp-form">

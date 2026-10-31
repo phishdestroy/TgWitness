@@ -21,7 +21,16 @@ Proszę wybrać jedną z metod. Pliki do pobrania w wersji przenośnej stają si
 | Windows | Proszę pobrać plik „`TgWitness-<version>-windows-amd64-portable.zip`” z sekcji „GitHub Releases”, a następnie kliknąć dwukrotnie plik „`TgWitness.cmd`” | Proszę dwukrotnie kliknąć `Start.cmd` | Proszę dwukrotnie kliknąć `scripts\Docker.cmd` |
 | Linux / macOS | — | `sh start.sh` | `sh scripts/docker-start.sh` |
 
-Aby uzyskać kod źródłowy, proszę pobrać i rozpakować plik ZIP z sekcji „GitHub Releases” lub sklonować repozytorium. Skrypt `Start.cmd` proponuje zainstalowanie Pythona 3.12 dla użytkownika systemu Windows, jeśli nie zostanie znaleziona odpowiednia wersja Pythona (winget lub podpisany instalator z python.org). `start.sh` wyświetla dokładne polecenie instalacyjne dla Państwa dystrybucji systemu Linux lub systemu macOS, jeśli brakuje środowiska Python. Pierwsze uruchomienie kodu źródłowego tworzy plik `.venv` i automatycznie instaluje zależności.
+W przypadku metod opartych na kodzie źródłowym [pobierz i rozpakuj bieżącą gałąź `main`](https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip) lub sklonuj repozytorium:
+
+```
+git clone https://github.com/phishdestroy/TgWitness.git
+cd TgWitness
+```
+
+Bieżący kod źródłowy obejmuje zbiorczy import kont, panel MTProxy oraz wznawiane ładowanie historii. Wersja przenośna 0.7.0 preview oraz jej archiwum kodu źródłowego powstały przed wprowadzeniem tych funkcji. Zobacz [dziennik zmian](https://phishdestroy.github.io/TgWitness/pl/docs/reference/changelog/), aby sprawdzić granice wersji.
+
+Skrypt `Start.cmd` proponuje instalację Pythona 3.12 dla użytkownika systemu Windows, jeśli nie zostanie znaleziony odpowiedni Python (przez winget lub podpisany instalator z python.org). Skrypt `start.sh` wypisuje dokładne polecenie instalacyjne dla danej dystrybucji systemu Linux lub systemu macOS, jeśli brakuje Pythona. Pierwsze uruchomienie ze źródeł automatycznie tworzy środowisko `.venv` i instaluje zależności.
 
 Docker kompiluje aplikację i uruchamia ją w tle; nie jest wymagane środowisko Python na hostie. Polecenia ``scripts\Docker.cmd`` i ``scripts/docker-start.sh`` wyświetlają adres panelu oraz token, gdy kontener działa poprawnie. Odpowiednie polecenia Docker na każdym obsługiwanym hoście to:
 
@@ -57,7 +66,9 @@ Wiadomości demonstracyjne są fikcyjne. Tryb demonstracyjny nie umożliwia poł
 
 Dane uwierzytelniające API identyfikują Państwa aplikację; same w sobie nie uprawniają one do korzystania z konta. Grupy prywatne nie wymagają publicznej nazwy użytkownika, jednak Państwa konto musi posiadać do nich dostęp.
 
-W przypadku istniejących kont prosimy zapoznać się z [formatami kont i sesji](https://phishdestroy.github.io/TgWitness/pl/docs/reference/accounts/): panel obsługuje Telethon StringSession, Telethon/Pyrogram SQLite, pliki TData ZIP dla pojedynczych kont oraz obsługiwane pliki JSON kont. Proszę wybrać sesję wraz z towarzyszącym jej plikiem JSON, a następnie nacisnąć przycisk **„Połącz konto**”. Dostępne jest również logowanie za pomocą kodu QR przy tych samych opcjonalnych ustawieniach API. TDLib, boty oraz zbiorcze listy kont nie są obsługiwane.
+W przypadku istniejących kont zobacz [konta i formaty sesji](https://phishdestroy.github.io/TgWitness/pl/docs/reference/accounts/): panel obsługuje Telethon StringSession, Telethon/Pyrogram SQLite, archiwa ZIP TData pojedynczych kont oraz obsługiwane pliki JSON kont. Wybierz jednocześnie plik sesji i towarzyszący mu plik JSON, a następnie naciśnij **Połącz konto**. Logowanie kodem QR jest również dostępne z tymi samymi opcjonalnymi ustawieniami API. Sesje TDLib, sesje botów oraz wykazy kont w formatach CSV/JSON nie są obsługiwane.
+
+W przypadku kilku kont użyj opcji **Konta → Importowanie kont** i wybierz obsługiwane pliki sesji. Towarzyszące pliki JSON są parowane na podstawie nazwy bazowej; każde zaimportowane konto otrzymuje własny obszar roboczy. Zobacz [import zbiorczy i grupy kont](https://phishdestroy.github.io/TgWitness/pl/docs/reference/accounts/#bulk-import-and-account-groups).
 
 Aby dodać kolejne konto, proszę nacisnąć przycisk **+** obok selektora kont lub otworzyć **Konto → Ustawienia → Ustawienia połączenia → Obszary robocze**, albo skorzystać z **opcji Konta**. Obszary robocze mają oddzielne sesje, dzienniki, klucze, źródła i kolejki. Przełączanie widoków nie powoduje zatrzymania działania pozostałych modułów zbierających dane. W tej instalacji to samo konto Telegram nie może być przypisane do dwóch obszarów roboczych. Nie ma ustalonej liczby obszarów roboczych; współdzielą one jeden proces, więc ich wydajność zależy od komputera.
 

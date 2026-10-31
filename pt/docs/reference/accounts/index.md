@@ -211,7 +211,7 @@ O primeiro exemplo preenche apenas as credenciais da API; faça login por telefo
 | **Sequências** de sessão do Pyrogram | Utilize o arquivo Pyrogram `.session`, ou o código QR/telefone |
 | TData com várias contas conectadas | Faça logout das outras contas no Telegram Desktop ou utilize o arquivo de sessão específico de cada conta |
 | Tokens de bot | Não suportado: o TgWitness atua como uma conta de usuário |
-| Listas em CSV/JSON de diversas contas | Adicione um espaço de trabalho por conta |
+| Listas em CSV/JSON de diversas contas | Importe arquivos de sessão compatíveis em **Contas → Importar contas** ou entre por telefone/QR em espaços de trabalho separados |
 | Sessões de teste no DC ou com bots | Utilize uma conta de usuário de produção |
 
 ## Várias contas
@@ -223,6 +223,10 @@ Pressione **+** ao lado do seletor de conta ou abra **Conta → Configurações 
 - Um diário permanece vinculado à conta que o criou. O login com uma conta diferente requer outro espaço de trabalho, e uma conta não pode ser atribuída a dois espaços de trabalho.
 - O token do painel principal controla todas as áreas de trabalho. [O acesso concedido](https://phishdestroy.github.io/TgWitness/pt/docs/reference/access/) pode restringir o acesso de outras pessoas a contas e chats selecionados, com permissões e limites de sessão distintos.
 - **A função “Contas”** renomeia um espaço de trabalho e exclui um espaço adicionado, juntamente com sua sessão, registro, fontes e chave de assinatura. O espaço de trabalho principal não pode ser excluído do painel.
+
+### Importação em lote e grupos de contas
+
+Use **Contas → Importar contas** para adicionar várias contas, combinar arquivos pelo nome e ver o resultado de cada login. Cada conta recebe seu próprio espaço de trabalho. Os grupos podem copiar configurações selecionadas de um modelo sem unir sessões, chaves ou evidências. Veja [o guia de importação e grupos](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) e [o painel do pool MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
 
 ## Sair
 

@@ -211,7 +211,7 @@ TData는 텔레그램 데스크톱 애플리케이션(desktop.telegram.org에서
 | Pyrogram 세션 **문자열** | Pyrogram `.session` 파일을 사용하거나, 휴대폰/QR 코드를 이용하십시오. |
 | 여러 계정이 로그인된 상태의 TData | 텔레그램 데스크톱에서 다른 계정에서 로그아웃하거나, 각 계정의 세션 파일을 사용하십시오. |
 | 봇 토큰 | 지원되지 않는 기능: TgWitness는 사용자 계정으로 활동하지 않습니다. |
-| 다수의 계정을 포함한 CSV/JSON 목록 | 계정당 하나의 작업 공간 추가 |
+| 다수의 계정을 포함한 CSV/JSON 목록 | **계정 → 계정 가져오기**를 통해 지원되는 세션 파일을 가져오거나 별도의 작업 공간에서 전화번호/QR로 로그인하세요 |
 | 테스트-DC 또는 봇 세션 | 실제 운영용 사용자 계정을 사용하십시오. |
 
 ## 여러 계정
@@ -223,6 +223,10 @@ TData는 텔레그램 데스크톱 애플리케이션(desktop.telegram.org에서
 - 저널은 이를 생성한 계정에 고정됩니다. 다른 계정으로 로그인하려면 별도의 작업 공간이 필요하며, 하나의 계정을 두 개의 작업 공간에 할당할 수는 없습니다.
 - 메인 패널 토큰은 모든 작업 공간을 제어합니다. [부여된 접근 권한을](https://phishdestroy.github.io/TgWitness/ko/docs/reference/access/) 통해 다른 사용자의 접근을 선택된 계정 및 채팅으로 제한할 수 있으며, 별도의 권한 및 세션 제한을 설정할 수 있습니다.
 - **계정은** 워크스페이스의 이름을 변경하거나 추가된 워크스페이스를 삭제하며, 이때 해당 세션, 저널, 출처 및 서명 키도 함께 삭제됩니다. 메인 워크스페이스는 패널에서 삭제할 수 없습니다.
+
+### 일괄 가져오기 및 계정 그룹
+
+**계정 → 계정 가져오기**에서 여러 계정을 추가하고, 확장자를 제외한 이름으로 파일을 연결하며, 각 로그인 결과를 확인하세요. 계정마다 별도의 작업 공간이 생성됩니다. 그룹은 세션, 키 또는 증거를 합치지 않고 템플릿에서 선택한 설정을 복사할 수 있습니다. [가져오기 및 그룹 안내](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings)와 [MTProxy 풀 대시보드](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)를 참조하세요.
 
 ## 로그아웃
 

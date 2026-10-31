@@ -211,7 +211,7 @@ Il primo esempio si limita a inserire le credenziali API; è possibile effettuar
 | **Stringhe** di sessione di Pyrogram | Utilizzi il file Pyrogram `.session`, oppure il codice QR o il numero di telefono |
 | TData con diversi account connessi | Effettuate il logout dagli altri account in Telegram Desktop oppure utilizzate il file di sessione specifico di ciascun account |
 | Token dei bot | Non supportato: TgWitness opera in qualità di account utente |
-| Elenchi in formato CSV/JSON di numerosi account | Aggiungere un’area di lavoro per ogni account |
+| Elenchi in formato CSV/JSON di numerosi account | Importa i file di sessione supportati tramite **Account → Importazione degli account**, oppure accedi tramite telefono/QR in spazi di lavoro separati |
 | Sessioni di Test-DC o con bot | Si prega di utilizzare un account utente di produzione |
 
 ## Account multipli
@@ -223,6 +223,10 @@ Premere **+** accanto al selettore dell’account, oppure aprire **Account → I
 - Un registro rimane associato all’account che lo ha creato. L’accesso con un account diverso richiede un altro spazio di lavoro, e un singolo account non può essere assegnato a due spazi di lavoro.
 - Il token del pannello principale controlla tutte le aree di lavoro. [L’accesso concesso](https://phishdestroy.github.io/TgWitness/it/docs/reference/access/) può limitare l’accesso di altre persone ad account e chat selezionati, con autorizzazioni distinte e limiti di sessione.
 - **La voce «Accounts»** rinomina un’area di lavoro ed elimina quella aggiunta, insieme alla relativa sessione, al registro, alle fonti e alla chiave di firma. L’area di lavoro principale non può essere eliminata dal pannello.
+
+### Importazione in blocco e gruppi di account
+
+Usa **Account → Importazione degli account** per aggiungere più account, abbinare i file per nome e vedere l’esito di ogni accesso. Ogni account riceve un proprio spazio di lavoro. I gruppi possono copiare impostazioni selezionate da un modello senza unire sessioni, chiavi o prove. Consulta [la guida a importazione e gruppi](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) e [il pannello del pool MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
 
 ## Esci
 

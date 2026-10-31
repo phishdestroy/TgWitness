@@ -211,7 +211,7 @@ Contoh pertama hanya mengisi kelayakan API; log masuk melalui telefon atau QR, a
 | **Rentetan** sesi Pyrogram | Gunakan fail Pyrogram `.session`, atau telefon/QR |
 | TData dengan beberapa akaun yang log masuk | Log keluar akaun lain dalam Telegram Desktop, atau gunakan fail sesi setiap akaun |
 | Token bot | Tidak disokong: TgWitness memerhati sebagai akaun pengguna |
-| Senarai CSV/JSON bagi banyak akaun | Tambah satu ruang kerja bagi setiap akaun |
+| Senarai CSV/JSON bagi banyak akaun | Import fail sesi yang disokong melalui **Akaun → Import akaun**, atau log masuk menggunakan telefon/QR dalam ruang kerja yang berasingan |
 | Sesi Test-DC atau bot | Gunakan akaun pengguna produksi |
 
 ## Beberapa akaun
@@ -223,6 +223,10 @@ Tekan **+** di sebelah pemilih akaun, atau buka **Akaun → Tetapan → Tetapan 
 - Jurnal kekal terikat kepada akaun yang menciptanya. Log masuk sebagai akaun lain memerlukan ruang kerja lain, dan satu akaun tidak boleh ditugaskan kepada dua ruang kerja.
 - Token panel utama mengawal semua ruang kerja. [Akses yang dikeluarkan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/access/) boleh mengehadkan orang lain kepada akaun dan sembang terpilih, dengan kebenaran berasingan dan had sesi.
 - **Akaun** menamakan semula ruang kerja dan memadam ruang kerja yang ditambah, termasuk sesi, jurnal, sumber dan kunci tandatangan. Ruang kerja utama tidak boleh dipadam dari panel.
+
+### Import pukal dan kumpulan akaun
+
+Gunakan **Akaun → Import akaun** untuk menambah beberapa akaun, memadankan fail mengikut nama asas dan melihat hasil setiap log masuk. Setiap akaun mendapat ruang kerja sendiri. Kumpulan boleh menyalin tetapan terpilih daripada templat tanpa menggabungkan sesi, kunci atau bukti. Lihat [panduan import dan kumpulan](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) dan [papan pemuka kumpulan MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
 
 ## Log keluar
 

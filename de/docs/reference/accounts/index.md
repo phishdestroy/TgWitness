@@ -211,7 +211,7 @@ Im ersten Beispiel werden lediglich die API-Anmeldedaten eingegeben; melden Sie 
 | Pyrogram-Sitzungs**strings** | Verwenden Sie die Pyrogram-Datei „`.session`“ oder den Telefoncode bzw. den QR-Code. |
 | TData mit mehreren angemeldeten Konten | Melden Sie sich von den anderen Konten in Telegram Desktop ab oder verwenden Sie die jeweilige Sitzungsdatei des jeweiligen Kontos |
 | Bot-Token | Nicht unterstützt: TgWitness fungiert als Benutzerkonto |
-| CSV-/JSON-Listen zahlreicher Konten | Fügen Sie pro Konto einen Arbeitsbereich hinzu |
+| CSV-/JSON-Listen zahlreicher Konten | Importieren Sie unterstützte Sitzungsdateien über **Konten → Konten importieren** oder melden Sie sich per Telefon/QR in separaten Arbeitsbereichen an |
 | Test-DC- oder Bot-Sitzungen | Verwenden Sie ein Produktionsbenutzerkonto |
 
 ## Mehrere Konten
@@ -223,6 +223,10 @@ Drücken Sie **+** neben der Kontoauswahl oder öffnen Sie **Konto → Einstellu
 - Ein Protokoll bleibt an das Konto gebunden, das es erstellt hat. Die Anmeldung mit einem anderen Konto erfordert einen weiteren Arbeitsbereich, und ein Konto kann nicht zwei Arbeitsbereichen zugeordnet werden.
 - Das Haupt-Panel-Token steuert alle Arbeitsbereiche. [Durch die Erteilung von Zugriffsrechten](https://phishdestroy.github.io/TgWitness/de/docs/reference/access/) können andere Personen auf ausgewählte Konten und Chats beschränkt werden, wobei separate Berechtigungen und Sitzungslimits gelten.
 - **„Accounts“** benennt einen Arbeitsbereich um und löscht einen hinzugefügten Arbeitsbereich samt dessen Sitzung, Protokoll, Quellen und Signaturschlüssel. Der Hauptarbeitsbereich kann nicht über das Bedienfeld gelöscht werden.
+
+### Stapelimport und Kontogruppen
+
+Unter **Konten → Konten importieren** können Sie mehrere Konten hinzufügen, Dateien nach Basisnamen zuordnen und jedes Anmeldeergebnis sehen. Jedes Konto erhält einen eigenen Arbeitsbereich. Gruppen können ausgewählte Einstellungen aus einer Vorlage kopieren, ohne Sitzungen, Schlüssel oder Belege zusammenzuführen. Siehe [die Anleitung für Import und Gruppen](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) und [das MTProxy-Pool-Dashboard](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
 
 ## Abmelden
 

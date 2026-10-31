@@ -80,7 +80,13 @@ Dalam demo, kawalan pemberitahuan boleh dilihat tetapi penghantaran dilumpuhkan.
 
 **Jurnal** memaparkan pemerhatian, carian dan penapis. Suntingan membuka versi yang dirakam; pembuangan membuka kandungan sebelumnya jika tersedia. Atribusi yang tidak diketahui kekal dinyatakan dengan jelas. Bilangan tersedia di bawah **Gambaran Keseluruhan**; butiran pemerolehan kekal dalam panduan tempatan.
 
+Buka mesej yang telah diedit untuk membandingkan versinya dengan **Perubahan dalam teks** atau **Bersebelahan**; **Data mentah** menunjukkan medan yang disimpan. Perubahan pada pautan tersembunyi dan butang bot dipaparkan secara berasingan. Buka pratonton lampiran untuk memeriksa imej, audio atau video yang disimpan; butang muat turun memastikan fail asal yang dipelihara kekal tersedia.
+
+**Live** mengemas kini jurnal dan sembang sebaik sahaja rekod tiba. Jedakannya semasa menyemak, atau gunakan butang peristiwa baharu apabila bersedia; pengumpulan tetap berjalan. **Ctrl/Cmd+K** mencari tindakan panel dan membuat carian dalam jurnal.
+
 **Sumber** mengandungi skop pemerhatian (perbualan terpilih, folder Telegram atau keseluruhan akaun), perbualan boleh diakses dari semua jenis, sumber terpilih dengan bintang keutamaan, tetapan lampiran dan semakan semula serta potret sejarah. Sumber peribadi dipilih melalui dialog/ID tanpa pautan awam. Status akses menerangkan pemeriksaan terkini, bukan kebenaran kekal.
+
+Tapis sumber, pilih kotak semaknya, kemudian dayakan, jeda atau tandakannya sebagai keutamaan secara serentak. Dalam senarai sembang yang tersedia, **Tambah yang dipilih** menggunakan pilihan anda; **Tambah semua padanan** menggunakan carian dan penapis jenis semasa.
 
 **Perbualan → Orang** memaparkan semua orang yang mempunyai mesej disimpan; dengan profil orang diaktifkan untuk perbualan, satu klik membuka profil orang tersebut dengan pautan ke rekod jurnal.
 

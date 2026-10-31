@@ -211,7 +211,7 @@ Birinchi misol faqat API ma'lumotlarini to'ldiradi; telefon yoki QR orqali tizim
 | Pyrogram sessiya **satrlari** | Pyrogram `.session` faylidan yoki telefon/QR kodidan foydalaning |
 | Bir nechta tizimga kirgan hisoblar bilan TData | Telegram Desktop'dagi boshqa hisoblardan chiqib turing yoki har bir hisob uchun alohida sessiya faylidan foydalaning |
 | Bot tokenlari | Qo'llab-quvvatlanmaydi: TgWitness foydalanuvchi hisobini kuzatadi |
-| Ko'plab akkauntlarning CSV/JSON ro'yxatlari | Har bir hisob uchun bitta ish maydonini qo'shing |
+| Ko'plab akkauntlarning CSV/JSON ro'yxatlari | Qo‘llab-quvvatlanadigan sessiya fayllarini **Hisoblar → Hisoblarni import qilish** orqali import qiling yoki alohida ishchi maydonlarda telefon/QR orqali kiring |
 | Test-DC yoki bot sessiyalari | Ishlab chiqarish foydalanuvchi hisobini ishlating |
 
 ## Bir nechta hisoblar
@@ -223,6 +223,10 @@ Hisob tanlovchisining yonidagi **+** tugmasini bosing yoki **Hisob → Sozlamala
 - Jurnal uni yaratgan akkauntga bog'langan bo'lib qoladi. Boshqa akkauntga kirish uchun alohida ish maydoni talab etiladi va bir akkaunt ikki ish maydoniga tayinlanishi mumkin emas.
 - Asosiy panel tokeni barcha ish maydonlarini nazorat qiladi. [Berilgan kirish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/access/) boshqalarni tanlangan hisoblar va suhbatlarga, alohida ruxsatnomalar va sessiya cheklovlari bilan cheklashi mumkin.
 - **Hisoblar** ish maydonini qayta nomlaydi va qo'shilgan ish maydonini sessiyasi, jurnali, manbalari va imzolash kaliti bilan o'chirib tashlaydi. Asosiy ish maydoni paneldan o'chirilmaydi.
+
+### Ommaviy import va hisob guruhlari
+
+Bir nechta hisob qo‘shish, fayllarni asosiy nomi bo‘yicha juftlash va har bir kirish natijasini ko‘rish uchun **Hisoblar → Hisoblarni import qilish** bo‘limidan foydalaning. Har bir hisob alohida ish maydoniga ega. Guruhlar seanslar, kalitlar yoki dalillarni birlashtirmasdan namunadan tanlangan sozlamalarni nusxalashi mumkin. [import va guruhlar qo‘llanmasi](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) va [MTProxy havuzi boshqaruv paneli](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)ga qarang.
 
 ## Chiqish
 

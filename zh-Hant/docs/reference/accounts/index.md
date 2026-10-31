@@ -211,7 +211,7 @@ TData 即是 Telegram Desktop 應用程式（來自 desktop.telegram.org 的跨�
 | Pyrogram 會話**字串** | 請使用 Pyrogram `.session` 檔案，或透過手機/QR 碼 |
 | TData 附帶多個已登入的帳戶 | 請在 Telegram Desktop 中登出其他帳戶，或使用各帳戶專屬的會話檔案 |
 | 機器人代幣 | 不支援：TgWitness 僅以使用者帳戶身分進行監測 |
-| 包含多個帳戶的 CSV/JSON 清單 | 每個帳戶新增一個工作區 |
+| 包含多個帳戶的 CSV/JSON 清單 | 透過**帳戶 → 匯入帳戶**匯入受支援的工作階段檔案，或在個別的工作區中透過電話號碼／QR 碼登入 |
 | Test-DC 或 機器人會話 | 請使用正式運作的用戶帳戶 |
 
 ## 多個帳戶
@@ -223,6 +223,10 @@ TData 即是 Telegram Desktop 應用程式（來自 desktop.telegram.org 的跨�
 - 日誌會與建立它的帳戶綁定。若以其他 帳戶登入，則需建立另一個工作區，且一個帳戶無法被指派至兩個 工作區。
 - 主面板中的「代幣」功能可控制所有工作區。[所發出的存取權限](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/access/)可將其他使用者限制在選定的帳戶和聊天室中，並可設定獨立的權限與會話限制。
 - **帳戶會**重新命名一個工作區，並刪除已新增的工作區，連同其會話、日誌、 來源及簽名金鑰一併刪除。主工作區無法從控制面板中刪除。
+
+### 批次匯入和帳戶群組
+
+使用 **帳戶 → 匯入帳戶** 新增多個帳戶，依基本檔名配對檔案，並查看每次登入的結果。每個帳戶都有獨立的工作區。群組可從範本複製選定的設定，而不會合併工作階段、金鑰或證據。請參閱[匯入和群組指南](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings)和[MTProxy 集區控制台](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)。
 
 ## 登出
 

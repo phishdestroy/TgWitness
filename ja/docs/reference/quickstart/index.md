@@ -21,7 +21,16 @@ TgWitnessは、ご自身のアカウントがアクセス可能なTelegramのグ
 | Windows | GitHub Releases から「`TgWitness-<version>-windows-amd64-portable.zip`」を抽出し、「`TgWitness.cmd`」をダブルクリックしてください。 | `Start.cmd` をダブルクリックしてください | `scripts\Docker.cmd` をダブルクリックしてください |
 | Linux / macOS | — | `sh start.sh` | `sh scripts/docker-start.sh` |
 
-ソースコードを入手するには、GitHub ReleasesからソースZIPファイルをダウンロードして解凍するか、 リポジトリをクローンしてください。`Start.cmd`は、適切なPythonが見つからない場合、 Windowsユーザー向けにPython 3.12のインストールを提案します（winget、またはpython.orgの署名付きインストーラー）。 `start.sh`は、 Pythonがインストールされていない場合、お使いのLinuxディストリビューションまたはmacOS向けの正確なインストールコマンドを表示します。 ソースコードを初めて実行すると、`.venv`が生成され、依存関係が自動的にインストールされます。
+ソースコードからの実行方法については、[現在の `main` をダウンロードして展開する](https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip)か、リポジトリをクローンしてください:
+
+```
+git clone https://github.com/phishdestroy/TgWitness.git
+cd TgWitness
+```
+
+現在のソースには、アカウントの一括インポート、MTProxyダッシュボード、および再開可能な履歴の読み込みが含まれています。0.7.0 のポータブルプレビューとそのリリースソースアーカイブは、これらの機能が追加される前のものです。バージョンの境界については、[変更履歴](https://phishdestroy.github.io/TgWitness/ja/docs/reference/changelog/)を参照してください。
+
+`Start.cmd` は、適切な Python が見つからない場合、現在の Windows ユーザー向けに Python 3.12 のインストール（winget、または署名済みの python.org インストーラー経由）を提案します。`start.sh` は、Python が不足している場合、お使いの Linux ディストリビューションまたは macOS 向けの正確なインストールコマンドを表示します。ソースからの初回起動時には、`.venv` が作成され、依存関係が自動的にインストールされます。
 
 Dockerがアプリケーションをビルドし、バックグラウンドで起動します。ホスト側のPythonは 不要です。`scripts\Docker.cmd`および`scripts/docker-start.sh`は、 コンテナが正常に動作している際に、パネルアドレスとトークンを表示します。サポートされているすべてのホストにおける対応するDockerコマンドは以下の通りです：
 
@@ -57,7 +66,9 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 API認証情報はアプリケーションを識別するものであり、それ自体ではアカウントへのアクセス権を付与するものではありません。 非公開グループでは公開ユーザー名は必要ありませんが、アカウントにはアクセス権が必要です。
 
-既存のアカウントについては、[アカウントおよびセッション形式をご](https://phishdestroy.github.io/TgWitness/ja/docs/reference/accounts/)参照ください。本 パネルでは、Telethon StringSession、Telethon/Pyrogram SQLite、単一アカウントの TData ZIP、およびサポート対象のアカウント JSON に対応しています。セッションとその対応する JSON を一緒に選択し、 **「アカウントを接続」**を押してください。QR ログインも 、同じオプションの API 設定で利用可能です。 TDLib、ボット、および一括アカウントリストはサポートされていません。
+既存のアカウントについては、[アカウントとセッション形式](https://phishdestroy.github.io/TgWitness/ja/docs/reference/accounts/)を参照してください。パネルは Telethon StringSession、Telethon/Pyrogram SQLite、単一アカウントの TData ZIP、およびサポートされているアカウント JSON を受け付けます。セッションとそれに付随する JSON を一緒に選択し、**アカウントを連携する**を押してください。同じオプションの API 設定を使用して QR ログインも利用できます。TDLib、ボットセッション、および CSV/JSON のアカウント一覧はサポートされていません。
+
+複数のアカウントを扱う場合は、**アカウント → アカウントのインポート**を使用し、サポートされているセッションファイルを選択してください。付随する JSON ファイルはベース名（拡張子を除いたファイル名）でペアリングされ、インポートされた各アカウントには専用のワークスペースが割り当てられます。[一括インポートとアカウントグループ](https://phishdestroy.github.io/TgWitness/ja/docs/reference/accounts/#bulk-import-and-account-groups)を参照してください。
 
 別のアカウントを追加するには、アカウント選択ボタンの横にある「**+**」を押すか、 **[アカウント] → [設定] → [接続設定] → [ワークスペース]** を開くか、**[アカウント]** を使用してください。ワークスペースごとに、 セッション、ジャーナル、鍵、ソース、キューが個別に管理されます。ビューを切り替えても、他のコレクターは実行されたままになります。 このインストール環境では、同じ Telegram アカウントを 2 つのワークスペースに割り当てることはできません。 ワークスペースの数に制限はありません。ワークスペースは1つのプロセスを共有するため、処理能力はマシンの性能に依存します。
 

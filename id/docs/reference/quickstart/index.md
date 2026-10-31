@@ -21,7 +21,16 @@ Pilih salah satu metode. Unduhan portabel akan tersedia setelah rilis build dite
 | Windows | Ekstrak `TgWitness-<version>-windows-amd64-portable.zip` dari GitHub Releases, klik dua kali `TgWitness.cmd` | Klik dua kali `Start.cmd` | Klik dua kali `scripts\Docker.cmd` |
 | Linux / macOS | — | `sh start.sh` | `sh scripts/docker-start.sh` |
 
-Untuk metode sumber, unduh dan ekstrak berkas ZIP sumber dari GitHub Releases atau kloning repositori. `Start.cmd` menawarkan untuk menginstal Python 3.12 bagi pengguna Windows jika tidak ditemukan Python yang sesuai (winget, atau penginstal python.org yang ditandatangani). `start.sh` menampilkan perintah instalasi yang tepat untuk distribusi Linux atau macOS Anda jika Python tidak terpasang. Saat dijalankan pertama kali, `.venv` akan dibuat dan dependensinya diinstal secara otomatis.
+Untuk metode kode sumber, [unduh dan ekstrak `main` saat ini](https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip) atau kloning repositori:
+
+```
+git clone https://github.com/phishdestroy/TgWitness.git
+cd TgWitness
+```
+
+Kode sumber saat ini mencakup impor akun massal, dasbor MTProxy, dan pemuatan riwayat yang dapat dilanjutkan. Pratinjau portabel 0.7.0 dan arsip kode sumber rilisnya diterbitkan sebelum penambahan ini. Lihat [log perubahan](https://phishdestroy.github.io/TgWitness/id/docs/reference/changelog/) untuk batas versinya.
+
+`Start.cmd` menawarkan untuk menginstal Python 3.12 bagi pengguna Windows Anda jika tidak ditemukan Python yang sesuai (winget, atau penginstal python.org bertanda tangan). `start.sh` mencetak perintah instalasi yang tepat untuk distribusi Linux atau macOS Anda jika Python belum ada. Peluncuran kode sumber pertama akan membuat `.venv` dan menginstal dependensi secara otomatis.
 
 Docker membangun aplikasi dan menjalankannya di latar belakang; Python di host tidak diperlukan. `scripts\Docker.cmd` dan `scripts/docker-start.sh` menampilkan alamat panel dan token saat kontainer dalam kondisi baik. Perintah Docker yang setara di setiap host yang didukung adalah:
 
@@ -57,7 +66,9 @@ Pesan demo bersifat fiktif. Mode demo tidak dapat terhubung ke akun Telegram yan
 
 Kredensial API mengidentifikasi aplikasi Anda; kredensial tersebut tidak secara otomatis memberikan otorisasi atas akun. Grup pribadi tidak memerlukan nama pengguna publik, tetapi akun Anda harus memiliki akses.
 
-Untuk akun yang sudah ada, lihat [format akun dan sesi](https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/): panel ini mendukung Telethon StringSession, Telethon/Pyrogram SQLite, TData ZIP untuk satu akun, dan JSON akun yang didukung. Pilih sesi dan file JSON pendampingnya secara bersamaan, lalu tekan **"Hubungkan Akun**". Masuk melalui QR juga tersedia dengan pengaturan API opsional yang sama. TDLib, bot, dan daftar akun massal tidak didukung.
+Untuk akun yang sudah ada, lihat [akun dan format sesi](https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/): panel menerima Telethon StringSession, SQLite Telethon/Pyrogram, ZIP TData akun tunggal, dan JSON akun yang didukung. Pilih sesi beserta JSON pendampingnya sekaligus, lalu tekan **Hubungkan akun**. Login QR juga tersedia dengan pengaturan API opsional yang sama. TDLib, sesi bot, dan inventaris akun CSV/JSON tidak didukung.
+
+Untuk beberapa akun, gunakan **Akun → Impor akun** dan pilih file sesi yang didukung. File JSON pendamping dipasangkan berdasarkan nama dasar (basename); setiap akun yang diimpor mendapatkan ruang kerjanya sendiri. Lihat [impor massal dan grup akun](https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/#bulk-import-and-account-groups).
 
 Untuk menambahkan akun lain, tekan **+** di samping pemilih akun atau buka **Akun → Pengaturan → Pengaturan koneksi → Ruang kerja**, atau gunakan **Akun**. Ruang kerja memiliki sesi, jurnal, kunci, sumber, dan antrian yang terpisah. Mengganti tampilan tidak akan menghentikan pengumpul lainnya. Akun Telegram yang sama tidak dapat ditugaskan ke dua ruang kerja dalam instalasi ini. Tidak ada batasan jumlah ruang kerja; semuanya berbagi satu proses, sehingga kapasitasnya bergantung pada mesin.
 

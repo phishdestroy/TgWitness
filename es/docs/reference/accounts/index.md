@@ -211,7 +211,7 @@ En el primer ejemplo solo se rellenan las credenciales de la API; inicie sesión
 | **Cadenas** de sesión de Pyrogram | Utilice el archivo Pyrogram `.session`, o el código QR/teléfono |
 | TData con varias cuentas registradas | Cierre la sesión en las demás cuentas de Telegram Desktop o utilice el archivo de sesión propio de cada cuenta |
 | Tokens de bot | No compatible: TgWitness actúa como una cuenta de usuario |
-| Listas en formato CSV/JSON de numerosas cuentas | Añada un espacio de trabajo por cada cuenta |
+| Listas en formato CSV/JSON de numerosas cuentas | Importe archivos de sesión compatibles mediante **Cuentas → Importar cuentas**, o inicie sesión por teléfono/QR en espacios de trabajo separados |
 | Sesiones de prueba en DC o con bots | Utilice una cuenta de usuario de producción |
 
 ## Cuentas múltiples
@@ -223,6 +223,10 @@ Pulse **+** junto al selector de cuentas, o bien abra **Cuenta → Ajustes → A
 - Un registro permanece vinculado a la cuenta que lo creó. Para iniciar sesión con una cuenta diferente se requiere otro espacio de trabajo, y una misma cuenta no puede asignarse a dos espacios de trabajo.
 - El token del panel principal controla todos los espacios de trabajo. [El acceso concedido](https://phishdestroy.github.io/TgWitness/es/docs/reference/access/) puede limitar el acceso de otras personas a cuentas y chats seleccionados, con permisos y límites de sesión independientes.
 - **La función «Cuentas»** cambia el nombre de un espacio de trabajo y elimina uno añadido, junto con su sesión, su registro, sus fuentes y su clave de firma. El espacio de trabajo principal no se puede eliminar desde el panel.
+
+### Importación masiva y grupos de cuentas
+
+Usa **Cuentas → Importar cuentas** para añadir varias cuentas, emparejar archivos por nombre y ver el resultado de cada inicio de sesión. Cada cuenta tiene su propio espacio de trabajo. Los grupos pueden copiar ajustes seleccionados de una plantilla sin combinar sesiones, claves ni pruebas. Consulta [la guía de importación y grupos](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) y [el panel del conjunto MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
 
 ## Cerrar sesión
 

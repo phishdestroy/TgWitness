@@ -211,7 +211,7 @@ W pierwszym przykładzie należy jedynie wprowadzić dane uwierzytelniające API
 | **Ciągi** sesji programu Pyrogram | Proszę skorzystać z pliku Pyrogram o numerze `.session` lub skanować kod QR za pomocą telefonu. |
 | TData z kilkoma zalogowanymi kontami | Wyloguj się z pozostałych kont w aplikacji Telegram Desktop lub skorzystaj z pliku sesji przypisanego do każdego konta |
 | Tokeny botów | Nieobsługiwane: TgWitness obserwuje jako konto użytkownika |
-| Listy wielu kont w formatach CSV/JSON | Należy dodać jeden obszar roboczy na każde konto |
+| Listy wielu kont w formatach CSV/JSON | Zaimportuj obsługiwane pliki sesji za pomocą opcji **Konta → Importowanie kont** lub zaloguj się przez telefon/kod QR w osobnych obszarach roboczych |
 | Sesje testowe DC lub sesje z wykorzystaniem botów | Należy korzystać z produkcyjnego konta użytkownika |
 
 ## Wiele kont
@@ -223,6 +223,10 @@ Naciśnij przycisk **+** obok selektora konta lub otwórz **Konto → Ustawienia
 - Dziennik pozostaje powiązany z kontem, które go utworzyło. Zalogowanie się przy użyciu innego konta wymaga utworzenia kolejnego obszaru roboczego, a jedno konto nie może być przypisane do dwóch obszarów roboczych.
 - Główny token panelu kontroluje wszystkie obszary robocze. [Przyznany dostęp](https://phishdestroy.github.io/TgWitness/pl/docs/reference/access/) może ograniczać innym osobom dostęp do wybranych kont i czatów, z oddzielnymi uprawnieniami i limitami sesji.
 - **Funkcja „Konta”** zmienia nazwę obszaru roboczego oraz usuwa dodany obszar wraz z jego sesją, dziennikiem, źródłami i kluczem podpisującym. Głównego obszaru roboczego nie można usunąć z panelu.
+
+### Import zbiorczy i grupy kont
+
+Otwórz **Konta → Importowanie kont**, aby dodać wiele kont, dopasować pliki według nazwy i sprawdzić wynik każdego logowania. Każde konto otrzymuje własny obszar roboczy. Grupy mogą kopiować wybrane ustawienia ze wzorca bez łączenia sesji, kluczy ani dowodów. Zobacz [przewodnik po imporcie i grupach](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) i [panel puli MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
 
 ## Wyloguj się
 

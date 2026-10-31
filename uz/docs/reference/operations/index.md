@@ -80,7 +80,13 @@ Demo rejimida bildirishnoma boshqaruvlari ko'rinadi, ammo yuborish funksiyasi o'
 
 **Jurnal** kuzatuvlar, qidiruv va filtrlarni ko'rsatadi. Tahrir ushlangan versiyalarni ochadi; o'chirish mavjud bo'lsa, oldingi kontentni ochadi. Noma'lum atribut aniq ko'rsatiladi. Hisoblar **Umumiy ko'rinish** bo'limida mavjud; olish tafsilotlari mahalliy qo'llanmada qoladi.
 
+Tahrirlangan xabarning versiyalarini **Matndagi o‘zgarishlar** yoki **Yonma-yon** yordamida solishtirish uchun uni oching; **Xom ma’lumotlar** saqlangan maydonlarni ko‘rsatadi. Yashirin havolalar va bot tugmalaridagi o‘zgarishlar alohida ko‘rinadi. Saqlangan rasm, audio yoki videolarni ko‘zdan kechirish uchun biriktirma ko‘rinishini oching; yuklab olish tugmasi saqlangan asl nusxadan foydalanish imkonini beradi.
+
+**Live** yozuvlar kelib tushishi bilan jurnal va chatlarni yangilab boradi. Ko‘rib chiqish vaqtida uni pauza qiling yoki tayyor bo‘lganingizda yangi hodisalar tugmasidan foydalaning; ma’lumotlarni yig‘ish davom etaveradi. **Ctrl/Cmd+K** panel amallarini topadi va jurnal bo‘ylab qidiradi.
+
 **Manbalar** kuzatuv doirasini (tanlangan suhbatlar, Telegram papkasi yoki butun akun), har qanday turdagi mavjud suhbatlarni, ustuvor yulduzchali tanlangan manbalarni, ilova va qayta tekshirish sozlamalari hamda tarix snopshotlarini o'z ichiga oladi. Xususiy manbalar dialog/ID orqali tanlanadi, ommaviy havola yo'q. Kirish holati eng so'nggi tekshiruvni tasvirlaydi, doimiy ruxsatnomalarni emas.
+
+Manbalarni filtrlang, ularning katakchalarini belgilang, so‘ngra ularni birgalikda yoqing, pauza qiling yoki ustuvor sifatida belgilang. Mavjud chatlar ro‘yxatida **Tanlanganlarni qo‘shish** sizning tanlovingizdan foydalanadi; **Barcha mos natijalarni qo‘shish** esa joriy qidiruv va tur filtridan foydalanadi.
 
 **Suhbatlar →** Saqlangan xabarlari bo'lgan barcha **odamlarni** ro'yxatlaydi; suhbat uchun odam profillari yoqilganda, ustiga bosish shu shaxsning profilini jurnal yozuvlari havolalari bilan ochadi.
 
