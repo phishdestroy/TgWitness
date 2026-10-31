@@ -1,0 +1,49 @@
+/* The shell stays in the viewport; each conversation column owns its scroll. */
+.workspace[data-current-view="chats"] { height: 100dvh; min-height: 0; }
+.workspace[data-current-view="chats"] main { height: 100%; min-height: 0; }
+.workspace[data-current-view="chats"] .topbar { flex-shrink: 0; position: relative; }
+.workspace[data-current-view="chats"] .health-toolbar,
+.workspace[data-current-view="chats"] .context-bar { flex-shrink: 0; }
+.workspace[data-current-view="chats"] .content {
+  display: flex; flex-direction: column; min-height: 0; max-width: none;
+  padding: 20px 24px; overflow: hidden;
+}
+.workspace[data-current-view="chats"] #view-chats { flex: 1; min-height: 0; }
+.workspace[data-current-view="chats"] .chats-shell {
+  height: 100%; min-height: 0; grid-template-columns: minmax(200px, 28%) minmax(0, 1fr); gap: 16px;
+}
+.workspace[data-current-view="chats"] #chats-list {
+  flex: 1; min-height: 0; max-height: none; overscroll-behavior: contain;
+}
+.workspace[data-current-view="chats"] .chat-pane,
+.workspace[data-current-view="chats"] .chat-feed { min-height: 0; }
+.workspace[data-current-view="chats"] .chat-feed { overscroll-behavior: contain; }
+.workspace[data-current-view="chats"] footer { display: none; }
+
+@media (min-width: 768px) {
+  .workspace[data-current-view="chats"] .chats-sidebar,
+  .workspace[data-current-view="chats"] .chat-pane { display: flex; }
+  .workspace[data-current-view="chats"] .chat-header { display: flex; }
+  .workspace[data-current-view="chats"] .chat-header .chat-actions { flex-direction: row; }
+  .workspace[data-current-view="chats"] .chat-title .avatar { display: inline-flex; }
+  .workspace[data-current-view="chats"] .chat-back { display: none; }
+}
+@media (min-width: 768px) and (max-width: 1000px) {
+  .workspace[data-current-view="chats"] .content { padding: 12px; }
+  .workspace[data-current-view="chats"] .chats-shell { gap: 10px; }
+  .workspace[data-current-view="chats"] .chat-item { gap: 8px; padding-inline: 8px; }
+}
+@media (max-width: 767px) {
+  .workspace[data-current-view="chats"] .content { padding: 10px 8px; }
+  .workspace[data-current-view="chats"] .chats-shell { grid-template-columns: minmax(0, 1fr); }
+  .chats-shell[data-panel="chat"] .chats-sidebar, .chats-shell[data-panel="list"] .chat-pane { display: none; }
+  .chat-back { display: inline-flex; min-height: 40px; }
+  .workspace[data-current-view="chats"] .chat-header { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 8px; padding: 12px; }
+  .chat-header .chat-actions { flex-direction: column; }
+  .chat-title .avatar { display: none; }
+  .chat-filters { margin-inline-start: 0; }
+  .workspace[data-current-view="chats"] .chat-status { padding: 8px 12px; }
+  .workspace[data-current-view="chats"] .chat-toolbar { padding-inline: 12px; }
+  .workspace[data-current-view="chats"] .chat-feed { padding: 12px; }
+  .workspace[data-current-view="chats"] .chat-compose { padding-inline: 12px; }
+}
