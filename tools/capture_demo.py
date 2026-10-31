@@ -100,7 +100,8 @@ def walk(page):
                 summary.click()
                 settle(page, 250)
 
-    for view in ("observations", "sources", "evidence", "witness", "parameters", "connection", "accounts", "chats"):
+    views = page.locator('.sidebar [data-view]:visible').evaluate_all('nodes=>nodes.map(n=>n.dataset.view)')
+    for view in dict.fromkeys([*views, "chats"]):
         page.locator(f'[data-view="{view}"]').first.click()
         settle(page)
         if view == "observations":
