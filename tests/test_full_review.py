@@ -156,7 +156,7 @@ def test_export_cancellation_waits_for_the_file_worker_before_cleanup(journal, m
         store, _ = journal
         collector = await prepared(journal)
         entered, release = threading.Event(), threading.Event()
-        def building(scratch, meta, vault, output, limit):
+        def building(scratch, meta, vault, output, limit, options=None):
             entered.set()
             assert release.wait(5)
             assert scratch.exists()
