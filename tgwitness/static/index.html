@@ -229,6 +229,22 @@
   </form>
   <div class="card padded"><h2 id="target-list-title">Selected chats</h2><div id="target-list"></div></div>
   <div class="card padded" hidden id="available-card"><h2>Available chats</h2><div class="dialog-filters"><input aria-label="Find an available chat" id="dialog-search" placeholder="Find a chat…" type="search"><select aria-label="Chat type" id="dialog-kind"><option value="">All types</option><option value="channels">Channels</option><option value="groups">Groups</option><option value="private">Private chats</option><option value="bots">Bots</option></select></div><p class="hint" id="dialog-limit"></p><div id="dialog-list"></div><button class="primary" id="finish-source-selection" type="button">Done</button></div>
+  <section class="card padded" id="history-card" aria-labelledby="history-heading">
+    <div class="eyebrow">Full history</div><h2 id="history-heading">Bring past messages into this workspace</h2>
+    <p class="muted">Load the available history of every enabled source into Chats and the signed journal. Progress survives a restart. Attachments follow your media settings. Deleted messages and unseen past edits cannot be recovered.</p>
+    <p class="hint">For an account archive, choose Whole account above, load and review the source list, then start observation. This run uses the enabled sources listed at its start; new sources are not added to a running job.</p>
+    <div class="chat-export-actions">
+      <button class="primary" id="history-start" type="button">Load full history</button>
+      <button class="secondary" id="history-pause" type="button" hidden>Pause history</button>
+      <button class="primary" id="history-resume" type="button" hidden>Continue history</button>
+      <button class="quiet" id="history-cancel" type="button" hidden>End this history run</button>
+      <button class="quiet" id="history-report" type="button" hidden>Save signed progress report</button>
+    </div>
+    <p id="history-progress" role="status" aria-live="polite"></p>
+    <p class="hint" id="history-media"></p>
+    <ul id="history-sources"></ul>
+    <p class="hint">Use Export evidence to hand over the journal and saved attachments. Finishing history reads does not mean every attachment was downloaded.</p>
+  </section>
   <details class="source-options" id="source-options"><summary>Recording settings · what to save, photos &amp; files, history</summary>
   <form class="card padded monitoring-card" id="monitoring-form">
     <div class="eyebrow">Monitoring policy</div><h2>Choose which changes to preserve</h2>
