@@ -76,7 +76,7 @@ DEMO_STATIC = {"demo/" + name: "tgwitness/static/" + name
 DEMO_STATIC.update({"demo/core/" + name: "tgwitness/static/core/" + name
                     for name in ("time.js", "view-host.js")})
 DEMO_STATIC.update({"demo/components/" + name: "tgwitness/static/components/" + name
-                    for name in ("shell.js", "shell.css", "health.js", "health.css")})
+                    for name in ("shell.js", "shell.css", "health.js", "health.css", "collection.js", "collection.css")})
 DEMO_STATIC.update({"demo/views/" + name: "tgwitness/static/views/" + name
                     for name in ("sources.js", "sources.css")})
 DEMO_STATIC.update({"demo/mock.js": "website/demo/mock.js", "demo/fixtures.json": "website/demo/fixtures.json"})

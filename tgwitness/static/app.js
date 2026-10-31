@@ -682,6 +682,11 @@ function renderCollectorHealth(h){
   state.healthStates=states;
 }
 
+let collectionUI=null;
+const collectionReady=import("./components/collection.js?v=1").then(({createCollectionControl})=>{
+  collectionUI=createCollectionControl({node,tr,status:()=>state.status,workspace:$("workspace")});collectionUI.update();return collectionUI;
+});
+collectionReady.catch(error=>toast(error.message,true));
 function renderStatus() {
   const s=state.status,c=s.collector;
   $("workspace").dataset.demo=String(!!s.demo);
@@ -697,7 +702,7 @@ function renderStatus() {
   $("collector-toggle").title=tr(s.demo?"Demo uses fictional observations":!c.has_session?"Connect an account first":
     !hasSources(s)?"Select at least one source first":"");
   $("nav-count").textContent=s.stats.total.toLocaleString();
-  renderCollectorHealth(s.health);
+  renderCollectorHealth(s.health);collectionUI?.update();
   show("collector-error",!!c.last_error);
   $("collector-error").textContent=c.last_error ? tr("Collector reported {error}. Review coverage events before relying on completeness.",{error:c.last_error}) : "";
   renderSetup();
@@ -865,6 +870,7 @@ function renderAccounts(){
     if(!down){
       const toggle=node("button","quiet",tr(c.running?"Pause":"Start"));toggle.disabled=state.status.demo||(!c.running&&!c.has_session);
       toggle.addEventListener("click",()=>busy(toggle,async()=>{
+        if(c.running&&!(await collectionReady).confirmPause(p.label))return;
         await json("collector/"+(c.running?"stop":"start"),{},{profile:p.id});
         toast(tr(c.running?"Paused collection for {name}.":"Started collection for {name}.",{name:p.label}));
         await loadProfiles();if(p.id===state.profile)await refreshStatus();
