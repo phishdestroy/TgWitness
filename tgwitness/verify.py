@@ -415,7 +415,8 @@ def verify_anchors(archive, names, public_key, event_count, hash_at, tsa_ca=None
                     openssl_verify_timestamp(data, reply, query, tsa_ca)
                 entry["signature"] = "checked against the given root" if tsa_ca else "not checked (use --tsa-ca)"
             elif proof_name.endswith(".ots"):
-                entry.update(kind="opentimestamps", **ots_summary(read_member(archive, proof_name), digest))
+                entry.update(kind="opentimestamps", **ots_summary(read_member(archive, proof_name), digest),
+                             attestation="as the calendar states it; ots verify checks it against Bitcoin")
             else:
                 continue
             results.append(entry)
@@ -1342,6 +1343,13 @@ def main():
                                    read_json_file(args.checkpoint) if args.checkpoint else None, args.tsa_ca)
             notes += coverage_lines(result["coverage"])
             pinned = bool(args.fingerprint)
+            if not args.checkpoint:
+                notes.append("No retained checkpoint supplied: records removed from the end of this journal are not "
+                             "detected. Pass --checkpoint with a checkpoint kept away from the collector.")
+            if any(a.get("kind") == "opentimestamps" and a.get("status") == "bitcoin" for a in result.get("anchors", [])):
+                notes.append("OpenTimestamps 'bitcoin' is the calendar's claim; ots verify checks it against Bitcoin.")
+            if args.witness and not args.witness_fingerprint:
+                notes.append("The witness key is not pinned: the witness journal is checked only against itself.")
             if args.witness:
                 witness = verify_witness(args.witness, args.witness_fingerprint)
                 result["witness"] = cross_check_witness(witness, args.bundle, result)
