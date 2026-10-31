@@ -1634,10 +1634,12 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         return await operation(interactions.execute, app.state.collector, body)
 
     @app.get("/api/chats/{chat_id}/messages", dependencies=[Depends(authenticate)])
-    async def chat_messages(chat_id: int, before_id: int | None = None, limit: int = 60):
+    async def chat_messages(chat_id: int, before_id: int | None = None, limit: int = 60, after_id: int | None = None):
         if not 1 <= limit <= 200:
             raise HTTPException(422, "Limit must be 1–200.")
-        return app.state.store.chat_messages(chat_id, before_id, limit)
+        if before_id is not None and after_id is not None:
+            raise HTTPException(422, "Choose one message cursor.")
+        return app.state.store.chat_messages(chat_id, before_id, limit, after_id=after_id)
 
     @app.get("/api/chats/{chat_id}/authors", dependencies=[Depends(authenticate)])
     async def chat_authors(chat_id: int):
