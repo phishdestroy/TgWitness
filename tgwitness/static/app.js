@@ -1527,7 +1527,7 @@ $("report-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitt
   reportSaving=true;reportControls();
   try{
     await json("report-options",body);if(reportOwner!==owner||reportKey()!==owner)return;
-    reportDirty=formControls?.changed(draft)||false;formControls?.accepted(draft);$("report-status").textContent=tr(reportDirty?"Saved. New edits have not been saved.":"Saved. The next export uses these settings.");toast(tr("Report settings saved."));
+    reportDirty=formControls?.changed(draft)||false;formControls?.accepted(draft,reportDirty);$("report-status").textContent=tr(reportDirty?"Saved. New edits have not been saved.":"Saved. The next export uses these settings.");toast(tr("Report settings saved."));
   }finally{if(reportOwner===owner&&reportKey()===owner){reportSaving=false;reportControls();}}
 });});
 document.querySelectorAll("[data-go-reports]").forEach(link=>link.addEventListener("click",event=>{
@@ -1613,7 +1613,7 @@ $("evidence-form").addEventListener("submit",event=>{event.preventDefault();busy
   const lines=id=>$(id).value.split("\n").map(v=>v.trim()).filter(Boolean);
   const e=await json("evidence",{enabled:$("evidence-enabled").checked,interval_minutes:Number($("evidence-interval").value),
     tsa_urls:lines("evidence-tsa"),ots_calendars:lines("evidence-ots")});
-  state.evidenceDirty=formControls?.changed(draft)||false;renderEvidence(e);formControls?.accepted(draft);
+  state.evidenceDirty=formControls?.changed(draft)||false;renderEvidence(e);formControls?.accepted(draft,state.evidenceDirty);
   toast(tr(e.settings.enabled?"Evidence mode is on. The current checkpoint is being timestamped.":"Evidence mode is off."));
 });});
 $("evidence-anchor").addEventListener("click",ev=>busy(ev.currentTarget,async()=>{
@@ -1679,7 +1679,7 @@ $("replica-form").addEventListener("submit",event=>{event.preventDefault();busy(
     retention_days:Number($("replica-retention").value||0),retention_mode:$("replica-mode").value,
     access_key:$("replica-access").value.trim(),secret_key:$("replica-secret").value.trim()});
   formControls?.clearSubmitted(draft,["replica-access","replica-secret"]);
-  state.replicaDirty=formControls?.changed(draft)||false;renderReplica(r);formControls?.accepted(draft);
+  state.replicaDirty=formControls?.changed(draft)||false;renderReplica(r);formControls?.accepted(draft,state.replicaDirty);
   toast(tr(r.settings.enabled?"Off-site copy is on. Download the encryption key and keep it apart.":"Off-site copy settings saved."));
 });});
 $("replica-test").addEventListener("click",e=>busy(e.currentTarget,async()=>{
@@ -1729,7 +1729,7 @@ async function saveAlerts(urls,add=[]){
   const draft=formControls?.capture("alerts-form");
   const a=await json("alerts",{enabled:$("alerts-enabled").checked,problems:$("alerts-problems").checked,changes:$("alerts-changes").checked,
     daily:$("alerts-daily").checked,daily_hour:Number($("alerts-hour").value),language:LANG,include_text:$("alerts-text").checked,urls,add_urls:add});
-  formControls?.clearSubmitted(draft,["alerts-urls"]);state.alertsDirty=formControls?.changed(draft)||false;renderAlerts(a);formControls?.accepted(draft);return a;
+  formControls?.clearSubmitted(draft,["alerts-urls"]);state.alertsDirty=formControls?.changed(draft)||false;renderAlerts(a);formControls?.accepted(draft,state.alertsDirty);return a;
 }
 $("alerts-form").addEventListener("submit",event=>{event.preventDefault();busy(event.submitter,async()=>{
   const lines=$("alerts-urls").value.split("\n").map(v=>v.trim()).filter(Boolean);
@@ -2003,7 +2003,7 @@ $("github-form").addEventListener("input",()=>{state.githubDirty=true;});
 $("github-form").addEventListener("submit",event=>{event.preventDefault();busy(event.submitter,async()=>{
   const draft=formControls?.capture("github-form");
   const r=await json("source-check",{repository:$("github-repository").value.trim(),ref:$("github-ref").value.trim()});
-  state.githubDirty=formControls?.changed(draft)||false;renderSourceCheck(r);formControls?.accepted(draft);
+  state.githubDirty=formControls?.changed(draft)||false;renderSourceCheck(r);formControls?.accepted(draft,state.githubDirty);
   toast(tr(r.last.matches?"The code matches the commit. The check is saved in the signed journal."
     :"The code differs from the commit. The check is saved in the signed journal."),!r.last.matches);
 });});

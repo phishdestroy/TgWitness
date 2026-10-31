@@ -35,9 +35,9 @@ export function createFormControls({forms, roots, tr, getSession, toast}) {
   function loaded(id) {const entry=records.get(id);if(entry){entry.baseline=snapshot(entry.form);update(entry);}}
   function capture(id) {const entry=records.get(id);return entry?{id,session:getSession(),values:snapshot(entry.form)}:null;}
   function changed(ticket) {const entry=ticket&&records.get(ticket.id);return !!entry&&different(snapshot(entry.form),ticket.values)>0;}
-  function accepted(ticket) {
+  function accepted(ticket,preserve=changed(ticket)) {
     const entry=ticket&&records.get(ticket.id);if(!entry||ticket.session!==getSession())return;
-    entry.baseline=changed(ticket)?ticket.values:snapshot(entry.form);update(entry);
+    entry.baseline=preserve?ticket.values:snapshot(entry.form);update(entry);
   }
   document.addEventListener('keydown',event=>{
     if(event.defaultPrevented||event.isComposing||event.altKey||!(event.ctrlKey||event.metaKey)||event.key.toLowerCase()!=='s')return;
@@ -69,8 +69,8 @@ export function createFormControls({forms, roots, tr, getSession, toast}) {
   for(const root of roots)observer.observe(root,{childList:true,subtree:true});
   return {loaded,capture,changed,accepted,clearSubmitted(ticket,ids){
     const entry=ticket&&records.get(ticket.id);if(!entry||ticket.session!==getSession())return;
-    for(const field of fields(entry.form))if(ids.includes(field.id)&&read(field)===ticket.values.get(field.id)){
-      field.value='';ticket.values.set(field.id,'');
+    for(const field of fields(entry.form))if(ids.includes(field.id)){
+      if(read(field)===ticket.values.get(field.id))field.value='';ticket.values.set(field.id,'');
     }
   },reset(){for(const entry of records.values()){
     entry.baseline=null;entry.bar.hidden=true;delete entry.form.dataset.dirty;
