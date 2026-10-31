@@ -784,6 +784,7 @@ function fillSourceSelect(id,value,all=false) {
   if ([...n.options].some(o=>o.value===String(value))) n.value=String(value);
 }
 let statusRequest=0,profilesRequest=0;
+const workspaceOptionsReady=import("./components/workspaces.js?v=1");
 async function refreshStatus() {
   const request=++statusRequest,revision=state.workspaceRevision,result=await json("status");
   if(revision!==state.workspaceRevision||request!==statusRequest)return;
@@ -792,14 +793,14 @@ async function refreshStatus() {
 }
 async function loadProfiles(){
   const request=++profilesRequest,result=await json("profiles",undefined,{root:true});
+  const {updateWorkspaceOptions}=await workspaceOptionsReady;
   if(request!==profilesRequest)return;
   state.profiles=result.profiles;
 
   for(const profile of state.profiles)if(profile.id==="default"&&profile.label==="Main account")profile.label=tr("Main account");
-  const select=$("profile-select");select.replaceChildren();
+  const select=$("profile-select");updateWorkspaceOptions(select,state.profiles,state.profile,tr);
   const list=$("profiles-list"),showList=state.view==='connection';if(showList)list.replaceChildren();
   for(const profile of state.profiles){
-    const option=new Option(profile.label,profile.id);option.disabled=!!profile.error_type;select.append(option);
     if(!showList)continue;
     const row=node("div","target-row"),info=node("div");
     info.append(node("h3","",profile.label),node("p","",profile.error_type==="DeletionPending"?tr("Deletion incomplete"):profile.error_type?tr("Unavailable: {error}",{error:profile.error_type}):
