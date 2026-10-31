@@ -67,6 +67,7 @@ function resetViewContent(view){
   if(view==='evidence')exportsView?.resetSession();
   if(view==='accounts')accountsView?.resetSession();
   if(view==='witness'){state.evidenceDirty=false;state.replicaDirty=false;state.alertsDirty=false;state.githubDirty=false;}
+  if(view==='chats')chatListView?.resetSession();
   if(view==='sealed')window.TgWitnessCapture?.reset();
   if(view==='system-log')systemLogView?.resetSession();
   if(view==='access'){accessView?.resetSession();accessFormVersion++;adminLimitsVersion++;accessFormReady=false;adminLimitsReady=false;adminLimitsDirty=false;accessLoadSerial++;
@@ -412,7 +413,7 @@ function lock() {
 }
 async function unlock() {
   accessStarted=true;
-  await Promise.all([timeReady,shellReady,viewReady,formsReady,connectionReady]);
+  await Promise.all([timeReady,shellReady,viewReady,formsReady,connectionReady,chatListReady]);
   const router=await ensureRouter(),requested=router.parse();
   state.me = await json("access/me",undefined,{root:true});
   await loadProfiles();
@@ -777,7 +778,7 @@ function renderViewStatus(view){
     fillSourceSelect("source-filter",state.source,true);
     window.TgWitnessJournal?.sync();
   }else if(view==='chats'){
-    renderComposer();renderChatStatus();renderMulti();
+    renderComposer();renderChatStatus();renderMulti();renderChatsList();
   }else if(view==='evidence'){
     $("fingerprint").textContent=s.fingerprint;$("export-profile-id").textContent=state.profile;
     renderVerification();renderChatExportTools();
@@ -2691,35 +2692,13 @@ async function refreshChats(refresh=false){
   if(state.chat===null){renderChatEmpty();return;}
   return await loadChatMessages(refresh?"refresh":"open");
 }
-function renderChatsList(){
-  if(state.view!=='chats')return;
-  const list=$("chats-list"),oldRows=new Map([...list.children].map(row=>[row.dataset.chat,row])),rows=[];
-  const query=$("chat-search").value.trim().toLocaleLowerCase();
-  for(const c of state.chats){
-    if(query&&!`${c.title||""} ${c.chat_id}`.toLocaleLowerCase().includes(query))continue;
-    const existing=oldRows.get(String(c.chat_id)),key=JSON.stringify([c,state.profile]);
-    if(existing?.renderKey===key){existing.classList.toggle('active',c.chat_id===state.chat);existing.setAttribute('aria-pressed',String(c.chat_id===state.chat));rows.push(existing);continue;}
-    const title=c.title||tr("Chat {id}",{id:c.chat_id}),row=node("button","chat-item"+(c.chat_id===state.chat?" active":""));row.type="button";
-    row.dataset.chat=String(c.chat_id);row.renderKey=key;
-    const body=node("span","chat-item-body"),top=node("span","chat-item-top"),bottom=node("span","chat-item-bottom");
-    top.append(node("span","chat-item-title",title),timeNode(c.last_observed_at,"chat-item-time"));
-    bottom.append(node("span","chat-item-preview",c.last_text?(c.last_sender?c.last_sender+": ":"")+c.last_text:tr(c.messages?"Media or service message":"No messages saved yet")));
-    const badges=node("span","chat-item-badges");
-    if(c.deleted)badges.append(node("span","pill pill-deleted",tr("{n} deleted",{n:c.deleted})));
-    if(c.missing)badges.append(node("span","pill pill-missing",tr("{n} not found",{n:c.missing})));
-    if(c.edited)badges.append(node("span","pill pill-edited",tr("{n} edited",{n:c.edited})));
-    if(!c.enabled)badges.append(node("span","pill",tr("paused")));
-    body.append(top,bottom,badges);row.append(avatarNode(c.chat_id,title),body);
-    row.setAttribute("aria-pressed",String(c.chat_id===state.chat));
-    row.addEventListener("click",()=>openChat(c.chat_id).catch(e=>toast(e.message,true)));
-    if(existing){existing.replaceChildren(...row.childNodes);existing.className=row.className;existing.setAttribute('aria-pressed',row.getAttribute('aria-pressed'));existing.renderKey=key;rows.push(existing);}else rows.push(row);
-  }
-  if(!state.chats.length)rows.push(node("p","hint chats-none",tr("No chats chosen yet.")));
-  else if(!rows.length)rows.push(node("p","hint chats-none",tr("No chats match your search.")));
-  placeChildren(list,rows);
-}
-$("chat-search").addEventListener("input",renderChatsList);
-$("chat-search").addEventListener("keydown",e=>{if(e.key==="Escape"){$("chat-search").value="";renderChatsList();}});
+let chatListView=null;
+const chatListReady=import('./views/chat-list.js?v=12').then(({createChatList})=>{
+  chatListView=createChatList({root:panelRoots.get('chats'),tr,node,icon,avatarNode,timeNode,getState:()=>state,
+    getSession:()=>state.workspaceRevision+':'+state.profile,may,json,refreshStatus,openChat,toast});
+  return chatListView;
+});
+function renderChatsList(){chatListView?.render();}
 $("chat-back").addEventListener("click",()=>{
   viewQuery("chats",".chats-shell").dataset.panel="list";
   $("chat-search").focus({preventScroll:true});
@@ -3623,7 +3602,7 @@ async function pollWorkspace(){
 }
 setInterval(pollWorkspace,5000);
 async function bootstrap(){
-  await Promise.all([timeReady,shellReady,viewReady]);
+  await Promise.all([timeReady,shellReady,viewReady,chatListReady]);
   await ensureRouter();
   const revision=state.workspaceRevision;
   try{
