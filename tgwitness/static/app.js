@@ -179,7 +179,7 @@ async function api(path, body, options={}) {
     if (typeof detail === "object") detail = tr(detail.message) + (detail.retry_after ? " " + tr("Retry after {n} seconds.", {n: detail.retry_after}) : "");
     if(!allowStale&&revision!==state.workspaceRevision)throw new StaleView();
     if (response.status === 401 && revision===state.workspaceRevision && token===state.token && !$("workspace").hidden) lock();
-    throw new Error(tr(detail));
+    const error=new Error(tr(detail));error.status=response.status;throw error;
   }
   return response;
 }
@@ -297,6 +297,7 @@ function connectionSettings(open){
   $("entry-settings").setAttribute("aria-expanded",String(open));
   show("connection-options",open);$("connection-options").open=open;
   if(open)window.TgWitnessProxies?.load();
+  else window.TgWitnessProxies?.stop?.();
   $("api-details").open=open;
 }
 $("entry-settings").addEventListener("click",()=>connectionSettings(!state.connectionSettings));
@@ -308,6 +309,7 @@ $("open-demo").addEventListener("click",e=>busy(e.currentTarget,async()=>{
 }));
 function navigate(view) {
   if(!viewAllowed(view))view="chats";
+  if(view!=="connection")window.TgWitnessProxies?.stop?.();
   state.view=view;
   $("workspace").dataset.currentView=view;
   document.querySelectorAll(".view").forEach(n=>n.hidden=n.id !== "view-"+view);
@@ -604,14 +606,17 @@ function fillSourceSelect(id,value,all=false) {
   state.status.targets.filter(t=>all || t.enabled).forEach(t=>n.append(new Option(t.title,String(t.chat_id))));
   if ([...n.options].some(o=>o.value===String(value))) n.value=String(value);
 }
+let statusRequest=0,profilesRequest=0;
 async function refreshStatus() {
-  const revision=state.workspaceRevision,result=await json("status");
-  if(revision!==state.workspaceRevision)return;
+  const request=++statusRequest,revision=state.workspaceRevision,result=await json("status");
+  if(revision!==state.workspaceRevision||request!==statusRequest)return;
   state.status=result;applyAccess();renderStatus();
   if(!viewAllowed(state.view))navigate("chats");
 }
 async function loadProfiles(){
-  const result=await json("profiles",undefined,{root:true});state.profiles=result.profiles;
+  const request=++profilesRequest,result=await json("profiles",undefined,{root:true});
+  if(request!==profilesRequest)return;
+  state.profiles=result.profiles;
 
   for(const profile of state.profiles)if(profile.id==="default"&&profile.label==="Main account")profile.label=tr("Main account");
   const select=$("profile-select");select.replaceChildren();
@@ -629,6 +634,7 @@ async function loadProfiles(){
   select.value=state.profile;
   $("nav-accounts").textContent=String(state.profiles.length);
   await window.TgWitnessFleet?.load();
+  if(request!==profilesRequest)return;
   renderAccounts();
 }
 function accountPhaseLabel(p){
@@ -644,7 +650,9 @@ function accountIdentity(p){
   return (a.username?"@"+a.username+" · ":"")+"ID "+a.id;
 }
 function renderAccounts(){
-  const grid=$("accounts-list"),s=state.status;if(!grid||!s)return;grid.replaceChildren();$("fleet-groups")?.replaceChildren();
+  const grid=$("accounts-list"),s=state.status;if(!grid||!s)return;
+  window.TgWitnessFleet?.beforeRender?.();
+  grid.replaceChildren();$("fleet-groups")?.replaceChildren();
   const list=state.profiles||[];
   $("accounts-limit").textContent=trn("{n} workspace. Add as many as you need — each uses its own Telegram account.",
     "{n} workspaces. Add as many as you need — each uses its own Telegram account.",list.length);
@@ -722,6 +730,7 @@ function renderAccounts(){
   window.TgWitnessFleet?.decorate();
 }
 async function switchProfile(id){
+  window.TgWitnessProxies?.clear?.();
   window.TgWitnessAnalysis?.clear();
   quickDialog.close();
   const revision=++state.workspaceRevision;
@@ -2480,7 +2489,7 @@ function modeSummary(s){
 const exportRunning=()=>multiRunning()||state.status?.collector.chat_export?.phase==="running";
 async function refreshChats(refresh=false){
   if(!state.status)return;
-  await resumeMulti();
+  void resumeMulti();
   const revision=state.workspaceRevision,result=await json("chats");
   if(revision!==state.workspaceRevision)return;
   state.chats=result.chats;
@@ -2598,6 +2607,7 @@ function renderChat(){
 }
 function renderChatStatus(){
   const box=$("chat-status"),s=state.status,info=state.chatInfo;if(!info||!s||$("chat-main").hidden)return;
+  const focusedFilter=box.contains(document.activeElement)?document.activeElement.dataset.chatFilter:null;
   const c=s.collector,contextOpen=!!box.querySelector(".chat-context[open]");box.replaceChildren();
   const state_=node("div","chat-state"),say=(cls,text)=>{state_.className="chat-state "+cls;const t=node("span","",text);t.title=text;state_.append(t);};
   const action=(cls,label,work)=>{const b=node("button",cls+" small",label);b.type="button";b.addEventListener("click",()=>busy(b,work));state_.append(b);return b;};
@@ -2612,6 +2622,7 @@ function renderChatStatus(){
   const filters=node("div","chat-filters");filters.setAttribute("role","group");filters.setAttribute("aria-label",tr("Show messages"));
   for(const [key,label] of [["all",tr("All")],["deleted",tr("Deleted")],["edited",tr("Edited")],["people",tr("People")]]){
     const f=node("button","filter"+(state.chatFilter===key?" active":""),label);f.type="button";
+    f.dataset.chatFilter=key;
     f.setAttribute("aria-pressed",String(state.chatFilter===key));
     f.addEventListener("click",()=>{state.chatFilter=key;if(key==="people")state.chatAuthor=null;renderChatStatus();renderChatFeed();});filters.append(f);
   }
@@ -2633,6 +2644,7 @@ function renderChatStatus(){
   const blocked=s.demo||!c.has_session||!info.enabled;
   $("chat-load-history").disabled=blocked;$("chat-history-limit").disabled=blocked;
   $("chat-export-start").disabled=s.demo||!c.has_session||exportRunning();
+  if(focusedFilter)box.querySelector('[data-chat-filter="'+focusedFilter+'"]')?.focus({preventScroll:true});
 }
 function renderChatFeed(){
   const feed=$("chat-feed"),s=state.status,info=state.chatInfo;
@@ -2646,6 +2658,12 @@ function renderChatFeed(){
       else feed.replaceChildren(notice);
     });return;
   }
+  const expanded=new Map([...feed.querySelectorAll(".msg")].map(row=>[row.id,{
+    versions:!!row.querySelector(".versions"),author:!!row.querySelector(".sender-details[open]")
+  }]));
+  const active=document.activeElement,focusRow=feed.contains(active)?active.closest(".msg")?.id:null;
+  const focusSelector=active.matches("button.pill-edited")?"button.pill-edited":
+    active.matches(".sender-details > summary")?".sender-details > summary":null;
   feed.replaceChildren();
   if(!chatReady){feed.append(viewState("loading",tr("Loading…")));return;}
   const shown=state.chatMessages.filter(m=>(state.chatFilter==="all"||(state.chatFilter==="deleted"?m.deleted||m.missing:m.edited))
@@ -2668,6 +2686,12 @@ function renderChatFeed(){
     const sid=m.sender?.id??null,t=when?new Date(when).getTime():0,grouped=sid!==null&&sid===lastSender&&t>=lastTime&&t-lastTime<300000;
     lastSender=sid;lastTime=t;feed.append(messageRow(m,grouped,byId));
   }
+  for(const row of feed.querySelectorAll(".msg")){
+    const previous=expanded.get(row.id);if(!previous)continue;
+    if(previous.versions)row.querySelector("button.pill-edited")?.click();
+    if(previous.author&&row.querySelector(".sender-details"))row.querySelector(".sender-details").open=true;
+  }
+  if(focusRow&&focusSelector)$(focusRow)?.querySelector(focusSelector)?.focus({preventScroll:true});
 }
 function messageRow(m,grouped,byId){
   const row=node("div","msg"+(grouped?" grouped":"")+(m.deleted?" deleted":m.missing?" missing":""));row.id="msg-"+m.message_id;
@@ -2694,7 +2718,8 @@ function messageRow(m,grouped,byId){
   if(m.deleted){const d=node("span","pill pill-deleted",tr("Deleted"));d.title=tr("Deletion seen {time}. Telegram does not report who deleted it or exactly when.",{time:fmtFull(m.deleted_observed_at)});meta.append(d);}
   else if(m.missing){const d=node("span","pill pill-missing",tr("Not found at recheck"));d.title=tr("Telegram no longer returned this message at {time} and no deletion notice was received: deleted while notices were missed, removed by an auto-delete timer, or no longer visible to this account.",{time:fmtFull(m.missing_observed_at)});meta.append(d);}
   if(m.versions.length>1){const e=node("button","pill pill-edited",tr("Edited · {n} versions",{n:m.versions.length}));e.type="button";e.title=tr("Show every saved version");
-    e.addEventListener("click",()=>{const open=bubble.querySelector(".versions");if(open){open.remove();return;}bubble.insertBefore(versionsNode(m),meta);});meta.append(e);}
+    e.setAttribute("aria-expanded","false");
+    e.addEventListener("click",()=>{const open=bubble.querySelector(".versions");e.setAttribute("aria-expanded",String(!open));if(open){open.remove();return;}bubble.insertBefore(versionsNode(m),meta);});meta.append(e);}
   else if(m.edited){const e=node("span","pill pill-edited",tr("Edited"));e.title=tr("Telegram marks this message as edited; the earlier text was not saved.");meta.append(e);}
   if(!m.origins.includes("live")&&m.origins.includes("history")){const o=node("span","origin",tr("from history"));o.title=tr("Loaded from chat history, not seen live");meta.append(o);}
   meta.append(node("span","time",fmtTime(m.sent_at||m.versions[0]?.observed_at)));
@@ -3037,8 +3062,13 @@ async function loadHistory(button,limit){
 $("chats-manage").addEventListener("click",()=>navigate("sources"));
 $("chat-load-history").addEventListener("click",e=>loadHistory(e.currentTarget,Number($("chat-history-limit").value)));
 
-let multiPoll=null;
+let multiPoll=null,multiRequest=0,multiDiscovery=null;
 const multiRunning=()=>state.multi?.phase==="running";
+const multiCurrent=(revision,token,request)=>revision===state.workspaceRevision&&token===state.token&&
+  !!token&&!$("workspace").hidden&&request===multiRequest;
+const multiRetryable=error=>!(error instanceof StaleView)&&
+  (!error.status||[408,429].includes(error.status)||error.status>=500);
+const multiRetryDelay=attempt=>Math.min(30000,1500*2**Math.min(attempt+1,5));
 async function openExportDialog(){
   const chat=state.chat,profile=state.profile,revision=state.workspaceRevision,generation=chatGeneration;
   toast(tr("Asking Telegram how big this chat is…"));
@@ -3108,20 +3138,48 @@ function renderMulti(){
   }
   box.append(workers);
 }
-async function pollMulti(id){
+async function pollMulti(id,attempt=0){
+  if(!state.token||$("workspace").hidden||(state.multi?.id&&state.multi.id!==id))return;
   clearTimeout(multiPoll);multiPoll=null;
+  const revision=state.workspaceRevision,token=state.token,request=++multiRequest;
+  const current=()=>multiCurrent(revision,token,request);
+  state.multiChecked=true;
   try{
     const before=state.multi?.phase,x=await json("multi-export/"+encodeURIComponent(id),undefined,{root:true});
+    if(!current())return;
     state.multi=x;renderMulti();
-    if(x.phase==="running")multiPoll=setTimeout(()=>pollMulti(id),1500);
+    if(x.phase==="running")multiPoll=setTimeout(()=>{if(current())pollMulti(id);},1500);
     else if(before==="running"&&x.phase==="done")toast(tr("Chat export finished: {n} messages. Save the signed archive.",{n:x.captured.toLocaleString()}));
     else if(before==="running"&&x.phase==="failed")toast(tr("Chat export failed: {error}",{error:x.error||tr("unknown error")}),true);
-  }catch(e){toast(e.message,true);}
+  }catch(e){
+    if(!current()||e instanceof StaleView)return;
+    if(multiRetryable(e))multiPoll=setTimeout(()=>{if(current())pollMulti(id,attempt+1);},multiRetryDelay(attempt));
+    else if([403,404].includes(e.status)){state.multi=null;renderMulti();}
+    if(!attempt)toast(e.message,true);
+  }
 }
-async function resumeMulti(){
-  if(state.multiChecked)return;state.multiChecked=true;
-  const x=await json("multi-export/current",undefined,{root:true}).catch(()=>null);
-  if(x&&["running","done"].includes(x.phase)){state.multi=x;renderMulti();if(x.phase==="running")pollMulti(x.id);}
+async function resumeMulti(attempt=0){
+  if(state.multiChecked||!state.token||$("workspace").hidden)return;
+  if(multiDiscovery&&multiCurrent(multiDiscovery.revision,multiDiscovery.token,multiDiscovery.request))return multiDiscovery.promise;
+  clearTimeout(multiPoll);multiPoll=null;
+  const request={revision:state.workspaceRevision,token:state.token,request:++multiRequest};
+  const current=()=>multiCurrent(request.revision,request.token,request.request);
+  multiDiscovery=request;
+  request.promise=(async()=>{
+    try{
+      const x=await json("multi-export/current",undefined,{root:true});
+      if(!current())return;
+      state.multiChecked=true;
+      state.multi=x&&["running","done"].includes(x.phase)?x:null;renderMulti();
+      if(state.multi?.phase==="running")pollMulti(x.id);
+    }catch(e){
+      if(!current()||e instanceof StaleView)return;
+      if(multiRetryable(e))multiPoll=setTimeout(()=>{if(current())resumeMulti(attempt+1);},multiRetryDelay(attempt));
+      else{state.multiChecked=true;state.multi=null;renderMulti();}
+      if(!attempt)toast(e.message,true);
+    }finally{if(multiDiscovery===request)multiDiscovery=null;}
+  })();
+  return request.promise;
 }
 function saveMulti(button){return busy(button,async()=>{
   const x=state.multi;if(!x?.ready)throw new Error(tr("No finished export to save."));
@@ -3297,9 +3355,10 @@ $("access-admin-form").addEventListener("submit",event=>{event.preventDefault();
     session_minutes:Number($("admin-idle").value)},{root:true});
   renderAccess();toast(tr("Limits saved."));
 });});
-let notifyTick=0;
-setInterval(async()=>{
-  if(!state.token||document.hidden||$("workspace").hidden)return;
+let notifyTick=0,pollRevision=null;
+async function pollWorkspace(){
+  if(!state.token||document.hidden||$("workspace").hidden||$("workspace").inert||pollRevision===state.workspaceRevision)return;
+  const revision=state.workspaceRevision;pollRevision=revision;
   try{
     const head=state.status?.stats.head?.seq;
     await refreshStatus();
@@ -3310,8 +3369,10 @@ setInterval(async()=>{
     if(state.view==="witness") await loadExtras();
     if(state.view==="access") await loadAccess(true);
     if(++notifyTick%3===0) await loadNotifications();
-  }catch(e){if(!(e instanceof StaleView))$("status-chip").textContent=tr("Panel connection unavailable");}
-},5000);
+  }catch(e){if(revision===state.workspaceRevision&&!(e instanceof StaleView))$("status-chip").textContent=tr("Panel connection unavailable");}
+  finally{if(pollRevision===revision)pollRevision=null;}
+}
+setInterval(pollWorkspace,5000);
 async function bootstrap(){
   const revision=state.workspaceRevision;
   try{
