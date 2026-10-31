@@ -288,3 +288,11 @@ def test_checks_never_connect_to_servers_of_an_avoided_country(monkeypatch):
     with pytest.raises(NoProxyAvailable, match="allowed country"):
         asyncio.run(pool.acquire("w"))
     assert not pool.exhausted
+
+
+def test_one_server_listed_with_two_secrets_is_not_given_to_two_workspaces(monkeypatch):
+    pool = pool_with(monkeypatch, ["8.8.8.1", "8.8.8.2"], set())
+    twin = NetworkConfig(kind="mtproxy", host="8.8.8.1", port=443, secret="b8" * 16)
+    pool.catalog.rows.insert(1, {"id": catalogs.route_id(twin), "route": twin, "label": "test list"})
+    first, second = asyncio.run(pool.acquire("a"))[1].host, asyncio.run(pool.acquire("b"))[1].host
+    assert {first, second} == {"8.8.8.1", "8.8.8.2"}

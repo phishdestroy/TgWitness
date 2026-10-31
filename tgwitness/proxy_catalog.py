@@ -548,15 +548,22 @@ class ProxyPool:
         ranks = {alias: policy.country_rank(countries.of(row["route"].host)) for alias, row in entries.items()}
         return {alias: rank for alias, rank in ranks.items() if rank is not None}
 
-    def order(self, owner, entries, avoid, now, share=0, ranks=None):
+    @staticmethod
+    def addresses(entries):
+        """{proxy id: host and port}: one server listed with several secrets is one address to Telegram."""
+        return {alias: (row["route"].host, row["route"].port) for alias, row in entries.items()}
+
+    def order(self, owner, entries, avoid, now, share=0, ranks=None, addresses=None):
         """Candidates: preferred countries first, then least shared, then measured latency, then list
-        order; share caps the accounts on one proxy (0: no cap); ranks leaves the other proxies out."""
-        load = Counter(v for k, v in self.assigned.items() if k != owner)
+        order; share caps the accounts on one proxy (0: no cap); ranks leaves the other proxies out.
+        Sharing counts per server address, so two secrets of one server are not two proxies."""
+        where = (addresses or {}).get
+        load = Counter(where(v, v) for k, v in self.assigned.items() if k != owner)
         position = {alias: number for number, alias in enumerate(entries)}
         ranks = dict.fromkeys(entries, 1) if ranks is None else ranks
         usable = [a for a in entries if a in ranks and a not in avoid and not self.resting(a, now)
-                  and not (share and load[a] >= share)]
-        return sorted(usable, key=lambda a: (ranks[a], load[a], not self.healthy(a, now),
+                  and not (share and load[where(a, a)] >= share)]
+        return sorted(usable, key=lambda a: (ranks[a], load[where(a, a)], not self.healthy(a, now),
                                              self.health.get(a, {}).get("latency_ms") or 0, position[a]))
 
     def available(self, owner, share=0):
@@ -566,8 +573,8 @@ class ProxyPool:
         except ValueError:
             return False
         now = time.time()
-        return any(self.healthy(a, now)
-                   for a in self.order(owner, list(entries), set(), now, share, self.country_ranks(entries)))
+        return any(self.healthy(a, now) for a in self.order(owner, list(entries), set(), now, share,
+                                                             self.country_ranks(entries), self.addresses(entries)))
 
     async def acquire(self, owner, preferred=None, avoid=(), share=0):
         """(proxy id, pinned route) for a workspace; raises NoProxyAvailable."""
@@ -576,17 +583,17 @@ class ProxyPool:
                 operator, entries = self.entries()
             except ValueError:
                 raise NoProxyAvailable("The proxy catalog is unavailable.") from None
-            now, ranks = time.time(), self.country_ranks(entries)
+            now, ranks, addresses = time.time(), self.country_ranks(entries), self.addresses(entries)
             current = self.assigned.get(owner) or preferred
-            others = {v for k, v in self.assigned.items() if k != owner}
+            others = {addresses.get(v, v) for k, v in self.assigned.items() if k != owner}
 
             if (current in ranks and current not in avoid and not self.resting(current, now)
-                    and current not in others):
+                    and addresses.get(current, current) not in others):
                 route = await self.check(current, entries[current], operator, quick=self.healthy(current, now))
                 if route:
                     self.assigned[owner] = current
                     return current, route
-            ordered = self.order(owner, list(entries), set(avoid), now, share, ranks)
+            ordered = self.order(owner, list(entries), set(avoid), now, share, ranks, addresses)
             # Preferred countries first; when none of them answers the others are tried, each group with
             # its own window, so unanswered preferred servers cannot crowd out working ones
             for rank in sorted({ranks[a] for a in ordered}):

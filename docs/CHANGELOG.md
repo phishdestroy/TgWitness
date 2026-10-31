@@ -61,7 +61,8 @@
   Country lookups move past hosts without an answer, the saved lists stay readable at
   their size limits, the last list update shows when lists were actually downloaded, and
   a blocked list download disables the update button and offers the proxy setting. Own
-  lists say how many links were left out and why.
+  lists say how many links were left out and why. One server listed with several secrets
+  counts as one address, so two workspaces are no longer put on the same server.
 - People and chats without a photo no longer fill the browser console with 404 errors,
   and the panel asks for the high-assurance statement only where it exists. Sign-in tabs
   wrap long labels instead of cutting them; the offline-gap note, size units and the
