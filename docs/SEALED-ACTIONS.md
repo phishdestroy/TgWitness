@@ -13,6 +13,9 @@ establish historical completeness, or certify that nobody accessed the host.
 
 ## User flow
 
+The helper explains the five stages and lets you try message or collector
+substitution on sample data. **Start my capture** opens the wizard.
+
 1. Choose **GitHub Actions capture (preview)** on the project homepage, the
    workspace login screen, or **Exports → Open capture helper**. You can also
    open the [official helper](https://phishdestroy.github.io/TgWitness/sealed.html?lang=en)
