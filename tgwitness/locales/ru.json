@@ -3177,14 +3177,29 @@
 "All countries": "Все страны",
 "All lists": "Все списки",
 "Checking every server. Results appear as they come in.": "Проверка всех серверов. Результаты отображаются по мере поступления.",
-"Lists updated: {n} sources.": "Обновлены списки: {n} источников.",
+"Lists updated: {n} sources.": {
+"one": "Обновлены списки: {n} источник.",
+"many": "Обновлены списки: {n} источников.",
+"few": "Обновлены списки: {n} источника.",
+"other": "Обновлены списки: {n} источника."
+},
 "List removed.": "Список удалён.",
 "List added. It is downloaded with the next list update.": "Список добавлен. Он будет загружен при следующем обновлении списков.",
 "{name}: a list may have at most 1 MiB.": "{name}: размер списка не должен превышать 1 МиБ.",
-"{n} servers added from your files.": "Добавлено {n} серверов из ваших файлов.",
+"{n} servers added from your files.": {
+"one": "Добавлен {n} сервер из ваших файлов.",
+"many": "Добавлено {n} серверов из ваших файлов.",
+"few": "Добавлены {n} сервера из ваших файлов.",
+"other": "{n} Серверы, добавленные из ваших файлов."
+},
 "Paste at least one proxy link.": "Вставьте как минимум одну ссылку на прокси-сервер.",
 "Pasted links": "Вставленные ссылки",
-"{n} servers added.": "Добавлено {n} серверов.",
+"{n} servers added.": {
+"one": "Добавлен {n} сервер.",
+"many": "Добавлено {n} серверов.",
+"few": "Добавлено {n} сервера.",
+"other": "Добавлено {n} сервера."
+},
 "Paste a GitHub token first.": "Сначала вставьте токен GitHub.",
 "GitHub token saved in the encrypted vault.": "Токен GitHub сохраняется в зашифрованном хранилище.",
 "GitHub token removed.": "Токен GitHub удалён.",
@@ -3200,8 +3215,12 @@
 "These settings are copied from the chosen workspace to every other member when you press Apply. Each member records what it received in its signed journal; an observing workspace keeps its IP mode until it is paused.": "Эти настройки копируются из выбранной рабочей области во все остальные рабочие области группы при нажатии кнопки «Применить». Каждая рабочая область записывает полученные данные в свой подписанный журнал; наблюдательная рабочая область сохраняет режим IP до тех пор, пока её работа не будет приостановлена.",
 "Choose what the group shares under Shared settings.": "Выберите, чем группа будет делиться, в разделе «Общие настройки».",
 "Apply to members": "Применить к участникам",
-"Settings copied to {n} workspaces.": "Настройки скопированы в {n} рабочих пространств.",
-"{n} kept their IP mode while observing.": "{n} сохранили свой IP-режим во время наблюдения.",
+"Settings copied to {n} workspaces.": {
+"one": "Настройки скопированы в {n} рабочую область.",
+"many": "Настройки скопированы в {n} рабочих пространств.",
+"few": "Настройки скопированы в {n} рабочих пространства.",
+"other": "Настройки скопированы в {n} рабочих пространства."
+},
 "New name for this group:": "Новое название для этой группы:",
 "Delete group": "Удалить группу",
 "Delete the group \"{name}\"? Its workspaces stay and lose only the grouping.": "Удалить группу «{name}»? Её рабочие пространства останутся, а группировка будет удалена.",
@@ -3220,7 +3239,12 @@
 "Enter the API pair as ID:Hash, or leave it empty.": "Введите пару данных API в формате «ID:Hash» или оставьте поле пустым.",
 "Importing…": "Импорт…",
 "{done} of {total} imported": "Импортировано {done} из {total}",
-"{n} accounts imported.": "Импортировано {n} учетных записей.",
+"{n} accounts imported.": {
+"one": "Импортирована {n} учетная запись.",
+"many": "Импортировано {n} учетных записей.",
+"few": "Импортировано {n} учётных записи.",
+"other": "Импортировано {n} учетных записей."
+},
 "Name of the new group:": "Название новой группы:",
 "Group created. Move workspaces into it or import accounts.": "Группа создана. Переместите в неё рабочие пространства или импортируйте учётные записи.",
 "Unknown bundled list.": "Неизвестный встроенный список.",
@@ -3762,5 +3786,17 @@
 "Open Parameters": "Открыть параметры",
 "Copies {list} from {name}": "Копирует {list} из {name}",
 "Add to group": "Добавить в группу",
-"Save these settings": "Сохранить эти настройки"
+"Save these settings": "Сохранить эти настройки",
+"Lists updated: {n} source.": "Обновлены списки: {n} источник.",
+"{n} server added from your files.": "Добавлен {n} сервер из ваших файлов.",
+"{n} server added.": "Добавлен {n} сервер.",
+"Settings copied to {n} workspace.": "Настройки скопированы в {n} рабочую область.",
+"{n} workspaces kept their IP mode while observing.": {
+"one": "{n} рабочая область сохранила свой режим IP во время наблюдения.",
+"many": "{n} рабочих пространств сохранили свой режим IP во время наблюдения.",
+"few": "{n} рабочих пространства сохранили свой режим IP во время наблюдения.",
+"other": "{n} рабочих пространств сохранили свой режим IP во время наблюдения."
+},
+"{n} workspace kept its IP mode while observing.": "{n} рабочая область сохранила свой режим IP во время наблюдения.",
+"{n} account imported.": "Импортирована {n} учетная запись."
 }

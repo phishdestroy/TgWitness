@@ -176,7 +176,8 @@
       await acceptWrite(result, serial); decorate();
       const done = result.results.filter(r => r.status === "applied").length;
       const skipped = result.results.filter(r => (r.skipped || []).length).length;
-      toast(tr("Settings copied to {n} workspaces.", {n: done}) + (skipped ? " " + tr("{n} kept their IP mode while observing.", {n: skipped}) : ""));
+      toast(trn("Settings copied to {n} workspace.", "Settings copied to {n} workspaces.", done) + (skipped ? " " +
+        trn("{n} workspace kept its IP mode while observing.", "{n} workspaces kept their IP mode while observing.", skipped) : ""));
     })));
     const rename = node("button", "quiet small", tr("Rename")); rename.type = "button";
     rename.addEventListener("click", () => busy(rename, () => writeGroup(group.id, async serial => {
@@ -335,7 +336,7 @@
           done: queue.filter(b => b.done).length, total: queue.length});
       }
       await loadProfiles(); await load();
-      if (current()) toast(tr("{n} accounts imported.", {n: queue.filter(b => b.done).length}));
+      if (current()) toast(trn("{n} account imported.", "{n} accounts imported.", queue.filter(b => b.done).length));
     } finally {
       passcode = "";
       importing = false;

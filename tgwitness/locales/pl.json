@@ -3177,14 +3177,29 @@
 "All countries": "Wszystkie kraje",
 "All lists": "Wszystkie listy",
 "Checking every server. Results appear as they come in.": "Sprawdzanie wszystkich serwerów. Wyniki pojawiają się na bieżąco.",
-"Lists updated: {n} sources.": "Zaktualizowano listy: {n} źródeł.",
+"Lists updated: {n} sources.": {
+"one": "Zaktualizowane listy: {n} źródło.",
+"many": "Zaktualizowane listy: {n} źródeł.",
+"few": "Zaktualizowane listy: {n} źródła.",
+"other": "Zaktualizowane listy: {n} źródła."
+},
 "List removed.": "Lista została usunięta.",
 "List added. It is downloaded with the next list update.": "Lista została dodana. Zostanie pobrana wraz z następną aktualizacją listy.",
 "{name}: a list may have at most 1 MiB.": "{name}: lista może mieć maksymalnie 1 MiB.",
-"{n} servers added from your files.": "Dodano {n} serwerów z Państwa plików.",
+"{n} servers added from your files.": {
+"one": "Dodano {n} serwer z Państwa plików.",
+"many": "Dodano {n} serwerów z Państwa plików.",
+"few": "Dodano {n} serwery z Państwa plików.",
+"other": "{n} Serwery dodane z Państwa plików."
+},
 "Paste at least one proxy link.": "Proszę wkleić co najmniej jeden link do serwera proxy.",
 "Pasted links": "Wklejone linki",
-"{n} servers added.": "Dodano {n} serwerów.",
+"{n} servers added.": {
+"one": "Dodano {n} serwer.",
+"many": "Dodano {n} serwerów.",
+"few": "Dodano {n} serwery.",
+"other": "Dodano {n} serwera."
+},
 "Paste a GitHub token first.": "Najpierw wklej token GitHub.",
 "GitHub token saved in the encrypted vault.": "Token serwisu GitHub jest zapisany w zaszyfrowanym sejfie.",
 "GitHub token removed.": "Token serwisu GitHub został usunięty.",
@@ -3200,8 +3215,12 @@
 "These settings are copied from the chosen workspace to every other member when you press Apply. Each member records what it received in its signed journal; an observing workspace keeps its IP mode until it is paused.": "Ustawienia te są kopiowane z wybranego obszaru roboczego do wszystkich pozostałych członków po naciśnięciu przycisku „Zastosuj”. Każdy członek rejestruje otrzymane dane w swoim podpisanym dzienniku; obszar roboczy obserwujący zachowuje tryb IP do momentu wstrzymania działania.",
 "Choose what the group shares under Shared settings.": "W sekcji „Ustawienia współdzielone” proszę wybrać elementy, które grupa ma udostępniać.",
 "Apply to members": "Zastosuj do członków",
-"Settings copied to {n} workspaces.": "Ustawienia skopiowano do {n} obszarów roboczych.",
-"{n} kept their IP mode while observing.": "{n} zachowało tryb IP podczas obserwacji.",
+"Settings copied to {n} workspaces.": {
+"one": "Ustawienia skopiowano do {n} obszaru roboczego.",
+"many": "Ustawienia skopiowano do {n} obszarów roboczych.",
+"few": "Ustawienia skopiowano do {n} obszarów roboczych.",
+"other": "Ustawienia skopiowano do {n} obszaru roboczego."
+},
 "New name for this group:": "Nowa nazwa tej grupy:",
 "Delete group": "Usuń grupę",
 "Delete the group \"{name}\"? Its workspaces stay and lose only the grouping.": "Czy chce Pan/Pani usunąć grupę „{name}”? Jej obszary robocze pozostaną nienaruszone, a grupa zostanie jedynie usunięta.",
@@ -3220,7 +3239,12 @@
 "Enter the API pair as ID:Hash, or leave it empty.": "Wprowadź parę danych API w formacie ID:Hash lub pozostaw to pole puste.",
 "Importing…": "Trwa import…",
 "{done} of {total} imported": "{done} z {total} zaimportowanych",
-"{n} accounts imported.": "Zaimportowano {n} kont.",
+"{n} accounts imported.": {
+"one": "Zaimportowano {n} konto.",
+"many": "Zaimportowano {n} kont.",
+"few": "Zaimportowano {n} konta.",
+"other": "Zaimportowano {n} konta."
+},
 "Name of the new group:": "Nazwa nowej grupy:",
 "Group created. Move workspaces into it or import accounts.": "Grupa została utworzona. Przenieś do niej obszary robocze lub zaimportuj konta.",
 "Unknown bundled list.": "Nieznana lista dołączona.",
@@ -3762,5 +3786,17 @@
 "A country cannot be preferred and avoided at once.": "Nie można jednocześnie preferować i unikać tego samego kraju.",
 "Choose at least one preferred country to use only those.": "Proszę wybrać co najmniej jeden preferowany kraj, aby korzystać wyłącznie z serwerów z tego kraju.",
 "Country choices need country lookups. Switch on Look up server countries.": "Wybór kraju wymaga sprawdzenia krajów serwerów. Proszę włączyć opcję „Sprawdź kraje serwerów”.",
-"Save these settings": "Zapisz te ustawienia"
+"Save these settings": "Zapisz te ustawienia",
+"Lists updated: {n} source.": "Zaktualizowane listy: {n} źródło.",
+"{n} server added from your files.": "Dodano {n} serwer z Państwa plików.",
+"{n} server added.": "Dodano {n} serwer.",
+"Settings copied to {n} workspace.": "Ustawienia skopiowano do {n} obszaru roboczego.",
+"{n} workspaces kept their IP mode while observing.": {
+"one": "{n} obszar roboczy zachował swój tryb IP podczas obserwacji.",
+"many": "{n} obszarów roboczych zachowało swój tryb IP podczas obserwacji.",
+"few": "{n} obszary robocze zachowały swój tryb IP podczas obserwacji.",
+"other": "{n} obszarów roboczych zachowało swój tryb IP podczas obserwacji."
+},
+"{n} workspace kept its IP mode while observing.": "{n} obszar roboczy zachował swój tryb IP podczas obserwacji.",
+"{n} account imported.": "Zaimportowano {n} konto."
 }

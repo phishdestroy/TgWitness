@@ -3126,14 +3126,20 @@
 "All countries": "ทุกประเทศ",
 "All lists": "ทุกรายการ",
 "Checking every server. Results appear as they come in.": "การตรวจสอบทุกเซิร์ฟเวอร์ ผลลัพธ์จะปรากฏทันทีที่ข้อมูลเข้ามา",
-"Lists updated: {n} sources.": "รายชื่อที่อัปเดตแล้ว: {n} แหล่ง",
+"Lists updated: {n} sources.": {
+"other": "รายชื่อที่อัปเดต: {n} แหล่ง"
+},
 "List removed.": "รายชื่อถูกลบแล้ว",
 "List added. It is downloaded with the next list update.": "รายชื่อถูกเพิ่มแล้ว จะถูกดาวน์โหลดเมื่อมีการอัปเดตรายชื่อครั้งต่อไป",
 "{name}: a list may have at most 1 MiB.": "{name}: รายการหนึ่งอาจมีขนาดสูงสุด 1 MiB",
-"{n} servers added from your files.": "เพิ่มเซิร์ฟเวอร์ {n} เครื่องจากไฟล์ของคุณ",
+"{n} servers added from your files.": {
+"other": "เพิ่มเซิร์ฟเวอร์ {n} เครื่องจากไฟล์ของคุณ"
+},
 "Paste at least one proxy link.": "วางลิงก์พร็อกซีอย่างน้อยหนึ่งลิงก์",
 "Pasted links": "ลิงก์ที่คัดลอกมา",
-"{n} servers added.": "เพิ่มเซิร์ฟเวอร์ {n} เครื่อง",
+"{n} servers added.": {
+"other": "เพิ่มเซิร์ฟเวอร์ {n} เครื่อง"
+},
 "Paste a GitHub token first.": "วางโทเค็น GitHub ลงก่อน",
 "GitHub token saved in the encrypted vault.": "โทเค็น GitHub ถูกเก็บไว้ในคลังข้อมูลที่เข้ารหัส",
 "GitHub token removed.": "โทเค็น GitHub ถูกลบแล้ว",
@@ -3149,8 +3155,9 @@
 "These settings are copied from the chosen workspace to every other member when you press Apply. Each member records what it received in its signed journal; an observing workspace keeps its IP mode until it is paused.": "การตั้งค่าเหล่านี้จะถูกคัดลอกจากพื้นที่ทำงานที่เลือกไปยังสมาชิกอื่น ๆ ทุกแห่งเมื่อคุณกด 'Apply' (นำไปใช้) สมาชิกแต่ละแห่งจะบันทึกสิ่งที่ได้รับไว้ในบันทึกที่ลงนามแล้ว; พื้นที่ทำงานที่สังเกตการณ์จะรักษาโหมด IP ของมันไว้จนกว่าจะถูกหยุดชั่วคราว",
 "Choose what the group shares under Shared settings.": "เลือกสิ่งที่กลุ่มจะแบ่งปันในส่วน \"การตั้งค่าที่แบ่งปัน\"",
 "Apply to members": "นำไปใช้กับสมาชิก",
-"Settings copied to {n} workspaces.": "การตั้งค่าได้คัดลอกไปยังพื้นที่ทำงาน {n} แห่งแล้ว",
-"{n} kept their IP mode while observing.": "{n} ยังคงใช้โหมด IP ของตนเองขณะสังเกตการณ์",
+"Settings copied to {n} workspaces.": {
+"other": "การตั้งค่าถูกคัดลอกไปยังพื้นที่ทำงาน {n} แห่ง"
+},
 "New name for this group:": "ชื่อใหม่สำหรับกลุ่มนี้:",
 "Delete group": "ลบกลุ่ม",
 "Delete the group \"{name}\"? Its workspaces stay and lose only the grouping.": "จะลบกลุ่ม \"{name}\" หรือไม่? พื้นที่ทำงานของกลุ่มจะยังคงอยู่ และจะสูญเสียเพียงการจัดกลุ่มเท่านั้น",
@@ -3166,7 +3173,9 @@
 "Enter the API pair as ID:Hash, or leave it empty.": "ป้อนคู่ API ในรูปแบบ ID:Hash หรือปล่อยให้ว่าง",
 "Importing…": "กำลังนำเข้า…",
 "{done} of {total} imported": "นำเข้าแล้ว {done} จาก {total}",
-"{n} accounts imported.": "นำเข้าบัญชีได้ {n} บัญชี",
+"{n} accounts imported.": {
+"other": "นำเข้าบัญชี {n} บัญชีแล้ว"
+},
 "Name of the new group:": "ชื่อของกลุ่มใหม่:",
 "Group created. Move workspaces into it or import accounts.": "กลุ่มได้สร้างแล้ว ย้ายพื้นที่ทำงานเข้าไปในกลุ่มนี้ หรือนำเข้าบัญชี",
 "Unknown bundled list.": "รายชื่อที่รวมไว้ไม่ทราบ",
@@ -3708,5 +3717,14 @@
 "A country cannot be preferred and avoided at once.": "ไม่สามารถกำหนดประเทศที่ต้องการและประเทศที่ต้องการหลีกเลี่ยงได้พร้อมกัน",
 "Choose at least one preferred country to use only those.": "เลือกประเทศที่ต้องการอย่างน้อยหนึ่งประเทศเพื่อใช้เฉพาะประเทศเหล่านั้นเท่านั้น",
 "Country choices need country lookups. Switch on Look up server countries.": "การเลือกประเทศจำเป็นต้องมีการค้นหาประเทศ ให้เปิดตัวเลือก “ค้นหาประเทศของเซิร์ฟเวอร์”",
-"Save these settings": "บันทึกการตั้งค่าเหล่านี้"
+"Save these settings": "บันทึกการตั้งค่าเหล่านี้",
+"Lists updated: {n} source.": "รายชื่อที่อัปเดต: {n} แหล่ง",
+"{n} server added from your files.": "เพิ่มเซิร์ฟเวอร์ {n} เครื่องจากไฟล์ของคุณ",
+"{n} server added.": "เพิ่มเซิร์ฟเวอร์ {n} เครื่อง",
+"Settings copied to {n} workspace.": "การตั้งค่าถูกคัดลอกไปยังพื้นที่ทำงาน {n} แห่ง",
+"{n} workspaces kept their IP mode while observing.": {
+"other": "พื้นที่ทำงาน {n} แห่งได้รักษาโหมด IP ของตัวเองไว้ขณะกำลังติดตาม"
+},
+"{n} workspace kept its IP mode while observing.": "พื้นที่ทำงาน {n} แห่งได้รักษาโหมด IP ของตัวเองไว้ขณะกำลังติดตาม",
+"{n} account imported.": "นำเข้าบัญชี {n} บัญชีแล้ว"
 }

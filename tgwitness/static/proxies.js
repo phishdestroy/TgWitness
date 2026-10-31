@@ -339,7 +339,7 @@
   $("pool-update").addEventListener("click", e => runAction(e.currentTarget, async () => {
     const result = await json("network/catalog/refresh", {}, {root: true});
     toast(result.throttled ? tr("The list was refreshed recently. Wait one minute before another download.") :
-      tr("Lists updated: {n} sources.", {n: (result.refresh?.updated || []).length}));
+      trn("Lists updated: {n} source.", "Lists updated: {n} sources.", (result.refresh?.updated || []).length));
     view = await json("network/proxies"); render();
   }));
   $("pool-sources").addEventListener("change", event => {
@@ -393,7 +393,7 @@
       }
     }
     if (view) render();
-    if (added) toast(tr("{n} servers added from your files.", {n: added}));
+    if (added) toast(trn("{n} server added from your files.", "{n} servers added from your files.", added));
   }
   function addLists(files) { return runAction(null, () => importLists(files)); }
   $("pool-files").addEventListener("change", () => { const files = [...$("pool-files").files]; $("pool-files").value = ""; addLists(files); });
@@ -406,7 +406,7 @@
     view = await json("network/sources/list", {label: tr("Pasted links"), text});
     if ($("pool-paste").value.trim() === text) $("pool-paste").value = "";
     render();
-    toast(tr("{n} servers added.", {n: view.added.compatible}));
+    toast(trn("{n} server added.", "{n} servers added.", view.added.compatible));
   }));
   $("pool-token-save").addEventListener("click", e => runAction(e.currentTarget, async () => {
     const token = $("pool-token").value.trim(); if (!token) throw new Error(tr("Paste a GitHub token first."));
