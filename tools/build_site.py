@@ -73,7 +73,8 @@ MODES_PAGES = site_modes.FILES
 DEMO_STATIC = {"demo/" + name: "tgwitness/static/" + name
                for name in ("style.css", "theme.js", "i18n.js", "app.js", "router.js", "integrations.js", "analysis.js", "media-analysis.js", "webhooks.js", "proxies.js", "fleet.js", "review.js", "live.js", "mark.svg", "guide.css", "guide.js",
                             "cloud-capture-locales.js", "cloud-capture.js", "cloud-capture.css", "cloud-capture-story.js", "cloud-capture-story.css", "capture.html")}
-DEMO_STATIC.update({"demo/core/time.js": "tgwitness/static/core/time.js"})
+DEMO_STATIC.update({"demo/core/" + name: "tgwitness/static/core/" + name
+                    for name in ("time.js", "view-host.js")})
 DEMO_STATIC.update({"demo/components/" + name: "tgwitness/static/components/" + name
                     for name in ("shell.js", "shell.css")})
 DEMO_STATIC.update({"demo/mock.js": "website/demo/mock.js", "demo/fixtures.json": "website/demo/fixtures.json"})

@@ -54,12 +54,12 @@
   }
 
   async function load() {
-    if (!state.status) return;
+    if (!state.status || state.view !== "accounts") return;
     if (formRevision !== state.workspaceRevision) clearForms();
     const revision = state.workspaceRevision, serial = ++loadSerial;
     try {
       const result = await json("profile-groups", undefined, {root: true});
-      if (revision !== state.workspaceRevision || serial !== loadSerial) return;
+      if (revision !== state.workspaceRevision || serial !== loadSerial || state.view !== "accounts") return;
       groups = result.groups; sections = result.sections;
       loadError = "";
     } catch (error) {
@@ -206,7 +206,7 @@
     if (formRevision !== state.workspaceRevision) clearForms();
     if (!restorePoint) beforeRender();
     for (const id of settings.keys()) if (!groups.some(group => group.id === id)) settings.delete(id);
-    const cards = new Map([...document.querySelectorAll(".account-card[data-profile]")].map(card => [card.dataset.profile, card]));
+    const cards = new Map([...$("view-accounts").querySelectorAll(".account-card[data-profile]")].map(card => [card.dataset.profile, card]));
     const membership = new Map(groups.flatMap(group => group.members.map(id => [id, group.id])));
     for (const [id, card] of cards) {
       card.querySelector(".fleet-card-row")?.remove();
@@ -223,7 +223,7 @@
     title.textContent = tr("Without group");
     title.hidden = !groups.length || !list.children.length;
     if (restorePoint) {
-      const focus = restorePoint.profile ? [...document.querySelectorAll(".account-card[data-profile]")]
+      const focus = restorePoint.profile ? [...$("view-accounts").querySelectorAll(".account-card[data-profile]")]
         .find(card => card.dataset.profile === restorePoint.profile)?.querySelector(".fleet-card-group") : restorePoint.element;
       if (focus?.isConnected && !focus.disabled) {
         focus.focus({preventScroll: true}); window.scrollTo({left: restorePoint.x, top: restorePoint.y, behavior: "instant"});

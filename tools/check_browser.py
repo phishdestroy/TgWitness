@@ -113,6 +113,15 @@ def unlock(page, server):
     expect(page.locator("#workspace")).to_be_visible()
 
 
+def navigate_panel(page, view):
+    """Use the same navigation on desktop and the mobile menu."""
+    button = page.locator(f'.sidebar [data-view="{view}"]')
+    if not button.is_visible():
+        page.locator("#navigation-toggle").click()
+    button.click()
+    expect(page.locator(f"#view-{view}")).to_be_visible()
+
+
 def check_layout(page, connection=False):
     assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), "Horizontal overflow"
     for button in page.locator(".sidebar .nav:visible").all():

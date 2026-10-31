@@ -189,8 +189,8 @@ def main():
             expect(page.locator("#mcp-created")).to_be_hidden()
             expect(page.locator("#mcp-name")).to_have_value("")
             page.evaluate("lock()")
-            expect(page.locator("#mcp-token")).to_have_value("")
-            expect(page.locator("#mcp-name")).to_have_value("")
+            assert page.evaluate("()=>[$('mcp-token').value,$('mcp-name').value]") == ["", ""]
+            expect(page.locator("#view-integrations")).to_have_count(0)
             assert not errors, errors
             browser.close()
     print("MCP UI passed: persistent drafts, availability recovery, scoped tools, six client configs, diagnostics, rotation/revocation, workspace isolation and mobile.")

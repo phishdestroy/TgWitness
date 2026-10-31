@@ -1,5 +1,21 @@
 "use strict";
-const $ = (id) => document.getElementById(id);
+// Classic addons share this adapter; each screen keeps its own root while detached.
+const panelRoots=new Map([...document.querySelectorAll('.view')].map(root=>[root.id.slice(5),root]));
+const $ = id => {
+  const attached=document.getElementById(id);if(attached)return attached;
+  for(const root of panelRoots.values()){
+    if(root.id===id)return root;
+    const found=root.querySelector('#'+CSS.escape(id));if(found)return found;
+  }
+  return null;
+};
+const viewQuery=(view,selector)=>panelRoots.get(view)?.querySelector(selector);
+const viewQueries=(view,selector)=>[...panelRoots.get(view)?.querySelectorAll(selector)||[]];
+function panelQueries(selector){
+  const found=new Set(document.querySelectorAll(selector));
+  for(const root of panelRoots.values())if(!root.isConnected)for(const item of root.querySelectorAll(selector))found.add(item);
+  return [...found];
+}
 const state = {token: sessionStorage.getItem("tgwitness-token") || "",
   view:({account:"connection",sources:"sources",exports:"evidence",journal:"observations",sealed:"sealed"}[location.hash.slice(1)]||"connection"), status: null,
   events: [], dialogs: [], filter: "", source: "", search: "", eventSince:"",eventUntil:"",cursor: null, request: 0, drawerSeq: null,
@@ -9,6 +25,60 @@ const state = {token: sessionStorage.getItem("tgwitness-token") || "",
   scope: null, scopeDirty: false, dossier: null, notifications: [], witnessToken: null, parameters: null, parametersDirty: false,
   me: null, access: null, accessEdit: null, accessChats: {}, consoleAfter: 0};
 const monitoringFields=["messages","edits","deletions","reactions","membership"];
+let viewHost=null;
+const viewContexts=new Map();
+const viewOptions=view=>({signal:viewContexts.get(view)?.signal});
+const viewReady=Promise.all([
+  import('./core/view-host.js?v=1'),
+  new Promise(resolve=>document.readyState==='complete'?resolve():document.addEventListener('DOMContentLoaded',resolve,{once:true})),
+]).then(([{createViewHost}])=>{
+  viewHost=createViewHost({getSession:()=>({workspace:state.profile,revision:state.workspaceRevision}),onError:error=>toast(error.message,true)});
+  for(const [name,root] of panelRoots){
+    let top=0,scrolls=[];
+    viewHost.register(name,root,{
+      async enter(context){
+        viewContexts.set(name,context);
+        if(context.params.load!==false)await loadPanelView(name);
+        if(!context.current())return;
+        for(const [element,scroll] of scrolls)if(root.contains(element))element.scrollTop=scroll;
+        if(context.params.restore!==false)window.scrollTo({top,behavior:'instant'});
+      },
+      updateStatus:()=>renderViewStatus(name),
+      leave(){
+        top=window.scrollY;scrolls=[root,...root.querySelectorAll('*')].filter(element=>element.scrollTop).map(element=>[element,element.scrollTop]);
+        if(name==='connection')window.TgWitnessProxies?.stop?.();
+        if(name==='integrations'){window.TgWitnessIntegrations?.clear();window.TgWitnessWebhooks?.clear();}
+        if(name==='sealed')window.TgWitnessCaptureStory?.pause?.();
+      },
+      resetSession(){top=0;scrolls=[];viewContexts.delete(name);resetViewContent(name);},
+    });
+  }
+});
+function resetViewContent(view){
+  const root=panelRoots.get(view);for(const form of root.querySelectorAll('form'))form.reset();
+  for(const field of root.querySelectorAll('input,textarea'))if(!field.form){field.value=field.defaultValue;field.checked=field.defaultChecked;}
+  if(view==='connection'){networkLoadedFor=null;policyOutsideDirty=false;state.policy=null;}
+  if(view==='sources'){state.scope=null;state.scopeDirty=false;state.recheckDirty=false;}
+  if(view==='witness'){state.evidenceDirty=false;state.replicaDirty=false;state.alertsDirty=false;}
+  if(view==='sealed')window.TgWitnessCapture?.reset();
+  const clear={observations:['events-body'],chats:['chats-list','chat-feed','chat-people','chat-about'],accounts:['accounts-list','fleet-groups'],
+    parameters:['parameters-groups','parameters-nav'],access:['access-console','access-list','access-sessions-list','access-token'],
+    connection:['profiles-list'],integrations:['webhook-list','webhook-history','webhook-chats']}[view]||[];
+  for(const id of clear)$(id)?.replaceChildren();
+}
+async function loadPanelView(view){
+  if(view==='sources'){renderTargets();await loadScope();}
+  else if(view==='witness')await loadExtras();
+  else if(view==='parameters')await loadParameters();
+  else if(view==='accounts'){renderAccounts();await loadProfiles();}
+  else if(view==='chats')await refreshChats(true);
+  else if(view==='observations')await refreshEvents();
+  else if(view==='access')await loadAccess();
+  else if(view==='evidence')await loadReportSettings();
+  else if(view==='integrations')await window.TgWitnessIntegrations?.load();
+  else if(view==='analysis')await window.TgWitnessAnalysis?.load();
+  else if(view==='connection'){await loadProfiles();if(!state.status.demo)await loadPolicy();}
+}
 let routerTask=null;
 function routeSnapshot(){return {view:state.drawerSeq!==null?"observations":state.view,workspace:state.profile,
   chatId:state.view==="chats"?state.chat:null,seq:state.drawerSeq,kind:state.filter,source:state.source,q:state.search,
@@ -27,7 +97,7 @@ async function applyRouteToPanel(route,current){
   closeDetail({history:false});
   state.filter=route.kind;state.source=route.source;state.search=route.q;state.eventSince=route.since;state.eventUntil=route.until;
   $("event-search").value=state.search;fillSourceSelect("source-filter",state.source,true);
-  document.querySelectorAll("[data-filter]").forEach(button=>button.classList.toggle("active",button.dataset.filter===state.filter));
+  viewQueries("observations","[data-filter]").forEach(button=>button.classList.toggle("active",button.dataset.filter===state.filter));
   navigate(route.view,{history:false,load:false});
   const view=state.view;
   if(view==="chats"){await refreshChats();if(current()&&route.chatId!==null)await openChat(route.chatId,{history:false});}
@@ -266,6 +336,8 @@ async function busy(button, work) {
 }
 function lock() {
   window.TgWitnessRouter?.invalidate();
+  viewHost?.resetSession();state.permissionsStamp=null;
+  state.events=[];state.chats=[];state.chatMessages=[];state.chatInfo=null;state.chat=null;state.parameters=null;
   selectedSources.clear();selectedDialogs.clear();sourceBatchBusy=false;
   resetReportSettings();
   window.dispatchEvent(new Event("tgwitness:lock"));
@@ -285,7 +357,7 @@ function lock() {
 }
 async function unlock() {
   accessStarted=true;
-  await Promise.all([timeReady,shellReady]);
+  await Promise.all([timeReady,shellReady,viewReady]);
   const router=await ensureRouter(),requested=router.parse();
   state.me = await json("access/me",undefined,{root:true});
   await loadProfiles();
@@ -306,9 +378,7 @@ async function unlock() {
 
   const openingView=state.view;
   renderStatus(); setAuthStep(state.status.collector.has_session ? "authorized" : "credentials");
-  await refreshEvents();
   loadNotifications().catch(()=>{});
-  if(state.view!=="parameters")loadParameters().catch(()=>{});
   if(!requested.explicit&&state.view===openingView&&state.view!=="sealed"&&!state.status.demo&&!state.status.collector.has_session&&viewAllowed("connection"))navigate("connection",{history:false});
   await router.start();
 }
@@ -332,6 +402,8 @@ function viewAllowed(view){
     analysis:!!(state.status?.analysis?.enabled||state.status?.analysis?.media_available)}[view]??true;
 }
 function applyAccess(){
+  const stamp=JSON.stringify([state.workspaceRevision,state.me,state.status?.chats_limited,state.status?.demo,state.status?.analysis]);
+  if(stamp===state.permissionsStamp)return;state.permissionsStamp=stamp;
   window.TgWitnessAnalysis?.syncStatus?.(state.status);
   const analysisTitle=tr(state.status?.analysis?.enabled?"Ask the archive":"Machine recognition");
   const analysisNav=document.querySelector('.sidebar [data-view="analysis"]');
@@ -344,15 +416,15 @@ function applyAccess(){
     while(next&&!next.classList.contains("nav-section")){visible=visible||!next.hidden;next=next.nextElementSibling;}
     heading.hidden=!visible;
   });
-  document.querySelectorAll("[data-open]").forEach(n=>n.hidden=!viewAllowed(n.dataset.open));
+  panelQueries("[data-open]").forEach(n=>n.hidden=!viewAllowed(n.dataset.open));
   $("collector-toggle").hidden=!may("collect")||!!state.status?.chats_limited;
   $("manage-profiles").hidden=!state.me?.admin;
   if(state.view==="analysis"&&!viewAllowed("analysis")&&!$("workspace").hidden)navigate("chats");
-  document.querySelectorAll("[data-export]").forEach(n=>n.hidden=!viewAllowed("evidence"));
+  panelQueries("[data-export]").forEach(n=>n.hidden=!viewAllowed("evidence"));
 
   const limited=!!state.status?.chats_limited;
   $("chats-manage").hidden=!viewAllowed("sources");
-  document.querySelector(".chat-open").hidden=!may("interact")||limited;
+  viewQuery("chats",".chat-open").hidden=!may("interact")||limited;
   $("chat-load-history").hidden=$("chat-history-limit").hidden=!may("sources");
   $("chat-export-start").hidden=!may("export");
   $("chat-compose").hidden=!may("interact");
@@ -382,6 +454,7 @@ function syncLive(){
     window.TgWitnessLive?.stop();return;
   }
   window.TgWitnessLive?.start({key:state.workspaceRevision+":"+state.profile,head:state.status.stats.head?.seq,api,tr,accessEnded:lock,
+    hosts:[viewQuery(state.view,state.view==='chats'?'.chat-header':'.journal .card-heading')].filter(Boolean),
     canRefresh:()=>{
       if(state.drawerSeq!==null||window.getSelection()?.toString()||document.hidden)return false;
       if(state.view==="chats"){const feed=$("chat-feed");return feed.scrollHeight-feed.scrollTop-feed.clientHeight<80;}
@@ -396,9 +469,11 @@ function navigate(view,options={}) {
   if(view!==state.view&&state.drawerSeq!==null)closeDetail({history:false});
   if(view!=="connection")window.TgWitnessProxies?.stop?.();
   state.view=view;
-  syncLive();
   $("workspace").dataset.currentView=view;
-  document.querySelectorAll(".view").forEach(n=>n.hidden=n.id !== "view-"+view);
+  const entered=viewHost.activate(view,{params:{load:options.load,restore:options.restore}}).catch(error=>{
+    if(!(error instanceof StaleView)&&error.name!=='AbortError')toast(error.message,true);
+  });
+  syncLive();
   document.querySelectorAll("[data-view]").forEach(n=>{
     const selected=n.dataset.view===(view==="sealed"?"evidence":view);
     n.classList.toggle("active",selected);
@@ -407,18 +482,8 @@ function navigate(view,options={}) {
   $("view-label").textContent=tr({chats:"Chats",observations:"Journal",sources:"Sources",evidence:"Exports",sealed:"Exports",witness:"Extras",parameters:"Parameters",connection:"Account",accounts:"Accounts",access:"Access",integrations:"Integrations",analysis:state.status?.analysis?.enabled?"Ask the archive":"Machine recognition"}[view]);
   show("entry-header",view==="connection");
   if(view==="connection")connectionSettings(false);
-  if(view!=="integrations"){window.TgWitnessIntegrations?.clear();window.TgWitnessWebhooks?.clear();}
   if(options.history!==false)window.TgWitnessRouter?.record();
-  if(options.load===false)return;
-  if (view==="sources") {renderTargets();loadScope().catch(e=>toast(e.message,true));}
-  if (view==="witness") loadExtras().catch(e=>toast(e.message,true));
-  if (view==="parameters") loadParameters().catch(e=>toast(e.message,true));
-  if (view==="accounts") {renderAccounts();loadProfiles().catch(e=>toast(e.message,true));window.TgWitnessFleet?.load();}
-  if (view==="chats") refreshChats().catch(e=>toast(e.message,true));
-  if (view==="access") loadAccess().catch(e=>toast(e.message,true));
-  if (view==="evidence") loadReportSettings().catch(e=>toast(e.message,true));
-  if (view==="integrations") window.TgWitnessIntegrations?.load();
-  if(view==="analysis")window.TgWitnessAnalysis?.load();
+  return entered;
 }
 $("manage-profiles").addEventListener("click",()=>{
   navigate("connection");connectionSettings(true);$("profiles-details").open=true;$("profiles-details").scrollIntoView({block:"start"});
@@ -472,7 +537,7 @@ function renderQuick(){
     const text=quickSearch.value.trim().slice(0,200);
     option("journal",tr("Search journal"),text,async()=>{state.search=text;state.cursor=null;$("event-search").value=text;navigate("observations");await refreshEvents();});
     if(/^(@[a-z0-9_]{3,}|(?:https?:\/\/)?t\.me\/\S+)$/i.test(text)&&may("interact"))
-      option("telegram",tr("Open Telegram link"),text,()=>{navigate("chats");$("chat-link").value=text;document.querySelector(".chat-open").open=true;$("chat-link").focus();});
+      option("telegram",tr("Open Telegram link"),text,()=>{navigate("chats");$("chat-link").value=text;viewQuery("chats",".chat-open").open=true;$("chat-link").focus();});
   }
   show("quick-empty",!quickResults.children.length);selectQuick(0);
 }
@@ -612,17 +677,11 @@ function renderCollectorHealth(h){
 }
 
 function renderStatus() {
-  renderHistory();
-  renderComposer();
-  const s=state.status,c=s.collector,counts=s.stats.counts;
+  const s=state.status,c=s.collector;
   $("workspace").dataset.demo=String(!!s.demo);
   $("workspace").dataset.onlineDemo=String(!!window.TGW_ONLINE_DEMO);
   show("demo-banner",s.demo);
-  renderChatStatus();
   $("app-version").textContent=s.version?"TgWitness "+s.version:"";
-  show("entry-settings",!s.demo);
-  show("entry-demo",s.demo);show("entry-return",s.demo||c.has_session);
-  $("entry-return").textContent=tr(s.demo?"View sample messages →":"Back to journal");
   $("status-chip").textContent=tr(s.demo ? "Demo workspace" : c.running ? (c.connected?"Observing":"Reconnecting") :
     c.has_session ? "Observation off" : ({code_required:"Waiting for code",password_required:"Waiting for 2FA",qr_pending:"Waiting for QR"}[c.phase]||"Account not connected"));
   $("status-chip").classList.toggle("live",!s.demo && c.running && c.connected);
@@ -631,32 +690,48 @@ function renderStatus() {
   $("collector-toggle").disabled=s.demo||(!c.running&&(!c.has_session||!hasSources(s)));
   $("collector-toggle").title=tr(s.demo?"Demo uses fictional observations":!c.has_session?"Connect an account first":
     !hasSources(s)?"Select at least one source first":"");
-  $("stat-messages").textContent=((counts["message.new"]||0)+(counts["message.snapshot"]||0)).toLocaleString();
-  $("stat-edits").textContent=(counts["message.edited"]||0).toLocaleString();
-  $("stat-deletes").textContent=(counts["message.deleted"]||0).toLocaleString();
-  $("stat-sources").textContent=s.targets.filter(x=>x.enabled).length;
-  $("sources-footnote").textContent=tr(s.demo ? "Synthetic sources" : c.running ? "Observation enabled" : "Observation paused");
   $("nav-count").textContent=s.stats.total.toLocaleString();
-  $("event-total").textContent=s.stats.total.toLocaleString();
-  $("fingerprint").textContent=s.fingerprint;
-  $("export-profile-id").textContent=state.profile;
   renderCollectorHealth(s.health);
   show("collector-error",!!c.last_error);
   $("collector-error").textContent=c.last_error ? tr("Collector reported {error}. Review coverage events before relying on completeness.",{error:c.last_error}) : "";
-  fillSourceSelect("source-filter",state.source,true);
+  renderSetup();
+  viewHost?.updateStatus(s);
+}
+function renderViewStatus(view){
+  const s=state.status;if(!s||viewHost?.active!==view)return;
+  const c=s.collector,counts=s.stats.counts;
+  if(view==='observations'){
+    $("stat-messages").textContent=((counts["message.new"]||0)+(counts["message.snapshot"]||0)).toLocaleString();
+    $("stat-edits").textContent=(counts["message.edited"]||0).toLocaleString();
+    $("stat-deletes").textContent=(counts["message.deleted"]||0).toLocaleString();
+    $("stat-sources").textContent=s.targets.filter(x=>x.enabled).length;
+    $("sources-footnote").textContent=tr(s.demo ? "Synthetic sources" : c.running ? "Observation enabled" : "Observation paused");
+    $("event-total").textContent=s.stats.total.toLocaleString();
+    fillSourceSelect("source-filter",state.source,true);
+  }else if(view==='chats'){
+    renderComposer();renderChatStatus();renderMulti();
+  }else if(view==='evidence'){
+    $("fingerprint").textContent=s.fingerprint;$("export-profile-id").textContent=state.profile;
+    renderVerification();
+  }else if(view==='sources'){
+  renderHistory();
   if (!state.captureDirty) {
     $("download-media").checked=s.capture.download_media;
     $("max-media").value=String(s.capture.max_media_mb);
     renderMediaRules(s.capture.types||{});
   }
-  renderCaptureDraft();renderVerification();renderRecheck();
+  renderCaptureDraft();renderRecheck();
   if(!state.monitoringDirty){
     for(const name of monitoringFields)$("monitor-"+name).checked=s.monitoring?.[name]??true;
     renderMonitoringDraft();
   }
   const enabled=monitoringFields.filter(name=>s.monitoring?.[name]??true);
   $("monitoring-current").textContent=tr("Saved for this account: {list}.",{list:enabled.length?enabled.map(termText).join(", "):tr("no live event categories")});
-  if (state.view==="sources") renderTargets();
+  renderTargets();
+  }else if(view==='connection'){
+  show("entry-settings",!s.demo);
+  show("entry-demo",s.demo);show("entry-return",s.demo||c.has_session);
+  $("entry-return").textContent=tr(s.demo?"View sample messages →":"Back to journal");
   const account=c.account;
   show("account-summary",!!account);
   const identity=account ? (account.username ? "@"+account.username+" · " : "") + "ID "+account.id : "";
@@ -670,7 +745,7 @@ function renderStatus() {
     show("authorized-mark",!account);
   }
   renderConnection();
-  renderSetup();
+  }else if(view==='analysis'||view==='integrations')window.TgWitnessAnalysis?.syncStatus?.(s);
 }
 
 function hasSources(s){return s.targets.some(t=>t.enabled)||(s.scope?.mode||"selected")!=="selected";}
@@ -699,7 +774,7 @@ $("setup-action").addEventListener("click",nextSetupStep);
 $("empty-action").addEventListener("click",()=>{
   if(state.filter||state.source||state.search||state.eventSince||state.eventUntil){
     state.filter=state.source=state.search=state.eventSince=state.eventUntil="";$("event-search").value="";$("source-filter").value="";
-    document.querySelectorAll("[data-filter]").forEach(n=>n.classList.toggle("active",n.dataset.filter===""));
+    viewQueries("observations","[data-filter]").forEach(n=>n.classList.toggle("active",n.dataset.filter===""));
     window.TgWitnessRouter?.record();
     busy($("empty-action"),()=>refreshEvents());
   }else nextSetupStep();
@@ -724,9 +799,10 @@ async function loadProfiles(){
 
   for(const profile of state.profiles)if(profile.id==="default"&&profile.label==="Main account")profile.label=tr("Main account");
   const select=$("profile-select");select.replaceChildren();
-  const list=$("profiles-list");list.replaceChildren();
+  const list=$("profiles-list"),showList=state.view==='connection';if(showList)list.replaceChildren();
   for(const profile of state.profiles){
     const option=new Option(profile.label,profile.id);option.disabled=!!profile.error_type;select.append(option);
+    if(!showList)continue;
     const row=node("div","target-row"),info=node("div");
     info.append(node("h3","",profile.label),node("p","",profile.error_type==="DeletionPending"?tr("Deletion incomplete"):profile.error_type?tr("Unavailable: {error}",{error:profile.error_type}):
       termText(profile.collector?.phase||"offline")+" · "+trn("{n} journal event","{n} journal events",profile.stats?.total||0)));
@@ -737,7 +813,7 @@ async function loadProfiles(){
   }
   select.value=state.profile;
   $("nav-accounts").textContent=String(state.profiles.length);
-  await window.TgWitnessFleet?.load();
+  if(state.view==='accounts')await window.TgWitnessFleet?.load();
   if(request!==profilesRequest)return;
   renderAccounts();
 }
@@ -754,6 +830,7 @@ function accountIdentity(p){
   return (a.username?"@"+a.username+" · ":"")+"ID "+a.id;
 }
 function renderAccounts(){
+  if(state.view!=='accounts')return;
   const grid=$("accounts-list"),s=state.status;if(!grid||!s)return;
   window.TgWitnessFleet?.beforeRender?.();
   grid.replaceChildren();$("fleet-groups")?.replaceChildren();
@@ -843,6 +920,7 @@ async function switchProfile(id,options={}){
   window.TgWitnessAnalysis?.clear();
   quickDialog.close();
   const revision=++state.workspaceRevision;
+  viewHost?.resetSession();state.permissionsStamp=null;
   $("workspace").inert=true;
   try{
   resetInteractions();
@@ -860,17 +938,12 @@ async function switchProfile(id,options={}){
   state.parameters=null;state.parametersDirty=false;state.recheckDirty=false;
   $("load-dialogs").textContent=tr("Load chats");
   $("event-search").value="";$("dialog-search").value="";show("available-card",false);
-  document.querySelectorAll("[data-filter]").forEach(n=>n.classList.toggle("active",n.dataset.filter===""));
+  viewQueries("observations","[data-filter]").forEach(n=>n.classList.toggle("active",n.dataset.filter===""));
   clearSecrets();$("api-id").value="";networkLoadedFor=null;
   $("network-result").textContent="";
-  await refreshStatus();await refreshEvents();await loadProfiles();
-  if(state.view==="chats")await refreshChats();
-  if(state.view==="sources")await loadScope();
-  if(state.view==="witness")await loadExtras();
-  if(state.view==="parameters")await loadParameters();
-  if(state.view==="evidence")await loadReportSettings();
-  if(state.view==="analysis")await window.TgWitnessAnalysis?.load();
-  if(state.view==="integrations"){window.TgWitnessWebhooks?.clear();await window.TgWitnessIntegrations?.load();}
+  await refreshStatus();await loadProfiles();
+  if(revision!==state.workspaceRevision)return;
+  await navigate(state.view,{history:false});
   await loadNotifications().catch(()=>{});
   if(revision!==state.workspaceRevision)return;
   setAuthStep(state.status.collector.has_session?"authorized":"credentials");
@@ -962,6 +1035,7 @@ function excerpt(e) {
 }
 let previouslyFocused;
 function renderEvents() {
+  if(state.view!=='observations')return;
   const body=$("events-body"); body.replaceChildren();
   for (const e of state.events) {
     const label=labels[e.kind] || [e.kind,"activity","system"];
@@ -993,6 +1067,7 @@ function renderEvents() {
   show("load-more",state.cursor!==null);
 }
 async function refreshEvents(append=false) {
+  if(state.view!=='observations')return;
   const request=++state.request,params=new URLSearchParams({limit:"60"});
   if(state.filter)params.set("kind",state.filter);
   if(state.source)params.set("chat_id",state.source);
@@ -1000,15 +1075,15 @@ async function refreshEvents(append=false) {
   if(state.eventSince)params.set("since",state.eventSince);
   if(state.eventUntil)params.set("until",state.eventUntil);
   if(append && state.cursor)params.set("before",state.cursor);
-  const result=await json("events?"+params);
+  const result=await json("events?"+params,undefined,viewOptions('observations'));
   if(request!==state.request)return;
   state.events=append ? [...state.events,...result.events] : result.events;
   state.cursor=result.next_before; renderEvents();
 }
-document.querySelectorAll("[data-filter]").forEach(b=>b.addEventListener("click",()=>busy(b,async()=>{
+viewQueries("observations","[data-filter]").forEach(b=>b.addEventListener("click",()=>busy(b,async()=>{
   state.filter=b.dataset.filter;
   window.TgWitnessRouter?.record({seq:null});
-  document.querySelectorAll("[data-filter]").forEach(n=>n.classList.toggle("active",n===b));
+  viewQueries("observations","[data-filter]").forEach(n=>n.classList.toggle("active",n===b));
   await refreshEvents();
 })));
 $("source-filter").addEventListener("change",()=>{state.source=$("source-filter").value;window.TgWitnessRouter?.record({seq:null});refreshEvents().catch(e=>toast(e.message,true));});
@@ -1338,6 +1413,7 @@ $("snapshot-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submi
 let exportPoll=null;
 function stopExportPoll(){if(exportPoll){clearTimeout(exportPoll);exportPoll=null;}}
 function renderExportState(x){
+  if(state.view!=='sources')return;
   const prog=$("chat-export-progress");
   const running=!!x&&x.phase==="running",done=!!x&&x.phase==="done"&&x.ready;
   show("chat-export-cancel",running);show("chat-export-download",done);
@@ -1425,7 +1501,7 @@ async function download(path,filename,stream=false,root=false,body=undefined){
 function saveBlob(blob,filename){
   const url=URL.createObjectURL(blob),a=node("a");a.href=url;a.download=filename;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
 }
-document.querySelectorAll("[data-export]").forEach(b=>b.addEventListener("click",()=>busy(b,async()=>{
+panelQueries("[data-export]").forEach(b=>b.addEventListener("click",()=>busy(b,async()=>{
   const fmt=b.dataset.export,password=$("export-password").value;
   const encrypt=!!b.closest("#view-evidence")&&$("export-encrypt-on").checked;
   if(encrypt&&password.length<12){$("export-password").focus();throw new Error(tr("Enter a password of at least 12 characters, or untick encryption."));}
@@ -1459,7 +1535,7 @@ async function loadReportSettings(){
   reportReady=false;reportControls();$("report-status").textContent=tr("Loading…");
   const pending=(async()=>{
     try{
-      const options=await json("report-options");if(!current())return;
+      const options=await json("report-options",undefined,viewOptions('evidence'));if(!current()||state.view!=='evidence')return;
       const select=$("report-language");
       if(!select.options.length){
         select.append(new Option(tr("Same as the panel"),"auto"));
@@ -1469,7 +1545,7 @@ async function loadReportSettings(){
       for(const [id,key] of Object.entries(REPORT_CHECKS))$(id).checked=options[key];
       reportReady=true;reportDirty=false;$("report-status").textContent=window.TGW_ONLINE_DEMO?tr("Sample data"):"";
     }catch(error){
-      if(!current()||error instanceof StaleView)return;
+      if(!current()||error instanceof StaleView||error.name==='AbortError')return;
       const retry=node("button","text-link",tr("Retry"));retry.type="button";
       retry.addEventListener("click",()=>loadReportSettings());
       $("report-status").replaceChildren(node("span","",tr("Could not load data")+": "+error.message+" "),retry);
@@ -1557,6 +1633,7 @@ function timestampsFacts(e,h){
   return facts;
 }
 function renderEvidence(e){
+  if(state.view!=='witness')return;
   const form=$("evidence-form"),status=$("evidence-status");
   form.querySelectorAll("input,select,textarea,button").forEach(n=>n.disabled=!e);
   state.timestampsHealth=e?.health||null;renderEvidenceBadge();
@@ -1614,6 +1691,7 @@ function lockText(lock){
   return lock.bucket_enabled?tr("Object Lock is enabled on the bucket; no retention was requested."):tr("Object Lock is not enabled on this bucket.");
 }
 function renderReplica(r){
+  if(state.view!=='witness')return;
   const form=$("replica-form"),status=$("replica-status");
   form.querySelectorAll("input,select,button").forEach(n=>n.disabled=!r);
   state.replicaHealth=r?.health||null;renderEvidenceBadge();
@@ -1664,6 +1742,7 @@ function alertsText(a){
   return tr("Last notification {time}.",{time:fmtFull(l.at)})+(l.error?" "+tr("Not delivered: {error} — retried within a minute.",{error:l.error}):"");
 }
 function renderAlerts(a){
+  if(state.view!=='witness')return;
   const form=$("alerts-form"),status=$("alerts-status");
   form.querySelectorAll("input,select,textarea,button").forEach(n=>n.disabled=!a);
   extraBadge("alerts",!!a?.settings.enabled,"On","Off");
@@ -1842,10 +1921,10 @@ function parameterValue(value){
 }
 async function loadParameters(){
   if(!state.status)return;
-  const profile=state.profile,r=await json("parameters");
+  const profile=state.profile,r=await json("parameters",undefined,viewOptions('parameters'));
   if(profile!==state.profile)return;
   state.parameters=r;
-  if(!state.parametersDirty)renderParameters();
+  if(state.view==='parameters'&&!state.parametersDirty)renderParameters();
 }
 function setParameterField(item,value){
   const field=$("parameter-"+item.key);
@@ -1981,6 +2060,7 @@ async function loadAssurance(){
     state.assurance=r?.ok?(await r.json()).statement:null;
   }
   const s=state.assurance,on=!!s;
+  if(state.view!=='witness')return;
   show("alerts-host",on);show("cloud-active",on);
   if(!on){$("extra-cloud-badge").className="extra-badge";extraBadge("cloud",false,"","Available");renderServerHealth(null);return;}
   $("cloud-active").textContent=tr("This collector runs on a sealed {provider} server, signing key {fingerprint}. An opened SSH port or a login there is recorded in the journal and sent as a problem notification.",
@@ -1990,6 +2070,7 @@ async function loadAssurance(){
 }
 // Deployment and the protection checks are separate: a running server is not a sealed one.
 function renderServerHealth(s){
+  if(state.view!=='witness')return;
   const box=$("cloud-health");box.replaceChildren();
   show("cloud-health",!!s);if(!s)return;
   const d=s.deployment,c=s.checks;
@@ -2020,6 +2101,7 @@ async function loadSourceCheck(){
   if(profile===state.profile)renderSourceCheck(r);
 }
 function renderSourceCheck(r){
+  if(state.view!=='witness')return;
   const l=r.last,box=$("github-result"),badge=$("extra-github-badge"),good=!!l&&r.current&&l.matches;
   $("github-form").querySelectorAll("input,button").forEach(n=>n.disabled=!!state.status?.demo);
   badge.textContent=tr(!l?"Not checked":!r.current?"Check again":l.matches?"Matches":"Differs");
@@ -2087,6 +2169,7 @@ async function loadWitness(){
 }
 function collectorAddress(){return location.origin+(state.profile==="default"?"":"/profiles/"+encodeURIComponent(state.profile));}
 function renderWitness(r){
+  if(state.view!=='witness')return;
   const list=$("witness-list"),demo=!!state.status?.demo;list.replaceChildren();
   $("witness-form").querySelectorAll("input,button").forEach(n=>n.disabled=demo);
   $("witness-setup-form").querySelector('[type="submit"]').disabled=demo;
@@ -2143,7 +2226,7 @@ function resetWitnessSetup(){
   for(const id of ["witness-token","witness-docker","witness-remote","witness-options","witness-setup-result"])$(id).textContent="";
   $("witness-setup-form").reset();$("witness-address").value="";
   $("witness-launch").open=false;
-  document.querySelectorAll("#extras-bot details").forEach(detail=>detail.open=false);
+  viewQueries("witness","#extras-bot details").forEach(detail=>detail.open=false);
 }
 function renderWitnessVolume(){
   const interval=Number($("witness-interval").value),policy=$("witness-policy").value;
@@ -2251,7 +2334,7 @@ function setAuthMethod(method){
     $("import-result").textContent="";
   }
   authMethod=method;
-  document.querySelectorAll("[data-auth-method]").forEach(button=>{
+  viewQueries("connection","[data-auth-method]").forEach(button=>{
     const selected=button.dataset.authMethod===method;
     button.classList.toggle("active",selected);button.setAttribute("aria-pressed",String(selected));
   });
@@ -2302,7 +2385,7 @@ async function loginRequest(path,body,options){
 function authProgress(message){
   $("auth-progress").textContent=message;show("auth-progress",!!message);
 }
-document.querySelectorAll("[data-auth-method]").forEach(button=>button.addEventListener("click",()=>setAuthMethod(button.dataset.authMethod)));
+viewQueries("connection","[data-auth-method]").forEach(button=>button.addEventListener("click",()=>setAuthMethod(button.dataset.authMethod)));
 $("api-id").addEventListener("paste",event=>{
   const text=event.clipboardData?.getData("text")||"";
   if(!text.includes(":"))return;
@@ -2332,12 +2415,13 @@ function routeFields(){
   show("network-endpoint",endpoint);show("network-login",kind!=="mtproxy");show("network-mtproxy",kind==="mtproxy");
   $("network-host").required=endpoint;$("network-secret").required=kind==="mtproxy";
   $("network-link").closest(".proxy-link").hidden=kind!=="mtproxy";
-  document.querySelector(".proxy-catalog").hidden=kind!=="mtproxy";
+  viewQuery("connection",".proxy-catalog").hidden=kind!=="mtproxy";
   $("network-auto-help").hidden=kind!=="mtproxy_auto";
   window.TgWitnessProxies?.sync?.();
   if(kind==="mtproxy"&&$("network-details").open)loadProxyCatalog();
 }
 function renderConnection(){
+  if(state.view!=='connection')return;
   renderApiState();
   const c=state.status.collector,r=c.network||{kind:"mtproxy_auto"},p=state.status.protection||{};
   const route=tr({direct:"Direct connection",socks5:"SOCKS5 proxy",http:"HTTP CONNECT proxy",mtproxy:"MTProxy · experimental",
@@ -2356,7 +2440,6 @@ function renderConnection(){
   if(networkLoadedFor!==state.profile){
     $("network-kind").value=r.kind;$("network-host").value=r.host||"";$("network-port").value=String(r.port||1080);
     networkLoadedFor=state.profile;routeFields();
-    if(!state.status.demo)loadPolicy().catch(e=>toast(e.message,true));
   }
   $("network-form").querySelector('[type="submit"]').disabled=state.status.demo||c.running;
   $("network-test").disabled=state.status.demo;$("sign-out").disabled=state.status.demo;
@@ -2435,9 +2518,10 @@ const exposureNames={hide:tr("Hide this server's address"),fallback:tr("Direct c
   tunnel:tr("Server behind a tunnel or VPN")};
 let policyOutsideDirty=false;
 function renderPolicy(p){
+  if(state.view!=='connection')return;
   state.policy=p;policyOutsideDirty=false;
   $("policy-summary").textContent=exposureNames[p.exposure];
-  document.querySelectorAll('input[name="exposure"]').forEach(n=>n.checked=n.value===p.exposure);
+  viewQueries("connection",'input[name="exposure"]').forEach(n=>n.checked=n.value===p.exposure);
   $("outside-enabled").checked=p.outside_enabled;
   const proxy=p.outside_proxy;
   $("outside-kind").value=proxy?.kind||"";$("outside-host").value=proxy?.host||"";
@@ -2459,14 +2543,14 @@ function outsideFields(){
   $("outside-kind").parentElement.hidden=!$("outside-enabled").checked;
 }
 async function loadPolicy(){
-  const profile=state.profile,p=await json("network/policy");
+  const profile=state.profile,p=await json("network/policy",undefined,viewOptions('connection'));
   if(profile===state.profile)renderPolicy(p);
 }
 for(const id of ["outside-kind","outside-host","outside-port","outside-username","outside-password"])
   $(id).addEventListener("input",()=>{policyOutsideDirty=true;outsideFields();});
 $("outside-enabled").addEventListener("change",outsideFields);
 $("policy-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
-  const kind=$("outside-kind").value,body={exposure:document.querySelector('input[name="exposure"]:checked')?.value||"hide",
+  const kind=$("outside-kind").value,body={exposure:viewQuery("connection",'input[name="exposure"]:checked')?.value||"hide",
     outside_enabled:$("outside-enabled").checked,outside_proxy:null,remove_outside_proxy:false};
   if(policyOutsideDirty&&kind)body.outside_proxy={kind,host:$("outside-host").value.trim(),port:Number($("outside-port").value),
     username:$("outside-username").value,password:$("outside-password").value};
@@ -2526,7 +2610,7 @@ async function loadAccountFiles(){
     converted=true;renderApiState();return result;
   }catch(error){
     if(revision===state.workspaceRevision&&selection===accountImportRevision&&/passcode/i.test(error.message)){
-      document.querySelector(".import-advanced").open=true;$("tdata-passcode").focus();
+      viewQuery("connection",".import-advanced").open=true;$("tdata-passcode").focus();
     }
     throw error;
   }finally{if(revision===state.workspaceRevision&&selection===accountImportRevision){if(converted)input.value="";renderSelectedFiles();$("tdata-passcode").value="";authProgress("");}}
@@ -2703,10 +2787,10 @@ function modeSummary(s){
 }
 const exportRunning=()=>multiRunning()||state.status?.collector.chat_export?.phase==="running";
 async function refreshChats(refresh=false){
-  if(!state.status)return;
+  if(!state.status||state.view!=='chats')return;
   void resumeMulti();
-  const revision=state.workspaceRevision,result=await json("chats");
-  if(revision!==state.workspaceRevision)return;
+  const revision=state.workspaceRevision,result=await json("chats",undefined,viewOptions('chats'));
+  if(revision!==state.workspaceRevision||state.view!=='chats')return;
   state.chats=result.chats;
   if(state.chat!==null&&!state.chats.some(c=>c.chat_id===state.chat))beginChat(null);
   if(state.chat===null&&state.chats.length){beginChat((state.chats.find(c=>c.enabled)||state.chats[0]).chat_id);refresh=false;}
@@ -2715,6 +2799,7 @@ async function refreshChats(refresh=false){
   return await loadChatMessages(refresh?"refresh":"open");
 }
 function renderChatsList(){
+  if(state.view!=='chats')return;
   const list=$("chats-list");list.replaceChildren();
   const query=$("chat-search").value.trim().toLocaleLowerCase();
   for(const c of state.chats){
@@ -2739,14 +2824,14 @@ function renderChatsList(){
 $("chat-search").addEventListener("input",renderChatsList);
 $("chat-search").addEventListener("keydown",e=>{if(e.key==="Escape"){$("chat-search").value="";renderChatsList();}});
 $("chat-back").addEventListener("click",()=>{
-  document.querySelector(".chats-shell").dataset.panel="list";
+  viewQuery("chats",".chats-shell").dataset.panel="list";
   $("chat-search").focus({preventScroll:true});
 });
 document.querySelectorAll("[data-demo-filter]").forEach(button=>button.addEventListener("click",()=>busy(button,async()=>{
   if(!state.status?.demo)return;
   const revision=state.workspaceRevision;
   state.chatFilter=button.dataset.demoFilter;state.chatAuthor=null;
-  document.querySelector(".chats-shell").dataset.panel="chat";
+  viewQuery("chats",".chats-shell").dataset.panel="chat";
   if(state.view!=="chats")navigate("chats");
   await refreshChats();
   if(revision!==state.workspaceRevision||state.view!=="chats")return;
@@ -2762,7 +2847,7 @@ function beginChat(id){
   renderComposer();renderChat();renderChatsList();
 }
 async function openChat(id,options={}){
-  document.querySelector(".chats-shell").dataset.panel="chat";
+  viewQuery("chats",".chats-shell").dataset.panel="chat";
   beginChat(id);if(options.history!==false)window.TgWitnessRouter?.record({view:"chats",chatId:id,seq:null});const loaded=await loadChatMessages("open");
   if(loaded)loadChatProfile().catch(()=>{});
   return loaded;
@@ -2777,15 +2862,15 @@ async function loadChatMessages(mode){
   const id=state.chat,revision=state.workspaceRevision,generation=chatGeneration,feed=$("chat-feed"),params=new URLSearchParams({limit:"60"});
   if(mode==="older"&&state.chatNextBefore)params.set("before_id",String(state.chatNextBefore));
   let result;
-  try {result=await json("chats/"+encodeURIComponent(id)+"/messages?"+params);}
+  try {result=await json("chats/"+encodeURIComponent(id)+"/messages?"+params,undefined,viewOptions('chats'));}
   catch(error){
-    if(error instanceof StaleView||revision!==state.workspaceRevision||id!==state.chat||generation!==chatGeneration)return;
+    if(error instanceof StaleView||error.name==='AbortError'||state.view!=='chats'||revision!==state.workspaceRevision||id!==state.chat||generation!==chatGeneration)return;
     feed.querySelector(".refresh-notice")?.remove();
     const notice=viewState("error",tr("Could not load data"),tr("Saved content remains available. Try loading again."),tr("Retry"),()=>loadChatMessages(mode));
     if(state.chatMessages.length){notice.classList.add("refresh-notice");feed.prepend(notice);}else feed.replaceChildren(notice);
     return false;
   }
-  if(revision!==state.workspaceRevision||id!==state.chat||generation!==chatGeneration)return;
+  if(state.view!=='chats'||revision!==state.workspaceRevision||id!==state.chat||generation!==chatGeneration)return;
   const known=state.chatMessages.reduce((last,m)=>Math.max(last,m.message_id),0);
   const atBottom=feed.scrollHeight-feed.scrollTop-feed.clientHeight<80,height=feed.scrollHeight,top=feed.scrollTop;
   const merged=new Map((mode==="open"?[]:state.chatMessages).map(m=>[m.message_id,m]));
@@ -2801,7 +2886,7 @@ async function loadChatMessages(mode){
   return true;
 }
 function renderChatEmpty(){
-  document.querySelector(".chats-shell").dataset.panel="chat";
+  viewQuery("chats",".chats-shell").dataset.panel="chat";
   const box=$("chat-empty"),s=state.status;show("chat-main",false);show("chat-empty",true);box.replaceChildren();
   if(!s)return;
   const add=(title,text,label,view)=>{box.append(node("h2","",title),node("p","",text));
@@ -2811,6 +2896,7 @@ function renderChatEmpty(){
   else add(tr("Select a chat"),tr("Pick a chat on the left to see its messages."));
 }
 function renderChat(){
+  if(state.view!=='chats')return;
   const info=state.chats.find(c=>c.chat_id===state.chat);state.chatInfo=info||null;
   if(!info){renderChatEmpty();return;}
   show("chat-empty",false);show("chat-main",true);
@@ -2821,6 +2907,7 @@ function renderChat(){
   renderChatStatus();renderMulti();renderChatFeed();renderComposer();
 }
 function renderChatStatus(){
+  if(state.view!=='chats')return;
   const box=$("chat-status"),s=state.status,info=state.chatInfo;if(!info||!s||$("chat-main").hidden)return;
   const focusedFilter=box.contains(document.activeElement)?document.activeElement.dataset.chatFilter:null;
   const c=s.collector,contextOpen=!!box.querySelector(".chat-context[open]");box.replaceChildren();
@@ -2862,6 +2949,7 @@ function renderChatStatus(){
   if(focusedFilter)box.querySelector('[data-chat-filter="'+focusedFilter+'"]')?.focus({preventScroll:true});
 }
 function renderChatFeed(){
+  if(state.view!=='chats')return;
   const feed=$("chat-feed"),s=state.status,info=state.chatInfo;
   if(state.chatFilter==="people"){
     const generation=chatGeneration;
@@ -3150,10 +3238,11 @@ function resetInteractions(){
   chatGeneration++;chatReady=false;composeDestination=null;
   $("chat-message").value="";$("chat-link").value="";$("chat-link-preview").replaceChildren();
   $("chat-search").value="";
-  document.querySelector(".chats-shell").dataset.panel="chat";
+  viewQuery("chats",".chats-shell").dataset.panel="chat";
   show("interaction-result",false);show("chat-reply",false);
 }
 function renderComposer(){
+  if(state.view!=='chats')return;
   const context=state.workspaceRevision+":"+chatGeneration+":"+state.profile+":"+state.chat;
   if(composeContext!==context){$("chat-message").value="";composeReply=null;composeContext=context;show("interaction-result",false);}
   const s=state.status,enabled=!!(chatReady&&s&&!s.demo&&s.collector.has_session&&state.chatInfo?.enabled);
@@ -3334,6 +3423,7 @@ async function openExportDialog(){
   toast(trn("Export started with {n} account. Observation keeps running.","Export started with {n} accounts. Observation keeps running.",profiles.length));
 }
 function renderMulti(){
+  if(state.view!=='chats')return;
   const x=state.multi,box=$("export-box"),known=x&&!["none","unknown"].includes(x.phase);
   const running=known&&x.phase==="running",mine=known&&x.chat_id===state.chat&&x.lead===state.profile;
   const percent=known&&x.total?Math.min(running?99:100,Math.floor(x.captured*100/x.total)):null;
@@ -3548,7 +3638,8 @@ async function loadConsole(){
 }
 async function loadAccess(quiet=false){
   if(!state.me?.admin)return;
-  state.access=await json("access",undefined,{root:true});
+  state.access=await json("access",undefined,{root:true,...viewOptions('access')});
+  if(state.view!=='access')return;
   if(!quiet){
     renderAccessForm(state.accessEdit);
     $("admin-sessions").value=state.access.admin.max_sessions;$("admin-on-limit").value=state.access.admin.on_limit;
@@ -3599,7 +3690,7 @@ async function pollWorkspace(){
 }
 setInterval(pollWorkspace,5000);
 async function bootstrap(){
-  await Promise.all([timeReady,shellReady]);
+  await Promise.all([timeReady,shellReady,viewReady]);
   await ensureRouter();
   const revision=state.workspaceRevision;
   try{
@@ -3615,6 +3706,6 @@ async function bootstrap(){
     }
   }catch(error){                                                                     }
   if(!accessStarted&&revision===state.workspaceRevision&&state.token)
-    await unlock().catch(error=>{if(!(error instanceof StaleView))lock();});
+    await unlock().catch(error=>{if(!(error instanceof StaleView)){lock();$("login-error").textContent=error.message;}});
 }
 bootstrap();
