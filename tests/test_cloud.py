@@ -721,6 +721,23 @@ def test_host_evidence_mismatches_fail(setup):
     assert checks(run_verify(world, host, out))["binding"] == "fail"
 
 
+def test_bootstrap_measurements_are_explicitly_self_reported(setup):
+    world, host, _record, out = setup(Hetzner)
+    original = world.user_data
+    world.user_data += "\n# Synthetic unexpected bootstrap change\n"
+    assert checks(run_verify(world, host, out))["binding"] == "fail"
+    # Model a compromised collector reporting the original values, its user data included. Provider APIs
+    # remain honest; there is no independent measurement of the runtime here.
+    host.override = {**assurance.user_data_hashes(original), "user_data_redacted": assurance.redact_user_data(original)}
+    report = run_verify(world, host, out)
+    assert report["result"] == "pass", [c for c in report["checks"] if c["status"] != "pass"]
+    assert report["verification_scope"] == "deployment-consistency"
+    assert report["assurance"]["independent_runtime_attestation"] == "not-performed"
+    assert report["assurance"]["key_nonexportability"] == "not-established"
+    shown = cloud.render(report)
+    assert "Deployment checks" in shown and "malicious bootstrap" in shown
+
+
 def test_a_deleted_hetzner_firewall_fails_the_report_instead_of_stopping_it(setup):
     world, host, _record, out = setup(Hetzner)
     world.firewall, world.server["public_net"]["firewalls"] = None, []
