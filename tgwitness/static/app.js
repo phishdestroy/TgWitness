@@ -2862,6 +2862,14 @@ function renderChatFeed(){
   if(!chatReady){feed.replaceChildren(viewState("loading",tr("Loading…")));return;}
   const shown=state.chatMessages.filter(m=>(state.chatFilter==="all"||(state.chatFilter==="deleted"?m.deleted||m.missing:m.edited))
     &&(state.chatAuthor===null||m.sender?.id===state.chatAuthor));
+  if(shown.some(m=>m.has_media&&!m.media.length)){
+    const key=JSON.stringify([s.demo,may('sources'),s.capture?.download_media]);let notice=feed.querySelector('.chat-media-notice');
+    if(!notice||notice.renderKey!==key){notice=node('aside','chat-media-notice');notice.setAttribute('role','note');notice.renderKey=key;
+      notice.append(icon('clip'),node('span','',tr('Some attachment files have not been saved.')));
+      if(!s.demo&&viewAllowed('sources')){const settings=node('button','text-link',tr('File saving settings'));settings.type='button';
+        settings.title=tr('Applies to future captures. Earlier files may no longer be available.');settings.addEventListener('click',()=>busy(settings,openRecordingSettings));notice.append(settings);}}
+    next.push(notice);
+  }
   if(state.chatNextBefore){let older=feed.querySelector('.chat-older');if(!older){older=node("button","quiet chat-older",tr("Show older messages"));older.type="button";
     older.addEventListener("click",()=>busy(older,()=>loadChatMessages("older")));}next.push(older);}
   if(!shown.length){
@@ -2896,22 +2904,23 @@ function messageRow(m,grouped,byId){
   const name=senderName(m),bubble=node("div","bubble");
   row.append(grouped?node("span","avatar-spacer"):avatarNode(m.sender?.id,name));
   if(!grouped){const head=node("div","bubble-head"),details=node("details","sender-details"),summary=node("summary"),facts=node("div","sender-facts");
-    summary.title=tr("Author details");summary.append(node("span","sender",name));
+    summary.title=m.sender?.username?'@'+m.sender.username:tr("Author details");summary.setAttribute('aria-label',tr('Author details')+': '+name);summary.append(node("span","sender",name));
     if(m.sender?.username)facts.append(node("span","","@"+m.sender.username));
     if(m.sender?.id!==null&&m.sender?.id!==undefined)facts.append(node("span","","ID "+m.sender.id));
     if(!facts.children.length)facts.append(node("span","",tr("No saved author details")));
     details.append(summary,facts);head.append(details);bubble.append(head);}
   if(m.reply_to){
-    const target=byId.get(m.reply_to),quote=node("button","reply-quote");quote.type="button";
-    quote.append(node("b","",target?senderName(target):tr("Reply")),node("span","",target?(target.text||tr("[attachment]")):tr("to message #{id} (not saved)",{id:m.reply_to})));
-    if(target)quote.addEventListener("click",()=>{const el=$("msg-"+m.reply_to);if(!el)return;el.scrollIntoView({block:"center",behavior:"smooth"});el.classList.add("flash");setTimeout(()=>el.classList.remove("flash"),1600);});
-    else quote.disabled=true;
+    const target=byId.get(m.reply_to),quote=node(target?'button':'div',target?'reply-quote':'reply-unavailable');
+    if(target){quote.type='button';quote.append(node('b','',senderName(target)),node('span','',target.text||tr('[attachment]')));
+      quote.addEventListener('click',()=>{let el=$('msg-'+m.reply_to);if(!el){state.chatFilter='all';state.chatAuthor=null;renderChatStatus();renderChatFeed();el=$('msg-'+m.reply_to);}if(!el)return;
+        el.scrollIntoView({block:'center',behavior:'smooth'});el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1600);});}
+    else quote.textContent=tr('Reply to #{id} · outside this loaded window',{id:m.reply_to});
     bubble.append(quote);
   }
   if(m.captured){if(m.text)bubble.append(node("div","bubble-text",m.text));if(m.buttons)bubble.append(buttonsNode(m.buttons,m));}
   else bubble.append(node("div","bubble-text muted-text",tr(m.deleted?"Deleted before TgWitness could save it — only the deletion notice was recorded.":"Content was not saved.")));
   m.media.forEach(media=>bubble.append(mediaNode(media)));
-  if(m.has_media&&!m.media.length)bubble.append(node("div","media-chip",tr("Attachment not downloaded — turn on photo & file saving to keep files")));
+  if(m.has_media&&!m.media.length){const missing=node('span','media-missing');missing.title=tr('Attachment file not saved');missing.setAttribute('role','img');missing.setAttribute('aria-label',missing.title);missing.append(icon('clip'));bubble.append(missing);}
   const meta=node("div","bubble-meta");
   if(m.deleted){const d=node("span","pill pill-deleted",tr("Deleted"));d.title=tr("Deletion seen {time}. Telegram does not report who deleted it or exactly when.",{time:fmtFull(m.deleted_observed_at)});meta.append(d);}
   else if(m.missing){const d=node("span","pill pill-missing",tr("Not found at recheck"));d.title=tr("Telegram no longer returned this message at {time} and no deletion notice was received: deleted while notices were missed, removed by an auto-delete timer, or no longer visible to this account.",{time:fmtFull(m.missing_observed_at)});meta.append(d);}

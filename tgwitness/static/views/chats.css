@@ -28,6 +28,12 @@ button.chat-setting-chip:hover { border-color: var(--accent); color: var(--accen
 .chat-history-tools button { border: 1px solid var(--border); border-inline-start: 0; border-start-start-radius: 0; border-end-start-radius: 0; }
 .workspace[data-current-view="chats"] .chat-state { gap: 6px 12px; min-height: 24px; }
 .workspace[data-current-view="chats"] .chat-state .small { min-height: 26px; padding: 0; }
+.chat-media-notice { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 10px; padding: 8px 10px; margin-bottom: 8px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text-2); font-size: 12px; }
+.chat-media-notice > .icon { flex: none; width: 15px; height: 15px; }
+.chat-media-notice .text-link { font-size: inherit; }
+.media-missing { display: inline-flex; align-items: center; margin-top: 5px; color: var(--muted); }
+.media-missing .icon { width: 14px; height: 14px; }
+.reply-unavailable { margin: 2px 0 6px; padding-inline-start: 8px; border-inline-start: 2px solid var(--border-strong); color: var(--muted); font-size: 12px; }
 
 @media (min-width: 768px) {
   .workspace[data-current-view="chats"] .chats-sidebar,
