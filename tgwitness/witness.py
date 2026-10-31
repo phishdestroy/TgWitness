@@ -91,7 +91,7 @@ class InvalidAnswer(ValueError):
 def proxy_config(url):
     """NetworkConfig from socks5://user:pass@host:port or http://host:port; direct when empty."""
     if not url:
-        return NetworkConfig()
+        return NetworkConfig(kind="direct")
     try:
         if not isinstance(url, str) or len(url) > 2048:
             raise ValueError
@@ -158,7 +158,7 @@ class Witness:
         self.channel, self.bot_token, self.bot_api = channel, bot_token, bot_api.rstrip("/")
         self.interval, self.timeout = interval, timeout
         self.post, self.title, self.texts = post, title, {**TEXTS, **(texts or {})}
-        self.network = network or NetworkConfig()
+        self.network = network or NetworkConfig(kind="direct")
         if pinned and self.store.get_setting("collector_fingerprint") not in (None, pinned):
             self.close()
             raise ValueError("This witness already follows another collector key. Use a new data directory.")
