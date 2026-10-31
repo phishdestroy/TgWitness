@@ -77,7 +77,7 @@ def main():
             expect(page.locator('#chat-feed .msg').first).to_be_visible()
             assert page.evaluate("""async()=>{const row=document.querySelector('#chat-feed .msg'),filter=document.querySelector('[data-chat-filter=all]');
               filter.focus();await refreshChats(true);return row.isConnected&&filter.isConnected&&document.activeElement===filter;}"""), "Unchanged conversation or filter was recreated"
-            page.locator('[data-chat-filter="people"]').click()
+            page.locator('[data-chat-view="people"]').click()
             password = page.locator('#chat-feed input[type="password"]')
             expect(password).to_be_visible()
             password.fill("synthetic-unsaved-password")
@@ -114,7 +114,7 @@ def main():
                 navigate_panel(page, 'chats')
                 if width == 390:
                     assert page.evaluate("()=>!document.activeElement.closest('[inert]')"), "Focus remained inside the closed mobile menu"
-                page.locator('[data-chat-filter="people"]').click()
+                page.locator('[data-chat-view="people"]').click()
                 expect(page.locator('.people-table')).to_be_visible()
                 page.screenshot(path=str(output / f"people-{width}.png"), animations="disabled")
                 captures.append({"width": width, "url": page.url})

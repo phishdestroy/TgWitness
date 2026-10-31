@@ -33,13 +33,15 @@ def main():
         with sync_playwright() as playwright:
             browser = launch_browser(playwright)
             page = browser.new_page(viewport={'width': 1440, 'height': 1000}, reduced_motion='reduce')
-            errors, snapshots, connected = [], [], {'value': False}
+            errors, snapshots, connected, ai_calls = [], [], {'value': False, 'ai': False}, []
             page.on('pageerror', lambda error: errors.append(str(error)))
+            page.on('request', lambda request: ai_calls.append(request.url) if '/api/analysis/' in request.url and request.method == 'POST' else None)
 
             def status(route):
                 response = route.fetch()
                 body = response.json()
                 body['collector']['has_session'] = connected['value']
+                body['analysis']['enabled'] = connected['ai']
                 route.fulfill(response=response, json=body)
 
             def snapshot(route):
@@ -75,8 +77,40 @@ def main():
             page.locator('.chat-media-notice').get_by_role('button', name='File saving settings').click()
             expect(page.locator('#capture-form')).to_be_visible()
             page.evaluate("()=>navigate('chats')")
-            page.evaluate("()=>{const feed=document.querySelector('#chat-feed');feed.scrollTop=feed.scrollHeight;}")
-            capture(page, '14-chat-content')
+            expect(page.locator('.chat-filters [data-chat-filter]')).to_have_count(4)
+            expect(page.locator('.chat-filters [data-chat-view]')).to_have_count(0)
+            expect(page.locator('[data-chat-view="ai"]')).to_have_count(0)
+            page.locator('[data-chat-filter="media"]').click()
+            expect(page.locator('#chat-feed .msg')).to_have_count(6)
+            assert page.locator('#chat-feed .msg').evaluate_all('rows=>rows.every(row=>row.querySelector(".media-missing"))')
+            page.locator('[data-chat-view="people"]').click()
+            expect(page.locator('#chat-feed .people')).to_be_visible()
+            expect(page.locator('.chat-filter-row')).to_be_hidden()
+            page.locator('[data-chat-view="profile"]').click()
+            expect(page.locator('.chat-profile-view')).to_be_visible()
+            expect(page.locator('.chat-profile-view')).to_contain_text('Profile not saved yet')
+            page.route('**/api/chats/-1001/profile', lambda route: route.fulfill(status=503, json={'detail': 'Synthetic failure'}))
+            page.evaluate('()=>loadChatProfile().catch(()=>{})')
+            expect(page.locator('.chat-profile-view')).to_contain_text('Could not load data')
+            expect(page.locator('.chat-profile-view')).not_to_contain_text('Profile not saved yet')
+            page.unroute('**/api/chats/-1001/profile')
+            page.locator('.chat-profile-view').get_by_role('button', name='Retry').click()
+            expect(page.locator('.chat-profile-view')).to_contain_text('Profile not saved yet')
+            page.locator('[data-chat-view="messages"]').click()
+            expect(page.locator('[data-chat-filter="media"]')).to_have_attribute('aria-pressed', 'true')
+            page.locator('[data-chat-filter="all"]').click()
+            connected['ai'] = True
+            page.evaluate('()=>refreshStatus()')
+            page.locator('[data-chat-view="ai"]').click()
+            expect(page.locator('#ask-chats input:checked')).to_have_value('-1001')
+            expect(page.locator('#ask-question')).to_be_focused()
+            assert not page.evaluate('()=>window.TgWitnessAnalysis.focusChat(999999)')
+            expect(page.locator('#ask-chats input:checked')).to_have_value('-1001')
+            assert not ai_calls, ai_calls
+            connected['ai'] = False
+            page.evaluate("async()=>{await refreshStatus();await navigate('chats');}")
+            expect(page.locator('[data-chat-view="ai"]')).to_have_count(0)
+            capture(page, '15-chat-views')
             connected['value'] = True
             page.evaluate('()=>refreshStatus()')
             expect(page.locator('#chat-load-history')).to_be_enabled()

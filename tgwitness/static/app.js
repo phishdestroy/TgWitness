@@ -22,7 +22,7 @@ const state = {token: sessionStorage.getItem("tgwitness-token") || "",
   eventBefore:null,eventAfter:null,eventMatched:null,cursor: null, request: 0, drawerSeq: null,
   profile: sessionStorage.getItem("tgwitness-profile") || "default", profiles: [], demoToken: "", monitoringDirty: false,
   captureDirty: false, workspaceRevision: 0, verification: null, opened:false, connectionSettings:false,
-  chat: null, chats: [], chatMessages: [], chatNextBefore: null, chatInfo: null, chatFilter: "all", chatAuthor: null,
+  chat: null, chats: [], chatMessages: [], chatNextBefore: null, chatInfo: null, chatFilter: "all", chatView: "messages", chatAuthor: null,
   scope: null, scopeDirty: false, dossier: null, notifications: [], witnessToken: null, parameters: null, parametersDirty: false,
   me: null, access: null, accessEdit: null, accessChats: {}, consoleAfter: 0};
 let viewHost=null;
@@ -1027,7 +1027,7 @@ async function switchProfile(id,options={}){
   state.profile=id;state.monitoringDirty=false;state.captureDirty=false;sessionStorage.setItem("tgwitness-profile",id);
   state.events=[];state.dialogs=[];state.cursor=null;state.filter="";state.source="";state.search="";state.eventSince="";state.eventUntil="";state.eventSystem=false;
   state.eventBefore=state.eventAfter=state.eventMatched=null;
-  state.chat=null;state.chats=[];state.chatMessages=[];state.chatNextBefore=null;state.chatInfo=null;state.chatFilter="all";state.chatAuthor=null;
+  state.chat=null;state.chats=[];state.chatMessages=[];state.chatNextBefore=null;state.chatInfo=null;state.chatFilter="all";state.chatView="messages";state.chatAuthor=null;
   state.scope=null;state.scopeDirty=false;state.dossier=null;state.notifications=[];resetWitnessSetup();
   closeNotifications();renderNotifications();renderExportState(null);
   state.evidenceDirty=false;state.replicaDirty=false;state.alertsDirty=false;
@@ -2711,7 +2711,7 @@ $("chat-back").addEventListener("click",()=>{
 document.querySelectorAll("[data-demo-filter]").forEach(button=>button.addEventListener("click",()=>busy(button,async()=>{
   if(!state.status?.demo)return;
   const revision=state.workspaceRevision;
-  state.chatFilter=button.dataset.demoFilter;state.chatAuthor=null;
+  state.chatFilter=button.dataset.demoFilter;state.chatView="messages";state.chatAuthor=null;
   viewQuery("chats",".chats-shell").dataset.panel="chat";
   if(state.view!=="chats")navigate("chats");
   await refreshChats();
@@ -2724,7 +2724,7 @@ function beginChat(id){
   $("export-dialog").close("cancel");
   chatGeneration++;chatReady=false;state.chat=id;state.chatInfo=null;state.chatMessages=[];
   state.chatNextBefore=null;state.chatAuthor=null;state.chatProfile=null;
-  if(state.chatFilter==="people")state.chatFilter="all";
+  state.chatView="messages";
   renderComposer();renderChat();renderChatsList();
 }
 async function openChat(id,options={}){
@@ -2793,10 +2793,11 @@ function renderChatStatus(){
   const box=$("chat-status"),s=state.status,info=state.chatInfo;if(!info||!s||$("chat-main").hidden)return;
   const current=s.collector,key=JSON.stringify([state.workspaceRevision,chatGeneration,info.enabled,s.demo,s.chats_limited,state.me?.permissions,
     current.has_session,current.running,current.connected,current.storage_low,current.storage_low&&current.disk_free_bytes,
-    modeSummary(s),recheckText(current),state.chatFilter,state.chatAuthor,state.chatProfile,exportRunning()]);
+    modeSummary(s),recheckText(current),state.chatFilter,state.chatView,state.chatAuthor,state.chatProfile,s.analysis?.enabled,exportRunning()]);
   if(box.renderKey===key)return;box.renderKey=key;
   const focusedFilter=box.contains(document.activeElement)?document.activeElement.dataset.chatFilter:null;
-  const c=s.collector,contextOpen=!!box.querySelector(".chat-context[open]");box.replaceChildren();
+  const focusedView=box.contains(document.activeElement)?document.activeElement.dataset.chatView:null;
+  const c=s.collector;box.replaceChildren();
   const state_=node("div","chat-state"),say=(cls,text,description=text)=>{state_.className="chat-state "+cls;const t=node("span","",text);t.title=description;state_.append(t);};
   state_.setAttribute('role','status');
   const action=(cls,label,work)=>{const b=node("button",cls+" small",label);b.type="button";b.addEventListener("click",()=>busy(b,work));state_.append(b);return b;};
@@ -2813,22 +2814,28 @@ function renderChatStatus(){
     if(allowed){chip.type='button';chip.setAttribute('aria-label',label+' · '+tr('Recording settings'));chip.addEventListener('click',()=>busy(chip,openRecordingSettings));}mode.append(chip);
   }
   const filters=node("div","chat-filters");filters.setAttribute("role","group");filters.setAttribute("aria-label",tr("Show messages"));
-  for(const [key,label] of [["all",tr("All")],["deleted",tr("Deleted")],["edited",tr("Edited")],["people",tr("People")]]){
+  for(const [key,label] of [["all",tr("All")],["deleted",tr("Deleted")],["edited",tr("Edited")],["media",tr("Media")]]){
     const f=node("button","filter"+(state.chatFilter===key?" active":""),label);f.type="button";
     f.dataset.chatFilter=key;
     f.setAttribute("aria-pressed",String(state.chatFilter===key));
-    f.addEventListener("click",()=>{state.chatFilter=key;if(key==="people")state.chatAuthor=null;renderChatStatus();renderChatFeed();});filters.append(f);
+    f.addEventListener("click",()=>{state.chatFilter=key;renderChatStatus();renderChatFeed();});filters.append(f);
   }
-  const details=node("details","chat-context"),contextTitle=node("summary","",tr("Collection"));
-  details.open=contextOpen;details.append(contextTitle,profileNode());
-  const toolbar=node("div","chat-filter-row");toolbar.append(filters);
-  if(!s.demo){box.append(state_,mode);toolbar.append(details);}
+  const tabs=node('div','chat-view-tabs');tabs.setAttribute('role','group');tabs.setAttribute('aria-label',tr('Chat views'));
+  const views=[['messages',tr('Messages')],['people',tr('People')],['profile',tr('Profile')]];
+  if(s.analysis?.enabled&&!s.demo&&viewAllowed('analysis'))views.push(['ai',tr('AI context')]);
+  for(const [name,label] of views){const tab=node('button','filter'+(state.chatView===name?' active':''),label);tab.type='button';tab.dataset.chatView=name;
+    tab.setAttribute('aria-pressed',String(state.chatView===name));tab.addEventListener('click',()=>{
+      if(name==='ai'){busy(tab,async()=>{const chat=state.chat,revision=state.workspaceRevision;await navigate('analysis');
+        if(revision===state.workspaceRevision)await window.TgWitnessAnalysis?.focusChat(chat);});return;}
+      state.chatView=name;renderChatStatus();renderChatFeed();renderComposer();});tabs.append(tab);}
+  const toolbar=node("div","chat-filter-row");toolbar.append(filters);toolbar.hidden=state.chatView!=='messages';
+  if(!s.demo){box.append(state_,mode);}
   else {
     const hint=node("span","visually-hidden",tr("Demo with fictional messages. Deleted messages are red; edited ones keep every saved version."));
     box.append(hint);
   }
-  box.append(toolbar);
-  if(state.chatAuthor!==null&&state.chatFilter!=="people"){
+  box.append(tabs,toolbar);
+  if(state.chatAuthor!==null&&state.chatView==='messages'){
     const who=state.chatMessages.find(m=>m.sender?.id===state.chatAuthor),chip=node("div","chat-author-chip");
     const author=who?senderName(who):"ID "+state.chatAuthor;chip.append(node("span","",tr("Showing only messages from {name}",{name:author})));
     const clear=node("button","text-link",tr("Show everyone"));clear.type="button";
@@ -2838,19 +2845,24 @@ function renderChatStatus(){
   $("chat-load-history").disabled=blocked;$("chat-history-limit").disabled=blocked;
   $("chat-export-start").disabled=s.demo||!c.has_session||exportRunning();
   if(focusedFilter)box.querySelector('[data-chat-filter="'+focusedFilter+'"]')?.focus({preventScroll:true});
+  if(focusedView)box.querySelector('[data-chat-view="'+focusedView+'"]')?.focus({preventScroll:true});
 }
 function renderChatFeed(){
   if(state.view!=='chats')return;
   const feed=$("chat-feed"),s=state.status,info=state.chatInfo;
-  if(state.chatFilter==="people"){
+  if(state.chatView==="people"){
     const generation=chatGeneration;
     if(!feed.querySelector(".people"))feed.replaceChildren(viewState("loading",tr("Loading…")));
     renderPeople(feed).catch(error=>{
-      if(error instanceof StaleView||state.chatFilter!=="people"||generation!==chatGeneration)return;
+      if(error instanceof StaleView||state.chatView!=="people"||generation!==chatGeneration)return;
       const notice=viewState("error",tr("Could not load data"),"",tr("Retry"),()=>renderChatFeed());
       if(feed.querySelector(".people")){feed.querySelector(".refresh-notice")?.remove();notice.classList.add("refresh-notice");feed.prepend(notice);}
       else feed.replaceChildren(notice);
     });return;
+  }
+  if(state.chatView==='profile'){
+    const key=JSON.stringify([state.chat,state.chatProfile,s.demo,s.collector.has_session,may('sources')]);
+    if(feed.firstElementChild?.profileKey!==key){const profile=profileNode(true);profile.profileKey=key;feed.replaceChildren(profile);}return;
   }
   const expanded=new Map([...feed.querySelectorAll(".msg")].map(row=>[row.id,{
     versions:!!row.querySelector(".versions"),author:!!row.querySelector(".sender-details[open]")
@@ -2860,7 +2872,7 @@ function renderChatFeed(){
     active.matches(".sender-details > summary")?".sender-details > summary":null;
   const oldRows=new Map([...feed.querySelectorAll('.msg')].map(row=>[row.id,row])),days=new Map([...feed.querySelectorAll('.chat-day')].map(day=>[day.dataset.day,day])),next=[],replaced=new Set();
   if(!chatReady){feed.replaceChildren(viewState("loading",tr("Loading…")));return;}
-  const shown=state.chatMessages.filter(m=>(state.chatFilter==="all"||(state.chatFilter==="deleted"?m.deleted||m.missing:m.edited))
+  const shown=state.chatMessages.filter(m=>(state.chatFilter==="all"||(state.chatFilter==="deleted"?m.deleted||m.missing:state.chatFilter==='media'?m.has_media||m.media.length:m.edited))
     &&(state.chatAuthor===null||m.sender?.id===state.chatAuthor));
   if(shown.some(m=>m.has_media&&!m.media.length)){
     const key=JSON.stringify([s.demo,may('sources'),s.capture?.download_media]);let notice=feed.querySelector('.chat-media-notice');
@@ -2939,7 +2951,7 @@ function messageRow(m,grouped,byId){
 let peopleRequest=0;
 async function renderPeople(feed){
   const id=state.chat,generation=chatGeneration,request=++peopleRequest,result=await json("chats/"+encodeURIComponent(id)+"/authors",undefined,viewOptions('chats'));
-  if(request!==peopleRequest||state.view!=='chats'||id!==state.chat||generation!==chatGeneration||state.chatFilter!=="people")return;
+  if(request!==peopleRequest||state.view!=='chats'||id!==state.chat||generation!==chatGeneration||state.chatView!=="people")return;
   const old=feed.querySelector('.people'),profiled=(state.status.dossiers||[]).includes(id),key=JSON.stringify([result,profiled]);
   if(old?.renderKey===key&&old.chat===id){feed.querySelector('.refresh-notice')?.remove();return;}
   const box=node("div","people");
@@ -2963,7 +2975,7 @@ async function renderPeople(feed){
     row.children[row.children.length-2].append(timeNode(p.first_message_at));row.lastElementChild.append(timeNode(p.last_message_at));
     if(p.id!==null){row.tabIndex=0;row.title=tr(profiled&&p.id!==id?"Open this person's profile":"Show this person's messages");
       const open=profiled&&p.id!==id?()=>openDossier(p.id).catch(e=>toast(e.message,true)):
-        ()=>{state.chatAuthor=p.id;state.chatFilter="all";renderChatStatus();renderChatFeed();};
+        ()=>{state.chatAuthor=p.id;state.chatFilter="all";state.chatView='messages';renderChatStatus();renderChatFeed();renderComposer();};
       row.addEventListener("click",open);row.addEventListener("keydown",e=>{if(e.key==="Enter")open();});}
     body.append(row);
   }
@@ -3091,7 +3103,7 @@ async function openDossier(personId){
     factSection(tr("Phone numbers mentioned"),m.phones),factSection(tr("Usernames mentioned"),m.usernames),factSection(tr("Links"),m.links),
     factSection(tr("Matches of your patterns"),m.patterns||[],item=>item.value+(item.detail?" · "+item.detail:"")));
   const show_=node("button","secondary",tr("Show this person's messages"));show_.type="button";
-  show_.addEventListener("click",()=>{closeDetail();state.chatAuthor=person.id;state.chatFilter="all";renderChatStatus();renderChatFeed();});
+  show_.addEventListener("click",()=>{closeDetail();state.chatAuthor=person.id;state.chatFilter="all";state.chatView='messages';renderChatStatus();renderChatFeed();renderComposer();});
   const limits=node("details","detail-block");limits.append(node("summary","",tr("What a profile can and cannot show")));
   const ul=node("ul");statement.limitations.forEach(x=>ul.append(node("li","",x)));limits.append(ul);
   content.append(show_,limits,node("p","detail-hash",tr("Built {time} from {n} journal records · signed with this workspace's key",{time:fmtFull(statement.built_at),n:Object.keys(statement.record_hashes).length})));
@@ -3155,7 +3167,7 @@ function renderComposer(){
   const context=state.workspaceRevision+":"+chatGeneration+":"+state.profile+":"+state.chat;
   if(composeContext!==context){$("chat-message").value="";composeReply=null;composeContext=context;show("interaction-result",false);}
   const s=state.status,enabled=!!(chatReady&&s&&!s.demo&&s.collector.has_session&&state.chatInfo?.enabled);
-  show("chat-compose",!!(s&&!s.demo&&s.collector.has_session&&may('interact')));
+  show("chat-compose",!!(state.chatView==='messages'&&s&&!s.demo&&s.collector.has_session&&may('interact')));
   composeDestination=enabled?{chat:state.chat,profile:state.profile,revision:state.workspaceRevision,generation:chatGeneration}:null;
   $("chat-send").disabled=!enabled||actionBusy;$("chat-message").disabled=!enabled||actionBusy;
   $("chat-message").placeholder=tr("Write a message…");
@@ -3237,15 +3249,18 @@ $("chat-open-form").addEventListener("submit",e=>{e.preventDefault();busy($("cha
 
 async function loadChatProfile(){
   const id=state.chat,revision=state.workspaceRevision,generation=chatGeneration;if(id===null||id===undefined)return;
-  const r=await json("chats/"+encodeURIComponent(id)+"/profile");
+  let r;
+  try{r=await json("chats/"+encodeURIComponent(id)+"/profile",undefined,viewOptions('chats'));}
+  catch(error){if(id===state.chat&&revision===state.workspaceRevision&&generation===chatGeneration&&!(error instanceof StaleView)){
+    state.chatProfile={chat:id,error:true};if(state.chatView==='profile')renderChatFeed();}throw error;}
   if(id!==state.chat||revision!==state.workspaceRevision||generation!==chatGeneration)return;
-  state.chatProfile={chat:id,...r};renderChatStatus();
+  state.chatProfile={chat:id,...r};renderChatStatus();if(state.chatView==='profile')renderChatFeed();
 }
-function profileNode(){
+function profileNode(standalone=false){
   const s=state.status,saved=state.chatProfile?.chat===state.chat?state.chatProfile:null,data=saved?.profile;
-  const box=node("details","chat-profile"),summary=node("summary");box.open=!!state.chatProfileOpen;
-  box.addEventListener("toggle",()=>{state.chatProfileOpen=box.open;});
-  summary.append(node("strong","",tr("Profile")),node("span","",data?tr("saved {time}",{time:fmtFull(saved.observed_at)}):tr("not saved yet")));
+  const box=node(standalone?'section':'details',"chat-profile"+(standalone?' chat-profile-view':'')),summary=node(standalone?'header':'summary');
+  if(!standalone){box.open=!!state.chatProfileOpen;box.addEventListener("toggle",()=>{state.chatProfileOpen=box.open;});}
+  summary.append(node("strong","",tr("Profile")),node("span","",data?tr("saved {time}",{time:fmtFull(saved.observed_at)}):saved&&!saved.error?tr("not saved yet"):''));
   box.append(summary);
   if(data){
     const facts=node("dl","dossier-facts"),add=(label,value)=>{if(value===null||value===undefined||value==="")return;facts.append(node("dt","",label),node("dd","",String(value)));};
@@ -3263,13 +3278,14 @@ function profileNode(){
     const record=node("button","text-link",tr("Open record #{seq}",{seq:saved.seq}));record.type="button";
     record.addEventListener("click",()=>openRecord(saved.seq).catch(e=>toast(e.message,true)));box.append(record);
   }
-  if(!data){const empty=viewState("unavailable",tr("Profile not saved yet"),tr("Save a profile snapshot to view the details available to this account."));empty.classList.add("compact");box.append(empty);}
+  if(!data){const empty=!saved?viewState('loading',tr('Loading…')):saved.error?viewState('error',tr('Could not load data'),'',tr('Retry'),()=>loadChatProfile().catch(()=>{})):
+    viewState("unavailable",tr("Profile not saved yet"),tr("Save a profile snapshot to view the details available to this account."));empty.classList.add("compact");box.append(empty);}
   const save=node("button","secondary small",tr("Save profile now"));save.type="button";save.disabled=!s||s.demo||!s.collector.has_session;
   save.hidden=!may("sources");
   save.addEventListener("click",()=>busy(save,async()=>{
     const id=state.chat,r=await json("chats/"+encodeURIComponent(id)+"/profile",{});
     if(id!==state.chat)return;
-    state.chatProfile={chat:id,...r};state.chatProfileOpen=true;renderChatStatus();toast(tr("Profile saved in the signed journal."));
+    state.chatProfile={chat:id,...r};state.chatProfileOpen=true;renderChatStatus();if(state.chatView==='profile')renderChatFeed();toast(tr("Profile saved in the signed journal."));
   }));
   box.append(save);return box;
 }

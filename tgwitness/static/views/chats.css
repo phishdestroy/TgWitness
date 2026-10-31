@@ -34,6 +34,12 @@ button.chat-setting-chip:hover { border-color: var(--accent); color: var(--accen
 .media-missing { display: inline-flex; align-items: center; margin-top: 5px; color: var(--muted); }
 .media-missing .icon { width: 14px; height: 14px; }
 .reply-unavailable { margin: 2px 0 6px; padding-inline-start: 8px; border-inline-start: 2px solid var(--border-strong); color: var(--muted); font-size: 12px; }
+.chat-view-tabs { display: flex; flex-wrap: wrap; gap: 2px; padding: 3px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-2); align-self: flex-start; max-width: 100%; }
+.chat-view-tabs .filter { min-height: 30px; padding: 0 10px; font-size: 12px; }
+.chat-view-tabs .filter.active { background: var(--surface); box-shadow: var(--shadow-sm); color: var(--text); }
+.chat-filter-row[hidden] { display: none; }
+.chat-feed .chat-profile-view { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+.chat-profile-view > header { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; font-size: 13px; }
 
 @media (min-width: 768px) {
   .workspace[data-current-view="chats"] .chats-sidebar,
