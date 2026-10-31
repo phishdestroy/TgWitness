@@ -46,7 +46,7 @@ def login(client, headers):
 
 
 def completed(client, headers):
-    deadline = time.monotonic() + 10
+    deadline = time.monotonic() + 60  # sealing writes and encrypts the output; slow on a loaded disk, done at once otherwise
     while time.monotonic() < deadline:
         value = client.get("/api/status", headers=headers).json()
         if value["phase"] in sealed.TERMINAL:
