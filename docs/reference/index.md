@@ -1,0 +1,25 @@
+# The complete reference
+
+Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/
+
+Every document of the project, rendered here with its diagrams. The guides are the short path; these pages hold every detail.
+
+## Set up
+
+[### Quick start Every way to install and launch TgWitness: Windows package, Python, Docker and the synthetic demo, with first checks.](https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/)[### Accounts and session formats Sign in by phone, QR code or auth key, import Telethon, Pyrogram or Telegram Desktop sessions, and run several accounts.](https://phishdestroy.github.io/TgWitness/docs/reference/accounts/)[### Access and permissions Issue scoped access to accounts and chats, choose permissions, limit sessions and IP addresses, and withdraw access.](https://phishdestroy.github.io/TgWitness/docs/reference/access/)[### Connection, proxies and data protection Authentication, automatic proxy pools, IP modes, fallback policy, external requests and secret storage.](https://phishdestroy.github.io/TgWitness/docs/reference/connection/)[### Deployment Run TgWitness as a service on Windows, Linux, macOS or Docker, behind HTTPS, with backups and updates.](https://phishdestroy.github.io/TgWitness/docs/reference/deployment/)
+
+## Collect
+
+[### How collection works Observation scope, live updates, rechecks, attachments, own actions and what a gap means, record by record.](https://phishdestroy.github.io/TgWitness/docs/reference/collection/)[### Load source history Load past messages from enabled sources, pause and resume, and verify a signed progress report.](https://phishdestroy.github.io/TgWitness/docs/reference/history/)[### Workflows and operations Daily operation of the panel: modes, monitoring categories, parameters, notifications, exports, backup and capacity.](https://phishdestroy.github.io/TgWitness/docs/reference/operations/)[### Investigation mode Whole-account investigations across channels, groups, private chats and bots, from scope to a verified case package.](https://phishdestroy.github.io/TgWitness/docs/reference/investigation/)[### Features and limits What TgWitness implements today, what the Telegram platform limits and what remains future work.](https://phishdestroy.github.io/TgWitness/docs/reference/features/)
+
+## Archive & integrations
+
+[### Archive analysis Search saved messages, review AI inputs and keep analytical reports with their source references.](https://phishdestroy.github.io/TgWitness/docs/reference/analysis/)[### Read-only MCP Connect an MCP client to selected workspaces and chats with expiring, revocable access.](https://phishdestroy.github.io/TgWitness/docs/reference/mcp/)[### Local OCR and transcription Recognize captured images and audio with a local worker; keep derived text linked to its source file.](https://phishdestroy.github.io/TgWitness/docs/reference/media-analysis/)[### Outgoing webhooks Send scoped events to HTTPS receivers with HMAC signatures, retries and delivery status.](https://phishdestroy.github.io/TgWitness/docs/reference/webhooks/)
+
+## Evidence
+
+[### How the evidence works Hash chain, signatures, checkpoints and witnesses explained with the exact formulas the verifier uses.](https://phishdestroy.github.io/TgWitness/docs/reference/how-it-works/)[### Evidence format Contents of the signed ZIP, record kinds, process receipts, people profiles, off-site copies and offline verification.](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/)[### Independent witness Run a witness with its own key and bot, publish signed checkpoints to a channel and check exports against it.](https://phishdestroy.github.io/TgWitness/docs/reference/witness/)[### Timestamps RFC 3161 timestamps for signed checkpoints: what is sent to the authority and how a response is verified.](https://phishdestroy.github.io/TgWitness/docs/reference/timestamp/)
+
+## Security & project
+
+[### Security and data handling Threat model, access model, secrets at rest, network exposure, session imports and how to report a vulnerability.](https://phishdestroy.github.io/TgWitness/docs/reference/security/)[### Architecture Components of the collector, panel, journal, workers and witness, and how data moves between them.](https://phishdestroy.github.io/TgWitness/docs/reference/architecture/)[### What has been tested The live Telegram test, automated checks, browser checks and what remains unverified.](https://phishdestroy.github.io/TgWitness/docs/reference/verification/)[### Licence and architectural incompatibility notice TgWitness is MIT-licensed for everyone, and why it is architecturally incompatible with the Taylor Wessing workflow.](https://phishdestroy.github.io/TgWitness/docs/reference/license/)[### Operator incompatibility notice Our operator notice on Taylor Wessing and its source record.](https://phishdestroy.github.io/TgWitness/docs/reference/notice/)[### Changelog Every change by version, including the changes not yet released.](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/)

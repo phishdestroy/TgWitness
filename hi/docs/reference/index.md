@@ -1,0 +1,25 @@
+# पूर्ण संदर्भ
+
+Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/
+
+परियोजना का प्रत्येक दस्तावेज़, यहाँ उसके आरेखों के साथ प्रस्तुत है। मार्गदर्शिकाएँ संक्षिप्त मार्ग हैं; ये पृष्ठ हर विवरण को समाहित करते हैं।
+
+## सेटअप
+
+[### त्वरित आरंभ TgWitness को इंस्टॉल और लॉन्च करने के सभी तरीके: विंडोज़ पैकेज, पाइथन, डॉकर और सिंथेटिक डेमो, साथ ही प्रारंभिक जांचें।](https://phishdestroy.github.io/TgWitness/hi/docs/reference/quickstart/)[### खाते और सत्र प्रारूप फ़ोन, QR कोड या auth कुंजी से साइन इन करें, Telethon, Pyrogram या Telegram Desktop सत्र आयात करें, और कई खाते चलाएँ।](https://phishdestroy.github.io/TgWitness/hi/docs/reference/accounts/)[### पहुँच और अनुमतियाँ खातों और चैट्स के लिए सीमित पहुँच प्रदान करें, अनुमतियाँ चुनें, सत्रों और आईपी पतों को सीमित करें, और पहुँच वापस ले लें।](https://phishdestroy.github.io/TgWitness/hi/docs/reference/access/)[### कनेक्शन, प्रॉक्सी और डेटा सुरक्षा प्रमाणीकरण, स्वचालित प्रॉक्सी पूल, आईपी मोड, फॉलबैक नीति, बाहरी अनुरोध और गुप्त भंडारण।](https://phishdestroy.github.io/TgWitness/hi/docs/reference/connection/)[### तैनाती Windows, Linux, macOS या Docker पर HTTPS के पीछे बैकअप और अपडेट के साथ TgWitness को एक सेवा के रूप में चलाएँ।](https://phishdestroy.github.io/TgWitness/hi/docs/reference/deployment/)
+
+## एकत्र करें
+
+[### संग्रह कैसे काम करता है निरीक्षण दायरा, लाइव अपडेट, पुनः जाँच, संलग्नक, अपनी कार्रवाइयाँ और किसी अंतराल का क्या अर्थ है, रिकॉर्ड दर रिकॉर्ड।](https://phishdestroy.github.io/TgWitness/hi/docs/reference/collection/)[### स्रोत इतिहास लोड करें सक्षम स्रोतों से पिछले संदेश लोड करें, विराम और फिर से शुरू करें, और एक हस्ताक्षरित प्रगति रिपोर्ट सत्यापित करें।](https://phishdestroy.github.io/TgWitness/hi/docs/reference/history/)[### कार्यप्रवाह और संचालन पैनल का दैनिक संचालन: मोड, निगरानी श्रेणियाँ, पैरामीटर, सूचनाएं, निर्यात, बैकअप और क्षमता।](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/)[### जांच मोड चैनलों, समूहों, निजी चैट्स और बॉट्स में पूरे खाते की जांच, दायरे से लेकर एक सत्यापित केस पैकेज तक।](https://phishdestroy.github.io/TgWitness/hi/docs/reference/investigation/)[### विशेषताएँ और सीमाएँ आज TgWitness जो कार्यान्वित करता है, टेलीग्राम प्लेटफ़ॉर्म जो सीमित करता है और जो कार्य भविष्य के लिए शेष हैं।](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/)
+
+## संग्रह और एकीकरण
+
+[### संग्रह विश्लेषण सहेजे गए संदेशों को खोजें, एआई इनपुट्स की समीक्षा करें और उनके स्रोत संदर्भों के साथ विश्लेषणात्मक रिपोर्टें रखें।](https://phishdestroy.github.io/TgWitness/hi/docs/reference/analysis/)[### केवल-पठनीय MCP MCP क्लाइंट को चयनित वर्कस्पेस और चैट्स से समाप्त होने वाली, रद्द की जा सकने वाली पहुँच के साथ कनेक्ट करें।](https://phishdestroy.github.io/TgWitness/hi/docs/reference/mcp/)[### स्थानीय OCR और प्रतिलेखन स्थानीय वर्कर के साथ कैप्चर की गई छवियों और ऑडियो को पहचानें; व्युत्पन्न पाठ को उसकी स्रोत फ़ाइल से लिंक रखें।](https://phishdestroy.github.io/TgWitness/hi/docs/reference/media-analysis/)[### आउटगोइंग वेबहुक्स HMAC हस्ताक्षरों, पुनः प्रयासों और वितरण स्थिति के साथ HTTPS रिसीवरों को स्कोप्ड इवेंट्स भेजें।](https://phishdestroy.github.io/TgWitness/hi/docs/reference/webhooks/)
+
+## साक्ष्य
+
+[### साक्ष्य कैसे काम करता है हैश चेन, हस्ताक्षर, चेकपॉइंट और विटनेस को सटीक सूत्रों के साथ समझाया गया है, जिनका उपयोग सत्यापनकर्ता करता है।](https://phishdestroy.github.io/TgWitness/hi/docs/reference/how-it-works/)[### साक्ष्य प्रारूप हस्ताक्षरित ZIP की सामग्री, रिकॉर्ड प्रकार, प्रक्रिया रसीदें, लोगों की प्रोफाइल, ऑफ-साइट प्रतियां और ऑफ़लाइन सत्यापन।](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/)[### स्वतंत्र गवाह अपनी कुंजी और बॉट के साथ एक विटनेस चलाएँ, एक चैनल पर हस्ताक्षरित चेकपॉइंट प्रकाशित करें और उनके विरुद्ध एक्सपोर्ट्स की जाँच करें।](https://phishdestroy.github.io/TgWitness/hi/docs/reference/witness/)[### टाइमस्टैम्प हस्ताक्षरित चेकपॉइंट्स के लिए RFC 3161 टाइमस्टैम्प: प्राधिकरण को क्या भेजा जाता है और प्रतिक्रिया कैसे सत्यापित की जाती है।](https://phishdestroy.github.io/TgWitness/hi/docs/reference/timestamp/)
+
+## सुरक्षा और परियोजना
+
+[### सुरक्षा और डेटा प्रबंधन थ्रेट मॉडल, एक्सेस मॉडल, रेस्ट में सिक्रेट्स, नेटवर्क एक्सपोजर, सेशन इम्पोर्ट्स और भेद्यता की रिपोर्ट कैसे करें।](https://phishdestroy.github.io/TgWitness/hi/docs/reference/security/)[### वास्तुकला कलेक्टर, पैनल, जर्नल, वर्कर्स और विटनेस के घटक, और डेटा उनके बीच कैसे प्रवाहित होता है।](https://phishdestroy.github.io/TgWitness/hi/docs/reference/architecture/)[### क्या परीक्षण किया गया है लाइव टेलीग्राम परीक्षण, स्वचालित जांचें, ब्राउज़र जांचें और जो अप्रमाणित रह जाता है।](https://phishdestroy.github.io/TgWitness/hi/docs/reference/verification/)[### लाइसेंस और वास्तुकला असंगति सूचना TgWitness सभी के लिए MIT-लाइसेंस प्राप्त है, और यह वास्तुशिल्पीय रूप से Taylor Wessing वर्कफ़्लो के साथ असंगत क्यों है।](https://phishdestroy.github.io/TgWitness/hi/docs/reference/license/)[### ऑपरेटर असंगति सूचना टेलर वेसिंग पर हमारा ऑपरेटर नोटिस और इसका स्रोत रिकॉर्ड।](https://phishdestroy.github.io/TgWitness/hi/docs/reference/notice/)[### बदलाव-लॉग प्रत्येक संस्करण में हुए सभी परिवर्तन, जिनमें अभी जारी नहीं किए गए परिवर्तन भी शामिल हैं।](https://phishdestroy.github.io/TgWitness/hi/docs/reference/changelog/)
