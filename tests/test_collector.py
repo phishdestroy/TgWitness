@@ -26,7 +26,8 @@ class FakeClient:
         self.options = kwargs
         self.account_id = 44 if api_id == 123 else api_id
         self.authorized = bool(session.auth_key)
-        self.session = NS(save=saved_session)
+        # As Telethon: a session it was given is saved as it is; a new sign-in creates a new key, one per account
+        self.session = NS(save=session.save if session.auth_key else lambda: saved_session(bytes([self.account_id % 256])))
         self.connected = False
         self.handlers = []
         self.instances.append(self)

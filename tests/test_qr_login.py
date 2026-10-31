@@ -44,7 +44,7 @@ def test_qr_lifecycle_and_no_token_persistence(journal, outcome):
             await collector.confirm_password("synthetic-password")
         if outcome != "expired":
             assert collector.poll_qr(result["id"])["step"] == "authorized"
-            assert vault.read("credentials")["session"] == saved_session()
+            assert vault.read("credentials")["session"] == saved_session(bytes([44]))  # a new key for account 44
             assert not collector.running
         else:
             assert collector.poll_qr(result["id"])["step"] == "expired"
