@@ -3456,7 +3456,7 @@ async function pollMulti(id,attempt=0){
   }
 }
 async function resumeMulti(attempt=0){
-  if(state.multiChecked||!state.token||$("workspace").hidden)return;
+  if(state.multiChecked||!state.token||!may("export")||$("workspace").hidden)return;
   if(multiDiscovery&&multiCurrent(multiDiscovery.revision,multiDiscovery.token,multiDiscovery.request))return multiDiscovery.promise;
   clearTimeout(multiPoll);multiPoll=null;
   const request={revision:state.workspaceRevision,token:state.token,request:++multiRequest};
