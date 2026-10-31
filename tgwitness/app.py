@@ -50,6 +50,7 @@ from . import netclient
 from . import source_check
 from . import dossier
 from . import report
+from . import recording
 from . import tuning
 from . import witness_api
 from . import interactions
@@ -518,22 +519,25 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         if app.state.store.get_setting("demo", False):
             raise HTTPException(409, "This is a synthetic demo. Start a separate data directory for real observation.")
 
+    async def perform_operation(call, *args):
+        try:
+            return await asyncio.wait_for(call(*args), tuning.value(app.state.store, "operation_timeout_seconds"))
+        except FloodWaitError as exc:
+            app.state.store.set_setting("rpc_backoff_until", max(time.time() + exc.seconds,
+                app.state.store.get_setting("rpc_backoff_until", 0)))
+            raise HTTPException(429, {"message": "Telegram requested a pause.", "retry_after": exc.seconds},
+                                headers={"Retry-After": str(exc.seconds)}) from None
+        except RPCError as exc:
+            raise HTTPException(400, "Telegram rejected the request: " + type(exc).__name__) from None
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from None
+        except (TimeoutError, OSError, ConnectionError) as exc:
+            raise HTTPException(503, "Connection unavailable: " + type(exc).__name__) from None
+
     async def operation(call, *args):
         require_live()
         async with op_lock:
-            try:
-                return await asyncio.wait_for(call(*args), tuning.value(app.state.store, "operation_timeout_seconds"))
-            except FloodWaitError as exc:
-                app.state.store.set_setting("rpc_backoff_until", max(time.time() + exc.seconds,
-                    app.state.store.get_setting("rpc_backoff_until", 0)))
-                raise HTTPException(429, {"message": "Telegram requested a pause.", "retry_after": exc.seconds},
-                                    headers={"Retry-After": str(exc.seconds)}) from None
-            except RPCError as exc:
-                raise HTTPException(400, "Telegram rejected the request: " + type(exc).__name__) from None
-            except ValueError as exc:
-                raise HTTPException(400, str(exc)) from None
-            except (TimeoutError, OSError, ConnectionError) as exc:
-                raise HTTPException(503, "Connection unavailable: " + type(exc).__name__) from None
+            return await perform_operation(call, *args)
 
     @app.get("/api/status", dependencies=[Depends(authenticate)])
     async def status(request: Request):
@@ -1097,10 +1101,37 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     @app.post("/api/capture", dependencies=[Depends(authenticate)])
     async def capture(body: Capture):
         require_live()
-        with app.state.store.transaction():
-            app.state.store.set_setting("capture", body.model_dump())
-            app.state.store.append("capture.changed", capture_settings(app.state.store))
+        async with op_lock:
+            with app.state.store.transaction():
+                app.state.store.set_setting("capture", body.model_dump())
+                app.state.store.append("capture.changed", capture_settings(app.state.store))
         return capture_settings(app.state.store)
+
+    @app.post("/api/recording", dependencies=[Depends(authenticate)])
+    async def set_recording(request: Request, body: recording.RecordingUpdate):
+        require_live()
+        try:
+            for permission in body.permissions():
+                access_check(request.state.principal, profile_id, (permission, None), {})
+        except Refused as exc:
+            raise HTTPException(403, str(exc)) from None
+        async with op_lock:
+            try:
+                changed, saved = recording.save(app.state.store, body)
+            except recording.Invalid as exc:
+                raise HTTPException(exc.status, str(exc)) from None
+            collector = app.state.collector
+            application = {"state": "applied"}
+            if body.scope is not None:
+                if not collector.running:
+                    application = {"state": "pending", "reason": "next_start"}
+                else:
+                    try:
+                        application["scope"] = await perform_operation(collector.apply_scope)
+                    except HTTPException as exc:
+                        application = {"state": "failed", "status": exc.status_code, "detail": exc.detail}
+            return {"saved": True, **saved, "changed": changed, "application": application,
+                    "collector": {"running": collector.running, "phase": collector.phase}}
 
     def scope_state():
         collector = app.state.collector
@@ -1116,35 +1147,25 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     async def set_scope(body: ScopeUpdate):
         require_live()
         store, collector = app.state.store, app.state.collector
-        previous, current = scope_settings(store), body.model_dump(exclude={"acknowledged"})
-        current["exclude"] = sorted(set(current["exclude"]))
-        widening = current["mode"] != "selected" and (previous["mode"] != current["mode"]
-                                                      or previous["folder_id"] != current["folder_id"])
-        if widening and not body.acknowledged:
-            raise HTTPException(409, WIDE_WARNING)
-        if current["mode"] == "folder" and current["folder_id"] is None:
-            raise HTTPException(422, "Choose a Telegram folder. Load chats first if the list is empty.")
-        if current != previous:
-            with store.transaction():
-                store.set_setting("scope", current)
-                store.append("scope.changed", {
-                    "before": previous, "after": current,
-                    "acknowledged": body.acknowledged if widening else None,
-                    "warning": WIDE_WARNING if current["mode"] != "selected" else None,
-                    "coverage": "applies to updates from now on; earlier history is not fetched"})
-            if collector.running:
-                await operation(collector.apply_scope)
+        async with op_lock:
+            try:
+                changed, _ = recording.save(store, recording.RecordingUpdate(scope=body))
+            except recording.Invalid as exc:
+                raise HTTPException(exc.status, str(exc)) from None
+            if "scope" in changed and collector.running:
+                await perform_operation(collector.apply_scope)
         return scope_state()
 
     @app.post("/api/recheck", dependencies=[Depends(authenticate)])
     async def set_recheck(body: Recheck):
         require_live()
         store = app.state.store
-        with store.transaction():
-            for key, value in body.model_dump().items():
-                store.set_setting(key, value)
-            store.append("recheck.changed", {**body.model_dump(), "meaning": "minutes between rechecks of "
-                                             "priority sources and of every other source; 0 turns a tier off"})
+        async with op_lock:
+            with store.transaction():
+                for key, value in body.model_dump().items():
+                    store.set_setting(key, value)
+                store.append("recheck.changed", {**body.model_dump(), "meaning": "minutes between rechecks of "
+                                                 "priority sources and of every other source; 0 turns a tier off"})
         return scope_state()
 
     def outside_state():

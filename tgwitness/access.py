@@ -103,6 +103,7 @@ POLICY = {
     "POST /api/interactions": ("interact", "body"),
     "POST /api/capture": ("settings", None),
     "POST /api/monitoring": ("settings", None),
+    "POST /api/recording": ("view", None),
     "POST /api/evidence": ("settings", None),
     "POST /api/evidence/anchor": ("settings", None),
     "POST /api/source-check": ("settings", None),

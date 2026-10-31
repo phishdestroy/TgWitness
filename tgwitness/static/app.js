@@ -24,7 +24,6 @@ const state = {token: sessionStorage.getItem("tgwitness-token") || "",
   chat: null, chats: [], chatMessages: [], chatNextBefore: null, chatInfo: null, chatFilter: "all", chatAuthor: null,
   scope: null, scopeDirty: false, dossier: null, notifications: [], witnessToken: null, parameters: null, parametersDirty: false,
   me: null, access: null, accessEdit: null, accessChats: {}, consoleAfter: 0};
-const monitoringFields=["messages","edits","deletions","reactions","membership"];
 let viewHost=null;
 const viewContexts=new Map();
 const viewOptions=view=>({signal:viewContexts.get(view)?.signal});
@@ -67,7 +66,7 @@ function resetViewContent(view){
   for(const id of clear)$(id)?.replaceChildren();
 }
 async function loadPanelView(view){
-  if(view==='sources'){renderTargets();await loadScope();}
+  if(view==='sources'){await sourcesReady;sourcesView.enter();renderTargets();await loadScope();}
   else if(view==='witness')await loadExtras();
   else if(view==='parameters')await loadParameters();
   else if(view==='accounts'){renderAccounts();await loadProfiles();}
@@ -102,7 +101,7 @@ async function applyRouteToPanel(route,current){
   const view=state.view;
   if(view==="chats"){await refreshChats();if(current()&&route.chatId!==null)await openChat(route.chatId,{history:false});}
   else if(view==="observations"){await refreshEvents();if(current()&&route.seq)await openRecord(route.seq,{history:false});}
-  else if(view==="sources")await loadScope();
+  else if(view==="sources"){await sourcesReady;sourcesView.enter();renderTargets();await loadScope();}
   else if(view==="parameters"){
     await loadParameters();if(current()){state.parameterSection=route.section;if(route.section)$("parameters-group-"+route.section)?.scrollIntoView({block:"start"});}
   }else if(view==="accounts")await loadProfiles();
@@ -339,6 +338,7 @@ function lock() {
   viewHost?.resetSession();state.permissionsStamp=null;
   state.events=[];state.chats=[];state.chatMessages=[];state.chatInfo=null;state.chat=null;state.parameters=null;
   selectedSources.clear();selectedDialogs.clear();sourceBatchBusy=false;
+  sourcesView?.resetSession();
   resetReportSettings();
   window.dispatchEvent(new Event("tgwitness:lock"));
   $("quick-dialog").close();
@@ -607,6 +607,10 @@ function openDiagnostics(name){
   navigate(d.view);
   if(d.extra)$("extras-open-"+d.extra).click();
   if(d.filter)document.querySelector('[data-filter="'+d.filter+'"]')?.click();
+  if(d.target==="capture-form"){
+    sourcesReady.then(view=>{view.showTab("recording");$("capture-form").scrollIntoView({block:"start"});});
+    return;
+  }
   if(d.target)$(d.target).scrollIntoView({block:"start"});
 }
 function healthRow(name,title,item,lines){
@@ -714,20 +718,7 @@ function renderViewStatus(view){
     $("fingerprint").textContent=s.fingerprint;$("export-profile-id").textContent=state.profile;
     renderVerification();
   }else if(view==='sources'){
-  renderHistory();
-  if (!state.captureDirty) {
-    $("download-media").checked=s.capture.download_media;
-    $("max-media").value=String(s.capture.max_media_mb);
-    renderMediaRules(s.capture.types||{});
-  }
-  renderCaptureDraft();renderRecheck();
-  if(!state.monitoringDirty){
-    for(const name of monitoringFields)$("monitor-"+name).checked=s.monitoring?.[name]??true;
-    renderMonitoringDraft();
-  }
-  const enabled=monitoringFields.filter(name=>s.monitoring?.[name]??true);
-  $("monitoring-current").textContent=tr("Saved for this account: {list}.",{list:enabled.length?enabled.map(termText).join(", "):tr("no live event categories")});
-  renderTargets();
+    sourcesView?.updateStatus(s);renderHistory();renderRecheck();renderTargets();
   }else if(view==='connection'){
   show("entry-settings",!s.demo);
   show("entry-demo",s.demo);show("entry-return",s.demo||c.has_session);
@@ -936,6 +927,7 @@ async function switchProfile(id,options={}){
   closeNotifications();renderNotifications();renderExportState(null);
   state.evidenceDirty=false;state.replicaDirty=false;state.alertsDirty=false;
   state.parameters=null;state.parametersDirty=false;state.recheckDirty=false;
+  sourcesView?.resetSession();
   $("load-dialogs").textContent=tr("Load chats");
   $("event-search").value="";$("dialog-search").value="";show("available-card",false);
   viewQueries("observations","[data-filter]").forEach(n=>n.classList.toggle("active",n.dataset.filter===""));
@@ -1177,6 +1169,16 @@ document.addEventListener("keydown",e=>{
     else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
   }
 });
+// Sources view boundary: the host supplies session, data and actions explicitly.
+let sourcesView=null;
+const sourcesReady=import("./views/sources.js").then(({createSources})=>{
+  sourcesView=createSources({root:$("view-sources"),tr,getState:()=>state,
+    getSession:()=>state.workspaceRevision+":"+state.profile,may,json,refreshStatus,toast,termText,scopeName,
+    setDirty:dirty=>{state.monitoringDirty=dirty.monitoring;state.captureDirty=dirty.capture;state.recheckDirty=dirty.recheck;},
+    saved:result=>{for(const name of ["monitoring","capture","recheck"])state.status[name]=result[name];}});
+  if(state.view==="sources"&&!$("workspace").hidden)sourcesView.enter();
+  return sourcesView;
+}).catch(error=>{toast(error.message,true);throw error;});
 const selectedSources=new Set(),selectedDialogs=new Set();let sourceBatchBusy=false;
 async function updateSources(ids,changes){
   if(sourceBatchBusy||!ids.length)return;
@@ -1226,9 +1228,6 @@ function renderTargets() {
     "No sources selected yet. Add groups from your chat list.":"Add an account first.")));
   const wide=(s.scope?.mode||"selected")!=="selected";
 
-  $("sources-title").textContent=tr(wide?"Observed chats":"Choose chats");
-  $("sources-description").textContent=tr(wide?"The scope adds chats by itself. Exclude or pause the ones you do not need.":
-    "Pick the groups and channels this account should observe.");
   $("target-list-title").textContent=tr(wide?"Chats in the scope":"Selected chats");
   for(const t of s.targets){
     const source=s.collector.source_status?.[String(t.chat_id)];
@@ -1272,8 +1271,6 @@ function renderTargets() {
   syncExport(s);
   $("load-dialogs").disabled=s.demo||!s.collector.has_session;
   $("load-dialogs").title=!s.collector.has_session&&!s.demo?tr("Connect your Telegram account first"):"";
-  $("capture-form").querySelector("button").disabled=s.demo;
-  $("monitoring-form").querySelectorAll("button,input").forEach(n=>n.disabled=s.demo);
   $("snapshot-form").querySelector("button").disabled=s.demo||!s.targets.some(t=>t.enabled);
   autoLoadDialogs();
 }
@@ -1294,7 +1291,7 @@ function renderDialogs(){
 const loadDialogs=button=>busy(button,async()=>{
   const revision=state.workspaceRevision,result=await json("dialogs");
   if(revision!==state.workspaceRevision)return;
-  state.dialogs=result.dialogs;show("available-card",true);
+  state.dialogs=result.dialogs;show("available-card",true);sourcesView?.showTab("chats");
   $("dialog-limit").textContent=tr(result.may_be_truncated?"First 1,000 dialogs inspected; more may exist.":"Showing the chats already available to this account.");
   if(state.scope){state.scope.folders=result.folders||[];renderScope();}
   $("load-dialogs").textContent=tr("Reload chats");
@@ -1313,63 +1310,7 @@ $("dialog-kind").addEventListener("change",renderDialogs);
 $("finish-source-selection").addEventListener("click",()=>{
   show("available-card",false);$("collector-toggle").focus({preventScroll:true});
 });
-function renderMonitoringDraft(){
-  const messages=$("monitor-messages").checked,enabled=monitoringFields.filter(name=>$("monitor-"+name).checked);
-  $("monitoring-note").textContent=tr(!enabled.length?"No live event types selected. Only operational and other group service records will continue.":
-    !messages?"New message capture is off. Edits and deletion notices may have no earlier content to compare.":
-    "Original messages provide context for later edits and deletion notices. Already saved records remain available.");
-  $("monitoring-unsaved").textContent=state.monitoringDirty?tr("Unsaved changes — press Save monitoring settings to apply."):"";
-}
-$("monitoring-form").addEventListener("change",()=>{state.monitoringDirty=true;renderMonitoringDraft();});
-document.querySelectorAll("[data-monitor-preset]").forEach(button=>button.addEventListener("click",()=>{
-  for(const name of monitoringFields)$("monitor-"+name).checked=button.dataset.monitorPreset==="all"||["messages","edits","deletions"].includes(name);
-  state.monitoringDirty=true;renderMonitoringDraft();
-}));
-$("monitoring-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
-  const profile=state.profile,revision=state.workspaceRevision,settings=Object.fromEntries(monitoringFields.map(name=>[name,$("monitor-"+name).checked]));
-  await json("monitoring",settings,{profile});
-  if(revision!==state.workspaceRevision)return;
-  state.monitoringDirty=monitoringFields.some(name=>settings[name]!==$("monitor-"+name).checked);
-  await refreshStatus();toast(tr(state.monitoringDirty?"Monitoring settings saved. Newer edits are still unsaved.":"Monitoring settings saved and recorded in the signed journal."));
-});});
-$("capture-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
-  const profile=state.profile,revision=state.workspaceRevision,settings=captureDraft();
-  await json("capture",settings,{profile});
-  if(revision!==state.workspaceRevision)return;
-  state.captureDirty=JSON.stringify(settings)!==JSON.stringify(captureDraft());
-  await refreshStatus();toast(tr(state.captureDirty?"Media settings saved. Newer edits are still unsaved.":"Media settings saved."));
-});});
-const mediaTypes=[["photo",tr("Photos")],["video",tr("Videos")],["animation",tr("GIFs & animations")],["video_note",tr("Round video messages")],
-  ["voice",tr("Voice messages")],["audio",tr("Music & audio")],["sticker",tr("Stickers")],["document",tr("Files & documents")]];
-
 const mediaLimit=c=>Math.max(0,...Object.values(c?.types||{}).filter(r=>r.enabled).map(r=>r.max_mb))||c?.max_media_mb;
-function renderMediaRules(types){
-  const box=$("media-rules");box.replaceChildren();
-  for(const [key,label] of mediaTypes){
-    const rule=types[key]||{enabled:true,max_mb:20},row=node("div","media-rule"),check=node("input"),size=node("input");
-    check.type="checkbox";check.checked=rule.enabled;check.id="media-on-"+key;check.dataset.mediaType=key;
-    Object.assign(size,{id:"media-max-"+key,type:"number",min:1,max:2000,step:1,required:true,value:String(rule.max_mb)});
-    size.setAttribute("aria-label",tr("Maximum size for {type}",{type:label}));
-    const name=node("label","",label);name.htmlFor=check.id;row.append(check,name,unitField(size,"MiB"));box.append(row);
-  }
-  $("media-rules").querySelectorAll("input,select").forEach(n=>n.disabled=!!state.status?.demo);
-}
-$("max-media").addEventListener("input",()=>{
-
-  for(const [key] of mediaTypes){const size=$("media-max-"+key);if(size)size.value=$("max-media").value;}
-});
-function captureDraft(){
-  const types={};
-  for(const [key] of mediaTypes){
-    if($("media-on-"+key))types[key]={enabled:$("media-on-"+key).checked,max_mb:Number($("media-max-"+key).value)};
-  }
-  return {download_media:$("download-media").checked,max_media_mb:Number($("max-media").value),types};
-}
-function renderCaptureDraft(){
-  $("capture-unsaved").textContent=state.captureDirty?tr("Unsaved changes — press Save media settings to apply."):"";
-}
-$("capture-form").addEventListener("change",()=>{state.captureDirty=true;renderCaptureDraft();});
-$("capture-form").addEventListener("input",()=>{state.captureDirty=true;renderCaptureDraft();});
 function renderHistory(){
   const s=state.status,h=s?.history||{phase:"none"},phase=h.phase;
   const active=phase==="running",paused=phase==="paused",exists=phase!=="none";
@@ -1831,9 +1772,12 @@ const scopeTypes=["channels","groups","private","bots"];
 const wideWarning=()=>tr("Folder and whole-account modes record private chats and messages of third parties. Use them only on a dedicated account, for a lawful purpose, and keep the data protected.");
 async function loadScope(){
   if(!state.status)return;
-  if(state.status.demo){state.scope=null;renderScope();return;}
-  const profile=state.profile,r=await json("scope");
-  if(profile!==state.profile)return;
+  if(state.status.demo){
+    state.scope={settings:state.status.scope,recheck:state.status.recheck,folders:[],warning:wideWarning()};
+    renderScope();return;
+  }
+  const revision=state.workspaceRevision,profile=state.profile,r=await json("scope");
+  if(revision!==state.workspaceRevision||profile!==state.profile)return;
   state.scope={...r,folders:r.folders.length?r.folders:(state.scope?.folders||[])};
   renderScope();
 }
@@ -1888,12 +1832,14 @@ function renderScope(){
 }
 $("scope-form").addEventListener("change",()=>{state.scopeDirty=true;renderScope();});
 $("scope-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
-  const draft=scopeDraft(),saved=state.scope.settings;
+  const draft=scopeDraft(),saved=state.scope.settings,revision=state.workspaceRevision,profile=state.profile;
   if(draft.mode==="folder"&&draft.folder_id===null)throw new Error(tr("Choose a Telegram folder. Load chats first if the list is empty."));
   const widening=draft.mode!=="selected"&&(draft.mode!==saved.mode||draft.folder_id!==saved.folder_id);
   if(widening&&!window.confirm(wideWarning()+"\n\n"+tr("Continue only with a dedicated account. Your confirmation is recorded in the signed journal.")))return;
-  const r=await json("scope",{...draft,acknowledged:widening});
-  state.scope={...r,folders:r.folders.length?r.folders:state.scope.folders};state.scopeDirty=false;
+  const r=await json("scope",{...draft,acknowledged:widening},{profile});
+  if(revision!==state.workspaceRevision)return;
+  state.scopeDirty=JSON.stringify(draft)!==JSON.stringify(scopeDraft());
+  state.scope={...r,folders:r.folders.length?r.folders:state.scope.folders};
   await refreshStatus();renderScope();
   toast(tr(draft.mode==="selected"?"Scope saved: only chosen chats are recorded.":"Scope saved and recorded in the signed journal. New chats are added as they appear."));
 });});
@@ -1901,16 +1847,7 @@ function renderRecheck(){
   const most=state.status?.parameters?.snapshot_max||500;
   $("snapshot-limit").max=String(most);
   $("snapshot-limit-hint").textContent=tr("1 to {n} messages; the largest snapshot is set in Parameters.",{n:most});
-  if(state.recheckDirty||!state.status?.recheck)return;
-  $("recheck-priority").value=String(state.status.recheck.recheck_minutes);
-  $("recheck-other").value=String(state.status.recheck.recheck_other_minutes);
-  $("recheck-form").querySelectorAll("input,button").forEach(n=>n.disabled=!!state.status.demo);
 }
-$("recheck-form").addEventListener("input",()=>{state.recheckDirty=true;});
-$("recheck-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
-  await json("recheck",{recheck_minutes:Number($("recheck-priority").value),recheck_other_minutes:Number($("recheck-other").value)});
-  state.recheckDirty=false;await refreshStatus();toast(tr("Recheck settings saved."));
-});});
 
 const parameterItems=()=>(state.parameters?.groups||[]).flatMap(g=>g.items);
 const sameValue=(a,b)=>JSON.stringify(a)===JSON.stringify(b);

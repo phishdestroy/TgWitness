@@ -1,0 +1,40 @@
+#view-sources .sources-summary { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: -8px 0 20px; color: var(--muted); font-size: 13px; }
+#view-sources .sources-summary span + span::before { content: "·"; margin-inline-end: 16px; color: var(--icon-faint); }
+#view-sources .sources-tabs { display: flex; gap: 6px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+#view-sources .sources-tabs button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-bottom: 2px solid transparent; border-radius: 0; padding: 10px 16px 12px; background: none; color: var(--muted); white-space: nowrap; min-height: 44px; }
+#view-sources .sources-tabs button[aria-selected="true"] { color: var(--accent-text); border-bottom-color: var(--accent); }
+#view-sources .sources-tabs button:hover { background: var(--surface-2); color: var(--text); }
+#view-sources .tab-count { min-width: 20px; padding: 1px 6px; border-radius: 5px; background: var(--surface-3); color: var(--text-2); font-size: 12px; font-variant-numeric: tabular-nums; }
+#view-sources #recording-tab-dirty { background: var(--warning-soft); color: var(--warning); }
+#view-sources .recording-intro { margin: 0 0 16px; }
+#view-sources .recording-sections { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+#view-sources #monitoring-form { grid-column: 1 / -1; }
+#view-sources .recording-sections .card { margin: 0; }
+#view-sources .recording-sections h2 { margin: 0 0 6px; font-size: 17px; }
+#view-sources .recording-sections .muted { margin: 0 0 14px; max-width: 82ch; font-size: 13px; }
+#view-sources .recording-sections .monitoring-options { gap: 12px 20px; }
+#view-sources .recording-sections .monitoring-options label { padding: 0; }
+#view-sources .recording-sections .monitoring-options small { font-size: 12px; }
+#view-sources #max-media { width: 180px; max-width: 100%; }
+#view-sources .recording-savebar { position: sticky; bottom: 12px; z-index: 4; display: flex; align-items: center; justify-content: space-between; gap: 12px 20px; margin-top: 20px; padding: 14px 18px; border: 1px solid var(--border-strong); border-radius: var(--radius-panel); background: var(--surface); box-shadow: var(--shadow-md); }
+#view-sources .recording-savebar.is-dirty { border-color: var(--accent-border); }
+#view-sources .recording-savebar:not(.is-dirty) { position: static; box-shadow: none; background: transparent; border-color: transparent; padding-inline: 0; }
+#view-sources .recording-savebar strong { font-size: 13px; font-weight: 600; }
+#view-sources .recording-savebar .hint { margin: 4px 0 0; }
+#view-sources .recording-savebar .hint:empty { display: none; }
+#view-sources .recording-actions { display: flex; gap: 8px; flex-shrink: 0; }
+#view-sources .scope-card { margin: 0; }
+@media (max-width: 600px) {
+  #view-sources .sources-summary { gap: 6px 12px; margin-bottom: 12px; }
+  #view-sources .sources-summary span + span::before { margin-inline-end: 10px; }
+  #view-sources .sources-tabs { gap: 0; }
+  #view-sources .sources-tabs button { flex: 1; gap: 5px; min-width: 0; padding-inline: 6px; font-size: 12px; }
+  #view-sources .sources-tabs .tab-count { min-width: 16px; padding-inline: 4px; font-size: 11px; }
+  #view-sources .recording-sections .padded { padding: 16px; }
+  #view-sources .recording-sections { grid-template-columns: 1fr; }
+  #view-sources .recording-sections .monitoring-presets { gap: 6px; margin: 12px 0; }
+  #view-sources .recording-sections .monitoring-presets button { flex: 1 1 auto; font-size: 12px; }
+  #view-sources .recording-savebar { flex-wrap: wrap; bottom: 6px; padding: 12px; gap: 10px; }
+  #view-sources .recording-actions { width: 100%; }
+  #view-sources .recording-actions button { flex: 1; font-size: 12px; padding-inline: 8px; }
+}
