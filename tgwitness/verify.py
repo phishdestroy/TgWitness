@@ -22,9 +22,13 @@ import subprocess
 import sys
 import tempfile
 import zipfile
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
+from cryptography import x509
+from cryptography.exceptions import InvalidSignature
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.asymmetric import ec, padding, rsa
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 
 FIELDS = ("seq", "observed_at", "source_at", "kind", "chat_id", "message_id",
@@ -112,33 +116,241 @@ def der(data, offset):
     return tag, start, start + length
 
 
-def timestamp_reply_summary(reply, digest, query=None):
-    """Status, covered hash, nonce and time of an RFC 3161 reply. OpenSSL checks its signature."""
+def children(data, start, end):
+    """(tag, offset, value start, value end) of each DER element between start and end."""
+    found, offset = [], start
+    while offset < end:
+        tag, value_start, value_end = der(data, offset)
+        if value_end > end:
+            raise ValueError("Truncated DER")
+        found.append((tag, offset, value_start, value_end))
+        offset = value_end
+    return found
+
+
+def oid(data, start, end):
+    parts, value = [], 0
+    for byte in data[start:end]:
+        value = (value << 7) | (byte & 0x7F)
+        if not byte & 0x80:
+            parts.append(value)
+            value = 0
+    if not parts:
+        raise ValueError("Empty object identifier")
+    first = min(parts[0] // 40, 2)
+    return ".".join(map(str, [first, parts[0] - 40 * first] + parts[1:]))
+
+
+SIGNED_DATA, TST_INFO = "1.2.840.113549.1.7.2", "1.2.840.113549.1.9.16.1.4"
+CONTENT_TYPE, MESSAGE_DIGEST = "1.2.840.113549.1.9.3", "1.2.840.113549.1.9.4"
+SIGNING_CERTIFICATE, SIGNING_CERTIFICATE_V2 = "1.2.840.113549.1.9.16.2.12", "1.2.840.113549.1.9.16.2.47"
+DIGESTS = {"2.16.840.1.101.3.4.2.1": hashes.SHA256, "2.16.840.1.101.3.4.2.2": hashes.SHA384,
+           "2.16.840.1.101.3.4.2.3": hashes.SHA512}
+RSA_SIGNATURES = {"1.2.840.113549.1.1.1": None, "1.2.840.113549.1.1.11": hashes.SHA256,
+                  "1.2.840.113549.1.1.12": hashes.SHA384, "1.2.840.113549.1.1.13": hashes.SHA512}
+ECDSA_SIGNATURES = {"1.2.840.10045.4.3.2": hashes.SHA256, "1.2.840.10045.4.3.3": hashes.SHA384,
+                    "1.2.840.10045.4.3.4": hashes.SHA512}
+
+
+def timestamp_token(reply):
+    """The parts of an RFC 3161 reply, read strictly: status, the TSTInfo bytes, the certificates and
+    the one SignerInfo of the signed data around them."""
     tag, start, end = der(reply, 0)
-    status_tag, status_start, status_end = der(reply, start)
-    int_tag, int_start, int_end = der(reply, status_start)
-    if tag != 0x30 or status_tag != 0x30 or int_tag != 0x02:
+    if tag != 0x30 or end != len(reply):
         raise ValueError("Not an RFC 3161 timestamp reply")
-    status = int.from_bytes(reply[int_start:int_end], "big")
+    parts = children(reply, start, end)
+    status_info = children(reply, parts[0][2], parts[0][3]) if parts and parts[0][0] == 0x30 else []
+    if not status_info or status_info[0][0] != 0x02:
+        raise ValueError("Not an RFC 3161 timestamp reply")
+    status = int.from_bytes(reply[status_info[0][2]:status_info[0][3]], "big")
     if status not in (0, 1):
         raise ValueError("The timestamp authority refused the request (status " + str(status) + ")")
-    token = reply[status_end:end]
-    at = token.find(digest)
-    if at < 0:
+    if len(parts) != 2 or parts[1][0] != 0x30:
+        raise ValueError("The timestamp reply carries no token")
+    content = children(reply, parts[1][2], parts[1][3])
+    if len(content) != 2 or content[0][0] != 0x06 or oid(reply, *content[0][2:]) != SIGNED_DATA or content[1][0] != 0xA0:
+        raise ValueError("The timestamp token is not signed data")
+    signed_tag, signed_start, signed_end = der(reply, content[1][2])
+    signed = children(reply, signed_start, signed_end) if signed_tag == 0x30 else []
+    if len(signed) < 4 or signed[2][0] != 0x30 or signed[-1][0] != 0x31:
+        raise ValueError("The timestamp token is not signed data")
+    encapsulated = children(reply, signed[2][2], signed[2][3])
+    if len(encapsulated) != 2 or oid(reply, *encapsulated[0][2:]) != TST_INFO or encapsulated[1][0] != 0xA0:
+        raise ValueError("The timestamp token does not hold a TSTInfo")
+    info_tag, info_start, info_end = der(reply, encapsulated[1][2])
+    if info_tag != 0x04:
+        raise ValueError("The timestamp token does not hold a TSTInfo")
+    certificates = []
+    for tag, _, value_start, value_end in signed[3:-1]:
+        if tag == 0xA0:
+            certificates += [reply[offset:stop] for _, offset, _, stop in children(reply, value_start, value_end)]
+    signers = children(reply, signed[-1][2], signed[-1][3])
+    if len(signers) != 1:
+        raise ValueError("The timestamp token must have exactly one signer")
+    return {"status": status, "tst": reply[info_start:info_end], "certificates": certificates,
+            "signer": signers[0], "reply": reply}
+
+
+def generalized_time(raw):
+    found = re.fullmatch(rb"(\d{14})(?:\.\d{1,6})?Z", raw)
+    if not found:
+        raise ValueError("The timestamp time is not a UTC GeneralizedTime")
+    return datetime.strptime(found[1].decode(), "%Y%m%d%H%M%S").replace(tzinfo=timezone.utc)
+
+
+def tst_info(tst):
+    """Imprint algorithm and hash, time and nonce of a TSTInfo, by position as RFC 3161 defines it."""
+    tag, start, end = der(tst, 0)
+    items = children(tst, start, end) if tag == 0x30 and end == len(tst) else []
+    if len(items) < 5 or [t for t, *_ in items[:5]] != [0x02, 0x06, 0x30, 0x02, 0x18]:
+        raise ValueError("Malformed TSTInfo")
+    imprint = children(tst, items[2][2], items[2][3])
+    algorithm = children(tst, imprint[0][2], imprint[0][3])
+    if len(imprint) != 2 or imprint[1][0] != 0x04 or not algorithm or algorithm[0][0] != 0x06:
+        raise ValueError("Malformed TSTInfo")
+    nonce = next((int.from_bytes(tst[s:e], "big", signed=True) for t, _, s, e in items[5:] if t == 0x02), None)
+    return {"algorithm": oid(tst, *algorithm[0][2:]), "hash": tst[imprint[1][2]:imprint[1][3]],
+            "time": generalized_time(tst[items[4][2]:items[4][3]]), "nonce": nonce}
+
+
+def query_nonce(query):
+    _, start, end = der(query, 0)
+    return next((int.from_bytes(query[s:e], "big", signed=True) for t, _, s, e in children(query, start, end)[2:]
+                 if t == 0x02), None)
+
+
+def timestamp_reply_summary(reply, digest, query=None):
+    """Status and time of an RFC 3161 reply whose TSTInfo stamps exactly this SHA-256 (and the request's nonce).
+    The signature is checked by timestamp_signature, or by OpenSSL with --tsa-ca."""
+    token = timestamp_token(reply)
+    info = tst_info(token["tst"])
+    if info["algorithm"] != "2.16.840.1.101.3.4.2.1" or info["hash"] != digest:
         raise ValueError("The timestamp does not cover this checkpoint")
-    if query is not None:
-        _, query_start, _ = der(query, 0)
-        version_end = der(query, query_start)[2]
-        imprint_end = der(query, version_end)[2]
-        nonce_tag, _, nonce_end = der(query, imprint_end)
-        if nonce_tag != 0x02 or query[imprint_end:nonce_end] not in token[at:]:
-            raise ValueError("The timestamp nonce differs from the request")
-    found = re.search(rb"\x18[\x0f-\x18](\d{14})(?:\.\d{1,6})?Z", token[at:])
-    when = None
-    if found:
-        t = found[1].decode()
-        when = t[0:4] + "-" + t[4:6] + "-" + t[6:8] + "T" + t[8:10] + ":" + t[10:12] + ":" + t[12:14] + "Z"
-    return {"status": status, "time": when}
+    if query is not None and info["nonce"] != query_nonce(query):
+        raise ValueError("The timestamp nonce differs from the request")
+    return {"status": token["status"], "time": info["time"].strftime("%Y-%m-%dT%H:%M:%SZ")}
+
+
+def signed_attributes(reply, start, end):
+    found = {}
+    for _, _, s, e in children(reply, start, end):
+        parts = children(reply, s, e)
+        if len(parts) != 2 or parts[0][0] != 0x06 or parts[1][0] != 0x31:
+            raise ValueError("Malformed signed attribute")
+        kind, values = parts
+        name = oid(reply, *kind[2:])
+        if name in found:
+            raise ValueError("Repeated signed attribute")
+        found[name] = children(reply, values[2], values[3])
+    return found
+
+
+def signing_certificate_hash(reply, attributes):
+    """The hash algorithm and the hash of the signer's certificate named in the ESS attribute."""
+    if SIGNING_CERTIFICATE_V2 in attributes:
+        name, default = SIGNING_CERTIFICATE_V2, hashes.SHA256
+    elif SIGNING_CERTIFICATE in attributes:
+        name, default = SIGNING_CERTIFICATE, hashes.SHA1
+    else:
+        raise ValueError("The timestamp does not name its signing certificate")
+    value = attributes[name][0]
+    certificates = children(reply, value[2], value[3])
+    first = children(reply, certificates[0][2], certificates[0][3])[0]
+    identifiers = children(reply, first[2], first[3])
+    algorithm = default
+    if identifiers[0][0] == 0x30:
+        algorithm = DIGESTS.get(oid(reply, *children(reply, identifiers[0][2], identifiers[0][3])[0][2:]))
+        identifiers = identifiers[1:]
+    if algorithm is None or identifiers[0][0] != 0x04:
+        raise ValueError("Unsupported signing certificate reference")
+    return algorithm, reply[identifiers[0][2]:identifiers[0][3]]
+
+
+def timestamp_signature(reply, roots):
+    """Who signed an RFC 3161 reply, checked: the hash of the TSTInfo in the signed attributes, the
+    signature over them, the certificate the ESS attribute names, its critical time-stamping key usage
+    as its only use, and a chain valid at the stamped time up to one of the given root certificates."""
+    token = timestamp_token(reply)
+    when = tst_info(token["tst"])["time"]
+    _, _, start, end = token["signer"]
+    items = children(reply, start, end)
+    if len(items) < 6 or items[3][0] != 0xA0 or items[4][0] != 0x30 or items[5][0] != 0x04:
+        raise ValueError("The timestamp signer has no signed attributes")
+    digest = DIGESTS.get(oid(reply, *children(reply, items[2][2], items[2][3])[0][2:]))
+    if digest is None:
+        raise ValueError("Unsupported timestamp digest algorithm")
+    attributes = signed_attributes(reply, items[3][2], items[3][3])
+    content_type, message_digest = attributes.get(CONTENT_TYPE), attributes.get(MESSAGE_DIGEST)
+    if not content_type or oid(reply, *content_type[0][2:]) != TST_INFO:
+        raise ValueError("The signed attributes do not describe a TSTInfo")
+    hasher = hashes.Hash(digest())
+    hasher.update(token["tst"])
+    if not message_digest or reply[message_digest[0][2]:message_digest[0][3]] != hasher.finalize():
+        raise ValueError("The signature does not cover this TSTInfo")
+    algorithm, named = signing_certificate_hash(reply, attributes)
+    raw = {}
+    for data in token["certificates"]:
+        raw[data] = x509.load_der_x509_certificate(data)
+    signer_data = None
+    for data in raw:
+        hasher = hashes.Hash(algorithm())
+        hasher.update(data)
+        if hasher.finalize() == named:
+            signer_data = data
+    if signer_data is None:
+        raise ValueError("The reply does not carry the certificate the signature names")
+    signer = raw[signer_data]
+    try:
+        usage = signer.extensions.get_extension_for_class(x509.ExtendedKeyUsage)
+    except x509.ExtensionNotFound:
+        usage = None
+    if not usage or not usage.critical or list(usage.value) != [x509.oid.ExtendedKeyUsageOID.TIME_STAMPING]:
+        raise ValueError("The signing certificate is not for time stamping only")
+    signed = b"\x31" + reply[items[3][1] + 1:items[3][3]]
+    signature = reply[items[5][2]:items[5][3]]
+    method = oid(reply, *children(reply, items[4][2], items[4][3])[0][2:])
+    key = signer.public_key()
+    try:
+        if isinstance(key, rsa.RSAPublicKey) and method in RSA_SIGNATURES:
+            key.verify(signature, signed, padding.PKCS1v15(), (RSA_SIGNATURES[method] or digest)())
+        elif isinstance(key, ec.EllipticCurvePublicKey) and method in ECDSA_SIGNATURES:
+            key.verify(signature, signed, ec.ECDSA(ECDSA_SIGNATURES[method]()))
+        else:
+            raise ValueError("Unsupported timestamp signature algorithm " + method)
+    except InvalidSignature:
+        raise ValueError("The timestamp signature is invalid") from None
+    trusted = {root.fingerprint(hashes.SHA256()): root for root in roots}
+    chain, current = [signer], signer
+    while not (len(chain) > 1 and chain[-1].fingerprint(hashes.SHA256()) in trusted):
+        if len(chain) > 8:
+            raise ValueError("The timestamp certificate chain is too long")
+        candidates = list(trusted.values()) + [c for c in raw.values() if c not in chain]
+        issuer = None
+        for candidate in candidates:
+            if candidate.subject != current.issuer:
+                continue
+            try:
+                current.verify_directly_issued_by(candidate)
+            except (ValueError, TypeError, InvalidSignature):
+                continue
+            issuer = candidate
+            break
+        if issuer is None:
+            raise ValueError("The timestamp certificate does not chain to a trusted root")
+        try:
+            constraints = issuer.extensions.get_extension_for_class(x509.BasicConstraints).value
+        except x509.ExtensionNotFound:
+            constraints = None
+        if not constraints or not constraints.ca:
+            raise ValueError("A certificate in the timestamp chain is not a certificate authority")
+        chain.append(issuer)
+        current = issuer
+    for certificate in chain:
+        if not certificate.not_valid_before_utc <= when <= certificate.not_valid_after_utc:
+            raise ValueError("A certificate in the timestamp chain was not valid at the stamped time")
+    root = chain[-1]
+    return {"signer": signer.subject.rfc4514_string(), "root": root.subject.rfc4514_string(),
+            "root_sha256": root.fingerprint(hashes.SHA256()).hex()}
 
 
 def ots_summary(proof, digest):

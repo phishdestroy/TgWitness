@@ -86,6 +86,7 @@ class Store:
         self.db.commit()
         self.signer = None
         self.targets_revision = 0
+        self.listeners = []  # called with each new record (the administrator's console)
 
     @contextmanager
     def transaction(self):
@@ -129,6 +130,11 @@ class Store:
                     (event["seq"], media_job["account_id"], chat_id, message_id,
                      media_job["descriptor"], hashlib.sha256(media_job["descriptor"]).hexdigest(),
                      media_job["max_bytes"]))
+            for listen in self.listeners:
+                try:
+                    listen(event)
+                except Exception:
+                    pass
             return event
 
     @staticmethod
@@ -335,8 +341,27 @@ class Store:
                 "SELECT seq, json_extract(payload,'$.media_sha256') FROM events WHERE kind='media.saved' AND seq>?"
                 " ORDER BY seq", (seq,)) if r[1]]
 
-    def events(self, chat_id=None, message_id=None, kind=None, before=None, limit=100, search=None):
+    def media_in_chats(self, sha256, chat_ids):
+        """Whether a preserved file was saved from one of these chats."""
+        marks = ",".join("?" * len(chat_ids))
+        with self.lock:
+            return self.db.execute(
+                "SELECT 1 FROM events WHERE kind='media.saved' AND chat_id IN (" + marks + ")"
+                " AND json_extract(payload,'$.media_sha256')=? LIMIT 1", (*sorted(chat_ids), sha256)).fetchone() is not None
+
+    def sender_in_chats(self, sender_id, chat_ids):
+        """Whether someone wrote a saved message in one of these chats."""
+        marks = ",".join("?" * len(chat_ids))
+        with self.lock:
+            return self.db.execute(
+                "SELECT 1 FROM events WHERE chat_id IN (" + marks + ") AND message_id IS NOT NULL"
+                " AND json_extract(payload,'$.sender_id')=? LIMIT 1", (*sorted(chat_ids), sender_id)).fetchone() is not None
+
+    def events(self, chat_id=None, message_id=None, kind=None, before=None, limit=100, search=None, chat_ids=None):
         filters, params = [], []
+        if chat_ids is not None:  # an access limited to chosen chats
+            filters.append("chat_id IN (" + ",".join("?" * len(chat_ids)) + ")")
+            params.extend(sorted(chat_ids))
         for key, value in (("chat_id", chat_id), ("message_id", message_id)):
             if value is not None:
                 filters.append(key + "=?")
@@ -442,9 +467,11 @@ class Store:
             self.db.execute("UPDATE media_jobs SET state=?,next_attempt=?,last_error=? WHERE message_event=?",
                             (state, time.time() + delay, payload.get("error_type"), job["message_event"]))
 
-    def stats(self):
+    def stats(self, chat_ids=None):
+        where = "" if chat_ids is None else " WHERE chat_id IN (" + ",".join("?" * len(chat_ids)) + ")"
         with self.lock:
-            counts = {r[0]: r[1] for r in self.db.execute("SELECT kind,count(*) FROM events GROUP BY kind")}
+            counts = {r[0]: r[1] for r in self.db.execute(
+                "SELECT kind,count(*) FROM events" + where + " GROUP BY kind", sorted(chat_ids or ()))}
             tail = self.db.execute("SELECT seq,hash,observed_at FROM events ORDER BY seq DESC LIMIT 1").fetchone()
         return {"counts": counts, "total": sum(counts.values()), "head": dict(tail) if tail else None}
 
