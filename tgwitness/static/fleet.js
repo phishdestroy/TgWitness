@@ -226,19 +226,21 @@
           button.dataset.unavailable=candidate.dataset.unavailable||'false';if(!button.hasAttribute('aria-busy'))button.disabled=candidate.disabled;});
         settingsPanel(group);
       }
-      const grid=section.querySelector('.accounts-grid'),members=group.members.map(id=>cards.get(id)).filter(Boolean);
+      const grid=section.querySelector('.accounts-grid'),members=window.TgWitnessAccounts?.ownsRows?[]:group.members.map(id=>cards.get(id)).filter(Boolean);
+      grid.hidden=!!window.TgWitnessAccounts?.ownsRows;
       if(!members.length)members.push(grid.querySelector('.fleet-empty')||node('p','hint fleet-empty',tr('No workspaces in this group yet. Move one here or import accounts into it.')));
       placeChildren(grid,members);return section;
     });
     // Move cards before retiring an old group, so removal never drops an account.
-    placeChildren(list,[...cards].filter(([id])=>!membership.has(id)).map(([,card])=>card));
+    placeChildren(list,[...cards].filter(([id])=>window.TgWitnessAccounts?.ownsRows||!membership.has(id)).map(([,card])=>card));
     placeChildren(box,sections);
     $("fleet-import-open").disabled = !editable();
     $("fleet-group-new").disabled = !editable() || !!creating;
     let title = $("fleet-ungrouped");
     if (!title) { title = node("h2", "fleet-ungrouped", ""); title.id = "fleet-ungrouped"; list.before(title); }
     title.textContent = tr("Without group");
-    title.hidden = !groups.length || !list.children.length;
+    title.hidden = !!window.TgWitnessAccounts?.ownsRows || !groups.length || !list.children.length;
+    window.TgWitnessAccounts?.updateStatus();
     if (restorePoint) {
       const focus = restorePoint.profile ? [...$("view-accounts").querySelectorAll(".account-card[data-profile]")]
         .find(card => card.dataset.profile === restorePoint.profile)?.querySelector(".fleet-card-group") : restorePoint.element;

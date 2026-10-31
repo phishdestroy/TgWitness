@@ -43,6 +43,7 @@ def main():
               const result=await json('profile-groups',{label:'Research group'},{root:true});
               await json('profiles/default/group',{group:result.groups[0].id},{root:true,method:'PUT'});await loadProfiles();
             }""")
+            page.locator('#accounts-groups').evaluate("element=>element.open=true")
             page.locator('.fleet-group-settings').evaluate("element=>element.open=true")
             template = page.locator('.fleet-group-settings select')
             template.select_option("default")

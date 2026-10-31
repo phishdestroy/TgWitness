@@ -62,6 +62,7 @@ function resetViewContent(view){
   if(view==='sources'){state.scope=null;state.scopeDirty=false;state.recheckDirty=false;}
   if(view==='parameters')parametersView?.resetSession();
   if(view==='evidence')exportsView?.resetSession();
+  if(view==='accounts')accountsView?.resetSession();
   if(view==='witness'){state.evidenceDirty=false;state.replicaDirty=false;state.alertsDirty=false;}
   if(view==='sealed')window.TgWitnessCapture?.reset();
   if(view==='access'){accessFormReady=false;adminLimitsReady=false;adminLimitsDirty=false;accessLoadSerial++;
@@ -881,6 +882,14 @@ function accountIdentity(p){
   if(!a)return tr(p.collector&&p.collector.has_session?"Signed in":"No account connected");
   return (a.username?"@"+a.username+" · ":"")+"ID "+a.id;
 }
+let accountsView=null;
+const accountsReady=import("./views/accounts.js").then(({createAccounts})=>{
+  accountsView=createAccounts({root:$("view-accounts"),tr,getState:()=>state,getSession:()=>state.workspaceRevision+":"+state.profile,
+    json,loadProfiles,refreshStatus,toast,switchProfile,navigate,diagnose:openDiagnostics});
+  window.TgWitnessAccounts=accountsView;
+  if(state.view==='accounts')renderAccounts();
+  return accountsView;
+}).catch(error=>toast(error.message,true));
 function renderAccounts(){
   if(state.view!=='accounts')return;
   const grid=$("accounts-list"),s=state.status;if(!grid||!s)return;
@@ -904,14 +913,14 @@ function renderAccounts(){
     head.append(who,badge);card.append(head);
     if(!down){
       const meta=node("dl","account-meta");
-      const pair=(k,v)=>{meta.append(node("dt","",k),node("dd","",v));};
-      pair(tr("Observation"),s.demo?tr("Sample data"):accountPhaseLabel(p));
+      const pair=(k,v,field)=>{const item=node("div","account-value");item.dataset.field=field;item.append(node("dt","",k),node("dd","",v));meta.append(item);};
+      pair(tr("Observation"),s.demo?tr("Sample data"):accountPhaseLabel(p),"observation");
       const attention=!s.demo&&p.health?Object.keys(healthPartNames).filter(name=>needsLook(p.health[name]?.state)):[];
-      if(attention.length)pair(tr("Needs attention"),attention.map(name=>healthPartNames[name]+" — "+healthStates[healthKnown(p.health[name].state)][0]).join(" · "));
-      pair(tr("Sources"),tr("{n} active",{n:p.sources_enabled||0})+(p.sources_total?" / "+p.sources_total:""));
-      pair(tr("Journal"),trn("{n} event","{n} events",p.stats&&p.stats.total||0));
-      pair(tr("Pending media"),String(c.media_pending||0));
-      pair(tr("Last update"),c.last_update_at?fmtTime(c.last_update_at):"—");
+      if(attention.length)pair(tr("Needs attention"),attention.map(name=>healthPartNames[name]+" — "+healthStates[healthKnown(p.health[name].state)][0]).join(" · "),"attention");
+      pair(tr("Sources"),tr("{n} active",{n:p.sources_enabled||0})+(p.sources_total?" / "+p.sources_total:""),"sources");
+      pair(tr("Journal"),p.stats?trn("{n} event","{n} events",p.stats.total):tr("Unavailable"),"events");
+      pair(tr("Pending media"),String(c.media_pending||0),"pending");
+      pair(tr("Last update"),c.last_update_at?fmtTime(c.last_update_at):"—","updated");
       card.append(meta);
     } else if(p.error_type){
       card.append(node("p","access-warning",p.error_type==="DeletionPending"?
@@ -922,6 +931,11 @@ function renderAccounts(){
     const open=node("button","secondary",tr(current?"Current":"Open"));open.dataset.action='open';open.disabled=down||current;
     open.addEventListener("click",()=>busy(open,()=>switchProfile(p.id)));
     actions.append(open);
+    if(!down&&!c.has_session){
+      const connect=node("button","secondary",tr("Connect"));connect.type="button";connect.dataset.action="connect";connect.disabled=state.status.demo;
+      connect.addEventListener("click",()=>busy(connect,async()=>{if(state.profile!==p.id)await switchProfile(p.id);if(state.profile===p.id&&state.token)await navigate("connection");}));
+      actions.prepend(connect);
+    }
     if(!down){
       const toggle=node("button","quiet",tr(c.running?"Pause":"Start"));toggle.dataset.action='toggle';toggle.disabled=state.status.demo||(!c.running&&!c.has_session);
       toggle.addEventListener("click",()=>busy(toggle,async()=>{
@@ -975,7 +989,7 @@ function renderAccounts(){
       if(!old.hasAttribute('aria-busy'))old.disabled=button.disabled;return old;}));
   }
   for(const [id,card] of cards)if(!list.some(profile=>profile.id===id))card.remove();
-  window.TgWitnessFleet?.decorate();
+  window.TgWitnessFleet?.decorate();accountsView?.updateStatus();
 }
 async function switchProfile(id,options={}){
   formControls?.reset();connectionNotice?.clear();

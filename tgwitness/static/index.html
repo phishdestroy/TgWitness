@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="/components/notifications.css?v=1">
 <link rel="stylesheet" href="/views/sources.css?v=17">
 <link rel="stylesheet" href="/views/parameters.css?v=21">
+<link rel="stylesheet" href="/views/accounts.css?v=29">
 <link rel="stylesheet" href="/cloud-capture.css?v=5"><link rel="stylesheet" href="/cloud-capture-story.css?v=3">
 <script src="/theme.js?v=0.7.0"></script>
 <script src="/guide-locale.js" data-scope="panel"></script>
@@ -893,8 +894,19 @@
     <div class="fleet-import-run"><button class="primary" disabled id="fleet-import-start" type="button">Import accounts</button><span class="hint" id="fleet-import-summary" role="status"></span></div>
     <ol class="fleet-results" id="fleet-results"></ol>
   </section>
-  <div id="fleet-groups"></div>
-  <div id="accounts-list" class="accounts-grid"></div>
+  <div class="accounts-overview" id="accounts-overview" aria-label="Workspace totals"></div>
+  <div class="accounts-tools">
+    <label>Find workspace<input id="accounts-search" type="search" placeholder="Name, username or account ID"></label>
+    <label>Show<select id="accounts-filter"><option value="all">All workspaces</option><option value="attention">Needs attention</option><option value="collecting">Collecting</option><option value="offline">Offline or paused</option><option value="empty">Not connected</option></select></label>
+    <label>Sort<select id="accounts-sort"><option value="attention">Problems first</option><option value="name">Name</option><option value="events">Most events</option><option value="pending">Most pending media</option></select></label>
+  </div>
+  <div class="accounts-bulk" id="accounts-bulk"><label class="check-label"><input id="accounts-select-page" type="checkbox"> Select this page</label><span id="accounts-selected" role="status"></span><button id="accounts-pause" class="secondary" type="button">Pause selected</button><button id="accounts-resume" class="secondary" type="button">Resume selected</button><button id="accounts-clear" class="quiet" type="button">Clear selection</button></div>
+  <p id="accounts-result" class="notice" role="status" hidden></p>
+  <div class="accounts-columns" aria-hidden="true"><span></span><span>Workspace</span><span>State</span><span>Sources</span><span>Events</span><span>Queue</span><span>Actions</span></div>
+  <div id="accounts-list" class="accounts-grid accounts-overview-list"></div>
+  <p id="accounts-empty" class="hint" hidden>No matching workspaces.</p>
+  <div class="accounts-pagination"><button id="accounts-prev" class="quiet" type="button">Previous</button><span id="accounts-page" role="status"></span><button id="accounts-next" class="quiet" type="button">Next</button></div>
+  <details class="accounts-groups" id="accounts-groups"><summary>Groups and shared settings</summary><div id="fleet-groups"></div></details>
   <form class="card padded profile-create" id="account-add-form"><div class="eyebrow">Add account</div><h2>New workspace</h2><p class="muted">Create an isolated workspace, then connect a distinct Telegram account inside it. Importing the same session into two workspaces can disrupt update delivery.</p><label for="account-add-label">Workspace name</label><input id="account-add-label" maxlength="80" placeholder="e.g. Research account 2" required><label for="account-add-group">Group · optional</label><select id="account-add-group"></select><button class="secondary" type="submit">Add workspace</button><p class="hint" id="accounts-limit"></p></form>
 </section>
 
