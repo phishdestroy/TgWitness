@@ -19,7 +19,7 @@ export function parseRoute(value,{workspace="default",staticDemo=false}={}){
   const explicit=!!query.get("route")||!!oldView||parts.length>0&&parts[0]!=="index.html"||query.has("event");
   const route={view:views[parts[0]]||null,workspace:query.get("ws")||query.get("workspace")||workspace,
     chatId:null,seq:null,kind:query.get("kind")||"",source:query.get("source")||"",q:query.get("q")||"",
-    since:query.get("since")||"",until:query.get("until")||"",extra:null,section:null,explicit};
+    since:query.get("since")||"",until:query.get("until")||"",system:query.get("system")==="1",extra:null,section:null,explicit};
   if(!workspacePattern.test(route.workspace))route.error="Unknown workspace.";
   if(parts[0]==="chats"&&parts.length>1){route.chatId=integer(parts[1]);if(route.chatId===null||parts.length>2)route.error="Record is unavailable to this access.";}
   if(parts[0]==="journal"&&parts.length>1){
@@ -48,6 +48,7 @@ export function routeURL(route,{base=location.href,staticDemo=false}={}){
   query.set("ws",route.workspace||"default");
   if(current.searchParams.has("lang"))query.set("lang",current.searchParams.get("lang"));
   if(route.view==="observations")for(const key of ["kind","source","q","since","until"])if(route[key])query.set(key,route[key]);
+  if(route.view==="observations"&&route.system)query.set("system","1");
   url.search=query.toString();url.hash=route.view==="parameters"&&route.section?encodeURIComponent(route.section):"";
   return url;
 }

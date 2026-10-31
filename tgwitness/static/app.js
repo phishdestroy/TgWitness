@@ -18,7 +18,7 @@ function panelQueries(selector){
 }
 const state = {token: sessionStorage.getItem("tgwitness-token") || "",
   view:({account:"connection",sources:"sources",exports:"evidence",journal:"observations",sealed:"sealed"}[location.hash.slice(1)]||"connection"), status: null,
-  events: [], dialogs: [], filter: "", source: "", search: "", eventSince:"",eventUntil:"",cursor: null, request: 0, drawerSeq: null,
+  events: [], dialogs: [], filter: "", source: "", search: "", eventSince:"",eventUntil:"",eventSystem:false,cursor: null, request: 0, drawerSeq: null,
   profile: sessionStorage.getItem("tgwitness-profile") || "default", profiles: [], demoToken: "", monitoringDirty: false,
   captureDirty: false, workspaceRevision: 0, verification: null, opened:false, connectionSettings:false,
   chat: null, chats: [], chatMessages: [], chatNextBefore: null, chatInfo: null, chatFilter: "all", chatAuthor: null,
@@ -94,9 +94,9 @@ async function loadPanelView(view){
 let routerTask=null;
 function routeSnapshot(){return {view:state.drawerSeq!==null?"observations":state.view,workspace:state.profile,
   chatId:state.view==="chats"?state.chat:null,seq:state.drawerSeq,kind:state.filter,source:state.source,q:state.search,
-  since:state.eventSince,until:state.eventUntil,extra:state.extra||null,section:state.parameterSection||null};}
+  since:state.eventSince,until:state.eventUntil,system:state.eventSystem,extra:state.extra||null,section:state.parameterSection||null};}
 function ensureRouter(){
-  if(!routerTask)routerTask=import("./router.js?v=1").then(({createRouter})=>{
+  if(!routerTask)routerTask=import("./router.js?v=2").then(({createRouter})=>{
     window.TgWitnessRouter=createRouter({snapshot:routeSnapshot,ready:()=>!!state.me&&!$("workspace").hidden,
       error:message=>toast(tr(message),true),apply:applyRouteToPanel});return window.TgWitnessRouter;
   });
@@ -108,6 +108,7 @@ async function applyRouteToPanel(route,current){
   if(!current())return;
   closeDetail({history:false});
   state.filter=route.kind;state.source=route.source;state.search=route.q;state.eventSince=route.since;state.eventUntil=route.until;
+  state.eventSystem=!!route.system;
   $("event-search").value=state.search;fillSourceSelect("source-filter",state.source,true);
   viewQueries("observations","[data-filter]").forEach(button=>button.classList.toggle("active",button.dataset.filter===state.filter));
   navigate(route.view,{history:false,load:false});
@@ -1020,7 +1021,7 @@ async function switchProfile(id,options={}){
   if(revision!==state.workspaceRevision)return;
   state.request++;clearVerification();
   state.profile=id;state.monitoringDirty=false;state.captureDirty=false;sessionStorage.setItem("tgwitness-profile",id);
-  state.events=[];state.dialogs=[];state.cursor=null;state.filter="";state.source="";state.search="";state.eventSince="";state.eventUntil="";
+  state.events=[];state.dialogs=[];state.cursor=null;state.filter="";state.source="";state.search="";state.eventSince="";state.eventUntil="";state.eventSystem=false;
   state.chat=null;state.chats=[];state.chatMessages=[];state.chatNextBefore=null;state.chatInfo=null;state.chatFilter="all";state.chatAuthor=null;
   state.scope=null;state.scopeDirty=false;state.dossier=null;state.notifications=[];resetWitnessSetup();
   closeNotifications();renderNotifications();renderExportState(null);
@@ -1125,10 +1126,7 @@ function excerpt(e) {
   return tr("Open the source record for observation details");
 }
 let previouslyFocused;
-function renderEvents() {
-  if(state.view!=='observations')return;
-  const body=$("events-body"); body.replaceChildren();
-  for (const e of state.events) {
+function eventRow(e) {
     const label=labels[e.kind] || [e.kind,"activity","system"];
     const row=node("tr","event-row"); row.tabIndex=0; row.setAttribute("role","button"); row.setAttribute("aria-label",tr("Open {label} event {seq}",{label:label[0],seq:e.seq}));
     const cell=node("td"), summary=node("div","event-summary"), text=node("div");
@@ -1142,9 +1140,13 @@ function renderEvents() {
     const open=node("td","event-open"); open.append(icon("chevron"));
     row.append(cell,source,time,open);
     row.addEventListener("click",()=>openDetail(e));
-    row.addEventListener("keydown",event=>{ if(event.key==="Enter"||event.key===" "){event.preventDefault();openDetail(e);} });
-    body.append(row);
-  }
+    row.addEventListener("keydown",event=>{ if(event.target===row&&(event.key==="Enter"||event.key===" ")){event.preventDefault();openDetail(e);} });
+    row.dataset.seq=String(e.seq);
+    return row;
+}
+function renderEvents() {
+  if(state.view!=='observations')return;
+  window.TgWitnessJournal.renderRows(state.events,eventRow);
   show("empty-events",state.events.length===0);
   const filtered=state.filter||state.source||state.search||state.eventSince||state.eventUntil,c=state.status.collector;
   $("empty-copy").textContent=tr(filtered ? "No events match these filters. Try another source, event type, or search." :
@@ -1167,13 +1169,14 @@ async function refreshEvents(append=false) {
   if(state.search)params.set("search",state.search);
   if(state.eventSince)params.set("since",state.eventSince);
   if(state.eventUntil)params.set("until",state.eventUntil);
+  if(!state.eventSystem)params.set("hide_system","true");
   if(append && state.cursor)params.set("before",state.cursor);
   const result=await json("events?"+params,undefined,viewOptions('observations'));
   if(request!==state.request)return;
   state.events=append ? [...state.events,...result.events] : result.events;
   state.cursor=result.next_before; renderEvents();
 }
-const journalReady=import('./components/journal.js?v=1').then(({createJournal})=>{
+const journalReady=import('./components/journal.js?v=2').then(({createJournal})=>{
   window.TgWitnessJournal=createJournal({get:$,state,node,icon,tr,invalidate:()=>{state.request++;},error:message=>toast(message,true),
     changed:async()=>{state.cursor=null;closeDetail({history:false});window.TgWitnessRouter?.record({seq:null});await refreshEvents();}});
   return window.TgWitnessJournal;

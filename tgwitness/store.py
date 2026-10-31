@@ -345,7 +345,7 @@ class Store:
 
     def events(self, chat_id=None, message_id=None, kind=None, before=None, limit=100, search=None, chat_ids=None,
                *, since=None, until=None, message_min=None, message_max=None, timeout_s=None,
-               text_only=False, message_only=False):
+               text_only=False, message_only=False, hide_system=False):
         filters, params = [], []
         source, order = "events", "seq"
         if chat_ids is not None:
@@ -370,6 +370,9 @@ class Store:
                     params.append(match + "%" if match.endswith(".") else match)
             if choices:
                 filters.append("(" + " OR ".join(choices) + ")")
+        if hide_system:
+            filters.append("kind NOT IN ('collector.heartbeat','host.state') AND NOT "
+                           "(kind='media.skipped' AND COALESCE(json_extract(payload,'$.reason'),'')='media download disabled')")
         if before is not None:
             filters.append("seq<?")
             params.append(before)

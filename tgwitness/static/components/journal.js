@@ -1,9 +1,29 @@
 const TYPES=[["messages","Messages"],["message.edited","Edits"],["message.deleted","Deletions"],
   ["reaction.snapshot","Reactions"],["membership","Membership"],["media","Attachments"],["actions","Actions"],["coverage","Collection"]];
 
+export function groupEvents(events){
+  const groups=[];
+  for(let i=0;i<events.length;){
+    const event=events[i],ref=event.payload?.message_event;
+    if(event.kind==="media.saved"&&Number.isSafeInteger(ref)&&event.chat_id!==null&&event.message_id!==null){
+      let end=i;
+      while(end<events.length&&events[end].kind==="media.saved"&&events[end].payload?.message_event===ref
+        &&events[end].chat_id===event.chat_id&&events[end].message_id===event.message_id)end++;
+      const original=events[end];
+      if(original?.seq===ref&&original.chat_id===event.chat_id&&original.message_id===event.message_id
+        &&["message.new","message.snapshot","message.recovered"].includes(original.kind)){
+        groups.push({event:original,related:events.slice(i,end)});i=end+1;continue;
+      }
+    }
+    groups.push({event,related:[]});i++;
+  }
+  return groups;
+}
+
 export function createJournal(context){
   const {get: $,state,node,icon,tr}=context,root=$("journal-filters"),search=$("event-search"),nativeSource=$("source-filter");
   let searchTimer=null,sourceQuery="",sourceFocus=0;
+  const expanded=new Set();
   const selected=()=>new Set((state.filter||"").split(",").filter(Boolean));
   const button=(label,cls="quiet")=>{const b=node("button",cls,tr(label));b.type="button";return b;};
   const types=node("div","journal-type-filters");types.role="group";types.setAttribute("aria-label",tr("Event types"));
@@ -44,7 +64,12 @@ export function createJournal(context){
     state.eventSince=a?.toISOString()||"";state.eventUntil=b?.toISOString()||"";change();
   });
   const chips=node("div","journal-active-filters");chips.id="journal-active-filters";chips.setAttribute("aria-label",tr("Active filters"));
-  root.replaceChildren(types,controls,dates,custom,error,chips);
+  const systemLine=node("div","journal-system-row"),systemLabel=node("label"),system=node("input");
+  system.type="checkbox";system.id="journal-system";
+  systemLabel.append(system,node("span","",tr("Show system records")));
+  systemLine.append(systemLabel,node("small","",tr("Routine records stay in the signed journal.")));
+  system.addEventListener("change",()=>{state.eventSystem=system.checked;change();});
+  root.replaceChildren(types,controls,dates,custom,error,chips,systemLine);
 
   const picker=node("dialog","journal-source-picker");picker.setAttribute("aria-label",tr("Choose a source"));
   const heading=node("div","journal-picker-heading"),sourceSearch=node("input"),close=button("Close","quiet small");
@@ -102,6 +127,7 @@ export function createJournal(context){
   }
   function chip(text,remove){const b=button("","journal-filter-chip");b.append(node("span","",text),icon("x"));b.title=tr("Remove filter");b.addEventListener("click",()=>{remove();change();});chips.append(b);}
   function sync(){
+    system.checked=!!state.eventSystem;
     const values=selected();
     for(const b of types.children){const on=b.dataset.filter?values.has(b.dataset.filter):!values.size;b.classList.toggle("active",on);b.setAttribute("aria-pressed",String(on));}
     if(document.activeElement!==search)search.value=state.search;
@@ -121,6 +147,27 @@ export function createJournal(context){
     chips.hidden=!chips.childElementCount;
   }
   function leave(){clearTimeout(searchTimer);closeSource();}
+  function renderRows(events,makeRow){
+    const body=$("events-body"),groups=groupEvents(events),present=new Set(groups.map(group=>group.event.seq));
+    for(const key of expanded)if(!present.has(key))expanded.delete(key);
+    body.replaceChildren();
+    for(const group of groups){
+      const row=makeRow(group.event);body.append(row);
+      if(!group.related.length)continue;
+      row.classList.add("journal-bundle");
+      const toggle=button("","quiet small journal-related"),children=[];
+      toggle.append(icon("chevron"),node("span","",group.related.length===1?tr("Attachment record"):tr("{n} attachment records",{n:group.related.length})));
+      row.querySelector(".event-summary > div").append(toggle);
+      for(const event of group.related){
+        const child=makeRow(event);child.classList.add("journal-related-row");child.id="journal-related-"+event.seq;
+        children.push(child);body.append(child);
+      }
+      const syncGroup=()=>{const open=expanded.has(group.event.seq);toggle.setAttribute("aria-expanded",String(open));children.forEach(child=>child.hidden=!open);};
+      toggle.setAttribute("aria-controls",children.map(child=>child.id).join(" "));
+      toggle.addEventListener("click",event=>{event.stopPropagation();expanded.has(group.event.seq)?expanded.delete(group.event.seq):expanded.add(group.event.seq);syncGroup();});
+      syncGroup();
+    }
+  }
   window.addEventListener("tgwitness:lock",leave);
-  sync();return {sync,leave,reset:leave};
+  sync();return {sync,leave,renderRows,reset(){leave();expanded.clear();}};
 }

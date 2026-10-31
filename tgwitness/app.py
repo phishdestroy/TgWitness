@@ -805,7 +805,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     async def get_events(request: Request, chat_id: int | None = None, message_id: int | None = None,
                          kind: str | None = None, before: int | None = None,
                          search: str | None = None, limit: int = 100,
-                         since: str | None = None, until: str | None = None):
+                         since: str | None = None, until: str | None = None, hide_system: bool = False):
         if not 1 <= limit <= 500 or (search and len(search) > 200):
             raise HTTPException(422, "Limit must be 1–500; search must be at most 200 characters.")
         if kind and (len(kind) > 300 or len(kind.split(",")) > 16):
@@ -824,7 +824,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         if dates[0] is not None and dates[1] is not None and dates[0] > dates[1]:
             raise HTTPException(422, "The start must precede the end of the selected period.")
         records = app.state.store.events(chat_id, message_id, kind, before, limit, search,
-                                         chat_ids=visible_chats(request), since=dates[0], until=dates[1])
+                                         chat_ids=visible_chats(request), since=dates[0], until=dates[1], hide_system=hide_system)
         return {"events": records, "next_before": records[-1]["seq"] if len(records) == limit else None}
 
     @app.get("/api/stream", dependencies=[Depends(authenticate)])

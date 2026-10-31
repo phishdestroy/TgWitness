@@ -1,6 +1,7 @@
 """Journal filters, navigation and evidence inspection on a synthetic local archive."""
 import argparse
 from datetime import datetime, timedelta, timezone
+import hashlib
 import json
 from pathlib import Path
 import sys
@@ -40,6 +41,14 @@ def seed(server):
                 store.append("collector.heartbeat", {"running": True})
     finally:
         store_module.utcnow = clock
+    original = store.append("message.new", {"text": "Captured evidence packet. Attachment receipt follows.", "sender_id": 44}, HARBOR, 900, 44)
+    content = b"Synthetic evidence packet\n"
+    digest = hashlib.sha256(content).hexdigest()
+    directory = store.root / "media"
+    directory.mkdir(exist_ok=True)
+    (directory / digest).write_bytes(content)
+    store.append("media.saved", {"message_event": original["seq"], "media_sha256": digest,
+                                 "original_name": "packet.txt", "mime_type": "text/plain", "size": len(content)}, HARBOR, 900)
 
 
 def params(page):
@@ -116,12 +125,45 @@ def visuals(page):
     page.keyboard.press("Escape")
 
 
+def routine_records(page):
+    page.wait_for_function("()=>state.events.length>0&&state.events.every(e=>!['collector.heartbeat','host.state'].includes(e.kind)&&!(e.kind==='media.skipped'&&e.payload.reason==='media download disabled'))")
+    toggle = page.locator(".journal-related").first
+    expect(toggle).to_be_visible()
+    toggle.click()
+    expect(page.locator(".journal-related-row:visible")).to_have_count(1)
+    expect(page.locator("#detail-drawer")).to_be_hidden()
+    page.locator(".journal-related-row").click()
+    expect(page.locator("#detail-drawer")).to_be_visible()
+    expect(page.locator("#detail-title")).to_have_text("Attachment preserved")
+    page.locator("#close-detail").click()
+    page.locator("#journal-system").check()
+    page.wait_for_function("()=>state.events.some(e=>e.kind==='collector.heartbeat')")
+    assert params(page)["system"] == ["1"]
+    page.go_back()
+    expect(page.locator("#journal-system")).not_to_be_checked()
+    page.wait_for_function("()=>state.events.every(e=>e.kind!=='collector.heartbeat')")
+    result = page.evaluate("""async()=>{
+      const {groupEvents}=await import('/components/journal.js?v=1');
+      const m={seq:1,kind:'message.new',chat_id:-1001,message_id:7,payload:{text:'original'}};
+      const media={seq:2,kind:'media.saved',chat_id:-1001,message_id:7,payload:{message_event:1}};
+      const input=[media,m],before=JSON.stringify(input),group=groupEvents(input);
+      if(group.length!==1||group[0].event.seq!==1||group[0].related[0].seq!==2)throw Error('pair lost');
+      for(const other of [{...media,kind:'media.failed'},{...media,chat_id:-1002},{...media,payload:{message_event:4}}])
+        if(groupEvents([other,m]).length!==2)throw Error('unrelated or failure was grouped');
+      if(groupEvents([media,{...m,kind:'message.edited'}]).length!==2)throw Error('edit hidden');
+      if(groupEvents([media,{seq:3,kind:'source.profile',payload:{}},m]).length!==3)throw Error('nonconsecutive grouping');
+      return before===JSON.stringify(input);
+    }""")
+    assert result
+
+
 def static_demo(browser, server):
     page = browser.new_page()
     fixture = {"/api/events": {"text": json.dumps({"events": [
         {"seq": 1, "kind": "message.new", "chat_id": HARBOR, "message_id": 1, "observed_at": "2026-10-30T12:00:00Z", "payload": {"text": "invoice"}},
         {"seq": 2, "kind": "media.saved", "chat_id": HARBOR, "message_id": 1, "observed_at": "2026-10-30T13:00:00Z", "payload": {}},
         {"seq": 3, "kind": "message.edited", "chat_id": OTHER, "message_id": 2, "observed_at": "2026-10-30T14:00:00Z", "payload": {"text": "invoice"}},
+        {"seq": 4, "kind": "collector.heartbeat", "chat_id": None, "message_id": None, "observed_at": "2026-10-30T15:00:00Z", "payload": {}},
     ]})}}
     page.route("**/fixtures.json", lambda route: route.fulfill(json=fixture))
     page.route("**/demo/mock.js", lambda route: route.fulfill(path=str(Path("website/demo/mock.js")), content_type="text/javascript"))
@@ -129,6 +171,8 @@ def static_demo(browser, server):
     page.add_script_tag(url=server.url + "/demo/mock.js")
     result = page.evaluate("async()=>await fetch('/api/events?kind=messages,media&since=2026-10-30T12:30:00Z').then(r=>r.json())")
     assert [event["seq"] for event in result["events"]] == [2]
+    result = page.evaluate("async()=>await fetch('/api/events?hide_system=true&limit=1').then(r=>r.json())")
+    assert [event["seq"] for event in result["events"]] == [3]
     page.close()
 
 
@@ -149,6 +193,8 @@ def main():
             expect(page.locator('[data-filter="messages"]')).to_be_visible()
             if not args.visual_only:
                 filters(page)
+                page.set_viewport_size({"width": 1440, "height": 1000})
+                routine_records(page)
             visuals(page)
             static_demo(browser, app)
             assert not errors, errors
