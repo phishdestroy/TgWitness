@@ -2298,9 +2298,9 @@
 "{n} requests": {
 "other": "{n} คำขอ"
 },
-"{n} sign-in": "{n} การเข้าสู่ระบบ",
+"{n} sign-in": "{n} ครั้งการลงชื่อเข้าใช้",
 "{n} sign-ins": {
-"other": "{n} การเข้าสู่ระบบ"
+"other": "{n} ครั้งการลงชื่อเข้าใช้"
 },
 "{workspace}: every chat": "{workspace}: ทุกการสนทนา",
 "{workspace}: {n} chat": "{workspace}: {n} การสนทนา",
@@ -3326,5 +3326,15 @@
 "other": "พื้นที่ทำงาน {n} แห่งได้รักษาโหมด IP ของตัวเองไว้ขณะกำลังติดตาม"
 },
 "{n} workspace kept its IP mode while observing.": "พื้นที่ทำงาน {n} แห่งได้รักษาโหมด IP ของตัวเองไว้ขณะกำลังติดตาม",
-"{n} account imported.": "นำเข้าบัญชี {n} บัญชีแล้ว"
+"{n} account imported.": "นำเข้าบัญชี {n} บัญชีแล้ว",
+"Not collected by the attachment settings: {type}": "ไม่ถูกเก็บตามการตั้งค่าไฟล์แนบ: {type}",
+"No file to download": "ไม่มีไฟล์ให้ดาวน์โหลด",
+"Download failed": "การดาวน์โหลดล้มเหลว",
+"Larger than the size limit": "เกินขีดจำกัดขนาด",
+"Size unknown or above the limit": "ขนาดไม่ทราบ หรือเกินขีดจำกัด",
+"Telegram did not provide the file": "Telegram ไม่ได้จัดหาไฟล์ดังกล่าว",
+"The downloaded size differs from the observed attachment": "ขนาดไฟล์ที่ดาวน์โหลดมาอาจแตกต่างจากขนาดไฟล์แนบที่สังเกตได้",
+"The queued file differs from the signed observation": "ไฟล์ในคิวแตกต่างจากบันทึกการสังเกตที่มีลายเซ็น",
+"The saved copy of this file is damaged": "สำเนาที่บันทึกของไฟล์นี้ถูกเสียหาย",
+"Telegram account not identified yet": "บัญชี Telegram ยังไม่ได้รับการระบุ"
 }

@@ -2163,7 +2163,7 @@
 "new sign-ins refused at the limit": "Se rechazan los nuevos inicios de sesión al alcanzar el límite",
 "the oldest session ends at the limit": "La sesión más antigua finaliza al alcanzar el límite.",
 "sign-ins: {used} of {max}": "Inicios de sesión: {used} de {max}",
-"{n} sign-in": "Inicio de sesión {n}",
+"{n} sign-in": "{n} inicio de sesión",
 "{n} sign-ins": {
 "one": "{n} inicio de sesión",
 "other": "{n} inicios de sesión"
@@ -3350,5 +3350,15 @@
 "other": "{n} espacios de trabajo mantuvieron su modo IP mientras estaban en observación."
 },
 "{n} workspace kept its IP mode while observing.": "{n} espacio de trabajo mantuvo su modo IP mientras observaba.",
-"{n} account imported.": "Se ha importado {n} cuenta."
+"{n} account imported.": "Se ha importado {n} cuenta.",
+"Not collected by the attachment settings: {type}": "No recopilado según la configuración de archivos adjuntos: {type}",
+"No file to download": "No hay ningún archivo para descargar",
+"Download failed": "Error de descarga",
+"Larger than the size limit": "Supera el límite de tamaño",
+"Size unknown or above the limit": "Tamaño desconocido o superior al límite",
+"Telegram did not provide the file": "Telegram no ha facilitado el archivo",
+"The downloaded size differs from the observed attachment": "El tamaño de la descarga difiere del del archivo adjunto observado",
+"The queued file differs from the signed observation": "El archivo en cola difiere de la observación firmada",
+"The saved copy of this file is damaged": "La copia guardada de este archivo está dañada",
+"Telegram account not identified yet": "Cuenta de Telegram aún no identificada"
 }

@@ -2150,7 +2150,7 @@
 "new sign-ins refused at the limit": "Không chấp nhận đăng nhập mới khi đã đạt giới hạn",
 "the oldest session ends at the limit": "phiên làm việc lâu đời nhất sẽ kết thúc khi đạt đến giới hạn",
 "sign-ins: {used} of {max}": "số lần đăng nhập: {used} trên tổng số {max}",
-"{n} sign-in": "Đăng nhập {n}",
+"{n} sign-in": "{n} lần đăng nhập",
 "{n} sign-ins": {
 "other": "{n} lần đăng nhập"
 },
@@ -3326,5 +3326,15 @@
 "other": "{n} không gian làm việc đã giữ nguyên chế độ IP trong khi đang ở chế độ quan sát."
 },
 "{n} workspace kept its IP mode while observing.": "{n} không gian làm việc đã giữ nguyên chế độ IP trong khi đang ở chế độ quan sát.",
-"{n} account imported.": "Đã nhập {n} tài khoản."
+"{n} account imported.": "Đã nhập {n} tài khoản.",
+"Not collected by the attachment settings: {type}": "Không được thu thập do cài đặt tệp đính kèm: {type}",
+"No file to download": "Không có tệp để tải xuống",
+"Download failed": "Tải xuống không thành công",
+"Larger than the size limit": "Lớn hơn giới hạn kích thước",
+"Size unknown or above the limit": "Kích thước không xác định hoặc vượt quá giới hạn",
+"Telegram did not provide the file": "Telegram không cung cấp tệp tin",
+"The downloaded size differs from the observed attachment": "Kích thước tệp tải xuống khác với kích thước tệp đính kèm được ghi nhận",
+"The queued file differs from the signed observation": "Tệp đang chờ xử lý khác với bản ghi quan sát đã được ký xác thực",
+"The saved copy of this file is damaged": "Bản sao đã lưu của tệp này bị hỏng",
+"Telegram account not identified yet": "Tài khoản Telegram chưa được xác định"
 }

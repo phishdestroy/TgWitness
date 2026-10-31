@@ -2298,7 +2298,7 @@
 "{n} requests": {
 "other": "{n} permintaan"
 },
-"{n} sign-in": "Log masuk {n}",
+"{n} sign-in": "{n} log masuk",
 "{n} sign-ins": {
 "other": "{n} log masuk"
 },
@@ -3326,5 +3326,15 @@
 "other": "{n} ruang kerja mengekalkan mod IPnya semasa memerhati."
 },
 "{n} workspace kept its IP mode while observing.": "{n} ruang kerja mengekalkan mod IPnya semasa memerhati.",
-"{n} account imported.": "{n} akaun diimport."
+"{n} account imported.": "{n} akaun diimport.",
+"Not collected by the attachment settings: {type}": "Tidak dikumpul oleh tetapan lampiran: {type}",
+"No file to download": "Tiada fail untuk dimuat turun",
+"Download failed": "Muat turun gagal",
+"Larger than the size limit": "Lebih besar daripada had saiz",
+"Size unknown or above the limit": "Saiz tidak diketahui atau melebihi had",
+"Telegram did not provide the file": "Telegram tidak menyediakan fail",
+"The downloaded size differs from the observed attachment": "Saiz yang dimuat turun berbeza daripada lampiran yang diperhatikan",
+"The queued file differs from the signed observation": "Fail yang dibariskan berbeza daripada pemerhatian yang disahkan",
+"The saved copy of this file is damaged": "Salinan simpanan fail ini rosak",
+"Telegram account not identified yet": "Akaun Telegram belum dikenal pasti"
 }

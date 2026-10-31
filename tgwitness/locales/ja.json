@@ -2298,9 +2298,9 @@
 "{n} requests": {
 "other": "{n}件のリクエスト"
 },
-"{n} sign-in": "{n} サインイン",
+"{n} sign-in": "{n}回のログイン",
 "{n} sign-ins": {
-"other": "{n} ログイン"
+"other": "{n}回のログイン"
 },
 "{workspace}: every chat": "{workspace}：すべてのチャット",
 "{workspace}: {n} chat": "{workspace}：{n}チャット",
@@ -3326,5 +3326,15 @@
 "other": "{n}つのワークスペースは、監視中にIPモードを維持しました。"
 },
 "{n} workspace kept its IP mode while observing.": "{n}つのワークスペースは、監視中にIPモードを維持しました。",
-"{n} account imported.": "{n}つのアカウントがインポートされました。"
+"{n} account imported.": "{n}つのアカウントがインポートされました。",
+"Not collected by the attachment settings: {type}": "添付ファイル設定により収集されませんでした：{type}",
+"No file to download": "ダウンロードできるファイルはありません",
+"Download failed": "ダウンロードに失敗しました",
+"Larger than the size limit": "サイズ制限を超えています",
+"Size unknown or above the limit": "サイズ不明、または制限を超えています",
+"Telegram did not provide the file": "Telegramからファイルが提供されませんでした",
+"The downloaded size differs from the observed attachment": "ダウンロードされたサイズは、確認された添付ファイルのサイズとは異なります",
+"The queued file differs from the signed observation": "キューに入れられたファイルは、署名付き観測データとは異なります",
+"The saved copy of this file is damaged": "このファイルの保存されたコピーが破損しています",
+"Telegram account not identified yet": "Telegramアカウントがまだ特定されていません"
 }

@@ -2150,7 +2150,7 @@
 "new sign-ins refused at the limit": "达到上限后拒绝新登录请求",
 "the oldest session ends at the limit": "最旧的会话将在达到限制时结束",
 "sign-ins: {used} of {max}": "登录次数：{used}/{max}",
-"{n} sign-in": "{n} 登录",
+"{n} sign-in": "{n} 次登录",
 "{n} sign-ins": {
 "other": "{n} 次登录"
 },
@@ -3326,5 +3326,15 @@
 "other": "{n} 个工作区在观察期间保留了其 IP 模式。"
 },
 "{n} workspace kept its IP mode while observing.": "{n} 个工作区在观察期间保留了其 IP 模式。",
-"{n} account imported.": "已导入 {n} 个账户。"
+"{n} account imported.": "已导入 {n} 个账户。",
+"Not collected by the attachment settings: {type}": "因附件设置未收集：{type}",
+"No file to download": "无文件可下载",
+"Download failed": "下载失败",
+"Larger than the size limit": "超过大小限制",
+"Size unknown or above the limit": "大小未知或超过限制",
+"Telegram did not provide the file": "Telegram 未提供该文件",
+"The downloaded size differs from the observed attachment": "下载大小与观察到的附件大小不同",
+"The queued file differs from the signed observation": "队列中的文件与已签名的观察记录不同",
+"The saved copy of this file is damaged": "该文件的保存副本已损坏",
+"Telegram account not identified yet": "Telegram 账户尚未识别"
 }

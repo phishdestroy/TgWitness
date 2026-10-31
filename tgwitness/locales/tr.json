@@ -3350,5 +3350,15 @@
 "other": "{n} çalışma alanı, gözlem yaparken IP modunu korumuştur."
 },
 "{n} workspace kept its IP mode while observing.": "{n} çalışma alanı, gözlem sırasında IP modunu korumuştur.",
-"{n} account imported.": "{n} hesap içe aktarıldı."
+"{n} account imported.": "{n} hesap içe aktarıldı.",
+"Not collected by the attachment settings: {type}": "Ek ayarları nedeniyle toplanmadı: {type}",
+"No file to download": "İndirilecek dosya yok",
+"Download failed": "İndirme başarısız",
+"Larger than the size limit": "Boyut sınırından büyük",
+"Size unknown or above the limit": "Boyut bilinmiyor veya sınırın üzerinde",
+"Telegram did not provide the file": "Telegram dosyayı sağlamadı",
+"The downloaded size differs from the observed attachment": "İndirilen boyut, gözlemlenen ek boyutundan farklıdır",
+"The queued file differs from the signed observation": "Kuyrukta bekleyen dosya, imzalı gözlemden farklıdır",
+"The saved copy of this file is damaged": "Bu dosyanın kaydedilen kopyası bozuk",
+"Telegram account not identified yet": "Telegram hesabı henüz tanımlanmadı"
 }

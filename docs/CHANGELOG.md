@@ -37,6 +37,10 @@
   preferred) and the list download and check intervals to the dashboard. Panel strings of
   groups, import and the dashboard are translated with their screen as context and with
   plural forms; context-dependent report labels are corrected in 23 languages.
+- MTProxy traffic is deciphered through OpenSSL instead of Telethon's pure-Python AES
+  (about 0.3 MB/s on a small server): a busy MTProxy route no longer holds a whole CPU
+  core and delays every panel answer by seconds. The chats list shows that it is loading,
+  and journal rows explain skipped and failed attachments in the panel language.
 - Added scoped, read-only MCP connections and local archive search with optional
   AI source review and separate analytical reports.
 - Added local OCR/transcription for saved attachments and signed outgoing webhooks

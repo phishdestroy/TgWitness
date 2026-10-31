@@ -2150,9 +2150,9 @@
 "new sign-ins refused at the limit": "pendaftaran baru ditolak karena telah mencapai batas",
 "the oldest session ends at the limit": "sesi tertua akan berakhir pada batas waktu",
 "sign-ins: {used} of {max}": "masuk: {used} dari {max}",
-"{n} sign-in": "{n} masuk",
+"{n} sign-in": "{n} kali masuk",
 "{n} sign-ins": {
-"other": "{n} masuk"
+"other": "{n} kali masuk"
 },
 "valid until {time}": "berlaku hingga {time}",
 "addresses: {list}": "alamat: {list}",
@@ -3326,5 +3326,15 @@
 "other": "{n} ruang kerja mempertahankan mode IP-nya saat mengamati."
 },
 "{n} workspace kept its IP mode while observing.": "{n} ruang kerja mempertahankan mode IP-nya saat mengamati.",
-"{n} account imported.": "{n} akun telah diimpor."
+"{n} account imported.": "{n} akun telah diimpor.",
+"Not collected by the attachment settings: {type}": "Tidak dikumpulkan karena pengaturan lampiran: {type}",
+"No file to download": "Tidak ada file yang dapat diunduh",
+"Download failed": "Unduhan gagal",
+"Larger than the size limit": "Lebih besar dari batas ukuran",
+"Size unknown or above the limit": "Ukuran tidak diketahui atau melebihi batas",
+"Telegram did not provide the file": "Telegram tidak menyediakan berkas tersebut",
+"The downloaded size differs from the observed attachment": "Ukuran unduhan berbeda dengan ukuran lampiran yang teramati",
+"The queued file differs from the signed observation": "File yang berada dalam antrian berbeda dari catatan pengamatan yang ditandatangani",
+"The saved copy of this file is damaged": "Salinan file ini yang disimpan rusak",
+"Telegram account not identified yet": "Akun Telegram belum teridentifikasi"
 }

@@ -2326,7 +2326,7 @@
 "other": "{n} בקשות",
 "two": "{n} בקשות"
 },
-"{n} sign-in": "כניסה {n}",
+"{n} sign-in": "{n} כניסה",
 "{n} sign-ins": {
 "one": "{n} כניסה",
 "other": "{n} כניסות",
@@ -3374,5 +3374,15 @@
 "two": "{n} סביבות עבודה שמרו על מצב ה-IP שלהן בזמן הצפייה."
 },
 "{n} workspace kept its IP mode while observing.": "סביבת עבודה {n} שמרה על מצב ה-IP שלה בזמן המעקב.",
-"{n} account imported.": "יובא חשבון {n}."
+"{n} account imported.": "יובא חשבון {n}.",
+"Not collected by the attachment settings: {type}": "לא נאסף על פי הגדרות הקובץ המצורף: {type}",
+"No file to download": "אין קובץ להורדה",
+"Download failed": "ההורדה נכשלה",
+"Larger than the size limit": "גדול מהמגבלה על הגודל",
+"Size unknown or above the limit": "גודל לא ידוע או מעל המגבלה",
+"Telegram did not provide the file": "Telegram לא סיפקה את הקובץ",
+"The downloaded size differs from the observed attachment": "גודל הקובץ שהורד שונה מגודל הקובץ הנצפה",
+"The queued file differs from the signed observation": "הקובץ בתור שונה מהתצפית החתומה",
+"The saved copy of this file is damaged": "העותק השמור של קובץ זה פגום",
+"Telegram account not identified yet": "חשבון טלגרם טרם זוהה"
 }

@@ -2298,7 +2298,7 @@
 "{n} requests": {
 "other": "{n} 項請求"
 },
-"{n} sign-in": "{n} 登入",
+"{n} sign-in": "{n} 次登入",
 "{n} sign-ins": {
 "other": "{n} 次登入"
 },
@@ -3326,5 +3326,15 @@
 "other": "{n} 個工作區在觀察期間保留了其 IP 模式。"
 },
 "{n} workspace kept its IP mode while observing.": "{n} 個工作區在觀察期間保留了其 IP 模式。",
-"{n} account imported.": "已匯入 {n} 個帳戶。"
+"{n} account imported.": "已匯入 {n} 個帳戶。",
+"Not collected by the attachment settings: {type}": "因附件設定未收集：{type}",
+"No file to download": "無檔案可供下載",
+"Download failed": "下載失敗",
+"Larger than the size limit": "超過大小限制",
+"Size unknown or above the limit": "大小未知或超過限制",
+"Telegram did not provide the file": "Telegram 未提供該檔案",
+"The downloaded size differs from the observed attachment": "下載大小與觀察到的附件大小不同",
+"The queued file differs from the signed observation": "排程中的檔案與已簽署的觀察記錄有所不同",
+"The saved copy of this file is damaged": "此檔案的儲存副本已損毀",
+"Telegram account not identified yet": "Telegram 帳號尚未識別"
 }

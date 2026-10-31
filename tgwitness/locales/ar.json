@@ -2215,11 +2215,11 @@
 "new sign-ins refused at the limit": "تم رفض عمليات تسجيل الدخول الجديدة عند بلوغ الحد الأقصى",
 "the oldest session ends at the limit": "تنتهي أقدم جلسة عند بلوغ الحد الأقصى",
 "sign-ins: {used} of {max}": "عمليات تسجيل الدخول: {used} من {max}",
-"{n} sign-in": "تسجيل الدخول {n}",
+"{n} sign-in": "{n} عملية تسجيل دخول",
 "{n} sign-ins": {
-"one": "{n} تسجيل دخول",
+"one": "{n} عملية تسجيل دخول",
 "few": "{n} عمليات تسجيل دخول",
-"two": "{n} عمليات تسجيل دخول",
+"two": "{n} عملية تسجيل دخول",
 "many": "{n} عملية تسجيل دخول",
 "other": "{n} عملية تسجيل دخول",
 "zero": "{n} عملية تسجيل دخول"
@@ -3446,5 +3446,15 @@
 "zero": "{n} مساحة عمل احتفظت بوضع IP الخاص بها أثناء المراقبة."
 },
 "{n} workspace kept its IP mode while observing.": "احتفظت مساحة العمل {n} بوضع IP الخاص بها أثناء المراقبة.",
-"{n} account imported.": "تم استيراد حساب {n}."
+"{n} account imported.": "تم استيراد حساب {n}.",
+"Not collected by the attachment settings: {type}": "لم يتم جمعها وفقًا لإعدادات المرفقات: {type}",
+"No file to download": "لا يوجد ملف للتنزيل",
+"Download failed": "فشل التنزيل",
+"Larger than the size limit": "أكبر من الحد الأقصى للحجم",
+"Size unknown or above the limit": "الحجم غير معروف أو يتجاوز الحد الأقصى",
+"Telegram did not provide the file": "لم يوفر Telegram الملف",
+"The downloaded size differs from the observed attachment": "يختلف حجم الملف الذي تم تنزيله عن حجم المرفق المرصود",
+"The queued file differs from the signed observation": "يختلف الملف الموجود في قائمة الانتظار عن الملاحظة الموقعة",
+"The saved copy of this file is damaged": "النسخة المحفوظة من هذا الملف تالفة",
+"Telegram account not identified yet": "لم يتم تحديد حساب Telegram بعد"
 }

@@ -2163,7 +2163,7 @@
 "new sign-ins refused at the limit": "ورودهای جدید در صورت رسیدن به حد مجاز رد می‌شوند",
 "the oldest session ends at the limit": "پیشین جلسه در حد مجاز پایان می‌یابد",
 "sign-ins: {used} of {max}": "ورودی‌ها: {used} از {max}",
-"{n} sign-in": "ورود {n}",
+"{n} sign-in": "{n} ورود",
 "{n} sign-ins": {
 "one": "{n} ورود",
 "other": "{n} ورود"
@@ -3350,5 +3350,15 @@
 "other": "{n} فضای کاری هنگام مشاهده، حالت IP خود را حفظ کردند."
 },
 "{n} workspace kept its IP mode while observing.": "{n} فضای کاری هنگام مشاهده، حالت IP خود را حفظ کرد.",
-"{n} account imported.": "{n} حساب وارد شد."
+"{n} account imported.": "{n} حساب وارد شد.",
+"Not collected by the attachment settings: {type}": "توسط تنظیمات ضمیمه جمع‌آوری نشده است: {type}",
+"No file to download": "فایل برای دانلود وجود ندارد",
+"Download failed": "دانلود ناموفق بود",
+"Larger than the size limit": "بزرگ‌تر از حد مجاز اندازه",
+"Size unknown or above the limit": "اندازه نامشخص یا بالاتر از حد مجاز",
+"Telegram did not provide the file": "تلگرام فایل را ارائه نکرد",
+"The downloaded size differs from the observed attachment": "اندازه دانلود شده با ضمیمه مشاهده‌شده متفاوت است",
+"The queued file differs from the signed observation": "فایل صف‌شده با مشاهده امضا‌شده متفاوت است",
+"The saved copy of this file is damaged": "نسخهٔ ذخیره شدهٔ این فایل خراب است",
+"Telegram account not identified yet": "حساب تلگرام هنوز شناسایی نشده است"
 }
