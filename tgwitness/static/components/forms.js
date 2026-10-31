@@ -9,18 +9,20 @@ export function createFormControls({forms, roots, tr, getSession, toast}) {
   const visible=form=>form.isConnected&&!form.closest('[hidden]')&&form.getClientRects().length;
   function update(entry) {
     const count=entry.baseline?different(snapshot(entry.form),entry.baseline):0;
-    entry.bar.hidden=!count;entry.form.dataset.dirty=String(!!count);
+    entry.bar.hidden=false;entry.form.dataset.dirty=String(!!count);
     entry.label.textContent=tr('Unsaved changes: {n}',{n:count});
-    entry.button.disabled=!count;
+    entry.label.hidden=entry.button.hidden=!count;entry.button.disabled=!count;
   }
   for(const {form,setDirty} of forms) {
     const bar=document.createElement('div'),label=document.createElement('span'),button=document.createElement('button');
     bar.className='form-draft-bar';bar.hidden=true;label.setAttribute('role','status');
     button.type='button';button.className='quiet';button.textContent=tr('Discard changes');
-    const save=document.createElement('button');save.type='button';save.className='primary';save.textContent=tr('Save changes');
-    save.addEventListener('click',()=>{const submit=form.querySelector('button[type=submit]:not(:disabled),button:not([type]):not(:disabled)');
-      if(submit&&!submit.closest('fieldset:disabled'))form.requestSubmit(submit);},{signal});
-    bar.append(label,save,button);form.append(bar);
+    // Move the existing action, keeping its label, listeners and disabled fieldset.
+    // Some actions (Check now) also make sense without a settings change.
+    const save=form.querySelector('button[type=submit]')||document.createElement('button');
+    const owner=save.closest('fieldset')||form;
+    if(!save.textContent){save.type='submit';save.className='primary';save.textContent=tr('Save changes');}
+    bar.append(label,save,button);owner.append(bar);
     const entry={form,bar,label,button,setDirty,baseline:null};records.set(form.id,entry);
     form.addEventListener('focusin',()=>{if(!entry.baseline)entry.baseline=snapshot(form);},{signal});
     for(const type of ['input','change'])form.addEventListener(type,()=>update(entry),{signal});

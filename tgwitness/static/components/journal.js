@@ -128,7 +128,11 @@ export function createJournal(context){
   systemLabel.append(system,node("span","",tr("Show system records")));
   systemLine.append(systemLabel,node("small","",tr("Routine records stay in the signed journal.")));
   system.addEventListener("change",()=>{state.eventSystem=system.checked;change();});
-  root.replaceChildren(types,controls,dates,custom,error,chips,systemLine);
+  const more=node('details','journal-more-filters'),moreTitle=node('summary','',tr('Filters'));
+  const compact=matchMedia('(max-width: 767px)');more.open=!compact.matches;
+  compact.addEventListener('change',()=>{more.open=!compact.matches;});
+  more.append(moreTitle,dates,custom,systemLine);
+  root.replaceChildren(types,controls,more,error,chips);
   const older=$("load-more"),footer=older.closest(".table-footer"),shown=$("shown-count"),range=node("span","journal-window-range");
   const pager=node("div","journal-pager"),newer=button("Newer records","quiet"),latest=button("Latest","quiet");
   newer.id="journal-newer";latest.id="journal-latest";older.textContent=tr("Older records");older.hidden=false;
