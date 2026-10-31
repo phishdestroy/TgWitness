@@ -181,7 +181,11 @@ class Witness:
             "X-TgWitness-Challenge": challenge},
             timeout=self.timeout, limit=64 * 1024, private=True)  # its operator chose the collector, often next door
         answer = json.loads(data)
-        if answer.get("capture") and answer["capture"].get("statement", {}).get("challenge") != challenge:
+        capture = answer.get("capture") if isinstance(answer, dict) else None
+        statement = capture.get("statement") if isinstance(capture, dict) else None
+        if not isinstance(statement, dict):
+            raise InvalidAnswer("collector did not provide a signed freshness proof; update the collector")
+        if statement.get("challenge") != challenge:
             raise InvalidAnswer("capture answer did not echo this check's challenge")
         return answer
 
@@ -205,7 +209,9 @@ class Witness:
             Ed25519PublicKey.from_public_bytes(base64.b64decode(statement["public_key"], validate=True)).verify(
                 base64.b64decode(value["signature"], validate=True), canonical(statement))
             count, head = statement["event_count"], statement["head_hash"]
-            if type(count) is not int or count < 0 or not isinstance(head, str) or len(head) != 64:
+            if (type(count) is not int or count < 0 or not isinstance(head, str)
+                    or re.fullmatch(r"[0-9a-f]{64}", head) is None
+                    or (count == 0) != (head == "0" * 64)):
                 raise InvalidAnswer("malformed record count or head hash")
         except InvalidAnswer:
             raise
