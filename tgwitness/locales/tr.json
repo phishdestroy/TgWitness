@@ -3385,5 +3385,7 @@
 "one": "{n} bağlantı hariç tutuldu: Sahte TLS bağlantıları (gizli anahtarı \"ee\" ile başlayanlar), özel adresler ve hatalı bağlantılar desteklenmemektedir.",
 "other": "Dışarıda bırakılan {n} bağlantı: Sahte TLS bağlantıları (gizli anahtarı \"ee\" ile başlayanlar), özel adresler ve hatalı bağlantılar desteklenmez."
 },
-"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} bağlantı hariç tutuldu: Sahte TLS bağlantıları (gizli anahtarı \"ee\" ile başlayanlar), özel adresler ve hatalı bağlantılar desteklenmemektedir."
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} bağlantı hariç tutuldu: Sahte TLS bağlantıları (gizli anahtarı \"ee\" ile başlayanlar), özel adresler ve hatalı bağlantılar desteklenmemektedir.",
+"No collection while process was offline.": "İşlem çevrimdışıyken toplama yapılmadı.",
+"the source was removed before this file was downloaded": "Bu dosya indirilmeden önce kaynak kaldırıldı"
 }

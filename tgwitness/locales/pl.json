@@ -3439,5 +3439,7 @@
 "few": "Pominięto {n} linki: linki typu „Fake TLS” (klucz tajny zaczynający się od „ee”), adresy prywatne oraz uszkodzone linki nie są obsługiwane.",
 "other": "{n} Pominięte linki: linki typu „Fake TLS” (klucz tajny zaczynający się od „ee”), adresy prywatne oraz uszkodzone linki nie są obsługiwane."
 },
-"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "Pominięto {n} link: linki typu „Fake TLS” (klucz tajny zaczynający się od „ee”), adresy prywatne oraz uszkodzone linki nie są obsługiwane."
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "Pominięto {n} link: linki typu „Fake TLS” (klucz tajny zaczynający się od „ee”), adresy prywatne oraz uszkodzone linki nie są obsługiwane.",
+"No collection while process was offline.": "Brak gromadzenia danych, gdy proces był w trybie offline.",
+"the source was removed before this file was downloaded": "Źródło zostało usunięte przed pobraniem tego pliku"
 }

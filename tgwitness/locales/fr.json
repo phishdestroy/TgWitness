@@ -3385,5 +3385,7 @@
 "one": "{n} lien ignoré : les liens « Fake TLS » (clé secrète commençant par « ee »), les adresses privées et les liens erronés ne sont pas pris en charge.",
 "other": "{n} liens ignorés : les liens « Fake TLS » (clé secrète commençant par « ee »), les adresses privées et les liens erronés ne sont pas pris en charge."
 },
-"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} lien ignoré : les liens « Fake TLS » (clé secrète commençant par « ee »), les adresses privées et les liens erronés ne sont pas pris en charge."
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} lien ignoré : les liens « Fake TLS » (clé secrète commençant par « ee »), les adresses privées et les liens erronés ne sont pas pris en charge.",
+"No collection while process was offline.": "Aucune collecte n’a eu lieu pendant que le processus était hors ligne.",
+"the source was removed before this file was downloaded": "La source a été supprimée avant le téléchargement de ce fichier"
 }

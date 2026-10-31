@@ -3358,5 +3358,7 @@
 "{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
 "other": "{n} pautan diabaikan: pautan Fake TLS (rahsia bermula dengan ee), alamat peribadi dan pautan rosak tidak disokong."
 },
-"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} pautan diabaikan: pautan Fake TLS (rahsia bermula dengan ee), alamat peribadi dan pautan rosak tidak disokong."
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} pautan diabaikan: pautan Fake TLS (rahsia bermula dengan ee), alamat peribadi dan pautan rosak tidak disokong.",
+"No collection while process was offline.": "Tiada pengumpulan semasa proses tidak dalam talian.",
+"the source was removed before this file was downloaded": "sumber telah dialihkan sebelum fail ini dimuat turun"
 }

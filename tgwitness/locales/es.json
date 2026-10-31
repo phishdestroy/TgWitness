@@ -3385,5 +3385,7 @@
 "one": "Se ha omitido {n} enlace: no se admiten enlaces TLS falsos (clave que comienza por «ee»), direcciones privadas ni enlaces erróneos.",
 "other": "Se han omitido {n} enlaces: no se admiten los enlaces «Fake TLS» (clave que comienza por «ee»), las direcciones privadas ni los enlaces erróneos."
 },
-"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "Se ha omitido {n} enlace: no se admiten enlaces TLS falsos (clave que comienza por «ee»), direcciones privadas ni enlaces erróneos."
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "Se ha omitido {n} enlace: no se admiten enlaces TLS falsos (clave que comienza por «ee»), direcciones privadas ni enlaces erróneos.",
+"No collection while process was offline.": "No se ha realizado ninguna recopilación mientras el proceso estaba desconectado.",
+"the source was removed before this file was downloaded": "La fuente se eliminó antes de que se descargara este archivo"
 }

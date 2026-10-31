@@ -3385,5 +3385,7 @@
 "one": "{n} Link wurde ausgelassen: Fake-TLS-Links (Geheimcode beginnt mit „ee“), private Adressen und fehlerhafte Links werden nicht unterstützt.",
 "other": "{n} Links wurden ausgelassen: Fake-TLS-Links (Geheimcode beginnt mit „ee“), private Adressen und fehlerhafte Links werden nicht unterstützt."
 },
-"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} Link wurde ausgelassen: Fake-TLS-Links (Geheimcode beginnt mit „ee“), private Adressen und fehlerhafte Links werden nicht unterstützt."
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} Link wurde ausgelassen: Fake-TLS-Links (Geheimcode beginnt mit „ee“), private Adressen und fehlerhafte Links werden nicht unterstützt.",
+"No collection while process was offline.": "Keine Erfassung, während der Prozess offline war.",
+"the source was removed before this file was downloaded": "Die Quelle wurde entfernt, bevor diese Datei heruntergeladen wurde"
 }

@@ -3385,5 +3385,7 @@
 "one": "{n} لنک خارج کیا گیا: Fake TLS لنکس (ee سے شروع ہونے والا سیکرٹ)، نجی پتے اور ٹوٹے ہوئے لنکس سپورٹ نہیں کیے جاتے۔",
 "other": "{n} لنکس خارج کیے گئے: جعلی TLS لنکس (خفیہ جو ee سے شروع ہوتے ہیں)، نجی پتے اور ٹوٹے ہوئے لنکس سپورٹ نہیں کیے جاتے۔"
 },
-"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} لنک خارج کیا گیا: Fake TLS لنکس (ee سے شروع ہونے والا سیکرٹ)، نجی پتے اور ٹوٹے ہوئے لنکس سپورٹ نہیں کیے جاتے۔"
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} لنک خارج کیا گیا: Fake TLS لنکس (ee سے شروع ہونے والا سیکرٹ)، نجی پتے اور ٹوٹے ہوئے لنکس سپورٹ نہیں کیے جاتے۔",
+"No collection while process was offline.": "جب عمل آف لائن تھا تو کوئی جمع نہیں ہوا۔",
+"the source was removed before this file was downloaded": "اس فائل کو ڈاؤن لوڈ کرنے سے پہلے ماخذ ہٹا دیا گیا تھا"
 }

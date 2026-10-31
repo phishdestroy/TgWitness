@@ -3385,5 +3385,7 @@
 "one": "{n} ta havola e'tibordan qoldirildi: Fake TLS havolalari (sir \"ee\" bilan boshlanadigan), xususiy manzillar va buzilgan havolalar qo'llab-quvvatlanmaydi.",
 "other": "{n} ta havola chiqarib tashlandi: Fake TLS havolalari (sir ee harfi bilan boshlanadi), shaxsiy manzillar va buzilgan havolalar qo'llab-quvvatlanmaydi."
 },
-"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} ta havola e'tibordan qoldirildi: Fake TLS havolalari (sir \"ee\" bilan boshlanadigan), xususiy manzillar va buzilgan havolalar qo'llab-quvvatlanmaydi."
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} ta havola e'tibordan qoldirildi: Fake TLS havolalari (sir \"ee\" bilan boshlanadigan), xususiy manzillar va buzilgan havolalar qo'llab-quvvatlanmaydi.",
+"No collection while process was offline.": "Jarayon oflayn bo'lgan paytda yig'ilishi bo'lmagan.",
+"the source was removed before this file was downloaded": "manba bu fayl yuklab olinishidan oldin olib tashlandi"
 }

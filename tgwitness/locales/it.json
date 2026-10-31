@@ -3385,5 +3385,7 @@
 "one": "{n} collegamento escluso: i collegamenti Fake TLS (codice segreto che inizia con «ee»), gli indirizzi privati e i collegamenti non validi non sono supportati.",
 "other": "{n} collegamenti esclusi: i collegamenti Fake TLS (codice segreto che inizia con «ee»), gli indirizzi privati e i collegamenti non validi non sono supportati."
 },
-"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} collegamento escluso: i collegamenti Fake TLS (codice segreto che inizia con «ee»), gli indirizzi privati e i collegamenti non validi non sono supportati."
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} collegamento escluso: i collegamenti Fake TLS (codice segreto che inizia con «ee»), gli indirizzi privati e i collegamenti non validi non sono supportati.",
+"No collection while process was offline.": "Nessuna raccolta mentre il processo era offline.",
+"the source was removed before this file was downloaded": "La fonte è stata rimossa prima che questo file venisse scaricato"
 }

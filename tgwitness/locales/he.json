@@ -3412,5 +3412,7 @@
 "other": "{n} קישורים שהושמטו: קישורי Fake TLS (סוד שמתחיל ב-ee), כתובות פרטיות וקישורים פגומים אינם נתמכים.",
 "two": "{n} קישורים שלא נכללו: קישורי Fake TLS (סוד שמתחיל ב-ee), כתובות פרטיות וקישורים פגומים אינם נתמכים."
 },
-"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "קישור אחד {n} שהושמט: קישורי Fake TLS (סוד המתחיל ב-ee), כתובות פרטיות וקישורים פגומים אינם נתמכים."
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "קישור אחד {n} שהושמט: קישורי Fake TLS (סוד המתחיל ב-ee), כתובות פרטיות וקישורים פגומים אינם נתמכים.",
+"No collection while process was offline.": "לא בוצע איסוף בזמן שהתהליך היה במצב לא מקוון.",
+"the source was removed before this file was downloaded": "המקור הוסר לפני שהקובץ הורד"
 }

@@ -3358,5 +3358,7 @@
 "{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
 "other": "{n} 个被排除的链接：不支持伪 TLS 链接（密钥以 ee 开头）、私有地址和无效链接。"
 },
-"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} 个被排除的链接：不支持伪 TLS 链接（密钥以 ee 开头）、私有地址和无效链接。"
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} 个被排除的链接：不支持伪 TLS 链接（密钥以 ee 开头）、私有地址和无效链接。",
+"No collection while process was offline.": "进程离线期间未进行采集。",
+"the source was removed before this file was downloaded": "该文件下载前，源文件已被删除"
 }

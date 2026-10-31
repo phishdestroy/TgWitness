@@ -4,6 +4,7 @@ import json
 import logging
 import os
 import sqlite3
+from types import SimpleNamespace
 from collections import defaultdict
 
 import pytest
@@ -49,7 +50,7 @@ def test_mtproxy_stream_is_ciphered_by_openssl_byte_for_byte_like_telethon(monke
 
     # The MTProxy header and the first frames, with the same random start as Telethon's own cipher.
     start, frame = b"\x01" + os.urandom(63), os.urandom(1000)
-    monkeypatch.setattr(tcpmtproxy.os, "urandom", lambda n: start)
+    monkeypatch.setattr(tcpmtproxy, "os", SimpleNamespace(urandom=lambda n: start))  # only this module's randomness
     codec = ConnectionTcpMTProxyRandomizedIntermediate.packet_codec
     secret = bytes.fromhex("dd" + "a1" * 16)
     header, encryptor, decryptor = tcpmtproxy.MTProxyIO.init_header(secret, 2, codec)

@@ -548,7 +548,8 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 "fingerprint": fingerprint(vault.public_key), "limitations": LIMITS,
                 "protection": {"vault_key_mode": vault.key_mode, "secrets_encrypted": True,
                                "journal_encrypted_by_app": False, "media_encrypted_by_app": False},
-                "run_id": app.state.run_receipt["run_id"], "chats_limited": allowed is not None}
+                "run_id": app.state.run_receipt["run_id"], "chats_limited": allowed is not None,
+                "assurance": bool(app.state.assurance)}
 
     if allow_profiles:
         @app.get("/api/profiles", dependencies=[Depends(authenticate)])
@@ -1588,7 +1589,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             raise HTTPException(404)
         path = await app.state.collector.avatar(peer_id)
         if not path:
-            raise HTTPException(404)
+            return Response(status_code=204)  # no photo (yet): not an error the browser should log
         return FileResponse(path, media_type="image/jpeg", headers={"Cache-Control": "private, max-age=3600"})
 
     @app.post("/api/chat-export/start", dependencies=[Depends(authenticate)])

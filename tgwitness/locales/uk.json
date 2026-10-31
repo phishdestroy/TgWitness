@@ -3439,5 +3439,7 @@
 "few": "{n} посилання пропущено: посилання Fake TLS (секрет, що починається з «ee»), приватні адреси та пошкоджені посилання не підтримуються.",
 "other": "{n} Посилання, що не враховуються: посилання Fake TLS (секрет, що починається з «ee»), приватні адреси та пошкоджені посилання не підтримуються."
 },
-"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} посилання пропущено: посилання Fake TLS (секрет, що починається з «ee»), приватні адреси та пошкоджені посилання не підтримуються."
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} посилання пропущено: посилання Fake TLS (секрет, що починається з «ee»), приватні адреси та пошкоджені посилання не підтримуються.",
+"No collection while process was offline.": "Збір даних не відбувався, оскільки процес був у режимі офлайн.",
+"the source was removed before this file was downloaded": "джерело було видалено до завантаження цього файлу"
 }
