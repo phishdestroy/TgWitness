@@ -26,6 +26,9 @@ DYNAMIC_SCRIPT_KEYS = (
     "All", "Priority", "Paused", "Unconfirmed access", "Enable selected", "Pause selected",
     "Mark priority", "Add selected", "Add all matching", "SHA-256", "Message ID", "Sender ID",
     "Link to this record",
+    "Messages", "Edits", "Deletions", "Reactions", "Membership", "Attachments", "Actions", "Collection",
+    "All events", "All sources", "Any time", "1 hour", "24 hours", "7 days", "Custom", "Custom period",
+    "From (UTC)", "Until (UTC)", "Apply dates", "Close", "Clear filters",
     "Install MCP support in this Python environment and restart TgWitness.",
     "MCP support is installed. Restart TgWitness to activate the endpoint.",
 )
@@ -67,7 +70,7 @@ def script_keys(source):
 
 def all_script_keys():
     keys = list(DYNAMIC_SCRIPT_KEYS)
-    for name in ("app.js", "i18n.js", "guide.js", "integrations.js", "analysis.js", "media-analysis.js", "webhooks.js", "proxies.js", "fleet.js", "review.js", "live.js"):
+    for name in ("app.js", "i18n.js", "guide.js", "integrations.js", "analysis.js", "media-analysis.js", "webhooks.js", "proxies.js", "fleet.js", "review.js", "live.js", "components/journal.js"):
         keys += script_keys((STATIC / name).read_text(encoding="utf-8"))
     return list(dict.fromkeys(keys))
 

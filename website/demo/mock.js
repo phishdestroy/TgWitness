@@ -13,6 +13,8 @@
 
   const CATEGORIES = {
     membership: ["membership."],
+    messages: ["message.new", "message.snapshot", "message.recovered"],
+    media: ["media."], actions: ["interaction."],
     coverage: ["coverage.", "connection.", "collector.", "process.", "observation.", "snapshot.", "target.",
       "capture.", "monitoring.", "source.", "scope.", "telegram.", "clock.", "media.failed", "media.retry",
       "media.recovered", "deletion.unscoped"],
@@ -43,13 +45,15 @@
       if (!/\/api\/events(\?|$)/.test(key)) continue;
       for (const event of JSON.parse(answer.text).events) known.set(event.seq, event);
     }
-    const kind = params.get("kind"), search = (params.get("search") || "").toLowerCase();
+    const kinds = (params.get("kind") || "").split(",").map(kind => kind.trim()).filter(Boolean), search = (params.get("search") || "").toLowerCase();
     const chat = params.get("chat_id"), message = params.get("message_id"), before = params.get("before");
+    const since = params.get("since"), until = params.get("until");
     const limit = Math.min(500, Math.max(1, Number(params.get("limit")) || 100));
     const matches = [...known.values()].filter(e =>
       (chat === null || String(e.chat_id) === chat) && (message === null || String(e.message_id) === message) &&
-      (!kind || (CATEGORIES[kind] ? CATEGORIES[kind].some(p => e.kind.startsWith(p)) : e.kind === kind)) &&
+      (!kinds.length || kinds.some(kind => (CATEGORIES[kind] || [kind]).some(p => p.endsWith(".") ? e.kind.startsWith(p) : e.kind === p))) &&
       (before === null || e.seq < Number(before)) &&
+      (!since || Date.parse(e.observed_at) >= Date.parse(since)) && (!until || Date.parse(e.observed_at) <= Date.parse(until)) &&
       (!search || JSON.stringify(e.payload).toLowerCase().includes(search)))
       .sort((a, b) => b.seq - a.seq).slice(0, limit);
     return {events: matches, next_before: matches.length === limit ? matches[matches.length - 1].seq : null};

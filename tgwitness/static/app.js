@@ -51,6 +51,7 @@ const viewReady=Promise.all([
         if(name==='parameters')parametersView?.leave();
         if(name==='evidence')exportsView?.leave();
         if(name==='system-log')systemLogView?.leave();
+        if(name==='observations')window.TgWitnessJournal?.leave();
       },
       resetSession(){top=0;scrolls=[];viewContexts.delete(name);resetViewContent(name);},
     });
@@ -69,6 +70,7 @@ function resetViewContent(view){
   if(view==='system-log')systemLogView?.resetSession();
   if(view==='access'){accessView?.resetSession();accessFormVersion++;adminLimitsVersion++;accessFormReady=false;adminLimitsReady=false;adminLimitsDirty=false;accessLoadSerial++;
     state.access=null;state.accessEdit=null;state.accessChats={};state.consoleAfter=0;show('access-new',false);}
+  if(view==='observations')window.TgWitnessJournal?.reset();
   const clear={observations:['events-body'],chats:['chats-list','chat-feed','chat-people','chat-about'],accounts:['accounts-list','fleet-groups'],
     access:['access-list','access-sessions-list','access-token'],'system-log':['access-console'],
     connection:['profiles-list'],witness:['witness-list','github-result','cloud-health','alerts-saved','evidence-status','replica-status'],
@@ -515,7 +517,7 @@ function syncLive(){
 }
 function navigate(view,options={}) {
   if(!viewAllowed(view))view="chats";
-  if(view!==state.view)clearTimeout(searchTimer);
+  if(view!==state.view)window.TgWitnessJournal?.leave();
   if(view!==state.view&&state.drawerSeq!==null)closeDetail({history:false});
   if(view!=="connection")window.TgWitnessProxies?.stop?.();
   state.view=view;
@@ -770,6 +772,7 @@ function renderViewStatus(view){
     $("sources-footnote").textContent=tr(s.demo ? "Synthetic sources" : c.running ? "Observation enabled" : "Observation paused");
     $("event-total").textContent=s.stats.total.toLocaleString();
     fillSourceSelect("source-filter",state.source,true);
+    window.TgWitnessJournal?.sync();
   }else if(view==='chats'){
     renderComposer();renderChatStatus();renderMulti();
   }else if(view==='evidence'){
@@ -1156,6 +1159,8 @@ function renderEvents() {
 }
 async function refreshEvents(append=false) {
   if(state.view!=='observations')return;
+  await journalReady;
+  window.TgWitnessJournal.sync();
   const request=++state.request,params=new URLSearchParams({limit:"60"});
   if(state.filter)params.set("kind",state.filter);
   if(state.source)params.set("chat_id",state.source);
@@ -1168,15 +1173,11 @@ async function refreshEvents(append=false) {
   state.events=append ? [...state.events,...result.events] : result.events;
   state.cursor=result.next_before; renderEvents();
 }
-viewQueries("observations","[data-filter]").forEach(b=>b.addEventListener("click",()=>busy(b,async()=>{
-  state.filter=b.dataset.filter;
-  window.TgWitnessRouter?.record({seq:null});
-  viewQueries("observations","[data-filter]").forEach(n=>n.classList.toggle("active",n===b));
-  await refreshEvents();
-})));
-$("source-filter").addEventListener("change",()=>{state.source=$("source-filter").value;window.TgWitnessRouter?.record({seq:null});refreshEvents().catch(e=>toast(e.message,true));});
-let searchTimer;
-$("event-search").addEventListener("input",()=>{state.search=$("event-search").value;window.TgWitnessRouter?.record({seq:null},{replace:true});clearTimeout(searchTimer);searchTimer=setTimeout(()=>refreshEvents().catch(e=>toast(e.message,true)),250);});
+const journalReady=import('./components/journal.js?v=1').then(({createJournal})=>{
+  window.TgWitnessJournal=createJournal({get:$,state,node,icon,tr,invalidate:()=>{state.request++;},error:message=>toast(message,true),
+    changed:async()=>{state.cursor=null;closeDetail({history:false});window.TgWitnessRouter?.record({seq:null});await refreshEvents();}});
+  return window.TgWitnessJournal;
+});
 $("load-more").addEventListener("click",e=>busy(e.currentTarget,()=>refreshEvents(true)));
 $("refresh").addEventListener("click",e=>busy(e.currentTarget,async()=>{await refreshStatus();await refreshEvents();}));
 $("collector-toggle").addEventListener("click",e=>busy(e.currentTarget,async()=>{

@@ -808,6 +808,8 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                          since: str | None = None, until: str | None = None):
         if not 1 <= limit <= 500 or (search and len(search) > 200):
             raise HTTPException(422, "Limit must be 1–500; search must be at most 200 characters.")
+        if kind and (len(kind) > 300 or len(kind.split(",")) > 16):
+            raise HTTPException(422, "Choose at most 16 event types.")
         if chat_id is not None:
             require_chat(request, chat_id)
         dates = []

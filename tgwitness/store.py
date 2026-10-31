@@ -355,16 +355,21 @@ class Store:
             if value is not None:
                 filters.append(key + "=?")
                 params.append(value)
-        if kind in ("membership", "coverage"):
-            prefixes = ("membership.",) if kind == "membership" else (
-                "coverage.", "connection.", "collector.", "process.", "observation.",
-                "snapshot.", "target.", "capture.", "monitoring.", "source.", "scope.", "telegram.", "clock.", "media.failed",
-                "media.retry", "media.recovered", "deletion.unscoped")
-            filters.append("(" + " OR ".join("kind LIKE ?" for _ in prefixes) + ")")
-            params.extend(p + "%" for p in prefixes)
-        elif kind:
-            filters.append("kind=?")
-            params.append(kind)
+        if kind:
+            groups = {"membership": ("membership.",), "media": ("media.",), "actions": ("interaction.",),
+                      "messages": ("message.new", "message.snapshot", "message.recovered"),
+                      "coverage": ("coverage.", "connection.", "collector.", "process.", "observation.",
+                                   "snapshot.", "target.", "capture.", "monitoring.", "source.", "scope.",
+                                   "telegram.", "clock.", "media.failed", "media.retry", "media.recovered",
+                                   "deletion.unscoped")}
+            kinds = list(dict.fromkeys(value.strip() for value in kind.split(",") if value.strip()))
+            choices = []
+            for value in kinds:
+                for match in groups.get(value, (value,)):
+                    choices.append("kind LIKE ?" if match.endswith(".") else "kind=?")
+                    params.append(match + "%" if match.endswith(".") else match)
+            if choices:
+                filters.append("(" + " OR ".join(choices) + ")")
         if before is not None:
             filters.append("seq<?")
             params.append(before)
