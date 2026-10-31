@@ -47,6 +47,36 @@ def main():
             expect(page.locator("html")).to_have_attribute("lang", "ru")
             expect(page.locator("#instructions")).to_have_attribute("href",
                 "https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/SEALED-ACTIONS.md")
+            # The explanation stays illustrative and never changes the real capture state.
+            expect(page.locator("[data-capture-story]")).to_have_attribute("data-running", "false")
+            for scene in range(5):
+                page.locator(f'[data-story-frame="{scene}"]').click()
+                expect(page.locator(".story-visual")).to_have_attribute("data-scene", str(scene))
+                for width in (1280, 390, 320):
+                    page.set_viewport_size({"width":width,"height":1000})
+                    check_layout(page)
+            for scenario, valid in (("message", "false"), ("collector", "false"), ("original", "true")):
+                page.locator(f'[data-story-scenario="{scenario}"]').click()
+                expect(page.locator(".story-verdict")).to_have_attribute("data-valid", valid)
+            expect(page.locator('[data-capture-action="next"]')).to_be_disabled()
+            page.locator("#capture-language").select_option("en")
+            expect(page.locator("#story-lab-title")).to_have_text("What if someone edits the result?")
+            page.locator("#capture-language").select_option("ru")
+            page.locator('[data-story-frame="0"]').click()
+            page.set_viewport_size({"width":1280,"height":1000})
+            page.locator(".story-player").scroll_into_view_if_needed()
+            page.clock.install()
+            page.locator("[data-story-play]").click()
+            expect(page.locator("[data-capture-story]")).to_have_attribute("data-running", "true")
+            page.clock.run_for(7600)
+            expect(page.locator(".story-visual")).to_have_attribute("data-scene", "1")
+            page.locator("[data-story-play]").click()
+            page.clock.run_for(8000)
+            expect(page.locator(".story-visual")).to_have_attribute("data-scene", "1")
+            page.clock.resume()
+            page.locator("[data-story-start]").click()
+            expect(page.locator("#capture-setup")).to_be_focused()
+            page.locator('[data-story-frame="0"]').click()
             for theme in ("light", "dark"):
                 page.locator(f'[data-theme-choice="{theme}"]').click()
                 expect(page.locator("html")).to_have_attribute("data-theme", theme)

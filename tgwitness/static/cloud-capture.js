@@ -44,6 +44,7 @@
       <h1>${t("Capture a chat through GitHub", "Выгрузка чата через GitHub")}</h1>
       <p class="page-description">${t("Collect a Telegram chat on a temporary runner. Receive an encrypted archive and GitHub provenance.", "Выгрузите чат Telegram на временной машине. Получите зашифрованный архив и аттестацию GitHub.")}</p></div>
       <label class="capture-language"><span>${t("Language", "Язык")}</span><select id="capture-language"><option value="en" ${lang === "en" ? "selected" : ""}>English</option><option value="ru" ${lang === "ru" ? "selected" : ""}>Русский</option></select></label></div>
+      <div data-capture-story></div><div class="capture-setup-heading" id="capture-setup" tabindex="-1"><h2>${t("Ready to capture your chat?", "Готовы выгрузить свой чат?")}</h2><p>${t("Keep this tab open. The four steps below guide your actual capture.", "Оставьте эту вкладку открытой. Ниже — четыре шага для вашей выгрузки.")}</p></div>
       <div class="capture-layout"><aside class="capture-rail"><ol class="capture-steps" aria-label="${t("Capture steps", "Шаги выгрузки")}">${titles.map((title, i) => `<li><button type="button" data-capture-step="${i+1}" ${state.busy || (i > 0 && !ready()) ? "disabled" : ""} ${state.step === i+1 ? 'aria-current="step"' : ""}><span class="capture-number">${i+1}</span><span><strong>${title}</strong><small>${subtitles[i]}</small></span></button></li>`).join("")}</ol>
       <div class="capture-private">${icon("lock")}<p>${t("Your private key and decrypted files stay in this browser. Save the key file before continuing.", "Закрытый ключ и расшифрованные файлы остаются в этом браузере. Сохраните файл ключа перед продолжением.")}</p></div>
       <a id="instructions" class="text-link" href="https://github.com/phishdestroy/TgWitness/blob/main/docs/${lang === "ru" ? "ru/" : ""}SEALED-ACTIONS.md" target="_blank" rel="noopener noreferrer">${t("Full instructions", "Подробная инструкция")}</a></aside>
@@ -55,6 +56,7 @@
       ${state.key ? button("reset", t("Start a new capture", "Начать новую выгрузку"), "quiet capture-reset") : ""}</div></div>`;
     root.querySelector("#recipient")?.setAttribute("aria-label", t("Public encryption key", "Открытый ключ шифрования"));
     const recipient = root.querySelector("#recipient"); if (recipient) recipient.value = state.key?.recipient || "";
+    window.TgWitnessCaptureStory?.mount(root.querySelector("[data-capture-story]"), lang);
     if (focus) root.querySelector("#capture-step-title").focus({preventScroll:true});
   }
   function keyStep() {
@@ -187,6 +189,6 @@
       return ()=>{save(value,"delivery.zip","application/zip");state.delivered=true;};
     });
   });
-  addEventListener("tgwitness:lock",()=>{epoch++;state=initial();render();});
+  addEventListener("tgwitness:lock",()=>{epoch++;state=initial();window.TgWitnessCaptureStory?.reset();render();});
   render();
 })();
