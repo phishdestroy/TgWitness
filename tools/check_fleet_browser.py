@@ -13,7 +13,7 @@ from check_fleet_async_browser import main as check_async_groups
 
 def account_files(name, api_id):
     return [
-        {"name": name + ".txt", "mimeType": "text/plain", "buffer": saved_session().encode()},
+        {"name": name + ".txt", "mimeType": "text/plain", "buffer": saved_session(bytes([api_id % 256])).encode()},
         {"name": name + ".json", "mimeType": "application/json",
          "buffer": json.dumps({"api_id": api_id, "api_hash": "a" * 32}).encode()},
     ]
