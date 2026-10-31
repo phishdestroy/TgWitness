@@ -88,7 +88,7 @@ Choose an entry below for the exact workflow, commands and limits. Each guide ha
 
 - [Documentation hub](https://phishdestroy.github.io/TgWitness/docs/): Browse the illustrated handbook and its language editions.
 
-- [Source code](https://github.com/phishdestroy/TgWitness): Implementation, tests and issue templates.
+- [Source code](https://github.com/phishdestroy/TgWitness): Implementation, documentation and issue templates.
 
 - [Releases](https://github.com/phishdestroy/TgWitness/releases): Packages and their release notes.
 
