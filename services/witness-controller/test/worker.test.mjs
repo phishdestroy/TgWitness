@@ -56,8 +56,8 @@ test("real Worker: role separation, concurrent replay, durable restart, immutabl
   await mf.dispose(); mf = new Miniflare(options);
   const after = await call(base + "/status", r.reader_token);
   assert.equal(after.body.observers[0].head, before.body.observers[0].head, "Receipt and observation heads survive a real runtime restart");
-  // Leave the other observers completely silent: the alarm must record their gap
-  // without a status request triggering advance(). Inspect persisted SQL directly.
+
+
   const until = challenge.body.statement.deadline_ms + 900;
   await sleep(Math.max(0, until - Date.now()));
   const sql = await mf.unsafeGetDurableObjectStorage("tgwitness-controller-test", "WitnessRun", { name: r.run_id });
@@ -76,7 +76,7 @@ test("real Worker: role separation, concurrent replay, durable restart, immutabl
   const closed = await call(base + "/status", r.reader_token);
   assert.equal(closed.body.closed, true); assert.equal(closed.body.continuity_broken, true);
 
-  // Exercise real HTTP routing/persistence for critical-action intents too.
+
   const second = (await call("/v1/runs", admin, f.body)).body, secondBase = `/v1/runs/${second.run_id}`;
   for (const observer of f.observers) {
     const route = `${secondBase}/observers/${observer.id}`, observerToken = second.observer_tokens[observer.id];

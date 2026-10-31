@@ -65,7 +65,7 @@ export default {
     }
     const segments = url.pathname.split("/").filter(Boolean);
     if (segments[0] !== "v1" || segments[1] !== "runs" || !UUID.test(segments[2] ?? "")) return json({ error: "not_found" }, 404);
-    // Registration is only available through the server-generated run identifier.
+
     if (segments.length === 3) return json({ error: "not_found" }, 404);
     return env.RUNS.get(env.RUNS.idFromName(segments[2])).fetch(request);
   },
@@ -96,8 +96,8 @@ export class WitnessRun extends DurableObject {
   }
   async commit(engine) {
     const next = engine.nextAlarm();
-    // Schedule BEFORE committing so a crash cannot leave a committed active run
-    // without a wake-up. A premature wake-up re-evaluates persisted deadlines.
+
+
     if (next !== null) await this.ctx.storage.setAlarm(Math.max(Date.now() + 1, next));
     this.ctx.storage.transactionSync(() => {
       for (const receipt of engine.receipts) {
@@ -108,8 +108,8 @@ export class WitnessRun extends DurableObject {
     if (next === null) await this.ctx.storage.deleteAlarm();
   }
   async fetch(request) {
-    // Consume bounded bodies outside the state lock: a slow upload must not
-    // block alarms or other observers. Authorization is still checked below.
+
+
     let payload = null;
     if (request.method === "POST" && request.body) {
       try { payload = await body(request); }
@@ -119,7 +119,7 @@ export class WitnessRun extends DurableObject {
       try { return await this.handle(request, payload); }
       catch (error) {
         if (error instanceof SyntaxError || error instanceof TypeError || /protocol|JSON|Body|observer|Register|base64|Observers/.test(error.message)) return json({ error: "invalid_request" }, 400);
-        // Never expose request data, credentials or exception internals.
+
         return json({ error: "controller_unavailable" }, 503);
       }
     });
@@ -147,8 +147,8 @@ export class WitnessRun extends DurableObject {
     } else if (observer && ((parts[5] === "challenge" && request.method === "GET") || (["answer", "intent", "permit"].includes(parts[5]) && request.method === "POST"))) {
       if (!await authorized(request, observer.token_hash)) return json({ error: "unauthorized" }, 401);
     } else return json({ error: "not_found" }, 404);
-    // Record receipt time after the entire bounded request body arrives. A slow
-    // body must not buy extra time by opening its HTTP request before the deadline.
+
+
     const engine = new RunEngine(state, await this.key(), this.env.WITNESS_PUBLIC_KEY);
     await engine.advance();
     let result;

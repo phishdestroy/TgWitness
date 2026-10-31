@@ -1,5 +1,5 @@
-// Only integers, strings, booleans, null, arrays and plain objects are accepted.
-// ASCII protocol field names sort lexically; no floating point values cross the wire.
+
+
 export const ZERO = "0".repeat(64);
 export const MAX_BATCH = 128;
 const encoder = new TextEncoder();
@@ -62,8 +62,8 @@ export async function observation(runId, observerId, seq, previous, payloadDiges
   return { seq, previous, payload_sha256: payloadDigest, hash: await sha(statement) };
 }
 
-// The caller supplies a separately retained checkpoint and a pinned controller key.
-// This checks the controller's receipt history, not Telegram source authenticity.
+
+
 export async function verifyBundle(bundle, checkpoint, publicKey) {
   if (bundle?.format !== "tgwitness-controller-export-v1" || !Array.isArray(bundle.receipts) || !bundle.receipts.length) throw new Error("Invalid receipt bundle");
   if (!checkpoint || !await verify(publicKey, checkpoint.statement, checkpoint.signature) || await sha(checkpoint.statement) !== checkpoint.hash) throw new Error("Invalid trusted checkpoint");

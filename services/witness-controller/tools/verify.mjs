@@ -8,7 +8,7 @@ try {
   }
   const report = await verifyBundle(JSON.parse(await readFile(file, "utf8")), JSON.parse(await readFile(checkpointFile, "utf8")), key);
   console.log(JSON.stringify(report, null, 2));
-  // 0 = verified receipt history, with all observers represented and no recorded
-  // interruptions through the checkpoint. It does NOT verify Telegram content.
+
+
   process.exitCode = report.continuity_broken || report.observers_responded !== 3 ? 2 : 0;
 } catch (e) { console.error(`Verification failed: ${e.message}`); process.exitCode = 1; }

@@ -1,4 +1,4 @@
-// Synthetic observer for tests/demo only. Never connects to Telegram.
+
 import { observation, privateKey, sha, sign, verify } from "../src/protocol.mjs";
 
 export async function syntheticAnswer(envelope, identity, pinnedControllerKey) {

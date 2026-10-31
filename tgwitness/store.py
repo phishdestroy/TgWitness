@@ -15,9 +15,9 @@ from . import continuity
 ZERO = "0" * 64
 EVENT_FIELDS = ("seq", "observed_at", "source_at", "kind", "chat_id", "message_id",
                 "actor_id", "payload", "previous_hash")
-# Journal records that make up the readable chat view.
+
 TEXT_KINDS = ("message.new", "message.snapshot", "message.edited", "message.recovered")
-# A deletion notice from Telegram and "not returned at a later recheck" are different facts.
+
 GONE_KINDS = ("message.deleted", "message.missing_on_recheck")
 CHAT_KINDS = TEXT_KINDS + GONE_KINDS + ("media.saved",)
 
@@ -75,19 +75,19 @@ class Store:
             CREATE TRIGGER IF NOT EXISTS immutable_delete BEFORE DELETE ON events
               BEGIN SELECT RAISE(ABORT, 'Journal is append-only'); END;
         """)
-        # Sources added before 0.7 were all chosen by hand and rechecked at the priority interval.
+
         columns = {r[1] for r in self.db.execute("PRAGMA table_info(targets)")}
         if "origin" not in columns:
             self.db.execute("ALTER TABLE targets ADD COLUMN origin TEXT NOT NULL DEFAULT 'manual'")
         if "priority" not in columns:
             self.db.execute("ALTER TABLE targets ADD COLUMN priority INTEGER NOT NULL DEFAULT 1")
-        # Private chats and ordinary groups share one account-wide message ID sequence; deletion
-        # notices for them carry only IDs, so the chat is found by a saved message ID.
+
+
         self.db.execute("CREATE INDEX IF NOT EXISTS event_message_id ON events(message_id)")
         self.db.commit()
         self.signer = None
         self.targets_revision = 0
-        self.listeners = []  # called with each new record (the administrator's console)
+        self.listeners = []
         with self.transaction():
             continuity.initialize(self.db)
 
@@ -363,7 +363,7 @@ class Store:
 
     def events(self, chat_id=None, message_id=None, kind=None, before=None, limit=100, search=None, chat_ids=None):
         filters, params = [], []
-        if chat_ids is not None:  # an access limited to chosen chats
+        if chat_ids is not None:
             filters.append("chat_id IN (" + ",".join("?" * len(chat_ids)) + ")")
             params.extend(sorted(chat_ids))
         for key, value in (("chat_id", chat_id), ("message_id", message_id)):

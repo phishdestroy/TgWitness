@@ -15,8 +15,8 @@ export function validateRegistration(body) {
   }
 }
 
-// Pure transition engine. The host MUST serialize transitions and atomically persist
-// the returned state, new receipts and next alarm. The storage adapter does this.
+
+
 export class RunEngine {
   constructor(state, signingKey, publicKey, now = Date.now(), random = randomToken) {
     this.state = structuredClone(state); this.key = signingKey; this.publicKey = publicKey;
@@ -40,7 +40,7 @@ export class RunEngine {
   }
   jitter(min, max) {
     const p = this.state.policy;
-    // Uniform bounded jitter; never an unbounded random delay.
+
     min ??= p.min_interval_ms; max ??= p.max_interval_ms;
     const range = max - min + 1;
     const cap = Math.floor(0x100000000 / range) * range;
@@ -75,7 +75,7 @@ export class RunEngine {
     if (s.pending_action && this.now >= s.pending_action.expires_at_ms) await this.cancelAction("approval_window_expired");
     for (const o of s.observers) {
       if (!o.quarantined && !o.challenge && this.now >= o.next_due) {
-        // A controller outage between challenges must not disappear on restart.
+
         if (this.now >= o.next_due + s.policy.response_timeout_ms) {
           await this.incident(o, "challenge_dispatch_overdue", { due_at_ms: o.next_due, detected_at_ms: this.now });
           o.status = "silent";
@@ -130,7 +130,7 @@ export class RunEngine {
       (s.action_ids ??= []).push(a.request_id);
       s.pending_action = { statement: a, ready_at_ms: ready, expires_at_ms: ready + s.policy.max_interval_ms + s.policy.response_timeout_ms + 5000,
         receipt_index: receipt.statement.index };
-      // Do not reveal the random release time before it passes.
+
       return { status: 202, body: { receipt, state: "waiting", poll_after_ms: 500 } };
     }
     const pending = s.pending_action;
@@ -138,8 +138,8 @@ export class RunEngine {
     if (this.now < pending.ready_at_ms || !s.observers.every((v) => v.last_response_ms >= pending.ready_at_ms && v.last_receipt.statement.index > pending.receipt_index)) {
       return { status: 202, body: { state: "waiting_for_hold_and_fresh_responses", poll_after_ms: 500 } };
     }
-    // An executor must persist request_id as consumed before applying the exact
-    // parameter digest. Issuance is one-time; this receipt is not execution proof.
+
+
     const receipt = await this.emit("critical_action_permitted", { request_id: a.request_id, observer_id: observerId,
       action: pending.statement.action, parameters_sha256: pending.statement.parameters_sha256,
       valid_until_ms: this.now + s.policy.permit_lifetime_ms, hold_finished_at_ms: pending.ready_at_ms,
