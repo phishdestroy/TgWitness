@@ -108,7 +108,7 @@ async function applyRouteToPanel(route,current){
   else if(view==="observations"){await refreshEvents();if(current()&&route.seq)await openRecord(route.seq,{history:false});}
   else if(view==="sources"){await sourcesReady;sourcesView.enter();renderTargets();await loadScope();}
   else if(view==="parameters"){
-    await loadParameters();if(current()){state.parameterSection=route.section;if(route.section)$("parameters-group-"+route.section)?.scrollIntoView({block:"start"});}
+    await loadParameters();if(current()){state.parameterSection=route.section;if(route.section)parametersView?.selectSection(route.section,{record:false});}
   }else if(view==="accounts")await loadProfiles();
   else if(view==="connection"){await loadProfiles();if(current()&&!state.status.demo)await loadPolicy();}
   else if(view==="access")await loadAccess();
