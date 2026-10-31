@@ -1185,10 +1185,19 @@ async function refreshEvents(direction=false) {
   renderEvents();
   if(direction)window.TgWitnessRouter?.record({seq:null,before:state.eventBefore});
 }
-const journalReady=import('./components/journal.js?v=3').then(({createJournal})=>{
+const journalReady=import('./components/journal.js?v=4').then(({createJournal})=>{
   window.TgWitnessJournal=createJournal({get:$,state,node,icon,tr,invalidate:()=>{state.request++;},error:message=>toast(message,true),
     changed:async()=>{state.cursor=state.eventBefore=state.eventAfter=state.eventMatched=null;closeDetail({history:false});window.TgWitnessRouter?.record({seq:null});await refreshEvents();},
-    page:direction=>refreshEvents(direction)});
+    page:direction=>{closeDetail({history:false});return refreshEvents(direction);},openDetail,showBackdrop:visible=>show("drawer-backdrop",visible),
+    openChat:async event=>{
+      const revision=state.workspaceRevision;closeDetail({history:false});await navigate("chats",{load:false});
+      if(revision!==state.workspaceRevision||state.view!=="chats")return;
+      await refreshChats();if(revision!==state.workspaceRevision||state.view!=="chats")return;
+      if(await openChat(event.chat_id)){
+        const message=$("msg-"+event.message_id);
+        if(message){message.scrollIntoView({block:"center"});replay(message,"flash",1500);}
+      }
+    }});
   return window.TgWitnessJournal;
 });
 $("refresh").addEventListener("click",e=>busy(e.currentTarget,async()=>{await refreshStatus();await refreshEvents();}));
@@ -1200,6 +1209,8 @@ function detailBlock(label,text,cls="") {
   const n=node("div","detail-block "+cls); n.append(node("small","",label),node("div","message-text",text||tr("(No text in this version)"))); return n;
 }
 async function openDetail(e,options={}) {
+  const detailView=state.view,detailRevision=state.workspaceRevision;await journalReady;
+  if(state.view!==detailView||state.workspaceRevision!==detailRevision||$("workspace").hidden)return;
   if($("detail-drawer").hidden)previouslyFocused=document.activeElement;
   state.drawerSeq=e.seq;
   if(options.history!==false)window.TgWitnessRouter?.record({view:"observations",seq:e.seq});
@@ -1233,10 +1244,11 @@ async function openDetail(e,options={}) {
       recognize.addEventListener("click",()=>window.TgWitnessMedia?.select({workspace:state.profile,chat_id:e.chat_id,event_seq:e.seq,digest:e.payload.media_sha256}));content.append(recognize);
     }
   }
-  const raw=node("details","detail-block");raw.append(node("summary","",tr("Original signed record")),node("pre","",JSON.stringify(e,null,2)));content.append(raw);
+  content.append(window.TgWitnessJournal.signedRecord(e));
   content.append(node("p","detail-hash","SHA-256 · "+e.hash));
   const lineage=node("div","lineage");content.append(lineage);
   show("drawer-backdrop",true);show("detail-drawer",true);$("close-detail").focus();
+  window.TgWitnessJournal.openDetail(e);
   if(e.chat_id!==null && e.message_id!==null) {
     try {
       const result=await json("events?"+new URLSearchParams({chat_id:e.chat_id,message_id:e.message_id,limit:"500"}));
@@ -1260,18 +1272,18 @@ async function openDetail(e,options={}) {
     } catch(error) {if(state.drawerSeq===e.seq)lineage.append(node("p","hint",error.message));}
   }
 }
-function closeDetail(options={}){const opened=state.drawerSeq!==null;state.drawerSeq=null;leave("detail-drawer");leave("drawer-backdrop");$("detail-content").replaceChildren();if(opened&&previouslyFocused?.isConnected)previouslyFocused.focus();previouslyFocused=null;if(opened&&options.history!==false)window.TgWitnessRouter?.record({seq:null},{replace:true});}
+function closeDetail(options={}){const opened=state.drawerSeq!==null;state.drawerSeq=null;window.TgWitnessJournal?.closeDetail();leave("detail-drawer");leave("drawer-backdrop");$("detail-content").replaceChildren();if(opened&&previouslyFocused?.isConnected)previouslyFocused.focus();previouslyFocused=null;if(opened&&options.history!==false)window.TgWitnessRouter?.record({seq:null},{replace:true});}
 $("close-detail").addEventListener("click",closeDetail);$("drawer-backdrop").addEventListener("click",closeDetail);
 document.addEventListener("keydown",e=>{
   if($("detail-drawer").hidden)return;
   if(document.querySelector("dialog[open]"))return;
   if(e.key==="Escape")closeDetail();
-  if(!e.ctrlKey&&!e.metaKey&&!e.altKey&&!e.shiftKey&&!e.isComposing&&!e.target.closest("input,textarea,select,[contenteditable='true'],audio,video")
+  if(!e.defaultPrevented&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&!e.shiftKey&&!e.isComposing&&!e.target.closest("input,textarea,select,[contenteditable='true'],audio,video")
     &&!window.getSelection()?.toString()&&["ArrowUp","ArrowDown","j","k"].includes(e.key)){
     const index=state.events.findIndex(item=>item.seq===state.drawerSeq),step=["ArrowDown","j"].includes(e.key)?1:-1;
     if(index>=0&&state.events[index+step]){e.preventDefault();openDetail(state.events[index+step]);}
   }
-  if(e.key==="Tab"){
+  if(e.key==="Tab"&&$("detail-drawer").getAttribute("aria-modal")==="true"){
     const nodes=[...$("detail-drawer").querySelectorAll("button,summary,a,audio,video,[tabindex='0']")].filter(n=>!n.disabled&&n.getClientRects().length);
     const first=nodes[0],last=nodes.at(-1);
     if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
@@ -3020,7 +3032,7 @@ async function openDossier(personId){
   const person=statement.people.find(p=>p.id===personId);
   if(!person)throw new Error(tr("No profile for this person: they have no saved message in this chat."));
   const nameOf=id=>{const other=statement.people.find(p=>p.id===id);return other?.names.at(-1)?.value||tr("User {id}",{id});};
-  previouslyFocused=document.activeElement;state.drawerSeq="dossier";
+  previouslyFocused=document.activeElement;state.drawerSeq="dossier";window.TgWitnessJournal?.closeDetail();
   const content=$("detail-content");content.replaceChildren();
   const head=node("div","dossier-head"),h=node("h2","",nameOf(person.id));h.id="detail-title";
   head.append(avatarNode(person.id,nameOf(person.id),"lg"),h);content.append(head);

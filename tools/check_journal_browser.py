@@ -222,10 +222,94 @@ def static_demo(browser, server):
     page.close()
 
 
+def inspector(page):
+    page.set_viewport_size({"width": 1440, "height": 1000})
+    page.evaluate("document.querySelector('.journal .table-wrap').scrollTop=0")
+    page.locator("#events-body .event-row:has(.event-icon.edit) .event-title").first.click()
+    drawer = page.locator("#detail-drawer")
+    expect(drawer).to_be_visible()
+    expect(drawer).to_have_attribute("aria-modal", "false")
+    expect(page.locator("#drawer-backdrop")).to_be_hidden()
+    first = page.evaluate("state.drawerSeq")
+    assert page.locator("#journal-previous-record").is_disabled() == (page.evaluate("state.events.findIndex(e=>e.seq===state.drawerSeq)") == 0)
+    page.locator("#journal-next-record").click()
+    page.wait_for_function("seq=>state.drawerSeq!==seq", arg=first)
+    assert page.evaluate("Number(document.querySelector('.event-row.journal-selected').dataset.seq)===state.drawerSeq")
+    page.locator("#journal-previous-record").click()
+    page.wait_for_function("seq=>state.drawerSeq===seq", arg=first)
+    assert page.evaluate("Number(document.querySelector('.event-row.journal-selected').dataset.seq)===state.drawerSeq")
+    expect(drawer.locator(".review-diff")).to_be_visible()
+    geometry = page.evaluate("""()=>({drawer:document.querySelector('#detail-drawer').getBoundingClientRect().toJSON(),
+      main:document.querySelector('#workspace > main').getBoundingClientRect().toJSON()})""")
+    assert geometry["drawer"]["width"] == 480 and geometry["main"]["right"] <= geometry["drawer"]["left"]
+    rtl = page.evaluate("""()=>{document.documentElement.dir='rtl';return {
+      rail:document.querySelector('.sidebar').getBoundingClientRect().right,
+      drawer:document.querySelector('#detail-drawer').getBoundingClientRect().left};}""")
+    assert rtl["rail"] <= rtl["drawer"]
+    page.evaluate("document.documentElement.dir='ltr'")
+    page.locator("#events-body .event-row:has(.event-icon.delete) .event-title").first.click()
+    page.wait_for_function("seq=>state.drawerSeq!==seq", arg=first)
+    page.locator(f'#events-body .event-row[data-seq="{first}"]').click()
+    page.wait_for_function("seq=>state.drawerSeq===seq", arg=first)
+    page.evaluate("""()=>[...document.querySelector('#detail-drawer').querySelectorAll('button,summary,a,audio,video,[tabindex="0"]')]
+      .filter(n=>!n.disabled&&n.getClientRects().length).at(-1).focus()""")
+    page.keyboard.press("Tab")
+    assert not page.evaluate("document.querySelector('#detail-drawer').contains(document.activeElement)")
+    page.get_by_role("button", name="SHA-256", exact=True).click()
+    assert page.evaluate("navigator.clipboard.readText()") == page.evaluate("state.events.find(e=>e.seq===state.drawerSeq).hash")
+    page.get_by_role("button", name="Link to this record", exact=True).click()
+    assert f"/journal/event/{first}" in page.evaluate("navigator.clipboard.readText()")
+    page.locator(".journal-json summary").click()
+    expect(page.locator(".journal-json .json-key").first).to_be_visible()
+    assert page.locator(".journal-json code").inner_text() == page.evaluate("JSON.stringify(state.events.find(e=>e.seq===state.drawerSeq),null,2)")
+    # Token markup contains text only, and even a long signed record has a bounded DOM preview.
+    safe = page.evaluate("""async()=>{
+      const {signedRecordPreview}=await import('/components/journal.js?v=4');
+      const value={text:'<img src=x onerror="window.__journal_xss=1">',long:'x'.repeat(200000)};
+      const preview=signedRecordPreview(value,{node,tr});document.body.append(preview);preview.open=true;
+      await new Promise(resolve=>setTimeout(resolve,50));
+      const result={size:preview.querySelector('code').textContent.length,images:preview.querySelectorAll('img').length,
+        hint:preview.querySelector('.hint')?.textContent,ran:window.__journal_xss||false};preview.remove();return result;
+    }""")
+    assert safe["size"] == 120000 and safe["images"] == 0 and not safe["ran"] and "complete record" in safe["hint"]
+    for width, height in ((1440, 1000), (390, 844)):
+        page.set_viewport_size({"width": width, "height": height})
+        for theme in ("light", "dark"):
+            page.evaluate("theme=>document.documentElement.dataset.theme=theme", theme)
+            expect(drawer).to_have_attribute("aria-modal", "false" if width >= 1280 else "true")
+            page.evaluate("document.querySelector('#detail-drawer').scrollTop=0")
+            check_layout(page)
+            box = drawer.bounding_box()
+            assert box and box["x"] >= 0 and box["x"] + box["width"] <= width
+            page.screenshot(path=str(SHOTS / f"inspector-{width}-{theme}.png"), animations="disabled")
+        if width == 390:
+            expect(page.locator("#drawer-backdrop")).to_be_visible()
+            page.locator("#close-detail").focus()
+            page.keyboard.press("Shift+Tab")
+            assert page.evaluate("document.querySelector('#detail-drawer').contains(document.activeElement)")
+    page.keyboard.press("Escape")
+    expect(drawer).to_be_hidden()
+    assert not page.evaluate("document.body.classList.contains('journal-docked')")
+    page.set_viewport_size({"width": 1440, "height": 1000})
+    page.locator("#events-body .event-row:has(.event-icon.edit) .event-title").first.click()
+    chat = page.evaluate("state.events.find(e=>e.seq===state.drawerSeq).chat_id")
+    page.locator("#journal-open-chat").click()
+    page.wait_for_function("id=>state.view==='chats'&&state.chat===id&&state.chatMessages.length>0", arg=chat)
+    expect(drawer).to_be_hidden()
+    assert f"/chats/{chat}" in page.url and not page.evaluate("document.body.classList.contains('journal-docked')")
+    navigate_panel(page, "observations")
+    page.locator("#events-body .event-row:has(.event-icon.edit) .event-title").first.click()
+    page.locator("#load-more").click()
+    expect(drawer).to_be_hidden()
+    page.wait_for_function("()=>state.eventBefore!==null")
+    page.locator("#journal-latest").click()
+    page.wait_for_function("()=>state.eventBefore===null")
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--visual-only", action="store_true")
-    parser.add_argument("--section", choices=("all", "routine", "window"), default="all")
+    parser.add_argument("--section", choices=("all", "routine", "window", "inspector"), default="all")
     args = parser.parse_args()
     with tempfile.TemporaryDirectory(prefix="journal-ui-") as scratch, RunningApp(Path(scratch)) as app:
         seed(app)
@@ -246,11 +330,13 @@ def main():
                     routine_records(page)
                 if args.section in ("all", "window"):
                     windows(page, app)
+                if args.section in ("all", "inspector"):
+                    inspector(page)
             visuals(page)
             static_demo(browser, app)
             assert not errors, errors
             browser.close()
-    print("Journal filters: groups, sources, dates, search, history, XSS and four viewport/theme captures passed.")
+    print("Journal: combined filters, scoped windows, system toggle, attachment groups, record inspector and four viewport/theme captures passed.")
 
 
 if __name__ == "__main__":

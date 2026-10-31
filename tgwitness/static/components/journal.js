@@ -20,12 +20,71 @@ export function groupEvents(events){
   return groups;
 }
 
+export function signedRecordPreview(value,{node,tr}){
+  const details=node("details","detail-block journal-json"),pre=node("pre"),code=node("code");
+  details.append(node("summary","",tr("Original signed record")),pre);pre.append(code);
+  let rendered=false;
+  details.addEventListener("toggle",()=>{
+    if(!details.open||rendered)return;rendered=true;
+    const raw=JSON.stringify(value,null,2),limit=120000,text=raw.slice(0,limit);
+    const pattern=/"(?:\\.|[^"\\])*"|-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?|\b(?:true|false|null)\b/g;
+    let offset=0,tokens=0;
+    for(const match of text.matchAll(pattern)){
+      if(++tokens>3000)break;
+      code.append(document.createTextNode(text.slice(offset,match.index)));
+      const kind=match[0][0]==='"'?(text[match.index+match[0].length]===":"?"key":"string"):
+        /^(true|false|null)$/.test(match[0])?"literal":"number";
+      code.append(node("span","json-"+kind,match[0]));offset=match.index+match[0].length;
+    }
+    code.append(document.createTextNode(text.slice(offset)));
+    if(raw.length>limit)details.append(node("p","hint",tr("Preview limited to {n} characters. Export the signed ZIP for the complete record.",{n:limit.toLocaleString()})));
+  });
+  return details;
+}
+
 export function createJournal(context){
   const {get: $,state,node,icon,tr}=context,root=$("journal-filters"),search=$("event-search"),nativeSource=$("source-filter");
   let searchTimer=null,sourceQuery="",sourceFocus=0,selectedSeq=null,pageBusy=false,pageTicket=0;
   const expanded=new Set();
   const selected=()=>new Set((state.filter||"").split(",").filter(Boolean));
   const button=(label,cls="quiet")=>{const b=node("button",cls,tr(label));b.type="button";return b;};
+  const inspector=$("detail-drawer"),wide=matchMedia("(min-width: 1280px)");let inspected=null;
+  function positionInspector(){
+    const active=inspected!==null&&!inspector.hidden&&state.drawerSeq===inspected.seq;
+    const docked=active&&state.view==="observations"&&wide.matches;
+    inspector.classList.toggle("journal-inspector",active);inspector.dataset.docked=String(docked);
+    inspector.setAttribute("aria-modal",String(!docked));document.body.classList.toggle("journal-docked",docked);
+    if(active)context.showBackdrop(!docked);
+  }
+  function closeInspector(){
+    inspected=null;inspector.classList.remove("journal-inspector");delete inspector.dataset.docked;
+    inspector.setAttribute("aria-modal","true");document.body.classList.remove("journal-docked");
+  }
+  function openInspector(event){
+    inspected=event;
+    const bar=node("nav","journal-record-nav");bar.setAttribute("aria-label",tr("Record navigation"));
+    const index=state.events.findIndex(item=>item.seq===event.seq);
+    for(const [label,offset,id] of [["Previous record",-1,"journal-previous-record"],["Next record",1,"journal-next-record"]]){
+      const b=button(label,"quiet small"),next=index>=0?state.events[index+offset]:null;b.id=id;b.disabled=!next;
+      b.addEventListener("click",()=>context.openDetail(next));bar.append(b);
+    }
+    if(event.chat_id!==null&&event.chat_id!==undefined){
+      const open=button("Open in chat","secondary small");open.id="journal-open-chat";
+      open.addEventListener("click",async()=>{
+        if(open.disabled)return;open.disabled=true;
+        try{await context.openChat(event);}catch(error){if(error.name!=="AbortError"&&error.name!=="StaleView")context.error(error.message);}
+        finally{if(open.isConnected)open.disabled=false;}
+      });bar.append(open);
+    }
+    $("detail-content").prepend(bar);inspector.scrollTop=0;positionInspector();
+    const row=$("events-body").querySelector('[data-seq="'+event.seq+'"]');
+    if(row?.hidden){
+      const toggle=[...$("events-body").querySelectorAll(".journal-related")].find(control=>control.getAttribute("aria-controls")?.split(" ").includes(row.id));
+      if(toggle?.getAttribute("aria-expanded")==="false")toggle.click();
+    }
+    if(row&&!row.hidden){selectRow(row);row.scrollIntoView({block:"nearest"});}
+  }
+  wide.addEventListener("change",positionInspector);
   const types=node("div","journal-type-filters");types.role="group";types.setAttribute("aria-label",tr("Event types"));
   const all=button("All events","filter");all.dataset.filter="";types.append(all);
   all.addEventListener("click",()=>{state.filter="";change();});
@@ -173,7 +232,7 @@ export function createJournal(context){
     if(chips.childElementCount){const clear=button("Clear filters","quiet small");clear.addEventListener("click",()=>{state.filter=state.source=state.search=state.eventSince=state.eventUntil="";search.value="";nativeSource.value="";change();});chips.append(clear);}
     chips.hidden=!chips.childElementCount;
   }
-  function leave(){clearTimeout(searchTimer);closeSource();}
+  function leave(){clearTimeout(searchTimer);closeSource();closeInspector();}
   function renderRows(events,makeRow){
     const body=$("events-body"),groups=groupEvents(events),present=new Set(groups.map(group=>group.event.seq));
     for(const key of expanded)if(!present.has(key))expanded.delete(key);
@@ -205,7 +264,8 @@ export function createJournal(context){
     $("events-body").closest(".table-wrap").setAttribute("aria-busy",String(pageBusy));
   }
   window.addEventListener("tgwitness:lock",leave);
-  sync();syncPage();return {sync,leave,renderRows,syncPage,
+  sync();syncPage();return {sync,leave,renderRows,syncPage,openDetail:openInspector,closeDetail:closeInspector,
+    signedRecord:value=>signedRecordPreview(value,{node,tr}),
     canRefresh:()=>!root.contains(document.activeElement)&&!picker.contains(document.activeElement)&&!$("events-body").contains(document.activeElement),
     reset(){leave();expanded.clear();selectedSeq=null;pageTicket++;pageBusy=false;}};
 }
