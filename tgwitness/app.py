@@ -226,7 +226,8 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     bearer = HTTPBearer(auto_error=False)
     op_lock = asyncio.Lock()
     export_lock = asyncio.Lock()
-    stream_count = 0
+    from .live_stream import StreamSlots
+    stream_slots = StreamSlots()
     public_proxies = PublicCatalog(root)
 
     shared_pool = proxy_pool or ProxyPool(public_proxies)
@@ -751,13 +752,9 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     @app.get("/api/stream", dependencies=[Depends(authenticate)])
     async def journal_stream(request: Request, after: int = 0,
                              credential: HTTPAuthorizationCredentials = Depends(bearer)):
-        from fastapi.responses import StreamingResponse
-        from .live_stream import stream
-        nonlocal stream_count
+        from .live_stream import LimitedStreamingResponse, stream
         if not 0 <= after <= 9223372036854775807:
             raise HTTPException(422, "Invalid journal cursor.")
-        if stream_count >= 32:
-            raise HTTPException(429, "Too many live streams.", headers={"Retry-After": "10"})
         token = credential.credentials
 
         def authorize():
@@ -771,19 +768,15 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             return principal.chats(profile_id)
 
         async def updates():
-            nonlocal stream_count
             try:
                 yield ": connected\n\n"
                 async for item in stream(app.state.store, after, authorize, request.is_disconnected):
                     yield item
             except Refused:
                 yield "event: access-ended\ndata: {}\n\n"
-            finally:
-                stream_count -= 1
 
-        stream_count += 1
-        return StreamingResponse(updates(), media_type="text/event-stream",
-                                 headers={"X-Accel-Buffering": "no", "Cache-Control": "no-store"})
+        return LimitedStreamingResponse(updates(), slots=stream_slots, media_type="text/event-stream",
+                                        headers={"X-Accel-Buffering": "no", "Cache-Control": "no-store"})
 
     @app.post("/api/auth/configure", dependencies=[Depends(authenticate)])
     async def configure(body: Credentials):

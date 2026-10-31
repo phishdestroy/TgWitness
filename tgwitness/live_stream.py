@@ -3,6 +3,49 @@ import asyncio
 import json
 import time
 
+from starlette.responses import JSONResponse, StreamingResponse
+
+
+class StreamSlots:
+    def __init__(self, limit=32):
+        self.limit = limit
+        self.active = 0
+
+    def acquire(self):
+        if self.active >= self.limit:
+            return False
+        self.active += 1
+        return True
+
+    def release(self):
+        if self.active <= 0:
+            raise RuntimeError("Live stream slot released without acquisition")
+        self.active -= 1
+
+
+class LimitedStreamingResponse(StreamingResponse):
+    """Keep the slot for the complete ASGI response, including its first headers."""
+    def __init__(self, content, *, slots, **kwargs):
+        super().__init__(content, **kwargs)
+        self.slots = slots
+
+    async def __call__(self, scope, receive, send):
+        acquired = self.slots.acquire()
+        try:
+            if not acquired:
+                await JSONResponse({"detail": "Too many live streams."}, status_code=429,
+                                   headers={"Retry-After": "10"})(scope, receive, send)
+                return
+            await super().__call__(scope, receive, send)
+        finally:
+            try:
+                close = getattr(self.body_iterator, "aclose", None)
+                if close is not None:
+                    await close()
+            finally:
+                if acquired:
+                    self.slots.release()
+
 
 def notifications(store, after, allowed, limit=100):
     where, args = ["seq > ?"], [after]

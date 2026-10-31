@@ -3,6 +3,8 @@ import hashlib
 import json
 
 import pytest
+from fastapi.security import HTTPAuthorizationCredentials
+from starlette.requests import ClientDisconnect, Request
 
 from tgwitness import live_stream
 from tgwitness.access import Refused
@@ -110,5 +112,174 @@ def test_stream_revocation_stops_and_slow_client_has_no_queue(journal):
         with pytest.raises(Refused):
             await anext(updates)
         await updates.aclose()
+
+    asyncio.run(run())
+
+
+def stream_scope(spec="2.4"):
+    return {"type": "http", "asgi": {"spec_version": spec}, "method": "GET", "path": "/api/stream",
+            "query_string": b"", "headers": [], "client": ("127.0.0.1", 50000),
+            "server": ("127.0.0.1", 80), "scheme": "http"}
+
+
+async def disconnected_receive():
+    return {"type": "http.disconnect"}
+
+
+def test_stream_route_header_failure_does_not_exhaust_slots(tmp_path):
+    from tgwitness.app import create_app
+
+    async def run():
+        app = create_app(tmp_path)
+        endpoint = next(route.endpoint for route in app.routes if getattr(route, "path", None) == "/api/stream")
+        scope = stream_scope()
+        request = Request(scope)
+        credential = HTTPAuthorizationCredentials(scheme="Bearer", credentials="synthetic")
+        # These responses have not started: constructing them must reserve nothing.
+        responses = [await endpoint(request, after=0, credential=credential) for _ in range(40)]
+
+        async def broken_send(message):
+            assert message["type"] == "http.response.start" and message["status"] == 200
+            raise OSError("Synthetic disconnect before first body")
+
+        for response in responses:
+            with pytest.raises(ClientDisconnect):
+                await response(scope, disconnected_receive, broken_send)
+            assert response.slots.active == 0
+
+    asyncio.run(run())
+
+
+def test_stream_limit_counts_active_responses_and_releases_header_cancellation():
+    async def run():
+        slots = live_stream.StreamSlots()
+        gate, started = asyncio.Event(), asyncio.Event()
+        headers = 0
+
+        async def body():
+            yield ": connected\n\n"
+
+        async def slow_send(message):
+            nonlocal headers
+            if message["type"] == "http.response.start":
+                headers += 1
+                if headers == 32:
+                    started.set()
+                await gate.wait()
+
+        def connection():
+            response = live_stream.LimitedStreamingResponse(body(), slots=slots, media_type="text/event-stream")
+            return asyncio.create_task(response(stream_scope(), disconnected_receive, slow_send))
+
+        tasks = [connection() for _ in range(32)]
+        try:
+            await asyncio.wait_for(started.wait(), 5)
+            assert slots.active == 32
+            rejected = []
+
+            async def capture(message):
+                rejected.append(message)
+
+            response = live_stream.LimitedStreamingResponse(body(), slots=slots)
+            await response(stream_scope(), disconnected_receive, capture)
+            assert rejected[0]["status"] == 429
+            assert dict(rejected[0]["headers"])[b"retry-after"] == b"10"
+            assert json.loads(rejected[1]["body"]) == {"detail": "Too many live streams."}
+            assert slots.active == 32
+            tasks[0].cancel()
+            with pytest.raises(asyncio.CancelledError):
+                await tasks[0]
+            assert slots.active == 31
+            tasks[0].cancel()  # Repeated cancellation cannot release the same slot again.
+            assert slots.active == 31
+            tasks.append(connection())
+            await asyncio.sleep(0)
+            assert slots.active == 32
+            gate.set()
+            await asyncio.gather(*tasks, return_exceptions=True)
+            assert slots.active == 0
+        finally:
+            gate.set()
+            for task in tasks:
+                task.cancel()
+            await asyncio.gather(*tasks, return_exceptions=True)
+
+    asyncio.run(run())
+
+
+def test_stream_body_disconnect_closes_generator_and_releases_slot():
+    async def run():
+        slots, closed = live_stream.StreamSlots(), []
+
+        async def body():
+            try:
+                yield ": connected\n\n"
+                await asyncio.Event().wait()
+            finally:
+                closed.append(True)
+
+        async def broken_send(message):
+            if message["type"] == "http.response.body":
+                raise OSError("Synthetic body disconnect")
+
+        response = live_stream.LimitedStreamingResponse(body(), slots=slots)
+        with pytest.raises(ClientDisconnect):
+            await response(stream_scope(), disconnected_receive, broken_send)
+        assert slots.active == 0 and closed == [True]
+
+    asyncio.run(run())
+
+
+def test_stream_old_asgi_disconnect_and_normal_expiry_release_slots(journal):
+    async def run():
+        store, _ = journal
+        slots = live_stream.StreamSlots()
+
+        async def blocked_send(message):
+            await asyncio.Event().wait()
+
+        async def connected():
+            return False
+
+        response = live_stream.LimitedStreamingResponse(
+            live_stream.stream(store, 0, lambda: None, connected), slots=slots)
+        await response(stream_scope("2.0"), disconnected_receive, blocked_send)
+        assert slots.active == 0
+        sent = []
+
+        async def capture(message):
+            sent.append(message)
+
+        expired = live_stream.LimitedStreamingResponse(
+            live_stream.stream(store, 0, lambda: None, connected, lifetime=0), slots=slots)
+        await expired(stream_scope(), disconnected_receive, capture)
+        assert slots.active == 0
+        assert sent[0]["status"] == 200 and sent[-1]["more_body"] is False
+
+    asyncio.run(run())
+
+
+@pytest.mark.parametrize("error", [RuntimeError, asyncio.CancelledError])
+def test_stream_slot_released_even_when_iterator_close_fails(error):
+    class BrokenClose:
+        def __aiter__(self):
+            return self
+
+        async def __anext__(self):
+            raise StopAsyncIteration
+
+        async def aclose(self):
+            raise error("Synthetic close failure")
+
+    async def run():
+        slots = live_stream.StreamSlots()
+
+        async def send(message):
+            pass
+
+        response = live_stream.LimitedStreamingResponse(BrokenClose(), slots=slots)
+        with pytest.raises(error):
+            await response(stream_scope(), disconnected_receive, send)
+        assert slots.active == 0
 
     asyncio.run(run())
