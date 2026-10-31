@@ -58,7 +58,7 @@ class RunningApp:
 
     def __enter__(self):
         self.thread.start()
-        deadline = time.monotonic() + 15
+        deadline = time.monotonic() + 60  # a loaded machine needs longer than 15 s to open a journal; ready returns at once
         while not self.server.started:
             if time.monotonic() > deadline:
                 raise RuntimeError("Local test server failed to start")

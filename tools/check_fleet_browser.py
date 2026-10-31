@@ -80,7 +80,9 @@ def main():
         page.locator("#fleet-import-start").click()
         expect(page.locator("html")).to_have_attribute("data-acceptance-held", "true")
         expect(page.locator("#fleet-group")).to_be_disabled()
-        expect(page.locator("#fleet-import-close")).to_be_disabled()
+        # Close and Stop stay usable while accounts are imported; both end the queue after the current account
+        expect(page.locator("#fleet-import-close")).to_be_enabled()
+        expect(page.locator("#fleet-import-stop")).to_be_visible()
         page.locator("#top-lock").click()
         expect(page.locator("#fleet-passcode")).to_have_value("")
         expect(page.locator("#fleet-api")).to_have_value("")
@@ -120,9 +122,27 @@ def main():
         page.locator("#fleet-import-open").click()
         page.locator("#fleet-files").set_input_files(account_files("finished", 505))
         page.locator("#fleet-import-start").click()
-        expect(page.locator("#fleet-results .ok")).to_have_count(1)
+        expect(page.locator("#fleet-results .ok")).to_have_count(1, timeout=30000)  # an import connects
         expect(page.locator("#fleet-import-close")).to_be_enabled()
         expect(page.locator("#fleet-import-start")).to_be_disabled()
+        page.locator("#fleet-files").set_input_files([*account_files("stopped", 506), *account_files("skipped", 507),
+                                                      {"name": "notes.docx", "mimeType": "application/octet-stream",
+                                                       "buffer": b"not an account"},
+                                                      {"name": "stopped.session-journal", "mimeType": "application/octet-stream",
+                                                       "buffer": b"journal"}])
+        expect(page.locator("#fleet-results .fleet-result")).to_have_count(3)
+        expect(page.locator("#fleet-results .fleet-result.bad")).to_contain_text("Unsupported account file")
+        expect(page.locator("#fleet-import-summary")).to_have_text("2 accounts ready to import")
+        hold_api_response(page, "/api/profiles/import")
+        page.locator("#fleet-import-start").click()
+        expect(page.locator("html")).to_have_attribute("data-acceptance-held", "true")
+        page.locator("#fleet-import-stop").click()
+        expect(page.locator("#fleet-import-stop")).to_be_disabled()
+        release_api_response(page)
+        expect(page.locator("#fleet-import-stop")).to_be_hidden(timeout=30000)
+        expect(page.locator("#fleet-results .fleet-result.ok")).to_have_count(1, timeout=30000)
+        expect(page.locator("#fleet-results .fleet-result").nth(1)).to_contain_text("Cancelled")
+        assert not any(e["label"] == "skipped" for e in server.app.state.profiles.entries.values())
         assert not errors, errors
         browser.close()
     check_async_groups()
