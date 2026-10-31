@@ -1806,7 +1806,6 @@ let parametersView=null;
 const parametersReady=import("./views/parameters.js").then(({createParameters})=>{
   parametersView=createParameters({root:$("view-parameters"),tr,getState:()=>state,
     getSession:()=>state.workspaceRevision+":"+state.profile,may,json,refreshStatus,toast,
-    confirm:message=>window.confirm(message),
     headerOffset:()=>{const header=document.querySelector(".topbar");return header&&["sticky","fixed"].includes(getComputedStyle(header).position)?header.getBoundingClientRect().height:0;},
     sectionHref:id=>window.TgWitnessRouter?.href({view:"parameters",section:id})||"#parameters-group-"+id,
     sectionChanged:id=>{state.parameterSection=id;window.TgWitnessRouter?.record();},

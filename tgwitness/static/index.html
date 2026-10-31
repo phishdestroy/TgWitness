@@ -632,7 +632,7 @@
 <section class="view" hidden id="view-parameters">
   <div class="page-heading">
     <div><h1>Parameters</h1><p class="page-description">Limits and pace of collection, rechecks, downloads, people profiles, notifications and exports for this workspace. Each change applies from the next use of the value and is recorded in the signed journal.</p></div>
-    <button class="secondary" id="parameters-reset" type="button"><svg aria-hidden="true" class="icon"><use href="#i-refresh"/></svg> Restore all defaults</button>
+    <details class="parameters-menu" id="parameters-menu"><summary>More options</summary><button class="quiet" id="parameters-reset" type="button">Restore defaults…</button></details>
   </div>
   <div class="parameters-toolbar" id="parameters-toolbar">
     <div class="parameters-tools"><input aria-label="Search parameters" id="parameters-search" placeholder="Find a parameter or group" type="search"><label class="check-label"><input id="parameters-changed" type="checkbox"> Only changed</label><span class="hint" id="parameters-count" role="status"></span></div>
@@ -642,8 +642,17 @@
   <div id="parameters-empty" class="card" hidden><p>No parameters match these filters.</p><button type="button" class="quiet" id="parameters-clear-search">Clear filters</button></div>
   <form class="parameters-form" id="parameters-form" novalidate>
     <div class="parameters-layout"><div id="parameters-groups"></div></div>
-    <div class="parameters-actions"><button class="primary" type="submit">Save parameters</button><span id="parameters-unsaved" role="status"></span></div>
+    <div class="parameters-actions" id="parameters-savebar">
+      <div><strong id="parameters-change-count">No unsaved changes</strong><p class="hint" id="parameters-unsaved" role="status"></p></div>
+      <div class="parameters-save-buttons"><button type="button" class="quiet" id="parameters-discard" disabled>Discard</button><button class="primary" id="parameters-save" type="submit" disabled>Save parameters</button></div>
+    </div>
   </form>
+  <dialog id="parameters-reset-dialog" class="parameters-reset-dialog" aria-labelledby="parameters-reset-title">
+    <h2 id="parameters-reset-title">Restore these defaults?</h2>
+    <p class="hint">Only the values below will change. Defaults are prepared as a draft; Save parameters applies them.</p>
+    <ul id="parameters-reset-list"></ul><p class="hint" id="parameters-reset-note" role="status"></p>
+    <div class="parameters-save-buttons"><button type="button" class="quiet" id="parameters-reset-cancel">Cancel</button><button type="button" class="primary" id="parameters-reset-apply">Prepare defaults</button></div>
+  </dialog>
 </section>
 
 <section class="view" hidden id="view-connection">
