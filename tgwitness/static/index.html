@@ -9,11 +9,12 @@
 <link rel="icon" type="image/svg+xml" href="/mark.svg">
 <link rel="stylesheet" href="/style.css?v=0.7.0-mcp2">
 <link rel="stylesheet" href="/components/shell.css?v=1">
+<link rel="stylesheet" href="/components/notifications.css?v=1">
 <link rel="stylesheet" href="/cloud-capture.css?v=5"><link rel="stylesheet" href="/cloud-capture-story.css?v=3">
 <script src="/theme.js?v=0.7.0"></script>
 <script src="/guide-locale.js" data-scope="panel"></script>
 <script defer src="/i18n.js?v=0.7.0"></script>
-<script defer src="/app.js?v=0.7.0-views1"></script>
+<script defer src="/app.js?v=0.7.0-views-notices1"></script>
 <script defer src="/integrations.js?v=2"></script>
 <script defer src="/analysis.js?v=3"></script>
 <script defer src="/media-analysis.js?v=2"></script>
@@ -152,11 +153,17 @@
   <div class="top-actions">
     <button class="quiet quick-mobile" data-quick-open type="button" aria-label="Go to a section" aria-haspopup="dialog" aria-controls="quick-dialog"><svg aria-hidden="true" class="icon"><use href="#i-search"/></svg></button>
     <div class="notify-wrap">
-      <button aria-controls="notify-panel" aria-expanded="false" aria-label="Notifications" class="quiet notify-button" id="notify-toggle" title="Notifications" type="button"><svg aria-hidden="true" class="icon"><use href="#i-bell"/></svg><b hidden id="notify-count">0</b></button>
-      <div aria-label="Notifications" class="notify-panel" hidden id="notify-panel" role="dialog">
-        <div class="notify-head"><h2>Notifications</h2><button class="text-link" id="notify-read" type="button">Mark all as read</button></div>
-        <div id="notify-list"></div>
-      </div>
+      <button aria-controls="notify-panel" aria-expanded="false" aria-haspopup="dialog" aria-label="Notifications" class="quiet notify-button" disabled id="notify-toggle" title="Notifications" type="button"><svg aria-hidden="true" class="icon"><use href="#i-bell"/></svg><b hidden id="notify-count">0</b></button>
+      <dialog aria-labelledby="notify-title" class="notify-panel" hidden id="notify-panel">
+        <div class="notify-head"><div><h2 id="notify-title">Notifications</h2><p class="notice-summary" id="notify-summary"></p></div><button aria-label="Close notifications" class="quiet" id="notify-close" type="button"><svg aria-hidden="true" class="icon"><use href="#i-x"/></svg></button></div>
+        <div aria-label="Notification categories" class="notice-filters" role="tablist">
+          <button aria-controls="notify-list" aria-selected="true" data-notice-filter="all" id="notify-tab-all" role="tab" type="button">All</button>
+          <button aria-controls="notify-list" aria-selected="false" data-notice-filter="problems" id="notify-tab-problems" role="tab" tabindex="-1" type="button">Problems</button>
+          <button aria-controls="notify-list" aria-selected="false" data-notice-filter="changes" id="notify-tab-changes" role="tab" tabindex="-1" type="button">Chat changes</button>
+        </div>
+        <div aria-labelledby="notify-tab-all" id="notify-list" role="tabpanel" tabindex="0"></div>
+        <div class="notice-footer"><div class="notice-footer-actions"><button id="notify-read" type="button">Mark all as read</button><button id="notify-rules" type="button">Notification rules</button></div><p id="notify-status" role="status"></p></div>
+      </dialog>
     </div>
     <span class="status-chip" id="status-chip">Offline</span>
     <button class="secondary" id="collector-toggle">Start observation</button>

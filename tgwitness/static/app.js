@@ -2258,41 +2258,55 @@ $("witness-setup-form").addEventListener("submit",e=>{e.preventDefault();busy(e.
   $("witness-launch").open=true;
 });});
 
-const readMark=()=>Number(localStorage.getItem("tgwitness-read-"+state.profile)||0);
+let noticeUI=null,noticeRequest=0;
+async function noticeNavigate(view){
+  if(!viewAllowed(view))return false;
+  if(typeof selectView==="function")await selectView(view);else navigate(view);
+  return state.view===view;
+}
+async function noticeAction(item,kind){
+  const revision=state.workspaceRevision,action=kind==="record"?{type:"record"}:item.action||
+    {type:item.level==="change"?"chat":"record",chat_id:item.chat_id};
+  if(action.type==="chat"&&Number.isSafeInteger(action.chat_id)){
+    if(!await noticeNavigate("chats"))return openRecord(item.seq);
+    await refreshChats();
+    if(revision!==state.workspaceRevision)return;
+    if(state.chats.some(chat=>chat.chat_id===action.chat_id))return openChat(action.chat_id);
+  }else if(action.type==="diagnostics"){
+    const destination=healthDiagnostics[action.part]||{accounts:{view:"accounts"},exports:{view:"evidence"}}[action.part];
+    if(destination&&await noticeNavigate(destination.view)){
+      if(revision!==state.workspaceRevision)return;
+      if(destination.extra)selectExtra(destination.extra);
+      if(destination.filter)document.querySelector('[data-filter="'+destination.filter+'"]')?.click();
+      const target=destination.target?$(destination.target):$("view-"+destination.view)?.querySelector("h1,h2");
+      if(target){target.tabIndex=-1;target.focus({preventScroll:true});target.scrollIntoView({block:"start"});}
+      return;
+    }
+  }
+  if(revision===state.workspaceRevision)return openRecord(item.seq);
+}
+const noticesReady=import("./components/notifications.js?v=1").then(({createNotifications})=>{
+  noticeUI=createNotifications({workspace:$("workspace"),panel:$("notify-panel"),toggle:$("notify-toggle"),badge:$("notify-count"),list:$("notify-list"),
+    readAll:$("notify-read"),rules:$("notify-rules"),closeButton:$("notify-close"),
+    filters:[...document.querySelectorAll("[data-notice-filter]")],summary:$("notify-summary"),status:$("notify-status"),
+    tr,trn,formatTime:fmtFull,items:()=>state.notifications,
+    context:()=>({profile:state.profile,fingerprint:state.status?.fingerprint,revision:state.workspaceRevision,
+      active:!!state.token&&!!state.status&&!$("workspace").hidden&&!$("workspace").inert}),
+    refresh:loadNotifications,action:noticeAction,canRules:()=>viewAllowed("witness")&&may("settings"),
+    openRules:async()=>{if(await noticeNavigate("witness")){selectExtra("alerts");$("extras-alerts-title").focus({preventScroll:true});$("extras-alerts").scrollIntoView({block:"start"});}},
+    error:error=>{if(!(error instanceof StaleView))toast(error.message,true);}});
+});
+noticesReady.catch(()=>{$("notify-toggle").disabled=false;$("notify-toggle").addEventListener("click",()=>toast(tr("Notifications could not load. Reload the page to retry."),true));});
 async function loadNotifications(){
-  if(!state.status)return;
-  const profile=state.profile,r=await json("notifications");
-  if(profile!==state.profile)return;
+  if(!state.status||!state.token||$("workspace").hidden)return;
+  const profile=state.profile,revision=state.workspaceRevision,ticket=++noticeRequest,r=await json("notifications");
+  if(profile!==state.profile||revision!==state.workspaceRevision||ticket!==noticeRequest)return;
   state.notifications=r.items;renderNotifications();
 }
 function renderNotifications(){
-  const mark=readMark(),unread=state.notifications.filter(i=>i.seq>mark).length,list=$("notify-list");
-  $("notify-count").textContent=unread>99?"99+":String(unread);show("notify-count",unread>0);
-  $("notify-toggle").setAttribute("aria-label",unread?trn("{n} unread notification","{n} unread notifications",unread):tr("Notifications"));
-  list.replaceChildren();
-  if(!state.notifications.length)list.append(node("p","hint notify-empty",tr("Nothing yet. Problems and changes in observed chats appear here.")));
-  for(const item of state.notifications){
-    const b=node("button","notify-item "+item.level+(item.seq>mark?" unread":""));b.type="button";
-    b.append(node("span","",item.text),node("small","",fmtFull(item.at)));
-    b.addEventListener("click",()=>busy(null,async()=>{
-      closeNotifications();
-      if(item.level==="change"&&item.chat_id!==null){navigate("chats");await refreshChats();if(state.chats.some(c=>c.chat_id===item.chat_id))await openChat(item.chat_id);}
-      else await openRecord(item.seq);
-    }));
-    list.append(b);
-  }
+  if(noticeUI)noticeUI.render();else noticesReady.then(()=>noticeUI.render()).catch(()=>{});
 }
-function closeNotifications(){show("notify-panel",false);$("notify-toggle").setAttribute("aria-expanded","false");}
-$("notify-toggle").addEventListener("click",()=>{
-  const open=$("notify-panel").hidden;show("notify-panel",open);$("notify-toggle").setAttribute("aria-expanded",String(open));
-  if(open)loadNotifications().catch(e=>toast(e.message,true));
-});
-$("notify-read").addEventListener("click",()=>{
-  const newest=Math.max(0,...state.notifications.map(i=>i.seq));
-  localStorage.setItem("tgwitness-read-"+state.profile,String(Math.max(newest,readMark())));renderNotifications();
-});
-document.addEventListener("click",e=>{if(!$("notify-panel").hidden&&!e.target.closest(".notify-wrap"))closeNotifications();});
-document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("notify-panel").hidden){closeNotifications();$("notify-toggle").focus();}});
+function closeNotifications(){if(noticeUI)noticeUI.close();else{$("notify-panel").hidden=true;$("notify-toggle").setAttribute("aria-expanded","false");}}
 async function openRecord(seq,options={}){
   const r=await json("events?"+new URLSearchParams({before:String(seq+1),limit:"1"}));
   if(r.events[0]?.seq===seq)await openDetail(r.events[0],options);

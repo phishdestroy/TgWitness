@@ -595,9 +595,14 @@ class Store:
         labels = [b.get("text") for r in markup.get("rows", []) for b in r.get("buttons", []) if b.get("text")]
         return row[0], labels
 
-    def events_of(self, kinds, limit=50, after=None, before=None):
+    def events_of(self, kinds, limit=50, after=None, before=None, *, chat_ids=None):
         """Newest records of the given kinds (for the panel's notification list)."""
+        if not kinds or chat_ids is not None and not chat_ids:
+            return []
         where, params = "kind IN (" + ",".join("?" * len(kinds)) + ")", list(kinds)
+        if chat_ids is not None:
+            where += " AND chat_id IN (" + ",".join("?" * len(chat_ids)) + ")"
+            params.extend(sorted(chat_ids))
         if after is not None:
             where += " AND seq>?"
             params.append(after)

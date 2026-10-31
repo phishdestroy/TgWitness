@@ -1572,9 +1572,10 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     @app.get("/api/notifications", dependencies=[Depends(authenticate)])
     async def notifications(request: Request):
         lang = i18n.pick(request.cookies.get(i18n.COOKIE), request.headers.get("accept-language"))
-        items, allowed = alerts.panel_items(app.state.store, i18n.words(lang),
-                                            tuning.value(app.state.store, "panel_notifications")), visible_chats(request)
-        return {"items": [i for i in items if allowed is None or i.get("chat_id") in allowed]}
+        items = alerts.panel_items(app.state.store, i18n.words(lang),
+                                   tuning.value(app.state.store, "panel_notifications"),
+                                   allowed_chats=visible_chats(request), workspace_id=profile_id)
+        return {"items": items}
 
     @app.get("/api/chats/{chat_id}/scale", dependencies=[Depends(authenticate)])
     async def chat_scale(chat_id: int):
