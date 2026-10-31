@@ -46,7 +46,7 @@
       for (const event of JSON.parse(answer.text).events) known.set(event.seq, event);
     }
     const kinds = (params.get("kind") || "").split(",").map(kind => kind.trim()).filter(Boolean), search = (params.get("search") || "").toLowerCase();
-    const chat = params.get("chat_id"), message = params.get("message_id"), before = params.get("before");
+    const chat = params.get("chat_id"), message = params.get("message_id"), before = params.get("before"), after = params.get("after");
     const since = params.get("since"), until = params.get("until");
     const hideSystem = ["true", "1"].includes(params.get("hide_system"));
     const limit = Math.min(500, Math.max(1, Number(params.get("limit")) || 100));
@@ -54,11 +54,16 @@
       (chat === null || String(e.chat_id) === chat) && (message === null || String(e.message_id) === message) &&
       (!kinds.length || kinds.some(kind => (CATEGORIES[kind] || [kind]).some(p => p.endsWith(".") ? e.kind.startsWith(p) : e.kind === p))) &&
       (!hideSystem || !["collector.heartbeat", "host.state"].includes(e.kind) && !(e.kind === "media.skipped" && e.payload.reason === "media download disabled")) &&
-      (before === null || e.seq < Number(before)) &&
       (!since || Date.parse(e.observed_at) >= Date.parse(since)) && (!until || Date.parse(e.observed_at) <= Date.parse(until)) &&
       (!search || JSON.stringify(e.payload).toLowerCase().includes(search)))
-      .sort((a, b) => b.seq - a.seq).slice(0, limit);
-    return {events: matches, next_before: matches.length === limit ? matches[matches.length - 1].seq : null};
+      .sort((a, b) => b.seq - a.seq);
+    const eligible = matches.filter(e => (before === null || e.seq < Number(before)) && (after === null || e.seq > Number(after)));
+    const page = after === null ? eligible.slice(0, limit) : eligible.slice(-limit);
+    const counted = ["true", "1"].includes(params.get("include_count"));
+    return {events: page,
+      next_before: page.length && matches.some(e => e.seq < page.at(-1).seq) ? page.at(-1).seq : null,
+      next_after: page.length && matches.some(e => e.seq > page[0].seq) ? page[0].seq : null,
+      matched: counted ? matches.length : null, count_exact: counted};
   }
 
   window.fetch = async (input, init = {}) => {

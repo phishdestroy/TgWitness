@@ -19,7 +19,8 @@ export function parseRoute(value,{workspace="default",staticDemo=false}={}){
   const explicit=!!query.get("route")||!!oldView||parts.length>0&&parts[0]!=="index.html"||query.has("event");
   const route={view:views[parts[0]]||null,workspace:query.get("ws")||query.get("workspace")||workspace,
     chatId:null,seq:null,kind:query.get("kind")||"",source:query.get("source")||"",q:query.get("q")||"",
-    since:query.get("since")||"",until:query.get("until")||"",system:query.get("system")==="1",extra:null,section:null,explicit};
+    since:query.get("since")||"",until:query.get("until")||"",system:query.get("system")==="1",
+    before:query.has("before")?integer(query.get("before")):null,extra:null,section:null,explicit};
   if(!workspacePattern.test(route.workspace))route.error="Unknown workspace.";
   if(parts[0]==="chats"&&parts.length>1){route.chatId=integer(parts[1]);if(route.chatId===null||parts.length>2)route.error="Record is unavailable to this access.";}
   if(parts[0]==="journal"&&parts.length>1){
@@ -35,6 +36,7 @@ export function parseRoute(value,{workspace="default",staticDemo=false}={}){
   if(route.view==="parameters"&&!oldView&&fragment&&!fragment.startsWith("/"))route.section=fragment.replace(/^parameters-group-/,"");
   if(explicit&&!route.view)route.error="Record is unavailable to this access.";
   if(route.source&&integer(route.source)===null)route.error="Record is unavailable to this access.";
+  if(query.has("before")&&(route.before===null||route.before<=0))route.error="Record is unavailable to this access.";
   return route;
 }
 
@@ -49,6 +51,7 @@ export function routeURL(route,{base=location.href,staticDemo=false}={}){
   if(current.searchParams.has("lang"))query.set("lang",current.searchParams.get("lang"));
   if(route.view==="observations")for(const key of ["kind","source","q","since","until"])if(route[key])query.set(key,route[key]);
   if(route.view==="observations"&&route.system)query.set("system","1");
+  if(route.view==="observations"&&route.before)query.set("before",route.before);
   url.search=query.toString();url.hash=route.view==="parameters"&&route.section?encodeURIComponent(route.section):"";
   return url;
 }

@@ -22,7 +22,7 @@ export function groupEvents(events){
 
 export function createJournal(context){
   const {get: $,state,node,icon,tr}=context,root=$("journal-filters"),search=$("event-search"),nativeSource=$("source-filter");
-  let searchTimer=null,sourceQuery="",sourceFocus=0;
+  let searchTimer=null,sourceQuery="",sourceFocus=0,selectedSeq=null,pageBusy=false,pageTicket=0;
   const expanded=new Set();
   const selected=()=>new Set((state.filter||"").split(",").filter(Boolean));
   const button=(label,cls="quiet")=>{const b=node("button",cls,tr(label));b.type="button";return b;};
@@ -70,6 +70,33 @@ export function createJournal(context){
   systemLine.append(systemLabel,node("small","",tr("Routine records stay in the signed journal.")));
   system.addEventListener("change",()=>{state.eventSystem=system.checked;change();});
   root.replaceChildren(types,controls,dates,custom,error,chips,systemLine);
+  const older=$("load-more"),footer=older.closest(".table-footer"),shown=$("shown-count"),range=node("span","journal-window-range");
+  const pager=node("div","journal-pager"),newer=button("Newer records","quiet"),latest=button("Latest","quiet");
+  newer.id="journal-newer";latest.id="journal-latest";older.textContent=tr("Older records");older.hidden=false;
+  range.id="journal-window-range";pager.append(newer,older,latest);
+  const windowStatus=node("span","journal-window-status");windowStatus.role="status";footer.replaceChildren(shown,range,pager,windowStatus);
+  for(const [control,direction] of [[older,"older"],[newer,"newer"],[latest,"latest"]])control.addEventListener("click",async()=>{
+    if(pageBusy)return;const ticket=++pageTicket;pageBusy=true;syncPage();windowStatus.textContent=tr("Loading records…");
+    try{await context.page(direction);if(ticket===pageTicket)$("events-body").closest(".table-wrap").scrollTop=0;}
+    catch(error){if(!["AbortError","StaleView"].includes(error.name))context.error(error.message);}
+    finally{if(ticket===pageTicket){pageBusy=false;windowStatus.textContent="";syncPage();}}
+  });
+  const visibleRows=()=>[...$("events-body").querySelectorAll(".event-row")].filter(row=>!row.hidden);
+  function selectRow(row,focus=false){
+    selectedSeq=row?Number(row.dataset.seq):null;
+    for(const item of visibleRows()){const active=item===row;item.tabIndex=active?0:-1;item.classList.toggle("journal-selected",active);}
+    if(focus&&row){row.focus();row.scrollIntoView({block:"nearest"});}
+  }
+  function restoreSelection(){const rows=visibleRows();selectRow(rows.find(row=>Number(row.dataset.seq)===selectedSeq)||rows[0]||null);}
+  $("events-body").addEventListener("focusin",event=>{const row=event.target.closest(".event-row");if(row)selectRow(row);});
+  $("events-body").addEventListener("keydown",event=>{
+    if(event.ctrlKey||event.metaKey||event.altKey||event.shiftKey||event.isComposing)return;
+    const row=event.target.closest(".event-row");if(!row)return;
+    if(["ArrowDown","ArrowUp"].includes(event.key)){
+      event.preventDefault();const rows=visibleRows(),index=rows.indexOf(row),next=Math.max(0,Math.min(rows.length-1,index+(event.key==="ArrowDown"?1:-1)));
+      selectRow(rows[next],true);
+    }else if(event.key==="Escape"&&$("detail-drawer").hidden){event.preventDefault();$("refresh").focus();}
+  });
 
   const picker=node("dialog","journal-source-picker");picker.setAttribute("aria-label",tr("Choose a source"));
   const heading=node("div","journal-picker-heading"),sourceSearch=node("input"),close=button("Close","quiet small");
@@ -122,7 +149,7 @@ export function createJournal(context){
   });
   nativeSource.addEventListener("change",()=>{state.source=nativeSource.value;change();});
   function change(){
-    clearTimeout(searchTimer);error.hidden=true;context.invalidate();sync();
+    clearTimeout(searchTimer);error.hidden=true;pageTicket++;pageBusy=false;windowStatus.textContent="";context.invalidate();sync();
     context.changed().catch(error=>{if(error.name!=="AbortError"&&error.name!=="StaleView")context.error(error.message);});
   }
   function chip(text,remove){const b=button("","journal-filter-chip");b.append(node("span","",text),icon("x"));b.title=tr("Remove filter");b.addEventListener("click",()=>{remove();change();});chips.append(b);}
@@ -164,10 +191,21 @@ export function createJournal(context){
       }
       const syncGroup=()=>{const open=expanded.has(group.event.seq);toggle.setAttribute("aria-expanded",String(open));children.forEach(child=>child.hidden=!open);};
       toggle.setAttribute("aria-controls",children.map(child=>child.id).join(" "));
-      toggle.addEventListener("click",event=>{event.stopPropagation();expanded.has(group.event.seq)?expanded.delete(group.event.seq):expanded.add(group.event.seq);syncGroup();});
+      toggle.addEventListener("click",event=>{event.stopPropagation();expanded.has(group.event.seq)?expanded.delete(group.event.seq):expanded.add(group.event.seq);syncGroup();restoreSelection();});
       syncGroup();
     }
+    restoreSelection();
+  }
+  function syncPage(){
+    shown.textContent=Number.isFinite(state.eventMatched)?tr("{shown} of {total} matching records",{shown:state.events.length,total:state.eventMatched.toLocaleString()}):
+      tr("{shown} records in this window",{shown:state.events.length});
+    range.textContent=state.events.length?"#"+state.events[0].seq+" – #"+state.events.at(-1).seq:"";
+    older.disabled=pageBusy||state.cursor===null;newer.disabled=pageBusy||state.eventAfter===null;
+    latest.disabled=pageBusy;latest.hidden=state.eventBefore===null;
+    $("events-body").closest(".table-wrap").setAttribute("aria-busy",String(pageBusy));
   }
   window.addEventListener("tgwitness:lock",leave);
-  sync();return {sync,leave,renderRows,reset(){leave();expanded.clear();}};
+  sync();syncPage();return {sync,leave,renderRows,syncPage,
+    canRefresh:()=>!root.contains(document.activeElement)&&!picker.contains(document.activeElement)&&!$("events-body").contains(document.activeElement),
+    reset(){leave();expanded.clear();selectedSeq=null;pageTicket++;pageBusy=false;}};
 }

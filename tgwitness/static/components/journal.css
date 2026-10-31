@@ -37,6 +37,14 @@
 .journal-related[aria-expanded=true] .icon { transform:rotate(90deg); }
 .journal-related-row { background:var(--surface-2); }
 .journal-related-row .event-summary { padding-left:20px; border-left:2px solid var(--border-strong); }
+.journal .table-footer { gap:8px 14px; flex-wrap:wrap; }
+.journal-pager { display:flex; flex-wrap:wrap; gap:5px; margin-left:auto; }
+.journal-window-range { font-family:var(--mono); font-size:11px; color:var(--muted); }
+.journal-window-status { width:100%; color:var(--muted); font-size:12px; }
+.journal-window-status:empty { display:none; }
+.events-table th { position:sticky; top:0; z-index:2; }
+.event-row.journal-selected { box-shadow:inset 3px 0 var(--accent); background:var(--accent-soft); }
+.event-row:focus-visible { outline:2px solid var(--accent); outline-offset:-2px; }
 @media(max-width:600px){
   .journal .filters { padding:12px; gap:10px; }
   .journal-controls { grid-template-columns:minmax(0,1fr); }
@@ -46,4 +54,5 @@
   .journal-date-filters { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:3px; }
   .journal-date-filters .filter { padding:6px 3px; }
   .journal-filter-chip { max-width:100%; }
+  .journal-pager { width:100%; margin-left:0; justify-content:space-between; }
 }

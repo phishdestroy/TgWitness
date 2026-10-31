@@ -29,6 +29,7 @@ DYNAMIC_SCRIPT_KEYS = (
     "Messages", "Edits", "Deletions", "Reactions", "Membership", "Attachments", "Actions", "Collection",
     "All events", "All sources", "Any time", "1 hour", "24 hours", "7 days", "Custom", "Custom period",
     "From (UTC)", "Until (UTC)", "Apply dates", "Close", "Clear filters",
+    "Newer records", "Older records", "Latest",
     "Install MCP support in this Python environment and restart TgWitness.",
     "MCP support is installed. Restart TgWitness to activate the endpoint.",
 )

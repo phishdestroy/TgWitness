@@ -3,6 +3,7 @@ import argparse
 from datetime import datetime, timedelta, timezone
 import hashlib
 import json
+import re
 from pathlib import Path
 import sys
 import tempfile
@@ -157,6 +158,48 @@ def routine_records(page):
     assert result
 
 
+def windows(page, server):
+    page.wait_for_function("()=>state.events.length===200&&state.eventBefore===null")
+    expect(page.locator("#shown-count")).to_have_text(re.compile(r"200 of \d+ matching records"))
+    first = page.evaluate("state.events.map(e=>e.seq)")
+    assert page.locator("#events-body tr").count() <= 200
+    page.locator("#load-more").click()
+    page.wait_for_function("seq=>state.events[0]?.seq<seq", arg=first[-1])
+    second = page.evaluate("state.events.map(e=>e.seq)")
+    assert not set(first).intersection(second) and len(second) == 200
+    assert params(page)["before"]
+    page.locator("#journal-newer").click()
+    page.wait_for_function("seq=>state.events[0]?.seq===seq", arg=first[0])
+    assert page.evaluate("state.events.map(e=>e.seq)") == first
+    page.go_back()
+    page.wait_for_function("seq=>state.events[0]?.seq===seq", arg=second[0])
+    page.reload()
+    page.wait_for_function("seq=>state.events[0]?.seq===seq", arg=second[0])
+    assert page.locator("#events-body tr").count() <= 200
+    added = server.app.state.store.append("message.new", {"text": "A live observation while reviewing an earlier window."}, HARBOR, 999)
+    page.wait_for_timeout(250)
+    assert page.evaluate("state.events[0].seq") == second[0]
+    page.locator("#journal-latest").click()
+    page.wait_for_function("seq=>state.events[0]?.seq===seq", arg=added["seq"])
+    expect(page.locator("#journal-latest")).to_be_hidden()
+    first_row = page.locator("#events-body .event-row:visible").first
+    first_row.focus()
+    page.keyboard.press("ArrowDown")
+    expect(page.locator("#events-body .event-row:visible").nth(1)).to_be_focused()
+    page.keyboard.press("Enter")
+    expect(page.locator("#detail-drawer")).to_be_visible()
+    page.keyboard.press("Escape")
+    expect(page.locator("#detail-drawer")).to_be_hidden()
+    page.keyboard.press("Escape")
+    expect(page.locator("#refresh")).to_be_focused()
+    geometry = page.evaluate("""()=>{
+      const box=document.querySelector('.journal .table-wrap');box.scrollTop=400;
+      const head=box.querySelector('th').getBoundingClientRect();return {top:head.top,box:box.getBoundingClientRect().top};
+    }""")
+    assert abs(geometry["top"]-geometry["box"]) <= 2, geometry
+    assert page.locator("#events-body tr").count() <= 200
+
+
 def static_demo(browser, server):
     page = browser.new_page()
     fixture = {"/api/events": {"text": json.dumps({"events": [
@@ -173,12 +216,16 @@ def static_demo(browser, server):
     assert [event["seq"] for event in result["events"]] == [2]
     result = page.evaluate("async()=>await fetch('/api/events?hide_system=true&limit=1').then(r=>r.json())")
     assert [event["seq"] for event in result["events"]] == [3]
+    result = page.evaluate("async()=>await fetch('/api/events?after=1&limit=1&include_count=true').then(r=>r.json())")
+    assert [event["seq"] for event in result["events"]] == [2] and result["matched"] == 4
+    assert result["next_before"] == 2 and result["next_after"] == 2
     page.close()
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--visual-only", action="store_true")
+    parser.add_argument("--section", choices=("all", "routine", "window"), default="all")
     args = parser.parse_args()
     with tempfile.TemporaryDirectory(prefix="journal-ui-") as scratch, RunningApp(Path(scratch)) as app:
         seed(app)
@@ -192,9 +239,13 @@ def main():
             navigate_panel(page, "observations")
             expect(page.locator('[data-filter="messages"]')).to_be_visible()
             if not args.visual_only:
-                filters(page)
+                if args.section == "all":
+                    filters(page)
                 page.set_viewport_size({"width": 1440, "height": 1000})
-                routine_records(page)
+                if args.section in ("all", "routine"):
+                    routine_records(page)
+                if args.section in ("all", "window"):
+                    windows(page, app)
             visuals(page)
             static_demo(browser, app)
             assert not errors, errors

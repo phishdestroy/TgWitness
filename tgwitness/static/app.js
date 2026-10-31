@@ -18,7 +18,8 @@ function panelQueries(selector){
 }
 const state = {token: sessionStorage.getItem("tgwitness-token") || "",
   view:({account:"connection",sources:"sources",exports:"evidence",journal:"observations",sealed:"sealed"}[location.hash.slice(1)]||"connection"), status: null,
-  events: [], dialogs: [], filter: "", source: "", search: "", eventSince:"",eventUntil:"",eventSystem:false,cursor: null, request: 0, drawerSeq: null,
+  events: [], dialogs: [], filter: "", source: "", search: "", eventSince:"",eventUntil:"",eventSystem:false,
+  eventBefore:null,eventAfter:null,eventMatched:null,cursor: null, request: 0, drawerSeq: null,
   profile: sessionStorage.getItem("tgwitness-profile") || "default", profiles: [], demoToken: "", monitoringDirty: false,
   captureDirty: false, workspaceRevision: 0, verification: null, opened:false, connectionSettings:false,
   chat: null, chats: [], chatMessages: [], chatNextBefore: null, chatInfo: null, chatFilter: "all", chatAuthor: null,
@@ -94,9 +95,9 @@ async function loadPanelView(view){
 let routerTask=null;
 function routeSnapshot(){return {view:state.drawerSeq!==null?"observations":state.view,workspace:state.profile,
   chatId:state.view==="chats"?state.chat:null,seq:state.drawerSeq,kind:state.filter,source:state.source,q:state.search,
-  since:state.eventSince,until:state.eventUntil,system:state.eventSystem,extra:state.extra||null,section:state.parameterSection||null};}
+  since:state.eventSince,until:state.eventUntil,system:state.eventSystem,before:state.eventBefore,extra:state.extra||null,section:state.parameterSection||null};}
 function ensureRouter(){
-  if(!routerTask)routerTask=import("./router.js?v=2").then(({createRouter})=>{
+  if(!routerTask)routerTask=import("./router.js?v=3").then(({createRouter})=>{
     window.TgWitnessRouter=createRouter({snapshot:routeSnapshot,ready:()=>!!state.me&&!$("workspace").hidden,
       error:message=>toast(tr(message),true),apply:applyRouteToPanel});return window.TgWitnessRouter;
   });
@@ -109,6 +110,7 @@ async function applyRouteToPanel(route,current){
   closeDetail({history:false});
   state.filter=route.kind;state.source=route.source;state.search=route.q;state.eventSince=route.since;state.eventUntil=route.until;
   state.eventSystem=!!route.system;
+  state.eventBefore=route.before??null;
   $("event-search").value=state.search;fillSourceSelect("source-filter",state.source,true);
   viewQueries("observations","[data-filter]").forEach(button=>button.classList.toggle("active",button.dataset.filter===state.filter));
   navigate(route.view,{history:false,load:false});
@@ -511,7 +513,7 @@ function syncLive(){
     canRefresh:()=>{
       if(state.drawerSeq!==null||window.getSelection()?.toString()||document.hidden)return false;
       if(state.view==="chats"){const feed=$("chat-feed");return feed.scrollHeight-feed.scrollTop-feed.clientHeight<80;}
-      return state.events.length<=60&&window.scrollY<120;
+      return state.eventBefore===null&&state.events.length<=200&&window.scrollY<120&&window.TgWitnessJournal?.canRefresh()!==false;
     },
     refresh:async()=>{await refreshStatus();if(state.view==="chats")await refreshChats(true);else if(state.view==="observations")await refreshEvents();}
   });
@@ -588,7 +590,7 @@ function renderQuick(){
     for(const chat of (state.status?.targets||[]).filter(c=>(c.title+" "+c.chat_id).toLowerCase().includes(query)).slice(0,12))
       option("chat-"+chat.chat_id,chat.title,String(chat.chat_id),async()=>{navigate("chats");await refreshChats();await openChat(chat.chat_id);});
     const text=quickSearch.value.trim().slice(0,200);
-    option("journal",tr("Search journal"),text,async()=>{state.search=text;state.cursor=null;$("event-search").value=text;navigate("observations");await refreshEvents();});
+    option("journal",tr("Search journal"),text,async()=>{state.search=text;state.cursor=state.eventBefore=state.eventAfter=null;$("event-search").value=text;navigate("observations");await refreshEvents();});
     if(/^(@[a-z0-9_]{3,}|(?:https?:\/\/)?t\.me\/\S+)$/i.test(text)&&may("interact"))
       option("telegram",tr("Open Telegram link"),text,()=>{navigate("chats");$("chat-link").value=text;viewQuery("chats",".chat-open").open=true;$("chat-link").focus();});
   }
@@ -829,6 +831,7 @@ $("setup-action").addEventListener("click",nextSetupStep);
 $("empty-action").addEventListener("click",()=>{
   if(state.filter||state.source||state.search||state.eventSince||state.eventUntil){
     state.filter=state.source=state.search=state.eventSince=state.eventUntil="";$("event-search").value="";$("source-filter").value="";
+    state.cursor=state.eventBefore=state.eventAfter=null;
     viewQueries("observations","[data-filter]").forEach(n=>n.classList.toggle("active",n.dataset.filter===""));
     window.TgWitnessRouter?.record();
     busy($("empty-action"),()=>refreshEvents());
@@ -1022,6 +1025,7 @@ async function switchProfile(id,options={}){
   state.request++;clearVerification();
   state.profile=id;state.monitoringDirty=false;state.captureDirty=false;sessionStorage.setItem("tgwitness-profile",id);
   state.events=[];state.dialogs=[];state.cursor=null;state.filter="";state.source="";state.search="";state.eventSince="";state.eventUntil="";state.eventSystem=false;
+  state.eventBefore=state.eventAfter=state.eventMatched=null;
   state.chat=null;state.chats=[];state.chatMessages=[];state.chatNextBefore=null;state.chatInfo=null;state.chatFilter="all";state.chatAuthor=null;
   state.scope=null;state.scopeDirty=false;state.dossier=null;state.notifications=[];resetWitnessSetup();
   closeNotifications();renderNotifications();renderExportState(null);
@@ -1156,32 +1160,37 @@ function renderEvents() {
   $("empty-action").textContent=tr(filtered?"Clear filters":!c.has_session?"Connect account →":
     !hasSources(state.status)?"Choose sources →":"Start observation");
   show("empty-action",!!filtered||(!state.status.demo&&!c.running));
-  $("shown-count").textContent=trn("{n} event shown","{n} events shown",state.events.length);
-  show("load-more",state.cursor!==null);
+  window.TgWitnessJournal.syncPage();
 }
-async function refreshEvents(append=false) {
+async function refreshEvents(direction=false) {
   if(state.view!=='observations')return;
   await journalReady;
   window.TgWitnessJournal.sync();
-  const request=++state.request,params=new URLSearchParams({limit:"60"});
+  const request=++state.request,params=new URLSearchParams({limit:"200",include_count:"true"});
+  const after=direction==="newer"?state.eventAfter:null;
+  const before=direction==="latest"?null:direction===true||direction==="older"?state.cursor:state.eventBefore;
+  if(direction==="newer"&&after===null||[true,"older"].includes(direction)&&before===null)return;
   if(state.filter)params.set("kind",state.filter);
   if(state.source)params.set("chat_id",state.source);
   if(state.search)params.set("search",state.search);
   if(state.eventSince)params.set("since",state.eventSince);
   if(state.eventUntil)params.set("until",state.eventUntil);
   if(!state.eventSystem)params.set("hide_system","true");
-  if(append && state.cursor)params.set("before",state.cursor);
+  if(after!==null)params.set("after",after);else if(before!==null)params.set("before",before);
   const result=await json("events?"+params,undefined,viewOptions('observations'));
   if(request!==state.request)return;
-  state.events=append ? [...state.events,...result.events] : result.events;
-  state.cursor=result.next_before; renderEvents();
+  state.events=result.events.slice(0,200);state.cursor=result.next_before??null;state.eventAfter=result.next_after??null;
+  state.eventMatched=result.count_exact?result.matched:null;
+  state.eventBefore=after!==null?(state.eventAfter!==null&&result.events.length?result.events[0].seq+1:null):before;
+  renderEvents();
+  if(direction)window.TgWitnessRouter?.record({seq:null,before:state.eventBefore});
 }
-const journalReady=import('./components/journal.js?v=2').then(({createJournal})=>{
+const journalReady=import('./components/journal.js?v=3').then(({createJournal})=>{
   window.TgWitnessJournal=createJournal({get:$,state,node,icon,tr,invalidate:()=>{state.request++;},error:message=>toast(message,true),
-    changed:async()=>{state.cursor=null;closeDetail({history:false});window.TgWitnessRouter?.record({seq:null});await refreshEvents();}});
+    changed:async()=>{state.cursor=state.eventBefore=state.eventAfter=state.eventMatched=null;closeDetail({history:false});window.TgWitnessRouter?.record({seq:null});await refreshEvents();},
+    page:direction=>refreshEvents(direction)});
   return window.TgWitnessJournal;
 });
-$("load-more").addEventListener("click",e=>busy(e.currentTarget,()=>refreshEvents(true)));
 $("refresh").addEventListener("click",e=>busy(e.currentTarget,async()=>{await refreshStatus();await refreshEvents();}));
 $("collector-toggle").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   await json("collector/"+(state.status.collector.running ? "stop" : "start"),{});
@@ -3589,7 +3598,7 @@ async function pollWorkspace(){
   try{
     const head=state.status?.stats.head?.seq;
     await refreshStatus();
-    if(!window.TgWitnessLive?.active()&&state.view==="observations" && state.drawerSeq===null && state.events.length<=60
+    if(!window.TgWitnessLive?.active()&&state.view==="observations" && state.drawerSeq===null && state.eventBefore===null && state.events.length<=200&&window.TgWitnessJournal?.canRefresh()!==false
         && state.status.stats.head?.seq!==head) await refreshEvents();
     if(!window.TgWitnessLive?.active()&&state.view==="chats" && state.status.stats.head?.seq!==head) await refreshChats(true);
     if(state.view==="accounts") await loadProfiles();

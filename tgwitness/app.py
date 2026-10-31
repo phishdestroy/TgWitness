@@ -805,11 +805,14 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     async def get_events(request: Request, chat_id: int | None = None, message_id: int | None = None,
                          kind: str | None = None, before: int | None = None,
                          search: str | None = None, limit: int = 100,
-                         since: str | None = None, until: str | None = None, hide_system: bool = False):
+                         since: str | None = None, until: str | None = None, hide_system: bool = False,
+                         after: int | None = None, include_count: bool = False):
         if not 1 <= limit <= 500 or (search and len(search) > 200):
             raise HTTPException(422, "Limit must be 1–500; search must be at most 200 characters.")
         if kind and (len(kind) > 300 or len(kind.split(",")) > 16):
             raise HTTPException(422, "Choose at most 16 event types.")
+        if before is not None and after is not None or any(value is not None and not 0 <= value < 2**53 for value in (before, after)):
+            raise HTTPException(422, "Choose one valid journal cursor.")
         if chat_id is not None:
             require_chat(request, chat_id)
         dates = []
@@ -823,9 +826,36 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 raise HTTPException(422, "Dates must be ISO timestamps with a timezone.") from None
         if dates[0] is not None and dates[1] is not None and dates[0] > dates[1]:
             raise HTTPException(422, "The start must precede the end of the selected period.")
-        records = app.state.store.events(chat_id, message_id, kind, before, limit, search,
-                                         chat_ids=visible_chats(request), since=dates[0], until=dates[1], hide_system=hide_system)
-        return {"events": records, "next_before": records[-1]["seq"] if len(records) == limit else None}
+        filters = dict(chat_id=chat_id, message_id=message_id, kind=kind, search=search,
+                       chat_ids=visible_chats(request), since=dates[0], until=dates[1], hide_system=hide_system)
+        store = app.state.store
+
+        def read_window():
+            records = store.events(**filters, before=before, after=after, limit=limit+1, timeout_s=2)
+            more = len(records) > limit
+            records = records[-limit:] if after is not None else records[:limit]
+            older = newer = None
+            if records:
+                if after is not None:
+                    newer = records[0]["seq"] if more else None
+                    older = records[-1]["seq"] if store.events(**filters, before=records[-1]["seq"], limit=1, timeout_s=1) else None
+                else:
+                    older = records[-1]["seq"] if more else None
+                    if before is not None and store.events(**filters, after=records[0]["seq"], limit=1, timeout_s=1):
+                        newer = records[0]["seq"]
+            matched = None
+            if include_count:
+                try:
+                    matched = store.count_events(**filters, timeout_s=2)
+                except TimeoutError:
+                    pass
+            return {"events": records, "next_before": older, "next_after": newer,
+                    "matched": matched, "count_exact": matched is not None}
+
+        try:
+            return await complete_in_thread(read_window)
+        except TimeoutError:
+            raise HTTPException(503, "The journal is busy. Narrow the filters and retry.") from None
 
     @app.get("/api/stream", dependencies=[Depends(authenticate)])
     async def journal_stream(request: Request, after: int = 0,
