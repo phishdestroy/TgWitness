@@ -17,7 +17,7 @@ from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, Response
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, Field, StrictBool, model_validator
 from telethon.errors import FloodWaitError, RPCError
 
 from . import __version__
@@ -128,11 +128,16 @@ class TargetBatch(BaseModel):
     chat_ids: list[int] = Field(min_length=1, max_length=500)
     enabled: bool | None = None
     priority: bool | None = None
+    remove: StrictBool = False
 
     @model_validator(mode="after")
     def action_required(self):
+        if self.remove:
+            if self.enabled is not None or self.priority is not None:
+                raise ValueError("Remove cannot be combined with enabled or priority.")
+            return self
         if self.enabled is None and self.priority is None:
-            raise ValueError("Choose enabled or priority.")
+            raise ValueError("Choose enabled, priority, or remove.")
         return self
 
 
@@ -1043,6 +1048,9 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         for chat_id in ids:
             require_chat(request, chat_id)
         async with op_lock:
+            if body.remove:
+                result = remove_targets(ids)
+                return {"targets": visible_targets(request), **result}
             existing = {t["chat_id"]: t for t in store.targets()}
             entries = {chat_id: existing.get(chat_id) or collector.dialog_cache.get(chat_id) for chat_id in ids}
             if any(entry is None for entry in entries.values()):
@@ -1073,30 +1081,43 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                                             "recheck": recheck_settings(store)}, body.chat_id)
         return {"targets": visible_targets(request)}
 
+    def remove_targets(ids):
+        """Remove validated sources as one transaction, then clear rebuildable caches."""
+        store = app.state.store
+        existing = {t["chat_id"]: t for t in store.targets()}
+        if any(chat_id not in existing for chat_id in ids):
+            raise HTTPException(404, "This chat is not among the sources.")
+        scope = scope_settings(store)
+        additions = set(ids) - set(scope["exclude"]) if scope["mode"] != "selected" else set()
+        if len(scope["exclude"]) + len(additions) > EXCLUDE_LIMIT:
+            raise HTTPException(409, "The scope already excludes 5,000 chats, the most it keeps. Pause these "
+                                     "chats instead, or switch the scope to chosen chats to remove them.")
+        with store.transaction():
+            if additions:
+                store.set_setting("scope", {**scope, "exclude": sorted(set(scope["exclude"]) | additions)})
+            for chat_id in ids:
+                store.remove_target(chat_id)
+                removed_dossier = dossier.remove(store, chat_id, clear_cache=False)
+                store.append("target.removed", {
+                    "title": existing[chat_id]["title"], "dossier_removed": removed_dossier,
+                    "excluded_from_scope": scope["mode"] != "selected",
+                    "journal": "records already saved for this chat stay in the append-only journal"}, chat_id)
+        pending = []
+        for chat_id in ids:
+            try:
+                dossier.cache_path(store, chat_id).unlink(missing_ok=True)
+            except OSError:
+                pending.append(chat_id)
+        return {"removed": len(ids), "excluded": len(additions), "cache_cleanup_pending": pending,
+                "media": {"pending": "cancelled", "running": "may_finish", "saved": "kept"}}
+
     @app.delete("/api/targets/{chat_id}", dependencies=[Depends(authenticate)])
     async def target_remove(request: Request, chat_id: int):
         require_live()
-        store = app.state.store
+        require_chat(request, chat_id)
         async with op_lock:
-            existing = next((t for t in store.targets() if t["chat_id"] == chat_id), None)
-            if not existing:
-                raise HTTPException(404, "This chat is not among the sources.")
-            scope = scope_settings(store)
-            exclude = scope["mode"] != "selected" and chat_id not in scope["exclude"]
-            if exclude and len(scope["exclude"]) >= EXCLUDE_LIMIT:
-                raise HTTPException(409, "The scope already excludes 5,000 chats, the most it keeps. Pause this "
-                                         "chat instead, or switch the scope to chosen chats to remove it.")
-            with store.transaction():
-                store.remove_target(chat_id)
-                if exclude:
-
-                    store.set_setting("scope", {**scope, "exclude": [*scope["exclude"], chat_id]})
-                removed_dossier = dossier.remove(store, chat_id)
-                store.append("target.removed", {
-                    "title": existing["title"], "dossier_removed": removed_dossier,
-                    "excluded_from_scope": scope["mode"] != "selected",
-                    "journal": "records already saved for this chat stay in the append-only journal"}, chat_id)
-        return {"targets": visible_targets(request)}
+            result = remove_targets([chat_id])
+        return {"targets": visible_targets(request), **result}
 
     @app.post("/api/capture", dependencies=[Depends(authenticate)])
     async def capture(body: Capture):

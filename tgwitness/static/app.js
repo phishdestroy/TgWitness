@@ -337,7 +337,7 @@ function lock() {
   window.TgWitnessRouter?.invalidate();
   viewHost?.resetSession();state.permissionsStamp=null;
   state.events=[];state.chats=[];state.chatMessages=[];state.chatInfo=null;state.chat=null;state.parameters=null;
-  selectedSources.clear();selectedDialogs.clear();sourceBatchBusy=false;
+  selectedDialogs.clear();sourceBatchBusy=false;
   sourcesView?.resetSession();
   resetReportSettings();
   window.dispatchEvent(new Event("tgwitness:lock"));
@@ -903,7 +903,7 @@ function renderAccounts(){
 }
 async function switchProfile(id,options={}){
   if(options.history!==false)window.TgWitnessRouter?.invalidate();
-  selectedSources.clear();selectedDialogs.clear();sourceBatchBusy=false;
+  selectedDialogs.clear();sourceBatchBusy=false;
   resetReportSettings();
   window.TgWitnessIntegrations?.clear(true);
   window.TgWitnessLive?.stop();window.TgWitnessReview?.clear();
@@ -1173,20 +1173,23 @@ document.addEventListener("keydown",e=>{
 let sourcesView=null;
 const sourcesReady=import("./views/sources.js").then(({createSources})=>{
   sourcesView=createSources({root:$("view-sources"),tr,getState:()=>state,
-    getSession:()=>state.workspaceRevision+":"+state.profile,may,json,refreshStatus,toast,termText,scopeName,
+    getSession:()=>state.workspaceRevision+":"+state.profile,may,json,refreshStatus,toast,termText,scopeName,icon,loadScope,
+    confirm:message=>window.confirm(message),
+    scopeExclusions:(ids,excluded)=>{if(state.scopeDirty)state.scopeExclude=excluded?
+      [...new Set([...state.scopeExclude,...ids])]:state.scopeExclude.filter(id=>!ids.includes(id));},
     setDirty:dirty=>{state.monitoringDirty=dirty.monitoring;state.captureDirty=dirty.capture;state.recheckDirty=dirty.recheck;},
     saved:result=>{for(const name of ["monitoring","capture","recheck"])state.status[name]=result[name];}});
   if(state.view==="sources"&&!$("workspace").hidden)sourcesView.enter();
   return sourcesView;
 }).catch(error=>{toast(error.message,true);throw error;});
-const selectedSources=new Set(),selectedDialogs=new Set();let sourceBatchBusy=false;
+const selectedDialogs=new Set();let sourceBatchBusy=false;
 async function updateSources(ids,changes){
   if(sourceBatchBusy||!ids.length)return;
   const revision=state.workspaceRevision;sourceBatchBusy=true;renderSourceTools();
   try{
     await json("targets/batch",{chat_ids:ids,...changes});
     if(revision!==state.workspaceRevision)return;
-    ids.forEach(id=>{selectedSources.delete(id);selectedDialogs.delete(id);});await refreshStatus();renderDialogs();
+    ids.forEach(id=>selectedDialogs.delete(id));await refreshStatus();renderDialogs();
   }finally{if(revision===state.workspaceRevision){sourceBatchBusy=false;renderSourceTools();}}
 }
 function sourceCheck(id,selected,title){
@@ -1197,19 +1200,6 @@ function sourceCheck(id,selected,title){
 function matchingDialogs(){const term=$("dialog-search").value.toLowerCase(),type=$("dialog-kind").value;
   return state.dialogs.filter(d=>(d.title+" "+d.chat_id).toLowerCase().includes(term)&&(!type||kindType[d.kind]===type));}
 function renderSourceTools(){
-  if(!$("target-tools")){
-    const bar=node("div","source-bulk");bar.id="target-tools";
-    const search=node("input");search.id="target-search";search.type="search";search.placeholder=tr("Search chats");search.setAttribute("aria-label",tr("Search chats"));search.addEventListener("input",renderTargets);
-    const filter=node("select");filter.id="target-filter";filter.setAttribute("aria-label",tr("Filter"));
-    for(const [value,label] of [["","All"],["priority","Priority"],["paused","Paused"],["unconfirmed","Unconfirmed access"]]){const option=node("option","",tr(label));option.value=value;filter.append(option);}
-    filter.addEventListener("change",renderTargets);bar.append(search,filter);$("target-list").before(bar);
-    const actions=node("div","source-bulk");actions.id="target-bulk-actions";bar.after(actions);
-  }
-  const actions=$("target-bulk-actions");actions.replaceChildren();
-  for(const [label,change] of [["Enable selected",{enabled:true}],["Pause selected",{enabled:false}],["Mark priority",{priority:true}]]){
-    const button=node("button","quiet small",tr(label)+" · "+selectedSources.size);button.type="button";button.disabled=sourceBatchBusy||!selectedSources.size||state.status.demo;
-    button.addEventListener("click",()=>busy(button,()=>updateSources([...selectedSources],change)));actions.append(button);
-  }
   if(!$("dialog-bulk-actions")){const actions=node("div","source-bulk");actions.id="dialog-bulk-actions";$("dialog-list").before(actions);}
   const available=$("dialog-bulk-actions");available.replaceChildren();
   const enabled=new Set(state.status.targets.filter(t=>t.enabled).map(t=>t.chat_id));
@@ -1220,52 +1210,8 @@ function renderSourceTools(){
   }
 }
 function renderTargets() {
-  const list=$("target-list");list.replaceChildren();
-  const s=state.status;
-  renderSourceTools();
-  const term=$("target-search").value.trim().toLowerCase(),filter=$("target-filter").value;
-  if(!s.targets.length)list.append(node("p","hint",tr(s.collector.has_session?
-    "No sources selected yet. Add groups from your chat list.":"Add an account first.")));
-  const wide=(s.scope?.mode||"selected")!=="selected";
-
-  $("target-list-title").textContent=tr(wide?"Chats in the scope":"Selected chats");
-  for(const t of s.targets){
-    const source=s.collector.source_status?.[String(t.chat_id)];
-    if(!(t.title+" "+t.chat_id).toLowerCase().includes(term)||(filter==="priority"&&!t.priority)||
-      (filter==="paused"&&t.enabled)||(filter==="unconfirmed"&&source?.state!=="access_unconfirmed"))continue;
-    const row=node("div","target-row"),info=node("div"),title=node("h3","",t.title);
-    if(t.origin==="scope"){const badge=node("span","pill",tr("auto"));badge.title=tr("Added by the observation scope");title.append(" ",badge);}
-    info.append(title,node("p","",termText(t.kind)+" · "+t.chat_id));
-    if(source)info.append(node("p",source.state==="access_unconfirmed"?"access-warning":"",termText(source.state)+" · "+termText(source.visibility)+" · "+termText(source.role)));
-    const actions=node("div","target-actions");
-    const star=node("button","icon-button star"+(t.priority?" on":""));star.type="button";star.append(icon("star"));
-    star.setAttribute("aria-pressed",String(!!t.priority));star.disabled=s.demo;
-    star.title=tr(t.priority?"Priority: rechecked every {n} min. Press for the regular interval.":"Regular: rechecked every {h} h. Press to make it a priority chat.",
-      {n:s.recheck?.recheck_minutes??15,h:Math.round((s.recheck?.recheck_other_minutes??360)/60)});
-    star.setAttribute("aria-label",tr("Priority recheck for {name}",{name:t.title}));
-    star.addEventListener("click",()=>busy(star,async()=>{await json("targets/priority",{chat_id:t.chat_id,priority:!t.priority});await refreshStatus();}));
-    const remove=node("button","quiet small",tr("Remove"));remove.type="button";remove.disabled=s.demo;
-    remove.addEventListener("click",()=>busy(remove,async()=>{
-      if(!window.confirm(tr("Remove \"{name}\" from the sources? Its people profiles are deleted. Records already saved stay in the journal.",{name:t.title})+
-        (wide?" "+tr("The chat is also excluded, so the scope does not add it again."):"")))return;
-      await api("targets/"+encodeURIComponent(t.chat_id),undefined,{method:"DELETE"});
-      toast(tr("Source removed."));await refreshStatus();if(state.scope)await loadScope();
-    }));
-    const label=node("label","toggle-label"),check=node("input");check.type="checkbox";check.checked=!!t.enabled;check.disabled=s.demo;
-    check.setAttribute("aria-label",tr("Observe {name}",{name:t.title}));
-    check.addEventListener("change",()=>busy(null,async()=>{check.disabled=true;try {await json("targets",{chat_id:t.chat_id,enabled:check.checked});await refreshStatus();} finally {check.disabled=s.demo;}}));
-    label.append(check,node("span","",tr(t.enabled?"Enabled":"Paused")));actions.append(star,label);
-    if(wide&&!s.scope.exclude.includes(t.chat_id)){
-      const exclude=node("button","quiet small",tr("Exclude"));exclude.type="button";exclude.disabled=s.demo;
-      exclude.title=tr("Never record this chat while the scope is a folder or the whole account");
-      exclude.addEventListener("click",()=>busy(exclude,async()=>{
-        await json("scope",{...s.scope,exclude:[...s.scope.exclude,t.chat_id],acknowledged:false});
-        toast(tr("Chat excluded from the scope."));await refreshStatus();await loadScope();
-      }));
-      actions.append(exclude);
-    }
-    actions.append(remove);row.append(sourceCheck(t.chat_id,selectedSources,t.title),info,actions);list.append(row);
-  }
+  const s=state.status;if(!s)return;
+  sourcesView?.renderTargets();
   fillSourceSelect("snapshot-source",$("snapshot-source").value);
   fillSourceSelect("chat-export-source",$("chat-export-source").value,true);
   syncExport(s);
@@ -1276,6 +1222,7 @@ function renderTargets() {
 }
 const kindType={channel:"channels",supergroup:"groups",group:"groups",private:"private",bot:"bots"};
 function renderDialogs(){
+  if(state.view!=="sources"||!state.status)return;
   const list=$("dialog-list");list.replaceChildren();renderSourceTools();
   $("finish-source-selection").disabled=!state.status.targets.some(t=>t.enabled);
   matchingDialogs().forEach(d=>{
@@ -1291,9 +1238,12 @@ function renderDialogs(){
 const loadDialogs=button=>busy(button,async()=>{
   const revision=state.workspaceRevision,result=await json("dialogs");
   if(revision!==state.workspaceRevision)return;
-  state.dialogs=result.dialogs;show("available-card",true);sourcesView?.showTab("chats");
+  state.dialogs=result.dialogs;
+  if(state.scope)state.scope.folders=result.folders||[];
+  if(state.view!=="sources")return;
+  show("available-card",true);sourcesView?.showTab("chats");
   $("dialog-limit").textContent=tr(result.may_be_truncated?"First 1,000 dialogs inspected; more may exist.":"Showing the chats already available to this account.");
-  if(state.scope){state.scope.folders=result.folders||[];renderScope();}
+  if(state.scope)renderScope();
   $("load-dialogs").textContent=tr("Reload chats");
   renderDialogs();
 });
@@ -1774,12 +1724,12 @@ async function loadScope(){
   if(!state.status)return;
   if(state.status.demo){
     state.scope={settings:state.status.scope,recheck:state.status.recheck,folders:[],warning:wideWarning()};
-    renderScope();return;
+    if(state.view==="sources")renderScope();return;
   }
   const revision=state.workspaceRevision,profile=state.profile,r=await json("scope");
   if(revision!==state.workspaceRevision||profile!==state.profile)return;
   state.scope={...r,folders:r.folders.length?r.folders:(state.scope?.folders||[])};
-  renderScope();
+  if(state.view==="sources")renderScope();
 }
 function scopeDraft(){
   const mode=document.querySelector("[name=scope-mode]:checked")?.value||"selected",folder=$("scope-folder").value;
@@ -1840,7 +1790,9 @@ $("scope-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitte
   if(revision!==state.workspaceRevision)return;
   state.scopeDirty=JSON.stringify(draft)!==JSON.stringify(scopeDraft());
   state.scope={...r,folders:r.folders.length?r.folders:state.scope.folders};
-  await refreshStatus();renderScope();
+  await refreshStatus();
+  if(revision!==state.workspaceRevision||profile!==state.profile)return;
+  if(state.view==="sources")renderScope();
   toast(tr(draft.mode==="selected"?"Scope saved: only chosen chats are recorded.":"Scope saved and recorded in the signed journal. New chats are added as they appear."));
 });});
 function renderRecheck(){

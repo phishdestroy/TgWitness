@@ -269,7 +269,27 @@
   </form>
   </div>
   <div id="sources-panel-chats" role="tabpanel" aria-labelledby="sources-tab-chats" hidden>
-  <div class="card padded"><h2 id="target-list-title">Selected chats</h2><div id="target-list"></div></div>
+  <section class="card source-list-card" id="target-card" aria-labelledby="target-list-title">
+    <div class="source-list-heading"><h2 id="target-list-title" tabindex="-1">Chats in scope</h2><span id="target-match-count" class="hint"></span></div>
+    <div class="source-filters" id="target-tools">
+      <input type="search" id="target-search" aria-label="Search chats" placeholder="Search by name or ID">
+      <select id="target-filter" aria-label="Source status"><option value="">All statuses</option><option value="enabled">Enabled</option><option value="paused">Paused</option><option value="priority">Priority</option><option value="excluded">Excluded</option><option value="unconfirmed">Unconfirmed access</option><option value="ignored">Ignored</option></select>
+      <select id="target-kind" aria-label="Source type"><option value="">All types</option><option value="channels">Channels</option><option value="groups">Groups</option><option value="private">Private chats</option><option value="bots">Bots</option></select>
+      <select id="target-sort" aria-label="Sort sources"><option value="name">Name · A–Z</option><option value="name-desc">Name · Z–A</option><option value="priority">Priority first</option><option value="status">Enabled first</option></select>
+    </div>
+    <div id="target-bulk-actions" class="source-selection-bar" hidden role="toolbar" aria-label="Selected sources">
+      <strong id="target-selection-count"></strong>
+      <label class="sr-only" for="target-bulk-action">Action for selected sources</label>
+      <select id="target-bulk-action"><option value="enable">Enable</option><option value="pause">Pause</option><option value="priority">Mark priority</option><option value="regular">Remove priority</option><option value="exclude">Exclude from scope</option><option value="remove">Remove sources</option></select>
+      <button type="button" class="secondary" id="target-bulk-apply">Apply</button><button type="button" class="quiet" id="target-selection-clear">Clear selection</button>
+    </div>
+    <div class="source-table-wrap"><table class="sources-table"><thead><tr>
+      <th class="source-select-cell"><input type="checkbox" id="target-select-page" aria-label="Select this page"></th><th>Source</th><th class="source-type-cell">Type</th><th class="source-status-cell">Status</th><th class="source-star-cell"><span class="sr-only">Priority</span></th><th class="source-menu-cell"><span class="sr-only">Actions</span></th>
+    </tr></thead><tbody id="target-list"></tbody></table></div>
+    <div id="target-empty" class="source-empty" hidden><p id="target-empty-message"></p><button type="button" class="quiet" id="target-clear-filters">Clear filters</button></div>
+    <div class="source-pagination"><button type="button" class="quiet" id="target-select-matching">Select all matching</button><span id="target-page-count" class="hint" role="status"></span><div><button type="button" class="quiet" id="target-prev">Previous</button><button type="button" class="quiet" id="target-next">Next</button></div></div>
+    <p id="source-action-result" class="hint source-action-result" role="status"></p>
+  </section>
   <div class="card padded" hidden id="available-card"><h2>Available chats</h2><div class="dialog-filters"><input aria-label="Find an available chat" id="dialog-search" placeholder="Find a chat…" type="search"><select aria-label="Chat type" id="dialog-kind"><option value="">All types</option><option value="channels">Channels</option><option value="groups">Groups</option><option value="private">Private chats</option><option value="bots">Bots</option></select></div><p class="hint" id="dialog-limit"></p><div id="dialog-list"></div><button class="primary" id="finish-source-selection" type="button">Done</button></div>
   <section class="card padded" id="history-card" aria-labelledby="history-heading">
     <div class="eyebrow">Full history</div><h2 id="history-heading">Bring past messages into this workspace</h2>

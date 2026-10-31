@@ -22,6 +22,9 @@ export function createSources(context) {
   const tabs = [...root.querySelectorAll("[data-source-tab]")];
   let tab = "scope", baseline = null, session = getSession(), saving = false, generation = 0;
   let dirty = {monitoring: false, capture: false, recheck: false};
+  const selection = new Set(), pageSize = 10;
+  const kindType = {channel: "channels", supergroup: "groups", group: "groups", private: "private", bot: "bots"};
+  let sourcePage = 0, sourceBusy = false, sourceAttempt = 0, rowsVersion = "";
   const on = (element, event, handler) => element.addEventListener(event, handler, {signal: listeners.signal});
   const allowed = group => !getState().status?.demo && may(group === "recheck" ? "sources" : "settings");
   const permission = group => may(group === "recheck" ? "sources" : "settings");
@@ -141,6 +144,221 @@ export function createSources(context) {
         : "Original messages provide context for later edits and deletion notices. Already saved records remain available.");
   }
 
+  function element(tag, className = "", text = "") {
+    const node = root.ownerDocument.createElement(tag);
+    node.className = className; node.textContent = text;
+    return node;
+  }
+
+  function sourceState(target, status) {
+    const seen = status.collector.source_status?.[String(target.chat_id)];
+    if (status.scope?.exclude.includes(target.chat_id)) return "excluded";
+    if (seen?.state === "access_unconfirmed") return seen.ignored ? "ignored" : "unconfirmed";
+    return target.enabled ? "enabled" : "paused";
+  }
+
+  function matchingTargets() {
+    const status = getState().status;
+    if (!status) return [];
+    const term = find("target-search").value.trim().toLocaleLowerCase();
+    const filter = find("target-filter").value, kind = find("target-kind").value;
+    const sort = find("target-sort").value;
+    return status.targets.filter(target =>
+      (target.title + " " + target.chat_id).toLocaleLowerCase().includes(term)
+      && (!kind || kindType[target.kind] === kind)
+      && (!filter || (filter === "priority" ? target.priority
+        : filter === "enabled" ? target.enabled && sourceState(target, status) !== "excluded"
+          : filter === "paused" ? !target.enabled : sourceState(target, status) === filter)))
+      .sort((a, b) => {
+        if (sort === "priority" && !!a.priority !== !!b.priority) return Number(b.priority) - Number(a.priority);
+        if (sort === "status" && !!a.enabled !== !!b.enabled) return Number(b.enabled) - Number(a.enabled);
+        return (sort === "name-desc" ? -1 : 1) * a.title.localeCompare(b.title) || a.chat_id - b.chat_id;
+      });
+  }
+
+  function sourceButton(action, target, label, className = "quiet small") {
+    const button = element("button", className, label);
+    button.type = "button"; button.dataset.sourceAction = action;
+    button.dataset.chatId = String(target.chat_id);
+    button.dataset.sourceFocus = target.chat_id + ":" + action;
+    return button;
+  }
+
+  function renderTargets() {
+    const status = getState().status;
+    if (!status || getState().view !== "sources") return;
+    const known = new Set(status.targets.map(target => target.chat_id));
+    for (const id of selection) if (!known.has(id)) selection.delete(id);
+    const matches = matchingTargets();
+    sourcePage = Math.min(sourcePage, Math.max(0, Math.ceil(matches.length / pageSize) - 1));
+    const visible = matches.slice(sourcePage * pageSize, (sourcePage + 1) * pageSize);
+    const snapshot = visible.map(target => ({...target, state: sourceState(target, status),
+      visibility: status.collector.source_status?.[String(target.chat_id)]?.visibility,
+      role: status.collector.source_status?.[String(target.chat_id)]?.role}));
+    const version = JSON.stringify(snapshot);
+    const body = find("target-list");
+    if (version !== rowsVersion) {
+      const active = body.contains(root.ownerDocument.activeElement)
+        ? root.ownerDocument.activeElement.dataset.sourceFocus : null;
+      const fragment = root.ownerDocument.createDocumentFragment();
+      for (const target of visible) {
+        const row = element("tr", "target-row"), pick = element("td", "source-select-cell");
+        const checkbox = element("input", "source-select");
+        checkbox.type = "checkbox"; checkbox.dataset.sourceAction = "select";
+        checkbox.dataset.chatId = String(target.chat_id); checkbox.dataset.sourceFocus = target.chat_id + ":select";
+        checkbox.setAttribute("aria-label", tr("Select {name}", {name: target.title}));
+        pick.append(checkbox);
+        const name = element("td", "source-name-cell");
+        name.append(element("strong", "", target.title), element("span", "source-id", String(target.chat_id)));
+        if (target.origin === "scope") name.append(element("span", "source-origin", tr("auto")));
+        const type = element("td", "source-type-cell", context.termText(target.kind));
+        const state = sourceState(target, status), stateCell = element("td", "source-status-cell");
+        const label = {enabled: tr("Enabled"), paused: tr("Paused"), excluded: tr("Excluded"),
+          unconfirmed: tr("Unconfirmed"), ignored: tr("Ignored")}[state];
+        const toggle = sourceButton("toggle", target, label, "source-state " + state);
+        toggle.setAttribute("aria-label", tr(target.enabled && state !== "excluded"
+          ? "Pause recording for {name}" : "Enable recording for {name}", {name: target.title}));
+        stateCell.append(toggle);
+        const starCell = element("td", "source-star-cell");
+        const star = sourceButton("star", target, "", "icon-button star" + (target.priority ? " on" : ""));
+        star.append(context.icon("star")); star.setAttribute("aria-pressed", String(!!target.priority));
+        star.setAttribute("aria-label", tr("Priority recheck for {name}", {name: target.title}));
+        star.title = tr(target.priority ? "Priority" : "Regular");
+        starCell.append(star);
+        const menuCell = element("td", "source-menu-cell"), menu = element("details", "source-row-menu");
+        const summary = element("summary", "", "⋯");
+        summary.setAttribute("aria-label", tr("Actions for {name}", {name: target.title}));
+        summary.dataset.sourceFocus = target.chat_id + ":menu";
+        const actions = element("div", "source-row-actions");
+        if ((status.scope?.mode || "selected") !== "selected" && state !== "excluded")
+          actions.append(sourceButton("exclude", target, tr("Exclude from scope")));
+        actions.append(sourceButton("remove", target, tr("Remove source")));
+        menu.append(summary, actions); menuCell.append(menu);
+        row.append(pick, name, type, stateCell, starCell, menuCell); fragment.append(row);
+      }
+      body.replaceChildren(fragment); rowsVersion = version;
+      if (active) [...body.querySelectorAll("[data-source-focus]")].find(node => node.dataset.sourceFocus === active)
+        ?.focus({preventScroll: true});
+    }
+    const blocked = sourceBusy || status.demo || !may("sources");
+    find("target-card").setAttribute("aria-busy", String(sourceBusy));
+    body.querySelectorAll("input,button").forEach(node => node.disabled = blocked);
+    body.querySelectorAll("input.source-select").forEach(node => node.checked = selection.has(Number(node.dataset.chatId)));
+    const master = find("target-select-page");
+    master.checked = !!visible.length && visible.every(target => selection.has(target.chat_id));
+    master.indeterminate = !master.checked && visible.some(target => selection.has(target.chat_id));
+    master.disabled = blocked || !visible.length;
+    find("target-match-count").textContent = tr("{shown} of {total}", {shown: matches.length, total: status.targets.length});
+    find("target-bulk-actions").hidden = !selection.size;
+    find("target-selection-count").textContent = tr("{n} selected", {n: selection.size});
+    find("target-bulk-apply").disabled = blocked || !selection.size;
+    find("target-bulk-apply").textContent = tr(sourceBusy ? "Applying…" : "Apply");
+    find("target-selection-clear").disabled = sourceBusy;
+    find("target-bulk-action").disabled = blocked;
+    const exclude = find("target-bulk-action").querySelector('[value="exclude"]');
+    exclude.hidden = exclude.disabled = (status.scope?.mode || "selected") === "selected";
+    if (exclude.disabled && find("target-bulk-action").value === "exclude") find("target-bulk-action").value = "pause";
+    find("target-empty").hidden = !!matches.length;
+    find("target-empty-message").textContent = tr(status.targets.length
+      ? "No sources match these filters." : status.collector.has_session
+        ? "No sources selected yet. Load chats to choose what to record." : "Connect an account to choose sources.");
+    find("target-clear-filters").hidden = !status.targets.length;
+    find("target-page-count").textContent = matches.length
+      ? tr("{from}–{to} of {total}", {from: sourcePage * pageSize + 1,
+        to: Math.min((sourcePage + 1) * pageSize, matches.length), total: matches.length}) : "";
+    find("target-prev").disabled = sourceBusy || sourcePage === 0;
+    find("target-next").disabled = sourceBusy || (sourcePage + 1) * pageSize >= matches.length;
+    find("target-select-matching").disabled = blocked || !matches.length;
+    find("target-select-matching").textContent = tr(matches.length > 500 ? "Select first 500 matching" : "Select all matching");
+  }
+
+  async function runSourceAction(ids, action) {
+    const state = getState(), status = state.status;
+    if (sourceBusy || !status || status.demo || !may("sources") || !ids.length) return;
+    if (ids.length > 500) {toast(tr("Choose up to 500 sources at a time."), true); return;}
+    const wide = (status.scope?.mode || "selected") !== "selected";
+    if (action === "remove" && !context.confirm(tr(ids.length === 1
+      ? "Remove this source? Saved messages and files stay. Cached people profiles are removed."
+      : "Remove {n} sources? Saved messages and files stay. Cached people profiles are removed.", {n: ids.length})
+      + (wide ? " " + tr("These chats are also excluded so the scope does not add them again.") : ""))) return;
+    const current = getSession(), attempt = ++sourceAttempt, profile = state.profile;
+    sourceBusy = true; renderTargets();
+    try {
+      let result;
+      if (action === "exclude") {
+        if (!wide) return;
+        result = await json("scope", {...status.scope,
+          exclude: [...new Set([...status.scope.exclude, ...ids])], acknowledged: false}, {profile});
+      } else {
+        const change = {enable: {enabled: true}, pause: {enabled: false}, priority: {priority: true},
+          regular: {priority: false}, remove: {remove: true}}[action];
+        if (!change) return;
+        result = await json("targets/batch", {chat_ids: ids, ...change}, {profile});
+      }
+      if (current !== getSession() || attempt !== sourceAttempt) return;
+      for (const id of ids) selection.delete(id);
+      if (action === "enable") context.scopeExclusions(ids, false);
+      if (action === "exclude" || action === "remove" && wide) context.scopeExclusions(ids, true);
+      await refreshStatus();
+      if (current !== getSession() || attempt !== sourceAttempt) return;
+      if (["enable", "exclude", "remove"].includes(action)) await context.loadScope();
+      if (current !== getSession() || attempt !== sourceAttempt) return;
+      const message = result.cache_cleanup_pending?.length
+        ? tr("Sources removed. A cached people profile could not be cleared; saved evidence is unchanged.")
+        : tr(action === "remove" ? (ids.length === 1 ? "Source removed. Saved evidence stays." : "{n} sources removed. Saved evidence stays.")
+          : action === "exclude" ? (ids.length === 1 ? "Source excluded." : "{n} sources excluded.")
+            : ids.length === 1 ? "Source updated." : "{n} sources updated.", {n: ids.length});
+      find("source-action-result").textContent = message; toast(message);
+    } catch (error) {
+      if (current !== getSession() || attempt !== sourceAttempt) return;
+      find("source-action-result").textContent = error.message; toast(error.message, true);
+    } finally {
+      if (current === getSession() && attempt === sourceAttempt) {sourceBusy = false; renderTargets();}
+    }
+  }
+  for (const id of ["target-search", "target-filter", "target-kind", "target-sort"])
+    on(find(id), id === "target-search" ? "input" : "change", () => {sourcePage = 0; renderTargets();});
+  on(find("target-clear-filters"), "click", () => {
+    for (const id of ["target-search", "target-filter", "target-kind"]) find(id).value = "";
+    sourcePage = 0; renderTargets(); find("target-search").focus();
+  });
+  on(find("target-select-page"), "change", event => {
+    for (const target of matchingTargets().slice(sourcePage * pageSize, (sourcePage + 1) * pageSize)) {
+      if (!event.target.checked) selection.delete(target.chat_id);
+      else if (selection.size < 500) selection.add(target.chat_id);
+    }
+    renderTargets();
+  });
+  on(find("target-select-matching"), "click", () => {
+    selection.clear();
+    for (const target of matchingTargets().slice(0, 500)) selection.add(target.chat_id);
+    renderTargets();
+  });
+  on(find("target-selection-clear"), "click", () => {selection.clear(); renderTargets();});
+  on(find("target-prev"), "click", () => {sourcePage--; renderTargets();});
+  on(find("target-next"), "click", () => {sourcePage++; renderTargets();});
+  on(find("target-bulk-apply"), "click", () => runSourceAction([...selection], find("target-bulk-action").value));
+  on(find("target-list"), "change", event => {
+    const checkbox = event.target.closest('[data-source-action="select"]');
+    if (!checkbox) return;
+    const id = Number(checkbox.dataset.chatId);
+    if (!checkbox.checked) selection.delete(id);
+    else if (selection.size < 500) selection.add(id);
+    else toast(tr("Choose up to 500 sources at a time."), true);
+    renderTargets();
+  });
+  on(find("target-list"), "click", event => {
+    const button = event.target.closest("button[data-source-action]");
+    if (!button) return;
+    const target = getState().status?.targets.find(item => item.chat_id === Number(button.dataset.chatId));
+    if (!target) return;
+    button.closest("details")?.removeAttribute("open");
+    let action = button.dataset.sourceAction;
+    if (action === "toggle") action = target.enabled && sourceState(target, getState().status) !== "excluded" ? "pause" : "enable";
+    if (action === "star") action = target.priority ? "regular" : "priority";
+    runSourceAction([target.chat_id], action);
+  });
+
   function updateStatus(status) {
     if (!status) return;
     if (session !== getSession()) resetSession();
@@ -167,6 +385,7 @@ export function createSources(context) {
     if (status.demo) note.textContent = tr("This demo is read-only. Recording settings can be changed in your own workspace.");
     else if (!permission("monitoring") && !permission("recheck")) note.textContent = tr("This access cannot change recording settings.");
     renderDraft();
+    if (getState().view === "sources") renderTargets();
   }
 
   on(form, "input", event => {
@@ -226,6 +445,10 @@ export function createSources(context) {
   function resetSession() {
     generation++; session = getSession(); baseline = null; saving = false;
     dirty = {monitoring: false, capture: false, recheck: false};
+    selection.clear(); sourcePage = 0; sourceBusy = false; sourceAttempt++; rowsVersion = "";
+    for (const id of ["target-search", "target-filter", "target-kind"]) find(id).value = "";
+    find("target-sort").value = "name"; find("target-bulk-actions").hidden = true;
+    find("source-action-result").textContent = "";
     context.setDirty({...dirty}); form.reset(); clearValidation(); find("recording-result").textContent = "";
     find("recording-save").disabled = find("recording-discard").disabled = true;
     find("recording-tab-dirty").hidden = true;
@@ -238,7 +461,7 @@ export function createSources(context) {
   }
   return {
     enter({params} = {}) {showTab(params?.tab || tab); updateStatus(getState().status);},
-    updateStatus, showTab,
+    updateStatus, showTab, renderTargets,
     leave() {},
     resetSession,
     destroy() {generation++; listeners.abort();},
