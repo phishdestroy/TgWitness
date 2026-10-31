@@ -731,28 +731,44 @@ def cross_check_witness(witness, bundle_path, bundle_result):
                                          if a["status"] == "ok" and 0 < (a["event_count"] or 0) <= count})
     prefixes = bundle_capture_prefixes(bundle_path, {a["event_count"] for a in mine
                                                     if a.get("capture") and a["status"] == "ok" and a["event_count"] <= count})
-    consistent, conflicts, later, anomalies = 0, [], 0, []
+    consistent, conflicts, later, anomalies, matched = 0, [], 0, [], []
     for anchor in mine:
         if anchor["status"] != "ok":
             anomalies.append(anchor)
         elif anchor["event_count"] > count:
             later += 1
-        elif anchor["event_count"] == 0 or hashes.get(anchor["event_count"]) == anchor["head_hash"]:
+        elif ("0" * 64 if anchor["event_count"] == 0 else hashes.get(anchor["event_count"])) == anchor["head_hash"]:
             capture = anchor.get("capture", {}).get("statement")
             prefix = prefixes.get(anchor["event_count"])
             if capture and (not prefix or any(prefix[k] != capture[k] for k in ("counts", "last_message_at"))):
                 conflicts.append(anchor)
             else:
                 consistent += 1
+                matched.append(anchor)
         else:
             conflicts.append(anchor)
-    periods, gaps = witnessed_periods(witness, key)
+    # A later head cannot be checked against an earlier export. Do not describe
+    # it, or a conflicting head, as a witnessed period of this particular file.
+    matching_sequences = {a["seq"] for a in matched}
+    timeline = []
+    for anchor in witness["anchors"]:
+        if anchor["collector_fingerprint"] == key and anchor["status"] == "ok":
+            if anchor["event_count"] > count:
+                continue
+            if anchor["seq"] not in matching_sequences:
+                anchor = {**anchor, "status": "conflict"}
+        timeline.append(anchor)
+    periods, gaps = witnessed_periods({**witness, "anchors": timeline}, key)
+    verified_through = max((a["event_count"] for a in matched), default=0)
     invalid = sum(1 for a in witness["anchors"] if a["status"] == "invalid")
     return {"witness_fingerprint": witness["fingerprint"], "anchors_for_this_key": len(mine),
             "other_keys": len(witness["anchors"]) - len(mine) - invalid, "invalid_answers": invalid,
             "consistent": consistent, "conflicts": conflicts,
             "after_export": later, "anomalies": anomalies, "no_response": len(witness["no_response"]),
-            "witnessed": periods, "witness_gaps": gaps}
+            "witnessed": periods, "witness_gaps": gaps,
+            "verified_through_event": verified_through, "unwitnessed_events": count - verified_through,
+            "export_head_witnessed": any(a["event_count"] == count for a in matched),
+            "witness_key_pinned": bool(witness.get("key_pinned"))}
 
 
 def channel_texts(source):
@@ -815,7 +831,8 @@ def check_channel(witness, source):
             "other_witnesses": foreign,
             "posted_but_not_found": sorted(posted - matching),
             "never_posted": sorted(set(witness["statements"]) - posted),
-            "telegram_post_dates": dates}
+            "telegram_post_dates": dates,
+            "post_date_verification": "not-performed"}
 
 
 def verify_dossier(path, expected_fingerprint=None, bundle=None):
@@ -897,11 +914,15 @@ def main():
     parser.add_argument("--tsa-ca", type=Path, help="Root certificate of the timestamp authority (PEM)")
     parser.add_argument("--witness", type=Path, help="Witness journal export to cross-check an evidence ZIP against")
     parser.add_argument("--witness-fingerprint", help="Witness key fingerprint retained independently")
+    parser.add_argument("--require-witness", action="store_true",
+                        help="Require a pinned witness checkpoint matching the full evidence ZIP's final record")
     parser.add_argument("--channel", help="Witness channel posts: Telegram Desktop result.json, saved page or t.me/s URL")
     parser.add_argument("--evidence", type=Path, help="With a profile/proof JSON: independently verify the matching evidence ZIP")
     parser.add_argument("--max-gib", type=int, default=MAX_UNCOMPRESSED_GIB,
                         help="Largest uncompressed archive to read, in GiB (default 4)")
     args = parser.parse_args()
+    if args.require_witness and (not args.witness or not args.witness_fingerprint):
+        parser.error("--require-witness requires --witness and --witness-fingerprint")
     globals()["MAX_UNCOMPRESSED_GIB"] = max(1, args.max_gib)
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(errors="backslashreplace")  # chat titles on legacy Windows consoles
@@ -942,11 +963,28 @@ def main():
                 notes += ["Witnessed from " + p["from"] + " to " + p["to"] for p in result["witness"]["witnessed"]]
                 if not result["witness"]["consistent"]:
                     notes.append("The witness has no answer signed by this export's key: nothing here is witnessed.")
+                notes.append("Witness checkpoints match through record "
+                             + str(result["witness"]["verified_through_event"]) + " of " + str(result["events"]) + ".")
+                if result["witness"]["unwitnessed_events"]:
+                    notes.append(str(result["witness"]["unwitnessed_events"])
+                                 + " trailing record(s) have no matching witness checkpoint.")
                 # A pinned witness that saw this key answering vouches for the key it saw.
                 pinned = pinned or bool(args.witness_fingerprint and result["witness"]["consistent"])
         check = result.get("channel_check") or (result.get("witness") or {}).get("channel_check")
         if check and (check["invalid_signatures"] or check["differ_from_journal"]):
             raise ValueError("Channel posts do not match the witness journal")
+        if check and check["telegram_post_dates"]:
+            notes.append("Channel dates are supplied metadata; witness signatures do not authenticate publication times.")
+        if args.require_witness:
+            witnessed = result.get("witness")
+            if not witnessed:
+                raise ValueError("--require-witness requires a full evidence ZIP and its witness journal")
+            if not witnessed["witness_key_pinned"] or not witnessed["export_head_witnessed"]:
+                raise ValueError("No pinned witness checkpoint matches the exported journal head; "
+                                 "retain a witness checkpoint at the export boundary")
+            if check and (check["posted_but_not_found"] or not check["matching"]):
+                raise ValueError("Requested channel evidence is missing signed witness posts")
+            result["witness_required"] = True
     except Exception as exc:
         parser.exit(1, "VERIFICATION FAILED: " + type(exc).__name__ + ": " + str(exc) + "\n")
     print(json.dumps(result, indent=2))
