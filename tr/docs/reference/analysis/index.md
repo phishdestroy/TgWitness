@@ -8,7 +8,7 @@ Kaydedilen mesajları arayın, yapay zeka girdilerini inceleyin ve kaynak refera
 
 [İş akışı kılavuzu](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-Paneldeki **"Arşivi Sorgula"**seçeneğini açın. Çalışma alanı seçiciyle hesap seçilir; form aracılığıyla sohbetler ve gözlem dönemi belirlenir. Arama, yapay zeka kullanılmadan yerel olarak gerçekleştirilir. Tam bir ifade veya etki alanı, arama sonuçlarını daraltır; bir mesaj kimliği girildiğinde kaydedilmiş sürümler talep edilir. Geri dönen alıntıları inceleyin ve günlük kayıtlarını veya bağlamlarını açın. Vektör veritabanı veya otomatik Telegram eylemi yoktur.
+Yapay zekâ kullanmadan yerel arama yapmak için **Günlük** bölümünü kullanın. **Arşive sor** özelliği için önce **Entegrasyonlar** bölümünde bir sağlayıcıyı etkinleştirip yapılandırın. Çalışma alanı seçici hesabı belirler; form ise sohbetleri ve gözlem dönemini belirler. Getirme işlemi yerel olarak çalışır. Tam bir ifade veya alan adı getirilen sonuçları daraltır; bir mesaj kimliği kaydedilmiş sürümleri talep eder. Alıntıları inceleyin ve ilgili günlük kayıtlarını veya bağlamlarını açın. Vektör veritabanı veya otomatik Telegram eylemi yoktur.
 
 ## Hizmet sağlayıcılar ve rıza
 

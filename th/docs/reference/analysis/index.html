@@ -33,10 +33,11 @@
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">ค้นหาในเอกสาร</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="ลองใช้ proxy, hash chain, token หรือ witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="ค้นหาอย่างชัดเจน" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">พิมพ์คำเพื่อค้นหาในคู่มือและเอกสารอ้างอิง การค้นหาจะเก็บไว้ในเบราว์เซอร์ของคุณ</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="eyebrow">อ้างอิง / การเก็บรักษาข้อมูลและการบูรณาการ</p><h1>การวิเคราะห์ข้อมูลในคลัง</h1><p class="guide-outcome">ค้นหาข้อความที่บันทึกไว้ ตรวจสอบข้อมูลที่ AI ให้มา และเก็บรายงานวิเคราะห์พร้อมแหล่งอ้างอิง</p><div class="wiki-body"><p><strong>เนื้อหาหลักปัจจุบัน:</strong> ใช้การเช็คเอาต์จากแหล่งที่มา; เวอร์ชัน 0.7.0 portable preview ยังไม่มีคุณสมบัตินี้</p>
 <p><a href="https://phishdestroy.github.io/TgWitness/docs/archive/">คู่มือขั้นตอนการทำงาน</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
-<p>เปิด <strong>Ask the archive</strong> ในแผงควบคุม ตัวเลือกพื้นที่ทำงานใช้เพื่อเลือกบัญชี;
-แบบฟอร์มใช้เพื่อเลือกการสนทนาและช่วงเวลาการสังเกต การค้นหาดำเนินการในเครื่องท้องถิ่น โดยไม่
-ใช้ AI การใช้คำวลีหรือโดเมนที่ตรงกันจะจำกัดผลการค้นหา; การใช้ ID ข้อความจะเรียกดู
-เวอร์ชันที่บันทึกไว้ ตรวจสอบข้อความที่แสดงผลและเปิดบันทึกหรือบริบทที่เกี่ยวข้อง
+<p>ใช้ <strong>บันทึก</strong> สำหรับการค้นหาในเครื่องโดยไม่ใช้ AI สำหรับ <strong>ถามคลังข้อมูล</strong> ให้เปิดใช้งาน
+และตั้งค่าผู้ให้บริการใน <strong>การบูรณาการ</strong> ก่อน ตัวเลือกพื้นที่ทำงานใช้เลือก
+บัญชี ส่วนแบบฟอร์มใช้เลือกแชทและช่วงเวลาการสังเกตการณ์ การดึงข้อมูลทำงาน
+ในเครื่อง วลีที่ตรงกันทุกคำหรือโดเมนจะจำกัดขอบเขตการดึงข้อมูลให้แคบลง ส่วน ID ข้อความจะเรียกดูเวอร์ชัน
+ที่บันทึกไว้ ตรวจสอบข้อความที่ตัดตอนมา แล้วเปิดรายการบันทึกหรือบริบทของข้อความนั้น
 ไม่มีฐานข้อมูลเวกเตอร์หรือการดำเนินการอัตโนมัติบน Telegram</p>
 <h2 id="providers-and-consent">ผู้ให้บริการและความยินยอม<a class="anchor" href="#providers-and-consent" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
 <p>AI ถูกปิดไว้โดยเริ่มต้นในทุกพื้นที่ทำงาน (workspace) ผู้บริหารหลักเท่านั้นที่สามารถกำหนดค่า

@@ -31,64 +31,169 @@
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="מדריכים"><a href="../../../">דף הבית</a> <span aria-hidden="true">/</span> <a href="../../">תיעוד</a> <span aria-hidden="true">/</span> <a href="../">הפניה</a> <span aria-hidden="true">/</span> <span aria-current="page">MCP לקריאה בלבד</span></nav>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">חפש בתיעוד</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="נסו להשתמש במונחים כמו &quot;פרוקסי&quot;, &quot;שרשרת האש&quot;, &quot;אסימון&quot; או &quot;עד&quot;..." autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="חיפוש ברור" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">הקלידו מילה כדי לחפש במדריכים ובמאגר המידע. החיפוש נשאר בדפדפן שלכם.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">הפניה / ארכיון ושילובים</p><h1>MCP לקריאה בלבד</h1><p class="guide-outcome">חבר לקוח MCP לסביבות עבודה וצ&#x27;אטים נבחרים עם גישה מוגבלת בזמן וניתנת לביטול.</p><div class="wiki-body"><p><strong>עיקרי כרגע:</strong> יש להשתמש ב-checkout מהמקור; גרסת התצוגה המקדימה הניידת 0.7.0 קדמה לתכונה זו.</p>
+<article class="guide-content"><p class="eyebrow">הפניה / ארכיון ושילובים</p><h1>MCP לקריאה בלבד</h1><p class="guide-outcome">חבר לקוח MCP לסביבות עבודה וצ&#x27;אטים נבחרים עם גישה מוגבלת בזמן וניתנת לביטול.</p><div class="wiki-body"><p>חברו לקוח אנליסט לסביבות עבודה וצ'אטים נבחרים. TgWitness מספקת
+<strong>Streamable HTTP בנתיב <code>/mcp</code> בתוך תהליך הפאנל</strong>. לכל חיבור יש אסימון (token),
+תוקף וכלים מורשים משלו. MCP אינו יכול לשלוח הודעות Telegram, לשנות
+הגדרות או לערוך את היומן החתום.</p>
 <p><a href="https://phishdestroy.github.io/TgWitness/docs/archive/">מדריך לתהליך העבודה</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">ויקי</a></p>
-<p>התקן את השרת האופציונלי מתוך ספריית הפרויקט של TgWitness:</p>
-<pre><code class="language-sh">python -m pip install &#x27;.[mcp]&#x27;</code></pre>
-<p>בלוח הבקרה, פתחו את <strong>&quot;Integrations&quot; → &quot;MCP&quot;</strong>. תנו שם לחיבור, בחרו את
-סביבות העבודה והצ&#x27;אטים שלו, ובחרו תאריך תפוגה. העתיקו את אסימון הארכיון פעם אחת; לא ניתן
-לאחזר אותו מאוחר יותר. בטלו אסימונים שאבדו והנפיקו אסימונים חלופיים. אסימוני הלוח ו
-אמצעי הזיהוי של Telegram אינם אמצעי הזיהוי של MCP.</p>
-<h2 id="connect-a-client">חבר לקוח<a class="anchor" href="#connect-a-client" aria-label="קישור לסעיף זה">#</a></h2>
-<p>הפאנל מייצר את ה-<code>.vscode/mcp.json</code> עבור <strong>ה-VS Code Local harness</strong> באמצעות
-<a href="https://code.visualstudio.com/docs/agents/reference/mcp-configuration">התצורה המתועדת</a> שלו.
-שמור את הקובץ שהורדת במיקום זה, הפעל <strong>את MCP: List Servers</strong>, והפעל את
-TgWitness. VS Code מבקש את האסימון באמצעות הזנת סיסמה. קובץ ה-
-JSON שהורדת מכיל הפניה לשורת הפקודה, ולא את האסימון עצמו. השתמש בקובץ ההפעלה של Python מתוך
-הסביבה שבה מותקן התוסף MCP.</p>
-<p>ללקוחות אחרים של stdio, הפעל:</p>
-<pre><code class="language-sh">python -m tgwitness.mcp_server --api-url http://127.0.0.1:8787</code></pre>
-<p>הגדר את <code>TGWITNESS_ARCHIVE_TOKEN</code> בסביבה המוגנת של הלקוח. אין להכניס אותו
-לפרמטרים של פקודות או לכתובות URL. הגשר קורא דרך ה-API המורשה
-של הארכיון בלוח הבקרה; אין לו גישה ישירה למסד הנתונים. Stdout מעביר רק הודעות MCP.</p>
-<p>עבור לקוחות מרוחקים, הפעל את השירות לצד הפאנל:</p>
-<pre><code class="language-sh">python -m tgwitness.mcp_server --transport streamable-http \
-  --api-url http://127.0.0.1:8787 --port 8766 \
-  --public-url https://archive.example.org/mcp</code></pre>
-<p>העבר את <code>/mcp</code> דרך פרוקסי הפוך ב-HTTPS אל <code>127.0.0.1:8766/mcp</code>, תוך שמירה על
-כותרת ה-<code>Authorization: Bearer …</code>. השבת את רישום כותרות האישור
-וגופי הבקשות/התגובות. בצע קישור מעבר ל-loopback רק בעת הצורך, באמצעות
-<code>--host</code> ו-<code>--public-url</code>. נקודת הקצה משתמשת ב-Streamable HTTP מתוך ה
-<a href="https://github.com/modelcontextprotocol/python-sdk">-SDK הרשמי
-של MCP ב-Python</a>.
-הוא תומך באישורי נושא שהוגדרו במפורש, ולא בגילוי OAuth;
-לקוחות הדורשים OAuth בלבד אינם נתמכים.</p>
-<p><strong>בדיקת הפרוטוקול והגישה</strong> מפעילות לקוח MCP אמיתי ומציגות רשימת כלים. התהליך
-אינו מוריד הודעות. לצורך בדיקה מרחוק, שרת ה-MCP הנבחר מקבל את
-אסימון הארכיון. יש להגדיר רק שרת שאתה מפעיל או סומך עליו בהיקף זה.</p>
-<h2 id="scope-and-results">היקף ותוצאות<a class="anchor" href="#scope-and-results" aria-label="קישור לסעיף זה">#</a></h2>
-<p>כלים זמינים: <code>list_workspaces</code>, <code>list_chats</code>, <code>search_messages</code>,
-<code>get_message_versions</code>, <code>get_message_context</code>, <code>get_journal_event</code> ו-
-<code>get_capture_status</code>. אין פעולות טלגרם, שינויי תצורה או
-כלים לייצוא המוני. בכל קריאה מתבצעת בדיקה חוזרת של הגישה לסביבת העבודה/לצ&#x27;אט; אישורים שפג תוקפם או שבוטלו
-מפסיקים לפעול. המגבלות הן 60 בקשות API לדקה לכל אישור,
-50 רשומות לדף, תגובה בגודל 64 KiB, ומועד אחרון של שמונה שניות ל-API.</p>
-<p>תוצאות ההודעות כוללות סביבת עבודה, מזהי צ&#x27;אט/הודעה, רצף אירועים, חתימת hash שמורה,
-וקישור לפאנל. על הצופה הפותח את הקישור להיות בעל פאנל מורשה משלו
-במסגרת הפעלה. אובייקטים גולמיים של Telegram, חתימות hash לגישה, הפניות לקבצים, חומר מהפעלה,
-ומפתחות אינם מופיעים. החיפוש בוחן את טקסט ההודעה, ולא שדות גולמיים. הטקסט
-מוגבל וקיצוצים מסומנים. עריכות, הודעות מחיקה של טלגרם ו-
-<code>missing_on_recheck</code> נשארים תצפיות נפרדות. גישה בהיקף הצ&#x27;אט אינה יכולה לראות
-אירועים תפעוליים ברמת סביבת העבודה; מצב הלכידה מסמן במפורש מגבלה זו.</p>
-<p>טקסט בארכיון הוא קלט שאינו אמין. הוראות בתוך הודעות אינן מעניקות
-היקף נוסף ואסור להתייחס אליהן כהוראות של הלקוח. מודל AI חיצוני עשוי
-לקבל כל תוכן שהלקוח MCP שלו מבקש. גישה לקריאה בלבד מונעת
-שינויים בארכיון; היא אינה מונעת מלקוח לשמור את הנתונים שהוא קורא.</p>
-<p>ה-hash מזהים את הרשומות השמורות ומאפשרים בדיקות תקינות. הם אינם
-מוכיחים באופן עצמאי את זהות מחבר ההודעה ב-Telegram או שכל ההודעות נלכדו.</p></div></article>
+<h2 id="install-and-check">התקנה ובדיקה<a class="anchor" href="#install-and-check" aria-label="קישור לסעיף זה">#</a></h2>
+<p>השתמשו בסביבת ה-Python שמריצה את הפאנל. מתוך עותק של קוד המקור:</p>
+<pre><code class="language-powershell"># Windows PowerShell
+&amp; .\.venv\Scripts\python.exe -m pip install -c deploy/constraints-mcp.txt -e &#x27;.[mcp]&#x27;
+&amp; .\.venv\Scripts\python.exe start.py --check</code></pre>
+<pre><code class="language-sh"># Linux / macOS
+.venv/bin/python -m pip install -c deploy/constraints-mcp.txt -e &#x27;.[mcp]&#x27;
+.venv/bin/python start.py --check</code></pre>
+<p>הפעילו מחדש את הפאנל עם תיקיית הנתונים הרגילה שלו וארגומנטי ההפעלה לאחר
+ההתקנה. בדיקת המוכנות אמורה לכלול את <code>[PASS] mcp: streamable-http available</code>.
+<strong>Integrations → MCP</strong> מציג את סטטוס זמן הריצה ופקודת התקנה המשתמשת
+בקובץ ההרצה של Python בפועל באותו שרת. <strong>Re-check</strong> מרענן את הסטטוס הזה ללא
+טעינה מחדש של הדף; הוא אינו מתקין חבילות או מפעיל מחדש את השרת.</p>
+<p>תוסף ה-MCP משתמש ב-<a href="https://github.com/modelcontextprotocol/python-sdk">MCP Python SDK</a> הרשמי.
+הקובץ <code>deploy/constraints-mcp.txt</code> מקבע את גרסאות ה-SDK והתלויות שנבדקו. תכונות אלו
+דורשות קוד מקור עדכני; גרסת התצוגה המקדימה הניידת 0.7.0 קדמה להן.</p>
+<h2 id="issue-a-connection">הנפקת חיבור<a class="anchor" href="#issue-a-connection" aria-label="קישור לסעיף זה">#</a></h2>
+<ol>
+<li>הזינו תווית ובחרו את סביבות העבודה והצ'אטים שהלקוח רשאי לקרוא.</li>
+<li>בחרו כלים בנפרד או השתמשו בערכה מוגדרת מראש (preset). מוצעים רק כלים שמומשו.</li>
+<li>בחרו 1, 7, 30 או 90 ימים, או תוקף מותאם אישית בין דקה אחת ל-90 ימים.</li>
+<li>לחצו על <strong>Create connection</strong>. האסימון מופיע פעם אחת לצד הגדרות הלקוח.</li>
+<li>העתיקו את האסימון וההגדרות, ולאחר מכן הפעילו את <strong>Check connection</strong>. פעולה זו מאתחלת את MCP
+    ומציגה את רשימת הכלים המורשים; <strong>לא נקראות הודעות</strong>. התוצאה מציגה את גרסת
+    הפרוטוקול, שמות הכלים, מספרם והזמן שחלף.</li>
+<li>לחצו על <strong>Done</strong> לאחר שמירת פרטי הגישה. דגימת מצב תקופתית (polling) משמרת את הטופס ואת
+    הכרטיס המוצג פעם אחת. נעילת הפאנל מנקה סודות המוצגים על המסך.</li>
+</ol>
+<p>הרשימה מציגה שימוש אחרון, כלי אחרון, כתובת ובקשות בדקה האחרונה.
+<strong>Revoke</strong> מסיים את הגישה. <strong>Rotate token</strong> מבטל את פרטי הגישה הישנים ומנפיק
+תחליף עם אותם היקף גישה (scope), כלים ותוקף; העתיקו את התחליף המוצג פעם אחת.
+אסימוני התחברות לפאנל ופרטי גישה של Telegram אינם פועלים כאסימוני MCP.</p>
+<h2 id="connect-your-client">חיבור הלקוח שלכם<a class="anchor" href="#connect-your-client" aria-label="קישור לסעיף זה">#</a></h2>
+<p>בחרו את הלקוח בפאנל והעתיקו את התצורה שנוצרה עבורו. התצורות משתמשות
+בהפניות לסודות או במצייני מיקום (placeholders) מפורשים; האסימון מועתק בנפרד.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>לקוח</th>
+<th>תצורה</th>
+<th>קישור</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude Code</td>
+<td><code>.mcp.json</code></td>
+<td>HTTP, <code>type: "http"</code>, כותרת bearer</td>
+</tr>
+<tr>
+<td>Claude Desktop</td>
+<td><code>claude_desktop_config.json</code></td>
+<td>גשר stdio מקומי</td>
+</tr>
+<tr>
+<td>Cursor</td>
+<td><code>.cursor/mcp.json</code></td>
+<td>HTTP עם כותרת ממשתנה סביבה</td>
+</tr>
+<tr>
+<td>VS Code Local</td>
+<td><code>.vscode/mcp.json</code></td>
+<td>HTTP עם קלט סיסמה מסוג <code>promptString</code></td>
+</tr>
+<tr>
+<td>Windsurf</td>
+<td><code>mcp_config.json</code></td>
+<td>HTTP עם מציין מיקום לכותרת bearer</td>
+</tr>
+<tr>
+<td>לקוחות אחרים</td>
+<td>כתובת URL וכותרת Authorization</td>
+<td>Streamable HTTP</td>
+</tr>
+</tbody>
+</table></div>
+<p>TgWitness משתמשת באסימוני bearer, ללא גילוי OAuth. השתמשו בגשר ה-stdio המקומי
+עבור לקוחות שהמחבר המרוחק שלהם מחייב OAuth. עבור VS Code, משתני קלט
+חלים על סביבת הריצה <strong>Local</strong> ואינם מועברים להפעלות Copilot.
+סימוכין להגדרות תצורה: <a href="https://code.claude.com/docs/en/mcp">Claude Code</a>,
+<a href="https://prod.cursor.com/docs/mcp">Cursor</a>,
+<a href="https://code.visualstudio.com/docs/agents/reference/mcp-configuration">VS Code</a>.</p>
+<p>נקודת הכניסה התקנית עבור גשר מקומי היא:</p>
+<pre><code class="language-sh">python -m tgwitness.mcp_server --url https://your-panel.example/mcp</code></pre>
+<p>השתמשו ב-Python המקומי של הלקוח שבו מותקן תוסף ה-MCP. הגדירו את
+<code>TGWITNESS_MCP_TOKEN</code> בסביבה המוגנת שלו. שמרו על פרטי הגישה מחוץ לארגומנטים של
+פקודות וכתובות URL. הפקודה <code>tgwitness-mcp</code> היא אותה נקודת כניסה. המודול הישן
+<code>tgwitness.mcp_bridge</code> והשם <code>TGWITNESS_ARCHIVE_TOKEN</code> נותרים כנתיבי תאימות
+לאחור עם אזהרה; תצורות חדשות משתמשות ב-<code>mcp_server</code> וב-<code>TGWITNESS_MCP_TOKEN</code>.</p>
+<h2 id="cloudflare-tunnel">Cloudflare Tunnel<a class="anchor" href="#cloudflare-tunnel" aria-label="קישור לסעיף זה">#</a></h2>
+<p>העבירו (forward) את הנתיב <code>/mcp</code> של הפאנל ושמרו על כותרת ה-bearer. פתיחת הגדרות
+MCP כמנהל מערכת רושמת את המקור (origin) הנוכחי של הפאנל עבור הרצה זו.
+לקבלת כתובת יציבה הזמינה מיד לאחר הפעלה מחדש, הגדירו את
+<code>TGWITNESS_PUBLIC_URL</code> עם מקור ה-HTTPS של הפאנל לפני הפעלת הפאנל.
+כותרות Host וכותרות מועברות (forwarded) שרירותיות אינן רושמות כתובת מהימנה.
+בדיקות Host ו-Origin דוחות מקורות דפדפן שאינם קשורים. תגובות משתמשות ב-
+<code>Cache-Control: no-store</code>; ערכי הרשאה לעולם אינם נרשמים ביומן.</p>
+<p>כתובת <code>*.trycloudflare.com</code> היא זמנית. כאשר הפעלה מחדש של התעלה משנה את
+שם המארח, עדכנו את כתובת ה-URL הציבורית המוגדרת ואת כתובת ה-URL של MCP בכל לקוח. השתמשו
+בשם מארח יציב עבור תצורות לקוח שמורות.</p>
+<h2 id="tools-and-boundaries">כלים וגבולות גזרה<a class="anchor" href="#tools-and-boundaries" aria-label="קישור לסעיף זה">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>כלי</th>
+<th>קורא</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list_workspaces</code></td>
+<td>סביבות עבודה שהוענקו להן הרשאות</td>
+</tr>
+<tr>
+<td><code>list_chats</code></td>
+<td>צ'אטים שהוענקו להם הרשאות</td>
+</tr>
+<tr>
+<td><code>search_messages</code></td>
+<td>טקסט הודעות שמור בתוך התקופה שנבחרה</td>
+</tr>
+<tr>
+<td><code>get_message_versions</code></td>
+<td>גרסאות שנלכדו ותצפיות מחיקה</td>
+</tr>
+<tr>
+<td><code>get_message_context</code></td>
+<td>מזהי הודעות סמוכות שנלכדו</td>
+</tr>
+<tr>
+<td><code>get_journal_event</code></td>
+<td>רשומה מסוננת אחת עם סימוכין למקור שלה</td>
+</tr>
+<tr>
+<td><code>get_capture_status</code></td>
+<td>מצב איסוף ורשומות כיסוי מורשות</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>tools/list</code> מחזיר רק את הכלים שהוענקו לאותו חיבור. קריאות לכלים אחרים
+נדחות. כלי הקשר קבוצתי, אפיזודות, טרמינולוגיה ושרשראות תגובה אינם
+מוצעים בגרסת בנייה זו; מנגנון ה-backend הנפרד של חבילות ההקשר שלהם אינו כלול.</p>
+<p>כל קריאה בודקת את האסימון, הכלי והיקף הגישה של סביבת העבודה/הצ'אט, לרבות לאחר
+שעבודת מסד הנתונים מסתיימת. המגבלות הן 60 בקשות לדקה, 50 רשומות לעמוד,
+64 KiB לתוצאה וזמן קצוב של שמונה שניות לארכיון. קריאת MCP שחרגה מהזמן הקצוב
+מחזירה שגיאת כלי המבקשת תקופה מצומצמת יותר או מגבלה נמוכה יותר.</p>
+<p>תוצאות הודעות נושאות את <code>untrusted_content: true</code>, מזהי סביבת עבודה/צ'אט/הודעה,
+רצף אירועים, גיבוב (hash) שמור וקישור לפאנל. אובייקטים גולמיים של Telegram, גיבובי גישה (access hashes),
+הפעלות (sessions) ומפתחות מושמטים. קטיעת טקסט מסומנת. עריכות, התראות מחיקה
+ו-<code>missing_on_recheck</code> הן תצפיות נפרדות. רשומות חסרות אינן מוכיחות
+שאירוע מעולם לא התרחש.</p>
+<p>התייחסו להוראות בתוך הודעות שנלכדו כאל ראיות, ולעולם לא כאל הוראות
+ללקוח. גישת קריאה בלבד מונעת שינויים בארכיון; הלקוח עדיין יכול
+לשמור את התוכן שהוא מורשה לקרוא. ערכי גיבוב (hashes) מזהים רשומות שמורות
+ותומכים בבדיקות שלמות; הם אינם מוכיחים בעלות על כתיבה ב-Telegram או לכידה מלאה.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/MCP.md">ערוך דף זה ב-GitHub ↗</a><a class="next-guide" href="../media-analysis/"><span>השלב הבא</span><strong>OCR מקומי ותמלול ←</strong></a><p>מדריכים אלה מתארים את היישום הנוכחי. תוצאות האימות והפערים הנותרים מתועדים בנפרד. <a href="../verification/">מה נבדק ←</a></p></footer>
 </main>
-<aside class="toc" aria-label="בעמוד זה"><p class="nav-label">בעמוד זה</p><a href="#connect-a-client">חבר לקוח</a><a href="#scope-and-results">היקף ותוצאות</a></aside>
+<aside class="toc" aria-label="בעמוד זה"><p class="nav-label">בעמוד זה</p><a href="#install-and-check">התקנה ובדיקה</a><a href="#issue-a-connection">הנפקת חיבור</a><a href="#connect-your-client">חיבור הלקוח שלכם</a><a href="#cloudflare-tunnel">Cloudflare Tunnel</a><a href="#tools-and-boundaries">כלים וגבולות גזרה</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>קוד פתוח · פועל על המחשב שלכם</span><a href="../../../../LICENSE">רישיון MIT</a><a href="../notice/">הודעת המפעיל</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">אבטחה</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "ממתין להודעה", "Step through a fictional send, edit and delete.": "עקבו אחר תהליך דמיוני של שליחה, עריכה ומחיקה.", "No observations yet. Start the sequence or advance one event.": "אין עדיין הערות. התחל את הרצף או עבור לאירוע הבא.", "Meet at 10:00": "נפגש בשעה 10:00", "A new message is visible in the chat.": "הודעה חדשה נראית בצ'אט.", "Record 1 appended: the collector observed the original message.": "הודעה מס' 1 מצורפת: האספן הבחין בהודעה המקורית.", "Meet at 11:00": "נפגש בשעה 11:00", "The current text changes. The earlier observation stays.": "הטקסט הנוכחי משתנה. ההערה הקודמת נשארת.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "רשומה 2 צורפה: העריכה מהווה תצפית חדשה. ברשומה 1 עדיין מופיע הטקסט המקורי.", "Message deleted": "ההודעה נמחקה", "The message has disappeared from the chat view.": "ההודעה נעלמה מתצוגת הצ'אט.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "הוספה של תיעוד 3: הודעת המחיקה נשמרת לצד שתי הגרסאות שנצפו.", "0 records": "0 רשומות", "1 record": "1 רשומה", "2 records": "2 רשומות", "3 records": "3 רשומות", "Complete / {n} of 3": "השלם / {n} מתוך 3", "Step / {n} of 3": "שלב / {n} מתוך 3", "Pause": "הפסקה", "Replay sequence": "רצף השמעה", "Play sequence": "רצף הפעלה", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "דוגמה סטטית זמינה. כדי לחשב חתימות hash באופן אינטראקטיבי, פתחו דף זה ב-HTTPS או בתצוגה מקדימה ב-localhost עם תמיכה ב-Web Crypto.", "No record supplied": "לא נמסר תיעוד", "Tail removed": "הזנב הוסר", "≠ saved hash": "≠ חתימת hash שנשמרה", "Rebuilt · different hash": "נבנה מחדש · חתימה שונה", "= saved hash": "= חתימת hash שנשמרה", "Same length and matching head.": "אורך זהה וכותרת תואמת.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "שלושת ההאשים שחושבו תואמים להאשים שנשמרו. דוגמה זו תואמת את הגבול של שלוש רשומות שנשמר.", "Same saved head; the journal prefix fails verification.": "אותו כותרת שמורה; קידומת היומן נכשלה באימות.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "הרשומה 2 כבר אינה תואמת את ה-hash השמור שלה. בדיקה של ה-head האחרון שנשמר בלבד עלולה לפספס זאת; המאמת בודק כל רשומה.", "Head differs from the retained checkpoint.": "הכותרת שונה מנקודת הבדיקה שנשמרה.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "ה-hash המשוחזרים מקושרים זה לזה, אך ה-head הסופי השתנה. נקודת הבדיקה שנשמרה דוחה היסטוריה זו. חתימות מקוריות גם הן לא יאושרו על רשומות ששונו.", "Too short: 2 supplied records \u003c 3 retained records.": "קצר מדי: 2 רשומות שסופקו \u003c 3 רשומות שנשמרו.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "שני ה-hash הנותרים עדיין תואמים. נקודת הבדיקה שנשמרה חושפת את החלק החסר. ללא הגבול הקודם הזה, הקידומת הקצרה הזו לבדה לא הייתה חושפת את ההשמטה.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "חישוב ה-Hash אינו זמין בדפדפן זה. הנוסחאות וההסבר הסטטי המופיעים להלן נותרים זמינים.", "{n} records": "{n} רשומות", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "התקבל: הספירה גדלה, החתימה מאומתת והמפתח תואם. העד שומר על הגבול החדש הזה.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "חזרה לאחור: התשובה החתומה מדווחת על פחות רשומות מאשר נקודת הבדיקה האחרונה שאושרה. ה-Witness מתעד את הבעיה ושומר על הגבול שאושר קודם לכן.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: הספירה נותרה ללא שינוי, אך הראש שונה. ה-witness מתעד את חילוקי הדעות ושומר על הגבול שהתקבל קודם לכן.", "No answer": "אין תשובה", "boundary unknown": "גבול לא ידוע", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "אין תגובה: ה-Witness מתעד את הבדיקה שנכשלה. הוא אינו יכול לקבוע את מצבו הנוכחי של האספן. אם ה-Witness עדיין יכול להגיע ל-Bot API ומדיניות הפרסום שלו מאפשרת זאת, הוא יכול לפרסם את הכישלון הזה.", "Send {n}": "שלח {n}", "Edit {n}": "ערוך {n}", "Delete {n}": "מחק {n}", "Both accounts captured all six expected observations in this example.": "שני החשבונות תיעדו את כל ששת הממצאים הצפויים בדוגמה זו.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "חשבון B עדיין תפס 6 מתוך 6. שתי קבלות לקחו יותר זמן. יחס הלכידה ועיכוב קבלת ההודעות עונים על שאלות שונות.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "חשבון B תפס 5 מתוך 6 עד למועד הסיום (83.3%). לעריכה החסרה אין עיכוב נמדד. תוצאה זו מתארת רק את שש הפעולות המבוקרות.", "not observed by cutoff": "לא נצפה עד למועד הסגירה", "{s} seconds": "{s} שניות", "Exact values follow in the table.": "הערכים המדויקים מופיעים בטבלה.", "{s} s": "{s} s", "Not observed": "לא נצפה", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "ארבעה צ'אטים מספקים תצפיות שונות. יש לעקוב אחר רשומות המקור עבור כל חיבור; אין לייחס את ההודעה בערוץ למשתמש 71001 ללא ציון השולח.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "הרשומות מס' 146 ו-205 מציגות את אותו מזהה שולח, 71001. דבר זה מקשר בין הפוסטים שנצפו בחשבון טלגרם בשני צ'אטים שונים. הוא אינו מזהה אדם אמיתי ואינו מייחס את הפוסט לערוץ.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "כתובת היעד pay.example.invalid/new מופיעה ברישום הקבוצה מס' 146, במקלדת הבוט מס' 173, בעריכת הערוץ מס' 188 ובהודעה פרטית מס' 205. כתובת יעד חוזרת מקשרת בין החומרים; היא אינה מהווה הוכחה לשליטה משותפת בחשבונות אלה.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "בקבלות המדיה המושלמות מס' 151 ו-209 יש ערכי SHA-256 מלאים זהים במקרה הבדיוני הזה. השוו את הבתים בפועל ואת רשומות ההודעות הקשורות אליהם. הקובץ התואם אינו מזהה את יוצרו ואינו מוכיח מי העביר אותו.", "the encrypted off-site copy": "העותק המוצפן מחוץ לאתר", "notifications": "התראות", "checkpoint hashes for timestamps": "חשישי checkpoint עבור חותמות זמן", "signed checkpoints for the witness": "נקודות ביקורת חתומות עבור ה-Witness", "Switched on in this example": "מופעל בדוגמה זו", "Optional · off by default": "אופציונלי · כבוי כברירת מחדל", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "יוצא מהמכשיר הזה: החיבור ל-Telegram ו-{list}. שום דבר אחר.", "Default: only the Telegram connection leaves this machine.": "ברירת מחדל: רק החיבור ל-Telegram יוצא ממחשב זה.", "{done} of {total} done": "{done} מתוך {total} הושלמו", "Mark step {n} as done": "סמן את השלב {n} כ\"בוצע\"", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "העתק", "Copied": "הועתק", "Command copied.": "הפקודה הועתקה.", "Selected — Ctrl/Cmd+C": "נבחר — Ctrl/Cmd+C", "Command selected. Copy it manually.": "הפקודה נבחרה. העתיקו אותה ידנית.", "Command copied to clipboard.": "הפקודה הועתקה ללוח.", "Select text": "בחר טקסט", "Clipboard unavailable. Command selected; copy it manually.": "הלוח אינו זמין. הפקודה נבחרה; העתק אותה ידנית.", "A message arrives. The first observation is saved.": "הודעה נכנסת. התצפית הראשונה נשמרת.", "The time changes. Both captured versions stay.": "הזמן משתנה. שתי הגרסאות שנשמרו נשארות.", "The message disappears. The captured history remains.": "ההודעה נעלמת. ההיסטוריה שנשמרה נשארת.", "Pause example animation": "השהה את האנימציה לדוגמה", "Play example animation": "הפעל אנימציה לדוגמה", "Play": "הפעל", "Full-size workspace screenshot": "צילום מסך של סביבת העבודה בגודל מלא", "Workspace screenshot · fictional data": "צילום מסך של סביבת העבודה · נתונים פיקטיביים", "Close": "סגור", "Close screenshot": "סגור צילום מסך", "Scrollable full-size screenshot": "צילום מסך בגודל מלא הניתן לגלילה", "Enlarge: {name}": "הגדל: {name}", "View full size": "הצג בגודל מלא"}</script>

@@ -8,7 +8,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/analy
 
 [工作流指南](https://phishdestroy.github.io/TgWitness/docs/archive/) · [维基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-在面板中打开**“查询存档”功能**。通过工作区选择器选择账户； 通过表单选择聊天群组和监控时间段。搜索在本地进行，不 使用 AI。输入精确短语或域名可缩小检索范围；输入消息 ID 可查询已保存的 版本。查看返回的摘录内容，并打开其日志记录或上下文。 本工具不包含矢量数据库，也不执行任何自动的 Telegram 操作。
+使用**日志**可在本地进行搜索，无需 AI。如需使用**查询存档**，请先在**集成**中启用并配置服务提供商。 通过工作区选择器选择账户；通过表单选择会话和观察时间段。检索在本地进行。 输入精确短语或域名可缩小检索范围；输入消息 ID 可查询已保存的版本。 请查看摘录内容，并打开其日志记录或上下文。 本工具不包含向量数据库，也不会自动执行任何 Telegram 操作。
 
 ## 服务提供商与同意条款
 

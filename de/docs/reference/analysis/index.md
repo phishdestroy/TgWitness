@@ -8,7 +8,7 @@ Durchsuchen Sie gespeicherte Nachrichten, überprüfen Sie KI-Eingaben und erste
 
 [Anleitung zum Arbeitsablauf](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-Öffnen Sie **„Ask the archive“** im Bedienfeld. Über die Arbeitsbereichsauswahl wird das Konto ausgewählt; über das Formular werden Chats und der Beobachtungszeitraum festgelegt. Die Suche erfolgt lokal, ohne KI. Eine genaue Phrase oder Domain grenzt die Ergebnisse ein; eine Nachrichten-ID fordert gespeicherte Versionen an. Überprüfen Sie die zurückgegebenen Auszüge und öffnen Sie deren Protokollaufzeichnungen oder den Kontext. Es gibt keine Vektordatenbank und keine automatischen Telegram-Aktionen.
+Verwenden Sie **Journal** für die lokale Suche ohne KI. Für **Fragen Sie das Archiv** aktivieren und konfigurieren Sie zunächst einen Anbieter unter **Integrationen**. Über die Arbeitsbereichsauswahl wird das Konto ausgewählt; über das Formular werden Chats und der Beobachtungszeitraum festgelegt. Die Suche nach relevanten Inhalten erfolgt lokal. Eine exakte Phrase oder Domain grenzt die Suche ein; eine Nachrichten-ID fordert gespeicherte Versionen an. Überprüfen Sie die Auszüge und öffnen Sie die zugehörigen Journaleinträge oder den Kontext. Es gibt keine Vektordatenbank und keine automatischen Telegram-Aktionen.
 
 ## Anbieter und Einwilligung
 

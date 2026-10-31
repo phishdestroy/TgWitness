@@ -31,36 +31,134 @@
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="Qo&#x27;llanmalar"><a href="../../../">Bosh sahifa</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentatsiya</a> <span aria-hidden="true">/</span> <a href="../">Manba</a> <span aria-hidden="true">/</span> <span aria-current="page">Faqat o&#x27;qish uchun MCP</span></nav>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Dokumentatsiyani qidiring</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zanjiri, token yoki guvohni sinab ko&#x27;ring…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Aniq qidiruv" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Qo&#x27;llanmalar va ma&#x27;lumotnoma bo&#x27;ylab qidirish uchun so&#x27;z yozing. Qidiruv brauzeringizda saqlanadi.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Manba / Arxiv va integratsiyalar</p><h1>Faqat o&#x27;qish uchun MCP</h1><p class="guide-outcome">MCP mijozini tanlangan ish maydonlari va suhbatlarga muddati tugaydigan, bekor qilinishi mumkin bo&#x27;lgan kirish huquqi bilan ulashing.</p><div class="wiki-body"><p><strong>Hozirgi asosiy:</strong> manbani chiqarib olishdan foydalaning; 0.7.0 portativ ko&#x27;rinishi ushbu xususiyatdan oldin yaratilgan.</p>
+<article class="guide-content"><p class="eyebrow">Manba / Arxiv va integratsiyalar</p><h1>Faqat o&#x27;qish uchun MCP</h1><p class="guide-outcome">MCP mijozini tanlangan ish maydonlari va suhbatlarga muddati tugaydigan, bekor qilinishi mumkin bo&#x27;lgan kirish huquqi bilan ulashing.</p><div class="wiki-body"><p>Tahlilchi mijozini tanlangan ish maydonlari va chatlarga ulang. TgWitness <strong>panel jarayonida <code>/mcp</code> manzilida Streamable HTTP</strong> xizmatini ko‘rsatadi. Har bir ulanish o‘zining tokeni, amal qilish muddati va ruxsat etilgan vositalariga ega. MCP Telegram xabarlarini yubora olmaydi, sozlamalarni o‘zgartira olmaydi yoki imzolangan jurnalni tahrirlay olmaydi.</p>
 <p><a href="https://phishdestroy.github.io/TgWitness/docs/archive/">Ish jarayoni bo&#x27;yicha qo&#x27;llanma</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
-<p>TgWitness loyihasi katalogidan ixtiyoriy serverni o&#x27;rnating:</p>
-<pre><code class="language-sh">python -m pip install &#x27;.[mcp]&#x27;</code></pre>
-<p>Panelda <strong>Integratsiyalar → MCP</strong> bo&#x27;limini oching. Ulanish nomini kiriting, uning ish maydonchalari va suhbatlarini tanlang va amal qilish muddatini belgilang. Arxiv tokenini bir marta nusxalang; uni keyin qayta tiklab bo&#x27;lmaydi. Yo&#x27;qolgan tokenlarni bekor qiling va ularni yangilari bilan almashtiring. Panel tokenlari va Telegram kirish ma&#x27;lumotlari MCP kirish ma&#x27;lumotlari hisoblanmaydi.</p>
-<h2 id="connect-a-client">Klientni ulanish<a class="anchor" href="#connect-a-client" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
-<p>Panel o&#x27;zining <a href="https://code.visualstudio.com/docs/agents/reference/mcp-configuration">hujjatlangan konfiguratsiyasidan</a> foydalangan holda <strong>VS Code Local harness</strong> uchun<code>.vscode/mcp.json</code> ni yaratadi.
-Yuklab olingan faylni shu joyga saqlang, <strong>MCP: List Servers ni</strong> ishga tushiring va TgWitness ni ishga tushiring. VS Code parol kirish oynasi orqali tokenni so&#x27;raydi. Yuklab olingan JSON token emas, balki so&#x27;rov havolasini o&#x27;z ichiga oladi. MCP extra o&#x27;rnatilgan muhitdan Python ijro etiladigan faylni ishlating.</p>
-<p>Boshqa stdio mijozlari uchun quyidagilarni bajaring:</p>
-<pre><code class="language-sh">python -m tgwitness.mcp_server --api-url http://127.0.0.1:8787</code></pre>
-<p><code>TGWITNESS_ARCHIVE_TOKEN</code> ni mijozning himoyalangan muhitida o&#x27;rnating. Uni buyruq argumentlariga yoki URL manzillariga kiritmang. Ko&#x27;prik panelning ruxsat berilgan arxiv API orqali o&#x27;qiydi; u bevosita ma&#x27;lumotlar bazasiga ulanmaydi. Stdout faqat MCP xabarlarini uzatadi.</p>
-<p>Masofaviy mijozlar uchun panel yonida xizmatni ishga tushiring:</p>
-<pre><code class="language-sh">python -m tgwitness.mcp_server --transport streamable-http \
-  --api-url http://127.0.0.1:8787 --port 8766 \
-  --public-url https://archive.example.org/mcp</code></pre>
-<p><code>/mcp</code> ni HTTPS teskari proxy orqali <code>127.0.0.1:8766/mcp</code> ga uzating, <code>Authorization: Bearer …</code> sarlavhasini saqlagan holda. Avtorizatsiya sarlavhalari va so&#x27;rov/javob tanalarini loglashni o&#x27;chirib qo&#x27;ying. Loopbackdan tashqariga bog&#x27;lanishni faqat kerak bo&#x27;lganda, <code>--host</code> va <code>--public-url</code> ni ishlatib yoqing. Endpoint rasmiy
-<a href="https://github.com/modelcontextprotocol/python-sdk">MCP Python SDK</a> dasturidagi Streamable HTTP dan foydalanadi.
-U aniq sozlangan bearer kreditsiyalarini qo&#x27;llab-quvvatlaydi, OAuth kashfiyotini emas; faqat OAuth talab qiladigan mijozlar qo&#x27;llab-quvvatlanmaydi.</p>
-<p><strong>Tekshiruv protokoli va kirish</strong> haqiqiy MCP mijozini ishga tushiradi va vositalarni ro&#x27;yxatlaydi. U xabarlarni olib kelmaydi. Masofaviy tekshiruv uchun tanlangan MCP server arxiv tokenini oladi. Faqat o&#x27;zingiz boshqaradigan yoki ishonadigan serverni sozlang.</p>
-<h2 id="scope-and-results">Doira va natijalar<a class="anchor" href="#scope-and-results" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
-<p>Mavjud vositalar: <code>list_workspaces</code>, <code>list_chats</code>, <code>search_messages</code>,
-<code>get_message_versions</code>, <code>get_message_context</code>, <code>get_journal_event</code> va
-<code>get_capture_status</code>. Telegram harakatlari, sozlamalarni o&#x27;zgartirish yoki ommaviy eksport vositalari mavjud emas. Har bir o&#x27;qish ish maydoni/suhbatga kirishni qayta tekshiradi; muddati tugagan va bekor qilingan ma&#x27;lumotlar ishlashni to&#x27;xtatadi. Cheklovlar: har bir ma&#x27;lumotnoma bo&#x27;yicha daqiqada 60 API so&#x27;rovi, har bir sahifada 50 yozuv, 64 KiB javob va sakkiz soniyalik API muddati.</p>
-<p>Xabar natijalariga ish maydoni, suhbat/xabar IDlari, voqealar ketma-ketligi, saqlangan xesh va panel havolasi kiradi. Havolani ochadigan ko&#x27;ruvchida o&#x27;zining ruxsat etilgan panel sessiyasi bo&#x27;lishi kerak. Xom Telegram obyektlari, kirish xeshlari, fayl havolalari, sessiya materiallari va kalitlar kiritilmagan. Qidiruv xabar matnini tekshiradi, xom maydonlarni emas. Matn chegaralangan va qisqartirilgan joylar belgilanadi. Tahrirlar, Telegram o&#x27;chirish bildirishnomalari va
-<code>missing_on_recheck</code> alohida kuzatuvlar sifatida qoladi. Sohaga oid kirish butun ish maydonidagi operatsion voqealarni ko&#x27;ra olmaydi; yozib olish holati bu cheklovni aniq belgilaydi.</p>
-<p>Arxiv matni ishonchsiz kirish hisoblanadi. Xabarlardagi ko&#x27;rsatmalar qo&#x27;shimcha imtiyoz bermaydi va ularni mijoz ko&#x27;rsatmalari deb hisoblash mumkin emas. Tashqi sun&#x27;iy intellekt modeli MCP-mijoz so&#x27;raydigan har qanday kontentni qabul qilishi mumkin. Faqat o&#x27;qish huquqi arxivni o&#x27;zgartirishni oldini oladi; ammo bu mijozning o&#x27;qigan ma&#x27;lumotlarini saqlashiga to&#x27;sqinlik qilmaydi.</p>
-<p>Hashlar saqlangan yozuvlarni aniqlaydi va yaxlitlik tekshiruvlarini qo&#x27;llab-quvvatlaydi. Ular mustaqil ravishda Telegram muallifligini yoki har bir xabar qabul qilinganini isbotlamaydi.</p></div></article>
+<h2 id="install-and-check">O‘rnatish va tekshirish<a class="anchor" href="#install-and-check" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
+<p>Panelni ishga tushiradigan Python muhitidan foydalaning. Manba kodlari yuklab olingan katalogdan:</p>
+<pre><code class="language-powershell"># Windows PowerShell
+&amp; .\.venv\Scripts\python.exe -m pip install -c deploy/constraints-mcp.txt -e &#x27;.[mcp]&#x27;
+&amp; .\.venv\Scripts\python.exe start.py --check</code></pre>
+<pre><code class="language-sh"># Linux / macOS
+.venv/bin/python -m pip install -c deploy/constraints-mcp.txt -e &#x27;.[mcp]&#x27;
+.venv/bin/python start.py --check</code></pre>
+<p>O‘rnatishdan so‘ng panelni odatdagi ma’lumotlar katalogi va ishga tushirish argumentlari bilan qayta ishga tushiring. Tayyorlik holatida <code>[PASS] mcp: streamable-http available</code> bo‘lishi kerak.
+<strong>Integrations → MCP</strong> bo‘limida ish vaqti (runtime) holati va ushbu serverning haqiqiy Python bajariladigan faylidan foydalangan holda o‘rnatish buyrug‘i ko‘rsatiladi. <strong>Re-check</strong> tugmasi sahifani qayta yuklamasdan ushbu holatni yangilaydi; u paketlarni o‘rnatmaydi yoki serverni qayta ishga tushirmaydi.</p>
+<p>MCP qo‘shimcha paketi rasmiy <a href="https://github.com/modelcontextprotocol/python-sdk">MCP Python SDK</a> dan foydalanadi.
+<code>deploy/constraints-mcp.txt</code> sinovdan o‘tgan SDK va bog‘liqliklarni qat’iy belgilaydi. Ushbu imkoniyatlar joriy manba kodini talab qiladi; 0.7.0 portativ dastlabki talqini ulardan oldin chiqqan.</p>
+<h2 id="issue-a-connection">Ulanish yaratish<a class="anchor" href="#issue-a-connection" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
+<ol>
+<li>Yorliq kiriting va mijoz o‘qishi mumkin bo‘lgan ish maydonlari hamda chatlarni tanlang.</li>
+<li>Vositalarni alohida-alohida tanlang yoki tayyor shablondan foydalaning. Faqat amalga oshirilgan vositalar taklif etiladi.</li>
+<li>1, 7, 30 yoki 90 kunni, yoxud bir daqiqadan 90 kungacha bo‘lgan maxsus amal qilish muddatini tanlang.</li>
+<li><strong>Create connection</strong> tugmasini bosing. Token mijoz konfiguratsiyasi yonida bir marta ko‘rinadi.</li>
+<li>Token va konfiguratsiyani nusxalab oling, so‘ngra <strong>Check connection</strong> tugmasini bosing. U MCP ni ishga tushiradi va ruxsat etilgan vositalar ro‘yxatini chiqaradi; <strong>hech qanday xabar o‘qilmaydi</strong>. Natijada protokol talqini, vosita nomlari, ularning soni va sarflangan vaqt ko‘rsatiladi.</li>
+<li>Hisob ma’lumotlari saqlanganidan so‘ng <strong>Done</strong> tugmasini bosing. Davriy so‘rovlar (polling) shaklni va bir marta ko‘rsatiladigan kartani saqlab qoladi. Panelni qulflash ekranda ko‘rsatilgan maxfiy ma’lumotlarni tozalaydi.</li>
+</ol>
+<p>Ro‘yxatda so‘nggi foydalanish, oxirgi vosita, manzil va so‘nggi daqiqadagi so‘rovlar soni ko‘rsatiladi.
+<strong>Revoke</strong> kirish huquqini to‘xtatadi. <strong>Rotate token</strong> eski hisob ma’lumotlarini bekor qiladi va xuddi shu qamrov, vositalar hamda amal qilish muddati bilan yangisini yaratadi; yangisini bir marta nusxalab oling.
+Panelga kirish tokenlari va Telegram hisob ma’lumotlari MCP tokenlari sifatida ishlamaydi.</p>
+<h2 id="connect-your-client">Mijozingizni ulash<a class="anchor" href="#connect-your-client" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
+<p>Panelda mijozni tanlang va yaratilgan konfiguratsiyani nusxalab oling. Konfiguratsiyalarda maxfiy havolalar yoki aniq o‘rinbosarlar (placeholders) ishlatiladi; token alohida nusxalanadi.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Mijoz</th>
+<th>Konfiguratsiya</th>
+<th>Ulanish</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude Code</td>
+<td><code>.mcp.json</code></td>
+<td>HTTP, <code>type: "http"</code>, bearer sarlavhasi</td>
+</tr>
+<tr>
+<td>Claude Desktop</td>
+<td><code>claude_desktop_config.json</code></td>
+<td>Lokal stdio ko‘prigi</td>
+</tr>
+<tr>
+<td>Cursor</td>
+<td><code>.cursor/mcp.json</code></td>
+<td>Muhit o‘zgaruvchisi sarlavhasiga ega HTTP</td>
+</tr>
+<tr>
+<td>VS Code Local</td>
+<td><code>.vscode/mcp.json</code></td>
+<td>Parolli <code>promptString</code> kiritmasiga ega HTTP</td>
+</tr>
+<tr>
+<td>Windsurf</td>
+<td><code>mcp_config.json</code></td>
+<td>Bearer sarlavhasi o‘rinbosariga ega HTTP</td>
+</tr>
+<tr>
+<td>Boshqa mijozlar</td>
+<td>URL va Authorization sarlavhasi</td>
+<td>Streamable HTTP</td>
+</tr>
+</tbody>
+</table></div>
+<p>TgWitness OAuth aniqlashisiz bearer tokenlardan foydalanadi. Masofaviy ulagichi OAuth talab qiladigan mijozlar uchun lokal stdio ko‘prigidan foydalaning. VS Code uchun kiritish o‘zgaruvchilari <strong>Local</strong> muhitiga taalluqli bo‘lib, Copilot sessiyalariga uzatilmaydi.
+Konfiguratsiya bo‘yicha ma’lumotnomalar: <a href="https://code.claude.com/docs/en/mcp">Claude Code</a>,
+<a href="https://prod.cursor.com/docs/mcp">Cursor</a>,
+<a href="https://code.visualstudio.com/docs/agents/reference/mcp-configuration">VS Code</a>.</p>
+<p>Lokal ko‘prik uchun standart kirish nuqtasi:</p>
+<pre><code class="language-sh">python -m tgwitness.mcp_server --url https://your-panel.example/mcp</code></pre>
+<p>Mijozning MCP qo‘shimcha paketi o‘rnatilgan lokal Python muhitidan foydalaning. Uning himoyalangan muhitida <code>TGWITNESS_MCP_TOKEN</code> o‘zgaruvchisini o‘rnating. Hisob ma’lumotlarini buyruq argumentlari va URL manzillariga kiritmang. <code>tgwitness-mcp</code> xuddi shu kirish nuqtasidir. Eski <code>tgwitness.mcp_bridge</code> moduli va <code>TGWITNESS_ARCHIVE_TOKEN</code> nomi ogohlantirish bilan moslik yo‘llari sifatida saqlanib qolgan; yangi konfiguratsiyalarda <code>mcp_server</code> va <code>TGWITNESS_MCP_TOKEN</code> ishlatiladi.</p>
+<h2 id="cloudflare-tunnel">Cloudflare Tunnel<a class="anchor" href="#cloudflare-tunnel" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
+<p>Panelning <code>/mcp</code> yo‘nalishini yo‘naltiring va bearer sarlavhasini saqlab qoling. Administrator sifatida MCP sozlamalarini ochish ushbu ishga tushirish jarayoni uchun panelning joriy manbasini (origin) ro‘yxatdan o‘tkazadi.
+Qayta ishga tushirilgandan so‘ng darhol mavjud bo‘ladigan barqaror manzil uchun, panelni ishga tushirishdan oldin <code>TGWITNESS_PUBLIC_URL</code> o‘zgaruvchisini panelning HTTPS manbasi bilan sozlang.
+Ixtiyoriy Host va yo‘naltirilgan sarlavhalar ishonchli manzilni ro‘yxatdan o‘tkazmaydi.
+Host va Origin tekshiruvlari aloqador bo‘lmagan brauzer manbalarini rad etadi. Javoblarda <code>Cache-Control: no-store</code> ishlatiladi; avtorizatsiya qiymatlari hech qachon jurnalga yozilmaydi.</p>
+<p><code>*.trycloudflare.com</code> manzili vaqtinchalik hisoblanadi. Tunnelni qayta ishga tushirish xost nomini o‘zgartirganda, sozlangan ommaviy URL va har bir mijozning MCP URL manzilini yangilang. Saqlangan mijoz konfiguratsiyalari uchun barqaror xost nomidan foydalaning.</p>
+<h2 id="tools-and-boundaries">Vositalar va chegaralar<a class="anchor" href="#tools-and-boundaries" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Vosita</th>
+<th>O‘qiydi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list_workspaces</code></td>
+<td>Ruxsat berilgan ish maydonlari</td>
+</tr>
+<tr>
+<td><code>list_chats</code></td>
+<td>Ruxsat berilgan chatlar</td>
+</tr>
+<tr>
+<td><code>search_messages</code></td>
+<td>Tanlangan davr ichida saqlangan xabar matni</td>
+</tr>
+<tr>
+<td><code>get_message_versions</code></td>
+<td>Qayd etilgan talqinlar va o‘chirish kuzatuvlari</td>
+</tr>
+<tr>
+<td><code>get_message_context</code></td>
+<td>Yaqin atrofdagi qayd etilgan xabar ID lari</td>
+</tr>
+<tr>
+<td><code>get_journal_event</code></td>
+<td>Manba havolasiga ega bitta tozalangan (sanitized) yozuv</td>
+</tr>
+<tr>
+<td><code>get_capture_status</code></td>
+<td>Yig‘ish holati va ruxsat etilgan qamrov yozuvlari</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>tools/list</code> faqat ushbu ulanishga ruxsat berilgan vositalarni qaytaradi. Boshqa vositalarga chaqiruvlar rad etiladi. Guruh konteksti, epizod, terminologiya va javoblar zanjiri vositalari ushbu yig‘mada taklif etilmaydi; ularning alohida kontekst-paket bekendi kiritilmagan.</p>
+<p>Har bir o‘qish amali token, vosita va ish maydoni/chat qamrovini, jumladan ma’lumotlar bazasi ishi tugaganidan keyin ham tekshiradi. Cheklovlar: daqiqasiga 60 ta so‘rov, har bir sahifada 50 ta yozuv, har bir natija uchun 64 KiB va arxiv uchun sakkiz soniyalik yakuniy muddat. Vaqti tugagan MCP chaqiruvi torroq davrni yoki kamroq cheklovni so‘rab vosita xatosini qaytaradi.</p>
+<p>Xabar natijalari <code>untrusted_content: true</code>, ish maydoni/chat/xabar ID lari, hodisa ketma-ketligi, saqlangan xesh va panel havolasini o‘z ichiga oladi. Xom Telegram obyektlari, kirish xeshlari, sessiyalar va kalitlar tushirib qoldiriladi. Matn qisqartirilganligi belgilanadi. Tahrirlar, o‘chirish bildirishnomalari va <code>missing_on_recheck</code> alohida kuzatuvlar hisoblanadi. Yozuvlarning yo‘qligi hodisa hech qachon sodir bo‘lmaganligini isbotlamaydi.</p>
+<p>Qayd etilgan xabarlar ichidagi ko‘rsatmalarga hech qachon mijoz ko‘rsatmalari sifatida emas, balki dalil sifatida qarang. Faqat o‘qish uchun kirish huquqi arxiv o‘zgarishlarining oldini oladi; biroq mijoz o‘ziga o‘qishga ruxsat berilgan kontentni saqlab qolishi mumkin. Xeshlar saqlangan yozuvlarni aniqlaydi va yaxlitlikni tekshirishni qo‘llab-quvvatlaydi; ular Telegram muallifligini yoki to‘liq qayd etilganlikni isbotlamaydi.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/MCP.md">Ushbu sahifani GitHubda tahrirlang ↗</a><a class="next-guide" href="../media-analysis/"><span>Keyingi qadam</span><strong>Mahalliy OCR va transkripsiya →</strong></a><p>Ushbu qo&#x27;llanmalar joriy amalga oshirishni tasvirlaydi. Tasdiqlash natijalari va qolgan bo&#x27;shliqlar alohida hujjatlashtirilgan. <a href="../verification/">Nima sinovdan o&#x27;tkazilgan →</a></p></footer>
 </main>
-<aside class="toc" aria-label="Ushbu sahifada"><p class="nav-label">Ushbu sahifada</p><a href="#connect-a-client">Klientni ulanish</a><a href="#scope-and-results">Doira va natijalar</a></aside>
+<aside class="toc" aria-label="Ushbu sahifada"><p class="nav-label">Ushbu sahifada</p><a href="#install-and-check">O‘rnatish va tekshirish</a><a href="#issue-a-connection">Ulanish yaratish</a><a href="#connect-your-client">Mijozingizni ulash</a><a href="#cloudflare-tunnel">Cloudflare Tunnel</a><a href="#tools-and-boundaries">Vositalar va chegaralar</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Ochiq manba · Sizning kompyuteringizda ishlaydi</span><a href="../../../../LICENSE">MIT litsenziyasi</a><a href="../notice/">Operator bildirishi</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Xavfsizlik</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "Xabarni kutish", "Step through a fictional send, edit and delete.": "Tasavvuriy jo'natish, tahrirlash va o'chirish jarayonini bosqichma-bosqich o'ting.", "No observations yet. Start the sequence or advance one event.": "Hali hech qanday kuzatuvlar yo'q. Ketma-ketlikni boshlang yoki bir voqeani oldinga suring.", "Meet at 10:00": "10:00 da uchrashing", "A new message is visible in the chat.": "Suhbatda yangi xabar ko'rinadi.", "Record 1 appended: the collector observed the original message.": "1-raqamli yozuv ilova qilindi: to'plovchi asl xabarni kuzatdi.", "Meet at 11:00": "11:00 da uchrashing", "The current text changes. The earlier observation stays.": "Joriy matn o'zgaradi. Avvalgi kuzatuv saqlanadi.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "2-yozuv ilova qilindi: tahrir yangi kuzatuvdir. 1-yozuv hanuzgacha asl matnni saqlab qolmoqda.", "Message deleted": "Xabar o'chirildi", "The message has disappeared from the chat view.": "Xabar suhbat ko'rinishidan yo'qoldi.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "3-raqamli yozuv ilova qilindi: o'chirish to'g'risidagi bildirishnoma kuzatilgan ikkala versiya bilan birga saqlanadi.", "0 records": "0 yozuv", "1 record": "1 yozuv", "2 records": "2 yozuv", "3 records": "3 yozuv", "Complete / {n} of 3": "3dan {n} to'liq", "Step / {n} of 3": "3 qadam / {n}dan 3", "Pause": "Tanaffus", "Replay sequence": "Qayta ijro etish ketma-ketligi", "Play sequence": "Sequensani ijro eting", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Statik misol mavjud. Hashlarni interaktiv tarzda hisoblash uchun ushbu sahifani HTTPS orqali yoki Web Crypto qo'llab-quvvatlanadigan localhost ko'rinishida oching.", "No record supplied": "Hech qanday yozuv taqdim etilmagan", "Tail removed": "Oxiri olib tashlandi", "≠ saved hash": "≠ saqlangan xesh", "Rebuilt · different hash": "Qayta qurilgan · boshqa xesh", "= saved hash": "= saqlangan xesh", "Same length and matching head.": "Bir xil uzunlik va mos keluvchi sarlavha.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Uchala hisoblangan xesh saqlangan xeshlarga mos keladi. Ushbu namunada saqlangan uch yozuv chegarasi bilan mos keladi.", "Same saved head; the journal prefix fails verification.": "Xuddi shu saqlangan sarlavha; jurnal prefiksi tasdiqdan o'tmaydi.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "2-yozuv saqlangan xeshga mos kelmaydi. Faqat oxirgi saqlangan headni tekshirish buni aniqlamaydi; verifikator har bir yozuvni tekshiradi.", "Head differs from the retained checkpoint.": "Head saqlangan tekshiruv nuqtasidan farq qiladi.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Qayta tuzilgan xeshlar bir-biriga bog'lanadi, lekin oxirgi bosh o'zgardi. Saqlangan tekshiruv nuqtasi bu tarixni rad etadi. O'zgartirilgan yozuvlarda asl imzolar ham muvaffaqiyatsiz bo'lardi.", "Too short: 2 supplied records \u003c 3 retained records.": "Juda qisqa: 2 ta taqdim etilgan yozuv \u003c 3 ta saqlangan yozuv.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Qolgan ikkita xesh hanuzgacha mos keladi. Saqlangan tekshiruv nuqtasi yo'qolgan oxirni ko'rsatadi. O'sha oldingi chegarasiz, bu qisqaroq prefiks o'zi o'chirib tashlangan qismni aniqlamas edi.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Hash hisoblash ushbu brauzerda mavjud emas. Quyidagi formulalar va statik izoh esa hanuzgacha mavjud.", "{n} records": "{n} yozuvlari", "head {hash}": "Zanjir boshi {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Qabul qilindi: hisob ortadi, imzo tasdiqlanadi va kalit mos keladi. Guvoh ushbu yangi chegarani saqlab qoladi.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: imzolangan javob oxirgi qabul qilingan tekshiruv nuqtasiga qaraganda kamroq yozuvlarni bildiradi. Guvoh muammoni qayd etadi va avvalgi qabul qilingan chegarani saqlab qoladi.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: hisob o'zgarmagan, lekin boshqasi boshqacha. Guvoh kelishmovchilikni qayd etadi va ilgari qabul qilingan chegarani saqlab qoladi.", "No answer": "Javob yo'q", "boundary unknown": "Chegara noma'lum", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Javob yo'q: guvoh muvaffaqiyatsiz tekshiruvni qayd etadi. Bu yig'uvchining joriy holatini aniqlay olmaydi. Agar guvoh hali ham Bot API ga ulanish imkoniga ega bo'lsa va uning nashr etish siyosati ruxsat etsa, u bu muvaffaqiyatsizlikni e'lon qilishi mumkin.", "Send {n}": "{n} yuboring", "Edit {n}": "Tahrir {n}", "Delete {n}": "{n}o'chirish", "Both accounts captured all six expected observations in this example.": "Bu misolda har ikkala akkaunt ham kutilgan oltita kuzatuvni to'liq qayd etdi.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Hisob B hanuzgacha 6 dan 6 tasini qayd etdi. Ikki kvitansiya esa ko'proq vaqt oldi. Qayd etish nisbatlari va kvitansiya kechikishlari turli savollarga javob beradi.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Account B kesish nuqtasigacha 6 ta harakatdan 5 tasini (83,3%) qayd etdi. Yo'qolgan tahrir uchun hech qanday o'lchangan kechikish yo'q. Ushbu natija faqat olti nazorat ostidagi harakatni tasvirlaydi.", "not observed by cutoff": "chegara nuqtasi tomonidan kuzatilmagan", "{s} seconds": "{s} soniya", "Exact values follow in the table.": "Jadvalda aniq qiymatlar keltirilgan.", "{s} s": "{s}s", "Not observed": "Kuzatilmagan", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "To'rtta suhbat turli kuzatuvlarni taqdim etadi. Har bir ulanish bo'yicha manba yozuvlarini kuzating; jo'natuvchi aniqlanmagan holda kanal postini 71001 foydalanuvchiga biriktirmang.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Yozuvlar #146 va #205 bir xil jo'natuvchi ID, 71001, ni ko'rsatadi. Bu Telegram hisobidagi kuzatilgan postlarni ikki chat bo'ylab bog'laydi. Bu haqiqiy shaxsni aniqlamaydi yoki kanal postini unga tegishli deb hisoblamaydi.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "pay.example.invalid/new manzili guruh yozuvi #146, bot klaviatura #173, kanal tahriri #188 va shaxsiy xabar #205 da uchraydi. Takroriy manzil materialni bog'laydi; bu hisoblarning umumiy nazorat ostida ekanligini isbotlamaydi.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Ushbu badiiy holatda #151 va #209 raqamli media kvitansiyalari to'liq SHA-256 qiymatlari bo'yicha teng. Haqiqiy baytlarni va ularga tegishli xabar yozuvlarini solishtiring. Mos keladigan fayl uning yaratuvchisini aniqlamaydi yoki uni kim jo'natganini isbotlamaydi.", "the encrypted off-site copy": "shifrlangan tashqi nusxa", "notifications": "bildirishnomalar", "checkpoint hashes for timestamps": "vaqt tamg'alari uchun tekshiruv nuqtasi xeshlari", "signed checkpoints for the witness": "guvoh uchun imzolangan tekshiruv nuqtalari", "Switched on in this example": "Ushbu misolda yoqilgan", "Optional · off by default": "Ixtiyoriy · standart bo'yicha o'chirilgan", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Ushbu mashinadan chiqishda: Telegram ulanishi va {list}. Boshqa hech narsa.", "Default: only the Telegram connection leaves this machine.": "Standart bo'yicha: faqat Telegram ulanishi ushbu mashinadan chiqadi.", "{done} of {total} done": "{done}dan {total} bajarildi", "Mark step {n} as done": "{n} bosqichini bajarilgan deb belgilash", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Ko'chirish", "Copied": "Ko'chirilgan", "Command copied.": "Buyruq nusxalandi.", "Selected — Ctrl/Cmd+C": "Tanlandi — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Buyruq tanlandi. Uni qo'lda nusxalash.", "Command copied to clipboard.": "Buyruq clipboardga nusxalandi.", "Select text": "Matnni tanlang", "Clipboard unavailable. Command selected; copy it manually.": "Klipbord mavjud emas. Buyruq tanlandi; uni qo'lda nusxalash.", "A message arrives. The first observation is saved.": "Xabar keladi. Birinchi kuzatuv saqlanadi.", "The time changes. Both captured versions stay.": "Vaqt o'zgaradi. Ikkala yozib olingan versiya ham saqlanadi.", "The message disappears. The captured history remains.": "Xabar yo'qoladi. Qayd etilgan tarix esa qoladi.", "Pause example animation": "Animatsiyani to'xtatish misoli", "Play example animation": "Namuna animatsiyasini ijro eting", "Play": "O'ynatish", "Full-size workspace screenshot": "To'liq o'lchamdagi ish maydoni skrinshoti", "Workspace screenshot · fictional data": "Ish maydoni skrinshoti · badiiy ma'lumotlar", "Close": "Yopish", "Close screenshot": "Ekran tasvirini yopish", "Scrollable full-size screenshot": "Haydaladigan to'liq o'lchamdagi skrinshot", "Enlarge: {name}": "Kengaytirish: {name}", "View full size": "To'liq o'lchamda ko'rish"}</script>

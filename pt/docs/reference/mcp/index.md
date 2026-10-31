@@ -4,48 +4,86 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/mcp/
 
 Conecte um cliente MCP a espaços de trabalho e chats selecionados com acesso temporário e revogável.
 
-**Versão principal atual:** utilize uma cópia do código-fonte; a versão prévia portátil 0.7.0 é anterior a esse recurso.
+Conecte um cliente analista aos workspaces e chats selecionados. O TgWitness serve **Streamable HTTP em `/mcp` no processo do painel**. Cada conexão possui seu próprio token, validade e ferramentas permitidas. O MCP não pode enviar mensagens do Telegram, alterar configurações ou modificar o diário assinado.
 
 [Guia de fluxo de trabalho](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-Instale o servidor opcional a partir do diretório do projeto TgWitness:
+## Instalar e verificar
+
+Use o ambiente Python que executa o painel. A partir de um checkout do código-fonte:
 
 ```
-python -m pip install '.[mcp]'
+# Windows PowerShell
+& .\.venv\Scripts\python.exe -m pip install -c deploy/constraints-mcp.txt -e '.[mcp]'
+& .\.venv\Scripts\python.exe start.py --check
 ```
 
-No painel, abra **Integrações → MCP**. Nomeie a conexão, selecione seus espaços de trabalho e chats e escolha um prazo de validade. Copie o token de arquivamento uma vez; ele não pode ser recuperado posteriormente. Revogue tokens perdidos e emita substitutos. Os tokens do painel e as credenciais do Telegram não são credenciais do MCP.
-
-## Conectar um cliente
-
-O painel gera `.vscode/mcp.json` para o **ambiente local do VS Code** usando sua [configuração documentada](https://code.visualstudio.com/docs/agents/reference/mcp-configuration). Salve o arquivo baixado nesse local, execute **o MCP: List Servers** e inicie o TgWitness. O VS Code solicita o token por meio de uma caixa de entrada de senha. O arquivo JSON baixado contém uma referência à solicitação, não o token. Use o executável Python do ambiente em que o MCP extra está instalado.
-
-Para outros clientes da stdio, execute:
-
 ```
-python -m tgwitness.mcp_server --api-url http://127.0.0.1:8787
+# Linux / macOS
+.venv/bin/python -m pip install -c deploy/constraints-mcp.txt -e '.[mcp]'
+.venv/bin/python start.py --check
 ```
 
-Defina `TGWITNESS_ARCHIVE_TOKEN` no ambiente protegido do cliente. Não o inclua em argumentos de comando ou URLs. A ponte faz a leitura por meio da API de arquivo autorizada do painel; ela não tem acesso direto ao banco de dados. O stdout transmite apenas mensagens MCP.
+Reinicie o painel com seu diretório de dados habitual e argumentos de inicialização após a instalação. A verificação de prontidão deve incluir `[PASS] mcp: streamable-http available`. **Integrations → MCP** mostra o status de execução e um comando de instalação usando o executável Python real daquele servidor. **Re-check** atualiza esse status sem recarregar a página; isso não instala pacotes nem reinicia o servidor.
 
-Para clientes remotos, execute o serviço ao lado do painel:
+O extra MCP usa o [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk) oficial. `deploy/constraints-mcp.txt` fixa o SDK testado e as dependências. Esses recursos exigem o código-fonte atual; a versão prévia portátil 0.7.0 é anterior a eles.
+
+## Emitir uma conexão
+
+1. Insira um rótulo e escolha os workspaces e chats que o cliente pode ler.
+2. Selecione as ferramentas individualmente ou use uma predefinição. Apenas ferramentas implementadas são oferecidas.
+3. Escolha 1, 7, 30 ou 90 dias, ou uma validade personalizada entre um minuto e 90 dias.
+4. Pressione **Create connection**. O token aparece uma única vez ao lado da configuração do cliente.
+5. Copie o token e a configuração e, em seguida, execute **Check connection**. Ele inicializa o MCP e lista as ferramentas permitidas; **nenhuma mensagem é lida**. O resultado mostra a versão do protocolo, nomes das ferramentas, contagem e tempo decorrido.
+6. Pressione **Done** quando a credencial estiver salva. As atualizações automáticas preservam o formulário e o cartão exibido uma única vez. Bloquear o painel limpa os segredos exibidos.
+
+A lista mostra o uso recente, a última ferramenta, o endereço e as requisições no último minuto. **Revoke** encerra o acesso. **Rotate token** revoga a credencial antiga e emite uma substituta com o mesmo escopo, ferramentas e validade; copie a substituta uma única vez. Tokens de login do painel e credenciais do Telegram não funcionam como tokens MCP.
+
+## Conecte seu cliente
+
+Selecione o cliente no painel e copie a configuração gerada. As configurações usam referências a segredos ou espaços reservados explícitos; o token é copiado separadamente.
+
+| Cliente | Configuração | Conexão |
+| --- | --- | --- |
+| Claude Code | `.mcp.json` | HTTP, `type: "http"`, cabeçalho bearer |
+| Claude Desktop | `claude_desktop_config.json` | Ponte stdio local |
+| Cursor | `.cursor/mcp.json` | HTTP com um cabeçalho de variável de ambiente |
+| VS Code Local | `.vscode/mcp.json` | HTTP com uma entrada `promptString` de senha |
+| Windsurf | `mcp_config.json` | HTTP com um espaço reservado para cabeçalho bearer |
+| Outros clientes | URL e cabeçalho Authorization | Streamable HTTP |
+
+O TgWitness usa tokens bearer, sem descoberta OAuth. Use a ponte stdio local para clientes cujo conector remoto exige OAuth. Para o VS Code, as variáveis de entrada aplicam-se ao ambiente **Local** e não são encaminhadas para sessões do Copilot. Referências de configuração: [Claude Code](https://code.claude.com/docs/en/mcp), [Cursor](https://prod.cursor.com/docs/mcp), [VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration).
+
+O ponto de entrada canônico para uma ponte local é:
 
 ```
-python -m tgwitness.mcp_server --transport streamable-http \
-  --api-url http://127.0.0.1:8787 --port 8766 \
-  --public-url https://archive.example.org/mcp
+python -m tgwitness.mcp_server --url https://your-panel.example/mcp
 ```
 
-Encaminhe `/mcp` por meio de um proxy reverso HTTPS para `127.0.0.1:8766/mcp`, preservando o cabeçalho `Authorization: Bearer …`. Desative o registro de cabeçalhos de autorização e corpos de solicitação/resposta. Faça a ligação além do loopback somente quando necessário, usando `--host` e `--public-url`. O endpoint utiliza Streamable HTTP do [SDK oficial do MCP para Python](https://github.com/modelcontextprotocol/python-sdk). Ele suporta credenciais de portador configuradas explicitamente, não a descoberta por OAuth; clientes que exigem apenas OAuth não são suportados.
+Use o Python local do cliente com o extra MCP instalado. Defina `TGWITNESS_MCP_TOKEN` em seu ambiente protegido. Mantenha as credenciais fora dos argumentos de comando e URLs. `tgwitness-mcp` é o mesmo ponto de entrada. O módulo antigo `tgwitness.mcp_bridge` e o nome `TGWITNESS_ARCHIVE_TOKEN` permanecem como caminhos de compatibilidade com um aviso; novas configurações usam `mcp_server` e `TGWITNESS_MCP_TOKEN`.
 
-**A verificação do protocolo e o acesso** inicializam um cliente MCP real e listam as ferramentas. Isso não busca mensagens. Para uma verificação remota, o servidor MCP escolhido recebe o token de arquivo. Configure apenas um servidor que você opera ou no qual confia para esse escopo.
+## Cloudflare Tunnel
 
-## Escopo e resultados
+Encaminhe a rota `/mcp` do painel e preserve o cabeçalho bearer. Abrir as configurações de MCP como administrador registra a origem atual do painel para esta execução. Para ter um endereço estável disponível imediatamente após a reinicialização, configure `TGWITNESS_PUBLIC_URL` com a origem HTTPS do painel antes de iniciá-lo. Cabeçalhos Host e de encaminhamento arbitrários não registram um endereço confiável. As verificações de Host e Origin rejeitam origens de navegador não relacionadas. As respostas usam `Cache-Control: no-store`; valores de autorização nunca são registrados nos logs.
 
-Ferramentas disponíveis: `list_workspaces`, `list_chats`, `search_messages`, `get_message_versions`, `get_message_context`, `get_journal_event` e `get_capture_status`. Não há ações no Telegram, alterações de configuração nem ferramentas de exportação em massa. A cada leitura, o acesso ao espaço de trabalho/bate-papo é verificado novamente; credenciais expiradas e revogadas deixam de funcionar. Os limites são de 60 solicitações de API por minuto por credencial, 50 registros por página, uma resposta de 64 KiB e um prazo de resposta da API de oito segundos.
+Um endereço `*.trycloudflare.com` é temporário. Quando uma reinicialização do túnel altera o hostname, atualize a URL pública configurada e a URL do MCP de cada cliente. Use um hostname estável para configurações de clientes salvas.
 
-Os resultados das mensagens incluem espaço de trabalho, IDs de bate-papo/mensagem, sequência de eventos, hash salvo, e um link para o painel. O usuário que abrir o link deve ter sua própria sessão autorizada no painel. Objetos brutos do Telegram, hashes de acesso, referências a arquivos, material da sessão e chaves são omitidos. A pesquisa examina o texto da mensagem, não os campos brutos. O texto é delimitado e o truncamento é marcado. Edições, notificações de exclusão do Telegram e `missing_on_recheck` permanecem como observações separadas. O acesso restrito ao chat não pode visualizar eventos operacionais em todo o espaço de trabalho; o status da captura marca explicitamente esse limite.
+## Ferramentas e limites
 
-O texto do arquivo é considerado uma entrada não confiável. As instruções contidas nas mensagens não conferem nenhum alcance adicional e não devem ser tratadas como instruções do cliente. Um modelo de IA externo pode receber qualquer conteúdo que seu cliente MCP solicitar. O acesso somente leitura impede alterações no arquivo; ele não impede que um cliente retenha os dados que lê.
+| Ferramenta | Lê |
+| --- | --- |
+| `list_workspaces` | Workspaces concedidos |
+| `list_chats` | Chats concedidos |
+| `search_messages` | Texto de mensagens salvas dentro do período selecionado |
+| `get_message_versions` | Versões capturadas e observações de exclusão |
+| `get_message_context` | IDs de mensagens capturadas próximas |
+| `get_journal_event` | Um registro higienizado com sua referência de origem |
+| `get_capture_status` | Estado da coleta e registros de cobertura permitidos |
 
-Os hashes identificam os registros salvos e permitem verificações de integridade. Eles não comprovam, por si só, a autoria no Telegram nem que todas as mensagens tenham sido capturadas.
+`tools/list` retorna apenas as ferramentas concedidas àquela conexão. Chamadas para outras ferramentas são recusadas. Ferramentas de contexto de grupo, episódio, terminologia e cadeia de respostas não são oferecidas nesta compilação; o backend separado de pacote de contexto delas não está incluído.
+
+Cada leitura verifica o token, a ferramenta e o escopo de workspace/chat, inclusive após a conclusão do trabalho no banco de dados. Os limites são de 60 requisições por minuto, 50 registros por página, 64 KiB por resultado e um tempo limite de oito segundos para o arquivo. Uma chamada MCP que exceda o tempo limite retorna um erro de ferramenta solicitando um período menor ou um limite mais baixo.
+
+Os resultados de mensagens contêm `untrusted_content: true`, IDs de workspace/chat/mensagem, sequência de eventos, hash salvo e um link para o painel. Objetos brutos do Telegram, hashes de acesso, sessões e chaves são omitidos. O truncamento de texto é sinalizado. Edições, avisos de exclusão e `missing_on_recheck` são observações distintas. Registros ausentes não provam que um evento nunca aconteceu.
+
+Trate instruções dentro de mensagens capturadas como evidência, nunca como instruções para o cliente. O acesso somente leitura impede alterações no arquivo; o cliente ainda pode reter o conteúdo que tem permissão para ler. Hashes identificam registros salvos e apoiam verificações de integridade; eles não provam autoria no Telegram nem captura completa.

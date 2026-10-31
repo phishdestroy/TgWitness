@@ -31,63 +31,169 @@
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="Panduan"><a href="../../../">Beranda</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentasi</a> <span aria-hidden="true">/</span> <a href="../">Referensi</a> <span aria-hidden="true">/</span> <span aria-current="page">MCP hanya baca</span></nav>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Cari di dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Coba gunakan proxy, rantai hash, token, atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Pencarian yang jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Ketik kata kunci untuk mencari panduan dan referensi. Hasil pencarian tetap tersimpan di browser Anda.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Referensi / Arsip &amp; integrasi</p><h1>MCP hanya baca</h1><p class="guide-outcome">Hubungkan klien MCP ke ruang kerja dan obrolan yang dipilih dengan akses yang memiliki batas waktu dan dapat dicabut.</p><div class="wiki-body"><p><strong>Versi utama saat ini:</strong> gunakan checkout sumber; pratinjau portabel 0.7.0 dirilis sebelum fitur ini tersedia.</p>
+<article class="guide-content"><p class="eyebrow">Referensi / Arsip &amp; integrasi</p><h1>MCP hanya baca</h1><p class="guide-outcome">Hubungkan klien MCP ke ruang kerja dan obrolan yang dipilih dengan akses yang memiliki batas waktu dan dapat dicabut.</p><div class="wiki-body"><p>Hubungkan klien analis ke ruang kerja dan obrolan yang dipilih. TgWitness menyajikan
+<strong>Streamable HTTP di <code>/mcp</code> dalam proses panel</strong>. Setiap koneksi memiliki
+token, masa berlaku, dan alat yang diizinkan sendiri. MCP tidak dapat mengirim pesan Telegram, mengubah
+pengaturan, atau memodifikasi jurnal bertanda tangan.</p>
 <p><a href="https://phishdestroy.github.io/TgWitness/docs/archive/">Panduan alur kerja</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
-<p>Instal server opsional dari direktori proyek TgWitness:</p>
-<pre><code class="language-sh">python -m pip install &#x27;.[mcp]&#x27;</code></pre>
-<p>Di panel, buka <strong>Integrasi → MCP</strong>. Beri nama koneksi, pilih
-ruang kerja dan obrolannya, serta tentukan masa berlaku. Salin token arsip sekali saja; token ini tidak
-dapat diambil kembali nanti. Cabut token yang hilang dan terbitkan penggantinya. Token panel dan
-kredensial Telegram bukanlah kredensial MCP.</p>
-<h2 id="connect-a-client">Hubungkan klien<a class="anchor" href="#connect-a-client" aria-label="Tautan ke bagian ini">#</a></h2>
-<p>Panel tersebut menghasilkan <code>.vscode/mcp.json</code> untuk <strong>harness Lokal VS Code</strong> menggunakan
-<a href="https://code.visualstudio.com/docs/agents/reference/mcp-configuration">konfigurasi yang terdokumentasi</a>.
-Simpan berkas yang diunduh di lokasi tersebut, jalankan <strong>MCP: List Servers</strong>, dan mulai
-TgWitness. VS Code akan meminta token melalui kolom masukan kata sandi. Berkas
-JSON yang diunduh berisi referensi prompt, bukan token itu sendiri. Gunakan berkas eksekusi Python dari
-lingkungan tempat ekstensi MCP diinstal.</p>
-<p>Untuk klien stdio lainnya, jalankan:</p>
-<pre><code class="language-sh">python -m tgwitness.mcp_server --api-url http://127.0.0.1:8787</code></pre>
-<p>Tetapkan <code>TGWITNESS_ARCHIVE_TOKEN</code> di lingkungan terlindungi klien. Jangan memasukkannya
-ke dalam argumen perintah atau URL. Jembatan ini membaca melalui API arsip yang diotorisasi
-panel; jembatan ini tidak memiliki akses langsung ke basis data. Stdout hanya mentransmisikan pesan MCP.</p>
-<p>Untuk klien jarak jauh, jalankan layanan ini di samping panel:</p>
-<pre><code class="language-sh">python -m tgwitness.mcp_server --transport streamable-http \
-  --api-url http://127.0.0.1:8787 --port 8766 \
-  --public-url https://archive.example.org/mcp</code></pre>
-<p>Teruskan <code>/mcp</code> melalui proxy terbalik HTTPS ke <code>127.0.0.1:8766/mcp</code>, dengan tetap mempertahankan
-header <code>Authorization: Bearer …</code>. Nonaktifkan pencatatan header otorisasi
-serta isi permintaan/respons. Lakukan pengikatan di luar loopback hanya jika diperlukan, menggunakan
-<code>--host</code> dan <code>--public-url</code>. Titik akhir ini menggunakan Streamable HTTP dari
-<a href="https://github.com/modelcontextprotocol/python-sdk">SDK Python MCP</a> resmi.
-Endpoint ini mendukung kredensial bearer yang dikonfigurasi secara eksplisit, bukan penemuan OAuth;
-klien yang hanya memerlukan OAuth tidak didukung.</p>
-<p><strong>Proses pemeriksaan protokol dan akses</strong> akan menginisialisasi klien MCP yang sebenarnya serta menampilkan daftar alat. Proses ini
-tidak mengambil pesan. Untuk pemeriksaan jarak jauh, server MCP yang dipilih akan menerima
-token arsip. Konfigurasikan hanya server yang Anda kelola atau percayai dengan cakupan tersebut.</p>
-<h2 id="scope-and-results">Ruang lingkup dan hasil<a class="anchor" href="#scope-and-results" aria-label="Tautan ke bagian ini">#</a></h2>
-<p>Alat yang tersedia: <code>list_workspaces</code>, <code>list_chats</code>, <code>search_messages</code>,
-<code>get_message_versions</code>, <code>get_message_context</code>, <code>get_journal_event</code>, dan
-<code>get_capture_status</code>. Tidak ada tindakan Telegram, perubahan konfigurasi, atau
-alat ekspor massal. Setiap kali dibaca, akses ruang kerja/obrolan diperiksa ulang; kredensial yang kedaluwarsa dan dicabut
-tidak lagi berfungsi. Batasannya adalah 60 permintaan API per menit per kredensial,
-50 catatan per halaman, respons sebesar 64 KiB, dan batas waktu API delapan detik.</p>
-<p>Hasil pesan mencakup ruang kerja, ID obrolan/pesan, urutan peristiwa, hash yang disimpan,
-dan tautan panel. Pengguna yang membuka tautan harus memiliki sesi panel
-yang terotorisasi sendiri. Objek Telegram mentah, hash akses, referensi file, materi sesi,
-dan kunci dihilangkan. Pencarian memeriksa teks pesan, bukan bidang mentah. Teks
-dibatasi dan pemotongan ditandai. Pengeditan, pemberitahuan penghapusan Telegram, dan
-<code>missing_on_recheck</code> tetap menjadi pengamatan terpisah. Akses dalam lingkup obrolan tidak dapat melihat
-peristiwa operasional di seluruh ruang kerja; status penangkapan secara eksplisit menandai batasan ini.</p>
-<p>Teks arsip merupakan masukan yang tidak dapat dipercaya. Instruksi di dalam pesan tidak memberikan
-ruang lingkup tambahan dan tidak boleh diperlakukan sebagai instruksi klien. Model AI eksternal dapat
-menerima konten apa pun yang diminta oleh klien MCP-nya. Akses baca-saja mencegah
-perubahan pada arsip; hal ini tidak mencegah klien untuk menyimpan data yang dibacanya.</p>
-<p>Hashes tersebut mengidentifikasi catatan yang disimpan dan mendukung pemeriksaan integritas. Hashes tersebut tidak
-secara mandiri membuktikan keaslian pengirim di Telegram atau bahwa setiap pesan telah terekam.</p></div></article>
+<h2 id="install-and-check">Instal dan periksa<a class="anchor" href="#install-and-check" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Gunakan lingkungan Python yang menjalankan panel. Dari checkout sumber:</p>
+<pre><code class="language-powershell"># Windows PowerShell
+&amp; .\.venv\Scripts\python.exe -m pip install -c deploy/constraints-mcp.txt -e &#x27;.[mcp]&#x27;
+&amp; .\.venv\Scripts\python.exe start.py --check</code></pre>
+<pre><code class="language-sh"># Linux / macOS
+.venv/bin/python -m pip install -c deploy/constraints-mcp.txt -e &#x27;.[mcp]&#x27;
+.venv/bin/python start.py --check</code></pre>
+<p>Mulai ulang panel dengan direktori data dan argumen peluncuran biasanya setelah
+instalasi. Pemeriksaan kesiapan harus menyertakan <code>[PASS] mcp: streamable-http available</code>.
+<strong>Integrations → MCP</strong> menampilkan status runtime dan perintah instalasi yang menggunakan
+eksekutabel Python aktual server tersebut. <strong>Re-check</strong> menyegarkan status ini tanpa
+memuat ulang halaman; tindakan ini tidak menginstal paket atau memulai ulang server.</p>
+<p>Ekstra MCP menggunakan <a href="https://github.com/modelcontextprotocol/python-sdk">MCP Python SDK</a> resmi.
+<code>deploy/constraints-mcp.txt</code> mengunci versi SDK dan dependensi yang telah diuji. Fitur-fitur ini
+memerlukan kode sumber terbaru; pratinjau portabel 0.7.0 mendahului fitur-fitur tersebut.</p>
+<h2 id="issue-a-connection">Terbitkan koneksi<a class="anchor" href="#issue-a-connection" aria-label="Tautan ke bagian ini">#</a></h2>
+<ol>
+<li>Masukkan label dan pilih ruang kerja serta obrolan yang boleh dibaca oleh klien.</li>
+<li>Pilih alat satu per satu atau gunakan preset. Hanya alat yang telah diimplementasikan yang ditawarkan.</li>
+<li>Pilih 1, 7, 30, atau 90 hari, atau masa berlaku khusus antara satu menit hingga 90 hari.</li>
+<li>Tekan <strong>Create connection</strong>. Token muncul satu kali di samping konfigurasi klien.</li>
+<li>Salin token dan konfigurasi, lalu jalankan <strong>Check connection</strong>. Tindakan ini menginisialisasi MCP
+    dan mencantumkan alat yang diizinkan; <strong>tidak ada pesan yang dibaca</strong>. Hasilnya menampilkan versi
+    protokol, nama alat, jumlah, dan waktu yang berlalu.</li>
+<li>Tekan <strong>Done</strong> setelah kredensial disimpan. Polling mempertahankan formulir dan
+    kartu yang hanya ditampilkan sekali. Mengunci panel akan menghapus rahasia yang ditampilkan.</li>
+</ol>
+<p>Daftar tersebut menampilkan penggunaan terkini, alat terakhir, alamat, dan permintaan dalam satu menit terakhir.
+<strong>Revoke</strong> mengakhiri akses. <strong>Rotate token</strong> mencabut kredensial lama dan menerbitkan
+pengganti dengan cakupan, alat, dan masa berlaku yang sama; salin pengganti tersebut satu kali.
+Token login panel dan kredensial Telegram tidak berfungsi sebagai token MCP.</p>
+<h2 id="connect-your-client">Hubungkan klien Anda<a class="anchor" href="#connect-your-client" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Pilih klien di panel dan salin konfigurasi yang dihasilkan. Konfigurasi menggunakan
+referensi rahasia atau placeholder eksplisit; token disalin secara terpisah.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Klien</th>
+<th>Konfigurasi</th>
+<th>Koneksi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude Code</td>
+<td><code>.mcp.json</code></td>
+<td>HTTP, <code>type: "http"</code>, header bearer</td>
+</tr>
+<tr>
+<td>Claude Desktop</td>
+<td><code>claude_desktop_config.json</code></td>
+<td>Jembatan stdio lokal</td>
+</tr>
+<tr>
+<td>Cursor</td>
+<td><code>.cursor/mcp.json</code></td>
+<td>HTTP dengan header variabel lingkungan</td>
+</tr>
+<tr>
+<td>VS Code Local</td>
+<td><code>.vscode/mcp.json</code></td>
+<td>HTTP dengan input kata sandi <code>promptString</code></td>
+</tr>
+<tr>
+<td>Windsurf</td>
+<td><code>mcp_config.json</code></td>
+<td>HTTP dengan placeholder header bearer</td>
+</tr>
+<tr>
+<td>Klien lainnya</td>
+<td>URL dan header Authorization</td>
+<td>Streamable HTTP</td>
+</tr>
+</tbody>
+</table></div>
+<p>TgWitness menggunakan token bearer, tanpa penemuan OAuth. Gunakan jembatan stdio lokal
+untuk klien yang konektor jarak jauhnya memerlukan OAuth. Untuk VS Code, variabel input
+berlaku pada harness <strong>Local</strong> dan tidak diteruskan ke sesi Copilot.
+Referensi konfigurasi: <a href="https://code.claude.com/docs/en/mcp">Claude Code</a>,
+<a href="https://prod.cursor.com/docs/mcp">Cursor</a>,
+<a href="https://code.visualstudio.com/docs/agents/reference/mcp-configuration">VS Code</a>.</p>
+<p>Titik masuk kanonis untuk jembatan lokal adalah:</p>
+<pre><code class="language-sh">python -m tgwitness.mcp_server --url https://your-panel.example/mcp</code></pre>
+<p>Gunakan Python lokal klien yang sudah terinstal ekstra MCP. Atur
+<code>TGWITNESS_MCP_TOKEN</code> di lingkungan yang dilindunginya. Jauhkan kredensial dari argumen
+perintah dan URL. <code>tgwitness-mcp</code> adalah titik masuk yang sama. Modul lama
+<code>tgwitness.mcp_bridge</code> dan nama <code>TGWITNESS_ARCHIVE_TOKEN</code> tetap menjadi jalur
+kompatibilitas dengan peringatan; konfigurasi baru menggunakan <code>mcp_server</code> dan <code>TGWITNESS_MCP_TOKEN</code>.</p>
+<h2 id="cloudflare-tunnel">Cloudflare Tunnel<a class="anchor" href="#cloudflare-tunnel" aria-label="Tautan ke bagian ini">#</a></h2>
+<p>Teruskan rute <code>/mcp</code> panel dan pertahankan header bearer. Membuka pengaturan MCP
+sebagai administrator akan mendaftarkan origin panel saat ini untuk proses yang sedang berjalan ini.
+Untuk alamat stabil yang langsung tersedia setelah mulai ulang, konfigurasikan
+<code>TGWITNESS_PUBLIC_URL</code> dengan origin HTTPS panel sebelum memulai panel.
+Header Host dan forwarded yang sembarang tidak akan mendaftarkan alamat tepercaya.
+Pemeriksaan Host dan Origin menolak origin browser yang tidak terkait. Respons menggunakan
+<code>Cache-Control: no-store</code>; nilai otorisasi tidak pernah dicatat ke dalam log.</p>
+<p>Alamat <code>*.trycloudflare.com</code> bersifat sementara. Ketika mulai ulang tunnel mengubah
+nama host, perbarui URL publik yang dikonfigurasi dan URL MCP setiap klien. Gunakan
+nama host yang stabil untuk konfigurasi klien yang disimpan.</p>
+<h2 id="tools-and-boundaries">Alat dan batasan<a class="anchor" href="#tools-and-boundaries" aria-label="Tautan ke bagian ini">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Alat</th>
+<th>Yang dibaca</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list_workspaces</code></td>
+<td>Ruang kerja yang diizinkan</td>
+</tr>
+<tr>
+<td><code>list_chats</code></td>
+<td>Obrolan yang diizinkan</td>
+</tr>
+<tr>
+<td><code>search_messages</code></td>
+<td>Teks pesan tersimpan dalam periode yang dipilih</td>
+</tr>
+<tr>
+<td><code>get_message_versions</code></td>
+<td>Versi yang tertangkap dan pengamatan penghapusan</td>
+</tr>
+<tr>
+<td><code>get_message_context</code></td>
+<td>ID pesan sekitar yang tertangkap</td>
+</tr>
+<tr>
+<td><code>get_journal_event</code></td>
+<td>Satu catatan yang telah disanitasi beserta referensi sumbernya</td>
+</tr>
+<tr>
+<td><code>get_capture_status</code></td>
+<td>Status pengumpulan dan catatan cakupan yang diizinkan</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>tools/list</code> hanya mengembalikan alat yang diizinkan untuk koneksi tersebut. Pemanggilan ke alat
+lain akan ditolak. Alat konteks grup, episode, terminologi, dan rantai balasan
+tidak ditawarkan dalam build ini; backend paket konteks terpisahnya tidak disertakan.</p>
+<p>Setiap pembacaan memeriksa token, alat, dan cakupan ruang kerja/obrolan, termasuk setelah
+pekerjaan database selesai. Batasannya adalah 60 permintaan per menit, 50 catatan per halaman,
+64 KiB per hasil, dan batas waktu arsip delapan detik. Pemanggilan MCP yang kehabisan waktu
+mengembalikan kesalahan alat yang meminta periode yang lebih sempit atau batas yang lebih rendah.</p>
+<p>Hasil pesan memuat <code>untrusted_content: true</code>, ID ruang kerja/obrolan/pesan,
+urutan peristiwa, hash tersimpan, dan tautan panel. Objek Telegram mentah, hash akses,
+sesi, dan kunci dihilangkan. Pemotongan teks ditandai. Suntingan, pemberitahuan penghapusan,
+dan <code>missing_on_recheck</code> adalah pengamatan yang berbeda. Catatan yang hilang tidak membuktikan
+bahwa suatu peristiwa tidak pernah terjadi.</p>
+<p>Perlakukan instruksi di dalam pesan yang tertangkap sebagai bukti, jangan pernah sebagai instruksi
+klien. Akses baca-saja mencegah perubahan arsip; klien masih dapat
+menyimpan konten yang diizinkan untuk dibacanya. Hash mengidentifikasi catatan yang disimpan dan
+mendukung pemeriksaan integritas; hash tidak membuktikan kepengarangan Telegram atau penangkapan yang lengkap.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/MCP.md">Edit halaman ini di GitHub ↗</a><a class="next-guide" href="../media-analysis/"><span>Langkah selanjutnya</span><strong>OCR dan transkripsi lokal →</strong></a><p>Panduan-panduan ini menjelaskan implementasi saat ini. Hasil validasi dan celah yang masih ada didokumentasikan secara terpisah. <a href="../verification/">Apa yang telah diuji →</a></p></footer>
 </main>
-<aside class="toc" aria-label="Di halaman ini"><p class="nav-label">Di halaman ini</p><a href="#connect-a-client">Hubungkan klien</a><a href="#scope-and-results">Ruang lingkup dan hasil</a></aside>
+<aside class="toc" aria-label="Di halaman ini"><p class="nav-label">Di halaman ini</p><a href="#install-and-check">Instal dan periksa</a><a href="#issue-a-connection">Terbitkan koneksi</a><a href="#connect-your-client">Hubungkan klien Anda</a><a href="#cloudflare-tunnel">Cloudflare Tunnel</a><a href="#tools-and-boundaries">Alat dan batasan</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Sumber terbuka · Dapat dijalankan di komputer Anda</span><a href="../../../../LICENSE">Lisensi MIT</a><a href="../notice/">Pemberitahuan operator</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Keamanan</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "Menunggu pesan", "Step through a fictional send, edit and delete.": "Ikuti langkah demi langkah proses pengiriman, pengeditan, dan penghapusan fiktif.", "No observations yet. Start the sequence or advance one event.": "Belum ada catatan. Mulai urutan atau lanjutkan ke peristiwa berikutnya.", "Meet at 10:00": "Bertemu pukul 10.00", "A new message is visible in the chat.": "Sebuah pesan baru terlihat di obrolan.", "Record 1 appended: the collector observed the original message.": "Catatan 1 ditambahkan: pengumpul telah mengamati pesan asli.", "Meet at 11:00": "Bertemu pukul 11.00", "The current text changes. The earlier observation stays.": "Teks saat ini berubah. Pengamatan sebelumnya tetap berlaku.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Catatan 2 ditambahkan: pengeditan ini merupakan pengamatan baru. Catatan 1 masih memuat teks aslinya.", "Message deleted": "Pesan telah dihapus", "The message has disappeared from the chat view.": "Pesan tersebut telah menghilang dari tampilan obrolan.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Catatan 3 ditambahkan: pemberitahuan penghapusan disimpan bersama kedua versi yang teramati.", "0 records": "0 catatan", "1 record": "1 catatan", "2 records": "2 catatan", "3 records": "3 catatan", "Complete / {n} of 3": "Lengkap / {n} dari 3", "Step / {n} of 3": "Langkah / {n} dari 3", "Pause": "Jeda", "Replay sequence": "Urutan pemutaran ulang", "Play sequence": "Urutan pemutaran", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Contoh statis tersedia. Untuk menghitung hash secara interaktif, buka halaman ini melalui HTTPS atau pratinjau localhost yang mendukung Web Crypto.", "No record supplied": "Tidak ada catatan yang disediakan", "Tail removed": "Bagian akhir dihapus", "≠ saved hash": "≠ hash yang disimpan", "Rebuilt · different hash": "Dibangun ulang · hash berbeda", "= saved hash": "= hash yang disimpan", "Same length and matching head.": "Panjang yang sama dan judul yang sesuai.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Ketiga hash yang dihitung cocok dengan hash yang disimpan. Sampel ini sesuai dengan batas tiga catatan yang disimpan.", "Same saved head; the journal prefix fails verification.": "Header yang sama telah disimpan; awalan jurnal gagal diverifikasi.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Catatan 2 tidak lagi cocok dengan hash yang tersimpan. Memeriksa hanya head terakhir yang tersimpan akan melewatkan hal ini; verifikator memeriksa setiap catatan.", "Head differs from the retained checkpoint.": "Header berbeda dari checkpoint yang disimpan.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Hash yang dibangun ulang saling terhubung, tetapi header terakhir telah berubah. Titik pemeriksaan yang disimpan menolak riwayat ini. Tanda tangan asli juga akan gagal pada catatan yang diubah.", "Too short: 2 supplied records \u003c 3 retained records.": "Terlalu singkat: 2 catatan yang disediakan \u003c 3 catatan yang disimpan.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Kedua hash yang tersisa masih cocok. Titik pemeriksaan yang disimpan mengungkapkan bagian akhir yang hilang. Tanpa batas awal tersebut, awalan yang lebih pendek ini saja tidak akan mengungkapkan adanya penghilangan tersebut.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Perhitungan hash tidak tersedia di browser ini. Rumus dan penjelasan statis di bawah ini tetap tersedia.", "{n} records": "{n} catatan", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Diterima: jumlahnya bertambah, tanda tangan terverifikasi, dan kuncinya cocok. Saksi mempertahankan batas baru ini.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: jawaban yang ditandatangani melaporkan jumlah catatan yang lebih sedikit daripada titik pemeriksaan terakhir yang diterima. TgWitness mencatat masalah tersebut dan mempertahankan batas yang diterima sebelumnya.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: jumlahnya tidak berubah, tetapi cabangnya berbeda. Saksi mencatat ketidaksesuaian tersebut dan mempertahankan batas yang sebelumnya telah disetujui.", "No answer": "Tidak ada jawaban", "boundary unknown": "batas tidak diketahui", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Tidak ada respons: TgWitness mencatat kegagalan pemeriksaan tersebut. TgWitness tidak dapat memastikan status terkini dari pengumpul data. Jika TgWitness masih dapat mengakses Bot API dan kebijakan publikasinya mengizinkan, TgWitness dapat mempublikasikan kegagalan tersebut.", "Send {n}": "Kirim {n}", "Edit {n}": "Edit {n}", "Delete {n}": "Hapus {n}", "Both accounts captured all six expected observations in this example.": "Kedua akun tersebut berhasil menangkap keenam pengamatan yang diharapkan dalam contoh ini.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Akun B masih berhasil menangkap 6 dari 6 pesan. Dua tanda terima membutuhkan waktu lebih lama. Rasio penangkapan dan penundaan tanda terima menjawab pertanyaan yang berbeda.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Akun B berhasil menangkap 5 dari 6 pesan sebelum batas waktu (83,3%). Pengeditan yang hilang tidak memiliki penundaan yang terukur. Hasil ini hanya menggambarkan enam tindakan yang dikendalikan.", "not observed by cutoff": "tidak terdeteksi pada batas waktu", "{s} seconds": "{s} detik", "Exact values follow in the table.": "Nilai-nilai yang tepat tercantum dalam tabel berikut.", "{s} s": "{s} s", "Not observed": "Tidak teramati", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Empat obrolan memberikan pengamatan yang berbeda-beda. Ikuti catatan sumber untuk setiap koneksi; jangan mengaitkan posting saluran tersebut dengan pengguna 71001 tanpa pengirim yang teridentifikasi.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Catatan #146 dan #205 menunjukkan ID pengirim yang sama, yaitu 71001. Hal ini menghubungkan postingan yang teramati dari sebuah akun Telegram di dua obrolan. Catatan ini tidak mengidentifikasi orang di dunia nyata atau mengaitkan postingan tersebut dengan saluran tertentu.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Tautan tujuan pay.example.invalid/new muncul dalam catatan grup #146, keyboard bot #173, pengeditan saluran #188, dan pesan pribadi #205. Tautan tujuan yang berulang menghubungkan materi tersebut; hal ini tidak membuktikan adanya kendali bersama atas akun-akun tersebut.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Tanda terima media yang telah diselesaikan #151 dan #209 memiliki nilai SHA-256 lengkap yang sama dalam kasus fiktif ini. Bandingkan byte yang sebenarnya dan catatan pesan yang terkait. File yang cocok tersebut tidak mengidentifikasi pembuatnya atau membuktikan siapa yang meneruskannya.", "the encrypted off-site copy": "salinan terenkripsi di luar lokasi", "notifications": "pemberitahuan", "checkpoint hashes for timestamps": "hash checkpoint untuk cap waktu", "signed checkpoints for the witness": "titik pemeriksaan yang ditandatangani untuk saksi", "Switched on in this example": "Diaktifkan dalam contoh ini", "Optional · off by default": "Opsional · dinonaktifkan secara default", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Yang tersisa di mesin ini: koneksi Telegram dan {list}. Tidak ada yang lain.", "Default: only the Telegram connection leaves this machine.": "Pengaturan default: hanya koneksi Telegram yang keluar dari mesin ini.", "{done} of {total} done": "{done} dari {total} selesai", "Mark step {n} as done": "Tandai langkah {n} sebagai selesai", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Teks", "Copied": "Disalin", "Command copied.": "Perintah telah disalin.", "Selected — Ctrl/Cmd+C": "Pilih — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Perintah telah dipilih. Salin secara manual.", "Command copied to clipboard.": "Perintah telah disalin ke papan klip.", "Select text": "Pilih teks", "Clipboard unavailable. Command selected; copy it manually.": "Clipboard tidak tersedia. Perintah telah dipilih; salin secara manual.", "A message arrives. The first observation is saved.": "Sebuah pesan masuk. Pengamatan pertama disimpan.", "The time changes. Both captured versions stay.": "Waktu berubah. Kedua versi yang terekam tetap ada.", "The message disappears. The captured history remains.": "Pesan tersebut menghilang. Riwayat yang terekam tetap ada.", "Pause example animation": "Jeda animasi contoh", "Play example animation": "Putar animasi contoh", "Play": "Putar", "Full-size workspace screenshot": "Tangkapan layar ruang kerja ukuran penuh", "Workspace screenshot · fictional data": "Tangkapan layar ruang kerja · data fiktif", "Close": "Tutup", "Close screenshot": "Tutup tangkapan layar", "Scrollable full-size screenshot": "Tangkapan layar ukuran penuh yang dapat digulir", "Enlarge: {name}": "Perbesar: {name}", "View full size": "Lihat ukuran penuh"}</script>

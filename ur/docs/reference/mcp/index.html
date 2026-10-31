@@ -31,39 +31,124 @@
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="رہنما"><a href="../../../">گھر</a> <span aria-hidden="true">/</span> <a href="../../">دستاویزات</a> <span aria-hidden="true">/</span> <a href="../">حوالہ</a> <span aria-hidden="true">/</span> <span aria-current="page">صرف پڑھنے کے لیے MCP</span></nav>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">دستاویزات میں تلاش کریں</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="پراکسی، ہیش چین، ٹوکن یا ویٹنس آزمائیں…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="خلاصہ تلاش" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">رہنما اور حوالہ جات میں تلاش کرنے کے لیے ایک لفظ ٹائپ کریں۔ تلاش آپ کے براؤزر میں ہی رہتی ہے۔</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">حوالہ / آرکائیو اور انضمامات</p><h1>صرف پڑھنے کے لیے MCP</h1><p class="guide-outcome">ایک MCP کلائنٹ کو منتخب ورک اسپیسز اور چیٹس سے منسلک کریں، جس کی رسائی ختم ہونے والی اور منسوخ کی جانے والی ہو۔</p><div class="wiki-body"><p><strong>موجودہ مرکزی:</strong> سورس چیک آؤٹ استعمال کریں؛ 0.7.0 پورٹیبل پریویو اس خصوصیت سے پہلے کا ہے۔</p>
+<article class="guide-content"><p class="eyebrow">حوالہ / آرکائیو اور انضمامات</p><h1>صرف پڑھنے کے لیے MCP</h1><p class="guide-outcome">ایک MCP کلائنٹ کو منتخب ورک اسپیسز اور چیٹس سے منسلک کریں، جس کی رسائی ختم ہونے والی اور منسوخ کی جانے والی ہو۔</p><div class="wiki-body"><p>کسی تجزیہ کار کلائنٹ کو منتخب ورک اسپیسز اور چیٹس سے منسلک کریں۔ TgWitness <strong>پینل پراسیس میں <code>/mcp</code> پر Streamable HTTP</strong> فراہم کرتا ہے۔ ہر کنکشن کا اپنا الگ ٹوکن، میعادِ ختم ہونے کا وقت اور مجاز ٹولز ہوتے ہیں۔ MCP ٹیلی گرام پیغامات نہیں بھیج سکتا، ترتیبات تبدیل نہیں کر سکتا اور نہ ہی دستخط شدہ جرنل میں ترمیم کر سکتا ہے۔</p>
 <p><a href="https://phishdestroy.github.io/TgWitness/docs/archive/">ورک فلو گائیڈ</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">ویکی</a></p>
-<p>TgWitness پروجیکٹ ڈائریکٹری سے اختیاری سرور انسٹال کریں:</p>
-<pre><code class="language-sh">python -m pip install &#x27;.[mcp]&#x27;</code></pre>
-<p>پینل میں <strong>Integrations → MCP</strong> کھولیں۔ کنکشن کا نام دیں، اس کے ورک اسپیسز اور چیٹس منتخب کریں، اور میعاد ختم ہونے کی تاریخ طے کریں۔ آرکائیو ٹوکن ایک بار کاپی کریں؛ اسے بعد میں بازیاب نہیں کیا جا سکتا۔ کھوئے ہوئے ٹوکنز کو منسوخ کریں اور متبادل جاری کریں۔ پینل ٹوکنز اور ٹیلیگرام کی سائن ان معلومات MCP کی سائن ان معلومات نہیں ہیں۔</p>
-<h2 id="connect-a-client">کلائنٹ کو کنیکٹ کریں<a class="anchor" href="#connect-a-client" aria-label="اس حصے کا لنک">#</a></h2>
-<p>پینل اپنی <a href="https://code.visualstudio.com/docs/agents/reference/mcp-configuration">دستاویزی تشکیلات</a> کے مطابق <strong>VS Code Local ہارنس</strong> کے لیے o<code>.vscode/mcp.json</code> پیدا کرتا ہے۔
-ڈاؤن لوڈ کی گئی فائل کو اسی مقام پر محفوظ کریں، <strong>MCP: List Servers</strong> چلائیں، اور TgWitness شروع کریں۔ VS Code پاس ورڈ ان پٹ کے ذریعے ٹوکن کے لیے درخواست کرتا ہے۔ ڈاؤن لوڈ شدہ JSON میں ٹوکن نہیں بلکہ ایک پرامپٹ حوالہ ہوتا ہے۔ MCP extra جس ماحول میں انسٹال ہے، وہاں سے Python ایگزیکیوٹ ایبل استعمال کریں۔</p>
-<p>دیگر stdio کلائنٹس کے لیے، چلائیں:</p>
-<pre><code class="language-sh">python -m tgwitness.mcp_server --api-url http://127.0.0.1:8787</code></pre>
-<p>کلائنٹ کے محفوظ ماحول میں <code>TGWITNESS_ARCHIVE_TOKEN</code> سیٹ کریں۔ اسے کمانڈ آرگومنٹس یا URLs میں نہ رکھیں۔ برج پینل کے مجاز آرکائیو API کے ذریعے پڑھتا ہے؛ اس کی براہِ راست ڈیٹا بیس تک رسائی نہیں ہوتی۔ Stdout صرف MCP پیغامات منتقل کرتا ہے۔</p>
-<p>دور دراز کلائنٹس کے لیے، پینل کے ساتھ سروس چلائیں:</p>
-<pre><code class="language-sh">python -m tgwitness.mcp_server --transport streamable-http \
-  --api-url http://127.0.0.1:8787 --port 8766 \
-  --public-url https://archive.example.org/mcp</code></pre>
-<p><code>/mcp</code> کو HTTPS ریورس پراکسی کے ذریعے <code>127.0.0.1:8766/mcp</code> پر فارورڈ کریں، <code>Authorization: Bearer …</code> ہیڈر کو برقرار رکھتے ہوئے۔  
-authorization headers اور request/response bodies کی لاگنگ غیر فعال کریں۔  
-loopback سے آگے صرف ضرورت پڑنے پر <code>--host</code> اور <code>--public-url</code> استعمال کرتے ہوئے bind کریں۔  
-یہ اینڈ پوائنٹ سرکاری
-<a href="https://github.com/modelcontextprotocol/python-sdk">MCP Python SDK</a> کے Streamable HTTP کا استعمال کرتا ہے۔
-یہ صراحتاً ترتیب دی گئی بیئرر کریڈینشلز کو سپورٹ کرتا ہے، OAuth ڈسکوری کو نہیں؛ صرف OAuth کے لیے کلائنٹس کی حمایت نہیں کی جاتی۔</p>
-<p><strong>چیک پروٹوکول اور رسائی</strong> ایک حقیقی MCP کلائنٹ کو فعال کرتی ہے اور ٹولز کی فہرست دکھاتی ہے۔ یہ پیغامات حاصل نہیں کرتا۔ دور دراز چیک کے لیے، منتخب کردہ MCP سرور آرکائیو ٹوکن وصول کرتا ہے۔ صرف ایسے سرور کو کنفیگر کریں جسے آپ چلاتے ہوں یا جس پر آپ اس دائرہ کار کے لیے بھروسہ کرتے ہوں۔</p>
-<h2 id="scope-and-results">دائرہ کار اور نتائج<a class="anchor" href="#scope-and-results" aria-label="اس حصے کا لنک">#</a></h2>
-<p>دستیاب ٹولز: <code>list_workspaces</code>، <code>list_chats</code>، <code>search_messages</code>،
-<code>get_message_versions</code>، <code>get_message_context</code>، <code>get_journal_event</code>، اور
-<code>get_capture_status</code>۔ کوئی ٹیلیگرام ایکشنز، کنفیگریشن تبدیلیاں، یا بلک-ایکسپورٹ ٹولز موجود نہیں ہیں۔ ہر پڑھنے پر ورک اسپیس/چیٹ کی رسائی دوبارہ چیک کی جاتی ہے؛ ختم شدہ اور منسوخ شدہ اسناد کام کرنا بند کر دیتی ہیں۔ حدود یہ ہیں: فی منٹ فی اسناد 60 API درخواستیں، فی صفحہ 50 ریکارڈز، 64 KiB کا جواب، اور آٹھ سیکنڈ کا API ڈیڈ لائن۔</p>
-<p>پیغام کے نتائج میں ورک اسپیس، چیٹ/پیغام کی شناختیں (آئی ڈیز)، واقعات کا تسلسل، محفوظ شدہ ہیش، اور ایک پینل لنک شامل ہیں۔ لنک کھولنے والے ویوئر کے پاس اپنا مجاز پینل سیشن ہونا چاہیے۔ خام ٹیلیگرام آبجیکٹس، رسائی کے ہیشز، فائل کے حوالہ جات، سیشن کا مواد، اور کیز کو خارج کر دیا گیا ہے۔ تلاش پیغام کے متن کا جائزہ لیتی ہے، نہ کہ خام فیلڈز کا۔ متن محدود ہوتا ہے اور اختصار کی نشاندہی کی جاتی ہے۔ ترامیم، ٹیلیگرام کے حذف کرنے کے نوٹس، اور
-<code>missing_on_recheck</code> الگ الگ مشاہدات کے طور پر رہتے ہیں۔ چیٹ کی حد تک رسائی پورے ورک اسپیس کے آپریشنل واقعات کو نہیں دیکھ سکتی؛ کیپچر اسٹیٹس واضح طور پر اس حد کی نشاندہی کرتا ہے۔</p>
-<p>آرکائیو شدہ متن غیر معتبر ان پٹ ہے۔ پیغامات کے اندر دی گئی ہدایات سے کوئی اضافی دائرہ اختیار نہیں ملتا اور انہیں کلائنٹ کی ہدایات کے طور پر نہیں لیا جانا چاہیے۔ ایک بیرونی AI ماڈل وہ تمام مواد وصول کر سکتا ہے جو اس کا MCP کلائنٹ طلب کرتا ہے۔ صرف پڑھنے کی اجازت آرکائیو میں تبدیلیوں کو روکتی ہے؛ یہ کلائنٹ کو پڑھے ہوئے ڈیٹا کو محفوظ کرنے سے نہیں روکتی۔</p>
-<p>ہیشز محفوظ شدہ ریکارڈز کی شناخت کرتے ہیں اور سالمیت کی جانچ کی حمایت کرتے ہیں۔ یہ خود بخود ٹیلیگرام کی مصنفیت یا ہر پیغام کی گرفتاری کا ثبوت نہیں دیتے۔</p></div></article>
+<h2 id="install-and-check">انسٹال اور چیک کریں<a class="anchor" href="#install-and-check" aria-label="اس حصے کا لنک">#</a></h2>
+<p>وہی Python انوائرنمنٹ استعمال کریں جو پینل چلاتا ہے۔ سورس چیک آؤٹ سے:</p>
+<pre><code class="language-powershell"># Windows PowerShell
+&amp; .\.venv\Scripts\python.exe -m pip install -c deploy/constraints-mcp.txt -e &#x27;.[mcp]&#x27;
+&amp; .\.venv\Scripts\python.exe start.py --check</code></pre>
+<pre><code class="language-sh"># Linux / macOS
+.venv/bin/python -m pip install -c deploy/constraints-mcp.txt -e &#x27;.[mcp]&#x27;
+.venv/bin/python start.py --check</code></pre>
+<p>انسٹالیشن کے بعد پینل کو اس کی معمول کی ڈیٹا ڈائریکٹری اور لانچ آرگومنٹس کے ساتھ دوبارہ اسٹارٹ کریں۔ ریڈینیس چیک میں <code>[PASS] mcp: streamable-http available</code> شامل ہونا چاہیے۔ <strong>Integrations → MCP</strong> رن ٹائم اسٹیٹس اور اس سرور کے اصل Python ایگزیکیوٹیبل کا استعمال کرتے ہوئے ایک انسٹالیشن کمانڈ دکھاتا ہے۔ <strong>Re-check</strong> صفحہ کو دوبارہ لوڈ کیے بغیر اس اسٹیٹس کو ریفریش کرتا ہے؛ یہ پیکجز انسٹال نہیں کرتا اور نہ ہی سرور کو دوبارہ اسٹارٹ کرتا ہے۔</p>
+<p>MCP ایکسٹرا آفیشل <a href="https://github.com/modelcontextprotocol/python-sdk">MCP Python SDK</a> استعمال کرتا ہے۔ <code>deploy/constraints-mcp.txt</code> ٹیسٹ شدہ SDK اور ڈیپینڈنسیز کو پن کرتا ہے۔ ان خصوصیات کے لیے موجودہ سورس درکار ہے؛ 0.7.0 پورٹیبل پریویو ان سے پرانا ہے۔</p>
+<h2 id="issue-a-connection">کنکشن جاری کریں<a class="anchor" href="#issue-a-connection" aria-label="اس حصے کا لنک">#</a></h2>
+<ol>
+<li>ایک لیبل درج کریں اور وہ ورک اسپیسز اور چیٹس منتخب کریں جنہیں کلائنٹ پڑھ سکتا ہے۔</li>
+<li>ٹولز کو انفرادی طور پر منتخب کریں یا کوئی پری سیٹ استعمال کریں۔ صرف لاگو شدہ ٹولز ہی پیش کیے جاتے ہیں۔</li>
+<li>1، 7، 30 یا 90 دن، یا ایک منٹ سے 90 دنوں کے درمیان کوئی حسبِ منشا میعاد منتخب کریں۔</li>
+<li><strong>Create connection</strong> دبائیں۔ ٹوکن کلائنٹ کنفیگ کے ساتھ صرف ایک بار ظاہر ہوتا ہے۔</li>
+<li>ٹوکن اور کنفیگ کاپی کریں، پھر <strong>Check connection</strong> چلائیں۔ یہ MCP کو انیشیئلائز کرتا ہے اور مجاز ٹولز کی فہرست دکھاتا ہے؛ <strong>کوئی پیغام نہیں پڑھا جاتا</strong>۔ نتیجہ پروٹوکول ورژن، ٹول کے نام، تعداد اور گزرے ہوئے وقت کو ظاہر کرتا ہے۔</li>
+<li>کریڈینشل محفوظ ہو جانے کے بعد <strong>Done</strong> دبائیں۔ پولنگ فارم اور ایک بار دکھائے جانے والے کارڈ کو برقرار رکھتی ہے۔ پینل کو لاک کرنے سے اسکرین پر موجود سیکرٹس صاف ہو جاتے ہیں۔</li>
+</ol>
+<p>فہرست میں حالیہ استعمال، آخری ٹول، ایڈریس اور گزشتہ منٹ کی ریکویسٹس دکھائی جاتی ہیں۔ <strong>Revoke</strong> رسائی ختم کر دیتا ہے۔ <strong>Rotate token</strong> پرانے کریڈینشل کو منسوخ کر دیتا ہے اور اسی اسکوپ، ٹولز اور میعاد کے ساتھ ایک متبادل جاری کرتا ہے؛ متبادل کو ایک بار کاپی کر لیں۔ پینل لاگ ان ٹوکنز اور ٹیلی گرام کریڈینشلز MCP ٹوکنز کے طور پر کام نہیں کرتے۔</p>
+<h2 id="connect-your-client">اپنے کلائنٹ کو منسلک کریں<a class="anchor" href="#connect-your-client" aria-label="اس حصے کا لنک">#</a></h2>
+<p>پینل میں کلائنٹ کو منتخب کریں اور اس کی تیار کردہ کنفیگریشن کاپی کریں۔ کنفیگز سیکرٹ ریفرنسز یا واضح پلیس ہولڈرز استعمال کرتی ہیں؛ ٹوکن کو الگ سے کاپی کیا جاتا ہے۔</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>کلائنٹ</th>
+<th>کنفیگریشن</th>
+<th>کنیکشن</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude Code</td>
+<td><code>.mcp.json</code></td>
+<td>HTTP، <code>type: "http"</code>، بیئرر ہیڈر</td>
+</tr>
+<tr>
+<td>Claude Desktop</td>
+<td><code>claude_desktop_config.json</code></td>
+<td>لوکل stdio برج</td>
+</tr>
+<tr>
+<td>Cursor</td>
+<td><code>.cursor/mcp.json</code></td>
+<td>انوائرنمنٹ ویری ایبل ہیڈر کے ساتھ HTTP</td>
+</tr>
+<tr>
+<td>VS Code Local</td>
+<td><code>.vscode/mcp.json</code></td>
+<td>پاس ورڈ <code>promptString</code> ان پٹ کے ساتھ HTTP</td>
+</tr>
+<tr>
+<td>Windsurf</td>
+<td><code>mcp_config.json</code></td>
+<td>بیئرر ہیڈر پلیس ہولڈر کے ساتھ HTTP</td>
+</tr>
+<tr>
+<td>دیگر کلائنٹس</td>
+<td>URL اور Authorization ہیڈر</td>
+<td>Streamable HTTP</td>
+</tr>
+</tbody>
+</table></div>
+<p>TgWitness بغیر OAuth ڈسکوری کے بیئرر ٹوکنز استعمال کرتا ہے۔ ایسے کلائنٹس کے لیے جن کے ریموٹ کنیکٹر کو OAuth کی ضرورت ہوتی ہے، لوکل stdio برج استعمال کریں۔ VS Code کے لیے، ان پٹ ویری ایبلز <strong>Local</strong> ہارنس پر لاگو ہوتے ہیں اور Copilot سیشنز کو فارورڈ نہیں کیے جاتے۔ کنفیگریشن کے حوالہ جات: <a href="https://code.claude.com/docs/en/mcp">Claude Code</a>، <a href="https://prod.cursor.com/docs/mcp">Cursor</a>، <a href="https://code.visualstudio.com/docs/agents/reference/mcp-configuration">VS Code</a>۔</p>
+<p>لوکل برج کے لیے معیاری انٹری پوائنٹ یہ ہے:</p>
+<pre><code class="language-sh">python -m tgwitness.mcp_server --url https://your-panel.example/mcp</code></pre>
+<p>کلائنٹ کا لوکل Python استعمال کریں جس میں MCP ایکسٹرا انسٹال ہو۔ اس کے محفوظ انوائرنمنٹ میں <code>TGWITNESS_MCP_TOKEN</code> سیٹ کریں۔ کریڈینشلز کو کمانڈ آرگومنٹس اور URLs سے دور رکھیں۔ <code>tgwitness-mcp</code> بھی وہی انٹری پوائنٹ ہے۔ پرانا <code>tgwitness.mcp_bridge</code> ماڈیول اور <code>TGWITNESS_ARCHIVE_TOKEN</code> نام وارننگ کے ساتھ مطابقت کے راستوں کے طور پر برقرار ہیں؛ نئی کنفیگز <code>mcp_server</code> اور <code>TGWITNESS_MCP_TOKEN</code> استعمال کرتی ہیں۔</p>
+<h2 id="cloudflare-tunnel">Cloudflare Tunnel<a class="anchor" href="#cloudflare-tunnel" aria-label="اس حصے کا لنک">#</a></h2>
+<p>پینل کے <code>/mcp</code> راؤٹ کو فارورڈ کریں اور بیئرر ہیڈر کو برقرار رکھیں۔ بطور ایڈمنسٹریٹر MCP سیٹنگز کھولنے سے اس رن کے لیے پینل کا موجودہ اوریجن رجسٹر ہو جاتا ہے۔ ری اسٹارٹ کے فوراً بعد دستیاب ہونے والے مستحکم ایڈریس کے لیے، پینل اسٹارٹ کرنے سے پہلے پینل کے HTTPS اوریجن کے ساتھ <code>TGWITNESS_PUBLIC_URL</code> کو کنفیگر کریں۔ فرضی Host اور فارورڈ کردہ ہیڈرز کسی قابلِ اعتماد ایڈریس کو رجسٹر نہیں کرتے۔ Host اور Origin چیکس غیر متعلقہ براؤزر اوریجنز کو مسترد کر دیتے ہیں۔ ریسپانسز <code>Cache-Control: no-store</code> استعمال کرتے ہیں؛ آتھورائزیشن ویلیوز کو کبھی لاگ نہیں کیا جاتا۔</p>
+<p><code>*.trycloudflare.com</code> ایڈریس عارضی ہوتا ہے۔ جب ٹنل کے ری اسٹارٹ ہونے سے ہوسٹ نیم تبدیل ہو جائے، تو کنفیگر کردہ پبلک URL اور ہر کلائنٹ کے MCP URL کو اپ ڈیٹ کریں۔ محفوظ کردہ کلائنٹ کنفیگریشنز کے لیے ایک مستحکم ہوسٹ نیم استعمال کریں۔</p>
+<h2 id="tools-and-boundaries">ٹولز اور حدود<a class="anchor" href="#tools-and-boundaries" aria-label="اس حصے کا لنک">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>ٹول</th>
+<th>پڑھتا ہے</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list_workspaces</code></td>
+<td>مجاز ورک اسپیسز</td>
+</tr>
+<tr>
+<td><code>list_chats</code></td>
+<td>مجاز چیٹس</td>
+</tr>
+<tr>
+<td><code>search_messages</code></td>
+<td>منتخب مدت کے اندر محفوظ کردہ پیغام کا متن</td>
+</tr>
+<tr>
+<td><code>get_message_versions</code></td>
+<td>کیپچر کیے گئے ورژنز اور حذف کیے جانے کے مشاہدات</td>
+</tr>
+<tr>
+<td><code>get_message_context</code></td>
+<td>قریبی کیپچر کیے گئے پیغام کی IDs</td>
+</tr>
+<tr>
+<td><code>get_journal_event</code></td>
+<td>اپنے سورس ریفرنس کے ساتھ ایک صاف شدہ ریکارڈ</td>
+</tr>
+<tr>
+<td><code>get_capture_status</code></td>
+<td>کولیکشن اسٹیٹ اور مجاز کوریج ریکارڈز</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>tools/list</code> صرف وہی ٹولز واپس کرتا ہے جن کی اس کنکشن کو اجازت دی گئی ہے۔ دیگر ٹولز کی کالز مسترد کر دی جاتی ہیں۔ اس بلڈ میں گروپ کانٹیکسٹ، ایپی سوڈ، ٹرمینالوجی اور ریپلائی چین کے ٹولز پیش نہیں کیے گئے ہیں؛ ان کا الگ کانٹیکسٹ پیک بیک اینڈ شامل نہیں ہے۔</p>
+<p>ہر ریڈ آپریشن ٹوکن، ٹول اور ورک اسپیس/چیٹ کے اسکوپ کو چیک کرتا ہے، بشمول ڈیٹا بیس کا کام مکمل ہونے کے بعد۔ حدود 60 ریکویسٹس فی منٹ، 50 ریکارڈز فی صفحہ، 64 KiB فی نتیجہ اور آٹھ سیکنڈ کی آرکائیو ڈیڈ لائن ہیں۔ ٹائم آؤٹ ہونے والی MCP کال ایک ٹول ایرر واپس کرتی ہے جس میں کم مدت یا کم حد استعمال کرنے کا کہا جاتا ہے۔</p>
+<p>پیغام کے نتائج میں <code>untrusted_content: true</code>، ورک اسپیس/چیٹ/پیغام کی IDs، ایونٹ کا تسلسل، محفوظ کردہ ہیش اور ایک پینل لنک شامل ہوتا ہے۔ خام ٹیلی گرام آبجیکٹس، ایکسیس ہیشز، سیشنز اور کیز (keys) کو خارج کر دیا جاتا ہے۔ متن کے کٹ جانے (truncation) کی نشاندہی کی جاتی ہے۔ ترامیم، حذف ہونے کے نوٹسز اور <code>missing_on_recheck</code> الگ الگ مشاہدات ہیں۔ غائب ریکارڈز اس بات کا ثبوت نہیں ہیں کہ کوئی ایونٹ کبھی پیش ہی نہیں آیا۔</p>
+<p>کیپچر کیے گئے پیغامات کے اندر موجود ہدایات کو ثبوت کے طور پر لیں، انہیں کبھی بھی کلائنٹ کی ہدایات نہ سمجھیں۔ صرف پڑھنے کی رسائی (Read-only access) آرکائیو میں تبدیلیوں کو روکتی ہے؛ تاہم کلائنٹ اب بھی اس مواد کو اپنے پاس محفوظ رکھ سکتا ہے جسے پڑھنے کی اسے اجازت ہے۔ ہیشز محفوظ کردہ ریکارڈز کی شناخت کرتے ہیں اور سالمیت کی جانچ (integrity checks) میں مدد دیتے ہیں؛ وہ ٹیلی گرام کی مصنفیت یا مکمل کیپچر ہونے کو ثابت نہیں کرتے۔</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/MCP.md">اس صفحے کو GitHub پر ترمیم کریں ↗</a><a class="next-guide" href="../media-analysis/"><span>اگلا قدم</span><strong>مقامی OCR اور ٹرانسکرپشن ←</strong></a><p>یہ رہنما موجودہ نفاذ کو بیان کرتے ہیں۔ توثیق کے نتائج اور باقی ماندہ خلائیں علیحدہ طور پر دستاویزی شکل میں درج ہیں۔ <a href="../verification/">کیا جانچا گیا ہے ←</a></p></footer>
 </main>
-<aside class="toc" aria-label="اس صفحے پر"><p class="nav-label">اس صفحے پر</p><a href="#connect-a-client">کلائنٹ کو کنیکٹ کریں</a><a href="#scope-and-results">دائرہ کار اور نتائج</a></aside>
+<aside class="toc" aria-label="اس صفحے پر"><p class="nav-label">اس صفحے پر</p><a href="#install-and-check">انسٹال اور چیک کریں</a><a href="#issue-a-connection">کنکشن جاری کریں</a><a href="#connect-your-client">اپنے کلائنٹ کو منسلک کریں</a><a href="#cloudflare-tunnel">Cloudflare Tunnel</a><a href="#tools-and-boundaries">ٹولز اور حدود</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>اوپن سورس · آپ کی مشین پر چلتا ہے</span><a href="../../../../LICENSE">ایم آئی ٹی لائسنس</a><a href="../notice/">آپریٹر نوٹس</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">سیکیورٹی</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "پیغام کا انتظار", "Step through a fictional send, edit and delete.": "ایک فرضی بھیجنے، ترمیم اور حذف کے مرحلے سے گزریں۔", "No observations yet. Start the sequence or advance one event.": "ابھی تک کوئی مشاہدات نہیں۔ سلسلہ شروع کریں یا ایک واقعہ آگے بڑھائیں۔", "Meet at 10:00": "10:00 بجے ملاقات کریں", "A new message is visible in the chat.": "چیٹ میں ایک نیا پیغام دکھائی دے رہا ہے۔", "Record 1 appended: the collector observed the original message.": "ریکارڈ 1 منسلک: جمع کرنے والے نے اصل پیغام کا مشاہدہ کیا۔", "Meet at 11:00": "11:00 بجے ملاقات کریں", "The current text changes. The earlier observation stays.": "موجودہ متن تبدیل ہوتا ہے۔ پچھلا مشاہدہ برقرار رہتا ہے۔", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "ریکارڈ 2 منسلک کیا گیا: ترمیم ایک نئی مشاہدہ ہے۔ ریکارڈ 1 اب بھی اصل متن کو برقرار رکھتا ہے۔", "Message deleted": "پیغام حذف شدہ", "The message has disappeared from the chat view.": "پیغام چیٹ کے منظر سے غائب ہو گیا ہے۔", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "ریکارڈ 3 منسلک: حذف کرنے کا نوٹس دونوں مشاہدہ شدہ ورژنز کے ساتھ برقرار رکھا گیا ہے۔", "0 records": "0 ریکارڈز", "1 record": "1 ریکارڈ", "2 records": "2 ریکارڈز", "3 records": "3 ریکارڈز", "Complete / {n} of 3": "مکمل / {n} میں سے 3", "Step / {n} of 3": "مرحلہ / {n} میں سے 3", "Pause": "وقفہ", "Replay sequence": "دوبارہ چلانے کا سلسلہ", "Play sequence": "سلسلہ چلائیں", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "جامد مثال دستیاب ہے۔ ہیشز کو انٹرایکٹو انداز میں کیلکولیٹ کرنے کے لیے، اس صفحے کو HTTPS پر یا Web Crypto سپورٹ کے ساتھ لوکل ہوسٹ پر پیش نظارہ کے طور پر کھولیں۔", "No record supplied": "کوئی ریکارڈ فراہم نہیں کیا گیا", "Tail removed": "ٹیل ہٹا دیا گیا", "≠ saved hash": "≠ محفوظ شدہ ہیش", "Rebuilt · different hash": "دوبارہ تعمیر شدہ · مختلف ہیش", "= saved hash": "= محفوظ شدہ ہیش", "Same length and matching head.": "ایک ہی لمبائی اور مماثل سر۔", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "تمام تینوں حساب شدہ ہیشز محفوظ شدہ ہیشز سے مطابقت رکھتے ہیں۔ یہ نمونہ برقرار رکھے گئے تین ریکارڈز کی حد سے مطابقت رکھتا ہے۔", "Same saved head; the journal prefix fails verification.": "یہی محفوظ شدہ سر؛ جرنل کا پیش نام تصدیق میں ناکام ہے۔", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "ریکارڈ 2 اب اپنے محفوظ شدہ ہیش سے مطابقت نہیں رکھتا۔ صرف آخری محفوظ شدہ ہیڈ کی جانچ کرنے سے یہ فرق نظر نہیں آئے گا؛ تصدیق کنندہ ہر ریکارڈ کی جانچ کرتا ہے۔", "Head differs from the retained checkpoint.": "ہیڈ برقرار رکھے گئے چیک پوائنٹ سے مختلف ہے۔", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "دوبارہ بنائے گئے ہیشز آپس میں جڑے ہوئے ہیں، لیکن آخری ہیڈ تبدیل ہو چکا ہے۔ محفوظ شدہ چیک پوائنٹ اس تاریخ کو مسترد کر دیتا ہے۔ اصل دستخط بھی تبدیل شدہ ریکارڈز پر ناکام ہوں گے۔", "Too short: 2 supplied records \u003c 3 retained records.": "بہت مختصر: فراہم کردہ ریکارڈز 2، محفوظ شدہ ریکارڈز 3 سے کم۔", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "باقی دو ہیشز اب بھی میل کھا رہے ہیں۔ محفوظ شدہ چیک پوائنٹ غائب شدہ ٹیل کو ظاہر کرتی ہے۔ اس ابتدائی حد کے بغیر، صرف یہ مختصر پری فکس حذف شدگی کو ظاہر نہیں کر سکتا تھا۔", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "اس براؤزر میں ہیش کی حساب کتاب دستیاب نہیں ہے۔ نیچے دیے گئے فارمولا اور جامد وضاحت دستیاب ہیں۔", "{n} records": "{n} ریکارڈز", "head {hash}": "ہیڈ {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "قبول شدہ: تعداد بڑھ رہی ہے، دستخط تصدیق شدہ ہیں اور کلید میل کھاتی ہے۔ گواہ اس نئی حد کو برقرار رکھتا ہے۔", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "رول بیک: دستخط شدہ جواب آخری منظور شدہ چیک پوائنٹ کے مقابلے میں کم ریکارڈز رپورٹ کرتا ہے۔ گواہ مسئلے کو ریکارڈ کرتا ہے اور پہلے منظور شدہ حد کو برقرار رکھتا ہے۔", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "فورک: تعداد میں کوئی تبدیلی نہیں ہوئی لیکن سربراہ مختلف ہے۔ گواہ اختلاف کو ریکارڈ کرتا ہے اور پہلے سے منظور شدہ حد کو برقرار رکھتا ہے۔", "No answer": "کوئی جواب نہیں", "boundary unknown": "حد نامعلوم", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "کوئی جواب نہیں: گواہ ناکام چیک کو ریکارڈ کرتا ہے۔ یہ جمع کرنے والے کی موجودہ حالت کا دعویٰ نہیں کر سکتا۔ اگر گواہ اب بھی Bot API تک پہنچ سکتا ہے اور اس کی اشاعت کی پالیسی اجازت دیتی ہے، تو یہ اس ناکامی کو شائع کر سکتا ہے۔", "Send {n}": "{n} بھیجیں", "Edit {n}": "{n} ترمیم", "Delete {n}": "{n} حذف کریں", "Both accounts captured all six expected observations in this example.": "دونوں اکاؤنٹس نے اس مثال میں تمام چھ متوقع مشاہدات کو ریکارڈ کیا۔", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "اکاؤنٹ B نے پھر بھی 6 میں سے 6 کو ریکارڈ کیا۔ دو رسیدیں زیادہ وقت لیں۔ کیپچر تناسب اور رسید میں تاخیر مختلف سوالات کے جواب دیتی ہیں۔", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "اکاؤنٹ B نے کٹ آف تک 6 میں سے 5 (83.3٪) ریکارڈ کیے۔ غائب ترمیم میں کوئی ناپے گئے تاخیر نہیں ہے۔ یہ نتیجہ صرف چھ کنٹرول شدہ کارروائیوں کو بیان کرتا ہے۔", "not observed by cutoff": "کٹ آف تک مشاہدہ نہیں ہوا", "{s} seconds": "{s} سیکنڈ", "Exact values follow in the table.": "درست اقدار جدول میں درج ہیں۔", "{s} s": "{s}s", "Not observed": "مشاہدہ نہیں ہوا", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "چار چیٹس مختلف مشاہدات پیش کرتی ہیں۔ ہر کنکشن کے لیے ماخذ ریکارڈز کی پیروی کریں؛ بغیر کسی منسوب کردہ بھیجنے والے کے چینل پوسٹ کو صارف 71001 سے منسوب نہ کریں۔", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "ریکارڈز #146 اور #205 ایک ہی بھیجنے والے کی شناخت، 71001، فراہم کرتے ہیں۔ یہ ایک ٹیلیگرام اکاؤنٹ کی دو چیٹس میں دیکھے گئے پوسٹس کو آپس میں جوڑتا ہے۔ یہ کسی حقیقی شخص کی شناخت نہیں کرتا اور نہ ہی چینل پوسٹ کو کسی فرد سے منسوب کرتا ہے۔", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "مقصد pay.example.invalid/new گروپ ریکارڈ #146، بوٹ کی بورڈ #173، چینل ایڈیٹ #188 اور نجی پیغام #205 میں ظاہر ہوتا ہے۔ ایک بار بار ظاہر ہونے والا مقصد مواد کو آپس میں جوڑتا ہے؛ یہ ان اکاؤنٹس کے مشترکہ کنٹرول کا ثبوت نہیں ہے۔", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "اس فرضی کیس میں مکمل میڈیا رسیدیں #151 اور #209 کے مکمل SHA-256 ویلیوز برابر ہیں۔ اصل بائٹس اور ان کے متعلقہ پیغام ریکارڈز کا موازنہ کریں۔ مطابقت پذیر فائل اپنے خالق کی شناخت نہیں بتاتی اور یہ ثابت نہیں کرتی کہ اسے کس نے فارورڈ کیا۔", "the encrypted off-site copy": "انکرپٹڈ آف سائٹ کاپی", "notifications": "اطلاعات", "checkpoint hashes for timestamps": "ٹائم اسٹیمپ کے لیے چیک پوائنٹ ہیشز", "signed checkpoints for the witness": "گواہ کے لیے دستخط شدہ چیک پوائنٹس", "Switched on in this example": "اس مثال میں فعال کیا گیا", "Optional · off by default": "اختیاری · ڈیفالٹ طور پر بند", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "اس مشین سے نکلتے ہوئے: ٹیلیگرام کنکشن اور {list}۔ بس اتنا ہی۔", "Default: only the Telegram connection leaves this machine.": "ڈیفالٹ: صرف ٹیلیگرام کنکشن اس مشین سے باہر جاتا ہے۔", "{done} of {total} done": "{done}   {total} مکمل", "Mark step {n} as done": "مرحلہ {n} کو مکمل شدہ کے طور پر نشان زد کریں", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "کاپی", "Copied": "کاپی شدہ", "Command copied.": "کمانڈ کاپی ہو گیا۔", "Selected — Ctrl/Cmd+C": "منتخب — Ctrl/Cmd+C", "Command selected. Copy it manually.": "کمانڈ منتخب کیا گیا۔ اسے دستی طور پر کاپی کریں۔", "Command copied to clipboard.": "کمانڈ کلپ بورڈ میں کاپی کر دی گئی۔", "Select text": "متن منتخب کریں", "Clipboard unavailable. Command selected; copy it manually.": "کلپ بورڈ دستیاب نہیں ہے۔ کمانڈ منتخب ہے؛ اسے دستی طور پر کاپی کریں۔", "A message arrives. The first observation is saved.": "ایک پیغام موصول ہوا۔ پہلی مشاہدہ محفوظ ہو گئی۔", "The time changes. Both captured versions stay.": "وقت بدل جاتا ہے۔ دونوں ریکارڈ شدہ ورژنز برقرار رہتے ہیں۔", "The message disappears. The captured history remains.": "پیغام غائب ہو جاتا ہے۔ محفوظ شدہ تاریخ باقی رہتی ہے۔", "Pause example animation": "مثال کے طور پر اینیمیشن کو روکیں", "Play example animation": "مثال کے طور پر اینیمیشن چلائیں", "Play": "چلائیں", "Full-size workspace screenshot": "مکمل سائز ورک اسپیس کا اسکرین شاٹ", "Workspace screenshot · fictional data": "ورک اسپیس کا اسکرین شاٹ · فرضی ڈیٹا", "Close": "بند کریں", "Close screenshot": "اسکرین شاٹ بند کریں", "Scrollable full-size screenshot": "اسکرول کرنے کے قابل مکمل سائز اسکرین شاٹ", "Enlarge: {name}": "بڑا کریں: {name}", "View full size": "مکمل سائز دیکھیں"}</script>

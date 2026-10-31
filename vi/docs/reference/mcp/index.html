@@ -31,63 +31,169 @@
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="Hướng dẫn"><a href="../../../">Trang chủ</a> <span aria-hidden="true">/</span> <a href="../../">Tài liệu hướng dẫn</a> <span aria-hidden="true">/</span> <a href="../">Tham khảo</a> <span aria-hidden="true">/</span> <span aria-current="page">MCP chỉ đọc</span></nav>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Tìm kiếm trong tài liệu</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Hãy thử các thuật ngữ như proxy, chuỗi băm, token hoặc witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Tìm kiếm rõ ràng" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Hãy nhập một từ khóa để tìm kiếm trong các hướng dẫn và tài liệu tham khảo. Kết quả tìm kiếm sẽ được lưu lại trong trình duyệt của quý vị.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Tham khảo / Lưu trữ &amp; tích hợp</p><h1>MCP chỉ đọc</h1><p class="guide-outcome">Kết nối một máy khách MCP với các không gian làm việc và cuộc trò chuyện đã chọn bằng quyền truy cập có thời hạn và có thể thu hồi.</p><div class="wiki-body"><p><strong>Phiên bản chính hiện tại:</strong> sử dụng bản checkout từ kho nguồn; phiên bản xem trước di động 0.7.0 ra mắt trước khi tính năng này được triển khai.</p>
+<article class="guide-content"><p class="eyebrow">Tham khảo / Lưu trữ &amp; tích hợp</p><h1>MCP chỉ đọc</h1><p class="guide-outcome">Kết nối một máy khách MCP với các không gian làm việc và cuộc trò chuyện đã chọn bằng quyền truy cập có thời hạn và có thể thu hồi.</p><div class="wiki-body"><p>Kết nối một ứng dụng khách dành cho chuyên viên phân tích với các không gian làm việc và cuộc trò chuyện đã chọn. TgWitness phục vụ
+<strong>Streamable HTTP tại <code>/mcp</code> trong tiến trình bảng điều khiển</strong>. Mỗi kết nối có mã thông báo,
+thời hạn và các công cụ được phép riêng. MCP không thể gửi tin nhắn Telegram, thay đổi
+cài đặt hoặc sửa đổi nhật ký đã ký.</p>
 <p><a href="https://phishdestroy.github.io/TgWitness/docs/archive/">Hướng dẫn quy trình làm việc</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
-<p>Cài đặt máy chủ tùy chọn từ thư mục dự án TgWitness:</p>
-<pre><code class="language-sh">python -m pip install &#x27;.[mcp]&#x27;</code></pre>
-<p>Trong bảng điều khiển, mở <strong>mục Tích hợp → MCP</strong>. Đặt tên cho kết nối, chọn
-không gian làm việc và các cuộc trò chuyện, đồng thời chọn thời hạn hiệu lực. Sao chép mã thông báo lưu trữ một lần; mã này không thể
-được lấy lại sau này. Thu hồi các mã thông báo bị mất và cấp mã thay thế. Mã thông báo bảng điều khiển và
-thông tin đăng nhập Telegram không phải là thông tin đăng nhập MCP.</p>
-<h2 id="connect-a-client">Kết nối một khách hàng<a class="anchor" href="#connect-a-client" aria-label="Liên kết đến phần này">#</a></h2>
-<p>Bảng điều khiển tạo mã <code>.vscode/mcp.json</code> cho <strong>bộ công cụ VS Code Local</strong> bằng cách sử dụng
-<a href="https://code.visualstudio.com/docs/agents/reference/mcp-configuration">cấu hình đã được ghi chép</a> của nó.
-Lưu tệp đã tải xuống vào vị trí đó, chạy <strong>MCP: List Servers</strong> và khởi động
-TgWitness. VS Code sẽ yêu cầu nhập mã thông báo thông qua ô nhập mật khẩu. Tệp JSON đã tải xuống
-chứa tham chiếu lời nhắc, không phải mã thông báo. Sử dụng tệp thực thi Python từ
-môi trường nơi tiện ích mở rộng MCP được cài đặt.</p>
-<p>Đối với các khách hàng khác của stdio, hãy chạy:</p>
-<pre><code class="language-sh">python -m tgwitness.mcp_server --api-url http://127.0.0.1:8787</code></pre>
-<p>Đặt <code>TGWITNESS_ARCHIVE_TOKEN</code> trong môi trường được bảo vệ của khách hàng. Không đặt nó
-trong các tham số lệnh hoặc URL. Cầu nối truy cập thông qua API lưu trữ được ủy quyền
-của bảng điều khiển; nó không có quyền truy cập trực tiếp vào cơ sở dữ liệu. Stdout chỉ truyền các tin nhắn MCP.</p>
-<p>Đối với khách hàng từ xa, hãy chạy dịch vụ bên cạnh bảng điều khiển:</p>
-<pre><code class="language-sh">python -m tgwitness.mcp_server --transport streamable-http \
-  --api-url http://127.0.0.1:8787 --port 8766 \
-  --public-url https://archive.example.org/mcp</code></pre>
-<p>Chuyển tiếp <code>/mcp</code> qua proxy ngược HTTPS đến <code>127.0.0.1:8766/mcp</code>, giữ nguyên
-tiêu đề <code>Authorization: Bearer …</code>. Tắt tính năng ghi nhật ký các tiêu đề ủy quyền
-và nội dung yêu cầu/phản hồi. Chỉ liên kết ngoài vòng lặp khi cần thiết, sử dụng
-<code>--host</code> và <code>--public-url</code>. Điểm cuối sử dụng Streamable HTTP từ
-<a href="https://github.com/modelcontextprotocol/python-sdk">SDK Python MCP</a> chính thức.
-Nó hỗ trợ thông tin xác thực bearer được cấu hình rõ ràng, không hỗ trợ phát hiện OAuth;
-các client chỉ yêu cầu OAuth sẽ không được hỗ trợ.</p>
-<p><strong>Việc kiểm tra giao thức và truy cập</strong> sẽ khởi tạo một máy khách MCP thực và liệt kê các công cụ. Quá trình này
-không lấy tin nhắn. Đối với kiểm tra từ xa, máy chủ MCP được chọn sẽ nhận
-mã thông báo lưu trữ. Chỉ cấu hình máy chủ mà bạn vận hành hoặc tin tưởng với phạm vi đó.</p>
-<h2 id="scope-and-results">Phạm vi và kết quả<a class="anchor" href="#scope-and-results" aria-label="Liên kết đến phần này">#</a></h2>
-<p>Các công cụ có sẵn: <code>list_workspaces</code>, <code>list_chats</code>, <code>search_messages</code>,
-<code>get_message_versions</code>, <code>get_message_context</code>, <code>get_journal_event</code> và
-<code>get_capture_status</code>. Không có các thao tác trên Telegram, thay đổi cấu hình hoặc
-công cụ xuất dữ liệu hàng loạt. Mỗi lần đọc sẽ kiểm tra lại quyền truy cập vào không gian làm việc/cuộc trò chuyện; các thông tin xác thực đã hết hạn hoặc bị thu hồi
-sẽ ngừng hoạt động. Giới hạn là 60 yêu cầu API mỗi phút cho mỗi thông tin xác thực,
-50 bản ghi mỗi trang, phản hồi 64 KiB và thời hạn API là tám giây.</p>
-<p>Kết quả tin nhắn bao gồm không gian làm việc, ID cuộc trò chuyện/tin nhắn, trình tự sự kiện, hàm băm đã lưu,
-và liên kết bảng điều khiển. Người xem mở liên kết phải có phiên bảng điều khiển được ủy quyền riêng
-của mình. Các đối tượng Telegram thô, hàm băm truy cập, tham chiếu tệp, tài liệu phiên,
-và khóa được bỏ qua. Tìm kiếm kiểm tra văn bản tin nhắn, không phải các trường thô. Nội dung văn bản
-được giới hạn và các phần bị cắt bớt được đánh dấu. Các thao tác chỉnh sửa, thông báo xóa của Telegram và
-<code>missing_on_recheck</code> vẫn là các quan sát riêng biệt. Quyền truy cập trong phạm vi cuộc trò chuyện không thể xem
-các sự kiện hoạt động trên toàn không gian làm việc; trạng thái ghi lại đánh dấu rõ ràng giới hạn này.</p>
-<p>Nội dung lưu trữ được coi là đầu vào không đáng tin cậy. Các hướng dẫn trong tin nhắn không cấp thêm
-quyền hạn nào và không được coi là chỉ thị từ khách hàng. Một mô hình AI bên ngoài có thể
-nhận bất kỳ nội dung nào mà khách hàng MCP của nó yêu cầu. Quyền truy cập chỉ đọc ngăn chặn
-việc thay đổi dữ liệu lưu trữ; tuy nhiên, nó không ngăn cản khách hàng lưu giữ dữ liệu mà họ đã đọc.</p>
-<p>Các giá trị băm giúp xác định các bản ghi đã lưu và hỗ trợ kiểm tra tính toàn vẹn. Chúng không
-tự thân chứng minh quyền tác giả trên Telegram hoặc rằng mọi tin nhắn đều đã được ghi lại.</p></div></article>
+<h2 id="install-and-check">Cài đặt và kiểm tra<a class="anchor" href="#install-and-check" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Sử dụng môi trường Python chạy bảng điều khiển. Từ bản mã nguồn đã tải về:</p>
+<pre><code class="language-powershell"># Windows PowerShell
+&amp; .\.venv\Scripts\python.exe -m pip install -c deploy/constraints-mcp.txt -e &#x27;.[mcp]&#x27;
+&amp; .\.venv\Scripts\python.exe start.py --check</code></pre>
+<pre><code class="language-sh"># Linux / macOS
+.venv/bin/python -m pip install -c deploy/constraints-mcp.txt -e &#x27;.[mcp]&#x27;
+.venv/bin/python start.py --check</code></pre>
+<p>Khởi động lại bảng điều khiển với thư mục dữ liệu và các đối số khởi chạy thông thường sau khi
+cài đặt. Trạng thái sẵn sàng sẽ bao gồm <code>[PASS] mcp: streamable-http available</code>.
+<strong>Integrations → MCP</strong> hiển thị trạng thái thời gian chạy và lệnh cài đặt sử dụng
+tệp thực thi Python thực tế của máy chủ đó. <strong>Re-check</strong> làm mới trạng thái này mà không cần
+tải lại trang; thao tác này không cài đặt các gói hoặc khởi động lại máy chủ.</p>
+<p>Phần bổ sung MCP sử dụng <a href="https://github.com/modelcontextprotocol/python-sdk">MCP Python SDK</a> chính thức.
+<code>deploy/constraints-mcp.txt</code> cố định phiên bản SDK và các phần phụ thuộc đã được kiểm thử. Các tính năng này
+yêu cầu mã nguồn hiện tại; bản xem trước di động 0.7.0 ra đời trước các tính năng này.</p>
+<h2 id="issue-a-connection">Cấp một kết nối<a class="anchor" href="#issue-a-connection" aria-label="Liên kết đến phần này">#</a></h2>
+<ol>
+<li>Nhập nhãn và chọn các không gian làm việc cũng như cuộc trò chuyện mà ứng dụng khách được phép đọc.</li>
+<li>Chọn từng công cụ riêng lẻ hoặc sử dụng cấu hình đặt sẵn. Chỉ các công cụ đã được triển khai mới được cung cấp.</li>
+<li>Chọn 1, 7, 30 hoặc 90 ngày, hoặc thời hạn tùy chỉnh từ một phút đến 90 ngày.</li>
+<li>Nhấn <strong>Create connection</strong>. Mã thông báo sẽ xuất hiện một lần bên cạnh cấu hình ứng dụng khách.</li>
+<li>Sao chép mã thông báo và cấu hình, sau đó chạy <strong>Check connection</strong>. Thao tác này sẽ khởi tạo MCP
+    và liệt kê các công cụ được phép; <strong>không có tin nhắn nào được đọc</strong>. Kết quả hiển thị phiên bản
+    giao thức, tên công cụ, số lượng và thời gian đã trôi qua.</li>
+<li>Nhấn <strong>Done</strong> khi thông tin xác thực đã được lưu. Quá trình thăm dò sẽ giữ nguyên biểu mẫu và
+    thẻ chỉ hiển thị một lần. Việc khóa bảng điều khiển sẽ xóa các thông tin bí mật đang hiển thị.</li>
+</ol>
+<p>Danh sách hiển thị lần sử dụng gần đây, công cụ cuối cùng, địa chỉ và các yêu cầu trong phút vừa qua.
+<strong>Revoke</strong> chấm dứt quyền truy cập. <strong>Rotate token</strong> thu hồi thông tin xác thực cũ và cấp
+một mã thay thế có cùng phạm vi, công cụ và thời hạn; hãy sao chép mã thay thế hiển thị một lần này.
+Mã thông báo đăng nhập bảng điều khiển và thông tin xác thực Telegram không hoạt động như mã thông báo MCP.</p>
+<h2 id="connect-your-client">Kết nối ứng dụng khách của bạn<a class="anchor" href="#connect-your-client" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Chọn ứng dụng khách trong bảng điều khiển và sao chép cấu hình được tạo ra. Các cấu hình sử dụng
+tham chiếu bí mật hoặc trình giữ chỗ tường minh; mã thông báo được sao chép riêng.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Ứng dụng khách</th>
+<th>Cấu hình</th>
+<th>Kết nối</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude Code</td>
+<td><code>.mcp.json</code></td>
+<td>HTTP, <code>type: "http"</code>, tiêu đề bearer</td>
+</tr>
+<tr>
+<td>Claude Desktop</td>
+<td><code>claude_desktop_config.json</code></td>
+<td>Cầu nối stdio cục bộ</td>
+</tr>
+<tr>
+<td>Cursor</td>
+<td><code>.cursor/mcp.json</code></td>
+<td>HTTP với tiêu đề biến môi trường</td>
+</tr>
+<tr>
+<td>VS Code Local</td>
+<td><code>.vscode/mcp.json</code></td>
+<td>HTTP với đầu vào mật khẩu <code>promptString</code></td>
+</tr>
+<tr>
+<td>Windsurf</td>
+<td><code>mcp_config.json</code></td>
+<td>HTTP với trình giữ chỗ tiêu đề bearer</td>
+</tr>
+<tr>
+<td>Các ứng dụng khách khác</td>
+<td>URL và tiêu đề Authorization</td>
+<td>Streamable HTTP</td>
+</tr>
+</tbody>
+</table></div>
+<p>TgWitness sử dụng mã thông báo bearer mà không cần khám phá OAuth. Sử dụng cầu nối stdio cục bộ
+cho các ứng dụng khách có trình kết nối từ xa yêu cầu OAuth. Đối với VS Code, các biến đầu vào
+áp dụng cho môi trường <strong>Local</strong> và không được chuyển tiếp tới các phiên Copilot.
+Tài liệu tham khảo cấu hình: <a href="https://code.claude.com/docs/en/mcp">Claude Code</a>,
+<a href="https://prod.cursor.com/docs/mcp">Cursor</a>,
+<a href="https://code.visualstudio.com/docs/agents/reference/mcp-configuration">VS Code</a>.</p>
+<p>Điểm nhập chuẩn cho cầu nối cục bộ là:</p>
+<pre><code class="language-sh">python -m tgwitness.mcp_server --url https://your-panel.example/mcp</code></pre>
+<p>Sử dụng Python cục bộ của ứng dụng khách đã cài đặt phần bổ sung MCP. Đặt
+<code>TGWITNESS_MCP_TOKEN</code> trong môi trường được bảo vệ của nó. Giữ thông tin xác thực ngoài các đối số
+lệnh và URL. <code>tgwitness-mcp</code> là cùng một điểm nhập. Mô-đun
+<code>tgwitness.mcp_bridge</code> cũ và tên <code>TGWITNESS_ARCHIVE_TOKEN</code> vẫn được giữ lại làm đường dẫn
+tương thích kèm theo cảnh báo; các cấu hình mới sử dụng <code>mcp_server</code> và <code>TGWITNESS_MCP_TOKEN</code>.</p>
+<h2 id="cloudflare-tunnel">Cloudflare Tunnel<a class="anchor" href="#cloudflare-tunnel" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Chuyển tiếp tuyến đường <code>/mcp</code> của bảng điều khiển và giữ nguyên tiêu đề bearer. Việc mở cài đặt
+MCP với tư cách quản trị viên sẽ đăng ký nguồn (origin) hiện tại của bảng điều khiển cho lần chạy này.
+Để có một địa chỉ ổn định khả dụng ngay sau khi khởi động lại, hãy cấu hình
+<code>TGWITNESS_PUBLIC_URL</code> với nguồn HTTPS của bảng điều khiển trước khi khởi động bảng điều khiển.
+Các tiêu đề Host và tiêu đề được chuyển tiếp tùy ý không đăng ký một địa chỉ đáng tin cậy.
+Việc kiểm tra Host và Origin sẽ từ chối các nguồn trình duyệt không liên quan. Các phản hồi sử dụng
+<code>Cache-Control: no-store</code>; các giá trị ủy quyền không bao giờ được ghi vào nhật ký.</p>
+<p>Địa chỉ <code>*.trycloudflare.com</code> chỉ là tạm thời. Khi việc khởi động lại đường hầm làm thay đổi
+tên máy chủ (hostname), hãy cập nhật URL công khai đã cấu hình và URL MCP của từng ứng dụng khách. Sử dụng một
+tên máy chủ ổn định cho các cấu hình ứng dụng khách đã lưu.</p>
+<h2 id="tools-and-boundaries">Công cụ và giới hạn<a class="anchor" href="#tools-and-boundaries" aria-label="Liên kết đến phần này">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Công cụ</th>
+<th>Dữ liệu đọc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list_workspaces</code></td>
+<td>Các không gian làm việc được cấp quyền</td>
+</tr>
+<tr>
+<td><code>list_chats</code></td>
+<td>Các cuộc trò chuyện được cấp quyền</td>
+</tr>
+<tr>
+<td><code>search_messages</code></td>
+<td>Văn bản tin nhắn đã lưu trong khoảng thời gian đã chọn</td>
+</tr>
+<tr>
+<td><code>get_message_versions</code></td>
+<td>Các phiên bản đã thu thập và các ghi nhận xóa</td>
+</tr>
+<tr>
+<td><code>get_message_context</code></td>
+<td>ID của các tin nhắn lân cận đã thu thập</td>
+</tr>
+<tr>
+<td><code>get_journal_event</code></td>
+<td>Một bản ghi đã được làm sạch kèm theo tham chiếu nguồn của nó</td>
+</tr>
+<tr>
+<td><code>get_capture_status</code></td>
+<td>Trạng thái thu thập và các bản ghi phạm vi bao phủ được phép</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>tools/list</code> chỉ trả về các công cụ được cấp cho kết nối đó. Các lệnh gọi đến những công cụ
+khác sẽ bị từ chối. Các công cụ ngữ cảnh nhóm, phân đoạn (episode), thuật ngữ và chuỗi trả lời
+không được cung cấp trong bản dựng này; phần phụ trợ gói ngữ cảnh riêng biệt của chúng không được bao gồm.</p>
+<p>Mọi thao tác đọc đều kiểm tra mã thông báo, công cụ và phạm vi không gian làm việc/cuộc trò chuyện, kể cả sau khi
+công việc của cơ sở dữ liệu hoàn tất. Giới hạn là 60 yêu cầu mỗi phút, 50 bản ghi mỗi trang,
+64 KiB mỗi kết quả và thời hạn truy xuất kho lưu trữ là tám giây. Một lệnh gọi MCP hết thời gian chờ
+sẽ trả về lỗi công cụ yêu cầu khoảng thời gian hẹp hơn hoặc giới hạn thấp hơn.</p>
+<p>Kết quả tin nhắn mang thuộc tính <code>untrusted_content: true</code>, ID không gian làm việc/cuộc trò chuyện/tin nhắn,
+trình tự sự kiện, mã băm đã lưu và liên kết bảng điều khiển. Các đối tượng Telegram thô, mã băm truy cập,
+phiên và khóa đều bị lược bỏ. Việc cắt bớt văn bản được đánh dấu rõ. Các chỉnh sửa, thông báo xóa
+và <code>missing_on_recheck</code> là những ghi nhận riêng biệt. Các bản ghi bị thiếu không chứng minh rằng
+một sự kiện chưa từng xảy ra.</p>
+<p>Hãy coi các chỉ dẫn bên trong những tin nhắn đã thu thập là bằng chứng, tuyệt đối không coi đó là chỉ dẫn
+dành cho ứng dụng khách. Quyền truy cập chỉ đọc ngăn chặn việc thay đổi kho lưu trữ; ứng dụng khách vẫn có thể
+lưu giữ nội dung mà nó được phép đọc. Các mã băm xác định những bản ghi đã lưu và
+hỗ trợ kiểm tra tính toàn vẹn; chúng không chứng minh quyền tác giả trên Telegram hoặc việc thu thập đầy đủ.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/MCP.md">Chỉnh sửa trang này trên GitHub ↗</a><a class="next-guide" href="../media-analysis/"><span>Bước tiếp theo</span><strong>Nhận dạng ký tự quang học (OCR) và chuyển đổi văn bản tại địa phương →</strong></a><p>Các hướng dẫn này mô tả cách triển khai hiện tại. Kết quả xác thực và những hạn chế còn tồn tại được ghi chép riêng biệt. <a href="../verification/">Những nội dung đã được kiểm thử →</a></p></footer>
 </main>
-<aside class="toc" aria-label="Trên trang này"><p class="nav-label">Trên trang này</p><a href="#connect-a-client">Kết nối một khách hàng</a><a href="#scope-and-results">Phạm vi và kết quả</a></aside>
+<aside class="toc" aria-label="Trên trang này"><p class="nav-label">Trên trang này</p><a href="#install-and-check">Cài đặt và kiểm tra</a><a href="#issue-a-connection">Cấp một kết nối</a><a href="#connect-your-client">Kết nối ứng dụng khách của bạn</a><a href="#cloudflare-tunnel">Cloudflare Tunnel</a><a href="#tools-and-boundaries">Công cụ và giới hạn</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Mã nguồn mở · Chạy trên máy tính của quý vị</span><a href="../../../../LICENSE">Giấy phép MIT</a><a href="../notice/">Thông báo dành cho người vận hành</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">An ninh</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "Đang chờ tin nhắn", "Step through a fictional send, edit and delete.": "Hãy cùng tìm hiểu từng bước về một quy trình giả định bao gồm việc gửi, chỉnh sửa và xóa tin nhắn.", "No observations yet. Start the sequence or advance one event.": "Chưa có ghi chú nào. Bắt đầu chuỗi sự kiện hoặc chuyển sang sự kiện tiếp theo.", "Meet at 10:00": "Hẹn gặp lúc 10:00", "A new message is visible in the chat.": "Một tin nhắn mới đã xuất hiện trong cuộc trò chuyện.", "Record 1 appended: the collector observed the original message.": "Ghi chú 1 được đính kèm: bộ thu thập đã ghi nhận tin nhắn gốc.", "Meet at 11:00": "Hẹn gặp lúc 11:00", "The current text changes. The earlier observation stays.": "Nội dung văn bản hiện tại đã được điều chỉnh. Quan sát trước đó vẫn được giữ nguyên.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Bản ghi số 2 đã được bổ sung: nội dung chỉnh sửa là một quan sát mới. Bản ghi số 1 vẫn giữ nguyên văn bản gốc.", "Message deleted": "Tin nhắn đã bị xóa", "The message has disappeared from the chat view.": "Tin nhắn đã biến mất khỏi giao diện trò chuyện.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Ghi chú 3 được đính kèm: thông báo xóa được lưu giữ cùng với cả hai phiên bản đã quan sát được.", "0 records": "0 bản ghi", "1 record": "1 bản ghi", "2 records": "2 bản ghi", "3 records": "3 bản ghi", "Complete / {n} of 3": "Hoàn tất / {n}/3", "Step / {n} of 3": "Bước / {n}/3", "Pause": "Tạm dừng", "Replay sequence": "Trình tự phát lại", "Play sequence": "Trình tự phát lại", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Ví dụ tĩnh hiện đã có sẵn. Để tính toán các giá trị băm một cách tương tác, vui lòng truy cập trang này qua HTTPS hoặc xem bản xem trước trên localhost với sự hỗ trợ của Web Crypto.", "No record supplied": "Không có bản ghi nào được cung cấp", "Tail removed": "Phần cuối đã được loại bỏ", "≠ saved hash": "≠ băm đã lưu", "Rebuilt · different hash": "Đã được xây dựng lại · mã băm khác", "= saved hash": "= mã băm đã lưu", "Same length and matching head.": "Độ dài tương đương và tiêu đề phù hợp.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Cả ba giá trị băm được tính toán đều khớp với các giá trị băm đã lưu. Mẫu này phù hợp với giới hạn ba bản ghi được lưu giữ.", "Same saved head; the journal prefix fails verification.": "Cùng một tiêu đề đã lưu; tiền tố của sổ ghi chép không qua được quá trình xác minh.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Bản ghi số 2 hiện không còn khớp với giá trị băm đã lưu trữ của nó. Việc chỉ kiểm tra giá trị băm cuối cùng đã lưu trữ sẽ bỏ sót lỗi này; trình xác minh sẽ kiểm tra từng bản ghi một.", "Head differs from the retained checkpoint.": "Đầu trang khác với điểm kiểm tra được lưu giữ.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Các giá trị băm được tái tạo liên kết với nhau, nhưng phần đầu cuối cùng đã thay đổi. Điểm kiểm tra được lưu giữ từ chối lịch sử này. Các chữ ký gốc cũng sẽ không hợp lệ đối với các bản ghi đã bị thay đổi.", "Too short: 2 supplied records \u003c 3 retained records.": "Quá ngắn: 2 bản ghi được cung cấp \u003c 3 bản ghi được lưu giữ.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Hai giá trị băm còn lại vẫn khớp nhau. Điểm kiểm tra được lưu giữ đã tiết lộ phần cuối bị thiếu. Nếu không có ranh giới trước đó, chỉ riêng tiền tố ngắn hơn này sẽ không thể phát hiện ra sự thiếu sót.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Trình duyệt này không hỗ trợ tính toán hàm băm. Các công thức và phần giải thích tĩnh dưới đây vẫn có sẵn.", "{n} records": "{n} bản ghi", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Đã được chấp nhận: số lượng tăng lên, chữ ký đã được xác minh và khóa khớp. TgWitness duy trì ranh giới mới này.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: bản trả lời có chữ ký báo cáo số lượng bản ghi ít hơn so với điểm kiểm tra được chấp nhận gần nhất. Hệ thống TgWitness ghi nhận sự cố và giữ nguyên ranh giới đã được chấp nhận trước đó.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: số lượng không thay đổi nhưng nhánh chính khác biệt. TgWitness ghi lại sự bất đồng này và duy trì ranh giới đã được chấp nhận trước đó.", "No answer": "Không có câu trả lời", "boundary unknown": "giới hạn chưa xác định", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Không có phản hồi: TgWitness ghi lại kết quả kiểm tra không thành công. Công cụ này không thể xác định trạng thái hiện tại của bộ thu thập dữ liệu. Nếu TgWitness vẫn có thể kết nối với Bot API và chính sách xuất bản cho phép, công cụ này có thể công bố thông tin về sự cố đó.", "Send {n}": "Gửi {n}", "Edit {n}": "Chỉnh sửa {n}", "Delete {n}": "Xóa {n}", "Both accounts captured all six expected observations in this example.": "Cả hai tài khoản đều ghi lại đầy đủ cả sáu quan sát dự kiến trong ví dụ này.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Tài khoản B vẫn ghi lại được 6/6 tin nhắn. Hai biên nhận mất nhiều thời gian hơn. Tỷ lệ ghi lại và độ trễ của biên nhận trả lời cho những câu hỏi khác nhau.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Tài khoản B đã ghi lại được 5 trong số 6 hành động trước thời hạn (83,3%). Hành động chỉnh sửa còn thiếu không có độ trễ được đo lường. Kết quả này chỉ mô tả sáu hành động được kiểm soát.", "not observed by cutoff": "không được ghi nhận trước thời hạn", "{s} seconds": "{s} giây", "Exact values follow in the table.": "Các giá trị chính xác được trình bày trong bảng dưới đây.", "{s} s": "{s} s", "Not observed": "Chưa được quan sát thấy", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Bốn cuộc trò chuyện cung cấp các quan sát khác nhau. Vui lòng theo dõi các bản ghi nguồn cho từng kết nối; không gán bài đăng trên kênh cho người dùng 71001 nếu không có thông tin người gửi được xác định rõ.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Các bản ghi số 146 và 205 cung cấp cùng một ID người gửi, đó là 71001. Điều này giúp liên kết các bài đăng được quan sát thấy từ một tài khoản Telegram trên hai cuộc trò chuyện. Tuy nhiên, thông tin này không xác định danh tính của một cá nhân trong thế giới thực cũng như không quy thuộc bài đăng trên kênh đó cho bất kỳ ai.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Địa chỉ đích pay.example.invalid/new xuất hiện trong bản ghi nhóm số 146, bản ghi bàn phím bot số 173, bản ghi chỉnh sửa kênh số 188 và tin nhắn riêng tư số 205. Việc địa chỉ đích này xuất hiện lặp lại giúp liên kết các tài liệu với nhau; điều này không chứng minh rằng các tài khoản đó nằm dưới sự kiểm soát chung.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Trong trường hợp giả định này, các biên nhận phương tiện đã hoàn tất số #151 và #209 có các giá trị SHA-256 đầy đủ trùng khớp. Hãy so sánh các byte thực tế và các bản ghi tin nhắn liên quan. Tệp trùng khớp này không xác định được người tạo ra nó cũng như không chứng minh được ai là người đã chuyển tiếp nó.", "the encrypted off-site copy": "bản sao được mã hóa lưu trữ ngoài trang web", "notifications": "thông báo", "checkpoint hashes for timestamps": "Các giá trị băm điểm kiểm tra (checkpoint hashes) để xác định dấu thời gian", "signed checkpoints for the witness": "các mốc kiểm tra có chữ ký dành cho TgWitness", "Switched on in this example": "Đã kích hoạt trong ví dụ này", "Optional · off by default": "Tùy chọn · tắt theo mặc định", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Khi rời khỏi thiết bị này: kết nối Telegram và {list}. Không có gì khác.", "Default: only the Telegram connection leaves this machine.": "Mặc định: chỉ kết nối Telegram mới được truyền ra khỏi máy này.", "{done} of {total} done": "{done}/{total} đã hoàn thành", "Mark step {n} as done": "Đánh dấu bước {n} là đã hoàn thành", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Nội dung", "Copied": "Đã sao chép", "Command copied.": "Lệnh đã được sao chép.", "Selected — Ctrl/Cmd+C": "Đã chọn — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Lệnh đã được chọn. Vui lòng sao chép thủ công.", "Command copied to clipboard.": "Lệnh đã được sao chép vào khay nhớ tạm.", "Select text": "Chọn văn bản", "Clipboard unavailable. Command selected; copy it manually.": "Không thể truy cập khay nhớ tạm. Lệnh đã được chọn; vui lòng sao chép thủ công.", "A message arrives. The first observation is saved.": "Một tin nhắn được gửi đến. Quan sát đầu tiên được lưu lại.", "The time changes. Both captured versions stay.": "Thời gian có thể thay đổi. Cả hai phiên bản được lưu giữ đều được giữ nguyên.", "The message disappears. The captured history remains.": "Tin nhắn có thể biến mất. Nhưng lịch sử đã được ghi lại vẫn còn đó.", "Pause example animation": "Tạm dừng hình ảnh minh họa", "Play example animation": "Xem ví dụ về hình ảnh động", "Play": "Phát", "Full-size workspace screenshot": "Ảnh chụp màn hình toàn màn hình không gian làm việc", "Workspace screenshot · fictional data": "Ảnh chụp màn hình giao diện làm việc · dữ liệu giả định", "Close": "Đóng", "Close screenshot": "Đóng ảnh chụp màn hình", "Scrollable full-size screenshot": "Ảnh chụp màn hình toàn màn hình có thể cuộn", "Enlarge: {name}": "Phóng to: {name}", "View full size": "Xem kích thước đầy đủ"}</script>

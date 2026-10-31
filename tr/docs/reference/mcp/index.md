@@ -4,48 +4,86 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/
 
 Bir MCP istemcisini, süresi dolan ve iptal edilebilir erişim izniyle seçilen çalışma alanlarına ve sohbetlere bağlayın.
 
-**Güncel ana sürüm:** kaynak kodunu kontrol edin; 0.7.0 taşınabilir önizleme sürümü bu özelliğin öncesine aittir.
+Bir analist istemcisini seçili çalışma alanlarına ve sohbetlere bağlayın. TgWitness, **panel sürecinde `/mcp` adresinde Streamable HTTP** sunar. Her bağlantının kendi belirteci (token), geçerlilik süresi ve izin verilen araçları vardır. MCP; Telegram mesajları gönderemez, ayarları değiştiremez veya imzalı günlüğü (journal) düzenleyemez.
 
 [İş akışı kılavuzu](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-TgWitness proje dizininden isteğe bağlı sunucuyu kurun:
+## Kurulum ve kontrol
+
+Paneli çalıştıran Python ortamını kullanın. Kaynak kod dizininden:
 
 ```
-python -m pip install '.[mcp]'
+# Windows PowerShell
+& .\.venv\Scripts\python.exe -m pip install -c deploy/constraints-mcp.txt -e '.[mcp]'
+& .\.venv\Scripts\python.exe start.py --check
 ```
 
-Panelde, **Entegrasyonlar → MCP'yi** açın. Bağlantıya bir ad verin, çalışma alanlarını ve sohbetleri seçin ve bir son kullanma tarihi belirleyin. Arşiv jetonunu bir kez kopyalayın; bu jeton daha sonra geri alınamaz. Kayıp jetonları iptal edin ve yenilerini oluşturun. Panel jetonları ve Telegram kimlik bilgileri, MCP kimlik bilgileri değildir.
-
-## Bir istemciyi bağlayın
-
-Panel, [belgelenmiş yapılandırmasını](https://code.visualstudio.com/docs/agents/reference/mcp-configuration) kullanarak **VS Code Local donanımı** iç`.vscode/mcp.json`'yi oluşturur. İndirilen dosyayı bu konuma kaydedin, MCP: List Servers komutunu çalıştırın ve İndirilen dosyayı bu konuma kaydedin, **MCP: List Servers komutunu** çalıştırın ve TgWitness'i başlatın. VS Code, şifre girişi yoluyla token'ı ister. İndirilen JSON dosyası, token'ı değil, bir istem referansı içerir. MCP extra'nın kurulu olduğu ortamdaki Python yürütülebilir dosyasını kullanın.
-
-Diğer stdio müşterileri için şunu çalıştırın:
-
 ```
-python -m tgwitness.mcp_server --api-url http://127.0.0.1:8787
+# Linux / macOS
+.venv/bin/python -m pip install -c deploy/constraints-mcp.txt -e '.[mcp]'
+.venv/bin/python start.py --check
 ```
 
-`TGWITNESS_ARCHIVE_TOKEN` değerini müşterinin korumalı ortamında ayarlayın. Bunu komut argümanlarına veya URL'lere eklemeyin. Köprü, panelin yetkili arşiv API'si aracılığıyla okuma yapar; doğrudan veritabanına erişimi yoktur. Stdout yalnızca MCP mesajlarını taşır.
+Kurulumdan sonra paneli olağan veri dizini ve başlatma argümanlarıyla yeniden başlatın. Hazırlık kontrolü `[PASS] mcp: streamable-http available` çıktısını içermelidir. **Integrations → MCP**, çalışma zamanı durumunu ve sunucunun asıl Python yürütülebilir dosyasını kullanan bir kurulum komutunu gösterir. **Re-check**, sayfayı yeniden yüklemeden bu durumu yeniler; paket kurmaz veya sunucuyu yeniden başlatmaz.
 
-Uzak istemciler için, hizmeti panelin yanında çalıştırın:
+MCP ekstrası, resmi [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk) paketini kullanır. `deploy/constraints-mcp.txt`, test edilmiş SDK ve bağımlılık sürümlerini sabitler. Bu özellikler güncel kaynak kodu gerektirir; 0.7.0 taşınabilir önizleme sürümü bunlardan daha eskidir.
+
+## Bağlantı oluşturma
+
+1. Bir etiket girin ve istemcinin okuyabileceği çalışma alanlarını ve sohbetleri seçin.
+2. Araçları tek tek seçin veya bir ön ayar kullanın. Yalnızca uygulanmış araçlar sunulur.
+3. 1, 7, 30 veya 90 günü ya da bir dakika ile 90 gün arasında özel bir geçerlilik süresi seçin.
+4. **Create connection** düğmesine basın. Belirteç, istemci yapılandırmasının yanında bir kez görüntülenir.
+5. Belirteci ve yapılandırmayı kopyalayın, ardından **Check connection** işlemini çalıştırın. Bu işlem MCP'yi başlatır ve izin verilen araçları listeler; **hiçbir mesaj okunmaz**. Sonuçta protokol sürümü, araç adları, araç sayısı ve geçen süre gösterilir.
+6. Kimlik bilgisi kaydedildiğinde **Done** düğmesine basın. Yoklama (polling), formu ve bir kez gösterilen kartı korur. Panelin kilitlenmesi görüntülenen gizli bilgileri temizler.
+
+Liste; son kullanımı, son aracı, adresi ve son dakikadaki istekleri gösterir. **Revoke** erişimi sonlandırır. **Rotate token** eski kimlik bilgisini iptal eder ve aynı kapsam, araçlar ve geçerlilik süresiyle yeni bir belirteç oluşturur; yeni belirteci bir kez kopyalayın. Panel oturum açma belirteçleri ve Telegram kimlik bilgileri MCP belirteci olarak çalışmaz.
+
+## İstemcinizi bağlama
+
+Panelde istemciyi seçin ve oluşturulan yapılandırmayı kopyalayın. Yapılandırmalar gizli bilgi referansları veya açık yer tutucular kullanır; belirteç ayrı olarak kopyalanır.
+
+| İstemci | Yapılandırma | Bağlantı |
+| --- | --- | --- |
+| Claude Code | `.mcp.json` | HTTP, `type: "http"`, bearer üstbilgisi |
+| Claude Desktop | `claude_desktop_config.json` | Yerel stdio köprüsü |
+| Cursor | `.cursor/mcp.json` | Ortam değişkeni üstbilgili HTTP |
+| VS Code Local | `.vscode/mcp.json` | Parola `promptString` girdili HTTP |
+| Windsurf | `mcp_config.json` | Bearer üstbilgisi yer tutuculu HTTP |
+| Diğer istemciler | URL ve Authorization üstbilgisi | Streamable HTTP |
+
+TgWitness, OAuth keşfi olmadan bearer belirteçleri kullanır. Uzak bağlayıcısı OAuth gerektiren istemciler için yerel stdio köprüsünü kullanın. VS Code için girdi değişkenleri **Local** çalışma ortamına uygulanır ve Copilot oturumlarına iletilmez. Yapılandırma referansları: [Claude Code](https://code.claude.com/docs/en/mcp), [Cursor](https://prod.cursor.com/docs/mcp), [VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration).
+
+Yerel bir köprü için standart giriş noktası şudur:
 
 ```
-python -m tgwitness.mcp_server --transport streamable-http \
-  --api-url http://127.0.0.1:8787 --port 8766 \
-  --public-url https://archive.example.org/mcp
+python -m tgwitness.mcp_server --url https://your-panel.example/mcp
 ```
 
-`/mcp`'yi, `127.0.0.1:8766/mcp`'ye bir HTTPS ters proxy üzerinden yönlendirin ve `Authorization: Bearer …` başlığını koruyun. Yetkilendirme başlıklarının ve istek/yanıt gövdelerinin günlüğe kaydedilmesini devre dışı bırakın. Yalnızca gerektiğinde, `--host` ve `--public-url` kullanarak loopback ötesine bağlanın. Uç nokta, resmi [MCP Python](https://github.com/modelcontextprotocol/python-sdk)SDK'sındaki Streamable HTTP'yi kullanır. OAuth keşfi değil, açıkça yapılandırılmış taşıyıcı kimlik bilgilerini destekler; yalnızca OAuth gerektiren istemciler desteklenmez.
+İstemcinin MCP ekstrası kurulmuş yerel Python ortamını kullanın. Korumalı ortamında `TGWITNESS_MCP_TOKEN` değişkenini ayarlayın. Kimlik bilgilerini komut argümanlarından ve URL'lerden uzak tutun. `tgwitness-mcp` aynı giriş noktasıdır. Eski `tgwitness.mcp_bridge` modülü ve `TGWITNESS_ARCHIVE_TOKEN` adı bir uyarıyla birlikte uyumluluk yolu olarak kalmaya devam eder; yeni yapılandırmalar `mcp_server` ve `TGWITNESS_MCP_TOKEN` kullanır.
 
-**Kontrol protokolü ve erişim,** gerçek bir MCP istemcisini başlatır ve araçları listeler. Bu işlem mesajları almaz. Uzaktan kontrol için, seçilen MCP sunucusu arşiv jetonunu alır. Yalnızca kendi işlettiğiniz veya bu kapsamda güvendiğiniz bir sunucuyu yapılandırın.
+## Cloudflare Tunnel
 
-## Kapsam ve sonuçlar
+Panelin `/mcp` rotasını yönlendirin ve bearer üstbilgisini koruyun. MCP ayarlarını yönetici olarak açmak, bu çalışma için panelin mevcut kaynağını (origin) kaydeder. Yeniden başlatmanın hemen ardından kullanılabilecek sabit bir adres için paneli başlatmadan önce `TGWITNESS_PUBLIC_URL` değişkenini panelin HTTPS kaynağıyla yapılandırın. Rastgele Host ve yönlendirilmiş (forwarded) üstbilgiler güvenilir bir adres kaydetmez. Host ve Origin kontrolleri ilgisiz tarayıcı kaynaklarını reddeder. Yanıtlar `Cache-Control: no-store` kullanır; yetkilendirme değerleri asla günlüğe kaydedilmez.
 
-Kullanılabilir araçlar: `list_workspaces`, `list_chats`, `search_messages`, `get_message_versions`, `get_message_context`, `get_journal_event` ve `get_capture_status`. Telegram eylemleri, yapılandırma değişiklikleri veya toplu dışa aktarma araçları bulunmamaktadır. Her okuma işleminde çalışma alanı/sohbet erişimi yeniden kontrol edilir; süresi dolmuş ve iptal edilmiş kimlik bilgileri artık çalışmaz. Sınırlar, kimlik bilgisi başına dakikada 60 API isteği, sayfa başına 50 kayıt, 64 KiB'lik yanıt ve sekiz saniyelik API süre sınırıdır.
+Bir `*.trycloudflare.com` adresi geçicidir. Bir tünel yeniden başlatması ana bilgisayar adını (hostname) değiştirdiğinde, yapılandırılmış genel URL'yi ve her istemcinin MCP URL'sini güncelleyin. Kayıtlı istemci yapılandırmaları için sabit bir ana bilgisayar adı kullanın.
 
-Mesaj sonuçları arasında çalışma alanı, sohbet/mesaj kimlikleri, olay sırası, kaydedilmiş hash ve bir panel bağlantısı yer alır. Bağlantıyı açan görüntüleyicinin kendi yetkili panel oturumu olması gerekir. Ham Telegram nesneleri, erişim hash'leri, dosya referansları, oturum materyalleri ve anahtarlar hariç tutulur. Arama, ham alanları değil, mesaj metnini inceler. Metin sınırlandırılır ve kesintiler işaretlenir. Düzenlemeler, Telegram silme bildirimleri ve `missing_on_recheck` ayrı gözlemler olarak kalır. Sohbet kapsamındaki erişim, çalışma alanı genelindeki operasyonel olayları göremez; yakalama durumu bu sınırı açıkça belirtir.
+## Araçlar ve sınırlar
 
-Arşiv metni güvenilir olmayan bir girdidir. Mesajlardaki talimatlar ek bir kapsam sağlamaz ve müşteri talimatları olarak değerlendirilmemelidir. Harici bir AI modeli, MCP istemcisinin talep ettiği her türlü içeriği alabilir. Salt okunur erişim, arşivde değişiklik yapılmasını engeller; ancak bir istemcinin okuduğu verileri saklamasını engellemez.
+| Araç | Okunan veriler |
+| --- | --- |
+| `list_workspaces` | İzin verilen çalışma alanları |
+| `list_chats` | İzin verilen sohbetler |
+| `search_messages` | Seçilen dönem içindeki kaydedilmiş mesaj metni |
+| `get_message_versions` | Yakalanan sürümler ve silme gözlemleri |
+| `get_message_context` | Yakındaki yakalanmış mesaj kimlikleri (ID'leri) |
+| `get_journal_event` | Kaynak referansıyla birlikte temizlenmiş (sanitized) tek bir kayıt |
+| `get_capture_status` | Toplama durumu ve izin verilen kapsam kayıtları |
 
-Hash değerleri, kaydedilen kayıtları tanımlar ve bütünlük kontrollerini destekler. Ancak bunlar, Telegram mesajlarının yazarlığını veya her mesajın yakalandığını bağımsız olarak kanıtlamaz.
+`tools/list` yalnızca ilgili bağlantıya izin verilen araçları döndürür. Diğer araçlara yapılan çağrılar reddedilir. Grup bağlamı, bölüm (episode), terminoloji ve yanıt zinciri araçları bu derlemede sunulmamaktadır; bunların ayrı bağlam paketi arka ucu dahil edilmemiştir.
+
+Her okuma işlemi, veritabanı çalışması bittikten sonrası da dahil olmak üzere belirteci, aracı ve çalışma alanı/sohbet kapsamını kontrol eder. Sınırlar dakikada 60 istek, sayfa başına 50 kayıt, sonuç başına 64 KiB ve sekiz saniyelik arşiv zaman sınırıdır. Zaman aşımına uğrayan bir MCP çağrısı, daha dar bir dönem veya daha düşük bir sınır isteyen bir araç hatası döndürür.
+
+Mesaj sonuçları `untrusted_content: true`, çalışma alanı/sohbet/mesaj kimliklerini, olay sırasını, kaydedilen karmayı (hash) ve bir panel bağlantısını taşır. Ham Telegram nesneleri, erişim karmaları, oturumlar ve anahtarlar çıkarılır. Metin kısaltmaları işaretlenir. Düzenlemeler, silme bildirimleri ve `missing_on_recheck` birbirinden ayrı gözlemlerdir. Eksik kayıtlar bir olayın asla gerçekleşmediğini kanıtlamaz.
+
+Yakalanan mesajların içindeki talimatları her zaman kanıt olarak değerlendirin, asla istemci talimatı olarak ele almayın. Salt okunur erişim arşivde değişiklik yapılmasını önler; ancak istemci okumasına izin verilen içeriği yine de saklayabilir. Karmalar (hash'ler) kaydedilen kayıtları tanımlar ve bütünlük kontrollerini destekler; Telegram yazarlığını veya eksiksiz yakalamayı kanıtlamaz.

@@ -22,7 +22,7 @@ Os registros capturados, o texto reconhecido e as conclusões dos analistas perm
 
 ## Carregar mensagens anteriores
 
-1. **Fontes** abertas: analise os chats habilitados e inicie a observação.
+1. Abra **Fontes → Chats no escopo**, analise os chats habilitados e inicie a observação.
 2. Selecione **“Carregar histórico completo**”. A execução utiliza a lista de fontes selecionada naquele momento.
 3. Utilize **“Pausar histórico”** e **“Continuar histórico”** conforme necessário. Após uma reinicialização, retome explicitamente.
 4. Verifique os resultados por fonte e a fila de anexos. Salve o relatório de progresso assinado junto com a exportação das evidências.
@@ -31,9 +31,9 @@ Isso preenche a área de trabalho com as mensagens disponíveis. A exportação 
 
 ## Pesquise primeiro, depois decida sobre a IA
 
-1. Acesse**o arquivo**. Escolha um espaço de trabalho, bate-papos e período de observação.
-2. Pesquise uma frase, um domínio ou um ID de mensagem. Abra o registro correspondente e suas versões salvas.
-3. Para a análise por IA, o administrador primeiro configura um provedor. Revise **os dados enviados ao modelo** e desmarque os trechos indesejados antes de aprovar a solicitação.
+1. Abra o **Diário** para fazer uma pesquisa local. Escolha uma área de trabalho e use os filtros de fonte e de período.
+2. Pesquise uma frase ou um domínio. Abra o registro correspondente e suas versões salvas.
+3. Para a análise por IA, o administrador habilita e configura um provedor em **Integrações**. Abra **Consulte o arquivo** e escolha os chats e um período. Revise **Dados enviados ao modelo** e desmarque os trechos indesejados antes de aprovar a solicitação.
 4. Verifique as citações retornadas. Salve a resposta como um relatório e adicione sua própria revisão ou notas.
 
 As buscas são realizadas localmente, sem IA. Os relatórios analíticos mantêm as referências das fontes e o histórico de revisões; eles são separados do registro assinado. [Configuração do provedor e relatórios](https://phishdestroy.github.io/TgWitness/pt/docs/reference/analysis/).

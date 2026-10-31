@@ -31,63 +31,124 @@
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="指南"><a href="../../../">首页</a> <span aria-hidden="true">/</span> <a href="../../">文档</a> <span aria-hidden="true">/</span> <a href="../">参考</a> <span aria-hidden="true">/</span> <span aria-current="page">只读 MCP</span></nav>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">参考 / 存档与集成</p><h1>只读 MCP</h1><p class="guide-outcome">将 MCP 客户端连接到选定的工作区和聊天群组，并授予具有时效性且可撤销的访问权限。</p><div class="wiki-body"><p><strong>当前主要版本：</strong>请使用源代码检出；0.7.0 便携版预览版尚未包含此功能。</p>
+<article class="guide-content"><p class="eyebrow">参考 / 存档与集成</p><h1>只读 MCP</h1><p class="guide-outcome">将 MCP 客户端连接到选定的工作区和聊天群组，并授予具有时效性且可撤销的访问权限。</p><div class="wiki-body"><p>将分析员客户端连接到选定的工作区和聊天。TgWitness <strong>在面板进程的 <code>/mcp</code> 处提供 Streamable HTTP 服务</strong>。每个连接都有各自的令牌、过期时间和允许使用的工具。MCP 无法发送 Telegram 消息、更改设置或修改已签名的日志。</p>
 <p><a href="https://phishdestroy.github.io/TgWitness/docs/archive/">工作流指南</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">维基</a></p>
-<p>从 TgWitness 项目目录安装可选服务器：</p>
-<pre><code class="language-sh">python -m pip install &#x27;.[mcp]&#x27;</code></pre>
-<p>在控制面板中，打开<strong>“集成”→“MCP”</strong>。为连接命名，选择其
-工作区和聊天群组，并设定有效期。请一次性复制存档令牌；该令牌
-之后无法再次获取。若令牌丢失，请撤销并重新生成。控制面板令牌和
-Telegram 凭据并非 MCP 凭据。</p>
-<h2 id="connect-a-client">连接客户端<a class="anchor" href="#connect-a-client" aria-label="本节链接">#</a></h2>
-<p>该面板根据
-其<a href="https://code.visualstudio.com/docs/agents/reference/mcp-configuration">文档中记载的配置</a>，为 <strong>VS Code Local 框架</strong>生成 <code>.vscode/mcp.json</code>。
-将下载的文件保存至该位置，运行 <strong>MCP：List Servers</strong>，并启动
-TgWitness。VS Code 会通过密码输入框提示输入令牌。下载的
-JSON 文件中包含提示引用，而非令牌本身。请使用安装了
-MCP 扩展的环境中的 Python 可执行文件。</p>
-<p>对于其他 stdio 客户端，请运行：</p>
-<pre><code class="language-sh">python -m tgwitness.mcp_server --api-url http://127.0.0.1:8787</code></pre>
-<p>请在客户端的受保护环境中设置 <code>TGWITNESS_ARCHIVE_TOKEN</code>。请勿将其
-放入命令行参数或 URL 中。该桥接器通过控制面板的授权
-存档 API 读取数据；它无法直接访问数据库。标准输出仅传输 MCP 消息。</p>
-<p>对于远程客户端，请在控制面板旁运行该服务：</p>
-<pre><code class="language-sh">python -m tgwitness.mcp_server --transport streamable-http \
-  --api-url http://127.0.0.1:8787 --port 8766 \
-  --public-url https://archive.example.org/mcp</code></pre>
-<p>通过 HTTPS 反向代理将 <code>/mcp</code> 转发至 <code>127.0.0.1:8766/mcp</code>，同时保留
-<code>Authorization: Bearer …</code> 头部。禁用授权头
-以及请求/响应正文的日志记录。仅在需要时才绑定到本地回环地址之外，使用
-<code>--host</code> 和 <code>--public-url</code>。该端点使用官方
-<a href="https://github.com/modelcontextprotocol/python-sdk">MCP Python SDK</a> 中的 Streamable HTTP。
-它支持显式配置的承载凭据，不支持 OAuth 发现；
-仅需 OAuth 的客户端不受支持。</p>
-<p><strong>检查协议并进行</strong>初始化将启动一个真正的 MCP 客户端并列出可用工具。此操作
-不会获取消息。进行远程检查时，所选的 MCP 服务器将接收
-存档令牌。请仅将该权限范围配置给您运营或信任的服务器。</p>
-<h2 id="scope-and-results">范围与成果<a class="anchor" href="#scope-and-results" aria-label="本节链接">#</a></h2>
-<p>可用工具：<code>list_workspaces</code>、<code>list_chats</code>、<code>search_messages</code>、
-<code>get_message_versions</code>、<code>get_message_context</code>、<code>get_journal_event</code> 和
-<code>get_capture_status</code>。不提供 Telegram 操作、配置更改或
-批量导出工具。 每次读取都会重新验证工作区/聊天访问权限；过期和被撤销的
-凭证将停止生效。限制包括：每分钟每份凭证 60 次 API 请求，
-每页 50 条记录，64 KiB 的响应大小，以及 8 秒的 API 超时限制。</p>
-<p>消息结果包括工作区、聊天/消息 ID、事件序列、保存的哈希值，
-以及一个面板链接。打开链接的查看者必须拥有自己的授权面板
-会话。Telegram 原始对象、访问哈希值、文件引用、会话材料
-和密钥均被省略。搜索仅针对消息文本，不包括原始字段。 文本内容
-受限，截断处会做标记。编辑操作、Telegram删除通知以及
-<code>missing_on_recheck</code>仍作为独立观察项处理。仅限聊天范围的访问权限无法查看
-整个工作空间的操作事件；捕获状态会明确标注此限制。</p>
-<p>存档文本属于不可信输入。消息中的指令不赋予任何额外
-权限，且不得视为客户端指令。外部 AI 模型可能会
-接收其 MCP 客户端请求的任何内容。只读访问权限可防止
-对存档进行修改；但无法阻止客户端保留其读取的数据。</p>
-<p>哈希值用于标识保存的记录并支持完整性校验。它们并不能
-独立证明 Telegram 消息的作者身份，也无法证明每条消息均已被捕获。</p></div></article>
+<h2 id="install-and-check">安装与检查<a class="anchor" href="#install-and-check" aria-label="本节链接">#</a></h2>
+<p>使用运行面板的 Python 环境。从源码检出目录执行：</p>
+<pre><code class="language-powershell"># Windows PowerShell
+&amp; .\.venv\Scripts\python.exe -m pip install -c deploy/constraints-mcp.txt -e &#x27;.[mcp]&#x27;
+&amp; .\.venv\Scripts\python.exe start.py --check</code></pre>
+<pre><code class="language-sh"># Linux / macOS
+.venv/bin/python -m pip install -c deploy/constraints-mcp.txt -e &#x27;.[mcp]&#x27;
+.venv/bin/python start.py --check</code></pre>
+<p>安装后，使用常用的数据目录和启动参数重启面板。就绪检查应包含 <code>[PASS] mcp: streamable-http available</code>。<strong>Integrations → MCP</strong> 会显示运行时状态以及使用该服务器实际 Python 可执行文件的安装命令。<strong>Re-check</strong> 可在不重新加载页面的情况下刷新此状态；它不会安装软件包或重启服务器。</p>
+<p>MCP 扩展使用官方的 <a href="https://github.com/modelcontextprotocol/python-sdk">MCP Python SDK</a>。<code>deploy/constraints-mcp.txt</code> 锁定了经过测试的 SDK 及其依赖项。这些功能需要当前的源码；0.7.0 便携预览版早于这些功能发布。</p>
+<h2 id="issue-a-connection">签发连接<a class="anchor" href="#issue-a-connection" aria-label="本节链接">#</a></h2>
+<ol>
+<li>输入标签并选择客户端可读取的工作区和聊天。</li>
+<li>逐个选择工具或使用预设。仅提供已实现的工具。</li>
+<li>选择 1、7、30 或 90 天，或在 1 分钟至 90 天之间自定义过期时间。</li>
+<li>点击 <strong>Create connection</strong>。令牌会在客户端配置旁显示一次。</li>
+<li>复制令牌和配置，然后运行 <strong>Check connection</strong>。它会初始化 MCP 并列出允许使用的工具；<strong>不会读取任何消息</strong>。结果将显示协议版本、工具名称、数量和耗时。</li>
+<li>保存凭据后点击 <strong>Done</strong>。轮询会保留表单和单次显示的卡片。锁定面板会清除已显示的机密信息。</li>
+</ol>
+<p>列表会显示最近使用情况、上次使用的工具、地址以及过去一分钟内的请求数。<strong>Revoke</strong> 会终止访问权限。<strong>Rotate token</strong> 会吊销旧凭据，并签发具有相同范围、工具和过期时间的替代令牌；请单次复制该替代令牌。面板登录令牌和 Telegram 凭据不能用作 MCP 令牌。</p>
+<h2 id="connect-your-client">连接您的客户端<a class="anchor" href="#connect-your-client" aria-label="本节链接">#</a></h2>
+<p>在面板中选择客户端并复制生成的配置。配置使用机密引用或显式占位符；令牌需单独复制。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>客户端</th>
+<th>配置</th>
+<th>连接</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude Code</td>
+<td><code>.mcp.json</code></td>
+<td>HTTP，<code>type: "http"</code>，Bearer 请求头</td>
+</tr>
+<tr>
+<td>Claude Desktop</td>
+<td><code>claude_desktop_config.json</code></td>
+<td>本地 stdio 桥接</td>
+</tr>
+<tr>
+<td>Cursor</td>
+<td><code>.cursor/mcp.json</code></td>
+<td>带环境变量请求头的 HTTP</td>
+</tr>
+<tr>
+<td>VS Code Local</td>
+<td><code>.vscode/mcp.json</code></td>
+<td>带密码 <code>promptString</code> 输入的 HTTP</td>
+</tr>
+<tr>
+<td>Windsurf</td>
+<td><code>mcp_config.json</code></td>
+<td>带 Bearer 请求头占位符的 HTTP</td>
+</tr>
+<tr>
+<td>其他客户端</td>
+<td>URL 和 Authorization 请求头</td>
+<td>Streamable HTTP</td>
+</tr>
+</tbody>
+</table></div>
+<p>TgWitness 使用 Bearer 令牌，不支持 OAuth 发现。对于远程连接器需要 OAuth 的客户端，请使用本地 stdio 桥接。对于 VS Code，输入变量适用于 <strong>Local</strong> 环境，不会转发到 Copilot 会话。配置参考：<a href="https://code.claude.com/docs/en/mcp">Claude Code</a>、<a href="https://prod.cursor.com/docs/mcp">Cursor</a>、<a href="https://code.visualstudio.com/docs/agents/reference/mcp-configuration">VS Code</a>。</p>
+<p>本地桥接的标准入口点为：</p>
+<pre><code class="language-sh">python -m tgwitness.mcp_server --url https://your-panel.example/mcp</code></pre>
+<p>使用客户端本地已安装 MCP 扩展的 Python。在其受保护的环境中设置 <code>TGWITNESS_MCP_TOKEN</code>。切勿将凭据放入命令参数和 URL 中。<code>tgwitness-mcp</code> 是相同的入口点。旧的 <code>tgwitness.mcp_bridge</code> 模块和 <code>TGWITNESS_ARCHIVE_TOKEN</code> 名称仍作为兼容路径保留，但会发出警告；新配置请使用 <code>mcp_server</code> 和 <code>TGWITNESS_MCP_TOKEN</code>。</p>
+<h2 id="cloudflare-tunnel">Cloudflare Tunnel<a class="anchor" href="#cloudflare-tunnel" aria-label="本节链接">#</a></h2>
+<p>转发面板的 <code>/mcp</code> 路由并保留 Bearer 请求头。以管理员身份打开 MCP 设置会为本次运行注册面板的当前源（Origin）。若要获得重启后立即可用的稳定地址，请在启动面板前使用面板的 HTTPS 源配置 <code>TGWITNESS_PUBLIC_URL</code>。任意 Host 和转发请求头不会注册受信任的地址。Host 和 Origin 检查会拒绝无关的浏览器源。响应使用 <code>Cache-Control: no-store</code>；授权值绝不会被记录到日志中。</p>
+<p><code>*.trycloudflare.com</code> 地址是临时的。当隧道重启更改主机名时，请更新已配置的公共 URL 以及每个客户端的 MCP URL。对于已保存的客户端配置，请使用稳定的主机名。</p>
+<h2 id="tools-and-boundaries">工具与边界<a class="anchor" href="#tools-and-boundaries" aria-label="本节链接">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>工具</th>
+<th>读取内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list_workspaces</code></td>
+<td>已授权的工作区</td>
+</tr>
+<tr>
+<td><code>list_chats</code></td>
+<td>已授权的聊天</td>
+</tr>
+<tr>
+<td><code>search_messages</code></td>
+<td>选定时间段内已保存的消息文本</td>
+</tr>
+<tr>
+<td><code>get_message_versions</code></td>
+<td>已捕获的版本和删除观测记录</td>
+</tr>
+<tr>
+<td><code>get_message_context</code></td>
+<td>附近已捕获的消息 ID</td>
+</tr>
+<tr>
+<td><code>get_journal_event</code></td>
+<td>单条经过脱敏处理的记录及其来源引用</td>
+</tr>
+<tr>
+<td><code>get_capture_status</code></td>
+<td>采集状态和允许的覆盖范围记录</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>tools/list</code> 仅返回授予该连接的工具。对其他工具的调用将被拒绝。此版本不提供群组上下文、事件片段（episode）、术语和回复链工具；未包含它们独立的上下文包后端。</p>
+<p>每次读取都会检查令牌、工具以及工作区/聊天范围，包括在数据库操作完成之后。限制为每分钟 60 次请求、每页 50 条记录、每个结果 64 KiB 以及 8 秒的归档截止时间。超时的 MCP 调用会返回工具错误，要求缩小时间段或降低限制。</p>
+<p>消息结果包含 <code>untrusted_content: true</code>、工作区/聊天/消息 ID、事件序列、已保存的哈希值以及面板链接。原始 Telegram 对象、访问哈希、会话和密钥均被省略。文本截断会予以标记。编辑、删除通知和 <code>missing_on_recheck</code> 是不同的观测记录。缺失记录并不能证明某个事件从未发生。</p>
+<p>请将已捕获消息中的指令视为证据，切勿将其作为客户端指令。只读访问权限可防止归档被更改；但客户端仍可保留允许其读取的内容。哈希值用于标识已保存的记录并支持完整性检查；它们不能证明 Telegram 作者身份或捕获的完整性。</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/MCP.md">在 GitHub 上编辑此页面 ↗</a><a class="next-guide" href="../media-analysis/"><span>下一步</span><strong>本地 OCR 和转录 →</strong></a><p>这些指南描述了当前的实现方案。验证结果和剩余缺陷在其他文档中单独记录。 <a href="../verification/">已测试的内容 →</a></p></footer>
 </main>
-<aside class="toc" aria-label="本页面内容"><p class="nav-label">本页面内容</p><a href="#connect-a-client">连接客户端</a><a href="#scope-and-results">范围与成果</a></aside>
+<aside class="toc" aria-label="本页面内容"><p class="nav-label">本页面内容</p><a href="#install-and-check">安装与检查</a><a href="#issue-a-connection">签发连接</a><a href="#connect-your-client">连接您的客户端</a><a href="#cloudflare-tunnel">Cloudflare Tunnel</a><a href="#tools-and-boundaries">工具与边界</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>开源 · 可在您的设备上运行</span><a href="../../../../LICENSE">MIT 许可协议</a><a href="../notice/">操作员通知</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">安全</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "等待消息", "Step through a fictional send, edit and delete.": "通过一个虚构的发送、编辑和删除过程进行演示。", "No observations yet. Start the sequence or advance one event.": "尚无观察记录。开始序列或跳转至下一事件。", "Meet at 10:00": "10:00 见面", "A new message is visible in the chat.": "聊天中显示了一条新消息。", "Record 1 appended: the collector observed the original message.": "已附录记录 1 条：采集器已捕获原始消息。", "Meet at 11:00": "11:00 见面", "The current text changes. The earlier observation stays.": "当前文本内容有所变更。先前的观察结果仍然有效。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "记录 2 已追加：该编辑内容为新观察结果。记录 1 仍保留原始文本。", "Message deleted": "消息已删除", "The message has disappeared from the chat view.": "该消息已从聊天界面中消失。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "已添加记录 3：删除通知与两个被观察到的版本一同保留。", "0 records": "0 条记录", "1 record": "1 条记录", "2 records": "2 条记录", "3 records": "3 条记录", "Complete / {n} of 3": "已完成 / {n}/3", "Step / {n} of 3": "第 {n} 步（共 3 步）", "Pause": "暂停", "Replay sequence": "回放序列", "Play sequence": "播放序列", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "静态示例已上线。如需交互式计算哈希值，请通过 HTTPS 访问此页面，或在支持 Web Crypto 的本地预览环境中打开。", "No record supplied": "未提供记录", "Tail removed": "尾部内容已删除", "≠ saved hash": "≠ 已保存的哈希值", "Rebuilt · different hash": "重建 · 哈希值不同", "= saved hash": "= 已保存的哈希值", "Same length and matching head.": "篇幅相同且标题一致。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "这三个计算出的哈希值均与保存的哈希值一致。该样本符合保留的三个记录边界。", "Same saved head; the journal prefix fails verification.": "保存的头部信息相同；日志前缀验证失败。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "记录 2 与其保存的哈希值不再匹配。若仅检查最终存储的头部，则会遗漏此问题；验证器会检查每一条记录。", "Head differs from the retained checkpoint.": "标题与保留的检查点不同。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "重建的哈希值相互关联，但最终的头部已发生变化。保留的检查点拒绝接受这一历史记录。对于已更改的记录，原始签名也会验证失败。", "Too short: 2 supplied records \u003c 3 retained records.": "内容过短：提供的记录有 2 条，而保留的记录少于 3 条。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "剩下的两个哈希值仍然匹配。保留的检查点揭示了缺失的部分。如果没有那个早先的边界，仅凭这个较短的前缀是无法揭示这一遗漏的。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "此浏览器不支持哈希计算。下方的公式和静态说明仍可查看。", "{n} records": "{n}条记录", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "已接受：计数持续增加，签名已验证，密钥匹配。该见证者保留了这一新边界。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "回滚：签名后的结果报告的记录数量少于上次被接受的检查点。Witness 会记录该问题，并保留较早被接受的边界。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "分叉：计数保持不变，但分支头不同。见证者会记录该分歧，并保留先前被接受的分界点。", "No answer": "无回答", "boundary unknown": "边界未知", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "无响应：该工具会记录验证失败的情况。它无法确定收集器的当前状态。如果该工具仍能访问 Bot API 且其发布政策允许，则会发布该失败信息。", "Send {n}": "发送 {n}", "Edit {n}": "编辑 {n}", "Delete {n}": "删除 {n}", "Both accounts captured all six expected observations in this example.": "在这项示例中，这两个账户均捕获了预期的全部六项观察结果。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "账户 B 依然成功捕获了 6 条中的 6 条。其中两条收据的捕获耗时较长。捕获率和收据延迟反映的是不同的问题。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "账户 B 在截止时间前捕获了 6 条中的 5 条（83.3%）。缺失的编辑操作未测得延迟。此结果仅描述了这六项受控操作。", "not observed by cutoff": "未在截止时间前观察到", "{s} seconds": "{s}秒", "Exact values follow in the table.": "具体数值见下表。", "{s} s": "{s} s", "Not observed": "未发现", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "四个聊天群组提供了不同的观察结果。请追溯每条连接的源记录；在未确认发件人身份的情况下，请勿将该频道帖子归因于用户 71001。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "记录 #146 和 #205 显示相同的发件人 ID：71001。这将同一 Telegram 账号在两个聊天群组中发布的帖子关联起来。但这并不能识别现实世界中的具体个人，也无法确定该频道帖子的发布者。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "目标地址 pay.example.invalid/new 出现在群组记录 #146、机器人键盘 #173、频道编辑 #188 以及私信 #205 中。目标地址的重复出现表明这些内容之间存在关联；但这并不能证明这些账户受共同控制。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "在此虚构案例中，已完成的媒体收据 #151 和 #209 具有完全相同的 SHA-256 值。请对比实际字节内容及其关联的消息记录。该匹配文件既未标识其创建者，也无法证明是谁转发了该文件。", "the encrypted off-site copy": "加密的异地副本", "notifications": "通知", "checkpoint hashes for timestamps": "时间戳的检查点哈希值", "signed checkpoints for the witness": "TgWitness 的签名检查点", "Switched on in this example": "在此示例中已启用", "Optional · off by default": "可选 · 默认关闭", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "离开这台机器时：Telegram 连接和 {list}。除此之外别无他物。", "Default: only the Telegram connection leaves this machine.": "默认设置：仅 Telegram 连接会离开这台机器。", "{done} of {total} done": "已完成 {done}/{total}", "Mark step {n} as done": "将步骤 {n} 标记为已完成", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "文案", "Copied": "已复制", "Command copied.": "已复制该指令。", "Selected — Ctrl/Cmd+C": "选中 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "已选中命令。请手动复制。", "Command copied to clipboard.": "命令已复制到剪贴板。", "Select text": "选择文本", "Clipboard unavailable. Command selected; copy it manually.": "剪贴板不可用。已选中命令；请手动复制。", "A message arrives. The first observation is saved.": "一条消息送达。首次记录被保存。", "The time changes. Both captured versions stay.": "时间会改变，但两个记录版本都会保留下来。", "The message disappears. The captured history remains.": "消息虽已消失，但记录的历史依然存在。", "Pause example animation": "暂停示例动画", "Play example animation": "播放示例动画", "Play": "播放", "Full-size workspace screenshot": "全屏工作区截图", "Workspace screenshot · fictional data": "工作区截图 · 虚构数据", "Close": "关闭", "Close screenshot": "关闭截图", "Scrollable full-size screenshot": "可滚动全屏截图", "Enlarge: {name}": "放大：{name}", "View full size": "查看大图"}</script>

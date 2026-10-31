@@ -22,7 +22,7 @@ Rekod yang dirakam, teks yang diiktiraf dan kesimpulan penganalisis kekal berasi
 
 ## Muat mesej terdahulu
 
-1. **Sumber** Terbuka, semak sembang yang diaktifkan dan mulakan pemerhatian.
+1. Buka **Sumber → Sembang dalam skop**, semak sembang yang didayakan dan mulakan pemerhatian.
 2. Pilih **Muat Sejarah Penuh**. Jalannya menggunakan senarai sumber yang dipilih pada masa itu.
 3. Gunakan **Sejarah Jeda** dan **Sejarah Teruskan** mengikut keperluan. Selepas memulakan semula, sambung secara eksplisit.
 4. Semak hasil bagi setiap sumber dan barisan menunggu lampiran. Simpan laporan kemajuan yang ditandatangani bersama eksport bukti.
@@ -31,9 +31,9 @@ Ini mengisi ruang kerja dengan mesej yang tersedia. Eksport HTML/JSON bagi setia
 
 ## Cari dahulu, kemudian buat keputusan tentang AI
 
-1. Buka **Tanya arkib**. Pilih ruang kerja, sembang dan tempoh pemerhatian.
-2. Cari frasa, domain atau ID mesej. Buka rekod yang sepadan dan versi simpanannya.
-3. Untuk analisis AI, pentadbir terlebih dahulu menyediakan penyedia. Semak **data yang dihantar kepada model** dan nyahcentang petikan yang tidak diingini sebelum meluluskan permintaan.
+1. Buka **Jurnal** untuk carian tempatan. Pilih ruang kerja dan gunakan penapis sumber dan masa.
+2. Cari frasa atau domain. Buka rekod yang sepadan dan versi simpanannya.
+3. Untuk analisis AI, pentadbir mendayakan dan mengkonfigurasikan penyedia dalam **Integrasi**. Buka **Tanya arkib** dan pilih sembang serta tempoh. Semak **Data dihantar ke model** dan nyahtanda petikan yang tidak diingini sebelum meluluskan permintaan.
 4. Semak petikan yang dikembalikan. Simpan jawapan sebagai laporan dan tambahkan semakan atau nota anda sendiri.
 
 Carian dijalankan secara tempatan tanpa AI. Laporan analitik mengekalkan rujukan sumber dan sejarah semakan; ia berasingan daripada jurnal yang disahkan. [Penyediaan penyedia dan laporan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/analysis/).

@@ -8,7 +8,7 @@ Cerca i messaggi salvati, esamina i dati forniti dall’intelligenza artificiale
 
 [Guida al flusso di lavoro](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-Aprire **"Ask the archive"** nel pannello. Il selettore dell’area di lavoro consente di scegliere l’account; il modulo permette di selezionare le chat e il periodo di osservazione. La ricerca viene eseguita localmente, senza l’uso dell’intelligenza artificiale. Una frase esatta o un dominio restringono i risultati; l’ID di un messaggio consente di richiedere le versioni salvate. Esaminare gli estratti restituiti e aprire i relativi record del registro o il contesto. Non è presente alcun database vettoriale né alcuna azione automatica su Telegram.
+Usare **Registro** per la ricerca locale senza IA. Per **Chieda all’archivio**, abilitare e configurare prima un provider in **Integrazioni**. Il selettore dell’area di lavoro consente di scegliere l’account; il modulo permette di selezionare le chat e il periodo di osservazione. Il recupero viene eseguito localmente. Una frase esatta o un dominio restringono il recupero; l’ID di un messaggio consente di richiedere le versioni salvate. Esaminare gli estratti e aprire i relativi record del registro o il contesto. Non è presente alcun database vettoriale né alcuna azione automatica su Telegram.
 
 ## Fornitori e consenso
 

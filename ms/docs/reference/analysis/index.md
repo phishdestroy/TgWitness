@@ -8,7 +8,7 @@ Cari mesej yang disimpan, semak input AI dan simpan laporan analitik beserta ruj
 
 [Panduan aliran kerja](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-Buka**arkib** dalam panel. Pemilih ruang kerja memilih akaun; borang memilih sembang dan tempoh pemerhatian. Carian dijalankan secara tempatan, tanpa AI. Frasa tepat atau domain menyempitkan hasil carian; ID mesej meminta versi yang disimpan. Semak petikan yang dikembalikan dan buka rekod jurnal atau konteks mereka. Tiada pangkalan data vektor atau tindakan Telegram automatik.
+Gunakan **Jurnal** untuk carian tempatan tanpa AI. Untuk **Tanya arkib**, dayakan dan konfigurasikan penyedia dalam **Integrasi** terlebih dahulu. Pemilih ruang kerja memilih akaun; borang memilih sembang dan tempoh pemerhatian. Pengambilan semula dijalankan secara tempatan. Frasa tepat atau domain menyempitkan pengambilan semula; ID mesej meminta versi yang disimpan. Semak petikan dan buka rekod jurnal atau konteksnya. Tiada pangkalan data vektor atau tindakan Telegram automatik.
 
 ## Penyedia dan persetujuan
 

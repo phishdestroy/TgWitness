@@ -8,7 +8,7 @@ Cari pesan yang disimpan, tinjau masukan AI, dan simpan laporan analitis beserta
 
 [Panduan alur kerja](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-Buka **"Ask the archive**" di panel. Pemilih ruang kerja menentukan akun; formulir memilih obrolan dan periode pengamatan. Pencarian dijalankan secara lokal, tanpa AI. Frasa atau domain yang tepat mempersempit hasil pencarian; ID pesan meminta versi yang disimpan. Tinjau cuplikan yang ditampilkan dan buka catatan jurnal atau konteksnya. Tidak ada basis data vektor atau tindakan otomatis di Telegram.
+Gunakan **Jurnal** untuk pencarian lokal tanpa AI. Untuk **Tanyakan ke arsip**, aktifkan dan konfigurasikan terlebih dahulu penyedia di **Integrasi**. Pemilih ruang kerja menentukan akun; formulir menentukan chat dan periode pengamatan. Pengambilan data dijalankan secara lokal. Frasa atau domain yang persis mempersempit pengambilan data; ID pesan meminta versi yang disimpan. Tinjau cuplikan dan buka catatan jurnal atau konteksnya. Tidak ada basis data vektor atau tindakan otomatis di Telegram.
 
 ## Penyedia layanan dan persetujuan
 

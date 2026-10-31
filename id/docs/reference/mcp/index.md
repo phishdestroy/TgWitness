@@ -4,48 +4,86 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/mcp/
 
 Hubungkan klien MCP ke ruang kerja dan obrolan yang dipilih dengan akses yang memiliki batas waktu dan dapat dicabut.
 
-**Versi utama saat ini:** gunakan checkout sumber; pratinjau portabel 0.7.0 dirilis sebelum fitur ini tersedia.
+Hubungkan klien analis ke ruang kerja dan obrolan yang dipilih. TgWitness menyajikan **Streamable HTTP di `/mcp` dalam proses panel**. Setiap koneksi memiliki token, masa berlaku, dan alat yang diizinkan sendiri. MCP tidak dapat mengirim pesan Telegram, mengubah pengaturan, atau memodifikasi jurnal bertanda tangan.
 
 [Panduan alur kerja](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-Instal server opsional dari direktori proyek TgWitness:
+## Instal dan periksa
+
+Gunakan lingkungan Python yang menjalankan panel. Dari checkout sumber:
 
 ```
-python -m pip install '.[mcp]'
+# Windows PowerShell
+& .\.venv\Scripts\python.exe -m pip install -c deploy/constraints-mcp.txt -e '.[mcp]'
+& .\.venv\Scripts\python.exe start.py --check
 ```
 
-Di panel, buka **Integrasi → MCP**. Beri nama koneksi, pilih ruang kerja dan obrolannya, serta tentukan masa berlaku. Salin token arsip sekali saja; token ini tidak dapat diambil kembali nanti. Cabut token yang hilang dan terbitkan penggantinya. Token panel dan kredensial Telegram bukanlah kredensial MCP.
-
-## Hubungkan klien
-
-Panel tersebut menghasilkan `.vscode/mcp.json` untuk **harness Lokal VS Code** menggunakan [konfigurasi yang terdokumentasi](https://code.visualstudio.com/docs/agents/reference/mcp-configuration). Simpan berkas yang diunduh di lokasi tersebut, jalankan **MCP: List Servers**, dan mulai TgWitness. VS Code akan meminta token melalui kolom masukan kata sandi. Berkas JSON yang diunduh berisi referensi prompt, bukan token itu sendiri. Gunakan berkas eksekusi Python dari lingkungan tempat ekstensi MCP diinstal.
-
-Untuk klien stdio lainnya, jalankan:
-
 ```
-python -m tgwitness.mcp_server --api-url http://127.0.0.1:8787
+# Linux / macOS
+.venv/bin/python -m pip install -c deploy/constraints-mcp.txt -e '.[mcp]'
+.venv/bin/python start.py --check
 ```
 
-Tetapkan `TGWITNESS_ARCHIVE_TOKEN` di lingkungan terlindungi klien. Jangan memasukkannya ke dalam argumen perintah atau URL. Jembatan ini membaca melalui API arsip yang diotorisasi panel; jembatan ini tidak memiliki akses langsung ke basis data. Stdout hanya mentransmisikan pesan MCP.
+Mulai ulang panel dengan direktori data dan argumen peluncuran biasanya setelah instalasi. Pemeriksaan kesiapan harus menyertakan `[PASS] mcp: streamable-http available`. **Integrations → MCP** menampilkan status runtime dan perintah instalasi yang menggunakan eksekutabel Python aktual server tersebut. **Re-check** menyegarkan status ini tanpa memuat ulang halaman; tindakan ini tidak menginstal paket atau memulai ulang server.
 
-Untuk klien jarak jauh, jalankan layanan ini di samping panel:
+Ekstra MCP menggunakan [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk) resmi. `deploy/constraints-mcp.txt` mengunci versi SDK dan dependensi yang telah diuji. Fitur-fitur ini memerlukan kode sumber terbaru; pratinjau portabel 0.7.0 mendahului fitur-fitur tersebut.
+
+## Terbitkan koneksi
+
+1. Masukkan label dan pilih ruang kerja serta obrolan yang boleh dibaca oleh klien.
+2. Pilih alat satu per satu atau gunakan preset. Hanya alat yang telah diimplementasikan yang ditawarkan.
+3. Pilih 1, 7, 30, atau 90 hari, atau masa berlaku khusus antara satu menit hingga 90 hari.
+4. Tekan **Create connection**. Token muncul satu kali di samping konfigurasi klien.
+5. Salin token dan konfigurasi, lalu jalankan **Check connection**. Tindakan ini menginisialisasi MCP dan mencantumkan alat yang diizinkan; **tidak ada pesan yang dibaca**. Hasilnya menampilkan versi protokol, nama alat, jumlah, dan waktu yang berlalu.
+6. Tekan **Done** setelah kredensial disimpan. Polling mempertahankan formulir dan kartu yang hanya ditampilkan sekali. Mengunci panel akan menghapus rahasia yang ditampilkan.
+
+Daftar tersebut menampilkan penggunaan terkini, alat terakhir, alamat, dan permintaan dalam satu menit terakhir. **Revoke** mengakhiri akses. **Rotate token** mencabut kredensial lama dan menerbitkan pengganti dengan cakupan, alat, dan masa berlaku yang sama; salin pengganti tersebut satu kali. Token login panel dan kredensial Telegram tidak berfungsi sebagai token MCP.
+
+## Hubungkan klien Anda
+
+Pilih klien di panel dan salin konfigurasi yang dihasilkan. Konfigurasi menggunakan referensi rahasia atau placeholder eksplisit; token disalin secara terpisah.
+
+| Klien | Konfigurasi | Koneksi |
+| --- | --- | --- |
+| Claude Code | `.mcp.json` | HTTP, `type: "http"`, header bearer |
+| Claude Desktop | `claude_desktop_config.json` | Jembatan stdio lokal |
+| Cursor | `.cursor/mcp.json` | HTTP dengan header variabel lingkungan |
+| VS Code Local | `.vscode/mcp.json` | HTTP dengan input kata sandi `promptString` |
+| Windsurf | `mcp_config.json` | HTTP dengan placeholder header bearer |
+| Klien lainnya | URL dan header Authorization | Streamable HTTP |
+
+TgWitness menggunakan token bearer, tanpa penemuan OAuth. Gunakan jembatan stdio lokal untuk klien yang konektor jarak jauhnya memerlukan OAuth. Untuk VS Code, variabel input berlaku pada harness **Local** dan tidak diteruskan ke sesi Copilot. Referensi konfigurasi: [Claude Code](https://code.claude.com/docs/en/mcp), [Cursor](https://prod.cursor.com/docs/mcp), [VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration).
+
+Titik masuk kanonis untuk jembatan lokal adalah:
 
 ```
-python -m tgwitness.mcp_server --transport streamable-http \
-  --api-url http://127.0.0.1:8787 --port 8766 \
-  --public-url https://archive.example.org/mcp
+python -m tgwitness.mcp_server --url https://your-panel.example/mcp
 ```
 
-Teruskan `/mcp` melalui proxy terbalik HTTPS ke `127.0.0.1:8766/mcp`, dengan tetap mempertahankan header `Authorization: Bearer …`. Nonaktifkan pencatatan header otorisasi serta isi permintaan/respons. Lakukan pengikatan di luar loopback hanya jika diperlukan, menggunakan `--host` dan `--public-url`. Titik akhir ini menggunakan Streamable HTTP dari [SDK Python MCP](https://github.com/modelcontextprotocol/python-sdk) resmi. Endpoint ini mendukung kredensial bearer yang dikonfigurasi secara eksplisit, bukan penemuan OAuth; klien yang hanya memerlukan OAuth tidak didukung.
+Gunakan Python lokal klien yang sudah terinstal ekstra MCP. Atur `TGWITNESS_MCP_TOKEN` di lingkungan yang dilindunginya. Jauhkan kredensial dari argumen perintah dan URL. `tgwitness-mcp` adalah titik masuk yang sama. Modul lama `tgwitness.mcp_bridge` dan nama `TGWITNESS_ARCHIVE_TOKEN` tetap menjadi jalur kompatibilitas dengan peringatan; konfigurasi baru menggunakan `mcp_server` dan `TGWITNESS_MCP_TOKEN`.
 
-**Proses pemeriksaan protokol dan akses** akan menginisialisasi klien MCP yang sebenarnya serta menampilkan daftar alat. Proses ini tidak mengambil pesan. Untuk pemeriksaan jarak jauh, server MCP yang dipilih akan menerima token arsip. Konfigurasikan hanya server yang Anda kelola atau percayai dengan cakupan tersebut.
+## Cloudflare Tunnel
 
-## Ruang lingkup dan hasil
+Teruskan rute `/mcp` panel dan pertahankan header bearer. Membuka pengaturan MCP sebagai administrator akan mendaftarkan origin panel saat ini untuk proses yang sedang berjalan ini. Untuk alamat stabil yang langsung tersedia setelah mulai ulang, konfigurasikan `TGWITNESS_PUBLIC_URL` dengan origin HTTPS panel sebelum memulai panel. Header Host dan forwarded yang sembarang tidak akan mendaftarkan alamat tepercaya. Pemeriksaan Host dan Origin menolak origin browser yang tidak terkait. Respons menggunakan `Cache-Control: no-store`; nilai otorisasi tidak pernah dicatat ke dalam log.
 
-Alat yang tersedia: `list_workspaces`, `list_chats`, `search_messages`, `get_message_versions`, `get_message_context`, `get_journal_event`, dan `get_capture_status`. Tidak ada tindakan Telegram, perubahan konfigurasi, atau alat ekspor massal. Setiap kali dibaca, akses ruang kerja/obrolan diperiksa ulang; kredensial yang kedaluwarsa dan dicabut tidak lagi berfungsi. Batasannya adalah 60 permintaan API per menit per kredensial, 50 catatan per halaman, respons sebesar 64 KiB, dan batas waktu API delapan detik.
+Alamat `*.trycloudflare.com` bersifat sementara. Ketika mulai ulang tunnel mengubah nama host, perbarui URL publik yang dikonfigurasi dan URL MCP setiap klien. Gunakan nama host yang stabil untuk konfigurasi klien yang disimpan.
 
-Hasil pesan mencakup ruang kerja, ID obrolan/pesan, urutan peristiwa, hash yang disimpan, dan tautan panel. Pengguna yang membuka tautan harus memiliki sesi panel yang terotorisasi sendiri. Objek Telegram mentah, hash akses, referensi file, materi sesi, dan kunci dihilangkan. Pencarian memeriksa teks pesan, bukan bidang mentah. Teks dibatasi dan pemotongan ditandai. Pengeditan, pemberitahuan penghapusan Telegram, dan `missing_on_recheck` tetap menjadi pengamatan terpisah. Akses dalam lingkup obrolan tidak dapat melihat peristiwa operasional di seluruh ruang kerja; status penangkapan secara eksplisit menandai batasan ini.
+## Alat dan batasan
 
-Teks arsip merupakan masukan yang tidak dapat dipercaya. Instruksi di dalam pesan tidak memberikan ruang lingkup tambahan dan tidak boleh diperlakukan sebagai instruksi klien. Model AI eksternal dapat menerima konten apa pun yang diminta oleh klien MCP-nya. Akses baca-saja mencegah perubahan pada arsip; hal ini tidak mencegah klien untuk menyimpan data yang dibacanya.
+| Alat | Yang dibaca |
+| --- | --- |
+| `list_workspaces` | Ruang kerja yang diizinkan |
+| `list_chats` | Obrolan yang diizinkan |
+| `search_messages` | Teks pesan tersimpan dalam periode yang dipilih |
+| `get_message_versions` | Versi yang tertangkap dan pengamatan penghapusan |
+| `get_message_context` | ID pesan sekitar yang tertangkap |
+| `get_journal_event` | Satu catatan yang telah disanitasi beserta referensi sumbernya |
+| `get_capture_status` | Status pengumpulan dan catatan cakupan yang diizinkan |
 
-Hashes tersebut mengidentifikasi catatan yang disimpan dan mendukung pemeriksaan integritas. Hashes tersebut tidak secara mandiri membuktikan keaslian pengirim di Telegram atau bahwa setiap pesan telah terekam.
+`tools/list` hanya mengembalikan alat yang diizinkan untuk koneksi tersebut. Pemanggilan ke alat lain akan ditolak. Alat konteks grup, episode, terminologi, dan rantai balasan tidak ditawarkan dalam build ini; backend paket konteks terpisahnya tidak disertakan.
+
+Setiap pembacaan memeriksa token, alat, dan cakupan ruang kerja/obrolan, termasuk setelah pekerjaan database selesai. Batasannya adalah 60 permintaan per menit, 50 catatan per halaman, 64 KiB per hasil, dan batas waktu arsip delapan detik. Pemanggilan MCP yang kehabisan waktu mengembalikan kesalahan alat yang meminta periode yang lebih sempit atau batas yang lebih rendah.
+
+Hasil pesan memuat `untrusted_content: true`, ID ruang kerja/obrolan/pesan, urutan peristiwa, hash tersimpan, dan tautan panel. Objek Telegram mentah, hash akses, sesi, dan kunci dihilangkan. Pemotongan teks ditandai. Suntingan, pemberitahuan penghapusan, dan `missing_on_recheck` adalah pengamatan yang berbeda. Catatan yang hilang tidak membuktikan bahwa suatu peristiwa tidak pernah terjadi.
+
+Perlakukan instruksi di dalam pesan yang tertangkap sebagai bukti, jangan pernah sebagai instruksi klien. Akses baca-saja mencegah perubahan arsip; klien masih dapat menyimpan konten yang diizinkan untuk dibacanya. Hash mengidentifikasi catatan yang disimpan dan mendukung pemeriksaan integritas; hash tidak membuktikan kepengarangan Telegram atau penangkapan yang lengkap.

@@ -31,63 +31,132 @@
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="指南"><a href="../../../">首頁</a> <span aria-hidden="true">/</span> <a href="../../">文件說明</a> <span aria-hidden="true">/</span> <a href="../">參考資料</a> <span aria-hidden="true">/</span> <span aria-current="page">唯讀 MCP</span></nav>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">搜尋文件</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="可嘗試使用「代理」、「雜湊鏈」、「代幣」或「見證者」等詞彙……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜尋" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">輸入關鍵字以搜尋指南與參考資料。搜尋結果僅保留於您的瀏覽器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">參考資料 / 存檔與整合功能</p><h1>唯讀 MCP</h1><p class="guide-outcome">將 MCP 客戶端連接到選定的工作區和聊天室，並賦予其具有有效期限且可撤銷的存取權限。</p><div class="wiki-body"><p><strong>當前主要版本：</strong>請使用原始碼檢出；0.7.0 便攜版預覽版尚未包含此功能。</p>
+<article class="guide-content"><p class="eyebrow">參考資料 / 存檔與整合功能</p><h1>唯讀 MCP</h1><p class="guide-outcome">將 MCP 客戶端連接到選定的工作區和聊天室，並賦予其具有有效期限且可撤銷的存取權限。</p><div class="wiki-body"><p>將分析師用戶端連線至選定的工作區與聊天室。TgWitness <strong>在面板行程中的 <code>/mcp</code> 提供 Streamable HTTP 服務</strong>。每個連線都有獨立的權杖、到期時間與授權工具。MCP 無法傳送 Telegram 訊息、變更設定或修改已簽章的日誌。</p>
 <p><a href="https://phishdestroy.github.io/TgWitness/docs/archive/">工作流程指南</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">維基</a></p>
-<p>從 TgWitness 專案目錄安裝可選的伺服器：</p>
-<pre><code class="language-sh">python -m pip install &#x27;.[mcp]&#x27;</code></pre>
-<p>在控制面板中，開啟<strong>「整合」→「MCP」</strong>。為連線命名、選取其
-工作區與聊天室，並設定有效期限。請將存檔憑證複製一次；該憑證
-日後無法重新取得。若遺失憑證，請撤銷並發行替代憑證。控制面板憑證與
-Telegram 憑證並非 MCP 憑證。</p>
-<h2 id="connect-a-client">連接客戶端<a class="anchor" href="#connect-a-client" aria-label="此節的連結">#</a></h2>
-<p>該面板會根據
-其<a href="https://code.visualstudio.com/docs/agents/reference/mcp-configuration">文件中記載的設定</a>，為 <strong>VS Code Local 框架</strong>產生 <code>.vscode/mcp.json</code>。
-將下載的檔案儲存至該位置，執行 <strong>MCP：List Servers</strong>，並啟動
-TgWitness。VS Code 會透過密碼輸入視窗提示輸入憑證。下載的
-JSON 檔案僅包含提示參考資訊，而非憑證本身。請使用安裝有
-MCP 擴充套件之環境中的 Python 可執行檔。</p>
-<p>針對其他 stdio 客戶端，請執行：</p>
-<pre><code class="language-sh">python -m tgwitness.mcp_server --api-url http://127.0.0.1:8787</code></pre>
-<p>請在客戶端的受保護環境中設定 <code>TGWITNESS_ARCHIVE_TOKEN</code>。請勿將其
-放入命令列參數或 URL 中。橋接器透過控制面板的授權
-存檔 API 讀取資料；它無法直接存取資料庫。標準輸出僅傳輸 MCP 訊息。</p>
-<p>對於遠端客戶，請在控制面板旁執行此服務：</p>
-<pre><code class="language-sh">python -m tgwitness.mcp_server --transport streamable-http \
-  --api-url http://127.0.0.1:8787 --port 8766 \
-  --public-url https://archive.example.org/mcp</code></pre>
-<p>透過 HTTPS 反向代理將 <code>/mcp</code> 轉發至 <code>127.0.0.1:8766/mcp</code>，同時保留
-<code>Authorization: Bearer …</code> 標頭。停用授權標頭
-以及請求／回應正文的記錄。僅在必要時進行超出迴圈連接的綁定，使用
-<code>--host</code> 和 <code>--public-url</code>。此端點採用官方
-<a href="https://github.com/modelcontextprotocol/python-sdk">MCP Python SDK</a> 中的 Streamable HTTP。
-它支援明確配置的 Bearer 憑證，但不支援 OAuth 發現機制；
-僅需 OAuth 的客戶端不被支援。</p>
-<p><strong>執行檢查協定並進行存取</strong>初始化後，系統會啟動一個真實的 MCP 客戶端並列出可用工具。此過程
-不會擷取訊息。進行遠端檢查時，所選的 MCP 伺服器將接收
-存檔憑證。請僅將此權限範圍配置給您自行營運或信任的伺服器。</p>
-<h2 id="scope-and-results">範圍與成果<a class="anchor" href="#scope-and-results" aria-label="此節的連結">#</a></h2>
-<p>可用工具：<code>list_workspaces</code>、<code>list_chats</code>、<code>search_messages</code>、
-<code>get_message_versions</code>、<code>get_message_context</code>、<code>get_journal_event</code> 及
-<code>get_capture_status</code>。本工具不提供 Telegram 操作、設定變更或
-批次匯出功能。 每次讀取都會重新驗證工作區／聊天室的存取權限；已過期或遭撤銷的
-憑證將停止運作。限制包括：每份憑證每分鐘 60 次 API 請求、
-每頁 50 筆記錄、64 KiB 的回應大小，以及 8 秒的 API 超時限制。</p>
-<p>訊息結果包含工作區、聊天/訊息 ID、事件序列、儲存的雜湊值，
-以及面板連結。開啟連結的檢視者必須擁有自己的授權面板
-會話。原始 Telegram 物件、存取雜湊值、檔案參照、會話資料，
-以及金鑰均不予顯示。搜尋功能檢索的是訊息文字，而非原始欄位。 文字內容
-會被截斷，並標示截斷處。編輯紀錄、Telegram 刪除通知及
-<code>missing_on_recheck</code> 仍屬獨立的觀察項目。僅限聊天室範圍的存取權限無法查看
-工作區範圍內的運作事件；擷取狀態會明確標示此限制。</p>
-<p>存檔中的文字屬於不可信的輸入。訊息內的指示不會賦予任何額外
-權限，且不得視為客戶端指令。外部 AI 模型可能會
-接收其 MCP 客戶端所請求的任何內容。唯讀存取權限可防止
-存檔內容被修改；但無法阻止客戶端保留其讀取的資料。</p>
-<p>這些雜湊值用於識別已儲存的記錄，並支援完整性檢查。它們並不能
-獨立證明 Telegram 訊息的發送者身分，亦無法證明每則訊息均已被完整擷取。</p></div></article>
+<h2 id="install-and-check">安裝與檢查<a class="anchor" href="#install-and-check" aria-label="此節的連結">#</a></h2>
+<p>請使用執行面板的 Python 環境。從原始碼檢出目錄執行：</p>
+<pre><code class="language-powershell"># Windows PowerShell
+&amp; .\.venv\Scripts\python.exe -m pip install -c deploy/constraints-mcp.txt -e &#x27;.[mcp]&#x27;
+&amp; .\.venv\Scripts\python.exe start.py --check</code></pre>
+<pre><code class="language-sh"># Linux / macOS
+.venv/bin/python -m pip install -c deploy/constraints-mcp.txt -e &#x27;.[mcp]&#x27;
+.venv/bin/python start.py --check</code></pre>
+<p>安裝完成後，請使用慣用的資料目錄與啟動引數重新啟動面板。就緒狀態應包含 <code>[PASS] mcp: streamable-http available</code>。
+<strong>Integrations → MCP</strong> 會顯示執行階段狀態，以及使用該伺服器實際 Python 執行檔的安裝指令。<strong>Re-check</strong> 會在不重新載入頁面的情況下重新整理此狀態；它不會安裝套件或重新啟動伺服器。</p>
+<p>MCP 擴充套件使用官方的 <a href="https://github.com/modelcontextprotocol/python-sdk">MCP Python SDK</a>。
+<code>deploy/constraints-mcp.txt</code> 鎖定了經測試的 SDK 與相依套件版本。這些功能需要最新的原始碼；0.7.0 可攜式預覽版早於這些功能推出。</p>
+<h2 id="issue-a-connection">核發連線<a class="anchor" href="#issue-a-connection" aria-label="此節的連結">#</a></h2>
+<ol>
+<li>輸入標籤，並選擇允許用戶端讀取的工作區與聊天室。</li>
+<li>逐一選擇工具或使用預設組合。系統僅提供已實作的工具。</li>
+<li>選擇 1、7、30 或 90 天，或設定介於 1 分鐘至 90 天之間的自訂到期時間。</li>
+<li>按下 <strong>Create connection</strong>。權杖會在用戶端設定旁顯示一次。</li>
+<li>複製權杖與設定，接著執行 <strong>Check connection</strong>。這會初始化 MCP 並列出授權的工具；<strong>不會讀取任何訊息</strong>。結果會顯示通訊協定版本、工具名稱、數量與耗時。</li>
+<li>儲存憑證後按下 <strong>Done</strong>。輪詢期間會保留表單與僅顯示一次的卡片。鎖定面板會清除畫面上顯示的機密資訊。</li>
+</ol>
+<p>清單會顯示近期使用情況、最後使用的工具、位址以及過去一分鐘內的請求數。
+<strong>Revoke</strong> 會終止存取權限。<strong>Rotate token</strong> 會撤銷舊憑證，並核發具有相同範圍、工具與到期時間的替代權杖；請單次複製該替代權杖。
+面板登入權杖與 Telegram 憑證無法作為 MCP 權杖使用。</p>
+<h2 id="connect-your-client">連接您的用戶端<a class="anchor" href="#connect-your-client" aria-label="此節的連結">#</a></h2>
+<p>在面板中選擇用戶端並複製產生的設定。設定檔會使用機密參照或明確的預留位置；權杖需另外複製。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>用戶端</th>
+<th>設定</th>
+<th>連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude Code</td>
+<td><code>.mcp.json</code></td>
+<td>HTTP、<code>type: "http"</code>、Bearer 標頭</td>
+</tr>
+<tr>
+<td>Claude Desktop</td>
+<td><code>claude_desktop_config.json</code></td>
+<td>本機 stdio 橋接器</td>
+</tr>
+<tr>
+<td>Cursor</td>
+<td><code>.cursor/mcp.json</code></td>
+<td>使用環境變數標頭的 HTTP</td>
+</tr>
+<tr>
+<td>VS Code Local</td>
+<td><code>.vscode/mcp.json</code></td>
+<td>使用密碼 <code>promptString</code> 輸入的 HTTP</td>
+</tr>
+<tr>
+<td>Windsurf</td>
+<td><code>mcp_config.json</code></td>
+<td>使用 Bearer 標頭預留位置的 HTTP</td>
+</tr>
+<tr>
+<td>其他用戶端</td>
+<td>URL 與 Authorization 標頭</td>
+<td>Streamable HTTP</td>
+</tr>
+</tbody>
+</table></div>
+<p>TgWitness 使用 Bearer 權杖，不支援 OAuth 自動探索。若用戶端的遠端連接器要求使用 OAuth，請改用本機 stdio 橋接器。針對 VS Code，輸入變數僅適用於 <strong>Local</strong> 執行環境，不會轉發至 Copilot 工作階段。
+設定參考文件：<a href="https://code.claude.com/docs/en/mcp">Claude Code</a>、<a href="https://prod.cursor.com/docs/mcp">Cursor</a>、<a href="https://code.visualstudio.com/docs/agents/reference/mcp-configuration">VS Code</a>。</p>
+<p>本機橋接器的標準進入點為：</p>
+<pre><code class="language-sh">python -m tgwitness.mcp_server --url https://your-panel.example/mcp</code></pre>
+<p>請使用用戶端本機已安裝 MCP 擴充套件的 Python 環境。在其受保護的環境中設定 <code>TGWITNESS_MCP_TOKEN</code>。請勿將憑證寫入指令引數與 URL 中。<code>tgwitness-mcp</code> 是相同的進入點。舊的 <code>tgwitness.mcp_bridge</code> 模組與 <code>TGWITNESS_ARCHIVE_TOKEN</code> 名稱仍作為相容性路徑保留並會發出警告；新的設定請使用 <code>mcp_server</code> 與 <code>TGWITNESS_MCP_TOKEN</code>。</p>
+<h2 id="cloudflare-tunnel">Cloudflare Tunnel<a class="anchor" href="#cloudflare-tunnel" aria-label="此節的連結">#</a></h2>
+<p>轉發面板的 <code>/mcp</code> 路由並保留 Bearer 標頭。以管理員身分開啟 MCP 設定時，會為當次執行註冊面板目前的來源位址（Origin）。
+若要在重新啟動後立即擁有穩定的可用位址，請在啟動面板前，將面板的 HTTPS 來源位址設定至 <code>TGWITNESS_PUBLIC_URL</code>。
+任意的 Host 與轉發標頭不會註冊為受信任的位址。
+Host 與 Origin 檢查會拒絕不相關的瀏覽器來源。回應會使用 <code>Cache-Control: no-store</code>；授權值絕不會被記錄至日誌中。</p>
+<p><code>*.trycloudflare.com</code> 位址是暫時性的。當通道重新啟動並變更主機名稱時，請更新已設定的公開 URL 以及各個用戶端的 MCP URL。針對需要儲存的用戶端設定，請使用穩定的主機名稱。</p>
+<h2 id="tools-and-boundaries">工具與權限邊界<a class="anchor" href="#tools-and-boundaries" aria-label="此節的連結">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>工具</th>
+<th>讀取內容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list_workspaces</code></td>
+<td>已授權的工作區</td>
+</tr>
+<tr>
+<td><code>list_chats</code></td>
+<td>已授權的聊天室</td>
+</tr>
+<tr>
+<td><code>search_messages</code></td>
+<td>指定期間內已儲存的訊息文字</td>
+</tr>
+<tr>
+<td><code>get_message_versions</code></td>
+<td>已擷取的版本與刪除觀測記錄</td>
+</tr>
+<tr>
+<td><code>get_message_context</code></td>
+<td>鄰近的已擷取訊息 ID</td>
+</tr>
+<tr>
+<td><code>get_journal_event</code></td>
+<td>單筆經過清理的記錄及其來源參照</td>
+</tr>
+<tr>
+<td><code>get_capture_status</code></td>
+<td>收集狀態與授權的涵蓋範圍記錄</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>tools/list</code> 僅會回傳授予該連線的工具。對其他工具的呼叫將會被拒絕。此組建不提供群組脈絡、事件片段（episode）、術語及回覆鏈工具；系統未包含這些工具獨立的 context-pack 後端。</p>
+<p>每次讀取都會檢查權杖、工具以及工作區／聊天室範圍，包含在資料庫作業完成之後的檢查。限制為每分鐘 60 次請求、每頁 50 筆記錄、每筆結果 64 KiB，以及 8 秒的封存查詢時限。逾時的 MCP 呼叫會回傳工具錯誤，要求縮小時間範圍或降低筆數上限。</p>
+<p>訊息結果包含 <code>untrusted_content: true</code>、工作區／聊天室／訊息 ID、事件序號、已儲存的雜湊值以及面板連結。原始 Telegram 物件、存取雜湊（access hashes）、工作階段與金鑰均會被省略。文字截斷處會加以標記。編輯、刪除通知與 <code>missing_on_recheck</code> 為各自獨立的觀測結果。缺少記錄並不能證明某個事件從未發生。</p>
+<p>請將擷取訊息內的指示視為證據，切勿將其作為用戶端指令執行。唯讀存取權限可防止封存內容遭竄改；但用戶端仍可保留其獲准讀取的內容。雜湊值用於識別已儲存的記錄並支援完整性檢查；它們無法證明 Telegram 的作者身分或擷取內容的完整性。</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/MCP.md">在 GitHub 上編輯此頁面 ↗</a><a class="next-guide" href="../media-analysis/"><span>下一步</span><strong>本地 OCR 與文字轉錄 →</strong></a><p>這些指南描述了當前的實作方式。驗證結果與尚存的缺口將另行記錄。 <a href="../verification/">已測試的內容 →</a></p></footer>
 </main>
-<aside class="toc" aria-label="本頁內容"><p class="nav-label">本頁內容</p><a href="#connect-a-client">連接客戶端</a><a href="#scope-and-results">範圍與成果</a></aside>
+<aside class="toc" aria-label="本頁內容"><p class="nav-label">本頁內容</p><a href="#install-and-check">安裝與檢查</a><a href="#issue-a-connection">核發連線</a><a href="#connect-your-client">連接您的用戶端</a><a href="#cloudflare-tunnel">Cloudflare Tunnel</a><a href="#tools-and-boundaries">工具與權限邊界</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>開源 · 可在您的機器上運行</span><a href="../../../../LICENSE">MIT 授權條款</a><a href="../notice/">操作員公告</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">安全性</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "等待訊息", "Step through a fictional send, edit and delete.": "透過一個虛構的發送、編輯和刪除流程逐步了解操作。", "No observations yet. Start the sequence or advance one event.": "目前尚無觀察記錄。開始執行序列或跳至下一則事件。", "Meet at 10:00": "上午 10:00 見面", "A new message is visible in the chat.": "聊天室中顯示了一則新訊息。", "Record 1 appended: the collector observed the original message.": "新增記錄 1 筆：收集器已偵測到原始訊息。", "Meet at 11:00": "上午 11:00 見面", "The current text changes. The earlier observation stays.": "當前文本有所變更。先前的觀察結果維持不變。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "新增記錄 2：此編輯為一項新觀察結果。記錄 1 仍保留原始文字。", "Message deleted": "訊息已刪除", "The message has disappeared from the chat view.": "該訊息已從聊天視圖中消失。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "新增「Record 3」：刪除通知將與兩個被觀察到的版本一併保留。", "0 records": "0 筆記錄", "1 record": "1 筆記錄", "2 records": "2 筆記錄", "3 records": "3 筆記錄", "Complete / {n} of 3": "完成 / {n} 共 3 項", "Step / {n} of 3": "步驟 / 3 中的 {n}", "Pause": "暫停", "Replay sequence": "重播序列", "Play sequence": "播放順序", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "靜態範例已上線。若要互動式計算雜湊值，請透過 HTTPS 開啟此頁面，或使用支援 Web Crypto 的 localhost 預覽。", "No record supplied": "未提供記錄", "Tail removed": "尾部內容已移除", "≠ saved hash": "≠ 已儲存的雜湊值", "Rebuilt · different hash": "重新建置 · 不同雜湊值", "= saved hash": "= 儲存的雜湊值", "Same length and matching head.": "篇幅相同且標題一致。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "這三個計算出的雜湊值均與儲存的雜湊值相符。此樣本符合保留的三筆記錄邊界。", "Same saved head; the journal prefix fails verification.": "儲存的標題相同；但日誌前綴無法通過驗證。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "記錄 2 已與其儲存的雜湊值不符。若僅檢查最後儲存的「頭部」，將無法發現此問題；驗證器會檢查每一筆記錄。", "Head differs from the retained checkpoint.": "標題與保留的檢查點不同。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "重建的雜湊值彼此關聯，但最終的頭部已發生變更。保留的檢查點會拒絕此歷史記錄。若記錄內容遭變更，原始簽名亦將驗證失敗。", "Too short: 2 supplied records \u003c 3 retained records.": "過短：提供的 2 筆記錄 \u003c 保留的 3 筆記錄。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "剩餘的兩個雜湊值仍然匹配。保留的檢查點揭示了缺失的部分。若無該較早的邊界，僅憑這個較短的前綴是無法揭露此遺漏的。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "此瀏覽器無法進行雜湊運算。下方的公式與靜態說明仍可正常顯示。", "{n} records": "{n} 筆記錄", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "已接受：計數持續增加，簽名經驗證無誤，且金鑰匹配。該見證者保留此新界限。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "回滾：簽名答覆所報告的記錄數量少於最後一個被接受的檢查點。Witness 會記錄此問題，並保留較早的被接受邊界。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "分叉（Fork）：分支數量未變，但分支頭不同。該見證系統會記錄此分歧，並保留先前被接受的分支邊界。", "No answer": "無回應", "boundary unknown": "邊界未知", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "無回應：Witness 會記錄驗證失敗的狀況。它無法判定收集器的當前狀態。若 Witness 仍能連線至 Bot API，且其發布政策允許，則可發布該次失敗的紀錄。", "Send {n}": "傳送 {n}", "Edit {n}": "編輯 {n}", "Delete {n}": "刪除 {n}", "Both accounts captured all six expected observations in this example.": "在此範例中，兩個帳戶均完整記錄了預期的六項觀察結果。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "帳號 B 仍成功擷取了 6 則中的 6 則。其中兩則收據的擷取時間較長。擷取率與收據延遲反映的是不同的問題。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "帳戶 B 在截止時間前成功擷取了 6 項中的 5 項（83.3%）。遺漏的那項編輯操作未測得任何延遲。此結果僅描述這六項受控操作。", "not observed by cutoff": "未在截止時間前觀察到", "{s} seconds": "{s} 秒", "Exact values follow in the table.": "具體數值詳見下表。", "{s} s": "{s} s", "Not observed": "未觀察到", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "四個聊天室提供了不同的觀察結果。請追蹤每項連結的原始記錄；若未標明發送者，請勿將該頻道貼文歸屬於使用者 71001。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "記錄 #146 和 #205 顯示相同的發送者 ID：71001。這將兩個聊天室中觀察到的 Telegram 帳號貼文相互連結。此資訊並未識別任何現實世界中的人士，亦未歸屬該頻道貼文的來源。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "目的地 pay.example.invalid/new 出現在群組記錄 #146、機器人鍵盤 #173、頻道編輯 #188 以及私人訊息 #205 中。重複出現的目的地將這些資料連結起來；但這並不能證明這些帳戶受共同控制。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "在此虛構案例中，已完成的媒體收據 #151 與 #209 具有完全相同的 SHA-256 值。請比較實際位元組及其相關的訊息記錄。該匹配檔案並未標示其創建者，亦無法證明是由誰轉發的。", "the encrypted off-site copy": "加密的異地備份", "notifications": "通知", "checkpoint hashes for timestamps": "時間戳記的檢查點雜湊值", "signed checkpoints for the witness": "TgWitness 的簽名檢查點", "Switched on in this example": "此範例中已啟用", "Optional · off by default": "可選 · 預設為關閉", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "離開這台機器時：Telegram 連線及 {list}。除此之外別無他物。", "Default: only the Telegram connection leaves this machine.": "預設設定：僅 Telegram 連線會離開這台機器。", "{done} of {total} done": "已完成 {done}/{total}", "Mark step {n} as done": "將步驟 {n} 標記為已完成", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "複製", "Copied": "複製", "Command copied.": "指令已複製。", "Selected — Ctrl/Cmd+C": "選取 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "已選取指令。請手動複製。", "Command copied to clipboard.": "指令已複製至剪貼簿。", "Select text": "選取文字", "Clipboard unavailable. Command selected; copy it manually.": "剪貼簿無法使用。已選取指令；請手動複製。", "A message arrives. The first observation is saved.": "一則訊息送達。首項觀察記錄已儲存。", "The time changes. Both captured versions stay.": "時間雖變，但兩份記錄版本皆保留。", "The message disappears. The captured history remains.": "訊息雖已消失，但被擷取的歷史紀錄依然存在。", "Pause example animation": "暫停範例動畫", "Play example animation": "播放範例動畫", "Play": "播放", "Full-size workspace screenshot": "全螢幕工作區螢幕截圖", "Workspace screenshot · fictional data": "工作區螢幕截圖 · 虛構資料", "Close": "關閉", "Close screenshot": "關閉螢幕截圖", "Scrollable full-size screenshot": "可捲動的全螢幕截圖", "Enlarge: {name}": "放大：{name}", "View full size": "檢視完整尺寸"}</script>

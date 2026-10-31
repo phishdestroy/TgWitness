@@ -33,11 +33,11 @@
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">ドキュメントを検索する</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="「プロキシ」、「ハッシュチェーン」、「トークン」、または「ウィットネス」などを試してみてください…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="検索を明確にする" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">ガイドやリファレンスを検索するには、単語を入力してください。検索はブラウザ内で行われます。</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="eyebrow">参考文献 / アーカイブと連携機能</p><h1>アーカイブ分析</h1><p class="guide-outcome">保存されたメッセージを検索し、AIの入力内容を検証し、出典情報を記載した分析レポートを管理できます。</p><div class="wiki-body"><p><strong>現在のメインバージョン：</strong>ソースコードをチェックアウトして使用してください。0.7.0のポータブルプレビュー版には、この機能が実装されていません。</p>
 <p><a href="https://phishdestroy.github.io/TgWitness/docs/archive/">ワークフローガイド</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
-<p>パネル内の<strong>「アーカイブを検索」</strong>を開きます。ワークスペースセレクターでアカウントを選択し、
-フォームでチャットと監視期間を選択します。検索はAIを使用せず、
-ローカルで実行されます。完全一致のフレーズやドメインで検索結果を絞り込み、メッセージIDを入力すると
-保存されたバージョンを取得できます。返された抜粋を確認し、そのジャーナル記録や文脈を開くことができます。
-ベクトルデータベースやTelegramに対する自動操作は一切行われません。</p>
+<p>AIを使用しないローカル検索には<strong>ジャーナル</strong>を使用します。<strong>アーカイブに問い合わせる</strong>を使用するには、まず<strong>連携機能</strong>でプロバイダーを有効化して設定してください。ワークスペースセレクターでアカウントを選択し、
+フォームでチャットと監視期間を選択します。取得処理はローカルで実行されます。
+完全一致のフレーズやドメインで取得対象を絞り込み、メッセージIDを指定すると保存された
+バージョンを取得します。抜粋を確認し、そのジャーナル記録や文脈を開いてください。
+ベクトルデータベースやTelegramに対する自動操作はありません。</p>
 <h2 id="providers-and-consent">プロバイダーおよび同意<a class="anchor" href="#providers-and-consent" aria-label="このセクションへのリンク">#</a></h2>
 <p>AI機能は、すべてのワークスペースで初期状態では無効になっています。モデル、エンドポイント、暗号化されたAPIキー、コンテキスト／出力の制限、タイムアウト、および1日あたりの
 リクエスト上限の設定は、メイン管理者のみが変更可能です。キーはブラウザに返されることはありません。現在のキーを維持するには、キーフィールドを空白のままにしておくか、

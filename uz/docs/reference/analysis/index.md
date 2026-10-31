@@ -8,7 +8,7 @@ Saqlangan xabarlarni qidiring, sun'iy intellekt kirimlarini ko'rib chiqing va ma
 
 [Ish jarayoni bo'yicha qo'llanma](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-Panelda **Arxivni** oching. Ish maydoni tanlovchisi hisobni tanlaydi; forma suhbatlar va kuzatuv davrini belgilaydi. Qidiruv mahalliy tarzda, AI ishtirokisiz amalga oshiriladi. Aniq ibora yoki domen natijalarni toraytiradi; xabar ID saqlangan versiyalarni so'raydi. Qaytarilgan parchalarni ko'rib chiqing va ularning jurnal yozuvlari yoki kontekstini oching. Vektor ma'lumotlar bazasi yoki Telegramning avtomatik harakati yo'q.
+AIsiz mahalliy qidiruv uchun **Jurnal** bo'limidan foydalaning. **Arxivdan so'rang** funksiyasidan foydalanish uchun avval **Integratsiyalar** bo'limida provayderni yoqing va sozlang. Ish maydoni tanlovchisi hisobni tanlaydi; forma chatlar va kuzatuv davrini tanlaydi. Ma'lumotlarni izlab topish mahalliy tarzda bajariladi. Aniq ibora yoki domen izlash doirasini toraytiradi; xabar ID esa saqlangan versiyalarni so'raydi. Parchalarni ko'rib chiqing va ularning jurnal yozuvlari yoki kontekstini oching. Vektor ma'lumotlar bazasi ham, Telegramda avtomatik amallar ham yo'q.
 
 ## Provayderlar va rozilik
 

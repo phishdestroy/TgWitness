@@ -4,48 +4,86 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 將 MCP 客戶端連接到選定的工作區和聊天室，並賦予其具有有效期限且可撤銷的存取權限。
 
-**當前主要版本：**請使用原始碼檢出；0.7.0 便攜版預覽版尚未包含此功能。
+將分析師用戶端連線至選定的工作區與聊天室。TgWitness **在面板行程中的 `/mcp` 提供 Streamable HTTP 服務**。每個連線都有獨立的權杖、到期時間與授權工具。MCP 無法傳送 Telegram 訊息、變更設定或修改已簽章的日誌。
 
 [工作流程指南](https://phishdestroy.github.io/TgWitness/docs/archive/) · [維基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-從 TgWitness 專案目錄安裝可選的伺服器：
+## 安裝與檢查
+
+請使用執行面板的 Python 環境。從原始碼檢出目錄執行：
 
 ```
-python -m pip install '.[mcp]'
+# Windows PowerShell
+& .\.venv\Scripts\python.exe -m pip install -c deploy/constraints-mcp.txt -e '.[mcp]'
+& .\.venv\Scripts\python.exe start.py --check
 ```
 
-在控制面板中，開啟**「整合」→「MCP」**。為連線命名、選取其 工作區與聊天室，並設定有效期限。請將存檔憑證複製一次；該憑證 日後無法重新取得。若遺失憑證，請撤銷並發行替代憑證。控制面板憑證與 Telegram 憑證並非 MCP 憑證。
-
-## 連接客戶端
-
-該面板會根據 其[文件中記載的設定](https://code.visualstudio.com/docs/agents/reference/mcp-configuration)，為 **VS Code Local 框架**產生 `.vscode/mcp.json`。 將下載的檔案儲存至該位置，執行 **MCP：List Servers**，並啟動 TgWitness。VS Code 會透過密碼輸入視窗提示輸入憑證。下載的 JSON 檔案僅包含提示參考資訊，而非憑證本身。請使用安裝有 MCP 擴充套件之環境中的 Python 可執行檔。
-
-針對其他 stdio 客戶端，請執行：
-
 ```
-python -m tgwitness.mcp_server --api-url http://127.0.0.1:8787
+# Linux / macOS
+.venv/bin/python -m pip install -c deploy/constraints-mcp.txt -e '.[mcp]'
+.venv/bin/python start.py --check
 ```
 
-請在客戶端的受保護環境中設定 `TGWITNESS_ARCHIVE_TOKEN`。請勿將其 放入命令列參數或 URL 中。橋接器透過控制面板的授權 存檔 API 讀取資料；它無法直接存取資料庫。標準輸出僅傳輸 MCP 訊息。
+安裝完成後，請使用慣用的資料目錄與啟動引數重新啟動面板。就緒狀態應包含 `[PASS] mcp: streamable-http available`。 **Integrations → MCP** 會顯示執行階段狀態，以及使用該伺服器實際 Python 執行檔的安裝指令。**Re-check** 會在不重新載入頁面的情況下重新整理此狀態；它不會安裝套件或重新啟動伺服器。
 
-對於遠端客戶，請在控制面板旁執行此服務：
+MCP 擴充套件使用官方的 [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk)。 `deploy/constraints-mcp.txt` 鎖定了經測試的 SDK 與相依套件版本。這些功能需要最新的原始碼；0.7.0 可攜式預覽版早於這些功能推出。
+
+## 核發連線
+
+1. 輸入標籤，並選擇允許用戶端讀取的工作區與聊天室。
+2. 逐一選擇工具或使用預設組合。系統僅提供已實作的工具。
+3. 選擇 1、7、30 或 90 天，或設定介於 1 分鐘至 90 天之間的自訂到期時間。
+4. 按下 **Create connection**。權杖會在用戶端設定旁顯示一次。
+5. 複製權杖與設定，接著執行 **Check connection**。這會初始化 MCP 並列出授權的工具；**不會讀取任何訊息**。結果會顯示通訊協定版本、工具名稱、數量與耗時。
+6. 儲存憑證後按下 **Done**。輪詢期間會保留表單與僅顯示一次的卡片。鎖定面板會清除畫面上顯示的機密資訊。
+
+清單會顯示近期使用情況、最後使用的工具、位址以及過去一分鐘內的請求數。 **Revoke** 會終止存取權限。**Rotate token** 會撤銷舊憑證，並核發具有相同範圍、工具與到期時間的替代權杖；請單次複製該替代權杖。 面板登入權杖與 Telegram 憑證無法作為 MCP 權杖使用。
+
+## 連接您的用戶端
+
+在面板中選擇用戶端並複製產生的設定。設定檔會使用機密參照或明確的預留位置；權杖需另外複製。
+
+| 用戶端 | 設定 | 連結 |
+| --- | --- | --- |
+| Claude Code | `.mcp.json` | HTTP、`type: "http"`、Bearer 標頭 |
+| Claude Desktop | `claude_desktop_config.json` | 本機 stdio 橋接器 |
+| Cursor | `.cursor/mcp.json` | 使用環境變數標頭的 HTTP |
+| VS Code Local | `.vscode/mcp.json` | 使用密碼 `promptString` 輸入的 HTTP |
+| Windsurf | `mcp_config.json` | 使用 Bearer 標頭預留位置的 HTTP |
+| 其他用戶端 | URL 與 Authorization 標頭 | Streamable HTTP |
+
+TgWitness 使用 Bearer 權杖，不支援 OAuth 自動探索。若用戶端的遠端連接器要求使用 OAuth，請改用本機 stdio 橋接器。針對 VS Code，輸入變數僅適用於 **Local** 執行環境，不會轉發至 Copilot 工作階段。 設定參考文件：[Claude Code](https://code.claude.com/docs/en/mcp)、[Cursor](https://prod.cursor.com/docs/mcp)、[VS Code](https://code.visualstudio.com/docs/agents/reference/mcp-configuration)。
+
+本機橋接器的標準進入點為：
 
 ```
-python -m tgwitness.mcp_server --transport streamable-http \
-  --api-url http://127.0.0.1:8787 --port 8766 \
-  --public-url https://archive.example.org/mcp
+python -m tgwitness.mcp_server --url https://your-panel.example/mcp
 ```
 
-透過 HTTPS 反向代理將 `/mcp` 轉發至 `127.0.0.1:8766/mcp`，同時保留 `Authorization: Bearer …` 標頭。停用授權標頭 以及請求／回應正文的記錄。僅在必要時進行超出迴圈連接的綁定，使用 `--host` 和 `--public-url`。此端點採用官方 [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk) 中的 Streamable HTTP。 它支援明確配置的 Bearer 憑證，但不支援 OAuth 發現機制； 僅需 OAuth 的客戶端不被支援。
+請使用用戶端本機已安裝 MCP 擴充套件的 Python 環境。在其受保護的環境中設定 `TGWITNESS_MCP_TOKEN`。請勿將憑證寫入指令引數與 URL 中。`tgwitness-mcp` 是相同的進入點。舊的 `tgwitness.mcp_bridge` 模組與 `TGWITNESS_ARCHIVE_TOKEN` 名稱仍作為相容性路徑保留並會發出警告；新的設定請使用 `mcp_server` 與 `TGWITNESS_MCP_TOKEN`。
 
-**執行檢查協定並進行存取**初始化後，系統會啟動一個真實的 MCP 客戶端並列出可用工具。此過程 不會擷取訊息。進行遠端檢查時，所選的 MCP 伺服器將接收 存檔憑證。請僅將此權限範圍配置給您自行營運或信任的伺服器。
+## Cloudflare Tunnel
 
-## 範圍與成果
+轉發面板的 `/mcp` 路由並保留 Bearer 標頭。以管理員身分開啟 MCP 設定時，會為當次執行註冊面板目前的來源位址（Origin）。 若要在重新啟動後立即擁有穩定的可用位址，請在啟動面板前，將面板的 HTTPS 來源位址設定至 `TGWITNESS_PUBLIC_URL`。 任意的 Host 與轉發標頭不會註冊為受信任的位址。 Host 與 Origin 檢查會拒絕不相關的瀏覽器來源。回應會使用 `Cache-Control: no-store`；授權值絕不會被記錄至日誌中。
 
-可用工具：`list_workspaces`、`list_chats`、`search_messages`、 `get_message_versions`、`get_message_context`、`get_journal_event` 及 `get_capture_status`。本工具不提供 Telegram 操作、設定變更或 批次匯出功能。 每次讀取都會重新驗證工作區／聊天室的存取權限；已過期或遭撤銷的 憑證將停止運作。限制包括：每份憑證每分鐘 60 次 API 請求、 每頁 50 筆記錄、64 KiB 的回應大小，以及 8 秒的 API 超時限制。
+`*.trycloudflare.com` 位址是暫時性的。當通道重新啟動並變更主機名稱時，請更新已設定的公開 URL 以及各個用戶端的 MCP URL。針對需要儲存的用戶端設定，請使用穩定的主機名稱。
 
-訊息結果包含工作區、聊天/訊息 ID、事件序列、儲存的雜湊值， 以及面板連結。開啟連結的檢視者必須擁有自己的授權面板 會話。原始 Telegram 物件、存取雜湊值、檔案參照、會話資料， 以及金鑰均不予顯示。搜尋功能檢索的是訊息文字，而非原始欄位。 文字內容 會被截斷，並標示截斷處。編輯紀錄、Telegram 刪除通知及 `missing_on_recheck` 仍屬獨立的觀察項目。僅限聊天室範圍的存取權限無法查看 工作區範圍內的運作事件；擷取狀態會明確標示此限制。
+## 工具與權限邊界
 
-存檔中的文字屬於不可信的輸入。訊息內的指示不會賦予任何額外 權限，且不得視為客戶端指令。外部 AI 模型可能會 接收其 MCP 客戶端所請求的任何內容。唯讀存取權限可防止 存檔內容被修改；但無法阻止客戶端保留其讀取的資料。
+| 工具 | 讀取內容 |
+| --- | --- |
+| `list_workspaces` | 已授權的工作區 |
+| `list_chats` | 已授權的聊天室 |
+| `search_messages` | 指定期間內已儲存的訊息文字 |
+| `get_message_versions` | 已擷取的版本與刪除觀測記錄 |
+| `get_message_context` | 鄰近的已擷取訊息 ID |
+| `get_journal_event` | 單筆經過清理的記錄及其來源參照 |
+| `get_capture_status` | 收集狀態與授權的涵蓋範圍記錄 |
 
-這些雜湊值用於識別已儲存的記錄，並支援完整性檢查。它們並不能 獨立證明 Telegram 訊息的發送者身分，亦無法證明每則訊息均已被完整擷取。
+`tools/list` 僅會回傳授予該連線的工具。對其他工具的呼叫將會被拒絕。此組建不提供群組脈絡、事件片段（episode）、術語及回覆鏈工具；系統未包含這些工具獨立的 context-pack 後端。
+
+每次讀取都會檢查權杖、工具以及工作區／聊天室範圍，包含在資料庫作業完成之後的檢查。限制為每分鐘 60 次請求、每頁 50 筆記錄、每筆結果 64 KiB，以及 8 秒的封存查詢時限。逾時的 MCP 呼叫會回傳工具錯誤，要求縮小時間範圍或降低筆數上限。
+
+訊息結果包含 `untrusted_content: true`、工作區／聊天室／訊息 ID、事件序號、已儲存的雜湊值以及面板連結。原始 Telegram 物件、存取雜湊（access hashes）、工作階段與金鑰均會被省略。文字截斷處會加以標記。編輯、刪除通知與 `missing_on_recheck` 為各自獨立的觀測結果。缺少記錄並不能證明某個事件從未發生。
+
+請將擷取訊息內的指示視為證據，切勿將其作為用戶端指令執行。唯讀存取權限可防止封存內容遭竄改；但用戶端仍可保留其獲准讀取的內容。雜湊值用於識別已儲存的記錄並支援完整性檢查；它們無法證明 Telegram 的作者身分或擷取內容的完整性。

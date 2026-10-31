@@ -33,10 +33,44 @@
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Cari dalam dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Cuba proksi, rantaian hash, token atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Carian jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Taip satu perkataan untuk mencari panduan dan rujukan. Carian kekal di pelayar anda.</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="language-notice">Halaman ini hanya tersedia dalam bahasa Inggeris.</p><p class="eyebrow">Rujukan / Keselamatan &amp; projek</p><h1>Logs perubahan</h1><p class="guide-outcome">Setiap perubahan mengikut versi, termasuk perubahan yang belum dikeluarkan.</p><div class="wiki-body" lang=en dir=ltr><h2 id="unreleased">Unreleased<a class="anchor" href="#unreleased" aria-label="Pautan ke bahagian ini">#</a></h2>
 <ul>
-<li>Kept disabled AI out of the sidebar and attachment actions. Provider setup lives
+<li>Added workspace-aware panel URLs, Back/Forward navigation and an active-view
+    lifecycle. Background updates preserve form drafts and focus; settings can be
+    saved with Ctrl/Cmd+S. Submitted secrets never become a Discard baseline.</li>
+<li>Reorganized Sources into Scope, Chats and Recording with one recording save;
+    Parameters now have search, section links, inline validation and a reset preview.</li>
+<li>Kept chat navigation and messages in separate scrolling columns, with compact
+    actions, source filters, priority and distinct conversation views/message filters.</li>
+<li>Added combined journal filters, cursor windows and a desktop record inspector.
+    Routine system events are hidden by default and remain available with a toggle.</li>
+<li>
+<p>Added grouped notifications, focused health actions, workspace summaries and
+    access presets. Export preparation history records byte counts and hashes without
+    changing signed evidence. See <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/FRONTEND.md">panel development</a> for module ownership
+    and the remaining extraction plan.</p>
+</li>
+<li>
+<p>Serve read-only MCP at the panel's <code>/mcp</code> endpoint. Connections select their
+    tools and scope, support token rotation and report recent use. Client setup
+    uses <code>tgwitness.mcp_server</code> and <code>TGWITNESS_MCP_TOKEN</code>; the runtime check provides
+    an installation command when the optional SDK is absent. Setup forms keep
+    their drafts, and protocol checks list tools without reading messages.</p>
+</li>
+<li>Keep report settings separate when switching workspaces. Cancelled exports
+    finish their file worker before releasing the lock and remove temporary data;
+    failed downloads clean up too. Scoped source actions return only allowed chats.</li>
+<li>
+<p>Refuse account/connection replacement during exports; roll back interrupted
+    collector startup and bound TLS shutdown. Local export write failures stop
+    immediately instead of skipping records. Verify signed attachment and avatar
+    references during export checks and backup restore, and reject invalid TSA
+    certificate constraints and broken storage pagination.</p>
+</li>
+<li>
+<p>Kept disabled AI out of the sidebar and attachment actions. Provider setup lives
     in Integrations; local recognition appears only when its worker is configured.
     Connection settings now show the fields for the selected route, with the
-    automatic MTProxy catalog available on demand.</li>
+    automatic MTProxy catalog available on demand.</p>
+</li>
 <li>Added inline and side-by-side edit comparisons, separate changes to hidden links
     and bot buttons, attachment previews and image zoom. The preserved original stays
     downloadable. Preview reads stop at 32 MiB; the browser cache holds at most 40

@@ -22,7 +22,7 @@ I dati acquisiti, il testo riconosciuto e le conclusioni degli analisti rimangon
 
 ## Carica i messaggi precedenti
 
-1. Open **Sources**: esamina le chat abilitate e avvia l’osservazione.
+1. Aprire **Fonti → Chat nell'ambito**, esaminare le chat abilitate e avviare l’osservazione.
 2. Selezionare **«Carica cronologia completa**». L’esecuzione utilizza l’elenco delle fonti selezionato in quel momento.
 3. Utilizzare **«Cronologia delle pause»** e **«Cronologia delle riprese»** secondo necessità. Dopo un riavvio, riprendere esplicitamente.
 4. Verificare i risultati per ciascuna fonte e la coda degli allegati. Salvare il rapporto sullo stato di avanzamento firmato insieme all’esportazione delle prove.
@@ -31,9 +31,9 @@ Questa operazione riempie l’area di lavoro con i messaggi disponibili. L’esp
 
 ## Prima cerca, poi decidi in merito all’IA
 
-1. Apri **«Chiedi all’archivio**». Scegli un’area di lavoro, le chat e il periodo di osservazione.
-2. Cerca una frase, un dominio o un ID messaggio. Apri il record corrispondente e le sue versioni salvate.
-3. Per l’analisi tramite IA, l’amministratore deve innanzitutto configurare un provider. Esaminare **i dati inviati al modello** e deselezionare gli estratti indesiderati prima di approvare la richiesta.
+1. Aprire **Registro** per la ricerca locale. Scegliere un’area di lavoro e usare i filtri per fonte e periodo.
+2. Cerca una frase o un dominio. Apri il record corrispondente e le sue versioni salvate.
+3. Per l’analisi tramite IA, l’amministratore abilita e configura un provider in **Integrazioni**. Aprire **Chieda all’archivio** e scegliere le chat e un periodo. Esaminare la sezione **Dati inviati al modello** e deselezionare gli estratti indesiderati prima di approvare la richiesta.
 4. Controlla i riferimenti restituiti. Salva la risposta come rapporto e aggiungi le tue revisioni o note.
 
 Le ricerche vengono eseguite localmente senza l’uso dell’intelligenza artificiale. I rapporti analitici conservano i riferimenti alle fonti e la cronologia delle revisioni; sono separati dal registro firmato. [Configurazione del provider e rapporti](https://phishdestroy.github.io/TgWitness/it/docs/reference/analysis/).

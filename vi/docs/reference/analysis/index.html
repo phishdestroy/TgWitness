@@ -33,11 +33,12 @@
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Tìm kiếm trong tài liệu</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Hãy thử các thuật ngữ như proxy, chuỗi băm, token hoặc witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Tìm kiếm rõ ràng" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Hãy nhập một từ khóa để tìm kiếm trong các hướng dẫn và tài liệu tham khảo. Kết quả tìm kiếm sẽ được lưu lại trong trình duyệt của quý vị.</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="eyebrow">Tham khảo / Lưu trữ &amp; tích hợp</p><h1>Phân tích kho lưu trữ</h1><p class="guide-outcome">Tìm kiếm các tin nhắn đã lưu, xem lại các đầu vào từ AI và lưu giữ các báo cáo phân tích kèm theo nguồn tham khảo.</p><div class="wiki-body"><p><strong>Phiên bản chính hiện tại:</strong> sử dụng bản checkout từ kho nguồn; phiên bản xem trước di động 0.7.0 ra mắt trước khi tính năng này được triển khai.</p>
 <p><a href="https://phishdestroy.github.io/TgWitness/docs/archive/">Hướng dẫn quy trình làm việc</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md">Wiki</a></p>
-<p>Mở <strong>&quot;Ask the archive</strong>&quot; trong bảng điều khiển. Trình chọn không gian làm việc chọn tài khoản;
-biểu mẫu chọn các cuộc trò chuyện và khoảng thời gian quan sát. Tìm kiếm được thực hiện cục bộ, không
-sử dụng AI. Một cụm từ chính xác hoặc tên miền sẽ thu hẹp kết quả tìm kiếm; ID tin nhắn yêu cầu các
-phiên bản đã lưu. Xem lại các đoạn trích được trả về và mở bản ghi nhật ký hoặc bối cảnh của chúng.
-Không có cơ sở dữ liệu vectơ hay hành động tự động trên Telegram.</p>
+<p>Dùng <strong>Sổ nhật ký</strong> để tìm kiếm cục bộ mà không cần AI. Để dùng <strong>Hỏi kho lưu trữ</strong>, trước tiên hãy bật
+và cấu hình một nhà cung cấp trong <strong>Tích hợp</strong>. Trình chọn không gian làm việc dùng để chọn
+tài khoản; biểu mẫu dùng để chọn các cuộc trò chuyện và khoảng thời gian quan sát. Việc truy xuất được thực hiện
+cục bộ. Một cụm từ chính xác hoặc tên miền sẽ thu hẹp phạm vi truy xuất; ID tin nhắn sẽ yêu cầu các phiên bản
+đã lưu. Hãy xem lại các đoạn trích và mở bản ghi nhật ký hoặc ngữ cảnh của chúng.
+Không có cơ sở dữ liệu vectơ hay hành động tự động nào trên Telegram.</p>
 <h2 id="providers-and-consent">Nhà cung cấp và sự đồng ý<a class="anchor" href="#providers-and-consent" aria-label="Liên kết đến phần này">#</a></h2>
 <p>Tính năng AI được tắt mặc định trong mọi không gian làm việc. Chỉ quản trị viên chính mới có thể cấu hình
 mô hình, điểm cuối, khóa API được mã hóa, giới hạn bối cảnh/đầu ra, thời gian chờ và hạn mức

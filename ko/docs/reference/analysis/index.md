@@ -8,7 +8,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/analy
 
 [워크플로우 가이드](https://phishdestroy.github.io/TgWitness/docs/archive/) · [위키](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
-패널에서 **‘아카이브 검색(Ask the archive**)’을 엽니다. 작업 공간 선택기를 통해 계정을 선택하고, 양식을 통해 채팅과 관찰 기간을 선택합니다. 검색은 AI를 사용하지 않고 로컬에서 실행됩니다. 정확한 문구나 도메인을 입력하면 검색 결과를 좁힐 수 있으며, 메시지 ID를 입력하면 저장된 버전을 조회할 수 있습니다. 반환된 발췌문을 검토하고 해당 저널 기록이나 맥락을 열어볼 수 있습니다. 벡터 데이터베이스나 텔레그램에 대한 자동 실행 기능은 없습니다.
+AI 없이 로컬 검색을 하려면 **저널**을 사용하세요. **아카이브에 문의하기**를 사용하려면 먼저 **연동 기능**에서 제공업체를 활성화하고 설정해야 합니다. 작업 공간 선택기에서 계정을 선택하고, 양식에서 대화와 관찰 기간을 선택합니다. 검색은 로컬에서 실행됩니다. 정확한 문구나 도메인을 입력하면 검색 범위가 좁혀지고, 메시지 ID를 입력하면 저장된 버전을 요청합니다. 발췌문을 검토하고 해당 저널 기록이나 맥락을 열어 보세요. 벡터 데이터베이스나 텔레그램 자동 작업 기능은 없습니다.
 
 ## 제공업체 및 동의
 
