@@ -19,6 +19,8 @@ the detailed data model lives in [Architecture](../docs/ARCHITECTURE.md).
 | Deliberate actions | [`interactions.py`](interactions.py), [`keyboard.py`](keyboard.py), [`telegram_client.py`](telegram_client.py) | Panel actions, saved buttons and transport handling |
 | Connections | [`network.py`](network.py), [`netclient.py`](netclient.py), [`proxy_catalog.py`](proxy_catalog.py) | Per-account routes and public proxy catalogs |
 | Secrets and imports | [`security.py`](security.py), [`account_import.py`](account_import.py), [`sessions.py`](sessions.py), [`tdata.py`](tdata.py) | Vault access and bounded account import handling |
+| Access and integrations | [`access.py`](access.py), [`archive.py`](archive.py), [`mcp_server.py`](mcp_server.py), [`webhooks.py`](webhooks.py) | Scoped panel access, read-only archive tools and outgoing events |
+| Derived analysis | [`analysis.py`](analysis.py), [`media_analysis.py`](media_analysis.py) | Source retrieval, analyst reports and local attachment processing |
 | Independent checks | [`witness.py`](witness.py), [`witness_api.py`](witness_api.py), [`anchor.py`](anchor.py), [`anchoring.py`](anchoring.py) | Witness checkpoints and external timestamps |
 | Operations | [`alerts.py`](alerts.py), [`replica.py`](replica.py), [`doctor.py`](doctor.py), [`tuning.py`](tuning.py) | Notifications, off-site copies, local diagnostics and operating parameters |
 | Interface | [`static/`](static/README.md), [`locales/`](locales/README.md), [`i18n.py`](i18n.py) | Bundled UI and interface translations |

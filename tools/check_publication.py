@@ -4,6 +4,7 @@ This bounded check is not a comprehensive secret scanner. It never prints matche
 Use --git-index to check the staged contents and require the complete reviewed source.
 """
 import argparse
+from html.parser import HTMLParser
 import io
 from pathlib import Path
 import re
@@ -23,6 +24,46 @@ PATTERNS = {
     "Telethon session": re.compile(r"(?<![A-Za-z0-9_-])1[A-Za-z0-9_-]{340,}={0,2}(?![A-Za-z0-9_-])"),
 }
 LINK = re.compile(r"\[[^\]]*\]\(([^\s)]+)(?:\s+[^)]*)?\)")
+
+
+class AssetLinks(HTMLParser):
+    """Collect HTML links and responsive image sources in Markdown documents."""
+
+    def __init__(self):
+        super().__init__()
+        self.links = []
+
+    def handle_starttag(self, tag, attrs):
+        for name, value in attrs:
+            if not value:
+                continue
+            if (tag == "a" and name == "href") or (tag == "img" and name == "src"):
+                self.links.append((value, self.getpos()[0]))
+            elif tag in ("source", "img") and name == "srcset":
+                for candidate in value.split(","):
+                    parts = candidate.split()
+                    if parts:
+                        self.links.append((parts[0], self.getpos()[0]))
+
+
+def documentation_links(content):
+    """Skip code examples while preserving source line numbers for diagnostics."""
+    lines, fence = [], None
+    for line in content.splitlines(keepends=True):
+        marker = re.match(r"^ {0,3}(`{3,}|~{3,})(.*)$", line)
+        if marker and fence is None:
+            fence = marker[1]
+            lines.append("\n")
+        elif fence:
+            if marker and marker[1][0] == fence[0] and len(marker[1]) >= len(fence) and not marker[2].strip():
+                fence = None
+            lines.append("\n")
+        else:
+            lines.append(re.sub(r"(`+).*?\1", lambda m: " " * len(m[0]), line))
+    prose = "".join(lines)
+    parser = AssetLinks()
+    parser.feed(prose)
+    return [(m[1], prose.count("\n", 0, m.start()) + 1) for m in LINK.finditer(prose)] + parser.links
 
 
 def secret_findings(content, name):
@@ -47,8 +88,8 @@ def check_sources(root):
         findings.extend(secret_findings(content, relative))
         if source.suffix != ".md":
             continue
-        for match in LINK.finditer(content):
-            href = urlsplit(match[1].strip("<>"))
+        for value, line in documentation_links(content):
+            href = urlsplit(value.strip("<>"))
             if href.scheme or href.netloc or not href.path or href.path.startswith("/"):
                 continue
             target = (source.parent / unquote(href.path)).resolve()
@@ -58,7 +99,6 @@ def check_sources(root):
             links += 1
             name = target.relative_to(root).as_posix()
             if not target.exists() or (target.is_file() and name not in selected):
-                line = content.count("\n", 0, match.start()) + 1
                 findings.append(f"{relative}:{line}: local link is absent from public source: {name}")
     return sources, links, findings
 

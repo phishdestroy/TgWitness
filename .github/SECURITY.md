@@ -14,7 +14,7 @@ There is no guaranteed response time or independent security certification.
 
 | Boundary | What to know |
 | --- | --- |
-| Access | One panel token controls every workspace. Keep the panel on localhost, or use HTTPS or an SSH tunnel. |
+| Access | The owner token controls every workspace. Issue [scoped access](../docs/ACCESS.md) for reviewers. Keep the panel on localhost, or use HTTPS or an SSH tunnel. |
 | Stored data | Credentials are encrypted; messages and media are not. Protect the data directory with disk encryption and restrictive permissions. |
 | Evidence | Signatures detect changes against a trusted key. They do not establish truth or complete capture. Keep checkpoints separately. |
 | Exports | Archives contain collected content and identifiers. Treat them as sensitive. |

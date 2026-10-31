@@ -52,6 +52,17 @@ Keep procedures consistent with the technical references; use fictional examples
 The [wiki maintenance guide](../docs/internal/WIKI.md) covers page additions, checks and publication.
 Use [SUPPORT.md](SUPPORT.md) for help requests and documentation issue reporting.
 
+For documentation changes, check links and the wiki bundle:
+
+```sh
+python tools/check_publication.py
+python tools/build_wiki.py
+```
+
+Write commands readers can run and describe the result they should see. Keep
+comments focused on constraints or decisions that the code does not explain.
+Review images at phone and desktop widths, including reduced-motion variants.
+
 ## Reporting issues
 
 Include the TgWitness version, OS/Python/browser versions, steps to reproduce,

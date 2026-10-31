@@ -7,12 +7,12 @@
 
 # The investigation handbook
 
-**From your first capture to a verifiable handoff.** Pick a path below, work with
-the record, and keep the checks alongside the conclusions.
+Practical guides for collecting Telegram messages, reviewing captured changes
+and sharing a verified export.
 
 [Explore the demo](https://phishdestroy.github.io/TgWitness/demo/) · [Start your first case](Getting-Started.md) · [How the record works](../HOW-IT-WORKS.md) · [Project](../../README.md)
 
-## From a chat to a case.
+## Archive, investigate, verify
 
 <picture>
   <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-features-mobile-static.svg">
@@ -47,6 +47,8 @@ that sequence, not every possible Telegram event.
 | Retain an independent checkpoint | [Independent witness](Independent-Witness.md) |
 | Send alerts or keep an encrypted remote copy | [Notifications](Notifications.md) · [Off-site copy](Off-site-Copy.md) |
 | Run on a server and recover after a problem | [Server and Docker](Server-and-Docker.md) · [Backup and recovery](Backup-and-Recovery.md) |
+| Search with an AI client or process attachments | [MCP](../MCP.md) · [Analysis](../ANALYSIS.md) · [OCR and transcription](../MEDIA-ANALYSIS.md) |
+| Capture one chat on a temporary runner | [GitHub Actions capture](../SEALED-ACTIONS.md) |
 | Fix a problem or understand a term | [Troubleshooting](Troubleshooting.md) · [FAQ](FAQ.md) · [Glossary](Glossary.md) |
 
 <details>

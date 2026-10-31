@@ -23,7 +23,7 @@ These build commands prepare files. Publishing remains a separate workflow.
 
 | Command | What it checks |
 | --- | --- |
-| `python tools/check_publication.py` | Selected public files, local Markdown links and recognized secret formats |
+| `python tools/check_publication.py` | Public files, Markdown/HTML links, responsive image sources and recognized secret formats |
 | `python tools/check_site.py` | Built website in a local browser |
 | `python tools/check_docs_site.py` | Public guides and their visual examples |
 | `python tools/check_browser.py` | Synthetic end-to-end panel workflow |

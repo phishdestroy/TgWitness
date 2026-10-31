@@ -18,7 +18,7 @@ else:
 
 FENCE = re.compile(r"^( {0,8})(`{3,}|~{3,})([^\n`]*)\n(.*?)^\1\2[ \t]*$", re.S | re.M)
 INLINE_CODE = re.compile(r"(`+)(.+?)\1", re.S)
-HTML_TAGS = {"a", "abbr", "b", "blockquote", "br", "code", "details", "div", "em", "i", "img", "kbd", "li", "ol", "p", "pre",
+HTML_TAGS = {"a", "abbr", "b", "blockquote", "br", "code", "details", "div", "em", "i", "img", "kbd", "li", "ol", "p", "picture", "pre", "source",
              "span", "strong", "sub", "summary", "sup", "table", "tbody", "td", "th", "thead", "tr", "ul"}
 SLOT = "WIKISLOT{}X"
 NEWLINE = "\n"
@@ -176,6 +176,20 @@ def rewrite_links(body, source, page_path, pages, page_ids, relative, repo_url, 
 
     def link(match):
         attribute, value = match.group(1), html.unescape(match.group(2))
+        if attribute == "srcset":
+            candidates = []
+            for candidate in value.split(","):
+                parts = candidate.split()
+                if not parts:
+                    continue
+                found = target_of(parts[0])
+                if found:
+                    resolved, _ = found
+                    name = "assets/" + posixpath.basename(resolved)
+                    assets[name] = resolved
+                    parts[0] = relative(page_path, name)
+                candidates.append(" ".join(parts))
+            return 'srcset="' + html.escape(", ".join(candidates), quote=True) + '"'
         found = target_of(value)
         if not found:
             return match.group(0)
@@ -194,7 +208,7 @@ def rewrite_links(body, source, page_path, pages, page_ids, relative, repo_url, 
         kind = "tree" if (root / resolved).is_dir() else "blob"
         url = f"{repo_url}/{kind}/{branch}/{resolved}" + ("#" + anchor if anchor else "")
         return f'href="{html.escape(url, quote=True)}"'
-    return re.sub(r'\b(href|src)="([^"]*)"', link, body)
+    return re.sub(r'\b(href|src|srcset)="([^"]*)"', link, body)
 
 
 def plain(body):
