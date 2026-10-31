@@ -70,6 +70,12 @@ def neutralize(answers):
     access = answers.get("/api/demo-access")
     if access:
         access["text"] = json.dumps({"available": True, "token": "online-demo"})
+    if "/api/access" in answers:
+        console = {"type": "application/json", "text": json.dumps({"lines": [], "last": 0})}
+        answers["/api/access/console"] = console
+        for key in list(answers):
+            if key.startswith("/api/access/console?"):
+                answers[key] = console
     catalog = answers.get("/api/network/catalog")
     if catalog:
 

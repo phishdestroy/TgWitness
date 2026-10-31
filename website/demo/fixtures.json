@@ -3,6 +3,10 @@
 "text": "{\"grants\":[],\"sessions\":[],\"admin\":{\"max_sessions\":0,\"on_limit\":\"replace\",\"session_minutes\":720},\"permissions\":[\"view\",\"export\",\"sources\",\"collect\",\"interact\",\"settings\",\"account\"]}",
 "type": "application/json"
 },
+"/api/access/console": {
+"text": "{\"lines\": [], \"last\": 0}",
+"type": "application/json"
+},
 "/api/access/me": {
 "text": "{\"admin\":true,\"label\":\"Main administrator\",\"permissions\":[\"view\",\"export\",\"sources\",\"collect\",\"interact\",\"settings\",\"account\"],\"all_workspaces\":true,\"workspaces\":{},\"expires_at\":null}",
 "type": "application/json"
