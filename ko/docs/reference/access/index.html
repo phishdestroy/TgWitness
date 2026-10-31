@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="ko" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>접근 및 권한 | TgWitness</title>
+<meta name="description" content="계정 및 채팅에 대한 접근 권한을 제한하고, 권한을 선택하며, 세션 및 IP 주소를 제한하고, 접근 권한을 철회할 수 있습니다."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/access/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="접근 및 권한 | TgWitness"><meta property="og:description" content="계정 및 채팅에 대한 접근 권한을 제한하고, 권한을 선택하며, 세션 및 IP 주소를 제한하고, 접근 권한을 철회할 수 있습니다.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/ko/docs/reference/access/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/access/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/access/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/access/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/access/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/access/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/access/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/access/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/access/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/access/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/access/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/access/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/access/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/access/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/access/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/access/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/access/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/access/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/access/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/access/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/access/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/access/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/access/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/access/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/access/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/access/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/access/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/ko/docs/reference/access/", "url": "https://phishdestroy.github.io/TgWitness/ko/docs/reference/access/", "name": "접근 및 권한 | TgWitness", "description": "계정 및 채팅에 대한 접근 권한을 제한하고, 권한을 선택하며, 세션 및 IP 주소를 제한하고, 접근 권한을 철회할 수 있습니다.", "inLanguage": "ko", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://phishdestroy.github.io/TgWitness/ko/"}, {"@type": "ListItem", "position": 2, "name": "문서", "item": "https://phishdestroy.github.io/TgWitness/ko/docs/"}, {"@type": "ListItem", "position": 3, "name": "참고 문헌", "item": "https://phishdestroy.github.io/TgWitness/ko/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "접근 및 권한", "item": "https://phishdestroy.github.io/TgWitness/ko/docs/reference/access/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">본문으로 건너뛰기</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / 문서</span></a>
+<nav aria-label="가이드"><a href="../../concepts/">시각적 가이드</a><a href="../../">모든 가이드</a><a href="../">참고 문헌</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="언어"><span aria-hidden="true">◍</span> 한국어</summary><div class="lang-list"><a href="../../../../docs/reference/access/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/access/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/access/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/access/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/access/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/access/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/access/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/access/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/access/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/access/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/access/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/access/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/access/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/access/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/access/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/access/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/access/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="./" hreflang="ko" lang="ko" aria-current="true">한국어</a><a href="../../../../zh-Hant/docs/reference/access/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/access/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/access/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/access/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/access/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/access/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/access/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="밝은 테마와 어두운 테마 전환"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="가이드"><a href="../../../guides/modes.html">모드, 시나리오 및 증거 수준</a><a href="../../../../sealed.html?lang=en">GitHub Actions로 수집 (미리 보기)</a><p class="nav-label">시작하기</p><a href="../../start/">몇 분 만에 시작하세요</a><a href="../../accounts/">계정 연결</a><a href="../../proxies/">프록시 선택</a><a href="../../exports/">내보내기 및 검증</a><p class="nav-label">증거 이해하기</p><a href="../../concepts/">증거가 어떻게 활용되는지 확인하기</a><a href="../../cases/">모든 채팅을 대상으로 조사하기</a><a href="../../security/">보안을 유지하세요</a><p class="nav-label">더 알아보기</p><a href="../../access/">사례 공유하기</a><a href="../../witness/">Witness 봇 설정하기</a><a href="../../server/">계속 운영해 주세요</a><a href="../../troubleshooting/">문제가 발생한 원인을 파악하세요</a></nav><nav class="wiki-nav" aria-label="참고 문헌"><p class="nav-label"><a class="nav-label-link" href="../">참고 문헌</a></p><details class="wiki-group" open><summary>설정</summary><a href="../quickstart/">빠른 시작</a><a href="../accounts/">계정 및 세션 형식</a><a href="./" aria-current="page">접근 및 권한</a><a href="../connection/">연결, 프록시 및 데이터 보호</a><a href="../deployment/">배포</a></details><details class="wiki-group"><summary>수집</summary><a href="../collection/">데이터 수집 방식</a><a href="../operations/">워크플로우 및 운영</a><a href="../investigation/">조사 모드</a><a href="../features/">기능 및 제한 사항</a></details><details class="wiki-group"><summary>증거</summary><a href="../how-it-works/">증거 기록의 작동 방식</a><a href="../evidence/">증거 형식</a><a href="../witness/">독립적인 증인</a><a href="../timestamp/">타임스탬프</a></details><details class="wiki-group"><summary>보안 및 프로젝트</summary><a href="../security/">보안 및 데이터 처리</a><a href="../architecture/">아키텍처</a><a href="../verification/">테스트된 내용</a><a href="../license/">라이선스 안내 및 아키텍처 비호환성 공지</a><a href="../notice/">운영자 호환성 불일치 공지</a><a href="../changelog/">변경 내역</a></details></nav><p class="sidebar-note">v0.7.0<br>오픈 소스 · 사용자의 컴퓨터에서 실행됩니다</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="가이드"><a href="../../../">홈</a> <span aria-hidden="true">/</span> <a href="../../">문서</a> <span aria-hidden="true">/</span> <a href="../">참고 문헌</a> <span aria-hidden="true">/</span> <span aria-current="page">접근 및 권한</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">문서 검색</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="프록시, 해시 체인, 토큰 또는 위트니스 등을 고려해 보십시오…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="명확한 검색" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">가이드와 참조 자료를 검색하려면 단어를 입력하세요. 검색 기록은 브라우저에 저장됩니다.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">참고 문헌 / 설정</p><h1>접근 및 권한</h1><p class="guide-outcome">계정 및 채팅에 대한 접근 권한을 제한하고, 권한을 선택하며, 세션 및 IP 주소를 제한하고, 접근 권한을 철회할 수 있습니다.</p><div class="wiki-body"><p>검토자에게는 하나의 채팅에 대한 접근 권한을, 분석가에게는 사건 내역 내보내기 권한을,
+운영자에게는 선택된 계정에 대한 관리 권한을 부여할 수 있습니다. 각 사용자는 고유한 토큰을 부여받습니다. 메인
+패널 토큰은 관리자가 보유합니다.</p>
+<p><a href="../accounts/">계정 설정</a> · <a href="../connection/">연결 경로</a> · <a href="../security/">보안 모델</a></p>
+<h2 id="two-scopes-two-different-jobs">두 가지 범위, 두 가지 서로 다른 업무<a class="anchor" href="#two-scopes-two-different-jobs" aria-label="이 섹션으로 이동">#</a></h2>
+<p><strong>수집 범위에</strong> 따라 계정이 기록하는 대상(선택한 채팅, 텔레그램
+폴더 또는 전체 계정)이 결정됩니다. <strong>접근 범위에</strong> 따라 다른 사람이 기록된
+계정 및 채팅 중 어떤 것을 보고 사용할 수 있는지가 결정됩니다. 접근 권한을 부여한다고 해서 텔레그램
+채팅에 참여하거나, 수집이 시작되거나, 텔레그램 계정 권한이 부여되는 것은 아닙니다.</p>
+<p>접근 권한을 통해 선택한 워크스페이스, 그 안의 특정 채팅, 또는 모든
+워크스페이스를 열 수 있습니다. <strong>나중에 추가된 워크스페이스를 포함한 모든 워크스페이스는</strong> 향후
+계정도 포함합니다. 특정 사건에 대한 접근을 해당 워크스페이스로만 제한해야 할 경우, 워크스페이스를 명시적으로 선택하십시오.</p>
+<h2 id="give-someone-access">사용자 접근 권한 부여<a class="anchor" href="#give-someone-access" aria-label="이 섹션으로 이동">#</a></h2>
+<ol>
+<li>주 관리자로 로그인한 후 <strong>‘Access’를</strong> 열어주세요.</li>
+<li><strong>&#x27;사용자 접근 권한 부여</strong>&#x27; 항목에서 로그에서 쉽게 알아볼 수 있는 이름을 입력하세요.</li>
+<li>작업 공간을 선택하고, 필요한 경우 개별 채팅방을 선택하십시오.</li>
+<li>이 사람이 수행할 수 있는 작업을 선택하십시오. <strong>‘보기’는</strong> 항상 포함됩니다.</li>
+<li>필요에 따라 만료 기간, 로그인/세션 제한 및 허용된 주소를 설정하십시오.</li>
+<li><strong>&#x27;생성&#x27;을</strong> 클릭하여 <strong>액세스 권한을 생성하세요</strong>. 토큰을 지금 복사하세요: 토큰은 한 번만 표시됩니다.</li>
+<li>패널 주소와 토큰을 비공개로 전송하십시오. 수신자는 일반 로그인 페이지에서 해당 토큰을 입력하면 되며,
+    귀하의 메인 패널 토큰이나 텔레그램 세션은 필요하지 않습니다.</li>
+</ol>
+<p>발급된 토큰이 포함된 패널을 별도의 브라우저 세션에서 열고,
+전달하기 전에 표시된 채팅과 허용된 작업을 확인하십시오.</p>
+<h2 id="choose-the-permissions">권한 선택<a class="anchor" href="#choose-the-permissions" aria-label="이 섹션으로 이동">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>사용 권한</th>
+<th>이 도구의 기능</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>view</code></td>
+<td>허용된 채팅, 캡처된 메시지, 프로필, 파일 및 필터링된 기록부를 확인할 수 있습니다. 항상 포함되어 있습니다.</td>
+</tr>
+<tr>
+<td><code>export</code></td>
+<td>허용된 채팅 기록 및 자료 모음을 내보낼 수 있습니다. 전체 작업 공간의 증거 자료를 내보내려면 해당 작업 공간 전체에 대한 접근 권한이 필요합니다.</td>
+</tr>
+<tr>
+<td><code>sources</code></td>
+<td>소스, 스냅샷 및 프로필 캡처를 관리합니다. 채팅 제한 액세스는 허용된 채팅에서만 작동하며, 계정 전체의 소스 검색 및 범위 설정은 비활성화된 상태로 유지됩니다.</td>
+</tr>
+<tr>
+<td><code>collect</code></td>
+<td>수집기를 시작하거나 중지합니다. 수집 작업이 계정에 영향을 미치므로 전체 작업 공간에 대한 접근 권한이 필요합니다.</td>
+</tr>
+<tr>
+<td><code>interact</code></td>
+<td>접근 권한 범위 내에서 지원되는 텔레그램 상호작용을 수행하십시오. 채팅 제한 접근 권한의 경우 계정 전체 링크 미리보기를 사용할 수 없습니다.</td>
+</tr>
+<tr>
+<td><code>settings</code></td>
+<td>수집 설정, 타임스탬프, 알림, 외부 백업 및 매개변수를 변경할 수 있습니다. 전체 워크스페이스에 대한 접근 권한이 필요합니다.</td>
+</tr>
+<tr>
+<td><code>account</code></td>
+<td>텔레그램에 로그인하거나 로그아웃하고 연결 경로를 관리할 수 있습니다. 전체 작업 공간에 대한 접근 권한이 필요합니다.</td>
+</tr>
+</tbody>
+</table></div>
+<p>권한과 적용 범위는 함께 확인됩니다. 특정 권한을 선택한다고 해서
+다른 채팅이 열리거나, 채팅 제한형 액세스 권한에 대해 워크스페이스 전체에 적용되는 작업이 활성화되지는 않습니다.
+병렬 내보내기의 경우, 선택한 모든 계정에서 내보내려는 채팅에 대한
+접근 권한이 포함되어야 합니다. 부여된 접근 권한으로는 새로운 접근 권한을 생성하거나, 타인의
+세션을 관리하거나, 관리자 콘솔을 열 수 없습니다.</p>
+<h3 id="three-useful-setups">세 가지 유용한 설정 방법<a class="anchor" href="#three-useful-setups" aria-label="이 섹션으로 이동">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>인물</th>
+<th>범위</th>
+<th>권한</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>검토자</td>
+<td>한 사례의 기록된 채팅 내용</td>
+<td><code>view</code></td>
+</tr>
+<tr>
+<td>업무 인계를 준비 중인 분석가</td>
+<td>조사 및 내보내기 대상 채팅</td>
+<td><code>view</code>, <code>export</code>; 텔레그램을 통해 조치를 취해야 하는 경우에만 <code>interact</code>를 추가하십시오.</td>
+</tr>
+<tr>
+<td>수집 운영자</td>
+<td>선별된 전체 작업 공간</td>
+<td><code>view</code>, <code>sources</code>, <code>collect</code>; 필요한 경우에만 <code>settings</code> 또는 <code>account</code>를 추가하십시오.</td>
+</tr>
+</tbody>
+</table></div>
+<p>이것들은 고정된 역할이 아니라, 권한 선택 상자를 통해 구성할 수 있는 예시입니다.</p>
+<h2 id="limits-and-sessions">제한 사항 및 세션<a class="anchor" href="#limits-and-sessions" aria-label="이 섹션으로 이동">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>설정</th>
+<th>작동 원리</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>병행 세션</td>
+<td>동시 세션 수를 1~100개로 제한합니다. 한도에 도달하면 다음 로그인을 거부하거나 가장 오래된 세션을 종료합니다.</td>
+</tr>
+<tr>
+<td>로그인 허용</td>
+<td>세션 시작을 위한 토큰의 사용 횟수를 제한합니다. 허용된 마지막 로그인이 사용되었다고 해서 기존 세션이 종료되지는 않습니다.</td>
+</tr>
+<tr>
+<td>유효 기간:</td>
+<td>접근 권한에 대한 절대 만료일이 적용됩니다. 만료된 접근 권한으로는 로그인하거나 요청을 계속할 수 없습니다.</td>
+</tr>
+<tr>
+<td>활동이 없는 시간</td>
+<td>세션 비활성 타임아웃은 5분에서 30일까지 설정 가능합니다. 요청이 성공하면 타임아웃 시간이 연장되며, 열려 있는 패널은 폴링을 통해 활성 상태를 유지할 수 있습니다.</td>
+</tr>
+<tr>
+<td>허용된 주소</td>
+<td>특정 IP 주소 또는 CIDR 서브넷을 허용합니다. 첫 로그인 바인딩이 활성화되지 않은 경우, 빈 상태로 두면 모든 주소를 허용합니다.</td>
+</tr>
+<tr>
+<td>첫 로그인 시 연결</td>
+<td>첫 번째 성공적인 로그인 시 해당 접속에 허용된 주소가 확정됩니다.</td>
+</tr>
+</tbody>
+</table></div>
+<p>IP는 애플리케이션이 인식하는 클라이언트 주소입니다. 리버스 프록시나
+터널을 사용하는 경우, IP 규칙을 적용하기 전에 <strong>‘열린 </strong>세션’에 표시된 주소를 확인하십시오.
+그렇지 않으면 여러 사용자가 프록시의 주소를 공유하는 것처럼 보일 수 있습니다.</p>
+<h2 id="change-or-withdraw-access">변경 또는 접근 권한 철회<a class="anchor" href="#change-or-withdraw-access" aria-label="이 섹션으로 이동">#</a></h2>
+<p><strong>&#x27;액세스(Accesses)</strong>&#x27; 항목에서 항목을 편집하여 범위, 권한 또는 제한 사항을 변경할 수 있습니다.
+범위 및 권한 변경 사항은 후속 요청 시 확인되며, 여기에는
+이미 열려 있는 세션에서 발생하는 요청도 포함됩니다. 액세스 권한을 취소하면 해당 세션이 종료되고
+발급된 토큰은 더 이상 사용할 수 없게 됩니다. 또한 관리자는 <strong>열려 있는 세션에</strong> 대해
+전체 액세스 권한을 취소하지 않고도 개별 세션을 종료할 수 있습니다.</p>
+<p>권한 취소 기능으로는 사용자가 이미 다운로드한 파일을 복구할 수 없습니다. 로그아웃,
+패널 잠금 또는 세션 종료는 실행 중인 수집기를 중지시키지 않습니다.</p>
+<h2 id="what-the-administrator-can-see">관리자가 확인할 수 있는 내용<a class="anchor" href="#what-the-administrator-can-see" aria-label="이 섹션으로 이동">#</a></h2>
+<p><strong>시작 시점부터 기록된</strong> 로그에는 모든
+워크스페이스의 프로세스 로그와 저널 활동(로그인, 거부, 경로 변경 및 운영자 조치 등)이 결합되어 있습니다. 이는
+현재 프로세스에 대한 인메모리 콘솔이며, 모든 메시지의 영구적인 사본은 아닙니다.
+빈번하게 발생하는 메시지 이벤트는 콘솔을 채우지 않고 저널에 남게 됩니다.</p>
+<p>접근 권한의 발급, 변경 및 취소, 세션 시작 또는 종료 시에도
+서명된 <code>access.*</code> 저널 기록이 생성됩니다. 토큰은 해당 기록에 포함되지 않습니다.
+발급된 토큰과 세션 인증 정보는 암호화된 볼트에 해시 형태로 보관됩니다.</p>
+<details>
+<summary><strong>주 관리자 및 신뢰 경계</strong></summary>
+
+메인 패널 토큰은 제한 없이 사용됩니다. 이 토큰을 사용하여 브라우저에 로그인하면
+관리자가 설정한 세션 제한이 적용되는 세션이 생성됩니다. 메인 토큰을
+직접 전송하는 스크립트는 전체 액세스 권한을 유지하며 브라우저 세션으로 집계되지 않습니다.
+
+이는 단일 설치 환경 내의 애플리케이션 수준 접근 제어입니다. 모든 작업 공간은
+서버 프로세스를 공유하며, 이는 호스트 관리자로부터의 격리를 의미하지 않습니다. 메인
+토큰, 텔레그램 세션, 서명 키 및 데이터 디렉터리는 비공개로 유지하십시오. 위트니스 토큰은
+패널 접근 토큰이 아닌 별도의 체크포인트/정상 작동 확인 자격 증명입니다.
+
+</details></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCESS.md">GitHub에서 이 페이지 편집하기 ↗</a><a class="next-guide" href="../connection/"><span>다음 단계</span><strong>연결, 프록시 및 데이터 보호 →</strong></a><p>이 가이드들은 현재 구현 내용을 설명합니다. 검증 결과와 남아 있는 미비 사항은 별도로 문서화되어 있습니다. <a href="../verification/">테스트된 내용 →</a></p></footer>
+</main>
+<aside class="toc" aria-label="이 페이지에서"><p class="nav-label">이 페이지에서</p><a href="#two-scopes-two-different-jobs">두 가지 범위, 두 가지 서로 다른 업무</a><a href="#give-someone-access">사용자 접근 권한 부여</a><a href="#choose-the-permissions">권한 선택</a><a href="#limits-and-sessions">제한 사항 및 세션</a><a href="#change-or-withdraw-access">변경 또는 접근 권한 철회</a><a href="#what-the-administrator-can-see">관리자가 확인할 수 있는 내용</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>오픈 소스 · 사용자의 컴퓨터에서 실행됩니다</span><a href="../../../../LICENSE">MIT 라이선스</a><a href="../notice/">운영자 공지</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">보안</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "메시지를 기다리고 있습니다", "Step through a fictional send, edit and delete.": "가상의 메시지 전송, 수정 및 삭제 과정을 단계별로 살펴보세요.", "No observations yet. Start the sequence or advance one event.": "아직 관찰 내용이 없습니다. 시퀀스를 시작하거나 이벤트를 하나 앞으로 넘기세요.", "Meet at 10:00": "10:00에 만나요", "A new message is visible in the chat.": "채팅창에 새 메시지가 표시됩니다.", "Record 1 appended: the collector observed the original message.": "기록 1건 추가됨: 수집기가 원본 메시지를 감지했습니다.", "Meet at 11:00": "11:00에 만나요", "The current text changes. The earlier observation stays.": "현재 텍스트가 변경되었습니다. 이전의 관찰 내용은 그대로 유지됩니다.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "기록 2가 추가되었습니다: 이 수정은 새로운 관찰 내용입니다. 기록 1에는 여전히 원본 텍스트가 유지되어 있습니다.", "Message deleted": "메시지가 삭제되었습니다.", "The message has disappeared from the chat view.": "해당 메시지가 채팅 화면에서 사라졌습니다.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Record 3 추가: 삭제 알림은 확인된 두 버전의 메시지와 함께 보존됩니다.", "0 records": "0건", "1 record": "1건의 기록", "2 records": "2건의 기록", "3 records": "3건의 기록", "Complete / {n} of 3": "완료 / 3개 중 {n}개", "Step / {n} of 3": "3단계 중 {n}단계", "Pause": "일시 정지", "Replay sequence": "재생 순서", "Play sequence": "재생 순서", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "정적 예제 페이지를 확인할 수 있습니다. 해시를 대화형으로 계산하려면 HTTPS를 통해 이 페이지를 열거나, Web Crypto를 지원하는 로컬호스트 미리보기에서 열어보세요.", "No record supplied": "기록이 제공되지 않음", "Tail removed": "꼬리 부분 삭제됨", "≠ saved hash": "≠ 저장된 해시", "Rebuilt · different hash": "재구축 · 다른 해시", "= saved hash": "= 저장된 해시", "Same length and matching head.": "글의 길이는 동일하며, 제목도 일치해야 합니다.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "계산된 세 개의 해시 값이 모두 저장된 해시 값과 일치합니다. 이 샘플은 유지된 3개 레코드 경계와 일치합니다.", "Same saved head; the journal prefix fails verification.": "동일한 헤더가 저장되었으나, 저널 접두사가 검증에 실패했습니다.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "레코드 2가 저장된 해시와 더 이상 일치하지 않습니다. 최종 저장된 헤더만 확인하면 이 문제를 놓칠 수 있으므로, 검증자는 모든 레코드를 확인합니다.", "Head differs from the retained checkpoint.": "헤더가 유지된 체크포인트와 다릅니다.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "재구성된 해시 값들은 서로 연결되어 있지만, 최종 헤더가 변경되었습니다. 보존된 체크포인트는 이 변경 내역을 거부합니다. 변경된 기록의 경우 원본 서명도 유효하지 않을 것입니다.", "Too short: 2 supplied records \u003c 3 retained records.": "너무 짧음: 제공된 기록 2건 \u003c 보존된 기록 3건.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "남아 있는 두 해시는 여전히 일치합니다. 보존된 체크포인트는 누락된 끝부분을 드러냅니다. 그 이전의 경계 정보가 없었다면, 이 짧은 접두사만으로는 누락된 부분을 파악할 수 없었을 것입니다.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "이 브라우저에서는 해시 계산 기능을 사용할 수 없습니다. 아래의 공식과 정적 설명은 계속 확인할 수 있습니다.", "{n} records": "{n}건의 기록", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "승인됨: 카운트가 증가하고, 서명이 검증되며, 키가 일치합니다. 위트니스는 이 새로운 경계를 유지합니다.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "롤백: 서명된 응답에 포함된 기록 수가 마지막으로 승인된 체크포인트보다 적게 보고된 경우. 위트니스는 이 문제를 기록하고 이전에 승인된 경계를 유지합니다.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "포크(Fork): 카운트는 변하지 않았지만 헤드가 다릅니다. 위트니스는 이 불일치를 기록하고 이전에 승인된 경계를 유지합니다.", "No answer": "답변 없음", "boundary unknown": "경계 미상", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "응답 없음: 위트니스는 확인 실패를 기록합니다. 수집기의 현재 상태를 확인할 수는 없습니다. 위트니스가 여전히 봇 API에 접속할 수 있고 게시 정책이 허용하는 경우, 해당 실패 사실을 게시할 수 있습니다.", "Send {n}": "{n} 보내기", "Edit {n}": "{n} 편집", "Delete {n}": "{n} 삭제", "Both accounts captured all six expected observations in this example.": "이 예시에서 두 계정 모두 예상된 6가지 관찰 항목을 모두 포착했습니다.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "계정 B는 여전히 6건 중 6건을 모두 캡처했습니다. 두 건의 수신 확인은 더 오래 걸렸습니다. 캡처 비율과 수신 확인 지연은 서로 다른 문제를 나타냅니다.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "계정 B는 마감 시점까지 6건 중 5건(83.3%)을 포착했습니다. 누락된 편집 건에는 측정된 지연 시간이 없습니다. 이 결과는 6건의 통제된 동작에 대해서만 설명한 것입니다.", "not observed by cutoff": "마감 시점에 확인되지 않음", "{s} seconds": "{s}초", "Exact values follow in the table.": "정확한 수치는 아래 표에 나와 있습니다.", "{s} s": "{s} s", "Not observed": "확인되지 않음", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "네 개의 채팅에서 서로 다른 관찰 결과가 제시됩니다. 모든 연결에 대해 원본 기록을 따르십시오. 발신자가 명시되지 않은 경우 채널 게시물을 사용자 71001에게 귀속시키지 마십시오.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "기록 #146과 #205는 동일한 발신자 ID인 71001을 나타냅니다. 이를 통해 두 채팅에서 관찰된 텔레그램 계정의 게시물을 연결할 수 있습니다. 이는 실제 인물을 식별하거나 채널 게시물의 작성자를 특정하지는 않습니다.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "수신처 pay.example.invalid/new는 그룹 기록 #146, 봇 키보드 #173, 채널 편집 #188 및 비공개 메시지 #205에 나타납니다. 동일한 수신처가 반복적으로 등장한다는 사실은 해당 자료 간의 연관성을 시사할 뿐, 해당 계정들이 동일한 주체에 의해 통제된다는 것을 증명하지는 않습니다.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "이 가상의 사례에서, 완료된 미디어 수신 기록 #151과 #209는 동일한 SHA-256 전체 값을 가지고 있습니다. 실제 바이트와 관련 메시지 기록을 비교해 보십시오. 일치하는 파일은 작성자를 식별하지 않으며, 누가 이를 전달했는지도 증명하지 않습니다.", "the encrypted off-site copy": "암호화된 오프사이트 사본", "notifications": "알림", "checkpoint hashes for timestamps": "타임스탬프용 체크포인트 해시", "signed checkpoints for the witness": "증거를 위한 서명된 체크포인트", "Switched on in this example": "이 예시에서는 활성화됨", "Optional · off by default": "선택 사항 · 기본값은 비활성화됨", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "이 기기에서 남기는 것: 텔레그램 연결 정보와 {list}. 그 외에는 아무것도 없습니다.", "Default: only the Telegram connection leaves this machine.": "기본 설정: 텔레그램 연결만 이 기기를 통해 이루어집니다.", "{done} of {total} done": "{done}/{total} 완료", "Mark step {n} as done": "{n}번 단계를 완료로 표시", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "복사", "Copied": "복사됨", "Command copied.": "명령 복사 완료.", "Selected — Ctrl/Cmd+C": "선택 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "명령어가 선택되었습니다. 수동으로 복사하십시오.", "Command copied to clipboard.": "명령어가 클립보드에 복사되었습니다.", "Select text": "텍스트 선택", "Clipboard unavailable. Command selected; copy it manually.": "클립보드를 사용할 수 없습니다. 명령어가 선택되었습니다. 수동으로 복사하십시오.", "A message arrives. The first observation is saved.": "메시지가 도착합니다. 첫 번째 관측 결과가 저장됩니다.", "The time changes. Both captured versions stay.": "시간이 변경됩니다. 캡처된 두 버전 모두 그대로 유지됩니다.", "The message disappears. The captured history remains.": "메시지는 사라지지만, 캡처된 기록은 남습니다.", "Pause example animation": "예시 애니메이션 일시 정지", "Play example animation": "예시 애니메이션 재생", "Play": "재생", "Full-size workspace screenshot": "전체 화면 작업 공간 스크린샷", "Workspace screenshot · fictional data": "작업 공간 스크린샷 · 가상의 데이터", "Close": "닫기", "Close screenshot": "스크린샷 닫기", "Scrollable full-size screenshot": "스크롤 가능한 전체 화면 스크린샷", "Enlarge: {name}": "확대: {name}", "View full size": "전체 크기 보기"}</script>
+</body></html>

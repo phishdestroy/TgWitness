@@ -2,15 +2,15 @@
 <html lang="he" dir="rtl" class="docs-root">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0b1120"><title>חיבור, פרוקסי והגנה על נתונים | TgWitness</title>
-<meta name="description" content="צמדי API, שיטות כניסה, נתיבי SOCKS5, HTTP ו-MTProxy, רשימות פרוקסי ציבוריות ומה כל נתיב מגן עליו."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/">
+<meta name="description" content="אימות, מאגרי פרוקסי אוטומטיים, מצבי IP, מדיניות גיבוי, בקשות חיצוניות ואחסון סודי."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/">
 <meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
 <meta property="og:locale" content="he_IL">
-<meta property="og:title" content="חיבור, פרוקסי והגנה על נתונים | TgWitness"><meta property="og:description" content="צמדי API, שיטות כניסה, נתיבי SOCKS5, HTTP ו-MTProxy, רשימות פרוקסי ציבוריות ומה כל נתיב מגן עליו.">
+<meta property="og:title" content="חיבור, פרוקסי והגנה על נתונים | TgWitness"><meta property="og:description" content="אימות, מאגרי פרוקסי אוטומטיים, מצבי IP, מדיניות גיבוי, בקשות חיצוניות ואחסון סודי.">
 <meta property="og:url" content="https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="TgWitness — Telegram observation journal">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/connection/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/connection/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/connection/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/connection/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/connection/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/connection/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/connection/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/connection/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/connection/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/connection/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/connection/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/connection/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/connection/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/connection/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/connection/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/", "url": "https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/", "name": "חיבור, פרוקסי והגנה על נתונים | TgWitness", "description": "צמדי API, שיטות כניסה, נתיבי SOCKS5, HTTP ו-MTProxy, רשימות פרוקסי ציבוריות ומה כל נתיב מגן עליו.", "inLanguage": "he", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "דף הבית", "item": "https://phishdestroy.github.io/TgWitness/he/"}, {"@type": "ListItem", "position": 2, "name": "תיעוד", "item": "https://phishdestroy.github.io/TgWitness/he/docs/"}, {"@type": "ListItem", "position": 3, "name": "הפניה", "item": "https://phishdestroy.github.io/TgWitness/he/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "חיבור, פרוקסי והגנה על נתונים", "item": "https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/"}]}]}</script>
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/connection/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/connection/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/connection/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/connection/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/connection/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/connection/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/connection/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/connection/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/connection/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/connection/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/connection/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/connection/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/connection/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/connection/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/connection/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/", "url": "https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/", "name": "חיבור, פרוקסי והגנה על נתונים | TgWitness", "description": "אימות, מאגרי פרוקסי אוטומטיים, מצבי IP, מדיניות גיבוי, בקשות חיצוניות ואחסון סודי.", "inLanguage": "he", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "דף הבית", "item": "https://phishdestroy.github.io/TgWitness/he/"}, {"@type": "ListItem", "position": 2, "name": "תיעוד", "item": "https://phishdestroy.github.io/TgWitness/he/docs/"}, {"@type": "ListItem", "position": 3, "name": "הפניה", "item": "https://phishdestroy.github.io/TgWitness/he/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "חיבור, פרוקסי והגנה על נתונים", "item": "https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/"}]}]}</script>
 <script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
 <link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../../../docs.css">
@@ -27,11 +27,11 @@
 <div class="header-tools"><details class="lang-menu"><summary aria-label="שפה"><span aria-hidden="true">◍</span> עברית</summary><div class="lang-list"><a href="../../../../docs/reference/connection/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/connection/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/connection/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/connection/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/connection/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/connection/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/connection/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/connection/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/connection/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/connection/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/connection/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/connection/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/connection/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/connection/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/connection/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/connection/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/connection/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/connection/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/connection/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/connection/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/connection/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/connection/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/connection/" hreflang="th" lang="th">ไทย</a><a href="./" hreflang="he" lang="he" aria-current="true">עברית</a><a href="../../../../bn/docs/reference/connection/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="החלפה בין ערכת נושא בהירה לכהה"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
 </div></header>
 <div class="docs-layout">
-<aside class="sidebar"><nav aria-label="מדריכים"><a href="../../../guides/modes.html">מצבים, תרחישים ורמות ראיות</a><p class="nav-label">צעדים ראשונים</p><a href="../../start/">התחילו תוך דקות ספורות</a><a href="../../accounts/">חבר חשבון</a><a href="../../proxies/">בחר פרוקסי</a><a href="../../exports/">ייצוא ואימות</a><p class="nav-label">הבנת הראיות</p><a href="../../concepts/">ראו כיצד הראיות פועלות</a><a href="../../cases/">חקור בכל הצ'אטים</a><a href="../../security/">שמרו על האבטחה</a><p class="nav-label">המשך לקרוא</p><a href="../../witness/">הגדרת בוט Witness</a><a href="../../server/">המשך להפעיל את האתר</a><a href="../../troubleshooting/">גלה מה השתבש</a></nav><nav class="wiki-nav" aria-label="הפניה"><p class="nav-label"><a class="nav-label-link" href="../">הפניה</a></p><details class="wiki-group" open><summary>הגדרה</summary><a href="../quickstart/">התחלה מהירה</a><a href="../accounts/">חשבונות ופורמטים של הפעלות</a><a href="./" aria-current="page">חיבור, פרוקסי והגנה על נתונים</a><a href="../deployment/">פריסה</a></details><details class="wiki-group"><summary>אסף</summary><a href="../collection/">כיצד מתבצע האיסוף</a><a href="../operations/">תהליכי עבודה ותפעול</a><a href="../investigation/">מצב חקירה</a><a href="../features/">תכונות ומגבלות</a></details><details class="wiki-group"><summary>ראיות</summary><a href="../how-it-works/">כיצד פועלת הראיה</a><a href="../evidence/">פורמט הראיות</a><a href="../witness/">עד עצמאי</a><a href="../timestamp/">חותמות זמן</a></details><details class="wiki-group"><summary>אבטחה ופרויקט</summary><a href="../security/">אבטחה וטיפול בנתונים</a><a href="../architecture/">ארכיטקטורה</a><a href="../verification/">מה נבדק</a><a href="../license/">הודעה בנושא הרישיון ואי־תאימות ארכיטקטונית</a><a href="../notice/">הודעה על חוסר תאימות למפעיל</a><a href="../changelog/">יומן שינויים</a></details></nav><p class="sidebar-note">v0.7.0<br>קוד פתוח · פועל על המחשב שלכם</p></aside>
+<aside class="sidebar"><nav aria-label="מדריכים"><a href="../../../guides/modes.html">מצבים, תרחישים ורמות ראיות</a><a href="../../../../sealed.html?lang=en">איסוף באמצעות GitHub Actions (גרסה מקדימה)</a><p class="nav-label">צעדים ראשונים</p><a href="../../start/">התחילו תוך דקות ספורות</a><a href="../../accounts/">חבר חשבון</a><a href="../../proxies/">בחר פרוקסי</a><a href="../../exports/">ייצוא ואימות</a><p class="nav-label">הבנת הראיות</p><a href="../../concepts/">ראו כיצד הראיות פועלות</a><a href="../../cases/">חקור בכל הצ'אטים</a><a href="../../security/">שמרו על האבטחה</a><p class="nav-label">המשך לקרוא</p><a href="../../access/">שתף מקרה</a><a href="../../witness/">הגדרת בוט Witness</a><a href="../../server/">המשך להפעיל את האתר</a><a href="../../troubleshooting/">גלה מה השתבש</a></nav><nav class="wiki-nav" aria-label="הפניה"><p class="nav-label"><a class="nav-label-link" href="../">הפניה</a></p><details class="wiki-group" open><summary>הגדרה</summary><a href="../quickstart/">התחלה מהירה</a><a href="../accounts/">חשבונות ופורמטים של הפעלות</a><a href="../access/">גישה והרשאות</a><a href="./" aria-current="page">חיבור, פרוקסי והגנה על נתונים</a><a href="../deployment/">פריסה</a></details><details class="wiki-group"><summary>אסף</summary><a href="../collection/">כיצד מתבצע האיסוף</a><a href="../operations/">תהליכי עבודה ותפעול</a><a href="../investigation/">מצב חקירה</a><a href="../features/">תכונות ומגבלות</a></details><details class="wiki-group"><summary>ראיות</summary><a href="../how-it-works/">כיצד פועלת הראיה</a><a href="../evidence/">פורמט הראיות</a><a href="../witness/">עד עצמאי</a><a href="../timestamp/">חותמות זמן</a></details><details class="wiki-group"><summary>אבטחה ופרויקט</summary><a href="../security/">אבטחה וטיפול בנתונים</a><a href="../architecture/">ארכיטקטורה</a><a href="../verification/">מה נבדק</a><a href="../license/">הודעה בנושא הרישיון ואי־תאימות ארכיטקטונית</a><a href="../notice/">הודעה על חוסר תאימות למפעיל</a><a href="../changelog/">יומן שינויים</a></details></nav><p class="sidebar-note">v0.7.0<br>קוד פתוח · פועל על המחשב שלכם</p></aside>
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="מדריכים"><a href="../../../">דף הבית</a> <span aria-hidden="true">/</span> <a href="../../">תיעוד</a> <span aria-hidden="true">/</span> <a href="../">הפניה</a> <span aria-hidden="true">/</span> <span aria-current="page">חיבור, פרוקסי והגנה על נתונים</span></nav>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">חפש בתיעוד</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="נסו להשתמש במונחים כמו &quot;פרוקסי&quot;, &quot;שרשרת האש&quot;, &quot;אסימון&quot; או &quot;עד&quot;..." autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="חיפוש ברור" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">הקלידו מילה כדי לחפש במדריכים ובמאגר המידע. החיפוש נשאר בדפדפן שלכם.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">הפניה / הגדרה</p><h1>חיבור, פרוקסי והגנה על נתונים</h1><p class="guide-outcome">צמדי API, שיטות כניסה, נתיבי SOCKS5, HTTP ו-MTProxy, רשימות פרוקסי ציבוריות ומה כל נתיב מגן עליו.</p><div class="wiki-body"><p>מסמך זה מתאר את התנהגות TgWitness 0.7.0 ואת מגבלותיו. אימות,
+<article class="guide-content"><p class="eyebrow">הפניה / הגדרה</p><h1>חיבור, פרוקסי והגנה על נתונים</h1><p class="guide-outcome">אימות, מאגרי פרוקסי אוטומטיים, מצבי IP, מדיניות גיבוי, בקשות חיצוניות ואחסון סודי.</p><div class="wiki-body"><p>מסמך זה מתאר את התנהגות TgWitness 0.7.0 ואת מגבלותיו. אימות,
 גישה למקור, קישוריות רשת ושלמות הלכידה הם מצבים נפרדים.
 לפרטים על שלבי הכניסה, פורמטי קבצים וחשבונות מרובים, התחל בסעיף &quot;
 <a href="../accounts/">חשבונות ופורמטי הפעלה</a>&quot;. לגבי מדיניות אירועים והתנהגות
@@ -148,8 +148,42 @@
 <p>MTProto הוא הפרוטוקול של טלגרם. Telethon היא ספריית הלקוח ב-Python שבה משתמש TgWitness.
 MTProxy הוא פרוקסי העברה של טלגרם; SOCKS5 ו-HTTP CONNECT מספקים
 מנהרות כלליות. אף אחד מהם אינו מחליף את אימות החשבון.</p>
-<p>שמור את נתיב החיבור עבור כל סביבת עבודה ב<strong>&quot;חשבון&quot; → &quot;הגדרות&quot; → &quot;הגדרות חיבור&quot; → &quot;שנה נתיב חיבור&quot;</strong> לפני
-הכניסה, אם אתה זקוק לפרוקסי. ברירת המחדל היא &quot;ישיר&quot;.</p>
+<p>שמור את נתיב החיבור עבור כל סביבת עבודה ב-<strong>חשבון → הגדרות → הגדרות חיבור → שינוי נתיב החיבור</strong> לפני
+הכניסה. סביבות עבודה חדשות מוגדרות כברירת מחדל <strong>ל-MTProxy אוטומטי · רשימות ציבוריות</strong> עם התנהגות &quot;הסתרת IP&quot;.
+סביבות עבודה קיימות שהשתמשו במפורש ב-Direct שומרות על מצב המאפשר זאת.</p>
+<h2 id="ip-modes">מצבי IP<a class="anchor" href="#ip-modes" aria-label="קישור לסעיף זה">#</a></h2>
+<p>המסלול קובע את החיבור. מצב ה-IP קובע מתי כתובת השרת
+עשויה להיחשף. בקרות אלה אינן מתקינות VPN ואינן מנתבות את כל התעבורה של המחשב.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>מצב</th>
+<th>Telegram</th>
+<th>בקשות חיצוניות</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hide IP (<code>hide</code>)</td>
+<td>השתמש בפרוקסי; המתן אם אף אחד לא עובד. אין פתרון חלופי ישיר.</td>
+<td>נדרש SOCKS5/HTTP; בקשות ללא פרוקסי מתאים יידחו.</td>
+</tr>
+<tr>
+<td>אפשר חלופה (<code>fallback</code>)</td>
+<td>MTProxy האוטומטי עשוי להשתמש ב-Direct לאחר העיכוב שהוגדר, ולאחר מכן לחזור לפרוקסי פעיל.</td>
+<td>יש להעדיף פרוקסי חיצוני שהוגדר מראש או את נתיב ה-SOCKS5/HTTP של החשבון; אחרת, מותר להשתמש ב-Direct.</td>
+</tr>
+<tr>
+<td>מנהרה / VPN (<code>tunnel</code>)</td>
+<td>מותר להשתמש בקישורים ישירים ובמעבר אוטומטי מיידי למאגר חלופי.</td>
+<td>גישה ישירה מותרת כאשר לא הוגדר שרת proxy מתאים.</td>
+</tr>
+</tbody>
+</table></div>
+<p>מצב מנהרה/VPN מניח שאתה מנהל את הרשת הזו בנפרד. ללא
+מנהרה פעילה, היעדים יכולים לראות את כתובת השרת עצמו. בחר את המצב בהתאם
+לרשת שלך בפועל, ולא לפי שם האפשרות.</p>
+<h3 id="choose-a-route">בחר מסלול<a class="anchor" href="#choose-a-route" aria-label="קישור לסעיף זה">#</a></h3>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
@@ -160,14 +194,19 @@ MTProxy הוא פרוקסי העברה של טלגרם; SOCKS5 ו-HTTP CONNECT �
 </thead>
 <tbody>
 <tr>
+<td>MTProxy אוטומטי</td>
+<td>רשימות מובנות או קטלוג אופרטורים</td>
+<td>שומר על מסלול טלגרם פעיל; המעבר לגיבוי ישיר תלוי במצב ה-IP</td>
+</tr>
+<tr>
 <td>ישיר</td>
-<td>אין</td>
-<td>Telethon מתחבר ישירות ל-Telegram</td>
+<td>מצב מנהרה/VPN</td>
+<td>Telethon משתמש במסלול הרשת של המארח</td>
 </tr>
 <tr>
 <td>SOCKS5</td>
 <td>שרת, יציאה, שם משתמש/סיסמה (אופציונלי)</td>
-<td>python-socks 2.8.2, rdns מופעל</td>
+<td>python-socks, תמיכה ב-DNS של יעד מרוחק</td>
 </tr>
 <tr>
 <td>HTTP CONNECT</td>
@@ -187,30 +226,66 @@ MTProxy הוא פרוקסי העברה של טלגרם; SOCKS5 ו-HTTP CONNECT �
 פעולה זו מאמתת וממלאת את השדות ללא יצירת חיבור או שמירה; בדקו ושמרו את
 המסלול בנפרד. שדות ידניים נשארים זמינים. ראו <a href="https://core.telegram.org/api/links#proxy-links">קישורי פרוקסי של טלגרם</a>.</p>
 <h3 id="public-proxies-supplied-by-your-installation">פרוקסי ציבוריים המסופקים על ידי ההתקנה שלכם<a class="anchor" href="#public-proxies-supplied-by-your-installation" aria-label="קישור לסעיף זה">#</a></h3>
-<p>הגדרות החיבור כוללות רשימה ציבורית מוכנה מראש
-<a href="https://github.com/SoliSpirit/mtproto">מ-SoliSpirit/mtproto</a> ו-
-<a href="https://github.com/zakky8/mtproto-proxy-pro">zakky8/mtproto-proxy-pro</a>. התמונת המצב המצורפת
-מכילה נתונים על נקודות קצה ציבוריות, ייחוס למקור ותאריכי הורדה, אך לא
-טענות האימות של אף אחד מהפרויקטים. הכלי פועל ללא צורך בהורדת דבר בעת ההפעלה. בחרו
-ערך, שמרו את המסלול, ואז בדקו את חיבור ה-Telegram לפני הכניסה.</p>
-<p><strong>עדכון הרשימות הציבוריות</strong> מביא את שני עדכוני ה-HTTPS הקבועים לפי בקשה. כל תגובה
-מוגבלת ל-1 MiB ול-20 שניות; הפניות נדחות. נשמרות לכל היותר 64 רשומות תואמות
-לכל מקור, לאחר הסרת כפילויות בין המקורות. קישורים לא חוקיים, כתובות IP פרטיות/שמורות
-, שמות מארחים מקומיים ורשומות Fake TLS <code>ee</code> שאינן נתמכות, מדלגים. שמות מארחים
-ציבוריים מפורשים בעת הבחירה; כל תשובה חייבת להיות ניתנת לניתוב גלובלי וה-
-IP הנבחר מוצמד במסלול השמור. הדבר מונע משם מארח של עדכון להפנות מאוחר יותר
-חיבור שמור לכתובת פרטית. יש להחיל ערך מחדש כדי לפרש אותו שוב.</p>
-<p>כל סביבת עבודה שומרת את תמונות המצב האחרונות והתקינות של המקור ב-<code>public-proxies.json</code>. תגובות מקור שנכשלו,
-היו ריקות או לא תואמות, שומרות על הערכים הקודמים של אותו מקור ועל חותמת הזמן.
+<p>הרשימה המובנית משלבת ארבעה מקורות:
+<a href="https://github.com/SoliSpirit/mtproto">SoliSpirit/mtproto</a>,
+<a href="https://github.com/zakky8/mtproto-proxy-pro">zakky8/mtproto-proxy-pro</a>,
+<a href="https://github.com/kort0881/telegram-proxy-collector">kort0881/telegram-proxy-collector</a>
+<a href="https://github.com/3yed-61/MTP-Collector">ו-3yed-61/MTP-Collector</a>.
+תמונת המצב המצורפת מכילה נתוני נקודות קצה, ייחוס למקורות ותאריכי הורדה.
+הופעתו של ספק ברשימה אינה מהווה הוכחה לכך שהפרוקסי פועל או מספק כל עדכון של טלגרם.</p>
+<p><strong>MTProxy האוטומטי</strong> בודק את קישוריות התקשורת של טלגרם, שומר על פרוקסי פעיל
+ומעביר לפרוקסי אחר כאשר הוא נכשל. סביבות העבודה מעדיפות פרוקסי שונים כאשר יש מספיק
+רשומות פעילות זמינות; כתובת יציאה ייחודית אינה מובטחת. פרוקסי שנכשלו
+נחים לפני ניסיון נוסף. אם אף אחד לא עובד, מצב ה-IP קובע אם האיסוף
+חייב להמתין או שמותר להשתמש בחיבור ישיר. החלפת פרוקסי אינה משנה את החשבון
+או מוחקת את היומן שלו. בחירות ושינויים במסלול נרשמים ביומן החתום.</p>
+<p>כאשר מסלולים אוטומטיים פעילים, הרשימות מתעדכנות מדי שעה ובדיקות העברה מתבצעות
+מדי עשר דקות כברירת מחדל. ניתן להגדיר מרווחי זמן אלה. <strong>עדכון רשימות ציבוריות</strong>
+מחייב רענון; הצגת הרשימה בלבד אינה משנה מסלול ידני שנשמר.</p>
+<p>כל תגובה בפיד מוגבלת ל-1 MiB עם זמן המתנה של שמונה שניות לבקשה ו
+מועד אחרון להורדה של 20 שניות בסך הכל; הפניות
+נדחות. עד 64 רשומות תואמות לכל מקור נשמרות ונעשות בהן הסרת כפילויות.
+המנתח מקבל סודות תומכים בשיטת הקסדצימלית וב-base64url וכן את פיד ה-JSON.
+<code>ee</code> TLS מזויף, קישורים לא חוקיים, ליטרלים של כתובות IP פרטיות/שמורות ושמות מארחים מקומיים
+מוחמצים. שמות מארחים מפורשים ונבדקים לפני השימוש, וכתובת ה-IP שנבחרה נקבעת
+לאותו חיבור. רכישה מחדש אוטומטית מפרשת שם מארח שוב; יש להחיל מחדש
+ערך ידני כדי לפרש אותו שוב.</p>
+<p>תגובות פיד שנכשלו, ריקות או שאינן תואמות שומרות על תמונת המצב הקודמת של המקור.
 העדכונים הם אטומיים, מסודרים ברצף ומוגבלים לניסיון אחד בדקה לכל סביבת עבודה.
-לא העדכון ולא הצפייה ברשימה משנים את המסלול הנבחר. הזמינות עדיין
-מחייבת בדיקת העברה; רישום של ספק אינו מהווה הוכחה למסירה מלאה ב-Telegram.</p>
-<p>הורדות הרשימה משתמשות בחיבור HTTPS נפרד, ישיר כברירת מחדל. הגדר את
-<code>TGWITNESS_PROXY_FEED_PROXY</code> לכתובת URL מסוג HTTP/SOCKS5 כדי לנתב בקשות אלה דרך פרוקסי הורדות;
-שני גרסאות ה-Collector של Compose מעבירות זאת. לא נשלחים לספקי השירותים נתוני הפעלה של טלגרם, פרטי הזדהות ל-API,
-אסימון לוח הבקרה או אסימון הבוט. ה-MTProxy של סביבת העבודה אינו יכול לבצע
-הורדות HTTP אלו. שמות הספקים, תאריכי השמירה ונתיב ההורדה מפורטים
-תחת <strong>הכותרת &quot;מאיפה מגיעה הרשימה&quot;</strong>.</p>
+בדיקת העברה מוצלחת מבססת קישוריות, אך לא אנונימיות או שלמות הלכידה.</p>
+<p><strong>תעבורת טלגרם ובקשות HTTPS משתמשות בנתיבים שונים.</strong> הורדות רשימות משתמשות ב
+חיבור HTTPS נפרד ובנתיב הבקשות החיצוני המסופק.
+<code>TGWITNESS_PROXY_FEED_PROXY</code> מבטל במפורש נתיב זה באמצעות פרוקסי HTTP/SOCKS5;
+שני גרסאות ה-Compose של האספן מעבירות אותו. מאגר הרקע פועל בהתאם לסביבת העבודה הראשית.
+לא נשלחים לספקי העדכונים שום הפעלות טלגרם, פרטי הזדהות ל-API, אסימון לוח הבקרה או אסימון בוט.
+שמות הספקים, תאריכי הצילום ומסלול ההורדה מופיעים תחת <strong>&quot;מאיפה מגיעה הרשימה&quot;</strong>.</p>
+<p>MTProxy מעביר תעבורת טלגרם בלבד. פעולות HTTP בסביבת העבודה, כגון חותמות זמן,
+התראות, עותקים מחוץ לאתר ובדיקות מקור, משתמשות בפרוקסי SOCKS5/HTTP נפרד כאשר
+הוא מוגדר, ולאחר מכן במסלול SOCKS5/HTTP של החשבון. ללא אף אחד מהם, Hide IP דוחה את
+הבקשה; המצבים האחרים מאפשרים חיבור ישיר. ניתן להשבית בקשות חיצוניות. פרוקסי להורדת עדכונים שהוגדר במפורש
+נשאר כקיצור דרך נפרד הניתן לעקיפה על ידי המפעיל.
+שירות העדים העצמאי שומר על מסלול משלו.</p>
+<details>
+<summary><strong>פרמטרים אוטומטיים של מאגר</strong></summary>
+
+תחת **פרמטרים → MTProxy אוטומטי**, הגדר את סף הכישלון, זמן ההמתנה,
+הרוטציה המתוכננת, שיתוף הפרוקסי ועיכוב הגיבוי המותר.
+
+| בקרה | ברירת מחדל |
+| --- | --- |
+| ניתוק לפני החלפה | 3 תוך 10 דקות |
+| מספר הפרוקסי שנבדקים בכל ניסיון חיבור | 3 |
+| זמן מנוחה ראשון / מקסימלי לאחר כשל | 10 דקות / 6 שעות |
+| רוטציה מתוכננת | מושבת; הפעלה במקרה של כשל |
+| חשבונות לכל פרוקסי | 0: עדיף כניסות נפרדות, שתף לפי הצורך. הגדר 1 כדי להמתין לכניסה בלעדית. |
+| עיכוב לפני מעבר ישיר מותר | 10 דקות; Hide IP עדיין מסרב ל-Direct |
+| רענון פיד / בדיקות העברה | 60 / 10 דקות; ערכי סביבת העבודה הראשית חלים על המאגר המשותף |
+
+פרוקסי שונים אינם מבטיחים כתובות יציאה שונות. הגדרות אלו אינן
+עוקפות את המגבלות של Telegram ואינן מבטיחות אנונימיות.
+
+</details>
+
 <p>כדי להחליף את הרשימה הציבורית בקטלוג המפעילים שלך, הגדר את העקיפה שלהלן.
 פעולה זו מבטלת לחלוטין את המנויים החיצוניים, גם כאשר מערך ה-<code>proxies</code> שלו ריק.</p>
 <p>העתיקו <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/proxies.config.example">את הקטלוג הריק</a>
@@ -230,10 +305,10 @@ IP הנבחר מוצמד במסלול השמור. הדבר מונע משם מא�
 ספרייה זו אינה נכללת ב-Git, בהקשר הבנייה של Docker ובארכיוני המקור. קטלוג זה
 מגדיר את חשבונות האיסוף; <a href="../witness/">בוט ה-witness</a> משתמש במסלול
 HTTP/SOCKS5 משלו, ולא ב-MTProxy.</p>
-<p>אם ה-proxy נכשל, TgWitness אינו עובר למצב Direct. יש להשהות את המעקב לפני
-שינוי המסלול. שמירת המסלול מנתקת לקוחות ישנים ומבטלת התחברות שלא הושלמה;
-לקוח חדש משתמש במסלול שנשמר. הקשר בין היומן/הפעלה של החשבון נשמר.
-ההגדרות מחליפות את המסלול הקודם: יש להזין מחדש את פרטי הזיהוי של ה-proxy בעת עריכתו.</p>
+<p>המעבר הישיר נשלט על ידי מצב ה-IP שלעיל. יש להשהות את המעקב לפני
+שינוי מסלול. שמירה מנתקת לקוחות ישנים ומבטלת התחברות שלא הושלמה;
+לקוח חדש משתמש במסלול השמור. הקישור בין היומן/הפעלה של החשבון נשאר.
+ההגדרות מחליפות את המסלול הקודם: יש להזין מחדש את פרטי הכניסה לפרוקסי בעת עריכתו.</p>
 <p>פרטי ההזדהות מוצפנים ב-<code>network.enc</code>. ה-API אינו מחזיר את שם המשתמש,
 הסיסמה או המפתח הסודי. הרשומות החתומות מכילות את סוג המסלול ואת המידע האם פרטי ההזדהות
 קיימים, ללא ציון נקודת הקצה והמפתחות הסודיים. המפעיל יכול לראות את נקודת הקצה
@@ -298,8 +373,9 @@ Telegram מספקת לעתים קרובות כתובות IP מספריות של 
 </tbody>
 </table></div>
 <p><strong>ההגנה על האחסון</strong> בחשבון מציגה מצבים אלה. אסימון הפאנל הוא
-סוד גישה, ולא סיסמת הצפנה. אסימון אחד שולט בכל סביבות העבודה;
-סביבות העבודה אינן משתמשים נפרדים או דיירים מבודדים.</p>
+סוד גישה, ולא סיסמת הצפנה. הוא מעניק גישה למנהל;
+ניתן להגביל את טווח <a href="../access/">האסימונים שהונפקו</a> לחשבונות ולצ&#x27;אטים. סביבות העבודה חולקות
+את תהליך המארח ואינן דיירים מבודדים.</p>
 <p>הדגמה סינתטית מבודדת, שהופעלה במפורש, יכולה להיפתח באופן אוטומטי באמצעות
 חיבור לופבק ישיר. הדבר נעשה באמצעות יכולת נפרדת למשך חיי התהליך; היא אינה
 חושפת את אסימון הפאנל שהוגדר ואינה מעניקה גישה לסביבות עבודה אמיתיות. בקשות מרחוק,
@@ -354,7 +430,7 @@ KDF של סיסמה. לא מתקבלות סיסמאות אנושיות שריר�
 <a href="../verification/">VERIFICATION.md</a> <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">ו-LIVE_ACCEPTANCE.md</a>.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/CONNECTION-SECURITY.md">ערוך דף זה ב-GitHub ↗</a><a class="next-guide" href="../deployment/"><span>השלב הבא</span><strong>פריסה ←</strong></a><p>מדריכים אלה מתארים את היישום הנוכחי. תוצאות האימות והפערים הנותרים מתועדים בנפרד. <a href="../verification/">מה נבדק ←</a></p></footer>
 </main>
-<aside class="toc" aria-label="בעמוד זה"><p class="nav-label">בעמוד זה</p><a href="#authentication-methods">שיטות אימות</a><a href="#import-a-telethon-session-file">ייבוא קובץ הפעלה של Telethon</a><a href="#mtproto-telethon-and-proxies">MTProto, Telethon ושרתי פרוקסי</a><a href="#encryption-and-signatures">הצפנה וחתימות</a><a href="#external-master-key">מפתח ראשי חיצוני</a><a href="#sources-and-verification-scope">מקורות והיקף האימות</a></aside>
+<aside class="toc" aria-label="בעמוד זה"><p class="nav-label">בעמוד זה</p><a href="#authentication-methods">שיטות אימות</a><a href="#import-a-telethon-session-file">ייבוא קובץ הפעלה של Telethon</a><a href="#mtproto-telethon-and-proxies">MTProto, Telethon ושרתי פרוקסי</a><a href="#ip-modes">מצבי IP</a><a href="#encryption-and-signatures">הצפנה וחתימות</a><a href="#external-master-key">מפתח ראשי חיצוני</a><a href="#sources-and-verification-scope">מקורות והיקף האימות</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>קוד פתוח · פועל על המחשב שלכם</span><a href="../../../../LICENSE">רישיון MIT</a><a href="../notice/">הודעת המפעיל</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">אבטחה</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "ממתין להודעה", "Step through a fictional send, edit and delete.": "עקבו אחר תהליך דמיוני של שליחה, עריכה ומחיקה.", "No observations yet. Start the sequence or advance one event.": "אין עדיין הערות. התחל את הרצף או עבור לאירוע הבא.", "Meet at 10:00": "נפגש בשעה 10:00", "A new message is visible in the chat.": "הודעה חדשה נראית בצ'אט.", "Record 1 appended: the collector observed the original message.": "הודעה מס' 1 מצורפת: האספן הבחין בהודעה המקורית.", "Meet at 11:00": "נפגש בשעה 11:00", "The current text changes. The earlier observation stays.": "הטקסט הנוכחי משתנה. ההערה הקודמת נשארת.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "רשומה 2 צורפה: העריכה מהווה תצפית חדשה. ברשומה 1 עדיין מופיע הטקסט המקורי.", "Message deleted": "ההודעה נמחקה", "The message has disappeared from the chat view.": "ההודעה נעלמה מתצוגת הצ'אט.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "הוספה של תיעוד 3: הודעת המחיקה נשמרת לצד שתי הגרסאות שנצפו.", "0 records": "0 רשומות", "1 record": "1 רשומה", "2 records": "2 רשומות", "3 records": "3 רשומות", "Complete / {n} of 3": "השלם / {n} מתוך 3", "Step / {n} of 3": "שלב / {n} מתוך 3", "Pause": "הפסקה", "Replay sequence": "רצף השמעה", "Play sequence": "רצף הפעלה", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "דוגמה סטטית זמינה. כדי לחשב חתימות hash באופן אינטראקטיבי, פתחו דף זה ב-HTTPS או בתצוגה מקדימה ב-localhost עם תמיכה ב-Web Crypto.", "No record supplied": "לא נמסר תיעוד", "Tail removed": "הזנב הוסר", "≠ saved hash": "≠ חתימת hash שנשמרה", "Rebuilt · different hash": "נבנה מחדש · חתימה שונה", "= saved hash": "= חתימת hash שנשמרה", "Same length and matching head.": "אורך זהה וכותרת תואמת.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "שלושת ההאשים שחושבו תואמים להאשים שנשמרו. דוגמה זו תואמת את הגבול של שלוש רשומות שנשמר.", "Same saved head; the journal prefix fails verification.": "אותו כותרת שמורה; קידומת היומן נכשלה באימות.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "הרשומה 2 כבר אינה תואמת את ה-hash השמור שלה. בדיקה של ה-head האחרון שנשמר בלבד עלולה לפספס זאת; המאמת בודק כל רשומה.", "Head differs from the retained checkpoint.": "הכותרת שונה מנקודת הבדיקה שנשמרה.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "ה-hash המשוחזרים מקושרים זה לזה, אך ה-head הסופי השתנה. נקודת הבדיקה שנשמרה דוחה היסטוריה זו. חתימות מקוריות גם הן לא יאושרו על רשומות ששונו.", "Too short: 2 supplied records \u003c 3 retained records.": "קצר מדי: 2 רשומות שסופקו \u003c 3 רשומות שנשמרו.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "שני ה-hash הנותרים עדיין תואמים. נקודת הבדיקה שנשמרה חושפת את החלק החסר. ללא הגבול הקודם הזה, הקידומת הקצרה הזו לבדה לא הייתה חושפת את ההשמטה.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "חישוב ה-Hash אינו זמין בדפדפן זה. הנוסחאות וההסבר הסטטי המופיעים להלן נותרים זמינים.", "{n} records": "{n} רשומות", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "התקבל: הספירה גדלה, החתימה מאומתת והמפתח תואם. העד שומר על הגבול החדש הזה.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "חזרה לאחור: התשובה החתומה מדווחת על פחות רשומות מאשר נקודת הבדיקה האחרונה שאושרה. ה-Witness מתעד את הבעיה ושומר על הגבול שאושר קודם לכן.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: הספירה נותרה ללא שינוי, אך הראש שונה. ה-witness מתעד את חילוקי הדעות ושומר על הגבול שהתקבל קודם לכן.", "No answer": "אין תשובה", "boundary unknown": "גבול לא ידוע", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "אין תגובה: ה-Witness מתעד את הבדיקה שנכשלה. הוא אינו יכול לקבוע את מצבו הנוכחי של האספן. אם ה-Witness עדיין יכול להגיע ל-Bot API ומדיניות הפרסום שלו מאפשרת זאת, הוא יכול לפרסם את הכישלון הזה.", "Send {n}": "שלח {n}", "Edit {n}": "ערוך {n}", "Delete {n}": "מחק {n}", "Both accounts captured all six expected observations in this example.": "שני החשבונות תיעדו את כל ששת הממצאים הצפויים בדוגמה זו.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "חשבון B עדיין תפס 6 מתוך 6. שתי קבלות לקחו יותר זמן. יחס הלכידה ועיכוב קבלת ההודעות עונים על שאלות שונות.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "חשבון B תפס 5 מתוך 6 עד למועד הסיום (83.3%). לעריכה החסרה אין עיכוב נמדד. תוצאה זו מתארת רק את שש הפעולות המבוקרות.", "not observed by cutoff": "לא נצפה עד למועד הסגירה", "{s} seconds": "{s} שניות", "Exact values follow in the table.": "הערכים המדויקים מופיעים בטבלה.", "{s} s": "{s} s", "Not observed": "לא נצפה", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "ארבעה צ'אטים מספקים תצפיות שונות. יש לעקוב אחר רשומות המקור עבור כל חיבור; אין לייחס את ההודעה בערוץ למשתמש 71001 ללא ציון השולח.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "הרשומות מס' 146 ו-205 מציגות את אותו מזהה שולח, 71001. דבר זה מקשר בין הפוסטים שנצפו בחשבון טלגרם בשני צ'אטים שונים. הוא אינו מזהה אדם אמיתי ואינו מייחס את הפוסט לערוץ.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "כתובת היעד pay.example.invalid/new מופיעה ברישום הקבוצה מס' 146, במקלדת הבוט מס' 173, בעריכת הערוץ מס' 188 ובהודעה פרטית מס' 205. כתובת יעד חוזרת מקשרת בין החומרים; היא אינה מהווה הוכחה לשליטה משותפת בחשבונות אלה.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "בקבלות המדיה המושלמות מס' 151 ו-209 יש ערכי SHA-256 מלאים זהים במקרה הבדיוני הזה. השוו את הבתים בפועל ואת רשומות ההודעות הקשורות אליהם. הקובץ התואם אינו מזהה את יוצרו ואינו מוכיח מי העביר אותו.", "the encrypted off-site copy": "העותק המוצפן מחוץ לאתר", "notifications": "התראות", "checkpoint hashes for timestamps": "חשישי checkpoint עבור חותמות זמן", "signed checkpoints for the witness": "נקודות ביקורת חתומות עבור ה-Witness", "Switched on in this example": "מופעל בדוגמה זו", "Optional · off by default": "אופציונלי · כבוי כברירת מחדל", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "יוצא מהמכשיר הזה: החיבור ל-Telegram ו-{list}. שום דבר אחר.", "Default: only the Telegram connection leaves this machine.": "ברירת מחדל: רק החיבור ל-Telegram יוצא ממחשב זה.", "{done} of {total} done": "{done} מתוך {total} הושלמו", "Mark step {n} as done": "סמן את השלב {n} כ\"בוצע\"", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "העתק", "Copied": "הועתק", "Command copied.": "הפקודה הועתקה.", "Selected — Ctrl/Cmd+C": "נבחר — Ctrl/Cmd+C", "Command selected. Copy it manually.": "הפקודה נבחרה. העתיקו אותה ידנית.", "Command copied to clipboard.": "הפקודה הועתקה ללוח.", "Select text": "בחר טקסט", "Clipboard unavailable. Command selected; copy it manually.": "הלוח אינו זמין. הפקודה נבחרה; העתק אותה ידנית.", "A message arrives. The first observation is saved.": "הודעה נכנסת. התצפית הראשונה נשמרת.", "The time changes. Both captured versions stay.": "הזמן משתנה. שתי הגרסאות שנשמרו נשארות.", "The message disappears. The captured history remains.": "ההודעה נעלמת. ההיסטוריה שנשמרה נשארת.", "Pause example animation": "השהה את האנימציה לדוגמה", "Play example animation": "הפעל אנימציה לדוגמה", "Play": "הפעל", "Full-size workspace screenshot": "צילום מסך של סביבת העבודה בגודל מלא", "Workspace screenshot · fictional data": "צילום מסך של סביבת העבודה · נתונים פיקטיביים", "Close": "סגור", "Close screenshot": "סגור צילום מסך", "Scrollable full-size screenshot": "צילום מסך בגודל מלא הניתן לגלילה", "Enlarge: {name}": "הגדל: {name}", "View full size": "הצג בגודל מלא"}</script>

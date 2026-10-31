@@ -2,15 +2,15 @@
 <html lang="th" dir="ltr" class="docs-root">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0b1120"><title>การเชื่อมต่อ, พร็อกซี และการคุ้มครองข้อมูล | TgWitness</title>
-<meta name="description" content="คู่ API, วิธีการลงชื่อเข้าใช้, SOCKS5, HTTP และ MTProxy routes, รายชื่อพร็อกซีสาธารณะ และสิ่งที่แต่ละเส้นทางปกป้อง"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/">
+<meta name="description" content="การยืนยันตัวตน, กลุ่มพร็อกซีอัตโนมัติ, โหมด IP, นโยบายสำรอง, คำขอจากภายนอก และการจัดเก็บข้อมูลลับ"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/">
 <meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
 <meta property="og:locale" content="th_TH">
-<meta property="og:title" content="การเชื่อมต่อ, พร็อกซี และการคุ้มครองข้อมูล | TgWitness"><meta property="og:description" content="คู่ API, วิธีการลงชื่อเข้าใช้, SOCKS5, HTTP และ MTProxy routes, รายชื่อพร็อกซีสาธารณะ และสิ่งที่แต่ละเส้นทางปกป้อง">
+<meta property="og:title" content="การเชื่อมต่อ, พร็อกซี และการคุ้มครองข้อมูล | TgWitness"><meta property="og:description" content="การยืนยันตัวตน, กลุ่มพร็อกซีอัตโนมัติ, โหมด IP, นโยบายสำรอง, คำขอจากภายนอก และการจัดเก็บข้อมูลลับ">
 <meta property="og:url" content="https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="TgWitness — Telegram observation journal">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/connection/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/connection/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/connection/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/connection/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/connection/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/connection/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/connection/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/connection/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/connection/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/connection/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/connection/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/connection/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/connection/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/connection/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/connection/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/", "url": "https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/", "name": "การเชื่อมต่อ, พร็อกซี และการคุ้มครองข้อมูล | TgWitness", "description": "คู่ API, วิธีการลงชื่อเข้าใช้, SOCKS5, HTTP และ MTProxy routes, รายชื่อพร็อกซีสาธารณะ และสิ่งที่แต่ละเส้นทางปกป้อง", "inLanguage": "th", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "หน้าหลัก", "item": "https://phishdestroy.github.io/TgWitness/th/"}, {"@type": "ListItem", "position": 2, "name": "เอกสาร", "item": "https://phishdestroy.github.io/TgWitness/th/docs/"}, {"@type": "ListItem", "position": 3, "name": "อ้างอิง", "item": "https://phishdestroy.github.io/TgWitness/th/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "การเชื่อมต่อ, พร็อกซี และการคุ้มครองข้อมูล", "item": "https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/"}]}]}</script>
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/connection/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/connection/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/connection/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/connection/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/connection/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/connection/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/connection/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/connection/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/connection/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/connection/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/connection/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/connection/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/connection/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/connection/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/connection/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/", "url": "https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/", "name": "การเชื่อมต่อ, พร็อกซี และการคุ้มครองข้อมูล | TgWitness", "description": "การยืนยันตัวตน, กลุ่มพร็อกซีอัตโนมัติ, โหมด IP, นโยบายสำรอง, คำขอจากภายนอก และการจัดเก็บข้อมูลลับ", "inLanguage": "th", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "หน้าหลัก", "item": "https://phishdestroy.github.io/TgWitness/th/"}, {"@type": "ListItem", "position": 2, "name": "เอกสาร", "item": "https://phishdestroy.github.io/TgWitness/th/docs/"}, {"@type": "ListItem", "position": 3, "name": "อ้างอิง", "item": "https://phishdestroy.github.io/TgWitness/th/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "การเชื่อมต่อ, พร็อกซี และการคุ้มครองข้อมูล", "item": "https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/"}]}]}</script>
 <script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
 <link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../../../docs.css">
@@ -27,11 +27,11 @@
 <div class="header-tools"><details class="lang-menu"><summary aria-label="ภาษา"><span aria-hidden="true">◍</span> ไทย</summary><div class="lang-list"><a href="../../../../docs/reference/connection/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/connection/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/connection/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/connection/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/connection/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/connection/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/connection/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/connection/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/connection/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/connection/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/connection/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/connection/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/connection/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/connection/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/connection/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/connection/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/connection/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/connection/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/connection/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/connection/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/connection/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/connection/" hreflang="ja" lang="ja">日本語</a><a href="./" hreflang="th" lang="th" aria-current="true">ไทย</a><a href="../../../../he/docs/reference/connection/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/connection/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="สลับระหว่างธีมสีอ่อนและสีเข้ม"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
 </div></header>
 <div class="docs-layout">
-<aside class="sidebar"><nav aria-label="คู่มือ"><a href="../../../guides/modes.html">โหมด, สถานการณ์ และระดับหลักฐาน</a><p class="nav-label">ขั้นตอนแรก</p><a href="../../start/">เริ่มใช้งานได้ภายในไม่กี่นาที</a><a href="../../accounts/">เชื่อมต่อบัญชี</a><a href="../../proxies/">เลือกพร็อกซี</a><a href="../../exports/">ส่งออกและตรวจสอบ</a><p class="nav-label">เข้าใจหลักฐาน</p><a href="../../concepts/">ดูวิธีการทำงานของหลักฐาน</a><a href="../../cases/">สืบสวนในทุกการสนทนา</a><a href="../../security/">รักษาความปลอดภัย</a><p class="nav-label">อ่านเพิ่มเติม</p><a href="../../witness/">ตั้งค่าบอทพยาน</a><a href="../../server/">ให้ระบบทำงานต่อไป</a><a href="../../troubleshooting/">ค้นหาว่าเกิดข้อผิดพลาดอะไร</a></nav><nav class="wiki-nav" aria-label="อ้างอิง"><p class="nav-label"><a class="nav-label-link" href="../">อ้างอิง</a></p><details class="wiki-group" open><summary>การตั้งค่า</summary><a href="../quickstart/">เริ่มต้นอย่างรวดเร็ว</a><a href="../accounts/">รูปแบบบัญชีและเซสชัน</a><a href="./" aria-current="page">การเชื่อมต่อ, พร็อกซี และการคุ้มครองข้อมูล</a><a href="../deployment/">การติดตั้ง</a></details><details class="wiki-group"><summary>Collect</summary><a href="../collection/">วิธีการเก็บรวบรวมข้อมูล</a><a href="../operations/">ขั้นตอนการทำงานและการดำเนินการ</a><a href="../investigation/">โหมดการสืบสวน</a><a href="../features/">คุณสมบัติและข้อจำกัด</a></details><details class="wiki-group"><summary>หลักฐาน</summary><a href="../how-it-works/">วิธีการทำงานของหลักฐาน</a><a href="../evidence/">รูปแบบหลักฐาน</a><a href="../witness/">พยานอิสระ</a><a href="../timestamp/">ข้อมูลเวลา</a></details><details class="wiki-group"><summary>ความปลอดภัยและโครงการ</summary><a href="../security/">ความปลอดภัยและการจัดการข้อมูล</a><a href="../architecture/">สถาปัตยกรรม</a><a href="../verification/">สิ่งที่ได้รับการทดสอบแล้ว</a><a href="../license/">ประกาศเรื่องใบอนุญาตและความไม่เข้ากันทางสถาปัตยกรรม</a><a href="../notice/">ประกาศความไม่เข้ากันได้ของผู้ดำเนินการ</a><a href="../changelog/">บันทึกการเปลี่ยนแปลง</a></details></nav><p class="sidebar-note">v0.7.0<br>โอเพนซอร์ส · ทำงานบนเครื่องของคุณ</p></aside>
+<aside class="sidebar"><nav aria-label="คู่มือ"><a href="../../../guides/modes.html">โหมด, สถานการณ์ และระดับหลักฐาน</a><a href="../../../../sealed.html?lang=en">รวบรวมผ่าน GitHub Actions (รุ่นทดลอง)</a><p class="nav-label">ขั้นตอนแรก</p><a href="../../start/">เริ่มใช้งานได้ภายในไม่กี่นาที</a><a href="../../accounts/">เชื่อมต่อบัญชี</a><a href="../../proxies/">เลือกพร็อกซี</a><a href="../../exports/">ส่งออกและตรวจสอบ</a><p class="nav-label">เข้าใจหลักฐาน</p><a href="../../concepts/">ดูวิธีการทำงานของหลักฐาน</a><a href="../../cases/">สืบสวนในทุกการสนทนา</a><a href="../../security/">รักษาความปลอดภัย</a><p class="nav-label">อ่านเพิ่มเติม</p><a href="../../access/">แบ่งปันกรณีศึกษา</a><a href="../../witness/">ตั้งค่าบอทพยาน</a><a href="../../server/">ให้ระบบทำงานต่อไป</a><a href="../../troubleshooting/">ค้นหาว่าเกิดข้อผิดพลาดอะไร</a></nav><nav class="wiki-nav" aria-label="อ้างอิง"><p class="nav-label"><a class="nav-label-link" href="../">อ้างอิง</a></p><details class="wiki-group" open><summary>การตั้งค่า</summary><a href="../quickstart/">เริ่มต้นอย่างรวดเร็ว</a><a href="../accounts/">รูปแบบบัญชีและเซสชัน</a><a href="../access/">การเข้าถึงและสิทธิ์</a><a href="./" aria-current="page">การเชื่อมต่อ, พร็อกซี และการคุ้มครองข้อมูล</a><a href="../deployment/">การติดตั้ง</a></details><details class="wiki-group"><summary>Collect</summary><a href="../collection/">วิธีการเก็บรวบรวมข้อมูล</a><a href="../operations/">ขั้นตอนการทำงานและการดำเนินการ</a><a href="../investigation/">โหมดการสืบสวน</a><a href="../features/">คุณสมบัติและข้อจำกัด</a></details><details class="wiki-group"><summary>หลักฐาน</summary><a href="../how-it-works/">วิธีการทำงานของหลักฐาน</a><a href="../evidence/">รูปแบบหลักฐาน</a><a href="../witness/">พยานอิสระ</a><a href="../timestamp/">ข้อมูลเวลา</a></details><details class="wiki-group"><summary>ความปลอดภัยและโครงการ</summary><a href="../security/">ความปลอดภัยและการจัดการข้อมูล</a><a href="../architecture/">สถาปัตยกรรม</a><a href="../verification/">สิ่งที่ได้รับการทดสอบแล้ว</a><a href="../license/">ประกาศเรื่องใบอนุญาตและความไม่เข้ากันทางสถาปัตยกรรม</a><a href="../notice/">ประกาศความไม่เข้ากันได้ของผู้ดำเนินการ</a><a href="../changelog/">บันทึกการเปลี่ยนแปลง</a></details></nav><p class="sidebar-note">v0.7.0<br>โอเพนซอร์ส · ทำงานบนเครื่องของคุณ</p></aside>
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="คู่มือ"><a href="../../../">หน้าหลัก</a> <span aria-hidden="true">/</span> <a href="../../">เอกสาร</a> <span aria-hidden="true">/</span> <a href="../">อ้างอิง</a> <span aria-hidden="true">/</span> <span aria-current="page">การเชื่อมต่อ, พร็อกซี และการคุ้มครองข้อมูล</span></nav>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">ค้นหาในเอกสาร</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="ลองใช้ proxy, hash chain, token หรือ witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="ค้นหาอย่างชัดเจน" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">พิมพ์คำเพื่อค้นหาในคู่มือและเอกสารอ้างอิง การค้นหาจะเก็บไว้ในเบราว์เซอร์ของคุณ</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">อ้างอิง / การตั้งค่า</p><h1>การเชื่อมต่อ, พร็อกซี และการคุ้มครองข้อมูล</h1><p class="guide-outcome">คู่ API, วิธีการลงชื่อเข้าใช้, SOCKS5, HTTP และ MTProxy routes, รายชื่อพร็อกซีสาธารณะ และสิ่งที่แต่ละเส้นทางปกป้อง</p><div class="wiki-body"><p>เอกสารนี้อธิบายการทำงานและข้อจำกัดของ TgWitness 0.7.0 การยืนยันตัวตน,
+<article class="guide-content"><p class="eyebrow">อ้างอิง / การตั้งค่า</p><h1>การเชื่อมต่อ, พร็อกซี และการคุ้มครองข้อมูล</h1><p class="guide-outcome">การยืนยันตัวตน, กลุ่มพร็อกซีอัตโนมัติ, โหมด IP, นโยบายสำรอง, คำขอจากภายนอก และการจัดเก็บข้อมูลลับ</p><div class="wiki-body"><p>เอกสารนี้อธิบายการทำงานและข้อจำกัดของ TgWitness 0.7.0 การยืนยันตัวตน,
 การเข้าถึงแหล่งข้อมูล, การเชื่อมต่อเครือข่าย และความครบถ้วนของการบันทึก เป็นสถานะที่แยกกัน
 สำหรับขั้นตอนการลงชื่อเข้าใช้ รูปแบบไฟล์ และบัญชีหลายบัญชี ให้เริ่มจาก
 <a href="../accounts/">ส่วนบัญชีและรูปแบบเซสชัน</a> สำหรับนโยบายเหตุการณ์และพฤติกรรม
@@ -148,8 +148,42 @@ IP/พอร์ต/DC และความยาวของคีย์ กา
 <p>MTProto คือโปรโตคอลของ Telegram ส่วน Telethon คือไลบรารีไคลเอนต์ Python ที่ TgWitness ใช้
 MTProxy เป็นพร็อกซีการส่งข้อมูลของ Telegram; SOCKS5 และ HTTP CONNECT ให้บริการ
 อุโมงค์ทั่วไป แต่ไม่มีตัวใดที่สามารถแทนที่การยืนยันตัวตนของบัญชีได้</p>
-<p>หากต้องการใช้พร็อกซี ให้บันทึกเส้นทางสำหรับแต่ละพื้นที่ทำงานใน <strong>Account → Settings → Connection settings → Change connection route</strong> ก่อน
-เข้าสู่ระบบ ค่าเริ่มต้นคือ Direct.</p>
+<p>บันทึกเส้นทางสำหรับแต่ละพื้นที่ทำงานใน <strong>Account → Settings → Connection settings → Change connection route</strong> ก่อน
+เข้าสู่ระบบ พื้นที่ทำงานใหม่จะตั้งค่าเริ่มต้นเป็น <strong>Automatic MTProxy · public lists</strong> พร้อมฟังก์ชัน Hide IP
+พื้นที่ทำงานที่มีอยู่ซึ่งใช้ Direct อย่างชัดเจนจะยังคงรักษาโหมดที่อนุญาตให้ใช้งานได้</p>
+<h2 id="ip-modes">โหมด IP<a class="anchor" href="#ip-modes" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
+<p>เส้นทางจะกำหนดการเชื่อมต่อ โหมด IP จะกำหนดว่าเมื่อใดที่อยู่ของเซิร์ฟเวอร์
+อาจถูกเปิดเผย การควบคุมเหล่านี้ไม่ติดตั้ง VPN หรือกำหนดเส้นทางให้กับการรับส่งข้อมูลทั้งหมดของเครื่อง</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>โหมด</th>
+<th>Telegram</th>
+<th>คำขอจากภายนอก</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ซ่อน IP (<code>hide</code>)</td>
+<td>ใช้พร็อกซี; หากไม่มีพร็อกซีใดทำงานได้ ให้รอ ไม่มีการสำรองโดยตรง</td>
+<td>ต้องใช้ SOCKS5/HTTP; ปฏิเสธคำขอที่ไม่มีพร็อกซีที่เหมาะสม</td>
+</tr>
+<tr>
+<td>อนุญาตให้ใช้ตัวเลือกสำรอง (<code>fallback</code>)</td>
+<td>MTProxy อัตโนมัติอาจใช้ Direct หลังจากช่วงเวลาหน่วงที่กำหนดไว้ แล้วกลับสู่พร็อกซีที่ทำงานได้</td>
+<td>แนะนำให้ใช้พร็อกซีภายนอกที่ตั้งค่าไว้แล้ว หรือเส้นทาง SOCKS5/HTTP ของบัญชีนั้น; หากไม่มี สามารถใช้ Direct ได้</td>
+</tr>
+<tr>
+<td>Tunnel / VPN (<code>tunnel</code>)</td>
+<td>อนุญาตให้ใช้เส้นทางตรงและระบบสำรองอัตโนมัติแบบทันที</td>
+<td>การเชื่อมต่อโดยตรงได้รับอนุญาตเมื่อไม่มีการกำหนดค่าพร็อกซีที่เกี่ยวข้อง</td>
+</tr>
+</tbody>
+</table></div>
+<p>โหมด Tunnel/VPN สมมติว่าคุณจัดการเครือข่ายนั้นแยกต่างหาก หากไม่มี
+tunnel ที่ทำงานได้ ผู้รับปลายทางจะสามารถเห็นที่อยู่ของเซิร์ฟเวอร์เองได้ ให้เลือกโหมดตาม
+สภาพเครือข่ายจริงของคุณ ไม่ใช่ตามชื่อของตัวเลือก</p>
+<h3 id="choose-a-route">เลือกเส้นทาง<a class="anchor" href="#choose-a-route" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h3>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
 <tr>
@@ -160,14 +194,19 @@ MTProxy เป็นพร็อกซีการส่งข้อมูลข
 </thead>
 <tbody>
 <tr>
+<td>MTProxy อัตโนมัติ</td>
+<td>รายชื่อที่สร้างไว้ล่วงหน้า หรือแคตตาล็อกตัวดำเนินการ</td>
+<td>รักษาเส้นทาง Telegram ที่ใช้งานได้; การเปลี่ยนไปใช้เส้นทางสำรองโดยตรงขึ้นอยู่กับโหมด IP</td>
+</tr>
+<tr>
 <td>ตรงไปตรงมา</td>
-<td>ไม่มี</td>
-<td>Telethon เชื่อมต่อโดยตรงกับ Telegram</td>
+<td>โหมด Tunnel/VPN</td>
+<td>Telethon ใช้เส้นทางเครือข่ายของผู้จัดงาน</td>
 </tr>
 <tr>
 <td>SOCKS5</td>
 <td>โฮสต์, พอร์ต, ชื่อผู้ใช้/รหัสผ่าน (ตามต้องการ)</td>
-<td>python-socks 2.8.2, เปิดใช้งาน rdns</td>
+<td>python-socks, เปิดใช้งาน DNS ปลายทางระยะไกล</td>
 </tr>
 <tr>
 <td>HTTP CONNECT</td>
@@ -187,30 +226,66 @@ MTProxy เป็นพร็อกซีการส่งข้อมูลข
 สิ่งนี้จะตรวจสอบความถูกต้องและกรอกข้อมูลในช่องโดยไม่ต้องเชื่อมต่อหรือบันทึก; ตรวจสอบและบันทึก
 เส้นทางแยกกัน ช่องข้อมูลที่กรอกด้วยมือยังคงใช้งานได้ ดู<a href="https://core.telegram.org/api/links#proxy-links">ลิงก์พร็อกซี Telegram</a></p>
 <h3 id="public-proxies-supplied-by-your-installation">พร็อกซีสาธารณะที่ระบบของคุณจัดหา<a class="anchor" href="#public-proxies-supplied-by-your-installation" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h3>
-<p>การตั้งค่าการเชื่อมต่อรวมถึงรายชื่อสาธารณะที่เตรียมไว้จาก
-<a href="https://github.com/SoliSpirit/mtproto">SoliSpirit/mtproto</a> และ
-<a href="https://github.com/zakky8/mtproto-proxy-pro">zakky8/mtproto-proxy-pro</a> สแนปช็อตที่รวมมา
-มีข้อมูลจุดปลายทางสาธารณะ การระบุแหล่งที่มา และวันที่ดาวน์โหลด แต่ไม่รวมถึง
-คำยืนยันการตรวจสอบของทั้งสองโครงการ มันทำงานได้โดยไม่ต้องดาวน์โหลดข้อมูลใดๆ เมื่อเริ่มต้น เลือก
-รายการหนึ่ง บันทึกเส้นทาง แล้วทดสอบการเชื่อมต่อ Telegram ก่อนลงชื่อเข้าใช้</p>
-<p><strong>การอัปเดตรายชื่อสาธารณะ</strong>จะดึงข้อมูลจากสองฟีด HTTPS ที่กำหนดไว้ตามคำขอ แต่ละการตอบกลับ
-ถูกจำกัดไว้ที่ 1 MiB และ 20 วินาที; การเปลี่ยนเส้นทางจะถูกปฏิเสธ เก็บไว้สูงสุด 64 รายการที่เข้ากันได้
-ต่อแหล่งข้อมูล โดยจะกำจัดข้อมูลซ้ำระหว่างแหล่งข้อมูล ลิงก์ที่ไม่ถูกต้อง, IP แบบตัวอักษรส่วนตัว/สำรอง
-ชื่อโฮสต์ท้องถิ่น และรายการ Fake TLS <code>ee</code> ที่ไม่ได้รับการสนับสนุนจะถูกข้ามไป ชื่อโฮสต์สาธารณะ
-จะถูกแปลงเป็นที่อยู่ IP เมื่อมีการเลือก; ทุกคำตอบต้องสามารถกำหนดเส้นทางได้ทั่วโลก และ
-ที่อยู่ IP ที่เลือกจะถูกตรึงไว้ในเส้นทางที่บันทึกไว้ สิ่งนี้ป้องกันไม่ให้ชื่อโฮสต์ของฟีด
-เปลี่ยนเส้นทางเชื่อมต่อที่บันทึกไว้ไปยังที่อยู่ส่วนตัวในภายหลัง ให้ใช้รายการนั้นอีกครั้งเพื่อแปลงเป็นที่อยู่ IP ใหม่</p>
-<p>แต่ละพื้นที่ทำงานจะเก็บรักษาภาพถ่ายล่าสุดที่สมบูรณ์ของแหล่งข้อมูลใน<code>public-proxies.json</code> การตอบสนองจากแหล่งข้อมูลที่ล้มเหลว
-ว่างเปล่า หรือไม่เข้ากัน จะเก็บรักษาข้อมูลและเวลาบันทึกของรายการก่อนหน้าของแหล่งข้อมูลนั้น
-การอัปเดตเป็นแบบอะตอมิก (atomic) และถูกจัดลำดับ (serialized) โดยจำกัดการลองเพียงหนึ่งครั้งต่อนาทีต่อพื้นที่ทำงาน
-ทั้งการอัปเดตและการดูรายชื่อจะไม่เปลี่ยนแปลงเส้นทางที่เลือก ความพร้อมใช้งานยังคง
-ต้องผ่านการทดสอบการส่งข้อมูล; การปรากฏในรายชื่อของผู้ให้บริการไม่ใช่หลักฐานว่าข้อความ Telegram ได้ส่งถึงผู้รับอย่างสมบูรณ์</p>
-<p>การดาวน์โหลดรายการใช้การเชื่อมต่อ HTTPS แยกต่างหาก ซึ่งตั้งค่าเป็นแบบตรงโดยค่าเริ่มต้น ให้ตั้งค่า
-<code>TGWITNESS_PROXY_FEED_PROXY</code> เป็น URL HTTP/SOCKS5 เพื่อส่งคำขอเหล่านี้ผ่านพร็อกซีดาวน์โหลด
-; ทั้งสองเวอร์ชันของ Compose สำหรับผู้รวบรวมข้อมูลจะส่งต่อคำขอนี้ ไม่มีการส่งเซสชัน Telegram, ข้อมูลรับรอง API,
-โทเค็นแผงควบคุม หรือโทเค็นบอต ไปยังผู้ให้บริการ MTProxy ของพื้นที่ทำงานไม่สามารถ
-รับส่งการดาวน์โหลด HTTP เหล่านี้ได้ ชื่อผู้ให้บริการ วันที่ที่บันทึกไว้ และเส้นทางดาวน์โหลดจะถูกเปิดเผย
-ในส่วน <strong>&quot;ที่มาของรายการ&quot;</strong></p>
+<p>รายชื่อที่มาในตัวรวมสี่แหล่ง:
+<a href="https://github.com/SoliSpirit/mtproto">SoliSpirit/mtproto</a>,
+<a href="https://github.com/zakky8/mtproto-proxy-pro">zakky8/mtproto-proxy-pro</a>,
+<a href="https://github.com/kort0881/telegram-proxy-collector">kort0881/telegram-proxy-collector</a>
+และ <a href="https://github.com/3yed-61/MTP-Collector">3yed-61/MTP-Collector</a>.
+สแนปช็อตที่รวมไว้มีข้อมูลเกี่ยวกับจุดปลายทาง (endpoint), ที่มาของข้อมูล และวันที่ดาวน์โหลด
+การปรากฏในรายชื่อของผู้ให้บริการไม่ใช่หลักฐานว่าพร็อกซีนั้นทำงานได้หรือส่งข้อมูลอัปเดตของ Telegram ทุกครั้ง</p>
+<p><strong>MTProxy</strong> ตรวจสอบการเชื่อมต่อเครือข่ายของ Telegram <strong>โดยอัตโนมัติ</strong> รักษาพร็อกซีที่ทำงานได้
+และเปลี่ยนไปใช้พร็อกซีอื่นเมื่อพร็อกซีเดิมล้มเหลว พื้นที่ทำงาน (Workspaces) จะเลือกใช้พร็อกซีต่างกันเมื่อมี
+รายการที่ทำงานได้เพียงพอ; ไม่รับประกันว่าจะมีที่อยู่ทางออก (exit address) ที่ไม่ซ้ำกัน พร็อกซีที่ล้มเหลว
+จะพักก่อนที่จะลองอีกครั้ง หากไม่มีพร็อกซีใดทำงานได้ โหมด IP จะกำหนดว่าการเก็บข้อมูล
+ต้องรอหรือสามารถใช้การเชื่อมต่อโดยตรงได้ การเปลี่ยนพร็อกซีจะไม่เปลี่ยนบัญชี
+หรือลบบันทึกของบัญชีนั้น การเลือกและเปลี่ยนแปลงเส้นทางจะถูกบันทึกไว้ในบันทึกที่ลงนามแล้ว</p>
+<p>เมื่อเส้นทางอัตโนมัติกำลังทำงาน รายการจะอัปเดตทุกชั่วโมง และการตรวจสอบการส่งข้อมูลจะดำเนินการ
+ทุกสิบนาทีตามค่าเริ่มต้น ช่วงเวลานี้สามารถปรับตั้งค่าได้ <strong>การอัปเดตรายการสาธารณะจะขอ</strong>
+อัปเดต; การดูรายการเพียงอย่างเดียวจะไม่เปลี่ยนแปลงเส้นทางที่ตั้งไว้ด้วยตนเอง</p>
+<p>การตอบสนองของฟีดแต่ละครั้งถูกจำกัดไว้ที่ 1 MiB พร้อมเวลาหมดอายุคำขอ 8 วินาที และ
+เวลาดาวน์โหลดรวม 20 วินาที; การเปลี่ยนเส้นทาง
+จะถูกปฏิเสธ ระบบจะเก็บรักษาและกำจัดข้อมูลซ้ำได้สูงสุด 64 รายการที่เข้ากันได้ต่อแหล่งข้อมูล
+ตัววิเคราะห์ข้อมูล (parser) รับข้อมูลลับในรูปแบบเลขฐานสิบหก (hexadecimal) และ base64url ที่รองรับ รวมถึงฟีด JSON
+TLS ปลอม<code>ee</code> ลิงก์ที่ไม่ถูกต้อง ค่า IP แบบตัวอักษรส่วนตัว/สำรอง และชื่อโฮสต์ท้องถิ่นจะถูก
+ข้ามไป ชื่อโฮสต์จะถูกแปลงและตรวจสอบก่อนใช้งาน และ IP ที่เลือกจะถูกตรึง
+ไว้สำหรับการเชื่อมต่อนั้น การรับข้อมูลใหม่โดยอัตโนมัติจะแปลงชื่อโฮสต์อีกครั้ง; ให้ใช้
+ข้อมูลที่ป้อนด้วยตนเองอีกครั้งเพื่อแปลงชื่อโฮสต์นั้นใหม่</p>
+<p>การตอบสนองจากฟีดที่ล้มเหลว ว่าง หรือไม่เข้ากัน จะเก็บภาพสแนปช็อตของแหล่งข้อมูลเดิมไว้
+การอัปเดตเป็นแบบอะตอมิก ถูกจัดลำดับ และจำกัดการลองเพียงหนึ่งครั้งต่อนาทีต่อพื้นที่ทำงาน
+การตรวจสอบการส่งข้อมูลที่สำเร็จจะยืนยันการเชื่อมต่อเท่านั้น ไม่รับประกันความเป็นนิรนามหรือความครบถ้วนของการบันทึก</p>
+<p><strong>การส่งข้อมูลของ Telegram และคำขอ HTTPS ใช้เส้นทางที่ต่างกัน</strong> การดาวน์โหลดรายการใช้
+การเชื่อมต่อ HTTPS แยกต่างหาก และเส้นทางคำขอภายนอกที่จัดเตรียมไว้
+<code>TGWITNESS_PROXY_FEED_PROXY</code> กำหนดเส้นทางนั้นให้ใช้พร็อกซี HTTP/SOCKS5 อย่างชัดเจน;
+ทั้งสองเวอร์ชันของ Compose ในตัวเก็บข้อมูลจะส่งต่อข้อมูลนี้ กลุ่มพื้นหลังจะติดตามพื้นที่ทำงานหลัก
+ไม่มีการส่งเซสชัน Telegram, ข้อมูลรับรอง API, โทเค็นแผงควบคุม หรือ โทเค็นบอต ไปยังผู้ให้บริการฟีด
+ชื่อผู้ให้บริการ, วันที่ถ่ายภาพ และเส้นทางดาวน์โหลด จะปรากฏภายใต้ส่วน <strong>“แหล่งที่มาของรายชื่อ”</strong></p>
+<p>MTProxy ส่งผ่านเฉพาะการรับส่งข้อมูล Telegram เท่านั้น การดำเนินการ HTTP ใน Workspace เช่น การบันทึกเวลา,
+การแจ้งเตือน, การคัดลอกข้อมูลนอกระบบ และการตรวจสอบแหล่งที่มา จะใช้ proxy SOCKS5/HTTP แยกต่างหากเมื่อ
+ได้รับการกำหนดค่าไว้ แล้วจึงใช้เส้นทาง SOCKS5/HTTP ของบัญชี หากไม่มีทั้งสองอย่าง Hide IP จะปฏิเสธ
+คำขอ; โหมดอื่น ๆ อนุญาตให้ใช้ Direct ได้ สามารถปิดการใช้งานคำขอจากภายนอกได้ โปรกซีดาวน์โหลดฟีดที่
+กำหนดค่าอย่างชัดเจนจะยังคงเป็นการตั้งค่าทับของผู้ดำเนินการที่แยกต่างหาก
+บริการพยานอิสระจะรักษาเส้นทางของตัวเอง</p>
+<details>
+<summary><strong>พารามิเตอร์พูลอัตโนมัติ</strong></summary>
+
+ใน **Parameters → Automatic MTProxy** ให้กำหนดค่าเกณฑ์ความล้มเหลว (failure threshold), ระยะเวลาพัก (cooldown),
+การหมุนเวียนตามแผน (planned rotation), การแบ่งปันพร็อกซี (proxy sharing) และระยะเวลาหน่วงเวลาสำรองที่อนุญาต (permitted fallback delay)
+
+| การควบคุม | ค่าเริ่มต้น |
+| --- | --- |
+| ตัดการเชื่อมต่อก่อนการเปลี่ยน | 3 ครั้งภายใน 10 นาที |
+| จำนวนพร็อกซีที่ลองต่อครั้ง | 3 |
+| เวลาพักครั้งแรก / สูงสุดหลังความล้มเหลว | 10 นาที / 6 ชั่วโมง |
+| การหมุนเวียนตามแผน | ปิด; เปลี่ยนเมื่อเกิดข้อผิดพลาด |
+| จำนวนบัญชีต่อพร็อกซี | 0: ให้ความสำคัญกับการใช้บัญชีแยกกัน, แบ่งปันเมื่อจำเป็น ตั้งค่าเป็น 1 เพื่อรอการเข้าถึงแบบเอกสิทธิ์ |
+| ความล่าช้าก่อนอนุญาตให้ใช้ Direct fallback | 10 นาที; Hide IP ยังคงปฏิเสธ Direct |
+| การรีเฟรชฟีด / การตรวจสอบการส่งข้อมูล | 60 / 10 นาที; ค่าในพื้นที่ทำงานหลักใช้กับกลุ่มพร็อกซีที่ใช้ร่วมกัน |
+
+พร็อกซีที่แตกต่างกันไม่รับประกันว่าจะมีที่อยู่ทางออกที่แตกต่างกัน การตั้งค่าเหล่านี้ไม่
+แทนที่ข้อจำกัดของ Telegram หรือรับประกันความเป็นนิรนาม
+
+</details>
+
 <p>เพื่อแทนที่รายชื่อสาธารณะด้วยแคตตาล็อกผู้ให้บริการของคุณเอง ให้กำหนดค่าการแทนที่ด้านล่างนี้
 การตั้งค่านี้จะปิดการสมัครรับข้อมูลจากภายนอกอย่างสมบูรณ์ รวมถึงเมื่ออาร์เรย์ <code>proxies</code> ของมันว่างเปล่า</p>
 <p>คัดลอก<a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/proxies.config.example">แคตตาล็อกที่ว่าง</a>
@@ -230,7 +305,7 @@ MTProxy เป็นพร็อกซีการส่งข้อมูลข
 ไดเรกทอรีนี้ถูกยกเว้นจาก Git, บริบทการสร้าง Docker และไฟล์อาร์ไคฟ์ต้นฉบับ ไฟล์
 แคตตาล็อกนี้กำหนดค่าบัญชีที่ใช้ในการเก็บข้อมูล; <a href="../witness/">บอทพยานใช้</a>
 เส้นทาง HTTP/SOCKS5 ของตัวเอง ไม่ใช่ MTProxy</p>
-<p>หากพร็อกซีล้มเหลว TgWitness จะไม่เปลี่ยนไปใช้ Direct โดยอัตโนมัติ ให้หยุดการสังเกตการณ์ก่อน
+<p>การเปลี่ยนเส้นทางสำรองโดยตรงถูกควบคุมโดยโหมด IP ข้างต้น ให้หยุดการสังเกตการณ์ก่อน
 ที่จะเปลี่ยนเส้นทาง การบันทึกจะตัดการเชื่อมต่อกับไคลเอนต์เก่าและยกเลิกการเข้าสู่ระบบที่ยังไม่เสร็จสิ้น; ไคลเอนต์
 ใหม่จะใช้เส้นทางที่บันทึกไว้ การผูกมัดระหว่างบันทึก/เซสชันของบัญชีจะยังคงอยู่
 การตั้งค่าจะแทนที่เส้นทางเดิม: ให้ป้อนข้อมูลรับรองพร็อกซีใหม่เมื่อแก้ไขเส้นทาง</p>
@@ -298,8 +373,9 @@ Telegram มักให้ที่อยู่ IP แบบตัวเลข�
 </tbody>
 </table></div>
 <p><strong>การป้องกันข้อมูล</strong>ในส่วน Account แสดงสถานะเหล่านี้ โทเค็นของแผงควบคุมเป็น
-รหัสลับการเข้าถึง ไม่ใช่รหัสผ่านสำหรับการเข้ารหัส โทเค็นเดียวควบคุมพื้นที่ทำงานทั้งหมด;
-พื้นที่ทำงานไม่ใช่ผู้ใช้ที่แยกกันหรือผู้เช่าที่แยกกัน</p>
+รหัสลับการเข้าถึง ไม่ใช่รหัสผ่านสำหรับการเข้ารหัส มันให้สิทธิ์การเข้าถึงระดับผู้ดูแลระบบ;
+<a href="../access/">โทเค็นที่ออก</a>สามารถกำหนดขอบเขตให้ใช้ได้กับบัญชีและแชทได้ พื้นที่ทำงาน (Workspaces) ใช้
+กระบวนการโฮสต์ร่วมกัน และไม่ใช่เทนท์ที่แยกกัน</p>
 <p>การสาธิตสังเคราะห์ที่เริ่มต้นอย่างชัดเจนและแยกเป็นอิสระสามารถเปิดได้โดยอัตโนมัติผ่านการเชื่อมต่อ
 loopback โดยตรง ซึ่งใช้ความสามารถที่ทำงานในกระบวนการแยกต่างหาก; มันไม่
 เปิดเผยโทเค็นแผงควบคุมที่ตั้งค่าไว้ และไม่ให้สิทธิ์เข้าถึงพื้นที่ทำงานจริง คำขอจากระยะไกล
@@ -354,7 +430,7 @@ KDF ของรหัสผ่าน รหัสผ่านที่ผู้
 <a href="../verification/">VERIFICATION.md</a> และ <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">LIVE_ACCEPTANCE.md</a></p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/CONNECTION-SECURITY.md">แก้ไขหน้านี้บน GitHub ↗</a><a class="next-guide" href="../deployment/"><span>ขั้นตอนต่อไป</span><strong>การติดตั้ง →</strong></a><p>คู่มือเหล่านี้อธิบายการนำไปใช้ในปัจจุบัน ผลการตรวจสอบความถูกต้องและช่องว่างที่ยังเหลืออยู่ได้รับการบันทึกไว้อย่างแยกต่างหาก <a href="../verification/">สิ่งที่ได้รับการทดสอบแล้ว →</a></p></footer>
 </main>
-<aside class="toc" aria-label="บนหน้านี้"><p class="nav-label">บนหน้านี้</p><a href="#authentication-methods">วิธีการยืนยันตัวตน</a><a href="#import-a-telethon-session-file">นำเข้าไฟล์เซสชัน Telethon</a><a href="#mtproto-telethon-and-proxies">MTProto, Telethon และพร็อกซี</a><a href="#encryption-and-signatures">การเข้ารหัสและลายเซ็น</a><a href="#external-master-key">กุญแจหลักภายนอก</a><a href="#sources-and-verification-scope">แหล่งข้อมูลและขอบเขตการตรวจสอบ</a></aside>
+<aside class="toc" aria-label="บนหน้านี้"><p class="nav-label">บนหน้านี้</p><a href="#authentication-methods">วิธีการยืนยันตัวตน</a><a href="#import-a-telethon-session-file">นำเข้าไฟล์เซสชัน Telethon</a><a href="#mtproto-telethon-and-proxies">MTProto, Telethon และพร็อกซี</a><a href="#ip-modes">โหมด IP</a><a href="#encryption-and-signatures">การเข้ารหัสและลายเซ็น</a><a href="#external-master-key">กุญแจหลักภายนอก</a><a href="#sources-and-verification-scope">แหล่งข้อมูลและขอบเขตการตรวจสอบ</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>โอเพนซอร์ส · ทำงานบนเครื่องของคุณ</span><a href="../../../../LICENSE">ใบอนุญาต MIT</a><a href="../notice/">ประกาศจากผู้ดำเนินการ</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">ความปลอดภัย</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "กำลังรอข้อความ", "Step through a fictional send, edit and delete.": "ลองทำตามขั้นตอนการส่ง แก้ไข และลบข้อความในสถานการณ์สมมติ", "No observations yet. Start the sequence or advance one event.": "ยังไม่มีความคิดเห็นใด ๆ เริ่มลำดับเหตุการณ์หรือเลื่อนไปหนึ่งเหตุการณ์", "Meet at 10:00": "พบกันเวลา 10:00", "A new message is visible in the chat.": "มีข้อความใหม่ปรากฏในแชท", "Record 1 appended: the collector observed the original message.": "บันทึก 1 แนบมาด้วย: ผู้เก็บข้อมูลได้สังเกตเห็นข้อความต้นฉบับ", "Meet at 11:00": "พบกันเวลา 11:00", "The current text changes. The earlier observation stays.": "ข้อความปัจจุบันมีการเปลี่ยนแปลง แต่ข้อสังเกตก่อนหน้านี้ยังคงอยู่", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "บันทึก 2 ได้ถูกเพิ่มเข้ามา: การแก้ไขนี้ถือเป็นการสังเกตการณ์ใหม่ บันทึก 1 ยังคงเก็บข้อความต้นฉบับไว้", "Message deleted": "ข้อความถูกลบ", "The message has disappeared from the chat view.": "ข้อความดังกล่าวได้หายไปแล้วจากหน้าจอสนทนา", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "บันทึก 3 ที่แนบมา: ประกาศการลบถูกรักษาไว้พร้อมกับทั้งสองเวอร์ชันที่สังเกตได้", "0 records": "0 รายการ", "1 record": "1 รายการ", "2 records": "2 รายการ", "3 records": "3 รายการ", "Complete / {n} of 3": "เสร็จสมบูรณ์ / {n} จาก 3", "Step / {n} of 3": "ขั้นตอน / {n} จาก 3", "Pause": "หยุดชั่วคราว", "Replay sequence": "ลำดับการเล่นซ้ำ", "Play sequence": "ลำดับการเล่น", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "มีตัวอย่างแบบคงที่ให้ใช้งานได้ หากต้องการคำนวณค่าแฮชแบบโต้ตอบ ให้เปิดหน้านี้ผ่าน HTTPS หรือดูตัวอย่างบน localhost ที่รองรับ Web Crypto", "No record supplied": "ไม่มีบันทึกที่ให้มา", "Tail removed": "ส่วนท้ายถูกลบ", "≠ saved hash": "≠ ค่าแฮชที่บันทึกไว้", "Rebuilt · different hash": "สร้างใหม่ · ค่าแฮชที่ต่างกัน", "= saved hash": "= hash ที่บันทึกไว้", "Same length and matching head.": "ความยาวเท่ากันและส่วนหัวที่สอดคล้องกัน", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "แฮชที่คำนวณได้ทั้งสามค่าตรงกับแฮชที่เก็บไว้ ตัวอย่างนี้สอดคล้องกับขอบเขตสามบันทึกที่เก็บไว้", "Same saved head; the journal prefix fails verification.": "ส่วนหัวที่บันทึกไว้เหมือนเดิม; ส่วนนำหน้าของบันทึกไม่ผ่านการตรวจสอบ", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "บันทึกที่ 2 ไม่ตรงกับค่าแฮชที่เก็บไว้แล้ว การตรวจสอบเพียงส่วนหัวสุดท้ายที่เก็บไว้จะไม่สามารถตรวจพบข้อผิดพลาดนี้ได้; ผู้ตรวจสอบจะตรวจสอบทุกบันทึก", "Head differs from the retained checkpoint.": "ส่วนหัวแตกต่างจากจุดตรวจสอบที่เก็บไว้", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "ค่าแฮชที่สร้างใหม่เชื่อมโยงกัน แต่ส่วนหัวสุดท้ายได้เปลี่ยนแปลงไปแล้ว จุดตรวจสอบที่เก็บไว้จะปฏิเสธประวัติการเปลี่ยนแปลงนี้ ลายเซ็นต้นฉบับก็จะล้มเหลวเมื่อใช้กับบันทึกที่เปลี่ยนแปลงแล้ว", "Too short: 2 supplied records \u003c 3 retained records.": "สั้นเกินไป: 2 รายการที่ส่งมา \u003c 3 รายการที่เก็บไว้", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "แฮชสองตัวที่เหลือยังคงตรงกัน จุดตรวจสอบที่เก็บไว้เผยให้เห็นส่วนท้ายที่หายไป หากไม่มีขอบเขตก่อนหน้านี้ ส่วนนำหน้าสั้นกว่านี้เพียงอย่างเดียวจะไม่สามารถเปิดเผยการขาดหายได้", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "การคำนวณแฮชไม่สามารถใช้งานได้ในเบราว์เซอร์นี้ แต่สูตรและคำอธิบายแบบคงที่ด้านล่างยังคงใช้งานได้", "{n} records": "{n} บันทึก", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "ได้รับการยอมรับ: จำนวนเพิ่มขึ้น ลายเซ็นได้รับการยืนยัน และกุญแจตรงกัน ผู้เป็นพยานจะเก็บรักษาขอบเขตใหม่นี้ไว้", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: คำตอบที่ลงนามแสดงจำนวนบันทึกน้อยกว่าจุดตรวจสอบที่ได้รับการยอมรับล่าสุด Witness จะบันทึกปัญหาและรักษาขอบเขตที่ได้รับการยอมรับก่อนหน้านี้", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: จำนวนไม่เปลี่ยนแปลง แต่หัว (head) แตกต่างกัน ผู้เป็นพยานบันทึกความไม่เห็นพ้องและรักษาขอบเขตที่ได้รับการยอมรับก่อนหน้านี้", "No answer": "ไม่มีคำตอบ", "boundary unknown": "ขอบเขตไม่ทราบ", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "ไม่มีการตอบสนอง: TgWitness จะบันทึกการตรวจสอบที่ล้มเหลว และไม่สามารถยืนยันสถานะปัจจุบันของผู้เก็บข้อมูลได้ หาก TgWitness ยังสามารถติดต่อกับ Bot API ได้ และนโยบายการเผยแพร่ของมันอนุญาต ก็สามารถเผยแพร่การล้มเหลวนั้นได้", "Send {n}": "ส่ง {n}", "Edit {n}": "แก้ไข{n}", "Delete {n}": "ลบ{n}", "Both accounts captured all six expected observations in this example.": "ทั้งสองบัญชีได้บันทึกการสังเกตทั้งหกข้อที่คาดการณ์ไว้ในตัวอย่างนี้", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "บัญชี B ยังคงบันทึกได้ 6 จาก 6 ข้อความ สองใบเสร็จใช้เวลานานกว่า อัตราการบันทึกและความล่าช้าของใบเสร็จให้คำตอบที่ต่างกัน", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "บัญชี B ได้บันทึก 5 จาก 6 การดำเนินการก่อนถึงจุดตัด (83.3%) การแก้ไขที่ขาดหายไปไม่มีการวัดความล่าช้า ผลลัพธ์นี้อธิบายเฉพาะการดำเนินการ 6 ครั้งที่ได้รับการควบคุมเท่านั้น", "not observed by cutoff": "ไม่ถูกตัดออก", "{s} seconds": "{s} วินาที", "Exact values follow in the table.": "ค่าที่แม่นยำจะปรากฏในตารางต่อไป", "{s} s": "{s} s", "Not observed": "ไม่พบ", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "สี่การสนทนาให้ข้อมูลสังเกตการณ์ที่แตกต่างกัน ให้ติดตามบันทึกต้นทางสำหรับทุกการเชื่อมต่อ; อย่ากำหนดโพสต์ในช่องให้กับผู้ใช้ 71001 โดยไม่มีผู้ส่งที่ระบุ", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "บันทึก #146 และ #205 มี ID ผู้ส่งเดียวกัน คือ 71001 ซึ่งเชื่อมโยงโพสต์ที่สังเกตได้จากบัญชี Telegram ในสองห้องสนทนา แต่ไม่ระบุตัวบุคคลจริงหรือระบุเจ้าของโพสต์ในช่องนั้น", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "ที่อยู่ปลายทาง pay.example.invalid/new ปรากฏในบันทึกกลุ่ม #146, คีย์บอร์ดบอท #173, การแก้ไขช่อง #188 และข้อความส่วนตัว #205 ที่อยู่ปลายทางที่ปรากฏซ้ำๆ นี้ช่วยเชื่อมโยงข้อมูลเข้าด้วยกัน แต่ไม่ได้เป็นหลักฐานว่าบัญชีเหล่านั้นอยู่ภายใต้การควบคุมร่วมกัน", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "ใบเสร็จสื่อที่เสร็จสมบูรณ์ #151 และ #209 มีค่า SHA-256 เต็มที่เท่ากันในคดีสมมตินี้ โปรดเปรียบเทียบไบต์จริงและบันทึกข้อความที่เกี่ยวข้อง ไฟล์ที่ตรงกันนี้ไม่ระบุผู้สร้างหรือพิสูจน์ว่าใครเป็นผู้ส่งต่อ", "the encrypted off-site copy": "สำเนาที่เข้ารหัสและเก็บไว้นอกเว็บไซต์", "notifications": "การแจ้งเตือน", "checkpoint hashes for timestamps": "ค่าแฮชจุดตรวจสอบสำหรับเวลา", "signed checkpoints for the witness": "จุดตรวจสอบที่ลงนามสำหรับ TgWitness", "Switched on in this example": "เปิดใช้งานในตัวอย่างนี้", "Optional · off by default": "เลือกได้ · ปิดตามค่าเริ่มต้น", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "ข้อมูลที่ส่งออกจากเครื่องนี้: การเชื่อมต่อ Telegram และ{list} ไม่มีข้อมูลอื่นใดอีก", "Default: only the Telegram connection leaves this machine.": "ค่าเริ่มต้น: มีเพียงการเชื่อมต่อ Telegram เท่านั้นที่ออกจากเครื่องนี้", "{done} of {total} done": "{done} จาก {total} เสร็จแล้ว", "Mark step {n} as done": "ทำเครื่องหมายขั้นตอน{n} ว่าเสร็จแล้ว", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "คัดลอก", "Copied": "คัดลอก", "Command copied.": "คำสั่งถูกคัดลอกแล้ว", "Selected — Ctrl/Cmd+C": "คัดลอก — Ctrl/Cmd+C", "Command selected. Copy it manually.": "คำสั่งถูกเลือกแล้ว คัดลอกด้วยมือ", "Command copied to clipboard.": "คำสั่งได้ถูกคัดลอกไปยังคลิปบอร์ดแล้ว", "Select text": "เลือกข้อความ", "Clipboard unavailable. Command selected; copy it manually.": "คลิปบอร์ดไม่สามารถใช้งานได้ คำสั่งถูกเลือกแล้ว; คัดลอกด้วยมือ", "A message arrives. The first observation is saved.": "มีข้อความเข้ามา ข้อสังเกตแรกถูกบันทึกไว้", "The time changes. Both captured versions stay.": "เวลาเปลี่ยนแปลง แต่ทั้งสองเวอร์ชันที่บันทึกไว้ยังคงอยู่", "The message disappears. The captured history remains.": "ข้อความจะหายไป แต่ประวัติที่ถูกบันทึกไว้จะยังคงอยู่", "Pause example animation": "หยุดตัวอย่างแอนิเมชัน", "Play example animation": "ดูตัวอย่างแอนิเมชัน", "Play": "เล่น", "Full-size workspace screenshot": "ภาพหน้าจอพื้นที่ทำงานขนาดเต็ม", "Workspace screenshot · fictional data": "ภาพหน้าจอพื้นที่ทำงาน · ข้อมูลสมมติ", "Close": "ปิด", "Close screenshot": "ปิดภาพหน้าจอ", "Scrollable full-size screenshot": "ภาพหน้าจอขนาดเต็มที่สามารถเลื่อนดูได้", "Enlarge: {name}": "ขยาย: {name}", "View full size": "ดูขนาดเต็ม"}</script>

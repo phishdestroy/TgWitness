@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="bn" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>অ্যাক্সেস এবং অনুমতিসমূহ | TgWitness</title>
+<meta name="description" content="অ্যাকাউন্ট এবং চ্যাটে সীমিত পরিসরের অ্যাক্সেস ইস্যু করুন, অনুমতি নির্বাচন করুন, সেশন এবং আইপি ঠিকানা সীমিত করুন, এবং অ্যাক্সেস প্রত্যাহার করুন।"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/access/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="bn_BD">
+<meta property="og:title" content="অ্যাক্সেস এবং অনুমতিসমূহ | TgWitness"><meta property="og:description" content="অ্যাকাউন্ট এবং চ্যাটে সীমিত পরিসরের অ্যাক্সেস ইস্যু করুন, অনুমতি নির্বাচন করুন, সেশন এবং আইপি ঠিকানা সীমিত করুন, এবং অ্যাক্সেস প্রত্যাহার করুন।">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/bn/docs/reference/access/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/access/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/access/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/access/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/access/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/access/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/access/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/access/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/access/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/access/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/access/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/access/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/access/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/access/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/access/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/access/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/access/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/access/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/access/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/access/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/access/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/access/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/access/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/access/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/access/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/access/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/access/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/bn/docs/reference/access/", "url": "https://phishdestroy.github.io/TgWitness/bn/docs/reference/access/", "name": "অ্যাক্সেস এবং অনুমতিসমূহ | TgWitness", "description": "অ্যাকাউন্ট এবং চ্যাটে সীমিত পরিসরের অ্যাক্সেস ইস্যু করুন, অনুমতি নির্বাচন করুন, সেশন এবং আইপি ঠিকানা সীমিত করুন, এবং অ্যাক্সেস প্রত্যাহার করুন।", "inLanguage": "bn", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "হোম", "item": "https://phishdestroy.github.io/TgWitness/bn/"}, {"@type": "ListItem", "position": 2, "name": "ডকুমেন্টেশন", "item": "https://phishdestroy.github.io/TgWitness/bn/docs/"}, {"@type": "ListItem", "position": 3, "name": "তথ্যসূত্র", "item": "https://phishdestroy.github.io/TgWitness/bn/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "অ্যাক্সেস এবং অনুমতিসমূহ", "item": "https://phishdestroy.github.io/TgWitness/bn/docs/reference/access/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">বিষয়ে সরাসরি যান</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / ডকুমেন্টেশন</span></a>
+<nav aria-label="গাইডসমূহ"><a href="../../concepts/">দৃশ্যমান গাইড</a><a href="../../">সমস্ত গাইড</a><a href="../">তথ্যসূত্র</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="ভাষা"><span aria-hidden="true">◍</span> বাংলা</summary><div class="lang-list"><a href="../../../../docs/reference/access/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/access/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/access/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/access/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/access/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/access/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/access/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/access/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/access/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/access/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/access/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/access/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/access/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/access/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/access/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/access/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/access/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/access/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/access/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/access/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/access/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/access/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/access/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/access/" hreflang="he" lang="he">עברית</a><a href="./" hreflang="bn" lang="bn" aria-current="true">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="হালকা ও গাঢ় থিমের মধ্যে পরিবর্তন করুন"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="গাইডসমূহ"><a href="../../../guides/modes.html">মোড, পরিস্থিতি এবং প্রমাণ স্তর</a><a href="../../../../sealed.html?lang=en">GitHub Actions দিয়ে সংগ্রহ (প্রাথমিক সংস্করণ)</a><p class="nav-label">প্রাথমিক পদক্ষেপ</p><a href="../../start/">মিনিটখানেকের মধ্যে শুরু করুন</a><a href="../../accounts/">একটি অ্যাকাউন্ট সংযুক্ত করুন</a><a href="../../proxies/">একটি প্রক্সি নির্বাচন করুন</a><a href="../../exports/">রপ্তানি এবং যাচাই করুন</a><p class="nav-label">প্রমাণ বোঝা</p><a href="../../concepts/">প্রমাণ কীভাবে কাজ করে দেখুন</a><a href="../../cases/">সমস্ত চ্যাট জুড়ে তদন্ত করুন</a><a href="../../security/">এটি নিরাপদ রাখুন</a><p class="nav-label">আরও এগিয়ে যান</p><a href="../../access/">একটি কেস শেয়ার করুন</a><a href="../../witness/">একটি উইটনেস বট সেট আপ করুন</a><a href="../../server/">এটি চালু রাখুন</a><a href="../../troubleshooting/">কি ভুল হয়েছে তা খুঁজে বের করুন</a></nav><nav class="wiki-nav" aria-label="তথ্যসূত্র"><p class="nav-label"><a class="nav-label-link" href="../">তথ্যসূত্র</a></p><details class="wiki-group" open><summary>সেটআপ</summary><a href="../quickstart/">দ্রুত শুরু</a><a href="../accounts/">অ্যাকাউন্ট এবং সেশন ফরম্যাটসমূহ</a><a href="./" aria-current="page">অ্যাক্সেস এবং অনুমতিসমূহ</a><a href="../connection/">সংযোগ, প্রক্সি এবং ডেটা সুরক্ষা</a><a href="../deployment/">নিয়োগ</a></details><details class="wiki-group"><summary>সংগ্রহ করুন</summary><a href="../collection/">সংগ্রহ কীভাবে কাজ করে</a><a href="../operations/">ওয়ার্কফ্লো এবং অপারেশনসমূহ</a><a href="../investigation/">তদন্ত মোড</a><a href="../features/">বৈশিষ্ট্য এবং সীমাবদ্ধতা</a></details><details class="wiki-group"><summary>প্রমাণ</summary><a href="../how-it-works/">প্রমাণ কীভাবে কাজ করে</a><a href="../evidence/">প্রমাণের ফর্ম্যাট</a><a href="../witness/">স্বতন্ত্র সাক্ষী</a><a href="../timestamp/">টাইমস্ট্যাম্পস</a></details><details class="wiki-group"><summary>নিরাপত্তা ও প্রকল্প</summary><a href="../security/">নিরাপত্তা এবং ডেটা হ্যান্ডলিং</a><a href="../architecture/">আর্কিটেকচার</a><a href="../verification/">কি পরীক্ষা করা হয়েছে</a><a href="../license/">লাইসেন্স এবং স্থাপত্যগত অসামঞ্জস্যতার বিজ্ঞপ্তি</a><a href="../notice/">অপারেটর অসামঞ্জস্যতার বিজ্ঞপ্তি</a><a href="../changelog/">পরিবর্তনলগ</a></details></nav><p class="sidebar-note">v0.7.0<br>ওপেন সোর্স · আপনার মেশিনে চলে</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="গাইডসমূহ"><a href="../../../">হোম</a> <span aria-hidden="true">/</span> <a href="../../">ডকুমেন্টেশন</a> <span aria-hidden="true">/</span> <a href="../">তথ্যসূত্র</a> <span aria-hidden="true">/</span> <span aria-current="page">অ্যাক্সেস এবং অনুমতিসমূহ</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">ডকুমেন্টেশন অনুসন্ধান করুন</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="প্রক্সি, হ্যাশ চেইন, টোকেন বা উইটনেস চেষ্টা করুন…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="স্পষ্ট অনুসন্ধান" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">গাইড এবং রেফারেন্স অনুসন্ধান করতে একটি শব্দ টাইপ করুন। অনুসন্ধান আপনার ব্রাউজারেই থাকবে।</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">তথ্যসূত্র / সেটআপ</p><h1>অ্যাক্সেস এবং অনুমতিসমূহ</h1><p class="guide-outcome">অ্যাকাউন্ট এবং চ্যাটে সীমিত পরিসরের অ্যাক্সেস ইস্যু করুন, অনুমতি নির্বাচন করুন, সেশন এবং আইপি ঠিকানা সীমিত করুন, এবং অ্যাক্সেস প্রত্যাহার করুন।</p><div class="wiki-body"><p>একজন পর্যালোচনাকারীকে একটি চ্যাটে অ্যাক্সেস দিন, একজন বিশ্লেষককে একটি কেস রপ্তানি করার অনুমতি দিন, অথবা একজন অপারেটরকে নির্বাচিত অ্যাকাউন্টগুলির নিয়ন্ত্রণ দিন। প্রত্যেক ব্যক্তি তাদের নিজস্ব টোকেন পাবেন। প্রধান প্যানেলের টোকেন প্রশাসকের কাছে থাকবে।</p>
+<p><a href="../accounts/">অ্যাকাউন্ট সেটআপ</a> · <a href="../connection/">সংযোগ পথসমূহ</a> · <a href="../security/">নিরাপত্তা মডেল</a></p>
+<h2 id="two-scopes-two-different-jobs">দুটি স্কোপ, দুটি ভিন্ন কাজ<a class="anchor" href="#two-scopes-two-different-jobs" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
+<p><strong>সংগ্রহের পরিধি</strong> নির্ধারণ করে একটি অ্যাকাউন্ট কী রেকর্ড করবে: নির্বাচিত চ্যাট, একটি টেলিগ্রাম ফোল্ডার বা পুরো অ্যাকাউন্ট। <strong>অ্যাক্সেসের পরিধি</strong> নির্ধারণ করে ওই রেকর্ডকৃত অ্যাকাউন্ট এবং চ্যাটগুলির মধ্যে কোনগুলো অন্য কেউ দেখতে এবং ব্যবহার করতে পারবে। অ্যাক্সেস দেওয়া টেলিগ্রাম চ্যাটে যোগ দেয় না, সংগ্রহ শুরু করে না বা টেলিগ্রাম অ্যাকাউন্টের অনুমতি প্রদান করে না।</p>
+<p>একটি অ্যাক্সেস নির্বাচিত ওয়ার্কস্পেস, সেগুলোর মধ্যে নির্বাচিত চ্যাট বা সমস্ত ওয়ার্কস্পেস খুলতে পারে। <strong>সমস্ত ওয়ার্কস্পেস, পরে যোগ করা ওয়ার্কস্পেসসহ,</strong> ভবিষ্যতের অ্যাকাউন্টগুলোকেও অন্তর্ভুক্ত করে। যখন কোনো কেস শুধুমাত্র ওই ওয়ার্কস্পেসগুলোর মধ্যে সীমাবদ্ধ রাখতে হবে, তখন স্পষ্টভাবে ওয়ার্কস্পেসগুলো নির্বাচন করুন।</p>
+<h2 id="give-someone-access">কেউকে অ্যাক্সেস দিন<a class="anchor" href="#give-someone-access" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
+<ol>
+<li>প্রধান প্রশাসক হিসেবে সাইন ইন করুন এবং অ্যাক্সেস খুলুন।</li>
+<li><strong>&#x27;কাউকে অ্যাক্সেস দিন&#x27;</strong> এর অধীনে, লগে আপনি যে নামটি চিনবেন তা লিখুন।</li>
+<li>ওয়ার্কস্পেসগুলো নির্বাচন করুন এবং প্রয়োজনে পৃথক চ্যাটগুলো নির্বাচন করুন।</li>
+<li>এই ব্যক্তি কী করতে পারে তা নির্বাচন করুন। ভিউ সবসময় অন্তর্ভুক্ত।</li>
+<li>প্রয়োজন অনুযায়ী মেয়াদোত্তীর্ণতা, সাইন-ইন/সেশন সীমা এবং অনুমোদিত ঠিকানাগুলো সেট করুন।</li>
+<li><strong>Create অ্যাক্সেস</strong> চাপুন। এখনই টোকেনটি কপি করুন: এটি শুধুমাত্র একবার দেখানো হয়।</li>
+<li>প্যানেলের ঠিকানা এবং টোকেন গোপনে পাঠান। প্রাপক সেই টোকেনটি সাধারণ সাইন-ইন পৃষ্ঠায় প্রবেশ করান; তাদের আপনার প্রধান প্যানেল টোকেন বা টেলিগ্রাম সেশনের কোনো প্রয়োজন নেই।</li>
+</ol>
+<p>জারি করা টোকেনসহ প্যানেলটি একটি পৃথক ব্রাউজার সেশনে খুলুন এবং হস্তান্তর করার আগে দৃশ্যমান চ্যাট এবং অনুমোদিত ক্রিয়াগুলি পরীক্ষা করুন।</p>
+<h2 id="choose-the-permissions">অনুমতিসমূহ নির্বাচন করুন<a class="anchor" href="#choose-the-permissions" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>অনুমতি</th>
+<th>এটি কী অনুমতি দেয়</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>view</code></td>
+<td>অনুমোদিত চ্যাট, ধরা পড়া বার্তা, প্রোফাইল, ফাইল এবং ফিল্টারকৃত জার্নাল রেকর্ড পড়ুন। সর্বদা অন্তর্ভুক্ত।</td>
+</tr>
+<tr>
+<td><code>export</code></td>
+<td>চ্যাট ইতিহাস এবং ডসিয়ের রপ্তানি অনুমোদিত। পুরো ওয়ার্কস্পেসের প্রমাণ রপ্তানির জন্য পুরো ওয়ার্কস্পেসের অ্যাক্সেস প্রয়োজন।</td>
+</tr>
+<tr>
+<td><code>sources</code></td>
+<td>উৎস, স্ন্যাপশট এবং প্রোফাইল ক্যাপচার পরিচালনা করুন। চ্যাট-সীমিত অ্যাক্সেস শুধুমাত্র অনুমোদিত চ্যাটগুলিতেই কাজ করতে পারে; অ্যাকাউন্ট-ব্যাপী উৎস আবিষ্কার এবং স্কোপ সেটিংস বন্ধ থাকে।</td>
+</tr>
+<tr>
+<td><code>collect</code></td>
+<td>একজন কালেক্টর শুরু বা বন্ধ করুন। পুরো ওয়ার্কস্পেস অ্যাক্সেস প্রয়োজন কারণ সংগ্রহ অ্যাকাউন্টকে প্রভাবিত করে।</td>
+</tr>
+<tr>
+<td><code>interact</code></td>
+<td>অ্যাক্সেসের পরিধির মধ্যে সমর্থিত টেলিগ্রাম ইন্টারঅ্যাকশনগুলি সম্পাদন করুন। চ্যাট-সীমিত অ্যাক্সেস অ্যাকাউন্ট-ব্যাপী লিঙ্ক প্রিভিউ ব্যবহার করতে পারে না।</td>
+</tr>
+<tr>
+<td><code>settings</code></td>
+<td>সংগ্রহ সেটিংস, টাইমস্ট্যাম্প, বিজ্ঞপ্তি, অফ-সাইট কপি এবং প্যারামিটার পরিবর্তন করুন। পুরো ওয়ার্কস্পেস অ্যাক্সেস প্রয়োজন।</td>
+</tr>
+<tr>
+<td><code>account</code></td>
+<td>টেলিগ্রামে সাইন ইন বা আউট করুন এবং সংযোগ পথ পরিচালনা করুন। সম্পূর্ণ ওয়ার্কস্পেস অ্যাক্সেস প্রয়োজন।</td>
+</tr>
+</tbody>
+</table></div>
+<p>অনুমতি এবং স্কোপ একসঙ্গে যাচাই করা হয়। একটি অনুমতি চিহ্নিত করলে অন্য কোনো চ্যাট খোলা হবে না বা চ্যাট-সীমিত অ্যাক্সেসের জন্য ওয়ার্কস্পেস-ব্যাপী কোনো অপারেশন আনলক হবে না।
+সমান্তরাল রপ্তানির জন্য, প্রতিটি নির্বাচিত অ্যাকাউন্টে রপ্তানি করা চ্যাটটি অবশ্যই
+এই অ্যাক্সেসের আওতায় থাকতে হবে। ইস্যু করা অ্যাক্সেস নতুন অ্যাক্সেস তৈরি করতে পারে না, অন্যদের
+সেশন পরিচালনা করতে পারে না বা প্রশাসক কনসোল খুলতে পারে না।</p>
+<h3 id="three-useful-setups">তিনটি দরকারী সেটআপ<a class="anchor" href="#three-useful-setups" aria-label="এই বিভাগের লিঙ্ক">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>ব্যক্তি</th>
+<th>পরিধি</th>
+<th>অনুমতিসমূহ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>সমীক্ষক</td>
+<td>একটি মামলার রেকর্ডকৃত চ্যাটসমূহ</td>
+<td><code>view</code></td>
+</tr>
+<tr>
+<td>বিশ্লেষক হস্তান্তর প্রস্তুত করছেন</td>
+<td>চ্যাটগুলি তদন্ত এবং রপ্তানি করার জন্য</td>
+<td><code>view</code>, <code>export</code>; <code>interact</code> যোগ করুন শুধুমাত্র যদি তারা টেলিগ্রামের মাধ্যমে কাজ করে</td>
+</tr>
+<tr>
+<td>সংগ্রহ অপারেটর</td>
+<td>নির্বাচিত সম্পূর্ণ ওয়ার্কস্পেস</td>
+<td><code>view</code>, <code>sources</code>, <code>collect</code>; শুধুমাত্র প্রয়োজন হলে <code>settings</code> বা <code>account</code> যোগ করুন।</td>
+</tr>
+</tbody>
+</table></div>
+<p>এগুলো হল উদাহরণ যা আপনি অনুমতি চেকবক্স ব্যবহার করে কনফিগার করেন, স্থায়ী ভূমিকা নয়।</p>
+<h2 id="limits-and-sessions">সীমা এবং সেশনসমূহ<a class="anchor" href="#limits-and-sessions" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>স্থাপনা</th>
+<th>এটি কীভাবে কাজ করে</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>সমান্তরাল সেশনসমূহ</td>
+<td>একই সময়ে সক্রিয় সেশন ১–১০০টিতে সীমাবদ্ধ করুন। সীমা অতিক্রম করলে পরবর্তী সাইন-ইন প্রত্যাখ্যান করুন অথবা সবচেয়ে পুরনো সেশনটি বন্ধ করে দিন।</td>
+</tr>
+<tr>
+<td>সাইন-ইন অনুমোদিত</td>
+<td>টোকেন ব্যবহার করে সেশন শুরু করার সফল ব্যবহার সীমিত করুন। শুধুমাত্র শেষ অনুমোদিত সাইন-ইন ব্যবহার হয়েছে বলে বিদ্যমান সেশনগুলো শেষ হবে না।</td>
+</tr>
+<tr>
+<td>যতক্ষণ পর্যন্ত বৈধ</td>
+<td>অ্যাক্সেসের জন্য একটি নির্দিষ্ট মেয়াদোত্তীর্ণতা। মেয়াদোত্তীর্ণ অ্যাক্সেস সাইন ইন করতে পারবে না এবং ক্রমাগত অনুরোধ করতে পারবে না।</td>
+</tr>
+<tr>
+<td>ক্রিয়াকলাপ ছাড়া মিনিট</td>
+<td>সেশন নিষ্ক্রিয়তার টাইমআউট ৫ মিনিট থেকে ৩০ দিন পর্যন্ত। সফল অনুরোধগুলো এটি বাড়িয়ে দেয়; একটি খোলা প্যানেল পোলিং করে নিজেকে সক্রিয় রাখতে পারে।</td>
+</tr>
+<tr>
+<td>অনুমোদিত ঠিকানাগুলি</td>
+<td>নির্দিষ্ট IP ঠিকানা বা CIDR সাবনেট গ্রহণ করুন। প্রথম-সাইন-ইন বাইন্ডিং সক্ষম না থাকলে যেকোনো ঠিকানা অনুমোদনের জন্য ফাঁকা রাখুন।</td>
+</tr>
+<tr>
+<td>প্রথম সাইন-ইন-এ সংযুক্ত করুন</td>
+<td>প্রথম সফল সাইন-ইন সেই অ্যাক্সেসের অনুমোদিত ঠিকানা নির্ধারণ করে।</td>
+</tr>
+</tbody>
+</table></div>
+<p>IP হল সেই ক্লায়েন্ট ঠিকানা যা অ্যাপ্লিকেশন দেখে। রিভার্স প্রক্সি বা টানেলের পিছনে, IP নিয়মের উপর নির্ভর করার আগে <strong>Open sessions</strong>-এ প্রদর্শিত ঠিকানাটি পরীক্ষা করুন: নাহলে একাধিক ব্যবহারকারী প্রক্সির ঠিকানা ভাগাভাগি করছে বলে মনে হতে পারে।</p>
+<h2 id="change-or-withdraw-access">অ্যাক্সেস পরিবর্তন বা প্রত্যাহার করুন<a class="anchor" href="#change-or-withdraw-access" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
+<p>কোনো এন্ট্রির স্কোপ, পারমিশন বা লিমিট পরিবর্তন করতে <strong>&#x27;অ্যাক্সেসসমূহ&#x27;-এর</strong> অধীনে সেটি সম্পাদনা করুন। স্কোপ এবং পারমিশনের পরিবর্তনগুলো পরবর্তী অনুরোধগুলোতে যাচাই করা হয়, যার মধ্যে ইতিমধ্যে খোলা সেশনগুলো থেকে করা অনুরোধগুলোও অন্তর্ভুক্ত। কোনো অ্যাক্সেস বাতিল করলে তা তার সেশনগুলো শেষ করে এবং ইস্যু করা টোকেনটি অকার্যকর করে তোলে। <strong>খোলা সেশনগুলো</strong> প্রশাসককে পুরো অ্যাক্সেস বাতিল না করেই একটি একক সেশন শেষ করার সুযোগ দেয়।</p>
+<p>Revocation ইতিমধ্যেই কেউ ডাউনলোড করা ফাইলগুলো পুনরুদ্ধার করতে পারে না। সাইন আউট করা, প্যানেল লক করা বা সেশন শেষ করা চলমান কালেক্টরকে থামাতে পারে না।</p>
+<h2 id="what-the-administrator-can-see">প্রশাসক যা দেখতে পারেন<a class="anchor" href="#what-the-administrator-can-see" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
+<p><strong>এই স্টার্টের লগ</strong> প্রক্রিয়া লগগুলোকে প্রতিটি ওয়ার্কস্পেসের জার্নাল কার্যকলাপের সাথে একত্রিত করে: সাইন-ইন, প্রত্যাখ্যান, রুট পরিবর্তন এবং অপারেটর কর্ম। এটি বর্তমান প্রক্রিয়ার জন্য একটি ইন-মেমরি কনসোল, প্রতিটি বার্তার স্থায়ী অনুলিপি নয়। ঘন ঘন বার্তা ইভেন্টগুলো কনসোল ভরার পরিবর্তে জার্নালেই থাকে।</p>
+<p>অ্যাক্সেস ইস্যু করা, পরিবর্তন করা এবং বাতিল করা, এবং সেশন শুরু বা শেষ করা, এছাড়াও স্বাক্ষরিত <code>access.*</code> জার্নাল রেকর্ড তৈরি করে। সেই রেকর্ডগুলিতে টোকেন অন্তর্ভুক্ত থাকে না। ইস্যু করা টোকেন এবং সেশন ক্রেডেনশিয়ালগুলি এনক্রিপ্ট করা ভল্টে হ্যাশ হিসেবে সংরক্ষণ করা হয়।</p>
+<details>
+<summary><strong>প্রধান প্রশাসক এবং বিশ্বাসের সীমা</strong></summary>
+
+প্রধান প্যানেল টোকেন অবাধ থাকে। এটি ব্যবহার করে ব্রাউজার সাইন-ইন করলে প্রশাসকের নির্ধারিত সেশন সীমার আওতায় সেশন তৈরি হয়। প্রধান টোকেন সরাসরি পাঠানোর স্ক্রিপ্টগুলো সম্পূর্ণ অ্যাক্সেস ধরে রাখে এবং সেগুলো ব্রাউজার সেশন হিসেবে গণ্য হয় না।
+
+এটি একটি ইনস্টলেশনে অ্যাপ্লিকেশন-স্তরের অ্যাক্সেস নিয়ন্ত্রণ। সমস্ত ওয়ার্কস্পেস সার্ভার প্রক্রিয়া শেয়ার করে; এটি হোস্ট প্রশাসকের থেকে বিচ্ছিন্ন নয়। প্রধান টোকেন, টেলিগ্রাম সেশন, স্বাক্ষর কী এবং ডেটা ডিরেক্টরি ব্যক্তিগত রাখুন। একটি উইটনেস টোকেন একটি পৃথক চেকপয়েন্ট/স্বাস্থ্য সনদ, প্যানেল অ্যাক্সেস টোকেন নয়।
+
+</details></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCESS.md">GitHub-এ এই পৃষ্ঠা সম্পাদনা করুন ↗</a><a class="next-guide" href="../connection/"><span>পরবর্তী ধাপ</span><strong>সংযোগ, প্রক্সি এবং ডেটা সুরক্ষা →</strong></a><p>এই গাইডগুলো বর্তমান বাস্তবায়ন বর্ণনা করে। যাচাইকরণ ফলাফল এবং অবশিষ্ট ফাঁকগুলো আলাদাভাবে নথিভুক্ত করা হয়েছে। <a href="../verification/">কি পরীক্ষা করা হয়েছে →</a></p></footer>
+</main>
+<aside class="toc" aria-label="এই পৃষ্ঠায়"><p class="nav-label">এই পৃষ্ঠায়</p><a href="#two-scopes-two-different-jobs">দুটি স্কোপ, দুটি ভিন্ন কাজ</a><a href="#give-someone-access">কেউকে অ্যাক্সেস দিন</a><a href="#choose-the-permissions">অনুমতিসমূহ নির্বাচন করুন</a><a href="#limits-and-sessions">সীমা এবং সেশনসমূহ</a><a href="#change-or-withdraw-access">অ্যাক্সেস পরিবর্তন বা প্রত্যাহার করুন</a><a href="#what-the-administrator-can-see">প্রশাসক যা দেখতে পারেন</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>ওপেন সোর্স · আপনার মেশিনে চলে</span><a href="../../../../LICENSE">MIT লাইসেন্স</a><a href="../notice/">অপারেটর বিজ্ঞপ্তি</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">নিরাপত্তা</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "বার্তার অপেক্ষায়", "Step through a fictional send, edit and delete.": "একটি কাল্পনিক পাঠানো, সম্পাদনা এবং মুছে ফেলার ধাপ অনুসরণ করুন।", "No observations yet. Start the sequence or advance one event.": "এখন পর্যন্ত কোনো পর্যবেক্ষণ নেই। সিকোয়েন্স শুরু করুন অথবা একটি ইভেন্ট এগিয়ে নিন।", "Meet at 10:00": "১০:০০ টায় মিলিত হন", "A new message is visible in the chat.": "চ্যাটে একটি নতুন বার্তা দৃশ্যমান।", "Record 1 appended: the collector observed the original message.": "রেকর্ড ১ সংযুক্ত: সংগ্রাহক মূল বার্তাটি পর্যবেক্ষণ করেছেন।", "Meet at 11:00": "১১:০০ টায় মিলিত হোন", "The current text changes. The earlier observation stays.": "বর্তমান পাঠ্য পরিবর্তিত হয়। পূর্ববর্তী পর্যবেক্ষণ অপরিবর্তিত থাকে।", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "রেকর্ড ২ সংযুক্ত: সম্পাদনাটি একটি নতুন পর্যবেক্ষণ। রেকর্ড ১ এখনও মূল পাঠ্য সংরক্ষণ করে।", "Message deleted": "বার্তা মুছে ফেলা হয়েছে", "The message has disappeared from the chat view.": "বার্তাটি চ্যাট ভিউ থেকে অদৃশ্য হয়ে গেছে।", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "রেকর্ড ৩ সংযুক্ত: মুছে ফেলার বিজ্ঞপ্তিটি উভয় দেখা সংস্করণের পাশাপাশি সংরক্ষিত রয়েছে।", "0 records": "0টি রেকর্ড", "1 record": "১টি রেকর্ড", "2 records": "২টি রেকর্ড", "3 records": "৩টি রেকর্ড", "Complete / {n} of 3": "৩টির মধ্যে সম্পূর্ণ / {n}", "Step / {n} of 3": "৩-এর মধ্যে ধাপ / {n}", "Pause": "বিরতি", "Replay sequence": "পুনঃপ্রচার ক্রম", "Play sequence": "ক্রম বাজান", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "স্থির উদাহরণটি উপলব্ধ। হ্যাশগুলো ইন্টার‍্যাক্টিভভাবে গণনা করতে HTTPS-এ এই পৃষ্ঠাটি খুলুন অথবা Web Crypto সমর্থনসহ লোকালহোস্ট প্রিভিউ ব্যবহার করুন।", "No record supplied": "কোনও রেকর্ড সরবরাহ করা হয়নি", "Tail removed": "টেইল অপসারণ করা হয়েছে", "≠ saved hash": "≠ সংরক্ষিত হ্যাশ", "Rebuilt · different hash": "পুনর্নির্মিত · ভিন্ন হ্যাশ", "= saved hash": "= সংরক্ষিত হ্যাশ", "Same length and matching head.": "একই দৈর্ঘ্য এবং মিলিত শিরোনাম।", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "তিনটি গণনা করা হ্যাশ সংরক্ষিত হ্যাশের সাথে মিলছে। এই নমুনাটি রাখা তিনটি রেকর্ডের সীমানার সাথে সামঞ্জস্যপূর্ণ।", "Same saved head; the journal prefix fails verification.": "একই সংরক্ষিত হেড; জার্নাল প্রিফিক্স যাচাইকরণে ব্যর্থ।", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "রেকর্ড ২ আর তার সংরক্ষিত হ্যাশের সাথে মিলছে না। শুধুমাত্র সর্বশেষ সংরক্ষিত হেড যাচাই করলে এটি ধরা পড়বে না; যাচাইকারী প্রতিটি রেকর্ড পরীক্ষা করে।", "Head differs from the retained checkpoint.": "হেড সংরক্ষিত চেকপয়েন্ট থেকে পৃথক।", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "পুনর্নির্মিত হ্যাশগুলো একে অপরের সাথে সংযুক্ত, কিন্তু চূড়ান্ত হেডটি পরিবর্তিত হয়েছে। সংরক্ষিত চেকপয়েন্ট এই ইতিহাস প্রত্যাখ্যান করে। পরিবর্তিত রেকর্ডগুলিতেও মূল স্বাক্ষরগুলো ব্যর্থ হবে।", "Too short: 2 supplied records \u003c 3 retained records.": "খুব সংক্ষিপ্ত: ২টি সরবরাহিত রেকর্ড \u003c ৩টি সংরক্ষিত রেকর্ড।", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "বাকী থাকা দুইটি হ্যাশ এখনও মিলছে। সংরক্ষিত চেকপয়েন্ট অনুপস্থিত টেইল উন্মোচন করে। সেই পূর্বের সীমানা ছাড়া শুধুমাত্র এই সংক্ষিপ্ত প্রিফিক্সটি বাদ পড়া অংশটি প্রকাশ করতে পারত না।", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "এই ব্রাউজারে হ্যাশ গণনা অনুপলব্ধ। নীচের সূত্র এবং স্থির ব্যাখ্যাগুলো এখনও উপলব্ধ।", "{n} records": "{n} রেকর্ডস", "head {hash}": "হেড {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "গ্রহণ করা হয়েছে: গণনা বৃদ্ধি পাচ্ছে, স্বাক্ষর যাচাই হচ্ছে এবং কী মিলছে। সাক্ষী এই নতুন সীমা বজায় রাখে।", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "রোলব্যাক: স্বাক্ষরিত উত্তরটি শেষ গৃহীত চেকপয়েন্টের তুলনায় কম রেকর্ড রিপোর্ট করে। সাক্ষী সমস্যাটি রেকর্ড করে এবং পূর্বের গৃহীত সীমা বজায় রাখে।", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "ফর্ক: গণনা অপরিবর্তিত আছে কিন্তু হেড ভিন্ন। সাক্ষী মতবিরোধ রেকর্ড করে এবং পূর্বে গৃহীত সীমানা বজায় রাখে।", "No answer": "কোনও উত্তর নেই", "boundary unknown": "সীমা অজানা", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "কোনো প্রতিক্রিয়া নেই: সাক্ষী ব্যর্থ চেক রেকর্ড করে। এটি সংগ্রাহকের বর্তমান অবস্থা নিশ্চিত করতে পারে না। যদি সাক্ষী এখনও Bot API-এ পৌঁছাতে পারে এবং এর প্রকাশ নীতি অনুমতি দেয়, তবে এটি সেই ব্যর্থতা প্রকাশ করতে পারে।", "Send {n}": "{n} পাঠান", "Edit {n}": "{n}সম্পাদনা", "Delete {n}": "{n} মুছুন", "Both accounts captured all six expected observations in this example.": "উভয় অ্যাকাউন্টই এই উদাহরণে প্রত্যাশিত ছয়টি পর্যবেক্ষণই ধারণ করেছে।", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "অ্যাকাউন্ট B এখনও ৬টির মধ্যে ৬টিই ধারণ করেছে। দুটি রসিদ ধারণ করতে বেশি সময় লেগেছে। ধারণ অনুপাত এবং রসিদ বিলম্ব ভিন্ন প্রশ্নগুলোর উত্তর দেয়।", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "কাটঅফের সময়সীমার মধ্যে Account B ছয়টির মধ্যে পাঁচটি (৮৩.৩%) ধারণ করেছে। অনুপস্থিত সম্পাদনার কোনো পরিমাপযোগ্য বিলম্ব নেই। এই ফলাফল শুধুমাত্র ছয়টি নিয়ন্ত্রিত কর্মকাণ্ডকে বর্ণনা করে।", "not observed by cutoff": "কাটঅফের মাধ্যমে পর্যবেক্ষণ করা হয়নি", "{s} seconds": "{s} সেকেন্ড", "Exact values follow in the table.": "নির্দিষ্ট মানসমূহ টেবিলে অনুসরণ করা হয়েছে।", "{s} s": "{s}s", "Not observed": "পর্যবেক্ষণ করা হয়নি", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "চারটি চ্যাট বিভিন্ন পর্যবেক্ষণ প্রদান করে। প্রতিটি সংযোগের জন্য উৎস রেকর্ডগুলো অনুসরণ করুন; প্রেরক নির্ধারণ না করে চ্যানেল পোস্টটি ব্যবহারকারী ৭১০०১-এ বরাদ্দ করবেন না।", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "রেকর্ড #146 এবং #205 একই প্রেরক আইডি, 71001, সরবরাহ করে। এটি দুইটি চ্যাটে একটি টেলিগ্রাম অ্যাকাউন্টের পর্যবেক্ষিত পোস্টগুলোকে সংযুক্ত করে। এটি কোনো বাস্তব ব্যক্তিকে চিহ্নিত করে না বা চ্যানেল পোস্টের সাথে কোনো ব্যক্তিকে যুক্ত করে না।", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "pay.example.invalid/new গন্তব্যটি গ্রুপ রেকর্ড #146, বট কীবোর্ড #173, চ্যানেল সম্পাদনা #188 এবং ব্যক্তিগত বার্তা #205-এ প্রদর্শিত হয়েছে। একই গন্তব্যের পুনরাবৃত্তি বিষয়বস্তুকে সংযুক্ত করে; এটি সেই অ্যাকাউন্টগুলির সাধারণ নিয়ন্ত্রণের প্রমাণ দেয় না।", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "এই কাল্পনিক ক্ষেত্রে সম্পন্ন মিডিয়া রসিদ #151 এবং #209-এর পূর্ণ SHA-256 মান সমান। প্রকৃত বাইট এবং সংশ্লিষ্ট বার্তা রেকর্ডগুলো তুলনা করুন। মিলিত ফাইলটি এর নির্মাতাকে শনাক্ত করে না বা কে এটি ফরওয়ার্ড করেছে তা প্রমাণ করে না।", "the encrypted off-site copy": "এনক্রিপ্টকৃত অফ-সাইট কপি", "notifications": "অ্যালার্টসমূহ", "checkpoint hashes for timestamps": "টাইমস্ট্যাম্পের জন্য চেকপয়েন্ট হ্যাশ", "signed checkpoints for the witness": "সাক্ষীর স্বাক্ষরিত চেকপয়েন্টসমূহ", "Switched on in this example": "এই উদাহরণে চালু করা হয়েছে", "Optional · off by default": "ঐচ্ছিক · ডিফল্টভাবে বন্ধ", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "এই মেশিন থেকে যাওয়া: টেলিগ্রাম সংযোগ এবং {list}। আর কিছুই না।", "Default: only the Telegram connection leaves this machine.": "ডিফল্ট: শুধুমাত্র টেলিগ্রাম সংযোগই এই মেশিন থেকে বের হয়।", "{done} of {total} done": "{total}-এর মধ্যে {done} সম্পন্ন", "Mark step {n} as done": "{n} ধাপটি সম্পন্ন হিসেবে চিহ্নিত করুন", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "কপি", "Copied": "কপি করা হয়েছে", "Command copied.": "কমান্ড অনুলিপি করা হয়েছে।", "Selected — Ctrl/Cmd+C": "নির্বাচিত — Ctrl/Cmd+C", "Command selected. Copy it manually.": "কমান্ড নির্বাচিত। এটি ম্যানুয়ালি অনুলিপি করুন।", "Command copied to clipboard.": "কমান্ডটি ক্লিপবোর্ডে অনুলিপি করা হয়েছে।", "Select text": "টেক্সট নির্বাচন করুন", "Clipboard unavailable. Command selected; copy it manually.": "ক্লিপবোর্ড অনুপলব্ধ। কমান্ড নির্বাচিত; ম্যানুয়ালি অনুলিপি করুন।", "A message arrives. The first observation is saved.": "একটি বার্তা এসেছে। প্রথম পর্যবেক্ষণ সংরক্ষিত হয়েছে।", "The time changes. Both captured versions stay.": "সময় পরিবর্তিত হয়। উভয় ধারণকৃত সংস্করণই থাকে।", "The message disappears. The captured history remains.": "বার্তাটি অদৃশ্য হয়ে যায়। ধারণকৃত ইতিহাস রয়ে যায়।", "Pause example animation": "অ্যানিমেশন বিরতি উদাহরণ", "Play example animation": "উদাহরণ অ্যানিমেশন প্লে করুন", "Play": "চালু করুন", "Full-size workspace screenshot": "পূর্ণ-আকারের কর্মস্থলের স্ক্রিনশট", "Workspace screenshot · fictional data": "ওয়ার্কস্পেস স্ক্রিনশট · কাল্পনিক ডেটা", "Close": "বন্ধ করুন", "Close screenshot": "স্ক্রিনশট বন্ধ করুন", "Scrollable full-size screenshot": "স্ক্রলযোগ্য পূর্ণ-আকারের স্ক্রিনশট", "Enlarge: {name}": "বড় করুন: {name}", "View full size": "পূর্ণ আকারে দেখুন"}</script>
+</body></html>
