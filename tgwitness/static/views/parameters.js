@@ -16,15 +16,25 @@ export function createParameters(context) {
   const items = () => (catalog?.groups || []).flatMap(group => group.items);
   const raw = entry => entry.item.kind === "bool" ? entry.field.checked : entry.field.value;
   const value = entry => entry.item.kind === "bool" ? entry.field.checked : entry.item.kind === "lines"
-    ? entry.field.value.split("\n").map(line => line.trim()).filter(Boolean) : Number(entry.field.value);
+    ? entry.field.value.split("\n").map(line => line.trim()).filter(Boolean)
+    : entry.field.value.trim() ? Number(entry.field.value) : NaN;
   const write = (entry, next) => {
     if (entry.item.kind === "bool") entry.field.checked = next;
     else entry.field.value = entry.item.kind === "lines" ? next.join("\n") : String(next);
   };
-  const formatted = value => Array.isArray(value) ? tr("{n} lines", {n: value.length})
+  const formatted = value => Array.isArray(value) ? tr(value.length === 1 ? "1 line" : "{n} lines", {n: value.length})
     : typeof value === "boolean" ? tr(value ? "On" : "Off") : Number(value).toLocaleString();
   const draft = () => Object.fromEntries([...fields].filter(([, entry]) => !equal(value(entry), entry.item.value))
     .map(([key, entry]) => [key, value(entry)]));
+
+  function problem(entry) {
+    if (entry.serverError) return entry.serverError;
+    if (entry.item.kind !== "int") return "";
+    const number = Number(entry.field.value);
+    return !entry.field.value.trim() || !Number.isInteger(number) || number < entry.item.low || number > entry.item.high
+      ? tr("Enter a whole number from {low} to {high}.", {
+        low: entry.item.low.toLocaleString(), high: entry.item.high.toLocaleString()}) : "";
+  }
 
   function offset() {
     root.style.setProperty("--parameters-top", Math.max(0, context.headerOffset?.() || 0) + "px");
@@ -51,17 +61,21 @@ export function createParameters(context) {
 
   function renderDraft() {
     if (!catalog || !active()) return;
-    let count = 0;
+    let count = 0, invalid = 0;
     for (const entry of fields.values()) {
       const changed = !equal(value(entry), entry.item.default);
       entry.row.classList.toggle("changed", changed);
-      entry.reset.hidden = !changed; entry.reset.disabled = !allowed() || saving;
+      entry.resetWrap.hidden = entry.marker.hidden = !changed; entry.reset.disabled = !allowed() || saving;
       entry.field.disabled = !allowed();
+      const error = problem(entry); invalid += Number(!!error);
+      entry.error.textContent = error; entry.error.hidden = !error;
+      entry.row.classList.toggle("invalid", !!error);
+      if (error) entry.field.setAttribute("aria-invalid", "true"); else entry.field.removeAttribute("aria-invalid");
       if (!equal(value(entry), entry.item.value)) count++;
     }
     context.setDirty(!!count);
     find("parameters-unsaved").textContent = count ? tr("Unsaved changes — press Save parameters to apply.") : "";
-    form.querySelector('[type="submit"]').disabled = !allowed() || saving || !count;
+    form.querySelector('[type="submit"]').disabled = !allowed() || saving || !count || !!invalid;
     find("parameters-reset").disabled = !allowed() || saving;
     for (const group of groups.values()) {
       const changed = group.entries.filter(entry => !equal(value(entry), entry.item.default)).length;
@@ -92,13 +106,19 @@ export function createParameters(context) {
           else Object.assign(field, {type: "number", min: item.low, max: item.high, step: 1, required: true});
           line.append(field); if (item.unit) line.append(make("span", "unit", tr(item.unit))); row.append(label, line);
         }
-        if (item.help) row.append(make("p", "hint", tr(item.help)));
+        const marker = make("span", "parameter-changed", tr("Changed")); label.append(marker);
+        if (item.help) {const help = make("p", "hint", tr(item.help)); help.id = id + "-help"; row.append(help);}
         const meta = make("p", "hint parameter-meta", [item.kind === "int"
-          ? tr("{low} to {high}", {low: item.low.toLocaleString(), high: item.high.toLocaleString()}) : "",
-          tr("Default: {value}", {value: formatted(item.default)})].filter(Boolean).join(" · "));
+          ? tr("Range: {low}–{high} {unit}", {low: item.low.toLocaleString(), high: item.high.toLocaleString(), unit: tr(item.unit)}) : "",
+          tr("Default: {value}", {value: formatted(item.default) + (item.kind === "int" && item.unit ? " " + tr(item.unit) : "")})].filter(Boolean).join(" · "));
+        meta.id = id + "-meta";
         const reset = make("button", "text-link", tr("Restore default")); reset.type = "button"; reset.dataset.parameterReset = item.key;
-        meta.append(" · ", reset); row.append(meta); grid.append(row);
-        const entry = {item, field, row, reset, search: [item.key, item.label, item.help, tr(item.label), tr(item.help || ""),
+        reset.setAttribute("aria-label", tr("Restore default for {name}", {name: tr(item.label)}));
+        const resetWrap = make("span", "parameter-reset"); resetWrap.append(" · ", reset); meta.append(resetWrap);
+        const error = make("p", "parameter-error"); error.id = id + "-parameter-error"; error.hidden = true; error.setAttribute("aria-live", "polite");
+        field.setAttribute("aria-describedby", [meta.id, item.help ? id + "-help" : "", error.id].filter(Boolean).join(" "));
+        row.append(meta, error); grid.append(row);
+        const entry = {item, field, row, reset, resetWrap, marker, error, serverError: "", search: [item.key, item.label, item.help, tr(item.label), tr(item.help || ""),
           group.id, tr(groupNames[group.id] || group.title)].join(" ").toLocaleLowerCase()};
         fields.set(item.key, entry); entryGroup.entries.push(entry); write(entry, item.value);
       }
@@ -141,18 +161,19 @@ export function createParameters(context) {
     event.preventDefault(); selected = link.dataset.parameterGroup; context.sectionChanged?.(selected); filter();
     groups.get(selected).card.scrollIntoView({block: "start", behavior: "instant"});
   });
-  on(form, "input", renderDraft);
+  on(form, "input", event => {
+    const entry = fields.get(event.target.dataset.parameter); if (entry) entry.serverError = "";
+    // The shared native-validation listener runs first; this view owns its inline result.
+    queueMicrotask(renderDraft);
+  });
   on(form, "click", event => {
     const button = event.target.closest("button[data-parameter-reset]"); if (!button || !allowed() || saving) return;
-    const entry = fields.get(button.dataset.parameterReset); write(entry, entry.item.default); renderDraft(); entry.field.focus();
+    const entry = fields.get(button.dataset.parameterReset); entry.serverError = ""; write(entry, entry.item.default); renderDraft(); entry.field.focus();
   });
   on(form, "submit", async event => {
     event.preventDefault(); if (!catalog || !allowed() || saving) return;
-    for (const entry of fields.values()) if (entry.item.kind === "int"
-      && (entry.field.value.trim() === "" || !entry.field.checkValidity())) {
-      find("parameters-result").textContent = tr("{name}: enter a whole number from {low} to {high}.", {
-        name: tr(entry.item.label), low: entry.item.low, high: entry.item.high}); entry.field.focus(); return;
-    }
+    const invalid = [...fields.values()].find(entry => problem(entry));
+    if (invalid) {renderDraft(); invalid.field.focus(); return;}
     const values = draft(); if (!Object.keys(values).length) return;
     const submitted = Object.fromEntries([...fields].map(([key, entry]) => [key, raw(entry)]));
     const now = getSession(), profile = getState().profile; request++; saving = true; renderDraft();
@@ -165,6 +186,8 @@ export function createParameters(context) {
       toast(tr("Parameters saved and recorded in the signed journal."));
     } catch (error) {
       if (now !== getSession() || error.name === "StaleView") return;
+      const entry = fields.get(error.parameter);
+      if (entry) {entry.serverError = error.message; if (active()) entry.field.focus();}
       if (active()) find("parameters-result").textContent = error.message;
       toast(error.message, true);
     } finally {if (now === getSession()) {saving = false; renderDraft();}}

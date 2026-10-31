@@ -13,6 +13,11 @@
 #view-parameters #parameters-empty p { margin-bottom: 12px; }
 #view-parameters #parameters-result:empty { display: none; }
 #view-parameters #parameters-result { margin: 0 0 12px; }
+#view-parameters .parameter-meta { font-size: 12px; line-height: 1.6; }
+#view-parameters .parameter-changed { display: inline-block; margin-inline-start: 8px; font-size: 11px; font-weight: 500; color: var(--accent-text); background: var(--accent-soft); border-radius: 4px; padding: 1px 5px; }
+#view-parameters .parameter-error { color: var(--danger); margin-top: 6px; font-size: 12px; }
+#view-parameters .parameter-row.invalid input { border-color: var(--danger); }
+#view-parameters .parameter-field .unit { font-size: 12px; }
 @media(max-width:600px) {
   #view-parameters .parameters-tools input[type=search] { flex-basis: 100%; }
   #view-parameters .parameters-tools .check-label { font-size: 12px; }
