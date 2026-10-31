@@ -73,6 +73,9 @@ SELF_ESTABLISHES = (
     "Cloudflare reports from which address the tunnel connector runs; the panel is reachable only through it.",
 )
 LIMITS = (
+    "The initial installer is a trust boundary. A malicious bootstrap could copy the signing key and falsify "
+    "the collector's measurements without a later SSH login. Matching installer/source hashes reported by "
+    "that collector are not independent runtime attestation or proof that the key was never copied.",
     "The collector's host measurements (SSH listeners, logins, boot) are self-reported: root on the server "
     "could falsify them. They support, not replace, the provider and Cloudflare records.",
     "The provider and its staff control the hypervisor, disks and network; nothing here excludes them.",
@@ -613,7 +616,7 @@ def verify_provider(report, record, provider):
         or "none outside the deployment")
     if not any(a["meaning"] == "server created" for a in report.actions):
         status, detail = worst([status, "review"]), detail + "; the creation is no longer listed"
-    report.add("provider_actions", status, "The provider's log shows no access to the server",
+    report.add("provider_actions", status, "No flagged access operations appear in the available provider log",
                detail + "; " + provider.log_retention, source)
     return server
 
@@ -698,14 +701,14 @@ def verify_collector(report, record, server, args, fetch):
             "compared with the deployment record only; pass --fingerprint from an independent channel"
     else:
         status, detail = "review", "no expected fingerprint"
-    report.add("fingerprint", status, "The signing key is the one born at deployment",
+    report.add("fingerprint", status, "The collector key matches the expected fingerprint",
                statement["fingerprint"] + "; " + detail, COLLECTOR)
     target = record["server"] if record["provider"] == "generic" else server
     if target:
         ipv4 = target.get("ipv4")
         problems = binding(statement, target["id"], ipv4, record.get("cloud_init") or {})
         report.add("binding", "fail" if problems else "pass",
-                   "The key answers from the recorded server, set up with the recorded installer",
+                   "The collector reports the recorded server and installer hashes",
                    "; ".join(problems) or "instance " + str(target["id"]) + (", IPv4 " + ipv4 if ipv4 else "")
                    + ", installer hashes match", COLLECTOR)
     published = record.get("cloud_init", {}).get("published", "cloud-init.redacted.yaml")
@@ -719,10 +722,10 @@ def verify_collector(report, record, server, args, fetch):
             problems.append("it does not install commit " + record["commit"])
         if record["mode"] in ("high-assurance", "self-attested") and "systemctl mask ssh.socket ssh.service" not in text:
             problems.append("it does not mask SSH")
-        report.add("cloud_init", "fail" if problems else "pass", "The published installer is what the server received",
+        report.add("cloud_init", "fail" if problems else "pass", "The published installer matches the collector-reported hash",
                    "; ".join(problems) or "SHA-256 matches; installs " + record["commit"], COLLECTOR)
     else:
-        report.add("cloud_init", "unavailable", "The published installer is what the server received",
+        report.add("cloud_init", "unavailable", "The published installer matches the collector-reported hash",
                    "pass --cloud-init " + published, COLLECTOR)
     deployed = host.get("deployment") or {}
     same = deployed.get("commit") == record["commit"] and deployed.get("deployment_id") == record["deployment_id"]
@@ -731,11 +734,11 @@ def verify_collector(report, record, server, args, fetch):
     if args.source:
         expected = source_tree_sha256(source_files(Path(args.source) / "tgwitness"))
         same = expected == statement["source_tree_sha256"]
-        report.add("source", "pass" if same else "fail", "The running code equals the checkout of the commit",
+        report.add("source", "pass" if same else "fail", "The collector-reported source hash matches the checkout",
                    "running " + statement["source_tree_sha256"] + ", checkout " + expected
                    + ("" if same else "; on Windows clone with git -c core.autocrlf=false"), COLLECTOR)
     else:
-        report.add("source", "unavailable", "The running code equals the checkout of the commit",
+        report.add("source", "unavailable", "The collector-reported source hash matches the checkout",
                    "pass --source with a checkout of " + record["commit"], COLLECTOR)
     flags = [(host.get("ssh_listening"), "something listens on port 22"),
              (host.get("ssh_processes"), "SSH server processes running"), (host.get("sessions"), "logged-in sessions now")]
@@ -755,12 +758,16 @@ def verify_collector(report, record, server, args, fetch):
 
 
 def verify_journal(report, path, key, server_id, generic=False):
+    if not key:
+        report.add("journal", "fail", "The evidence journal matches the expected collector key",
+                   "no expected collector key is available for this deployment", JOURNAL)
+        return
     try:
         result = verify_bundle(path, expected_fingerprint=key)
     except Exception as exc:
         report.add("journal", "fail", "The evidence journal is signed by this key", type(exc).__name__ + ": " + str(exc), JOURNAL)
         return
-    starts, problems, boots, baseline = 0, [], [], None
+    starts, problems, boots, baseline, unknown = 0, [], [], None, []
     with open_archive(path) as archive, archive.open("events.jsonl") as stream:
         for line in bounded_lines(stream):
             event = json.loads(line)
@@ -777,6 +784,10 @@ def verify_journal(report, path, key, server_id, generic=False):
                 continue
             if str(instance) != str(server_id):
                 problems.append("record " + str(event["seq"]) + ": instance " + str(instance))
+            missing = [name for name in ("boot_id", "ssh_listening", "ssh_processes", "sessions", "logins")
+                       if host.get(name) is None]
+            if missing:
+                unknown.append("record " + str(event["seq"]) + ": unavailable host measurements: " + ", ".join(missing))
             for flag, text in (("ssh_listening", "port 22 open"), ("ssh_processes", "SSH processes"),
                                ("sessions", "sessions")):
                 if host.get(flag):
@@ -788,8 +799,11 @@ def verify_journal(report, path, key, server_id, generic=False):
                 problems.append("record " + str(event["seq"]) + ": login(s) recorded")
             if host.get("boot_id") and host["boot_id"] not in boots:
                 boots.append(host["boot_id"])
-    report.add("journal", "fail" if problems else "pass", "The evidence journal is signed by this key and was kept on this server",
-               "; ".join(problems[:20]) or str(result["events"]) + " records verified; " + str(starts)
+    if not starts:
+        problems.append("no process.started record binds this journal to the reported server")
+    report.add("journal", "fail" if problems else "unavailable" if unknown else "pass",
+               "The journal signatures and recorded host measurements match",
+               "; ".join((problems + unknown)[:20]) or str(result["events"]) + " records verified; " + str(starts)
                + " process start(s) on server " + str(server_id) + "; " + str(len(boots)) + " boot(s)", JOURNAL)
 
 
@@ -829,6 +843,10 @@ def verify(args, provider=None, cloudflare=None, fetch=collector_statement):
     generic = record["provider"] == "generic"
     return {"format": "tgwitness-assurance-report-v1", "generated_at": utcnow(),
             "verifier": {"software": "TgWitness", "version": __version__}, "result": report.result(),
+            "verification_scope": "deployment-consistency",
+            "assurance": {"runtime_measurements": "collector-self-report",
+                          "independent_runtime_attestation": "not-performed",
+                          "key_nonexportability": "not-established", "source_authenticity": "not-established"},
             "deployment": {k: record.get(k) for k in ("deployment_id", "name", "mode", "provider", "location",
                                                       "repository", "commit", "panel_host", "witness_host", "created_at")},
             "provider_title": kind.title, "server": record["server"], "firewall": (record.get("firewall") or {}).get("id"),
@@ -854,7 +872,9 @@ def render(report):
              + " (`python -m tgwitness.cloud verify`). Every provider and Cloudflare value below was "
              "requested by the verifier at that time; the deployment record supplied only the IDs to ask about.", "",
              "| | |", "| --- | --- |",
-             "| **Result** | **" + report["result"].upper() + "** |",
+             "| **Deployment checks** | **" + report["result"].upper() + "** |",
+             "| Runtime measurements | Self-reported by the collector; no independent runtime attestation |",
+             "| Private-key custody | This report does not establish that the key was never copied |",
              "| Collector key fingerprint | `" + str(report["fingerprint"]) + "` |",
              "| Deployment | " + cell(deployment["deployment_id"]) + " (" + cell(deployment["mode"]) + "), "
              + cell(deployment["created_at"]) + " |",

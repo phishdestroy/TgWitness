@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- Evidence verification now reports the exact prefix covered by witness checkpoints and
+  any unwitnessed tail. `--require-witness` requires a pinned witness and a matching final
+  exported record; requested channel checks also reject missing claimed posts.
+- Cloud journal checks reject missing startup records or expected collector keys and
+  report unavailable host measurements. Deployment reports distinguish configuration
+  checks from independent runtime attestation; supplied channel dates are not authenticated
+  by witness signatures.
+
 - Expanded the panel and complete documentation site to 25 languages, including German,
   French, Italian, Japanese, Korean and Hebrew. Language switches preserve the current
   documentation page; the static demo includes the new panel dictionaries. Existing
