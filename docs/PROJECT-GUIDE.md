@@ -557,3 +557,11 @@ workflow has run yet. Read [CONTRIBUTING.md](../.github/CONTRIBUTING.md) before 
 | [Deployment](../deploy/README.md) | Service templates and HTTPS configuration |
 | [Website](../website/README.md) | Public pages, practical guides and language catalogues |
 | [GitHub configuration](../.github/AUTOMATION.md) | Automation, issue forms and dependency updates |
+
+## Archive and integrations in current main
+
+[Workflow guide](https://phishdestroy.github.io/TgWitness/docs/archive/) ·
+[History loading](HISTORY.md) · [Archive analysis](ANALYSIS.md) · [MCP](MCP.md) ·
+[OCR / transcription](MEDIA-ANALYSIS.md) · [Webhooks](WEBHOOKS.md)
+
+Use a source checkout for these additions; the 0.7.0 portable preview predates them.

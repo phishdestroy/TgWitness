@@ -27,10 +27,16 @@ def main():
         ("setup", "Setup guide", "Setup"),
         ("account", "Telegram account", "Account"),
         ("deploy", "Docker & servers", "Servers"),
+        ("people", "People & dossiers", "People"),
+        ("bots", "Bot investigation", "Bots"),
+        ("archive", "Search, AI & MCP", "Archive"),
+        ("cloud", "Sealed cloud mode", "Cloud"),
     )
     for name, desktop, mobile in entries:
         for narrow in (False, True):
             width, height = (108, 46) if narrow else (240, 48)
+            if name in {"people", "bots", "archive", "cloud"}:
+                width = 170 if narrow else 360
             title = mobile if narrow else desktop
             d = Drawing(fonts, width, height, desktop)
             fill = "#16364e" if name == "demo" else "#0d1d2e"
