@@ -159,7 +159,8 @@
 <div class="content">
 <div class="context-bar">
   <div class="notice demo" hidden id="demo-banner"><svg aria-hidden="true" class="icon"><use href="#i-sparkle"/></svg><span><strong>Demo workspace</strong> · Fictional records for exploring the interface. Telegram is not connected.</span></div>
-  <details class="health-details"><summary>Collector health <span>Storage &amp; attachment queue</span></summary><div aria-live="polite" class="health-strip" id="health-strip"></div></details>
+  <details class="health-details"><summary>Collector health <span>Storage &amp; attachment queue</span></summary><div class="health-strip" id="health-strip"></div></details>
+  <span aria-live="polite" class="visually-hidden" id="health-announce"></span>
 </div>
 <div class="notice error" hidden id="collector-error"></div>
 
@@ -371,7 +372,7 @@
       <label for="evidence-ots">OpenTimestamps calendars, one address per line</label><textarea id="evidence-ots" rows="4" spellcheck="false"></textarea>
     </details>
     <button class="secondary" type="submit">Save evidence mode</button> <button class="quiet" id="evidence-anchor" type="button">Anchor now</button>
-    <p class="hint" id="evidence-status" role="status"></p>
+    <div class="hint health-detail" id="evidence-status" role="status"></div>
   </form>
   <form class="card padded" id="replica-form"><div class="eyebrow">Off-site copy</div><h2>Copy everything to S3-compatible storage</h2>
     <p class="muted">The journal, photos &amp; files, checkpoints with their timestamps and chat exports are encrypted on this machine before upload, so the provider stores only encrypted objects. Works with AWS S3 and other S3-compatible services. Download the encryption key and keep it apart: without it the copy cannot be read.</p>
@@ -391,7 +392,7 @@
       <label for="replica-mode">Object Lock mode</label><select id="replica-mode"><option value="GOVERNANCE">Governance</option><option value="COMPLIANCE">Compliance: nobody can delete or shorten it, including the bucket owner</option></select>
     </details>
     <button class="secondary" type="submit">Save off-site copy</button> <button class="quiet" id="replica-test" type="button">Test connection</button> <button class="quiet" id="replica-sync" type="button">Copy now</button> <button class="quiet" id="replica-key" type="button">Download encryption key</button>
-    <p class="hint" id="replica-status" role="status"></p>
+    <div class="hint health-detail" id="replica-status" role="status"></div>
   </form>
   </div>
 
@@ -425,6 +426,7 @@
   <div class="extra-panel card padded" id="extras-cloud" hidden role="region" aria-labelledby="extras-cloud-title">
     <div class="extra-panel-heading"><div><span class="eyebrow">24/7 SERVER</span><h2 id="extras-cloud-title" tabindex="-1">A sealed server, set up by commands you can check.</h2><p>The server has no SSH and no open ports: the panel is reached through a Cloudflare Tunnel, and anyone with a read-only token can check how it was created.</p></div><button class="quiet" data-extra-close="cloud" type="button">Back to extras</button></div>
     <p class="notice" hidden id="cloud-active"></p>
+    <div class="health-detail" hidden id="cloud-health" role="status"></div>
     <form class="cloud-form" id="cloud-form">
       <div class="replica-fields">
         <div><label for="cloud-provider">Provider</label><select id="cloud-provider"></select></div>
@@ -463,6 +465,7 @@
       <div class="extra-card-top"><span class="extra-icon"><svg class="icon" aria-hidden="true"><use href="#i-archive"/></svg></span><span class="extra-badge" id="extra-evidence-badge">Off</span></div>
       <h2>Evidence that holds up</h2><p>Independent timestamps for the journal and an encrypted copy in storage that nobody can quietly delete.</p>
       <p class="extra-requires">Timestamps work at once · the copy needs S3 storage</p>
+      <p class="extra-status" hidden id="extra-evidence-status"></p>
       <button class="secondary" id="extras-open-evidence" data-extra="evidence" aria-expanded="false" aria-controls="extras-evidence" type="button">Turn on evidence mode <span aria-hidden="true">→</span></button>
     </article>
     <article class="extra-card extra-cloud">

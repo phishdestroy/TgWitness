@@ -61,6 +61,7 @@ POLICY = {
     "GET /api/evidence": ("view", None),
     "GET /api/source-check": ("view", None),
     "GET /api/replica": ("view", None),
+    "GET /api/health": ("view", None),
     "GET /api/alerts": ("view", None),
     "GET /api/parameters": ("view", None),
     "GET /api/checkpoint": ("view", None),
