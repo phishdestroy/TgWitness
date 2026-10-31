@@ -146,3 +146,82 @@ def test_custom_proxy_can_be_selected_from_another_workspace(tmp_path, monkeypat
 
 def test_github_token_is_never_sent_over_plain_http():
     assert proxy_sources.github_headers("http://api.github.com/repos/test/file", TOKEN) is None
+
+
+def located(catalog):
+    """The seeded servers with known countries: 8.8.8.8 in Germany, 1.1.1.1 in the Netherlands."""
+    catalog.countries.cache = {"8.8.8.8": {"country": "DE", "at": 9e9}, "1.1.1.1": {"country": "NL", "at": 9e9}}
+    return catalog
+
+
+def choose(tmp_path, catalog, **choice):
+    settings = catalog.settings()
+    for key, value in choice.items():
+        setattr(settings, key, value)
+    return proxy_sources.save(tmp_path, settings)
+
+
+def test_country_choice_orders_and_excludes_servers_of_the_automatic_route(tmp_path, monkeypatch):
+    catalog = located(seed(tmp_path, monkeypatch))
+
+    async def handshake(route):
+        return 40
+    monkeypatch.setattr(catalogs.ProxyPool, "probe", staticmethod(handshake))
+    pool = catalogs.ProxyPool(catalog)
+    host = lambda owner: pool.table()[[r["id"] for r in pool.table()].index(pool.assigned[owner])]["host"]
+
+    choose(tmp_path, catalog, prefer=["nl"])
+    asyncio.run(pool.acquire("a"))
+    assert host("a") == "1.1.1.1" and catalog.settings().prefer == ["NL"]
+    rows = {r["host"]: r for r in pool.table()}
+    assert rows["1.1.1.1"]["preferred"] and not rows["8.8.8.8"]["preferred"] and not any(r["excluded"] for r in rows.values())
+
+    # An avoided country is never used, and a workspace on it moves at its next choice.
+    choose(tmp_path, catalog, prefer=[], avoid=["NL"])
+    asyncio.run(pool.acquire("a"))
+    assert host("a") == "8.8.8.8" and {r["host"] for r in pool.table() if r["excluded"]} == {"1.1.1.1"}
+    assert pool.available("b")
+
+    choose(tmp_path, catalog, avoid=[], prefer=["FR"], only_preferred=True)
+    pool.release("a")
+    try:
+        asyncio.run(pool.acquire("a"))
+        raise AssertionError("an excluded server was chosen")
+    except catalogs.NoProxyAvailable as exc:
+        assert "allowed country" in str(exc)
+    assert not pool.available("a")
+
+    # Unknown countries count as "another country": usable unless only preferred countries may serve.
+    catalog.countries.cache = {}
+    choose(tmp_path, catalog, only_preferred=False)
+    assert len(asyncio.run(pool.acquire("a"))) == 2
+
+
+def test_country_choice_is_validated_before_it_is_saved(tmp_path, monkeypatch):
+    catalog = seed(tmp_path, monkeypatch)
+    for choice, problem in (({"prefer": ["Germany"]}, "two-letter"), ({"prefer": ["DE"], "avoid": ["de"]}, "at once"),
+                            ({"only_preferred": True}, "at least one"),
+                            ({"prefer": ["DE"], "countries": False}, "country lookups")):
+        try:
+            choose(tmp_path, catalog, **{"prefer": [], "avoid": [], "only_preferred": False, "countries": True, **choice})
+            raise AssertionError(choice)
+        except ValueError as exc:
+            assert problem in str(exc)
+    assert catalog.settings().prefer == []
+    assert choose(tmp_path, catalog, prefer=[" de", "DE", "nl"]).prefer == ["DE", "NL"]
+
+
+def test_country_choice_through_the_panel_is_journaled_and_shown(tmp_path, monkeypatch):
+    catalog = located(seed(tmp_path, monkeypatch))
+    app = create_app(tmp_path / "data", client_factory=FakeClient, proxy_pool=catalogs.ProxyPool(catalog))
+    with TestClient(app) as client:
+        client.headers["Authorization"] = "Bearer " + app.state.vault.token
+        view = client.get("/api/network/proxies").json()
+        assert view["schedule"]["lists_minutes"] == catalogs.FEED_SECONDS // 60 and view["summary"]["excluded"] == 0
+        settings = {k: view["settings"][k] for k in ("disabled", "custom", "github", "countries")}
+        refused = client.post("/api/network/sources", json={**settings, "prefer": ["DE"], "avoid": ["DE"]})
+        assert refused.status_code == 422 and refused.json()["detail"] == "A country cannot be preferred and avoided at once."
+        saved = client.post("/api/network/sources", json={**settings, "prefer": ["DE"], "avoid": ["NL"]}).json()
+        assert saved["settings"]["prefer"] == ["DE"] and saved["summary"]["excluded"] == 1 and saved["summary"]["preferred"] == 1
+        event = app.state.store.events(kind="network.sources_changed")[0]["payload"]
+        assert event["prefer_countries"] == ["DE"] and event["avoid_countries"] == ["NL"]

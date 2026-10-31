@@ -885,15 +885,18 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         for entry in (profiles.entries.values() if profiles else ()):
             if entry.get("app") is not None and (principal is None or principal.opens(entry["id"])):
                 labels[str(entry["app"].state.store.root)] = entry["label"]
-        rows, settings = shared_pool.table(labels), catalog.settings()
+        rows, settings, intervals = shared_pool.table(labels), catalog.settings(), shared_pool.intervals()
         latencies = sorted(r["latency_ms"] for r in rows if r["latency_ms"])
         return {"rows": rows, "summary": {
                     "listed": len(rows), "ok": sum(r["status"] == "ok" for r in rows),
                     "resting": sum(r["status"] == "resting" for r in rows),
                     "untested": sum(r["status"] == "untested" for r in rows),
+                    "excluded": sum(r["excluded"] for r in rows), "preferred": sum(r["preferred"] for r in rows),
                     "median_ms": latencies[len(latencies) // 2] if latencies else None,
                     "countries": len({r["country"] for r in rows if r["country"]}),
                     "checked_at": shared_pool.probed_at or None, "checking": shared_pool.check_task is not None},
+                "schedule": {"lists_minutes": round(intervals["lists"] / 60), "probe_minutes": round(intervals["probe"] / 60),
+                             "lists_at": shared_pool.refreshed_at or None},
                 "sources": catalog.public()["sources"],
                 "settings": {**settings.model_dump(), "github_token": bool(catalog.github_token()),
                              "github_status": catalog.github_status},
@@ -930,7 +933,8 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 raise HTTPException(422, str(exc)) from None
             catalog.forget(before - {item.id for item in body.custom})
         app.state.store.append("network.sources_changed", {
-            "bundled_off": body.disabled, "own_lists": len(body.custom), "github_search": body.github.enabled})
+            "bundled_off": body.disabled, "own_lists": len(body.custom), "github_search": body.github.enabled,
+            "prefer_countries": body.prefer, "avoid_countries": body.avoid, "only_preferred": body.only_preferred})
         return proxy_view()
 
     @app.post("/api/network/sources/list", dependencies=[Depends(authenticate)])

@@ -512,13 +512,25 @@ class ProxyPool:
             self.succeeded(alias, latency)
         return route
 
-    def order(self, owner, entries, avoid, now, share=0):
-        """Candidates: least shared first, then measured latency, then list order; share caps the
-        accounts on one proxy (0: no cap)."""
+    def country_ranks(self, entries):
+        """{proxy id: 0 preferred country, 1 other} after the operator's country choice; proxies in an
+        avoided country, or outside the preferred ones when only those may serve, are left out."""
+        settings, countries = getattr(self.catalog, "settings", None), getattr(self.catalog, "countries", None)
+        policy = settings() if settings and countries else None
+        if policy is None or not (policy.prefer or policy.avoid):
+            return dict.fromkeys(entries, 1)
+        ranks = {alias: policy.country_rank(countries.of(row["route"].host)) for alias, row in entries.items()}
+        return {alias: rank for alias, rank in ranks.items() if rank is not None}
+
+    def order(self, owner, entries, avoid, now, share=0, ranks=None):
+        """Candidates: preferred countries first, then least shared, then measured latency, then list
+        order; share caps the accounts on one proxy (0: no cap); ranks leaves the other proxies out."""
         load = Counter(v for k, v in self.assigned.items() if k != owner)
         position = {alias: number for number, alias in enumerate(entries)}
-        usable = [a for a in entries if a not in avoid and not self.resting(a, now) and not (share and load[a] >= share)]
-        return sorted(usable, key=lambda a: (load[a], not self.healthy(a, now),
+        ranks = dict.fromkeys(entries, 1) if ranks is None else ranks
+        usable = [a for a in entries if a in ranks and a not in avoid and not self.resting(a, now)
+                  and not (share and load[a] >= share)]
+        return sorted(usable, key=lambda a: (ranks[a], load[a], not self.healthy(a, now),
                                              self.health.get(a, {}).get("latency_ms") or 0, position[a]))
 
     def available(self, owner, share=0):
@@ -528,7 +540,8 @@ class ProxyPool:
         except ValueError:
             return False
         now = time.time()
-        return any(self.healthy(a, now) for a in self.order(owner, list(entries), set(), now, share))
+        return any(self.healthy(a, now)
+                   for a in self.order(owner, list(entries), set(), now, share, self.country_ranks(entries)))
 
     async def acquire(self, owner, preferred=None, avoid=(), share=0):
         """(proxy id, pinned route) for a workspace; raises NoProxyAvailable."""
@@ -537,17 +550,17 @@ class ProxyPool:
                 operator, entries = self.entries()
             except ValueError:
                 raise NoProxyAvailable("The proxy catalog is unavailable.") from None
-            now = time.time()
+            now, ranks = time.time(), self.country_ranks(entries)
             current = self.assigned.get(owner) or preferred
             others = {v for k, v in self.assigned.items() if k != owner}
 
-            if (current in entries and current not in avoid and not self.resting(current, now)
+            if (current in ranks and current not in avoid and not self.resting(current, now)
                     and current not in others):
                 route = await self.check(current, entries[current], operator, quick=self.healthy(current, now))
                 if route:
                     self.assigned[owner] = current
                     return current, route
-            candidates = self.order(owner, list(entries), set(avoid), now, share)[:PICK_LIMIT]
+            candidates = self.order(owner, list(entries), set(avoid), now, share, ranks)[:PICK_LIMIT]
             for alias in [a for a in candidates if self.healthy(a, now)][:PICK_BATCH]:
                 route = await self.check(alias, entries[alias], operator, quick=True)
                 if route:
@@ -566,6 +579,8 @@ class ProxyPool:
             self.assigned.pop(owner, None)
             self.exhausted = True
             self.wakeup.set()
+            if not ranks and entries:
+                raise NoProxyAvailable("No listed MTProxy is in an allowed country.")
             raise NoProxyAvailable("No listed MTProxy answered.")
 
     def release(self, owner):
@@ -600,7 +615,7 @@ class ProxyPool:
         now, users = time.time(), {}
         for owner, alias in self.assigned.items():
             users.setdefault(alias, []).append((labels or {}).get(owner) or "another workspace")
-        countries = getattr(self.catalog, "countries", None)
+        countries, ranks = getattr(self.catalog, "countries", None), self.country_ranks(entries)
         rows = []
         for alias, row in entries.items():
             state = self.health.get(alias, {})
@@ -610,7 +625,8 @@ class ProxyPool:
                          "country": countries.of(row["route"].host) if countries else None,
                          "latency_ms": state.get("latency_ms") if status == "ok" else None,
                          "checked_at": state.get("checked_at"), "failures": state.get("failures", 0),
-                         "error_type": state.get("error_type"), "status": status, "used_by": users.get(alias, [])})
+                         "error_type": state.get("error_type"), "status": status, "used_by": users.get(alias, []),
+                         "excluded": alias not in ranks, "preferred": ranks.get(alias) == 0})
         return rows
 
     async def check_all(self, network=None):

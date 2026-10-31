@@ -163,7 +163,7 @@
     title.append(node("span", "fleet-count", String(group.members.length)));
     const shares = (group.sections || []).map(key => tr(SECTIONS[key] || key));
     who.append(title, node("p", "hint", group.template && shares.length ?
-      tr("Shares {list} from {name}", {list: shares.join(", "), name: labelOf(group.template)}) :
+      tr("Copies {list} from {name}", {list: shares.join(", "), name: labelOf(group.template)}) :
       tr("Choose what the group shares under Shared settings.")));
     const actions = node("div", "fleet-group-actions");
     const apply = node("button", "primary small", tr("Apply to members")); apply.type = "button";

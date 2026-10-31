@@ -63,7 +63,7 @@ Direct fallback depends on the selected IP mode. A successful transport test is 
 
 ## Public lists
 
-A snapshot from four public sources is bundled. The active pool refreshes lists and
+A snapshot from six public sources is bundled. The active pool refreshes lists and
 checks transport in the background; failed downloads keep the last usable entries.
 **Update public lists** requests a refresh without rewriting a manual route.
 
@@ -92,6 +92,16 @@ lists during refresh. It is stored encrypted and sent only to HTTPS GitHub hosts
 Country lookup is optional; it sends proxy server IPs to a geolocation service
 through the configured outside route. Ping and country are observations, not trust
 ratings. **Check all now** updates results without changing a saved manual route.
+
+**Countries** sets preferred and avoided countries for the automatic route. Servers in
+preferred countries are tried first; servers in avoided countries are never used. With
+**Use only servers in preferred countries**, a workspace waits rather than use another
+country. A server whose country is not known yet counts as another country. A workspace
+keeps a working server; the choice applies when it picks the next one, and each change is
+recorded in the journal.
+
+The dashboard shows how often lists are downloaded and servers checked; **Open Parameters**
+leads to these intervals under **Parameters → Automatic MTProxy** of the main workspace.
 
 ## Other network traffic
 

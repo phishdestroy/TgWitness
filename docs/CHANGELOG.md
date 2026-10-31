@@ -33,6 +33,10 @@
   imports leave no empty workspace; locking or switching stops the remaining queue.
 - Added the MTProxy dashboard: ping, status, countries, filters, shared custom
   lists and optional GitHub search. Routes remain separate for each account.
+- Added a country choice for the automatic MTProxy route (preferred, avoided, only
+  preferred) and the list download and check intervals to the dashboard. Panel strings of
+  groups, import and the dashboard are translated with their screen as context and with
+  plural forms; context-dependent report labels are corrected in 23 languages.
 - Added scoped, read-only MCP connections and local archive search with optional
   AI source review and separate analytical reports.
 - Added local OCR/transcription for saved attachments and signed outgoing webhooks
