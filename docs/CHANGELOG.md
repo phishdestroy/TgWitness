@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Replaced the separate capture form with a four-step wizard shared by Exports
+  and the standalone page. It uses workspace themes and controls, explains each
+  file handoff, confirms key saving and clears its key when the workspace locks.
+  The temporary Telegram panel also uses workspace styling and readable progress.
+
 - Added entry points for the GitHub Actions capture preview on the workspace
   login screen, in Exports, on the project homepage and in the documentation.
   Entry labels are translated; the English/Russian helper preserves the chosen
