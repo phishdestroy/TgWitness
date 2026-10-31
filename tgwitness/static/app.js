@@ -188,7 +188,37 @@ const termLabels={offline:tr("offline"),ready:tr("ready"),credentials:tr("creden
   member_or_unknown:tr("member or unknown"),unknown:tr("unknown"),messages:tr("messages"),edits:tr("edits"),
   deletions:tr("deletions"),reactions:tr("reactions"),membership:tr("membership")};
 const termText=value=>termLabels[value]??String(value??"").replaceAll("_"," ");
-function formatTime(value) { return value ? new Date(value).toISOString().replace("T", " ").replace(".000Z", " UTC").replace(/Z$/, " UTC") : tr("Not supplied"); }
+let panelTime;
+const timeReady=import("./core/time.js?v=1").then(({createTimeFormatter})=>{
+  let zone="UTC";try{zone=localStorage.getItem("tgwitness-time-zone")||"UTC";}catch{}
+  panelTime=createTimeFormatter({locale:LANG,translate:tr,zone});
+  const label=node("label","language-pick time-zone-pick"),select=node("select");
+  select.id="time-zone";select.setAttribute("aria-label",tr("Display time"));
+  select.append(new Option(tr("UTC"),"UTC"),new Option(tr("Local time"),"local"));select.value=panelTime.zone;
+  label.append(node("span","",tr("Time")),select);document.querySelector(".sidebar .preferences").prepend(label);
+  select.addEventListener("change",()=>{
+    panelTime.setZone(select.value);try{localStorage.setItem("tgwitness-time-zone",panelTime.zone);}catch{}
+    if(state.view==="chats"&&state.chat!==null){const feed=$("chat-feed"),top=feed.scrollTop;renderChatFeed();feed.scrollTop=top;}
+    updateTimes();window.dispatchEvent(new CustomEvent("tgwitness:time-zone",{detail:{zone:panelTime.zone}}));
+  });
+});
+function fmtTime(value,options){return panelTime?.fmtTime(value,options)??tr("Not supplied");}
+function formatTime(value){return fmtTime(value);}
+function timeNode(value,cls="",mode="relative"){
+  const result=node("time",cls,fmtTime(value,{mode}));
+  if(value!==null&&value!==undefined&&value!==""){
+    result.dataset.timestamp=String(value);result.dataset.timeMode=mode;result.title=fmtTime(value);
+    const instant=new Date(value);if(Number.isFinite(instant.getTime()))result.dateTime=instant.toISOString();
+  }
+  return result;
+}
+function updateTimes(){
+  for(const item of document.querySelectorAll("[data-timestamp]")){
+    const value=item.dateTime||item.dataset.timestamp;
+    item.textContent=fmtTime(value,{mode:item.dataset.timeMode||"absolute"});item.title=fmtTime(value);
+  }
+}
+setInterval(()=>{if(!document.hidden)updateTimes();},30000);
 function sourceTitle(id) { return state.status?.targets.find(x => x.chat_id === id)?.title || (id === null ? tr("Collector / account") : String(id)); }
 let toastTimer;
 let networkLoadedFor=null;
@@ -254,6 +284,7 @@ function lock() {
 }
 async function unlock() {
   accessStarted=true;
+  await timeReady;
   const router=await ensureRouter(),requested=router.parse();
   state.me = await json("access/me",undefined,{root:true});
   await loadProfiles();
@@ -749,7 +780,7 @@ function renderAccounts(){
       pair(tr("Sources"),tr("{n} active",{n:p.sources_enabled||0})+(p.sources_total?" / "+p.sources_total:""));
       pair(tr("Journal"),trn("{n} event","{n} events",p.stats&&p.stats.total||0));
       pair(tr("Pending media"),String(c.media_pending||0));
-      pair(tr("Last update"),c.last_update_at?new Date(c.last_update_at).toLocaleString():"—");
+      pair(tr("Last update"),c.last_update_at?fmtTime(c.last_update_at):"—");
       card.append(meta);
     } else if(p.error_type){
       card.append(node("p","access-warning",p.error_type==="DeletionPending"?
@@ -936,13 +967,12 @@ function renderEvents() {
     const row=node("tr","event-row"); row.tabIndex=0; row.setAttribute("role","button"); row.setAttribute("aria-label",tr("Open {label} event {seq}",{label:label[0],seq:e.seq}));
     const cell=node("td"), summary=node("div","event-summary"), text=node("div");
     const title=node("div","event-title",label[0]); title.append(node("span","",e.message_id ? "#"+e.message_id : "#"+e.seq));
-    text.append(title,node("div","event-excerpt",excerpt(e)),
-      node("div","event-mobile-meta",sourceTitle(e.chat_id)+" · "+new Date(e.observed_at).toISOString().slice(0,19).replace("T"," ")+" UTC"));
+    const mobileMeta=node("div","event-mobile-meta",sourceTitle(e.chat_id)+" · ");
+    mobileMeta.append(timeNode(e.observed_at));text.append(title,node("div","event-excerpt",excerpt(e)),mobileMeta);
     const mark=node("span","event-icon "+label[2]); mark.append(icon(label[1]));
     summary.append(mark,text); cell.append(summary);
     const source=node("td"); source.append(node("span","source-title",sourceTitle(e.chat_id)),node("span","source-id",e.chat_id || tr("system")));
-    const time=node("td"),d=new Date(e.observed_at);
-    time.append(node("span","event-time",d.toISOString().slice(11,19)),node("span","event-date",d.toISOString().slice(0,10)));
+    const time=node("td");time.append(timeNode(e.observed_at,"event-time"));
     const open=node("td","event-open"); open.append(icon("chevron"));
     row.append(cell,source,time,open);
     row.addEventListener("click",()=>openDetail(e));
@@ -2643,10 +2673,9 @@ function avatarNode(id,name,size="",profile=state.profile){
   loadAvatar(id,profile).then(url=>{if(url){const img=node("img");img.alt="";img.src=url;n.replaceChildren(img);}});
   return n;
 }
-const fmtTime=v=>v?new Date(v).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"}):"";
-const fmtDay=v=>v?new Date(v).toLocaleDateString([],{weekday:"long",day:"numeric",month:"long",year:"numeric"}):tr("Unknown date");
-const fmtFull=v=>v?new Date(v).toLocaleString():tr("unknown time");
-function fmtShort(v){if(!v)return "";const d=new Date(v);return d.toDateString()===new Date().toDateString()?fmtTime(v):d.toLocaleDateString([],{day:"numeric",month:"short"});}
+const fmtDay=value=>panelTime?.day(value)??tr("Unknown date");
+const fmtFull=value=>fmtTime(value);
+const fmtShort=value=>value?fmtTime(value,{mode:"relative"}):"";
 function humanSize(n){if(n===null||n===undefined)return "";const u=["B","KB","MB","GB"];let i=0;while(n>=1024&&i<3){n/=1024;i++;}return n.toFixed(i?1:0)+" "+u[i];}
 const serviceLabels={MessageActionChatAddUser:tr("added a member"),MessageActionChatDeleteUser:tr("removed a member or left"),
   MessageActionChatJoinedByLink:tr("joined via invite link"),MessageActionChatJoinedByRequest:tr("joined after a join request"),
@@ -2691,7 +2720,7 @@ function renderChatsList(){
     if(query&&!`${c.title||""} ${c.chat_id}`.toLocaleLowerCase().includes(query))continue;
     const title=c.title||tr("Chat {id}",{id:c.chat_id}),row=node("button","chat-item"+(c.chat_id===state.chat?" active":""));row.type="button";
     const body=node("span","chat-item-body"),top=node("span","chat-item-top"),bottom=node("span","chat-item-bottom");
-    top.append(node("span","chat-item-title",title),node("span","chat-item-time",fmtShort(c.last_observed_at)));
+    top.append(node("span","chat-item-title",title),timeNode(c.last_observed_at,"chat-item-time"));
     bottom.append(node("span","chat-item-preview",c.last_text?(c.last_sender?c.last_sender+": ":"")+c.last_text:tr(c.messages?"Media or service message":"No messages saved yet")));
     const badges=node("span","chat-item-badges");
     if(c.deleted)badges.append(node("span","pill pill-deleted",tr("{n} deleted",{n:c.deleted})));
@@ -2865,9 +2894,9 @@ function renderChatFeed(){
   const byId=new Map(state.chatMessages.map(m=>[m.message_id,m]));
   let lastDay=null,lastSender=null,lastTime=0;
   for(const m of shown){
-    const when=m.sent_at||m.versions[0]?.observed_at||m.deleted_observed_at,day=when?new Date(when).toDateString():"unknown";
+    const when=m.sent_at||m.versions[0]?.observed_at||m.deleted_observed_at,day=panelTime.dayKey(when);
     if(day!==lastDay){feed.append(node("div","chat-day",fmtDay(when)));lastDay=day;lastSender=null;}
-    if(m.service_action){feed.append(node("div","chat-service",senderName(m)+" "+serviceText(m.service_action)+" · "+fmtTime(when)));lastSender=null;continue;}
+    if(m.service_action){const service=node("div","chat-service",senderName(m)+" "+serviceText(m.service_action)+" · ");service.append(timeNode(when));feed.append(service);lastSender=null;continue;}
     const sid=m.sender?.id??null,t=when?new Date(when).getTime():0,grouped=sid!==null&&sid===lastSender&&t>=lastTime&&t-lastTime<300000;
     lastSender=sid;lastTime=t;feed.append(messageRow(m,grouped,byId));
   }
@@ -2907,7 +2936,7 @@ function messageRow(m,grouped,byId){
     e.addEventListener("click",()=>{const open=bubble.querySelector(".versions");e.setAttribute("aria-expanded",String(!open));if(open){open.remove();return;}bubble.insertBefore(versionsNode(m),meta);});meta.append(e);}
   else if(m.edited){const e=node("span","pill pill-edited",tr("Edited"));e.title=tr("Telegram marks this message as edited; the earlier text was not saved.");meta.append(e);}
   if(!m.origins.includes("live")&&m.origins.includes("history")){const o=node("span","origin",tr("from history"));o.title=tr("Loaded from chat history, not seen live");meta.append(o);}
-  meta.append(node("span","time",fmtTime(m.sent_at||m.versions[0]?.observed_at)));
+  meta.append(timeNode(m.sent_at||m.versions[0]?.observed_at,"time"));
   if(!state.status?.demo&&!m.deleted&&!m.missing&&may("interact")){const reply=node("button","text-link",tr("Reply"));reply.type="button";
     const generation=chatGeneration,revision=state.workspaceRevision;
     reply.addEventListener("click",()=>{if(!chatReady||generation!==chatGeneration||revision!==state.workspaceRevision)return;
@@ -2934,7 +2963,8 @@ async function renderPeople(feed){
     const text=node("div");text.append(node("b","",name),node("small","",[p.username?"@"+p.username:"",p.id!==null?"ID "+p.id:""].filter(Boolean).join(" · ")));
     card.append(text);who.append(card);
     row.append(who,node("td","num",String(p.messages)),node("td","num"+(p.deleted||p.missing?" bad":""),String(p.deleted)+(p.missing?" +"+tr("{n} not found",{n:p.missing}):"")),
-      node("td","num",String(p.edited)),node("td","",fmtShort(p.first_message_at)),node("td","",fmtShort(p.last_message_at)));
+      node("td","num",String(p.edited)),Object.assign(node("td"),{title:fmtTime(p.first_message_at)}),Object.assign(node("td"),{title:fmtTime(p.last_message_at)}));
+    row.children[row.children.length-2].append(timeNode(p.first_message_at));row.lastElementChild.append(timeNode(p.last_message_at));
     if(p.id!==null){row.tabIndex=0;row.title=tr(profiled&&p.id!==id?"Open this person's profile":"Show this person's messages");
       const open=profiled&&p.id!==id?()=>openDossier(p.id).catch(e=>toast(e.message,true)):
         ()=>{state.chatAuthor=p.id;state.chatFilter="all";renderChatStatus();renderChatFeed();};
@@ -3508,7 +3538,7 @@ async function loadConsole(){
   if(r.lines.length&&r.lines[0].n<=state.consoleAfter)pre.replaceChildren();
   for(const line of r.lines){
     const item=node("span","console-line "+line.level.toLowerCase(),
-      line.at.slice(11,19)+" "+line.level.padEnd(7)+" "+line.text+"\n");
+      fmtTime(line.at)+" "+line.level.padEnd(7)+" "+line.text+"\n");
     pre.append(item);
   }
   while(pre.childElementCount>3000)pre.firstElementChild.remove();
@@ -3568,6 +3598,7 @@ async function pollWorkspace(){
 }
 setInterval(pollWorkspace,5000);
 async function bootstrap(){
+  await timeReady;
   await ensureRouter();
   const revision=state.workspaceRevision;
   try{
