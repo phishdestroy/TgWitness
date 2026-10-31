@@ -290,6 +290,13 @@ const timeReady=import("./core/time.js?v=1").then(({createTimeFormatter})=>{
   });
 });
 const shellReady=import("./components/shell.js?v=2").then(({createResponsiveShell})=>createResponsiveShell({node,icon,tr}));
+let formControls=null;
+const formsReady=import('./components/forms.js').then(({createFormControls})=>{
+  formControls=createFormControls({roots:[...panelRoots.values()],tr,getSession:()=>state.workspaceRevision+':'+state.profile,toast,
+    forms:[['report-form',value=>reportDirty=value],['evidence-form',value=>state.evidenceDirty=value],
+      ['replica-form',value=>state.replicaDirty=value],['alerts-form',value=>state.alertsDirty=value],
+      ['github-form',value=>state.githubDirty=value]].map(([id,setDirty])=>({form:$(id),setDirty}))});
+});
 function fmtTime(value,options){return panelTime?.fmtTime(value,options)??tr("Not supplied");}
 function formatTime(value){return fmtTime(value);}
 function timeNode(value,cls="",mode="relative"){
@@ -359,7 +366,7 @@ async function busy(button, work) {
 }
 function lock() {
   window.TgWitnessRouter?.invalidate();
-  viewHost?.resetSession();state.permissionsStamp=null;
+  viewHost?.resetSession();formControls?.reset();state.permissionsStamp=null;
   state.events=[];state.chats=[];state.chatMessages=[];state.chatInfo=null;state.chat=null;state.parameters=null;
   sourcesView?.resetSession();
   parametersView?.resetSession();
@@ -382,7 +389,7 @@ function lock() {
 }
 async function unlock() {
   accessStarted=true;
-  await Promise.all([timeReady,shellReady,viewReady]);
+  await Promise.all([timeReady,shellReady,viewReady,formsReady]);
   const router=await ensureRouter(),requested=router.parse();
   state.me = await json("access/me",undefined,{root:true});
   await loadProfiles();
@@ -958,6 +965,7 @@ function renderAccounts(){
   window.TgWitnessFleet?.decorate();
 }
 async function switchProfile(id,options={}){
+  formControls?.reset();
   if(options.history!==false)window.TgWitnessRouter?.invalidate();
   parametersView?.resetSession();
   resetChatExportTools();
@@ -1439,7 +1447,7 @@ async function loadReportSettings(){
       }
       for(const [id,key] of Object.entries(REPORT_FIELDS))$(id).value=options[key];
       for(const [id,key] of Object.entries(REPORT_CHECKS))$(id).checked=options[key];
-      reportReady=true;reportDirty=false;$("report-status").textContent=window.TGW_ONLINE_DEMO?tr("Sample data"):"";
+      reportReady=true;reportDirty=false;formControls?.loaded("report-form");$("report-status").textContent=window.TGW_ONLINE_DEMO?tr("Sample data"):"";
     }catch(error){
       if(!current()||error instanceof StaleView||error.name==='AbortError')return;
       const retry=node("button","text-link",tr("Retry"));retry.type="button";
@@ -1455,14 +1463,14 @@ $("report-timeline").addEventListener("change",syncReportParts);
 $("report-form").addEventListener("input",()=>{if(reportReady){reportDirty=true;$("report-status").replaceChildren();}});
 $("report-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
   if(!reportReady||reportOwner!==reportKey()||reportSaving||window.TGW_ONLINE_DEMO)return;
-  const owner=reportOwner;
+  const owner=reportOwner,draft=formControls?.capture("report-form");
   const body={};
   for(const [id,key] of Object.entries(REPORT_FIELDS))body[key]=$(id).value;
   for(const [id,key] of Object.entries(REPORT_CHECKS))body[key]=$(id).checked;
   reportSaving=true;reportControls();
   try{
     await json("report-options",body);if(reportOwner!==owner||reportKey()!==owner)return;
-    reportDirty=false;$("report-status").textContent=tr("Saved. The next export uses these settings.");toast(tr("Report settings saved."));
+    reportDirty=formControls?.changed(draft)||false;formControls?.accepted(draft);$("report-status").textContent=tr(reportDirty?"Saved. New edits have not been saved.":"Saved. The next export uses these settings.");toast(tr("Report settings saved."));
   }finally{if(reportOwner===owner&&reportKey()===owner){reportSaving=false;reportControls();}}
 });});
 document.querySelectorAll("[data-go-reports]").forEach(link=>link.addEventListener("click",event=>{
@@ -1537,17 +1545,18 @@ function renderEvidence(e){
   if(state.evidenceProfile!==state.profile){state.evidenceDirty=false;state.evidenceProfile=state.profile;}
   if(!state.evidenceDirty){
     $("evidence-enabled").checked=e.settings.enabled;$("evidence-interval").value=String(e.settings.interval_minutes);
-    $("evidence-tsa").value=e.settings.tsa_urls.join("\n");$("evidence-ots").value=e.settings.ots_calendars.join("\n");
+    $("evidence-tsa").value=e.settings.tsa_urls.join("\n");$("evidence-ots").value=e.settings.ots_calendars.join("\n");formControls?.loaded("evidence-form");
   }
   $("evidence-anchor").disabled=!e.settings.enabled||e.busy;
   renderHealthDetail(status,e.health,timestampsLead(e.health),timestampsFacts(e,e.health));
 }
 $("evidence-form").addEventListener("input",()=>{state.evidenceDirty=true;});
 $("evidence-form").addEventListener("submit",event=>{event.preventDefault();busy(event.submitter,async()=>{
+  const draft=formControls?.capture("evidence-form");
   const lines=id=>$(id).value.split("\n").map(v=>v.trim()).filter(Boolean);
   const e=await json("evidence",{enabled:$("evidence-enabled").checked,interval_minutes:Number($("evidence-interval").value),
     tsa_urls:lines("evidence-tsa"),ots_calendars:lines("evidence-ots")});
-  state.evidenceDirty=false;renderEvidence(e);
+  state.evidenceDirty=formControls?.changed(draft)||false;renderEvidence(e);formControls?.accepted(draft);
   toast(tr(e.settings.enabled?"Evidence mode is on. The current checkpoint is being timestamped.":"Evidence mode is off."));
 });});
 $("evidence-anchor").addEventListener("click",ev=>busy(ev.currentTarget,async()=>{
@@ -1598,7 +1607,7 @@ function renderReplica(r){
     $("replica-enabled").checked=s.enabled;$("replica-endpoint").value=s.endpoint;$("replica-region").value=s.region;
     $("replica-bucket").value=s.bucket;$("replica-prefix").value=s.prefix;$("replica-path-style").checked=s.path_style;
     $("replica-interval").value=String(s.interval_minutes);$("replica-retention").value=String(s.retention_days);
-    $("replica-mode").value=s.retention_mode;
+    $("replica-mode").value=s.retention_mode;formControls?.loaded("replica-form");
   }
   for(const id of ["replica-access","replica-secret"])$(id).placeholder=r.has_credentials?tr("Saved — leave empty to keep"):"";
   $("replica-test").disabled=!r.has_credentials;$("replica-sync").disabled=!s.enabled||r.busy;$("replica-key").disabled=!r.has_key;
@@ -1606,12 +1615,14 @@ function renderReplica(r){
 }
 $("replica-form").addEventListener("input",()=>{state.replicaDirty=true;});
 $("replica-form").addEventListener("submit",event=>{event.preventDefault();busy(event.submitter,async()=>{
+  const draft=formControls?.capture("replica-form");
   const r=await json("replica",{enabled:$("replica-enabled").checked,endpoint:$("replica-endpoint").value.trim(),
     region:$("replica-region").value.trim()||"us-east-1",bucket:$("replica-bucket").value.trim(),prefix:$("replica-prefix").value.trim()||"tgwitness",
     path_style:$("replica-path-style").checked,interval_minutes:Number($("replica-interval").value),
     retention_days:Number($("replica-retention").value||0),retention_mode:$("replica-mode").value,
     access_key:$("replica-access").value.trim(),secret_key:$("replica-secret").value.trim()});
-  $("replica-access").value="";$("replica-secret").value="";state.replicaDirty=false;renderReplica(r);
+  formControls?.clearSubmitted(draft,["replica-access","replica-secret"]);
+  state.replicaDirty=formControls?.changed(draft)||false;renderReplica(r);formControls?.accepted(draft);
   toast(tr(r.settings.enabled?"Off-site copy is on. Download the encryption key and keep it apart.":"Off-site copy settings saved."));
 });});
 $("replica-test").addEventListener("click",e=>busy(e.currentTarget,async()=>{
@@ -1648,7 +1659,7 @@ function renderAlerts(a){
   if(!state.alertsDirty){
     $("alerts-enabled").checked=s.enabled;$("alerts-problems").checked=s.problems;$("alerts-changes").checked=s.changes;
     $("alerts-text").checked=!!s.include_text;
-    $("alerts-daily").checked=s.daily;$("alerts-hour").value=String(s.daily_hour);
+    $("alerts-daily").checked=s.daily;$("alerts-hour").value=String(s.daily_hour);formControls?.loaded("alerts-form");
   }
   $("alerts-urls").placeholder=a.destinations.length?tr("Leave empty to keep the saved destinations"):"matrixs://user:password@matrix.example.org/#room";
   $("alerts-saved").textContent=a.destinations.length?tr("Saved: {list}",{list:a.destinations.join(" · ")}):"";
@@ -1658,9 +1669,10 @@ function renderAlerts(a){
 for(let h=0;h<24;h++)$("alerts-hour").append(new Option(String(h).padStart(2,"0")+":00",String(h)));
 $("alerts-form").addEventListener("input",()=>{state.alertsDirty=true;});
 async function saveAlerts(urls,add=[]){
+  const draft=formControls?.capture("alerts-form");
   const a=await json("alerts",{enabled:$("alerts-enabled").checked,problems:$("alerts-problems").checked,changes:$("alerts-changes").checked,
     daily:$("alerts-daily").checked,daily_hour:Number($("alerts-hour").value),language:LANG,include_text:$("alerts-text").checked,urls,add_urls:add});
-  $("alerts-urls").value="";state.alertsDirty=false;renderAlerts(a);return a;
+  formControls?.clearSubmitted(draft,["alerts-urls"]);state.alertsDirty=formControls?.changed(draft)||false;renderAlerts(a);formControls?.accepted(draft);return a;
 }
 $("alerts-form").addEventListener("submit",event=>{event.preventDefault();busy(event.submitter,async()=>{
   const lines=$("alerts-urls").value.split("\n").map(v=>v.trim()).filter(Boolean);
@@ -1912,7 +1924,7 @@ function renderSourceCheck(r){
   $("github-form").querySelectorAll("input,button").forEach(n=>n.disabled=!!state.status?.demo);
   badge.textContent=tr(!l?"Not checked":!r.current?"Check again":l.matches?"Matches":"Differs");
   badge.classList.toggle("on",good);badge.classList.toggle("warn",!!l&&!good);
-  if(l&&!state.githubDirty){$("github-repository").value=l.repository.replace("https://","");$("github-ref").value=l.ref;}
+  if(l&&!state.githubDirty){$("github-repository").value=l.repository.replace("https://","");$("github-ref").value=l.ref;formControls?.loaded("github-form");}
   $("github-running").textContent=tr("Running: version {version}, {n} program files, source hash {hash}.",
     {version:r.version,n:r.files,hash:r.source_tree_sha256.slice(0,16)+"…"});
   box.replaceChildren();show("github-result",!!l);
@@ -1932,8 +1944,9 @@ function renderSourceCheck(r){
 }
 $("github-form").addEventListener("input",()=>{state.githubDirty=true;});
 $("github-form").addEventListener("submit",event=>{event.preventDefault();busy(event.submitter,async()=>{
+  const draft=formControls?.capture("github-form");
   const r=await json("source-check",{repository:$("github-repository").value.trim(),ref:$("github-ref").value.trim()});
-  state.githubDirty=false;renderSourceCheck(r);
+  state.githubDirty=formControls?.changed(draft)||false;renderSourceCheck(r);formControls?.accepted(draft);
   toast(tr(r.last.matches?"The code matches the commit. The check is saved in the signed journal."
     :"The code differs from the commit. The check is saved in the signed journal."),!r.last.matches);
 });});
@@ -3467,6 +3480,7 @@ function renderAccess(){
         tr("last activity {time}",{time:formatTime(s.last_seen_at)}),trn("{n} request","{n} requests",s.requests)].join(" · ")),
       node("p","hint",s.agent.slice(0,120)));
     end.addEventListener("click",()=>busy(end,async()=>{
+      if(!window.confirm(tr("End this session? Its open panel will be locked.")))return;
       accessLoadSerial++;
       state.access=await json("access/sessions/"+encodeURIComponent(s.id),undefined,{root:true,method:"DELETE"});renderAccess();
     }));
