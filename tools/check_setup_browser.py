@@ -23,7 +23,7 @@ def main():
         "label": "Project proxy · synthetic fixture", "link": "tg://proxy?server=proxy.example.org&port=443&secret=" + secret}]}))
     previous = os.environ.get("TGWITNESS_PROXY_CATALOG")
     os.environ["TGWITNESS_PROXY_CATALOG"] = str(catalog)
-    errors, external, writes = [], [], []
+    errors, external, writes, catalog_reads = [], [], [], []
     try:
         with RunningApp(run / "collector") as server, sync_playwright() as p:
             browser = launch_browser(p)
@@ -32,6 +32,8 @@ def main():
             page.on("pageerror", lambda e: errors.append(str(e)))
             page.on("request", lambda req: external.append(req.url) if urlsplit(req.url).hostname != "127.0.0.1" else None)
             page.on("request", lambda req: writes.append(req.url) if req.method not in ("GET", "HEAD", "OPTIONS") else None)
+            page.on("request", lambda req: catalog_reads.append(req.url)
+                    if urlsplit(req.url).path.endswith("/api/network/catalog") else None)
             unlock(page, server)
 
             keys = page.evaluate("""async () => {
@@ -95,7 +97,13 @@ def main():
             page.locator('[data-view="connection"]').click()
             page.locator("#entry-settings").click()
             page.locator("#network-details > summary").click()
+            expect(page.locator("#network-kind")).to_have_value("mtproxy_auto")
+            expect(page.locator(".proxy-catalog")).to_be_hidden()
+            assert not catalog_reads, "Automatic routing must not load the fixed MTProxy picker"
+            page.locator("#network-kind").select_option("mtproxy")
+            expect(page.locator(".proxy-catalog")).to_be_visible()
             expect(page.locator("#proxy-catalog-select")).to_have_value("project-a")
+            assert catalog_reads, "Selecting MTProxy must load its catalog"
             assert page.locator("#network-secret").input_value() == ""
             page.locator("#proxy-catalog-apply").click()
             expect(page.locator("#route-detail")).to_contain_text("proxy.example.org:443")
