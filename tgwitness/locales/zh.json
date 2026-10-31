@@ -2101,5 +2101,12 @@
 "messages.checkChatInvite": "messages.checkChatInvite",
 "messages.getBotCallbackAnswer": "messages.getBotCallbackAnswer",
 "messages.importChatInvite": "messages.importChatInvite",
-"messages.requestUrlAuth": "messages.requestUrlAuth"
+"messages.requestUrlAuth": "messages.requestUrlAuth",
+"Automatic MTProxy checks built-in public lists, keeps a working route and replaces failing entries. Open Account → Settings → Connection settings to choose the route and IP mode. Parameters controls rotation, sharing, checking intervals and retry delays.": "MTProxy 会自动检查内置的公共列表，保持路由正常运行，并替换失效的条目。打开“账户”→“设置”→“连接设置”以选择路由和 IP 模式。相关参数用于控制轮换、共享、检查间隔和重试延迟。",
+"Hide IP refuses direct fallback. Allow fallback can use Direct after the configured delay. Tunnel / VPN permits the host's direct network route but does not create a VPN. Pause observation before changing routes; saving cancels unfinished login. <strong>Test Telegram connection</strong> checks transport, not complete delivery.": "“隐藏 IP”不支持直接备用连接。“允许备用连接”可在配置的延迟时间过后使用“直接”连接。“隧道/VPN”允许使用主机的直接网络路由，但不会建立 VPN 连接。切换路由前请暂停监控；保存操作将取消未完成的登录。<strong>Telegram 连接测试</strong>仅检查传输状态，不检查是否完全送达。",
+"Hide IP waits for a working proxy; direct fallback requires a mode that permits it": "“隐藏 IP”功能需等待可用的代理；若需直接备用方案，则需启用允许此操作的模式",
+"MTProxy carries Telegram traffic only. External requests need a separate SOCKS5/HTTP proxy, the account's SOCKS5/HTTP route, or Direct where the IP mode permits it. External requests can be disabled; an explicit feed-download proxy is a separate override. The independent witness keeps its own route.": "MTProxy 仅传输 Telegram 流量。外部请求需要单独的 SOCKS5/HTTP 代理、该账户的 SOCKS5/HTTP 路由，或在 IP 模式允许的情况下使用 Direct 模式。外部请求可以禁用；显式的订阅源下载代理则通过单独的覆盖设置进行配置。独立见证者保留其自身的路由。",
+"Open Access to give a reviewer their own token. Keep View for reading; add Export for downloads. Chat-limited access cannot open whole-workspace settings or full journal exports. Revoking access ends its sessions but cannot recall downloaded files.": "“开放访问”权限可为审阅者分配专属令牌。保留“查看”功能用于阅读；新增“导出”功能用于下载。仅限聊天访问的用户无法打开整个工作区设置或进行完整日志导出。撤销访问权限将终止其会话，但无法收回已下载的文件。",
+"The administrator can issue access to selected workspaces and chats, with separate permissions, expiry, IP restrictions and session limits. The main panel token remains unrestricted. An existing journal cannot be reassigned to another Telegram account.": "管理员可以授予对选定工作区和聊天室的访问权限，并可设置独立的权限、有效期、IP 限制和会话限制。主面板令牌不受任何限制。现有的日志无法重新分配给另一个 Telegram 账户。",
+"Application routes do not configure a system VPN": "应用程序的路由不会配置系统 VPN"
 }
