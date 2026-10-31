@@ -1378,7 +1378,8 @@ details[open] > :not(summary) { animation: unfold .22s ease-out; }
   #connection-options .card { padding: 16px; }
 }
 @media (max-width: 520px) {
-  .sidebar nav .nav { flex-direction: column; gap: 3px; min-height: 50px; padding: 6px 2px; font-size: 13px;
+  /* Ten sections make three rows here; kept short so the sign-in button stays on the first screen of a phone. */
+  .sidebar nav .nav { flex-direction: column; gap: 3px; min-height: 44px; padding: 4px 2px; font-size: 13px;
     line-height: 1.15; text-align: center; white-space: normal; overflow-wrap: break-word; }
 }
 @media (max-width: 380px) {
