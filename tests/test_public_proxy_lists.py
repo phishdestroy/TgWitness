@@ -247,3 +247,19 @@ def test_feed_entry_ids_change_with_secret_and_never_depend_on_list_position():
 @pytest.mark.parametrize("address", ["224.0.0.1", "ff02::1", "::1", "::ffff:127.0.0.1", "fe80::1%eth0"])
 def test_multicast_and_scoped_addresses_are_not_public_proxy_destinations(address):
     assert not catalogs.public_host(address)
+
+
+def test_lists_are_parsed_once_until_a_list_or_setting_changes(tmp_path, monkeypatch):
+    catalog = seed(tmp_path, monkeypatch)
+    parsed, parse = [], catalogs.parse_feed
+    monkeypatch.setattr(catalogs, "parse_feed", lambda *args, **kwargs: parsed.append(1) or parse(*args, **kwargs))
+    first = catalog.catalog()
+    count = len(parsed)
+    assert count and catalog.catalog() == first and len(parsed) == count
+    catalog.add_list("Own list", link("9.9.9.9"))
+    assert [row["label"] for row in catalog.catalog()["proxies"]][-1] == "Own list"
+    settings = catalog.settings()
+    settings.disabled = [catalogs.SOURCES[0]["id"]]
+    catalogs.proxy_sources.save(catalog.root, settings)
+    catalog.changed()
+    assert catalogs.SOURCES[0]["label"] not in {row["label"] for row in catalog.catalog()["proxies"]}
