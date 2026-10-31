@@ -17,6 +17,12 @@ NOT_IN_POLICY = {
     "GET /api/access", "POST /api/access/grants", "PATCH /api/access/grants/{grant_id}",
     "DELETE /api/access/grants/{grant_id}", "DELETE /api/access/sessions/{session_id}",
     "POST /api/access/admin", "GET /api/access/console",
+    "GET /api/integrations/mcp", "POST /api/integrations/mcp", "DELETE /api/integrations/mcp/{connection_id}",
+    "POST /api/integrations/mcp/check",
+    "GET /api/archive/identity", "POST /api/archive/query",
+    "POST /api/analysis/provider", "POST /api/analysis/provider/test",
+    "GET /api/integrations/webhooks", "POST /api/integrations/webhooks",
+    "DELETE /api/integrations/webhooks/{hook_id}", "POST /api/integrations/webhooks/{hook_id}/test",
 }
 
 

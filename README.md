@@ -29,8 +29,12 @@
 - Keep separate sessions, sources and signing keys for each account.
 - Export readable HTML, JSON or a signed evidence ZIP.
 - Share selected accounts and chats with scoped access.
+- Connect read-only MCP clients; review AI answers and separate analytical reports.
+- Run optional local OCR/transcription and signed outgoing webhooks.
 
 [Collection](docs/COLLECTION.md) · [Investigation](docs/INVESTIGATION.md) · [Access](docs/ACCESS.md)
+
+[MCP setup](docs/MCP.md) · [Archive analysis](docs/ANALYSIS.md) · [Local media processing](docs/MEDIA-ANALYSIS.md) · [Webhooks](docs/WEBHOOKS.md)
 
 <a name="screenshots"></a>
 

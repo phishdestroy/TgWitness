@@ -9,6 +9,7 @@ const state = {token: sessionStorage.getItem("tgwitness-token") || "",
   scope: null, scopeDirty: false, dossier: null, notifications: [], witnessToken: null, parameters: null, parametersDirty: false,
   me: null, access: null, accessEdit: null, accessChats: {}, consoleAfter: 0};
 const monitoringFields=["messages","edits","deletions","reactions","membership"];
+let sourceLink=new URLSearchParams(location.search);
 
 const permissionLabels={
   view:[tr("Read"),tr("Chats, journal, messages, attachments and settings. Always included.")],
@@ -239,6 +240,14 @@ async function unlock() {
   loadNotifications().catch(()=>{});
   if(state.view!=="parameters")loadParameters().catch(()=>{});
   if(state.view!=="sealed"&&!state.status.demo&&!state.status.collector.has_session&&viewAllowed("connection"))navigate("connection");
+  if(sourceLink){
+    const params=sourceLink;sourceLink=null;
+    const workspace=params.get("workspace"),seq=Number(params.get("event"));
+    if(workspace&&/^(default|[a-f0-9]{32})$/.test(workspace)&&Number.isSafeInteger(seq)&&seq>0){
+      if(!state.profiles.some(p=>p.id===workspace))toast(tr("Record is unavailable to this access."),true);
+      else{if(state.profile!==workspace)await switchProfile(workspace);navigate("observations");await openRecord(seq);}
+    }
+  }
 }
 $("unlock-form").addEventListener("submit", async event => {
   event.preventDefault(); $("login-error").textContent="";
@@ -256,7 +265,7 @@ function viewAllowed(view){
   const limited=!!state.status?.chats_limited;
   return {sources:may("sources")&&!limited,evidence:may("export")&&!limited,sealed:may("export")&&!limited,witness:may("settings")&&!limited,
     parameters:may("settings")&&!limited,connection:may("account")&&!limited,accounts:!!state.me?.admin,
-    access:!!state.me?.admin}[view]??true;
+    access:!!state.me?.admin,integrations:!!state.me?.admin}[view]??true;
 }
 function applyAccess(){
   document.querySelectorAll(".sidebar .nav[data-view]").forEach(n=>n.hidden=!viewAllowed(n.dataset.view));
@@ -300,7 +309,7 @@ function navigate(view) {
     n.classList.toggle("active",selected);
     if(selected)n.setAttribute("aria-current","page");else n.removeAttribute("aria-current");
   });
-  $("view-label").textContent=tr({chats:"Chats",observations:"Journal",sources:"Sources",evidence:"Exports",sealed:"Exports",witness:"Extras",parameters:"Parameters",connection:"Account",accounts:"Accounts",access:"Access"}[view]);
+  $("view-label").textContent=tr({chats:"Chats",observations:"Journal",sources:"Sources",evidence:"Exports",sealed:"Exports",witness:"Extras",parameters:"Parameters",connection:"Account",accounts:"Accounts",access:"Access",integrations:"Integrations",analysis:"Ask the archive"}[view]);
   show("entry-header",view==="connection");
   if(view==="connection")connectionSettings(false);
   if (view==="sources") {renderTargets();loadScope().catch(e=>toast(e.message,true));}
@@ -309,6 +318,9 @@ function navigate(view) {
   if (view==="accounts") {renderAccounts();loadProfiles().catch(e=>toast(e.message,true));}
   if (view==="chats") refreshChats().catch(e=>toast(e.message,true));
   if (view==="access") loadAccess().catch(e=>toast(e.message,true));
+  if (view==="integrations") window.TgWitnessIntegrations?.load();
+  else {window.TgWitnessIntegrations?.clear();window.TgWitnessWebhooks?.clear();}
+  if(view==="analysis")window.TgWitnessAnalysis?.load();
 }
 $("manage-profiles").addEventListener("click",()=>{
   navigate("connection");connectionSettings(true);$("profiles-details").open=true;$("profiles-details").scrollIntoView({block:"start"});
@@ -611,6 +623,7 @@ function renderAccounts(){
   }
 }
 async function switchProfile(id){
+  window.TgWitnessAnalysis?.clear();
   quickDialog.close();
   const revision=++state.workspaceRevision;
   $("workspace").inert=true;
@@ -638,6 +651,8 @@ async function switchProfile(id){
   if(state.view==="sources")await loadScope();
   if(state.view==="witness")await loadExtras();
   if(state.view==="parameters")await loadParameters();
+  if(state.view==="analysis")await window.TgWitnessAnalysis?.load();
+  if(state.view==="integrations"){window.TgWitnessWebhooks?.clear();await window.TgWitnessIntegrations?.load();}
   await loadNotifications().catch(()=>{});
   if(revision!==state.workspaceRevision)return;
   setAuthStep(state.status.collector.has_session?"authorized":"credentials");
@@ -806,6 +821,8 @@ async function openDetail(e) {
   if(e.payload.media_sha256) {
     const b=node("button","secondary",tr("↓ Download preserved attachment"));
     b.addEventListener("click",()=>busy(b,()=>download("media/"+e.payload.media_sha256,e.payload.media_sha256)));content.append(b);
+    const recognize=node("button","quiet",tr("Recognize attachment"));recognize.type="button";
+    recognize.addEventListener("click",()=>window.TgWitnessMedia?.select({workspace:state.profile,chat_id:e.chat_id,event_seq:e.seq,digest:e.payload.media_sha256}));content.append(recognize);
   }
   const raw=node("details","detail-block");raw.append(node("summary","",tr("Original signed record")),node("pre","",JSON.stringify(e,null,2)));content.append(raw);
   content.append(node("p","detail-hash","SHA-256 · "+e.hash));
@@ -1762,6 +1779,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("notify-panel").
 async function openRecord(seq){
   const r=await json("events?"+new URLSearchParams({before:String(seq+1),limit:"1"}));
   if(r.events[0]?.seq===seq)openDetail(r.events[0]);
+  else toast(tr("Record is unavailable to this access."),true);
 }
 function clearVerification(){state.verification=null;$("verification-result").textContent="";}
 function renderVerification(){

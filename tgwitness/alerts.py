@@ -440,7 +440,7 @@ async def alert_pass(store, vault, network, now=None):
     return {"notifications": sent, "error": error}
 
 
-async def alert_loop(store, vault, network_config, wakeup):
+async def alert_loop(store, vault, network_config, wakeup, workspace_id="default"):
     while True:
         with suppress(TimeoutError):
             await asyncio.wait_for(wakeup.wait(), tuning.value(store, "alerts_check_seconds"))
@@ -449,3 +449,11 @@ async def alert_loop(store, vault, network_config, wakeup):
             await alert_pass(store, vault, network_config())
         except Exception as exc:
             store.set_setting("alerts_last", {"at": utcnow(), "notifications": 0, "error": type(exc).__name__})
+        from . import webhooks
+        try:
+            await webhooks.pump(store, vault, network_config(), workspace_id)
+        except Exception as exc:
+            async with webhooks.lock(store):
+                data = webhooks.state(store)
+                data["last_error"] = type(exc).__name__
+                store.set_setting("webhook_delivery", data)

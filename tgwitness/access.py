@@ -32,6 +32,19 @@ WORKSPACE_ID = re.compile(r"default|[a-f0-9]{32}")
 
 
 POLICY = {
+    "GET /api/analysis/provider": ("view", "root"),
+    "GET /api/analysis/media": ("view", "root"),
+    "POST /api/analysis/media": ("view", "root"),
+    "GET /api/analysis/media/{job_id}": ("view", "root"),
+    "POST /api/analysis/media/{job_id}/{action}": ("view", "root"),
+    "POST /api/analysis/preview": ("view", "root"),
+    "POST /api/analysis/context": ("view", "root"),
+    "POST /api/analysis/generate": ("view", "root"),
+    "GET /api/analysis/reports": ("view", "root"),
+    "POST /api/analysis/reports": ("view", "root"),
+    "GET /api/analysis/reports/{report_id}": ("view", "root"),
+    "PATCH /api/analysis/reports/{report_id}": ("view", "root"),
+    "GET /api/analysis/reports/{report_id}/download": ("export", "root"),
     "GET /api/status": ("view", "filter"),
     "GET /api/profiles": ("view", "root"),
     "GET /api/events": ("view", "filter"),

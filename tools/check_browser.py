@@ -208,7 +208,9 @@ def check_languages(browser, server):
     context = browser.new_context(viewport={"width": 1440, "height": 1060}, reduced_motion="reduce")
     page, errors, keys = context.new_page(), [], []
     page.on("pageerror", lambda exc: errors.append(str(exc)))
-    page.route("**/app.js*", lambda route: route.abort())
+    panel_scripts = ("app.js", "integrations.js", "analysis.js", "media-analysis.js", "webhooks.js")
+    for script in panel_scripts:
+        page.route("**/" + script + "*", lambda route: route.abort())
     page.goto(server.url + "/")
     keys += page.evaluate("pageKeys()")
 
@@ -222,7 +224,8 @@ def check_languages(browser, server):
     journal = page.locator('[data-view="observations"]').first
     page.goto(server.url)
     english = " ".join(journal.inner_text().split()[:-1])
-    page.unroute("**/app.js*")
+    for script in panel_scripts:
+        page.unroute("**/" + script + "*")
 
     context.add_cookies([{"name": i18n.COOKIE, "value": "ru", "url": server.url}])
     page.goto(server.url + "/?lang=de")
