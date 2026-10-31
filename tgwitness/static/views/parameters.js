@@ -8,13 +8,13 @@ export function createParameters(context) {
   const listeners = new AbortController(), fields = new Map(), groups = new Map();
   let session = getSession(), catalog = null, request = 0, saving = false, schema = "", selected = "collection";
   let pending = null, resetPlan = null;
+  const unavailableDrafts = new Map();
   const on = (node, event, fn) => node.addEventListener(event, fn, {signal: listeners.signal});
   const active = () => getState().view === "parameters";
   const allowed = () => may("settings") && !getState().status?.demo;
   const make = (tag, className = "", text = "") => {
     const node = root.ownerDocument.createElement(tag); node.className = className; node.textContent = text; return node;
   };
-  const items = () => (catalog?.groups || []).flatMap(group => group.items);
   const raw = entry => entry.item.kind === "bool" ? entry.field.checked : entry.field.value;
   const value = entry => entry.item.kind === "bool" ? entry.field.checked : entry.item.kind === "lines"
     ? entry.field.value.split("\n").map(line => line.trim()).filter(Boolean)
@@ -60,6 +60,13 @@ export function createParameters(context) {
     offset();
   }
 
+  function selectSection(id, {record = true, scroll = true} = {}) {
+    if (!groups.has(id)) return false;
+    selected = id; if (record) context.sectionChanged?.(id); filter();
+    if (scroll) groups.get(id).card.scrollIntoView({block: "start", behavior: "instant"});
+    return true;
+  }
+
   function renderDraft() {
     if (!catalog || !active()) return;
     let count = 0, invalid = 0;
@@ -74,16 +81,18 @@ export function createParameters(context) {
       if (error) entry.field.setAttribute("aria-invalid", "true"); else entry.field.removeAttribute("aria-invalid");
       if (!equal(value(entry), entry.item.value)) count++;
     }
-    context.setDirty(!!count);
-    find("parameters-change-count").textContent = count
-      ? tr(count === 1 ? "1 unsaved change" : "{n} unsaved changes", {n: count}) : tr("No unsaved changes");
+    const total = count + unavailableDrafts.size;
+    context.setDirty(!!total);
+    find("parameters-change-count").textContent = total
+      ? tr(total === 1 ? "1 unsaved change" : "{n} unsaved changes", {n: total}) : tr("No unsaved changes");
     find("parameters-unsaved").textContent = invalid
       ? tr(invalid === 1 ? "Fix 1 invalid value to save." : "Fix {n} invalid values to save.", {n: invalid})
       : saving ? tr("Saving parameters…") : "";
     find("parameters-save").disabled = !allowed() || saving || !count || !!invalid;
+    find("parameters-review-invalid").hidden = !invalid;
     find("parameters-save").textContent = tr(saving ? "Saving…" : "Save parameters");
-    find("parameters-discard").disabled = !allowed() || saving || !count;
-    find("parameters-savebar").classList.toggle("is-dirty", !!count);
+    find("parameters-discard").disabled = !allowed() || saving || !total;
+    find("parameters-savebar").classList.toggle("is-dirty", !!total);
     const changedDefaults = [...fields.values()].some(entry => !equal(value(entry), entry.item.default));
     find("parameters-reset").disabled = !allowed() || saving || !changedDefaults;
     if (!allowed()) {find("parameters-reset-dialog").close(); resetPlan = null;}
@@ -139,7 +148,28 @@ export function createParameters(context) {
   function accept(data, submitted = null) {
     if (!active()) {pending = {data, submitted}; context.saved(data); return;}
     const nextSchema = JSON.stringify(data.groups.map(group => ({id: group.id, items: group.items.map(({value, ...item}) => item)})));
-    if (nextSchema !== schema) {build(data); schema = nextSchema;}
+    if (nextSchema !== schema) {
+      const edits = [...fields].filter(([key, entry]) => submitted
+        ? !equal(raw(entry), submitted[key]) : !equal(value(entry), entry.item.value))
+        .map(([key, entry]) => ({key, kind: entry.item.kind, label: entry.item.label, raw: raw(entry)}));
+      const focused = root.contains(root.ownerDocument.activeElement) ? root.ownerDocument.activeElement.dataset.parameter : null;
+      build(data); schema = nextSchema;
+      for (const [key, edit] of unavailableDrafts) if (fields.get(key)?.item.kind === edit.kind) {
+        if (edit.kind === "bool") fields.get(key).field.checked = edit.raw; else fields.get(key).field.value = edit.raw;
+        unavailableDrafts.delete(key);
+      }
+      for (const edit of edits) {
+        const entry = fields.get(edit.key);
+        if (entry && entry.item.kind === edit.kind) {
+          if (edit.kind === "bool") entry.field.checked = edit.raw; else entry.field.value = edit.raw;
+        } else unavailableDrafts.set(edit.key, edit);
+      }
+      const warning = find("parameters-catalog-warning"); warning.hidden = !unavailableDrafts.size;
+      warning.textContent = unavailableDrafts.size ? tr("These edited parameters changed or disappeared from this version. They were not saved:")
+        + "\n" + [...unavailableDrafts.values()].map(edit => tr(edit.label) + ": " + String(edit.raw)).join("\n") : "";
+      if (focused && fields.has(focused)) fields.get(focused).field.focus({preventScroll: true});
+      if (!groups.has(selected)) selected = groups.keys().next().value;
+    }
     else for (const group of data.groups) for (const item of group.items) {
       const entry = fields.get(item.key);
       if (submitted ? equal(raw(entry), submitted[item.key]) : equal(value(entry), entry.item.value)) write(entry, item.value);
@@ -159,6 +189,7 @@ export function createParameters(context) {
       const result = await json("parameters", undefined, {profile, signal});
       if (mine !== request || now !== getSession() || !current()) return;
       accept(result); find("parameters-result").textContent = "";
+      if (getState().parameterSection) selectSection(getState().parameterSection, {record: false, scroll: false});
     } catch (error) {
       if (mine !== request || now !== getSession() || !current() || error.name === "AbortError" || error.name === "StaleView") return;
       find("parameters-result").textContent = error.message; throw error;
@@ -171,8 +202,7 @@ export function createParameters(context) {
   });
   on(find("parameters-nav"), "click", event => {
     const link = event.target.closest("a[data-parameter-group]"); if (!link) return;
-    event.preventDefault(); selected = link.dataset.parameterGroup; context.sectionChanged?.(selected); filter();
-    groups.get(selected).card.scrollIntoView({block: "start", behavior: "instant"});
+    event.preventDefault(); selectSection(link.dataset.parameterGroup);
   });
   on(form, "input", event => {
     const entry = fields.get(event.target.dataset.parameter); if (entry) entry.serverError = "";
@@ -181,7 +211,8 @@ export function createParameters(context) {
   });
   on(form, "click", event => {
     const button = event.target.closest("button[data-parameter-reset]"); if (!button || !allowed() || saving) return;
-    const entry = fields.get(button.dataset.parameterReset); entry.serverError = ""; write(entry, entry.item.default); renderDraft(); entry.field.focus();
+    const entry = fields.get(button.dataset.parameterReset); entry.serverError = ""; write(entry, entry.item.default); renderDraft();
+    (entry.row.hidden ? find("parameters-search") : entry.field).focus();
   });
   on(form, "submit", async event => {
     event.preventDefault(); if (!catalog || !allowed() || saving) return;
@@ -203,7 +234,8 @@ export function createParameters(context) {
       if (now !== getSession() || error.name === "StaleView") return;
       const entry = fields.get(error.parameter);
       if (entry && equal(raw(entry), submitted[error.parameter])) {
-        entry.serverError = error.message; if (active()) entry.field.focus();
+        entry.serverError = error.message;
+        if (active()) {find("parameters-search").value = ""; find("parameters-changed").checked = false; filter(); entry.field.focus();}
       }
       if (active()) find("parameters-result").textContent = error.message;
       toast(error.message, true);
@@ -212,7 +244,12 @@ export function createParameters(context) {
   on(find("parameters-discard"), "click", () => {
     if (!allowed() || saving || !catalog) return;
     for (const entry of fields.values()) {write(entry, entry.item.value); entry.serverError = "";}
+    unavailableDrafts.clear(); find("parameters-catalog-warning").hidden = true; find("parameters-catalog-warning").textContent = "";
     find("parameters-result").textContent = tr("Changes discarded."); renderDraft();
+  });
+  on(find("parameters-review-invalid"), "click", () => {
+    const entry = [...fields.values()].find(item => problem(item)); if (!entry) return;
+    find("parameters-search").value = ""; find("parameters-changed").checked = false; filter(); entry.field.focus();
   });
   const plannedDefaults = () => [...fields].filter(([, entry]) => !equal(value(entry), entry.item.default))
     .map(([key, entry]) => ({key, before: raw(entry), after: entry.item.default}));
@@ -251,15 +288,17 @@ export function createParameters(context) {
   function resetSession() {
     request++; session = getSession(); saving = false; catalog = null; schema = ""; selected = "collection";
     pending = resetPlan = null; find("parameters-reset-dialog").close(); find("parameters-menu").open = false;
+    unavailableDrafts.clear(); find("parameters-catalog-warning").hidden = true; find("parameters-catalog-warning").textContent = "";
     find("parameters-reset-list").replaceChildren(); find("parameters-reset-note").textContent = "";
     fields.clear(); groups.clear(); find("parameters-groups").replaceChildren(); find("parameters-nav").replaceChildren();
     find("parameters-search").value = ""; find("parameters-changed").checked = false;
     for (const id of ["parameters-count", "parameters-result", "parameters-unsaved"]) find(id).textContent = "";
     find("parameters-change-count").textContent = tr("No unsaved changes");
     find("parameters-save").disabled = find("parameters-discard").disabled = true;
+    find("parameters-review-invalid").hidden = true;
     context.setDirty(false); context.saved(null);
   }
-  return {load, enter: load, updateStatus() {if (active()) renderDraft();},
+  return {load, enter: load, selectSection, updateStatus() {if (active()) renderDraft();},
     leave() {request++; find("parameters-reset-dialog").close(); resetPlan = null;}, resetSession,
     destroy() {request++; listeners.abort();}};
 }

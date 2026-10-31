@@ -639,11 +639,12 @@
     <nav aria-label="Parameter groups" class="parameters-nav" id="parameters-nav"></nav>
   </div>
   <p id="parameters-result" class="hint" role="status"></p>
+  <p id="parameters-catalog-warning" class="notice warning" role="alert" hidden></p>
   <div id="parameters-empty" class="card" hidden><p>No parameters match these filters.</p><button type="button" class="quiet" id="parameters-clear-search">Clear filters</button></div>
   <form class="parameters-form" id="parameters-form" novalidate>
     <div class="parameters-layout"><div id="parameters-groups"></div></div>
     <div class="parameters-actions" id="parameters-savebar">
-      <div><strong id="parameters-change-count">No unsaved changes</strong><p class="hint" id="parameters-unsaved" role="status"></p></div>
+      <div><strong id="parameters-change-count">No unsaved changes</strong><p class="hint" id="parameters-unsaved" role="status"></p><button type="button" class="text-link" id="parameters-review-invalid" hidden>Review invalid values</button></div>
       <div class="parameters-save-buttons"><button type="button" class="quiet" id="parameters-discard" disabled>Discard</button><button class="primary" id="parameters-save" type="submit" disabled>Save parameters</button></div>
     </div>
   </form>

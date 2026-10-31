@@ -13,6 +13,7 @@
 #view-parameters #parameters-empty p { margin-bottom: 12px; }
 #view-parameters #parameters-result:empty { display: none; }
 #view-parameters #parameters-result { margin: 0 0 12px; }
+#view-parameters #parameters-catalog-warning { white-space: pre-wrap; max-height: 240px; overflow: auto; overflow-wrap: anywhere; }
 #view-parameters .parameter-meta { font-size: 12px; line-height: 1.6; }
 #view-parameters .parameter-changed { display: inline-block; margin-inline-start: 8px; font-size: 11px; font-weight: 500; color: var(--accent-text); background: var(--accent-soft); border-radius: 4px; padding: 1px 5px; }
 #view-parameters .parameter-error { color: var(--danger); margin-top: 6px; font-size: 12px; }
