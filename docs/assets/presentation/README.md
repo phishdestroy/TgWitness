@@ -23,36 +23,20 @@ instructions and the complete page index expand below them.
 | `casework-hero*.svg`, `casework-handbook*.svg` | Repository and handbook covers: a message, its captured edit and the retained record; desktop, phone and still variants |
 | `casework-nav-*.svg` | Three readable navigation buttons, with animated and still variants |
 | `casework-{chain,tamper,checkpoint}*.svg` | Matching evidence diagrams; stable labels, animated emphasis, vertical phone layouts and separate stills |
-| `technical-hero*.svg` | Earlier technical repository banner, retained for existing references |
-| `technical-wiki*.svg` | Earlier technical handbook banners, retained for existing references |
-| `identity-hero*.svg` | Earlier dossier cover, retained with its phone and still compositions |
-| `identity-wiki.svg`, `identity-wiki-static.svg` | Earlier illustrated handbook cover |
-| `identity-nav-{demo,start,wiki}*.svg` | Animated workspace, local setup and handbook buttons in the same family as the setup actions, with separate stills |
+| `technical-hero-static.svg` | Source composition of the GitHub and website sharing PNGs |
 | `identity-action-{setup,account,deploy}*.svg` | Setup, dedicated-account and server links in the PhishDestroy two-line button style; animated rims, highlights, icons and arrows, with separate stills |
-| `identity-divider*.svg` | A blue and gold section rule with a moving trace and a still alternative |
 | `identity-meta-*.svg` | The existing version, tested-environment, language and MIT labels as local badges |
 | `readme-investigation-animated.svg`, `tgwitness-investigation-static.svg` | Original investigation composition, retained as the source of the illustrated scene |
-| `case-{demo,start,wiki,evidence}.svg` | Earlier navigation assets retained for existing references |
-| `case-path*.svg` | The four-step case route, with separate desktop, phone and reduced-motion compositions |
 | `case-chain-mobile*.svg` | A vertical record-chain explanation with readable phone captions, exact digest/signature formulas and a separate still |
-| `repository-cover*.svg`, `repository-cover*.webp` | Earlier compact journal cover, retained for existing links |
-| `repository-{demo,setup,modes}.svg` | Earlier navigation assets, retained for existing links |
 | `tgwitness-investigation-mobile-{animated,static}.svg` | Mobile composition of the approved investigation scene, with motion and a separate still |
-| `entry-{demo,guides,wiki}.svg` | Three navigation cards matching the PhishDestroy repository family |
-| `readme-typing.svg`, `readme-typing-static.svg` | Animated typing line and its readable still |
 | `readme-workspace-*.webp` | Actual demo screenshots in a 13-second loop: conversation, saved versions and deletion notices; both themes, a readable phone crop and separate stills |
 | `readme-investigation-animated.svg`, `readme-evidence-*-animated.svg` | The approved SVG scenes exported for README's picture-controlled motion preference |
-| [Repository cover](readme-cover.svg), [static cover](readme-cover-static.svg), [mobile cover](readme-cover-mobile.svg) | Compact TgWitness masthead with the original animated investigation scene and reduced-motion alternative |
-| [Workspace preview, light](workspace-preview-light.png), [dark](workspace-preview-dark.png) | Framed, unmodified Chats screenshots with fictional demo data |
-| `nav-*.svg` | Four equal-width navigation buttons; two per row on narrow screens |
-| [README hero](readme-hero.svg) | Compact animated repository cover |
+| `nav-*.svg` | Start and handbook navigation buttons |
 | [Shared brand cover](brand.svg) | Reduced-motion README alternative and translated introductions |
 | [Investigation artwork](tgwitness-investigation-static.svg) | Full-size static composition |
 | [Animated investigation](tgwitness-investigation-animated.svg) | Extended investigation sequence |
 | [Investigation overview film](investigation-overview.mp4) | The illustrated SVG sequence as a 12-second, 1280 × 720 MP4 |
 | [Mobile cover](mobile.svg) | Legible narrow-screen composition |
-| [Capability cards](capabilities.svg), [mobile cards](capabilities-mobile.svg) | Collection, captured versions, investigation and verification |
-| [Film navigation](button-films.svg) | Direct access to the films and animation gallery |
 | [Investigation film](investigation.mp4), [GIF](investigation.gif) | 12-second concept film, 1280 × 672 MP4 |
 | [Message history film](message-history.mp4), [GIF](message-history.gif), [still](message-history-static.png) | 12-second concept film, 1280 × 576 MP4 |
 | [GitHub preview](preview-github.png) | 1280 × 640 repository sharing image |
@@ -153,7 +137,6 @@ outlined from Manrope for consistent rendering. The font licence is retained in
 [OFL-Manrope.txt](OFL-Manrope.txt). Review animation as an ordinary image, both
 themes and a narrow viewport before replacing an asset.
 
-The original artwork and renderer remain documented in [launch-kit](../launch-kit/README.md).
 
 To refresh the workspace loop, build the site with `python tools/build_site.py`,
 then run `python website/capture_readme.py` with Playwright Chromium and Pillow

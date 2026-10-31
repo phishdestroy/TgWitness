@@ -23,7 +23,6 @@ project website. The authenticated application panel lives in
 | [`render_case_assets.py`](render_case_assets.py) | Investigation navigation and case-path diagrams, with desktop, phone and still variants |
 | [`capture_readme.py`](capture_readme.py) | Real demo workflow for the README, with light/dark, phone and reduced-motion exports |
 | [`demo/`](demo/mock.js) | Read-only online demo: the request-answering script and the recorded fictional records |
-| [`artwork.html`](artwork.html), [`render_artwork.py`](render_artwork.py) | Original HTML/CSS presentation artwork and renderer |
 
 ## Build and inspect
 
