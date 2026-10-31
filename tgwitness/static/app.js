@@ -665,18 +665,20 @@ function collectorLines(name,p){
   if(p.reason==="queue_waiting")return [tr("Attachments have been waiting for more than an hour."),...facts];
   return [tr("Attachment downloads are off."),...facts];
 }
+let healthUI=null;
+const healthReady=import("./components/health.js?v=1").then(({createHealthBar})=>{
+  healthUI=createHealthBar({node,icon,tr,stateNames:healthStates,partNames:healthPartNames,lines:collectorLines,
+    diagnose:openDiagnostics,canDiagnose:name=>viewAllowed(healthDiagnostics[name]?.view),workspace:$("workspace")});
+  if(state.status)renderCollectorHealth(state.status.health);
+  return healthUI;
+});
+healthReady.catch(error=>toast(error.message,true));
 function renderCollectorHealth(h){
-  const strip=$("health-strip");strip.replaceChildren();
-  const summary=document.querySelector(".health-details > summary");
-  summary.querySelector(".health-badge")?.remove();
+  healthUI?.update(h,{profile:state.profile,demo:state.status?.demo});
   if(!h)return;
-  const names=["connection","intake","sources","media"];
-  for(const name of names)strip.append(healthRow(name,healthPartNames[name],h[name],collectorLines(name,h[name])));
-  summary.append(stateBadge(h.state));
-  // The rows are rebuilt on every refresh; only a change of a part's state is announced.
-  const states=state.profile+":"+names.map(name=>h[name].state).join(",");
+  const names=["connection","intake","sources","media"],states=state.profile+":"+names.map(name=>h[name]?.state).join(",");
   if(state.healthStates&&state.healthStates!==states&&state.healthStates.split(":")[0]===state.profile)
-    $("health-announce").textContent=names.map(name=>healthPartNames[name]+" — "+healthStates[healthKnown(h[name].state)][0]).join(" · ");
+    $("health-announce").textContent=names.map(name=>healthPartNames[name]+" — "+healthStates[healthKnown(h[name]?.state)][0]).join(" · ");
   state.healthStates=states;
 }
 
