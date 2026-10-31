@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Added a fork-launched sealed capture preview: restricted fresh-session login,
+  one-chat history and media collection, encrypted connection/result artifacts,
+  pinned reusable-workflow provenance and a fail-closed verifier. English/Russian
+  browser helper keeps the private decryption key local. This uses ordinary GitHub
+  infrastructure, not confidential hardware or Telegram-signed evidence.
+  See [sealed capture](SEALED-ACTIONS.md) for setup, policy and deployment limits.
 - Sources can load the available history of every currently enabled source into
   Chats and the signed journal. The persistent queue supports pause, resume and
   explicit continuation after restart, with separate per-source failures and media
