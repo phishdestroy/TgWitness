@@ -1,0 +1,5 @@
+{
+  "format": "tgwitness-sealed-policy-v1",
+  "workflow": "phishdestroy/TgWitness/.github/workflows/sealed-collector.yml",
+  "releases": []
+}
