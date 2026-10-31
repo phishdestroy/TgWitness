@@ -30,6 +30,15 @@ if a &lt; b:
     assert "Hash chain · SHA-256" in result
     for chrome in ("Menu text", "Footer text", "Copy command", "private chrome", "never include this"):
         assert chrome not in result
+    assert all(line == line.rstrip(" \t") for line in result.splitlines())
+
+
+def test_prose_cleanup_preserves_code_whitespace():
+    result = markdown('<main><h1>Copy</h1><blockquote><p>Quote</p><p>More</p></blockquote>'
+                      '<ol><li>Run:<pre><code>print("a  ")  \n\nnext()</code></pre></li></ol></main>',
+                      "https://example.org/docs/")
+    assert 'print("a  ")  \n\n   next()' in result
+    assert all(line == line.rstrip(" \t") for line in result.splitlines() if 'print(' not in line)
 
 
 def test_main_export_preserves_examples_and_uses_html_canonical():

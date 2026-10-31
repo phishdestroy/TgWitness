@@ -112,10 +112,10 @@ def markdown(source, url):
         return value
 
     content = emit(article).strip()
-    content = re.sub(r"\n[ \t]+\n", "\n\n", content)
+    content = "\n".join(line.rstrip(" \t") for line in content.split("\n"))
     content = re.sub(r"\n{3,}", "\n\n", content)
     content = re.sub(r"(?m)^([ \t]*)TGW_CODE_BLOCK_(\d+)[ \t]*$",
-                     lambda m: "\n".join(m[1] + line for line in code_blocks[int(m[2])].split("\n")), content)
+                     lambda m: "\n".join(m[1] + line if line else "" for line in code_blocks[int(m[2])].split("\n")), content)
     title = next((raw(n).strip() for n in all_nodes if n.tag == "h1"), "TgWitness")
     if not re.search(r"^# ", content, re.M):
         content = "# " + title + "\n\n" + content
