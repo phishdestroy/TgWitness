@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="pl" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Dostęp i uprawnienia | TgWitness</title>
+<meta name="description" content="Proszę określić zakres dostępu do kont i czatów, wybrać uprawnienia, ograniczyć liczbę sesji i adresów IP oraz cofnąć dostęp."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/access/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:title" content="Dostęp i uprawnienia | TgWitness"><meta property="og:description" content="Proszę określić zakres dostępu do kont i czatów, wybrać uprawnienia, ograniczyć liczbę sesji i adresów IP oraz cofnąć dostęp.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/pl/docs/reference/access/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/access/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/access/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/access/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/access/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/access/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/access/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/access/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/access/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/access/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/access/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/access/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/access/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/access/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/access/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/access/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/access/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/access/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/access/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/access/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/access/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/access/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/access/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/access/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/access/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/access/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/access/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/pl/docs/reference/access/", "url": "https://phishdestroy.github.io/TgWitness/pl/docs/reference/access/", "name": "Dostęp i uprawnienia | TgWitness", "description": "Proszę określić zakres dostępu do kont i czatów, wybrać uprawnienia, ograniczyć liczbę sesji i adresów IP oraz cofnąć dostęp.", "inLanguage": "pl", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Strona główna", "item": "https://phishdestroy.github.io/TgWitness/pl/"}, {"@type": "ListItem", "position": 2, "name": "Dokumentacja", "item": "https://phishdestroy.github.io/TgWitness/pl/docs/"}, {"@type": "ListItem", "position": 3, "name": "Odniesienie", "item": "https://phishdestroy.github.io/TgWitness/pl/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Dostęp i uprawnienia", "item": "https://phishdestroy.github.io/TgWitness/pl/docs/reference/access/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Przejdź do treści</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Dokumentacja</span></a>
+<nav aria-label="Przewodniki"><a href="../../concepts/">Przewodnik wizualny</a><a href="../../">Wszystkie przewodniki</a><a href="../">Odniesienie</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Język"><span aria-hidden="true">◍</span> Polski</summary><div class="lang-list"><a href="../../../../docs/reference/access/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/access/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/access/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/access/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/access/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/access/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/access/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/access/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/access/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/access/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/access/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/access/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/access/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/access/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/access/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/access/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/access/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/access/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/access/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/access/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="./" hreflang="pl" lang="pl" aria-current="true">Polski</a><a href="../../../../ja/docs/reference/access/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/access/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/access/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/access/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Przełączanie między jasnym a ciemnym motywem"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Przewodniki"><a href="../../../guides/modes.html">Tryby, scenariusze i poziomy dowodów</a><a href="../../../../sealed.html?lang=en">Zbieranie przez GitHub Actions (wersja wstępna)</a><p class="nav-label">Pierwsze kroki</p><a href="../../start/">Rozpocznij w ciągu kilku minut</a><a href="../../accounts/">Podłącz konto</a><a href="../../proxies/">Proszę wybrać serwer proxy</a><a href="../../exports/">Eksportowanie i weryfikacja</a><p class="nav-label">Zrozumienie dowodów</p><a href="../../concepts/">Zobacz, jak działa system gromadzenia dowodów</a><a href="../../cases/">Przeprowadzanie dochodzeń we wszystkich czatach</a><a href="../../security/">Dbaj o bezpieczeństwo</a><p class="nav-label">Dowiedz się więcej</p><a href="../../access/">Przedstaw proszę przypadek</a><a href="../../witness/">Skonfiguruj bota Witness</a><a href="../../server/">Prosimy o dalsze prowadzenie tej strony</a><a href="../../troubleshooting/">Dowiedz się, co poszło nie tak</a></nav><nav class="wiki-nav" aria-label="Odniesienie"><p class="nav-label"><a class="nav-label-link" href="../">Odniesienie</a></p><details class="wiki-group" open><summary>Konfiguracja</summary><a href="../quickstart/">Szybki start</a><a href="../accounts/">Konta i formaty sesji</a><a href="./" aria-current="page">Dostęp i uprawnienia</a><a href="../connection/">Połączenia, serwery proxy i ochrona danych</a><a href="../deployment/">Wdrożenie</a></details><details class="wiki-group"><summary>Zbieraj</summary><a href="../collection/">Jak przebiega gromadzenie danych</a><a href="../operations/">Procesy i operacje</a><a href="../investigation/">Tryb dochodzeniowy</a><a href="../features/">Funkcje i ograniczenia</a></details><details class="wiki-group"><summary>Dowody</summary><a href="../how-it-works/">Jak działa ten rejestr dowodów</a><a href="../evidence/">Format dowodów</a><a href="../witness/">Niezależny świadek</a><a href="../timestamp/">Sygnatury czasowe</a></details><details class="wiki-group"><summary>Bezpieczeństwo i projekt</summary><a href="../security/">Bezpieczeństwo i przetwarzanie danych</a><a href="../architecture/">Architektura</a><a href="../verification/">Co zostało przetestowane</a><a href="../license/">Informacja o licencji i niezgodności architektonicznej</a><a href="../notice/">Powiadomienie o niezgodności operatorów</a><a href="../changelog/">Lista zmian</a></details></nav><p class="sidebar-note">v0.7.0<br>Oprogramowanie typu open source · Działa na Państwa komputerze</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Przewodniki"><a href="../../../">Strona główna</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentacja</a> <span aria-hidden="true">/</span> <a href="../">Odniesienie</a> <span aria-hidden="true">/</span> <span aria-current="page">Dostęp i uprawnienia</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Przeszukaj dokumentację</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proszę rozważyć użycie terminów takich jak: serwer proxy, łańcuch skrótów, token lub świadek…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Przejrzyste wyszukiwanie" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Wpisz słowo, aby przeszukać przewodniki i materiały referencyjne. Wyniki wyszukiwania pozostają w Państwa przeglądarce.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Odniesienie / Konfiguracja</p><h1>Dostęp i uprawnienia</h1><p class="guide-outcome">Proszę określić zakres dostępu do kont i czatów, wybrać uprawnienia, ograniczyć liczbę sesji i adresów IP oraz cofnąć dostęp.</p><div class="wiki-body"><p>Można przyznać recenzentowi dostęp do jednej rozmowy, analitykowi uprawnienie do eksportowania sprawy lub
+operatorowi kontrolę nad wybranymi kontami. Każda osoba otrzymuje własny token. Główny
+token panelu pozostaje w posiadaniu administratora.</p>
+<p><a href="../accounts/">Konfiguracja konta</a> · <a href="../connection/">Trasy połączeń</a> · <a href="../security/">Model bezpieczeństwa</a></p>
+<h2 id="two-scopes-two-different-jobs">Dwa obszary zastosowań, dwa różne zadania<a class="anchor" href="#two-scopes-two-different-jobs" aria-label="Link do tej sekcji">#</a></h2>
+<p><strong>Zakres gromadzenia danych</strong> określa, co jest rejestrowane na danym koncie: wybrane czaty, folder w aplikacji Telegram
+lub całe konto. <strong>Zakres dostępu</strong> określa, które z tych zarejestrowanych
+kont i czatów mogą być przeglądane i wykorzystywane przez inną osobę. Przyznanie dostępu nie powoduje dołączenia do
+czatu w aplikacji Telegram, rozpoczęcia gromadzenia danych ani przyznania uprawnień do konta w aplikacji Telegram.</p>
+<p>Uprawnienie to umożliwia dostęp do wybranych obszarów roboczych, wybranych czatów w ich obrębie lub wszystkich
+obszarów roboczych. Dostęp <strong>do wszystkich obszarów roboczych, w tym tych dodanych później,</strong> obejmuje również przyszłe
+konta. Należy wyraźnie wybrać konkretne obszary robocze, jeśli sprawa ma ograniczać się wyłącznie do nich.</p>
+<h2 id="give-someone-access">Przyznaj komuś dostęp<a class="anchor" href="#give-someone-access" aria-label="Link do tej sekcji">#</a></h2>
+<ol>
+<li>Zaloguj się jako główny administrator i otwórz sekcję <strong>„Dostęp</strong>”.</li>
+<li>W sekcji <strong>„Przyznaj komuś dostęp</strong>” proszę wpisać imię i nazwisko, które będzie Pan/Pani w stanie rozpoznać w dzienniku.</li>
+<li>Proszę wybrać przestrzenie robocze oraz, w razie potrzeby, poszczególne czaty.</li>
+<li>Proszę wybrać, co dana osoba może zrobić. Zawsze należy uwzględnić opcję <strong>„Wyświetl</strong>”.</li>
+<li>Proszę ustawić termin ważności, limity logowań/sesji oraz dozwolone adresy zgodnie z potrzebami.</li>
+<li>Proszę kliknąć <strong>„Utwórz dostęp</strong>”. Proszę skopiować token teraz: zostanie on wyświetlony tylko raz.</li>
+<li>Proszę przesłać adres panelu i token w wiadomości prywatnej. Odbiorca wprowadza ten token
+    na standardowej stronie logowania; nie potrzebuje on Państwa głównego tokenu panelu ani sesji w Telegramie.</li>
+</ol>
+<p>Proszę otworzyć panel z wygenerowanym tokenem w osobnej sesji przeglądarki i sprawdzić
+widoczne czaty oraz dozwolone działania przed przekazaniem go.</p>
+<h2 id="choose-the-permissions">Proszę wybrać uprawnienia<a class="anchor" href="#choose-the-permissions" aria-label="Link do tej sekcji">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Uprawnienia</th>
+<th>Możliwości narzędzia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>view</code></td>
+<td>Dostęp do odczytanych rozmów, przechwyconych wiadomości, profili, plików oraz przefiltrowanych wpisów w dzienniku. Zawsze w zestawie.</td>
+</tr>
+<tr>
+<td><code>export</code></td>
+<td>Dopuszczalny jest eksport historii czatów i dossier. Eksport dowodów z całego obszaru roboczego wymaga dostępu do całego obszaru roboczego.</td>
+</tr>
+<tr>
+<td><code>sources</code></td>
+<td>Zarządzanie źródłami, migawkami i przechwytywaniem profili. Dostęp ograniczony do czatów pozwala na działanie wyłącznie w ramach dozwolonych czatów; funkcje wykrywania źródeł w całym koncie oraz ustawienia zakresu pozostają wyłączone.</td>
+</tr>
+<tr>
+<td><code>collect</code></td>
+<td>Uruchomienie lub zatrzymanie modułu zbierającego. Wymagany jest dostęp do całego obszaru roboczego, ponieważ proces gromadzenia danych ma wpływ na konto.</td>
+</tr>
+<tr>
+<td><code>interact</code></td>
+<td>Proszę wykonywać obsługiwane interakcje w aplikacji Telegram w ramach zakresu dostępu. Dostęp ograniczony do czatu nie pozwala na korzystanie z podglądu linków dla całego konta.</td>
+</tr>
+<tr>
+<td><code>settings</code></td>
+<td>Zmiana ustawień gromadzenia danych, znaczników czasu, powiadomień, kopii poza serwerem oraz parametrów. Wymagany jest dostęp do całego obszaru roboczego.</td>
+</tr>
+<tr>
+<td><code>account</code></td>
+<td>Zaloguj się lub wyloguj z serwisu Telegram oraz zarządzaj trasami połączeń. Wymagany jest dostęp do całego obszaru roboczego.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Uprawnienia i zakres są sprawdzane łącznie. Zaznaczenie uprawnienia nie powoduje otwarcia
+innych czatów ani odblokowania operacji obejmującej cały obszar roboczy w przypadku dostępu ograniczonego do konkretnego czatu.
+W przypadku eksportu równoległego uprawnienie musi obejmować eksportowany czat na każdym wybranym
+koncie. Przyznane uprawnienie nie pozwala na tworzenie nowych uprawnień, zarządzanie sesjami innych osób
+ani otwieranie konsoli administratora.</p>
+<h3 id="three-useful-setups">Trzy przydatne konfiguracje<a class="anchor" href="#three-useful-setups" aria-label="Link do tej sekcji">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Osoba</th>
+<th>Zakres</th>
+<th>Uprawnienia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Recenzent</td>
+<td>Zapisane rozmowy z jednej sprawy</td>
+<td><code>view</code></td>
+</tr>
+<tr>
+<td>Analityk przygotowujący przekazanie obowiązków</td>
+<td>Czatów do zbadania i wyeksportowania</td>
+<td><code>view</code>, <code>export</code>; proszę dodać <code>interact</code> wyłącznie w przypadku, gdy działania mają być prowadzone za pośrednictwem Telegrama</td>
+</tr>
+<tr>
+<td>Operator gromadzenia danych</td>
+<td>Wybrane kompletne obszary robocze</td>
+<td><code>view</code>, <code>sources</code>, <code>collect</code>; proszę dodać <code>settings</code> lub <code>account</code> wyłącznie w razie potrzeby</td>
+</tr>
+</tbody>
+</table></div>
+<p>Są to przykłady, które można skonfigurować za pomocą pól wyboru uprawnień, a nie stałe role.</p>
+<h2 id="limits-and-sessions">Ograniczenia i sesje<a class="anchor" href="#limits-and-sessions" aria-label="Link do tej sekcji">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Kontekst</th>
+<th>Jak to działa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sesje równoległe</td>
+<td>Należy ograniczyć liczbę jednoczesnych sesji do 1–100. Po osiągnięciu limitu należy odmówić kolejnego logowania lub zakończyć najstarszą sesję.</td>
+</tr>
+<tr>
+<td>Dopuszczalne logowanie</td>
+<td>Należy ograniczyć liczbę pomyślnych użyć tokenu do rozpoczęcia sesji. Istniejące sesje nie są kończone tylko dlatego, że wykorzystano ostatnie dozwolone logowanie.</td>
+</tr>
+<tr>
+<td>Ważne do</td>
+<td>Bezwzględny termin wygaśnięcia dostępu. Użytkownik z wygasłym dostępem nie może się zalogować ani nadal wysyłać żądań.</td>
+</tr>
+<tr>
+<td>Minuty bez aktywności</td>
+<td>Limit czasu bezczynności sesji, od 5 minut do 30 dni. Pomyślne żądania przedłużają ten czas; otwarty panel może utrzymać swoją aktywność poprzez wysyłanie zapytań.</td>
+</tr>
+<tr>
+<td>Dopuszczalne adresy</td>
+<td>Proszę zaakceptować określone adresy IP lub podsieci CIDR. Proszę pozostawić pole puste, aby zezwolić na dowolny adres, o ile nie włączono powiązania z pierwszym logowaniem.</td>
+</tr>
+<tr>
+<td>Powiązanie z pierwszym logowaniem</td>
+<td>Pierwsze pomyślne zalogowanie się ustala adres dozwolony dla tego dostępu.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Adres IP to adres klienta widoczny dla aplikacji. W przypadku korzystania z serwera proxy odwrotnego lub
+tunelu należy sprawdzić adres wyświetlany w sekcji <strong>„Otwarte sesje”</strong> przed zastosowaniem reguł opartych na adresach IP:
+w przeciwnym razie może się wydawać, że kilku użytkowników korzysta z tego samego adresu serwera proxy.</p>
+<h2 id="change-or-withdraw-access">Zmiana lub cofnięcie dostępu<a class="anchor" href="#change-or-withdraw-access" aria-label="Link do tej sekcji">#</a></h2>
+<p>Proszę edytować wpis w <strong>sekcji „Dostępy”</strong>, aby zmienić jego zakres, uprawnienia lub ograniczenia.
+Zmiany zakresu i uprawnień są sprawdzane przy kolejnych żądaniach, w tym
+przy żądaniach pochodzących z sesji, które są już otwarte. Cofnięcie dostępu powoduje zakończenie sesji
+i uniemożliwia korzystanie z wydanego tokenu. Funkcja <strong>otwartych sesji</strong> pozwala również administratorowi
+zakończyć pojedynczą sesję bez konieczności cofania całego dostępu.</p>
+<p>Cofnięcie uprawnień nie pozwala na odzyskanie plików, które ktoś już pobrał. Wylogowanie się,
+zablokowanie panelu lub zakończenie sesji nie zatrzymuje działającego kolektora.</p>
+<h2 id="what-the-administrator-can-see">Co widzi administrator<a class="anchor" href="#what-the-administrator-can-see" aria-label="Link do tej sekcji">#</a></h2>
+<p><strong>Dziennik od momentu uruchomienia</strong> łączy logi procesowe z aktywnością dziennika z każdego
+obszaru roboczego: logowania, odmowy, zmiany trasy oraz działania operatorów. Jest to
+konsola działająca w pamięci dla bieżącego procesu, a nie trwała kopia każdej wiadomości.
+Często powtarzające się zdarzenia związane z wiadomościami pozostają w dzienniku, zamiast zapełniać konsolę.</p>
+<p>Przyznawanie, zmiana i cofanie uprawnień dostępu, a także rozpoczynanie lub kończenie sesji powodują również utworzenie
+podpisanych wpisów w dzienniku <code>access.*</code>. Tokeny nie są uwzględniane w tych wpisach.
+Przyznane tokeny i poświadczenia sesji są przechowywane w postaci skrótów w zaszyfrowanym sejfie.</p>
+<details>
+<summary><strong>Główny administrator i granica zaufania</strong></summary>
+
+Token panelu głównego pozostaje nieograniczony. Logowanie za jego pomocą w przeglądarce tworzy sesje
+podlegające limitom sesji skonfigurowanym przez administratora. Skrypty wysyłające
+bezpośrednio token główny zachowują pełny dostęp i nie są traktowane jako sesje przeglądarki.
+
+Jest to kontrola dostępu na poziomie aplikacji w ramach jednej instalacji. Wszystkie obszary robocze współdzielą
+proces serwera; nie oznacza to izolacji od administratora hosta. Należy zachować poufność głównego
+tokena, sesji Telegramu, kluczy podpisujących oraz katalogu danych. Token świadka
+stanowi oddzielny punkt kontrolny/poświadczenie stanu, a nie token dostępu do panelu.
+
+</details></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCESS.md">Edytuj tę stronę na GitHubie ↗</a><a class="next-guide" href="../connection/"><span>Kolejny krok</span><strong>Połączenia, serwery proxy i ochrona danych →</strong></a><p>Niniejsze wytyczne opisują aktualną implementację. Wyniki walidacji oraz pozostałe luki zostały udokumentowane oddzielnie. <a href="../verification/">Co zostało przetestowane →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Na tej stronie"><p class="nav-label">Na tej stronie</p><a href="#two-scopes-two-different-jobs">Dwa obszary zastosowań, dwa różne zadania</a><a href="#give-someone-access">Przyznaj komuś dostęp</a><a href="#choose-the-permissions">Proszę wybrać uprawnienia</a><a href="#limits-and-sessions">Ograniczenia i sesje</a><a href="#change-or-withdraw-access">Zmiana lub cofnięcie dostępu</a><a href="#what-the-administrator-can-see">Co widzi administrator</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Oprogramowanie typu open source · Działa na Państwa komputerze</span><a href="../../../../LICENSE">Licencja MIT</a><a href="../notice/">Informacja dla operatorów</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Bezpieczeństwo</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Oczekiwanie na wiadomość", "Step through a fictional send, edit and delete.": "Prześledź krok po kroku fikcyjny proces wysłania, edycji i usunięcia wiadomości.", "No observations yet. Start the sequence or advance one event.": "Brak dotychczasowych uwag. Rozpocznij sekwencję lub przejdź do następnego zdarzenia.", "Meet at 10:00": "Spotkanie o godz. 10:00", "A new message is visible in the chat.": "Na czacie widoczna jest nowa wiadomość.", "Record 1 appended: the collector observed the original message.": "Dodano wpis nr 1: moduł zbierający odnotował oryginalną wiadomość.", "Meet at 11:00": "Spotkanie o godz. 11:00", "The current text changes. The earlier observation stays.": "Obecny tekst ulega zmianie. Wcześniejsza uwaga pozostaje bez zmian.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Dodano wpis nr 2: edycja stanowi nową obserwację. Wpis nr 1 nadal zawiera tekst oryginalny.", "Message deleted": "Wiadomość usunięta", "The message has disappeared from the chat view.": "Wiadomość zniknęła z widoku czatu.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Załączono zapis nr 3: powiadomienie o usunięciu jest zachowywane wraz z obiema zaobserwowanymi wersjami.", "0 records": "0 wpisów", "1 record": "1 wpis", "2 records": "2 wpisy", "3 records": "3 wpisy", "Complete / {n} of 3": "Całość / {n} z 3", "Step / {n} of 3": "Krok / {n} z 3", "Pause": "Pauza", "Replay sequence": "Sekwencja odtwarzania", "Play sequence": "Sekwencja odtwarzania", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Dostępny jest statyczny przykład. Aby obliczać skróty w trybie interaktywnym, proszę otworzyć tę stronę za pośrednictwem protokołu HTTPS lub w podglądzie na lokalnym serwerze z obsługą Web Crypto.", "No record supplied": "Brak dostarczonego zapisu", "Tail removed": "Usunięto końcówkę", "≠ saved hash": "≠ zapisany skrót", "Rebuilt · different hash": "Przebudowana wersja · inny skrót", "= saved hash": "= zapisany skrót", "Same length and matching head.": "Ta sama długość i dopasowany nagłówek.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Wszystkie trzy obliczone skróty są zgodne z zapisanymi skrótami. Niniejszy przykład jest zgodny z zachowanym ograniczeniem do trzech rekordów.", "Same saved head; the journal prefix fails verification.": "Ten sam zapisany nagłówek; prefiks dziennika nie przeszedł weryfikacji.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Rekord nr 2 nie jest już zgodny ze swoim zapisanym skrótem. Sprawdzanie wyłącznie końcowego, zapisanego nagłówka nie pozwoliłoby tego wykryć; weryfikator sprawdza każdy rekord.", "Head differs from the retained checkpoint.": "Nagłówek różni się od zachowanego punktu kontrolnego.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Odbudowane skróty są ze sobą powiązane, ale ostatni nagłówek uległ zmianie. Zachowany punkt kontrolny odrzuca tę historię. Oryginalne podpisy również nie zostałyby uznane w przypadku zmienionych wpisów.", "Too short: 2 supplied records \u003c 3 retained records.": "Zbyt krótki: 2 dostarczone zapisy \u003c 3 zachowane zapisy.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Dwa pozostałe skróty nadal są zgodne. Zachowany punkt kontrolny ujawnia brakujący fragment. Bez tej wcześniejszej granicy sam ten krótszy prefiks nie ujawniłby pominięcia.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "W tej przeglądarce nie jest dostępna funkcja obliczania skrótu. Poniższe wzory i statyczne objaśnienia pozostają dostępne.", "{n} records": "{n} wpisów", "head {hash}": "nagłówek {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Zatwierdzono: liczba wzrasta, podpis został zweryfikowany, a klucz jest zgodny. Świadek zachowuje tę nową granicę.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Cofnięcie: podpisana odpowiedź zawiera mniej rekordów niż ostatni zaakceptowany punkt kontrolny. System TgWitness rejestruje problem i zachowuje wcześniej zaakceptowany zakres danych.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Rozgałęzienie: liczba pozostaje niezmieniona, ale gałąź główna jest inna. Świadek odnotowuje rozbieżność i zachowuje wcześniej zaakceptowaną granicę.", "No answer": "Brak odpowiedzi", "boundary unknown": "granica nieznana", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Brak odpowiedzi: narzędzie TgWitness rejestruje nieudaną weryfikację. Nie jest w stanie określić aktualnego stanu kolektora. Jeśli narzędzie TgWitness nadal ma dostęp do interfejsu API bota, a jego polityka publikacji na to pozwala, może opublikować informację o tej niepowodzeniu.", "Send {n}": "Wyślij {n}", "Edit {n}": "Edytuj {n}", "Delete {n}": "Usuń {n}", "Both accounts captured all six expected observations in this example.": "W tym przykładzie oba opisy uwzględniły wszystkie sześć oczekiwanych obserwacji.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Konto B nadal zarejestrowało 6 z 6 wiadomości. W przypadku dwóch potwierdzeń zajęło to więcej czasu. Wskaźnik przechwycenia i opóźnienie w otrzymaniu potwierdzenia odpowiadają na różne pytania.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Konto B zarejestrowało 5 z 6 zdarzeń przed upływem terminu (83,3%). Brakująca edycja nie wykazuje żadnego zmierzonego opóźnienia. Wynik ten odnosi się wyłącznie do sześciu kontrolowanych działań.", "not observed by cutoff": "nie spełniono wymogu przed upływem terminu", "{s} seconds": "{s} sekund", "Exact values follow in the table.": "Dokładne wartości podano w tabeli.", "{s} s": "{s} s", "Not observed": "Nie zaobserwowano", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Cztery czaty zawierają różne spostrzeżenia. Należy śledzić zapisy źródłowe dla każdego połączenia; nie należy przypisywać wpisu na kanale do użytkownika 71001 bez podania nadawcy.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Zapisy nr 146 i nr 205 zawierają ten sam identyfikator nadawcy: 71001. Pozwala to powiązać zaobserwowane posty z konta Telegram w dwóch różnych czatach. Nie pozwala to jednak na identyfikację konkretnej osoby w świecie rzeczywistym ani na przypisanie autorstwa postu opublikowanego na kanale.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Adres docelowy pay.example.invalid/new pojawia się w zapisie grupy nr 146, wpisie z klawiatury bota nr 173, edycji kanału nr 188 oraz prywatnej wiadomości nr 205. Powtarzający się adres docelowy łączy te materiały; nie dowodzi to jednak wspólnej kontroli nad tymi kontami.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "W tej fikcyjnej sprawie potwierdzenia odbioru multimediów nr 151 i nr 209 mają identyczne pełne wartości SHA-256. Proszę porównać rzeczywiste bajty oraz powiązane z nimi zapisy wiadomości. Zgodny plik nie pozwala zidentyfikować jego twórcy ani ustalić, kto go przesłał.", "the encrypted off-site copy": "zaszyfrowana kopia przechowywana poza serwerem", "notifications": "powiadomienia", "checkpoint hashes for timestamps": "Skróty kontrolne jako znaczniki czasu", "signed checkpoints for the witness": "podpisane punkty kontrolne dla serwisu Witness", "Switched on in this example": "W tym przykładzie włączono tę opcję", "Optional · off by default": "Opcjonalne · domyślnie wyłączone", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Opuszczając to urządzenie: połączenie z Telegramem oraz {list}. Nic więcej.", "Default: only the Telegram connection leaves this machine.": "Ustawienie domyślne: z tego urządzenia wychodzi wyłącznie połączenie z serwisem Telegram.", "{done} of {total} done": "{done} z {total} wykonano", "Mark step {n} as done": "Oznacz krok {n} jako wykonany", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Kopia", "Copied": "Skopiowano", "Command copied.": "Polecenie skopiowano.", "Selected — Ctrl/Cmd+C": "Zaznaczone — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Wybrano polecenie. Proszę skopiować je ręcznie.", "Command copied to clipboard.": "Polecenie skopiowano do schowka.", "Select text": "Zaznacz tekst", "Clipboard unavailable. Command selected; copy it manually.": "Schowek jest niedostępny. Wybrano polecenie; proszę skopiować je ręcznie.", "A message arrives. The first observation is saved.": "Przychodzi wiadomość. Pierwsza obserwacja zostaje zapisana.", "The time changes. Both captured versions stay.": "Czas ulega zmianie. Obie zarejestrowane wersje pozostają zachowane.", "The message disappears. The captured history remains.": "Wiadomość znika. Zachowana historia pozostaje.", "Pause example animation": "Przykładowa animacja z pauzą", "Play example animation": "Odtwórz przykładową animację", "Play": "Odtwórz", "Full-size workspace screenshot": "Zrzut ekranu przedstawiający obszar roboczy w pełnym rozmiarze", "Workspace screenshot · fictional data": "Zrzut ekranu z obszaru roboczego · dane fikcyjne", "Close": "Zamknij", "Close screenshot": "Zamknij zrzut ekranu", "Scrollable full-size screenshot": "Przewijalny zrzut ekranu w pełnym rozmiarze", "Enlarge: {name}": "Powiększ: {name}", "View full size": "Wyświetl w pełnym rozmiarze"}</script>
+</body></html>

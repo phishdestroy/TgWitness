@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="ja" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>アクセスと権限 | TgWitness</title>
+<meta name="description" content="アカウントやチャットへのアクセス範囲を限定し、権限を選択し、セッションやIPアドレスを制限し、アクセス権を取り消すことができます。"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/access/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="アクセスと権限 | TgWitness"><meta property="og:description" content="アカウントやチャットへのアクセス範囲を限定し、権限を選択し、セッションやIPアドレスを制限し、アクセス権を取り消すことができます。">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/ja/docs/reference/access/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/access/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/access/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/access/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/access/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/access/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/access/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/access/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/access/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/access/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/access/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/access/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/access/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/access/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/access/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/access/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/access/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/access/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/access/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/access/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/access/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/access/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/access/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/access/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/access/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/access/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/access/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/ja/docs/reference/access/", "url": "https://phishdestroy.github.io/TgWitness/ja/docs/reference/access/", "name": "アクセスと権限 | TgWitness", "description": "アカウントやチャットへのアクセス範囲を限定し、権限を選択し、セッションやIPアドレスを制限し、アクセス権を取り消すことができます。", "inLanguage": "ja", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://phishdestroy.github.io/TgWitness/ja/"}, {"@type": "ListItem", "position": 2, "name": "ドキュメント", "item": "https://phishdestroy.github.io/TgWitness/ja/docs/"}, {"@type": "ListItem", "position": 3, "name": "参考文献", "item": "https://phishdestroy.github.io/TgWitness/ja/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "アクセスと権限", "item": "https://phishdestroy.github.io/TgWitness/ja/docs/reference/access/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">コンテンツへスキップ</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / ドキュメント</span></a>
+<nav aria-label="ガイド"><a href="../../concepts/">ビジュアルガイド</a><a href="../../">すべてのガイド</a><a href="../">参考文献</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="言語"><span aria-hidden="true">◍</span> 日本語</summary><div class="lang-list"><a href="../../../../docs/reference/access/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/access/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/access/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/access/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/access/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/access/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/access/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/access/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/access/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/access/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/access/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/access/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/access/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/access/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/access/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/access/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/access/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/access/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/access/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/access/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/access/" hreflang="pl" lang="pl">Polski</a><a href="./" hreflang="ja" lang="ja" aria-current="true">日本語</a><a href="../../../../th/docs/reference/access/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/access/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/access/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="ライトテーマとダークテーマを切り替える"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="ガイド"><a href="../../../guides/modes.html">モード、シナリオ、および証拠レベル</a><a href="../../../../sealed.html?lang=en">GitHub Actions で収集（プレビュー）</a><p class="nav-label">はじめに</p><a href="../../start/">数分で始められます</a><a href="../../accounts/">アカウントを連携する</a><a href="../../proxies/">プロキシを選択してください</a><a href="../../exports/">エクスポートと検証</a><p class="nav-label">証拠について理解する</p><a href="../../concepts/">証拠の仕組みをご覧ください</a><a href="../../cases/">すべてのチャットを横断的に調査する</a><a href="../../security/">セキュリティを確保してください</a><p class="nav-label">さらに詳しく</p><a href="../../access/">事例を共有する</a><a href="../../witness/">Witnessボットの設定</a><a href="../../server/">稼働を継続してください</a><a href="../../troubleshooting/">何が問題だったのかを確認する</a></nav><nav class="wiki-nav" aria-label="参考文献"><p class="nav-label"><a class="nav-label-link" href="../">参考文献</a></p><details class="wiki-group" open><summary>セットアップ</summary><a href="../quickstart/">クイックスタート</a><a href="../accounts/">アカウントとセッション形式</a><a href="./" aria-current="page">アクセスと権限</a><a href="../connection/">接続、プロキシ、およびデータ保護</a><a href="../deployment/">導入</a></details><details class="wiki-group"><summary>収集</summary><a href="../collection/">収集の仕組み</a><a href="../operations/">ワークフローと操作方法</a><a href="../investigation/">調査モード</a><a href="../features/">機能と制限事項</a></details><details class="wiki-group"><summary>証拠</summary><a href="../how-it-works/">証拠の仕組み</a><a href="../evidence/">証拠の形式</a><a href="../witness/">独立した証人</a><a href="../timestamp/">タイムスタンプ</a></details><details class="wiki-group"><summary>セキュリティとプロジェクト</summary><a href="../security/">セキュリティおよびデータ取り扱い</a><a href="../architecture/">アーキテクチャ</a><a href="../verification/">テスト済みの内容</a><a href="../license/">ライセンスに関する説明とアーキテクチャ上の非互換性の通知</a><a href="../notice/">オペレーターの非互換性に関する通知</a><a href="../changelog/">変更履歴</a></details></nav><p class="sidebar-note">v0.7.0<br>オープンソース・お使いのマシン上で動作します</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="ガイド"><a href="../../../">ホーム</a> <span aria-hidden="true">/</span> <a href="../../">ドキュメント</a> <span aria-hidden="true">/</span> <a href="../">参考文献</a> <span aria-hidden="true">/</span> <span aria-current="page">アクセスと権限</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">ドキュメントを検索する</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="「プロキシ」、「ハッシュチェーン」、「トークン」、または「ウィットネス」などを試してみてください…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="検索を明確にする" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">ガイドやリファレンスを検索するには、単語を入力してください。検索はブラウザ内で行われます。</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">参考文献 / セットアップ</p><h1>アクセスと権限</h1><p class="guide-outcome">アカウントやチャットへのアクセス範囲を限定し、権限を選択し、セッションやIPアドレスを制限し、アクセス権を取り消すことができます。</p><div class="wiki-body"><p>レビュー担当者には1つのチャットへのアクセス権を、アナリストには案件のエクスポート権限を、
+オペレーターには選択したアカウントの管理権限を付与します。各ユーザーには独自のトークンが割り当てられます。メイン
+パネルのトークンは管理者が保持します。</p>
+<p><a href="../accounts/">アカウントの設定</a> · <a href="../connection/">接続経路</a> · <a href="../security/">セキュリティモデル</a></p>
+<h2 id="two-scopes-two-different-jobs">2つの適用範囲、2つの異なる役割<a class="anchor" href="#two-scopes-two-different-jobs" aria-label="このセクションへのリンク">#</a></h2>
+<p><strong>収集範囲によって</strong>、アカウントが記録する対象（選択したチャット、Telegramの
+フォルダ、またはアカウント全体）が決まります。<strong>アクセス範囲によって、</strong>記録された
+アカウントやチャットのうち、他のユーザーが閲覧・利用できるものが決まります。アクセス権を付与しても、
+Telegramのチャットに参加したり、収集を開始したり、Telegramアカウントの権限が付与されたりすることはありません。</p>
+<p>アクセス権限を設定することで、選択したワークスペース、その中の特定のチャット、またはすべての
+ワークスペースを開くことができます。<strong>すべてのワークスペース（後から追加されたものも含む）は、</strong>将来の
+アカウントにも適用されます。特定のケースを特定のワークスペースに限定する必要がある場合は、そのワークスペースを明示的に選択してください。</p>
+<h2 id="give-someone-access">アクセス権を付与する<a class="anchor" href="#give-someone-access" aria-label="このセクションへのリンク">#</a></h2>
+<ol>
+<li>メイン管理者としてログインし、「<strong>Access」</strong>を開いてください。</li>
+<li>「<strong>アクセス権を付与する」</strong>の項目で、ログ上で識別できる名前を入力してください。</li>
+<li>ワークスペースを選択し、必要に応じて個々のチャットを選択してください。</li>
+<li>この人物が実行しうる行動を選択してください。「<strong>表示」</strong>は常に含まれます。</li>
+<li>必要に応じて、有効期限、ログイン／セッション制限、および許可されるアドレスを設定してください。</li>
+<li><strong>「アクセスを作成」</strong>をクリックしてください。トークンを今すぐコピーしてください。トークンは一度しか表示されません。</li>
+<li>パネルアドレスとトークンを非公開で送信してください。受信者は、通常のサインインページでそのトークンを入力します。
+    あなたのメインパネルトークンやTelegramのセッションは必要ありません。</li>
+</ol>
+<p>発行されたトークンが表示されたパネルを別のブラウザセッションで開き、
+表示されているチャットや許可されている操作を確認してから、相手にお渡しください。</p>
+<h2 id="choose-the-permissions">権限を選択してください<a class="anchor" href="#choose-the-permissions" aria-label="このセクションへのリンク">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>利用許諾</th>
+<th>本ツールの機能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>view</code></td>
+<td>閲覧可能なチャット、キャプチャされたメッセージ、プロフィール、ファイル、およびフィルタリングされたジャーナル記録をご確認いただけます。これらは常に含まれています。</td>
+</tr>
+<tr>
+<td><code>export</code></td>
+<td>許可されたチャット履歴および資料をエクスポートできます。ワークスペース全体の証拠データをエクスポートするには、そのワークスペース全体へのアクセス権が必要です。</td>
+</tr>
+<tr>
+<td><code>sources</code></td>
+<td>ソース、スナップショット、プロファイルの取得を管理します。チャット限定のアクセス権限では、許可されたチャットに対してのみ操作が可能であり、アカウント全体のソース検出およびスコープ設定は非公開のままとなります。</td>
+</tr>
+<tr>
+<td><code>collect</code></td>
+<td>コレクターの起動または停止を行います。収集操作はアカウントに影響を与えるため、ワークスペース全体へのアクセス権が必要です。</td>
+</tr>
+<tr>
+<td><code>interact</code></td>
+<td>アクセス範囲内で、サポートされているTelegramの操作を行ってください。「チャット限定」のアクセス権限では、アカウント全体のリンクプレビュー機能はご利用いただけません。</td>
+</tr>
+<tr>
+<td><code>settings</code></td>
+<td>収集設定、タイムスタンプ、通知、オフサイトコピー、およびパラメータを変更できます。ワークスペース全体へのアクセス権が必要です。</td>
+</tr>
+<tr>
+<td><code>account</code></td>
+<td>Telegramへのログインおよびログアウト、接続経路の管理が可能です。ワークスペース全体へのアクセス権が必要です。</td>
+</tr>
+</tbody>
+</table></div>
+<p>権限と適用範囲は同時に確認されます。権限にチェックを入れても、
+チャット限定のアクセス権の場合、他のチャットが開かれたり、ワークスペース全体での操作が可能になったりすることはありません。
+並行してエクスポートを行う場合、アクセス権限は、選択されたすべての
+アカウントにおいて、エクスポート対象のチャットをカバーしている必要があります。付与されたアクセス権限では、新しいアクセス権限の作成、他者の
+セッションの管理、または管理者コンソールの起動は行えません。</p>
+<h3 id="three-useful-setups">3つの便利な設定方法<a class="anchor" href="#three-useful-setups" aria-label="このセクションへのリンク">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>人物</th>
+<th>範囲</th>
+<th>権限</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>レビュー担当者</td>
+<td>ある事例の記録されたチャット</td>
+<td><code>view</code></td>
+</tr>
+<tr>
+<td>引き継ぎの準備を行うアナリスト</td>
+<td>調査およびエクスポート対象のチャット</td>
+<td><code>view</code>、<code>export</code>；Telegramを通じて対応する必要がある場合にのみ、<code>interact</code>を追加してください。</td>
+</tr>
+<tr>
+<td>収集オペレーター</td>
+<td>選択されたワークスペース全体</td>
+<td><code>view</code>、<code>sources</code>、<code>collect</code>。<code>settings</code>または<code>account</code>は、必要な場合にのみ追加してください。</td>
+</tr>
+</tbody>
+</table></div>
+<p>これらは、権限チェックボックスで設定する例であり、固定された役割ではありません。</p>
+<h2 id="limits-and-sessions">制限とセッション<a class="anchor" href="#limits-and-sessions" aria-label="このセクションへのリンク">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>設定</th>
+<th>仕組み</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>並行セッション</td>
+<td>同時接続セッション数を1～100に制限します。上限に達した場合は、次のログインを拒否するか、最も古いセッションを終了します。</td>
+</tr>
+<tr>
+<td>ログインが可能です</td>
+<td>トークンを使用してセッションを開始できる回数を制限します。許可された最後のログインが使用されたからといって、既存のセッションが終了することはありません。</td>
+</tr>
+<tr>
+<td>有効期限：</td>
+<td>アクセス権には絶対的な有効期限が設定されています。有効期限が切れたアクセス権では、ログインやリクエストの継続はできません。</td>
+</tr>
+<tr>
+<td>一定時間操作がない場合の記録</td>
+<td>セッションの非アクティブ状態によるタイムアウトは、5分から30日まで設定可能です。リクエストが成功するとタイムアウト時間が延長されます。また、開いているパネルはポーリングを行うことで、アクティブ状態を維持することができます。</td>
+</tr>
+<tr>
+<td>許可されたアドレス</td>
+<td>特定のIPアドレスまたはCIDRサブネットを受け入れます。「first-sign-in binding」が有効になっていない限り、空欄のままにするとすべてのアドレスを受け入れます。</td>
+</tr>
+<tr>
+<td>初回ログイン時に紐付ける</td>
+<td>初回ログインに成功すると、そのアクセスに対する許可済みアドレスが確定します。</td>
+</tr>
+</tbody>
+</table></div>
+<p>IPアドレスとは、アプリケーションから認識されるクライアントのアドレスを指します。リバースプロキシや
+トンネルの背後にある場合は、IPルールに依存する前に「<strong>開いているセッション」</strong>に表示されるアドレスを確認してください。
+そうしないと、複数のユーザーがプロキシのアドレスを共有しているように見える可能性があります。</p>
+<h2 id="change-or-withdraw-access">アクセスの変更または取り消し<a class="anchor" href="#change-or-withdraw-access" aria-label="このセクションへのリンク">#</a></h2>
+<p><strong>「アクセス」</strong>の下にあるエントリを編集して、その適用範囲、権限、または制限を変更してください。
+適用範囲および権限の変更は、その後のリクエスト（すでに開かれているセッションからのリクエストを含みます）において確認されます。
+アクセス権を取り消すと、そのセッションは終了し、
+発行されたトークンは使用できなくなります。また、<strong>開かれているセッションについては、</strong>管理者が
+アクセス権全体を取り消すことなく、個々のセッションを終了させることも可能です。</p>
+<p>アクセス権の取り消しを行っても、すでに誰かがダウンロードしたファイルを復元することはできません。ログアウト、
+パネルのロック、またはセッションの終了を行っても、実行中のコレクターは停止しません。</p>
+<h2 id="what-the-administrator-can-see">管理者が確認できる内容<a class="anchor" href="#what-the-administrator-can-see" aria-label="このセクションへのリンク">#</a></h2>
+<p><strong>この開始以降のログには</strong>、プロセスログとすべての
+ワークスペースからのジャーナルアクティビティ（ログイン、拒否、経路変更、オペレーターの操作など）が組み合わされています。これは、
+現在のプロセス用のインメモリコンソールであり、すべてのメッセージの恒久的なコピーではありません。
+頻繁に発生するメッセージイベントは、コンソールを埋めることなく、ジャーナルに保存されます。</p>
+<p>アクセス権の付与、変更、取り消し、およびセッションの開始・終了の際にも、
+署名付き<code>access.*</code>ジャーナル記録が生成されます。これらの記録にはトークンは含まれません。
+発行されたトークンおよびセッション認証情報は、ハッシュ化された状態で暗号化された保管庫に保持されます。</p>
+<details>
+<summary><strong>メイン管理者および信頼境界</strong></summary>
+
+メインパネルのトークンには制限が設けられていません。このトークンを使用してブラウザでログインすると、
+管理者が設定したセッション制限の対象となるセッションが作成されます。
+メイントークンを直接送信するスクリプトは、完全なアクセス権を維持し、ブラウザセッションとしてカウントされません。
+
+これは、単一のインストール環境におけるアプリケーションレベルのアクセス制御です。すべてのワークスペースは
+サーバープロセスを共有しており、ホスト管理者からの隔離は行われていません。メイントークン、
+Telegramセッション、署名鍵、およびデータディレクトリは、機密として厳重に管理してください。ウィットネストークンは
+、パネルアクセストークンではなく、独立したチェックポイント／健全性確認用の認証情報です。
+
+</details></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCESS.md">GitHubでこのページを編集する ↗</a><a class="next-guide" href="../connection/"><span>次のステップ</span><strong>接続、プロキシ、およびデータ保護 →</strong></a><p>これらのガイドは、現在の実装について説明しています。検証結果および残された課題については、別途文書化されています。 <a href="../verification/">テスト済みの内容 →</a></p></footer>
+</main>
+<aside class="toc" aria-label="このページについて"><p class="nav-label">このページについて</p><a href="#two-scopes-two-different-jobs">2つの適用範囲、2つの異なる役割</a><a href="#give-someone-access">アクセス権を付与する</a><a href="#choose-the-permissions">権限を選択してください</a><a href="#limits-and-sessions">制限とセッション</a><a href="#change-or-withdraw-access">アクセスの変更または取り消し</a><a href="#what-the-administrator-can-see">管理者が確認できる内容</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>オープンソース・お使いのマシン上で動作します</span><a href="../../../../LICENSE">MITライセンス</a><a href="../notice/">オペレーター向け通知</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">セキュリティ</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "メッセージをお待ちしています", "Step through a fictional send, edit and delete.": "架空の送信、編集、削除のプロセスを順を追ってご説明します。", "No observations yet. Start the sequence or advance one event.": "まだ観察結果はありません。シーケンスを開始するか、1件先へ進めてください。", "Meet at 10:00": "10:00に集合してください。", "A new message is visible in the chat.": "チャットに新しいメッセージが表示されています。", "Record 1 appended: the collector observed the original message.": "記録1が追加されました：コレクターが元のメッセージを確認しました。", "Meet at 11:00": "11:00にお会いしましょう", "The current text changes. The earlier observation stays.": "現在のテキストは変更されます。以前の指摘はそのまま残ります。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "レコード2が追加されました：この編集は新たな観察結果です。レコード1には依然として元のテキストが保持されています。", "Message deleted": "メッセージが削除されました", "The message has disappeared from the chat view.": "そのメッセージはチャット画面から消えました。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "「Record 3」を追加しました：削除通知は、確認された両方のバージョンとともに保持されます。", "0 records": "0件の記録", "1 record": "1件の記録", "2 records": "2件の記録", "3 records": "3件の記録", "Complete / {n} of 3": "完了 / 3件中{n}件", "Step / {n} of 3": "ステップ / 3のうち{n}", "Pause": "一時停止", "Replay sequence": "再生シーケンス", "Play sequence": "再生順序", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "静的なサンプルが利用可能です。ハッシュをインタラクティブに計算するには、HTTPS経由でこのページを開くか、Web Cryptoをサポートするローカルホストのプレビューを開いてください。", "No record supplied": "記録は提供されていません", "Tail removed": "末尾を削除しました", "≠ saved hash": "≠ 保存されたハッシュ", "Rebuilt · different hash": "再構築済み・ハッシュ値が異なります", "= saved hash": "= 保存されたハッシュ", "Same length and matching head.": "同じ長さで、見出しも一致しています。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "計算された3つのハッシュ値はすべて、保存されているハッシュ値と一致しています。このサンプルは、保持されている3レコード単位の境界と一致しています。", "Same saved head; the journal prefix fails verification.": "保存されたヘッダーは同じですが、ジャーナルのプレフィックスが検証に失敗しました。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "レコード2は、保存されているハッシュと一致しなくなりました。最後に保存されたヘッドのみを確認していた場合、この不一致を見逃してしまいます。検証ツールはすべてのレコードを確認します。", "Head differs from the retained checkpoint.": "ヘッダーは、保持されているチェックポイントとは異なります。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "再構築されたハッシュは相互にリンクしていますが、最終ヘッドが変更されています。保持されているチェックポイントは、この履歴を拒否します。変更されたレコードに対しては、元の署名も検証に失敗します。", "Too short: 2 supplied records \u003c 3 retained records.": "記録数が少なすぎます：提供された記録が2件、保存された記録が3件未満です。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "残りの2つのハッシュは依然として一致しています。保持されているチェックポイントにより、欠落していた末尾部分が明らかになりました。その以前の境界情報がなければ、この短いプレフィックスだけでは欠落に気づくことはできなかったでしょう。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "このブラウザではハッシュ計算をご利用いただけません。以下の数式および説明文は引き続きご覧いただけます。", "{n} records": "{n}件の記録", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "承認済み：カウントが増加し、署名が検証され、鍵が一致しました。Witnessはこの新しい境界を保持します。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "ロールバック：署名付き回答で報告されたレコード数が、最後に承認されたチェックポイントのレコード数よりも少ない場合。Witnessはこの問題を記録し、以前に承認された境界を維持します。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "フォーク：カウントは変わりませんが、ヘッドが異なります。ウィットネスはこの不一致を記録し、以前に承認された境界を維持します。", "No answer": "回答なし", "boundary unknown": "境界不明", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "応答なし：Witnessはチェックの失敗を記録します。コレクターの現在の状態を特定することはできません。Witnessが依然としてBot APIにアクセスでき、かつ公開ポリシーが許可している場合、その失敗を公開することができます。", "Send {n}": "{n} を送信", "Edit {n}": "編集 {n}", "Delete {n}": "{n}を削除", "Both accounts captured all six expected observations in this example.": "この例では、両方のアカウントとも、想定されていた6つの観測項目すべてを捕捉しました。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "アカウントBでも6件中6件を正常に取得できました。2件の受信確認には時間がかかりました。取得率と受信確認の遅延は、それぞれ異なる問題を示しています。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "アカウントBは、締め切り時点までに6件中5件を捕捉しました（83.3％）。捕捉されなかった編集操作については、測定された遅延はありません。この結果は、6件の制御された操作についてのみ記述したものです。", "not observed by cutoff": "締め切りまでに確認されませんでした", "{s} seconds": "{s}秒", "Exact values follow in the table.": "具体的な数値は表に示されています。", "{s} s": "{s} s", "Not observed": "確認されませんでした", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "4つのチャットから、それぞれ異なる観察結果が得られています。すべての接続について、元の記録を追跡してください。送信者が特定されていない限り、チャンネルへの投稿をユーザー71001に割り当てないでください。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "記録#146と#205には、同じ送信者ID「71001」が記載されています。これにより、2つのチャットにまたがるTelegramアカウントの投稿が関連付けられます。ただし、実在の人物を特定したり、チャンネルへの投稿の作者を特定したりするものではありません。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "宛先「pay.example.invalid/new」は、グループ記録#146、ボットキーボード#173、チャンネル編集#188、およびプライベートメッセージ#205に登場します。宛先が繰り返し登場することは、これらの資料を結びつける要素ではありますが、それらのアカウントが共通の管理下にあることを証明するものではありません。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "この架空の事例において、完了済みのメディア受信記録 #151 と #209 は、完全な SHA-256 値が一致しています。実際のバイトデータと、それに関連するメッセージ記録を比較してください。一致したファイルからは、作成者が特定されることも、誰が転送したかを証明することもできません。", "the encrypted off-site copy": "暗号化されたオフサイトコピー", "notifications": "通知", "checkpoint hashes for timestamps": "タイムスタンプ用のチェックポイントハッシュ", "signed checkpoints for the witness": "Witness用の署名付きチェックポイント", "Switched on in this example": "この例では有効になっています", "Optional · off by default": "オプション・デフォルトではオフ", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "このマシンから削除されるもの：Telegramの接続情報と{list}。それ以外は一切ありません。", "Default: only the Telegram connection leaves this machine.": "デフォルト設定：Telegramへの接続のみがこのマシンから行われます。", "{done} of {total} done": "{done}/{total} 完了", "Mark step {n} as done": "ステップ{n}を「完了」としてマークする", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "コピー", "Copied": "コピー", "Command copied.": "コマンドをコピーしました。", "Selected — Ctrl/Cmd+C": "選択 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "コマンドが選択されました。手動でコピーしてください。", "Command copied to clipboard.": "コマンドがクリップボードにコピーされました。", "Select text": "テキストを選択", "Clipboard unavailable. Command selected; copy it manually.": "クリップボードが利用できません。コマンドが選択されています。手動でコピーしてください。", "A message arrives. The first observation is saved.": "メッセージが届きました。最初の記録が保存されました。", "The time changes. Both captured versions stay.": "時刻は変更されますが、キャプチャされた両方のバージョンはそのまま残ります。", "The message disappears. The captured history remains.": "メッセージは消えても、記録された履歴は残ります。", "Pause example animation": "アニメーションの一時停止例", "Play example animation": "サンプルアニメーションを再生する", "Play": "再生", "Full-size workspace screenshot": "ワークスペースのフルサイズスクリーンショット", "Workspace screenshot · fictional data": "ワークスペースのスクリーンショット・架空のデータ", "Close": "閉じる", "Close screenshot": "スクリーンショットを閉じる", "Scrollable full-size screenshot": "スクロール可能なフルサイズのスクリーンショット", "Enlarge: {name}": "拡大：{name}", "View full size": "フルサイズで表示"}</script>
+</body></html>
