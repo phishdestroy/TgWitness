@@ -698,7 +698,7 @@ def main():
             page.locator('[data-view="connection"]').click()
             page.locator('[data-auth-method="files"]').click()
             session_path = run / "synthetic.tgwitness-session"
-            session_path.write_text(saved_session(), encoding="ascii")
+            session_path.write_text(saved_session(b"y"), encoding="ascii")  # another account, another key
             page.locator("#session-file").set_input_files(session_path)
 
             started = time.monotonic()
