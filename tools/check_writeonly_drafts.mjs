@@ -55,4 +55,23 @@ secret.value='current-workspace-draft';
 controls.clearSubmitted(stale,[secret.id]);controls.accepted(stale);discard();
 assert.equal(secret.value,'current-workspace-draft','Old replies cannot clear or restore another workspace draft.');
 controls.destroy();
+// Destination helpers have their own Add action and disappear when the service changes.
+// They must not leave removed controls in the saved form's Discard baseline.
+const destination=new Element();destination.id='alert-destinations';
+const helper=new Element();helper.id='alert-builder-token';
+helper.closest=selector=>selector==='.alerts-builder'?{}:null;
+const alerts=new Element();alerts.id='alerts-form';alerts.fields=[destination,helper];
+const alertControls=createFormControls({forms:[{form:alerts,setDirty:()=>{}}],roots:[],
+  tr:text=>text,getSession:()=>session,toast:()=>{}});
+alertControls.loaded(alerts.id);
+helper.value='draft-destination-token';
+assert.equal(alertControls.changed(alertControls.capture(alerts.id)),false);
+const beforeRemoval=alertControls.capture(alerts.id);
+alerts.fields=[destination];
+assert.equal(alertControls.changed(beforeRemoval),false,'Removing helper fields must not dirty the saved form.');
+destination.value='changed';
+alerts.children[0].children[2].dispatchEvent(new Event('click'));
+assert.equal(destination.value,'');
+assert.equal(alerts.dataset.dirty,'false','Discard must leave no phantom helper changes.');
+alertControls.destroy();
 console.log('Write-only fields preserve newer drafts and discard to an empty baseline; stale replies are ignored.');

@@ -1,7 +1,8 @@
 /** Local drafts only: no storage, credentials, or automatic writes. */
 export function createFormControls({forms, roots, tr, getSession, toast}) {
   const records=new Map(), listeners=new AbortController(), signal=listeners.signal;
-  const fields=form=>[...form.querySelectorAll('input,textarea,select')].filter(field=>field.type!=='file'&&field.id);
+  const fields=form=>[...form.querySelectorAll('input,textarea,select')].filter(field=>
+    field.type!=='file'&&field.id&&!field.closest('.alerts-builder'));
   const read=field=>['checkbox','radio'].includes(field.type)?field.checked:field.value;
   const snapshot=form=>new Map(fields(form).map(field=>[field.id,read(field)]));
   const different=(a,b)=>[...new Set([...a.keys(),...b.keys()])].filter(key=>a.get(key)!==b.get(key)).length;
