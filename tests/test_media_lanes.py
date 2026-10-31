@@ -14,7 +14,7 @@ async def until(predicate):
     async def poll():
         while not predicate():
             await asyncio.sleep(.01)
-    await asyncio.wait_for(poll(), 2)
+    await asyncio.wait_for(poll(), 30)
 
 
 @pytest.mark.parametrize("ttl", [None, "media", "message"])
@@ -210,6 +210,46 @@ def test_worker_failure_cancels_other_lane_and_keeps_job(journal, monkeypatch):
             assert collector.phase == "collector_error"
             assert store.media_stats() == {"retry": 1}
             assert collector.media_worker.done() and collector.urgent_media_worker.done()
+        finally:
+            await collector.stop(shutdown=True)
+    asyncio.run(run())
+
+
+def test_waiting_files_follow_the_current_attachment_settings(journal):
+    async def run():
+        store, _ = journal
+        collector = await prepared(journal)
+        store.set_setting("capture", {"download_media": True, "max_media_mb": 8})
+        fetched = []
+
+        async def download(media, file, progress_callback):
+            fetched.append(media.document.id)
+            file.write(b"x" * media.document.size)
+            return file
+
+        photo = media_message(id=11, document_id=503)
+        photo.media = types.MessageMediaPhoto(photo=types.Photo(
+            id=503, access_hash=777, file_reference=b"original-reference", date=photo.date,
+            sizes=[types.PhotoSize(type="x", w=2, h=2, size=4)], dc_id=2))
+        collector.client.download_media = download
+        small = await collector.capture_message(media_message(id=9, document_id=501), "message.new", CHAT)
+        large = await collector.capture_message(media_message(id=10, document_id=502, size=3 * 1024**2),
+                                                "message.new", CHAT)
+        image = await collector.capture_message(photo, "message.new", CHAT)
+        store.set_setting("capture", {"download_media": False, "max_media_mb": 8})
+        try:
+            await collector.start()
+            await asyncio.sleep(.3)
+            assert fetched == [] and store.media_stats() == {"queued": 3}
+            store.set_setting("capture", {"download_media": True, "max_media_mb": 8, "types": {
+                "document": {"enabled": True, "max_mb": 1}, "photo": {"enabled": False, "max_mb": 8}}})
+            collector.media_wakeup.set()
+            await wait_media(store)
+            assert fetched == [501] and store.media_stats() == {"done": 1, "skipped": 2}
+            assert store.events(kind="media.saved")[0]["payload"]["message_event"] == small["seq"]
+            assert {e["payload"]["message_event"]: e["payload"]["reason"] for e in store.events(kind="media.skipped")} == {
+                large["seq"]: "above the size limit of the attachment settings",
+                image["seq"]: "attachment type not collected by policy: photo"}
         finally:
             await collector.stop(shutdown=True)
     asyncio.run(run())

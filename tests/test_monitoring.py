@@ -7,7 +7,7 @@ from telethon.tl import types
 
 from tgwitness.app import create_app
 from tgwitness.collector import Collector
-from tgwitness.monitoring import Monitoring
+from tgwitness.monitoring import Monitoring, capture_settings
 from tgwitness.verify import verify_events
 from test_collector import CHAT, FakeClient, telegram_message, saved_session
 
@@ -113,3 +113,16 @@ def test_local_demo_entry_is_scoped_and_never_discloses_master_token(tmp_path, m
         assert c.get("/api/demo-access").json() == {"available":False}
     with TestClient(create_app(tmp_path / "demo"),base_url="http://127.0.0.1",client=("127.0.0.1",50123)) as c:
         assert c.get("/api/demo-access").json() == {"available":False}
+
+
+def test_gifs_and_stickers_stay_off_until_turned_on(journal):
+    store, _ = journal
+    for saved in (None, {"download_media": True, "max_media_mb": 30}):
+        if saved:
+            store.set_setting("capture", saved)
+        rules = capture_settings(store)["types"]
+        assert [kind for kind, rule in rules.items() if not rule["enabled"]] == ["animation", "sticker"]
+    assert {rule["max_mb"] for rule in rules.values()} == {30}
+    store.set_setting("capture", {"download_media": True, "max_media_mb": 30,
+                                  "types": {"sticker": {"enabled": True, "max_mb": 2}}})
+    assert capture_settings(store)["types"]["sticker"] == {"enabled": True, "max_mb": 2}
