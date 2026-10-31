@@ -80,7 +80,13 @@ In der Demo sind die Benachrichtigungssteuerelemente sichtbar, das Versenden ist
 
 **Das Protokoll** zeigt Beobachtungen, Suchfunktionen und Filter an. Bei einer Bearbeitung werden die erfassten Versionen angezeigt; bei einer Löschung wird der vorherige Inhalt angezeigt, sofern verfügbar. Unbekannte Quellenangaben bleiben ausdrücklich gekennzeichnet. Zahlenangaben sind unter **„Übersicht“** verfügbar; Details zur Erfassung verbleiben im lokalen Leitfaden.
 
+Öffnen Sie eine bearbeitete Nachricht, um ihre Versionen über **Änderungen im Text** oder **Nebeneinander** zu vergleichen; **Rohdaten** zeigt die gespeicherten Felder an. Änderungen an versteckten Links und Bot-Schaltflächen werden separat angezeigt. Öffnen Sie eine Anhangsvorschau, um gespeicherte Bilder, Audio- oder Videodateien zu prüfen; über die Download-Schaltfläche bleibt das gesicherte Original verfügbar.
+
+**Live** aktualisiert das Journal und die Chats, sobald Datensätze eintreffen. Pausieren Sie es während der Überprüfung oder nutzen Sie die Schaltfläche für neue Ereignisse, wenn Sie bereit sind; die Erfassung läuft im Hintergrund weiter. **Ctrl/Cmd+K** findet Panel-Aktionen und durchsucht das Journal.
+
 **Der Bereich „Quellen“** umfasst den Überwachungsumfang (ausgewählte Chats, einen Telegram-Ordner oder das gesamte Konto), zugängliche Chats aller Art, ausgewählte Quellen mit Prioritätssternen, Einstellungen für Anhänge und Nachprüfungen sowie Momentaufnahmen des Verlaufs. Private Quellen werden anhand des Dialogs/der ID ohne öffentlichen Link ausgewählt. Der Zugriffsstatus beschreibt die letzte Überprüfung, nicht dauerhafte Berechtigungen.
+
+Filtern Sie Quellen, aktivieren Sie deren Kontrollkästchen und aktivieren, pausieren oder markieren Sie sie anschließend gemeinsam als prioritär. In der Liste der verfügbaren Chats verwendet **Ausgewählte hinzufügen** Ihre Auswahl; **Alle Treffer hinzufügen** nutzt die aktuelle Suche und den Typfilter.
 
 Unter **„Chats → Personen“** werden alle Personen mit gespeicherten Nachrichten aufgelistet; sind die Personenprofile für den Chat aktiviert, öffnet ein Klick das Profil der jeweiligen Person mit Links zu den Protokollen.
 

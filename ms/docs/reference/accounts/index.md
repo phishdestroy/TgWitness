@@ -211,7 +211,7 @@ Contoh pertama hanya mengisi kelayakan API; log masuk melalui telefon atau QR, a
 | **Rentetan** sesi Pyrogram | Gunakan fail Pyrogram `.session`, atau telefon/QR |
 | TData dengan beberapa akaun yang log masuk | Log keluar akaun lain dalam Telegram Desktop, atau gunakan fail sesi setiap akaun |
 | Token bot | Tidak disokong: TgWitness memerhati sebagai akaun pengguna |
-| Senarai CSV/JSON bagi banyak akaun | Tambah satu ruang kerja bagi setiap akaun |
+| Senarai CSV/JSON bagi banyak akaun | Import fail sesi yang disokong melalui **Akaun → Import akaun**, atau log masuk menggunakan telefon/QR dalam ruang kerja yang berasingan |
 | Sesi Test-DC atau bot | Gunakan akaun pengguna produksi |
 
 ## Beberapa akaun

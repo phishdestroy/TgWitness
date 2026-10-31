@@ -63,11 +63,17 @@ a los que tienen acceso sus cuentas. Se ejecuta localmente con su propio directo
 </tr>
 </tbody>
 </table></div>
-<p>Para obtener el código fuente, descargue y extraiga el archivo ZIP de GitHub Releases o clone
-el repositorio. «<code>Start.cmd</code>» le ofrece instalar Python 3.12 en su sistema Windows si no
-se encuentra una versión adecuada de Python (winget o el instalador firmado de python.org). <code>start.sh</code> muestra
+<p>Para los métodos desde el código fuente, <a href="https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip">descargue y extraiga la rama <code>main</code> actual</a>
+o clone el repositorio:</p>
+<pre><code class="language-sh">git clone https://github.com/phishdestroy/TgWitness.git
+cd TgWitness</code></pre>
+<p>El código fuente actual incluye la importación de cuentas por lotes, el panel de MTProxy y la carga de historial
+reanudable. La versión preliminar portátil 0.7.0 y el archivo de código fuente de su lanzamiento son anteriores a
+estas incorporaciones. Consulte <a href="../changelog/">el registro de cambios</a> para ver los límites entre versiones.</p>
+<p><code>Start.cmd</code> ofrece instalar Python 3.12 para su usuario de Windows si no se encuentra un Python
+adecuado (mediante winget o el instalador firmado de python.org). <code>start.sh</code> muestra
 el comando de instalación exacto para su distribución de Linux o macOS si falta Python.
-La primera ejecución del código fuente crea <code>.venv</code> e instala las dependencias automáticamente.</p>
+El primer inicio desde el código fuente crea <code>.venv</code> e instala las dependencias automáticamente.</p>
 <p>Docker compila la aplicación y la inicia en segundo plano; no es
 necesario un servidor Python. <code>scripts\Docker.cmd</code> y <code>scripts/docker-start.sh</code> muestran la dirección del panel y el token cuando
 el contenedor funciona correctamente. Los comandos de Docker equivalentes en todos los hosts compatibles son:</p>
@@ -120,11 +126,15 @@ El buen funcionamiento de la prueba depende de Telegram, no de TgWitness, y no g
 </ol>
 <p>Las credenciales de la API identifican su aplicación; por sí solas, no autorizan una cuenta.
 Los grupos privados no necesitan un nombre de usuario público, pero su cuenta debe tener acceso.</p>
-<p>Para las cuentas existentes, consulte <a href="../accounts/">los formatos de cuentas y sesiones</a>: el
-panel admite Telethon StringSession, Telethon/Pyrogram SQLite, TData
-ZIP de una sola cuenta y JSON de cuentas compatibles. Seleccione una sesión y su archivo JSON correspondiente,
-y pulse <strong>«Conectar cuenta</strong>». El inicio de sesión mediante código QR también
-está disponible con la misma configuración opcional de la API. No se admiten TDLib, bots ni listas de cuentas masivas.</p>
+<p>Para cuentas existentes, consulte <a href="../accounts/">cuentas y formatos de sesión</a>: el
+panel acepta StringSession de Telethon, SQLite de Telethon/Pyrogram, ZIP de TData de una sola cuenta
+y archivos JSON de cuenta compatibles. Seleccione una sesión y su JSON complementario juntos,
+y pulse <strong>Conectar cuenta</strong>. El inicio de sesión por QR también está
+disponible con los mismos ajustes opcionales de API. No se admiten TDLib, sesiones de bots ni inventarios
+de cuentas en CSV/JSON.</p>
+<p>Para varias cuentas, use <strong>Cuentas → Importar cuentas</strong> y seleccione sus archivos de sesión
+compatibles. Los archivos JSON complementarios se emparejan por su nombre base; cada cuenta importada
+obtiene su propio espacio de trabajo. Consulte <a href="../accounts/#bulk-import-and-account-groups">importación masiva y grupos de cuentas</a>.</p>
 <p>Para añadir otra cuenta, pulse <strong>+</strong> junto al selector de cuentas o abra
 <strong>Cuenta → Ajustes → Ajustes de conexión → Espacios de trabajo</strong>, o utilice <strong>Cuentas</strong>. Los espacios de trabajo tienen sesiones,
 registros, claves, fuentes y colas independientes. Al cambiar de vista, los demás recopiladores siguen en funcionamiento.

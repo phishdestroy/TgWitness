@@ -21,7 +21,16 @@ TgWitness 是一款用於監控您帳戶可存取之 Telegram 群組與頻道的
 | Windows | 從 GitHub Releases 中提取 `TgWitness-<version>-windows-amd64-portable.zip`，雙擊 `TgWitness.cmd` | 雙擊 `Start.cmd` | 雙擊 `scripts\Docker.cmd` |
 | Linux / macOS | — | `sh start.sh` | `sh scripts/docker-start.sh` |
 
-若需取得原始碼，請從 GitHub Releases 下載並解壓縮原始碼 ZIP 檔，或克隆 該儲存庫。若未找到合適的 Python 版本（winget 或 python.org 的簽名安裝程式），`Start.cmd` 會為您的 Windows 使用者安裝 Python 3.12。 若缺少 Python，`start.sh` 會 輸出適用於您所使用之 Linux 發行版或 macOS 的精確安裝指令。 首次執行原始碼時，系統會自動建立 `.venv` 並安裝所需依賴項。
+若採用原始碼方式，請[下載並解壓縮目前的 `main`](https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip)，或複製儲存庫：
+
+```
+git clone https://github.com/phishdestroy/TgWitness.git
+cd TgWitness
+```
+
+目前的原始碼包含批次匯入帳戶、MTProxy 儀表板，以及可續傳的歷史記錄載入功能。0.7.0 免安裝預覽版及其發行版原始碼壓縮檔早於這些新增功能。請參閱[更新日誌](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/changelog/)以了解版本差異。
+
+如果找不到合適的 Python，`Start.cmd` 會提議為您的 Windows 使用者安裝 Python 3.12（透過 winget 或經過簽署的 python.org 安裝程式）。若缺少 Python，`start.sh` 會印出適用於您的 Linux 發行版或 macOS 的確切安裝指令。首次從原始碼啟動時，會自動建立 `.venv` 並安裝相依套件。
 
 Docker 會編譯應用程式並在背景中啟動它；無需主機端的 Python 環境。 當容器運作正常時，`scripts\Docker.cmd` 和 `scripts/docker-start.sh` 會輸出控制面板位址與代幣。 在所有受支援的主機上，對應的 Docker 指令如下：
 
@@ -57,7 +66,9 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 API 憑證用於識別您的應用程式；它們本身並不會 授權任何帳戶。私人群組無需公開使用者名稱，但您的帳戶必須具備存取權限。
 
-關於現有帳戶，請參閱[帳戶與會話格式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/accounts/)：本 面板支援 Telethon StringSession、Telethon/Pyrogram SQLite、單一帳戶 TData ZIP 以及受支援的帳戶 JSON 格式。請同時選取會話及其對應的 JSON 檔案， 按下**「連線帳戶」**。亦可透過 QR 碼登入， 並採用相同的可選 API 設定。 TDLib、機器人及批量帳戶清單均不支援。
+對於現有帳戶，請參閱[帳戶與工作階段格式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/accounts/)：面板接受 Telethon StringSession、Telethon/Pyrogram SQLite、單一帳戶 TData ZIP，以及受支援的帳戶 JSON。請同時選取工作階段及其隨附的 JSON，然後按下**連結帳戶**。也可以使用相同的選用 API 設定進行 QR 碼登入。不支援 TDLib、機器人工作階段，以及 CSV/JSON 帳戶清單。
+
+若有多個帳戶，請使用**帳戶 → 匯入帳戶**並選取其受支援的工作階段檔案。隨附的 JSON 檔案會依主檔名自動配對；每個匯入的帳戶都會獲得各自的工作區。請參閱[大量匯入與帳戶群組](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/accounts/#bulk-import-and-account-groups)。
 
 若要新增另一個帳戶，請按帳戶選擇器旁的 **+**，或開啟 **「帳戶」→「設定」→「連線設定」→「工作區」**，亦可使用**「帳戶」功能**。各工作區擁有獨立的會話、 日誌、金鑰、來源及佇列。切換檢視畫面時，其他資料擷取程式仍會繼續執行。 在此安裝環境中，同一個 Telegram 帳戶無法指派給兩個工作區。 工作區數量沒有限制；由於它們共用同一個程序，因此容量取決於電腦的效能。
 

@@ -211,7 +211,7 @@ Hem takma ad hem de asıl ad mevcutsa, bunlar birbiriyle uyumlu olmalıdır. Ör
 | Pyrogram oturum **dizeleri** | Pyrogram `.session` dosyasını veya telefon/QR kodunu kullanın |
 | Birkaç oturum açılmış hesap içeren TData | Telegram Desktop'taki diğer hesaplardan çıkış yapın veya her hesabın kendi oturum dosyasını kullanın |
 | Bot jetonları | Desteklenmez: TgWitness, bir kullanıcı hesabı olarak gözlem yapar |
-| Çok sayıda hesabın CSV/JSON listeleri | Hesap başına bir çalışma alanı ekleyin |
+| Çok sayıda hesabın CSV/JSON listeleri | Desteklenen oturum dosyalarını **Hesaplar → Hesapları içe aktar** üzerinden içe aktarın veya ayrı çalışma alanlarında telefon/QR ile giriş yapın |
 | Test-DC veya bot oturumları | Üretim kullanıcı hesabı kullanın |
 
 ## Birden fazla hesap

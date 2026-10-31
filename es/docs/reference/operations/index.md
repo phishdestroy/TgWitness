@@ -80,7 +80,13 @@ En la demostración, los controles de notificación están visibles, pero el env
 
 **El registro** muestra observaciones, búsquedas y filtros. Al editar un mensaje, se abren las versiones capturadas; al borrar un mensaje, se muestra el contenido anterior, si está disponible. Las atribuciones desconocidas se indican de forma explícita. Los recuentos están disponibles en **«Visión general»**; los detalles de la adquisición se mantienen en la guía local.
 
+Abra un mensaje editado para comparar sus versiones con **Cambios en el texto** o **En paralelo**; **Datos sin procesar** muestra los campos guardados. Los cambios en enlaces ocultos y botones de bots aparecen por separado. Abra la vista previa de un archivo adjunto para inspeccionar las imágenes, el audio o el vídeo guardados; el botón de descarga mantiene disponible el original conservado.
+
+**Live** actualiza el diario y los chats a medida que llegan los registros. Páuselo mientras revisa o use el botón de nuevos eventos cuando esté listo; la recopilación sigue ejecutándose. **Ctrl/Cmd+K** encuentra acciones del panel y busca en el diario.
+
 **La sección «Fuentes»** incluye el ámbito de observación (chats seleccionados, una carpeta de Telegram o toda la cuenta), chats accesibles de todo tipo, fuentes seleccionadas con estrellas de prioridad, ajustes de archivos adjuntos y de reverificación, así como instantáneas del historial. Las fuentes privadas se seleccionan por diálogo o ID sin enlace público. El estado de acceso describe la última comprobación, no los permisos permanentes.
+
+Filtre las fuentes, marque sus casillas de verificación y luego habilítelas, páuselas o márquelas como prioritarias conjuntamente. En la lista de chats disponibles, **Añadir seleccionados** utiliza su selección; **Añadir todas las coincidencias** utiliza la búsqueda y el filtro de tipo actuales.
 
 **En «Chats → Personas»** se muestra una lista de todas las personas cuyos mensajes se han guardado; si se han activado los perfiles de usuario para el chat, al hacer clic se abre el perfil de esa persona con enlaces a los registros del diario.
 

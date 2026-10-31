@@ -211,7 +211,7 @@ En el primer ejemplo solo se rellenan las credenciales de la API; inicie sesión
 | **Cadenas** de sesión de Pyrogram | Utilice el archivo Pyrogram `.session`, o el código QR/teléfono |
 | TData con varias cuentas registradas | Cierre la sesión en las demás cuentas de Telegram Desktop o utilice el archivo de sesión propio de cada cuenta |
 | Tokens de bot | No compatible: TgWitness actúa como una cuenta de usuario |
-| Listas en formato CSV/JSON de numerosas cuentas | Añada un espacio de trabajo por cada cuenta |
+| Listas en formato CSV/JSON de numerosas cuentas | Importe archivos de sesión compatibles mediante **Cuentas → Importar cuentas**, o inicie sesión por teléfono/QR en espacios de trabajo separados |
 | Sesiones de prueba en DC o con bots | Utilice una cuenta de usuario de producción |
 
 ## Cuentas múltiples

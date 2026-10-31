@@ -63,11 +63,17 @@ a cui i vostri account possono accedere. Funziona in locale con una propria dire
 </tr>
 </tbody>
 </table></div>
-<p>Per i metodi di compilazione, scarichi ed estragga il file ZIP contenente il codice sorgente da GitHub Releases oppure cloni
-il repository. <code>Start.cmd</code> propone di installare Python 3.12 per il Suo utente Windows qualora non venga
-individuata una versione adeguata di Python (winget o il programma di installazione firmato da python.org). <code>start.sh</code> visualizza
-il comando di installazione esatto per la Sua distribuzione Linux o per macOS qualora Python non fosse presente.
-Il primo avvio del codice sorgente crea <code>.venv</code> e installa automaticamente le dipendenze.</p>
+<p>Per i metodi basati sul codice sorgente, <a href="https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip">scarica ed estrai il ramo <code>main</code> corrente</a>
+oppure clona il repository:</p>
+<pre><code class="language-sh">git clone https://github.com/phishdestroy/TgWitness.git
+cd TgWitness</code></pre>
+<p>Il codice sorgente attuale include l'importazione in blocco degli account, la dashboard MTProxy e il caricamento della cronologia
+ripristinabile. L'anteprima portatile 0.7.0 e il relativo archivio sorgente di rilascio sono antecedenti a
+queste aggiunte. Consulta <a href="../changelog/">il changelog</a> per i dettagli sulle versioni.</p>
+<p><code>Start.cmd</code> propone di installare Python 3.12 per il tuo utente Windows se non viene trovato un
+Python adatto (tramite winget o il programma di installazione firmato di python.org). <code>start.sh</code> mostra
+il comando di installazione esatto per la tua distribuzione Linux o macOS se Python è assente.
+Il primo avvio da sorgente crea <code>.venv</code> e installa automaticamente le dipendenze.</p>
 <p>Docker compila l’applicazione e la avvia in background; non è
 necessario un host Python. <code>scripts\Docker.cmd</code> e <code>scripts/docker-start.sh</code> visualizzano l’indirizzo del pannello e il token quando
 il container è in stato di funzionamento. I comandi Docker equivalenti su ogni host supportato sono:</p>
@@ -120,11 +126,15 @@ Il corretto svolgimento della prova dipende da Telegram, non da TgWitness, e non
 </ol>
 <p>Le credenziali API identificano la vostra applicazione; di per sé non autorizzano un account.
 I gruppi privati non richiedono un nome utente pubblico, ma il vostro account deve disporre dei diritti di accesso.</p>
-<p>Per gli account esistenti, consultare <a href="../accounts/">i formati degli account e delle sessioni</a>: il
-pannello accetta Telethon StringSession, Telethon/Pyrogram SQLite, TData
-ZIP per account singolo e JSON degli account supportati. Selezionare una sessione e il relativo file JSON associato,
-quindi premere <strong>«Connetti account</strong>». È inoltre
-disponibile l’accesso tramite codice QR con le stesse impostazioni API opzionali. TDLib, i bot e gli elenchi di account in blocco non sono supportati.</p>
+<p>Per gli account esistenti, consulta <a href="../accounts/">account e formati di sessione</a>: il
+pannello accetta Telethon StringSession, SQLite Telethon/Pyrogram, file ZIP TData a singolo account
+e file JSON di account supportati. Seleziona insieme una sessione e il relativo file JSON associato,
+quindi premi <strong>Collegare l’account</strong>. È disponibile anche l'accesso tramite QR
+con le stesse impostazioni API opzionali. TDLib, sessioni bot e inventari di account
+CSV/JSON non sono supportati.</p>
+<p>Per più account, usa <strong>Account → Importazione degli account</strong> e seleziona i relativi file di sessione
+supportati. I file JSON associati vengono abbinati in base al nome base; ogni account importato
+ottiene il proprio spazio di lavoro. Consulta <a href="../accounts/#bulk-import-and-account-groups">importazione in blocco e gruppi di account</a>.</p>
 <p>Per aggiungere un altro account, prema <strong>+</strong> accanto al selettore di account oppure apra
 <strong>Account → Impostazioni → Impostazioni di connessione → Spazi di lavoro</strong>, oppure utilizzi <strong>la sezione Account</strong>. Gli spazi di lavoro dispongono di sessioni,
 registri, chiavi, fonti e code separati. Il cambio di vista lascia in esecuzione gli altri collettori.

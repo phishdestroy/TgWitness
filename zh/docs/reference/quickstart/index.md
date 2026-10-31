@@ -21,7 +21,16 @@ TgWitness 是一款用于监控您账户可访问的 Telegram 群组和频道的
 | Windows | 从 GitHub Releases 中提取 `TgWitness-<version>-windows-amd64-portable.zip`，双击 `TgWitness.cmd` | 双击 `Start.cmd` | 双击 `scripts\Docker.cmd` |
 | Linux / macOS | — | `sh start.sh` | `sh scripts/docker-start.sh` |
 
-如需获取源代码，请从 GitHub Releases 下载并解压源代码 ZIP 文件，或克隆 该代码库。若未检测到合适的 Python 版本（winget 或 python.org 提供的签名安装程序），`Start.cmd` 将为您的 Windows 用户自动安装 Python 3.12。 `start.sh` 会 在缺少 Python 时，显示适用于您的 Linux 发行版或 macOS 的精确安装命令。 首次运行源代码会自动生成 `.venv` 并安装依赖项。
+对于源码方式，请[下载并解压当前的 `main` 分支](https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip)， 或克隆仓库：
+
+```
+git clone https://github.com/phishdestroy/TgWitness.git
+cd TgWitness
+```
+
+当前源码包含批量导入账户、MTProxy 仪表板以及可恢复的 历史记录加载功能。0.7.0 便携预览版及其发布源码压缩包早于 这些新增功能。有关版本界限，请参阅[更新日志](https://phishdestroy.github.io/TgWitness/zh/docs/reference/changelog/)。
+
+如果未找到合适的 Python，`Start.cmd` 会提议为您的 Windows 用户安装 Python 3.12（通过 winget 或带签名的 python.org 安装程序）。如果缺少 Python，`start.sh` 会打印 适用于您的 Linux 发行版或 macOS 的确切安装命令。 首次从源码启动会自动创建 `.venv` 并安装依赖项。
 
 Docker 负责构建应用程序并在后台启动它；无需在主机上安装 Python。当 容器运行正常时，`scripts\Docker.cmd` 和 `scripts/docker-start.sh` 会输出控制面板地址和令牌。在所有受支持的主机上，相应的 Docker 命令如下：
 
@@ -57,7 +66,9 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 API 凭据用于识别您的应用程序；它们本身并不能 授权任何账户。私人群组无需公开用户名，但您的账户必须具备访问权限。
 
-关于现有账户，请参[阅账户和会话格式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/)：该 面板支持 Telethon StringSession、Telethon/Pyrogram SQLite、单账户 TData ZIP 以及受支持的账户 JSON 格式。请同时选择一个会话及其对应的 JSON 文件， 点击**“连接账户**”。还支持 二维码登录，并可使用相同的可选 API 设置。 不支持 TDLib、机器人及批量账户列表。
+对于现有账户，请参阅[账户和会话格式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/)：面板 支持 Telethon StringSession、Telethon/Pyrogram SQLite、单账户 TData ZIP 以及受支持的账户 JSON。同时选择一个会话及其配套的 JSON 文件， 然后按**连接账户**。二维码登录同样 可用，并支持相同的可选 API 设置。不支持 TDLib、机器人会话以及 CSV/JSON 账户清单。
+
+对于多个账户，请使用**账户 → 导入账户**并选择其受支持的 会话文件。配套的 JSON 文件按基本名称（basename）配对；每个导入的账户 都会获得各自的工作区。请参阅[批量导入与账户组](https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/#bulk-import-and-account-groups)。
 
 要添加另一个账户，请点击账户选择器旁边的 **+**，或打开 **“账户” → “设置” → “连接设置” → “工作区**”，或使用**“账户”功能**。各个工作区拥有独立的会话、 日志、密钥、来源和队列。切换视图时，其他采集器将继续运行。 在此安装环境中，同一个 Telegram 账户不能分配给两个工作区。 工作区数量没有限制；它们共享一个进程，因此容量取决于机器性能。
 

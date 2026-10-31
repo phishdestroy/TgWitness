@@ -80,7 +80,13 @@ Trong bản demo, các điều khiển thông báo hiển thị nhưng chức n�
 
 **Tạp chí này** hiển thị các quan sát, chức năng tìm kiếm và bộ lọc. Khi có thao tác chỉnh sửa, các phiên bản đã được ghi lại sẽ được mở ra; khi có thao tác xóa, nội dung trước đó (nếu có) sẽ được hiển thị. Nguồn gốc không xác định vẫn được nêu rõ ràng. Số liệu thống kê có sẵn trong **phần Tổng quan**; chi tiết về quá trình thu thập được lưu giữ trong hướng dẫn cục bộ.
 
+Mở một tin nhắn đã chỉnh sửa để so sánh các phiên bản của nó bằng **Thay đổi trong văn bản** hoặc **Đặt cạnh nhau**; **Dữ liệu thô** hiển thị các trường đã lưu. Các thay đổi đối với liên kết ẩn và nút bot xuất hiện riêng biệt. Mở bản xem trước tệp đính kèm để kiểm tra hình ảnh, âm thanh hoặc video đã lưu; nút tải xuống giúp giữ cho bản gốc đã lưu trữ luôn sẵn có.
+
+**Live** cập nhật nhật ký và các cuộc trò chuyện ngay khi có bản ghi mới. Tạm dừng tính năng này khi đang xem xét, hoặc sử dụng nút sự kiện mới khi đã sẵn sàng; quá trình thu thập vẫn tiếp tục chạy. **Ctrl/Cmd+K** tìm các thao tác trên bảng điều khiển và tìm kiếm trong nhật ký.
+
 **Phần “Nguồn”** bao gồm phạm vi quan sát (các cuộc trò chuyện được chọn, một thư mục Telegram hoặc toàn bộ tài khoản), các cuộc trò chuyện có thể truy cập thuộc mọi loại, các nguồn được chọn kèm dấu sao ưu tiên, cài đặt về tệp đính kèm và kiểm tra lại, cùng các bản chụp lịch sử. Các nguồn riêng tư được chọn theo hộp thoại/ID mà không cần liên kết công khai. Trạng thái truy cập mô tả lần kiểm tra gần đây nhất, chứ không phải quyền truy cập vĩnh viễn.
+
+Lọc các nguồn, đánh dấu vào ô chọn của chúng, sau đó bật, tạm dừng hoặc đánh dấu ưu tiên cho chúng cùng lúc. Trong danh sách cuộc trò chuyện khả dụng, **Thêm mục đã chọn** sẽ sử dụng lựa chọn của bạn; **Thêm tất cả kết quả phù hợp** sẽ sử dụng bộ lọc tìm kiếm và loại hiện tại.
 
 **Phần “Trò chuyện” → “Người dùng”** liệt kê tất cả những người có tin nhắn được lưu trữ; khi tính năng hồ sơ người dùng được bật cho cuộc trò chuyện đó, chỉ cần nhấp chuột là hồ sơ của người đó sẽ mở ra kèm theo các liên kết đến các bản ghi trong sổ chứng cứ.
 

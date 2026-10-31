@@ -63,11 +63,11 @@ Proxy&#x27;ler, tanıklar, veri aktarımları veya sunucu kurulumu için <a href
 </tr>
 </tbody>
 </table></div>
-<p>Kaynak kod yöntemleri için, GitHub Sürümleri&#x27;nden kaynak ZIP dosyasını indirip açın veya
-depo klonlayın. Uygun bir Python bulunmazsa (winget veya imzalı python.org yükleyicisi),
-<code>Start.cmd</code>, Windows kullanıcınız için Python 3.12&#x27;yi yüklemeyi önerir. <code>start.sh</code>, Python yoksa
-Linux dağıtımınız veya macOS için tam kurulum komutunu görüntüler.
-Kaynağın ilk çalıştırılması <code>.venv</code>&#x27;yi oluşturur ve bağımlılıkları otomatik olarak yükler.</p>
+<p>Kaynak kodu yöntemleri için <a href="https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip">güncel <code>main</code> dalını indirip çıkarın</a> veya depoyu klonlayın:</p>
+<pre><code class="language-sh">git clone https://github.com/phishdestroy/TgWitness.git
+cd TgWitness</code></pre>
+<p>Güncel kaynak kodu; toplu hesap içe aktarma, MTProxy kontrol paneli ve kaldığı yerden devam edebilen geçmiş yükleme özelliklerini içerir. 0.7.0 taşınabilir önizleme sürümü ve sürüm kaynak arşivi bu eklemelerden önceye aittir. Sürüm sınırları için <a href="../changelog/">değişiklik günlüğüne</a> bakın.</p>
+<p><code>Start.cmd</code>, uygun bir Python bulunamazsa Windows kullanıcınız için Python 3.12 kurmayı önerir (winget veya imzalı python.org yükleyicisi ile). <code>start.sh</code>, Python eksikse Linux dağıtımınız veya macOS için tam kurulum komutunu yazdırır. Kaynak koddan ilk başlatma, <code>.venv</code> ortamını oluşturur ve bağımlılıkları otomatik olarak yükler.</p>
 <p>Docker, uygulamayı derler ve arka planda çalıştırır; Python ana bilgisayarı
 gerekmez. <code>scripts\Docker.cmd</code> ve <code>scripts/docker-start.sh</code>, konteyner
 çalışır durumdayken panel adresini ve jetonu yazdırır. Desteklenen her ana bilgisayarda kullanılabilecek eşdeğer Docker komutları şunlardır:</p>
@@ -121,11 +121,8 @@ Sorunsuz bir test çalışması TgWitness’e değil, Telegram’a bağlıdır v
 </ol>
 <p>API kimlik bilgileri uygulamanızı tanımlar; tek başlarına bir hesaba yetki vermezler.
 Özel gruplar için herkese açık kullanıcı adı gerekmez, ancak hesabınızın erişim izni olmalıdır.</p>
-<p>Mevcut hesaplar için <a href="../accounts/">hesap ve oturum formatlarına</a> bakın:
-panel, Telethon StringSession, Telethon/Pyrogram SQLite, tek hesaplı TData
-ZIP ve desteklenen hesap JSON&#x27;larını kabul eder. Bir oturumu ve ona ait JSON dosyasını birlikte seçin,
-<strong>&quot;Hesaba Bağlan&quot;</strong> düğmesine basın. QR ile giriş de
-aynı isteğe bağlı API ayarlarıyla kullanılabilir. TDLib, botlar ve toplu hesap listeleri desteklenmemektedir.</p>
+<p>Mevcut hesaplar için <a href="../accounts/">hesaplar ve oturum biçimleri</a> sayfasına bakın: panel; Telethon StringSession, Telethon/Pyrogram SQLite, tek hesaplı TData ZIP ve desteklenen hesap JSON biçimlerini kabul eder. Bir oturumu ve eşlik eden JSON dosyasını birlikte seçip <strong>Hesap bağla</strong> düğmesine basın. QR ile giriş de aynı isteğe bağlı API ayarlarıyla kullanılabilir. TDLib, bot oturumları ve CSV/JSON hesap envanterleri desteklenmez.</p>
+<p>Birden fazla hesap için <strong>Hesaplar → Hesapları içe aktar</strong> yolunu kullanın ve desteklenen oturum dosyalarını seçin. Eşlik eden JSON dosyaları temel dosya adına göre eşleştirilir; içe aktarılan her hesap kendi çalışma alanını alır. <a href="../accounts/#bulk-import-and-account-groups">Toplu içe aktarma ve hesap grupları</a> bölümüne bakın.</p>
 <p>Başka bir hesap eklemek için, hesap seçicinin yanındaki <strong>+</strong> tuşuna basın veya
 <strong>Hesap → Ayarlar → Bağlantı ayarları → Çalışma alanları seçeneğini</strong> açın ya da <strong>Hesaplar bölümünü</strong> kullanın. Çalışma alanlarının ayrı oturumları,
 günlükleri, anahtarları, kaynakları ve kuyrukları vardır. Görünümler arasında geçiş yapıldığında diğer toplayıcılar çalışmaya devam eder.

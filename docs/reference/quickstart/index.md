@@ -21,7 +21,16 @@ Choose one method. Portable downloads become available after a release build is 
 | Windows | Extract `TgWitness-<version>-windows-amd64-portable.zip` from GitHub Releases, double-click `TgWitness.cmd` | Double-click `Start.cmd` | Double-click `scripts\Docker.cmd` |
 | Linux / macOS | — | `sh start.sh` | `sh scripts/docker-start.sh` |
 
-For the source methods, download and extract the source ZIP from GitHub Releases or clone the repository. `Start.cmd` offers to install Python 3.12 for your Windows user if no suitable Python is found (winget, or the signed python.org installer). `start.sh` prints the exact install command for your Linux distribution or macOS if Python is missing. The first source launch creates `.venv` and installs dependencies automatically.
+For the source methods, [download and extract current `main`](https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip) or clone the repository:
+
+```
+git clone https://github.com/phishdestroy/TgWitness.git
+cd TgWitness
+```
+
+The current source includes batch account import, the MTProxy dashboard and resumable history loading. The 0.7.0 portable preview and its release source archive predate these additions. See [the changelog](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/) for the version boundary.
+
+`Start.cmd` offers to install Python 3.12 for your Windows user if no suitable Python is found (winget, or the signed python.org installer). `start.sh` prints the exact install command for your Linux distribution or macOS if Python is missing. The first source launch creates `.venv` and installs dependencies automatically.
 
 Docker builds the application and starts it in the background; host Python is unnecessary. `scripts\Docker.cmd` and `scripts/docker-start.sh` print the panel address and token when the container is healthy. The equivalent Docker commands on every supported host are:
 
@@ -57,7 +66,9 @@ Demo messages are fictional. Demo mode cannot connect a real Telegram account.
 
 API credentials identify your application; they do not authorize an account by themselves. Private groups need no public username, but your account must have access.
 
-For existing accounts, see [accounts and session formats](https://phishdestroy.github.io/TgWitness/docs/reference/accounts/): the panel accepts Telethon StringSession, Telethon/Pyrogram SQLite, single-account TData ZIP, and supported account JSON. Select a session and its companion JSON together, press **Connect account**. QR login is also available with the same optional API settings. TDLib, bots, and bulk account lists are unsupported.
+For existing accounts, see [accounts and session formats](https://phishdestroy.github.io/TgWitness/docs/reference/accounts/): the panel accepts Telethon StringSession, Telethon/Pyrogram SQLite, single-account TData ZIP, and supported account JSON. Select a session and its companion JSON together, press **Connect account**. QR login is also available with the same optional API settings. TDLib, bot sessions and CSV/JSON account inventories are unsupported.
+
+For several accounts, use **Accounts → Import accounts** and select their supported session files. Companion JSON files are paired by basename; each imported account gets its own workspace. See [bulk import and account groups](https://phishdestroy.github.io/TgWitness/docs/reference/accounts/#bulk-import-and-account-groups).
 
 To add another account, press **+** beside the account selector or open **Account → Settings → Connection settings → Workspaces**, or use **Accounts**. Workspaces have separate sessions, journals, keys, sources and queues. Switching views leaves other collectors running. The same Telegram account cannot be assigned to two workspaces in this installation. There is no fixed number of workspaces; they share one process, so capacity depends on the machine.
 

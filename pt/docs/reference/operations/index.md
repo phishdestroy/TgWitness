@@ -80,7 +80,13 @@ Na demonstração, os controles de notificação estão visíveis, mas o envio e
 
 **O diário** apresenta observações, pesquisas e filtros. Uma edição abre as versões capturadas; uma exclusão abre o conteúdo anterior, se disponível. Atribuições desconhecidas permanecem explícitas. As contagens estão disponíveis na seção **“Visão geral”**; os detalhes da aquisição permanecem no guia local.
 
+Abra uma mensagem editada para comparar suas versões com **Alterações no texto** ou **Lado a lado**; **Dados brutos** mostra os campos salvos. Alterações em links ocultos e botões de bots aparecem separadamente. Abra a pré-visualização de um anexo para inspecionar imagens, áudios ou vídeos salvos; o botão de download mantém o original preservado disponível.
+
+O modo **Live** atualiza o diário e os chats conforme os registros chegam. Pause-o durante a revisão ou use o botão de novos eventos quando estiver pronto; a coleta continua em execução. **Ctrl/Cmd+K** encontra ações do painel e pesquisa no diário.
+
 **A seção “Fontes”** contém o escopo de observação (conversas selecionadas, uma pasta do Telegram ou toda a conta), conversas acessíveis de todos os tipos, fontes selecionadas com estrelas de prioridade, configurações de anexos e reavaliação, além de instantâneos do histórico. As fontes privadas são selecionadas por diálogo/ID sem um link público. O status de acesso descreve a verificação mais recente, e não permissões permanentes.
+
+Filtre as fontes, marque suas caixas de seleção e, em seguida, ative, pause ou marque todas como prioritárias de uma só vez. Na lista de chats disponíveis, **Adicionar selecionados** usa a sua seleção; **Adicionar todos os resultados** usa a busca e o filtro de tipo atuais.
 
 **A seção “Bate-papos → Pessoas”** lista todos aqueles cujas mensagens foram salvas; com os perfis das pessoas ativados para o bate-papo, um clique abre o perfil dessa pessoa com links para os registros do diário.
 

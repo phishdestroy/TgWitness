@@ -21,7 +21,16 @@ Bir usulni tanlang. Portativ yuklamalar chiqarilgan versiya e'lon qilingach mavj
 | Windows | `TgWitness-<version>-windows-amd64-portable.zip`ni GitHub Releases'dan yuklab oling, `TgWitness.cmd` ustiga ikki marta bosing | `Start.cmd` ustiga ikki marta bosing | `scripts\Docker.cmd` ustiga ikki marta bosing |
 | Linux / macOS | — | `sh start.sh` | `sh scripts/docker-start.sh` |
 
-Manba kod usullari uchun GitHub Releases'dan manba ZIP faylini yuklab oling va arxivdan chiqarib oling yoki omborni klonlang. Agar mos Python topilmasa (winget yoki imzolangan python.org o'rnatuvchisi), `Start.cmd` Windows foydalanuvchingiz uchun Python 3.12 o'rnatishni taklif etadi. `start.sh` Python yo'q bo'lsa, Linux distributivi yoki macOS uchun aniq o'rnatish buyrug'ini chiqaradi. Birinchi manba ishga tushirilganda `.venv` yaratiladi va bog'liqliklar avtomatik o'rnatiladi.
+Manba kodidan foydalanish usullari uchun [joriy `main` tarmog‘ini yuklab oling va arxivdan chiqaring](https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip) yoki repozitoriyni klonlang:
+
+```
+git clone https://github.com/phishdestroy/TgWitness.git
+cd TgWitness
+```
+
+Joriy manba kodiga hisoblarni ommaviy import qilish, MTProxy boshqaruv paneli va davom ettiriladigan tarixni yuklash kiradi. 0.7.0 portativ sinov talqini va uning reliz manba arxivi ushbu qo‘shimchalardan oldin chiqarilgan. Versiyalar chegarasini bilish uchun [o‘zgarishlar jurnalini](https://phishdestroy.github.io/TgWitness/uz/docs/reference/changelog/) ko‘ring.
+
+Agar mos Python topilmasa, `Start.cmd` Windows foydalanuvchingiz uchun Python 3.12 ni o‘rnatishni taklif qiladi (winget yoki imzolangan python.org o‘rnatuvchisi orqali). Agar Python mavjud bo‘lmasa, `start.sh` Linux distributivingiz yoki macOS uchun aniq o‘rnatish buyrug‘ini chiqaradi. Manbadan birinchi marta ishga tushirilganda `.venv` yaratiladi va bog‘liqliklar avtomatik ravishda o‘rnatiladi.
 
 Docker ilovani kompilyatsiya qilib, uni fon rejimida ishga tushiradi; host Python keraksiz. `scripts\Docker.cmd` va `scripts/docker-start.sh` konteyner sog'lom holatda bo'lganda panel manzili va tokenni chop etadi. Har bir qo'llab-quvvatlanadigan hostdagi ekvivalent Docker buyruqlari quyidagilardan iborat:
 
@@ -57,7 +66,9 @@ Demo xabarlari badiiydir. Demo rejimi haqiqiy Telegram hisobiga ulanmaydi.
 
 API ma'lumotlari sizning ilovangizni aniqlaydi; ular o'zlari hech qanday hisobni ruxsat etmaydi. Xususiy guruhlarga ommaviy foydalanuvchi nomi kerak emas, lekin sizning hisobingizda kirish huquqi bo'lishi kerak.
 
-Mavjud hisoblar uchun [hisoblar va sessiya formatlariga](https://phishdestroy.github.io/TgWitness/uz/docs/reference/accounts/) qarang: panel Telethon StringSession, Telethon/Pyrogram SQLite, yagona hisobli TData ZIP va qo'llab-quvvatlanadigan hisob JSON formatlarini qabul qiladi. Sessiyani va uning hamroh JSON faylini birgalikda tanlang, **"Hisobni ulash"** tugmasini bosing. QR orqali kirish ham xuddi shu ixtiyoriy API sozlamalari bilan mavjud. TDLib, botlar va ommaviy hisob ro'yxatlari qo'llab-quvvatlanmaydi.
+Mavjud hisoblar uchun [hisoblar va sessiya formatlari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/accounts/) bo‘limiga qarang: panel Telethon StringSession, Telethon/Pyrogram SQLite, bitta hisobli TData ZIP va qo‘llab-quvvatlanadigan hisob JSON fayllarini qabul qiladi. Sessiya va unga tegishli JSON faylini birgalikda tanlab, **Hisobni bog'lash** tugmasini bosing. Xuddi shu ixtiyoriy API sozlamalari bilan QR orqali kirish ham mavjud. TDLib, bot sessiyalari va CSV/JSON hisoblar ro‘yxati qo‘llab-quvvatlanmaydi.
+
+Bir nechta hisob uchun **Hisoblar → Hisoblarni import qilish** bo‘limidan foydalaning va ularning qo‘llab-quvvatlanadigan sessiya fayllarini tanlang. Qo‘shimcha JSON fayllar asosiy nom bo‘yicha juftlanadi; har bir import qilingan hisob o‘z ishchi maydoniga ega bo‘ladi. [Ommaviy import va hisob guruhlari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/accounts/#bulk-import-and-account-groups) bo‘limiga qarang.
 
 Yana bir akkaunt qo'shish uchun akkaunt tanlovchisining yonidagi **+** tugmasini bosing yoki **Akkaunt → Sozlamalar → Ulanish sozlamalari → Ish maydonchalari bo'limini** oching, yoki **Akkauntlar bo'lim**idan foydalaning. Ish maydonchalari alohida sessiyalarga, jurnalarga, kalitlarga, manbalarga va navbatlarga ega. Ko'rinishlarni almashtirish boshqa yig'uvchilarni ishlashda davom ettiradi. Ushbu o'rnatishda bir xil Telegram akkaunti ikki ish maydonchasiga tayinlanishi mumkin emas. Ish maydonlarining doimiy soni yo'q; ular bitta jarayonni baham ko'radi, shuning uchun sig'im mashinaga bog'liq.
 

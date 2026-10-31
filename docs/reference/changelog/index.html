@@ -33,8 +33,33 @@
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Search the documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Try proxy, hash chain, token or witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Clear search" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Type a word to search the guides and the reference. Search stays in your browser.</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="eyebrow">Reference / Security &amp; project</p><h1>Changelog</h1><p class="guide-outcome">Every change by version, including the changes not yet released.</p><div class="wiki-body"><h2 id="unreleased">Unreleased<a class="anchor" href="#unreleased" aria-label="Link to this section">#</a></h2>
 <ul>
-<li>Reworked the workspace navigation and chat layout, added chat search and kept
-    collection warnings visible. The desktop conversation fits the viewport.</li>
+<li>Kept disabled AI out of the sidebar and attachment actions. Provider setup lives
+    in Integrations; local recognition appears only when its worker is configured.
+    Connection settings now show the fields for the selected route, with the
+    automatic MTProxy catalog available on demand.</li>
+<li>Added inline and side-by-side edit comparisons, separate changes to hidden links
+    and bot buttons, attachment previews and image zoom. The preserved original stays
+    downloadable. Preview reads stop at 32 MiB; the browser cache holds at most 40
+    previews and 64 MiB, with three concurrent reads, and is cleared on lock or workspace switch.</li>
+<li>Added live journal/chat updates with a pause control for the view, batch source
+    selection and actions, and journal search from Ctrl/Cmd+K. Live updates recheck
+    access and chat scope; pausing the view does not pause collection.</li>
+<li>Indexed saved message state and source summaries. Existing journals build these
+    derived indexes once during their first startup after the update; signed records
+    and their hashes stay unchanged. Small and expiring attachments have a separate
+    download lane so a large file does not hold them up.</li>
+<li>Preserved observed avatar changes as signed records with content-addressed files,
+    including removal and reuse of an earlier photo. People profiles show scoped
+    history and similarity leads; saved photos travel in evidence ZIPs.</li>
+<li>
+<p>Added automatic upgrades for OpenTimestamps receipts older than one hour, with
+    bounded requests through the configured route and the original receipt retained.
+    A Bitcoin attestation remains explicitly unverified until checked independently.</p>
+</li>
+<li>
+<p>Reworked the workspace navigation and chat layout, added chat search and kept
+    collection warnings visible. The desktop conversation fits the viewport.</p>
+</li>
 <li>Rebuilt the online demo around a fictional investigation with named participants,
     edit comparisons and real signed sample downloads. Verification results now stay
     visible; unavailable online-only actions no longer look usable.</li>

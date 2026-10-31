@@ -211,7 +211,7 @@ Ví dụ đầu tiên chỉ yêu cầu điền thông tin đăng nhập API; qu�
 | **Các chuỗi** phiên làm việc của Pyrogram | Vui lòng sử dụng tệp Pyrogram `.session`, hoặc quét mã QR bằng điện thoại |
 | TData với nhiều tài khoản đã đăng nhập | Vui lòng đăng xuất khỏi các tài khoản khác trên Telegram Desktop, hoặc sử dụng tệp phiên làm việc riêng của từng tài khoản |
 | Mã thông báo bot | Không được hỗ trợ: TgWitness chỉ thực hiện quan sát với tư cách là một tài khoản người dùng |
-| Danh sách CSV/JSON của nhiều tài khoản | Thêm một không gian làm việc cho mỗi tài khoản |
+| Danh sách CSV/JSON của nhiều tài khoản | Nhập các tệp phiên được hỗ trợ qua **Tài khoản → Nhập tài khoản**, hoặc đăng nhập bằng số điện thoại/mã QR trong các không gian làm việc riêng biệt |
 | Các phiên thử nghiệm (Test-DC) hoặc phiên bot | Vui lòng sử dụng tài khoản người dùng chính thức |
 
 ## Nhiều tài khoản

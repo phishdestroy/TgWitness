@@ -80,7 +80,13 @@ Nella demo, i controlli delle notifiche sono visibili ma l’invio è disabilita
 
 **Il registro** mostra osservazioni, ricerche e filtri. Una modifica apre le versioni acquisite; una cancellazione apre il contenuto precedente, se disponibile. Le attribuzioni sconosciute rimangono esplicite. I conteggi sono disponibili nella sezione **Panoramica**; i dettagli relativi all’acquisizione rimangono nella guida locale.
 
+Apri un messaggio modificato per confrontarne le versioni con **Modifiche nel testo** o **Affiancate**; **Dati grezzi** mostra i campi salvati. Le modifiche ai link nascosti e ai pulsanti dei bot appaiono separatamente. Apri l'anteprima di un allegato per ispezionare immagini, audio o video salvati; il pulsante di download mantiene disponibile l'originale preservato.
+
+**Live** aggiorna il registro e le chat man mano che arrivano i record. Mettilo in pausa durante la revisione, oppure usa il pulsante dei nuovi eventi quando sei pronto; la raccolta continua a funzionare. **Ctrl/Cmd+K** trova le azioni del pannello ed effettua ricerche nel registro.
+
 **La sezione «Fonti»** contiene l’ambito di monitoraggio (chat selezionate, una cartella di Telegram o l’intero account), chat accessibili di ogni tipo, fonti selezionate contrassegnate da stelle di priorità, impostazioni relative agli allegati e alla verifica incrociata, nonché istantanee della cronologia. Le fonti private vengono selezionate tramite finestra di dialogo/ID senza un link pubblico. Lo stato di accesso descrive la verifica più recente, non le autorizzazioni permanenti.
+
+Filtra le fonti, seleziona le relative caselle di controllo, quindi abilitale, mettile in pausa o contrassegnale come prioritarie insieme. Nell'elenco delle chat disponibili, **Aggiungi selezionati** utilizza la tua selezione; **Aggiungi tutti i risultati** utilizza la ricerca e il filtro di tipo correnti.
 
 **La sezione «Chat» → «Persone»** elenca tutti gli utenti con messaggi salvati; se i profili degli utenti sono attivati per la chat, un clic apre il profilo di quella persona con i collegamenti alle voci del registro.
 

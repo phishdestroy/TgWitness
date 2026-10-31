@@ -21,7 +21,16 @@ Escolha um método. Os downloads portáteis ficam disponíveis após a publicaç
 | Windows | Extraia o `TgWitness-<version>-windows-amd64-portable.zip` das versões do GitHub e clique duas vezes no `TgWitness.cmd` | Clique duas vezes em `Start.cmd` | Clique duas vezes em `scripts\Docker.cmd` |
 | Linux / macOS | — | `sh start.sh` | `sh scripts/docker-start.sh` |
 
-Para obter os códigos-fonte, baixe e extraia o arquivo ZIP de código-fonte a partir do GitHub Releases ou clone o repositório. O ``Start.cmd`` oferece a instalação do Python 3.12 para o seu usuário do Windows caso não seja encontrado um Python adequado (winget ou o instalador assinado do python.org). `start.sh` exibe o comando de instalação exato para sua distribuição Linux ou macOS, caso o Python esteja ausente. A primeira execução do código-fonte cria o `.venv` e instala as dependências automaticamente.
+Para os métodos a partir do código-fonte, [baixe e extraia a branch `main` atual](https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip) ou clone o repositório:
+
+```
+git clone https://github.com/phishdestroy/TgWitness.git
+cd TgWitness
+```
+
+O código-fonte atual inclui importação de contas em lote, o painel MTProxy e carregamento de histórico retomável. A prévia portátil 0.7.0 e o arquivo de código-fonte do seu lançamento são anteriores a essas adições. Veja [o changelog](https://phishdestroy.github.io/TgWitness/pt/docs/reference/changelog/) para entender o limite entre as versões.
+
+O `Start.cmd` oferece a instalação do Python 3.12 para o seu usuário do Windows caso nenhuma versão adequada do Python seja encontrada (via winget ou pelo instalador assinado do python.org). O `start.sh` exibe o comando exato de instalação para a sua distribuição Linux ou macOS se o Python estiver ausente. A primeira execução a partir do código-fonte cria o `.venv` e instala as dependências automaticamente.
 
 O Docker compila o aplicativo e o inicia em segundo plano; não é necessário um host Python. `scripts\Docker.cmd` e `scripts/docker-start.sh` exibem o endereço do painel e o token quando o contêiner está em bom estado. Os comandos equivalentes do Docker em todos os hosts compatíveis são:
 
@@ -57,7 +66,9 @@ As mensagens de demonstração são fictícias. O modo de demonstração não pe
 
 As credenciais da API identificam seu aplicativo; elas não autorizam uma conta por si só. Grupos privados não exigem nome de usuário público, mas sua conta deve ter acesso.
 
-Para contas existentes, consulte [os formatos de contas e sessões](https://phishdestroy.github.io/TgWitness/pt/docs/reference/accounts/): o painel aceita Telethon StringSession, Telethon/Pyrogram SQLite, TData ZIP de conta única e JSON de conta compatível. Selecione uma sessão e seu JSON correspondente juntos, clique em **“Conectar conta**”. O login por QR também está disponível com as mesmas configurações opcionais da API. TDLib, bots e listas de contas em massa não são suportados.
+Para contas existentes, veja [contas e formatos de sessão](https://phishdestroy.github.io/TgWitness/pt/docs/reference/accounts/): o painel aceita StringSession do Telethon, SQLite do Telethon/Pyrogram, ZIP de TData de conta única e JSON de conta compatível. Selecione uma sessão e seu arquivo JSON complementar juntos e pressione **Conectar conta**. O login por QR também está disponível com as mesmas configurações opcionais de API. TDLib, sessões de bots e inventários de contas em CSV/JSON não são suportados.
+
+Para várias contas, use **Contas → Importar contas** e selecione os arquivos de sessão compatíveis. Os arquivos JSON complementares são pareados pelo nome-base; cada conta importada recebe seu próprio espaço de trabalho. Veja [importação em massa e grupos de contas](https://phishdestroy.github.io/TgWitness/pt/docs/reference/accounts/#bulk-import-and-account-groups).
 
 Para adicionar outra conta, pressione **+** ao lado do seletor de contas ou acesse **Conta → Configurações → Configurações de conexão → Espaços de trabalho**, ou utilize **a opção Contas**. Os espaços de trabalho possuem sessões, registros, chaves, fontes e filas separadas. A troca de visualizações mantém os demais coletores em execução. A mesma conta do Telegram não pode ser atribuída a dois espaços de trabalho nesta instalação. Não há um número fixo de espaços de trabalho; eles compartilham um único processo, portanto, a capacidade depende do computador.
 

@@ -63,11 +63,17 @@ mà tài khoản của quý vị có quyền truy cập. Ứng dụng này chạ
 </tr>
 </tbody>
 </table></div>
-<p>Đối với các phương pháp lấy mã nguồn, quý vị hãy tải xuống và giải nén tệp ZIP chứa mã nguồn từ GitHub Releases hoặc sao chép
-kho lưu trữ. <code>Start.cmd</code> sẽ đề xuất cài đặt Python 3.12 cho người dùng Windows nếu không
-tìm thấy phiên bản Python phù hợp (winget hoặc trình cài đặt có chữ ký từ python.org). <code>start.sh</code> sẽ hiển thị
-lệnh cài đặt chính xác dành cho bản phân phối Linux hoặc macOS của quý vị nếu thiếu Python.
-Lần khởi chạy mã nguồn đầu tiên sẽ tạo ra <code>.venv</code> và tự động cài đặt các phụ thuộc.</p>
+<p>Đối với các phương pháp dùng mã nguồn, hãy <a href="https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip">tải xuống và giải nén nhánh <code>main</code> hiện tại</a>
+hoặc sao chép (clone) kho lưu trữ:</p>
+<pre><code class="language-sh">git clone https://github.com/phishdestroy/TgWitness.git
+cd TgWitness</code></pre>
+<p>Mã nguồn hiện tại bao gồm tính năng nhập tài khoản hàng loạt, bảng điều khiển MTProxy và tải
+lịch sử có thể tiếp tục. Bản xem trước di động (portable) 0.7.0 và gói mã nguồn phát hành của nó có trước
+các bổ sung này. Xem <a href="../changelog/">nhật ký thay đổi</a> để biết ranh giới phiên bản.</p>
+<p><code>Start.cmd</code> đề xuất cài đặt Python 3.12 cho người dùng Windows của bạn nếu không
+tìm thấy Python phù hợp (qua winget, hoặc trình cài đặt có chữ ký số từ python.org). <code>start.sh</code> sẽ in ra
+lệnh cài đặt chính xác cho bản phân phối Linux hoặc macOS của bạn nếu thiếu Python.
+Lần khởi chạy từ mã nguồn đầu tiên sẽ tự động tạo <code>.venv</code> và cài đặt các gói phụ thuộc.</p>
 <p>Docker sẽ biên dịch ứng dụng và khởi chạy nó ở chế độ nền; không cần phải cài đặt Python trên máy chủ.
 <code>scripts\Docker.cmd</code> và <code>scripts/docker-start.sh</code> sẽ hiển thị địa chỉ bảng điều khiển và mã thông báo khi
 container hoạt động bình thường. Các lệnh Docker tương ứng trên mọi hệ điều hành được hỗ trợ là:</p>
@@ -121,11 +127,15 @@ Việc chạy thử nghiệm suôn sẻ phụ thuộc vào Telegram, không ph�
 </ol>
 <p>Thông tin đăng nhập API dùng để xác định ứng dụng của quý vị; chúng không tự động cấp quyền truy cập cho tài khoản
 nào cả. Các nhóm riêng tư không yêu cầu tên người dùng công khai, nhưng tài khoản của quý vị phải có quyền truy cập.</p>
-<p>Đối với các tài khoản hiện có, vui lòng tham khảo <a href="../accounts/">các định dạng tài khoản và phiên làm việc</a>:
-bảng điều khiển hỗ trợ Telethon StringSession, Telethon/Pyrogram SQLite, tệp ZIP TData
-cho một tài khoản duy nhất và định dạng JSON tài khoản được hỗ trợ. Vui lòng chọn một phiên làm việc cùng với tệp JSON đi kèm,
-sau đó nhấn <strong>“Kết nối tài khoản</strong>”. Tính năng đăng nhập qua mã QR cũng
-có sẵn với các cài đặt API tùy chọn tương tự. TDLib, bot và danh sách tài khoản số lượng lớn không được hỗ trợ.</p>
+<p>Đối với các tài khoản hiện có, hãy xem <a href="../accounts/">tài khoản và định dạng phiên</a>: bảng điều khiển
+chấp nhận Telethon StringSession, Telethon/Pyrogram SQLite, TData
+ZIP một tài khoản và JSON tài khoản được hỗ trợ. Chọn một phiên cùng với tệp JSON đi kèm của nó,
+nhấn <strong>Kết nối tài khoản</strong>. Đăng nhập bằng mã QR cũng
+khả dụng với cùng các cài đặt API tùy chọn. TDLib, phiên bot và danh sách kiểm kê tài khoản CSV/JSON
+không được hỗ trợ.</p>
+<p>Đối với nhiều tài khoản, hãy sử dụng <strong>Tài khoản → Nhập tài khoản</strong> và chọn các tệp phiên
+được hỗ trợ của chúng. Các tệp JSON đi kèm được ghép nối theo tên cơ sở (basename); mỗi tài khoản được nhập
+sẽ có không gian làm việc riêng. Xem <a href="../accounts/#bulk-import-and-account-groups">nhập hàng loạt và nhóm tài khoản</a>.</p>
 <p>Để thêm một tài khoản khác, hãy nhấn vào <strong>+</strong> bên cạnh bộ chọn tài khoản hoặc mở
 <strong>Tài khoản → Cài đặt → Cài đặt kết nối → Không gian làm việc</strong>, hoặc sử dụng <strong>mục Tài khoản</strong>. Các không gian làm việc có các phiên làm việc,
 sổ nhật ký, khóa, nguồn và hàng đợi riêng biệt. Việc chuyển đổi chế độ xem sẽ không làm gián đoạn hoạt động của các trình thu thập khác.

@@ -179,7 +179,7 @@ async function api(path, body, options={}) {
     if (typeof detail === "object") detail = tr(detail.message) + (detail.retry_after ? " " + tr("Retry after {n} seconds.", {n: detail.retry_after}) : "");
     if(!allowStale&&revision!==state.workspaceRevision)throw new StaleView();
     if (response.status === 401 && revision===state.workspaceRevision && token===state.token && !$("workspace").hidden) lock();
-    throw new Error(tr(detail));
+    const error=new Error(tr(detail));error.status=response.status;throw error;
   }
   return response;
 }
@@ -202,6 +202,7 @@ async function busy(button, work) {
     if(button.id==="chat-send"||button.id==="chat-preview-button")renderComposer();} }
 }
 function lock() {
+  selectedSources.clear();selectedDialogs.clear();sourceBatchBusy=false;
   window.dispatchEvent(new Event("tgwitness:lock"));
   $("quick-dialog").close();
   $("workspace").inert=false;
@@ -266,9 +267,16 @@ function viewAllowed(view){
   const limited=!!state.status?.chats_limited;
   return {sources:may("sources")&&!limited,evidence:may("export")&&!limited,sealed:may("export")&&!limited,witness:may("settings")&&!limited,
     parameters:may("settings")&&!limited,connection:may("account")&&!limited,accounts:!!state.me?.admin,
-    access:!!state.me?.admin,integrations:!!state.me?.admin}[view]??true;
+    access:!!state.me?.admin,integrations:!!state.me?.admin,
+    analysis:!!(state.status?.analysis?.enabled||state.status?.analysis?.media_available)}[view]??true;
 }
 function applyAccess(){
+  window.TgWitnessAnalysis?.syncStatus?.(state.status);
+  const analysisTitle=tr(state.status?.analysis?.enabled?"Ask the archive":"Machine recognition");
+  const analysisNav=document.querySelector('.sidebar [data-view="analysis"]');
+  const analysisText=[...analysisNav.childNodes].find(n=>n.nodeType===Node.TEXT_NODE&&n.textContent.trim());
+  if(analysisText)analysisText.textContent=" "+analysisTitle;
+  $("view-analysis").querySelector("h1").textContent=analysisTitle;
   document.querySelectorAll(".sidebar .nav[data-view]").forEach(n=>n.hidden=!viewAllowed(n.dataset.view));
   document.querySelectorAll(".nav-section").forEach(heading=>{
     let next=heading.nextElementSibling,visible=false;
@@ -278,6 +286,7 @@ function applyAccess(){
   document.querySelectorAll("[data-open]").forEach(n=>n.hidden=!viewAllowed(n.dataset.open));
   $("collector-toggle").hidden=!may("collect")||!!state.status?.chats_limited;
   $("manage-profiles").hidden=!state.me?.admin;
+  if(state.view==="analysis"&&!viewAllowed("analysis")&&!$("workspace").hidden)navigate("chats");
   document.querySelectorAll("[data-export]").forEach(n=>n.hidden=!viewAllowed("evidence"));
 
   const limited=!!state.status?.chats_limited;
@@ -297,6 +306,7 @@ function connectionSettings(open){
   $("entry-settings").setAttribute("aria-expanded",String(open));
   show("connection-options",open);$("connection-options").open=open;
   if(open)window.TgWitnessProxies?.load();
+  else window.TgWitnessProxies?.stop?.();
   $("api-details").open=open;
 }
 $("entry-settings").addEventListener("click",()=>connectionSettings(!state.connectionSettings));
@@ -306,9 +316,24 @@ $("route-open").addEventListener("click",()=>{
 $("open-demo").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   state.token=state.demoToken;state.profile="default";await unlock();
 }));
+function syncLive(){
+  if(!state.token||!state.status||state.status.demo||window.TGW_ONLINE_DEMO||!["observations","chats"].includes(state.view)){
+    window.TgWitnessLive?.stop();return;
+  }
+  window.TgWitnessLive?.start({key:state.workspaceRevision+":"+state.profile,head:state.status.stats.head?.seq,api,tr,accessEnded:lock,
+    canRefresh:()=>{
+      if(state.drawerSeq!==null||window.getSelection()?.toString()||document.hidden)return false;
+      if(state.view==="chats"){const feed=$("chat-feed");return feed.scrollHeight-feed.scrollTop-feed.clientHeight<80;}
+      return state.events.length<=60&&window.scrollY<120;
+    },
+    refresh:async()=>{await refreshStatus();if(state.view==="chats")await refreshChats(true);else if(state.view==="observations")await refreshEvents();}
+  });
+}
 function navigate(view) {
   if(!viewAllowed(view))view="chats";
+  if(view!=="connection")window.TgWitnessProxies?.stop?.();
   state.view=view;
+  syncLive();
   $("workspace").dataset.currentView=view;
   document.querySelectorAll(".view").forEach(n=>n.hidden=n.id !== "view-"+view);
   document.querySelectorAll("[data-view]").forEach(n=>{
@@ -316,7 +341,7 @@ function navigate(view) {
     n.classList.toggle("active",selected);
     if(selected)n.setAttribute("aria-current","page");else n.removeAttribute("aria-current");
   });
-  $("view-label").textContent=tr({chats:"Chats",observations:"Journal",sources:"Sources",evidence:"Exports",sealed:"Exports",witness:"Extras",parameters:"Parameters",connection:"Account",accounts:"Accounts",access:"Access",integrations:"Integrations",analysis:"Ask the archive"}[view]);
+  $("view-label").textContent=tr({chats:"Chats",observations:"Journal",sources:"Sources",evidence:"Exports",sealed:"Exports",witness:"Extras",parameters:"Parameters",connection:"Account",accounts:"Accounts",access:"Access",integrations:"Integrations",analysis:state.status?.analysis?.enabled?"Ask the archive":"Machine recognition"}[view]);
   show("entry-header",view==="connection");
   if(view==="connection")connectionSettings(false);
   if (view==="sources") {renderTargets();loadScope().catch(e=>toast(e.message,true));}
@@ -369,6 +394,21 @@ function renderQuick(){
     option.addEventListener("click",()=>openQuickDestination(nav.dataset.view));
     quickResults.append(option);
   }
+  if(query){
+    const option=(key,title,subtitle,action)=>{
+      const item=node("div","quick-option");item.id="quick-option-"+key;item.setAttribute("role","option");item.dataset.action=key;
+      item.append(node("span","quick-label",title),node("small","",subtitle),icon("chevron"));
+      item.addEventListener("click",()=>{quickDialog.close();busy(null,action);});quickResults.append(item);
+    };
+    for(const profile of state.profiles.filter(p=>!p.error_type&&(p.label+" "+p.id).toLowerCase().includes(query)).slice(0,8))
+      option("workspace-"+profile.id,profile.label,tr("Accounts"),()=>switchProfile(profile.id));
+    for(const chat of (state.status?.targets||[]).filter(c=>(c.title+" "+c.chat_id).toLowerCase().includes(query)).slice(0,12))
+      option("chat-"+chat.chat_id,chat.title,String(chat.chat_id),async()=>{navigate("chats");await refreshChats();await openChat(chat.chat_id);});
+    const text=quickSearch.value.trim().slice(0,200);
+    option("journal",tr("Search journal"),text,async()=>{state.search=text;state.cursor=null;$("event-search").value=text;navigate("observations");await refreshEvents();});
+    if(/^(@[a-z0-9_]{3,}|(?:https?:\/\/)?t\.me\/\S+)$/i.test(text)&&may("interact"))
+      option("telegram",tr("Open Telegram link"),text,()=>{navigate("chats");$("chat-link").value=text;document.querySelector(".chat-open").open=true;$("chat-link").focus();});
+  }
   show("quick-empty",!quickResults.children.length);selectQuick(0);
 }
 function openQuickDestination(view){
@@ -401,7 +441,7 @@ quickSearch.addEventListener("keydown",event=>{
     event.preventDefault();selectQuick(quickIndex+(event.key==="ArrowDown"?1:-1));
   }else if(event.key==="Enter"){
     event.preventDefault();const option=quickResults.children[quickIndex];
-    if(option)openQuickDestination(option.dataset.destination);
+    if(option)option.click();
   }
 });
 quickDialog.addEventListener("click",event=>{
@@ -604,14 +644,17 @@ function fillSourceSelect(id,value,all=false) {
   state.status.targets.filter(t=>all || t.enabled).forEach(t=>n.append(new Option(t.title,String(t.chat_id))));
   if ([...n.options].some(o=>o.value===String(value))) n.value=String(value);
 }
+let statusRequest=0,profilesRequest=0;
 async function refreshStatus() {
-  const revision=state.workspaceRevision,result=await json("status");
-  if(revision!==state.workspaceRevision)return;
+  const request=++statusRequest,revision=state.workspaceRevision,result=await json("status");
+  if(revision!==state.workspaceRevision||request!==statusRequest)return;
   state.status=result;applyAccess();renderStatus();
   if(!viewAllowed(state.view))navigate("chats");
 }
 async function loadProfiles(){
-  const result=await json("profiles",undefined,{root:true});state.profiles=result.profiles;
+  const request=++profilesRequest,result=await json("profiles",undefined,{root:true});
+  if(request!==profilesRequest)return;
+  state.profiles=result.profiles;
 
   for(const profile of state.profiles)if(profile.id==="default"&&profile.label==="Main account")profile.label=tr("Main account");
   const select=$("profile-select");select.replaceChildren();
@@ -629,6 +672,7 @@ async function loadProfiles(){
   select.value=state.profile;
   $("nav-accounts").textContent=String(state.profiles.length);
   await window.TgWitnessFleet?.load();
+  if(request!==profilesRequest)return;
   renderAccounts();
 }
 function accountPhaseLabel(p){
@@ -644,7 +688,9 @@ function accountIdentity(p){
   return (a.username?"@"+a.username+" · ":"")+"ID "+a.id;
 }
 function renderAccounts(){
-  const grid=$("accounts-list"),s=state.status;if(!grid||!s)return;grid.replaceChildren();$("fleet-groups")?.replaceChildren();
+  const grid=$("accounts-list"),s=state.status;if(!grid||!s)return;
+  window.TgWitnessFleet?.beforeRender?.();
+  grid.replaceChildren();$("fleet-groups")?.replaceChildren();
   const list=state.profiles||[];
   $("accounts-limit").textContent=trn("{n} workspace. Add as many as you need — each uses its own Telegram account.",
     "{n} workspaces. Add as many as you need — each uses its own Telegram account.",list.length);
@@ -722,6 +768,9 @@ function renderAccounts(){
   window.TgWitnessFleet?.decorate();
 }
 async function switchProfile(id){
+  selectedSources.clear();selectedDialogs.clear();sourceBatchBusy=false;
+  window.TgWitnessLive?.stop();window.TgWitnessReview?.clear();
+  window.TgWitnessProxies?.clear?.();
   window.TgWitnessAnalysis?.clear();
   quickDialog.close();
   const revision=++state.workspaceRevision;
@@ -755,6 +804,7 @@ async function switchProfile(id){
   await loadNotifications().catch(()=>{});
   if(revision!==state.workspaceRevision)return;
   setAuthStep(state.status.collector.has_session?"authorized":"credentials");
+  syncLive();
   toast(tr("Switched workspace. Other collectors keep their current state."));
   }catch(error){if(revision===state.workspaceRevision&&!(error instanceof StaleView))lock();throw error;}
   finally{if(revision===state.workspaceRevision)$("workspace").inert=false;}
@@ -901,7 +951,8 @@ function detailBlock(label,text,cls="") {
   const n=node("div","detail-block "+cls); n.append(node("small","",label),node("div","message-text",text||tr("(No text in this version)"))); return n;
 }
 async function openDetail(e) {
-  previouslyFocused=document.activeElement; state.drawerSeq=e.seq;
+  if($("detail-drawer").hidden)previouslyFocused=document.activeElement;
+  state.drawerSeq=e.seq;
   const label=labels[e.kind]?.[0]||e.kind;
   const content=$("detail-content");content.replaceChildren();
   const h=node("h2","",label);h.id="detail-title";content.append(h);
@@ -914,14 +965,23 @@ async function openDetail(e) {
     [tr("Action attribution"),tr(e.kind==="message.edited" ? "Editor not supplied" : e.kind==="message.deleted" ? "Deleter not supplied" : "See raw record and visibility notes")],
   ]) { const box=node("div");box.append(node("small","",label),node("strong","",String(value)));meta.append(box); }
   content.append(meta);
+  const copies=node("div","review-tabs");
+  for(const [label,value] of [["SHA-256",e.hash],["Message ID",e.message_id],["Sender ID",sender],
+    ["Link to this record",location.origin+location.pathname+"?"+new URLSearchParams({event:e.seq,workspace:state.profile})+"#journal"]]){
+    if(value===null||value===undefined)continue;
+    const copy=node("button","quiet small",tr(label));copy.type="button";copy.title=String(value);
+    copy.addEventListener("click",()=>busy(copy,async()=>{await navigator.clipboard.writeText(String(value));toast(tr("Copied"));}));copies.append(copy);
+  }
+  content.append(copies);
   const versions=node("div");content.append(versions);
   if("text" in e.payload)versions.append(detailBlock(tr("Captured version"),e.payload.text));
   content.append(node("p","detail-caption",excerpt(e)));
   if(e.payload.media_sha256) {
-    const b=node("button","secondary",tr("↓ Download preserved attachment"));
-    b.addEventListener("click",()=>busy(b,()=>download("media/"+e.payload.media_sha256,e.payload.media_sha256)));content.append(b);
-    const recognize=node("button","quiet",tr("Recognize attachment"));recognize.type="button";
-    recognize.addEventListener("click",()=>window.TgWitnessMedia?.select({workspace:state.profile,chat_id:e.chat_id,event_seq:e.seq,digest:e.payload.media_sha256}));content.append(recognize);
+    content.append(window.TgWitnessReview.attachment(e.payload,{api,download,busy,tr}));
+    if(state.status?.analysis?.media_available){
+      const recognize=node("button","quiet",tr("Recognize attachment"));recognize.type="button";
+      recognize.addEventListener("click",()=>window.TgWitnessMedia?.select({workspace:state.profile,chat_id:e.chat_id,event_seq:e.seq,digest:e.payload.media_sha256}));content.append(recognize);
+    }
   }
   const raw=node("details","detail-block");raw.append(node("summary","",tr("Original signed record")),node("pre","",JSON.stringify(e,null,2)));content.append(raw);
   content.append(node("p","detail-hash","SHA-256 · "+e.hash));
@@ -931,12 +991,12 @@ async function openDetail(e) {
     try {
       const result=await json("events?"+new URLSearchParams({chat_id:e.chat_id,message_id:e.message_id,limit:"500"}));
       if(state.drawerSeq!==e.seq)return;
-      const previous=result.events.find(x=>x.seq<e.seq && ["message.new","message.edited","message.snapshot"].includes(x.kind));
+      const previous=result.events.find(x=>x.seq<e.seq && ["message.new","message.edited","message.snapshot","message.recovered"].includes(x.kind));
       if(e.kind==="message.edited") {
         versions.replaceChildren();
-        versions.append(previous ? detailBlock(tr("Previously observed · event #{seq}",{seq:previous.seq}),previous.payload.text,"before")
-          : detailBlock(tr("Previous content unavailable"),tr("No earlier content version was found in the loaded records."),"before"));
-        versions.append(detailBlock(tr("Newly observed version"),e.payload.text,"after"));
+        if(previous)versions.append(window.TgWitnessReview.compare(previous.payload,e.payload,tr));
+        else versions.append(detailBlock(tr("Previous content unavailable"),tr("No earlier content version was found in the loaded records."),"before"),
+          detailBlock(tr("Newly observed version"),e.payload.text,"after"));
       } else if(e.kind==="message.deleted") {
         versions.append(previous ? detailBlock(tr("Last captured content before this notice"),previous.payload.text)
           : detailBlock(tr("Content unavailable"),tr("The journal has no earlier content version in the loaded records. This notice cannot recover it.")));
@@ -954,17 +1014,65 @@ function closeDetail(){state.drawerSeq=null;leave("detail-drawer");leave("drawer
 $("close-detail").addEventListener("click",closeDetail);$("drawer-backdrop").addEventListener("click",closeDetail);
 document.addEventListener("keydown",e=>{
   if($("detail-drawer").hidden)return;
+  if(document.querySelector("dialog[open]"))return;
   if(e.key==="Escape")closeDetail();
+  if(!e.ctrlKey&&!e.metaKey&&!e.altKey&&!e.shiftKey&&!e.isComposing&&!e.target.closest("input,textarea,select,[contenteditable='true'],audio,video")
+    &&!window.getSelection()?.toString()&&["ArrowUp","ArrowDown","j","k"].includes(e.key)){
+    const index=state.events.findIndex(item=>item.seq===state.drawerSeq),step=["ArrowDown","j"].includes(e.key)?1:-1;
+    if(index>=0&&state.events[index+step]){e.preventDefault();openDetail(state.events[index+step]);}
+  }
   if(e.key==="Tab"){
-    const nodes=[...$("detail-drawer").querySelectorAll("button,summary,a,[tabindex='0']")].filter(n=>!n.disabled);
+    const nodes=[...$("detail-drawer").querySelectorAll("button,summary,a,audio,video,[tabindex='0']")].filter(n=>!n.disabled&&n.getClientRects().length);
     const first=nodes[0],last=nodes.at(-1);
     if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
     else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
   }
 });
+const selectedSources=new Set(),selectedDialogs=new Set();let sourceBatchBusy=false;
+async function updateSources(ids,changes){
+  if(sourceBatchBusy||!ids.length)return;
+  const revision=state.workspaceRevision;sourceBatchBusy=true;renderSourceTools();
+  try{
+    await json("targets/batch",{chat_ids:ids,...changes});
+    if(revision!==state.workspaceRevision)return;
+    ids.forEach(id=>{selectedSources.delete(id);selectedDialogs.delete(id);});await refreshStatus();renderDialogs();
+  }finally{if(revision===state.workspaceRevision){sourceBatchBusy=false;renderSourceTools();}}
+}
+function sourceCheck(id,selected,title){
+  const check=node("input","source-select");check.type="checkbox";check.checked=selected.has(id);check.disabled=sourceBatchBusy||state.status.demo;
+  check.setAttribute("aria-label",tr("Select {name}",{name:title}));
+  check.addEventListener("change",()=>{if(check.checked)selected.add(id);else selected.delete(id);renderSourceTools();});return check;
+}
+function matchingDialogs(){const term=$("dialog-search").value.toLowerCase(),type=$("dialog-kind").value;
+  return state.dialogs.filter(d=>(d.title+" "+d.chat_id).toLowerCase().includes(term)&&(!type||kindType[d.kind]===type));}
+function renderSourceTools(){
+  if(!$("target-tools")){
+    const bar=node("div","source-bulk");bar.id="target-tools";
+    const search=node("input");search.id="target-search";search.type="search";search.placeholder=tr("Search chats");search.setAttribute("aria-label",tr("Search chats"));search.addEventListener("input",renderTargets);
+    const filter=node("select");filter.id="target-filter";filter.setAttribute("aria-label",tr("Filter"));
+    for(const [value,label] of [["","All"],["priority","Priority"],["paused","Paused"],["unconfirmed","Unconfirmed access"]]){const option=node("option","",tr(label));option.value=value;filter.append(option);}
+    filter.addEventListener("change",renderTargets);bar.append(search,filter);$("target-list").before(bar);
+    const actions=node("div","source-bulk");actions.id="target-bulk-actions";bar.after(actions);
+  }
+  const actions=$("target-bulk-actions");actions.replaceChildren();
+  for(const [label,change] of [["Enable selected",{enabled:true}],["Pause selected",{enabled:false}],["Mark priority",{priority:true}]]){
+    const button=node("button","quiet small",tr(label)+" · "+selectedSources.size);button.type="button";button.disabled=sourceBatchBusy||!selectedSources.size||state.status.demo;
+    button.addEventListener("click",()=>busy(button,()=>updateSources([...selectedSources],change)));actions.append(button);
+  }
+  if(!$("dialog-bulk-actions")){const actions=node("div","source-bulk");actions.id="dialog-bulk-actions";$("dialog-list").before(actions);}
+  const available=$("dialog-bulk-actions");available.replaceChildren();
+  const enabled=new Set(state.status.targets.filter(t=>t.enabled).map(t=>t.chat_id));
+  const matching=matchingDialogs().filter(d=>!enabled.has(d.chat_id)).map(d=>d.chat_id);
+  for(const [label,ids] of [["Add selected",[...selectedDialogs]],["Add all matching",matching]]){
+    const button=node("button","secondary small",tr(label)+" · "+ids.length);button.type="button";button.disabled=sourceBatchBusy||!ids.length||ids.length>500||state.status.demo;
+    button.addEventListener("click",()=>busy(button,()=>updateSources(ids,{enabled:true})));available.append(button);
+  }
+}
 function renderTargets() {
   const list=$("target-list");list.replaceChildren();
   const s=state.status;
+  renderSourceTools();
+  const term=$("target-search").value.trim().toLowerCase(),filter=$("target-filter").value;
   if(!s.targets.length)list.append(node("p","hint",tr(s.collector.has_session?
     "No sources selected yet. Add groups from your chat list.":"Add an account first.")));
   const wide=(s.scope?.mode||"selected")!=="selected";
@@ -975,6 +1083,8 @@ function renderTargets() {
   $("target-list-title").textContent=tr(wide?"Chats in the scope":"Selected chats");
   for(const t of s.targets){
     const source=s.collector.source_status?.[String(t.chat_id)];
+    if(!(t.title+" "+t.chat_id).toLowerCase().includes(term)||(filter==="priority"&&!t.priority)||
+      (filter==="paused"&&t.enabled)||(filter==="unconfirmed"&&source?.state!=="access_unconfirmed"))continue;
     const row=node("div","target-row"),info=node("div"),title=node("h3","",t.title);
     if(t.origin==="scope"){const badge=node("span","pill",tr("auto"));badge.title=tr("Added by the observation scope");title.append(" ",badge);}
     info.append(title,node("p","",termText(t.kind)+" · "+t.chat_id));
@@ -1006,7 +1116,7 @@ function renderTargets() {
       }));
       actions.append(exclude);
     }
-    actions.append(remove);row.append(info,actions);list.append(row);
+    actions.append(remove);row.append(sourceCheck(t.chat_id,selectedSources,t.title),info,actions);list.append(row);
   }
   fillSourceSelect("snapshot-source",$("snapshot-source").value);
   fillSourceSelect("chat-export-source",$("chat-export-source").value,true);
@@ -1020,15 +1130,15 @@ function renderTargets() {
 }
 const kindType={channel:"channels",supergroup:"groups",group:"groups",private:"private",bot:"bots"};
 function renderDialogs(){
-  const list=$("dialog-list");list.replaceChildren();const term=$("dialog-search").value.toLowerCase(),type=$("dialog-kind").value;
+  const list=$("dialog-list");list.replaceChildren();renderSourceTools();
   $("finish-source-selection").disabled=!state.status.targets.some(t=>t.enabled);
-  state.dialogs.filter(d=>d.title.toLowerCase().includes(term)&&(!type||kindType[d.kind]===type)).forEach(d=>{
+  matchingDialogs().forEach(d=>{
     const row=node("div","target-row"),info=node("div");
     info.append(node("h3","",d.title),node("p","",termText(d.kind)+" · "+d.chat_id+(d.visibility?" · "+termText(d.visibility):"")));
     const chosen=state.status.targets.some(t=>t.chat_id===d.chat_id&&t.enabled);
     const b=node("button","secondary",tr(chosen?"Selected":"Add source"));b.disabled=chosen;
     b.addEventListener("click",()=>busy(b,async()=>{await json("targets",{chat_id:d.chat_id,enabled:true});await refreshStatus();renderDialogs();}));
-    row.append(info,b);list.append(row);
+    if(!chosen)row.append(sourceCheck(d.chat_id,selectedDialogs,d.title));row.append(info,b);list.append(row);
   });
   if(!list.children.length)list.append(node("p","hint",tr("No available chats match this search.")));
 }
@@ -2115,6 +2225,11 @@ function routeFields(){
   const endpoint=kind!=="direct"&&kind!=="mtproxy_auto";
   show("network-endpoint",endpoint);show("network-login",kind!=="mtproxy");show("network-mtproxy",kind==="mtproxy");
   $("network-host").required=endpoint;$("network-secret").required=kind==="mtproxy";
+  $("network-link").closest(".proxy-link").hidden=kind!=="mtproxy";
+  document.querySelector(".proxy-catalog").hidden=kind!=="mtproxy";
+  $("network-auto-help").hidden=kind!=="mtproxy_auto";
+  window.TgWitnessProxies?.sync?.();
+  if(kind==="mtproxy"&&$("network-details").open)loadProxyCatalog();
 }
 function renderConnection(){
   renderApiState();
@@ -2134,7 +2249,7 @@ function renderConnection(){
     r.host+":"+r.port+" · "+(r.has_credentials?tr("Credentials stored in encrypted vault.")+" ":"")+tr("Direct fallback disabled.");
   if(networkLoadedFor!==state.profile){
     $("network-kind").value=r.kind;$("network-host").value=r.host||"";$("network-port").value=String(r.port||1080);
-    networkLoadedFor=state.profile;routeFields();loadProxyCatalog();
+    networkLoadedFor=state.profile;routeFields();
     if(!state.status.demo)loadPolicy().catch(e=>toast(e.message,true));
   }
   $("network-form").querySelector('[type="submit"]').disabled=state.status.demo||c.running;
@@ -2149,6 +2264,7 @@ function renderConnection(){
   }
 }
 $("network-kind").addEventListener("change",routeFields);
+$("network-details").addEventListener("toggle",()=>{if($("network-details").open&&$("network-kind").value==="mtproxy")loadProxyCatalog();});
 async function loadProxyCatalog(refresh=false){
   const profile=state.profile,revision=state.workspaceRevision,select=$("proxy-catalog-select"),previous=select.value;
   try{
@@ -2230,8 +2346,11 @@ function renderPolicy(p){
 }
 function outsideFields(){
   const none=!$("outside-kind").value;
-  for(const id of ["outside-host","outside-port","outside-username","outside-password"])$(id).disabled=none||!$("outside-enabled").checked;
+  for(const id of ["outside-host","outside-port","outside-username","outside-password"]){
+    $(id).disabled=none||!$("outside-enabled").checked;$(id).parentElement.hidden=$(id).disabled;
+  }
   $("outside-kind").disabled=!$("outside-enabled").checked;
+  $("outside-kind").parentElement.hidden=!$("outside-enabled").checked;
 }
 async function loadPolicy(){
   const profile=state.profile,p=await json("network/policy");
@@ -2429,7 +2548,7 @@ $("sign-out").addEventListener("click",e=>busy(e.currentTarget,async()=>{
     "Signed out here. Telegram did not confirm: end the session in Telegram under Settings → Devices."),!r.telegram_session_ended);
 }));
 
-const avatarCache=new Map(),mediaCache=new Map();
+const avatarCache=new Map();
 function avatarClass(id){let h=0;for(const ch of String(id??"?"))h=(h*31+ch.charCodeAt(0))>>>0;return "av"+(h%8);}
 function initials(name){
 
@@ -2480,7 +2599,7 @@ function modeSummary(s){
 const exportRunning=()=>multiRunning()||state.status?.collector.chat_export?.phase==="running";
 async function refreshChats(refresh=false){
   if(!state.status)return;
-  await resumeMulti();
+  void resumeMulti();
   const revision=state.workspaceRevision,result=await json("chats");
   if(revision!==state.workspaceRevision)return;
   state.chats=result.chats;
@@ -2598,6 +2717,7 @@ function renderChat(){
 }
 function renderChatStatus(){
   const box=$("chat-status"),s=state.status,info=state.chatInfo;if(!info||!s||$("chat-main").hidden)return;
+  const focusedFilter=box.contains(document.activeElement)?document.activeElement.dataset.chatFilter:null;
   const c=s.collector,contextOpen=!!box.querySelector(".chat-context[open]");box.replaceChildren();
   const state_=node("div","chat-state"),say=(cls,text)=>{state_.className="chat-state "+cls;const t=node("span","",text);t.title=text;state_.append(t);};
   const action=(cls,label,work)=>{const b=node("button",cls+" small",label);b.type="button";b.addEventListener("click",()=>busy(b,work));state_.append(b);return b;};
@@ -2612,6 +2732,7 @@ function renderChatStatus(){
   const filters=node("div","chat-filters");filters.setAttribute("role","group");filters.setAttribute("aria-label",tr("Show messages"));
   for(const [key,label] of [["all",tr("All")],["deleted",tr("Deleted")],["edited",tr("Edited")],["people",tr("People")]]){
     const f=node("button","filter"+(state.chatFilter===key?" active":""),label);f.type="button";
+    f.dataset.chatFilter=key;
     f.setAttribute("aria-pressed",String(state.chatFilter===key));
     f.addEventListener("click",()=>{state.chatFilter=key;if(key==="people")state.chatAuthor=null;renderChatStatus();renderChatFeed();});filters.append(f);
   }
@@ -2633,6 +2754,7 @@ function renderChatStatus(){
   const blocked=s.demo||!c.has_session||!info.enabled;
   $("chat-load-history").disabled=blocked;$("chat-history-limit").disabled=blocked;
   $("chat-export-start").disabled=s.demo||!c.has_session||exportRunning();
+  if(focusedFilter)box.querySelector('[data-chat-filter="'+focusedFilter+'"]')?.focus({preventScroll:true});
 }
 function renderChatFeed(){
   const feed=$("chat-feed"),s=state.status,info=state.chatInfo;
@@ -2646,6 +2768,12 @@ function renderChatFeed(){
       else feed.replaceChildren(notice);
     });return;
   }
+  const expanded=new Map([...feed.querySelectorAll(".msg")].map(row=>[row.id,{
+    versions:!!row.querySelector(".versions"),author:!!row.querySelector(".sender-details[open]")
+  }]));
+  const active=document.activeElement,focusRow=feed.contains(active)?active.closest(".msg")?.id:null;
+  const focusSelector=active.matches("button.pill-edited")?"button.pill-edited":
+    active.matches(".sender-details > summary")?".sender-details > summary":null;
   feed.replaceChildren();
   if(!chatReady){feed.append(viewState("loading",tr("Loading…")));return;}
   const shown=state.chatMessages.filter(m=>(state.chatFilter==="all"||(state.chatFilter==="deleted"?m.deleted||m.missing:m.edited))
@@ -2668,6 +2796,12 @@ function renderChatFeed(){
     const sid=m.sender?.id??null,t=when?new Date(when).getTime():0,grouped=sid!==null&&sid===lastSender&&t>=lastTime&&t-lastTime<300000;
     lastSender=sid;lastTime=t;feed.append(messageRow(m,grouped,byId));
   }
+  for(const row of feed.querySelectorAll(".msg")){
+    const previous=expanded.get(row.id);if(!previous)continue;
+    if(previous.versions)row.querySelector("button.pill-edited")?.click();
+    if(previous.author&&row.querySelector(".sender-details"))row.querySelector(".sender-details").open=true;
+  }
+  if(focusRow&&focusSelector)$(focusRow)?.querySelector(focusSelector)?.focus({preventScroll:true});
 }
 function messageRow(m,grouped,byId){
   const row=node("div","msg"+(grouped?" grouped":"")+(m.deleted?" deleted":m.missing?" missing":""));row.id="msg-"+m.message_id;
@@ -2694,7 +2828,8 @@ function messageRow(m,grouped,byId){
   if(m.deleted){const d=node("span","pill pill-deleted",tr("Deleted"));d.title=tr("Deletion seen {time}. Telegram does not report who deleted it or exactly when.",{time:fmtFull(m.deleted_observed_at)});meta.append(d);}
   else if(m.missing){const d=node("span","pill pill-missing",tr("Not found at recheck"));d.title=tr("Telegram no longer returned this message at {time} and no deletion notice was received: deleted while notices were missed, removed by an auto-delete timer, or no longer visible to this account.",{time:fmtFull(m.missing_observed_at)});meta.append(d);}
   if(m.versions.length>1){const e=node("button","pill pill-edited",tr("Edited · {n} versions",{n:m.versions.length}));e.type="button";e.title=tr("Show every saved version");
-    e.addEventListener("click",()=>{const open=bubble.querySelector(".versions");if(open){open.remove();return;}bubble.insertBefore(versionsNode(m),meta);});meta.append(e);}
+    e.setAttribute("aria-expanded","false");
+    e.addEventListener("click",()=>{const open=bubble.querySelector(".versions");e.setAttribute("aria-expanded",String(!open));if(open){open.remove();return;}bubble.insertBefore(versionsNode(m),meta);});meta.append(e);}
   else if(m.edited){const e=node("span","pill pill-edited",tr("Edited"));e.title=tr("Telegram marks this message as edited; the earlier text was not saved.");meta.append(e);}
   if(!m.origins.includes("live")&&m.origins.includes("history")){const o=node("span","origin",tr("from history"));o.title=tr("Loaded from chat history, not seen live");meta.append(o);}
   meta.append(node("span","time",fmtTime(m.sent_at||m.versions[0]?.observed_at)));
@@ -2821,6 +2956,25 @@ async function openDossier(personId){
   else pictures.append(node("p","hint",tr("No avatar in the local cache. Avatars are cached when the panel shows them.")));
   if(avatar.similar.length)pictures.append(node("p","",tr("Similar avatars: {list}",{list:avatar.similar.map(s=>(s.in_this_chat?nameOf(s.id):"ID "+s.id)+" ("+s.distance+")").join(", ")})));
   if(avatar.photo_ids.length)pictures.append(factSection(tr("Profile photo IDs seen"),avatar.photo_ids));
+  if(avatar.history?.length){
+    const history=node("details","avatar-history"),entries=node("div");let shown=0;
+    history.append(node("summary","",tr("Saved versions, oldest first")+" · "+avatar.history.length),entries);
+    const more=node("button","quiet small",tr("Load more"));more.type="button";
+    const fill=()=>{
+      for(const saved of avatar.history.slice(shown,shown+20)){
+        const row=node("div","avatar-history-item");row.append(node("p","hint",tr("First")+" · "+fmtFull(saved.first_at)+" / "+tr("Last")+" · "+fmtFull(saved.last_at)),
+          window.TgWitnessReview.attachment(saved,{api,download,busy,tr}),refButtons(saved.records||[]));entries.append(row);
+      }
+      shown+=20;more.hidden=shown>=avatar.history.length;
+    };
+    history.addEventListener("toggle",()=>{if(history.open&&!shown)fill();});more.addEventListener("click",fill);history.append(more);pictures.append(history);
+  }
+  if(avatar.history_similar?.length){
+    for(const similar of avatar.history_similar.slice(0,20)){
+      const line=node("p","",tr("Similar avatars: {list}",{list:nameOf(similar.id)+" ("+similar.distance+")"}));
+      line.append(refButtons(similar.records||[]),refButtons(similar.other_records||[]));pictures.append(line);
+    }
+  }
   content.append(pictures);
   const r=person.relations,links=node("section","dossier-section");links.append(node("h3","",tr("Connections")));
   const linkList=node("ul");
@@ -2843,7 +2997,8 @@ async function openDossier(personId){
 function versionsNode(m){
   const box=node("div","versions");box.append(node("div","versions-title",tr("Saved versions, oldest first")));
   m.versions.forEach((v,i)=>{const item=node("div","version"+(i===m.versions.length-1?" current":""));
-    item.append(node("small","",(i===0?tr("First saved"):tr("Edit {n}",{n:i}))+" · "+tr("saved {time}",{time:fmtFull(v.observed_at)})),node("div","",v.text||tr("(no text)")));
+    item.append(node("small","",(i===0?tr("First saved"):tr("Edit {n}",{n:i}))+" · "+tr("saved {time}",{time:fmtFull(v.observed_at)})));
+    item.append(i?window.TgWitnessReview.compare(m.versions[i-1],v,tr):node("div","",v.text||tr("(no text)")));
     if(v.buttons)item.append(buttonsNode(v.buttons));
     const record=node("button","text-link",tr("Journal record #{n}",{n:v.seq}));record.type="button";
     record.addEventListener("click",()=>busy(record,()=>openRecord(v.seq)));item.append(record);box.append(item);});
@@ -3014,18 +3169,7 @@ function profileNode(){
   box.append(save);return box;
 }
 function mediaNode(media){
-  const image=/^image\/(jpeg|png|webp|gif)$/.test(media.mime_type||"")&&(media.size||0)<15*1024*1024;
-  const wrap=node("div",image?"media-image":"media-chip");
-  if(image){
-    const img=node("img");img.alt=media.name||tr("Saved image");wrap.append(img);
-    if(!mediaCache.has(media.sha256))mediaCache.set(media.sha256,api("media/"+media.sha256).then(r=>r.blob())
-      .then(b=>URL.createObjectURL(new Blob([b],{type:media.mime_type}))).catch(()=>{mediaCache.delete(media.sha256);return null;}));
-    mediaCache.get(media.sha256).then(url=>{if(url)img.src=url;else{wrap.className="media-chip";wrap.textContent=tr("Image saved — preview unavailable");}});
-  }else{
-    wrap.append(node("span","",tr("Attachment: {name}",{name:media.name||tr("file")})+(media.size?" · "+humanSize(media.size):"")));
-    const b=node("button","quiet small",tr("Save"));b.type="button";b.addEventListener("click",()=>busy(b,()=>download("media/"+media.sha256,media.name||media.sha256)));wrap.append(b);
-  }
-  return wrap;
+  return window.TgWitnessReview.attachment(media,{api,download,busy,tr});
 }
 async function loadHistory(button,limit){
   await busy(button,async()=>{
@@ -3037,8 +3181,13 @@ async function loadHistory(button,limit){
 $("chats-manage").addEventListener("click",()=>navigate("sources"));
 $("chat-load-history").addEventListener("click",e=>loadHistory(e.currentTarget,Number($("chat-history-limit").value)));
 
-let multiPoll=null;
+let multiPoll=null,multiRequest=0,multiDiscovery=null;
 const multiRunning=()=>state.multi?.phase==="running";
+const multiCurrent=(revision,token,request)=>revision===state.workspaceRevision&&token===state.token&&
+  !!token&&!$("workspace").hidden&&request===multiRequest;
+const multiRetryable=error=>!(error instanceof StaleView)&&
+  (!error.status||[408,429].includes(error.status)||error.status>=500);
+const multiRetryDelay=attempt=>Math.min(30000,1500*2**Math.min(attempt+1,5));
 async function openExportDialog(){
   const chat=state.chat,profile=state.profile,revision=state.workspaceRevision,generation=chatGeneration;
   toast(tr("Asking Telegram how big this chat is…"));
@@ -3108,20 +3257,48 @@ function renderMulti(){
   }
   box.append(workers);
 }
-async function pollMulti(id){
+async function pollMulti(id,attempt=0){
+  if(!state.token||$("workspace").hidden||(state.multi?.id&&state.multi.id!==id))return;
   clearTimeout(multiPoll);multiPoll=null;
+  const revision=state.workspaceRevision,token=state.token,request=++multiRequest;
+  const current=()=>multiCurrent(revision,token,request);
+  state.multiChecked=true;
   try{
     const before=state.multi?.phase,x=await json("multi-export/"+encodeURIComponent(id),undefined,{root:true});
+    if(!current())return;
     state.multi=x;renderMulti();
-    if(x.phase==="running")multiPoll=setTimeout(()=>pollMulti(id),1500);
+    if(x.phase==="running")multiPoll=setTimeout(()=>{if(current())pollMulti(id);},1500);
     else if(before==="running"&&x.phase==="done")toast(tr("Chat export finished: {n} messages. Save the signed archive.",{n:x.captured.toLocaleString()}));
     else if(before==="running"&&x.phase==="failed")toast(tr("Chat export failed: {error}",{error:x.error||tr("unknown error")}),true);
-  }catch(e){toast(e.message,true);}
+  }catch(e){
+    if(!current()||e instanceof StaleView)return;
+    if(multiRetryable(e))multiPoll=setTimeout(()=>{if(current())pollMulti(id,attempt+1);},multiRetryDelay(attempt));
+    else if([403,404].includes(e.status)){state.multi=null;renderMulti();}
+    if(!attempt)toast(e.message,true);
+  }
 }
-async function resumeMulti(){
-  if(state.multiChecked)return;state.multiChecked=true;
-  const x=await json("multi-export/current",undefined,{root:true}).catch(()=>null);
-  if(x&&["running","done"].includes(x.phase)){state.multi=x;renderMulti();if(x.phase==="running")pollMulti(x.id);}
+async function resumeMulti(attempt=0){
+  if(state.multiChecked||!state.token||$("workspace").hidden)return;
+  if(multiDiscovery&&multiCurrent(multiDiscovery.revision,multiDiscovery.token,multiDiscovery.request))return multiDiscovery.promise;
+  clearTimeout(multiPoll);multiPoll=null;
+  const request={revision:state.workspaceRevision,token:state.token,request:++multiRequest};
+  const current=()=>multiCurrent(request.revision,request.token,request.request);
+  multiDiscovery=request;
+  request.promise=(async()=>{
+    try{
+      const x=await json("multi-export/current",undefined,{root:true});
+      if(!current())return;
+      state.multiChecked=true;
+      state.multi=x&&["running","done"].includes(x.phase)?x:null;renderMulti();
+      if(state.multi?.phase==="running")pollMulti(x.id);
+    }catch(e){
+      if(!current()||e instanceof StaleView)return;
+      if(multiRetryable(e))multiPoll=setTimeout(()=>{if(current())resumeMulti(attempt+1);},multiRetryDelay(attempt));
+      else{state.multiChecked=true;state.multi=null;renderMulti();}
+      if(!attempt)toast(e.message,true);
+    }finally{if(multiDiscovery===request)multiDiscovery=null;}
+  })();
+  return request.promise;
 }
 function saveMulti(button){return busy(button,async()=>{
   const x=state.multi;if(!x?.ready)throw new Error(tr("No finished export to save."));
@@ -3297,21 +3474,24 @@ $("access-admin-form").addEventListener("submit",event=>{event.preventDefault();
     session_minutes:Number($("admin-idle").value)},{root:true});
   renderAccess();toast(tr("Limits saved."));
 });});
-let notifyTick=0;
-setInterval(async()=>{
-  if(!state.token||document.hidden||$("workspace").hidden)return;
+let notifyTick=0,pollRevision=null;
+async function pollWorkspace(){
+  if(!state.token||document.hidden||$("workspace").hidden||$("workspace").inert||pollRevision===state.workspaceRevision)return;
+  const revision=state.workspaceRevision;pollRevision=revision;
   try{
     const head=state.status?.stats.head?.seq;
     await refreshStatus();
-    if(state.view==="observations" && state.drawerSeq===null && state.events.length<=60
+    if(!window.TgWitnessLive?.active()&&state.view==="observations" && state.drawerSeq===null && state.events.length<=60
         && state.status.stats.head?.seq!==head) await refreshEvents();
-    if(state.view==="chats" && state.status.stats.head?.seq!==head) await refreshChats(true);
+    if(!window.TgWitnessLive?.active()&&state.view==="chats" && state.status.stats.head?.seq!==head) await refreshChats(true);
     if(state.view==="accounts") await loadProfiles();
     if(state.view==="witness") await loadExtras();
     if(state.view==="access") await loadAccess(true);
     if(++notifyTick%3===0) await loadNotifications();
-  }catch(e){if(!(e instanceof StaleView))$("status-chip").textContent=tr("Panel connection unavailable");}
-},5000);
+  }catch(e){if(revision===state.workspaceRevision&&!(e instanceof StaleView))$("status-chip").textContent=tr("Panel connection unavailable");}
+  finally{if(pollRevision===revision)pollRevision=null;}
+}
+setInterval(pollWorkspace,5000);
 async function bootstrap(){
   const revision=state.workspaceRevision;
   try{

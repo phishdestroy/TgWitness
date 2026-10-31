@@ -211,7 +211,7 @@ W pierwszym przykładzie należy jedynie wprowadzić dane uwierzytelniające API
 | **Ciągi** sesji programu Pyrogram | Proszę skorzystać z pliku Pyrogram o numerze `.session` lub skanować kod QR za pomocą telefonu. |
 | TData z kilkoma zalogowanymi kontami | Wyloguj się z pozostałych kont w aplikacji Telegram Desktop lub skorzystaj z pliku sesji przypisanego do każdego konta |
 | Tokeny botów | Nieobsługiwane: TgWitness obserwuje jako konto użytkownika |
-| Listy wielu kont w formatach CSV/JSON | Należy dodać jeden obszar roboczy na każde konto |
+| Listy wielu kont w formatach CSV/JSON | Zaimportuj obsługiwane pliki sesji za pomocą opcji **Konta → Importowanie kont** lub zaloguj się przez telefon/kod QR w osobnych obszarach roboczych |
 | Sesje testowe DC lub sesje z wykorzystaniem botów | Należy korzystać z produkcyjnego konta użytkownika |
 
 ## Wiele kont

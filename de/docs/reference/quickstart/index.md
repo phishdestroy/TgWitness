@@ -21,7 +21,16 @@ Wählen Sie eine Methode aus. Portable Downloads stehen zur Verfügung, sobald e
 | Windows | `TgWitness-<version>-windows-amd64-portable.zip` aus den GitHub-Veröffentlichungen extrahieren, auf `TgWitness.cmd` doppelklicken | Doppelklicken Sie auf „`Start.cmd`“ | Doppelklicken Sie auf „`scripts\Docker.cmd`“ |
 | Linux / macOS | — | `sh start.sh` | `sh scripts/docker-start.sh` |
 
-Um den Quellcode zu erhalten, laden Sie bitte die ZIP-Datei mit dem Quellcode von GitHub Releases herunter und entpacken Sie sie oder klonen Sie das Repository. „`Start.cmd`“ bietet an, Python 3.12 für Ihren Windows-Benutzer zu installieren, falls kein geeignetes Python gefunden wird (winget oder der signierte Installer von python.org). `start.sh` gibt den genauen Installationsbefehl für Ihre Linux-Distribution oder macOS aus, falls Python fehlt. Beim ersten Start der Quelldatei wird `.venv` erstellt und die Abhängigkeiten werden automatisch installiert.
+Für die Quellcode-Methoden [laden Sie den aktuellen `main`-Branch herunter und entpacken Sie ihn](https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip) oder klonen Sie das Repository:
+
+```
+git clone https://github.com/phishdestroy/TgWitness.git
+cd TgWitness
+```
+
+Der aktuelle Quellcode umfasst den Stapelimport von Konten, das MTProxy-Dashboard und das fortsetzbare Laden des Verlaufs. Die portable Vorschau 0.7.0 und ihr Release-Quellarchiv sind älter als diese Neuerungen. Siehe [das Changelog](https://phishdestroy.github.io/TgWitness/de/docs/reference/changelog/) für die Versionsabgrenzung.
+
+`Start.cmd` bietet an, Python 3.12 für Ihren Windows-Benutzer zu installieren, falls kein passendes Python gefunden wird (über winget oder das signierte Installationsprogramm von python.org). `start.sh` gibt den genauen Installationsbefehl für Ihre Linux-Distribution oder macOS aus, falls Python fehlt. Beim ersten Start aus dem Quellcode wird `.venv` erstellt und die Abhängigkeiten werden automatisch installiert.
 
 Docker erstellt die Anwendung und startet sie im Hintergrund; ein Python-Host ist nicht erforderlich. „`scripts\Docker.cmd`“ und „`scripts/docker-start.sh`“ geben die Panel-Adresse und das Token aus, wenn der Container ordnungsgemäß läuft. Die entsprechenden Docker-Befehle auf jedem unterstützten Host lauten:
 
@@ -57,7 +66,9 @@ Die Beispielnachrichten sind fiktiv. Im Demomodus kann keine Verbindung zu einem
 
 API-Zugangsdaten identifizieren Ihre Anwendung; sie autorisieren kein Konto an sich. Private Gruppen benötigen keinen öffentlichen Benutzernamen, aber Ihr Konto muss über Zugriffsrechte verfügen.
 
-Für bestehende Konten siehe [Konten und Sitzungsformate](https://phishdestroy.github.io/TgWitness/de/docs/reference/accounts/): Das Bedienfeld akzeptiert Telethon StringSession, Telethon/Pyrogram SQLite, TData-ZIP-Dateien für Einzelkonten sowie unterstützte Konto-JSON-Dateien. Wählen Sie eine Sitzung und die dazugehörige JSON-Datei gemeinsam aus und klicken Sie auf **„Konto verbinden**“. Eine Anmeldung per QR-Code ist ebenfalls mit denselben optionalen API-Einstellungen verfügbar. TDLib, Bots und Massenkontenlisten werden nicht unterstützt.
+Informationen zu bestehenden Konten finden Sie unter [Konten und Sitzungsformate](https://phishdestroy.github.io/TgWitness/de/docs/reference/accounts/): Das Panel akzeptiert Telethon StringSession, Telethon/Pyrogram SQLite, Einzelkonto-TData- ZIPs und unterstützte Konto-JSON-Dateien. Wählen Sie eine Sitzung und die zugehörige JSON-Datei gemeinsam aus und drücken Sie auf **Konto verbinden**. Die QR-Anmeldung ist ebenfalls mit denselben optionalen API-Einstellungen verfügbar. TDLib, Bot-Sitzungen und CSV/JSON- Kontobestände werden nicht unterstützt.
+
+Verwenden Sie für mehrere Konten **Konten → Konten importieren** und wählen Sie deren unterstützte Sitzungsdateien aus. Zugehörige JSON-Dateien werden anhand des Basisnamens zugeordnet; jedes importierte Konto erhält seinen eigenen Arbeitsbereich. Siehe [Massenimport und Kontogruppen](https://phishdestroy.github.io/TgWitness/de/docs/reference/accounts/#bulk-import-and-account-groups).
 
 Um ein weiteres Konto hinzuzufügen, drücken Sie „**+**“ neben der Kontoauswahl oder öffnen Sie **„Konto“ → „Einstellungen“ → „Verbindungseinstellungen“ → „Arbeitsbereiche“** oder nutzen Sie **die Funktion „Konten**“. Arbeitsbereiche verfügen über separate Sitzungen, Protokolle, Schlüssel, Quellen und Warteschlangen. Beim Wechseln der Ansicht laufen die anderen Erfassungsmodule weiter. Dasselbe Telegram-Konto kann in dieser Installation nicht zwei Arbeitsbereichen zugewiesen werden. Es gibt keine festgelegte Anzahl von Arbeitsbereichen; sie teilen sich einen Prozess, sodass die Kapazität von der Rechenleistung des Computers abhängt.
 

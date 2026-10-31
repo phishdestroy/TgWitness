@@ -80,7 +80,13 @@ Demoda, bildirim denetimleri görünür durumdadır ancak gönderme işlevi devr
 
 **Günlük**, gözlemleri, arama sonuçlarını ve filtreleri gösterir. Düzenleme yapıldığında yakalanan sürümler açılır; silme işlemi yapıldığında, varsa önceki içerik görüntülenir. Kaynağı bilinmeyen içerikler açıkça belirtilir. Sayımlar "**Genel Bakış"** bölümünde mevcuttur; toplama ayrıntıları yerel kılavuzda yer alır.
 
+Düzenlenmiş bir mesajın sürümlerini **Metindeki değişiklikler** veya **Yan yana** görünümüyle karşılaştırmak için mesajı açın; **Ham veriler** kaydedilen alanları gösterir. Gizli bağlantılardaki ve bot düğmelerindeki değişiklikler ayrı olarak görünür. Kaydedilen görselleri, sesleri veya videoları incelemek için ek önizlemesini açın; indirme düğmesi korunan orijinal dosyayı erişilebilir tutar.
+
+**Live**, kayıtlar geldikçe günlüğü ve sohbetleri günceller. İnceleme yaparken duraklatın veya hazır olduğunuzda yeni etkinlikler düğmesini kullanın; veri toplama çalışmaya devam eder. **Ctrl/Cmd+K** panel işlemlerini bulur ve günlükte arama yapar.
+
 **Kaynaklar** bölümünde gözlem kapsamı (seçilen sohbetler, bir Telegram klasörü veya tüm hesap), her türden erişilebilir sohbetler, öncelik yıldızlarıyla işaretlenmiş seçilmiş kaynaklar, ek ve yeniden kontrol ayarları ile geçmiş anlık görüntüleri yer alır. Özel kaynaklar, herkese açık bir bağlantı olmaksızın diyalog/ID yoluyla seçilir. Erişim durumu, kalıcı izinleri değil, en son kontrolü belirtir.
+
+Kaynakları filtreleyin, onay kutularını seçin, ardından bunları birlikte etkinleştirin, duraklatın veya öncelikli olarak işaretleyin. Kullanılabilir sohbetler listesinde **Seçilenleri ekle** seçiminizi kullanır; **Tüm eşleşmeleri ekle** ise geçerli arama ve tür filtresini kullanır.
 
 **Sohbetler → Kişiler,** kaydedilmiş mesajları olan herkesi listeler; sohbet için kişi profilleri etkinleştirildiğinde, bir tıklama ile o kişinin profili açılır ve burada günlük kayıtlarına bağlantılar bulunur.
 

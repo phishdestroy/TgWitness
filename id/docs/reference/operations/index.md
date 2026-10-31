@@ -80,7 +80,13 @@ Dalam demo, kontrol notifikasi terlihat tetapi pengiriman dinonaktifkan. Konfigu
 
 **Jurnal** menampilkan pengamatan, pencarian, dan filter. Pengeditan akan menampilkan versi yang terekam; penghapusan akan menampilkan konten sebelumnya jika tersedia. Sumber yang tidak diketahui tetap disebutkan secara eksplisit. Jumlah tersedia di bagian **Ikhtisar**; rincian akuisisi tetap ada di panduan lokal.
 
+Buka pesan yang diedit untuk membandingkan versinya dengan **Perubahan dalam teks** atau **Berdampingan**; **Data mentah** menampilkan kolom yang disimpan. Perubahan pada tautan tersembunyi dan tombol bot muncul secara terpisah. Buka pratinjau lampiran untuk memeriksa gambar, audio, atau video yang disimpan; tombol unduh menjaga agar file asli yang disimpan tetap tersedia.
+
+**Live** memperbarui jurnal dan obrolan saat catatan masuk. Jeda fitur ini saat meninjau, atau gunakan tombol peristiwa baru saat siap; pengumpulan data tetap berjalan. **Ctrl/Cmd+K** menemukan tindakan panel dan mencari di dalam jurnal.
+
 **Sumber** mencakup cakupan pengamatan (obrolan yang dipilih, folder Telegram, atau seluruh akun), obrolan yang dapat diakses dari segala jenis, sumber terpilih dengan bintang prioritas, pengaturan lampiran dan pemeriksaan ulang, serta cuplikan riwayat. Sumber pribadi dipilih berdasarkan dialog/ID tanpa tautan publik. Status akses menggambarkan pemeriksaan terbaru, bukan izin permanen.
+
+Filter sumber, centang kotaknya, lalu aktifkan, jeda, atau tandai sebagai prioritas secara bersamaan. Dalam daftar obrolan yang tersedia, **Tambahkan yang dipilih** menggunakan pilihan Anda; **Tambahkan semua hasil** menggunakan filter pencarian dan jenis saat ini.
 
 **Obrolan → Daftar Kontak** menampilkan semua orang yang pesannya telah disimpan; jika profil kontak diaktifkan untuk obrolan tersebut, satu klik akan membuka profil orang tersebut beserta tautan ke catatan jurnal.
 

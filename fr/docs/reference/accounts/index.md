@@ -211,7 +211,7 @@ Le premier exemple ne concerne que la saisie des identifiants API ; connectez-vo
 | **Chaînes** de session Pyrogram | Utilisez le fichier Pyrogram `.session`, ou le code QR/le numéro de téléphone |
 | TData avec plusieurs comptes connectés | Déconnectez-vous des autres comptes dans Telegram Desktop, ou utilisez le fichier de session propre à chaque compte |
 | Jetons de bot | Non pris en charge : TgWitness observe en tant que compte utilisateur |
-| Listes au format CSV/JSON de nombreux comptes | Ajoutez un espace de travail par compte |
+| Listes au format CSV/JSON de nombreux comptes | Importez les fichiers de session pris en charge via **Comptes → Importer des comptes**, ou connectez-vous par téléphone/QR dans des espaces de travail distincts |
 | Sessions de test sur DC ou via un bot | Utilisez un compte utilisateur de production |
 
 ## Comptes multiples

@@ -21,7 +21,16 @@ Bir yöntem seçin. Sürüm derlemesi yayınlandıktan sonra taşınabilir indir
 | Windows | GitHub Sürümleri'nden `TgWitness-<version>-windows-amd64-portable.zip` dosyasını çıkarın, `TgWitness.cmd` dosyasına çift tıklayın | `Start.cmd`'ye çift tıklayın | `scripts\Docker.cmd`'ye çift tıklayın |
 | Linux / macOS | — | `sh start.sh` | `sh scripts/docker-start.sh` |
 
-Kaynak kod yöntemleri için, GitHub Sürümleri'nden kaynak ZIP dosyasını indirip açın veya depo klonlayın. Uygun bir Python bulunmazsa (winget veya imzalı python.org yükleyicisi), `Start.cmd`, Windows kullanıcınız için Python 3.12'yi yüklemeyi önerir. `start.sh`, Python yoksa Linux dağıtımınız veya macOS için tam kurulum komutunu görüntüler. Kaynağın ilk çalıştırılması `.venv`'yi oluşturur ve bağımlılıkları otomatik olarak yükler.
+Kaynak kodu yöntemleri için [güncel `main` dalını indirip çıkarın](https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip) veya depoyu klonlayın:
+
+```
+git clone https://github.com/phishdestroy/TgWitness.git
+cd TgWitness
+```
+
+Güncel kaynak kodu; toplu hesap içe aktarma, MTProxy kontrol paneli ve kaldığı yerden devam edebilen geçmiş yükleme özelliklerini içerir. 0.7.0 taşınabilir önizleme sürümü ve sürüm kaynak arşivi bu eklemelerden önceye aittir. Sürüm sınırları için [değişiklik günlüğüne](https://phishdestroy.github.io/TgWitness/tr/docs/reference/changelog/) bakın.
+
+`Start.cmd`, uygun bir Python bulunamazsa Windows kullanıcınız için Python 3.12 kurmayı önerir (winget veya imzalı python.org yükleyicisi ile). `start.sh`, Python eksikse Linux dağıtımınız veya macOS için tam kurulum komutunu yazdırır. Kaynak koddan ilk başlatma, `.venv` ortamını oluşturur ve bağımlılıkları otomatik olarak yükler.
 
 Docker, uygulamayı derler ve arka planda çalıştırır; Python ana bilgisayarı gerekmez. `scripts\Docker.cmd` ve `scripts/docker-start.sh`, konteyner çalışır durumdayken panel adresini ve jetonu yazdırır. Desteklenen her ana bilgisayarda kullanılabilecek eşdeğer Docker komutları şunlardır:
 
@@ -57,7 +66,9 @@ Demo mesajları kurgusaldır. Demo modunda gerçek bir Telegram hesabına bağla
 
 API kimlik bilgileri uygulamanızı tanımlar; tek başlarına bir hesaba yetki vermezler. Özel gruplar için herkese açık kullanıcı adı gerekmez, ancak hesabınızın erişim izni olmalıdır.
 
-Mevcut hesaplar için [hesap ve oturum formatlarına](https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/) bakın: panel, Telethon StringSession, Telethon/Pyrogram SQLite, tek hesaplı TData ZIP ve desteklenen hesap JSON'larını kabul eder. Bir oturumu ve ona ait JSON dosyasını birlikte seçin, **"Hesaba Bağlan"** düğmesine basın. QR ile giriş de aynı isteğe bağlı API ayarlarıyla kullanılabilir. TDLib, botlar ve toplu hesap listeleri desteklenmemektedir.
+Mevcut hesaplar için [hesaplar ve oturum biçimleri](https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/) sayfasına bakın: panel; Telethon StringSession, Telethon/Pyrogram SQLite, tek hesaplı TData ZIP ve desteklenen hesap JSON biçimlerini kabul eder. Bir oturumu ve eşlik eden JSON dosyasını birlikte seçip **Hesap bağla** düğmesine basın. QR ile giriş de aynı isteğe bağlı API ayarlarıyla kullanılabilir. TDLib, bot oturumları ve CSV/JSON hesap envanterleri desteklenmez.
+
+Birden fazla hesap için **Hesaplar → Hesapları içe aktar** yolunu kullanın ve desteklenen oturum dosyalarını seçin. Eşlik eden JSON dosyaları temel dosya adına göre eşleştirilir; içe aktarılan her hesap kendi çalışma alanını alır. [Toplu içe aktarma ve hesap grupları](https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/#bulk-import-and-account-groups) bölümüne bakın.
 
 Başka bir hesap eklemek için, hesap seçicinin yanındaki **+** tuşuna basın veya **Hesap → Ayarlar → Bağlantı ayarları → Çalışma alanları seçeneğini** açın ya da **Hesaplar bölümünü** kullanın. Çalışma alanlarının ayrı oturumları, günlükleri, anahtarları, kaynakları ve kuyrukları vardır. Görünümler arasında geçiş yapıldığında diğer toplayıcılar çalışmaya devam eder. Bu kurulumda aynı Telegram hesabı iki çalışma alanına atanamaz. Çalışma alanlarının sabit bir sayısı yoktur; hepsi tek bir işlemi paylaşır, bu nedenle kapasite makineye bağlıdır.
 

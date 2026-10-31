@@ -63,11 +63,17 @@ auxquels vos comptes ont accès. Elle fonctionne en local avec son propre réper
 </tr>
 </tbody>
 </table></div>
-<p>Pour accéder aux sources, téléchargez et décompressez le fichier ZIP des sources depuis GitHub Releases ou clonez
-le dépôt. <code>Start.cmd</code> vous propose d’installer Python 3.12 sur votre système Windows si aucune
-version appropriée de Python n’est détectée (winget ou le programme d’installation signé de python.org). <code>start.sh</code> affiche
-la commande d’installation exacte pour votre distribution Linux ou macOS si Python est absent.
-Le premier lancement du code source crée <code>.venv</code> et installe automatiquement les dépendances.</p>
+<p>Pour les méthodes depuis les sources, <a href="https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip">téléchargez et extrayez la branche <code>main</code> actuelle</a>
+ou clonez le dépôt :</p>
+<pre><code class="language-sh">git clone https://github.com/phishdestroy/TgWitness.git
+cd TgWitness</code></pre>
+<p>Les sources actuelles incluent l'importation de comptes par lot, le tableau de bord MTProxy et le chargement d'historique
+avec reprise. L'aperçu portable 0.7.0 et l'archive source de cette version sont antérieurs à
+ces ajouts. Consultez <a href="../changelog/">le journal des modifications</a> pour connaître la limite de version.</p>
+<p><code>Start.cmd</code> propose d'installer Python 3.12 pour votre utilisateur Windows si aucune
+version appropriée de Python n'est trouvée (via winget ou l'installateur signé de python.org). <code>start.sh</code> affiche
+la commande d'installation exacte pour votre distribution Linux ou macOS si Python est manquant.
+Le premier lancement depuis les sources crée <code>.venv</code> et installe les dépendances automatiquement.</p>
 <p>Docker compile l’application et la lance en arrière-plan ; l’utilisation de Python sur l’hôte n’est
 pas nécessaire. Les commandes « <code>scripts\Docker.cmd</code> » et « <code>scripts/docker-start.sh</code> » affichent l’adresse du panneau et le jeton lorsque
 le conteneur fonctionne correctement. Les commandes Docker équivalentes sur chaque hôte pris en charge sont les suivantes :</p>
@@ -120,11 +126,15 @@ Le bon déroulement d’un test dépend de Telegram, et non de TgWitness, et ne 
 </ol>
 <p>Les identifiants API permettent d’identifier votre application ; ils n’autorisent pas en
 soi l’accès à un compte. Les groupes privés ne nécessitent pas de nom d’utilisateur public, mais votre compte doit disposer d’un accès.</p>
-<p>Pour les comptes existants, consultez <a href="../accounts/">les formats de comptes et de sessions</a> : le
-panneau accepte Telethon StringSession, Telethon/Pyrogram SQLite, les fichiers ZIP TData à compte unique
-et les fichiers JSON de comptes pris en charge. Sélectionnez une session et le fichier JSON correspondant,
-puis cliquez sur « <strong>Connecter le compte</strong> ». La connexion par code QR est également
-disponible avec les mêmes paramètres API facultatifs. TDLib, les bots et les listes de comptes en masse ne sont pas pris en charge.</p>
+<p>Pour les comptes existants, consultez <a href="../accounts/">comptes et formats de session</a> : le
+panneau accepte Telethon StringSession, SQLite Telethon/Pyrogram, les archives ZIP TData
+à compte unique et les fichiers JSON de compte pris en charge. Sélectionnez ensemble une session et son fichier JSON associé,
+puis appuyez sur <strong>Connecter un compte</strong>. La connexion par code QR est également
+disponible avec les mêmes paramètres d'API facultatifs. TDLib, les sessions de bots et les inventaires
+de comptes CSV/JSON ne sont pas pris en charge.</p>
+<p>Pour plusieurs comptes, utilisez <strong>Comptes → Importer des comptes</strong> et sélectionnez leurs fichiers de session
+pris en charge. Les fichiers JSON associés sont appariés selon leur nom de base ; chaque compte importé
+obtient son propre espace de travail. Consultez <a href="../accounts/#bulk-import-and-account-groups">importation en masse et groupes de comptes</a>.</p>
 <p>Pour ajouter un autre compte, appuyez sur <strong>+</strong> à côté du sélecteur de compte ou ouvrez
 <strong>Compte → Paramètres → Paramètres de connexion → Espaces de travail</strong>, ou utilisez <strong>la rubrique Comptes</strong>. Les espaces de travail disposent de sessions,
 de journaux, de clés, de sources et de files d’attente distincts. Le changement de vue ne modifie pas le fonctionnement des autres collecteurs.

@@ -21,7 +21,16 @@ Pilih satu kaedah. Muat turun mudah alih akan tersedia selepas binaan rilis dite
 | Windows | Ekstrak `TgWitness-<version>-windows-amd64-portable.zip` daripada GitHub Releases, klik dua kali `TgWitness.cmd` | Klik dua kali `Start.cmd` | Klik dua kali `scripts\Docker.cmd` |
 | Linux / macOS | — | `sh start.sh` | `sh scripts/docker-start.sh` |
 
-Untuk kaedah sumber, muat turun dan ekstrak fail ZIP sumber daripada GitHub Releases atau klon repositori. `Start.cmd` menawarkan pemasangan Python 3.12 untuk pengguna Windows anda jika tiada Python yang sesuai ditemui (winget, atau pemasang python.org yang disahkan). `start.sh` mencetak arahan pemasangan tepat untuk pengedaran Linux anda atau macOS jika Python tiada. Pelancaran sumber pertama mencipta `.venv` dan memasang kebergantungan secara automatik.
+Untuk kaedah kod sumber, [muat turun dan ekstrak `main` semasa](https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip) atau klon repositori:
+
+```
+git clone https://github.com/phishdestroy/TgWitness.git
+cd TgWitness
+```
+
+Sumber semasa merangkumi import akaun berkelompok, papan pemuka MTProxy dan pemuatan sejarah yang boleh disambung semula. Pratonton mudah alih 0.7.0 serta arkib sumber keluarannya diterbitkan sebelum penambahan ini. Lihat [log perubahan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/changelog/) untuk sempadan versi.
+
+`Start.cmd` menawarkan pemasangan Python 3.12 untuk pengguna Windows anda jika tiada Python yang sesuai ditemui (winget, atau pemasang python.org yang ditandatangani). `start.sh` mencetak arahan pemasangan yang tepat untuk edaran Linux atau macOS anda jika Python tiada. Pelancaran sumber pertama akan mencipta `.venv` dan memasang kebergantungan secara automatik.
 
 Docker membina aplikasi dan memulakannya di latar belakang; Python hos tidak diperlukan. `scripts\Docker.cmd` dan `scripts/docker-start.sh` mencetak alamat panel dan token apabila kontena sihat. Perintah Docker yang setara pada setiap hos yang disokong ialah:
 
@@ -57,7 +66,9 @@ Mesej demo adalah rekaan. Mod demo tidak dapat menyambungkan akaun Telegram sebe
 
 Kredensial API mengenal pasti aplikasi anda; ia tidak memberi kebenaran kepada akaun secara sendirinya. Kumpulan peribadi tidak memerlukan nama pengguna awam, tetapi akaun anda mesti mempunyai akses.
 
-Untuk akaun sedia ada, lihat [format akaun dan sesi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/accounts/): panel menerima Telethon StringSession, Telethon/Pyrogram SQLite, TData ZIP akaun tunggal, dan JSON akaun yang disokong. Pilih sesi dan JSON pendampingnya bersama-sama, tekan **Hubungkan akaun**. Log masuk QR juga tersedia dengan tetapan API pilihan yang sama. TDLib, bot, dan senarai akaun pukal tidak disokong.
+Untuk akaun sedia ada, lihat [format akaun dan sesi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/accounts/): panel menerima Telethon StringSession, Telethon/Pyrogram SQLite, ZIP TData satu akaun dan JSON akaun yang disokong. Pilih sesi dan JSON pengiringnya bersama-sama, kemudian tekan **Sambungkan akaun**. Log masuk QR juga tersedia dengan tetapan API pilihan yang sama. TDLib, sesi bot dan inventori akaun CSV/JSON tidak disokong.
+
+Untuk beberapa akaun, gunakan **Akaun → Import akaun** dan pilih fail sesi yang disokong. Fail JSON pengiring dipadankan mengikut nama asas; setiap akaun yang diimport mendapat ruang kerjanya sendiri. Lihat [import pukal dan kumpulan akaun](https://phishdestroy.github.io/TgWitness/ms/docs/reference/accounts/#bulk-import-and-account-groups).
 
 Untuk menambah akaun lain, tekan **+** di sebelah pemilih akaun atau buka **Akaun → Tetapan → Tetapan sambungan → Ruang kerja**, atau gunakan **Akaun**. Ruang kerja mempunyai sesi, jurnal, kunci, sumber dan barisan menunggu yang berasingan. Menukar paparan tidak menghentikan pengumpul lain yang sedang berjalan. Akaun Telegram yang sama tidak boleh ditugaskan kepada dua ruang kerja dalam pemasangan ini. Tiada bilangan ruang kerja yang tetap; ia berkongsi satu proses, jadi kapasiti bergantung pada mesin.
 

@@ -211,7 +211,7 @@ Im ersten Beispiel werden lediglich die API-Anmeldedaten eingegeben; melden Sie 
 | Pyrogram-Sitzungs**strings** | Verwenden Sie die Pyrogram-Datei „`.session`“ oder den Telefoncode bzw. den QR-Code. |
 | TData mit mehreren angemeldeten Konten | Melden Sie sich von den anderen Konten in Telegram Desktop ab oder verwenden Sie die jeweilige Sitzungsdatei des jeweiligen Kontos |
 | Bot-Token | Nicht unterstützt: TgWitness fungiert als Benutzerkonto |
-| CSV-/JSON-Listen zahlreicher Konten | Fügen Sie pro Konto einen Arbeitsbereich hinzu |
+| CSV-/JSON-Listen zahlreicher Konten | Importieren Sie unterstützte Sitzungsdateien über **Konten → Konten importieren** oder melden Sie sich per Telefon/QR in separaten Arbeitsbereichen an |
 | Test-DC- oder Bot-Sitzungen | Verwenden Sie ein Produktionsbenutzerkonto |
 
 ## Mehrere Konten

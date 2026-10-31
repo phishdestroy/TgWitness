@@ -62,7 +62,11 @@
 </tr>
 </tbody>
 </table></div>
-<p>Untuk kaedah sumber, muat turun dan ekstrak fail ZIP sumber daripada GitHub Releases atau klon repositori. <code>Start.cmd</code> menawarkan pemasangan Python 3.12 untuk pengguna Windows anda jika tiada Python yang sesuai ditemui (winget, atau pemasang python.org yang disahkan). <code>start.sh</code> mencetak arahan pemasangan tepat untuk pengedaran Linux anda atau macOS jika Python tiada. Pelancaran sumber pertama mencipta <code>.venv</code> dan memasang kebergantungan secara automatik.</p>
+<p>Untuk kaedah kod sumber, <a href="https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip">muat turun dan ekstrak <code>main</code> semasa</a> atau klon repositori:</p>
+<pre><code class="language-sh">git clone https://github.com/phishdestroy/TgWitness.git
+cd TgWitness</code></pre>
+<p>Sumber semasa merangkumi import akaun berkelompok, papan pemuka MTProxy dan pemuatan sejarah yang boleh disambung semula. Pratonton mudah alih 0.7.0 serta arkib sumber keluarannya diterbitkan sebelum penambahan ini. Lihat <a href="../changelog/">log perubahan</a> untuk sempadan versi.</p>
+<p><code>Start.cmd</code> menawarkan pemasangan Python 3.12 untuk pengguna Windows anda jika tiada Python yang sesuai ditemui (winget, atau pemasang python.org yang ditandatangani). <code>start.sh</code> mencetak arahan pemasangan yang tepat untuk edaran Linux atau macOS anda jika Python tiada. Pelancaran sumber pertama akan mencipta <code>.venv</code> dan memasang kebergantungan secara automatik.</p>
 <p>Docker membina aplikasi dan memulakannya di latar belakang; Python hos tidak diperlukan. <code>scripts\Docker.cmd</code> dan <code>scripts/docker-start.sh</code> mencetak alamat panel dan token apabila kontena sihat. Perintah Docker yang setara pada setiap hos yang disokong ialah:</p>
 <pre><code class="language-sh">docker compose up -d --build --wait
 docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
@@ -103,7 +107,8 @@ Jika tidak, biarkan pemasangan langsung yang sedang berjalan di atas terus berja
 <li>Pilih tetapan lampiran secara berasingan, kemudian tekan <strong>Mula pemerhatian</strong>.</li>
 </ol>
 <p>Kredensial API mengenal pasti aplikasi anda; ia tidak memberi kebenaran kepada akaun secara sendirinya. Kumpulan peribadi tidak memerlukan nama pengguna awam, tetapi akaun anda mesti mempunyai akses.</p>
-<p>Untuk akaun sedia ada, lihat <a href="../accounts/">format akaun dan sesi</a>: panel menerima Telethon StringSession, Telethon/Pyrogram SQLite, TData ZIP akaun tunggal, dan JSON akaun yang disokong. Pilih sesi dan JSON pendampingnya bersama-sama, tekan <strong>Hubungkan akaun</strong>. Log masuk QR juga tersedia dengan tetapan API pilihan yang sama. TDLib, bot, dan senarai akaun pukal tidak disokong.</p>
+<p>Untuk akaun sedia ada, lihat <a href="../accounts/">format akaun dan sesi</a>: panel menerima Telethon StringSession, Telethon/Pyrogram SQLite, ZIP TData satu akaun dan JSON akaun yang disokong. Pilih sesi dan JSON pengiringnya bersama-sama, kemudian tekan <strong>Sambungkan akaun</strong>. Log masuk QR juga tersedia dengan tetapan API pilihan yang sama. TDLib, sesi bot dan inventori akaun CSV/JSON tidak disokong.</p>
+<p>Untuk beberapa akaun, gunakan <strong>Akaun → Import akaun</strong> dan pilih fail sesi yang disokong. Fail JSON pengiring dipadankan mengikut nama asas; setiap akaun yang diimport mendapat ruang kerjanya sendiri. Lihat <a href="../accounts/#bulk-import-and-account-groups">import pukal dan kumpulan akaun</a>.</p>
 <p>Untuk menambah akaun lain, tekan <strong>+</strong> di sebelah pemilih akaun atau buka
 <strong>Akaun → Tetapan → Tetapan sambungan → Ruang kerja</strong>, atau gunakan <strong>Akaun</strong>. Ruang kerja mempunyai sesi, jurnal, kunci, sumber dan barisan menunggu yang berasingan. Menukar paparan tidak menghentikan pengumpul lain yang sedang berjalan.
 Akaun Telegram yang sama tidak boleh ditugaskan kepada dua ruang kerja dalam pemasangan ini.

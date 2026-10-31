@@ -21,7 +21,16 @@ Vui lòng chọn một phương thức. Các bản tải xuống di động sẽ
 | Windows | Trích xuất tệp `TgWitness-<version>-windows-amd64-portable.zip` từ GitHub Releases, nhấp đúp vào tệp `TgWitness.cmd` | Nhấp đúp vào `Start.cmd` | Nhấp đúp vào `scripts\Docker.cmd` |
 | Linux / macOS | — | `sh start.sh` | `sh scripts/docker-start.sh` |
 
-Đối với các phương pháp lấy mã nguồn, quý vị hãy tải xuống và giải nén tệp ZIP chứa mã nguồn từ GitHub Releases hoặc sao chép kho lưu trữ. `Start.cmd` sẽ đề xuất cài đặt Python 3.12 cho người dùng Windows nếu không tìm thấy phiên bản Python phù hợp (winget hoặc trình cài đặt có chữ ký từ python.org). `start.sh` sẽ hiển thị lệnh cài đặt chính xác dành cho bản phân phối Linux hoặc macOS của quý vị nếu thiếu Python. Lần khởi chạy mã nguồn đầu tiên sẽ tạo ra `.venv` và tự động cài đặt các phụ thuộc.
+Đối với các phương pháp dùng mã nguồn, hãy [tải xuống và giải nén nhánh `main` hiện tại](https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip) hoặc sao chép (clone) kho lưu trữ:
+
+```
+git clone https://github.com/phishdestroy/TgWitness.git
+cd TgWitness
+```
+
+Mã nguồn hiện tại bao gồm tính năng nhập tài khoản hàng loạt, bảng điều khiển MTProxy và tải lịch sử có thể tiếp tục. Bản xem trước di động (portable) 0.7.0 và gói mã nguồn phát hành của nó có trước các bổ sung này. Xem [nhật ký thay đổi](https://phishdestroy.github.io/TgWitness/vi/docs/reference/changelog/) để biết ranh giới phiên bản.
+
+`Start.cmd` đề xuất cài đặt Python 3.12 cho người dùng Windows của bạn nếu không tìm thấy Python phù hợp (qua winget, hoặc trình cài đặt có chữ ký số từ python.org). `start.sh` sẽ in ra lệnh cài đặt chính xác cho bản phân phối Linux hoặc macOS của bạn nếu thiếu Python. Lần khởi chạy từ mã nguồn đầu tiên sẽ tự động tạo `.venv` và cài đặt các gói phụ thuộc.
 
 Docker sẽ biên dịch ứng dụng và khởi chạy nó ở chế độ nền; không cần phải cài đặt Python trên máy chủ. `scripts\Docker.cmd` và `scripts/docker-start.sh` sẽ hiển thị địa chỉ bảng điều khiển và mã thông báo khi container hoạt động bình thường. Các lệnh Docker tương ứng trên mọi hệ điều hành được hỗ trợ là:
 
@@ -57,7 +66,9 @@ Các tin nhắn trong phần demo là hư cấu. Chế độ demo không thể k
 
 Thông tin đăng nhập API dùng để xác định ứng dụng của quý vị; chúng không tự động cấp quyền truy cập cho tài khoản nào cả. Các nhóm riêng tư không yêu cầu tên người dùng công khai, nhưng tài khoản của quý vị phải có quyền truy cập.
 
-Đối với các tài khoản hiện có, vui lòng tham khảo [các định dạng tài khoản và phiên làm việc](https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/): bảng điều khiển hỗ trợ Telethon StringSession, Telethon/Pyrogram SQLite, tệp ZIP TData cho một tài khoản duy nhất và định dạng JSON tài khoản được hỗ trợ. Vui lòng chọn một phiên làm việc cùng với tệp JSON đi kèm, sau đó nhấn **“Kết nối tài khoản**”. Tính năng đăng nhập qua mã QR cũng có sẵn với các cài đặt API tùy chọn tương tự. TDLib, bot và danh sách tài khoản số lượng lớn không được hỗ trợ.
+Đối với các tài khoản hiện có, hãy xem [tài khoản và định dạng phiên](https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/): bảng điều khiển chấp nhận Telethon StringSession, Telethon/Pyrogram SQLite, TData ZIP một tài khoản và JSON tài khoản được hỗ trợ. Chọn một phiên cùng với tệp JSON đi kèm của nó, nhấn **Kết nối tài khoản**. Đăng nhập bằng mã QR cũng khả dụng với cùng các cài đặt API tùy chọn. TDLib, phiên bot và danh sách kiểm kê tài khoản CSV/JSON không được hỗ trợ.
+
+Đối với nhiều tài khoản, hãy sử dụng **Tài khoản → Nhập tài khoản** và chọn các tệp phiên được hỗ trợ của chúng. Các tệp JSON đi kèm được ghép nối theo tên cơ sở (basename); mỗi tài khoản được nhập sẽ có không gian làm việc riêng. Xem [nhập hàng loạt và nhóm tài khoản](https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/#bulk-import-and-account-groups).
 
 Để thêm một tài khoản khác, hãy nhấn vào **+** bên cạnh bộ chọn tài khoản hoặc mở **Tài khoản → Cài đặt → Cài đặt kết nối → Không gian làm việc**, hoặc sử dụng **mục Tài khoản**. Các không gian làm việc có các phiên làm việc, sổ nhật ký, khóa, nguồn và hàng đợi riêng biệt. Việc chuyển đổi chế độ xem sẽ không làm gián đoạn hoạt động của các trình thu thập khác. Cùng một tài khoản Telegram không thể được gán cho hai không gian làm việc trong bản cài đặt này. Không có số lượng không gian làm việc cố định; các không gian này chia sẻ chung một tiến trình, do đó dung lượng phụ thuộc vào cấu hình máy tính.
 

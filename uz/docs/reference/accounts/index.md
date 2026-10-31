@@ -211,7 +211,7 @@ Birinchi misol faqat API ma'lumotlarini to'ldiradi; telefon yoki QR orqali tizim
 | Pyrogram sessiya **satrlari** | Pyrogram `.session` faylidan yoki telefon/QR kodidan foydalaning |
 | Bir nechta tizimga kirgan hisoblar bilan TData | Telegram Desktop'dagi boshqa hisoblardan chiqib turing yoki har bir hisob uchun alohida sessiya faylidan foydalaning |
 | Bot tokenlari | Qo'llab-quvvatlanmaydi: TgWitness foydalanuvchi hisobini kuzatadi |
-| Ko'plab akkauntlarning CSV/JSON ro'yxatlari | Har bir hisob uchun bitta ish maydonini qo'shing |
+| Ko'plab akkauntlarning CSV/JSON ro'yxatlari | Qo‘llab-quvvatlanadigan sessiya fayllarini **Hisoblar → Hisoblarni import qilish** orqali import qiling yoki alohida ishchi maydonlarda telefon/QR orqali kiring |
 | Test-DC yoki bot sessiyalari | Ishlab chiqarish foydalanuvchi hisobini ishlating |
 
 ## Bir nechta hisoblar

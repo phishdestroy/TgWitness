@@ -211,7 +211,7 @@ Contoh pertama hanya mengisi kredensial API; masuk dengan nomor telepon atau QR,
 | **String** sesi Pyrogram | Gunakan berkas Pyrogram `.session`, atau ponsel/QR |
 | TData dengan beberapa akun yang telah masuk | Keluar dari akun-akun lain di Telegram Desktop, atau gunakan berkas sesi masing-masing akun |
 | Token bot | Tidak didukung: TgWitness beroperasi sebagai akun pengguna |
-| Daftar CSV/JSON dari banyak akun | Tambahkan satu ruang kerja per akun |
+| Daftar CSV/JSON dari banyak akun | Impor file sesi yang didukung melalui **Akun → Impor akun**, atau masuk melalui telepon/QR di ruang kerja terpisah |
 | Sesi Test-DC atau bot | Gunakan akun pengguna produksi |
 
 ## Beberapa akun

@@ -211,7 +211,7 @@ TData 即是 Telegram Desktop 應用程式（來自 desktop.telegram.org 的跨�
 | Pyrogram 會話**字串** | 請使用 Pyrogram `.session` 檔案，或透過手機/QR 碼 |
 | TData 附帶多個已登入的帳戶 | 請在 Telegram Desktop 中登出其他帳戶，或使用各帳戶專屬的會話檔案 |
 | 機器人代幣 | 不支援：TgWitness 僅以使用者帳戶身分進行監測 |
-| 包含多個帳戶的 CSV/JSON 清單 | 每個帳戶新增一個工作區 |
+| 包含多個帳戶的 CSV/JSON 清單 | 透過**帳戶 → 匯入帳戶**匯入受支援的工作階段檔案，或在個別的工作區中透過電話號碼／QR 碼登入 |
 | Test-DC 或 機器人會話 | 請使用正式運作的用戶帳戶 |
 
 ## 多個帳戶

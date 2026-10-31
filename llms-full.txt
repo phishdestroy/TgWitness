@@ -2406,7 +2406,16 @@ Choose one method. Portable downloads become available after a release build is 
 | Windows | Extract `TgWitness-<version>-windows-amd64-portable.zip` from GitHub Releases, double-click `TgWitness.cmd` | Double-click `Start.cmd` | Double-click `scripts\Docker.cmd` |
 | Linux / macOS | — | `sh start.sh` | `sh scripts/docker-start.sh` |
 
-For the source methods, download and extract the source ZIP from GitHub Releases or clone the repository. `Start.cmd` offers to install Python 3.12 for your Windows user if no suitable Python is found (winget, or the signed python.org installer). `start.sh` prints the exact install command for your Linux distribution or macOS if Python is missing. The first source launch creates `.venv` and installs dependencies automatically.
+For the source methods, [download and extract current `main`](https://github.com/phishdestroy/TgWitness/archive/refs/heads/main.zip) or clone the repository:
+
+```
+git clone https://github.com/phishdestroy/TgWitness.git
+cd TgWitness
+```
+
+The current source includes batch account import, the MTProxy dashboard and resumable history loading. The 0.7.0 portable preview and its release source archive predate these additions. See [the changelog](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/) for the version boundary.
+
+`Start.cmd` offers to install Python 3.12 for your Windows user if no suitable Python is found (winget, or the signed python.org installer). `start.sh` prints the exact install command for your Linux distribution or macOS if Python is missing. The first source launch creates `.venv` and installs dependencies automatically.
 
 Docker builds the application and starts it in the background; host Python is unnecessary. `scripts\Docker.cmd` and `scripts/docker-start.sh` print the panel address and token when the container is healthy. The equivalent Docker commands on every supported host are:
 
@@ -2442,7 +2451,9 @@ Demo messages are fictional. Demo mode cannot connect a real Telegram account.
 
 API credentials identify your application; they do not authorize an account by themselves. Private groups need no public username, but your account must have access.
 
-For existing accounts, see [accounts and session formats](https://phishdestroy.github.io/TgWitness/docs/reference/accounts/): the panel accepts Telethon StringSession, Telethon/Pyrogram SQLite, single-account TData ZIP, and supported account JSON. Select a session and its companion JSON together, press **Connect account**. QR login is also available with the same optional API settings. TDLib, bots, and bulk account lists are unsupported.
+For existing accounts, see [accounts and session formats](https://phishdestroy.github.io/TgWitness/docs/reference/accounts/): the panel accepts Telethon StringSession, Telethon/Pyrogram SQLite, single-account TData ZIP, and supported account JSON. Select a session and its companion JSON together, press **Connect account**. QR login is also available with the same optional API settings. TDLib, bot sessions and CSV/JSON account inventories are unsupported.
+
+For several accounts, use **Accounts → Import accounts** and select their supported session files. Companion JSON files are paired by basename; each imported account gets its own workspace. See [bulk import and account groups](https://phishdestroy.github.io/TgWitness/docs/reference/accounts/#bulk-import-and-account-groups).
 
 To add another account, press **+** beside the account selector or open **Account → Settings → Connection settings → Workspaces**, or use **Accounts**. Workspaces have separate sessions, journals, keys, sources and queues. Switching views leaves other collectors running. The same Telegram account cannot be assigned to two workspaces in this installation. There is no fixed number of workspaces; they share one process, so capacity depends on the machine.
 
@@ -2708,7 +2719,7 @@ The first example only fills API credentials; sign in by phone or QR, or add a s
 | Pyrogram session **strings** | Use the Pyrogram `.session` file, or phone/QR |
 | TData with several logged-in accounts | Log out the other accounts in Telegram Desktop, or use each account's own session file |
 | Bot tokens | Not supported: TgWitness observes as a user account |
-| CSV/JSON lists of many accounts | Add one workspace per account |
+| CSV/JSON lists of many accounts | Import supported session files through **Accounts → Import accounts**, or sign in by phone/QR in separate workspaces |
 | Test-DC or bot sessions | Use a production user account |
 
 ## Multiple accounts
@@ -3549,7 +3560,13 @@ In the demo, the notification controls are visible but sending is disabled. Conf
 
 **Journal** shows observations, search and filters. An edit opens captured versions; a deletion opens prior content if available. Unknown attribution remains explicit. Counts are available under **Overview**; acquisition details stay in the local guide.
 
+Open an edited message to compare its versions with **Inline diff** or **Side by side**; **Raw** shows the saved fields. Changes to hidden links and bot buttons appear separately. Open an attachment preview to inspect saved images, audio or video; the download button keeps the preserved original available.
+
+**Live** updates the journal and chats as records arrive. Pause it while reviewing, or use the new-events button when ready; collection keeps running. **Ctrl/Cmd+K** finds panel actions and searches the journal.
+
 **Sources** contains the observation scope (chosen chats, a Telegram folder or the whole account), accessible chats of every type, selected sources with priority stars, attachment and recheck settings and history snapshots. Private sources are selected by dialog/ID without a public link. Access status describes the most recent check, not permanent permissions.
+
+Filter sources, select their checkboxes, then enable, pause or mark them as priority together. In the available-chat list, **Add selected** uses your selection; **Add all matching** uses the current search and type filter.
 
 **Chats → People** lists everyone with saved messages; with people profiles switched on for the chat, a click opens that person's profile with links to the journal records.
 
@@ -4953,6 +4970,12 @@ Every change by version, including the changes not yet released.
 
 ## Unreleased
 
+- Kept disabled AI out of the sidebar and attachment actions. Provider setup lives in Integrations; local recognition appears only when its worker is configured. Connection settings now show the fields for the selected route, with the automatic MTProxy catalog available on demand.
+- Added inline and side-by-side edit comparisons, separate changes to hidden links and bot buttons, attachment previews and image zoom. The preserved original stays downloadable. Preview reads stop at 32 MiB; the browser cache holds at most 40 previews and 64 MiB, with three concurrent reads, and is cleared on lock or workspace switch.
+- Added live journal/chat updates with a pause control for the view, batch source selection and actions, and journal search from Ctrl/Cmd+K. Live updates recheck access and chat scope; pausing the view does not pause collection.
+- Indexed saved message state and source summaries. Existing journals build these derived indexes once during their first startup after the update; signed records and their hashes stay unchanged. Small and expiring attachments have a separate download lane so a large file does not hold them up.
+- Preserved observed avatar changes as signed records with content-addressed files, including removal and reuse of an earlier photo. People profiles show scoped history and similarity leads; saved photos travel in evidence ZIPs.
+- Added automatic upgrades for OpenTimestamps receipts older than one hour, with bounded requests through the configured route and the original receipt retained. A Bitcoin attestation remains explicitly unverified until checked independently.
 - Reworked the workspace navigation and chat layout, added chat search and kept collection warnings visible. The desktop conversation fits the viewport.
 - Rebuilt the online demo around a fictional investigation with named participants, edit comparisons and real signed sample downloads. Verification results now stay visible; unavailable online-only actions no longer look usable.
 - Added batch session import and account groups with template settings. Failed imports leave no empty workspace; locking or switching stops the remaining queue.

@@ -80,7 +80,13 @@ Dans la démo, les commandes de notification sont visibles mais l’envoi est d�
 
 **Le journal** présente les observations, les recherches et les filtres. Une modification permet d’afficher les versions capturées ; une suppression permet d’afficher le contenu antérieur, s’il est disponible. Les sources inconnues restent explicitement indiquées. Les chiffres sont disponibles dans **la rubrique « Aperçu »** ; les détails relatifs à l’acquisition figurent dans le guide local.
 
+Ouvrez un message modifié pour comparer ses versions avec **Différences dans le texte** ou **Côte à côte** ; **Données brutes** affiche les champs enregistrés. Les modifications apportées aux liens masqués et aux boutons de bot apparaissent séparément. Ouvrez l'aperçu d'une pièce jointe pour inspecter les images, l'audio ou la vidéo enregistrés ; le bouton de téléchargement permet de récupérer l'original préservé.
+
+**Live** met à jour le journal et les discussions au fur et à mesure que les enregistrements arrivent. Mettez-le en pause pendant la vérification, ou utilisez le bouton des nouveaux événements lorsque vous êtes prêt ; la collecte continue de fonctionner. **Ctrl/Cmd+K** trouve les actions du panneau et effectue des recherches dans le journal.
+
 **La section « Sources »** contient le périmètre d’observation (discussions sélectionnées, un dossier Telegram ou l’ensemble du compte), les discussions accessibles de tous types, les sources sélectionnées avec des étoiles de priorité, les paramètres relatifs aux pièces jointes et aux vérifications, ainsi que les instantanés de l’historique. Les sources privées sont sélectionnées par boîte de dialogue/identifiant sans lien public. Le statut d’accès décrit la dernière vérification effectuée, et non des autorisations permanentes.
+
+Filtrez les sources, cochez leurs cases, puis activez-les, mettez-les en pause ou marquez-les comme prioritaires simultanément. Dans la liste des discussions disponibles, **Ajouter la sélection** utilise votre sélection ; **Ajouter tous les résultats** utilise la recherche et le filtre de type actuels.
 
 **« Chats → Personnes »** répertorie toutes les personnes dont les messages ont été enregistrés ; lorsque les profils des participants sont activés pour la conversation, un clic ouvre le profil de cette personne avec des liens vers les entrées du journal.
 
