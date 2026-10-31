@@ -114,3 +114,17 @@ def test_launcher_reports_failed_setup_step_without_traceback():
     launcher = runpy.run_path(str(Path(__file__).resolve().parents[1] / "start.py"))
     with pytest.raises(SystemExit, match="Synthetic failure"):
         launcher["step"]([sys.executable, "-c", "raise SystemExit(3)"], "Synthetic failure")
+
+
+def test_panel_keeps_idle_connections_longer_than_reverse_proxies(tmp_path, monkeypatch):
+    import uvicorn
+    import tgwitness.app
+    from tgwitness.__main__ import main
+    served = {}
+    monkeypatch.setattr(tgwitness.app, "create_app", lambda root, demo=False: "panel")
+    monkeypatch.setattr(uvicorn, "run", lambda app, **options: served.update(options, app=app))
+    monkeypatch.setattr(sys, "argv", ["tgwitness", "--data-dir", str(tmp_path), "--no-browser"])
+    main()
+    # Caddy reuses idle upstream connections for two minutes and cloudflared for 90 seconds: a panel closing
+    # them first resets the next request on them, which the browser receives as 502.
+    assert served["app"] == "panel" and served["timeout_keep_alive"] > 120

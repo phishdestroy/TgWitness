@@ -1,5 +1,9 @@
 from starlette.responses import JSONResponse
 
+# Reverse proxies reuse idle connections: Caddy keeps them two minutes, cloudflared 90 seconds. Uvicorn closes
+# them after 5 seconds by default, and a request sent into a connection it is closing reaches the browser as 502.
+KEEP_ALIVE_SECONDS = 150
+
 
 def request_limit(path, default=16384):
     if "/api/analysis/reports/" in path:
