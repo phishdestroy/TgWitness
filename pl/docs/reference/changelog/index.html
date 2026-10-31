@@ -42,6 +42,20 @@
     These additions require current source; the 0.7.0 portable preview predates them.</p>
 </li>
 <li>
+<p>Sealed, localized reports. <code>report.html</code> and <code>chat.html</code> are rebuilt as self-contained
+    case documents in any of the 25 panel languages: case details, integrity and key
+    fingerprint, timestamps with their check commands, coverage, chain of custody with a
+    printable transfer table, verification steps, standards and limitations. Each ends with
+    an Ed25519 seal over its own bytes, checked in the browser or by
+    <code>verify.py report.html --fingerprint … --evidence …</code>. Reports carry Dublin Core and
+    schema.org metadata and a Content-Security-Policy that blocks network loads; the chat
+    report shows the history oldest first.</p>
+</li>
+<li>Signed archives add <code>custody.json</code> and <code>SHA256SUMS</code>; README.txt is written in the report
+    language and in English. Case details from <strong>Exports → Report settings</strong> are signed into
+    the manifest. <code>verify.py</code> checks the seal and the sums, prints a coloured summary at a
+    terminal (<code>--lang en|ru|uk</code>) and offers <code>--json</code>.</li>
+<li>
 <p>Added a five-stage capture animation and examples of message/collector
     substitution to the helper and Exports.</p>
 </li>
