@@ -12,6 +12,7 @@ from . import message_content
 from . import continuity
 from .journal_index import CHAT_KINDS, MEDIA_KINDS, TEXT_KINDS, JournalIndex, migrate_media, nul_text, search_text
 from .journal_index import GONE_KINDS as GONE_KINDS
+from .journal_index import NUL_PAYLOAD
 
 ZERO = "0" * 64
 EVENT_FIELDS = ("seq", "observed_at", "source_at", "kind", "chat_id", "message_id",
@@ -371,10 +372,20 @@ class Store:
             candidate = self.read_index.candidate(search, text_only=text_only)
             if candidate is not None:
                 table = "event_text_search" if text_only else "event_payload_search"
-                source = table + " JOIN events ON events.seq=" + table + ".rowid"
-                order = table + ".rowid"
-                filters.append(table + " MATCH ?")
-                params.append(candidate)
+                if text_only:
+                    # Older trigram tokenizers also stop at NUL. Include the rare
+                    # NUL rows from a partial index, including existing journals
+                    # whose FTS rows were already truncated. Exact matching follows.
+                    source = ("(SELECT rowid FROM event_text_search WHERE event_text_search MATCH ? "
+                              "UNION SELECT seq AS rowid FROM events INDEXED BY event_text_nul WHERE "
+                              + NUL_PAYLOAD + ") AS candidates JOIN events ON events.seq=candidates.rowid")
+                    order = "candidates.rowid"
+                    params.insert(0, candidate)
+                else:
+                    source = table + " JOIN events ON events.seq=" + table + ".rowid"
+                    order = table + ".rowid"
+                    filters.append(table + " MATCH ?")
+                    params.append(candidate)
             value = "COALESCE(json_extract(payload,'$.text'),'')" if text_only else "payload"
             if text_only:
                 # Keep the fast path and scalar semantics. Only escaped-NUL text
