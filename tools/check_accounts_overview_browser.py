@@ -89,6 +89,7 @@ def main():
                 page.evaluate("theme=>{document.documentElement.dataset.theme=theme;}", theme)
                 for width in (1440, 390):
                     page.set_viewport_size({'width': width, 'height': 1000})
+                    page.evaluate('()=>scrollTo(0,0)')
                     page.screenshot(path=str(output / f'accounts-{theme}-{width}.png'), full_page=True)
                     assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1'), (theme, width)
             page.set_viewport_size({'width': 1440, 'height': 1000})

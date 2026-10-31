@@ -16,7 +16,7 @@ export function createAccounts(context) {
     session=getSession();selected.clear();working=false;page=0;
     find('accounts-result').hidden=true;find('accounts-result').textContent='';
     find('accounts-search').value='';find('accounts-filter').value='all';find('accounts-sort').value='attention';
-    find('accounts-overview').replaceChildren();
+    find('accounts-overview').replaceChildren();find('accounts-selected').textContent=tr('{n} selected',{n:0});
   }
   function summary(){
     const list=profiles(), facts=[['workspaces',tr('Workspaces'),list.length],['collecting',tr('Collecting'),list.filter(collecting).length],
