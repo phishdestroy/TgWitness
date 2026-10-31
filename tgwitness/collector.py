@@ -2187,7 +2187,9 @@ class Collector:
                 self.store.append("storage.ok", {"free_bytes": free, "media_jobs": self.store.media_stats()})
             account = self.store.get_setting("account", {}) or {}
             limits = {"max_priority": 1} if lane == "urgent" else {"min_priority": 2} if lane == "bulk" else {}
-            job = self.store.claim_media(account.get("id", 0), **limits)
+            capture = capture_settings(self.store)
+            # Downloads turned off keep the waiting files queued until they are turned on again
+            job = self.store.claim_media(account.get("id", 0), **limits) if capture["download_media"] else None
             if not job:
                 self.media_wakeup.clear()
                 try:
@@ -2209,6 +2211,16 @@ class Collector:
                 with BinaryReader(job["descriptor"]) as reader:
                     message = reader.tgread_object()
                 size = getattr(message.file, "size", None) if message.file else None
+                kind = policy.get("media_type") or media_kind(message)
+                rule, limit = capture["types"][kind], capture["types"][kind]["max_mb"] * 1024**2
+                if not rule["enabled"] or (size is not None and limit < size <= job["max_bytes"]):
+                    # The settings changed after the file was queued: a type turned off or a lower limit
+                    # also stops the files already waiting
+                    self.store.finish_media(job, "skipped", {
+                        "reason": "above the size limit of the attachment settings" if rule["enabled"]
+                        else "attachment type not collected by policy: " + kind,
+                        "meaning": "the attachment settings changed after this file was queued"})
+                    continue
                 if size is None or size > job["max_bytes"]:
                     raise ValueError("unknown_size_or_above_limit")
                 if shutil.disk_usage(media_root).free < size + 64 * 1024**2:

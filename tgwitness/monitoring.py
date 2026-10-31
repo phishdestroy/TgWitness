@@ -17,6 +17,8 @@ CAPTURE_DEFAULTS = {"download_media": True, "max_media_mb": 20}
 MEDIA_TYPES = ("photo", "video", "animation", "video_note", "voice", "audio", "sticker", "document")
 MEDIA_DEFAULT_MB = {"photo": 20, "video": 100, "animation": 20, "video_note": 50, "voice": 20, "audio": 50,
                     "sticker": 5, "document": 50}
+# Stickers and GIFs are rarely evidence and fill the download queue: they stay off until turned on.
+MEDIA_DEFAULT_OFF = ("animation", "sticker")
 
 
 class MediaRule(BaseModel):
@@ -43,7 +45,7 @@ def capture_settings(store):
     legacy = saved.get("max_media_mb") if saved and "types" not in saved else None
     types = {}
     for kind in MEDIA_TYPES:
-        rule = rules.get(kind) or {"enabled": True, "max_mb": legacy or MEDIA_DEFAULT_MB[kind]}
+        rule = rules.get(kind) or {"enabled": kind not in MEDIA_DEFAULT_OFF, "max_mb": legacy or MEDIA_DEFAULT_MB[kind]}
         types[kind] = {"enabled": bool(rule.get("enabled", True)), "max_mb": int(rule.get("max_mb") or 20)}
     return {"download_media": bool(saved.get("download_media", True)),
             "record_disabled_media": bool(saved.get("record_disabled_media", True)),

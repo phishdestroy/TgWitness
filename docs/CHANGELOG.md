@@ -72,6 +72,9 @@
 - The panel, proof, sealed and MCP servers keep idle connections for 150 seconds instead
   of 5: Caddy and cloudflared reused connections the server had already closed, and the
   browser received sporadic 502 answers.
+- GIFs and stickers are no longer downloaded unless turned on. Turning downloads off now
+  pauses the files already waiting, and turning a type off or lowering its limit skips the
+  waiting files it excludes; before, the queue kept downloading under the old settings.
 - Added scoped, read-only MCP connections and local archive search with optional
   AI source review and separate analytical reports.
 - Added local OCR/transcription for saved attachments and signed outgoing webhooks

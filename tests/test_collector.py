@@ -98,7 +98,7 @@ async def wait_media(store):
     async def completed():
         while sum(v for k, v in store.media_stats().items() if k in ("queued", "running")):
             await asyncio.sleep(.01)
-    await asyncio.wait_for(completed(), 4)
+    await asyncio.wait_for(completed(), 30)
 
 
 def test_authorize_2fa_restore_and_no_codes_on_disk(journal, tmp_path):

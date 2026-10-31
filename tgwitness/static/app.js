@@ -1123,6 +1123,7 @@ function excerpt(e) {
       const type=/^attachment type not collected by policy: (\w+)$/.exec(p.reason||"")?.[1];
       if(type)return tr("Not collected by the attachment settings: {type}",{type:Object.fromEntries(mediaTypes)[type]||termText(type)});
       if(p.reason==="media download disabled")return tr("Attachment downloads off");
+      if(p.reason==="above the size limit of the attachment settings")return tr("Larger than the size limit");
       if(p.reason==="authorized account identity unavailable")return tr("Telegram account not identified yet");
       return String(p.reason||"").startsWith("metadata-only")?tr("No file to download"):p.reason||"";
     }

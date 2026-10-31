@@ -634,7 +634,8 @@ def main():
             saved = live.app.state.store.get_setting("capture")
             assert (saved["download_media"], saved["max_media_mb"]) == (False, 20)
 
-            assert len(saved["types"]) == 8 and all(r == {"enabled": True, "max_mb": 20} for r in saved["types"].values())
+            assert len(saved["types"]) == 8 and all(r == {"enabled": kind not in ("animation", "sticker"), "max_mb": 20}
+                                                    for kind, r in saved["types"].items())
             check_layout(page)
             expect(page.locator("#toast")).not_to_be_visible(timeout=10000)
             page.locator("#monitoring-form").screenshot(path=str(output / "monitoring.png"))
