@@ -3259,7 +3259,6 @@
 "The GitHub token is kept by the main workspace.": "Токен GitHub хранится в главном рабочем пространстве.",
 "A list may have at most 1 MiB.": "Размер списка не должен превышать 1 МиБ.",
 "Remove a list first: at most 40 own lists.": "Сначала удалите список: максимально 40 собственных списков.",
-"No compatible MTProxy links were found in this list.": "В данном списке не найдено совместимых ссылок MTProxy.",
 "The same list is added twice.": "Один и тот же список добавлен дважды.",
 "Use an https:// address without credentials.": "Используйте адрес https:// без указания учетных данных.",
 "A list address is required.": "Требуется указать адрес списка.",
@@ -3431,5 +3430,14 @@
 "few": "Наблюдение приостановлено в {n} рабочих пространствах.",
 "other": "{n} рабочих пространств приостановлены."
 },
-"{n} workspace paused.": "Мониторинг приостановлен в {n} рабочей области."
+"{n} workspace paused.": "Мониторинг приостановлен в {n} рабочей области.",
+"Set a proxy for these requests": "Установить прокси для этих запросов",
+"No compatible MTProxy links were found in this list. Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "В этом списке не найдено совместимых ссылок MTProxy. Ссылки Fake TLS (секретный ключ, начинающийся с «ee»), частные адреса и некорректные ссылки не поддерживаются.",
+"{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
+"one": "Исключена {n} ссылка: ссылки Fake TLS (секретный ключ, начинающийся с «ee»), частные адреса и некорректные ссылки не поддерживаются.",
+"many": "Исключено {n} ссылок: ссылки с подделкой TLS (секретный ключ, начинающийся с «ee»), частные адреса и некорректные ссылки не поддерживаются.",
+"few": "Исключены {n} ссылки: ссылки Fake TLS (секретный ключ, начинающийся с «ee»), частные адреса и некорректные ссылки не поддерживаются.",
+"other": "{n} Исключённые ссылки: ссылки с подделкой TLS (секретный ключ, начинающийся с «ee»), частные адреса и некорректные ссылки не поддерживаются."
+},
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "Исключена {n} ссылка: ссылки Fake TLS (секретный ключ, начинающийся с «ee»), частные адреса и некорректные ссылки не поддерживаются."
 }

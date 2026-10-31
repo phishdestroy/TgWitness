@@ -56,6 +56,12 @@
   operations, an import can be stopped after the current account, files that are not
   account files are shown as such, and import errors appear in the panel language.
   Account groups can start or pause all their workspaces at once.
+- Unanswered servers in preferred countries no longer hide working servers in other
+  countries; servers of avoided countries are never connected to, not even by checks.
+  Country lookups move past hosts without an answer, the saved lists stay readable at
+  their size limits, the last list update shows when lists were actually downloaded, and
+  a blocked list download disables the update button and offers the proxy setting. Own
+  lists say how many links were left out and why.
 - Added scoped, read-only MCP connections and local archive search with optional
   AI source review and separate analytical reports.
 - Added local OCR/transcription for saved attachments and signed outgoing webhooks

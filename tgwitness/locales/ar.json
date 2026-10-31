@@ -3305,7 +3305,6 @@
 "The GitHub token is kept by the main workspace.": "يتم الاحتفاظ برمز GitHub في مساحة العمل الرئيسية.",
 "A list may have at most 1 MiB.": "يجب ألا يتجاوز حجم القائمة 1 ميغابايت كحد أقصى.",
 "Remove a list first: at most 40 own lists.": "قم بإزالة قائمة أولاً: بحد أقصى 40 قائمة خاصة.",
-"No compatible MTProxy links were found in this list.": "لم يتم العثور على روابط MTProxy متوافقة في هذه القائمة.",
 "The same list is added twice.": "يتم إضافة القائمة نفسها مرتين.",
 "Use an https:// address without credentials.": "استخدم عنوان https:// دون الحاجة إلى بيانات اعتماد.",
 "A list address is required.": "يلزم وجود عنوان قائمة.",
@@ -3483,5 +3482,16 @@
 "other": "تم إيقاف المراقبة في {n} مساحة عمل.",
 "zero": "تم إيقاف المراقبة في {n} مساحة عمل."
 },
-"{n} workspace paused.": "تم إيقاف المراقبة في مساحة عمل {n}."
+"{n} workspace paused.": "تم إيقاف المراقبة في مساحة عمل {n}.",
+"Set a proxy for these requests": "تعيين وكيل لهذه الطلبات",
+"No compatible MTProxy links were found in this list. Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "لم يتم العثور على روابط MTProxy متوافقة في هذه القائمة. لا يتم دعم روابط TLS المزيفة (السر الذي يبدأ بـ ee) والعناوين الخاصة والروابط المعطلة.",
+"{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
+"one": "تم استبعاد رابط {n}: لا يتم دعم روابط Fake TLS (السر الذي يبدأ بـ ee) والعناوين الخاصة والروابط المعطلة.",
+"few": "تم استبعاد {n} روابط: لا يتم دعم روابط Fake TLS (السر الذي يبدأ بـ ee) والعناوين الخاصة والروابط المعطلة.",
+"two": "تم استبعاد رابطين: {n} لا يتم دعم روابط Fake TLS (السر الذي يبدأ بـ ee) والعناوين الخاصة والروابط المعطلة.",
+"many": "تم استبعاد {n} رابطًا: لا يتم دعم روابط Fake TLS (السر الذي يبدأ بـ ee) والعناوين الخاصة والروابط المعطلة.",
+"other": "تم استبعاد {n} رابط: لا يتم دعم روابط Fake TLS (السر الذي يبدأ بـ ee) والعناوين الخاصة والروابط المعطلة.",
+"zero": "تم استبعاد {n} رابط: لا يتم دعم روابط Fake TLS (السر الذي يبدأ بـ ee) والعناوين الخاصة والروابط المعطوبة."
+},
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "تم استبعاد رابط {n}: لا يتم دعم روابط Fake TLS (السر الذي يبدأ بـ ee) والعناوين الخاصة والروابط المعطلة."
 }

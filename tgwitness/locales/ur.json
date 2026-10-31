@@ -3213,7 +3213,6 @@
 "The GitHub token is kept by the main workspace.": "GitHub ٹوکن مرکزی ورک اسپیس کے پاس رکھا جاتا ہے۔",
 "A list may have at most 1 MiB.": "ایک فہرست میں زیادہ سے زیادہ 1 MiB ہو سکتا ہے۔",
 "Remove a list first: at most 40 own lists.": "سب سے پہلے ایک فہرست حذف کریں: زیادہ سے زیادہ 40 اپنی فہرستیں۔",
-"No compatible MTProxy links were found in this list.": "اس فہرست میں کوئی مطابقت رکھنے والا MTProxy لنک نہیں ملا۔",
 "The same list is added twice.": "ایک ہی فہرست دو بار شامل کی گئی ہے۔",
 "Use an https:// address without credentials.": "بغیر کریڈنشلز کے ایک 'https://' پتہ استعمال کریں۔",
 "A list address is required.": "ایک فہرست کا پتہ ضروری ہے۔",
@@ -3379,5 +3378,12 @@
 "one": "{n} ورک اسپیس نے مشاہدہ معطل کیا۔",
 "other": "{n} ورک اسپیسز نے مشاہدہ معطل کیا۔"
 },
-"{n} workspace paused.": "{n} ورک اسپیس نے مشاہدہ معطل کیا۔"
+"{n} workspace paused.": "{n} ورک اسپیس نے مشاہدہ معطل کیا۔",
+"Set a proxy for these requests": "ان درخواستوں کے لیے پروکسی سیٹ کریں",
+"No compatible MTProxy links were found in this list. Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "اس فہرست میں کوئی مطابقت رکھنے والے MTProxy لنکس نہیں ملے۔ جعلی TLS لنکس (خفیہ جو ee سے شروع ہوتا ہے)، نجی پتے اور ٹوٹے ہوئے لنکس سپورٹ نہیں کیے جاتے۔",
+"{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
+"one": "{n} لنک خارج کیا گیا: Fake TLS لنکس (ee سے شروع ہونے والا سیکرٹ)، نجی پتے اور ٹوٹے ہوئے لنکس سپورٹ نہیں کیے جاتے۔",
+"other": "{n} لنکس خارج کیے گئے: جعلی TLS لنکس (خفیہ جو ee سے شروع ہوتے ہیں)، نجی پتے اور ٹوٹے ہوئے لنکس سپورٹ نہیں کیے جاتے۔"
+},
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} لنک خارج کیا گیا: Fake TLS لنکس (ee سے شروع ہونے والا سیکرٹ)، نجی پتے اور ٹوٹے ہوئے لنکس سپورٹ نہیں کیے جاتے۔"
 }

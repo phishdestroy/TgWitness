@@ -3213,7 +3213,6 @@
 "The GitHub token is kept by the main workspace.": "GitHub টোকেনটি প্রধান ওয়ার্কস্পেস দ্বারা সংরক্ষিত থাকে।",
 "A list may have at most 1 MiB.": "একটি তালিকায় সর্বোচ্চ ১ MiB থাকতে পারে।",
 "Remove a list first: at most 40 own lists.": "প্রথমে একটি তালিকা মুছে ফেলুন: সর্বোচ্চ ৪০টি নিজস্ব তালিকা।",
-"No compatible MTProxy links were found in this list.": "এই তালিকায় কোনো সামঞ্জস্যপূর্ণ MTProxy লিঙ্ক পাওয়া যায়নি।",
 "The same list is added twice.": "একই তালিকা দুইবার যোগ করা হয়েছে।",
 "Use an https:// address without credentials.": "https:// ঠিকানা ব্যবহার করুন, কোনো শংসাপত্র ছাড়াই।",
 "A list address is required.": "একটি তালিকা ঠিকানা প্রয়োজন।",
@@ -3379,5 +3378,12 @@
 "one": "{n}টি ওয়ার্কস্পেস পর্যবেক্ষণ স্থগিত করেছে।",
 "other": "{n}টি ওয়ার্কস্পেস পর্যবেক্ষণ স্থগিত করেছে।"
 },
-"{n} workspace paused.": "{n}টি ওয়ার্কস্পেস পর্যবেক্ষণ স্থগিত করেছে।"
+"{n} workspace paused.": "{n}টি ওয়ার্কস্পেস পর্যবেক্ষণ স্থগিত করেছে।",
+"Set a proxy for these requests": "এই অনুরোধগুলির জন্য একটি প্রক্সি সেট করুন",
+"No compatible MTProxy links were found in this list. Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "এই তালিকায় কোনো সামঞ্জস্যপূর্ণ MTProxy লিঙ্ক পাওয়া যায়নি। ভুয়া TLS লিঙ্ক (গোপনীয়তা ee দিয়ে শুরু), ব্যক্তিগত ঠিকানা এবং ভাঙা লিঙ্ক সমর্থিত নয়।",
+"{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
+"one": "{n}টি লিঙ্ক বাদ দেওয়া হয়েছে: Fake TLS লিঙ্ক (গোপনীয়তা ee দিয়ে শুরু), ব্যক্তিগত ঠিকানা এবং ভাঙা লিঙ্ক সমর্থিত নয়।",
+"other": "{n}টি লিঙ্ক বাদ দেওয়া হয়েছে: Fake TLS লিঙ্ক (গোপনীয়তা ee দিয়ে শুরু), ব্যক্তিগত ঠিকানা এবং ভাঙা লিঙ্ক সমর্থিত নয়।"
+},
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n}টি লিঙ্ক বাদ দেওয়া হয়েছে: Fake TLS লিঙ্ক (গোপনীয়তা ee দিয়ে শুরু), ব্যক্তিগত ঠিকানা এবং ভাঙা লিঙ্ক সমর্থিত নয়।"
 }

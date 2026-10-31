@@ -3190,7 +3190,6 @@
 "The GitHub token is kept by the main workspace.": "Token GitHub disimpan oleh ruang kerja utama.",
 "A list may have at most 1 MiB.": "Satu senarai boleh memuat sehingga 1 MiB.",
 "Remove a list first: at most 40 own lists.": "Keluarkan satu senarai terlebih dahulu: maksimum 40 senarai sendiri.",
-"No compatible MTProxy links were found in this list.": "Tiada pautan MTProxy yang serasi ditemui dalam senarai ini.",
 "The same list is added twice.": "Senarai yang sama ditambah dua kali.",
 "Use an https:// address without credentials.": "Gunakan alamat ehttps:// tanpa kelayakan.",
 "A list address is required.": "Alamat senarai diperlukan.",
@@ -3353,5 +3352,11 @@
 "{n} workspaces paused.": {
 "other": "{n} ruang kerja menghentikan pemerhatian."
 },
-"{n} workspace paused.": "{n} ruang kerja menghentikan pemerhatian."
+"{n} workspace paused.": "{n} ruang kerja menghentikan pemerhatian.",
+"Set a proxy for these requests": "Tetapkan proksi untuk permintaan ini",
+"No compatible MTProxy links were found in this list. Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "Tiada pautan MTProxy yang serasi ditemui dalam senarai ini. Pautan Fake TLS (rahsia bermula dengan ee), alamat peribadi dan pautan yang rosak tidak disokong.",
+"{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
+"other": "{n} pautan diabaikan: pautan Fake TLS (rahsia bermula dengan ee), alamat peribadi dan pautan rosak tidak disokong."
+},
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} pautan diabaikan: pautan Fake TLS (rahsia bermula dengan ee), alamat peribadi dan pautan rosak tidak disokong."
 }

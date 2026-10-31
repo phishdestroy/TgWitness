@@ -3259,7 +3259,6 @@
 "The GitHub token is kept by the main workspace.": "Токен GitHub зберігається в головному робочому просторі.",
 "A list may have at most 1 MiB.": "Розмір списку не повинен перевищувати 1 МіБ.",
 "Remove a list first: at most 40 own lists.": "Спочатку видаліть список: максимально 40 власних списків.",
-"No compatible MTProxy links were found in this list.": "У цьому списку не знайдено сумісних посилань на MTProxy.",
 "The same list is added twice.": "Один і той самий список додано двічі.",
 "Use an https:// address without credentials.": "Використовуйте адресу https:// без введення облікових даних.",
 "A list address is required.": "Необхідно вказати адресу списку.",
@@ -3431,5 +3430,14 @@
 "few": "Спостереження призупинено у {n} робочих просторах.",
 "other": "{n} робочих просторів призупинено."
 },
-"{n} workspace paused.": "Призупинено {n} робочу область."
+"{n} workspace paused.": "Призупинено {n} робочу область.",
+"Set a proxy for these requests": "Встановити проксі для цих запитів",
+"No compatible MTProxy links were found in this list. Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "У цьому списку не знайдено сумісних посилань MTProxy. Посилання Fake TLS (секрет, що починається з «ee»), приватні адреси та пошкоджені посилання не підтримуються.",
+"{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
+"one": "{n} посилання пропущено: посилання Fake TLS (секрет, що починається з «ee»), приватні адреси та пошкоджені посилання не підтримуються.",
+"many": "{n} посилань пропущено: посилання Fake TLS (секрет, що починається з «ee»), приватні адреси та пошкоджені посилання не підтримуються.",
+"few": "{n} посилання пропущено: посилання Fake TLS (секрет, що починається з «ee»), приватні адреси та пошкоджені посилання не підтримуються.",
+"other": "{n} Посилання, що не враховуються: посилання Fake TLS (секрет, що починається з «ee»), приватні адреси та пошкоджені посилання не підтримуються."
+},
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} посилання пропущено: посилання Fake TLS (секрет, що починається з «ee»), приватні адреси та пошкоджені посилання не підтримуються."
 }

@@ -225,3 +225,21 @@ def test_country_choice_through_the_panel_is_journaled_and_shown(tmp_path, monke
         assert saved["settings"]["prefer"] == ["DE"] and saved["summary"]["excluded"] == 1 and saved["summary"]["preferred"] == 1
         event = app.state.store.events(kind="network.sources_changed")[0]["payload"]
         assert event["prefer_countries"] == ["DE"] and event["avoid_countries"] == ["NL"]
+
+
+def test_hosts_without_a_country_wait_so_the_next_lookups_reach_other_hosts(tmp_path, monkeypatch):
+    countries, asked = proxy_sources.Countries(tmp_path), []
+    monkeypatch.setattr(proxy_sources, "GEO_BATCH", 2)
+
+    async def address(host):
+        return None if host.startswith("unresolved") else host
+
+    async def lookup(ip, network):
+        asked.append(ip)
+        return "DE"
+    monkeypatch.setattr(countries, "address", address)
+    monkeypatch.setattr(countries, "lookup", lookup)
+    hosts = ["unresolved-1.example", "unresolved-2.example", "8.8.8.8"]
+    assert asyncio.run(countries.locate(hosts, None)) == 0
+    assert asyncio.run(countries.locate(hosts, None)) == 1 and countries.of("8.8.8.8") == "DE" and asked == ["8.8.8.8"]
+    assert countries.of("unresolved-1.example") is None

@@ -45,7 +45,8 @@
     $("pool-github-search").disabled ||= !view?.settings.github_token;
     $("pool-token-remove").disabled ||= !view?.settings.github_token;
     $("pool-check").disabled = !!state.status?.demo || pending > 0 || !!view?.summary.checking;
-    $("pool-update").disabled = readOnly || pending > 0;
+    $("pool-update").disabled = readOnly || pending > 0 || !!view?.download_problem;
+    $("pool-update").title = view?.download_problem ? tr(view.download_problem) : "";
     for (const kind of ["prefer", "avoid"]) {
       const add = $("pool-" + kind + "-add");
       add.disabled ||= !$("pool-countries").checked || add.options.length < 2;
@@ -146,10 +147,20 @@
     show("pool-schedule-edit", state.profile === "default");
     let note = $("pool-note");
     if (!note) { note = node("p", "hint pool-note"); note.id = "pool-note"; $("pool-schedule").after(note); }
-    note.textContent = view.download_problem ? tr(view.download_problem) + " " +
-      tr("List updates and country lookups wait for it; checks of the servers themselves still run.") :
-      policy && s.listed && s.excluded === s.listed ? tr("The country choice excludes every listed server. Workspaces on the automatic route wait until one is allowed.") :
-      !view.settings.countries ? tr("Country lookups are switched off under Lists and sources.") : "";
+    // Every applicable warning: a blocked download also explains why a country choice excludes everything
+    note.textContent = [
+      view.download_problem && tr(view.download_problem) + " " +
+        tr("List updates and country lookups wait for it; checks of the servers themselves still run."),
+      policy && s.listed && s.excluded === s.listed &&
+        tr("The country choice excludes every listed server. Workspaces on the automatic route wait until one is allowed."),
+      !view.settings.countries && tr("Country lookups are switched off under Lists and sources.")].filter(Boolean).join(" ");
+    if (view.download_problem && $("outside-kind")) {
+      const set = node("button", "quiet small", tr("Set a proxy for these requests")); set.type = "button";
+      set.addEventListener("click", () => {
+        $("policy-form").scrollIntoView({block: "start", behavior: "smooth"}); $("outside-enabled").focus({preventScroll: true});
+      });
+      note.append(" ", set);
+    }
     note.hidden = !note.textContent;
   }
 
@@ -377,7 +388,7 @@
   async function importLists(files) {
     if (!state.me?.admin || state.status?.demo) return;
     const revision = state.workspaceRevision;
-    let added = 0;
+    let added = 0, skipped = 0;
     for (const file of files) {
       if (revision !== state.workspaceRevision || !state.token) return;
       if (file.size > 1024 * 1024) { toast(tr("{name}: a list may have at most 1 MiB.", {name: file.name}), true); continue; }
@@ -385,14 +396,18 @@
         const text = await file.text();
         if (revision !== state.workspaceRevision || !state.token) return;
         view = await json("network/sources/list", {label: file.name, text});
-        added += view.added.compatible;
+        added += view.added.compatible; skipped += view.added.skipped;
       } catch (error) {
         if (revision !== state.workspaceRevision || error instanceof StaleView) return;
         toast(file.name + ": " + error.message, true);
       }
     }
     if (view) render();
-    if (added) toast(trn("{n} server added from your files.", "{n} servers added from your files.", added));
+    if (added) toast(trn("{n} server added from your files.", "{n} servers added from your files.", added) + skippedText(skipped));
+  }
+  function skippedText(n) {
+    return n ? " " + trn("{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.",
+                         "{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.", n) : "";
   }
   function addLists(files) { return runAction(null, () => importLists(files)); }
   $("pool-files").addEventListener("change", () => { const files = [...$("pool-files").files]; $("pool-files").value = ""; addLists(files); });
@@ -405,7 +420,7 @@
     view = await json("network/sources/list", {label: tr("Pasted links"), text});
     if ($("pool-paste").value.trim() === text) $("pool-paste").value = "";
     render();
-    toast(trn("{n} server added.", "{n} servers added.", view.added.compatible));
+    toast(trn("{n} server added.", "{n} servers added.", view.added.compatible) + skippedText(view.added.skipped));
   }));
   $("pool-token-save").addEventListener("click", e => runAction(e.currentTarget, async () => {
     const token = $("pool-token").value.trim(); if (!token) throw new Error(tr("Paste a GitHub token first."));

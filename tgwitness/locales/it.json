@@ -3213,7 +3213,6 @@
 "The GitHub token is kept by the main workspace.": "Il token GitHub è conservato dall’area di lavoro principale.",
 "A list may have at most 1 MiB.": "Un elenco può avere una dimensione massima di 1 MiB.",
 "Remove a list first: at most 40 own lists.": "Rimuova prima un elenco: al massimo 40 elenchi propri.",
-"No compatible MTProxy links were found in this list.": "In questo elenco non sono stati trovati collegamenti MTProxy compatibili.",
 "The same list is added twice.": "Lo stesso elenco viene aggiunto due volte.",
 "Use an https:// address without credentials.": "Utilizzi un indirizzo https:// senza credenziali.",
 "A list address is required.": "È necessario un indirizzo di elenco.",
@@ -3379,5 +3378,12 @@
 "one": "{n} spazio di lavoro messo in pausa.",
 "other": "{n} spazi di lavoro sono stati messi in pausa."
 },
-"{n} workspace paused.": "{n} spazio di lavoro messo in pausa."
+"{n} workspace paused.": "{n} spazio di lavoro messo in pausa.",
+"Set a proxy for these requests": "Imposta un proxy per queste richieste",
+"No compatible MTProxy links were found in this list. Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "In questo elenco non sono stati trovati collegamenti MTProxy compatibili. I collegamenti Fake TLS (codice segreto che inizia con «ee»), gli indirizzi privati e i collegamenti non validi non sono supportati.",
+"{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
+"one": "{n} collegamento escluso: i collegamenti Fake TLS (codice segreto che inizia con «ee»), gli indirizzi privati e i collegamenti non validi non sono supportati.",
+"other": "{n} collegamenti esclusi: i collegamenti Fake TLS (codice segreto che inizia con «ee»), gli indirizzi privati e i collegamenti non validi non sono supportati."
+},
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} collegamento escluso: i collegamenti Fake TLS (codice segreto che inizia con «ee»), gli indirizzi privati e i collegamenti non validi non sono supportati."
 }

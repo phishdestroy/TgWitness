@@ -3259,7 +3259,6 @@
 "The GitHub token is kept by the main workspace.": "Token serwisu GitHub jest przechowywany w głównym obszarze roboczym.",
 "A list may have at most 1 MiB.": "Lista może mieć maksymalnie 1 MiB.",
 "Remove a list first: at most 40 own lists.": "Najpierw należy usunąć listę: maksymalnie 40 własnych list.",
-"No compatible MTProxy links were found in this list.": "Na tej liście nie znaleziono żadnych kompatybilnych linków MTProxy.",
 "The same list is added twice.": "Ta sama lista została dodana dwukrotnie.",
 "Use an https:// address without credentials.": "Proszę skorzystać z adresu https:// bez podawania danych uwierzytelniających.",
 "A list address is required.": "Wymagany jest adres listy.",
@@ -3431,5 +3430,14 @@
 "few": "Wstrzymano obserwację w {n} obszarach roboczych.",
 "other": "Wstrzymano obserwację w {n} obszarze roboczym."
 },
-"{n} workspace paused.": "Wstrzymano obserwację w {n} obszarze roboczym."
+"{n} workspace paused.": "Wstrzymano obserwację w {n} obszarze roboczym.",
+"Set a proxy for these requests": "Ustaw proxy dla tych żądań",
+"No compatible MTProxy links were found in this list. Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "Na tej liście nie znaleziono żadnych kompatybilnych linków MTProxy. Linki typu „Fake TLS” (klucz tajny zaczynający się od „ee”), adresy prywatne oraz uszkodzone linki nie są obsługiwane.",
+"{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
+"one": "Pominięto {n} link: linki typu „Fake TLS” (klucz tajny zaczynający się od „ee”), adresy prywatne oraz uszkodzone linki nie są obsługiwane.",
+"many": "Pominięto {n} linków: linki typu „Fake TLS” (klucz tajny zaczynający się od „ee”), adresy prywatne oraz uszkodzone linki nie są obsługiwane.",
+"few": "Pominięto {n} linki: linki typu „Fake TLS” (klucz tajny zaczynający się od „ee”), adresy prywatne oraz uszkodzone linki nie są obsługiwane.",
+"other": "{n} Pominięte linki: linki typu „Fake TLS” (klucz tajny zaczynający się od „ee”), adresy prywatne oraz uszkodzone linki nie są obsługiwane."
+},
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "Pominięto {n} link: linki typu „Fake TLS” (klucz tajny zaczynający się od „ee”), adresy prywatne oraz uszkodzone linki nie są obsługiwane."
 }

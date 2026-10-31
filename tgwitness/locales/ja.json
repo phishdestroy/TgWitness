@@ -3190,7 +3190,6 @@
 "The GitHub token is kept by the main workspace.": "GitHubトークンはメインワークスペースで管理されます。",
 "A list may have at most 1 MiB.": "リストの最大サイズは1 MiBです。",
 "Remove a list first: at most 40 own lists.": "まずリストを削除してください：最大40個の独自リストまでです。",
-"No compatible MTProxy links were found in this list.": "このリストには、互換性のあるMTProxyリンクが見つかりませんでした。",
 "The same list is added twice.": "同じリストが2回追加されています。",
 "Use an https:// address without credentials.": "認証情報なしで、https:// のアドレスをご利用ください。",
 "A list address is required.": "リストのアドレスが必要です。",
@@ -3353,5 +3352,11 @@
 "{n} workspaces paused.": {
 "other": "{n}つのワークスペースが一時停止されました。"
 },
-"{n} workspace paused.": "{n}つのワークスペースが一時停止されました。"
+"{n} workspace paused.": "{n}つのワークスペースが一時停止されました。",
+"Set a proxy for these requests": "これらのリクエストにプロキシを設定する",
+"No compatible MTProxy links were found in this list. Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "このリストには互換性のあるMTProxyリンクが見つかりませんでした。「ee」で始まる秘密鍵を持つFake TLSリンク、プライベートアドレスへのリンク、および不正なリンクはサポートされていません。",
+"{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
+"other": "除外されるリンクは{n}つです：Fake TLSリンク（シークレットが「ee」で始まるもの）、プライベートアドレス、および不正な形式のリンクはサポートされていません。"
+},
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "除外されるリンクは{n}つです：Fake TLSリンク（シークレットが「ee」で始まるもの）、プライベートアドレス、および不正な形式のリンクはサポートされていません。"
 }

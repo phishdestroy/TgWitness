@@ -3190,7 +3190,6 @@
 "The GitHub token is kept by the main workspace.": "Mã thông báo GitHub được lưu trữ tại không gian làm việc chính.",
 "A list may have at most 1 MiB.": "Một danh sách có thể có dung lượng tối đa là 1 MiB.",
 "Remove a list first: at most 40 own lists.": "Vui lòng xóa danh sách trước: tối đa 40 danh sách riêng.",
-"No compatible MTProxy links were found in this list.": "Không tìm thấy liên kết MTProxy tương thích nào trong danh sách này.",
 "The same list is added twice.": "Cùng một danh sách đã được thêm vào hai lần.",
 "Use an https:// address without credentials.": "Vui lòng sử dụng địa chỉ https:// mà không cần thông tin đăng nhập.",
 "A list address is required.": "Cần có địa chỉ danh sách.",
@@ -3353,5 +3352,11 @@
 "{n} workspaces paused.": {
 "other": "{n} không gian làm việc đã bị tạm dừng."
 },
-"{n} workspace paused.": "{n} không gian làm việc đã bị tạm dừng."
+"{n} workspace paused.": "{n} không gian làm việc đã bị tạm dừng.",
+"Set a proxy for these requests": "Thiết lập proxy cho các yêu cầu này",
+"No compatible MTProxy links were found in this list. Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "Không tìm thấy liên kết MTProxy tương thích nào trong danh sách này. Các liên kết TLS giả mạo (mã bí mật bắt đầu bằng \"ee\"), địa chỉ riêng tư và các liên kết bị lỗi không được hỗ trợ.",
+"{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
+"other": "Còn {n} liên kết bị loại trừ: Các liên kết Fake TLS (mã bí mật bắt đầu bằng \"ee\"), các địa chỉ riêng tư và các liên kết bị lỗi không được hỗ trợ."
+},
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "Còn {n} liên kết bị loại trừ: Các liên kết Fake TLS (mã bí mật bắt đầu bằng \"ee\"), các địa chỉ riêng tư và các liên kết bị lỗi không được hỗ trợ."
 }

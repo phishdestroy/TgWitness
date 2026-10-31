@@ -257,3 +257,34 @@ def test_profiles_share_one_pool_and_get_different_proxies(tmp_path, monkeypatch
         assert client.post("/api/network", json={"kind": "direct"}).status_code == 200
         assert client.get("/api/status").json()["collector"]["network"]["kind"] == "direct"
         assert app.state.store.get_setting("auto_route") is None
+
+
+def test_unanswered_preferred_servers_do_not_hide_a_working_one_elsewhere(monkeypatch):
+    from types import SimpleNamespace
+    from tgwitness.proxy_sources import SourceSettings
+    dead = ["9.9.%d.1" % i for i in range(60)]
+    pool = pool_with(monkeypatch, dead + ["1.1.1.1"], set(dead))
+    pool.catalog.countries = SimpleNamespace(of=lambda host: "DE" if host in dead else "NL")
+    pool.catalog.settings = lambda: SourceSettings(prefer=["DE"])
+    alias, route = asyncio.run(pool.acquire("w"))
+    assert route.host == "1.1.1.1"
+    assert sum(pool.health.get(row["id"], {}).get("failures", 0) for row in pool.catalog.rows) == catalogs.PICK_LIMIT
+
+
+def test_checks_never_connect_to_servers_of_an_avoided_country(monkeypatch):
+    from types import SimpleNamespace
+    from tgwitness.proxy_sources import SourceSettings
+    pool, probed = pool_with(monkeypatch, ["8.8.8.8", "1.1.1.1"], set()), []
+
+    async def handshake(route):
+        probed.append(route.host)
+        return 20
+    monkeypatch.setattr(ProxyPool, "probe", staticmethod(handshake))
+    pool.catalog.countries = SimpleNamespace(of={"8.8.8.8": "RU", "1.1.1.1": "NL"}.get)
+    pool.catalog.settings = lambda: SourceSettings(avoid=["RU"])
+    asyncio.run(pool.probe_all())
+    assert probed == ["1.1.1.1"]
+    pool.catalog.settings = lambda: SourceSettings(prefer=["FR"], only_preferred=True)
+    with pytest.raises(NoProxyAvailable, match="allowed country"):
+        asyncio.run(pool.acquire("w"))
+    assert not pool.exhausted

@@ -3213,7 +3213,6 @@
 "The GitHub token is kept by the main workspace.": "GitHub jetonu ana çalışma alanı tarafından saklanır.",
 "A list may have at most 1 MiB.": "Bir listenin boyutu en fazla 1 MiB olabilir.",
 "Remove a list first: at most 40 own lists.": "Önce bir listeyi silin: en fazla 40 adet kendi listeniz olabilir.",
-"No compatible MTProxy links were found in this list.": "Bu listede uyumlu MTProxy bağlantısı bulunamadı.",
 "The same list is added twice.": "Aynı liste iki kez eklenmiştir.",
 "Use an https:// address without credentials.": "Kimlik bilgileri gerektirmeyen https:// adresini kullanın.",
 "A list address is required.": "Bir liste adresi gereklidir.",
@@ -3379,5 +3378,12 @@
 "one": "{n} çalışma alanı duraklatıldı.",
 "other": "{n} çalışma alanı duraklatıldı."
 },
-"{n} workspace paused.": "{n} çalışma alanı duraklatıldı."
+"{n} workspace paused.": "{n} çalışma alanı duraklatıldı.",
+"Set a proxy for these requests": "Bu istekler için bir proxy ayarla",
+"No compatible MTProxy links were found in this list. Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "Bu listede uyumlu MTProxy bağlantısı bulunamadı. Fake TLS bağlantıları (gizli anahtarı ee ile başlayan), özel adresler ve hatalı bağlantılar desteklenmemektedir.",
+"{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
+"one": "{n} bağlantı hariç tutuldu: Sahte TLS bağlantıları (gizli anahtarı \"ee\" ile başlayanlar), özel adresler ve hatalı bağlantılar desteklenmemektedir.",
+"other": "Dışarıda bırakılan {n} bağlantı: Sahte TLS bağlantıları (gizli anahtarı \"ee\" ile başlayanlar), özel adresler ve hatalı bağlantılar desteklenmez."
+},
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} bağlantı hariç tutuldu: Sahte TLS bağlantıları (gizli anahtarı \"ee\" ile başlayanlar), özel adresler ve hatalı bağlantılar desteklenmemektedir."
 }
