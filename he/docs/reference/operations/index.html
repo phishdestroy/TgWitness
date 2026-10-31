@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="he" dir="rtl" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>תהליכי עבודה ותפעול | TgWitness</title>
+<meta name="description" content="תפעול יומיומי של לוח הבקרה: מצבי פעולה, קטגוריות ניטור, פרמטרים, התראות, ייצוא נתונים, גיבוי וקיבולת."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="he_IL">
+<meta property="og:title" content="תהליכי עבודה ותפעול | TgWitness"><meta property="og:description" content="תפעול יומיומי של לוח הבקרה: מצבי פעולה, קטגוריות ניטור, פרמטרים, התראות, ייצוא נתונים, גיבוי וקיבולת.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/operations/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/operations/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/operations/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/operations/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/operations/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/operations/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/operations/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/operations/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/operations/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/operations/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/operations/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/operations/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/operations/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/operations/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/", "url": "https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/", "name": "תהליכי עבודה ותפעול | TgWitness", "description": "תפעול יומיומי של לוח הבקרה: מצבי פעולה, קטגוריות ניטור, פרמטרים, התראות, ייצוא נתונים, גיבוי וקיבולת.", "inLanguage": "he", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "דף הבית", "item": "https://phishdestroy.github.io/TgWitness/he/"}, {"@type": "ListItem", "position": 2, "name": "תיעוד", "item": "https://phishdestroy.github.io/TgWitness/he/docs/"}, {"@type": "ListItem", "position": 3, "name": "הפניה", "item": "https://phishdestroy.github.io/TgWitness/he/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "תהליכי עבודה ותפעול", "item": "https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">דלג לתוכן</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / תיעוד</span></a>
+<nav aria-label="מדריכים"><a href="../../concepts/">מדריך חזותי</a><a href="../../">כל המדריכים</a><a href="../">הפניה</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="שפה"><span aria-hidden="true">◍</span> עברית</summary><div class="lang-list"><a href="../../../../docs/reference/operations/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/operations/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/operations/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/operations/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/operations/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/operations/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/operations/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/operations/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/operations/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/operations/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/operations/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/operations/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/operations/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/operations/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/operations/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/operations/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/operations/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/operations/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/operations/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/operations/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/operations/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/operations/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/operations/" hreflang="th" lang="th">ไทย</a><a href="./" hreflang="he" lang="he" aria-current="true">עברית</a><a href="../../../../bn/docs/reference/operations/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="החלפה בין ערכת נושא בהירה לכהה"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="מדריכים"><a href="../../../guides/modes.html">מצבים, תרחישים ורמות ראיות</a><p class="nav-label">צעדים ראשונים</p><a href="../../start/">התחילו תוך דקות ספורות</a><a href="../../accounts/">חבר חשבון</a><a href="../../proxies/">בחר פרוקסי</a><a href="../../exports/">ייצוא ואימות</a><p class="nav-label">הבנת הראיות</p><a href="../../concepts/">ראו כיצד הראיות פועלות</a><a href="../../cases/">חקור בכל הצ'אטים</a><a href="../../security/">שמרו על האבטחה</a><p class="nav-label">המשך לקרוא</p><a href="../../witness/">הגדרת בוט Witness</a><a href="../../server/">המשך להפעיל את האתר</a><a href="../../troubleshooting/">גלה מה השתבש</a></nav><nav class="wiki-nav" aria-label="הפניה"><p class="nav-label"><a class="nav-label-link" href="../">הפניה</a></p><details class="wiki-group"><summary>הגדרה</summary><a href="../quickstart/">התחלה מהירה</a><a href="../accounts/">חשבונות ופורמטים של הפעלות</a><a href="../connection/">חיבור, פרוקסי והגנה על נתונים</a><a href="../deployment/">פריסה</a></details><details class="wiki-group" open><summary>אסף</summary><a href="../collection/">כיצד מתבצע האיסוף</a><a href="./" aria-current="page">תהליכי עבודה ותפעול</a><a href="../investigation/">מצב חקירה</a><a href="../features/">תכונות ומגבלות</a></details><details class="wiki-group"><summary>ראיות</summary><a href="../how-it-works/">כיצד פועלת הראיה</a><a href="../evidence/">פורמט הראיות</a><a href="../witness/">עד עצמאי</a><a href="../timestamp/">חותמות זמן</a></details><details class="wiki-group"><summary>אבטחה ופרויקט</summary><a href="../security/">אבטחה וטיפול בנתונים</a><a href="../architecture/">ארכיטקטורה</a><a href="../verification/">מה נבדק</a><a href="../license/">הודעה בנושא הרישיון ואי־תאימות ארכיטקטונית</a><a href="../notice/">הודעה על חוסר תאימות למפעיל</a><a href="../changelog/">יומן שינויים</a></details></nav><p class="sidebar-note">v0.7.0<br>קוד פתוח · פועל על המחשב שלכם</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="מדריכים"><a href="../../../">דף הבית</a> <span aria-hidden="true">/</span> <a href="../../">תיעוד</a> <span aria-hidden="true">/</span> <a href="../">הפניה</a> <span aria-hidden="true">/</span> <span aria-current="page">תהליכי עבודה ותפעול</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">חפש בתיעוד</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="נסו להשתמש במונחים כמו &quot;פרוקסי&quot;, &quot;שרשרת האש&quot;, &quot;אסימון&quot; או &quot;עד&quot;..." autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="חיפוש ברור" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">הקלידו מילה כדי לחפש במדריכים ובמאגר המידע. החיפוש נשאר בדפדפן שלכם.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">הפניה / אסף</p><h1>תהליכי עבודה ותפעול</h1><p class="guide-outcome">תפעול יומיומי של לוח הבקרה: מצבי פעולה, קטגוריות ניטור, פרמטרים, התראות, ייצוא נתונים, גיבוי וקיבולת.</p><div class="wiki-body"><p>לחיבור הראשון, השתמש <a href="../accounts/">בחשבונות ובפורמטים של הפעלה</a>.
+להסבר על גרסאות שמורות, מדיניות אירועים ופערים, ראה
+<a href="../collection/">כיצד פועל האיסוף</a>. מדריך זה מכסה את התפעול השוטף והשחזור.</p>
+<h2 id="operator-workflow">זרימת העבודה של המפעיל<a class="anchor" href="#operator-workflow" aria-label="קישור לסעיף זה">#</a></h2>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 671 416" width="671" height="416" role="img" aria-labelledby="flow-2-title flow-2-desc"><title id="flow-2-title">תרשים זרימה</title><desc id="flow-2-desc">בחרו באחסון ובהגנה על המפתחות → פתח את הפאנל באמצעות האסימון שלו; פתח את הפאנל באמצעות האסימון שלו → בחר סביבת עבודה; בחר סביבת עבודה → הגדרת מסלול ישיר או דרך פרוקסי; הגדרת מסלול ישיר או דרך פרוקסי → הזן מספר טלפון או בחר קבצים / QR; הזן מספר טלפון או בחר קבצים / QR → בדוק את זהות החשבון ובחר בקבוצות נגישות; בדוק את זהות החשבון ובחר בקבוצות נגישות → שמור את מדיניות האירועים והקבצים המצורפים, ולאחר מכן התחל במעקב; שמור את מדיניות האירועים והקבצים המצורפים, ולאחר מכן התחל במעקב → ניטור שגיאות, גישה, תורים ודיסק; ניטור שגיאות, גישה, תורים ודיסק → שמירה על נקודות בקרה עצמאיות; שמירה על נקודות בקרה עצמאיות → ייצוא ואימות החומר</desc><defs><marker id="flow-2-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M202.9 37.0C227.6 37.0 227.6 37.0 252.4 37.0" marker-end="url(#flow-2-arrow)" style="--i:0;--len:49" pathLength="49"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M202.9 37.0C227.6 37.0 227.6 37.0 252.4 37.0"/></circle><path class="flow-edge" d="M418.4 37.0C453.4 37.0 453.4 37.0 488.5 37.0" marker-end="url(#flow-2-arrow)" style="--i:1;--len:70" pathLength="70"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M418.4 37.0C453.4 37.0 453.4 37.0 488.5 37.0"/></circle><path class="flow-edge" d="M554.2 57.0C554.2 86.5 554.2 86.5 554.2 116.0" marker-end="url(#flow-2-arrow)" style="--i:2;--len:59" pathLength="59"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M554.2 57.0C554.2 86.5 554.2 86.5 554.2 116.0"/></circle><path class="flow-edge" d="M474.7 145.0C448.2 145.0 448.2 145.0 421.8 145.0" marker-end="url(#flow-2-arrow)" style="--i:3;--len:53" pathLength="53"/><circle class="flow-pulse" r="3.2" style="--i:3"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M474.7 145.0C448.2 145.0 448.2 145.0 421.8 145.0"/></circle><path class="flow-edge" d="M248.9 145.0C222.5 145.0 222.5 145.0 196.0 145.0" marker-end="url(#flow-2-arrow)" style="--i:4;--len:53" pathLength="53"/><circle class="flow-pulse" r="3.2" style="--i:4"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M248.9 145.0C222.5 145.0 222.5 145.0 196.0 145.0"/></circle><path class="flow-edge" d="M116.5 174.0C116.5 199.0 116.5 199.0 116.5 224.0" marker-end="url(#flow-2-arrow)" style="--i:5;--len:50" pathLength="50"/><circle class="flow-pulse" r="3.2" style="--i:5"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M116.5 174.0C116.5 199.0 116.5 199.0 116.5 224.0"/></circle><path class="flow-edge" d="M196.0 271.0C225.9 271.0 225.9 271.0 255.8 271.0" marker-end="url(#flow-2-arrow)" style="--i:6;--len:60" pathLength="60"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M196.0 271.0C225.9 271.0 225.9 271.0 255.8 271.0"/></circle><path class="flow-edge" d="M414.9 271.0C443.1 271.0 443.1 271.0 471.2 271.0" marker-end="url(#flow-2-arrow)" style="--i:7;--len:56" pathLength="56"/><circle class="flow-pulse" r="3.2" style="--i:7"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M414.9 271.0C443.1 271.0 443.1 271.0 471.2 271.0"/></circle><path class="flow-edge" d="M554.2 300.0C554.2 334.0 554.2 334.0 554.2 368.0" marker-end="url(#flow-2-arrow)" style="--i:8;--len:68" pathLength="68"/><circle class="flow-pulse" r="3.2" style="--i:8"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M554.2 300.0C554.2 334.0 554.2 334.0 554.2 368.0"/></circle><g class="flow-node" style="--i:0"><rect x="30.0" y="8.0" width="172.9" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="116.5" y="28.0">בחרו באחסון ובהגנה על</tspan><tspan x="116.5" y="46.0">המפתחות</tspan></text></g><g class="flow-node" style="--i:1"><rect x="252.4" y="8.0" width="166.0" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="335.4" y="28.0">פתח את הפאנל באמצעות</tspan><tspan x="335.4" y="46.0">האסימון שלו</tspan></text></g><g class="flow-node" style="--i:2"><rect x="488.5" y="17.0" width="131.5" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="554.2" y="37.0">בחר סביבת עבודה</tspan></text></g><g class="flow-node" style="--i:3"><rect x="474.7" y="116.0" width="159.1" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="554.2" y="136.0">הגדרת מסלול ישיר או</tspan><tspan x="554.2" y="154.0">דרך פרוקסי</tspan></text></g><g class="flow-node" style="--i:4"><rect x="248.9" y="116.0" width="172.9" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="335.4" y="136.0">הזן מספר טלפון או בחר</tspan><tspan x="335.4" y="154.0">קבצים / QR</tspan></text></g><g class="flow-node" style="--i:5"><rect x="36.9" y="116.0" width="159.1" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="116.5" y="136.0">בדוק את זהות החשבון</tspan><tspan x="116.5" y="154.0">ובחר בקבוצות נגישות</tspan></text></g><g class="flow-node" style="--i:6"><rect x="36.9" y="224.0" width="159.1" height="94.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="116.5" y="244.0">שמור את מדיניות</tspan><tspan x="116.5" y="262.0">האירועים והקבצים</tspan><tspan x="116.5" y="280.0">המצורפים, ולאחר מכן</tspan><tspan x="116.5" y="298.0">התחל במעקב</tspan></text></g><g class="flow-node" style="--i:7"><rect x="255.8" y="242.0" width="159.1" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="335.4" y="262.0">ניטור שגיאות, גישה,</tspan><tspan x="335.4" y="280.0">תורים ודיסק</tspan></text></g><g class="flow-node" style="--i:8"><rect x="471.2" y="242.0" width="166.0" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="554.2" y="262.0">שמירה על נקודות בקרה</tspan><tspan x="554.2" y="280.0">עצמאיות</tspan></text></g><g class="flow-node" style="--i:9"><rect x="478.1" y="368.0" width="152.2" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="554.2" y="388.0">ייצוא ואימות החומר</tspan></text></g></svg></div><details class="flow-steps"><summary>תרשים כטקסט</summary><ol><li>בחרו באחסון ובהגנה על המפתחות → פתח את הפאנל באמצעות האסימון שלו</li><li>פתח את הפאנל באמצעות האסימון שלו → בחר סביבת עבודה</li><li>בחר סביבת עבודה → הגדרת מסלול ישיר או דרך פרוקסי</li><li>הגדרת מסלול ישיר או דרך פרוקסי → הזן מספר טלפון או בחר קבצים / QR</li><li>הזן מספר טלפון או בחר קבצים / QR → בדוק את זהות החשבון ובחר בקבוצות נגישות</li><li>בדוק את זהות החשבון ובחר בקבוצות נגישות → שמור את מדיניות האירועים והקבצים המצורפים, ולאחר מכן התחל במעקב</li><li>שמור את מדיניות האירועים והקבצים המצורפים, ולאחר מכן התחל במעקב → ניטור שגיאות, גישה, תורים ודיסק</li><li>ניטור שגיאות, גישה, תורים ודיסק → שמירה על נקודות בקרה עצמאיות</li><li>שמירה על נקודות בקרה עצמאיות → ייצוא ואימות החומר</li></ol></details></figure>
+<p>אישור, קישוריות רשת, גישה לקבוצה ושלמות
+המסירה הם מאפיינים שונים. מצב חיבור ירוק אינו מעיד על כך שכל
+האירועים נלכדו.</p>
+<h2 id="modes">מצבים<a class="anchor" href="#modes" aria-label="קישור לסעיף זה">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>מצב</th>
+<th>פעולה</th>
+<th>התנהגות</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>הדגמה</td>
+<td>scripts\Demo.cmd או <code>--demo</code></td>
+<td>נתונים סינתטיים; חיבורים לחשבונות אמיתיים מושבתים</td>
+</tr>
+<tr>
+<td>הערה</td>
+<td>התחל במעקב</td>
+<td>תיעוד עדכונים שנמסרו עבור מקורות נבחרים</td>
+</tr>
+<tr>
+<td>תמונת מצב היסטורית</td>
+<td>מקורות → תמונת מצב היסטורית</td>
+<td>עד 500 הודעות עדכניות; ללא שחזור של כל השינויים בעבר</td>
+</tr>
+<tr>
+<td>הפסקה</td>
+<td>השהיית התצפית</td>
+<td>הפסקת האיסוף תוך שמירת הנתונים והמשימות בתור</td>
+</tr>
+<tr>
+<td>בדיקה/העברה</td>
+<td>ייצוא</td>
+<td>ZIP, JSONL/CSV/HTML, נקודת ביקורת, אישור תהליך ובקשת חותמת זמן</td>
+</tr>
+<tr>
+<td>חשבונות מרובים</td>
+<td>סביבות עבודה או הכפתור העליון <strong>+</strong></td>
+<td>מספר בלתי מוגבל של סביבות עבודה נפרדות בתהליך אחד</td>
+</tr>
+</tbody>
+</table></div>
+<p>הגישה לדמו המקומי נפתחת אוטומטית ללא צורך בהזנת אסימון ידנית. היא משתמשת
+ביכולת לתקופת חיי התהליך, התקפה רק לגישה ישירה בלולאה חזרה (loopback) לדמו סינתטי
+מבודד; אסימון הפאנל הראשי אינו נחשף. סביבות עבודה אמיתיות וגישה לדמו מרחוק
+או באמצעות פרוקסי שומרות על אימות באמצעות אסימון. הכניסה לדמו אינה מעניקה הרשאה ל-Telegram.</p>
+<h2 id="monitoring-categories">קטגוריות ניטור<a class="anchor" href="#monitoring-categories" aria-label="קישור לסעיף זה">#</a></h2>
+<p><img alt="הגדרות ניטור לכל חשבון עם נתוני מקור סינתטיים" src="../../../../assets/sources.png" /></p>
+<p>ב<strong>-מקורות → הגדרות לכידה → בחר אילו שינויים לשמור</strong>, בחר באופן נפרד הודעות חדשות, עריכות,
+הודעות על מחיקה, עדכוני תגובות ואירועי חברות. ברירת המחדל
+שומרת את כל הקטגוריות. האפשרות &quot;<strong>הודעות, עריכות ומחיקות&quot;</strong> שומרת על ההקשר המקורי
+תוך השבתת עדכוני תגובות/חברות נפרדים. <strong>&quot;כל הפעילות הגלויה&quot;</strong> משחזרת
+את כל החמש. הגדרות קבועות מראש משנות את הטופס; לחצו על &quot;<strong>שמור הגדרות ניטור&quot;</strong> כדי להחיל.</p>
+<p>המדיניות שנשמרה חלה על כל המקורות שנבחרו באותו מרחב עבודה.
+מרחבי עבודה אחרים שומרים על ההגדרות שלהם. כל שינוי בפועל מתועד עם ערכים חתומים של &quot;לפני&quot; ו&quot;אחרי&quot;;
+המדיניות הנוכחית כלולה גם באישורי תהליך וברשומות תחילת התצפית.
+השבתת קטגוריה אינה מוחקת תצפיות קודמות. הפעלה מחדש
+אינה משחזרת שינויים שהוחמצו. בגרסה זו אין אפשרות לעקוף הגדרות קטגוריה לפי קבוצה.</p>
+<p>השאר את האפשרות להודעות חדשות מופעלת כאשר לתוכן קודם יש חשיבות: הודעת מחיקה אינה יכולה
+לשחזר טקסט שמעולם לא נלכד. רשומות תפעוליות/כיסוי ואירועי שירות קבוצתיים אחרים
+נשמרים תמיד. תמונות מצב מפורשות של ההיסטוריה נפרדות
+מבחירת הקטגוריות בזמן אמת ועשויות לכלול הודעות שירות. מתגים אלה אינם
+מסתירים מטא-נתונים של תגובות/חברים המוטמעים באובייקט טלגרם שנלכד בכל דרך אחרת.</p>
+<p>תמונת מצב היסטורית עשויה להכניס קבצים מצורפים לתור בזמן ההשהיה. יש להתחיל את המעקב כדי לעבד
+אותם. &quot;בתור&quot; אינו פירושו &quot;הורד&quot;. קובץ מקורי שאינו זמין אינו מוחלף
+בגרסה ערוכה חדשה יותר; התוצאות נרשמות בנפרד.</p>
+<p><strong>הנעילה</strong> מוחקת את הגישה לדפדפן ואת השדות הסודיים, אך משאירה את האיסוף פועל.
+סגירת לשונית גם היא משאירה את התהליך פועל. עצירת תהליך ה-Python או השירות
+עוצרת את האיסוף ללא תלות במצב הדפדפן.</p>
+<p>מחיקת סביבת עבודה נוספת עוצרת את האספן שלה ומסירה את הנתונים המקומיים שלה. אם
+קובץ נעול או שגיאת מערכת קבצים מפריעים לתהליך ההסרה, הלוח מדווח על הכישלון ו
+משאיר את סביבת העבודה ברשימה כלא זמינה (<code>DeletionPending</code>). סגור תוכניות המחזיקות את
+הקבצים שלה ונסה שוב <strong>למחוק</strong>. הפעלה מחדש של TgWitness משאירה את סביבת העבודה במצב עצירה ואינה
+יוצרת מחדש את יומן הרישום או המפתחות שהוסרו חלקית. מחיקה מוצלחת נרשמת
+רק לאחר שהספרייה הוסרה; עותקים שיוצאו או גובו בנפרד נשארים
+תחת מדיניות השמירה שלהם.</p>
+<h2 id="notifications">התראות<a class="anchor" href="#notifications" aria-label="קישור לסעיף זה">#</a></h2>
+<p><strong>מקורות</strong> פתוחים <strong>→ התראות → התראות וסיכום יומי</strong>. TgWitness משתמש ב-
+Apprise כדי לשלוח התראות ל-Matrix, Telegram, Discord, Slack, ntfy, דוא&quot;ל ושירותים אחרים
+הנתמכים. ניתן להוסיף מספר יעדים למרחב עבודה אחד.</p>
+<ol>
+<li>הזן כתובת URL אחת של Apprise בכל שורה. השתמש
+    <a href="https://appriseit.com/services/">בקטלוג השירותים ובפורמטים של כתובות ה-URL</a> המתאימים לשירות שלך.</li>
+<li>הפעל את האפשרות <strong>&quot;שלח התראות</strong>&quot;, ולאחר מכן בחר התראות על בעיות, שינויים בצ&#x27;אטים הנצפים
+    וסיכום יומי. השעה בסיכום מבוססת על זמן השרת.</li>
+<li>הפעל את האפשרות <strong>&quot;כלול קטעים קצרים&quot;</strong> אם ברצונך שהטקסט שנשמר מהודעות שנמחקו ונערכו
+    יופיע בהתראות.</li>
+<li>לחץ על &quot;<strong>שמור התראות</strong>&quot; ולאחר מכן על &quot;<strong>שלח בדיקה</strong>&quot; כדי לבדוק את המסירה.</li>
+</ol>
+<p>לצורך קבלת הנתונים, השתמשו <a href="https://appriseit.com/services/json/">ב-webhook JSON</a> של Apprise.
+לדוגמה, <code>jsons://notify.example.org/tgwitness</code> שולח JSON דרך HTTPS אל
+נקודת הקצה הזו. זוהי דוגמה בדיונית; החליפו אותה ביעד שלכם.</p>
+<p>היעדים וההגדרות שייכים לסביבת העבודה הנבחרת. התראות על שינויים
+מכסות את המקורות הנצפים, כולל צ&#x27;אטים שנוספו לאחרונה. הפעמון בסרגל העליון
+מציג גם בעיות אחרונות ושינויים בצ&#x27;אטים.</p>
+<p>בהדגמה, אפשרויות השליטה בהודעות נראות לעין, אך שליחתן מושבתת. קבעו את
+אופן המסירה בסביבת עבודה אמיתית. ההודעות משתמשות בנתיב ה-Direct, SOCKS5 או
+HTTP של סביבת העבודה הזו; MTProxy אינו יכול להעבירן. יעדים שאינם HTTP, כגון SMTP, דורשים
+נתיב ישיר.</p>
+<h2 id="panel-layout">פריסת הפאנלים<a class="anchor" href="#panel-layout" aria-label="קישור לסעיף זה">#</a></h2>
+<p><img alt="סביבת עבודה לחיבור באמצעות נתונים סינתטיים" src="../../../../assets/connection.png" /></p>
+<p><strong>היומן</strong> מציג תצפיות, חיפושים ומסננים. עריכה פותחת את הגרסאות שנלכדו;
+מחיקה פותחת את התוכן הקודם, אם קיים. ייחוס לא ידוע נשאר מפורש.
+הנתונים הסטטיסטיים זמינים תחת <strong>&quot;סקירה כללית</strong>&quot;; פרטי הרכישה נשארים במדריך המקומי.</p>
+<p><strong>המקורות</strong> כוללים את היקף הניטור (צ&#x27;אטים נבחרים, תיקיית טלגרם או החשבון כולו),
+צ&#x27;אטים נגישים מכל סוג, מקורות נבחרים עם כוכבי עדיפות, הגדרות
+לנספחים ובדיקות חוזרות, וכן תמונות מצב של ההיסטוריה. מקורות פרטיים נבחרים לפי דיאלוג/מזהה
+ללא קישור ציבורי. מצב הגישה מתאר את הבדיקה האחרונה, ולא הרשאות קבועות.</p>
+<p><strong>&quot;צ&#x27;אטים&quot; → &quot;אנשים&quot;</strong> מציג את כל מי שהודעותיו נשמרו; כאשר פרופילי המשתמשים מופעלים
+בצ&#x27;אט, לחיצה אחת פותחת את הפרופיל של אותו אדם עם קישורים לרישומי היומן.</p>
+<p><strong>Witness</strong> יוצר אסימוני עדות לקריאה בלבד, מציג מתי כל עד נבדק לאחרונה,
+ומספק את הפקודות והאפשרויות להפעלת <a href="../witness/">עד אחד (עצמאי</a>).</p>
+<p><strong>הפרמטרים</strong> כוללים את כל המגבלות והקצבים של סביבת העבודה שאינם מופיעים בעמוד אחר:
+כמה שיחות נקראות, באיזו תדירות רשימת הצ&#x27;אטים נקראת מחדש, מרווחי הזמן בין פעימות ונקודות ביקורת,
+מאגר ההפעלה, אופן פיזור הבקשות בבדיקות חוזרות (עיכוב ראשוני, מספר הצ&#x27;אטים לכל
+מעבר, הפסקה בין צ&#x27;אטים, הודעות ששוחזרו ונדרשו מחדש), שמירת מקום בדיסק, זמני המתנה ו
+ניסיונות חוזרים להורדות, מה מחפשים בפרופילים של משתמשים (כולל ביטויים רגולריים משלך),
+גודל וקצב ההתראות, מגבלות על תמונות מצב, קבצי ZIP והורדות בדפדפן, וכן זמני המתנה וניסיונות חוזרים של
+לקוח טלגרם. כל שדה מציג את הטווח והערך המוגדר כברירת מחדל שלו; שדות ששונו
+מסומנים וניתן לשחזר אותם אחד אחד או כולם יחד. כל שינוי נרשם כ-
+<code>parameters.changed</code> עם הערכים שלפני ואחרי, ורשומות תחילת התצפית מציינות
+את הערכים בתוקף. הערכים חלים מהשימוש הבא בהם; זמני ההמתנה והניסיונות החוזרים של הלקוח חלים מה
+חיבור הבא. מרווחי בדיקה חוזרת, סוגי קבצים מצורפים וגודלם, ראיות ומרווחי העתקה מחוץ לאתר
+נשארים בדפים נפרדים שלהם וניתן להגדיר להם כל ערך בטווח שלהם, ולא רק ערכים קבועים מראש.</p>
+<p>הפעמון בסרגל העליון מפרט בעיות ושינויים אחרונים בצ&#x27;אטים הנצפים; הודעות שלא נקראו
+נספרות עד לסמןן כנקראות. השינויים מקובצים לפי צ&#x27;אט ושעה (&quot;12 נמחקו,
+1 נערך, 0 לא נמצאו&quot;), ובעיות כגון יציאה מהמערכת או דיסק מלא נשארות ברשימה
+ללא קשר לעומס בצ&#x27;אטים.</p>
+<p><strong>ההרשמה</strong> מתחילה בשדה מספר הטלפון. <strong>המשך</strong> מוביל ישירות
+להזנת קוד, ומבקש פרטי הזדהות ל-API רק כאשר הם חסרים. QR וייבוא קבצים הם
+כרטיסיות חלופיות. פרטי הזדהות ל-API שנשמרו משמשים שוב רק בתוך סביבת העבודה שלהם.
+מסך הכניסה אינו כולל סרגל צדדי, סטטיסטיקות או פסקאות הגדרה. סמל <strong>ההגדרות</strong>
+פותח את אפשרויות השליטה ב-API, בפרוקסי, באחסון ובחשבונות נוספים. התקנות חדשות
+מתחילות כאן; חשבונות מחוברים ללא מקורות נבחרים מתחילים ב<strong>&quot;בחר צ&#x27;אטים</strong>&quot;.
+שינוי המסלול מחייב הפסקת התצפית ומבטל תהליך התחברות שלא הושלם. יומן קיים
+אינו יכול להיות מקושר מחדש לחשבון טלגרם אחר באופן שקט.</p>
+<p><strong>הייצוא</strong> בודק את תקינות היומן ומייצר קבצים ניידים. ניתן להעביר את מזהה סביבת העבודה
+לפקודת ה-CLI להורדה. כל ייצוא מקבע קידומת של יומן מלא; אירועים מאוחרים יותר
+נכללים בייצוא הבא. מסנני החיפוש אינם משנים את היקף החבילה.
+מידע מפורט על חתימה וכיסוי נמצא תחת <strong>&quot;אימות ומגבלות&quot;</strong>.</p>
+<p>הלוח מציג את מצב האספן, קבצי מדיה בתור/שנכשלו, קבצי המדיה הוותיקים ביותר הממתינים, שטח
+דיסק פנוי, הפסקות בקשות ומקורות שגישתם לא אושרה תחת &quot;<strong>תקינות האספן&quot;</strong>
+. פרטים אלה מקופלים בתחילה ומוסתרים תחת &quot;חשבון&quot;. כרטיס הגדרה
+מציג את השלב הבא: חיבור חשבון, בחירת מקורות או התחלת מעקב.
+רשימת החשבונות היא תמונת מצב בזמן הטעינה;
+סביבת העבודה הנבחרת מתעדכנת מעת לעת. זהו אינו מוניטור SLA רב-תהליכים.</p>
+<p>ממשק המשתמש עושה שימוש בנכסים מקומיים ובעיבוד טקסט עבור תוכן המקור. נבדקו פריסות למחשב שולחני ולמסכים צרים
+ב-Chromium. אין מדובר בתעודת נגישות מלאה;
+הערכת השימושיות עבור תוכנות הקראת מסך ובני אדם נותרה משימה נפרדת.</p>
+<h2 id="deployment-environments">סביבות פריסה<a class="anchor" href="#deployment-environments" aria-label="קישור לסעיף זה">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>סביבה</th>
+<th>התקנה</th>
+<th>סטטוס האימות</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>מחשב/שרת Windows</td>
+<td>Python 3.11+, סקריפטים\Setup.cmd/Start.cmd, ספריית נתונים פרטית</td>
+<td>נבדק מקומית ב-Windows/Python 3.12</td>
+</tr>
+<tr>
+<td>שרת לינוקס/VPS</td>
+<td>סביבת venv ב-Python, משתמש בשירות ייעודי, HTTPS/SSH</td>
+<td>מוצגים דוגמאות לקוד, ל-CI ול-systemd; לא מבוצעות במארח זה</td>
+</tr>
+<tr>
+<td>macOS</td>
+<td>סביבת venv ב-Python, תהליך ברקע או סוכן משתמש</td>
+<td>מוצגת דוגמה ל-launchd; נדרשת בדיקת התקנה נפרדת</td>
+</tr>
+<tr>
+<td>Docker/Compose</td>
+<td>נפח קבוע, עובד אחד</td>
+<td>כולל הגדרה ובדיקת זמן ריצה של CI; Docker אינו זמין באופן מקומי</td>
+</tr>
+<tr>
+<td>דפדפן טלפוני</td>
+<td>התחבר ללוח הבקרה המוגן בשרת פעיל</td>
+<td>נבדקה תצורה מצומצמת של Chromium; האספן אינו פועל ב-iOS/Android</td>
+</tr>
+</tbody>
+</table></div>
+<p>ניידות פירושה שאין צורך בשירות ענן או בבניית ממשק משתמש. כל יעד עדיין
+זקוק לתלות תואמות ב-Python/קריפטוגרפיה, לדיסק מקומי ולגישה לרשת. ראו את
+<a href="../deployment/">הקובץ DEPLOYMENT.md</a> ואת <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">תבניות השירות</a>.</p>
+<p>סביבות העבודה חולקות מעבד, זיכרון ולולאת אירועים. לצורך בידוד תהליכים, יש להשתמש
+באינסטנסים, יציאות, ספריות נתונים והרשאות חשבון נפרדים. אין לוח בקרה מאוחד
+בין אינסטנסים נפרדים. לעולם אין להפנות מספר עובדים לאותה מסד נתונים.</p>
+<h2 id="startup-checks-and-exports">בדיקות וייצוא של סטארט-אפים<a class="anchor" href="#startup-checks-and-exports" aria-label="קישור לסעיף זה">#</a></h2>
+<p>הפעל את <code>python start.py --check</code> לפני שתתחיל בסביבה מוכנה. הוסף את <code>--json</code>
+לבדיקות הניתנות לקריאה ממוחשבת, או העבר את <code>--data-dir</code>, <code>--host</code> ו-<code>--port</code> המיועדים.
+הפקודה בודקת את תנאי הקדם ללא צורך בכניסה ל-Telegram או ביצירת יומן.
+היא אינה מאמתת יומן ואינה מוכיחה מוכנות ללכידה; אימות היומן מתבצע
+במהלך הפעלת היישום. יציאה תפוסה עשויה להיות פשוט מופע קיים.</p>
+<p>דפדפנים התומכים ב-API לגישה למערכת הקבצים שומרים את הייצוא באמצעות זרם הניתן לכתיבה.
+דפדפנים אחרים מאחסנים במאגר זמני עד 128 MiB לכל היותר. השתמשו ב-CLI של הזרמה עבור ייצוא בנפח גדול יותר
+או בדפדפנים ללא תמיכה בזרם קבצים:</p>
+<pre><code class="language-sh">python -m tgwitness.download --token-file data/live/panel-token.txt --out evidence.zip</code></pre>
+<p>הוסף את <code>--profile ID</code>
+מ-Exports עבור סביבת עבודה משנה. השתמש ב-<code>--url https://server</code>
+לגישה מרחוק. HTTP רגיל מתקבל רק עבור יעדי לולאה חוזרת (loopback). האסימון
+נקרא מקובץ ונשלח בכותרת, אינו מודפס או מוטמע ב-URL. הפניות
+נדחות. יעדים קיימים אינם נמחקים. העברות שנכשלו מסירות את
+קובץ החלק הזמני שלהן. ה-SHA-256 המדווח הוא בדיקת סיכום של ההעברה; אמת את קובץ ה-ZIP החתום
+בנפרד באמצעות טביעת אצבע/נקודת ביקורת מהימנה.</p>
+<h2 id="backup-restore-and-interruptions">גיבוי, שחזור והפרעות<a class="anchor" href="#backup-restore-and-interruptions" aria-label="קישור לסעיף זה">#</a></h2>
+<ol>
+<li>השהה את הניטור והפסק את התהליך בצורה מסודרת.</li>
+<li>העתיקו את כל ספריית הנתונים: מסדי נתונים, WAL/SHM אם קיימים, מדיה,
+    <code>credentials.enc</code>, <code>signing.enc</code>, <code>network.enc</code>, מפתחות הכספת/מטא-נתונים, אסימון,
+    נקודות ביקורת וכל ספריית <code>profiles/</code>.</li>
+<li>במצב מפתח חיצוני, יש לשמור בנפרד את המפתח הראשי ולשמור כל
+    <code>vault.external.json</code>. יצירת מפתח חדש אינה מאפשרת לשחזר את הסודות הישנים.</li>
+<li>שחזר בזמן שהיעד מושבת; קבע את תצורת המפתח המקורי, הגבל
+    את הגישה, ואמת את תקינות הנתונים לפני חידוש הפעולה.</li>
+<li>יש לתעד את משך ההשבתה ואת תוצאות האימות. תמונת מצב של ההיסטוריה אינה יכולה להוכיח כי
+    לא התרחשו מחיקות במהלך ההפרעה.</li>
+</ol>
+<p>קובצי ZIP של הראיות אינם כוללים מפתחות סשן/מפתחות פרטיים ואינם מהווים גיבויים מלאים של השירות.
+ארבעה מרכיבים מוגנים באופן שונה:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>מה</th>
+<th>הגנה</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ייצוא קבצים ללא סיסמה (הגדרת ברירת המחדל)</td>
+<td>לא מוצפן. חתום, כך שניתן לזהות שינויים, אך כל מי שמחזיק בקובץ יכול לקרוא אותו</td>
+</tr>
+<tr>
+<td>ייצוא קבצים באמצעות סיסמה</td>
+<td>אם תגדיר סיסמה, הייצוא המוגמר יישמר ללא שינוי בקובץ ZIP בפורמט WinZip AES-256, שניתן לפתוח באמצעות 7-Zip ו-WinRAR; הסיסמה אינה נשמרת (<a href="../evidence/">טיפול בראיות</a>)</td>
+</tr>
+<tr>
+<td>מאגר היומן והקובצים המצורפים שנשמרו בדיסק</td>
+<td>אינו מוצפן על ידי TgWitness; יש להשתמש בדיסק או בנפח מוצפן</td>
+</tr>
+<tr>
+<td>הפעלות טלגרם ומפתחות חתימה</td>
+<td>מוצפן בספריית הנתונים (<code>credentials.enc</code>, <code>signing.enc</code>, <code>network.enc</code>)</td>
+</tr>
+</tbody>
+</table></div>
+<p>גיבוי מלא הוא ספריית הנתונים המוקפאת שתוארה לעיל, ולא ייצוא.
+יש להשתמש באחסון מוגן ובמנגנון העברה מכוון עבור שניהם. ייצוא זמני מהשרת נשמר ב-
+<code>temporary-exports/</code> של כל סביבת עבודה; תגובות שהושלמו מנוקות, וקבצי ייצוא
+שנפסקו מוסרים בהפעלה הבאה, בזמן שמנעול המופע של סביבת העבודה נשמר.</p>
+<p>אירוע של שחזור חיבור אינו מבטיח שחזור של שינויים שביניים.
+משימות מדיה מתמשכות ומצב העדכון של טלגרם נשמרים גם לאחר הפעלה מחדש; ראו
+<a href="../evidence/#durable-collection-and-process-receipts-02">פורמט הראיות</a>.</p>
+<h2 id="capacity-and-retention">קיבולת ואחסון<a class="anchor" href="#capacity-and-retention" aria-label="קישור לסעיף זה">#</a></h2>
+<p>הגבלות ברירת מחדל, הניתנות לשינוי תחת <strong>&quot;פרמטרים&quot;</strong>: 1,000 השיחות הראשונות, 500 הודעות
+לכל תמונת מצב, 4 GiB של תוכן ZIP חתום ולא דחוס (ארכיונים גדולים יותר דורשים
+<code>verify.py --max-gib N</code>) וגיבוי דפדפן בגודל 128 MiB. קובצים מצורפים תופסים 1–2,000 MiB לכל
+סוג תחת <strong>&quot;מקורות&quot; → &quot;קובצים מצורפים&quot;</strong>. ברירת המחדל של ממשק שורת הפקודה (CLI) להורדה היא העברת 5 GiB. שטח הדיסק הזמין עשוי להוות
+מגבלה נמוכה יותר. יש להקצות שטח עבור יומנים, מדיה, WAL, ייצוא זמני וגיבויים.
+ייצואים משתמשים בנפח הנתונים במקום ב-<code>/tmp</code> של Compose בגודל 512 MiB.</p>
+<p>יש למדוד אירועים בשנייה, גיל התור, בייטים של מדיה וזמן השהיה בדיסק, במקום לספור
+רק קבוצות. מבחני ביצועים מקומיים סינתטיים אינם מבטיחים מסירה ב-Telegram.
+אין מחיקה אוטומטית של נתונים שנשמרו. הסרת החלק האחרון של היומן מבטלת את
+הקשר שלו לנקודות הבדיקה שנשמרו.</p>
+<p>כבר קיימות בדיקות חוזרות לפי סדר עדיפות: מקורות המסומנים בכוכבית נבדקים מחדש כל 15 דקות כברירת מחדל,
+ואחרים כל 6 שעות (ראו <a href="../collection/#recheck-tiers">רמות בדיקה חוזרת</a>). קיימות ייצואים
+המוגנים בסיסמה כפי שתואר לעיל. קבלת טלגרם/פרוקסי בזמן אמת, השמעה חוזרת עמידה,
+יומן מנהל וסקר תגובות, עובדים מבודדים, הצפנה של היומן המקומי והמדיה
+על ידי TgWitness עצמה, תפקידי משתמשים ובדיקה עצמאית נותרים עבודות נפרדות. ראו
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/READINESS.md">READINESS.md</a>, <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">LIVE_ACCEPTANCE.md</a> ו-
+<a href="../verification/">VERIFICATION.md</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/OPERATIONS.md">ערוך דף זה ב-GitHub ↗</a><a class="next-guide" href="../investigation/"><span>השלב הבא</span><strong>מצב חקירה ←</strong></a><p>מדריכים אלה מתארים את היישום הנוכחי. תוצאות האימות והפערים הנותרים מתועדים בנפרד. <a href="../verification/">מה נבדק ←</a></p></footer>
+</main>
+<aside class="toc" aria-label="בעמוד זה"><p class="nav-label">בעמוד זה</p><a href="#operator-workflow">זרימת העבודה של המפעיל</a><a href="#modes">מצבים</a><a href="#monitoring-categories">קטגוריות ניטור</a><a href="#notifications">התראות</a><a href="#panel-layout">פריסת הפאנלים</a><a href="#deployment-environments">סביבות פריסה</a><a href="#startup-checks-and-exports">בדיקות וייצוא של סטארט-אפים</a><a href="#backup-restore-and-interruptions">גיבוי, שחזור והפרעות</a><a href="#capacity-and-retention">קיבולת ואחסון</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>קוד פתוח · פועל על המחשב שלכם</span><a href="../../../../LICENSE">רישיון MIT</a><a href="../notice/">הודעת המפעיל</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">אבטחה</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "ממתין להודעה", "Step through a fictional send, edit and delete.": "עקבו אחר תהליך דמיוני של שליחה, עריכה ומחיקה.", "No observations yet. Start the sequence or advance one event.": "אין עדיין הערות. התחל את הרצף או עבור לאירוע הבא.", "Meet at 10:00": "נפגש בשעה 10:00", "A new message is visible in the chat.": "הודעה חדשה נראית בצ'אט.", "Record 1 appended: the collector observed the original message.": "הודעה מס' 1 מצורפת: האספן הבחין בהודעה המקורית.", "Meet at 11:00": "נפגש בשעה 11:00", "The current text changes. The earlier observation stays.": "הטקסט הנוכחי משתנה. ההערה הקודמת נשארת.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "רשומה 2 צורפה: העריכה מהווה תצפית חדשה. ברשומה 1 עדיין מופיע הטקסט המקורי.", "Message deleted": "ההודעה נמחקה", "The message has disappeared from the chat view.": "ההודעה נעלמה מתצוגת הצ'אט.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "הוספה של תיעוד 3: הודעת המחיקה נשמרת לצד שתי הגרסאות שנצפו.", "0 records": "0 רשומות", "1 record": "1 רשומה", "2 records": "2 רשומות", "3 records": "3 רשומות", "Complete / {n} of 3": "השלם / {n} מתוך 3", "Step / {n} of 3": "שלב / {n} מתוך 3", "Pause": "הפסקה", "Replay sequence": "רצף השמעה", "Play sequence": "רצף הפעלה", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "דוגמה סטטית זמינה. כדי לחשב חתימות hash באופן אינטראקטיבי, פתחו דף זה ב-HTTPS או בתצוגה מקדימה ב-localhost עם תמיכה ב-Web Crypto.", "No record supplied": "לא נמסר תיעוד", "Tail removed": "הזנב הוסר", "≠ saved hash": "≠ חתימת hash שנשמרה", "Rebuilt · different hash": "נבנה מחדש · חתימה שונה", "= saved hash": "= חתימת hash שנשמרה", "Same length and matching head.": "אורך זהה וכותרת תואמת.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "שלושת ההאשים שחושבו תואמים להאשים שנשמרו. דוגמה זו תואמת את הגבול של שלוש רשומות שנשמר.", "Same saved head; the journal prefix fails verification.": "אותו כותרת שמורה; קידומת היומן נכשלה באימות.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "הרשומה 2 כבר אינה תואמת את ה-hash השמור שלה. בדיקה של ה-head האחרון שנשמר בלבד עלולה לפספס זאת; המאמת בודק כל רשומה.", "Head differs from the retained checkpoint.": "הכותרת שונה מנקודת הבדיקה שנשמרה.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "ה-hash המשוחזרים מקושרים זה לזה, אך ה-head הסופי השתנה. נקודת הבדיקה שנשמרה דוחה היסטוריה זו. חתימות מקוריות גם הן לא יאושרו על רשומות ששונו.", "Too short: 2 supplied records \u003c 3 retained records.": "קצר מדי: 2 רשומות שסופקו \u003c 3 רשומות שנשמרו.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "שני ה-hash הנותרים עדיין תואמים. נקודת הבדיקה שנשמרה חושפת את החלק החסר. ללא הגבול הקודם הזה, הקידומת הקצרה הזו לבדה לא הייתה חושפת את ההשמטה.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "חישוב ה-Hash אינו זמין בדפדפן זה. הנוסחאות וההסבר הסטטי המופיעים להלן נותרים זמינים.", "{n} records": "{n} רשומות", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "התקבל: הספירה גדלה, החתימה מאומתת והמפתח תואם. העד שומר על הגבול החדש הזה.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "חזרה לאחור: התשובה החתומה מדווחת על פחות רשומות מאשר נקודת הבדיקה האחרונה שאושרה. ה-Witness מתעד את הבעיה ושומר על הגבול שאושר קודם לכן.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: הספירה נותרה ללא שינוי, אך הראש שונה. ה-witness מתעד את חילוקי הדעות ושומר על הגבול שהתקבל קודם לכן.", "No answer": "אין תשובה", "boundary unknown": "גבול לא ידוע", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "אין תגובה: ה-Witness מתעד את הבדיקה שנכשלה. הוא אינו יכול לקבוע את מצבו הנוכחי של האספן. אם ה-Witness עדיין יכול להגיע ל-Bot API ומדיניות הפרסום שלו מאפשרת זאת, הוא יכול לפרסם את הכישלון הזה.", "Send {n}": "שלח {n}", "Edit {n}": "ערוך {n}", "Delete {n}": "מחק {n}", "Both accounts captured all six expected observations in this example.": "שני החשבונות תיעדו את כל ששת הממצאים הצפויים בדוגמה זו.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "חשבון B עדיין תפס 6 מתוך 6. שתי קבלות לקחו יותר זמן. יחס הלכידה ועיכוב קבלת ההודעות עונים על שאלות שונות.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "חשבון B תפס 5 מתוך 6 עד למועד הסיום (83.3%). לעריכה החסרה אין עיכוב נמדד. תוצאה זו מתארת רק את שש הפעולות המבוקרות.", "not observed by cutoff": "לא נצפה עד למועד הסגירה", "{s} seconds": "{s} שניות", "Exact values follow in the table.": "הערכים המדויקים מופיעים בטבלה.", "{s} s": "{s} s", "Not observed": "לא נצפה", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "ארבעה צ'אטים מספקים תצפיות שונות. יש לעקוב אחר רשומות המקור עבור כל חיבור; אין לייחס את ההודעה בערוץ למשתמש 71001 ללא ציון השולח.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "הרשומות מס' 146 ו-205 מציגות את אותו מזהה שולח, 71001. דבר זה מקשר בין הפוסטים שנצפו בחשבון טלגרם בשני צ'אטים שונים. הוא אינו מזהה אדם אמיתי ואינו מייחס את הפוסט לערוץ.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "כתובת היעד pay.example.invalid/new מופיעה ברישום הקבוצה מס' 146, במקלדת הבוט מס' 173, בעריכת הערוץ מס' 188 ובהודעה פרטית מס' 205. כתובת יעד חוזרת מקשרת בין החומרים; היא אינה מהווה הוכחה לשליטה משותפת בחשבונות אלה.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "בקבלות המדיה המושלמות מס' 151 ו-209 יש ערכי SHA-256 מלאים זהים במקרה הבדיוני הזה. השוו את הבתים בפועל ואת רשומות ההודעות הקשורות אליהם. הקובץ התואם אינו מזהה את יוצרו ואינו מוכיח מי העביר אותו.", "the encrypted off-site copy": "העותק המוצפן מחוץ לאתר", "notifications": "התראות", "checkpoint hashes for timestamps": "חשישי checkpoint עבור חותמות זמן", "signed checkpoints for the witness": "נקודות ביקורת חתומות עבור ה-Witness", "Switched on in this example": "מופעל בדוגמה זו", "Optional · off by default": "אופציונלי · כבוי כברירת מחדל", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "יוצא מהמכשיר הזה: החיבור ל-Telegram ו-{list}. שום דבר אחר.", "Default: only the Telegram connection leaves this machine.": "ברירת מחדל: רק החיבור ל-Telegram יוצא ממחשב זה.", "{done} of {total} done": "{done} מתוך {total} הושלמו", "Mark step {n} as done": "סמן את השלב {n} כ\"בוצע\"", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "העתק", "Copied": "הועתק", "Command copied.": "הפקודה הועתקה.", "Selected — Ctrl/Cmd+C": "נבחר — Ctrl/Cmd+C", "Command selected. Copy it manually.": "הפקודה נבחרה. העתיקו אותה ידנית.", "Command copied to clipboard.": "הפקודה הועתקה ללוח.", "Select text": "בחר טקסט", "Clipboard unavailable. Command selected; copy it manually.": "הלוח אינו זמין. הפקודה נבחרה; העתק אותה ידנית.", "A message arrives. The first observation is saved.": "הודעה נכנסת. התצפית הראשונה נשמרת.", "The time changes. Both captured versions stay.": "הזמן משתנה. שתי הגרסאות שנשמרו נשארות.", "The message disappears. The captured history remains.": "ההודעה נעלמת. ההיסטוריה שנשמרה נשארת.", "Pause example animation": "השהה את האנימציה לדוגמה", "Play example animation": "הפעל אנימציה לדוגמה", "Play": "הפעל", "Full-size workspace screenshot": "צילום מסך של סביבת העבודה בגודל מלא", "Workspace screenshot · fictional data": "צילום מסך של סביבת העבודה · נתונים פיקטיביים", "Close": "סגור", "Close screenshot": "סגור צילום מסך", "Scrollable full-size screenshot": "צילום מסך בגודל מלא הניתן לגלילה", "Enlarge: {name}": "הגדל: {name}", "View full size": "הצג בגודל מלא"}</script>
+</body></html>

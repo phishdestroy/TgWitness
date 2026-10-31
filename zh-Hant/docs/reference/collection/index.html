@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="zh-Hant" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>資料蒐集原理 | TgWitness</title>
+<meta name="description" content="觀察範圍、即時更新、重新核對、附件、使用者操作以及「缺口」的含義，皆以逐筆記錄的方式呈現。"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/collection/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="資料蒐集原理 | TgWitness"><meta property="og:description" content="觀察範圍、即時更新、重新核對、附件、使用者操作以及「缺口」的含義，皆以逐筆記錄的方式呈現。">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/collection/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/collection/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/collection/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/collection/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/collection/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/collection/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/collection/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/collection/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/collection/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/collection/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/collection/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/collection/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/collection/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/collection/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/collection/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/collection/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/collection/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/collection/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/collection/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/collection/", "url": "https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/collection/", "name": "資料蒐集原理 | TgWitness", "description": "觀察範圍、即時更新、重新核對、附件、使用者操作以及「缺口」的含義，皆以逐筆記錄的方式呈現。", "inLanguage": "zh-Hant", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首頁", "item": "https://phishdestroy.github.io/TgWitness/zh-Hant/"}, {"@type": "ListItem", "position": 2, "name": "文件說明", "item": "https://phishdestroy.github.io/TgWitness/zh-Hant/docs/"}, {"@type": "ListItem", "position": 3, "name": "參考資料", "item": "https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "資料蒐集原理", "item": "https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/collection/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">跳至內容</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / 文件說明</span></a>
+<nav aria-label="指南"><a href="../../concepts/">視覺指南</a><a href="../../">所有指南</a><a href="../">參考資料</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="語言"><span aria-hidden="true">◍</span> 繁體中文</summary><div class="lang-list"><a href="../../../../docs/reference/collection/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/collection/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/collection/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/collection/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/collection/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/collection/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/collection/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/collection/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/collection/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/collection/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/collection/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/collection/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/collection/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/collection/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/collection/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/collection/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/collection/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/collection/" hreflang="ko" lang="ko">한국어</a><a href="./" hreflang="zh-Hant" lang="zh-Hant" aria-current="true">繁體中文</a><a href="../../../../ms/docs/reference/collection/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/collection/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/collection/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/collection/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/collection/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/collection/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="在淺色與深色主題之間切換"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="指南"><a href="../../../guides/modes.html">模式、情境與證據等級</a><p class="nav-label">入門指南</p><a href="../../start/">幾分鐘內即可開始使用</a><a href="../../accounts/">連結帳戶</a><a href="../../proxies/">選擇代理伺服器</a><a href="../../exports/">匯出與驗證</a><p class="nav-label">了解證據</p><a href="../../concepts/">了解證據如何運作</a><a href="../../cases/">跨所有聊天室進行調查</a><a href="../../security/">確保安全</a><p class="nav-label">深入了解</p><a href="../../witness/">設定 Witness 機器人</a><a href="../../server/">讓它持續運作</a><a href="../../troubleshooting/">找出問題所在</a></nav><nav class="wiki-nav" aria-label="參考資料"><p class="nav-label"><a class="nav-label-link" href="../">參考資料</a></p><details class="wiki-group"><summary>設定</summary><a href="../quickstart/">快速入門</a><a href="../accounts/">帳戶與會話格式</a><a href="../connection/">連線、代理伺服器與資料保護</a><a href="../deployment/">部署</a></details><details class="wiki-group" open><summary>收集</summary><a href="./" aria-current="page">資料蒐集原理</a><a href="../operations/">工作流程與操作</a><a href="../investigation/">調查模式</a><a href="../features/">功能與限制</a></details><details class="wiki-group"><summary>證據</summary><a href="../how-it-works/">證據的運作方式</a><a href="../evidence/">證據格式</a><a href="../witness/">獨立見證人</a><a href="../timestamp/">時間戳記</a></details><details class="wiki-group"><summary>安全性與專案</summary><a href="../security/">安全性與資料處理</a><a href="../architecture/">架構</a><a href="../verification/">已測試的內容</a><a href="../license/">授權說明及架構不相容聲明</a><a href="../notice/">操作員不相容通知</a><a href="../changelog/">更新紀錄</a></details></nav><p class="sidebar-note">v0.7.0<br>開源 · 可在您的機器上運行</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="指南"><a href="../../../">首頁</a> <span aria-hidden="true">/</span> <a href="../../">文件說明</a> <span aria-hidden="true">/</span> <a href="../">參考資料</a> <span aria-hidden="true">/</span> <span aria-current="page">資料蒐集原理</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">搜尋文件</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="可嘗試使用「代理」、「雜湊鏈」、「代幣」或「見證者」等詞彙……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜尋" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">輸入關鍵字以搜尋指南與參考資料。搜尋結果僅保留於您的瀏覽器中。</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">參考資料 / 收集</p><h1>資料蒐集原理</h1><p class="guide-outcome">觀察範圍、即時更新、重新核對、附件、使用者操作以及「缺口」的含義，皆以逐筆記錄的方式呈現。</p><div class="wiki-body"><p>TgWitness 會記錄已連線的 Telegram 帳號所觀察到的內容。該日誌會保存
+這些觀察結果、其時間順序，以及隨附的上下文。它不會
+根據缺失的訊息或帳號處於連線狀態，來推斷未被觀察到的行動。</p>
+<h2 id="from-login-to-a-journal">從登入到日誌<a class="anchor" href="#from-login-to-a-journal" aria-label="此節的連結">#</a></h2>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 691 306" width="691" height="306" role="img" aria-labelledby="flow-1-title flow-1-desc"><title id="flow-1-title">流程圖</title><desc id="flow-1-desc">授權使用者帳戶 → 選擇可存取的群組與頻道; 選擇可存取的群組與頻道 → 儲存事件與附件設定; 儲存事件與附件設定 → 開始監測; 開始監測 → 透過活躍的客戶端接收更新; 透過活躍的客戶端接收更新 → 適用來源與事件政策; 適用來源與事件政策 → 附加一份經簽署的觀察記錄; 附加一份經簽署的觀察記錄 → 檢視或匯出日誌; 附加一份經簽署的觀察記錄 → 處理任何排程中的附件; 處理任何排程中的附件 → 附上下載結果</desc><defs><marker id="flow-1-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M182.2 28.0C219.0 28.0 219.0 28.0 255.8 28.0" marker-end="url(#flow-1-arrow)" style="--i:0;--len:74" pathLength="74"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M182.2 28.0C219.0 28.0 219.0 28.0 255.8 28.0"/></circle><path class="flow-edge" d="M435.6 28.0C465.5 28.0 465.5 28.0 495.4 28.0" marker-end="url(#flow-1-arrow)" style="--i:1;--len:60" pathLength="60"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M435.6 28.0C465.5 28.0 465.5 28.0 495.4 28.0"/></circle><path class="flow-edge" d="M571.5 48.0C571.5 77.5 571.5 77.5 571.5 107.0" marker-end="url(#flow-1-arrow)" style="--i:2;--len:59" pathLength="59"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M571.5 48.0C571.5 77.5 571.5 77.5 571.5 107.0"/></circle><path class="flow-edge" d="M519.5 127.0C477.6 127.0 477.6 127.0 435.6 127.0" marker-end="url(#flow-1-arrow)" style="--i:3;--len:84" pathLength="84"/><circle class="flow-pulse" r="3.2" style="--i:3"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M519.5 127.0C477.6 127.0 477.6 127.0 435.6 127.0"/></circle><path class="flow-edge" d="M255.8 127.0C225.9 127.0 225.9 127.0 196.0 127.0" marker-end="url(#flow-1-arrow)" style="--i:4;--len:60" pathLength="60"/><circle class="flow-pulse" r="3.2" style="--i:4"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M255.8 127.0C225.9 127.0 225.9 127.0 196.0 127.0"/></circle><path class="flow-edge" d="M119.9 147.0C119.9 185.0 119.9 185.0 119.9 223.0" marker-end="url(#flow-1-arrow)" style="--i:5;--len:76" pathLength="76"/><circle class="flow-pulse" r="3.2" style="--i:5"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M119.9 147.0C119.9 185.0 119.9 185.0 119.9 223.0"/></circle><path class="flow-edge" d="M209.8 252.0C246.6 252.0 246.6 226.0 283.4 226.0" marker-end="url(#flow-1-arrow)" style="--i:6;--len:80" pathLength="80"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M209.8 252.0C246.6 252.0 246.6 226.0 283.4 226.0"/></circle><path class="flow-edge" d="M209.8 252.0C236.3 252.0 236.3 278.0 262.7 278.0" marker-end="url(#flow-1-arrow)" style="--i:6;--len:61" pathLength="61"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M209.8 252.0C236.3 252.0 236.3 278.0 262.7 278.0"/></circle><path class="flow-edge" d="M428.7 278.0C472.4 278.0 472.4 252.0 516.1 252.0" marker-end="url(#flow-1-arrow)" style="--i:7;--len:93" pathLength="93"/><circle class="flow-pulse" r="3.2" style="--i:7"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M428.7 278.0C472.4 278.0 472.4 252.0 516.1 252.0"/></circle><g class="flow-node" style="--i:0"><rect x="57.6" y="8.0" width="124.6" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="28.0">授權使用者帳戶</tspan></text></g><g class="flow-node" style="--i:1"><rect x="255.8" y="8.0" width="179.8" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="28.0">選擇可存取的群組與頻道</tspan></text></g><g class="flow-node" style="--i:2"><rect x="495.4" y="8.0" width="152.2" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="28.0">儲存事件與附件設定</tspan></text></g><g class="flow-node" style="--i:3"><rect x="519.5" y="107.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="127.0">開始監測</tspan></text></g><g class="flow-node" style="--i:4"><rect x="255.8" y="98.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="118.0">透過活躍的客戶端接收更</tspan><tspan x="345.7" y="136.0">新</tspan></text></g><g class="flow-node" style="--i:5"><rect x="43.8" y="107.0" width="152.2" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="127.0">適用來源與事件政策</tspan></text></g><g class="flow-node" style="--i:6"><rect x="30.0" y="223.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="243.0">附加一份經簽署的觀察記</tspan><tspan x="119.9" y="261.0">錄</tspan></text></g><g class="flow-node" style="--i:7"><rect x="283.4" y="206.0" width="124.6" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="226.0">檢視或匯出日誌</tspan></text></g><g class="flow-node" style="--i:7"><rect x="262.7" y="258.0" width="166.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="278.0">處理任何排程中的附件</tspan></text></g><g class="flow-node" style="--i:8"><rect x="516.1" y="232.0" width="110.8" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="252.0">附上下載結果</tspan></text></g></svg></div><details class="flow-steps"><summary>圖表轉為文字</summary><ol><li>授權使用者帳戶 → 選擇可存取的群組與頻道</li><li>選擇可存取的群組與頻道 → 儲存事件與附件設定</li><li>儲存事件與附件設定 → 開始監測</li><li>開始監測 → 透過活躍的客戶端接收更新</li><li>透過活躍的客戶端接收更新 → 適用來源與事件政策</li><li>適用來源與事件政策 → 附加一份經簽署的觀察記錄</li><li>附加一份經簽署的觀察記錄 → 檢視或匯出日誌</li><li>附加一份經簽署的觀察記錄 → 處理任何排程中的附件</li><li>處理任何排程中的附件 → 附上下載結果</li></ol></details></figure>
+<p>授權、存取來源、運作中的收集器以及完整傳輸是
+不同的問題。成功登入並不代表能存取每個群組。
+已連線的傳輸通道並不能證明所有相關更新均已送達。</p>
+<h2 id="observation-scope-chosen-chats-a-folder-or-the-whole-account">監測範圍：指定聊天室、特定資料夾或整個帳戶<a class="anchor" href="#observation-scope-chosen-chats-a-folder-or-the-whole-account" aria-label="此節的連結">#</a></h2>
+<p>來源 → <strong>監測範圍</strong>決定了工作區將記錄哪些聊天內容。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>模式</th>
+<th>記錄</th>
+<th>新對話</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>選定的聊天室（預設）</td>
+<td>僅限您手動新增的聊天紀錄</td>
+<td>絕不會自動新增</td>
+</tr>
+<tr>
+<td>Telegram 資料夾</td>
+<td>某個帳戶資料夾中的對話：包含按名稱列出的對話，加上該資料夾的分類（聯絡人、非聯絡人、群組、頻道、機器人），減去被排除的對話，以及（若資料夾有此設定）已歸檔的對話</td>
+<td>符合條件的聊天記錄一經啟動即會被加入；您在 Telegram 中加入該資料夾的聊天記錄，將於一小時內被擷取</td>
+</tr>
+<tr>
+<td>完整說明</td>
+<td>該帳號所見的每則聊天紀錄</td>
+<td>每當有新的聊天室、群組、私人聊天或機器人出現，只要其首次更新一到，便會立即被加入系統</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>來源類型</strong>（頻道、群組、私人聊天、機器人）會進一步限定「資料夾」及
+    「整個帳戶」模式的範圍。所選的聊天內容可為任何類型，包括私人聊天和機器人。</li>
+<li><strong>被排除的聊天室</strong>在任何模式下均不會被記錄。在「資料夾」及「整個帳戶」模式下，
+    若對來源進行<em>「排除」</em>或<em>「移除」</em>操作，該來源便會被加入此清單，因此範圍設定不會再次將其納入。
+    若再次手動選取該聊天室（在「來源」或「聊天室」中），該聊天室即會從清單中移除。此清單
+    最多可容納 5,000 個聊天室；超過此限時，<em>「移除」</em>操作將被拒絕，此時可改為暫停該聊天室。</li>
+<li><strong>自身操作</strong>（預設為開啟）：此帳號發送的訊息、其編輯紀錄以及
+    回覆鍵盤按鍵的按壓紀錄。若關閉此功能，外發訊息與編輯紀錄將被跳過。</li>
+<li>切換至特定資料夾或整個帳戶時會要求確認：這些模式會記錄
+    私人聊天內容及第三方訊息，僅應配置於專用帳戶中。
+    該確認操作及每次範圍變更皆會產生經<code>scope.changed</code>簽名的記錄。</li>
+<li>透過範圍新增的聊天室會以標記為<em>「自動」</em>的來源顯示，並記錄為 <code>scope.applied</code>
+    （在開始時及每小時）或 <code>source.discovered</code>（監測期間出現的新聊天室）。切換回
+    已選定的聊天室時，所有自動新增的來源都會暫停。</li>
+</ul>
+<p>這些模式無法做到的事：</p>
+<ul>
+<li><strong>秘密聊天</strong>在兩台裝置之間採用端對端加密，無論在何種模式下，
+    皆不會傳送至 TgWitness。</li>
+<li><strong>當 TgWitness 未運行時，將不會進行任何記錄。</strong>重新啟動後，它會向 Telegram
+    查詢遺漏的更新並重新檢查聊天記錄，但若發生長時間
+    中斷，Telegram 並不會回傳所有資料。報告及 <code>verify.py</code> 會將此類期間標示為資料缺口（參見<a href="../evidence/#coverage-continuity-gaps-and-unobserved-ids">覆蓋範圍</a>）。</li>
+<li>初始僅列出前 1,000 則對話（上限設定於<strong>「參數」</strong>中）；較舊的
+    對話將於下次變得活躍時被加入。已加入對話的早期歷史紀錄不會被擷取——如有需要，請自行
+    擷取歷史快照或匯出完整對話紀錄。</li>
+<li>不會套用那些隨時變動的資料夾條件（如靜音、已讀）：此類聊天室
+    仍會持續被監控。</li>
+<li>在另一款應用程式中按下的<strong>內嵌（回呼）機器人按鈕</strong>，對第二個
+    會話而言是不可見的；機器人的回覆或編輯內容會被記錄下來。回覆鍵盤按鍵操作會以發送中的
+    訊息形式傳送，並標記為 <code>button_press</code>。</li>
+<li>聊天數量越多，發送請求的次數就越多。Telegram 會針對其認為
+    過量的訊息量限制帳號，這正是使用專用帳號的另一個理由。</li>
+</ul>
+<h2 id="scope-and-event-selection">範圍與事件篩選<a class="anchor" href="#scope-and-event-selection" aria-label="此節的連結">#</a></h2>
+<p>每個工作區都有其專屬的來源。TgWitness 不會加入群組、接受
+邀請，也不會自動清點所有成員。來源必須是該帳號
+已可存取的。 啟動時，收集器會將選定的來源
+與該帳號可見的對話進行比對；除非在「
+<strong>參數 → 從帳號清單讀取的對話」</strong>中另有指定，否則將檢查前 1,000 則對話。
+若來源缺失，將標記為<strong>「存取未確認</strong>」，而非假設該來源已將您移除。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>設定</th>
+<th>收集</th>
+<th>停用時的效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>新訊息</td>
+<td>一般已傳送訊息</td>
+<td>後續的編輯／刪除操作可能缺乏先前已擷取的文字內容供比對。</td>
+</tr>
+<tr>
+<td>編輯</td>
+<td>提供經編輯的訊息版本</td>
+<td>中間的變更內容日後不會被重建。</td>
+</tr>
+<tr>
+<td>刪除記錄</td>
+<td>範圍限定之刪除通知與非範圍限定之帳戶層級通知</td>
+<td>刪除通知不會被加入日誌中。</td>
+</tr>
+<tr>
+<td>反應</td>
+<td>即時反應快照</td>
+<td>不會另行新增反應更新。</td>
+</tr>
+<tr>
+<td>會員</td>
+<td>已發送會員服務訊息及參與者最新動態</td>
+<td>上述會員觀察內容並未被納入。</td>
+</tr>
+</tbody>
+</table></div>
+<p>設定將套用至工作區中所有已選取的來源。儲存表單以套用
+變更；變更內容將連同簽署的「變更前」與「變更後」數值一併記錄。停用某個類別
+並不會刪除較早的記錄。重新啟用該類別也不會補回遺漏的更新。</p>
+<p>操作記錄及其他群組服務事件與這些
+設定開關無關。當會員功能啟用時，會員服務訊息仍會產生訊息記錄，
+即使一般的新訊息擷取功能已停用。擷取的 Telegram
+物件會保留內嵌的元資料；設定開關並非內容遮蔽規則。</p>
+<p><strong>私人聊天室和一般群組中的刪除記錄會以</strong>訊息 ID 的形式呈現，不附帶聊天室資訊。
+這些聊天室共用一套帳戶層級的訊息 ID 序列，因此當帶有該 ID 的訊息
+先前已被儲存時，其所屬的聊天室便已知曉：刪除記錄將被記錄在該聊天室中，
+<code>chat_resolution</code> 解釋了具體機制。 從未被儲存的 ID 將被視為<strong>範圍未定的刪除</strong>，其
+來源明確標示為未知；收集器不會進行推測。Telegram 從不透露是誰刪除了
+訊息；當被刪除的訊息是由該帳號發送時，紀錄會如實標示
+（<code>deleted_message_was_outgoing</code>），但不會指名刪除者。</p>
+<h2 id="own-actions">自身行動<a class="anchor" href="#own-actions" aria-label="此節的連結">#</a></h2>
+<p>被監測帳號發送的訊息會標記為 <code>outgoing</code>。關於外發
+訊息的編輯說明指出：在私人聊天室和群組中，僅發送者本人可進行編輯；而頻道
+貼文則可由其他管理員進行編輯。 當發送的訊息重複了該聊天室中
+最新儲存的回覆鍵盤上某個按鈕的文字時，該訊息會標示為 <code>button_press</code>，並附有
+該鍵盤記錄的連結。</p>
+<p>「排除自身操作」的原則同樣適用於背景重新檢查及自動新增的聊天記錄。
+被跳過的發送訊息會使重新檢查的位置向前推移，以避免阻擋後續收到的
+訊息。明確的面板操作以及手動請求的聊天記錄快照仍會被記錄下來。</p>
+<h2 id="investigation-mode-joining-teams-and-talking-to-bots">調查模式：加入群組並與機器人對話<a class="anchor" href="#investigation-mode-joining-teams-and-talking-to-bots" aria-label="此節的連結">#</a></h2>
+<p><strong>來源 → 監測範圍 → 調查</strong>模式會為專用
+帳戶設定監測範圍，該帳戶將加入群組聊天、啟動聊天機器人並向其發送訊息：涵蓋整個帳戶、所有
+來源類型、自身操作，以及每個出現的群組聊天或聊天機器人的檔案及其最新
+200 則可見訊息。 檢視表單並按下「<strong>儲存範圍」</strong>；切換至整個
+帳戶時，系統會要求進行慣常的確認。</p>
+<ul>
+<li><strong>按鈕。</strong>訊息下方的按鈕會與該訊息一併保留，並顯示於「<strong>聊天」</strong>中：連結、網頁
+    應用程式、登入連結、待複製的文字、回呼資料、內嵌查詢，以及要求提供電話
+    號碼或位置的請求。 連結以文字形式顯示，且絕不會由面板自動開啟。當機器人
+    僅變更按鈕內容（例如新的付款連結）時，無論是
+    即時更新或重新檢查，這都將被視為該訊息的新版本。</li>
+<li>
+<p><strong>新聊天室與機器人。</strong>在「資料夾模式」及「整個帳戶模式」下，<strong>當新的聊天室或機器人
+    出現時</strong>，系統會於其出現的瞬間立即儲存：</p>
+<ul>
+<li>其作為 <code>source.profile</code> 記錄的檔案：機器人說明與指令、
+    使用者、群組或頻道的簡介文字、成員名單，以及當 Telegram 提供
+    時所顯示的關聯聊天室與邀請連結；</li>
+<li>其最新的可見訊息（最多 1,000 則）將作為標記為 <code>new_chat</code> 的歷史快照：
+    剛加入的團隊聊天室中的較早訊息，或是觀察者
+    注意到該聊天室之前，機器人所發的訊息。已即時儲存的訊息不會重複記錄。</li>
+</ul>
+<p>啟用此模式時，清單中已存在的聊天室將直接加入，且不包含快照。
+若觸發 FloodWait，此作業將暫停，並於之後恢復；失敗情況會被記錄，而
+該聊天室的即時記錄則會持續進行。
+- <strong>依需求儲存設定檔。在「聊天」→「設定檔」→「儲存設定檔」中，可</strong>儲存任何來源的當前設定檔；
+最新設定檔會顯示在訊息上方。
+- <strong>不可見。</strong>在其他 Telegram 應用程式中按下的內嵌（回呼）按鈕、
+機器人對此類按壓所作出的彈出視窗或連結，以及在其他應用程式中使用的邀請連結，均不會傳送至
+TgWitness。但機器人隨後發送或編輯的內容仍會被記錄。</p>
+</li>
+</ul>
+<h3 id="act-from-the-panel">從面板執行操作<a class="anchor" href="#act-from-the-panel" aria-label="此節的連結">#</a></h3>
+<p><strong>「聊天」</strong>功能現已包含一個迷你客戶端，該客戶端使用所選工作區的 Telegram 帳戶：</p>
+<ul>
+<li>撰寫純文字訊息，或在已儲存的訊息下方選擇<strong>「回覆」</strong>。即使設定範圍排除外發更新，系統仍會記錄回傳的外發
+    訊息。</li>
+<li>按下當前回調按鈕或文字按鈕下方的<strong>「Press」按鈕</strong>。若鍵盤輸入內容與儲存版本不符，伺服器將再次擷取
+    該訊息並拒絕執行此動作。
+    回調收據會保留 Telegram 的彈出文字、警示標記及網址；回覆內容亦會顯示
+    於對話下方。網址仍為可選取的文字，且不會自動開啟。</li>
+<li>展開「<strong>開啟 Telegram 連結</strong>」，輸入 <code>@username</code>、公開的 <code>https://t.me/name</code> 連結、
+    <code>https://t.me/+invite</code> / <code>joinchat/invite</code>，或帶有 <code>?start=parameter</code> 的機器人連結，然後按下
+    <strong>「儲存預覽」</strong>。在加入前，原始連結與 Telegram 的預覽皆已簽名。
+    <strong>加入／開啟並觀察</strong>後，系統會加入該群組／頻道或開啟該用戶／機器人，將該
+    聊天視為已啟用的來源，並將 <code>/start</code> 連同其啟動參數一併傳送給機器人。
+    待管理員批准的加入請求將被記錄為「待處理」，而非「成員資格」。</li>
+</ul>
+<p>啟用「<strong>開始監測</strong>」功能，即可即時擷取收到的回覆。當監測暫停時，面板操作仍可進行，
+但此時僅能保證其直接回覆內容會被保存。
+當監測正在執行時，新增的來源會使用已設定的設定檔／歷史紀錄匯入方式。
+當來源處於暫停狀態時，請先在<strong>「來源」</strong>中啟用該來源，再進行傳送或按下其按鈕。</p>
+<p><code>interaction.preview</code>、<code>interaction.requested</code> 和 <code>interaction.result</code> 是證據匯出中包含的普通簽名
+日誌事件。請求會標識帳戶、訊息／按鈕
+或預覽記錄，並標示監測是否正在運行。回執則區分成功、
+拒絕、待核准及未知結果。中斷的請求可能已傳送至
+Telegram：在執行新操作前請先檢查聊天記錄。 重複使用請求 ID 可檢索其
+已儲存的收據，而無需重複執行該動作，包括重新啟動後亦然。當在當前頁面會話中針對同一動作收到模稜兩可的回應時，控制面板會保留該
+ID。
+此外，當成功執行動作後刷新視圖失敗時，控制面板也會保留該 ID：收據
+仍會保持可見，再次點擊即可檢索該收據。 回呼與加入 RPC 僅有一次
+嘗試機會；可重試的讀取操作則會保留其設定的重試政策。立即切換聊天室
+會立即清除草稿與回覆對象，並停用傳送功能，直至新對話載入為止。</p>
+<p>此迷你客戶端可處理文字及回呼按鈕。網頁應用程式、登入／電話號碼／位置請求、
+付款、內嵌查詢及附件仍需透過 Telegram 客戶端處理；其儲存的按鈕
+元資料仍可被檢視。新的控制項採用英文文字。</p>
+<h2 id="recheck-tiers">重新檢查等級<a class="anchor" href="#recheck-tiers" aria-label="此節的連結">#</a></h2>
+<p>重新檢查功能會再次向 Telegram 查詢遺漏的訊息、編輯紀錄以及該平台不再回傳的訊息。
+標有星號的來源為<strong>優先</strong>來源，預設每 15 分鐘重新檢查一次；
+其餘來源則每 6 小時重新檢查一次。選定的聊天室預設為優先來源，透過
+資料夾或整個帳戶新增的聊天室則為一般來源。 每次循環最多重新檢查 30 個來源，
+其餘來源則等待下一分鐘；重新連線後，優先來源將優先處理。兩者
+的間隔時間皆可於「來源」→「記錄設定」→「重新檢查」中設定（0 表示關閉該層級），並
+以「<code>recheck.changed</code>」形式記錄。</p>
+<p>遺漏的訊息將從上次處理中斷處開始向上擷取，每次處理最多擷取「
+<strong>參數 → 每次重新檢查的新訊息數</strong>」（預設為 1,000 則）。 因此，經過長時間中斷後，
+重新檢查將填補整個空缺，即使比該空缺更新的即時訊息已被優先儲存
+亦然。仍在補齊資料的聊天室將於下一分鐘再次進行重新檢查，而非
+等待其層級間隔；<code>recheck.completed</code> 將顯示 <code>continues_after</code>，直至完成為止。</p>
+<p>比對項目包含訊息文字、實體、鍵盤輸入（包括刪除紀錄）以及附件
+內容／識別資訊。 僅變更檔案存取雜湊值或檔案參照本身並不構成
+編輯，Telegram 自動填入的內容亦不構成編輯：例如連結預覽載入、故事瀏覽次數、由該帳號解鎖的付費
+媒體，以及發票收據。聊天記錄中的每個儲存版本皆連結至其完整的日誌記錄，包含媒體元資料。</p>
+<h2 id="message-history-and-attribution">訊息歷史紀錄與來源標示<a class="anchor" href="#message-history-and-attribution" aria-label="此節的連結">#</a></h2>
+<p>假設收集器先觀察到「10:00 會議」，隨後看到「11:00 會議」，
+接著收到刪除通知。系統會將這三項不同的觀察結果追加至日誌中：
+原始文字保留不變，編輯後的內容作為獨立版本，而通知則記錄了
+已觀察到刪除操作。</p>
+<p>若資料蒐集是在首個版本消失後才開始，則該內容將無法取得。
+若在離線期間發生多次編輯，僅能儲存後續觀察到的
+版本。刪除通知無法恢復從未被擷取的內容。</p>
+<p>訊息發送者不必然等同於編輯者。Telegram 通常不會
+提供刪除訊息者的身分或確切刪除時間。身分不明的行為者
+仍將保持匿名。反應快照與參與者更新僅包含
+Telegram 向該帳號顯示的計數及身分資訊。</p>
+<p>序號表示觀察順序。收集器的 UTC 時間戳記即為其
+本地時間；若提供 Telegram 來源的時間戳記，則會另行儲存。
+兩者均非獨立的可信時間戳記。</p>
+<h2 id="history-snapshots">歷史快照<a class="anchor" href="#history-snapshots" aria-label="此節的連結">#</a></h2>
+<p>快照功能會從已啟用的來源擷取最新的可見訊息，每次請求最多
+500 則。結果會標記為「歷史觀察紀錄」。這些紀錄可能與
+即時擷取內容重疊，而重複的觀察紀錄將作為獨立記錄保存。</p>
+<p>快照遵循附件政策，但與即時事件切換機制相互獨立。
+它們不會還原已刪除的訊息或遺漏的中間版本。您可以在
+暫停狀態下請求快照；任何排入佇列的附件將等待至觀察開始
+且下載工作程序執行時才會處理。</p>
+<h2 id="attachment-handling">附件處理<a class="anchor" href="#attachment-handling" aria-label="此節的連結">#</a></h2>
+<p>附件下載功能預設為啟用狀態，當可用磁碟空間低於 1 GiB 時會暫停下載。收集器會將
+訊息監測與下載任務一併提交。該任務會保留原始媒體
+描述符及大小政策，因此後續經編輯的附件不會被悄然替換。</p>
+<p>下載作業於訊息擷取後執行。下載完成後將產生一個包含 SHA-256 值與位元組數的 <code>media.saved</code>
+記錄。被跳過、失敗、重試及中斷的
+作業將產生不同的結果。排入佇列的任務並不代表該檔案已成功保存。
+完成的檔案還必須與原始觀察到的附件
+描述符中的位元組數相符。若回應過短或出乎意料地過長，則不會被記錄為已保存的媒體。</p>
+<p><strong>各類型皆</strong>設有儲存限制：照片、影片、GIF 及動畫、圓形影片訊息、
+語音訊息、音樂與音訊、貼圖，以及檔案。 每種類型均可關閉，並設有
+各自的容量限制（範圍為 1 至 2,000 MiB）；新工作區預設值為：照片 20 MiB、
+影片 100 MiB、檔案、音訊及圓形影片 50 MiB、語音與 GIF 20 MiB，以及
+貼圖為 5 MiB。設定<em>最大檔案大小</em>將同時套用至所有類型。在
+按類型設定限制之前儲存的政策，將維持其針對每種類型的單一限制。停用某種類型會產生
+一個 <code>media.skipped</code> 記錄；未知大小或超大檔案將不會被下載。 大型檔案的
+下載速度至少為 256 KiB/s。任務在系統重啟後仍會保留，但過期的參考、喪失
+存取權限或已刪除的檔案仍可能導致無法恢復。現有任務將保留與其一同儲存的
+政策。</p>
+<h2 id="pause-lock-disconnect-and-restart">暫停、鎖定、斷開連接及重新啟動<a class="anchor" href="#pause-lock-disconnect-and-restart" aria-label="此節的連結">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>動作或狀態</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>切換工作區</td>
+<td>變更面板檢視；其他收集器將維持其狀態。</td>
+</tr>
+<tr>
+<td>鎖定面板或關閉分頁</td>
+<td>讓伺服器與監測功能持續運作。</td>
+</tr>
+<tr>
+<td>暫停觀察</td>
+<td>停止該收集器並保留排程中的附件處理工作。</td>
+</tr>
+<tr>
+<td>停用來源</td>
+<td>停止未來的範圍內擷取；當此功能停用時，相關的排程媒體處理任務將處於等待狀態。</td>
+</tr>
+<tr>
+<td>移除來源</td>
+<td>系統會將其視為來源並刪除其使用者檔案；已儲存的記錄仍保留在僅可追加的日誌中。尚待處理的附件則會被記錄為失敗（<code>source_removed</code>）。在資料夾模式與整個帳戶模式下，該附件亦會被排除在外。</td>
+</tr>
+<tr>
+<td>變更連線路徑</td>
+<td>需暫停運作，關閉舊版客戶端，並取消未完成的登入程序。</td>
+</tr>
+<tr>
+<td>停止 Python 程序</td>
+<td>停止所有工作區；離線期間不會進行任何監測。</td>
+</tr>
+<tr>
+<td>主動監測結束後重新啟動</td>
+<td>嘗試使用已儲存的會話來恢復先前儲存的範圍。若手動暫停，則會清除該意圖。</td>
+</tr>
+</tbody>
+</table></div>
+<p>此收集器會記錄偵測到的連線中斷、重試、錯誤、啟動／停止，以及
+心跳訊號。短暫的中斷可能因週期性的連線檢查而未被偵測到。
+重新啟動後，系統會從儲存的更新位置請求遺漏的更新，並
+定期重新檢查已監控的聊天室；詳見<a href="../evidence/#durable-collection-and-process-receipts-02">證據格式</a>。快照僅提供背景資訊；
+並不能證明資料缺口已修復。</p>
+<h2 id="account-isolation-and-verification">帳戶隔離與驗證<a class="anchor" href="#account-isolation-and-verification" aria-label="此節的連結">#</a></h2>
+<p>每個工作區皆擁有專屬的日誌、授權、簽署金鑰、政策及佇列。
+僅其活躍的客戶端可貢獻即時觀察記錄。遭拒絕、待處理、
+已被取代以及進行連線測試的客戶端，均無法將即時更新寫入其日誌。
+不同帳戶可觀察同一群組，但其日誌仍保持獨立。</p>
+<p>每個事件皆包含前一個雜湊值及 Ed25519 簽名。匯出內容涵蓋
+整個工作區日誌，並透過固定序列號進行標記。面板篩選器不會過濾
+匯出內容；在匯出檔案準備期間，資料蒐集可能持續進行至其邊界之外。</p>
+<p><strong>「驗證日誌」</strong>會透過顯示的
+邊界檢查事件鏈與簽名。當工作區變更時，其結果將被清除，而面板會標示
+檢查後新增的記錄。ZIP 匯出功能亦會驗證所收集的媒體檔案。</p>
+<p>有效的簽名是針對可信密鑰的完整性進行驗證，而非針對 Telegram
+的來源或內容真實性。請獨立保留指紋與檢查點。請參閱
+<a href="../evidence/">證據模型</a>、<a href="../operations/">日常運作</a>流程及
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">即時驗收程序</a>，以了解信任與交付要求。</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/COLLECTION.md">在 GitHub 上編輯此頁面 ↗</a><a class="next-guide" href="../operations/"><span>下一步</span><strong>工作流程與操作 →</strong></a><p>這些指南描述了當前的實作方式。驗證結果與尚存的缺口將另行記錄。 <a href="../verification/">已測試的內容 →</a></p></footer>
+</main>
+<aside class="toc" aria-label="本頁內容"><p class="nav-label">本頁內容</p><a href="#from-login-to-a-journal">從登入到日誌</a><a href="#observation-scope-chosen-chats-a-folder-or-the-whole-account">監測範圍：指定聊天室、特定資料夾或整個帳戶</a><a href="#scope-and-event-selection">範圍與事件篩選</a><a href="#own-actions">自身行動</a><a href="#investigation-mode-joining-teams-and-talking-to-bots">調查模式：加入群組並與機器人對話</a><a href="#recheck-tiers">重新檢查等級</a><a href="#message-history-and-attribution">訊息歷史紀錄與來源標示</a><a href="#history-snapshots">歷史快照</a><a href="#attachment-handling">附件處理</a><a href="#pause-lock-disconnect-and-restart">暫停、鎖定、斷開連接及重新啟動</a><a href="#account-isolation-and-verification">帳戶隔離與驗證</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>開源 · 可在您的機器上運行</span><a href="../../../../LICENSE">MIT 授權條款</a><a href="../notice/">操作員公告</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">安全性</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "等待訊息", "Step through a fictional send, edit and delete.": "透過一個虛構的發送、編輯和刪除流程逐步了解操作。", "No observations yet. Start the sequence or advance one event.": "目前尚無觀察記錄。開始執行序列或跳至下一則事件。", "Meet at 10:00": "上午 10:00 見面", "A new message is visible in the chat.": "聊天室中顯示了一則新訊息。", "Record 1 appended: the collector observed the original message.": "新增記錄 1 筆：收集器已偵測到原始訊息。", "Meet at 11:00": "上午 11:00 見面", "The current text changes. The earlier observation stays.": "當前文本有所變更。先前的觀察結果維持不變。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "新增記錄 2：此編輯為一項新觀察結果。記錄 1 仍保留原始文字。", "Message deleted": "訊息已刪除", "The message has disappeared from the chat view.": "該訊息已從聊天視圖中消失。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "新增「Record 3」：刪除通知將與兩個被觀察到的版本一併保留。", "0 records": "0 筆記錄", "1 record": "1 筆記錄", "2 records": "2 筆記錄", "3 records": "3 筆記錄", "Complete / {n} of 3": "完成 / {n} 共 3 項", "Step / {n} of 3": "步驟 / 3 中的 {n}", "Pause": "暫停", "Replay sequence": "重播序列", "Play sequence": "播放順序", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "靜態範例已上線。若要互動式計算雜湊值，請透過 HTTPS 開啟此頁面，或使用支援 Web Crypto 的 localhost 預覽。", "No record supplied": "未提供記錄", "Tail removed": "尾部內容已移除", "≠ saved hash": "≠ 已儲存的雜湊值", "Rebuilt · different hash": "重新建置 · 不同雜湊值", "= saved hash": "= 儲存的雜湊值", "Same length and matching head.": "篇幅相同且標題一致。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "這三個計算出的雜湊值均與儲存的雜湊值相符。此樣本符合保留的三筆記錄邊界。", "Same saved head; the journal prefix fails verification.": "儲存的標題相同；但日誌前綴無法通過驗證。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "記錄 2 已與其儲存的雜湊值不符。若僅檢查最後儲存的「頭部」，將無法發現此問題；驗證器會檢查每一筆記錄。", "Head differs from the retained checkpoint.": "標題與保留的檢查點不同。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "重建的雜湊值彼此關聯，但最終的頭部已發生變更。保留的檢查點會拒絕此歷史記錄。若記錄內容遭變更，原始簽名亦將驗證失敗。", "Too short: 2 supplied records \u003c 3 retained records.": "過短：提供的 2 筆記錄 \u003c 保留的 3 筆記錄。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "剩餘的兩個雜湊值仍然匹配。保留的檢查點揭示了缺失的部分。若無該較早的邊界，僅憑這個較短的前綴是無法揭露此遺漏的。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "此瀏覽器無法進行雜湊運算。下方的公式與靜態說明仍可正常顯示。", "{n} records": "{n} 筆記錄", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "已接受：計數持續增加，簽名經驗證無誤，且金鑰匹配。該見證者保留此新界限。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "回滾：簽名答覆所報告的記錄數量少於最後一個被接受的檢查點。Witness 會記錄此問題，並保留較早的被接受邊界。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "分叉（Fork）：分支數量未變，但分支頭不同。該見證系統會記錄此分歧，並保留先前被接受的分支邊界。", "No answer": "無回應", "boundary unknown": "邊界未知", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "無回應：Witness 會記錄驗證失敗的狀況。它無法判定收集器的當前狀態。若 Witness 仍能連線至 Bot API，且其發布政策允許，則可發布該次失敗的紀錄。", "Send {n}": "傳送 {n}", "Edit {n}": "編輯 {n}", "Delete {n}": "刪除 {n}", "Both accounts captured all six expected observations in this example.": "在此範例中，兩個帳戶均完整記錄了預期的六項觀察結果。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "帳號 B 仍成功擷取了 6 則中的 6 則。其中兩則收據的擷取時間較長。擷取率與收據延遲反映的是不同的問題。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "帳戶 B 在截止時間前成功擷取了 6 項中的 5 項（83.3%）。遺漏的那項編輯操作未測得任何延遲。此結果僅描述這六項受控操作。", "not observed by cutoff": "未在截止時間前觀察到", "{s} seconds": "{s} 秒", "Exact values follow in the table.": "具體數值詳見下表。", "{s} s": "{s} s", "Not observed": "未觀察到", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "四個聊天室提供了不同的觀察結果。請追蹤每項連結的原始記錄；若未標明發送者，請勿將該頻道貼文歸屬於使用者 71001。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "記錄 #146 和 #205 顯示相同的發送者 ID：71001。這將兩個聊天室中觀察到的 Telegram 帳號貼文相互連結。此資訊並未識別任何現實世界中的人士，亦未歸屬該頻道貼文的來源。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "目的地 pay.example.invalid/new 出現在群組記錄 #146、機器人鍵盤 #173、頻道編輯 #188 以及私人訊息 #205 中。重複出現的目的地將這些資料連結起來；但這並不能證明這些帳戶受共同控制。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "在此虛構案例中，已完成的媒體收據 #151 與 #209 具有完全相同的 SHA-256 值。請比較實際位元組及其相關的訊息記錄。該匹配檔案並未標示其創建者，亦無法證明是由誰轉發的。", "the encrypted off-site copy": "加密的異地備份", "notifications": "通知", "checkpoint hashes for timestamps": "時間戳記的檢查點雜湊值", "signed checkpoints for the witness": "TgWitness 的簽名檢查點", "Switched on in this example": "此範例中已啟用", "Optional · off by default": "可選 · 預設為關閉", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "離開這台機器時：Telegram 連線及 {list}。除此之外別無他物。", "Default: only the Telegram connection leaves this machine.": "預設設定：僅 Telegram 連線會離開這台機器。", "{done} of {total} done": "已完成 {done}/{total}", "Mark step {n} as done": "將步驟 {n} 標記為已完成", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "複製", "Copied": "複製", "Command copied.": "指令已複製。", "Selected — Ctrl/Cmd+C": "選取 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "已選取指令。請手動複製。", "Command copied to clipboard.": "指令已複製至剪貼簿。", "Select text": "選取文字", "Clipboard unavailable. Command selected; copy it manually.": "剪貼簿無法使用。已選取指令；請手動複製。", "A message arrives. The first observation is saved.": "一則訊息送達。首項觀察記錄已儲存。", "The time changes. Both captured versions stay.": "時間雖變，但兩份記錄版本皆保留。", "The message disappears. The captured history remains.": "訊息雖已消失，但被擷取的歷史紀錄依然存在。", "Pause example animation": "暫停範例動畫", "Play example animation": "播放範例動畫", "Play": "播放", "Full-size workspace screenshot": "全螢幕工作區螢幕截圖", "Workspace screenshot · fictional data": "工作區螢幕截圖 · 虛構資料", "Close": "關閉", "Close screenshot": "關閉螢幕截圖", "Scrollable full-size screenshot": "可捲動的全螢幕截圖", "Enlarge: {name}": "放大：{name}", "View full size": "檢視完整尺寸"}</script>
+</body></html>

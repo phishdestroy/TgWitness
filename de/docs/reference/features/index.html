@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="de" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Funktionen und Einschränkungen | TgWitness</title>
+<meta name="description" content="Was TgWitness derzeit umsetzt, welche Einschränkungen die Telegram-Plattform auferlegt und welche Aufgaben noch in Zukunft zu bewältigen sind."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/features/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="de_DE">
+<meta property="og:title" content="Funktionen und Einschränkungen | TgWitness"><meta property="og:description" content="Was TgWitness derzeit umsetzt, welche Einschränkungen die Telegram-Plattform auferlegt und welche Aufgaben noch in Zukunft zu bewältigen sind.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/de/docs/reference/features/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/features/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/features/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/features/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/features/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/features/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/features/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/features/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/features/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/features/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/features/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/features/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/features/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/features/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/features/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/features/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/de/docs/reference/features/", "url": "https://phishdestroy.github.io/TgWitness/de/docs/reference/features/", "name": "Funktionen und Einschränkungen | TgWitness", "description": "Was TgWitness derzeit umsetzt, welche Einschränkungen die Telegram-Plattform auferlegt und welche Aufgaben noch in Zukunft zu bewältigen sind.", "inLanguage": "de", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://phishdestroy.github.io/TgWitness/de/"}, {"@type": "ListItem", "position": 2, "name": "Dokumentation", "item": "https://phishdestroy.github.io/TgWitness/de/docs/"}, {"@type": "ListItem", "position": 3, "name": "Referenz", "item": "https://phishdestroy.github.io/TgWitness/de/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Funktionen und Einschränkungen", "item": "https://phishdestroy.github.io/TgWitness/de/docs/reference/features/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Dokumentation</span></a>
+<nav aria-label="Anleitungen"><a href="../../concepts/">Visuelle Anleitung</a><a href="../../">Alle Anleitungen</a><a href="../">Referenz</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Sprache"><span aria-hidden="true">◍</span> Deutsch</summary><div class="lang-list"><a href="../../../../docs/reference/features/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/features/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/features/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/features/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/features/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/features/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/features/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/features/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/features/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/features/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/features/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/features/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/features/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/features/" hreflang="fr" lang="fr">Français</a><a href="./" hreflang="de" lang="de" aria-current="true">Deutsch</a><a href="../../../../it/docs/reference/features/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/features/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/features/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/features/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/features/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/features/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/features/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/features/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/features/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/features/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Zwischen hellem und dunklem Design wechseln"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Anleitungen"><a href="../../../guides/modes.html">Modi, Szenarien und Evidenzstufen</a><p class="nav-label">Erste Schritte</p><a href="../../start/">In wenigen Minuten loslegen</a><a href="../../accounts/">Ein Konto verbinden</a><a href="../../proxies/">Wählen Sie einen Proxy</a><a href="../../exports/">Exportieren und verifizieren</a><p class="nav-label">Die Beweismittel verstehen</p><a href="../../concepts/">Erfahren Sie, wie die Beweissicherung funktioniert</a><a href="../../cases/">Untersuchungen über alle Chats hinweg</a><a href="../../security/">Sorgen Sie für Sicherheit</a><p class="nav-label">Weiterlesen</p><a href="../../witness/">Einen Witness-Bot einrichten</a><a href="../../server/">Halten Sie den Betrieb aufrecht</a><a href="../../troubleshooting/">Finden Sie heraus, was schiefgelaufen ist</a></nav><nav class="wiki-nav" aria-label="Referenz"><p class="nav-label"><a class="nav-label-link" href="../">Referenz</a></p><details class="wiki-group"><summary>Einrichtung</summary><a href="../quickstart/">Schnellstart</a><a href="../accounts/">Konten und Sitzungsformate</a><a href="../connection/">Verbindung, Proxys und Datenschutz</a><a href="../deployment/">Bereitstellung</a></details><details class="wiki-group" open><summary>Sammeln</summary><a href="../collection/">So funktioniert die Datenerfassung</a><a href="../operations/">Arbeitsabläufe und Funktionen</a><a href="../investigation/">Untersuchungsmodus</a><a href="./" aria-current="page">Funktionen und Einschränkungen</a></details><details class="wiki-group"><summary>Beweismaterial</summary><a href="../how-it-works/">So funktioniert das Beweismaterial</a><a href="../evidence/">Format der Beweismittel</a><a href="../witness/">Unabhängiger Zeuge</a><a href="../timestamp/">Zeitstempel</a></details><details class="wiki-group"><summary>Sicherheit & Projekt</summary><a href="../security/">Sicherheit und Datenumgang</a><a href="../architecture/">Architektur</a><a href="../verification/">Was wurde getestet?</a><a href="../license/">Hinweis zur Lizenz und zur architektonischen Inkompatibilität</a><a href="../notice/">Hinweis zur Inkompatibilität mit bestimmten Betreibern</a><a href="../changelog/">Änderungsprotokoll</a></details></nav><p class="sidebar-note">v0.7.0<br>Open Source · Läuft auf Ihrem Rechner</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Anleitungen"><a href="../../../">Startseite</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentation</a> <span aria-hidden="true">/</span> <a href="../">Referenz</a> <span aria-hidden="true">/</span> <span aria-current="page">Funktionen und Einschränkungen</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Durchsuchen Sie die Dokumentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Versuchen Sie es mit „Proxy“, „Hash-Kette“, „Token“ oder „Witness“ …" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Klare Suche" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Geben Sie ein Wort ein, um die Anleitungen und das Nachschlagewerk zu durchsuchen. Die Suche erfolgt in Ihrem Browser.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Referenz / Sammeln</p><h1>Funktionen und Einschränkungen</h1><p class="guide-outcome">Was TgWitness derzeit umsetzt, welche Einschränkungen die Telegram-Plattform auferlegt und welche Aufgaben noch in Zukunft zu bewältigen sind.</p><div class="wiki-body"><p>Designreferenz: 26. Oktober 2026. Der primäre Anwendungsfall sind private Telegram-Gruppen
+und -Kanäle, auf die die verbundenen Konten Zugriff haben. Dieses Dokument unterscheidet zwischen
+bereits implementiertem Verhalten, Plattformgrenzen und zukünftigen Arbeitsschritten. Ein Punkt in der Zielarchitektur
+bedeutet nicht, dass die Funktion bereits existiert.</p>
+<h2 id="standalone-application">Eigenständige Anwendung<a class="anchor" href="#standalone-application" aria-label="Link zu diesem Abschnitt">#</a></h2>
+<p>TgWitness verfügt über eine eigene Installation, ein eigenes Datenverzeichnis und einen eigenen Release-Zyklus. Die mitgelieferte
+Weboberfläche übernimmt die Einrichtung und Überprüfung; exportierte Datensätze können eigenständig verwendet werden.</p>
+<p>Der Betreiber verbindet seine Konten, wählt die für jedes Konto sichtbaren Quellen aus und erhält
+ein gespeichertes Beobachtungsprotokoll. Das Dashboard zeigt Inhalte, gespeicherte Änderungen, die Herkunft der Beobachtungen
+sowie bekannte Lücken an. Ein anderer Ermittler kann das exportierte Material überprüfen.</p>
+<p>Vier unterschiedliche Zustände sind von Bedeutung: Kontoautorisierung, Zugriff auf eine Quelle, ein funktionierender
+Kollektor sowie der Grad, in dem die Vollständigkeit der Übermittlung festgestellt wird. Keiner der
+ersten drei Zustände beweist automatisch den vierten. Eine inaktive Gruppe ist nicht zwangsläufig
+ein defekter Kollektor.</p>
+<h2 id="optional-extras">Optionale Zusatzfunktionen<a class="anchor" href="#optional-extras" aria-label="Link zu diesem Abschnitt">#</a></h2>
+<p>Die tägliche Einrichtung erfolgt über „Konto“ → „Quellen“ → „Beobachtung“. <strong>„Extras“</strong> ist ein separater Bereich
+mit zwei Karten: einem Telegram-Witness-Bot und einer geplanten
+GitHub-Build-Verifizierung. Bei jeder Karte werden zunächst die Verfügbarkeit und die Anforderungen angegeben, bevor die
+Einstellungen angezeigt werden. Durch Auswahl einer Karte werden Anweisungen geöffnet; es erfolgt keine Registrierung oder Aktivierung eines Dienstes.</p>
+<p>Die Einrichtung des Bots erfolgt in drei Schritten: Erstellen eines Lesezugriffs, Auswählen der Veröffentlichungseinstellungen und
+Starten auf dem Witness-Host. Netzwerk- und Veröffentlichungsoptionen, bestehende Verbindungen sowie
+Verifizierungsbefehle werden auf Anfrage offengelegt. Die heruntergeladene Konfiguration unterscheidet sich
+von einem laufenden Witness. Beim Wechseln der Zusatzoptionen bleibt der Entwurf erhalten; Kontoänderungen und die Sperrung
+löschen das temporäre Token und das Formular. Die integrierte Anleitung enthält Anweisungen zum Start.
+GitHub bleibt ein markierter Plan, ohne Anmeldeformular oder vorgetäuschten Verbindungsstatus.</p>
+<h2 id="protocol-and-private-sources">Protokoll und private Quellen<a class="anchor" href="#protocol-and-private-sources" aria-label="Link zu diesem Abschnitt">#</a></h2>
+<p><strong>MTProto ist das Protokoll von Telegram; Telethon ist die Python-Bibliothek, die TgWitness verwendet, um
+MTProto zu nutzen.</strong> Es handelt sich dabei nicht um alternative Verbindungsmethoden. Die Datenerfassung erfolgt über MTProto;
+der optionale „Witness“ veröffentlicht signierte Prüfberichte über die Bot-API.</p>
+<p>Jeder Arbeitsbereich verfügt über einen eigenen autorisierten Client und einen eigenen Aktualisierungsstrom für das Konto. TgWitness
+wählt Beobachtungen aus konfigurierten Quellen aus und stellt separate, explizite Anfragen
+für Funktionen wie Verlaufs-Snapshots und Medien-Downloads.</p>
+<p>Eine private Quelle benötigt keinen öffentlichen Benutzernamen. Der Telegram-Peer-Typ und die numerische ID sind
+die Identifikatoren; Titel und Benutzernamen können sich ändern. Der Zugriff hängt von der bestehenden
+Mitgliedschaft und den Berechtigungen ab. TgWitness tritt Quellen nicht automatisch bei und umgeht auch nicht
+die Beitrittsgenehmigung. Ein Zugriffshash von einem anderen Konto ist kein universelles Zugriffstoken.</p>
+<p>Das Erfassungsmodell muss versteckte Verlaufsdaten vor dem Beitritt, Teilnehmer- und Administratorrollen,
+den Widerruf von Sitzungen, die Entfernung oder Änderung von Berechtigungen, die Migration von Gruppen zu Supergruppen,
+Themen und Foren, verknüpfte Diskussionen, Kanalidentitäten sowie nicht verfügbare
+Anhänge berücksichtigen. Nicht jede Kombination wurde bereits in der Praxis getestet.</p>
+<p>Die Sichtbarkeit der Quellen wird beim Start des Collectors überprüft. Fehlt eine Quelle aus dem begrenzten
+Dialogergebnis, bedeutet dies, dass <strong>der Zugriff nicht bestätigt ist</strong>, nicht jedoch, dass eine Entfernung nachgewiesen wurde. Eine nicht verfügbare
+Quelle verhindert nicht die Beobachtung anderer zugänglicher Quellen. Fügen Sie niemals Einladungslinks
+oder echte Sitzungen in öffentliche Fixtures ein.</p>
+<h2 id="multiple-accounts">Mehrere Konten<a class="anchor" href="#multiple-accounts" aria-label="Link zu diesem Abschnitt">#</a></h2>
+<p>Das Panel unterstützt eine beliebige Anzahl von <strong>Arbeitsbereichen</strong>, von denen jeder über folgende Merkmale verfügt:</p>
+<ul>
+<li>Autorisierung, verschlüsselter Speicher und Verbindungsweg.</li>
+<li>SQLite-Protokoll und Ed25519-Signaturidentität.</li>
+<li>Ausgewählte Quellen, Medienwarteschlange und Erfassungseinstellungen.</li>
+<li>Überwachungsstatus, Fehler, Kontrollpunkte und Exporte.</li>
+</ul>
+<p>Das Wechseln des angezeigten Arbeitsbereichs stoppt keinen anderen Collector. Eine doppelte Kontoautorisierung
+über verschiedene Arbeitsbereiche hinweg wird abgelehnt. Ein Protokoll, das bereits an ein Telegram-Konto
+gebunden ist, kann keinem anderen Konto zugewiesen werden; eine erneute Verbindung desselben Kontos ist jedoch zulässig.
+Dadurch bleiben die Kontoidentität und der relevante Nachrichten-ID-Bereich erhalten.</p>
+<p>Es gibt keine festgelegte Anzahl und keine garantierte Durchsatzleistung. Arbeitsbereiche teilen sich einen
+Python-Prozess und eine Ereignisschleife. Separate Account-Worker sind noch in der Entwicklung. Für eine
+derzeitige Prozessisolierung verwenden Sie separate Installationen, Ports und Datenverzeichnisse.</p>
+<p>Weisen Sie jedem Konto die Quellen zu, auf die es zugreifen kann. Verschiedene Konten können dieselbe
+Gruppe beobachten, doch ihre Beobachtungen bleiben getrennt und behalten ihre Herkunft bei. Zwei Konten
+auf einem vom Betreiber kontrollierten Rechner gelten nicht als zwei unabhängige Zeugen. Exporte erfolgen
+pro Arbeitsbereich; ein zusammengeführtes Fallpaket oder eine globale Telegram-Zeitleiste sind nicht implementiert.</p>
+<h2 id="capture-and-attribution">Erfassung und Zuordnung<a class="anchor" href="#capture-and-attribution" aria-label="Link zu diesem Abschnitt">#</a></h2>
+<p>Unter „Quellen“ stehen pro Konto Schaltflächen für neue Nachrichten, Bearbeitungen, Löschungen, Reaktionen
+und Mitgliedschaften zur Verfügung. Voreinstellungen behalten entweder alle Kategorien oder Nachrichten/Bearbeitungen/Löschungen bei.
+Die Richtlinie gilt für die ausgewählten Gruppen des Arbeitsbereichs, bleibt auch nach einem Neustart erhalten und wird
+mit den Änderungen vor und nach der Anpassung signiert. Standardmäßig werden alle Kategorien beibehalten. Das Deaktivieren einer Kategorie
+führt nicht zum Löschen alter Datensätze; das erneute Aktivieren stellt verpasste Ereignisse nicht wieder her.
+Betriebliche Aufzeichnungen, andere Gruppen-Service-Ereignisse und explizite Verlaufs-Snapshots sind
+separat. Erfasste Telegram-Objekte können eingebettete Metadaten beibehalten, unabhängig von den
+Schaltflächen für separate Aktualisierungen. Es gibt noch keine gruppenspezifischen Kategorie-Überschreibungen.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Material</th>
+<th>Jetzt erfasst</th>
+<th>Grenze</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nachricht</td>
+<td>Text, Peer-/Nachrichten-IDs, Metadaten des Absenders, Antworten und ursprünglicher Update-Envelope</td>
+<td>Keine öffentlich überprüfbare Telegram-Signatur für die Nachricht</td>
+</tr>
+<tr>
+<td>Bearbeiten</td>
+<td>Neu erfasste Version und alle zuvor gespeicherten Versionen</td>
+<td>Zwischenzeitliche Bearbeitungen während Ausfallzeiten können verloren gehen; der Absender ist nicht zwangsläufig der Bearbeiter.</td>
+</tr>
+<tr>
+<td>Löschung</td>
+<td>Benachrichtigung und gegebenenfalls zuvor erfasste Inhalte</td>
+<td>In der Regel keine Angabe des Löschers oder des genauen Zeitpunkts der Aktion</td>
+</tr>
+<tr>
+<td>Nicht erfasste Löschungen</td>
+<td>Originalmitteilung auf Kontoebene, ohne Vermutungen über den Gesprächspartner anzustellen</td>
+<td>Die strikte Korrelation mit zuvor gespeicherten, auf das Konto bezogenen IDs ist Gegenstand zukünftiger Arbeiten.</td>
+</tr>
+<tr>
+<td>Reaktion</td>
+<td>Ausgegebene Zählerstände und sichtbare aktuelle Identitäten</td>
+<td>Eine vollständige Liste der verfügbaren Reaktoren erfordert separate Abfragen; Kanäle können Identitäten verbergen</td>
+</tr>
+<tr>
+<td>Mitgliedschaft</td>
+<td>Service-Meldungen und zugestellte Teilnehmer-Updates</td>
+<td>Die Sichtbarkeit hängt von der Rolle und der Art des Chats ab; fehlende Ereignisse bedeuten nicht zwangsläufig, dass keine Aktivitäten stattgefunden haben.</td>
+</tr>
+<tr>
+<td>Administratoraktionen</td>
+<td>Ausschließlich relevante Aktualisierungen</td>
+<td>Eine separate Abfrage des Admin-Protokolls ist nicht implementiert</td>
+</tr>
+<tr>
+<td>Anhang</td>
+<td>Beschreibung der Originalversion, heruntergeladene Bytes/SHA-256 und Ergebnisse der Versuche</td>
+<td>Eine gelöschte Datei ist möglicherweise nicht wiederherstellbar; die neueste Version wird nicht ersetzt.</td>
+</tr>
+<tr>
+<td>Geschichte</td>
+<td>Eindeutige Momentaufnahme der aktuell sichtbaren Nachrichten</td>
+<td>Es werden nicht alle Bearbeitungen oder gelöschten Inhalte rekonstruiert.</td>
+</tr>
+<tr>
+<td>Erfassungsprozess</td>
+<td>Start/Stopp, Heartbeat, Fehler, Einstellungen, Umfang und Programmempfang</td>
+<td>Selbstauskunft, keine unabhängige Prozessbescheinigung</td>
+</tr>
+</tbody>
+</table></div>
+<p>Eine Handlung wird einer Person nur dann zugeordnet, wenn die Quelle diesen Akteur tatsächlich angibt.
+Andernfalls meldet die Benutzeroberfläche die fehlende Zuordnung. Benutzernamen und Namen sind
+beobachtete Attribute, kein Nachweis einer Identität in der realen Welt.</p>
+<h2 id="capacity-and-telegram-limits">Kapazität und Telegram-Beschränkungen<a class="anchor" href="#capacity-and-telegram-limits" aria-label="Link zu diesem Abschnitt">#</a></h2>
+<p>Es gibt keine allgemeingültige Anzahl von Chats, die mit garantierter Qualität überwacht werden können.
+Die Kapazität hängt von der Spitzenanzahl an Ereignissen pro Sekunde, dem Volumen und der Größe der Anhänge, zusätzlichen
+RPCs, aktiven Konten, Festplattenlatenz/freiem Speicherplatz, Netzwerkbedingungen, Telegram-Beschränkungen,
+akzeptabler Verzögerung und der Warteschlangentiefe ab.</p>
+<p>Telegram unterscheidet zwischen passiver Zustellung und aktivem Short-Polling. In der aktualisierten
+Dokumentation werden zusätzliche „<code>updates.getChannelDifference</code>“-Aufrufe für offene
+Kanäle/Supergruppen beschrieben und maximal <strong>zehn gleichzeitig per Short-Polling abgefragte
+Quellen</strong> empfohlen. Dies stellt weder eine Begrenzung auf zehn ausgewählte Gruppen noch eine Garantie für Vollständigkeit dar.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Modus</th>
+<th>Zweck</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Standardbeobachtung</td>
+<td>Erfassung der von ausgewählten Quellen übermittelten Aktualisierungen</td>
+<td>Umsgesetzt</td>
+</tr>
+<tr>
+<td>Vorrangige Beobachtung</td>
+<td>Zusätzliche Differenzprüfungen für eine begrenzte Quellenmenge</td>
+<td>Nicht als Benutzermodus implementiert</td>
+</tr>
+</tbody>
+</table></div>
+<p>Beliebige Abfragen mit hoher Frequenz, die „FloodWait“ ignorieren oder von einer linearen Kapazität
+durch zusätzliche Konten ausgehen, stellen kein gültiges Modell zur Dimensionierung dar. Die Standardgrenzen liegen bei den
+ersten 1.000 aufgelisteten Dialogen, bis zu 500 Nachrichten pro Verlaufs-Snapshot,
+1–2.000 MiB pro erfasster Datei je nach Typ sowie 4 GiB unkomprimierter, signierter ZIP-Inhalte; diese Werte
+können pro Arbeitsbereich unter <strong>„Parameter“</strong> angepasst werden. Exporte unterliegen keiner festen Obergrenze für die Anzahl der Ereignisse.
+Der Browser-Fallback ist standardmäßig auf 128 MiB begrenzt; die Streaming-CLI verfügt über ein konfigurierbares
+Übertragungslimit, standardmäßig 5 GiB.</p>
+<p><code>tools/check_capacity.py</code> misst die lokale Erfassung und den Export synthetischer Daten. Die Ergebnisse
+stellen keine Messungen der Telegram-Zustellung dar und garantieren keine tatsächliche Chat-Anzahl. Siehe
+<a href="../verification/">VERIFICATION.md</a> für die gemessene Version und die Arbeitslast.</p>
+<h2 id="reliability-and-recovery">Zuverlässigkeit und Wiederherstellung<a class="anchor" href="#reliability-and-recovery" aria-label="Link zu diesem Abschnitt">#</a></h2>
+<p>Zu den implementierten Funktionen gehören SQLite-WAL/synchrone Transaktionen; atomare
+Schreibvorgänge für Nachrichten und Medienaufträge; persistente Aufträge und Wiederholungsverzögerungen; Deskriptoren für Originalversionen;
+begrenzte Wiederholungsversuche; persistentes „FloodWait“ für Medien; Medien-Downloads außerhalb der
+Netzwerkwartezeit des Text-Ereignisses; Exporte mit stabilem Präfix, während spätere Schreibvorgänge fortgesetzt werden; atomare Einstellungen und
+Prüfprotokolle; Beibehaltung der gültigen Autorisierung nach fehlgeschlagener Ersatzanmeldung;
+Isolierung eines beschädigten zusätzlichen Arbeitsbereichs; explizite Wiederverbindungsversuche; eindeutige
+Meldung von Autorisierungsverlusten; sowie Erkennung von Änderungen der Wanduhrzeit mithilfe einer monotonen Uhr.</p>
+<p>Die PTS/QTS/SEQ-Werte von Konten und Kanälen werden gespeichert und nach einem Neustart wiederhergestellt, und die überwachten Chats
+werden regelmäßig erneut überprüft; siehe <a href="../evidence/#durable-collection-and-process-receipts-02">Beweisformat</a>. Das regelmäßige Speichern der Position
+stellt keine atomare, verlustfreie Bestätigung der Protokollakzeptanz dar.</p>
+<p>Zu Beginn jedes Vorgangs werden der vorherige Kopf und die Offline-Grenze aufgezeichnet. Der aktuelle Verlauf
+wird nicht zur Lückenbehebung herangezogen. Die Differenzspeicherung von Telegram ist begrenzt;
+<code>differenceTooLong</code> kann nicht alle verschwundenen Inhalte rekonstruieren. Unwiederherstellbare Lücken müssen
+ausdrücklich gekennzeichnet bleiben, selbst wenn ein späterer Verlaufs-Snapshot erfolgreich ist.</p>
+<h2 id="evidence-model">Beweismodell<a class="anchor" href="#evidence-model" aria-label="Link zu diesem Abschnitt">#</a></h2>
+<p>Jedes Ereignis erfasst eine Sequenz, die lokale Beobachtungszeit in UTC, die Quellzeit (sofern angegeben),
+die Art des Ereignisses, die Quelle, den Akteur (sofern angegeben), die ursprüngliche Nutzlast, den vorherigen Hashwert und die Signatur.
+Bei der Erfassung von Nachrichten werden zudem das Konto des Erfassers und der Ausführungskontext gespeichert.</p>
+<p>Der signierte Prozessbeleg enthält eine zufällige Lauf-ID; TgWitness/Python/OS/Abhängigkeitsversionen;
+SHA-256-Werte der Quelldateien und einen aggregierten Fingerabdruck; das ursprüngliche Konto,
+den Umfang und die Einstellungen; UTC-/monotone Messwerte; sowie den vorhergehenden Protokollkopf.
+Einstellungsänderungen, Start-/Stoppvorgänge und Fehler werden in dasselbe Protokoll eingetragen. Kontrollpunkte werden
+beim Start, alle fünf Minuten während der Überwachung (einstellbar) sowie bei ordnungsgemäßem Beenden gespeichert.
+Ein gespeicherter lokaler Kontrollpunkt kann ein Zurücksetzen auf ein früheres Protokollpräfix erkennen.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Funktionsweise</th>
+<th>Was damit erreicht wird</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Datei-SHA-256</td>
+<td>Die Bytes stimmen mit einem bekannten Digest überein</td>
+</tr>
+<tr>
+<td>Ereignis-Hash-Kette</td>
+<td>Aufzeichnung der Reihenfolge/Verknüpfung in Bezug auf eine bekannte Grenze</td>
+</tr>
+<tr>
+<td>Ed25519</td>
+<td>Signatur unter einem bestimmten Schlüssel</td>
+</tr>
+<tr>
+<td>Unabhängig gespeicherter Kontrollpunkt</td>
+<td>Der nachfolgende Text entspricht den beibehaltenen Grenzen.</td>
+</tr>
+<tr>
+<td>Analyse der Programmdatei</td>
+<td>Selbstbericht des Collectors über erfasste Dateien</td>
+</tr>
+<tr>
+<td>Gültige, unabhängige TSA-Antwort</td>
+<td>Vorhandensein bestimmter Bytes zum TSA-Zeitpunkt unter expliziten Vertrauensannahmen</td>
+</tr>
+</tbody>
+</table></div>
+<p>Die Vorbereitung von RFC-3161-Anfragen und die Überprüfung der Antworten mittels OpenSSL sind implementiert.
+Eine automatische Übermittlung ist nicht implementiert. Eine Anfrage oder eine lokale Signatur, die den
+Systemzeitstempel enthält, stellt keinen eigenständigen Zeitstempel dar. Siehe <a href="../timestamp/">TIMESTAMP.md</a>.</p>
+<p>Ein Betreiber, der den Collector und den Signaturschlüssel kontrolliert, kann neue signierte
+Beobachtungen fälschen. Die Signaturen belegen weder die Herkunft aus Telegram noch die Richtigkeit oder die automatische
+rechtliche Zulässigkeit. Eine strengere Aufbewahrungspflicht erfordert unabhängige Kontrollpunkte/Zeitspeicherung,
+Zugriffskontrollen für Schlüssel, Übertragungsprotokolle und die Überprüfung durch vertrauenswürdige Software.</p>
+<h2 id="export-deployment-and-handoff">Export, Bereitstellung und Übergabe<a class="anchor" href="#export-deployment-and-handoff" aria-label="Link zu diesem Abschnitt">#</a></h2>
+<p>Eine signierte ZIP-Datei enthält die Originaldateien im JSONL-, CSV- und HTML-Format sowie erhaltene Anhänge, Hashes, ein
+signiertes Manifest und ein praktisches Verifizierungswerkzeug. Sie umfasst einen Arbeitsbereich und ein festes, vollständiges
+Protokollpräfix. Suchfilter im Bedienfeld entfernen Datensätze nicht stillschweigend. Geheime Schlüssel,
+Token und Telegram-Sitzungen werden ausgeschlossen; die ursprünglichen Beobachtungen können dennoch
+personenbezogene Daten und Telegram-Metadaten enthalten.</p>
+<p>Speichern Sie den ZIP-Digest, den vertrauenswürdigen Fingerabdruck, den Checkpoint, die Prozessquittung und die Übergabe
+separat. Verwenden Sie ein Verifizierungsprogramm aus einer vertrauenswürdigen Installation, anstatt
+ausführbarem Code allein deshalb zu vertrauen, weil er in der untersuchten ZIP-Datei enthalten ist.</p>
+<p>Die Browser-Oberfläche wird lokal ohne Node.js, CDNs oder externe Schriftarten bereitgestellt. Ein
+Operator-Token steuert die Installation. Für den Fernzugriff sind HTTPS oder ein SSH-Tunnel erforderlich.
+Native Python- und Container-Definitionen werden bereitgestellt, zusammen mit Service-Beispielen im
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">Verzeichnis „deploy/“</a>; durchgeführte Plattformprüfungen sind separat aufgeführt.</p>
+<p>Der Standard-Arbeitsbereich verwendet das Datenstammverzeichnis; zusätzliche Arbeitsbereiche verwenden „<code>profiles/&lt;id&gt;/</code>“.
+Für die Datensicherung müssen der Prozess angehalten und der vollständige Daten-/Schlüsselsatz vorhanden sein. Die ZIP-Dateien mit den Beweismitteln sind
+keine Anwendungssicherungen. Für Geheimnisse kann ein externer Hauptschlüssel für ein neues Datenverzeichnis
+verwendet werden; die Verschlüsselung von Protokoll und Medien erfolgt über die Festplatte bzw. das Volume des Betreibers.
+Siehe <a href="../connection/">CONNECTION-SECURITY.md</a> und <a href="../operations/">OPERATIONS.md</a>.</p>
+<h2 id="stable-release-criteria">Kriterien für stabile Veröffentlichungen<a class="anchor" href="#stable-release-criteria" aria-label="Link zu diesem Abschnitt">#</a></h2>
+<p>Vor einer stabilen Veröffentlichung bitte folgenden Hinweis hinzufügen:</p>
+<ol>
+<li>Echte private Gruppen, Supergruppen, Foren und Kanäle mit Mitglieder-/Administratorrollen sowie
+    verborgenem/sichtbarem Verlauf, einschließlich Anmeldung/2FA, Widerruf und Zugriffsverlust.</li>
+<li>Kontrollierte Bearbeitungen, Löschungen, Reaktionen, Mitgliedschaften und Medien im Zusammenhang mit bekannten Handlungen.</li>
+<li>Prozess- oder Serverausfälle, Festplattenausfälle oder volle Festplatten, abgelaufene Dateiverweise, „FloodWait“,
+    Netzwerkausfall, beschädigte Dateien und Datenbank-Rollback.</li>
+<li>Dauerbetrieb mit mehreren Konten unter Berücksichtigung von Verzögerungen, Warteschlangen, Speicher- und Festplattenressourcen, einschließlich
+    sowohl ruhiger als auch aktiver Quellen.</li>
+<li>Unterbrechung zwischen dem Fortschreiten des MTProto-Status und der Annahme des Protokolls.</li>
+<li>Saubere Installation auf der vorgesehenen Betriebssystem-/Container-Matrix und verifizierte Wiederherstellung aus dem Backup.</li>
+<li>Unabhängige Überprüfung von Sicherheitsaspekten, Signaturen sowie Zuordnungs- und Beweisangaben.</li>
+</ol>
+<p>Das Abrufen von Admin-Protokollen, zusätzliche Reaktorlisten, priorisiertes Abrufen, separate Worker,
+anwendungsweite Verschlüsselung und Benutzerrollen sind noch für die Zukunft vorgesehen. Version 0.6 unterstützt
+das in <a href="../accounts/">ACCOUNTS.md</a> beschriebene, auf ein einzelnes Konto beschränkte TData sowie den Import von Kontodateien.
+Bitte lesen Sie vor der Veröffentlichung die Nutzungsbedingungen der Telegram-API durch. Referenzen zur Forschung und Erkenntnisse zur Plattform
+finden Sie in <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/RESEARCH.md">der Datei RESEARCH.md</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/PRODUCT.md">Diese Seite auf GitHub bearbeiten ↗</a><a class="next-guide" href="../how-it-works/"><span>Nächster Schritt</span><strong>So funktioniert das Beweismaterial →</strong></a><p>Diese Leitfäden beschreiben die aktuelle Implementierung. Validierungsergebnisse und verbleibende Lücken werden separat dokumentiert. <a href="../verification/">Was wurde getestet? →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Auf dieser Seite"><p class="nav-label">Auf dieser Seite</p><a href="#standalone-application">Eigenständige Anwendung</a><a href="#optional-extras">Optionale Zusatzfunktionen</a><a href="#protocol-and-private-sources">Protokoll und private Quellen</a><a href="#multiple-accounts">Mehrere Konten</a><a href="#capture-and-attribution">Erfassung und Zuordnung</a><a href="#capacity-and-telegram-limits">Kapazität und Telegram-Beschränkungen</a><a href="#reliability-and-recovery">Zuverlässigkeit und Wiederherstellung</a><a href="#evidence-model">Beweismodell</a><a href="#export-deployment-and-handoff">Export, Bereitstellung und Übergabe</a><a href="#stable-release-criteria">Kriterien für stabile Veröffentlichungen</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Open Source · Läuft auf Ihrem Rechner</span><a href="../../../../LICENSE">MIT-Lizenz</a><a href="../notice/">Hinweis für Betreiber</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Sicherheit</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Warten auf eine Nachricht", "Step through a fictional send, edit and delete.": "Verfolgen Sie Schritt für Schritt einen fiktiven Vorgang des Sendens, Bearbeitens und Löschens.", "No observations yet. Start the sequence or advance one event.": "Noch keine Beobachtungen. Starten Sie die Sequenz oder springen Sie zum nächsten Ereignis.", "Meet at 10:00": "Treffpunkt um 10:00 Uhr", "A new message is visible in the chat.": "Im Chat ist eine neue Nachricht zu sehen.", "Record 1 appended: the collector observed the original message.": "Eintrag 1 angehängt: Der Collector hat die ursprüngliche Nachricht erfasst.", "Meet at 11:00": "Treffpunkt um 11:00 Uhr", "The current text changes. The earlier observation stays.": "Der aktuelle Text ändert sich. Die frühere Feststellung bleibt bestehen.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Eintrag 2 angehängt: Die Bearbeitung stellt eine neue Beobachtung dar. Eintrag 1 enthält weiterhin den Originaltext.", "Message deleted": "Nachricht gelöscht", "The message has disappeared from the chat view.": "Die Nachricht ist aus der Chat-Ansicht verschwunden.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Aufzeichnung 3 angehängt: Die Löschmeldung wird zusammen mit beiden beobachteten Versionen beibehalten.", "0 records": "0 Einträge", "1 record": "1 Eintrag", "2 records": "2 Einträge", "3 records": "3 Einträge", "Complete / {n} of 3": "Vollständig / {n} von 3", "Step / {n} of 3": "Schritt / {n} von 3", "Pause": "Pause", "Replay sequence": "Wiedergabesequenz", "Play sequence": "Ablaufsequenz", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Ein statisches Beispiel steht zur Verfügung. Um Hashwerte interaktiv zu berechnen, öffnen Sie diese Seite über HTTPS oder eine Localhost-Vorschau mit Web-Crypto-Unterstützung.", "No record supplied": "Es wurde kein Eintrag bereitgestellt", "Tail removed": "Ende entfernt", "≠ saved hash": "≠ gespeicherter Hash", "Rebuilt · different hash": "Neu erstellt · anderer Hash", "= saved hash": "= gespeicherter Hash", "Same length and matching head.": "Gleiche Länge und passender Titel.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Alle drei berechneten Hashwerte stimmen mit den gespeicherten Hashwerten überein. Diese Stichprobe entspricht der festgelegten Grenze von drei Datensätzen.", "Same saved head; the journal prefix fails verification.": "Derselbe gespeicherte Header; das Protokollpräfix besteht die Überprüfung nicht.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Datensatz 2 stimmt nicht mehr mit seinem gespeicherten Hash überein. Würde nur der zuletzt gespeicherte Kopf überprüft werden, würde dies übersehen werden; der Prüfer überprüft jeden einzelnen Datensatz.", "Head differs from the retained checkpoint.": "Der Header weicht vom beibehaltenen Checkpoint ab.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Die neu berechneten Hashes sind miteinander verknüpft, doch der abschließende Header hat sich geändert. Der beibehaltene Checkpoint lehnt diesen Verlauf ab. Auch die ursprünglichen Signaturen würden bei geänderten Datensätzen fehlschlagen.", "Too short: 2 supplied records \u003c 3 retained records.": "Zu kurz: 2 bereitgestellte Datensätze \u003c 3 gespeicherte Datensätze.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Die beiden verbleibenden Hashes stimmen weiterhin überein. Der beibehaltene Checkpoint offenbart den fehlenden Endabschnitt. Ohne diese frühere Grenze würde dieses kürzere Präfix allein die Auslassung nicht aufdecken.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Die Hash-Berechnung ist in diesem Browser nicht verfügbar. Die Formeln und die statische Erläuterung unten stehen weiterhin zur Verfügung.", "{n} records": "{n} Einträge", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Akzeptiert: Die Zählung steigt, die Signatur wird verifiziert und der Schlüssel stimmt überein. Der Witness behält diese neue Grenze bei.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: Die signierte Antwort meldet weniger Datensätze als der zuletzt akzeptierte Checkpoint. Der Witness protokolliert das Problem und behält die zuvor akzeptierte Grenze bei.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: Die Zählung bleibt unverändert, der Head weicht jedoch ab. Der Witness protokolliert die Abweichung und behält die zuvor akzeptierte Grenze bei.", "No answer": "Keine Antwort", "boundary unknown": "Grenze unbekannt", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Keine Antwort: Der „Witness“ protokolliert die fehlgeschlagene Überprüfung. Er kann den aktuellen Status des „Collectors“ nicht feststellen. Sofern der „Witness“ weiterhin auf die Bot-API zugreifen kann und seine Veröffentlichungsrichtlinien dies zulassen, kann er diesen Fehler veröffentlichen.", "Send {n}": "{n} senden", "Edit {n}": "Bearbeiten {n}", "Delete {n}": "{n} löschen", "Both accounts captured all six expected observations in this example.": "Beide Konten haben in diesem Beispiel alle sechs erwarteten Beobachtungen erfasst.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Konto B hat weiterhin 6 von 6 erfasst. Bei zwei Belegen dauerte es länger. Die Erfassungsquote und die Verzögerung bei der Belegübermittlung geben Aufschluss über unterschiedliche Aspekte.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Konto B erfasste bis zum Stichtag 5 von 6 Ereignissen (83,3 %). Für die fehlende Bearbeitung wurde keine Verzögerung gemessen. Dieses Ergebnis bezieht sich ausschließlich auf die sechs kontrollierten Aktionen.", "not observed by cutoff": "nicht bis zum Stichtag beachtet", "{s} seconds": "{s} Sekunden", "Exact values follow in the table.": "Die genauen Werte sind der Tabelle zu entnehmen.", "{s} s": "{s} s", "Not observed": "Nicht beachtet", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Vier Chats liefern unterschiedliche Beobachtungen. Verfolgen Sie die Quelldatensätze für jede Verbindung; ordnen Sie den Kanalbeitrag nicht dem Nutzer 71001 zu, solange kein Absender angegeben ist.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Die Datensätze Nr. 146 und Nr. 205 weisen dieselbe Absender-ID auf, nämlich 71001. Dadurch lassen sich die beobachteten Beiträge eines Telegram-Kontos über zwei Chats hinweg miteinander verknüpfen. Dabei wird weder eine reale Person identifiziert noch der Kanalbeitrag einer bestimmten Person zugeordnet.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Die Ziel-pay.example.invalid/new taucht in Gruppeneintrag Nr. 146, Bot-Tastatureingabe Nr. 173, Kanalbearbeitung Nr. 188 und privater Nachricht Nr. 205 auf. Eine wiederkehrende Zieladresse verbindet das Material miteinander; sie beweist jedoch keine gemeinsame Kontrolle über diese Konten.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Die abgeschlossenen Medienbelege Nr. 151 und Nr. 209 weisen in diesem fiktiven Fall identische vollständige SHA-256-Werte auf. Vergleichen Sie die tatsächlichen Bytes und die zugehörigen Nachrichtenaufzeichnungen. Die übereinstimmende Datei gibt weder Aufschluss über ihren Ersteller noch belegt sie, wer sie weitergeleitet hat.", "the encrypted off-site copy": "die verschlüsselte externe Kopie", "notifications": "Benachrichtigungen", "checkpoint hashes for timestamps": "Checkpoint-Hashes für Zeitstempel", "signed checkpoints for the witness": "Signierte Kontrollpunkte für TgWitness", "Switched on in this example": "In diesem Beispiel aktiviert", "Optional · off by default": "Optional · standardmäßig deaktiviert", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Was auf diesem Gerät verbleibt: die Telegram-Verbindung und {list}. Sonst nichts.", "Default: only the Telegram connection leaves this machine.": "Standard: Nur die Telegram-Verbindung verlässt diesen Rechner.", "{done} of {total} done": "{done} von {total} erledigt", "Mark step {n} as done": "Schritt {n} als erledigt markieren", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Kopie", "Copied": "Kopiert", "Command copied.": "Befehl kopiert.", "Selected — Ctrl/Cmd+C": "Ausgewählt – Strg/Cmd+C", "Command selected. Copy it manually.": "Befehl ausgewählt. Bitte kopieren Sie ihn manuell.", "Command copied to clipboard.": "Befehl in die Zwischenablage kopiert.", "Select text": "Text auswählen", "Clipboard unavailable. Command selected; copy it manually.": "Zwischenablage nicht verfügbar. Befehl ausgewählt; bitte manuell kopieren.", "A message arrives. The first observation is saved.": "Eine Nachricht geht ein. Die erste Beobachtung wird gespeichert.", "The time changes. Both captured versions stay.": "Die Zeitangaben ändern sich. Beide erfassten Versionen bleiben erhalten.", "The message disappears. The captured history remains.": "Die Nachricht verschwindet. Der aufgezeichnete Verlauf bleibt erhalten.", "Pause example animation": "Beispielanimation anhalten", "Play example animation": "Beispielanimation abspielen", "Play": "Abspielen", "Full-size workspace screenshot": "Screenshot des Arbeitsbereichs in voller Größe", "Workspace screenshot · fictional data": "Screenshot des Arbeitsbereichs · fiktive Daten", "Close": "Schließen", "Close screenshot": "Screenshot schließen", "Scrollable full-size screenshot": "Scrollbarer Screenshot in voller Größe", "Enlarge: {name}": "Vergrößern: {name}", "View full size": "In voller Größe anzeigen"}</script>
+</body></html>

@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="bn" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>সংযোগ, প্রক্সি এবং ডেটা সুরক্ষা | TgWitness</title>
+<meta name="description" content="API পেয়ার, সাইন-ইন পদ্ধতি, SOCKS5, HTTP এবং MTProxy রুট, পাবলিক প্রক্সি তালিকা এবং প্রতিটি রুট কী সুরক্ষা প্রদান করে।"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/connection/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="bn_BD">
+<meta property="og:title" content="সংযোগ, প্রক্সি এবং ডেটা সুরক্ষা | TgWitness"><meta property="og:description" content="API পেয়ার, সাইন-ইন পদ্ধতি, SOCKS5, HTTP এবং MTProxy রুট, পাবলিক প্রক্সি তালিকা এবং প্রতিটি রুট কী সুরক্ষা প্রদান করে।">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/bn/docs/reference/connection/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/connection/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/connection/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/connection/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/connection/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/connection/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/connection/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/connection/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/connection/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/connection/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/connection/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/connection/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/connection/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/connection/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/connection/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/connection/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/bn/docs/reference/connection/", "url": "https://phishdestroy.github.io/TgWitness/bn/docs/reference/connection/", "name": "সংযোগ, প্রক্সি এবং ডেটা সুরক্ষা | TgWitness", "description": "API পেয়ার, সাইন-ইন পদ্ধতি, SOCKS5, HTTP এবং MTProxy রুট, পাবলিক প্রক্সি তালিকা এবং প্রতিটি রুট কী সুরক্ষা প্রদান করে।", "inLanguage": "bn", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "হোম", "item": "https://phishdestroy.github.io/TgWitness/bn/"}, {"@type": "ListItem", "position": 2, "name": "ডকুমেন্টেশন", "item": "https://phishdestroy.github.io/TgWitness/bn/docs/"}, {"@type": "ListItem", "position": 3, "name": "তথ্যসূত্র", "item": "https://phishdestroy.github.io/TgWitness/bn/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "সংযোগ, প্রক্সি এবং ডেটা সুরক্ষা", "item": "https://phishdestroy.github.io/TgWitness/bn/docs/reference/connection/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">বিষয়ে সরাসরি যান</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / ডকুমেন্টেশন</span></a>
+<nav aria-label="গাইডসমূহ"><a href="../../concepts/">দৃশ্যমান গাইড</a><a href="../../">সমস্ত গাইড</a><a href="../">তথ্যসূত্র</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="ভাষা"><span aria-hidden="true">◍</span> বাংলা</summary><div class="lang-list"><a href="../../../../docs/reference/connection/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/connection/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/connection/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/connection/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/connection/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/connection/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/connection/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/connection/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/connection/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/connection/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/connection/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/connection/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/connection/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/connection/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/connection/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/connection/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/connection/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/connection/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/connection/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/connection/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/connection/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/connection/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/connection/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/connection/" hreflang="he" lang="he">עברית</a><a href="./" hreflang="bn" lang="bn" aria-current="true">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="হালকা ও গাঢ় থিমের মধ্যে পরিবর্তন করুন"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="গাইডসমূহ"><a href="../../../guides/modes.html">মোড, পরিস্থিতি এবং প্রমাণ স্তর</a><p class="nav-label">প্রাথমিক পদক্ষেপ</p><a href="../../start/">মিনিটখানেকের মধ্যে শুরু করুন</a><a href="../../accounts/">একটি অ্যাকাউন্ট সংযুক্ত করুন</a><a href="../../proxies/">একটি প্রক্সি নির্বাচন করুন</a><a href="../../exports/">রপ্তানি এবং যাচাই করুন</a><p class="nav-label">প্রমাণ বোঝা</p><a href="../../concepts/">প্রমাণ কীভাবে কাজ করে দেখুন</a><a href="../../cases/">সমস্ত চ্যাট জুড়ে তদন্ত করুন</a><a href="../../security/">এটি নিরাপদ রাখুন</a><p class="nav-label">আরও এগিয়ে যান</p><a href="../../witness/">একটি উইটনেস বট সেট আপ করুন</a><a href="../../server/">এটি চালু রাখুন</a><a href="../../troubleshooting/">কি ভুল হয়েছে তা খুঁজে বের করুন</a></nav><nav class="wiki-nav" aria-label="তথ্যসূত্র"><p class="nav-label"><a class="nav-label-link" href="../">তথ্যসূত্র</a></p><details class="wiki-group" open><summary>সেটআপ</summary><a href="../quickstart/">দ্রুত শুরু</a><a href="../accounts/">অ্যাকাউন্ট এবং সেশন ফরম্যাটসমূহ</a><a href="./" aria-current="page">সংযোগ, প্রক্সি এবং ডেটা সুরক্ষা</a><a href="../deployment/">নিয়োগ</a></details><details class="wiki-group"><summary>সংগ্রহ করুন</summary><a href="../collection/">সংগ্রহ কীভাবে কাজ করে</a><a href="../operations/">ওয়ার্কফ্লো এবং অপারেশনসমূহ</a><a href="../investigation/">তদন্ত মোড</a><a href="../features/">বৈশিষ্ট্য এবং সীমাবদ্ধতা</a></details><details class="wiki-group"><summary>প্রমাণ</summary><a href="../how-it-works/">প্রমাণ কীভাবে কাজ করে</a><a href="../evidence/">প্রমাণের ফর্ম্যাট</a><a href="../witness/">স্বতন্ত্র সাক্ষী</a><a href="../timestamp/">টাইমস্ট্যাম্পস</a></details><details class="wiki-group"><summary>নিরাপত্তা ও প্রকল্প</summary><a href="../security/">নিরাপত্তা এবং ডেটা হ্যান্ডলিং</a><a href="../architecture/">আর্কিটেকচার</a><a href="../verification/">কি পরীক্ষা করা হয়েছে</a><a href="../license/">লাইসেন্স এবং স্থাপত্যগত অসামঞ্জস্যতার বিজ্ঞপ্তি</a><a href="../notice/">অপারেটর অসামঞ্জস্যতার বিজ্ঞপ্তি</a><a href="../changelog/">পরিবর্তনলগ</a></details></nav><p class="sidebar-note">v0.7.0<br>ওপেন সোর্স · আপনার মেশিনে চলে</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="গাইডসমূহ"><a href="../../../">হোম</a> <span aria-hidden="true">/</span> <a href="../../">ডকুমেন্টেশন</a> <span aria-hidden="true">/</span> <a href="../">তথ্যসূত্র</a> <span aria-hidden="true">/</span> <span aria-current="page">সংযোগ, প্রক্সি এবং ডেটা সুরক্ষা</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">ডকুমেন্টেশন অনুসন্ধান করুন</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="প্রক্সি, হ্যাশ চেইন, টোকেন বা উইটনেস চেষ্টা করুন…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="স্পষ্ট অনুসন্ধান" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">গাইড এবং রেফারেন্স অনুসন্ধান করতে একটি শব্দ টাইপ করুন। অনুসন্ধান আপনার ব্রাউজারেই থাকবে।</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">তথ্যসূত্র / সেটআপ</p><h1>সংযোগ, প্রক্সি এবং ডেটা সুরক্ষা</h1><p class="guide-outcome">API পেয়ার, সাইন-ইন পদ্ধতি, SOCKS5, HTTP এবং MTProxy রুট, পাবলিক প্রক্সি তালিকা এবং প্রতিটি রুট কী সুরক্ষা প্রদান করে।</p><div class="wiki-body"><p>এই নথিটি TgWitness 0.7.0 এর কার্যপ্রণালী এবং এর সীমাবদ্ধতা বর্ণনা করে। প্রমাণীকরণ, উৎস অ্যাক্সেস, নেটওয়ার্ক সংযোগ এবং ক্যাপচার পরিপূর্ণতা পৃথক অবস্থা। সাইন-ইন ধাপ, ফাইল ফরম্যাট এবং একাধিক অ্যাকাউন্টের জন্য,
+<a href="../accounts/">অ্যাকাউন্ট এবং সেশন ফরম্যাট</a> দিয়ে শুরু করুন। ইভেন্ট নীতি এবং পুনরায় শুরু করার কার্যপ্রণালীর জন্য, <a href="../collection/">সংগ্রহ কীভাবে কাজ করে তা</a> দেখুন।</p>
+<h2 id="authentication-methods">প্রমাণীকরণ পদ্ধতি<a class="anchor" href="#authentication-methods" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
+<p><strong>API আইডি এবং API হ্যাশ একটি অ্যাপ্লিকেশন সনাক্ত করে; এগুলো অ্যাকাউন্ট লগিনের বিকল্প নয়।</strong>
+
+TgWitness-এ এগুলো ঐচ্ছিক। অগ্রাধিকার: ফর্মে প্রবেশ করানো একটি জোড়া, তারপর আমদানি করা অ্যাকাউন্ট JSON থেকে একটি, তারপর ওয়ার্কস্পেসে সংরক্ষিত জোড়া, তারপর 50-এর বিল্ট-ইন পুল
+public জোড়া, টেলিগ্রাম একটি প্রত্যাখ্যান করলে এলোমেলো ক্রমে চেষ্টা করা হয় এবং স্বয়ংক্রিয়ভাবে রোটেশন করা হয়। শুধুমাত্র টেলিগ্রাম ডেস্কটপ জোড়া (২০৪০) একটি মিলিত টেলিগ্রাম ডেস্কটপ ক্লায়েন্ট বিবরণ সহ পাঠানো হয়। <a href="https://my.telegram.org">my.telegram.org</a>
+-এ API ডেভেলপমেন্ট টুলস থেকে আপনার নিজস্ব জোড়া আপনার সমস্ত অ্যাকাউন্টের সাথে ব্যবহার করা যেতে পারে; প্রতিটি অ্যাকাউন্টের নিজস্ব অনুমোদন থাকে।</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>পদ্ধতি</th>
+<th>প্রয়োজনীয়তা</th>
+<th>টিজিউইটনেস সাপোর্ট</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ফোন, কোড, ঐচ্ছিক 2FA</td>
+<td>অ্যাকাউন্ট অ্যাক্সেস; API জোড়া ঐচ্ছিক</td>
+<td>প্যানেল লগইন</td>
+</tr>
+<tr>
+<td>অথর কী হেক্স + DC আইডি</td>
+<td>পূর্ণ ৫১২-অক্ষরের কী এবং DC ১–৫</td>
+<td>ডাইরেক্ট <strong>অথ কী</strong> ট্যাব; অনুমোদন সংরক্ষণের আগে ঐচ্ছিক ব্যবহারকারী আইডি যাচাই করা হয়</td>
+</tr>
+<tr>
+<td>টেলিথন স্ট্রিংসেশন</td>
+<td>একটি বৈধ সেশন স্ট্রিং</td>
+<td>প্যানেল লগইন</td>
+</tr>
+<tr>
+<td>টেলিথন SQLite <code>.session</code></td>
+<td>বন্ধ, সামঞ্জস্যপূর্ণ অনুলিপি</td>
+<td>স্কিমা ৭/৮-এর সরাসরি প্যানেল আমদানি; ঐচ্ছিক অফলাইন CLI</td>
+</tr>
+<tr>
+<td>পাইরোগ্রাম এসকিউএলআইটি <code>.session</code></td>
+<td>বন্ধ উৎপাদন ব্যবহারকারী সেশন</td>
+<td>স্কিমা ২/৩-এর প্যানেল থেকে সরাসরি আমদানি</td>
+</tr>
+<tr>
+<td>টেলিগ্রাম ডেস্কটপ TData ZIP</td>
+<td>একটি আধুনিক অ্যাকাউন্ট; সুরক্ষিত থাকলে স্থানীয় পাসকোড</td>
+<td>চেকসাম/ডিক্রিপশন যাচাইসহ ইন-মেমোরি রূপান্তর</td>
+</tr>
+<tr>
+<td>অ্যাকাউন্ট JSON</td>
+<td>সমর্থিত API/সেশন/কী ক্ষেত্রসমূহ</td>
+<td>শুধুমাত্র মেটাডেটা API ক্রেডেনশিয়াল পূরণ করে; সেশন/কী বা ফোন/QR লগইন এখনও প্রয়োজন।</td>
+</tr>
+<tr>
+<td>কিউআর লগইন</td>
+<td>অনুমোদিত টেলিগ্রাম অ্যাপ থেকে নিশ্চিতকরণ</td>
+<td>স্থানীয় QR জেনারেট, মেয়াদোত্তীর্ণ/পুনরায় চেষ্টা, ঐচ্ছিক 2FA</td>
+</tr>
+<tr>
+<td>টিডিএলিব / পাইরোগ্রাম স্ট্রিংসেশন</td>
+<td>অন্যান্য গ্রন্থাগার-নির্দিষ্ট ফরম্যাট</td>
+<td>সমর্থনবিহীন</td>
+</tr>
+<tr>
+<td>বট টোকেন</td>
+<td>নিজের অ্যাক্সেস/আপডেট মডেল সহ একটি বট</td>
+<td>এই সংগ্রাহক দ্বারা ব্যবহৃত হয়নি</td>
+</tr>
+</tbody>
+</table></div>
+<p>টেলিগ্রাম কোড ডেলিভারি বেছে নেয়; SMS নিশ্চিত নয়। একটি API হ্যাশ বাতিলকৃত সেশন ঠিক করতে বা ভুলে যাওয়া 2FA পাসওয়ার্ড প্রতিস্থাপন করতে পারে না। TgWitness লগইন কোড বা টেলিগ্রাম 2FA পাসওয়ার্ড ডিস্কে সংরক্ষণ করে না।</p>
+<p>ব্যক্তিগত উৎসের জন্য, অ্যাকাউন্টে ইতিমধ্যেই অ্যাক্সেস থাকতে হবে। গ্রুপ ব্যবহারকারীর নাম অপ্রয়োজনীয়। প্রক্সি বা সেশন আমদানি সদস্যপদ বা প্রশাসক অধিকার প্রদান করে না। বর্তমান সদস্যপদ পূর্ব-যোগদানের ইতিহাসে অ্যাক্সেসের নিশ্চয়তা দেয় না।</p>
+<h2 id="import-a-telethon-session-file">টেলিথন সেশন ফাইল আমদানি করুন<a class="anchor" href="#import-a-telethon-session-file" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
+<p>Telethon SQLite, Pyrogram SQLite, এবং Telegram Desktop TData বিভিন্ন ফরম্যাট ব্যবহার করে।
+প্যানেল সমর্থিত কাঠামোগুলো সনাক্ত ও রূপান্তর করে; ফাইলের নাম পরিবর্তন করা রূপান্তর নয়। <strong>Files-এর</strong> অধীনে একটি সেশন এবং এর সঙ্গী JSON নির্বাচন করুন, তারপর <strong>Connect account</strong> চাপুন। সর্বোচ্চ চারটি মিলিত ফাইল এবং মোট ৮ MiB গ্রহণ করা হয়। TData/JSON-এর বিবরণের জন্য <a href="../accounts/">ফরম্যাট সীমা</a> দেখুন।
+পাসকোড পুনরুদ্ধারের কোনো ব্যবস্থা নেই। ফোন/2FA বা QR লগইন একটি পৃথক অনুমোদন তৈরি করে।</p>
+<p>ঐচ্ছিক শুধুমাত্র টেলিথনের কমান্ড-লাইন পথটি এখনও উপলব্ধ রয়েছে:</p>
+<ol>
+<li>মূল সেশন ব্যবহার করে ক্লায়েন্টটি বন্ধ করুন এবং একটি সামঞ্জস্যপূর্ণ কপি তৈরি করুন। কনভার্টার অসম্পূর্ণ WAL/জার্নালযুক্ত ফাইলগুলো প্রত্যাখ্যান করে। চেক এড়ানোর জন্য সেই ফাইলগুলো মুছে ফেলার পরিবর্তে মূল ক্লায়েন্টটি সঠিকভাবে বন্ধ করুন।</li>
+<li>TgWitness পরিবেশ থেকে চালান:</li>
+</ol>
+<pre><code class="language-sh">python -m tgwitness.sessions account.session --out account.tgwitness-session</code></pre>
+<ol start="3">
+<li><strong>অ্যাকাউন্ট যোগ করুন → ফাইলস</strong>-এ, ফলাফল লোড করুন অথবা এর স্ট্রিং পেস্ট করুন, এবং চালিয়ে যান।</li>
+<li>প্রদর্শিত সংখ্যাত্মক অ্যাকাউন্ট আইডি পরীক্ষা করুন, উৎসগুলো নির্বাচন করুন এবং পর্যবেক্ষণ শুরু করুন।</li>
+</ol>
+<p>রূপান্তরকারী SQLite শুধুমাত্র-পঠন (read-only) মোডে খোলে, কোনো স্কিমা আপগ্রেড বা নেটওয়ার্ক অনুরোধ করে না, এবং সেশন প্রিন্ট করে না। এটি স্কিমা সংস্করণ, টেবিল ধরন, একটি একক সেশন সারি, IP/পোর্ট/DC এবং কী দৈর্ঘ্য পরীক্ষা করে। CLI ইনপুট 64 MiB পর্যন্ত সীমাবদ্ধ; StringSession টেক্সট 4 KiB পর্যন্ত সীমাবদ্ধ। প্যানেল রূপান্তর প্রমাণীকৃত TgWitness সার্ভারে ফাইল আপলোড করে, সেগুলো মেমরিতে প্রক্রিয়া করে, এবং আপলোডকৃত মূল ফাইলগুলো সংরক্ষণ না করে সেই ব্রাউজারে মানসম্মত শংসাপত্র ফেরত পাঠায়। দূরবর্তী সার্ভারের জন্য HTTPS ব্যবহার করুন।</p>
+<p><strong>রূপান্তরিত ফাইলটি একটি এনক্রিপ্ট না করা অ্যাকাউন্ট-অ্যাক্সেস গোপনীয়তা।</strong> এটি সুরক্ষিত স্টোরেজে রাখুন এবং কখনই কমিট করবেন না বা কোনো তৃতীয় পক্ষের রূপান্তর সেবার কাছে পাঠাবেন না। TgWitness অনুমোদিত সেশনটি তার এনক্রিপ্টেড ভল্টে সংরক্ষণ করে। একটি সেশন কপি করলে আলাদা কোনো অনুমোদন তৈরি হয় না: ক্লোন করা auth কী ব্যবহার করে সমান্তরাল ক্লায়েন্ট চালাবেন না এবং স্বতন্ত্র আপডেট ডেলিভারি ধরে নেবেন না।</p>
+<p>রূপান্তর অনুমোদন স্থানান্তর করে, মূল বার্তাগুলো নয়, এন্টিটি ক্যাশ বা একটি টেকসই আপডেট কার্সর। এটি প্রক্রিয়া পুনঃশুরুতে আপডেট পুনরুদ্ধার ঠিক করে না।</p>
+<h2 id="mtproto-telethon-and-proxies">এমটিপ্রোটো, টেলিথন এবং প্রক্সি<a class="anchor" href="#mtproto-telethon-and-proxies" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
+<p>MTProto হল টেলিগ্রামের প্রোটোকল। Telethon হল Python ক্লায়েন্ট লাইব্রেরি যা TgWitness ব্যবহার করে।
+MTProxy হল একটি টেলিগ্রাম পরিবহন প্রক্সি; SOCKS5 এবং HTTP CONNECT সাধারণ টানেল প্রদান করে।
+কোনোটাই অ্যাকাউন্ট প্রামাণীকরণের বিকল্প নয়।</p>
+<p>প্রক্সি প্রয়োজন হলে <strong>Account → Settings → Connection settings → Change connection route</strong>-এ সাইন ইন করার আগে প্রতিটি ওয়ার্কস্পেসের জন্য রুট সংরক্ষণ করুন। ডিফল্ট হল Direct।</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>রুট</th>
+<th>সেটিংস</th>
+<th>সীমা</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>সরাসরি</td>
+<td>কোনও নেই</td>
+<td>টেলিথন সরাসরি টেলিগ্রামের সাথে সংযুক্ত করে।</td>
+</tr>
+<tr>
+<td>সক্স৫</td>
+<td>হোস্ট, পোর্ট, ঐচ্ছিক ব্যবহারকারীর নাম/पासওয়ার্ড</td>
+<td>পাইথন-সক্স ২.৮.২, rdns সক্ষম</td>
+</tr>
+<tr>
+<td>এইচটিটিপি কানেক্ট</td>
+<td>হোস্ট, পোর্ট, ঐচ্ছিক ব্যবহারকারীর নাম/पासওয়ার্ড</td>
+<td>সরল HTTP CONNECT; প্রক্সি নিজে TLS বাস্তবায়ন করা হয়নি।</td>
+</tr>
+<tr>
+<td>এমটিপ্রক্সি</td>
+<td>হোস্ট, পোর্ট, গোপন</td>
+<td>পরীক্ষামূলক টেলিথন পরিবহন; ৩২টি হেক্সাডিসিমাল সংখ্যা বা <code>dd</code> + ৩২টি হেক্সাডিসিমাল সংখ্যা</td>
+</tr>
+</tbody>
+</table></div>
+<p>Fake TLS <code>ee</code> সিক্রেটগুলো প্রত্যাখ্যাত। Telethon 1.45-এর নরমালাইজেশন প্রিফিক্স এবং ডোমেইন সরিয়ে দিতে পারে, কিন্তু এতে Fake TLS বাস্তবায়িত হয় না। <code>tg://proxy?server=…&amp;port=…&amp;secret=…</code> বা <code>https://t.me/proxy?server=…&amp;port=…&amp;secret=…</code> পেস্ট করুন এবং <strong>লিঙ্ক থেকে ফিল ফিল্ডস</strong> নির্বাচন করুন।
+এটি সংযোগ বা সংরক্ষণ না করেই ক্ষেত্রগুলো যাচাই ও পূরণ করে; রুটটি আলাদাভাবে পর্যালোচনা ও সংরক্ষণ করুন। ম্যানুয়াল ক্ষেত্রগুলোও উপলব্ধ থাকবে। <a href="https://core.telegram.org/api/links#proxy-links">টেলিগ্রাম প্রক্সি লিঙ্কগুলো</a> দেখুন।</p>
+<h3 id="public-proxies-supplied-by-your-installation">আপনার ইনস্টলেশন দ্বারা সরবরাহিত পাবলিক প্রক্সি<a class="anchor" href="#public-proxies-supplied-by-your-installation" aria-label="এই বিভাগের লিঙ্ক">#</a></h3>
+<p>সংযোগ সেটিংসে
+<a href="https://github.com/SoliSpirit/mtproto">SoliSpirit/mtproto</a> এবং <a href="https://github.com/zakky8/mtproto-proxy-pro">zakky8/mtproto-proxy-pro থেকে</a> একটি প্রস্তুত-প্রস্তাবিত পাবলিক তালিকা অন্তর্ভুক্ত রয়েছে। বান্ডিলকৃত স্ন্যাপশটে পাবলিক এন্ডপয়েন্টের তথ্য, উত্সের স্বীকৃতি এবং ডাউনলোড তারিখ রয়েছে, তবে কোনো প্রকল্পের যাচাইকরণের দাবি নেই। এটি স্টার্টআপে কিছুই আনলোড না করেই কাজ করে। একটি এন্ট্রি নির্বাচন করুন, রুটটি সংরক্ষণ করুন, তারপর সাইন ইন করার আগে টেলিগ্রাম সংযোগ পরীক্ষা করুন।</p>
+<p><strong>আপডেট পাবলিক লিস্ট</strong> অনুরোধের ভিত্তিতে দুটি স্থায়ী HTTPS ফিড আনে। প্রতিটি প্রতিক্রিয়া 1 MiB এবং 20 সেকেন্ডে সীমাবদ্ধ; পুনঃনির্দেশনা প্রত্যাখ্যাত। প্রতি উত্স থেকে সর্বোচ্চ ৬৪টি সামঞ্জস্যপূর্ণ এন্ট্রি রাখা হয়, উত্সগুলির মধ্যে ডুপ্লিকেট অপসারণ করে। অসিদ্ধ লিঙ্ক, ব্যক্তিগত/সংরক্ষিত আইপি লিটারাল, স্থানীয় হোস্টনাম এবং অ-সমর্থিত Fake TLS <code>ee</code> এন্ট্রিগুলো বাদ দেওয়া হয়। নির্বাচনের সময় পাবলিক হোস্টনেমগুলো রিসলভ করা হয়; প্রতিটি উত্তর অবশ্যই বিশ্বব্যাপী রাউটেবল হতে হবে এবং নির্বাচিত আইপিটি সংরক্ষিত রুটে পিন করা হয়। এটি ফিড হোস্টনেমকে পরে সংরক্ষিত সংযোগটি ব্যক্তিগত ঠিকানায় পুনঃনির্দেশ করা থেকে বাধা দেয়। কোনো এন্ট্রি পুনরায় প্রয়োগ করুন তা আবার রিসলভ করার জন্য।</p>
+<p>প্রতিটি ওয়ার্কস্পেস তার শেষ সফল সোর্স স্ন্যাপশটগুলো <code>public-proxies.json</code>-এ ধরে রাখে। ব্যর্থ, খালি বা অসামঞ্জস্যপূর্ণ সোর্স প্রতিক্রিয়াগুলো সেই সোর্সের পূর্ববর্তী এন্ট্রি এবং টাইমস্ট্যাম্প সংরক্ষণ করে।
+আপডেটগুলো অ্যাটমিক, সিরিয়ালেজড এবং প্রতিটি ওয়ার্কস্পেসের জন্য প্রতি মিনিটে একবারের চেষ্টায় সীমাবদ্ধ।
+তালিকা আপডেট করা বা দেখা—কোনোটাই নির্বাচিত রুট পরিবর্তন করে না। উপলব্ধতা নিশ্চিত করতে এখনও একটি ট্রান্সপোর্ট পরীক্ষা প্রয়োজন; একটি প্রদানকারীর তালিকাভুক্তি সম্পূর্ণ টেলিগ্রাম ডেলিভারির প্রমাণ নয়।</p>
+<p>লিস্ট ডাউনলোডগুলি একটি পৃথক HTTPS সংযোগ ব্যবহার করে, ডিফল্টভাবে সরাসরি। এই অনুরোধগুলিকে একটি ডাউনলোড প্রক্সির মাধ্যমে রাউট করার জন্য
+<code>TGWITNESS_PROXY_FEED_PROXY</code>-কে একটি HTTP/SOCKS5 URL-এ সেট করুন; উভয় collector Compose ভেরিয়েন্টই এটিকে ফরওয়ার্ড করে। প্রোভাইডারদের কাছে কোনো টেলিগ্রাম সেশন, API ক্রেডেনশিয়াল, প্যানেল টোকেন বা বট টোকেন পাঠানো হয় না। ওয়ার্কস্পেসের MTProxy এই HTTP ডাউনলোডগুলো পরিচালনা করতে পারে না। প্রোভাইডারদের নাম, সংরক্ষিত তারিখ এবং ডাউনলোড রুট <strong>&#x27;তালিকাটি কোথা থেকে আসে</strong>&#x27; বিভাগে প্রকাশ করা হয়েছে।</p>
+<p>পাবলিক তালিকা আপনার নিজস্ব অপারেটর ক্যাটালগ দিয়ে প্রতিস্থাপন করতে, নিচের ওভাররাইড কনফিগার করুন।
+এটি বাহ্যিক সাবস্ক্রিপশন সম্পূর্ণরূপে নিষ্ক্রিয় করে, এমনকি যখন এর <code>proxies</code> অ্যারে খালি থাকে তখনও।</p>
+<p><a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/proxies.config.example">খালি ক্যাটালগটি</a>
+<code>proxy-config/proxies.json</code>
+-এ কপি করুন এবং আপনার স্থাপিত পাবলিক এন্ডপয়েন্টগুলো যোগ করুন:</p>
+<pre><code class="language-json">{&quot;format&quot;: &quot;tgwitness-proxy-catalog-v1&quot;, &quot;proxies&quot;: [
+  {&quot;id&quot;: &quot;project-eu&quot;, &quot;label&quot;: &quot;Project EU&quot;,
+   &quot;link&quot;: &quot;tg://proxy?server=REPLACE_HOST&amp;port=443&amp;secret=REPLACE_SECRET&quot;}
+]}</code></pre>
+<p>উদাহরণ মানগুলো প্রতিস্থাপন করতে হবে। সর্বোচ্চ ৩২টি স্বতন্ত্র এন্ট্রি গ্রহণ করা হয়।
+প্রমাণিত তালিকাটি শেয়ার্ড সিক্রেট ছাড়া লেবেল/হোস্ট/পোর্ট ফেরত দেয়; একটি নির্বাচন করলে
+তার ক্রেডেনশিয়াল ওয়ার্কস্পেস ভল্টে সংরক্ষিত হয়। স্পষ্ট পরিবহন পরীক্ষার আগ পর্যন্ত
+উপলব্ধতা পরীক্ষিত হয়নি। একটি ভুল ফরম্যাটের ক্যাটালগ ম্যানুয়াল কনফিগারেশন প্রয়োজন করে।</p>
+<p>নেটিভ লঞ্চ: স্থানীয় JSON পাথে <code>TGWITNESS_PROXY_CATALOG</code> সেট করুন। ডকার:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.proxies.yaml up -d --build</code></pre>
+<p>ওভারলে মাউন্ট <code>proxy-config</code> শুধুমাত্র পড়ার জন্য; ফাইলগুলো কন্টেইনার UID 10001 দ্বারা পড়ার যোগ্য হতে হবে।
+এই ডিরেক্টরি Git, Docker বিল্ড প্রসঙ্গ এবং সোর্স আর্কাইভ থেকে বাদ দেওয়া হয়েছে। এই
+ক্যাটালগ সংগ্রহকারী অ্যাকাউন্টগুলো কনফিগার করে; <a href="../witness/">উইটনেস বট</a> তার নিজস্ব
+HTTP/SOCKS5 রুট ব্যবহার করে, MTProxy নয়।</p>
+<p>যদি প্রক্সি ব্যর্থ হয়, TgWitness Direct-এ ফিরে যায় না। রুট পরিবর্তন করার আগে পর্যবেক্ষণ বিরতি দিন। সেভ করা রুট পুরনো ক্লায়েন্টদের বিচ্ছিন্ন করে এবং অসম্পূর্ণ লগইন বাতিল করে; একটি নতুন ক্লায়েন্ট সেভ করা রুট ব্যবহার করে। অ্যাকাউন্টের জার্নাল/সেশন বাইন্ডিং অক্ষুণ্ণ থাকে। সেটিংস পূর্ববর্তী রুট প্রতিস্থাপন করে: এটি সম্পাদনা করার সময় প্রক্সি ক্রেডেনশিয়াল পুনরায় প্রবেশ করান।</p>
+<p><code>network.enc</code>-এ ক্রেডেনশিয়ালগুলো এনক্রিপ্ট করা হয়। API ব্যবহারকারীর নাম, পাসওয়ার্ড বা সিক্রেট ফেরত দেয় না। স্বাক্ষরিত রেকর্ডগুলোতে রুট টাইপ এবং ক্রেডেনশিয়াল উপস্থিত আছে কিনা তা থাকে, এন্ডপয়েন্ট এবং সিক্রেটগুলো বাদ দিয়ে। অপারেটর প্যানেলে এন্ডপয়েন্ট দেখতে পারে। সিক্রেট ফিল্ডগুলো সেভ, লক বা ওয়ার্কস্পেস পরিবর্তনের পর পরিষ্কার হয়ে যায়।</p>
+<p><strong>টেলিগ্রাম সংযোগ পরীক্ষা</strong>, লগইন করার আগেও উপলব্ধ, একটি অস্থায়ী অননুমোদিত টেলিগ্রাম সংযোগ পথের মাধ্যমে খোলে এবং বন্ধ করে। এটি কোনো আইপি-চেক ওয়েবসাইটের সাথে যোগাযোগ করে না। সফল হলে এটি পরিবহন সংযোগ স্থাপন করে, গ্রুপে প্রবেশাধিকার, সম্পূর্ণ ডেলিভারি বা অজ্ঞাতনামা নিশ্চিত করে না।</p>
+<p>প্রক্সি টেলিগ্রাম ক্লায়েন্টের সংযোগগুলিতে প্রযোজ্য, যার মধ্যে টেলিগ্রাম DC মিডিয়া ডাউনলোডও রয়েছে। ব্রাউজার, pip, SSH এবং ম্যানুয়ালি চালিত TSA টুলগুলির আলাদা রুট রয়েছে। প্রক্সি হোস্টনেম স্থানীয়ভাবে রিসলভ করা যেতে পারে। <code>rdns</code> গন্তব্য হোস্টনেমকে প্রভাবিত করে; টেলিগ্রাম প্রায়ই সংখ্যামূলক DC IP সরবরাহ করে।</p>
+<p>SOCKS5 এবং সাধারণ HTTP CONNECT নিজে থেকেই প্রক্সি ক্রেডেনশিয়াল বা ক্লায়েন্ট-থেকে-প্রক্সি টানেল এনক্রিপ্ট করে না। MTProto আলাদাভাবে টেলিগ্রাম ট্র্যাফিক সুরক্ষিত করে। অবিশ্বস্ত নেটওয়ার্কে প্রক্সির সাথে যোগাযোগের জন্য একটি উপযুক্ত নিরাপদ চ্যানেল ব্যবহার করুন। ব্যক্তিগত গ্রুপগুলো ক্লাউড চ্যাট; MTProto সেগুলোকে এন্ড-টু-এন্ড এনক্রিপ্টেড সিক্রেট চ্যাটে রূপান্তর করে না।</p>
+<h2 id="encryption-and-signatures">এনক্রিপশন এবং স্বাক্ষর<a class="anchor" href="#encryption-and-signatures" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>স্তর</th>
+<th>বাস্তবায়িত</th>
+<th>অপারেটরের দায়িত্ব</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>টেলিগ্রাম ট্র্যাফিক</td>
+<td>টেলিথন এমটিপ্রোটো</td>
+<td>প্ল্যাটফর্মের বিশ্বাসযোগ্যতা, পথ এবং প্রাপ্যতা</td>
+</tr>
+<tr>
+<td>ওয়েব প্যানেল</td>
+<td>বাহক টোকেন, লুপব্যাক ডিফল্ট, অনুরোধ সীমা</td>
+<td>দূরবর্তী অ্যাক্সেসের জন্য HTTPS বা SSH টানেল</td>
+</tr>
+<tr>
+<td>গোপন কথা</td>
+<td>API শংসাপত্র, সেশন, প্রক্সি শংসাপত্র এবং স্বাক্ষর ব্যক্তিগত কী-এর জন্য ফারনেট</td>
+<td>ডিক্রিপশন কী এবং চলমান হোস্ট সুরক্ষিত রাখুন।</td>
+</tr>
+<tr>
+<td>ভল্ট কী</td>
+<td>স্থানীয় কী, অথবা নতুন ইনস্টলেশনের জন্য বাহ্যিক মাস্টার কী</td>
+<td>সুরক্ষিত স্টোরেজ এবং কী ব্যাকআপ পৃথক করুন</td>
+</tr>
+<tr>
+<td>বার্তা এবং সংযুক্তি</td>
+<td>সাধারণ পাঠ্য অ্যাপ্লিকেশন সংরক্ষণ</td>
+<td>এনক্রিপ্ট করা ডিস্ক/ভলিউম</td>
+</tr>
+<tr>
+<td>জিআইপি/জসনএল/সিএসভি/এইচটিএমএল</td>
+<td>অখণ্ডতা যাচাই, কোনো বিষয়বস্তু এনক্রিপশন নেই</td>
+<td>রপ্তানি করা অনুলিপি এবং স্থানান্তরগুলি সুরক্ষিত করুন</td>
+</tr>
+<tr>
+<td>উৎস এবং সময়</td>
+<td>স্বাক্ষরিত জার্নাল, প্রক্রিয়া রসিদ, RFC 3161 টুলস</td>
+<td>বিশ্বস্ত চাবি, স্বাধীন চেকপয়েন্ট/টিএসএ এবং হেফাজত প্রক্রিয়া</td>
+</tr>
+</tbody>
+</table></div>
+<p>অ্যাকাউন্টে <strong>স্টোরেজ সুরক্ষা</strong> এই অবস্থাগুলো দেখায়। প্যানেল টোকেন একটি অ্যাক্সেস সিক্রেট, এনক্রিপশন পাসওয়ার্ড নয়। একটি টোকেন সমস্ত ওয়ার্কস্পেস নিয়ন্ত্রণ করে; ওয়ার্কস্পেসগুলো পৃথক ব্যবহারকারী বা বিচ্ছিন্ন টেন্যান্ট নয়।</p>
+<p>স্পষ্টভাবে শুরু করা, বিচ্ছিন্ন একটি সিন্থেটিক ডেমো সরাসরি লুপব্যাক সংযোগের মাধ্যমে স্বয়ংক্রিয়ভাবে খোলা যেতে পারে। এটি একটি পৃথক প্রক্রিয়া-জীবনকাল সক্ষমতা ব্যবহার করে; এটি কনফিগার করা প্যানেল টোকেন প্রকাশ করে না বা বাস্তব ওয়ার্কস্পেসে অ্যাক্সেস প্রদান করে না। রিমোট, প্রক্সি বা ক্রস-অরিজিন অনুরোধগুলি এই স্বয়ংক্রিয়-প্রবেশ সক্ষমতা অর্জন/ব্যবহার করতে পারে না।
+এই সুবিধাটি প্রকৃত অ্যাকাউন্ট ডেটার জন্য প্রমাণীকরণ সীমানা অপসারণ করে না।</p>
+<p>BitLocker, LUKS, FileVault বা একটি পরিচালিত এনক্রিপ্ট করা ভলিউম তাদের নিজ নিজ হুমকি মডেলের অধীনে স্টোরেজ সুরক্ষিত রাখতে পারে। একটি আনলক করা চলমান মেশিনের প্রশাসক এখনও ডেটা পড়তে পারেন। স্টোরেজ পরিকল্পনায় SQLite WAL/SHM, মিডিয়া, অস্থায়ী এক্সপোর্ট, সোয়াপ, ব্যাকআপ এবং ব্রাউজার ডাউনলোড অন্তর্ভুক্ত করুন। একটি ডকার ভলিউম শুধুমাত্র ভলিউম হওয়ার কারণে এনক্রিপ্ট করা হয় না। TgWitness SQLCipher বা অবজেক্ট এনক্রিপশন বাস্তবায়ন করে না।</p>
+<h2 id="external-master-key">বাহ্যিক মাস্টার কী<a class="anchor" href="#external-master-key" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
+<p><strong>নতুন</strong> ইনস্টলেশনের জন্য, মাস্টার কীটি ডেটা ডিরেক্টরির বাইরে রাখুন।
+এটি স্বয়ংক্রিয়ভাবে বিদ্যমান লোকাল-কি ভল্টকে মাইগ্রেট করে না। শুধুমাত্র সার্ভিস আইডেনটিটির জন্য অ্যাক্সেসযোগ্য একটি কী ডিরেক্টরি প্রস্তুত করুন, তারপর চালান:</p>
+<pre><code class="language-sh">python -m tgwitness.security create-master-key /private/keys/tgwitness-master.key
+export TGWITNESS_VAULT_KEY_FILE=/private/keys/tgwitness-master.key
+python -m tgwitness --data-dir /private/observations/new-case</code></pre>
+<p>ইনস্টল করা প্রকল্প পরিবেশ ব্যবহার করে PowerShell:</p>
+<pre><code class="language-powershell">python -m tgwitness.security create-master-key E:\PrivateKeys\tgwitness-master.key
+$env:TGWITNESS_VAULT_KEY_FILE = &#x27;E:\PrivateKeys\tgwitness-master.key&#x27;
+python -m tgwitness --data-dir E:\PrivateData\new-case</code></pre>
+<p>Docker-এ, ফাইলটি <code>/data</code>-এর বাইরে শুধুমাত্র-পঠন (read-only) হিসেবে মাউন্ট করুন, উদাহরণস্বরূপ
+<code>/run/secrets/tgwitness-master.key</code>-এ, এবং পরিবেশ ভেরিয়েবল (environment variable) সেই পথে সেট করুন।
+সার্ভিস UID-কে এটি পড়ার অনুমতি থাকতে হবে। পরিবেশ/কনফিগারেশন ফাইলের মাধ্যমে পথটি পাস করুন, কী-এর বাইট নয়।</p>
+<p>প্রতিটি ওয়ার্কস্পেস একটি এলোমেলো পাবলিক সল্ট এবং HKDF-SHA256-এর মাধ্যমে প্রাপ্ত নিজস্ব ফারনেট কী পায়।<code>vault.external.json</code> ডেরিভেশন মেটাডেটা সংরক্ষণ করে, মাস্টার কী নয়। কোনো কী অনুপস্থিত বা ভুল থাকলে, নীরবে প্রতিস্থাপন না করে স্টার্টআপ ব্যর্থ হয়। পুনরুদ্ধারের জন্য সল্ট মেটাডেটা এবং মাস্টার কী উভয়ই সংরক্ষণ করুন।</p>
+<p>সমস্ত ওয়ার্কস্পেস একই মাস্টার কী থেকে উদ্ভূত; এর দুর্বলতা পুরো ইনস্টলেশনকে প্রভাবিত করে। চলমান প্রক্রিয়া গোপনীয়তা ডিক্রিপ্ট করতে পারে। এটি কোনো HSM বা পাসওয়ার্ড KDF নয়। এলোমেলো কী-এর পরিবর্তে ইচ্ছামত মানব পাসওয়ার্ড গ্রহণ করা হয় না।</p>
+<p>যথাযথ মাইগ্রেশন বাস্তবায়ন ও যাচাই না হওয়া পর্যন্ত বিদ্যমান ইনস্টলেশনে বিদ্যমান কীটি রেখে দিন।<code>vault.key</code> মুছে ফেলা বা মাস্টার কী প্রতিস্থাপন সেশন/স্বাক্ষর কী-তে অ্যাক্সেস ধ্বংস করতে পারে। এনক্রিপ্ট করা ব্যাকআপ এবং কীগুলো আলাদাভাবে সংরক্ষণ করুন এবং একটি বিচ্ছিন্ন পরিবেশে পুনরুদ্ধার পরীক্ষা করুন।</p>
+<h2 id="sources-and-verification-scope">উৎস এবং যাচাইয়ের পরিধি<a class="anchor" href="#sources-and-verification-scope" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
+<p>২৬ অক্টোবর ২০২৬-এ পর্যালোচিত:</p>
+<ul>
+<li>https://core.telegram.org/api/auth</li>
+<li>https://core.telegram.org/api/obtaining_api_id</li>
+<li>https://docs.telethon.dev/en/stable/basic/signing-in.html</li>
+<li>https://docs.telethon.dev/en/stable/concepts/sessions.html</li>
+<li>https://core.telegram.org/mtproto/mtproto-transports</li>
+<li>https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/SourceFiles/storage/storage_account.cpp</li>
+<li>টেলিথন 1.45.0: SQLiteSession, StringSession, <code>Connection._proxy_connect</code>,
+    <code>TcpMTProxy.normalize_secret</code> এবং ডাউনলোড পদ্ধতি।</li>
+</ul>
+<p>স্থানীয় পরীক্ষাগুলো লুপব্যাক SOCKS5/HTTP CONNECT ফিক্সচার, সিন্থেটিক SQLite সেশন, রুট আইসোলেশন, সিক্রেট এক্সক্লুশন এবং মিসিং-কি রিফিউজাল কভার করে। এগুলো বাস্তব টেলিগ্রাম/প্রক্সি ইন্টারঅপারেবিলিটি বা লাইভ MTProxy আচরণ প্রতিষ্ঠা করে না।
+<a href="../verification/">VERIFICATION.md</a> এবং <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">LIVE_ACCEPTANCE.md</a> দেখুন।</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/CONNECTION-SECURITY.md">GitHub-এ এই পৃষ্ঠা সম্পাদনা করুন ↗</a><a class="next-guide" href="../deployment/"><span>পরবর্তী ধাপ</span><strong>নিয়োগ →</strong></a><p>এই গাইডগুলো বর্তমান বাস্তবায়ন বর্ণনা করে। যাচাইকরণ ফলাফল এবং অবশিষ্ট ফাঁকগুলো আলাদাভাবে নথিভুক্ত করা হয়েছে। <a href="../verification/">কি পরীক্ষা করা হয়েছে →</a></p></footer>
+</main>
+<aside class="toc" aria-label="এই পৃষ্ঠায়"><p class="nav-label">এই পৃষ্ঠায়</p><a href="#authentication-methods">প্রমাণীকরণ পদ্ধতি</a><a href="#import-a-telethon-session-file">টেলিথন সেশন ফাইল আমদানি করুন</a><a href="#mtproto-telethon-and-proxies">এমটিপ্রোটো, টেলিথন এবং প্রক্সি</a><a href="#encryption-and-signatures">এনক্রিপশন এবং স্বাক্ষর</a><a href="#external-master-key">বাহ্যিক মাস্টার কী</a><a href="#sources-and-verification-scope">উৎস এবং যাচাইয়ের পরিধি</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>ওপেন সোর্স · আপনার মেশিনে চলে</span><a href="../../../../LICENSE">MIT লাইসেন্স</a><a href="../notice/">অপারেটর বিজ্ঞপ্তি</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">নিরাপত্তা</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "বার্তার অপেক্ষায়", "Step through a fictional send, edit and delete.": "একটি কাল্পনিক পাঠানো, সম্পাদনা এবং মুছে ফেলার ধাপ অনুসরণ করুন।", "No observations yet. Start the sequence or advance one event.": "এখন পর্যন্ত কোনো পর্যবেক্ষণ নেই। সিকোয়েন্স শুরু করুন অথবা একটি ইভেন্ট এগিয়ে নিন।", "Meet at 10:00": "১০:০০ টায় মিলিত হন", "A new message is visible in the chat.": "চ্যাটে একটি নতুন বার্তা দৃশ্যমান।", "Record 1 appended: the collector observed the original message.": "রেকর্ড ১ সংযুক্ত: সংগ্রাহক মূল বার্তাটি পর্যবেক্ষণ করেছেন।", "Meet at 11:00": "১১:০০ টায় মিলিত হোন", "The current text changes. The earlier observation stays.": "বর্তমান পাঠ্য পরিবর্তিত হয়। পূর্ববর্তী পর্যবেক্ষণ অপরিবর্তিত থাকে।", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "রেকর্ড ২ সংযুক্ত: সম্পাদনাটি একটি নতুন পর্যবেক্ষণ। রেকর্ড ১ এখনও মূল পাঠ্য সংরক্ষণ করে।", "Message deleted": "বার্তা মুছে ফেলা হয়েছে", "The message has disappeared from the chat view.": "বার্তাটি চ্যাট ভিউ থেকে অদৃশ্য হয়ে গেছে।", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "রেকর্ড ৩ সংযুক্ত: মুছে ফেলার বিজ্ঞপ্তিটি উভয় দেখা সংস্করণের পাশাপাশি সংরক্ষিত রয়েছে।", "0 records": "0টি রেকর্ড", "1 record": "১টি রেকর্ড", "2 records": "২টি রেকর্ড", "3 records": "৩টি রেকর্ড", "Complete / {n} of 3": "৩টির মধ্যে সম্পূর্ণ / {n}", "Step / {n} of 3": "৩-এর মধ্যে ধাপ / {n}", "Pause": "বিরতি", "Replay sequence": "পুনঃপ্রচার ক্রম", "Play sequence": "ক্রম বাজান", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "স্থির উদাহরণটি উপলব্ধ। হ্যাশগুলো ইন্টার‍্যাক্টিভভাবে গণনা করতে HTTPS-এ এই পৃষ্ঠাটি খুলুন অথবা Web Crypto সমর্থনসহ লোকালহোস্ট প্রিভিউ ব্যবহার করুন।", "No record supplied": "কোনও রেকর্ড সরবরাহ করা হয়নি", "Tail removed": "টেইল অপসারণ করা হয়েছে", "≠ saved hash": "≠ সংরক্ষিত হ্যাশ", "Rebuilt · different hash": "পুনর্নির্মিত · ভিন্ন হ্যাশ", "= saved hash": "= সংরক্ষিত হ্যাশ", "Same length and matching head.": "একই দৈর্ঘ্য এবং মিলিত শিরোনাম।", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "তিনটি গণনা করা হ্যাশ সংরক্ষিত হ্যাশের সাথে মিলছে। এই নমুনাটি রাখা তিনটি রেকর্ডের সীমানার সাথে সামঞ্জস্যপূর্ণ।", "Same saved head; the journal prefix fails verification.": "একই সংরক্ষিত হেড; জার্নাল প্রিফিক্স যাচাইকরণে ব্যর্থ।", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "রেকর্ড ২ আর তার সংরক্ষিত হ্যাশের সাথে মিলছে না। শুধুমাত্র সর্বশেষ সংরক্ষিত হেড যাচাই করলে এটি ধরা পড়বে না; যাচাইকারী প্রতিটি রেকর্ড পরীক্ষা করে।", "Head differs from the retained checkpoint.": "হেড সংরক্ষিত চেকপয়েন্ট থেকে পৃথক।", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "পুনর্নির্মিত হ্যাশগুলো একে অপরের সাথে সংযুক্ত, কিন্তু চূড়ান্ত হেডটি পরিবর্তিত হয়েছে। সংরক্ষিত চেকপয়েন্ট এই ইতিহাস প্রত্যাখ্যান করে। পরিবর্তিত রেকর্ডগুলিতেও মূল স্বাক্ষরগুলো ব্যর্থ হবে।", "Too short: 2 supplied records \u003c 3 retained records.": "খুব সংক্ষিপ্ত: ২টি সরবরাহিত রেকর্ড \u003c ৩টি সংরক্ষিত রেকর্ড।", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "বাকী থাকা দুইটি হ্যাশ এখনও মিলছে। সংরক্ষিত চেকপয়েন্ট অনুপস্থিত টেইল উন্মোচন করে। সেই পূর্বের সীমানা ছাড়া শুধুমাত্র এই সংক্ষিপ্ত প্রিফিক্সটি বাদ পড়া অংশটি প্রকাশ করতে পারত না।", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "এই ব্রাউজারে হ্যাশ গণনা অনুপলব্ধ। নীচের সূত্র এবং স্থির ব্যাখ্যাগুলো এখনও উপলব্ধ।", "{n} records": "{n} রেকর্ডস", "head {hash}": "হেড {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "গ্রহণ করা হয়েছে: গণনা বৃদ্ধি পাচ্ছে, স্বাক্ষর যাচাই হচ্ছে এবং কী মিলছে। সাক্ষী এই নতুন সীমা বজায় রাখে।", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "রোলব্যাক: স্বাক্ষরিত উত্তরটি শেষ গৃহীত চেকপয়েন্টের তুলনায় কম রেকর্ড রিপোর্ট করে। সাক্ষী সমস্যাটি রেকর্ড করে এবং পূর্বের গৃহীত সীমা বজায় রাখে।", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "ফর্ক: গণনা অপরিবর্তিত আছে কিন্তু হেড ভিন্ন। সাক্ষী মতবিরোধ রেকর্ড করে এবং পূর্বে গৃহীত সীমানা বজায় রাখে।", "No answer": "কোনও উত্তর নেই", "boundary unknown": "সীমা অজানা", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "কোনো প্রতিক্রিয়া নেই: সাক্ষী ব্যর্থ চেক রেকর্ড করে। এটি সংগ্রাহকের বর্তমান অবস্থা নিশ্চিত করতে পারে না। যদি সাক্ষী এখনও Bot API-এ পৌঁছাতে পারে এবং এর প্রকাশ নীতি অনুমতি দেয়, তবে এটি সেই ব্যর্থতা প্রকাশ করতে পারে।", "Send {n}": "{n} পাঠান", "Edit {n}": "{n}সম্পাদনা", "Delete {n}": "{n} মুছুন", "Both accounts captured all six expected observations in this example.": "উভয় অ্যাকাউন্টই এই উদাহরণে প্রত্যাশিত ছয়টি পর্যবেক্ষণই ধারণ করেছে।", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "অ্যাকাউন্ট B এখনও ৬টির মধ্যে ৬টিই ধারণ করেছে। দুটি রসিদ ধারণ করতে বেশি সময় লেগেছে। ধারণ অনুপাত এবং রসিদ বিলম্ব ভিন্ন প্রশ্নগুলোর উত্তর দেয়।", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "কাটঅফের সময়সীমার মধ্যে Account B ছয়টির মধ্যে পাঁচটি (৮৩.৩%) ধারণ করেছে। অনুপস্থিত সম্পাদনার কোনো পরিমাপযোগ্য বিলম্ব নেই। এই ফলাফল শুধুমাত্র ছয়টি নিয়ন্ত্রিত কর্মকাণ্ডকে বর্ণনা করে।", "not observed by cutoff": "কাটঅফের মাধ্যমে পর্যবেক্ষণ করা হয়নি", "{s} seconds": "{s} সেকেন্ড", "Exact values follow in the table.": "নির্দিষ্ট মানসমূহ টেবিলে অনুসরণ করা হয়েছে।", "{s} s": "{s}s", "Not observed": "পর্যবেক্ষণ করা হয়নি", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "চারটি চ্যাট বিভিন্ন পর্যবেক্ষণ প্রদান করে। প্রতিটি সংযোগের জন্য উৎস রেকর্ডগুলো অনুসরণ করুন; প্রেরক নির্ধারণ না করে চ্যানেল পোস্টটি ব্যবহারকারী ৭১০०১-এ বরাদ্দ করবেন না।", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "রেকর্ড #146 এবং #205 একই প্রেরক আইডি, 71001, সরবরাহ করে। এটি দুইটি চ্যাটে একটি টেলিগ্রাম অ্যাকাউন্টের পর্যবেক্ষিত পোস্টগুলোকে সংযুক্ত করে। এটি কোনো বাস্তব ব্যক্তিকে চিহ্নিত করে না বা চ্যানেল পোস্টের সাথে কোনো ব্যক্তিকে যুক্ত করে না।", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "pay.example.invalid/new গন্তব্যটি গ্রুপ রেকর্ড #146, বট কীবোর্ড #173, চ্যানেল সম্পাদনা #188 এবং ব্যক্তিগত বার্তা #205-এ প্রদর্শিত হয়েছে। একই গন্তব্যের পুনরাবৃত্তি বিষয়বস্তুকে সংযুক্ত করে; এটি সেই অ্যাকাউন্টগুলির সাধারণ নিয়ন্ত্রণের প্রমাণ দেয় না।", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "এই কাল্পনিক ক্ষেত্রে সম্পন্ন মিডিয়া রসিদ #151 এবং #209-এর পূর্ণ SHA-256 মান সমান। প্রকৃত বাইট এবং সংশ্লিষ্ট বার্তা রেকর্ডগুলো তুলনা করুন। মিলিত ফাইলটি এর নির্মাতাকে শনাক্ত করে না বা কে এটি ফরওয়ার্ড করেছে তা প্রমাণ করে না।", "the encrypted off-site copy": "এনক্রিপ্টকৃত অফ-সাইট কপি", "notifications": "অ্যালার্টসমূহ", "checkpoint hashes for timestamps": "টাইমস্ট্যাম্পের জন্য চেকপয়েন্ট হ্যাশ", "signed checkpoints for the witness": "সাক্ষীর স্বাক্ষরিত চেকপয়েন্টসমূহ", "Switched on in this example": "এই উদাহরণে চালু করা হয়েছে", "Optional · off by default": "ঐচ্ছিক · ডিফল্টভাবে বন্ধ", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "এই মেশিন থেকে যাওয়া: টেলিগ্রাম সংযোগ এবং {list}। আর কিছুই না।", "Default: only the Telegram connection leaves this machine.": "ডিফল্ট: শুধুমাত্র টেলিগ্রাম সংযোগই এই মেশিন থেকে বের হয়।", "{done} of {total} done": "{total}-এর মধ্যে {done} সম্পন্ন", "Mark step {n} as done": "{n} ধাপটি সম্পন্ন হিসেবে চিহ্নিত করুন", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "কপি", "Copied": "কপি করা হয়েছে", "Command copied.": "কমান্ড অনুলিপি করা হয়েছে।", "Selected — Ctrl/Cmd+C": "নির্বাচিত — Ctrl/Cmd+C", "Command selected. Copy it manually.": "কমান্ড নির্বাচিত। এটি ম্যানুয়ালি অনুলিপি করুন।", "Command copied to clipboard.": "কমান্ডটি ক্লিপবোর্ডে অনুলিপি করা হয়েছে।", "Select text": "টেক্সট নির্বাচন করুন", "Clipboard unavailable. Command selected; copy it manually.": "ক্লিপবোর্ড অনুপলব্ধ। কমান্ড নির্বাচিত; ম্যানুয়ালি অনুলিপি করুন।", "A message arrives. The first observation is saved.": "একটি বার্তা এসেছে। প্রথম পর্যবেক্ষণ সংরক্ষিত হয়েছে।", "The time changes. Both captured versions stay.": "সময় পরিবর্তিত হয়। উভয় ধারণকৃত সংস্করণই থাকে।", "The message disappears. The captured history remains.": "বার্তাটি অদৃশ্য হয়ে যায়। ধারণকৃত ইতিহাস রয়ে যায়।", "Pause example animation": "অ্যানিমেশন বিরতি উদাহরণ", "Play example animation": "উদাহরণ অ্যানিমেশন প্লে করুন", "Play": "চালু করুন", "Full-size workspace screenshot": "পূর্ণ-আকারের কর্মস্থলের স্ক্রিনশট", "Workspace screenshot · fictional data": "ওয়ার্কস্পেস স্ক্রিনশট · কাল্পনিক ডেটা", "Close": "বন্ধ করুন", "Close screenshot": "স্ক্রিনশট বন্ধ করুন", "Scrollable full-size screenshot": "স্ক্রলযোগ্য পূর্ণ-আকারের স্ক্রিনশট", "Enlarge: {name}": "বড় করুন: {name}", "View full size": "পূর্ণ আকারে দেখুন"}</script>
+</body></html>

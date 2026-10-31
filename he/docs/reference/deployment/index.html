@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="he" dir="rtl" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>פריסה | TgWitness</title>
+<meta name="description" content="הפעל את TgWitness כשירות ב-Windows, Linux, macOS או Docker, מאחורי HTTPS, עם גיבויים ועדכונים."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/deployment/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="he_IL">
+<meta property="og:title" content="פריסה | TgWitness"><meta property="og:description" content="הפעל את TgWitness כשירות ב-Windows, Linux, macOS או Docker, מאחורי HTTPS, עם גיבויים ועדכונים.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/he/docs/reference/deployment/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/deployment/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/deployment/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/deployment/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/deployment/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/deployment/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/deployment/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/deployment/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/deployment/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/deployment/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/deployment/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/deployment/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/deployment/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/deployment/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/deployment/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/deployment/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/deployment/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/deployment/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/deployment/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/deployment/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/deployment/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/deployment/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/he/docs/reference/deployment/", "url": "https://phishdestroy.github.io/TgWitness/he/docs/reference/deployment/", "name": "פריסה | TgWitness", "description": "הפעל את TgWitness כשירות ב-Windows, Linux, macOS או Docker, מאחורי HTTPS, עם גיבויים ועדכונים.", "inLanguage": "he", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "דף הבית", "item": "https://phishdestroy.github.io/TgWitness/he/"}, {"@type": "ListItem", "position": 2, "name": "תיעוד", "item": "https://phishdestroy.github.io/TgWitness/he/docs/"}, {"@type": "ListItem", "position": 3, "name": "הפניה", "item": "https://phishdestroy.github.io/TgWitness/he/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "פריסה", "item": "https://phishdestroy.github.io/TgWitness/he/docs/reference/deployment/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">דלג לתוכן</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / תיעוד</span></a>
+<nav aria-label="מדריכים"><a href="../../concepts/">מדריך חזותי</a><a href="../../">כל המדריכים</a><a href="../">הפניה</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="שפה"><span aria-hidden="true">◍</span> עברית</summary><div class="lang-list"><a href="../../../../docs/reference/deployment/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/deployment/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/deployment/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/deployment/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/deployment/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/deployment/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/deployment/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/deployment/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/deployment/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/deployment/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/deployment/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/deployment/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/deployment/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/deployment/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/deployment/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/deployment/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/deployment/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/deployment/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/deployment/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/deployment/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/deployment/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/deployment/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/deployment/" hreflang="th" lang="th">ไทย</a><a href="./" hreflang="he" lang="he" aria-current="true">עברית</a><a href="../../../../bn/docs/reference/deployment/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="החלפה בין ערכת נושא בהירה לכהה"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="מדריכים"><a href="../../../guides/modes.html">מצבים, תרחישים ורמות ראיות</a><p class="nav-label">צעדים ראשונים</p><a href="../../start/">התחילו תוך דקות ספורות</a><a href="../../accounts/">חבר חשבון</a><a href="../../proxies/">בחר פרוקסי</a><a href="../../exports/">ייצוא ואימות</a><p class="nav-label">הבנת הראיות</p><a href="../../concepts/">ראו כיצד הראיות פועלות</a><a href="../../cases/">חקור בכל הצ'אטים</a><a href="../../security/">שמרו על האבטחה</a><p class="nav-label">המשך לקרוא</p><a href="../../witness/">הגדרת בוט Witness</a><a href="../../server/">המשך להפעיל את האתר</a><a href="../../troubleshooting/">גלה מה השתבש</a></nav><nav class="wiki-nav" aria-label="הפניה"><p class="nav-label"><a class="nav-label-link" href="../">הפניה</a></p><details class="wiki-group" open><summary>הגדרה</summary><a href="../quickstart/">התחלה מהירה</a><a href="../accounts/">חשבונות ופורמטים של הפעלות</a><a href="../connection/">חיבור, פרוקסי והגנה על נתונים</a><a href="./" aria-current="page">פריסה</a></details><details class="wiki-group"><summary>אסף</summary><a href="../collection/">כיצד מתבצע האיסוף</a><a href="../operations/">תהליכי עבודה ותפעול</a><a href="../investigation/">מצב חקירה</a><a href="../features/">תכונות ומגבלות</a></details><details class="wiki-group"><summary>ראיות</summary><a href="../how-it-works/">כיצד פועלת הראיה</a><a href="../evidence/">פורמט הראיות</a><a href="../witness/">עד עצמאי</a><a href="../timestamp/">חותמות זמן</a></details><details class="wiki-group"><summary>אבטחה ופרויקט</summary><a href="../security/">אבטחה וטיפול בנתונים</a><a href="../architecture/">ארכיטקטורה</a><a href="../verification/">מה נבדק</a><a href="../license/">הודעה בנושא הרישיון ואי־תאימות ארכיטקטונית</a><a href="../notice/">הודעה על חוסר תאימות למפעיל</a><a href="../changelog/">יומן שינויים</a></details></nav><p class="sidebar-note">v0.7.0<br>קוד פתוח · פועל על המחשב שלכם</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="מדריכים"><a href="../../../">דף הבית</a> <span aria-hidden="true">/</span> <a href="../../">תיעוד</a> <span aria-hidden="true">/</span> <a href="../">הפניה</a> <span aria-hidden="true">/</span> <span aria-current="page">פריסה</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">חפש בתיעוד</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="נסו להשתמש במונחים כמו &quot;פרוקסי&quot;, &quot;שרשרת האש&quot;, &quot;אסימון&quot; או &quot;עד&quot;..." autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="חיפוש ברור" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">הקלידו מילה כדי לחפש במדריכים ובמאגר המידע. החיפוש נשאר בדפדפן שלכם.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">הפניה / הגדרה</p><h1>פריסה</h1><p class="guide-outcome">הפעל את TgWitness כשירות ב-Windows, Linux, macOS או Docker, מאחורי HTTPS, עם גיבויים ועדכונים.</p><div class="wiki-body"><p><strong>אנגלית</strong> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md">Русский</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md">אוקראינית</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md">Español</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md">פורטוגזית (ברזיל)</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md">Türkçe</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md">العربية</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md">فارسی</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md">אורדו</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md">हिन्दी</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md">באסהה אינדונזיה</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md">Tiếng Việt</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md">סינית פשוטה</a></p>
+<h2 id="choose-an-installation">בחר התקנה<a class="anchor" href="#choose-an-installation" aria-label="קישור לסעיף זה">#</a></h2>
+<p>עבור החבילה הניידת, חלצו את הקובץ <code>TgWitness-&lt;version&gt;-windows-amd64-portable.zip</code> מ-
+GitHub Releases. עבור השיטות האחרות, הורידו וחילצו את קובץ ה-ZIP של הקוד המקור או שיבטו את
+המאגר, ולאחר מכן הריצו את הפקודה הבאה מתוך ספריית הפרויקט:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>התקנה</th>
+<th>התחל</th>
+<th>פועל ברקע?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>חבילת תוכנה ניידת ל-Windows</td>
+<td><code>TgWitness.cmd</code></td>
+<td>לא; השאר את החלון פתוח.</td>
+</tr>
+<tr>
+<td>יליד Windows</td>
+<td><code>Start.cmd</code></td>
+<td>לא; השתמש במשימת הכניסה האופציונלית לשימוש ברקע.</td>
+</tr>
+<tr>
+<td>תואם באופן מובנה ל-Linux/macOS</td>
+<td><code>sh start.sh</code></td>
+<td>לא; יש להשתמש ב-systemd/launchd להפעלה ברקע.</td>
+</tr>
+<tr>
+<td>Docker על כל מארח נתמך</td>
+<td><code>docker compose up -d --build --wait</code></td>
+<td>כן, כל עוד הדמון של Docker פועל.</td>
+</tr>
+<tr>
+<td>עוזר Docker ב-Windows</td>
+<td><code>scripts\Docker.cmd</code></td>
+<td>כן; התוכנה ממתינה לבדיקת תקינות שרת האינטרנט.</td>
+</tr>
+<tr>
+<td>עוזר Docker ב-Linux/macOS</td>
+<td><code>sh scripts/docker-start.sh</code></td>
+<td>כן; התוכנה ממתינה לבדיקת תקינות שרת האינטרנט.</td>
+</tr>
+</tbody>
+</table></div>
+<p>לגבי שרת ענן שצד שלישי אמור להיות מסוגל לבדוק — שנוצר באמצעות
+ה-API של הספק, ללא SSH, ונגיש רק דרך Cloudflare Tunnel — ראו
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md">פריסה ברמת אבטחה גבוהה</a>.</p>
+<p>הפעלה מקורית יוצרת קובץ <code>.venv</code> פרטי ומתקינה את התלויות המוצמדות.
+Docker בונה אותן בתוך התמונה, ללא צורך ב-Python במארח. ההתקנה הראשונית
+דורשת גישה לאינטרנט. כאשר לא נמצא Python 3.11 ומעלה, ה-<code>Start.cmd</code> מבקש אישור לפני
+התקנת Python 3.12 עבור המשתמש הנוכחי ב-Windows (באמצעות winget, או לחלופין באמצעות מתקין python.org
+לאחר בדיקת החתימה של Python Software Foundation); הוא לעולם אינו מבקש
+הרשאות מנהל. Docker ושירותי מערכת ההפעלה נותרים תנאים מוקדמים.</p>
+<p>התקנות מקוריות וניידות משתמשות ב-<code>data/live</code> בתוך התיקייה שלהן. Docker משתמש בנפח בשם <code>tgwitness-data</code>
+ב-<code>/data</code>. אלה הן התקנות נפרדות עד שתעביר בכוונה את
+ספריית הנתונים המלאה. אל תצפה שמכולה חדשה של Docker תזהה חשבונות מקוריים
+באופן אוטומטי.</p>
+<h2 id="installation-requirements">דרישות התקנה<a class="anchor" href="#installation-requirements" aria-label="קישור לסעיף זה">#</a></h2>
+<p>התקנה מקומית דורשת Python 3.11 או גרסה מאוחרת יותר עם <code>venv</code> ו-<code>ensurepip</code>, גישה לאינטרנט
+להתקנת התלות הראשונה, וספריית פרויקט הניתנת לכתיבה עבור
+<code>.venv</code>. הפאנל המצורף אינו דורש Node.js או בניית ממשק משתמש. הפעל את תוכנת ההפעלה
+מחשבון מערכת ההפעלה הרגיל שלך; TgWitness אינו דורש הרשאות מנהל/root.</p>
+<ul>
+<li><strong>Windows:</strong> <code>Start.cmd</code> בודק את <code>py -3</code>, לאחר מכן את <code>python</code>, ולאחר מכן את תיקיות ההתקנה המוגדרות כברירת מחדל לכל משתמש ו-
+    &quot;Program Files&quot;, ודורש גרסה 3.11 או מאוחרת יותר. אם אף אחת מהן לא עובדת, הוא
+    מציע את ההתקנה האוטומטית לכל משתמש שתוארה לעיל. <code>py -3 start.py</code> גם עובד.
+    החבילה הניידת אינה דורשת Python כלל.</li>
+<li><strong>לינוקס:</strong> <code>start.sh</code> מנסה את <code>python3.13</code>, <code>python3.12</code>, <code>python3.11</code>, <code>python3</code> ו-
+    <code>python</code>, ומדפיס את פקודת ההתקנה עבור apt, dnf, pacman, zypper, apk או Homebrew
+    כאשר אף אחת מהן אינה מתאימה. התקנות של Debian/Ubuntu עשויות לדרוש את חבילת
+    <code>python3-venv</code> המתאימה למתורגמן הנבחר. גרסת Python המוגדרת כברירת מחדל הישנה יותר
+    בהפצה חייבת להיות מוחלפת או משלימה ב-Python 3.11+.</li>
+<li><strong>macOS:</strong> התקן הפצה עדכנית של Python 3.11 ומעלה; אל תניח שהמתורגמן
+    המסופק על ידי מערכת ההפעלה עומד בדרישות. השתמש ב-<code>python3 start.py</code> מתוך ספריית הפרויקט.</li>
+<li><strong>Docker:</strong> יש להשתמש ב-Docker Engine/Desktop עם Compose v2.20 או גרסה חדשה יותר. Docker Desktop
+    חייב להשתמש במכולות לינוקס ב-Windows. המכולה מתקינה את
+    תלותי ה-Python שלה; המארח אינו זקוק להתקנה נפרדת של Python.</li>
+</ul>
+<p>השתמש באחסון מקומי קבוע עבור ספריית הנתונים. תכנן את הקיבולת בהתאם להודעות,
+קובצי מדיה, צמיחת WAL, ייצוא וגיבויים; אין מפרט מינימום אוניברסלי מבוסס ראיות
+לדיסק/RAM עבור כל עומס עבודה. ארכיטקטורות מעבד וגרסאות Python
+ללא גלגלי תלות תואמים עשויות לדרוש כלי בנייה נוספים והסמכה
+משלהן. &quot;נייד&quot; אינו מהווה טענה לתמיכה אוניברסלית במערכות הפעלה או בחומרה.</p>
+<p>Windows 11/Python 3.12 אומתו באופן מקומי. הגדרות עבור Linux/macOS/קונטיינרים ו-CI
+מסופקות, אך לא הוצאו לפועל במארח הפיתוח הזה. ראו את
+<a href="../verification/">הקובץ VERIFICATION.md</a> לקבלת ההיקף המדויק.</p>
+<h2 id="local-computer">מחשב מקומי<a class="anchor" href="#local-computer" aria-label="קישור לסעיף זה">#</a></h2>
+<p>השתמש ב-<code>Start.cmd</code> ב-Windows או ב-<code>sh start.sh</code> ב-Linux/macOS. <code>scripts\Setup.cmd</code> או
+<code>sh start.sh --setup-only</code> מכינים
+את הסביבה. תוכנת ההפעלה מתקינה את התלויות הנדרשות בשימוש הראשון; בהפעלות הבאות
+היא עושה שימוש חוזר בסביבה. נדרשת גישה לאינטרנט לצורך ההתקנה ואיסוף הנתונים מ-Telegram,
+אך עיון ברשומות קיימות ויצירת ייצוא פועלים במצב לא מקוון.</p>
+<p>הפעל את <code>python start.py --check</code> לאחר ההתקנה כדי לבדוק תלות מקומיות, Ed25519,
+אחסון, תצורת מפתחות וכתובת ההאזנה מבלי להפעיל את האספן.
+השתמשו ב-<code>--json</code> לקבלת פלט מובנה. העבירו את הפקודות המיועדות <code>--data-dir</code>, <code>--host</code> ו-
+<code>--port</code>. הבדיקה אינה מתקינה חבילות, אינה יוצרת יומן ואינה מתחברת ל-Telegram;
+היא אינה מהווה אימות של תקינות או כיסוי. בעת ההפעלה מתבצעת אימות נפרד של
+יומנים קיימים. גם <code>python start.py --help</code> נמנע מהתקנה.</p>
+<p>אפשרויות:</p>
+<p>לאחר השימוש ב-start.py, הפעל פקודות עזר באמצעות <code>.venv\Scripts\python.exe</code> ב-
+Windows או <code>.venv/bin/python</code> ב-Linux/macOS, או הפעל תחילה את הסביבה הזו.
+הדוגמאות ל-<code>python -m ...</code> המופיעות להלן מניחות שהסביבה פעילה.</p>
+<pre><code class="language-sh">python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 8787</code></pre>
+<p>משתני סביבה: TGWITNESS_DATA, TGWITNESS_HOST, TGWITNESS_PORT, TGWITNESS_TOKEN.
+TGWITNESS_VAULT_KEY_FILE בוחר במצב מפתח חיצוני עבור התקנה חדשה; ראה להלן.
+TGWITNESS_TOKEN, אם צוין, חייב להכיל לפחות 24 תווים; יש להשתמש בערך אקראי
+קריפטוגרפי. ללא ערך זה, האפליקציה מייצרת אסימון אקראי בן 256 סיביות בקובץ panel-token.txt.
+הגדרת הסביבה אינה מחליפה את הקובץ הזה. יש להפעיל מחדש כדי להחליף את פרטי ההזדהות.</p>
+<p>רק תהליך אחד בדיוק יכול להיות הבעלים של ספריית נתונים. נעילת קבצים חוצת-פלטפורמות של מערכת ההפעלה מונעת
+כתיבה מקבילה בשוגג. השתמש בעובד Uvicorn אחד. הלוח יכול לנהל מספר בלתי מוגבל של
+סביבות עבודה, עם ספריות סביבת עבודה נוספות תחת profiles/&lt;id&gt;/.
+עבור מופעי שירות נפרדים, יש להשתמש בספריות ויציאות נפרדות. קבצי WAL של SQLite צריכים להיות מאוחסנים באחסון מקומי קבוע,
+ולא במערכת קבצים ברשת. אין לשתף אמצעי אחסון אחד בין עותקים.</p>
+<h2 id="windows-portable-package">חבילת תוכנה ניידת ל-Windows<a class="anchor" href="#windows-portable-package" aria-label="קישור לסעיף זה">#</a></h2>
+<p>כל גרסה ב-GitHub כוללת את <code>TgWitness-&lt;version&gt;-windows-amd64-portable.zip</code> ואת
+<code>.sha256</code>. היא מכילה את סביבת ההרצה הרשמית של Python 3.12 הניתנת להטמעה מ-python.org
+(סכום הבדיקה מוצמד ב-<code>tools/build_portable.py</code>), את TgWitness ואת התלויות המוצמדות שלו,
+ושלושה משגרים:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>קובץ</th>
+<th>מטרה</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TgWitness.cmd</code></td>
+<td>הפעל את הפאנל; אפשרויות נוספות מועברות, לדוגמה: <code>TgWitness.cmd --port 8790</code></td>
+</tr>
+<tr>
+<td><code>TgWitness-Demo.cmd</code></td>
+<td>הפעל את ההדגמה הסינתטית ב-<code>data\demo</code></td>
+</tr>
+<tr>
+<td><code>TgWitness-Check.cmd</code></td>
+<td>הפעל את בדיקת המוכנות מבלי להפעיל את התוכנה</td>
+</tr>
+</tbody>
+</table></div>
+<p>חלץ את הארכיון כולו לתיקייה הניתנת לכתיבה, כגון <code>Documents\TgWitness</code>; אל תפעיל
+אותו מתוך קובץ ה-ZIP או מתוך תיקיית Program Files. סביבת ההרצה משתמשת בנתיב מודול מבודד,
+כך שהתקנות Python אחרות ו-<code>PYTHONPATH</code> אינן משפיעות עליה. הנתונים נשמרים בתיקיית
+<code>data</code> של החבילה. כדי לעדכן, עצרו את TgWitness, חלצו את הגרסה החדשה לתיקייה חדשה
+והעתיקו את תיקיית <code>data</code> אליה.</p>
+<p>הקימו אותו בעצמכם ב-Windows 64 סיביות עם Python 3.12:</p>
+<pre><code class="language-sh">python tools/build_portable.py</code></pre>
+<p>הבונה מאמת את בדיקת הסיכום בזמן ריצה, מתקין את התלות המוגבלות בתוך
+החבילה, מבצע בדיקת מוכנות באמצעות המתורגמן המובנה וכותב את קובץ ה-ZIP
+ואת בדיקת הסיכום ל-<code>dist/</code>.</p>
+<h2 id="container">קונטיינר<a class="anchor" href="#container" aria-label="קישור לסעיף זה">#</a></h2>
+<pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
+<p>פעולה זו יוצרת אמצעי אחסון קבוע בעל שם עבור /data.
+יציאת האינטרנט ממופה ל-127.0.0.1:8787. התהליך פועל כ-UID 10001 עם
+יכולות מצומצמות, מערכת קבצים שורשית לקריאה בלבד, ו- /data ו- /tmp הניתנים לכתיבה.
+<code>--wait</code> בודק את תקינות שרת האינטרנט לפני החזרה; הוא אינו מבצע
+אימות או משלוח של Telegram. העוזרים המסופקים משתמשים בזמן המתנה של 180 שניות
+לאחר הבנייה. הורדות התלות הראשוניות עשויות לארוך זמן רב יותר מכך.</p>
+<p>שני קבצי ה-Compose הבסיסיים משתמשים בשם הפרויקט <code>tgwitness</code>, ולכן חילוץ גרסה חדשה
+לספרייה אחרת אינו בוחר באופן אוטומטי נפח נתונים חדש. שמרו על פריסה אחת בלבד
+פעילה עבור פרויקט זה. עבור התקנות עצמאיות, השתמשו ב-
+<code>docker compose -p NAME ...</code> ייחודי וביציאת מארח שונה, ושמרו על שניהם בעת עדכונים.
+עבור פריסה ישנה יותר המשתמשת בשם פרויקט שונה, המשיכו להשתמש בשמה המקורי
+יחד עם <code>-p</code>; <code>docker compose ls</code> מציג רשימה של פרויקטים קיימים.</p>
+<p>העתיקו את <code>deploy/env.example</code> ל-<code>.env</code> ושנו את <code>TGWITNESS_PORT</code> כדי להשתמש ביציאת לולבק
+שונה. לדוגמה, <code>TGWITNESS_PORT=8788</code> חושף את הלוח ב-
+<code>http://127.0.0.1:8788</code>; הקונטיינר עדיין מאזין על 8787. <code>.env</code> מתעלם מ-Git.</p>
+<p>אחזור האסימון הראשוני:</p>
+<pre><code class="language-sh">docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
+<p>פקודות שימושיות:</p>
+<pre><code class="language-sh">docker compose ps
+docker compose logs --tail 100 -f
+docker compose stop
+docker compose up -d --wait</code></pre>
+<p><code>restart: unless-stopped</code> מפעיל מחדש את האספן לאחר קריסה או הפעלה מחדש של הדמון של Docker
+. בשרת לינוקס, הפעל את Docker בעת האתחול באמצעות מנהל השירותים של ההפצה שלך
+, בדרך כלל <code>sudo systemctl enable --now docker</code>. ב-Windows/macOS, הפעל
+את ההגדרה &quot;התחל בעת כניסה&quot; ב-Docker Desktop. יציאה מהמחשב, מצב שינה או עצירה של
+של Docker עלולים להפריע לאיסוף. מכולה שהופסקה במפורש תישאר
+מופסקת עד שתפעיל אותה שוב.</p>
+<p>נפח /tmp מוגבל ל-512 MiB בתצורת הדוגמה. מבנה הייצוא
+משתמש במקום זאת ב-<code>temporary-exports/</code> של כל סביבת עבודה ב-/data הקבוע. יש לשמור מקום
+שם לייצוא בו-זמני, לצמיחת היומן/WAL, למדיה ולגיבויים.
+המשגר משתמש בקובץ deploy/constraints.txt כדי לקבע גרסאות תלויות ריצה מוסמכות.
+Docker ושרתים בעלי אבטחה גבוהה מתקינים מתוך deploy/requirements.lock ו-
+deploy/build.lock באמצעות pip --require-hashes: כל קובץ חבילה חייב להתאים ל-SHA-256
+שנרשם ב-commit, ולכן קובץ שהוחלף ב-PyPI או במראה נדחה. תמונת הבסיס של Python
+וחבילות מערכת ההפעלה עדיין דורשות אישור גרסה עצמאי.</p>
+<p>אין להשתמש ב-docker compose down -v אלא אם כן בכוונתכם להשמיד את היומן והמפתחות.
+דוחות תקינות הקונטיינר מתייחסים לזמינות שרת האינטרנט, ולא להצלחת לכידת הודעות טלגרם.
+בדקו את מצב האספן בלוח הבקרה, את פעילותו, את השגיאות ואת אירועי הכיסוי.</p>
+<h3 id="independent-witness-profile">פרופיל עד עצמאי<a class="anchor" href="#independent-witness-profile" aria-label="קישור לסעיף זה">#</a></h3>
+<p>השירות האופציונלי <code>witness</code> מפעיל עד <a href="../witness/">עצמאי</a> בתוך
+קונטיינר משלו, עם מפתח ויומן משלו בנפח ה-<code>witness-data</code>, ורק
+אסימון עד לקריאה בלבד עבור האספן. צרו את האסימון בדף <strong>ה-Witness</strong> בלוח הבקרה, הוסיפו אותו
+יחד עם אסימון בוט וערוץ ל-<code>.env</code>, ואז הפעילו את הפרופיל:</p>
+<pre><code class="language-sh">docker compose --profile witness up -d          # deploy/compose/compose.image.yaml: same flag
+docker compose logs witness                     # witness key fingerprint</code></pre>
+<p>השירות מגיע לאספן בתוך רשת Compose בכתובת <code>http://tgwitness:8787</code>
+(<code>TGWITNESS_WITNESS_COLLECTOR</code>
+מבטל את ההגדרה הזו; לדוגמה, <code>/profiles/&lt;workspace ID&gt;</code>
+עבור
+סביבת עבודה אחרת). עבור עד בשרת נפרד, המנוהל על ידי אדם אחר, יש להשתמש
+ב-<code>deploy/compose/compose.witness.yaml</code>
+שם, כאשר <code>TGWITNESS_WITNESS_COLLECTOR</code>
+מוגדר לכתובת ה-HTTPS
+של האספן; קובץ זה מכיל רק את העד.</p>
+<h2 id="install-a-published-image">התקן תמונה שפורסמה<a class="anchor" href="#install-a-published-image" aria-label="קישור לסעיף זה">#</a></h2>
+<p>האתר יהיה זמין לאחר השלמת <a href="#automated-github-releases">תהליך השחרור</a>
+בהצלחה ותצורת חבילת GHCR ציבורית. שם/בעל המאגר אינו מקודד באופן קבוע
+בעץ המקור הזה. יש להשתמש בתמונה המוצגת בסיכום תהליך השחרור של אותה גרסה.</p>
+<p>העתיקו את <code>deploy/env.example</code> ל-<code>.env</code>. הגדירו את <code>TGWITNESS_IMAGE</code> לגרסה שפורסמה, תוך שימוש
+בנתיב המאגר <strong>באותיות קטנות</strong>, לדוגמה:</p>
+<pre><code class="language-dotenv">TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.0
+TGWITNESS_PORT=8787</code></pre>
+<p>הפעל קובץ זה בנפרד, במקום <code>compose.yaml</code>:</p>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml exec tgwitness cat /data/panel-token.txt</code></pre>
+<p>אין צורך בבניית קוד מקור, ב-Python או במהדר על השרת המארח. תהליך העבודה של המהדורה
+מיועד למכולות Linux AMD64 ו-ARM64, כולל מכונת הווירטואלית של Docker Desktop ב-Linux.
+יש להשתמש בתגית גרסה או ב-<code>ghcr.io/owner/repository@sha256:...</code> מתוך סיכום תהליך העבודה.
+לא הוגדרה תגית <code>latest</code> נעה או שדרוג יישום ללא השגחה.
+התמונות וגרסאות המקור משתמשות באותו נפח נתונים כאשר שם הפרויקט שלהן תואם.</p>
+<h2 id="automatic-https-on-a-server">HTTPS אוטומטי בשרת<a class="anchor" href="#automatic-https-on-a-server" aria-label="קישור לסעיף זה">#</a></h2>
+<p>השתמש בשרת עם Docker, דומיין שבשליטתך ואחסון מקומי קבוע.
+כוונו את רשומות ה-A/AAAA של הדומיין אל השרת; פרסמו AAAA רק אם ה-IPv6 מגיע
+אליו. אפשרו כניסת TCP 80 ו-443 ויציאת DNS/HTTPS לצורך הנפקת תעודות.
+שירותים אחרים אינם רשאים להשתמש ביציאות אלה.</p>
+<p>העתיקו את <code>deploy/env.example</code> ל-<code>.env</code> והגדירו שם מארח, ללא סכמה או נתיב:</p>
+<pre><code class="language-dotenv">TGWITNESS_DOMAIN=watch.your-domain.org</code></pre>
+<p>התחל את בניית הקוד המקור עם שכבת-על HTTPS:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt</code></pre>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml -f deploy/compose/compose.https.yaml up -d --wait</code></pre>
+<p>עבור תמונה שפורסמה, השתמש ב-<code>deploy/compose/compose.image.yaml</code> כקובץ הראשון במקום זאת. שמור
+את שני הארגומנטים <code>-f</code> לשימוש מאוחר יותר בפקודות סטטוס, יומנים, עדכון והפסקת פעולה.</p>
+<p>Caddy משיג ומחדש תעודה, מפנה HTTP ל-HTTPS ומעביר
+בקשות לאספן ברשת Compose הפרטית. למצב התעודה יש
+נפח קבוע משלו. יציאת המארח הישירה של האספן נשארת בלולבק בלבד.
+תצורת Caddy המסופקת אינה מאפשרת רישום גישה.</p>
+<p>פתח את <code>https://watch.your-domain.org</code> והזן את אסימון הפאנל. מוכנות לכתיבה
+אינה מאשרת הנפקת תעודה או נגישות חיצונית. אם HTTPS אינו
+מוכן, בדוק את ה-DNS, כללי חומת האש, וכן:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.https.yaml logs --tail 100 caddy</code></pre>
+<p>תמונת ה-Caddy המסופקת נושאת את התגית <code>2-alpine</code>. ביצוע פקודת pull מרענן את התמונה;
+הצמיד תקציר שנבדק לפריסה שלך אם אתה זקוק לגרסאות תשתית קבועות.</p>
+<h2 id="updates-and-backups">עדכונים וגיבויים<a class="anchor" href="#updates-and-backups" aria-label="קישור לסעיף זה">#</a></h2>
+<p>שמרו על שם הפרויקט Compose ועל נפח הנתונים גם לאחר עדכונים. תחילה עצרו את
+האספן ובצעו גיבוי מלא. עבור פריסה מבוססת-מקור כברירת מחדל:</p>
+<pre><code class="language-sh">docker compose stop
+docker compose cp tgwitness:/data ../tgwitness-backup-before-update</code></pre>
+<p>השתמשו בכל פעם ביעד גיבוי חדש, מחוץ למאגר, והגנו עליו כעל
+חומר הדורש גישה לחשבון. הנתיב המופיע בדוגמה הוא להמחשה בלבד; השתמשו במיקום הגיבוי הפרטי שלכם.
+העתיקו את הספרייה כולה, כולל קבצים מוסתרים, כל סביבות העבודה, המפתחות,
+יומני הראיות והמדיה. גבו בנפרד את מפתח המאסטר של הכספת החיצונית, אם הוגדר.
+קובץ ZIP של ראיות אינו גיבוי יישום שניתן לשחזר. עבור HTTPS, שמרו גם
+את כרכי Caddy אם אתם צריכים לשמור על מצב האישור/החשבון שלו.</p>
+<p>לצורך פריסה מהמקור, יש להוריד את קבצי הגרסה החדשה ולהריץ:</p>
+<pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
+<p>לצורך פריסת תמונה, יש לשנות את <code>TGWITNESS_IMAGE</code> לגרסה הרצויה, ולאחר מכן להריץ:</p>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait</code></pre>
+<p>השתמשו בקובצי ה-Compose של ההתקנה שלכם גם עבור פקודות ה-stop/copy שלעיל.
+שמרו על <code>.env</code>, על התצורה המותאמת אישית ועל אותו שם פרויקט. <code>down</code> שומר על
+כרכים שמותיים; <strong><code>down -v</code> מוחק אותם</strong>. אין להעתיק את <code>.venv</code> בין מערכות הפעלה
+או גרסאות Python. לעדכונים מקוריים, עצרו את TgWitness, גבו את ספריית הנתונים המלאה
+שלו, החליפו את קבצי המקור והפעילו את <code>python start.py --setup-only</code> לפני ההפעלה.</p>
+<p>יש לבדוק את הגישה ללוח הבקרה, זהות החשבון, מצב הניטור והיקף הכיסוי לאחר
+עדכון. הפעלה מחדש אינה משחזרת עדכוני Telegram שהוחמצו. ביצוע החזרה לגרסה קודמת עשוי
+לדרוש את הגיבוי מלפני העדכון, אם גרסה עתידית תשנה את פורמטי האחסון.</p>
+<h2 id="automated-github-releases">מהדורות אוטומטיות ב-GitHub<a class="anchor" href="#automated-github-releases" aria-label="קישור לסעיף זה">#</a></h2>
+<p><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml">תהליך שחרור </a>הגרסאות מוכן לשימוש לאחר
+שהפרויקט יועלה למאגר GitHub עם Actions מופעל. הוא פועל כאשר
+<strong>מתפרסמת</strong> גרסה ב-GitHub, כולל גרסת טרום-שחרור. טיוטות ודחיפות תגיות
+לבדן אינן מפרסמות חבילות.</p>
+<ol>
+<li>הגדר את גרסת החבילה ואת יומן השינויים, ולאחר מכן פרסם גרסה המתויגת ב-<code>v</code>
+    בתוספת הגרסה המדויקת של <code>pyproject.toml</code>, כגון <code>v0.7.0</code>.</li>
+<li>תהליך העבודה מאמת את התג ומריץ את בדיקות Python המשותפות ל-Windows/Linux/macOS,
+    בדיקות דפדפן כלליות/ייבוא חשבונות/QR, חבילת המקור ו-Docker. כמו כן, מתבצעת התקנה מקורית חדשה
+    בכל שלושת מערכות ההפעלה באמצעות Python 3.12.</li>
+<li>לאחר שעובר את הבדיקות הללו, הוא מבצע בדיקת תפקוד (smoke test) לתמונת ARM64 תחת QEMU, מפרסם
+    תמונות AMD64/ARM64 ב-<code>ghcr.io/&lt;lowercase-owner&gt;/&lt;lowercase-repository&gt;:&lt;version&gt;</code>,
+    ומצרף את קובץ ה-ZIP המקורי, את בדיקת הסיכום (checksum) ואת ה-Python wheel לגרסה. משימה נפרדת
+    ב-Windows בונה ומצרפת את קובץ ה-ZIP הנייד ואת בדיקת הסיכום שלו.</li>
+<li>לאחר הפרסום הראשון, יש לפתוח את הגדרות חבילת ה-GHCR ולהגדיר את הנראות
+    ל<strong>&quot;ציבורי&quot;</strong> אם הכוונה היא לאפשר הורדת תמונות באופן אנונימי. מאגר קוד פתוח ציבורי
+    לבדו אינו מבטיח חבילת קונטיינר ציבורית. מדיניות הארגון חייבת
+    לאפשר פרסום החבילה. זרימת העבודה משתמשת ב-<code>GITHUB_TOKEN</code>; אין להכניס למאגר
+    סיסמאות רישום או פרטי התחברות ל-VPS.</li>
+</ol>
+<p>הצלחת זרימת העבודה מרחוק לא הוכחה על ידי הכנה מקומית זו. אמולציית ARM64
+היא בדיקת תפקוד בסיסית בלבד, ואינה מהווה הסמכה לחומרה מקורית או לשימוש ב-Telegram בסביבה חיה.
+תהליך זה אוטומטי את אריזת הגרסה; הפעלת שרת עדיין דורשת את הפקודה Compose
+ואת תנאי הקדם של הדומיין/המארח. שרתים קיימים אינם
+משודרגים או מופעלים מחדש באופן אוטומטי עם פרסום גרסה חדשה.</p>
+<h2 id="remote-server">שרת מרוחק<a class="anchor" href="#remote-server" aria-label="קישור לסעיף זה">#</a></h2>
+<p>יש להגביל את השירות ל-loopback ולהשתמש במנהרת SSH, או לסיים את HTTPS ב-
+פרוקסי הפוך. קובץ ה-Compose הבסיסי מיועד לשימוש מקומי בלבד; שכבת-העל האופציונלית
+<code>deploy/compose/compose.https.yaml</code> מספקת את Caddy עבור דומיין שהוגדר.
+הקפידו שלא לכלול את אסימון ה-bearer בכתובות URL וביומני הפרוקסי. פרוקסי הפוך צריך להגביל
+את גודל הבקשות ואת קצב החיבורים. אל תחשפו HTTP רגיל לאינטרנט.</p>
+<p>דוגמאות ל-systemd, למשימת כניסה ל-Windows, לסוכן משתמש ב-macOS ול-Caddy מסופקות
+בתיקיית <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/.</a> יש לבדוק/להתאים את הנתיבים שלהן לפני ההתקנה.
+מדובר בתבניות מסופקות, ולא בהגדרות פלטפורמה המבוצעות באופן מקומי. אין
+שירות או משימה ברקע הרשומים על ידי המשגר הרגיל.</p>
+<p>ב-Windows, הפעלה של <code>pythonw.exe</code> ללא חלון מאחסנת אבחון אתחול/שרת ב-
+<code>logs/server.log</code> תחת ספריית הנתונים (5 MiB לכל קובץ, שתי גיבויים מתחלפים).
+הפעלות קונסולה שומרות את יומני הקונסולה. רישום גישה ל-HTTP מושבת בשני
+המצבים. יש להגן על היומנים באמצעות ספריית הנתונים ולבדוק אותם לפני השיתוף.</p>
+<h2 id="restart-and-gaps">הפעלה מחדש ופערים<a class="anchor" href="#restart-and-gaps" aria-label="קישור לסעיף זה">#</a></h2>
+<p>מצב התצפית האחרון שביקשת נשמר. אם התצפית הייתה פעילה,
+בעת ההפעלה המערכת מנסה להתחבר מחדש ולהמשיך לעקוב אחר המקורות שנבחרו. השהיה ידנית מבטלת
+כוונה זו. כישלון בהפעלה מחדש נרשם ומוצג בלוח הבקרה.</p>
+<p>StringSession שומר על ההרשאה אך לא על מצב העדכון/הישות המתמשך של Telethon.
+הדיאלוגים נטענים מחדש בעת ההפעלה. Telegram/Telethon יכולים לשחזר חלק מהפרעות השידור
+במהלך הפעולה, אך TgWitness אינו מבטיח השמעה חוזרת מתמשכת לאחר הפעלה מחדש של התהליך.
+בכל הפעלה נרשמים ראש היומן הקודם וגבול המצב הלא מקוון.
+המוניטור בודק את החיבור כל 10 שניות ומוסיף אות חיים כל דקה
+(<strong>פרמטרים → תיעוד פעילות כל</strong>).
+הפרעות קצרות עלולות להחמיץ; תעבורה מחוברת אינה מבטיחה
+מסירת עדכונים מלאה. תמונות מצב הן תצפיות מפורשות על ההיסטוריה הנוכחית, לעולם לא תיקון פערים.</p>
+<p>תור המדיה מאוחסן במסד הנתונים SQLite של כל סביבת עבודה. הודעה והמשימה שלה
+נשמרים באופן אטומי. משימות שהופסקו במהלך הריצה משוחזרות לצורך ניסיון חוזר בעת ההפעלה.
+לכל הורדה יש זמן המתנה בסיסי של 120 שניות בתוספת זמן בהתאם לגודל הקובץ בקצב של 256 KiB/s, וכן
+מגבלה של 1–2,000 MiB לכל סוג קובץ מצורף; זמן ההמתנה, המהירות והניסיונות החוזרים מוגדרים תחת <strong>&quot;פרמטרים&quot;</strong>. האספן
+מדלג על קבצים שגודלם אינו ידוע. השהיה שומרת על המשימות בתור. הניסיון החוזר משתמש
+במתאר הקובץ המקורי שנצפה, לעולם לא בגרסה האחרונה של הודעה שעברה עריכה לאחר מכן.
+לכשלים זמניים יש מספר ניסיונות חוזרים מוגבל; הפסקות של FloodWait במדיה נשמרות גם לאחר הפעלה מחדש.
+שחזור המדיה נפרד משחזור העדכונים של Telegram ואינו יכול לשחזר קבצים שנעלמו.</p>
+<h2 id="backup-restore-and-capacity">גיבוי, שחזור וקיבולת<a class="anchor" href="#backup-restore-and-capacity" aria-label="קישור לסעיף זה">#</a></h2>
+<p>עצור את התהליך לפני העתקת <strong>ספריית הנתונים כולה</strong>, כולל vault.key,
+signing.enc, credentials.enc, קבצי מסד הנתונים SQLite/WAL, מדיה, אסימון, נקודות ביקורת,
+וכל הפרופילים/תתי-הספריות. שחזר
+את העותק המלא בזמן ששירות היעד מושבת. מפתחות vault חסרים או
+אי-התאמה במפתחות החתימה יגרמו לכישלון ההפעלה; אין ליצור מחדש מפתחות כדי לכפות גישה.</p>
+<p>יש לשמור גיבויים סודיים מוצפנים ותחת בקרת גישה. קבצי ZIP של ראיות הם קבצים ניידים
+המשמשים לבדיקת ממצאים, ולא גיבויים של יישומים או גיבויים של הפעלות טלגרם.
+אין מחיקה אוטומטית של נתונים ישנים. יש לתכנן שטח דיסק עבור כל ההודעות,
+מטא-נתונים גולמיים, קבצי מדיה, ייצוא זמני וגיבויים.</p>
+<p>אימות סטארט-אפ וייצוא רשומות זרם במקום טעינת היומן כולו.
+ייצוא מקבע תמונת מצב של קריאה בעוד שכתובות WAL חדשות יכולות להמשיך; ייצוא ארוך-טווח
+יכול לשמור דפי WAL, ולכן נפח הדיסק עדיין חשוב. קבצי ZIP מוגבלים ל-4 GiB
+ללא דחיסה כדי להתאים לברירת המחדל של המאמת העצמאי; <strong>פרמטרים → ZIP חתום הגדול ביותר</strong>
+מעלה את המגבלה, וארכיונים כאלה מאומתים באמצעות <code>verify.py --max-gib N</code>. בפורמטים אחרים אין מגבלה על מספר האירועים.
+דפדפנים נתמכים מזרימים קטעי תגובה לקובץ שנבחר על ידי המשתמש. דפדפנים אחרים
+מאחסנים במאגר זמני לכל היותר 128 MiB ומפנים העברות גדולות יותר ל-CLI המאושר:</p>
+<pre><code class="language-sh">python -m tgwitness.download --token-file data/live/panel-token.txt --out evidence.zip</code></pre>
+<p>השתמש ב-<code>--profile ID</code> מתוך <strong>&#x27;ייצוא&#x27; → &#x27;מזהה סביבת עבודה&#x27;</strong> עבור סביבת עבודה אחרת,
+<code>--format zip|jsonl|csv|html</code>, <code>--url https://your-server</code> עבור שרת מרוחק, או
+<code>--max-mib</code> כדי לשנות את מגבלת ההעברה של 5 GiB. HTTP רגיל מותר רק עבור
+loopback. האסימונים מועברים בכותרות, הפניות נדחות, קבצים קיימים
+אינם נמחקים, והורדות לא שלמות אינן מתפרסמות כקבצים מוגמרים.
+אם TGWITNESS_TOKEN מבטל את האסימון שנוצר, השתמש בקובץ מוגן בנפרד
+המכיל את הערך הפעיל: panel-token.txt אינו נכתב מחדש על ידי הביטול.
+ה-SHA-256 של הפקודה הוא רק בדיקת סיכום העברה; אמת באופן עצמאי את קובץ ה-ZIP החתום.</p>
+<p>קובצי הייצוא מהשרת נשמרים בתוך ה-<code>temporary-exports/</code> הפרטי של כל סביבת עבודה.
+תגובות מוצלחות מנקות את הקבצים שלהן. ייצואים שנקטעו מוסרים בעת
+ההפעלה הבאה של סביבת העבודה, תוך שמירה על נעילת המופע הבלעדי שלה. ספרייה זו היא חלק
+ממודל האיומים/קיבולת האחסון; יש להשתמש בנפח נתונים מוצפן. העברות בהיקף של
+מספר ג&#x27;יגה-בייט בקנה מידה תעשייתי עדיין דורשות אימות במערכת היעד שלכם.</p>
+<p>הלוח מציג מדיה בתור/שנכשלה, המדיה הוותיקה ביותר הממתינה, שטח דיסק פנוי,
+הפסקות בבקשות טלגרם, ומקורות שגישתם לא אושרה. אבחונים אלה אינם
+מהווים ניטור משלוח מלא מקצה לקצה. סביבות העבודה חולקות תהליך; חשבון רועש יכול
+עדיין להשפיע על אחרים. תהליכי עבודה נפרדים, שמירה/סיבוב, שחזור עדכונים עמיד
+, עיגון נקודות ביקורת מרחוק, תפקידים והסמכת פריסה מלאה נותרים על כנם.</p>
+<h2 id="connection-and-protection-options">אפשרויות חיבור והגנה<a class="anchor" href="#connection-and-protection-options" aria-label="קישור לסעיף זה">#</a></h2>
+<p>נתיבי החיבור הם לכל סביבת עבודה ויש להגדירם לפני ההרשאה.
+SOCKS5/HTTP CONNECT משתמשים בתלות המוצמדת python-socks. MTProxy משתמש ב-
+תחבורה ביניים אקראית ניסיונית של Telethon; סודות TLS מזויפים אינם נתמכים.
+לא הוגדר מעבר אוטומטי ישיר. זהו אינו נתיב רשת ברמת המערכת כולה.</p>
+<p>בהתקנות חדשות, TGWITNESS_VAULT_KEY_FILE מצביע על קובץ מפתח ראשי אקראי
+המוגן בנפרד. יש לעגן אותו לקריאה בלבד מחוץ ל-/data בתוך קונטיינר. יש לשמור את
+מטא-הנתונים הציבוריים של salt בקובץ vault.external.json בנפרד עבור כל סביבת עבודה והמפתח הראשי.
+כספות מקומיות קיימות דורשות הגירה מתוכננת; הגדרת משתנה זה אינה
+ממירה אותן באופן אוטומטי. אחסון וייצוא של הודעות/מדיה אינם מוצפנים על ידי היישום.
+יש להשתמש בנפחים מוצפנים ובאחסון זמני פרטי מספיק במידת הצורך.</p>
+<p>נהלים מפורטים: <a href="../connection/">חיבור/אבטחה</a> ו
+<a href="../operations/">מצבי הפעלה</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/DEPLOYMENT.md">ערוך דף זה ב-GitHub ↗</a><a class="next-guide" href="../collection/"><span>השלב הבא</span><strong>כיצד מתבצע האיסוף ←</strong></a><p>מדריכים אלה מתארים את היישום הנוכחי. תוצאות האימות והפערים הנותרים מתועדים בנפרד. <a href="../verification/">מה נבדק ←</a></p></footer>
+</main>
+<aside class="toc" aria-label="בעמוד זה"><p class="nav-label">בעמוד זה</p><a href="#choose-an-installation">בחר התקנה</a><a href="#installation-requirements">דרישות התקנה</a><a href="#local-computer">מחשב מקומי</a><a href="#windows-portable-package">חבילת תוכנה ניידת ל-Windows</a><a href="#container">קונטיינר</a><a href="#install-a-published-image">התקן תמונה שפורסמה</a><a href="#automatic-https-on-a-server">HTTPS אוטומטי בשרת</a><a href="#updates-and-backups">עדכונים וגיבויים</a><a href="#automated-github-releases">מהדורות אוטומטיות ב-GitHub</a><a href="#remote-server">שרת מרוחק</a><a href="#restart-and-gaps">הפעלה מחדש ופערים</a><a href="#backup-restore-and-capacity">גיבוי, שחזור וקיבולת</a><a href="#connection-and-protection-options">אפשרויות חיבור והגנה</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>קוד פתוח · פועל על המחשב שלכם</span><a href="../../../../LICENSE">רישיון MIT</a><a href="../notice/">הודעת המפעיל</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">אבטחה</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "ממתין להודעה", "Step through a fictional send, edit and delete.": "עקבו אחר תהליך דמיוני של שליחה, עריכה ומחיקה.", "No observations yet. Start the sequence or advance one event.": "אין עדיין הערות. התחל את הרצף או עבור לאירוע הבא.", "Meet at 10:00": "נפגש בשעה 10:00", "A new message is visible in the chat.": "הודעה חדשה נראית בצ'אט.", "Record 1 appended: the collector observed the original message.": "הודעה מס' 1 מצורפת: האספן הבחין בהודעה המקורית.", "Meet at 11:00": "נפגש בשעה 11:00", "The current text changes. The earlier observation stays.": "הטקסט הנוכחי משתנה. ההערה הקודמת נשארת.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "רשומה 2 צורפה: העריכה מהווה תצפית חדשה. ברשומה 1 עדיין מופיע הטקסט המקורי.", "Message deleted": "ההודעה נמחקה", "The message has disappeared from the chat view.": "ההודעה נעלמה מתצוגת הצ'אט.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "הוספה של תיעוד 3: הודעת המחיקה נשמרת לצד שתי הגרסאות שנצפו.", "0 records": "0 רשומות", "1 record": "1 רשומה", "2 records": "2 רשומות", "3 records": "3 רשומות", "Complete / {n} of 3": "השלם / {n} מתוך 3", "Step / {n} of 3": "שלב / {n} מתוך 3", "Pause": "הפסקה", "Replay sequence": "רצף השמעה", "Play sequence": "רצף הפעלה", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "דוגמה סטטית זמינה. כדי לחשב חתימות hash באופן אינטראקטיבי, פתחו דף זה ב-HTTPS או בתצוגה מקדימה ב-localhost עם תמיכה ב-Web Crypto.", "No record supplied": "לא נמסר תיעוד", "Tail removed": "הזנב הוסר", "≠ saved hash": "≠ חתימת hash שנשמרה", "Rebuilt · different hash": "נבנה מחדש · חתימה שונה", "= saved hash": "= חתימת hash שנשמרה", "Same length and matching head.": "אורך זהה וכותרת תואמת.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "שלושת ההאשים שחושבו תואמים להאשים שנשמרו. דוגמה זו תואמת את הגבול של שלוש רשומות שנשמר.", "Same saved head; the journal prefix fails verification.": "אותו כותרת שמורה; קידומת היומן נכשלה באימות.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "הרשומה 2 כבר אינה תואמת את ה-hash השמור שלה. בדיקה של ה-head האחרון שנשמר בלבד עלולה לפספס זאת; המאמת בודק כל רשומה.", "Head differs from the retained checkpoint.": "הכותרת שונה מנקודת הבדיקה שנשמרה.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "ה-hash המשוחזרים מקושרים זה לזה, אך ה-head הסופי השתנה. נקודת הבדיקה שנשמרה דוחה היסטוריה זו. חתימות מקוריות גם הן לא יאושרו על רשומות ששונו.", "Too short: 2 supplied records \u003c 3 retained records.": "קצר מדי: 2 רשומות שסופקו \u003c 3 רשומות שנשמרו.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "שני ה-hash הנותרים עדיין תואמים. נקודת הבדיקה שנשמרה חושפת את החלק החסר. ללא הגבול הקודם הזה, הקידומת הקצרה הזו לבדה לא הייתה חושפת את ההשמטה.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "חישוב ה-Hash אינו זמין בדפדפן זה. הנוסחאות וההסבר הסטטי המופיעים להלן נותרים זמינים.", "{n} records": "{n} רשומות", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "התקבל: הספירה גדלה, החתימה מאומתת והמפתח תואם. העד שומר על הגבול החדש הזה.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "חזרה לאחור: התשובה החתומה מדווחת על פחות רשומות מאשר נקודת הבדיקה האחרונה שאושרה. ה-Witness מתעד את הבעיה ושומר על הגבול שאושר קודם לכן.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: הספירה נותרה ללא שינוי, אך הראש שונה. ה-witness מתעד את חילוקי הדעות ושומר על הגבול שהתקבל קודם לכן.", "No answer": "אין תשובה", "boundary unknown": "גבול לא ידוע", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "אין תגובה: ה-Witness מתעד את הבדיקה שנכשלה. הוא אינו יכול לקבוע את מצבו הנוכחי של האספן. אם ה-Witness עדיין יכול להגיע ל-Bot API ומדיניות הפרסום שלו מאפשרת זאת, הוא יכול לפרסם את הכישלון הזה.", "Send {n}": "שלח {n}", "Edit {n}": "ערוך {n}", "Delete {n}": "מחק {n}", "Both accounts captured all six expected observations in this example.": "שני החשבונות תיעדו את כל ששת הממצאים הצפויים בדוגמה זו.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "חשבון B עדיין תפס 6 מתוך 6. שתי קבלות לקחו יותר זמן. יחס הלכידה ועיכוב קבלת ההודעות עונים על שאלות שונות.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "חשבון B תפס 5 מתוך 6 עד למועד הסיום (83.3%). לעריכה החסרה אין עיכוב נמדד. תוצאה זו מתארת רק את שש הפעולות המבוקרות.", "not observed by cutoff": "לא נצפה עד למועד הסגירה", "{s} seconds": "{s} שניות", "Exact values follow in the table.": "הערכים המדויקים מופיעים בטבלה.", "{s} s": "{s} s", "Not observed": "לא נצפה", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "ארבעה צ'אטים מספקים תצפיות שונות. יש לעקוב אחר רשומות המקור עבור כל חיבור; אין לייחס את ההודעה בערוץ למשתמש 71001 ללא ציון השולח.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "הרשומות מס' 146 ו-205 מציגות את אותו מזהה שולח, 71001. דבר זה מקשר בין הפוסטים שנצפו בחשבון טלגרם בשני צ'אטים שונים. הוא אינו מזהה אדם אמיתי ואינו מייחס את הפוסט לערוץ.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "כתובת היעד pay.example.invalid/new מופיעה ברישום הקבוצה מס' 146, במקלדת הבוט מס' 173, בעריכת הערוץ מס' 188 ובהודעה פרטית מס' 205. כתובת יעד חוזרת מקשרת בין החומרים; היא אינה מהווה הוכחה לשליטה משותפת בחשבונות אלה.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "בקבלות המדיה המושלמות מס' 151 ו-209 יש ערכי SHA-256 מלאים זהים במקרה הבדיוני הזה. השוו את הבתים בפועל ואת רשומות ההודעות הקשורות אליהם. הקובץ התואם אינו מזהה את יוצרו ואינו מוכיח מי העביר אותו.", "the encrypted off-site copy": "העותק המוצפן מחוץ לאתר", "notifications": "התראות", "checkpoint hashes for timestamps": "חשישי checkpoint עבור חותמות זמן", "signed checkpoints for the witness": "נקודות ביקורת חתומות עבור ה-Witness", "Switched on in this example": "מופעל בדוגמה זו", "Optional · off by default": "אופציונלי · כבוי כברירת מחדל", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "יוצא מהמכשיר הזה: החיבור ל-Telegram ו-{list}. שום דבר אחר.", "Default: only the Telegram connection leaves this machine.": "ברירת מחדל: רק החיבור ל-Telegram יוצא ממחשב זה.", "{done} of {total} done": "{done} מתוך {total} הושלמו", "Mark step {n} as done": "סמן את השלב {n} כ\"בוצע\"", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "העתק", "Copied": "הועתק", "Command copied.": "הפקודה הועתקה.", "Selected — Ctrl/Cmd+C": "נבחר — Ctrl/Cmd+C", "Command selected. Copy it manually.": "הפקודה נבחרה. העתיקו אותה ידנית.", "Command copied to clipboard.": "הפקודה הועתקה ללוח.", "Select text": "בחר טקסט", "Clipboard unavailable. Command selected; copy it manually.": "הלוח אינו זמין. הפקודה נבחרה; העתק אותה ידנית.", "A message arrives. The first observation is saved.": "הודעה נכנסת. התצפית הראשונה נשמרת.", "The time changes. Both captured versions stay.": "הזמן משתנה. שתי הגרסאות שנשמרו נשארות.", "The message disappears. The captured history remains.": "ההודעה נעלמת. ההיסטוריה שנשמרה נשארת.", "Pause example animation": "השהה את האנימציה לדוגמה", "Play example animation": "הפעל אנימציה לדוגמה", "Play": "הפעל", "Full-size workspace screenshot": "צילום מסך של סביבת העבודה בגודל מלא", "Workspace screenshot · fictional data": "צילום מסך של סביבת העבודה · נתונים פיקטיביים", "Close": "סגור", "Close screenshot": "סגור צילום מסך", "Scrollable full-size screenshot": "צילום מסך בגודל מלא הניתן לגלילה", "Enlarge: {name}": "הגדל: {name}", "View full size": "הצג בגודל מלא"}</script>
+</body></html>

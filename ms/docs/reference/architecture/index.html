@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ms" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Arkitektur | TgWitness</title>
+<meta name="description" content="Komponen pengumpul, panel, jurnal, pekerja dan saksi, dan bagaimana data bergerak di antara mereka."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/architecture/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="ms_MY">
+<meta property="og:title" content="Arkitektur | TgWitness"><meta property="og:description" content="Komponen pengumpul, panel, jurnal, pekerja dan saksi, dan bagaimana data bergerak di antara mereka.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/ms/docs/reference/architecture/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/architecture/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/architecture/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/architecture/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/architecture/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/architecture/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/architecture/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/architecture/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/architecture/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/architecture/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/architecture/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/architecture/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/architecture/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/architecture/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/architecture/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/architecture/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/architecture/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/architecture/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/architecture/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/architecture/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/architecture/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/architecture/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/architecture/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/architecture/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/architecture/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/architecture/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/architecture/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/ms/docs/reference/architecture/", "url": "https://phishdestroy.github.io/TgWitness/ms/docs/reference/architecture/", "name": "Arkitektur | TgWitness", "description": "Komponen pengumpul, panel, jurnal, pekerja dan saksi, dan bagaimana data bergerak di antara mereka.", "inLanguage": "ms", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://phishdestroy.github.io/TgWitness/ms/"}, {"@type": "ListItem", "position": 2, "name": "Dokumentasi", "item": "https://phishdestroy.github.io/TgWitness/ms/docs/"}, {"@type": "ListItem", "position": 3, "name": "Rujukan", "item": "https://phishdestroy.github.io/TgWitness/ms/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Arkitektur", "item": "https://phishdestroy.github.io/TgWitness/ms/docs/reference/architecture/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Langkau ke kandungan</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Dokumentasi</span></a>
+<nav aria-label="Panduan"><a href="../../concepts/">Panduan visual</a><a href="../../">Semua panduan</a><a href="../">Rujukan</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Bahasa"><span aria-hidden="true">◍</span> Bahasa Melayu</summary><div class="lang-list"><a href="../../../../docs/reference/architecture/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/architecture/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/architecture/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/architecture/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/architecture/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/architecture/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/architecture/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/architecture/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/architecture/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/architecture/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/architecture/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/architecture/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/architecture/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/architecture/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/architecture/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/architecture/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/architecture/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/architecture/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/architecture/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="./" hreflang="ms" lang="ms" aria-current="true">Bahasa Melayu</a><a href="../../../../pl/docs/reference/architecture/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/architecture/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/architecture/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/architecture/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/architecture/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Beralih antara tema cerah dan gelap"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Panduan"><a href="../../../guides/modes.html">Mod, senario dan tahap bukti</a><p class="nav-label">Langkah pertama</p><a href="../../start/">Mulakan dalam beberapa minit</a><a href="../../accounts/">Sambungkan akaun</a><a href="../../proxies/">Pilih proksi</a><a href="../../exports/">Eksport dan sahkan</a><p class="nav-label">Memahami bukti</p><a href="../../concepts/">Lihat bagaimana bukti berfungsi</a><a href="../../cases/">Siasat di semua sembang</a><a href="../../security/">Jaga keselamatannya</a><p class="nav-label">Teruskan lagi</p><a href="../../witness/">Menyediakan bot saksi</a><a href="../../server/">Teruskan menjalankannya</a><a href="../../troubleshooting/">Temui apa yang salah</a></nav><nav class="wiki-nav" aria-label="Rujukan"><p class="nav-label"><a class="nav-label-link" href="../">Rujukan</a></p><details class="wiki-group"><summary>Pemasangan</summary><a href="../quickstart/">Permulaan pantas</a><a href="../accounts/">Akaun dan format sesi</a><a href="../connection/">Sambungan, proksi dan perlindungan data</a><a href="../deployment/">Penyebaran</a></details><details class="wiki-group"><summary>Kumpulkan</summary><a href="../collection/">Bagaimana pengumpulan berfungsi</a><a href="../operations/">Aliran kerja dan operasi</a><a href="../investigation/">Mod siasatan</a><a href="../features/">Ciri dan had</a></details><details class="wiki-group"><summary>Bukti</summary><a href="../how-it-works/">Bagaimana bukti berfungsi</a><a href="../evidence/">Format bukti</a><a href="../witness/">Saksi bebas</a><a href="../timestamp/">Cap masa</a></details><details class="wiki-group" open><summary>Keselamatan & projek</summary><a href="../security/">Keselamatan dan pengendalian data</a><a href="./" aria-current="page">Arkitektur</a><a href="../verification/">Apa yang telah diuji</a><a href="../license/">Notis lesen dan ketidakserasian seni bina</a><a href="../notice/">Notis ketidakpadanan pengendali</a><a href="../changelog/">Logs perubahan</a></details></nav><p class="sidebar-note">v0.7.0<br>Sumber terbuka · Berjalan pada mesin anda</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Panduan"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentasi</a> <span aria-hidden="true">/</span> <a href="../">Rujukan</a> <span aria-hidden="true">/</span> <span aria-current="page">Arkitektur</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Cari dalam dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Cuba proksi, rantaian hash, token atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Carian jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Taip satu perkataan untuk mencari panduan dan rujukan. Carian kekal di pelayar anda.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Rujukan / Keselamatan &amp; projek</p><h1>Arkitektur</h1><p class="guide-outcome">Komponen pengumpul, panel, jurnal, pekerja dan saksi, dan bagaimana data bergerak di antara mereka.</p><div class="wiki-body"><p>Satu proses Python menjadi hos panel FastAPI dan sebarang bilangan ruang kerja terasing, setiap satu dengan klien akaun pengguna Telethon. SQLite menyimpan jurnal peristiwa berasingan yang hanya menambah dan tetapan operasi yang boleh diubah.
+Sebuah peti besi yang disulitkan menyimpan kelayakan API, StringSession, dan kunci penandatanganan.
+Bahagian hadapan adalah HTML/CSS/JavaScript biasa yang dibundel: tiada pembinaan Node, CDN, atau muat turun bahagian hadapan semasa runtime diperlukan.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Modul</th>
+<th>Tanggungjawab</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>collector.py</td>
+<td>Autorisasi, pemilihan dialog, kemas kini, tangkapan skrin, barisan media, pemantauan sambungan</td>
+</tr>
+<tr>
+<td>interactions.py / telegram_client.py</td>
+<td>Tindakan panel yang jelas, resit yang disahkan, ID permintaan berterusan dan dasar percubaan semula callback/sertai tempatan tugas</td>
+</tr>
+<tr>
+<td>message_content.py</td>
+<td>Perbandingan mesej yang dapat diperhatikan, mengecualikan metadata capaian penghantaran</td>
+</tr>
+<tr>
+<td>workers.py</td>
+<td>Tunggu pekerja fail eksport sebelum pembersihan pembatalan</td>
+</tr>
+<tr>
+<td>store.py</td>
+<td>Transaksi WAL, rantaian peristiwa teratur, penapis pertanyaan, tetapan operasi</td>
+</tr>
+<tr>
+<td>security.py</td>
+<td>Penciptaan fail peribadi, peti simpanan disulitkan, tandatangan Ed25519, kunci proses tunggal</td>
+</tr>
+<tr>
+<td>evidence.py</td>
+<td>Eksport jurnal lengkap, derivatif, titik pemeriksaan, pengesahan lampiran</td>
+</tr>
+<tr>
+<td>verify.py</td>
+<td>Pemverifikasi berdiri sendiri, baca sahaja (stdlib + kriptografi): arkib, liputan, jurnal saksi dan kiriman saluran, fail profil</td>
+</tr>
+<tr>
+<td>app.py</td>
+<td>API yang disahkan, kitar hayat, pengesahan permintaan, panel statik</td>
+</tr>
+<tr>
+<td>profiles.py</td>
+<td>Pelbagai pengumpul akaun terasing, token panel kongsi, kitar hayat setiap ruang kerja</td>
+</tr>
+<tr>
+<td>provenance.py</td>
+<td>Pengukuran identiti, kod dan kebergantungan yang ditandatangani oleh proses akuisisi</td>
+</tr>
+<tr>
+<td>network.py</td>
+<td>Laluan per-workspace yang disahkan; status dan bukti yang disembunyikan; pilihan pengangkutan Telethon</td>
+</tr>
+<tr>
+<td>sessions.py</td>
+<td>Penukaran hanya-baca luar talian bagi skema SQLite Telethon yang telah disemak</td>
+</tr>
+<tr>
+<td>account_import.py</td>
+<td>Pengesanan dan penormalan dalam memori bagi fail akaun dan JSON yang disokong</td>
+</tr>
+<tr>
+<td>tdata.py</td>
+<td>Pembaca ZIP TData moden terhad, pengesahan checksum/penyahsulit, tiada ekstraksi</td>
+</tr>
+<tr>
+<td>doctor.py</td>
+<td>Semakan kesiapsiagaan tempatan tanpa pengumpulan, log masuk atau pemasangan pakej</td>
+</tr>
+<tr>
+<td>download.py</td>
+<td>Muat turun eksport penstriman yang disahkan dengan bacaan terhad dan tanpa ke atas menulis</td>
+</tr>
+<tr>
+<td>monitoring.py</td>
+<td>Dasar peristiwa setiap ruang kerja dan peraturan lampiran mengikut jenis yang disahkan, dikongsi oleh pengendali, status dan resit yang ditandatangani</td>
+</tr>
+<tr>
+<td>scope.py</td>
+<td>Skop pemerhatian (perbualan terpilih, folder Telegram, keseluruhan akaun), jenis sumber, pengecualian, peringkat semakan semula</td>
+</tr>
+<tr>
+<td>dossier.py</td>
+<td>Profil orang bagi setiap sembang dibina daripada rekod yang disimpan: fakta dengan rujukan rekod, SHA-256/pHash avatar, pengekstrakan sebutan</td>
+</tr>
+<tr>
+<td>witness_api.py</td>
+<td>Token saksi baca sahaja dan tajuk jurnal yang disahkan yang boleh mereka ambil</td>
+</tr>
+<tr>
+<td>witness.py</td>
+<td>Proses saksi bebas: kunci dan jurnal sendiri, pemeriksaan utama, kiriman saluran yang disahkan, eksport</td>
+</tr>
+<tr>
+<td>alerts.py</td>
+<td>Notifikasi Apprise dan senarai notifikasi panel</td>
+</tr>
+<tr>
+<td>logging_config.py</td>
+<td>Log konsol dan diagnostik pelayan berputar untuk pelancaran tanpa tetingkap</td>
+</tr>
+<tr>
+<td>statik/</td>
+<td>Antaramuka responsif, pintu akses tempatan, penapis, butiran, eksport, tetapan akaun</td>
+</tr>
+<tr>
+<td>demo.py</td>
+<td>Jurnal sintetik dilabel dengan jelas, diasingkan daripada pengumpulan sebenar</td>
+</tr>
+</tbody>
+</table></div>
+<p>Pengendali pemerhatian didaftarkan sebelum sambungan. Pengumpulan langsung dikawal oleh identiti klien aktif, status pelaksanaan nyata, sumber yang diaktifkan atau skop pemerhatian (mod folder atau akaun penuh menambah sembang baru sebagai sumber pada kemas kini pertamanya), dan dasar acara. Klien yang ditolak dan digantikan tidak dapat menyumbang kemas kini langsung. Reaksi mentah dan kemas kini keahlian mengekalkan had keterlihatan. Kandungan mesej masuk dan tugas media tahan lama-nya disimpan bersama. Tugas mengekalkan penerang TL asal dan mengikat hash-nya kepada pemerhatian mesej yang disahkan. Semantik penghantar/penyunting/pembuang dipisahkan.</p>
+<p>Setiap ruang kerja menerima satu akaun dan mempunyai direktori serta identiti tandatangan sendiri.
+Ruang kerja utama kekal di root untuk keserasian; ruang kerja tambahan terletak di
+profiles/&lt;id&gt;/. Satu token pemegang mengawal keseluruhan pemasangan; ruang kerja bukan
+penyewa kebenaran berasingan. Kunci proses melindungi direktori; kunci pangkalan data menyusun selingan peristiwa secara bersiri. Setiap tampalan melakukan komitmen secara serentak ke WAL SQLite dengan mod serentak PENUH. Pencetus kemas kini/pembuangan peristiwa menghalang suntingan aplikasi biasa; pentadbir sistem fail kekal di dalam sempadan kepercayaan.</p>
+<p>Autorisasi API adalah token pembawa. Operasi log masuk disusun secara bersiri dan terhad mengikut masa.
+Pemunggahan akaun menggunakan had khusus 12 MiB untuk badan yang disulitkan dan had 8 MiB untuk fail yang terdekod; permintaan API biasa mengekalkan had 16 KiB. Penukaran dijalankan dalam benang pekerja (worker thread), menyimpan muat naik dalam memori, dan memulangkan input yang dinormalisasi kepada pelayar yang disahkan. Log masuk QR mempunyai calon bagi setiap ruang kerja, pengecam jangka pendek, tugas penanti, dan pembatalan eksplisit. Hanya kebenaran yang diterima akan menjadi klien aktif.
+Telegram FloodWait dikembalikan dengan nilai Retry-After; kelayakan dan mesej ralat RPC mentah tidak didedahkan dalam ralat API. Eksport dijalankan di luar gelung peristiwa asenkron dan disusun mengikut ruang kerja. Ia menyalurkan snapshot bacaan yang stabil, dan boleh wujud bersama dengan penulisan WAL yang berterusan. Pengumpul ruang kerja berkongsi gelung proses/peristiwa.</p>
+<p>Snapshot sejarah semasa dan kemas kini langsung boleh bertindih. Kedua-duanya adalah pemerhatian berasingan, dilabel mengikut sumber; duplikat tidak digabungkan secara senyap. Tiada inferens daripada ID yang hilang, teks yang dipadam tetapi dicipta, penyenaraian paksa ahli, atau penyertaan automatik dalam kumpulan dilaksanakan.</p>
+<p>Untuk penjelasan yang ditujukan kepada pengendali, lihat <a href="../collection/">bagaimana pengumpulan berfungsi</a> dan <a href="../accounts/">format akaun serta sesi</a>.</p>
+<p>Konfigurasi rangkaian disimpan dalam peti keselamatan yang disulitkan. Menggunakan laluan akan menutup klien lama dan membatalkan log masuk yang belum selesai; sambungan kemudian menggunakan laluan tersebut tanpa sebarang ralat balik langsung. Pemasangan kunci luaran baharu menghasilkan kunci Fernet setiap ruang kerja dengan HKDF-SHA256 daripada fail kunci induk dan garam rawak yang disimpan. Ini melindungi rahsia secara berasingan daripada direktori data, bukan kandungan jurnal/media dalam teks biasa.</p>
+<p>Kemasukan demo tempatan menggunakan keupayaan proses yang dijana secara berasingan, dan tidak pernah menggunakan token panel yang dikonfigurasikan. Penerbitan dan penerimaan memerlukan mod demo secara eksplisit, root sintetik tanpa ruang kerja tambahan atau sesi yang dibenarkan, rakan sebantal/Host loopback, tiada penanda aras penghalaan proksi, dan tiada permintaan pelayar rentas asal. API langsung mengekalkan pengesahan pembawa dan menolak perubahan pengumpulan dalam mod demo.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ARCHITECTURE.md">Sunting halaman ini di GitHub ↗</a><a class="next-guide" href="../verification/"><span>Langkah seterusnya</span><strong>Apa yang telah diuji →</strong></a><p>Panduan ini menerangkan pelaksanaan semasa. Keputusan pengesahan dan jurang yang masih ada didokumenkan secara berasingan. <a href="../verification/">Apa yang telah diuji →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Pada halaman ini"></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Sumber terbuka · Berjalan pada mesin anda</span><a href="../../../../LICENSE">lesen MIT</a><a href="../notice/">Notis pengendali</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Keselamatan</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Menunggu mesej", "Step through a fictional send, edit and delete.": "Lalui langkah demi langkah penghantaran, penyuntingan dan pemadaman rekaan.", "No observations yet. Start the sequence or advance one event.": "Tiada pemerhatian setakat ini. Mulakan urutan atau majukan satu peristiwa.", "Meet at 10:00": "Bertemu pada pukul 10:00", "A new message is visible in the chat.": "Satu mesej baru kelihatan dalam sembang.", "Record 1 appended: the collector observed the original message.": "Rekod 1 dilampirkan: pengumpul memerhati mesej asal.", "Meet at 11:00": "Bertemu pada pukul 11:00", "The current text changes. The earlier observation stays.": "Teks semasa berubah. Pengamatan terdahulu kekal.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Rekod 2 dilampirkan: suntingan ini adalah pemerhatian baru. Rekod 1 masih mengekalkan teks asal.", "Message deleted": "Mesej telah dipadam", "The message has disappeared from the chat view.": "Mesej itu telah hilang daripada paparan sembang.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Rekod 3 dilampirkan: notis pemadaman disimpan bersama kedua-dua versi yang diperhatikan.", "0 records": "0 rekod", "1 record": "1 rekod", "2 records": "2 rekod", "3 records": "3 rekod", "Complete / {n} of 3": "Selesai / {n} daripada 3", "Step / {n} of 3": "Langkah / {n} daripada 3", "Pause": "Pause", "Replay sequence": "Susunan semula urutan", "Play sequence": "Mainkan urutan", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Contoh statik tersedia. Untuk mengira hash secara interaktif, buka halaman ini melalui HTTPS atau pratonton localhost dengan sokongan Web Crypto.", "No record supplied": "Tiada rekod disediakan", "Tail removed": "Bahagian akhir telah dialih keluar", "≠ saved hash": "≠ hash yang disimpan", "Rebuilt · different hash": "Dibina semula · hash berbeza", "= saved hash": "= hash yang disimpan", "Same length and matching head.": "Panjang yang sama dan kepala yang sepadan.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Ketiga-tiga hash yang dikira sepadan dengan hash yang disimpan. Sampel ini selari dengan sempadan tiga rekod yang disimpan.", "Same saved head; the journal prefix fails verification.": "Kepala yang sama disimpan; awalan jurnal gagal pengesahan.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Rekod 2 tidak lagi sepadan dengan hash yang disimpannya. Memeriksa hanya kepala simpanan terakhir akan terlepas perkara ini; pengesah memeriksa setiap rekod.", "Head differs from the retained checkpoint.": "Kepala berbeza daripada checkpoint yang disimpan.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Hashes yang dibina semula saling berkait, tetapi kepala terakhir telah berubah. Titik pemeriksaan yang dikekalkan menolak sejarah ini. Tandatangan asal juga akan gagal pada rekod yang diubah.", "Too short: 2 supplied records \u003c 3 retained records.": "Terlalu pendek: 2 rekod dibekalkan \u003c 3 rekod disimpan.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Dua hash yang masih tinggal masih sepadan. Titik pemeriksaan yang dikekalkan mendedahkan ekor yang hilang. Tanpa sempadan awal itu, hanya awalan yang lebih pendek ini tidak akan mendedahkan pengecualian tersebut.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Pengiraan hash tidak tersedia dalam pelayar ini. Formula dan penjelasan statik di bawah masih tersedia.", "{n} records": "{n}rekod", "head {hash}": "Hujung {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Diterima: bilangan meningkat, tandatangan disahkan dan kunci sepadan. Saksi mengekalkan sempadan baharu ini.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: jawapan yang disahkan melaporkan lebih sedikit rekod berbanding titik pemeriksaan terakhir yang diterima. Saksi merekodkan masalah dan mengekalkan sempadan yang diterima sebelum ini.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Simpangan: bilangan tidak berubah tetapi kepala berbeza. Saksi merekodkan perselisihan dan mengekalkan sempadan yang diterima sebelum ini.", "No answer": "Tiada jawapan", "boundary unknown": "batas tidak diketahui", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Tiada maklum balas: saksi merekodkan pemeriksaan yang gagal. Ia tidak dapat mengesahkan keadaan semasa pengumpul. Jika saksi masih dapat mencapai Bot API dan dasar penerbitannya membenarkan, ia boleh menerbitkan kegagalan tersebut.", "Send {n}": "Hantar {n}", "Edit {n}": "Sunting {n}", "Delete {n}": "Padam {n}", "Both accounts captured all six expected observations in this example.": "Kedua-dua akaun merakam kesemua enam pemerhatian yang dijangka dalam contoh ini.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Akaun B masih menangkap 6 daripada 6. Dua resit mengambil masa lebih lama. Nisbah tangkapan dan kelewatan resit menjawab soalan yang berbeza.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Akaun B merakam 5 daripada 6 sebelum had masa (83.3%). Suntingan yang hilang tidak mempunyai kelewatan yang diukur. Keputusan ini hanya menerangkan enam tindakan terkawal.", "not observed by cutoff": "tidak dikesan oleh cutoff", "{s} seconds": "{s} saat", "Exact values follow in the table.": "Nilai tepat diikuti dalam jadual.", "{s} s": "{s}s", "Not observed": "Tidak diperhatikan", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Empat perbualan menyumbang pemerhatian yang berbeza. Ikuti rekod sumber bagi setiap sambungan; jangan kaitkan kiriman saluran kepada pengguna 71001 tanpa penghantar yang disahkan.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Rekod #146 dan #205 memberikan ID penghantar yang sama, 71001. Ini menghubungkan kiriman yang diperhatikan daripada akaun Telegram merentasi dua sembang. Ia tidak mengenal pasti individu sebenar atau mengaitkan kiriman saluran tersebut.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Tujuan pay.example.invalid/new muncul dalam rekod kumpulan #146, papan kekunci bot #173, suntingan saluran #188 dan mesej peribadi #205. Tujuan yang berulang menghubungkan bahan tersebut; ia tidak membuktikan kawalan bersama ke atas akaun-akaun tersebut.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Resit media yang diselesaikan #151 dan #209 mempunyai nilai SHA-256 penuh yang sama dalam kes fiksyen ini. Bandingkan bait sebenar dan rekod mesej yang berkaitan. Fail yang sepadan tidak mengenal pasti penciptanya atau membuktikan siapa yang menghantarnya.", "the encrypted off-site copy": "salinan luar tapak yang disulitkan", "notifications": "pemberitahuan", "checkpoint hashes for timestamps": "Hash titik pemeriksaan untuk cap masa", "signed checkpoints for the witness": "titik pemeriksaan bertandatangan untuk saksi", "Switched on in this example": "Diaktifkan dalam contoh ini", "Optional · off by default": "Pilihan · dimatikan secara lalai", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Meninggalkan mesin ini: sambungan Telegram dan {list}. Tiada apa-apa lagi.", "Default: only the Telegram connection leaves this machine.": "Lalai: hanya sambungan Telegram yang keluar dari mesin ini.", "{done} of {total} done": "{done} daripada {total} telah selesai", "Mark step {n} as done": "Tandakan langkah {n} sebagai selesai", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Salin", "Copied": "Disalin", "Command copied.": "Perintah disalin.", "Selected — Ctrl/Cmd+C": "Disalin — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Perintah telah dipilih. Salin secara manual.", "Command copied to clipboard.": "Perintah disalin ke papan klip.", "Select text": "Pilih teks", "Clipboard unavailable. Command selected; copy it manually.": "Papan klip tidak tersedia. Perintah telah dipilih; salin secara manual.", "A message arrives. The first observation is saved.": "Satu mesej tiba. Pengamatan pertama disimpan.", "The time changes. Both captured versions stay.": "Waktu berubah. Kedua-dua versi yang dirakam kekal.", "The message disappears. The captured history remains.": "Mesej itu hilang. Sejarah yang dirakam kekal.", "Pause example animation": "Jeda animasi contoh", "Play example animation": "Mainkan animasi contoh", "Play": "Main", "Full-size workspace screenshot": "Tangkapan skrin ruang kerja bersaiz penuh", "Workspace screenshot · fictional data": "Tangkapan skrin ruang kerja · data rekaan", "Close": "Tutup", "Close screenshot": "Tutup tangkapan skrin", "Scrollable full-size screenshot": "Skrinshot bersaiz penuh yang boleh disejuk", "Enlarge: {name}": "Perbesarkan: {name}", "View full size": "Lihat saiz penuh"}</script>
+</body></html>

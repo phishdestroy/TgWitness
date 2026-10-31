@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="pl" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Architektura | TgWitness</title>
+<meta name="description" content="Elementy składowe: moduł zbierający, panel, dziennik, moduły robocze oraz moduł „witness”, a także sposób przepływu danych między nimi."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/architecture/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:title" content="Architektura | TgWitness"><meta property="og:description" content="Elementy składowe: moduł zbierający, panel, dziennik, moduły robocze oraz moduł „witness”, a także sposób przepływu danych między nimi.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/pl/docs/reference/architecture/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/architecture/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/architecture/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/architecture/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/architecture/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/architecture/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/architecture/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/architecture/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/architecture/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/architecture/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/architecture/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/architecture/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/architecture/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/architecture/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/architecture/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/architecture/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/architecture/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/architecture/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/architecture/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/architecture/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/architecture/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/architecture/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/architecture/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/architecture/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/architecture/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/architecture/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/architecture/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/pl/docs/reference/architecture/", "url": "https://phishdestroy.github.io/TgWitness/pl/docs/reference/architecture/", "name": "Architektura | TgWitness", "description": "Elementy składowe: moduł zbierający, panel, dziennik, moduły robocze oraz moduł „witness”, a także sposób przepływu danych między nimi.", "inLanguage": "pl", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Strona główna", "item": "https://phishdestroy.github.io/TgWitness/pl/"}, {"@type": "ListItem", "position": 2, "name": "Dokumentacja", "item": "https://phishdestroy.github.io/TgWitness/pl/docs/"}, {"@type": "ListItem", "position": 3, "name": "Odniesienie", "item": "https://phishdestroy.github.io/TgWitness/pl/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Architektura", "item": "https://phishdestroy.github.io/TgWitness/pl/docs/reference/architecture/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Przejdź do treści</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Dokumentacja</span></a>
+<nav aria-label="Przewodniki"><a href="../../concepts/">Przewodnik wizualny</a><a href="../../">Wszystkie przewodniki</a><a href="../">Odniesienie</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Język"><span aria-hidden="true">◍</span> Polski</summary><div class="lang-list"><a href="../../../../docs/reference/architecture/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/architecture/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/architecture/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/architecture/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/architecture/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/architecture/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/architecture/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/architecture/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/architecture/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/architecture/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/architecture/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/architecture/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/architecture/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/architecture/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/architecture/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/architecture/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/architecture/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/architecture/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/architecture/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/architecture/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="./" hreflang="pl" lang="pl" aria-current="true">Polski</a><a href="../../../../ja/docs/reference/architecture/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/architecture/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/architecture/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/architecture/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Przełączanie między jasnym a ciemnym motywem"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Przewodniki"><a href="../../../guides/modes.html">Tryby, scenariusze i poziomy dowodów</a><p class="nav-label">Pierwsze kroki</p><a href="../../start/">Rozpocznij w ciągu kilku minut</a><a href="../../accounts/">Podłącz konto</a><a href="../../proxies/">Proszę wybrać serwer proxy</a><a href="../../exports/">Eksportowanie i weryfikacja</a><p class="nav-label">Zrozumienie dowodów</p><a href="../../concepts/">Zobacz, jak działa system gromadzenia dowodów</a><a href="../../cases/">Przeprowadzanie dochodzeń we wszystkich czatach</a><a href="../../security/">Dbaj o bezpieczeństwo</a><p class="nav-label">Dowiedz się więcej</p><a href="../../witness/">Skonfiguruj bota Witness</a><a href="../../server/">Prosimy o dalsze prowadzenie tej strony</a><a href="../../troubleshooting/">Dowiedz się, co poszło nie tak</a></nav><nav class="wiki-nav" aria-label="Odniesienie"><p class="nav-label"><a class="nav-label-link" href="../">Odniesienie</a></p><details class="wiki-group"><summary>Konfiguracja</summary><a href="../quickstart/">Szybki start</a><a href="../accounts/">Konta i formaty sesji</a><a href="../connection/">Połączenia, serwery proxy i ochrona danych</a><a href="../deployment/">Wdrożenie</a></details><details class="wiki-group"><summary>Zbieraj</summary><a href="../collection/">Jak przebiega gromadzenie danych</a><a href="../operations/">Procesy i operacje</a><a href="../investigation/">Tryb dochodzeniowy</a><a href="../features/">Funkcje i ograniczenia</a></details><details class="wiki-group"><summary>Dowody</summary><a href="../how-it-works/">Jak działa ten rejestr dowodów</a><a href="../evidence/">Format dowodów</a><a href="../witness/">Niezależny świadek</a><a href="../timestamp/">Sygnatury czasowe</a></details><details class="wiki-group" open><summary>Bezpieczeństwo i projekt</summary><a href="../security/">Bezpieczeństwo i przetwarzanie danych</a><a href="./" aria-current="page">Architektura</a><a href="../verification/">Co zostało przetestowane</a><a href="../license/">Informacja o licencji i niezgodności architektonicznej</a><a href="../notice/">Powiadomienie o niezgodności operatorów</a><a href="../changelog/">Lista zmian</a></details></nav><p class="sidebar-note">v0.7.0<br>Oprogramowanie typu open source · Działa na Państwa komputerze</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Przewodniki"><a href="../../../">Strona główna</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentacja</a> <span aria-hidden="true">/</span> <a href="../">Odniesienie</a> <span aria-hidden="true">/</span> <span aria-current="page">Architektura</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Przeszukaj dokumentację</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proszę rozważyć użycie terminów takich jak: serwer proxy, łańcuch skrótów, token lub świadek…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Przejrzyste wyszukiwanie" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Wpisz słowo, aby przeszukać przewodniki i materiały referencyjne. Wyniki wyszukiwania pozostają w Państwa przeglądarce.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Odniesienie / Bezpieczeństwo i projekt</p><h1>Architektura</h1><p class="guide-outcome">Elementy składowe: moduł zbierający, panel, dziennik, moduły robocze oraz moduł „witness”, a także sposób przepływu danych między nimi.</p><div class="wiki-body"><p>Jeden proces w języku Python obsługuje panel FastAPI oraz dowolną liczbę izolowanych obszarów roboczych,
+z których każdy posiada klienta konta użytkownika Telethon.
+Baza danych SQLite przechowuje podpisany dziennik zdarzeń z możliwością wyłącznie dodawania wpisów oraz zmienne ustawienia operacyjne.
+W zaszyfrowanym sejfie przechowywane są dane uwierzytelniające API, obiekt StringSession oraz klucz podpisujący.
+Interfejs użytkownika stanowi zwykły pakiet plików HTML/CSS/JavaScript: nie jest wymagana kompilacja w środowisku Node, korzystanie z sieci CDN ani pobieranie
+interfejsu użytkownika w czasie wykonywania.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Moduł</th>
+<th>Odpowiedzialność</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>collector.py</td>
+<td>Autoryzacja, wybór okien dialogowych, aktualizacje, migawki, kolejka multimediów, monitorowanie połączeń</td>
+</tr>
+<tr>
+<td>interactions.py / telegram_client.py</td>
+<td>Wyraźnie określone działania paneli, podpisane potwierdzenia, trwałe identyfikatory żądań oraz polityka ponownych prób wywołań zwrotnych i dołączania w ramach danego zadania</td>
+</tr>
+<tr>
+<td>message_content.py</td>
+<td>Porównanie widocznych wiadomości, z wyłączeniem metadanych dotyczących dostępu do sieci transportowej</td>
+</tr>
+<tr>
+<td>workers.py</td>
+<td>Należy poczekać na zakończenie pracy procesów eksportujących pliki przed przeprowadzeniem operacji czyszczenia po anulowaniu</td>
+</tr>
+<tr>
+<td>store.py</td>
+<td>Transakcje WAL, uporządkowany łańcuch zdarzeń, filtry zapytań, ustawienia operacyjne</td>
+</tr>
+<tr>
+<td>security.py</td>
+<td>Tworzenie plików prywatnych, zaszyfrowany sejf, podpisywanie algorytmem Ed25519, blokada pojedynczego procesu</td>
+</tr>
+<tr>
+<td>evidence.py</td>
+<td>Eksport pełnego dziennika, pliki pochodne, punkty kontrolne, weryfikacja załączników</td>
+</tr>
+<tr>
+<td>verify.py</td>
+<td>Samodzielny weryfikator tylko do odczytu (biblioteka standardowa + kryptografia): archiwa, zakres, dzienniki świadków i posty na kanałach, pliki profilowe</td>
+</tr>
+<tr>
+<td>app.py</td>
+<td>Uwierzytelnione API, cykl życia, walidacja żądań, panel statyczny</td>
+</tr>
+<tr>
+<td>profiles.py</td>
+<td>Wiele niezależnych modułów zbierających dane z kont, wspólny token panelu, cykl życia dostosowany do poszczególnych obszarów roboczych</td>
+</tr>
+<tr>
+<td>provenance.py</td>
+<td>Podpisane pomiary tożsamości, kodu i zależności w trakcie procesu pozyskiwania danych</td>
+</tr>
+<tr>
+<td>network.py</td>
+<td>Zweryfikowane ścieżki dla poszczególnych obszarów roboczych; status i dowody poddane redakcji; opcje przesyłania danych w ramach Telethon</td>
+</tr>
+<tr>
+<td>sessions.py</td>
+<td>Konwersja zweryfikowanych schematów bazy danych Telethon w formacie SQLite do trybu tylko do odczytu w trybie offline</td>
+</tr>
+<tr>
+<td>account_import.py</td>
+<td>Wykrywanie i normalizacja w pamięci obsługiwanych plików kont oraz plików JSON</td>
+</tr>
+<tr>
+<td>tdata.py</td>
+<td>Ograniczony, nowoczesny czytnik plików ZIP TData, weryfikacja sum kontrolnych i odszyfrowania, bez wyodrębniania danych</td>
+</tr>
+<tr>
+<td>doctor.py</td>
+<td>Lokalne testy gotowości bez gromadzenia danych, logowania ani instalacji pakietów</td>
+</tr>
+<tr>
+<td>download.py</td>
+<td>Uwierzytelniony eksport strumieniowy z możliwością pobrania, z ograniczonymi operacjami odczytu i bez nadpisywania danych</td>
+</tr>
+<tr>
+<td>monitoring.py</td>
+<td>Zweryfikowane zasady dotyczące zdarzeń w poszczególnych obszarach roboczych oraz reguły dotyczące załączników w zależności od typu, udostępniane przez osoby odpowiedzialne za obsługę, statusy oraz podpisane potwierdzenia odbioru</td>
+</tr>
+<tr>
+<td>scope.py</td>
+<td>Zakres monitorowania (wybrane czaty, folder Telegramu, całe konto), typy źródeł, wykluczenia, poziomy ponownej weryfikacji</td>
+</tr>
+<tr>
+<td>dossier.py</td>
+<td>Profile użytkowników dla poszczególnych czatów tworzone na podstawie zapisanych danych: fakty wraz z odniesieniami do zapisów, skróty SHA-256/pHash awatarów, ekstrakcja wzmianek</td>
+</tr>
+<tr>
+<td>witness_api.py</td>
+<td>Tokeny świadków z prawem tylko do odczytu oraz podpisany nagłówek dziennika, który mogą pobrać</td>
+</tr>
+<tr>
+<td>witness.py</td>
+<td>Niezależny proces świadectwa: własny klucz i dziennik, weryfikacja tożsamości, podpisane posty na kanałach, eksport</td>
+</tr>
+<tr>
+<td>alerts.py</td>
+<td>Powiadomienia w aplikacji Apprise oraz lista powiadomień na panelu</td>
+</tr>
+<tr>
+<td>logging_config.py</td>
+<td>Rejestrowanie w konsoli oraz rotacyjna diagnostyka serwera w przypadku uruchomień bez okien graficznych</td>
+</tr>
+<tr>
+<td>static/</td>
+<td>Interfejs dostosowujący się do różnych urządzeń, lokalna brama dostępu, filtry, szczegóły, eksport danych, konfiguracja konta</td>
+</tr>
+<tr>
+<td>demo.py</td>
+<td>Wyraźnie oznaczony dziennik syntetyczny, oddzielony od rzeczywistych danych</td>
+</tr>
+</tbody>
+</table></div>
+<p>Moduły obsługi obserwacji są rejestrowane przed nawiązaniem połączenia. Gromadzenie danych na żywo jest ograniczone przez
+tożsamość aktywnego klienta, wyraźny stan działania, włączone źródła lub zakres
+obserwacji (tryby folderowe lub obejmujące całe konto dodają nową rozmowę jako źródło przy jej pierwszej aktualizacji) oraz zasady
+dotyczące zdarzeń. Odrzuceni i zastąpieni klienci nie mogą przekazywać aktualizacji na żywo. Surowe reakcje i aktualizacje członkostwa
+zachowują ograniczenia widoczności. Treść przychodzącej wiadomości oraz związane z nią zadanie trwałego nośnika są
+zapisywane łącznie. Zadania zachowują oryginalny deskryptor TL i wiążą jego skrót z
+podpisaną obserwacją wiadomości. Semantyka nadawcy, edytora i usuwającego jest rozdzielona.</p>
+<p>Każdy obszar roboczy obsługuje jedno konto i posiada własny katalog oraz tożsamość podpisującą.
+Główny obszar roboczy pozostaje w katalogu głównym ze względu na kompatybilność; dodatkowe obszary robocze znajdują się w
+katalogu profiles/&lt;id&gt;/. Całą instalacją zarządza jeden token typu „bearer”; obszary robocze nie stanowią
+oddzielnych podmiotów autoryzacyjnych. Blokady procesów chronią katalogi; blokady bazy danych
+serializują wstawianie zdarzeń. Każde dodanie jest zapisywane synchronicznie
+do dziennika WAL bazy SQLite w trybie pełnej synchronizacji. Wyzwalacze aktualizacji/usuwania zdarzeń uniemożliwiają
+zwykłe edycje w aplikacji; administratorzy systemu plików pozostają w granicach strefy zaufania.</p>
+<p>Autoryzacja API odbywa się za pomocą tokenu typu „bearer”. Operacje logowania są serializowane i ograniczone czasowo.
+Przesyłanie danych z konta podlega dedykowanemu limitowi 12 MiB dla zakodowanego treści oraz limitowi 8 MiB dla zdekodowanego pliku;
+zwykłe żądania API zachowują limit 16 KiB. Konwersja przebiega w wątku roboczym,
+przechowuje przesłane dane w pamięci i zwraca znormalizowane dane wejściowe do uwierzytelnionej
+przeglądarki. Logowanie za pomocą kodu QR obejmuje kandydata dla danego obszaru roboczego, krótkotrwały identyfikator, zadanie oczekujące
+oraz wyraźne anulowanie. Tylko zaakceptowana autoryzacja staje się aktywnym klientem.
+Funkcja Telegram FloodWait zwraca wartość Retry-After; dane uwierzytelniające oraz surowe komunikaty o błędach RPC
+nie są ujawniane w komunikatach o błędach API. Eksporty przebiegają poza asynchroniczną pętlą zdarzeń
+i są serializowane dla poszczególnych obszarów roboczych. Przesyłają one strumieniowo stabilną migawkę odczytu i mogą
+współistnieć z trwającym zapisem do dziennika WAL. Kolektory obszarów roboczych współdzielą pętlę procesową/zdarzeniową.</p>
+<p>Aktualne migawki historii i aktualizacje na żywo mogą się nakładać. Obie stanowią odrębne obserwacje,
+oznaczone źródłem; duplikaty nie są automatycznie zwijane. Nie stosuje się żadnych wnioskowań na podstawie brakujących
+identyfikatorów, sfabrykowanego usuniętego tekstu, wymuszonego wyliczania członków ani automatycznego dołączania do grup.
+Nie jest to wdrażane.</p>
+<p>Aby zapoznać się z wyjaśnieniami przeznaczonymi dla operatorów, proszę zapoznać się z <a href="../collection/">opisem działania procesu gromadzenia danych</a>
+oraz <a href="../accounts/">formatami kont i sesji</a>.</p>
+<p>Konfiguracja sieciowa znajduje się w zaszyfrowanym sejfie. Zastosowanie trasy powoduje zamknięcie starych
+klientów i anulowanie niedokończonych procesów logowania; późniejsze połączenia korzystają z tej trasy bez
+bezpośredniego rozwiązania awaryjnego. Nowa instalacja z kluczem zewnętrznym generuje klucz Fernet dla każdego obszaru roboczego
+za pomocą algorytmu HKDF-SHA256 na podstawie pliku klucza głównego oraz zapisanej losowej wartości solującej. Zapewnia to ochronę
+kluczy w oddzielnym miejscu od katalogu danych, a nie w postaci zwykłego tekstu w dzienniku lub treściach multimedialnych.</p>
+<p>Lokalny wpis demonstracyjny wykorzystuje oddzielnie wygenerowaną zdolność procesową, nigdy skonfigurowany
+token panelu. Wydanie i akceptacja wymagają wyraźnego trybu demonstracyjnego, syntetycznego katalogu głównego
+bez dodatkowych obszarów roboczych ani autoryzowanej sesji, pętli zwrotnej peer/Host, braku
+nagłówków przekierowujących przez serwer proxy oraz braku żądań przeglądarki międzydomenowych. Aktywne interfejsy API zachowują uwierzytelnianie typu „bearer”
+i odrzucają zmiany w gromadzeniu danych w trybie demonstracyjnym.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ARCHITECTURE.md">Edytuj tę stronę na GitHubie ↗</a><a class="next-guide" href="../verification/"><span>Kolejny krok</span><strong>Co zostało przetestowane →</strong></a><p>Niniejsze wytyczne opisują aktualną implementację. Wyniki walidacji oraz pozostałe luki zostały udokumentowane oddzielnie. <a href="../verification/">Co zostało przetestowane →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Na tej stronie"></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Oprogramowanie typu open source · Działa na Państwa komputerze</span><a href="../../../../LICENSE">Licencja MIT</a><a href="../notice/">Informacja dla operatorów</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Bezpieczeństwo</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Oczekiwanie na wiadomość", "Step through a fictional send, edit and delete.": "Prześledź krok po kroku fikcyjny proces wysłania, edycji i usunięcia wiadomości.", "No observations yet. Start the sequence or advance one event.": "Brak dotychczasowych uwag. Rozpocznij sekwencję lub przejdź do następnego zdarzenia.", "Meet at 10:00": "Spotkanie o godz. 10:00", "A new message is visible in the chat.": "Na czacie widoczna jest nowa wiadomość.", "Record 1 appended: the collector observed the original message.": "Dodano wpis nr 1: moduł zbierający odnotował oryginalną wiadomość.", "Meet at 11:00": "Spotkanie o godz. 11:00", "The current text changes. The earlier observation stays.": "Obecny tekst ulega zmianie. Wcześniejsza uwaga pozostaje bez zmian.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Dodano wpis nr 2: edycja stanowi nową obserwację. Wpis nr 1 nadal zawiera tekst oryginalny.", "Message deleted": "Wiadomość usunięta", "The message has disappeared from the chat view.": "Wiadomość zniknęła z widoku czatu.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Załączono zapis nr 3: powiadomienie o usunięciu jest zachowywane wraz z obiema zaobserwowanymi wersjami.", "0 records": "0 wpisów", "1 record": "1 wpis", "2 records": "2 wpisy", "3 records": "3 wpisy", "Complete / {n} of 3": "Całość / {n} z 3", "Step / {n} of 3": "Krok / {n} z 3", "Pause": "Pauza", "Replay sequence": "Sekwencja odtwarzania", "Play sequence": "Sekwencja odtwarzania", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Dostępny jest statyczny przykład. Aby obliczać skróty w trybie interaktywnym, proszę otworzyć tę stronę za pośrednictwem protokołu HTTPS lub w podglądzie na lokalnym serwerze z obsługą Web Crypto.", "No record supplied": "Brak dostarczonego zapisu", "Tail removed": "Usunięto końcówkę", "≠ saved hash": "≠ zapisany skrót", "Rebuilt · different hash": "Przebudowana wersja · inny skrót", "= saved hash": "= zapisany skrót", "Same length and matching head.": "Ta sama długość i dopasowany nagłówek.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Wszystkie trzy obliczone skróty są zgodne z zapisanymi skrótami. Niniejszy przykład jest zgodny z zachowanym ograniczeniem do trzech rekordów.", "Same saved head; the journal prefix fails verification.": "Ten sam zapisany nagłówek; prefiks dziennika nie przeszedł weryfikacji.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Rekord nr 2 nie jest już zgodny ze swoim zapisanym skrótem. Sprawdzanie wyłącznie końcowego, zapisanego nagłówka nie pozwoliłoby tego wykryć; weryfikator sprawdza każdy rekord.", "Head differs from the retained checkpoint.": "Nagłówek różni się od zachowanego punktu kontrolnego.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Odbudowane skróty są ze sobą powiązane, ale ostatni nagłówek uległ zmianie. Zachowany punkt kontrolny odrzuca tę historię. Oryginalne podpisy również nie zostałyby uznane w przypadku zmienionych wpisów.", "Too short: 2 supplied records \u003c 3 retained records.": "Zbyt krótki: 2 dostarczone zapisy \u003c 3 zachowane zapisy.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Dwa pozostałe skróty nadal są zgodne. Zachowany punkt kontrolny ujawnia brakujący fragment. Bez tej wcześniejszej granicy sam ten krótszy prefiks nie ujawniłby pominięcia.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "W tej przeglądarce nie jest dostępna funkcja obliczania skrótu. Poniższe wzory i statyczne objaśnienia pozostają dostępne.", "{n} records": "{n} wpisów", "head {hash}": "nagłówek {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Zatwierdzono: liczba wzrasta, podpis został zweryfikowany, a klucz jest zgodny. Świadek zachowuje tę nową granicę.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Cofnięcie: podpisana odpowiedź zawiera mniej rekordów niż ostatni zaakceptowany punkt kontrolny. System TgWitness rejestruje problem i zachowuje wcześniej zaakceptowany zakres danych.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Rozgałęzienie: liczba pozostaje niezmieniona, ale gałąź główna jest inna. Świadek odnotowuje rozbieżność i zachowuje wcześniej zaakceptowaną granicę.", "No answer": "Brak odpowiedzi", "boundary unknown": "granica nieznana", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Brak odpowiedzi: narzędzie TgWitness rejestruje nieudaną weryfikację. Nie jest w stanie określić aktualnego stanu kolektora. Jeśli narzędzie TgWitness nadal ma dostęp do interfejsu API bota, a jego polityka publikacji na to pozwala, może opublikować informację o tej niepowodzeniu.", "Send {n}": "Wyślij {n}", "Edit {n}": "Edytuj {n}", "Delete {n}": "Usuń {n}", "Both accounts captured all six expected observations in this example.": "W tym przykładzie oba opisy uwzględniły wszystkie sześć oczekiwanych obserwacji.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Konto B nadal zarejestrowało 6 z 6 wiadomości. W przypadku dwóch potwierdzeń zajęło to więcej czasu. Wskaźnik przechwycenia i opóźnienie w otrzymaniu potwierdzenia odpowiadają na różne pytania.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Konto B zarejestrowało 5 z 6 zdarzeń przed upływem terminu (83,3%). Brakująca edycja nie wykazuje żadnego zmierzonego opóźnienia. Wynik ten odnosi się wyłącznie do sześciu kontrolowanych działań.", "not observed by cutoff": "nie spełniono wymogu przed upływem terminu", "{s} seconds": "{s} sekund", "Exact values follow in the table.": "Dokładne wartości podano w tabeli.", "{s} s": "{s} s", "Not observed": "Nie zaobserwowano", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Cztery czaty zawierają różne spostrzeżenia. Należy śledzić zapisy źródłowe dla każdego połączenia; nie należy przypisywać wpisu na kanale do użytkownika 71001 bez podania nadawcy.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Zapisy nr 146 i nr 205 zawierają ten sam identyfikator nadawcy: 71001. Pozwala to powiązać zaobserwowane posty z konta Telegram w dwóch różnych czatach. Nie pozwala to jednak na identyfikację konkretnej osoby w świecie rzeczywistym ani na przypisanie autorstwa postu opublikowanego na kanale.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Adres docelowy pay.example.invalid/new pojawia się w zapisie grupy nr 146, wpisie z klawiatury bota nr 173, edycji kanału nr 188 oraz prywatnej wiadomości nr 205. Powtarzający się adres docelowy łączy te materiały; nie dowodzi to jednak wspólnej kontroli nad tymi kontami.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "W tej fikcyjnej sprawie potwierdzenia odbioru multimediów nr 151 i nr 209 mają identyczne pełne wartości SHA-256. Proszę porównać rzeczywiste bajty oraz powiązane z nimi zapisy wiadomości. Zgodny plik nie pozwala zidentyfikować jego twórcy ani ustalić, kto go przesłał.", "the encrypted off-site copy": "zaszyfrowana kopia przechowywana poza serwerem", "notifications": "powiadomienia", "checkpoint hashes for timestamps": "Skróty kontrolne jako znaczniki czasu", "signed checkpoints for the witness": "podpisane punkty kontrolne dla serwisu Witness", "Switched on in this example": "W tym przykładzie włączono tę opcję", "Optional · off by default": "Opcjonalne · domyślnie wyłączone", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Opuszczając to urządzenie: połączenie z Telegramem oraz {list}. Nic więcej.", "Default: only the Telegram connection leaves this machine.": "Ustawienie domyślne: z tego urządzenia wychodzi wyłącznie połączenie z serwisem Telegram.", "{done} of {total} done": "{done} z {total} wykonano", "Mark step {n} as done": "Oznacz krok {n} jako wykonany", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Kopia", "Copied": "Skopiowano", "Command copied.": "Polecenie skopiowano.", "Selected — Ctrl/Cmd+C": "Zaznaczone — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Wybrano polecenie. Proszę skopiować je ręcznie.", "Command copied to clipboard.": "Polecenie skopiowano do schowka.", "Select text": "Zaznacz tekst", "Clipboard unavailable. Command selected; copy it manually.": "Schowek jest niedostępny. Wybrano polecenie; proszę skopiować je ręcznie.", "A message arrives. The first observation is saved.": "Przychodzi wiadomość. Pierwsza obserwacja zostaje zapisana.", "The time changes. Both captured versions stay.": "Czas ulega zmianie. Obie zarejestrowane wersje pozostają zachowane.", "The message disappears. The captured history remains.": "Wiadomość znika. Zachowana historia pozostaje.", "Pause example animation": "Przykładowa animacja z pauzą", "Play example animation": "Odtwórz przykładową animację", "Play": "Odtwórz", "Full-size workspace screenshot": "Zrzut ekranu przedstawiający obszar roboczy w pełnym rozmiarze", "Workspace screenshot · fictional data": "Zrzut ekranu z obszaru roboczego · dane fikcyjne", "Close": "Zamknij", "Close screenshot": "Zamknij zrzut ekranu", "Scrollable full-size screenshot": "Przewijalny zrzut ekranu w pełnym rozmiarze", "Enlarge: {name}": "Powiększ: {name}", "View full size": "Wyświetl w pełnym rozmiarze"}</script>
+</body></html>

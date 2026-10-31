@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="zh-Hant" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>連線、代理伺服器與資料保護 | TgWitness</title>
+<meta name="description" content="API 對、登入方式、SOCKS5、HTTP 及 MTProxy 路由、公開代理伺服器清單，以及各路由所提供的保護功能。"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="連線、代理伺服器與資料保護 | TgWitness"><meta property="og:description" content="API 對、登入方式、SOCKS5、HTTP 及 MTProxy 路由、公開代理伺服器清單，以及各路由所提供的保護功能。">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/connection/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/connection/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/connection/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/connection/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/connection/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/connection/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/connection/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/connection/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/connection/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/connection/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/connection/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/connection/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/connection/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/connection/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/connection/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/", "url": "https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/", "name": "連線、代理伺服器與資料保護 | TgWitness", "description": "API 對、登入方式、SOCKS5、HTTP 及 MTProxy 路由、公開代理伺服器清單，以及各路由所提供的保護功能。", "inLanguage": "zh-Hant", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首頁", "item": "https://phishdestroy.github.io/TgWitness/zh-Hant/"}, {"@type": "ListItem", "position": 2, "name": "文件說明", "item": "https://phishdestroy.github.io/TgWitness/zh-Hant/docs/"}, {"@type": "ListItem", "position": 3, "name": "參考資料", "item": "https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "連線、代理伺服器與資料保護", "item": "https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">跳至內容</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / 文件說明</span></a>
+<nav aria-label="指南"><a href="../../concepts/">視覺指南</a><a href="../../">所有指南</a><a href="../">參考資料</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="語言"><span aria-hidden="true">◍</span> 繁體中文</summary><div class="lang-list"><a href="../../../../docs/reference/connection/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/connection/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/connection/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/connection/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/connection/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/connection/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/connection/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/connection/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/connection/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/connection/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/connection/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/connection/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/connection/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/connection/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/connection/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/connection/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/connection/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/connection/" hreflang="ko" lang="ko">한국어</a><a href="./" hreflang="zh-Hant" lang="zh-Hant" aria-current="true">繁體中文</a><a href="../../../../ms/docs/reference/connection/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/connection/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/connection/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/connection/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/connection/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/connection/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="在淺色與深色主題之間切換"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="指南"><a href="../../../guides/modes.html">模式、情境與證據等級</a><p class="nav-label">入門指南</p><a href="../../start/">幾分鐘內即可開始使用</a><a href="../../accounts/">連結帳戶</a><a href="../../proxies/">選擇代理伺服器</a><a href="../../exports/">匯出與驗證</a><p class="nav-label">了解證據</p><a href="../../concepts/">了解證據如何運作</a><a href="../../cases/">跨所有聊天室進行調查</a><a href="../../security/">確保安全</a><p class="nav-label">深入了解</p><a href="../../witness/">設定 Witness 機器人</a><a href="../../server/">讓它持續運作</a><a href="../../troubleshooting/">找出問題所在</a></nav><nav class="wiki-nav" aria-label="參考資料"><p class="nav-label"><a class="nav-label-link" href="../">參考資料</a></p><details class="wiki-group" open><summary>設定</summary><a href="../quickstart/">快速入門</a><a href="../accounts/">帳戶與會話格式</a><a href="./" aria-current="page">連線、代理伺服器與資料保護</a><a href="../deployment/">部署</a></details><details class="wiki-group"><summary>收集</summary><a href="../collection/">資料蒐集原理</a><a href="../operations/">工作流程與操作</a><a href="../investigation/">調查模式</a><a href="../features/">功能與限制</a></details><details class="wiki-group"><summary>證據</summary><a href="../how-it-works/">證據的運作方式</a><a href="../evidence/">證據格式</a><a href="../witness/">獨立見證人</a><a href="../timestamp/">時間戳記</a></details><details class="wiki-group"><summary>安全性與專案</summary><a href="../security/">安全性與資料處理</a><a href="../architecture/">架構</a><a href="../verification/">已測試的內容</a><a href="../license/">授權說明及架構不相容聲明</a><a href="../notice/">操作員不相容通知</a><a href="../changelog/">更新紀錄</a></details></nav><p class="sidebar-note">v0.7.0<br>開源 · 可在您的機器上運行</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="指南"><a href="../../../">首頁</a> <span aria-hidden="true">/</span> <a href="../../">文件說明</a> <span aria-hidden="true">/</span> <a href="../">參考資料</a> <span aria-hidden="true">/</span> <span aria-current="page">連線、代理伺服器與資料保護</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">搜尋文件</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="可嘗試使用「代理」、「雜湊鏈」、「代幣」或「見證者」等詞彙……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜尋" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">輸入關鍵字以搜尋指南與參考資料。搜尋結果僅保留於您的瀏覽器中。</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">參考資料 / 設定</p><h1>連線、代理伺服器與資料保護</h1><p class="guide-outcome">API 對、登入方式、SOCKS5、HTTP 及 MTProxy 路由、公開代理伺服器清單，以及各路由所提供的保護功能。</p><div class="wiki-body"><p>本文檔說明 TgWitness 0.7.0 的運作方式及其限制。驗證、
+來源存取、網路連線及擷取完整性均為獨立的狀態。
+關於登入步驟、檔案格式及多重帳戶，請先參閱「
+<a href="../accounts/">帳戶與會話格式</a>」；關於事件政策及重新啟動
+行為，請參閱<a href="../collection/">「資料擷取運作方式」</a>。</p>
+<h2 id="authentication-methods">驗證方法<a class="anchor" href="#authentication-methods" aria-label="此節的連結">#</a></h2>
+<p><strong>API ID 和 API 雜湊值用於識別應用程式；它們並不能取代帳戶登入。</strong>
+
+在 TgWitness 中，這些資訊為選用項目。優先順序如下：首先是表單中輸入的一組值，其次是來自
+匯入帳戶 JSON 檔案的一組值，接著是儲存於工作區的一組值，最後是內建的 50 組
+公開配對組，當 Telegram 拒絕某組時，系統會以隨機順序嘗試並自動輪替。僅
+Telegram Desktop 配對組 (2040) 會隨附相應的 Telegram Desktop 客戶端描述一併傳送。
+您可將從 <a href="https://my.telegram.org">my.telegram.org</a>
+的 API 開發工具取得的專屬配對組用於所有帳戶；每個帳戶仍保有各自的授權。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>要求</th>
+<th>TgWitness 支援</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>手機號碼、代碼、可選的雙因素驗證</td>
+<td>帳戶存取；API 配對為選用項目</td>
+<td>面板登入</td>
+</tr>
+<tr>
+<td>授權金鑰 HEX + DC ID</td>
+<td>完整的 512 字元金鑰及 DC 1–5</td>
+<td>「直接<strong>授權金鑰」</strong>分頁；在儲存授權前，會檢查可選的用戶 ID</td>
+</tr>
+<tr>
+<td>Telethon StringSession</td>
+<td>有效的會話字串</td>
+<td>面板登入</td>
+</tr>
+<tr>
+<td>Telethon SQLite <code>.session</code></td>
+<td>封閉式、一致的文案</td>
+<td>可直接從面板匯入模式 7/8；可選的離線命令列介面 (CLI)</td>
+</tr>
+<tr>
+<td>Pyrogram SQLite <code>.session</code></td>
+<td>已關閉的生產環境使用者會話</td>
+<td>直接匯入模式 2/3</td>
+</tr>
+<tr>
+<td>Telegram 桌面版 TData ZIP</td>
+<td>一個現代帳戶；若設有保護，則需輸入本地密碼</td>
+<td>內存轉換，並包含校驗和／解密檢查</td>
+</tr>
+<tr>
+<td>帳戶 JSON</td>
+<td>支援的 API/會話/金鑰欄位</td>
+<td>僅憑元資料即可填入 API 憑證；仍需透過會話/金鑰或手機/QR 碼進行登入</td>
+</tr>
+<tr>
+<td>QR 碼登入</td>
+<td>來自授權 Telegram 應用程式的確認</td>
+<td>本地 QR 碼生成、過期/重試機制，以及可選用的雙因素驗證 (2FA)</td>
+</tr>
+<tr>
+<td>TDLib / Pyrogram StringSession</td>
+<td>其他特定於資料庫的格式</td>
+<td>不支援</td>
+</tr>
+<tr>
+<td>機器人代幣</td>
+<td>一個具備獨立存取／更新模型的機器人</td>
+<td>此資料蒐集者未使用此工具</td>
+</tr>
+</tbody>
+</table></div>
+<p>Telegram 採用代碼傳送方式；簡訊傳送無法保證成功。API 雜湊值無法修復
+已被撤銷的連線，亦無法取代遺忘的雙因素驗證 (2FA) 密碼。TgWitness 不會將
+登入代碼或 Telegram 雙因素驗證 (2FA) 密碼儲存至磁碟。</p>
+<p>若為私人來源，該帳號必須已具備存取權限。群組使用者名稱
+並非必要。透過代理或會話匯入，既不會授予成員資格，也不會授予管理員
+權限。目前的成員資格並不能保證能存取加入群組前的歷史紀錄。</p>
+<h2 id="import-a-telethon-session-file">匯入 Telethon 會話檔案<a class="anchor" href="#import-a-telethon-session-file" aria-label="此節的連結">#</a></h2>
+<p>Telethon SQLite、Pyrogram SQLite 以及 Telegram Desktop TData 採用不同的格式。
+此面板會偵測並轉換受支援的結構；重新命名檔案並不
+屬於轉換範疇。請在「<strong>檔案</strong>」選項中選取一個會話及其對應的 JSON 檔案，然後按下<strong>「連線帳戶」</strong>。最多可接受四個符合條件的檔案，
+總大小不得超過 8 MiB。 有關 TData/JSON 的詳細資訊，請參閱<a href="../accounts/">格式限制</a>。
+不提供密碼恢復功能。透過手機/雙因素驗證 (2FA) 或 QR 碼登入將建立獨立的授權。</p>
+<p>僅限 Telethon 的可選命令列路徑仍可使用：</p>
+<ol>
+<li>請停止使用原始連線的客戶端，並建立一份一致的副本。該
+    轉換器會拒絕處理 WAL/日誌未完成的檔案。請正確關閉原始
+    客戶端，而非刪除這些檔案以繞過檢查。</li>
+<li>在 TgWitness 環境中，執行：</li>
+</ol>
+<pre><code class="language-sh">python -m tgwitness.sessions account.session --out account.tgwitness-session</code></pre>
+<ol start="3">
+<li>在「<strong>新增帳戶」→「檔案</strong>」下，載入結果或
+    貼上其字串，然後繼續。</li>
+<li>請確認顯示的數字帳號 ID，選擇來源並開始監測。</li>
+</ol>
+<p>此轉換器以唯讀模式開啟 SQLite，不會執行任何資料結構升級或網路請求，
+也不會輸出該會話內容。它會檢查資料結構版本、資料表類型、單一
+會話列、IP/埠/資料中心以及金鑰長度。命令列介面 (CLI) 輸入限制為 64 MiB；StringSession
+文字限制為 4 KiB。 面板轉換會將檔案上傳至已驗證的 TgWitness
+伺服器，在記憶體中進行處理，並將標準化的憑證傳回該
+瀏覽器，且不會儲存上傳的原始檔案。若使用遠端伺服器，請採用 HTTPS。</p>
+<p><strong>轉換後的檔案為未加密的帳戶存取密鑰。</strong> 請將其存放在受保護的
+儲存空間中，切勿將其提交至版本控制系統或傳送給第三方轉換服務。TgWitness
+會將授權會話儲存於其加密金庫中。複製會話並不會
+建立獨立的授權：請勿同時執行使用克隆授權金鑰的
+客戶端，並假設其能獨立接收更新。</p>
+<p>轉換操作僅傳遞授權，而非原始訊息、實體快取或
+持久性更新游標。此操作不會解決跨程序重啟時的更新復原問題。</p>
+<h2 id="mtproto-telethon-and-proxies">MTProto、Telethon 及代理伺服器<a class="anchor" href="#mtproto-telethon-and-proxies" aria-label="此節的連結">#</a></h2>
+<p>MTProto 是 Telegram 的通訊協定。Telethon 是 TgWitness 所使用的 Python 客戶端函式庫。
+MTProxy 是一款 Telegram 傳輸代理伺服器；SOCKS5 和 HTTP CONNECT 提供一般性的
+隧道。上述方式均無法取代帳戶驗證。</p>
+<p>若需使用代理伺服器，請在登入前前往「<strong>帳戶</strong>」<strong>→「設定」→「連線設定」→「變更連線路徑」</strong>，為每個工作區儲存路徑。
+預設值為「直接」。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>路徑</th>
+<th>設定</th>
+<th>分隔線</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>直接</td>
+<td>無</td>
+<td>Telethon 可直接連線至 Telegram</td>
+</tr>
+<tr>
+<td>SOCKS5</td>
+<td>主機、埠號、可選的使用者名稱／密碼</td>
+<td>python-socks 2.8.2，已啟用 rdns</td>
+</tr>
+<tr>
+<td>HTTP CONNECT</td>
+<td>主機、埠號、可選的使用者名稱／密碼</td>
+<td>僅支援純 HTTP CONNECT；尚未實作與代理伺服器本身的 TLS 連線</td>
+</tr>
+<tr>
+<td>MTProxy</td>
+<td>主機、埠號、密鑰</td>
+<td>實驗性 Telethon 傳輸格式；32 位元十六進位數字，或 <code>dd</code> + 32 位元十六進位數字</td>
+</tr>
+</tbody>
+</table></div>
+<p>偽 TLS <code>ee</code> 密鑰將被拒絕。Telethon 1.45 的正規化功能可移除前綴
+與網域，但並未實作偽 TLS 功能。請貼上 <code>tg://proxy?server=…&amp;port=…&amp;secret=…</code>
+或 <code>https://t.me/proxy?server=…&amp;port=…&amp;secret=…</code>，並選擇「<strong>從連結填入欄位</strong>」。
+此操作會在不建立連線或儲存的情況下驗證並填入欄位；請另行檢視並儲存
+路由。手動填寫欄位仍可使用。請參閱 <a href="https://core.telegram.org/api/links#proxy-links">Telegram 代理連結</a>。</p>
+<h3 id="public-proxies-supplied-by-your-installation">由您的安裝環境提供的公開代理伺服器<a class="anchor" href="#public-proxies-supplied-by-your-installation" aria-label="此節的連結">#</a></h3>
+<p>連線設定包含來自
+<a href="https://github.com/SoliSpirit/mtproto">SoliSpirit/mtproto</a> 及
+<a href="https://github.com/zakky8/mtproto-proxy-pro">zakky8/mtproto-proxy-pro</a> 的現成公開清單。隨附的快照
+包含公開端點的相關資訊、來源標示及下載日期，但不包含
+任一專案的驗證聲明。此工具在啟動時無需擷取任何資料即可運作。 請選擇
+一項條目、儲存路徑，然後在登入前測試 Telegram 連線。</p>
+<p><strong>「更新公開清單」</strong>功能會根據請求擷取兩個固定的 HTTPS 資料源。每個回應
+上限為 1 MiB 且需在 20 秒內完成；重定向將被拒絕。 每個來源最多保留 64 筆相容的
+條目，並會跨來源進行去重。無效連結、私有／保留的
+IP 字面量、本地主機名稱以及不支援的偽 TLS <code>ee</code> 條目均會被跳過。 公開
+主機名稱會在選取時進行解析；每個回覆必須是全球可路由的，且
+選取的 IP 位址會被固定在儲存的路徑中。此機制可防止饋送主機名稱日後
+將已儲存的連線重新導向至私有位址。若要重新解析某個條目，請重新套用該條目。</p>
+<p>每個工作區都會在 <code>public-proxies.json</code> 中保留其最後一個有效的來源快照。若來源回應失敗、
+為空或不相容，則會保留該來源的先前條目及時間戳記。
+更新操作具有原子性、序列化，且每分鐘每個工作區僅限嘗試一次。
+無論是更新或檢視清單，均不會變更所選的路由。可用性仍
+需透過傳輸測試確認；服務供應商的清單列舉並不構成 Telegram 訊息已完整送達的證據。</p>
+<p>清單下載使用獨立的 HTTPS 連線，預設為直接連線。將
+<code>TGWITNESS_PROXY_FEED_PROXY</code> 設定為 HTTP/SOCKS5 URL，即可將這些請求路由至下載
+代理伺服器；兩種 Compose 收集器變體皆會轉發該設定。 不會將任何 Telegram 會話、API 憑證、
+控制面板代幣或機器人代幣傳送給服務供應商。工作區的 MTProxy 無法處理
+這些 HTTP 下載。服務供應商名稱、儲存日期及下載路徑均於
+<strong>「清單來源」</strong>中揭露。</p>
+<p>若要將公開清單替換為您自己的營運商目錄，請配置以下覆寫設定。
+此設定將完全停用外部訂閱功能，即使其 <code>proxies</code> 陣列為空時亦然。</p>
+<p>將<a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/proxies.config.example">空目錄</a>
+複製到 <code>proxy-config/proxies.json</code>
+，並新增您已部署的公開端點：</p>
+<pre><code class="language-json">{&quot;format&quot;: &quot;tgwitness-proxy-catalog-v1&quot;, &quot;proxies&quot;: [
+  {&quot;id&quot;: &quot;project-eu&quot;, &quot;label&quot;: &quot;Project EU&quot;,
+   &quot;link&quot;: &quot;tg://proxy?server=REPLACE_HOST&amp;port=443&amp;secret=REPLACE_SECRET&quot;}
+]}</code></pre>
+<p>必須替換範例值。最多可接受 32 筆不同的條目。
+經驗證的清單會回傳標籤／主機／埠號，且不包含共享密鑰；選取其中一項
+將把其憑證儲存至工作區金庫中。在進行
+明確的傳輸測試之前，可用性尚未經過測試。若目錄格式不正確，則可進行手動設定。</p>
+<p>原生啟動：將 <code>TGWITNESS_PROXY_CATALOG</code> 設定為本機 JSON 路徑。Docker：</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.proxies.yaml up -d --build</code></pre>
+<p>該覆蓋層以唯讀模式掛載 <code>proxy-config</code>；檔案必須可被容器 UID 10001 讀取。
+該目錄不包含在 Git、Docker 建置環境及原始碼存檔中。此
+目錄用於配置收集帳戶；<a href="../witness/">witness 機器人</a>使用其自身的
+HTTP/SOCKS5 路由，而非 MTProxy。</p>
+<p>若代理伺服器失敗，TgWitness 不會切換至 Direct 模式。在
+變更路由前，請先暫停監測。儲存設定會斷開舊客戶端連線並取消未完成的登入；
+新客戶端將使用已儲存的路由。該帳號的日誌／會話綁定關係將維持不變。
+設定會覆寫先前路由：編輯時請重新輸入代理伺服器憑證。</p>
+<p>憑證採用 <code>network.enc</code> 加密。API 不會回傳使用者名稱、
+密碼或機密金鑰。簽名紀錄包含路由類型及是否包含憑證，
+但不包含端點與機密金鑰。操作者可在控制面板中查看端點。
+機密欄位會在儲存、鎖定或切換工作區後清空。</p>
+<p>「<strong>測試 Telegram 連線</strong>」功能（登入前亦可使用），會透過該路徑開啟並關閉一個臨時
+且未經授權的 Telegram 連線。此功能不會聯繫任何 IP 檢查
+網站。測試成功僅表示傳輸連線已建立，並不代表群組存取權限、訊息
+完整傳送或匿名性。</p>
+<p>此代理適用於 Telegram 客戶端的連線，包括 Telegram 數據中心（DC）的媒體
+下載。瀏覽器、pip、SSH 以及手動調用的 TSA 工具則有獨立的路由。
+代理主機名稱可於本地解析。<code>rdns</code> 會影響目標主機名稱；
+Telegram 通常會提供數據中心的數值 IP 位址。</p>
+<p>SOCKS5 和純 HTTP CONNECT 本身並不會加密代理憑證或
+客戶端至代理的隧道。MTProto 會另行保護 Telegram 流量。 在不可信的網路環境中，請使用
+適當的安全通道連線至代理伺服器。私人群組
+屬於雲端聊天；MTProto 並不會將其轉變為端對端加密的「秘密聊天」。</p>
+<h2 id="encryption-and-signatures">加密與簽名<a class="anchor" href="#encryption-and-signatures" aria-label="此節的連結">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>層級</th>
+<th>已實作</th>
+<th>操作員責任</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Telegram 通訊流量</td>
+<td>Telethon MTProto</td>
+<td>平台可信度、傳輸路徑與可用性</td>
+</tr>
+<tr>
+<td>網頁控制面板</td>
+<td>承載者代幣、迴路預設值、請求限制</td>
+<td>透過 HTTPS 或 SSH 隧道進行遠端存取</td>
+</tr>
+<tr>
+<td>秘密</td>
+<td>Fernet 用於管理 API 憑證、會話、代理伺服器憑證及簽名私鑰</td>
+<td>保護解密金鑰與運行主機</td>
+</tr>
+<tr>
+<td>金庫金鑰</td>
+<td>新安裝時使用本機金鑰或外部主金鑰</td>
+<td>獨立的受保護儲存空間與金鑰備份</td>
+</tr>
+<tr>
+<td>訊息與附件</td>
+<td>明文應用程式儲存</td>
+<td>加密磁碟／磁碟區</td>
+</tr>
+<tr>
+<td>ZIP/JSONL/CSV/HTML</td>
+<td>完整性檢查，無內容加密</td>
+<td>保護匯出副本與傳輸內容</td>
+</tr>
+<tr>
+<td>來源與時間</td>
+<td>簽名日誌、流程收據、RFC 3161 工具</td>
+<td>可信密鑰、獨立檢查點／TSA 及保管程序</td>
+</tr>
+</tbody>
+</table></div>
+<p>「帳戶」中的<strong>儲存保護功能</strong>會顯示這些狀態。面板憑證是一種
+存取密鑰，而非加密密碼。一個憑證可控制所有工作區；
+工作區並非獨立的使用者或隔離的租戶。</p>
+<p>一個明確啟動且隔離的合成示範環境，可透過直接
+迴路連接自動開啟。此功能採用獨立的進程生命週期機制；既不會
+洩露已設定的面板憑證，也不會授予存取真實工作區的權限。遠端、
+代理或跨來源的請求均無法取得或使用此自動進入功能。
+此便利功能並不會消除針對真實帳戶資料的驗證邊界。</p>
+<p>BitLocker、LUKS、FileVault 或受管加密卷宗皆可在
+各自的威脅模型下保護儲存裝置。 已解鎖且正在運行的機器之管理員
+仍可讀取資料。在儲存規劃中，應納入 SQLite WAL/SHM、媒體檔案、臨時匯出檔案、交換檔、備份
+以及瀏覽器下載檔案。Docker 卷宗並非僅因
+其為卷宗而自動加密。TgWitness 未實作 SQLCipher 或物件加密功能。</p>
+<h2 id="external-master-key">外部主金鑰<a class="anchor" href="#external-master-key" aria-label="此節的連結">#</a></h2>
+<p>若要進行新安裝，請將主金鑰放置於資料目錄之外。
+此操作不會自動遷移現有的本機金鑰保管庫。請準備一個
+僅限服務身分存取的金鑰目錄，然後執行：</p>
+<pre><code class="language-sh">python -m tgwitness.security create-master-key /private/keys/tgwitness-master.key
+export TGWITNESS_VAULT_KEY_FILE=/private/keys/tgwitness-master.key
+python -m tgwitness --data-dir /private/observations/new-case</code></pre>
+<p>PowerShell，使用已安裝的專案環境：</p>
+<pre><code class="language-powershell">python -m tgwitness.security create-master-key E:\PrivateKeys\tgwitness-master.key
+$env:TGWITNESS_VAULT_KEY_FILE = &#x27;E:\PrivateKeys\tgwitness-master.key&#x27;
+python -m tgwitness --data-dir E:\PrivateData\new-case</code></pre>
+<p>在 Docker 中，請將檔案以唯讀方式掛載至 <code>/data</code> 之外的目錄（例如
+<code>/run/secrets/tgwitness-master.key</code>），並將環境變數設定為該路徑。
+該服務的 UID 必須具備讀取權限。請透過
+環境變數／設定檔傳遞路徑，而非金鑰位元組。</p>
+<p>每個工作區都會獲得一個隨機的公開鹽值，以及透過
+HKDF-SHA256 衍生的專屬 Fernet 金鑰。<code>vault.external.json</code> 僅儲存衍生元數據，而非主金鑰。
+若金鑰遺失或錯誤，系統將無法啟動，且不會在後台自動替換金鑰。請同時保留
+鹽值元數據與主金鑰，以備復原之用。</p>
+<p>所有工作區均源自同一主金鑰；若主金鑰遭洩露，將影響整個
+安裝環境。正在執行的程序可解密機密資料。此工具並非 HSM 或
+密碼 KDF。不接受以任意人為設定的密碼取代隨機金鑰。</p>
+<p>在刻意規劃的遷移方案
+實施並驗證完成之前，請保留現有安裝環境中的現有金鑰。刪除 <code>vault.key</code> 或更換主金鑰可能會導致
+無法存取會話／簽署金鑰。請將加密備份與金鑰分開存放，並
+在隔離的實例中測試還原功能。</p>
+<h2 id="sources-and-verification-scope">資料來源與驗證範圍<a class="anchor" href="#sources-and-verification-scope" aria-label="此節的連結">#</a></h2>
+<p>審閱日期：2026年10月26日：</p>
+<ul>
+<li>https://core.telegram.org/api/auth</li>
+<li>https://core.telegram.org/api/obtaining_api_id</li>
+<li>https://docs.telethon.dev/en/stable/basic/signing-in.html</li>
+<li>https://docs.telethon.dev/en/stable/concepts/sessions.html</li>
+<li>https://core.telegram.org/mtproto/mtproto-transports</li>
+<li>https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/SourceFiles/storage/storage_account.cpp</li>
+<li>Telethon 1.45.0：SQLiteSession、StringSession、<code>Connection._proxy_connect</code>、
+    <code>TcpMTProxy.normalize_secret</code> 及下載方法。</li>
+</ul>
+<p>本地測試涵蓋迴路 SOCKS5/HTTP CONNECT 測試案例、模擬的 SQLite 會話、
+路由隔離、機密資料排除以及缺失金鑰時的拒絕機制。這些測試並未建立
+真實的 Telegram/代理伺服器互通性，亦未模擬 MTProxy 的實際運作行為。請參閱
+<a href="../verification/">VERIFICATION.md</a> 及 <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">LIVE_ACCEPTANCE.md</a>。</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/CONNECTION-SECURITY.md">在 GitHub 上編輯此頁面 ↗</a><a class="next-guide" href="../deployment/"><span>下一步</span><strong>部署 →</strong></a><p>這些指南描述了當前的實作方式。驗證結果與尚存的缺口將另行記錄。 <a href="../verification/">已測試的內容 →</a></p></footer>
+</main>
+<aside class="toc" aria-label="本頁內容"><p class="nav-label">本頁內容</p><a href="#authentication-methods">驗證方法</a><a href="#import-a-telethon-session-file">匯入 Telethon 會話檔案</a><a href="#mtproto-telethon-and-proxies">MTProto、Telethon 及代理伺服器</a><a href="#encryption-and-signatures">加密與簽名</a><a href="#external-master-key">外部主金鑰</a><a href="#sources-and-verification-scope">資料來源與驗證範圍</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>開源 · 可在您的機器上運行</span><a href="../../../../LICENSE">MIT 授權條款</a><a href="../notice/">操作員公告</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">安全性</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "等待訊息", "Step through a fictional send, edit and delete.": "透過一個虛構的發送、編輯和刪除流程逐步了解操作。", "No observations yet. Start the sequence or advance one event.": "目前尚無觀察記錄。開始執行序列或跳至下一則事件。", "Meet at 10:00": "上午 10:00 見面", "A new message is visible in the chat.": "聊天室中顯示了一則新訊息。", "Record 1 appended: the collector observed the original message.": "新增記錄 1 筆：收集器已偵測到原始訊息。", "Meet at 11:00": "上午 11:00 見面", "The current text changes. The earlier observation stays.": "當前文本有所變更。先前的觀察結果維持不變。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "新增記錄 2：此編輯為一項新觀察結果。記錄 1 仍保留原始文字。", "Message deleted": "訊息已刪除", "The message has disappeared from the chat view.": "該訊息已從聊天視圖中消失。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "新增「Record 3」：刪除通知將與兩個被觀察到的版本一併保留。", "0 records": "0 筆記錄", "1 record": "1 筆記錄", "2 records": "2 筆記錄", "3 records": "3 筆記錄", "Complete / {n} of 3": "完成 / {n} 共 3 項", "Step / {n} of 3": "步驟 / 3 中的 {n}", "Pause": "暫停", "Replay sequence": "重播序列", "Play sequence": "播放順序", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "靜態範例已上線。若要互動式計算雜湊值，請透過 HTTPS 開啟此頁面，或使用支援 Web Crypto 的 localhost 預覽。", "No record supplied": "未提供記錄", "Tail removed": "尾部內容已移除", "≠ saved hash": "≠ 已儲存的雜湊值", "Rebuilt · different hash": "重新建置 · 不同雜湊值", "= saved hash": "= 儲存的雜湊值", "Same length and matching head.": "篇幅相同且標題一致。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "這三個計算出的雜湊值均與儲存的雜湊值相符。此樣本符合保留的三筆記錄邊界。", "Same saved head; the journal prefix fails verification.": "儲存的標題相同；但日誌前綴無法通過驗證。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "記錄 2 已與其儲存的雜湊值不符。若僅檢查最後儲存的「頭部」，將無法發現此問題；驗證器會檢查每一筆記錄。", "Head differs from the retained checkpoint.": "標題與保留的檢查點不同。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "重建的雜湊值彼此關聯，但最終的頭部已發生變更。保留的檢查點會拒絕此歷史記錄。若記錄內容遭變更，原始簽名亦將驗證失敗。", "Too short: 2 supplied records \u003c 3 retained records.": "過短：提供的 2 筆記錄 \u003c 保留的 3 筆記錄。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "剩餘的兩個雜湊值仍然匹配。保留的檢查點揭示了缺失的部分。若無該較早的邊界，僅憑這個較短的前綴是無法揭露此遺漏的。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "此瀏覽器無法進行雜湊運算。下方的公式與靜態說明仍可正常顯示。", "{n} records": "{n} 筆記錄", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "已接受：計數持續增加，簽名經驗證無誤，且金鑰匹配。該見證者保留此新界限。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "回滾：簽名答覆所報告的記錄數量少於最後一個被接受的檢查點。Witness 會記錄此問題，並保留較早的被接受邊界。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "分叉（Fork）：分支數量未變，但分支頭不同。該見證系統會記錄此分歧，並保留先前被接受的分支邊界。", "No answer": "無回應", "boundary unknown": "邊界未知", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "無回應：Witness 會記錄驗證失敗的狀況。它無法判定收集器的當前狀態。若 Witness 仍能連線至 Bot API，且其發布政策允許，則可發布該次失敗的紀錄。", "Send {n}": "傳送 {n}", "Edit {n}": "編輯 {n}", "Delete {n}": "刪除 {n}", "Both accounts captured all six expected observations in this example.": "在此範例中，兩個帳戶均完整記錄了預期的六項觀察結果。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "帳號 B 仍成功擷取了 6 則中的 6 則。其中兩則收據的擷取時間較長。擷取率與收據延遲反映的是不同的問題。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "帳戶 B 在截止時間前成功擷取了 6 項中的 5 項（83.3%）。遺漏的那項編輯操作未測得任何延遲。此結果僅描述這六項受控操作。", "not observed by cutoff": "未在截止時間前觀察到", "{s} seconds": "{s} 秒", "Exact values follow in the table.": "具體數值詳見下表。", "{s} s": "{s} s", "Not observed": "未觀察到", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "四個聊天室提供了不同的觀察結果。請追蹤每項連結的原始記錄；若未標明發送者，請勿將該頻道貼文歸屬於使用者 71001。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "記錄 #146 和 #205 顯示相同的發送者 ID：71001。這將兩個聊天室中觀察到的 Telegram 帳號貼文相互連結。此資訊並未識別任何現實世界中的人士，亦未歸屬該頻道貼文的來源。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "目的地 pay.example.invalid/new 出現在群組記錄 #146、機器人鍵盤 #173、頻道編輯 #188 以及私人訊息 #205 中。重複出現的目的地將這些資料連結起來；但這並不能證明這些帳戶受共同控制。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "在此虛構案例中，已完成的媒體收據 #151 與 #209 具有完全相同的 SHA-256 值。請比較實際位元組及其相關的訊息記錄。該匹配檔案並未標示其創建者，亦無法證明是由誰轉發的。", "the encrypted off-site copy": "加密的異地備份", "notifications": "通知", "checkpoint hashes for timestamps": "時間戳記的檢查點雜湊值", "signed checkpoints for the witness": "TgWitness 的簽名檢查點", "Switched on in this example": "此範例中已啟用", "Optional · off by default": "可選 · 預設為關閉", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "離開這台機器時：Telegram 連線及 {list}。除此之外別無他物。", "Default: only the Telegram connection leaves this machine.": "預設設定：僅 Telegram 連線會離開這台機器。", "{done} of {total} done": "已完成 {done}/{total}", "Mark step {n} as done": "將步驟 {n} 標記為已完成", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "複製", "Copied": "複製", "Command copied.": "指令已複製。", "Selected — Ctrl/Cmd+C": "選取 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "已選取指令。請手動複製。", "Command copied to clipboard.": "指令已複製至剪貼簿。", "Select text": "選取文字", "Clipboard unavailable. Command selected; copy it manually.": "剪貼簿無法使用。已選取指令；請手動複製。", "A message arrives. The first observation is saved.": "一則訊息送達。首項觀察記錄已儲存。", "The time changes. Both captured versions stay.": "時間雖變，但兩份記錄版本皆保留。", "The message disappears. The captured history remains.": "訊息雖已消失，但被擷取的歷史紀錄依然存在。", "Pause example animation": "暫停範例動畫", "Play example animation": "播放範例動畫", "Play": "播放", "Full-size workspace screenshot": "全螢幕工作區螢幕截圖", "Workspace screenshot · fictional data": "工作區螢幕截圖 · 虛構資料", "Close": "關閉", "Close screenshot": "關閉螢幕截圖", "Scrollable full-size screenshot": "可捲動的全螢幕截圖", "Enlarge: {name}": "放大：{name}", "View full size": "檢視完整尺寸"}</script>
+</body></html>

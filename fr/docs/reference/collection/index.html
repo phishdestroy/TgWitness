@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="fr" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Fonctionnement de la collecte | TgWitness</title>
+<meta name="description" content="Champ d’observation, mises à jour en temps réel, vérifications croisées, pièces jointes, actions effectuées et signification d’une lacune, message par message."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/collection/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Fonctionnement de la collecte | TgWitness"><meta property="og:description" content="Champ d’observation, mises à jour en temps réel, vérifications croisées, pièces jointes, actions effectuées et signification d’une lacune, message par message.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/fr/docs/reference/collection/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/collection/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/collection/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/collection/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/collection/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/collection/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/collection/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/collection/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/collection/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/collection/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/collection/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/collection/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/collection/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/collection/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/collection/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/collection/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/collection/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/collection/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/collection/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/fr/docs/reference/collection/", "url": "https://phishdestroy.github.io/TgWitness/fr/docs/reference/collection/", "name": "Fonctionnement de la collecte | TgWitness", "description": "Champ d’observation, mises à jour en temps réel, vérifications croisées, pièces jointes, actions effectuées et signification d’une lacune, message par message.", "inLanguage": "fr", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://phishdestroy.github.io/TgWitness/fr/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://phishdestroy.github.io/TgWitness/fr/docs/"}, {"@type": "ListItem", "position": 3, "name": "Référence", "item": "https://phishdestroy.github.io/TgWitness/fr/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Fonctionnement de la collecte", "item": "https://phishdestroy.github.io/TgWitness/fr/docs/reference/collection/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Aller au contenu</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Documentation</span></a>
+<nav aria-label="Guides"><a href="../../concepts/">Guide visuel</a><a href="../../">Tous les guides</a><a href="../">Référence</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Langue"><span aria-hidden="true">◍</span> Français</summary><div class="lang-list"><a href="../../../../docs/reference/collection/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/collection/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/collection/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/collection/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/collection/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/collection/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/collection/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/collection/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/collection/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/collection/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/collection/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/collection/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/collection/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="./" hreflang="fr" lang="fr" aria-current="true">Français</a><a href="../../../../de/docs/reference/collection/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/collection/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/collection/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/collection/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/collection/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/collection/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/collection/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/collection/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/collection/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/collection/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/collection/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Basculer entre le thème clair et le thème sombre"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Guides"><a href="../../../guides/modes.html">Modes, scénarios et niveaux de preuve</a><p class="nav-label">Premiers pas</p><a href="../../start/">Commencez en quelques minutes</a><a href="../../accounts/">Connecter un compte</a><a href="../../proxies/">Choisissez un proxy</a><a href="../../exports/">Exporter et vérifier</a><p class="nav-label">Comprendre les preuves</p><a href="../../concepts/">Découvrez comment fonctionne la conservation des preuves</a><a href="../../cases/">Effectuez des recherches dans toutes les discussions</a><a href="../../security/">Assurez-en la sécurité</a><p class="nav-label">En savoir plus</p><a href="../../witness/">Configurer un bot TgWitness</a><a href="../../server/">Assurez son bon fonctionnement</a><a href="../../troubleshooting/">Découvrez ce qui n’a pas fonctionné</a></nav><nav class="wiki-nav" aria-label="Référence"><p class="nav-label"><a class="nav-label-link" href="../">Référence</a></p><details class="wiki-group"><summary>Configuration</summary><a href="../quickstart/">Mise en route rapide</a><a href="../accounts/">Formats des comptes et des sessions</a><a href="../connection/">Connexion, proxys et protection des données</a><a href="../deployment/">Déploiement</a></details><details class="wiki-group" open><summary>Collecter</summary><a href="./" aria-current="page">Fonctionnement de la collecte</a><a href="../operations/">Workflows et opérations</a><a href="../investigation/">Mode enquête</a><a href="../features/">Fonctionnalités et limites</a></details><details class="wiki-group"><summary>Preuves</summary><a href="../how-it-works/">Fonctionnement des preuves</a><a href="../evidence/">Format des preuves</a><a href="../witness/">Témoin indépendant</a><a href="../timestamp/">Horodatages</a></details><details class="wiki-group"><summary>Sécurité et projet</summary><a href="../security/">Sécurité et traitement des données</a><a href="../architecture/">Architecture</a><a href="../verification/">Ce qui a été testé</a><a href="../license/">Avis relatif à la licence et à l’incompatibilité architecturale</a><a href="../notice/">Avis d’incompatibilité avec certains opérateurs</a><a href="../changelog/">Journal des modifications</a></details></nav><p class="sidebar-note">v0.7.0<br>Open source · Fonctionne sur votre machine</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Guides"><a href="../../../">Accueil</a> <span aria-hidden="true">/</span> <a href="../../">Documentation</a> <span aria-hidden="true">/</span> <a href="../">Référence</a> <span aria-hidden="true">/</span> <span aria-current="page">Fonctionnement de la collecte</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Rechercher dans la documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Essayez « proxy », « chaîne de hachage », « jeton » ou « témoin »…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Recherche claire" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Saisissez un mot pour effectuer une recherche dans les guides et la documentation de référence. La recherche s&#x27;effectue directement dans votre navigateur.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Référence / Collecter</p><h1>Fonctionnement de la collecte</h1><p class="guide-outcome">Champ d’observation, mises à jour en temps réel, vérifications croisées, pièces jointes, actions effectuées et signification d’une lacune, message par message.</p><div class="wiki-body"><p>TgWitness enregistre ce qu’un compte Telegram connecté observe. Le journal conserve
+ces observations, leur séquence et le contexte qui les accompagne. Il ne
+déduit pas d’actions invisibles à partir d’un message manquant ou du fait qu’un compte soit connecté.</p>
+<h2 id="from-login-to-a-journal">De la connexion au journal<a class="anchor" href="#from-login-to-a-journal" aria-label="Lien vers cette section">#</a></h2>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 691 414" width="691" height="414" role="img" aria-labelledby="flow-1-title flow-1-desc"><title id="flow-1-title">Organigramme</title><desc id="flow-1-desc">Autoriser un compte utilisateur → Sélectionnez les groupes et canaux accessibles; Sélectionnez les groupes et canaux accessibles → Enregistrer les paramètres relatifs aux événements et aux pièces jointes; Enregistrer les paramètres relatifs aux événements et aux pièces jointes → Commencer l&#x27;observation; Commencer l&#x27;observation → Recevez les mises à jour du client actif; Recevez les mises à jour du client actif → Appliquer la politique relative aux sources et aux événements; Appliquer la politique relative aux sources et aux événements → Ajouter une observation signée; Ajouter une observation signée → Consultez ou exportez le journal; Ajouter une observation signée → Traiter toute pièce jointe en attente; Traiter toute pièce jointe en attente → Ajoutez le résultat du téléchargement</desc><defs><marker id="flow-1-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M199.4 55.0C236.3 55.0 236.3 55.0 273.1 55.0" marker-end="url(#flow-1-arrow)" style="--i:0;--len:74" pathLength="74"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M199.4 55.0C236.3 55.0 236.3 55.0 273.1 55.0"/></circle><path class="flow-edge" d="M418.4 55.0C451.7 55.0 451.7 55.0 485.1 55.0" marker-end="url(#flow-1-arrow)" style="--i:1;--len:67" pathLength="67"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M418.4 55.0C451.7 55.0 451.7 55.0 485.1 55.0"/></circle><path class="flow-edge" d="M571.5 102.0C571.5 131.5 571.5 131.5 571.5 161.0" marker-end="url(#flow-1-arrow)" style="--i:2;--len:59" pathLength="59"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M571.5 102.0C571.5 131.5 571.5 131.5 571.5 161.0"/></circle><path class="flow-edge" d="M512.6 190.0C470.7 190.0 470.7 190.0 428.7 190.0" marker-end="url(#flow-1-arrow)" style="--i:3;--len:84" pathLength="84"/><circle class="flow-pulse" r="3.2" style="--i:3"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M512.6 190.0C470.7 190.0 470.7 190.0 428.7 190.0"/></circle><path class="flow-edge" d="M262.7 190.0C236.3 190.0 236.3 190.0 209.8 190.0" marker-end="url(#flow-1-arrow)" style="--i:4;--len:53" pathLength="53"/><circle class="flow-pulse" r="3.2" style="--i:4"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M262.7 190.0C236.3 190.0 236.3 190.0 209.8 190.0"/></circle><path class="flow-edge" d="M119.9 228.0C119.9 270.5 119.9 270.5 119.9 313.0" marker-end="url(#flow-1-arrow)" style="--i:5;--len:85" pathLength="85"/><circle class="flow-pulse" r="3.2" style="--i:5"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M119.9 228.0C119.9 270.5 119.9 270.5 119.9 313.0"/></circle><path class="flow-edge" d="M196.0 342.0C227.6 342.0 227.6 307.0 259.3 307.0" marker-end="url(#flow-1-arrow)" style="--i:6;--len:75" pathLength="75"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M196.0 342.0C227.6 342.0 227.6 307.0 259.3 307.0"/></circle><path class="flow-edge" d="M196.0 342.0C231.1 342.0 231.1 377.0 266.2 377.0" marker-end="url(#flow-1-arrow)" style="--i:6;--len:81" pathLength="81"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M196.0 342.0C231.1 342.0 231.1 377.0 266.2 377.0"/></circle><path class="flow-edge" d="M425.3 377.0C453.4 377.0 453.4 342.0 481.6 342.0" marker-end="url(#flow-1-arrow)" style="--i:7;--len:69" pathLength="69"/><circle class="flow-pulse" r="3.2" style="--i:7"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M425.3 377.0C453.4 377.0 453.4 342.0 481.6 342.0"/></circle><g class="flow-node" style="--i:0"><rect x="40.4" y="26.0" width="159.1" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="46.0">Autoriser un compte</tspan><tspan x="119.9" y="64.0">utilisateur</tspan></text></g><g class="flow-node" style="--i:1"><rect x="273.1" y="17.0" width="145.3" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="37.0">Sélectionnez les</tspan><tspan x="345.7" y="55.0">groupes et canaux</tspan><tspan x="345.7" y="73.0">accessibles</tspan></text></g><g class="flow-node" style="--i:2"><rect x="485.1" y="8.0" width="172.9" height="94.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="28.0">Enregistrer les</tspan><tspan x="571.5" y="46.0">paramètres relatifs</tspan><tspan x="571.5" y="64.0">aux événements et aux</tspan><tspan x="571.5" y="82.0">pièces jointes</tspan></text></g><g class="flow-node" style="--i:3"><rect x="512.6" y="161.0" width="117.7" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="181.0">Commencer</tspan><tspan x="571.5" y="199.0">l&#x27;observation</tspan></text></g><g class="flow-node" style="--i:4"><rect x="262.7" y="161.0" width="166.0" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="181.0">Recevez les mises à</tspan><tspan x="345.7" y="199.0">jour du client actif</tspan></text></g><g class="flow-node" style="--i:5"><rect x="30.0" y="152.0" width="179.8" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="172.0">Appliquer la politique</tspan><tspan x="119.9" y="190.0">relative aux sources</tspan><tspan x="119.9" y="208.0">et aux événements</tspan></text></g><g class="flow-node" style="--i:6"><rect x="43.8" y="313.0" width="152.2" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="333.0">Ajouter une</tspan><tspan x="119.9" y="351.0">observation signée</tspan></text></g><g class="flow-node" style="--i:7"><rect x="259.3" y="278.0" width="172.9" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="298.0">Consultez ou exportez</tspan><tspan x="345.7" y="316.0">le journal</tspan></text></g><g class="flow-node" style="--i:7"><rect x="266.2" y="348.0" width="159.1" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="368.0">Traiter toute pièce</tspan><tspan x="345.7" y="386.0">jointe en attente</tspan></text></g><g class="flow-node" style="--i:8"><rect x="481.6" y="313.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="333.0">Ajoutez le résultat du</tspan><tspan x="571.5" y="351.0">téléchargement</tspan></text></g></svg></div><details class="flow-steps"><summary>Schéma sous forme de texte</summary><ol><li>Autoriser un compte utilisateur → Sélectionnez les groupes et canaux accessibles</li><li>Sélectionnez les groupes et canaux accessibles → Enregistrer les paramètres relatifs aux événements et aux pièces jointes</li><li>Enregistrer les paramètres relatifs aux événements et aux pièces jointes → Commencer l&#x27;observation</li><li>Commencer l&#x27;observation → Recevez les mises à jour du client actif</li><li>Recevez les mises à jour du client actif → Appliquer la politique relative aux sources et aux événements</li><li>Appliquer la politique relative aux sources et aux événements → Ajouter une observation signée</li><li>Ajouter une observation signée → Consultez ou exportez le journal</li><li>Ajouter une observation signée → Traiter toute pièce jointe en attente</li><li>Traiter toute pièce jointe en attente → Ajoutez le résultat du téléchargement</li></ol></details></figure>
+<p>L’autorisation, l’accès à une source, le bon fonctionnement d’un collecteur et la transmission complète sont
+des questions distinctes. Une connexion réussie ne garantit pas l’accès à tous les groupes.
+Un transport connecté ne prouve pas que toutes les mises à jour pertinentes sont bien parvenues.</p>
+<h2 id="observation-scope-chosen-chats-a-folder-or-the-whole-account">Périmètre d’observation : discussions sélectionnées, un dossier ou l’intégralité du compte<a class="anchor" href="#observation-scope-chosen-chats-a-folder-or-the-whole-account" aria-label="Lien vers cette section">#</a></h2>
+<p>Sources → <strong>Le périmètre d’observation</strong> détermine les discussions qu’un espace de travail enregistre.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Enregistre</th>
+<th>Nouvelles conversations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Discussions sélectionnées (par défaut)</td>
+<td>Uniquement les discussions que vous ajoutez manuellement</td>
+<td>Jamais ajouté automatiquement</td>
+</tr>
+<tr>
+<td>Dossier Telegram</td>
+<td>Conversations contenues dans l’un des dossiers du compte : conversations incluses par nom, auxquelles s’ajoutent les catégories du dossier (contacts, non-contacts, groupes, chaînes, bots), moins les conversations exclues et, si le dossier le précise, les conversations archivées</td>
+<td>Les conversations correspondantes sont ajoutées dès qu’elles deviennent actives ; celles que vous ajoutez au dossier dans Telegram sont récupérées dans l’heure qui suit.</td>
+</tr>
+<tr>
+<td>Compte complet</td>
+<td>Toutes les conversations auxquelles le compte a accès</td>
+<td>Chaque nouvelle conversation, groupe, conversation privée ou bot est ajouté dès la réception de sa première mise à jour.</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>Les types de sources</strong> (chaînes, groupes, discussions privées, bots) permettent de restreindre les modes « dossier » et
+    « compte entier ». Les discussions sélectionnées peuvent être de n’importe quel type, y compris les discussions privées et les bots.</li>
+<li><strong>Les discussions exclues</strong> ne sont jamais enregistrées, quel que soit le mode utilisé. En mode « dossier » et en mode « compte entier »,
+    les actions <em>« Exclure »</em> et <em>« Supprimer »</em> sur une source l’ajoutent à cette liste, de sorte que le périmètre ne l’ajoute pas à nouveau.
+    Si vous sélectionnez à nouveau la conversation manuellement (dans « Sources » ou à partir de « Conversations »), celle-ci est retirée de la liste. La liste
+    peut contenir jusqu’à 5 000 conversations ; au-delà, <em>la commande « Supprimer »</em> est refusée et la conversation peut être mise en pause à la place.</li>
+<li><strong>Actions propres à l’outil</strong> (activées par défaut) : les messages envoyés par ce compte, ses modifications et les
+    appuis sur les touches du clavier de réponse. Lorsque cette fonction est désactivée, les messages sortants et les modifications sont ignorés.</li>
+<li>Le passage à un dossier ou à l’ensemble du compte nécessite une confirmation : ces modes enregistrent
+    les discussions privées et les messages de tiers et ne doivent être utilisés que sur un compte dédié.
+    La confirmation et chaque modification de périmètre font l’objet d’enregistrements signés au format <code>scope.changed</code>.</li>
+<li>Les discussions ajoutées par le filtre apparaissent comme des sources marquées <em>« auto »</em>, enregistrées sous la forme <code>scope.applied</code>
+    (au démarrage et toutes les heures) ou <code>source.discovered</code> (une nouvelle discussion pendant la surveillance). Le retour
+    aux discussions sélectionnées met en pause toutes les sources ajoutées automatiquement.</li>
+</ul>
+<p>Ce que ces modes ne permettent pas de faire :</p>
+<ul>
+<li><strong>Les discussions secrètes</strong> sont chiffrées de bout en bout entre deux appareils et ne parviennent jamais à
+    TgWitness, quel que soit le mode utilisé.</li>
+<li><strong>Aucun enregistrement n’est effectué lorsque TgWitness n’est pas en cours d’exécution.</strong> Après un redémarrage, il interroge Telegram
+    pour récupérer les mises à jour manquées et vérifie à nouveau les discussions, mais Telegram ne restitue pas l’intégralité des données après de longues
+    pannes. Les rapports et le fichier <code>verify.py</code> indiquent ces périodes sous forme de lacunes (voir <a href="../evidence/#coverage-continuity-gaps-and-unobserved-ids">la section « Couverture »</a>).</li>
+<li>Seules les 1 000 premières conversations sont répertoriées au démarrage (la limite est définie dans <strong>les paramètres</strong>) ; les
+    conversations plus anciennes sont ajoutées dès qu’elles redeviennent actives. L’historique antérieur d’une conversation ajoutée n’est pas récupéré — effectuez un
+    instantané de l’historique ou une exportation complète de la conversation lorsque vous en avez besoin.</li>
+<li>Les conditions relatives aux dossiers qui changent constamment (silencieux, lu) ne sont pas prises en compte : ces discussions
+    restent sous surveillance.</li>
+<li><strong>Les boutons du bot intégrés (callback)</strong> sur lesquels on appuie dans une autre application sont invisibles pour une deuxième
+    session ; la réponse ou la modification du bot est enregistrée. Les frappes sur le clavier de réponse sont transmises sous forme de
+    messages sortants et sont identifiées par le code <code>button_press</code>.</li>
+<li>Plus il y a de discussions, plus il y a de demandes. Telegram restreint les comptes dont le volume est jugé
+    excessif, ce qui constitue une raison supplémentaire d’utiliser des comptes dédiés.</li>
+</ul>
+<h2 id="scope-and-event-selection">Portée et sélection des événements<a class="anchor" href="#scope-and-event-selection" aria-label="Lien vers cette section">#</a></h2>
+<p>Chaque espace de travail dispose de ses propres sources. TgWitness ne rejoint pas de groupes, n’accepte pas
+d’invitations et ne recense pas automatiquement tous les membres. Les sources doivent déjà être
+accessibles au compte. Au démarrage, le collecteur vérifie les sources sélectionnées
+par rapport aux conversations visibles du compte ; les 1 000 premières conversations sont inspectées, sauf indication contraire
+<strong>dans Paramètres → Chats lus à partir de la liste du compte</strong>.
+Une source absente est marquée comme <strong>« accès non confirmé</strong> » ; on ne suppose pas pour autant que vous ayez été supprimé.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Contexte</th>
+<th>Collecte</th>
+<th>Conséquences en cas de désactivation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nouveaux messages</td>
+<td>Messages ordinaires remis</td>
+<td>Les modifications ou suppressions ultérieures peuvent ne pas disposer de texte capturé antérieurement avec lequel effectuer une comparaison.</td>
+</tr>
+<tr>
+<td>Modifications</td>
+<td>Versions modifiées des messages fournies</td>
+<td>Les modifications intermédiaires ne sont pas reconstituées par la suite.</td>
+</tr>
+<tr>
+<td>Suppressions</td>
+<td>Notifications de suppression ciblées et notifications non ciblées au niveau du compte</td>
+<td>Les notifications de suppression ne sont pas ajoutées au journal.</td>
+</tr>
+<tr>
+<td>Réactions</td>
+<td>Instantanés des réactions fournis</td>
+<td>Les mises à jour relatives aux réactions ne sont pas ajoutées séparément.</td>
+</tr>
+<tr>
+<td>Adhésion</td>
+<td>Envoi de messages relatifs au service d’adhésion et de mises à jour destinées aux participants</td>
+<td>Ces observations relatives à l’adhésion ne sont pas incluses.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Les paramètres s’appliquent à toutes les sources sélectionnées dans l’espace de travail. Enregistrez le formulaire pour appliquer
+les modifications ; celles-ci sont consignées avec des valeurs « avant » et « après » signées. La désactivation d’une catégorie
+ne supprime pas les enregistrements antérieurs. Sa réactivation ne permet pas de récupérer les mises à jour manquées.</p>
+<p>Les enregistrements opérationnels et autres événements liés aux services de groupe restent distincts de ces
+paramètres. Les messages de service relatifs à l’adhésion peuvent générer des enregistrements de messages lorsque l’adhésion
+est activée, même si la capture standard des nouveaux messages est désactivée. Les objets Telegram
+capturés conservent leurs métadonnées intégrées ; un paramètre ne constitue pas une règle de caviardage.</p>
+<p><strong>Les suppressions dans les discussions privées et les groupes ordinaires</strong> apparaissent sous forme d’identifiants de message sans discussion associée.
+Ces discussions partagent une séquence d’identifiants de message valable pour l’ensemble du compte ; ainsi, lorsqu’un message portant cet identifiant a été
+enregistré auparavant, sa discussion est connue : la suppression est consignée dans cette discussion,
+comme l’explique <code>chat_resolution</code>. Les identifiants jamais enregistrés restent une <strong>suppression sans contexte,</strong> avec une
+source explicitement inconnue ; le collecteur ne fait aucune supposition. Telegram n’indique jamais qui a supprimé un
+message ; lorsque le message supprimé a été envoyé par ce compte, l’enregistrement l’indique
+(<code>deleted_message_was_outgoing</code>) sans nommer la personne à l’origine de la suppression.</p>
+<h2 id="own-actions">Actions propres<a class="anchor" href="#own-actions" aria-label="Lien vers cette section">#</a></h2>
+<p>Les messages envoyés par le compte surveillé sont identifiés par la mention « <code>outgoing</code> ». La modification d’un
+message sortant précise que, dans les discussions privées et les groupes, seul son auteur peut le modifier, tandis que les
+publications sur les chaînes peuvent être modifiées par d’autres administrateurs. Lorsqu’un message sortant reprend le texte d’un bouton
+issu du dernier clavier de réponse enregistré dans cette conversation, il porte la mention « <code>button_press</code> » accompagnée d’un lien vers
+l’enregistrement correspondant du clavier.</p>
+<p>L&#x27;exclusion de vos propres actions s&#x27;applique également aux vérifications en arrière-plan et à l&#x27;historique automatique des nouvelles conversations.
+Les messages sortants ignorés font avancer la position de vérification afin qu&#x27;ils ne puissent pas bloquer les messages entrants ultérieurs.
+Les actions explicites effectuées dans le panneau et les instantanés d&#x27;historique demandés manuellement restent enregistrés.</p>
+<h2 id="investigation-mode-joining-teams-and-talking-to-bots">Mode d’enquête : rejoindre des groupes et communiquer avec des bots<a class="anchor" href="#investigation-mode-joining-teams-and-talking-to-bots" aria-label="Lien vers cette section">#</a></h2>
+<p><strong>Sources → Portée d’observation → Le mode d’enquête</strong> configure la portée pour un
+compte dédié qui rejoint des discussions de groupe, lance des bots et leur envoie des messages : l’intégralité du compte, chaque
+type de source, vos propres actions, ainsi que, pour chaque discussion ou bot qui apparaît, son profil et ses
+200 derniers messages visibles. Vérifiez le formulaire et cliquez sur <strong>« Enregistrer le champ d’observation »</strong> ; le passage à l’ensemble du
+compte nécessite la confirmation habituelle.</p>
+<ul>
+<li><strong>Boutons.</strong> Les boutons situés sous un message sont conservés avec celui-ci et s’affichent dans <strong>les discussions</strong> : liens,
+    applications web, liens de connexion, textes à copier, données de rappel, requêtes intégrées, demandes de
+    numéro de téléphone ou de localisation. Les liens s’affichent sous forme de texte et ne sont jamais ouverts par le panneau. Lorsqu’un bot
+    modifie uniquement les boutons (un nouveau lien de paiement), il s’agit d’une nouvelle version du message, tant
+    lors des mises à jour en temps réel que lors des vérifications ultérieures.</li>
+<li>
+<p><strong>Nouvelles conversations et nouveaux bots.</strong> En mode « dossier » et en mode « compte entier », <strong>lorsqu’une nouvelle conversation ou un nouveau bot
+    apparaît</strong>, l’enregistrement s’effectue immédiatement après son apparition :</p>
+<ul>
+<li>son profil sous forme d’enregistrement <code>source.profile</code> : description du bot et commandes, texte de présentation
+    d’un utilisateur, d’un groupe ou d’une chaîne, membres, discussion associée et lien d’invitation lorsque Telegram en fournit
+    un ;</li>
+<li>ses derniers messages visibles (jusqu’à 1 000) sous la forme d’un instantané de l’historique marqué <code>new_chat</code> : les
+    messages antérieurs d’une discussion de groupe à laquelle vous venez de rejoindre, ou ce qu’un bot a dit avant que l’observation
+    ne détecte la discussion. Les messages déjà enregistrés en temps réel ne sont pas répétés.</li>
+</ul>
+<p>Les discussions déjà présentes dans la liste au moment de l’activation du mode sont ajoutées sans capture d’écran.
+Un FloodWait suspend cette opération, qui reprend ensuite ; les échecs sont consignés et l’
+enregistrement en temps réel de la discussion se poursuit.
+- <strong>Profils sur demande. Conversations → Profil → Enregistrer le profil </strong>permet <strong>désormais</strong> d’enregistrer le profil actuel
+de n’importe quelle source ; le plus récent s’affiche au-dessus des messages.
+- <strong>Non visible.</strong> Les boutons intégrés (callback) sur lesquels on appuie dans une autre application Telegram, la fenêtre contextuelle ou le
+lien par lequel un bot répond à une telle pression, ainsi que les liens d’invitation utilisés dans une autre application n’atteignent pas
+TgWitness. Ce que le bot envoie ou modifie par la suite est enregistré.</p>
+</li>
+</ul>
+<h3 id="act-from-the-panel">Intervention lors de la table ronde<a class="anchor" href="#act-from-the-panel" aria-label="Lien vers cette section">#</a></h3>
+<p><strong>La rubrique « Chats »</strong> comprend désormais un mini-client utilisant le compte Telegram de l&#x27;espace de travail sélectionné :</p>
+<ul>
+<li>Rédigez un message en texte brut ou sélectionnez <strong>« Répondre »</strong> sous un message enregistré. Le message sortant ainsi généré
+    est enregistré même lorsque la configuration exclut les mises à jour sortantes.</li>
+<li>Appuyez sur<strong> le bouton « Appuyer »</strong> situé sous un bouton de rappel ou de texte actif. Le serveur récupère à nouveau le
+    message et refuse l’action si le clavier diffère de la version enregistrée.
+    Les accusés de réception des rappels conservent le texte de la fenêtre contextuelle de Telegram, le drapeau d’alerte et l’URL ; la réponse s’affiche également
+    sous la conversation. Les URL restent du texte sélectionnable et ne s’ouvrent pas automatiquement.</li>
+<li>Développez <strong>le lien « Ouvrir Telegram</strong> », saisissez <code>@username</code>, un lien public <code>https://t.me/name</code>,
+    <code>https://t.me/+invite</code> / <code>joinchat/invite</code>, ou un lien de bot avec <code>?start=parameter</code>, puis cliquez sur «
+    <strong>Enregistrer l’aperçu</strong> ». Le lien d’origine et l’aperçu Telegram sont signés avant l’adhésion.
+    <strong>Rejoindre / ouvrir et observer</strong> : le système rejoint alors le groupe/la chaîne ou ouvre l’utilisateur/le bot, ajoute la
+    conversation en tant que source activée et envoie « <code>/start</code> » à un bot, en incluant son paramètre de démarrage.
+    Une demande d’adhésion en attente de validation par l’administrateur est enregistrée comme « en attente », et non comme une adhésion effective.</li>
+</ul>
+<p>Activez « <strong>Démarrer l’observation</strong> » pour capturer les réponses entrantes en temps réel. Les actions du panneau fonctionnent lorsque
+l’observation est en pause, mais seules leurs réponses directes sont alors garanties d’être enregistrées.
+Les sources nouvellement ajoutées utilisent le profil configuré ou l’historique de collecte lorsque l’observation est en cours.
+Lorsqu’une source est en pause, activez-la dans <strong>« Sources »</strong> avant d’envoyer un message ou d’appuyer sur ses boutons.</p>
+<p><code>interaction.preview</code>, <code>interaction.requested</code> et <code>interaction.result</code> sont des événements courants du journal signés
+inclus dans les exportations de preuves. Les requêtes identifient le compte, le message/bouton
+ou l&#x27;aperçu concerné, et indiquent si l&#x27;observation était en cours. Les accusés de réception distinguent les cas de réussite,
+de rejet, d&#x27;approbation en attente et de résultat inconnu. Une requête interrompue peut avoir atteint
+Telegram : veuillez vérifier la conversation avant de lancer une nouvelle action. La réutilisation d’un identifiant de requête permet de récupérer son
+accusé de réception enregistré sans répéter l’action, y compris après un redémarrage. Le panneau conserve l’
+identifiant après une réponse ambiguë pour la même action au cours de la session de page en cours.
+Il conserve également cet identifiant lorsque l’actualisation de la vue échoue après une action réussie : l’accusé de réception
+reste visible, et un nouveau clic permet de le récupérer. Les RPC de rappel et de participation ne disposent que d’une seule
+tentative ; les lectures réessayables conservent leur politique de réessai configurée. Le changement de discussion
+efface immédiatement le brouillon et la cible de réponse, et désactive l’envoi jusqu’à ce que la nouvelle conversation soit chargée.</p>
+<p>Ce mini-client gère les boutons de texte et de rappel. Les applications web, les demandes d’identification, de numéro de téléphone ou de localisation,
+les paiements, les requêtes intégrées et les pièces jointes nécessitent toujours un client Telegram ; les métadonnées des boutons enregistrés
+restent visibles. Les nouvelles commandes utilisent du texte en anglais.</p>
+<h2 id="recheck-tiers">Niveaux de vérification<a class="anchor" href="#recheck-tiers" aria-label="Lien vers cette section">#</a></h2>
+<p>Les vérifications de suivi demandent à nouveau à Telegram les messages manqués, les modifications et les messages qu’il ne renvoie plus.
+Les sources marquées d’une étoile sont des sources <strong>prioritaires</strong>, revérifiées toutes les 15 minutes par défaut ;
+toutes les autres sources toutes les 6 heures. Les discussions sélectionnées sont initialement considérées comme des sources prioritaires, tandis que celles ajoutées via un
+dossier ou l’ensemble du compte sont traitées comme des sources standard. Au maximum 30 sources sont revérifiées par cycle et
+les autres attendent la minute suivante ; après une reconnexion, les sources prioritaires sont traitées en premier. Ces deux
+intervalles sont définis sous Sources → Paramètres d’enregistrement → Revérification (la valeur 0 désactive un niveau) et sont
+enregistrés sous la forme <code>recheck.changed</code>.</p>
+<p>Les messages manqués sont récupérés à partir du point où le cycle précédent s’est arrêté, dans la limite du nombre de
+<strong>« nouveaux messages par nouvelle vérification »</strong> (1 000 par défaut) défini dans
+<strong>Paramètres</strong>. Après une longue interruption, la
+nouvelle vérification comble donc l’intégralité du retard, même lorsque des messages en temps réel plus récents que le retard ont été enregistrés
+en premier. Une conversation qui est encore en cours de rattrapage est vérifiée à nouveau dès la minute suivante au lieu d’
+attendre son intervalle de niveau ; <code>recheck.completed</code> affiche <code>continues_after</code> jusqu’à ce que l’opération soit terminée.</p>
+<p>Les comparaisons portent sur le texte des messages, les entités, les claviers (y compris les suppressions) et le
+contenu/l’identité des pièces jointes. La modification des hachages d’accès aux fichiers ou des références de fichiers ne constitue pas à elle seule une
+modification, pas plus que ce que Telegram ajoute de lui-même : le chargement d’un aperçu de lien, les vues d’une story, les
+contenus multimédias payants débloqués par ce compte, la réception d’une facture. Chaque version enregistrée dans « Chats » renvoie vers son enregistrement complet dans le journal, y compris les métadonnées des médias.</p>
+<h2 id="message-history-and-attribution">Historique des messages et attribution<a class="anchor" href="#message-history-and-attribution" aria-label="Lien vers cette section">#</a></h2>
+<p>Supposons que le collecteur observe « Réunion à 10 h », puis constate « Réunion à 11 h »,
+et reçoive ensuite une notification de suppression. Il ajoute alors trois observations distinctes. Le
+texte d’origine est conservé, la modification constitue une version distincte, et la notification indique qu’
+une suppression a été constatée.</p>
+<p>Si la collecte a commencé après la disparition de la première version, ce texte n’est pas disponible.
+Si plusieurs modifications ont eu lieu alors que le processus était hors ligne, seules les versions observées par la suite
+peuvent être enregistrées. Une notification de suppression ne permet pas de récupérer un contenu qui n’a jamais été capturé.</p>
+<p>L’expéditeur d’un message n’est pas automatiquement la personne qui l’a modifié. Telegram ne fournit généralement pas
+l’identité de la personne ayant supprimé un message ni l’heure exacte de la suppression. Les acteurs inconnus
+restent inconnus. Les instantanés des réactions et les mises à jour des participants ne contiennent que les chiffres
+et les identités que Telegram rend visibles au titulaire du compte.</p>
+<p>Les numéros de séquence indiquent l’ordre d’observation. L’horodatage UTC du collecteur correspond à son
+horloge locale ; l’horodatage source de Telegram est stocké séparément lorsqu’il est fourni.
+Aucun de ces deux horodatages n’est considéré comme un horodatage fiable et indépendant.</p>
+<h2 id="history-snapshots">Instantanés de l&#x27;historique<a class="anchor" href="#history-snapshots" aria-label="Lien vers cette section">#</a></h2>
+<p>Une requête « snapshot » récupère les derniers messages visibles provenant d’une source activée, dans la limite de
+500 par requête. Les résultats sont qualifiés d’« observations historiques ». Ils peuvent se chevaucher
+avec la capture en temps réel, et les observations répétées sont conservées sous forme d’enregistrements distincts.</p>
+<p>Les instantanés respectent la politique relative aux pièces jointes, mais restent distincts des changements liés aux événements en temps réel.
+Ils ne reconstituent pas les messages supprimés ni les versions intermédiaires manquantes. Vous pouvez
+en demander un lorsque l’enregistrement est en pause ; les pièces jointes mises en file d’attente attendent que l’observation commence
+et que le processus de téléchargement s’exécute.</p>
+<h2 id="attachment-handling">Gestion des pièces jointes<a class="anchor" href="#attachment-handling" aria-label="Lien vers cette section">#</a></h2>
+<p>Le téléchargement des pièces jointes est activé par défaut et est suspendu lorsque l&#x27;espace disque disponible est inférieur à 1 GiB. Le collecteur valide simultanément la
+surveillance des messages et la tâche de téléchargement. La tâche conserve le descripteur multimédia d’origine
+et la politique de taille, de sorte qu’une pièce jointe modifiée ultérieurement ne soit pas remplacée sans préavis.</p>
+<p>Les téléchargements s’exécutent après la capture des messages. Un téléchargement abouti génère un enregistrement « <code>media.saved</code>
+» accompagné de son hachage SHA-256 et de son nombre d’octets. Les opérations ignorées, ayant échoué, ayant fait l’objet d’une nouvelle tentative ou ayant été interrompues
+génèrent des résultats distincts. Une tâche mise en file d’attente ne constitue pas une preuve que le fichier a été préservé.
+Le fichier final doit également correspondre au nombre d’octets indiqué dans le descripteur de pièce jointe d’origine
+observé. Une réponse trop courte ou inattendue n’est pas enregistrée comme média conservé.</p>
+<p>Des limites sont définies <strong>par type</strong> : photos, vidéos, GIF et animations, messages vidéo circulaires,
+messages vocaux, musique et fichiers audio, autocollants et fichiers. Chaque type peut être désactivé et dispose de
+sa propre limite de taille comprise entre 1 et 2 000 Mio ; les nouveaux espaces de travail commencent avec 20 Mio pour les photos,
+100 Mio pour les vidéos, 50 Mio pour les fichiers, les fichiers audio et les vidéos circulaires, 20 Mio pour les messages vocaux et les GIF, et
+5 MiB pour les autocollants. <em>La taille maximale des fichiers</em> s’applique à tous les types simultanément. Les politiques enregistrées avant l’
+instauration des limites par type conservent leur limite unique pour chaque type. Un type désactivé génère un
+enregistrement <code>media.skipped</code> ; les fichiers de taille inconnue ou trop volumineux ne sont pas téléchargés. Les fichiers volumineux bénéficient d’un
+débit de téléchargement d’au moins 256 KiB/s. Les tâches survivent à un redémarrage, mais les références expirées, la perte d’
+accès ou la suppression de fichiers peuvent néanmoins empêcher leur récupération. Les tâches existantes conservent la politique enregistrée
+avec elles.</p>
+<h2 id="pause-lock-disconnect-and-restart">Mettre en pause, verrouiller, se déconnecter et redémarrer<a class="anchor" href="#pause-lock-disconnect-and-restart" aria-label="Lien vers cette section">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Action ou état</th>
+<th>Effet</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Changer d&#x27;espace de travail</td>
+<td>Modifie l’affichage du panneau ; les autres collecteurs conservent leur état.</td>
+</tr>
+<tr>
+<td>Verrouillez le panneau ou fermez l&#x27;onglet</td>
+<td>Le serveur et le système d’observation continuent de fonctionner.</td>
+</tr>
+<tr>
+<td>Observation en pause</td>
+<td>Interrompt ce collecteur et conserve les pièces jointes en attente de traitement.</td>
+</tr>
+<tr>
+<td>Désactiver une source</td>
+<td>Interrompt toute capture ciblée future ; les tâches multimédias mises en file d’attente pour celle-ci sont mises en attente tant qu’elle est désactivée.</td>
+</tr>
+<tr>
+<td>Supprimer une source</td>
+<td>Il ignore cette source et supprime les profils des utilisateurs concernés ; les enregistrements déjà sauvegardés restent dans le journal à ajout seul. Les pièces jointes encore en attente sont enregistrées comme ayant échoué (<code>source_removed</code>). En modes « dossier » et « compte entier », elles sont également exclues.</td>
+</tr>
+<tr>
+<td>Modifier l&#x27;itinéraire de connexion</td>
+<td>Nécessite une pause, ferme les anciens clients et annule les connexions inachevées.</td>
+</tr>
+<tr>
+<td>Arrêtez le processus Python</td>
+<td>Interrompt tous les espaces de travail ; aucune observation n’est effectuée lorsque l’outil est hors ligne.</td>
+</tr>
+<tr>
+<td>Redémarrage après une période d’observation active</td>
+<td>Tente de reprendre la portée enregistrée à l&#x27;aide de la session sauvegardée. Une pause manuelle annule cette intention.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Le collecteur enregistre les déconnexions détectées, les nouvelles tentatives, les erreurs, les démarrages/arrêts et les
+signaux de présence. Les courtes interruptions peuvent échapper aux contrôles de connectivité périodiques.
+Après un redémarrage, les mises à jour manquées sont demandées à partir de la position de mise à jour enregistrée et
+les discussions surveillées sont revérifiées périodiquement ; voir <a href="../evidence/#durable-collection-and-process-receipts-02">le format des preuves</a>. Un instantané fournit le contexte ;
+il ne prouve pas qu’une lacune a été comblée.</p>
+<h2 id="account-isolation-and-verification">Isolement et vérification des comptes<a class="anchor" href="#account-isolation-and-verification" aria-label="Lien vers cette section">#</a></h2>
+<p>Chaque espace de travail dispose de son propre journal, de ses propres autorisations, de sa clé de signature, de sa politique et de sa file d’attente.
+Seul son client actif peut y ajouter des observations en temps réel. Les clients rejetés, en attente,
+remplacés ou effectuant un test de connexion ne peuvent pas enregistrer de mises à jour en temps réel dans ce journal.
+Différents comptes peuvent observer le même groupe, mais leurs journaux restent distincts.</p>
+<p>Chaque événement comprend le hachage précédent et une signature Ed25519. Les exportations couvrent l’
+intégralité du journal de l’espace de travail grâce à un numéro de séquence fixe. Les filtres du panneau ne filtrent pas
+l’exportation ; la collecte peut se poursuivre au-delà de ses limites pendant sa préparation.</p>
+<p><strong>La vérification du journal</strong> contrôle la chaîne d’événements et les signatures à travers la
+limite affichée. Son résultat est effacé lorsque l’espace de travail change, et le panneau identifie
+les nouveaux enregistrements ajoutés après la vérification. L’exportation au format ZIP permet également de vérifier les médias collectés.</p>
+<p>Une signature valide garantit l’intégrité par rapport à la clé de confiance, et non par rapport à l’origine Telegram
+ou à la véracité du contenu. Conservez les empreintes et les points de contrôle de manière indépendante. Consultez
+le <a href="../evidence/">modèle de preuve</a>, <a href="../operations/">les opérations quotidiennes</a> et
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">la procédure d’acceptation en temps réel</a> pour connaître les exigences en matière de confiance et de transmission.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/COLLECTION.md">Modifier cette page sur GitHub ↗</a><a class="next-guide" href="../operations/"><span>Étape suivante</span><strong>Workflows et opérations →</strong></a><p>Ces guides décrivent la mise en œuvre actuelle. Les résultats de validation et les lacunes restantes sont documentés séparément. <a href="../verification/">Ce qui a été testé →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Sur cette page"><p class="nav-label">Sur cette page</p><a href="#from-login-to-a-journal">De la connexion au journal</a><a href="#observation-scope-chosen-chats-a-folder-or-the-whole-account">Périmètre d’observation : discussions sélectionnées, un dossier ou l’intégralité du compte</a><a href="#scope-and-event-selection">Portée et sélection des événements</a><a href="#own-actions">Actions propres</a><a href="#investigation-mode-joining-teams-and-talking-to-bots">Mode d’enquête : rejoindre des groupes et communiquer avec des bots</a><a href="#recheck-tiers">Niveaux de vérification</a><a href="#message-history-and-attribution">Historique des messages et attribution</a><a href="#history-snapshots">Instantanés de l'historique</a><a href="#attachment-handling">Gestion des pièces jointes</a><a href="#pause-lock-disconnect-and-restart">Mettre en pause, verrouiller, se déconnecter et redémarrer</a><a href="#account-isolation-and-verification">Isolement et vérification des comptes</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Open source · Fonctionne sur votre machine</span><a href="../../../../LICENSE">Licence MIT</a><a href="../notice/">Avis à l’opérateur</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Sécurité</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "En attente d'un message", "Step through a fictional send, edit and delete.": "Suivez pas à pas un scénario fictif d’envoi, de modification et de suppression.", "No observations yet. Start the sequence or advance one event.": "Aucune observation pour l'instant. Lancez la séquence ou passez à l'événement suivant.", "Meet at 10:00": "Rendez-vous à 10 h", "A new message is visible in the chat.": "Un nouveau message apparaît dans la conversation.", "Record 1 appended: the collector observed the original message.": "Enregistrement n° 1 joint : le collecteur a relevé le message d'origine.", "Meet at 11:00": "Rendez-vous à 11 h", "The current text changes. The earlier observation stays.": "Le texte actuel a été modifié. L’observation précédente reste valable.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Enregistrement n° 2 ajouté : la modification constitue une nouvelle observation. L'enregistrement n° 1 conserve toujours le texte d'origine.", "Message deleted": "Message supprimé", "The message has disappeared from the chat view.": "Le message a disparu de la vue de la conversation.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Enregistrement n° 3 joint : la notification de suppression est conservée aux côtés des deux versions observées.", "0 records": "0 enregistrement", "1 record": "1 enregistrement", "2 records": "2 entrées", "3 records": "3 entrées", "Complete / {n} of 3": "Terminé / {n} sur 3", "Step / {n} of 3": "Étape / {n} sur 3", "Pause": "Pause", "Replay sequence": "Séquence de relecture", "Play sequence": "Séquence de lecture", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Un exemple statique est disponible. Pour calculer des hachages de manière interactive, ouvrez cette page via HTTPS ou dans un aperçu localhost prenant en charge Web Crypto.", "No record supplied": "Aucun enregistrement fourni", "Tail removed": "Fin supprimée", "≠ saved hash": "≠ hachage enregistré", "Rebuilt · different hash": "Reconstruit · hachage différent", "= saved hash": "= hachage enregistré", "Same length and matching head.": "Même longueur et titre correspondant.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Les trois hachages calculés correspondent aux hachages enregistrés. Cet échantillon respecte la limite de trois enregistrements conservés.", "Same saved head; the journal prefix fails verification.": "Même en-tête enregistré ; le préfixe du journal ne passe pas la vérification.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "L'enregistrement n° 2 ne correspond plus à son hachage enregistré. Une vérification portant uniquement sur l'en-tête final stocké passerait cela inaperçu ; le vérificateur contrôle chaque enregistrement.", "Head differs from the retained checkpoint.": "L'en-tête diffère du point de contrôle conservé.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Les hachages reconstruits s’enchaînent, mais l’en-tête final a été modifié. Le point de contrôle conservé rejette cet historique. Les signatures d’origine échoueraient également sur les enregistrements modifiés.", "Too short: 2 supplied records \u003c 3 retained records.": "Trop court : 2 enregistrements fournis \u003c 3 enregistrements conservés.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Les deux hachages restants correspondent toujours. Le point de contrôle conservé révèle la partie manquante. Sans cette limite antérieure, ce préfixe plus court ne permettrait pas à lui seul de mettre en évidence l’omission.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Le calcul de hachage n'est pas disponible dans ce navigateur. Les formules et l'explication statique ci-dessous restent disponibles.", "{n} records": "{n} enregistrements", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Accepté : le décompte augmente, la signature est vérifiée et la clé correspond. Le témoin conserve cette nouvelle limite.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback : la réponse signée fait état d’un nombre d’enregistrements inférieur à celui du dernier point de contrôle accepté. Le témoin consigne le problème et conserve la limite acceptée précédemment.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork : le compteur reste inchangé, mais la tête diffère. Le témoin consigne le désaccord et conserve la limite acceptée précédemment.", "No answer": "Pas de réponse", "boundary unknown": "limite inconnue", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Absence de réponse : le témoin enregistre l’échec de la vérification. Il ne peut pas déterminer l’état actuel du collecteur. Si le témoin peut toujours accéder à l’API du bot et que sa politique de publication le permet, il peut publier cet échec.", "Send {n}": "Envoyer {n}", "Edit {n}": "Modifier {n}", "Delete {n}": "Supprimer {n}", "Both accounts captured all six expected observations in this example.": "Les deux comptes ont capturé l’ensemble des six observations attendues dans cet exemple.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Le compte B a tout de même capturé 6 messages sur 6. Deux reçus ont pris plus de temps. Le taux de capture et le délai de réception répondent à des questions différentes.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Le compte B a capturé 5 messages sur 6 avant l'heure limite (83,3 %). La modification manquante ne présente aucun délai mesurable. Ce résultat ne concerne que les six actions contrôlées.", "not observed by cutoff": "non respecté à la date limite", "{s} seconds": "{s} secondes", "Exact values follow in the table.": "Les valeurs exactes figurent dans le tableau ci-dessous.", "{s} s": "{s} s", "Not observed": "Non respecté", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Quatre discussions apportent des observations différentes. Suivez les enregistrements sources pour chaque connexion ; n’attribuez pas la publication de la chaîne à l’utilisateur 71001 en l’absence d’un expéditeur identifié.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Les enregistrements n° 146 et n° 205 indiquent le même identifiant d'expéditeur, 71001. Cela permet de relier les publications observées d'un compte Telegram sur deux discussions différentes. Cela ne permet pas d'identifier une personne dans la vie réelle ni d'attribuer la publication à une chaîne.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "L’adresse de destination pay.example.invalid/new apparaît dans l’enregistrement de groupe n° 146, le clavier du bot n° 173, la modification de la chaîne n° 188 et le message privé n° 205. Une destination récurrente relie ces éléments ; elle ne prouve pas pour autant l’existence d’un contrôle commun de ces comptes.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Dans ce cas fictif, les reçus multimédias n° 151 et n° 209 présentent des valeurs SHA-256 complètes identiques. Comparez les octets réels et les enregistrements de messages associés. Le fichier correspondant n’identifie pas son auteur et ne permet pas de déterminer qui l’a transmis.", "the encrypted off-site copy": "la copie cryptée hors site", "notifications": "notifications", "checkpoint hashes for timestamps": "Hachages de contrôle pour les horodatages", "signed checkpoints for the witness": "points de contrôle signés pour TgWitness", "Switched on in this example": "Activé dans cet exemple", "Optional · off by default": "Facultatif · désactivé par défaut", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "À quitter cet appareil : la connexion Telegram et {list}. Rien d’autre.", "Default: only the Telegram connection leaves this machine.": "Par défaut : seule la connexion Telegram sort de cette machine.", "{done} of {total} done": "{done} sur {total} terminé", "Mark step {n} as done": "Marquer l'étape {n} comme terminée", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Copier", "Copied": "Copié", "Command copied.": "Commande copiée.", "Selected — Ctrl/Cmd+C": "Sélectionné — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Commande sélectionnée. Copiez-la manuellement.", "Command copied to clipboard.": "Commande copiée dans le presse-papiers.", "Select text": "Sélectionner le texte", "Clipboard unavailable. Command selected; copy it manually.": "Presse-papiers indisponible. Commande sélectionnée ; veuillez la copier manuellement.", "A message arrives. The first observation is saved.": "Un message arrive. La première observation est enregistrée.", "The time changes. Both captured versions stay.": "L'heure change. Les deux versions capturées sont conservées.", "The message disappears. The captured history remains.": "Le message disparaît. L'historique enregistré demeure.", "Pause example animation": "Mettre en pause l'animation d'exemple", "Play example animation": "Lancer l'animation d'exemple", "Play": "Lire", "Full-size workspace screenshot": "Capture d'écran de l'espace de travail en plein écran", "Workspace screenshot · fictional data": "Capture d'écran de l'espace de travail · données fictives", "Close": "Fermer", "Close screenshot": "Fermer la capture d'écran", "Scrollable full-size screenshot": "Capture d'écran en plein écran défilable", "Enlarge: {name}": "Agrandir : {name}", "View full size": "Afficher en grand format"}</script>
+</body></html>

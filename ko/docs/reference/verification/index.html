@@ -1,0 +1,842 @@
+<!doctype html>
+<html lang="ko" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>테스트된 내용 | TgWitness</title>
+<meta name="description" content="실시간 텔레그램 테스트, 자동화된 점검, 브라우저 점검 및 아직 검증되지 않은 사항."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/verification/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="테스트된 내용 | TgWitness"><meta property="og:description" content="실시간 텔레그램 테스트, 자동화된 점검, 브라우저 점검 및 아직 검증되지 않은 사항.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/ko/docs/reference/verification/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/verification/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/verification/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/verification/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/verification/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/verification/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/verification/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/verification/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/verification/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/verification/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/verification/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/verification/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/verification/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/verification/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/verification/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/verification/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/verification/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/verification/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/verification/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/verification/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/verification/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/verification/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/verification/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/verification/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/verification/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/verification/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/verification/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/ko/docs/reference/verification/", "url": "https://phishdestroy.github.io/TgWitness/ko/docs/reference/verification/", "name": "테스트된 내용 | TgWitness", "description": "실시간 텔레그램 테스트, 자동화된 점검, 브라우저 점검 및 아직 검증되지 않은 사항.", "inLanguage": "ko", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://phishdestroy.github.io/TgWitness/ko/"}, {"@type": "ListItem", "position": 2, "name": "문서", "item": "https://phishdestroy.github.io/TgWitness/ko/docs/"}, {"@type": "ListItem", "position": 3, "name": "참고 문헌", "item": "https://phishdestroy.github.io/TgWitness/ko/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "테스트된 내용", "item": "https://phishdestroy.github.io/TgWitness/ko/docs/reference/verification/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">본문으로 건너뛰기</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / 문서</span></a>
+<nav aria-label="가이드"><a href="../../concepts/">시각적 가이드</a><a href="../../">모든 가이드</a><a href="../">참고 문헌</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="언어"><span aria-hidden="true">◍</span> 한국어</summary><div class="lang-list"><a href="../../../../docs/reference/verification/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/verification/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/verification/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/verification/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/verification/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/verification/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/verification/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/verification/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/verification/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/verification/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/verification/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/verification/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/verification/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/verification/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/verification/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/verification/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/verification/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="./" hreflang="ko" lang="ko" aria-current="true">한국어</a><a href="../../../../zh-Hant/docs/reference/verification/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/verification/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/verification/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/verification/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/verification/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/verification/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/verification/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="밝은 테마와 어두운 테마 전환"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="가이드"><a href="../../../guides/modes.html">모드, 시나리오 및 증거 수준</a><p class="nav-label">시작하기</p><a href="../../start/">몇 분 만에 시작하세요</a><a href="../../accounts/">계정 연결</a><a href="../../proxies/">프록시 선택</a><a href="../../exports/">내보내기 및 검증</a><p class="nav-label">증거 이해하기</p><a href="../../concepts/">증거가 어떻게 활용되는지 확인하기</a><a href="../../cases/">모든 채팅을 대상으로 조사하기</a><a href="../../security/">보안을 유지하세요</a><p class="nav-label">더 알아보기</p><a href="../../witness/">Witness 봇 설정하기</a><a href="../../server/">계속 운영해 주세요</a><a href="../../troubleshooting/">문제가 발생한 원인을 파악하세요</a></nav><nav class="wiki-nav" aria-label="참고 문헌"><p class="nav-label"><a class="nav-label-link" href="../">참고 문헌</a></p><details class="wiki-group"><summary>설정</summary><a href="../quickstart/">빠른 시작</a><a href="../accounts/">계정 및 세션 형식</a><a href="../connection/">연결, 프록시 및 데이터 보호</a><a href="../deployment/">배포</a></details><details class="wiki-group"><summary>수집</summary><a href="../collection/">데이터 수집 방식</a><a href="../operations/">워크플로우 및 운영</a><a href="../investigation/">조사 모드</a><a href="../features/">기능 및 제한 사항</a></details><details class="wiki-group"><summary>증거</summary><a href="../how-it-works/">증거 기록의 작동 방식</a><a href="../evidence/">증거 형식</a><a href="../witness/">독립적인 증인</a><a href="../timestamp/">타임스탬프</a></details><details class="wiki-group" open><summary>보안 및 프로젝트</summary><a href="../security/">보안 및 데이터 처리</a><a href="../architecture/">아키텍처</a><a href="./" aria-current="page">테스트된 내용</a><a href="../license/">라이선스 안내 및 아키텍처 비호환성 공지</a><a href="../notice/">운영자 호환성 불일치 공지</a><a href="../changelog/">변경 내역</a></details></nav><p class="sidebar-note">v0.7.0<br>오픈 소스 · 사용자의 컴퓨터에서 실행됩니다</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="가이드"><a href="../../../">홈</a> <span aria-hidden="true">/</span> <a href="../../">문서</a> <span aria-hidden="true">/</span> <a href="../">참고 문헌</a> <span aria-hidden="true">/</span> <span aria-current="page">테스트된 내용</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">문서 검색</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="프록시, 해시 체인, 토큰 또는 위트니스 등을 고려해 보십시오…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="명확한 검색" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">가이드와 참조 자료를 검색하려면 단어를 입력하세요. 검색 기록은 브라우저에 저장됩니다.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">참고 문헌 / 보안 및 프로젝트</p><h1>테스트된 내용</h1><p class="guide-outcome">실시간 텔레그램 테스트, 자동화된 점검, 브라우저 점검 및 아직 검증되지 않은 사항.</p><div class="wiki-body"><h2 id="live-telegram-test-whole-account--29-october-2026">실시간 텔레그램 테스트, 전체 계정 · 2026년 10월 29일<a class="anchor" href="#live-telegram-test-whole-account--29-october-2026" aria-label="이 섹션으로 이동">#</a></h2>
+<p>아래 테스트 이후에도 해당 계정은 계속 운영되었습니다. 10월 29일 12:10 UTC에 기록 범위가
+계정 전체(채널, 그룹, 비공개 채팅 및 봇)로 전환되었으며, 패널에서
+확인을 요청하자 서명된 기록부에 해당 내용이 기록되었습니다. 17:59 UTC 기준 기록부에는 다음과 같은 내용이 포함되어 있었습니다:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>기록 기간: 10월 27일 21:36 ~ 10월 29일 17:59 (UTC)</th>
+<th style="text-align: right;">개수</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>저널 기록</td>
+<td style="text-align: right;">9,968</td>
+</tr>
+<tr>
+<td>새 메시지</td>
+<td style="text-align: right;">5,308</td>
+</tr>
+<tr>
+<td>전체 계정으로 전환한 후의 내용</td>
+<td style="text-align: right;">3,878</td>
+</tr>
+<tr>
+<td>삭제 내역</td>
+<td style="text-align: right;">784</td>
+</tr>
+<tr>
+<td>TgWitness가 메시지를 저장한 후 삭제된 메시지들</td>
+<td style="text-align: right;">596</td>
+</tr>
+<tr>
+<td>수정 사항</td>
+<td style="text-align: right;">41</td>
+</tr>
+<tr>
+<td>재검토를 통해 추가된 메시지</td>
+<td style="text-align: right;">2,273</td>
+</tr>
+<tr>
+<td>재확인 과정에서 더 이상 찾을 수 없었던 메시지</td>
+<td style="text-align: right;">18</td>
+</tr>
+<tr>
+<td>기록 스냅샷을 통해 저장된 메시지</td>
+<td style="text-align: right;">242</td>
+</tr>
+<tr>
+<td>저장된 첨부 파일</td>
+<td style="text-align: right;">247</td>
+</tr>
+<tr>
+<td>수집기 시작</td>
+<td style="text-align: right;">19</td>
+</tr>
+<tr>
+<td>Telegram FloodWait 일시 중지</td>
+<td style="text-align: right;">26</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>패널의 <strong>‘Verify’</strong> 검사를 통해 총 9,968건의 기록에 대한 서명과 해시 체인이 모두 확인되었습니다.</li>
+<li>메시지는 2개의 그룹 또는 채널과 3개의 비공개 채팅 및 봇에서 전송되었습니다. <strong>채팅에서</strong> 메시지 버튼이
+    한 번 눌렸으며, 해당 요청과 텔레그램의 응답이 저널에 기록되어 있습니다.</li>
+<li>컬렉터가 재시작 시 계정을 다시 스캔하면서 새로운 채팅이 추가되었습니다. 새로운 채팅의
+    이전 메시지 저장은 비활성화되어 있었으므로(<code>history = 0</code>), 여기서는 다루지 않습니다.</li>
+</ul>
+<p>다루지 않는 내용: 반응, 회원 변경, 인물 프로필, 메시지 전송, 초대
+를 통한 가입, 프록시, 알림, 위트니스 봇 및 여러 계정의 동시 사용. 공개 파일에는
+단순한 집계 수치만 포함됩니다.</p>
+<h2 id="password-protected-export-opened-with-libarchive--29-october-2026">libarchive로 열 수 있는 비밀번호로 보호된 내보내기 파일 · 2026년 10월 29일<a class="anchor" href="#password-protected-export-opened-with-libarchive--29-october-2026" aria-label="이 섹션으로 이동">#</a></h2>
+<p>내보내기 암호화 코드(WinZip AES-256, 7-Zip 및 WinRAR이
+읽을 수 있는 형식)로 생성된 아카이브를 Windows <code>tar</code>(bsdtar 3.6.2, libarchive)로 열었습니다. 올바른 암호를 입력했을 때
+추출된 파일의 SHA-256 해시값은 원본과 일치했으며, 잘못된 암호를 입력했을 때는 &quot;Incorrect
+passphrase&quot;라는 오류 메시지가 표시되었습니다. 7-Zip과 WinRAR 자체는 실행되지 않았습니다.</p>
+<h2 id="live-telegram-test--27-to-29-october-2026">텔레그램 실시간 테스트 · 2026년 10월 27일~29일<a class="anchor" href="#live-telegram-test--27-to-29-october-2026" aria-label="이 섹션으로 이동">#</a></h2>
+<p>내장된 API 쌍 풀을 통해 로그인된 하나의 실제 텔레그램 계정이
+<strong>10월 27일 21:36 UTC부터 10월 29일 05:15 UTC까지</strong> 하나의 슈퍼그룹을 기록했습니다. 이 기간 동안 수집기는
+12회 실행되었습니다.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>기록됨</th>
+<th style="text-align: right;">개수</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>하트비트 및 서비스 기록을 포함한 저널 기록</td>
+<td style="text-align: right;">2,385</td>
+</tr>
+<tr>
+<td>새 메시지</td>
+<td style="text-align: right;">1,291</td>
+</tr>
+<tr>
+<td>삭제 내역</td>
+<td style="text-align: right;">472</td>
+</tr>
+<tr>
+<td>TgWitness가 해당 텍스트를 저장한 후 삭제된 것들</td>
+<td style="text-align: right;">347</td>
+</tr>
+<tr>
+<td>수정 사항</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr>
+<td>중지된 동안 누락된 메시지는 재검사를 통해 추가됨</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr>
+<td>저장된 첨부 파일</td>
+<td style="text-align: right;">17</td>
+</tr>
+<tr>
+<td>첨부 파일이 다운로드되지 않았습니다(다운로드 기능이 꺼져 있거나 다운로드할 파일이 없음).</td>
+<td style="text-align: right;">14</td>
+</tr>
+<tr>
+<td>Telegram FloodWait는 재확인 과정에서 각각 3초씩 일시 정지합니다.</td>
+<td style="text-align: right;">8</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>총 2,385건의 기록에 대한 서명과 해시 체인은 저널의
+    공개 키를 통해 검증됩니다.</li>
+<li>재시작 후, 수집기는 저장된 업데이트 상태(<code>pts</code>)에서 작업을 재개하고 Telethon이
+    누락된 메시지를 보충한 뒤, 재검사를 통해 아직 누락된 메시지를 추가합니다.</li>
+<li>각 FloodWait에서 수집기는 요청된 시간을 기다린 후 작업을 계속했습니다.</li>
+<li>계정은 로그인 상태가 유지되었으며, 10월 29일에 동일한 세션이 다시 연결되었습니다.</li>
+</ul>
+<p>이번 테스트에서 다루지 않은 사항: 여러 계정 동시 처리, 관리자 역할, 프록시,
+몇 시간 이상 지속되는 서비스 중단, 그리고 전체 <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">실시간 승인 절차</a>.
+공개 파일에는 다음 항목만 포함됩니다: 계정 또는 채팅 식별자, 메시지,
+인증 정보는 포함되지 않습니다.</p>
+<p>아래의 이전 항목들은 각 실행 결과를 설명하며, 대부분 합성 테스트 클라이언트를 사용했습니다.
+최신 자동화 결과는 아래에 있으며, <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PREPUBLICATION-2026-10-29.md">게시 전 감사</a>
+기록은 이전 기준선을 보여줍니다.</p>
+<h2 id="built-in-public-mtproxy-lists--29-october-2026">내장된 공개 MTProxy 목록 · 2026년 10월 29일<a class="anchor" href="#built-in-public-mtproxy-lists--29-october-2026" aria-label="이 섹션으로 이동">#</a></h2>
+<p>SoliSpirit/mtproto 및
+zakky8/mtproto-proxy-pro에서 번들된 공개 스냅샷과 명시적인 HTTPS 새로고침 기능을 추가했습니다. 이 호스트에서 애플리케이션 다운로더는 2026년 10월 29일 12:58 UTC에 두 피드를
+성공적으로 가져왔습니다: 필터링, 중복 제거 및 소스당 64개 항목 제한을 적용한 후
+<strong>118개의 고유한 호환 엔드포인트가</strong> 확인되었습니다. 이는 목록 검색 기능만 검증한 것이며,
+해당 엔드포인트를 통한 연결성이나 메시지 전달을 검증한 것은 아닙니다. 이 작업 동안 목록에 포함된 프록시에
+실제 계정이 연결된 적은 없습니다. <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/PROXIES.md">운영자 및 사용자 가이드</a>.</p>
+<p>오류가 발생했거나, 내용이 비어 있거나, 호환되지 않는 소스 응답의 경우 이전 항목과 날짜가 유지됩니다. 업데이트
+선택된 경로는 변경되지 않습니다. 공개 주소는 유효성 검증을 거치며, 선택 시 IP 주소가 고정됩니다.
+운영자/수동 경로는 별도로 유지됩니다. 이제 계정 로그인 전 패널에서
+연결 테스트를 사용할 수 있습니다. 가짜 TLS ee 및 자동 프록시 선택은
+여전히 지원되지 않습니다. 운영자 카탈로그는 구독 설정을 완전히 재정의합니다.</p>
+<ul>
+<li>전체 테스트 스위트: <strong>366개 통과, 3개 건너뜀</strong>, 287.94초. 기존 종속성 경고
+    및 플랫폼 건너뜀 항목은 그대로 남아 있습니다. 최종 공개 목록/현지화 회귀 테스트: <strong>36개 통과</strong>,
+    여기에는 유효하지 않은 다운로드 프록시 포트에 대한 거부도 포함되며, 이는 전체 테스트 스위트와 중복됩니다.</li>
+<li>영어/러시아어, 라이트/다크 모드에서 390/1440 픽셀 해상도로 브라우저 호환성 테스트 통과: 기본 제공
+    옵션, 설정 열 때 외부 데이터 불러오기 없음, 명시적 새로고침, 오류 발생 시 경로 및
+    캐시 유지, 로그인 전 프로브, 응답 지연 시 작업 공간 격리, 소스
+    세부 정보 및 레이아웃/명암비. 자바스크립트 오류나 외부 브라우저 요청 없음.</li>
+<li>총 13개 언어에 대한 최종 정적 번역 검수가 모두 통과되었으며, 새 콘텐츠는
+    러시아어로 번역되었고, 그 외 언어에서는 영어로 명확하게 대체 표시됩니다. 업데이트된 내장 가이드가
+    두 테마 모두에서 레이아웃 및 대비 검사를 통과했습니다.</li>
+<li>Ruff 및 게시물 검증을 통과함(공개 파일 259개, 로컬 링크 1,354개); 업데이트됨
+    작성 및 CI YAML 파싱 완료. 여기서는 Docker 및 원격 CI가 실행되지 않았습니다.</li>
+<li>재구축된 휠은 독립 설치, 번들 목록 로딩 및 서명된 내보내기
+    검증을 통과했습니다. 69개의 패키지 리소스 전부가 작업 공간과 일치했으며, 소스 해시도 확인되었습니다.</li>
+</ul>
+<p>수신 내역: <code>test-results/public-proxy-research/download-receipt.json</code>,
+<code>test-results/public-proxy-research/copy-receipt.json</code>,
+<code>test-results/public-proxies-full-suite.log</code>, <code>test-results/public-proxies-final-focused.log</code>,
+<code>test-results/public-proxies-browser/receipt.json</code> 및 <code>test-results/public-proxies-package.log</code>.
+브라우저/계정/전송 환경 설정은 가상 데이터이며, 위의 두 피드 다운로드 사례는 실제 HTTPS 요청입니다.</p>
+<h2 id="optional-extras-presentation--29-october-2026">선택적 추가 기능 소개 · 2026년 10월 29일<a class="anchor" href="#optional-extras-presentation--29-october-2026" aria-label="이 섹션으로 이동">#</a></h2>
+<p>이전의 Proof 봇 접속처는 이제 <strong>‘Extras’로</strong> 변경되었습니다: 간략한 개요에 이어
+선택한 옵션에 대한 별도의 설정 페이지가 제공됩니다. 위트니스 양식은 세 단계로 구성되어 있으며,
+연결 관리, 네트워크 옵션 및 배포 세부 정보는 접혀져 있습니다. GitHub는
+명시적으로 계획되어 있으며, 인증 정보 입력 양식이 없습니다. <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/EXTRAS.md">러시아어 개요</a>.</p>
+<ul>
+<li>현지화, Witness 설정 및 게시 검증을 위한 30가지 집중 테스트를 통과했습니다.</li>
+<li>영어/러시아어, 라이트/다크 모드, 390/1440 픽셀 해상도에서 크로미움 설정 승인 테스트 통과:
+    키보드 포커스 및 리턴 키 작동, 추가 기능 선택 시 암시적 연결 없음, 초안
+    보존, 고정된 구성/토큰 다운로드, 잠금 시 토큰 삭제, 그리고 정상 작동하는
+    로컬 가이드 앵커. 레이아웃 및 단색 배경 텍스트 대비 검사 통과.</li>
+<li>워크스페이스 전환 테스트를 통과했으며, 전환 후 지연된 토큰 응답이 도착하는 경우도 포함됩니다.
+    빠른 탐색을 통해 봇, 증명, GitHub 관련 용어를 포함한 추가 기능을 확인할 수 있으며,
+    기존의 320/390/1440 픽셀 및 러시아어/RTL(오른쪽에서 왼쪽으로) 검사도 모두 통과했습니다.</li>
+<li>설정 실행 과정에서 자바스크립트 오류나 외부 브라우저 요청은 관찰되지 않았습니다.
+    이는 합성 UI 검사 결과이며, 새로운 실시간 텔레그램 또는 봇 게시 증거가 아닙니다.</li>
+<li>총 13개 언어 환경에 대해 최종 언어 로딩 및 사전 지원 범위가 통과되었으며,
+    러시아어를 제외한 다른 언어에서는 명시적인 영어 대체 문구가 유지되었습니다. 확장된 Proof 가이드 또한
+    두 테마 모두에서 320/768/1440 픽셀 해상도에서 레이아웃 및 대비 검사를 통과했습니다.</li>
+<li>재구축된 휠은 독립 설치 및 서명된 내보내기 검증을 통과했습니다. 총
+    67개의 패키지 리소스가 작업 공간과 일치했으며, 소스 아카이브에는 253개의 공개
+    파일이 포함되어 있습니다. 1,346개의 로컬 문서 링크에 대한 소스/링크 확인이 통과되었습니다.</li>
+</ul>
+<p>영수증: <code>test-results/setup-browser/receipt.json</code>,
+<code>test-results/quick-navigation/receipt.json</code>, <code>test-results/extras-final.json</code>,
+<code>test-results/extras-package.log</code> 및 <code>test-results/extras-artifacts.json</code>.
+스크린샷 자료에는 합성 작업 공간이 사용되었습니다.</p>
+<h2 id="witness-bot-and-proxy-setup-audit--29-october-2026">Witness 봇 및 프록시 설정 감사 · 2026년 10월 29일<a class="anchor" href="#witness-bot-and-proxy-setup-audit--29-october-2026" aria-label="이 섹션으로 이동">#</a></h2>
+<p>위트니스 설정(현재 <strong>‘추가 기능(Extras)’ → ‘채널 내 봇’</strong>)은 독립적으로 배포된 위트니스를 준비합니다: 고정된 수집기
+키, 범위 지정된 토큰 다운로드, 전용 채널, 게시 정책, HTTP/SOCKS5 경로 및 사용자 지정
+봇 API. 봇 토큰은 위트니스 호스트에 남아 있습니다. 새로운 <code>--check-config</code>는
+네트워크 연결을 열거나 키를 생성하지 않고도 구성 및 파일을 검증합니다. JSON
+파일 경로는 구성 파일과 동일한 위치에서 해결됩니다. 모든 Compose 위트니스 변형은 이제
+HTTP 프록시 및 봇 API 설정을 전달합니다.</p>
+<p>계정 설정에서는 운영자가 관리하는 공개 MTProxy 카탈로그, 사용자 지정 텔레그램
+프록시 링크 미리보기 및 기존 수동 입력 필드를 지원합니다. 카탈로그 응답에서는 비밀 정보가 생략되며,
+선택 시 경로는 워크스페이스 볼트에 저장됩니다. 카탈로그가 없거나 형식이 잘못된 경우
+수동 경로를 사용할 수 있습니다. 프로젝트 프록시 주소나 호스팅된 위트니스 서비스는
+기본적으로 생성되거나 활성화되지 않습니다. Caddy 예제에서는 패널이 비공개로 유지되는 수집기에 외부 위트니스가 접근해야 할 때,
+범위가 지정된 헤드 엔드포인트만 노출합니다.</p>
+<p>검증:</p>
+<ul>
+<li>전체 테스트: <strong>348개 통과, 3개 건너뜀</strong>, 195.81초. 건너뜀은 Windows의 제한 사항 때문이며,
+    기존의 두 가지 종속성 비추천 경고는 여전히 남아 있습니다.</li>
+<li>최종 위트니스/구성/릴리스 회귀 테스트 실행: <strong>11개 통과, 1개 건너뛰기</strong>.
+    이는 전체 테스트 스위트와 중복됩니다. 테스트 항목에는 경로 확인, 오프라인 사전 검증,
+    실제 루프백 HTTP 봇 API 피처(fixture)를 통한 서명/게시, 기록된 전달
+    실패, 채널 토큰 검증 및 프록시 비밀 정보 제외가 포함됩니다.</li>
+<li>크로미움 설정 승인 테스트를 영어/러시아어 환경에서 390/1440 픽셀 해상도로 통과: 고정된 구성
+    및 토큰 다운로드, 잠금 시 토큰 삭제, 카탈로그 선택, 사용자 지정 링크 미리보기
+    이후 명시적 저장, 레이아웃/명암비 확인, 자바스크립트 오류 또는 외부
+    브라우저 요청 없음. 러시아어 계정 제목 및 로그인 탭의 좁은 화면에서 발생하는 오버플로우 문제를 수정했습니다.</li>
+<li>Ruff, 출처/링크 검증 및 Compose/워크플로우 YAML 구문 분석 테스트를 통과했습니다.</li>
+<li>재구축된 휠은 독립 설치, 패널/정적 리소스 및 API 인증
+    검사를 통과했을 뿐만 아니라, 직접 및 스트리밍 방식의 32개 이벤트 합성 내보내기 데이터에 대한 독립적인 검증도 통과했습니다.</li>
+</ul>
+<p>수신 내역: <code>test-results/setup-full-suite.log</code>, <code>setup-final-focused.log</code>,
+<code>setup-browser/receipt.json</code>, <code>setup-browser-final.log</code> 및 <code>setup-package.log</code>.
+이 검증 과정에서는 합성 계정/프록시 및 로컬 봇 API 고정 장치를 사용합니다. 이는
+실제 봇 게시물, 작동 중인 공개 MTProxy 서버, 원격 CI 실행 또는 Docker
+배포를 주장하는 것이 아닙니다. 위에 보관된 실제 텔레그램 관찰 기록은 별도의
+증거 자료로 남아 있습니다. <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/WITNESS.md">설정 안내</a>.</p>
+<h2 id="presentation-and-documentation-review--29-october-2026">프레젠테이션 및 문서 검토 · 2026년 10월 29일<a class="anchor" href="#presentation-and-documentation-review--29-october-2026" aria-label="이 섹션으로 이동">#</a></h2>
+<p>제품 페이지, 접속 화면, 영어/러시아어 README 문서 및 프레젠테이션 이미지가 이제
+일관된 시각적 스타일을 공유합니다. 공개된 스크린샷에는 가상의 데모 데이터가 사용되었습니다. 또한 이번 검토를 통해
+위에 있던 구식 실시간 검증 및 복구 설명도 수정되었습니다.</p>
+<ul>
+<li>집중 현지화, 사이트 및 게시 테스트: <strong>33개 통과, 1개 건너뜀</strong>. 건너뛴
+    테스트는 이 호스트에서 사용할 수 없는 심볼릭 링크 생성을 필요로 합니다.</li>
+<li>모든 언어 카탈로그, RTL 레이아웃,
+    밝은/어두운 테마, 텍스트 명암비 및 작업 공간 전환을 포함하여 크로미움 패널에 대한 일반 승인 절차를 통과했습니다. 프로필 생성
+    검사는 이제 선택한 작업 공간을 확인하기 전에 실제 HTTP 응답을 기다립니다.</li>
+<li>영어/러시아어 접속 화면은 두 테마 모두에서
+    320, 390, 768, 850 및 1440 픽셀 해상도에서 레이아웃 및 명암비 검사를 통과했으며, 제출 버튼은 초기 뷰포트 내에 위치합니다.</li>
+<li>320, 390, 768, 1024 및 1440 픽셀 해상도에서 공개 사이트 호환성 테스트를 통과했으며, 여기에는 메시지
+    이력 제어, 스크린샷 확대/Esc 키/포커스 복귀, 키보드 탭 이동, 클립보드
+    거부, 프로젝트 하위 경로, 모션 감소 및 자바스크립트 미지원 시 대체 기능 등이 포함됩니다. 실패한
+    자산 요청, 외부 요청 또는 자바스크립트 오류는 관찰되지 않았습니다.</li>
+<li>재구축된 휠이 독립 실행 환경 테스트를 통과했습니다: 패널 리소스 및 로케일이
+    로드되었으며, API 접근에는 인증이 필요하고, 직접/스트리밍 내보내기 기능을 통해
+    32개의 모든 합성 이벤트가 독립적으로 검증되었습니다. Ruff 및 공개 소스/링크 검사도 통과했습니다.</li>
+</ul>
+<p>로컬 영수증: <code>test-results/design-tests.log</code>, <code>design-panel-final.log</code>,
+<code>design-review-final.log</code>, <code>design-site.log</code> 및 <code>design-package/install-receipt.json</code>.
+이번 프레젠테이션/문서 변경을 위해 전체 백엔드 제품군을 재실행하지 않았으며,
+이전 결과는 게시 전 감사 결과에 그대로 남아 있습니다.</p>
+<h2 id="version-061">버전 0.6.1<a class="anchor" href="#version-061" aria-label="이 섹션으로 이동">#</a></h2>
+<p>0.6.1 버전에서는 패널 표시 방식, 런처, 패키징 및 문서가 변경되었습니다.
+수집, 저장, 서명 및 내보내기 코드는 변경되지 않았습니다. Windows 11 / Python 3.12.10
+환경에서 고정된 런타임을 사용할 경우:</p>
+<ul>
+<li>전체 제품군은 <strong>137개의 테스트를</strong> 통과했으며, <strong>2개는 건너뛰었고</strong> 기존 Starlette 경고가 발생했습니다.
+    새로운 테스트 항목에는 런처의 Ctrl+C 처리(서버가 정상적으로 중지되도록 30초의 시간이 주어짐)와
+    조치가 필요한 설정 단계 오류가 포함됩니다.</li>
+<li>Chromium(헤드리스 셸 156)은 <strong>45개의 일반 시나리오와 35개의
+    계정 가져오기/QR/인증 키 시나리오를</strong> 모두 통과했으며, 여기에는 단색 텍스트 대비 검사,
+    320–1440 px에서 수평 오버플로우 없음, 320/390 px에서 첫 로그인 필드 가시성 등이 포함됩니다.
+    페이지 내 자바스크립트 오류나 외부 요청은 관찰되지 않았습니다.</li>
+<li><code>python start.py --setup-only</code>가 패키지를 0.6.1 버전으로 재설치했고,
+    <code>python start.py --check</code>가 준비 완료 상태를 보고했습니다. 실제 <code>python -m tgwitness --demo</code> 서버는
+    패널, 스타일시트, 스크립트, 로고, 가이드 및 <code>/api/status</code> 버전 0.6.1을 반환했으며,
+    제거된 <code>workspace.css</code>는 404 오류를 반환했습니다.</li>
+<li><code>Start.cmd</code>는 PATH 외부에 Python 설치 경로를 발견했습니다. 사용 가능한 Python이 없으므로
+    설치 제안이 표시되었으며, 수동 설치 안내를 거부하고 1로 종료되었습니다.
+    python.org 다운로드 단계에서 3.12.10 설치 프로그램을 가져왔으며, Python
+    Software Foundation의 Authenticode 검사를 통과했습니다. 이 호스트에서는 설치 프로그램 자체가 실행되지 않았습니다.</li>
+<li>Python을 전혀 사용하지 않은 <code>start.sh</code>는 설치 안내를 출력한 후 종료되었습니다. 1. <code>scripts\Docker.cmd</code>와
+    <code>scripts/docker-start.sh</code>는 가짜 <code>docker</code> 실행 파일에 대해 테스트되었습니다: 호출
+    순서, 패널 주소 및 토큰 출력이 정확했으며, 실패 시 성공 메시지가 표시되지 않았습니다.</li>
+<li><code>python tools/build_portable.py</code>는
+    고정된 임베디드 런타임 체크섬을 확인한 후 18.8 MiB 크기의 Windows 패키지를 빌드했습니다. 공백이 포함된 경로로 압축을 풀고 PATH에
+    <code>C:\Windows</code> 디렉터리만 포함된 상태에서 실행했을 때, 내장된 파이썬은 <code>TgWitness-Check.cmd</code>를 통과했으며,
+    데모(32개 이벤트)와 실시간 작업 공간을 제공했고, 크로미움은 자바스크립트 오류 없이 저널과 상세
+    드로어를 렌더링했습니다. 데이터는 패키지의 <code>data</code> 폴더에 기록되었습니다.</li>
+<li><code>python tools/build_preview.py</code>는 110개의 파일로 구성된 소스 아카이브를 생성했습니다.
+    <code>git add</code>의 시뮬레이션 결과, 세션, 키, 데이터베이스, 토큰, 로그 또는 내보내기
+    파일, 로컬 절대 경로, 비밀 정보로 보이는 문자열이 포함되지 않은 동일한 110개의 파일이 나열되었습니다.</li>
+</ul>
+<p>이번 10월 27일 패키징 실행에서는 다음 항목이 수행되지 않았습니다: 자동 Python
+설치 자체, Docker 빌드/Compose 점검, Linux/macOS 실행 또는 새로운 라이브 계정
+테스트. 실제 텔레그램 증거는 위와 아래의 이전 계정 점검
+내역에 기록되어 있습니다. CI 정의만으로는 플랫폼 실행을 충족시키지 못합니다.</p>
+<h2 id="version-060">버전 0.6.0<a class="anchor" href="#version-060" aria-label="이 섹션으로 이동">#</a></h2>
+<p>Windows 11 / Python 3.12.10에서 실행된 최신 전체 고정 런타임 제품군은 26.53초 만에 135개의 테스트를 통과했으며,
+1개는 건너뛰었고, 기존 Starlette 경고가 발생했습니다. 이 건너뜀
+현상은 POSIX 권한이 필요합니다. QR
+렌더러를 준비 상태 점검 및 프로세스 측정 항목에 추가한 후, 영향을 받던 8개의 준비 상태/작업 공간
+점검 항목도 통과했습니다.</p>
+<p>새롭게 추가된 내용은 텔레톤(Telethon) 스키마 7/8, 파이로그람(Pyrogram) 스키마 2/3, 완전한 JSON
+키 및 메타데이터 전용 JSON, 일치/충돌 계정 파일, TData 패스코드,
+체크섬 변조 및 안전하지 않은 경로, 오프라인/인증된 메모리 내 변환,
+온라인 계정 ID 확인, QR 성공/2FA/만료, 유효 기간이 지난 취소, 계정
+격리 등이 포함됩니다. TData 고정값은 암호화를 위해 별도의 AES-IGE 구현을 사용합니다.</p>
+<p>Chromium은 <strong>45개의 일반 시나리오</strong>와 <strong>35개의 계정 가져오기/QR/인증 키 시나리오를</strong> 통과했으며,
+페이지 자바스크립트 오류나 외부 요청은 관찰되지 않았습니다. 새로운 브라우저 검사 항목은
+네 가지 입력 형식을 모두 포괄하며, 보호된 TData, API 메타데이터, QR 렌더링,
+만료/재시도, 2단계 인증(2FA), 잘못된 계정 거부, 잠금/작업 공간 취소, 반응형
+레이아웃, 그리고 최신 파일 선택 후 지연된 변환 응답 등을 다룹니다.</p>
+<p>계정 입력 항목이 변경된 후 두 브라우저 제품군 모두 다시 테스트를 통과했습니다. 실제 설정에서는
+계정 양식이 열리고, 데모 모드에서는 샘플 기록부가 열립니다. 데모 계정 페이지에는
+실시간 시작 안내가 표시되며, 인증 정보 입력란은 숨겨져 있습니다.
+320, 390, 1440 픽셀에서 집중적으로 확인한 결과, 숫자 입력란과 주요
+버튼이 스크롤 없이 화면에 잘 맞으며, API 입력란은 초기 상태에서 접혀 있고,
+텍스트 명암비가 가독성을 유지하는 것으로 확인되었습니다. 캡처 및 검증 제어 항목은
+새로운 확장 가능한 섹션을 연 후에도 가려진 상태로 유지됩니다.</p>
+<p>직접 인증 키(Auth Key) 흐름은 실제
+가져오기 및 인증 엔드포인트를 통해 합성된 자격 증명으로 테스트되었습니다. 점검 항목에는 불완전한 키, 누락된 DC,
+부정확한 사용자 ID, 계정 신원 불일치, 저장된 API 자격 증명, 표시되는
+요청 진행 상황, 비밀 정보 삭제, 편집 또는 메서드 변경 후 지연된 응답 등이 포함됩니다.
+네 가지 로그인 방식 모두 320, 390, 1440 픽셀 해상도에서 검증되었습니다. 파일 선택기는
+형식 안내보다 먼저 표시되며, ‘연결’ 버튼은 API 설정이 접힌 상태에서 초기 844픽셀 뷰포트에
+적절히 표시됩니다. 이번
+UI 수용 테스트에서는 실제 인증 키를 사용한 인증 시도는 수행되지 않았습니다.</p>
+<p>두 브라우저 제품군을 사용하여 패널 새로 고침을 다시 확인한 결과, 페이지 자바스크립트
+오류나 외부 요청은 관찰되지 않았습니다. 계정 제품군은 이제 하나의 API ID/해시 쌍을
+붙여넣는 기능, 필드를 대체하지 않고 형식이 잘못되었거나 중복된 쌍을 거부하는 기능,
+메타데이터 전용 안내, 그리고 로그인 방법 변경 또는 수동 자격 증명 편집 후
+유효 기간이 지난 가져오기 응답을 무시하는 기능을 포함합니다. 설정 가이드, 명시적 시작/일시 중지, 빈 검색 복구, 최종
+연결/로컬 가이드 레이아웃 및 320, 390, 1440 픽셀에서의 확실한 텍스트 대비에 대한
+6가지 추가 집중 점검을 통과했습니다.
+직접 로그인 업데이트에는 단일 전화번호/코드 요청 기능이 추가되었으며, 전화번호, QR 및 세션 로그인 시
+현재 작업 공간에 저장된 API 쌍을 재사용합니다. 위의 전체 Python
+테스트 모음에는 새로운 지속성, 부분 자격 증명 거부 및 작업 공간
+격리 테스트가 포함되어 있습니다. 브라우저 점검 항목에는 직접 전화번호 입력, 저장된 자격 증명 재사용,
+메타데이터 전용 라우팅, 원클릭 파일 승인, 중복 계정 거부 기능이 포함됩니다.
+간소화된 패널 토큰 및 전화번호 양식도 320, 390, 1440 픽셀 해상도에서 초기 스크롤 없이
+검증되었습니다. 호환성 검사 결과, 기존 프로세스가 여전히 실행 중인 상태에서도 직접 전화번호 양식이
+이전 구성/코드 엔드포인트를 사용할 수 있음이 확인되었습니다.</p>
+<p>사용자가 제공한 계정 하나에 대해서는 공개 테스트 환경 외부에서 별도로 확인했습니다.
+해당 계정의 Telethon, Pyrogram 및 TData 입력 데이터는 모두 동일한 인증 정보로 확인되었으며,
+함께 제공된 JSON 파일에는 API 인증 정보가 포함되어 있었습니다. 네 개의 파일 모두
+0.6.0 패널을 통해 불러왔으며, 텔레그램에서 예상된 숫자형 계정 ID가 확인되었습니다. 원본 파일은
+변경되지 않은 상태로 유지되었습니다. 소스는 선택되지 않았으며 관찰 기능은 비활성화된 상태로 유지되었습니다. 이는
+실시간 수집, 복구 또는 처리 능력이 아닌, 하나의 가져오기/로그인 예시에 해당합니다.</p>
+<p>텔레그램은 실제 QR 토큰도 발행했으나, 스캔되지 않은 상태에서 취소되었습니다.
+전체 QR 확인 및 2단계 인증(2FA) 절차는 시뮬레이션된 클라이언트를 통해 테스트되었으며, 실제 텔레그램 앱을 통한 모바일
+확인은 별도의 승인 단계로 남아 있습니다.
+공개 파일에는 실제 계정 식별자, 비밀 정보 또는 스크린샷이 포함되어 있지 않습니다.</p>
+<p>런처 업그레이드가 완료되었습니다. 소스, 설치된 메타데이터 및 준비 상태 마커는
+0.6.0을 보고하며, QR코드는 8.2이고 <code>pip check</code> 검증을 통과했습니다. 설치된 휠은
+패널과 가이드를 제공했으며, 인증되지 않은 API 요청을 거부하고, 직접 및 스트리밍된 32개 이벤트 합성 내보내기 데이터를 독립적으로
+검증했습니다. 업데이트된 오프라인 가이드는
+320, 390, 1440 픽셀 해상도에서 확인되었습니다. 공개 스크린샷은 여전히 합성된 것입니다.</p>
+<p>소스 릴리스에는 허용 목록에 포함된 107개의 파일이 포함되어 있습니다. 로컬 문서 링크는 정상적으로 작동합니다.
+Docker/Caddy 실행, 원격 CI/패키지 게시, ARM64 런타임, 지속적
+수집 및 전체 실시간 텔레그램 호환성 매트릭스에 대해서는 본 문서에서 다루지 않습니다.</p>
+<h2 id="version-051">버전 0.5.1<a class="anchor" href="#version-051" aria-label="이 섹션으로 이동">#</a></h2>
+<p>Windows 11 / Python 3.12.10 환경에서 전체 프로젝트 환경 테스트 스위트가 통과되었습니다:
+<strong>94개 통과, 2개 건너뛰기</strong>, 소요 시간 31.21초, 기존 Starlette 경고가 발생했습니다.
+건너뛴 항목은 이 호스트에서 사용할 수 없는 POSIX 권한 및 심볼릭 링크 생성을 필요로 합니다.
+다운로드 HTTP 피처는 요청 스레드 진단 메시지를 출력했으며, 모든 어설션이
+통과했습니다. 이번 실행 결과만으로는 호스트 전송 문제가 없음을 확신할 수는 없습니다.</p>
+<p>새로운 회귀 테스트 범위에는 StringSession, 코드 및 2FA 계정
+변경 사항, 취소된 신원 조회, 보류 중인 로그인 취소, 그리고
+활성, 거부됨, 대체됨 및 프로브 클라이언트에 대한 등록된 핸들러를 통한 업데이트가 포함됩니다. 오직
+활성 수집기만이 이벤트를 기여하며, 저장된 인증 정보와 서명된 기록은
+변함없이 유지됩니다. 그 밖의 새로운 검사 항목으로는 데이터베이스 재개방 후 유니코드 검색,
+커버리지에 모니터링 정책 경계 포함, 공개 소스 패키징 제외 사항 등이 있습니다.</p>
+<p>실제 프로젝트인 <code>pythonw.exe</code>는 격리된 합성 패널을 실행하여
+HTTP 200을 반환하고 <code>logs/server.log</code>에 시작 진단 정보를 보관했습니다. 로그에는
+생성된 패널 토큰이나 HTTP 액세스 기록이 포함되어 있지 않았습니다. 테스트는
+자신의 합성 프로세스만 종료했습니다. 작업 스케줄러 작업은 등록되지 않았으며, 로그온/로그아웃,
+절전 모드 및 서비스 복구는 여전히 별도의 검증 항목으로 남아 있습니다.</p>
+<p>크롬ium 호환성 테스트에서 <strong>45가지 시나리오를</strong> 통과했으며, 페이지 내 자바스크립트 오류나
+외부 요청은 관찰되지 않았습니다. 새로운 검사 항목에는 601/768/850픽셀 타임라인의 날짜
+및 시간, 상태 갱신 시 첨부 파일 초안, 저장 중 이루어진 최신 수정,
+계정 전환 시 지워진 검증 결과, 다른 페이지로 이동했다가 다시 돌아왔을 때의
+지연된 검증 응답, 그리고 새로운 이벤트가 도착할 때의 명확한 검증 경계 등이 포함됩니다.
+또한 검색 아이콘/텍스트 간격이 수정되었으며, 브라우저 제품군을 재실행했습니다.</p>
+<p>브라우저 실행 시 <code>.venv</code>에 고정된 런타임과 기존 시스템에서 제공하는
+Playwright 1.62.0/Chromium을 사용했으며, 이는 임포트 경로의 프로젝트 환경 뒤에 추가되었습니다.
+Playwright 다운로드 속도가 느려지면서 선택적 개발 종속성 설치가 중단되었으며,
+새로운 브라우저 도구 버전은 검증되지 않았습니다. 일반적인
+<code>python start.py --setup-only</code>를 통해 애플리케이션 업그레이드가 완료되었습니다. 소스, 설치된
+메타데이터 및 런처의 마커는 0.5.1을 보고했으며, <code>pip check</code>는 통과했습니다. 준비 상태 점검은
+사용되지 않은 새로운 경로에서 통과되었으며, 예상된 로컬 볼트 키 경고는 유지되었습니다.</p>
+<p>0.5.1 휠을 별도로 설치하고 스모크 테스트를 수행했습니다: 모든 패널/가이드 자산이
+제대로 제공되었으며, 인증되지 않은 API 액세스는 거부되었고, 직접 및 스트리밍된
+32개 이벤트 증거 ZIP 파일 모두 독립적인 검증에 통과했습니다. 설치된 패키지의
+애플리케이션 파일은 소스 코드와 비교되었습니다. 공개 소스 아카이브는
+명시적인 파일 유형 허용 목록을 사용하며, 링크된 소스 파일은 허용하지 않습니다. 소스 디렉토리 내에
+배치된 런타임 자료는 회귀 테스트에서 제외됩니다.</p>
+<p>코드 수정 작업 중, 공개 소스 선택 항목 및 Git 후보 세트에는
+86개의 파일이 포함되어 있었으며, 런타임 데이터 디렉터리는 포함되지 않았습니다. 식별 가능한 개인 키, GitHub 토큰,
+텔레그램 봇 토큰 및 StringSession 패턴에 대한 스캔 결과 일치 항목이 발견되지 않았습니다. 이는 제한된
+패턴 확인일 뿐, 포괄적인 비밀 정보 감사는 아닙니다. 무시 규칙 프로브는 12가지
+일반적인 계정/데이터/내보내기 아티팩트를 다룹니다. 워크플로/이슈/Compose YAML 및 Windows
+작업 스크립트는 성공적으로 파싱되었습니다. 로컬 문서 링크는 정상적으로 연결됩니다.</p>
+<p>10월 27일 검토에서 제기된 7가지 지적 사항이 모두 해결되었습니다. GitHub
+워크플로 실행, Linux/macOS/Docker 런타임, 실제 텔레그램, 외부 프록시/TSA
+상호 운용성 및 지속적 부하 검증은 이번 로컬 실행 범위에서 제외되었습니다.
+리포지토리 공개, 서비스 등록 또는 실제 계정 수집은
+수행되지 않았습니다.</p>
+<h3 id="english-documentation-update">영어 문서 업데이트<a class="anchor" href="#english-documentation-update" aria-label="이 섹션으로 이동">#</a></h3>
+<p>README, 계정/세션 참조, 수집 워크플로우 및 번들 가이드에는 이제
+지원되는 입력 항목, 작업 공간 동작, 이벤트 정책 및 내보내기 형식이
+영어로 설명되어 있습니다. 공개된 세 개의 스크린샷은 합성 데이터를 사용하여 갱신되었습니다.
+이 시점에서 공개 소스 모음에는 두 개의 새로운 가이드를 포함하여 총 88개의 파일이 포함되어 있습니다.
+23개의 마크다운 문서에 포함된 총 131개의 로컬 링크가 모두 정상적으로 연결됩니다.</p>
+<p>인터페이스 및 가이드 수정 후, 크로미엄(Chromium) 승인 테스트에서 다시 모든
+45개 시나리오를 통과했으며, 페이지 내 자바스크립트 오류나 외부 요청은 관찰되지 않았습니다.
+이번 문서 및 프레젠테이션 업데이트를 위해 전체 파이썬 테스트 스위트는 재실행되지 않았으며,
+위의 94개 항목 모두 통과 결과는 이전 코드 수정 실행 시의 결과입니다.</p>
+<p>재구축된 휠이 새로운 격리된 대상 시스템에 설치되었습니다. 패널 및 가이드
+자산은 정상적으로 작동했으며, 인증되지 않은 API 액세스는 거부되었고,
+직접 및 스트리밍 방식의 내보내기 모두 32건의 합성 이벤트에 대한 독립적인 검증을 통과했습니다.</p>
+<h3 id="installation-and-deployment-update">설치 및 배포 업데이트<a class="anchor" href="#installation-and-deployment-update" aria-label="이 섹션으로 이동">#</a></h3>
+<p>집중 설치 프로그램, 패키징 및 준비 상태 점검은 <strong>14개의 테스트를</strong> 통과했으며,
+사용할 수 없는 심볼릭 링크 생성으로 인해 1개 항목은 건너뛰었습니다. 네이티브 래퍼 점검은 공백이 포함된 경로,
+인수 전달, 설정/데모 모드 및 0이 아닌 종료 코드 전파를 다룹니다.
+Git Bash 검사는 시뮬레이션된 데몬을 사용하여 Docker 셸 헬퍼를 테스트하며, 여기에는
+Docker 미설치, Compose 미설치, 상태 대기 실패, 대체 포트에서의
+성공적인 시작 등이 포함됩니다. 이러한 시뮬레이션된 검사는 Docker 런타임 호환성을 보장하지 않습니다.</p>
+<p>공식 소스 코드의 전체 사본을 경로에 공백이 포함된 새로운 Windows 디렉터리에
+설치했습니다. <code>scripts\Setup.cmd</code>는 새로운 환경을 생성하고
+고정된 런타임을 설치했으며, <code>Start.cmd --check --json</code>는 대상 데이터 디렉터리를 생성하지 않은 채
+준비 완료 상태를 보고했습니다. <code>pip check</code>는 테스트를 통과했습니다. 재빌드된 휠도
+직접 및 스트리밍 방식의 32개 이벤트 내보내기를 포함한 설치된 패키지 검사를 통과했습니다.</p>
+<p>셸 구문과 5개의 워크플로우/Compose YAML 파일이 파싱되었습니다. 소스 및 이미지 Compose
+구성은 저장소 및 런타임 설정에 대해 일치합니다. 이 단계에서 23개의 마크다운 문서에 걸쳐 있는 총 139개의 로컬
+링크가 모두 해결되었습니다. 공개 소스 선택 항목에는 99개의 파일이 포함되어 있습니다.</p>
+<p>CI 정의는 이제 Windows/Linux/macOS에서의 새로운 네이티브 설정, 컨테이너 재생성 시의 Compose
+상태/액세스 제어/지속성, 그리고 Caddy 구성을 적용합니다.
+릴리스 워크플로는 이러한 점검을 통과해야만 배포가 이루어지도록 제한하며, 에뮬레이트된 ARM64
+스모크 테스트를 추가합니다. 이 호스트에서는 Docker를 사용할 수 없습니다. 실제 Compose/Caddy 실행,
+인증서 발급, ARM64 실행, 원격 워크플로우/패키지 게시
+는 로컬에서 여전히 제한됩니다. 애플리케이션/UI 코드는 이번 업데이트로 변경되지 않았으며,
+이전 전체 Python 및 브라우저 테스트 결과는 재실행되지 않았습니다.</p>
+<h2 id="version-050">버전 0.5.0<a class="anchor" href="#version-050" aria-label="이 섹션으로 이동">#</a></h2>
+<p>전체 고정 런타임 테스트 모음이 통과되었습니다: <strong>81개 통과, 1개 건너뛰기</strong>, 소요 시간 22.00초,
+기존 Starlette 경고가 발생했습니다. Windows에서는 POSIX 권한 검사가
+건너뜁니다. 새로운 핸들러 테스트는 다양한
+정책을 통해 메시지 전송, 편집, 범위 지정/비지정 삭제,
+반응, 참가자 업데이트 및 멤버십 서비스 메시지를 테스트합니다. 비활성화된 카테고리는 해당 실시간 관측 결과를 생성하지 않으며, 커버리지
+진단 및 명시적 스냅샷은 계속 사용할 수 있습니다. 테스트는 지속된 정책,
+작업 공간 분리, 서명된 전후 감사 기록, 정책 변경 없음 동작,
+엄격한 유효성 검사 및 다음 프로세스 수신에의 포함 여부를 검증합니다.</p>
+<p>데모 항목 테스트를 통해 이 도구의 기능이 구성된 패널 토큰과 다르다는 점이 확인되며,
+실제 작업 공간에 대한 인증이 불가능하고, 수집 설정을 변경할 수 없으며,
+원격, 전달, 크로스 오리진 또는 유효하지 않은 호스트 요청에 대해서는 발급되거나 수락되지 않습니다.
+명시적인 데모 플래그 없이 저장된 데모를 열어도 자동 항목 등록은 활성화되지 않습니다.</p>
+<p>크로미움 수용 테스트에서 <strong>39가지 시나리오를</strong> 통과했으며, 여기에는 토큰 입력 없이
+로컬 데모에 접속하는 경우, 모니터링 사전 설정, 소스 선택에서 정책으로의 전환,
+계정별 독립성, 데스크톱/320/390픽셀 레이아웃 및 텍스트 대비 검사 등이 포함됩니다.
+페이지에서 자바스크립트 오류는 발생하지 않았습니다. 호스트의 AdGuard가 삽입한 요청은
+수신 내역에 그대로 남아 있습니다. 다운로드 HTTP 테스트 케이스에서는 클라이언트가
+연결을 종료한 후 연결 재설정이 기록되었으나, 어설션은 여전히 통과했습니다. 이는 실제 서비스 운영 환경에서의 결과가 아닙니다.</p>
+<p>일반 런처의 격리 환경이 0.5.0으로 업그레이드되었으며, 소스 버전과 설치된
+버전이 일치하고 pip 검사가 통과되었습니다. 기존 비밀 금고 암호화, 잘못된/누락된
+키 거부 및 서명/미디어 변조 검사가 전체 테스트 스위트에서 통과되었습니다. 메시지 내용이나 첨부 파일에 대한 새로운
+애플리케이션 암호화 기능은 제공되지 않는다고 명시되어 있습니다.</p>
+<p>업데이트된 UI를 사용할 수 있도록 로컬 데모가 재시작됩니다. 기존에 생성된
+기록은 유지되며, 기존 백그라운드 데모 프로세스를 중지하면 다음 시작 시
+오프라인 경계가 생성됩니다. 이러한 확인 과정에는 실제 텔레그램 세션이 사용되지 않습니다.</p>
+<p>실행 중인 localhost:8787 패널은 버전 0.5.0, 자동 데모 액세스,
+5가지 모니터링 제어 기능 및 33개의 보존된 합성 저널 이벤트를 표시했습니다. 별도로
+설치된 0.5.0 휠은 모든 패널/가이드 자산을 제공했으며, 인증되지 않은 API
+접근을 거부하고, 직접 및 스트리밍
+다운로드 도우미를 통해 검증된 32개 이벤트가 포함된 ZIP 파일을 생성했습니다. 런타임 패키지 버전은 0.4 버전에서 기록된 대로 고정되어 있습니다.</p>
+<h2 id="version-040">버전 0.4.0<a class="anchor" href="#version-040" aria-label="이 섹션으로 이동">#</a></h2>
+<p>전체 고정 런타임 테스트 모음이 통과되었습니다: <strong>78개 통과, 1개 건너뜀</strong>, 소요 시간 19.77초.
+건너뛴 검사 항목은 POSIX 권한을 필요로 하며, 업스트림 Starlette TestClient의
+사용 중단 경고는 여전히 남아 있습니다. 새로운 테스트 항목으로는 스트리밍 다운로드/워크스페이스 라우팅,
+인증 헤더, 덮어쓰기 거부, 리디렉션, 잘린 응답,
+공지된/실제 크기 제한, 제한된 읽기, 정리, 하드
+링크가 없는 파일 시스템, 준비 상태 오류, 그리고 패키지를 설치해서는 안 되는 런처 모드 등이 포함됩니다.
+내보내기 테스트를 통해 워크스페이스 내 임시 파일 및 선택적 고아 파일 정리가 확인되었습니다.</p>
+<p>크롬ium 호환성 테스트에서 나열된 36가지 시나리오를 모두 통과했으며, 페이지 자바스크립트 오류는 발생하지 않았습니다.
+이 도구는 모의 전화/코드/2단계 인증(2FA) 로그인, 변환된 세션, 두 개의 작업 공간 및 별도의
+경로/상태, 관측값, 서명, 체크포인트 및 타임스탬프 요청을 실행하며, 그 외에도 다음을 수행합니다:</p>
+<ul>
+<li>데스크톱 및 320/390픽셀 레이아웃, 가로 방향 넘침 없음, 명확한 내비게이션,
+    그리고 초기 844픽셀 뷰포트 내에 첫 번째 로그인 필드가 표시됨.</li>
+<li>WCAG AA 텍스트 기준에 따른 단색 배경과의 텍스트 대비가 확보되어 있습니다. 비활성화된 컨트롤,
+    불투명도 및 이미지/그라데이션 배경은 제외되었으며, 이는 완전한 WCAG 감사가 아닙니다.</li>
+<li>모의 OS 파일 선택기/쓰기 가능 기능을 통해 작성된 실제 로컬 내보내기 응답,
+    그 후 독립적인 ZIP 검증; 취소 시 내보내기 요청이 전송되지 않습니다.</li>
+<li>쓰기 오류가 발생하면 대상 처리가 중단되며, 128 MiB 폴백은 일치하는 페이로드를 할당하지 않은 채
+    지정된 응답 크기보다 큰 응답을 거부합니다.</li>
+<li>데스크톱 및 두 가지 좁은 화면 너비에 대한 영어 현지화 가이드.</li>
+</ul>
+<p>OS 저장 대화 상자와 실제 멀티 기가바이트 규모의 브라우저 쓰기 작업은 자동화되거나
+검증되지 않았습니다. 파이썬 다운로드 테스트는 제한된 청크와 루프백 고정 장치를 사용합니다. 실제 텔레그램을 활용한
+전체 배포 승인 테스트는 별도로 진행됩니다.</p>
+<p>일반 설치 프로그램을 통해 <code>.venv</code>가 0.4.0으로 업그레이드되었습니다. 소스 코드와 설치된 메타데이터가 일치하며,
+<code>pip check</code>는 테스트를 통과했습니다. <code>python start.py --check --json</code>는 데이터 디렉터리를 생성하지 않은 채 새로운
+합성 경로에서 준비 완료 상태를 보고했습니다. 로컬 키 저장소 관련 경고는
+여전히 유효합니다: journals/media는 애플리케이션에 의해 암호화되지 않습니다.</p>
+<p>0.4.0 휠이 빌드되어 별도의 디렉터리에 설치되었습니다. 총 23개의 애플리케이션
+파일이 소스 파일과 바이트 단위로 일치합니다. 설치된 패키지는 패널 및
+영어 가이드/자산을 제공했으며, 인증되지 않은 API 액세스를 거부하고, 검증에 통과한
+32개 이벤트가 포함된 합성 ZIP 파일을 내보냈습니다. 또한 스트리밍 다운로드 명령을 통해
+실행 중인 설치된 애플리케이션에서 독립적으로 검증된 ZIP 파일을 가져왔습니다.</p>
+<p>공개 문서와 로컬 가이드는 영어로 제공되며, 로컬 문서 링크는
+정상적으로 작동합니다. PowerShell은 Windows 작업 템플릿을, Python은 macOS
+plist 파일을 파싱했습니다. 이는 구문 검사일 뿐, 서비스 실행은 아닙니다. 등록된 작업/서비스는 없습니다.
+CI 구성에 이제 준비 상태 확인이 포함되었으나, 원격 CI는 아직 실행되지 않았습니다.</p>
+<p>0.4 브라우저 실행 시 다시 호스트 AdGuard 삽입 및 Windows asyncio
+소켓 정리 시 OSError 10022 오류가 관찰되었습니다. 브라우저 어설션은 통과되었으며, 이러한 환경적
+관찰 결과는 고정된 애플리케이션 동작으로 간주되지 않고 그대로 유지됩니다.
+초기 OpenSSL/브라우저/pip 샌드박스 실행 시도는 실패했으며, 성공적으로 통과한
+실행은 샌드박스 외부에서 승인된 실행 방식을 사용했습니다.</p>
+<h2 id="version-031-focused-readiness-fixes">버전 0.3.1은 안정성 개선에 중점을 두었습니다.<a class="anchor" href="#version-031-focused-readiness-fixes" aria-label="이 섹션으로 이동">#</a></h2>
+<p>관련 런처, 증거/저장소 및 API 검사 결과: <strong>31개 통과,
+1개 건너뜀</strong>, 업스트림 Starlette 경고 1건. 건너뛴 검사는 POSIX
+디렉터리 권한을 확인하는 것으로, 이 Windows 호스트에서는 해당 권한을 설정할 수 없습니다.
+구형 Python 테스트는 버전/임포트 경계를 시뮬레이션합니다. Python 3.10 인터프리터는
+설치되어 있지 않거나 검증되지 않았습니다. 이전에 통과했던 0.3 테스트 모음은 아래에 기록되어 있으며,
+이번 집중적인 변경 사항에 대해서는 전체 테스트 모음과 브라우저 시나리오를 재실행하지 않았습니다.</p>
+<p>일반 런처가 로컬 환경을 0.3.1로 업그레이드했습니다. 소스 및 설치된
+메타데이터가 일치하며, pip check도 통과했습니다. 별도로 설치된 0.3.1 휠이
+패널/자산을 제공했으며, 인증되지 않은 API 액세스를 거부하고 검증된
+32개 이벤트의 합성 내보내기 파일을 생성했습니다. 워크플로 YAML은 파싱되었으나, 새로운 컨테이너 런타임
+검사는 실행되지 않았습니다. 사용 가능한 로컬 Docker/Podman/Linux 런타임이 없었기 때문입니다.</p>
+<p>나머지 사용성, 실제 서비스 및
+플랫폼 관련 미비 사항에 대해서는 <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/READINESS.md">준비 상태 분석 결과를</a> 참조하십시오. 이 패치는 추가 운영 체제를 지원하지 않습니다.</p>
+<h2 id="version-030">버전 0.3.0<a class="anchor" href="#version-030" aria-label="이 섹션으로 이동">#</a></h2>
+<p>전체 고정 런타임 제품군이 테스트를 통과했습니다: <strong>61개 테스트</strong> 중, 업스트림 Starlette
+TestClient의 사용 중단 경고 1건이 발생했습니다. 런타임 메타데이터에 따르면 TgWitness 0.3.0 및
+python-socks 2.8.2가 사용 중이며, pip check도 통과했습니다. 브라우저 호환성 테스트는
+페이지 자바스크립트 오류 없이 통과했습니다.</p>
+<p>0.3.0 휠이 빌드되어 별도의 패키지 디렉터리에 설치되었습니다. 이 휠은
+패널과 자산을 제공했으며, 인증되지 않은 API 요청을 거부하고,
+독립적인 검증을 통과한 32개 이벤트로 구성된 합성 저널을 내보냈습니다. 로컬 문서
+링크가 정상적으로 작동합니다. MTProxy 베어 키 정규화 수정 후, 9가지
+연결/보안 테스트가 모두 성공적으로 재실행되었습니다.</p>
+<p>새롭게 추가된 내용은 다음과 같습니다:</p>
+<ul>
+<li>실제 루프백 테스트 서버를 통한 SOCKS5 사용자 이름/비밀번호 및 HTTP CONNECT;
+    설정이 잘못된 프록시는 대상 서버로 자동 전환되지 않고 오류가 발생합니다.</li>
+<li>프록시 유효성 검사, MTProxy 전송 방식 선택, 위조된 TLS 비밀 정보 거부,
+    지속성, 작업 공간 격리, 관찰 중 변경 사항 거부, 그리고 API 상태 및 서명된 이벤트에서
+    비밀 정보 제외.</li>
+<li>합성된 Telethon SQLite 스키마 7 및 8의 읽기 전용 변환; 변경되지 않은
+    소스 해시; 기타 형식, SQL 뷰 및 미처리된 WAL 파일은 거부됨.</li>
+<li>외부 볼트 마스터 키: 서로 다른 파생 작업 공간 키, 성공적인 재개방,
+    잘못되었거나 누락된 키에 대한 거부, 기존 로컬 볼트의 암시적 마이그레이션 없음.</li>
+<li>브라우저 프록시 설정, 인증 정보 삭제, 저장소 보호 공개,
+    모바일 연결 페이지, 변환된 세션 파일 권한 설정, 별도의 경로,
+    그리고 가짜 텔레그램 클라이언트를 사용한 이전에 다룬 모든 수집/내보내기 시나리오.</li>
+</ul>
+<p>개발 과정에서 루프백 테스트가 피어의 종료 신호를 무한정 기다리는 현상이 발생했으며, 또 다른
+실행에서는 핸드셰이크 후 Windows 연결이 재설정되는 현상이 관찰되었습니다. 이제 이 테스트 환경은
+전체 통신 과정을 제한하며, 핸드셰이크 완료 후 발생하는 EOF/재설정을 연결
+종료로 간주합니다. 핸드셰이크/인증 어설션은 여전히 필수입니다. 이는 실제 프록시 제공업체를
+배제하는 것이 아니며, 텔레그램 전송 계층의 고정된 결함을 시사하는 것도 아닙니다.</p>
+<p>아래에 설명된 호스트 AdGuard 요청 관찰 내용은 여전히 유효합니다. 실제 텔레그램
+계정, SOCKS/HTTP 프록시 외부, 또는 가동 중인 MTProxy 서버는 사용되지 않았습니다. MTProxy는
+실험적 단계이며, 선택된 옵션 및 비밀 키 유효성 검사는 확인되었으나
+실제 상호 운용성은 검증되지 않았습니다. 새로운 외부 키 및 세션 변환 명령어는
+합성 시크릿을 통해서만 테스트되었습니다. Linux/macOS/Docker에 대해서는 아직 검증되지 않았습니다.</p>
+<p>아래의 0.2 버전 처리량 측정 결과는 재현되지 않았으므로,
+0.3 버전에 대한 새로운 다중 계정/프록시 벤치마크로 제시되어서는 안 됩니다.</p>
+<h2 id="version-020-baseline">버전 0.2.0 기준<a class="anchor" href="#version-020-baseline" aria-label="이 섹션으로 이동">#</a></h2>
+<p>Windows 환경에서 Python 3.12.10을 사용하여 테스트했습니다. 실제 텔레그램 계정은 연결되지 않았습니다.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>확인</th>
+<th>결과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>파이썬 도구 모음</td>
+<td>개발 환경에서 52건이 통과되었고, 고정된 런타임 환경에서도 52건이 통과되었습니다. 각 실행에서 Starlette TestClient의 사용 중단 경고가 한 건씩 발생했습니다.</td>
+</tr>
+<tr>
+<td>JavaScript 구문</td>
+<td>Node.js로 구현됨</td>
+</tr>
+<tr>
+<td>크로미움 호환성</td>
+<td>통과됨; 페이지 내 자바스크립트 오류 없음</td>
+</tr>
+<tr>
+<td>데스크톱/모바일 레이아웃</td>
+<td>1440 × 1060 및 390 × 844 해상도에서 확인 결과, 문서가 가로 방향으로 넘치지 않음</td>
+</tr>
+<tr>
+<td>HTML 형식의 메시지 내용</td>
+<td>텍스트로 렌더링됨; 삽입된 스크립트는 실행되지 않음</td>
+</tr>
+<tr>
+<td>계정 사용 흐름 예시</td>
+<td>API 인증 정보 → 휴대폰 → 코드 → 2단계 인증 → 그룹 선택 → 시작 → 스냅샷 → 일시 중지 → 새로 고침</td>
+</tr>
+<tr>
+<td>브라우저 내 증거</td>
+<td>편집 내역 비교, 삭제 전 내용, 필터, ZIP 다운로드, 체크포인트, 서명된 처리 영수증, RFC 3161 요청 다운로드 및 체크포인트 바인딩</td>
+</tr>
+<tr>
+<td>다중 계정</td>
+<td>저널, 키, 소스 및 실시간 상태를 별도로 관리하며, 브라우저를 전환해도 다른 수집기는 계속 실행됩니다. 재시작 후 작업 공간이 다시 열리며, 중복 계정 및 계정 재할당은 허용되지 않습니다.</td>
+</tr>
+<tr>
+<td>암호화 오류</td>
+<td>서명된 필드 변경, 서명되지 않은 필드 추가, 잘못된 키, 손상된 아카이브 구성 요소, 변경되거나 누락된 미디어, 체크포인트에서 감지된 잘림으로 인해 거부됨</td>
+</tr>
+<tr>
+<td>저장소</td>
+<td>동시 추가 시 검증되며, 업데이트/삭제 시 거부되며, 시작 시 추가 없이 변경된 저널은 거부하고 잠금을 해제합니다.</td>
+</tr>
+<tr>
+<td>매체의 내구성</td>
+<td>메시지/작업 단위 쓰기; 재시작 복구; 원본 버전 설명자 유지; 큐 대체 및 기존 파일 손상 거부; FloodWait 지속; 소스 오류 격리</td>
+</tr>
+<tr>
+<td>스트리밍</td>
+<td>새로운 기록이 추가되는 동안 안정적인 접두사가 내보내지며, 유지된 체크포인트가 저널의 잘림 현상을 감지합니다. 내보내기 과정에서는 전체 이벤트 스트림이 반영되지 않습니다.</td>
+</tr>
+<tr>
+<td>RFC 3161</td>
+<td>OpenSSL 3.5.9가 생성된 요청을 읽습니다. 로컬에서 생성된 합성 CA/TSA 응답은 허용되며, 변조된 데이터, 논스(nonce) 및 잘못된 CA는 거부됩니다. 주변 CA 환경은 명시적 신뢰 설정을 무시하지 않습니다.</td>
+</tr>
+<tr>
+<td>로컬 설정</td>
+<td>start.py --setup-only 명령을 실행하여 격리된 .venv를 0.2.0으로 업그레이드했습니다. 소스 및 설치된 메타데이터가 일치하며, pip check가 성공적으로 완료되었습니다.</td>
+</tr>
+<tr>
+<td>Wheel</td>
+<td>0.2.0 버전을 빌드하여 test-results 디렉터리에 별도로 설치함; 패널/자산을 제공했으며, 인증되지 않은 API 요청을 거부하고, 32건의 이벤트로 구성된 합성 아카이브를 내보내고 검증함</td>
+</tr>
+</tbody>
+</table></div>
+<p>소스 테스트에는 FastAPI 0.159.1, Uvicorn 0.54.0, Telethon 1.45.0,
+cryptography 50.0.2, pytest 9.1.1 및 Playwright 1.62.0이 사용되었습니다.
+고정된 런타임은 FastAPI 0.162.0, Starlette 1.10.0,
+Uvicorn 0.54.0, Telethon 1.45.0 및 cryptography 50.0.2를 사용합니다.
+deploy/constraints.txt에는 런타임 버전 고정 정보가 기록되어 있으며, deploy/requirements.lock 및
+deploy/build.lock에는 모든 패키지 파일의 SHA-256 해시값이 추가되어 있으며, Docker 및 고신뢰도
+서버는 이 파일들에서만 설치합니다(pip --require-hashes). 이는 모든 구성된 CI 플랫폼에서 호환성이
+보장된다는 증거는 아닙니다. 원격 CI는 실행되지 않았습니다.</p>
+<h2 id="synthetic-local-capacity-measurement">합성 지역 역량 측정<a class="anchor" href="#synthetic-local-capacity-measurement" aria-label="이 섹션으로 이동">#</a></h2>
+<p>명령어: <code>python tools/check_capacity.py --events 10000 --chats 100</code></p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>지표</th>
+<th>관찰됨</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>입력</td>
+<td>선별된 100개의 가상 출처에서 발생한 10,000건의 가상 메시지 이벤트</td>
+</tr>
+<tr>
+<td>메시지 본문</td>
+<td>400자; 미디어 또는 네트워크 관련 내용 없음</td>
+</tr>
+<tr>
+<td>데이터 수집</td>
+<td>53.273초; 초당 187.7건</td>
+</tr>
+<tr>
+<td>핸들러 지연 시간</td>
+<td>p50 4.162 ms; p95 7.784 ms; 최대 129.118 ms</td>
+</tr>
+<tr>
+<td>ZIP 파일로 내보내기</td>
+<td>tracemalloc 활성화 시 19.868초 소요</td>
+</tr>
+<tr>
+<td>추적된 Python export 할당량의 최대치</td>
+<td>0.51 MiB; RSS 처리 불가</td>
+</tr>
+<tr>
+<td>ZIP 파일 크기</td>
+<td>4,610,962 바이트</td>
+</tr>
+<tr>
+<td>독립적인 검증</td>
+<td>총 10,000건의 이벤트가 검증되었습니다.</td>
+</tr>
+</tbody>
+</table></div>
+<p>이 측정값은 해당 Windows 호스트의 로컬 순차 기록/내보내기 경로를 나타냅니다. 이 측정값은
+MTProto 전송, 동시 계정 수, 텔레그램 전송 제한, 미디어,
+장시간 지속되는 워크로드 또는 실제 채팅 건수를 보장하지 않습니다. 이 측정값은
+최종 오프라인 타임스탬프 도구가 도입되기 전의 것으로, 해당 도구는 측정된 메시지 경로를 변경하지 않습니다.</p>
+<h2 id="environmental-observations">환경 관찰<a class="anchor" href="#environmental-observations" aria-label="이 섹션으로 이동">#</a></h2>
+<p>Windows 샌드박스 제한 사항으로 인해 기본 pytest/pip 임시 디렉터리와
+Playwright 하위 프로세스가 차단되었습니다. pytest는 프로젝트 내부의
+새로운 임시 디렉터리를 사용했으며, 설치 및 브라우저 프로세스는 샌드박스 외부에서
+승인된 실행이 필요했습니다.</p>
+<p>해당 기기의 AdGuard가 local.adguard.org로 전송되는 요청을 브라우저에 주입했습니다.
+브라우저 기록에는 이러한 요청이 남아 있습니다. 이번 실행 결과는 수정되지 않은 브라우저 환경에서
+아웃바운드 요청이 전혀 없음을 입증하는 증거가 <strong>아닙니다</strong>. 앱 소스 자체에는
+외부 자산/CDN/분석 요청이 포함되어 있지 않습니다. AdGuard 설정은 변경되지 않았습니다.</p>
+<p>최종 브라우저 실행 시 Windows asyncio 소켓 정리 과정에서 OSError 10022 오류가 기록되었습니다.
+모든 브라우저 검증은 통과되었으며, 페이지 내 자바스크립트 오류는 발생하지 않았습니다. 원인은
+확인되지 않았으며, 이번 실행 결과만으로는 호스트 전송 문제가 없음을 입증할 수 없습니다.</p>
+<p>urllib의 connection-close 요청을 사용한 첫 번째 설치 패키지 HTTP 프로브에서는
+샌드박스 내부와 외부 모두에서, 그리고 두
+의존성 세트 모두에서 연결 재설정이 발생했습니다. 마지막 프로브는 http.client를 통해 표준 HTTP/1.1 지속 연결을
+사용했으며 테스트를 통과했습니다. 브라우저 요청도 통과했습니다. 재설정의 정확한 원인은
+확인되지 않았으며, 이는 애플리케이션의 고정된 결함으로 분류되지는 않았습니다.</p>
+<h2 id="remaining-qualification">나머지 자격 요건<a class="anchor" href="#remaining-qualification" aria-label="이 섹션으로 이동">#</a></h2>
+<p>보관된 실시간 저널은 실제 수집 내역, 수정 내역, 삭제 알림, 첨부 파일,
+재확인 및 속도 제한 처리를 기록합니다. 단, 이 기록은 전송 내역의 완전한 추적이나 역할별 가시성, 반응 주체, 장기간의 FloodWait, 계정 차단 및
+네트워크/프로세스 중단 복구와 관련된 통제된
+매트릭스를 보장하지는 않습니다. QR 토큰 발급은 완료된
+모바일 QR 확인과는 별개로 처리됩니다.</p>
+<p>Docker 빌드/실행, Linux/macOS 설치, 지속적인 고부하 처리, 독립적인 보안
+검토, 실질적인 독립적 TSA 대응, 인증서 취소/보관 검증 및
+포렌식 인증은 기록된 인증 범위에서 제외됩니다. 저장된 MTProto 상태
+및 캐치업 기능은 구현되었으나, 원자적 내구성 재재생 기능은 아직 확립되지 않았습니다. 관리자 로그
+수집, 추가 리액터 목록 및 우선순위 단기 폴링은 별도의 기능으로 남아 있습니다.
+제어된 자격 매트릭스에 대한 <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">실시간 승인</a> 내용을 참조하십시오.</p>
+<p>세부적인 로컬 영수증 및 스크린샷은 test-results/ 디렉터리에 있습니다(Git에서 무시됨).
+docs/assets/에 있는 공개 스크린샷에는 가상의 데모 데이터만 포함되어 있습니다.</p>
+<h2 id="public-website-and-publication-preparation--27-october-2026">공개 웹사이트 및 간행물 준비 · 2026년 10월 27일<a class="anchor" href="#public-website-and-publication-preparation--27-october-2026" aria-label="이 섹션으로 이동">#</a></h2>
+<p>별도의 <code>website/</code> 프레젠테이션 및 Pages 빌드는 패널의
+검토가 끝난 후에 추가되었습니다. 실제 계정 구성이나 수집 로직은 변경되지 않았습니다.</p>
+<ul>
+<li>기존 애플리케이션 제품군은 테스트를 통과했습니다: 138개 통과, POSIX 전용 항목 1개 건너뛰기, 그리고
+    업스트림 Starlette/httpx의 사용 중단 경고 1건. 추가된 11개의 사이트 빌드 테스트는
+    예상치 못한 출력 거부 및 연결된 입력 거부를 포함하여 각각 독립적으로 통과했습니다.</li>
+<li>프로젝트-venv Playwright 및 Chromium
+    헤드리스 셸 156을 사용하여 두 애플리케이션 브라우저 스크립트 모두 테스트를 통과했습니다. 페이지 내 자바스크립트 오류나 외부 요청은 기록되지 않았습니다.
+    모든 계정 시나리오에는 가상의 전송 방식과 허구적인 데이터가 사용되었습니다.</li>
+<li><code>tools/check_site.py</code>는 너비 320, 390, 768, 1024 및 1440에서 테스트를 통과했으며, 이 과정에서 프로젝트
+    URL 하위 경로, 키보드 탭, 클립보드 접근 성공/거부, 움직임 최소화,
+    자바스크립트 비활성화 상태가 적용되었습니다. 자산 요청 실패나 외부 요청 실패는 발생하지 않았습니다.</li>
+<li><code>tools/build_site.py</code>는 허용 목록에 포함된 공개 파일 10개를 생성했으며, 총 용량은 약 460KB입니다.
+    브라우저 스크린샷과 영수증은 무시된 <code>test-results/site/</code>에 포함되어 있습니다.</li>
+<li>프로젝트 환경에 빌드 전용 setuptools/wheel
+    도구를 설치한 후 휠을 성공적으로 생성했습니다. 격리된 대상 환경에 이를 설치하고
+    <code>tools/check_install.py</code>를 실행한 결과, 정적 자산, 접근 제어, 서명된
+    32개 이벤트 합성 내보내기, 그리고 독립적으로 검증된 스트리밍 다운로드 테스트를 모두 통과했습니다.</li>
+<li><code>pip check</code>를 통과했습니다. Git에서 선별된 공개 후보에 대한 패턴 스캔 결과,
+    식별 가능한 개인 키 블록, GitHub/bot/AWS 토큰, 긴 리터럴 비밀값
+    할당, 또는 병합 충돌 마커는 발견되지 않았습니다. 이는 모든 가능한
+    비밀 형식이 존재하지 않는다는 증거는 아닙니다. 런타임 데이터/세션/키 프로브는 Git에서 무시되었습니다.</li>
+<li>GitHub CLI 인증이 유효하지 않았습니다. 원격 저장소가 구성되지 않았으며 초기
+    커밋도 존재하지 않았습니다. 푸시, 호스팅된 워크플로, Pages 배포 또는 릴리스가 수행되지 않았습니다.
+    Docker 및 라이브 텔레그램/플랫폼 검증은 이번 점검 대상에서 제외됩니다.</li>
+</ul>
+<p>이 호스트에서 E: 작업 공간 파일 시스템에서 Playwright 다운로드 잠금에 실패했습니다.
+<code>%LOCALAPPDATA%/tgwitness-playwright</code>에 Chromium을 설치하고, 동일한
+<code>PLAYWRIGHT_BROWSERS_PATH</code>를 사용하여 검사를 수행한 결과 성공했습니다. 이는 환경상의 우회 조치이며,
+애플리케이션의 런타임 종속성을 변경한 것은 아닙니다.</p>
+<h2 id="interactive-documentation-and-website-metadata--29-october-2026">대화형 문서 및 웹사이트 메타데이터 · 2026년 10월 29일<a class="anchor" href="#interactive-documentation-and-website-metadata--29-october-2026" aria-label="이 섹션으로 이동">#</a></h2>
+<p>이 공개 사이트는 홈페이지, 가이드 색인, 그리고 10개의
+가이드 등 총 12개의 영어 HTML 페이지로 구성되어 있습니다. 이 아티팩트에는 명시적으로 나열된 28개의 프레젠테이션 파일이 포함되어 있으며,
+용량은 약 1.85 MB이고, 수집기 데이터는 포함되어 있지 않습니다. 공개 웹사이트는 영어로 제공되며,
+애플리케이션 번역본 및 번역된 리포지토리 가이드는 별도로 제공됩니다.</p>
+<ul>
+<li>사이트, 소스 게시물 및 릴리스 경계 테스트: <strong>18개 통과, 2개 건너뜀</strong>.
+    건너뛴 항목은 이 Windows 파일 시스템에서의 심볼릭 링크 생성과 관련됩니다. 테스트 항목은
+    고유한 페이지 메타데이터, 영어로만 구성된 공개 페이지, 정규화된 URL, 모든 사이트맵
+    항목, 로컬 자산/앵커, 구조화된 탐색 및 비공개 파일 제외 여부를 확인합니다.</li>
+<li><code>tools/check_site.py</code>와 <code>tools/check_docs_site.py</code> 모두 Chromium에서
+    320, 390, 768, 1024 및 1440 픽셀 해상도에서 프로젝트 URL 하위 경로를 통해 테스트를 통과했습니다. 이 가이드의 점검 항목은
+    11개의 문서 페이지 전체, 검색 및 키보드 탐색, 클립보드
+    작동 여부(성공/실패), 그리고 자바스크립트 없이도 읽을 수 있는 콘텐츠를 모두 포함합니다.</li>
+<li>다음과 같은 5가지 대화형 예제가 성공적으로 통과되었습니다: 모션 최소화 및 화면 밖 일시 정지 기능을 갖춘
+    메시지 재생/단계별 이동/일시 정지/재설정; 원본/변경된/재구성된/잘린
+    해시 체인; 증인 승인/롤백/포크/무응답 결정; 그리고
+    전송 완료/지연/누락 시나리오; 또한 발신자 ID, 수신자 및 첨부 파일
+    발신자 ID, 수신처 및 첨부 파일
+    해시를 기반으로 가상의 교차 채팅 관찰 내용을 연결하는 조사 지도. 조사 제어 기능은 키보드 탐색 및 자바스크립트 미사용 시
+    폴백 검사를 통과했습니다. 브라우저의 SHA-256 결과는
+    파이썬의 <code>hashlib</code> 및 표준 JSON과 독립적으로 비교되었습니다. 해시
+    예시는 Web Crypto를 사용할 수 없는 경우에도 가독성 있는 대체 결과를 유지했습니다.</li>
+<li>전달 비율과 차트 마커는 접근성이 보장된 표와 일치하도록 조정되었습니다. 모바일 축
+    라벨은 시각적 검토 후 확대되었습니다. 모든 예시는
+    설명용 또는 합성용으로 표시되며, 브라우저 예시 중 텔레그램에 접속하는 사례는 없습니다.</li>
+<li>외부 요청, 실패한 HTTP 요청 또는 자바스크립트 오류는 기록되지 않았습니다.
+    데스크톱/모바일 스크린샷 및 수신 확인 내역은 <code>test-results/site/</code>
+    및 <code>test-results/docs-site/</code> 항목에서 제외되었습니다. 문서 색인, 메시지/해시 예시,
+    위트니스 레이아웃, 전달 차트 및 조사 지도는
+    데스크톱/모바일 화면 크기로 검토되었습니다.</li>
+<li>282개의 공개 소스 파일과 1,426개의 로컬
+    문서 링크에 대한 게시물 스캔이 통과되었습니다. 수정된 Python 사이트 도구 및 테스트에 대해서는 Ruff가 통과되었습니다.</li>
+<li><code>docs/HOW-IT-WORKS.md</code>는 Mermaid
+    다이어그램 및 수식을 지원하는 GitHub 마크다운 보조 도구를 제공합니다. <code>docs/INVESTIGATION.md</code>는 전체 계정 범위,
+    채팅별 기록 수집, 사용자 프로필, 채팅 간 참조, 타임라인
+    및 검증된 사례 인계 절차를 다룹니다. 이 도구의 단계와 제한 사항은
+    현재 범위, 수집, 자료집, 내보내기, 검증기 및 패널 코드를 기준으로 확인되었습니다. 호스팅된
+    GitHub 렌더링은 확인되지 않았습니다.</li>
+</ul>
+<p>이것은 로컬 웹사이트/문서 점검입니다. 실시간 텔레그램
+자격 요건을 추가하거나 호스팅된 페이지 배포, 원격 CI 성공 또는 검색
+엔진 색인화를 확립하지는 않습니다. <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/PUBLISHING.md">게시 절차</a> 및
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/SEO.md">웹사이트 메타데이터 참고 사항을</a> 참조하십시오.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/VERIFICATION.md">GitHub에서 이 페이지 편집하기 ↗</a><a class="next-guide" href="../changelog/"><span>다음 단계</span><strong>변경 내역 →</strong></a><p>이 가이드들은 현재 구현 내용을 설명합니다. 검증 결과와 남아 있는 미비 사항은 별도로 문서화되어 있습니다. <a href="./">테스트된 내용 →</a></p></footer>
+</main>
+<aside class="toc" aria-label="이 페이지에서"><p class="nav-label">이 페이지에서</p><a href="#live-telegram-test-whole-account--29-october-2026">실시간 텔레그램 테스트, 전체 계정 · 2026년 10월 29일</a><a href="#password-protected-export-opened-with-libarchive--29-october-2026">libarchive로 열 수 있는 비밀번호로 보호된 내보내기 파일 · 2026년 10월 29일</a><a href="#live-telegram-test--27-to-29-october-2026">텔레그램 실시간 테스트 · 2026년 10월 27일~29일</a><a href="#built-in-public-mtproxy-lists--29-october-2026">내장된 공개 MTProxy 목록 · 2026년 10월 29일</a><a href="#optional-extras-presentation--29-october-2026">선택적 추가 기능 소개 · 2026년 10월 29일</a><a href="#witness-bot-and-proxy-setup-audit--29-october-2026">Witness 봇 및 프록시 설정 감사 · 2026년 10월 29일</a><a href="#presentation-and-documentation-review--29-october-2026">프레젠테이션 및 문서 검토 · 2026년 10월 29일</a><a href="#version-061">버전 0.6.1</a><a href="#version-060">버전 0.6.0</a><a href="#version-051">버전 0.5.1</a><a href="#version-050">버전 0.5.0</a><a href="#version-040">버전 0.4.0</a><a href="#version-031-focused-readiness-fixes">버전 0.3.1은 안정성 개선에 중점을 두었습니다.</a><a href="#version-030">버전 0.3.0</a><a href="#version-020-baseline">버전 0.2.0 기준</a><a href="#synthetic-local-capacity-measurement">합성 지역 역량 측정</a><a href="#environmental-observations">환경 관찰</a><a href="#remaining-qualification">나머지 자격 요건</a><a href="#public-website-and-publication-preparation--27-october-2026">공개 웹사이트 및 간행물 준비 · 2026년 10월 27일</a><a href="#interactive-documentation-and-website-metadata--29-october-2026">대화형 문서 및 웹사이트 메타데이터 · 2026년 10월 29일</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>오픈 소스 · 사용자의 컴퓨터에서 실행됩니다</span><a href="../../../../LICENSE">MIT 라이선스</a><a href="../notice/">운영자 공지</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">보안</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "메시지를 기다리고 있습니다", "Step through a fictional send, edit and delete.": "가상의 메시지 전송, 수정 및 삭제 과정을 단계별로 살펴보세요.", "No observations yet. Start the sequence or advance one event.": "아직 관찰 내용이 없습니다. 시퀀스를 시작하거나 이벤트를 하나 앞으로 넘기세요.", "Meet at 10:00": "10:00에 만나요", "A new message is visible in the chat.": "채팅창에 새 메시지가 표시됩니다.", "Record 1 appended: the collector observed the original message.": "기록 1건 추가됨: 수집기가 원본 메시지를 감지했습니다.", "Meet at 11:00": "11:00에 만나요", "The current text changes. The earlier observation stays.": "현재 텍스트가 변경되었습니다. 이전의 관찰 내용은 그대로 유지됩니다.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "기록 2가 추가되었습니다: 이 수정은 새로운 관찰 내용입니다. 기록 1에는 여전히 원본 텍스트가 유지되어 있습니다.", "Message deleted": "메시지가 삭제되었습니다.", "The message has disappeared from the chat view.": "해당 메시지가 채팅 화면에서 사라졌습니다.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Record 3 추가: 삭제 알림은 확인된 두 버전의 메시지와 함께 보존됩니다.", "0 records": "0건", "1 record": "1건의 기록", "2 records": "2건의 기록", "3 records": "3건의 기록", "Complete / {n} of 3": "완료 / 3개 중 {n}개", "Step / {n} of 3": "3단계 중 {n}단계", "Pause": "일시 정지", "Replay sequence": "재생 순서", "Play sequence": "재생 순서", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "정적 예제 페이지를 확인할 수 있습니다. 해시를 대화형으로 계산하려면 HTTPS를 통해 이 페이지를 열거나, Web Crypto를 지원하는 로컬호스트 미리보기에서 열어보세요.", "No record supplied": "기록이 제공되지 않음", "Tail removed": "꼬리 부분 삭제됨", "≠ saved hash": "≠ 저장된 해시", "Rebuilt · different hash": "재구축 · 다른 해시", "= saved hash": "= 저장된 해시", "Same length and matching head.": "글의 길이는 동일하며, 제목도 일치해야 합니다.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "계산된 세 개의 해시 값이 모두 저장된 해시 값과 일치합니다. 이 샘플은 유지된 3개 레코드 경계와 일치합니다.", "Same saved head; the journal prefix fails verification.": "동일한 헤더가 저장되었으나, 저널 접두사가 검증에 실패했습니다.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "레코드 2가 저장된 해시와 더 이상 일치하지 않습니다. 최종 저장된 헤더만 확인하면 이 문제를 놓칠 수 있으므로, 검증자는 모든 레코드를 확인합니다.", "Head differs from the retained checkpoint.": "헤더가 유지된 체크포인트와 다릅니다.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "재구성된 해시 값들은 서로 연결되어 있지만, 최종 헤더가 변경되었습니다. 보존된 체크포인트는 이 변경 내역을 거부합니다. 변경된 기록의 경우 원본 서명도 유효하지 않을 것입니다.", "Too short: 2 supplied records \u003c 3 retained records.": "너무 짧음: 제공된 기록 2건 \u003c 보존된 기록 3건.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "남아 있는 두 해시는 여전히 일치합니다. 보존된 체크포인트는 누락된 끝부분을 드러냅니다. 그 이전의 경계 정보가 없었다면, 이 짧은 접두사만으로는 누락된 부분을 파악할 수 없었을 것입니다.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "이 브라우저에서는 해시 계산 기능을 사용할 수 없습니다. 아래의 공식과 정적 설명은 계속 확인할 수 있습니다.", "{n} records": "{n}건의 기록", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "승인됨: 카운트가 증가하고, 서명이 검증되며, 키가 일치합니다. 위트니스는 이 새로운 경계를 유지합니다.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "롤백: 서명된 응답에 포함된 기록 수가 마지막으로 승인된 체크포인트보다 적게 보고된 경우. 위트니스는 이 문제를 기록하고 이전에 승인된 경계를 유지합니다.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "포크(Fork): 카운트는 변하지 않았지만 헤드가 다릅니다. 위트니스는 이 불일치를 기록하고 이전에 승인된 경계를 유지합니다.", "No answer": "답변 없음", "boundary unknown": "경계 미상", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "응답 없음: 위트니스는 확인 실패를 기록합니다. 수집기의 현재 상태를 확인할 수는 없습니다. 위트니스가 여전히 봇 API에 접속할 수 있고 게시 정책이 허용하는 경우, 해당 실패 사실을 게시할 수 있습니다.", "Send {n}": "{n} 보내기", "Edit {n}": "{n} 편집", "Delete {n}": "{n} 삭제", "Both accounts captured all six expected observations in this example.": "이 예시에서 두 계정 모두 예상된 6가지 관찰 항목을 모두 포착했습니다.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "계정 B는 여전히 6건 중 6건을 모두 캡처했습니다. 두 건의 수신 확인은 더 오래 걸렸습니다. 캡처 비율과 수신 확인 지연은 서로 다른 문제를 나타냅니다.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "계정 B는 마감 시점까지 6건 중 5건(83.3%)을 포착했습니다. 누락된 편집 건에는 측정된 지연 시간이 없습니다. 이 결과는 6건의 통제된 동작에 대해서만 설명한 것입니다.", "not observed by cutoff": "마감 시점에 확인되지 않음", "{s} seconds": "{s}초", "Exact values follow in the table.": "정확한 수치는 아래 표에 나와 있습니다.", "{s} s": "{s} s", "Not observed": "확인되지 않음", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "네 개의 채팅에서 서로 다른 관찰 결과가 제시됩니다. 모든 연결에 대해 원본 기록을 따르십시오. 발신자가 명시되지 않은 경우 채널 게시물을 사용자 71001에게 귀속시키지 마십시오.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "기록 #146과 #205는 동일한 발신자 ID인 71001을 나타냅니다. 이를 통해 두 채팅에서 관찰된 텔레그램 계정의 게시물을 연결할 수 있습니다. 이는 실제 인물을 식별하거나 채널 게시물의 작성자를 특정하지는 않습니다.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "수신처 pay.example.invalid/new는 그룹 기록 #146, 봇 키보드 #173, 채널 편집 #188 및 비공개 메시지 #205에 나타납니다. 동일한 수신처가 반복적으로 등장한다는 사실은 해당 자료 간의 연관성을 시사할 뿐, 해당 계정들이 동일한 주체에 의해 통제된다는 것을 증명하지는 않습니다.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "이 가상의 사례에서, 완료된 미디어 수신 기록 #151과 #209는 동일한 SHA-256 전체 값을 가지고 있습니다. 실제 바이트와 관련 메시지 기록을 비교해 보십시오. 일치하는 파일은 작성자를 식별하지 않으며, 누가 이를 전달했는지도 증명하지 않습니다.", "the encrypted off-site copy": "암호화된 오프사이트 사본", "notifications": "알림", "checkpoint hashes for timestamps": "타임스탬프용 체크포인트 해시", "signed checkpoints for the witness": "증거를 위한 서명된 체크포인트", "Switched on in this example": "이 예시에서는 활성화됨", "Optional · off by default": "선택 사항 · 기본값은 비활성화됨", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "이 기기에서 남기는 것: 텔레그램 연결 정보와 {list}. 그 외에는 아무것도 없습니다.", "Default: only the Telegram connection leaves this machine.": "기본 설정: 텔레그램 연결만 이 기기를 통해 이루어집니다.", "{done} of {total} done": "{done}/{total} 완료", "Mark step {n} as done": "{n}번 단계를 완료로 표시", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "복사", "Copied": "복사됨", "Command copied.": "명령 복사 완료.", "Selected — Ctrl/Cmd+C": "선택 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "명령어가 선택되었습니다. 수동으로 복사하십시오.", "Command copied to clipboard.": "명령어가 클립보드에 복사되었습니다.", "Select text": "텍스트 선택", "Clipboard unavailable. Command selected; copy it manually.": "클립보드를 사용할 수 없습니다. 명령어가 선택되었습니다. 수동으로 복사하십시오.", "A message arrives. The first observation is saved.": "메시지가 도착합니다. 첫 번째 관측 결과가 저장됩니다.", "The time changes. Both captured versions stay.": "시간이 변경됩니다. 캡처된 두 버전 모두 그대로 유지됩니다.", "The message disappears. The captured history remains.": "메시지는 사라지지만, 캡처된 기록은 남습니다.", "Pause example animation": "예시 애니메이션 일시 정지", "Play example animation": "예시 애니메이션 재생", "Play": "재생", "Full-size workspace screenshot": "전체 화면 작업 공간 스크린샷", "Workspace screenshot · fictional data": "작업 공간 스크린샷 · 가상의 데이터", "Close": "닫기", "Close screenshot": "스크린샷 닫기", "Scrollable full-size screenshot": "스크롤 가능한 전체 화면 스크린샷", "Enlarge: {name}": "확대: {name}", "View full size": "전체 크기 보기"}</script>
+</body></html>

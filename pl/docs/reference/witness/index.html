@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="pl" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Niezależny świadek | TgWitness</title>
+<meta name="description" content="Uruchom program Witness z własnym kluczem i botem, opublikuj podpisane punkty kontrolne na kanale i porównaj z nimi wyeksportowane dane."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/witness/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:title" content="Niezależny świadek | TgWitness"><meta property="og:description" content="Uruchom program Witness z własnym kluczem i botem, opublikuj podpisane punkty kontrolne na kanale i porównaj z nimi wyeksportowane dane.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/pl/docs/reference/witness/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/witness/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/witness/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/witness/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/witness/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/witness/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/witness/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/witness/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/witness/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/witness/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/witness/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/witness/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/witness/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/witness/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/witness/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/witness/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/witness/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/witness/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/witness/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/witness/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/witness/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/witness/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/witness/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/witness/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/pl/docs/reference/witness/", "url": "https://phishdestroy.github.io/TgWitness/pl/docs/reference/witness/", "name": "Niezależny świadek | TgWitness", "description": "Uruchom program Witness z własnym kluczem i botem, opublikuj podpisane punkty kontrolne na kanale i porównaj z nimi wyeksportowane dane.", "inLanguage": "pl", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Strona główna", "item": "https://phishdestroy.github.io/TgWitness/pl/"}, {"@type": "ListItem", "position": 2, "name": "Dokumentacja", "item": "https://phishdestroy.github.io/TgWitness/pl/docs/"}, {"@type": "ListItem", "position": 3, "name": "Odniesienie", "item": "https://phishdestroy.github.io/TgWitness/pl/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Niezależny świadek", "item": "https://phishdestroy.github.io/TgWitness/pl/docs/reference/witness/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Przejdź do treści</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Dokumentacja</span></a>
+<nav aria-label="Przewodniki"><a href="../../concepts/">Przewodnik wizualny</a><a href="../../">Wszystkie przewodniki</a><a href="../">Odniesienie</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Język"><span aria-hidden="true">◍</span> Polski</summary><div class="lang-list"><a href="../../../../docs/reference/witness/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/witness/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/witness/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/witness/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/witness/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/witness/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/witness/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/witness/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/witness/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/witness/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/witness/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/witness/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/witness/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/witness/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/witness/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/witness/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/witness/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/witness/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/witness/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/witness/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="./" hreflang="pl" lang="pl" aria-current="true">Polski</a><a href="../../../../ja/docs/reference/witness/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/witness/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/witness/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/witness/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Przełączanie między jasnym a ciemnym motywem"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Przewodniki"><a href="../../../guides/modes.html">Tryby, scenariusze i poziomy dowodów</a><p class="nav-label">Pierwsze kroki</p><a href="../../start/">Rozpocznij w ciągu kilku minut</a><a href="../../accounts/">Podłącz konto</a><a href="../../proxies/">Proszę wybrać serwer proxy</a><a href="../../exports/">Eksportowanie i weryfikacja</a><p class="nav-label">Zrozumienie dowodów</p><a href="../../concepts/">Zobacz, jak działa system gromadzenia dowodów</a><a href="../../cases/">Przeprowadzanie dochodzeń we wszystkich czatach</a><a href="../../security/">Dbaj o bezpieczeństwo</a><p class="nav-label">Dowiedz się więcej</p><a href="../../witness/">Skonfiguruj bota Witness</a><a href="../../server/">Prosimy o dalsze prowadzenie tej strony</a><a href="../../troubleshooting/">Dowiedz się, co poszło nie tak</a></nav><nav class="wiki-nav" aria-label="Odniesienie"><p class="nav-label"><a class="nav-label-link" href="../">Odniesienie</a></p><details class="wiki-group"><summary>Konfiguracja</summary><a href="../quickstart/">Szybki start</a><a href="../accounts/">Konta i formaty sesji</a><a href="../connection/">Połączenia, serwery proxy i ochrona danych</a><a href="../deployment/">Wdrożenie</a></details><details class="wiki-group"><summary>Zbieraj</summary><a href="../collection/">Jak przebiega gromadzenie danych</a><a href="../operations/">Procesy i operacje</a><a href="../investigation/">Tryb dochodzeniowy</a><a href="../features/">Funkcje i ograniczenia</a></details><details class="wiki-group" open><summary>Dowody</summary><a href="../how-it-works/">Jak działa ten rejestr dowodów</a><a href="../evidence/">Format dowodów</a><a href="./" aria-current="page">Niezależny świadek</a><a href="../timestamp/">Sygnatury czasowe</a></details><details class="wiki-group"><summary>Bezpieczeństwo i projekt</summary><a href="../security/">Bezpieczeństwo i przetwarzanie danych</a><a href="../architecture/">Architektura</a><a href="../verification/">Co zostało przetestowane</a><a href="../license/">Informacja o licencji i niezgodności architektonicznej</a><a href="../notice/">Powiadomienie o niezgodności operatorów</a><a href="../changelog/">Lista zmian</a></details></nav><p class="sidebar-note">v0.7.0<br>Oprogramowanie typu open source · Działa na Państwa komputerze</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Przewodniki"><a href="../../../">Strona główna</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentacja</a> <span aria-hidden="true">/</span> <a href="../">Odniesienie</a> <span aria-hidden="true">/</span> <span aria-current="page">Niezależny świadek</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Przeszukaj dokumentację</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proszę rozważyć użycie terminów takich jak: serwer proxy, łańcuch skrótów, token lub świadek…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Przejrzyste wyszukiwanie" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Wpisz słowo, aby przeszukać przewodniki i materiały referencyjne. Wyniki wyszukiwania pozostają w Państwa przeglądarce.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Odniesienie / Dowody</p><h1>Niezależny świadek</h1><p class="guide-outcome">Uruchom program Witness z własnym kluczem i botem, opublikuj podpisane punkty kontrolne na kanale i porównaj z nimi wyeksportowane dane.</p><div class="wiki-body"><p><a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/WITNESS.md">Konfiguracja bota i serwera proxy w języku rosyjskim</a>.</p>
+<p>Moduł zbierający podpisuje swój własny dziennik, więc każdy, kto kontroluje ten moduł oraz jego klucz, mógłby w
+zasadzie przeredagować lub skrócić dziennik, a następnie podpisać go ponownie. Świadek sprawia, że
+jest to wykrywalne. Jest to odrębny proces — inny kontener, a raczej serwer obsługiwany przez inną osobę
+— który co kilka minut pobiera podpisaną czołówkę dziennika kolektora, podpisuje to, co
+zauważył, własnym kluczem, przechowuje to we własnym dzienniku i publikuje na kanale Telegramu.</p>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 560 391" width="560" height="391" role="img" aria-labelledby="flow-7-title flow-7-desc"><title id="flow-7-title">Schemat blokowy</title><desc id="flow-7-desc">Collector → Witness (podpisany punkt kontrolny: liczba zapisów + skrót nagłówka); Witness → Dziennik Witness, własny klucz; Witness → Kanał na Telegramie (podpisany wpis za pośrednictwem własnego bota); Plik ZIP z dowodami → verify.py; Dziennik Witness, własny klucz → verify.py; Kanał na Telegramie → verify.py (Eksport z aplikacji Telegram Desktop lub strona t.me/s)</desc><defs><marker id="flow-7-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M200.0 46.0C200.0 84.5 200.0 84.5 200.0 123.0" marker-end="url(#flow-7-arrow)" style="--i:0;--len:77" pathLength="77"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M200.0 46.0C200.0 84.5 200.0 84.5 200.0 123.0"/></circle><path class="flow-edge" d="M200.0 163.0C200.0 194.0 102.8 194.0 102.8 225.0" marker-end="url(#flow-7-arrow)" style="--i:1;--len:122" pathLength="122"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M200.0 163.0C200.0 194.0 102.8 194.0 102.8 225.0"/></circle><path class="flow-edge" d="M200.0 163.0C200.0 198.5 297.2 198.5 297.2 234.0" marker-end="url(#flow-7-arrow)" style="--i:1;--len:127" pathLength="127"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M200.0 163.0C200.0 198.5 297.2 198.5 297.2 234.0"/></circle><path class="flow-edge" d="M474.3 274.0C474.3 309.5 291.4 309.5 291.4 345.0" marker-end="url(#flow-7-arrow)" style="--i:2;--len:204" pathLength="204"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="2.3s" repeatCount="indefinite" path="M474.3 274.0C474.3 309.5 291.4 309.5 291.4 345.0"/></circle><path class="flow-edge" d="M102.8 283.0C102.8 314.0 291.4 314.0 291.4 345.0" marker-end="url(#flow-7-arrow)" style="--i:2;--len:205" pathLength="205"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="2.3s" repeatCount="indefinite" path="M102.8 283.0C102.8 314.0 291.4 314.0 291.4 345.0"/></circle><path class="flow-edge" d="M297.2 274.0C297.2 309.5 291.4 309.5 291.4 345.0" marker-end="url(#flow-7-arrow)" style="--i:2;--len:71" pathLength="71"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M297.2 274.0C297.2 309.5 291.4 309.5 291.4 345.0"/></circle><g class="flow-node" style="--i:0"><rect x="148.0" y="6.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="200.0" y="26.0">Collector</tspan></text></g><g class="flow-node" style="--i:1"><rect x="148.0" y="123.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="200.0" y="143.0">Witness</tspan></text></g><g class="flow-node" style="--i:2"><rect x="6.0" y="225.0" width="193.6" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="102.8" y="245.0">Dziennik Witness, własny</tspan><tspan x="102.8" y="263.0">klucz</tspan></text></g><g class="flow-node" style="--i:2"><rect x="217.6" y="234.0" width="159.1" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="297.2" y="254.0">Kanał na Telegramie</tspan></text></g><g class="flow-node" style="--i:2"><rect x="394.7" y="234.0" width="159.1" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="474.3" y="254.0">Plik ZIP z dowodami</tspan></text></g><g class="flow-node" style="--i:3"><rect x="239.4" y="345.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="291.4" y="365.0">verify.py</tspan></text></g><g class="flow-label" style="--i:0"><rect x="110.1" y="58.0" width="179.8" height="53.0" rx="6"/><text x="200.0" y="69.5" text-anchor="middle" dominant-baseline="central">podpisany punkt kontrolny:</text><text x="200.0" y="84.5" text-anchor="middle" dominant-baseline="central">liczba zapisów + skrót</text><text x="200.0" y="99.5" text-anchor="middle" dominant-baseline="central">nagłówka</text></g><g class="flow-label" style="--i:1"><rect x="180.6" y="189.5" width="186.1" height="38.0" rx="6"/><text x="273.7" y="201.0" text-anchor="middle" dominant-baseline="central">podpisany wpis za</text><text x="273.7" y="216.0" text-anchor="middle" dominant-baseline="central">pośrednictwem własnego bota</text></g><g class="flow-label" style="--i:2"><rect x="199.6" y="280.5" width="192.4" height="38.0" rx="6"/><text x="295.8" y="292.0" text-anchor="middle" dominant-baseline="central">Eksport z aplikacji Telegram</text><text x="295.8" y="307.0" text-anchor="middle" dominant-baseline="central">Desktop lub strona t.me/s</text></g></svg></div><details class="flow-steps"><summary>Schemat w formie tekstowej</summary><ol><li>Collector → Witness (podpisany punkt kontrolny: liczba zapisów + skrót nagłówka)</li><li>Witness → Dziennik Witness, własny klucz</li><li>Witness → Kanał na Telegramie (podpisany wpis za pośrednictwem własnego bota)</li><li>Plik ZIP z dowodami → verify.py</li><li>Dziennik Witness, własny klucz → verify.py</li><li>Kanał na Telegramie → verify.py (Eksport z aplikacji Telegram Desktop lub strona t.me/s)</li></ol></details></figure>
+<h2 id="what-the-witness-gets-and-what-it-does-not">Co oferuje TgWitness, a czego nie zapewnia<a class="anchor" href="#what-the-witness-gets-and-what-it-does-not" aria-label="Link do tej sekcji">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Świadek posiada</th>
+<th>Świadek nigdy nie ma</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Token świadka</strong> z prawem tylko do odczytu dla jednego obszaru roboczego</td>
+<td>Sesja Telegramu użytkownika korzystającego z narzędzia lub dane uwierzytelniające do interfejsu API</td>
+</tr>
+<tr>
+<td>Własny klucz Ed25519 i dziennik</td>
+<td>Skarbiec kolektora, klucz podpisujący lub token panelowy</td>
+</tr>
+<tr>
+<td>Własny token bota w serwisie Telegram</td>
+<td>Treść wiadomości: nagłówek zawiera liczbę zapisów oraz skrót</td>
+</tr>
+</tbody>
+</table></div>
+<p>Token jest generowany na stronie <strong>„Witness”</strong> w panelu, wyświetlany jednorazowo i przechowywany wyłącznie w postaci
+klucza SHA-256. Otwiera on dokładnie jeden punkt końcowy, <code>GET /api/witness/head</code>, który zwraca świeżo
+podpisany punkt kontrolny wraz z podpisanymi licznikami zbiorów bez treści oraz informacją o stanie operacyjnym.
+Nie może on otworzyć panelu, odczytać treści wiadomości ani zmienić ustawień, a
+token panelu nie jest tam akceptowany. Cofnięcie tokenu odbywa się na tej samej stronie. Kolektor rejestruje
+moment rozpoczęcia sprawdzania przez nowy klucz świadka (<code>witness.seen</code>) oraz pokazuje ostatnie sprawdzenie dla każdego tokenu;
+świadek, który nie przeprowadził sprawdzenia w ciągu 2,5 interwału, zostaje oznaczony jako przeterminowany.</p>
+<p>Nowi świadkowie wysyłają losowe hasło weryfikacyjne przy
+każdej ankiecie; instrukcja przechwytywania powtarza je pod podpisem kolektora. Liczniki są
+powiązane z konkretnym punktem kontrolnym i są uwzględniane w podpisanych wpisach świadków. Starsze nagłówki
+są nadal akceptowane przez samodzielnego świadka. Sam wzrost objętości dziennika nigdy nie jest traktowany jako nowa wiadomość.</p>
+<h2 id="what-it-checks-and-records">Co narzędzie sprawdza i rejestruje<a class="anchor" href="#what-it-checks-and-records" aria-label="Link do tej sekcji">#</a></h2>
+<p>W każdym przedziale czasowym (domyślnie co 10 minut) narzędzie TgWitness:</p>
+<ol>
+<li>samodzielnie pobiera nagłówek (moduł zbierający nie może go przesłać ani pominąć);</li>
+<li>weryfikuje podpis kolektora, przypięty klucz kolektora (<code>--collector-fingerprint</code>,
+    lub pierwszy widoczny klucz), niezmniejszającą się liczbę oraz niezmieniony nagłówek przy niezmienionej liczbie;</li>
+<li>dodaje podpisany zapis do własnego dziennika: <code>witness.anchor</code> o statusie <code>ok</code>,
+    <code>key_changed</code>, <code>rollback</code> (mniej zapisów niż poprzednio), <code>fork</code> (ta sama długość, inny
+    nagłówek) lub <code>invalid</code> (odpowiedź nie przeszła weryfikacji), albo <code>witness.no_response</code>, gdy
+    moduł zbierający nie udzielił odpowiedzi;</li>
+<li>wynik jest publikowany na kanale wraz z podpisem, w tym komunikat „brak odpowiedzi”, o ile narzędzie TgWitness
+    działa i ma dostęp do interfejsu API bota. Rejestrowany jest identyfikator publikacji (<code>witness.posted</code>),
+    a także identyfikator nieudanej publikacji (<code>witness.post_failed</code>).</li>
+</ol>
+<p>Wpis wygląda następująco; ostatnia linia zawiera podpisane oświadczenie:</p>
+<pre><code class="language-text">TgWitness witness #42 · journal head
+Collector 3fa9c2d1e0b4a7f6: 18234 records
+Head 9b1f…c07e
+2026-10-28T19:40:00.123+00:00
+TGW1.eyJhdCI6…&lt;statement&gt;.&lt;signature&gt;</code></pre>
+<h2 id="run-a-witness">Uruchom program Witness<a class="anchor" href="#run-a-witness" aria-label="Link do tej sekcji">#</a></h2>
+<p>Potrzebny jest Państwu bot w Telegramie (można go utworzyć za pomocą @BotFather), kanał, w którym bot ten pełni funkcję
+administratora, oraz adres kolektora dostępny dla świadka — za pośrednictwem protokołu HTTPS poza
+siecią prywatną (patrz profil HTTPS w <a href="../deployment/">sekcji wdrożenia</a>).</p>
+<p>Proszę otworzyć <strong>menu „Dodatki” → „Bot w Państwa kanale” → „Skonfiguruj bota”</strong>
+w panelu. Trzy kroki obejmują
+ustawienie dostępu tylko do odczytu, wybór kanału oraz określenie częstotliwości, a następnie uruchomienie bota. Polityka
+publikacji, opcjonalny serwer proxy HTTP/SOCKS5 oraz niestandardowy adres API bota znajdują się w <strong>ustawieniach zaawansowanych</strong>
+. Formularz
+pobiera plik <code>witness.json</code>
+z przypisanym kluczem kolektora dla tego obszaru roboczego. Proszę pobrać nowo
+utworzony token tylko do odczytu, <strong>zapisując plik dostępu</strong>
+jako <code>witness-token.txt</code>
+; proszę umieścić go oraz plik <code>bot-token.txt</code>
+utworzony na hoście Witness obok tego pliku JSON. Kolektor nigdy nie otrzymuje tokenu bota.
+Pobieranie nie powoduje uruchomienia usługi ani opublikowania komunikatu. Żaden świadek projektu hostowanego nie jest
+domyślnie rejestrowany.</p>
+<pre><code class="language-sh">python -m tgwitness.witness run --config witness.json --check-config
+python -m tgwitness.witness run --config witness.json
+python -m tgwitness.witness fingerprint --config witness.json</code></pre>
+<p>Pierwsze polecenie sprawdza pliki konfiguracyjne i pliki tajne bez wysyłania żądań sieciowych ani
+tworzenia kluczy. Ścieżki w formacie JSON są względne względem tego pliku; ścieżki CLI/środowiska są względne względem
+katalogu roboczego. Należy zachować odcisk palca świadka poza jego hostem. Wskaźnik
+ostatniego odczytu kolektora potwierdza jedynie żądanie; publikacja jest zgłaszana przez Proof lub sprawdzana
+w dzienniku świadka oraz na kanale.</p>
+<p>Jeśli panel znajduje się za tunelem SSH, należy udostępnić wyłącznie wyznaczony punkt końcowy Witness na
+oddzielnej nazwie hosta HTTPS, korzystając z <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/Caddyfile.witness.example">poniższego przykładu wykorzystującego Caddy</a>.
+Domyślny obszar roboczy korzysta wówczas z <code>https://witness.example.org</code>, pozostałe obszary robocze – z
+<code>https://witness.example.org/profiles/ID</code>. Tokeny są nadal wymagane; panel oraz jego
+inne trasy API nie są przekierowywane przez ten wirtualny host.</p>
+<p>Proszę wybrać opcję <code>all</code>, aby uzyskać regularnie publikowane punkty kontrolne. Pięciominutowy interwał oznacza około 288
+wpisów dziennie na każdy obszar roboczy. Opcje <code>changes</code> i <code>problems</code> celowo pomijają publikację niektórych punktów kontrolnych.
+MTProxy jest przeznaczony dla klienta Telegramu służącego do gromadzenia danych. Polling HTTP serwisu Witness oraz interfejs API botów Telegramu HTTPS
+korzystają z własnej trasy bezpośredniej/HTTP/SOCKS5 (<a href="https://core.telegram.org/bots/api">Bot API</a>).</p>
+<p><strong>Obok modułu zbierającego, z wykorzystaniem Docker</strong> (ten sam host — niezależny proces i klucz, ale ten
+sam operator): należy wprowadzić wartości w polu „<code>.env</code>” i uruchomić profil.</p>
+<pre><code class="language-sh">TGWITNESS_WITNESS_TOKEN=tgww_...
+TGWITNESS_WITNESS_BOT_TOKEN=123456:ABC...
+TGWITNESS_WITNESS_CHANNEL=@your_witness_channel
+# another workspace: TGWITNESS_WITNESS_COLLECTOR=http://tgwitness:8787/profiles/&lt;workspace ID&gt;
+
+docker compose --profile witness up -d
+docker compose logs witness     # prints the witness key fingerprint</code></pre>
+<p>W przypadku publikacji obrazu prosimy o użycie kodu <code>docker compose --project-directory . -f deploy/compose/compose.image.yaml --profile witness up -d</code>.</p>
+<p><strong>Na serwerze innej osoby</strong> (prawdziwy niezależny świadek): skopiuj tam repozytorium, ustaw
+<code>TGWITNESS_WITNESS_COLLECTOR=https://your-collector.example.org</code> oraz trzy powyższe wartości
+w <code>.env</code>, a następnie</p>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.witness.yaml up -d</code></pre>
+<p>lub bez wykorzystania Docker:</p>
+<pre><code class="language-sh">python -m tgwitness.witness run --collector https://your-collector.example.org \
+    --token-file witness-token.txt --bot-token-file bot-token.txt --channel @your_witness_channel</code></pre>
+<h3 id="options">Opcje<a class="anchor" href="#options" aria-label="Link do tej sekcji">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Opcja</th>
+<th>Środowisko</th>
+<th>Domyślnie</th>
+<th>Znaczenie</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--interval</code></td>
+<td><code>TGWITNESS_WITNESS_INTERVAL</code></td>
+<td>10</td>
+<td>Czas między kolejnymi sprawdzeniami: 1–1440</td>
+</tr>
+<tr>
+<td><code>--timeout</code></td>
+<td><code>_TIMEOUT</code></td>
+<td>30</td>
+<td>Czas oczekiwania na uruchomienie modułu zbierającego dane i interfejsu API bota: od 5 do 600 sekund</td>
+</tr>
+<tr>
+<td><code>--post</code></td>
+<td><code>_POST</code></td>
+<td><code>all</code></td>
+<td><code>all</code>: wszystko w porządku; <code>changes</code>: nowa kwestia lub problem; <code>problems</code>: same problemy i brak odpowiedzi</td>
+</tr>
+<tr>
+<td><code>--title</code></td>
+<td><code>_TITLE</code></td>
+<td><code>TgWitness witness</code></td>
+<td>Pierwsze słowa każdego wpisu na kanale</td>
+</tr>
+<tr>
+<td><code>--collector-fingerprint</code></td>
+<td><code>_COLLECTOR_FINGERPRINT</code></td>
+<td>–</td>
+<td>Należy zapisać klucz kolektora zamiast polegać na pierwszej odpowiedzi</td>
+</tr>
+<tr>
+<td><code>--proxy</code></td>
+<td><code>_PROXY</code></td>
+<td>bezpośredni</td>
+<td><code>socks5://host:port</code> lub <code>http://host:port</code></td>
+</tr>
+<tr>
+<td><code>--bot-api</code></td>
+<td><code>_BOT_API</code></td>
+<td><code>https://api.telegram.org</code></td>
+<td>Adres interfejsu API bota, np. lokalny serwer interfejsu API bota</td>
+</tr>
+<tr>
+<td><code>--data-dir</code></td>
+<td><code>_DATA</code></td>
+<td><code>witness-data</code></td>
+<td>Klucz Witness i dziennik</td>
+</tr>
+<tr>
+<td><code>--config</code></td>
+<td><code>_CONFIG</code></td>
+<td>–</td>
+<td>Plik JSON zawierający dowolną z powyższych opcji</td>
+</tr>
+</tbody>
+</table></div>
+<p>Adres kolektora, tokeny oraz kanał pochodzą z <code>--collector</code>, <code>--token</code> lub
+<code>--token-file</code>, <code>--bot-token</code> lub <code>--bot-token-file</code> i <code>--channel</code>, albo <code>_COLLECTOR</code>, <code>_TOKEN</code>,
+<code>_TOKEN_FILE</code>, <code>_BOT_TOKEN</code>, <code>_BOT_TOKEN_FILE</code> i <code>_CHANNEL</code>, co pozwala na utrzymanie poufności poza
+listą procesów.</p>
+<p>Plik konfiguracyjny wykorzystuje nazwy opcji z podkreśleniami oraz symbol <code>texts</code>, który zastępuje słowa
+w postach kanału:</p>
+<pre><code class="language-json">{&quot;collector&quot;: &quot;https://your-collector.example.org&quot;, &quot;token_file&quot;: &quot;witness-token.txt&quot;,
+ &quot;bot_token_file&quot;: &quot;bot-token.txt&quot;, &quot;channel&quot;: &quot;@your_witness_channel&quot;,
+ &quot;interval&quot;: 5, &quot;timeout&quot;: 30, &quot;post&quot;: &quot;changes&quot;, &quot;title&quot;: &quot;Partner witness&quot;,
+ &quot;texts&quot;: {&quot;ok&quot;: &quot;journal head&quot;, &quot;no_response&quot;: &quot;no answer from the collector&quot;, &quot;records&quot;: &quot;records&quot;}}</code></pre>
+<p>Klucze <code>texts</code>: <code>ok</code>, <code>key_changed</code>, <code>rollback</code>, <code>fork</code>, <code>invalid</code>, <code>no_response</code>, <code>collector</code>,
+<code>records</code>, <code>head</code>. Wiersz pole wygrywa z środowiskiem, a środowisko z plikiem.
+Nieznane opcje lub klucze tekstowe powodują zatrzymanie działania narzędzia „witness” i wyświetlenie komunikatu zamiast ich ignorowania.
+Sformułowanie nigdy nie ma wpływu na weryfikację: skrypt verify.py sprawdza podpisany token na końcu każdego
+wpisu. W przypadku <code>--post changes</code> lub <code>problems</code> kontrole, które nie zostały opublikowane, nadal znajdują się w
+dzienniku świadków, a <code>verify.py</code> wymienia je jako nigdy nieopublikowane; rekord początkowy określa
+politykę. Każda kontrola nadal pojawia się w dzienniku, więc mniejsza liczba wpisów oznacza mniejszą liczbę niezależnych
+czasów w Telegramie, a nie mniejszą liczbę kontroli.</p>
+<p>Nawet bez kanału aplikacja TgWitness nadal prowadzi swój dziennik. Proszę przechowywać odcisk klucza aplikacji TgWitness
+(<code>python -m tgwitness.witness fingerprint</code>) w innym miejscu.</p>
+<h2 id="verify">Zweryfikuj<a class="anchor" href="#verify" aria-label="Link do tej sekcji">#</a></h2>
+<p>Ze strony świadka należy wyeksportować ten dziennik:</p>
+<pre><code class="language-sh">python -m tgwitness.witness export --out witness.zip
+# Docker (add -f deploy/compose/compose.witness.yaml on a witness server):
+docker compose exec witness python -m tgwitness.witness export --out /witness/witness.zip
+docker compose cp witness:/witness/witness.zip .</code></pre>
+<p>Następnie, w dowolnym miejscu, korzystając z podpisanego pliku ZIP z narzędzia zbierającego oraz kanału wyeksportowanego z aplikacji Telegram
+Desktop (<em>opcja „Eksportuj historię czatu</em>
+” → „JSON” generuje plik o nazwie „<code>result.json</code>
+”) lub jego publicznej strony o nazwie „<code>https://t.me/s/…</code>
+”:</p>
+<pre><code class="language-sh">python verify.py tgwitness-evidence.zip --fingerprint COLLECTOR_SHA256 \
+    --witness witness.zip --witness-fingerprint WITNESS_SHA256 --channel result.json</code></pre>
+<p><code>verify.py</code> sprawdza dziennik świadka (łańcuch i podpisy), a następnie upewnia się, że <strong>każdy nagłówek, który
+widział świadek, znajduje się w wyeksportowanym dzienniku</strong>: wpis o tym numerze musi posiadać dokładnie
+ten sam skrót. Główka, która nie pasuje, powoduje niepowodzenie weryfikacji — dziennik został zmieniony po
+tym, jak świadek go obejrzał. Zgłasza również główki zaobserwowane po eksporcie, anomalie zarejestrowane przez świadka,
+nieudane odpowiedzi, okresy, które świadek obserwował bez przerwy („Obserwowano
+od X do Y”) oraz luki. Liczą się wyłącznie odpowiedzi podpisane kluczem należącym do danego eksportu: eksport podpisany
+kluczem, którego świadek nigdy nie widział, jest zgłaszany jako niepotwierdzony, a bez <code>--fingerprint</code> jego
+podpisujący pozostaje nieprzypisany. W przypadku <code>--channel</code> każdy podpisany wpis musi być zgodny z dziennikiem świadka
+wpis po wpisie: zmienione wpisy nie przechodzą weryfikacji, a brakujące wpisy są wymienione. Daty
+wpisów na kanale pochodzą z serwisu Telegram, który stanowi niezależny zegar.</p>
+<p>Świadectwo pokazuje, co rejestrator zgłosił w danym momencie, oraz że późniejsze eksporty są z tym zgodne.
+Nie pokazuje ono, że rejestrator zarejestrował wszystko, co dostarczył Telegram, ani
+że treść wiadomości jest prawdziwa. Świadectwo wygenerowane przez tego samego operatora na tym samym urządzeniu ma
+mniejszą wagę niż świadectwo wygenerowane przez inną osobę.</p>
+<p>Sam wzrost liczby wpisów nie wystarcza do ustalenia ciągłości danych w trybie „tylko dodawania” w sieci: porównanie w trybie offline
+musi polegać na zestawieniu każdego zachowanego skrótu prefiksu z pełnym eksportem z kolektora.
+Przerwy w działaniu serwisu Witness oraz nieudane publikacje powodują powstanie przedziałów czasowych bez zewnętrznych punktów odniesienia. Brakujące
+wpisy można zgłaszać na podstawie zachowanego dziennika Witness; ani kanał, ani serwer
+kontrolowany przez tego samego operatora nie stanowią niezmiennego archiwum strony trzeciej.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/WITNESS.md">Edytuj tę stronę na GitHubie ↗</a><a class="next-guide" href="../timestamp/"><span>Kolejny krok</span><strong>Sygnatury czasowe →</strong></a><p>Niniejsze wytyczne opisują aktualną implementację. Wyniki walidacji oraz pozostałe luki zostały udokumentowane oddzielnie. <a href="../verification/">Co zostało przetestowane →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Na tej stronie"><p class="nav-label">Na tej stronie</p><a href="#what-the-witness-gets-and-what-it-does-not">Co oferuje TgWitness, a czego nie zapewnia</a><a href="#what-it-checks-and-records">Co narzędzie sprawdza i rejestruje</a><a href="#run-a-witness">Uruchom program Witness</a><a href="#verify">Zweryfikuj</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Oprogramowanie typu open source · Działa na Państwa komputerze</span><a href="../../../../LICENSE">Licencja MIT</a><a href="../notice/">Informacja dla operatorów</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Bezpieczeństwo</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Oczekiwanie na wiadomość", "Step through a fictional send, edit and delete.": "Prześledź krok po kroku fikcyjny proces wysłania, edycji i usunięcia wiadomości.", "No observations yet. Start the sequence or advance one event.": "Brak dotychczasowych uwag. Rozpocznij sekwencję lub przejdź do następnego zdarzenia.", "Meet at 10:00": "Spotkanie o godz. 10:00", "A new message is visible in the chat.": "Na czacie widoczna jest nowa wiadomość.", "Record 1 appended: the collector observed the original message.": "Dodano wpis nr 1: moduł zbierający odnotował oryginalną wiadomość.", "Meet at 11:00": "Spotkanie o godz. 11:00", "The current text changes. The earlier observation stays.": "Obecny tekst ulega zmianie. Wcześniejsza uwaga pozostaje bez zmian.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Dodano wpis nr 2: edycja stanowi nową obserwację. Wpis nr 1 nadal zawiera tekst oryginalny.", "Message deleted": "Wiadomość usunięta", "The message has disappeared from the chat view.": "Wiadomość zniknęła z widoku czatu.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Załączono zapis nr 3: powiadomienie o usunięciu jest zachowywane wraz z obiema zaobserwowanymi wersjami.", "0 records": "0 wpisów", "1 record": "1 wpis", "2 records": "2 wpisy", "3 records": "3 wpisy", "Complete / {n} of 3": "Całość / {n} z 3", "Step / {n} of 3": "Krok / {n} z 3", "Pause": "Pauza", "Replay sequence": "Sekwencja odtwarzania", "Play sequence": "Sekwencja odtwarzania", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Dostępny jest statyczny przykład. Aby obliczać skróty w trybie interaktywnym, proszę otworzyć tę stronę za pośrednictwem protokołu HTTPS lub w podglądzie na lokalnym serwerze z obsługą Web Crypto.", "No record supplied": "Brak dostarczonego zapisu", "Tail removed": "Usunięto końcówkę", "≠ saved hash": "≠ zapisany skrót", "Rebuilt · different hash": "Przebudowana wersja · inny skrót", "= saved hash": "= zapisany skrót", "Same length and matching head.": "Ta sama długość i dopasowany nagłówek.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Wszystkie trzy obliczone skróty są zgodne z zapisanymi skrótami. Niniejszy przykład jest zgodny z zachowanym ograniczeniem do trzech rekordów.", "Same saved head; the journal prefix fails verification.": "Ten sam zapisany nagłówek; prefiks dziennika nie przeszedł weryfikacji.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Rekord nr 2 nie jest już zgodny ze swoim zapisanym skrótem. Sprawdzanie wyłącznie końcowego, zapisanego nagłówka nie pozwoliłoby tego wykryć; weryfikator sprawdza każdy rekord.", "Head differs from the retained checkpoint.": "Nagłówek różni się od zachowanego punktu kontrolnego.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Odbudowane skróty są ze sobą powiązane, ale ostatni nagłówek uległ zmianie. Zachowany punkt kontrolny odrzuca tę historię. Oryginalne podpisy również nie zostałyby uznane w przypadku zmienionych wpisów.", "Too short: 2 supplied records \u003c 3 retained records.": "Zbyt krótki: 2 dostarczone zapisy \u003c 3 zachowane zapisy.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Dwa pozostałe skróty nadal są zgodne. Zachowany punkt kontrolny ujawnia brakujący fragment. Bez tej wcześniejszej granicy sam ten krótszy prefiks nie ujawniłby pominięcia.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "W tej przeglądarce nie jest dostępna funkcja obliczania skrótu. Poniższe wzory i statyczne objaśnienia pozostają dostępne.", "{n} records": "{n} wpisów", "head {hash}": "nagłówek {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Zatwierdzono: liczba wzrasta, podpis został zweryfikowany, a klucz jest zgodny. Świadek zachowuje tę nową granicę.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Cofnięcie: podpisana odpowiedź zawiera mniej rekordów niż ostatni zaakceptowany punkt kontrolny. System TgWitness rejestruje problem i zachowuje wcześniej zaakceptowany zakres danych.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Rozgałęzienie: liczba pozostaje niezmieniona, ale gałąź główna jest inna. Świadek odnotowuje rozbieżność i zachowuje wcześniej zaakceptowaną granicę.", "No answer": "Brak odpowiedzi", "boundary unknown": "granica nieznana", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Brak odpowiedzi: narzędzie TgWitness rejestruje nieudaną weryfikację. Nie jest w stanie określić aktualnego stanu kolektora. Jeśli narzędzie TgWitness nadal ma dostęp do interfejsu API bota, a jego polityka publikacji na to pozwala, może opublikować informację o tej niepowodzeniu.", "Send {n}": "Wyślij {n}", "Edit {n}": "Edytuj {n}", "Delete {n}": "Usuń {n}", "Both accounts captured all six expected observations in this example.": "W tym przykładzie oba opisy uwzględniły wszystkie sześć oczekiwanych obserwacji.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Konto B nadal zarejestrowało 6 z 6 wiadomości. W przypadku dwóch potwierdzeń zajęło to więcej czasu. Wskaźnik przechwycenia i opóźnienie w otrzymaniu potwierdzenia odpowiadają na różne pytania.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Konto B zarejestrowało 5 z 6 zdarzeń przed upływem terminu (83,3%). Brakująca edycja nie wykazuje żadnego zmierzonego opóźnienia. Wynik ten odnosi się wyłącznie do sześciu kontrolowanych działań.", "not observed by cutoff": "nie spełniono wymogu przed upływem terminu", "{s} seconds": "{s} sekund", "Exact values follow in the table.": "Dokładne wartości podano w tabeli.", "{s} s": "{s} s", "Not observed": "Nie zaobserwowano", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Cztery czaty zawierają różne spostrzeżenia. Należy śledzić zapisy źródłowe dla każdego połączenia; nie należy przypisywać wpisu na kanale do użytkownika 71001 bez podania nadawcy.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Zapisy nr 146 i nr 205 zawierają ten sam identyfikator nadawcy: 71001. Pozwala to powiązać zaobserwowane posty z konta Telegram w dwóch różnych czatach. Nie pozwala to jednak na identyfikację konkretnej osoby w świecie rzeczywistym ani na przypisanie autorstwa postu opublikowanego na kanale.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Adres docelowy pay.example.invalid/new pojawia się w zapisie grupy nr 146, wpisie z klawiatury bota nr 173, edycji kanału nr 188 oraz prywatnej wiadomości nr 205. Powtarzający się adres docelowy łączy te materiały; nie dowodzi to jednak wspólnej kontroli nad tymi kontami.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "W tej fikcyjnej sprawie potwierdzenia odbioru multimediów nr 151 i nr 209 mają identyczne pełne wartości SHA-256. Proszę porównać rzeczywiste bajty oraz powiązane z nimi zapisy wiadomości. Zgodny plik nie pozwala zidentyfikować jego twórcy ani ustalić, kto go przesłał.", "the encrypted off-site copy": "zaszyfrowana kopia przechowywana poza serwerem", "notifications": "powiadomienia", "checkpoint hashes for timestamps": "Skróty kontrolne jako znaczniki czasu", "signed checkpoints for the witness": "podpisane punkty kontrolne dla serwisu Witness", "Switched on in this example": "W tym przykładzie włączono tę opcję", "Optional · off by default": "Opcjonalne · domyślnie wyłączone", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Opuszczając to urządzenie: połączenie z Telegramem oraz {list}. Nic więcej.", "Default: only the Telegram connection leaves this machine.": "Ustawienie domyślne: z tego urządzenia wychodzi wyłącznie połączenie z serwisem Telegram.", "{done} of {total} done": "{done} z {total} wykonano", "Mark step {n} as done": "Oznacz krok {n} jako wykonany", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Kopia", "Copied": "Skopiowano", "Command copied.": "Polecenie skopiowano.", "Selected — Ctrl/Cmd+C": "Zaznaczone — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Wybrano polecenie. Proszę skopiować je ręcznie.", "Command copied to clipboard.": "Polecenie skopiowano do schowka.", "Select text": "Zaznacz tekst", "Clipboard unavailable. Command selected; copy it manually.": "Schowek jest niedostępny. Wybrano polecenie; proszę skopiować je ręcznie.", "A message arrives. The first observation is saved.": "Przychodzi wiadomość. Pierwsza obserwacja zostaje zapisana.", "The time changes. Both captured versions stay.": "Czas ulega zmianie. Obie zarejestrowane wersje pozostają zachowane.", "The message disappears. The captured history remains.": "Wiadomość znika. Zachowana historia pozostaje.", "Pause example animation": "Przykładowa animacja z pauzą", "Play example animation": "Odtwórz przykładową animację", "Play": "Odtwórz", "Full-size workspace screenshot": "Zrzut ekranu przedstawiający obszar roboczy w pełnym rozmiarze", "Workspace screenshot · fictional data": "Zrzut ekranu z obszaru roboczego · dane fikcyjne", "Close": "Zamknij", "Close screenshot": "Zamknij zrzut ekranu", "Scrollable full-size screenshot": "Przewijalny zrzut ekranu w pełnym rozmiarze", "Enlarge: {name}": "Powiększ: {name}", "View full size": "Wyświetl w pełnym rozmiarze"}</script>
+</body></html>

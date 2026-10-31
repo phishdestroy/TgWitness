@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="de" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Konten und Sitzungsformate | TgWitness</title>
+<meta name="description" content="Melden Sie sich per Telefon, QR-Code oder Authentifizierungsschlüssel an, importieren Sie Sitzungen aus Telethon, Pyrogram oder Telegram Desktop und verwalten Sie mehrere Konten."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/accounts/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="de_DE">
+<meta property="og:title" content="Konten und Sitzungsformate | TgWitness"><meta property="og:description" content="Melden Sie sich per Telefon, QR-Code oder Authentifizierungsschlüssel an, importieren Sie Sitzungen aus Telethon, Pyrogram oder Telegram Desktop und verwalten Sie mehrere Konten.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/de/docs/reference/accounts/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/accounts/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/accounts/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/accounts/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/accounts/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/accounts/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/accounts/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/accounts/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/accounts/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/accounts/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/accounts/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/accounts/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/accounts/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/accounts/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/accounts/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/accounts/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/accounts/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/accounts/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/accounts/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/accounts/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/accounts/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/accounts/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/accounts/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/de/docs/reference/accounts/", "url": "https://phishdestroy.github.io/TgWitness/de/docs/reference/accounts/", "name": "Konten und Sitzungsformate | TgWitness", "description": "Melden Sie sich per Telefon, QR-Code oder Authentifizierungsschlüssel an, importieren Sie Sitzungen aus Telethon, Pyrogram oder Telegram Desktop und verwalten Sie mehrere Konten.", "inLanguage": "de", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://phishdestroy.github.io/TgWitness/de/"}, {"@type": "ListItem", "position": 2, "name": "Dokumentation", "item": "https://phishdestroy.github.io/TgWitness/de/docs/"}, {"@type": "ListItem", "position": 3, "name": "Referenz", "item": "https://phishdestroy.github.io/TgWitness/de/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Konten und Sitzungsformate", "item": "https://phishdestroy.github.io/TgWitness/de/docs/reference/accounts/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Dokumentation</span></a>
+<nav aria-label="Anleitungen"><a href="../../concepts/">Visuelle Anleitung</a><a href="../../">Alle Anleitungen</a><a href="../">Referenz</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Sprache"><span aria-hidden="true">◍</span> Deutsch</summary><div class="lang-list"><a href="../../../../docs/reference/accounts/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/accounts/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/accounts/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/accounts/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/accounts/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/accounts/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/accounts/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/accounts/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/accounts/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/accounts/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/accounts/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/accounts/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/accounts/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/accounts/" hreflang="fr" lang="fr">Français</a><a href="./" hreflang="de" lang="de" aria-current="true">Deutsch</a><a href="../../../../it/docs/reference/accounts/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/accounts/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/accounts/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/accounts/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/accounts/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/accounts/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/accounts/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/accounts/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/accounts/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/accounts/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Zwischen hellem und dunklem Design wechseln"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Anleitungen"><a href="../../../guides/modes.html">Modi, Szenarien und Evidenzstufen</a><p class="nav-label">Erste Schritte</p><a href="../../start/">In wenigen Minuten loslegen</a><a href="../../accounts/">Ein Konto verbinden</a><a href="../../proxies/">Wählen Sie einen Proxy</a><a href="../../exports/">Exportieren und verifizieren</a><p class="nav-label">Die Beweismittel verstehen</p><a href="../../concepts/">Erfahren Sie, wie die Beweissicherung funktioniert</a><a href="../../cases/">Untersuchungen über alle Chats hinweg</a><a href="../../security/">Sorgen Sie für Sicherheit</a><p class="nav-label">Weiterlesen</p><a href="../../witness/">Einen Witness-Bot einrichten</a><a href="../../server/">Halten Sie den Betrieb aufrecht</a><a href="../../troubleshooting/">Finden Sie heraus, was schiefgelaufen ist</a></nav><nav class="wiki-nav" aria-label="Referenz"><p class="nav-label"><a class="nav-label-link" href="../">Referenz</a></p><details class="wiki-group" open><summary>Einrichtung</summary><a href="../quickstart/">Schnellstart</a><a href="./" aria-current="page">Konten und Sitzungsformate</a><a href="../connection/">Verbindung, Proxys und Datenschutz</a><a href="../deployment/">Bereitstellung</a></details><details class="wiki-group"><summary>Sammeln</summary><a href="../collection/">So funktioniert die Datenerfassung</a><a href="../operations/">Arbeitsabläufe und Funktionen</a><a href="../investigation/">Untersuchungsmodus</a><a href="../features/">Funktionen und Einschränkungen</a></details><details class="wiki-group"><summary>Beweismaterial</summary><a href="../how-it-works/">So funktioniert das Beweismaterial</a><a href="../evidence/">Format der Beweismittel</a><a href="../witness/">Unabhängiger Zeuge</a><a href="../timestamp/">Zeitstempel</a></details><details class="wiki-group"><summary>Sicherheit & Projekt</summary><a href="../security/">Sicherheit und Datenumgang</a><a href="../architecture/">Architektur</a><a href="../verification/">Was wurde getestet?</a><a href="../license/">Hinweis zur Lizenz und zur architektonischen Inkompatibilität</a><a href="../notice/">Hinweis zur Inkompatibilität mit bestimmten Betreibern</a><a href="../changelog/">Änderungsprotokoll</a></details></nav><p class="sidebar-note">v0.7.0<br>Open Source · Läuft auf Ihrem Rechner</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Anleitungen"><a href="../../../">Startseite</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentation</a> <span aria-hidden="true">/</span> <a href="../">Referenz</a> <span aria-hidden="true">/</span> <span aria-current="page">Konten und Sitzungsformate</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Durchsuchen Sie die Dokumentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Versuchen Sie es mit „Proxy“, „Hash-Kette“, „Token“ oder „Witness“ …" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Klare Suche" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Geben Sie ein Wort ein, um die Anleitungen und das Nachschlagewerk zu durchsuchen. Die Suche erfolgt in Ihrem Browser.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Referenz / Einrichtung</p><h1>Konten und Sitzungsformate</h1><p class="guide-outcome">Melden Sie sich per Telefon, QR-Code oder Authentifizierungsschlüssel an, importieren Sie Sitzungen aus Telethon, Pyrogram oder Telegram Desktop und verwalten Sie mehrere Konten.</p><div class="wiki-body"><p>TgWitness meldet sich über MTProto als <strong>Telegram-Benutzerkonto</strong> (nicht als Bot) an und nutzt dabei
+Telethon. Jedes Konto befindet sich in einem eigenen <strong>Arbeitsbereich</strong> (in der
+API und den Befehlszeilentools als <em>„Workspace“</em> bezeichnet) mit eigener Sitzung, eigenen Quellen, eigenem Protokoll und eigenem Signaturschlüssel.</p>
+<p>Sitzungsdateien, Sitzungsstrings und Auth-Keys sind <strong>Kontoautorisierungen</strong>: Wer auch immer
+im Besitz einer solchen ist, kann im Namen dieses Kontos handeln. Sie enthalten keinen Nachrichtenverlauf.</p>
+<blockquote class="callout">
+<p>[!WARNUNG]
+<strong>Verwenden Sie nichts, dessen Verlust Sie sich nicht leisten können.</strong> Wir raten dringend davon ab,
+persönliche oder anderweitig wertvolle Konten zu verknüpfen sowie eine API-ID bzw. einen API-Hash für ein
+Konto zu erstellen, das Ihnen wichtig ist. Dabei geht es nicht darum, dass TgWitness ungetestet ist: Telegram schränkt Konten ein und
+sperrt sie unvorhersehbar dauerhaft – bei Anfragevolumina, die es als
+übermäßig erachtet, unabhängig vom Client oder Zweck und ohne angemessene Dokumentation. Viele Sperren
+sind irreversibel. Verwenden Sie dafür eigens eingerichtete Konten. Reibungslose Testläufe hängen von Telegram ab, nicht von der
+Software, und bieten keinerlei Garantie für die Zukunft.</p>
+</blockquote>
+<ul>
+<li><a href="#at-a-glance">Auf einen Blick</a></li>
+<li><a href="#before-you-start-api-id-and-api-hash">Bevor Sie beginnen: API-ID und API-Hash</a></li>
+<li><a href="#phone-number">Telefonnummer</a> · <a href="#qr-code">QR-Code</a> · <a href="#auth-key--dc-id">Authentifizierungsschlüssel + DC-ID</a></li>
+<li><a href="#account-files">Kontodateien</a>: <a href="#telethon-session">Telethon .session</a> ·
+    <a href="#pyrogram-session">Pyrogram .session</a> · <a href="#session--json-pair">Paar aus Sitzung und JSON</a> ·
+    <a href="#telegram-desktop-tdata">TData</a> · <a href="#telethon-stringsession">StringSession</a> ·
+    <a href="#account-json">JSON-Datei für das Konto</a></li>
+<li><a href="#identify-what-you-have">Ermitteln Sie, was Ihnen vorliegt</a> · <a href="#unsupported-formats">Nicht unterstützte Formate</a></li>
+<li><a href="#multiple-accounts">Mehrere Konten</a> · <a href="#keeping-account-files-safe">Sichere Aufbewahrung von Kontodateien</a> ·
+    <a href="#troubleshooting">Fehlerbehebung</a></li>
+</ul>
+<h2 id="at-a-glance">Auf einen Blick<a class="anchor" href="#at-a-glance" aria-label="Link zu diesem Abschnitt">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Was Sie haben</th>
+<th>Registerkarte <strong>„Konto hinzufügen“</strong></th>
+<th>Außerdem benötigen Sie</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Die Telefonnummer und der Zugriff auf die Anmeldedaten</td>
+<td><strong>Telefon</strong></td>
+<td>2FA-Passwort, sofern aktiviert</td>
+</tr>
+<tr>
+<td>Telegram auf einem anderen Gerät geöffnet</td>
+<td><strong>QR-Code</strong></td>
+<td>2FA-Passwort, sofern aktiviert</td>
+</tr>
+<tr>
+<td>Eine <code>.session</code>-Datei (Telethon oder Pyrogram)</td>
+<td><strong>Dateien</strong></td>
+<td>Optionales begleitendes JSON-Dokument für App-Einstellungen</td>
+</tr>
+<tr>
+<td><code>.session</code> + <code>.json</code> mit demselben Namen</td>
+<td><strong>Dateien</strong> (bitte beide auswählen)</td>
+<td>In der Regel nichts weiter</td>
+</tr>
+<tr>
+<td>Ein „<code>tdata</code>“-Ordner in Telegram Desktop</td>
+<td><strong>Dateien</strong> (als ZIP)</td>
+<td>Der lokale Desktop-Zugangscode, sofern einer festgelegt wurde</td>
+</tr>
+<tr>
+<td>Eine Telethon-StringSession (Text, <code>.txt</code>, <code>.tgwitness-session</code>)</td>
+<td><strong>Dateien</strong></td>
+<td>Es ist kein separates API-Paar erforderlich</td>
+</tr>
+<tr>
+<td>Ein „<code>.json</code>“ mit einer Sitzung oder einem Authentifizierungsschlüssel</td>
+<td><strong>Dateien</strong></td>
+<td>Es ist kein separates API-Paar erforderlich</td>
+</tr>
+<tr>
+<td>Ein Auth-Schlüssel (512 Hexadezimalzeichen) und dessen DC-Nummer</td>
+<td><strong>Authentifizierungsschlüssel</strong></td>
+<td>Optionale Benutzer-ID</td>
+</tr>
+</tbody>
+</table></div>
+<p>TgWitness erkennt Dateien anhand ihres <strong>Inhalts</strong>, nicht anhand ihrer Namen. Das Umbenennen einer Datei
+führt niemals zu einer Konvertierung.</p>
+<h2 id="before-you-start-api-id-and-api-hash">Bevor Sie beginnen: API-ID und API-Hash<a class="anchor" href="#before-you-start-api-id-and-api-hash" aria-label="Link zu diesem Abschnitt">#</a></h2>
+<p>Sie können sich anmelden, ohne eine Telegram-API-Anwendung zu erstellen. Wenn kein Schlüsselpaar eingegeben,
+importiert oder bereits im Arbeitsbereich gespeichert ist, wählt TgWitness ein Schlüsselpaar aus seinem integrierten Pool von
+50 öffentlichen API-Schlüsselpaaren (<code>tgwitness/api_pool.py</code>) in zufälliger Reihenfolge aus. Wenn Telegram ein Paar ablehnt
+(<code>API_ID_INVALID</code>, <code>API_ID_PUBLISHED_FLOOD</code>, <code>UPDATE_APP_TO_LOGIN</code>), wird das nächste versucht,
+bis zu acht pro Anmeldung; abgelehnte Paare werden bis zum Neustart übersprungen. Das Paar, mit dem die Anmeldung erfolgte, wird
+zusammen mit dem Konto gespeichert und für dieses wiederverwendet. Eine <strong>API-ID</strong> und <strong>ein API-Hash</strong> identifizieren die Anwendung gegenüber Telegram; sie
+autorisieren ein Konto jedoch nicht eigenständig.</p>
+<p>Um stattdessen Ihre eigene Anwendung zu verwenden (das Konto, unter dem diese registriert ist, ist dem Risiko ausgesetzt; siehe
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/PROJECT-GUIDE.md#connect-a-telegram-account">„Warum ein integrierter API-Pool?</a>“):</p>
+<ol>
+<li>Öffnen Sie <a href="https://my.telegram.org">my.telegram.org</a> und melden Sie sich mit einer beliebigen Telefonnummer an,
+    die Ihnen gehört. Der Code wird in der Telegram-App angezeigt, nicht per SMS.</li>
+<li>Wählen Sie <strong>API-Entwicklungstools</strong> aus.</li>
+<li>Erstellen Sie eine Anwendung: beliebiger Titel und Kurzname (5–32 Zeichen), Plattform <strong>„Desktop</strong>“.
+    URL und Beschreibung können leer bleiben.</li>
+<li>Kopieren Sie <strong>die App-API-ID</strong> (eine Zahl) und <strong>den App-API-Hash</strong> (32 hexadezimale Zeichen).</li>
+</ol>
+<p>Im Bedienfeld finden Sie die Felder <strong>„API-ID“ und „Hash“</strong> unterhalb des Anmeldeformulars. Sie können ein einzelnes
+„<code>api_id:api_hash</code>“-Paar in <strong>das Feld „API-ID“</strong> einfügen, woraufhin beide Felder automatisch ausgefüllt werden. Ein einziges Paar kann
+für alle Ihre Konten verwendet werden. Nach erfolgreicher Anmeldung wird es verschlüsselt ausschließlich in
+diesem Arbeitsbereich gespeichert und niemals an den Browser zurückgesendet.</p>
+<p>Es sind drei verschiedene Zugangsdaten beteiligt:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Geheim</th>
+<th>Öffnet</th>
+<th>Verfügbarkeit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Panel-Token</td>
+<td>Das TgWitness-Webpanel</td>
+<td><code>panel-token.txt</code> im Datenverzeichnis oder <code>TGWITNESS_TOKEN</code></td>
+</tr>
+<tr>
+<td>API-ID + Hash</td>
+<td>Für sich genommen nichts Besonderes; identifiziert die App</td>
+<td>Integriertes Paar, importierte Einstellungen oder Ihre eigene App unter my.telegram.org</td>
+</tr>
+<tr>
+<td>Kontoautorisierung</td>
+<td>Der Telegram-Account</td>
+<td>Erstellt per Telefon-/QR-Anmeldung oder als Sitzung importiert</td>
+</tr>
+</tbody>
+</table></div>
+<p>Falls Telegram über einen Proxy erreicht werden muss, nehmen Sie die entsprechenden
+<strong>Einstellungen</strong> zunächst unter
+<strong>„Konto“ → „Einstellungen“ → „Verbindungseinstellungen“ → „Verbindungsroute ändern“</strong> vor.</p>
+<h2 id="phone-number">Telefonnummer<a class="anchor" href="#phone-number" aria-label="Link zu diesem Abschnitt">#</a></h2>
+<ol>
+<li>Eröffnen Sie <strong>ein Konto</strong>, wechseln Sie zur Registerkarte <strong>„Telefon“</strong> und geben Sie die Nummer im internationalen Format ein,
+    beispielsweise <code>+44 7700 900123</code>. Leerzeichen und Bindestriche werden automatisch entfernt.</li>
+<li>Klicken Sie auf <strong>„Weiter</strong>“. Die Felder „API-ID“ und „Hash“ können leer bleiben.</li>
+<li>Geben Sie den Code ein, den Telegram versendet (in der Regel an die Telegram-App; der Empfang per SMS kann nicht garantiert werden).</li>
+<li>Falls für das Konto eine zweistufige Verifizierung eingerichtet ist, geben Sie dieses Passwort ein. Es handelt sich dabei nicht um das Panel-Token
+    und auch nicht um einen Gerätezugangscode.</li>
+<li>Überprüfen Sie die nach der Anmeldung angezeigte Konto-ID und wählen Sie anschließend die Quellen aus.</li>
+</ol>
+<p>Anmeldedaten und das 2FA-Passwort werden niemals auf die Festplatte geschrieben.</p>
+<h2 id="qr-code">QR-Code<a class="anchor" href="#qr-code" aria-label="Link zu diesem Abschnitt">#</a></h2>
+<p>Verwenden Sie diese Option, wenn das Konto bereits auf einem Smartphone oder einem anderen Computer angemeldet ist.</p>
+<ol>
+<li>Registerkarte <strong>„QR-Code“</strong> → <strong>QR-Code anzeigen</strong>. API-ID + Hash können leer bleiben.</li>
+<li>Auf dem angemeldeten Gerät: <strong>Einstellungen → Geräte → Desktop-Gerät verknüpfen</strong>, den Code scannen
+    und bestätigen.</li>
+<li>Geben Sie das 2FA-Passwort in TgWitness ein, falls Telegram Sie dazu auffordert.</li>
+</ol>
+<p>Das QR-Bild wird lokal generiert. Codes verfallen; klicken Sie auf <strong>„Einen weiteren QR-Code generieren“,</strong>
+um es erneut zu versuchen. Das Sperren des Fensters, das Wechseln des Arbeitsbereichs oder das Starten einer weiteren Anmeldung bricht
+einen ausstehenden Code ab.</p>
+<h2 id="auth-key--dc-id">Authentifizierungsschlüssel + DC-ID<a class="anchor" href="#auth-key--dc-id" aria-label="Link zu diesem Abschnitt">#</a></h2>
+<p>Ein Auth-Key ist der 256-Byte-Autorisierungsschlüssel, der jeder Telegram-Sitzung zugrunde liegt und
+als <strong>512 hexadezimale Zeichen</strong> zusammen mit der Rechenzentrumsnummer <strong>DC 1–5</strong> geschrieben wird.</p>
+<ol>
+<li>Registerkarte <strong>„Auth-Schlüssel</strong>“. Fügen Sie den vollständigen Schlüssel ein; ein verkürzter Schlüssel, der „<code>…</code>“ enthält, funktioniert nicht.</li>
+<li>Wählen Sie die mit dem Schlüssel bereitgestellte DC-ID aus.</li>
+<li>Geben Sie optional die <strong>Benutzer-ID</strong> ein. TgWitness lehnt die Verbindung dann ab, falls Telegram
+    ein anderes Konto meldet.</li>
+<li>Press <strong>Connect-Konto</strong>.</li>
+</ol>
+<p>Ein Auth-Schlüssel (512 Zeichen) ist kein API-Hash (32 Zeichen). Derselbe Schlüssel kann auch
+als JSON importiert werden, siehe <a href="#account-json">Account-JSON</a>.</p>
+<h2 id="account-files">Kontodateien<a class="anchor" href="#account-files" aria-label="Link zu diesem Abschnitt">#</a></h2>
+<p>Öffnen Sie <strong>„Konto hinzufügen“ → „Dateien“</strong> und wählen Sie bis zu <strong>vier Dateien</strong> aus, <strong>die zu einem Konto gehören</strong> (insgesamt
+<strong>8 MiB</strong>), und klicken Sie anschließend auf <strong>„Konto verbinden</strong>“.</p>
+<ul>
+<li>Die Dateien werden <strong>im Arbeitsspeicher</strong> Ihres TgWitness-Servers konvertiert. Hochgeladene Dateien werden nicht gespeichert,
+    ZIP-Dateien werden nicht auf die Festplatte entpackt und es wird kein externer Dienst kontaktiert.</li>
+<li>Die daraus resultierende Sitzung wird anschließend mit Telegram abgeglichen. Wenn eine Datei eine Benutzer-ID enthält,
+    muss diese mit dem von Telegram gemeldeten Konto übereinstimmen.</li>
+<li>Dateien, die verschiedene Konten oder unterschiedliche API-Zugangsdaten beschreiben, werden abgelehnt,
+anstatt sich für eine Option zu entscheiden.</li>
+<li><strong>Das Feld „Passcode“ oder „Session Text“</strong> enthält das lokale TData-Passcode-Feld, ein Feld zum Einfügen
+    einer „StringSession“ sowie <strong>zum Einlesen von Dateien ohne Anmeldung</strong> (das Formular wird ausgefüllt, ohne
+    Telegram zu kontaktieren).</li>
+</ul>
+<h3 id="telethon-session">Telethon <code>.session</code><a class="anchor" href="#telethon-session" aria-label="Link zu diesem Abschnitt">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Was ist das?</td>
+<td>Die SQLite-Datenbank, die von Telethon-basierten Tools erstellt wird, zum Beispiel <code>my_account.session</code></td>
+</tr>
+<tr>
+<td>Anerkannt von</td>
+<td>Tabellen <code>sessions</code> (zusammen mit <code>dc_id</code>, <code>server_address</code>, <code>port</code>, <code>auth_key</code>) und <code>version</code> = 7 oder 8</td>
+</tr>
+<tr>
+<td>Anforderungen</td>
+<td>Genau eine Zeile mit autorisierten Sitzungen; eine geschlossene, vollständige Datenbank</td>
+</tr>
+</tbody>
+</table></div>
+<p>Schließen Sie zunächst das Programm, das die Datei erstellt hat. Falls <code>my_account.session-journal</code> oder
+<code>my_account.session-wal</code> daneben vorhanden sind, ist die Datenbank noch nicht abgeschlossen: Öffnen und
+schließen Sie den ursprünglichen Client ordnungsgemäß. Das Löschen dieser Sidecar-Dateien kann zu einer beschädigten Kopie führen.</p>
+<h3 id="pyrogram-session">Pyrogram <code>.session</code><a class="anchor" href="#pyrogram-session" aria-label="Link zu diesem Abschnitt">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Was ist das?</td>
+<td>Die SQLite-Datenbank, die von Pyrogram-basierten Tools erstellt wird</td>
+</tr>
+<tr>
+<td>Anerkannt von</td>
+<td>Tabelle <code>sessions</code> mit <code>dc_id</code>, <code>auth_key</code>, <code>test_mode</code>, <code>user_id</code>, <code>is_bot</code>; <code>version</code> = 2 oder 3</td>
+</tr>
+<tr>
+<td>Anforderungen</td>
+<td>Eine autorisierte Benutzersitzung im Produktionsnetzwerk. Bot- und Test-DC-Sitzungen werden abgelehnt.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Die gespeicherte Benutzer-ID wird bei der Anmeldung mit den Daten von Telegram abgeglichen.</p>
+<h3 id="session--json-pair">Paar aus Sitzung und JSON<a class="anchor" href="#session--json-pair" aria-label="Link zu diesem Abschnitt">#</a></h3>
+<p>Die Datensätze werden häufig als zwei Dateien mit demselben Namen bereitgestellt, beispielsweise „
+<code>447700900123.session</code>“ und „<code>447700900123.json</code>“. Wählen Sie <strong>beide</strong> gleichzeitig aus.</p>
+<ul>
+<li>Ausgehend vom JSON verwendet TgWitness <code>app_id</code>/<code>api_id</code> und <code>app_hash</code>/<code>api_hash</code>, sodass Sie
+    in der Regel keine API-Anmeldedaten eingeben müssen.</li>
+<li>Andere Felder wie <code>phone</code>, <code>device</code>, <code>sdk</code>, <code>app_version</code>, <code>lang_pack</code> oder ein gespeichertes
+    <code>twoFA</code>-Passwort werden <strong>ignoriert</strong>. Wenn für das Konto eine 2FA aktiviert ist, fordert TgWitness diese an.</li>
+<li>Eine JSON-Datei allein enthält lediglich Metadaten. Ohne die Sitzungsdatei fahren Sie bitte mit der Anmeldung per Telefon
+    oder QR-Code fort.</li>
+</ul>
+<h3 id="telegram-desktop-tdata">Telegram Desktop (TData)<a class="anchor" href="#telegram-desktop-tdata" aria-label="Link zu diesem Abschnitt">#</a></h3>
+<p>TData ist der Ordner „<code>tdata</code>“ der Telegram-Desktop-Anwendung (die plattformübergreifende
+App von desktop.telegram.org).</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>System</th>
+<th>Standardstandort „<code>tdata</code>“</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td><code>%APPDATA%\Telegram Desktop\tdata</code> (portables Telegram: neben <code>Telegram.exe</code>)</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td><code>~/.local/share/TelegramDesktop/tdata</code></td>
+</tr>
+<tr>
+<td>macOS</td>
+<td><code>~/Library/Application Support/Telegram Desktop/tdata</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>So importieren Sie es:</p>
+<blockquote class="callout">
+<p><strong>Warnung bezüglich paralleler Sitzungen.</strong> Beim Import von TData wird der Autorisierungsschlüssel von Telegram Desktop
+wiederverwendet; es wird kein eigenständiger Login erstellt. Verwenden Sie diesen Schlüssel nicht gleichzeitig in Desktop und
+TgWitness. Telegram kann die Autorisierung mit
+„<code>AUTH_KEY_DUPLICATED</code>“ ungültig machen, wodurch beide Instanzen bis zu einem neuen Login unbrauchbar werden.</p>
+<p>Beenden Sie „Desktop“ vollständig, einschließlich des Prozesses in der Taskleiste, und lassen Sie diese Instanz geschlossen, während
+TgWitness die importierte Sitzung nutzt. <strong>Beenden Sie die Anwendung, melden Sie sich nicht ab und widerrufen Sie die Sitzung nicht:</strong>
+Ein Widerruf macht auch die importierte Kopie ungültig. Falls Sie beide Clients gleichzeitig ausführen müssen,
+melden Sie sich per Telefon oder QR-Code bei TgWitness an, um eine eigene Autorisierung zu erstellen. Ein eigenes
+Konto wird empfohlen, gewährleistet jedoch nicht, dass geklonte Schlüssel sicher parallel verwendet werden können.</p>
+<p>Dies gilt auch für importierte <code>.session</code>-Dateien, StringSession-Text und Auth-Key-HEX-Daten.
+Andere Clients mit eigenen, unabhängig erstellten Autorisierungen können angemeldet bleiben.
+Siehe <a href="https://core.telegram.org/api/errors#406-not-acceptable">die Dokumentation zu „AUTH_KEY_DUPLICATED“ von Telegram</a>.</p>
+</blockquote>
+<ol>
+<li>Beenden Sie Telegram Desktop vollständig.</li>
+<li>
+<p>Erstellen Sie eine ZIP-Datei, die <strong>ausschließlich</strong> diese beiden Elemente aus <code>tdata</code> enthält:</p>
+<ul>
+<li><code>key_datas</code></li>
+<li>die 16-stellige Dateiendung „<code>s</code>“ daneben, in der Regel „<code>D877F783D5D3EF8Cs</code>“</li>
+</ul>
+<p>Das Komprimieren des gesamten Ordners einschließlich seines Medien-Caches überschreitet in der Regel die Grenzwerte
+(512 Einträge, 32 MiB entpackt).
+3. Wählen Sie die ZIP-Datei unter <strong>„Dateien“</strong> aus. Falls für Telegram Desktop ein <strong>lokaler Passcode</strong> eingerichtet ist, geben Sie diesen
+zunächst unter <strong>„Passcode“ oder „Sitzungstext“</strong> ein. Dies ist nicht das 2FA-Passwort.</p>
+</li>
+</ol>
+<p>Unterstützt: ein Konto pro Archiv, moderner <code>key_datas</code>-/<code>key_data0</code>-/<code>key_data1</code>-Speicher,
+lokaler Passcode. Nicht unterstützt: Ordner mit mehreren angemeldeten Konten, ältere Desktop-
+Layouts, passwortgeschützte ZIP-Dateien sowie die separate native macOS-App „Telegram für macOS“.</p>
+<h3 id="telethon-stringsession">Telethon StringSession<a class="anchor" href="#telethon-stringsession" aria-label="Link zu diesem Abschnitt">#</a></h3>
+<p>Eine einzelne Textzeile, die in der Regel mit „<code>1</code>“ beginnt und etwa 350 Zeichen lang ist. Laden Sie
+sie als „<code>.txt</code>“- oder „<code>.tgwitness-session</code>“-Datei (maximal 4 KiB) hoch oder fügen Sie sie unter
+<strong>„Passcode“ oder „Sitzungstext“</strong> ein. Es werden ausschließlich Telethon-Zeichenfolgen akzeptiert; Pyrogram- und TDLib-
+Zeichenfolgen verwenden andere Formate.</p>
+<h3 id="account-json">JSON-Datei für das Konto<a class="anchor" href="#account-json" aria-label="Link zu diesem Abschnitt">#</a></h3>
+<p>Ein JSON-Objekt mit einer Größe von maximal <strong>64 KiB</strong> in einer Datei mit der Endung „<strong><code>.json</code></strong>“.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Feld (Aliase)</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>api_id</code> (<code>app_id</code>)</td>
+<td>Anwendungs-ID, eine positive Zahl</td>
+</tr>
+<tr>
+<td><code>api_hash</code> (<code>app_hash</code>)</td>
+<td>Anwendungs-Hash, 32 hexadezimale Zeichen</td>
+</tr>
+<tr>
+<td><code>string_session</code> (<code>session_string</code>, <code>session</code>)</td>
+<td>Text aus der Telethon-StringSession, kein Dateiname</td>
+</tr>
+<tr>
+<td><code>auth_key</code> (<code>auth_key_hex</code>) + <code>dc_id</code></td>
+<td>Vollständiger Auth-Schlüssel mit 512 Zeichen und DC 1–5</td>
+</tr>
+<tr>
+<td><code>user_id</code> (<code>id</code>)</td>
+<td>Optional; vor dem Speichern der Autorisierung mit Telegram abgeglichen</td>
+</tr>
+</tbody>
+</table></div>
+<p>Sind sowohl ein Alias als auch der Hauptname vorhanden, müssen diese übereinstimmen. Beispiele:</p>
+<pre><code class="language-json">{ &quot;app_id&quot;: 1234567, &quot;app_hash&quot;: &quot;0123456789abcdef0123456789abcdef&quot; }</code></pre>
+<pre><code class="language-json">{
+  &quot;api_id&quot;: 1234567,
+  &quot;api_hash&quot;: &quot;0123456789abcdef0123456789abcdef&quot;,
+  &quot;auth_key&quot;: &quot;REPLACE_WITH_ALL_512_HEXADECIMAL_CHARACTERS&quot;,
+  &quot;dc_id&quot;: 2,
+  &quot;user_id&quot;: 123456789
+}</code></pre>
+<p>Im ersten Beispiel werden lediglich die API-Anmeldedaten eingegeben; melden Sie sich per Telefon oder QR-Code an oder fügen Sie eine Sitzungsdatei hinzu.
+Massenlisten (ein JSON-Array mit Konten) werden nicht akzeptiert.</p>
+<h2 id="identify-what-you-have">Ermitteln Sie, was Ihnen vorliegt<a class="anchor" href="#identify-what-you-have" aria-label="Link zu diesem Abschnitt">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Wie Sie sehen</th>
+<th>Es ist</th>
+<th>Verwendung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*.session</code>; beim Öffnen in einem Texteditor wird oben „<code>SQLite format 3</code>“ angezeigt</td>
+<td>Telethon oder Pyrogram SQLite</td>
+<td><strong>Dateien</strong> (werden automatisch erkannt)</td>
+</tr>
+<tr>
+<td>Ein Ordner „<code>tdata</code>“, der „<code>key_datas</code>“ enthält</td>
+<td>Telegram Desktop TData</td>
+<td>Zwei Dateien als ZIP-Datei komprimieren, dann <strong>„Dateien“</strong></td>
+</tr>
+<tr>
+<td>Eine Textzeile, beginnend mit <code>1</code>, ca. 350 Zeichen</td>
+<td>Telethon StringSession</td>
+<td><strong>Dateien</strong></td>
+</tr>
+<tr>
+<td><code>*.json</code> mit <code>app_id</code>/<code>app_hash</code></td>
+<td>Begleitende Metadaten</td>
+<td><strong>Dateien</strong> zusammen mit der zugehörigen Sitzung</td>
+</tr>
+<tr>
+<td><code>*.json</code> mit <code>auth_key</code> oder <code>string_session</code></td>
+<td>JSON-Datei für das Konto</td>
+<td><strong>Dateien</strong></td>
+</tr>
+<tr>
+<td>512 Zeichen <code>0-9a-f</code></td>
+<td>Auth-Schlüssel</td>
+<td><strong>Authentifizierungsschlüssel</strong></td>
+</tr>
+<tr>
+<td>32 Zeichen <code>0-9a-f</code></td>
+<td>API-Hash</td>
+<td><strong>API-ID + Hash</strong></td>
+</tr>
+<tr>
+<td><code>td.binlog</code> oder ein <code>db.sqlite</code> aus einer TDLib-App</td>
+<td>TDLib-Speicher</td>
+<td>Nicht unterstützt</td>
+</tr>
+<tr>
+<td><code>123456789:AA…</code></td>
+<td>Bot-Token</td>
+<td>Nicht unterstützt</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="unsupported-formats">Nicht unterstützte Formate<a class="anchor" href="#unsupported-formats" aria-label="Link zu diesem Abschnitt">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Format</th>
+<th>Alternative</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TDLib-Speicher (<code>td.binlog</code>) und TDLib-Exporte</td>
+<td>Anmeldung per Telefon oder QR-Code</td>
+</tr>
+<tr>
+<td>Pyrogram-Sitzungs<strong>strings</strong></td>
+<td>Verwenden Sie die Pyrogram-Datei „<code>.session</code>“ oder den Telefoncode bzw. den QR-Code.</td>
+</tr>
+<tr>
+<td>TData mit mehreren angemeldeten Konten</td>
+<td>Melden Sie sich von den anderen Konten in Telegram Desktop ab oder verwenden Sie die jeweilige Sitzungsdatei des jeweiligen Kontos</td>
+</tr>
+<tr>
+<td>Bot-Token</td>
+<td>Nicht unterstützt: TgWitness fungiert als Benutzerkonto</td>
+</tr>
+<tr>
+<td>CSV-/JSON-Listen zahlreicher Konten</td>
+<td>Fügen Sie pro Konto einen Arbeitsbereich hinzu</td>
+</tr>
+<tr>
+<td>Test-DC- oder Bot-Sitzungen</td>
+<td>Verwenden Sie ein Produktionsbenutzerkonto</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="multiple-accounts">Mehrere Konten<a class="anchor" href="#multiple-accounts" aria-label="Link zu diesem Abschnitt">#</a></h2>
+<p>Drücken Sie <strong>+</strong> neben der Kontoauswahl oder öffnen Sie
+<strong>Konto → Einstellungen → Verbindungseinstellungen → Arbeitsbereiche</strong>, geben Sie eine Bezeichnung ein und
+melden Sie sich an.</p>
+<ul>
+<li>Beliebig viele Arbeitsbereiche, einschließlich des Hauptarbeitsbereichs. Jeder verfügt über eine eigene Sitzung, eine eigene Proxy-Route,
+    Quellen, Erfassungsrichtlinien, ein Protokoll, einen Signaturschlüssel, Checkpoints und Exportfunktionen.</li>
+<li>Das Wechseln des angezeigten Arbeitsbereichs führt nicht dazu, dass die anderen angehalten werden.</li>
+<li>Ein Protokoll bleibt an das Konto gebunden, das es erstellt hat. Die Anmeldung mit einem anderen
+    Konto erfordert einen weiteren Arbeitsbereich, und ein Konto kann nicht zwei
+    Arbeitsbereichen zugeordnet werden.</li>
+<li>Alle Arbeitsbereiche nutzen ein gemeinsames Panel-Token; es handelt sich nicht um separate Benutzer.</li>
+<li><strong>„Accounts“</strong> benennt einen Arbeitsbereich um und löscht einen hinzugefügten Arbeitsbereich samt dessen Sitzung, Protokoll,
+    Quellen und Signaturschlüssel. Der Hauptarbeitsbereich kann nicht über das Bedienfeld gelöscht werden.</li>
+</ul>
+<h2 id="sign-out">Abmelden<a class="anchor" href="#sign-out" aria-label="Link zu diesem Abschnitt">#</a></h2>
+<p><strong>„Konto → Bei Telegram abmelden“</strong> (bei pausierter Überwachung) fordert Telegram auf, die
+Sitzung zu beenden, sodass diese auch aus den <strong>„Einstellungen → Geräte</strong>“ des Kontos verschwindet und die
+Sitzung aus dem Arbeitsbereich-Tresor entfernt wird. Das Protokoll, die Quellen, die Einstellungen und der Signaturschlüssel bleiben erhalten, und
+das Protokoll zeichnet die Abmeldung auf. Der Arbeitsbereich gehört weiterhin zu seinem Konto: Nur dieses
+Konto kann sich erneut damit verbinden. Wenn Telegram nicht antwortet, wird die Sitzung dennoch
+hier entfernt und dies wird im Bedienfeld angezeigt; beenden Sie sie in Telegram unter <strong>„Einstellungen“ → „Geräte</strong>“.</p>
+<h2 id="convert-a-telethon-session-offline">Eine Telethon-Sitzung offline konvertieren<a class="anchor" href="#convert-a-telethon-session-offline" aria-label="Link zu diesem Abschnitt">#</a></h2>
+<p>Das Panel importiert <code>.session</code>-Dateien direkt. Für eine Offline-Konvertierung in eine
+StringSession-Datei führen Sie im Projektordner folgenden Befehl aus:</p>
+<pre><code class="language-powershell">.venv\Scripts\python.exe -m tgwitness.sessions account.session --out account.tgwitness-session   # Windows</code></pre>
+<pre><code class="language-sh">.venv/bin/python -m tgwitness.sessions account.session --out account.tgwitness-session          # Linux/macOS</code></pre>
+<p>Der Konverter liest ausschließlich Telethon-SQLite-Dateien (bis zu 64 MiB), verändert die Eingabedaten in keiner Weise,
+führt keine Netzwerkanfragen durch und überschreibt keine bereits vorhandene Ausgabedatei.</p>
+<h2 id="keeping-account-files-safe">Sichere Aufbewahrung von Kontodateien<a class="anchor" href="#keeping-account-files-safe" aria-label="Link zu diesem Abschnitt">#</a></h2>
+<ul>
+<li>Behandeln Sie jedes <code>.session</code>, jede TData-ZIP-Datei, jede StringSession, jeden Auth-Schlüssel und jede Konto-JSON-Datei wie ein
+    Passwort. TgWitness speichert die importierten Autorisierungsdaten in seinem verschlüsselten Tresor; Sie können
+    die Originaldateien anschließend löschen.</li>
+<li>Führen Sie dieselbe Autorisierung nicht gleichzeitig in zwei Programmen aus. Telegram könnte diese widerrufen
+    (<code>AUTH_KEY_DUPLICATED</code>), woraufhin beide Instanzen nicht mehr funktionieren.</li>
+<li>Eine abgelaufene oder widerrufene Sitzung kann nicht durch eine Konvertierung wiederhergestellt werden. Bitte melden Sie sich erneut an.</li>
+</ul>
+<h2 id="troubleshooting">Fehlerbehebung<a class="anchor" href="#troubleshooting" aria-label="Link zu diesem Abschnitt">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Meldung oder Symptom</th>
+<th>Vorgehensweise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Diese Sitzung kann nicht gelesen werden. Schließen Sie den ursprünglichen Client…</em></td>
+<td>Die SQLite-Datei ist geöffnet oder unvollständig (Sidecar-Datei <code>-journal</code>/<code>-wal</code>). Beenden Sie das ursprüngliche Programm ordnungsgemäß und kopieren Sie die Datei erneut.</td>
+</tr>
+<tr>
+<td><em>Unterstützte Telethon-SQLite-Schemas: 7 und 8</em> / <em>Pyrogram … 2 und 3</em></td>
+<td>Die Datei wurde mit einer sehr alten oder unbekannten Bibliotheksversion erstellt. Melden Sie sich stattdessen per Telefon/QR-Code an.</td>
+</tr>
+<tr>
+<td><em>Es werden ausschließlich autorisierte Produktionsnutzersitzungen unterstützt</em></td>
+<td>Die Pyrogram-Datei gehört zu einem Bot oder zum Testnetzwerk.</td>
+</tr>
+<tr>
+<td><em>Das TData-Archiv umfasst mehr als 512 Einträge oder 32 MiB</em></td>
+<td>Bitte nur die ZIP-Dateien „<code>key_datas</code>“ und „<code>D877F783D5D3EF8Cs</code>“, nicht den gesamten Ordner.</td>
+</tr>
+<tr>
+<td><em>TData kann nicht entschlüsselt werden. Überprüfen Sie den lokalen Passcode auf dem Desktop.</em></td>
+<td>Geben Sie den lokalen Passcode von Telegram Desktop unter <strong>„Passcode“ oder „Sitzungstext“</strong> ein.</td>
+</tr>
+<tr>
+<td><em>Importieren Sie jeweils ein TData-Konto</em></td>
+<td>Telegram Desktop verfügte über mehrere Konten; siehe <a href="#unsupported-formats">„Nicht unterstützte Formate</a>“.</td>
+</tr>
+<tr>
+<td><em>Ausgewählte Dateien beschreiben verschiedene Konten oder API-Zugangsdaten</em></td>
+<td>Wählen Sie Dateien nur aus einem einzigen Konto aus.</td>
+</tr>
+<tr>
+<td><em>Die JSON-Datei enthält keine unterstützten API-Anmeldedaten oder Autorisierungen.</em></td>
+<td>Überprüfen Sie die Feldnamen in <a href="#account-json">der JSON-Datei „Account</a>“.</td>
+</tr>
+<tr>
+<td><em>Ausschließlich API-Metadaten</em></td>
+<td>Die JSON-Datei enthält keine Sitzung. Fügen Sie die Datei „<code>.session</code>“ hinzu oder verwenden Sie die Telefonnummer bzw. den QR-Code.</td>
+</tr>
+<tr>
+<td><em>Der Auth-Key (HEX) muss alle 512 hexadezimalen Zeichen enthalten</em></td>
+<td>Der Schlüssel ist abgeschnitten oder enthält „<code>…</code>“.</td>
+</tr>
+<tr>
+<td>Die Konto-ID stimmt nicht mit dem importierten Konto überein</td>
+<td>Die Benutzer-ID der Datei weicht von der von Telegram gemeldeten ab; die Datei bezieht sich auf ein anderes Konto.</td>
+</tr>
+<tr>
+<td>Das Konto gehört bereits zu einem anderen Arbeitsbereich</td>
+<td>Öffnen Sie diesen Arbeitsbereich, anstatt das Konto zweimal hinzuzufügen.</td>
+</tr>
+<tr>
+<td>Verbunden, jedoch fehlt eine private Gruppe in der Chat-Liste unter <strong>„Quellen“</strong></td>
+<td>Überprüfen Sie die Mitgliedschaft. Der Picker überprüft die ersten 1.000 Dialoge; erhöhen Sie das Limit unter <strong>„Parameter</strong>“.</td>
+</tr>
+<tr>
+<td>Proxy-Verbindung fehlgeschlagen</td>
+<td>Überprüfen Sie Host, Port und Anmeldedaten. TgWitness greift niemals auf eine direkte Verbindung zurück.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Siehe auch: <a href="../connection/">Verbindung und Sicherheit</a> für Proxys und Verschlüsselung,
+sowie <a href="../collection/">die Funktionsweise der Datenerfassung</a> hinsichtlich der nach der Anmeldung erfassten Inhalte.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCOUNTS.md">Diese Seite auf GitHub bearbeiten ↗</a><a class="next-guide" href="../connection/"><span>Nächster Schritt</span><strong>Verbindung, Proxys und Datenschutz →</strong></a><p>Diese Leitfäden beschreiben die aktuelle Implementierung. Validierungsergebnisse und verbleibende Lücken werden separat dokumentiert. <a href="../verification/">Was wurde getestet? →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Auf dieser Seite"><p class="nav-label">Auf dieser Seite</p><a href="#at-a-glance">Auf einen Blick</a><a href="#before-you-start-api-id-and-api-hash">Bevor Sie beginnen: API-ID und API-Hash</a><a href="#phone-number">Telefonnummer</a><a href="#qr-code">QR-Code</a><a href="#auth-key--dc-id">Authentifizierungsschlüssel + DC-ID</a><a href="#account-files">Kontodateien</a><a href="#identify-what-you-have">Ermitteln Sie, was Ihnen vorliegt</a><a href="#unsupported-formats">Nicht unterstützte Formate</a><a href="#multiple-accounts">Mehrere Konten</a><a href="#sign-out">Abmelden</a><a href="#convert-a-telethon-session-offline">Eine Telethon-Sitzung offline konvertieren</a><a href="#keeping-account-files-safe">Sichere Aufbewahrung von Kontodateien</a><a href="#troubleshooting">Fehlerbehebung</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Open Source · Läuft auf Ihrem Rechner</span><a href="../../../../LICENSE">MIT-Lizenz</a><a href="../notice/">Hinweis für Betreiber</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Sicherheit</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Warten auf eine Nachricht", "Step through a fictional send, edit and delete.": "Verfolgen Sie Schritt für Schritt einen fiktiven Vorgang des Sendens, Bearbeitens und Löschens.", "No observations yet. Start the sequence or advance one event.": "Noch keine Beobachtungen. Starten Sie die Sequenz oder springen Sie zum nächsten Ereignis.", "Meet at 10:00": "Treffpunkt um 10:00 Uhr", "A new message is visible in the chat.": "Im Chat ist eine neue Nachricht zu sehen.", "Record 1 appended: the collector observed the original message.": "Eintrag 1 angehängt: Der Collector hat die ursprüngliche Nachricht erfasst.", "Meet at 11:00": "Treffpunkt um 11:00 Uhr", "The current text changes. The earlier observation stays.": "Der aktuelle Text ändert sich. Die frühere Feststellung bleibt bestehen.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Eintrag 2 angehängt: Die Bearbeitung stellt eine neue Beobachtung dar. Eintrag 1 enthält weiterhin den Originaltext.", "Message deleted": "Nachricht gelöscht", "The message has disappeared from the chat view.": "Die Nachricht ist aus der Chat-Ansicht verschwunden.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Aufzeichnung 3 angehängt: Die Löschmeldung wird zusammen mit beiden beobachteten Versionen beibehalten.", "0 records": "0 Einträge", "1 record": "1 Eintrag", "2 records": "2 Einträge", "3 records": "3 Einträge", "Complete / {n} of 3": "Vollständig / {n} von 3", "Step / {n} of 3": "Schritt / {n} von 3", "Pause": "Pause", "Replay sequence": "Wiedergabesequenz", "Play sequence": "Ablaufsequenz", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Ein statisches Beispiel steht zur Verfügung. Um Hashwerte interaktiv zu berechnen, öffnen Sie diese Seite über HTTPS oder eine Localhost-Vorschau mit Web-Crypto-Unterstützung.", "No record supplied": "Es wurde kein Eintrag bereitgestellt", "Tail removed": "Ende entfernt", "≠ saved hash": "≠ gespeicherter Hash", "Rebuilt · different hash": "Neu erstellt · anderer Hash", "= saved hash": "= gespeicherter Hash", "Same length and matching head.": "Gleiche Länge und passender Titel.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Alle drei berechneten Hashwerte stimmen mit den gespeicherten Hashwerten überein. Diese Stichprobe entspricht der festgelegten Grenze von drei Datensätzen.", "Same saved head; the journal prefix fails verification.": "Derselbe gespeicherte Header; das Protokollpräfix besteht die Überprüfung nicht.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Datensatz 2 stimmt nicht mehr mit seinem gespeicherten Hash überein. Würde nur der zuletzt gespeicherte Kopf überprüft werden, würde dies übersehen werden; der Prüfer überprüft jeden einzelnen Datensatz.", "Head differs from the retained checkpoint.": "Der Header weicht vom beibehaltenen Checkpoint ab.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Die neu berechneten Hashes sind miteinander verknüpft, doch der abschließende Header hat sich geändert. Der beibehaltene Checkpoint lehnt diesen Verlauf ab. Auch die ursprünglichen Signaturen würden bei geänderten Datensätzen fehlschlagen.", "Too short: 2 supplied records \u003c 3 retained records.": "Zu kurz: 2 bereitgestellte Datensätze \u003c 3 gespeicherte Datensätze.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Die beiden verbleibenden Hashes stimmen weiterhin überein. Der beibehaltene Checkpoint offenbart den fehlenden Endabschnitt. Ohne diese frühere Grenze würde dieses kürzere Präfix allein die Auslassung nicht aufdecken.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Die Hash-Berechnung ist in diesem Browser nicht verfügbar. Die Formeln und die statische Erläuterung unten stehen weiterhin zur Verfügung.", "{n} records": "{n} Einträge", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Akzeptiert: Die Zählung steigt, die Signatur wird verifiziert und der Schlüssel stimmt überein. Der Witness behält diese neue Grenze bei.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: Die signierte Antwort meldet weniger Datensätze als der zuletzt akzeptierte Checkpoint. Der Witness protokolliert das Problem und behält die zuvor akzeptierte Grenze bei.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: Die Zählung bleibt unverändert, der Head weicht jedoch ab. Der Witness protokolliert die Abweichung und behält die zuvor akzeptierte Grenze bei.", "No answer": "Keine Antwort", "boundary unknown": "Grenze unbekannt", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Keine Antwort: Der „Witness“ protokolliert die fehlgeschlagene Überprüfung. Er kann den aktuellen Status des „Collectors“ nicht feststellen. Sofern der „Witness“ weiterhin auf die Bot-API zugreifen kann und seine Veröffentlichungsrichtlinien dies zulassen, kann er diesen Fehler veröffentlichen.", "Send {n}": "{n} senden", "Edit {n}": "Bearbeiten {n}", "Delete {n}": "{n} löschen", "Both accounts captured all six expected observations in this example.": "Beide Konten haben in diesem Beispiel alle sechs erwarteten Beobachtungen erfasst.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Konto B hat weiterhin 6 von 6 erfasst. Bei zwei Belegen dauerte es länger. Die Erfassungsquote und die Verzögerung bei der Belegübermittlung geben Aufschluss über unterschiedliche Aspekte.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Konto B erfasste bis zum Stichtag 5 von 6 Ereignissen (83,3 %). Für die fehlende Bearbeitung wurde keine Verzögerung gemessen. Dieses Ergebnis bezieht sich ausschließlich auf die sechs kontrollierten Aktionen.", "not observed by cutoff": "nicht bis zum Stichtag beachtet", "{s} seconds": "{s} Sekunden", "Exact values follow in the table.": "Die genauen Werte sind der Tabelle zu entnehmen.", "{s} s": "{s} s", "Not observed": "Nicht beachtet", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Vier Chats liefern unterschiedliche Beobachtungen. Verfolgen Sie die Quelldatensätze für jede Verbindung; ordnen Sie den Kanalbeitrag nicht dem Nutzer 71001 zu, solange kein Absender angegeben ist.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Die Datensätze Nr. 146 und Nr. 205 weisen dieselbe Absender-ID auf, nämlich 71001. Dadurch lassen sich die beobachteten Beiträge eines Telegram-Kontos über zwei Chats hinweg miteinander verknüpfen. Dabei wird weder eine reale Person identifiziert noch der Kanalbeitrag einer bestimmten Person zugeordnet.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Die Ziel-pay.example.invalid/new taucht in Gruppeneintrag Nr. 146, Bot-Tastatureingabe Nr. 173, Kanalbearbeitung Nr. 188 und privater Nachricht Nr. 205 auf. Eine wiederkehrende Zieladresse verbindet das Material miteinander; sie beweist jedoch keine gemeinsame Kontrolle über diese Konten.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Die abgeschlossenen Medienbelege Nr. 151 und Nr. 209 weisen in diesem fiktiven Fall identische vollständige SHA-256-Werte auf. Vergleichen Sie die tatsächlichen Bytes und die zugehörigen Nachrichtenaufzeichnungen. Die übereinstimmende Datei gibt weder Aufschluss über ihren Ersteller noch belegt sie, wer sie weitergeleitet hat.", "the encrypted off-site copy": "die verschlüsselte externe Kopie", "notifications": "Benachrichtigungen", "checkpoint hashes for timestamps": "Checkpoint-Hashes für Zeitstempel", "signed checkpoints for the witness": "Signierte Kontrollpunkte für TgWitness", "Switched on in this example": "In diesem Beispiel aktiviert", "Optional · off by default": "Optional · standardmäßig deaktiviert", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Was auf diesem Gerät verbleibt: die Telegram-Verbindung und {list}. Sonst nichts.", "Default: only the Telegram connection leaves this machine.": "Standard: Nur die Telegram-Verbindung verlässt diesen Rechner.", "{done} of {total} done": "{done} von {total} erledigt", "Mark step {n} as done": "Schritt {n} als erledigt markieren", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Kopie", "Copied": "Kopiert", "Command copied.": "Befehl kopiert.", "Selected — Ctrl/Cmd+C": "Ausgewählt – Strg/Cmd+C", "Command selected. Copy it manually.": "Befehl ausgewählt. Bitte kopieren Sie ihn manuell.", "Command copied to clipboard.": "Befehl in die Zwischenablage kopiert.", "Select text": "Text auswählen", "Clipboard unavailable. Command selected; copy it manually.": "Zwischenablage nicht verfügbar. Befehl ausgewählt; bitte manuell kopieren.", "A message arrives. The first observation is saved.": "Eine Nachricht geht ein. Die erste Beobachtung wird gespeichert.", "The time changes. Both captured versions stay.": "Die Zeitangaben ändern sich. Beide erfassten Versionen bleiben erhalten.", "The message disappears. The captured history remains.": "Die Nachricht verschwindet. Der aufgezeichnete Verlauf bleibt erhalten.", "Pause example animation": "Beispielanimation anhalten", "Play example animation": "Beispielanimation abspielen", "Play": "Abspielen", "Full-size workspace screenshot": "Screenshot des Arbeitsbereichs in voller Größe", "Workspace screenshot · fictional data": "Screenshot des Arbeitsbereichs · fiktive Daten", "Close": "Schließen", "Close screenshot": "Screenshot schließen", "Scrollable full-size screenshot": "Scrollbarer Screenshot in voller Größe", "Enlarge: {name}": "Vergrößern: {name}", "View full size": "In voller Größe anzeigen"}</script>
+</body></html>

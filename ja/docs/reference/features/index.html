@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="ja" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>機能と制限事項 | TgWitness</title>
+<meta name="description" content="TgWitnessが現在実装している機能、Telegramプラットフォームによる制限、および今後の課題について。"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="機能と制限事項 | TgWitness"><meta property="og:description" content="TgWitnessが現在実装している機能、Telegramプラットフォームによる制限、および今後の課題について。">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/features/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/features/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/features/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/features/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/features/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/features/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/features/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/features/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/features/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/features/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/features/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/features/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/features/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/features/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/features/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/features/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/features/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/", "url": "https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/", "name": "機能と制限事項 | TgWitness", "description": "TgWitnessが現在実装している機能、Telegramプラットフォームによる制限、および今後の課題について。", "inLanguage": "ja", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://phishdestroy.github.io/TgWitness/ja/"}, {"@type": "ListItem", "position": 2, "name": "ドキュメント", "item": "https://phishdestroy.github.io/TgWitness/ja/docs/"}, {"@type": "ListItem", "position": 3, "name": "参考文献", "item": "https://phishdestroy.github.io/TgWitness/ja/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "機能と制限事項", "item": "https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">コンテンツへスキップ</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / ドキュメント</span></a>
+<nav aria-label="ガイド"><a href="../../concepts/">ビジュアルガイド</a><a href="../../">すべてのガイド</a><a href="../">参考文献</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="言語"><span aria-hidden="true">◍</span> 日本語</summary><div class="lang-list"><a href="../../../../docs/reference/features/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/features/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/features/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/features/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/features/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/features/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/features/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/features/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/features/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/features/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/features/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/features/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/features/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/features/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/features/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/features/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/features/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/features/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/features/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/features/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/features/" hreflang="pl" lang="pl">Polski</a><a href="./" hreflang="ja" lang="ja" aria-current="true">日本語</a><a href="../../../../th/docs/reference/features/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/features/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/features/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="ライトテーマとダークテーマを切り替える"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="ガイド"><a href="../../../guides/modes.html">モード、シナリオ、および証拠レベル</a><p class="nav-label">はじめに</p><a href="../../start/">数分で始められます</a><a href="../../accounts/">アカウントを連携する</a><a href="../../proxies/">プロキシを選択してください</a><a href="../../exports/">エクスポートと検証</a><p class="nav-label">証拠について理解する</p><a href="../../concepts/">証拠の仕組みをご覧ください</a><a href="../../cases/">すべてのチャットを横断的に調査する</a><a href="../../security/">セキュリティを確保してください</a><p class="nav-label">さらに詳しく</p><a href="../../witness/">Witnessボットの設定</a><a href="../../server/">稼働を継続してください</a><a href="../../troubleshooting/">何が問題だったのかを確認する</a></nav><nav class="wiki-nav" aria-label="参考文献"><p class="nav-label"><a class="nav-label-link" href="../">参考文献</a></p><details class="wiki-group"><summary>セットアップ</summary><a href="../quickstart/">クイックスタート</a><a href="../accounts/">アカウントとセッション形式</a><a href="../connection/">接続、プロキシ、およびデータ保護</a><a href="../deployment/">導入</a></details><details class="wiki-group" open><summary>収集</summary><a href="../collection/">収集の仕組み</a><a href="../operations/">ワークフローと操作方法</a><a href="../investigation/">調査モード</a><a href="./" aria-current="page">機能と制限事項</a></details><details class="wiki-group"><summary>証拠</summary><a href="../how-it-works/">証拠の仕組み</a><a href="../evidence/">証拠の形式</a><a href="../witness/">独立した証人</a><a href="../timestamp/">タイムスタンプ</a></details><details class="wiki-group"><summary>セキュリティとプロジェクト</summary><a href="../security/">セキュリティおよびデータ取り扱い</a><a href="../architecture/">アーキテクチャ</a><a href="../verification/">テスト済みの内容</a><a href="../license/">ライセンスに関する説明とアーキテクチャ上の非互換性の通知</a><a href="../notice/">オペレーターの非互換性に関する通知</a><a href="../changelog/">変更履歴</a></details></nav><p class="sidebar-note">v0.7.0<br>オープンソース・お使いのマシン上で動作します</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="ガイド"><a href="../../../">ホーム</a> <span aria-hidden="true">/</span> <a href="../../">ドキュメント</a> <span aria-hidden="true">/</span> <a href="../">参考文献</a> <span aria-hidden="true">/</span> <span aria-current="page">機能と制限事項</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">ドキュメントを検索する</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="「プロキシ」、「ハッシュチェーン」、「トークン」、または「ウィットネス」などを試してみてください…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="検索を明確にする" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">ガイドやリファレンスを検索するには、単語を入力してください。検索はブラウザ内で行われます。</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">参考文献 / 収集</p><h1>機能と制限事項</h1><p class="guide-outcome">TgWitnessが現在実装している機能、Telegramプラットフォームによる制限、および今後の課題について。</p><div class="wiki-body"><p>デザインリファレンス：2026年10月26日。主なユースケースは、接続されたアカウントからアクセス可能な
+Telegramのプライベートグループおよびチャンネルです。本ドキュメントでは、
+実装済みの動作、プラットフォームの制限、および今後の課題を区別しています。目標アーキテクチャの
+項目は、その機能がすでに存在することを示すものではありません。</p>
+<h2 id="standalone-application">スタンドアロンアプリケーション<a class="anchor" href="#standalone-application" aria-label="このセクションへのリンク">#</a></h2>
+<p>TgWitnessには、独自のインストール手順、データディレクトリ、およびリリースライフサイクルがあります。同梱の
+Webインターフェースでは、設定や確認を行うことができ、エクスポートされた記録は単独でも利用可能です。</p>
+<p>利用者は自身のアカウントを連携させ、各アカウントで表示可能な情報源を選択することで、
+保存された観測ジャーナルを取得します。パネルには、コンテンツ、保存された変更内容、観測の
+出所、および既知の欠落情報が表示されます。別の調査員が、エクスポートされた資料を検証することができます。</p>
+<p>重要なのは、4つの異なる状態です。アカウントの認証、情報源へのアクセス、正常に動作する
+コレクター、そして配信の完全性がどの程度確立されているか、という4点です。最初の
+3つの状態のいずれも、4つ目の状態を自動的に証明するものではありません。グループが静かであるからといって、必ずしも
+コレクターが機能していないとは限りません。</p>
+<h2 id="optional-extras">オプション機能<a class="anchor" href="#optional-extras" aria-label="このセクションへのリンク">#</a></h2>
+<p>日常的な設定は、「アカウント」→「ソース」→「監視」の順で行います。<strong>「エクストラ」</strong>は独立した設定項目であり、
+2つのカードが用意されています。1つはTelegramのウィットネスボット、もう1つは
+計画中のGitHubビルド検証です。各カードでは、設定画面が表示される前に、
+利用可能状況と要件が明示されています。カードを選択すると手順が表示されますが、これにより登録やサービスの開始が行われるわけではありません。</p>
+<p>ボットのセットアップは、読み取り専用アクセス権の作成、公開設定の選択、そして
+Witnessホストでの起動という3つのステップで構成されています。ネットワークおよび公開オプション、既存の接続、
+検証コマンドは、必要に応じて開示されます。 ダウンロードされた設定は、
+実行中のWitnessとは別物です。追加機能の切り替えを行っても下書きは保持されますが、アカウントの変更やロックを行うと、
+一時的なトークンとフォームがクリアされます。組み込みのガイドには、起動手順が含まれています。
+GitHubは引き続き明確な計画として残されており、認証情報の入力フォームや偽装された接続状態は存在しません。</p>
+<h2 id="protocol-and-private-sources">プロトコルおよび非公開の情報源<a class="anchor" href="#protocol-and-private-sources" aria-label="このセクションへのリンク">#</a></h2>
+<p><strong>MTProtoはTelegramのプロトコルであり、TelethonはTgWitnessがMTProtoと
+通信するために使用するPythonライブラリです。</strong>これらは別々の接続方法ではありません。「Collection」はMTProtoを使用し、
+オプションの「witness」はBot APIを通じて署名付きチェックを公開します。</p>
+<p>各ワークスペースには、独自の認証済みクライアントとアカウント更新ストリームがあります。TgWitnessは、
+設定されたソースから観測データを選択し、履歴のスナップショットやメディアのダウンロードなどの機能については、
+個別に明示的なリクエストを行います。</p>
+<p>非公開の情報源には、公開ユーザー名は必要ありません。Telegramのピアタイプと数値IDが
+識別子となります。タイトルやユーザー名は変更される可能性があります。アクセスは、既存の
+メンバーシップおよび権限によって決まります。TgWitnessは、情報源に自動的に参加したり、
+参加承認を迂回したりすることはありません。別のアカウントからのアクセスハッシュは、汎用的なアクセストークンではありません。</p>
+<p>収集モデルでは、参加前の非公開履歴、参加者／管理者の
+役割、セッションの失効、権限の削除または変更、グループからスーパーグループへの
+移行、トピック／フォーラム、関連するディスカッション、チャンネルの識別情報、および利用できない
+添付ファイルなどを考慮する必要があります。すべての組み合わせについて、実稼働環境での検証が完了しているわけではありません。</p>
+<p>ソースの可視性は、コレクターの起動時に確認されます。範囲内の
+ダイアログ結果からソースが欠落している場合、<strong>それはアクセスが確認されていないことを</strong>意味し、削除が証明されたわけではありません。1つのソースが
+利用できない場合でも、他のアクセス可能なソースの監視には支障がありません。招待
+リンクや実際のセッションを、公開用フィクスチャに決して記載しないでください。</p>
+<h2 id="multiple-accounts">複数のアカウント<a class="anchor" href="#multiple-accounts" aria-label="このセクションへのリンク">#</a></h2>
+<p>このパネルは、任意の数の<strong>ワークスペース</strong>に対応しており、各ワークスペースには以下の機能が備わっています：</p>
+<ul>
+<li>認証、暗号化された保管庫、および接続経路。</li>
+<li>SQLiteジャーナルおよびEd25519署名用ID。</li>
+<li>選択された情報源、メディアキュー、およびキャプチャ設定。</li>
+<li>監視状態、エラー、チェックポイント、およびエクスポート機能。</li>
+</ul>
+<p>表示されているワークスペースを切り替えても、別のコレクターの動作は停止しません。ワークスペースをまたいだアカウントの
+重複認証は拒否されます。すでに1つのTelegram
+アカウントに紐付けられているジャーナルを別のアカウントに再割り当てすることはできませんが、同じアカウントへの再接続は可能です。
+これにより、アカウントの識別情報および関連するメッセージIDの範囲が保持されます。</p>
+<p>固定の処理数や測定されたスループットの保証はありません。ワークスペースは
+Pythonプロセスとイベントループを共有します。個別のアカウントワーカーの実装は今後の課題です。
+現時点でのプロセス分離については、別々のインストール、ポート、データディレクトリをご利用ください。</p>
+<p>各アカウントに、アクセス可能な情報源を割り当ててください。異なるアカウントが同じ
+グループを監視している場合でも、その監視データは個別に管理され、元の情報源が保持されます。1人のオペレーターが管理するマシン上の2つのアカウントは、
+2つの独立した証人とはみなされません。エクスポートは
+ワークスペース単位で行われます。統合されたケースパッケージやグローバルなTelegramタイムラインの機能は実装されていません。</p>
+<h2 id="capture-and-attribution">キャプチャと出典明記<a class="anchor" href="#capture-and-attribution" aria-label="このセクションへのリンク">#</a></h2>
+<p>「Sources」では、新規メッセージ、編集、削除、リアクション、
+およびメンバーシップについて、アカウントごとの設定切り替えが可能です。プリセットでは、すべてのカテゴリ、またはメッセージ／編集／削除のいずれかを保持します。
+このポリシーはワークスペースで選択されたグループに適用され、再起動後も維持され、
+変更前後のデータで署名されます。デフォルトではすべてのカテゴリが保持されます。 カテゴリを無効にしても
+過去の記録は削除されません。また、再度有効にしても、記録されなかったイベントは復元されません。
+運用記録、その他のグループサービスイベント、および明示的な履歴スナップショットは
+別個に扱われます。キャプチャされたTelegramオブジェクトは、
+個別の更新設定にかかわらず、埋め込まれたメタデータを保持する場合があります。現時点では、グループごとのカテゴリ上書き機能はありません。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>資料</th>
+<th>現在キャプチャ中</th>
+<th>境界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>メッセージ</td>
+<td>テキスト、ピアID／メッセージID、送信者のメタデータ、返信、および元の更新エンベロープ</td>
+<td>このメッセージには、公的に検証可能なTelegramの署名がありません</td>
+</tr>
+<tr>
+<td>編集</td>
+<td>新たに検出されたバージョンおよび以前に保存されたすべてのバージョン</td>
+<td>ダウンタイム中に加えられた編集内容は失われる可能性があります。送信者が必ずしも編集者であるとは限りません。</td>
+</tr>
+<tr>
+<td>削除</td>
+<td>通知および（もしあれば）以前にキャプチャされたコンテンツ</td>
+<td>通常、削除者や正確な操作時刻は記録されません</td>
+</tr>
+<tr>
+<td>範囲外の削除</td>
+<td>相手方を推測することなく、アカウントレベルで表示されるオリジナルの通知</td>
+<td>以前に保存されたアカウント単位のIDとの厳密な照合については、今後の課題となります。</td>
+</tr>
+<tr>
+<td>反応</td>
+<td>配信されたカウンターと、確認可能な最近のID</td>
+<td>利用可能なリアクターの完全なリストを確認するには、別途照会が必要です。チャンネルによっては身元が非公開となっている場合があります。</td>
+</tr>
+<tr>
+<td>メンバーシップ</td>
+<td>サービスに関するお知らせおよび参加者への最新情報の配信</td>
+<td>表示される内容は役割やチャットの種類によって異なります。イベントが欠落しているからといって、そのイベントが存在しなかったことを示すものではありません。</td>
+</tr>
+<tr>
+<td>管理者の操作</td>
+<td>関連する更新情報のみを掲載しています</td>
+<td>管理ログの個別のポーリング機能は実装されていません</td>
+</tr>
+<tr>
+<td>添付ファイル</td>
+<td>オリジナルバージョンの記述、ダウンロードされたバイト数／SHA-256、および試行結果</td>
+<td>削除されたファイルは復元できない場合があります。最新バージョンが置き換えられることはありません。</td>
+</tr>
+<tr>
+<td>沿革</td>
+<td>現在表示されているメッセージの明確なスナップショット</td>
+<td>すべての編集や削除されたコンテンツを復元するわけではありません</td>
+</tr>
+<tr>
+<td>コレクタープロセス</td>
+<td>起動／停止、ハートビート、エラー、設定、対象範囲、およびプログラムの受信</td>
+<td>自己申告であり、独立したプロセス認証ではありません。</td>
+</tr>
+</tbody>
+</table></div>
+<p>ある行動が特定の人物に帰属するのは、情報源がその行為者を実際に明示している場合に限られます。
+それ以外の場合、インターフェースは帰属情報の欠落を報告します。ユーザー名や氏名は
+観察された属性であり、実世界の身元の証明ではありません。</p>
+<h2 id="capacity-and-telegram-limits">容量とTelegramの制限<a class="anchor" href="#capacity-and-telegram-limits" aria-label="このセクションへのリンク">#</a></h2>
+<p>品質を保証して監視できるチャットの数は、一概には言えません。
+処理能力は、1秒あたりのピークイベント数、添付ファイルの量とサイズ、追加の
+RPC、アクティブなアカウント数、ディスクのレイテンシ／空き容量、ネットワーク状況、Telegramの制限、
+許容可能な遅延、およびキューの深さによって異なります。</p>
+<p>Telegramは、パッシブ配信とアクティブなショートポーリングを区別しています。その更新
+ドキュメントでは、公開
+チャンネル／スーパーグループに対する追加の<code>updates.getChannelDifference</code>呼び出しについて説明しており、<strong>同時にショートポーリングを行う
+ソースは</strong>最大10件までとすることを推奨しています。これは、選択されたグループが10件に制限されるということでも、完全性が保証されるということでもありません。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>モード</th>
+<th>目的</th>
+<th>ステータス</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>標準的な観察事項</td>
+<td>選択した情報源からの更新情報を記録します</td>
+<td>実装済み</td>
+</tr>
+<tr>
+<td>優先事項の観察</td>
+<td>限定されたソースセットに対する追加の差異チェック</td>
+<td>ユーザーモードとしては実装されていません</td>
+</tr>
+</tbody>
+</table></div>
+<p>FloodWaitを無視したり、追加アカウントからの容量を線形と仮定したりする
+ような、恣意的な高頻度ポーリングは、有効なサイジングモデルとは言えません。デフォルトの制限は、
+リストされた最初の1,000件のダイアログ、履歴スナップショットあたり最大500件のメッセージ、
+タイプごとに収集ファイルあたり1～2,000 MiB、および非圧縮の署名付きZIPコンテンツは4 GiBです。これらは
+「<strong>パラメータ</strong>」でワークスペースごとに変更可能です。エクスポートには、イベント数の固定上限はありません。
+ブラウザのフォールバックは、デフォルトで128 MiBに制限されています。ストリーミングCLIには設定可能な
+転送制限があり、デフォルトは5 GiBです。</p>
+<p><code>tools/check_capacity.py</code>は、ローカルでの合成データの取り込みおよびエクスポートを測定します。その結果は、
+Telegramの配信測定値でも、実際のチャット数の保証でもありません。測定されたバージョンおよびワークロードについては、
+<a href="../verification/">VERIFICATION.md</a>をご参照ください。</p>
+<h2 id="reliability-and-recovery">信頼性と復旧<a class="anchor" href="#reliability-and-recovery" aria-label="このセクションへのリンク">#</a></h2>
+<p>実装されている機能には、SQLite WAL／同期トランザクション、メッセージ
+およびメディアジョブの原子的な書き込み、永続的なジョブと再試行の遅延、オリジナルバージョンの記述子、
+再試行回数の制限；永続化されたメディアのFloodWait；テキストイベントの
+ネットワーク待機時間外でのメディアダウンロード；後続の書き込みが継続中の安定プレフィックスによるエクスポート；設定および
+監査記録の原子性；ログイン置換失敗後の有効な認証情報の保持；
+破損した追加ワークスペースの隔離；明示的な再接続試行；明確な
+認証喪失の報告；および単調時計を用いた実時間変更検出などが含まれます。</p>
+<p>アカウントおよびチャンネルの pts/qts/seq は保存され、再起動後も復元されます。また、監視対象のチャットは
+定期的に再確認されます。<a href="../evidence/#durable-collection-and-process-receipts-02">証拠の形式については</a>、こちらをご覧ください。位置情報を
+定期的に保存することは、ジャーナルの受諾に対するアトミックかつロスレスな確認ではありません。</p>
+<p>各プロセスの開始時には、前回のヘッドとオフライン境界が記録されます。現在の履歴は
+ギャップの修復として扱われません。Telegramの差分保持容量には限りがあり、
+<code>differenceTooLong</code>では消失したコンテンツのすべてを復元することはできません。復元不可能なギャップは、
+後の履歴スナップショットが成功した場合でも、明示的に残しておく必要があります。</p>
+<h2 id="evidence-model">証拠モデル<a class="anchor" href="#evidence-model" aria-label="このセクションへのリンク">#</a></h2>
+<p>各イベントには、シーケンス、ローカルUTC観測時刻、提供されている場合は送信元時刻、
+種類、送信元、提供されている場合はアクター、元のペイロード、前回のハッシュ、および署名が記録されます。
+メッセージの観測データには、コレクターアカウントおよび実行コンテキストも保持されます。</p>
+<p>署名付きプロセスレシートには、ランダムな実行ID、TgWitness/Python/OSの依存関係
+バージョン、ソースファイルのSHA-256値および集約フィンガープリント、初期アカウント、
+スコープおよび設定、UTC/単調な測定値、ならびに直前のジャーナルヘッダーが含まれます。
+設定の変更、起動／停止、およびエラーは、同じジャーナルに記録されます。チェックポイントは、
+起動時、監視中の5分ごと（変更可能）、および正常な停止時に保持されます。
+保持されたローカルチェックポイントにより、以前のジャーナルプレフィックスへのロールバックを検出することが可能です。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>仕組み</th>
+<th>本ツールが実現すること</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ファイルの SHA-256</td>
+<td>バイト数が既知のダイジェストと一致しています</td>
+</tr>
+<tr>
+<td>イベントハッシュチェーン</td>
+<td>既知の境界を基準とした記録の順序付け／関連付け</td>
+</tr>
+<tr>
+<td>Ed25519</td>
+<td>特定の鍵による署名</td>
+</tr>
+<tr>
+<td>独立して保持されているチェックポイント</td>
+<td>後続の資料は、維持された境界と一致しています。</td>
+</tr>
+<tr>
+<td>プログラムファイルの測定</td>
+<td>収集ツールによる測定ファイルに関する自己報告</td>
+</tr>
+<tr>
+<td>有効な独立したTSAの回答</td>
+<td>明示的な信頼仮定の下における、TSA時刻ごとの特定のバイトの存在</td>
+</tr>
+</tbody>
+</table></div>
+<p>RFC 3161に基づくリクエストの作成およびOpenSSLによるレスポンスの検証が実装されています。
+自動送信機能は実装されていません。リクエストや、マシンの
+時刻を含むローカル署名は、独立したタイムスタンプとはみなされません。<a href="../timestamp/">TIMESTAMP.md</a>をご参照ください。</p>
+<p>コレクターおよび署名鍵を管理するオペレーターは、新しい署名付き
+観測データを捏造する可能性があります。署名は、Telegramでの発信元、真実性、または自動的な
+法的証拠能力を立証するものではありません。より強固な証拠保全には、独立したチェックポイント／タイムスタンプの保存、
+鍵へのアクセス制御、転送記録、および信頼できるソフトウェアによる検証が必要です。</p>
+<h2 id="export-deployment-and-handoff">エクスポート、導入、および引き継ぎ<a class="anchor" href="#export-deployment-and-handoff" aria-label="このセクションへのリンク">#</a></h2>
+<p>署名付きZIPファイルには、元のJSONL、CSV、HTML、保存された添付ファイル、ハッシュ、
+署名付きマニフェスト、および利便性を考慮した検証ツールが含まれています。これは1つのワークスペースと、固定された完全な
+ジャーナルプレフィックスを対象としています。パネル検索フィルターによって、記録が黙って削除されることはありません。 秘密鍵、
+トークン、およびTelegramのセッションは除外されますが、元の観測データには依然として
+個人情報やTelegramのメタデータが含まれている可能性があります。</p>
+<p>ZIPダイジェスト、信頼できるフィンガープリント、チェックポイント、処理受領記録、および引き継ぎ記録は、
+それぞれ個別に保持してください。検証対象のZIPファイルに含まれているという理由だけで実行可能コードを信頼するのではなく、
+信頼できる環境から取得した検証ツールを使用してください。</p>
+<p>ブラウザインターフェースは、Node.js、CDN、外部フォントを必要とせず、ローカルで動作します。1つの
+オペレータートークンでインストールを制御します。リモートアクセスには、HTTPSまたはSSHトンネルが必要です。
+ネイティブのPythonおよびコンテナ定義が提供されており、
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/ディレクトリ</a>下にサービスの例が掲載されています。実行されたプラットフォームチェックは別途一覧化されています。</p>
+<p>デフォルトのワークスペースはデータルートを使用します。追加のワークスペースは<code>profiles/&lt;id&gt;/</code>を使用します。
+バックアップを行うには、プロセスを停止させ、完全なデータおよび鍵セットが必要です。証拠用ZIPファイルは
+アプリケーションのバックアップではありません。シークレットについては、新しいデータ
+ディレクトリ用に外部のマスターキーを使用できます。ジャーナルおよびメディアの暗号化は、オペレーターのディスクまたはボリュームによって提供されます。
+<a href="../connection/">CONNECTION-SECURITY.md</a> および <a href="../operations/">OPERATIONS.md</a> を参照してください。</p>
+<h2 id="stable-release-criteria">安定版のリリース基準<a class="anchor" href="#stable-release-criteria" aria-label="このセクションへのリンク">#</a></h2>
+<p>安定版がリリースされるまでは、次のように補足してください：</p>
+<ol>
+<li>実際のプライベートグループ、スーパーグループ、フォーラム、チャンネルにおいて、メンバー／管理者の役割や
+    非表示／表示の履歴（ログイン／2FA、権限の取り消し、アクセス権の喪失を含む）を記録します。</li>
+<li>既知の行動に対する、編集、削除、リアクション、メンバーシップ、およびメディアの監視を行います。</li>
+<li>プロセスのクラッシュ／ホストのクラッシュ、ディスク障害／ディスク容量不足、有効期限切れのファイル参照、FloodWait、
+    ネットワーク切断、ファイルの破損、およびデータベースのロールバック。</li>
+<li>測定された遅延、キュー、メモリ、ディスク容量を考慮した、継続的なマルチアカウント利用。これには、
+    静的なソースと動的なソースの両方を併せて含みます。</li>
+<li>MTProtoの状態遷移とジャーナルの受入の間に中断が生じました。</li>
+<li>対象のOS／コンテナ環境へのクリーンインストール、およびバックアップと復元の検証が行われています。</li>
+<li>セキュリティ、署名、および帰属・証拠に関する主張についての独立した検証。</li>
+</ol>
+<p>管理ログのポーリング、追加のリアクターリスト、優先度付きポーリング、個別のワーカー、
+アプリケーション全体の暗号化、およびユーザーロールについては、今後の課題となります。バージョン 0.6 では、
+<a href="../accounts/">ACCOUNTS.md</a> に記載されている、範囲限定の単一アカウント用 TData およびアカウントファイルのインポートに対応しています。
+公開前にTelegram APIの利用規約をご確認ください。参考文献およびプラットフォームに関する
+調査結果は、<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/RESEARCH.md">RESEARCH.</a>mdに記載されています。</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/PRODUCT.md">GitHubでこのページを編集する ↗</a><a class="next-guide" href="../how-it-works/"><span>次のステップ</span><strong>証拠の仕組み →</strong></a><p>これらのガイドは、現在の実装について説明しています。検証結果および残された課題については、別途文書化されています。 <a href="../verification/">テスト済みの内容 →</a></p></footer>
+</main>
+<aside class="toc" aria-label="このページについて"><p class="nav-label">このページについて</p><a href="#standalone-application">スタンドアロンアプリケーション</a><a href="#optional-extras">オプション機能</a><a href="#protocol-and-private-sources">プロトコルおよび非公開の情報源</a><a href="#multiple-accounts">複数のアカウント</a><a href="#capture-and-attribution">キャプチャと出典明記</a><a href="#capacity-and-telegram-limits">容量とTelegramの制限</a><a href="#reliability-and-recovery">信頼性と復旧</a><a href="#evidence-model">証拠モデル</a><a href="#export-deployment-and-handoff">エクスポート、導入、および引き継ぎ</a><a href="#stable-release-criteria">安定版のリリース基準</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>オープンソース・お使いのマシン上で動作します</span><a href="../../../../LICENSE">MITライセンス</a><a href="../notice/">オペレーター向け通知</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">セキュリティ</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "メッセージをお待ちしています", "Step through a fictional send, edit and delete.": "架空の送信、編集、削除のプロセスを順を追ってご説明します。", "No observations yet. Start the sequence or advance one event.": "まだ観察結果はありません。シーケンスを開始するか、1件先へ進めてください。", "Meet at 10:00": "10:00に集合してください。", "A new message is visible in the chat.": "チャットに新しいメッセージが表示されています。", "Record 1 appended: the collector observed the original message.": "記録1が追加されました：コレクターが元のメッセージを確認しました。", "Meet at 11:00": "11:00にお会いしましょう", "The current text changes. The earlier observation stays.": "現在のテキストは変更されます。以前の指摘はそのまま残ります。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "レコード2が追加されました：この編集は新たな観察結果です。レコード1には依然として元のテキストが保持されています。", "Message deleted": "メッセージが削除されました", "The message has disappeared from the chat view.": "そのメッセージはチャット画面から消えました。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "「Record 3」を追加しました：削除通知は、確認された両方のバージョンとともに保持されます。", "0 records": "0件の記録", "1 record": "1件の記録", "2 records": "2件の記録", "3 records": "3件の記録", "Complete / {n} of 3": "完了 / 3件中{n}件", "Step / {n} of 3": "ステップ / 3のうち{n}", "Pause": "一時停止", "Replay sequence": "再生シーケンス", "Play sequence": "再生順序", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "静的なサンプルが利用可能です。ハッシュをインタラクティブに計算するには、HTTPS経由でこのページを開くか、Web Cryptoをサポートするローカルホストのプレビューを開いてください。", "No record supplied": "記録は提供されていません", "Tail removed": "末尾を削除しました", "≠ saved hash": "≠ 保存されたハッシュ", "Rebuilt · different hash": "再構築済み・ハッシュ値が異なります", "= saved hash": "= 保存されたハッシュ", "Same length and matching head.": "同じ長さで、見出しも一致しています。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "計算された3つのハッシュ値はすべて、保存されているハッシュ値と一致しています。このサンプルは、保持されている3レコード単位の境界と一致しています。", "Same saved head; the journal prefix fails verification.": "保存されたヘッダーは同じですが、ジャーナルのプレフィックスが検証に失敗しました。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "レコード2は、保存されているハッシュと一致しなくなりました。最後に保存されたヘッドのみを確認していた場合、この不一致を見逃してしまいます。検証ツールはすべてのレコードを確認します。", "Head differs from the retained checkpoint.": "ヘッダーは、保持されているチェックポイントとは異なります。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "再構築されたハッシュは相互にリンクしていますが、最終ヘッドが変更されています。保持されているチェックポイントは、この履歴を拒否します。変更されたレコードに対しては、元の署名も検証に失敗します。", "Too short: 2 supplied records \u003c 3 retained records.": "記録数が少なすぎます：提供された記録が2件、保存された記録が3件未満です。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "残りの2つのハッシュは依然として一致しています。保持されているチェックポイントにより、欠落していた末尾部分が明らかになりました。その以前の境界情報がなければ、この短いプレフィックスだけでは欠落に気づくことはできなかったでしょう。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "このブラウザではハッシュ計算をご利用いただけません。以下の数式および説明文は引き続きご覧いただけます。", "{n} records": "{n}件の記録", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "承認済み：カウントが増加し、署名が検証され、鍵が一致しました。Witnessはこの新しい境界を保持します。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "ロールバック：署名付き回答で報告されたレコード数が、最後に承認されたチェックポイントのレコード数よりも少ない場合。Witnessはこの問題を記録し、以前に承認された境界を維持します。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "フォーク：カウントは変わりませんが、ヘッドが異なります。ウィットネスはこの不一致を記録し、以前に承認された境界を維持します。", "No answer": "回答なし", "boundary unknown": "境界不明", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "応答なし：Witnessはチェックの失敗を記録します。コレクターの現在の状態を特定することはできません。Witnessが依然としてBot APIにアクセスでき、かつ公開ポリシーが許可している場合、その失敗を公開することができます。", "Send {n}": "{n} を送信", "Edit {n}": "編集 {n}", "Delete {n}": "{n}を削除", "Both accounts captured all six expected observations in this example.": "この例では、両方のアカウントとも、想定されていた6つの観測項目すべてを捕捉しました。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "アカウントBでも6件中6件を正常に取得できました。2件の受信確認には時間がかかりました。取得率と受信確認の遅延は、それぞれ異なる問題を示しています。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "アカウントBは、締め切り時点までに6件中5件を捕捉しました（83.3％）。捕捉されなかった編集操作については、測定された遅延はありません。この結果は、6件の制御された操作についてのみ記述したものです。", "not observed by cutoff": "締め切りまでに確認されませんでした", "{s} seconds": "{s}秒", "Exact values follow in the table.": "具体的な数値は表に示されています。", "{s} s": "{s} s", "Not observed": "確認されませんでした", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "4つのチャットから、それぞれ異なる観察結果が得られています。すべての接続について、元の記録を追跡してください。送信者が特定されていない限り、チャンネルへの投稿をユーザー71001に割り当てないでください。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "記録#146と#205には、同じ送信者ID「71001」が記載されています。これにより、2つのチャットにまたがるTelegramアカウントの投稿が関連付けられます。ただし、実在の人物を特定したり、チャンネルへの投稿の作者を特定したりするものではありません。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "宛先「pay.example.invalid/new」は、グループ記録#146、ボットキーボード#173、チャンネル編集#188、およびプライベートメッセージ#205に登場します。宛先が繰り返し登場することは、これらの資料を結びつける要素ではありますが、それらのアカウントが共通の管理下にあることを証明するものではありません。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "この架空の事例において、完了済みのメディア受信記録 #151 と #209 は、完全な SHA-256 値が一致しています。実際のバイトデータと、それに関連するメッセージ記録を比較してください。一致したファイルからは、作成者が特定されることも、誰が転送したかを証明することもできません。", "the encrypted off-site copy": "暗号化されたオフサイトコピー", "notifications": "通知", "checkpoint hashes for timestamps": "タイムスタンプ用のチェックポイントハッシュ", "signed checkpoints for the witness": "Witness用の署名付きチェックポイント", "Switched on in this example": "この例では有効になっています", "Optional · off by default": "オプション・デフォルトではオフ", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "このマシンから削除されるもの：Telegramの接続情報と{list}。それ以外は一切ありません。", "Default: only the Telegram connection leaves this machine.": "デフォルト設定：Telegramへの接続のみがこのマシンから行われます。", "{done} of {total} done": "{done}/{total} 完了", "Mark step {n} as done": "ステップ{n}を「完了」としてマークする", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "コピー", "Copied": "コピー", "Command copied.": "コマンドをコピーしました。", "Selected — Ctrl/Cmd+C": "選択 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "コマンドが選択されました。手動でコピーしてください。", "Command copied to clipboard.": "コマンドがクリップボードにコピーされました。", "Select text": "テキストを選択", "Clipboard unavailable. Command selected; copy it manually.": "クリップボードが利用できません。コマンドが選択されています。手動でコピーしてください。", "A message arrives. The first observation is saved.": "メッセージが届きました。最初の記録が保存されました。", "The time changes. Both captured versions stay.": "時刻は変更されますが、キャプチャされた両方のバージョンはそのまま残ります。", "The message disappears. The captured history remains.": "メッセージは消えても、記録された履歴は残ります。", "Pause example animation": "アニメーションの一時停止例", "Play example animation": "サンプルアニメーションを再生する", "Play": "再生", "Full-size workspace screenshot": "ワークスペースのフルサイズスクリーンショット", "Workspace screenshot · fictional data": "ワークスペースのスクリーンショット・架空のデータ", "Close": "閉じる", "Close screenshot": "スクリーンショットを閉じる", "Scrollable full-size screenshot": "スクロール可能なフルサイズのスクリーンショット", "Enlarge: {name}": "拡大：{name}", "View full size": "フルサイズで表示"}</script>
+</body></html>

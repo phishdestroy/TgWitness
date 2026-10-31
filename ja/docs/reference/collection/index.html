@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="ja" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>収集の仕組み | TgWitness</title>
+<meta name="description" content="記録範囲、リアルタイム更新、再確認、添付ファイル、自身の操作、および「ギャップ」の意味について、記録ごとに解説しています。"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="収集の仕組み | TgWitness"><meta property="og:description" content="記録範囲、リアルタイム更新、再確認、添付ファイル、自身の操作、および「ギャップ」の意味について、記録ごとに解説しています。">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/collection/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/collection/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/collection/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/collection/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/collection/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/collection/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/collection/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/collection/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/collection/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/collection/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/collection/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/collection/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/collection/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/collection/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/collection/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/collection/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/collection/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/collection/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/", "url": "https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/", "name": "収集の仕組み | TgWitness", "description": "記録範囲、リアルタイム更新、再確認、添付ファイル、自身の操作、および「ギャップ」の意味について、記録ごとに解説しています。", "inLanguage": "ja", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://phishdestroy.github.io/TgWitness/ja/"}, {"@type": "ListItem", "position": 2, "name": "ドキュメント", "item": "https://phishdestroy.github.io/TgWitness/ja/docs/"}, {"@type": "ListItem", "position": 3, "name": "参考文献", "item": "https://phishdestroy.github.io/TgWitness/ja/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "収集の仕組み", "item": "https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">コンテンツへスキップ</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / ドキュメント</span></a>
+<nav aria-label="ガイド"><a href="../../concepts/">ビジュアルガイド</a><a href="../../">すべてのガイド</a><a href="../">参考文献</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="言語"><span aria-hidden="true">◍</span> 日本語</summary><div class="lang-list"><a href="../../../../docs/reference/collection/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/collection/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/collection/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/collection/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/collection/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/collection/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/collection/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/collection/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/collection/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/collection/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/collection/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/collection/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/collection/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/collection/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/collection/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/collection/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/collection/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/collection/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/collection/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/collection/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/collection/" hreflang="pl" lang="pl">Polski</a><a href="./" hreflang="ja" lang="ja" aria-current="true">日本語</a><a href="../../../../th/docs/reference/collection/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/collection/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/collection/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="ライトテーマとダークテーマを切り替える"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="ガイド"><a href="../../../guides/modes.html">モード、シナリオ、および証拠レベル</a><p class="nav-label">はじめに</p><a href="../../start/">数分で始められます</a><a href="../../accounts/">アカウントを連携する</a><a href="../../proxies/">プロキシを選択してください</a><a href="../../exports/">エクスポートと検証</a><p class="nav-label">証拠について理解する</p><a href="../../concepts/">証拠の仕組みをご覧ください</a><a href="../../cases/">すべてのチャットを横断的に調査する</a><a href="../../security/">セキュリティを確保してください</a><p class="nav-label">さらに詳しく</p><a href="../../witness/">Witnessボットの設定</a><a href="../../server/">稼働を継続してください</a><a href="../../troubleshooting/">何が問題だったのかを確認する</a></nav><nav class="wiki-nav" aria-label="参考文献"><p class="nav-label"><a class="nav-label-link" href="../">参考文献</a></p><details class="wiki-group"><summary>セットアップ</summary><a href="../quickstart/">クイックスタート</a><a href="../accounts/">アカウントとセッション形式</a><a href="../connection/">接続、プロキシ、およびデータ保護</a><a href="../deployment/">導入</a></details><details class="wiki-group" open><summary>収集</summary><a href="./" aria-current="page">収集の仕組み</a><a href="../operations/">ワークフローと操作方法</a><a href="../investigation/">調査モード</a><a href="../features/">機能と制限事項</a></details><details class="wiki-group"><summary>証拠</summary><a href="../how-it-works/">証拠の仕組み</a><a href="../evidence/">証拠の形式</a><a href="../witness/">独立した証人</a><a href="../timestamp/">タイムスタンプ</a></details><details class="wiki-group"><summary>セキュリティとプロジェクト</summary><a href="../security/">セキュリティおよびデータ取り扱い</a><a href="../architecture/">アーキテクチャ</a><a href="../verification/">テスト済みの内容</a><a href="../license/">ライセンスに関する説明とアーキテクチャ上の非互換性の通知</a><a href="../notice/">オペレーターの非互換性に関する通知</a><a href="../changelog/">変更履歴</a></details></nav><p class="sidebar-note">v0.7.0<br>オープンソース・お使いのマシン上で動作します</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="ガイド"><a href="../../../">ホーム</a> <span aria-hidden="true">/</span> <a href="../../">ドキュメント</a> <span aria-hidden="true">/</span> <a href="../">参考文献</a> <span aria-hidden="true">/</span> <span aria-current="page">収集の仕組み</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">ドキュメントを検索する</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="「プロキシ」、「ハッシュチェーン」、「トークン」、または「ウィットネス」などを試してみてください…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="検索を明確にする" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">ガイドやリファレンスを検索するには、単語を入力してください。検索はブラウザ内で行われます。</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">参考文献 / 収集</p><h1>収集の仕組み</h1><p class="guide-outcome">記録範囲、リアルタイム更新、再確認、添付ファイル、自身の操作、および「ギャップ」の意味について、記録ごとに解説しています。</p><div class="wiki-body"><p>TgWitnessは、接続されたTelegramアカウントが検知した内容を記録します。このジャーナルは、
+それらの検知内容、その順序、および付随するコンテキストを保存します。また、
+欠落したメッセージやアカウントの接続状態から、目に見えない行動を推測することはありません。</p>
+<h2 id="from-login-to-a-journal">ログインからジャーナルまで<a class="anchor" href="#from-login-to-a-journal" aria-label="このセクションへのリンク">#</a></h2>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 691 396" width="691" height="396" role="img" aria-labelledby="flow-1-title flow-1-desc"><title id="flow-1-title">フローチャート</title><desc id="flow-1-desc">ユーザーアカウントの認証 → アクセス可能なグループおよびチャンネルを選択してください; アクセス可能なグループおよびチャンネルを選択してください → イベントおよび添付ファイルの設定を保存する; イベントおよび添付ファイルの設定を保存する → 監視を開始する; 監視を開始する → アクティブなクライアントからの更新情報を受け取る; アクティブなクライアントからの更新情報を受け取る → 情報源およびイベントに関するポリシーを適用する; 情報源およびイベントに関するポリシーを適用する → 署名付き観測記録を追加する; 署名付き観測記録を追加する → ジャーナルの確認またはエクスポート; 署名付き観測記録を追加する → キューに格納された添付ファイルを処理する; キューに格納された添付ファイルを処理する → ダウンロード結果を追加してください</desc><defs><marker id="flow-1-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M209.8 46.0C232.8 46.0 232.8 46.0 255.8 46.0" marker-end="url(#flow-1-arrow)" style="--i:0;--len:46" pathLength="46"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M209.8 46.0C232.8 46.0 232.8 46.0 255.8 46.0"/></circle><path class="flow-edge" d="M435.6 46.0C458.6 46.0 458.6 46.0 481.6 46.0" marker-end="url(#flow-1-arrow)" style="--i:1;--len:46" pathLength="46"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M435.6 46.0C458.6 46.0 458.6 46.0 481.6 46.0"/></circle><path class="flow-edge" d="M571.5 75.0C571.5 113.5 571.5 113.5 571.5 152.0" marker-end="url(#flow-1-arrow)" style="--i:2;--len:77" pathLength="77"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M571.5 75.0C571.5 113.5 571.5 113.5 571.5 152.0"/></circle><path class="flow-edge" d="M509.2 172.0C472.4 172.0 472.4 172.0 435.6 172.0" marker-end="url(#flow-1-arrow)" style="--i:3;--len:74" pathLength="74"/><circle class="flow-pulse" r="3.2" style="--i:3"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M509.2 172.0C472.4 172.0 472.4 172.0 435.6 172.0"/></circle><path class="flow-edge" d="M255.8 172.0C232.8 172.0 232.8 172.0 209.8 172.0" marker-end="url(#flow-1-arrow)" style="--i:4;--len:46" pathLength="46"/><circle class="flow-pulse" r="3.2" style="--i:4"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M255.8 172.0C232.8 172.0 232.8 172.0 209.8 172.0"/></circle><path class="flow-edge" d="M119.9 210.0C119.9 252.5 119.9 252.5 119.9 295.0" marker-end="url(#flow-1-arrow)" style="--i:5;--len:85" pathLength="85"/><circle class="flow-pulse" r="3.2" style="--i:5"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M119.9 210.0C119.9 252.5 119.9 252.5 119.9 295.0"/></circle><path class="flow-edge" d="M209.8 324.0C232.8 324.0 232.8 289.0 255.8 289.0" marker-end="url(#flow-1-arrow)" style="--i:6;--len:61" pathLength="61"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M209.8 324.0C232.8 324.0 232.8 289.0 255.8 289.0"/></circle><path class="flow-edge" d="M209.8 324.0C232.8 324.0 232.8 359.0 255.8 359.0" marker-end="url(#flow-1-arrow)" style="--i:6;--len:61" pathLength="61"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M209.8 324.0C232.8 324.0 232.8 359.0 255.8 359.0"/></circle><path class="flow-edge" d="M435.6 359.0C458.6 359.0 458.6 324.0 481.6 324.0" marker-end="url(#flow-1-arrow)" style="--i:7;--len:61" pathLength="61"/><circle class="flow-pulse" r="3.2" style="--i:7"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M435.6 359.0C458.6 359.0 458.6 324.0 481.6 324.0"/></circle><g class="flow-node" style="--i:0"><rect x="30.0" y="17.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="37.0">ユーザーアカウントの認</tspan><tspan x="119.9" y="55.0">証</tspan></text></g><g class="flow-node" style="--i:1"><rect x="255.8" y="8.0" width="179.8" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="28.0">アクセス可能なグループ</tspan><tspan x="345.7" y="46.0">およびチャンネルを選択</tspan><tspan x="345.7" y="64.0">してください</tspan></text></g><g class="flow-node" style="--i:2"><rect x="481.6" y="17.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="37.0">イベントおよび添付ファ</tspan><tspan x="571.5" y="55.0">イルの設定を保存する</tspan></text></g><g class="flow-node" style="--i:3"><rect x="509.2" y="152.0" width="124.6" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="172.0">監視を開始する</tspan></text></g><g class="flow-node" style="--i:4"><rect x="255.8" y="134.0" width="179.8" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="154.0">アクティブなクライアン</tspan><tspan x="345.7" y="172.0">トからの更新情報を受け</tspan><tspan x="345.7" y="190.0">取る</tspan></text></g><g class="flow-node" style="--i:5"><rect x="30.0" y="134.0" width="179.8" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="154.0">情報源およびイベントに</tspan><tspan x="119.9" y="172.0">関するポリシーを適用す</tspan><tspan x="119.9" y="190.0">る</tspan></text></g><g class="flow-node" style="--i:6"><rect x="30.0" y="295.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="315.0">署名付き観測記録を追加</tspan><tspan x="119.9" y="333.0">する</tspan></text></g><g class="flow-node" style="--i:7"><rect x="255.8" y="260.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="280.0">ジャーナルの確認または</tspan><tspan x="345.7" y="298.0">エクスポート</tspan></text></g><g class="flow-node" style="--i:7"><rect x="255.8" y="330.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="350.0">キューに格納された添付</tspan><tspan x="345.7" y="368.0">ファイルを処理する</tspan></text></g><g class="flow-node" style="--i:8"><rect x="481.6" y="295.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="315.0">ダウンロード結果を追加</tspan><tspan x="571.5" y="333.0">してください</tspan></text></g></svg></div><details class="flow-steps"><summary>図表をテキストで記述</summary><ol><li>ユーザーアカウントの認証 → アクセス可能なグループおよびチャンネルを選択してください</li><li>アクセス可能なグループおよびチャンネルを選択してください → イベントおよび添付ファイルの設定を保存する</li><li>イベントおよび添付ファイルの設定を保存する → 監視を開始する</li><li>監視を開始する → アクティブなクライアントからの更新情報を受け取る</li><li>アクティブなクライアントからの更新情報を受け取る → 情報源およびイベントに関するポリシーを適用する</li><li>情報源およびイベントに関するポリシーを適用する → 署名付き観測記録を追加する</li><li>署名付き観測記録を追加する → ジャーナルの確認またはエクスポート</li><li>署名付き観測記録を追加する → キューに格納された添付ファイルを処理する</li><li>キューに格納された添付ファイルを処理する → ダウンロード結果を追加してください</li></ol></details></figure>
+<p>認証、情報源へのアクセス、稼働中のコレクター、および完全な配信は、
+それぞれ異なる問題です。ログインに成功したからといって、すべてのグループへのアクセスが許可されるわけではありません。
+接続された転送経路があるからといって、関連するすべての更新が確実に届いたとは限りません。</p>
+<h2 id="observation-scope-chosen-chats-a-folder-or-the-whole-account">監視範囲：指定したチャット、フォルダ、またはアカウント全体<a class="anchor" href="#observation-scope-chosen-chats-a-folder-or-the-whole-account" aria-label="このセクションへのリンク">#</a></h2>
+<p>出典 → <strong>監視範囲によって、</strong>ワークスペースが記録するチャットが決まります。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>モード</th>
+<th>記録</th>
+<th>新しいチャット</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>選択したチャット（デフォルト）</td>
+<td>手動で追加したチャットのみ</td>
+<td>自動的に追加されることはありません</td>
+</tr>
+<tr>
+<td>Telegramフォルダ</td>
+<td>アカウントのフォルダ内のチャット：フォルダに指定されたチャットに加え、そのフォルダのカテゴリ（連絡先、非連絡先、グループ、チャンネル、ボット）に含まれるチャットから、除外されたチャットおよび（フォルダの設定で指定されている場合）アーカイブされたチャットを除いたもの</td>
+<td>該当するチャットは、アクティブになるとすぐに追加されます。Telegramのフォルダに追加したチャットは、1時間以内に取り込まれます。</td>
+</tr>
+<tr>
+<td>アカウント全体</td>
+<td>そのアカウントで表示されるすべてのチャット</td>
+<td>新しいチャット、グループ、プライベートチャット、またはボットは、最初の更新が届いた瞬間に追加されます。</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>ソースの種類</strong>（チャンネル、グループ、プライベートチャット、ボット）によって、フォルダモードと
+    アカウント全体モードの適用範囲が限定されます。選択したチャットは、プライベートチャットやボットを含め、どのタイプでも構いません。</li>
+<li><strong>除外されたチャットは</strong>、どのモードにおいても記録されることはありません。フォルダモードおよびアカウント全体モードでは、
+    ソースに対して<em>「除外」</em>または<em>「削除」</em>を行うと、そのチャットがこのリストに追加されるため、スコープによって再度追加されることはありません。
+    手動でチャットを再度選択すると（「ソース」または「チャット」から）、リストから除外されます。このリストには
+    最大5,000件のチャットが登録可能です。それを超えると、<em>「削除」</em>は拒否され、代わりにチャットを一時停止することができます。</li>
+<li><strong>自身の操作</strong>（デフォルトでオン）：このアカウントが送信するメッセージ、その編集、および
+    返信キーボードのボタン操作。オフにすると、送信メッセージと編集はスキップされます。</li>
+<li>フォルダまたはアカウント全体に切り替える際には確認が求められます。これらのモードでは、
+    プライベートチャットや第三者のメッセージも記録されるため、専用のアカウントでのみ使用してください。
+    確認およびスコープの変更はすべて、<code>scope.changed</code>レコードとして署名されます。</li>
+<li>スコープによって追加されたチャットは、<em>「auto」</em>とマークされたソースとして表示され、<code>scope.applied</code>
+    （開始時および1時間ごと）または<code>source.discovered</code>（監視中に新しいチャットが追加された場合）として記録されます。選択したチャットに
+    戻すと、自動的に追加されたすべてのソースが一時停止します。</li>
+</ul>
+<p>これらのモードでは以下のことができません：</p>
+<ul>
+<li><strong>シークレットチャットは</strong>2台のデバイス間でエンドツーエンド暗号化されており、いかなるモードにおいても
+    TgWitnessには一切送信されません。</li>
+<li><strong>TgWitnessが実行されていない間は、何も記録されません。</strong>再起動後、TgWitnessはTelegramに
+    見逃した更新情報を問い合わせ、チャットを再確認しますが、長時間の
+    サービス停止後には、Telegramがすべてのデータを返してくれるわけではありません。レポートおよび<code>verify.py</code>では、そのような期間はギャップとして表示されます（<a href="../evidence/#coverage-continuity-gaps-and-unobserved-ids">カバレッジを</a>参照）。</li>
+<li>最初は最初の 1,000 件のダイアログのみが表示されます（上限は<strong>「パラメータ」</strong>に記載されています）。それより古い
+    チャットは、次にアクティブになった時点で追加されます。追加されたチャットのそれ以前の履歴は取得されません。必要な場合は、履歴の
+    スナップショットまたはチャットの完全なエクスポートを行ってください。</li>
+<li>常に変化するフォルダの状態（ミュート、既読）は適用されません。そのようなチャットは
+    引き続き監視対象となります。</li>
+<li>別のアプリで押された<strong>インライン（コールバック）ボットボタンは</strong>、2つ目の
+    セッションからは認識されません。ボットの返信や編集は記録されます。返信用のキーボード入力は送信
+    メッセージとして届き、「<code>button_press</code>」というラベルが付けられます。</li>
+<li>チャットが増えれば、リクエストも増えます。Telegramは、同社が
+    過剰と判断した通信量に対してアカウントを制限するため、専用のアカウントを使用すべき理由がまた一つ増えます。</li>
+</ul>
+<h2 id="scope-and-event-selection">適用範囲とイベントの選択<a class="anchor" href="#scope-and-event-selection" aria-label="このセクションへのリンク">#</a></h2>
+<p>各ワークスペースには独自の情報源があります。TgWitnessは、グループへの参加、
+招待の受諾、または全メンバーの自動列挙は行いません。情報源は、すでに
+そのアカウントからアクセス可能なものでなければなりません。 起動時、コレクターは選択されたソースを
+アカウントの表示可能なダイアログと照合します。
+<strong>「パラメータ」→「アカウントのリストから読み込むチャット」</strong>で別段の指定がない限り、最初の 1,000 件のダイアログが検査されます。
+ソースが存在しない場合は<strong>「アクセス未確認」</strong>とマークされ、あなたが削除されたとはみなされません。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>設定</th>
+<th>収集します</th>
+<th>無効にした場合の影響</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>新しいメッセージ</td>
+<td>通常配信されたメッセージ</td>
+<td>後から行われた編集や削除については、比較対象となる以前に記録されたテキストが存在しない場合があります。</td>
+</tr>
+<tr>
+<td>編集</td>
+<td>編集済みのメッセージ版を提供</td>
+<td>途中での変更内容は、後から復元されることはありません。</td>
+</tr>
+<tr>
+<td>削除</td>
+<td>範囲指定された削除通知と、範囲指定のないアカウントレベルの通知</td>
+<td>削除通知はジャーナルには追加されません。</td>
+</tr>
+<tr>
+<td>反応</td>
+<td>送信された反応のスナップショット</td>
+<td>個別の反応に関する更新情報は追加されません。</td>
+</tr>
+<tr>
+<td>メンバーシップ</td>
+<td>会員向けサービスのお知らせや参加者への最新情報を配信しました</td>
+<td>これらの会員に関する観察事項は追加されていません。</td>
+</tr>
+</tbody>
+</table></div>
+<p>設定は、ワークスペース内で選択されたすべてのソースに適用されます。変更を適用するには、フォームを保存してください。
+変更内容は、署名付きの「変更前」および「変更後」の値とともに記録されます。カテゴリを無効にしても、
+それ以前の記録は削除されません。また、再度有効にしても、見逃した更新内容は遡って反映されません。</p>
+<p>運用記録やその他のグループサービス関連のイベントは、これらの
+設定とは別個に扱われます。メンバーシップサービスメッセージについては、通常の
+新規メッセージのキャプチャが無効になっている場合でも、メンバーシップが
+有効になっているとメッセージ記録が生成されることがあります。キャプチャされたTelegram
+オブジェクトには埋め込まれたメタデータが保持されます。設定は、情報の黒塗りルールではありません。</p>
+<p><strong>プライベートチャットや通常のグループでの削除は</strong>、チャットを伴わないメッセージIDとして記録されます。
+これらのチャットはアカウント全体で共通のメッセージIDシーケンスを共有しているため、そのIDを持つメッセージが
+以前に保存されていた場合、そのチャットは特定されます。削除は当該チャットに記録され、
+その仕組みについては<code>chat_resolution</code>で説明されています。 保存されたことのないIDは、
+明示的に「不明」<strong>とされた削除として</strong>扱われます。コレクターは推測を行いません。Telegramは、誰がメッセージを削除したかを決して明かしません。
+削除されたメッセージがこのアカウントから送信された場合、記録にはその旨が
+（<code>deleted_message_was_outgoing</code>）記載されますが、削除者の名前は明記されません。</p>
+<h2 id="own-actions">自身の行動<a class="anchor" href="#own-actions" aria-label="このセクションへのリンク">#</a></h2>
+<p>監視対象アカウントから送信されたメッセージには「<code>outgoing</code>」というラベルが付与されます。送信済み
+メッセージの編集については、プライベートチャットやグループチャットでは作成者本人がのみ編集可能であるのに対し、チャンネルへの
+投稿は他の管理者も編集できることが明記されています。 送信メッセージが、そのチャット内で最も新しく保存された返信キーボードのボタン
+のテキストを繰り返し使用している場合、そのメッセージには<code>button_press</code>というラベルが付けられ、
+そのキーボードの記録へのリンクが添付されます。</p>
+<p>自身の操作を除外する処理は、バックグラウンドでの再チェックや、新しいチャット履歴の自動記録にも適用されます。
+スキップされた送信メッセージは、再チェックの位置を先へ進めるため、それ以降の受信メッセージの記録を妨げることはありません。
+パネルでの明示的な操作や、手動で要求された履歴のスナップショットは、引き続き記録されます。</p>
+<h2 id="investigation-mode-joining-teams-and-talking-to-bots">調査モード：チームへの参加とボットとの対話<a class="anchor" href="#investigation-mode-joining-teams-and-talking-to-bots" aria-label="このセクションへのリンク">#</a></h2>
+<p><strong>「ソース」→「監視範囲」→「調査モード」</strong>では、チームチャットに参加し、ボットを起動してそこに書き込みを行う専用
+アカウントの監視範囲を設定します。対象となるのは、アカウント全体、すべての
+ソースタイプ、自身のアクション、および表示されるすべてのチャットやボットのプロフィールと、その最新の
+200件の表示可能なメッセージです。 フォームを確認し、「<strong>スコープを保存」</strong>を押してください。アカウント全体への
+切り替えには、通常の確認が求められます。</p>
+<ul>
+<li><strong>ボタン。</strong>メッセージの下にあるボタンはメッセージと共に保持され、「<strong>チャット</strong>」に表示されます：リンク、Web
+    アプリ、ログインリンク、コピー用のテキスト、コールバックデータ、インラインクエリ、電話番号や
+    位置情報の要求などです。 リンクはテキストとして表示され、パネルによって開かれることはありません。ボットが
+    ボタンのみ（新しい支払いリンクなど）を変更した場合、それはメッセージの新しいバージョンとみなされ、
+    ライブ更新および再確認の双方において適用されます。</li>
+<li>
+<p><strong>新しいチャットとボット。</strong>フォルダモードおよびアカウント全体モードにおいて、<strong>新しいチャットやボットが
+    出現すると</strong>、出現直後に保存されます：</p>
+<ul>
+<li><code>source.profile</code>レコードとしてのプロファイル：ボットの説明とコマンド、ユーザー、グループ、またはチャンネルの「概要」テキスト、
+    メンバー、リンクされたチャット、およびTelegramが返した際の招待リンク
+    ；</li>
+<li><code>new_chat</code> とマークされた履歴スナップショットとして、最新の表示可能なメッセージ（最大 1,000 件）を保存します。これには、
+    参加したばかりのチームチャットの以前のメッセージや、監視がチャットに
+    気付く前にボットが発信した内容などが含まれます。すでに保存済みのメッセージは重複して記録されません。</li>
+</ul>
+<p>モードを有効にした時点で既にリストに含まれているチャットは、スナップショットなしで追加されます。
+FloodWaitが発生すると、この処理は一時停止され、その後再開されます。失敗は記録され、
+チャットのリアルタイム記録は継続されます。
+- <strong>プロファイルはリクエストに応じて表示されます。「チャット」→「プロファイル」→「プロファイルを保存」を選択すると</strong>、任意のソースの現在のプロファイルが保存され、
+メッセージの上部に最新のプロファイルが表示されます。
+- <strong>非表示。</strong>別のTelegramアプリ内で押されたインライン（コールバック）ボタン、ボットが
+その押下に応答して表示するポップアップやリンク、および別のアプリで使用された招待リンクは、
+TgWitnessには届きません。ボットがその後送信または編集した内容は記録されます。</p>
+</li>
+</ul>
+<h3 id="act-from-the-panel">パネルからの発言<a class="anchor" href="#act-from-the-panel" aria-label="このセクションへのリンク">#</a></h3>
+<p><strong>「Chats」</strong>には、選択したワークスペースのTelegramアカウントを使用するミニクライアントが追加されました：</p>
+<ul>
+<li>プレーンテキストのメッセージを入力するか、保存済みのメッセージの下にある<strong>「返信」</strong>を選択してください。送信される
+    メッセージは、送信更新が対象範囲から除外されている場合でも記録されます。</li>
+<li>「Press<strong>」ボタンは、</strong>現在のコールバックボタンまたはテキストボタンの下にあります。サーバーは
+    メッセージを再度取得し、キーボード入力が保存されたバージョンと異なる場合は、その操作を拒否します。
+    コールバックの受信確認には、Telegramのポップアップテキスト、アラートフラグ、およびURLが保持されます。また、返信内容は
+    会話の下にも表示されます。URLは選択可能なテキストのままとなり、自動的に開かれることはありません。</li>
+<li><strong>「Telegramリンクを開く」</strong>を展開し、「<code>@username</code>」、公開の「<code>https://t.me/name</code>」リンク、
+    「<code>https://t.me/+invite</code>」／「<code>joinchat/invite</code>」、または「<code>?start=parameter</code>」を含むボットリンクを入力し、
+    <strong>「プレビューを保存」</strong>を押してください。参加前に、元のリンクとTelegramのプレビューに署名が行われます。
+    <strong>参加／開いて確認した後</strong>、グループ／チャンネルに参加するか、ユーザー／ボットを開き、
+    チャットを有効なソースとして追加し、開始パラメータを含む<code>/start</code>をボットに送信します。
+    管理者の承認待ちの参加リクエストは、メンバーシップとしてではなく「保留中」として記録されます。</li>
+</ul>
+<p>「<strong>監視を開始</strong>」をオンにすると、受信した返信をリアルタイムでキャプチャできます。監視が一時停止している間もパネルの操作は機能しますが、
+その場合は直接的な返信のみが確実に保存されます。
+新たに追加されたソースは、監視が実行されている際に、設定されたプロファイル／履歴の取り込みを使用します。
+ソースが一時停止している場合は、「<strong>ソース</strong>」で有効にしてから、送信やボタンの操作を行ってください。</p>
+<p><code>interaction.preview</code>、<code>interaction.requested</code>、<code>interaction.result</code>は、証拠エクスポートに含まれる通常の署名付き
+ジャーナルイベントです。リクエストには、アカウント、メッセージ／ボタン
+またはプレビューレコード、および監視が実行されていたかどうかが識別されます。レシートは、成功、
+拒否、承認待ち、および不明な結果を区別します。中断されたリクエストはTelegramに到達している可能性があります：
+新しい操作を開始する前にチャットを確認してください。 リクエスト ID を再利用すると、
+再起動後を含め、アクションを繰り返すことなく保存された受信確認を取得できます。パネルは、
+現在のページセッション中に同じアクションに対して曖昧な応答があった場合でも、その ID を保持します。
+また、アクションが成功した後でビューの更新に失敗した場合も、その ID を保持します。受信確認は
+表示されたままとなり、再度クリックすると取得できます。 コールバックおよび参加 RPC には 1 回の
+試行があります。再試行可能な読み取り操作は、設定された再試行ポリシーを維持します。チャットを切り替えると、
+下書きと返信先が即座にクリアされ、新しい会話が読み込まれるまで送信が無効になります。</p>
+<p>このミニクライアントは、テキストおよびコールバックボタンを処理します。Webアプリ、ログイン／電話番号／位置情報の要求、
+支払い、インラインクエリ、添付ファイルについては、引き続きTelegramクライアントが必要となります。保存されたボタンの
+メタデータは引き続き表示されます。新しいコントロールには英語のテキストが使用されています。</p>
+<h2 id="recheck-tiers">ティアの再確認<a class="anchor" href="#recheck-tiers" aria-label="このセクションへのリンク">#</a></h2>
+<p>再確認では、Telegramに対し、見逃されたメッセージや編集履歴、および現在返されなくなったメッセージについて再度照会を行います。
+星印が付いたソースは優先ソースであり、デフォルトでは15分ごとに再確認が行われます。
+その他のソースはすべて6時間ごとに再確認されます。選択されたチャットは当初から優先ソースとして扱われますが、
+フォルダまたはアカウント全体から追加されたチャットは通常のソースとして扱われます。 1回の処理につき最大30の情報源が再確認され、
+残りは次の分まで待機します。再接続後は、優先情報源が先に処理されます。両方の
+間隔は、「情報源」→「記録設定」→「再確認」（0に設定するとその階層がオフになります）で設定され、
+<code>recheck.changed</code>として記録されます。</p>
+<p>取得し損ねたメッセージは、前回の処理が停止した地点から上流に向かって取得されます。1回の処理につき、
+<strong>[パラメータ] → [再チェックごとの新規メッセージ数]</strong>（デフォルトは1,000件）を上限とします。 長期間の停止後、
+再チェックは、その空白期間よりも新しいリアルタイムのメッセージが先に保存されていた場合でも、
+空白期間全体を埋めるように行われます。まだ追いついていないチャットは、
+ティア間隔を待つのではなく、次の分に再度再チェックされます。<code>recheck.completed</code>は、処理が完了するまで<code>continues_after</code>と表示されます。</p>
+<p>比較対象には、メッセージ本文、エンティティ、キーボード入力（削除を含む）、および添付ファイルの
+内容・識別情報が含まれます。 ファイルへのアクセスハッシュやファイル参照のみを変更しても、
+編集とはみなされません。また、Telegramが自動的に入力する項目（リンクプレビューの読み込み、ストーリーの閲覧、このアカウントによってロック解除された有料
+メディア、請求書の受領など）も編集とはみなされません。「チャット」に保存された各バージョンは、メディアのメタデータを含む完全なジャーナル記録にリンクされています。</p>
+<h2 id="message-history-and-attribution">メッセージ履歴と出典情報<a class="anchor" href="#message-history-and-attribution" aria-label="このセクションへのリンク">#</a></h2>
+<p>例えば、コレクターが「10:00に会議」という記録を検知し、その後「11:00に会議」という記録を確認し、
+さらに削除通知を受け取ったとします。この場合、3つの異なる記録が追加されます。
+元のテキストは残され、編集後の内容は別のバージョンとして扱われ、通知には
+削除が検知されたことが記録されます。</p>
+<p>最初のバージョンが消えた後に収集が開始された場合、そのテキストは利用できません。
+プロセスがオフラインの間に複数の編集が行われた場合、その後確認された
+バージョンのみが保存されます。削除通知では、一度もキャプチャされなかったコンテンツを復元することはできません。</p>
+<p>メッセージの送信者が必ずしも編集者であるとは限りません。Telegramでは通常、
+メッセージを削除した人物や正確な削除時刻は提供されません。身元不明の当事者は
+そのまま不明のままとなります。反応のスナップショットや参加者の更新情報には、
+Telegramがそのアカウントに対して表示している件数と身元のみが含まれます。</p>
+<p>シーケンス番号は観測順序を表しています。コレクターのUTCタイムスタンプは、その
+ローカル時計によるものです。Telegramの送信元タイムスタンプが提供された場合は、別途保存されます。
+いずれも、独立した信頼できるタイムスタンプではありません。</p>
+<h2 id="history-snapshots">履歴のスナップショット<a class="anchor" href="#history-snapshots" aria-label="このセクションへのリンク">#</a></h2>
+<p>スナップショットは、有効化されたソースから最新の表示可能なメッセージをリクエストするもので、1回のリクエストにつき最大
+500件まで取得可能です。結果は「履歴観測」としてラベル付けされます。これらは
+リアルタイムのキャプチャと重複する場合があり、重複する観測結果は個別の記録として保持されます。</p>
+<p>スナップショットは添付ファイルポリシーに従いますが、ライブイベントの切り替えとは別個に処理されます。
+削除されたメッセージや見逃された中間バージョンを復元することはありません。
+一時停止中にスナップショットをリクエストできますが、キューに入れられた添付ファイルは、監視が開始され、
+ダウンロードワーカーが実行されるまで待機します。</p>
+<h2 id="attachment-handling">添付ファイルの取り扱い<a class="anchor" href="#attachment-handling" aria-label="このセクションへのリンク">#</a></h2>
+<p>添付ファイルのダウンロードはデフォルトで有効になっており、空きディスク容量が1 GiB未満になると一時停止します。コレクターは、
+メッセージの監視とダウンロードのジョブを同時に実行します。このジョブは元のメディア
+記述子とサイズポリシーを維持するため、後から編集された添付ファイルが黙って置き換えられることはありません。</p>
+<p>ダウンロードはメッセージのキャプチャ後に実行されます。ダウンロードが完了すると、SHA-256およびバイト数を伴う<code>media.saved</code>
+レコードが生成されます。スキップ、失敗、再試行、および中断された
+処理については、それぞれ異なる結果となります。キューに入れられたジョブは、ファイルが保存されたことの証拠とはなりません。
+また、完了したファイルは、当初観測された添付ファイル記述子に記載されたバイト数と一致している必要があります。
+レスポンスが短すぎたり、予期せず長すぎたりする場合は、保存されたメディアとして記録されません。</p>
+<p>制限は、写真、動画、GIFおよびアニメーション、ラウンド動画メッセージ、
+音声メッセージ、音楽およびオーディオ、ステッカー、ファイルといった<strong>種類ごとに</strong>設定されています。 各タイプは個別に無効化可能で、
+1～2,000 MiBの範囲で独自のサイズ制限が設定されています。新しいワークスペースでは、写真用が20 MiB、
+動画用が100 MiB、ファイル・音声・ラウンド動画用が50 MiB、音声・GIF用が20 MiB、
+ステッカーは5 MiBです。<em>最大ファイルサイズは</em>、すべての種類に対して一括で設定されます。種類ごとの制限が設定される前に保存されたポリシーは、
+すべての種類に対して単一の制限を維持します。無効化された種類については、
+「<code>media.skipped</code>」レコードが生成され、サイズ不明またはサイズ超過のファイルはダウンロードされません。 大容量ファイルの
+ダウンロード速度は、少なくとも256 KiB/sとなります。ジョブは再起動後も維持されますが、有効期限が切れた参照、アクセス権の喪失、
+またはファイルの削除により、復元できない場合があります。既存のジョブは、保存された
+ポリシーを引き続き保持します。</p>
+<h2 id="pause-lock-disconnect-and-restart">一時停止、ロック、切断、再起動<a class="anchor" href="#pause-lock-disconnect-and-restart" aria-label="このセクションへのリンク">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>動作または状態</th>
+<th>効果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ワークスペースを切り替える</td>
+<td>パネル表示を変更します。その他のコレクターは状態を維持します。</td>
+</tr>
+<tr>
+<td>パネルをロックするか、タブを閉じてください</td>
+<td>サーバーと監視機能は稼働したままとなります。</td>
+</tr>
+<tr>
+<td>観察の一時停止</td>
+<td>そのコレクターを停止し、キューに格納されている添付ファイルの処理を保持します。</td>
+</tr>
+<tr>
+<td>ソースを無効にする</td>
+<td>今後のスコープ指定によるキャプチャを停止します。無効化されている間、それに関連するキューに登録されたメディア処理ジョブは待機状態となります。</td>
+</tr>
+<tr>
+<td>出典を削除する</td>
+<td>情報源として認識されず、ユーザープロフィールは削除されますが、すでに保存された記録は追記専用ジャーナルに残ります。まだ処理待ちの添付ファイルは、失敗（<code>source_removed</code>）として記録されます。フォルダモードおよびアカウント全体モードでも、これらは除外されます。</td>
+</tr>
+<tr>
+<td>接続経路を変更する</td>
+<td>一時停止が必要となり、古いクライアントを終了し、未完了のログインをキャンセルします。</td>
+</tr>
+<tr>
+<td>Pythonプロセスを停止する</td>
+<td>すべてのワークスペースを停止します。オフライン中は、いかなる観測も行われません。</td>
+</tr>
+<tr>
+<td>アクティブな監視終了後に再起動します</td>
+<td>保存されたセッションを使用して、保存された範囲の再開を試みます。手動で一時停止すると、その意図は解除されます。</td>
+</tr>
+</tbody>
+</table></div>
+<p>コレクターは、検知された接続切断、再試行、エラー、起動／停止、および
+ハートビートを記録します。短時間の中断は、定期的な接続チェックでは検出されない場合があります。
+再起動後、見逃された更新は保存された更新位置から要求され、
+監視対象のチャットは定期的に再チェックされます。<a href="../evidence/#durable-collection-and-process-receipts-02">証拠形式</a>をご参照ください。スナップショットは文脈を提供しますが、
+ギャップが修復されたことを証明するものではありません。</p>
+<h2 id="account-isolation-and-verification">アカウントの分離と検証<a class="anchor" href="#account-isolation-and-verification" aria-label="このセクションへのリンク">#</a></h2>
+<p>各ワークスペースには、独自のジャーナル、認証、署名鍵、ポリシー、およびキューがあります。
+そのワークスペースのアクティブなクライアントのみが、リアルタイムの観測データを記録できます。拒否されたクライアント、保留中のクライアント、
+置き換えられたクライアント、および接続テスト中のクライアントは、そのジャーナルにリアルタイムの更新を書き込むことはできません。
+異なるアカウントが同じグループを監視することは可能ですが、それぞれのジャーナルは独立したままです。</p>
+<p>各イベントには、前回のハッシュ値とEd25519署名が含まれます。エクスポート対象は、
+固定のシーケンス番号を通じてワークスペースのジャーナル全体を網羅します。パネルフィルターは
+エクスポート内容をフィルタリングしません。エクスポートの準備が行われている間も、その範囲を超えて収集が継続される場合があります。</p>
+<p><strong>「ジャーナルの検証」機能は、</strong>表示された
+境界を通じてイベントの連鎖と署名を検証します。ワークスペースが変更されると結果はクリアされ、パネルには
+検証後に追加された新しい記録が表示されます。ZIP形式でのエクスポートでは、収集されたメディアの検証も行われます。</p>
+<p>有効な署名は、Telegramの
+送信元や内容の真実性ではなく、信頼できる鍵に対する完全性を保証するものです。フィンガープリントとチェックポイントは個別に保持してください。信頼および配信要件については、
+<a href="../evidence/">証拠モデル</a>、<a href="../operations/">日常の運用</a>、
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">およびライブ受入手順をご</a>参照ください。</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/COLLECTION.md">GitHubでこのページを編集する ↗</a><a class="next-guide" href="../operations/"><span>次のステップ</span><strong>ワークフローと操作方法 →</strong></a><p>これらのガイドは、現在の実装について説明しています。検証結果および残された課題については、別途文書化されています。 <a href="../verification/">テスト済みの内容 →</a></p></footer>
+</main>
+<aside class="toc" aria-label="このページについて"><p class="nav-label">このページについて</p><a href="#from-login-to-a-journal">ログインからジャーナルまで</a><a href="#observation-scope-chosen-chats-a-folder-or-the-whole-account">監視範囲：指定したチャット、フォルダ、またはアカウント全体</a><a href="#scope-and-event-selection">適用範囲とイベントの選択</a><a href="#own-actions">自身の行動</a><a href="#investigation-mode-joining-teams-and-talking-to-bots">調査モード：チームへの参加とボットとの対話</a><a href="#recheck-tiers">ティアの再確認</a><a href="#message-history-and-attribution">メッセージ履歴と出典情報</a><a href="#history-snapshots">履歴のスナップショット</a><a href="#attachment-handling">添付ファイルの取り扱い</a><a href="#pause-lock-disconnect-and-restart">一時停止、ロック、切断、再起動</a><a href="#account-isolation-and-verification">アカウントの分離と検証</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>オープンソース・お使いのマシン上で動作します</span><a href="../../../../LICENSE">MITライセンス</a><a href="../notice/">オペレーター向け通知</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">セキュリティ</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "メッセージをお待ちしています", "Step through a fictional send, edit and delete.": "架空の送信、編集、削除のプロセスを順を追ってご説明します。", "No observations yet. Start the sequence or advance one event.": "まだ観察結果はありません。シーケンスを開始するか、1件先へ進めてください。", "Meet at 10:00": "10:00に集合してください。", "A new message is visible in the chat.": "チャットに新しいメッセージが表示されています。", "Record 1 appended: the collector observed the original message.": "記録1が追加されました：コレクターが元のメッセージを確認しました。", "Meet at 11:00": "11:00にお会いしましょう", "The current text changes. The earlier observation stays.": "現在のテキストは変更されます。以前の指摘はそのまま残ります。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "レコード2が追加されました：この編集は新たな観察結果です。レコード1には依然として元のテキストが保持されています。", "Message deleted": "メッセージが削除されました", "The message has disappeared from the chat view.": "そのメッセージはチャット画面から消えました。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "「Record 3」を追加しました：削除通知は、確認された両方のバージョンとともに保持されます。", "0 records": "0件の記録", "1 record": "1件の記録", "2 records": "2件の記録", "3 records": "3件の記録", "Complete / {n} of 3": "完了 / 3件中{n}件", "Step / {n} of 3": "ステップ / 3のうち{n}", "Pause": "一時停止", "Replay sequence": "再生シーケンス", "Play sequence": "再生順序", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "静的なサンプルが利用可能です。ハッシュをインタラクティブに計算するには、HTTPS経由でこのページを開くか、Web Cryptoをサポートするローカルホストのプレビューを開いてください。", "No record supplied": "記録は提供されていません", "Tail removed": "末尾を削除しました", "≠ saved hash": "≠ 保存されたハッシュ", "Rebuilt · different hash": "再構築済み・ハッシュ値が異なります", "= saved hash": "= 保存されたハッシュ", "Same length and matching head.": "同じ長さで、見出しも一致しています。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "計算された3つのハッシュ値はすべて、保存されているハッシュ値と一致しています。このサンプルは、保持されている3レコード単位の境界と一致しています。", "Same saved head; the journal prefix fails verification.": "保存されたヘッダーは同じですが、ジャーナルのプレフィックスが検証に失敗しました。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "レコード2は、保存されているハッシュと一致しなくなりました。最後に保存されたヘッドのみを確認していた場合、この不一致を見逃してしまいます。検証ツールはすべてのレコードを確認します。", "Head differs from the retained checkpoint.": "ヘッダーは、保持されているチェックポイントとは異なります。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "再構築されたハッシュは相互にリンクしていますが、最終ヘッドが変更されています。保持されているチェックポイントは、この履歴を拒否します。変更されたレコードに対しては、元の署名も検証に失敗します。", "Too short: 2 supplied records \u003c 3 retained records.": "記録数が少なすぎます：提供された記録が2件、保存された記録が3件未満です。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "残りの2つのハッシュは依然として一致しています。保持されているチェックポイントにより、欠落していた末尾部分が明らかになりました。その以前の境界情報がなければ、この短いプレフィックスだけでは欠落に気づくことはできなかったでしょう。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "このブラウザではハッシュ計算をご利用いただけません。以下の数式および説明文は引き続きご覧いただけます。", "{n} records": "{n}件の記録", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "承認済み：カウントが増加し、署名が検証され、鍵が一致しました。Witnessはこの新しい境界を保持します。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "ロールバック：署名付き回答で報告されたレコード数が、最後に承認されたチェックポイントのレコード数よりも少ない場合。Witnessはこの問題を記録し、以前に承認された境界を維持します。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "フォーク：カウントは変わりませんが、ヘッドが異なります。ウィットネスはこの不一致を記録し、以前に承認された境界を維持します。", "No answer": "回答なし", "boundary unknown": "境界不明", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "応答なし：Witnessはチェックの失敗を記録します。コレクターの現在の状態を特定することはできません。Witnessが依然としてBot APIにアクセスでき、かつ公開ポリシーが許可している場合、その失敗を公開することができます。", "Send {n}": "{n} を送信", "Edit {n}": "編集 {n}", "Delete {n}": "{n}を削除", "Both accounts captured all six expected observations in this example.": "この例では、両方のアカウントとも、想定されていた6つの観測項目すべてを捕捉しました。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "アカウントBでも6件中6件を正常に取得できました。2件の受信確認には時間がかかりました。取得率と受信確認の遅延は、それぞれ異なる問題を示しています。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "アカウントBは、締め切り時点までに6件中5件を捕捉しました（83.3％）。捕捉されなかった編集操作については、測定された遅延はありません。この結果は、6件の制御された操作についてのみ記述したものです。", "not observed by cutoff": "締め切りまでに確認されませんでした", "{s} seconds": "{s}秒", "Exact values follow in the table.": "具体的な数値は表に示されています。", "{s} s": "{s} s", "Not observed": "確認されませんでした", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "4つのチャットから、それぞれ異なる観察結果が得られています。すべての接続について、元の記録を追跡してください。送信者が特定されていない限り、チャンネルへの投稿をユーザー71001に割り当てないでください。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "記録#146と#205には、同じ送信者ID「71001」が記載されています。これにより、2つのチャットにまたがるTelegramアカウントの投稿が関連付けられます。ただし、実在の人物を特定したり、チャンネルへの投稿の作者を特定したりするものではありません。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "宛先「pay.example.invalid/new」は、グループ記録#146、ボットキーボード#173、チャンネル編集#188、およびプライベートメッセージ#205に登場します。宛先が繰り返し登場することは、これらの資料を結びつける要素ではありますが、それらのアカウントが共通の管理下にあることを証明するものではありません。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "この架空の事例において、完了済みのメディア受信記録 #151 と #209 は、完全な SHA-256 値が一致しています。実際のバイトデータと、それに関連するメッセージ記録を比較してください。一致したファイルからは、作成者が特定されることも、誰が転送したかを証明することもできません。", "the encrypted off-site copy": "暗号化されたオフサイトコピー", "notifications": "通知", "checkpoint hashes for timestamps": "タイムスタンプ用のチェックポイントハッシュ", "signed checkpoints for the witness": "Witness用の署名付きチェックポイント", "Switched on in this example": "この例では有効になっています", "Optional · off by default": "オプション・デフォルトではオフ", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "このマシンから削除されるもの：Telegramの接続情報と{list}。それ以外は一切ありません。", "Default: only the Telegram connection leaves this machine.": "デフォルト設定：Telegramへの接続のみがこのマシンから行われます。", "{done} of {total} done": "{done}/{total} 完了", "Mark step {n} as done": "ステップ{n}を「完了」としてマークする", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "コピー", "Copied": "コピー", "Command copied.": "コマンドをコピーしました。", "Selected — Ctrl/Cmd+C": "選択 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "コマンドが選択されました。手動でコピーしてください。", "Command copied to clipboard.": "コマンドがクリップボードにコピーされました。", "Select text": "テキストを選択", "Clipboard unavailable. Command selected; copy it manually.": "クリップボードが利用できません。コマンドが選択されています。手動でコピーしてください。", "A message arrives. The first observation is saved.": "メッセージが届きました。最初の記録が保存されました。", "The time changes. Both captured versions stay.": "時刻は変更されますが、キャプチャされた両方のバージョンはそのまま残ります。", "The message disappears. The captured history remains.": "メッセージは消えても、記録された履歴は残ります。", "Pause example animation": "アニメーションの一時停止例", "Play example animation": "サンプルアニメーションを再生する", "Play": "再生", "Full-size workspace screenshot": "ワークスペースのフルサイズスクリーンショット", "Workspace screenshot · fictional data": "ワークスペースのスクリーンショット・架空のデータ", "Close": "閉じる", "Close screenshot": "スクリーンショットを閉じる", "Scrollable full-size screenshot": "スクロール可能なフルサイズのスクリーンショット", "Enlarge: {name}": "拡大：{name}", "View full size": "フルサイズで表示"}</script>
+</body></html>

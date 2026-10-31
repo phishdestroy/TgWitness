@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="ko" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>배포 | TgWitness</title>
+<meta name="description" content="TgWitness를 Windows, Linux, macOS 또는 Docker 환경에서 HTTPS를 통해 서비스 형태로 실행할 수 있으며, 백업 및 업데이트 기능이 제공됩니다."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/deployment/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="배포 | TgWitness"><meta property="og:description" content="TgWitness를 Windows, Linux, macOS 또는 Docker 환경에서 HTTPS를 통해 서비스 형태로 실행할 수 있으며, 백업 및 업데이트 기능이 제공됩니다.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/ko/docs/reference/deployment/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/deployment/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/deployment/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/deployment/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/deployment/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/deployment/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/deployment/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/deployment/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/deployment/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/deployment/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/deployment/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/deployment/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/deployment/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/deployment/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/deployment/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/deployment/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/deployment/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/deployment/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/deployment/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/deployment/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/deployment/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/deployment/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/ko/docs/reference/deployment/", "url": "https://phishdestroy.github.io/TgWitness/ko/docs/reference/deployment/", "name": "배포 | TgWitness", "description": "TgWitness를 Windows, Linux, macOS 또는 Docker 환경에서 HTTPS를 통해 서비스 형태로 실행할 수 있으며, 백업 및 업데이트 기능이 제공됩니다.", "inLanguage": "ko", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://phishdestroy.github.io/TgWitness/ko/"}, {"@type": "ListItem", "position": 2, "name": "문서", "item": "https://phishdestroy.github.io/TgWitness/ko/docs/"}, {"@type": "ListItem", "position": 3, "name": "참고 문헌", "item": "https://phishdestroy.github.io/TgWitness/ko/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "배포", "item": "https://phishdestroy.github.io/TgWitness/ko/docs/reference/deployment/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">본문으로 건너뛰기</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / 문서</span></a>
+<nav aria-label="가이드"><a href="../../concepts/">시각적 가이드</a><a href="../../">모든 가이드</a><a href="../">참고 문헌</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="언어"><span aria-hidden="true">◍</span> 한국어</summary><div class="lang-list"><a href="../../../../docs/reference/deployment/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/deployment/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/deployment/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/deployment/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/deployment/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/deployment/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/deployment/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/deployment/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/deployment/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/deployment/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/deployment/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/deployment/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/deployment/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/deployment/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/deployment/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/deployment/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/deployment/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="./" hreflang="ko" lang="ko" aria-current="true">한국어</a><a href="../../../../zh-Hant/docs/reference/deployment/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/deployment/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/deployment/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/deployment/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/deployment/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/deployment/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/deployment/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="밝은 테마와 어두운 테마 전환"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="가이드"><a href="../../../guides/modes.html">모드, 시나리오 및 증거 수준</a><p class="nav-label">시작하기</p><a href="../../start/">몇 분 만에 시작하세요</a><a href="../../accounts/">계정 연결</a><a href="../../proxies/">프록시 선택</a><a href="../../exports/">내보내기 및 검증</a><p class="nav-label">증거 이해하기</p><a href="../../concepts/">증거가 어떻게 활용되는지 확인하기</a><a href="../../cases/">모든 채팅을 대상으로 조사하기</a><a href="../../security/">보안을 유지하세요</a><p class="nav-label">더 알아보기</p><a href="../../witness/">Witness 봇 설정하기</a><a href="../../server/">계속 운영해 주세요</a><a href="../../troubleshooting/">문제가 발생한 원인을 파악하세요</a></nav><nav class="wiki-nav" aria-label="참고 문헌"><p class="nav-label"><a class="nav-label-link" href="../">참고 문헌</a></p><details class="wiki-group" open><summary>설정</summary><a href="../quickstart/">빠른 시작</a><a href="../accounts/">계정 및 세션 형식</a><a href="../connection/">연결, 프록시 및 데이터 보호</a><a href="./" aria-current="page">배포</a></details><details class="wiki-group"><summary>수집</summary><a href="../collection/">데이터 수집 방식</a><a href="../operations/">워크플로우 및 운영</a><a href="../investigation/">조사 모드</a><a href="../features/">기능 및 제한 사항</a></details><details class="wiki-group"><summary>증거</summary><a href="../how-it-works/">증거 기록의 작동 방식</a><a href="../evidence/">증거 형식</a><a href="../witness/">독립적인 증인</a><a href="../timestamp/">타임스탬프</a></details><details class="wiki-group"><summary>보안 및 프로젝트</summary><a href="../security/">보안 및 데이터 처리</a><a href="../architecture/">아키텍처</a><a href="../verification/">테스트된 내용</a><a href="../license/">라이선스 안내 및 아키텍처 비호환성 공지</a><a href="../notice/">운영자 호환성 불일치 공지</a><a href="../changelog/">변경 내역</a></details></nav><p class="sidebar-note">v0.7.0<br>오픈 소스 · 사용자의 컴퓨터에서 실행됩니다</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="가이드"><a href="../../../">홈</a> <span aria-hidden="true">/</span> <a href="../../">문서</a> <span aria-hidden="true">/</span> <a href="../">참고 문헌</a> <span aria-hidden="true">/</span> <span aria-current="page">배포</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">문서 검색</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="프록시, 해시 체인, 토큰 또는 위트니스 등을 고려해 보십시오…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="명확한 검색" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">가이드와 참조 자료를 검색하려면 단어를 입력하세요. 검색 기록은 브라우저에 저장됩니다.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">참고 문헌 / 설정</p><h1>배포</h1><p class="guide-outcome">TgWitness를 Windows, Linux, macOS 또는 Docker 환경에서 HTTPS를 통해 서비스 형태로 실행할 수 있으며, 백업 및 업데이트 기능이 제공됩니다.</p><div class="wiki-body"><p><strong>영어</strong> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/DEPLOYMENT.md">Русский</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/uk/DEPLOYMENT.md">우크라이나어</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/es/DEPLOYMENT.md">Español</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/pt/DEPLOYMENT.md">포르투갈어 (브라질)</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/tr/DEPLOYMENT.md">Türkçe</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ar/DEPLOYMENT.md">العربية</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/fa/DEPLOYMENT.md">فارسی</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ur/DEPLOYMENT.md">우르두어</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/hi/DEPLOYMENT.md">हिन्दी</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/id/DEPLOYMENT.md">인도네시아어</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/vi/DEPLOYMENT.md">베트남어</a> · <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/zh/DEPLOYMENT.md">간체 중국어</a></p>
+<h2 id="choose-an-installation">설치 방법 선택<a class="anchor" href="#choose-an-installation" aria-label="이 섹션으로 이동">#</a></h2>
+<p>이동식 패키지의 경우, GitHub Releases에서 <code>TgWitness-&lt;version&gt;-windows-amd64-portable.zip</code>를 추출하십시오.
+다른 방법을 사용하려면 소스 ZIP 파일을 다운로드하여 압축을 풀거나 저장소를 복제한 후,
+프로젝트 디렉터리에서 다음 명령을 실행하십시오:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>설치</th>
+<th>시작</th>
+<th>백그라운드에서 실행되나요?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows용 휴대용 패키지</td>
+<td><code>TgWitness.cmd</code></td>
+<td>아니요; 창을 열어 두세요.</td>
+</tr>
+<tr>
+<td>Windows 전용</td>
+<td><code>Start.cmd</code></td>
+<td>아니요. 백그라운드에서 사용하려면 선택적 로그온 작업을 사용하십시오.</td>
+</tr>
+<tr>
+<td>Linux/macOS 네이티브 지원</td>
+<td><code>sh start.sh</code></td>
+<td>아니요. 백그라운드 실행에는 systemd/launchd를 사용하십시오.</td>
+</tr>
+<tr>
+<td>지원되는 모든 호스트에서 Docker 사용</td>
+<td><code>docker compose up -d --build --wait</code></td>
+<td>네, Docker 데몬이 실행 중일 때입니다.</td>
+</tr>
+<tr>
+<td>Windows용 Docker 보조 도구</td>
+<td><code>scripts\Docker.cmd</code></td>
+<td>네, 헬퍼는 웹 서버의 정상 작동 상태를 확인합니다.</td>
+</tr>
+<tr>
+<td>Linux/macOS용 Docker 보조 도구</td>
+<td><code>sh scripts/docker-start.sh</code></td>
+<td>네, 헬퍼는 웹 서버의 정상 작동 상태를 확인합니다.</td>
+</tr>
+</tbody>
+</table></div>
+<p>제3자가 확인할 수 있어야 하는 클라우드 서버(
+SSH 없이 제공업체의 API를 통해 생성되며, Cloudflare Tunnel을 통해서만 접속 가능)에 대해서는
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md">‘고신뢰도 배포’를</a> 참조하십시오.</p>
+<p>네이티브 시작 시 비공개 <code>.venv</code>를 생성하고 고정된 종속성을 설치합니다.
+Docker는 호스트 Python 없이 이미지 내에서 이를 빌드합니다. 최초
+설정 시 인터넷 접속이 필요합니다. Python 3.11 이상이 발견되지 않으면, <code>Start.cmd</code>는 현재 Windows 사용자를 위해 Python 3.12를
+설치하기 전에 확인을 요청합니다(winget을 사용하거나, 그렇지 않은 경우 Python Software Foundation의 서명을 확인한 후 python.org
+설치 프로그램을 사용함). 이 과정에서 관리자 권한을
+요청하지 않습니다. Docker 및 OS 서비스는 여전히 필수 전제 조건으로 유지됩니다.</p>
+<p>네이티브 및 포터블 설치 환경에서는 해당 폴더 내의 `<code>data/live</code>`를 사용합니다. Docker는 `<code>tgwitness-data</code>`라는 이름의 볼륨을
+`<code>/data</code>`에 사용합니다. 전체 데이터 디렉터리를 의도적으로 마이그레이션하기 전까지는
+이 두 환경은 별개의 설치 환경으로 간주됩니다. 새로운 Docker 컨테이너가 네이티브
+계정을 자동으로 감지할 것이라고 기대하지 마십시오.</p>
+<h2 id="installation-requirements">설치 요구 사항<a class="anchor" href="#installation-requirements" aria-label="이 섹션으로 이동">#</a></h2>
+<p>네이티브 설치에는 Python 3.11 이상과 <code>venv</code> 및 <code>ensurepip</code>가 필요하며, 첫 번째 종속성 설치를 위해 인터넷
+접속이 가능해야 하고,
+<code>.venv</code>를 위한 쓰기 가능한 프로젝트 디렉터리가 필요합니다. 번들된 패널은 Node.js나 프론트엔드 빌드가 필요하지 않습니다. 일반 OS 계정에서 런처를 실행하십시오.
+TgWitness는 관리자/루트 권한을 요구하지 않습니다.</p>
+<ul>
+<li><strong>Windows:</strong> <code>Start.cmd</code>는 <code>py -3</code>를 확인한 다음, <code>python</code>를 확인하고, 그 다음 사용자별 기본 설치 폴더와
+    Program Files 설치 폴더를 확인하며, 버전 3.11 이상이 필요합니다. 어느 것도 작동하지 않으면,
+    위에서 설명한 사용자별 자동 설치 옵션을 제공합니다. <code>py -3 start.py</code>도 작동합니다.
+    휴대용 패키지는 파이썬이 전혀 필요하지 않습니다.</li>
+<li><strong>Linux:</strong> <code>start.sh</code>는 <code>python3.13</code>, <code>python3.12</code>, <code>python3.11</code>, <code>python3</code> 및
+    <code>python</code>를 시도하며, 적합한 것이 없을 경우 apt, dnf, pacman, zypper, apk 또는 Homebrew용
+    설치 명령어를 출력합니다. Debian/Ubuntu 설치의 경우, 선택한 인터프리터와 일치하는
+    <code>python3-venv</code> 패키지가 필요할 수 있습니다. 배포판의 구형
+    기본 Python은 Python 3.11 이상으로 교체하거나 보완해야 합니다.</li>
+<li><strong>macOS:</strong> 최신 Python 3.11 이상 배포판을 설치하십시오. OS에서 제공하는
+    인터프리터가 요구 사항을 충족한다고 가정하지 마십시오. 프로젝트 디렉토리에 있는 <code>python3 start.py</code>를 사용하십시오.</li>
+<li><strong>Docker:</strong> Compose v2.20 이상과 함께 Docker Engine/Desktop을 사용하십시오. Windows에서 Docker Desktop을
+    사용할 경우 Linux 컨테이너를 사용해야 합니다. 컨테이너는 자체
+    Python 종속성을 설치하므로, 호스트에 별도로 Python을 설치할 필요가 없습니다.</li>
+</ul>
+<p>데이터 디렉토리에는 영구 로컬 스토리지를 사용하십시오. 메시지,
+미디어, WAL 증가량, 내보내기 및 백업을 고려하여 용량을 계획하십시오. 모든 워크로드에 적용되는 증거 기반의 보편적인 최소
+디스크/RAM 사양은 존재하지 않습니다. 호환되는 의존성 휠이 없는 CPU 아키텍처 및 Python 버전의 경우
+추가 빌드 도구와 별도의
+검증이 필요할 수 있습니다. &quot;이식성&quot;은 모든 OS 또는 하드웨어를 지원한다는 주장이 아닙니다.</p>
+<p>Windows 11/Python 3.12 환경은 로컬에서 검증되었습니다. Linux/macOS/컨테이너 정의 및 CI
+설정이 제공되지만, 이 개발 호스트에서는 실행되지 않았습니다. 정확한 범위는
+<a href="../verification/">VERIFICATION.md</a>를 참조하십시오.</p>
+<h2 id="local-computer">로컬 컴퓨터<a class="anchor" href="#local-computer" aria-label="이 섹션으로 이동">#</a></h2>
+<p>Windows에서는 <code>Start.cmd</code>를, Linux/macOS에서는 <code>sh start.sh</code>를 사용하십시오. <code>scripts\Setup.cmd</code> 또는
+<code>sh start.sh --setup-only</code>를 실행하면
+환경이 준비됩니다. 런처는 첫 사용 시 필수 구성 요소를 설치하며, 이후 실행 시에는
+기존 환경을 재사용합니다. 설정 및 텔레그램 데이터 수집에는 인터넷 연결이 필요하지만,
+기존 기록 열람 및 내보내기 기능은 오프라인에서도 작동합니다.</p>
+<p>설치 후 <code>python start.py --check</code>를 실행하여 수집기를 시작하지 않은 상태에서 로컬 종속성, Ed25519,
+저장소, 키 구성 및 수신 주소를 확인하십시오.
+구조화된 출력을 보려면 <code>--json</code>를 사용하십시오. 의도된 <code>--data-dir</code>, <code>--host</code> 및
+<code>--port</code>를 전달하십시오. 이 검사는 패키지를 설치하거나, 저널을 생성하거나, 텔레그램에 연결하지 않으며,
+무결성 또는 커버리지 검증도 아닙니다. 시작 시 기존 저널을 별도로 검증합니다.
+<code>python start.py --help</code> 역시 설치를 수행하지 않습니다.</p>
+<p>옵션:</p>
+<p>start.py를 실행한 후, Windows에서는 <code>.venv\Scripts\python.exe</code>, Linux/macOS에서는 <code>.venv/bin/python</code>를 사용하여 보조 명령을 실행하거나, 먼저 해당 환경을 활성화하십시오.
+아래의 <code>python -m ...</code> 예제는 환경이 활성화된 상태를 전제로 합니다.</p>
+<pre><code class="language-sh">python -m tgwitness --data-dir /path/to/private/data --host 127.0.0.1 --port 8787</code></pre>
+<p>환경 변수: TGWITNESS_DATA, TGWITNESS_HOST, TGWITNESS_PORT, TGWITNESS_TOKEN.
+TGWITNESS_VAULT_KEY_FILE은 새 설치 시 외부 키 모드를 선택합니다. 아래를 참조하십시오.
+TGWITNESS_TOKEN은 지정될 경우 최소 24자 이상이어야 하며, 암호학적으로
+무작위 생성된 값을 사용해야 합니다. 이 값이 없으면 앱이 panel-token.txt 파일에 256비트 무작위 토큰을 생성합니다.
+환경 변수 재정의는 해당 파일을 덮어쓰지 않습니다. 자격 증명을 갱신하려면 앱을 재시작하십시오.</p>
+<p>데이터 디렉터리를 소유할 수 있는 프로세스는 정확히 하나뿐입니다. 크로스 플랫폼 OS 파일 잠금 기능을 통해
+의도치 않은 동시 쓰기 작업을 방지합니다. Uvicorn 워커를 하나 사용하십시오. 패널을 통해 프로필(profiles)/&lt;id&gt;/ 아래에 추가 워크스페이스 디렉터리를 생성하여
+무제한의 워크스페이스를 관리할 수 있습니다.
+별도의 서비스 인스턴스의 경우, 별도의 디렉터리와 포트를 사용하십시오. SQLite WAL 파일은 네트워크 파일 시스템이 아닌 로컬 영구
+저장소에 위치해야 합니다. 복제본 간에 하나의 볼륨을 공유하지 마십시오.</p>
+<h2 id="windows-portable-package">Windows용 휴대용 패키지<a class="anchor" href="#windows-portable-package" aria-label="이 섹션으로 이동">#</a></h2>
+<p>각 GitHub 릴리스에는 <code>TgWitness-&lt;version&gt;-windows-amd64-portable.zip</code>와 그에
+수반되는 <code>.sha256</code>가 포함되어 있습니다. 여기에는 python.org에서 제공하는 공식 임베드 가능한 Python 3.12 런타임
+(<code>tools/build_portable.py</code>에 체크섬이 고정됨), TgWitness 및 고정된 종속성,
+그리고 다음 세 가지 런처가 포함되어 있습니다:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>파일</th>
+<th>목적</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TgWitness.cmd</code></td>
+<td>패널을 시작합니다. 추가 옵션은 그대로 전달됩니다(예: <code>TgWitness.cmd --port 8790</code>).</td>
+</tr>
+<tr>
+<td><code>TgWitness-Demo.cmd</code></td>
+<td><code>data\demo</code>에서 시뮬레이션 데모를 시작하세요.</td>
+</tr>
+<tr>
+<td><code>TgWitness-Check.cmd</code></td>
+<td>시작하지 않고 준비 상태 확인 실행</td>
+</tr>
+</tbody>
+</table></div>
+<p>전체 아카이브를 <code>Documents\TgWitness</code>와 같은 쓰기 가능한 폴더에 압축을 풀어 주십시오. ZIP 파일 내부나 Program Files 폴더에서
+실행하지 마십시오. 런타임은 격리된 모듈 경로를 사용하므로,
+다른 Python 설치본이나 <code>PYTHONPATH</code>는 이에 영향을 미치지 않습니다. 데이터는
+패키지의 <code>data</code> 폴더에 저장됩니다. 업데이트하려면 TgWitness를 중지하고, 새 버전을 새로운
+폴더에 압축을 풀고 <code>data</code> 폴더를 해당 위치로 복사하십시오.</p>
+<p>Python 3.12를 사용하여 64비트 Windows 환경에서 직접 빌드하는 방법:</p>
+<pre><code class="language-sh">python tools/build_portable.py</code></pre>
+<p>빌더는 런타임 체크섬을 검증하고, 제한된 종속성을
+패키지에 설치하며, 내장된 인터프리터를 사용하여 준비 상태 검사를 실행한 후 ZIP 파일과
+체크섬을 <code>dist/</code>에 기록합니다.</p>
+<h2 id="container">컨테이너<a class="anchor" href="#container" aria-label="이 섹션으로 이동">#</a></h2>
+<pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
+<p>이 명령은 /data에 대한 명명된 영구 볼륨을 생성합니다.
+웹 포트는 127.0.0.1:8787로 매핑됩니다. 이 프로세스는 UID 10001로 실행되며,
+권한이 제거된 상태이고, 루트 파일 시스템은 읽기 전용이며, /data 및 /tmp는 쓰기 가능합니다.
+<code>--wait</code>는 반환하기 전에 웹 서버의 상태를 확인하며, 텔레그램
+인증이나 전송을 수행하지 않습니다. 제공된 헬퍼는 빌드 후 180초의 준비 시간 제한을
+사용합니다. 초기 종속성 다운로드에는 이보다 더 오랜 시간이 소요될 수 있습니다.</p>
+<p>두 기본 Compose 파일 모두 프로젝트 이름 <code>tgwitness</code>를 사용하므로, 새 릴리스를
+다른 디렉터리에 추출하더라도 새로운 데이터 볼륨이 자동으로 선택되지 않습니다. 해당 프로젝트에 대해서는 하나의
+배포만 활성화된 상태로 유지하십시오. 독립적인 설치의 경우, 고유한
+<code>docker compose -p NAME ...</code>와 다른 호스트 포트를 사용하고, 업데이트 시 두 가지를 모두 유지하십시오.
+다른 프로젝트 이름을 사용하는 기존 배포 환경의 경우, 기존
+이름에 <code>-p</code>를 추가하여 계속 사용하십시오. <code>docker compose ls</code>는 기존 프로젝트를 나열합니다.</p>
+<p><code>deploy/env.example</code>를 <code>.env</code>로 복사하고, <code>TGWITNESS_PORT</code>를 변경하여 다른 루프백
+포트를 사용하십시오. 예를 들어, <code>TGWITNESS_PORT=8788</code>는
+<code>http://127.0.0.1:8788</code>에서 패널을 노출하며, 컨테이너는 여전히 8787 포트를 수신 대기합니다. <code>.env</code>는 Git에서 제외됩니다.</p>
+<p>초기 토큰 가져오기:</p>
+<pre><code class="language-sh">docker compose exec tgwitness cat /data/panel-token.txt</code></pre>
+<p>유용한 명령어:</p>
+<pre><code class="language-sh">docker compose ps
+docker compose logs --tail 100 -f
+docker compose stop
+docker compose up -d --wait</code></pre>
+<p><code>restart: unless-stopped</code>는 충돌이나 Docker 데몬
+재시작 후 수집기를 다시 시작합니다. 리눅스 서버에서는 배포판의 서비스
+관리자(일반적으로 <code>sudo systemctl enable --now docker</code>)를 사용하여 부팅 시 Docker를 활성화하십시오. Windows/macOS에서는
+Docker Desktop의 ‘로그인 시 시작’ 설정을 활성화하십시오. 데스크톱에서 로그아웃하거나 절전 모드로 전환하거나, 중지된
+Docker 데몬은 수집을 중단시킬 수 있습니다. 명시적으로 중지된 컨테이너는
+다시 시작할 때까지 중지된 상태로 유지됩니다.</p>
+<p>예시 구성에서 /tmp 볼륨의 상한은 512 MiB로 설정되어 있습니다. 내보내기 구조는
+대신 각 작업 공간의 <code>temporary-exports/</code>를 영구 저장소인 /data에 사용합니다. 해당 위치에
+동시 내보내기, 저널/WAL 증가, 미디어 및 백업을 위한 공간을 확보하십시오.
+런처는 deploy/constraints.txt를 사용하여 적격한 런타임 종속성 버전을 고정합니다.
+Docker 및 고신뢰도 서버는 deploy/requirements.lock 및
+deploy/build.lock을 기반으로 pip --require-hashes를 사용하여 설치됩니다. 모든 패키지 파일은 커밋에 기록된 SHA-256
+해시와 일치해야 하므로, PyPI 또는 미러에서 파일이 교체된 경우 설치가 거부됩니다. Python 기본
+이미지와 운영 체제 패키지는 여전히 별도의 릴리스 검증을 거쳐야 합니다.</p>
+<p>저널과 키를 삭제할 의도가 아닌 이상, `docker compose down -v` 명령어를 사용하지 마십시오.
+컨테이너 상태 보고서는 웹 서버의 가용성을 나타낼 뿐, 텔레그램 캡처 성공 여부를 나타내는 것이 아닙니다.
+패널의 수집기 상태, 하트비트, 오류 및 커버리지 이벤트를 확인하십시오.</p>
+<h3 id="independent-witness-profile">독립적인 증인 프로필<a class="anchor" href="#independent-witness-profile" aria-label="이 섹션으로 이동">#</a></h3>
+<p>선택 사항인 <code>witness</code> 서비스는 자체
+컨테이너 내에서 <a href="../witness/">독립적인 위트니스를</a> 실행하며, <code>witness-data</code> 볼륨에 자체 키와 저널을 보유하고, 수집기용으로는 읽기 전용
+위트니스 토큰만 제공합니다. 패널의 ‘위트니스(Witness)’ 페이지에서 토큰을 생성하고,
+봇 토큰 및 채널과 함께 <code>.env</code>에 추가한 다음, 프로필을 시작하십시오:</p>
+<pre><code class="language-sh">docker compose --profile witness up -d          # deploy/compose/compose.image.yaml: same flag
+docker compose logs witness                     # witness key fingerprint</code></pre>
+<p>이 서비스는 Compose 네트워크 내의 수집기(<code>http://tgwitness:8787</code>
+)에 연결됩니다(<code>TGWITNESS_WITNESS_COLLECTOR</code>
+가 이를 재정의하며, 예를 들어 <code>/profiles/&lt;workspace ID&gt;</code>
+는
+다른 작업 공간을 나타냅니다). 다른 사람이 운영하는 별도 서버의 위트니스(witness)를 사용하려면,
+해당 서버에서 <code>deploy/compose/compose.witness.yaml</code>
+를 사용하고 <code>TGWITNESS_WITNESS_COLLECTOR</code>
+를 수집기의 HTTPS
+주소로 설정하십시오. 해당 파일에는 위트니스만 포함되어 있습니다.</p>
+<h2 id="install-a-published-image">공개된 이미지를 설치하세요<a class="anchor" href="#install-a-published-image" aria-label="이 섹션으로 이동">#</a></h2>
+<p>이 내용은 <a href="#automated-github-releases">릴리스 워크플로우가</a>
+성공적으로 완료되고 GHCR 패키지가 공개적으로 구성된 후에 이용 가능해집니다. 리포지토리의 소유자/이름은 이 소스 트리에 하드코딩되어 있지 않습니다.
+해당 릴리스의 워크플로우 요약에 표시된 이미지를 사용하십시오.</p>
+<p><code>deploy/env.example</code>를 <code>.env</code>로 복사하십시오. <code>TGWITNESS_IMAGE</code>를 공개된 버전으로 설정할 때는
+<strong>소문자</strong> 리포지토리 경로를 사용하십시오. 예:</p>
+<pre><code class="language-dotenv">TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.0
+TGWITNESS_PORT=8787</code></pre>
+<p><code>compose.yaml</code> 대신 이 파일을 단독으로 실행하십시오:</p>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait
+docker compose --project-directory . -f deploy/compose/compose.image.yaml exec tgwitness cat /data/panel-token.txt</code></pre>
+<p>호스트 측에서 소스 빌드, 파이썬 또는 컴파일러가 필요하지 않습니다. 릴리스 워크플로는
+Docker Desktop의 Linux VM을 포함하여 Linux AMD64 및 ARM64 컨테이너를 대상으로 합니다.
+워크플로 요약에서 버전 태그 또는 <code>ghcr.io/owner/repository@sha256:...</code>를 사용하십시오.
+<code>latest</code> 태그 이동이나 무인 애플리케이션 업그레이드는 구성되어 있지 않습니다.
+프로젝트 이름이 일치할 경우, 이미지 및 소스 변형은 동일한 데이터 볼륨을 사용합니다.</p>
+<h2 id="automatic-https-on-a-server">서버에서 HTTPS 자동 적용<a class="anchor" href="#automatic-https-on-a-server" aria-label="이 섹션으로 이동">#</a></h2>
+<p>Docker가 설치된 서버, 사용자가 직접 관리하는 도메인, 그리고 영구적인 로컬 저장소를 사용하십시오.
+도메인의 A/AAAA 레코드를 서버로 지정하고, IPv6가 서버에 도달하는 경우에만 AAAA 레코드를 공개하십시오.
+인증서 발급을 위해 인바운드 TCP 80 및 443 포트와 아웃바운드 DNS/HTTPS를 허용하십시오.
+다른 서비스가 이미 이 포트들을 사용하고 있어서는 안 됩니다.</p>
+<p><code>deploy/env.example</code>를 <code>.env</code>로 복사하고, 스키마나 경로 없이 호스트명을 설정하십시오:</p>
+<pre><code class="language-dotenv">TGWITNESS_DOMAIN=watch.your-domain.org</code></pre>
+<p>HTTPS 오버레이를 사용하여 소스 빌드를 시작합니다:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.https.yaml up -d --build --wait
+docker compose -f compose.yaml -f deploy/compose/compose.https.yaml exec tgwitness cat /data/panel-token.txt</code></pre>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml -f deploy/compose/compose.https.yaml up -d --wait</code></pre>
+<p>게시된 이미지의 경우, 첫 번째 파일로 <code>deploy/compose/compose.image.yaml</code>를 대신 사용하십시오.
+나중에 상태, 로그, 업데이트 및 중지 명령을 실행할 수 있도록 <code>-f</code> 인수는 모두 유지하십시오.</p>
+<p>Caddy는 인증서를 취득 및 갱신하고, HTTP를 HTTPS로 리디렉션하며,
+요청을 사설 Compose 네트워크상의 수집기로 전달합니다. 인증서 상태는
+별도의 영구 볼륨에 저장됩니다. 수집기의 직접 호스트 포트는 루프백 전용으로 유지됩니다.
+제공된 Caddy 구성에서는 액세스 로깅이 활성화되어 있지 않습니다.</p>
+<p><code>https://watch.your-domain.org</code>를 열고 패널 토큰을 입력하세요. 준비 상태 확인은
+인증서 발급이나 외부 접근 가능성을 보장하지 않습니다. HTTPS가
+준비되지 않은 경우, DNS, 방화벽 규칙을 확인하고 다음을 수행하세요:</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.https.yaml logs --tail 100 caddy</code></pre>
+<p>제공된 Caddy 이미지는 ‘<code>2-alpine</code>’ 태그를 따릅니다. 풀링하면 해당 이미지가 새로 고쳐집니다.
+고정된 인프라 버전이 필요한 경우, 테스트를 거친 다이제스트를 배포 환경에 고정해 두십시오.</p>
+<h2 id="updates-and-backups">업데이트 및 백업<a class="anchor" href="#updates-and-backups" aria-label="이 섹션으로 이동">#</a></h2>
+<p>업데이트 시에도 Compose 프로젝트 이름과 데이터 볼륨을 유지합니다. 먼저
+수집기를 중지하고 전체 백업을 수행하십시오. 기본 소스 기반 배포의 경우:</p>
+<pre><code class="language-sh">docker compose stop
+docker compose cp tgwitness:/data ../tgwitness-backup-before-update</code></pre>
+<p>매번 저장소 외부의 새로운 백업 대상을 사용하고, 이를
+계정 접근 자료로 보호하십시오. 예시 경로는 참고용일 뿐이며, 본인의 개인 백업
+위치를 사용하십시오. 숨겨진 파일, 모든 작업 공간, 키,
+저널 및 미디어를 포함하여 디렉터리 전체를 복사하십시오. 구성된 경우 외부 볼트 마스터 키를 별도로 백업하십시오.
+증거용 ZIP 파일은 복원 가능한 애플리케이션 백업이 아닙니다. HTTPS의 경우, 인증서/계정 상태를 유지해야 한다면
+Caddy 볼륨도 함께 보존하십시오.</p>
+<p>소스 배포를 위해서는 최신 릴리스 파일을 다운로드한 후 다음 명령을 실행하십시오:</p>
+<pre><code class="language-sh">docker compose up -d --build --wait</code></pre>
+<p>이미지를 배포하려면 <code>TGWITNESS_IMAGE</code>를 원하는 버전으로 변경한 후 다음 명령을 실행하십시오:</p>
+<pre><code class="language-sh">docker compose --project-directory . -f deploy/compose/compose.image.yaml pull
+docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d --wait</code></pre>
+<p>앞서 언급된 중지/복사 명령어에도 설치본의 Compose 파일을 사용하십시오.
+<code>.env</code>, 사용자 지정 구성 및 동일한 프로젝트 이름을 유지하십시오. <code>down</code>는 이름이 지정된
+볼륨을 유지하며, <strong><code>down -v</code></strong>는 <strong>이를 삭제합니다</strong>. <code>.venv</code>는 운영 체제
+또는 Python 버전 간에 복사하지 마십시오. 네이티브 업데이트를 수행하려면 TgWitness를 중지하고, 전체 데이터
+디렉터리를 백업한 후, 소스 파일을 교체하고, 실행 전에 <code>python start.py --setup-only</code>를 실행하십시오.</p>
+<p>업데이트 후 패널 접근 권한, 계정 신원, 관찰 상태 및 적용 범위를 확인하십시오.
+재시작해도 놓친 텔레그램 업데이트는 복원되지 않습니다. 향후 버전에서 저장 형식이 변경될 경우, 롤백을 수행하려면
+업데이트 전 백업이 필요할 수 있습니다.</p>
+<h2 id="automated-github-releases">GitHub 자동 릴리스<a class="anchor" href="#automated-github-releases" aria-label="이 섹션으로 이동">#</a></h2>
+<p>이 프로젝트가 Actions가 활성화된 GitHub 저장소에 푸시되면 <a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml">릴리스 </a>워크플로가
+바로 사용 가능해집니다. 이 워크플로는 프리릴리스를 포함하여 GitHub 릴리스가
+<strong>게시될</strong> 때 실행됩니다. 초안이나 태그 푸시만으로는
+패키지가 게시되지 않습니다.</p>
+<ol>
+<li>패키지 버전과 변경 내역을 설정한 후, <code>v</code> 태그와
+    <code>pyproject.toml</code>의 정확한 버전(예: <code>v0.7.0</code>)을 함께 지정하여 릴리스를 게시하십시오.</li>
+<li>이 워크플로는 태그를 검증하고, Windows/Linux/macOS에서 공통으로 사용되는 Python,
+    general/account-import/QR 브라우저, 소스 패키지 및 Docker 검사를 실행합니다. 또한 Python 3.12를 사용하여
+    세 가지 운영 체제 모두에서 새로운 네이티브 설치도 수행됩니다.</li>
+<li>이러한 검사가 통과되면, QEMU 환경에서 ARM64 이미지를 스모크 테스트하고,
+    AMD64/ARM64 이미지를 <code>ghcr.io/&lt;lowercase-owner&gt;/&lt;lowercase-repository&gt;:&lt;version&gt;</code>에 게시하며,
+    소스 ZIP 파일, 체크섬 및 Python 휠을 릴리스에 첨부합니다. 별도의
+    Windows 작업이 실행되어 포터블 ZIP 파일과 해당 체크섬을 빌드하여 첨부합니다.</li>
+<li>첫 게시 후, GHCR 패키지 설정을 열고 익명 이미지 가져오기를
+    원하는 경우 가시성을 <strong>‘공개</strong>(<strong>Public)</strong>’로 설정하십시오. 공개 소스 저장소만으로는
+    공개 컨테이너 패키지가 보장되지 않습니다. 조직 정책에서
+    패키지 게시가 허용되어야 합니다. 이 워크플로는 <code>GITHUB_TOKEN</code>를 사용하며, 레지스트리
+    비밀번호나 VPS 인증 정보는 저장소에 포함되어서는 안 됩니다.</li>
+</ol>
+<p>이 로컬 준비 과정만으로는 원격 워크플로우의 성공 여부가 확인되지 않았습니다. ARM64
+에뮬레이션은 예비 테스트일 뿐, 네이티브 하드웨어나 실제 텔레그램 환경에서의 검증은 아닙니다.
+이는 릴리스 패키징을 자동화하지만, 서버를 시작하려면 여전히 Compose
+명령과 해당 도메인/호스트 전제 조건이 필요합니다. 릴리스가 공개될 때 기존 서버는 자동으로
+업그레이드되거나 재시작되지 않습니다.</p>
+<h2 id="remote-server">원격 서버<a class="anchor" href="#remote-server" aria-label="이 섹션으로 이동">#</a></h2>
+<p>서비스를 루프백에 제한하고 SSH 터널을 사용하거나, 리버스 프록시에서 HTTPS 연결을
+종료하십시오. 기본 Compose 파일은 로컬 전용이며, 선택 사항인
+<code>deploy/compose/compose.https.yaml</code> 오버레이는 구성된 도메인에 대해 Caddy를 제공합니다.
+베어러 토큰이 URL이나 프록시 로그에 노출되지 않도록 하십시오. 리버스 프록시는
+요청 크기와 연결 빈도를 제한해야 합니다. 일반 HTTP를 인터넷에 노출하지 마십시오.</p>
+<p><a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">deploy/</a> 디렉토리에는 systemd, Windows 로그온 작업, macOS 사용자 에이전트 및 Caddy에 대한 예제가
+제공됩니다. 설치 전에 해당 경로를 검토하고 조정하십시오.
+이들은 템플릿으로 제공되는 것이며, 로컬에서 실행되는 플랫폼별 설정은 아닙니다. 일반 런처로는
+백그라운드 서비스나 작업이 등록되지 않습니다.</p>
+<p>Windows에서 창이 표시되지 않는 <code>pythonw.exe</code> 방식으로 실행하면 시작/서버 진단 정보가
+데이터 디렉터리 내의 <code>logs/server.log</code>에 저장됩니다(파일당 5 MiB, 순환 백업 2개).
+콘솔 방식으로 실행할 경우 콘솔 로그가 유지됩니다. 두 모드 모두에서
+HTTP 액세스 로깅은 비활성화되어 있습니다. 데이터 디렉터리를 통해 로그를 보호하고, 공유하기 전에 내용을 검토하십시오.</p>
+<h2 id="restart-and-gaps">재시작 및 누락된 내용<a class="anchor" href="#restart-and-gaps" aria-label="이 섹션으로 이동">#</a></h2>
+<p>마지막으로 요청된 모니터링 상태가 유지됩니다. 모니터링이 활성화된 상태였다면,
+시작 시 선택한 소스에 다시 연결하여 모니터링을 재개하려고 시도합니다. 수동 일시 중지를 하면
+해당 시도가 취소됩니다. 재시작에 실패한 경우 기록되어 패널에 표시됩니다.</p>
+<p>StringSession은 인증 정보를 유지하지만, Telethon의 영구적인 업데이트/엔티티 상태는 유지하지 않습니다.
+시작 시 대화 내용이 다시 로드됩니다. Telegram/Telethon은 실행 중 일부 전송 중단을 복구할 수 있지만,
+TgWitness는 프로세스 재시작 시 영구적인 재생을 보장하지 않습니다.
+매번 시작 시 이전 저널 헤더와 오프라인 경계를 기록합니다.
+모니터는 10초마다 연결 상태를 확인하고 1분마다 하트비트를 추가합니다
+(<strong>매개변수 → 활성 기록 간격</strong>).
+짧은 중단은 감지되지 않을 수 있으며, 연결된 전송 경로라고 해서
+업데이트가 완전히 전달된다는 보장은 없습니다. 스냅샷은 명시적인 현재 기록 관측값이며, 결손 부분을 보충하지 않습니다.</p>
+<p>미디어 큐는 각 워크스페이스의 SQLite 데이터베이스에 저장됩니다. 메시지와 해당 작업은
+원자적으로 커밋됩니다. 실행 중 중단된 작업은 시작 시 재시도를 위해 복구됩니다.
+각 다운로드에는 120초의 기본 타임아웃에 파일 크기에 따른 256 KiB/s 속도가 적용되며,
+첨부 파일 유형당 1~2,000 MiB의 제한이 있습니다. 타임아웃, 속도 및 재시도 횟수는 <strong>‘매개변수’에서 설정할 수 있습니다</strong>. 수집기는
+크기가 알려지지 않은 파일은 건너뜁니다. 일시 중지 시 대기열에 있는 작업은 유지됩니다. 재시도는 원래
+관측된 파일 디스크립터를 사용하며, 이후에 수정된 메시지의 최신 버전은 절대 사용하지 않습니다.
+일시적인 오류에 대해서는 재시도 횟수에 제한이 있으며, 미디어 FloodWait 일시 중지는 재시작 후에도 유지됩니다.
+미디어 복구는 텔레그램 업데이트 복구와 별개이며, 사라진 파일을 복원할 수는 없습니다.</p>
+<h2 id="backup-restore-and-capacity">백업, 복원 및 용량<a class="anchor" href="#backup-restore-and-capacity" aria-label="이 섹션으로 이동">#</a></h2>
+<p>vault.key,
+signing.enc, credentials.enc, SQLite 데이터베이스/WAL 파일, 미디어, 토큰, 체크포인트,
+및 모든 프로필/하위 디렉터리를 포함한 <strong>전체 데이터 디렉터</strong>리를 복사하기 전에 프로세스를 중지하십시오. 대상 서비스가 중지된 상태에서
+복사본 전체를 복원하십시오. 볼트 키가 누락되거나
+서명 키가 일치하지 않으면 시작에 실패합니다. 강제 접근을 위해 키를 재생성하지 마십시오.</p>
+<p>비밀 백업 파일은 암호화하고 접근 권한을 엄격히 통제하십시오. 증거 ZIP 파일은 휴대성이 뛰어나며,
+애플리케이션 백업이나 텔레그램 세션 백업이 아닌 증거 자료를 검토하는 데 사용됩니다.
+자동 보존 및 삭제 기능은 없습니다. 모든 메시지, 원시
+메타데이터, 미디어, 임시 내보내기 파일 및 백업 파일을 저장할 디스크 공간을 미리 확보하십시오.</p>
+<p>전체 저널을 불러오는 대신, 시작 시 검증 및 스트림 기록 내보내기를 수행합니다.
+내보내기를 시작하면 읽기 스냅샷이 고정되지만 새로운 WAL 쓰기는 계속될 수 있습니다. 장시간 진행되는 내보내기의 경우
+WAL 페이지가 유지될 수 있으므로 디스크 용량은 여전히 중요합니다. ZIP 파일은 독립 검증자의 기본값에 맞춰
+압축 해제 시 4 GiB로 제한되며; <strong>매개변수 → 최대 서명된 ZIP</strong>
+을 통해 상한을 높일 수 있으며, 이러한 아카이브는 <code>verify.py --max-gib N</code>로 검증됩니다. 다른 형식의 경우 이벤트 수 제한이 없습니다.
+지원되는 브라우저는 응답 청크를 사용자가 선택한 파일로 스트리밍합니다. 그 외의 브라우저는
+최대 128 MiB까지 버퍼링하며, 그 이상의 전송은 인증된 CLI로 전달합니다:</p>
+<pre><code class="language-sh">python -m tgwitness.download --token-file data/live/panel-token.txt --out evidence.zip</code></pre>
+<p>다른 워크스페이스의 경우 <strong>[Exports] → [Workspace ID]</strong>에서 <code>--profile ID</code>를,
+원격 서버의 경우 <code>--format zip|jsonl|csv|html</code>, <code>--url https://your-server</code>를,
+5 GiB 전송 제한을 변경하려면 <code>--max-mib</code>를 사용하십시오. 일반 HTTP는
+루프백에서만 허용됩니다. 토큰은 헤더를 통해 전송되며, 리디렉션은 거부되고, 기존 파일은
+덮어쓰지 않으며, 다운로드가 완료되지 않은 파일은 완료된 파일로 게시되지 않습니다.
+TGWITNESS_TOKEN이 생성된 토큰을 재정의하는 경우, 해당 활성 값이 포함된 별도로 보호된 파일을 사용하십시오.
+panel-token.txt는 재정의에 의해 재작성되지 않습니다.
+명령어의 SHA-256은 전송 체크섬일 뿐입니다. 서명된 ZIP 파일은 별도로 검증하십시오.</p>
+<p>서버 내보내기 파일은 각 작업 공간의 비공개 <code>temporary-exports/</code> 내에 보관됩니다.
+수출이 성공적으로 완료되면 해당 파일은 정리됩니다. 중단된 수출 파일은
+다음 워크스페이스 시작 시, 해당 워크스페이스의 전용 인스턴스 잠금이 유지된 상태에서 제거됩니다. 이 디렉터리는
+저장소 위협/용량 모델의 일부이므로, 암호화된 데이터 볼륨을 사용하십시오. 실제 운영 환경 규모의
+수 기가바이트급 전송의 경우, 대상 시스템에서 여전히 적합성 검증이 필요합니다.</p>
+<p>이 패널에는 대기 중이거나 실패한 미디어, 가장 오래된 보류 중인 미디어, 사용 가능한 디스크 공간, 텔레그램
+요청 일시 중지 상태, 그리고 액세스가 확인되지 않은 소스가 표시됩니다. 이러한 진단 정보는
+완전한 종단 간 전송 모니터링 기능은 아닙니다. 워크스페이스는 하나의 프로세스를 공유하므로, 문제가 있는 계정이
+다른 계정에 영향을 미칠 수 있습니다. 별도의 작업자 프로세스, 보존/교체, 내구성 있는 업데이트
+복구, 원격 체크포인트 고정, 역할, 그리고 전체 배포 검증 기능은 여전히 유지됩니다.</p>
+<h2 id="connection-and-protection-options">연결 및 보안 옵션<a class="anchor" href="#connection-and-protection-options" aria-label="이 섹션으로 이동">#</a></h2>
+<p>연결 경로는 워크스페이스별로 다르며, 인증 전에 구성해야 합니다.
+SOCKS5/HTTP CONNECT는 고정된 python-socks 종속성을 사용합니다. MTProxy는 Telethon의
+실험적인 무작위 중간 전송 방식을 사용하며, 가짜 TLS ee 비밀키는 지원되지 않습니다.
+자동 직접 폴백은 구성되어 있지 않습니다. 이는 시스템 전체에 적용되는 네트워크 경로가 아닙니다.</p>
+<p>새로 설치할 경우, TGWITNESS_VAULT_KEY_FILE은 별도로 보호된 무작위
+마스터 키 파일을 가리키도록 설정합니다. 컨테이너 내 /data 외부에 읽기 전용으로 마운트하십시오. 각 작업 공간과 마스터 키에 대한
+vault.external.json 솔트 메타데이터를 별도로 보관하십시오.
+기존의 로컬 볼트는 계획적인 마이그레이션이 필요하며, 이 변수를 설정한다고 해서
+자동으로 변환되지는 않습니다. 메시지/미디어 저장 및 내보내기 기능은 애플리케이션 수준에서 암호화되지 않습니다.
+필요한 경우 암호화된 볼륨과 충분한 용량의 비공개 임시 저장 공간을 사용하십시오.</p>
+<p>상세한 절차: <a href="../connection/">연결/보안</a> 및
+<a href="../operations/">운영 모드</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/DEPLOYMENT.md">GitHub에서 이 페이지 편집하기 ↗</a><a class="next-guide" href="../collection/"><span>다음 단계</span><strong>데이터 수집 방식 →</strong></a><p>이 가이드들은 현재 구현 내용을 설명합니다. 검증 결과와 남아 있는 미비 사항은 별도로 문서화되어 있습니다. <a href="../verification/">테스트된 내용 →</a></p></footer>
+</main>
+<aside class="toc" aria-label="이 페이지에서"><p class="nav-label">이 페이지에서</p><a href="#choose-an-installation">설치 방법 선택</a><a href="#installation-requirements">설치 요구 사항</a><a href="#local-computer">로컬 컴퓨터</a><a href="#windows-portable-package">Windows용 휴대용 패키지</a><a href="#container">컨테이너</a><a href="#install-a-published-image">공개된 이미지를 설치하세요</a><a href="#automatic-https-on-a-server">서버에서 HTTPS 자동 적용</a><a href="#updates-and-backups">업데이트 및 백업</a><a href="#automated-github-releases">GitHub 자동 릴리스</a><a href="#remote-server">원격 서버</a><a href="#restart-and-gaps">재시작 및 누락된 내용</a><a href="#backup-restore-and-capacity">백업, 복원 및 용량</a><a href="#connection-and-protection-options">연결 및 보안 옵션</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>오픈 소스 · 사용자의 컴퓨터에서 실행됩니다</span><a href="../../../../LICENSE">MIT 라이선스</a><a href="../notice/">운영자 공지</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">보안</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "메시지를 기다리고 있습니다", "Step through a fictional send, edit and delete.": "가상의 메시지 전송, 수정 및 삭제 과정을 단계별로 살펴보세요.", "No observations yet. Start the sequence or advance one event.": "아직 관찰 내용이 없습니다. 시퀀스를 시작하거나 이벤트를 하나 앞으로 넘기세요.", "Meet at 10:00": "10:00에 만나요", "A new message is visible in the chat.": "채팅창에 새 메시지가 표시됩니다.", "Record 1 appended: the collector observed the original message.": "기록 1건 추가됨: 수집기가 원본 메시지를 감지했습니다.", "Meet at 11:00": "11:00에 만나요", "The current text changes. The earlier observation stays.": "현재 텍스트가 변경되었습니다. 이전의 관찰 내용은 그대로 유지됩니다.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "기록 2가 추가되었습니다: 이 수정은 새로운 관찰 내용입니다. 기록 1에는 여전히 원본 텍스트가 유지되어 있습니다.", "Message deleted": "메시지가 삭제되었습니다.", "The message has disappeared from the chat view.": "해당 메시지가 채팅 화면에서 사라졌습니다.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Record 3 추가: 삭제 알림은 확인된 두 버전의 메시지와 함께 보존됩니다.", "0 records": "0건", "1 record": "1건의 기록", "2 records": "2건의 기록", "3 records": "3건의 기록", "Complete / {n} of 3": "완료 / 3개 중 {n}개", "Step / {n} of 3": "3단계 중 {n}단계", "Pause": "일시 정지", "Replay sequence": "재생 순서", "Play sequence": "재생 순서", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "정적 예제 페이지를 확인할 수 있습니다. 해시를 대화형으로 계산하려면 HTTPS를 통해 이 페이지를 열거나, Web Crypto를 지원하는 로컬호스트 미리보기에서 열어보세요.", "No record supplied": "기록이 제공되지 않음", "Tail removed": "꼬리 부분 삭제됨", "≠ saved hash": "≠ 저장된 해시", "Rebuilt · different hash": "재구축 · 다른 해시", "= saved hash": "= 저장된 해시", "Same length and matching head.": "글의 길이는 동일하며, 제목도 일치해야 합니다.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "계산된 세 개의 해시 값이 모두 저장된 해시 값과 일치합니다. 이 샘플은 유지된 3개 레코드 경계와 일치합니다.", "Same saved head; the journal prefix fails verification.": "동일한 헤더가 저장되었으나, 저널 접두사가 검증에 실패했습니다.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "레코드 2가 저장된 해시와 더 이상 일치하지 않습니다. 최종 저장된 헤더만 확인하면 이 문제를 놓칠 수 있으므로, 검증자는 모든 레코드를 확인합니다.", "Head differs from the retained checkpoint.": "헤더가 유지된 체크포인트와 다릅니다.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "재구성된 해시 값들은 서로 연결되어 있지만, 최종 헤더가 변경되었습니다. 보존된 체크포인트는 이 변경 내역을 거부합니다. 변경된 기록의 경우 원본 서명도 유효하지 않을 것입니다.", "Too short: 2 supplied records \u003c 3 retained records.": "너무 짧음: 제공된 기록 2건 \u003c 보존된 기록 3건.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "남아 있는 두 해시는 여전히 일치합니다. 보존된 체크포인트는 누락된 끝부분을 드러냅니다. 그 이전의 경계 정보가 없었다면, 이 짧은 접두사만으로는 누락된 부분을 파악할 수 없었을 것입니다.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "이 브라우저에서는 해시 계산 기능을 사용할 수 없습니다. 아래의 공식과 정적 설명은 계속 확인할 수 있습니다.", "{n} records": "{n}건의 기록", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "승인됨: 카운트가 증가하고, 서명이 검증되며, 키가 일치합니다. 위트니스는 이 새로운 경계를 유지합니다.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "롤백: 서명된 응답에 포함된 기록 수가 마지막으로 승인된 체크포인트보다 적게 보고된 경우. 위트니스는 이 문제를 기록하고 이전에 승인된 경계를 유지합니다.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "포크(Fork): 카운트는 변하지 않았지만 헤드가 다릅니다. 위트니스는 이 불일치를 기록하고 이전에 승인된 경계를 유지합니다.", "No answer": "답변 없음", "boundary unknown": "경계 미상", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "응답 없음: 위트니스는 확인 실패를 기록합니다. 수집기의 현재 상태를 확인할 수는 없습니다. 위트니스가 여전히 봇 API에 접속할 수 있고 게시 정책이 허용하는 경우, 해당 실패 사실을 게시할 수 있습니다.", "Send {n}": "{n} 보내기", "Edit {n}": "{n} 편집", "Delete {n}": "{n} 삭제", "Both accounts captured all six expected observations in this example.": "이 예시에서 두 계정 모두 예상된 6가지 관찰 항목을 모두 포착했습니다.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "계정 B는 여전히 6건 중 6건을 모두 캡처했습니다. 두 건의 수신 확인은 더 오래 걸렸습니다. 캡처 비율과 수신 확인 지연은 서로 다른 문제를 나타냅니다.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "계정 B는 마감 시점까지 6건 중 5건(83.3%)을 포착했습니다. 누락된 편집 건에는 측정된 지연 시간이 없습니다. 이 결과는 6건의 통제된 동작에 대해서만 설명한 것입니다.", "not observed by cutoff": "마감 시점에 확인되지 않음", "{s} seconds": "{s}초", "Exact values follow in the table.": "정확한 수치는 아래 표에 나와 있습니다.", "{s} s": "{s} s", "Not observed": "확인되지 않음", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "네 개의 채팅에서 서로 다른 관찰 결과가 제시됩니다. 모든 연결에 대해 원본 기록을 따르십시오. 발신자가 명시되지 않은 경우 채널 게시물을 사용자 71001에게 귀속시키지 마십시오.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "기록 #146과 #205는 동일한 발신자 ID인 71001을 나타냅니다. 이를 통해 두 채팅에서 관찰된 텔레그램 계정의 게시물을 연결할 수 있습니다. 이는 실제 인물을 식별하거나 채널 게시물의 작성자를 특정하지는 않습니다.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "수신처 pay.example.invalid/new는 그룹 기록 #146, 봇 키보드 #173, 채널 편집 #188 및 비공개 메시지 #205에 나타납니다. 동일한 수신처가 반복적으로 등장한다는 사실은 해당 자료 간의 연관성을 시사할 뿐, 해당 계정들이 동일한 주체에 의해 통제된다는 것을 증명하지는 않습니다.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "이 가상의 사례에서, 완료된 미디어 수신 기록 #151과 #209는 동일한 SHA-256 전체 값을 가지고 있습니다. 실제 바이트와 관련 메시지 기록을 비교해 보십시오. 일치하는 파일은 작성자를 식별하지 않으며, 누가 이를 전달했는지도 증명하지 않습니다.", "the encrypted off-site copy": "암호화된 오프사이트 사본", "notifications": "알림", "checkpoint hashes for timestamps": "타임스탬프용 체크포인트 해시", "signed checkpoints for the witness": "증거를 위한 서명된 체크포인트", "Switched on in this example": "이 예시에서는 활성화됨", "Optional · off by default": "선택 사항 · 기본값은 비활성화됨", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "이 기기에서 남기는 것: 텔레그램 연결 정보와 {list}. 그 외에는 아무것도 없습니다.", "Default: only the Telegram connection leaves this machine.": "기본 설정: 텔레그램 연결만 이 기기를 통해 이루어집니다.", "{done} of {total} done": "{done}/{total} 완료", "Mark step {n} as done": "{n}번 단계를 완료로 표시", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "복사", "Copied": "복사됨", "Command copied.": "명령 복사 완료.", "Selected — Ctrl/Cmd+C": "선택 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "명령어가 선택되었습니다. 수동으로 복사하십시오.", "Command copied to clipboard.": "명령어가 클립보드에 복사되었습니다.", "Select text": "텍스트 선택", "Clipboard unavailable. Command selected; copy it manually.": "클립보드를 사용할 수 없습니다. 명령어가 선택되었습니다. 수동으로 복사하십시오.", "A message arrives. The first observation is saved.": "메시지가 도착합니다. 첫 번째 관측 결과가 저장됩니다.", "The time changes. Both captured versions stay.": "시간이 변경됩니다. 캡처된 두 버전 모두 그대로 유지됩니다.", "The message disappears. The captured history remains.": "메시지는 사라지지만, 캡처된 기록은 남습니다.", "Pause example animation": "예시 애니메이션 일시 정지", "Play example animation": "예시 애니메이션 재생", "Play": "재생", "Full-size workspace screenshot": "전체 화면 작업 공간 스크린샷", "Workspace screenshot · fictional data": "작업 공간 스크린샷 · 가상의 데이터", "Close": "닫기", "Close screenshot": "스크린샷 닫기", "Scrollable full-size screenshot": "스크롤 가능한 전체 화면 스크린샷", "Enlarge: {name}": "확대: {name}", "View full size": "전체 크기 보기"}</script>
+</body></html>

@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="th" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>วิธีการเก็บรวบรวมข้อมูล | TgWitness</title>
+<meta name="description" content="ขอบเขตการสังเกตการณ์, การอัปเดตแบบเรียลไทม์, การตรวจสอบซ้ำ, ไฟล์แนบ, การดำเนินการของผู้ใช้เอง และความหมายของช่องว่าง (gap) — บันทึกอย่างละเอียดทีละรายการ"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="th_TH">
+<meta property="og:title" content="วิธีการเก็บรวบรวมข้อมูล | TgWitness"><meta property="og:description" content="ขอบเขตการสังเกตการณ์, การอัปเดตแบบเรียลไทม์, การตรวจสอบซ้ำ, ไฟล์แนบ, การดำเนินการของผู้ใช้เอง และความหมายของช่องว่าง (gap) — บันทึกอย่างละเอียดทีละรายการ">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/collection/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/collection/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/collection/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/collection/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/collection/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/collection/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/collection/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/collection/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/collection/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/collection/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/collection/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/collection/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/collection/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/collection/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/collection/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/collection/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/collection/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/collection/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/", "url": "https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/", "name": "วิธีการเก็บรวบรวมข้อมูล | TgWitness", "description": "ขอบเขตการสังเกตการณ์, การอัปเดตแบบเรียลไทม์, การตรวจสอบซ้ำ, ไฟล์แนบ, การดำเนินการของผู้ใช้เอง และความหมายของช่องว่าง (gap) — บันทึกอย่างละเอียดทีละรายการ", "inLanguage": "th", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "หน้าหลัก", "item": "https://phishdestroy.github.io/TgWitness/th/"}, {"@type": "ListItem", "position": 2, "name": "เอกสาร", "item": "https://phishdestroy.github.io/TgWitness/th/docs/"}, {"@type": "ListItem", "position": 3, "name": "อ้างอิง", "item": "https://phishdestroy.github.io/TgWitness/th/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "วิธีการเก็บรวบรวมข้อมูล", "item": "https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">ข้ามไปยังเนื้อหา</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / เอกสาร</span></a>
+<nav aria-label="คู่มือ"><a href="../../concepts/">คู่มือภาพ</a><a href="../../">คู่มือทั้งหมด</a><a href="../">อ้างอิง</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="ภาษา"><span aria-hidden="true">◍</span> ไทย</summary><div class="lang-list"><a href="../../../../docs/reference/collection/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/collection/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/collection/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/collection/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/collection/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/collection/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/collection/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/collection/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/collection/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/collection/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/collection/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/collection/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/collection/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/collection/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/collection/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/collection/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/collection/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/collection/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/collection/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/collection/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/collection/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/collection/" hreflang="ja" lang="ja">日本語</a><a href="./" hreflang="th" lang="th" aria-current="true">ไทย</a><a href="../../../../he/docs/reference/collection/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/collection/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="สลับระหว่างธีมสีอ่อนและสีเข้ม"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="คู่มือ"><a href="../../../guides/modes.html">โหมด, สถานการณ์ และระดับหลักฐาน</a><p class="nav-label">ขั้นตอนแรก</p><a href="../../start/">เริ่มใช้งานได้ภายในไม่กี่นาที</a><a href="../../accounts/">เชื่อมต่อบัญชี</a><a href="../../proxies/">เลือกพร็อกซี</a><a href="../../exports/">ส่งออกและตรวจสอบ</a><p class="nav-label">เข้าใจหลักฐาน</p><a href="../../concepts/">ดูวิธีการทำงานของหลักฐาน</a><a href="../../cases/">สืบสวนในทุกการสนทนา</a><a href="../../security/">รักษาความปลอดภัย</a><p class="nav-label">อ่านเพิ่มเติม</p><a href="../../witness/">ตั้งค่าบอทพยาน</a><a href="../../server/">ให้ระบบทำงานต่อไป</a><a href="../../troubleshooting/">ค้นหาว่าเกิดข้อผิดพลาดอะไร</a></nav><nav class="wiki-nav" aria-label="อ้างอิง"><p class="nav-label"><a class="nav-label-link" href="../">อ้างอิง</a></p><details class="wiki-group"><summary>การตั้งค่า</summary><a href="../quickstart/">เริ่มต้นอย่างรวดเร็ว</a><a href="../accounts/">รูปแบบบัญชีและเซสชัน</a><a href="../connection/">การเชื่อมต่อ, พร็อกซี และการคุ้มครองข้อมูล</a><a href="../deployment/">การติดตั้ง</a></details><details class="wiki-group" open><summary>Collect</summary><a href="./" aria-current="page">วิธีการเก็บรวบรวมข้อมูล</a><a href="../operations/">ขั้นตอนการทำงานและการดำเนินการ</a><a href="../investigation/">โหมดการสืบสวน</a><a href="../features/">คุณสมบัติและข้อจำกัด</a></details><details class="wiki-group"><summary>หลักฐาน</summary><a href="../how-it-works/">วิธีการทำงานของหลักฐาน</a><a href="../evidence/">รูปแบบหลักฐาน</a><a href="../witness/">พยานอิสระ</a><a href="../timestamp/">ข้อมูลเวลา</a></details><details class="wiki-group"><summary>ความปลอดภัยและโครงการ</summary><a href="../security/">ความปลอดภัยและการจัดการข้อมูล</a><a href="../architecture/">สถาปัตยกรรม</a><a href="../verification/">สิ่งที่ได้รับการทดสอบแล้ว</a><a href="../license/">ประกาศเรื่องใบอนุญาตและความไม่เข้ากันทางสถาปัตยกรรม</a><a href="../notice/">ประกาศความไม่เข้ากันได้ของผู้ดำเนินการ</a><a href="../changelog/">บันทึกการเปลี่ยนแปลง</a></details></nav><p class="sidebar-note">v0.7.0<br>โอเพนซอร์ส · ทำงานบนเครื่องของคุณ</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="คู่มือ"><a href="../../../">หน้าหลัก</a> <span aria-hidden="true">/</span> <a href="../../">เอกสาร</a> <span aria-hidden="true">/</span> <a href="../">อ้างอิง</a> <span aria-hidden="true">/</span> <span aria-current="page">วิธีการเก็บรวบรวมข้อมูล</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">ค้นหาในเอกสาร</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="ลองใช้ proxy, hash chain, token หรือ witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="ค้นหาอย่างชัดเจน" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">พิมพ์คำเพื่อค้นหาในคู่มือและเอกสารอ้างอิง การค้นหาจะเก็บไว้ในเบราว์เซอร์ของคุณ</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">อ้างอิง / Collect</p><h1>วิธีการเก็บรวบรวมข้อมูล</h1><p class="guide-outcome">ขอบเขตการสังเกตการณ์, การอัปเดตแบบเรียลไทม์, การตรวจสอบซ้ำ, ไฟล์แนบ, การดำเนินการของผู้ใช้เอง และความหมายของช่องว่าง (gap) — บันทึกอย่างละเอียดทีละรายการ</p><div class="wiki-body"><p>TgWitness บันทึกสิ่งที่บัญชี Telegram ที่เชื่อมต่อไว้สังเกตเห็น บันทึกนี้เก็บรักษา
+การสังเกตเหล่านั้น ลำดับการเกิด และบริบทที่มาพร้อมกับมัน มัน
+ไม่สันนิษฐานการกระทำที่มองไม่เห็นจากข้อความที่หายไป หรือจากบัญชีที่กำลังเชื่อมต่ออยู่</p>
+<h2 id="from-login-to-a-journal">ตั้งแต่การเข้าสู่ระบบจนถึงบันทึก<a class="anchor" href="#from-login-to-a-journal" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 691 378" width="691" height="378" role="img" aria-labelledby="flow-1-title flow-1-desc"><title id="flow-1-title">แผนผังกระบวนการ</title><desc id="flow-1-desc">อนุมัติบัญชีผู้ใช้ → เลือกกลุ่มและช่องที่เข้าถึงได้; เลือกกลุ่มและช่องที่เข้าถึงได้ → บันทึกการตั้งค่าเหตุการณ์และไฟล์แนบ; บันทึกการตั้งค่าเหตุการณ์และไฟล์แนบ → เริ่มการสังเกต; เริ่มการสังเกต → รับข่าวสารล่าสุดจากลูกค้าที่ใช้งานอยู่; รับข่าวสารล่าสุดจากลูกค้าที่ใช้งานอยู่ → ปฏิบัติตามนโยบายเกี่ยวกับแหล่งข้อมูลและเหตุการณ์; ปฏิบัติตามนโยบายเกี่ยวกับแหล่งข้อมูลและเหตุการณ์ → เพิ่มบันทึกการสังเกตที่มีลายเซ็น; เพิ่มบันทึกการสังเกตที่มีลายเซ็น → ตรวจสอบหรือส่งออกบันทึก; เพิ่มบันทึกการสังเกตที่มีลายเซ็น → ประมวลผลไฟล์แนบที่อยู่ในคิว; ประมวลผลไฟล์แนบที่อยู่ในคิว → เพิ่มผลลัพธ์การดาวน์โหลด</desc><defs><marker id="flow-1-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M196.0 37.0C225.9 37.0 225.9 37.0 255.8 37.0" marker-end="url(#flow-1-arrow)" style="--i:0;--len:60" pathLength="60"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M196.0 37.0C225.9 37.0 225.9 37.0 255.8 37.0"/></circle><path class="flow-edge" d="M435.6 37.0C458.6 37.0 458.6 37.0 481.6 37.0" marker-end="url(#flow-1-arrow)" style="--i:1;--len:46" pathLength="46"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M435.6 37.0C458.6 37.0 458.6 37.0 481.6 37.0"/></circle><path class="flow-edge" d="M571.5 66.0C571.5 100.0 571.5 100.0 571.5 134.0" marker-end="url(#flow-1-arrow)" style="--i:2;--len:68" pathLength="68"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M571.5 66.0C571.5 100.0 571.5 100.0 571.5 134.0"/></circle><path class="flow-edge" d="M509.2 154.0C472.4 154.0 472.4 154.0 435.6 154.0" marker-end="url(#flow-1-arrow)" style="--i:3;--len:74" pathLength="74"/><circle class="flow-pulse" r="3.2" style="--i:3"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M509.2 154.0C472.4 154.0 472.4 154.0 435.6 154.0"/></circle><path class="flow-edge" d="M255.8 154.0C232.8 154.0 232.8 154.0 209.8 154.0" marker-end="url(#flow-1-arrow)" style="--i:4;--len:46" pathLength="46"/><circle class="flow-pulse" r="3.2" style="--i:4"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M255.8 154.0C232.8 154.0 232.8 154.0 209.8 154.0"/></circle><path class="flow-edge" d="M119.9 192.0C119.9 234.5 119.9 234.5 119.9 277.0" marker-end="url(#flow-1-arrow)" style="--i:5;--len:85" pathLength="85"/><circle class="flow-pulse" r="3.2" style="--i:5"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M119.9 192.0C119.9 234.5 119.9 234.5 119.9 277.0"/></circle><path class="flow-edge" d="M209.8 306.0C232.8 306.0 232.8 271.0 255.8 271.0" marker-end="url(#flow-1-arrow)" style="--i:6;--len:61" pathLength="61"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M209.8 306.0C232.8 306.0 232.8 271.0 255.8 271.0"/></circle><path class="flow-edge" d="M209.8 306.0C232.8 306.0 232.8 341.0 255.8 341.0" marker-end="url(#flow-1-arrow)" style="--i:6;--len:61" pathLength="61"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M209.8 306.0C232.8 306.0 232.8 341.0 255.8 341.0"/></circle><path class="flow-edge" d="M435.6 341.0C458.6 341.0 458.6 306.0 481.6 306.0" marker-end="url(#flow-1-arrow)" style="--i:7;--len:61" pathLength="61"/><circle class="flow-pulse" r="3.2" style="--i:7"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M435.6 341.0C458.6 341.0 458.6 306.0 481.6 306.0"/></circle><g class="flow-node" style="--i:0"><rect x="43.8" y="17.0" width="152.2" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="37.0">อนุมัติบัญชีผู้ใช้</tspan></text></g><g class="flow-node" style="--i:1"><rect x="255.8" y="8.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="28.0">เลือกกลุ่มและช่องที่เข</tspan><tspan x="345.7" y="46.0">้าถึงได้</tspan></text></g><g class="flow-node" style="--i:2"><rect x="481.6" y="8.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="28.0">บันทึกการตั้งค่าเหตุกา</tspan><tspan x="571.5" y="46.0">รณ์และไฟล์แนบ</tspan></text></g><g class="flow-node" style="--i:3"><rect x="509.2" y="134.0" width="124.6" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="154.0">เริ่มการสังเกต</tspan></text></g><g class="flow-node" style="--i:4"><rect x="255.8" y="125.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="145.0">รับข่าวสารล่าสุดจากลูก</tspan><tspan x="345.7" y="163.0">ค้าที่ใช้งานอยู่</tspan></text></g><g class="flow-node" style="--i:5"><rect x="30.0" y="116.0" width="179.8" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="136.0">ปฏิบัติตามนโยบายเกี่ยว</tspan><tspan x="119.9" y="154.0">กับแหล่งข้อมูลและเหตุก</tspan><tspan x="119.9" y="172.0">ารณ์</tspan></text></g><g class="flow-node" style="--i:6"><rect x="30.0" y="277.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="297.0">เพิ่มบันทึกการสังเกตที</tspan><tspan x="119.9" y="315.0">่มีลายเซ็น</tspan></text></g><g class="flow-node" style="--i:7"><rect x="255.8" y="242.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="262.0">ตรวจสอบหรือส่งออกบันทึ</tspan><tspan x="345.7" y="280.0">ก</tspan></text></g><g class="flow-node" style="--i:7"><rect x="255.8" y="312.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="332.0">ประมวลผลไฟล์แนบที่อยู่</tspan><tspan x="345.7" y="350.0">ในคิว</tspan></text></g><g class="flow-node" style="--i:8"><rect x="481.6" y="277.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="297.0">เพิ่มผลลัพธ์การดาวน์โห</tspan><tspan x="571.5" y="315.0">ลด</tspan></text></g></svg></div><details class="flow-steps"><summary>แผนภาพในรูปแบบข้อความ</summary><ol><li>อนุมัติบัญชีผู้ใช้ → เลือกกลุ่มและช่องที่เข้าถึงได้</li><li>เลือกกลุ่มและช่องที่เข้าถึงได้ → บันทึกการตั้งค่าเหตุการณ์และไฟล์แนบ</li><li>บันทึกการตั้งค่าเหตุการณ์และไฟล์แนบ → เริ่มการสังเกต</li><li>เริ่มการสังเกต → รับข่าวสารล่าสุดจากลูกค้าที่ใช้งานอยู่</li><li>รับข่าวสารล่าสุดจากลูกค้าที่ใช้งานอยู่ → ปฏิบัติตามนโยบายเกี่ยวกับแหล่งข้อมูลและเหตุการณ์</li><li>ปฏิบัติตามนโยบายเกี่ยวกับแหล่งข้อมูลและเหตุการณ์ → เพิ่มบันทึกการสังเกตที่มีลายเซ็น</li><li>เพิ่มบันทึกการสังเกตที่มีลายเซ็น → ตรวจสอบหรือส่งออกบันทึก</li><li>เพิ่มบันทึกการสังเกตที่มีลายเซ็น → ประมวลผลไฟล์แนบที่อยู่ในคิว</li><li>ประมวลผลไฟล์แนบที่อยู่ในคิว → เพิ่มผลลัพธ์การดาวน์โหลด</li></ol></details></figure>
+<p>การอนุญาต การเข้าถึงแหล่งข้อมูล ตัวเก็บข้อมูลที่กำลังทำงาน และการส่งข้อมูลที่สมบูรณ์ เป็น
+เรื่องที่ต่างกัน การเข้าสู่ระบบที่สำเร็จไม่ได้หมายความว่าจะได้รับสิทธิ์เข้าถึงทุกกลุ่ม
+การเชื่อมต่อระบบขนส่งไม่ได้หมายความว่าทุกการอัปเดตที่เกี่ยวข้องได้ส่งถึงแล้ว</p>
+<h2 id="observation-scope-chosen-chats-a-folder-or-the-whole-account">ขอบเขตการสังเกต: การสนทนาที่เลือกไว้, โฟลเดอร์ หรือบัญชีทั้งหมด<a class="anchor" href="#observation-scope-chosen-chats-a-folder-or-the-whole-account" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
+<p>แหล่งข้อมูล → <strong>ขอบเขตการสังเกต</strong>กำหนดว่าพื้นที่ทำงานจะบันทึกการสนทนาใด</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>โหมด</th>
+<th>บันทึก</th>
+<th>การสนทนาใหม่</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>การสนทนาที่เลือก (ค่าเริ่มต้น)</td>
+<td>เฉพาะการสนทนาที่คุณเพิ่มด้วยมือเท่านั้น</td>
+<td>ไม่เคยถูกเพิ่มอัตโนมัติ</td>
+</tr>
+<tr>
+<td>โฟลเดอร์ Telegram</td>
+<td>การสนทนาในหนึ่งในโฟลเดอร์ของบัญชี: การสนทนาที่รวมไว้ตามชื่อ พร้อมทั้งหมวดหมู่ของโฟลเดอร์ (ผู้ติดต่อ, ผู้ที่ไม่ใช่ผู้ติดต่อ, กลุ่ม, ช่อง, บอท), หักออกจากการสนทนาที่ถูกยกเว้น และหากโฟลเดอร์ระบุไว้ ก็รวมถึงการสนทนาที่ถูกเก็บถาวร</td>
+<td>การสนทนาที่ตรงกันจะถูกเพิ่มทันทีที่เริ่มใช้งาน; การสนทนาที่คุณเพิ่มเข้าไปในโฟลเดอร์ใน Telegram จะถูกบันทึกภายในหนึ่งชั่วโมง</td>
+</tr>
+<tr>
+<td>บัญชีทั้งหมด</td>
+<td>ทุกการสนทนาที่บัญชีนี้เห็น</td>
+<td>ทุกการสนทนาใหม่ กลุ่มสนทนา การสนทนาส่วนตัว หรือบอท จะถูกเพิ่มเข้ามาทันทีที่มีการอัปเดตครั้งแรก</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>ประเภทแหล่งข้อมูล</strong> (ช่อง, กลุ่ม, การสนทนาส่วนตัว, บอท) ช่วยจำกัดโหมดโฟลเดอร์และ
+    โหมดบัญชีทั้งหมด การสนทนาที่เลือกสามารถเป็นประเภทใดก็ได้ รวมถึงการสนทนาส่วนตัวและบอท</li>
+<li><strong>การสนทนาที่ถูก</strong>ยกเว้นจะไม่ถูกบันทึกเลย ไม่ว่าในโหมดใดก็ตาม ในโหมดโฟลเดอร์และโหมดบัญชีทั้งหมด
+    <em>การคลิก &quot;ยกเว้น&quot;</em> หรือ <em>&quot;ลบ&quot;</em> บนแหล่งข้อมูลจะทำให้แหล่งข้อมูลนั้นถูกเพิ่มเข้าสู่รายชื่อนี้ ดังนั้นระบบจะไม่เพิ่มมันเข้าไปอีกครั้ง
+    การเลือกการสนทนาอีกครั้งด้วยมือ (ในส่วน &quot;แหล่งข้อมูล&quot; หรือจาก &quot;การสนทนา&quot;) จะลบการสนทนานั้นออกจากรายชื่อ รายชื่อ
+    สามารถเก็บได้สูงสุด 5,000 การสนทนา; หากเกินจำนวนนี้ <em>การกด &quot;ลบ&quot;</em> จะถูกปฏิเสธ และสามารถหยุดการบันทึกการสนทนานั้นแทนได้</li>
+<li><strong>การดำเนินการของบัญชีนี้</strong> (เปิดโดยค่าเริ่มต้น): ข้อความที่บัญชีนี้ส่ง การแก้ไข และ
+    การกดปุ่มบนคีย์บอร์ดเพื่อตอบกลับ หากปิดไว้ ข้อความที่ส่งออกไปและการแก้ไขจะไม่ถูกบันทึก</li>
+<li>การเปลี่ยนไปยังโฟลเดอร์หรือบัญชีทั้งหมดจะขอการยืนยัน: โหมดเหล่านี้บันทึก
+    การสนทนาส่วนตัวและข้อความของบุคคลที่สาม และควรใช้ในบัญชีเฉพาะเท่านั้น
+    การยืนยันและการเปลี่ยนแปลงขอบเขตทุกครั้งจะถูกบันทึกเป็นบันทึก<code>scope.changed</code>ที่ลงนามแล้ว</li>
+<li>การสนทนาที่เพิ่มเข้ามาตามขอบเขตจะปรากฏเป็นแหล่งข้อมูลที่มีเครื่องหมาย <em>&quot;auto</em>&quot; และถูกบันทึกเป็น <code>scope.applied</code>
+    (เมื่อเริ่มต้นและทุกชั่วโมง) หรือ <code>source.discovered</code> (การสนทนาใหม่ระหว่างการเฝ้าสังเกต) การกลับ
+    ไปยังการสนทนาที่เลือกไว้จะทำให้แหล่งข้อมูลที่เพิ่มเข้ามาโดยอัตโนมัติทั้งหมดถูกหยุดชั่วคราว</li>
+</ul>
+<p>สิ่งที่โหมดเหล่านี้ไม่สามารถทำได้:</p>
+<ul>
+<li><strong>การสนทนาแบบลับ (Secret chats)</strong> ได้รับการเข้ารหัสแบบ end-to-end ระหว่างอุปกรณ์สองเครื่อง และไม่เคยส่งถึง
+    TgWitness ในรูปแบบใดก็ตาม</li>
+<li><strong>ไม่มีการบันทึกข้อมูลใดๆ เมื่อ TgWitness ไม่ทำงาน</strong> หลังจากรีสตาร์ท ระบบจะขอข้อมูลอัปเดตที่พลาดไปจาก Telegram
+    และตรวจสอบการสนทนาใหม่ แต่ Telegram ไม่ส่งข้อมูลทั้งหมดกลับมาหลังจาก
+    การหยุดให้บริการเป็นเวลานาน รายงานและ<code>verify.py</code> แสดงช่วงเวลาดังกล่าวเป็นช่องว่าง (ดู<a href="../evidence/#coverage-continuity-gaps-and-unobserved-ids">การครอบคลุม</a>)</li>
+<li>ในตอนแรกจะแสดงเพียง 1,000 บทสนทนาแรกเท่านั้น (ขีดจำกัดนี้อยู่ในส่วน <strong>Parameters</strong>); บทสนทนา
+    ที่เก่ากว่าจะถูกเพิ่มเข้ามาเมื่อมีการใช้งานอีกครั้ง ประวัติก่อนหน้านั้นของบทสนทนาที่เพิ่มเข้ามาจะไม่ถูกดึงมา — ให้ทำการ
+    ถ่ายภาพประวัติ (snapshot) หรือส่งออกบทสนทนาทั้งหมดเมื่อจำเป็น</li>
+<li>เงื่อนไขของโฟลเดอร์ที่เปลี่ยนแปลงตลอดเวลา (ปิดเสียง, อ่านแล้ว) จะไม่ถูกนำไปใช้: การสนทนาดังกล่าว
+    ยังคงถูกติดตามต่อไป</li>
+<li><strong>ปุ่มบอตแบบอินไลน์ (callback)</strong> ที่ถูกกดในแอปอื่นจะไม่ปรากฏในเซสชัน
+    ที่สอง; การตอบกลับหรือการแก้ไขของบอตจะถูกบันทึกไว้ การกดปุ่มบนคีย์บอร์ดเพื่อตอบกลับจะส่งออกไป
+    ในฐานะข้อความขาออก และถูกติดป้ายว่า <code>button_press</code></li>
+<li>การสนทนาที่มากขึ้นหมายถึงคำขอที่มากขึ้น Telegram จะจำกัดบัญชีสำหรับปริมาณที่พิจารณาว่า
+    เกินความจำเป็น ซึ่งเป็นเหตุผลอีกหนึ่งในการใช้บัญชีเฉพาะ</li>
+</ul>
+<h2 id="scope-and-event-selection">ขอบเขตและวิธีการเลือกเหตุการณ์<a class="anchor" href="#scope-and-event-selection" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
+<p>แต่ละพื้นที่ทำงานมีแหล่งข้อมูลของตัวเอง TgWitness ไม่เข้าร่วมกลุ่ม ไม่รับ
+คำเชิญ หรือระบุสมาชิกทุกคนโดยอัตโนมัติ แหล่งข้อมูลต้องเป็น
+แหล่งที่บัญชีดังกล่าวสามารถเข้าถึงได้อยู่แล้ว เมื่อเริ่มต้นทำงาน ตัวเก็บข้อมูลจะตรวจสอบแหล่งข้อมูลที่เลือก
+เทียบกับบทสนทนาที่บัญชีสามารถมองเห็นได้; บทสนทนา 1,000 รายการแรกจะถูกตรวจสอบ เว้นแต่ในส่วน
+<strong>Parameters → Chats read from the account’s list</strong> จะกำหนดไว้เป็นอย่างอื่น
+แหล่งข้อมูลที่ขาดหายไปจะถูกทำเครื่องหมายว่า &quot;<strong>การเข้าถึงยังไม่ได้รับการยืนยัน</strong>&quot; และไม่ถือว่าแหล่งข้อมูลนั้นได้ลบคุณออกจากรายชื่อ</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>บริบท</th>
+<th>รวบรวม</th>
+<th>ผลเมื่อปิดใช้งาน</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ข้อความใหม่</td>
+<td>ข้อความที่ส่งไปทั่วไป</td>
+<td>การแก้ไขหรือการลบข้อความในภายหลังอาจไม่มีข้อความที่บันทึกไว้ก่อนหน้านี้เพื่อเปรียบเทียบ</td>
+</tr>
+<tr>
+<td>การแก้ไข</td>
+<td>ส่งเวอร์ชันข้อความที่ได้รับการแก้ไข</td>
+<td>การเปลี่ยนแปลงระหว่างขั้นตอนจะไม่ถูกสร้างขึ้นใหม่ในภายหลัง</td>
+</tr>
+<tr>
+<td>การลบ</td>
+<td>แจ้งการลบที่อยู่ในขอบเขตการตรวจสอบ และแจ้งการลบที่ไม่อยู่ในขอบเขตการตรวจสอบระดับบัญชี</td>
+<td>การแจ้งเตือนการลบข้อความจะไม่ถูกเพิ่มเข้าไปในบันทึกหลักฐาน</td>
+</tr>
+<tr>
+<td>ปฏิกิริยา</td>
+<td>ส่งภาพถ่ายหน้าจอแสดงปฏิกิริยา</td>
+<td>ไม่มีการเพิ่มอัปเดตปฏิกิริยาแยกต่างหาก</td>
+</tr>
+<tr>
+<td>การเป็นสมาชิก</td>
+<td>ส่งข้อความบริการสมาชิกและอัปเดตข้อมูลผู้เข้าร่วม</td>
+<td>ข้อสังเกตเกี่ยวกับสมาชิกดังกล่าวไม่ได้ถูกเพิ่มเข้าไป</td>
+</tr>
+</tbody>
+</table></div>
+<p>การตั้งค่าจะนำไปใช้กับทุกแหล่งข้อมูลที่เลือกในพื้นที่ทำงาน บันทึกแบบฟอร์มเพื่อนำการเปลี่ยนแปลงไปใช้
+การเปลี่ยนแปลงจะถูกบันทึกพร้อมค่าก่อนและหลังที่มีการลงนาม การปิดใช้งานหมวดหมู่
+จะไม่ลบข้อมูลบันทึกก่อนหน้านี้ การเปิดใช้งานใหม่จะไม่เติมข้อมูลที่พลาดไป</p>
+<p>บันทึกการดำเนินงานและเหตุการณ์บริการกลุ่มอื่น ๆ ยังคงแยกต่างหากจาก
+สวิตช์เหล่านี้ ข้อความบริการสมาชิกสามารถสร้างบันทึกข้อความได้เมื่อ
+การเป็นสมาชิกถูกเปิดใช้งาน แม้ว่าการบันทึกข้อความใหม่แบบปกติจะถูกปิดใช้งานก็ตาม วัตถุ Telegram
+ที่ถูกบันทึกจะรักษาข้อมูลเมตาดาต้าที่ฝังไว้; สวิตช์ไม่ใช่กฎการลบข้อมูล</p>
+<p><strong>การลบข้อความในแชทส่วนตัวและกลุ่มทั่วไปจะปรากฏเป็น</strong> ID ข้อความโดยไม่มีข้อมูลแชท
+แชทเหล่านี้ใช้ลำดับ ID ข้อความเดียวกันสำหรับทั้งบัญชี ดังนั้นเมื่อข้อความที่มี ID ดังกล่าว
+ถูกบันทึกไว้ก่อนหน้านี้ แชทที่เกี่ยวข้องก็จะถูกระบุ: การลบข้อความจะถูกบันทึกในแชทนั้นพร้อม
+<code>chat_resolution</code> ที่อธิบายวิธีการ ID ที่ไม่เคยถูกบันทึกจะยังคงเป็นการ<strong>ลบที่ไม่มีขอบเขต</strong> พร้อม
+แหล่งที่มาที่ไม่ทราบอย่างชัดเจน; ระบบเก็บข้อมูลไม่ทำการคาดเดา Telegram ไม่เคยระบุว่าใครเป็นผู้ลบ
+ข้อความ; เมื่อข้อความที่ถูกลบถูกส่งจากบัญชีนี้ บันทึกจะระบุเช่นนั้น
+(<code>deleted_message_was_outgoing</code>) โดยไม่ระบุชื่อผู้ลบ</p>
+<h2 id="own-actions">การดำเนินการของตนเอง<a class="anchor" href="#own-actions" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
+<p>ข้อความที่ส่งจากบัญชีที่ถูกติดตามจะถูกติดป้ายว่า <code>outgoing</code> การแก้ไขข้อความที่ส่งออกไป
+จะระบุว่า ในแชทส่วนตัวและกลุ่ม มีเพียงผู้เขียนเท่านั้นที่สามารถแก้ไขได้ ส่วนโพสต์ในช่อง
+สามารถถูกแก้ไขได้โดยผู้ดูแลระบบอื่น ๆ เมื่อข้อความที่ส่งออกไปซ้ำกับข้อความของปุ่ม
+จากคีย์บอร์ดตอบกลับที่บันทึกไว้ล่าสุดในแชทนั้น ข้อความดังกล่าวจะมีรหัส<code>button_press</code> พร้อมลิงก์ไปยัง
+บันทึกของคีย์บอร์ดนั้น</p>
+<p>การไม่รวมการดำเนินการของระบบเองยังใช้กับการตรวจสอบซ้ำในพื้นหลังและประวัติการสนทนาใหม่ที่สร้างขึ้นอัตโนมัติ
+ข้อความที่ส่งออกไปแล้วและถูกข้ามไปจะเลื่อนตำแหน่งการตรวจสอบซ้ำให้ไปข้างหน้า เพื่อไม่ให้ขัดขวางข้อความที่ส่งเข้ามาในภายหลัง
+การดำเนินการบนแผงควบคุมที่ระบุชัดเจนและภาพถ่ายประวัติที่ขอมาด้วยมือจะยังคงถูกบันทึกไว้</p>
+<h2 id="investigation-mode-joining-teams-and-talking-to-bots">โหมดการสืบสวน: การเข้าร่วมทีมและการสนทนากับบอท<a class="anchor" href="#investigation-mode-joining-teams-and-talking-to-bots" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
+<p><strong>แหล่งข้อมูล → ขอบเขตการสังเกต → โหมดการสืบสวน</strong> จะเตรียมขอบเขตสำหรับบัญชีเฉพาะ
+ที่เข้าร่วมการสนทนาในกลุ่มทีม, เปิดใช้งานบอท และส่งข้อความไปยังบอทเหล่านั้น: บัญชีทั้งหมด, ทุก
+ประเภทแหล่งข้อมูล, การดำเนินการของตนเอง, และสำหรับทุกการสนทนาหรือบอทที่ปรากฏขึ้น จะแสดงโปรไฟล์และ
+ข้อความ 200 ข้อความล่าสุดที่มองเห็นได้ ตรวจสอบแบบฟอร์มและกด &quot;<strong>บันทึกขอบเขต&quot;</strong>; การเปลี่ยนไปใช้
+บัญชีทั้งหมดจะขอการยืนยันตามปกติ</p>
+<ul>
+<li><strong>ปุ่มต่างๆ</strong> ปุ่มที่อยู่ใต้ข้อความจะถูกรักษาไว้พร้อมกับข้อความและแสดงใน<strong>ส่วน Chats</strong>: ลิงก์, เว็บ
+    แอป, ลิงก์เข้าสู่ระบบ, ข้อความเพื่อคัดลอก, ข้อมูล callback, การค้นหาในข้อความ, การขอ
+    หมายเลขโทรศัพท์หรือตำแหน่ง ลิงก์จะแสดงเป็นข้อความและไม่ถูกเปิดโดยแผงควบคุม เมื่อบอท
+    เปลี่ยนแปลงเฉพาะปุ่ม (ลิงก์การชำระเงินใหม่) นั่นถือเป็นเวอร์ชันใหม่ของข้อความ ทั้ง
+    จากการอัปเดตแบบเรียลไทม์และจากการตรวจสอบซ้ำ</li>
+<li>
+<p><strong>การสนทนาและบอตใหม่</strong> ในโหมดโฟลเดอร์และโหมดบัญชีทั้งหมด <strong>เมื่อการสนทนาหรือบอตใหม่
+    ปรากฏขึ้น</strong> จะถูกบันทึกทันทีหลังจากที่มันปรากฏ:</p>
+<ul>
+<li>โปรไฟล์ในรูปแบบบันทึก<code>source.profile</code>: คำอธิบายและคำสั่งของบอท, ข้อความ &quot;เกี่ยวกับ&quot;
+    ของผู้ใช้ กลุ่ม หรือช่อง, สมาชิก, การสนทนาที่เชื่อมโยง และลิงก์เชิญเมื่อ Telegram ส่งคืน
+    ลิงก์ดังกล่าว;</li>
+<li>ข้อความล่าสุดที่มองเห็นได้ (สูงสุด 1,000 ข้อความ) ในรูปแบบภาพถ่ายประวัติที่มีเครื่องหมาย<code>new_chat</code>:
+    ข้อความก่อนหน้าของห้องแชทกลุ่มที่เพิ่งเข้าร่วม หรือสิ่งที่บอทพูดก่อนที่ระบบสังเกตการณ์
+    จะตรวจพบห้องแชทนั้น ข้อความที่บันทึกไว้แบบเรียลไทม์แล้วจะไม่ถูกบันทึกซ้ำ</li>
+</ul>
+<p>การสนทนาที่อยู่ในรายชื่อแล้วเมื่อเปิดโหมดนี้จะถูกเพิ่มเข้าไปโดยไม่มีการถ่ายภาพหน้าจอ
+FloodWait จะหยุดการทำงานนี้ชั่วคราวและจะดำเนินการต่อหลังจากนั้น; ความล้มเหลวจะถูกบันทึกไว้และการบันทึก
+การสนทนาแบบเรียลไทม์จะดำเนินต่อไป
+- <strong>โปรไฟล์ตามคำขอ การเลือก Chats → Profile → Save profile </strong>จะบันทึกโปรไฟล์ปัจจุบัน
+ของแหล่งข้อมูลใดก็ตาม; โปรไฟล์ล่าสุดจะแสดงอยู่ด้านบนข้อความ
+- <strong>ไม่ปรากฏให้เห็น</strong> ปุ่มในไลน์ (callback) ที่ถูกกดในแอป Telegram อื่น หน้าต่างป๊อปอัพ หรือ
+ลิงก์ที่บอทตอบกลับเมื่อถูกกด รวมถึงลิงก์เชิญที่ใช้ในแอปอื่น จะไม่ส่งถึง
+TgWitness สิ่งที่บอทส่งหรือแก้ไขหลังจากนั้นจะถูกบันทึกไว้</p>
+</li>
+</ul>
+<h3 id="act-from-the-panel">การดำเนินการจากคณะผู้อภิปราย<a class="anchor" href="#act-from-the-panel" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h3>
+<p><strong>ส่วน &quot;Chats&quot;</strong> ตอนนี้ได้เพิ่มมินิ-ไคลเอนต์ที่ใช้บัญชี Telegram ของพื้นที่ทำงานที่เลือกไว้:</p>
+<ul>
+<li>เขียนข้อความแบบข้อความธรรมดา หรือเลือก <strong>&quot;Reply&quot; (</strong>ตอบกลับ) ใต้ข้อความที่บันทึกไว้ ข้อความที่ส่งออกไป
+    จะถูกบันทึกไว้ แม้เมื่อตั้งค่าให้ไม่บันทึกการอัปเดตข้อความที่ส่งออกไป</li>
+<li>กด<strong>ปุ่ม &quot;Press&quot;</strong> ใต้ปุ่ม callback หรือปุ่มข้อความปัจจุบัน เซิร์ฟเวอร์จะดึง
+    ข้อความมาอีกครั้งและปฏิเสธการดำเนินการหากข้อความที่ป้อนไม่ตรงกับเวอร์ชันที่บันทึกไว้
+    ใบยืนยันการรับข้อความ callback จะเก็บข้อความป๊อปอัพ ธงแจ้งเตือน และ URL ของ Telegram ไว้; คำตอบจะแสดง
+    อยู่ใต้บทสนทนาด้วย URL ยังคงเป็นข้อความที่เลือกได้และไม่เปิดอัตโนมัติ</li>
+<li>คลิก &quot;<strong>Open Telegram link</strong>&quot; (เปิดลิงก์ Telegram), ป้อน <code>@username</code>, ลิงก์สาธารณะ <code>https://t.me/name</code>,
+    <code>https://t.me/+invite</code> / <code>joinchat/invite</code> หรือลิงก์บอทที่มี <code>?start=parameter</code> แล้วคลิก
+    <strong>&quot;Save preview</strong>&quot; (บันทึกตัวอย่าง) ลิงก์ต้นฉบับและตัวอย่างของ Telegram จะถูกลงนามก่อนการเข้าร่วม
+    <strong>การเข้าร่วม / เปิดและ</strong>สังเกตการณ์จะนับเป็นการเข้าร่วมกลุ่ม/ช่อง หรือเปิดผู้ใช้/บอท เพิ่ม
+    การสนทนาเป็นแหล่งข้อมูลที่เปิดใช้งาน และส่ง<code>/start</code> ไปยังบอท พร้อมทั้งพารามิเตอร์เริ่มต้น
+    คำขอเข้าร่วมที่รอการอนุมัติจากผู้ดูแลระบบจะถูกบันทึกเป็น &quot;รอการอนุมัติ&quot; ไม่ใช่ &quot;สมาชิก&quot;</li>
+</ul>
+<p>เปิด &quot;<strong>Start observation</strong>&quot; เพื่อบันทึกคำตอบที่เข้ามาแบบเรียลไทม์ การดำเนินการบนแผงควบคุมยังคงทำงานได้แม้
+การสังเกตการณ์จะถูกหยุดชั่วคราว แต่ในขณะนั้นจะรับประกันได้เพียงคำตอบโดยตรงเท่านั้นที่จะถูกบันทึก
+แหล่งข้อมูลที่เพิ่มใหม่จะใช้การรับข้อมูลตามโปรไฟล์/ประวัติที่ตั้งค่าไว้เมื่อการสังเกตการณ์กำลังทำงาน
+เมื่อแหล่งข้อมูลถูกหยุดชั่วคราว ให้เปิดใช้งานมันในส่วน <strong>&quot;Sources&quot;</strong> ก่อนที่จะส่งข้อความหรือกดปุ่มของมัน</p>
+<p><code>interaction.preview</code>, <code>interaction.requested</code> และ <code>interaction.result</code> เป็นเหตุการณ์ในบันทึก
+ที่ลงนามแล้วซึ่งรวมอยู่ในการส่งออกหลักฐาน คำขอระบุบัญชี ข้อความ/ปุ่ม
+หรือบันทึกตัวอย่าง และระบุว่ากำลังดำเนินการสังเกตการณ์อยู่หรือไม่ ใบตอบรับแยกแยะระหว่างความสำเร็จ
+การปฏิเสธ การรอการอนุมัติ และผลลัพธ์ที่ไม่ทราบ คำขอที่ถูกขัดจังหวะอาจได้ส่งถึง
+Telegram แล้ว: ตรวจสอบแชทก่อนเริ่มดำเนินการใหม่ การใช้ ID คำขอซ้ำจะเรียกคืน
+ใบยืนยันที่บันทึกไว้โดยไม่ต้องทำซ้ำการดำเนินการ รวมถึงหลังการรีสตาร์ท แผงควบคุมจะเก็บรักษา
+ID ไว้หลังจากได้รับคำตอบที่ไม่ชัดเจนสำหรับการดำเนินการเดียวกันในเซสชันหน้าปัจจุบัน
+นอกจากนี้ยังเก็บรักษา ID นั้นไว้เมื่อการรีเฟรชหน้าล้มเหลวหลังการดำเนินการสำเร็จ: ใบยืนยัน
+จะยังคงแสดงอยู่ และการคลิกอีกครั้งจะเรียกคืนมัน RPC แบบ callback และ join มีโอกาส
+ลองเพียงครั้งเดียว; ส่วนการอ่านที่สามารถลองใหม่ได้จะรักษานโยบายการลองใหม่ที่ตั้งค่าไว้ การเปลี่ยนแชททันที
+จะลบร่างข้อความและเป้าหมายการตอบกลับ และปิดการส่งข้อความจนกว่าการสนทนาใหม่จะโหลดเสร็จ</p>
+<p>มินิ-ไคลเอนต์นี้จัดการปุ่มข้อความและปุ่ม callback ได้ แอปเว็บ คำขอเข้าสู่ระบบ/หมายเลขโทรศัพท์/ตำแหน่ง
+การชำระเงิน การค้นหาในข้อความ และไฟล์แนบ ยังคงต้องใช้ไคลเอนต์ Telegram; ข้อมูลเมตาดาต้าของปุ่มที่บันทึกไว้
+ยังคงแสดงอยู่ องค์ประกอบการควบคุมใหม่ใช้ข้อความภาษาอังกฤษ</p>
+<h2 id="recheck-tiers">ตรวจสอบระดับใหม่<a class="anchor" href="#recheck-tiers" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
+<p>การตรวจสอบซ้ำจะขอข้อมูลจาก Telegram อีกครั้งสำหรับข้อความที่พลาดไป การแก้ไข และข้อความที่ Telegram ไม่ส่งกลับมาอีก
+แหล่งข้อมูลที่มีเครื่องหมายดาวเป็นแหล่งข้อมูลลำดับความสำคัญ ซึ่งจะถูกตรวจสอบซ้ำทุก 15 นาทีตามค่าเริ่มต้น;
+แหล่งข้อมูลอื่น ๆ ทั้งหมดจะถูกตรวจสอบซ้ำทุก 6 ชั่วโมง การสนทนาที่เลือกไว้จะเริ่มต้นเป็นแหล่งข้อมูลลำดับความสำคัญ ส่วนการสนทนาที่เพิ่มผ่าน
+โฟลเดอร์หรือบัญชีทั้งหมดจะเริ่มต้นเป็นแหล่งข้อมูลปกติ ตรวจสอบซ้ำได้สูงสุด 30 แหล่งต่อรอบ และ
+ส่วนที่เหลือจะรอจนถึงนาทีถัดไป; หลังจากเชื่อมต่อใหม่ แหล่งข้อมูลลำดับความสำคัญจะได้รับการตรวจสอบก่อน ทั้ง
+สองช่วงเวลาถูกตั้งค่าไว้ที่ แหล่งข้อมูล → การตั้งค่าการบันทึก → ตรวจสอบซ้ำ (0 จะปิดระดับนั้น) และถูก
+บันทึกเป็น <code>recheck.changed</code></p>
+<p>ข้อความที่พลาดจะถูกดึงขึ้นจากจุดที่รอบการตรวจสอบครั้งก่อนหยุดไว้ โดยจำนวนสูงสุดคือตามการตั้งค่าใน
+<strong>Parameters → new messages per recheck</strong> (ค่าเริ่มต้นคือ 1,000) ต่อรอบ หลังจากหยุดไปนาน
+การตรวจสอบซ้ำจึงจะเติมเต็มช่องว่างทั้งหมด แม้ข้อความสดที่ใหม่กว่าช่วงช่องว่างนั้นจะถูกบันทึก
+ไว้ก่อนก็ตาม การสนทนาที่ยังกำลังตามทันจะถูกตรวจสอบซ้ำอีกครั้งในนาทีถัดไป แทนที่จะ
+รอจนถึงช่วงเวลาที่กำหนด; <code>recheck.completed</code> จะแสดง <code>continues_after</code> จนกว่าจะเสร็จสิ้น</p>
+<p>การเปรียบเทียบรวมถึงข้อความของข้อความ, เอนทิตี, แป้นพิมพ์ (รวมถึงการลบ), และ
+เนื้อหา/ข้อมูลระบุตัวตนของไฟล์แนบ การเปลี่ยนแปลงแฮชการเข้าถึงไฟล์หรือการอ้างอิงไฟล์เพียงอย่างเดียวไม่ถือเป็นการ
+แก้ไข เช่นเดียวกับข้อมูลที่ Telegram เติมเข้าไปเอง: การโหลดตัวอย่างลิงก์, การดูสตอรี, สื่อแบบชำระเงิน
+ที่บัญชีนี้ปลดล็อก, หรือใบเสร็จรับเงินใบแจ้งหนี้ แต่ละเวอร์ชันที่บันทึกไว้ใน Chats จะเชื่อมโยงไปยังบันทึกสมุดบันทึกฉบับเต็ม รวมถึงเมตาดาต้าของสื่อ</p>
+<h2 id="message-history-and-attribution">ประวัติข้อความและที่มา<a class="anchor" href="#message-history-and-attribution" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
+<p>สมมติว่าผู้เก็บข้อมูลสังเกตเห็นข้อความ “ประชุมเวลา 10:00” ต่อมาเห็นข้อความ “ประชุมเวลา 11:00”
+และจากนั้นได้รับแจ้งการลบข้อความ ระบบจะบันทึกการสังเกตสามรายการที่แยกกัน โดย
+ข้อความต้นฉบับยังคงอยู่ การแก้ไขถือเป็นเวอร์ชันที่แยกต่างหาก และแจ้งเตือนบันทึกว่า
+มีการสังเกตเห็นการลบข้อความ</p>
+<p>หากการเก็บข้อมูลเริ่มขึ้นหลังจากเวอร์ชันแรกหายไป ข้อความดังกล่าวจะไม่สามารถเข้าถึงได้
+หากมีการแก้ไขหลายครั้งในขณะที่ระบบอยู่ในโหมดออฟไลน์ จะสามารถบันทึกได้เฉพาะ
+เวอร์ชันที่ตรวจพบในภายหลังเท่านั้น การแจ้งเตือนการลบไม่สามารถกู้คืนเนื้อหาที่ยังไม่เคยถูกบันทึกไว้ได้</p>
+<p>ผู้ส่งข้อความไม่จำเป็นต้องเป็นผู้แก้ไขโดยอัตโนมัติ Telegram โดยทั่วไปไม่
+ให้ข้อมูลเกี่ยวกับบุคคลที่ลบข้อความหรือเวลาที่ลบข้อความอย่างแม่นยำ ผู้กระทำที่ไม่ทราบตัวตน
+จะยังคงไม่ทราบตัวตน ภาพถ่ายหน้าจอของปฏิกิริยาและการอัปเดตของผู้เข้าร่วมมีเพียงจำนวน
+และข้อมูลประจำตัวที่ Telegram แสดงให้บัญชีนั้นเห็นเท่านั้น</p>
+<p>หมายเลขลำดับแสดงลำดับการสังเกตการณ์ เวลา UTC ของผู้เก็บข้อมูลคือ
+เวลาท้องถิ่นของอุปกรณ์นั้น ส่วนเวลา UTC ของแหล่งข้อมูล Telegram จะถูกเก็บไว้แยกต่างหากหากมีข้อมูลดังกล่าว
+ทั้งสองอย่างนี้ไม่ใช่เวลาที่เชื่อถือได้อย่างอิสระ</p>
+<h2 id="history-snapshots">ภาพถ่ายประวัติ<a class="anchor" href="#history-snapshots" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
+<p>การส่งคำขอแบบสแนปช็อตจะดึงข้อความล่าสุดที่มองเห็นได้จากแหล่งข้อมูลที่เปิดใช้งานอยู่ โดยแต่ละคำขอสามารถดึงได้สูงสุด
+500 ข้อความ ผลลัพธ์จะถูกระบุว่าเป็น &quot;การสังเกตประวัติ&quot; ซึ่งอาจทับซ้อน
+กับการบันทึกแบบเรียลไทม์ และการสังเกตซ้ำจะถูกเก็บเป็นบันทึกแยกต่างหาก</p>
+<p>ภาพถ่ายหน้าจอ (Snapshots) ปฏิบัติตามนโยบายไฟล์แนบ แต่ยังคงแยกต่างหากจากสวิตช์เหตุการณ์แบบเรียลไทม์
+ภาพถ่ายหน้าจอเหล่านี้ไม่สร้างข้อความที่ถูกลบหรือเวอร์ชันกลางที่พลาดไปใหม่ คุณสามารถ
+ขอภาพถ่ายหน้าจอได้ขณะที่ระบบอยู่ในสถานะหยุดชั่วคราว; ไฟล์แนบใด ๆ ที่อยู่ในคิวจะรอจนกว่าการสังเกตการณ์จะเริ่ม
+และตัวประมวลผลดาวน์โหลดทำงาน</p>
+<h2 id="attachment-handling">การจัดการไฟล์แนบ<a class="anchor" href="#attachment-handling" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
+<p>การดาวน์โหลดไฟล์แนบถูกเปิดไว้โดยค่าเริ่มต้น และจะหยุดชั่วคราวเมื่อพื้นที่ดิสก์ว่างเหลือน้อยกว่า 1 GiB ผู้รวบรวมจะบันทึก
+การสังเกตข้อความและงานดาวน์โหลดพร้อมกัน งานนี้รักษาตัวระบุสื่อต้นฉบับ
+และนโยบายขนาดไว้ ดังนั้นไฟล์แนบที่ได้รับการแก้ไขในภายหลังจะไม่ถูกแทนที่โดยอัตโนมัติ</p>
+<p>การดาวน์โหลดจะดำเนินการหลังจากจับข้อความได้ การดาวน์โหลดที่เสร็จสิ้นจะสร้างบันทึก<code>media.saved</code>
+พร้อมด้วย SHA-256 และจำนวนไบต์ งานที่ถูกข้ามไป ล้มเหลว ลองใหม่ และถูกขัดจังหวะ
+จะมีผลลัพธ์ที่แยกกัน งานที่อยู่ในคิวไม่ใช่หลักฐานว่าไฟล์นั้นได้รับการเก็บรักษาไว้
+ไฟล์ที่เสร็จสมบูรณ์ต้องตรงกับจำนวนไบต์ในตัวระบุไฟล์แนบต้นฉบับที่สังเกตได้
+การตอบกลับที่สั้นหรือยาวกว่าที่คาดไว้จะไม่ถูกบันทึกเป็นสื่อที่ได้รับการเก็บรักษา</p>
+<p>มีการกำหนดขีดจำกัด<strong>ตามประเภท</strong>: รูปภาพ, วิดีโอ, GIF และภาพเคลื่อนไหว, ข้อความวิดีโอแบบวงกลม,
+ข้อความเสียง, เพลงและเสียง, สติกเกอร์ และไฟล์ แต่ละประเภทสามารถปิดได้และมี
+ขีดจำกัดขนาดของตัวเองตั้งแต่ 1 ถึง 2,000 MiB; พื้นที่ทำงานใหม่เริ่มต้นด้วย 20 MiB สำหรับรูปภาพ,
+100 MiB สำหรับวิดีโอ, 50 MiB สำหรับไฟล์, เสียง และวิดีโอแบบวงกลม, 20 MiB สำหรับข้อความเสียงและ GIFs และ
+5 MiB สำหรับสติกเกอร์ การตั้งค่า<em>ขนาดไฟล์</em>สูงสุดจะกำหนดทุกประเภทพร้อมกัน นโยบายที่บันทึกไว้ก่อน
+การกำหนดขีดจำกัดตามประเภทจะยังคงใช้ขีดจำกัดเดียวสำหรับทุกประเภท ประเภทที่ถูกปิดจะสร้าง
+บันทึก <code>media.skipped</code>; ไฟล์ที่มีขนาดไม่ทราบหรือเกินขนาดจะไม่ถูกดาวน์โหลด ไฟล์ขนาดใหญ่จะได้รับการ
+ความเร็วการดาวน์โหลดอย่างน้อย 256 KiB/s งานจะยังคงอยู่หลังการรีสตาร์ท แต่การอ้างอิงที่หมดอายุ การสูญเสีย
+สิทธิ์การเข้าถึง หรือไฟล์ที่ถูกลบ อาจยังคงทำให้ไม่สามารถกู้คืนได้ งานที่มีอยู่จะรักษานโยบายที่บันทึก
+ไว้พร้อมกับงานนั้น</p>
+<h2 id="pause-lock-disconnect-and-restart">หยุดชั่วคราว, ล็อก, ตัดการเชื่อมต่อ และเริ่มต้นใหม่<a class="anchor" href="#pause-lock-disconnect-and-restart" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>การดำเนินการหรือเงื่อนไข</th>
+<th>ผลลัพธ์</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>เปลี่ยนพื้นที่ทำงาน</td>
+<td>เปลี่ยนมุมมองของแผง; เครื่องมือเก็บข้อมูลอื่น ๆ จะรักษาสถานะเดิมไว้</td>
+</tr>
+<tr>
+<td>ล็อกแผงควบคุมหรือปิดแท็บ</td>
+<td>ทำให้เซิร์ฟเวอร์และระบบการสังเกตการณ์ยังคงทำงานต่อไป</td>
+</tr>
+<tr>
+<td>หยุดการสังเกต</td>
+<td>หยุดการทำงานของตัวเก็บรวบรวมและรักษาไฟล์แนบที่อยู่ในคิว</td>
+</tr>
+<tr>
+<td>ปิดใช้งานแหล่งข้อมูล</td>
+<td>หยุดการบันทึกข้อมูลในอนาคตตามขอบเขตที่กำหนด; งานสื่อที่อยู่ในคิวจะรอจนกว่าเครื่องมือนี้ถูกปิดใช้งาน</td>
+</tr>
+<tr>
+<td>ลบแหล่งข้อมูล</td>
+<td>ระบบจะลืมแหล่งข้อมูลนี้และลบโปรไฟล์ผู้ใช้ที่เกี่ยวข้อง; ข้อมูลที่บันทึกไว้แล้วจะยังคงอยู่ในบันทึกแบบเพิ่มข้อมูลเท่านั้น (append-only journal) ส่วนไฟล์แนบที่ยังรอการบันทึกจะถูกลงบันทึกว่าล้มเหลว (<code>source_removed</code>) ในโหมดโฟลเดอร์และโหมดบัญชีทั้งหมด ข้อมูลเหล่านี้ก็จะถูกยกเว้นเช่นกัน</td>
+</tr>
+<tr>
+<td>เปลี่ยนเส้นทางเชื่อมต่อ</td>
+<td>จำเป็นต้องหยุดชั่วคราว ปิดแอปพลิเคชันเก่า และยกเลิกการเข้าสู่ระบบที่ยังไม่เสร็จสิ้น</td>
+</tr>
+<tr>
+<td>หยุดกระบวนการ Python</td>
+<td>หยุดการทำงานของทุกพื้นที่ทำงาน; ไม่มีการบันทึกข้อมูลใดๆ เมื่อระบบอยู่ในสถานะออฟไลน์</td>
+</tr>
+<tr>
+<td>เริ่มต้นใหม่หลังการสังเกตการณ์อย่างจริงจัง</td>
+<td>ระบบจะพยายามต่อจากขอบเขตที่บันทึกไว้โดยใช้เซสชันที่บันทึกไว้ การหยุดชั่วคราวแบบแมนนวลจะยกเลิกความตั้งใจดังกล่าว</td>
+</tr>
+</tbody>
+</table></div>
+<p>เครื่องมือเก็บข้อมูลจะบันทึกการตัดการเชื่อมต่อที่ตรวจพบ การลองใหม่ ข้อผิดพลาด การเริ่ม/หยุด และ
+สัญญาณชีพจร การตรวจสอบการเชื่อมต่อแบบเป็นช่วงอาจพลาดการหยุดชะงักสั้นๆ ได้
+หลังการรีสตาร์ท ระบบจะขออัปเดตที่พลาดไปจากตำแหน่งอัปเดตที่บันทึกไว้ และ
+ตรวจสอบการสนทนาที่สังเกตเห็นอีกครั้งเป็นระยะ ๆ; ดู<a href="../evidence/#durable-collection-and-process-receipts-02">รูปแบบหลักฐาน</a> สแนปช็อตให้บริบท;
+แต่มันไม่ได้พิสูจน์ว่าช่องว่างนั้นได้รับการแก้ไขแล้ว</p>
+<h2 id="account-isolation-and-verification">การแยกบัญชีและการตรวจสอบ<a class="anchor" href="#account-isolation-and-verification" aria-label="ลิงก์ไปยังส่วนนี้">#</a></h2>
+<p>แต่ละพื้นที่ทำงานมีบันทึกการตรวจสอบ (journal) การอนุญาต (authorization) กุญแจการลงนาม (signing key) นโยบาย (policy) และคิว (queue) ของตัวเอง
+มีเพียงไคลเอนต์ที่ใช้งานอยู่เท่านั้นที่สามารถส่งข้อมูลการสังเกตแบบเรียลไทม์ได้ ไคลเอนต์ที่ถูกปฏิเสธ (rejected) อยู่ระหว่างการพิจารณา (pending)
+ถูกแทนที่ (superseded) และไคลเอนต์ที่ทดสอบการเชื่อมต่อ (connection-test) ไม่สามารถเขียนข้อมูลอัปเดตแบบเรียลไทม์ลงในบันทึกการตรวจสอบได้
+บัญชีต่าง ๆ สามารถสังเกตกลุ่มเดียวกันได้ แต่บันทึกการตรวจสอบของแต่ละบัญชีจะยังคงแยกกัน</p>
+<p>แต่ละเหตุการณ์จะรวมถึงค่าแฮชของเหตุการณ์ก่อนหน้าและลายเซ็น Ed25519 การส่งออกจะครอบคลุม
+บันทึกพื้นที่ทำงานทั้งหมดผ่านหมายเลขลำดับที่คงที่ ตัวกรองในแผงควบคุมจะไม่กรอง
+ข้อมูลที่ส่งออก; การเก็บข้อมูลอาจดำเนินต่อไปเกินขอบเขตของบันทึกในขณะที่กำลังเตรียมการส่งออก</p>
+<p><strong>Verify journal</strong> ตรวจสอบลำดับเหตุการณ์และลายเซ็นผ่าน
+ขอบเขตที่แสดงไว้ ผลลัพธ์จะถูกล้างเมื่อพื้นที่ทำงานเปลี่ยนแปลง และแผงควบคุมจะระบุ
+บันทึกใหม่ที่เพิ่มเข้ามาหลังการตรวจสอบ การส่งออกเป็น ZIP ยังตรวจสอบสื่อที่เก็บรวบรวมไว้ด้วย</p>
+<p>ลายเซ็นที่ถูกต้องจะยืนยันความสมบูรณ์ของข้อมูลเมื่อเทียบกับกุญแจที่เชื่อถือได้ ไม่ใช่
+แหล่งที่มาของ Telegram หรือความถูกต้องของเนื้อหา เก็บรักษาลายนิ้วมือและจุดตรวจสอบอย่างอิสระ ดู
+<a href="../evidence/">แบบจำลองหลักฐาน</a> <a href="../operations/">การดำเนินงานประจำวัน</a> และ
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">ขั้นตอนการรับข้อมูลแบบเรียลไทม์</a> เพื่อทราบข้อกำหนดด้านความเชื่อถือและการส่งมอบ</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/COLLECTION.md">แก้ไขหน้านี้บน GitHub ↗</a><a class="next-guide" href="../operations/"><span>ขั้นตอนต่อไป</span><strong>ขั้นตอนการทำงานและการดำเนินการ →</strong></a><p>คู่มือเหล่านี้อธิบายการนำไปใช้ในปัจจุบัน ผลการตรวจสอบความถูกต้องและช่องว่างที่ยังเหลืออยู่ได้รับการบันทึกไว้อย่างแยกต่างหาก <a href="../verification/">สิ่งที่ได้รับการทดสอบแล้ว →</a></p></footer>
+</main>
+<aside class="toc" aria-label="บนหน้านี้"><p class="nav-label">บนหน้านี้</p><a href="#from-login-to-a-journal">ตั้งแต่การเข้าสู่ระบบจนถึงบันทึก</a><a href="#observation-scope-chosen-chats-a-folder-or-the-whole-account">ขอบเขตการสังเกต: การสนทนาที่เลือกไว้, โฟลเดอร์ หรือบัญชีทั้งหมด</a><a href="#scope-and-event-selection">ขอบเขตและวิธีการเลือกเหตุการณ์</a><a href="#own-actions">การดำเนินการของตนเอง</a><a href="#investigation-mode-joining-teams-and-talking-to-bots">โหมดการสืบสวน: การเข้าร่วมทีมและการสนทนากับบอท</a><a href="#recheck-tiers">ตรวจสอบระดับใหม่</a><a href="#message-history-and-attribution">ประวัติข้อความและที่มา</a><a href="#history-snapshots">ภาพถ่ายประวัติ</a><a href="#attachment-handling">การจัดการไฟล์แนบ</a><a href="#pause-lock-disconnect-and-restart">หยุดชั่วคราว, ล็อก, ตัดการเชื่อมต่อ และเริ่มต้นใหม่</a><a href="#account-isolation-and-verification">การแยกบัญชีและการตรวจสอบ</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>โอเพนซอร์ส · ทำงานบนเครื่องของคุณ</span><a href="../../../../LICENSE">ใบอนุญาต MIT</a><a href="../notice/">ประกาศจากผู้ดำเนินการ</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">ความปลอดภัย</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "กำลังรอข้อความ", "Step through a fictional send, edit and delete.": "ลองทำตามขั้นตอนการส่ง แก้ไข และลบข้อความในสถานการณ์สมมติ", "No observations yet. Start the sequence or advance one event.": "ยังไม่มีความคิดเห็นใด ๆ เริ่มลำดับเหตุการณ์หรือเลื่อนไปหนึ่งเหตุการณ์", "Meet at 10:00": "พบกันเวลา 10:00", "A new message is visible in the chat.": "มีข้อความใหม่ปรากฏในแชท", "Record 1 appended: the collector observed the original message.": "บันทึก 1 แนบมาด้วย: ผู้เก็บข้อมูลได้สังเกตเห็นข้อความต้นฉบับ", "Meet at 11:00": "พบกันเวลา 11:00", "The current text changes. The earlier observation stays.": "ข้อความปัจจุบันมีการเปลี่ยนแปลง แต่ข้อสังเกตก่อนหน้านี้ยังคงอยู่", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "บันทึก 2 ได้ถูกเพิ่มเข้ามา: การแก้ไขนี้ถือเป็นการสังเกตการณ์ใหม่ บันทึก 1 ยังคงเก็บข้อความต้นฉบับไว้", "Message deleted": "ข้อความถูกลบ", "The message has disappeared from the chat view.": "ข้อความดังกล่าวได้หายไปแล้วจากหน้าจอสนทนา", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "บันทึก 3 ที่แนบมา: ประกาศการลบถูกรักษาไว้พร้อมกับทั้งสองเวอร์ชันที่สังเกตได้", "0 records": "0 รายการ", "1 record": "1 รายการ", "2 records": "2 รายการ", "3 records": "3 รายการ", "Complete / {n} of 3": "เสร็จสมบูรณ์ / {n} จาก 3", "Step / {n} of 3": "ขั้นตอน / {n} จาก 3", "Pause": "หยุดชั่วคราว", "Replay sequence": "ลำดับการเล่นซ้ำ", "Play sequence": "ลำดับการเล่น", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "มีตัวอย่างแบบคงที่ให้ใช้งานได้ หากต้องการคำนวณค่าแฮชแบบโต้ตอบ ให้เปิดหน้านี้ผ่าน HTTPS หรือดูตัวอย่างบน localhost ที่รองรับ Web Crypto", "No record supplied": "ไม่มีบันทึกที่ให้มา", "Tail removed": "ส่วนท้ายถูกลบ", "≠ saved hash": "≠ ค่าแฮชที่บันทึกไว้", "Rebuilt · different hash": "สร้างใหม่ · ค่าแฮชที่ต่างกัน", "= saved hash": "= hash ที่บันทึกไว้", "Same length and matching head.": "ความยาวเท่ากันและส่วนหัวที่สอดคล้องกัน", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "แฮชที่คำนวณได้ทั้งสามค่าตรงกับแฮชที่เก็บไว้ ตัวอย่างนี้สอดคล้องกับขอบเขตสามบันทึกที่เก็บไว้", "Same saved head; the journal prefix fails verification.": "ส่วนหัวที่บันทึกไว้เหมือนเดิม; ส่วนนำหน้าของบันทึกไม่ผ่านการตรวจสอบ", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "บันทึกที่ 2 ไม่ตรงกับค่าแฮชที่เก็บไว้แล้ว การตรวจสอบเพียงส่วนหัวสุดท้ายที่เก็บไว้จะไม่สามารถตรวจพบข้อผิดพลาดนี้ได้; ผู้ตรวจสอบจะตรวจสอบทุกบันทึก", "Head differs from the retained checkpoint.": "ส่วนหัวแตกต่างจากจุดตรวจสอบที่เก็บไว้", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "ค่าแฮชที่สร้างใหม่เชื่อมโยงกัน แต่ส่วนหัวสุดท้ายได้เปลี่ยนแปลงไปแล้ว จุดตรวจสอบที่เก็บไว้จะปฏิเสธประวัติการเปลี่ยนแปลงนี้ ลายเซ็นต้นฉบับก็จะล้มเหลวเมื่อใช้กับบันทึกที่เปลี่ยนแปลงแล้ว", "Too short: 2 supplied records \u003c 3 retained records.": "สั้นเกินไป: 2 รายการที่ส่งมา \u003c 3 รายการที่เก็บไว้", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "แฮชสองตัวที่เหลือยังคงตรงกัน จุดตรวจสอบที่เก็บไว้เผยให้เห็นส่วนท้ายที่หายไป หากไม่มีขอบเขตก่อนหน้านี้ ส่วนนำหน้าสั้นกว่านี้เพียงอย่างเดียวจะไม่สามารถเปิดเผยการขาดหายได้", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "การคำนวณแฮชไม่สามารถใช้งานได้ในเบราว์เซอร์นี้ แต่สูตรและคำอธิบายแบบคงที่ด้านล่างยังคงใช้งานได้", "{n} records": "{n} บันทึก", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "ได้รับการยอมรับ: จำนวนเพิ่มขึ้น ลายเซ็นได้รับการยืนยัน และกุญแจตรงกัน ผู้เป็นพยานจะเก็บรักษาขอบเขตใหม่นี้ไว้", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: คำตอบที่ลงนามแสดงจำนวนบันทึกน้อยกว่าจุดตรวจสอบที่ได้รับการยอมรับล่าสุด Witness จะบันทึกปัญหาและรักษาขอบเขตที่ได้รับการยอมรับก่อนหน้านี้", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: จำนวนไม่เปลี่ยนแปลง แต่หัว (head) แตกต่างกัน ผู้เป็นพยานบันทึกความไม่เห็นพ้องและรักษาขอบเขตที่ได้รับการยอมรับก่อนหน้านี้", "No answer": "ไม่มีคำตอบ", "boundary unknown": "ขอบเขตไม่ทราบ", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "ไม่มีการตอบสนอง: TgWitness จะบันทึกการตรวจสอบที่ล้มเหลว และไม่สามารถยืนยันสถานะปัจจุบันของผู้เก็บข้อมูลได้ หาก TgWitness ยังสามารถติดต่อกับ Bot API ได้ และนโยบายการเผยแพร่ของมันอนุญาต ก็สามารถเผยแพร่การล้มเหลวนั้นได้", "Send {n}": "ส่ง {n}", "Edit {n}": "แก้ไข{n}", "Delete {n}": "ลบ{n}", "Both accounts captured all six expected observations in this example.": "ทั้งสองบัญชีได้บันทึกการสังเกตทั้งหกข้อที่คาดการณ์ไว้ในตัวอย่างนี้", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "บัญชี B ยังคงบันทึกได้ 6 จาก 6 ข้อความ สองใบเสร็จใช้เวลานานกว่า อัตราการบันทึกและความล่าช้าของใบเสร็จให้คำตอบที่ต่างกัน", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "บัญชี B ได้บันทึก 5 จาก 6 การดำเนินการก่อนถึงจุดตัด (83.3%) การแก้ไขที่ขาดหายไปไม่มีการวัดความล่าช้า ผลลัพธ์นี้อธิบายเฉพาะการดำเนินการ 6 ครั้งที่ได้รับการควบคุมเท่านั้น", "not observed by cutoff": "ไม่ถูกตัดออก", "{s} seconds": "{s} วินาที", "Exact values follow in the table.": "ค่าที่แม่นยำจะปรากฏในตารางต่อไป", "{s} s": "{s} s", "Not observed": "ไม่พบ", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "สี่การสนทนาให้ข้อมูลสังเกตการณ์ที่แตกต่างกัน ให้ติดตามบันทึกต้นทางสำหรับทุกการเชื่อมต่อ; อย่ากำหนดโพสต์ในช่องให้กับผู้ใช้ 71001 โดยไม่มีผู้ส่งที่ระบุ", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "บันทึก #146 และ #205 มี ID ผู้ส่งเดียวกัน คือ 71001 ซึ่งเชื่อมโยงโพสต์ที่สังเกตได้จากบัญชี Telegram ในสองห้องสนทนา แต่ไม่ระบุตัวบุคคลจริงหรือระบุเจ้าของโพสต์ในช่องนั้น", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "ที่อยู่ปลายทาง pay.example.invalid/new ปรากฏในบันทึกกลุ่ม #146, คีย์บอร์ดบอท #173, การแก้ไขช่อง #188 และข้อความส่วนตัว #205 ที่อยู่ปลายทางที่ปรากฏซ้ำๆ นี้ช่วยเชื่อมโยงข้อมูลเข้าด้วยกัน แต่ไม่ได้เป็นหลักฐานว่าบัญชีเหล่านั้นอยู่ภายใต้การควบคุมร่วมกัน", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "ใบเสร็จสื่อที่เสร็จสมบูรณ์ #151 และ #209 มีค่า SHA-256 เต็มที่เท่ากันในคดีสมมตินี้ โปรดเปรียบเทียบไบต์จริงและบันทึกข้อความที่เกี่ยวข้อง ไฟล์ที่ตรงกันนี้ไม่ระบุผู้สร้างหรือพิสูจน์ว่าใครเป็นผู้ส่งต่อ", "the encrypted off-site copy": "สำเนาที่เข้ารหัสและเก็บไว้นอกเว็บไซต์", "notifications": "การแจ้งเตือน", "checkpoint hashes for timestamps": "ค่าแฮชจุดตรวจสอบสำหรับเวลา", "signed checkpoints for the witness": "จุดตรวจสอบที่ลงนามสำหรับ TgWitness", "Switched on in this example": "เปิดใช้งานในตัวอย่างนี้", "Optional · off by default": "เลือกได้ · ปิดตามค่าเริ่มต้น", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "ข้อมูลที่ส่งออกจากเครื่องนี้: การเชื่อมต่อ Telegram และ{list} ไม่มีข้อมูลอื่นใดอีก", "Default: only the Telegram connection leaves this machine.": "ค่าเริ่มต้น: มีเพียงการเชื่อมต่อ Telegram เท่านั้นที่ออกจากเครื่องนี้", "{done} of {total} done": "{done} จาก {total} เสร็จแล้ว", "Mark step {n} as done": "ทำเครื่องหมายขั้นตอน{n} ว่าเสร็จแล้ว", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "คัดลอก", "Copied": "คัดลอก", "Command copied.": "คำสั่งถูกคัดลอกแล้ว", "Selected — Ctrl/Cmd+C": "คัดลอก — Ctrl/Cmd+C", "Command selected. Copy it manually.": "คำสั่งถูกเลือกแล้ว คัดลอกด้วยมือ", "Command copied to clipboard.": "คำสั่งได้ถูกคัดลอกไปยังคลิปบอร์ดแล้ว", "Select text": "เลือกข้อความ", "Clipboard unavailable. Command selected; copy it manually.": "คลิปบอร์ดไม่สามารถใช้งานได้ คำสั่งถูกเลือกแล้ว; คัดลอกด้วยมือ", "A message arrives. The first observation is saved.": "มีข้อความเข้ามา ข้อสังเกตแรกถูกบันทึกไว้", "The time changes. Both captured versions stay.": "เวลาเปลี่ยนแปลง แต่ทั้งสองเวอร์ชันที่บันทึกไว้ยังคงอยู่", "The message disappears. The captured history remains.": "ข้อความจะหายไป แต่ประวัติที่ถูกบันทึกไว้จะยังคงอยู่", "Pause example animation": "หยุดตัวอย่างแอนิเมชัน", "Play example animation": "ดูตัวอย่างแอนิเมชัน", "Play": "เล่น", "Full-size workspace screenshot": "ภาพหน้าจอพื้นที่ทำงานขนาดเต็ม", "Workspace screenshot · fictional data": "ภาพหน้าจอพื้นที่ทำงาน · ข้อมูลสมมติ", "Close": "ปิด", "Close screenshot": "ปิดภาพหน้าจอ", "Scrollable full-size screenshot": "ภาพหน้าจอขนาดเต็มที่สามารถเลื่อนดูได้", "Enlarge: {name}": "ขยาย: {name}", "View full size": "ดูขนาดเต็ม"}</script>
+</body></html>

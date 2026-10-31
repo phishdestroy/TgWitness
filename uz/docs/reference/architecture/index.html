@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="uz" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Arxitektura | TgWitness</title>
+<meta name="description" content="Yig&#x27;uvchi, panel, jurnal, ishchilar va guvoh komponentlari hamda ma&#x27;lumotlar ularning o&#x27;rtasida qanday harakatlanadi."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/architecture/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="uz_UZ">
+<meta property="og:title" content="Arxitektura | TgWitness"><meta property="og:description" content="Yig&#x27;uvchi, panel, jurnal, ishchilar va guvoh komponentlari hamda ma&#x27;lumotlar ularning o&#x27;rtasida qanday harakatlanadi.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/uz/docs/reference/architecture/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/architecture/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/architecture/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/architecture/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/architecture/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/architecture/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/architecture/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/architecture/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/architecture/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/architecture/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/architecture/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/architecture/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/architecture/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/architecture/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/architecture/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/architecture/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/architecture/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/architecture/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/architecture/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/architecture/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/architecture/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/architecture/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/architecture/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/architecture/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/architecture/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/architecture/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/architecture/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/uz/docs/reference/architecture/", "url": "https://phishdestroy.github.io/TgWitness/uz/docs/reference/architecture/", "name": "Arxitektura | TgWitness", "description": "Yig'uvchi, panel, jurnal, ishchilar va guvoh komponentlari hamda ma'lumotlar ularning o'rtasida qanday harakatlanadi.", "inLanguage": "uz", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Bosh sahifa", "item": "https://phishdestroy.github.io/TgWitness/uz/"}, {"@type": "ListItem", "position": 2, "name": "Dokumentatsiya", "item": "https://phishdestroy.github.io/TgWitness/uz/docs/"}, {"@type": "ListItem", "position": 3, "name": "Manba", "item": "https://phishdestroy.github.io/TgWitness/uz/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Arxitektura", "item": "https://phishdestroy.github.io/TgWitness/uz/docs/reference/architecture/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Mavzuga o&#x27;tish</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Dokumentatsiya</span></a>
+<nav aria-label="Qo&#x27;llanmalar"><a href="../../concepts/">Vizual qo&#x27;llanma</a><a href="../../">Barcha qo&#x27;llanmalar</a><a href="../">Manba</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Til"><span aria-hidden="true">◍</span> O‘zbekcha</summary><div class="lang-list"><a href="../../../../docs/reference/architecture/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/architecture/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/architecture/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/architecture/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/architecture/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/architecture/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/architecture/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/architecture/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/architecture/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/architecture/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/architecture/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/architecture/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/architecture/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/architecture/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/architecture/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/architecture/" hreflang="it" lang="it">Italiano</a><a href="./" hreflang="uz" lang="uz" aria-current="true">O‘zbekcha</a><a href="../../../../ko/docs/reference/architecture/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/architecture/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/architecture/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/architecture/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/architecture/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/architecture/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/architecture/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/architecture/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Yengil va qorong&#x27;i mavzular o&#x27;rtasida almashtiring"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Qo&#x27;llanmalar"><a href="../../../guides/modes.html">Rejimlar, ssenariylar va dalillar darajalari</a><p class="nav-label">Birinchi qadamlar</p><a href="../../start/">Bir necha daqiqada boshlang</a><a href="../../accounts/">Hisobni bog'lang</a><a href="../../proxies/">Proxy tanlang</a><a href="../../exports/">Eksport va tekshirish</a><p class="nav-label">Dalillarni tushunish</p><a href="../../concepts/">Dalillar qanday ishlashini ko'ring</a><a href="../../cases/">Barcha suhbatlarni tergov qiling</a><a href="../../security/">Xavfsiz saqlang</a><p class="nav-label">Yana ham chuqurroq</p><a href="../../witness/">Witness botini sozlang</a><a href="../../server/">Uni ishlashda davom ettiring</a><a href="../../troubleshooting/">Nima noto'g'ri ketganini aniqlang</a></nav><nav class="wiki-nav" aria-label="Manba"><p class="nav-label"><a class="nav-label-link" href="../">Manba</a></p><details class="wiki-group"><summary>Sozlash</summary><a href="../quickstart/">Tez boshlash</a><a href="../accounts/">Hisoblar va sessiya formatlari</a><a href="../connection/">Ulanish, proksi va ma'lumotlarni himoya qilish</a><a href="../deployment/">Joriy etish</a></details><details class="wiki-group"><summary>Yig'ish</summary><a href="../collection/">Yig'ish qanday ishlaydi</a><a href="../operations/">Ish jarayonlari va operatsiyalar</a><a href="../investigation/">Tergov rejimi</a><a href="../features/">Imkoniyatlar va cheklovlar</a></details><details class="wiki-group"><summary>Dalil</summary><a href="../how-it-works/">Dalil qanday ishlaydi</a><a href="../evidence/">Dalil formati</a><a href="../witness/">Mustaqil guvoh</a><a href="../timestamp/">Vaqt tamg'alari</a></details><details class="wiki-group" open><summary>Xavfsizlik va loyiha</summary><a href="../security/">Xavfsizlik va ma'lumotlarni boshqarish</a><a href="./" aria-current="page">Arxitektura</a><a href="../verification/">Nima sinovdan o'tkazilgan</a><a href="../license/">Litsenziya va arxitektura nomuvofiqligi to'g'risidagi ogohlantirish</a><a href="../notice/">Operator mos kelmasligi to'g'risida ogohlantirish</a><a href="../changelog/">O'zgarishlar tarixi</a></details></nav><p class="sidebar-note">v0.7.0<br>Ochiq manba · Sizning kompyuteringizda ishlaydi</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Qo&#x27;llanmalar"><a href="../../../">Bosh sahifa</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentatsiya</a> <span aria-hidden="true">/</span> <a href="../">Manba</a> <span aria-hidden="true">/</span> <span aria-current="page">Arxitektura</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Dokumentatsiyani qidiring</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zanjiri, token yoki guvohni sinab ko&#x27;ring…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Aniq qidiruv" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Qo&#x27;llanmalar va ma&#x27;lumotnoma bo&#x27;ylab qidirish uchun so&#x27;z yozing. Qidiruv brauzeringizda saqlanadi.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Manba / Xavfsizlik va loyiha</p><h1>Arxitektura</h1><p class="guide-outcome">Yig&#x27;uvchi, panel, jurnal, ishchilar va guvoh komponentlari hamda ma&#x27;lumotlar ularning o&#x27;rtasida qanday harakatlanadi.</p><div class="wiki-body"><p>Bir Python jarayoni FastAPI panelini va istalgan sonli izolyatsiyalangan ish maydonlarini, har biri Telethon foydalanuvchi-akunenti bilan, mezbonlik qiladi.
+SQLite faqat qo&#x27;shimcha kiritishga mo&#x27;ljallangan imzolangan voqealar jurnalini va o&#x27;zgartiriladigan operatsion sozlamalarni saqlaydi.
+Shifrlangan ombor API ma&#x27;lumotlari, StringSession va imzolash kalitini saqlaydi.
+Frontend oddiy paketlangan HTML/CSS/JavaScript: Node build, CDN yoki frontend ish vaqti yuklamalari kerak emas.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Modul</th>
+<th>Mas&#x27;uliyat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>collector.py</td>
+<td>Avtorizatsiya, dialog tanlovi, yangilanishlar, snapshotlar, media navbati, ulanishni monitoring qilish</td>
+</tr>
+<tr>
+<td>interactions.py / telegram_client.py</td>
+<td>Panelning aniq harakatlari, imzolangan kvitansiyalar, doimiy so&#x27;rov identifikatorlari va vazifa-mahalliy callback/qo&#x27;shilishni qayta urinish siyosati</td>
+</tr>
+<tr>
+<td>message_content.py</td>
+<td>Kuzatiladigan xabarlarni solishtirish, transportga kirish metama&#x27;lumotlarini istisno qilgan holda</td>
+</tr>
+<tr>
+<td>workers.py</td>
+<td>Bekor qilishni tozalashdan oldin eksport fayllari ishchilarini kuting</td>
+</tr>
+<tr>
+<td>store.py</td>
+<td>WAL tranzaktsiyalari, tartibga solingan voqealar zanjiri, so&#x27;rov filtrlari, operatsion sozlamalar</td>
+</tr>
+<tr>
+<td>security.py</td>
+<td>Shaxsiy fayl yaratish, shifrlangan ombor, Ed25519 imzolash, yagona jarayon qulfi</td>
+</tr>
+<tr>
+<td>evidence.py</td>
+<td>Butun jurnalni eksport qilish, derivativlar, tekshiruv nuqtalari, ilovalarni tasdiqlash</td>
+</tr>
+<tr>
+<td>verify.py</td>
+<td>Mustaqil, faqat o&#x27;qish uchun mo&#x27;ljallangan tasdiqlovchi (stdlib + kriptografiya): arxivlar, qamrov, guvoh jurnallari va kanal postlari, profil fayllari</td>
+</tr>
+<tr>
+<td>app.py</td>
+<td>Avtorizatsiyalangan API, hayotiy tsikl, so&#x27;rovni tasdiqlash, statik panel</td>
+</tr>
+<tr>
+<td>profiles.py</td>
+<td>Bir nechta izolyatsiyalangan akkaunt yig&#x27;uvchilar, umumiy panel tokeni, har bir ish maydoni bo&#x27;yicha hayotiy tsikl</td>
+</tr>
+<tr>
+<td>provenance.py</td>
+<td>Imzolangan olish-ijro etish jarayonida shaxsiyat, kod va bog&#x27;liqlik o&#x27;lchovlari</td>
+</tr>
+<tr>
+<td>network.py</td>
+<td>Har bir ish maydoni bo&#x27;yicha tasdiqlangan yo&#x27;nalishlar; o&#x27;chirilgan holat va dalillar; Telethon transport variantlari</td>
+</tr>
+<tr>
+<td>sessions.py</td>
+<td>Ko&#x27;rib chiqilgan Telethon SQLite sxemalarini oflayn faqat o&#x27;qish uchun konvertatsiya qilish</td>
+</tr>
+<tr>
+<td>account_import.py</td>
+<td>Qo&#x27;llab-quvvatlanadigan akkaunt fayllari va JSON-larni xotirada aniqlash va normalizatsiya qilish</td>
+</tr>
+<tr>
+<td>tdata.py</td>
+<td>Cheklangan zamonaviy TData ZIP o&#x27;qirgichi, tekshirish summasi/dekripsiya tasdiqlovi, chiqarib olish yo&#x27;q</td>
+</tr>
+<tr>
+<td>doctor.py</td>
+<td>Mahalliy tayyorgarlik tekshiruvlari ma&#x27;lumot yig&#x27;ish, tizimga kirish yoki paket o&#x27;rnatilishini talab qilmaydi</td>
+</tr>
+<tr>
+<td>download.py</td>
+<td>Avtorizatsiyalangan jonli eksport yuklab olish, chegaralangan o&#x27;qishlar va ustma-ust yozishsiz</td>
+</tr>
+<tr>
+<td>monitoring.py</td>
+<td>Har bir ish maydoni bo&#x27;yicha voqealar siyosati va har bir turdagi ilovalar qoidalari tasdiqlangan, handlerlar, holat va imzolangan kvitansiyalar bilan baham ko&#x27;riladi</td>
+</tr>
+<tr>
+<td>scope.py</td>
+<td>Kuzatuv doirasi (tanlangan suhbatlar, Telegram papkasi, butun hisob), manba turlari, istisnolar, qayta tekshirish darajalari</td>
+</tr>
+<tr>
+<td>dossier.py</td>
+<td>Saklanib qolgan yozuvlar asosida chatdagi odam profillari: yozuv raqamlari bilan faktlar, avatar SHA-256/pHash, tilga olishlarni ajratib olish</td>
+</tr>
+<tr>
+<td>witness_api.py</td>
+<td>Faqat o&#x27;qish uchun mo&#x27;ljallangan guvoh tokenlari va ular olishi mumkin bo&#x27;lgan imzolangan jurnal sarlavhasi</td>
+</tr>
+<tr>
+<td>witness.py</td>
+<td>Mustaqil guvoh jarayoni: o&#x27;z kaliti va jurnal, bosh tekshiruvlari, imzolangan kanal postlari, eksport</td>
+</tr>
+<tr>
+<td>alerts.py</td>
+<td>Bildirishnomalar va panelning bildirishnomalar ro&#x27;yxati</td>
+</tr>
+<tr>
+<td>logging_config.py</td>
+<td>Penceresiz ishga tushirishlar uchun konsol yozuvlari va aylanib turuvchi server diagnostikasi</td>
+</tr>
+<tr>
+<td>static/</td>
+<td>Moslashuvchan interfeys, mahalliy kirish darvozasi, filtrlar, tafsilotlar, eksportlar, hisob sozlamalari</td>
+</tr>
+<tr>
+<td>demo.py</td>
+<td>Aniq yorliq bilan belgilangan sintetik jurnal, haqiqiy to&#x27;plamdan ajratilgan</td>
+</tr>
+</tbody>
+</table></div>
+<p>Kuzatuv ishlovchilari ulanishdan oldin ro&#x27;yxatdan o&#x27;tkaziladi. Jonli yig&#x27;ish faol mijoz identifikatori, aniq bajarilish holati, yoqilgan manbalar yoki kuzatuv doirasi (papka yoki butun hisob rejimlari yangi suhbatni birinchi yangilanishida manba sifatida qo&#x27;shadi) va voqea siyosati bilan nazorat qilinadi. Rad etilgan va almashtirilgan mijozlar jonli yangilanishlarni taqdim eta olmaydi. Xom munosabatlar va a&#x27;zolik yangilanishlari ko&#x27;rinish chegaralarini saqlaydi. Kiruvchi xabar mazmuni va uning doimiy media vazifasi birgalikda yozib qo&#x27;yiladi. Vazifalar asl TL tavsiflagichni saqlaydi va uning xeshini imzolangan xabar kuzatuviga bog&#x27;laydi. Jo&#x27;natuvchi/tahrirlovchi/o&#x27;chiruvchi semantikalari ajratilgan.</p>
+<p>Har bir ish maydoni bitta hisobni qabul qiladi va o&#x27;zining katalogi hamda imzolash identifikatori bilan ta&#x27;minlangan.
+Asosiy ish maydoni moslik uchun ildizda qoladi; qo&#x27;shimcha ish maydonlari
+profiles/&lt;id&gt;/ yo&#x27;lida joylashadi. Bitta egasi token butun o&#x27;rnatishni nazorat qiladi; ish maydonlari alohida
+ruxsatnomaga ega bo&#x27;lgan ijara bo&#x27;linmalari emas. Jarayon qulflari kataloglarni himoya qiladi; ma&#x27;lumotlar bazasi qulflari voqealarni kiritishni ketma-ket amalga oshiradi. Har bir qo&#x27;shimcha yozuv FULL sinxron rejimda SQLite WALga sinxron tarzda yoziladi. Voqea yangilanishi/o&#x27;chirish to&#x27;siqlari oddiy ilova tahrirlariga yo&#x27;l qo&#x27;ymaydi; fayl tizimi ma&#x27;murlari ishonch chegarasi ichida qoladi.</p>
+<p>API avtorizatsiyasi egalik qiluvchi token hisoblanadi. Kirish amaliyotlari ketma-ketlashtirilgan va vaqt bilan cheklangan. Hisobga yuklashlar uchun maxsus 12 MiB kodlangan-tanaga va 8 MiB dekskodlangan-faylga limit mavjud; oddiy API so&#x27;rovlari esa 16 KiB limitni saqlab qoladi. Konversiya worker-threadda ishlaydi, yuklamalarni xotirada saqlaydi va autentifikatsiyalangan brauzerga normalizatsiyalangan kirishni qaytaradi. QR-kirish har bir ish maydoni uchun nomzod, qisqa muddatli identifikator, kutuvchi vazifa va aniq bekor qilishga ega. Faqat qabul qilingan avtorizatsiya faol mijozga aylanadi.
+Telegram FloodWait Retry-After qiymati bilan qaytariladi; kredensiallar va xom RPC xato xabarlari API xatolarida oshkor etilmaydi. Eksportlar asinxron voqealar siklidan tashqarida ishlaydi va har bir ish maydoni bo&#x27;yicha ketma-ketlashtiriladi. Ular barqaror o&#x27;qish snopshotini oqimlaydi va davom etayotgan WAL yozuvlari bilan birga mavjud bo&#x27;lishi mumkin. Ish maydoni yig&#x27;uvchilari jarayon/voqea siklini baham ko&#x27;radi.</p>
+<p>Joriy tarix snopshotlari va jonli yangilanishlar bir-birini kesib o&#x27;tishi mumkin. Ikkalasi ham alohida kuzatuvlar bo&#x27;lib, manba bo&#x27;yicha belgilangan; takrorlar jimjit birlashtirilmaydi. Yo&#x27;qolgan IDlar, soxta o&#x27;chirilgan matn, majburiy a&#x27;zolarni sanab o&#x27;tish yoki guruhga avtomatik qo&#x27;shilish asosida hech qanday xulosa chiqarilmaydi.</p>
+<p>Operatorlar uchun tushuntirishni <a href="../collection/">to&#x27;plash qanday ishlashi</a> va <a href="../accounts/">hisoblar hamda sessiya formatlari</a> bo&#x27;limlarida ko&#x27;ring.</p>
+<p>Tarmoq sozlamalari shifrlangan omborda saqlanadi. Yo&#x27;nalishni qo&#x27;llash eski klientlarni yopadi va yakunlanmagan kirishni bekor qiladi; keyingi ulanishlar o&#x27;sha yo&#x27;nalishdan foydalanadi va to&#x27;g&#x27;ridan-to&#x27;g&#x27;ri qaytish yo&#x27;q. Yangi tashqi kalit o&#x27;rnatilganda, har bir ish maydonining Fernet kaliti HKDF-SHA256 yordamida bosh kalit fayli va saqlangan tasodifiy tuzdan hosil qilinadi. Bu maxfiy ma&#x27;lumotlarni oddiy matndagi jurnal/media mazmunidan alohida himoya qiladi.</p>
+<p>Mahalliy demo kirish alohida yaratilgan jarayon imkoniyatidan foydalanadi, hech qachon sozlangan panel tokenidan emas. Chiqarish va qabul qilish aniq demo rejimini, qo&#x27;shimcha ish maydonchalarsiz yoki ruxsat etilgan sessiyasiz sintetik ildizni, loopback peer/Host, proxy yo&#x27;naltirish sarlavhalarisiz va cross-origin brauzer so&#x27;rovisiz talab qiladi. Jonli APIlar bearer autentifikatsiyasini saqlab qoladi va demo rejimida yig&#x27;ish o&#x27;zgarishlarini rad etadi.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ARCHITECTURE.md">Ushbu sahifani GitHubda tahrirlang ↗</a><a class="next-guide" href="../verification/"><span>Keyingi qadam</span><strong>Nima sinovdan o'tkazilgan →</strong></a><p>Ushbu qo&#x27;llanmalar joriy amalga oshirishni tasvirlaydi. Tasdiqlash natijalari va qolgan bo&#x27;shliqlar alohida hujjatlashtirilgan. <a href="../verification/">Nima sinovdan o&#x27;tkazilgan →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Ushbu sahifada"></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Ochiq manba · Sizning kompyuteringizda ishlaydi</span><a href="../../../../LICENSE">MIT litsenziyasi</a><a href="../notice/">Operator bildirishi</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Xavfsizlik</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Xabarni kutish", "Step through a fictional send, edit and delete.": "Tasavvuriy jo'natish, tahrirlash va o'chirish jarayonini bosqichma-bosqich o'ting.", "No observations yet. Start the sequence or advance one event.": "Hali hech qanday kuzatuvlar yo'q. Ketma-ketlikni boshlang yoki bir voqeani oldinga suring.", "Meet at 10:00": "10:00 da uchrashing", "A new message is visible in the chat.": "Suhbatda yangi xabar ko'rinadi.", "Record 1 appended: the collector observed the original message.": "1-raqamli yozuv ilova qilindi: to'plovchi asl xabarni kuzatdi.", "Meet at 11:00": "11:00 da uchrashing", "The current text changes. The earlier observation stays.": "Joriy matn o'zgaradi. Avvalgi kuzatuv saqlanadi.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "2-yozuv ilova qilindi: tahrir yangi kuzatuvdir. 1-yozuv hanuzgacha asl matnni saqlab qolmoqda.", "Message deleted": "Xabar o'chirildi", "The message has disappeared from the chat view.": "Xabar suhbat ko'rinishidan yo'qoldi.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "3-raqamli yozuv ilova qilindi: o'chirish to'g'risidagi bildirishnoma kuzatilgan ikkala versiya bilan birga saqlanadi.", "0 records": "0 yozuv", "1 record": "1 yozuv", "2 records": "2 yozuv", "3 records": "3 yozuv", "Complete / {n} of 3": "3dan {n} to'liq", "Step / {n} of 3": "3 qadam / {n}dan 3", "Pause": "Tanaffus", "Replay sequence": "Qayta ijro etish ketma-ketligi", "Play sequence": "Sequensani ijro eting", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Statik misol mavjud. Hashlarni interaktiv tarzda hisoblash uchun ushbu sahifani HTTPS orqali yoki Web Crypto qo'llab-quvvatlanadigan localhost ko'rinishida oching.", "No record supplied": "Hech qanday yozuv taqdim etilmagan", "Tail removed": "Oxiri olib tashlandi", "≠ saved hash": "≠ saqlangan xesh", "Rebuilt · different hash": "Qayta qurilgan · boshqa xesh", "= saved hash": "= saqlangan xesh", "Same length and matching head.": "Bir xil uzunlik va mos keluvchi sarlavha.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Uchala hisoblangan xesh saqlangan xeshlarga mos keladi. Ushbu namunada saqlangan uch yozuv chegarasi bilan mos keladi.", "Same saved head; the journal prefix fails verification.": "Xuddi shu saqlangan sarlavha; jurnal prefiksi tasdiqdan o'tmaydi.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "2-yozuv saqlangan xeshga mos kelmaydi. Faqat oxirgi saqlangan headni tekshirish buni aniqlamaydi; verifikator har bir yozuvni tekshiradi.", "Head differs from the retained checkpoint.": "Head saqlangan tekshiruv nuqtasidan farq qiladi.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Qayta tuzilgan xeshlar bir-biriga bog'lanadi, lekin oxirgi bosh o'zgardi. Saqlangan tekshiruv nuqtasi bu tarixni rad etadi. O'zgartirilgan yozuvlarda asl imzolar ham muvaffaqiyatsiz bo'lardi.", "Too short: 2 supplied records \u003c 3 retained records.": "Juda qisqa: 2 ta taqdim etilgan yozuv \u003c 3 ta saqlangan yozuv.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Qolgan ikkita xesh hanuzgacha mos keladi. Saqlangan tekshiruv nuqtasi yo'qolgan oxirni ko'rsatadi. O'sha oldingi chegarasiz, bu qisqaroq prefiks o'zi o'chirib tashlangan qismni aniqlamas edi.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Hash hisoblash ushbu brauzerda mavjud emas. Quyidagi formulalar va statik izoh esa hanuzgacha mavjud.", "{n} records": "{n} yozuvlari", "head {hash}": "Zanjir boshi {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Qabul qilindi: hisob ortadi, imzo tasdiqlanadi va kalit mos keladi. Guvoh ushbu yangi chegarani saqlab qoladi.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: imzolangan javob oxirgi qabul qilingan tekshiruv nuqtasiga qaraganda kamroq yozuvlarni bildiradi. Guvoh muammoni qayd etadi va avvalgi qabul qilingan chegarani saqlab qoladi.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: hisob o'zgarmagan, lekin boshqasi boshqacha. Guvoh kelishmovchilikni qayd etadi va ilgari qabul qilingan chegarani saqlab qoladi.", "No answer": "Javob yo'q", "boundary unknown": "Chegara noma'lum", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Javob yo'q: guvoh muvaffaqiyatsiz tekshiruvni qayd etadi. Bu yig'uvchining joriy holatini aniqlay olmaydi. Agar guvoh hali ham Bot API ga ulanish imkoniga ega bo'lsa va uning nashr etish siyosati ruxsat etsa, u bu muvaffaqiyatsizlikni e'lon qilishi mumkin.", "Send {n}": "{n} yuboring", "Edit {n}": "Tahrir {n}", "Delete {n}": "{n}o'chirish", "Both accounts captured all six expected observations in this example.": "Bu misolda har ikkala akkaunt ham kutilgan oltita kuzatuvni to'liq qayd etdi.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Hisob B hanuzgacha 6 dan 6 tasini qayd etdi. Ikki kvitansiya esa ko'proq vaqt oldi. Qayd etish nisbatlari va kvitansiya kechikishlari turli savollarga javob beradi.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Account B kesish nuqtasigacha 6 ta harakatdan 5 tasini (83,3%) qayd etdi. Yo'qolgan tahrir uchun hech qanday o'lchangan kechikish yo'q. Ushbu natija faqat olti nazorat ostidagi harakatni tasvirlaydi.", "not observed by cutoff": "chegara nuqtasi tomonidan kuzatilmagan", "{s} seconds": "{s} soniya", "Exact values follow in the table.": "Jadvalda aniq qiymatlar keltirilgan.", "{s} s": "{s}s", "Not observed": "Kuzatilmagan", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "To'rtta suhbat turli kuzatuvlarni taqdim etadi. Har bir ulanish bo'yicha manba yozuvlarini kuzating; jo'natuvchi aniqlanmagan holda kanal postini 71001 foydalanuvchiga biriktirmang.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Yozuvlar #146 va #205 bir xil jo'natuvchi ID, 71001, ni ko'rsatadi. Bu Telegram hisobidagi kuzatilgan postlarni ikki chat bo'ylab bog'laydi. Bu haqiqiy shaxsni aniqlamaydi yoki kanal postini unga tegishli deb hisoblamaydi.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "pay.example.invalid/new manzili guruh yozuvi #146, bot klaviatura #173, kanal tahriri #188 va shaxsiy xabar #205 da uchraydi. Takroriy manzil materialni bog'laydi; bu hisoblarning umumiy nazorat ostida ekanligini isbotlamaydi.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Ushbu badiiy holatda #151 va #209 raqamli media kvitansiyalari to'liq SHA-256 qiymatlari bo'yicha teng. Haqiqiy baytlarni va ularga tegishli xabar yozuvlarini solishtiring. Mos keladigan fayl uning yaratuvchisini aniqlamaydi yoki uni kim jo'natganini isbotlamaydi.", "the encrypted off-site copy": "shifrlangan tashqi nusxa", "notifications": "bildirishnomalar", "checkpoint hashes for timestamps": "vaqt tamg'alari uchun tekshiruv nuqtasi xeshlari", "signed checkpoints for the witness": "guvoh uchun imzolangan tekshiruv nuqtalari", "Switched on in this example": "Ushbu misolda yoqilgan", "Optional · off by default": "Ixtiyoriy · standart bo'yicha o'chirilgan", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Ushbu mashinadan chiqishda: Telegram ulanishi va {list}. Boshqa hech narsa.", "Default: only the Telegram connection leaves this machine.": "Standart bo'yicha: faqat Telegram ulanishi ushbu mashinadan chiqadi.", "{done} of {total} done": "{done}dan {total} bajarildi", "Mark step {n} as done": "{n} bosqichini bajarilgan deb belgilash", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Ko'chirish", "Copied": "Ko'chirilgan", "Command copied.": "Buyruq nusxalandi.", "Selected — Ctrl/Cmd+C": "Tanlandi — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Buyruq tanlandi. Uni qo'lda nusxalash.", "Command copied to clipboard.": "Buyruq clipboardga nusxalandi.", "Select text": "Matnni tanlang", "Clipboard unavailable. Command selected; copy it manually.": "Klipbord mavjud emas. Buyruq tanlandi; uni qo'lda nusxalash.", "A message arrives. The first observation is saved.": "Xabar keladi. Birinchi kuzatuv saqlanadi.", "The time changes. Both captured versions stay.": "Vaqt o'zgaradi. Ikkala yozib olingan versiya ham saqlanadi.", "The message disappears. The captured history remains.": "Xabar yo'qoladi. Qayd etilgan tarix esa qoladi.", "Pause example animation": "Animatsiyani to'xtatish misoli", "Play example animation": "Namuna animatsiyasini ijro eting", "Play": "O'ynatish", "Full-size workspace screenshot": "To'liq o'lchamdagi ish maydoni skrinshoti", "Workspace screenshot · fictional data": "Ish maydoni skrinshoti · badiiy ma'lumotlar", "Close": "Yopish", "Close screenshot": "Ekran tasvirini yopish", "Scrollable full-size screenshot": "Haydaladigan to'liq o'lchamdagi skrinshot", "Enlarge: {name}": "Kengaytirish: {name}", "View full size": "To'liq o'lchamda ko'rish"}</script>
+</body></html>

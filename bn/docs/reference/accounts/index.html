@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="bn" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>অ্যাকাউন্ট এবং সেশন ফরম্যাটসমূহ | TgWitness</title>
+<meta name="description" content="ফোন, QR কোড বা auth কী দিয়ে সাইন ইন করুন, Telethon, Pyrogram বা Telegram Desktop সেশন আমদানি করুন, এবং একাধিক অ্যাকাউন্ট চালান।"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/accounts/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="bn_BD">
+<meta property="og:title" content="অ্যাকাউন্ট এবং সেশন ফরম্যাটসমূহ | TgWitness"><meta property="og:description" content="ফোন, QR কোড বা auth কী দিয়ে সাইন ইন করুন, Telethon, Pyrogram বা Telegram Desktop সেশন আমদানি করুন, এবং একাধিক অ্যাকাউন্ট চালান।">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/bn/docs/reference/accounts/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/accounts/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/accounts/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/accounts/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/accounts/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/accounts/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/accounts/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/accounts/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/accounts/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/accounts/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/accounts/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/accounts/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/accounts/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/accounts/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/accounts/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/accounts/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/accounts/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/accounts/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/accounts/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/accounts/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/accounts/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/accounts/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/accounts/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/bn/docs/reference/accounts/", "url": "https://phishdestroy.github.io/TgWitness/bn/docs/reference/accounts/", "name": "অ্যাকাউন্ট এবং সেশন ফরম্যাটসমূহ | TgWitness", "description": "ফোন, QR কোড বা auth কী দিয়ে সাইন ইন করুন, Telethon, Pyrogram বা Telegram Desktop সেশন আমদানি করুন, এবং একাধিক অ্যাকাউন্ট চালান।", "inLanguage": "bn", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "হোম", "item": "https://phishdestroy.github.io/TgWitness/bn/"}, {"@type": "ListItem", "position": 2, "name": "ডকুমেন্টেশন", "item": "https://phishdestroy.github.io/TgWitness/bn/docs/"}, {"@type": "ListItem", "position": 3, "name": "তথ্যসূত্র", "item": "https://phishdestroy.github.io/TgWitness/bn/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "অ্যাকাউন্ট এবং সেশন ফরম্যাটসমূহ", "item": "https://phishdestroy.github.io/TgWitness/bn/docs/reference/accounts/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">বিষয়ে সরাসরি যান</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / ডকুমেন্টেশন</span></a>
+<nav aria-label="গাইডসমূহ"><a href="../../concepts/">দৃশ্যমান গাইড</a><a href="../../">সমস্ত গাইড</a><a href="../">তথ্যসূত্র</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="ভাষা"><span aria-hidden="true">◍</span> বাংলা</summary><div class="lang-list"><a href="../../../../docs/reference/accounts/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/accounts/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/accounts/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/accounts/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/accounts/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/accounts/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/accounts/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/accounts/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/accounts/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/accounts/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/accounts/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/accounts/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/accounts/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/accounts/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/accounts/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/accounts/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/accounts/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/accounts/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/accounts/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/accounts/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/accounts/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/accounts/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/accounts/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/accounts/" hreflang="he" lang="he">עברית</a><a href="./" hreflang="bn" lang="bn" aria-current="true">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="হালকা ও গাঢ় থিমের মধ্যে পরিবর্তন করুন"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="গাইডসমূহ"><a href="../../../guides/modes.html">মোড, পরিস্থিতি এবং প্রমাণ স্তর</a><p class="nav-label">প্রাথমিক পদক্ষেপ</p><a href="../../start/">মিনিটখানেকের মধ্যে শুরু করুন</a><a href="../../accounts/">একটি অ্যাকাউন্ট সংযুক্ত করুন</a><a href="../../proxies/">একটি প্রক্সি নির্বাচন করুন</a><a href="../../exports/">রপ্তানি এবং যাচাই করুন</a><p class="nav-label">প্রমাণ বোঝা</p><a href="../../concepts/">প্রমাণ কীভাবে কাজ করে দেখুন</a><a href="../../cases/">সমস্ত চ্যাট জুড়ে তদন্ত করুন</a><a href="../../security/">এটি নিরাপদ রাখুন</a><p class="nav-label">আরও এগিয়ে যান</p><a href="../../witness/">একটি উইটনেস বট সেট আপ করুন</a><a href="../../server/">এটি চালু রাখুন</a><a href="../../troubleshooting/">কি ভুল হয়েছে তা খুঁজে বের করুন</a></nav><nav class="wiki-nav" aria-label="তথ্যসূত্র"><p class="nav-label"><a class="nav-label-link" href="../">তথ্যসূত্র</a></p><details class="wiki-group" open><summary>সেটআপ</summary><a href="../quickstart/">দ্রুত শুরু</a><a href="./" aria-current="page">অ্যাকাউন্ট এবং সেশন ফরম্যাটসমূহ</a><a href="../connection/">সংযোগ, প্রক্সি এবং ডেটা সুরক্ষা</a><a href="../deployment/">নিয়োগ</a></details><details class="wiki-group"><summary>সংগ্রহ করুন</summary><a href="../collection/">সংগ্রহ কীভাবে কাজ করে</a><a href="../operations/">ওয়ার্কফ্লো এবং অপারেশনসমূহ</a><a href="../investigation/">তদন্ত মোড</a><a href="../features/">বৈশিষ্ট্য এবং সীমাবদ্ধতা</a></details><details class="wiki-group"><summary>প্রমাণ</summary><a href="../how-it-works/">প্রমাণ কীভাবে কাজ করে</a><a href="../evidence/">প্রমাণের ফর্ম্যাট</a><a href="../witness/">স্বতন্ত্র সাক্ষী</a><a href="../timestamp/">টাইমস্ট্যাম্পস</a></details><details class="wiki-group"><summary>নিরাপত্তা ও প্রকল্প</summary><a href="../security/">নিরাপত্তা এবং ডেটা হ্যান্ডলিং</a><a href="../architecture/">আর্কিটেকচার</a><a href="../verification/">কি পরীক্ষা করা হয়েছে</a><a href="../license/">লাইসেন্স এবং স্থাপত্যগত অসামঞ্জস্যতার বিজ্ঞপ্তি</a><a href="../notice/">অপারেটর অসামঞ্জস্যতার বিজ্ঞপ্তি</a><a href="../changelog/">পরিবর্তনলগ</a></details></nav><p class="sidebar-note">v0.7.0<br>ওপেন সোর্স · আপনার মেশিনে চলে</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="গাইডসমূহ"><a href="../../../">হোম</a> <span aria-hidden="true">/</span> <a href="../../">ডকুমেন্টেশন</a> <span aria-hidden="true">/</span> <a href="../">তথ্যসূত্র</a> <span aria-hidden="true">/</span> <span aria-current="page">অ্যাকাউন্ট এবং সেশন ফরম্যাটসমূহ</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">ডকুমেন্টেশন অনুসন্ধান করুন</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="প্রক্সি, হ্যাশ চেইন, টোকেন বা উইটনেস চেষ্টা করুন…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="স্পষ্ট অনুসন্ধান" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">গাইড এবং রেফারেন্স অনুসন্ধান করতে একটি শব্দ টাইপ করুন। অনুসন্ধান আপনার ব্রাউজারেই থাকবে।</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">তথ্যসূত্র / সেটআপ</p><h1>অ্যাকাউন্ট এবং সেশন ফরম্যাটসমূহ</h1><p class="guide-outcome">ফোন, QR কোড বা auth কী দিয়ে সাইন ইন করুন, Telethon, Pyrogram বা Telegram Desktop সেশন আমদানি করুন, এবং একাধিক অ্যাকাউন্ট চালান।</p><div class="wiki-body"><p>TgWitness MTProto ব্যবহার করে টেলিথন-এর মাধ্যমে একটি <strong>টেলিগ্রাম ব্যবহারকারী অ্যাকাউন্ট</strong> (বট নয়) হিসেবে সাইন ইন করে। প্রতিটি অ্যাকাউন্ট তার নিজস্ব সেশন, সোর্স, জার্নাল এবং সই করার কী সহ নিজস্ব একটি <strong>কর্মস্থলে</strong> (API এবং কমান্ড-লাইন টুলসে <em>workspace</em> নামে পরিচিত) অবস্থান করে।</p>
+<p>সেশন ফাইল, সেশন স্ট্রিং এবং অ্যথ কী-গুলো <strong>অ্যাকাউন্ট অনুমোদন</strong>: যার কাছে এগুলো থাকবে, সে ঐ অ্যাকাউন্ট হিসেবে কাজ করতে পারবে। এগুলোতে বার্তার ইতিহাস থাকে না।</p>
+<blockquote class="callout">
+<p>[!WARNING]
+<strong>এমন কোনো কিছু ব্যবহার করবেন না যা আপনি হারাতে পারবেন না।</strong> আমরা ব্যক্তিগত বা অন্য কোনো মূল্যবান অ্যাকাউন্ট সংযোগ করার এবং আপনি মূল্যবান মনে করেন এমন কোনো অ্যাকাউন্টে API আইডি/API হ্যাশ তৈরি করার বিরুদ্ধে দৃঢ়ভাবে পরামর্শ দিচ্ছি। এটি TgWitness অপ্রমাণিত হওয়ার বিষয় নয়: টেলিগ্রাম অনিশ্চিতভাবে অ্যাকাউন্ট সীমিত করে এবং স্থায়ীভাবে নিষিদ্ধ করে — এমন অনুরোধের পরিমাণের জন্য যা এটি অতিরিক্ত বলে মনে করে, ক্লায়েন্ট বা উদ্দেশ্য যাই হোক না কেন, কোনো যথাযথ ডকুমেন্টেশন ছাড়াই। অনেক নিষেধাজ্ঞা অপরিবর্তনীয়। নিবেদিত অ্যাকাউন্ট ব্যবহার করুন। মসৃণ পরীক্ষা চালানো টেলিগ্রামের উপর নির্ভর করে, সফটওয়্যারের উপর নয়, এবং ভবিষ্যতের জন্য কোনো নিশ্চয়তা দেয় না।</p>
+</blockquote>
+<ul>
+<li><a href="#at-a-glance">এক নজরে</a></li>
+<li><a href="#before-you-start-api-id-and-api-hash">শুরু করার আগে: API আইডি এবং API হ্যাশ</a></li>
+<li><a href="#phone-number">ফোন নম্বর</a> · <a href="#qr-code">কিউআর কোড</a> · <a href="#auth-key--dc-id">অথ কী + ডি সি আইডি</a></li>
+<li><a href="#account-files">অ্যাকাউন্ট ফাইলসমূহ</a>: <a href="#telethon-session">টেলিথন সেশন</a> ·
+    <a href="#pyrogram-session">পাইরোগ্রাম সেশন</a> · <a href="#session--json-pair">সেশন + JSON জোড়া</a> ·
+    <a href="#telegram-desktop-tdata">টি-ডেটা</a> · <a href="#telethon-stringsession">স্ট্রিং সেশন</a> ·
+    <a href="#account-json">অ্যাকাউন্ট JSON</a></li>
+<li><a href="#identify-what-you-have">আপনার কাছে কী আছে তা চিহ্নিত করুন।</a> · <a href="#unsupported-formats">সমর্থনবিহীন ফরম্যাটসমূহ</a></li>
+<li><a href="#multiple-accounts">অনেকগুলো অ্যাকাউন্ট</a> · <a href="#keeping-account-files-safe">অ্যাকাউন্ট ফাইলগুলো নিরাপদ রাখা</a> ·
+    <a href="#troubleshooting">ত্রুটি নির্ণয়</a></li>
+</ul>
+<h2 id="at-a-glance">এক নজরে<a class="anchor" href="#at-a-glance" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>তোমার কাছে যা আছে</th>
+<th><strong>অ্যাকাউন্ট যোগ করুন</strong>-এ ট্যাব</th>
+<th>আপনাকে আরও প্রয়োজন হবে</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ফোন নম্বর এবং লগইন কোডে প্রবেশাধিকার</td>
+<td>ফোন</td>
+<td>যদি 2FA পাসওয়ার্ড সক্ষম করা থাকে</td>
+</tr>
+<tr>
+<td>টেলিগ্রাম অন্য ডিভাইসে খোলা আছে</td>
+<td><strong>কিউআর কোড</strong></td>
+<td>যদি 2FA পাসওয়ার্ড সক্ষম করা থাকে</td>
+</tr>
+<tr>
+<td><code>.session</code> ফাইল (টেলিথন বা পাইরোগ্রাম)</td>
+<td><strong>ফাইলসমূহ</strong></td>
+<td>অ্যাপ সেটিংসের জন্য ঐচ্ছিক সঙ্গী JSON</td>
+</tr>
+<tr>
+<td><code>.session</code>+<code>.json</code> একই নামে</td>
+<td><strong>ফাইলসমূহ</strong> (উভয়টি নির্বাচন করুন)</td>
+<td>সাধারণত আর কিছুই না</td>
+</tr>
+<tr>
+<td>টেলিগ্রাম ডেস্কটপ <code>tdata</code> ফোল্ডার</td>
+<td><strong>ফাইলসমূহ</strong> (ZIP হিসেবে)</td>
+<td>যদি ডেস্কটপের স্থানীয় পাসকোড সেট করা থাকে</td>
+</tr>
+<tr>
+<td>একটি টেলিথন স্ট্রিংসেশন (টেক্সট, <code>.txt</code>, <code>.tgwitness-session</code>)</td>
+<td><strong>ফাইলসমূহ</strong></td>
+<td>কোনো পৃথক API জোড়ার প্রয়োজন নেই</td>
+</tr>
+<tr>
+<td><code>.json</code>, সেশন বা অথ কী সহ</td>
+<td><strong>ফাইলসমূহ</strong></td>
+<td>কোনো পৃথক API জোড়ার প্রয়োজন নেই</td>
+</tr>
+<tr>
+<td>একটি অ্যাক্সেস কী (৫১২ হেক্সাডেসিমাল অক্ষর) এবং এর DC নম্বর</td>
+<td><strong>অথ কী</strong></td>
+<td>ঐচ্ছিক ব্যবহারকারী আইডি</td>
+</tr>
+</tbody>
+</table></div>
+<p>TgWitness ফাইলগুলোকে তাদের নামের পরিবর্তে তাদের <strong>বিষয়বস্তু</strong> অনুযায়ী চিনে। একটি ফাইলের নাম পরিবর্তন করলে তা কখনই রূপান্তরিত হয় না।</p>
+<h2 id="before-you-start-api-id-and-api-hash">শুরু করার আগে: API আইডি এবং API হ্যাশ<a class="anchor" href="#before-you-start-api-id-and-api-hash" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
+<p>আপনি টেলিগ্রাম API অ্যাপ্লিকেশন তৈরি না করেই সাইন ইন করতে পারেন। যখন কোনো জোড়া ওয়ার্কস্পেসে প্রবেশ করানো, আমদানি বা ইতিমধ্যেই সংরক্ষণ করা না থাকে, TgWitness তার বিল্ট-ইন ৫০টি পাবলিক API জোড়ার (<code>tgwitness/api_pool.py</code>) পুল থেকে এলোমেলোভাবে একটি জোড়া বেছে নেয়। যদি টেলিগ্রাম কোনো জোড়া প্রত্যাখ্যান করে (<code>API_ID_INVALID</code>, <code>API_ID_PUBLISHED_FLOOD</code>, <code>UPDATE_APP_TO_LOGIN</code>), তাহলে পরবর্তী জোড়া চেষ্টা করা হয়, প্রতি সাইন-ইনে সর্বোচ্চ আটটি; প্রত্যাখ্যাত জোড়াগুলো রিস্টার্ট না হওয়া পর্যন্ত এড়িয়ে যাওয়া হয়। সাইন-ইন করা জোড়াটি অ্যাকাউন্টের সাথে সংরক্ষণ করা হয় এবং সেটি ঐ অ্যাকাউন্টের জন্য পুনরায় ব্যবহার করা হয়। একটি <strong>API আইডি</strong> এবং <strong>API হ্যাশ</strong> টেলিগ্রামের কাছে অ্যাপ্লিকেশনটিকে চিহ্নিত করে; এগুলো নিজে থেকেই কোনো অ্যাকাউন্টকে অনুমোদন করে না।</p>
+<p>তার পরিবর্তে আপনার নিজস্ব অ্যাপ্লিকেশন ব্যবহার করতে (যে অ্যাকাউন্টটি এটি নিবন্ধন করে, সেটিই ঝুঁকির মধ্যে রয়েছে; দেখুন:
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/PROJECT-GUIDE.md#connect-a-telegram-account">কেন একটি বিল্ট-ইন API পুল?</a>)</p>
+<ol>
+<li><a href="https://my.telegram.org">my.telegram.org</a> খুলুন এবং আপনার যেকোনো ফোন নম্বর দিয়ে সাইন ইন করুন। কোডটি Telegram অ্যাপে আসে, SMS-এ নয়।</li>
+<li><strong>API ডেভেলপমেন্ট টুলস</strong> নির্বাচন করুন।</li>
+<li>একটি অ্যাপ্লিকেশন তৈরি করুন: যেকোন শিরোনাম এবং সংক্ষিপ্ত নাম (৫–৩২ অক্ষর), প্ল্যাটফর্ম <strong>ডেস্কটপ</strong>।
+    URL এবং বর্ণনা ফাঁকা রাখা যেতে পারে।</li>
+<li><strong>অ্যাপের api_id</strong> (একটি সংখ্যা) এবং <strong>অ্যাপের api_hash</strong> (৩২ হেক্সাডেসিমাল অক্ষর) কপি করুন।</li>
+</ol>
+<p>প্যানেলে, সাইন-ইন ফর্মের নিচে <strong>API আইডি + হ্যাশ</strong> খুলুন। আপনি একটি একক <code>api_id:api_hash</code> জোড়া <strong>API আইডি</strong> এবং উভয় ক্ষেত্রেই পেস্ট করতে পারেন। একটি জোড়া আপনার সমস্ত অ্যাকাউন্টের জন্য ব্যবহার করা যেতে পারে। সফল লগইন করার পর এটি শুধুমাত্র সেই ওয়ার্কস্পেসে এনক্রিপ্ট করা অবস্থায় সংরক্ষণ করা হয় এবং কখনই ব্রাউজারে ফেরত পাঠানো হয় না।</p>
+<p>তিনটি ভিন্ন শংসাপত্র জড়িত:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>গোপন</th>
+<th>খোলে</th>
+<th>যেখানে এটি বাস করে</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>প্যানেল টোকেন</td>
+<td>টিজিউইটনেস ওয়েব প্যানেল</td>
+<td>ডেটা ডিরেক্টরিতে <code>panel-token.txt</code> অথবা <code>TGWITNESS_TOKEN</code></td>
+</tr>
+<tr>
+<td>এপিআই আইডি + হ্যাশ</td>
+<td>নিজে থেকে কিছুই নয়; অ্যাপটিকে চিহ্নিত করে</td>
+<td>নির্মিত যুগল, আমদানি করা সেটিংস, অথবা আপনার নিজস্ব অ্যাপ my.telegram.org-এ</td>
+</tr>
+<tr>
+<td>অ্যাকাউন্ট অনুমোদন</td>
+<td>টেলিগ্রাম অ্যাকাউন্ট</td>
+<td>ফোন/কিউআর লগইন দ্বারা তৈরি বা একটি সেশন হিসেবে আনা হয়েছে</td>
+</tr>
+</tbody>
+</table></div>
+<p>যদি টেলিগ্রাম প্রক্সির মাধ্যমে অ্যাক্সেস করতে হয়, তাহলে প্রথমে
+<strong>Account → Settings → Connection settings → Change connection route</strong>-এ সেট করুন।</p>
+<h2 id="phone-number">ফোন নম্বর<a class="anchor" href="#phone-number" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
+<ol>
+<li>অ্যাকাউন্ট খুলুন, ফোন ট্যাবে যান এবং নম্বরটি আন্তর্জাতিক ফরম্যাটে লিখুন, উদাহরণস্বরূপ <code>+44 7700 900123</code>। ফাঁকা স্থান এবং ড্যাশগুলো স্বয়ংক্রিয়ভাবে মুছে ফেলা হয়।</li>
+<li><strong>Continue</strong> চাপুন। API আইডি + হ্যাশ ফাঁকা থাকতে পারে।</li>
+<li>টেলিগ্রাম যে কোড পাঠায় তা প্রবেশ করান (সাধারণত টেলিগ্রাম অ্যাপে; এসএমএস নিশ্চিত নয়)।</li>
+<li>যদি অ্যাকাউন্টে দুই-ধাপ যাচাইকরণ থাকে, তবে সেই পাসওয়ার্ডটি লিখুন। এটি প্যানেল টোকেন নয় এবং ডিভাইস পাসকোডও নয়।</li>
+<li>লগইন করার পর প্রদর্শিত অ্যাকাউন্ট আইডি পরীক্ষা করুন, তারপর উৎসগুলো নির্বাচন করুন।</li>
+</ol>
+<p>লগইন কোড এবং 2FA পাসওয়ার্ড কখনই ডিস্কে লেখা হয় না।</p>
+<h2 id="qr-code">কিউআর কোড<a class="anchor" href="#qr-code" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
+<p>যখন অ্যাকাউন্ট ইতিমধ্যেই কোনো ফোনে বা অন্য কোনো কম্পিউটারে সাইন ইন করা থাকে, তখন এটি ব্যবহার করুন।</p>
+<ol>
+<li><strong>QR কোডে</strong> ট্যাপ করুন → <strong>QR কোড দেখান</strong>। API আইডি + হ্যাশ ফাঁকা থাকতে পারে।</li>
+<li>সাইন-ইন করা ডিভাইসে: <strong>সেটিংস → ডিভাইসসমূহ → ডেস্কটপ ডিভাইস লিঙ্ক করুন</strong>, কোড স্ক্যান করুন এবং নিশ্চিত করুন।</li>
+<li>যদি টেলিগ্রাম অনুরোধ করে, TgWitness-এ 2FA পাসওয়ার্ড লিখুন।</li>
+</ol>
+<p>QR চিত্রটি স্থানীয়ভাবে তৈরি করা হয়। কোডগুলির মেয়াদ শেষ হয়; পুনরায় চেষ্টা করতে <strong>&#x27;অন্য QR কোড তৈরি করুন&#x27;</strong>
+চাপুন। প্যানেল লক করা, কর্মক্ষেত্র পরিবর্তন করা বা অন্য লগইন শুরু করলে অপেক্ষমান কোড বাতিল হয়ে যায়।</p>
+<h2 id="auth-key--dc-id">অথ কী + ডি সি আইডি<a class="anchor" href="#auth-key--dc-id" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
+<p>একটি অ্যথ কী হল প্রতিটি টেলিগ্রাম সেশনের পেছনের কাঁচা ২৫৬-বাইট অনুমোদন, যা <strong>৫১২ হেক্সাডেসিমাল অক্ষরে</strong> লেখা হয়, ডেটা-সেন্টার নম্বর <strong>DC 1–5-এর</strong> সাথে।</p>
+<ol>
+<li>Tab <strong>Auth কী</strong>। সম্পূর্ণ কীটি পেস্ট করুন; <code>…</code> ধারণকারী সংক্ষিপ্ত কীটি কাজ করবে না।</li>
+<li>চাবির সাথে সরবরাহিত DC আইডি নির্বাচন করুন।</li>
+<li>ঐচ্ছিকভাবে <strong>ব্যবহারকারী আইডি</strong> লিখুন। যদি টেলিগ্রাম ভিন্ন কোনো অ্যাকাউন্ট রিপোর্ট করে, তাহলে TgWitness সংযোগ করতে অস্বীকার করবে।</li>
+<li>প্রেস <strong>কানেক্ট অ্যাকাউন্ট</strong>।</li>
+</ol>
+<p>একটি অ্যথ কী (৫১২ অক্ষর) API হ্যাশ (৩২ অক্ষর) নয়। একই কী JSON হিসেবেও আমদানি করা যেতে পারে, দেখুন <a href="#account-json">অ্যাকাউন্ট JSON</a>।</p>
+<h2 id="account-files">অ্যাকাউন্ট ফাইলসমূহ<a class="anchor" href="#account-files" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
+<p><strong>&#x27;অ্যাকাউন্ট যোগ করুন&#x27; → &#x27;ফাইলসমূহ&#x27;</strong> খুলুন, <strong>একটি অ্যাকাউন্টের অন্তর্গত</strong> সর্বোচ্চ <strong>চারটি ফাইল</strong> (মোট
+<strong>৮ MiB</strong>) নির্বাচন করুন, তারপর <strong>&#x27;অ্যাকাউন্ট সংযুক্ত করুন&#x27;</strong> চাপুন।</p>
+<ul>
+<li>ফাইলগুলো আপনার TgWitness সার্ভারের <strong>মেমরিতে</strong> রূপান্তরিত হয়। আপলোডগুলো সংরক্ষণ করা হয় না,
+ZIP ফাইলগুলো ডিস্কে এক্সট্র্যাক্ট করা হয় না এবং কোনো বাহ্যিক পরিষেবার সাথে যোগাযোগ করা হয় না।</li>
+<li>এরপর প্রাপ্ত সেশন টেলিগ্রামের সাথে যাচাই করা হয়। যদি কোনো ফাইলে ব্যবহারকারী আইডি উল্লেখ থাকে,
+    তবে তা টেলিগ্রাম যে অ্যাকাউন্ট রিপোর্ট করে তার সাথে মিলতে হবে।</li>
+<li>বিভিন্ন অ্যাকাউন্ট বা বিভিন্ন API শংসাপত্র বর্ণনা করে এমন ফাইলগুলো বাছাই করার পরিবর্তে প্রত্যাখ্যাত হয়।</li>
+<li><strong>পাসকোড বা সেশন টেক্সট</strong> TData-এর লোকাল পাসকোড ফিল্ড ধারণ করে, একটি বক্স যা <strong>সাইন ইন না করেই</strong> একটি StringSession এবং <strong>Read ফাইল</strong> পেস্ট করার জন্য (টেলিগ্রামের সাথে যোগাযোগ না করেই ফর্ম পূরণ করে)।</li>
+</ul>
+<h3 id="telethon-session">টেলিথন <code>.session</code><a class="anchor" href="#telethon-session" aria-label="এই বিভাগের লিঙ্ক">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>এটি কী</td>
+<td>SQLite ডাটাবেস টেলিথন-ভিত্তিক টুলগুলো তৈরি করে, উদাহরণস্বরূপ <code>my_account.session</code></td>
+</tr>
+<tr>
+<td>দ্বারা স্বীকৃত</td>
+<td>টেবিল <code>sessions</code> (<code>dc_id</code>, <code>server_address</code>, <code>port</code>, <code>auth_key</code> সহ) এবং <code>version</code> = 7 বা 8</td>
+</tr>
+<tr>
+<td>প্রয়োজনীয়তা</td>
+<td>ঠিক একটাই অনুমোদিত সেশন সারি; একটি বন্ধ, সম্পূর্ণ ডাটাবেস</td>
+</tr>
+</tbody>
+</table></div>
+<p>প্রথমে সেই প্রোগ্রামটি বন্ধ করুন যা ফাইলটি তৈরি করেছে। যদি এর পাশে<code>my_account.session-journal</code> বা<code>my_account.session-wal</code> থাকে, তাহলে ডাটাবেস চূড়ান্ত হয়নি: মূল ক্লায়েন্টটি সঠিকভাবে খুলুন এবং বন্ধ করুন। ওই সাইডকার ফাইলগুলো মুছে ফেললে একটি অকার্যকর কপি থেকে যেতে পারে।</p>
+<h3 id="pyrogram-session">পাইরোগ্রাম <code>.session</code><a class="anchor" href="#pyrogram-session" aria-label="এই বিভাগের লিঙ্ক">#</a></h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>এটি কী</td>
+<td>SQLite ডাটাবেস যা Pyrogram-ভিত্তিক টুলগুলো তৈরি করে</td>
+</tr>
+<tr>
+<td>দ্বারা স্বীকৃত</td>
+<td><code>sessions</code> টেবিলে <code>dc_id</code>, <code>auth_key</code>, <code>test_mode</code>, <code>user_id</code>, <code>is_bot</code> রয়েছে; <code>version</code> = 2 বা 3</td>
+</tr>
+<tr>
+<td>প্রয়োজনীয়তা</td>
+<td>প্রোডাকশন নেটওয়ার্কে একটি অনুমোদিত <strong>ব্যবহারকারী</strong> সেশন। বট এবং টেস্ট-ডিসি সেশন প্রত্যাখ্যাত।</td>
+</tr>
+</tbody>
+</table></div>
+<p>লগইন করার সময় সংরক্ষিত ব্যবহারকারী আইডি টেলিগ্রামের সাথে যাচাই করা হয়।</p>
+<h3 id="session--json-pair">সেশন + JSON জোড়া<a class="anchor" href="#session--json-pair" aria-label="এই বিভাগের লিঙ্ক">#</a></h3>
+<p>অ্যাকাউন্টগুলো প্রায়ই একই নামের দুটি ফাইল হিসেবে বিতরণ করা হয়, উদাহরণস্বরূপ
+<code>447700900123.session</code> এবং <code>447700900123.json</code>। একসঙ্গে <strong>উভয়টি</strong> নির্বাচন করুন।</p>
+<ul>
+<li>JSON থেকে, TgWitness <code>app_id</code>/<code>api_id</code> এবং <code>app_hash</code>/<code>api_hash</code> ব্যবহার করে, তাই সাধারণত আপনাকে API ক্রেডেনশিয়াল টাইপ করতে হয় না।</li>
+<li><code>phone</code>, <code>device</code>, <code>sdk</code>, <code>app_version</code>, <code>lang_pack</code> বা সংরক্ষিত <code>twoFA</code> পাসওয়ার্ডের মতো অন্যান্য ক্ষেত্রগুলো <strong>উপেক্ষা</strong> করা হয়। যদি অ্যাকাউন্টে 2FA থাকে, TgWitness তা চায়।</li>
+<li>শুধুমাত্র একটি JSON নিজেই কেবল মেটাডেটা। সেশন ফাইল ছাড়া ফোন বা QR লগইন দিয়ে চালিয়ে যান।</li>
+</ul>
+<h3 id="telegram-desktop-tdata">টেলিগ্রাম ডেস্কটপ (টিডাটা)<a class="anchor" href="#telegram-desktop-tdata" aria-label="এই বিভাগের লিঙ্ক">#</a></h3>
+<p>TData হল টেলিগ্রাম ডেস্কটপ অ্যাপ্লিকেশনের <code>tdata</code> ফোল্ডার (desktop.telegram.org থেকে ক্রস-প্ল্যাটফর্ম অ্যাপ)।</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>সিস্টেম</th>
+<th>ডিফল্ট <code>tdata</code> অবস্থান</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>উইন্ডোজ</td>
+<td><code>%APPDATA%\Telegram Desktop\tdata</code> (পোর্টেবল টেলিগ্রাম: <code>Telegram.exe</code>-এর পাশে)</td>
+</tr>
+<tr>
+<td>লিনাক্স</td>
+<td><code>~/.local/share/TelegramDesktop/tdata</code></td>
+</tr>
+<tr>
+<td>ম্যাকওএস</td>
+<td><code>~/Library/Application Support/Telegram Desktop/tdata</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>এটি আমদানি করতে:</p>
+<blockquote class="callout">
+<p><strong>সমান্তরাল সেশন সতর্কতা।</strong> TData আমদানি Telegram Desktop-এর অনুমোদন কী পুনর্ব্যবহার করে; এটি একটি স্বতন্ত্র লগইন তৈরি করে না। সেই কীটি Desktop এবং TgWitness-এ একযোগে ব্যবহার করবেন না। Telegram <code>AUTH_KEY_DUPLICATED</code>-এর মাধ্যমে অনুমোদন বাতিল করতে পারে, ফলে নতুন লগইন না হওয়া পর্যন্ত উভয় কপিই অকার্যকর হয়ে যাবে।</p>
+<p>ডেস্কটপ সম্পূর্ণরূপে বন্ধ করুন, এর ট্রে প্রসেসসহ, এবং TgWitness আমদানি করা সেশন ব্যবহার করার সময় সেই কপিটি বন্ধ রাখুন। <strong>ক্লোজ করুন, লগ আউট করবেন না বা সেশন বাতিল করবেন না:</strong>
+বাতিলকরণ আমদানি করা কপিটিকেও অকার্যকর করে। যদি উভয় ক্লায়েন্টই চালাতে চান, তাহলে TgWitness-এ ফোন বা QR কোড ব্যবহার করে সাইন ইন করুন, যাতে একটি নতুন অনুমোদন তৈরি হয়। একটি নিবেদিত অ্যাকাউন্ট ব্যবহারের পরামর্শ দেওয়া হয়, তবে এতে ক্লোন করা কীগুলো সমান্তরালে ব্যবহার করার জন্য নিরাপদ হয় না।</p>
+<p>এটি আমদানি করা <code>.session</code> ফাইল, StringSession টেক্সট এবং Auth Key HEX-এর ক্ষেত্রেও প্রযোজ্য।
+অন্যান্য ক্লায়েন্টগুলো, যাদের নিজস্ব স্বতন্ত্র অনুমোদন রয়েছে, তারা সাইন-ইন অবস্থায় থাকতে পারে।
+<a href="https://core.telegram.org/api/errors#406-not-acceptable">Telegram-এর AUTH_KEY_DUPLICATED ডকুমেন্টেশন</a> দেখুন।</p>
+</blockquote>
+<ol>
+<li>টেলিগ্রাম ডেস্কটপ সম্পূর্ণরূপে বন্ধ করুন।</li>
+<li>
+<p><code>tdata</code> থেকে শুধুমাত্র এই দুইটি আইটেম নিয়ে একটি ZIP তৈরি করুন:</p>
+<ul>
+<li><code>key_datas</code></li>
+<li>পাশের ১৬-অক্ষরের ফাইলটি যা <code>s</code> দিয়ে শেষ হয়, সাধারণত <code>D877F783D5D3EF8Cs</code></li>
+</ul>
+<p>মিডিয়া ক্যাশসহ পুরো ফোল্ডারটি জিপ করলে সাধারণত সীমা অতিক্রম হয়
+(৫১২ এন্ট্রি, ৩২ MiB আনপ্যাকড)।
+৩. ফাইলসে ZIP নির্বাচন করুন। যদি টেলিগ্রাম ডেস্কটপের একটি <strong>লোকাল পাসকোড</strong> থাকে, তবে প্রথমে সেটি <strong>Passcode বা সেশন টেক্সটের</strong> নিচে লিখুন। এটি 2FA পাসওয়ার্ড নয়।</p>
+</li>
+</ol>
+<p>সমর্থিত: প্রতি আর্কাইভে একটি অ্যাকাউন্ট, আধুনিক <code>key_datas</code>/<code>key_data0</code>/<code>key_data1</code> স্টোরেজ এবং স্থানীয় পাসকোড। সমর্থিত নয়: একাধিক লগইন করা অ্যাকাউন্টের ফোল্ডার, পুরোনো Desktop ফাইল বিন্যাস, পাসওয়ার্ড-সুরক্ষিত ZIP এবং পৃথক নেটিভ macOS অ্যাপ "Telegram for macOS"।</p>
+<h3 id="telethon-stringsession">টেলিথন স্ট্রিংসেশন<a class="anchor" href="#telethon-stringsession" aria-label="এই বিভাগের লিঙ্ক">#</a></h3>
+<p>একটি একক লাইনের টেক্সট, সাধারণত <code>1</code> দিয়ে শুরু হয় এবং প্রায় ৩৫০ অক্ষরের দীর্ঘ। এটিকে <code>.txt</code> বা <code>.tgwitness-session</code> ফাইল হিসেবে লোড করুন (সর্বোচ্চ ৪ KiB), অথবা <strong>পাসকোড বা সেশন টেক্সটের</strong> নিচে পেস্ট করুন। শুধুমাত্র Telethon স্ট্রিং গ্রহণ করা হয়; Pyrogram এবং TDLib স্ট্রিং ভিন্ন ফরম্যাট ব্যবহার করে।</p>
+<h3 id="account-json">অ্যাকাউন্ট JSON<a class="anchor" href="#account-json" aria-label="এই বিভাগের লিঙ্ক">#</a></h3>
+<p><code>.json</code> দিয়ে শেষ হওয়া একটি ফাইলে সর্বোচ্চ ৬৪ কিবি একটি JSON অবজেক্ট।</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>ক্ষেত্র (উপনামসমূহ)</th>
+<th>অর্থ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>api_id</code> (<code>app_id</code>)</td>
+<td>অ্যাপ্লিকেশন আইডি, একটি ধনাত্মক সংখ্যা</td>
+</tr>
+<tr>
+<td><code>api_hash</code> (<code>app_hash</code>)</td>
+<td>অ্যাপ্লিকেশন হ্যাশ, ৩২ হেক্সাডেসিমাল অক্ষর</td>
+</tr>
+<tr>
+<td><code>string_session</code> (<code>session_string</code>, <code>session</code>)</td>
+<td>টেলিথন স্ট্রিংসেশন টেক্সট, ফাইল নামের নয়</td>
+</tr>
+<tr>
+<td><code>auth_key</code> (<code>auth_key_hex</code>) + <code>dc_id</code></td>
+<td>৫১২-অক্ষরের অ্যাক্সেস কী এবং DC 1–5 সম্পূর্ণ করুন।</td>
+</tr>
+<tr>
+<td><code>user_id</code> (<code>id</code>)</td>
+<td>ঐচ্ছিক; অনুমোদন সংরক্ষণের আগে টেলিগ্রামের সাথে যাচাই করা হয়।</td>
+</tr>
+</tbody>
+</table></div>
+<p>যদি এলিয়াস এবং প্রধান নাম উভয়ই উপস্থিত থাকে, তবে সেগুলো মিলতে হবে। উদাহরণ:</p>
+<pre><code class="language-json">{ &quot;app_id&quot;: 1234567, &quot;app_hash&quot;: &quot;0123456789abcdef0123456789abcdef&quot; }</code></pre>
+<pre><code class="language-json">{
+  &quot;api_id&quot;: 1234567,
+  &quot;api_hash&quot;: &quot;0123456789abcdef0123456789abcdef&quot;,
+  &quot;auth_key&quot;: &quot;REPLACE_WITH_ALL_512_HEXADECIMAL_CHARACTERS&quot;,
+  &quot;dc_id&quot;: 2,
+  &quot;user_id&quot;: 123456789
+}</code></pre>
+<p>প্রথম উদাহরণটি শুধুমাত্র API ক্রেডেনশিয়াল পূরণ করে; ফোন বা QR দিয়ে সাইন ইন করুন, অথবা একটি সেশন ফাইল যোগ করুন। বাল্ক তালিকা (অ্যাকাউন্টের JSON অ্যারে) গ্রহণ করা হয় না।</p>
+<h2 id="identify-what-you-have">আপনার কাছে কী আছে তা চিহ্নিত করুন।<a class="anchor" href="#identify-what-you-have" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>তুমি দেখো</th>
+<th>এটি</th>
+<th>ব্যবহার করুন</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*.session</code>; এটিকে একটি টেক্সট এডিটরে খুললে শীর্ষে <code>SQLite format 3</code> দেখা যায়।</td>
+<td>টেলিথন অথবা পাইরোগ্রাম এসকিউএলআইটি</td>
+<td><strong>ফাইলসমূহ</strong> (স্বয়ংক্রিয়ভাবে সনাক্ত)</td>
+</tr>
+<tr>
+<td><code>tdata</code> ফোল্ডার যা <code>key_datas</code> ধারণ করে</td>
+<td>টেলিগ্রাম ডেস্কটপ টিডাটা</td>
+<td>দুটি ফাইল ZIP করুন, তারপর <strong>ফাইলসমূহ।</strong></td>
+</tr>
+<tr>
+<td><code>1</code> দিয়ে শুরু একটি টেক্সট লাইন, প্রায় ৩৫০ অক্ষর</td>
+<td>টেলিথন স্ট্রিংসেশন</td>
+<td><strong>ফাইলসমূহ</strong></td>
+</tr>
+<tr>
+<td><code>*.json</code> <code>app_id</code>/<code>app_hash</code></td>
+<td>সঙ্গী মেটাডেটা</td>
+<td><strong>ফাইলসমূহ</strong>, এর সেশনের সাথে</td>
+</tr>
+<tr>
+<td><code>*.json</code>, <code>auth_key</code> বা <code>string_session</code>-এর সাথে</td>
+<td>অ্যাকাউন্ট JSON</td>
+<td><strong>ফাইলসমূহ</strong></td>
+</tr>
+<tr>
+<td>৫১২ অক্ষর <code>0-9a-f</code></td>
+<td>অথ কী</td>
+<td><strong>অথ কী</strong></td>
+</tr>
+<tr>
+<td>৩২টি অক্ষর <code>0-9a-f</code></td>
+<td>এপিআই হ্যাশ</td>
+<td><strong>এপিআই আইডি + হ্যাশ</strong></td>
+</tr>
+<tr>
+<td>TDLib অ্যাপ থেকে <code>td.binlog</code> বা <code>db.sqlite</code></td>
+<td>টিডিএলিব স্টোরেজ</td>
+<td>সমর্থিত নয়</td>
+</tr>
+<tr>
+<td><code>123456789:AA…</code></td>
+<td>বট টোকেন</td>
+<td>সমর্থিত নয়</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="unsupported-formats">সমর্থনবিহীন ফরম্যাটসমূহ<a class="anchor" href="#unsupported-formats" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>ফরম্যাট</th>
+<th>বিকল্প</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TDLib স্টোরেজ (<code>td.binlog</code>) এবং TDLib এক্সপোর্টস</td>
+<td>ফোন বা QR দিয়ে সাইন ইন করুন</td>
+</tr>
+<tr>
+<td>পাইরোগ্রাম সেশন <strong>স্ট্রিংসমূহ</strong></td>
+<td>Pyrogram <code>.session</code> ফাইল ব্যবহার করুন, অথবা ফোন/কিউআর</td>
+</tr>
+<tr>
+<td>অনেকগুলো লগইন করা অ্যাকাউন্টসহ TData</td>
+<td>টেলিগ্রাম ডেস্কটপে অন্যান্য অ্যাকাউন্টগুলো থেকে লগ আউট করুন, অথবা প্রতিটি অ্যাকাউন্টের নিজস্ব সেশন ফাইল ব্যবহার করুন।</td>
+</tr>
+<tr>
+<td>বট টোকেনসমূহ</td>
+<td>সমর্থিত নয়: TgWitness একটি ব্যবহারকারী অ্যাকাউন্ট হিসেবে পর্যবেক্ষণ করে</td>
+</tr>
+<tr>
+<td>অনেক অ্যাকাউন্টের CSV/JSON তালিকা</td>
+<td>প্রতিটি অ্যাকাউন্টের জন্য একটি ওয়ার্কস্পেস যোগ করুন</td>
+</tr>
+<tr>
+<td>টেস্ট-ডিসি বা বট সেশন</td>
+<td>একটি প্রোডাকশন ব্যবহারকারী অ্যাকাউন্ট ব্যবহার করুন</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="multiple-accounts">অনেকগুলো অ্যাকাউন্ট<a class="anchor" href="#multiple-accounts" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
+<p>অ্যাকাউন্ট সিলেক্টরের পাশে <strong>+</strong> চাপুন, অথবা
+<strong>অ্যাকাউন্ট → সেটিংস → সংযোগ সেটিংস → ওয়ার্কস্পেস</strong> খুলুন, একটি লেবেল লিখুন এবং
+সাইন ইন করুন।</p>
+<ul>
+<li>মূল সহ যেকোনো সংখ্যক ওয়ার্কস্পেস। প্রতিটিই নিজস্ব সেশন, প্রক্সি রুট, সোর্স, ক্যাপচার নীতি, জার্নাল, স্বাক্ষর কী, চেকপয়েন্ট এবং এক্সপোর্ট রয়েছে।</li>
+<li>প্রদর্শিত কর্মক্ষেত্র পরিবর্তন করলে অন্যান্যগুলো থামে না।</li>
+<li>একটি জার্নাল সবসময়ই সেটি তৈরি করা অ্যাকাউন্টের সাথে আবদ্ধ থাকে। অন্য একটি অ্যাকাউন্ট হিসেবে সাইন ইন করতে একটি আলাদা ওয়ার্কস্পেস প্রয়োজন, এবং একটি অ্যাকাউন্টকে দুটি ওয়ার্কস্পেসে বরাদ্দ করা যায় না।</li>
+<li>সব কর্মক্ষেত্র একটি প্যানেল টোকেন শেয়ার করে; এগুলো পৃথক ব্যবহারকারী নয়।</li>
+<li><strong>Accounts</strong> একটি ওয়ার্কস্পেসের নাম পরিবর্তন করে এবং একটি যোগ করা ওয়ার্কস্পেসকে তার সেশন, জার্নাল, সোর্স এবং স্বাক্ষর কীসহ মুছে ফেলে। প্রধান ওয়ার্কস্পেস প্যানেল থেকে মুছে ফেলা যায় না।</li>
+</ul>
+<h2 id="sign-out">সাইন আউট<a class="anchor" href="#sign-out" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
+<p><strong>Account → Sign out of Telegram</strong> (with observation paused) টেলিগ্রামকে সেশন শেষ করতে বলে, তাই এটি অ্যাকাউন্টের <strong>Settings → </strong>Devices থেকেও অদৃশ্য হয়ে যায় এবং ওয়ার্কস্পেস ভল্ট থেকে সেশন মুছে ফেলে। জার্নাল, সোর্স, সেটিংস এবং স্বাক্ষর কী থাকে, এবং জার্নালে সাইন-আউট রেকর্ড হয়। ওয়ার্কস্পেসটি এখনও তার অ্যাকাউন্টেরই থাকবে: শুধুমাত্র সেই অ্যাকাউন্টই আবার এতে সংযোগ করতে পারবে। যদি টেলিগ্রাম সাড়া না দেয়, তবুও সেশনটি এখানে সরিয়ে ফেলা হবে এবং প্যানেল সেটি দেখাবে; টেলিগ্রামে <strong>Settings → Devices</strong>-এ গিয়ে এটি শেষ করুন।</p>
+<h2 id="convert-a-telethon-session-offline">টেলিথন সেশনটি অফলাইনে রূপান্তর করুন<a class="anchor" href="#convert-a-telethon-session-offline" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
+<p>প্যানেল সরাসরি <code>.session</code> ফাইল আমদানি করে। অফলাইনে StringSession ফাইলে রূপান্তর করতে, প্রকল্প ফোল্ডার থেকে চালান:</p>
+<pre><code class="language-powershell">.venv\Scripts\python.exe -m tgwitness.sessions account.session --out account.tgwitness-session   # Windows</code></pre>
+<pre><code class="language-sh">.venv/bin/python -m tgwitness.sessions account.session --out account.tgwitness-session          # Linux/macOS</code></pre>
+<p>রূপান্তরকারী শুধুমাত্র Telethon SQLite (৬৪ MiB পর্যন্ত) পড়ে, ইনপুট কখনো পরিবর্তন করে না, কোনো নেটওয়ার্ক অনুরোধ করে না এবং বিদ্যমান আউটপুট ফাইল ওভাররাইট করতে অস্বীকার করে।</p>
+<h2 id="keeping-account-files-safe">অ্যাকাউন্ট ফাইলগুলো নিরাপদ রাখা<a class="anchor" href="#keeping-account-files-safe" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
+<ul>
+<li>প্রতিটি <code>.session</code>, TData ZIP, StringSession, Auth Key এবং account JSON-কে একটি পাসওয়ার্ডের মতো বিবেচনা করুন। TgWitness আমদানি করা অনুমোদন তার এনক্রিপ্ট করা ভল্টে রাখে; আপনি পরে মূল ফাইলগুলো মুছে ফেলতে পারেন।</li>
+<li>একই অনুমোদন একসঙ্গে দুইটি প্রোগ্রামে চালাবেন না। টেলিগ্রাম এটি বাতিল করতে পারে (<code>AUTH_KEY_DUPLICATED</code>), এবং উভয় কপি কাজ করা বন্ধ করে দেবে।</li>
+<li>মেয়াদোত্তীর্ণ বা বাতিলকৃত সেশন রূপান্তরের মাধ্যমে পুনরুজ্জীবিত করা যাবে না।  পুনরায় সাইন ইন করুন।</li>
+</ul>
+<h2 id="troubleshooting">ত্রুটি নির্ণয়<a class="anchor" href="#troubleshooting" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>বার্তা বা উপসর্গ</th>
+<th>কি করতে হবে</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>এই সেশনটি পড়া যাচ্ছে না। এর মূল ক্লায়েন্টটি বন্ধ করুন…</em></td>
+<td>SQLite ফাইলটি খোলা বা অসম্পূর্ণ (<code>-journal</code>/<code>-wal</code> সাইডকার)। মূল প্রোগ্রামটি সঠিকভাবে বন্ধ করুন এবং ফাইলটি আবার কপি করুন।</td>
+</tr>
+<tr>
+<td><em>সমর্থিত টেলিথন SQLite স্কিমা: ৭ এবং ৮</em> / <em>পাইরোগ্রাম … ২ এবং ৩</em></td>
+<td>ফাইলটি একটি খুব পুরনো বা অজানা লাইব্রেরি সংস্করণ দ্বারা তৈরি করা হয়েছে। পরিবর্তে ফোন/কিউআর কোড দিয়ে সাইন ইন করুন।</td>
+</tr>
+<tr>
+<td><em>শুধুমাত্র অনুমোদিত প্রোডাকশন ব্যবহারকারী সেশনগুলো সমর্থিত।</em></td>
+<td>Pyrogram ফাইলটি একটি বট বা টেস্ট নেটওয়ার্কের অন্তর্গত।</td>
+</tr>
+<tr>
+<td><em>TData আর্কাইভ ৫১২ এন্ট্রি বা ৩২ MiB অতিক্রম করেছে</em></td>
+<td>শুধুমাত্র <code>key_datas</code> এবং <code>D877F783D5D3EF8Cs</code>-এর জিপ, পুরো ফোল্ডার নয়।</td>
+</tr>
+<tr>
+<td><em>TData ডিক্রিপ্ট করা যাচ্ছে না। ডেস্কটপের স্থানীয় পাসকোড পরীক্ষা করুন।</em></td>
+<td><strong>Passcode বা সেশন টেক্সট</strong>-এ Telegram Desktop-এর স্থানীয় পাসকোড লিখুন।</td>
+</tr>
+<tr>
+<td><em>একবারে একটি TData অ্যাকাউন্ট আমদানি করুন</em></td>
+<td>টেলিগ্রাম ডেস্কটপে একাধিক অ্যাকাউন্ট ছিল; <a href="#unsupported-formats">সমর্থিত নয় এমন ফরম্যাট</a> দেখুন।</td>
+</tr>
+<tr>
+<td><em>নির্বাচিত ফাইলগুলো বিভিন্ন অ্যাকাউন্ট বা API শংসাপত্র বর্ণনা করে।</em></td>
+<td>শুধুমাত্র একটি অ্যাকাউন্টের ফাইল নির্বাচন করুন।</td>
+</tr>
+<tr>
+<td><em>JSON-এ কোনো সমর্থিত API শংসাপত্র বা অনুমোদন নেই।</em></td>
+<td><a href="#account-json">Account </a>JSON-এ ফিল্ডের নামগুলো পরীক্ষা করুন।</td>
+</tr>
+<tr>
+<td><em>শুধুমাত্র API মেটাডেটা</em></td>
+<td>JSON-এ কোনো সেশন নেই।<code>.session</code> ফাইল যোগ করুন অথবা ফোন/QR ব্যবহার করুন।</td>
+</tr>
+<tr>
+<td><em>অথ কী HEX-এ সমস্ত ৫১২টি হেক্সাডেসিমাল অক্ষর থাকতে হবে।</em></td>
+<td>কীটি সংক্ষিপ্ত করা হয়েছে বা এতে <code>…</code> রয়েছে।</td>
+</tr>
+<tr>
+<td>অ্যাকাউন্ট আইডি আমদানি করা অ্যাকাউন্টের সাথে মিলছে না।</td>
+<td>ফাইলের ব্যবহারকারী আইডি টেলিগ্রামের রিপোর্ট করা আইডি থেকে ভিন্ন; ফাইলটি অন্য একটি অ্যাকাউন্টের জন্য।</td>
+</tr>
+<tr>
+<td>অ্যাকাউন্ট ইতিমধ্যেই অন্য একটি ওয়ার্কস্পেসের অন্তর্গত।</td>
+<td>অ্যাকাউন্টটি দুইবার যোগ করার পরিবর্তে সেই ওয়ার্কস্পেসটি খুলুন।</td>
+</tr>
+<tr>
+<td>সংযুক্ত, কিন্তু সোর্সেসের চ্যাট তালিকায় একটি ব্যক্তিগত গ্রুপ নেই।</td>
+<td>সদস্যতা পরীক্ষা করুন। পিকার প্রথম ১,০০০টি ডায়ালগ পরিদর্শন করে; প্যারামিটারে সীমা বাড়ান।</td>
+</tr>
+<tr>
+<td>প্রক্সি সংযোগ ব্যর্থ হয়েছে</td>
+<td>হোস্ট, পোর্ট এবং ক্রেডেনশিয়ালগুলো পরীক্ষা করুন। TgWitness কখনই সরাসরি সংযোগে ফিরে যায় না।</td>
+</tr>
+</tbody>
+</table></div>
+<p>আরও দেখুন: প্রক্সি এবং এনক্রিপশনের জন্য <a href="../connection/">সংযোগ ও নিরাপত্তা</a>, এবং সাইন-ইন করার পর কী সংগ্রহ করা হয় তা <a href="../collection/">কীভাবে কাজ করে</a>।</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/ACCOUNTS.md">GitHub-এ এই পৃষ্ঠা সম্পাদনা করুন ↗</a><a class="next-guide" href="../connection/"><span>পরবর্তী ধাপ</span><strong>সংযোগ, প্রক্সি এবং ডেটা সুরক্ষা →</strong></a><p>এই গাইডগুলো বর্তমান বাস্তবায়ন বর্ণনা করে। যাচাইকরণ ফলাফল এবং অবশিষ্ট ফাঁকগুলো আলাদাভাবে নথিভুক্ত করা হয়েছে। <a href="../verification/">কি পরীক্ষা করা হয়েছে →</a></p></footer>
+</main>
+<aside class="toc" aria-label="এই পৃষ্ঠায়"><p class="nav-label">এই পৃষ্ঠায়</p><a href="#at-a-glance">এক নজরে</a><a href="#before-you-start-api-id-and-api-hash">শুরু করার আগে: API আইডি এবং API হ্যাশ</a><a href="#phone-number">ফোন নম্বর</a><a href="#qr-code">কিউআর কোড</a><a href="#auth-key--dc-id">অথ কী + ডি সি আইডি</a><a href="#account-files">অ্যাকাউন্ট ফাইলসমূহ</a><a href="#identify-what-you-have">আপনার কাছে কী আছে তা চিহ্নিত করুন।</a><a href="#unsupported-formats">সমর্থনবিহীন ফরম্যাটসমূহ</a><a href="#multiple-accounts">অনেকগুলো অ্যাকাউন্ট</a><a href="#sign-out">সাইন আউট</a><a href="#convert-a-telethon-session-offline">টেলিথন সেশনটি অফলাইনে রূপান্তর করুন</a><a href="#keeping-account-files-safe">অ্যাকাউন্ট ফাইলগুলো নিরাপদ রাখা</a><a href="#troubleshooting">ত্রুটি নির্ণয়</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>ওপেন সোর্স · আপনার মেশিনে চলে</span><a href="../../../../LICENSE">MIT লাইসেন্স</a><a href="../notice/">অপারেটর বিজ্ঞপ্তি</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">নিরাপত্তা</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "বার্তার অপেক্ষায়", "Step through a fictional send, edit and delete.": "একটি কাল্পনিক পাঠানো, সম্পাদনা এবং মুছে ফেলার ধাপ অনুসরণ করুন।", "No observations yet. Start the sequence or advance one event.": "এখন পর্যন্ত কোনো পর্যবেক্ষণ নেই। সিকোয়েন্স শুরু করুন অথবা একটি ইভেন্ট এগিয়ে নিন।", "Meet at 10:00": "১০:০০ টায় মিলিত হন", "A new message is visible in the chat.": "চ্যাটে একটি নতুন বার্তা দৃশ্যমান।", "Record 1 appended: the collector observed the original message.": "রেকর্ড ১ সংযুক্ত: সংগ্রাহক মূল বার্তাটি পর্যবেক্ষণ করেছেন।", "Meet at 11:00": "১১:০০ টায় মিলিত হোন", "The current text changes. The earlier observation stays.": "বর্তমান পাঠ্য পরিবর্তিত হয়। পূর্ববর্তী পর্যবেক্ষণ অপরিবর্তিত থাকে।", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "রেকর্ড ২ সংযুক্ত: সম্পাদনাটি একটি নতুন পর্যবেক্ষণ। রেকর্ড ১ এখনও মূল পাঠ্য সংরক্ষণ করে।", "Message deleted": "বার্তা মুছে ফেলা হয়েছে", "The message has disappeared from the chat view.": "বার্তাটি চ্যাট ভিউ থেকে অদৃশ্য হয়ে গেছে।", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "রেকর্ড ৩ সংযুক্ত: মুছে ফেলার বিজ্ঞপ্তিটি উভয় দেখা সংস্করণের পাশাপাশি সংরক্ষিত রয়েছে।", "0 records": "0টি রেকর্ড", "1 record": "১টি রেকর্ড", "2 records": "২টি রেকর্ড", "3 records": "৩টি রেকর্ড", "Complete / {n} of 3": "৩টির মধ্যে সম্পূর্ণ / {n}", "Step / {n} of 3": "৩-এর মধ্যে ধাপ / {n}", "Pause": "বিরতি", "Replay sequence": "পুনঃপ্রচার ক্রম", "Play sequence": "ক্রম বাজান", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "স্থির উদাহরণটি উপলব্ধ। হ্যাশগুলো ইন্টার‍্যাক্টিভভাবে গণনা করতে HTTPS-এ এই পৃষ্ঠাটি খুলুন অথবা Web Crypto সমর্থনসহ লোকালহোস্ট প্রিভিউ ব্যবহার করুন।", "No record supplied": "কোনও রেকর্ড সরবরাহ করা হয়নি", "Tail removed": "টেইল অপসারণ করা হয়েছে", "≠ saved hash": "≠ সংরক্ষিত হ্যাশ", "Rebuilt · different hash": "পুনর্নির্মিত · ভিন্ন হ্যাশ", "= saved hash": "= সংরক্ষিত হ্যাশ", "Same length and matching head.": "একই দৈর্ঘ্য এবং মিলিত শিরোনাম।", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "তিনটি গণনা করা হ্যাশ সংরক্ষিত হ্যাশের সাথে মিলছে। এই নমুনাটি রাখা তিনটি রেকর্ডের সীমানার সাথে সামঞ্জস্যপূর্ণ।", "Same saved head; the journal prefix fails verification.": "একই সংরক্ষিত হেড; জার্নাল প্রিফিক্স যাচাইকরণে ব্যর্থ।", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "রেকর্ড ২ আর তার সংরক্ষিত হ্যাশের সাথে মিলছে না। শুধুমাত্র সর্বশেষ সংরক্ষিত হেড যাচাই করলে এটি ধরা পড়বে না; যাচাইকারী প্রতিটি রেকর্ড পরীক্ষা করে।", "Head differs from the retained checkpoint.": "হেড সংরক্ষিত চেকপয়েন্ট থেকে পৃথক।", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "পুনর্নির্মিত হ্যাশগুলো একে অপরের সাথে সংযুক্ত, কিন্তু চূড়ান্ত হেডটি পরিবর্তিত হয়েছে। সংরক্ষিত চেকপয়েন্ট এই ইতিহাস প্রত্যাখ্যান করে। পরিবর্তিত রেকর্ডগুলিতেও মূল স্বাক্ষরগুলো ব্যর্থ হবে।", "Too short: 2 supplied records \u003c 3 retained records.": "খুব সংক্ষিপ্ত: ২টি সরবরাহিত রেকর্ড \u003c ৩টি সংরক্ষিত রেকর্ড।", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "বাকী থাকা দুইটি হ্যাশ এখনও মিলছে। সংরক্ষিত চেকপয়েন্ট অনুপস্থিত টেইল উন্মোচন করে। সেই পূর্বের সীমানা ছাড়া শুধুমাত্র এই সংক্ষিপ্ত প্রিফিক্সটি বাদ পড়া অংশটি প্রকাশ করতে পারত না।", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "এই ব্রাউজারে হ্যাশ গণনা অনুপলব্ধ। নীচের সূত্র এবং স্থির ব্যাখ্যাগুলো এখনও উপলব্ধ।", "{n} records": "{n} রেকর্ডস", "head {hash}": "হেড {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "গ্রহণ করা হয়েছে: গণনা বৃদ্ধি পাচ্ছে, স্বাক্ষর যাচাই হচ্ছে এবং কী মিলছে। সাক্ষী এই নতুন সীমা বজায় রাখে।", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "রোলব্যাক: স্বাক্ষরিত উত্তরটি শেষ গৃহীত চেকপয়েন্টের তুলনায় কম রেকর্ড রিপোর্ট করে। সাক্ষী সমস্যাটি রেকর্ড করে এবং পূর্বের গৃহীত সীমা বজায় রাখে।", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "ফর্ক: গণনা অপরিবর্তিত আছে কিন্তু হেড ভিন্ন। সাক্ষী মতবিরোধ রেকর্ড করে এবং পূর্বে গৃহীত সীমানা বজায় রাখে।", "No answer": "কোনও উত্তর নেই", "boundary unknown": "সীমা অজানা", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "কোনো প্রতিক্রিয়া নেই: সাক্ষী ব্যর্থ চেক রেকর্ড করে। এটি সংগ্রাহকের বর্তমান অবস্থা নিশ্চিত করতে পারে না। যদি সাক্ষী এখনও Bot API-এ পৌঁছাতে পারে এবং এর প্রকাশ নীতি অনুমতি দেয়, তবে এটি সেই ব্যর্থতা প্রকাশ করতে পারে।", "Send {n}": "{n} পাঠান", "Edit {n}": "{n}সম্পাদনা", "Delete {n}": "{n} মুছুন", "Both accounts captured all six expected observations in this example.": "উভয় অ্যাকাউন্টই এই উদাহরণে প্রত্যাশিত ছয়টি পর্যবেক্ষণই ধারণ করেছে।", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "অ্যাকাউন্ট B এখনও ৬টির মধ্যে ৬টিই ধারণ করেছে। দুটি রসিদ ধারণ করতে বেশি সময় লেগেছে। ধারণ অনুপাত এবং রসিদ বিলম্ব ভিন্ন প্রশ্নগুলোর উত্তর দেয়।", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "কাটঅফের সময়সীমার মধ্যে Account B ছয়টির মধ্যে পাঁচটি (৮৩.৩%) ধারণ করেছে। অনুপস্থিত সম্পাদনার কোনো পরিমাপযোগ্য বিলম্ব নেই। এই ফলাফল শুধুমাত্র ছয়টি নিয়ন্ত্রিত কর্মকাণ্ডকে বর্ণনা করে।", "not observed by cutoff": "কাটঅফের মাধ্যমে পর্যবেক্ষণ করা হয়নি", "{s} seconds": "{s} সেকেন্ড", "Exact values follow in the table.": "নির্দিষ্ট মানসমূহ টেবিলে অনুসরণ করা হয়েছে।", "{s} s": "{s}s", "Not observed": "পর্যবেক্ষণ করা হয়নি", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "চারটি চ্যাট বিভিন্ন পর্যবেক্ষণ প্রদান করে। প্রতিটি সংযোগের জন্য উৎস রেকর্ডগুলো অনুসরণ করুন; প্রেরক নির্ধারণ না করে চ্যানেল পোস্টটি ব্যবহারকারী ৭১০०১-এ বরাদ্দ করবেন না।", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "রেকর্ড #146 এবং #205 একই প্রেরক আইডি, 71001, সরবরাহ করে। এটি দুইটি চ্যাটে একটি টেলিগ্রাম অ্যাকাউন্টের পর্যবেক্ষিত পোস্টগুলোকে সংযুক্ত করে। এটি কোনো বাস্তব ব্যক্তিকে চিহ্নিত করে না বা চ্যানেল পোস্টের সাথে কোনো ব্যক্তিকে যুক্ত করে না।", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "pay.example.invalid/new গন্তব্যটি গ্রুপ রেকর্ড #146, বট কীবোর্ড #173, চ্যানেল সম্পাদনা #188 এবং ব্যক্তিগত বার্তা #205-এ প্রদর্শিত হয়েছে। একই গন্তব্যের পুনরাবৃত্তি বিষয়বস্তুকে সংযুক্ত করে; এটি সেই অ্যাকাউন্টগুলির সাধারণ নিয়ন্ত্রণের প্রমাণ দেয় না।", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "এই কাল্পনিক ক্ষেত্রে সম্পন্ন মিডিয়া রসিদ #151 এবং #209-এর পূর্ণ SHA-256 মান সমান। প্রকৃত বাইট এবং সংশ্লিষ্ট বার্তা রেকর্ডগুলো তুলনা করুন। মিলিত ফাইলটি এর নির্মাতাকে শনাক্ত করে না বা কে এটি ফরওয়ার্ড করেছে তা প্রমাণ করে না।", "the encrypted off-site copy": "এনক্রিপ্টকৃত অফ-সাইট কপি", "notifications": "অ্যালার্টসমূহ", "checkpoint hashes for timestamps": "টাইমস্ট্যাম্পের জন্য চেকপয়েন্ট হ্যাশ", "signed checkpoints for the witness": "সাক্ষীর স্বাক্ষরিত চেকপয়েন্টসমূহ", "Switched on in this example": "এই উদাহরণে চালু করা হয়েছে", "Optional · off by default": "ঐচ্ছিক · ডিফল্টভাবে বন্ধ", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "এই মেশিন থেকে যাওয়া: টেলিগ্রাম সংযোগ এবং {list}। আর কিছুই না।", "Default: only the Telegram connection leaves this machine.": "ডিফল্ট: শুধুমাত্র টেলিগ্রাম সংযোগই এই মেশিন থেকে বের হয়।", "{done} of {total} done": "{total}-এর মধ্যে {done} সম্পন্ন", "Mark step {n} as done": "{n} ধাপটি সম্পন্ন হিসেবে চিহ্নিত করুন", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "কপি", "Copied": "কপি করা হয়েছে", "Command copied.": "কমান্ড অনুলিপি করা হয়েছে।", "Selected — Ctrl/Cmd+C": "নির্বাচিত — Ctrl/Cmd+C", "Command selected. Copy it manually.": "কমান্ড নির্বাচিত। এটি ম্যানুয়ালি অনুলিপি করুন।", "Command copied to clipboard.": "কমান্ডটি ক্লিপবোর্ডে অনুলিপি করা হয়েছে।", "Select text": "টেক্সট নির্বাচন করুন", "Clipboard unavailable. Command selected; copy it manually.": "ক্লিপবোর্ড অনুপলব্ধ। কমান্ড নির্বাচিত; ম্যানুয়ালি অনুলিপি করুন।", "A message arrives. The first observation is saved.": "একটি বার্তা এসেছে। প্রথম পর্যবেক্ষণ সংরক্ষিত হয়েছে।", "The time changes. Both captured versions stay.": "সময় পরিবর্তিত হয়। উভয় ধারণকৃত সংস্করণই থাকে।", "The message disappears. The captured history remains.": "বার্তাটি অদৃশ্য হয়ে যায়। ধারণকৃত ইতিহাস রয়ে যায়।", "Pause example animation": "অ্যানিমেশন বিরতি উদাহরণ", "Play example animation": "উদাহরণ অ্যানিমেশন প্লে করুন", "Play": "চালু করুন", "Full-size workspace screenshot": "পূর্ণ-আকারের কর্মস্থলের স্ক্রিনশট", "Workspace screenshot · fictional data": "ওয়ার্কস্পেস স্ক্রিনশট · কাল্পনিক ডেটা", "Close": "বন্ধ করুন", "Close screenshot": "স্ক্রিনশট বন্ধ করুন", "Scrollable full-size screenshot": "স্ক্রলযোগ্য পূর্ণ-আকারের স্ক্রিনশট", "Enlarge: {name}": "বড় করুন: {name}", "View full size": "পূর্ণ আকারে দেখুন"}</script>
+</body></html>

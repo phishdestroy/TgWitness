@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="ja" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>接続、プロキシ、およびデータ保護 | TgWitness</title>
+<meta name="description" content="APIペア、ログイン方法、SOCKS5、HTTPおよびMTProxyルート、公開プロキシリスト、および各ルートが保護する内容について。"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/connection/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="接続、プロキシ、およびデータ保護 | TgWitness"><meta property="og:description" content="APIペア、ログイン方法、SOCKS5、HTTPおよびMTProxyルート、公開プロキシリスト、および各ルートが保護する内容について。">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/ja/docs/reference/connection/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/connection/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/connection/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/connection/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/connection/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/connection/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/connection/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/connection/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/connection/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/connection/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/connection/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/connection/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/connection/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/connection/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/connection/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/connection/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/connection/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/connection/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/connection/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/ja/docs/reference/connection/", "url": "https://phishdestroy.github.io/TgWitness/ja/docs/reference/connection/", "name": "接続、プロキシ、およびデータ保護 | TgWitness", "description": "APIペア、ログイン方法、SOCKS5、HTTPおよびMTProxyルート、公開プロキシリスト、および各ルートが保護する内容について。", "inLanguage": "ja", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://phishdestroy.github.io/TgWitness/ja/"}, {"@type": "ListItem", "position": 2, "name": "ドキュメント", "item": "https://phishdestroy.github.io/TgWitness/ja/docs/"}, {"@type": "ListItem", "position": 3, "name": "参考文献", "item": "https://phishdestroy.github.io/TgWitness/ja/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "接続、プロキシ、およびデータ保護", "item": "https://phishdestroy.github.io/TgWitness/ja/docs/reference/connection/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">コンテンツへスキップ</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / ドキュメント</span></a>
+<nav aria-label="ガイド"><a href="../../concepts/">ビジュアルガイド</a><a href="../../">すべてのガイド</a><a href="../">参考文献</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="言語"><span aria-hidden="true">◍</span> 日本語</summary><div class="lang-list"><a href="../../../../docs/reference/connection/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/connection/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/connection/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/connection/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/connection/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/connection/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/connection/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/connection/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/connection/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/connection/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/connection/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/connection/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/connection/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/connection/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/connection/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/connection/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/connection/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/connection/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/connection/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/connection/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/connection/" hreflang="pl" lang="pl">Polski</a><a href="./" hreflang="ja" lang="ja" aria-current="true">日本語</a><a href="../../../../th/docs/reference/connection/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/connection/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/connection/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="ライトテーマとダークテーマを切り替える"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="ガイド"><a href="../../../guides/modes.html">モード、シナリオ、および証拠レベル</a><p class="nav-label">はじめに</p><a href="../../start/">数分で始められます</a><a href="../../accounts/">アカウントを連携する</a><a href="../../proxies/">プロキシを選択してください</a><a href="../../exports/">エクスポートと検証</a><p class="nav-label">証拠について理解する</p><a href="../../concepts/">証拠の仕組みをご覧ください</a><a href="../../cases/">すべてのチャットを横断的に調査する</a><a href="../../security/">セキュリティを確保してください</a><p class="nav-label">さらに詳しく</p><a href="../../witness/">Witnessボットの設定</a><a href="../../server/">稼働を継続してください</a><a href="../../troubleshooting/">何が問題だったのかを確認する</a></nav><nav class="wiki-nav" aria-label="参考文献"><p class="nav-label"><a class="nav-label-link" href="../">参考文献</a></p><details class="wiki-group" open><summary>セットアップ</summary><a href="../quickstart/">クイックスタート</a><a href="../accounts/">アカウントとセッション形式</a><a href="./" aria-current="page">接続、プロキシ、およびデータ保護</a><a href="../deployment/">導入</a></details><details class="wiki-group"><summary>収集</summary><a href="../collection/">収集の仕組み</a><a href="../operations/">ワークフローと操作方法</a><a href="../investigation/">調査モード</a><a href="../features/">機能と制限事項</a></details><details class="wiki-group"><summary>証拠</summary><a href="../how-it-works/">証拠の仕組み</a><a href="../evidence/">証拠の形式</a><a href="../witness/">独立した証人</a><a href="../timestamp/">タイムスタンプ</a></details><details class="wiki-group"><summary>セキュリティとプロジェクト</summary><a href="../security/">セキュリティおよびデータ取り扱い</a><a href="../architecture/">アーキテクチャ</a><a href="../verification/">テスト済みの内容</a><a href="../license/">ライセンスに関する説明とアーキテクチャ上の非互換性の通知</a><a href="../notice/">オペレーターの非互換性に関する通知</a><a href="../changelog/">変更履歴</a></details></nav><p class="sidebar-note">v0.7.0<br>オープンソース・お使いのマシン上で動作します</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="ガイド"><a href="../../../">ホーム</a> <span aria-hidden="true">/</span> <a href="../../">ドキュメント</a> <span aria-hidden="true">/</span> <a href="../">参考文献</a> <span aria-hidden="true">/</span> <span aria-current="page">接続、プロキシ、およびデータ保護</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">ドキュメントを検索する</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="「プロキシ」、「ハッシュチェーン」、「トークン」、または「ウィットネス」などを試してみてください…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="検索を明確にする" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">ガイドやリファレンスを検索するには、単語を入力してください。検索はブラウザ内で行われます。</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">参考文献 / セットアップ</p><h1>接続、プロキシ、およびデータ保護</h1><p class="guide-outcome">APIペア、ログイン方法、SOCKS5、HTTPおよびMTProxyルート、公開プロキシリスト、および各ルートが保護する内容について。</p><div class="wiki-body"><p>このドキュメントでは、TgWitness 0.7.0 の動作とその制限事項について説明します。認証、
+ソースへのアクセス、ネットワーク接続、およびキャプチャの完全性は、それぞれ独立した状態です。
+サインインの手順、ファイル形式、および複数アカウントについては、「
+<a href="../accounts/">アカウントとセッション形式</a>」からご確認ください。イベントポリシーや再起動時の
+動作については、<a href="../collection/">「収集の仕組み」</a>をご覧ください。</p>
+<h2 id="authentication-methods">認証方法<a class="anchor" href="#authentication-methods" aria-label="このセクションへのリンク">#</a></h2>
+<p><strong>API ID および API ハッシュはアプリケーションを識別するものであり、アカウントへのログインに代わるものではありません。</strong>
+
+TgWitness ではこれらはオプションです。優先順位は、フォームに入力されたペア、次に
+インポートされたアカウント JSON からのペア、次にワークスペースに保存されたペア、そして 50 組の
+公開ペアのプールを順に試行し、Telegramが1つを拒否した場合は自動的にローテーションされます。
+Telegram Desktopのペア（2040）のみ、対応するTelegram Desktopクライアントの説明とともに送信されます。
+<a href="https://my.telegram.org">my.telegram.</a>
+orgのAPI開発ツールから取得したご自身のペアは、すべてのアカウントで使用可能です。各アカウントには、引き続き独自の認証が適用されます。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>要件</th>
+<th>TgWitness サポート</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>電話番号、コード、オプションの2段階認証</td>
+<td>アカウントへのアクセス；APIペアは任意です</td>
+<td>パネルへのログイン</td>
+</tr>
+<tr>
+<td>認証キー（HEX）＋DC ID</td>
+<td>512文字の完全なキーおよびDC 1～5</td>
+<td>「Direct <strong>Auth key」</strong>タブ；認証が保存される前に、オプションのユーザーIDがチェックされます</td>
+</tr>
+<tr>
+<td>Telethon StringSession</td>
+<td>有効なセッション文字列</td>
+<td>パネルへのログイン</td>
+</tr>
+<tr>
+<td>Telethon SQLite <code>.session</code></td>
+<td>完成済みで一貫性のある文章</td>
+<td>スキーマのパネルからの直接インポート 7/8；オプションのオフラインCLI</td>
+</tr>
+<tr>
+<td>Pyrogram SQLite <code>.session</code></td>
+<td>本番環境のユーザーセッションを終了しました</td>
+<td>スキーマのパネルからの直接インポート 2/3</td>
+</tr>
+<tr>
+<td>Telegram Desktop TData ZIP</td>
+<td>最新のアカウント1つ。保護されている場合はローカルパスコード</td>
+<td>チェックサムおよび復号化の検証を伴うインメモリ変換</td>
+</tr>
+<tr>
+<td>アカウントのJSON</td>
+<td>サポートされているAPI/セッション/キーフィールド</td>
+<td>API認証情報はメタデータのみで自動的に設定されますが、セッション/キーまたは電話番号/QRコードによるログインは依然として必要です。</td>
+</tr>
+<tr>
+<td>QRコードによるログイン</td>
+<td>Telegramの公式アプリによる確認</td>
+<td>ローカルでのQRコード生成、有効期限設定・再試行、オプションの2段階認証</td>
+</tr>
+<tr>
+<td>TDLib / Pyrogram StringSession</td>
+<td>その他のライブラリ固有のフォーマット</td>
+<td>未対応</td>
+</tr>
+<tr>
+<td>ボットトークン</td>
+<td>独自のアクセス／更新モデルを備えたボット</td>
+<td>このコレクターでは使用されていません</td>
+</tr>
+</tbody>
+</table></div>
+<p>Telegramはコードの配信方式を採用しており、SMSによる配信は保証されません。APIハッシュでは、
+失効したセッションを復元したり、忘れた2FAパスワードを再発行したりすることはできません。TgWitnessは、
+ログインコードやTelegramの2FAパスワードをディスクに保存することはありません。</p>
+<p>非公開の情報源の場合、アカウントはすでにアクセス権を持っている必要があります。グループのユーザー名は
+不要です。プロキシやセッションのインポートを行っても、メンバーシップや管理者
+権限は付与されません。現在のメンバーシップがあっても、参加前の履歴へのアクセスが保証されるわけではありません。</p>
+<h2 id="import-a-telethon-session-file">Telethonのセッションファイルをインポートする<a class="anchor" href="#import-a-telethon-session-file" aria-label="このセクションへのリンク">#</a></h2>
+<p>Telethon SQLite、Pyrogram SQLite、および Telegram Desktop TData は、それぞれ異なる形式を使用しています。
+パネルは、サポートされている構造を検出して変換しますが、ファイル名の変更は
+変換には該当しません。「<strong>ファイル</strong>」から 1 つのセッションとその対応する JSON を選択し、<strong>「アカウントに接続</strong>」を押してください。最大 4 つの一致するファイルと
+合計 8 MiB まで受け付けられます。 TData/JSONの詳細については、<a href="../accounts/">フォーマットの制限</a>をご参照ください。
+パスコードの復元機能はありません。電話/2FAまたはQRコードによるログインでは、別途認証が行われます。</p>
+<p>オプションの「Telethon専用」コマンドラインパスは引き続き利用可能です：</p>
+<ol>
+<li>元のセッションを使用しているクライアントを停止し、一貫性のあるコピーを作成してください。
+    コンバーターは、WAL/ジャーナルが未完了のファイルを拒否します。チェックを回避するためにそれらのファイルを削除するのではなく、元の
+    クライアントを適切に終了させてください。</li>
+<li>TgWitness環境から、以下のコマンドを実行してください：</li>
+</ol>
+<pre><code class="language-sh">python -m tgwitness.sessions account.session --out account.tgwitness-session</code></pre>
+<ol start="3">
+<li>「<strong>アカウントの追加」→「ファイル」</strong>で、結果ファイルをアップロードするか、
+    その文字列を貼り付けて、次に進んでください。</li>
+<li>表示されている数値のアカウントIDを確認し、情報源を選択して、監視を開始してください。</li>
+</ol>
+<p>このコンバーターはSQLiteを読み取り専用モードで開き、スキーマのアップグレードやネットワークリクエストは行わず、
+セッションを出力することもありません。スキーマのバージョン、テーブル型、1つの
+セッション行、IP/ポート/データセンター、および鍵の長さを確認します。CLI入力は64 MiBに制限されており、StringSession
+のテキストは4 KiBに制限されています。 パネルでの変換では、認証済みのTgWitness
+サーバーにファイルをアップロードし、メモリ内で処理した後、正規化された認証情報をその
+ブラウザに返します。アップロードされた元のファイルは保存されません。リモートサーバーにはHTTPSを使用してください。</p>
+<p><strong>変換されたファイルは、暗号化されていないアカウントアクセス秘密鍵です。</strong> これを保護された
+ストレージに保管し、決してコミットしたり、第三者の変換サービスに送信したりしないでください。TgWitnessは
+認証済みセッションを暗号化された保管庫に保存します。セッションをコピーしても
+別の認証が作成されることはありません。クローン化された認証キーを使用してクライアントを同時に実行したり、
+独立した更新配信が行われると想定したりしないでください。</p>
+<p>変換処理では、元のメッセージやエンティティキャッシュ、あるいは
+永続的な更新カーソルではなく、権限のみが転送されます。また、プロセスの再起動を跨いだ更新の復元は行われません。</p>
+<h2 id="mtproto-telethon-and-proxies">MTProto、Telethon、およびプロキシ<a class="anchor" href="#mtproto-telethon-and-proxies" aria-label="このセクションへのリンク">#</a></h2>
+<p>MTProtoはTelegramのプロトコルです。Telethonは、TgWitnessが使用するPythonクライアントライブラリです。
+MTProxyはTelegramのトランスポートプロキシであり、SOCKS5およびHTTP CONNECTが一般的な
+トンネルを提供します。いずれもアカウント認証に代わるものではありません。</p>
+<p>プロキシが必要な場合は、ログイン前に「<strong>アカウント」→「設定」→「接続設定」→「接続ルートの変更」</strong>で、各ワークスペースのルートを保存してください。
+デフォルトは「ダイレクト」です。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>ルート</th>
+<th>設定</th>
+<th>境界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>直接</td>
+<td>なし</td>
+<td>TelethonはTelegramに直接接続します</td>
+</tr>
+<tr>
+<td>SOCKS5</td>
+<td>ホスト、ポート、オプションのユーザー名／パスワード</td>
+<td>python-socks 2.8.2、rdns 有効</td>
+</tr>
+<tr>
+<td>HTTP CONNECT</td>
+<td>ホスト、ポート、オプションのユーザー名／パスワード</td>
+<td>プレーンなHTTP CONNECTを使用します。プロキシ自体へのTLSは実装されていません。</td>
+</tr>
+<tr>
+<td>MTProxy</td>
+<td>ホスト、ポート、シークレット</td>
+<td>実験的なTelethonトランスポート：32桁の16進数、または<code>dd</code>＋32桁の16進数</td>
+</tr>
+</tbody>
+</table></div>
+<p>偽の TLS <code>ee</code> シークレットは拒否されます。Telethon 1.45 の正規化機能では、プレフィックス
+やドメインを削除できますが、これは偽の TLS を実装するものではありません。<code>tg://proxy?server=…&amp;port=…&amp;secret=…</code>
+または <code>https://t.me/proxy?server=…&amp;port=…&amp;secret=…</code> を貼り付け、「<strong>リンクからフィールドに値を入力」</strong>を選択してください。
+これにより、接続や保存を行わずにフィールドの検証と入力が行われます。内容を確認し、
+ルートは別途保存してください。手動入力用のフィールドは引き続き利用可能です。<a href="https://core.telegram.org/api/links#proxy-links">Telegramプロキシリンク</a>をご参照ください。</p>
+<h3 id="public-proxies-supplied-by-your-installation">インストール時に提供されるパブリックプロキシ<a class="anchor" href="#public-proxies-supplied-by-your-installation" aria-label="このセクションへのリンク">#</a></h3>
+<p>接続設定には、
+<a href="https://github.com/SoliSpirit/mtproto">SoliSpirit/mtproto</a> および
+<a href="https://github.com/zakky8/mtproto-proxy-pro">zakky8/mtproto-proxy-pro</a> による既成のパブリックリストが含まれています。同梱のスナップショットには、
+パブリックエンドポイントの情報、出典情報、ダウンロード日が含まれていますが、いずれの
+プロジェクトの検証主張も含まれていません。起動時に何も取得しなくても動作します。 エントリを
+選択し、ルートを保存してから、ログインする前にTelegram接続をテストしてください。</p>
+<p><strong>「パブリックリストの更新」機能は、</strong>リクエストに応じて2つの固定HTTPSフィードを取得します。各レスポンスは
+1 MiBおよび20秒に制限されており、リダイレクトは拒否されます。 ソースごとに最大64件の互換性のあるエントリが
+保持され、ソース間で重複排除が行われます。無効なリンク、プライベート／予約済み
+IPリテラル、ローカルホスト名、およびサポートされていないFake TLS <code>ee</code>エントリはスキップされます。 パブリックな
+ホスト名は選択時に解決されます。すべての応答はグローバルにルーティング可能でなければならず、
+選択されたIPアドレスは保存されたルートに固定されます。これにより、フィードのホスト名が後で
+保存された接続をプライベートアドレスにリダイレクトすることを防ぎます。エントリを再適用すると、再度解決されます。</p>
+<p>各ワークスペースは、<code>public-proxies.json</code>形式で最後の正常なソーススナップショットを保持します。失敗した、
+空の、または互換性のないソース応答については、そのソースの以前のエントリとタイムスタンプが保持されます。
+更新処理はアトミックかつシリアライズされており、ワークスペースごとに1分間に1回の試行に制限されています。
+リストの更新や閲覧を行っても、選択されたルートは変更されません。利用可能性を確認するには、
+引き続きトランスポートテストが必要です。プロバイダーのリスト掲載は、Telegramへの完全な配信を証明するものではありません。</p>
+<p>リストのダウンロードには別のHTTPS接続が使用され、デフォルトでは直接接続となります。
+<code>TGWITNESS_PROXY_FEED_PROXY</code>をHTTP/SOCKS5のURLに設定することで、これらのリクエストをダウンロード
+プロキシ経由でルーティングできます。両方のコレクター「Compose」バリアントがこれを転送します。 Telegramのセッション、API認証情報、
+パネルトークン、ボットトークンは、プロバイダーに送信されません。ワークスペースのMTProxyでは、
+これらのHTTPダウンロードを処理できません。プロバイダー名、保存日、およびダウンロード経路については、
+<strong>「リストの出典」</strong>の項で開示されています。</p>
+<p>公開リストを独自のオペレーターカタログに置き換えるには、以下のオーバーライドを設定してください。
+これにより、<code>proxies</code>配列が空の場合を含め、外部サブスクリプションが完全に無効化されます。</p>
+<p><a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/proxies.config.example">空のカタログを</a><code>proxy-config/proxies.json</code>
+にコピーし、デプロイ済みのパブリックエンドポイントを追加してください：</p>
+<pre><code class="language-json">{&quot;format&quot;: &quot;tgwitness-proxy-catalog-v1&quot;, &quot;proxies&quot;: [
+  {&quot;id&quot;: &quot;project-eu&quot;, &quot;label&quot;: &quot;Project EU&quot;,
+   &quot;link&quot;: &quot;tg://proxy?server=REPLACE_HOST&amp;port=443&amp;secret=REPLACE_SECRET&quot;}
+]}</code></pre>
+<p>例示された値は置き換える必要があります。最大32件の異なるエントリが受け入れられます。
+認証済みリストは、共有秘密鍵なしでラベル／ホスト／ポートを返します。いずれかを選択すると、
+その認証情報がワークスペースの保管庫に保存されます。明示的なトランスポートテストが行われるまでは、
+可用性は未検証のままです。カタログの形式が不正な場合は、手動での設定が可能となります。</p>
+<p>ネイティブ起動：<code>TGWITNESS_PROXY_CATALOG</code>をローカルのJSONパスに設定してください。Docker：</p>
+<pre><code class="language-sh">docker compose -f compose.yaml -f deploy/compose/compose.proxies.yaml up -d --build</code></pre>
+<p>オーバーレイは<code>proxy-config</code>を読み取り専用でマウントします。ファイルはコンテナのUID 10001から読み取り可能である必要があります。
+当該ディレクトリは、Git、Dockerのビルドコンテキスト、およびソースアーカイブから除外されています。この
+カタログは収集アカウントを設定するものです。<a href="../witness/">Witnessボットは</a>、MTProxyではなく、独自の
+HTTP/SOCKS5ルートを使用します。</p>
+<p>プロキシに障害が発生した場合、TgWitnessはDirectへのフォールバックを行いません。ルートを変更する前に、
+監視を一時停止してください。保存を行うと、古いクライアントは切断され、未完了のログインはキャンセルされます。
+新しいクライアントは保存されたルートを使用します。アカウントのジャーナルとセッションの紐付けは維持されます。
+設定を変更すると以前のルートが上書きされます。編集する際は、プロキシの認証情報を再入力してください。</p>
+<p>認証情報は<code>network.enc</code>で暗号化されています。APIはユーザー名、
+パスワード、またはシークレットを返しません。署名付きレコードには、ルートタイプと認証情報の
+有無が含まれていますが、エンドポイントやシークレットは除外されています。オペレーターはパネル上で
+エンドポイントを確認できます。シークレットフィールドは、保存、ロック、またはワークスペースの切り替え後に消去されます。</p>
+<p><strong>「Telegram接続のテスト」</strong>は、ログイン前でも利用可能で、ルートを経由して一時的な
+非認証のTelegram接続を開閉します。IPチェック
+サイトには接続しません。テストに成功しても、グループへのアクセス、完全な
+配信、または匿名性が保証されるわけではなく、単にトランスポート接続が確立されたことを示すものです。</p>
+<p>このプロキシは、Telegram DCからのメディア
+ダウンロードを含め、Telegramクライアントの接続に適用されます。ブラウザ、pip、SSH、および手動で起動されたTSAツールには、それぞれ別の経路が設定されています。
+プロキシのホスト名はローカルで解決される場合があります。<code>rdns</code>は宛先のホスト名に影響を及ぼしますが、
+Telegramは多くの場合、数値のDC IPアドレスを提供します。</p>
+<p>SOCKS5およびプレーンなHTTP CONNECT自体は、プロキシの認証情報や
+クライアントからプロキシへのトンネルを暗号化しません。TelegramのトラフィックはMTProtoによって別途保護されます。 信頼できないネットワーク上では、
+プロキシへの適切なセキュアチャネルをご利用ください。プライベートグループは
+クラウドチャットであり、MTProto によってエンドツーエンド暗号化された「シークレットチャット」にはなりません。</p>
+<h2 id="encryption-and-signatures">暗号化と署名<a class="anchor" href="#encryption-and-signatures" aria-label="このセクションへのリンク">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>レイヤー</th>
+<th>実装済み</th>
+<th>運用者の責任</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Telegramの通信量</td>
+<td>Telethon MTProto</td>
+<td>プラットフォームの信頼性、経路、および可用性</td>
+</tr>
+<tr>
+<td>Webパネル</td>
+<td>ベアラー・トークン、ループバックのデフォルト設定、リクエスト制限</td>
+<td>リモートアクセスにはHTTPSまたはSSHトンネルをご利用ください</td>
+</tr>
+<tr>
+<td>秘密</td>
+<td>API 認証情報、セッション、プロキシ認証情報、および署名用秘密鍵を管理するための Fernet</td>
+<td>復号鍵と稼働中のホストを保護してください</td>
+</tr>
+<tr>
+<td>Vaultキー</td>
+<td>新規インストール用のローカルキー、または外部マスターキー</td>
+<td>保護されたストレージと鍵のバックアップを分離</td>
+</tr>
+<tr>
+<td>メッセージと添付ファイル</td>
+<td>プレーンテキスト形式でのアプリケーションデータ保存</td>
+<td>暗号化されたディスク／ボリューム</td>
+</tr>
+<tr>
+<td>ZIP/JSONL/CSV/HTML</td>
+<td>整合性チェックを実施しており、コンテンツの暗号化は行われません。</td>
+<td>エクスポートされたコピーや転送データの保護</td>
+</tr>
+<tr>
+<td>出所と時刻</td>
+<td>署名付きジャーナル、プロセス受領証、RFC 3161 対応ツール</td>
+<td>信頼できる鍵、独立したチェックポイント／TSA、および保管手順</td>
+</tr>
+</tbody>
+</table></div>
+<p>「アカウント」内の<strong>ストレージ保護には</strong>、以下の状態が表示されます。パネルトークンは
+アクセスシークレットであり、暗号化パスワードではありません。1つのトークンですべてのワークスペースを管理します。
+ワークスペースは、個別のユーザーや独立したテナントではありません。</p>
+<p>明示的に起動された、隔離された合成デモは、直接の
+ループバック接続を介して自動的に開くことができます。これは、プロセス存続期間に限定された機能を利用しており、
+設定されたパネルトークンを開示することも、実際のワークスペースへのアクセスを許可することもありません。リモート、
+プロキシ経由、またはクロスオリジンからのリクエストでは、この自動起動機能を利用することはできません。
+この利便性により、実際のアカウントデータに対する認証の境界が取り除かれることはありません。</p>
+<p>BitLocker、LUKS、FileVault、または管理対象の暗号化ボリュームは、
+それぞれの脅威モデルに基づいてストレージを保護することができます。 ロック解除され、稼働中のマシンの管理者は、
+依然としてデータを読み取ることができます。ストレージの計画には、SQLiteのWAL/SHM、メディア、一時的なエクスポートデータ、スワップ領域、バックアップ、
+およびブラウザのダウンロードデータを含めてください。Dockerボリュームは、単に
+ボリュームであるという理由だけで暗号化されるわけではありません。TgWitnessは、SQLCipherやオブジェクト暗号化を実装していません。</p>
+<h2 id="external-master-key">外部マスターキー<a class="anchor" href="#external-master-key" aria-label="このセクションへのリンク">#</a></h2>
+<p><strong>新規</strong>インストールを行う場合は、マスターキーをデータディレクトリの外に配置してください。
+これにより、既存のローカルキー保管庫が自動的に移行されるわけではありません。サービスIDのみがアクセス可能なキー
+ディレクトリを用意し、以下のコマンドを実行してください：</p>
+<pre><code class="language-sh">python -m tgwitness.security create-master-key /private/keys/tgwitness-master.key
+export TGWITNESS_VAULT_KEY_FILE=/private/keys/tgwitness-master.key
+python -m tgwitness --data-dir /private/observations/new-case</code></pre>
+<p>PowerShell（インストール済みのプロジェクト環境を使用）：</p>
+<pre><code class="language-powershell">python -m tgwitness.security create-master-key E:\PrivateKeys\tgwitness-master.key
+$env:TGWITNESS_VAULT_KEY_FILE = &#x27;E:\PrivateKeys\tgwitness-master.key&#x27;
+python -m tgwitness --data-dir E:\PrivateData\new-case</code></pre>
+<p>Dockerでは、ファイルを<code>/data</code>の外側（例えば
+<code>/run/secrets/tgwitness-master.key</code>）に読み取り専用でマウントし、環境変数をそのパスに設定してください。
+サービスUIDは、そのファイルを読み取れる権限を持っている必要があります。キーバイトではなく、パスを
+環境変数または設定ファイルを介して渡してください。</p>
+<p>各ワークスペースには、ランダムなパブリックソルトと、
+HKDF-SHA256を通じて導出された独自のFernetキーが割り当てられます。<code>vault.external.json</code>には、マスターキーではなく、導出メタデータが保存されます。
+キーが欠落している、または間違っている場合、自動的に置き換えられることなく起動に失敗します。復旧のために、
+ソルトのメタデータとマスターキーの両方を保管しておいてください。</p>
+<p>すべてのワークスペースは同一のマスターキーから派生しており、その秘密鍵が漏洩すると、
+インストール全体に影響が及びます。実行中のプロセスは秘密情報を復号化できます。これはHSMや
+パスワードKDFではありません。ランダムな鍵の代わりに、任意のユーザー設定のパスワードは使用できません。</p>
+<p>意図的な移行が
+実施され、検証されるまでは、既存のインストール環境については既存の鍵を維持してください。<code>vault.key</code>を削除したり、マスターキーを置き換えたりすると、
+セッションや署名鍵へのアクセスが失われる可能性があります。暗号化されたバックアップと鍵は別々に保管し、
+隔離されたインスタンスで復旧テストを行ってください。</p>
+<h2 id="sources-and-verification-scope">情報源および検証範囲<a class="anchor" href="#sources-and-verification-scope" aria-label="このセクションへのリンク">#</a></h2>
+<p>2026年10月26日時点でのレビュー：</p>
+<ul>
+<li>https://core.telegram.org/api/auth</li>
+<li>https://core.telegram.org/api/obtaining_api_id</li>
+<li>https://docs.telethon.dev/en/stable/basic/signing-in.html</li>
+<li>https://docs.telethon.dev/en/stable/concepts/sessions.html</li>
+<li>https://core.telegram.org/mtproto/mtproto-transports</li>
+<li>https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/SourceFiles/storage/storage_account.cpp</li>
+<li>Telethon 1.45.0：SQLiteSession、StringSession、<code>Connection._proxy_connect</code>、
+    <code>TcpMTProxy.normalize_secret</code>、およびダウンロード方法。</li>
+</ul>
+<p>ローカルテストでは、ループバック SOCKS5/HTTP CONNECT フィクスチャ、合成 SQLite セッション、
+経路の分離、秘密情報の除外、およびキー欠落時の拒否について検証しています。これらは、
+実際の Telegram とプロキシ間の相互運用性や、MTProxy の実稼働時の挙動を検証するものではありません。
+<a href="../verification/">VERIFICATION.md</a> および <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">LIVE_ACCEPTANCE.md</a> をご参照ください。</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/CONNECTION-SECURITY.md">GitHubでこのページを編集する ↗</a><a class="next-guide" href="../deployment/"><span>次のステップ</span><strong>導入 →</strong></a><p>これらのガイドは、現在の実装について説明しています。検証結果および残された課題については、別途文書化されています。 <a href="../verification/">テスト済みの内容 →</a></p></footer>
+</main>
+<aside class="toc" aria-label="このページについて"><p class="nav-label">このページについて</p><a href="#authentication-methods">認証方法</a><a href="#import-a-telethon-session-file">Telethonのセッションファイルをインポートする</a><a href="#mtproto-telethon-and-proxies">MTProto、Telethon、およびプロキシ</a><a href="#encryption-and-signatures">暗号化と署名</a><a href="#external-master-key">外部マスターキー</a><a href="#sources-and-verification-scope">情報源および検証範囲</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>オープンソース・お使いのマシン上で動作します</span><a href="../../../../LICENSE">MITライセンス</a><a href="../notice/">オペレーター向け通知</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">セキュリティ</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "メッセージをお待ちしています", "Step through a fictional send, edit and delete.": "架空の送信、編集、削除のプロセスを順を追ってご説明します。", "No observations yet. Start the sequence or advance one event.": "まだ観察結果はありません。シーケンスを開始するか、1件先へ進めてください。", "Meet at 10:00": "10:00に集合してください。", "A new message is visible in the chat.": "チャットに新しいメッセージが表示されています。", "Record 1 appended: the collector observed the original message.": "記録1が追加されました：コレクターが元のメッセージを確認しました。", "Meet at 11:00": "11:00にお会いしましょう", "The current text changes. The earlier observation stays.": "現在のテキストは変更されます。以前の指摘はそのまま残ります。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "レコード2が追加されました：この編集は新たな観察結果です。レコード1には依然として元のテキストが保持されています。", "Message deleted": "メッセージが削除されました", "The message has disappeared from the chat view.": "そのメッセージはチャット画面から消えました。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "「Record 3」を追加しました：削除通知は、確認された両方のバージョンとともに保持されます。", "0 records": "0件の記録", "1 record": "1件の記録", "2 records": "2件の記録", "3 records": "3件の記録", "Complete / {n} of 3": "完了 / 3件中{n}件", "Step / {n} of 3": "ステップ / 3のうち{n}", "Pause": "一時停止", "Replay sequence": "再生シーケンス", "Play sequence": "再生順序", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "静的なサンプルが利用可能です。ハッシュをインタラクティブに計算するには、HTTPS経由でこのページを開くか、Web Cryptoをサポートするローカルホストのプレビューを開いてください。", "No record supplied": "記録は提供されていません", "Tail removed": "末尾を削除しました", "≠ saved hash": "≠ 保存されたハッシュ", "Rebuilt · different hash": "再構築済み・ハッシュ値が異なります", "= saved hash": "= 保存されたハッシュ", "Same length and matching head.": "同じ長さで、見出しも一致しています。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "計算された3つのハッシュ値はすべて、保存されているハッシュ値と一致しています。このサンプルは、保持されている3レコード単位の境界と一致しています。", "Same saved head; the journal prefix fails verification.": "保存されたヘッダーは同じですが、ジャーナルのプレフィックスが検証に失敗しました。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "レコード2は、保存されているハッシュと一致しなくなりました。最後に保存されたヘッドのみを確認していた場合、この不一致を見逃してしまいます。検証ツールはすべてのレコードを確認します。", "Head differs from the retained checkpoint.": "ヘッダーは、保持されているチェックポイントとは異なります。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "再構築されたハッシュは相互にリンクしていますが、最終ヘッドが変更されています。保持されているチェックポイントは、この履歴を拒否します。変更されたレコードに対しては、元の署名も検証に失敗します。", "Too short: 2 supplied records \u003c 3 retained records.": "記録数が少なすぎます：提供された記録が2件、保存された記録が3件未満です。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "残りの2つのハッシュは依然として一致しています。保持されているチェックポイントにより、欠落していた末尾部分が明らかになりました。その以前の境界情報がなければ、この短いプレフィックスだけでは欠落に気づくことはできなかったでしょう。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "このブラウザではハッシュ計算をご利用いただけません。以下の数式および説明文は引き続きご覧いただけます。", "{n} records": "{n}件の記録", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "承認済み：カウントが増加し、署名が検証され、鍵が一致しました。Witnessはこの新しい境界を保持します。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "ロールバック：署名付き回答で報告されたレコード数が、最後に承認されたチェックポイントのレコード数よりも少ない場合。Witnessはこの問題を記録し、以前に承認された境界を維持します。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "フォーク：カウントは変わりませんが、ヘッドが異なります。ウィットネスはこの不一致を記録し、以前に承認された境界を維持します。", "No answer": "回答なし", "boundary unknown": "境界不明", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "応答なし：Witnessはチェックの失敗を記録します。コレクターの現在の状態を特定することはできません。Witnessが依然としてBot APIにアクセスでき、かつ公開ポリシーが許可している場合、その失敗を公開することができます。", "Send {n}": "{n} を送信", "Edit {n}": "編集 {n}", "Delete {n}": "{n}を削除", "Both accounts captured all six expected observations in this example.": "この例では、両方のアカウントとも、想定されていた6つの観測項目すべてを捕捉しました。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "アカウントBでも6件中6件を正常に取得できました。2件の受信確認には時間がかかりました。取得率と受信確認の遅延は、それぞれ異なる問題を示しています。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "アカウントBは、締め切り時点までに6件中5件を捕捉しました（83.3％）。捕捉されなかった編集操作については、測定された遅延はありません。この結果は、6件の制御された操作についてのみ記述したものです。", "not observed by cutoff": "締め切りまでに確認されませんでした", "{s} seconds": "{s}秒", "Exact values follow in the table.": "具体的な数値は表に示されています。", "{s} s": "{s} s", "Not observed": "確認されませんでした", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "4つのチャットから、それぞれ異なる観察結果が得られています。すべての接続について、元の記録を追跡してください。送信者が特定されていない限り、チャンネルへの投稿をユーザー71001に割り当てないでください。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "記録#146と#205には、同じ送信者ID「71001」が記載されています。これにより、2つのチャットにまたがるTelegramアカウントの投稿が関連付けられます。ただし、実在の人物を特定したり、チャンネルへの投稿の作者を特定したりするものではありません。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "宛先「pay.example.invalid/new」は、グループ記録#146、ボットキーボード#173、チャンネル編集#188、およびプライベートメッセージ#205に登場します。宛先が繰り返し登場することは、これらの資料を結びつける要素ではありますが、それらのアカウントが共通の管理下にあることを証明するものではありません。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "この架空の事例において、完了済みのメディア受信記録 #151 と #209 は、完全な SHA-256 値が一致しています。実際のバイトデータと、それに関連するメッセージ記録を比較してください。一致したファイルからは、作成者が特定されることも、誰が転送したかを証明することもできません。", "the encrypted off-site copy": "暗号化されたオフサイトコピー", "notifications": "通知", "checkpoint hashes for timestamps": "タイムスタンプ用のチェックポイントハッシュ", "signed checkpoints for the witness": "Witness用の署名付きチェックポイント", "Switched on in this example": "この例では有効になっています", "Optional · off by default": "オプション・デフォルトではオフ", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "このマシンから削除されるもの：Telegramの接続情報と{list}。それ以外は一切ありません。", "Default: only the Telegram connection leaves this machine.": "デフォルト設定：Telegramへの接続のみがこのマシンから行われます。", "{done} of {total} done": "{done}/{total} 完了", "Mark step {n} as done": "ステップ{n}を「完了」としてマークする", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "コピー", "Copied": "コピー", "Command copied.": "コマンドをコピーしました。", "Selected — Ctrl/Cmd+C": "選択 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "コマンドが選択されました。手動でコピーしてください。", "Command copied to clipboard.": "コマンドがクリップボードにコピーされました。", "Select text": "テキストを選択", "Clipboard unavailable. Command selected; copy it manually.": "クリップボードが利用できません。コマンドが選択されています。手動でコピーしてください。", "A message arrives. The first observation is saved.": "メッセージが届きました。最初の記録が保存されました。", "The time changes. Both captured versions stay.": "時刻は変更されますが、キャプチャされた両方のバージョンはそのまま残ります。", "The message disappears. The captured history remains.": "メッセージは消えても、記録された履歴は残ります。", "Pause example animation": "アニメーションの一時停止例", "Play example animation": "サンプルアニメーションを再生する", "Play": "再生", "Full-size workspace screenshot": "ワークスペースのフルサイズスクリーンショット", "Workspace screenshot · fictional data": "ワークスペースのスクリーンショット・架空のデータ", "Close": "閉じる", "Close screenshot": "スクリーンショットを閉じる", "Scrollable full-size screenshot": "スクロール可能なフルサイズのスクリーンショット", "Enlarge: {name}": "拡大：{name}", "View full size": "フルサイズで表示"}</script>
+</body></html>

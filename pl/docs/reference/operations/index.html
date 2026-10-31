@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="pl" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Procesy i operacje | TgWitness</title>
+<meta name="description" content="Codzienne działanie panelu: tryby pracy, kategorie monitorowania, parametry, powiadomienia, eksport danych, tworzenie kopii zapasowych oraz pojemność."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:title" content="Procesy i operacje | TgWitness"><meta property="og:description" content="Codzienne działanie panelu: tryby pracy, kategorie monitorowania, parametry, powiadomienia, eksport danych, tworzenie kopii zapasowych oraz pojemność.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/operations/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/operations/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/operations/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/operations/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/operations/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/operations/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/operations/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/operations/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/operations/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/operations/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/operations/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/operations/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/operations/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/operations/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/operations/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/operations/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/operations/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/operations/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/", "url": "https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/", "name": "Procesy i operacje | TgWitness", "description": "Codzienne działanie panelu: tryby pracy, kategorie monitorowania, parametry, powiadomienia, eksport danych, tworzenie kopii zapasowych oraz pojemność.", "inLanguage": "pl", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Strona główna", "item": "https://phishdestroy.github.io/TgWitness/pl/"}, {"@type": "ListItem", "position": 2, "name": "Dokumentacja", "item": "https://phishdestroy.github.io/TgWitness/pl/docs/"}, {"@type": "ListItem", "position": 3, "name": "Odniesienie", "item": "https://phishdestroy.github.io/TgWitness/pl/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Procesy i operacje", "item": "https://phishdestroy.github.io/TgWitness/pl/docs/reference/operations/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Przejdź do treści</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Dokumentacja</span></a>
+<nav aria-label="Przewodniki"><a href="../../concepts/">Przewodnik wizualny</a><a href="../../">Wszystkie przewodniki</a><a href="../">Odniesienie</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Język"><span aria-hidden="true">◍</span> Polski</summary><div class="lang-list"><a href="../../../../docs/reference/operations/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/operations/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/operations/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/operations/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/operations/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/operations/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/operations/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/operations/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/operations/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/operations/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/operations/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/operations/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/operations/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/operations/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/operations/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/operations/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/operations/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/operations/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/operations/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/operations/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="./" hreflang="pl" lang="pl" aria-current="true">Polski</a><a href="../../../../ja/docs/reference/operations/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/operations/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/operations/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/operations/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Przełączanie między jasnym a ciemnym motywem"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Przewodniki"><a href="../../../guides/modes.html">Tryby, scenariusze i poziomy dowodów</a><p class="nav-label">Pierwsze kroki</p><a href="../../start/">Rozpocznij w ciągu kilku minut</a><a href="../../accounts/">Podłącz konto</a><a href="../../proxies/">Proszę wybrać serwer proxy</a><a href="../../exports/">Eksportowanie i weryfikacja</a><p class="nav-label">Zrozumienie dowodów</p><a href="../../concepts/">Zobacz, jak działa system gromadzenia dowodów</a><a href="../../cases/">Przeprowadzanie dochodzeń we wszystkich czatach</a><a href="../../security/">Dbaj o bezpieczeństwo</a><p class="nav-label">Dowiedz się więcej</p><a href="../../witness/">Skonfiguruj bota Witness</a><a href="../../server/">Prosimy o dalsze prowadzenie tej strony</a><a href="../../troubleshooting/">Dowiedz się, co poszło nie tak</a></nav><nav class="wiki-nav" aria-label="Odniesienie"><p class="nav-label"><a class="nav-label-link" href="../">Odniesienie</a></p><details class="wiki-group"><summary>Konfiguracja</summary><a href="../quickstart/">Szybki start</a><a href="../accounts/">Konta i formaty sesji</a><a href="../connection/">Połączenia, serwery proxy i ochrona danych</a><a href="../deployment/">Wdrożenie</a></details><details class="wiki-group" open><summary>Zbieraj</summary><a href="../collection/">Jak przebiega gromadzenie danych</a><a href="./" aria-current="page">Procesy i operacje</a><a href="../investigation/">Tryb dochodzeniowy</a><a href="../features/">Funkcje i ograniczenia</a></details><details class="wiki-group"><summary>Dowody</summary><a href="../how-it-works/">Jak działa ten rejestr dowodów</a><a href="../evidence/">Format dowodów</a><a href="../witness/">Niezależny świadek</a><a href="../timestamp/">Sygnatury czasowe</a></details><details class="wiki-group"><summary>Bezpieczeństwo i projekt</summary><a href="../security/">Bezpieczeństwo i przetwarzanie danych</a><a href="../architecture/">Architektura</a><a href="../verification/">Co zostało przetestowane</a><a href="../license/">Informacja o licencji i niezgodności architektonicznej</a><a href="../notice/">Powiadomienie o niezgodności operatorów</a><a href="../changelog/">Lista zmian</a></details></nav><p class="sidebar-note">v0.7.0<br>Oprogramowanie typu open source · Działa na Państwa komputerze</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Przewodniki"><a href="../../../">Strona główna</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentacja</a> <span aria-hidden="true">/</span> <a href="../">Odniesienie</a> <span aria-hidden="true">/</span> <span aria-current="page">Procesy i operacje</span></nav>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Przeszukaj dokumentację</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proszę rozważyć użycie terminów takich jak: serwer proxy, łańcuch skrótów, token lub świadek…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Przejrzyste wyszukiwanie" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Wpisz słowo, aby przeszukać przewodniki i materiały referencyjne. Wyniki wyszukiwania pozostają w Państwa przeglądarce.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Odniesienie / Zbieraj</p><h1>Procesy i operacje</h1><p class="guide-outcome">Codzienne działanie panelu: tryby pracy, kategorie monitorowania, parametry, powiadomienia, eksport danych, tworzenie kopii zapasowych oraz pojemność.</p><div class="wiki-body"><p>W przypadku pierwszego połączenia proszę skorzystać z <a href="../accounts/">kont i formatów sesji</a>.
+Wyjaśnienie dotyczące zapisanych wersji, zasad dotyczących zdarzeń oraz luk można znaleźć w sekcji
+<a href="../collection/">„Jak działa gromadzenie danych</a>”. Niniejszy przewodnik obejmuje codzienne działanie oraz odzyskiwanie danych.</p>
+<h2 id="operator-workflow">Przebieg pracy operatora<a class="anchor" href="#operator-workflow" aria-label="Link do tej sekcji">#</a></h2>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 691 542" width="691" height="542" role="img" aria-labelledby="flow-2-title flow-2-desc"><title id="flow-2-title">Schemat blokowy</title><desc id="flow-2-desc">Wybierz opcję przechowywania danych i zabezpieczenia klucza → Proszę otworzyć panel za pomocą tokenu; Proszę otworzyć panel za pomocą tokenu → Proszę wybrać obszar roboczy; Proszę wybrać obszar roboczy → Konfiguracja połączenia bezpośredniego lub przez serwer proxy; Konfiguracja połączenia bezpośredniego lub przez serwer proxy → Wprowadź numer telefonu lub wybierz pliki / kod QR; Wprowadź numer telefonu lub wybierz pliki / kod QR → Proszę sprawdzić tożsamość konta i wybrać grupy, do których ma Pan/Pani dostęp; Proszę sprawdzić tożsamość konta i wybrać grupy, do których ma Pan/Pani dostęp → Zapisz zasady dotyczące zdarzeń i załączników, a następnie rozpocznij monitorowanie; Zapisz zasady dotyczące zdarzeń i załączników, a następnie rozpocznij monitorowanie → Monitorowanie błędów, dostępu, kolejek i dysku; Monitorowanie błędów, dostępu, kolejek i dysku → Zachowanie niezależnych punktów kontrolnych; Zachowanie niezależnych punktów kontrolnych → Eksportowanie i weryfikacja materiałów</desc><defs><marker id="flow-2-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M206.4 55.0C232.8 55.0 232.8 55.0 259.3 55.0" marker-end="url(#flow-2-arrow)" style="--i:0;--len:53" pathLength="53"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M206.4 55.0C232.8 55.0 232.8 55.0 259.3 55.0"/></circle><path class="flow-edge" d="M432.2 55.0C460.3 55.0 460.3 55.0 488.5 55.0" marker-end="url(#flow-2-arrow)" style="--i:1;--len:56" pathLength="56"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M432.2 55.0C460.3 55.0 460.3 55.0 488.5 55.0"/></circle><path class="flow-edge" d="M571.5 84.0C571.5 122.5 571.5 122.5 571.5 161.0" marker-end="url(#flow-2-arrow)" style="--i:2;--len:77" pathLength="77"/><circle class="flow-pulse" r="3.2" style="--i:2"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M571.5 84.0C571.5 122.5 571.5 122.5 571.5 161.0"/></circle><path class="flow-edge" d="M495.4 208.0C462.1 208.0 462.1 208.0 428.7 208.0" marker-end="url(#flow-2-arrow)" style="--i:3;--len:67" pathLength="67"/><circle class="flow-pulse" r="3.2" style="--i:3"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M495.4 208.0C462.1 208.0 462.1 208.0 428.7 208.0"/></circle><path class="flow-edge" d="M262.7 208.0C231.1 208.0 231.1 208.0 199.4 208.0" marker-end="url(#flow-2-arrow)" style="--i:4;--len:63" pathLength="63"/><circle class="flow-pulse" r="3.2" style="--i:4"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M262.7 208.0C231.1 208.0 231.1 208.0 199.4 208.0"/></circle><path class="flow-edge" d="M119.9 264.0C119.9 289.0 119.9 289.0 119.9 314.0" marker-end="url(#flow-2-arrow)" style="--i:5;--len:50" pathLength="50"/><circle class="flow-pulse" r="3.2" style="--i:5"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M119.9 264.0C119.9 289.0 119.9 289.0 119.9 314.0"/></circle><path class="flow-edge" d="M202.9 370.0C231.1 370.0 231.1 370.0 259.3 370.0" marker-end="url(#flow-2-arrow)" style="--i:6;--len:56" pathLength="56"/><circle class="flow-pulse" r="3.2" style="--i:6"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M202.9 370.0C231.1 370.0 231.1 370.0 259.3 370.0"/></circle><path class="flow-edge" d="M432.2 370.0C460.3 370.0 460.3 370.0 488.5 370.0" marker-end="url(#flow-2-arrow)" style="--i:7;--len:56" pathLength="56"/><circle class="flow-pulse" r="3.2" style="--i:7"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M432.2 370.0C460.3 370.0 460.3 370.0 488.5 370.0"/></circle><path class="flow-edge" d="M571.5 408.0C571.5 442.0 571.5 442.0 571.5 476.0" marker-end="url(#flow-2-arrow)" style="--i:8;--len:68" pathLength="68"/><circle class="flow-pulse" r="3.2" style="--i:8"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M571.5 408.0C571.5 442.0 571.5 442.0 571.5 476.0"/></circle><g class="flow-node" style="--i:0"><rect x="33.5" y="8.0" width="172.9" height="94.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="28.0">Wybierz opcję</tspan><tspan x="119.9" y="46.0">przechowywania danych</tspan><tspan x="119.9" y="64.0">i zabezpieczenia</tspan><tspan x="119.9" y="82.0">klucza</tspan></text></g><g class="flow-node" style="--i:1"><rect x="259.3" y="26.0" width="172.9" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="46.0">Proszę otworzyć panel</tspan><tspan x="345.7" y="64.0">za pomocą tokenu</tspan></text></g><g class="flow-node" style="--i:2"><rect x="488.5" y="26.0" width="166.0" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="46.0">Proszę wybrać obszar</tspan><tspan x="571.5" y="64.0">roboczy</tspan></text></g><g class="flow-node" style="--i:3"><rect x="495.4" y="161.0" width="152.2" height="94.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="181.0">Konfiguracja</tspan><tspan x="571.5" y="199.0">połączenia</tspan><tspan x="571.5" y="217.0">bezpośredniego lub</tspan><tspan x="571.5" y="235.0">przez serwer proxy</tspan></text></g><g class="flow-node" style="--i:4"><rect x="262.7" y="170.0" width="166.0" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="190.0">Wprowadź numer</tspan><tspan x="345.7" y="208.0">telefonu lub wybierz</tspan><tspan x="345.7" y="226.0">pliki / kod QR</tspan></text></g><g class="flow-node" style="--i:5"><rect x="40.4" y="152.0" width="159.1" height="112.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="172.0">Proszę sprawdzić</tspan><tspan x="119.9" y="190.0">tożsamość konta i</tspan><tspan x="119.9" y="208.0">wybrać grupy, do</tspan><tspan x="119.9" y="226.0">których ma Pan/Pani</tspan><tspan x="119.9" y="244.0">dostęp</tspan></text></g><g class="flow-node" style="--i:6"><rect x="36.9" y="314.0" width="166.0" height="112.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="119.9" y="334.0">Zapisz zasady</tspan><tspan x="119.9" y="352.0">dotyczące zdarzeń i</tspan><tspan x="119.9" y="370.0">załączników, a</tspan><tspan x="119.9" y="388.0">następnie rozpocznij</tspan><tspan x="119.9" y="406.0">monitorowanie</tspan></text></g><g class="flow-node" style="--i:7"><rect x="259.3" y="332.0" width="172.9" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="345.7" y="352.0">Monitorowanie błędów,</tspan><tspan x="345.7" y="370.0">dostępu, kolejek i</tspan><tspan x="345.7" y="388.0">dysku</tspan></text></g><g class="flow-node" style="--i:8"><rect x="488.5" y="332.0" width="166.0" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="352.0">Zachowanie</tspan><tspan x="571.5" y="370.0">niezależnych punktów</tspan><tspan x="571.5" y="388.0">kontrolnych</tspan></text></g><g class="flow-node" style="--i:9"><rect x="481.6" y="476.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="571.5" y="496.0">Eksportowanie i</tspan><tspan x="571.5" y="514.0">weryfikacja materiałów</tspan></text></g></svg></div><details class="flow-steps"><summary>Schemat w formie tekstowej</summary><ol><li>Wybierz opcję przechowywania danych i zabezpieczenia klucza → Proszę otworzyć panel za pomocą tokenu</li><li>Proszę otworzyć panel za pomocą tokenu → Proszę wybrać obszar roboczy</li><li>Proszę wybrać obszar roboczy → Konfiguracja połączenia bezpośredniego lub przez serwer proxy</li><li>Konfiguracja połączenia bezpośredniego lub przez serwer proxy → Wprowadź numer telefonu lub wybierz pliki / kod QR</li><li>Wprowadź numer telefonu lub wybierz pliki / kod QR → Proszę sprawdzić tożsamość konta i wybrać grupy, do których ma Pan/Pani dostęp</li><li>Proszę sprawdzić tożsamość konta i wybrać grupy, do których ma Pan/Pani dostęp → Zapisz zasady dotyczące zdarzeń i załączników, a następnie rozpocznij monitorowanie</li><li>Zapisz zasady dotyczące zdarzeń i załączników, a następnie rozpocznij monitorowanie → Monitorowanie błędów, dostępu, kolejek i dysku</li><li>Monitorowanie błędów, dostępu, kolejek i dysku → Zachowanie niezależnych punktów kontrolnych</li><li>Zachowanie niezależnych punktów kontrolnych → Eksportowanie i weryfikacja materiałów</li></ol></details></figure>
+<p>Uprawnienia, łączność sieciowa, dostęp do grupy oraz kompletność
+dostarczenia to odrębne właściwości. Zielony status połączenia nie oznacza, że wszystkie
+zdarzenia zostały zarejestrowane.</p>
+<h2 id="modes">Tryby działania<a class="anchor" href="#modes" aria-label="Link do tej sekcji">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Tryb</th>
+<th>Działanie</th>
+<th>Zachowanie</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wersja demonstracyjna</td>
+<td>scripts\Demo.cmd lub <code>--demo</code></td>
+<td>Dane syntetyczne; połączenia z prawdziwymi kontami wyłączone</td>
+</tr>
+<tr>
+<td>Uwaga</td>
+<td>Rozpocznij obserwację</td>
+<td>Rejestruj dostarczone aktualizacje dla wybranych źródeł</td>
+</tr>
+<tr>
+<td>Migawka historyczna</td>
+<td>Źródła → migawka historii</td>
+<td>Do 500 aktualnych wiadomości; brak odtwarzania wszystkich przeszłych zmian</td>
+</tr>
+<tr>
+<td>Pauza</td>
+<td>Wstrzymanie obserwacji</td>
+<td>Zatrzymanie gromadzenia danych przy jednoczesnym zachowaniu danych i zadań oczekujących w kolejce</td>
+</tr>
+<tr>
+<td>Przegląd/przekazanie</td>
+<td>Eksport</td>
+<td>Pliki ZIP, JSONL/CSV/HTML, punkty kontrolne, potwierdzenia przetworzenia oraz żądania dotyczące znaczników czasu</td>
+</tr>
+<tr>
+<td>Wiele kont</td>
+<td>Obszary robocze lub górny przycisk „<strong>+</strong>”</td>
+<td>Dowolna liczba oddzielnych obszarów roboczych w ramach jednego procesu</td>
+</tr>
+</tbody>
+</table></div>
+<p>Dostęp do lokalnej wersji demonstracyjnej otwiera się automatycznie bez konieczności ręcznego wprowadzania tokenu. Wykorzystuje on
+uprawnienie ograniczone do czasu trwania procesu, ważne wyłącznie w przypadku bezpośredniego dostępu typu loopback do izolowanej
+syntetycznej wersji demonstracyjnej; token panelu głównego nie jest ujawniany. Prawdziwe środowiska robocze oraz zdalny
+lub pośredni dostęp do wersji demonstracyjnej wymagają uwierzytelnienia za pomocą tokenu. Dostęp do wersji demonstracyjnej nie zapewnia uprawnień w aplikacji Telegram.</p>
+<h2 id="monitoring-categories">Kategorie monitorowania<a class="anchor" href="#monitoring-categories" aria-label="Link do tej sekcji">#</a></h2>
+<p><img alt="Ustawienia monitorowania dla poszczególnych kont z wykorzystaniem syntetycznych danych źródłowych" src="../../../../assets/sources.png" /></p>
+<p>W sekcji <strong>Źródła → Ustawienia przechwytywania → Wybierz zmiany do zachowania</strong> należy niezależnie zaznaczyć nowe wiadomości, edycje,
+powiadomienia o usunięciu, aktualizacje reakcji oraz zdarzenia związane z członkostwem. Ustawienie domyślne
+zachowuje wszystkie kategorie. Opcja <strong>„Wiadomości, edycje i usunięcia”</strong> zachowuje oryginalny kontekst,
+wyłączając jednocześnie oddzielne aktualizacje dotyczące reakcji i członków. Opcja <strong>„Wszystkie widoczne działania”</strong> przywraca
+wszystkie pięć kategorii. Ustawienia wstępne zmieniają formę; naciśnij <strong>„Zapisz ustawienia monitorowania”,</strong> aby zastosować zmiany.</p>
+<p>Zapisana polityka ma zastosowanie do wszystkich wybranych źródeł w danym obszarze roboczym. Pozostałe
+obszary robocze zachowują własne ustawienia. Każda faktyczna zmiana jest rejestrowana wraz z podpisanymi wartościami „przed” i „po”
+; aktualna polityka jest również uwzględniana w potwierdzeniach procesów oraz
+rekordach rozpoczęcia obserwacji. Wyłączenie kategorii nie powoduje usunięcia wcześniejszych obserwacji. Ponowne włączenie
+nie pozwala na odzyskanie pominiętych zmian. W tej wersji nie ma możliwości nadpisania kategorii na poziomie poszczególnych grup.</p>
+<p>Należy pozostawić włączoną opcję rejestrowania nowych wiadomości, gdy istotna jest wcześniejsza treść: powiadomienie o usunięciu nie pozwala
+na odzyskanie tekstu, który nigdy nie został zarejestrowany. Zapisy operacyjne/dotyczące zasięgu oraz inne zdarzenia związane z obsługą
+grup są zawsze zachowywane. Wyraźne migawki historii są oddzielone od
+wyboru kategorii na żywo i mogą zawierać komunikaty serwisowe. Te opcje nie
+ukrywają metadanych dotyczących reakcji/członków osadzonych w obiekcie Telegramu, który został w inny sposób zarejestrowany.</p>
+<p>W przypadku wstrzymania działania funkcji „migawka historii” załączniki mogą zostać umieszczone w kolejce. Należy rozpocząć obserwację, aby je przetworzyć.
+Umieszczenie w kolejce nie oznacza pobrania. Niedostępny plik oryginalny nie jest zastępowany
+nowszą, edytowaną wersją; wyniki są rejestrowane oddzielnie.</p>
+<p><strong>Funkcja „Lock”</strong> kasuje dostęp przeglądarki oraz pola tajne, ale pozostawia proces gromadzenia danych uruchomiony.
+Zamknięcie karty również nie powoduje zatrzymania procesu. Zatrzymanie procesu lub usługi w języku Python
+powoduje zatrzymanie gromadzenia danych niezależnie od stanu przeglądarki.</p>
+<p>Usunięcie dodatkowego obszaru roboczego zatrzymuje działanie jego modułu zbierającego dane i usuwa dane lokalne. Jeśli
+zablokowany plik lub błąd systemu plików przerwie proces usuwania, panel zgłasza niepowodzenie i
+utrzymuje obszar roboczy na liście jako niedostępny (<code>DeletionPending</code>). Proszę zamknąć programy korzystające z jego
+plików i ponowić próbę <strong>usunięcia</strong>. Ponowne uruchomienie TgWitness pozostawia ten obszar roboczy w stanie zatrzymanym i
+nie odtwarza częściowo usuniętego dziennika ani kluczy. Pomyślne usunięcie zostaje zarejestrowane
+dopiero po usunięciu katalogu; oddzielnie wyeksportowane lub zarchiwizowane kopie pozostają
+podlegające własnym zasadom przechowywania danych.</p>
+<h2 id="notifications">Powiadomienia<a class="anchor" href="#notifications" aria-label="Link do tej sekcji">#</a></h2>
+<p><strong>Źródła</strong> otwarte <strong>→ Powiadomienia → Alerty i codzienne podsumowanie</strong>. TgWitness wykorzystuje
+aplikację Apprise do wysyłania alertów do serwisów Matrix, Telegram, Discord, Slack, ntfy, poczty elektronicznej oraz innych
+obsługiwanych usług. Do jednego obszaru roboczego można dodać kilka miejsc docelowych.</p>
+<ol>
+<li>W każdym wierszu proszę podać jeden adres docelowy Apprise. Proszę skorzystać z
+    <a href="https://appriseit.com/services/">katalogu usług i formatów adresów URL</a> odpowiednich dla Państwa usługi.</li>
+<li>Proszę włączyć opcję <strong>„Wysyłaj powiadomienia”</strong>, a następnie wybrać alerty o problemach, zmiany w obserwowanych
+    czatach oraz codzienne podsumowanie. Godzina podsumowania jest podawana według czasu serwera.</li>
+<li>Proszę włączyć opcję <strong>„Dołącz krótkie fragmenty”,</strong> jeśli chcą Państwo, aby w powiadomieniach pojawiał się zapisany tekst z usuniętych i edytowanych
+    wiadomości.</li>
+<li>Proszę kliknąć <strong>„Zapisz powiadomienia”</strong>, a następnie <strong>„Wyślij test”,</strong> aby sprawdzić, czy wiadomość została dostarczona.</li>
+</ol>
+<p>Aby skonfigurować własny odbiornik, proszę skorzystać z <a href="https://appriseit.com/services/json/">webhooka JSON</a> firmy Apprise.
+Na przykład <code>jsons://notify.example.org/tgwitness</code> wysyła dane JSON przez protokół HTTPS do tego
+punktu końcowego. Jest to przykład fikcyjny; proszę zastąpić go własnym adresem docelowym.</p>
+<p>Miejsca docelowe i ustawienia należą do wybranego obszaru roboczego. Powiadomienia o zmianach
+obejmują obserwowane źródła, w tym nowo dodane czaty. Dzwonek na górnym pasku
+wyświetla również ostatnie problemy i zmiany w czatach.</p>
+<p>W wersji demonstracyjnej elementy sterujące powiadomieniami są widoczne, ale wysyłanie jest wyłączone. Skonfiguruj
+dostarczanie w rzeczywistym środowisku roboczym. Powiadomienia wykorzystują trasę Direct, SOCKS5 lub
+HTTP tego środowiska roboczego; MTProxy nie może ich przesyłać. Miejsca docelowe inne niż HTTP, takie jak SMTP, wymagają
+trasy bezpośredniej.</p>
+<h2 id="panel-layout">Układ panelu<a class="anchor" href="#panel-layout" aria-label="Link do tej sekcji">#</a></h2>
+<p><img alt="Środowisko robocze Connection wykorzystujące dane syntetyczne" src="../../../../assets/connection.png" /></p>
+<p><strong>Dziennik</strong> zawiera obserwacje, funkcje wyszukiwania i filtry. Edycja powoduje wyświetlenie zarejestrowanych wersji;
+usunięcie powoduje wyświetlenie poprzedniej treści, o ile jest ona dostępna. Nieznane źródła są wyraźnie zaznaczone.
+Liczby są dostępne w <strong>sekcji „Przegląd”</strong>; szczegóły dotyczące pozyskiwania danych znajdują się w lokalnym przewodniku.</p>
+<p><strong>Sekcja „Źródła”</strong> zawiera zakres monitorowania (wybrane czaty, folder w aplikacji Telegram lub całe
+konto), dostępne czaty każdego typu, wybrane źródła oznaczone gwiazdkami priorytetowymi, ustawienia dotyczące załączników
+i ponownej weryfikacji oraz migawki historii. Źródła prywatne wybiera się na podstawie dialogu/identyfikatora
+bez publicznego linku. Status dostępu opisuje wynik ostatniej weryfikacji, a nie stałe uprawnienia.</p>
+<p><strong>W sekcji „Czat” → „Osoby”</strong> wyświetlana jest lista wszystkich osób, których wiadomości zostały zapisane; jeśli w danym czacie włączono wyświetlanie profili użytkowników,
+kliknięcie otwiera profil danej osoby wraz z linkami do wpisów w dzienniku.</p>
+<p><strong>Witness</strong> tworzy tokeny świadków z prawem tylko do odczytu, pokazuje, kiedy każdy ze świadków został ostatnio sprawdzony, oraz
+udostępnia polecenia i opcje umożliwiające uruchomienie jednego (<a href="../witness/">niezależnego) świadka</a>.</p>
+<p><strong>Sekcja „Parametry”</strong> zawiera wszystkie ograniczenia i tempo działania środowiska pracy, które nie zostały omówione na innych stronach:
+liczbę odczytywanych rozmów, częstotliwość ponownego odczytu listy czatów, interwały sygnałów kontrolnych i punktów kontrolnych,
+bufor startowy, sposób rozkładania żądań podczas ponownych sprawdzeń (pierwsze opóźnienie, liczba czatów na
+przejście, przerwa między czatami, odzyskane i ponownie żądane wiadomości), rezerwa miejsca na dysku, limity czasu i
+ponowne próby pobierania, kryteria wyszukiwania profili użytkowników (w tym własne wyrażenia regularne),
+rozmiar i częstotliwość powiadomień, limity migawek, plików ZIP i pobrań w przeglądarce, a także limity czasu i
+ponowne próby klienta Telegram. Każde pole wyświetla swój zakres i wartość domyślną; zmienione pola są
+oznaczone i można je przywrócić pojedynczo lub wszystkie naraz. Każda zmiana jest rejestrowana jako
+„<code>parameters.changed</code>” wraz z wartościami przed i po zmianie, a zapisy rozpoczęcia obserwacji podają
+aktualne wartości. Wartości obowiązują od momentu ich następnego użycia; limity czasu i ponowne próby klienta – od
+następnego połączenia. Interwały ponownej weryfikacji, typy i rozmiary załączników, dowody oraz interwały tworzenia kopii poza serwisem
+pozostają na osobnych stronach i mogą przyjmować dowolną wartość z podanego zakresu, a nie tylko wartości domyślne.</p>
+<p>Dzwonek na górnym pasku wyświetla listę najnowszych problemów i zmian w obserwowanych czatach; wiadomości nieprzeczytane
+są zliczane do momentu oznaczenia ich jako przeczytane. Zmiany są pogrupowane według czatów i godzin („12 usuniętych,
+1 edytowana, 0 nieznalezionych”), a problemy, takie jak wylogowanie lub zapełnienie dysku, pozostają na liście
+niezależnie od tego, jak intensywna jest aktywność na czatach.</p>
+<p><strong>Rejestracja</strong> rozpoczyna się od pola numeru telefonu. <strong>Kontynuacja</strong> prowadzi bezpośrednio do
+wprowadzenia kodu, a o podanie danych uwierzytelniających API prosi się wyłącznie w przypadku ich braku. Kody QR i import plików to
+alternatywne zakładki. Zapisane dane uwierzytelniające API są ponownie wykorzystywane wyłącznie w ramach danego obszaru roboczego.
+Ekran rejestracji nie zawiera paska bocznego, statystyk ani sekcji konfiguracyjnych. Ikona <strong>„Ustawienia</strong>”
+otwiera opcje kontroli API, serwera proxy, pamięci oraz dodatkowych kont. Nowe instalacje
+rozpoczynają się tutaj; połączone konta bez wybranych źródeł rozpoczynają się od opcji <strong>„Wybierz czaty</strong>”.
+Zmiana ścieżki wymaga wstrzymania obserwacji i powoduje anulowanie niedokończonego logowania. Istniejącego
+dziennika nie można w sposób automatyczny powiązać z innym kontem w aplikacji Telegram.</p>
+<p><strong>Funkcja eksportu</strong> sprawdza integralność dziennika i generuje pliki przenośne. Identyfikator obszaru roboczego
+można przekazać do interfejsu wiersza poleceń (CLI) służącego do pobierania. Każdy eksport przypisuje prefiks pełnego dziennika; późniejsze
+zdarzenia trafiają do kolejnego eksportu. Filtry wyszukiwania nie zmieniają zakresu pakietu.
+Szczegółowe informacje dotyczące podpisywania i zakresu znajdują się w sekcji <strong>„Weryfikacja i ograniczenia</strong>”.</p>
+<p>Panel w sekcji „Stan kolektora” przedstawia stan kolektora, pliki multimedialne w kolejce lub z niepowodzeniem, najstarsze pliki multimedialne oczekujące, wolne
+miejsce na dysku, wstrzymania żądań oraz źródła, do których dostęp nie został potwierdzony w <strong>sekcji
+„Stan kolektora</strong>”. Szczegóły te są początkowo zwinięte i ukryte w sekcji „Konto”. Karta konfiguracji
+przedstawia kolejny krok: podłączenie konta, wybór źródeł lub rozpoczęcie monitorowania.
+Lista kont stanowi migawkę z momentu ładowania;
+wybrany obszar roboczy jest okresowo odświeżany. Nie jest to wieloprocesowy monitor SLA.</p>
+<p>Interfejs użytkownika wykorzystuje lokalne zasoby oraz renderowanie tekstu dla treści źródłowych. Przetestowano układy dla komputerów stacjonarnych oraz wąskich
+okien przeglądarki Chromium. Nie jest to pełna certyfikacja dostępności;
+ocena użyteczności dla czytników ekranu oraz dla użytkowników pozostaje odrębnym zadaniem.</p>
+<h2 id="deployment-environments">Środowiska wdrożeniowe<a class="anchor" href="#deployment-environments" aria-label="Link do tej sekcji">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Środowisko</th>
+<th>Instalacja</th>
+<th>Status weryfikacji</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Komputery PC z systemem Windows / serwery</td>
+<td>Python 3.11+, skrypty w katalogu Setup.cmd/Start.cmd, prywatny katalog danych</td>
+<td>Sprawdzono lokalnie w systemie Windows z wykorzystaniem języka Python 3.12</td>
+</tr>
+<tr>
+<td>Serwer Linux/VPS</td>
+<td>Środowisko venv w języku Python, dedykowany serwer, protokoły HTTPS/SSH</td>
+<td>Podano przykładowy kod, CI oraz systemd; nie są one uruchamiane na tym serwerze</td>
+</tr>
+<tr>
+<td>macOS</td>
+<td>Środowisko venv w języku Python, proces działający w tle lub agent użytkownika</td>
+<td>Podano przykładowy plik launchd; konieczna jest oddzielna weryfikacja instalacji</td>
+</tr>
+<tr>
+<td>Docker/Compose</td>
+<td>Stała wydajność, jeden pracownik</td>
+<td>Zawiera definicję oraz funkcję sprawdzania środowiska uruchomieniowego CI; Docker niedostępny lokalnie</td>
+</tr>
+<tr>
+<td>Przeglądarka w telefonie</td>
+<td>Proszę połączyć się z chronionym panelem na uruchomionym serwerze</td>
+<td>Przetestowano wąski układ oparty na silniku Chromium; narzędzie do gromadzenia danych nie działa na systemach iOS ani Android</td>
+</tr>
+</tbody>
+</table></div>
+<p>Przenośność oznacza brak konieczności korzystania z usługi w chmurze ani tworzenia interfejsu użytkownika. Każdy komputer docelowy nadal
+wymaga kompatybilnych zależności języka Python i bibliotek kryptograficznych, a także dostępu do dysku lokalnego i sieci. Proszę zapoznać się z
+<a href="../deployment/">plikiem DEPLOYMENT.md</a> oraz <a href="https://github.com/phishdestroy/TgWitness/blob/main/deploy/README.md">szablonami usług</a>.</p>
+<p>Środowiska robocze współdzielą procesor, pamięć oraz pętlę zdarzeń. W celu izolacji procesów należy stosować odrębne
+instancje, porty, katalogi danych oraz uprawnienia do kont. Nie istnieje ujednolicony
+panel obejmujący oddzielne instancje. Nigdy nie należy kierować kilku procesów roboczych do jednej bazy danych.</p>
+<h2 id="startup-checks-and-exports">Sprawdzanie i eksportowanie danych<a class="anchor" href="#startup-checks-and-exports" aria-label="Link do tej sekcji">#</a></h2>
+<p>Przed uruchomieniem przygotowanego środowiska należy wykonać polecenie <code>python start.py --check</code>. Należy dodać <code>--json</code>
+w celu przeprowadzenia kontroli nadających się do odczytu maszynowego lub przekazać zamierzone wartości <code>--data-dir</code>, <code>--host</code> i <code>--port</code>.
+Polecenie to sprawdza warunki wstępne bez konieczności logowania się do serwisu Telegram ani tworzenia dziennika.
+Nie weryfikuje ono dziennika ani nie potwierdza gotowości do przechwytywania danych; weryfikacja dziennika odbywa się
+podczas uruchamiania aplikacji. Zajęty port może po prostu oznaczać istniejącą instancję.</p>
+<p>Przeglądarki obsługujące interfejs API dostępu do systemu plików zapisują eksportowane dane za pośrednictwem strumienia z prawem zapisu.
+Inne przeglądarki buforują maksymalnie 128 MiB. W przypadku większych
+eksportów lub przeglądarek nieobsługujących strumieniowania plików należy skorzystać z interfejsu CLI do strumieniowania:</p>
+<pre><code class="language-sh">python -m tgwitness.download --token-file data/live/panel-token.txt --out evidence.zip</code></pre>
+<p>Proszę dodać <code>--profile ID</code>
+z sekcji „Exports” dla podprzestrzeni roboczej. W celu uzyskania zdalnego dostępu należy użyć <code>--url https://server</code>
+. Zwykły protokół HTTP jest akceptowany wyłącznie w przypadku adresów docelowych typu loopback. Token
+jest odczytywany z pliku i wysyłany w nagłówku; nie jest wyświetlany ani umieszczany w adresie URL. Przekierowania są
+odrzucane. Istniejące adresy docelowe nie są nadpisywane. W przypadku nieudanych transferów usuwany jest
+tymczasowy plik częściowy. Zgłoszony kod SHA-256 stanowi sumę kontrolną transferu; prosimy o oddzielną weryfikację podpisanego
+pliku ZIP za pomocą zaufanego odcisku palca/punktu kontrolnego.</p>
+<h2 id="backup-restore-and-interruptions">Tworzenie kopii zapasowych, przywracanie danych i przerwy w działaniu<a class="anchor" href="#backup-restore-and-interruptions" aria-label="Link do tej sekcji">#</a></h2>
+<ol>
+<li>Wstrzymaj obserwację i zakończ proces w sposób uporządkowany.</li>
+<li>Skopiuj cały katalog danych: bazy danych, pliki WAL/SHM (jeśli występują), pliki multimedialne,
+    <code>credentials.enc</code>, <code>signing.enc</code>, <code>network.enc</code>, klucze sejfu/metadane, token,
+    punkty kontrolne oraz każdy katalog <code>profiles/</code>.</li>
+<li>W trybie klucza zewnętrznego należy oddzielnie przechowywać klucz główny oraz zachować każdy klucz
+    <code>vault.external.json</code>. Wygenerowanie nowego klucza nie pozwala na odzyskanie starych tajnych danych.</li>
+<li>Proszę przywrócić dane, gdy miejsce docelowe jest zatrzymane; skonfigurować oryginalny klucz, ograniczyć
+    dostęp oraz zweryfikować integralność przed wznowieniem.</li>
+<li>Należy odnotować przerwy w działaniu oraz wyniki weryfikacji. Migawka historii nie może stanowić dowodu na to, że
+    podczas przerwy nie doszło do usunięcia żadnych wiadomości.</li>
+</ol>
+<p>Pliki ZIP z dowodami nie zawierają kluczy sesji ani kluczy prywatnych i nie stanowią pełnych kopii zapasowych serwisu.
+Cztery rodzaje danych są chronione w różny sposób:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Co</th>
+<th>Ochrona</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Eksportowanie plików bez hasła (ustawienie domyślne)</td>
+<td>Nie jest zaszyfrowany. Jest podpisany, dzięki czemu zmiany są wykrywalne, ale każdy, kto posiada ten plik, może go odczytać.</td>
+</tr>
+<tr>
+<td>Eksport plików z hasłem</td>
+<td>W przypadku ustawienia hasła gotowy plik eksportu zostanie zapisany bez zmian w formacie ZIP z szyfrowaniem AES-256 za pomocą programu WinZip, który można otworzyć za pomocą programów 7-Zip i WinRAR; hasło nie jest zapisywane (<a href="../evidence/">zgodnie z zasadami postępowania z materiałami dowodowymi</a>)</td>
+</tr>
+<tr>
+<td>Baza danych dziennika oraz załączniki zapisane na dysku</td>
+<td>Dane nie są szyfrowane przez TgWitness; prosimy o korzystanie z szyfrowanego dysku lub partycji</td>
+</tr>
+<tr>
+<td>Sesje w Telegramie i klucze podpisujące</td>
+<td>Zaszyfrowane w katalogu danych (<code>credentials.enc</code>, <code>signing.enc</code>, <code>network.enc</code>)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Pełna kopia zapasowa to opisany powyżej katalog danych zatrzymanych, a nie eksport.
+W obu przypadkach należy stosować zabezpieczoną pamięć masową oraz przemyślany mechanizm transferu. Tymczasowe eksporty serwerowe są przechowywane w katalogu
+<code>temporary-exports/</code> każdego obszaru roboczego; zakończone odpowiedzi są usuwane, a pliki przerwanych eksportów
+są usuwane przy następnym uruchomieniu, podczas gdy instancja tego obszaru roboczego pozostaje zablokowana.</p>
+<p>Przywrócenie połączenia nie gwarantuje odzyskania zmian wprowadzonych w międzyczasie.
+Trwałe zadania związane z multimediami oraz stan aktualizacji aplikacji Telegram pozostają zachowane po ponownym uruchomieniu; proszę zapoznać się z
+<a href="../evidence/#durable-collection-and-process-receipts-02">formatem dowodów</a>.</p>
+<h2 id="capacity-and-retention">Pojemność i okres przechowywania<a class="anchor" href="#capacity-and-retention" aria-label="Link do tej sekcji">#</a></h2>
+<p>Domyślne limity, które można zmienić w <strong>sekcji „Parametry</strong>”: pierwsze 1 000 rozmów, 500 wiadomości
+na zrzut, 4 GiB nieskompresowanej, podpisanej zawartości pliku ZIP (większe archiwa wymagają
+<code>verify.py --max-gib N</code>) oraz 128 MiB rezerwy dla przeglądarki. Załączniki zajmują od 1 do 2 000 MiB na
+typ w sekcji <strong>Źródła → Załączniki</strong>. Domyślna wartość dla interfejsu CLI pobierania wynosi 5 GiB przesłanych danych. Dostępna przestrzeń dyskowa może stanowić
+dolną granicę. Należy zarezerwować miejsce na dzienniki, multimedia, pliki WAL, tymczasowe eksporty oraz kopie zapasowe.
+Eksporty wykorzystują objętość danych zamiast wartości 512 MiB określonej w opcji „<code>/tmp</code>” w sekcji „Compose”.</p>
+<p>Należy mierzyć liczbę zdarzeń na sekundę, wiek kolejki, liczbę bajtów multimediów oraz opóźnienie dysku, a nie ograniczać się wyłącznie do zliczania
+grup. Syntetyczne testy porównawcze w środowisku lokalnym nie gwarantują dostarczenia wiadomości w Telegramie.
+Nie ma automatycznego usuwania danych po upływie okresu przechowywania. Usunięcie końcowej części dziennika unieważnia jego
+powiązanie z zachowanymi punktami kontrolnymi.</p>
+<p>Istnieją już priorytetowe weryfikacje: źródła oznaczone gwiazdką są domyślnie weryfikowane co 15 minut,
+pozostałe co 6 godzin (patrz <a href="../collection/#recheck-tiers">poziomy weryfikacji</a>). Dostępne są eksporty chronione hasłem,
+zgodnie z powyższym opisem. Akceptacja danych z Telegrama/proxy w czasie rzeczywistym, trwałe odtwarzanie,
+dziennik administratora i sondaż reakcji, izolowane procesy robocze, szyfrowanie lokalnego dziennika i multimediów
+przez sam program TgWitness, role użytkowników oraz niezależna weryfikacja pozostają odrębnymi obszarami prac. Proszę zapoznać się z plikami
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/READINESS.md">READINESS.md</a>, <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/LIVE_ACCEPTANCE.md">LIVE_ACCEPTANCE.md</a> oraz
+<a href="../verification/">VERIFICATION.md</a>.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/OPERATIONS.md">Edytuj tę stronę na GitHubie ↗</a><a class="next-guide" href="../investigation/"><span>Kolejny krok</span><strong>Tryb dochodzeniowy →</strong></a><p>Niniejsze wytyczne opisują aktualną implementację. Wyniki walidacji oraz pozostałe luki zostały udokumentowane oddzielnie. <a href="../verification/">Co zostało przetestowane →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Na tej stronie"><p class="nav-label">Na tej stronie</p><a href="#operator-workflow">Przebieg pracy operatora</a><a href="#modes">Tryby działania</a><a href="#monitoring-categories">Kategorie monitorowania</a><a href="#notifications">Powiadomienia</a><a href="#panel-layout">Układ panelu</a><a href="#deployment-environments">Środowiska wdrożeniowe</a><a href="#startup-checks-and-exports">Sprawdzanie i eksportowanie danych</a><a href="#backup-restore-and-interruptions">Tworzenie kopii zapasowych, przywracanie danych i przerwy w działaniu</a><a href="#capacity-and-retention">Pojemność i okres przechowywania</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Oprogramowanie typu open source · Działa na Państwa komputerze</span><a href="../../../../LICENSE">Licencja MIT</a><a href="../notice/">Informacja dla operatorów</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Bezpieczeństwo</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Oczekiwanie na wiadomość", "Step through a fictional send, edit and delete.": "Prześledź krok po kroku fikcyjny proces wysłania, edycji i usunięcia wiadomości.", "No observations yet. Start the sequence or advance one event.": "Brak dotychczasowych uwag. Rozpocznij sekwencję lub przejdź do następnego zdarzenia.", "Meet at 10:00": "Spotkanie o godz. 10:00", "A new message is visible in the chat.": "Na czacie widoczna jest nowa wiadomość.", "Record 1 appended: the collector observed the original message.": "Dodano wpis nr 1: moduł zbierający odnotował oryginalną wiadomość.", "Meet at 11:00": "Spotkanie o godz. 11:00", "The current text changes. The earlier observation stays.": "Obecny tekst ulega zmianie. Wcześniejsza uwaga pozostaje bez zmian.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Dodano wpis nr 2: edycja stanowi nową obserwację. Wpis nr 1 nadal zawiera tekst oryginalny.", "Message deleted": "Wiadomość usunięta", "The message has disappeared from the chat view.": "Wiadomość zniknęła z widoku czatu.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Załączono zapis nr 3: powiadomienie o usunięciu jest zachowywane wraz z obiema zaobserwowanymi wersjami.", "0 records": "0 wpisów", "1 record": "1 wpis", "2 records": "2 wpisy", "3 records": "3 wpisy", "Complete / {n} of 3": "Całość / {n} z 3", "Step / {n} of 3": "Krok / {n} z 3", "Pause": "Pauza", "Replay sequence": "Sekwencja odtwarzania", "Play sequence": "Sekwencja odtwarzania", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Dostępny jest statyczny przykład. Aby obliczać skróty w trybie interaktywnym, proszę otworzyć tę stronę za pośrednictwem protokołu HTTPS lub w podglądzie na lokalnym serwerze z obsługą Web Crypto.", "No record supplied": "Brak dostarczonego zapisu", "Tail removed": "Usunięto końcówkę", "≠ saved hash": "≠ zapisany skrót", "Rebuilt · different hash": "Przebudowana wersja · inny skrót", "= saved hash": "= zapisany skrót", "Same length and matching head.": "Ta sama długość i dopasowany nagłówek.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Wszystkie trzy obliczone skróty są zgodne z zapisanymi skrótami. Niniejszy przykład jest zgodny z zachowanym ograniczeniem do trzech rekordów.", "Same saved head; the journal prefix fails verification.": "Ten sam zapisany nagłówek; prefiks dziennika nie przeszedł weryfikacji.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Rekord nr 2 nie jest już zgodny ze swoim zapisanym skrótem. Sprawdzanie wyłącznie końcowego, zapisanego nagłówka nie pozwoliłoby tego wykryć; weryfikator sprawdza każdy rekord.", "Head differs from the retained checkpoint.": "Nagłówek różni się od zachowanego punktu kontrolnego.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Odbudowane skróty są ze sobą powiązane, ale ostatni nagłówek uległ zmianie. Zachowany punkt kontrolny odrzuca tę historię. Oryginalne podpisy również nie zostałyby uznane w przypadku zmienionych wpisów.", "Too short: 2 supplied records \u003c 3 retained records.": "Zbyt krótki: 2 dostarczone zapisy \u003c 3 zachowane zapisy.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Dwa pozostałe skróty nadal są zgodne. Zachowany punkt kontrolny ujawnia brakujący fragment. Bez tej wcześniejszej granicy sam ten krótszy prefiks nie ujawniłby pominięcia.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "W tej przeglądarce nie jest dostępna funkcja obliczania skrótu. Poniższe wzory i statyczne objaśnienia pozostają dostępne.", "{n} records": "{n} wpisów", "head {hash}": "nagłówek {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Zatwierdzono: liczba wzrasta, podpis został zweryfikowany, a klucz jest zgodny. Świadek zachowuje tę nową granicę.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Cofnięcie: podpisana odpowiedź zawiera mniej rekordów niż ostatni zaakceptowany punkt kontrolny. System TgWitness rejestruje problem i zachowuje wcześniej zaakceptowany zakres danych.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Rozgałęzienie: liczba pozostaje niezmieniona, ale gałąź główna jest inna. Świadek odnotowuje rozbieżność i zachowuje wcześniej zaakceptowaną granicę.", "No answer": "Brak odpowiedzi", "boundary unknown": "granica nieznana", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Brak odpowiedzi: narzędzie TgWitness rejestruje nieudaną weryfikację. Nie jest w stanie określić aktualnego stanu kolektora. Jeśli narzędzie TgWitness nadal ma dostęp do interfejsu API bota, a jego polityka publikacji na to pozwala, może opublikować informację o tej niepowodzeniu.", "Send {n}": "Wyślij {n}", "Edit {n}": "Edytuj {n}", "Delete {n}": "Usuń {n}", "Both accounts captured all six expected observations in this example.": "W tym przykładzie oba opisy uwzględniły wszystkie sześć oczekiwanych obserwacji.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Konto B nadal zarejestrowało 6 z 6 wiadomości. W przypadku dwóch potwierdzeń zajęło to więcej czasu. Wskaźnik przechwycenia i opóźnienie w otrzymaniu potwierdzenia odpowiadają na różne pytania.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Konto B zarejestrowało 5 z 6 zdarzeń przed upływem terminu (83,3%). Brakująca edycja nie wykazuje żadnego zmierzonego opóźnienia. Wynik ten odnosi się wyłącznie do sześciu kontrolowanych działań.", "not observed by cutoff": "nie spełniono wymogu przed upływem terminu", "{s} seconds": "{s} sekund", "Exact values follow in the table.": "Dokładne wartości podano w tabeli.", "{s} s": "{s} s", "Not observed": "Nie zaobserwowano", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Cztery czaty zawierają różne spostrzeżenia. Należy śledzić zapisy źródłowe dla każdego połączenia; nie należy przypisywać wpisu na kanale do użytkownika 71001 bez podania nadawcy.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Zapisy nr 146 i nr 205 zawierają ten sam identyfikator nadawcy: 71001. Pozwala to powiązać zaobserwowane posty z konta Telegram w dwóch różnych czatach. Nie pozwala to jednak na identyfikację konkretnej osoby w świecie rzeczywistym ani na przypisanie autorstwa postu opublikowanego na kanale.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Adres docelowy pay.example.invalid/new pojawia się w zapisie grupy nr 146, wpisie z klawiatury bota nr 173, edycji kanału nr 188 oraz prywatnej wiadomości nr 205. Powtarzający się adres docelowy łączy te materiały; nie dowodzi to jednak wspólnej kontroli nad tymi kontami.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "W tej fikcyjnej sprawie potwierdzenia odbioru multimediów nr 151 i nr 209 mają identyczne pełne wartości SHA-256. Proszę porównać rzeczywiste bajty oraz powiązane z nimi zapisy wiadomości. Zgodny plik nie pozwala zidentyfikować jego twórcy ani ustalić, kto go przesłał.", "the encrypted off-site copy": "zaszyfrowana kopia przechowywana poza serwerem", "notifications": "powiadomienia", "checkpoint hashes for timestamps": "Skróty kontrolne jako znaczniki czasu", "signed checkpoints for the witness": "podpisane punkty kontrolne dla serwisu Witness", "Switched on in this example": "W tym przykładzie włączono tę opcję", "Optional · off by default": "Opcjonalne · domyślnie wyłączone", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Opuszczając to urządzenie: połączenie z Telegramem oraz {list}. Nic więcej.", "Default: only the Telegram connection leaves this machine.": "Ustawienie domyślne: z tego urządzenia wychodzi wyłącznie połączenie z serwisem Telegram.", "{done} of {total} done": "{done} z {total} wykonano", "Mark step {n} as done": "Oznacz krok {n} jako wykonany", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Kopia", "Copied": "Skopiowano", "Command copied.": "Polecenie skopiowano.", "Selected — Ctrl/Cmd+C": "Zaznaczone — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Wybrano polecenie. Proszę skopiować je ręcznie.", "Command copied to clipboard.": "Polecenie skopiowano do schowka.", "Select text": "Zaznacz tekst", "Clipboard unavailable. Command selected; copy it manually.": "Schowek jest niedostępny. Wybrano polecenie; proszę skopiować je ręcznie.", "A message arrives. The first observation is saved.": "Przychodzi wiadomość. Pierwsza obserwacja zostaje zapisana.", "The time changes. Both captured versions stay.": "Czas ulega zmianie. Obie zarejestrowane wersje pozostają zachowane.", "The message disappears. The captured history remains.": "Wiadomość znika. Zachowana historia pozostaje.", "Pause example animation": "Przykładowa animacja z pauzą", "Play example animation": "Odtwórz przykładową animację", "Play": "Odtwórz", "Full-size workspace screenshot": "Zrzut ekranu przedstawiający obszar roboczy w pełnym rozmiarze", "Workspace screenshot · fictional data": "Zrzut ekranu z obszaru roboczego · dane fikcyjne", "Close": "Zamknij", "Close screenshot": "Zamknij zrzut ekranu", "Scrollable full-size screenshot": "Przewijalny zrzut ekranu w pełnym rozmiarze", "Enlarge: {name}": "Powiększ: {name}", "View full size": "Wyświetl w pełnym rozmiarze"}</script>
+</body></html>
