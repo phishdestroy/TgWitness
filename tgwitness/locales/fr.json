@@ -3213,7 +3213,6 @@
 "The GitHub token is kept by the main workspace.": "Le jeton GitHub est conservé par l’espace de travail principal.",
 "A list may have at most 1 MiB.": "Une liste ne peut pas dépasser 1 MiB.",
 "Remove a list first: at most 40 own lists.": "Supprimez d’abord une liste : 40 listes personnelles au maximum.",
-"No compatible MTProxy links were found in this list.": "Aucun lien MTProxy compatible n’a été trouvé dans cette liste.",
 "The same list is added twice.": "La même liste a été ajoutée deux fois.",
 "Use an https:// address without credentials.": "Utilisez une adresse https:// sans identifiants.",
 "A list address is required.": "Une adresse de liste est requise.",
@@ -3779,5 +3778,12 @@
 "one": "{n} espace de travail mis en pause.",
 "other": "{n} espaces de travail ont été mis en pause."
 },
-"{n} workspace paused.": "{n} espace de travail mis en pause."
+"{n} workspace paused.": "{n} espace de travail mis en pause.",
+"Set a proxy for these requests": "Configurer un proxy pour ces requêtes",
+"No compatible MTProxy links were found in this list. Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "Aucun lien MTProxy compatible n’a été trouvé dans cette liste. Les liens « Fake TLS » (clé commençant par « ee »), les adresses privées et les liens erronés ne sont pas pris en charge.",
+"{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
+"one": "{n} lien ignoré : les liens « Fake TLS » (clé secrète commençant par « ee »), les adresses privées et les liens erronés ne sont pas pris en charge.",
+"other": "{n} liens ignorés : les liens « Fake TLS » (clé secrète commençant par « ee »), les adresses privées et les liens erronés ne sont pas pris en charge."
+},
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} lien ignoré : les liens « Fake TLS » (clé secrète commençant par « ee »), les adresses privées et les liens erronés ne sont pas pris en charge."
 }

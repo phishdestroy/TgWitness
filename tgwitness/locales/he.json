@@ -3236,7 +3236,6 @@
 "The GitHub token is kept by the main workspace.": "אסימון GitHub נשמר בסביבת העבודה הראשית.",
 "A list may have at most 1 MiB.": "רשימה יכולה להכיל עד 1 MiB לכל היותר.",
 "Remove a list first: at most 40 own lists.": "יש להסיר רשימה תחילה: עד 40 רשימות משלך לכל היותר.",
-"No compatible MTProxy links were found in this list.": "לא נמצאו קישורי MTProxy תואמים ברשימה זו.",
 "The same list is added twice.": "אותה רשימה מתווספת פעמיים.",
 "Use an https:// address without credentials.": "יש להשתמש בכתובת https:// ללא פרטי התחברות.",
 "A list address is required.": "יש צורך בכתובת רשימה.",
@@ -3805,5 +3804,13 @@
 "other": "{n} סביבות עבודה הושעו.",
 "two": "{n} סביבות עבודה הושעו."
 },
-"{n} workspace paused.": "סביבת עבודה אחת הושעתה.{n}"
+"{n} workspace paused.": "סביבת עבודה אחת הושעתה.{n}",
+"Set a proxy for these requests": "הגדר פרוקסי לבקשות אלה",
+"No compatible MTProxy links were found in this list. Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "לא נמצאו קישורי MTProxy תואמים ברשימה זו. קישורי Fake TLS (מפתח סודי המתחיל ב-ee), כתובות פרטיות וקישורים פגומים אינם נתמכים.",
+"{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
+"one": "קישור אחד {n} שהושמט: קישורי Fake TLS (סוד המתחיל ב-ee), כתובות פרטיות וקישורים פגומים אינם נתמכים.",
+"other": "{n} קישורים שהושמטו: קישורי Fake TLS (סוד שמתחיל ב-ee), כתובות פרטיות וקישורים פגומים אינם נתמכים.",
+"two": "{n} קישורים שלא נכללו: קישורי Fake TLS (סוד שמתחיל ב-ee), כתובות פרטיות וקישורים פגומים אינם נתמכים."
+},
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "קישור אחד {n} שהושמט: קישורי Fake TLS (סוד המתחיל ב-ee), כתובות פרטיות וקישורים פגומים אינם נתמכים."
 }

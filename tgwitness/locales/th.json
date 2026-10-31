@@ -3190,7 +3190,6 @@
 "The GitHub token is kept by the main workspace.": "โทเค็น GitHub จะถูกเก็บรักษาโดยพื้นที่ทำงานหลัก",
 "A list may have at most 1 MiB.": "รายการหนึ่งอาจมีขนาดสูงสุด 1 MiB",
 "Remove a list first: at most 40 own lists.": "ลบรายชื่อก่อน: สามารถเก็บรายชื่อของตัวเองได้สูงสุด 40 รายชื่อ",
-"No compatible MTProxy links were found in this list.": "ไม่พบลิงก์ MTProxy ที่เข้ากันได้ในรายชื่อนี้",
 "The same list is added twice.": "รายชื่อเดียวกันถูกเพิ่มเข้าไปสองครั้ง",
 "Use an https:// address without credentials.": "ใช้ที่อยู่ https:// โดยไม่ต้องใส่ข้อมูลรับรอง",
 "A list address is required.": "จำเป็นต้องมีที่อยู่ของรายชื่อ",
@@ -3753,5 +3752,11 @@
 "{n} workspaces paused.": {
 "other": "พื้นที่ทำงาน {n} แห่งถูกหยุดชั่วคราว"
 },
-"{n} workspace paused.": "พื้นที่ทำงาน {n} แห่งถูกหยุดชั่วคราว"
+"{n} workspace paused.": "พื้นที่ทำงาน {n} แห่งถูกหยุดชั่วคราว",
+"Set a proxy for these requests": "ตั้งพร็อกซีสำหรับคำขอเหล่านี้",
+"No compatible MTProxy links were found in this list. Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "ไม่พบลิงก์ MTProxy ที่เข้ากันได้ในรายการนี้ ลิงก์ Fake TLS (รหัสลับที่เริ่มต้นด้วย ee) ที่อยู่เครือข่ายส่วนตัว และลิงก์ที่ผิดรูปแบบ ไม่ได้รับการสนับสนุน",
+"{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
+"other": "มีลิงก์ {n} ลิงก์ที่ถูกยกเว้น: ลิงก์ Fake TLS (รหัสลับที่เริ่มต้นด้วย ee), ที่อยู่เครือข่ายส่วนตัว และลิงก์ที่ผิดรูปแบบ ไม่ได้รับการสนับสนุน"
+},
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "มีลิงก์ {n} ลิงก์ที่ถูกยกเว้น: ลิงก์ Fake TLS (รหัสลับที่เริ่มต้นด้วย ee), ที่อยู่เครือข่ายส่วนตัว และลิงก์ที่ผิดรูปแบบ ไม่ได้รับการสนับสนุน"
 }

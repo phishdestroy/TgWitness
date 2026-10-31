@@ -57,7 +57,6 @@ MAX_BYTES = 1024 * 1024
 MAX_PER_SOURCE = 400
 MAX_LARGE_SOURCE = 2000  # uploaded lists and the GitHub search collect from many files
 REFRESH_SECONDS = 60
-CATALOG_SECONDS = 60  # a list file edited outside the panel shows within this time
 FEED_SECONDS = 3600
 PROBE_SECONDS = 600
 PROBE_TIMEOUT = 8
@@ -192,8 +191,18 @@ async def download(source, network):
     return body.decode("utf-8-sig")
 
 
+def signature(path):
+    try:
+        stat = path.stat()
+    except OSError:
+        return None
+    return stat.st_mtime_ns, stat.st_size
+
+
 def read_snapshot(path, known=None):
-    if path.stat().st_size > 8 * MAX_BYTES:
+    # Room for every list at its download limit: a larger file would be read as missing, and the next
+    # save would rebuild it from the bundled lists without the operator's own
+    if path.stat().st_size > (len(SOURCES) + proxy_sources.MAX_CUSTOM + 1) * 2 * MAX_BYTES:
         raise ValueError
     data = json.loads(path.read_text(encoding="utf-8"))
     if (not isinstance(data, dict) or data.get("format") != FORMAT
@@ -233,11 +242,11 @@ class PublicCatalog:
         self.countries = proxy_sources.Countries(self.root)
         # Every status read of every workspace describes the pool: parsing the lists each time held
         # the event loop for tens of milliseconds per workspace
-        self.parsed = None
+        self.parsed, self.revision = None, 0
 
     def changed(self):
         """Parse the lists again on the next read: a list, a source setting or the token changed."""
-        self.parsed = None
+        self.revision += 1
 
     def settings(self):
         return proxy_sources.load(self.root)
@@ -276,8 +285,9 @@ class PublicCatalog:
         configured, entries = operator_catalog()
         if configured:
             return {"configured": True, "mode": "operator", "sources": [], "proxies": entries}
-        if self.parsed is None or time.monotonic() - self.parsed[0] >= CATALOG_SECONDS:
-            self.parsed = time.monotonic(), self.parse()
+        key = self.revision, signature(self.cache), signature(self.root / proxy_sources.SETTINGS)
+        if self.parsed is None or self.parsed[0] != key:
+            self.parsed = key, self.parse()
         catalog = self.parsed[1]
         return {**catalog, "sources": [dict(source) for source in catalog["sources"]],
                 "proxies": list(catalog["proxies"]),
@@ -379,7 +389,7 @@ class PublicCatalog:
         item.id = proxy_sources.source_id("list", item.label + str(time.time_ns()))
         entry = source_data({"id": item.id}, links_in(text), datetime.now(timezone.utc).isoformat(timespec="seconds"))
         if not entry["proxies"]:
-            raise ValueError("No compatible MTProxy links were found in this list.")
+            raise ValueError("No compatible MTProxy links were found in this list. Fake TLS links (secret starting with ee), private addresses and broken links are not supported.")
         settings.custom.append(item)
         proxy_sources.save(self.root, settings)
         self.changed()
@@ -402,7 +412,7 @@ class PublicCatalog:
             with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=self.cache.parent,
                                              prefix=".public-proxies-", suffix=".tmp", delete=False) as stream:
                 temporary = Path(stream.name)
-                json.dump(snapshot, stream, ensure_ascii=False, indent=2)
+                json.dump(snapshot, stream, ensure_ascii=False, separators=(",", ":"))
                 stream.write("\n")
                 stream.flush()
                 os.fsync(stream.fileno())
@@ -613,25 +623,30 @@ class ProxyPool:
                 if route:
                     self.assigned[owner] = current
                     return current, route
-            candidates = self.order(owner, list(entries), set(avoid), now, share, ranks)[:PICK_LIMIT]
-            for alias in [a for a in candidates if self.healthy(a, now)][:PICK_BATCH]:
-                route = await self.check(alias, entries[alias], operator, quick=True)
-                if route:
-                    self.assigned[owner] = alias
-                    return alias, route
-            untested = [a for a in candidates if not self.healthy(a, now)]
-            for start in range(0, len(untested), PICK_BATCH):
-                batch = untested[start:start + PICK_BATCH]
-                routes = await asyncio.gather(*(self.check(a, entries[a], operator) for a in batch))
-                found = sorted((self.health[a]["latency_ms"], number, a, r)
-                               for number, (a, r) in enumerate(zip(batch, routes)) if r)
-                if found:
-                    _, _, alias, route = found[0]
-                    self.assigned[owner] = alias
-                    return alias, route
+            ordered = self.order(owner, list(entries), set(avoid), now, share, ranks)
+            # Preferred countries first; when none of them answers the others are tried, each group with
+            # its own window, so unanswered preferred servers cannot crowd out working ones
+            for rank in sorted({ranks[a] for a in ordered}):
+                candidates = [a for a in ordered if ranks[a] == rank]
+                for alias in [a for a in candidates if self.healthy(a, now)][:PICK_BATCH]:
+                    route = await self.check(alias, entries[alias], operator, quick=True)
+                    if route:
+                        self.assigned[owner] = alias
+                        return alias, route
+                untested = [a for a in candidates if not self.healthy(a, now)][:PICK_LIMIT]
+                for start in range(0, len(untested), PICK_BATCH):
+                    batch = untested[start:start + PICK_BATCH]
+                    routes = await asyncio.gather(*(self.check(a, entries[a], operator) for a in batch))
+                    found = sorted((self.health[a]["latency_ms"], number, a, r)
+                                   for number, (a, r) in enumerate(zip(batch, routes)) if r)
+                    if found:
+                        _, _, alias, route = found[0]
+                        self.assigned[owner] = alias
+                        return alias, route
             self.assigned.pop(owner, None)
-            self.exhausted = True
-            self.wakeup.set()
+            if ranks:  # a country choice that allows no listed server is not helped by checking them again
+                self.exhausted = True
+                self.wakeup.set()
             if not ranks and entries:
                 raise NoProxyAvailable("No listed MTProxy is in an allowed country.")
             raise NoProxyAvailable("No listed MTProxy answered.")
@@ -702,7 +717,8 @@ class ProxyPool:
         async def one(alias):
             async with gate:
                 await self.check(alias, entries[alias], operator)
-        await asyncio.gather(*(one(a) for a in entries if not self.resting(a, now)))
+        allowed = self.country_ranks(entries)
+        await asyncio.gather(*(one(a) for a in entries if a in allowed and not self.resting(a, now)))
         for alias in set(self.health) - set(entries):
             del self.health[alias]
         self.exhausted = False

@@ -3213,7 +3213,6 @@
 "The GitHub token is kept by the main workspace.": "O token do GitHub é mantido pelo espaço de trabalho principal.",
 "A list may have at most 1 MiB.": "Uma lista pode ter, no máximo, 1 MiB.",
 "Remove a list first: at most 40 own lists.": "Remova uma lista primeiro: no máximo 40 listas próprias.",
-"No compatible MTProxy links were found in this list.": "Não foram encontrados links compatíveis com o MTProxy nesta lista.",
 "The same list is added twice.": "A mesma lista foi adicionada duas vezes.",
 "Use an https:// address without credentials.": "Utilize um endereço https:// sem credenciais.",
 "A list address is required.": "É necessário um endereço de lista.",
@@ -3779,5 +3778,12 @@
 "one": "{n} espaço de trabalho foi pausado.",
 "other": "{n} espaços de trabalho foram pausados."
 },
-"{n} workspace paused.": "{n} espaço de trabalho foi pausado."
+"{n} workspace paused.": "{n} espaço de trabalho foi pausado.",
+"Set a proxy for these requests": "Definir um proxy para essas solicitações",
+"No compatible MTProxy links were found in this list. Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "Não foram encontrados links MTProxy compatíveis nesta lista. Links TLS falsos (chave que começa com “ee”), endereços privados e links inválidos não são suportados.",
+"{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
+"one": "{n} link excluído: links de TLS falso (chave secreta que começa com “ee”), endereços privados e links inválidos não são suportados.",
+"other": "{n} links excluídos: links de TLS falso (chave secreta começando com “ee”), endereços privados e links inválidos não são suportados."
+},
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} link excluído: links de TLS falso (chave secreta que começa com “ee”), endereços privados e links inválidos não são suportados."
 }

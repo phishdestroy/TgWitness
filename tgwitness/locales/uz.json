@@ -3213,7 +3213,6 @@
 "The GitHub token is kept by the main workspace.": "GitHub tokeni asosiy ish maydoni tomonidan saqlanadi.",
 "A list may have at most 1 MiB.": "Ro'yxatda ko'pi bilan 1 MiB bo'lishi mumkin.",
 "Remove a list first: at most 40 own lists.": "Avvalo ro'yxatni o'chirib tashlang: eng ko'pi bilan 40 ta o'z ro'yxatlar.",
-"No compatible MTProxy links were found in this list.": "Ushbu ro'yxatda mos keladigan MTProxy havolalari topilmadi.",
 "The same list is added twice.": "Bir xil ro'yxat ikki marta qo'shilgan.",
 "Use an https:// address without credentials.": "https:// manzilini parol va foydalanuvchi nomi ko'rsatmasdan ishlating.",
 "A list address is required.": "Ro'yxat manzili talab etiladi.",
@@ -3779,5 +3778,12 @@
 "one": "{n} ta ish maydoni to'xtatildi.",
 "other": "{n} ta ish maydoni to'xtatildi."
 },
-"{n} workspace paused.": "{n} ta ish maydoni to'xtatildi."
+"{n} workspace paused.": "{n} ta ish maydoni to'xtatildi.",
+"Set a proxy for these requests": "Ushbu so'rovlar uchun proksini o'rnating",
+"No compatible MTProxy links were found in this list. Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "Ushbu ro'yxatda mos keladigan MTProxy havolalari topilmadi. Fake TLS havolalari (sir \"ee\" harfi bilan boshlanadigan), xususiy manzillar va buzilgan havolalar qo'llab-quvvatlanmaydi.",
+"{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
+"one": "{n} ta havola e'tibordan qoldirildi: Fake TLS havolalari (sir \"ee\" bilan boshlanadigan), xususiy manzillar va buzilgan havolalar qo'llab-quvvatlanmaydi.",
+"other": "{n} ta havola chiqarib tashlandi: Fake TLS havolalari (sir ee harfi bilan boshlanadi), shaxsiy manzillar va buzilgan havolalar qo'llab-quvvatlanmaydi."
+},
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} ta havola e'tibordan qoldirildi: Fake TLS havolalari (sir \"ee\" bilan boshlanadigan), xususiy manzillar va buzilgan havolalar qo'llab-quvvatlanmaydi."
 }

@@ -3213,7 +3213,6 @@
 "The GitHub token is kept by the main workspace.": "El token de GitHub lo conserva el espacio de trabajo principal.",
 "A list may have at most 1 MiB.": "Una lista puede tener un máximo de 1 MiB.",
 "Remove a list first: at most 40 own lists.": "Elimine primero una lista: un máximo de 40 listas propias.",
-"No compatible MTProxy links were found in this list.": "No se han encontrado enlaces MTProxy compatibles en esta lista.",
 "The same list is added twice.": "Se ha añadido la misma lista dos veces.",
 "Use an https:// address without credentials.": "Utilice una dirección https:// sin credenciales.",
 "A list address is required.": "Se requiere una dirección de lista.",
@@ -3779,5 +3778,12 @@
 "one": "Se ha pausado {n} espacio de trabajo.",
 "other": "Se han pausado {n} espacios de trabajo."
 },
-"{n} workspace paused.": "Se ha pausado {n} espacio de trabajo."
+"{n} workspace paused.": "Se ha pausado {n} espacio de trabajo.",
+"Set a proxy for these requests": "Establecer un proxy para estas solicitudes",
+"No compatible MTProxy links were found in this list. Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "No se han encontrado enlaces MTProxy compatibles en esta lista. No se admiten enlaces TLS falsos (clave que comienza por «ee»), direcciones privadas ni enlaces erróneos.",
+"{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
+"one": "Se ha omitido {n} enlace: no se admiten enlaces TLS falsos (clave que comienza por «ee»), direcciones privadas ni enlaces erróneos.",
+"other": "Se han omitido {n} enlaces: no se admiten los enlaces «Fake TLS» (clave que comienza por «ee»), las direcciones privadas ni los enlaces erróneos."
+},
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "Se ha omitido {n} enlace: no se admiten enlaces TLS falsos (clave que comienza por «ee»), direcciones privadas ni enlaces erróneos."
 }

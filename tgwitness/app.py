@@ -1000,6 +1000,15 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             return await app.state.collector.set_network(route)
         return await operation(apply)
 
+    def lists_updated_at(sources):
+        """When the newest list in use was actually downloaded; a blocked or failed attempt changes nothing."""
+        stamps = []
+        for source in sources:
+            with suppress(TypeError, ValueError):
+                if source.get("enabled") and source.get("fetched_at"):
+                    stamps.append(datetime.fromisoformat(source["fetched_at"]).timestamp())
+        return max(stamps, default=None)
+
     def proxy_view(principal=None):
         """The shared automatic pool as the panel shows it: every server, its check and its users."""
         catalog = shared_pool.catalog
@@ -1009,6 +1018,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             if entry.get("app") is not None and (principal is None or principal.opens(entry["id"])):
                 labels[str(entry["app"].state.store.root)] = entry["label"]
         rows, settings, intervals = shared_pool.table(labels), catalog.settings(), shared_pool.intervals()
+        sources = catalog.public()["sources"]
         latencies = sorted(r["latency_ms"] for r in rows if r["latency_ms"])
         return {"rows": rows, "summary": {
                     "listed": len(rows), "ok": sum(r["status"] == "ok" for r in rows),
@@ -1019,8 +1029,8 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                     "countries": len({r["country"] for r in rows if r["country"]}),
                     "checked_at": shared_pool.probed_at or None, "checking": shared_pool.check_task is not None},
                 "schedule": {"lists_minutes": round(intervals["lists"] / 60), "probe_minutes": round(intervals["probe"] / 60),
-                             "lists_at": shared_pool.refreshed_at or None},
-                "sources": catalog.public()["sources"],
+                             "lists_at": lists_updated_at(sources)},
+                "sources": sources,
                 "settings": {**settings.model_dump(), "github_token": bool(catalog.github_token()),
                              "github_status": catalog.github_status},
                 **download_route()}

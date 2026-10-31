@@ -3190,7 +3190,6 @@
 "The GitHub token is kept by the main workspace.": "GitHub 憑證由主工作區保管。",
 "A list may have at most 1 MiB.": "每個清單的大小上限為 1 MiB。",
 "Remove a list first: at most 40 own lists.": "請先移除清單：最多可保留 40 份自訂清單。",
-"No compatible MTProxy links were found in this list.": "在此清單中未找到相容的 MTProxy 連結。",
 "The same list is added twice.": "同一份清單被重複新增了兩次。",
 "Use an https:// address without credentials.": "請使用無需憑證的 https:// 網址。",
 "A list address is required.": "必須提供清單網址。",
@@ -3753,5 +3752,11 @@
 "{n} workspaces paused.": {
 "other": "{n} 個工作區已暫停。"
 },
-"{n} workspace paused.": "{n} 個工作區已暫停。"
+"{n} workspace paused.": "{n} 個工作區已暫停。",
+"Set a proxy for these requests": "為這些請求設定代理",
+"No compatible MTProxy links were found in this list. Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "在此清單中未找到相容的 MTProxy 連結。不支援偽 TLS 連結（密鑰以 ee 開頭）、私有網址及損壞的連結。",
+"{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
+"other": "{n} 個連結未被納入：不支援偽 TLS 連結（密鑰以 ee 開頭）、私有網段位址及格式錯誤的連結。"
+},
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} 個連結未被納入：不支援偽 TLS 連結（密鑰以 ee 開頭）、私有網段位址及格式錯誤的連結。"
 }

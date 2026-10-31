@@ -3213,7 +3213,6 @@
 "The GitHub token is kept by the main workspace.": "Das GitHub-Token wird vom Hauptarbeitsbereich verwaltet.",
 "A list may have at most 1 MiB.": "Eine Liste darf maximal 1 MiB umfassen.",
 "Remove a list first: at most 40 own lists.": "Entfernen Sie zunächst eine Liste: maximal 40 eigene Listen.",
-"No compatible MTProxy links were found in this list.": "In dieser Liste wurden keine kompatiblen MTProxy-Links gefunden.",
 "The same list is added twice.": "Die gleiche Liste wurde zweimal hinzugefügt.",
 "Use an https:// address without credentials.": "Verwenden Sie eine Adresse vom Typ „https://“ ohne Anmeldedaten.",
 "A list address is required.": "Eine Listenadresse ist erforderlich.",
@@ -3779,5 +3778,12 @@
 "one": "{n} Arbeitsbereich wurde angehalten.",
 "other": "{n} Arbeitsbereiche wurden angehalten."
 },
-"{n} workspace paused.": "{n} Arbeitsbereich wurde angehalten."
+"{n} workspace paused.": "{n} Arbeitsbereich wurde angehalten.",
+"Set a proxy for these requests": "Proxy für diese Anfragen einrichten",
+"No compatible MTProxy links were found in this list. Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "In dieser Liste wurden keine kompatiblen MTProxy-Links gefunden. Fake-TLS-Links (Geheimcode beginnend mit „ee“), private Adressen und fehlerhafte Links werden nicht unterstützt.",
+"{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
+"one": "{n} Link wurde ausgelassen: Fake-TLS-Links (Geheimcode beginnt mit „ee“), private Adressen und fehlerhafte Links werden nicht unterstützt.",
+"other": "{n} Links wurden ausgelassen: Fake-TLS-Links (Geheimcode beginnt mit „ee“), private Adressen und fehlerhafte Links werden nicht unterstützt."
+},
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} Link wurde ausgelassen: Fake-TLS-Links (Geheimcode beginnt mit „ee“), private Adressen und fehlerhafte Links werden nicht unterstützt."
 }

@@ -3190,7 +3190,6 @@
 "The GitHub token is kept by the main workspace.": "GitHub 令牌由主工作区保管。",
 "A list may have at most 1 MiB.": "一个列表的最大容量为 1 MiB。",
 "Remove a list first: at most 40 own lists.": "请先删除列表：最多可保留 40 个自有列表。",
-"No compatible MTProxy links were found in this list.": "在此列表中未找到兼容的 MTProxy 链接。",
 "The same list is added twice.": "同一列表被添加了两次。",
 "Use an https:// address without credentials.": "请使用不带凭据的 https:// 地址。",
 "A list address is required.": "需要提供列表地址。",
@@ -3753,5 +3752,11 @@
 "{n} workspaces paused.": {
 "other": "{n} 个工作区已暂停。"
 },
-"{n} workspace paused.": "{n} 个工作区已暂停。"
+"{n} workspace paused.": "{n} 个工作区已暂停。",
+"Set a proxy for these requests": "为这些请求设置代理",
+"No compatible MTProxy links were found in this list. Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "未在此列表中找到兼容的 MTProxy 链接。不支持伪 TLS 链接（密钥以 ee 开头）、私有地址和无效链接。",
+"{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
+"other": "{n} 个被排除的链接：不支持伪 TLS 链接（密钥以 ee 开头）、私有地址和无效链接。"
+},
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} 个被排除的链接：不支持伪 TLS 链接（密钥以 ee 开头）、私有地址和无效链接。"
 }

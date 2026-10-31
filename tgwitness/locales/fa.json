@@ -3213,7 +3213,6 @@
 "The GitHub token is kept by the main workspace.": "توکن گیت‌هاب توسط فضای کاری اصلی نگهداری می‌شود.",
 "A list may have at most 1 MiB.": "یک لیست می‌تواند حداکثر ۱ مگابایت (MiB) داشته باشد.",
 "Remove a list first: at most 40 own lists.": "ابتدا یک لیست را حذف کنید: حداکثر ۴۰ لیست شخصی.",
-"No compatible MTProxy links were found in this list.": "در این لیست هیچ لینک MTProxy سازگاری یافت نشد.",
 "The same list is added twice.": "همان لیست دو بار اضافه شده است.",
 "Use an https:// address without credentials.": "از یک آدرس https:// بدون اعتبارنامه استفاده کنید.",
 "A list address is required.": "یک آدرس لیست مورد نیاز است.",
@@ -3779,5 +3778,12 @@
 "one": "{n} فضای کاری متوقف شد.",
 "other": "{n} فضای کاری متوقف شدند."
 },
-"{n} workspace paused.": "{n} فضای کاری متوقف شد."
+"{n} workspace paused.": "{n} فضای کاری متوقف شد.",
+"Set a proxy for these requests": "تنظیم پروکسی برای این درخواست‌ها",
+"No compatible MTProxy links were found in this list. Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "هیچ لینک MTProxy سازگاری در این لیست یافت نشد. لینک‌های Fake TLS (رمز عبور با شروع ee)، آدرس‌های خصوصی و لینک‌های خراب پشتیبانی نمی‌شوند.",
+"{n} links left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": {
+"one": "{n} لینک نادیده گرفته شده: لینک‌های Fake TLS (رمز عبور با شروع ee)، آدرس‌های خصوصی و لینک‌های خراب پشتیبانی نمی‌شوند.",
+"other": "{n} لینک نادیده گرفته شده: لینک‌های Fake TLS (رمز عبور شروع‌شده با ee)، آدرس‌های خصوصی و لینک‌های خراب پشتیبانی نمی‌شوند."
+},
+"{n} link left out: Fake TLS links (secret starting with ee), private addresses and broken links are not supported.": "{n} لینک نادیده گرفته شده: لینک‌های Fake TLS (رمز عبور با شروع ee)، آدرس‌های خصوصی و لینک‌های خراب پشتیبانی نمی‌شوند."
 }
