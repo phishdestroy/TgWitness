@@ -3760,5 +3760,24 @@
 "The downloaded size differs from the observed attachment": "İndirilen boyut, gözlemlenen ek boyutundan farklıdır",
 "The queued file differs from the signed observation": "Kuyrukta bekleyen dosya, imzalı gözlemden farklıdır",
 "The saved copy of this file is damaged": "Bu dosyanın kaydedilen kopyası bozuk",
-"Telegram account not identified yet": "Telegram hesabı henüz tanımlanmadı"
+"Telegram account not identified yet": "Telegram hesabı henüz tanımlanmadı",
+"Stop after this account": "Bu hesaptan sonra durdur",
+"This Telegram account already has a workspace: {label}.": "Bu Telegram hesabının halihazırda bir çalışma alanı vardır: {label}.",
+"This Telegram account is being imported right now.": "Bu Telegram hesabı şu anda içe aktarılmaktadır.",
+"Telegram did not answer in time. Try again later.": "Telegram zamanında yanıt vermedi. Daha sonra tekrar deneyin.",
+"Start all": "Hepsini başlat",
+"Pause all": "Hepsini duraklat",
+"Capture and monitoring": "Yakalama ve izleme",
+"Recheck schedule": "Programı yeniden kontrol et",
+"IP protection mode": "IP koruma modu",
+"{n} workspaces started.": {
+"one": "{n} çalışma alanı başlatıldı.",
+"other": "{n} çalışma alanı başlatıldı."
+},
+"{n} workspace started.": "{n} çalışma alanı başlatıldı.",
+"{n} workspaces paused.": {
+"one": "{n} çalışma alanı duraklatıldı.",
+"other": "{n} çalışma alanı duraklatıldı."
+},
+"{n} workspace paused.": "{n} çalışma alanı duraklatıldı."
 }

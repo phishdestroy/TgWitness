@@ -242,9 +242,9 @@ def test_profiles_share_one_pool_and_get_different_proxies(tmp_path, monkeypatch
     with TestClient(app) as client:
         client.headers["Authorization"] = "Bearer " + app.state.vault.token
         child = client.post("/api/profiles", json={"label": "Second"}).json()["id"]
-        for prefix, api_id in (("", 123), ("/profiles/" + child, 777)):
+        for prefix, api_id, key in (("", 123, b"x"), ("/profiles/" + child, 777, b"y")):
             assert client.post(prefix + "/api/auth/configure", json={
-                "api_id": api_id, "api_hash": "a" * 32, "session": saved_session()}).status_code == 200
+                "api_id": api_id, "api_hash": "a" * 32, "session": saved_session(key)}).status_code == 200
         main = client.get("/api/status").json()["collector"]["network"]
         second = client.get("/profiles/" + child + "/api/status").json()["collector"]["network"]
         assert main["kind"] == second["kind"] == "mtproxy_auto"

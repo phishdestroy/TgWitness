@@ -3736,5 +3736,22 @@
 "The downloaded size differs from the observed attachment": "下载大小与观察到的附件大小不同",
 "The queued file differs from the signed observation": "队列中的文件与已签名的观察记录不同",
 "The saved copy of this file is damaged": "该文件的保存副本已损坏",
-"Telegram account not identified yet": "Telegram 账户尚未识别"
+"Telegram account not identified yet": "Telegram 账户尚未识别",
+"Stop after this account": "导入此账户后停止",
+"This Telegram account already has a workspace: {label}.": "该 Telegram 账号已有一个工作区：{label}。",
+"This Telegram account is being imported right now.": "该 Telegram 账号目前正在导入中。",
+"Telegram did not answer in time. Try again later.": "Telegram 未及时响应。请稍后重试。",
+"Start all": "全部启动",
+"Pause all": "暂停全部",
+"Capture and monitoring": "捕获与监控",
+"Recheck schedule": "重新检查计划",
+"IP protection mode": "IP保护模式",
+"{n} workspaces started.": {
+"other": "已启动 {n} 个工作区。"
+},
+"{n} workspace started.": "已启动 {n} 个工作区。",
+"{n} workspaces paused.": {
+"other": "{n} 个工作区已暂停。"
+},
+"{n} workspace paused.": "{n} 个工作区已暂停。"
 }

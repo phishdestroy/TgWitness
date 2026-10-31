@@ -1,7 +1,7 @@
 (() => {
   "use strict";
   // Account groups with shared settings, and importing many accounts into their own workspaces.
-  let groups = [], sections = [], picked = [], importing = false;
+  let groups = [], sections = [], picked = [], importing = false, stopping = false;
   let loadSerial = 0, formRevision = -1, restorePoint = null, loadError = "", creating = null;
   const settings = new Map(), moving = new Map(), writing = new Map();
   const editable = () => !!state.me?.admin && !state.status?.demo;
@@ -158,6 +158,32 @@
     groupControls(group.id);
   }
 
+  // Start or pause every member at once; members without a session or already in that state are left alone
+  function groupRun(group) {
+    const members = () => (state.profiles || []).filter(p => group.members.includes(p.id) && p.collector);
+    const due = {start: p => !p.collector.running && p.collector.has_session, stop: p => p.collector.running};
+    return [["start", tr("Start all")], ["stop", tr("Pause all")]].map(([action, label]) => {
+      const button = node("button", "secondary small", label); button.type = "button";
+      button.disabled = !may("collect") || !!state.status?.demo || !members().some(due[action]);
+      button.addEventListener("click", () => busy(button, async () => {
+        const done = [], failed = [];
+        for (const profile of members().filter(due[action])) {
+          try {
+            await json("collector/" + action, {}, {profile: profile.id}); done.push(profile.label);
+          } catch (error) {
+            if (error instanceof StaleView) return;
+            failed.push(profile.label + ": " + error.message);
+          }
+        }
+        await loadProfiles();
+        toast([action === "start" ? trn("{n} workspace started.", "{n} workspaces started.", done.length)
+                                  : trn("{n} workspace paused.", "{n} workspaces paused.", done.length),
+               ...failed].join(" · "), !!failed.length);
+      }));
+      return button;
+    });
+  }
+
   function groupSection(group, cards, headerOnly=false) {
     const section = node("section", "fleet-group card"), head = node("div", "fleet-group-head");
     section.dataset.group = group.id;section.groupData=group;
@@ -193,7 +219,7 @@
       const result = await json("profile-groups/" + group.id, undefined, {root: true, method: "DELETE"});
       await acceptWrite(result, serial); fillSelects(); decorate();
     })));
-    actions.append(apply, rename, remove);
+    actions.append(apply, ...groupRun(group), rename, remove);
     for (const button of [rename, remove]) button.disabled = !editable() || writing.has(group.id);
     head.append(who, actions);
     section.append(head);if(headerOnly)return section;
@@ -269,7 +295,7 @@
     return btoa(text);
   }
 
-  function renderPicked() {
+  function renderPicked(unsupported = []) {
     const list = $("fleet-results"); list.replaceChildren();
     for (const bundle of picked) {
       const item = node("li", "fleet-result waiting");
@@ -277,15 +303,32 @@
                   node("span", "fleet-state", tr("Waiting")));
       bundle.row = item; list.append(item);
     }
+    for (const file of unsupported) {
+      const item = node("li", "fleet-result bad");
+      item.append(node("strong", "", file.name), node("span", "hint", ""), node("span", "fleet-state",
+        tr("Unsupported account file. Expected SQLite, TData ZIP, account JSON, or StringSession text.")));
+      list.append(item);
+    }
     $("fleet-import-start").disabled = !picked.length || !editable();
     $("fleet-import-summary").textContent = picked.length ? trn("{n} account ready to import", "{n} accounts ready to import", picked.length) : "";
   }
 
   function pick(files) {
     if (importing || !editable()) return;
-    picked = bundles(files.filter(f => f.size <= 8 * 1024 * 1024));
+    // Dropped files skip the chooser's filter: other types are shown as not importable, not counted as ready;
+    // SQLite journals and hidden files that travel next to sessions are left out silently
+    files = files.filter(f => !f.name.startsWith(".") && !/-journal$/i.test(f.name));
+    const supported = file => /\.(session|json|zip|txt)$/i.test(file.name);
+    picked = bundles(files.filter(f => f.size <= 8 * 1024 * 1024 && supported(f)));
     if (files.some(f => f.size > 8 * 1024 * 1024)) toast(tr("Files above 8 MiB were left out."), true);
-    renderPicked();
+    renderPicked(files.filter(f => !supported(f)));
+  }
+
+  // The server prefixes its reason and names the other workspace: translate the parts, not the sentence
+  function importError(message) {
+    const reason = /^Not imported: (.+)$/s.exec(message)?.[1] ?? message;
+    const owner = /^This Telegram account already has a workspace: (.+)\.$/s.exec(reason)?.[1];
+    return owner === undefined ? tr(reason) : tr("This Telegram account already has a workspace: {label}.", {label: owner});
   }
 
   function mark(bundle, kind, text) {
@@ -301,9 +344,11 @@
     const pair = pairText.match(/^(\d{1,10})\s*[:\s]\s*([0-9a-fA-F]{32})$/);
     if (pairText && !pair) throw new Error(tr("Enter the API pair as ID:Hash, or leave it empty."));
     let passcode = $("fleet-passcode").value, group = $("fleet-group").value || null;
-    importing = true;
-    const fields = [...$("fleet-import").querySelectorAll("input, select, button")];
+    importing = true; stopping = false;
+    const fields = [...$("fleet-import").querySelectorAll("input, select, button")]
+      .filter(field => field.id !== "fleet-import-close" && field.id !== "fleet-import-stop");
     fields.forEach(field => { field.disabled = true; });
+    show("fleet-import-stop", true); $("fleet-import-stop").disabled = false;
     try {
       if (group === "__new") {
         const label = $("fleet-group-name").value.trim() || tr("Imported accounts");
@@ -316,6 +361,7 @@
       for (const bundle of queue) {
         if (!current()) return;
         if (bundle.done) continue;
+        if (stopping) { mark(bundle, "waiting", tr("Cancelled")); continue; }
         mark(bundle, "busy", tr("Importing…"));
         try {
           if (bundle.files.length > 4 || bundle.files.reduce((n, f) => n + f.size, 0) > 8 * 1024 * 1024)
@@ -330,7 +376,7 @@
           bundle.done = true;
         } catch (error) {
           if (!current() || error instanceof StaleView) return;
-          mark(bundle, "bad", error.message);
+          mark(bundle, "bad", importError(error.message));
         }
         $("fleet-import-summary").textContent = tr("{done} of {total} imported", {
           done: queue.filter(b => b.done).length, total: queue.length});
@@ -340,6 +386,7 @@
     } finally {
       passcode = "";
       importing = false;
+      show("fleet-import-stop", false);
       fields.forEach(field => { field.disabled = !editable(); });
       $("fleet-import-start").disabled = !editable() || !picked.some(b => !b.done);
       if (current()) {
@@ -351,7 +398,10 @@
   $("fleet-import-open").addEventListener("click", () => {
     show("fleet-import", true); fillSelects(); $("fleet-import").scrollIntoView({block: "start", behavior: "smooth"});
   });
-  $("fleet-import-close").addEventListener("click", () => { show("fleet-import", false); picked = []; renderPicked(); });
+  $("fleet-import-close").addEventListener("click", () => {
+    stopping = importing; show("fleet-import", false); picked = []; renderPicked();
+  });
+  $("fleet-import-stop").addEventListener("click", () => { stopping = true; $("fleet-import-stop").disabled = true; });
   $("fleet-files").addEventListener("change", () => { pick([...$("fleet-files").files]); $("fleet-files").value = ""; });
   const drop = $("fleet-drop");
   drop.addEventListener("dragover", e => { e.preventDefault(); drop.classList.add("over"); });

@@ -722,9 +722,9 @@ form > .health-detail { margin-top: 14px; }
 #chat-export-progress:not(:empty) { margin-top: 12px; color: var(--text-2); font-size: 13px; }
 .accounts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 16px; }
 .account-card.current { border-color: var(--accent-border); box-shadow: 0 0 0 1px var(--accent-border); }
-.account-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.account-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 12px; }
 .account-head h2 { font-size: 17px; margin: 0; }
-.account-card .account-id { margin: 4px 0 0; color: var(--text-2); font-family: var(--mono); font-size: 13px; overflow-wrap: anywhere; }
+.account-card .account-id { margin: 4px 0 0; color: var(--text-2); font-size: 13px; font-variant-numeric: tabular-nums; overflow-wrap: break-word; }
 .account-badge { flex: none; padding: 3px 10px; border-radius: 999px; font-size: 13px; font-weight: 600; border: 1px solid var(--border-strong); background: var(--surface-3); color: var(--text-2); }
 .account-badge.on { background: var(--success-soft); border-color: var(--success-border); color: var(--success); }
 .account-badge.down { background: var(--danger-soft); border-color: var(--danger-border); color: var(--danger); }
@@ -733,7 +733,7 @@ form > .health-detail { margin-top: 14px; }
 .account-meta dd { margin: 0; font-size: 13px; font-weight: 550; text-align: right; }
 .account-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
 #account-add-form { margin-top: 18px; }
-.account-who > div { min-width: 0; overflow-wrap: anywhere; }
+.account-who > div { min-width: 0; overflow-wrap: break-word; }
 .account-who { display: flex; align-items: center; gap: 12px; min-width: 0; }
 .avatar { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px;
   border-radius: 50%; overflow: hidden; color: #fff; font-size: 14px; font-weight: 650; letter-spacing: .02em; user-select: none; }

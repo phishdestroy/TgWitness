@@ -3760,5 +3760,24 @@
 "The downloaded size differs from the observed attachment": "Yuklab olingan hajm kuzatilgan ilovadan farq qiladi",
 "The queued file differs from the signed observation": "Navbatga qo'yilgan fayl imzolangan kuzatuvdan farq qiladi",
 "The saved copy of this file is damaged": "Ushbu faylning saqlangan nusxasi shikastlangan",
-"Telegram account not identified yet": "Telegram hisobi hali aniqlanmagan"
+"Telegram account not identified yet": "Telegram hisobi hali aniqlanmagan",
+"Stop after this account": "Ushbu hisobdan keyin to'xtatish",
+"This Telegram account already has a workspace: {label}.": "Ushbu Telegram akkauntida allaqachon ish maydoni mavjud: {label}.",
+"This Telegram account is being imported right now.": "Ushbu Telegram akkaunti hozir import qilinmoqda.",
+"Telegram did not answer in time. Try again later.": "Telegram vaqtida javob bermadi. Keyinroq yana urinib ko'ring.",
+"Start all": "Barchasini boshlash",
+"Pause all": "Hammasini to'xtatish",
+"Capture and monitoring": "Yozib olish va monitoring",
+"Recheck schedule": "Qayta tekshirish jadvalini",
+"IP protection mode": "IP himoya rejimi",
+"{n} workspaces started.": {
+"one": "{n} ta ish maydoni boshladi.",
+"other": "{n} ta ish maydoni ish boshladi."
+},
+"{n} workspace started.": "{n} ta ish maydoni boshladi.",
+"{n} workspaces paused.": {
+"one": "{n} ta ish maydoni to'xtatildi.",
+"other": "{n} ta ish maydoni to'xtatildi."
+},
+"{n} workspace paused.": "{n} ta ish maydoni to'xtatildi."
 }

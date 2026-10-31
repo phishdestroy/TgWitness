@@ -3760,5 +3760,24 @@
 "The downloaded size differs from the observed attachment": "اندازه دانلود شده با ضمیمه مشاهده‌شده متفاوت است",
 "The queued file differs from the signed observation": "فایل صف‌شده با مشاهده امضا‌شده متفاوت است",
 "The saved copy of this file is damaged": "نسخهٔ ذخیره شدهٔ این فایل خراب است",
-"Telegram account not identified yet": "حساب تلگرام هنوز شناسایی نشده است"
+"Telegram account not identified yet": "حساب تلگرام هنوز شناسایی نشده است",
+"Stop after this account": "توقف پس از این حساب",
+"This Telegram account already has a workspace: {label}.": "این حساب تلگرام از قبل یک فضای کاری دارد: {label}.",
+"This Telegram account is being imported right now.": "این حساب تلگرام در حال حاضر در حال وارد شدن است.",
+"Telegram did not answer in time. Try again later.": "تلگرام به موقع پاسخ نداد. بعداً دوباره امتحان کنید.",
+"Start all": "شروع همه",
+"Pause all": "تعلیق همه",
+"Capture and monitoring": "ثبت و نظارت",
+"Recheck schedule": "بازبینی برنامه",
+"IP protection mode": "حالت محافظت از IP",
+"{n} workspaces started.": {
+"one": "{n} فضای کاری شروع شد.",
+"other": "{n} فضای کاری شروع شدند."
+},
+"{n} workspace started.": "{n} فضای کاری شروع شد.",
+"{n} workspaces paused.": {
+"one": "{n} فضای کاری متوقف شد.",
+"other": "{n} فضای کاری متوقف شدند."
+},
+"{n} workspace paused.": "{n} فضای کاری متوقف شد."
 }

@@ -3808,5 +3808,28 @@
 "The downloaded size differs from the observed attachment": "Rozmiar pobranego pliku różni się od rozmiaru zaobserwowanego załącznika",
 "The queued file differs from the signed observation": "Plik w kolejce różni się od podpisanej obserwacji",
 "The saved copy of this file is damaged": "Zapisana kopia tego pliku jest uszkodzona",
-"Telegram account not identified yet": "Konto Telegram nie zostało jeszcze zidentyfikowane"
+"Telegram account not identified yet": "Konto Telegram nie zostało jeszcze zidentyfikowane",
+"Stop after this account": "Zatrzymaj po tym koncie",
+"This Telegram account already has a workspace: {label}.": "To konto w Telegramie posiada już obszar roboczy: {label}.",
+"This Telegram account is being imported right now.": "To konto Telegram jest właśnie importowane.",
+"Telegram did not answer in time. Try again later.": "Telegram nie odpowiedział w odpowiednim czasie. Proszę spróbować ponownie później.",
+"Start all": "Uruchom wszystko",
+"Pause all": "Wstrzymaj wszystko",
+"Capture and monitoring": "Rejestracja i monitorowanie",
+"Recheck schedule": "Ponowna weryfikacja harmonogramu",
+"IP protection mode": "Tryb ochrony adresów IP",
+"{n} workspaces started.": {
+"one": "Rozpoczęto obserwację w {n} obszarze roboczym.",
+"many": "Rozpoczęto obserwację w {n} obszarach roboczych.",
+"few": "Rozpoczęto obserwację w {n} obszarach roboczych.",
+"other": "Rozpoczęto obserwację w {n} obszarze roboczym."
+},
+"{n} workspace started.": "Rozpoczęto obserwację w {n} obszarze roboczym.",
+"{n} workspaces paused.": {
+"one": "Wstrzymano obserwację w {n} obszarze roboczym.",
+"many": "Wstrzymano obserwację w {n} obszarach roboczych.",
+"few": "Wstrzymano obserwację w {n} obszarach roboczych.",
+"other": "Wstrzymano obserwację w {n} obszarze roboczym."
+},
+"{n} workspace paused.": "Wstrzymano obserwację w {n} obszarze roboczym."
 }

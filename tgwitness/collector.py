@@ -25,7 +25,7 @@ from . import message_content
 from . import replica
 from . import tuning
 from .history import History
-from .account_import import validate_string
+from .account_import import session_key, validate_string
 from .avatar_history import AvatarHistory
 from .telegram_client import WitnessClient
 from .workers import complete_in_thread
@@ -980,6 +980,8 @@ class Collector:
         await self.cancel_login()
 
         session = validate_string(session) if session else ""
+        if session and self.account_guard:
+            self.account_guard(None, self, key=session_key(session))
         await self.ensure_route()
         candidate = self.make_client(api_id, api_hash, session)
         self.login_client = candidate

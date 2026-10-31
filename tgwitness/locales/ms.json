@@ -3736,5 +3736,22 @@
 "The downloaded size differs from the observed attachment": "Saiz yang dimuat turun berbeza daripada lampiran yang diperhatikan",
 "The queued file differs from the signed observation": "Fail yang dibariskan berbeza daripada pemerhatian yang disahkan",
 "The saved copy of this file is damaged": "Salinan simpanan fail ini rosak",
-"Telegram account not identified yet": "Akaun Telegram belum dikenal pasti"
+"Telegram account not identified yet": "Akaun Telegram belum dikenal pasti",
+"Stop after this account": "Hentikan selepas akaun ini",
+"This Telegram account already has a workspace: {label}.": "Akaun Telegram ini sudah mempunyai ruang kerja: {label}.",
+"This Telegram account is being imported right now.": "Akaun Telegram ini sedang diimport sekarang.",
+"Telegram did not answer in time. Try again later.": "Telegram tidak menjawab dalam masa. Cuba lagi kemudian.",
+"Start all": "Mulakan semua",
+"Pause all": "Hentikan semua",
+"Capture and monitoring": "Rakaman dan pemantauan",
+"Recheck schedule": "Semak semula jadual",
+"IP protection mode": "Mod perlindungan IP",
+"{n} workspaces started.": {
+"other": "{n} ruang kerja telah bermula."
+},
+"{n} workspace started.": "{n} ruang kerja telah bermula.",
+"{n} workspaces paused.": {
+"other": "{n} ruang kerja menghentikan pemerhatian."
+},
+"{n} workspace paused.": "{n} ruang kerja menghentikan pemerhatian."
 }

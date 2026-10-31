@@ -3808,5 +3808,28 @@
 "The downloaded size differs from the observed attachment": "Размер загруженного файла отличается от размера наблюдаемого вложения",
 "The queued file differs from the signed observation": "Файл, находящийся в очереди, отличается от подписанного наблюдения",
 "The saved copy of this file is damaged": "Сохраненная копия этого файла повреждена",
-"Telegram account not identified yet": "Учётная запись Telegram пока не идентифицирована"
+"Telegram account not identified yet": "Учётная запись Telegram пока не идентифицирована",
+"Stop after this account": "Остановить после этой учетной записи",
+"This Telegram account already has a workspace: {label}.": "У этой учётной записи Telegram уже есть рабочая область: {label}.",
+"This Telegram account is being imported right now.": "В данный момент происходит импорт этой учётной записи Telegram.",
+"Telegram did not answer in time. Try again later.": "Telegram не ответил вовремя. Попробуйте позже.",
+"Start all": "Запустить всё",
+"Pause all": "Приостановить всё",
+"Capture and monitoring": "Захват и мониторинг",
+"Recheck schedule": "Повторная проверка расписания",
+"IP protection mode": "Режим защиты IP",
+"{n} workspaces started.": {
+"one": "Запущено {n} рабочее пространство.",
+"many": "Запущено {n} рабочих пространств.",
+"few": "Запущено {n} рабочих пространства.",
+"other": "Запущено {n} рабочих пространств."
+},
+"{n} workspace started.": "Запущено {n} рабочее пространство.",
+"{n} workspaces paused.": {
+"one": "Мониторинг приостановлен в {n} рабочей области.",
+"many": "Наблюдение приостановлено в {n} рабочих пространствах.",
+"few": "Наблюдение приостановлено в {n} рабочих пространствах.",
+"other": "{n} рабочих пространств приостановлены."
+},
+"{n} workspace paused.": "Мониторинг приостановлен в {n} рабочей области."
 }

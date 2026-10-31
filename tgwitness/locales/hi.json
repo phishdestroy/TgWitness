@@ -3760,5 +3760,24 @@
 "The downloaded size differs from the observed attachment": "डाउनलोड किया गया आकार देखे गए अटैचमेंट से भिन्न होता है",
 "The queued file differs from the signed observation": "कतारबद्ध फ़ाइल हस्ताक्षरित अवलोकन से भिन्न होती है",
 "The saved copy of this file is damaged": "इस फ़ाइल की सहेजी गई प्रति क्षतिग्रस्त है",
-"Telegram account not identified yet": "टेलीग्राम खाता अभी तक पहचाना नहीं गया है"
+"Telegram account not identified yet": "टेलीग्राम खाता अभी तक पहचाना नहीं गया है",
+"Stop after this account": "इस खाते के बाद रुकें",
+"This Telegram account already has a workspace: {label}.": "इस टेलीग्राम खाते में पहले से ही एक वर्कस्पेस है: {label}।",
+"This Telegram account is being imported right now.": "यह टेलीग्राम खाता अभी आयात हो रहा है।",
+"Telegram did not answer in time. Try again later.": "टेलीग्राम ने समय पर जवाब नहीं दिया। बाद में फिर से कोशिश करें।",
+"Start all": "सभी शुरू करें",
+"Pause all": "सभी को रोकें",
+"Capture and monitoring": "कैप्चर और निगरानी",
+"Recheck schedule": "पुनः जाँच अनुसूची",
+"IP protection mode": "आईपी सुरक्षा मोड",
+"{n} workspaces started.": {
+"one": "{n} कार्यक्षेत्र शुरू हुआ।",
+"other": "{n} वर्कस्पेस शुरू हुए।"
+},
+"{n} workspace started.": "{n} कार्यक्षेत्र शुरू हुआ।",
+"{n} workspaces paused.": {
+"one": "{n} कार्यक्षेत्र ने अवलोकन को निलंबित किया।",
+"other": "{n} कार्यक्षेत्रों ने अवलोकन को निलंबित किया।"
+},
+"{n} workspace paused.": "{n} कार्यक्षेत्र ने अवलोकन को निलंबित किया।"
 }

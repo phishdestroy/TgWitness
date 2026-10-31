@@ -3736,5 +3736,22 @@
 "The downloaded size differs from the observed attachment": "ขนาดไฟล์ที่ดาวน์โหลดมาอาจแตกต่างจากขนาดไฟล์แนบที่สังเกตได้",
 "The queued file differs from the signed observation": "ไฟล์ในคิวแตกต่างจากบันทึกการสังเกตที่มีลายเซ็น",
 "The saved copy of this file is damaged": "สำเนาที่บันทึกของไฟล์นี้ถูกเสียหาย",
-"Telegram account not identified yet": "บัญชี Telegram ยังไม่ได้รับการระบุ"
+"Telegram account not identified yet": "บัญชี Telegram ยังไม่ได้รับการระบุ",
+"Stop after this account": "หยุดหลังจากบัญชีนี้",
+"This Telegram account already has a workspace: {label}.": "บัญชี Telegram นี้มีพื้นที่ทำงานอยู่แล้ว: {label}",
+"This Telegram account is being imported right now.": "บัญชี Telegram นี้กำลังถูกนำเข้าอยู่ขณะนี้",
+"Telegram did not answer in time. Try again later.": "Telegram ไม่ตอบกลับทันเวลา โปรดลองอีกครั้งในภายหลัง",
+"Start all": "เริ่มทั้งหมด",
+"Pause all": "หยุดทั้งหมด",
+"Capture and monitoring": "การจับภาพและติดตาม",
+"Recheck schedule": "ตรวจสอบตารางเวลาใหม่",
+"IP protection mode": "โหมดการป้องกัน IP",
+"{n} workspaces started.": {
+"other": "พื้นที่ทำงาน {n} แห่งได้เริ่มแล้ว"
+},
+"{n} workspace started.": "พื้นที่ทำงาน {n} แห่งได้เริ่มแล้ว",
+"{n} workspaces paused.": {
+"other": "พื้นที่ทำงาน {n} แห่งถูกหยุดชั่วคราว"
+},
+"{n} workspace paused.": "พื้นที่ทำงาน {n} แห่งถูกหยุดชั่วคราว"
 }
