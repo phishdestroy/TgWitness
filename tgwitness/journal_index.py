@@ -20,6 +20,12 @@ def search_text(value):
     return unicodedata.normalize("NFC", value.casefold())
 
 
+def nul_text(payload):
+    """Older JSON1 builds truncate decoded strings at NUL; Python preserves them."""
+    value = json.loads(payload).get("text")
+    return value if isinstance(value, str) else ""
+
+
 class JournalIndex:
     def __init__(self, db):
         self.db = db
