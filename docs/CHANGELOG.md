@@ -9,7 +9,9 @@
   report unavailable host measurements. Deployment reports distinguish configuration
   checks from independent runtime attestation; supplied channel dates are not authenticated
   by witness signatures.
-
+- Added access and permissions guides with reviewer/analyst examples, session limits,
+  IP restrictions and revocation. Updated routing guides for automatic MTProxy,
+  IP modes and external requests; connected the README, Wiki, website and bundled guide.
 - Expanded the panel and complete documentation site to 25 languages, including German,
   French, Italian, Japanese, Korean and Hebrew. Language switches preserve the current
   documentation page; the static demo includes the new panel dictionaries. Existing
