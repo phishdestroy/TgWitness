@@ -1868,7 +1868,7 @@ async function loadAssurance(){
   const s=state.assurance,on=!!s;
   if(state.view!=='witness')return;
   show("alerts-host",on);show("cloud-active",on);
-  if(!on){$("extra-cloud-badge").className="extra-badge";extraBadge("cloud",false,"","Available");renderServerHealth(null);return;}
+  if(!on){$("extra-cloud-badge").className="extra-badge";extraBadge("cloud",false,"","Off");renderServerHealth(null);return;}
   $("cloud-active").textContent=tr("This collector runs on a sealed {provider} server, signing key {fingerprint}. An opened SSH port or a login there is recorded in the journal and sent as a problem notification.",
     {provider:CLOUD[s.host?.mode]?.[0]||s.host?.mode||"",fingerprint:s.fingerprint});
   const profile=state.profile,h=await json("health");
@@ -1977,6 +1977,8 @@ function collectorAddress(){return location.origin+(state.profile==="default"?""
 function renderWitness(r){
   if(state.view!=='witness')return;
   const list=$("witness-list"),demo=!!state.status?.demo;list.replaceChildren();
+  const witnessed=r.tokens.some(token=>token.last_poll&&!token.overdue);
+  extraBadge("bot",witnessed,"On",r.tokens.some(token=>token.overdue)?"Check again":"Not checked");
   $("witness-form").querySelectorAll("input,button").forEach(n=>n.disabled=demo);
   $("witness-setup-form").querySelector('[type="submit"]').disabled=demo;
   $("witness-token-download").disabled=demo||!state.witnessToken;
