@@ -1,12 +1,20 @@
 /** Download receipts and progress; report drafts remain owned by their form. */
 export function createExports({root, tr, json, getSession, fmtTime, toast}) {
   const find = id => root.querySelector('#'+id), tabs = [...root.querySelectorAll('[data-export-tab]')];
-  let session = getSession(), request = 0, transfer = 0, selected = 'downloads';
+  let session = getSession(), request = 0, transfer = 0, selected = 'downloads', entries = [];
   const bytes = size => size < 1024 ? tr('{n} B',{n:size}) : size < 1048576
     ? tr('{n} KiB',{n:(size/1024).toFixed(1)}) : tr('{n} MiB',{n:(size/1048576).toFixed(1)});
   const make = (tag, text='', cls='') => {
     const el = document.createElement(tag);el.textContent=text;if(cls)el.className=cls;return el;
   };
+  function renderTimes() {
+    for(const time of root.querySelectorAll('.export-receipt time')){
+      time.textContent=fmtTime(time.dateTime);time.title=time.textContent;
+    }
+    find('exports-last').textContent=entries.length?tr('Latest: {size} · {time}',{
+      size:bytes(entries[0].bytes),time:fmtTime(entries[0].created_at)}):'';
+  }
+  window.addEventListener('tgwitness:time-zone',renderTimes);
   function select(name, focus=false) {
     selected = name === 'settings' ? 'settings' : 'downloads';
     for (const button of tabs) {
@@ -29,13 +37,14 @@ export function createExports({root, tr, json, getSession, fmtTime, toast}) {
     try {
       const result=await json('exports/history',undefined,options);
       if(owner!==getSession()||mine!==request)return;
-      const list=find('exports-history-list'), entries=result.exports||[];
+      const list=find('exports-history-list');entries=result.exports||[];
       const stamp=JSON.stringify(entries);
       if(list.dataset.stamp!==stamp) {
         const rows=entries.map(entry=>{
           const row=make('div','','export-receipt'),label=make('strong',entry.format.toUpperCase());
+          const time=make('time');time.dateTime=entry.created_at;
           row.append(label,make('span',entry.encrypted?tr('Encrypted'):tr('Plain file'),'hint'),
-            make('time',fmtTime(entry.created_at)),make('span',bytes(entry.bytes)));
+            time,make('span',bytes(entry.bytes)));
           const hash=make('code',entry.sha256),copy=make('button',tr('Copy SHA-256'),'quiet');
           copy.type='button';copy.addEventListener('click',async()=>{
             try{await navigator.clipboard.writeText(entry.sha256);toast(tr('Hash copied.'));}catch{toast(tr('Could not copy. Select and copy the hash.'),true);}
@@ -44,7 +53,7 @@ export function createExports({root, tr, json, getSession, fmtTime, toast}) {
         });
         list.replaceChildren(...rows);list.dataset.stamp=stamp;
       }
-      find('exports-last').textContent=entries.length?tr('Latest: {size} · {time}',{size:bytes(entries[0].bytes),time:fmtTime(entries[0].created_at)}):'';
+      renderTimes();
       find('exports-history-status').textContent=entries.length?'':tr('No exports prepared yet. Choose a format above.');
     }catch(error){
       if(owner===getSession()&&mine===request&&!['AbortError','StaleView'].includes(error.name))find('exports-history-status').textContent=error.message;
@@ -70,8 +79,9 @@ export function createExports({root, tr, json, getSession, fmtTime, toast}) {
     };
   }
   return {load,select,begin,leave(){request++;find('exports-history-refresh').disabled=false;},resetSession(){
-    session=getSession();request++;transfer++;select('downloads');find('exports-progress').hidden=true;
+    session=getSession();request++;transfer++;entries=[];select('downloads');find('exports-progress').hidden=true;
     find('exports-history-list').replaceChildren();delete find('exports-history-list').dataset.stamp;
     find('exports-last').textContent=find('exports-history-status').textContent='';
-  },enter(options){if(session!==getSession())this.resetSession();return load(options);}};
+  },destroy(){window.removeEventListener('tgwitness:time-zone',renderTimes);},
+    enter(options){if(session!==getSession())this.resetSession();return load(options);}};
 }
