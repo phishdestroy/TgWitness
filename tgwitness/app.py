@@ -17,7 +17,7 @@ from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, Response
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel, Field, StrictBool, model_validator
+from pydantic import BaseModel, Field, StrictBool, StrictInt, model_validator
 from telethon.errors import FloodWaitError, RPCError
 
 from . import __version__
@@ -139,6 +139,21 @@ class TargetBatch(BaseModel):
         if self.enabled is None and self.priority is None:
             raise ValueError("Choose enabled, priority, or remove.")
         return self
+
+
+class IgnoreSources(BaseModel):
+    chat_ids: list[StrictInt] = Field(min_length=1, max_length=500)
+    ignored: StrictBool
+
+    @model_validator(mode="after")
+    def valid_chat_ids(self):
+        if any(chat_id == 0 or not -(2**53) < chat_id < 2**53 for chat_id in self.chat_ids):
+            raise ValueError("Invalid chat ID.")
+        return self
+
+
+class ClearMediaQueue(BaseModel):
+    through_seq: StrictInt = Field(ge=0, lt=2**53)
 
 
 class DossierSwitch(BaseModel):
@@ -513,6 +528,34 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         if allowed is not None and chat_id not in allowed:
             raise HTTPException(403, "This chat is not open to this access.")
 
+    def scoped_status(workspace, allowed, current=None):
+        current = dict(current or workspace.state.collector.status())
+        if allowed is not None:
+            store = workspace.state.store
+            current["source_status"] = {chat: status for chat, status in current.get("source_status", {}).items()
+                                        if int(chat) in allowed}
+            current["media_jobs"] = store.media_stats(allowed)
+            current["media_pending"] = sum(n for state, n in current["media_jobs"].items()
+                                           if state in ("queued", "running", "retry"))
+            current["oldest_pending_media_at"] = store.media_oldest(allowed)
+            recheck = current.get("recheck")
+            current["recheck"] = None
+            if recheck and (records := store.events(kind="recheck.completed", limit=1)):
+                results = [r for r in records[0]["payload"].get("chats", []) if r.get("chat_id") in allowed]
+                if results:
+                    current["recheck"] = {"at": recheck.get("at") or records[0]["observed_at"], "chats": len(results),
+                                          "errors": sum("error" in r for r in results),
+                                          **{key: sum(r.get(key, 0) for r in results)
+                                             for key in ("recovered", "edited", "missing", "checked")}}
+            if current.get("chat_export") and current["chat_export"].get("chat_id") not in allowed:
+                current["chat_export"] = None
+            if current.get("scope"):
+                current["scope"] = {**current["scope"],
+                                    "exclude": [chat for chat in current["scope"].get("exclude", []) if chat in allowed]}
+        targets = [t for t in workspace.state.store.targets() if allowed is None or t["chat_id"] in allowed]
+        parts = health.collector_of(workspace.state, current, enabled_sources=sum(bool(t["enabled"]) for t in targets))
+        return current, parts, targets
+
     async def authenticate_witness(request: Request, credential: HTTPAuthorizationCredentials = Depends(bearer)):
         """Witness tokens open only the signed journal head; the panel token is not accepted here."""
         entry = witness_api.match(app.state.vault, credential.credentials) if credential else None
@@ -549,16 +592,16 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         from . import ai, media_analysis
         store, vault = app.state.store, app.state.vault
         allowed = visible_chats(request)
-        collector_status = app.state.collector.status()
+        collector_status, parts, targets = scoped_status(app, allowed)
         return {"version": __version__, "demo": store.get_setting("demo", False),
                 "analysis": {"enabled": ai.enabled(app.state) and not store.get_setting("demo", False),
                              "media_available": media_analysis.available() and not store.get_setting("demo", False)},
                 "collector": collector_status, "stats": store.stats(allowed),
-                "health": health.collector_of(app.state, collector_status),
+                "health": parts,
                 "history": app.state.collector.history.status() if allowed is None else None,
-                "targets": [t for t in store.targets() if allowed is None or t["chat_id"] in allowed],
+                "targets": targets,
                 "capture": capture_settings(store),
-                "monitoring": monitoring_settings(store), "scope": scope_settings(store),
+                "monitoring": monitoring_settings(store), "scope": collector_status["scope"],
                 "recheck": recheck_settings(store),
                 "dossiers": [c for c in dossier.enabled_chats(store) if allowed is None or c in allowed],
                 "parameters": tuning.values(store),
@@ -574,9 +617,13 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             for entry in app.state.profiles.summary():
                 if not principal.opens(entry["id"]):
                     continue
-                if principal.chats(entry["id"]) is not None:
-                    entry = {**entry, "stats": None, "sources_enabled": None,
-                             "sources_total": len(principal.chats(entry["id"]))}
+                allowed = principal.chats(entry["id"])
+                if allowed is not None:
+                    workspace = app.state.profiles.entries[entry["id"]].get("app")
+                    current, parts, targets = (scoped_status(workspace, allowed, entry["collector"])
+                                                if workspace else (None, None, []))
+                    entry = {**entry, "stats": None, "sources_enabled": sum(bool(t["enabled"]) for t in targets),
+                             "collector": current, "health": parts, "sources_total": len(targets)}
                 listed.append(entry)
             return {"profiles": listed, "limit": Profiles.MAX_PROFILES,
                     "model": "independent account collectors and signing identities"}
@@ -1111,6 +1158,37 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         return {"removed": len(ids), "excluded": len(additions), "cache_cleanup_pending": pending,
                 "media": {"pending": "cancelled", "running": "may_finish", "saved": "kept"}}
 
+    @app.post("/api/targets/ignore-unconfirmed", dependencies=[Depends(authenticate)])
+    async def ignore_sources(request: Request, body: IgnoreSources):
+        require_live()
+        collector, store = app.state.collector, app.state.store
+        ids = list(dict.fromkeys(body.chat_ids))
+        for chat_id in ids:
+            require_chat(request, chat_id)
+        async with op_lock:
+            targets = {t["chat_id"]: t for t in store.targets()}
+            if any(chat_id not in targets for chat_id in ids):
+                raise HTTPException(404, "A selected chat is no longer among the sources.")
+            if body.ignored and any(collector.source_status.get(str(chat_id), {}).get("state") != "access_unconfirmed"
+                                    for chat_id in ids):
+                raise HTTPException(409, "Only sources not found in the last dialog check can be ignored.")
+            with store.transaction():
+                ignored = set(store.get_setting("ignored_source_warnings", []))
+                for chat_id in ids:
+                    if (chat_id in ignored) == body.ignored:
+                        continue
+                    if body.ignored:
+                        ignored.add(chat_id)
+                    else:
+                        ignored.discard(chat_id)
+                    target = targets[chat_id]
+                    store.append("target.changed", {"title": target["title"], "enabled": bool(target["enabled"]),
+                                                    "ignore_unconfirmed": body.ignored,
+                                                    "reason": "source warning preference changed"}, chat_id)
+                store.set_setting("ignored_source_warnings", sorted(ignored))
+            current, parts, _ = scoped_status(app, visible_chats(request))
+        return {"source_status": current["source_status"], "health": parts["sources"]}
+
     @app.delete("/api/targets/{chat_id}", dependencies=[Depends(authenticate)])
     async def target_remove(request: Request, chat_id: int):
         require_live()
@@ -1124,9 +1202,24 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         require_live()
         async with op_lock:
             with app.state.store.transaction():
-                app.state.store.set_setting("capture", body.model_dump())
+                saved = body.model_dump()
+                if "record_disabled_media" not in body.model_fields_set:
+                    saved["record_disabled_media"] = capture_settings(app.state.store)["record_disabled_media"]
+                app.state.store.set_setting("capture", saved)
                 app.state.store.append("capture.changed", capture_settings(app.state.store))
+            app.state.collector.media_wakeup.set()
         return capture_settings(app.state.store)
+
+    @app.post("/api/media/queue/clear", dependencies=[Depends(authenticate)])
+    async def clear_media_queue(body: ClearMediaQueue):
+        require_live()
+        store = app.state.store
+        async with op_lock:
+            head = store.stats()["head"]
+            if body.through_seq > (head["seq"] if head else 0):
+                raise HTTPException(409, "The queue snapshot is newer than this workspace. Refresh and try again.")
+            cancelled = await complete_in_thread(store.clear_media_queue, body.through_seq)
+            return {"cancelled": cancelled, "through_seq": body.through_seq, "media_jobs": store.media_stats()}
 
     @app.post("/api/recording", dependencies=[Depends(authenticate)])
     async def set_recording(request: Request, body: recording.RecordingUpdate):

@@ -460,16 +460,18 @@ class Store:
         path = self.root / "checkpoints" / "latest.json"
         return json.loads(path.read_bytes()) if path.exists() else None
 
-    def media_stats(self):
+    def media_stats(self, chat_ids=None):
+        clause = " WHERE chat_id IN (" + ",".join("?" * len(chat_ids)) + ")" if chat_ids is not None else ""
         with self.lock:
             return {r[0]: r[1] for r in self.db.execute(
-                "SELECT state,count(*) FROM media_jobs GROUP BY state")}
+                "SELECT state,count(*) FROM media_jobs" + clause + " GROUP BY state", sorted(chat_ids or []))}
 
-    def media_oldest(self):
+    def media_oldest(self, chat_ids=None):
+        clause = " AND j.chat_id IN (" + ",".join("?" * len(chat_ids)) + ")" if chat_ids is not None else ""
         with self.lock:
             row = self.db.execute(
                 "SELECT min(e.observed_at) FROM media_jobs j JOIN events e ON e.seq=j.message_event "
-                "WHERE j.state IN ('queued','retry','running')").fetchone()
+                "WHERE j.state IN ('queued','retry','running')" + clause, sorted(chat_ids or [])).fetchone()
         return row[0]
 
     def claim_media(self, account_id, now=None, *, min_priority=None, max_priority=None):
@@ -491,6 +493,23 @@ class Store:
             job = dict(row)
             job["attempts"] += 1
             return job
+
+    def clear_media_queue(self, through_seq):
+        """Cancel waiting jobs in the reviewed snapshot, retaining their signed receipts and files."""
+        if type(through_seq) is not int or not 0 <= through_seq < 2**53:
+            raise ValueError("Invalid queue cutoff")
+        with self.transaction():
+            rows = self.db.execute(
+                "SELECT message_event,chat_id,message_id FROM media_jobs "
+                "WHERE state IN ('queued','retry') AND message_event<=? ORDER BY message_event",
+                (through_seq,)).fetchall()
+            for row in rows:
+                self.append("media.skipped", {"message_event": row["message_event"],
+                                              "reason": "waiting download cancelled by operator"},
+                            row["chat_id"], row["message_id"])
+            self.db.execute("UPDATE media_jobs SET state='cancelled',next_attempt=0,last_error='operator_cancelled' "
+                            "WHERE state IN ('queued','retry') AND message_event<=?", (through_seq,))
+            return len(rows)
 
     def recover_media(self):
         with self.transaction():

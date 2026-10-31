@@ -424,8 +424,13 @@ def panel_items(store, words, limit=60, *, allowed_chats=None, workspace_id="def
 
     problem_bound = limit * 5 * PROBLEM_PAGES
     records, truncated = scan((*PROBLEM_KINDS, *NOTICE_RECOVERIES), problem_bound)
+    ignored = set(store.get_setting("ignored_source_warnings", []))
+    resolved = store.get_setting("resolved_source_warnings", {})
     groups, recovered = {}, {}
     for event in reversed(records):
+        if event["kind"] == "source.access_unconfirmed" and (event["chat_id"] in ignored
+                or event["seq"] <= resolved.get(str(event["chat_id"]), 0)):
+            continue
         family = recovered_family(event)
         if family:
             recovered[family] = event["seq"]

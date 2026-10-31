@@ -64,7 +64,10 @@ def save(store, body):
                 })
                 changed.append("monitoring")
         if body.capture is not None:
-            store.set_setting("capture", body.capture.model_dump())
+            value = body.capture.model_dump()
+            if "record_disabled_media" not in body.capture.model_fields_set:
+                value["record_disabled_media"] = before["capture"]["record_disabled_media"]
+            store.set_setting("capture", value)
             current = capture_settings(store)
             if current != before["capture"]:
                 store.append("capture.changed", current)
