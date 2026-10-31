@@ -1,0 +1,33 @@
+name: Witness controller
+on:
+  push:
+    branches: [main]
+    paths:
+      - services/witness-controller/**
+      - .github/workflows/witness-controller.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: witness-controller-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  controller:
+    runs-on: [self-hosted, Linux, X64, tgwitness-ci]
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: services/witness-controller
+    env:
+      WRANGLER_SEND_METRICS: 'false'
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+      - run: npm ci --no-fund
+      - run: npm test
+      - run: npm run build
+      - run: npm audit --audit-level=high
