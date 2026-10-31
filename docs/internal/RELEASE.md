@@ -1,8 +1,8 @@
 # Version 0.7.0
 
 TgWitness is a self-hosted Telegram observation journal under the
-[MIT License](../../LICENSE). Version 0.7.0 is the first GitHub release; later changes are
-listed under **Unreleased** in the [changelog](../CHANGELOG.md). The release carries the
+[MIT License](../../LICENSE). Version 0.7.0 is the first GitHub preview release; its
+contents are listed in the [changelog](../CHANGELOG.md). The release carries the
 Windows portable package, the wheel and the source archive, each with its SHA-256.
 
 ## Included in this source tree
