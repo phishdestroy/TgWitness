@@ -13,6 +13,12 @@ from tgwitness.archive import ArchiveQuery, ArchiveReader, ConnectionSettings, C
 from tgwitness.mcp_transport import trusted_request
 
 
+@pytest.fixture
+def mcp_panel(request):
+    pytest.importorskip("mcp")
+    return request.getfixturevalue("panel")
+
+
 def issue(admin, tools):
     response = admin.post("/api/mcp/connections", json={"name": "Boundary audit",
         "workspaces": {"default": [HARBOR]}, "expires_at": time.time() + 3600, "tools": tools})
@@ -48,8 +54,8 @@ def test_mcp_host_and_origin_use_configuration_not_forwarded_headers(monkeypatch
     assert trusted_request(request) is expected
 
 
-def test_mcp_tools_allowlist_applies_to_discovery_and_direct_calls(panel, monkeypatch):
-    app, admin = panel
+def test_mcp_tools_allowlist_applies_to_discovery_and_direct_calls(mcp_panel, monkeypatch):
+    app, admin = mcp_panel
     issued = issue(admin, ["list_chats"])
     listing = rpc(admin, issued["token"], "tools/list")
     assert listing.status_code == 200, listing.text
@@ -73,8 +79,8 @@ def test_mcp_tools_allowlist_applies_to_discovery_and_direct_calls(panel, monkey
 
 
 @pytest.mark.parametrize("change", ("revoke", "rotate"))
-def test_mcp_discards_read_that_finishes_after_token_change(panel, monkeypatch, change):
-    app, admin = panel
+def test_mcp_discards_read_that_finishes_after_token_change(mcp_panel, monkeypatch, change):
+    app, admin = mcp_panel
     issued = issue(admin, ["search_messages"])
     app.state.store.append("message.new", {"text": "REVOKED_REPLY_SECRET"}, HARBOR, 2)
     entered, release = threading.Event(), threading.Event()
@@ -143,8 +149,8 @@ def test_cancelled_archive_call_retains_its_worker_slot(journal, monkeypatch):
     asyncio.run(run())
 
 
-def test_mcp_read_timeout_returns_a_tool_error_without_unfinished_data(panel, monkeypatch):
-    app, admin = panel
+def test_mcp_read_timeout_returns_a_tool_error_without_unfinished_data(mcp_panel, monkeypatch):
+    app, admin = mcp_panel
     issued = issue(admin, ["search_messages"])
     entered, finished, release = threading.Event(), threading.Event(), threading.Event()
     monkeypatch.setattr(archive_api, "QUERY_TIMEOUT", .05)
@@ -169,8 +175,8 @@ def test_mcp_read_timeout_returns_a_tool_error_without_unfinished_data(panel, mo
         assert finished.wait(3)
 
 
-def test_only_authenticated_same_origin_panel_can_register_a_public_host(panel, monkeypatch):
-    app, admin = panel
+def test_only_authenticated_same_origin_panel_can_register_a_public_host(mcp_panel, monkeypatch):
+    app, admin = mcp_panel
     monkeypatch.delenv("TGWITNESS_PUBLIC_URL", raising=False)
     issued = issue(admin, ["list_chats"])
     host = "operator-tunnel.example"
