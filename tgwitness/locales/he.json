@@ -2381,5 +2381,8 @@
   "process_shutdown": "process_shutdown",
   "source_disabled": "source_disabled",
   "{messages} messages · {done} of {total} sources": "{messages} messages · {done} of {total} sources",
-  "{n} enabled sources. Start observation before loading history.": "{n} enabled sources. Start observation before loading history."
+  "{n} enabled sources. Start observation before loading history.": "{n} enabled sources. Start observation before loading history.",
+"GitHub Actions capture (preview)": "איסוף באמצעות GitHub Actions (גרסה מקדימה)",
+"A fresh Telegram login, one chat, an encrypted archive and GitHub provenance.": "כניסה חדשה ל־Telegram, צ׳אט אחד, ארכיון מוצפן ואישור מקור של GitHub.",
+"Open capture helper": "פתיחת עוזר האיסוף"
 }

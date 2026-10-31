@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Added entry points for the GitHub Actions capture preview on the workspace
+  login screen, in Exports, on the project homepage and in the documentation.
+  Entry labels are translated; the English/Russian helper preserves the chosen
+  language. Expanded setup, privacy boundaries, mode selection and troubleshooting.
+
 - Added a fork-launched sealed capture preview: restricted fresh-session login,
   one-chat history and media collection, encrypted connection/result artifacts,
   pinned reusable-workflow provenance and a fail-closed verifier. English/Russian

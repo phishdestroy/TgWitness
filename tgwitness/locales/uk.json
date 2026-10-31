@@ -2397,5 +2397,8 @@
   "process_shutdown": "process_shutdown",
   "source_disabled": "source_disabled",
   "{messages} messages · {done} of {total} sources": "{messages} messages · {done} of {total} sources",
-  "{n} enabled sources. Start observation before loading history.": "{n} enabled sources. Start observation before loading history."
+  "{n} enabled sources. Start observation before loading history.": "{n} enabled sources. Start observation before loading history.",
+"GitHub Actions capture (preview)": "Вивантаження через GitHub Actions (попередня версія)",
+"A fresh Telegram login, one chat, an encrypted archive and GitHub provenance.": "Новий вхід у Telegram, один чат, зашифрований архів і атестація GitHub.",
+"Open capture helper": "Відкрити помічник вивантаження"
 }

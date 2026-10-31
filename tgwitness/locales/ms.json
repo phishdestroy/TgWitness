@@ -2349,5 +2349,8 @@
   "process_shutdown": "process_shutdown",
   "source_disabled": "source_disabled",
   "{messages} messages · {done} of {total} sources": "{messages} messages · {done} of {total} sources",
-  "{n} enabled sources. Start observation before loading history.": "{n} enabled sources. Start observation before loading history."
+  "{n} enabled sources. Start observation before loading history.": "{n} enabled sources. Start observation before loading history.",
+"GitHub Actions capture (preview)": "Pengumpulan melalui GitHub Actions (pratonton)",
+"A fresh Telegram login, one chat, an encrypted archive and GitHub provenance.": "Log masuk Telegram baharu, satu sembang, arkib disulitkan dan bukti asal GitHub.",
+"Open capture helper": "Buka pembantu pengumpulan"
 }

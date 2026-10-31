@@ -1,9 +1,11 @@
 "use strict";
 const $ = id => document.getElementById(id), encoder = new TextEncoder(), decoder = new TextDecoder();
-let record = null, privateKey = null, lang = navigator.language.startsWith("ru") ? "ru" : "en";
+const requestedLanguage = new URLSearchParams(location.search).get("lang");
+let record = null, privateKey = null, lang = (requestedLanguage || navigator.language).startsWith("ru") ? "ru" : "en";
 const tr = (en, ru) => lang === "ru" ? ru : en;
 function translate() {document.documentElement.lang = lang; $("language").value = lang;
-  document.querySelectorAll("[data-en]").forEach(el => {el.textContent = el.dataset[lang];});}
+  document.querySelectorAll("[data-en]").forEach(el => {el.textContent = el.dataset[lang];});
+  $("instructions").href = "https://github.com/phishdestroy/TgWitness/blob/main/docs/" + (lang === "ru" ? "ru/" : "") + "SEALED-ACTIONS.md";}
 $("language").onchange = () => {lang = $("language").value; translate();}; translate();
 const b64 = bytes => btoa(String.fromCharCode(...new Uint8Array(bytes)));
 const unb64 = text => Uint8Array.from(atob(text), c => c.charCodeAt(0));

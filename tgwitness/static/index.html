@@ -85,6 +85,7 @@
     <button class="primary full" type="submit">Open workspace</button>
   </form>
   <button class="primary full" hidden id="open-demo" type="button">Explore demo</button>
+  <a class="text-link" id="gate-sealed" data-sealed-helper href="https://phishdestroy.github.io/TgWitness/sealed.html" target="_blank" rel="noopener noreferrer">GitHub Actions capture (preview)</a>
   <details class="gate-token-help"><summary>Where is my access token?</summary><p class="hint" id="gate-help">Find it in <code>data/live/panel-token.txt</code>.<br>Demo mode uses <code>data/demo/panel-token.txt</code>.<br>For a custom directory, follow the path printed at startup.</p></details>
   <p id="login-error" role="alert"></p>
   <div class="preferences">
@@ -291,6 +292,11 @@
       <small>Includes all sources through a fixed journal boundary, regardless of filters. Streaming export · ZIP limit: 4 GiB uncompressed unless changed in Parameters.</small>
     </div>
   </div>
+  <section class="card padded" id="sealed-capture-option">
+    <h2>GitHub Actions capture (preview)</h2>
+    <p>A fresh Telegram login, one chat, an encrypted archive and GitHub provenance.</p>
+    <a class="text-link" id="export-sealed" data-sealed-helper href="https://phishdestroy.github.io/TgWitness/sealed.html" target="_blank" rel="noopener noreferrer">Open capture helper</a>
+  </section>
   <div class="export-grid">
     <button class="card export-card" data-export="jsonl"><span class="file-icon"><svg aria-hidden="true" class="icon"><use href="#i-braces"/></svg></span><h3>JSONL journal</h3><p>Original event records and individual signatures. One event per line.</p><span>Download .jsonl</span></button>
     <button class="card export-card" data-export="csv"><span class="file-icon"><svg aria-hidden="true" class="icon"><use href="#i-table"/></svg></span><h3>Spreadsheet</h3><p>Review observations in your analysis tools. Formula-safe cells.</p><span>Download .csv</span></button>
