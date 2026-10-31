@@ -1,4 +1,5 @@
-export function createHealthBar({node, icon, tr, stateNames, partNames, lines, diagnose, canDiagnose, workspace}) {
+import {createHealthActions} from "./health-actions.js";
+export function createHealthBar({node, icon, tr, stateNames, partNames, lines, diagnose, canDiagnose, workspace, actionContext}) {
   const names = ["connection", "intake", "sources", "media"];
   const labels = {connection: tr("Telegram"), intake: tr("Intake"), sources: tr("Sources"), media: tr("Attachments")};
   const bar = node("div", "health-toolbar"); bar.setAttribute("aria-label", tr("Collector health"));
@@ -63,6 +64,8 @@ export function createHealthBar({node, icon, tr, stateNames, partNames, lines, d
   window.addEventListener("tgwitness:route", hide);
   window.addEventListener("tgwitness:lock", hide);
   new MutationObserver(() => { if (workspace.hidden || workspace.inert) hide(); }).observe(workspace, {attributes: true, attributeFilter: ["hidden", "inert"]});
+  const controller = {update, open, close: hide, actions: name => panels.get(name)?.actions};
+  const actions = actionContext ? createHealthActions({node,tr,health:controller,close:hide,context:actionContext}) : null;
   function update(health, {profile, demo = false} = {}) {
     if (profile !== identity) { hide(); identity = profile; }
     latest = health; bar.hidden = demo || !health;
@@ -87,6 +90,7 @@ export function createHealthBar({node, icon, tr, stateNames, partNames, lines, d
       });
       panel.diagnostic.hidden = !canDiagnose(name);
     }
+    actions?.update();
   }
-  return {update, open, close: hide, actions: name => panels.get(name)?.actions};
+  return controller;
 }

@@ -614,7 +614,11 @@ export function createSources(context) {
   }
   return {
     enter({params} = {}) {showTab(params?.tab || tab); updateStatus(getState().status);},
-    updateStatus, showTab, renderTargets, loadDialogs,
+    updateStatus, showTab, renderTargets, loadDialogs, runSourceAction,
+    filterTargets(value) {
+      showTab("chats"); find("target-search").value=""; find("target-kind").value="";
+      find("target-filter").value=value; sourcePage=0; renderTargets();
+    },
     leave() {},
     resetSession,
     destroy() {generation++; listeners.abort();},
