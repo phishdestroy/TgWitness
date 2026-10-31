@@ -68,6 +68,16 @@ class SourceSettings(BaseModel):
     custom: list[CustomSource] = Field(default_factory=list, max_length=MAX_CUSTOM)
     github: GitHubSearch = Field(default_factory=GitHubSearch)
     countries: bool = True
+    # Country choice of the automatic route: preferred servers first, avoided ones never.
+    prefer: list[str] = Field(default_factory=list, max_length=60)
+    avoid: list[str] = Field(default_factory=list, max_length=60)
+    only_preferred: bool = False
+
+    def country_rank(self, code):
+        """0 preferred, 1 any other allowed country, None not to be used."""
+        if code in self.avoid or (self.only_preferred and code not in self.prefer):
+            return None
+        return 0 if code in self.prefer else 1
 
 
 def source_id(kind, text):
@@ -90,6 +100,16 @@ def save(root, settings):
     ids = [item.id for item in settings.custom]
     if len(ids) != len(set(ids)):
         raise ValueError("The same list is added twice.")
+    settings.prefer = list(dict.fromkeys(code.strip().upper() for code in settings.prefer))
+    settings.avoid = list(dict.fromkeys(code.strip().upper() for code in settings.avoid))
+    if not all(re.fullmatch(r"[A-Z]{2}", code) for code in settings.prefer + settings.avoid):
+        raise ValueError("Use two-letter country codes such as DE or NL.")
+    if set(settings.prefer) & set(settings.avoid):
+        raise ValueError("A country cannot be preferred and avoided at once.")
+    if settings.only_preferred and not settings.prefer:
+        raise ValueError("Choose at least one preferred country to use only those.")
+    if (settings.prefer or settings.avoid) and not settings.countries:
+        raise ValueError("Country choices need country lookups. Switch on Look up server countries.")
     private_write(Path(root) / SETTINGS, settings.model_dump_json(indent=1).encode("utf-8"))
     return settings
 
