@@ -17,7 +17,7 @@ from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, Response
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, Field, StrictBool, StrictInt, model_validator
 from telethon.errors import FloodWaitError, RPCError
 
 from . import __version__
@@ -50,6 +50,7 @@ from . import netclient
 from . import source_check
 from . import dossier
 from . import report
+from . import recording
 from . import tuning
 from . import witness_api
 from . import interactions
@@ -127,12 +128,32 @@ class TargetBatch(BaseModel):
     chat_ids: list[int] = Field(min_length=1, max_length=500)
     enabled: bool | None = None
     priority: bool | None = None
+    remove: StrictBool = False
 
     @model_validator(mode="after")
     def action_required(self):
+        if self.remove:
+            if self.enabled is not None or self.priority is not None:
+                raise ValueError("Remove cannot be combined with enabled or priority.")
+            return self
         if self.enabled is None and self.priority is None:
-            raise ValueError("Choose enabled or priority.")
+            raise ValueError("Choose enabled, priority, or remove.")
         return self
+
+
+class IgnoreSources(BaseModel):
+    chat_ids: list[StrictInt] = Field(min_length=1, max_length=500)
+    ignored: StrictBool
+
+    @model_validator(mode="after")
+    def valid_chat_ids(self):
+        if any(chat_id == 0 or not -(2**53) < chat_id < 2**53 for chat_id in self.chat_ids):
+            raise ValueError("Invalid chat ID.")
+        return self
+
+
+class ClearMediaQueue(BaseModel):
+    through_seq: StrictInt = Field(ge=0, lt=2**53)
 
 
 class DossierSwitch(BaseModel):
@@ -507,6 +528,34 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         if allowed is not None and chat_id not in allowed:
             raise HTTPException(403, "This chat is not open to this access.")
 
+    def scoped_status(workspace, allowed, current=None):
+        current = dict(current or workspace.state.collector.status())
+        if allowed is not None:
+            store = workspace.state.store
+            current["source_status"] = {chat: status for chat, status in current.get("source_status", {}).items()
+                                        if int(chat) in allowed}
+            current["media_jobs"] = store.media_stats(allowed)
+            current["media_pending"] = sum(n for state, n in current["media_jobs"].items()
+                                           if state in ("queued", "running", "retry"))
+            current["oldest_pending_media_at"] = store.media_oldest(allowed)
+            recheck = current.get("recheck")
+            current["recheck"] = None
+            if recheck and (records := store.events(kind="recheck.completed", limit=1)):
+                results = [r for r in records[0]["payload"].get("chats", []) if r.get("chat_id") in allowed]
+                if results:
+                    current["recheck"] = {"at": recheck.get("at") or records[0]["observed_at"], "chats": len(results),
+                                          "errors": sum("error" in r for r in results),
+                                          **{key: sum(r.get(key, 0) for r in results)
+                                             for key in ("recovered", "edited", "missing", "checked")}}
+            if current.get("chat_export") and current["chat_export"].get("chat_id") not in allowed:
+                current["chat_export"] = None
+            if current.get("scope"):
+                current["scope"] = {**current["scope"],
+                                    "exclude": [chat for chat in current["scope"].get("exclude", []) if chat in allowed]}
+        targets = [t for t in workspace.state.store.targets() if allowed is None or t["chat_id"] in allowed]
+        parts = health.collector_of(workspace.state, current, enabled_sources=sum(bool(t["enabled"]) for t in targets))
+        return current, parts, targets
+
     async def authenticate_witness(request: Request, credential: HTTPAuthorizationCredentials = Depends(bearer)):
         """Witness tokens open only the signed journal head; the panel token is not accepted here."""
         entry = witness_api.match(app.state.vault, credential.credentials) if credential else None
@@ -518,38 +567,41 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         if app.state.store.get_setting("demo", False):
             raise HTTPException(409, "This is a synthetic demo. Start a separate data directory for real observation.")
 
+    async def perform_operation(call, *args):
+        try:
+            return await asyncio.wait_for(call(*args), tuning.value(app.state.store, "operation_timeout_seconds"))
+        except FloodWaitError as exc:
+            app.state.store.set_setting("rpc_backoff_until", max(time.time() + exc.seconds,
+                app.state.store.get_setting("rpc_backoff_until", 0)))
+            raise HTTPException(429, {"message": "Telegram requested a pause.", "retry_after": exc.seconds},
+                                headers={"Retry-After": str(exc.seconds)}) from None
+        except RPCError as exc:
+            raise HTTPException(400, "Telegram rejected the request: " + type(exc).__name__) from None
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from None
+        except (TimeoutError, OSError, ConnectionError) as exc:
+            raise HTTPException(503, "Connection unavailable: " + type(exc).__name__) from None
+
     async def operation(call, *args):
         require_live()
         async with op_lock:
-            try:
-                return await asyncio.wait_for(call(*args), tuning.value(app.state.store, "operation_timeout_seconds"))
-            except FloodWaitError as exc:
-                app.state.store.set_setting("rpc_backoff_until", max(time.time() + exc.seconds,
-                    app.state.store.get_setting("rpc_backoff_until", 0)))
-                raise HTTPException(429, {"message": "Telegram requested a pause.", "retry_after": exc.seconds},
-                                    headers={"Retry-After": str(exc.seconds)}) from None
-            except RPCError as exc:
-                raise HTTPException(400, "Telegram rejected the request: " + type(exc).__name__) from None
-            except ValueError as exc:
-                raise HTTPException(400, str(exc)) from None
-            except (TimeoutError, OSError, ConnectionError) as exc:
-                raise HTTPException(503, "Connection unavailable: " + type(exc).__name__) from None
+            return await perform_operation(call, *args)
 
     @app.get("/api/status", dependencies=[Depends(authenticate)])
     async def status(request: Request):
         from . import ai, media_analysis
         store, vault = app.state.store, app.state.vault
         allowed = visible_chats(request)
-        collector_status = app.state.collector.status()
+        collector_status, parts, targets = scoped_status(app, allowed)
         return {"version": __version__, "demo": store.get_setting("demo", False),
                 "analysis": {"enabled": ai.enabled(app.state) and not store.get_setting("demo", False),
                              "media_available": media_analysis.available() and not store.get_setting("demo", False)},
                 "collector": collector_status, "stats": store.stats(allowed),
-                "health": health.collector_of(app.state, collector_status),
+                "health": parts,
                 "history": app.state.collector.history.status() if allowed is None else None,
-                "targets": [t for t in store.targets() if allowed is None or t["chat_id"] in allowed],
+                "targets": targets,
                 "capture": capture_settings(store),
-                "monitoring": monitoring_settings(store), "scope": scope_settings(store),
+                "monitoring": monitoring_settings(store), "scope": collector_status["scope"],
                 "recheck": recheck_settings(store),
                 "dossiers": [c for c in dossier.enabled_chats(store) if allowed is None or c in allowed],
                 "parameters": tuning.values(store),
@@ -565,9 +617,13 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             for entry in app.state.profiles.summary():
                 if not principal.opens(entry["id"]):
                     continue
-                if principal.chats(entry["id"]) is not None:
-                    entry = {**entry, "stats": None, "sources_enabled": None,
-                             "sources_total": len(principal.chats(entry["id"]))}
+                allowed = principal.chats(entry["id"])
+                if allowed is not None:
+                    workspace = app.state.profiles.entries[entry["id"]].get("app")
+                    current, parts, targets = (scoped_status(workspace, allowed, entry["collector"])
+                                                if workspace else (None, None, []))
+                    entry = {**entry, "stats": None, "sources_enabled": sum(bool(t["enabled"]) for t in targets),
+                             "collector": current, "health": parts, "sources_total": len(targets)}
                 listed.append(entry)
             return {"profiles": listed, "limit": Profiles.MAX_PROFILES,
                     "model": "independent account collectors and signing identities"}
@@ -1039,6 +1095,9 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         for chat_id in ids:
             require_chat(request, chat_id)
         async with op_lock:
+            if body.remove:
+                result = remove_targets(ids)
+                return {"targets": visible_targets(request), **result}
             existing = {t["chat_id"]: t for t in store.targets()}
             entries = {chat_id: existing.get(chat_id) or collector.dialog_cache.get(chat_id) for chat_id in ids}
             if any(entry is None for entry in entries.values()):
@@ -1069,38 +1128,124 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                                             "recheck": recheck_settings(store)}, body.chat_id)
         return {"targets": visible_targets(request)}
 
+    def remove_targets(ids):
+        """Remove validated sources as one transaction, then clear rebuildable caches."""
+        store = app.state.store
+        existing = {t["chat_id"]: t for t in store.targets()}
+        if any(chat_id not in existing for chat_id in ids):
+            raise HTTPException(404, "This chat is not among the sources.")
+        scope = scope_settings(store)
+        additions = set(ids) - set(scope["exclude"]) if scope["mode"] != "selected" else set()
+        if len(scope["exclude"]) + len(additions) > EXCLUDE_LIMIT:
+            raise HTTPException(409, "The scope already excludes 5,000 chats, the most it keeps. Pause these "
+                                     "chats instead, or switch the scope to chosen chats to remove them.")
+        with store.transaction():
+            if additions:
+                store.set_setting("scope", {**scope, "exclude": sorted(set(scope["exclude"]) | additions)})
+            for chat_id in ids:
+                store.remove_target(chat_id)
+                removed_dossier = dossier.remove(store, chat_id, clear_cache=False)
+                store.append("target.removed", {
+                    "title": existing[chat_id]["title"], "dossier_removed": removed_dossier,
+                    "excluded_from_scope": scope["mode"] != "selected",
+                    "journal": "records already saved for this chat stay in the append-only journal"}, chat_id)
+        pending = []
+        for chat_id in ids:
+            try:
+                dossier.cache_path(store, chat_id).unlink(missing_ok=True)
+            except OSError:
+                pending.append(chat_id)
+        return {"removed": len(ids), "excluded": len(additions), "cache_cleanup_pending": pending,
+                "media": {"pending": "cancelled", "running": "may_finish", "saved": "kept"}}
+
+    @app.post("/api/targets/ignore-unconfirmed", dependencies=[Depends(authenticate)])
+    async def ignore_sources(request: Request, body: IgnoreSources):
+        require_live()
+        collector, store = app.state.collector, app.state.store
+        ids = list(dict.fromkeys(body.chat_ids))
+        for chat_id in ids:
+            require_chat(request, chat_id)
+        async with op_lock:
+            targets = {t["chat_id"]: t for t in store.targets()}
+            if any(chat_id not in targets for chat_id in ids):
+                raise HTTPException(404, "A selected chat is no longer among the sources.")
+            if body.ignored and any(collector.source_status.get(str(chat_id), {}).get("state") != "access_unconfirmed"
+                                    for chat_id in ids):
+                raise HTTPException(409, "Only sources not found in the last dialog check can be ignored.")
+            with store.transaction():
+                ignored = set(store.get_setting("ignored_source_warnings", []))
+                for chat_id in ids:
+                    if (chat_id in ignored) == body.ignored:
+                        continue
+                    if body.ignored:
+                        ignored.add(chat_id)
+                    else:
+                        ignored.discard(chat_id)
+                    target = targets[chat_id]
+                    store.append("target.changed", {"title": target["title"], "enabled": bool(target["enabled"]),
+                                                    "ignore_unconfirmed": body.ignored,
+                                                    "reason": "source warning preference changed"}, chat_id)
+                store.set_setting("ignored_source_warnings", sorted(ignored))
+            current, parts, _ = scoped_status(app, visible_chats(request))
+        return {"source_status": current["source_status"], "health": parts["sources"]}
+
     @app.delete("/api/targets/{chat_id}", dependencies=[Depends(authenticate)])
     async def target_remove(request: Request, chat_id: int):
         require_live()
-        store = app.state.store
+        require_chat(request, chat_id)
         async with op_lock:
-            existing = next((t for t in store.targets() if t["chat_id"] == chat_id), None)
-            if not existing:
-                raise HTTPException(404, "This chat is not among the sources.")
-            scope = scope_settings(store)
-            exclude = scope["mode"] != "selected" and chat_id not in scope["exclude"]
-            if exclude and len(scope["exclude"]) >= EXCLUDE_LIMIT:
-                raise HTTPException(409, "The scope already excludes 5,000 chats, the most it keeps. Pause this "
-                                         "chat instead, or switch the scope to chosen chats to remove it.")
-            with store.transaction():
-                store.remove_target(chat_id)
-                if exclude:
-
-                    store.set_setting("scope", {**scope, "exclude": [*scope["exclude"], chat_id]})
-                removed_dossier = dossier.remove(store, chat_id)
-                store.append("target.removed", {
-                    "title": existing["title"], "dossier_removed": removed_dossier,
-                    "excluded_from_scope": scope["mode"] != "selected",
-                    "journal": "records already saved for this chat stay in the append-only journal"}, chat_id)
-        return {"targets": visible_targets(request)}
+            result = remove_targets([chat_id])
+        return {"targets": visible_targets(request), **result}
 
     @app.post("/api/capture", dependencies=[Depends(authenticate)])
     async def capture(body: Capture):
         require_live()
-        with app.state.store.transaction():
-            app.state.store.set_setting("capture", body.model_dump())
-            app.state.store.append("capture.changed", capture_settings(app.state.store))
+        async with op_lock:
+            with app.state.store.transaction():
+                saved = body.model_dump()
+                if "record_disabled_media" not in body.model_fields_set:
+                    saved["record_disabled_media"] = capture_settings(app.state.store)["record_disabled_media"]
+                app.state.store.set_setting("capture", saved)
+                app.state.store.append("capture.changed", capture_settings(app.state.store))
+            app.state.collector.media_wakeup.set()
         return capture_settings(app.state.store)
+
+    @app.post("/api/media/queue/clear", dependencies=[Depends(authenticate)])
+    async def clear_media_queue(body: ClearMediaQueue):
+        require_live()
+        store = app.state.store
+        async with op_lock:
+            head = store.stats()["head"]
+            if body.through_seq > (head["seq"] if head else 0):
+                raise HTTPException(409, "The queue snapshot is newer than this workspace. Refresh and try again.")
+            cancelled = await complete_in_thread(store.clear_media_queue, body.through_seq)
+            return {"cancelled": cancelled, "through_seq": body.through_seq, "media_jobs": store.media_stats()}
+
+    @app.post("/api/recording", dependencies=[Depends(authenticate)])
+    async def set_recording(request: Request, body: recording.RecordingUpdate):
+        require_live()
+        try:
+            for permission in body.permissions():
+                access_check(request.state.principal, profile_id, (permission, None), {})
+        except Refused as exc:
+            raise HTTPException(403, str(exc)) from None
+        async with op_lock:
+            try:
+                changed, saved = recording.save(app.state.store, body)
+            except recording.Invalid as exc:
+                raise HTTPException(exc.status, str(exc)) from None
+            collector = app.state.collector
+            application = {"state": "applied"}
+            if body.scope is not None:
+                if not collector.running:
+                    application = {"state": "pending", "reason": "next_start"}
+                else:
+                    try:
+                        application["scope"] = await perform_operation(collector.apply_scope)
+                    except HTTPException as exc:
+                        application = {"state": "failed", "status": exc.status_code, "detail": exc.detail}
+            return {"saved": True, **saved, "changed": changed, "application": application,
+                    "collector": {"running": collector.running, "phase": collector.phase}}
 
     def scope_state():
         collector = app.state.collector
@@ -1116,35 +1261,25 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     async def set_scope(body: ScopeUpdate):
         require_live()
         store, collector = app.state.store, app.state.collector
-        previous, current = scope_settings(store), body.model_dump(exclude={"acknowledged"})
-        current["exclude"] = sorted(set(current["exclude"]))
-        widening = current["mode"] != "selected" and (previous["mode"] != current["mode"]
-                                                      or previous["folder_id"] != current["folder_id"])
-        if widening and not body.acknowledged:
-            raise HTTPException(409, WIDE_WARNING)
-        if current["mode"] == "folder" and current["folder_id"] is None:
-            raise HTTPException(422, "Choose a Telegram folder. Load chats first if the list is empty.")
-        if current != previous:
-            with store.transaction():
-                store.set_setting("scope", current)
-                store.append("scope.changed", {
-                    "before": previous, "after": current,
-                    "acknowledged": body.acknowledged if widening else None,
-                    "warning": WIDE_WARNING if current["mode"] != "selected" else None,
-                    "coverage": "applies to updates from now on; earlier history is not fetched"})
-            if collector.running:
-                await operation(collector.apply_scope)
+        async with op_lock:
+            try:
+                changed, _ = recording.save(store, recording.RecordingUpdate(scope=body))
+            except recording.Invalid as exc:
+                raise HTTPException(exc.status, str(exc)) from None
+            if "scope" in changed and collector.running:
+                await perform_operation(collector.apply_scope)
         return scope_state()
 
     @app.post("/api/recheck", dependencies=[Depends(authenticate)])
     async def set_recheck(body: Recheck):
         require_live()
         store = app.state.store
-        with store.transaction():
-            for key, value in body.model_dump().items():
-                store.set_setting(key, value)
-            store.append("recheck.changed", {**body.model_dump(), "meaning": "minutes between rechecks of "
-                                             "priority sources and of every other source; 0 turns a tier off"})
+        async with op_lock:
+            with store.transaction():
+                for key, value in body.model_dump().items():
+                    store.set_setting(key, value)
+                store.append("recheck.changed", {**body.model_dump(), "meaning": "minutes between rechecks of "
+                                                 "priority sources and of every other source; 0 turns a tier off"})
         return scope_state()
 
     def outside_state():
@@ -1572,9 +1707,10 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     @app.get("/api/notifications", dependencies=[Depends(authenticate)])
     async def notifications(request: Request):
         lang = i18n.pick(request.cookies.get(i18n.COOKIE), request.headers.get("accept-language"))
-        items, allowed = alerts.panel_items(app.state.store, i18n.words(lang),
-                                            tuning.value(app.state.store, "panel_notifications")), visible_chats(request)
-        return {"items": [i for i in items if allowed is None or i.get("chat_id") in allowed]}
+        items = alerts.panel_items(app.state.store, i18n.words(lang),
+                                   tuning.value(app.state.store, "panel_notifications"),
+                                   allowed_chats=visible_chats(request), workspace_id=profile_id)
+        return {"items": items}
 
     @app.get("/api/chats/{chat_id}/scale", dependencies=[Depends(authenticate)])
     async def chat_scale(chat_id: int):

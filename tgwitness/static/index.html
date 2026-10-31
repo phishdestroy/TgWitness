@@ -7,22 +7,26 @@
 <meta name="color-scheme" content="light dark">
 <title>TgWitness · Observation workspace</title>
 <link rel="icon" type="image/svg+xml" href="/mark.svg">
-<link rel="stylesheet" href="/style.css?v=0.7.0-mcp2">
+<link rel="stylesheet" href="/style.css?v=0.7.0-polling1">
 <link rel="stylesheet" href="/components/shell.css?v=1">
+<link rel="stylesheet" href="/components/health.css?v=1">
+<link rel="stylesheet" href="/components/collection.css?v=1">
+<link rel="stylesheet" href="/components/notifications.css?v=1">
+<link rel="stylesheet" href="/views/sources.css?v=17">
 <link rel="stylesheet" href="/cloud-capture.css?v=5"><link rel="stylesheet" href="/cloud-capture-story.css?v=3">
 <script src="/theme.js?v=0.7.0"></script>
 <script src="/guide-locale.js" data-scope="panel"></script>
 <script defer src="/i18n.js?v=0.7.0"></script>
-<script defer src="/app.js?v=0.7.0-shell1"></script>
+<script defer src="/app.js?v=0.7.0-polling2"></script>
 <script defer src="/integrations.js?v=2"></script>
 <script defer src="/analysis.js?v=3"></script>
 <script defer src="/media-analysis.js?v=2"></script>
-<script defer src="/webhooks.js?v=1"></script>
+<script defer src="/webhooks.js?v=2"></script>
 <script defer src="/proxies.js?v=3"></script>
-<script defer src="/fleet.js?v=2"></script>
+<script defer src="/fleet.js?v=4"></script>
 <script defer src="/review.js?v=1"></script>
-<script defer src="/live.js?v=1"></script>
-<script defer src="/cloud-capture-locales.js?v=1"></script><script defer src="/cloud-capture-story.js?v=3"></script><script defer src="/cloud-capture.js?v=5"></script>
+<script defer src="/live.js?v=2"></script>
+<script defer src="/cloud-capture-locales.js?v=1"></script><script defer src="/cloud-capture-story.js?v=4"></script><script defer src="/cloud-capture.js?v=6"></script>
 </head>
 <body>
 <svg class="icon-sprite" aria-hidden="true" focusable="false">
@@ -152,11 +156,17 @@
   <div class="top-actions">
     <button class="quiet quick-mobile" data-quick-open type="button" aria-label="Go to a section" aria-haspopup="dialog" aria-controls="quick-dialog"><svg aria-hidden="true" class="icon"><use href="#i-search"/></svg></button>
     <div class="notify-wrap">
-      <button aria-controls="notify-panel" aria-expanded="false" aria-label="Notifications" class="quiet notify-button" id="notify-toggle" title="Notifications" type="button"><svg aria-hidden="true" class="icon"><use href="#i-bell"/></svg><b hidden id="notify-count">0</b></button>
-      <div aria-label="Notifications" class="notify-panel" hidden id="notify-panel" role="dialog">
-        <div class="notify-head"><h2>Notifications</h2><button class="text-link" id="notify-read" type="button">Mark all as read</button></div>
-        <div id="notify-list"></div>
-      </div>
+      <button aria-controls="notify-panel" aria-expanded="false" aria-haspopup="dialog" aria-label="Notifications" class="quiet notify-button" disabled id="notify-toggle" title="Notifications" type="button"><svg aria-hidden="true" class="icon"><use href="#i-bell"/></svg><b hidden id="notify-count">0</b></button>
+      <dialog aria-labelledby="notify-title" class="notify-panel" hidden id="notify-panel">
+        <div class="notify-head"><div><h2 id="notify-title">Notifications</h2><p class="notice-summary" id="notify-summary"></p></div><button aria-label="Close notifications" class="quiet" id="notify-close" type="button"><svg aria-hidden="true" class="icon"><use href="#i-x"/></svg></button></div>
+        <div aria-label="Notification categories" class="notice-filters" role="tablist">
+          <button aria-controls="notify-list" aria-selected="true" data-notice-filter="all" id="notify-tab-all" role="tab" type="button">All</button>
+          <button aria-controls="notify-list" aria-selected="false" data-notice-filter="problems" id="notify-tab-problems" role="tab" tabindex="-1" type="button">Problems</button>
+          <button aria-controls="notify-list" aria-selected="false" data-notice-filter="changes" id="notify-tab-changes" role="tab" tabindex="-1" type="button">Chat changes</button>
+        </div>
+        <div aria-labelledby="notify-tab-all" id="notify-list" role="tabpanel" tabindex="0"></div>
+        <div class="notice-footer"><div class="notice-footer-actions"><button id="notify-read" type="button">Mark all as read</button><button id="notify-rules" type="button">Notification rules</button></div><p id="notify-status" role="status"></p></div>
+      </dialog>
     </div>
     <span class="status-chip" id="status-chip">Offline</span>
     <button class="secondary" id="collector-toggle">Start observation</button>
@@ -224,9 +234,21 @@
 
 <section class="view" hidden id="view-sources">
   <div class="page-heading">
-    <div><h1 id="sources-title">Choose chats</h1><p class="page-description" id="sources-description">Pick the groups and channels this account should observe.</p></div>
-    <button class="primary" id="load-dialogs">Load chats</button>
+    <div><h1 id="sources-title">Sources</h1><p class="page-description" id="sources-description">Choose the conversations to record and what to keep.</p></div>
+    <button class="secondary" id="load-dialogs" type="button" aria-describedby="dialog-refresh-description">Refresh chat list</button>
   </div>
+  <div class="source-refresh-info">
+    <p id="dialog-refresh-description" class="hint">Read the chats and folders available to this account. This refreshes the list; it does not download messages.</p>
+    <div class="source-refresh-status"><span class="hint" id="dialog-refresh-status" role="status" aria-live="polite">Not refreshed in this session.</span><button type="button" class="text-link" id="dialog-refresh-retry" hidden>Retry</button></div>
+    <progress id="dialog-refresh-progress" aria-label="Refreshing chat list" hidden></progress>
+  </div>
+  <div class="sources-summary" aria-label="Source overview"><span id="sources-scope-summary"></span><span id="sources-count-summary"></span><span id="sources-recording-summary"></span></div>
+  <div class="sources-tabs" role="tablist" aria-label="Source settings">
+    <button type="button" id="sources-tab-scope" role="tab" aria-controls="sources-panel-scope" aria-selected="true" data-source-tab="scope">Scope</button>
+    <button type="button" id="sources-tab-chats" role="tab" aria-controls="sources-panel-chats" aria-selected="false" tabindex="-1" data-source-tab="chats">Chats in scope <span id="sources-tab-count" class="tab-count">0</span></button>
+    <button type="button" id="sources-tab-recording" role="tab" aria-controls="sources-panel-recording" aria-selected="false" tabindex="-1" data-source-tab="recording">Recording <span id="recording-tab-dirty" class="tab-count" hidden></span></button>
+  </div>
+  <div id="sources-panel-scope" role="tabpanel" aria-labelledby="sources-tab-scope">
   <form class="card padded scope-card" id="scope-form"><div class="eyebrow">Observation scope</div><h2>What this account records</h2>
     <div class="investigation-preset"><button class="secondary" id="scope-investigation" type="button"><svg aria-hidden="true" class="icon"><use href="#i-eye"/></svg> Investigation mode</button><p class="hint">For a dedicated account that joins teams and talks to bots: records every chat, group, private chat and bot it sees, its own messages and button presses, and for each new chat or bot saves its profile and earlier visible messages at once. Review and press Save scope.</p><a class="format-help" href="/dedicated-account.html" rel="noopener" target="_blank">Why never your main account ↗</a></div>
     <div aria-label="Observation scope" class="scope-modes" role="radiogroup">
@@ -252,8 +274,37 @@
     <div class="scope-actions"><button class="primary" type="submit">Save scope</button><span id="scope-unsaved" role="status"></span></div>
     <details class="scope-limits"><summary>Limits of folder and whole-account modes</summary><p class="hint">Secret chats are end-to-end encrypted between two devices and never reach TgWitness. Nothing is recorded while TgWitness is not running: after a restart it catches up only what Telegram still returns, and the report shows the gap. Chats beyond the chat list limit (1,000 dialogs unless changed in Parameters) are added when they next become active, and the earlier history of an added chat is not fetched. Muted or read state of a folder is not applied: such chats stay observed. Inline bot buttons pressed in another app are invisible to TgWitness; the bot's reply or edit is recorded.</p></details>
   </form>
-  <div class="card padded"><h2 id="target-list-title">Selected chats</h2><div id="target-list"></div></div>
-  <div class="card padded" hidden id="available-card"><h2>Available chats</h2><div class="dialog-filters"><input aria-label="Find an available chat" id="dialog-search" placeholder="Find a chat…" type="search"><select aria-label="Chat type" id="dialog-kind"><option value="">All types</option><option value="channels">Channels</option><option value="groups">Groups</option><option value="private">Private chats</option><option value="bots">Bots</option></select></div><p class="hint" id="dialog-limit"></p><div id="dialog-list"></div><button class="primary" id="finish-source-selection" type="button">Done</button></div>
+  </div>
+  <div id="sources-panel-chats" role="tabpanel" aria-labelledby="sources-tab-chats" hidden>
+  <section class="card source-list-card" id="target-card" aria-labelledby="target-list-title">
+    <div class="source-list-heading"><h2 id="target-list-title" tabindex="-1">Chats in scope</h2><span id="target-match-count" class="hint"></span></div>
+    <div class="source-filters" id="target-tools">
+      <input type="search" id="target-search" aria-label="Search chats" placeholder="Search by name or ID">
+      <select id="target-filter" aria-label="Source status"><option value="">All statuses</option><option value="enabled">Enabled</option><option value="paused">Paused</option><option value="priority">Priority</option><option value="excluded">Excluded</option><option value="unconfirmed">Unconfirmed access</option><option value="ignored">Ignored</option></select>
+      <select id="target-kind" aria-label="Source type"><option value="">All types</option><option value="channels">Channels</option><option value="groups">Groups</option><option value="private">Private chats</option><option value="bots">Bots</option></select>
+      <select id="target-sort" aria-label="Sort sources"><option value="name">Name · A–Z</option><option value="name-desc">Name · Z–A</option><option value="priority">Priority first</option><option value="status">Enabled first</option></select>
+    </div>
+    <div id="target-bulk-actions" class="source-selection-bar" hidden role="toolbar" aria-label="Selected sources">
+      <strong id="target-selection-count"></strong>
+      <label class="sr-only" for="target-bulk-action">Action for selected sources</label>
+      <select id="target-bulk-action"><option value="enable">Enable</option><option value="pause">Pause</option><option value="priority">Mark priority</option><option value="regular">Remove priority</option><option value="exclude">Exclude from scope</option><option value="remove">Remove sources</option></select>
+      <button type="button" class="secondary" id="target-bulk-apply">Apply</button><button type="button" class="quiet" id="target-selection-clear">Clear selection</button>
+    </div>
+    <div class="source-table-wrap"><table class="sources-table"><thead><tr>
+      <th class="source-select-cell"><input type="checkbox" id="target-select-page" aria-label="Select this page"></th><th>Source</th><th class="source-type-cell">Type</th><th class="source-status-cell">Status</th><th class="source-star-cell"><span class="sr-only">Priority</span></th><th class="source-menu-cell"><span class="sr-only">Actions</span></th>
+    </tr></thead><tbody id="target-list"></tbody></table></div>
+    <div id="target-empty" class="source-empty" hidden><p id="target-empty-message"></p><button type="button" class="quiet" id="target-clear-filters">Clear filters</button></div>
+    <div class="source-pagination"><button type="button" class="quiet" id="target-select-matching">Select all matching</button><span id="target-page-count" class="hint" role="status"></span><div><button type="button" class="quiet" id="target-prev">Previous</button><button type="button" class="quiet" id="target-next">Next</button></div></div>
+    <p id="source-action-result" class="hint source-action-result" role="status"></p>
+  </section>
+  <section class="card padded" hidden id="available-card" aria-labelledby="dialog-list-title">
+    <h2 id="dialog-list-title">Available chats</h2>
+    <div class="dialog-filters"><input aria-label="Find an available chat" id="dialog-search" placeholder="Find a chat…" type="search"><select aria-label="Chat type" id="dialog-kind"><option value="">All types</option><option value="channels">Channels</option><option value="groups">Groups</option><option value="private">Private chats</option><option value="bots">Bots</option></select></div>
+    <p class="hint" id="dialog-limit"></p>
+    <div id="dialog-bulk-actions" class="source-bulk"><button type="button" class="secondary small" id="dialog-add-selected">Add selected</button><button type="button" class="secondary small" id="dialog-add-matching">Add all matching</button></div>
+    <div id="dialog-list"></div>
+    <div class="source-pagination"><span class="hint" id="dialog-page-count" role="status"></span><div><button type="button" class="quiet" id="dialog-prev">Previous</button><button type="button" class="quiet" id="dialog-next">Next</button></div><button class="secondary" id="finish-source-selection" type="button">Done</button></div>
+  </section>
   <section class="card padded" id="history-card" aria-labelledby="history-heading">
     <div class="eyebrow">Full history</div><h2 id="history-heading">Bring past messages into this workspace</h2>
     <p class="muted">Load the available history of every enabled source into Chats and the signed journal. Progress survives a restart. Attachments follow your media settings. Deleted messages and unseen past edits cannot be recovered.</p>
@@ -270,8 +321,12 @@
     <ul id="history-sources"></ul>
     <p class="hint">Use Export evidence to hand over the journal and saved attachments. Finishing history reads does not mean every attachment was downloaded.</p>
   </section>
-  <details class="source-options" id="source-options"><summary>Recording settings · what to save, photos &amp; files, history</summary>
-  <form class="card padded monitoring-card" id="monitoring-form">
+  </div>
+  <div id="sources-panel-recording" role="tabpanel" aria-labelledby="sources-tab-recording" hidden>
+  <form id="recording-form">
+    <p class="hint recording-intro">One policy for this workspace. Changes apply to future activity; saved records stay.</p>
+    <div id="source-options" class="recording-sections">
+  <section class="card padded monitoring-card" id="monitoring-form">
     <div class="eyebrow">Monitoring policy</div><h2>Choose which changes to preserve</h2>
     <p class="muted">Applies to all selected sources in this workspace. Keep original messages to compare later changes.</p>
     <div class="monitoring-presets"><button class="secondary" data-monitor-preset="all" type="button">All visible activity</button><button class="secondary" data-monitor-preset="changes" type="button">Messages, edits &amp; deletions</button></div>
@@ -284,22 +339,22 @@
     </div>
     <p class="hint" id="monitoring-note"></p><p class="hint" id="monitoring-current"></p>
     <details class="monitoring-details"><summary>What these settings affect</summary><p class="hint">Changes apply to future live updates. Turning a category back on does not recover missed events. Operational records, other group service events and explicitly requested history snapshots remain separate. These switches do not remove metadata embedded in captured messages.</p></details>
-    <div class="monitoring-actions"><button class="primary" type="submit">Save monitoring settings</button><span id="monitoring-unsaved" role="status"></span></div>
-  </form>
-  <div class="two-columns">
-    <form class="card padded" id="capture-form"><div class="eyebrow">Attachments</div><h2>Preserve media when available</h2><p class="muted">Downloads happen after message capture. Deleted or unavailable files may be missed; every attempt gets a recorded outcome.</p><label class="check-label"><input id="download-media" type="checkbox"> Download visible attachments</label><label for="max-media">Maximum file size, MiB</label><input id="max-media" max="2000" min="1" required step="1" type="number"><details class="media-rules-details"><summary>Limits by type</summary><p class="hint">Changing the maximum size above sets every type; adjust single types here, 1 to 2,000 MiB.</p><div class="media-rules" id="media-rules"></div></details><button class="secondary" type="submit">Save media settings</button><p id="capture-unsaved" role="status"></p></form>
-    <form class="card padded" id="snapshot-form"><div class="eyebrow">History snapshot</div><h2>Start with visible context</h2><p class="muted">Save the latest visible messages as a labeled snapshot. This cannot reconstruct deleted messages or changes missed while offline.</p><label for="snapshot-source">Selected source</label><select id="snapshot-source" required></select><label for="snapshot-limit">Most recent messages</label><input id="snapshot-limit" max="500" min="1" required step="1" type="number" value="100"><p class="hint" id="snapshot-limit-hint"></p><button class="secondary" type="submit">Capture history snapshot</button></form>
-  </div>
-  <form class="card padded" id="recheck-form"><div class="eyebrow">Recheck</div><h2>Ask Telegram again for missed changes</h2>
+    <span id="monitoring-unsaved" class="hint" hidden></span>
+  </section>
+    <section class="card padded" id="capture-form"><div class="eyebrow">Attachments</div><h2>Preserve media when available</h2><p class="muted">Downloads happen after message capture. Deleted or unavailable files may be missed; every attempt gets a recorded outcome.</p><label class="check-label"><input id="download-media" type="checkbox"> Download visible attachments</label><label for="max-media">Maximum file size, MiB</label><input id="max-media" max="2000" min="1" required step="1" type="number"><details class="media-rules-details"><summary>Limits by type</summary><p class="hint">Changing the maximum size above sets every type; adjust single types here, 1 to 2,000 MiB.</p><div class="media-rules" id="media-rules"></div></details><p id="capture-unsaved" hidden></p></section>
+  <section class="card padded" id="recheck-form"><div class="eyebrow">Recheck</div><h2>Ask Telegram again for missed changes</h2>
     <p class="muted">Rechecks recover missed messages and edits and mark messages Telegram no longer returns. Priority chats are rechecked often, the rest rarely, so the account stays clear of Telegram's rate limits (FloodWait). Mark priority chats with the star in the list above.</p>
     <div class="recheck-fields"><div><label for="recheck-priority">Priority chats, every … minutes</label><input id="recheck-priority" max="1440" min="0" required step="1" type="number"></div>
     <div><label for="recheck-other">Other chats, every … minutes</label><input id="recheck-other" max="10080" min="0" required step="1" type="number"></div></div>
     <p class="hint">0 turns rechecks of that group off. How many chats a pass takes and the pause between them are under Parameters.</p>
-    <button class="secondary" type="submit">Save recheck settings</button>
+  </section>
+    </div>
+    <div class="recording-savebar" id="recording-savebar">
+      <div><strong id="recording-change-count" role="status">No unsaved changes</strong><p id="recording-result" class="hint" aria-live="polite"></p></div>
+      <div class="recording-actions"><button class="quiet" type="button" id="recording-discard" disabled>Discard changes</button><button class="primary" type="submit" id="recording-save" disabled>Save recording settings</button></div>
+    </div>
   </form>
-  <form class="card padded" id="chat-export-form"><div class="eyebrow">Full chat export</div><h2>Export a whole chat, signed</h2><p class="muted">Download the entire visible history of one chat as a signed bundle: <code>chat.json</code> (Telegram-style) and a readable <code>chat.html</code>, with an Ed25519 signature so a copy can be checked for changes against your key. Private chats work when the account is a member. A current snapshot only: deleted or past-edited messages are not reconstructed. Large chats can take a long time and depend on Telegram's rate limits.</p><label for="chat-export-source">Selected source</label><select id="chat-export-source" required></select><div class="chat-export-actions"><button class="secondary" type="submit">Export full chat</button><button class="quiet" hidden id="chat-export-cancel" type="button">Cancel</button><button class="primary" hidden id="chat-export-download" type="button"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Download signed bundle</button></div><p id="chat-export-progress" role="status"></p><p class="hint">Language and case details of <code>chat.html</code>: <a data-go-reports="settings" href="#">Exports → Report settings</a>.</p></form>
-  </details>
-  <p class="hint">Notifications, evidence mode and a 24/7 server are under <a data-go-extra="alerts" href="#">Extras</a>.</p>
+  </div>
 </section>
 
 <section class="view" hidden id="view-evidence">
@@ -332,6 +387,9 @@
     <div hidden id="export-password-field"><label for="export-password">Password, at least 12 characters</label><input autocomplete="new-password" id="export-password" maxlength="256" spellcheck="false" type="password"></div>
     <p class="hint">The file is saved as an AES-256 ZIP that 7-Zip or WinRAR opens with this password. Inside is the unchanged signed file, so <code>verify.py</code> works as before. The password is not stored; without it the file cannot be opened.</p>
   </div>
+  <details class="source-options" id="export-chat-tools"><summary>Capture or export one chat</summary>
+    <form class="card padded" id="snapshot-form"><div class="eyebrow">History snapshot</div><h2>Start with visible context</h2><p class="muted">Save the latest visible messages as a labeled snapshot. This cannot reconstruct deleted messages or changes missed while offline.</p><label for="snapshot-source">Selected source</label><select id="snapshot-source" required></select><label for="snapshot-limit">Most recent messages</label><input id="snapshot-limit" max="500" min="1" required step="1" type="number" value="100"><p class="hint" id="snapshot-limit-hint"></p><button class="secondary" type="submit">Capture history snapshot</button></form>  <form class="card padded" id="chat-export-form"><div class="eyebrow">Full chat export</div><h2>Export a whole chat, signed</h2><p class="muted">Download the entire visible history of one chat as a signed bundle: <code>chat.json</code> (Telegram-style) and a readable <code>chat.html</code>, with an Ed25519 signature so a copy can be checked for changes against your key. Private chats work when the account is a member. A current snapshot only: deleted or past-edited messages are not reconstructed. Large chats can take a long time and depend on Telegram's rate limits.</p><label for="chat-export-source">Selected source</label><select id="chat-export-source" required></select><div class="chat-export-actions"><button class="secondary" type="submit">Export full chat</button><button class="quiet" hidden id="chat-export-cancel" type="button">Cancel</button><button class="primary" hidden id="chat-export-download" type="button"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Download signed bundle</button></div><p id="chat-export-progress" role="status"></p><p class="hint">Language and case details of <code>chat.html</code>: <a data-go-reports="settings" href="#">Exports → Report settings</a>.</p></form>
+  </details>
   <form class="card padded report-settings" id="report-form">
     <div class="eyebrow">Readable reports</div><h2>Report settings</h2>
     <p class="muted">Language, case details and contents of the report in every signed archive and chat export. Case details are signed into the export; leave a field empty to omit it.</p>

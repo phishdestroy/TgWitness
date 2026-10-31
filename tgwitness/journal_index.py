@@ -7,6 +7,7 @@ TEXT_KINDS = ("message.new", "message.snapshot", "message.edited", "message.reco
 GONE_KINDS = ("message.deleted", "message.missing_on_recheck")
 CHAT_KINDS = TEXT_KINDS + GONE_KINDS + ("media.saved",)
 MEDIA_KINDS = ("media.saved", "actor.avatar_saved")
+NUL_PAYLOAD = "instr(payload,'\\u0000')>0"
 READ_GROUPS = {
     "state": ("message_state_index", "chat_state_index", "known_chat_index"),
     "counts": ("event_kind_counts", "chat_event_kind_counts"),
@@ -55,6 +56,7 @@ class JournalIndex:
             "json_extract(payload,'$.sender_id'),chat_id,message_id,kind)",
             "CREATE INDEX IF NOT EXISTS event_media ON events("
             "json_extract(payload,'$.media_sha256'),chat_id,kind)",
+            "CREATE INDEX IF NOT EXISTS event_text_nul ON events(seq) WHERE " + NUL_PAYLOAD,
         ):
             db.execute(sql)
         self.search_enabled = self.create_search()

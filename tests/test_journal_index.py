@@ -118,8 +118,17 @@ def test_projection_and_search_roll_back_with_event_and_media_queue(journal):
     assert store.stats()["counts"] == {"message.new": 1}
 
 
-def test_search_survives_sqlite_json_strings_truncated_at_nul(journal):
+def test_search_survives_sqlite_json_strings_truncated_at_nul(journal, monkeypatch):
     store, vault = journal
+    original = JournalIndex.search
+
+    def legacy_tokenizer(index, event):
+        text = event["payload"].get("text")
+        if isinstance(text, str):
+            event = {**event, "payload": {**event["payload"], "text": text.split("\0", 1)[0]}}
+        original(index, event)
+
+    monkeypatch.setattr(JournalIndex, "search", legacy_tokenizer)
     kept = store.append("message.new", {"text": "before\0after-nul xyz"}, 1, 1)
     store.append("message.new", {"text": "private\0after-nul hidden"}, 2, 2)
 
@@ -135,6 +144,8 @@ def test_search_survives_sqlite_json_strings_truncated_at_nul(journal):
         assert store.events(search=query, text_only=True, chat_ids={1}) == [kept]
     assert not store.events(search="after-nul", text_only=True, chat_ids={3})
     assert not store.events(search="after-nul", text_only=True, chat_ids={1}, before=kept["seq"])
+    plan = store.db.execute("EXPLAIN QUERY PLAN SELECT seq FROM events WHERE instr(payload,'\\u0000')>0")
+    assert any("event_text_nul" in row[3] for row in plan)
     assert store.verify(vault.public_key)["events"] == 2
 
 

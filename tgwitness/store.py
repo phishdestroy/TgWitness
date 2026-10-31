@@ -12,6 +12,7 @@ from . import message_content
 from . import continuity
 from .journal_index import CHAT_KINDS, MEDIA_KINDS, TEXT_KINDS, JournalIndex, migrate_media, nul_text, search_text
 from .journal_index import GONE_KINDS as GONE_KINDS
+from .journal_index import NUL_PAYLOAD
 
 ZERO = "0" * 64
 EVENT_FIELDS = ("seq", "observed_at", "source_at", "kind", "chat_id", "message_id",
@@ -371,10 +372,20 @@ class Store:
             candidate = self.read_index.candidate(search, text_only=text_only)
             if candidate is not None:
                 table = "event_text_search" if text_only else "event_payload_search"
-                source = table + " JOIN events ON events.seq=" + table + ".rowid"
-                order = table + ".rowid"
-                filters.append(table + " MATCH ?")
-                params.append(candidate)
+                if text_only:
+                    # Older trigram tokenizers also stop at NUL. Include the rare
+                    # NUL rows from a partial index, including existing journals
+                    # whose FTS rows were already truncated. Exact matching follows.
+                    source = ("(SELECT rowid FROM event_text_search WHERE event_text_search MATCH ? "
+                              "UNION SELECT seq AS rowid FROM events INDEXED BY event_text_nul WHERE "
+                              + NUL_PAYLOAD + ") AS candidates JOIN events ON events.seq=candidates.rowid")
+                    order = "candidates.rowid"
+                    params.insert(0, candidate)
+                else:
+                    source = table + " JOIN events ON events.seq=" + table + ".rowid"
+                    order = table + ".rowid"
+                    filters.append(table + " MATCH ?")
+                    params.append(candidate)
             value = "COALESCE(json_extract(payload,'$.text'),'')" if text_only else "payload"
             if text_only:
                 # Keep the fast path and scalar semantics. Only escaped-NUL text
@@ -460,16 +471,18 @@ class Store:
         path = self.root / "checkpoints" / "latest.json"
         return json.loads(path.read_bytes()) if path.exists() else None
 
-    def media_stats(self):
+    def media_stats(self, chat_ids=None):
+        clause = " WHERE chat_id IN (" + ",".join("?" * len(chat_ids)) + ")" if chat_ids is not None else ""
         with self.lock:
             return {r[0]: r[1] for r in self.db.execute(
-                "SELECT state,count(*) FROM media_jobs GROUP BY state")}
+                "SELECT state,count(*) FROM media_jobs" + clause + " GROUP BY state", sorted(chat_ids or []))}
 
-    def media_oldest(self):
+    def media_oldest(self, chat_ids=None):
+        clause = " AND j.chat_id IN (" + ",".join("?" * len(chat_ids)) + ")" if chat_ids is not None else ""
         with self.lock:
             row = self.db.execute(
                 "SELECT min(e.observed_at) FROM media_jobs j JOIN events e ON e.seq=j.message_event "
-                "WHERE j.state IN ('queued','retry','running')").fetchone()
+                "WHERE j.state IN ('queued','retry','running')" + clause, sorted(chat_ids or [])).fetchone()
         return row[0]
 
     def claim_media(self, account_id, now=None, *, min_priority=None, max_priority=None):
@@ -491,6 +504,23 @@ class Store:
             job = dict(row)
             job["attempts"] += 1
             return job
+
+    def clear_media_queue(self, through_seq):
+        """Cancel waiting jobs in the reviewed snapshot, retaining their signed receipts and files."""
+        if type(through_seq) is not int or not 0 <= through_seq < 2**53:
+            raise ValueError("Invalid queue cutoff")
+        with self.transaction():
+            rows = self.db.execute(
+                "SELECT message_event,chat_id,message_id FROM media_jobs "
+                "WHERE state IN ('queued','retry') AND message_event<=? ORDER BY message_event",
+                (through_seq,)).fetchall()
+            for row in rows:
+                self.append("media.skipped", {"message_event": row["message_event"],
+                                              "reason": "waiting download cancelled by operator"},
+                            row["chat_id"], row["message_id"])
+            self.db.execute("UPDATE media_jobs SET state='cancelled',next_attempt=0,last_error='operator_cancelled' "
+                            "WHERE state IN ('queued','retry') AND message_event<=?", (through_seq,))
+            return len(rows)
 
     def recover_media(self):
         with self.transaction():
@@ -595,9 +625,14 @@ class Store:
         labels = [b.get("text") for r in markup.get("rows", []) for b in r.get("buttons", []) if b.get("text")]
         return row[0], labels
 
-    def events_of(self, kinds, limit=50, after=None, before=None):
+    def events_of(self, kinds, limit=50, after=None, before=None, *, chat_ids=None):
         """Newest records of the given kinds (for the panel's notification list)."""
+        if not kinds or chat_ids is not None and not chat_ids:
+            return []
         where, params = "kind IN (" + ",".join("?" * len(kinds)) + ")", list(kinds)
+        if chat_ids is not None:
+            where += " AND chat_id IN (" + ",".join("?" * len(chat_ids)) + ")"
+            params.extend(sorted(chat_ids))
         if after is not None:
             where += " AND seq>?"
             params.append(after)
