@@ -345,7 +345,23 @@ class Store:
 
     def events(self, chat_id=None, message_id=None, kind=None, before=None, limit=100, search=None, chat_ids=None,
                *, since=None, until=None, message_min=None, message_max=None, timeout_s=None,
-               text_only=False, message_only=False):
+               text_only=False, message_only=False, hide_system=False, after=None):
+        source, order, where, params = self._event_selection(
+            chat_id, message_id, kind, before, search, chat_ids, since=since, until=until,
+            message_min=message_min, message_max=message_max, text_only=text_only,
+            message_only=message_only, hide_system=hide_system, after=after)
+        sql = "SELECT events.* FROM " + source + where + " ORDER BY " + order
+        sql += " ASC LIMIT ?" if after is not None else " DESC LIMIT ?"
+        records = [self.decode(r) for r in self.bounded_read(sql, [*params, limit], timeout_s)]
+        return list(reversed(records)) if after is not None else records
+
+    def count_events(self, *, timeout_s=2, **filters):
+        source, _, where, params = self._event_selection(**filters)
+        return self.bounded_read("SELECT count(*) FROM " + source + where, params, timeout_s)[0][0]
+
+    def _event_selection(self, chat_id=None, message_id=None, kind=None, before=None, search=None, chat_ids=None,
+                         *, since=None, until=None, message_min=None, message_max=None,
+                         text_only=False, message_only=False, hide_system=False, after=None):
         filters, params = [], []
         source, order = "events", "seq"
         if chat_ids is not None:
@@ -355,19 +371,30 @@ class Store:
             if value is not None:
                 filters.append(key + "=?")
                 params.append(value)
-        if kind in ("membership", "coverage"):
-            prefixes = ("membership.",) if kind == "membership" else (
-                "coverage.", "connection.", "collector.", "process.", "observation.",
-                "snapshot.", "target.", "capture.", "monitoring.", "source.", "scope.", "telegram.", "clock.", "media.failed",
-                "media.retry", "media.recovered", "deletion.unscoped")
-            filters.append("(" + " OR ".join("kind LIKE ?" for _ in prefixes) + ")")
-            params.extend(p + "%" for p in prefixes)
-        elif kind:
-            filters.append("kind=?")
-            params.append(kind)
+        if kind:
+            groups = {"membership": ("membership.",), "media": ("media.",), "actions": ("interaction.",),
+                      "messages": ("message.new", "message.snapshot", "message.recovered"),
+                      "coverage": ("coverage.", "connection.", "collector.", "process.", "observation.",
+                                   "snapshot.", "target.", "capture.", "monitoring.", "source.", "scope.",
+                                   "telegram.", "clock.", "media.failed", "media.retry", "media.recovered",
+                                   "deletion.unscoped")}
+            kinds = list(dict.fromkeys(value.strip() for value in kind.split(",") if value.strip()))
+            choices = []
+            for value in kinds:
+                for match in groups.get(value, (value,)):
+                    choices.append("kind LIKE ?" if match.endswith(".") else "kind=?")
+                    params.append(match + "%" if match.endswith(".") else match)
+            if choices:
+                filters.append("(" + " OR ".join(choices) + ")")
+        if hide_system:
+            filters.append("kind NOT IN ('collector.heartbeat','host.state') AND NOT "
+                           "(kind='media.skipped' AND COALESCE(json_extract(payload,'$.reason'),'')='media download disabled')")
         if before is not None:
             filters.append("seq<?")
             params.append(before)
+        if after is not None:
+            filters.append("seq>?")
+            params.append(after)
         if search:
             candidate = self.read_index.candidate(search, text_only=text_only)
             if candidate is not None:
@@ -405,11 +432,7 @@ class Store:
             if value is not None:
                 filters.append(comparison)
                 params.append(value)
-        sql = "SELECT events.* FROM " + source
-        if filters:
-            sql += " WHERE " + " AND ".join(filters)
-        sql += " ORDER BY " + order + " DESC LIMIT ?"
-        return [self.decode(r) for r in self.bounded_read(sql, [*params, limit], timeout_s)]
+        return source, order, " WHERE " + " AND ".join(filters) if filters else "", params
 
     def archive_chats(self, offset, limit, chat_ids):
         sql = ("WITH known AS (SELECT chat_id,title,kind,enabled FROM targets UNION ALL "

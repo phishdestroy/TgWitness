@@ -17,7 +17,7 @@ export function createViewHost({getSession=()=>({}),onError=error=>console.error
       try{entry.controller.leave?.();}catch(error){onError(error);}
       active=null;
     }
-    entry.root.hidden=true;entry.root.remove();
+    entry.root.hidden=true;delete entry.root.dataset.loading;entry.root.removeAttribute("aria-busy");entry.root.remove();
   }
   function register(name,root,controller={}){
     if(disposed||entries.has(name)||!root?.parentNode)throw new Error("View registration requires a unique name and an attached root.");
@@ -43,6 +43,7 @@ export function createViewHost({getSession=()=>({}),onError=error=>console.error
     const session=Object.freeze({...getSession()});
     const current=()=>!disposed&&!request.signal.aborted&&ticket===generation&&active===entry;
     entry.context={signal:request.signal,session,params,current};
+    entry.root.dataset.loading="true";entry.root.setAttribute("aria-busy","true");
     try{
       if(!entry.mounted){entry.controller.mount?.(entry.root);entry.mounted=true;}
       if(status)updateStatus(status);
@@ -52,7 +53,7 @@ export function createViewHost({getSession=()=>({}),onError=error=>console.error
       if(!current()||error?.name==="AbortError")return false;
       if(!entry.mounted)leave(entry);
       throw error;
-    }
+    }finally{if(current()){delete entry.root.dataset.loading;entry.root.removeAttribute("aria-busy");}}
   }
   function updateStatus(next){
     status=next;if(disposed||!active||active.request?.signal.aborted)return;

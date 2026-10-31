@@ -27,7 +27,7 @@ def test_panel_routes_do_not_swallow_apis_assets_or_unknown_documents(tmp_path):
     for path in (
         "/api/no-such-api", "/api/chats/42/unknown", "/missing.js", "/missing.svg",
         "/assets/missing.css", "/chats/42/missing.js", "/journal/event/73/anything",
-        "/extras/unknown", "/unknown", "/system-log", "/panel-token.txt",
+        "/extras/unknown", "/unknown", "/system-log/no", "/panel-token.txt",
         "/journal/event/0", "/journal/event/-1", "/journal/event/not-a-number",
         "/journal/event/9223372036854775808", "/chats/0", "/chats/name",
         "/chats/１２３", "/chats/42.json", "/chats/%2e%2e", "/chats/%2fetc",
