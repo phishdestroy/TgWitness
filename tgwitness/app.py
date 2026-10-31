@@ -324,6 +324,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                                                      "probe": tuning.value(store, "proxy_probe_minutes") * 60}
                     shared_pool.outside = collector.outside_route
                     shared_pool.catalog.vault = vault
+                    shared_pool.catalog.changed()
                     pool_task = asyncio.create_task(shared_pool.run())
 
             async def resume():
@@ -931,6 +932,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 proxy_sources.save(catalog.root, body)
             except ValueError as exc:
                 raise HTTPException(422, str(exc)) from None
+            catalog.changed()
             catalog.forget(before - {item.id for item in body.custom})
         app.state.store.append("network.sources_changed", {
             "bundled_off": body.disabled, "own_lists": len(body.custom), "github_search": body.github.enabled,

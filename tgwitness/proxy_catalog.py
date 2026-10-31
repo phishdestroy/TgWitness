@@ -54,8 +54,7 @@ MAX_BYTES = 1024 * 1024
 MAX_PER_SOURCE = 400
 MAX_LARGE_SOURCE = 2000  # uploaded lists and the GitHub search collect from many files
 REFRESH_SECONDS = 60
-
-
+CATALOG_SECONDS = 60  # a list file edited outside the panel shows within this time
 FEED_SECONDS = 3600
 PROBE_SECONDS = 600
 PROBE_TIMEOUT = 8
@@ -229,6 +228,13 @@ class PublicCatalog:
         self.vault = None  # the main workspace's vault keeps the GitHub token
         self.github_status = {"last_run": None, "files": 0, "proxies": 0, "error": None}
         self.countries = proxy_sources.Countries(self.root)
+        # Every status read of every workspace describes the pool: parsing the lists each time held
+        # the event loop for tens of milliseconds per workspace
+        self.parsed = None
+
+    def changed(self):
+        """Parse the lists again on the next read: a list, a source setting or the token changed."""
+        self.parsed = None
 
     def settings(self):
         return proxy_sources.load(self.root)
@@ -240,6 +246,7 @@ class PublicCatalog:
         if self.vault is None:
             raise ValueError("The GitHub token is kept by the main workspace.")
         self.vault.save("github", {"token": token} if token else {})
+        self.changed()
 
     def sources(self):
         """Bundled lists, the operator's lists and the GitHub search, each with its switch."""
@@ -266,6 +273,14 @@ class PublicCatalog:
         configured, entries = operator_catalog()
         if configured:
             return {"configured": True, "mode": "operator", "sources": [], "proxies": entries}
+        if self.parsed is None or time.monotonic() - self.parsed[0] >= CATALOG_SECONDS:
+            self.parsed = time.monotonic(), self.parse()
+        catalog = self.parsed[1]
+        return {**catalog, "sources": [dict(source) for source in catalog["sources"]],
+                "proxies": list(catalog["proxies"]),
+                "download_route": "proxy" if os.environ.get("TGWITNESS_PROXY_FEED_PROXY", "").strip() else "direct"}
+
+    def parse(self):
         snapshot, mode = self.snapshot()
         entries, seen, sources = [], set(), []
         saved = {row["id"]: row for row in snapshot["sources"]}
@@ -280,8 +295,7 @@ class PublicCatalog:
                 if row["id"] not in seen:
                     seen.add(row["id"])
                     entries.append({**row, "label": source["label"], "source": source["id"]})
-        return {"configured": bool(entries), "mode": mode, "sources": sources, "proxies": entries,
-                "download_route": "proxy" if os.environ.get("TGWITNESS_PROXY_FEED_PROXY", "").strip() else "direct"}
+        return {"configured": bool(entries), "mode": mode, "sources": sources, "proxies": entries}
 
     def public(self):
         catalog = self.catalog()
@@ -365,6 +379,7 @@ class PublicCatalog:
             raise ValueError("No compatible MTProxy links were found in this list.")
         settings.custom.append(item)
         proxy_sources.save(self.root, settings)
+        self.changed()
         previous, _ = self.snapshot()
         saved = {e["id"]: e for e in previous["sources"]}
         saved[item.id] = entry
@@ -389,6 +404,7 @@ class PublicCatalog:
                 stream.flush()
                 os.fsync(stream.fileno())
             os.replace(temporary, self.cache)
+            self.changed()
         finally:
             if temporary:
                 with suppress(OSError):
