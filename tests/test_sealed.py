@@ -153,6 +153,27 @@ def test_deadline_seals_partial_capture_and_records_revocation_failure(tmp_path,
         assert last["payload"]["revocation"] == "not_confirmed"
 
 
+@pytest.mark.parametrize("confirmed", [True, False])
+def test_cancel_pending_login_preserves_revocation_result(tmp_path, recipient, confirmed):
+    class Pending(CapsuleClient):
+        async def log_out(self):
+            if not confirmed:
+                raise OSError("synthetic logout failure")
+            return await super().log_out()
+    cfg = config(recipient)
+    headers = {"Authorization": "Bearer " + cfg["token"]}
+    app = sealed.create_app(tmp_path / "data", tmp_path / "out", cfg, Pending)
+    with TestClient(app) as client:
+        assert client.post("/api/phone", headers=headers,
+            json={"api_id":123,"api_hash":"a"*32,"phone":"+15550001111"}).status_code == 200
+        assert client.post("/api/cancel", headers=headers, json={}).status_code == 200
+        status = client.get("/api/status", headers=headers).json()
+        assert status["phase"] == "cancelled"
+        assert status["revocation"] == ("revoked" if confirmed else "not_confirmed")
+        assert app.state.session.collector.login_client is None
+        assert not (tmp_path / "out" / "evidence.zip").exists()
+
+
 @pytest.mark.parametrize("directory", ["data", "out"])
 def test_preloaded_state_is_rejected(tmp_path, recipient, directory):
     target = tmp_path / directory
