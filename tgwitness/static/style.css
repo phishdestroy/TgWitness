@@ -739,6 +739,7 @@ form > .health-detail { margin-top: 14px; }
 .av0-text { color: #b42318; } .av1-text { color: #b54708; } .av2-text { color: #027a48; } .av3-text { color: #175cd3; }
 .av4-text { color: #6941c6; } .av5-text { color: #c11574; } .av6-text { color: #0e7490; } .av7-text { color: #475467; }
 #workspace[data-current-view="chats"] #setup-card { display: none; }
+.workspace:not([data-current-view="connection"]):not([data-current-view="sources"]) #setup-card { display: none; }
 .chats-shell { display: grid; grid-template-columns: minmax(260px, 340px) minmax(0, 1fr); gap: 16px;
   height: calc(100vh - 130px); min-height: 540px; }
 .chats-sidebar { display: flex; flex-direction: column; min-height: 0; overflow: hidden; }

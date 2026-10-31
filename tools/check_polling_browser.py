@@ -105,6 +105,7 @@ def main():
             page.evaluate("()=>{for(const radio of $('scope-form').querySelectorAll('[name=scope-mode]'))radio.checked=radio.value==='account';}")
             page.evaluate("()=>navigate('chats')")
             assert page.evaluate("()=>scopeDraft().mode") == "account"
+            page.evaluate("()=>{clearTimeout(toastTimer);show('toast',false);}")
 
             for width, height in ((1440, 1000), (390, 844)):
                 page.set_viewport_size({"width": width, "height": height})

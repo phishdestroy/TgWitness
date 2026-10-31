@@ -3545,7 +3545,8 @@ function renderAccess(){
   placeChildren(sessions,sessionRows);
 }
 async function loadConsole(){
-  const r=await json("access/console?after="+state.consoleAfter,undefined,{root:true}),pre=$("access-console");
+  const r=await json("access/console?after="+state.consoleAfter,undefined,{root:true,...viewOptions('access')}),pre=$("access-console");
+  if(state.view!=='access')return;
   if(r.lines.length&&r.lines[0].n<=state.consoleAfter)pre.replaceChildren();
   for(const line of r.lines){
     const item=node("span","console-line "+line.level.toLowerCase(),
