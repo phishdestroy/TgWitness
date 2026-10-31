@@ -8,7 +8,7 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
-from check_browser import RunningApp, unlock, check_layout, launch_browser
+from check_browser import RunningApp, unlock, check_layout, launch_browser, navigate_panel
 from playwright.sync_api import expect, sync_playwright
 from tgwitness import i18n
 
@@ -47,7 +47,7 @@ def main():
             for lang in i18n.LANGUAGES[1:]:
                 missing = sorted(set(keys) - set(i18n.words(lang)))
                 assert not missing, (lang, missing)
-            page.locator('[data-view="witness"]').click()
+            navigate_panel(page, "witness")
             expect(page.locator("#witness-form")).to_be_hidden()
             expect(page.locator(".extra-card")).to_have_count(5)
             before = len(writes)
@@ -94,7 +94,7 @@ def main():
             assert page.evaluate("state.witnessToken") is None
             assert token not in page.locator("body").inner_text()
             unlock(page, server)
-            page.locator('[data-view="connection"]').click()
+            navigate_panel(page, "connection")
             page.locator("#entry-settings").click()
             page.locator("#network-details > summary").click()
             expect(page.locator("#network-kind")).to_have_value("mtproxy_auto")
@@ -126,7 +126,7 @@ def main():
                 expect(page.locator("#workspace")).to_be_visible()
                 for width in (390, 1440):
                     page.set_viewport_size({"width": width, "height": 1060})
-                    page.locator('[data-view="witness"]').click()
+                    navigate_panel(page, "witness")
                     for theme in ("light", "dark"):
                         page.emulate_media(color_scheme=theme)
                         page.evaluate("selectExtra(null)")
@@ -140,7 +140,7 @@ def main():
                                 page.evaluate("window.scrollTo(0,0)")
                                 page.screenshot(path=str(output / f"witness-{lang}-{theme}-{width}.png"), full_page=True)
                             page.locator('[data-extra-close="' + name + '"]').click()
-                    page.locator('[data-view="connection"]').click()
+                    navigate_panel(page, "connection")
                     if page.locator("#entry-settings").get_attribute("aria-expanded") != "true":
                         page.locator("#entry-settings").click()
                     if not page.locator("#network-link").is_visible():
