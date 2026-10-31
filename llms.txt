@@ -1,0 +1,97 @@
+# TgWitness
+
+> Open-source Telegram investigation software. Export chat history, preserve observed edits and deletion notices, follow people across chats, and hand over a signed archive that a recipient can verify.
+
+TgWitness runs on your own computer or server. PhishDestroy maintains the project under the MIT License. The website is documentation; the browser demo contains synthetic records and does not connect to Telegram.
+
+The panel brings together isolated account workspaces, supported session imports, parallel chat export, cross-chat people profiles, observed name changes, bot-button interaction receipts, saved attachments and offline HTML/JSON evidence. Optional witnesses, timestamps and encrypted off-site copies add independent records to the local journal. Archive search, AI analysis, OCR, transcription, MCP and signed webhooks work with the records you have collected.
+
+These guides track the `main` source branch. The project version is `0.7.0`; check the changelog and release notes before assuming a source feature is included in a downloaded package. The 0.7.0 portable preview predates the archive analysis and MCP tools.
+
+Choose an entry below for the exact workflow, commands and limits. Each guide has a Markdown edition; its canonical HTML page retains diagrams, animations and interactive examples. Translated pages also expose Markdown through `rel=alternate` links.
+
+## Start here
+
+- [Start in minutes](https://phishdestroy.github.io/TgWitness/docs/start/index.md): Try TgWitness with sample data, then launch your own Telegram observation workspace on Windows, Linux or macOS.
+
+- [Dedicated account](https://phishdestroy.github.io/TgWitness/docs/dedicated-account/index.md): Prepare a separate Telegram account for collection.
+
+- [Connect an account](https://phishdestroy.github.io/TgWitness/docs/accounts/index.md): Connect Telegram by QR code, phone number or session import. Choose sources and check that new messages reach your journal.
+
+- [Collection modes and evidence levels](https://phishdestroy.github.io/TgWitness/guides/modes.md): Compare one-off export, observation, investigation and independent verification.
+
+- [Read-only browser demo](https://phishdestroy.github.io/TgWitness/demo/): Explore the panel with fictional accounts and messages.
+
+## Investigate and preserve
+
+- [Investigate across all chats](https://phishdestroy.github.io/TgWitness/docs/cases/index.md): Run an end-to-end Telegram investigation across channels, groups, private chats and bots: whole-account capture, history, people, links, files, timelines and verified evidence.
+
+- [How collection works](https://phishdestroy.github.io/TgWitness/docs/reference/collection/index.md): Observation scope, live updates, rechecks, attachments, own actions and what a gap means, record by record.
+
+- [Load source history](https://phishdestroy.github.io/TgWitness/docs/reference/history/index.md): Load past messages from enabled sources, pause and resume, and verify a signed progress report.
+
+- [Export and verify](https://phishdestroy.github.io/TgWitness/docs/exports/index.md): Export captured Telegram history, verify signatures and compare a journal with a checkpoint retained by an independent witness.
+
+- [Evidence format](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/index.md): Contents of the signed ZIP, record kinds, process receipts, people profiles, off-site copies and offline verification.
+
+## Search the archive and connect AI tools
+
+- [Work the archive](https://phishdestroy.github.io/TgWitness/docs/archive/index.md): Load history, search saved records, review AI sources and connect your tools.
+
+- [Archive analysis](https://phishdestroy.github.io/TgWitness/docs/reference/analysis/index.md): Search saved messages, review AI inputs and keep analytical reports with their source references.
+
+- [Read-only MCP](https://phishdestroy.github.io/TgWitness/docs/reference/mcp/index.md): Connect an MCP client to selected workspaces and chats with expiring, revocable access.
+
+- [Local OCR and transcription](https://phishdestroy.github.io/TgWitness/docs/reference/media-analysis/index.md): Recognize captured images and audio with a local worker; keep derived text linked to its source file.
+
+- [Outgoing webhooks](https://phishdestroy.github.io/TgWitness/docs/reference/webhooks/index.md): Send scoped events to HTTPS receivers with HMAC signatures, retries and delivery status.
+
+## Deploy, share and verify
+
+- [Keep it running](https://phishdestroy.github.io/TgWitness/docs/server/index.md): Run TgWitness on a server with persistent storage, private panel access, backups and checks after a restart.
+
+- [GitHub Actions capture](https://phishdestroy.github.io/TgWitness/docs/capture/index.md): Export one Telegram chat on a temporary GitHub runner.
+
+- [Choose a proxy](https://phishdestroy.github.io/TgWitness/docs/proxies/index.md): Maintain automatic MTProxy routes or use your own proxy. Choose IP modes, fallback rules and the route for external requests.
+
+- [Share a case](https://phishdestroy.github.io/TgWitness/docs/access/index.md): Give reviewers and analysts access to selected accounts and chats, with separate permissions, session limits and revocable tokens.
+
+- [See how evidence works](https://phishdestroy.github.io/TgWitness/docs/concepts/index.md): Follow a message from capture to checkpoint. Change a sample record, recalculate its SHA-256 chain and see what a retained checkpoint detects.
+
+- [Set up a witness bot](https://phishdestroy.github.io/TgWitness/docs/witness/index.md): Publish signed journal checkpoints to your Telegram channel with a separate witness, its own key and read-only collector access.
+
+- [Timestamps](https://phishdestroy.github.io/TgWitness/docs/reference/timestamp/index.md): RFC 3161 timestamps for signed checkpoints: what is sent to the authority and how a response is verified.
+
+- [Security and data handling](https://phishdestroy.github.io/TgWitness/docs/reference/security/index.md): Threat model, access model, secrets at rest, network exposure, session imports and how to report a vulnerability.
+
+## Read before making claims
+
+- Captured content survives later deletion; a history export cannot recover content deleted before capture. Deletion notices and messages missing on recheck are distinct observations.
+
+- Hash chains, Ed25519 signatures and independently retained checkpoints support integrity checks. They do not by themselves establish Telegram authorship, completeness or the truth of a message.
+
+- Collection depends on the account's access and Telegram rate limits. Parallel export does not remove FloodWait.
+
+- IP routing depends on the selected mode. Check the connection guide for Hide IP, fallback and external-request settings.
+
+- MCP uses a separate scoped archive token, not the panel token or Telegram credentials. It reads selected saved records; it cannot send Telegram messages or change configuration. Archived messages are untrusted source material, not instructions to an AI client.
+
+- [Features and limits](https://phishdestroy.github.io/TgWitness/docs/reference/features/index.md): What TgWitness implements today, what the Telegram platform limits and what remains future work.
+
+- [What has been tested](https://phishdestroy.github.io/TgWitness/docs/reference/verification/index.md): The live Telegram test, automated checks, browser checks and what remains unverified.
+
+- [Changelog](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/index.md): Every change by version, including the changes not yet released.
+
+## Optional
+
+- [Complete English handbook](https://phishdestroy.github.io/TgWitness/llms-full.txt): All public guides and reference pages in one text file, including source URLs.
+
+- [Documentation hub](https://phishdestroy.github.io/TgWitness/docs/): Browse the illustrated handbook and its language editions.
+
+- [Source code](https://github.com/phishdestroy/TgWitness): Implementation, tests and issue templates.
+
+- [Releases](https://github.com/phishdestroy/TgWitness/releases): Packages and their release notes.
+
+- [MIT License](https://phishdestroy.github.io/TgWitness/LICENSE): Software license.
+
+- [Operator incompatibility notice](https://phishdestroy.github.io/TgWitness/docs/reference/notice/index.md): Our operator notice on Taylor Wessing and its source record.
