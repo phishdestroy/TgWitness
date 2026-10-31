@@ -13,13 +13,8 @@ establish historical completeness, or certify that nobody accessed the host.
 
 ## User flow
 
-The helper starts with an animated five-stage explanation: key, capture,
-attestation, encryption and verification. Pause playback or select any stage.
-An illustrative example shows how editing a message changes the expected hash
-and how an unapproved collector is rejected. These examples do not connect an
-account or verify user archives. **Start my capture** jumps to the actual wizard.
-The same explanation appears in the workspace and standalone page, in English
-and Russian; it respects the browser's reduced-motion preference.
+The helper explains the five stages and lets you try message or collector
+substitution on sample data. **Start my capture** opens the wizard.
 
 1. Choose **GitHub Actions capture (preview)** on the project homepage, the
    workspace login screen, or **Exports → Open capture helper**. You can also
