@@ -436,6 +436,161 @@ def fingerprint(public_key):
     return hashlib.sha256(base64.b64decode(public_key, validate=True)).hexdigest()
 
 
+# RFC 9162 section 2.1: leaves are the 32 raw bytes of journal event hashes.
+# Kept here so the verifier shipped in each ZIP needs no TgWitness installation.
+MERKLE_EMPTY = hashlib.sha256(b"").digest()
+
+
+def merkle_leaf(event_hash):
+    return hashlib.sha256(b"\x00" + bytes.fromhex(event_hash)).digest()
+
+
+def merkle_node(left, right):
+    return hashlib.sha256(b"\x01" + left + right).digest()
+
+
+def hash_bytes(value):
+    if not isinstance(value, str) or not re.fullmatch(r"[0-9a-f]{64}", value):
+        raise ValueError("Malformed SHA-256 commitment")
+    return bytes.fromhex(value)
+
+
+class MerkleFrontier:
+    """Streaming tree root using O(log n) memory, recomputed from exported events."""
+    def __init__(self):
+        self.nodes = []
+        self.count = 0
+
+    def append(self, event_hash):
+        node, level, count = merkle_leaf(event_hash), 0, self.count
+        while count & 1:
+            node = merkle_node(self.nodes[level], node)
+            self.nodes[level] = None
+            count >>= 1
+            level += 1
+        if level == len(self.nodes):
+            self.nodes.append(node)
+        else:
+            self.nodes[level] = node
+        self.count += 1
+
+    def root(self):
+        result = None
+        for node in self.nodes:
+            if node is not None:
+                result = node if result is None else merkle_node(node, result)
+        return result if result is not None else MERKLE_EMPTY
+
+
+def merkle_path(value):
+    if not isinstance(value, list) or len(value) > 64:
+        raise ValueError("Malformed or excessive Merkle proof")
+    return [hash_bytes(node) for node in value]
+
+
+def verify_inclusion(event_hash, index, size, root, path):
+    """RFC 9162 section 2.1.3.2; all unused/extra nodes are rejected."""
+    if not 0 <= index < size:
+        raise ValueError("Merkle leaf outside tree")
+    fn, sn, calculated = index, size - 1, merkle_leaf(event_hash)
+    for node in merkle_path(path):
+        if sn == 0:
+            raise ValueError("Excess Merkle inclusion nodes")
+        if fn & 1 or fn == sn:
+            calculated = merkle_node(node, calculated)
+            while fn and not fn & 1:
+                fn >>= 1
+                sn >>= 1
+        else:
+            calculated = merkle_node(calculated, node)
+        fn >>= 1
+        sn >>= 1
+    if sn != 0 or calculated != root:
+        raise ValueError("Event is not included in committed tree")
+
+
+def verify_consistency(first, second, first_root, second_root, path):
+    """RFC 9162 section 2.1.4.2, plus explicit empty/equal tree cases."""
+    nodes = merkle_path(path)
+    if not 0 <= first <= second:
+        raise ValueError("Invalid Merkle tree sizes")
+    if first == 0:
+        if nodes or first_root != MERKLE_EMPTY or (second == 0 and second_root != MERKLE_EMPTY):
+            raise ValueError("Invalid empty-tree consistency proof")
+        return
+    if first == second:
+        if nodes or first_root != second_root:
+            raise ValueError("Equal-size Merkle trees differ")
+        return
+    if not nodes:
+        raise ValueError("Missing Merkle consistency proof")
+    if first & (first - 1) == 0:
+        nodes.insert(0, first_root)
+    fn, sn = first - 1, second - 1
+    while fn & 1:
+        fn >>= 1
+        sn >>= 1
+    fr = sr = nodes[0]
+    for node in nodes[1:]:
+        if sn == 0:
+            raise ValueError("Excess Merkle consistency nodes")
+        if fn & 1 or fn == sn:
+            fr, sr = merkle_node(node, fr), merkle_node(node, sr)
+            while fn and not fn & 1:
+                fn >>= 1
+                sn >>= 1
+        else:
+            sr = merkle_node(sr, node)
+        fn >>= 1
+        sn >>= 1
+    if sn != 0 or fr != first_root or sr != second_root:
+        raise ValueError("Journal does not extend the previously committed tree")
+
+
+def verify_continuity(value, checkpoint, previous=None, challenge=None):
+    """Authenticate the tree, its journal head and its extension of a retained boundary."""
+    statement, proof = value["statement"], value["proof"]
+    if (set(value) != {"statement", "signature", "proof"}
+            or set(statement) != {"format", "public_key", "event_count", "head_hash", "root", "challenge"}
+            or set(proof) != {"from_count", "consistency", "head_path", "previous_head_path"}
+            or statement["format"] != "tgwitness-continuity-v1"):
+        raise ValueError("Unexpected continuity proof fields")
+    count, start = statement["event_count"], proof["from_count"]
+    if any(type(n) is not int or not 0 <= n < 2**63 for n in (count, start)) or start > count:
+        raise ValueError("Invalid continuity boundary")
+    root = hash_bytes(statement["root"])
+    hash_bytes(statement["head_hash"])
+    if not isinstance(statement["challenge"], str) or not re.fullmatch(r"[0-9a-f]{32}", statement["challenge"]):
+        raise ValueError("Missing continuity challenge")
+    if statement["challenge"] != challenge:
+        raise ValueError("Continuity challenge differs from this check")
+    for field in ("public_key", "event_count", "head_hash"):
+        if statement[field] != checkpoint[field]:
+            raise ValueError("Continuity proof differs from checkpoint: " + field)
+    Ed25519PublicKey.from_public_bytes(base64.b64decode(statement["public_key"], validate=True)).verify(
+        base64.b64decode(value["signature"], validate=True), canonical(statement))
+    if count:
+        verify_inclusion(statement["head_hash"], count - 1, count, root, proof["head_path"])
+    elif root != MERKLE_EMPTY or statement["head_hash"] != "0" * 64 or proof["head_path"]:
+        raise ValueError("Invalid empty journal commitment")
+    expected = previous["event_count"] if previous else 0
+    if start != expected:
+        raise ValueError("Continuity proof starts at a different retained boundary")
+    if start:
+        verify_inclusion(previous["head_hash"], start - 1, count, root, proof["previous_head_path"])
+    elif proof["previous_head_path"]:
+        raise ValueError("Unexpected previous-head proof for empty journal")
+    if previous and previous.get("root"):
+        verify_consistency(start, count, hash_bytes(previous["root"]), root, proof["consistency"])
+    elif start == 0:
+        verify_consistency(0, count, MERKLE_EMPTY, root, proof["consistency"])
+    else:
+        # Upgrading an old witness: the previous chain head is included, but no
+        # old Merkle root was retained. This is a baseline, not retroactive proof.
+        merkle_path(proof["consistency"])
+    return statement
+
+
 LIVENESS_GAP_SECONDS = 180  # an observing collector writes a heartbeat every minute
 CHANNEL_IDS_BELOW = -1000000000000  # channels and supergroups number their messages per chat
 MESSAGE_KINDS = ("message.new", "message.snapshot", "message.edited", "message.recovered",
@@ -790,9 +945,11 @@ def verify_capture(value, checkpoint):
 
 def bundle_capture_prefixes(bundle_path, boundaries):
     wanted, result = set(boundaries), {}
+    tree = MerkleFrontier()
     counts, last = dict.fromkeys(CAPTURE_KINDS, 0), None
     if 0 in wanted:
-        result[0] = {"head_hash": "0" * 64, "counts": dict(counts), "last_message_at": None}
+        result[0] = {"head_hash": "0" * 64, "counts": dict(counts), "last_message_at": None,
+                     "root": tree.root().hex()}
     if not wanted:
         return result
     limit = max(wanted)
@@ -801,12 +958,14 @@ def bundle_capture_prefixes(bundle_path, boundaries):
             event = json.loads(line)
             if event["seq"] > limit:
                 break
+            tree.append(event["hash"])
             if event["kind"] in counts:
                 counts[event["kind"]] += 1
                 if event["kind"].startswith("message."):
                     last = max(last or event["observed_at"], event["observed_at"])
             if event["seq"] in wanted:
-                result[event["seq"]] = {"head_hash": event["hash"], "counts": dict(counts), "last_message_at": last}
+                result[event["seq"]] = {"head_hash": event["hash"], "counts": dict(counts), "last_message_at": last,
+                                        "root": tree.root().hex()}
     return result
 
 
@@ -869,6 +1028,7 @@ def verify_witness(path, expected_fingerprint=None):
             if member_digest(archive, name) != digest:
                 raise ValueError("File hash mismatch: " + name)
         anchors, silent, posted, failures, statements, interval = [], [], {}, [], {}, None
+        retained = {}
 
         def observed(stream):
             """One pass: each event is read when the chain check asks for it, then summarised."""
@@ -892,6 +1052,20 @@ def verify_witness(path, expected_fingerprint=None):
                                 or captured["head_hash"] != payload["head_hash"]):
                             raise ValueError("Witness capture proof differs from its anchor")
                         anchors[-1]["capture"] = payload["capture"]
+                    collector_key = payload.get("collector_fingerprint")
+                    if payload.get("status") == "ok":
+                        prior = retained.get(collector_key)
+                        if payload.get("continuity") is not None:
+                            if not payload.get("capture"):
+                                raise ValueError("Continuity proof has no matching capture proof")
+                            committed = verify_continuity(payload["continuity"], payload["checkpoint"]["statement"],
+                                                          prior, captured["challenge"])
+                            anchors[-1]["continuity"] = payload["continuity"]
+                            anchors[-1]["root"] = committed["root"]
+                        elif prior and prior.get("root"):
+                            raise ValueError("Witness accepted a continuity downgrade")
+                        retained[collector_key] = {k: anchors[-1][k] for k in ("event_count", "head_hash", "root")
+                                                  if k in anchors[-1]}
                     statements[event["seq"]] = post_statement(event, fp)
                 elif kind == "witness.no_response":
                     silent.append({"seq": event["seq"], "at": event["observed_at"], "error": payload.get("error")})
@@ -943,28 +1117,48 @@ def cross_check_witness(witness, bundle_path, bundle_result):
                                          if a["status"] == "ok" and 0 < (a["event_count"] or 0) <= count})
     prefixes = bundle_capture_prefixes(bundle_path, {a["event_count"] for a in mine
                                                     if a.get("capture") and a["status"] == "ok" and a["event_count"] <= count})
-    consistent, conflicts, later, anomalies = 0, [], 0, []
+    consistent, conflicts, later, anomalies, matched = 0, [], 0, [], []
     for anchor in mine:
         if anchor["status"] != "ok":
             anomalies.append(anchor)
         elif anchor["event_count"] > count:
             later += 1
-        elif anchor["event_count"] == 0 or hashes.get(anchor["event_count"]) == anchor["head_hash"]:
+        elif ("0" * 64 if anchor["event_count"] == 0 else hashes.get(anchor["event_count"])) == anchor["head_hash"]:
             capture = anchor.get("capture", {}).get("statement")
             prefix = prefixes.get(anchor["event_count"])
-            if capture and (not prefix or any(prefix[k] != capture[k] for k in ("counts", "last_message_at"))):
+            if (capture and (not prefix or any(prefix[k] != capture[k] for k in ("counts", "last_message_at")))
+                    or anchor.get("root") and (not prefix or prefix["root"] != anchor["root"])):
                 conflicts.append(anchor)
             else:
                 consistent += 1
+                matched.append(anchor)
         else:
             conflicts.append(anchor)
-    periods, gaps = witnessed_periods(witness, key)
+    # A later head cannot be checked against an earlier export. Do not describe
+    # it, or a conflicting head, as a witnessed period of this particular file.
+    matching_sequences = {a["seq"] for a in matched}
+    timeline = []
+    for anchor in witness["anchors"]:
+        if anchor["collector_fingerprint"] == key and anchor["status"] == "ok":
+            if anchor["event_count"] > count:
+                continue
+            if anchor["seq"] not in matching_sequences:
+                anchor = {**anchor, "status": "conflict"}
+        timeline.append(anchor)
+    periods, gaps = witnessed_periods({**witness, "anchors": timeline}, key)
+    verified_through = max((a["event_count"] for a in matched), default=0)
+    continuity_through = max((a["event_count"] for a in matched if a.get("root")), default=0)
     invalid = sum(1 for a in witness["anchors"] if a["status"] == "invalid")
     return {"witness_fingerprint": witness["fingerprint"], "anchors_for_this_key": len(mine),
             "other_keys": len(witness["anchors"]) - len(mine) - invalid, "invalid_answers": invalid,
             "consistent": consistent, "conflicts": conflicts,
             "after_export": later, "anomalies": anomalies, "no_response": len(witness["no_response"]),
-            "witnessed": periods, "witness_gaps": gaps}
+            "witnessed": periods, "witness_gaps": gaps,
+            "verified_through_event": verified_through, "unwitnessed_events": count - verified_through,
+            "continuity_verified_through_event": continuity_through,
+            "export_head_witnessed": any(a["event_count"] == count for a in matched),
+            "export_head_witness_records": [a["seq"] for a in matched if a["event_count"] == count],
+            "witness_key_pinned": bool(witness.get("key_pinned"))}
 
 
 def channel_texts(source):
@@ -1023,11 +1217,13 @@ def check_channel(witness, source):
                 if date:
                     dates[statement["seq"]] = date
     posted = set(witness["posted"])
-    return {"matching": len(matching), "invalid_signatures": invalid, "differ_from_journal": differing,
+    return {"matching": len(matching), "matching_records": sorted(matching),
+            "invalid_signatures": invalid, "differ_from_journal": differing,
             "other_witnesses": foreign,
             "posted_but_not_found": sorted(posted - matching),
             "never_posted": sorted(set(witness["statements"]) - posted),
-            "telegram_post_dates": dates}
+            "telegram_post_dates": dates,
+            "post_date_verification": "not-performed"}
 
 
 def verify_dossier(path, expected_fingerprint=None, bundle=None):
@@ -1109,11 +1305,15 @@ def main():
     parser.add_argument("--tsa-ca", type=Path, help="Root certificate of the timestamp authority (PEM)")
     parser.add_argument("--witness", type=Path, help="Witness journal export to cross-check an evidence ZIP against")
     parser.add_argument("--witness-fingerprint", help="Witness key fingerprint retained independently")
+    parser.add_argument("--require-witness", action="store_true",
+                        help="Require a pinned witness checkpoint matching the full evidence ZIP's final record")
     parser.add_argument("--channel", help="Witness channel posts: Telegram Desktop result.json, saved page or t.me/s URL")
     parser.add_argument("--evidence", type=Path, help="With a profile/proof JSON: independently verify the matching evidence ZIP")
     parser.add_argument("--max-gib", type=int, default=MAX_UNCOMPRESSED_GIB,
                         help="Largest uncompressed archive to read, in GiB (default 4)")
     args = parser.parse_args()
+    if args.require_witness and (not args.witness or not args.witness_fingerprint):
+        parser.error("--require-witness requires --witness and --witness-fingerprint")
     globals()["MAX_UNCOMPRESSED_GIB"] = max(1, args.max_gib)
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(errors="backslashreplace")  # chat titles on legacy Windows consoles
@@ -1154,11 +1354,31 @@ def main():
                 notes += ["Witnessed from " + p["from"] + " to " + p["to"] for p in result["witness"]["witnessed"]]
                 if not result["witness"]["consistent"]:
                     notes.append("The witness has no answer signed by this export's key: nothing here is witnessed.")
+                notes.append("Witness checkpoints match through record "
+                             + str(result["witness"]["verified_through_event"]) + " of " + str(result["events"]) + ".")
+                if result["witness"]["unwitnessed_events"]:
+                    notes.append(str(result["witness"]["unwitnessed_events"])
+                                 + " trailing record(s) have no matching witness checkpoint.")
                 # A pinned witness that saw this key answering vouches for the key it saw.
                 pinned = pinned or bool(args.witness_fingerprint and result["witness"]["consistent"])
         check = result.get("channel_check") or (result.get("witness") or {}).get("channel_check")
         if check and (check["invalid_signatures"] or check["differ_from_journal"]):
             raise ValueError("Channel posts do not match the witness journal")
+        if check and check["telegram_post_dates"]:
+            notes.append("Channel dates are supplied metadata; witness signatures do not authenticate publication times.")
+        if args.require_witness:
+            witnessed = result.get("witness")
+            if not witnessed:
+                raise ValueError("--require-witness requires a full evidence ZIP and its witness journal")
+            if not witnessed["witness_key_pinned"] or not witnessed["export_head_witnessed"]:
+                raise ValueError("No pinned witness checkpoint matches the exported journal head; "
+                                 "retain a witness checkpoint at the export boundary")
+            if witnessed["witness_fingerprint"] == result["fingerprint"]:
+                raise ValueError("Collector and independent witness must use different trusted signing keys")
+            if check and (check["posted_but_not_found"] or not
+                          set(check["matching_records"]).intersection(witnessed["export_head_witness_records"])):
+                raise ValueError("Requested channel evidence is missing signed witness posts at the export boundary")
+            result["witness_required"] = True
     except Exception as exc:
         parser.exit(1, "VERIFICATION FAILED: " + type(exc).__name__ + ": " + str(exc) + "\n")
     print(json.dumps(result, indent=2))

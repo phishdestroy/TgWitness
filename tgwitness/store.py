@@ -10,6 +10,7 @@ from pathlib import Path
 
 from . import keyboard
 from . import message_content
+from . import continuity
 
 ZERO = "0" * 64
 EVENT_FIELDS = ("seq", "observed_at", "source_at", "kind", "chat_id", "message_id",
@@ -87,6 +88,8 @@ class Store:
         self.signer = None
         self.targets_revision = 0
         self.listeners = []  # called with each new record (the administrator's console)
+        with self.transaction():
+            continuity.initialize(self.db)
 
     @contextmanager
     def transaction(self):
@@ -123,6 +126,7 @@ class Store:
             self.db.execute("INSERT INTO events VALUES (?,?,?,?,?,?,?,?,?,?,?)",
                             tuple(canonical(event[k]).decode() if k == "payload" else event[k]
                                   for k in (*EVENT_FIELDS, "hash", "signature")))
+            continuity.index_event(self.db, event["seq"], event["hash"])
             if media_job:
                 self.db.execute(
                     "INSERT INTO media_jobs(message_event,account_id,chat_id,message_id,"
