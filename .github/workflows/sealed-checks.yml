@@ -56,7 +56,7 @@ jobs:
             --signer-digest "$EXPECTED_SHA" --deny-self-hosted-runners
           if gh attestation verify synthetic.txt --bundle "$BUNDLE" --repo phishdestroy/TgWitness \
             --signer-workflow phishdestroy/TgWitness/.github/workflows/sealed-collector.yml \
-            --signer-digest 2819e41e8c5a93996f28607d71e6847f3b89d8a0 --deny-self-hosted-runners; then
+            --signer-digest 03f00930a188625fb57b4aed143cd55077ddc3f2 --deny-self-hosted-runners; then
             echo 'ERROR: test signer accepted as production collector'
             exit 1
           fi
