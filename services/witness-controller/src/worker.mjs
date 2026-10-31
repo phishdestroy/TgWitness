@@ -111,7 +111,7 @@ export class WitnessRun extends DurableObject {
     // Consume bounded bodies outside the state lock: a slow upload must not
     // block alarms or other observers. Authorization is still checked below.
     let payload = null;
-    if (request.method === "POST" && !new URL(request.url).pathname.endsWith("/close")) {
+    if (request.method === "POST" && request.body) {
       try { payload = await body(request); }
       catch { return json({ error: "invalid_request_body" }, 400); }
     }
