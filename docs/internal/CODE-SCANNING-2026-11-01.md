@@ -80,6 +80,16 @@ untrusted PR checks use GitHub-hosted runners. The same-commit reusable
 workflow uses `./.github/workflows/checks.yml`; the suggested `$/` spelling
 is not accepted by the currently validated actionlint version.
 
+The pinned sealed signer `eab5169e400ff3010d8853f42c8e430fe23ffe6b`
+had no reference in the current public history, causing the impostor/stale-ref
+warnings. The annotated archival tag
+[`archive/sealed-signer-eab5169e400f`](https://github.com/phishdestroy/TgWitness/tree/archive/sealed-signer-eab5169e400f)
+retains that exact reviewed commit, its collector parent and the older approved
+pair in their ancestry. It is not a release or a cryptographic signing claim.
+The verifier's exact accepted SHA pairs remain authoritative and unchanged.
+The historical tag triggers only hosted synthetic sealed validation; it does
+not launch a production capture or publish release assets.
+
 Scorecard process findings require actual review history, repository age,
 fuzzing or a best-practices assessment. The OSSF wrapper's action commit is
 pinned, but its internal version-tagged container is an upstream limitation.
