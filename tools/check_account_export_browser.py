@@ -7,6 +7,7 @@ from urllib.parse import urlsplit
 from playwright.sync_api import expect, sync_playwright
 
 from check_browser import RunningApp, launch_browser
+from tgwitness import i18n
 
 
 DEFAULTS = {
@@ -90,6 +91,9 @@ def main():
             expect(page.locator("#workspace")).to_be_visible()
             page.evaluate("navigate('evidence')")
             expect(page.locator("#account-export-card")).to_be_visible()
+            keys = page.evaluate("pageKeys()")
+            assert "Why this account snapshot is being collected" in keys
+            assert "Who needs this file, and why" in keys
             expect(page.locator("#account-export-jobs")).to_contain_text("No account exports yet")
             page.locator("#account-export-configure").click()
             expect(page.locator("#account-export-dialog")).to_be_visible()
@@ -161,7 +165,7 @@ def main():
                            coverage={**jobs[0]["coverage"], "tasks_done": 4, "failures": 1})
             page.evaluate("pollWorkspace()")
             expect(page.locator("#account-export-jobs")).to_contain_text("Omissions and unavailable data (1)")
-            expect(page.locator("#account-export-jobs")).to_contain_text("99 messages saved")
+            expect(page.locator("#account-export-jobs")).to_contain_text("messages saved: 99")
             expect(page.locator('[data-account-export-action="resume"]')).to_have_count(0)
             fail_get[0] = True
             page.evaluate("pollWorkspace()")
@@ -221,6 +225,54 @@ def main():
                 page.locator("#account-export-close").click()
             page.evaluate("state.me.admin=false;applyAccess()")
             expect(page.locator("#account-export-card")).to_be_hidden()
+            ru_page = browser.new_page()
+            ru_page.goto(server.url + "/?lang=ru", wait_until="networkidle")
+            expect(ru_page.locator("#workspace")).to_be_visible()
+            # The shell can appear before the first status response has selected its view.
+            ru_page.wait_for_function("state.me?.admin === true && !!state.status")
+            ru_page.locator('.sidebar [data-view="evidence"]').click()
+            expect(ru_page.locator("#account-export-card")).to_be_visible()
+            ru = i18n.words("ru")
+            for selector, key in (("#account-export-purpose", "Why this account snapshot is being collected"),
+                                  ("#account-disclosure-purpose", "Who needs this file, and why")):
+                assert ru[key] and ru[key] != key
+                expect(ru_page.locator(selector)).to_have_attribute("placeholder", ru[key])
+            assert ru_page.evaluate("""() => {
+              const area=document.createElement('textarea');
+              area.placeholder='Synthetic placeholder';
+              area.setAttribute('aria-label','Synthetic accessible label');
+              area.title='Synthetic title';
+              area.textContent='Default user text';
+              area.value='Typed private text';
+              document.body.append(area);
+              const hidden=document.createElement('textarea');
+              hidden.hidden=true;hidden.disabled=true;
+              hidden.placeholder='Hidden synthetic placeholder';
+              hidden.value='Hidden private text';document.body.append(hidden);
+              const excluded=document.createElement('textarea');
+              excluded.setAttribute('data-no-translate','');
+              excluded.placeholder='Excluded synthetic placeholder';
+              document.body.append(excluded);
+              const keys=pageKeys();
+              if(!['Synthetic placeholder','Synthetic accessible label','Synthetic title',
+                   'Hidden synthetic placeholder'].every(key=>keys.includes(key)))return false;
+              if(keys.includes('Default user text')||keys.includes('Typed private text')||
+                 keys.includes('Excluded synthetic placeholder'))return false;
+              Object.assign(DICT,{'Synthetic placeholder':'Синтетическая подсказка',
+                'Synthetic accessible label':'Синтетическая метка',
+                'Synthetic title':'Синтетический заголовок',
+                'Hidden synthetic placeholder':'Скрытая подсказка',
+                'Default user text':'Text that must never appear',
+                'Excluded synthetic placeholder':'Must remain excluded'});
+              translatePage();
+              return area.placeholder==='Синтетическая подсказка'&&
+                area.getAttribute('aria-label')==='Синтетическая метка'&&
+                area.title==='Синтетический заголовок'&&
+                area.value==='Typed private text'&&area.textContent==='Default user text'&&
+                hidden.placeholder==='Скрытая подсказка'&&hidden.value==='Hidden private text'&&
+                excluded.placeholder==='Excluded synthetic placeholder';
+            }""")
+            ru_page.close()
             assert not errors, errors
             browser.close()
     print(json.dumps({"passed": True, "starts": len(starts), "repeat_downloads": len(downloads),
@@ -231,7 +283,8 @@ def main():
                       "retryable job-list outage",
                       "repeat download and delete",
                       "transformed disclosure preview and invalidation", "signed derivative repeat download",
-                      "320/390px layout", "restricted access hides account export"], "page_errors": errors}, indent=2))
+                      "320/390px layout", "restricted access hides account export",
+                      "textarea attributes translate without touching typed content"], "page_errors": errors}, indent=2))
 
 
 if __name__ == "__main__":
