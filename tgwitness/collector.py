@@ -956,7 +956,7 @@ class Collector:
             return [(api_id, api_hash)]
         saved = self.vault.read("credentials")
         api_id, api_hash = saved.get("api_id"), saved.get("api_hash")
-        if api_id and api_hash and api_id not in api_pool.POOL_IDS:
+        if api_id and api_hash and (api_id, api_hash) not in api_pool.POOL:
             return [(api_id, api_hash)]
         return api_pool.login_order((api_id, api_hash) if api_id and api_hash else None)
 

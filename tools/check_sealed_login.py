@@ -125,6 +125,22 @@ async def pool_and_override_failures(recipient):
         session.vault.save("credentials", {"api_id": own[0], "api_hash": own[1]})
         assert collector.login_pairs(None, None) == [own]
 
+    async with capsule(recipient) as (session, client):
+        # A saved custom hash must remain authoritative even when its ID matches a pool ID.
+        own = (next(iter(api_pool.POOL_IDS)), "f" * 32)
+        assert own not in api_pool.POOL
+        session.vault.save("credentials", {"api_id": own[0], "api_hash": own[1]})
+        with patch.object(api_pool, "login_order", side_effect=AssertionError("Saved custom pair replaced by pool")):
+            response = await client.post("/api/phone", json={"phone": "+15550001111"})
+            assert response.status_code == 200
+            assert RecordingClient.attempts == [own]
+            await session.collector.cancel_login()
+            RecordingClient.attempts = []
+            RecordingClient.fail_ids = {own[0]}
+            response = await client.post("/api/qr", json={})
+            assert response.status_code == 400
+            assert RecordingClient.attempts == [own]
+
 
 @asynccontextmanager
 async def _context_patch_pool(pairs):
