@@ -139,6 +139,10 @@ jobs:
           python -m pip check
       - name: Check the installation and signed export with synthetic data
         run: python tools/check_install.py --package . --output build/package-smoke
+      - name: Check disclosure privacy and interrupted account export recovery
+        run: |
+          python -I tools/check_disclosure_privacy.py
+          python -I tools/check_account_export_recovery.py
       - run: python -m tgwitness --check --json --data-dir readiness-probe
       - name: Exercise the first-run installer in a fresh environment
         if: matrix.python == '3.12'
