@@ -83,7 +83,7 @@ export function renderScales(box, data, {tr, node, after = null, compact = false
 export function createSetup(context) {
   const {root, tr, json, node, toast, may, getState, answered, openExtra} = context;
   const form = root.querySelector("#setup-form"), find = id => root.querySelector("#" + id);
-  let data = null, wanted = null;
+  let data = null, wanted = null, edited = false;
   const pick = name => form.querySelector(`input[name="setup-${name}"]:checked`)?.value || null;
   const choose = (name, value) => {
     const input = form.querySelector(`input[name="setup-${name}"][value="${value}"]`);
@@ -162,13 +162,16 @@ export function createSetup(context) {
     update();
   }
 
+  // A reload that lands after the person changed an answer keeps the answers and refreshes the rest.
   async function load() {
+    const first = !data;
     data = await json("setup");
-    render();
+    if (edited && !first) update(); else render();
     return data;
   }
 
   form.addEventListener("change", event => {
+    edited = true;
     if (event.target.name === "setup-goal") { wanted = event.target.value; preset(wanted); }
     update();
   });
@@ -177,7 +180,7 @@ export function createSetup(context) {
     const button = event.submitter; if (button) button.disabled = true;
     try {
       const result = await json("setup", answers());
-      data = result; wanted = null; answered();
+      data = result; wanted = null; edited = false; answered();
       render();
       toast(result.changed.length ? tr("Settings applied for: {goal}.", {goal: goalName(tr, result.saved.goal)})
         : tr("Saved. The current settings already match."));
@@ -185,13 +188,13 @@ export function createSetup(context) {
     finally { if (button) button.disabled = !allowed(); }
   });
   find("setup-skip").addEventListener("click", async () => {
-    try { data = await json("setup/skip", {}); answered(); render(); openExtra(null); }
+    try { data = await json("setup/skip", {}); edited = false; answered(); render(); openExtra(null); }
     catch (error) { toast(error.message, true); }
   });
 
   return {
     load, render, goalName: goal => goalName(tr, goal),
-    start(goal) { wanted = goal; if (data) render(); },
+    start(goal) { wanted = goal; edited = false; if (data) render(); },
     get data() { return data; },
   };
 }

@@ -44,14 +44,10 @@
 #setup-scales { padding: 16px; border-radius: var(--radius-lg); background: var(--surface-2); }
 .setup-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
 
-/* Beside the sign-in on wide screens, below it on narrow ones: the phone field stays in view. */
-.setup-start { grid-column: 2; grid-row: 2; margin: 14px 0 16px; padding: 18px 20px; border: 1px solid var(--accent-border); border-radius: var(--radius-lg); background: var(--accent-soft); }
+/* On Start here, below the two journeys: how much the record has to prove. */
+.setup-start { margin: 0 0 16px; padding: 18px 20px; border: 1px solid var(--accent-border); border-radius: var(--radius-lg); background: var(--accent-soft); }
 .setup-start h2 { margin: 6px 0 4px; font-size: 18px; }
 .setup-start-goals { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 8px; }
-.connection-simple:has(#setup-start:not([hidden])) .account-guide { grid-row: 3 / span 2; }
-@media (max-width: 1150px) {
-  .setup-start { grid-column: 1; grid-row: auto; margin-top: 16px; }
-}
 
 @media (max-width: 760px) {
   .level-scales, .setup-choices.setup-two { grid-template-columns: 1fr; }

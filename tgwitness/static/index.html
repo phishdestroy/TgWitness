@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="/views/sources.css?v=17">
 <link rel="stylesheet" href="/views/parameters.css?v=21">
 <link rel="stylesheet" href="/views/accounts.css?v=30">
-<link rel="stylesheet" href="/views/setup.css?v=2">
+<link rel="stylesheet" href="/views/setup.css?v=3">
 <link rel="stylesheet" href="/views/access.css?v=30">
 <link rel="stylesheet" href="/components/journal.css?v=4">
 <link rel="stylesheet" href="/views/chats.css?v=11">
@@ -24,7 +24,7 @@
 <script src="/theme.js?v=0.7.0"></script>
 <script src="/guide-locale.js" data-scope="panel"></script>
 <script defer src="/i18n.js?v=0.7.0"></script>
-<script defer src="/app.js?v=0.7.0-handoff2-setup1"></script>
+<script defer src="/app.js?v=0.7.0-handoff2-setup2"></script>
 <script defer src="/integrations.js?v=2"></script>
 <script defer src="/analysis.js?v=3"></script>
 <script defer src="/media-analysis.js?v=2"></script>
@@ -220,6 +220,16 @@
     <article class="card workflow-card" id="workflow-investigation-card"><svg aria-hidden="true" class="icon"><use href="#i-journal"/></svg><h2>Follow an investigation</h2><p>Keep new messages, observed edits and deletion notices from the chats you choose.</p><ol><li>Choose sources</li><li>Start observation explicitly</li><li>Review and export saved records</li></ol><button class="secondary" data-workflow="investigation" type="button">Set up observation</button><p class="hint">Previously saved records stay available when observation is paused.</p></article>
   </div>
   <section class="card workflow-status" aria-label="Current workspace"><div><strong id="workflow-status-title"></strong><p id="workflow-status-copy"></p></div><button class="secondary" data-open="chats" type="button">Open saved chats</button><button class="quiet" data-open="accounts" type="button">Manage accounts</button></section>
+  <section class="setup-start" hidden id="setup-start" aria-labelledby="setup-start-title">
+    <span class="eyebrow">BEFORE YOU START</span><h2 id="setup-start-title">What will you use TgWitness for?</h2>
+    <p class="hint">Pick a goal and we suggest the settings. It takes a minute, and everything can be changed later under Extras.</p>
+    <div class="setup-start-goals">
+      <button class="secondary" data-setup-goal="personal" type="button">A personal record</button>
+      <button class="secondary" data-setup-goal="investigation" type="button">An investigation</button>
+      <button class="secondary" data-setup-goal="evidence" type="button">Evidence for a case</button>
+    </div>
+    <button class="text-link" id="setup-start-skip" type="button">Skip, I will set it up myself</button>
+  </section>
   <p class="hint">TgWitness signs the saved files. Telegram does not certify them. Export details explain what was collected and what is missing.</p>
 </section>
 
@@ -979,16 +989,6 @@
     <div hidden id="authorized-state"><span class="success-mark" id="authorized-mark"><svg aria-hidden="true" class="icon"><use href="#i-check"/></svg></span><span class="avatar xl" hidden id="authorized-avatar"></span><h2>Account connected</h2><p class="account-id" hidden id="authorized-account"></p><p class="muted">Choose the groups and channels to observe.</p><button class="primary" data-open="sources">Choose sources →</button><button class="quiet" id="change-account">Sign in again</button><button class="quiet sign-out" id="sign-out" type="button">Sign out of Telegram</button></div>
     <div class="route-line" hidden id="route-line"><svg aria-hidden="true" class="icon"><use href="#i-link"/></svg><span id="route-line-text"></span><button class="text-link" id="route-open" type="button">Proxy settings</button></div>
   </div>
-  <section class="setup-start" hidden id="setup-start" aria-labelledby="setup-start-title">
-    <span class="eyebrow">BEFORE YOU START</span><h2 id="setup-start-title">What will you use TgWitness for?</h2>
-    <p class="hint">Pick a goal and we suggest the settings. It takes a minute, and everything can be changed later under Extras.</p>
-    <div class="setup-start-goals">
-      <button class="secondary" data-setup-goal="personal" type="button">A personal record</button>
-      <button class="secondary" data-setup-goal="investigation" type="button">An investigation</button>
-      <button class="secondary" data-setup-goal="evidence" type="button">Evidence for a case</button>
-    </div>
-    <button class="text-link" id="setup-start-skip" type="button">Skip, I will set it up myself</button>
-  </section>
   <aside aria-label="How TgWitness works" class="account-guide">
     <div class="guide-label"><svg aria-hidden="true" class="icon"><use href="#i-shield"/></svg> Built for observation</div>
     <h2>Every change.<br>In context.</h2>

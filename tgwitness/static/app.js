@@ -911,14 +911,14 @@ function renderStatus() {
   $("collector-error-copy").textContent=signIn?
     tr('Telegram no longer accepts this session. Sign in to the same account; saved records and sources stay in this workspace.'):
     c.last_error ? tr("Collector reported {error}. Review coverage events before relying on completeness.",{error:c.last_error}) : "";
-  renderSetup();renderSetupStart();
+  renderSetup();
   renderWorkflowControls();
   viewHost?.updateStatus(s);
 }
 function renderViewStatus(view){
   const s=state.status;if(!s||viewHost?.active!==view)return;
   const c=s.collector,counts=s.stats.counts;
-  if(view==='start')renderWorkflowControls();
+  if(view==='start'){renderWorkflowControls();renderSetupStart();}
   else if(view==='observations'){
     $("stat-messages").textContent=((counts["message.new"]||0)+(counts["message.snapshot"]||0)).toLocaleString();
     $("stat-edits").textContent=(counts["message.edited"]||0).toLocaleString();
@@ -2653,9 +2653,9 @@ async function loadExtras(){
   await Promise.all([loadWitness(),loadAlerts(),loadEvidence(),loadReplica(),loadAssurance(),loadSourceCheck(),loadSetup()]);
 }
 
-// Setup by goal (views/setup.js, levels.py): the first-run card on Account, the Extras card and its panel.
+// Setup by goal (views/setup.js, levels.py): the goal card on Start here, the Extras card and its panel.
 let setupView=null;
-const setupReady=import("./views/setup.js?v=2").then(({createSetup,renderScales})=>{
+const setupReady=import("./views/setup.js?v=3").then(({createSetup,renderScales})=>{
   setupView=createSetup({root:$("extras-setup"),tr,json,node,toast,may,fmtFull,getState:()=>state,
     answered:()=>{if(state.status)state.status.setup_answered=true;renderSetupStart();renderSetupCard();},
     openExtra:name=>selectExtra(name)});
@@ -2675,7 +2675,7 @@ function renderSetupCard(){
   setupView.renderScales($("setup-overview-scales"),data,{tr,node,compact:true});
 }
 function renderSetupStart(){
-  const s=state.status;
+  const s=state.status;if(viewHost?.active!=='start')return;
   show("setup-start",!!s&&!s.demo&&!s.chats_limited&&!s.setup_answered&&may("settings"));
 }
 document.querySelectorAll("[data-setup-goal]").forEach(button=>button.addEventListener("click",async()=>{

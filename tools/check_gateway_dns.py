@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "tools"))
 
-from check_cloud_wizard import (ACCOUNT, CF_TOKEN, HETZNER_API, HZ_TOKEN, OTHER, Host, Response, World, quick_args,
+from check_cloud_wizard import (ACCOUNT, CF_TOKEN, HZ_TOKEN, OTHER, Host, Response, World, quick_args,
                                 quiet)
 from tgwitness import anchoring, cloud
 from tgwitness.evidence import export_file
@@ -408,7 +408,7 @@ def check_panel_api(directory):
 
 
 def check_browser(directory, output):
-    from check_browser import RunningApp as PanelApp, check_layout, launch_browser, navigate_panel, unlock
+    from check_browser import RunningApp as PanelApp, check_layout, launch_browser, navigate_panel, reload_panel, unlock
     from playwright.sync_api import expect, sync_playwright
     import tgwitness.app as panel
 
@@ -449,7 +449,8 @@ def check_browser(directory, output):
                                            "tsa_urls": [], "ots_calendars": []})
             store.set_setting("evidence_witnesses", {"gateway": {"at": recent(1), "ok": True, "count": 36,
                                                                  "until": recent(3), "seq": 9}})
-            page.reload()
+            reload_panel(page)
+            expect(page.locator("#view-witness")).to_be_visible()
             navigate_panel(page, "witness")
             page.locator("#extras-open-evidence").click()
             expect(page.locator("#evidence-status")).to_contain_text("Cloudflare Gateway log copied: 36 queries")
@@ -494,7 +495,7 @@ def check_browser(directory, output):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--browser", action="store_true", help="Also run the panel flows in a browser")
+    parser.add_argument("--no-browser", action="store_true", help="Skip the panel flows in a browser")
     args = parser.parse_args()
     quiet()
     print(check_rules())
@@ -504,7 +505,7 @@ def main():
         print(check_shared(Path(tmp)))
         print(check_journal_copy(Path(tmp) / "journal"))
         print(check_panel_api(Path(tmp)))
-        if args.browser:
+        if not args.no_browser:
             output = ROOT / "test-results" / "gateway-dns"
             output.mkdir(parents=True, exist_ok=True)
             print(check_browser(Path(tmp), output))
