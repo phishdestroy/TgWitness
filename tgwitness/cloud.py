@@ -4,6 +4,7 @@
     python -m tgwitness.cloud deploy --provider P ...  tunnel, DNS, firewall and server; waits for the key
     python -m tgwitness.cloud lock   --record ...      removes every inbound firewall rule (debug deployments)
     python -m tgwitness.cloud verify --record ...      a report from the provider, Cloudflare and the collector
+    python -m tgwitness.cloud destroy --record ...     deletes the server, firewall, DNS records and tunnel
 
 Providers (tgwitness/providers): hetzner, digitalocean, linode, vultr, aws. The server is created
 through the provider's API without an SSH key, behind a provider firewall with no inbound rules,
@@ -13,10 +14,17 @@ read-only credentials compares the provider's own log and firewall, the tunnel c
 address and the collector's signed statement. "generic" installs on any server by hand with
 install.sh and is never more than self-attested. Nothing here shows what a provider can do on
 its own hypervisor.
+
+--quick-tunnel needs no domain and no Cloudflare account: cloudflared opens a random
+https://*.trycloudflare.com address that changes whenever it restarts. The server posts each
+address, signed with a key only the deployment directory holds, to a ntfy.sh topic, where deploy
+and the panel look it up. No Cloudflare account keeps records of such a tunnel, so verify cannot
+check its connector.
 """
 import argparse
 import base64
 import hashlib
+import hmac
 import ipaddress
 import json
 import os
@@ -26,6 +34,7 @@ import shutil
 import subprocess
 import sys
 import time
+import uuid
 from pathlib import Path
 
 import requests
@@ -59,8 +68,21 @@ KEY_NAME = re.compile(r"[A-Za-z0-9][A-Za-z0-9._@:-]{0,127}")
 TUNNEL_TOKEN = re.compile(r"[A-Za-z0-9+/=_-]{16,4096}")
 DEPLOYMENT_ID = re.compile(r"[0-9a-f]{16}")
 TUNNEL_ID = re.compile(r"[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}")
+BEACON_SERVER = "https://ntfy.sh/"
+BEACON = re.compile(re.escape(BEACON_SERVER) + r"tgw-[0-9a-f]{32}")
+QUICK_HOST = re.compile(r"[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?\.trycloudflare\.com")
+ADDRESS_FORMAT = "tgwitness-address-v1"
 INSTALLER_FIELDS = ("deployment_id", "name", "mode", "provider", "repository", "commit", "panel_host",
-                    "witness_host", "ssh")
+                    "witness_host", "ssh", "beacon", "gateway")
+# --gateway-dns: Cloudflare Gateway's anycast resolvers. One account's location is told apart by the name its
+# DNS-over-TLS certificate carries, <doh_subdomain>.cloudflare-gateway.com.
+GATEWAY_RESOLVERS = ("172.64.36.1", "172.64.36.2")
+GATEWAY_HOST = ".cloudflare-gateway.com"
+DOH_SUBDOMAIN = re.compile(r"[a-z0-9]{6,32}")
+LOCATION_ID = re.compile(r"[0-9a-f]{32}")
+DNS_PORTS = (53, 853)
+GATEWAY_WINDOW_SECONDS = 3 * 3600  # the widest range one raw Gateway log query may span (free plan)
+GATEWAY_RULE_ACTIONS = ("override", "block", "safesearch", "ytrestricted", "resolve")
 
 REFERENCE_BUILDER = """\
 import json, sys
@@ -90,6 +112,17 @@ SELF_ESTABLISHES = (
     "Self-attested only. The collector signs the hash of the installer it ran, the deployed commit, its own "
     "source tree, the host inventory taken before installation and the host's SSH and login state.",
     "Cloudflare reports from which address the tunnel connector runs; the panel is reachable only through it.",
+)
+GATEWAY_ESTABLISHES = (
+    "With --gateway-dns the provider firewall lets DNS (ports 53 and 853) leave the server only to Cloudflare "
+    "Gateway, over TLS, and Gateway answers it from the deployment's own location: Cloudflare logs every name the "
+    "server looked up, and the report shows whether a Gateway policy could change those answers.",
+)
+GATEWAY_LIMITS = (
+    "Gateway DNS covers lookups through the system resolver. A program that sends DNS over HTTPS on port 443 "
+    "to another resolver, or connects to an address without looking it up (Telegram's servers, for one), is "
+    "not in the Gateway log. Cloudflare keeps that log 24 hours on the free plan; the collector's journal "
+    "keeps a copy only when evidence mode copies it.",
 )
 LIMITS = (
     "The initial installer is a trust boundary. A malicious bootstrap could copy the signing key and falsify "
@@ -122,6 +155,20 @@ class Cloudflare(Api):
     def result(self, method, path, body=None, params=None, allow=()):
         data = self.call(method, path, body, params, allow)
         return None if data is None else data["result"]
+
+    def graphql(self, query, variables):
+        """Cloudflare's analytics API; its answers carry data and errors rather than success."""
+        response = self.send("POST", self.base + "/graphql", "/graphql", json={"query": query, "variables": variables},
+                             headers=self.headers)
+        try:
+            data = response.json()
+        except ValueError:
+            data = None
+        if response.status_code >= 400 or not isinstance(data, dict) or data.get("errors") or not data.get("data"):
+            errors = (data or {}).get("errors") if isinstance(data, dict) else None
+            raise DeployError("Cloudflare POST /graphql: HTTP " + str(response.status_code) + " "
+                              + "; ".join(str(e.get("message")) for e in errors or [] if isinstance(e, dict)))
+        return data["data"]
 
 
 def read_secret(path, variable, option, required=True):
@@ -167,15 +214,33 @@ def specification(args, resolve=resolve_commit):
                 raise DeployError("--" + option.replace("_", "-") + " has an unexpected value")
     if not REPOSITORY.fullmatch(args.repository):
         raise DeployError("--repository must be an https:// Git URL without credentials")
-    if not ACCOUNT.fullmatch(args.cloudflare_account):
-        raise DeployError("--cloudflare-account must be the 32-character account ID")
-    zone = args.zone.lower().rstrip(".")
-    hosts = [h.lower().rstrip(".") for h in (args.panel_host, args.witness_host) if h]
-    for host in hosts:
-        if not HOST.fullmatch(host) or not host.endswith("." + zone):
-            raise DeployError(host + " must be a hostname inside the zone " + zone)
-    if len(set(hosts)) != len(hosts):
-        raise DeployError("Use different hostnames for the panel and the witness endpoint")
+    quick = bool(getattr(args, "quick_tunnel", False))
+    gateway = bool(getattr(args, "gateway_dns", False))
+    if gateway:
+        if args.provider != "hetzner":
+            raise DeployError("--gateway-dns needs outbound firewall rules, implemented for Hetzner only so far")
+        if not (args.cloudflare_account and ACCOUNT.fullmatch(args.cloudflare_account)):
+            raise DeployError("--gateway-dns needs --cloudflare-account, the 32-character account ID")
+    reused = getattr(args, "gateway_location", None)
+    if reused and (not gateway or not LOCATION_ID.fullmatch(reused)):
+        raise DeployError("--gateway-location takes the 32-character ID of a Gateway DNS location, with --gateway-dns")
+    if quick:
+        if args.zone or (args.cloudflare_account and not gateway) or args.panel_host or args.witness_host:
+            raise DeployError("--quick-tunnel takes no --zone, --panel-host or --witness-host, and "
+                              "--cloudflare-account only with --gateway-dns")
+        zone, hosts = None, []
+    else:
+        if not (args.zone and args.cloudflare_account and args.panel_host):
+            raise DeployError("Give --zone, --cloudflare-account and --panel-host, or --quick-tunnel without a domain")
+        if not ACCOUNT.fullmatch(args.cloudflare_account):
+            raise DeployError("--cloudflare-account must be the 32-character account ID")
+        zone = args.zone.lower().rstrip(".")
+        hosts = [h.lower().rstrip(".") for h in (args.panel_host, args.witness_host) if h]
+        for host in hosts:
+            if not HOST.fullmatch(host) or not host.endswith("." + zone):
+                raise DeployError(host + " must be a hostname inside the zone " + zone)
+        if len(set(hosts)) != len(hosts):
+            raise DeployError("Use different hostnames for the panel and the witness endpoint")
     ssh = "disabled"
     if args.debug_ssh_key or args.debug_ssh_from:
         if generic:
@@ -195,7 +260,11 @@ def specification(args, resolve=resolve_commit):
             "mode": "self-attested" if generic else "high-assurance" if ssh == "disabled" else "debug",
             "provider": args.provider, **choices, "repository": args.repository, "requested_ref": args.ref,
             "commit": resolve(args.repository, args.ref), "zone": zone, "cloudflare_account": args.cloudflare_account,
-            "panel_host": hosts[0], "witness_host": hosts[1] if len(hosts) > 1 else None, "ssh": ssh}
+            "panel_host": hosts[0] if hosts else None, "witness_host": hosts[1] if len(hosts) > 1 else None,
+            "ssh": ssh, "beacon": BEACON_SERVER + "tgw-" + secrets.token_hex(16) if quick else None,
+            # Filled in by deploy once Cloudflare has created the location.
+            "gateway": {"account": args.cloudflare_account, "location_id": reused, "doh_subdomain": None}
+            if gateway else None}
 
 
 def ingress(spec):
@@ -210,6 +279,44 @@ def inbound_rules(spec):
     if spec["ssh"] == "disabled":
         return []
     return [{"protocol": "tcp", "port": "22", "source": spec["ssh"]["allowed_from"]}]
+
+
+def outbound_rules(spec):
+    """Provider-neutral outbound rules. None without --gateway-dns: everything may leave. With it, everything
+    may leave except DNS (ports 53 and 853), which reaches only Cloudflare Gateway, over TLS."""
+    if not spec.get("gateway"):
+        return []
+    anywhere = ["0.0.0.0/0", "::/0"]
+    rules = [{"protocol": protocol, "port": port, "destination": anywhere}
+             for protocol in ("tcp", "udp") for port in ("1-52", "54-852", "854-65535")]
+    return rules + [{"protocol": "tcp", "port": "853", "destination": [ip + "/32" for ip in GATEWAY_RESOLVERS]},
+                    {"protocol": "icmp", "port": None, "destination": anywhere}]
+
+
+def dns_leaks(outbound):
+    """What in a firewall's outbound rules lets DNS reach anything but Gateway's resolvers."""
+    if not outbound:
+        return ["no outbound rules: every destination is reachable, DNS included"]
+    gateway = [ipaddress.ip_network(ip) for ip in GATEWAY_RESOLVERS]
+    leaks = []
+    for rule in outbound:
+        if rule["protocol"] not in ("tcp", "udp"):
+            continue
+        low, _, high = (rule.get("port") or "1-65535").partition("-")
+        for port in DNS_PORTS:
+            if int(low) <= port <= int(high or low):
+                foreign = []
+                for destination in rule["destination"]:
+                    try:
+                        network = ipaddress.ip_network(destination, strict=False)
+                    except ValueError:
+                        foreign.append(destination)
+                        continue
+                    if not any(network.version == g.version and network.subnet_of(g) for g in gateway):
+                        foreign.append(destination)
+                if foreign:
+                    leaks.append(rule["protocol"] + " " + str(port) + " to " + ", ".join(foreign))
+    return leaks
 
 
 UNIT = """\
@@ -324,6 +431,103 @@ cloudflared service install "$TGWITNESS_TUNNEL_TOKEN"
 rm -f /etc/tgwitness/secrets.env
 """
 
+# --quick-tunnel: TGWITNESS_TUNNEL_TOKEN carries the key that signs the published address, so the
+# redaction every released collector applies covers it too.
+QUICK_START = """\
+set -a
+. /etc/tgwitness/secrets.env
+set +a
+(umask 077 && printf 'TGWITNESS_TOKEN=%s\\n' "$TGWITNESS_TOKEN" > /etc/tgwitness/panel.env)
+(umask 077 && printf 'TGWITNESS_TUNNEL_TOKEN=%s\\n' "$TGWITNESS_TUNNEL_TOKEN" > /etc/tgwitness/address.env)
+systemctl daemon-reload
+systemctl enable --now tgwitness.service tgwitness-tunnel.service tgwitness-address.service
+rm -f /etc/tgwitness/secrets.env
+"""
+
+TUNNEL_UNIT = """\
+[Unit]
+Description=TgWitness quick tunnel: a random trycloudflare.com address for the panel
+Wants=network-online.target
+After=network-online.target tgwitness.service
+
+[Service]
+Type=simple
+DynamicUser=yes
+ExecStart=cloudflared tunnel --no-autoupdate --metrics 127.0.0.1:20241 --url http://127.0.0.1:8787
+Restart=always
+RestartSec=10
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target
+"""
+
+ADDRESS_UNIT = """\
+[Unit]
+Description=TgWitness quick tunnel address, signed and posted to the deployment's ntfy.sh topic
+After=tgwitness-tunnel.service
+
+[Service]
+Type=simple
+DynamicUser=yes
+Environment=TGWITNESS_BEACON=@BEACON@
+EnvironmentFile=/etc/tgwitness/address.env
+ExecStart=/usr/bin/python3 /usr/local/sbin/tgwitness-address
+Restart=always
+RestartSec=30
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target
+"""
+
+ADDRESS_SCRIPT = """\
+# Posts the quick tunnel's address when it changes, and every three hours (ntfy.sh keeps 12).
+import hashlib, hmac, json, os, time, urllib.request
+KEY, TOPIC = os.environ["TGWITNESS_TUNNEL_TOKEN"].encode(), os.environ["TGWITNESS_BEACON"]
+last, sent = None, 0
+while True:
+    try:
+        with urllib.request.urlopen("http://127.0.0.1:20241/quicktunnel", timeout=5) as answer:
+            host = json.load(answer).get("hostname")
+        now = int(time.time())
+        if host and (host != last or now - sent >= 10800):
+            text = "@FORMAT@ " + host + " " + str(now)
+            body = text + " " + hmac.new(KEY, text.encode(), hashlib.sha256).hexdigest()
+            urllib.request.urlopen(urllib.request.Request(TOPIC, body.encode(), method="POST"), timeout=20).close()
+            last, sent = host, now
+    except (OSError, ValueError):
+        pass
+    time.sleep(30)
+"""
+
+# --gateway-dns: every lookup over TLS to the deployment's Gateway location; the provider firewall blocks DNS
+# to any other resolver, including the ones the network configuration hands out.
+RESOLVED = """\
+[Resolve]
+DNS=@SERVERS@
+DNSOverTLS=yes
+Domains=~.
+FallbackDNS=
+"""
+
+GATEWAY_START = """\
+systemctl restart systemd-resolved
+for attempt in $(seq 60); do getent hosts pkg.cloudflare.com >/dev/null && break; sleep 5; done
+echo "DNS through Cloudflare Gateway @HOST@ $(date -u +%FT%TZ)"
+"""
+
+
+def gateway_host(spec):
+    return (spec["gateway"]["doh_subdomain"] or "LOCATION-AFTER-CREATION") + GATEWAY_HOST
+
+
 PREINSTALL = """\
 {
   echo "# TgWitness pre-installation inventory, $(date -u +%FT%TZ)"
@@ -345,16 +549,34 @@ def fill(template, spec):
 
 
 def files(spec, tunnel_id, panel_token, tunnel_token):
-    """What every deployment writes before installing: its description, the two secrets, the unit."""
+    """What every deployment writes before installing: its description, the two secrets, the units and,
+    for a quick tunnel or Gateway DNS, their own files."""
     if not TUNNEL_TOKEN.fullmatch(tunnel_token) or not re.fullmatch(r"[A-Za-z0-9_-]{24,256}", panel_token):
         raise DeployError("Unexpected token format; refusing to write it into the installer")
     description = {"format": "tgwitness-deployment-v1", "tunnel_id": tunnel_id,
                    **{k: spec[k] for k in ("deployment_id", "name", "mode", "provider", "repository", "commit",
                                            "panel_host", "witness_host", "ssh")}}
+    extra = []
+    if spec.get("beacon"):
+        if not BEACON.fullmatch(spec["beacon"]):
+            raise DeployError("Unexpected address topic; refusing to write it into the installer")
+        description["beacon"] = spec["beacon"]
+        extra = [("/etc/systemd/system/tgwitness-tunnel.service", "0644", TUNNEL_UNIT),
+                 ("/etc/systemd/system/tgwitness-address.service", "0644", ADDRESS_UNIT.replace("@BEACON@", spec["beacon"])),
+                 ("/usr/local/sbin/tgwitness-address", "0755", ADDRESS_SCRIPT.replace("@FORMAT@", ADDRESS_FORMAT))]
+    if spec.get("gateway"):
+        description["gateway"] = spec["gateway"]
+        servers = " ".join(ip + "#" + gateway_host(spec) for ip in GATEWAY_RESOLVERS)
+        extra.append(("/etc/systemd/resolved.conf.d/tgwitness-gateway.conf", "0644",
+                      RESOLVED.replace("@SERVERS@", servers)))
     return [("/etc/tgwitness/assurance.json", "0644", json.dumps(description, sort_keys=True) + "\n"),
             ("/etc/tgwitness/secrets.env", "0600",
              "TGWITNESS_TOKEN=" + panel_token + "\nTGWITNESS_TUNNEL_TOKEN=" + tunnel_token + "\n"),
-            ("/etc/systemd/system/tgwitness.service", "0644", UNIT.replace("@PROVIDER@", spec["provider"]))]
+            ("/etc/systemd/system/tgwitness.service", "0644", UNIT.replace("@PROVIDER@", spec["provider"]))] + extra
+
+
+def start_script(spec):
+    return QUICK_START if spec.get("beacon") else START
 
 
 def block(text, spaces=6):
@@ -366,7 +588,9 @@ def cloud_init(spec, tunnel_id, panel_token, tunnel_token):
     locked = spec["ssh"] == "disabled"
     bootstrap = ("#!/bin/bash\n# TgWitness high-assurance bootstrap: runs once from cloud-init and needs no "
                  "interactive access.\nset -euo pipefail\nexec >>/var/log/tgwitness-bootstrap.log 2>&1\n"
-                 + (SSH_OFF if locked else "") + fill(INSTALL, spec) + START
+                 + (SSH_OFF if locked else "")
+                 + (GATEWAY_START.replace("@HOST@", gateway_host(spec)) if spec.get("gateway") else "")
+                 + fill(INSTALL, spec) + start_script(spec)
                  + 'echo "TgWitness bootstrap finished $(date -u +%FT%TZ)"\n')
     written = files(spec, tunnel_id, panel_token, tunnel_token) + [("/usr/local/sbin/tgwitness-bootstrap", "0700", bootstrap)]
     if not locked:
@@ -401,7 +625,7 @@ def install_script(spec, tunnel_id, panel_token, tunnel_token):
     lines += ["exec > >(tee -a /var/log/tgwitness-bootstrap.log) 2>&1", fill(INSTALL, spec).rstrip("\n"),
               "/opt/tgwitness/.venv/bin/python -m tgwitness.assurance install-record \"$SCRIPT\" "
               "/etc/tgwitness/preinstall.txt /etc/tgwitness/install.json",
-              START.rstrip("\n"),
+              start_script(spec).rstrip("\n"),
               "if command -v ufw >/dev/null; then ufw default deny incoming; ufw default allow outgoing; "
               "ufw --force enable; fi",
               'rm -f "$SCRIPT"', 'echo "TgWitness installed. SSH closes now and this session ends."',
@@ -455,10 +679,23 @@ def installer_spec(record):
     a value carrying its own shell or YAML would otherwise reach the reference and pass with it."""
     spec, tunnel = {k: record.get(k) for k in INSTALLER_FIELDS}, (record.get("tunnel") or {}).get("id")
     patterns = [(spec["deployment_id"], DEPLOYMENT_ID), (spec["name"], NAME), (spec["repository"], REPOSITORY),
-                (spec["commit"], COMMIT), (spec["panel_host"], HOST), (tunnel, TUNNEL_ID)]
+                (spec["commit"], COMMIT)]
+    if spec["beacon"] is None:
+        patterns += [(spec["panel_host"], HOST), (tunnel, TUNNEL_ID)]
+    else:
+        patterns.append((spec["beacon"], BEACON))
     if spec["witness_host"] is not None:
         patterns.append((spec["witness_host"], HOST))
     valid = spec["provider"] in NAMES and all(isinstance(v, str) and p.fullmatch(v) for v, p in patterns)
+    gateway = spec["gateway"]
+    if gateway is not None:
+        valid = (valid and spec["provider"] == "hetzner" and isinstance(gateway, dict)
+                 and set(gateway) == {"account", "location_id", "doh_subdomain"}
+                 and all(isinstance(gateway[k], str) for k in gateway) and bool(ACCOUNT.fullmatch(gateway["account"]))
+                 and bool(LOCATION_ID.fullmatch(gateway["location_id"]))
+                 and bool(DOH_SUBDOMAIN.fullmatch(gateway["doh_subdomain"])))
+    if spec["beacon"] is not None:
+        valid = valid and spec["panel_host"] is None and spec["witness_host"] is None and tunnel is None
     generic, ssh = spec["provider"] == "generic", spec["ssh"]
     if ssh == "disabled":
         valid = valid and spec["mode"] == ("self-attested" if generic else "high-assurance")
@@ -549,11 +786,42 @@ def write_record(path, record):
     path.write_bytes(json.dumps(record, indent=2, ensure_ascii=False).encode() + b"\n")
 
 
+def address_signature(key, text):
+    return hmac.new(key.encode(), text.encode(), hashlib.sha256).hexdigest()
+
+
+def read_beacon(topic, key=None, session=None):
+    """The newest quick tunnel address posted to the deployment's topic. With the deployment's key only
+    signed posts count; a verifier without it relies on the collector statement found at the address."""
+    if not BEACON.fullmatch(topic or ""):
+        raise DeployError("The deployment has no address topic")
+    response = (session or requests).get(topic + "/json", params={"poll": "1", "since": "all"}, timeout=30)
+    if response.status_code != 200:
+        raise DeployError("ntfy.sh answered HTTP " + str(response.status_code) + " for the address topic")
+    found = None
+    for line in response.text.splitlines():
+        try:
+            parts = (json.loads(line).get("message") or "").split(" ")
+        except ValueError:
+            continue
+        if len(parts) != 4 or parts[0] != ADDRESS_FORMAT or not QUICK_HOST.fullmatch(parts[1]) \
+                or not parts[2].isdigit():
+            continue
+        if key is not None and not hmac.compare_digest(parts[3], address_signature(key, " ".join(parts[:3]))):
+            continue
+        if found is None or int(parts[2]) >= found["posted"]:
+            found = {"host": parts[1], "posted": int(parts[2]), "signed": key is not None}
+    if not found:
+        raise DeployError("The server has not posted its quick tunnel address yet")
+    return found
+
+
 def wait_for_collector(host, minutes, fetch):
+    """host is the panel's hostname, or a function that looks up the current one."""
     deadline = time.monotonic() + minutes * 60
     while True:
         try:
-            return fetch(host, secrets.token_hex(16))
+            return fetch(host() if callable(host) else host, secrets.token_hex(16))
         except (DeployError, requests.RequestException, ValueError, KeyError) as exc:
             if time.monotonic() > deadline:
                 raise DeployError("The collector did not answer in time (" + str(exc) + "). Run verify "
@@ -567,18 +835,26 @@ def connect(kind, credentials, spec, log=None):
     return provider
 
 
-def deploy(args, provider=None, cloudflare=None, fetch=collector_statement, resolve=resolve_commit):
+def printed(stage, text):
+    print(text, flush=True)
+
+
+def deploy(args, provider=None, cloudflare=None, fetch=collector_statement, resolve=resolve_commit, progress=printed,
+           beacon=read_beacon):
+    """progress(stage, text) reports each step: tunnel, install, server, running, waiting."""
     spec = specification(args, resolve)
-    kind, generic = get(spec["provider"]), spec["provider"] == "generic"
+    kind, generic, quick = get(spec["provider"]), spec["provider"] == "generic", bool(spec["beacon"])
     out = Path(args.out or Path("deployments") / spec["name"])
     if (out / "deployment.json").exists():
         raise DeployError(str(out) + " already holds a deployment; choose another --out or --name")
     log = []
     provider = provider or connect(kind, kind.credentials(args.provider_token_file), spec)
     provider.location, provider.mode, provider.log = spec["location"], spec["mode"], log
-    cf = cloudflare or Cloudflare(read_secret(args.cloudflare_token_file, "CLOUDFLARE_API_TOKEN",
-                                              "--cloudflare-token-file"))
-    cf.log = log
+    cf = None
+    if not quick or spec["gateway"]:
+        cf = cloudflare or Cloudflare(read_secret(args.cloudflare_token_file, "CLOUDFLARE_API_TOKEN",
+                                                  "--cloudflare-token-file"))
+        cf.log = log
     out.mkdir(parents=True, exist_ok=True)
     record = {**spec, "created_at": utcnow(), "deployed_by": "TgWitness " + __version__, "state": "starting",
               "api_calls": log}
@@ -586,58 +862,82 @@ def deploy(args, provider=None, cloudflare=None, fetch=collector_statement, reso
     account = spec["cloudflare_account"]
     hosts = [h for h in (spec["panel_host"], spec["witness_host"]) if h]
     try:
-        zones = cf.result("GET", "/zones", params={"name": spec["zone"]})
-        if len(zones) != 1:
-            raise DeployError("Cloudflare zone " + spec["zone"] + " was not found for this token")
-        record["zone_id"] = zones[0]["id"]
-        for host in hosts:
-            if cf.result("GET", "/zones/" + record["zone_id"] + "/dns_records", params={"name": host}):
-                raise DeployError(host + " already has DNS records; choose an unused hostname")
-        tunnel = cf.result("POST", "/accounts/" + account + "/cfd_tunnel",
-                           {"name": "tgwitness-" + spec["name"] + "-" + spec["deployment_id"], "config_src": "cloudflare"})
-        record["tunnel"] = {"id": tunnel["id"], "name": tunnel["name"], "created_at": tunnel.get("created_at")}
-        write_record(path, record)
-        print("Cloudflare tunnel", tunnel["id"], "created", flush=True)
-        tunnel_token = tunnel.get("token") or cf.result(
-            "GET", "/accounts/" + account + "/cfd_tunnel/" + tunnel["id"] + "/token")
-        config = cf.result("PUT", "/accounts/" + account + "/cfd_tunnel/" + tunnel["id"] + "/configurations",
-                           {"config": {"ingress": ingress(spec)}})
-        record["tunnel"]["config_version"] = config.get("version")
-        record["dns"] = []
-        for host in hosts:
-            created = cf.result("POST", "/zones/" + record["zone_id"] + "/dns_records", {
-                "type": "CNAME", "name": host, "content": tunnel["id"] + ".cfargotunnel.com", "proxied": True,
-                "comment": "TgWitness " + spec["mode"] + " deployment " + spec["deployment_id"]})
-            record["dns"].append({"host": host, "id": created["id"]})
-        write_record(path, record)
+        if quick:
+            tunnel_id, tunnel_token = None, secrets.token_urlsafe(32)
+            private_write(out / "address-key.txt", tunnel_token.encode())
+            progress("tunnel", "Quick tunnel: the server posts its trycloudflare.com address, signed, to "
+                     + spec["beacon"])
+        else:
+            zones = cf.result("GET", "/zones", params={"name": spec["zone"]})
+            if len(zones) != 1:
+                raise DeployError("Cloudflare zone " + spec["zone"] + " was not found for this token")
+            record["zone_id"] = zones[0]["id"]
+            for host in hosts:
+                if cf.result("GET", "/zones/" + record["zone_id"] + "/dns_records", params={"name": host}):
+                    raise DeployError(host + " already has DNS records; choose an unused hostname")
+            tunnel = cf.result("POST", "/accounts/" + account + "/cfd_tunnel",
+                               {"name": "tgwitness-" + spec["name"] + "-" + spec["deployment_id"], "config_src": "cloudflare"})
+            tunnel_id = tunnel["id"]
+            record["tunnel"] = {"id": tunnel_id, "name": tunnel["name"], "created_at": tunnel.get("created_at")}
+            write_record(path, record)
+            progress("tunnel", "Cloudflare tunnel " + tunnel_id + " created")
+            tunnel_token = tunnel.get("token") or cf.result(
+                "GET", "/accounts/" + account + "/cfd_tunnel/" + tunnel_id + "/token")
+            config = cf.result("PUT", "/accounts/" + account + "/cfd_tunnel/" + tunnel_id + "/configurations",
+                               {"config": {"ingress": ingress(spec)}})
+            record["tunnel"]["config_version"] = config.get("version")
+            record["dns"] = []
+            for host in hosts:
+                created = cf.result("POST", "/zones/" + record["zone_id"] + "/dns_records", {
+                    "type": "CNAME", "name": host, "content": tunnel_id + ".cfargotunnel.com", "proxied": True,
+                    "comment": "TgWitness " + spec["mode"] + " deployment " + spec["deployment_id"]})
+                record["dns"].append({"host": host, "id": created["id"]})
+            write_record(path, record)
+        if spec["gateway"]:
+            progress("gateway", "Cloudflare Gateway: preparing the DNS location")
+            spec["gateway"], record["gateway_shared"] = create_gateway(cf, spec)
+            record["gateway"] = spec["gateway"]
+            write_record(path, record)
+            progress("gateway", "Cloudflare Gateway location " + spec["gateway"]["location_id"]
+                     + (" (shared; this server's queries are told apart by its address)" if record["gateway_shared"]
+                        else "") + ": the server resolves only through " + gateway_host(spec) + ", over TLS")
         panel_token = secrets.token_urlsafe(32)
         private_write(out / "panel-token.txt", panel_token.encode())
         if generic:
-            script = install_script(spec, tunnel["id"], panel_token, tunnel_token)
+            script = install_script(spec, tunnel_id, panel_token, tunnel_token)
             private_write(out / "install.sh", script.encode())
             (out / "install.redacted.sh").write_bytes(redact_user_data(script).encode())
             record["cloud_init"] = {**user_data_hashes(script), "published": "install.redacted.sh"}
             record["state"] = "waiting for install.sh on the server"
             write_record(path, record)
-            print("Copy", out / "install.sh", "to a freshly installed Ubuntu 24.04 server and run it there as root:")
-            print("    sudo bash install.sh")
-            print("It installs commit", spec["commit"], "closes SSH and ends that session.", flush=True)
+            progress("install", "Copy " + str(out / "install.sh") + " to a freshly installed Ubuntu 24.04 server and "
+                     "run it there as root:\n    sudo bash install.sh\nIt installs commit " + spec["commit"]
+                     + " closes SSH and ends that session.")
         else:
-            user_data = cloud_init(spec, tunnel["id"], panel_token, tunnel_token)
+            user_data = cloud_init(spec, tunnel_id, panel_token, tunnel_token)
             if len(user_data.encode()) > kind.user_data_limit:
                 raise DeployError("cloud-init exceeds " + kind.title + "'s user data limit")
             (out / "cloud-init.redacted.yaml").write_bytes(redact_user_data(user_data).encode())
             record["cloud_init"] = {**user_data_hashes(user_data), "published": "cloud-init.redacted.yaml"}
             write_record(path, record)
-            print(kind.title + ": creating the firewall and the server", flush=True)
-            firewall, server = provider.create(spec, user_data, inbound_rules(spec))
-            record["firewall"] = {**firewall, "inbound_rules": inbound_rules(spec)}
+            progress("server", kind.title + ": creating the firewall and the server")
+            outbound = outbound_rules(spec)
+            firewall, server = provider.create(spec, user_data, inbound_rules(spec), outbound)
+            record["firewall"] = {**firewall, "inbound_rules": inbound_rules(spec),
+                                  **({"outbound_rules": outbound} if outbound else {})}
             record["server"] = server
             record["state"] = "server running; waiting for the collector"
             write_record(path, record)
-            print(kind.title + " server", server["id"], "is running", flush=True)
-        print("Waiting up to", args.wait, "minutes for the collector's signed statement", flush=True)
-        answer = wait_for_collector(spec["panel_host"], args.wait, fetch)
+            progress("running", kind.title + " server " + str(server["id"]) + " is running")
+        progress("waiting", "Waiting up to " + str(args.wait) + " minutes for the collector's signed statement")
+        located = {}
+
+        def current():
+            located.update(beacon(spec["beacon"], tunnel_token))
+            return located["host"]
+        answer = wait_for_collector(current if quick else spec["panel_host"], args.wait, fetch)
+        if quick:
+            record["address"] = {"host": located["host"], "posted": located["posted"], "seen_at": utcnow()}
         statement = answer["statement"]
         host = statement.get("host") or {}
         record["collector"] = {"fingerprint": statement["fingerprint"], "public_key": statement["public_key"],
@@ -671,6 +971,138 @@ def lock(args, provider=None):
     record["firewall"]["inbound_rules"] = []
     write_record(path, record)
     return record
+
+
+def remove_tunnel(cf, record):
+    """The DNS records that point to the deployment's tunnel, then the tunnel. Missing ones are skipped."""
+    account, removed = record["cloudflare_account"], []
+    tunnels = {record["tunnel"]["id"]} if record.get("tunnel") else set()
+    name = "tgwitness-" + record["name"] + "-" + record["deployment_id"]
+    tunnels |= {t["id"] for t in cf.result("GET", "/accounts/" + account + "/cfd_tunnel",
+                                           params={"name": name, "is_deleted": "false"}) or []}
+    zone = record.get("zone_id")
+    for host in (record["panel_host"], record.get("witness_host")) if zone else ():
+        for item in (cf.result("GET", "/zones/" + zone + "/dns_records", params={"name": host}) if host else None) or []:
+            target = (item.get("content") or "").removesuffix(".cfargotunnel.com")
+            if target in tunnels or record["deployment_id"] in (item.get("comment") or ""):
+                cf.result("DELETE", "/zones/" + zone + "/dns_records/" + item["id"], allow=(404,))
+                removed.append({"resource": "dns", "id": item["id"], "name": host})
+    for tunnel in sorted(tunnels):
+        path = "/accounts/" + account + "/cfd_tunnel/" + tunnel
+        for attempt in range(6):
+            try:
+                cf.call("DELETE", path + "/connections", allow=(404,))
+                cf.result("DELETE", path, allow=(404,))
+                break
+            except DeployError:
+                if attempt == 5:
+                    raise
+                base.pause(10)  # the connector of the deleted server is still registered
+        removed.append({"resource": "tunnel", "id": tunnel, "name": name})
+    return removed
+
+
+def gateway_name(record):
+    return "tgwitness-" + record["name"] + "-" + record["deployment_id"]
+
+
+def create_gateway(cf, spec):
+    """The Gateway DNS location the server resolves through, and whether other devices may share it.
+
+    A location of the server's own, unless --gateway-location names an existing one. Without a Zero Trust plan
+    Cloudflare allows one location per account: when it refuses another and the account has exactly one, the
+    server shares that one, and its queries are told apart by its own address. An account that has never used
+    Gateway gets it switched on first."""
+    account, wanted = spec["gateway"]["account"], spec["gateway"]["location_id"]
+    path = "/accounts/" + account + "/gateway"
+    try:
+        cf.result("GET", path)
+    except DeployError as exc:
+        if "1001" not in str(exc):  # "has not been initialized"
+            raise
+        cf.result("POST", path)
+    shared = bool(wanted)
+    if wanted:
+        location = cf.result("GET", path + "/locations/" + wanted)
+    else:
+        try:
+            location = cf.result("POST", path + "/locations", {
+                "name": gateway_name(spec), "client_default": False, "ecs_support": False,
+                "endpoints": {"doh": {"enabled": True}, "dot": {"enabled": True}, "ipv4": {"enabled": False},
+                              "ipv6": {"enabled": False}}})
+        except DeployError as exc:
+            if "1002" not in str(exc):  # "does not have access to this feature": the plan's location limit
+                raise
+            existing = cf.result("GET", path + "/locations") or []
+            if len(existing) != 1:
+                raise DeployError("Cloudflare allows no further DNS location in this account; choose one of its "
+                                  "locations with --gateway-location: " + ", ".join(
+                                      str(item.get("id")) + " (" + str(item.get("name")) + ")"
+                                      for item in existing)) from None
+            location, shared = existing[0], True
+    if not (LOCATION_ID.fullmatch(str(location.get("id")))
+            and DOH_SUBDOMAIN.fullmatch(str(location.get("doh_subdomain")))):
+        raise DeployError("Cloudflare returned an unexpected Gateway location")
+    if not ((location.get("endpoints") or {}).get("dot") or {}).get("enabled"):
+        raise DeployError("Gateway location " + location["id"] + " does not accept DNS over TLS; turn on its DoT "
+                          "endpoint in Cloudflare Zero Trust, or let the deployment create its own location")
+    return {"account": account, "location_id": location["id"], "doh_subdomain": location["doh_subdomain"]}, shared
+
+
+def remove_gateway(cf, record):
+    """The deployment's own Gateway location, also when a failed deployment never recorded its ID; a shared
+    location stays."""
+    path = "/accounts/" + record["gateway"]["account"] + "/gateway/locations"
+    ids = set() if record.get("gateway_shared") else {record["gateway"]["location_id"]} - {None}
+    ids |= {item["id"] for item in cf.result("GET", path) or [] if item.get("name") == gateway_name(record)}
+    removed = []
+    for location in sorted(ids):
+        cf.result("DELETE", path + "/" + location, allow=(404,))
+        removed.append({"resource": "gateway location", "id": location, "name": gateway_name(record)})
+    return removed
+
+
+def destroy(args, provider=None, cloudflare=None, progress=printed):
+    """Deletes what a deployment created: server and firewall at the provider, DNS records and tunnel at
+    Cloudflare. The server's journal and signing key go with it. The record stays, marked removed."""
+    path = Path(args.record)
+    record = json.loads(path.read_text(encoding="utf-8"))
+    if args.confirm != record["name"]:
+        raise DeployError("Confirm with the server name " + record["name"] + ": its journal and signing key are "
+                          "deleted with it")
+    generic, quick, log, removed = record["provider"] == "generic", bool(record.get("beacon")), [], []
+    if not generic:
+        kind = get(record["provider"])
+        provider = provider or connect(kind, kind.credentials(args.provider_token_file), record)
+        provider.location, provider.mode, provider.log = record.get("location"), record["mode"], log
+    cf = None
+    if not quick or record.get("gateway"):
+        cf = cloudflare or Cloudflare(read_secret(args.cloudflare_token_file, "CLOUDFLARE_API_TOKEN",
+                                                  "--cloudflare-token-file"))
+        cf.log = log
+    try:
+        if not generic:
+            progress("server", kind.title + ": deleting the server and its firewall")
+            removed += provider.destroy(record)
+        if not quick:  # a quick tunnel ends with its server; its posts expire from ntfy.sh within 12 hours
+            progress("tunnel", "Cloudflare: deleting the DNS records and the tunnel")
+            removed += remove_tunnel(cf, record)
+        if record.get("gateway"):
+            progress("gateway", "Cloudflare Gateway: the shared DNS location stays; only a leftover of this "
+                     "deployment is removed" if record.get("gateway_shared") else
+                     "Cloudflare Gateway: deleting the DNS location; its logs stay with Cloudflare for their "
+                     "retention period")
+            removed += remove_gateway(cf, record)
+        record["state"] = "removed"
+    except Exception as exc:
+        record["state"] = "removal failed: " + str(exc)
+        raise DeployError(str(exc) + ". What was removed so far is listed in " + str(path)) from exc
+    finally:
+        record.setdefault("removals", []).append({"at": utcnow(), "removed": removed, "api_calls": log})
+        write_record(path, record)
+    if generic:
+        progress("note", "The server itself was installed by hand: wipe or delete it at its provider")
+    return record, removed
 
 
 class Report:
@@ -720,6 +1152,11 @@ def verify_provider(report, record, provider):
                "The provider firewall admits no inbound connections",
                "; ".join(problems + ([found["changed"]] if found.get("changed") else []))
                or "firewall " + str(record["firewall"]["id"]) + " applied with no inbound rules", source)
+    if record.get("gateway"):
+        leaks = dns_leaks(found.get("outbound"))
+        report.add("dns_firewall", "fail" if leaks else "pass", "DNS leaves the server only to Cloudflare Gateway",
+                   "; ".join(leaks) or "outbound rules let ports 53 and 853 reach only " + ", ".join(GATEWAY_RESOLVERS)
+                   + "; DNS over HTTPS on port 443 is not covered", source)
     if record["mode"] == "debug":
         locks = record.get("locks") or []
         report.add("mode", "review" if locks and not found["inbound"] else "fail", "Deployed without SSH",
@@ -804,9 +1241,114 @@ def verify_tunnel(report, record, cf, server):
                str(len(entries)) + " entr(ies), " + str(len(late)) + " after the deployment (first 1000 log entries)", CF)
 
 
-def verify_collector(report, record, server, args, fetch, reference=None, reference_error=None):
+def gateway_queries(by_source):
+    """The location's DNS queries of the last day, newest first; by_source keeps only one address's (Cloudflare
+    treats source addresses as personal data: the filter needs Zero Trust PII Read)."""
+    return ("query($account: String!, $location: String!, $since: Time!, $until: Time!"
+            + (", $source: String!" if by_source else "") + ") { viewer { accounts(filter: {accountTag: $account}) { "
+            "cf1GatewayDnsRawGroups(limit: 1000, filter: {location: $location" + (", sourceIP: $source" if by_source
+                                                                               else "")
+            + ", datetime_geq: $since, datetime_lt: $until}, orderBy: [datetime_DESC]) { dimensions { datetime "
+            "destination } } } } }")
+
+
+def gateway_day(cf, by_source, asked):
+    """The last 24 hours of the location's log, newest first, read in the windows Cloudflare allows."""
+    rows, end = [], time.time()
+    start = end - 86400
+    while end > start and len(rows) < 5000:
+        begin = max(start, end - GATEWAY_WINDOW_SECONDS)
+        window = {**asked, "since": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(begin)),
+                  "until": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(end))}
+        rows += cf.graphql(gateway_queries(by_source), window)["viewer"]["accounts"][0]["cf1GatewayDnsRawGroups"]
+        end = begin
+    return rows
+
+
+def verify_gateway(report, record, cf, server=None):
+    """The deployment's Gateway location, what Gateway logs and may change, the server's queries there (told apart
+    by the server's address, which also covers a shared location) and the audit trail."""
+    gateway, path = record["gateway"], "/accounts/" + record["gateway"]["account"] + "/gateway"
+    if not gateway.get("location_id"):
+        report.add("gateway_location", "fail", "The server's Gateway location exists and takes DNS over TLS",
+                   "the deployment never recorded a Gateway location", RECORD)
+        return
+    title = "The server's Gateway location exists and takes DNS over TLS"
     try:
-        answer = fetch(record["panel_host"], secrets.token_hex(16))
+        location = cf.result("GET", path + "/locations/" + gateway["location_id"], allow=(404,))
+    except DeployError as exc:
+        report.add("gateway_location", "unavailable", title, "this token cannot read Gateway (Zero Trust Read): "
+                   + str(exc), CF)
+        return
+    dot = ((location or {}).get("endpoints") or {}).get("dot") or {}
+    good = bool(location) and location.get("doh_subdomain") == gateway["doh_subdomain"] and dot.get("enabled")
+    report.add("gateway_location", "pass" if good else "fail", title,
+               (str(location.get("name")) + ", " + str(location.get("doh_subdomain")) + GATEWAY_HOST + ", DNS over TLS "
+                + ("on" if dot.get("enabled") else "off")
+                + ("; shared with whatever else uses this location" if record.get("gateway_shared") else ""))
+               if location else "location deleted or not visible to this token", CF)
+    logging = cf.result("GET", path + "/logging") or {}
+    dns = (logging.get("settings_by_rule_type") or {}).get("dns") or {}
+    report.add("gateway_logging", "pass" if dns.get("log_all") else "review", "Gateway logs every DNS query",
+               "log every DNS query: " + ("yes" if dns.get("log_all") else "no") + "; Cloudflare keeps the log 24 hours "
+               "on the free plan" + ("; personal data redacted in logs" if logging.get("redact_pii") else ""), CF)
+    rules = cf.result("GET", path + "/rules") or []
+    acting = [r for r in rules if r.get("enabled") and "dns" in (r.get("filters") or [])
+              and r.get("action") in GATEWAY_RULE_ACTIONS]
+    report.add("gateway_rules", "review" if acting else "pass", "No Gateway DNS policy changes, blocks or redirects answers",
+               "; ".join(str(r.get("name")) + " (" + str(r.get("action")) + "): " + str(r.get("traffic") or "all DNS")
+                         for r in acting)[:900] or "none of " + str(len(rules)) + " polic(ies) acts on DNS answers", CF)
+    report.cloudflare["gateway_rules"] = [{k: r.get(k) for k in ("name", "action", "enabled", "traffic", "updated_at")}
+                                          for r in acting]
+    title = "The server resolves through its Gateway location"
+    source = (server or {}).get("ipv4") or record["server"].get("ipv4")
+    asked = {"account": gateway["account"], "location": str(uuid.UUID(gateway["location_id"]))}
+    try:
+        try:
+            if not source:
+                raise DeployError("the server's IPv4 address is unknown")
+            rows = gateway_day(cf, True, {**asked, "source": source})
+        except DeployError as exc:
+            if record.get("gateway_shared") or "sourceIP" not in str(exc):
+                raise
+            # A location of the server's own: every query in it is the server's.
+            rows, source = gateway_day(cf, False, asked), None
+    except (DeployError, KeyError, IndexError, TypeError) as exc:
+        needs = "Account Analytics Read" + (" and, for a shared location, Zero Trust PII Read"
+                                            if record.get("gateway_shared") else "")
+        report.add("gateway_queries", "unavailable", title, "this token cannot read the server's Gateway log ("
+                   + needs + "): " + str(exc), CF)
+    else:
+        names = sorted({r["dimensions"]["destination"] for r in rows})
+        report.cloudflare["gateway_names_24h"] = names[:300]
+        report.add("gateway_queries", "pass" if rows else "review", title,
+                   str(len(rows)) + ("+" if len(rows) >= 5000 else "") + " DNS queries"
+                   + (" from " + source if source else " in the server's own location")
+                   + " in the last 24 hours, "
+                   + str(len(names)) + " names, latest " + rows[0]["dimensions"]["datetime"] if rows else
+                   "no DNS query in the last 24 hours: the server is stopped or resolves elsewhere", CF)
+    logs = cf.call("GET", "/accounts/" + gateway["account"] + "/audit_logs",
+                   params={"since": record["created_at"], "per_page": 1000, "direction": "asc"}, allow=(401, 403))
+    if logs is None:
+        report.add("gateway_audit", "unavailable", "Cloudflare audit log for Gateway",
+                   "this token cannot read the account audit log (Audit Logs Read)", CF)
+        return
+    entries = [e for e in logs.get("result") or [] if str((e.get("resource") or {}).get("type") or "").startswith("gateway")
+               or gateway["location_id"] in json.dumps(e)]
+    created = parse_time(record["created_at"]).timestamp()
+    late = [e for e in entries if parse_time(e["when"]).timestamp() > created + 1800]
+    report.cloudflare["gateway_audit"] = [{k: e.get(k) for k in ("when", "action", "actor", "resource")} for e in entries]
+    report.add("gateway_audit", "review" if late else "pass", "Cloudflare audit log for Gateway",
+               str(len(entries)) + " Gateway entr(ies), " + str(len(late)) + " after the deployment"
+               + (": " + "; ".join(str(e["when"]) + " " + str((e.get("action") or {}).get("type")) + " "
+                                   + str((e.get("resource") or {}).get("type")) for e in late[:10]) if late else "")
+               + " (first 1000 log entries)", CF)
+
+
+def verify_collector(report, record, server, args, fetch, reference=None, reference_error=None, beacon=read_beacon):
+    try:
+        host = record["panel_host"] or beacon(record["beacon"])["host"]
+        answer = fetch(host, secrets.token_hex(16))
     except (DeployError, requests.RequestException, ValueError, KeyError) as exc:
         report.add("statement", "fail", "The collector answers with a fresh signed statement", str(exc), COLLECTOR)
         return None
@@ -939,7 +1481,7 @@ def verify_journal(report, path, key, server_id, generic=False, reference=None):
                + " process start(s) on server " + str(server_id) + "; " + str(len(boots)) + " boot(s)", JOURNAL)
 
 
-def verify(args, provider=None, cloudflare=None, fetch=collector_statement):
+def verify(args, provider=None, cloudflare=None, fetch=collector_statement, beacon=read_beacon):
     record = json.loads(Path(args.record).read_text(encoding="utf-8"))
     if record.get("format") != "tgwitness-deployment-v1" or not record.get("server"):
         raise DeployError(str(args.record) + " is not a completed deployment record")
@@ -955,18 +1497,27 @@ def verify(args, provider=None, cloudflare=None, fetch=collector_statement):
         server = verify_provider(report, record, provider)
     token = None if cloudflare else read_secret(args.cloudflare_token_file, "CLOUDFLARE_API_TOKEN",
                                                 "--cloudflare-token-file", required=False)
-    if cloudflare or token:
+    if record.get("beacon"):
+        report.add("tunnel", "unavailable", "Cloudflare tunnel, ingress, connector and DNS",
+                   "quick tunnel: no Cloudflare account keeps records of it, so the machine running its connector "
+                   "is not confirmed; the collector statement found at the posted address is checked below", CF)
+    elif cloudflare or token:
         verify_tunnel(report, record, cloudflare or Cloudflare(token), server)
     else:
         report.add("tunnel", "unavailable", "Cloudflare tunnel, ingress, connector and DNS",
                    "no Cloudflare token (Cloudflare Tunnel Read, DNS Read)", CF)
+    if record.get("gateway") and (cloudflare or token):
+        verify_gateway(report, record, cloudflare or Cloudflare(token), server)
+    elif record.get("gateway"):
+        report.add("gateway_location", "unavailable", "Cloudflare Gateway location, logging, policies and queries",
+                   "no Cloudflare token (Zero Trust Read, Account Analytics Read, Audit Logs Read)", CF)
     reference = reference_error = None
     if args.source:
         try:
             reference = reference_installer(record, args.source)
         except DeployError as exc:
             reference_error = str(exc)
-    statement = verify_collector(report, record, server, args, fetch, reference, reference_error)
+    statement = verify_collector(report, record, server, args, fetch, reference, reference_error, beacon)
     if args.evidence:
         key = args.fingerprint or (statement or {}).get("fingerprint") or (record.get("collector") or {}).get("fingerprint")
         verify_journal(report, args.evidence, key, record["server"]["id"], record["provider"] == "generic", reference)
@@ -986,14 +1537,16 @@ def verify(args, provider=None, cloudflare=None, fetch=collector_statement):
                           "independent_runtime_attestation": "not-performed",
                           "key_nonexportability": "not-established", "source_authenticity": "not-established"},
             "deployment": {k: record.get(k) for k in ("deployment_id", "name", "mode", "provider", "location",
-                                                      "repository", "commit", "panel_host", "witness_host", "created_at")},
+                                                      "repository", "commit", "panel_host", "witness_host", "beacon",
+                                                      "gateway", "created_at")},
             "provider_title": kind.title, "server": record["server"], "firewall": (record.get("firewall") or {}).get("id"),
-            "tunnel": record.get("tunnel", {}).get("id"), "cloudflare_account": record.get("cloudflare_account"),
+            "tunnel": (record.get("tunnel") or {}).get("id"), "cloudflare_account": record.get("cloudflare_account"),
             "fingerprint": (statement or {}).get("fingerprint"), "checks": report.checks,
             "provider_actions": report.actions, "cloudflare": report.cloudflare,
             "collector_statement": report.collector, "files": files_seen,
-            "establishes": SELF_ESTABLISHES if generic else ESTABLISHES,
-            "does_not_establish": tuple(kind.limits) + LIMITS}
+            "establishes": (SELF_ESTABLISHES if generic else ESTABLISHES)
+            + (GATEWAY_ESTABLISHES if record.get("gateway") else ()),
+            "does_not_establish": tuple(kind.limits) + LIMITS + (GATEWAY_LIMITS if record.get("gateway") else ())}
 
 
 def cell(value):
@@ -1021,7 +1574,10 @@ def render(report):
              "| Server | " + cell(server.get("name")) + " #" + cell(server.get("id")) + ", " + cell(server.get("ipv4")) + " |",
              "| Provider firewall | " + cell(report["firewall"]) + " |",
              "| Cloudflare tunnel | " + cell(tunnel) + " |",
-             "| Panel | https://" + cell(deployment["panel_host"]) + " |", ""]
+             *(["| Cloudflare Gateway DNS | location " + cell(deployment["gateway"].get("location_id")) + ", "
+                + cell(deployment["gateway"].get("doh_subdomain")) + GATEWAY_HOST + " |"] if deployment.get("gateway") else []),
+             "| Panel | " + ("https://" + cell(deployment["panel_host"]) if deployment["panel_host"] else
+                            "quick tunnel, address posted to " + cell(deployment.get("beacon"))) + " |", ""]
     if deployment["mode"] == "self-attested":
         lines += ["> **Self-attested.** This server was installed by hand. Whoever ran the installer had root before it, "
                   "and no provider record is available, so every host value below comes from the host itself.", ""]
@@ -1039,6 +1595,17 @@ def render(report):
                   "- `GET " + CLOUDFLARE_API + "/accounts/" + str(account) + "/cfd_tunnel/" + tunnel + "/connections`",
                   "- `GET " + CLOUDFLARE_API + "/accounts/" + str(account) + "/cfd_tunnel/" + tunnel + "/configurations`",
                   "- `GET " + CLOUDFLARE_API + "/accounts/" + str(account) + "/audit_logs`"]
+    gateway = deployment.get("gateway")
+    if gateway and gateway.get("location_id"):
+        path = CLOUDFLARE_API + "/accounts/" + str(gateway["account"]) + "/gateway"
+        lines += ["", "## Records kept by Cloudflare Gateway", "",
+                  "- `GET " + path + "/locations/" + gateway["location_id"] + "`",
+                  "- `GET " + path + "/logging` and `GET " + path + "/rules`",
+                  "- DNS queries of the location: GraphQL `cf1GatewayDnsRawGroups`, filter `location: "
+                  + str(uuid.UUID(gateway["location_id"])) + "` (24 hours on the free plan)"]
+        names = report["cloudflare"].get("gateway_names_24h")
+        if names:
+            lines += ["", "Names the server looked up in the last 24 hours: " + ", ".join("`" + cell(n) + "`" for n in names)]
     if report["collector_statement"]:
         lines += ["", "## Signed collector statement", "", "```json",
                   json.dumps(report["collector_statement"], indent=2, ensure_ascii=False), "```"]
@@ -1063,9 +1630,17 @@ def add_target(parser):
     parser.add_argument("--image", help="Image (default Ubuntu 24.04 of the provider)")
     parser.add_argument("--ref", required=True, help="40-character commit, or a release tag resolved once with git")
     parser.add_argument("--repository", default=DEFAULT_REPOSITORY, help="Git repository (https)")
-    parser.add_argument("--zone", required=True, help="Cloudflare zone, e.g. example.org")
-    parser.add_argument("--cloudflare-account", required=True, help="Cloudflare account ID")
-    parser.add_argument("--panel-host", required=True, help="Panel hostname in the zone")
+    parser.add_argument("--zone", help="Cloudflare zone, e.g. example.org")
+    parser.add_argument("--cloudflare-account", help="Cloudflare account ID")
+    parser.add_argument("--panel-host", help="Panel hostname in the zone")
+    parser.add_argument("--quick-tunnel", action="store_true",
+                        help="No domain and no Cloudflare account: a random https://*.trycloudflare.com address that "
+                        "changes when the server restarts; verify cannot check its connector")
+    parser.add_argument("--gateway-dns", action="store_true",
+                        help="DNS only through a Cloudflare Gateway location of this server, over TLS; the provider "
+                        "firewall blocks DNS to any other resolver (Hetzner; needs --cloudflare-account)")
+    parser.add_argument("--gateway-location", help="With --gateway-dns: an existing Gateway DNS location ID to use "
+                        "instead of creating one; destroy leaves it")
     parser.add_argument("--witness-host", help="Optional hostname exposing only the witness and assurance endpoints")
     parser.add_argument("--debug-ssh-key", help="NOT high-assurance: provider SSH key for a debugging deployment")
     parser.add_argument("--debug-ssh-from", help="NOT high-assurance: the only address or network allowed to SSH")
@@ -1073,20 +1648,29 @@ def add_target(parser):
 
 def plan(spec):
     kind = get(spec["provider"])
-    placeholder = ("TUNNEL-ID-AFTER-CREATION", "x" * 43, "x" * 32)
+    placeholder = (None, "x" * 43, "x" * 43) if spec["beacon"] else ("TUNNEL-ID-AFTER-CREATION", "x" * 43, "x" * 32)
     if spec["provider"] == "generic":
         text = install_script(spec, *placeholder)
-        calls = ["Cloudflare: tunnel, its ingress and DNS records as below",
+        calls = ["Cloudflare: tunnel, its ingress and DNS records as below" if not spec["beacon"] else
+                 "Cloudflare: nothing; cloudflared opens the quick tunnel on the server",
                  "No provider API: you run install.sh on the server yourself (self-attested)"]
     else:
         text = cloud_init(spec, *placeholder)
-        calls = [kind.title + ": firewall with inbound rules " + json.dumps(inbound_rules(spec)),
+        calls = [kind.title + ": firewall with inbound rules " + json.dumps(inbound_rules(spec))
+                 + (" and outbound rules " + json.dumps(outbound_rules(spec)) if spec.get("gateway") else ""),
                  kind.title + ": server " + spec["server_type"] + ", " + spec["image"] + " in " + spec["location"]
                  + ", SSH keys " + json.dumps([spec["ssh"]["debug_key"]] if spec["ssh"] != "disabled" else []),
                  "user data " + str(len(text.encode())) + " of " + str(kind.user_data_limit) + " bytes"]
-    lines = ["# Provider: " + kind.title + "; mode " + spec["mode"] + "; commit " + spec["commit"],
-             "# Cloudflare: tunnel ingress " + json.dumps(ingress(spec)),
-             *("# Cloudflare: CNAME " + h + " -> TUNNEL.cfargotunnel.com" for h in (spec["panel_host"], spec["witness_host"]) if h),
+    if spec["beacon"]:
+        tunnel = ["# Quick tunnel without a Cloudflare account; the address is posted, signed, to " + spec["beacon"]]
+    else:
+        tunnel = ["# Cloudflare: tunnel ingress " + json.dumps(ingress(spec)),
+                  *("# Cloudflare: CNAME " + h + " -> TUNNEL.cfargotunnel.com"
+                    for h in (spec["panel_host"], spec["witness_host"]) if h)]
+    if spec.get("gateway"):
+        tunnel.append("# Cloudflare Gateway: a DNS location " + gateway_name(spec) + " in account "
+                      + spec["gateway"]["account"] + "; its DNS-over-TLS name replaces LOCATION-AFTER-CREATION below")
+    lines = ["# Provider: " + kind.title + "; mode " + spec["mode"] + "; commit " + spec["commit"], *tunnel,
              *("# " + c for c in calls), "# Published installer (secrets replaced):"]
     return "\n".join(lines) + "\n" + redact_user_data(text)
 
@@ -1101,7 +1685,8 @@ def main(argv=None):
     add_target(run)
     run.add_argument("--provider-token-file", help="Provider credentials (or the provider's environment variable)")
     run.add_argument("--cloudflare-token-file",
-                     help="Token with Cloudflare Tunnel Edit, Zone Read and DNS Edit (or CLOUDFLARE_API_TOKEN)")
+                     help="Token with Cloudflare Tunnel Edit, Zone Read and DNS Edit, and Zero Trust Edit for "
+                     "--gateway-dns (or CLOUDFLARE_API_TOKEN)")
     run.add_argument("--out", type=Path, help="Deployment directory (default deployments/NAME)")
     run.add_argument("--wait", type=int, help="Minutes to wait for the collector (default 20; 60 for generic)")
     close = commands.add_parser("lock", help="Remove every inbound rule from the deployment firewall")
@@ -1111,13 +1696,23 @@ def main(argv=None):
     check.add_argument("--record", type=Path, required=True, help="deployment.json from the operator")
     check.add_argument("--provider-token-file", help="Read-only provider credentials (or the provider's variable)")
     check.add_argument("--cloudflare-token-file", help="Optional: Cloudflare Tunnel Read, DNS Read and Account "
-                       "Settings Read (or CLOUDFLARE_API_TOKEN)")
+                       "Settings Read; with Gateway DNS also Zero Trust Read, Account Analytics Read, Audit Logs "
+                       "Read and, for a shared location, Zero Trust PII Read (or CLOUDFLARE_API_TOKEN)")
     check.add_argument("--fingerprint", help="Collector key fingerprint received through an independent channel")
     check.add_argument("--cloud-init", type=Path, help="The published installer: cloud-init.redacted.yaml or install.redacted.sh")
     check.add_argument("--source", type=Path, help="A checkout of the deployed commit; its own code builds the reference "
                        "installer the server's user data must equal byte for byte")
     check.add_argument("--evidence", type=Path, help="An evidence ZIP exported from this collector")
     check.add_argument("--report", type=Path, help="Write the Markdown report here and its JSON beside it")
+    remove = commands.add_parser("destroy", help="Delete the server, its firewall, DNS records and tunnel; "
+                                 "the record stays")
+    remove.add_argument("--record", type=Path, required=True, help="deployment.json")
+    remove.add_argument("--confirm", required=True,
+                        help="The server name again: the journal and signing key on the server are deleted with it")
+    remove.add_argument("--provider-token-file", help="Provider credentials with write access")
+    remove.add_argument("--cloudflare-token-file",
+                        help="Token with Cloudflare Tunnel Edit, Zone Read and DNS Edit, and Zero Trust Edit for "
+                     "--gateway-dns (or CLOUDFLARE_API_TOKEN)")
     args = parser.parse_args(argv)
     try:
         if args.command == "plan":
@@ -1130,10 +1725,16 @@ def main(argv=None):
             server, account = record["server"], record["cloudflare_account"]
             print("Deployment", record["deployment_id"], "is running (" + record["mode"] + ").")
             print("Collector key fingerprint:", record["collector"]["fingerprint"])
-            print("Panel: https://" + record["panel_host"], "- token in", out / "panel-token.txt")
-            print("Server", server["id"], server.get("ipv4") or "", "- tunnel", record["tunnel"]["id"])
-            print("Cloudflare records:", CLOUDFLARE_API + "/accounts/" + account + "/cfd_tunnel/"
-                  + record["tunnel"]["id"] + "/connections")
+            if record["beacon"]:
+                print("Panel now: https://" + record["address"]["host"], "- token in", out / "panel-token.txt")
+                print("The address changes when the server restarts; the current one is posted, signed with",
+                      out / "address-key.txt", "to", record["beacon"])
+                print("Server", server["id"], server.get("ipv4") or "", "- quick tunnel, no Cloudflare records")
+            else:
+                print("Panel: https://" + record["panel_host"], "- token in", out / "panel-token.txt")
+                print("Server", server["id"], server.get("ipv4") or "", "- tunnel", record["tunnel"]["id"])
+                print("Cloudflare records:", CLOUDFLARE_API + "/accounts/" + account + "/cfd_tunnel/"
+                      + record["tunnel"]["id"] + "/connections")
             print("Publish the fingerprint through a separate channel. Give a verifier", out / "deployment.json",
                   "and", out / record["cloud_init"]["published"], "with read-only credentials.")
         elif args.command == "lock":
@@ -1141,6 +1742,11 @@ def main(argv=None):
             print("Firewall", record["firewall"]["id"], "now admits no inbound connections.")
             if record["mode"] == "debug":
                 print("Run sudo tgwitness-lock in the last SSH session first, or SSH keeps listening on the host.")
+        elif args.command == "destroy":
+            record, removed = destroy(args)
+            for item in removed:
+                print("Removed", item["resource"], item["id"], item.get("name") or "")
+            print("Deployment", record["deployment_id"], "removed; its record stays in", args.record)
         else:
             report = verify(args)
             text = render(report)
