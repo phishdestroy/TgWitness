@@ -31,6 +31,16 @@ def main():
                               "print('faster-whisper=' + version('faster-whisper') + ' av=' + av.__version__)"],
                              check=True, capture_output=True, text=True, timeout=90)
     print("Offline transcription imports passed:", imports.stdout.strip(), flush=True)
+    harness = Path(__file__).with_name("check_media_decoding.py").resolve()
+    decoding = subprocess.run([*docker(), "run", "--rm", "--network=none", "--read-only",
+                              "--cap-drop=ALL", "--security-opt=no-new-privileges",
+                              "--user=65534:65534", "--memory=2g", "--memory-swap=2g", "--cpus=1", "--pids-limit=64",
+                              "--tmpfs=/tmp:rw,noexec,nosuid,size=128m",
+                              "--mount", "type=bind,src=" + str(harness) + ",dst=/checks/check_media_decoding.py,readonly",
+                              "--entrypoint", "python", os.environ["TGWITNESS_MEDIA_IMAGE"],
+                              "/checks/check_media_decoding.py", "--worker", "/worker.py"],
+                             check=True, capture_output=True, text=True, timeout=90)
+    print(decoding.stdout.strip(), flush=True)
     with tempfile.TemporaryDirectory(prefix="media-worker-check-") as scratch:
         path = Path(scratch) / "synthetic.png"
         image = Image.new("RGB", (1000, 140), "white")
