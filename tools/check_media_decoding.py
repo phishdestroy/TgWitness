@@ -73,6 +73,7 @@ def main():
             assert samples.dtype == np.float32 and samples.ndim == 1 and np.isfinite(samples).all()
             assert abs(len(samples) - 16000) < 2048 and np.max(np.abs(samples)) > .01
             assert hashlib.sha256(path.read_bytes()).digest() == before
+            print("Decoded generated " + name, flush=True)
 
         # Native decoder negative control: metadata claims 1s, but the frames contain 4s.
         forged = root / "forged-duration.flac"
@@ -87,6 +88,7 @@ def main():
             decoded = sum(frame.samples for frame in old.decode(audio=0))
             assert decoded == 4 * 48000
         refused(worker, forged, seconds=2)
+        print("Rejected forged FLAC duration after positive old-decoder control", flush=True)
 
         # A concat manifest successfully opens a second local file under the old automatic decoder.
         playlist = root / "references.txt"
@@ -94,6 +96,7 @@ def main():
         with av.open(str(playlist)) as old:
             assert sum(frame.samples for frame in old.decode(audio=0)) > 0
         refused(worker, playlist)
+        print("Rejected concat secondary file after positive old-decoder control", flush=True)
         for name, content in (("network.m3u8", b"#EXTM3U\n#EXT-X-TARGETDURATION:1\n#EXTINF:1,\nhttps://invalid.invalid/audio.ts\n#EXT-X-ENDLIST\n"),
                               ("network.mpd", b'<MPD xmlns="urn:mpeg:dash:schema:mpd:2011"><BaseURL>https://invalid.invalid/</BaseURL></MPD>')):
             path = root / name

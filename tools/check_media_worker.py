@@ -42,11 +42,13 @@ def main():
                                   "--mount", "type=bind,src=" + str(harness) + ",dst=/checks/check_media_decoding.py,readonly",
                                   "--entrypoint", "python", os.environ["TGWITNESS_MEDIA_IMAGE"],
                                   "/checks/check_media_decoding.py", "--worker", "/worker.py"],
-                                 check=True, capture_output=True, text=True, timeout=90)
+                                 capture_output=True, text=True, timeout=90)
     finally:
         # Killing a timed-out Docker CLI alone does not guarantee container termination.
         subprocess.run([*docker(), "rm", "--force", name], capture_output=True, timeout=10)
     print(decoding.stdout.strip(), flush=True)
+    if decoding.returncode:
+        raise RuntimeError("Native decoder check failed:\n" + decoding.stderr[-16384:])
     with tempfile.TemporaryDirectory(prefix="media-worker-check-") as scratch:
         path = Path(scratch) / "synthetic.png"
         image = Image.new("RGB", (1000, 140), "white")
