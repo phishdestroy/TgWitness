@@ -18,9 +18,10 @@ The initial inventory contained **180 open alerts**:
 | OpenSSF Scorecard | 31 | 26 dependency-pinning records and five process assessments |
 
 Counts are scanner records, not a count of demonstrated remote exploits.
-No alert was dismissed and no blanket suppression, severity reduction or
-`ignore-unfixed` exemption was introduced. Only a subsequent default-branch
-scan can establish which GitHub alerts close.
+No blanket suppression, severity reduction or `ignore-unfixed` exemption was
+introduced. One existing alert, #95, was individually dismissed as a confirmed
+false positive after the source and protocol review below. Only a subsequent
+default-branch scan can establish which other GitHub alerts close.
 
 ## Source boundaries and compatibility
 
@@ -29,7 +30,7 @@ scan can establish which GitHub alerts close.
 | #81–84, media paths | Express the existing 64-character lowercase hexadecimal contract with `re.fullmatch`. Scope membership checks, symlink rejection and inline-media fallback remain. Regression probes cover authentication, scoped access, encoded traversal, Unicode, newline and length boundaries. No bypass of the earlier HTTP guard was demonstrated. |
 | #85–86, locale paths | Load only files from fixed supported-language path catalogs. This enforces the contract inside the loader as well as at HTTP callers. Unsupported direct calls perform no file read. |
 | #96, report control characters | Replace an ambiguous regex with an explicit set of the same 76 control/bidirectional code points. Exhaustive Unicode comparison established equivalence. The policy applies to report metadata, not authoritative message text. |
-| #79, fixture script filter | Make the repository-owned test-fixture filter case-insensitive. It is not a general-purpose HTML sanitizer. |
+| #79 and follow-up #208, fixture script filter | Parse the repository-owned fixture with the browser's inert DOM parser and remove script elements before loading it. This handles browser tag syntax without a regex filter. It is not a general-purpose HTML sanitizer. |
 | #80, diagram parser | The expression recognizes Mermaid arrows; rendered labels pass through HTML escaping. A markup probe verifies the boundary. No production sanitizer is replaced with a regex. |
 | #87, publication scanner | A synthetic secret canary confirms output contains only the location, pattern and `value withheld`, not the matched bytes. |
 | #88, #90, synthetic fixtures | Fixed test values and generated TData are synthetic. Tests do not load an operator's credentials. |
@@ -40,6 +41,10 @@ The original format can be compared with Telegram Desktop's
 [passcode derivation](https://github.com/telegramdesktop/tdesktop/blob/5ff615713d2178b8458e201778d23d7abe78db9b/Telegram/SourceFiles/storage/details/storage_file_utilities.cpp#L372)
 and [key/IV derivation](https://github.com/telegramdesktop/tdesktop/blob/5ff615713d2178b8458e201778d23d7abe78db9b/Telegram/SourceFiles/mtproto/mtproto_auth_key.cpp#L43).
 Scanner warnings about those required primitives can remain after analysis.
+Alert #95 specifically treats the intermediate SHA-512 digest as a standalone
+password hash. The next statement passes it to PBKDF2-HMAC-SHA-512, exactly as
+the referenced Desktop format specifies. Its dismissal records that reasoning
+and the passcode regressions; it does not dismiss the other legacy crypto alerts.
 
 ## Workflow and dependency controls
 
