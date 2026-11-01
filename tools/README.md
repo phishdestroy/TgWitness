@@ -27,6 +27,10 @@ Builds stay local. See [publishing](../docs/internal/PUBLISHING.md) and
 | `python tools/check_docs_site.py` | Docs, search and diagrams |
 | `python tools/check_browser.py` | Panel flow with fake Telegram data |
 | `python tools/check_account_export_browser.py` | Account-export scope, disclosure preview, access and narrow-screen flows |
+| `python tools/check_cloud_wizard.py` | Server 24/7 wizard and `tgwitness.cloud` against simulated Hetzner, Cloudflare and ntfy.sh |
+| `python tools/check_evidence_witnesses.py` | Evidence mode's drand and device-list records, through export and `verify.py`; `--live` asks the real drand relays |
+| `python tools/check_gateway_dns.py` | Gateway DNS for a 24/7 server: firewall rules, installer, verify, shared location, the journal copy; `--browser` adds the panel |
+| `python tools/check_setup_levels.py` | Setup by goal: the proposal per goal, what Apply changes and records, the credibility and reliability scales, in the browser |
 | `python tools/capture_screenshots.py` | Screenshots in `test-results/`; `--docs` updates docs assets |
 | `python tools/capture_demo.py` | Refresh `website/demo/fixtures.json` from the local demo |
 
