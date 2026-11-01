@@ -33,9 +33,22 @@
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">חפש בתיעוד</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="נסו להשתמש במונחים כמו &quot;פרוקסי&quot;, &quot;שרשרת האש&quot;, &quot;אסימון&quot; או &quot;עד&quot;..." autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="חיפוש ברור" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">הקלידו מילה כדי לחפש במדריכים ובמאגר המידע. החיפוש נשאר בדפדפן שלכם.</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="language-notice">דף זה זמין באנגלית בלבד.</p><p class="eyebrow">הפניה / אבטחה ופרויקט</p><h1>יומן שינויים</h1><p class="guide-outcome">כל השינויים לפי גרסה, כולל השינויים שטרם שוחררו.</p><div class="wiki-body" lang=en dir=ltr><h2 id="unreleased">Unreleased<a class="anchor" href="#unreleased" aria-label="קישור לסעיף זה">#</a></h2>
 <ul>
-<li>Added workspace-aware panel URLs, Back/Forward navigation and an active-view
+<li>Added configurable account export through Telegram Takeout or the explicitly
+    selected regular API. Jobs retain signed progress, support pause/resume and
+    produce a reusable ZIP with coverage and omission records.</li>
+<li>Added separate signed disclosure copies with purpose, sender/date/text filters,
+    participant pseudonyms and optional text/file exclusions. Preview is bound to
+    the administrator session and source archive. Signatures establish integrity;
+    they do not establish Telegram authorship, completeness or legal admissibility.
+    See <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ACCOUNT-EXPORT.md">account export</a> and the <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/ACCOUNT-EXPORT.md">Russian guide</a>.</li>
+<li>
+<p>Added fictional account-export and disclosure downloads to the online demo.</p>
+</li>
+<li>
+<p>Added workspace-aware panel URLs, Back/Forward navigation and an active-view
     lifecycle. Background updates preserve form drafts and focus; settings can be
-    saved with Ctrl/Cmd+S. Submitted secrets never become a Discard baseline.</li>
+    saved with Ctrl/Cmd+S. Submitted secrets never become a Discard baseline.</p>
+</li>
 <li>Reorganized Sources into Scope, Chats and Recording with one recording save;
     Parameters now have search, section links, inline validation and a reset preview.</li>
 <li>Kept chat navigation and messages in separate scrolling columns, with compact
