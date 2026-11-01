@@ -1,10 +1,12 @@
 """Offline export recovery and scale checks using fictional account data only."""
 import asyncio
+import hashlib
 import json
 from pathlib import Path
 import re
 import sys
 import tempfile
+from unittest.mock import patch
 import zipfile
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -13,7 +15,7 @@ from tgwitness.account_export import AccountExport
 from tgwitness.demo import seed_demo
 from tgwitness.security import Vault
 from tgwitness.store import Store
-from tgwitness.verify import verify_account_export
+from tgwitness.verify import fingerprint, verify_account_export
 from tools.demo_account_export import SyntheticCollector, SyntheticTransport
 
 
@@ -61,7 +63,20 @@ async def check_recovery(root):
             nonlocal packaging_attempts, receipt_iterations
             packaging_attempts += 1
             if packaging_attempts == 1:
-                raise OSError("synthetic disk interruption before ZIP publication")
+                open_member = zipfile.ZipFile.open
+                writes = 0
+
+                def fail_second_member(archive, name, mode="r", *args, **kwargs):
+                    nonlocal writes
+                    if mode == "w":
+                        writes += 1
+                        if writes == 2:
+                            raise OSError("synthetic disk interruption during ZIP write")
+                    return open_member(archive, name, mode, *args, **kwargs)
+
+                with patch.object(zipfile.ZipFile, "open", fail_second_member):
+                    original_package(job)
+                raise AssertionError("Injected ZIP write failure was ignored")
             export.receipts = Counted(export.receipts)
             original_package(job)
             receipt_iterations = export.receipts.iterations
@@ -76,18 +91,22 @@ async def check_recovery(root):
             assert not export.public(job_id)["ready"]
             assert export.result_path(job_id) is None
             assert not (export.directory(job_id) / "export.zip").exists()
-            sealed_before = sorted(p.name for p in (export.directory(job_id) / "receipts").glob("*.json"))
+            assert not (export.directory(job_id) / "export.zip.part").exists()
+            sealed_before = {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+                             for p in (export.directory(job_id) / "receipts").glob("*.json")}
 
             await export.resume(job_id)
             await asyncio.wait_for(export.task, 20)
             state = export.public(job_id)
             assert state["ready"] and state["phase"] == "partial", state
-            assert sealed_before == sorted(p.name for p in (export.directory(job_id) / "receipts").glob("*.json"))
+            sealed_after = {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+                            for p in (export.directory(job_id) / "receipts").glob("*.json")}
+            assert sealed_after == sealed_before, "Resume replaced a signed receipt"
             assert packaging_attempts == 2
             assert receipt_iterations == 1, f"HTML packaging rescanned {receipt_iterations} receipt lists"
 
             archive_path = export.result_path(job_id)
-            result = verify_account_export(archive_path)
+            result = verify_account_export(archive_path, fingerprint(vault.public_key))
             assert result["receipt_count"] == len(sealed_before)
             assert result["counts"]["messages"] == 18
             assert not result["complete_within_scope"]  # Synthetic discovery gap remains visible.
