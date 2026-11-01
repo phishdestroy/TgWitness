@@ -40,9 +40,14 @@ concurrency:
 jobs:
   quality:
     name: Dependencies, lint and source
-    runs-on: [self-hosted, Linux, X64, tgwitness-ci]
+    runs-on: [self-hosted, Linux, X64, "${{ vars.TGWITNESS_GENERAL_RUNNER || 'tgwitness-ci' }}"]
     timeout-minutes: 30
     steps:
+      - name: Record available CI capacity
+        run: |
+          nproc
+          free --mebi
+          df --human-readable "$RUNNER_TEMP"
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           persist-credentials: false
@@ -103,7 +108,7 @@ jobs:
       matrix:
         os: ${{ fromJSON(inputs.full_platforms && '["linux", "windows-latest", "macos-latest"]' || '["linux"]') }}
         python: ${{ fromJSON(inputs.full_platforms && '["3.11", "3.12", "3.13"]' || '["3.12"]') }}
-    runs-on: ${{ matrix.os == 'linux' && fromJSON('["self-hosted", "Linux", "X64", "tgwitness-ci"]') || matrix.os }}
+    runs-on: ${{ matrix.os == 'linux' && fromJSON(format('["self-hosted", "Linux", "X64", "{0}"]', vars.TGWITNESS_GENERAL_RUNNER || 'tgwitness-ci')) || matrix.os }}
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -134,7 +139,7 @@ jobs:
           python start.py --setup-only
           python start.py --check --json --data-dir installer-readiness-probe
   browser:
-    runs-on: [self-hosted, Linux, X64, tgwitness-ci]
+    runs-on: [self-hosted, Linux, X64, "${{ vars.TGWITNESS_GENERAL_RUNNER || 'tgwitness-ci' }}"]
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -176,7 +181,7 @@ jobs:
           if-no-files-found: warn
           retention-days: 3
   browser-ux:
-    runs-on: [self-hosted, Linux, X64, tgwitness-ci]
+    runs-on: [self-hosted, Linux, X64, "${{ vars.TGWITNESS_GENERAL_RUNNER || 'tgwitness-ci' }}"]
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
