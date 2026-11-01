@@ -89,6 +89,10 @@ pair in their ancestry. It is not a release or a cryptographic signing claim.
 The verifier's exact accepted SHA pairs remain authoritative and unchanged.
 The historical tag triggers only hosted synthetic sealed validation; it does
 not launch a production capture or publish release assets.
+That historical run passed the real synthetic attestation check; its old test
+suite reported one policy/workflow pin mismatch because the archived workflow
+commit predates the subsequent policy promotion. The archival reference preserves
+those historical bytes and is not presented as a newly validated release.
 
 Scorecard process findings require actual review history, repository age,
 fuzzing or a best-practices assessment. The OSSF wrapper's action commit is
