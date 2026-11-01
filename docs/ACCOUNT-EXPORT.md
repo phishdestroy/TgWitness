@@ -11,6 +11,7 @@ This workflow exports data currently accessible to the connected account. The de
 | Setting | Meaning |
 | --- | --- |
 | Purpose | Record why this acquisition is needed. Do not put unnecessary names or sensitive case details here. |
+| Report language | Choose the language of the readable report's labels. Original message text remains unchanged; untranslated template labels use English. The language is fixed with the signed job options. |
 | Chat kinds / chat IDs | All selected kinds, or just the listed chats; Saved Messages belongs to private chats. Archived chats are separately selectable. |
 | Dates | UTC. The panel's From and Through calendar dates are both included. The API uses inclusive `from_utc` and exclusive `to_utc`; the panel sends the start of the day after Through. An empty bound leaves that side unrestricted. |
 | Sender IDs | Only messages by the listed senders; an empty list includes all senders. |
@@ -46,7 +47,7 @@ The Ed25519 signature and SHA-256 hashes detect changes after the collector comm
 
 ## Prepare a disclosure for a lawyer or another recipient
 
-From a finished account export, choose **Prepare minimized disclosure**. This builds a separate signed derivative. The source ZIP remains unchanged and private; do not send it together with a minimized derivative unless the recipient is authorized to receive its full contents.
+From a finished account export, choose **Prepare a sharing copy**. This builds a separate signed derivative. The source ZIP remains unchanged and private; do not send it together with a minimized derivative unless the recipient is authorized to receive its full contents. Choose its report language separately. Changing the language or any selection setting requires another preview before creation.
 
 1. Enter the disclosure purpose and select dates, sender IDs and literal text criteria.
 2. Choose whether to keep identities, reveal only listed participants, or pseudonymize everyone. In either pseudonymized mode chat IDs/titles and message IDs are also replaced. Pseudonyms are stable inside one disclosure and change between independently prepared disclosures.

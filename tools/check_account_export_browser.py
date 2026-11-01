@@ -11,6 +11,7 @@ from tgwitness import i18n
 
 
 DEFAULTS = {
+    "report_language": "en",
     "purpose": "", "sender_ids": [], "text_contains": [],
     "chat_kinds": ["private", "bot", "group", "supergroup", "channel"],
     "from_utc": None, "to_utc": None, "chat_ids": [], "own_messages_only": False,
@@ -102,6 +103,8 @@ def main():
             expect(page.locator("#account-export-jobs")).to_contain_text("No account exports yet")
             page.locator("#account-export-configure").click()
             expect(page.locator("#account-export-dialog")).to_be_visible()
+            expect(page.locator('#account-export-language')).to_have_value('en')
+            expect(page.locator('#account-export-language option')).to_have_count(25)
             expect(page.locator("#account-export-kinds input:checked")).to_have_count(5)
             expect(page.locator("#account-export-media input:checked")).to_have_count(8)
             expect(page.locator("#account-export-archived")).to_be_checked()
@@ -112,6 +115,7 @@ def main():
             expect(page.locator("#account-export-sections input:checked")).to_have_count(0)
             page.evaluate("accountExportDefaults(state.accountExportDefaults)")
             page.locator("#account-export-purpose").fill("Fictional preservation request")
+            page.locator('#account-export-language').select_option('fr')
             page.locator("#account-export-from").fill("2026-01-01")
             page.locator("#account-export-through").fill("2026-01-31")
             page.locator("#account-export-ids").locator("xpath=ancestor::details").locator("summary").click()
@@ -132,6 +136,8 @@ def main():
             page.evaluate("pollWorkspace()")
             page.locator("#account-export-configure").click()
             expect(page.locator("#account-export-file-limit")).to_have_value("64")
+            expect(page.locator('#account-export-language')).to_have_value('fr')
+            expect(page.locator('#account-export-preview')).to_contain_text('Français')
             expect(page.locator("#account-export-profile-photos")).to_be_checked()
             assert page.evaluate("state.accountExportDirty")
             page.locator("#account-export-start").click()
@@ -146,6 +152,7 @@ def main():
             assert len(starts) == 1
             assert starts[0]["chat_ids"] == [-100123, 42]
             assert starts[0]["purpose"] == "Fictional preservation request"
+            assert starts[0]['report_language'] == 'fr'
             assert starts[0]["sender_ids"] == [42, 55]
             assert starts[0]["text_contains"] == ["fictional phrase", "other phrase"]
             assert starts[0]["from_utc"] == "2026-01-01T00:00:00Z"
@@ -205,15 +212,17 @@ def main():
             expect(page.locator("#account-disclosure-samples")).to_contain_text("[Person 1]")
             assert "SECRET RAW PERSON" not in page.locator("#account-disclosure-preview").inner_text()
             page.locator("#account-disclosure-phrases").fill("other phrase")
+            page.locator('#account-disclosure-language').select_option('ar')
             expect(page.locator("#account-disclosure-create")).to_be_disabled()
             page.locator("#account-disclosure-check").click()
             expect(page.locator("#account-disclosure-create")).to_be_enabled()
             page.once("dialog", lambda dialog: dialog.accept())
             page.locator("#account-disclosure-create").click()
             expect(page.locator("#account-disclosure-dialog")).to_be_hidden()
-            expect(page.locator("#account-export-jobs")).to_contain_text("Signed minimized disclosures")
+            expect(page.locator("#account-export-jobs")).to_contain_text("Signed sharing copies")
             assert len(disclosure_previews) == 2
             assert disclosure_previews[-1]["purpose"] == "Fictional narrow disclosure"
+            assert disclosure_previews[-1]['report_language'] == 'ar'
             assert disclosure_previews[-1]["sender_ids"] == [42]
             assert disclosure_previews[-1]["text_contains"] == ["other phrase"]
             assert disclosure_previews[-1]["redact_terms"] == ["private word", "second phrase"]

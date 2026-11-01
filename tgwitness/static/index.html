@@ -417,6 +417,7 @@
       <div class="account-export-dialog-head"><div><span class="eyebrow">NEW ACCOUNT EXPORT</span><h2 id="account-export-dialog-title" tabindex="-1">Choose what to save</h2></div><button class="quiet" id="account-export-close" type="button" aria-label="Close export settings">×</button></div>
       <p class="muted">Every accessible chat and its full visible history are selected by default. Observation sources are separate from this export.</p>
       <p class="hint">For a personal backup, describe that purpose. You can prepare a separate sharing copy after the export finishes.</p>
+      <div class="export-language"><label for="account-export-language">Report language</label><select id="account-export-language" data-no-translate></select><p class="hint">Report labels use this language. Original messages stay unchanged.</p></div>
       <div class="account-export-purpose"><label for="account-export-purpose">Collection purpose</label><textarea id="account-export-purpose" rows="2" maxlength="1000" required placeholder="Why this account snapshot is being collected"></textarea><p class="hint">The purpose is included in the signed export. Describe the specific investigation or request.</p><button class="secondary account-export-preset" id="account-export-minimize" type="button">Minimize collection</button><p class="hint">Turns off media and optional account data. Chat and sender filters remain yours to set.</p></div>
       <fieldset class="account-export-fieldset"><legend>Chats</legend>
         <div class="account-export-choices" id="account-export-kinds" tabindex="-1">
@@ -449,9 +450,10 @@
   </dialog>
   <dialog class="account-export-dialog account-disclosure-dialog" id="account-disclosure-dialog" aria-labelledby="account-disclosure-title">
     <form id="account-disclosure-form" method="dialog">
-      <div class="account-export-dialog-head"><div><span class="eyebrow">REVIEW BEFORE SHARING</span><h2 id="account-disclosure-title">Prepare minimized disclosure</h2></div><button class="quiet" id="account-disclosure-close" type="button" aria-label="Close disclosure settings">×</button></div>
+      <div class="account-export-dialog-head"><div><span class="eyebrow">REVIEW BEFORE SHARING</span><h2 id="account-disclosure-title">Prepare a sharing copy</h2></div><button class="quiet" id="account-disclosure-close" type="button" aria-label="Close disclosure settings">×</button></div>
       <p class="muted">Create a separate signed derivative from a completed account export. The original archive stays unchanged. Review the sample and remaining personal information before creating a file for sharing.</p>
       <div class="account-export-purpose"><label for="account-disclosure-purpose">Disclosure purpose</label><textarea id="account-disclosure-purpose" rows="2" maxlength="1000" required placeholder="Who needs this file, and why"></textarea></div>
+      <div class="export-language"><label for="account-disclosure-language">Report language</label><select id="account-disclosure-language" data-no-translate></select><p class="hint">Report labels use this language. Original messages stay unchanged.</p></div>
       <fieldset class="account-export-fieldset"><legend>Records to include</legend>
         <div class="account-export-fields"><div><label for="account-disclosure-from">From date (UTC)</label><input id="account-disclosure-from" type="date"></div><div><label for="account-disclosure-through">Through date (UTC)</label><input id="account-disclosure-through" type="date"></div></div>
         <div class="account-export-fields account-export-content-filters"><div><label for="account-disclosure-senders">Sender IDs to include</label><textarea id="account-disclosure-senders" rows="2" placeholder="Leave blank for all senders"></textarea><p class="hint">Numeric IDs separated by commas or spaces.</p></div><div><label for="account-disclosure-phrases">Text contains</label><textarea id="account-disclosure-phrases" rows="2" placeholder="One literal phrase per line"></textarea><p class="hint">A message matches any listed phrase.</p></div></div>
@@ -464,7 +466,7 @@
       </fieldset>
       <div class="account-disclosure-preview" id="account-disclosure-preview" hidden><h3>Review transformed sample</h3><p class="hint">Only the transformed sample is shown here. Check names, quotes and other details that might still identify people.</p><div id="account-disclosure-summary"></div><div id="account-disclosure-samples"></div><div id="account-disclosure-warnings"></div><p class="hint" id="account-disclosure-expiry"></p></div>
       <p class="account-export-preview" id="account-disclosure-status" role="status">Preview is required after every change to these settings.</p>
-      <div class="account-export-dialog-actions"><button class="quiet" id="account-disclosure-dismiss" type="button">Close</button><button class="secondary" id="account-disclosure-check" type="button">Preview disclosure</button><button class="primary" disabled id="account-disclosure-create" type="submit">Create signed derivative</button></div>
+      <div class="account-export-dialog-actions"><button class="quiet" id="account-disclosure-dismiss" type="button">Close</button><button class="secondary" id="account-disclosure-check" type="button">Preview sharing copy</button><button class="primary" disabled id="account-disclosure-create" type="submit">Create signed sharing copy</button></div>
     </form>
   </dialog>
   <div id="export-journal-panel">
@@ -473,6 +475,7 @@
     <div class="evidence-body">
       <h2>Signed archive</h2>
       <p>Journal, report, attachments and verification tools.</p>
+      <p class="hint"><a data-go-reports="settings" href="#">Choose report language &amp; case details</a></p>
       <button class="primary" data-export="zip"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Download signed ZIP</button>
       <small>Includes all sources through a fixed journal boundary, regardless of filters. Streaming export · ZIP limit: 4 GiB uncompressed unless changed in Parameters.</small>
     </div>
@@ -506,7 +509,7 @@
   </div>
   <form class="card padded report-settings" id="report-form" role="tabpanel" aria-labelledby="exports-tab-settings" hidden>
     <div class="eyebrow">Readable reports</div><h2>Report settings</h2>
-    <p class="muted">Language, case details and contents of the report in every signed archive and chat export. Case details are signed into the export; leave a field empty to omit it.</p>
+    <p class="muted">Language, case details and contents of journal and single-chat reports. Case details are signed into the export; leave a field empty to omit it. Account snapshots and sharing copies choose their report language in their own export settings.</p>
     <fieldset class="report-fields" id="report-fields" disabled>
     <div class="report-grid">
       <div><label for="report-language">Report language</label><select data-no-translate id="report-language"></select></div>

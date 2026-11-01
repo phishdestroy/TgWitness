@@ -9,6 +9,11 @@
 - Replaced disclosure JSON previews with readable transformed-message cards,
   exact included-record counts and explicit sample limits. Original archives
   remain separate from sharing copies, and privacy warnings remain visible.
+- Added printable offline reports for account exports and sharing copies, with
+  scope, coverage, readable messages and verification instructions. Choose the
+  report language separately from the panel; original message text stays intact.
+  New labels use explicit English fallbacks where translations are unavailable.
+  Existing signed jobs and already published archives retain their original bytes.
 - Distinguished rejected Telegram authorization from paused accounts and network
   failures. Account counters filter the list; **Sign in again** returns to the
   existing workspace without discarding its journal, sources or signing key.

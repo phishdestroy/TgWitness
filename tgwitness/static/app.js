@@ -1591,11 +1591,17 @@ $("chat-export-download").addEventListener("click",e=>saveExport(e.currentTarget
 const accountExportKinds=["private","bot","group","supergroup","channel"];
 const accountExportMedia=["photo","video","video_message","voice","audio","document","sticker","animation"];
 const accountExportFallback={purpose:"",chat_kinds:accountExportKinds,from_utc:null,to_utc:null,chat_ids:[],
+  report_language:'en',
   sender_ids:[],text_contains:[],own_messages_only:false,
   include_archived:true,media_types:accountExportMedia,max_media_file_mib:512,max_total_gib:16,
   include_profile:true,include_contacts:true,include_profile_photos:false,include_stories:false,
   include_session_metadata:false,include_other_data:false,transport:"takeout"};
 let accountExportRead=null,accountExportRequest=0;
+for(const id of ['account-export-language','account-disclosure-language']){
+  for(const [code,name] of Object.entries(PANEL_LANGUAGES)){
+    const option=new Option(name,code);option.lang=code;option.defaultSelected=code==='en';$(id).append(option);
+  }
+}
 function resetAccountExport(){
   accountExportRequest++;accountExportRead=null;disclosurePreview?.clear();
   $("account-export-dialog")?.close();$("account-disclosure-dialog")?.close();
@@ -1615,6 +1621,7 @@ function accountExportError(error){
 function accountExportDefaults(options){
   const saved={...accountExportFallback,...options};
   $("account-export-purpose").value=saved.purpose||"";
+  $('account-export-language').value=saved.report_language||'en';
   for(const input of $("account-export-kinds").querySelectorAll('input[type="checkbox"]'))
     input.checked=saved.chat_kinds.includes(input.value);
   for(const input of $("account-export-media").querySelectorAll('input[type="checkbox"]'))
@@ -1666,7 +1673,7 @@ function accountExportOptions(){
   if(!Number.isInteger(max_media_file_mib)||max_media_file_mib<1||max_media_file_mib>4096||
       !Number.isInteger(max_total_gib)||max_total_gib<1||max_total_gib>1024)
     throw new Error(tr("Enter a per-file limit of 1–4,096 MiB and a media budget of 1–1,024 GiB."));
-  return {purpose,chat_kinds:kinds,from_utc,to_utc,chat_ids,sender_ids,text_contains,
+  return {purpose,report_language:$('account-export-language').value,chat_kinds:kinds,from_utc,to_utc,chat_ids,sender_ids,text_contains,
     own_messages_only:$("account-export-own").checked,
     include_archived:$("account-export-archived").checked,
     media_types:[...$("account-export-media").querySelectorAll("input:checked")].map(n=>n.value),
@@ -1697,6 +1704,7 @@ function renderAccountExportPreview(){
       ' '+tr(x.own_messages_only?'Only messages sent by this account.':'Messages from all matching senders.')+
       ' '+tr(x.include_archived?'Archived chats included.':'Archived chats excluded.')+
       ' '+tr('Other account data: {data}. Connection method: {method}.',{data:other,method:transport})+
+      ' '+tr('Report language: {language}.',{language:PANEL_LANGUAGES[x.report_language]||x.report_language})+
       (x.purpose?" "+tr("Purpose: {purpose}",{purpose:x.purpose}):" "+tr("Enter a collection purpose before starting."));
   }catch(error){box.textContent=error.message;$('account-export-advanced-summary').textContent=tr('Review export settings.');}
 }
@@ -1799,7 +1807,7 @@ function renderAccountExportJobs(){
     if(!job.ready&&(["paused","failed"].includes(phase)||(phase==="waiting"&&!active&&!waitPending)))
       addAction(actions,job,tr("Resume"),"resume",()=>accountExportAction(job,"resume"));
     if(job.ready)addAction(actions,job,tr("Download signed archive"),"download",()=>accountExportDownload(job),"primary");
-    if(job.ready)addAction(actions,job,tr("Prepare minimized disclosure"),"disclosure",()=>openAccountDisclosure(job));
+    if(job.ready)addAction(actions,job,tr("Prepare a sharing copy"),"disclosure",()=>openAccountDisclosure(job));
     if(!active)addAction(actions,job,tr("Delete job"),"delete",()=>accountExportDelete(job),"quiet");
     card.append(actions);
     const saved=state.accountDisclosures[job.id]||[];
@@ -1807,11 +1815,11 @@ function renderAccountExportJobs(){
     const disclosures=[...persisted,...saved.filter(local=>!persisted.some(item=>item.id===local.id))];
     if(disclosures.length){
       const derivatives=node("div","account-disclosure-list");
-      derivatives.append(node("strong","",tr("Signed minimized disclosures")));
+      derivatives.append(node("strong","",tr("Signed sharing copies")));
       for(const item of disclosures){
         const row=node("div","account-disclosure-item"),label=node("span","",tr("Disclosure {id}",{id:String(item.id||"").slice(0,10)}));
         row.append(label);
-        if(item.ready){const button=node("button","quiet",tr("Download disclosure"));button.type="button";
+        if(item.ready){const button=node("button","quiet",tr("Download sharing copy"));button.type="button";
           button.dataset.accountExportAction="disclosure-download";button.dataset.jobId=job.id;
           button.addEventListener("click",()=>busy(button,()=>accountDisclosureDownload(job,item)));
           row.append(button);
@@ -1905,7 +1913,7 @@ function accountDisclosurePolicy(){
   const purpose=$("account-disclosure-purpose").value.trim();
   if(!purpose)throw new Error(tr("Enter a disclosure purpose."));
   const identity_mode=$("account-disclosure-identities").value;
-  return {purpose,...accountExportDates("account-disclosure"),
+  return {purpose,report_language:$('account-disclosure-language').value,...accountExportDates("account-disclosure"),
     sender_ids:accountExportIds($("account-disclosure-senders").value,"sender"),
     text_contains:accountExportPhrases($("account-disclosure-phrases").value),
     redact_terms:accountExportPhrases($("account-disclosure-redact-terms").value),
@@ -2101,7 +2109,7 @@ $("report-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitt
     reportDirty=formControls?.changed(draft)||false;formControls?.accepted(draft,reportDirty);$("report-status").textContent=tr(reportDirty?"Saved. New edits have not been saved.":"Saved. The next export uses these settings.");toast(tr("Report settings saved."));
   }finally{if(reportOwner===owner&&reportKey()===owner){reportSaving=false;reportControls();}}
 });});
-document.querySelectorAll("[data-go-reports]").forEach(link=>link.addEventListener("click",event=>{
+panelQueries("[data-go-reports]").forEach(link=>link.addEventListener("click",event=>{
   event.preventDefault();navigate("evidence");exportsReady.then(view=>{view.select("settings");$("report-form").scrollIntoView({block:"start"});});
 }));
 $("export-encrypt-on").addEventListener("change",()=>{

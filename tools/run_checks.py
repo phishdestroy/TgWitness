@@ -30,6 +30,7 @@ SUITES = {
         "check_mcp_browser.py", "check_settings_browser.py", "check_analysis_browser.py",
         "check_account_browser.py", "check_fleet_browser.py", "check_proxy_async_browser.py",
         "check_export_async_browser.py", "check_account_export_browser.py", "check_refresh_browser.py",
+        "check_account_reports.py",
         "check_analyst_browser.py", "check_history_browser.py", "check_sealed_browser.py",
         "check_interactions_browser.py", "check_workspace_browser.py", "check_quick_browser.py",
         "check_proof_browser.py", "check_setup_browser.py", "check_public_proxies_browser.py",
