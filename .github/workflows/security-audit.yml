@@ -34,6 +34,16 @@ jobs:
             lock: deploy/build.lock
           - name: mcp
             lock: deploy/constraints-mcp.txt
+          - name: mcp-lock
+            lock: deploy/mcp.lock
+          - name: audit-tooling
+            lock: deploy/audit.lock
+          - name: browser-tooling
+            lock: deploy/browser.lock
+          - name: site-tooling
+            lock: deploy/site.lock
+          - name: media-worker
+            lock: deploy/media-worker/requirements.lock
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
