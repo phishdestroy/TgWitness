@@ -2,6 +2,65 @@
 
 ## Unreleased
 
+- Kept English as the canonical interface, documentation and demo language, with
+  explicit fallback and browser checks. Capture now falls back to its English
+  source when a translation is missing. Other languages remain translations.
+- Hardened Capture language selection and encoded its HTML/URL output, pinned
+  release actions, and documented the dated security scan results, including
+  unresolved Debian package findings in the container images.
+- Refreshed the Russian panel and Capture wizard through DeepL, with reviewed
+  privacy and evidence terminology, preserved placeholders and command examples.
+- Raised dependency security floors and regenerated the hash-locked build tools.
+  Notification services now refuse HTTP redirects, including URL-level redirect
+  overrides, so credentials cannot be forwarded to a different endpoint. Configure
+  the final notification endpoint directly; HTTP 3xx responses fail delivery.
+- Added weekly Dependabot updates, checks for pull requests on hosted runners,
+  and nightly dependency, CodeQL and container vulnerability scans. Custom
+  dependency locks remain reviewed and regenerated together with version changes.
+- Fixed quick search after rapid close/reopen and temporary parameter API errors.
+  Browser checks run two at a time with individual logs and a complete result
+  summary, including checks after a failure.
+- Corrected archive-search date defaults across daylight-saving transitions so
+  recently captured records remain inside the selected period.
+
+- Added configurable account export through Telegram Takeout or the explicitly
+  selected regular API. Jobs retain signed progress, support pause/resume and
+  produce a reusable ZIP with coverage and omission records.
+- Added separate signed disclosure copies with purpose, sender/date/text filters,
+  participant pseudonyms and optional text/file exclusions. Preview is bound to
+  the administrator session and source archive. Signatures establish integrity;
+  they do not establish Telegram authorship, completeness or legal admissibility.
+  See [account export](ACCOUNT-EXPORT.md) and the [Russian guide](ru/ACCOUNT-EXPORT.md).
+- Added fictional account-export and disclosure downloads to the online demo.
+
+- Added workspace-aware panel URLs, Back/Forward navigation and an active-view
+  lifecycle. Background updates preserve form drafts and focus; settings can be
+  saved with Ctrl/Cmd+S. Submitted secrets never become a Discard baseline.
+- Reorganized Sources into Scope, Chats and Recording with one recording save;
+  Parameters now have search, section links, inline validation and a reset preview.
+- Kept chat navigation and messages in separate scrolling columns, with compact
+  actions, source filters, priority and distinct conversation views/message filters.
+- Added combined journal filters, cursor windows and a desktop record inspector.
+  Routine system events are hidden by default and remain available with a toggle.
+- Added grouped notifications, focused health actions, workspace summaries and
+  access presets. Export preparation history records byte counts and hashes without
+  changing signed evidence. See [panel development](FRONTEND.md) for module ownership
+  and the remaining extraction plan.
+
+- Serve read-only MCP at the panel's `/mcp` endpoint. Connections select their
+  tools and scope, support token rotation and report recent use. Client setup
+  uses `tgwitness.mcp_server` and `TGWITNESS_MCP_TOKEN`; the runtime check provides
+  an installation command when the optional SDK is absent. Setup forms keep
+  their drafts, and protocol checks list tools without reading messages.
+- Keep report settings separate when switching workspaces. Cancelled exports
+  finish their file worker before releasing the lock and remove temporary data;
+  failed downloads clean up too. Scoped source actions return only allowed chats.
+- Refuse account/connection replacement during exports; roll back interrupted
+  collector startup and bound TLS shutdown. Local export write failures stop
+  immediately instead of skipping records. Verify signed attachment and avatar
+  references during export checks and backup restore, and reject invalid TSA
+  certificate constraints and broken storage pagination.
+
 - Kept disabled AI out of the sidebar and attachment actions. Provider setup lives
   in Integrations; local recognition appears only when its worker is configured.
   Connection settings now show the fields for the selected route, with the
@@ -57,7 +116,9 @@
   account files are shown as such, and import errors appear in the panel language.
   Account groups can start or pause all their workspaces at once.
 - Unanswered servers in preferred countries no longer hide working servers in other
-  countries; servers of avoided countries are never connected to, not even by checks.
+  countries; servers identified as being in avoided countries are excluded, including from
+  checks. Servers with unknown country remain eligible unless only preferred countries are
+  allowed.
   Country lookups move past hosts without an answer, the saved lists stay readable at
   their size limits, the last list update shows when lists were actually downloaded, and
   a blocked list download disables the update button and offers the proxy setting. Own

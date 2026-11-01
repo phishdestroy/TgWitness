@@ -1,5 +1,6 @@
 """Isolated account collectors behind one authenticated panel."""
 import asyncio
+from contextlib import ExitStack
 import re
 import shutil
 import uuid
@@ -29,7 +30,8 @@ class Profiles:
         label = app.state.store.get_setting("profile_label", "Main account")
         self.entries = {"default": {"id": "default", "label": label, "app": app, "cm": None}}
         self.opening = {}
-        self.importing = set()  # authorization keys of imports still connecting
+        self.session_reservations = {}  # authorization keys reserved before a connection can start
+        self.account_reservations = {}  # account IDs held through the durable ownership write
         self.lock = asyncio.Lock()
         app.state.collector.account_guard = self.check_account
 
@@ -57,6 +59,50 @@ class Profiles:
         connects: the same key from a second address can make Telegram revoke it (AUTH_KEY_DUPLICATED)."""
         if self.holder(account_id, key, collector):
             raise ValueError("This Telegram account already belongs to another profile. Use its existing workspace.")
+        if key:
+            return self.reserve_session(key, collector)
+        if account_id is not None:
+            return self.reserve_account(account_id, collector)
+
+    @staticmethod
+    def _reserve(reservations, identity, owner):
+        existing = reservations.get(identity)
+        if existing is not None:
+            if existing["owner"] is owner:
+                return lambda: None  # an outer import already holds this lease
+            raise ValueError("This Telegram account is being imported right now.")
+        lease = {"owner": owner}
+        reservations[identity] = lease
+
+        def release():
+            if reservations.get(identity) is lease:
+                del reservations[identity]
+        return release
+
+    def reserve_session(self, key, owner):
+        """Reserve a key synchronously before any await; return an identity-bound release callback."""
+        if not key:
+            raise ValueError("These files hold no login session. Add the .session or TData of the account.")
+        if self.holder(key=key, collector=owner):
+            raise ValueError("This Telegram account already belongs to another profile. Use its existing workspace.")
+        return self._reserve(self.session_reservations, key, owner)
+
+    def reserve_account(self, account_id, owner):
+        if self.holder(account_id=account_id, collector=owner):
+            raise ValueError("This Telegram account already belongs to another profile. Use its existing workspace.")
+        return self._reserve(self.account_reservations, account_id, owner)
+
+    def transfer_session(self, key, owner, collector, account_id=None):
+        """Give a still-held import lease to its child without opening a reservation gap."""
+        lease = self.session_reservations.get(key)
+        if lease is None or lease["owner"] is not owner:
+            raise ValueError("The account import no longer holds its session reservation.")
+        account = self.account_reservations.get(account_id) if account_id is not None else None
+        if account_id is not None and (account is None or account["owner"] is not owner):
+            raise ValueError("The account import no longer holds its session reservation.")
+        lease["owner"] = collector
+        if account is not None:
+            account["owner"] = collector
 
     async def open(self):
         try:
@@ -139,6 +185,12 @@ class Profiles:
             if multi and multi.uses(profile_id):
                 raise ValueError("This account is part of a running multi-account export. "
                                  "Cancel the export or wait for it to finish, then delete the account.")
+            child = entry.get("app")
+            if child and (child.state.collector.export_claim
+                          or getattr(child.state, "operation_lock", None) and child.state.operation_lock.locked()
+                          or getattr(child.state, "account_export", None) and child.state.account_export.busy()
+                          or getattr(child.state, "disclosures", None) and child.state.disclosures.busy()):
+                raise ValueError("Pause the account export and wait for current workspace operations and disclosure packaging before deleting this workspace.")
 
 
             if not entry.get("deleting"):
@@ -151,6 +203,8 @@ class Profiles:
                     self.app.state.store.append("profile.deletion_started", {"profile_id": profile_id})
                 entry["deleting"] = True
             cm = entry.get("cm")
+            if child:
+                child.state.closing = True
             entry.update(app=None, error_type="DeletionPending")
             if cm is not None:
 
@@ -306,20 +360,25 @@ class Profiles:
             return {"group": group, "results": results}
 
     def summary(self):
-        result = []
-        for profile in self.entries.values():
-            app = profile["app"]
-            status = app.state.collector.status() if app else None
-            sources = app.state.store.target_counts() if app else None
-            result.append({
-                "id": profile["id"], "label": profile["label"], "group": self.group_of(profile["id"]),
-                "collector": status, "health": health.collector_of(app.state, status) if app else None,
-                "stats": app.state.store.stats() if app else None,
-                "sources_enabled": sources["enabled"] if sources else None,
-                "sources_total": sources["total"] if sources else None,
-                "error_type": profile.get("error_type"),
-            })
-        return result
+        with ExitStack() as snapshots:
+            result, pools = [], set()
+            for profile in self.entries.values():
+                app = profile["app"]
+                pool = getattr(app.state.collector, "proxy_pool", None) if app else None
+                if pool is not None and id(pool) not in pools:
+                    snapshots.enter_context(pool.read_snapshot())
+                    pools.add(id(pool))
+                status = app.state.collector.status() if app else None
+                sources = app.state.store.target_counts() if app else None
+                result.append({
+                    "id": profile["id"], "label": profile["label"], "group": self.group_of(profile["id"]),
+                    "collector": status, "health": health.collector_of(app.state, status) if app else None,
+                    "stats": app.state.store.stats() if app else None,
+                    "sources_enabled": sources["enabled"] if sources else None,
+                    "sources_total": sources["total"] if sources else None,
+                    "error_type": profile.get("error_type"),
+                })
+            return result
 
     async def close(self):
         for profile_id, entry in list(self.entries.items()):

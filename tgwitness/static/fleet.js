@@ -3,14 +3,14 @@
   // Account groups with shared settings, and importing many accounts into their own workspaces.
   let groups = [], sections = [], picked = [], importing = false, stopping = false;
   let loadSerial = 0, formRevision = -1, restorePoint = null, loadError = "", creating = null;
-  const settings = new Map(), moving = new Map(), writing = new Map();
+  const settings = new Map(), moving = new Map(), writing = new Map(), groupActions = new Map();
   const editable = () => !!state.me?.admin && !state.status?.demo;
   const SECTIONS = {parameters: "Parameters", reports: "Report settings", capture: "Capture and monitoring",
                     recheck: "Recheck schedule", route: "IP protection mode"};
   const labelOf = id => (state.profiles || []).find(p => p.id === id)?.label || id;
 
   function clearForms() {
-    settings.clear(); moving.clear(); writing.clear(); restorePoint = null; creating = null;
+    settings.clear(); moving.clear(); writing.clear(); groupActions.clear(); restorePoint = null; creating = null;
     formRevision = state.workspaceRevision; loadSerial++;
   }
 
@@ -34,7 +34,7 @@
   }
 
   function groupControls(id) {
-    const entry = settings.get(id), disabled = !editable() || writing.has(id);
+    const entry = settings.get(id), disabled = !editable() || writing.has(id) || groupActions.has(id);
     if (entry) entry.panel.querySelectorAll("input, select, button").forEach(field => { field.disabled = disabled; });
     const section = [...$("fleet-groups").children].find(n => n.dataset.group === id);
     section?.querySelectorAll(".fleet-group-actions button").forEach(button => {
@@ -43,7 +43,7 @@
   }
 
   async function writeGroup(id, work) {
-    if (writing.has(id) || !editable()) return;
+    if (writing.has(id) || groupActions.has(id) || !editable()) return;
     const marker = {}, revision = state.workspaceRevision;
     writing.set(id, marker); const serial = ++loadSerial; groupControls(id);
     try { return await work(serial); }
@@ -54,12 +54,12 @@
   }
 
   async function load() {
-    if (!state.status) return;
+    if (!state.status || state.view !== "accounts") return;
     if (formRevision !== state.workspaceRevision) clearForms();
     const revision = state.workspaceRevision, serial = ++loadSerial;
     try {
       const result = await json("profile-groups", undefined, {root: true});
-      if (revision !== state.workspaceRevision || serial !== loadSerial) return;
+      if (revision !== state.workspaceRevision || serial !== loadSerial || state.view !== "accounts") return;
       groups = result.groups; sections = result.sections;
       loadError = "";
     } catch (error) {
@@ -73,12 +73,9 @@
 
   function fillSelects() {
     const add = $("account-add-group"), target = $("fleet-group");
-    const previous = [add.value, target.value];
-    add.replaceChildren(new Option(tr("No group"), ""));
-    target.replaceChildren(new Option(tr("A new group"), "__new"), new Option(tr("No group"), ""));
-    for (const group of groups) { add.append(new Option(group.label, group.id)); target.append(new Option(group.label, group.id)); }
-    add.value = [...add.options].some(o => o.value === previous[0]) ? previous[0] : "";
-    target.value = [...target.options].some(o => o.value === previous[1]) ? previous[1] : (groups.length ? groups[0].id : "__new");
+    const choices=groups.map(group=>[group.id,group.label]);
+    syncOptions(add,[["",tr("No group")],...choices]);
+    syncOptions(target,[["__new",tr("A new group")],["",tr("No group")],...choices],groups[0]?.id||"__new");
     $("fleet-group-name").closest("div").hidden = target.value !== "__new";
   }
 
@@ -88,9 +85,9 @@
     select.append(new Option(tr("No group"), ""));
     for (const group of groups) select.append(new Option(group.label, group.id));
     select.value = moving.get(profileId)?.group ?? current ?? "";
-    select.disabled = !editable() || moving.has(profileId);
+    select.disabled = !editable() || moving.has(profileId) || groupActions.size;
     select.addEventListener("change", () => busy(null, async () => {
-      if (!editable() || moving.has(profileId)) return;
+      if (!editable() || moving.has(profileId) || groupActions.size) return;
       const marker = {group: select.value}, revision = state.workspaceRevision;
       moving.set(profileId, marker); select.disabled = true; const serial = ++loadSerial;
       try {
@@ -103,6 +100,12 @@
       }
     }));
     return select;
+  }
+
+  function updateGroupSelect(select,profileId,current){
+    syncOptions(select,[["",tr("No group")],...groups.map(group=>[group.id,group.label])]);
+    select.value=moving.get(profileId)?.group??current??"";
+    select.disabled=!editable()||moving.has(profileId)||!!groupActions.size;
   }
 
   function settingsPanel(group) {
@@ -145,8 +148,7 @@
     const options = JSON.stringify((state.profiles || []).map(p => [p.id, p.label]));
     if (entry.options !== options) {
       const previous = template.value;
-      template.replaceChildren(new Option(tr("Choose a workspace"), ""));
-      for (const profile of state.profiles || []) template.append(new Option(profile.label, profile.id));
+      syncOptions(template,[["",tr("Choose a workspace")],...(state.profiles||[]).map(profile=>[profile.id,profile.label])]);
       template.value = previous; entry.options = options;
     }
     if (!entry.dirty) {
@@ -162,29 +164,45 @@
     const due = {start: p => !p.collector.running && p.collector.has_session, stop: p => p.collector.running};
     return [["start", tr("Start all")], ["stop", tr("Pause all")]].map(([action, label]) => {
       const button = node("button", "secondary small", label); button.type = "button";
-      button.disabled = !may("collect") || !!state.status?.demo || !members().some(due[action]);
-      button.addEventListener("click", () => busy(button, async () => {
-        const done = [], failed = [];
-        for (const profile of members().filter(due[action])) {
-          try {
-            await json("collector/" + action, {}, {profile: profile.id}); done.push(profile.label);
-          } catch (error) {
-            if (error instanceof StaleView) return;
-            failed.push(profile.label + ": " + error.message);
+      button.dataset.unavailable = String(!may("collect") || !!state.status?.demo || !members().some(due[action]));
+      button.disabled = button.dataset.unavailable === "true" || groupActions.has(group.id);
+      button.addEventListener("click", () => busy(null, async () => {
+        if (button.disabled || groupActions.has(group.id) || writing.has(group.id) || moving.size || !may("collect")) return;
+        const marker = {}, revision = state.workspaceRevision, done = [], failed = [];
+        const current = () => revision === state.workspaceRevision && !!state.token && state.view === "accounts"
+          && groupActions.get(group.id) === marker && may("collect");
+        groupActions.set(group.id, marker); decorate();
+        try {
+          for (const profile of members().filter(due[action])) {
+            if (!current()) return;
+            if (!groups.find(item => item.id === group.id)?.members.includes(profile.id)) continue;
+            try {
+              await json("collector/" + action, {}, {profile: profile.id});
+              if (!current()) return;
+              done.push(profile.label);
+            } catch (error) {
+              if (!current() || error instanceof StaleView) return;
+              failed.push(profile.label + ": " + error.message);
+            }
           }
+          if (!current()) return;
+          await loadProfiles();
+          if (!current()) return;
+          toast([action === "start" ? trn("{n} workspace started.", "{n} workspaces started.", done.length)
+                                    : trn("{n} workspace paused.", "{n} workspaces paused.", done.length),
+                 ...failed].join(" · "), !!failed.length);
+        } finally {
+          if (groupActions.get(group.id) === marker) groupActions.delete(group.id);
+          if (revision === state.workspaceRevision && state.view === "accounts") decorate();
         }
-        await loadProfiles();
-        toast([action === "start" ? trn("{n} workspace started.", "{n} workspaces started.", done.length)
-                                  : trn("{n} workspace paused.", "{n} workspaces paused.", done.length),
-               ...failed].join(" · "), !!failed.length);
       }));
       return button;
     });
   }
 
-  function groupSection(group, cards) {
+  function groupSection(group, cards, headerOnly=false) {
     const section = node("section", "fleet-group card"), head = node("div", "fleet-group-head");
-    section.dataset.group = group.id;
+    section.dataset.group = group.id;section.groupData=group;
     const who = node("div"), title = node("h2", "", group.label);
     title.append(node("span", "fleet-count", String(group.members.length)));
     const shares = (group.sections || []).map(key => tr(SECTIONS[key] || key));
@@ -220,10 +238,9 @@
     actions.append(apply, ...groupRun(group), rename, remove);
     for (const button of [rename, remove]) button.disabled = !editable() || writing.has(group.id);
     head.append(who, actions);
+    section.append(head);if(headerOnly)return section;
     const grid = node("div", "accounts-grid");
-    for (const id of group.members) if (cards.has(id)) grid.append(cards.get(id));
-    if (!group.members.length) grid.append(node("p", "hint fleet-empty", tr("No workspaces in this group yet. Move one here or import accounts into it.")));
-    section.append(head, settingsPanel(group), grid);
+    section.append(settingsPanel(group), grid);
     return section;
   }
 
@@ -233,24 +250,42 @@
     if (formRevision !== state.workspaceRevision) clearForms();
     if (!restorePoint) beforeRender();
     for (const id of settings.keys()) if (!groups.some(group => group.id === id)) settings.delete(id);
-    const cards = new Map([...document.querySelectorAll(".account-card[data-profile]")].map(card => [card.dataset.profile, card]));
+    const cards = new Map([...$("view-accounts").querySelectorAll(".account-card[data-profile]")].map(card => [card.dataset.profile, card]));
     const membership = new Map(groups.flatMap(group => group.members.map(id => [id, group.id])));
     for (const [id, card] of cards) {
-      card.querySelector(".fleet-card-row")?.remove();
-      const row = node("div", "fleet-card-row"), label = node("span", "", tr("Group"));
-      row.append(label, groupSelect(id, membership.get(id)));
-      card.querySelector(".account-actions")?.before(row);
+      let select=card.querySelector('.fleet-card-group');
+      if(!select){const row=node('div','fleet-card-row');select=groupSelect(id,membership.get(id));
+        row.append(node('span','',tr('Group')),select);card.querySelector('.account-actions')?.before(row);}
+      else updateGroupSelect(select,id,membership.get(id));
     }
-    box.replaceChildren(...groups.map(group => groupSection(group, cards)));
-    for (const [id, card] of cards) if (!membership.has(id)) list.append(card);
+    const previous=new Map([...box.children].map(section=>[section.dataset.group,section]));
+    const sections=groups.map(value=>{
+      let section=previous.get(value.id),group=section?Object.assign(section.groupData,value):value;
+      if(!section)section=groupSection(group,cards);
+      else{
+        const fresh=groupSection(group,cards,true),oldHead=section.querySelector('.fleet-group-head'),newHead=fresh.querySelector('.fleet-group-head');
+        if(oldHead.firstElementChild.outerHTML!==newHead.firstElementChild.outerHTML)oldHead.firstElementChild.replaceWith(newHead.firstElementChild);
+        [...oldHead.querySelectorAll('button')].forEach((button,index)=>{const candidate=newHead.querySelectorAll('button')[index];
+          button.dataset.unavailable=candidate.dataset.unavailable||'false';if(!button.hasAttribute('aria-busy'))button.disabled=candidate.disabled;});
+        settingsPanel(group);
+      }
+      const grid=section.querySelector('.accounts-grid'),members=window.TgWitnessAccounts?.ownsRows?[]:group.members.map(id=>cards.get(id)).filter(Boolean);
+      grid.hidden=!!window.TgWitnessAccounts?.ownsRows;
+      if(!members.length)members.push(grid.querySelector('.fleet-empty')||node('p','hint fleet-empty',tr('No workspaces in this group yet. Move one here or import accounts into it.')));
+      placeChildren(grid,members);return section;
+    });
+    // Move cards before retiring an old group, so removal never drops an account.
+    placeChildren(list,[...cards].filter(([id])=>window.TgWitnessAccounts?.ownsRows||!membership.has(id)).map(([,card])=>card));
+    placeChildren(box,sections);
     $("fleet-import-open").disabled = !editable();
     $("fleet-group-new").disabled = !editable() || !!creating;
     let title = $("fleet-ungrouped");
     if (!title) { title = node("h2", "fleet-ungrouped", ""); title.id = "fleet-ungrouped"; list.before(title); }
     title.textContent = tr("Without group");
-    title.hidden = !groups.length || !list.children.length;
+    title.hidden = !!window.TgWitnessAccounts?.ownsRows || !groups.length || !list.children.length;
+    window.TgWitnessAccounts?.updateStatus();
     if (restorePoint) {
-      const focus = restorePoint.profile ? [...document.querySelectorAll(".account-card[data-profile]")]
+      const focus = restorePoint.profile ? [...$("view-accounts").querySelectorAll(".account-card[data-profile]")]
         .find(card => card.dataset.profile === restorePoint.profile)?.querySelector(".fleet-card-group") : restorePoint.element;
       if (focus?.isConnected && !focus.disabled) {
         focus.focus({preventScroll: true}); window.scrollTo({left: restorePoint.x, top: restorePoint.y, behavior: "instant"});

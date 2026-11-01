@@ -124,7 +124,7 @@
     return box;
   }
 
-  const clock = seconds => new Date(seconds * 1000).toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"});
+  const clock = seconds => fmtTime(seconds * 1000);
   const every = minutes => minutes >= 60 && minutes % 60 === 0 ? tr("{n} h", {n: minutes / 60}) : tr("{n} min", {n: minutes});
 
   function renderStats() {

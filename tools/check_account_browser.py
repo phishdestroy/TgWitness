@@ -7,10 +7,10 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
-from check_browser import RunningApp, unlock, check_layout, hold_api_response, release_api_response, launch_browser
-from test_account_import import sqlite_fixture, tdata_fixture
-from test_qr_login import QRClient
-from test_collector import saved_session
+from check_browser import RunningApp, unlock, check_layout, hold_api_response, release_api_response, launch_browser, navigate_panel
+from tools.browser_fixtures import sqlite_fixture, tdata_fixture
+from tools.browser_fixtures import QRClient
+from tools.browser_fixtures import saved_session
 from telethon.sessions import StringSession
 from playwright.sync_api import sync_playwright, expect
 
@@ -40,7 +40,7 @@ def main():
         page.on("request", lambda req: outbound.append(req.url) if urlsplit(req.url).hostname not in (None,"127.0.0.1") else None)
         def open_account():
             if not page.locator('#view-connection').is_visible():
-                page.locator('[data-view="connection"]').click()
+                navigate_panel(page, "connection")
 
         def open_settings():
             open_account()
@@ -111,6 +111,27 @@ def main():
         assert not server.app.state.collector.running
         scenarios.append("imported account ID checked during authorization")
 
+        def workspace_api_path(path):
+            profile = page.evaluate("state.profile")
+            return ("" if profile == "default" else "/profiles/" + profile) + "/api/" + path
+
+        def request_qr(button):
+            # Cold QR rendering may outlast the UI assertion budget. Wait for
+            # the request itself, then keep the normal rendering assertions.
+            path = workspace_api_path("auth/qr/start")
+            with page.expect_response(lambda response: urlsplit(response.url).path == path
+                                      and response.request.method == "POST", timeout=25000) as pending:
+                page.locator(button).click()
+            assert pending.value.status == 200
+
+        def reload_workspace():
+            path = workspace_api_path("status")
+            with page.expect_response(lambda response: urlsplit(response.url).path == path
+                                      and response.request.method == "GET", timeout=20000) as pending:
+                page.reload()
+            assert pending.value.status == 200
+            expect(page.locator("#workspace")).to_be_visible()
+
         def begin_qr(api_id="123"):
             if page.locator("#authorized-state").is_visible():
                 page.locator("#change-account").click()
@@ -123,7 +144,7 @@ def main():
             page.locator("#api-id").fill(api_id)
             page.locator("#api-hash").fill("a"*32)
             choose_method("qr")
-            page.locator("#start-qr").click()
+            request_qr("#start-qr")
             expect(page.locator("#qr-state")).to_be_visible()
             expect(page.locator("#qr-image")).to_be_visible()
             return server.app.state.collector.login_client
@@ -147,7 +168,7 @@ def main():
         expect(page.locator("#qr-status")).to_contain_text("expired")
         expect(page.locator("#qr-retry")).to_be_visible()
         assert not candidate.connected
-        page.locator("#qr-retry").click()
+        request_qr("#qr-retry")
         expect(page.locator("#qr-status")).to_contain_text("Waiting for confirmation")
         candidate = server.app.state.collector.login_client
         scan(candidate, "password")
@@ -167,8 +188,10 @@ def main():
         candidate = begin_qr()
         page.locator('[aria-label="Lock workspace"]:visible').first.click()
         expect(page.locator("#gate")).to_be_visible()
-        page.wait_for_function("!document.querySelector('#qr-image').getAttribute('src')")
-        hold_api_response(page, "/events?limit=60")
+        page.wait_for_function("()=>!$('qr-image').getAttribute('src')")
+        # Unlock loads only the active Account screen. A late policy response
+        # must not reset a QR sign-in started while account settings load.
+        hold_api_response(page, "/network/policy")
         page.locator("#panel-token").fill(server.app.state.vault.token)
         page.locator("#unlock-form button[type=submit]").click()
         expect(page.locator("#workspace")).to_be_visible()
@@ -180,12 +203,11 @@ def main():
         release_api_response(page)
         page.wait_for_load_state("networkidle")
         expect(page.locator("#qr-state")).to_be_visible()
-        scenarios.append("sign-in is ready before journal loading and is not reset when it completes")
+        scenarios.append("sign-in is ready before account settings load and is not reset when they arrive")
         response = context.request.post(server.url+"/api/profiles",data={"label":"Second synthetic account"},
             headers={"Authorization":"Bearer "+server.app.state.vault.token})
         child = response.json()["id"]
-        page.reload()
-        expect(page.locator("#workspace")).to_be_visible()
+        reload_workspace()
 
         assert candidate.connected
         open_account()
@@ -271,15 +293,18 @@ def main():
         expect(page.locator("#code-form")).to_be_visible()
         page.locator("#auth-back").click()
         choose_method("qr")
-        page.locator("#start-qr").click()
+        request_qr("#start-qr")
         expect(page.locator("#qr-image")).to_be_visible()
         page.locator("#qr-cancel").click()
         scenarios += ["phone number goes directly to code and 2FA", "saved API credentials reused for phone and QR"]
         response = context.request.post(server.url+"/api/profiles",data={"label":"Direct file import"},
             headers={"Authorization":"Bearer "+server.app.state.vault.token})
         third = response.json()["id"]
-        page.reload()
-        expect(page.locator("#workspace")).to_be_visible()
+        try:
+            reload_workspace()
+        except AssertionError as failure:
+            reason = page.locator("#login-error").text_content()
+            raise AssertionError({"reload_error": reason, "browser_errors": errors}) from failure
         open_settings()
         page.locator("#profile-select").select_option(third)
         open_account()
@@ -382,9 +407,8 @@ def main():
         choose_method("key")
         enter_key()
         page.locator('[aria-label="Lock workspace"]:visible').first.click()
-        expect(page.locator("#auth-key")).to_have_value("")
-        expect(page.locator("#auth-dc")).to_have_value("")
-        expect(page.locator("#auth-user-id")).to_have_value("")
+        assert page.evaluate("()=>['auth-key','auth-dc','auth-user-id'].map(id=>$(id).value)") == ["", "", ""]
+        expect(page.locator("#view-connection")).to_have_count(0)
         scenarios.append("locking the panel clears pasted Auth Key and identity fields")
 
         page.locator("#panel-token").fill(server.app.state.vault.token)

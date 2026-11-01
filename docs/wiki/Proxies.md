@@ -94,11 +94,11 @@ through the configured outside route. Ping and country are observations, not tru
 ratings. **Check all now** updates results without changing a saved manual route.
 
 **Countries** sets preferred and avoided countries for the automatic route. Servers in
-preferred countries are tried first; servers in avoided countries are never used. With
-**Use only servers in preferred countries**, a workspace waits rather than use another
-country. A server whose country is not known yet counts as another country. A workspace
-keeps a working server; the choice applies when it picks the next one, and each change is
-recorded in the journal.
+preferred countries are tried first. Servers identified as being in avoided countries are
+excluded; servers whose country is unknown remain eligible unless **Use only servers in
+preferred countries** is selected. With that option, a workspace waits rather than use
+another country or a server whose country is unknown. A workspace keeps a working server;
+the choice applies when it picks the next one, and each change is recorded in the journal.
 
 The dashboard shows how often lists are downloaded and servers checked; **Open Parameters**
 leads to these intervals under **Parameters → Automatic MTProxy** of the main workspace.

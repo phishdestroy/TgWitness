@@ -7,7 +7,7 @@ from playwright.sync_api import expect, sync_playwright
 
 from check_browser import (ROOT, RunningApp, hold_api_response, launch_browser,
                            release_api_response, unlock)
-from test_collector import saved_session
+from tools.browser_fixtures import saved_session
 from check_fleet_async_browser import main as check_async_groups
 
 
@@ -47,13 +47,14 @@ def main():
         page.locator("#fleet-import-start").click()
         expect(page.locator("#fleet-results .ok")).to_have_count(2, timeout=30000)
         expect(page.locator("#fleet-results .bad")).to_have_count(1)
-        expect(page.locator("#fleet-groups .account-card")).to_have_count(2)
+        expect(page.locator("#fleet-groups .fleet-group")).to_have_count(1)
         expect(page.locator(".account-card")).to_have_count(3)
         assert len(server.app.state.profiles.entries) == 3
         group = page.evaluate("json('profile-groups').then(r=>r.groups[0])")
         profiles = page.evaluate("json('profiles').then(r=>r.profiles)")
         alpha = next(item["id"] for item in profiles if item["label"] == "alpha")
         page.evaluate("json('parameters',{values:{snapshot_max:777}})")
+        page.locator("#accounts-groups").evaluate("element=>element.open=true")
         page.locator(".fleet-group-settings summary").click()
         page.locator("#fleet-template-" + group["id"]).select_option("default")
         page.get_by_role("button", name="Save group settings", exact=True).click()
@@ -84,11 +85,14 @@ def main():
         expect(page.locator("#fleet-import-close")).to_be_enabled()
         expect(page.locator("#fleet-import-stop")).to_be_visible()
         page.locator("#top-lock").click()
-        expect(page.locator("#fleet-passcode")).to_have_value("")
-        expect(page.locator("#fleet-api")).to_have_value("")
+        expect(page.locator("#view-accounts")).to_have_count(0)
+        assert page.evaluate("()=>[$('fleet-passcode').value,$('fleet-api').value,$('fleet-files').value]") == ["", "", ""]
         release_api_response(page)
         page.locator("#panel-token").fill(server.app.state.vault.token)
-        page.locator("#unlock-form button").click()
+        with page.expect_response(lambda response: response.url == server.url + "/api/status"
+                                  and response.request.method == "GET", timeout=20000) as login_status:
+            page.locator("#unlock-form button").click()
+        assert login_status.value.status == 200
         expect(page.locator("#unlock-form button")).to_be_enabled()
         expect(page.locator("#workspace")).to_be_visible()
         page.locator('[data-view="accounts"]').click()
@@ -96,7 +100,11 @@ def main():
         assert len(imported) == before + 1, "Locking must stop the remaining import queue"
         assert not any(e["label"] == "delta" for e in server.app.state.profiles.entries.values())
 
-        page.locator("#profile-select").select_option(alpha)
+        # Switching awaits its final scoped notification read before releasing the workspace.
+        with page.expect_response(lambda response: response.url == server.url + "/profiles/" + alpha + "/api/notifications"
+                                  and response.request.method == "GET", timeout=20000) as switched:
+            page.locator("#profile-select").select_option(alpha)
+        assert switched.value.status == 200
         expect(page.locator("#workspace")).to_have_js_property("inert", False)
         expect(page.locator("#workspace")).to_be_visible()
         page.locator('[data-view="connection"]').click()

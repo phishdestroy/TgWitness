@@ -34,7 +34,7 @@ def main():
             expect(dialog).to_be_visible()
             expect(search).to_be_focused()
             destinations = ["chats", "observations", "sources", "evidence", "witness", "parameters",
-                            "connection", "accounts", "access", "integrations"]
+                            "connection", "accounts", "access", "system-log", "integrations"]
             expect(dialog.get_by_role("option")).to_have_count(len(destinations))
             assert dialog.get_by_role("option").evaluate_all(
                 "nodes=>nodes.map(n=>n.dataset.destination)") == destinations
@@ -114,8 +114,14 @@ def main():
                 expect(page.locator("#workspace")).to_be_visible()
                 page.keyboard.press("Control+k")
                 search.fill(query)
-                expect(dialog.locator("[role=option][data-destination]")).to_have_count(1)
-                page.keyboard.press("Enter")
+                destinations = dialog.locator("[role=option][data-destination]")
+                expected = ["observations", "system-log"] if lang == "ru" else ["observations"]
+                expect(destinations).to_have_count(len(expected))
+                assert destinations.evaluate_all("nodes=>nodes.map(node=>node.dataset.destination)") == expected
+                # Both Russian labels contain "журнал"; select the intended destination explicitly.
+                journal = dialog.locator('[data-destination="observations"]')
+                expect(journal).to_be_visible()
+                journal.click()
                 expect(page.locator("#view-observations")).to_be_visible()
                 page.keyboard.press("Control+k")
 

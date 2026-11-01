@@ -55,6 +55,23 @@ MEMBERSHIP_ACTIONS = (types.MessageActionChatAddUser, types.MessageActionChatDel
                       types.MessageActionChatJoinedByLink, types.MessageActionChatJoinedByRequest)
 
 
+def connection_change(call):
+    """An export and an account change must never own the same connection."""
+    @wraps(call)
+    async def guarded(self, *args, **kwargs):
+        if self.export_busy() or self.export_claim:
+            raise ValueError("An export is using this account. Wait for it or cancel it before changing its connection.")
+        previous, current = self.connection_change_task, asyncio.current_task()
+        if previous is not None and previous is not current:
+            raise ValueError("This account's connection is already being changed. Wait for it to finish.")
+        self.connection_change_task = current
+        try:
+            return await call(self, *args, **kwargs)
+        finally:
+            self.connection_change_task = previous
+    return guarded
+
+
 def recovered_source(update):
     """Telethon hands over messages fetched through getDifference (after a gap or restart) with pts=0."""
     return "update_recovery" if getattr(update, "pts", None) == 0 else None
@@ -190,6 +207,7 @@ class Collector:
         self.export_state = None
         self.export_path = None
         self.export_claim = None
+        self.connection_change_task = None
         self.people = {}
         self.avatar_lock = asyncio.Lock()
         self.avatar_failures = {}
@@ -253,7 +271,7 @@ class Collector:
                                  if s in ("queued", "running", "retry")),
             "media_jobs": self.store.media_stats(),
             "oldest_pending_media_at": self.store.media_oldest(),
-            "source_status": self.source_status,
+            "source_status": self.source_status_view(),
             "last_update_at": self.last_update_at,
             "max_handler_ms": round(self.max_handler_ms, 2),
             "rpc_backoff_until": self.store.get_setting("rpc_backoff_until", 0),
@@ -569,6 +587,7 @@ class Collector:
         if candidate and candidate is not self.client:
             await candidate.disconnect()
 
+    @connection_change
     async def sign_out(self):
         """End this workspace's Telegram session and forget it here. The journal, sources, settings and
         signing key stay; the workspace still belongs to its account, so only that account can connect again."""
@@ -882,6 +901,7 @@ class Collector:
                     self.pool().succeeded(client.route_id)
                 return
 
+    @connection_change
     async def set_network(self, config):
         if self.running:
             raise ValueError("Pause observation before changing the Telegram route.")
@@ -953,35 +973,39 @@ class Collector:
         return await self.with_api_pair(api_id, api_hash, lambda pair_id, pair_hash:
                                         self.connect_login(pair_id, pair_hash, session, expected_user_id))
 
+    @connection_change
     async def connect_login(self, api_id, api_hash, session="", expected_user_id=None):
         if self.running:
             raise ValueError("Pause observation before changing accounts.")
         await self.cancel_login()
 
         session = validate_string(session) if session else ""
-        if session and self.account_guard:
-            self.account_guard(None, self, key=session_key(session))
-        await self.ensure_route()
-        candidate = self.make_client(api_id, api_hash, session)
-        self.login_client = candidate
-        self.pending_credentials = {"api_id": api_id, "api_hash": api_hash}
-        self.pending_account_id = expected_user_id
-
-        self.pending_key_origin = "imported" if session else "created"
+        release = self.account_guard(None, self, key=session_key(session)) if session and self.account_guard else None
         try:
-            await self.connect_client(candidate)
-            is_authorized = await candidate.is_user_authorized()
-            if session and not is_authorized:
-                raise ValueError("This session is not authorized.")
-            if is_authorized:
-                await self.authorized()
-                return {"step": "authorized"}
-        except BaseException:
-            await self.cancel_login()
-            self.phase = "ready" if self.vault.read("credentials").get("session") else "offline"
-            raise
-        self.phase = "login_required"
-        return {"step": "phone"}
+            await self.ensure_route()
+            candidate = self.make_client(api_id, api_hash, session)
+            self.login_client = candidate
+            self.pending_credentials = {"api_id": api_id, "api_hash": api_hash}
+            self.pending_account_id = expected_user_id
+
+            self.pending_key_origin = "imported" if session else "created"
+            try:
+                await self.connect_client(candidate)
+                is_authorized = await candidate.is_user_authorized()
+                if session and not is_authorized:
+                    raise ValueError("This session is not authorized.")
+                if is_authorized:
+                    await self.authorized()
+                    return {"step": "authorized"}
+            except BaseException:
+                await self.cancel_login()
+                self.phase = "ready" if self.vault.read("credentials").get("session") else "offline"
+                raise
+            self.phase = "login_required"
+            return {"step": "phone"}
+        finally:
+            if release:
+                release()
 
     async def start_phone(self, phone, api_id=None, api_hash=None):
         async def attempt(pair_id, pair_hash):
@@ -1076,12 +1100,14 @@ class Collector:
         await self.authorized()
         return {"step": "authorized"}
 
+    @connection_change
     async def authorized(self):
         if self.running:
             raise ValueError("Pause observation before completing an account change.")
         candidate = self.login_client
         if not candidate:
             raise ValueError("Configure API credentials first.")
+        release = None
         try:
             me = await candidate.get_me()
             self.remember(me)
@@ -1093,7 +1119,7 @@ class Collector:
             if existing.get("id") is not None and existing["id"] != me.id:
                 raise ValueError("This journal belongs to a different Telegram account. Create another account workspace.")
             if self.account_guard:
-                self.account_guard(me.id, self)
+                release = self.account_guard(me.id, self)
             credentials = dict(self.pending_credentials)
             credentials["session"] = candidate.session.save()
             await self.avatar_history.close()
@@ -1108,6 +1134,9 @@ class Collector:
             await self.cancel_login()
             self.phase = "ready" if self.vault.read("credentials").get("session") else "offline"
             raise
+        finally:
+            if release:
+                release()
         self.client = candidate
         self.login_client = None
         self.pending_credentials = None
@@ -1131,9 +1160,42 @@ class Collector:
             self.phase = "login_required"
             raise ValueError("Telegram authorization expired. Sign in again.")
 
+    def source_status_view(self):
+        ignored = set(self.store.get_setting("ignored_source_warnings", []))
+        enabled = {str(t["chat_id"]) for t in self.store.targets(True)}
+        return {chat: {**status, **({"ignored": True} if int(chat) in ignored
+                                  and status.get("state") == "access_unconfirmed" else {})}
+                for chat, status in self.source_status.items() if chat in enabled}
+
+    def refresh_source_visibility(self):
+        """Refresh only after completed dialog enumeration; an ignored source resets on positive sighting."""
+        targets = self.store.targets(True)
+        statuses = {}
+        with self.store.transaction():
+            ignored = set(self.store.get_setting("ignored_source_warnings", []))
+            resolved = self.store.get_setting("resolved_source_warnings", {})
+            returned = ignored.intersection(self.dialog_cache, (t["chat_id"] for t in targets))
+            for target in targets:
+                chat_id = target["chat_id"]
+                visible = chat_id in self.dialog_cache
+                statuses[str(chat_id)] = {
+                    "state": "visible_in_dialogs" if visible else "access_unconfirmed",
+                    "checked_at": utcnow(), "meaning": "Dialog visibility is not a guarantee of every update.",
+                    "visibility": self.dialog_cache.get(chat_id, {}).get("visibility", "unknown"),
+                    "role": self.dialog_cache.get(chat_id, {}).get("role", "unknown")}
+                if chat_id in returned:
+                    receipt = self.store.append("target.changed", {"title": target["title"], "enabled": True,
+                                                                   "ignore_unconfirmed": False,
+                                                                   "reason": "source visible in account dialogs"}, chat_id)
+                    resolved[str(chat_id)] = receipt["seq"]
+            if returned:
+                self.store.set_setting("ignored_source_warnings", sorted(ignored - returned))
+                self.store.set_setting("resolved_source_warnings", resolved)
+        self.source_status = statuses
+
     async def dialogs(self):
         await self.restore()
-        self.dialog_cache = {}
+        dialogs = {}
         count, limit = 0, self.param("dialog_limit")
 
         async for dialog in self.client.iter_dialogs(limit=limit):
@@ -1142,7 +1204,7 @@ class Collector:
             kind = kind_of(entity) or (
                 "supergroup" if getattr(entity, "megagroup", False) else "channel" if dialog.is_channel
                 else "group" if dialog.is_group else "bot" if getattr(entity, "bot", False) else "private")
-            self.dialog_cache[dialog.id] = {
+            dialogs[dialog.id] = {
                 "chat_id": dialog.id, "title": dialog.name, "kind": kind, "entity": entity,
                 "archived": getattr(dialog, "folder_id", None) == 1,
                 "visibility": "public_username" if getattr(entity, "username", None) else "private_or_unlisted",
@@ -1150,6 +1212,8 @@ class Collector:
                         else "administrator" if getattr(entity, "admin_rights", None) else "member_or_unknown",
             }
         await self.load_folders()
+        self.dialog_cache = dialogs
+        self.refresh_source_visibility()
         return {"dialogs": [{k: v for k, v in d.items() if k != "entity"}
                             for d in self.dialog_cache.values()],
                 "folders": [{"id": f["id"], "title": f["title"],
@@ -1185,6 +1249,24 @@ class Collector:
     async def start(self):
         if self.running:
             return
+        try:
+            await self.start_observation()
+        except BaseException:
+            self.buffered, self.buffering = [], False
+            if self.running:
+                # Buffered handlers and catch-up can yield after running was set.
+                # A timeout there must not leave a collector without workers.
+                with suppress(Exception):
+                    await self.stop()
+                self.running = False
+                await self.cancel_workers()
+                await self.avatar_history.close()
+                if self.client and not (self.export_busy() or self.export_claim):
+                    with suppress(Exception):
+                        await self.client.disconnect()
+            raise
+
+    async def start_observation(self):
         if self.watchdog or self.media_worker or self.urgent_media_worker or self.reconciler or self.intake_worker:
             await self.stop()
         if scope_settings(self.store)["mode"] == "selected" and not self.store.targets(True):
@@ -1264,7 +1346,7 @@ class Collector:
                 self.phase = "collector_error"
             await self.cancel_workers()
             await self.avatar_history.close()
-            if self.client:
+            if self.client and not (self.export_busy() or self.export_claim):
                 await self.client.disconnect()
 
     async def cancel_workers(self):
@@ -1397,7 +1479,7 @@ class Collector:
             self.running, self.phase = False, "storage_error"
             await self.cancel_workers()
             await self.avatar_history.close()
-            if self.client:
+            if self.client and not (self.export_busy() or self.export_claim):
                 await self.client.disconnect()
 
     async def capture_message(self, message, kind, chat_id, update=None, source=None, history_run_id=None):
@@ -1434,7 +1516,8 @@ class Collector:
             media_type = media_kind(message) if message.file else None
             rule = settings["types"].get(media_type) if media_type else None
             if not settings["download_media"]:
-                media_skip = "media download disabled"
+                if settings["record_disabled_media"]:
+                    media_skip = "media download disabled"
             elif not message.file:
                 media_skip = "metadata-only media type; no downloadable file"
             elif not rule["enabled"]:
@@ -1808,7 +1891,7 @@ class Collector:
     def reserve_export(self, owner):
         """One export per account, individual or multi-account. Checked and taken with no await in
         between, before the owner's first await; only the owner releases it."""
-        if self.export_busy() or self.export_claim:
+        if self.export_busy() or self.export_claim or self.connection_change_task is not None:
             return False
         self.export_claim = owner
         return True
@@ -1914,18 +1997,27 @@ class Collector:
         """Newest to oldest; after FloodWait or a brief connection loss, resume below the last message seen."""
         failures = 0
         while True:
+            writing = False
             try:
                 async for message in self.client.iter_messages(entity, offset_id=offset_id, min_id=min_id):
-                    offset_id, failures = message.id, 0
+                    writing = True
                     await on_message(message)
+                    writing = False
+                    offset_id, failures = message.id, 0
                 return
             except FloodWaitError as exc:
+                if writing:
+                    raise
                 wait = min(exc.seconds + 1, 3600)
                 self.store.append("telegram.backoff", {"seconds": wait, "context": "chat_export"})
                 if on_wait:
                     on_wait(wait)
                 await asyncio.sleep(wait)
             except (OSError, ConnectionError, TimeoutError):
+                if writing:
+                    # A local write/flush failure is not a retryable Telegram
+                    # disconnect. Never skip that record and sign the remainder.
+                    raise
                 failures += 1
                 if failures > 8:
                     raise
@@ -2080,6 +2172,13 @@ class Collector:
         media_root = self.store.root / "media"
         media_root.mkdir(exist_ok=True)
         while self.running:
+            if not capture_settings(self.store)["download_media"]:
+                self.media_wakeup.clear()
+                try:
+                    await asyncio.wait_for(self.media_wakeup.wait(), 1)
+                except TimeoutError:
+                    pass
+                continue
             if time.time() < self.store.get_setting("rpc_backoff_until", 0):
                 await asyncio.sleep(1)
                 continue

@@ -27,7 +27,9 @@ class ConnectionSettings(BaseModel):
     model_config = ConfigDict(extra="forbid")
     name: str = Field(min_length=1, max_length=80)
     workspaces: dict[str, list[int] | None] = Field(min_length=1, max_length=100)
-    expires_at: float
+    expires_at: float | None = None
+    expires_in_seconds: int | None = Field(default=None, ge=60, le=90 * 86400, strict=True)
+    tools: list[Literal[TOOLS]] = Field(default_factory=lambda: list(TOOLS), min_length=1, max_length=len(TOOLS))
 
     @field_validator("name")
     @classmethod
@@ -35,6 +37,12 @@ class ConnectionSettings(BaseModel):
         if not value.strip() or any(ord(c) < 32 for c in value):
             raise ValueError("Enter a connection name.")
         return value.strip()
+
+    @model_validator(mode="after")
+    def expiry_choice(self):
+        if (self.expires_at is None) == (self.expires_in_seconds is None):
+            raise ValueError("Choose either an expiry time or an access duration.")
+        return self
 
 
 class ArchiveQuery(BaseModel):
@@ -75,13 +83,19 @@ class Connections:
     def save(self):
         self.vault.save("archive-access", {"connections": self.entries})
 
-    @staticmethod
-    def public(entry):
-        return {k: v for k, v in entry.items() if k != "sha256"} | {"tools": list(TOOLS)}
+    def public(self, entry):
+        with self.lock:
+            recent = self.requests.get(entry["id"], ())
+            used = sum(at >= time.time() - 60 for at in recent)
+            return {k: v for k, v in entry.items() if k not in ("sha256", "usage_saved_at")} | {
+                "tools": list(entry.get("tools", TOOLS)), "uses": entry.get("uses", 0),
+                "last_address": entry.get("last_address"), "last_tool": entry.get("last_tool"),
+                "requests_last_minute": used, "rate_limit_per_minute": 60}
 
     def issue(self, settings):
         now = time.time()
-        if not now + 60 <= settings.expires_at <= now + 90 * 86400:
+        expires_at = now + settings.expires_in_seconds if settings.expires_in_seconds is not None else settings.expires_at
+        if not now + 60 <= expires_at <= now + 90 * 86400:
             raise ValueError("Access must expire between one minute and 90 days from now.")
         scope = GrantSettings(label=settings.name, workspaces=settings.workspaces).workspaces
         with self.lock:
@@ -89,7 +103,9 @@ class Connections:
                 raise ValueError("At most 100 archive connections are supported.")
             token = "tgw_mcp_" + secrets.token_urlsafe(32)
             entry = {"id": secrets.token_hex(16), "name": settings.name, "workspaces": scope,
-                     "expires_at": settings.expires_at, "created_at": now, "last_used_at": None,
+                     "expires_at": expires_at, "created_at": now, "last_used_at": None,
+                     "tools": [tool for tool in TOOLS if tool in settings.tools], "uses": 0,
+                     "last_address": None, "last_tool": None,
                      "revoked_at": None, "sha256": hashlib.sha256(token.encode()).hexdigest()}
             self.entries.append(entry)
             self.save()
@@ -104,14 +120,29 @@ class Connections:
             self.requests.pop(connection_id, None)
             self.save()
 
-    def resolve(self, token, *, count=True):
-        if not token.startswith("tgw_mcp_") or len(token) > 128:
+    def rotate(self, connection_id):
+        with self.lock:
+            entry = next((e for e in self.entries if e["id"] == connection_id), None)
+            if entry is None:
+                raise KeyError(connection_id)
+            if entry["revoked_at"] or entry["expires_at"] <= time.time():
+                raise Refused("Issue a new connection after access expires or is revoked.")
+            token = "tgw_mcp_" + secrets.token_urlsafe(32)
+            entry.update(sha256=hashlib.sha256(token.encode()).hexdigest(), rotated_at=time.time())
+            self.save()
+            return token, self.public(entry)
+
+    def resolve(self, token, *, count=True, address=None, tool=None):
+        if not isinstance(token, str) or not token.startswith("tgw_mcp_") or len(token) > 128:
             raise Refused("Invalid archive credential.")
         digest, now = hashlib.sha256(token.encode()).hexdigest(), time.time()
         with self.lock:
             entry = next((e for e in self.entries if secrets.compare_digest(e["sha256"], digest)), None)
             if not entry or entry["revoked_at"] or entry["expires_at"] <= now:
                 raise Refused("Archive access has expired or been revoked.")
+            tools = entry.get("tools", TOOLS)
+            if tool is not None and tool not in tools:
+                raise Refused("This connection does not allow that archive tool.")
             if count:
                 recent = self.requests.setdefault(entry["id"], deque())
                 while recent and recent[0] < now - 60:
@@ -119,11 +150,18 @@ class Connections:
                 if len(recent) >= 60:
                     raise RateLimited("Archive request limit reached. Retry in one minute.")
                 recent.append(now)
-                if not entry["last_used_at"] or now - entry["last_used_at"] >= 60:
-                    entry["last_used_at"] = now
+                save_due = not entry["last_used_at"] or now - entry.get("usage_saved_at", 0) >= 60
+                entry["last_used_at"] = now
+                entry["uses"] = entry.get("uses", 0) + 1
+                if address is not None:
+                    entry["last_address"] = address
+                if save_due:
+                    entry["usage_saved_at"] = now
                     self.save()
+            if tool is not None:
+                entry["last_tool"] = tool
             grant = {"id": entry["id"], "workspaces": entry["workspaces"], "all_workspaces": False,
-                     "permissions": ["view"], "expires_at": entry["expires_at"]}
+                     "permissions": ["view"], "expires_at": entry["expires_at"], "tools": list(tools)}
             return Principal(False, entry["name"], grant)
 
 

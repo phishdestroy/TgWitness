@@ -1,6 +1,7 @@
 .venv/
 __pycache__/
 .pytest_cache/
+/tests/
 .ruff_cache/
 *.pyc
 data/
@@ -24,6 +25,8 @@ tgwitness-backup*/
 !website/demo/downloads/tgwitness-demo.zip
 !website/demo/downloads/tgwitness-demo.jsonl
 !website/demo/downloads/tgwitness-demo-timestamp-request.zip
+!website/demo/downloads/tgwitness-demo-account-export.zip
+!website/demo/downloads/tgwitness-demo-minimized-disclosure.zip
 .instance.lock
 evidence.zip
 evidence.jsonl

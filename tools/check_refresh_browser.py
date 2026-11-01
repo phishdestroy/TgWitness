@@ -1,6 +1,7 @@
 """Slow responses must not rewind the workspace or interrupt reading saved edits."""
 import tempfile
 from pathlib import Path
+from urllib.parse import urlsplit
 
 from playwright.sync_api import expect, sync_playwright
 
@@ -46,8 +47,19 @@ def main():
             return interval(callback, delay, ...args);
           };
         })();""")
-        page.goto(server.url)
-        expect(page.locator("#chat-feed .msg").first).to_be_visible()
+        with page.expect_response(
+            lambda response: "/api/chats/" in urlsplit(response.url).path
+            and urlsplit(response.url).path.endswith("/messages")
+            and response.request.method == "GET", timeout=20000,
+        ) as initial_messages:
+            page.goto(server.url)
+        assert initial_messages.value.ok, initial_messages.value.status
+        try:
+            expect(page.locator("#chat-feed .msg").first).to_be_visible()
+        except AssertionError:
+            print("Demo startup:", page.evaluate("""()=>({error:$('login-error').textContent,view:state.view,
+              revision:state.workspaceRevision,opened:state.opened,authenticated:!!state.token,accessStarted})"""), errors, flush=True)
+            raise
 
         hold_once(page, "/api/status")
         page.evaluate("window.heldRefresh = refreshStatus(); void 0")
@@ -55,9 +67,12 @@ def main():
         server.app.state.store.append("message.new", {"text": "Newer observation", "synthetic": True},
                                       chat_id=-100100002, message_id=900)
         page.evaluate("refreshStatus()")
-        expect(page.locator("#stat-messages")).to_have_text("19")
+        assert page.evaluate("()=>(state.status.stats.counts['message.new']||0)+(state.status.stats.counts['message.snapshot']||0)") == 19
         release(page)
+        assert page.evaluate("()=>(state.status.stats.counts['message.new']||0)+(state.status.stats.counts['message.snapshot']||0)") == 19
+        page.evaluate("()=>navigate('observations')")
         expect(page.locator("#stat-messages")).to_have_text("19")
+        page.evaluate("()=>navigate('chats')")
 
         page.evaluate("delete document.documentElement.dataset.refreshHeld")
         hold_once(page, "/api/status")
