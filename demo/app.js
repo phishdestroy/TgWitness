@@ -569,6 +569,10 @@ const quickDialog=$("quick-dialog"),quickSearch=$("quick-search"),quickResults=$
 const quickCatalogHint=node('p','hint');quickCatalogHint.hidden=true;quickCatalogHint.setAttribute('role','status');quickResults.after(quickCatalogHint);
 let quickIndex=0,quickCatalog=[],quickCatalogKey='',quickCatalogPending=null;
 const quickSession=()=>state.workspaceRevision+':'+state.profile;
+function cancelQuickCatalog(){
+  const pending=quickCatalogPending;quickCatalogPending=null;
+  pending?.abort();quickCatalogHint.hidden=true;
+}
 async function loadQuickCatalog(){
   if(!quickDialog.open||!viewAllowed('parameters'))return;
   const session=quickSession();if(quickCatalogKey===session||quickCatalogPending)return;
@@ -582,8 +586,9 @@ async function loadQuickCatalog(){
     quickCatalogHint.textContent=tr('Parameter search is unavailable. Open Parameters to retry.');quickCatalogHint.hidden=false;
   }}finally{if(quickCatalogPending===controller)quickCatalogPending=null;}
 }
-quickDialog.addEventListener('close',()=>{quickCatalogPending?.abort();quickCatalogPending=null;quickCatalogHint.hidden=true;});
-window.addEventListener('tgwitness:lock',()=>{quickCatalog=[];quickCatalogKey='';quickCatalogPending?.abort();quickCatalogPending=null;quickResults.replaceChildren();});
+// Native close events are queued; an older one must not cancel a reopened palette.
+quickDialog.addEventListener('close',()=>{if(!quickDialog.open)cancelQuickCatalog();});
+window.addEventListener('tgwitness:lock',()=>{quickCatalog=[];quickCatalogKey='';cancelQuickCatalog();quickResults.replaceChildren();});
 $("quick-shortcut").textContent=/Mac|iPhone|iPad/.test(navigator.platform)?"⌘ K":"Ctrl K";
 function selectQuick(index){
   const options=[...quickResults.children];
@@ -652,7 +657,8 @@ function openQuickDestination(view){
 function toggleQuick(){
   if(quickDialog.open){quickDialog.close();return;}
   if($("workspace").hidden||$("workspace").inert||document.querySelector("dialog[open]")||!$("detail-drawer").hidden)return;
-  closeNotifications();quickSearch.value="";
+  // Retire the previous request before reopening, even if its close event is still queued.
+  closeNotifications();cancelQuickCatalog();quickSearch.value="";
   quickDialog.showModal();renderQuick();quickSearch.focus();void loadQuickCatalog();
 }
 document.querySelectorAll("[data-quick-open]").forEach(button=>button.addEventListener("click",toggleQuick));
@@ -1626,7 +1632,7 @@ function renderAccountExportJobs(){
       const bar=node("progress");bar.setAttribute("aria-label",tr("Export in progress"));card.append(bar);
     }
     const facts=node("div","account-export-metrics");
-    const metric=(label,value)=>{if(Number.isFinite(value)){const item=node("span");item.append(node("b","",value.toLocaleString())," "+label);facts.append(item);}};
+    const metric=(label,value)=>{if(Number.isFinite(value)){const item=node("span");item.append(label+": ",node("b","",value.toLocaleString()));facts.append(item);}};
     metric(tr("chats discovered"),counts.chats_discovered);
     metric(tr("chats selected"),counts.chats_selected);
     metric(tr("chats finished"),counts.chats_done);
@@ -3920,7 +3926,7 @@ $("chat-export-start").addEventListener("click",e=>busy(e.currentTarget,openExpo
 $("chat-export-get").addEventListener("click",e=>saveMulti(e.currentTarget));
 
 function localInput(unix){
-  if(!unix)return "";const d=new Date(unix*1000);d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,16);
+  if(!unix)return "";const d=new Date(unix*1000);return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,16);
 }
 function workspaceName(id){return state.profiles.find(p=>p.id===id)?.label||id;}
 function accessScope(g){

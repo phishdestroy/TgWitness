@@ -33,9 +33,27 @@
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Cari dalam dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Cuba proksi, rantaian hash, token atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Carian jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Taip satu perkataan untuk mencari panduan dan rujukan. Carian kekal di pelayar anda.</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="language-notice">Halaman ini hanya tersedia dalam bahasa Inggeris.</p><p class="eyebrow">Rujukan / Keselamatan &amp; projek</p><h1>Logs perubahan</h1><p class="guide-outcome">Setiap perubahan mengikut versi, termasuk perubahan yang belum dikeluarkan.</p><div class="wiki-body" lang=en dir=ltr><h2 id="unreleased">Unreleased<a class="anchor" href="#unreleased" aria-label="Pautan ke bahagian ini">#</a></h2>
 <ul>
-<li>Added configurable account export through Telegram Takeout or the explicitly
+<li>Refreshed the Russian panel and Capture wizard through DeepL, with reviewed
+    privacy and evidence terminology, preserved placeholders and command examples.</li>
+<li>Raised dependency security floors and regenerated the hash-locked build tools.
+    Notification services now refuse HTTP redirects, including URL-level redirect
+    overrides, so credentials cannot be forwarded to a different endpoint. Configure
+    the final notification endpoint directly; HTTP 3xx responses fail delivery.</li>
+<li>Added weekly Dependabot updates, checks for pull requests on hosted runners,
+    and nightly dependency, CodeQL and container vulnerability scans. Custom
+    dependency locks remain reviewed and regenerated together with version changes.</li>
+<li>Fixed quick search after rapid close/reopen and temporary parameter API errors.
+    Browser checks run two at a time with individual logs and a complete result
+    summary, including checks after a failure.</li>
+<li>
+<p>Corrected archive-search date defaults across daylight-saving transitions so
+    recently captured records remain inside the selected period.</p>
+</li>
+<li>
+<p>Added configurable account export through Telegram Takeout or the explicitly
     selected regular API. Jobs retain signed progress, support pause/resume and
-    produce a reusable ZIP with coverage and omission records.</li>
+    produce a reusable ZIP with coverage and omission records.</p>
+</li>
 <li>Added separate signed disclosure copies with purpose, sender/date/text filters,
     participant pseudonyms and optional text/file exclusions. Preview is bound to
     the administrator session and source archive. Signatures establish integrity;
