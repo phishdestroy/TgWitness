@@ -18,7 +18,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/
 
 ## 证据
 
-[### 证据的运作原理 通过验证者实际使用的精确公式，详细解释了哈希链、签名、检查点和见证人等概念。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/how-it-works/)[### 证据格式 签名 ZIP 文件的内容、记录类型、操作收据、用户资料、异地副本及离线验证。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/)[### 独立见证者 运行一个带有独立密钥和机器人的 Witness 实例，将签名后的检查点发布到频道中，并据此验证导出数据。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/)[### 时间戳 签名检查点采用 RFC 3161 时间戳：向认证机构发送的内容以及如何验证响应。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/timestamp/)
+[### 证据的运作原理 通过验证者实际使用的精确公式，详细解释了哈希链、签名、检查点和见证人等概念。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/how-it-works/)[### 证据格式 签名 ZIP 文件的内容、记录类型、操作收据、用户资料、异地副本及离线验证。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/)[### 证据与信任 导出数据、视频、网页存档和签名记录能证明什么，以及采集设备如何影响其可靠性。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence-trust/)[### 独立见证者 运行一个带有独立密钥和机器人的 Witness 实例，将签名后的检查点发布到频道中，并据此验证导出数据。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/)[### 时间戳 签名检查点采用 RFC 3161 时间戳：向认证机构发送的内容以及如何验证响应。](https://phishdestroy.github.io/TgWitness/zh/docs/reference/timestamp/)
 
 ## 安全与项目
 

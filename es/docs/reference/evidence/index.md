@@ -6,6 +6,8 @@ Contenido del archivo ZIP firmado, tipos de registros, acuses de recibo, perfile
 
 Una observación no es una conclusión. Un identificador de remitente no es una identidad en el mundo real. La fuente es la actualización del servicio visible en la cuenta; Telegram no firma criptográficamente estos registros guardados para un investigador externo.
 
+Para conocer la función del dispositivo de recopilación, las comparaciones con exportaciones, los archivos de vídeo y web, y lo que la verificación puede establecer en una evaluación jurídica, consulta[«Pruebas, dispositivos de captura y valor probatorio](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence-trust/)».
+
 ## ¿Qué es la firma?
 
 | Material | Protección | Qué debe conservarse |

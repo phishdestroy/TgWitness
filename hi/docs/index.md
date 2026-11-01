@@ -36,7 +36,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/
 
 साक्ष्य
 
-[साक्ष्य कैसे काम करता है](https://phishdestroy.github.io/TgWitness/hi/docs/reference/how-it-works/)[साक्ष्य प्रारूप](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/)[स्वतंत्र गवाह](https://phishdestroy.github.io/TgWitness/hi/docs/reference/witness/)[टाइमस्टैम्प](https://phishdestroy.github.io/TgWitness/hi/docs/reference/timestamp/)
+[साक्ष्य कैसे काम करता है](https://phishdestroy.github.io/TgWitness/hi/docs/reference/how-it-works/)[साक्ष्य प्रारूप](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/)[साक्ष्य और विश्वास](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence-trust/)[स्वतंत्र गवाह](https://phishdestroy.github.io/TgWitness/hi/docs/reference/witness/)[टाइमस्टैम्प](https://phishdestroy.github.io/TgWitness/hi/docs/reference/timestamp/)
 
 सुरक्षा और परियोजना
 

@@ -36,7 +36,7 @@ Arkib & integrasi
 
 Bukti
 
-[Bagaimana bukti berfungsi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/how-it-works/)[Format bukti](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/)[Saksi bebas](https://phishdestroy.github.io/TgWitness/ms/docs/reference/witness/)[Cap masa](https://phishdestroy.github.io/TgWitness/ms/docs/reference/timestamp/)
+[Bagaimana bukti berfungsi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/how-it-works/)[Format bukti](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/)[Bukti dan kepercayaan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence-trust/)[Saksi bebas](https://phishdestroy.github.io/TgWitness/ms/docs/reference/witness/)[Cap masa](https://phishdestroy.github.io/TgWitness/ms/docs/reference/timestamp/)
 
 Keselamatan & projek
 

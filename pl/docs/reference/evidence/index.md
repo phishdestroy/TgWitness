@@ -6,6 +6,8 @@ Zawartość podpisanego pliku ZIP, rodzaje zapisów, potwierdzenia przetwarzania
 
 Obserwacja nie jest wnioskiem. Identyfikator nadawcy nie jest tożsamą z tożsamością w świecie rzeczywistym. Źródłem informacji jest aktualizacja usługi widoczna na koncie; Telegram nie podpisuje kryptograficznie tych zapisanych danych na potrzeby zewnętrznego śledczego.
 
+Aby zapoznać się z rolą urządzenia gromadzącego, porównaniami z eksportami, archiwami wideo i internetowymi oraz tym, co weryfikacja może ustalić w ocenie prawnej, przeczytaj[„Dowody, urządzenia przechwytujące i waga prawna](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence-trust/)”.
+
 ## Co jest podpisane
 
 | Materiały | Ochrona | Co należy zachować |

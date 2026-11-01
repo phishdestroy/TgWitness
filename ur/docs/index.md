@@ -36,7 +36,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/
 
 شواہد
 
-[شواہد کیسے کام کرتے ہیں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/how-it-works/)[شواہد کا فارمیٹ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/)[آزاد شاہد](https://phishdestroy.github.io/TgWitness/ur/docs/reference/witness/)[ٹائم اسٹیمپس](https://phishdestroy.github.io/TgWitness/ur/docs/reference/timestamp/)
+[شواہد کیسے کام کرتے ہیں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/how-it-works/)[شواہد کا فارمیٹ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/)[شواہد اور اعتماد](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence-trust/)[آزاد شاہد](https://phishdestroy.github.io/TgWitness/ur/docs/reference/witness/)[ٹائم اسٹیمپس](https://phishdestroy.github.io/TgWitness/ur/docs/reference/timestamp/)
 
 سیکیورٹی اور پروجیکٹ
 

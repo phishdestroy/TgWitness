@@ -36,7 +36,7 @@ Lưu trữ & tích hợp
 
 Bằng chứng
 
-[Cách thức hoạt động của bằng chứng](https://phishdestroy.github.io/TgWitness/vi/docs/reference/how-it-works/)[Định dạng bằng chứng](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/)[Nhân chứng độc lập](https://phishdestroy.github.io/TgWitness/vi/docs/reference/witness/)[Dấu thời gian](https://phishdestroy.github.io/TgWitness/vi/docs/reference/timestamp/)
+[Cách thức hoạt động của bằng chứng](https://phishdestroy.github.io/TgWitness/vi/docs/reference/how-it-works/)[Định dạng bằng chứng](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/)[Bằng chứng và sự tin cậy](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence-trust/)[Nhân chứng độc lập](https://phishdestroy.github.io/TgWitness/vi/docs/reference/witness/)[Dấu thời gian](https://phishdestroy.github.io/TgWitness/vi/docs/reference/timestamp/)
 
 An ninh & dự án
 

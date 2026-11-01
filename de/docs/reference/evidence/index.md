@@ -6,6 +6,8 @@ Inhalt der signierten ZIP-Datei, Protokolltypen, Prozessbestätigungen, Benutzer
 
 Eine Beobachtung ist keine Schlussfolgerung. Eine Absender-ID ist keine Identität in der realen Welt. Die im Konto sichtbare Dienstaktualisierung ist die Quelle; Telegram signiert diese gespeicherten Datensätze nicht kryptografisch für einen externen Ermittler.
 
+Zur Rolle des Erfassungsgeräts, zu Vergleichen mit Exporten, Video- und Web-Archiven sowie dazu, was eine Überprüfung im Rahmen einer rechtlichen Beurteilung feststellen kann, lesen Sie[„Beweismittel, Erfassungsgeräte und rechtliche Beweiskraft](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence-trust/)“.
+
 ## Was ist signiert?
 
 | Material | Schutz | Was ist zu beachten? |

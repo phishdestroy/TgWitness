@@ -6,6 +6,8 @@ Imzolangan ZIP tarkibi, yozuv turlari, jarayon kvitansiyalari, odamlar profillar
 
 Kuzatuv xulosa emas. Jo'natuvchi ID haqiqiy dunyo identifikatori emas. Hisobga ko'rinadigan xizmat yangilanishi manba hisoblanadi; Telegram bu saqlangan yozuvlarni uchinchi tomon tergovchisi uchun kriptografik imzo bilan tasdiqlamaydi.
 
+Yig'ish qurilmasi roli, eksport bilan solishtirish, video va veb-arxivlar hamda tekshiruv huquqiy baholashda nima aniqlashi mumkinligi haqida ma'lumot uchun "[Dalillar, ushlash qurilmalari va huquqiy og'irlik](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence-trust/)"ni o'qing.
+
 ## Imzolangan nima
 
 | Material | Himoya | Saqlab qo'yish kerak bo'lgan narsalar |

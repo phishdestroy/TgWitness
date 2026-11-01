@@ -6,6 +6,8 @@ Kandungan ZIP yang disahkan, jenis rekod, resit proses, profil orang, salinan lu
 
 Perhatian bukanlah kesimpulan. ID penghantar bukanlah identiti sebenar di dunia nyata. Kemas kini perkhidmatan yang boleh dilihat oleh akaun adalah sumbernya; Telegram tidak menandatangani secara kriptografi rekod yang disimpan ini untuk penyiasat pihak ketiga.
 
+Untuk peranan peranti pengumpulan, perbandingan dengan eksport, arkib video dan web, dan apa yang boleh disahkan dalam penilaian undang-undang, baca[Bukti, peranti tangkapan dan berat undang-undang](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence-trust/).
+
 ## Apa itu ditandatangani
 
 | Bahan | Perlindungan | Apa yang perlu disimpan |

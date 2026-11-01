@@ -18,7 +18,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/
 
 ## 증거
 
-[### 증거 기록의 작동 방식 해시 체인, 서명, 체크포인트 및 위트니스에 대해 검증자가 사용하는 정확한 수식을 바탕으로 설명합니다.](https://phishdestroy.github.io/TgWitness/ko/docs/reference/how-it-works/)[### 증거 형식 서명된 ZIP 파일의 내용, 기록 유형, 처리 내역, 사용자 프로필, 외부 백업본 및 오프라인 검증.](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/)[### 독립적인 증인 자체 키와 봇을 사용하여 위트니스를 실행하고, 서명된 체크포인트를 채널에 게시한 후, 내보낸 데이터를 이를 기준으로 대조하여 확인하십시오.](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/)[### 타임스탬프 서명된 체크포인트에 대한 RFC 3161 타임스탬프: 인증 기관에 전송되는 내용과 응답을 검증하는 방법.](https://phishdestroy.github.io/TgWitness/ko/docs/reference/timestamp/)
+[### 증거 기록의 작동 방식 해시 체인, 서명, 체크포인트 및 위트니스에 대해 검증자가 사용하는 정확한 수식을 바탕으로 설명합니다.](https://phishdestroy.github.io/TgWitness/ko/docs/reference/how-it-works/)[### 증거 형식 서명된 ZIP 파일의 내용, 기록 유형, 처리 내역, 사용자 프로필, 외부 백업본 및 오프라인 검증.](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/)[### 증거 및 신뢰 수출 자료, 동영상, 웹 아카이브 및 서명된 기록이 입증할 수 있는 내용과, 수집 장치가 그 신뢰성에 미치는 영향.](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence-trust/)[### 독립적인 증인 자체 키와 봇을 사용하여 위트니스를 실행하고, 서명된 체크포인트를 채널에 게시한 후, 내보낸 데이터를 이를 기준으로 대조하여 확인하십시오.](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/)[### 타임스탬프 서명된 체크포인트에 대한 RFC 3161 타임스탬프: 인증 기관에 전송되는 내용과 응답을 검증하는 방법.](https://phishdestroy.github.io/TgWitness/ko/docs/reference/timestamp/)
 
 ## 보안 및 프로젝트
 

@@ -36,7 +36,7 @@ Arşiv ve entegrasyonlar
 
 Kanıt
 
-[Kanıt sistemi nasıl çalışır?](https://phishdestroy.github.io/TgWitness/tr/docs/reference/how-it-works/)[Kanıt formatı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/)[Bağımsız tanık](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/)[Zaman damgaları](https://phishdestroy.github.io/TgWitness/tr/docs/reference/timestamp/)
+[Kanıt sistemi nasıl çalışır?](https://phishdestroy.github.io/TgWitness/tr/docs/reference/how-it-works/)[Kanıt formatı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/)[Kanıt ve güven](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence-trust/)[Bağımsız tanık](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/)[Zaman damgaları](https://phishdestroy.github.io/TgWitness/tr/docs/reference/timestamp/)
 
 Güvenlik ve proje
 

@@ -36,7 +36,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/
 
 شواهد
 
-[چگونگی کارکرد شواهد](https://phishdestroy.github.io/TgWitness/fa/docs/reference/how-it-works/)[فرمت مدرک](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/)[شاهد مستقل](https://phishdestroy.github.io/TgWitness/fa/docs/reference/witness/)[برچسب‌های زمانی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/timestamp/)
+[چگونگی کارکرد شواهد](https://phishdestroy.github.io/TgWitness/fa/docs/reference/how-it-works/)[فرمت مدرک](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/)[شواهد و اعتماد](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence-trust/)[شاهد مستقل](https://phishdestroy.github.io/TgWitness/fa/docs/reference/witness/)[برچسب‌های زمانی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/timestamp/)
 
 امنیت و پروژه
 

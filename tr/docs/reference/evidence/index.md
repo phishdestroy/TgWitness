@@ -6,6 +6,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/evide
 
 Bir gözlem, bir sonuç değildir. Gönderen kimliği, gerçek dünyadaki bir kimlik değildir. Hesap tarafından görülebilen hizmet güncellemesi kaynaktır; Telegram, üçüncü taraf araştırmacılar için bu kaydedilmiş kayıtları kriptografik olarak imzalamaz.
 
+Toplama cihazının rolü, dışa aktarımlarla karşılaştırmalar, video ve web arşivleri ile yasal bir değerlendirmede doğrulamanın neyi kanıtlayabileceği hakkında bilgi için "[Kanıt, yakalama cihazları ve hukuki ağırlık](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence-trust/)" bölümünü okuyun.
+
 ## Neler imzalanır?
 
 | Materyal | Koruma | Neler saklanmalı |

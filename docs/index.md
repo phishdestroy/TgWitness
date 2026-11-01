@@ -36,7 +36,7 @@ Archive & integrations
 
 Evidence
 
-[How the evidence works](https://phishdestroy.github.io/TgWitness/docs/reference/how-it-works/)[Evidence format](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/)[Independent witness](https://phishdestroy.github.io/TgWitness/docs/reference/witness/)[Timestamps](https://phishdestroy.github.io/TgWitness/docs/reference/timestamp/)
+[How the evidence works](https://phishdestroy.github.io/TgWitness/docs/reference/how-it-works/)[Evidence format](https://phishdestroy.github.io/TgWitness/docs/reference/evidence/)[Evidence and trust](https://phishdestroy.github.io/TgWitness/docs/reference/evidence-trust/)[Independent witness](https://phishdestroy.github.io/TgWitness/docs/reference/witness/)[Timestamps](https://phishdestroy.github.io/TgWitness/docs/reference/timestamp/)
 
 Security & project
 

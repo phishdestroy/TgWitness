@@ -6,6 +6,8 @@ Contenu du fichier ZIP signé, types d’enregistrements, accusés de réception
 
 Une observation n’est pas une conclusion. Un identifiant d’expéditeur n’est pas une identité dans le monde réel. La mise à jour du service visible sur le compte constitue la source ; Telegram ne signe pas cryptographiquement ces enregistrements sauvegardés à l’intention d’un enquêteur tiers.
 
+Concernant le rôle du dispositif de collecte, les comparaisons avec les exportations, les archives vidéo et Web, ainsi que ce qu’une vérification peut établir dans le cadre d’une évaluation juridique, consultez la section «[Preuves, dispositifs de capture et valeur juridique](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence-trust/) ».
+
 ## Qu'est-ce qui est signé ?
 
 | Contenu | Protection | Éléments à conserver |

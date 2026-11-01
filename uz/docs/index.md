@@ -36,7 +36,7 @@ Arxiv va integratsiyalar
 
 Dalil
 
-[Dalil qanday ishlaydi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/how-it-works/)[Dalil formati](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/)[Mustaqil guvoh](https://phishdestroy.github.io/TgWitness/uz/docs/reference/witness/)[Vaqt tamg'alari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/timestamp/)
+[Dalil qanday ishlaydi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/how-it-works/)[Dalil formati](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/)[Dalil va ishonch](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence-trust/)[Mustaqil guvoh](https://phishdestroy.github.io/TgWitness/uz/docs/reference/witness/)[Vaqt tamg'alari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/timestamp/)
 
 Xavfsizlik va loyiha
 

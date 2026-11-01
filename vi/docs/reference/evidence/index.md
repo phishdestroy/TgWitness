@@ -6,6 +6,8 @@ Nội dung của tệp ZIP đã được ký, các loại bản ghi, biên nhậ
 
 Một quan sát không phải là một kết luận. ID người gửi không phải là danh tính trong thế giới thực. Nguồn thông tin là bản cập nhật dịch vụ hiển thị trên tài khoản; Telegram không thực hiện việc ký số các bản ghi đã lưu này dành cho các nhà điều tra bên thứ ba.
 
+Để hiểu rõ vai trò của thiết bị thu thập, so sánh với các bản xuất, kho lưu trữ video và web, cũng như những gì quá trình xác minh có thể xác lập trong đánh giá pháp lý, hãy đọc[“Bằng chứng, thiết bị thu thập và giá trị pháp lý](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence-trust/)”.
+
 ## “Được ký” là gì
 
 | Nội dung | Bảo vệ | Những nội dung cần lưu giữ |
