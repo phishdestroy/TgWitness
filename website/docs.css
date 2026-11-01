@@ -137,6 +137,8 @@ details p { font-size:14px; }
 .table-wrap tbody tr { transition:background .15s; }
 .table-wrap tbody tr:hover { background:#f6f8fc; }
 .table-wrap td code { white-space:normal; }
+#live-server-journal-inventory--1-november-2026 + p + .table-wrap th:first-child { white-space:normal; }
+#live-server-journal-inventory--1-november-2026 + p + .table-wrap :is(th,td):last-child { width:1%; white-space:nowrap; }
 .wiki-formula { margin:22px 0; padding:16px 20px; border:1px solid #ccd9ec; border-radius:12px; background:linear-gradient(130deg,#fff,#eff4ff); font:clamp(15px,1.5vw,18px)/1.9 var(--mono); color:#143c71; overflow-x:auto; direction:ltr; text-align:left; }
 .math { font-family:var(--mono); font-size:.92em; color:#143c71; unicode-bidi:isolate; direction:ltr; }
 [data-theme=dark] .wiki-formula { border-color:#2b3f5f; background:linear-gradient(130deg,#121d31,#14223b); color:#c9dcff; }
