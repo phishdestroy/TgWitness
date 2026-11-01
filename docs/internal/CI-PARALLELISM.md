@@ -1,4 +1,4 @@
-# Bounded CI parallelism
+# CI execution and queue isolation
 
 The original `tgwitness-ci` runner executes one job at a time. In the measured
 [Checks run](https://github.com/phishdestroy/TgWitness/actions/runs/41331263417),
@@ -8,57 +8,38 @@ ran for 13s after waiting 12m40s behind the website and application checks.
 
 ## Routing
 
-| Runner | Custom labels | Account and access |
-| --- | --- | --- |
-| Primary | `tgwitness-ci`, `tgwitness-general` | Existing `gha` account and Docker access |
-| General | `tgwitness-general` only | Separate `tgwitness-ci-general` account, no Docker or sudo |
+| Work | Runner |
+| --- | --- |
+| Source, dependency and lint checks | Fresh GitHub-hosted Ubuntu |
+| Linux Python installation/readiness | Fresh GitHub-hosted Ubuntu |
+| Browser and panel suites | Separate GitHub-hosted Ubuntu runners |
+| Wiki archive | Fresh GitHub-hosted Ubuntu |
+| Docker checks | Existing `tgwitness-ci` Linux runner |
+| Website and release workflows | Their existing runner selections |
+| Sealed collection, provenance, Scorecard and PR checks | Their existing GitHub-hosted runners |
 
-The `TGWITNESS_GENERAL_RUNNER` repository variable selects the label for source,
-Python, browser and Wiki jobs. Until it is set, these jobs continue to use
-`tgwitness-ci`. Set it to `tgwitness-general` only after both runners are healthy.
-Docker checks, release jobs and the existing website workflow retain their
-original routing. Sealed collection, provenance, Scorecard and PR checks retain
-their GitHub-hosted runners.
+Independent jobs can now overlap without waiting for the single project runner.
+Each hosted job gets its own machine and workspace. The browser suites keep
+their existing limit of two independent tests at a time. No test, assertion,
+permission, timeout or trigger is removed to obtain the speedup. The existing
+dependency-keyed pip cache applies to hosted jobs; browser installation remains
+version-specific. Dependency downloads and runner startup remain part of cold
+run time.
 
-Never give the general runner the `tgwitness-ci` label. Docker jobs currently
-use shared image names; keeping them on the single primary runner prevents a
-second Docker job from overwriting images during another job's checks. Separate
-accounts and work directories prevent accidental sharing of caches, runner
-credentials and output. They are not isolation from a compromised primary
-account, which already has root-equivalent Docker access. Both persistent
-runners are for reviewed repository code, not untrusted pull requests.
+The project server retains its warm Docker layers and serial Docker execution.
+Its shared image tags are not exposed to a second Docker worker. This change
+requires no SSH access, additional server, new persistent runner credentials,
+repository variable or new secret. The project runner remains dedicated to
+reviewed repository code. Hosted PR and attestation jobs remain independent of it.
 
-## Prepare and activate
-
-1. Inspect CPU, RAM, current load and disk space on the actual host. Four CPUs,
-   8 GB RAM and sufficient disk headroom are the minimum starting point for two
-   concurrent jobs. Do not add multiple copies without measuring contention.
-2. Run `scripts/install-ci-general-runner.sh` as root on the existing CI host.
-   It verifies the runner download and creates separate user, work and tool-cache
-   directories. Existing primary registration and Docker configuration remain intact.
-3. Create a short-lived registration token from GitHub's runner registration
-   API on the administrator's machine. Pass it privately to `config.sh` as the
-   general account, with `--unattended`, the repository URL, a unique runner name,
-   `--labels tgwitness-general` and `--work _work`. Do not store a personal GitHub
-   token on the server or in repository secrets. Never use shell tracing.
-4. Install the new service as `tgwitness-ci-general`. Before starting it, add a
-   systemd service drop-in with `UMask=0077`, `NoNewPrivileges=yes`,
-   `CPUQuota=200%`, `MemoryHigh=3G`, `MemoryMax=4G`, `MemorySwapMax=0`,
-   `TasksMax=1024` and `OOMPolicy=stop`. Adjust limits only after inspecting the
-   host's actual capacity. The primary runner must retain RAM and CPU headroom.
-5. Confirm that the new account cannot read the primary runner's credentials or
-   write its work tree, tool cache or Docker socket. Check that it has no sudo
-   privileges. Start the service, confirm its labels and online state in GitHub,
-   and add `tgwitness-general` to the primary runner's labels.
-6. Set `TGWITNESS_GENERAL_RUNNER=tgwitness-general`. Dispatch normal Linux Checks
-   and a Wiki build. Confirm overlapping jobs with different `runner_id` values,
-   successful browser/installation checks, and Docker running only on the primary.
-   Compare elapsed time and queue time with the recorded baseline; inspect CPU,
-   memory pressure and service logs for OOM events before accepting the change.
+Measure end-to-end duration, individual job duration and queue time separately.
+Confirm different runner IDs and overlapping start/finish times for the hosted
+jobs. A site or release job can still delay the Docker job on the project runner;
+this change removes the unrelated Python/browser/Wiki work from that queue.
+The full Windows/macOS release matrix remains opt-in through `full_platforms`.
 
 ## Rollback
 
-Delete the `TGWITNESS_GENERAL_RUNNER` repository variable to restore the original
-routing for new workflow runs. Let any active general-runner job finish, then
-stop its service. Do not unregister or remove its directories during a job.
-No sealed or release workflow change is required.
+Revert this PR to restore the original runner selection. There is no server-side
+installation or repository setting to undo. Do not cancel an unrelated release
+or sealed capture when checking the changed routing.
