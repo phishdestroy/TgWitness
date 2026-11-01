@@ -16,17 +16,20 @@ ran for 13s after waiting 12m40s behind the website and application checks.
 The `TGWITNESS_GENERAL_RUNNER` repository variable selects the label for source,
 Python, browser and Wiki jobs. Until it is set, these jobs continue to use
 `tgwitness-ci`. Set it to `tgwitness-general` only after both runners are healthy.
-Docker checks, release jobs and the existing website workflow retain their
-original routing. Sealed collection, provenance, Scorecard and PR checks retain
-their GitHub-hosted runners.
+Docker checks, release publishing jobs and the existing website workflow retain
+their original routing. Release validation calls `checks.yml`, so its Linux
+source, Python and browser jobs use the selected pool; Windows and macOS jobs
+remain GitHub-hosted. Sealed collection, provenance, Scorecard and PR checks
+retain their GitHub-hosted runners.
 
 Never give the general runner the `tgwitness-ci` label. Docker jobs currently
 use shared image names; keeping them on the single primary runner prevents a
 second Docker job from overwriting images during another job's checks. Separate
 accounts and work directories prevent accidental sharing of caches, runner
 credentials and output. They are not isolation from a compromised primary
-account, which already has root-equivalent Docker access. Both persistent
-runners are for reviewed repository code, not untrusted pull requests.
+account, which already has root-equivalent Docker access. Dispatch workflows
+only on reviewed refs. Neither persistent runner may execute untrusted pull
+requests.
 
 ## Prepare and activate
 
