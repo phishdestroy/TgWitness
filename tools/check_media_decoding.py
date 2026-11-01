@@ -1,5 +1,6 @@
 """Real native-decoder regressions; no model, network, Telegram account or prerecorded media."""
 import argparse
+import errno
 import hashlib
 import importlib.util
 from pathlib import Path
@@ -49,6 +50,12 @@ def refused(worker, path, seconds=10):
         worker.decode_audio(path, max_seconds=seconds)
     except (ValueError, av.error.FFmpegError):
         return
+    except OSError as exc:
+        # PyAV's Python IO callback propagates EINVAL for an invalid seek in malformed media.
+        # Do not classify unrelated file/permission/resource failures as successful rejection.
+        if exc.errno == errno.EINVAL:
+            return
+        raise
     raise AssertionError("Unsafe input was decoded: " + path.name)
 
 
@@ -127,6 +134,10 @@ def main():
             try:
                 samples = worker.decode_audio(path, max_seconds=3)
             except (ValueError, av.error.FFmpegError):
+                rejected += 1
+            except OSError as exc:
+                if exc.errno != errno.EINVAL:
+                    raise
                 rejected += 1
             else:
                 assert len(samples) <= 3 * 16000 and np.isfinite(samples).all()
