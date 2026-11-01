@@ -286,14 +286,17 @@ Zakończony plik musi również odpowiadać liczbie bajtów podanej w oryginalny
 . Krótka lub nieoczekiwanie długa odpowiedź nie jest rejestrowana jako zachowany plik multimedialny.</p>
 <p>Limity są ustalane <strong>dla poszczególnych typów</strong>: zdjęcia, filmy, pliki GIF i animacje, okrągłe wiadomości wideo,
 wiadomości głosowe, muzyka i pliki audio, naklejki oraz pliki. Każdy typ można wyłączyć i ma on
-własny limit rozmiaru od 1 do 2 000 MiB; nowe obszary robocze zaczynają się od 20 MiB dla zdjęć,
+własny limit rozmiaru od 1 do 2 000 MiB; nowe obszary robocze rozpoczynają się od 20 MiB dla zdjęć,
 100 MiB dla filmów, 50 MiB dla plików, plików audio i okrągłych filmów, 20 MiB dla wiadomości głosowych i plików GIF oraz
-5 MiB na naklejki. <em>Maksymalny rozmiar pliku</em> ustala się jednocześnie dla wszystkich typów. Zasady zapisane przed
-wprowadzeniem limitów dla poszczególnych typów zachowują swój pojedynczy limit dla każdego typu. Wyłączenie danego typu powoduje utworzenie
-rekordu <code>media.skipped</code>; pliki o nieznanym rozmiarze lub przekraczające limit nie są pobierane. Duże pliki są
-pobierane z prędkością co najmniej 256 KiB/s. Zadania pozostają aktywne po ponownym uruchomieniu, jednak wygasłe odwołania, utrata
-dostępu lub usunięte pliki mogą nadal uniemożliwić ich odzyskanie. Istniejące zadania zachowują zasady zapisane
-wraz z nimi.</p>
+5 MiB na naklejki. W nowych obszarach roboczych pliki GIF i naklejki są domyślnie wyłączone do momentu ich włączenia. Obszary robocze
+z zasadami zapisanymi przed wprowadzeniem limitów dla poszczególnych typów zachowują wszystkie typy włączone i utrzymują jeden
+limit dla każdego typu. <em>Maksymalny rozmiar pliku</em> ustala się jednocześnie dla wszystkich typów. Wyłączenie danego typu powoduje utworzenie
+rekordu <code>media.skipped</code>; pliki o nieznanym rozmiarze lub przekraczające limit nie są pobierane. Duże pliki otrzymują
+dodatkowy czas pobierania w oparciu o ich rozmiar i prędkość bazową wynoszącą 256 KiB/s. Zadania pozostają aktywne
+po ponownym uruchomieniu, jednak wygasłe odwołania, utrata dostępu lub usunięte pliki mogą nadal uniemożliwić ich odzyskanie.
+Zadania oczekujące zachowują zapisany dla nich limit, więc podwyższony limit ma zastosowanie wyłącznie do nowych plików.
+Wyłączenie typu lub obniżenie jego limitu powoduje również pominięcie wykluczonych plików oczekujących, z których każdy posiada
+rekord typu „<code>media.skipped</code>”; wyłączenie pobierania wstrzymuje działanie kolejki do momentu ponownego włączenia tej funkcji.</p>
 <h2 id="pause-lock-disconnect-and-restart">Wstrzymanie, zablokowanie, rozłączenie i ponowne uruchomienie<a class="anchor" href="#pause-lock-disconnect-and-restart" aria-label="Link do tej sekcji">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

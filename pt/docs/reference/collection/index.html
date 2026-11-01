@@ -287,12 +287,15 @@ Uma resposta curta ou inesperadamente longa não é registrada como mídia prese
 mensagens de voz, música e áudio, adesivos e arquivos. Cada tipo pode ser desativado e possui
 seu próprio limite de tamanho, variando de 1 a 2.000 MiB; novos espaços de trabalho começam com 20 MiB para fotos,
 100 MiB para vídeos, 50 MiB para arquivos, áudio e vídeos circulares, 20 MiB para mensagens de voz e GIFs e
-5 MiB para adesivos. <em>O tamanho máximo de arquivo</em> define todos os tipos de uma só vez. As políticas salvas antes da
-implementação dos limites por tipo mantêm seu limite único para cada tipo. Um tipo desativado gera um
-registro <code>media.skipped</code>; arquivos de tamanho desconhecido ou acima do limite não são baixados. Arquivos grandes têm
-velocidade de download de pelo menos 256 KiB/s. As tarefas sobrevivem à reinicialização, mas referências expiradas, perda de
-acesso ou arquivos excluídos ainda podem impedir a recuperação. As tarefas existentes mantêm a política salva
-junto a elas.</p>
+5 MiB para adesivos. Novos espaços de trabalho mantêm GIFs e adesivos desativados até que sejam ativados. Espaços de trabalho
+com políticas salvas antes da implementação dos limites por tipo mantêm todos os tipos ativados e conservam seu único
+limite para cada tipo. <em>O tamanho máximo de arquivo</em> define todos os tipos de uma só vez. Um tipo desativado gera
+um registro <code>media.skipped</code>; arquivos de tamanho desconhecido ou acima do limite não são baixados. Arquivos grandes recebem
+tempo extra de download com base em seu tamanho e em uma velocidade de referência de 256 KiB/s. As tarefas sobrevivem
+à reinicialização, mas referências expiradas, acesso perdido ou arquivos excluídos ainda podem impedir a recuperação.
+Tarefas em espera mantêm o limite salvo com elas, de modo que um aumento no limite se aplica apenas a novos arquivos.
+Desativar um tipo ou reduzir seu limite também ignora os arquivos em espera que ele exclui, cada um com
+um registro <code>media.skipped</code>; desativar os downloads pausa a fila até que sejam reativados.</p>
 <h2 id="pause-lock-disconnect-and-restart">Pausar, bloquear, desconectar e reiniciar<a class="anchor" href="#pause-lock-disconnect-and-restart" aria-label="Link para esta seção">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

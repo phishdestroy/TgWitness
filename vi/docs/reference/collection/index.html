@@ -289,12 +289,15 @@ Tệp đã hoàn tất cũng phải khớp với số byte trong mô tả tệp 
 tin nhắn thoại, nhạc và âm thanh, nhãn dán, và tệp tin. Mỗi loại có thể được tắt và có
 giới hạn dung lượng riêng từ 1 đến 2.000 MiB; các không gian làm việc mới bắt đầu với 20 MiB cho ảnh,
 100 MiB cho video, 50 MiB cho tệp tin, âm thanh và video tròn, 20 MiB cho tin nhắn thoại và GIF, cùng
-5 MiB cho nhãn dán. <em>Giới hạn kích thước tệp tối đa</em> sẽ áp dụng đồng thời cho mọi loại. Các chính sách được lưu trước khi
-áp dụng giới hạn theo từng loại sẽ vẫn giữ nguyên giới hạn riêng cho từng loại. Khi một loại bị tắt, hệ thống sẽ tạo ra
-bản ghi <code>media.skipped</code>; các tệp có kích thước không xác định hoặc vượt quá giới hạn sẽ không được tải xuống. Các tệp tin lớn sẽ được
-cấp tốc độ tải xuống tối thiểu 256 KiB/s. Các tác vụ vẫn tồn tại sau khi khởi động lại, nhưng các tham chiếu đã hết hạn, mất
-quyền truy cập hoặc tệp tin bị xóa vẫn có thể cản trở việc khôi phục. Các tác vụ hiện có sẽ giữ nguyên chính sách đã được lưu
-cùng với chúng.</p>
+5 MiB dành cho nhãn dán. Các không gian làm việc mới sẽ để GIF và nhãn dán ở trạng thái tắt cho đến khi được bật. Các không gian làm việc
+có chính sách được lưu trước khi áp dụng giới hạn theo từng loại sẽ giữ tất cả các loại ở trạng thái bật và duy trì
+giới hạn chung duy nhất cho mỗi loại. <em>Giới hạn kích thước tệp tối đa</em> sẽ áp dụng đồng thời cho mọi loại. Một loại bị tắt sẽ tạo ra
+bản ghi <code>media.skipped</code>; các tệp có kích thước không xác định hoặc vượt quá giới hạn sẽ không được tải xuống. Các tệp lớn sẽ có
+thời gian tải xuống thêm dựa trên kích thước của chúng và tốc độ cơ bản là 256 KiB/s. Các tác vụ vẫn tồn tại
+sau khi khởi động lại, nhưng các tham chiếu đã hết hạn, quyền truy cập bị mất hoặc các tệp đã bị xóa vẫn có thể cản trở việc khôi phục.
+Các tác vụ đang chờ sẽ giữ nguyên giới hạn đã lưu kèm theo chúng, do đó việc tăng giới hạn chỉ áp dụng cho các tệp mới.
+Việc tắt một loại tệp hoặc giảm giới hạn của loại đó cũng sẽ bỏ qua các tệp đang chờ thuộc loại bị loại trừ, mỗi tệp sẽ có
+một bản ghi <code>media.skipped</code>; việc tắt tính năng tải xuống sẽ tạm dừng hàng đợi cho đến khi tính năng này được bật lại.</p>
 <h2 id="pause-lock-disconnect-and-restart">Tạm dừng, khóa, ngắt kết nối và khởi động lại<a class="anchor" href="#pause-lock-disconnect-and-restart" aria-label="Liên kết đến phần này">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

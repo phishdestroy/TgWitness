@@ -287,12 +287,15 @@ Respons yang pendek atau panjang secara tak terduga tidak dicatat sebagai media 
 pesan suara, musik dan audio, stiker, serta file. Setiap jenis dapat dinonaktifkan dan memiliki
 batas ukuran tersendiri mulai dari 1 hingga 2.000 MiB; ruang kerja baru dimulai dengan 20 MiB untuk foto,
 100 MiB untuk video, 50 MiB untuk file, audio, dan video bulat, 20 MiB untuk pesan suara dan GIF, serta
-5 MiB untuk stiker. <em>Batas ukuran file maksimum</em> berlaku untuk semua jenis sekaligus. Kebijakan yang disimpan sebelum
-penggunaan batas per jenis tetap mempertahankan batas tunggalnya untuk setiap jenis. Jenis yang dinonaktifkan menghasilkan
-catatan <code>media.skipped</code>; file dengan ukuran tidak diketahui atau melebihi batas tidak akan diunduh. File besar mendapatkan
-kecepatan unduh minimal 256 KiB/s. Tugas tetap berjalan setelah sistem di-restart, tetapi referensi yang kedaluwarsa, kehilangan
-akses, atau file yang dihapus tetap dapat menghalangi pemulihan. Tugas yang sudah ada mempertahankan kebijakan yang disimpan
-bersama tugas tersebut.</p>
+5 MiB untuk stiker. Ruang kerja baru menonaktifkan GIF dan stiker hingga diaktifkan. Ruang kerja
+dengan kebijakan yang disimpan sebelum batasan per jenis akan mengaktifkan semua jenis dan mempertahankan
+batasan tunggal untuk setiap jenis. <em>Ukuran file maksimum</em> menentukan semua jenis sekaligus. Jenis yang dinonaktifkan menghasilkan
+catatan <code>media.skipped</code>; file dengan ukuran tidak diketahui atau berukuran melebihi batas tidak akan diunduh. File besar mendapatkan
+waktu unduh tambahan berdasarkan ukurannya dan kecepatan dasar 256 KiB/s. Tugas tetap ada
+setelah restart, tetapi referensi yang kedaluwarsa, akses yang hilang, atau file yang dihapus tetap dapat menghalangi pemulihan.
+Pekerjaan yang sedang menunggu mempertahankan batas yang tersimpan bersamanya, sehingga peningkatan batas hanya berlaku untuk file baru.
+Menonaktifkan suatu jenis atau menurunkan batasnya juga akan melewatkan file-file yang sedang menunggu yang dikecualikan, masing-masing dengan
+catatan <code>media.skipped</code>; menonaktifkan unduhan akan menjeda antrian hingga diaktifkan kembali.</p>
 <h2 id="pause-lock-disconnect-and-restart">Jeda, kunci, putuskan sambungan, dan mulai ulang<a class="anchor" href="#pause-lock-disconnect-and-restart" aria-label="Tautan ke bagian ini">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

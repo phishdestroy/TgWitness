@@ -288,12 +288,15 @@ Eine zu kurze oder unerwartet lange Antwort wird nicht als gesichertes Medium er
 Sprachnachrichten, Musik und Audiodateien, Sticker sowie Dateien. Jeder Typ kann deaktiviert werden und verfügt über
 ein eigenes Größenlimit von 1 bis 2.000 MiB; neue Arbeitsbereiche beginnen mit 20 MiB für Fotos,
 100 MiB für Videos, 50 MiB für Dateien, Audio und Rundvideos, 20 MiB für Sprachnachrichten und GIFs sowie
-5 MiB für Sticker. <em>Die maximale Dateigröße</em> gilt für alle Typen gleichzeitig. Richtlinien, die vor der
-Einführung der typbezogenen Begrenzungen gespeichert wurden, behalten ihre individuelle Begrenzung für jeden Typ bei. Ein deaktivierter Typ erzeugt einen
-„<code>media.skipped</code>“-Eintrag; Dateien mit unbekannter Größe oder übergroße Dateien werden nicht heruntergeladen. Große Dateien erhalten
-eine Download-Geschwindigkeit von mindestens 256 KiB/s. Aufträge bleiben auch nach einem Neustart bestehen, doch abgelaufene Verweise, verlorener
-Zugriff oder gelöschte Dateien können die Wiederherstellung dennoch verhindern. Bestehende Aufträge behalten die mit ihnen gespeicherte
-Richtlinie bei.</p>
+5 MiB für Sticker. In neuen Arbeitsbereichen sind GIFs und Sticker deaktiviert, bis sie aktiviert werden. Arbeitsbereiche
+mit Richtlinien, die vor der Einführung der typbezogenen Begrenzungen gespeichert wurden, behalten alle Typen aktiviert und behalten ihre einheitliche
+Obergrenze für jeden Typ bei. <em>Die maximale Dateigröße</em> gilt für alle Typen gleichzeitig. Ein deaktivierter Typ erzeugt
+einen „<code>media.skipped</code>“-Datensatz; Dateien mit unbekannter Größe oder übergroße Dateien werden nicht heruntergeladen. Große Dateien erhalten
+zusätzliche Download-Zeit, basierend auf ihrer Größe und einer Basisgeschwindigkeit von 256 KiB/s. Aufträge bleiben
+nach einem Neustart erhalten, doch abgelaufene Verweise, verlorener Zugriff oder gelöschte Dateien können die Wiederherstellung dennoch verhindern.
+Wartende Aufträge behalten das für sie gespeicherte Limit bei, sodass eine Anhebung des Limits nur für neue Dateien gilt.
+Das Deaktivieren eines Typs oder das Herabsetzen seines Limits überspringt auch die davon ausgeschlossenen wartenden Dateien, für die jeweils
+ein „<code>media.skipped</code>“-Datensatz erstellt wird; das Deaktivieren von Downloads hält die Warteschlange an, bis sie wieder aktiviert werden.</p>
 <h2 id="pause-lock-disconnect-and-restart">Anhalten, sperren, Verbindung trennen und neu starten<a class="anchor" href="#pause-lock-disconnect-and-restart" aria-label="Link zu diesem Abschnitt">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

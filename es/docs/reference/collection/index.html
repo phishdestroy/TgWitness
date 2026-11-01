@@ -287,12 +287,15 @@ Una respuesta más corta o inesperadamente más larga no se registra como conten
 mensajes de voz, música y audio, pegatinas y archivos. Cada tipo puede desactivarse y tiene
 su propio límite de tamaño, que va de 1 a 2.000 MiB; los nuevos espacios de trabajo comienzan con 20 MiB para fotos,
 100 MiB para vídeos, 50 MiB para archivos, audio y vídeos circulares, 20 MiB para mensajes de voz y GIF, y
-5 MiB para los stickers. <em>El tamaño máximo de archivo</em> se establece para todos los tipos a la vez. Las políticas guardadas antes de que
-se aplicaran los límites por tipo conservan su límite único para cada tipo. Desactivar un tipo genera un
-registro <code>media.skipped</code>; los archivos de tamaño desconocido o que superen el límite no se descargan. Los archivos de gran tamaño obtienen
-una velocidad de descarga de al menos 256 KiB/s. Las tareas se mantienen tras un reinicio, pero las referencias caducadas, la pérdida
-de acceso o los archivos eliminados pueden impedir su recuperación. Las tareas existentes conservan la política guardada
-junto con ellas.</p>
+5 MiB para los stickers. Los nuevos espacios de trabajo mantienen los GIF y los stickers desactivados hasta que se activen. Los espacios de trabajo
+con políticas guardadas antes de la implantación de los límites por tipo mantienen todos los tipos activados y conservan su único
+límite para cada tipo. <em>El tamaño máximo de archivo</em> se establece para todos los tipos a la vez. Un tipo desactivado genera
+un registro <code>media.skipped</code>; los archivos de tamaño desconocido o que superan el límite no se descargan. Los archivos de gran tamaño disponen de
+tiempo de descarga adicional en función de su tamaño y de una velocidad base de 256 KiB/s. Los trabajos se mantienen
+tras un reinicio, pero las referencias caducadas, la pérdida de acceso o los archivos eliminados pueden seguir impidiendo la recuperación.
+Los trabajos en espera conservan el límite guardado con ellos, por lo que un aumento del límite solo se aplica a los archivos nuevos.
+Desactivar un tipo o reducir su límite también omite los archivos en espera que excluye, cada uno con
+un registro «<code>media.skipped</code>»; desactivar las descargas pone en pausa la cola hasta que se vuelvan a activar.</p>
 <h2 id="pause-lock-disconnect-and-restart">Pausar, bloquear, desconectar y reiniciar<a class="anchor" href="#pause-lock-disconnect-and-restart" aria-label="Enlace a esta sección">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

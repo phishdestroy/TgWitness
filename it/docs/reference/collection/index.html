@@ -285,14 +285,17 @@ Il file completato deve inoltre corrispondere al conteggio dei byte presente nel
 Una risposta breve o inaspettatamente lunga non viene registrata come contenuto multimediale conservato.</p>
 <p>I limiti sono impostati <strong>per tipo</strong>: foto, video, GIF e animazioni, messaggi video circolari,
 messaggi vocali, musica e audio, adesivi e file. Ogni tipo può essere disattivato e presenta
-un proprio limite di dimensione compreso tra 1 e 2.000 MiB; i nuovi spazi di lavoro partono da 20 MiB per le foto,
+un proprio limite di dimensione compreso tra 1 e 2.000 MiB; i nuovi spazi di lavoro partono con 20 MiB per le foto,
 100 MiB per i video, 50 MiB per file, audio e video circolari, 20 MiB per messaggi vocali e GIF e
-5 MiB per gli adesivi. <em>La dimensione massima dei file</em> viene impostata contemporaneamente per ogni tipo. Le politiche salvate prima dell’
-introduzione dei limiti per tipo mantengono il limite unico per ciascun tipo. La disattivazione di un tipo genera un
-record <code>media.skipped</code>; i file di dimensione sconosciuta o sovradimensionati non vengono scaricati. I file di grandi dimensioni ottengono
-una velocità di download di almeno 256 KiB/s. I processi sopravvivono al riavvio, ma i riferimenti scaduti, la perdita
-di accesso o i file eliminati possono comunque impedire il recupero. I processi esistenti mantengono la politica salvata
-insieme a essi.</p>
+5 MiB per gli adesivi. Nei nuovi spazi di lavoro, le GIF e gli adesivi rimangono disattivati finché non vengono attivati. Gli spazi di lavoro
+con criteri salvati prima dell’introduzione dei limiti per tipo mantengono tutti i tipi abilitati e conservano il loro unico
+limite per ciascun tipo. <em>La dimensione massima dei file</em> viene impostata contemporaneamente per tutti i tipi. Un tipo disattivato genera
+un record <code>media.skipped</code>; i file di dimensioni sconosciute o eccessive non vengono scaricati. Ai file di grandi dimensioni viene
+assegnato un tempo di download aggiuntivo in base alle loro dimensioni e a una velocità di base di 256 KiB/s. I processi sopravvivono
+al riavvio, ma i riferimenti scaduti, l’accesso perso o i file eliminati possono comunque impedire il recupero.
+I processi in attesa mantengono il limite salvato con essi, pertanto un aumento del limite si applica solo ai nuovi file.
+La disattivazione di un tipo o la riduzione del relativo limite comporta inoltre il salto dei file in attesa da esso esclusi, ciascuno con
+un record <code>media.skipped</code>; la disattivazione dei download mette in pausa la coda fino a quando non vengono riattivati.</p>
 <h2 id="pause-lock-disconnect-and-restart">Messa in pausa, blocco, disconnessione e riavvio<a class="anchor" href="#pause-lock-disconnect-and-restart" aria-label="Collegamento a questa sezione">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

@@ -285,14 +285,17 @@ Tamamlanan dosya, gözlemlenen orijinal ek tanımlayıcısındaki bayt sayısıy
 eşleşmelidir. Kısa veya beklenmedik şekilde uzun bir yanıt, korunmuş medya olarak kaydedilmez.</p>
 <p>Sınırlar <strong>türlere göre</strong> belirlenmiştir: fotoğraflar, videolar, GIF&#x27;ler ve animasyonlar, yuvarlak video mesajları,
 sesli mesajlar, müzik ve ses dosyaları, çıkartmalar ve dosyalar. Her tür ayrı ayrı devre dışı bırakılabilir ve
-1 ila 2.000 MiB arasında kendi boyut sınırına sahiptir; yeni çalışma alanları fotoğraflar için 20 MiB,
+1 ile 2.000 MiB arasında kendi boyut sınırına sahiptir; yeni çalışma alanları fotoğraflar için 20 MiB,
 videolar için 100 MiB, dosyalar, ses ve yuvarlak videolar için 50 MiB, sesli mesajlar ve GIF&#x27;ler için 20 MiB ve
-çıkartmalar için 5 MiB ile başlar. <em>Maksimum dosya boyutu,</em> her türü aynı anda belirler. Tür bazında sınırlar
-belirlenmeden önce kaydedilen ilkeler, her tür için tek bir sınırını korur. Devre dışı bırakılan bir tür, bir
-<code>media.skipped</code> kaydı oluşturur; boyutu bilinmeyen veya boyut aşımı dosyalar indirilmez. Büyük dosyalar için
-en az 256 KiB/s indirme hızı sağlanır. İşler yeniden başlatma işleminden sonra da devam eder, ancak süresi dolmuş referanslar, kaybedilen
-erişim veya silinmiş dosyalar yine de kurtarmayı engelleyebilir. Mevcut işler, kendileriyle birlikte kaydedilen
-ilkeyi korur.</p>
+çıkartmalar için 5 MiB ile başlar. Yeni çalışma alanlarında GIF’ler ve çıkartmalar etkinleştirilene kadar devre dışıdır. Tür bazında sınırlar belirlenmeden önce
+kayıtlı ilkeler bulunan çalışma alanlarında tüm türler etkin kalır ve her tür için tek bir
+sınır korunur. <em>Maksimum dosya boyutu</em>, tüm türler için aynı anda belirlenir. Devre dışı bırakılan bir tür,
+<code>media.skipped</code> kaydı oluşturur; boyutu bilinmeyen veya sınırı aşan dosyalar indirilmez. Büyük dosyalar,
+boyutlarına ve 256 KiB/s temel hıza göre ek indirme süresine sahip olur. İşler,
+yeniden başlatma işleminden sonra da devam eder, ancak süresi dolmuş referanslar, erişim kaybı veya silinmiş dosyalar yine de kurtarmayı engelleyebilir.
+Bekleyen işler, kendileriyle birlikte kaydedilen sınırı korur; bu nedenle, artırılan sınır yalnızca yeni dosyalara uygulanır.
+Bir türü devre dışı bırakmak veya sınırını düşürmek, hariç tutulan bekleyen dosyaları da atlar; her bir dosya için
+<code>media.skipped</code> kaydı oluşturulur; indirmeleri devre dışı bırakmak, tekrar etkinleştirilene kadar kuyruğu duraklatır.</p>
 <h2 id="pause-lock-disconnect-and-restart">Duraklatma, kilitleme, bağlantıyı kesme ve yeniden başlatma<a class="anchor" href="#pause-lock-disconnect-and-restart" aria-label="Bu bölüme bağlantı">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

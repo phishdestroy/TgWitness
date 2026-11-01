@@ -286,14 +286,17 @@ Le fichier final doit également correspondre au nombre d’octets indiqué dans
 observé. Une réponse trop courte ou inattendue n’est pas enregistrée comme média conservé.</p>
 <p>Des limites sont définies <strong>par type</strong> : photos, vidéos, GIF et animations, messages vidéo circulaires,
 messages vocaux, musique et fichiers audio, autocollants et fichiers. Chaque type peut être désactivé et dispose de
-sa propre limite de taille comprise entre 1 et 2 000 Mio ; les nouveaux espaces de travail commencent avec 20 Mio pour les photos,
-100 Mio pour les vidéos, 50 Mio pour les fichiers, les fichiers audio et les vidéos circulaires, 20 Mio pour les messages vocaux et les GIF, et
-5 MiB pour les autocollants. <em>La taille maximale des fichiers</em> s’applique à tous les types simultanément. Les politiques enregistrées avant l’
-instauration des limites par type conservent leur limite unique pour chaque type. Un type désactivé génère un
-enregistrement <code>media.skipped</code> ; les fichiers de taille inconnue ou trop volumineux ne sont pas téléchargés. Les fichiers volumineux bénéficient d’un
-débit de téléchargement d’au moins 256 KiB/s. Les tâches survivent à un redémarrage, mais les références expirées, la perte d’
-accès ou la suppression de fichiers peuvent néanmoins empêcher leur récupération. Les tâches existantes conservent la politique enregistrée
-avec elles.</p>
+sa propre limite de taille comprise entre 1 et 2 000 MiB ; les nouveaux espaces de travail commencent avec 20 MiB pour les photos,
+100 MiB pour les vidéos, 50 MiB pour les fichiers, les fichiers audio et les vidéos circulaires, 20 MiB pour les messages vocaux et les GIF, et
+5 MiB pour les autocollants. Dans les nouveaux espaces de travail, les GIF et les autocollants sont désactivés par défaut jusqu’à ce qu’ils soient activés. Les espaces de travail
+dont les politiques ont été enregistrées avant la mise en place des limites par type conservent tous les types activés et maintiennent leur limite unique
+pour chaque type. <em>La taille maximale des fichiers</em> s’applique à tous les types simultanément. La désactivation d’un type génère
+un enregistrement « <code>media.skipped</code> » ; les fichiers de taille inconnue ou trop volumineux ne sont pas téléchargés. Les fichiers volumineux bénéficient d’un
+temps de téléchargement supplémentaire en fonction de leur taille et d’une vitesse de base de 256 KiB/s. Les tâches survivent
+au redémarrage, mais les références expirées, la perte d’accès ou la suppression de fichiers peuvent tout de même empêcher leur récupération.
+Les tâches en attente conservent la limite qui leur est associée ; ainsi, une augmentation de la limite ne s’applique qu’aux nouveaux fichiers.
+La désactivation d’un type ou la réduction de sa limite exclut également les fichiers en attente concernés, chacun étant associé à
+un enregistrement « <code>media.skipped</code> » ; la désactivation des téléchargements met la file d’attente en pause jusqu’à ce qu’ils soient réactivés.</p>
 <h2 id="pause-lock-disconnect-and-restart">Mettre en pause, verrouiller, se déconnecter et redémarrer<a class="anchor" href="#pause-lock-disconnect-and-restart" aria-label="Lien vers cette section">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>
