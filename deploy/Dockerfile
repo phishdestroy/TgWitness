@@ -1,4 +1,4 @@
-FROM python:3.12-slim
+FROM python:3.15-slim
 LABEL org.opencontainers.image.title="TgWitness" \
       org.opencontainers.image.description="Self-hosted Telegram observation journal with signed exports" \
       org.opencontainers.image.licenses="MIT"
