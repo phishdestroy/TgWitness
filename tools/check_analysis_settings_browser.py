@@ -7,7 +7,9 @@ import re
 def check_settings(browser):
     root = Path(__file__).resolve().parents[1]
     html = (root / 'tgwitness/static/index.html').read_text(encoding='utf-8')
-    html = re.sub(r'<script\b[^>]*>.*?</script>', '', html, flags=re.S)
+    # Remove the repository template's scripts for this isolated fixture; this
+    # is not a sanitizer for externally supplied HTML.
+    html = re.sub(r'<script\b[^>]*>.*?</script>', '', html, flags=re.S | re.I)
     page = browser.new_page()
     page.set_content(html)
     page.evaluate("""()=>{
