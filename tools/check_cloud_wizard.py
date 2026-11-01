@@ -454,7 +454,7 @@ def check_panel(directory):
 
 def check_browser(directory, output):
     sys.path.insert(0, str(ROOT / "tools"))
-    from check_browser import RunningApp as PanelApp, check_layout, launch_browser, lock_panel, navigate_panel, unlock
+    from check_browser import RunningApp as PanelApp, check_layout, launch_browser, lock_panel, navigate_panel, reload_panel, unlock
     from playwright.sync_api import expect, sync_playwright
     from tgwitness import i18n
     world = World()
@@ -559,7 +559,8 @@ def check_browser(directory, output):
         expect(page.locator("#cloud-hetzner-token")).to_have_value("")
         expect(page.locator("#cloud-offer")).to_be_hidden()
         context.add_cookies([{"name": i18n.COOKIE, "value": "ru", "url": server.url}])
-        page.reload()
+        reload_panel(page)
+        expect(page.locator("#view-witness")).to_be_visible()
         navigate_panel(page, "witness")
         page.locator("#extras-open-cloud").click()
         expect(page.locator("#cloud-check")).to_have_text(i18n.words("ru")["Check and show the price"])

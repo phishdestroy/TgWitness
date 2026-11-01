@@ -1,7 +1,7 @@
 """Check setup by goal and the credibility and reliability scales (levels.py, views/setup.js).
 
 The proposal for each goal, what Apply changes and records in the signed journal, and the scales
-from the actual settings. Then the panel in a browser: the first-run card on Account, the
+from the actual settings. Then the panel in a browser: the goal card on Start here, the
 proposal with its predicted scales, Apply, the Extras card, both widths and Russian.
 """
 import argparse
@@ -137,7 +137,7 @@ def check_api(directory):
 
 
 def check_browser(directory, output):
-    from check_browser import RunningApp, check_layout, launch_browser, navigate_panel, unlock
+    from check_browser import RunningApp, check_layout, launch_browser, navigate_panel, reload_panel, unlock
     from playwright.sync_api import expect, sync_playwright
     from tgwitness import i18n
     errors = []
@@ -147,13 +147,13 @@ def check_browser(directory, output):
         context = browser.new_context(viewport={"width": 1280, "height": 900}, reduced_motion="reduce")
         page = context.new_page()
         page.on("pageerror", lambda exc: errors.append(str(exc)))
-        unlock(page, server)
-        expect(page.locator("#view-connection")).to_be_visible()
+        unlock(page, server, start=True)
+        expect(page.locator("#view-start")).to_be_visible()
         expect(page.locator("#setup-start")).to_be_visible()
-        check_layout(page, connection=True)
+        check_layout(page)
         page.screenshot(path=str(output / "setup-start-en.png"))
         page.set_viewport_size({"width": 390, "height": 844})
-        check_layout(page, connection=True)
+        check_layout(page)
         page.set_viewport_size({"width": 1280, "height": 900})
 
         page.locator('[data-setup-goal="evidence"]').click()
@@ -197,11 +197,12 @@ def check_browser(directory, output):
         expect(page.locator("#setup-overview-scales .level-scale")).to_have_count(2)
         expect(page.locator("#setup-overview-scales .level-scale").first.locator(".level-name")).to_have_text("High")
         page.locator(".extra-card.extra-setup").screenshot(path=str(output / "setup-card-en.png"))
-        navigate_panel(page, "connection")
+        navigate_panel(page, "start")
         expect(page.locator("#setup-start")).to_be_hidden()
 
         context.add_cookies([{"name": i18n.COOKIE, "value": "ru", "url": server.url}])
-        page.reload()
+        reload_panel(page)
+        expect(page.locator("#view-start")).to_be_visible()
         navigate_panel(page, "witness")
         words = i18n.words("ru")
         expect(page.locator("#extra-setup-badge")).to_have_text(words["Evidence for a case"])
@@ -210,7 +211,7 @@ def check_browser(directory, output):
         page.screenshot(path=str(output / "setup-proposal-ru.png"), full_page=True)
         browser.close()
     assert not errors, errors
-    return "ok  browser: goal card on Account keeps sign-in in view, proposal with predicted scales, Apply, Extras card; English and Russian"
+    return "ok  browser: goal card on Start here, proposal with predicted scales, Apply, Extras card; English and Russian"
 
 
 def main():

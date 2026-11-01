@@ -47,7 +47,7 @@ SUITES = {
         "check_access_sections_browser.py", "check_journal_browser.py", "check_exports_browser.py",
         "check_controls_browser.py", "check_quick_search_browser.py",
         "check_cloud_wizard.py", "check_evidence_witnesses.py", "check_setup_levels.py",
-        "check_gateway_dns.py --browser",
+        "check_gateway_dns.py",
     ),
     "site": ("check_site.py", "check_docs_site.py", "check_report_example.py"),
 }
@@ -214,9 +214,8 @@ def main():
                         help="Seconds per check, followed by up to five seconds of cleanup")
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
-    checks = [Check(Path(entry.split()[0]).stem, (sys.executable, str(ROOT / "tools" / entry.split()[0]),
-                                                *entry.split()[1:]))
-              for entry in SUITES[args.suite]]
+    checks = [Check(Path(script).stem, (sys.executable, str(ROOT / "tools" / script)))
+              for script in SUITES[args.suite]]
     passed, _ = asyncio.run(run_checks(checks, args.output or ROOT / "build/check-results" / args.suite,
                                       workers=args.jobs, timeout=args.timeout))
     return 0 if passed else 1

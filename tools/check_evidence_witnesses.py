@@ -198,7 +198,7 @@ async def check_live(directory):
 
 def check_browser(directory, output):
     sys.path.insert(0, str(ROOT / "tools"))
-    from check_browser import RunningApp, check_layout, launch_browser, navigate_panel, unlock
+    from check_browser import RunningApp, check_layout, launch_browser, navigate_panel, reload_panel, unlock
     from playwright.sync_api import expect, sync_playwright
     from tgwitness import i18n
 
@@ -236,7 +236,8 @@ def check_browser(directory, output):
                       "round_time": "2026-11-01T09:59:58.000+00:00", "relay": DRAND_RELAYS[0], "seq": 9},
             "devices": {"at": "2026-11-01T10:00:01.000+00:00", "ok": False,
                         "error": "Telegram is not connected: observation is paused or reconnecting."}})
-        page.reload()
+        reload_panel(page)
+        expect(page.locator("#view-witness")).to_be_visible()
         navigate_panel(page, "witness")
         page.locator("#extras-open-evidence").click()
         expect(page.locator("#evidence-more")).to_have_attribute("open", "")
@@ -249,7 +250,8 @@ def check_browser(directory, output):
             check_layout(page)
         page.set_viewport_size({"width": 1280, "height": 1000})
         context.add_cookies([{"name": i18n.COOKIE, "value": "ru", "url": server.url}])
-        page.reload()
+        reload_panel(page)
+        expect(page.locator("#view-witness")).to_be_visible()
         navigate_panel(page, "witness")
         page.locator("#extras-open-evidence").click()
         words = i18n.words("ru")
