@@ -82,6 +82,9 @@ jobs:
       - name: Check bounded CI orchestration with synthetic failures
         if: ${{ !cancelled() }}
         run: python tools/check_check_runner.py
+      - name: Check source archive repeatability and interrupted-build recovery
+        if: ${{ !cancelled() }}
+        run: python -I tools/check_source_archive.py
       - name: Check reviewed source and Git index for publication
         id: publication
         if: ${{ !cancelled() }}
