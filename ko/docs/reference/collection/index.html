@@ -30,6 +30,7 @@
 <aside class="sidebar"><nav aria-label="가이드"><a href="../../../guides/modes.html">모드, 시나리오 및 증거 수준</a><p class="nav-label">시작하기</p><a href="../../start/">몇 분 만에 시작하세요</a><a href="../../dedicated-account/">전용 계정</a><a href="../../accounts/">계정 연결</a><a href="../../proxies/">프록시 선택</a><a href="../../exports/">내보내기 및 검증</a><a href="../../capture/">GitHub Actions 캡처</a><p class="nav-label">증거 이해하기</p><a href="../../concepts/">증거가 어떻게 활용되는지 확인하기</a><a href="../../cases/">모든 채팅을 대상으로 조사하기</a><a href="../../security/">보안을 유지하세요</a><p class="nav-label">더 알아보기</p><a href="../../archive/">아카이브 활용하기</a><a href="../../access/">사례 공유하기</a><a href="../../witness/">Witness 봇 설정하기</a><a href="../../server/">계속 운영해 주세요</a><a href="../../troubleshooting/">문제가 발생한 원인을 파악하세요</a></nav><nav class="wiki-nav" aria-label="참고 문헌"><p class="nav-label"><a class="nav-label-link" href="../">참고 문헌</a></p><details class="wiki-group"><summary>설정</summary><a href="../quickstart/">빠른 시작</a><a href="../accounts/">계정 및 세션 형식</a><a href="../access/">접근 및 권한</a><a href="../connection/">연결, 프록시 및 데이터 보호</a><a href="../deployment/">배포</a></details><details class="wiki-group" open><summary>수집</summary><a href="./" aria-current="page">데이터 수집 방식</a><a href="../history/">소스 기록 불러오기</a><a href="../operations/">워크플로우 및 운영</a><a href="../investigation/">조사 모드</a><a href="../features/">기능 및 제한 사항</a></details><details class="wiki-group"><summary>아카이브 및 연동 기능</summary><a href="../analysis/">아카이브 분석</a><a href="../mcp/">읽기 전용 MCP</a><a href="../media-analysis/">로컬 OCR 및 텍스트 변환</a><a href="../webhooks/">발신 웹훅</a></details><details class="wiki-group"><summary>증거</summary><a href="../how-it-works/">증거 기록의 작동 방식</a><a href="../evidence/">증거 형식</a><a href="../witness/">독립적인 증인</a><a href="../timestamp/">타임스탬프</a></details><details class="wiki-group"><summary>보안 및 프로젝트</summary><a href="../security/">보안 및 데이터 처리</a><a href="../architecture/">아키텍처</a><a href="../verification/">테스트된 내용</a><a href="../license/">라이선스 안내 및 아키텍처 비호환성 공지</a><a href="../notice/">운영자 호환성 불일치 공지</a><a href="../changelog/">변경 내역</a></details></nav><p class="sidebar-note">v0.7.0<br>오픈 소스 · 사용자의 컴퓨터에서 실행됩니다</p></aside>
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="가이드"><a href="../../../">홈</a> <span aria-hidden="true">/</span> <a href="../../">문서</a> <span aria-hidden="true">/</span> <a href="../">참고 문헌</a> <span aria-hidden="true">/</span> <span aria-current="page">데이터 수집 방식</span></nav>
+<p class="verification-shortcut"><a href="../verification/">테스트된 내용 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">문서 검색</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="프록시, 해시 체인, 토큰 또는 위트니스 등을 고려해 보십시오…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="명확한 검색" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">가이드와 참조 자료를 검색하려면 단어를 입력하세요. 검색 기록은 브라우저에 저장됩니다.</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="eyebrow">참고 문헌 / 수집</p><h1>데이터 수집 방식</h1><p class="guide-outcome">관찰 범위, 실시간 업데이트, 재확인, 첨부 파일, 사용자 작업 및 ‘갭(gap)’의 의미 등을 기록 단위로 상세히 설명합니다.</p><div class="wiki-body"><p>TgWitness는 연결된 텔레그램 계정이 감지한 내용을 기록합니다. 이 기록부는
 감지된 내용, 그 순서, 그리고 함께 제공된 맥락을 보존합니다. 이 도구는
@@ -285,14 +286,17 @@ ID를 유지합니다.
 설명자에 명시된 바이트 수와도 일치해야 합니다. 응답이 짧거나 예기치 않게 긴 경우, 보존된 미디어로 기록되지 않습니다.</p>
 <p>제한은 <strong>유형별로</strong> 설정됩니다: 사진, 동영상, GIF 및 애니메이션, 원형 동영상 메시지,
 음성 메시지, 음악 및 오디오, 스티커, 파일. 각 유형은 비활성화할 수 있으며,
-1~2,000 MiB 범위의 개별 용량 제한이 적용됩니다. 새로 생성된 작업 공간의 초기 용량은 사진 20 MiB,
+1~2,000 MiB 범위의 개별 용량 제한이 적용됩니다. 새로운 작업 공간은 사진 20 MiB,
 동영상 100 MiB, 파일·오디오·라운드 동영상 50 MiB, 음성 및 GIF 20 MiB,
-스티커는 5 MiB로 설정됩니다. <em>최대 파일 크기를</em> 설정하면 모든 유형에 동시에 적용됩니다. 유형별 제한이 적용되기 전에 저장된
-정책은 모든 유형에 대해 단일 제한을 유지합니다. 비활성화된 유형은
-&#x27;<code>media.skipped</code>&#x27; 레코드를 생성하며, 크기가 알려지지 않았거나 용량을 초과한 파일은 다운로드되지 않습니다. 대용량 파일의 경우
-최소 256 KiB/s의 다운로드 속도가 보장됩니다. 작업은 시스템 재시작 후에도 유지되지만, 만료된 참조,
-접근 권한 상실 또는 파일 삭제로 인해 복구가 불가능할 수 있습니다. 기존 작업은 해당 작업과 함께 저장된
-정책을 유지합니다.</p>
+스티커는 5 MiB로 설정됩니다. 새 워크스페이스에서는 GIF와 스티커가 활성화될 때까지 비활성화 상태로 유지됩니다. 유형별 제한이 적용되기 전에 정책이 저장된 워크스페이스는
+모든 유형이 활성화된 상태로 유지되며, 모든 유형에 대해 단일
+제한이 적용됩니다. <em>최대 파일 크기</em> 설정은 모든 유형에 동시에 적용됩니다. 특정 유형이 비활성화되면
+<code>media.skipped</code> 레코드가 생성되며, 크기가 알려지지 않았거나 용량을 초과한 파일은 다운로드되지 않습니다. 대용량 파일은
+크기와 256 KiB/s의 기준 속도를 기준으로 추가 다운로드 시간이 부여됩니다. 작업은
+재시작 후에도 유지되지만, 만료된 참조, 접근 권한 상실 또는 파일 삭제로 인해 복구가 불가능할 수 있습니다.
+대기 중인 작업은 저장된 제한을 유지하므로, 제한을 상향 조정해도 새로운 파일에만 적용됩니다.
+유형을 비활성화하거나 제한을 낮추면 해당 유형에서 제외된 대기 중인 파일도 건너뛰게 되며, 각 파일에는
+<code>media.skipped</code> 레코드가 생성됩니다. 다운로드를 비활성화하면 다시 활성화될 때까지 대기열이 일시 중지됩니다.</p>
 <h2 id="pause-lock-disconnect-and-restart">일시 중지, 잠금, 연결 해제 및 재시작<a class="anchor" href="#pause-lock-disconnect-and-restart" aria-label="이 섹션으로 이동">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

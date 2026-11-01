@@ -30,6 +30,7 @@
 <aside class="sidebar"><nav aria-label="指南"><a href="../../../guides/modes.html">模式、场景和证据级别</a><p class="nav-label">入门指南</p><a href="../../start/">几分钟内即可开始使用</a><a href="../../dedicated-account/">专用账号</a><a href="../../accounts/">连接账户</a><a href="../../proxies/">选择代理</a><a href="../../exports/">导出与验证</a><a href="../../capture/">GitHub Actions 捕获</a><p class="nav-label">了解证据</p><a href="../../concepts/">了解证据如何运作</a><a href="../../cases/">跨所有聊天记录进行调查</a><a href="../../security/">确保安全</a><p class="nav-label">了解更多</p><a href="../../archive/">浏览存档</a><a href="../../access/">分享案例</a><a href="../../witness/">设置 Witness 机器人</a><a href="../../server/">保持其运行</a><a href="../../troubleshooting/">查找问题所在</a></nav><nav class="wiki-nav" aria-label="参考"><p class="nav-label"><a class="nav-label-link" href="../">参考</a></p><details class="wiki-group"><summary>设置</summary><a href="../quickstart/">快速入门</a><a href="../accounts/">账户与会话格式</a><a href="../access/">访问与权限</a><a href="../connection/">连接、代理和数据保护</a><a href="../deployment/">部署</a></details><details class="wiki-group" open><summary>收集</summary><a href="./" aria-current="page">数据采集原理</a><a href="../history/">加载源代码历史记录</a><a href="../operations/">工作流程与操作</a><a href="../investigation/">调查模式</a><a href="../features/">功能与限制</a></details><details class="wiki-group"><summary>存档与集成</summary><a href="../analysis/">存档分析</a><a href="../mcp/">只读 MCP</a><a href="../media-analysis/">本地 OCR 和转录</a><a href="../webhooks/">外发 webhook</a></details><details class="wiki-group"><summary>证据</summary><a href="../how-it-works/">证据的运作原理</a><a href="../evidence/">证据格式</a><a href="../witness/">独立见证者</a><a href="../timestamp/">时间戳</a></details><details class="wiki-group"><summary>安全与项目</summary><a href="../security/">安全与数据处理</a><a href="../architecture/">架构</a><a href="../verification/">已测试的内容</a><a href="../license/">许可协议与架构不兼容声明</a><a href="../notice/">运营商兼容性通知</a><a href="../changelog/">更新日志</a></details></nav><p class="sidebar-note">v0.7.0<br>开源 · 可在您的设备上运行</p></aside>
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="指南"><a href="../../../">首页</a> <span aria-hidden="true">/</span> <a href="../../">文档</a> <span aria-hidden="true">/</span> <a href="../">参考</a> <span aria-hidden="true">/</span> <span aria-current="page">数据采集原理</span></nav>
+<p class="verification-shortcut"><a href="../verification/">已测试的内容 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="eyebrow">参考 / 收集</p><h1>数据采集原理</h1><p class="guide-outcome">观察范围、实时更新、复核、附件、用户操作以及“缺口”的含义，逐条记录。</p><div class="wiki-body"><p>TgWitness 记录已连接的 Telegram 账户所观察到的内容。该日志保存
 这些观察结果、其时间顺序以及随附的上下文信息。它不会
@@ -284,15 +285,17 @@ Telegram向该账户显示的计数和身份信息。</p>
 已完成的文件还必须与原始观察到的附件
 描述符中的字节数相匹配。较短或意外较长的响应不会被记录为已保存的媒体文件。</p>
 <p><strong>各类别均</strong>设有存储限制：照片、视频、GIF 和动画、圆形视频消息、
-语音消息、音乐和音频、贴纸以及文件。 每种类型均可单独关闭，并设有
-1 至 2,000 MiB 的独立大小限制；新工作区初始设置为：照片 20 MiB、
-视频 100 MiB、文件、音频及圆形视频 50 MiB、语音和 GIF 20 MiB，以及
-5 MiB 用于贴纸。<em>最大文件大小</em>会一次性设定所有类型。在
-按类型设置限制之前保存的策略，仍保持其针对每种类型的单一限制。关闭某种类别会生成一个
-<code>media.skipped</code> 记录；未知大小或超大文件不会被下载。 大文件的
-下载速率至少为 256 KiB/s。任务在系统重启后仍会保留，但过期的引用、丢失的
-访问权限或已删除的文件仍可能导致无法恢复。现有任务将保留与其一同保存的
-策略。</p>
+语音消息、音乐和音频、贴图以及文件。 每种类型均可单独关闭，并设有
+1 至 2,000 MiB 的独立大小限制；新工作区初始设置为：照片 20 MiB，
+视频 100 MiB，文件、音频和圆形视频 50 MiB，语音和 GIF 20 MiB，
+5 MiB用于贴纸。新工作区默认关闭GIF和贴纸功能，需手动开启。在按类型设置限制之前已保存策略的工作区，将保持所有类型启用，并保留其针对每种类型的单一
+限制。<em>最大文件大小</em>设置将一次性调整所有类型。 关闭某类文件会生成
+一个<code>media.skipped</code>记录；未知大小或超大文件将不会被下载。大文件将根据
+其大小和256 KiB/s的基准速度获得额外的下载时间。任务在
+重启后仍会保留，但过期的引用、访问权限丢失或文件被删除仍可能导致无法恢复。
+待处理任务会保留与其关联的限制值，因此提高的限制仅适用于新文件。
+禁用某类型或降低其限制值也会跳过该类型所排除的待处理文件，每个文件都会生成
+一条<code>media.skipped</code>记录；禁用下载功能会暂停队列，直到该功能被重新启用。</p>
 <h2 id="pause-lock-disconnect-and-restart">暂停、锁定、断开连接和重启<a class="anchor" href="#pause-lock-disconnect-and-restart" aria-label="本节链接">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

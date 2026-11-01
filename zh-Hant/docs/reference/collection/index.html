@@ -30,6 +30,7 @@
 <aside class="sidebar"><nav aria-label="指南"><a href="../../../guides/modes.html">模式、情境與證據等級</a><p class="nav-label">入門指南</p><a href="../../start/">幾分鐘內即可開始使用</a><a href="../../dedicated-account/">專用帳戶</a><a href="../../accounts/">連結帳戶</a><a href="../../proxies/">選擇代理伺服器</a><a href="../../exports/">匯出與驗證</a><a href="../../capture/">GitHub Actions 擷取</a><p class="nav-label">了解證據</p><a href="../../concepts/">了解證據如何運作</a><a href="../../cases/">跨所有聊天室進行調查</a><a href="../../security/">確保安全</a><p class="nav-label">深入了解</p><a href="../../archive/">瀏覽檔案庫</a><a href="../../access/">分享案例</a><a href="../../witness/">設定 Witness 機器人</a><a href="../../server/">讓它持續運作</a><a href="../../troubleshooting/">找出問題所在</a></nav><nav class="wiki-nav" aria-label="參考資料"><p class="nav-label"><a class="nav-label-link" href="../">參考資料</a></p><details class="wiki-group"><summary>設定</summary><a href="../quickstart/">快速入門</a><a href="../accounts/">帳戶與會話格式</a><a href="../access/">存取與權限</a><a href="../connection/">連線、代理伺服器與資料保護</a><a href="../deployment/">部署</a></details><details class="wiki-group" open><summary>收集</summary><a href="./" aria-current="page">資料蒐集原理</a><a href="../history/">載入來源歷史紀錄</a><a href="../operations/">工作流程與操作</a><a href="../investigation/">調查模式</a><a href="../features/">功能與限制</a></details><details class="wiki-group"><summary>存檔與整合功能</summary><a href="../analysis/">檔案分析</a><a href="../mcp/">唯讀 MCP</a><a href="../media-analysis/">本地 OCR 與文字轉錄</a><a href="../webhooks/">外發 Webhook</a></details><details class="wiki-group"><summary>證據</summary><a href="../how-it-works/">證據的運作方式</a><a href="../evidence/">證據格式</a><a href="../witness/">獨立見證人</a><a href="../timestamp/">時間戳記</a></details><details class="wiki-group"><summary>安全性與專案</summary><a href="../security/">安全性與資料處理</a><a href="../architecture/">架構</a><a href="../verification/">已測試的內容</a><a href="../license/">授權說明及架構不相容聲明</a><a href="../notice/">操作員不相容通知</a><a href="../changelog/">更新紀錄</a></details></nav><p class="sidebar-note">v0.7.0<br>開源 · 可在您的機器上運行</p></aside>
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="指南"><a href="../../../">首頁</a> <span aria-hidden="true">/</span> <a href="../../">文件說明</a> <span aria-hidden="true">/</span> <a href="../">參考資料</a> <span aria-hidden="true">/</span> <span aria-current="page">資料蒐集原理</span></nav>
+<p class="verification-shortcut"><a href="../verification/">已測試的內容 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">搜尋文件</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="可嘗試使用「代理」、「雜湊鏈」、「代幣」或「見證者」等詞彙……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜尋" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">輸入關鍵字以搜尋指南與參考資料。搜尋結果僅保留於您的瀏覽器中。</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="eyebrow">參考資料 / 收集</p><h1>資料蒐集原理</h1><p class="guide-outcome">觀察範圍、即時更新、重新核對、附件、使用者操作以及「缺口」的含義，皆以逐筆記錄的方式呈現。</p><div class="wiki-body"><p>TgWitness 會記錄已連線的 Telegram 帳號所觀察到的內容。該日誌會保存
 這些觀察結果、其時間順序，以及隨附的上下文。它不會
@@ -284,15 +285,18 @@ Telegram 向該帳號顯示的計數及身分資訊。</p>
 完成的檔案還必須與原始觀察到的附件
 描述符中的位元組數相符。若回應過短或出乎意料地過長，則不會被記錄為已保存的媒體。</p>
 <p><strong>各類型皆</strong>設有儲存限制：照片、影片、GIF 及動畫、圓形影片訊息、
-語音訊息、音樂與音訊、貼圖，以及檔案。 每種類型均可關閉，並設有
-各自的容量限制（範圍為 1 至 2,000 MiB）；新工作區預設值為：照片 20 MiB、
+語音訊息、音樂與音訊、貼圖，以及檔案。 每種類型皆可關閉，並設有
+各自的容量限制（範圍為 1 至 2,000 MiB）；新工作區預設為：照片 20 MiB、
 影片 100 MiB、檔案、音訊及圓形影片 50 MiB、語音與 GIF 20 MiB，以及
-貼圖為 5 MiB。設定<em>最大檔案大小</em>將同時套用至所有類型。在
-按類型設定限制之前儲存的政策，將維持其針對每種類型的單一限制。停用某種類型會產生
-一個 <code>media.skipped</code> 記錄；未知大小或超大檔案將不會被下載。 大型檔案的
-下載速度至少為 256 KiB/s。任務在系統重啟後仍會保留，但過期的參考、喪失
-存取權限或已刪除的檔案仍可能導致無法恢復。現有任務將保留與其一同儲存的
-政策。</p>
+貼圖為 5 MiB。新工作區預設會關閉 GIF 和貼圖功能，直至手動開啟。若工作區
+在「按類型設定限制」政策實施前已儲存相關設定，則所有類型皆保持啟用狀態，並維持其單一
+類型限制。<em>設定最大檔案大小</em>將同時套用至所有類型。 停用某種類型會產生
+<code>media.skipped</code> 記錄；未知大小或超出限額的檔案將不會被下載。大型檔案會
+根據其大小及 256 KiB/s 的基準速度獲得額外的下載時間。工作會
+在重新啟動後保留，但過期的參考、存取權限遺失或已刪除的檔案仍可能導致無法恢復。
+待處理工作會保留其儲存的限制值，因此提高的限制僅適用於新檔案。
+停用某種類型或降低其限制值，也會跳過該類型所排除的待處理檔案，每個檔案
+都會產生一個<code>media.skipped</code>記錄；停用下載功能會暫停佇列，直到再次啟用為止。</p>
 <h2 id="pause-lock-disconnect-and-restart">暫停、鎖定、斷開連接及重新啟動<a class="anchor" href="#pause-lock-disconnect-and-restart" aria-label="此節的連結">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

@@ -30,6 +30,7 @@
 <aside class="sidebar"><nav aria-label="ガイド"><a href="../../../guides/modes.html">モード、シナリオ、および証拠レベル</a><p class="nav-label">はじめに</p><a href="../../start/">数分で始められます</a><a href="../../dedicated-account/">専用アカウント</a><a href="../../accounts/">アカウントを連携する</a><a href="../../proxies/">プロキシを選択してください</a><a href="../../exports/">エクスポートと検証</a><a href="../../capture/">GitHub Actionsのキャプチャ</a><p class="nav-label">証拠について理解する</p><a href="../../concepts/">証拠の仕組みをご覧ください</a><a href="../../cases/">すべてのチャットを横断的に調査する</a><a href="../../security/">セキュリティを確保してください</a><p class="nav-label">さらに詳しく</p><a href="../../archive/">アーカイブの操作</a><a href="../../access/">事例を共有する</a><a href="../../witness/">Witnessボットの設定</a><a href="../../server/">稼働を継続してください</a><a href="../../troubleshooting/">何が問題だったのかを確認する</a></nav><nav class="wiki-nav" aria-label="参考文献"><p class="nav-label"><a class="nav-label-link" href="../">参考文献</a></p><details class="wiki-group"><summary>セットアップ</summary><a href="../quickstart/">クイックスタート</a><a href="../accounts/">アカウントとセッション形式</a><a href="../access/">アクセスと権限</a><a href="../connection/">接続、プロキシ、およびデータ保護</a><a href="../deployment/">導入</a></details><details class="wiki-group" open><summary>収集</summary><a href="./" aria-current="page">収集の仕組み</a><a href="../history/">ソース履歴を読み込む</a><a href="../operations/">ワークフローと操作方法</a><a href="../investigation/">調査モード</a><a href="../features/">機能と制限事項</a></details><details class="wiki-group"><summary>アーカイブと連携機能</summary><a href="../analysis/">アーカイブ分析</a><a href="../mcp/">読み取り専用 MCP</a><a href="../media-analysis/">ローカルでのOCRおよび文字起こし</a><a href="../webhooks/">送信されるWebhook</a></details><details class="wiki-group"><summary>証拠</summary><a href="../how-it-works/">証拠の仕組み</a><a href="../evidence/">証拠の形式</a><a href="../witness/">独立した証人</a><a href="../timestamp/">タイムスタンプ</a></details><details class="wiki-group"><summary>セキュリティとプロジェクト</summary><a href="../security/">セキュリティおよびデータ取り扱い</a><a href="../architecture/">アーキテクチャ</a><a href="../verification/">テスト済みの内容</a><a href="../license/">ライセンスに関する説明とアーキテクチャ上の非互換性の通知</a><a href="../notice/">オペレーターの非互換性に関する通知</a><a href="../changelog/">変更履歴</a></details></nav><p class="sidebar-note">v0.7.0<br>オープンソース・お使いのマシン上で動作します</p></aside>
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="ガイド"><a href="../../../">ホーム</a> <span aria-hidden="true">/</span> <a href="../../">ドキュメント</a> <span aria-hidden="true">/</span> <a href="../">参考文献</a> <span aria-hidden="true">/</span> <span aria-current="page">収集の仕組み</span></nav>
+<p class="verification-shortcut"><a href="../verification/">テスト済みの内容 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">ドキュメントを検索する</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="「プロキシ」、「ハッシュチェーン」、「トークン」、または「ウィットネス」などを試してみてください…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="検索を明確にする" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">ガイドやリファレンスを検索するには、単語を入力してください。検索はブラウザ内で行われます。</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="eyebrow">参考文献 / 収集</p><h1>収集の仕組み</h1><p class="guide-outcome">記録範囲、リアルタイム更新、再確認、添付ファイル、自身の操作、および「ギャップ」の意味について、記録ごとに解説しています。</p><div class="wiki-body"><p>TgWitnessは、接続されたTelegramアカウントが検知した内容を記録します。このジャーナルは、
 それらの検知内容、その順序、および付随するコンテキストを保存します。また、
@@ -287,13 +288,15 @@ Telegramがそのアカウントに対して表示している件数と身元の
 <p>制限は、写真、動画、GIFおよびアニメーション、ラウンド動画メッセージ、
 音声メッセージ、音楽およびオーディオ、ステッカー、ファイルといった<strong>種類ごとに</strong>設定されています。 各タイプは個別に無効化可能で、
 1～2,000 MiBの範囲で独自のサイズ制限が設定されています。新しいワークスペースでは、写真用が20 MiB、
-動画用が100 MiB、ファイル・音声・ラウンド動画用が50 MiB、音声・GIF用が20 MiB、
-ステッカーは5 MiBです。<em>最大ファイルサイズは</em>、すべての種類に対して一括で設定されます。種類ごとの制限が設定される前に保存されたポリシーは、
-すべての種類に対して単一の制限を維持します。無効化された種類については、
-「<code>media.skipped</code>」レコードが生成され、サイズ不明またはサイズ超過のファイルはダウンロードされません。 大容量ファイルの
-ダウンロード速度は、少なくとも256 KiB/sとなります。ジョブは再起動後も維持されますが、有効期限が切れた参照、アクセス権の喪失、
-またはファイルの削除により、復元できない場合があります。既存のジョブは、保存された
-ポリシーを引き続き保持します。</p>
+動画用が100 MiB、ファイル・音声・ラウンド動画用が50 MiB、音声およびGIF用が20 MiB、
+ステッカーは5 MiBとなります。新しいワークスペースでは、GIFとステッカーは有効に設定されるまで無効のままとなります。タイプごとの制限が導入される前にポリシーが保存されたワークスペースでは、すべてのタイプが有効なままとなり、すべてのタイプに対して単一の
+制限が維持されます。<em>最大ファイルサイズ</em>を設定すると、すべてのタイプが一括して設定されます。 無効化されたタイプでは
+<code>media.skipped</code>レコードが生成され、サイズ不明または上限を超えるファイルはダウンロードされません。大容量ファイルの
+ダウンロード時間は、そのサイズと256 KiB/sという基準速度に基づいて追加で割り当てられます。ジョブは
+再起動後も存続しますが、有効期限が切れた参照、アクセス不能、または削除されたファイルによって、復元が妨げられる可能性があります。
+待機中のジョブは、そのジョブに保存された制限値を維持するため、制限値の引き上げは新しいファイルにのみ適用されます。
+タイプを無効にしたり、その制限値を引き下げたりすると、除外対象となる待機中のファイルもスキップされ、それぞれに
+<code>media.skipped</code>レコードが生成されます。ダウンロードを無効にすると、再度有効になるまでキューは一時停止されます。</p>
 <h2 id="pause-lock-disconnect-and-restart">一時停止、ロック、切断、再起動<a class="anchor" href="#pause-lock-disconnect-and-restart" aria-label="このセクションへのリンク">#</a></h2>
 <div class="table-wrap" tabindex="0"><table>
 <thead>

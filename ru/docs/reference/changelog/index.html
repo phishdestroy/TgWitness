@@ -30,9 +30,34 @@
 <aside class="sidebar"><nav aria-label="Руководства"><a href="../../../guides/modes.html">Режимы, сценарии и уровни доказательства</a><p class="nav-label">Первые шаги</p><a href="../../start/">Запуск за несколько минут</a><a href="../../dedicated-account/">Отдельный аккаунт</a><a href="../../accounts/">Подключение аккаунта</a><a href="../../proxies/">Выбор прокси</a><a href="../../exports/">Экспорт и проверка</a><a href="../../capture/">Выгрузка через GitHub Actions</a><p class="nav-label">Разобраться в доказательствах</p><a href="../../concepts/">Как устроены доказательства</a><a href="../../cases/">Расследование по всем чатам</a><a href="../../security/">Безопасность установки</a><p class="nav-label">Дальше</p><a href="../../archive/">Работа с архивом</a><a href="../../access/">Поделиться делом</a><a href="../../witness/">Бот-свидетель</a><a href="../../server/">Постоянная работа на сервере</a><a href="../../troubleshooting/">Поиск неисправностей</a></nav><nav class="wiki-nav" aria-label="Справочник"><p class="nav-label"><a class="nav-label-link" href="../">Справочник</a></p><details class="wiki-group"><summary>Установка</summary><a href="../quickstart/">Быстрый старт</a><a href="../accounts/">Аккаунты и форматы сессий</a><a href="../access/">Доступ и разрешения</a><a href="../connection/">Подключение, прокси и защита данных</a><a href="../deployment/">Развёртывание</a></details><details class="wiki-group"><summary>Сбор</summary><a href="../collection/">Как устроен сбор</a><a href="../history/">Загрузить историю источников</a><a href="../operations/">Работа и обслуживание</a><a href="../investigation/">Режим расследования</a><a href="../features/">Возможности и ограничения</a></details><details class="wiki-group"><summary>Архив и интеграции</summary><a href="../analysis/">Анализ архива</a><a href="../mcp/">MCP только для чтения</a><a href="../media-analysis/">Локальное распознавание текста (OCR) и транскрипция</a><a href="../webhooks/">Исходящие веб-хуки</a></details><details class="wiki-group"><summary>Доказательства</summary><a href="../how-it-works/">Как устроены доказательства</a><a href="../evidence/">Формат доказательств</a><a href="../witness/">Независимый свидетель</a><a href="../timestamp/">Метки времени</a></details><details class="wiki-group" open><summary>Безопасность и проект</summary><a href="../security/">Безопасность и обращение с данными</a><a href="../architecture/">Архитектура</a><a href="../verification/">Что проверено</a><a href="../license/">Уведомление о несовместимости лицензий и архитектуры</a><a href="../notice/">Уведомление о несовместимости с операторами</a><a href="./" aria-current="page">Список изменений</a></details></nav><p class="sidebar-note">v0.7.0<br>Открытый исходный код · Работает на вашем компьютере</p></aside>
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="Руководства"><a href="../../../">Главная</a> <span aria-hidden="true">/</span> <a href="../../">Документация</a> <span aria-hidden="true">/</span> <a href="../">Справочник</a> <span aria-hidden="true">/</span> <span aria-current="page">Список изменений</span></nav>
+<p class="verification-shortcut"><a href="../verification/">Что проверено →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Поиск по документации</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Попробуйте «прокси», «цепочку хешей», «токен» или «свидетель»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Очистить поиск" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Введите слово для поиска в руководствах и справочнике. Результаты поиска остаются в вашем браузере.</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="language-notice">Эта страница есть только на английском.</p><p class="eyebrow">Справочник / Безопасность и проект</p><h1>Список изменений</h1><p class="guide-outcome">Все изменения по версиям, включая те, которые ещё не выпущены.</p><div class="wiki-body" lang=en dir=ltr><h2 id="unreleased">Unreleased<a class="anchor" href="#unreleased" aria-label="Ссылка на раздел">#</a></h2>
 <ul>
+<li>Made large account-export progress and HTML preparation use linear task/page
+    scans. Interrupted ZIP writes leave no downloadable partial archive; regression
+    checks resume from byte-identical signed receipts and retain coverage gaps.</li>
+<li>Strengthened disclosure masking for Unicode names, alternate usernames,
+    direct-chat names and whole-token sender IDs, including the public purpose.
+    Unknown senders no longer receive a shared identity alias. Exceeding the masking
+    limit now stops preparation rather than silently skipping identities.</li>
+<li>Bound transcription by actual decoded audio samples, decode only once, and
+    reject playlist formats and secondary file/URL references inside the isolated
+    media worker. Native decoder checks cover generated common Telegram formats
+    and malformed input without downloading a transcription model.</li>
+<li>
+<p>Made source ZIP metadata repeatable and preserved the previous archive when
+    a new build fails before publication. Input bytes, including signed demo files,
+    remain unchanged; reproducibility requires matching inputs and compression tools.</p>
+</li>
+<li>
+<p>Kept English as the canonical interface, documentation and demo language, with
+    explicit fallback and browser checks. Capture now falls back to its English
+    source when a translation is missing. Other languages remain translations.</p>
+</li>
+<li>Hardened Capture language selection and encoded its HTML/URL output, pinned
+    release actions, and documented the dated security scan results, including
+    unresolved Debian package findings in the container images.</li>
 <li>Refreshed the Russian panel and Capture wizard through DeepL, with reviewed
     privacy and evidence terminology, preserved placeholders and command examples.</li>
 <li>Raised dependency security floors and regenerated the hash-locked build tools.
@@ -132,6 +157,42 @@
     imports leave no empty workspace; locking or switching stops the remaining queue.</li>
 <li>Added the MTProxy dashboard: ping, status, countries, filters, shared custom
     lists and optional GitHub search. Routes remain separate for each account.</li>
+<li>Added a country choice for the automatic MTProxy route (preferred, avoided, only
+    preferred) and the list download and check intervals to the dashboard. Panel strings of
+    groups, import and the dashboard are translated with their screen as context and with
+    plural forms; context-dependent report labels are corrected in 23 languages.</li>
+<li>MTProxy traffic is deciphered through OpenSSL instead of Telethon's pure-Python AES
+    (about 0.3 MB/s on a small server): a busy MTProxy route no longer holds a whole CPU
+    core and delays every panel answer by seconds. The chats list shows that it is loading,
+    and journal rows explain skipped and failed attachments in the panel language.</li>
+<li>The panel, proof, sealed and MCP servers keep idle connections for 150 seconds instead
+    of 5: Caddy and cloudflared reused connections the server had already closed, and the
+    browser received sporadic 502 answers.</li>
+<li>GIFs and stickers are no longer downloaded unless turned on. Turning downloads off now
+    pauses the files already waiting, and turning a type off or lowering its limit skips the
+    waiting files it excludes; before, the queue kept downloading under the old settings.</li>
+<li>Public proxy lists are parsed once, and again only after a list, a source setting or the
+    GitHub token changes. Every status read of every workspace parsed them on the event loop
+    that also carries Telegram traffic; with 10 workspaces the account list took 690 ms, now 7 ms.</li>
+<li>Bulk import refuses a session another workspace already holds before it connects: the same
+    key from a second proxy address can make Telegram revoke it. An imported workspace
+    disconnects until its sources are chosen, imports no longer hold the other workspaces'
+    operations, an import can be stopped after the current account, files that are not
+    account files are shown as such, and import errors appear in the panel language.
+    Account groups can start or pause all their workspaces at once.</li>
+<li>Unanswered servers in preferred countries no longer hide working servers in other
+    countries; servers identified as being in avoided countries are excluded, including from
+    checks. Servers with unknown country remain eligible unless only preferred countries are
+    allowed.
+    Country lookups move past hosts without an answer, the saved lists stay readable at
+    their size limits, the last list update shows when lists were actually downloaded, and
+    a blocked list download disables the update button and offers the proxy setting. Own
+    lists say how many links were left out and why. One server listed with several secrets
+    counts as one address, so two workspaces are no longer put on the same server.</li>
+<li>People and chats without a photo no longer fill the browser console with 404 errors,
+    and the panel asks for the high-assurance statement only where it exists. Sign-in tabs
+    wrap long labels instead of cutting them; the offline-gap note, size units and the
+    reason of attachments dropped with a removed source are shown in the panel language.</li>
 <li>Added scoped, read-only MCP connections and local archive search with optional
     AI source review and separate analytical reports.</li>
 <li>Added local OCR/transcription for saved attachments and signed outgoing webhooks

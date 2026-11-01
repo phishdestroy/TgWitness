@@ -30,8 +30,113 @@
 <aside class="sidebar"><nav aria-label="指南"><a href="../../../guides/modes.html">模式、场景和证据级别</a><p class="nav-label">入门指南</p><a href="../../start/">几分钟内即可开始使用</a><a href="../../dedicated-account/">专用账号</a><a href="../../accounts/">连接账户</a><a href="../../proxies/">选择代理</a><a href="../../exports/">导出与验证</a><a href="../../capture/">GitHub Actions 捕获</a><p class="nav-label">了解证据</p><a href="../../concepts/">了解证据如何运作</a><a href="../../cases/">跨所有聊天记录进行调查</a><a href="../../security/">确保安全</a><p class="nav-label">了解更多</p><a href="../../archive/">浏览存档</a><a href="../../access/">分享案例</a><a href="../../witness/">设置 Witness 机器人</a><a href="../../server/">保持其运行</a><a href="../../troubleshooting/">查找问题所在</a></nav><nav class="wiki-nav" aria-label="参考"><p class="nav-label"><a class="nav-label-link" href="../">参考</a></p><details class="wiki-group"><summary>设置</summary><a href="../quickstart/">快速入门</a><a href="../accounts/">账户与会话格式</a><a href="../access/">访问与权限</a><a href="../connection/">连接、代理和数据保护</a><a href="../deployment/">部署</a></details><details class="wiki-group"><summary>收集</summary><a href="../collection/">数据采集原理</a><a href="../history/">加载源代码历史记录</a><a href="../operations/">工作流程与操作</a><a href="../investigation/">调查模式</a><a href="../features/">功能与限制</a></details><details class="wiki-group"><summary>存档与集成</summary><a href="../analysis/">存档分析</a><a href="../mcp/">只读 MCP</a><a href="../media-analysis/">本地 OCR 和转录</a><a href="../webhooks/">外发 webhook</a></details><details class="wiki-group"><summary>证据</summary><a href="../how-it-works/">证据的运作原理</a><a href="../evidence/">证据格式</a><a href="../witness/">独立见证者</a><a href="../timestamp/">时间戳</a></details><details class="wiki-group" open><summary>安全与项目</summary><a href="../security/">安全与数据处理</a><a href="../architecture/">架构</a><a href="./" aria-current="page">已测试的内容</a><a href="../license/">许可协议与架构不兼容声明</a><a href="../notice/">运营商兼容性通知</a><a href="../changelog/">更新日志</a></details></nav><p class="sidebar-note">v0.7.0<br>开源 · 可在您的设备上运行</p></aside>
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="指南"><a href="../../../">首页</a> <span aria-hidden="true">/</span> <a href="../../">文档</a> <span aria-hidden="true">/</span> <a href="../">参考</a> <span aria-hidden="true">/</span> <span aria-current="page">已测试的内容</span></nav>
+<p class="verification-shortcut"><a href="./">已测试的内容 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">参考 / 安全与项目</p><h1>已测试的内容</h1><p class="guide-outcome">Telegram 实时测试、自动化检查、浏览器检查以及尚未经过验证的内容。</p><div class="wiki-body"><h2 id="live-telegram-test-whole-account--29-october-2026">Telegram 实时测试，完整账户 · 2026年10月29日<a class="anchor" href="#live-telegram-test-whole-account--29-october-2026" aria-label="本节链接">#</a></h2>
+<article class="guide-content"><p class="eyebrow">参考 / 安全与项目</p><h1>已测试的内容</h1><p class="guide-outcome">Telegram 实时测试、自动化检查、浏览器检查以及尚未经过验证的内容。</p><div class="wiki-body"><h2 id="live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026<a class="anchor" href="#live-server-journal-inventory--1-november-2026" aria-label="本节链接">#</a></h2>
+<p>At approximately 19:15 UTC, sequential read-only SQLite <code>query_only</code> queries counted
+events in ten workspace databases on a running server. Collection continued during
+the queries, so this is not an atomic snapshot across workspaces.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Observed across the ten workspace databases</th>
+<th style="text-align: right;">计数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Workspaces with at least one <code>message.new</code> event</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr>
+<td>Journal records, including operational events</td>
+<td style="text-align: right;">1,610,818</td>
+</tr>
+<tr>
+<td><code>message.new</code> events</td>
+<td style="text-align: right;">900,232</td>
+</tr>
+<tr>
+<td><code>message.edited</code> events</td>
+<td style="text-align: right;">80,683</td>
+</tr>
+<tr>
+<td><code>message.deleted</code> events</td>
+<td style="text-align: right;">400,536</td>
+</tr>
+<tr>
+<td><code>message.recovered</code> events</td>
+<td style="text-align: right;">53,403</td>
+</tr>
+<tr>
+<td><code>message.snapshot</code> events</td>
+<td style="text-align: right;">2,183</td>
+</tr>
+<tr>
+<td><code>media.saved</code> events</td>
+<td style="text-align: right;">50,418</td>
+</tr>
+<tr>
+<td><code>media.failed</code> events</td>
+<td style="text-align: right;">5,575</td>
+</tr>
+<tr>
+<td><code>coverage.gap</code> events</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr>
+<td>Database bytes, excluding WAL files and media</td>
+<td style="text-align: right;">7,909,003,264</td>
+</tr>
+</tbody>
+</table></div>
+<p>These are <strong>event counts</strong>, not unique messages, people or media files. The same
+message can appear in more than one workspace, and an edit or deletion can produce
+another journal event. <code>media.failed</code> counts historical failure events, not the
+current media queue. The queries did <strong>not</strong> newly verify signatures and the full
+hash chain of all 1,610,818 records, measure delivery or throughput, or establish
+that every Telegram event was captured. No message content, account or chat IDs,
+workspace labels, credentials or private files are published here.</p>
+<p>At this review, the separately configured public monitor covered three sources:
+one capture response was OK and two reported <code>no_response</code>. That monitor is
+not a ten-workspace health summary. <code>no_response</code> means the observer could not
+obtain a response at that check; it does not establish message loss. The smaller
+29 October test below has its own explicit signature and hash-chain verification.</p>
+<h2 id="recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026<a class="anchor" href="#recent-offline-and-fault-injection-checks--1-november-2026" aria-label="本节链接">#</a></h2>
+<p>These checks use fictional data and local files; they add regression evidence for
+the current source, not another live Telegram delivery measurement:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>检查</th>
+<th>What it exercised</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/check_source_archive.py">Source archive</a></td>
+<td>Two builds with identical source bytes but changed file times produced the same ZIP and checksum. Exact archived bytes and file hashes matched; private test files stayed out. A simulated write failure left the previous archive and checksum intact.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/check_account_export_recovery.py">Account export recovery</a></td>
+<td>A simulated disk error on the second ZIP member left no published or partial ZIP. Resume kept every signed receipt byte-identical, produced an independently verifiable archive using the expected signing fingerprint, and retained the synthetic coverage gap as a partial result. Scale assertions guard against repeated task and receipt scans as histories grow.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/check_disclosure_privacy.py">Minimized disclosure privacy</a></td>
+<td>Synthetic Unicode names and aliases, nested metadata, unknown senders and media fields were checked in all three identity modes and with text omission. A masking-limit failure did not silently weaken redaction; the original signed account export stayed unchanged.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/check_media_worker.py">Linux media decoder and OCR</a></td>
+<td>A <a href="https://github.com/phishdestroy/TgWitness/actions/runs/41341200341/job/124951395192">Linux Docker CI check</a> at commit <code>5a9e0814</code> passed generated Ogg/Opus, MP3, M4A, MP4 with video, WAV and FLAC inputs; forged-duration and secondary-file-reference controls; and 48 mutated parser fixtures (34 rejected, 14 decoded within bounds). Real Tesseract OCR ran with original bytes unchanged. The decoder and OCR ran in network-isolated containers without a Whisper model.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The checks run in the <a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/pr-check.yml">pull-request</a> and
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/checks.yml">full Checks</a> workflows.
+They test these failure boundaries, not every possible storage failure or whether
+a disclosure is automatically safe to publish. The media check does not measure
+speech recognition accuracy or Telegram delivery. Review each derivative before sharing.</p>
+<h2 id="live-telegram-test-whole-account--29-october-2026">Telegram 实时测试，完整账户 · 2026年10月29日<a class="anchor" href="#live-telegram-test-whole-account--29-october-2026" aria-label="本节链接">#</a></h2>
 <p>在以下测试结束后，该账户仍继续运行。10月29日12:10（UTC），其监控范围
 被切换为整个账户（频道、群组、私人聊天和机器人）；控制面板要求
 确认，经签名的日志记录了这一操作。截至17:59（UTC），日志中包含：</p>
@@ -833,7 +938,7 @@ docs/assets/ 目录中的公开截图仅包含虚构的演示数据。</p>
 <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/SEO.md">网站元数据说明</a>。</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/VERIFICATION.md">在 GitHub 上编辑此页面 ↗</a><a class="next-guide" href="../changelog/"><span>下一步</span><strong>更新日志 →</strong></a><p>这些指南描述了当前的实现方案。验证结果和剩余缺陷在其他文档中单独记录。 <a href="./">已测试的内容 →</a></p></footer>
 </main>
-<aside class="toc" aria-label="本页面内容"><p class="nav-label">本页面内容</p><a href="#live-telegram-test-whole-account--29-october-2026">Telegram 实时测试，完整账户 · 2026年10月29日</a><a href="#password-protected-export-opened-with-libarchive--29-october-2026">通过 libarchive 打开受密码保护的导出文件 · 2026年10月29日</a><a href="#live-telegram-test--27-to-29-october-2026">Telegram 实时测试 · 2026年10月27日至29日</a><a href="#built-in-public-mtproxy-lists--29-october-2026">内置的公共 MTProxy 列表 · 2026年10月29日</a><a href="#optional-extras-presentation--29-october-2026">可选附加功能演示 · 2026年10月29日</a><a href="#witness-bot-and-proxy-setup-audit--29-october-2026">Witness 机器人和代理设置审核 · 2026年10月29日</a><a href="#presentation-and-documentation-review--29-october-2026">演示与文档评审 · 2026年10月29日</a><a href="#version-061">版本 0.6.1</a><a href="#version-060">版本 0.6.0</a><a href="#version-051">版本 0.5.1</a><a href="#version-050">版本 0.5.0</a><a href="#version-040">版本 0.4.0</a><a href="#version-031-focused-readiness-fixes">0.3.1 版本主要针对就绪性问题进行了修复</a><a href="#version-030">版本 0.3.0</a><a href="#version-020-baseline">0.2.0 版本基线</a><a href="#synthetic-local-capacity-measurement">合成本地能力测量</a><a href="#environmental-observations">环境观察</a><a href="#remaining-qualification">剩余资格要求</a><a href="#public-website-and-publication-preparation--27-october-2026">公共网站及出版物筹备 · 2026年10月27日</a><a href="#interactive-documentation-and-website-metadata--29-october-2026">交互式文档和网站元数据 · 2026年10月29日</a></aside>
+<aside class="toc" aria-label="本页面内容"><p class="nav-label">本页面内容</p><a href="#live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026</a><a href="#recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026</a><a href="#live-telegram-test-whole-account--29-october-2026">Telegram 实时测试，完整账户 · 2026年10月29日</a><a href="#password-protected-export-opened-with-libarchive--29-october-2026">通过 libarchive 打开受密码保护的导出文件 · 2026年10月29日</a><a href="#live-telegram-test--27-to-29-october-2026">Telegram 实时测试 · 2026年10月27日至29日</a><a href="#built-in-public-mtproxy-lists--29-october-2026">内置的公共 MTProxy 列表 · 2026年10月29日</a><a href="#optional-extras-presentation--29-october-2026">可选附加功能演示 · 2026年10月29日</a><a href="#witness-bot-and-proxy-setup-audit--29-october-2026">Witness 机器人和代理设置审核 · 2026年10月29日</a><a href="#presentation-and-documentation-review--29-october-2026">演示与文档评审 · 2026年10月29日</a><a href="#version-061">版本 0.6.1</a><a href="#version-060">版本 0.6.0</a><a href="#version-051">版本 0.5.1</a><a href="#version-050">版本 0.5.0</a><a href="#version-040">版本 0.4.0</a><a href="#version-031-focused-readiness-fixes">0.3.1 版本主要针对就绪性问题进行了修复</a><a href="#version-030">版本 0.3.0</a><a href="#version-020-baseline">0.2.0 版本基线</a><a href="#synthetic-local-capacity-measurement">合成本地能力测量</a><a href="#environmental-observations">环境观察</a><a href="#remaining-qualification">剩余资格要求</a><a href="#public-website-and-publication-preparation--27-october-2026">公共网站及出版物筹备 · 2026年10月27日</a><a href="#interactive-documentation-and-website-metadata--29-october-2026">交互式文档和网站元数据 · 2026年10月29日</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>开源 · 可在您的设备上运行</span><a href="../../../../LICENSE">MIT 许可协议</a><a href="../notice/">操作员通知</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">安全</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "等待消息", "Step through a fictional send, edit and delete.": "通过一个虚构的发送、编辑和删除过程进行演示。", "No observations yet. Start the sequence or advance one event.": "尚无观察记录。开始序列或跳转至下一事件。", "Meet at 10:00": "10:00 见面", "A new message is visible in the chat.": "聊天中显示了一条新消息。", "Record 1 appended: the collector observed the original message.": "已附录记录 1 条：采集器已捕获原始消息。", "Meet at 11:00": "11:00 见面", "The current text changes. The earlier observation stays.": "当前文本内容有所变更。先前的观察结果仍然有效。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "记录 2 已追加：该编辑内容为新观察结果。记录 1 仍保留原始文本。", "Message deleted": "消息已删除", "The message has disappeared from the chat view.": "该消息已从聊天界面中消失。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "已添加记录 3：删除通知与两个被观察到的版本一同保留。", "0 records": "0 条记录", "1 record": "1 条记录", "2 records": "2 条记录", "3 records": "3 条记录", "Complete / {n} of 3": "已完成 / {n}/3", "Step / {n} of 3": "第 {n} 步（共 3 步）", "Pause": "暂停", "Replay sequence": "回放序列", "Play sequence": "播放序列", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "静态示例已上线。如需交互式计算哈希值，请通过 HTTPS 访问此页面，或在支持 Web Crypto 的本地预览环境中打开。", "No record supplied": "未提供记录", "Tail removed": "尾部内容已删除", "≠ saved hash": "≠ 已保存的哈希值", "Rebuilt · different hash": "重建 · 哈希值不同", "= saved hash": "= 已保存的哈希值", "Same length and matching head.": "篇幅相同且标题一致。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "这三个计算出的哈希值均与保存的哈希值一致。该样本符合保留的三个记录边界。", "Same saved head; the journal prefix fails verification.": "保存的头部信息相同；日志前缀验证失败。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "记录 2 与其保存的哈希值不再匹配。若仅检查最终存储的头部，则会遗漏此问题；验证器会检查每一条记录。", "Head differs from the retained checkpoint.": "标题与保留的检查点不同。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "重建的哈希值相互关联，但最终的头部已发生变化。保留的检查点拒绝接受这一历史记录。对于已更改的记录，原始签名也会验证失败。", "Too short: 2 supplied records \u003c 3 retained records.": "内容过短：提供的记录有 2 条，而保留的记录少于 3 条。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "剩下的两个哈希值仍然匹配。保留的检查点揭示了缺失的部分。如果没有那个早先的边界，仅凭这个较短的前缀是无法揭示这一遗漏的。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "此浏览器不支持哈希计算。下方的公式和静态说明仍可查看。", "{n} records": "{n}条记录", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "已接受：计数持续增加，签名已验证，密钥匹配。该见证者保留了这一新边界。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "回滚：签名后的结果报告的记录数量少于上次被接受的检查点。Witness 会记录该问题，并保留较早被接受的边界。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "分叉：计数保持不变，但分支头不同。见证者会记录该分歧，并保留先前被接受的分界点。", "No answer": "无回答", "boundary unknown": "边界未知", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "无响应：该工具会记录验证失败的情况。它无法确定收集器的当前状态。如果该工具仍能访问 Bot API 且其发布政策允许，则会发布该失败信息。", "Send {n}": "发送 {n}", "Edit {n}": "编辑 {n}", "Delete {n}": "删除 {n}", "Both accounts captured all six expected observations in this example.": "在这项示例中，这两个账户均捕获了预期的全部六项观察结果。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "账户 B 依然成功捕获了 6 条中的 6 条。其中两条收据的捕获耗时较长。捕获率和收据延迟反映的是不同的问题。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "账户 B 在截止时间前捕获了 6 条中的 5 条（83.3%）。缺失的编辑操作未测得延迟。此结果仅描述了这六项受控操作。", "not observed by cutoff": "未在截止时间前观察到", "{s} seconds": "{s}秒", "Exact values follow in the table.": "具体数值见下表。", "{s} s": "{s} s", "Not observed": "未发现", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "四个聊天群组提供了不同的观察结果。请追溯每条连接的源记录；在未确认发件人身份的情况下，请勿将该频道帖子归因于用户 71001。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "记录 #146 和 #205 显示相同的发件人 ID：71001。这将同一 Telegram 账号在两个聊天群组中发布的帖子关联起来。但这并不能识别现实世界中的具体个人，也无法确定该频道帖子的发布者。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "目标地址 pay.example.invalid/new 出现在群组记录 #146、机器人键盘 #173、频道编辑 #188 以及私信 #205 中。目标地址的重复出现表明这些内容之间存在关联；但这并不能证明这些账户受共同控制。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "在此虚构案例中，已完成的媒体收据 #151 和 #209 具有完全相同的 SHA-256 值。请对比实际字节内容及其关联的消息记录。该匹配文件既未标识其创建者，也无法证明是谁转发了该文件。", "the encrypted off-site copy": "加密的异地副本", "notifications": "通知", "checkpoint hashes for timestamps": "时间戳的检查点哈希值", "signed checkpoints for the witness": "TgWitness 的签名检查点", "Switched on in this example": "在此示例中已启用", "Optional · off by default": "可选 · 默认关闭", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "离开这台机器时：Telegram 连接和 {list}。除此之外别无他物。", "Default: only the Telegram connection leaves this machine.": "默认设置：仅 Telegram 连接会离开这台机器。", "{done} of {total} done": "已完成 {done}/{total}", "Mark step {n} as done": "将步骤 {n} 标记为已完成", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "文案", "Copied": "已复制", "Command copied.": "已复制该指令。", "Selected — Ctrl/Cmd+C": "选中 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "已选中命令。请手动复制。", "Command copied to clipboard.": "命令已复制到剪贴板。", "Select text": "选择文本", "Clipboard unavailable. Command selected; copy it manually.": "剪贴板不可用。已选中命令；请手动复制。", "A message arrives. The first observation is saved.": "一条消息送达。首次记录被保存。", "The time changes. Both captured versions stay.": "时间会改变，但两个记录版本都会保留下来。", "The message disappears. The captured history remains.": "消息虽已消失，但记录的历史依然存在。", "Pause example animation": "暂停示例动画", "Play example animation": "播放示例动画", "Play": "播放", "Full-size workspace screenshot": "全屏工作区截图", "Workspace screenshot · fictional data": "工作区截图 · 虚构数据", "Close": "关闭", "Close screenshot": "关闭截图", "Scrollable full-size screenshot": "可滚动全屏截图", "Enlarge: {name}": "放大：{name}", "View full size": "查看大图"}</script>

@@ -30,9 +30,34 @@
 <aside class="sidebar"><nav aria-label="Przewodniki"><a href="../../../guides/modes.html">Tryby, scenariusze i poziomy dowodów</a><p class="nav-label">Pierwsze kroki</p><a href="../../start/">Rozpocznij w ciągu kilku minut</a><a href="../../dedicated-account/">Dedykowane konto</a><a href="../../accounts/">Podłącz konto</a><a href="../../proxies/">Proszę wybrać serwer proxy</a><a href="../../exports/">Eksportowanie i weryfikacja</a><a href="../../capture/">Przechwytywanie za pomocą GitHub Actions</a><p class="nav-label">Zrozumienie dowodów</p><a href="../../concepts/">Zobacz, jak działa system gromadzenia dowodów</a><a href="../../cases/">Przeprowadzanie dochodzeń we wszystkich czatach</a><a href="../../security/">Dbaj o bezpieczeństwo</a><p class="nav-label">Dowiedz się więcej</p><a href="../../archive/">Przeglądaj archiwum</a><a href="../../access/">Przedstaw proszę przypadek</a><a href="../../witness/">Skonfiguruj bota Witness</a><a href="../../server/">Prosimy o dalsze prowadzenie tej strony</a><a href="../../troubleshooting/">Dowiedz się, co poszło nie tak</a></nav><nav class="wiki-nav" aria-label="Odniesienie"><p class="nav-label"><a class="nav-label-link" href="../">Odniesienie</a></p><details class="wiki-group"><summary>Konfiguracja</summary><a href="../quickstart/">Szybki start</a><a href="../accounts/">Konta i formaty sesji</a><a href="../access/">Dostęp i uprawnienia</a><a href="../connection/">Połączenia, serwery proxy i ochrona danych</a><a href="../deployment/">Wdrożenie</a></details><details class="wiki-group"><summary>Zbieraj</summary><a href="../collection/">Jak przebiega gromadzenie danych</a><a href="../history/">Wczytaj historię źródła</a><a href="../operations/">Procesy i operacje</a><a href="../investigation/">Tryb dochodzeniowy</a><a href="../features/">Funkcje i ograniczenia</a></details><details class="wiki-group"><summary>Archiwum i integracje</summary><a href="../analysis/">Analiza archiwum</a><a href="../mcp/">MCP tylko do odczytu</a><a href="../media-analysis/">Lokalne rozpoznawanie tekstu (OCR) i transkrypcja</a><a href="../webhooks/">Wychodzące webhooki</a></details><details class="wiki-group"><summary>Dowody</summary><a href="../how-it-works/">Jak działa ten rejestr dowodów</a><a href="../evidence/">Format dowodów</a><a href="../witness/">Niezależny świadek</a><a href="../timestamp/">Sygnatury czasowe</a></details><details class="wiki-group" open><summary>Bezpieczeństwo i projekt</summary><a href="../security/">Bezpieczeństwo i przetwarzanie danych</a><a href="../architecture/">Architektura</a><a href="../verification/">Co zostało przetestowane</a><a href="../license/">Informacja o licencji i niezgodności architektonicznej</a><a href="../notice/">Powiadomienie o niezgodności operatorów</a><a href="./" aria-current="page">Lista zmian</a></details></nav><p class="sidebar-note">v0.7.0<br>Oprogramowanie typu open source · Działa na Państwa komputerze</p></aside>
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="Przewodniki"><a href="../../../">Strona główna</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentacja</a> <span aria-hidden="true">/</span> <a href="../">Odniesienie</a> <span aria-hidden="true">/</span> <span aria-current="page">Lista zmian</span></nav>
+<p class="verification-shortcut"><a href="../verification/">Co zostało przetestowane →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Przeszukaj dokumentację</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proszę rozważyć użycie terminów takich jak: serwer proxy, łańcuch skrótów, token lub świadek…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Przejrzyste wyszukiwanie" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Wpisz słowo, aby przeszukać przewodniki i materiały referencyjne. Wyniki wyszukiwania pozostają w Państwa przeglądarce.</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="language-notice">Strona ta jest dostępna wyłącznie w języku angielskim.</p><p class="eyebrow">Odniesienie / Bezpieczeństwo i projekt</p><h1>Lista zmian</h1><p class="guide-outcome">Wszystkie zmiany w poszczególnych wersjach, w tym zmiany, które nie zostały jeszcze opublikowane.</p><div class="wiki-body" lang=en dir=ltr><h2 id="unreleased">Unreleased<a class="anchor" href="#unreleased" aria-label="Link do tej sekcji">#</a></h2>
 <ul>
+<li>Made large account-export progress and HTML preparation use linear task/page
+    scans. Interrupted ZIP writes leave no downloadable partial archive; regression
+    checks resume from byte-identical signed receipts and retain coverage gaps.</li>
+<li>Strengthened disclosure masking for Unicode names, alternate usernames,
+    direct-chat names and whole-token sender IDs, including the public purpose.
+    Unknown senders no longer receive a shared identity alias. Exceeding the masking
+    limit now stops preparation rather than silently skipping identities.</li>
+<li>Bound transcription by actual decoded audio samples, decode only once, and
+    reject playlist formats and secondary file/URL references inside the isolated
+    media worker. Native decoder checks cover generated common Telegram formats
+    and malformed input without downloading a transcription model.</li>
+<li>
+<p>Made source ZIP metadata repeatable and preserved the previous archive when
+    a new build fails before publication. Input bytes, including signed demo files,
+    remain unchanged; reproducibility requires matching inputs and compression tools.</p>
+</li>
+<li>
+<p>Kept English as the canonical interface, documentation and demo language, with
+    explicit fallback and browser checks. Capture now falls back to its English
+    source when a translation is missing. Other languages remain translations.</p>
+</li>
+<li>Hardened Capture language selection and encoded its HTML/URL output, pinned
+    release actions, and documented the dated security scan results, including
+    unresolved Debian package findings in the container images.</li>
 <li>Refreshed the Russian panel and Capture wizard through DeepL, with reviewed
     privacy and evidence terminology, preserved placeholders and command examples.</li>
 <li>Raised dependency security floors and regenerated the hash-locked build tools.
@@ -132,6 +157,42 @@
     imports leave no empty workspace; locking or switching stops the remaining queue.</li>
 <li>Added the MTProxy dashboard: ping, status, countries, filters, shared custom
     lists and optional GitHub search. Routes remain separate for each account.</li>
+<li>Added a country choice for the automatic MTProxy route (preferred, avoided, only
+    preferred) and the list download and check intervals to the dashboard. Panel strings of
+    groups, import and the dashboard are translated with their screen as context and with
+    plural forms; context-dependent report labels are corrected in 23 languages.</li>
+<li>MTProxy traffic is deciphered through OpenSSL instead of Telethon's pure-Python AES
+    (about 0.3 MB/s on a small server): a busy MTProxy route no longer holds a whole CPU
+    core and delays every panel answer by seconds. The chats list shows that it is loading,
+    and journal rows explain skipped and failed attachments in the panel language.</li>
+<li>The panel, proof, sealed and MCP servers keep idle connections for 150 seconds instead
+    of 5: Caddy and cloudflared reused connections the server had already closed, and the
+    browser received sporadic 502 answers.</li>
+<li>GIFs and stickers are no longer downloaded unless turned on. Turning downloads off now
+    pauses the files already waiting, and turning a type off or lowering its limit skips the
+    waiting files it excludes; before, the queue kept downloading under the old settings.</li>
+<li>Public proxy lists are parsed once, and again only after a list, a source setting or the
+    GitHub token changes. Every status read of every workspace parsed them on the event loop
+    that also carries Telegram traffic; with 10 workspaces the account list took 690 ms, now 7 ms.</li>
+<li>Bulk import refuses a session another workspace already holds before it connects: the same
+    key from a second proxy address can make Telegram revoke it. An imported workspace
+    disconnects until its sources are chosen, imports no longer hold the other workspaces'
+    operations, an import can be stopped after the current account, files that are not
+    account files are shown as such, and import errors appear in the panel language.
+    Account groups can start or pause all their workspaces at once.</li>
+<li>Unanswered servers in preferred countries no longer hide working servers in other
+    countries; servers identified as being in avoided countries are excluded, including from
+    checks. Servers with unknown country remain eligible unless only preferred countries are
+    allowed.
+    Country lookups move past hosts without an answer, the saved lists stay readable at
+    their size limits, the last list update shows when lists were actually downloaded, and
+    a blocked list download disables the update button and offers the proxy setting. Own
+    lists say how many links were left out and why. One server listed with several secrets
+    counts as one address, so two workspaces are no longer put on the same server.</li>
+<li>People and chats without a photo no longer fill the browser console with 404 errors,
+    and the panel asks for the high-assurance statement only where it exists. Sign-in tabs
+    wrap long labels instead of cutting them; the offline-gap note, size units and the
+    reason of attachments dropped with a removed source are shown in the panel language.</li>
 <li>Added scoped, read-only MCP connections and local archive search with optional
     AI source review and separate analytical reports.</li>
 <li>Added local OCR/transcription for saved attachments and signed outgoing webhooks

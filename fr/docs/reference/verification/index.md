@@ -4,6 +4,41 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/verif
 
 Le test Telegram en direct, les vérifications automatisées, les vérifications au niveau du navigateur et ce qui reste à vérifier.
 
+## Live server journal inventory · 1 November 2026
+
+At approximately 19:15 UTC, sequential read-only SQLite `query_only` queries counted events in ten workspace databases on a running server. Collection continued during the queries, so this is not an atomic snapshot across workspaces.
+
+| Observed across the ten workspace databases | Nombre |
+| --- | --- |
+| Workspaces with at least one `message.new` event | 8 |
+| Journal records, including operational events | 1,610,818 |
+| `message.new` events | 900,232 |
+| `message.edited` events | 80,683 |
+| `message.deleted` events | 400,536 |
+| `message.recovered` events | 53,403 |
+| `message.snapshot` events | 2,183 |
+| `media.saved` events | 50,418 |
+| `media.failed` events | 5,575 |
+| `coverage.gap` events | 11 |
+| Database bytes, excluding WAL files and media | 7,909,003,264 |
+
+These are **event counts**, not unique messages, people or media files. The same message can appear in more than one workspace, and an edit or deletion can produce another journal event. `media.failed` counts historical failure events, not the current media queue. The queries did **not** newly verify signatures and the full hash chain of all 1,610,818 records, measure delivery or throughput, or establish that every Telegram event was captured. No message content, account or chat IDs, workspace labels, credentials or private files are published here.
+
+At this review, the separately configured public monitor covered three sources: one capture response was OK and two reported `no_response`. That monitor is not a ten-workspace health summary. `no_response` means the observer could not obtain a response at that check; it does not establish message loss. The smaller 29 October test below has its own explicit signature and hash-chain verification.
+
+## Recent offline and fault-injection checks · 1 November 2026
+
+These checks use fictional data and local files; they add regression evidence for the current source, not another live Telegram delivery measurement:
+
+| Vérifier | What it exercised |
+| --- | --- |
+| [Source archive](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_source_archive.py) | Two builds with identical source bytes but changed file times produced the same ZIP and checksum. Exact archived bytes and file hashes matched; private test files stayed out. A simulated write failure left the previous archive and checksum intact. |
+| [Account export recovery](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_account_export_recovery.py) | A simulated disk error on the second ZIP member left no published or partial ZIP. Resume kept every signed receipt byte-identical, produced an independently verifiable archive using the expected signing fingerprint, and retained the synthetic coverage gap as a partial result. Scale assertions guard against repeated task and receipt scans as histories grow. |
+| [Minimized disclosure privacy](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_disclosure_privacy.py) | Synthetic Unicode names and aliases, nested metadata, unknown senders and media fields were checked in all three identity modes and with text omission. A masking-limit failure did not silently weaken redaction; the original signed account export stayed unchanged. |
+| [Linux media decoder and OCR](https://github.com/phishdestroy/TgWitness/blob/main/tools/check_media_worker.py) | A [Linux Docker CI check](https://github.com/phishdestroy/TgWitness/actions/runs/41341200341/job/124951395192) at commit `5a9e0814` passed generated Ogg/Opus, MP3, M4A, MP4 with video, WAV and FLAC inputs; forged-duration and secondary-file-reference controls; and 48 mutated parser fixtures (34 rejected, 14 decoded within bounds). Real Tesseract OCR ran with original bytes unchanged. The decoder and OCR ran in network-isolated containers without a Whisper model. |
+
+The checks run in the [pull-request](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/pr-check.yml) and [full Checks](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/checks.yml) workflows. They test these failure boundaries, not every possible storage failure or whether a disclosure is automatically safe to publish. The media check does not measure speech recognition accuracy or Telegram delivery. Review each derivative before sharing.
+
 ## Test Telegram en direct, compte complet · 29 octobre 2026
 
 Le même compte a continué à fonctionner après le test ci-dessous. Le 29 octobre à 12 h 10 UTC, son champ d’application a été étendu à l’ensemble du compte (chaînes, groupes, discussions privées et bots) ; le panneau a demandé une confirmation et le journal signé a enregistré cette opération. À 17 h 59 UTC, le journal contenait :
