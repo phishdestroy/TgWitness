@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+- Added **Start here** with separate personal-export and investigation journeys.
+  Account snapshots and saved observations now have distinct export controls;
+  secondary formats, account metadata and connection options are progressively
+  disclosed. Navigation preserves drafts and never starts collection implicitly.
+- Replaced disclosure JSON previews with readable transformed-message cards,
+  exact included-record counts and explicit sample limits. Original archives
+  remain separate from sharing copies, and privacy warnings remain visible.
+- Distinguished rejected Telegram authorization from paused accounts and network
+  failures. Account counters filter the list; **Sign in again** returns to the
+  existing workspace without discarding its journal, sources or signing key.
+  This state follows actual authorization checks; simply opening the panel does
+  not probe every saved session.
+
 - Made large account-export progress and HTML preparation use linear task/page
   scans. Interrupted ZIP writes leave no downloadable partial archive; regression
   checks resume from byte-identical signed receipts and retain coverage gaps.

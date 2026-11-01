@@ -367,7 +367,8 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                     async with op_lock:
                         await collector.start()
                 except Exception as exc:
-                    collector.phase, collector.last_error = "resume_failed", type(exc).__name__
+                    collector.phase = "authorization_required" if collector.authorization_required else "resume_failed"
+                    collector.last_error = type(exc).__name__
                     store.append("coverage.gap", {"reason": "resume_failed", "error_type": type(exc).__name__})
 
             if store.get_setting("resume", False) and not store.get_setting("demo", False):

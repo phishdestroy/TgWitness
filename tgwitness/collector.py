@@ -14,6 +14,8 @@ from collections import deque
 from telethon import events, utils
 from telethon.errors import SessionPasswordNeededError, FloodWaitError, InvalidBufferError, RPCError
 from telethon.errors import FileReferenceExpiredError
+from telethon.errors import (AuthKeyDuplicatedError, AuthKeyInvalidError, AuthKeyUnregisteredError,
+                             SessionExpiredError, SessionRevokedError)
 from telethon.extensions import BinaryReader
 from telethon.sessions import StringSession
 from telethon.tl import functions, types
@@ -41,6 +43,14 @@ from .verify import fingerprint
 
 STORAGE_RECHECK_SECONDS = 30
 SMALL_MEDIA_BYTES = 2 * 1024**2
+
+
+class AuthorizationRequired(ValueError):
+    """The saved account session was rejected, not merely disconnected."""
+
+
+AUTHORIZATION_ERRORS = (AuthorizationRequired, AuthKeyDuplicatedError, AuthKeyInvalidError,
+                        AuthKeyUnregisteredError, SessionExpiredError, SessionRevokedError)
 
 
 ROUTE_ERRORS = (OSError, TimeoutError, asyncio.IncompleteReadError, InvalidBufferError)
@@ -215,6 +225,7 @@ class Collector:
         self.running = False
         self.phase = "offline"
         self.last_error = None
+        self.authorization_required = False
         self.pending_phone = None
         self.phone_hash = None
         self.dialog_cache = {}
@@ -262,6 +273,7 @@ class Collector:
             "phase": self.phase, "running": self.running,
             "connected": bool(self.client and self.client.is_connected()),
             "has_session": bool(credentials.get("session")),
+            "authorization_required": self.authorization_required,
             "has_api_credentials": bool(credentials.get("api_id") and credentials.get("api_hash")),
             "builtin_api": credentials.get("api_id") is None or credentials.get("api_id") in api_pool.POOL_IDS,
             "api_pool_size": len(api_pool.POOL) - len(api_pool.rejected),
@@ -618,6 +630,7 @@ class Collector:
         self.vault.save("credentials", {k: v for k, v in credentials.items() if k != "session"})
         self.dialog_cache = {}
         self.phase, self.last_error = "offline", None
+        self.authorization_required = False
         account = self.store.get_setting("account", None) or {}
         self.store.append("account.signed_out", {
             "account_id": account.get("id"), "telegram_session_ended": ended,
@@ -923,8 +936,9 @@ class Collector:
             self.store.set_setting("resume", False)
             self.store.set_setting("auto_route", None)
             self.store.append("network.changed", config.receipt())
-        self.phase = "offline"
-        self.last_error = None
+        self.phase = "authorization_required" if self.authorization_required else "offline"
+        if not self.authorization_required:
+            self.last_error = None
         return config.public()
 
     async def test_network(self):
@@ -969,7 +983,7 @@ class Collector:
                 if (pair_id, pair_hash) in api_pool.POOL:
                     api_pool.reject(pair_id)
                 await self.cancel_login()
-                self.phase = "ready" if self.vault.read("credentials").get("session") else "offline"
+                self.phase = self.resting_phase()
                 if number == len(pairs):
                     raise
 
@@ -1003,7 +1017,7 @@ class Collector:
                     return {"step": "authorized"}
             except BaseException:
                 await self.cancel_login()
-                self.phase = "ready" if self.vault.read("credentials").get("session") else "offline"
+                self.phase = self.resting_phase()
                 raise
             self.phase = "login_required"
             return {"step": "phone"}
@@ -1055,7 +1069,7 @@ class Collector:
                     if self.login_client is candidate:
                         self.login_client = None
                         self.pending_credentials = self.pending_account_id = None
-                        self.phase = "ready" if self.vault.read("credentials").get("session") else "offline"
+                        self.phase = self.resting_phase()
                         await candidate.disconnect()
 
             self.qr_task = asyncio.create_task(wait_for_scan())
@@ -1076,7 +1090,7 @@ class Collector:
             was_pending = self.login_client is not None
             await self.cancel_login()
             if was_pending:
-                self.phase = "ready" if self.vault.read("credentials").get("session") else "offline"
+                self.phase = self.resting_phase()
         return {"step": "cancelled"}
 
     async def send_code(self, phone):
@@ -1136,7 +1150,7 @@ class Collector:
                 self.store.append("account.authorized", {"account_id": me.id, "key_origin": self.pending_key_origin})
         except BaseException:
             await self.cancel_login()
-            self.phase = "ready" if self.vault.read("credentials").get("session") else "offline"
+            self.phase = self.resting_phase()
             raise
         finally:
             if release:
@@ -1149,20 +1163,42 @@ class Collector:
             self.qr_state["step"] = "authorized"
         self.dialog_cache = {}
         self.pending_phone = self.phone_hash = None
+        self.authorization_required = False
         self.phase, self.last_error = "ready", None
+
+    def resting_phase(self):
+        if self.authorization_required:
+            return "authorization_required"
+        return "ready" if self.vault.read("credentials").get("session") else "offline"
 
     async def restore(self):
         credentials = self.vault.read("credentials")
         if not credentials.get("session"):
             raise ValueError("Connect a Telegram account first.")
-        if not self.client:
-            await self.ensure_route()
-            self.client = self.make_client(credentials["api_id"], credentials["api_hash"], credentials["session"])
-        if not self.client.is_connected():
-            await self.connect_client(self.client)
-        if not await self.client.is_user_authorized():
-            self.phase = "login_required"
-            raise ValueError("Telegram authorization expired. Sign in again.")
+        try:
+            if not self.client:
+                await self.ensure_route()
+                self.client = self.make_client(credentials["api_id"], credentials["api_hash"], credentials["session"])
+            if not self.client.is_connected():
+                await self.connect_client(self.client)
+            if not await self.client.is_user_authorized():
+                raise AuthorizationRequired("Telegram authorization expired. Sign in again.")
+            if self.authorization_required:
+                # Telethon may cache a positive authorization check. A known rejection needs
+                # a fresh Telegram RPC before the panel can consider this session usable again.
+                me = await self.client.get_me()
+                if me is None:
+                    raise AuthorizationRequired("Telegram authorization expired. Sign in again.")
+                existing = self.store.get_setting("account", {}) or {}
+                if existing.get("id") is not None and existing["id"] != me.id:
+                    raise ValueError("This journal belongs to a different Telegram account. Create another account workspace.")
+        except AUTHORIZATION_ERRORS as exc:
+            self.authorization_required = True
+            self.phase, self.last_error = "authorization_required", type(exc).__name__
+            raise
+        if self.authorization_required:
+            self.authorization_required = False
+            self.phase, self.last_error = "observing" if self.running else "ready", None
 
     def source_status_view(self):
         ignored = set(self.store.get_setting("ignored_source_warnings", []))
@@ -1255,7 +1291,7 @@ class Collector:
             return
         try:
             await self.start_observation()
-        except BaseException:
+        except BaseException as exc:
             self.buffered, self.buffering = [], False
             if self.running:
                 # Buffered handlers and catch-up can yield after running was set.
@@ -1268,6 +1304,9 @@ class Collector:
                 if self.client and not (self.export_busy() or self.export_claim):
                     with suppress(Exception):
                         await self.client.disconnect()
+            if isinstance(exc, AUTHORIZATION_ERRORS):
+                self.authorization_required = True
+                self.phase, self.last_error = "authorization_required", type(exc).__name__
             raise
 
     async def start_observation(self):
@@ -1451,7 +1490,7 @@ class Collector:
         self.store.append("connection.retry", {"attempt": self.reconnect_attempts})
         try:
             await self.restore()
-        except ValueError:
+        except AUTHORIZATION_ERRORS:
             self.phase, self.running = "authorization_required", False
             self.store.append("coverage.gap", {"reason": "authorization_required"})
             asyncio.create_task(self.client.disconnect())
@@ -1476,6 +1515,8 @@ class Collector:
 
     async def failure(self, exc, context):
         self.last_error = type(exc).__name__
+        if isinstance(exc, AUTHORIZATION_ERRORS):
+            self.authorization_required = True
         try:
             self.store.append("collector.error", {"operation": context, "error_type": type(exc).__name__,
                                                  "coverage": "this update may not have been recorded"})
