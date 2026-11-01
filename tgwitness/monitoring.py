@@ -17,7 +17,7 @@ CAPTURE_DEFAULTS = {"download_media": True, "max_media_mb": 20}
 MEDIA_TYPES = ("photo", "video", "animation", "video_note", "voice", "audio", "sticker", "document")
 MEDIA_DEFAULT_MB = {"photo": 20, "video": 100, "animation": 20, "video_note": 50, "voice": 20, "audio": 50,
                     "sticker": 5, "document": 50}
-# Stickers and GIFs are rarely evidence and fill the download queue: they stay off until turned on.
+# New workspaces leave optional GIF and sticker downloads off until explicitly enabled.
 MEDIA_DEFAULT_OFF = ("animation", "sticker")
 
 
