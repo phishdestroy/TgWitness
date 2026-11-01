@@ -54,6 +54,12 @@
   <a href="docs/COLLECTION.md"><picture><source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-nav-history-mobile.svg"><img src="docs/assets/presentation/readme-nav-history.svg" width="32%" alt="Collection and saved versions"></picture></a>
 </p>
 
+In the current source panel, **Start here** offers **Export my account** for a
+one-off [signed account snapshot](docs/ACCOUNT-EXPORT.md), or **Follow an investigation**
+for ongoing observation. Choose a task, connect an account and review its scope;
+collection only starts when you explicitly start it. Less common controls live
+under **More tools & settings**.
+
 **Choose your scope:** selected chats, a Telegram folder or the whole account.
 Keep each account in its own workspace, with separate sources, session and signing key.
 
