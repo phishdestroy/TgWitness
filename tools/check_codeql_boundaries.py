@@ -1,12 +1,18 @@
 """Offline regressions for reviewed CodeQL boundaries; synthetic accounts and bytes only."""
 import hashlib
+import http.client
 import importlib.util
 import json
+import socket
 import sys
 import tempfile
+import threading
+import time
+from contextlib import contextmanager
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
-from urllib.parse import quote
+from urllib.parse import quote, urlencode
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -25,6 +31,44 @@ def refused(call):
     except ValueError:
         return
     raise AssertionError("Expected rejection")
+
+
+@contextmanager
+def local_client(app):
+    """Exercise the real HTTP boundary using only installed runtime dependencies."""
+    import uvicorn
+
+    sock = socket.socket()
+    sock.bind(("127.0.0.1", 0))
+    port = sock.getsockname()[1]
+    server = uvicorn.Server(uvicorn.Config(app, log_level="error", access_log=False))
+    thread = threading.Thread(target=server.run, kwargs={"sockets": [sock]}, daemon=True)
+    thread.start()
+    try:
+        deadline = time.monotonic() + 15
+        while not server.started:
+            if not thread.is_alive() or time.monotonic() > deadline:
+                raise RuntimeError("Synthetic application did not start")
+            time.sleep(.05)
+
+        def get(path, headers=None, params=None):
+            if params:
+                path += "?" + urlencode(params)
+            connection = http.client.HTTPConnection("127.0.0.1", port, timeout=10)
+            try:
+                connection.request("GET", path, headers=headers or {})
+                response = connection.getresponse()
+                return SimpleNamespace(status_code=response.status, content=response.read(), headers=response.headers)
+            finally:
+                connection.close()
+
+        yield SimpleNamespace(get=get)
+    finally:
+        server.should_exit = True
+        thread.join(timeout=10)
+        sock.close()
+        if thread.is_alive():
+            raise RuntimeError("Synthetic application did not stop")
 
 
 def check_locales_and_case_metadata():
@@ -48,14 +92,13 @@ def check_locales_and_case_metadata():
 
 
 def check_media_and_locale_http():
-    from fastapi.testclient import TestClient
     from tgwitness.access import GrantSettings
     from tgwitness.app import create_app
 
     with tempfile.TemporaryDirectory(prefix="tgwitness-codeql-") as temporary:
         root = Path(temporary).resolve()
         app = create_app(root, demo=True)
-        with TestClient(app) as client:
+        with local_client(app) as client:
             admin = {"Authorization": "Bearer " + app.state.vault.token}
             data = b"synthetic attachment, not an executable preview"
             digest = hashlib.sha256(data).hexdigest()
