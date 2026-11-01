@@ -34,9 +34,30 @@
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">搜尋文件</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="可嘗試使用「代理」、「雜湊鏈」、「代幣」或「見證者」等詞彙……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜尋" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">輸入關鍵字以搜尋指南與參考資料。搜尋結果僅保留於您的瀏覽器中。</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="language-notice">本頁面僅提供英文版本。</p><p class="eyebrow">參考資料 / 安全性與專案</p><h1>更新紀錄</h1><p class="guide-outcome">按版本列出所有變更，包含尚未發布的變更。</p><div class="wiki-body" lang=en dir=ltr><h2 id="unreleased">Unreleased<a class="anchor" href="#unreleased" aria-label="此節的連結">#</a></h2>
 <ul>
-<li>Made large account-export progress and HTML preparation use linear task/page
+<li>Added <strong>Start here</strong> with separate personal-export and investigation journeys.
+    Account snapshots and saved observations now have distinct export controls;
+    secondary formats, account metadata and connection options are progressively
+    disclosed. Navigation preserves drafts and never starts collection implicitly.</li>
+<li>Replaced disclosure JSON previews with readable transformed-message cards,
+    exact included-record counts and explicit sample limits. Original archives
+    remain separate from sharing copies, and privacy warnings remain visible.</li>
+<li>Added printable offline reports for account exports and sharing copies, with
+    scope, coverage, readable messages and verification instructions. Choose the
+    report language separately from the panel; original message text stays intact.
+    New labels use explicit English fallbacks where translations are unavailable.
+    Existing signed jobs and already published archives retain their original bytes.</li>
+<li>
+<p>Distinguished rejected Telegram authorization from paused accounts and network
+    failures. Account counters filter the list; <strong>Sign in again</strong> returns to the
+    existing workspace without discarding its journal, sources or signing key.
+    This state follows actual authorization checks; simply opening the panel does
+    not probe every saved session.</p>
+</li>
+<li>
+<p>Made large account-export progress and HTML preparation use linear task/page
     scans. Interrupted ZIP writes leave no downloadable partial archive; regression
-    checks resume from byte-identical signed receipts and retain coverage gaps.</li>
+    checks resume from byte-identical signed receipts and retain coverage gaps.</p>
+</li>
 <li>Strengthened disclosure masking for Unicode names, alternate usernames,
     direct-chat names and whole-token sender IDs, including the public purpose.
     Unknown senders no longer receive a shared identity alias. Exceeding the masking

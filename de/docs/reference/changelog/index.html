@@ -34,9 +34,30 @@
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Durchsuchen Sie die Dokumentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Versuchen Sie es mit „Proxy“, „Hash-Kette“, „Token“ oder „Witness“ …" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Klare Suche" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Geben Sie ein Wort ein, um die Anleitungen und das Nachschlagewerk zu durchsuchen. Die Suche erfolgt in Ihrem Browser.</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="language-notice">Diese Seite ist nur auf Englisch verfügbar.</p><p class="eyebrow">Referenz / Sicherheit &amp; Projekt</p><h1>Änderungsprotokoll</h1><p class="guide-outcome">Alle Änderungen pro Version, einschließlich der noch nicht veröffentlichten Änderungen.</p><div class="wiki-body" lang=en dir=ltr><h2 id="unreleased">Unreleased<a class="anchor" href="#unreleased" aria-label="Link zu diesem Abschnitt">#</a></h2>
 <ul>
-<li>Made large account-export progress and HTML preparation use linear task/page
+<li>Added <strong>Start here</strong> with separate personal-export and investigation journeys.
+    Account snapshots and saved observations now have distinct export controls;
+    secondary formats, account metadata and connection options are progressively
+    disclosed. Navigation preserves drafts and never starts collection implicitly.</li>
+<li>Replaced disclosure JSON previews with readable transformed-message cards,
+    exact included-record counts and explicit sample limits. Original archives
+    remain separate from sharing copies, and privacy warnings remain visible.</li>
+<li>Added printable offline reports for account exports and sharing copies, with
+    scope, coverage, readable messages and verification instructions. Choose the
+    report language separately from the panel; original message text stays intact.
+    New labels use explicit English fallbacks where translations are unavailable.
+    Existing signed jobs and already published archives retain their original bytes.</li>
+<li>
+<p>Distinguished rejected Telegram authorization from paused accounts and network
+    failures. Account counters filter the list; <strong>Sign in again</strong> returns to the
+    existing workspace without discarding its journal, sources or signing key.
+    This state follows actual authorization checks; simply opening the panel does
+    not probe every saved session.</p>
+</li>
+<li>
+<p>Made large account-export progress and HTML preparation use linear task/page
     scans. Interrupted ZIP writes leave no downloadable partial archive; regression
-    checks resume from byte-identical signed receipts and retain coverage gaps.</li>
+    checks resume from byte-identical signed receipts and retain coverage gaps.</p>
+</li>
 <li>Strengthened disclosure masking for Unicode names, alternate usernames,
     direct-chat names and whole-token sender IDs, including the public purpose.
     Unknown senders no longer receive a shared identity alias. Exceeding the masking
