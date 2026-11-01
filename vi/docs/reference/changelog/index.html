@@ -30,12 +30,31 @@
 <aside class="sidebar"><nav aria-label="Hướng dẫn"><a href="../../../guides/modes.html">Các chế độ, kịch bản và mức độ bằng chứng</a><p class="nav-label">Các bước đầu tiên</p><a href="../../start/">Bắt đầu chỉ trong vài phút</a><a href="../../dedicated-account/">Tài khoản chuyên dụng</a><a href="../../accounts/">Kết nối tài khoản</a><a href="../../proxies/">Chọn một máy chủ proxy</a><a href="../../exports/">Xuất và xác minh</a><a href="../../capture/">Ghi lại các hành động trên GitHub Actions</a><p class="nav-label">Hiểu rõ về bằng chứng</p><a href="../../concepts/">Tìm hiểu cách thức hoạt động của bằng chứng</a><a href="../../cases/">Điều tra trên tất cả các cuộc trò chuyện</a><a href="../../security/">Hãy đảm bảo tính bảo mật</a><p class="nav-label">Tìm hiểu thêm</p><a href="../../archive/">Quản lý kho lưu trữ</a><a href="../../access/">Chia sẻ một trường hợp</a><a href="../../witness/">Thiết lập bot chứng cứ</a><a href="../../server/">Hãy duy trì hoạt động của nó</a><a href="../../troubleshooting/">Tìm hiểu nguyên nhân sự cố</a></nav><nav class="wiki-nav" aria-label="Tham khảo"><p class="nav-label"><a class="nav-label-link" href="../">Tham khảo</a></p><details class="wiki-group"><summary>Thiết lập</summary><a href="../quickstart/">Hướng dẫn bắt đầu nhanh</a><a href="../accounts/">Các định dạng tài khoản và phiên làm việc</a><a href="../access/">Quyền truy cập và quyền hạn</a><a href="../connection/">Kết nối, máy chủ trung gian và bảo vệ dữ liệu</a><a href="../deployment/">Triển khai</a></details><details class="wiki-group"><summary>Thu thập</summary><a href="../collection/">Cách thức thu thập dữ liệu</a><a href="../history/">Tải lịch sử nguồn</a><a href="../operations/">Quy trình làm việc và hoạt động</a><a href="../investigation/">Chế độ điều tra</a><a href="../features/">Các tính năng và giới hạn</a></details><details class="wiki-group"><summary>Lưu trữ & tích hợp</summary><a href="../analysis/">Phân tích kho lưu trữ</a><a href="../mcp/">MCP chỉ đọc</a><a href="../media-analysis/">Nhận dạng ký tự quang học (OCR) và chuyển đổi văn bản tại địa phương</a><a href="../webhooks/">Webhook đi</a></details><details class="wiki-group"><summary>Bằng chứng</summary><a href="../how-it-works/">Cách thức hoạt động của bằng chứng</a><a href="../evidence/">Định dạng bằng chứng</a><a href="../witness/">Nhân chứng độc lập</a><a href="../timestamp/">Dấu thời gian</a></details><details class="wiki-group" open><summary>An ninh & dự án</summary><a href="../security/">An ninh và xử lý dữ liệu</a><a href="../architecture/">Kiến trúc</a><a href="../verification/">Những nội dung đã được kiểm thử</a><a href="../license/">Thông báo về sự không tương thích giữa giấy phép và kiến trúc</a><a href="../notice/">Thông báo về sự không tương thích giữa các nhà cung cấp dịch vụ</a><a href="./" aria-current="page">Bản ghi thay đổi</a></details></nav><p class="sidebar-note">v0.7.0<br>Mã nguồn mở · Chạy trên máy tính của quý vị</p></aside>
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="Hướng dẫn"><a href="../../../">Trang chủ</a> <span aria-hidden="true">/</span> <a href="../../">Tài liệu hướng dẫn</a> <span aria-hidden="true">/</span> <a href="../">Tham khảo</a> <span aria-hidden="true">/</span> <span aria-current="page">Bản ghi thay đổi</span></nav>
+<p class="verification-shortcut"><a href="../verification/">Những nội dung đã được kiểm thử →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Tìm kiếm trong tài liệu</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Hãy thử các thuật ngữ như proxy, chuỗi băm, token hoặc witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Tìm kiếm rõ ràng" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Hãy nhập một từ khóa để tìm kiếm trong các hướng dẫn và tài liệu tham khảo. Kết quả tìm kiếm sẽ được lưu lại trong trình duyệt của quý vị.</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="language-notice">Trang này chỉ có sẵn bằng tiếng Anh.</p><p class="eyebrow">Tham khảo / An ninh &amp; dự án</p><h1>Bản ghi thay đổi</h1><p class="guide-outcome">Mọi thay đổi theo từng phiên bản, bao gồm cả những thay đổi chưa được phát hành.</p><div class="wiki-body" lang=en dir=ltr><h2 id="unreleased">Unreleased<a class="anchor" href="#unreleased" aria-label="Liên kết đến phần này">#</a></h2>
 <ul>
-<li>Kept English as the canonical interface, documentation and demo language, with
+<li>Made large account-export progress and HTML preparation use linear task/page
+    scans. Interrupted ZIP writes leave no downloadable partial archive; regression
+    checks resume from byte-identical signed receipts and retain coverage gaps.</li>
+<li>Strengthened disclosure masking for Unicode names, alternate usernames,
+    direct-chat names and whole-token sender IDs, including the public purpose.
+    Unknown senders no longer receive a shared identity alias. Exceeding the masking
+    limit now stops preparation rather than silently skipping identities.</li>
+<li>Bound transcription by actual decoded audio samples, decode only once, and
+    reject playlist formats and secondary file/URL references inside the isolated
+    media worker. Native decoder checks cover generated common Telegram formats
+    and malformed input without downloading a transcription model.</li>
+<li>
+<p>Made source ZIP metadata repeatable and preserved the previous archive when
+    a new build fails before publication. Input bytes, including signed demo files,
+    remain unchanged; reproducibility requires matching inputs and compression tools.</p>
+</li>
+<li>
+<p>Kept English as the canonical interface, documentation and demo language, with
     explicit fallback and browser checks. Capture now falls back to its English
-    source when a translation is missing. Other languages remain translations.</li>
+    source when a translation is missing. Other languages remain translations.</p>
+</li>
 <li>Hardened Capture language selection and encoded its HTML/URL output, pinned
     release actions, and documented the dated security scan results, including
     unresolved Debian package findings in the container images.</li>

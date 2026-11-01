@@ -30,8 +30,113 @@
 <aside class="sidebar"><nav aria-label="Guides"><a href="../../../guides/modes.html">Modes, scenarios and evidence levels</a><p class="nav-label">First steps</p><a href="../../start/">Start in minutes</a><a href="../../dedicated-account/">Dedicated account</a><a href="../../accounts/">Connect an account</a><a href="../../proxies/">Choose a proxy</a><a href="../../exports/">Export and verify</a><a href="../../capture/">GitHub Actions capture</a><p class="nav-label">Understand the evidence</p><a href="../../concepts/">See how evidence works</a><a href="../../cases/">Investigate across all chats</a><a href="../../security/">Keep it secure</a><p class="nav-label">Go further</p><a href="../../archive/">Work the archive</a><a href="../../access/">Share a case</a><a href="../../witness/">Set up a witness bot</a><a href="../../server/">Keep it running</a><a href="../../troubleshooting/">Find what went wrong</a></nav><nav class="wiki-nav" aria-label="Reference"><p class="nav-label"><a class="nav-label-link" href="../">Reference</a></p><details class="wiki-group"><summary>Set up</summary><a href="../quickstart/">Quick start</a><a href="../accounts/">Accounts and session formats</a><a href="../access/">Access and permissions</a><a href="../connection/">Connection, proxies and data protection</a><a href="../deployment/">Deployment</a></details><details class="wiki-group"><summary>Collect</summary><a href="../collection/">How collection works</a><a href="../history/">Load source history</a><a href="../operations/">Workflows and operations</a><a href="../investigation/">Investigation mode</a><a href="../features/">Features and limits</a></details><details class="wiki-group"><summary>Archive & integrations</summary><a href="../analysis/">Archive analysis</a><a href="../mcp/">Read-only MCP</a><a href="../media-analysis/">Local OCR and transcription</a><a href="../webhooks/">Outgoing webhooks</a></details><details class="wiki-group"><summary>Evidence</summary><a href="../how-it-works/">How the evidence works</a><a href="../evidence/">Evidence format</a><a href="../witness/">Independent witness</a><a href="../timestamp/">Timestamps</a></details><details class="wiki-group" open><summary>Security & project</summary><a href="../security/">Security and data handling</a><a href="../architecture/">Architecture</a><a href="./" aria-current="page">What has been tested</a><a href="../license/">Licence and architectural incompatibility notice</a><a href="../notice/">Operator incompatibility notice</a><a href="../changelog/">Changelog</a></details></nav><p class="sidebar-note">v0.7.0<br>Open source · Runs on your machine</p></aside>
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="Guides"><a href="../../../">Home</a> <span aria-hidden="true">/</span> <a href="../../">Documentation</a> <span aria-hidden="true">/</span> <a href="../">Reference</a> <span aria-hidden="true">/</span> <span aria-current="page">What has been tested</span></nav>
+<p class="verification-shortcut"><a href="./">What has been tested →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Search the documentation</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Try proxy, hash chain, token or witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Clear search" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Type a word to search the guides and the reference. Search stays in your browser.</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">Reference / Security &amp; project</p><h1>What has been tested</h1><p class="guide-outcome">The live Telegram test, automated checks, browser checks and what remains unverified.</p><div class="wiki-body"><h2 id="live-telegram-test-whole-account--29-october-2026">Live Telegram test, whole account · 29 October 2026<a class="anchor" href="#live-telegram-test-whole-account--29-october-2026" aria-label="Link to this section">#</a></h2>
+<article class="guide-content"><p class="eyebrow">Reference / Security &amp; project</p><h1>What has been tested</h1><p class="guide-outcome">The live Telegram test, automated checks, browser checks and what remains unverified.</p><div class="wiki-body"><h2 id="live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026<a class="anchor" href="#live-server-journal-inventory--1-november-2026" aria-label="Link to this section">#</a></h2>
+<p>At approximately 19:15 UTC, sequential read-only SQLite <code>query_only</code> queries counted
+events in ten workspace databases on a running server. Collection continued during
+the queries, so this is not an atomic snapshot across workspaces.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Observed across the ten workspace databases</th>
+<th style="text-align: right;">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Workspaces with at least one <code>message.new</code> event</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr>
+<td>Journal records, including operational events</td>
+<td style="text-align: right;">1,610,818</td>
+</tr>
+<tr>
+<td><code>message.new</code> events</td>
+<td style="text-align: right;">900,232</td>
+</tr>
+<tr>
+<td><code>message.edited</code> events</td>
+<td style="text-align: right;">80,683</td>
+</tr>
+<tr>
+<td><code>message.deleted</code> events</td>
+<td style="text-align: right;">400,536</td>
+</tr>
+<tr>
+<td><code>message.recovered</code> events</td>
+<td style="text-align: right;">53,403</td>
+</tr>
+<tr>
+<td><code>message.snapshot</code> events</td>
+<td style="text-align: right;">2,183</td>
+</tr>
+<tr>
+<td><code>media.saved</code> events</td>
+<td style="text-align: right;">50,418</td>
+</tr>
+<tr>
+<td><code>media.failed</code> events</td>
+<td style="text-align: right;">5,575</td>
+</tr>
+<tr>
+<td><code>coverage.gap</code> events</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr>
+<td>Database bytes, excluding WAL files and media</td>
+<td style="text-align: right;">7,909,003,264</td>
+</tr>
+</tbody>
+</table></div>
+<p>These are <strong>event counts</strong>, not unique messages, people or media files. The same
+message can appear in more than one workspace, and an edit or deletion can produce
+another journal event. <code>media.failed</code> counts historical failure events, not the
+current media queue. The queries did <strong>not</strong> newly verify signatures and the full
+hash chain of all 1,610,818 records, measure delivery or throughput, or establish
+that every Telegram event was captured. No message content, account or chat IDs,
+workspace labels, credentials or private files are published here.</p>
+<p>At this review, the separately configured public monitor covered three sources:
+one capture response was OK and two reported <code>no_response</code>. That monitor is
+not a ten-workspace health summary. <code>no_response</code> means the observer could not
+obtain a response at that check; it does not establish message loss. The smaller
+29 October test below has its own explicit signature and hash-chain verification.</p>
+<h2 id="recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026<a class="anchor" href="#recent-offline-and-fault-injection-checks--1-november-2026" aria-label="Link to this section">#</a></h2>
+<p>These checks use fictional data and local files; they add regression evidence for
+the current source, not another live Telegram delivery measurement:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Check</th>
+<th>What it exercised</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/check_source_archive.py">Source archive</a></td>
+<td>Two builds with identical source bytes but changed file times produced the same ZIP and checksum. Exact archived bytes and file hashes matched; private test files stayed out. A simulated write failure left the previous archive and checksum intact.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/check_account_export_recovery.py">Account export recovery</a></td>
+<td>A simulated disk error on the second ZIP member left no published or partial ZIP. Resume kept every signed receipt byte-identical, produced an independently verifiable archive using the expected signing fingerprint, and retained the synthetic coverage gap as a partial result. Scale assertions guard against repeated task and receipt scans as histories grow.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/check_disclosure_privacy.py">Minimized disclosure privacy</a></td>
+<td>Synthetic Unicode names and aliases, nested metadata, unknown senders and media fields were checked in all three identity modes and with text omission. A masking-limit failure did not silently weaken redaction; the original signed account export stayed unchanged.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/check_media_worker.py">Linux media decoder and OCR</a></td>
+<td>A <a href="https://github.com/phishdestroy/TgWitness/actions/runs/41341200341/job/124951395192">Linux Docker CI check</a> at commit <code>5a9e0814</code> passed generated Ogg/Opus, MP3, M4A, MP4 with video, WAV and FLAC inputs; forged-duration and secondary-file-reference controls; and 48 mutated parser fixtures (34 rejected, 14 decoded within bounds). Real Tesseract OCR ran with original bytes unchanged. The decoder and OCR ran in network-isolated containers without a Whisper model.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The checks run in the <a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/pr-check.yml">pull-request</a> and
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/checks.yml">full Checks</a> workflows.
+They test these failure boundaries, not every possible storage failure or whether
+a disclosure is automatically safe to publish. The media check does not measure
+speech recognition accuracy or Telegram delivery. Review each derivative before sharing.</p>
+<h2 id="live-telegram-test-whole-account--29-october-2026">Live Telegram test, whole account · 29 October 2026<a class="anchor" href="#live-telegram-test-whole-account--29-october-2026" aria-label="Link to this section">#</a></h2>
 <p>The same account kept running after the test below. On 29 October at 12:10 UTC its scope
 was switched to the whole account (channels, groups, private chats and bots); the panel asked
 for confirmation and the signed journal recorded it. By 17:59 UTC the journal held:</p>
@@ -835,7 +940,7 @@ engine indexing. See <a href="https://github.com/phishdestroy/TgWitness/blob/mai
 <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/SEO.md">the website metadata notes</a>.</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/VERIFICATION.md">Edit this page on GitHub ↗</a><a class="next-guide" href="../changelog/"><span>Next step</span><strong>Changelog →</strong></a><p>These guides describe the current implementation. Validation results and remaining gaps are documented separately. <a href="./">What has been tested →</a></p></footer>
 </main>
-<aside class="toc" aria-label="On this page"><p class="nav-label">On this page</p><a href="#live-telegram-test-whole-account--29-october-2026">Live Telegram test, whole account · 29 October 2026</a><a href="#password-protected-export-opened-with-libarchive--29-october-2026">Password-protected export opened with libarchive · 29 October 2026</a><a href="#live-telegram-test--27-to-29-october-2026">Live Telegram test · 27 to 29 October 2026</a><a href="#built-in-public-mtproxy-lists--29-october-2026">Built-in public MTProxy lists · 29 October 2026</a><a href="#optional-extras-presentation--29-october-2026">Optional extras presentation · 29 October 2026</a><a href="#witness-bot-and-proxy-setup-audit--29-october-2026">Witness bot and proxy setup audit · 29 October 2026</a><a href="#presentation-and-documentation-review--29-october-2026">Presentation and documentation review · 29 October 2026</a><a href="#version-061">Version 0.6.1</a><a href="#version-060">Version 0.6.0</a><a href="#version-051">Version 0.5.1</a><a href="#version-050">Version 0.5.0</a><a href="#version-040">Version 0.4.0</a><a href="#version-031-focused-readiness-fixes">Version 0.3.1 focused readiness fixes</a><a href="#version-030">Version 0.3.0</a><a href="#version-020-baseline">Version 0.2.0 baseline</a><a href="#synthetic-local-capacity-measurement">Synthetic local capacity measurement</a><a href="#environmental-observations">Environmental observations</a><a href="#remaining-qualification">Remaining qualification</a><a href="#public-website-and-publication-preparation--27-october-2026">Public website and publication preparation · 27 October 2026</a><a href="#interactive-documentation-and-website-metadata--29-october-2026">Interactive documentation and website metadata · 29 October 2026</a></aside>
+<aside class="toc" aria-label="On this page"><p class="nav-label">On this page</p><a href="#live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026</a><a href="#recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026</a><a href="#live-telegram-test-whole-account--29-october-2026">Live Telegram test, whole account · 29 October 2026</a><a href="#password-protected-export-opened-with-libarchive--29-october-2026">Password-protected export opened with libarchive · 29 October 2026</a><a href="#live-telegram-test--27-to-29-october-2026">Live Telegram test · 27 to 29 October 2026</a><a href="#built-in-public-mtproxy-lists--29-october-2026">Built-in public MTProxy lists · 29 October 2026</a><a href="#optional-extras-presentation--29-october-2026">Optional extras presentation · 29 October 2026</a><a href="#witness-bot-and-proxy-setup-audit--29-october-2026">Witness bot and proxy setup audit · 29 October 2026</a><a href="#presentation-and-documentation-review--29-october-2026">Presentation and documentation review · 29 October 2026</a><a href="#version-061">Version 0.6.1</a><a href="#version-060">Version 0.6.0</a><a href="#version-051">Version 0.5.1</a><a href="#version-050">Version 0.5.0</a><a href="#version-040">Version 0.4.0</a><a href="#version-031-focused-readiness-fixes">Version 0.3.1 focused readiness fixes</a><a href="#version-030">Version 0.3.0</a><a href="#version-020-baseline">Version 0.2.0 baseline</a><a href="#synthetic-local-capacity-measurement">Synthetic local capacity measurement</a><a href="#environmental-observations">Environmental observations</a><a href="#remaining-qualification">Remaining qualification</a><a href="#public-website-and-publication-preparation--27-october-2026">Public website and publication preparation · 27 October 2026</a><a href="#interactive-documentation-and-website-metadata--29-october-2026">Interactive documentation and website metadata · 29 October 2026</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Open source · Runs on your machine</span><a href="../../../LICENSE">MIT license</a><a href="../notice/">Operator notice</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Security</a></footer>
 <script id="site-dict" type="application/json">{}</script>

@@ -30,12 +30,31 @@
 <aside class="sidebar"><nav aria-label="Panduan"><a href="../../../guides/modes.html">Mode, skenario, dan tingkat bukti</a><p class="nav-label">Langkah-langkah awal</p><a href="../../start/">Mulai dalam hitungan menit</a><a href="../../dedicated-account/">Akun khusus</a><a href="../../accounts/">Hubungkan akun</a><a href="../../proxies/">Pilih proxy</a><a href="../../exports/">Ekspor dan verifikasi</a><a href="../../capture/">Penangkapan GitHub Actions</a><p class="nav-label">Memahami bukti</p><a href="../../concepts/">Lihat cara kerja bukti ini</a><a href="../../cases/">Selidiki seluruh obrolan</a><a href="../../security/">Jaga keamanannya</a><p class="nav-label">Pelajari lebih lanjut</p><a href="../../archive/">Mengelola arsip</a><a href="../../access/">Bagikan sebuah kasus</a><a href="../../witness/">Siapkan bot saksi</a><a href="../../server/">Jaga agar tetap berjalan</a><a href="../../troubleshooting/">Temukan apa yang salah</a></nav><nav class="wiki-nav" aria-label="Referensi"><p class="nav-label"><a class="nav-label-link" href="../">Referensi</a></p><details class="wiki-group"><summary>Pengaturan</summary><a href="../quickstart/">Panduan cepat</a><a href="../accounts/">Format akun dan sesi</a><a href="../access/">Akses dan izin</a><a href="../connection/">Koneksi, proxy, dan perlindungan data</a><a href="../deployment/">Penerapan</a></details><details class="wiki-group"><summary>Kumpulkan</summary><a href="../collection/">Cara kerja pengumpulan data</a><a href="../history/">Muat riwayat sumber</a><a href="../operations/">Alur kerja dan operasi</a><a href="../investigation/">Mode penyelidikan</a><a href="../features/">Fitur dan batasan</a></details><details class="wiki-group"><summary>Arsip & integrasi</summary><a href="../analysis/">Analisis arsip</a><a href="../mcp/">MCP hanya baca</a><a href="../media-analysis/">OCR dan transkripsi lokal</a><a href="../webhooks/">Webhook keluar</a></details><details class="wiki-group"><summary>Bukti</summary><a href="../how-it-works/">Cara kerja bukti tersebut</a><a href="../evidence/">Format bukti</a><a href="../witness/">Saksi independen</a><a href="../timestamp/">Cap waktu</a></details><details class="wiki-group" open><summary>Keamanan & proyek</summary><a href="../security/">Keamanan dan penanganan data</a><a href="../architecture/">Arsitektur</a><a href="../verification/">Apa yang telah diuji</a><a href="../license/">Pemberitahuan mengenai lisensi dan ketidakcocokan arsitektur</a><a href="../notice/">Pemberitahuan ketidakcocokan operator</a><a href="./" aria-current="page">Daftar Perubahan</a></details></nav><p class="sidebar-note">v0.7.0<br>Sumber terbuka · Dapat dijalankan di komputer Anda</p></aside>
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="Panduan"><a href="../../../">Beranda</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentasi</a> <span aria-hidden="true">/</span> <a href="../">Referensi</a> <span aria-hidden="true">/</span> <span aria-current="page">Daftar Perubahan</span></nav>
+<p class="verification-shortcut"><a href="../verification/">Apa yang telah diuji →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Cari di dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Coba gunakan proxy, rantai hash, token, atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Pencarian yang jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Ketik kata kunci untuk mencari panduan dan referensi. Hasil pencarian tetap tersimpan di browser Anda.</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="language-notice">Halaman ini hanya tersedia dalam bahasa Inggris.</p><p class="eyebrow">Referensi / Keamanan &amp; proyek</p><h1>Daftar Perubahan</h1><p class="guide-outcome">Setiap perubahan per versi, termasuk perubahan yang belum dirilis.</p><div class="wiki-body" lang=en dir=ltr><h2 id="unreleased">Unreleased<a class="anchor" href="#unreleased" aria-label="Tautan ke bagian ini">#</a></h2>
 <ul>
-<li>Kept English as the canonical interface, documentation and demo language, with
+<li>Made large account-export progress and HTML preparation use linear task/page
+    scans. Interrupted ZIP writes leave no downloadable partial archive; regression
+    checks resume from byte-identical signed receipts and retain coverage gaps.</li>
+<li>Strengthened disclosure masking for Unicode names, alternate usernames,
+    direct-chat names and whole-token sender IDs, including the public purpose.
+    Unknown senders no longer receive a shared identity alias. Exceeding the masking
+    limit now stops preparation rather than silently skipping identities.</li>
+<li>Bound transcription by actual decoded audio samples, decode only once, and
+    reject playlist formats and secondary file/URL references inside the isolated
+    media worker. Native decoder checks cover generated common Telegram formats
+    and malformed input without downloading a transcription model.</li>
+<li>
+<p>Made source ZIP metadata repeatable and preserved the previous archive when
+    a new build fails before publication. Input bytes, including signed demo files,
+    remain unchanged; reproducibility requires matching inputs and compression tools.</p>
+</li>
+<li>
+<p>Kept English as the canonical interface, documentation and demo language, with
     explicit fallback and browser checks. Capture now falls back to its English
-    source when a translation is missing. Other languages remain translations.</li>
+    source when a translation is missing. Other languages remain translations.</p>
+</li>
 <li>Hardened Capture language selection and encoded its HTML/URL output, pinned
     release actions, and documented the dated security scan results, including
     unresolved Debian package findings in the container images.</li>

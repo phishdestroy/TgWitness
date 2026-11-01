@@ -30,12 +30,31 @@
 <aside class="sidebar"><nav aria-label="מדריכים"><a href="../../../guides/modes.html">מצבים, תרחישים ורמות ראיות</a><p class="nav-label">צעדים ראשונים</p><a href="../../start/">התחילו תוך דקות ספורות</a><a href="../../dedicated-account/">חשבון ייעודי</a><a href="../../accounts/">חבר חשבון</a><a href="../../proxies/">בחר פרוקסי</a><a href="../../exports/">ייצוא ואימות</a><a href="../../capture/">תיעוד פעולות GitHub</a><p class="nav-label">הבנת הראיות</p><a href="../../concepts/">ראו כיצד הראיות פועלות</a><a href="../../cases/">חקור בכל הצ'אטים</a><a href="../../security/">שמרו על האבטחה</a><p class="nav-label">המשך לקרוא</p><a href="../../archive/">עבוד עם הארכיון</a><a href="../../access/">שתף מקרה</a><a href="../../witness/">הגדרת בוט Witness</a><a href="../../server/">המשך להפעיל את האתר</a><a href="../../troubleshooting/">גלה מה השתבש</a></nav><nav class="wiki-nav" aria-label="הפניה"><p class="nav-label"><a class="nav-label-link" href="../">הפניה</a></p><details class="wiki-group"><summary>הגדרה</summary><a href="../quickstart/">התחלה מהירה</a><a href="../accounts/">חשבונות ופורמטים של הפעלות</a><a href="../access/">גישה והרשאות</a><a href="../connection/">חיבור, פרוקסי והגנה על נתונים</a><a href="../deployment/">פריסה</a></details><details class="wiki-group"><summary>אסף</summary><a href="../collection/">כיצד מתבצע האיסוף</a><a href="../history/">טען היסטוריית המקור</a><a href="../operations/">תהליכי עבודה ותפעול</a><a href="../investigation/">מצב חקירה</a><a href="../features/">תכונות ומגבלות</a></details><details class="wiki-group"><summary>ארכיון ושילובים</summary><a href="../analysis/">ניתוח ארכיונים</a><a href="../mcp/">MCP לקריאה בלבד</a><a href="../media-analysis/">OCR מקומי ותמלול</a><a href="../webhooks/">webhooks יוצאים</a></details><details class="wiki-group"><summary>ראיות</summary><a href="../how-it-works/">כיצד פועלת הראיה</a><a href="../evidence/">פורמט הראיות</a><a href="../witness/">עד עצמאי</a><a href="../timestamp/">חותמות זמן</a></details><details class="wiki-group" open><summary>אבטחה ופרויקט</summary><a href="../security/">אבטחה וטיפול בנתונים</a><a href="../architecture/">ארכיטקטורה</a><a href="../verification/">מה נבדק</a><a href="../license/">הודעה בנושא הרישיון ואי־תאימות ארכיטקטונית</a><a href="../notice/">הודעה על חוסר תאימות למפעיל</a><a href="./" aria-current="page">יומן שינויים</a></details></nav><p class="sidebar-note">v0.7.0<br>קוד פתוח · פועל על המחשב שלכם</p></aside>
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="מדריכים"><a href="../../../">דף הבית</a> <span aria-hidden="true">/</span> <a href="../../">תיעוד</a> <span aria-hidden="true">/</span> <a href="../">הפניה</a> <span aria-hidden="true">/</span> <span aria-current="page">יומן שינויים</span></nav>
+<p class="verification-shortcut"><a href="../verification/">מה נבדק ←</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">חפש בתיעוד</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="נסו להשתמש במונחים כמו &quot;פרוקסי&quot;, &quot;שרשרת האש&quot;, &quot;אסימון&quot; או &quot;עד&quot;..." autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="חיפוש ברור" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">הקלידו מילה כדי לחפש במדריכים ובמאגר המידע. החיפוש נשאר בדפדפן שלכם.</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="language-notice">דף זה זמין באנגלית בלבד.</p><p class="eyebrow">הפניה / אבטחה ופרויקט</p><h1>יומן שינויים</h1><p class="guide-outcome">כל השינויים לפי גרסה, כולל השינויים שטרם שוחררו.</p><div class="wiki-body" lang=en dir=ltr><h2 id="unreleased">Unreleased<a class="anchor" href="#unreleased" aria-label="קישור לסעיף זה">#</a></h2>
 <ul>
-<li>Kept English as the canonical interface, documentation and demo language, with
+<li>Made large account-export progress and HTML preparation use linear task/page
+    scans. Interrupted ZIP writes leave no downloadable partial archive; regression
+    checks resume from byte-identical signed receipts and retain coverage gaps.</li>
+<li>Strengthened disclosure masking for Unicode names, alternate usernames,
+    direct-chat names and whole-token sender IDs, including the public purpose.
+    Unknown senders no longer receive a shared identity alias. Exceeding the masking
+    limit now stops preparation rather than silently skipping identities.</li>
+<li>Bound transcription by actual decoded audio samples, decode only once, and
+    reject playlist formats and secondary file/URL references inside the isolated
+    media worker. Native decoder checks cover generated common Telegram formats
+    and malformed input without downloading a transcription model.</li>
+<li>
+<p>Made source ZIP metadata repeatable and preserved the previous archive when
+    a new build fails before publication. Input bytes, including signed demo files,
+    remain unchanged; reproducibility requires matching inputs and compression tools.</p>
+</li>
+<li>
+<p>Kept English as the canonical interface, documentation and demo language, with
     explicit fallback and browser checks. Capture now falls back to its English
-    source when a translation is missing. Other languages remain translations.</li>
+    source when a translation is missing. Other languages remain translations.</p>
+</li>
 <li>Hardened Capture language selection and encoded its HTML/URL output, pinned
     release actions, and documented the dated security scan results, including
     unresolved Debian package findings in the container images.</li>

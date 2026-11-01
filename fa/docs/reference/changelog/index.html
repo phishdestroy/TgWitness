@@ -30,12 +30,31 @@
 <aside class="sidebar"><nav aria-label="راهنماها"><a href="../../../guides/modes.html">حالت‌ها، سناریوها و سطوح شواهد</a><p class="nav-label">قدم‌های اول</p><a href="../../start/">در چند دقیقه شروع کنید</a><a href="../../dedicated-account/">حساب اختصاصی</a><a href="../../accounts/">اتصال یک حساب</a><a href="../../proxies/">یک پروکسی انتخاب کنید</a><a href="../../exports/">صادرات و تأیید</a><a href="../../capture/">GitHub Actions ضبط می‌کند</a><p class="nav-label">درک شواهد</p><a href="../../concepts/">ببینید مدرک چگونه کار می‌کند</a><a href="../../cases/">تحقیق در تمام چت‌ها</a><a href="../../security/">آن را امن نگه دارید</a><p class="nav-label">پیش‌تر بروید</p><a href="../../archive/">کار با آرشیو</a><a href="../../access/">یک مورد را به اشتراک بگذارید</a><a href="../../witness/">راه‌اندازی یک بات شاهد</a><a href="../../server/">آن را در حال اجرا نگه دارید</a><a href="../../troubleshooting/">مشخص کنید چه چیزی اشتباه پیش رفته است</a></nav><nav class="wiki-nav" aria-label="منبع"><p class="nav-label"><a class="nav-label-link" href="../">منبع</a></p><details class="wiki-group"><summary>راه‌اندازی</summary><a href="../quickstart/">راه‌اندازی سریع</a><a href="../accounts/">فرمت‌های حساب کاربری و جلسه</a><a href="../access/">دسترسی و مجوزها</a><a href="../connection/">اتصال، پروکسی‌ها و حفاظت از داده‌ها</a><a href="../deployment/">راه‌اندازی</a></details><details class="wiki-group"><summary>جمع‌آوری</summary><a href="../collection/">نحوهٔ کارکرد جمع‌آوری</a><a href="../history/">بارگذاری تاریخچه منبع</a><a href="../operations/">روندها و عملیات‌ها</a><a href="../investigation/">حالت تحقیق</a><a href="../features/">ویژگی‌ها و محدودیت‌ها</a></details><details class="wiki-group"><summary>آرشیو و یکپارچه‌سازی‌ها</summary><a href="../analysis/">تحلیل بایگانی</a><a href="../mcp/">MCP فقط-خواندنی</a><a href="../media-analysis/">شناسایی نوری حروف (OCR) و رونویسی محلی</a><a href="../webhooks/">وب‌هوک‌های خروجی</a></details><details class="wiki-group"><summary>شواهد</summary><a href="../how-it-works/">چگونگی کارکرد شواهد</a><a href="../evidence/">فرمت مدرک</a><a href="../witness/">شاهد مستقل</a><a href="../timestamp/">برچسب‌های زمانی</a></details><details class="wiki-group" open><summary>امنیت و پروژه</summary><a href="../security/">امنیت و مدیریت داده‌ها</a><a href="../architecture/">معماری</a><a href="../verification/">آنچه آزمایش شده است</a><a href="../license/">اعلان عدم سازگاری مجوز و معماری</a><a href="../notice/">اعلان عدم سازگاری اپراتور</a><a href="./" aria-current="page">فهرست تغییرات</a></details></nav><p class="sidebar-note">v0.7.0<br>کد باز · روی دستگاه شما اجرا می‌شود</p></aside>
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="راهنماها"><a href="../../../">خانه</a> <span aria-hidden="true">/</span> <a href="../../">مستندسازی</a> <span aria-hidden="true">/</span> <a href="../">منبع</a> <span aria-hidden="true">/</span> <span aria-current="page">فهرست تغییرات</span></nav>
+<p class="verification-shortcut"><a href="../verification/">آنچه آزمایش شده است ←</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">جستجو در مستندات</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="پراکسی، زنجیره هش، توکن یا ویسنس را امتحان کنید…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="جستجوی واضح" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">یک کلمه تایپ کنید تا در راهنماها و مرجع جستجو شود. جستجو در مرورگر شما باقی می‌ماند.</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="language-notice">این صفحه فقط به زبان انگلیسی در دسترس است.</p><p class="eyebrow">منبع / امنیت و پروژه</p><h1>فهرست تغییرات</h1><p class="guide-outcome">هر تغییر در هر نسخه، از جمله تغییراتی که هنوز منتشر نشده‌اند.</p><div class="wiki-body" lang=en dir=ltr><h2 id="unreleased">Unreleased<a class="anchor" href="#unreleased" aria-label="لینک به این بخش">#</a></h2>
 <ul>
-<li>Kept English as the canonical interface, documentation and demo language, with
+<li>Made large account-export progress and HTML preparation use linear task/page
+    scans. Interrupted ZIP writes leave no downloadable partial archive; regression
+    checks resume from byte-identical signed receipts and retain coverage gaps.</li>
+<li>Strengthened disclosure masking for Unicode names, alternate usernames,
+    direct-chat names and whole-token sender IDs, including the public purpose.
+    Unknown senders no longer receive a shared identity alias. Exceeding the masking
+    limit now stops preparation rather than silently skipping identities.</li>
+<li>Bound transcription by actual decoded audio samples, decode only once, and
+    reject playlist formats and secondary file/URL references inside the isolated
+    media worker. Native decoder checks cover generated common Telegram formats
+    and malformed input without downloading a transcription model.</li>
+<li>
+<p>Made source ZIP metadata repeatable and preserved the previous archive when
+    a new build fails before publication. Input bytes, including signed demo files,
+    remain unchanged; reproducibility requires matching inputs and compression tools.</p>
+</li>
+<li>
+<p>Kept English as the canonical interface, documentation and demo language, with
     explicit fallback and browser checks. Capture now falls back to its English
-    source when a translation is missing. Other languages remain translations.</li>
+    source when a translation is missing. Other languages remain translations.</p>
+</li>
 <li>Hardened Capture language selection and encoded its HTML/URL output, pinned
     release actions, and documented the dated security scan results, including
     unresolved Debian package findings in the container images.</li>

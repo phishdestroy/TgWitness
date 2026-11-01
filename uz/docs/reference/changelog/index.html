@@ -30,12 +30,31 @@
 <aside class="sidebar"><nav aria-label="Qo&#x27;llanmalar"><a href="../../../guides/modes.html">Rejimlar, ssenariylar va dalillar darajalari</a><p class="nav-label">Birinchi qadamlar</p><a href="../../start/">Bir necha daqiqada boshlang</a><a href="../../dedicated-account/">Maxsus hisob</a><a href="../../accounts/">Hisobni bog'lang</a><a href="../../proxies/">Proxy tanlang</a><a href="../../exports/">Eksport va tekshirish</a><a href="../../capture/">GitHub Actions yozib oladi</a><p class="nav-label">Dalillarni tushunish</p><a href="../../concepts/">Dalillar qanday ishlashini ko'ring</a><a href="../../cases/">Barcha suhbatlarni tergov qiling</a><a href="../../security/">Xavfsiz saqlang</a><p class="nav-label">Yana ham chuqurroq</p><a href="../../archive/">Arxiv bilan ishlash</a><a href="../../access/">Bir ishni baham ko'ring</a><a href="../../witness/">Witness botini sozlang</a><a href="../../server/">Uni ishlashda davom ettiring</a><a href="../../troubleshooting/">Nima noto'g'ri ketganini aniqlang</a></nav><nav class="wiki-nav" aria-label="Manba"><p class="nav-label"><a class="nav-label-link" href="../">Manba</a></p><details class="wiki-group"><summary>Sozlash</summary><a href="../quickstart/">Tez boshlash</a><a href="../accounts/">Hisoblar va sessiya formatlari</a><a href="../access/">Kirish va ruxsatnomalar</a><a href="../connection/">Ulanish, proksi va ma'lumotlarni himoya qilish</a><a href="../deployment/">Joriy etish</a></details><details class="wiki-group"><summary>Yig'ish</summary><a href="../collection/">Yig'ish qanday ishlaydi</a><a href="../history/">Manba tarixini yuklash</a><a href="../operations/">Ish jarayonlari va operatsiyalar</a><a href="../investigation/">Tergov rejimi</a><a href="../features/">Imkoniyatlar va cheklovlar</a></details><details class="wiki-group"><summary>Arxiv va integratsiyalar</summary><a href="../analysis/">Arxiv tahlili</a><a href="../mcp/">Faqat o'qish uchun MCP</a><a href="../media-analysis/">Mahalliy OCR va transkripsiya</a><a href="../webhooks/">Chiquvchi webhooks</a></details><details class="wiki-group"><summary>Dalil</summary><a href="../how-it-works/">Dalil qanday ishlaydi</a><a href="../evidence/">Dalil formati</a><a href="../witness/">Mustaqil guvoh</a><a href="../timestamp/">Vaqt tamg'alari</a></details><details class="wiki-group" open><summary>Xavfsizlik va loyiha</summary><a href="../security/">Xavfsizlik va ma'lumotlarni boshqarish</a><a href="../architecture/">Arxitektura</a><a href="../verification/">Nima sinovdan o'tkazilgan</a><a href="../license/">Litsenziya va arxitektura nomuvofiqligi to'g'risidagi ogohlantirish</a><a href="../notice/">Operator mos kelmasligi to'g'risida ogohlantirish</a><a href="./" aria-current="page">O'zgarishlar tarixi</a></details></nav><p class="sidebar-note">v0.7.0<br>Ochiq manba · Sizning kompyuteringizda ishlaydi</p></aside>
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="Qo&#x27;llanmalar"><a href="../../../">Bosh sahifa</a> <span aria-hidden="true">/</span> <a href="../../">Dokumentatsiya</a> <span aria-hidden="true">/</span> <a href="../">Manba</a> <span aria-hidden="true">/</span> <span aria-current="page">O&#x27;zgarishlar tarixi</span></nav>
+<p class="verification-shortcut"><a href="../verification/">Nima sinovdan o&#x27;tkazilgan →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Dokumentatsiyani qidiring</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zanjiri, token yoki guvohni sinab ko&#x27;ring…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Aniq qidiruv" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Qo&#x27;llanmalar va ma&#x27;lumotnoma bo&#x27;ylab qidirish uchun so&#x27;z yozing. Qidiruv brauzeringizda saqlanadi.</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="language-notice">Ushbu sahifa faqat ingliz tilida mavjud.</p><p class="eyebrow">Manba / Xavfsizlik va loyiha</p><h1>O&#x27;zgarishlar tarixi</h1><p class="guide-outcome">Har bir versiyadagi barcha o&#x27;zgarishlar, hali e&#x27;lon qilinmagan o&#x27;zgarishlar ham.</p><div class="wiki-body" lang=en dir=ltr><h2 id="unreleased">Unreleased<a class="anchor" href="#unreleased" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
 <ul>
-<li>Kept English as the canonical interface, documentation and demo language, with
+<li>Made large account-export progress and HTML preparation use linear task/page
+    scans. Interrupted ZIP writes leave no downloadable partial archive; regression
+    checks resume from byte-identical signed receipts and retain coverage gaps.</li>
+<li>Strengthened disclosure masking for Unicode names, alternate usernames,
+    direct-chat names and whole-token sender IDs, including the public purpose.
+    Unknown senders no longer receive a shared identity alias. Exceeding the masking
+    limit now stops preparation rather than silently skipping identities.</li>
+<li>Bound transcription by actual decoded audio samples, decode only once, and
+    reject playlist formats and secondary file/URL references inside the isolated
+    media worker. Native decoder checks cover generated common Telegram formats
+    and malformed input without downloading a transcription model.</li>
+<li>
+<p>Made source ZIP metadata repeatable and preserved the previous archive when
+    a new build fails before publication. Input bytes, including signed demo files,
+    remain unchanged; reproducibility requires matching inputs and compression tools.</p>
+</li>
+<li>
+<p>Kept English as the canonical interface, documentation and demo language, with
     explicit fallback and browser checks. Capture now falls back to its English
-    source when a translation is missing. Other languages remain translations.</li>
+    source when a translation is missing. Other languages remain translations.</p>
+</li>
 <li>Hardened Capture language selection and encoded its HTML/URL output, pinned
     release actions, and documented the dated security scan results, including
     unresolved Debian package findings in the container images.</li>

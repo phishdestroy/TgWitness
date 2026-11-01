@@ -30,12 +30,31 @@
 <aside class="sidebar"><nav aria-label="رہنما"><a href="../../../guides/modes.html">مodes، منظرنامے اور شواہد کی سطحیں</a><p class="nav-label">ابتدائی اقدامات</p><a href="../../start/">چند منٹ میں شروع کریں</a><a href="../../dedicated-account/">وقف شدہ اکاؤنٹ</a><a href="../../accounts/">اکاؤنٹ منسلک کریں</a><a href="../../proxies/">ایک پروکسی منتخب کریں</a><a href="../../exports/">ایکسپورٹ اور تصدیق کریں</a><a href="../../capture/">GitHub Actions کی گرفت</a><p class="nav-label">شواہد کو سمجھیں</p><a href="../../concepts/">دیکھیں کہ شواہد کیسے کام کرتا ہے</a><a href="../../cases/">تمام چیٹس میں تفتیش کریں</a><a href="../../security/">اسے محفوظ رکھیں</a><p class="nav-label">مزید آگے بڑھیں</p><a href="../../archive/">آرکائیو پر کام کریں</a><a href="../../access/">ایک کیس شیئر کریں</a><a href="../../witness/">ویٹنس بوٹ قائم کریں</a><a href="../../server/">اسے چلتا رکھیں</a><a href="../../troubleshooting/">پتہ لگائیں کہ کیا غلط ہوا</a></nav><nav class="wiki-nav" aria-label="حوالہ"><p class="nav-label"><a class="nav-label-link" href="../">حوالہ</a></p><details class="wiki-group"><summary>سیٹ اپ</summary><a href="../quickstart/">تیزی سے آغاز</a><a href="../accounts/">اکاؤنٹس اور سیشن فارمیٹس</a><a href="../access/">رسائی اور اجازت نامے</a><a href="../connection/">کنیکشن، پراکسیز اور ڈیٹا کی حفاظت</a><a href="../deployment/">نفاذ</a></details><details class="wiki-group"><summary>جمع کریں</summary><a href="../collection/">جمع کرنے کا طریقہ</a><a href="../history/">ماخذ کی تاریخ لوڈ کریں</a><a href="../operations/">ورک فلو اور آپریشنز</a><a href="../investigation/">تحقیقاتی موڈ</a><a href="../features/">خصوصیات اور حدود</a></details><details class="wiki-group"><summary>آرکائیو اور انضمامات</summary><a href="../analysis/">آرکائیو کا تجزیہ</a><a href="../mcp/">صرف پڑھنے کے لیے MCP</a><a href="../media-analysis/">مقامی OCR اور ٹرانسکرپشن</a><a href="../webhooks/">جاں نکلنے والے ویب ہُکس</a></details><details class="wiki-group"><summary>شواہد</summary><a href="../how-it-works/">شواہد کیسے کام کرتے ہیں</a><a href="../evidence/">شواہد کا فارمیٹ</a><a href="../witness/">آزاد شاہد</a><a href="../timestamp/">ٹائم اسٹیمپس</a></details><details class="wiki-group" open><summary>سیکیورٹی اور پروجیکٹ</summary><a href="../security/">سیکیورٹی اور ڈیٹا ہینڈلنگ</a><a href="../architecture/">معمارِی</a><a href="../verification/">کیا جانچا گیا ہے</a><a href="../license/">لائسنس اور فنِ تعمیر کی عدم مطابقت کا نوٹس</a><a href="../notice/">آپریٹر کی عدم مطابقت کا نوٹس</a><a href="./" aria-current="page">تبدیلیوں کا ریکارڈ</a></details></nav><p class="sidebar-note">v0.7.0<br>اوپن سورس · آپ کی مشین پر چلتا ہے</p></aside>
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="رہنما"><a href="../../../">گھر</a> <span aria-hidden="true">/</span> <a href="../../">دستاویزات</a> <span aria-hidden="true">/</span> <a href="../">حوالہ</a> <span aria-hidden="true">/</span> <span aria-current="page">تبدیلیوں کا ریکارڈ</span></nav>
+<p class="verification-shortcut"><a href="../verification/">کیا جانچا گیا ہے ←</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">دستاویزات میں تلاش کریں</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="پراکسی، ہیش چین، ٹوکن یا ویٹنس آزمائیں…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="خلاصہ تلاش" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">رہنما اور حوالہ جات میں تلاش کرنے کے لیے ایک لفظ ٹائپ کریں۔ تلاش آپ کے براؤزر میں ہی رہتی ہے۔</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="language-notice">یہ صفحہ صرف انگریزی میں دستیاب ہے۔</p><p class="eyebrow">حوالہ / سیکیورٹی اور پروجیکٹ</p><h1>تبدیلیوں کا ریکارڈ</h1><p class="guide-outcome">ہر ورژن میں ہونے والی تبدیلیاں، بشمول وہ تبدیلیاں جو ابھی جاری نہیں ہوئیں۔</p><div class="wiki-body" lang=en dir=ltr><h2 id="unreleased">Unreleased<a class="anchor" href="#unreleased" aria-label="اس حصے کا لنک">#</a></h2>
 <ul>
-<li>Kept English as the canonical interface, documentation and demo language, with
+<li>Made large account-export progress and HTML preparation use linear task/page
+    scans. Interrupted ZIP writes leave no downloadable partial archive; regression
+    checks resume from byte-identical signed receipts and retain coverage gaps.</li>
+<li>Strengthened disclosure masking for Unicode names, alternate usernames,
+    direct-chat names and whole-token sender IDs, including the public purpose.
+    Unknown senders no longer receive a shared identity alias. Exceeding the masking
+    limit now stops preparation rather than silently skipping identities.</li>
+<li>Bound transcription by actual decoded audio samples, decode only once, and
+    reject playlist formats and secondary file/URL references inside the isolated
+    media worker. Native decoder checks cover generated common Telegram formats
+    and malformed input without downloading a transcription model.</li>
+<li>
+<p>Made source ZIP metadata repeatable and preserved the previous archive when
+    a new build fails before publication. Input bytes, including signed demo files,
+    remain unchanged; reproducibility requires matching inputs and compression tools.</p>
+</li>
+<li>
+<p>Kept English as the canonical interface, documentation and demo language, with
     explicit fallback and browser checks. Capture now falls back to its English
-    source when a translation is missing. Other languages remain translations.</li>
+    source when a translation is missing. Other languages remain translations.</p>
+</li>
 <li>Hardened Capture language selection and encoded its HTML/URL output, pinned
     release actions, and documented the dated security scan results, including
     unresolved Debian package findings in the container images.</li>

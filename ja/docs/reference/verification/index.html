@@ -30,8 +30,113 @@
 <aside class="sidebar"><nav aria-label="ガイド"><a href="../../../guides/modes.html">モード、シナリオ、および証拠レベル</a><p class="nav-label">はじめに</p><a href="../../start/">数分で始められます</a><a href="../../dedicated-account/">専用アカウント</a><a href="../../accounts/">アカウントを連携する</a><a href="../../proxies/">プロキシを選択してください</a><a href="../../exports/">エクスポートと検証</a><a href="../../capture/">GitHub Actionsのキャプチャ</a><p class="nav-label">証拠について理解する</p><a href="../../concepts/">証拠の仕組みをご覧ください</a><a href="../../cases/">すべてのチャットを横断的に調査する</a><a href="../../security/">セキュリティを確保してください</a><p class="nav-label">さらに詳しく</p><a href="../../archive/">アーカイブの操作</a><a href="../../access/">事例を共有する</a><a href="../../witness/">Witnessボットの設定</a><a href="../../server/">稼働を継続してください</a><a href="../../troubleshooting/">何が問題だったのかを確認する</a></nav><nav class="wiki-nav" aria-label="参考文献"><p class="nav-label"><a class="nav-label-link" href="../">参考文献</a></p><details class="wiki-group"><summary>セットアップ</summary><a href="../quickstart/">クイックスタート</a><a href="../accounts/">アカウントとセッション形式</a><a href="../access/">アクセスと権限</a><a href="../connection/">接続、プロキシ、およびデータ保護</a><a href="../deployment/">導入</a></details><details class="wiki-group"><summary>収集</summary><a href="../collection/">収集の仕組み</a><a href="../history/">ソース履歴を読み込む</a><a href="../operations/">ワークフローと操作方法</a><a href="../investigation/">調査モード</a><a href="../features/">機能と制限事項</a></details><details class="wiki-group"><summary>アーカイブと連携機能</summary><a href="../analysis/">アーカイブ分析</a><a href="../mcp/">読み取り専用 MCP</a><a href="../media-analysis/">ローカルでのOCRおよび文字起こし</a><a href="../webhooks/">送信されるWebhook</a></details><details class="wiki-group"><summary>証拠</summary><a href="../how-it-works/">証拠の仕組み</a><a href="../evidence/">証拠の形式</a><a href="../witness/">独立した証人</a><a href="../timestamp/">タイムスタンプ</a></details><details class="wiki-group" open><summary>セキュリティとプロジェクト</summary><a href="../security/">セキュリティおよびデータ取り扱い</a><a href="../architecture/">アーキテクチャ</a><a href="./" aria-current="page">テスト済みの内容</a><a href="../license/">ライセンスに関する説明とアーキテクチャ上の非互換性の通知</a><a href="../notice/">オペレーターの非互換性に関する通知</a><a href="../changelog/">変更履歴</a></details></nav><p class="sidebar-note">v0.7.0<br>オープンソース・お使いのマシン上で動作します</p></aside>
 <main id="main" class="docs-main">
 <nav class="breadcrumbs" aria-label="ガイド"><a href="../../../">ホーム</a> <span aria-hidden="true">/</span> <a href="../../">ドキュメント</a> <span aria-hidden="true">/</span> <a href="../">参考文献</a> <span aria-hidden="true">/</span> <span aria-current="page">テスト済みの内容</span></nav>
+<p class="verification-shortcut"><a href="./">テスト済みの内容 →</a></p>
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">ドキュメントを検索する</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="「プロキシ」、「ハッシュチェーン」、「トークン」、または「ウィットネス」などを試してみてください…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="検索を明確にする" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">ガイドやリファレンスを検索するには、単語を入力してください。検索はブラウザ内で行われます。</p><div id="search-results" hidden></div></div>
-<article class="guide-content"><p class="eyebrow">参考文献 / セキュリティとプロジェクト</p><h1>テスト済みの内容</h1><p class="guide-outcome">Telegramのライブテスト、自動チェック、ブラウザチェック、および未検証のまま残っている事項について。</p><div class="wiki-body"><h2 id="live-telegram-test-whole-account--29-october-2026">Telegramのライブテスト、アカウント全体 · 2026年10月29日<a class="anchor" href="#live-telegram-test-whole-account--29-october-2026" aria-label="このセクションへのリンク">#</a></h2>
+<article class="guide-content"><p class="eyebrow">参考文献 / セキュリティとプロジェクト</p><h1>テスト済みの内容</h1><p class="guide-outcome">Telegramのライブテスト、自動チェック、ブラウザチェック、および未検証のまま残っている事項について。</p><div class="wiki-body"><h2 id="live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026<a class="anchor" href="#live-server-journal-inventory--1-november-2026" aria-label="このセクションへのリンク">#</a></h2>
+<p>At approximately 19:15 UTC, sequential read-only SQLite <code>query_only</code> queries counted
+events in ten workspace databases on a running server. Collection continued during
+the queries, so this is not an atomic snapshot across workspaces.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Observed across the ten workspace databases</th>
+<th style="text-align: right;">カウント</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Workspaces with at least one <code>message.new</code> event</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr>
+<td>Journal records, including operational events</td>
+<td style="text-align: right;">1,610,818</td>
+</tr>
+<tr>
+<td><code>message.new</code> events</td>
+<td style="text-align: right;">900,232</td>
+</tr>
+<tr>
+<td><code>message.edited</code> events</td>
+<td style="text-align: right;">80,683</td>
+</tr>
+<tr>
+<td><code>message.deleted</code> events</td>
+<td style="text-align: right;">400,536</td>
+</tr>
+<tr>
+<td><code>message.recovered</code> events</td>
+<td style="text-align: right;">53,403</td>
+</tr>
+<tr>
+<td><code>message.snapshot</code> events</td>
+<td style="text-align: right;">2,183</td>
+</tr>
+<tr>
+<td><code>media.saved</code> events</td>
+<td style="text-align: right;">50,418</td>
+</tr>
+<tr>
+<td><code>media.failed</code> events</td>
+<td style="text-align: right;">5,575</td>
+</tr>
+<tr>
+<td><code>coverage.gap</code> events</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr>
+<td>Database bytes, excluding WAL files and media</td>
+<td style="text-align: right;">7,909,003,264</td>
+</tr>
+</tbody>
+</table></div>
+<p>These are <strong>event counts</strong>, not unique messages, people or media files. The same
+message can appear in more than one workspace, and an edit or deletion can produce
+another journal event. <code>media.failed</code> counts historical failure events, not the
+current media queue. The queries did <strong>not</strong> newly verify signatures and the full
+hash chain of all 1,610,818 records, measure delivery or throughput, or establish
+that every Telegram event was captured. No message content, account or chat IDs,
+workspace labels, credentials or private files are published here.</p>
+<p>At this review, the separately configured public monitor covered three sources:
+one capture response was OK and two reported <code>no_response</code>. That monitor is
+not a ten-workspace health summary. <code>no_response</code> means the observer could not
+obtain a response at that check; it does not establish message loss. The smaller
+29 October test below has its own explicit signature and hash-chain verification.</p>
+<h2 id="recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026<a class="anchor" href="#recent-offline-and-fault-injection-checks--1-november-2026" aria-label="このセクションへのリンク">#</a></h2>
+<p>These checks use fictional data and local files; they add regression evidence for
+the current source, not another live Telegram delivery measurement:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>確認</th>
+<th>What it exercised</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/check_source_archive.py">Source archive</a></td>
+<td>Two builds with identical source bytes but changed file times produced the same ZIP and checksum. Exact archived bytes and file hashes matched; private test files stayed out. A simulated write failure left the previous archive and checksum intact.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/check_account_export_recovery.py">Account export recovery</a></td>
+<td>A simulated disk error on the second ZIP member left no published or partial ZIP. Resume kept every signed receipt byte-identical, produced an independently verifiable archive using the expected signing fingerprint, and retained the synthetic coverage gap as a partial result. Scale assertions guard against repeated task and receipt scans as histories grow.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/check_disclosure_privacy.py">Minimized disclosure privacy</a></td>
+<td>Synthetic Unicode names and aliases, nested metadata, unknown senders and media fields were checked in all three identity modes and with text omission. A masking-limit failure did not silently weaken redaction; the original signed account export stayed unchanged.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/check_media_worker.py">Linux media decoder and OCR</a></td>
+<td>A <a href="https://github.com/phishdestroy/TgWitness/actions/runs/41341200341/job/124951395192">Linux Docker CI check</a> at commit <code>5a9e0814</code> passed generated Ogg/Opus, MP3, M4A, MP4 with video, WAV and FLAC inputs; forged-duration and secondary-file-reference controls; and 48 mutated parser fixtures (34 rejected, 14 decoded within bounds). Real Tesseract OCR ran with original bytes unchanged. The decoder and OCR ran in network-isolated containers without a Whisper model.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The checks run in the <a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/pr-check.yml">pull-request</a> and
+<a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/checks.yml">full Checks</a> workflows.
+They test these failure boundaries, not every possible storage failure or whether
+a disclosure is automatically safe to publish. The media check does not measure
+speech recognition accuracy or Telegram delivery. Review each derivative before sharing.</p>
+<h2 id="live-telegram-test-whole-account--29-october-2026">Telegramのライブテスト、アカウント全体 · 2026年10月29日<a class="anchor" href="#live-telegram-test-whole-account--29-october-2026" aria-label="このセクションへのリンク">#</a></h2>
 <p>以下のテスト後も、同じアカウントは引き続き稼働していました。10月29日 12:10 UTC に、その対象範囲が
 アカウント全体（チャンネル、グループ、プライベートチャット、ボット）に切り替えられました。パネルが
 確認を求めたところ、署名付きジャーナルにその記録が保存されました。17:59 UTC 時点で、ジャーナルには以下の内容が記録されていました：</p>
@@ -837,7 +942,7 @@ docs/assets/ ディレクトリ内の公開用スクリーンショットには�
 <a href="https://github.com/phishdestroy/TgWitness/blob/main/docs/internal/SEO.md">ウェブサイトのメタデータに関する注意事項</a>をご確認ください。</p></div></article>
 <footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/VERIFICATION.md">GitHubでこのページを編集する ↗</a><a class="next-guide" href="../changelog/"><span>次のステップ</span><strong>変更履歴 →</strong></a><p>これらのガイドは、現在の実装について説明しています。検証結果および残された課題については、別途文書化されています。 <a href="./">テスト済みの内容 →</a></p></footer>
 </main>
-<aside class="toc" aria-label="このページについて"><p class="nav-label">このページについて</p><a href="#live-telegram-test-whole-account--29-october-2026">Telegramのライブテスト、アカウント全体 · 2026年10月29日</a><a href="#password-protected-export-opened-with-libarchive--29-october-2026">libarchive を使用して開くパスワード保護されたエクスポートファイル · 2026年10月29日</a><a href="#live-telegram-test--27-to-29-october-2026">Telegram ライブテスト · 2026年10月27日～29日</a><a href="#built-in-public-mtproxy-lists--29-october-2026">組み込みの公開MTProxyリスト · 2026年10月29日</a><a href="#optional-extras-presentation--29-october-2026">オプション機能のプレゼンテーション · 2026年10月29日</a><a href="#witness-bot-and-proxy-setup-audit--29-october-2026">Witnessボットおよびプロキシ設定の監査 · 2026年10月29日</a><a href="#presentation-and-documentation-review--29-october-2026">プレゼンテーションおよびドキュメントのレビュー · 2026年10月29日</a><a href="#version-061">バージョン 0.6.1</a><a href="#version-060">バージョン 0.6.0</a><a href="#version-051">バージョン 0.5.1</a><a href="#version-050">バージョン 0.5.0</a><a href="#version-040">バージョン 0.4.0</a><a href="#version-031-focused-readiness-fixes">バージョン 0.3.1 では、運用準備に関する修正に重点を置きました。</a><a href="#version-030">バージョン 0.3.0</a><a href="#version-020-baseline">バージョン 0.2.0 ベースライン</a><a href="#synthetic-local-capacity-measurement">合成による現地能力測定</a><a href="#environmental-observations">環境に関する観察事項</a><a href="#remaining-qualification">残りの資格要件</a><a href="#public-website-and-publication-preparation--27-october-2026">公開ウェブサイトおよび出版物の準備 · 2026年10月27日</a><a href="#interactive-documentation-and-website-metadata--29-october-2026">インタラクティブなドキュメントおよびウェブサイトのメタデータ · 2026年10月29日</a></aside>
+<aside class="toc" aria-label="このページについて"><p class="nav-label">このページについて</p><a href="#live-server-journal-inventory--1-november-2026">Live server journal inventory · 1 November 2026</a><a href="#recent-offline-and-fault-injection-checks--1-november-2026">Recent offline and fault-injection checks · 1 November 2026</a><a href="#live-telegram-test-whole-account--29-october-2026">Telegramのライブテスト、アカウント全体 · 2026年10月29日</a><a href="#password-protected-export-opened-with-libarchive--29-october-2026">libarchive を使用して開くパスワード保護されたエクスポートファイル · 2026年10月29日</a><a href="#live-telegram-test--27-to-29-october-2026">Telegram ライブテスト · 2026年10月27日～29日</a><a href="#built-in-public-mtproxy-lists--29-october-2026">組み込みの公開MTProxyリスト · 2026年10月29日</a><a href="#optional-extras-presentation--29-october-2026">オプション機能のプレゼンテーション · 2026年10月29日</a><a href="#witness-bot-and-proxy-setup-audit--29-october-2026">Witnessボットおよびプロキシ設定の監査 · 2026年10月29日</a><a href="#presentation-and-documentation-review--29-october-2026">プレゼンテーションおよびドキュメントのレビュー · 2026年10月29日</a><a href="#version-061">バージョン 0.6.1</a><a href="#version-060">バージョン 0.6.0</a><a href="#version-051">バージョン 0.5.1</a><a href="#version-050">バージョン 0.5.0</a><a href="#version-040">バージョン 0.4.0</a><a href="#version-031-focused-readiness-fixes">バージョン 0.3.1 では、運用準備に関する修正に重点を置きました。</a><a href="#version-030">バージョン 0.3.0</a><a href="#version-020-baseline">バージョン 0.2.0 ベースライン</a><a href="#synthetic-local-capacity-measurement">合成による現地能力測定</a><a href="#environmental-observations">環境に関する観察事項</a><a href="#remaining-qualification">残りの資格要件</a><a href="#public-website-and-publication-preparation--27-october-2026">公開ウェブサイトおよび出版物の準備 · 2026年10月27日</a><a href="#interactive-documentation-and-website-metadata--29-october-2026">インタラクティブなドキュメントおよびウェブサイトのメタデータ · 2026年10月29日</a></aside>
 </div>
 <footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>オープンソース・お使いのマシン上で動作します</span><a href="../../../../LICENSE">MITライセンス</a><a href="../notice/">オペレーター向け通知</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">セキュリティ</a></footer>
 <script id="site-dict" type="application/json">{"Waiting for a message": "メッセージをお待ちしています", "Step through a fictional send, edit and delete.": "架空の送信、編集、削除のプロセスを順を追ってご説明します。", "No observations yet. Start the sequence or advance one event.": "まだ観察結果はありません。シーケンスを開始するか、1件先へ進めてください。", "Meet at 10:00": "10:00に集合してください。", "A new message is visible in the chat.": "チャットに新しいメッセージが表示されています。", "Record 1 appended: the collector observed the original message.": "記録1が追加されました：コレクターが元のメッセージを確認しました。", "Meet at 11:00": "11:00にお会いしましょう", "The current text changes. The earlier observation stays.": "現在のテキストは変更されます。以前の指摘はそのまま残ります。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "レコード2が追加されました：この編集は新たな観察結果です。レコード1には依然として元のテキストが保持されています。", "Message deleted": "メッセージが削除されました", "The message has disappeared from the chat view.": "そのメッセージはチャット画面から消えました。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "「Record 3」を追加しました：削除通知は、確認された両方のバージョンとともに保持されます。", "0 records": "0件の記録", "1 record": "1件の記録", "2 records": "2件の記録", "3 records": "3件の記録", "Complete / {n} of 3": "完了 / 3件中{n}件", "Step / {n} of 3": "ステップ / 3のうち{n}", "Pause": "一時停止", "Replay sequence": "再生シーケンス", "Play sequence": "再生順序", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "静的なサンプルが利用可能です。ハッシュをインタラクティブに計算するには、HTTPS経由でこのページを開くか、Web Cryptoをサポートするローカルホストのプレビューを開いてください。", "No record supplied": "記録は提供されていません", "Tail removed": "末尾を削除しました", "≠ saved hash": "≠ 保存されたハッシュ", "Rebuilt · different hash": "再構築済み・ハッシュ値が異なります", "= saved hash": "= 保存されたハッシュ", "Same length and matching head.": "同じ長さで、見出しも一致しています。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "計算された3つのハッシュ値はすべて、保存されているハッシュ値と一致しています。このサンプルは、保持されている3レコード単位の境界と一致しています。", "Same saved head; the journal prefix fails verification.": "保存されたヘッダーは同じですが、ジャーナルのプレフィックスが検証に失敗しました。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "レコード2は、保存されているハッシュと一致しなくなりました。最後に保存されたヘッドのみを確認していた場合、この不一致を見逃してしまいます。検証ツールはすべてのレコードを確認します。", "Head differs from the retained checkpoint.": "ヘッダーは、保持されているチェックポイントとは異なります。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "再構築されたハッシュは相互にリンクしていますが、最終ヘッドが変更されています。保持されているチェックポイントは、この履歴を拒否します。変更されたレコードに対しては、元の署名も検証に失敗します。", "Too short: 2 supplied records \u003c 3 retained records.": "記録数が少なすぎます：提供された記録が2件、保存された記録が3件未満です。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "残りの2つのハッシュは依然として一致しています。保持されているチェックポイントにより、欠落していた末尾部分が明らかになりました。その以前の境界情報がなければ、この短いプレフィックスだけでは欠落に気づくことはできなかったでしょう。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "このブラウザではハッシュ計算をご利用いただけません。以下の数式および説明文は引き続きご覧いただけます。", "{n} records": "{n}件の記録", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "承認済み：カウントが増加し、署名が検証され、鍵が一致しました。Witnessはこの新しい境界を保持します。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "ロールバック：署名付き回答で報告されたレコード数が、最後に承認されたチェックポイントのレコード数よりも少ない場合。Witnessはこの問題を記録し、以前に承認された境界を維持します。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "フォーク：カウントは変わりませんが、ヘッドが異なります。ウィットネスはこの不一致を記録し、以前に承認された境界を維持します。", "No answer": "回答なし", "boundary unknown": "境界不明", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "応答なし：Witnessはチェックの失敗を記録します。コレクターの現在の状態を特定することはできません。Witnessが依然としてBot APIにアクセスでき、かつ公開ポリシーが許可している場合、その失敗を公開することができます。", "Send {n}": "{n} を送信", "Edit {n}": "編集 {n}", "Delete {n}": "{n}を削除", "Both accounts captured all six expected observations in this example.": "この例では、両方のアカウントとも、想定されていた6つの観測項目すべてを捕捉しました。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "アカウントBでも6件中6件を正常に取得できました。2件の受信確認には時間がかかりました。取得率と受信確認の遅延は、それぞれ異なる問題を示しています。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "アカウントBは、締め切り時点までに6件中5件を捕捉しました（83.3％）。捕捉されなかった編集操作については、測定された遅延はありません。この結果は、6件の制御された操作についてのみ記述したものです。", "not observed by cutoff": "締め切りまでに確認されませんでした", "{s} seconds": "{s}秒", "Exact values follow in the table.": "具体的な数値は表に示されています。", "{s} s": "{s} s", "Not observed": "確認されませんでした", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "4つのチャットから、それぞれ異なる観察結果が得られています。すべての接続について、元の記録を追跡してください。送信者が特定されていない限り、チャンネルへの投稿をユーザー71001に割り当てないでください。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "記録#146と#205には、同じ送信者ID「71001」が記載されています。これにより、2つのチャットにまたがるTelegramアカウントの投稿が関連付けられます。ただし、実在の人物を特定したり、チャンネルへの投稿の作者を特定したりするものではありません。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "宛先「pay.example.invalid/new」は、グループ記録#146、ボットキーボード#173、チャンネル編集#188、およびプライベートメッセージ#205に登場します。宛先が繰り返し登場することは、これらの資料を結びつける要素ではありますが、それらのアカウントが共通の管理下にあることを証明するものではありません。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "この架空の事例において、完了済みのメディア受信記録 #151 と #209 は、完全な SHA-256 値が一致しています。実際のバイトデータと、それに関連するメッセージ記録を比較してください。一致したファイルからは、作成者が特定されることも、誰が転送したかを証明することもできません。", "the encrypted off-site copy": "暗号化されたオフサイトコピー", "notifications": "通知", "checkpoint hashes for timestamps": "タイムスタンプ用のチェックポイントハッシュ", "signed checkpoints for the witness": "Witness用の署名付きチェックポイント", "Switched on in this example": "この例では有効になっています", "Optional · off by default": "オプション・デフォルトではオフ", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "このマシンから削除されるもの：Telegramの接続情報と{list}。それ以外は一切ありません。", "Default: only the Telegram connection leaves this machine.": "デフォルト設定：Telegramへの接続のみがこのマシンから行われます。", "{done} of {total} done": "{done}/{total} 完了", "Mark step {n} as done": "ステップ{n}を「完了」としてマークする", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "コピー", "Copied": "コピー", "Command copied.": "コマンドをコピーしました。", "Selected — Ctrl/Cmd+C": "選択 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "コマンドが選択されました。手動でコピーしてください。", "Command copied to clipboard.": "コマンドがクリップボードにコピーされました。", "Select text": "テキストを選択", "Clipboard unavailable. Command selected; copy it manually.": "クリップボードが利用できません。コマンドが選択されています。手動でコピーしてください。", "A message arrives. The first observation is saved.": "メッセージが届きました。最初の記録が保存されました。", "The time changes. Both captured versions stay.": "時刻は変更されますが、キャプチャされた両方のバージョンはそのまま残ります。", "The message disappears. The captured history remains.": "メッセージは消えても、記録された履歴は残ります。", "Pause example animation": "アニメーションの一時停止例", "Play example animation": "サンプルアニメーションを再生する", "Play": "再生", "Full-size workspace screenshot": "ワークスペースのフルサイズスクリーンショット", "Workspace screenshot · fictional data": "ワークスペースのスクリーンショット・架空のデータ", "Close": "閉じる", "Close screenshot": "スクリーンショットを閉じる", "Scrollable full-size screenshot": "スクロール可能なフルサイズのスクリーンショット", "Enlarge: {name}": "拡大：{name}", "View full size": "フルサイズで表示"}</script>
