@@ -12,10 +12,11 @@ is harmless.
 
 Use a recent [GitHub CLI](https://cli.github.com/manual/gh_attestation_verify).
 From a release produced after `provenance.yml` was introduced, download
-`TgWitness-<ver>.zip`, its `.zip.sha256` file, `sbom.spdx.json`, and
-`provenance.sigstore.json`. This ZIP is built with `tools/build_source.py` on
-GitHub-hosted Ubuntu. It has a separate name to avoid the existing release
-workflow's `*-source.zip` upload. Manual runs retain files in the
+`TgWitness-<ver>.zip`, its `.zip.sha256` file, `sbom.spdx.json`,
+`provenance.sigstore.json`, and `sbom.sigstore.json`. This ZIP is created with
+`tools/build_source.py` on GitHub-hosted Ubuntu. It uses a separate filename so
+it cannot replace the `*-source.zip` file uploaded by the existing release
+workflow. Manual runs retain files in the
 `attested-source` Actions artifact; they do not attach release assets.
 
 Choose the release version and the full commit SHA you have independently
@@ -81,10 +82,32 @@ python -m tgwitness.sealed_verify evidence.zip --bundle attestation.jsonl --repo
   runs zizmor on workflow changes and Mondays at 07:00 UTC. Read its
   `workflow-audit-sarif` artifact for injection, permission and pinning findings.
   Code-scanning findings are also uploaded; dashboard access may be restricted.
-- **Dependencies:** `sbom.spdx.json` is a repository inventory, signed as a
-  build output and bound to the ZIP by an SPDX attestation. Authenticate it
-  using the release verification command above with `sbom.spdx.json` as the
-  filename and the same commit/ref constraints, then scan locally:
+- **Dependencies:** `sbom.spdx.json` combines repository components detected by
+  Syft with Python package names and exact versions declared in `deploy/requirements.lock`,
+  `deploy/build.lock`, and `deploy/constraints-mcp.txt`, including the inherited
+  `deploy/constraints.txt`. Runtime and build files also contain distribution hashes;
+  MCP files specify version constraints. The workflow first creates the source
+  ZIP. Then it creates temporary requirements files that Syft can read. It rejects
+  missing Python packages, unexpected Python packages, or versions that differ
+  from the declarations. The original dependency files must match the bytes
+  stored in the ZIP. An SPDX annotation lists input file hashes, dependency
+  groups and platform conditions.
+
+  Verify the signature of this inventory using the release verification command above with
+  `sbom.spdx.json` as the filename and the same commit/ref constraints. Verify
+  its separate SPDX binding to the source ZIP with the saved bundle:
+
+  ```sh
+  gh attestation verify "TgWitness-${VERSION}.zip" \
+    --bundle sbom.sigstore.json \
+    --predicate-type https://spdx.dev/Document/v2.3 \
+    --repo phishdestroy/TgWitness \
+    --signer-workflow phishdestroy/TgWitness/.github/workflows/provenance.yml \
+    --signer-digest "$COMMIT" --source-digest "$COMMIT" \
+    --source-ref "refs/tags/v${VERSION}" --deny-self-hosted-runners
+  ```
+
+  Then run a local vulnerability scan of the verified inventory:
 
   ```sh
   grype sbom:sbom.spdx.json
@@ -100,5 +123,8 @@ python -m tgwitness.sealed_verify evidence.zip --bundle attestation.jsonl --repo
   downloads, legacy `*-source.zip` files or releases without this attestation.
 - Bit-for-bit reproducible rebuilds: the current ZIP builder records timestamps.
   The guarantee concerns the exact published and attested bytes.
-- An exhaustive installed-runtime SBOM or a vulnerability-free result. The SBOM
-  describes what the scanner detects in the source repository.
+- An exhaustive list of installed packages or operating-system/container packages.
+  The Python entries list exact versions specified for the runtime, build tools
+  and optional MCP support across supported platforms. Some listed packages may
+  not be installed on the current host. This process does not resolve additional
+  dependencies or prove that packages are free of vulnerabilities.
