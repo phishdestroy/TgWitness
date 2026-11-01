@@ -44,6 +44,7 @@ included in 0.7.1. [Start with the workflow guide](https://phishdestroy.github.i
 | Investigate across the whole account | [Complete investigation walkthrough](INVESTIGATION.md) | A source register, cited cross-chat timeline, people/file connections and verified evidence per workspace |
 | Choose a connection route | [Proxy settings](CONNECTION-SECURITY.md) | A successful Telegram connection check |
 | Share a verifiable record | [Export and verify](EVIDENCE.md#investigation-handoff) | Valid signatures and the expected key fingerprint |
+| Explain what a capture can establish | [Evidence, capture devices and legal weight](EVIDENCE-TRUST.md) | Clear distinctions between source authenticity, preservation and legal assessment |
 | Publish checkpoints to a channel | [Witness bot](WITNESS.md#run-a-witness) | A signed post from the running witness |
 | Leave it running on a server | [Deployment](DEPLOYMENT.md) | Persistent storage and capture after a restart |
 | Let a third party check the server itself | [High-assurance deployment](HIGH-ASSURANCE.md) | A report from the provider, Cloudflare and the collector |

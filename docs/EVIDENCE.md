@@ -4,6 +4,10 @@ An observation is not a conclusion. A sender ID is not a real-world identity.
 The account-visible service update is the source; Telegram does not cryptographically
 sign these saved records for a third-party investigator.
 
+For the role of the collecting device, comparisons with exports, video and web
+archives, and what verification can establish in a legal assessment, read
+[Evidence, capture devices and legal weight](EVIDENCE-TRUST.md).
+
 ## What is signed
 
 | Material | Protection | What to retain |
