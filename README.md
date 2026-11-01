@@ -25,6 +25,21 @@
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/phishdestroy/TgWitness/badge)](https://securityscorecards.dev/viewer/?uri=github.com/phishdestroy/TgWitness)
 [![Independent verification guide](https://img.shields.io/badge/Independent%20verification%20guide-docs-356a8a)](docs/TRUST.md)
 
+## Observed live scale · 1 November 2026
+
+A read-only inventory across **10 workspace databases** found **8 with new-message events**.
+
+| Recorded event | Count |
+| --- | ---: |
+| Journal records, including operational events | **1,610,818** |
+| New-message events (`message.new`) | **900,232** |
+| Deletion events (`message.deleted`) | **400,536** |
+| Edit events (`message.edited`) | **80,683** |
+
+These are event counts, not unique messages or a throughput benchmark. The sequential
+queries were not an atomic snapshot and did not newly verify all signatures or the
+full journal hash chain. [Read the dated inventory, regression checks and limits](docs/VERIFICATION.md).
+
 <a href="https://phishdestroy.github.io/TgWitness/demo/">
 <picture>
   <source media="(max-width: 640px) and (prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="docs/assets/presentation/readme-workspace-mobile-dark-still.webp">
