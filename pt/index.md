@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pt/
 
-[Código aberto / v0.7.0](https://phishdestroy.github.io/TgWitness/pt/docs/reference/changelog/)
+[Código aberto / v0.7.1](https://phishdestroy.github.io/TgWitness/pt/docs/reference/changelog/)
 
 Capture mensagens do Telegram, preserve suas alterações e exporte um registro assinado.
 
@@ -225,7 +225,7 @@ A execução do código-fonte requer o Python 3.11 ou superior. O instalador do 
 
 [Navegue pelas versões](https://github.com/phishdestroy/TgWitness/releases)
 
-Não possui o Python no Windows? [Baixe o pacote portátil](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.0/TgWitness-0.7.0-windows-amd64-portable.zip), extraia-o e clique duas vezes em “`TgWitness.cmd`”.
+Não possui o Python no Windows? [Baixe o pacote portátil](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip), extraia-o e clique duas vezes em “`TgWitness.cmd`”.
 
 PASSO 02
 
@@ -260,7 +260,7 @@ Acesse [127.0.0.1:8787](http://127.0.0.1:8787) após a inicialização.
 
 Para instalações a partir do código-fonte, o token é `data/live/panel-token.txt`. O login no Telegram pode ser feito usando as configurações da API integrada ou seu próprio par de chaves obtido em [my.telegram.org](https://my.telegram.org). [Guia completo de configuração ↗](https://phishdestroy.github.io/TgWitness/pt/docs/reference/quickstart/)
 
-**TgWitness 0.7.0** [Novidades →](https://phishdestroy.github.io/TgWitness/pt/docs/reference/changelog/) · [Recursos e limitações conhecidas →](https://phishdestroy.github.io/TgWitness/pt/docs/reference/features/)
+**TgWitness 0.7.1** [Novidades →](https://phishdestroy.github.io/TgWitness/pt/docs/reference/changelog/) · [Recursos e limitações conhecidas →](https://phishdestroy.github.io/TgWitness/pt/docs/reference/features/)
 
 ## Instruções claras. Um próximo passo útil.
 
@@ -273,8 +273,6 @@ Para instalações a partir do código-fonte, o token é `data/live/panel-token.
 ## Trabalhe com o arquivo.
 
 Carregar histórico, revisar fontes de IA, conectar um cliente MCP, reconhecer mídias salvas e enviar webhooks assinados.
-
-Disponível na fonte atual. A versão prévia portátil 0.7.0 é anterior a essas ferramentas.
 
 [Explore o fluxo de trabalho](https://phishdestroy.github.io/TgWitness/pt/docs/archive/)
 

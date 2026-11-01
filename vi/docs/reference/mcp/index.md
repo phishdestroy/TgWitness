@@ -26,7 +26,7 @@ Sử dụng môi trường Python chạy bảng điều khiển. Từ bản mã 
 
 Khởi động lại bảng điều khiển với thư mục dữ liệu và các đối số khởi chạy thông thường sau khi cài đặt. Trạng thái sẵn sàng sẽ bao gồm `[PASS] mcp: streamable-http available`. **Integrations → MCP** hiển thị trạng thái thời gian chạy và lệnh cài đặt sử dụng tệp thực thi Python thực tế của máy chủ đó. **Re-check** làm mới trạng thái này mà không cần tải lại trang; thao tác này không cài đặt các gói hoặc khởi động lại máy chủ.
 
-Phần bổ sung MCP sử dụng [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk) chính thức. `deploy/constraints-mcp.txt` cố định phiên bản SDK và các phần phụ thuộc đã được kiểm thử. Các tính năng này yêu cầu mã nguồn hiện tại; bản xem trước di động 0.7.0 ra đời trước các tính năng này.
+Tiện ích MCP extra sử dụng [SDK Python chính thức của MCP](https://github.com/modelcontextprotocol/python-sdk). Tệp`deploy/constraints-mcp.txt` cố định phiên bản SDK và các phụ thuộc đã được kiểm thử.
 
 ## Cấp một kết nối
 

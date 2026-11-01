@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/conne
 
 Otentikasi, kumpulan proxy otomatis, mode IP, kebijakan cadangan, permintaan eksternal, dan penyimpanan rahasia.
 
-Dokumen ini menjelaskan perilaku TgWitness 0.7.0 dan batasannya. Otentikasi, akses sumber, konektivitas jaringan, dan kelengkapan penangkapan merupakan kondisi yang terpisah. Untuk langkah-langkah masuk, format berkas, dan pengelolaan beberapa akun, mulailah dengan [bagian akun dan format sesi](https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/). Untuk kebijakan peristiwa dan perilaku saat dimulai ulang, lihat [cara kerja pengumpulan data](https://phishdestroy.github.io/TgWitness/id/docs/reference/collection/).
+Dokumen ini menjelaskan perilaku TgWitness 0.7.1 dan batasannya. Otentikasi, akses sumber, konektivitas jaringan, dan kelengkapan penangkapan merupakan kondisi yang terpisah. Untuk langkah-langkah masuk, format berkas, dan pengelolaan beberapa akun, mulailah dengan [bagian akun dan format sesi](https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/). Untuk kebijakan peristiwa dan perilaku saat dimulai ulang, lihat [cara kerja pengumpulan data](https://phishdestroy.github.io/TgWitness/id/docs/reference/collection/).
 
 ## Metode otentikasi
 

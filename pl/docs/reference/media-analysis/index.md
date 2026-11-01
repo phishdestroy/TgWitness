@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/media
 
 Rozpoznawanie przechwyconych obrazów i plików audio za pomocą lokalnego modułu roboczego; zachowanie powiązania tekstu wyodrębnionego z plikiem źródłowym.
 
-**Aktualna wersja główna:** należy skorzystać z kopii źródłowej; przenośna wersja zapoznawcza 0.7.0 nie zawiera jeszcze tej funkcji.
-
 [Przewodnik po procesie pracy](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Otwórz wpis w dzienniku `media.saved`, wybierz opcję **„Rozpoznaj załącznik**”, a następnie wybierz „OCR” lub „transkrypcja” w sekcji **„Zapytaj archiwum**”. Przetwarzanie odbywa się ręcznie i lokalnie. Nie ma trybu mediów w chmurze ani automatycznego przesyłania. Oryginalne bajty załącznika i plik `media_sha256` pozostają niezmienione; rozpoznany tekst jest wyraźnie oznaczony jako wynik rozpoznawania maszynowego i przechowywany oddzielnie wraz z skrótem źródłowym, wersją silnika/modelu, językiem, parametrami oraz czasem zakończenia. Transkrypcje zachowują zwrócone znaczniki czasu.

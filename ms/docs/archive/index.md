@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/archive/
 
 Cari mesej. Semak sumber. Bina kes.
 
-Alat-alat ini tersedia dari cawangan utama semasa. Pratonton mudah alih 0.7.0 wujud sebelum mereka; gunakan keluaran sumber untuk aliran kerja ini.
-
 01**Bawa masuk sejarah**
 
 Muatkan mesej terdahulu daripada sumber yang telah diaktifkan ke dalam ruang kerja.

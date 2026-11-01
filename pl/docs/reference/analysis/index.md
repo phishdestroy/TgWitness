@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/analy
 
 Przeszukuj zapisane wiadomości, przeglądaj dane wprowadzone przez sztuczną inteligencję i przechowuj raporty analityczne wraz z odniesieniami do źródeł.
 
-**Aktualna wersja główna:** należy skorzystać z kopii źródłowej; przenośna wersja zapoznawcza 0.7.0 nie zawiera jeszcze tej funkcji.
-
 [Przewodnik po procesie pracy](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Aby wyszukiwać lokalnie bez AI, użyj widoku **Dziennik**. Aby korzystać z funkcji **Zapytaj archiwum**, najpierw włącz i skonfiguruj dostawcę w sekcji **Integracje**. Selektor obszaru roboczego służy do wyboru konta, a formularz do wyboru czatów i okresu obserwacji. Wyszukiwanie fragmentów odbywa się lokalnie. Dokładna fraza lub domena zawęża wyszukiwanie, a identyfikator wiadomości pozwala pobrać zapisane wersje. Przejrzyj fragmenty i otwórz powiązane wpisy w dzienniku lub ich kontekst. Nie jest używana baza danych wektorowa ani nie są wykonywane automatyczne działania w Telegramie.

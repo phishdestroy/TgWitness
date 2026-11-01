@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 將特定範圍的事件傳送至 HTTPS 接收端，並附帶 HMAC 簽名、重試機制及傳送狀態。
 
-**當前主要版本：**請使用原始碼檢出；0.7.0 便攜版預覽版尚未包含此功能。
-
 [工作流程指南](https://phishdestroy.github.io/TgWitness/docs/archive/) · [維基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 在所選工作區中，開啟「**整合」→「外發 webhook」**。 新增一個 HTTPS 接收器，選擇「收集器／媒體／匯出」事件，並可選擇針對 新訊息及變更的聊天室。預設情況下不包含訊息內容。啟用摘要功能 將在訊息變更事件中最多新增 1,000 個字元；Telegram 的原始欄位及 憑證絕不會被傳送。

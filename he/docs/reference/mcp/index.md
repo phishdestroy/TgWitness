@@ -26,7 +26,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/mcp/
 
 הפעילו מחדש את הפאנל עם תיקיית הנתונים הרגילה שלו וארגומנטי ההפעלה לאחר ההתקנה. בדיקת המוכנות אמורה לכלול את `[PASS] mcp: streamable-http available`. **Integrations → MCP** מציג את סטטוס זמן הריצה ופקודת התקנה המשתמשת בקובץ ההרצה של Python בפועל באותו שרת. **Re-check** מרענן את הסטטוס הזה ללא טעינה מחדש של הדף; הוא אינו מתקין חבילות או מפעיל מחדש את השרת.
 
-תוסף ה-MCP משתמש ב-[MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk) הרשמי. הקובץ `deploy/constraints-mcp.txt` מקבע את גרסאות ה-SDK והתלויות שנבדקו. תכונות אלו דורשות קוד מקור עדכני; גרסת התצוגה המקדימה הניידת 0.7.0 קדמה להן.
+התוסף MCP משתמש [ב-SDK הרשמי של MCP ב-Python](https://github.com/modelcontextprotocol/python-sdk).`deploy/constraints-mcp.txt` קובע את גרסת ה-SDK והתלות שנבדקו.
 
 ## הנפקת חיבור
 

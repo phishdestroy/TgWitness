@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/
 
-[Open source / v0.7.0](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/)
+[Open source / v0.7.1](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/)
 
 Keep what
 you saw.
@@ -234,7 +234,7 @@ Source launch needs Python 3.11+. The Windows launcher offers installation if Py
 
 [Browse releases](https://github.com/phishdestroy/TgWitness/releases)
 
-No Python on Windows? [Download the portable package](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.0/TgWitness-0.7.0-windows-amd64-portable.zip), extract it and double-click `TgWitness.cmd`.
+No Python on Windows? [Download the portable package](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip), extract it and double-click `TgWitness.cmd`.
 
 STEP 02
 
@@ -269,7 +269,7 @@ Open [127.0.0.1:8787](http://127.0.0.1:8787) after launch.
 
 For source installs, the token is in `data/live/panel-token.txt`. Telegram sign-in can use the built-in API settings or your own pair from [my.telegram.org](https://my.telegram.org). [Full setup guide ↗](https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/)
 
-**TgWitness 0.7.0** [What’s new →](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/) · [Features and known limits →](https://phishdestroy.github.io/TgWitness/docs/reference/features/)
+**TgWitness 0.7.1** [What’s new →](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/) · [Features and known limits →](https://phishdestroy.github.io/TgWitness/docs/reference/features/)
 
 ## Clear instructions.
 A useful next step.
@@ -283,8 +283,6 @@ A useful next step.
 ## Work the archive.
 
 Load history, review AI sources, connect an MCP client, recognize saved media and send signed webhooks.
-
-Available from current source. The 0.7.0 portable preview predates these tools.
 
 [Explore the workflow](https://phishdestroy.github.io/TgWitness/docs/archive/)
 

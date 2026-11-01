@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/histo
 
 Tải các tin nhắn trước đây từ các nguồn đã được kích hoạt, tạm dừng và tiếp tục, đồng thời xác minh báo cáo tiến độ có chữ ký.
 
-**Phiên bản chính hiện tại:** có sẵn từ mã nguồn; không được bao gồm trong bản xem trước di động 0.7.0.
-
 Trong **phần Nguồn**, xem lại các cuộc trò chuyện đã được kích hoạt, bắt đầu quan sát, sau đó chọn **Tải toàn bộ lịch sử**. Quá trình này sẽ cố định danh sách các nguồn đó và đọc các tin nhắn trong quá khứ có sẵn của chúng vào phần Cuộc trò chuyện và sổ nhật ký quan sát có chữ ký. Tệp đính kèm sử dụng các cài đặt đính kèm hiện có và hàng đợi tải xuống bền vững. Điều này tách biệt với việc xuất JSON/HTML có chữ ký cho từng cuộc trò chuyện.
 
 Để thu thập dữ liệu trên toàn tài khoản, hãy chọn **"Toàn bộ tài khoản"**, bắt đầu theo dõi để tải danh sách nguồn của tài khoản đó, và xem xét danh sách đó trước khi bắt đầu ghi lại lịch sử. Giới hạn danh sách cuộc trò chuyện vẫn áp dụng (mặc định là 1.000, có thể điều chỉnh trong phần "Tham số"). Việc chạy thành công không chứng minh rằng mọi cuộc trò chuyện trong tài khoản đều đã được liệt kê. Các cuộc trò chuyện được phát hiện hoặc kích hoạt sau đó cần phải chạy lại.

@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/conne
 
 Authentification, pools de proxys automatiques, modes IP, politique de repli, requêtes externes et stockage des secrets.
 
-Ce document décrit le fonctionnement de TgWitness 0.7.0 et ses limites. L’authentification, l’accès à la source, la connectivité réseau et l’exhaustivité de la capture constituent des états distincts. Pour connaître les étapes de connexion, les formats de fichiers et la gestion des comptes multiples, commencez par consulter la section « [Comptes et formats de session](https://phishdestroy.github.io/TgWitness/fr/docs/reference/accounts/) ». Pour les règles relatives aux événements et le comportement en cas de redémarrage, consultez [la section « Fonctionnement de la collecte](https://phishdestroy.github.io/TgWitness/fr/docs/reference/collection/) ».
+Ce document décrit le fonctionnement de TgWitness 0.7.1 et ses limites. L’authentification, l’accès à la source, la connectivité réseau et l’exhaustivité de la capture constituent des états distincts. Pour connaître les étapes de connexion, les formats de fichiers et la gestion des comptes multiples, commencez par consulter la section « [Comptes et formats de session](https://phishdestroy.github.io/TgWitness/fr/docs/reference/accounts/) ». Pour les règles relatives aux événements et le comportement en cas de redémarrage, consultez [la section « Fonctionnement de la collecte](https://phishdestroy.github.io/TgWitness/fr/docs/reference/collection/) ».
 
 ## Méthodes d’authentification
 

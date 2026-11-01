@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/webho
 
 HMAC 서명, 재시도 및 전달 상태를 포함하여 지정된 범위의 이벤트를 HTTPS 수신자에게 전송합니다.
 
-**현재 메인 버전:** 소스 체크아웃을 사용하십시오. 0.7.0 휴대용 미리보기 버전은 이 기능이 구현되기 전의 버전입니다.
-
 [워크플로우 가이드](https://phishdestroy.github.io/TgWitness/docs/archive/) · [위키](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 선택한 작업 공간에서 [Open **Integrations] → [Outgoing webhooks]**를 선택합니다. HTTPS 수신자를 추가하고, 수집기/미디어/내보내기 이벤트를 선택한 다음, 선택 사항으로 새로운 관측 및 변경 사항에 대한 채팅을 선택합니다. 메시지 본문은 기본적으로 비활성화되어 있습니다. 발췌문 기능을 활성화하면 메시지 변경 이벤트에 최대 1,000자까지 추가되며, 텔레그램의 원본 필드 및 인증 정보는 절대 전송되지 않습니다.

@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/archive/
 
 尋找訊息。查證來源。建立案情。
 
-這些工具可從當前主分支取得。0.7.0 便攜版預覽版早於這些工具；若要使用此工作流程，請從原始碼檢出。
-
 01**導入歷史紀錄**
 
 將已啟用的來源中的過往訊息載入至工作區。

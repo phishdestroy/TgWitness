@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/histo
 
 Pobieraj poprzednie wiadomości z włączonych źródeł, wstrzymuj i wznawiaj proces oraz weryfikuj podpisany raport z postępów.
 
-**Aktualna wersja główna:** dostępna ze źródła; nie zawarta w przenośnej wersji zapoznawczej 0.7.0.
-
 W sekcji **„Źródła**” przejrzyj włączone czaty, rozpocznij obserwację, a następnie wybierz opcję **„Załaduj pełną historię**”. Operacja ta ustala listę źródeł i wczytuje dostępne wiadomości z przeszłości do sekcji „Czaty” oraz do podpisanego dziennika obserwacji. Pliki multimedialne wykorzystują istniejące ustawienia załączników oraz trwałą kolejkę pobierania. Jest to odrębna funkcja od podpisanego eksportu w formacie JSON/HTML dla poszczególnych czatów.
 
 Aby zebrać dane z całego konta, wybierz **opcję „Całe konto”**, rozpocznij obserwację, aby załadować listę źródeł, a następnie przejrzyj tę listę przed rozpoczęciem tworzenia historii. Nadal obowiązuje limit listy okien dialogowych (domyślnie 1 000, można go dostosować w sekcji „Parametry”). Pomyślne przeprowadzenie operacji nie oznacza, że wszystkie rozmowy na koncie zostały uwzględnione. Czaty wykryte lub włączone później wymagają ponownego uruchomienia operacji.

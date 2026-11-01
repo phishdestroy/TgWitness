@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/analy
 
 Durchsuchen Sie gespeicherte Nachrichten, überprüfen Sie KI-Eingaben und erstellen Sie Analyseberichte mit Quellenangaben.
 
-**Aktueller Hauptpunkt:** Verwenden Sie einen Source-Checkout; die portable Vorschauversion 0.7.0 stammt aus einer Zeit vor der Einführung dieser Funktion.
-
 [Anleitung zum Arbeitsablauf](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Verwenden Sie **Journal** für die lokale Suche ohne KI. Für **Fragen Sie das Archiv** aktivieren und konfigurieren Sie zunächst einen Anbieter unter **Integrationen**. Über die Arbeitsbereichsauswahl wird das Konto ausgewählt; über das Formular werden Chats und der Beobachtungszeitraum festgelegt. Die Suche nach relevanten Inhalten erfolgt lokal. Eine exakte Phrase oder Domain grenzt die Suche ein; eine Nachrichten-ID fordert gespeicherte Versionen an. Überprüfen Sie die Auszüge und öffnen Sie die zugehörigen Journaleinträge oder den Kontext. Es gibt keine Vektordatenbank und keine automatischen Telegram-Aktionen.

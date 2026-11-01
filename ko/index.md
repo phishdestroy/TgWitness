@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/
 
-[오픈 소스 / v0.7.0](https://phishdestroy.github.io/TgWitness/ko/docs/reference/changelog/)
+[오픈 소스 / v0.7.1](https://phishdestroy.github.io/TgWitness/ko/docs/reference/changelog/)
 
 텔레그램 메시지를 캡처하고, 변경 내역을 보존하며, 서명된 기록을 내보냅니다.
 
@@ -225,7 +225,7 @@ cd TgWitness
 
 [릴리스 보기](https://github.com/phishdestroy/TgWitness/releases)
 
-Windows에 Python이 설치되어 있지 않으신가요? [휴대용 패키지를 다운로드하여](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.0/TgWitness-0.7.0-windows-amd64-portable.zip) 압축을 풀고, ‘`TgWitness.cmd`’ 파일을 더블클릭하세요.
+Windows에 Python이 설치되어 있지 않으신가요? [휴대용 패키지를 다운로드하여](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip) 압축을 풀고, ‘`TgWitness.cmd`’ 파일을 더블클릭하세요.
 
 2단계
 
@@ -260,7 +260,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 소스 코드 설치 시 토큰은 `data/live/panel-token.txt`입니다. 텔레그램 로그인은 내장된 API 설정을 사용하거나 [my.telegram.](https://my.telegram.org)org에서 생성한 본인만의 키 쌍을 사용할 수 있습니다. [전체 설정 가이드 ↗](https://phishdestroy.github.io/TgWitness/ko/docs/reference/quickstart/)
 
-**TgWitness 0.7.0** [새로운 소식 →](https://phishdestroy.github.io/TgWitness/ko/docs/reference/changelog/) · [기능 및 알려진 제한 사항 →](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/)
+**TgWitness 0.7.1** [새로운 소식 →](https://phishdestroy.github.io/TgWitness/ko/docs/reference/changelog/) · [기능 및 알려진 제한 사항 →](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/)
 
 ## 명확한 지침. 유용한 다음 단계.
 
@@ -273,8 +273,6 @@ docker compose exec tgwitness cat /data/panel-token.txt
 ## 아카이브를 살펴보세요.
 
 이력을 불러오고, AI 출처를 검토하며, MCP 클라이언트를 연결하고, 저장된 미디어를 인식하며, 서명된 웹훅을 전송합니다.
-
-현재 소스에서 이용 가능합니다. 0.7.0 휴대용 미리보기 버전은 이 도구들보다 먼저 출시되었습니다.
 
 [워크플로우 살펴보기](https://phishdestroy.github.io/TgWitness/ko/docs/archive/)
 

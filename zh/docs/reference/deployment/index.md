@@ -127,7 +127,7 @@ docker compose logs witness                     # witness key fingerprint
 将 `deploy/env.example` 复制到 `.env`。将 `TGWITNESS_IMAGE` 设置为发布版本，使用 **小写形式的**仓库路径，例如：
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.1
 TGWITNESS_PORT=8787
 ```
 
@@ -206,10 +206,11 @@ docker compose --project-directory . -f deploy/compose/compose.image.yaml up -d 
 
 将该项目推送到已启用 Actions 的 GitHub 仓库后，[发布工作流](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml)即可投入使用。当**发布** GitHub Release（包括预发布版本）时，该工作流会自动运行。仅推送草稿或标签 不会发布软件包。
 
-1. 设置软件包版本和变更日志，然后发布一个标记为 `v` 加上确切的 `pyproject.toml` 版本（例如 `v0.7.0`）的发布版本。
+1. 设置软件包版本和变更日志，然后发布一个标记为 `v` 加上确切的 `pyproject.toml` 版本（例如 `v0.7.1`）的发布版本。
 2. 该工作流会验证标签，并运行适用于 Windows/Linux/macOS 的通用 Python、 general/account-import/QR 浏览器、源代码包以及 Docker 检查。此外，还会在 这三种操作系统上使用 Python 3.12 进行全新的原生安装测试。
-3. 通过上述检查后，系统会在 QEMU 环境下对 ARM64 镜像进行烟雾测试，将 AMD64/ARM64 镜像发布至 `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`， 并将源代码 ZIP 包、校验和及 Python wheel 文件附加到发布包中。另有一项 Windows 任务负责构建并附加可移植 ZIP 包及其校验和。
-4. 首次发布后，请打开 GHCR 包设置，并将可见性 设为“公开”（**Public**），以便匿名拉取图像。仅拥有公开的源代码仓库 并不能保证容器包也会公开。组织政策必须 允许发布包。该工作流使用 `GITHUB_TOKEN`；注册表 密码或 VPS 凭据不应存放在仓库中。
+3. 在通过上述检查后，系统会在 QEMU 环境下对 ARM64 镜像进行烟雾测试，将 AMD64/ARM64 镜像发布至`ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>` ， 并附上源代码 ZIP 包和 Python wheel 包及其 SHA-256 校验文件。 Windows 可移植 ZIP 包正是检查工作流所测试的精确构建产物； 发布工作流会下载并发布该构建产物及其校验和。
+4. 最后一个任务会再次下载所有三个已发布的软件包，并验证其校验和。随后发布`SHA256SUMS.txt` 和`RELEASE-MANIFEST.json` ，记录版本号、源代码修订号及资源大小。上传操作不会覆盖现有的发布资源。
+5. 首次发布后，请打开 GHCR 包设置，并将可见性 设为“公开”（**Public**），以便匿名拉取图像。仅拥有公开的源代码仓库 并不能保证容器包也会公开。组织政策必须 允许发布包。该工作流使用 `GITHUB_TOKEN`；注册表 密码或 VPS 凭据不应存放在仓库中。
 
 仅通过本地准备工作尚无法确保远程工作流的成功。ARM64 仿真仅为初步验证，并非原生硬件或实时 Telegram 环境的认证。 此功能可自动完成版本打包；启动服务器仍需使用 Compose 命令及其域名/主机先决条件。当新版本发布时，现有服务器不会被 自动升级或重启。
 

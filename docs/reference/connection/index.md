@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/connecti
 
 Authentication, automatic proxy pools, IP modes, fallback policy, external requests and secret storage.
 
-This document describes TgWitness 0.7.0 behavior and its limits. Authentication, source access, network connectivity and capture completeness are separate states. For sign-in steps, file formats, and multiple accounts, start with [accounts and session formats](https://phishdestroy.github.io/TgWitness/docs/reference/accounts/). For event policies and restart behavior, see [how collection works](https://phishdestroy.github.io/TgWitness/docs/reference/collection/).
+This document describes TgWitness 0.7.1 behavior and its limits. Authentication, source access, network connectivity and capture completeness are separate states. For sign-in steps, file formats, and multiple accounts, start with [accounts and session formats](https://phishdestroy.github.io/TgWitness/docs/reference/accounts/). For event policies and restart behavior, see [how collection works](https://phishdestroy.github.io/TgWitness/docs/reference/collection/).
 
 ## Authentication methods
 

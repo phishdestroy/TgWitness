@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/media
 
 ローカルワーカーを使用してキャプチャされた画像や音声を認識し、抽出されたテキストを元のファイルと関連付けます。
 
-**現在のメインバージョン：**ソースコードをチェックアウトして使用してください。0.7.0のポータブルプレビュー版には、この機能が実装されていません。
-
 [ワークフローガイド](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 `media.saved`ジャーナルレコードを開き、「**添付ファイルを認識」**を選択してから、 「**アーカイブに問い合わせ」**の下にある「OCR」または「文字起こし」を選択します。処理は手動で、ローカルで行われます。 クラウドメディアモードや自動アップロード機能はありません。元の添付ファイルのバイトデータおよび `media_sha256`は変更されず、認識されたテキストは明示的に「機械 認識」としてマークされ、ソースのハッシュ値、エンジン／モデルのバージョン、 言語、パラメータ、完了時刻とともに別途保存されます。文字起こしデータには、返されたタイムスタンプが保持されます。

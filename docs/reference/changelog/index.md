@@ -4,8 +4,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/changelo
 
 Every change by version, including the changes not yet released.
 
-## Unreleased
+## 0.7.1 preview · 1 November 2026
 
+- Fixed chat profiles getting stuck after navigating away while a request was loading. Reopening the view can retry, and an outdated request cannot overwrite the current chat's profile state.
 - Added a clear handoff after download: distinguish the original archive from sharing copies, review the report, and copy plain instructions for the recipient. Polling preserves the selected copy and focus; unavailable clipboard access leaves the instructions selectable.
 - Added recipient guidance and stable record references to readable account and sharing reports, including print layouts. References describe the archived document; they do not turn printouts or screenshots into signed evidence.
 - Added a browsable fictional report with the matching signed ZIP. Its preview is byte-identical to the archived HTML; previous signed demo samples are retained.
@@ -56,7 +57,7 @@ Every change by version, including the changes not yet released.
 - People and chats without a photo no longer fill the browser console with 404 errors, and the panel asks for the high-assurance statement only where it exists. Sign-in tabs wrap long labels instead of cutting them; the offline-gap note, size units and the reason of attachments dropped with a removed source are shown in the panel language.
 - Added scoped, read-only MCP connections and local archive search with optional AI source review and separate analytical reports.
 - Added local OCR/transcription for saved attachments and signed outgoing webhooks with delivery status, retries and an n8n example.
-- Connected the new workflows across README, Wiki and translated site reference. These additions require current source; the 0.7.0 portable preview predates them.
+- Connected the new workflows across README, Wiki and translated site reference.
 - Sealed, localized reports. `report.html` and `chat.html` are rebuilt as self-contained case documents in any of the 25 panel languages: case details, integrity and key fingerprint, timestamps with their check commands, coverage, chain of custody with a printable transfer table, verification steps, standards and limitations. Each ends with an Ed25519 seal over its own bytes, checked in the browser or by `verify.py report.html --fingerprint … --evidence …`. Reports carry Dublin Core and schema.org metadata and a Content-Security-Policy that blocks network loads; the chat report shows the history oldest first.
 - Signed archives add `custody.json` and `SHA256SUMS`; README.txt is written in the report language and in English. Case details from **Exports → Report settings** are signed into the manifest. `verify.py` checks the seal and the sums, prints a coloured summary at a terminal (`--lang en|ru|uk`) and offers `--json`.
 - Added a five-stage capture animation and examples of message/collector substitution to the helper and Exports.

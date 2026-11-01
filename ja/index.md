@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/
 
-[オープンソース / v0.7.0](https://phishdestroy.github.io/TgWitness/ja/docs/reference/changelog/)
+[オープンソース / v0.7.1](https://phishdestroy.github.io/TgWitness/ja/docs/reference/changelog/)
 
 Telegramのメッセージをキャプチャし、その変更履歴を保存して、署名付きの記録をエクスポートします。
 
@@ -225,7 +225,7 @@ cd TgWitness
 
 [リリースを閲覧する](https://github.com/phishdestroy/TgWitness/releases)
 
-WindowsにPythonがインストールされていない場合は、[ポータブルパッケージをダウンロードし](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.0/TgWitness-0.7.0-windows-amd64-portable.zip)、解凍して「`TgWitness.cmd`」をダブルクリックしてください。
+WindowsにPythonがインストールされていない場合は、[ポータブルパッケージをダウンロードし](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip)、解凍して「`TgWitness.cmd`」をダブルクリックしてください。
 
 ステップ 02
 
@@ -260,7 +260,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 ソースからのインストールの場合、トークンは「`data/live/panel-token.txt`」です。Telegramでのログインには、組み込みのAPI設定、[またはmy.telegram.](https://my.telegram.org)orgから取得した独自のペアを使用できます。[完全なセットアップガイド ↗](https://phishdestroy.github.io/TgWitness/ja/docs/reference/quickstart/)
 
-**TgWitness 0.7.0** [新着情報 →](https://phishdestroy.github.io/TgWitness/ja/docs/reference/changelog/) · [機能と既知の制限事項 →](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/)
+**TgWitness 0.7.1** [新着情報 →](https://phishdestroy.github.io/TgWitness/ja/docs/reference/changelog/) · [機能と既知の制限事項 →](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/)
 
 ## 分かりやすい手順。役立つ次のステップ。
 
@@ -273,8 +273,6 @@ docker compose exec tgwitness cat /data/panel-token.txt
 ## アーカイブを処理する。
 
 履歴の読み込み、AIソースの確認、MCPクライアントの接続、保存されたメディアの認識、および署名付きWebhookの送信。
-
-現在のソースから入手可能です。0.7.0 ポータブルプレビュー版は、これらのツールよりも以前のバージョンです。
 
 [ワークフローの詳細はこちら](https://phishdestroy.github.io/TgWitness/ja/docs/archive/)
 

@@ -22,7 +22,7 @@ MTProxy האוטומטי מתחזק נתיבי טלגרם פעילים מארב�
 
 ## כלי ארכיון
 
-הגרסה הנוכחית, `main`, מוסיפה [איסוף היסטוריה](https://phishdestroy.github.io/TgWitness/he/docs/reference/history/), [חיפוש וניתוח בארכיון](https://phishdestroy.github.io/TgWitness/he/docs/reference/analysis/), [MCP לקריאה בלבד](https://phishdestroy.github.io/TgWitness/he/docs/reference/mcp/), [OCR/תמלול מקומי](https://phishdestroy.github.io/TgWitness/he/docs/reference/media-analysis/) ו- [webhooks יוצאים](https://phishdestroy.github.io/TgWitness/he/docs/reference/webhooks/). אלו הן תכונות מבדיקת הקוד המקור, שנוספו לאחר תצוגה מקדימה של גרסה 0.7.0 הניידת. דוחות אנליטיים וטקסט מזוהה נשארים נפרדים מהאירועים שנלכדו.
+[איסוף היסטוריה](https://phishdestroy.github.io/TgWitness/he/docs/reference/history/), [חיפוש וניתוח בארכיון](https://phishdestroy.github.io/TgWitness/he/docs/reference/analysis/),[MCP לקריאה בלבד](https://phishdestroy.github.io/TgWitness/he/docs/reference/mcp/), [OCR/תמלול מקומי](https://phishdestroy.github.io/TgWitness/he/docs/reference/media-analysis/) ו-[webhooks יוצאים](https://phishdestroy.github.io/TgWitness/he/docs/reference/webhooks/) כלולים ב- 0.7.1. דוחות אנליטיים וטקסט מזוהה נשארים נפרדים מהאירועים שנלכדו.
 
 ## תוספות אופציונליות
 

@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/conne
 
 Xác thực, nhóm proxy tự động, chế độ IP, chính sách dự phòng, yêu cầu bên ngoài và lưu trữ khóa bí mật.
 
-Tài liệu này mô tả cách thức hoạt động và các giới hạn của TgWitness phiên bản 0.7.0. Quá trình xác thực, quyền truy cập nguồn, kết nối mạng và tính đầy đủ của dữ liệu thu thập là các trạng thái độc lập. Để tìm hiểu về các bước đăng nhập, định dạng tệp và quản lý nhiều tài khoản, quý vị hãy bắt đầu từ phần [“Tài khoản và định dạng phiên làm việc](https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/)”. Đối với chính sách sự kiện và hành vi khởi động lại, xin vui lòng tham khảo phần [“Cách thức thu thập dữ liệu hoạt động](https://phishdestroy.github.io/TgWitness/vi/docs/reference/collection/)”.
+Tài liệu này mô tả cách thức hoạt động và các giới hạn của TgWitness phiên bản 0.7.1. Quá trình xác thực, quyền truy cập nguồn, kết nối mạng và tính đầy đủ của dữ liệu thu thập là các trạng thái độc lập. Để tìm hiểu về các bước đăng nhập, định dạng tệp và quản lý nhiều tài khoản, quý vị hãy bắt đầu từ phần [“Tài khoản và định dạng phiên làm việc](https://phishdestroy.github.io/TgWitness/vi/docs/reference/accounts/)”. Đối với chính sách sự kiện và hành vi khởi động lại, xin vui lòng tham khảo phần [“Cách thức thu thập dữ liệu hoạt động](https://phishdestroy.github.io/TgWitness/vi/docs/reference/collection/)”.
 
 ## Các phương thức xác thực
 

@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/webho
 
 Gửi các sự kiện trong phạm vi đến các máy chủ nhận HTTPS kèm theo chữ ký HMAC, tính năng thử lại và trạng thái giao nhận.
 
-**Phiên bản chính hiện tại:** sử dụng bản checkout từ kho nguồn; phiên bản xem trước di động 0.7.0 ra mắt trước khi tính năng này được triển khai.
-
 [Hướng dẫn quy trình làm việc](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Mở **Tích hợp → Webhook đi** trong không gian làm việc đã chọn. Thêm một bộ thu HTTPS, chọn các sự kiện thu thập/phương tiện/xuất dữ liệu, và tùy chọn chọn các cuộc trò chuyện cho các quan sát mới và thay đổi. Văn bản tin nhắn bị tắt theo mặc định. Việc bật trích đoạn sẽ thêm tối đa 1.000 ký tự vào các sự kiện thay đổi tin nhắn; các trường Telegram thô và thông tin đăng nhập không bao giờ được gửi đi.

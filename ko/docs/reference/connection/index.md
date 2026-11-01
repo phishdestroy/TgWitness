@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/conne
 
 인증, 자동 프록시 풀, IP 모드, 대체 정책, 외부 요청 및 비밀 정보 저장.
 
-이 문서는 TgWitness 0.7.0의 동작 방식과 그 한계를 설명합니다. 인증, 소스 액세스, 네트워크 연결 및 캡처 완전성은 각각 별개의 상태입니다. 로그인 절차, 파일 형식 및 다중 계정에 대해서는 [‘계정 및 세션 형식’](https://phishdestroy.github.io/TgWitness/ko/docs/reference/accounts/) 섹션부터 확인하십시오. 이벤트 정책 및 재시작 동작에 대해서는 [‘수집 방식’ 섹션을](https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/) 참조하십시오.
+이 문서는 TgWitness 0.7.1의 동작 방식과 그 한계를 설명합니다. 인증, 소스 액세스, 네트워크 연결 및 캡처 완전성은 각각 별개의 상태입니다. 로그인 절차, 파일 형식 및 다중 계정에 대해서는 [‘계정 및 세션 형식’](https://phishdestroy.github.io/TgWitness/ko/docs/reference/accounts/) 섹션부터 확인하십시오. 이벤트 정책 및 재시작 동작에 대해서는 [‘수집 방식’ 섹션을](https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/) 참조하십시오.
 
 ## 인증 방법
 

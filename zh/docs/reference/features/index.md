@@ -22,7 +22,7 @@ TgWitness 拥有独立的安装流程、数据目录和发布生命周期。随�
 
 ## 归档工具
 
-当前版本 `main` 新增了[历史数据采集](https://phishdestroy.github.io/TgWitness/zh/docs/reference/history/)、[存档搜索与分析](https://phishdestroy.github.io/TgWitness/zh/docs/reference/analysis/)、 [只读 MCP](https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/)、[本地 OCR/转录以及](https://phishdestroy.github.io/TgWitness/zh/docs/reference/media-analysis/) [外发 webhook 功能](https://phishdestroy.github.io/TgWitness/zh/docs/reference/webhooks/)。这些功能已发布至源代码仓库，是在 0.7.0 便携版预览版之后添加的。分析报告和识别出的文本与 捕获的事件保持分离。
+0.7.1 包含[历史数据采集](https://phishdestroy.github.io/TgWitness/zh/docs/reference/history/)、[存档搜索与分析](https://phishdestroy.github.io/TgWitness/zh/docs/reference/analysis/)、[只读 MCP](https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/)、[本地 OCR/转录](https://phishdestroy.github.io/TgWitness/zh/docs/reference/media-analysis/)以及[外发 webhook](https://phishdestroy.github.io/TgWitness/zh/docs/reference/webhooks/)功能。分析报告和识别出的文本与 捕获的事件保持分离。
 
 ## 可选附加功能
 

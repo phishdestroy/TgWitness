@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/conne
 
 身份验证、自动代理池、IP 模式、备用策略、外部请求及密钥存储。
 
-本文档描述了 TgWitness 0.7.0 的行为及其限制。身份验证、 源访问、网络连接和捕获完整性属于各自独立的状态。 有关登录步骤、文件格式和多账户管理，请先参阅 [“账户与会话格式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/)”部分。有关事件策略和重启 行为，请参阅[“数据采集原理”部分](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/)。
+本文档描述了 TgWitness 0.7.1 的行为及其限制。身份验证、 源访问、网络连接和捕获完整性属于各自独立的状态。 有关登录步骤、文件格式和多账户管理，请先参阅 [“账户与会话格式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/accounts/)”部分。有关事件策略和重启 行为，请参阅[“数据采集原理”部分](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/)。
 
 ## 认证方法
 

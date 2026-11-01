@@ -26,7 +26,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/mcp/
 
 安装后，使用常用的数据目录和启动参数重启面板。就绪检查应包含 `[PASS] mcp: streamable-http available`。**Integrations → MCP** 会显示运行时状态以及使用该服务器实际 Python 可执行文件的安装命令。**Re-check** 可在不重新加载页面的情况下刷新此状态；它不会安装软件包或重启服务器。
 
-MCP 扩展使用官方的 [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk)。`deploy/constraints-mcp.txt` 锁定了经过测试的 SDK 及其依赖项。这些功能需要当前的源码；0.7.0 便携预览版早于这些功能发布。
+该 MCP 扩展程序使用官方的[MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk)。`deploy/constraints-mcp.txt` 锁定了经过测试的 SDK 及其依赖项。
 
 ## 签发连接
 

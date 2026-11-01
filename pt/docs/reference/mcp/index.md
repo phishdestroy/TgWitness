@@ -26,7 +26,7 @@ Use o ambiente Python que executa o painel. A partir de um checkout do código-f
 
 Reinicie o painel com seu diretório de dados habitual e argumentos de inicialização após a instalação. A verificação de prontidão deve incluir `[PASS] mcp: streamable-http available`. **Integrations → MCP** mostra o status de execução e um comando de instalação usando o executável Python real daquele servidor. **Re-check** atualiza esse status sem recarregar a página; isso não instala pacotes nem reinicia o servidor.
 
-O extra MCP usa o [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk) oficial. `deploy/constraints-mcp.txt` fixa o SDK testado e as dependências. Esses recursos exigem o código-fonte atual; a versão prévia portátil 0.7.0 é anterior a eles.
+O MCP extra utiliza o [SDK oficial do MCP para Python](https://github.com/modelcontextprotocol/python-sdk). O arquivo`deploy/constraints-mcp.txt` fixa a versão do SDK testado e suas dependências.
 
 ## Emitir uma conexão
 

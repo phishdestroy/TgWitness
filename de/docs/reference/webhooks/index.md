@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/webho
 
 Sendet definierte Ereignisse mit HMAC-Signaturen, Wiederholungsversuchen und Zustellstatus an HTTPS-Empfänger.
 
-**Aktueller Hauptpunkt:** Verwenden Sie einen Source-Checkout; die portable Vorschauversion 0.7.0 stammt aus einer Zeit vor der Einführung dieser Funktion.
-
 [Anleitung zum Arbeitsablauf](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Öffnen Sie **„Integrationen“ → „Ausgehende Webhooks“** im ausgewählten Arbeitsbereich. Fügen Sie einen HTTPS-Empfänger hinzu, wählen Sie „Collector/Media/Export“-Ereignisse aus und wählen Sie optional Chats für neue Beobachtungen und Änderungen aus. Der Nachrichtentext ist standardmäßig deaktiviert. Durch das Aktivieren von Auszügen werden den Ereignissen zu Nachrichtenänderungen maximal 1.000 Zeichen hinzugefügt; Telegram-Rohdatenfelder und Anmeldedaten werden niemals gesendet.

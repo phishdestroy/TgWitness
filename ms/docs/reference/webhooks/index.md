@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/webho
 
 Hantar peristiwa berlingkup ke penerima HTTPS dengan tandatangan HMAC, percubaan semula dan status penghantaran.
 
-**Utama semasa:** gunakan checkout sumber; pratonton mudah alih 0.7.0 wujud sebelum ciri ini.
-
 [Panduan aliran kerja](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Buka **Integrasi → Webhook keluaran** di ruang kerja yang dipilih. Tambah penerima HTTPS, pilih acara pengumpul/media/pembuangan, dan secara pilihan pilih sembang untuk pemerhatian baharu dan perubahan. Teks mesej dilumpuhkan secara lalai. Mengaktifkan petikan menambah paling banyak 1,000 aksara kepada acara perubahan mesej; medan Telegram mentah dan kelayakan tidak pernah dihantar.

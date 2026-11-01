@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/archive/
 
 Znajdź wiadomość. Sprawdź źródło. Zbuduj sprawę.
 
-Narzędzia te są dostępne w aktualnej gałęzi głównej. Wersja przenośna 0.7.0 jest starsza od nich; w tym przypadku należy pobrać kod źródłowy.
-
 01**Przedstaw historię**
 
 Załaduj poprzednie wiadomości z włączonych źródeł do obszaru roboczego.

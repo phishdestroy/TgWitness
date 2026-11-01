@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/analy
 
 Cari mesej yang disimpan, semak input AI dan simpan laporan analitik beserta rujukan sumbernya.
 
-**Utama semasa:** gunakan checkout sumber; pratonton mudah alih 0.7.0 wujud sebelum ciri ini.
-
 [Panduan aliran kerja](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Gunakan **Jurnal** untuk carian tempatan tanpa AI. Untuk **Tanya arkib**, dayakan dan konfigurasikan penyedia dalam **Integrasi** terlebih dahulu. Pemilih ruang kerja memilih akaun; borang memilih sembang dan tempoh pemerhatian. Pengambilan semula dijalankan secara tempatan. Frasa tepat atau domain menyempitkan pengambilan semula; ID mesej meminta versi yang disimpan. Semak petikan dan buka rekod jurnal atau konteksnya. Tiada pangkalan data vektor atau tindakan Telegram automatik.

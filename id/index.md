@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/
 
-[Sumber terbuka / v0.7.0](https://phishdestroy.github.io/TgWitness/id/docs/reference/changelog/)
+[Sumber terbuka / v0.7.1](https://phishdestroy.github.io/TgWitness/id/docs/reference/changelog/)
 
 Rekam pesan Telegram, pertahankan perubahannya, dan ekspor catatan yang telah ditandatangani.
 
@@ -225,7 +225,7 @@ Peluncuran sumber memerlukan Python 3.11+. Peluncur Windows menawarkan instalasi
 
 [Telusuri rilis](https://github.com/phishdestroy/TgWitness/releases)
 
-Tidak ada Python di Windows? [Unduh paket portabel](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.0/TgWitness-0.7.0-windows-amd64-portable.zip), ekstrak, lalu klik dua kali berkas `TgWitness.cmd`.
+Tidak ada Python di Windows? [Unduh paket portabel](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip), ekstrak, lalu klik dua kali berkas `TgWitness.cmd`.
 
 LANGKAH 02
 
@@ -260,7 +260,7 @@ Buka [127.0.0.1:8787](http://127.0.0.1:8787) setelah diluncurkan.
 
 Untuk instalasi dari sumber, tokennya adalah `data/live/panel-token.txt`. Masuk ke Telegram dapat menggunakan pengaturan API bawaan atau pasangan kunci Anda sendiri dari [my.telegram.org](https://my.telegram.org). [Panduan pengaturan lengkap ↗](https://phishdestroy.github.io/TgWitness/id/docs/reference/quickstart/)
 
-**TgWitness 0.7.0** [Apa yang baru →](https://phishdestroy.github.io/TgWitness/id/docs/reference/changelog/) · [Fitur dan batasan yang diketahui →](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/)
+**TgWitness 0.7.1** [Apa yang baru →](https://phishdestroy.github.io/TgWitness/id/docs/reference/changelog/) · [Fitur dan batasan yang diketahui →](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/)
 
 ## Petunjuk yang jelas. Langkah selanjutnya yang bermanfaat.
 
@@ -273,8 +273,6 @@ Untuk instalasi dari sumber, tokennya adalah `data/live/panel-token.txt`. Masuk 
 ## Kelola arsip.
 
 Memuat riwayat, meninjau sumber AI, menghubungkan klien MCP, mengenali media yang disimpan, dan mengirim webhook yang ditandatangani.
-
-Tersedia dari sumber saat ini. Versi pratinjau portabel 0.7.0 dirilis sebelum alat-alat ini.
 
 [Jelajahi alur kerja](https://phishdestroy.github.io/TgWitness/id/docs/archive/)
 

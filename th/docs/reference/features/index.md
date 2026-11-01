@@ -22,7 +22,7 @@ MTProxy อัตโนมัติจะรักษาเส้นทาง Te
 
 ## เครื่องมือเก็บถาวร
 
-`main` เวอร์ชันปัจจุบันเพิ่มฟังก์ชัน[การเก็บรวบรวมประวัติ](https://phishdestroy.github.io/TgWitness/th/docs/reference/history/) [การค้นหาและวิเคราะห์ในคลังข้อมูล](https://phishdestroy.github.io/TgWitness/th/docs/reference/analysis/) [MCP แบบอ่านอย่างเดียว](https://phishdestroy.github.io/TgWitness/th/docs/reference/mcp/) [OCR/การถอดความแบบท้องถิ่น](https://phishdestroy.github.io/TgWitness/th/docs/reference/media-analysis/) และ [webhooks ที่ส่งออกไป](https://phishdestroy.github.io/TgWitness/th/docs/reference/webhooks/) นี่เป็นคุณสมบัติที่เพิ่มเข้ามาในเวอร์ชัน source-checkout หลังจาก การเปิดตัวเวอร์ชัน 0.7.0 portable preview รายงานวิเคราะห์และข้อความที่ได้รับการถอดความจะยังคงแยกต่างหาก จากเหตุการณ์ที่บันทึกไว้
+[การเก็บรวบรวมประวัติ](https://phishdestroy.github.io/TgWitness/th/docs/reference/history/) [การค้นหาและวิเคราะห์ข้อมูลในคลังข้อมูล](https://phishdestroy.github.io/TgWitness/th/docs/reference/analysis/) [MCP แบบอ่านอย่างเดียว](https://phishdestroy.github.io/TgWitness/th/docs/reference/mcp/) [OCR/การถอดเสียงในเครื่อง](https://phishdestroy.github.io/TgWitness/th/docs/reference/media-analysis/) และ[webhooks ที่ส่งออกไป](https://phishdestroy.github.io/TgWitness/th/docs/reference/webhooks/)ถูกรวมไว้ใน0.7.1. รายงานวิเคราะห์และข้อความที่ได้รับการระบุจะแยกต่างหาก จากเหตุการณ์ที่บันทึกไว้
 
 ## ส่วนเสริม (ไม่บังคับ)
 

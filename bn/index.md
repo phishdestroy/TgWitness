@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/
 
-[মুক্ত উৎস / v0.7.0](https://phishdestroy.github.io/TgWitness/bn/docs/reference/changelog/)
+[মুক্ত উৎস / v0.7.1](https://phishdestroy.github.io/TgWitness/bn/docs/reference/changelog/)
 
 টেলিগ্রাম বার্তাগুলো ক্যাপচার করুন, তাদের পরিবর্তন সংরক্ষণ করুন, এবং স্বাক্ষরিত রেকর্ড রপ্তানি করুন।
 
@@ -225,7 +225,7 @@ cd TgWitness
 
 [রিলিজগুলো ব্রাউজ করুন](https://github.com/phishdestroy/TgWitness/releases)
 
-উইন্ডোজে পাইথন নেই? [পোর্টেবল প্যাকেজটি ডাউনলোড করুন](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.0/TgWitness-0.7.0-windows-amd64-portable.zip), এটি এক্সট্র্যাক্ট করুন এবং `TgWitness.cmd`-এ ডাবল-ক্লিক করুন।
+উইন্ডোজে পাইথন নেই? [পোর্টেবল প্যাকেজটি ডাউনলোড করুন](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip), এটি এক্সট্র্যাক্ট করুন এবং `TgWitness.cmd`-এ ডাবল-ক্লিক করুন।
 
 ধাপ ০২
 
@@ -260,7 +260,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 সোর্স ইনস্টলের জন্য টোকেনটি `data/live/panel-token.txt`-এ রয়েছে। টেলিগ্রাম সাইন-ইন বিল্ট-ইন API সেটিংস ব্যবহার করতে পারে অথবা [my.telegram.org](https://my.telegram.org) থেকে আপনার নিজস্ব জোড়া ব্যবহার করতে পারে। [সম্পূর্ণ সেটআপ গাইড ↗](https://phishdestroy.github.io/TgWitness/bn/docs/reference/quickstart/)
 
-**টিজিউইটনেস 0.7.0** [নতুন কী →](https://phishdestroy.github.io/TgWitness/bn/docs/reference/changelog/) · [বৈশিষ্ট্যসমূহ এবং পরিচিত সীমাবদ্ধতা →](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/)
+**টিজিউইটনেস 0.7.1** [নতুন কী →](https://phishdestroy.github.io/TgWitness/bn/docs/reference/changelog/) · [বৈশিষ্ট্যসমূহ এবং পরিচিত সীমাবদ্ধতা →](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/)
 
 ## স্পষ্ট নির্দেশনা। একটি উপকারী পরবর্তী পদক্ষেপ।
 
@@ -273,8 +273,6 @@ docker compose exec tgwitness cat /data/panel-token.txt
 ## আর্কাইভ নিয়ে কাজ করুন।
 
 লোড ইতিহাস দেখুন, AI উৎসগুলি পর্যালোচনা করুন, একটি MCP ক্লায়েন্ট সংযুক্ত করুন, সংরক্ষিত মিডিয়া সনাক্ত করুন এবং স্বাক্ষরিত ওয়েবহুক পাঠান।
-
-বর্তমান সোর্স থেকে উপলব্ধ। 0.7.0 পোর্টেবল প্রিভিউ এই সরঞ্জামগুলোর আগে থেকেই বিদ্যমান।
 
 [এর কর্মপ্রবাহ অন্বেষণ করুন](https://phishdestroy.github.io/TgWitness/bn/docs/archive/)
 

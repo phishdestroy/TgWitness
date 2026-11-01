@@ -28,8 +28,6 @@ git clone https://github.com/phishdestroy/TgWitness.git
 cd TgWitness
 ```
 
-現在のソースには、アカウントの一括インポート、MTProxyダッシュボード、および再開可能な履歴の読み込みが含まれています。0.7.0 のポータブルプレビューとそのリリースソースアーカイブは、これらの機能が追加される前のものです。バージョンの境界については、[変更履歴](https://phishdestroy.github.io/TgWitness/ja/docs/reference/changelog/)を参照してください。
-
 `Start.cmd` は、適切な Python が見つからない場合、現在の Windows ユーザー向けに Python 3.12 のインストール（winget、または署名済みの python.org インストーラー経由）を提案します。`start.sh` は、Python が不足している場合、お使いの Linux ディストリビューションまたは macOS 向けの正確なインストールコマンドを表示します。ソースからの初回起動時には、`.venv` が作成され、依存関係が自動的にインストールされます。
 
 Dockerがアプリケーションをビルドし、バックグラウンドで起動します。ホスト側のPythonは 不要です。`scripts\Docker.cmd`および`scripts/docker-start.sh`は、 コンテナが正常に動作している際に、パネルアドレスとトークンを表示します。サポートされているすべてのホストにおける対応するDockerコマンドは以下の通りです：

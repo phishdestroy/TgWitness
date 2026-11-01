@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/conne
 
 احراز هویت، استخرهای خودکار پروکسی، حالت‌های IP، سیاست پشتیبان، درخواست‌های خارجی و ذخیره‌سازی مخفی.
 
-این سند رفتار و محدودیت‌های TgWitness 0.7.0 را توصیف می‌کند. احراز هویت، دسترسی به منبع، اتصال شبکه و کامل بودن ضبط، حالات جداگانه‌ای هستند. برای مراحل ورود، فرمت‌های فایل و حساب‌های متعدد، از بخش [«حساب‌ها و فرمت‌های جلسه](https://phishdestroy.github.io/TgWitness/fa/docs/reference/accounts/)» شروع کنید. برای سیاست‌های رویداد و رفتار راه‌اندازی مجدد، به بخش [«نحوه کارکرد جمع‌آوری»](https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/) مراجعه کنید.
+این سند رفتار و محدودیت‌های TgWitness 0.7.1 را توصیف می‌کند. احراز هویت، دسترسی به منبع، اتصال شبکه و کامل بودن ضبط، حالات جداگانه‌ای هستند. برای مراحل ورود، فرمت‌های فایل و حساب‌های متعدد، از بخش [«حساب‌ها و فرمت‌های جلسه](https://phishdestroy.github.io/TgWitness/fa/docs/reference/accounts/)» شروع کنید. برای سیاست‌های رویداد و رفتار راه‌اندازی مجدد، به بخش [«نحوه کارکرد جمع‌آوری»](https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/) مراجعه کنید.
 
 ## روش‌های احراز هویت
 

@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/
 
-[Відкрите програмне забезпечення / v0.7.0](https://phishdestroy.github.io/TgWitness/uk/docs/reference/changelog/)
+[Відкрите програмне забезпечення / v0.7.1](https://phishdestroy.github.io/TgWitness/uk/docs/reference/changelog/)
 
 Збирайте повідомлення Telegram, зберігайте їхні зміни та експортуйте підписаний запис.
 
@@ -225,7 +225,7 @@ cd TgWitness
 
 [Переглянути випуски](https://github.com/phishdestroy/TgWitness/releases)
 
-Немає Python на Windows? [Завантажте портативний пакет](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.0/TgWitness-0.7.0-windows-amd64-portable.zip), розпакуйте його та двічі клацніть на файл «`TgWitness.cmd`».
+Немає Python на Windows? [Завантажте портативний пакет](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip), розпакуйте його та двічі клацніть на файл «`TgWitness.cmd`».
 
 КРОК 02
 
@@ -260,7 +260,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 Для встановлення з вихідного коду токен знаходиться в `data/live/panel-token.txt`. Для входу в Telegram можна використовувати вбудовані налаштування API або власну пару з [my.telegram.org](https://my.telegram.org). [Повна інструкція з налаштування ↗](https://phishdestroy.github.io/TgWitness/uk/docs/reference/quickstart/)
 
-**TgWitness 0.7.0** [Що нового →](https://phishdestroy.github.io/TgWitness/uk/docs/reference/changelog/) · [Функції та відомі обмеження →](https://phishdestroy.github.io/TgWitness/uk/docs/reference/features/)
+**TgWitness 0.7.1** [Що нового →](https://phishdestroy.github.io/TgWitness/uk/docs/reference/changelog/) · [Функції та відомі обмеження →](https://phishdestroy.github.io/TgWitness/uk/docs/reference/features/)
 
 ## Чіткі інструкції. Корисний наступний крок.
 
@@ -273,8 +273,6 @@ docker compose exec tgwitness cat /data/panel-token.txt
 ## Опрацюйте архів.
 
 Завантажуйте історію, переглядайте джерела ШІ, підключайте клієнт MCP, розпізнавайте збережені мультимедійні файли та надсилайте підписані веб-хуки.
-
-Доступно з поточного джерела. Портативна попередня версія 0.7.0 з’явилася раніше за ці інструменти.
 
 [Ознайомтеся з робочим процесом](https://phishdestroy.github.io/TgWitness/uk/docs/archive/)
 

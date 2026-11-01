@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/
 
-[开源 / v0.7.0](https://phishdestroy.github.io/TgWitness/zh/docs/reference/changelog/)
+[开源 / v0.7.1](https://phishdestroy.github.io/TgWitness/zh/docs/reference/changelog/)
 
 捕获 Telegram 消息，保留其变更记录，并导出经签名的记录。
 
@@ -225,7 +225,7 @@ cd TgWitness
 
 [浏览版本](https://github.com/phishdestroy/TgWitness/releases)
 
-Windows 上没有 Python？[请下载便携版软件包](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.0/TgWitness-0.7.0-windows-amd64-portable.zip)，解压后双击 `TgWitness.cmd`。
+Windows 上没有 Python？[请下载便携版软件包](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip)，解压后双击 `TgWitness.cmd`。
 
 步骤 02
 
@@ -260,7 +260,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 对于源代码安装，令牌位于 `data/live/panel-token.txt`。Telegram 登录可使用内置的 API 设置，或使用您在 [my.telegram.org](https://my.telegram.org) 上生成的密钥对。[完整设置指南 ↗](https://phishdestroy.github.io/TgWitness/zh/docs/reference/quickstart/)
 
-**TgWitness 0.7.0** [最新动态 →](https://phishdestroy.github.io/TgWitness/zh/docs/reference/changelog/) · [功能与已知限制 →](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/)
+**TgWitness 0.7.1** [最新动态 →](https://phishdestroy.github.io/TgWitness/zh/docs/reference/changelog/) · [功能与已知限制 →](https://phishdestroy.github.io/TgWitness/zh/docs/reference/features/)
 
 ## 清晰的说明。有用的下一步操作。
 
@@ -273,8 +273,6 @@ docker compose exec tgwitness cat /data/panel-token.txt
 ## 查阅存档。
 
 加载历史记录、审查 AI 来源、连接 MCP 客户端、识别已保存的媒体文件并发送带签名的 webhook。
-
-可从当前源获取。0.7.0 便携版预览版早于这些工具发布。
 
 [探索工作流](https://phishdestroy.github.io/TgWitness/zh/docs/archive/)
 

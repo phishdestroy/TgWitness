@@ -22,7 +22,7 @@ TgWitness 擁有專屬的安裝程序、資料目錄及發行週期。內建的 
 
 ## 歸檔工具
 
-最新版本 `main` 新增了[歷史記錄擷取](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/history/)、[檔案庫搜尋與分析](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/analysis/)、 [唯讀 MCP](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/)、[本地 OCR／轉錄以及](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/media-analysis/) [外發 webhook 功能](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/webhooks/)。這些功能需從原始碼檢出，是在 0.7.0 便攜版預覽版之後新增的。分析報告與辨識出的文字仍與 擷取的事件分開儲存。
+0.7.1 包含[歷史紀錄擷取](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/history/)、[檔案庫搜尋與分析](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/analysis/)、[唯讀 MCP](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/mcp/)、[本地 OCR／轉錄](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/media-analysis/)以及[外發 webhook](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/webhooks/)功能。分析報告與辨識出的文字將與 擷取的事件分開儲存。
 
 ## 可選附加功能
 

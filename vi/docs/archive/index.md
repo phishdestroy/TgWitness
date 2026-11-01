@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/archive/
 
 Tìm tin nhắn. Kiểm tra nguồn. Xây dựng hồ sơ vụ việc.
 
-Các công cụ này hiện có sẵn trên nhánh chính hiện tại. Phiên bản xem trước di động 0.7.0 ra mắt trước đó; hãy sử dụng bản sao mã nguồn để thực hiện quy trình làm việc này.
-
 01**Hiển thị lịch sử**
 
 Tải các tin nhắn trước đây từ các nguồn đã được kích hoạt của bạn vào không gian làm việc.

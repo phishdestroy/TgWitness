@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/
 
-[Open source / v0.7.0](https://phishdestroy.github.io/TgWitness/fr/docs/reference/changelog/)
+[Open source / v0.7.1](https://phishdestroy.github.io/TgWitness/fr/docs/reference/changelog/)
 
 Capturez les messages Telegram, conservez leurs modifications et exportez un enregistrement signé.
 
@@ -225,7 +225,7 @@ Le lancement de la source nécessite Python 3.11 ou une version ultérieure. Le 
 
 [Parcourir les versions](https://github.com/phishdestroy/TgWitness/releases)
 
-Vous n'avez pas Python sous Windows ? [Téléchargez le package portable](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.0/TgWitness-0.7.0-windows-amd64-portable.zip), décompressez-le et double-cliquez sur « `TgWitness.cmd` ».
+Vous n'avez pas Python sous Windows ? [Téléchargez le package portable](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip), décompressez-le et double-cliquez sur « `TgWitness.cmd` ».
 
 ÉTAPE 02
 
@@ -260,7 +260,7 @@ Ouvrez le port [127.0.0.1:8787](http://127.0.0.1:8787) après le lancement.
 
 Pour les installations à partir des sources, le jeton est « `data/live/panel-token.txt` ». La connexion à Telegram peut s'effectuer via les paramètres API intégrés ou à l'aide de votre propre paire de clés obtenue sur [my.telegram.org](https://my.telegram.org). [Guide d'installation complet ↗](https://phishdestroy.github.io/TgWitness/fr/docs/reference/quickstart/)
 
-**TgWitness 0.7.0** [Quoi de neuf →](https://phishdestroy.github.io/TgWitness/fr/docs/reference/changelog/) · [Fonctionnalités et limites connues →](https://phishdestroy.github.io/TgWitness/fr/docs/reference/features/)
+**TgWitness 0.7.1** [Quoi de neuf →](https://phishdestroy.github.io/TgWitness/fr/docs/reference/changelog/) · [Fonctionnalités et limites connues →](https://phishdestroy.github.io/TgWitness/fr/docs/reference/features/)
 
 ## Des instructions claires. Une prochaine étape utile.
 
@@ -273,8 +273,6 @@ Pour les installations à partir des sources, le jeton est « `data/live/panel-t
 ## Exploiter les archives.
 
 Charger l'historique, examiner les sources IA, connecter un client MCP, reconnaître les médias enregistrés et envoyer des webhooks signés.
-
-Disponible à partir de la source actuelle. La version préliminaire portable 0.7.0 est antérieure à ces outils.
 
 [Découvrez le flux de travail](https://phishdestroy.github.io/TgWitness/fr/docs/archive/)
 

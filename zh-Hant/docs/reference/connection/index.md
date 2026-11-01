@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 驗證、自動代理伺服器池、IP 模式、備用策略、外部請求及機密資料儲存。
 
-本文檔說明 TgWitness 0.7.0 的運作方式及其限制。驗證、 來源存取、網路連線及擷取完整性均為獨立的狀態。 關於登入步驟、檔案格式及多重帳戶，請先參閱「 [帳戶與會話格式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/accounts/)」；關於事件政策及重新啟動 行為，請參閱[「資料擷取運作方式」](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/collection/)。
+本文檔說明 TgWitness 0.7.1 的運作方式及其限制。驗證、 來源存取、網路連線及擷取完整性均為獨立的狀態。 關於登入步驟、檔案格式及多重帳戶，請先參閱「 [帳戶與會話格式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/accounts/)」；關於事件政策及重新啟動 行為，請參閱[「資料擷取運作方式」](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/collection/)。
 
 ## 驗證方法
 

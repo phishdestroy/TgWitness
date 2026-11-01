@@ -26,7 +26,7 @@ Utilisez l'environnement Python qui exécute le panneau. Depuis une copie des so
 
 Redémarrez le panneau avec son répertoire de données et ses arguments de lancement habituels après l'installation. La vérification de l'état de préparation doit inclure `[PASS] mcp: streamable-http available`. **Integrations → MCP** affiche l'état d'exécution et une commande d'installation utilisant l'exécutable Python réel de ce serveur. **Re-check** actualise cet état sans recharger la page ; cela n'installe aucun paquet et ne redémarre pas le serveur.
 
-L'extra MCP utilise le [SDK Python MCP](https://github.com/modelcontextprotocol/python-sdk) officiel. `deploy/constraints-mcp.txt` épingle le SDK et les dépendances testés. Ces fonctionnalités nécessitent le code source actuel ; l'aperçu portable 0.7.0 leur est antérieur.
+L'extension MCP utilise le [SDK Python officiel de MCP](https://github.com/modelcontextprotocol/python-sdk).`deploy/constraints-mcp.txt` spécifie la version du SDK testé et ses dépendances.
 
 ## Émettre une connexion
 

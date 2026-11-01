@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/conne
 
 تصدیق، خودکار پراکسی پولز، آئی پی موڈز، فال بیک پالیسی، بیرونی درخواستیں اور خفیہ ذخیرہ۔
 
-یہ دستاویز TgWitness 0.7.0 کے طرز عمل اور اس کی حدود کو بیان کرتی ہے۔ تصدیق، ماخذ تک رسائی، نیٹ ورک کنیکٹیویٹی اور مکمل کپچر الگ الگ حالتें ہیں۔ سائن ان کے مراحل، فائل فارمیٹس، اور متعدد اکاؤنٹس کے لیے، [اکاؤنٹس اور سیشن فارمیٹس](https://phishdestroy.github.io/TgWitness/ur/docs/reference/accounts/) سے شروع کریں۔ ایونٹ پالیسیاں اور دوبارہ شروع کرنے کے طرز عمل کے لیے، دیکھیں [کہ کلیکشن کیسے کام کرتی](https://phishdestroy.github.io/TgWitness/ur/docs/reference/collection/) ہے۔
+یہ دستاویز TgWitness 0.7.1 کے طرز عمل اور اس کی حدود کو بیان کرتی ہے۔ تصدیق، ماخذ تک رسائی، نیٹ ورک کنیکٹیویٹی اور مکمل کپچر الگ الگ حالتें ہیں۔ سائن ان کے مراحل، فائل فارمیٹس، اور متعدد اکاؤنٹس کے لیے، [اکاؤنٹس اور سیشن فارمیٹس](https://phishdestroy.github.io/TgWitness/ur/docs/reference/accounts/) سے شروع کریں۔ ایونٹ پالیسیاں اور دوبارہ شروع کرنے کے طرز عمل کے لیے، دیکھیں [کہ کلیکشن کیسے کام کرتی](https://phishdestroy.github.io/TgWitness/ur/docs/reference/collection/) ہے۔
 
 ## تصدیقی طریقے
 

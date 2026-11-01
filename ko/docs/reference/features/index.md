@@ -22,7 +22,7 @@ TgWitness는 자체 설치 절차, 데이터 디렉터리 및 릴리스 라이�
 
 ## 아카이브 도구
 
-현재 `main` 버전에서는 [기록 수집](https://phishdestroy.github.io/TgWitness/ko/docs/reference/history/), [아카이브 검색 및 분석](https://phishdestroy.github.io/TgWitness/ko/docs/reference/analysis/), [읽기 전용 MCP](https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/), [로컬 OCR/전사 기능](https://phishdestroy.github.io/TgWitness/ko/docs/reference/media-analysis/) 및 [발신 웹훅](https://phishdestroy.github.io/TgWitness/ko/docs/reference/webhooks/) 기능이 추가되었습니다. 이는 0.7.0 휴대용 미리보기 버전 이후에 추가된 소스 체크아웃 기능입니다. 분석 보고서와 인식된 텍스트는 캡처된 이벤트와 별도로 관리됩니다.
+0.7.1 에는 [기록 내역 수집](https://phishdestroy.github.io/TgWitness/ko/docs/reference/history/), [아카이브 검색 및 분석](https://phishdestroy.github.io/TgWitness/ko/docs/reference/analysis/),[읽기 전용 MCP](https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/), [로컬 OCR/전사 기능](https://phishdestroy.github.io/TgWitness/ko/docs/reference/media-analysis/) 및[발신 웹훅이](https://phishdestroy.github.io/TgWitness/ko/docs/reference/webhooks/) 포함되어 있습니다. 분석 보고서와 인식된 텍스트는 캡처된 이벤트와 별도로 관리됩니다.
 
 ## 선택적 추가 기능
 

@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/webho
 
 将带 HMAC 签名的指定范围事件发送至 HTTPS 接收端，支持重试并提供投递状态。
 
-**当前主要版本：**请使用源代码检出；0.7.0 便携版预览版尚未包含此功能。
-
 [工作流指南](https://phishdestroy.github.io/TgWitness/docs/archive/) · [维基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 在所选工作区中打开**“集成”→“外发 webhook”**。 添加一个 HTTPS 接收器，选择收集器/媒体/导出事件，并可选地为 新观察项和变更选择聊天。消息正文默认处于关闭状态。启用摘要 功能后，消息变更事件最多增加 1,000 个字符；Telegram 的原始字段和 凭据绝不会被发送。

@@ -22,7 +22,7 @@ MTProxy tự động duy trì các tuyến kết nối Telegram hoạt động t
 
 ## Công cụ lưu trữ
 
-Phiên bản hiện tại `main` bổ sung [các tính năng thu thập lịch sử](https://phishdestroy.github.io/TgWitness/vi/docs/reference/history/), [tìm kiếm và phân tích kho lưu trữ](https://phishdestroy.github.io/TgWitness/vi/docs/reference/analysis/), [MCP chỉ đọc](https://phishdestroy.github.io/TgWitness/vi/docs/reference/mcp/), [OCR/chuyển đổi văn bản cục bộ](https://phishdestroy.github.io/TgWitness/vi/docs/reference/media-analysis/) và [webhook gửi đi](https://phishdestroy.github.io/TgWitness/vi/docs/reference/webhooks/). Đây là các tính năng từ mã nguồn, được thêm vào sau bản xem trước di động 0.7.0. Các báo cáo phân tích và văn bản được nhận diện được lưu trữ riêng biệt với các sự kiện đã ghi lại.
+[Tính năng thu thập lịch sử](https://phishdestroy.github.io/TgWitness/vi/docs/reference/history/), [tìm kiếm và phân tích kho lưu trữ](https://phishdestroy.github.io/TgWitness/vi/docs/reference/analysis/),[MCP chỉ đọc](https://phishdestroy.github.io/TgWitness/vi/docs/reference/mcp/), [OCR/chuyển đổi văn bản cục bộ](https://phishdestroy.github.io/TgWitness/vi/docs/reference/media-analysis/) và[webhook gửi đi](https://phishdestroy.github.io/TgWitness/vi/docs/reference/webhooks/) được bao gồm trong 0.7.1. Các báo cáo phân tích và văn bản được nhận diện được tách biệt với các sự kiện đã ghi lại.
 
 ## Các tính năng bổ sung tùy chọn
 

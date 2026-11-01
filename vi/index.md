@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/
 
-[Nguồn mở / v0.7.0](https://phishdestroy.github.io/TgWitness/vi/docs/reference/changelog/)
+[Nguồn mở / v0.7.1](https://phishdestroy.github.io/TgWitness/vi/docs/reference/changelog/)
 
 Ghi lại các tin nhắn Telegram, bảo toàn các thay đổi của chúng và xuất bản ghi có chữ ký.
 
@@ -225,7 +225,7 @@ Việc khởi chạy ứng dụng yêu cầu Python 3.11 trở lên. Trình kh�
 
 [Xem các bản phát hành](https://github.com/phishdestroy/TgWitness/releases)
 
-Không có Python trên Windows? Vui lòng [tải xuống gói phần mềm di động](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.0/TgWitness-0.7.0-windows-amd64-portable.zip), giải nén và nhấp đúp vào tệp `TgWitness.cmd`.
+Không có Python trên Windows? Vui lòng [tải xuống gói phần mềm di động](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip), giải nén và nhấp đúp vào tệp `TgWitness.cmd`.
 
 BƯỚC 02
 
@@ -260,7 +260,7 @@ Vui lòng truy cập [127.0.0.1:8787](http://127.0.0.1:8787) sau khi khởi ch�
 
 Đối với cài đặt từ nguồn, mã thông báo nằm trong `data/live/panel-token.txt`. Việc đăng nhập Telegram có thể sử dụng cài đặt API tích hợp sẵn hoặc cặp khóa riêng của bạn từ [my.telegram.org](https://my.telegram.org). [Hướng dẫn cài đặt đầy đủ ↗](https://phishdestroy.github.io/TgWitness/vi/docs/reference/quickstart/)
 
-**TgWitness 0.7.0** [Có gì mới →](https://phishdestroy.github.io/TgWitness/vi/docs/reference/changelog/) · [Các tính năng và giới hạn đã biết →](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/)
+**TgWitness 0.7.1** [Có gì mới →](https://phishdestroy.github.io/TgWitness/vi/docs/reference/changelog/) · [Các tính năng và giới hạn đã biết →](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/)
 
 ## Hướng dẫn rõ ràng. Bước tiếp theo hữu ích.
 
@@ -273,8 +273,6 @@ Vui lòng truy cập [127.0.0.1:8787](http://127.0.0.1:8787) sau khi khởi ch�
 ## Quản lý kho lưu trữ.
 
 Tải lịch sử, xem xét các nguồn AI, kết nối với máy khách MCP, nhận diện phương tiện truyền thông đã lưu và gửi webhook có chữ ký.
-
-Có sẵn từ nguồn hiện tại. Phiên bản xem trước di động 0.7.0 ra mắt trước các công cụ này.
 
 [Khám phá quy trình làm việc](https://phishdestroy.github.io/TgWitness/vi/docs/archive/)
 

@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/archive/
 
 Trouvez le message. Vérifiez la source. Construisez votre dossier.
 
-Ces outils sont disponibles dans la branche principale actuelle. La version préliminaire portable 0.7.0 est antérieure à celles-ci ; utilisez une extraction du code source pour ce workflow.
-
 01**Intégrer l'historique**
 
 Importez les messages antérieurs provenant de vos sources activées dans l'espace de travail.

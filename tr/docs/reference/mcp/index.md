@@ -26,7 +26,7 @@ Paneli çalıştıran Python ortamını kullanın. Kaynak kod dizininden:
 
 Kurulumdan sonra paneli olağan veri dizini ve başlatma argümanlarıyla yeniden başlatın. Hazırlık kontrolü `[PASS] mcp: streamable-http available` çıktısını içermelidir. **Integrations → MCP**, çalışma zamanı durumunu ve sunucunun asıl Python yürütülebilir dosyasını kullanan bir kurulum komutunu gösterir. **Re-check**, sayfayı yeniden yüklemeden bu durumu yeniler; paket kurmaz veya sunucuyu yeniden başlatmaz.
 
-MCP ekstrası, resmi [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk) paketini kullanır. `deploy/constraints-mcp.txt`, test edilmiş SDK ve bağımlılık sürümlerini sabitler. Bu özellikler güncel kaynak kodu gerektirir; 0.7.0 taşınabilir önizleme sürümü bunlardan daha eskidir.
+MCP eklentisi, resmi [MCP Python SDK'sını](https://github.com/modelcontextprotocol/python-sdk) kullanır.`deploy/constraints-mcp.txt`, test edilmiş SDK'yı ve bağımlılıkları sabitler.
 
 ## Bağlantı oluşturma
 

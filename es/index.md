@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/es/
 
-[Código abierto / v0.7.0](https://phishdestroy.github.io/TgWitness/es/docs/reference/changelog/)
+[Código abierto / v0.7.1](https://phishdestroy.github.io/TgWitness/es/docs/reference/changelog/)
 
 Capture mensajes de Telegram, conserve sus modificaciones y exporte un registro firmado.
 
@@ -225,7 +225,7 @@ Para ejecutar el programa se requiere Python 3.11 o superior. El ejecutable de W
 
 [Consulte las versiones](https://github.com/phishdestroy/TgWitness/releases)
 
-¿No dispone de Python en Windows? [Descargue el paquete portátil](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.0/TgWitness-0.7.0-windows-amd64-portable.zip), extráigalo y haga doble clic en «`TgWitness.cmd`».
+¿No dispone de Python en Windows? [Descargue el paquete portátil](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip), extráigalo y haga doble clic en «`TgWitness.cmd`».
 
 PASO 02
 
@@ -260,7 +260,7 @@ Abra [127.0.0.1:8787](http://127.0.0.1:8787) tras el inicio.
 
 Para instalaciones desde el código fuente, el token es `data/live/panel-token.txt`. Para iniciar sesión en Telegram, puedes utilizar la configuración de la API integrada o tu propio par de claves de [my.telegram.org](https://my.telegram.org). [Guía de configuración completa ↗](https://phishdestroy.github.io/TgWitness/es/docs/reference/quickstart/)
 
-**TgWitness 0.7.0** [Novedades →](https://phishdestroy.github.io/TgWitness/es/docs/reference/changelog/) · [Características y limitaciones conocidas →](https://phishdestroy.github.io/TgWitness/es/docs/reference/features/)
+**TgWitness 0.7.1** [Novedades →](https://phishdestroy.github.io/TgWitness/es/docs/reference/changelog/) · [Características y limitaciones conocidas →](https://phishdestroy.github.io/TgWitness/es/docs/reference/features/)
 
 ## Instrucciones claras. Un siguiente paso útil.
 
@@ -273,8 +273,6 @@ Para instalaciones desde el código fuente, el token es `data/live/panel-token.t
 ## Trabaja con el archivo.
 
 Cargar el historial, revisar las fuentes de IA, conectar un cliente MCP, reconocer los archivos multimedia guardados y enviar webhooks firmados.
-
-Disponible en la fuente actual. La versión preliminar portátil 0.7.0 es anterior a estas herramientas.
 
 [Explora el flujo de trabajo](https://phishdestroy.github.io/TgWitness/es/docs/archive/)
 

@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/analy
 
 搜索已保存的消息、审查 AI 输入内容，并保存附有来源参考信息的分析报告。
 
-**当前主要版本：**请使用源代码检出；0.7.0 便携版预览版尚未包含此功能。
-
 [工作流指南](https://phishdestroy.github.io/TgWitness/docs/archive/) · [维基](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 使用**日志**可在本地进行搜索，无需 AI。如需使用**查询存档**，请先在**集成**中启用并配置服务提供商。 通过工作区选择器选择账户；通过表单选择会话和观察时间段。检索在本地进行。 输入精确短语或域名可缩小检索范围；输入消息 ID 可查询已保存的版本。 请查看摘录内容，并打开其日志记录或上下文。 本工具不包含向量数据库，也不会自动执行任何 Telegram 操作。

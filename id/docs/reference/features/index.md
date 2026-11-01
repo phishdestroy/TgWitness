@@ -22,7 +22,7 @@ MTProxy otomatis menjaga rute Telegram yang berfungsi dari empat sumber publik a
 
 ## Alat arsip
 
-`main` saat ini menambahkan [fitur perolehan riwayat](https://phishdestroy.github.io/TgWitness/id/docs/reference/history/), [pencarian dan analisis arsip](https://phishdestroy.github.io/TgWitness/id/docs/reference/analysis/), [MCP read-only](https://phishdestroy.github.io/TgWitness/id/docs/reference/mcp/), [OCR/transkripsi lokal](https://phishdestroy.github.io/TgWitness/id/docs/reference/media-analysis/), dan [webhook keluar](https://phishdestroy.github.io/TgWitness/id/docs/reference/webhooks/). Ini adalah fitur-fitur yang tersedia di repositori sumber, ditambahkan setelah pratinjau portabel versi 0.7.0. Laporan analitis dan teks yang dikenali tetap terpisah dari peristiwa yang direkam.
+[Pengambilan riwayat](https://phishdestroy.github.io/TgWitness/id/docs/reference/history/), [pencarian dan analisis arsip](https://phishdestroy.github.io/TgWitness/id/docs/reference/analysis/),[MCP read-only](https://phishdestroy.github.io/TgWitness/id/docs/reference/mcp/), [OCR/transkripsi lokal](https://phishdestroy.github.io/TgWitness/id/docs/reference/media-analysis/), dan[webhook keluar](https://phishdestroy.github.io/TgWitness/id/docs/reference/webhooks/) disertakan dalam 0.7.1. Laporan analitis dan teks yang dikenali tetap terpisah dari peristiwa yang direkam.
 
 ## Fitur tambahan opsional
 

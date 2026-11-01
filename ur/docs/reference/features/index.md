@@ -22,7 +22,7 @@ TgWitness کا اپنا انسٹالیشن، ڈیٹا ڈائریکٹری، او�
 
 ## آرکائیو ٹولز
 
-موجودہ `main` میں [ہسٹری حصول](https://phishdestroy.github.io/TgWitness/ur/docs/reference/history/)، [آرکائیو تلاش اور تجزیہ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/analysis/)، [ریڈ-اونلی MCP](https://phishdestroy.github.io/TgWitness/ur/docs/reference/mcp/)، [مقامی OCR/ٹرانسکرپشن](https://phishdestroy.github.io/TgWitness/ur/docs/reference/media-analysis/) اور [آؤٹ گوئنگ ویب ہُکس](https://phishdestroy.github.io/TgWitness/ur/docs/reference/webhooks/) شامل ہیں۔ یہ سورس-چیک آؤٹ خصوصیات ہیں، جو 0.7.0 پورٹیبل پریویو کے بعد شامل کی گئیں۔ تجزیاتی رپورٹس اور شناخت شدہ متن گرفتار کردہ واقعات سے الگ رہتے ہیں۔
+0.7.1 میں [تاریخ حصول](https://phishdestroy.github.io/TgWitness/ur/docs/reference/history/)، [آرکائیو تلاش اور تجزیہ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/analysis/)،[صرف پڑھنے کے لیے MCP](https://phishdestroy.github.io/TgWitness/ur/docs/reference/mcp/)، [مقامی OCR/ٹرانسکرپشن](https://phishdestroy.github.io/TgWitness/ur/docs/reference/media-analysis/) اور[نکلنے والے ویب ہکس](https://phishdestroy.github.io/TgWitness/ur/docs/reference/webhooks/) شامل ہیں۔ تجزیاتی رپورٹس اور شناخت شدہ متن گرفتار کردہ واقعات سے الگ رہتے ہیں۔
 
 ## اختیاری اضافی خصوصیات
 

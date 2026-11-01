@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/conne
 
 認証、自動プロキシプール、IPモード、フォールバックポリシー、外部リクエスト、およびシークレットストレージ。
 
-このドキュメントでは、TgWitness 0.7.0 の動作とその制限事項について説明します。認証、 ソースへのアクセス、ネットワーク接続、およびキャプチャの完全性は、それぞれ独立した状態です。 サインインの手順、ファイル形式、および複数アカウントについては、「 [アカウントとセッション形式](https://phishdestroy.github.io/TgWitness/ja/docs/reference/accounts/)」からご確認ください。イベントポリシーや再起動時の 動作については、[「収集の仕組み」](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/)をご覧ください。
+このドキュメントでは、TgWitness 0.7.1 の動作とその制限事項について説明します。認証、 ソースへのアクセス、ネットワーク接続、およびキャプチャの完全性は、それぞれ独立した状態です。 サインインの手順、ファイル形式、および複数アカウントについては、「 [アカウントとセッション形式](https://phishdestroy.github.io/TgWitness/ja/docs/reference/accounts/)」からご確認ください。イベントポリシーや再起動時の 動作については、[「収集の仕組み」](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/)をご覧ください。
 
 ## 認証方法
 

@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/
 
-[ओपन सोर्स / v0.7.0](https://phishdestroy.github.io/TgWitness/hi/docs/reference/changelog/)
+[ओपन सोर्स / v0.7.1](https://phishdestroy.github.io/TgWitness/hi/docs/reference/changelog/)
 
 टेलीग्राम संदेशों को कैप्चर करें, उनके परिवर्तनों को संरक्षित करें, और एक हस्ताक्षरित रिकॉर्ड निर्यात करें।
 
@@ -225,7 +225,7 @@ cd TgWitness
 
 [रिलीज़ ब्राउज़ करें](https://github.com/phishdestroy/TgWitness/releases)
 
-Windows पर Python नहीं है? [पोर्टेबल पैकेज डाउनलोड करें](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.0/TgWitness-0.7.0-windows-amd64-portable.zip), इसे एक्सट्रेक्ट करें और `TgWitness.cmd` पर डबल-क्लिक करें।
+Windows पर Python नहीं है? [पोर्टेबल पैकेज डाउनलोड करें](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip), इसे एक्सट्रेक्ट करें और `TgWitness.cmd` पर डबल-क्लिक करें।
 
 चरण 02
 
@@ -260,7 +260,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 सोर्स इंस्टॉल्स के लिए, टोकन `data/live/panel-token.txt` में है। टेलीग्राम साइन-इन अंतर्निहित API सेटिंग्स या [my.telegram.org](https://my.telegram.org) से आपके अपने जोड़े का उपयोग कर सकता है। [पूर्ण सेटअप गाइड ↗](https://phishdestroy.github.io/TgWitness/hi/docs/reference/quickstart/)
 
-**TgWitness 0.7.0** [क्या नया है →](https://phishdestroy.github.io/TgWitness/hi/docs/reference/changelog/) · [विशेषताएँ और ज्ञात सीमाएँ →](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/)
+**TgWitness 0.7.1** [क्या नया है →](https://phishdestroy.github.io/TgWitness/hi/docs/reference/changelog/) · [विशेषताएँ और ज्ञात सीमाएँ →](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/)
 
 ## स्पष्ट निर्देश। एक उपयोगी अगला कदम।
 
@@ -273,8 +273,6 @@ docker compose exec tgwitness cat /data/panel-token.txt
 ## आर्काइव पर काम करें।
 
 इतिहास लोड करें, AI स्रोतों की समीक्षा करें, एक MCP क्लाइंट कनेक्ट करें, सहेजे गए मीडिया को पहचानें और हस्ताक्षरित वेबहुक्स भेजें।
-
-वर्तमान स्रोत से उपलब्ध। 0.7.0 पोर्टेबल पूर्वावलोकन इन उपकरणों से पहले का है।
 
 [के वर्कफ़्लो का अन्वेषण करें](https://phishdestroy.github.io/TgWitness/hi/docs/archive/)
 

@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/
 
-[Oprogramowanie typu open source / v0.7.0](https://phishdestroy.github.io/TgWitness/pl/docs/reference/changelog/)
+[Oprogramowanie typu open source / v0.7.1](https://phishdestroy.github.io/TgWitness/pl/docs/reference/changelog/)
 
 Przechwytuj wiadomości z Telegrama, zachowuj wprowadzone w nich zmiany i eksportuj podpisany zapis.
 
@@ -225,7 +225,7 @@ Uruchomienie aplikacji wymaga środowiska Python 3.11 lub nowszego. Program uruc
 
 [Przeglądaj wersje](https://github.com/phishdestroy/TgWitness/releases)
 
-Nie ma Pythona w systemie Windows? [Proszę pobrać pakiet przenośny](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.0/TgWitness-0.7.0-windows-amd64-portable.zip), rozpakować go i kliknąć dwukrotnie plik „`TgWitness.cmd`”.
+Nie ma Pythona w systemie Windows? [Proszę pobrać pakiet przenośny](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip), rozpakować go i kliknąć dwukrotnie plik „`TgWitness.cmd`”.
 
 KROK 02
 
@@ -260,7 +260,7 @@ Po uruchomieniu proszę otworzyć adres [127.0.0.1:8787](http://127.0.0.1:8787).
 
 W przypadku instalacji ze źródeł token znajduje się w `data/live/panel-token.txt`. Do logowania w Telegramie można użyć wbudowanych ustawień API lub własnej pary kluczy z [my.telegram.org](https://my.telegram.org). [Pełny przewodnik konfiguracji ↗](https://phishdestroy.github.io/TgWitness/pl/docs/reference/quickstart/)
 
-**TgWitness 0.7.0** [Co nowego →](https://phishdestroy.github.io/TgWitness/pl/docs/reference/changelog/) · [Funkcje i znane ograniczenia →](https://phishdestroy.github.io/TgWitness/pl/docs/reference/features/)
+**TgWitness 0.7.1** [Co nowego →](https://phishdestroy.github.io/TgWitness/pl/docs/reference/changelog/) · [Funkcje i znane ograniczenia →](https://phishdestroy.github.io/TgWitness/pl/docs/reference/features/)
 
 ## Jasne instrukcje. Przydatne wskazówki dotyczące dalszych działań.
 
@@ -273,8 +273,6 @@ W przypadku instalacji ze źródeł token znajduje się w `data/live/panel-token
 ## Przeglądaj archiwum.
 
 Wczytuj historię, przeglądaj źródła AI, podłącz klienta MCP, rozpoznawaj zapisane multimedia i wysyłaj podpisane webhooki.
-
-Dostępne z aktualnego źródła. Przenośna wersja zapoznawcza 0.7.0 powstała przed wprowadzeniem tych narzędzi.
 
 [Zapoznaj się z przebiegiem pracy](https://phishdestroy.github.io/TgWitness/pl/docs/archive/)
 

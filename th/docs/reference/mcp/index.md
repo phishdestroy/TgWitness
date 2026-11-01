@@ -26,7 +26,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/reference/mcp/
 
 รีสตาร์ตพาเนลโดยใช้ไดเรกทอรีข้อมูลและอาร์กิวเมนต์การรันตามปกติหลังจากการติดตั้ง การตรวจสอบความพร้อมควรแสดงผลรวมถึง `[PASS] mcp: streamable-http available` **Integrations → MCP** จะแสดงสถานะรันไทม์และคำสั่งติดตั้งโดยใช้ ไฟล์ปฏิบัติการ Python จริงของเซิร์ฟเวอร์นั้น ปุ่ม **Re-check** จะรีเฟรชสถานะนี้โดยไม่ต้อง โหลดหน้าเว็บใหม่ โดยจะไม่ติดตั้งแพ็กเกจหรือรีสตาร์ตเซิร์ฟเวอร์
 
-ส่วนเสริม MCP ใช้ [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk) อย่างเป็นทางการ ไฟล์ `deploy/constraints-mcp.txt` จะล็อกรุ่นของ SDK และดีเพนเดนซีที่ผ่านการทดสอบแล้ว ฟีเจอร์เหล่านี้ ต้องใช้ซอร์สโค้ดปัจจุบัน เนื่องจากรุ่นพรีวิวแบบพกพา 0.7.0 ออกมาก่อนฟีเจอร์เหล่านี้
+ส่วนเสริม MCP ใช้[MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk) อย่างเป็นทางการ`deploy/constraints-mcp.txt` กำหนด SDK และส่วนพึ่งพาที่ได้รับการทดสอบแล้ว
 
 ## ออกการเชื่อมต่อ
 

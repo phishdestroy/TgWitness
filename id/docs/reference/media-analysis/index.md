@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/media
 
 Kenali gambar dan audio yang direkam menggunakan worker lokal; jaga agar teks yang dihasilkan tetap tertaut ke berkas asalnya.
 
-**Versi utama saat ini:** gunakan checkout sumber; pratinjau portabel 0.7.0 dirilis sebelum fitur ini tersedia.
-
 [Panduan alur kerja](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Buka catatan jurnal `media.saved`, pilih "**Kenali lampiran**", lalu pilih OCR atau transkripsi di bawah **"Tanyakan ke arsip**". Pemrosesan dilakukan secara manual dan lokal. Tidak ada mode media cloud atau unggahan otomatis. Byte lampiran asli dan `media_sha256` tetap tidak berubah; teks yang dikenali ditandai secara eksplisit sebagai hasil pengenalan mesin dan disimpan terpisah bersama hash sumber, versi mesin/model, bahasa, parameter, dan waktu penyelesaian. Transkrip mempertahankan cap waktu yang dikembalikan.

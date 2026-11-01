@@ -28,8 +28,6 @@ git clone https://github.com/phishdestroy/TgWitness.git
 cd TgWitness
 ```
 
-Sumber semasa merangkumi import akaun berkelompok, papan pemuka MTProxy dan pemuatan sejarah yang boleh disambung semula. Pratonton mudah alih 0.7.0 serta arkib sumber keluarannya diterbitkan sebelum penambahan ini. Lihat [log perubahan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/changelog/) untuk sempadan versi.
-
 `Start.cmd` menawarkan pemasangan Python 3.12 untuk pengguna Windows anda jika tiada Python yang sesuai ditemui (winget, atau pemasang python.org yang ditandatangani). `start.sh` mencetak arahan pemasangan yang tepat untuk edaran Linux atau macOS anda jika Python tiada. Pelancaran sumber pertama akan mencipta `.venv` dan memasang kebergantungan secara automatik.
 
 Docker membina aplikasi dan memulakannya di latar belakang; Python hos tidak diperlukan. `scripts\Docker.cmd` dan `scripts/docker-start.sh` mencetak alamat panel dan token apabila kontena sihat. Perintah Docker yang setara pada setiap hos yang disokong ialah:

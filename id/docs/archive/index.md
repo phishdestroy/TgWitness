@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/archive/
 
 Temukan pesan. Periksa sumbernya. Bangun kasusnya.
 
-Alat-alat ini tersedia di cabang utama saat ini. Versi pratinjau portabel 0.7.0 dirilis sebelum versi tersebut; gunakan checkout sumber untuk alur kerja ini.
-
 01**Menampilkan riwayat**
 
 Muat pesan-pesan sebelumnya dari sumber-sumber yang telah diaktifkan ke dalam ruang kerja.

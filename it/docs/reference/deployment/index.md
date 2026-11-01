@@ -127,7 +127,7 @@ Tale contenuto diventa disponibile al termine di un [flusso di lavoro di rilasci
 Copi `deploy/env.example` in `.env`. Imposti `TGWITNESS_IMAGE` sulla versione pubblicata, utilizzando il percorso del repository **in minuscolo**, ad esempio:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.1
 TGWITNESS_PORT=8787
 ```
 
@@ -206,10 +206,11 @@ Verifichi l’accesso al pannello di controllo, l’identità dell’account, lo
 
 Il [flusso di lavoro di rilascio](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml) è pronto all’uso dopo che il presente progetto è stato caricato in un repository GitHub con Actions abilitato. Si avvia quando viene **pubblicata** una versione su GitHub, compresa una versione preliminare. Le bozze e i push di tag da soli non comportano la pubblicazione dei pacchetti.
 
-1. Impostare la versione del pacchetto e il log delle modifiche, quindi pubblicare una versione contrassegnata con `v` più la versione esatta `pyproject.toml`, ad esempio `v0.7.0`.
+1. Impostare la versione del pacchetto e il log delle modifiche, quindi pubblicare una versione contrassegnata con `v` più la versione esatta `pyproject.toml`, ad esempio `v0.7.1`.
 2. Il flusso di lavoro convalida il tag ed esegue i controlli condivisi per Windows/Linux/macOS relativi a Python, general/account-import/QR browser, source-package e Docker. Viene inoltre eseguita un’installazione nativa ex novo su tutti e tre i sistemi operativi utilizzando Python 3.12.
-3. Una volta superati tali controlli, esegue uno smoke test su un’immagine ARM64 in ambiente QEMU, pubblica le immagini AMD64/ARM64 su `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`, e allega alla versione il file ZIP del codice sorgente, il checksum e il pacchetto Python wheel. Un processo separato su Windows compila e allega il file ZIP portatile e il relativo checksum.
-4. Dopo la prima pubblicazione, apra le impostazioni del pacchetto GHCR e imposti la visibilità su **«Pubblico»** qualora si intenda effettuare il recupero anonimo delle immagini. Un repository di origine pubblico di per sé non garantisce un pacchetto container pubblico. Le politiche dell’organizzazione devono consentire la pubblicazione del pacchetto. Il flusso di lavoro utilizza `GITHUB_TOKEN`; nessuna password del registro né credenziali VPS devono essere presenti nel repository.
+3. Una volta superati tali controlli, esegue uno smoke test su un'immagine ARM64 in ambiente QEMU, pubblica le immagini AMD64/ARM64 su `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`, e allega il file ZIP sorgente e il wheel Python con i relativi sidecar SHA-256. Il file ZIP portatile per Windows è l'artefatto esatto testato dal flusso di lavoro dei controlli; il flusso di lavoro di rilascio scarica e pubblica tale artefatto e il suo checksum.
+4. Un'operazione finale scarica nuovamente tutti e tre i pacchetti pubblicati e ne verifica i checksum. Successivamente pubblica `SHA256SUMS.txt` e `RELEASE-MANIFEST.json`, registrando la versione, la revisione del codice sorgente e le dimensioni delle risorse. I caricamenti non sovrascrivono le risorse di rilascio esistenti.
+5. Dopo la prima pubblicazione, apra le impostazioni del pacchetto GHCR e imposti la visibilità su **«Pubblico»** qualora si intenda effettuare il recupero anonimo delle immagini. Un repository di origine pubblico di per sé non garantisce un pacchetto container pubblico. Le politiche dell’organizzazione devono consentire la pubblicazione del pacchetto. Il flusso di lavoro utilizza `GITHUB_TOKEN`; nessuna password del registro né credenziali VPS devono essere presenti nel repository.
 
 Il successo del flusso di lavoro remoto non è stato ancora dimostrato da questa configurazione locale. L’emulazione ARM64 costituisce un test preliminare, non una qualificazione su hardware nativo o su Telegram in tempo reale. Ciò automatizza la creazione del pacchetto di rilascio; l’avvio di un server richiede comunque il comando Compose e i relativi prerequisiti relativi a dominio/host. I server esistenti non vengono aggiornati né riavviati in modo automatico quando viene pubblicata una nuova versione.
 

@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/
 
-[โอเพนซอร์ส / v0.7.0](https://phishdestroy.github.io/TgWitness/th/docs/reference/changelog/)
+[โอเพนซอร์ส / v0.7.1](https://phishdestroy.github.io/TgWitness/th/docs/reference/changelog/)
 
 บันทึกข้อความ Telegram, รักษาการเปลี่ยนแปลงของข้อความ และส่งออกบันทึกที่มีลายเซ็น
 
@@ -225,7 +225,7 @@ cd TgWitness
 
 [ดูเวอร์ชันที่ปล่อยออกมา](https://github.com/phishdestroy/TgWitness/releases)
 
-ไม่มี Python บน Windows? [ดาวน์โหลดแพ็กเกจแบบพกพา (portable package](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.0/TgWitness-0.7.0-windows-amd64-portable.zip)) แตกไฟล์ออก แล้วคลิกสองครั้งที่ `TgWitness.cmd`
+ไม่มี Python บน Windows? [ดาวน์โหลดแพ็กเกจแบบพกพา (portable package](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip)) แตกไฟล์ออก แล้วคลิกสองครั้งที่ `TgWitness.cmd`
 
 ขั้นตอน 02
 
@@ -260,7 +260,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 สำหรับการติดตั้งจากแหล่งต้นแบบ โทเค็นอยู่ที่ `data/live/panel-token.txt` การลงชื่อเข้าใช้ Telegram สามารถใช้การตั้งค่า API ที่มาพร้อมระบบ หรือคู่กุญแจของคุณเองจาก [my.telegram.org](https://my.telegram.org) [คู่มือการตั้งค่าครบถ้วน ↗](https://phishdestroy.github.io/TgWitness/th/docs/reference/quickstart/)
 
-**TgWitness 0.7.0** [มีอะไรใหม่ →](https://phishdestroy.github.io/TgWitness/th/docs/reference/changelog/) · [คุณสมบัติและข้อจำกัดที่ทราบ →](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/)
+**TgWitness 0.7.1** [มีอะไรใหม่ →](https://phishdestroy.github.io/TgWitness/th/docs/reference/changelog/) · [คุณสมบัติและข้อจำกัดที่ทราบ →](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/)
 
 ## คำแนะนำที่ชัดเจน ขั้นตอนต่อไปที่มีประโยชน์
 
@@ -273,8 +273,6 @@ docker compose exec tgwitness cat /data/panel-token.txt
 ## จัดการกับคลังข้อมูล
 
 โหลดประวัติ, ตรวจสอบแหล่งข้อมูล AI, เชื่อมต่อไคลเอนต์ MCP, ระบุสื่อที่บันทึกไว้ และส่ง webhooks ที่มีลายเซ็น
-
-มีให้ดาวน์โหลดจากแหล่งปัจจุบัน เวอร์ชัน 0.7.0 portable preview ถูกพัฒนาขึ้นก่อนเครื่องมือเหล่านี้
 
 [สำรวจขั้นตอนการทำงาน](https://phishdestroy.github.io/TgWitness/th/docs/archive/)
 

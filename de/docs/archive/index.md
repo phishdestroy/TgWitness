@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/archive/
 
 Die Nachricht finden. Die Quelle überprüfen. Den Fall aufbauen.
 
-Diese Tools sind im aktuellen Hauptzweig verfügbar. Die portable Vorschauversion 0.7.0 ist älter als diese; verwenden Sie für diesen Arbeitsablauf einen Quellcode-Checkout.
-
 01**Den Verlauf einbeziehen**
 
 Laden Sie vergangene Nachrichten aus Ihren aktivierten Quellen in den Arbeitsbereich.
