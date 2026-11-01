@@ -41,6 +41,7 @@ pre .copy-control:focus-visible { outline-color:#8eafff; }
 .sidebar-note { border-top:1px solid var(--line); margin:30px 12px 0; padding-top:20px; font-size:11px; color:var(--muted); }
 .breadcrumbs { display:flex; align-items:center; flex-wrap:wrap; gap:8px; color:var(--muted); font-size:11px; margin:0 0 24px; }
 .breadcrumbs a { text-decoration:none; color:var(--muted); }
+.verification-shortcut { margin:-10px 0 22px; font-size:13px; font-weight:600; }
 .docs-main { min-width:0; }
 .search { margin-bottom:44px; }
 .search label { display:block; font-size:12px; font-weight:600; margin-bottom:8px; }
