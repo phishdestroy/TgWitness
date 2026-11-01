@@ -28,8 +28,6 @@ git clone https://github.com/phishdestroy/TgWitness.git
 cd TgWitness
 ```
 
-Güncel kaynak kodu; toplu hesap içe aktarma, MTProxy kontrol paneli ve kaldığı yerden devam edebilen geçmiş yükleme özelliklerini içerir. 0.7.0 taşınabilir önizleme sürümü ve sürüm kaynak arşivi bu eklemelerden önceye aittir. Sürüm sınırları için [değişiklik günlüğüne](https://phishdestroy.github.io/TgWitness/tr/docs/reference/changelog/) bakın.
-
 `Start.cmd`, uygun bir Python bulunamazsa Windows kullanıcınız için Python 3.12 kurmayı önerir (winget veya imzalı python.org yükleyicisi ile). `start.sh`, Python eksikse Linux dağıtımınız veya macOS için tam kurulum komutunu yazdırır. Kaynak koddan ilk başlatma, `.venv` ortamını oluşturur ve bağımlılıkları otomatik olarak yükler.
 
 Docker, uygulamayı derler ve arka planda çalıştırır; Python ana bilgisayarı gerekmez. `scripts\Docker.cmd` ve `scripts/docker-start.sh`, konteyner çalışır durumdayken panel adresini ve jetonu yazdırır. Desteklenen her ana bilgisayarda kullanılabilecek eşdeğer Docker komutları şunlardır:

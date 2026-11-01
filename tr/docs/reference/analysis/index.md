@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/analy
 
 Kaydedilen mesajları arayın, yapay zeka girdilerini inceleyin ve kaynak referanslarıyla birlikte analitik raporlar tutun.
 
-**Güncel ana sürüm:** kaynak kodunu kontrol edin; 0.7.0 taşınabilir önizleme sürümü bu özelliğin öncesine aittir.
-
 [İş akışı kılavuzu](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Yapay zekâ kullanmadan yerel arama yapmak için **Günlük** bölümünü kullanın. **Arşive sor** özelliği için önce **Entegrasyonlar** bölümünde bir sağlayıcıyı etkinleştirip yapılandırın. Çalışma alanı seçici hesabı belirler; form ise sohbetleri ve gözlem dönemini belirler. Getirme işlemi yerel olarak çalışır. Tam bir ifade veya alan adı getirilen sonuçları daraltır; bir mesaj kimliği kaydedilmiş sürümleri talep eder. Alıntıları inceleyin ve ilgili günlük kayıtlarını veya bağlamlarını açın. Vektör veritabanı veya otomatik Telegram eylemi yoktur.

@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/analy
 
 Tìm kiếm các tin nhắn đã lưu, xem lại các đầu vào từ AI và lưu giữ các báo cáo phân tích kèm theo nguồn tham khảo.
 
-**Phiên bản chính hiện tại:** sử dụng bản checkout từ kho nguồn; phiên bản xem trước di động 0.7.0 ra mắt trước khi tính năng này được triển khai.
-
 [Hướng dẫn quy trình làm việc](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Dùng **Sổ nhật ký** để tìm kiếm cục bộ mà không cần AI. Để dùng **Hỏi kho lưu trữ**, trước tiên hãy bật và cấu hình một nhà cung cấp trong **Tích hợp**. Trình chọn không gian làm việc dùng để chọn tài khoản; biểu mẫu dùng để chọn các cuộc trò chuyện và khoảng thời gian quan sát. Việc truy xuất được thực hiện cục bộ. Một cụm từ chính xác hoặc tên miền sẽ thu hẹp phạm vi truy xuất; ID tin nhắn sẽ yêu cầu các phiên bản đã lưu. Hãy xem lại các đoạn trích và mở bản ghi nhật ký hoặc ngữ cảnh của chúng. Không có cơ sở dữ liệu vectơ hay hành động tự động nào trên Telegram.

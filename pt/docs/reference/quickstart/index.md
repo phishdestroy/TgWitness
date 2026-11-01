@@ -28,8 +28,6 @@ git clone https://github.com/phishdestroy/TgWitness.git
 cd TgWitness
 ```
 
-O código-fonte atual inclui importação de contas em lote, o painel MTProxy e carregamento de histórico retomável. A prévia portátil 0.7.0 e o arquivo de código-fonte do seu lançamento são anteriores a essas adições. Veja [o changelog](https://phishdestroy.github.io/TgWitness/pt/docs/reference/changelog/) para entender o limite entre as versões.
-
 O `Start.cmd` oferece a instalação do Python 3.12 para o seu usuário do Windows caso nenhuma versão adequada do Python seja encontrada (via winget ou pelo instalador assinado do python.org). O `start.sh` exibe o comando exato de instalação para a sua distribuição Linux ou macOS se o Python estiver ausente. A primeira execução a partir do código-fonte cria o `.venv` e instala as dependências automaticamente.
 
 O Docker compila o aplicativo e o inicia em segundo plano; não é necessário um host Python. `scripts\Docker.cmd` e `scripts/docker-start.sh` exibem o endereço do painel e o token quando o contêiner está em bom estado. Os comandos equivalentes do Docker em todos os hosts compatíveis são:

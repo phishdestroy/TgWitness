@@ -26,7 +26,7 @@ Użyj środowiska Python, w którym działa panel. Z pobranego kodu źródłoweg
 
 Po instalacji uruchom ponownie panel ze standardowym katalogiem danych i argumentami startowymi. Sprawdzenie gotowości powinno zawierać `[PASS] mcp: streamable-http available`. Sekcja **Integrations → MCP** pokazuje status środowiska uruchomieniowego oraz polecenie instalacyjne używające rzeczywistego pliku wykonywalnego Pythona na tym serwerze. Przycisk **Re-check** odświeża ten status bez przeładowywania strony; nie instaluje pakietów ani nie restartuje serwera.
 
-Dodatek MCP wykorzystuje oficjalny pakiet [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk). Plik `deploy/constraints-mcp.txt` przypina przetestowane wersje SDK i zależności. Funkcje te wymagają aktualnego kodu źródłowego; przenośna wersja poglądowa 0.7.0 powstała przed ich wprowadzeniem.
+Dodatek MCP korzysta z oficjalnego zestawu [SDK MCP dla języka Python](https://github.com/modelcontextprotocol/python-sdk). Plik`deploy/constraints-mcp.txt` określa wersję testowanego zestawu SDK i zależności.
 
 ## Utworzenie połączenia
 

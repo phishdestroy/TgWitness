@@ -26,7 +26,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/
 
 설치 후 기존 데이터 디렉터리 및 실행 인수를 사용하여 패널을 재시작합니다. 준비 상태(Readiness) 결과에 `[PASS] mcp: streamable-http available`이 포함되어야 합니다. **Integrations → MCP**에서는 해당 서버의 실제 Python 실행 파일을 사용하는 설치 명령어와 런타임 상태를 확인할 수 있습니다. **Re-check**를 누르면 페이지를 새로고침하지 않고 이 상태를 갱신하며, 패키지를 설치하거나 서버를 재시작하지는 않습니다.
 
-MCP 추가 기능(extra)은 공식 [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk)를 사용합니다. `deploy/constraints-mcp.txt`에는 테스트를 거친 SDK 및 의존성 버전이 고정되어 있습니다. 이 기능을 사용하려면 최신 소스 코드가 필요하며, 0.7.0 포터블 프리뷰 버전은 이 기능이 추가되기 전에 출시되었습니다.
+이 MCP 엑스트라는 공식 [MCP Python SDK를](https://github.com/modelcontextprotocol/python-sdk) 사용합니다.`deploy/constraints-mcp.txt` 에는 테스트를 거친 SDK 및 종속성이 명시되어 있습니다.
 
 ## 연결 발급
 

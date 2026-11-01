@@ -22,7 +22,7 @@ TgWitness की अपनी इंस्टॉलेशन, डेटा ड�
 
 ## आर्काइव उपकरण
 
-वर्तमान `main` में [इतिहास अधिग्रहण](https://phishdestroy.github.io/TgWitness/hi/docs/reference/history/), [आर्काइव खोज और विश्लेषण](https://phishdestroy.github.io/TgWitness/hi/docs/reference/analysis/), [केवल-पठन MCP](https://phishdestroy.github.io/TgWitness/hi/docs/reference/mcp/), [स्थानीय OCR/प्रतिलेखन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/media-analysis/) और [आउटगोइंग वेबहुक्स](https://phishdestroy.github.io/TgWitness/hi/docs/reference/webhooks/) जोड़े गए हैं। ये स्रोत-चेकआउट सुविधाएँ हैं, जिन्हें 0.7.0 पोर्टेबल पूर्वावलोकन के बाद जोड़ा गया है। विश्लेषणात्मक रिपोर्ट और पहचाना गया पाठ कैप्चर की गई घटनाओं से अलग रहते हैं।
+[इतिहास अधिग्रहण](https://phishdestroy.github.io/TgWitness/hi/docs/reference/history/), [अभिलेखागार खोज और विश्लेषण](https://phishdestroy.github.io/TgWitness/hi/docs/reference/analysis/),[केवल-पठन MCP](https://phishdestroy.github.io/TgWitness/hi/docs/reference/mcp/), [स्थानीय OCR/प्रतिलेखन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/media-analysis/) और[आउटगोइंग वेबहुक्स](https://phishdestroy.github.io/TgWitness/hi/docs/reference/webhooks/) 0.7.1 में शामिल हैं। विश्लेषणात्मक रिपोर्टें और पहचाना गया पाठ कैप्चर की गई घटनाओं से अलग रहते हैं।
 
 ## वैकल्पिक अतिरिक्त
 

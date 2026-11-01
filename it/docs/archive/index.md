@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/archive/
 
 Trova il messaggio. Verifica la fonte. Costruisci il caso.
 
-Questi strumenti sono disponibili nel ramo principale attuale. L'anteprima portatile 0.7.0 è precedente a questi; per questo flusso di lavoro, utilizzare un checkout dal codice sorgente.
-
 01**Inserire la cronologia**
 
 Carica i messaggi precedenti dalle tue fonti abilitate nell’area di lavoro.

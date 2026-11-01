@@ -28,8 +28,6 @@ git clone https://github.com/phishdestroy/TgWitness.git
 cd TgWitness
 ```
 
-Joriy manba kodiga hisoblarni ommaviy import qilish, MTProxy boshqaruv paneli va davom ettiriladigan tarixni yuklash kiradi. 0.7.0 portativ sinov talqini va uning reliz manba arxivi ushbu qo‘shimchalardan oldin chiqarilgan. Versiyalar chegarasini bilish uchun [o‘zgarishlar jurnalini](https://phishdestroy.github.io/TgWitness/uz/docs/reference/changelog/) ko‘ring.
-
 Agar mos Python topilmasa, `Start.cmd` Windows foydalanuvchingiz uchun Python 3.12 ni o‘rnatishni taklif qiladi (winget yoki imzolangan python.org o‘rnatuvchisi orqali). Agar Python mavjud bo‘lmasa, `start.sh` Linux distributivingiz yoki macOS uchun aniq o‘rnatish buyrug‘ini chiqaradi. Manbadan birinchi marta ishga tushirilganda `.venv` yaratiladi va bog‘liqliklar avtomatik ravishda o‘rnatiladi.
 
 Docker ilovani kompilyatsiya qilib, uni fon rejimida ishga tushiradi; host Python keraksiz. `scripts\Docker.cmd` va `scripts/docker-start.sh` konteyner sog'lom holatda bo'lganda panel manzili va tokenni chop etadi. Har bir qo'llab-quvvatlanadigan hostdagi ekvivalent Docker buyruqlari quyidagilardan iborat:

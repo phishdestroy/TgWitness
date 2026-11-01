@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/webho
 
 Mengirimkan peristiwa yang telah difilter ke penerima HTTPS dengan tanda tangan HMAC, upaya pengiriman ulang, dan status pengiriman.
 
-**Versi utama saat ini:** gunakan checkout sumber; pratinjau portabel 0.7.0 dirilis sebelum fitur ini tersedia.
-
 [Panduan alur kerja](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Buka **Integrasi → Webhook keluar** di ruang kerja yang dipilih. Tambahkan penerima HTTPS, pilih peristiwa pengumpul/media/ekspor, dan secara opsional pilih obrolan untuk pengamatan baru dan perubahan. Teks pesan dinonaktifkan secara default. Mengaktifkan kutipan akan menambahkan maksimal 1.000 karakter ke peristiwa perubahan pesan; bidang Telegram mentah dan kredensial tidak pernah dikirim.

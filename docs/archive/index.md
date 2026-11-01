@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/archive/
 
 Find the message. Check the source. Build the case.
 
-These tools are available from the current main branch. The 0.7.0 portable preview predates them; use a source checkout for this workflow.
-
 01**Bring in the history**
 
 Load past messages from your enabled sources into the workspace.

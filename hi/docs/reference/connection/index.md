@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/conne
 
 प्रमाणीकरण, स्वचालित प्रॉक्सी पूल, आईपी मोड, फॉलबैक नीति, बाहरी अनुरोध और गुप्त भंडारण।
 
-यह दस्तावेज़ TgWitness 0.7.0 के व्यवहार और इसकी सीमाओं का वर्णन करता है। प्रमाणीकरण, स्रोत पहुँच, नेटवर्क कनेक्टिविटी और कैप्चर की पूर्णता अलग-अलग स्थितियाँ हैं। साइन-इन चरणों, फ़ाइल स्वरूपों और एकाधिक खातों के लिए, [खातों और सत्र स्वरूपों](https://phishdestroy.github.io/TgWitness/hi/docs/reference/accounts/) से शुरू करें। इवेंट नीतियों और पुनरारंभ व्यवहार के लिए, देखें [कि संग्रहण कैसे काम करता है](https://phishdestroy.github.io/TgWitness/hi/docs/reference/collection/)।
+यह दस्तावेज़ TgWitness 0.7.1 के व्यवहार और इसकी सीमाओं का वर्णन करता है। प्रमाणीकरण, स्रोत पहुँच, नेटवर्क कनेक्टिविटी और कैप्चर की पूर्णता अलग-अलग स्थितियाँ हैं। साइन-इन चरणों, फ़ाइल स्वरूपों और एकाधिक खातों के लिए, [खातों और सत्र स्वरूपों](https://phishdestroy.github.io/TgWitness/hi/docs/reference/accounts/) से शुरू करें। इवेंट नीतियों और पुनरारंभ व्यवहार के लिए, देखें [कि संग्रहण कैसे काम करता है](https://phishdestroy.github.io/TgWitness/hi/docs/reference/collection/)।
 
 ## प्रमाणिकरण विधियाँ
 

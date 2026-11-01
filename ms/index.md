@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/
 
-[Sumber terbuka / v0.7.0](https://phishdestroy.github.io/TgWitness/ms/docs/reference/changelog/)
+[Sumber terbuka / v0.7.1](https://phishdestroy.github.io/TgWitness/ms/docs/reference/changelog/)
 
 Rekod mesej Telegram, pelihara perubahan mereka, dan eksport rekod yang disahkan.
 
@@ -225,7 +225,7 @@ Pelancaran sumber memerlukan Python 3.11+. Pelancar Windows menawarkan pemasanga
 
 [Layari keluaran](https://github.com/phishdestroy/TgWitness/releases)
 
-Tiada Python pada Windows? [Muat turun pakej mudah alih](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.0/TgWitness-0.7.0-windows-amd64-portable.zip), ekstrak dan klik dua kali `TgWitness.cmd`.
+Tiada Python pada Windows? [Muat turun pakej mudah alih](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip), ekstrak dan klik dua kali `TgWitness.cmd`.
 
 LANGKAH 02
 
@@ -260,7 +260,7 @@ Buka [127.0.0.1:8787](http://127.0.0.1:8787) selepas pelancaran.
 
 Untuk pemasangan sumber, token berada di `data/live/panel-token.txt`. Log masuk Telegram boleh menggunakan tetapan API terbina dalam atau pasangan anda sendiri dari [my.telegram.org](https://my.telegram.org). [Panduan penyediaan penuh ↗](https://phishdestroy.github.io/TgWitness/ms/docs/reference/quickstart/)
 
-**TgWitness 0.7.0** [Apa yang baru →](https://phishdestroy.github.io/TgWitness/ms/docs/reference/changelog/) · [Ciri-ciri dan had yang diketahui →](https://phishdestroy.github.io/TgWitness/ms/docs/reference/features/)
+**TgWitness 0.7.1** [Apa yang baru →](https://phishdestroy.github.io/TgWitness/ms/docs/reference/changelog/) · [Ciri-ciri dan had yang diketahui →](https://phishdestroy.github.io/TgWitness/ms/docs/reference/features/)
 
 ## Arahan yang jelas. Langkah seterusnya yang berguna.
 
@@ -273,8 +273,6 @@ Untuk pemasangan sumber, token berada di `data/live/panel-token.txt`. Log masuk 
 ## Kerjakan arkib.
 
 Muat sejarah, semak sumber AI, sambungkan klien MCP, kenal pasti media yang disimpan dan hantar webhook yang disahkan.
-
-Tersedia daripada sumber semasa. Pratonton mudah alih 0.7.0 wujud sebelum alat-alat ini.
 
 [Terokai aliran kerja](https://phishdestroy.github.io/TgWitness/ms/docs/archive/)
 

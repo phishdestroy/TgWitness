@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/histo
 
 Etkinleştirilmiş kaynaklardan geçmiş mesajları yükleyin, işlemi duraklatıp devam ettirin ve imzalı bir ilerleme raporunu doğrulayın.
 
-**Mevcut ana sürüm:** kaynak koddan edinilebilir; 0.7.0 taşınabilir önizleme sürümüne dahil değildir.
-
 **Kaynaklar** bölümünde, etkinleştirilmiş sohbetleri gözden geçirin, gözlemi başlatın, ardından **"Tüm geçmişi yükle**" seçeneğini seçin. İşlem, kaynak listesini sabitler ve mevcut geçmiş mesajlarını Sohbetler bölümüne ve imzalı gözlem günlüğüne aktarır. Medya, mevcut ek ayarlarını ve kalıcı indirme kuyruğunu kullanır. Bu, sohbet başına imzalı JSON/HTML dışa aktarımından ayrıdır.
 
 Hesap genelinde toplama yapmak için "**Tüm hesap**" seçeneğini seçin, gözlemi başlatarak kaynak listesini yükleyin ve geçmişi başlatmadan önce bu listeyi inceleyin. İletişim kutusu listesi sınırı hâlâ geçerlidir (varsayılan olarak 1.000, Parametreler'den ayarlanabilir). İşlemin başarılı bir şekilde tamamlanması, her hesap diyaloğunun listelendiğini kanıtlamaz. Daha sonra keşfedilen veya etkinleştirilen sohbetler için işlemin tekrarlanması gerekir.

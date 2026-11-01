@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/histo
 
 Yoqilgan manbalardan avvalgi xabarlarni yuklang, to'xtating va davom ettiring, shuningdek imzolangan progress hisobotini tasdiqlang.
 
-**Hozirgi asosiy:** manbadan olinadi; 0.7.0 portativ ko'rinishiga kiritilmagan.
-
 **Manbalar** bo'limida yoqilgan suhbatlarni ko'rib chiqing, kuzatuvni boshlang, so'ngra **"To'liq tarixni yuklash"ni** tanlang. Ushbu jarayon manbalar ro'yxatini tuzatadi va ularning mavjud avvalgi xabarlarini Suhbatlarga hamda imzolangan kuzatuv jurnaliga yuklaydi. Media mavjud ilova sozlamalari va barqaror yuklab olish navbatidan foydalanadi. Bu har bir suhbat bo'yicha imzolangan JSON/HTML eksportidan alohida.
 
 Hisob bo'yicha to'liq yig'ish uchun "**Butun hisob**"ni tanlang, manba ro'yxatini yuklash uchun kuzatuvni boshlashingiz va tarixni boshlashdan oldin ushbu ro'yxatni ko'rib chiqishingiz kerak. Dialog-ro'yxat chegarasi hanuz amalda (o'rnatilgan bo'yicha 1 000, Parametrlarda sozlanishi mumkin). Muvaffaqiyatli ish har bir hisob-dialog ro'yxatga olingani dalil emas. Keyinchalik topilgan yoki yoqilgan suhbatlar uchun yana bir marta ishga tushirish kerak bo'ladi.

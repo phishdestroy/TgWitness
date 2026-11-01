@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/conne
 
 Kimlik doğrulama, otomatik proxy havuzları, IP modları, yedekleme politikası, harici istekler ve gizli depolama.
 
-Bu belge, TgWitness 0.7.0 sürümünün davranışını ve sınırlarını açıklamaktadır. Kimlik doğrulama, kaynağa erişim, ağ bağlantısı ve yakalama eksiksizliği ayrı durumlardır. Oturum açma adımları, dosya biçimleri ve birden fazla hesap hakkında bilgi için [hesaplar ve oturum biçimleri](https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/) bölümünden başlayın. Olay ilkeleri ve yeniden başlatma davranışı hakkında bilgi için [toplama işleminin nasıl çalıştığına](https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/) bakın.
+Bu belge, TgWitness 0.7.1 sürümünün davranışını ve sınırlarını açıklamaktadır. Kimlik doğrulama, kaynağa erişim, ağ bağlantısı ve yakalama eksiksizliği ayrı durumlardır. Oturum açma adımları, dosya biçimleri ve birden fazla hesap hakkında bilgi için [hesaplar ve oturum biçimleri](https://phishdestroy.github.io/TgWitness/tr/docs/reference/accounts/) bölümünden başlayın. Olay ilkeleri ve yeniden başlatma davranışı hakkında bilgi için [toplama işleminin nasıl çalıştığına](https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/) bakın.
 
 ## Kimlik doğrulama yöntemleri
 

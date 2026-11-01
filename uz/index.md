@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/
 
-[Ochiq manba / v0.7.0](https://phishdestroy.github.io/TgWitness/uz/docs/reference/changelog/)
+[Ochiq manba / v0.7.1](https://phishdestroy.github.io/TgWitness/uz/docs/reference/changelog/)
 
 Telegram xabarlarini yozib oling, ularning o'zgartirishlarini saqlang va imzolangan yozuvni eksport qiling.
 
@@ -225,7 +225,7 @@ Manba ishga tushirish uchun Python 3.11+ talab etiladi. Windows ishga tushiruvch
 
 [Chiqarilishlarni ko'rib chiqing](https://github.com/phishdestroy/TgWitness/releases)
 
-Windowsda Python yo'qmi? [Portativ paketni yuklab oling](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.0/TgWitness-0.7.0-windows-amd64-portable.zip), arxivni oching va`TgWitness.cmd` fayliga ikki marta boshingiz.
+Windowsda Python yo'qmi? [Portativ paketni yuklab oling](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip), arxivni oching va`TgWitness.cmd` fayliga ikki marta boshingiz.
 
 02-qadam
 
@@ -260,7 +260,7 @@ Ishga tushirgandan so‘ng [127.0.0.1:8787](http://127.0.0.1:8787) manzilini och
 
 Manba kodidan o'rnatishda token `data/live/panel-token.txt` da joylashgan. Telegramga kirish uchun o'rnatilgan API sozlamalaridan yoki [my.telegram.org](https://my.telegram.org) saytidan olingan o'zingizning juft kalitingizdan foydalanishingiz mumkin. [To'liq sozlash bo'yicha qo'llanma ↗](https://phishdestroy.github.io/TgWitness/uz/docs/reference/quickstart/)
 
-**TgWitness 0.7.0** [Nima yangilik →](https://phishdestroy.github.io/TgWitness/uz/docs/reference/changelog/) · [Xususiyatlar va ma'lum cheklovlar →](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/)
+**TgWitness 0.7.1** [Nima yangilik →](https://phishdestroy.github.io/TgWitness/uz/docs/reference/changelog/) · [Xususiyatlar va ma'lum cheklovlar →](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/)
 
 ## Aniq ko'rsatmalar. Foydali keyingi qadam.
 
@@ -273,8 +273,6 @@ Manba kodidan o'rnatishda token `data/live/panel-token.txt` da joylashgan. Teleg
 ## Arxiv ustida ishlang.
 
 Yuklash tarixini ko'rish, sun'iy intellekt manbalarini ko'rib chiqish, MCP mijozini ulash, saqlangan media fayllarini aniqlash va imzolangan webhook'larni yuborish.
-
-Joriy manbadan mavjud. 0.7.0 portativ ko'rinishi ushbu vositalardan oldin chiqdi.
 
 [ish jarayonini o'rganing](https://phishdestroy.github.io/TgWitness/uz/docs/archive/)
 

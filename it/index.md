@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/it/
 
-[Open source / v0.7.0](https://phishdestroy.github.io/TgWitness/it/docs/reference/changelog/)
+[Open source / v0.7.1](https://phishdestroy.github.io/TgWitness/it/docs/reference/changelog/)
 
 Acquisite i messaggi di Telegram, conservatene le modifiche ed esportate un registro firmato.
 
@@ -225,7 +225,7 @@ Per l’esecuzione del programma è necessario Python 3.11 o versioni successive
 
 [Sfogliare le versioni](https://github.com/phishdestroy/TgWitness/releases)
 
-Non dispone di Python su Windows? [Scarichi il pacchetto portatile](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.0/TgWitness-0.7.0-windows-amd64-portable.zip), lo estragga e faccia doppio clic su `TgWitness.cmd`.
+Non dispone di Python su Windows? [Scarichi il pacchetto portatile](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip), lo estragga e faccia doppio clic su `TgWitness.cmd`.
 
 FASE 02
 
@@ -260,7 +260,7 @@ Aprire [127.0.0.1:8787](http://127.0.0.1:8787) dopo l’avvio.
 
 Per le installazioni dal codice sorgente, il token è `data/live/panel-token.txt`. Per l’accesso a Telegram è possibile utilizzare le impostazioni API integrate oppure la propria coppia di credenziali ottenuta da [my.telegram.org](https://my.telegram.org). [Guida completa alla configurazione ↗](https://phishdestroy.github.io/TgWitness/it/docs/reference/quickstart/)
 
-**TgWitness 0.7.0** [Novità →](https://phishdestroy.github.io/TgWitness/it/docs/reference/changelog/) · [Funzionalità e limiti noti →](https://phishdestroy.github.io/TgWitness/it/docs/reference/features/)
+**TgWitness 0.7.1** [Novità →](https://phishdestroy.github.io/TgWitness/it/docs/reference/changelog/) · [Funzionalità e limiti noti →](https://phishdestroy.github.io/TgWitness/it/docs/reference/features/)
 
 ## Istruzioni chiare. Un utile passo successivo.
 
@@ -273,8 +273,6 @@ Per le installazioni dal codice sorgente, il token è `data/live/panel-token.txt
 ## Elaborare l’archivio.
 
 Carica la cronologia, esamina le fonti AI, collega un client MCP, riconosci i file multimediali salvati e invia webhook firmati.
-
-Disponibile dalla fonte attuale. L’anteprima portatile della versione 0.7.0 è precedente a questi strumenti.
 
 [Esplora il flusso di lavoro](https://phishdestroy.github.io/TgWitness/it/docs/archive/)
 

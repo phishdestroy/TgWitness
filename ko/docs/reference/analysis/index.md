@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/analy
 
 저장된 메시지를 검색하고, AI 입력 내용을 검토하며, 출처 참조 정보가 포함된 분석 보고서를 보관할 수 있습니다.
 
-**현재 메인 버전:** 소스 체크아웃을 사용하십시오. 0.7.0 휴대용 미리보기 버전은 이 기능이 구현되기 전의 버전입니다.
-
 [워크플로우 가이드](https://phishdestroy.github.io/TgWitness/docs/archive/) · [위키](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 AI 없이 로컬 검색을 하려면 **저널**을 사용하세요. **아카이브에 문의하기**를 사용하려면 먼저 **연동 기능**에서 제공업체를 활성화하고 설정해야 합니다. 작업 공간 선택기에서 계정을 선택하고, 양식에서 대화와 관찰 기간을 선택합니다. 검색은 로컬에서 실행됩니다. 정확한 문구나 도메인을 입력하면 검색 범위가 좁혀지고, 메시지 ID를 입력하면 저장된 버전을 요청합니다. 발췌문을 검토하고 해당 저널 기록이나 맥락을 열어 보세요. 벡터 데이터베이스나 텔레그램 자동 작업 기능은 없습니다.

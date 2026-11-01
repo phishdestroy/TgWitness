@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/it/docs/reference/histo
 
 Carica i messaggi precedenti dalle fonti abilitate, metti in pausa e riprendi, quindi verifica un rapporto sullo stato di avanzamento firmato.
 
-**Versione principale attuale:** disponibile dal codice sorgente; non inclusa nell’anteprima portatile della versione 0.7.0.
-
 In **«Fonti**», esamina le chat abilitate, avvia l’osservazione, quindi seleziona **«Carica cronologia completa**». L’esecuzione fissa l’elenco delle fonti e importa i messaggi passati disponibili nelle «Chat» e nel registro di osservazione firmato. I file multimediali utilizzano le impostazioni di allegato esistenti e la coda di download permanente. Ciò è distinto dall’esportazione JSON/HTML firmata per singola chat.
 
 Per la raccolta a livello di account, selezionare **«Intero account»**, avviare l’osservazione per caricare il relativo elenco delle fonti e verificare tale elenco prima di avviare la cronologia. Il limite dell’elenco delle finestre di dialogo rimane valido (1.000 per impostazione predefinita, regolabile in «Parametri»). Un’esecuzione riuscita non garantisce che tutte le conversazioni dell’account siano state incluse nell’elenco. Le chat scoperte o abilitate in un secondo momento richiedono un’altra esecuzione.

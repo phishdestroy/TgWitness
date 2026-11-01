@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/analy
 
 Saqlangan xabarlarni qidiring, sun'iy intellekt kirimlarini ko'rib chiqing va manba havolalari bilan analitik hisobotlarni saqlang.
 
-**Hozirgi asosiy:** manbani chiqarib olishdan foydalaning; 0.7.0 portativ ko'rinishi ushbu xususiyatdan oldin yaratilgan.
-
 [Ish jarayoni bo'yicha qo'llanma](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 AIsiz mahalliy qidiruv uchun **Jurnal** bo'limidan foydalaning. **Arxivdan so'rang** funksiyasidan foydalanish uchun avval **Integratsiyalar** bo'limida provayderni yoqing va sozlang. Ish maydoni tanlovchisi hisobni tanlaydi; forma chatlar va kuzatuv davrini tanlaydi. Ma'lumotlarni izlab topish mahalliy tarzda bajariladi. Aniq ibora yoki domen izlash doirasini toraytiradi; xabar ID esa saqlangan versiyalarni so'raydi. Parchalarni ko'rib chiqing va ularning jurnal yozuvlari yoki kontekstini oching. Vektor ma'lumotlar bazasi ham, Telegramda avtomatik amallar ham yo'q.

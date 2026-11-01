@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/media
 
 Kenal pasti imej dan audio yang dirakam dengan pekerja tempatan; pastikan teks terbitan dipautkan kepada fail sumbernya.
 
-**Utama semasa:** gunakan checkout sumber; pratonton mudah alih 0.7.0 wujud sebelum ciri ini.
-
 [Panduan aliran kerja](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Buka rekod jurnal `media.saved`, pilih **Kenal pasti lampiran**, kemudian pilih OCR atau transkripsi di bawah **Tanya arkib**. Pemprosesan adalah secara manual dan tempatan. Tiada mod media awan atau muat naik automatik. Bait lampiran asal dan `media_sha256` kekal tidak berubah; teks yang diiktiraf ditandakan secara eksplisit sebagai pengiktirafan mesin dan disimpan secara berasingan dengan hash sumber, versi enjin/model, bahasa, parameter dan masa penyempurnaan. Transkrip mengekalkan cap masa yang dikembalikan.

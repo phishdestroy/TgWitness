@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/reference/conne
 
 Uwierzytelnianie, automatyczne pule serwerów proxy, tryby adresów IP, zasady rezerwowe, żądania zewnętrzne oraz przechowywanie kluczy tajnych.
 
-Niniejszy dokument opisuje działanie programu TgWitness w wersji 0.7.0 oraz jego ograniczenia. Uwierzytelnianie, dostęp do źródła, łączność sieciowa oraz kompletność przechwytywania stanowią odrębne stany. W przypadku procedur logowania, formatów plików oraz obsługi wielu kont proszę zapoznać się najpierw z sekcją [„Konta i formaty sesji](https://phishdestroy.github.io/TgWitness/pl/docs/reference/accounts/)”. Informacje na temat zasad dotyczących zdarzeń oraz zachowania po ponownym uruchomieniu można znaleźć w sekcji [„Jak działa gromadzenie danych](https://phishdestroy.github.io/TgWitness/pl/docs/reference/collection/)”.
+Niniejszy dokument opisuje działanie programu TgWitness w wersji 0.7.1 oraz jego ograniczenia. Uwierzytelnianie, dostęp do źródła, łączność sieciowa oraz kompletność przechwytywania stanowią odrębne stany. W przypadku procedur logowania, formatów plików oraz obsługi wielu kont proszę zapoznać się najpierw z sekcją [„Konta i formaty sesji](https://phishdestroy.github.io/TgWitness/pl/docs/reference/accounts/)”. Informacje na temat zasad dotyczących zdarzeń oraz zachowania po ponownym uruchomieniu można znaleźć w sekcji [„Jak działa gromadzenie danych](https://phishdestroy.github.io/TgWitness/pl/docs/reference/collection/)”.
 
 ## Metody uwierzytelniania
 

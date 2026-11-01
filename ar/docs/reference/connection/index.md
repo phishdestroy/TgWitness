@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/conne
 
 المصادقة، ومجموعات البروكسي التلقائية، وأنماط عناوين IP، وسياسة الحل البديل، والطلبات الخارجية، والتخزين السري.
 
-يصف هذا المستند سلوك TgWitness 0.7.0 وحدوده. تعتبر المصادقة، والوصول إلى المصدر، والاتصال بالشبكة، واكتمال التقاط البيانات حالات منفصلة. للاطلاع على خطوات تسجيل الدخول، وتنسيقات الملفات، والحسابات المتعددة، ابدأ بـ [«الحسابات وتنسيقات الجلسات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/accounts/)». وللاطلاع على سياسات الأحداث وسلوك إعادة التشغيل، انظر [«كيفية عمل عملية التجميع](https://phishdestroy.github.io/TgWitness/ar/docs/reference/collection/)».
+يصف هذا المستند سلوك TgWitness 0.7.1 وحدوده. تعتبر المصادقة، والوصول إلى المصدر، والاتصال بالشبكة، واكتمال التقاط البيانات حالات منفصلة. للاطلاع على خطوات تسجيل الدخول، وتنسيقات الملفات، والحسابات المتعددة، ابدأ بـ [«الحسابات وتنسيقات الجلسات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/accounts/)». وللاطلاع على سياسات الأحداث وسلوك إعادة التشغيل، انظر [«كيفية عمل عملية التجميع](https://phishdestroy.github.io/TgWitness/ar/docs/reference/collection/)».
 
 ## طرق المصادقة
 

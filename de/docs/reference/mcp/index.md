@@ -26,7 +26,7 @@ Verwenden Sie die Python-Umgebung, in der das Panel ausgeführt wird. Aus einem 
 
 Starten Sie das Panel nach der Installation mit dem üblichen Datenverzeichnis und den gewohnten Startargumenten neu. Die Bereitschaftsprüfung sollte `[PASS] mcp: streamable-http available` enthalten. **Integrations → MCP** zeigt den Laufzeitstatus sowie einen Installationsbefehl an, der die tatsächliche Python-Programmdatei des Servers verwendet. **Re-check** aktualisiert diesen Status ohne erneutes Laden der Seite; es werden dabei keine Pakete installiert und der Server wird nicht neu gestartet.
 
-Das MCP-Extra nutzt das offizielle [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk). `deploy/constraints-mcp.txt` legt das getestete SDK und dessen Abhängigkeiten fest. Diese Funktionen erfordern aktuellen Quellcode; die portable Vorschauversion 0.7.0 ist älter als diese Funktionen.
+Das MCP-Extra nutzt das offizielle [MCP-Python-SDK](https://github.com/modelcontextprotocol/python-sdk).`deploy/constraints-mcp.txt` legt das getestete SDK und die Abhängigkeiten fest.
 
 ## Verbindung erstellen
 

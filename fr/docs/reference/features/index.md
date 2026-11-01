@@ -22,7 +22,7 @@ MTProxy, qui fonctionne automatiquement, maintient des routes Telegram opératio
 
 ## Outils d'archivage
 
-La version actuelle `main` ajoute [la collecte de l'historique](https://phishdestroy.github.io/TgWitness/fr/docs/reference/history/), [la recherche et l'analyse dans les archives](https://phishdestroy.github.io/TgWitness/fr/docs/reference/analysis/), [un MCP en lecture seule](https://phishdestroy.github.io/TgWitness/fr/docs/reference/mcp/), [l'OCR/transcription locale](https://phishdestroy.github.io/TgWitness/fr/docs/reference/media-analysis/) et [les webhooks sortants](https://phishdestroy.github.io/TgWitness/fr/docs/reference/webhooks/). Il s'agit de fonctionnalités issues du code source, ajoutées après la préversion portable 0.7.0. Les rapports analytiques et le texte reconnu restent séparés des événements capturés.
+[L'acquisition de l'historique](https://phishdestroy.github.io/TgWitness/fr/docs/reference/history/), [la recherche et l'analyse dans les archives](https://phishdestroy.github.io/TgWitness/fr/docs/reference/analysis/),[le MCP en lecture seule](https://phishdestroy.github.io/TgWitness/fr/docs/reference/mcp/), [l'OCR/transcription locale](https://phishdestroy.github.io/TgWitness/fr/docs/reference/media-analysis/) et[les webhooks sortants](https://phishdestroy.github.io/TgWitness/fr/docs/reference/webhooks/) sont inclus dans 0.7.1. Les rapports analytiques et le texte reconnu restent séparés des événements capturés.
 
 ## Options supplémentaires
 

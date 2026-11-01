@@ -22,7 +22,7 @@ MTProxy خودکار، مسیرهای فعال تلگرام را از چهار �
 
 ## ابزارهای بایگانی
 
-نسخهٔ کنونی `main` [قابلیت‌های دریافت تاریخچه](https://phishdestroy.github.io/TgWitness/fa/docs/reference/history/)، [جست‌وجو و تحلیل آرشیو](https://phishdestroy.github.io/TgWitness/fa/docs/reference/analysis/)، [MCP فقط-خواندنی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/)، [OCR/استنساخ محلی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/media-analysis/) و [وب‌هوک‌های خروجی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/webhooks/) را اضافه می‌کند. این‌ها ویژگی‌هایی هستند که پس از پیش‌نمایش نسخهٔ قابل حمل 0.7.0 به کد منبع افزوده شده‌اند. گزارش‌های تحلیلی و متن‌های شناسایی‌شده از رویدادهای ضبط‌شده جدا می‌مانند.
+[تولید تاریخچه](https://phishdestroy.github.io/TgWitness/fa/docs/reference/history/)، [جست‌وجوی آرشیو و تحلیل](https://phishdestroy.github.io/TgWitness/fa/docs/reference/analysis/)،[MCP فقط-خواندنی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/)، [OCR/استنساخ محلی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/media-analysis/) و[وب‌هوک‌های خروجی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/webhooks/) در نسخهٔ پیش‌نمایش 0.7.1 گنجانده شده‌اند. گزارش‌های تحلیلی و متن‌های شناسایی‌شده از رویدادهای ضبط‌شده جدا می‌مانند.
 
 ## افزودنی‌های اختیاری
 

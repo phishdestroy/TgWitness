@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/histo
 
 Muat pesan-pesan sebelumnya dari sumber yang diaktifkan, jeda dan lanjutkan, serta verifikasi laporan kemajuan yang telah ditandatangani.
 
-**Versi utama saat ini:** tersedia dari sumber; tidak termasuk dalam pratinjau portabel 0.7.0.
-
 Di bagian **Sumber**, tinjau obrolan yang diaktifkan, mulai pengamatan, lalu pilih **Muat riwayat lengkap**. Proses ini mengunci daftar sumber tersebut dan membaca pesan-pesan lama yang tersedia ke dalam Obrolan dan jurnal pengamatan yang ditandatangani. Media menggunakan pengaturan lampiran yang ada dan antrian unduhan yang tahan lama. Ini terpisah dari ekspor JSON/HTML yang ditandatangani per obrolan.
 
 Untuk pengumpulan di seluruh akun, pilih **"Seluruh akun**", mulai pemantauan untuk memuat daftar sumbernya, dan tinjau daftar tersebut sebelum memulai riwayat. Batas daftar dialog masih berlaku (1.000 secara default, dapat disesuaikan di Parameter). Proses yang berhasil tidak menjamin bahwa setiap percakapan akun telah terdaftar. Percakapan yang ditemukan atau diaktifkan kemudian memerlukan proses pengumpulan ulang.

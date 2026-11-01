@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/analysis
 
 Search saved messages, review AI inputs and keep analytical reports with their source references.
 
-**Current main:** use a source checkout; the 0.7.0 portable preview predates this feature.
-
 [Workflow guide](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Use **Journal** for local search without AI. For **Ask the archive**, first enable and configure a provider in **Integrations**. The workspace selector chooses the account; the form chooses chats and the observation period. Retrieval runs locally. An exact phrase or domain narrows retrieval; a message ID requests saved versions. Review the excerpts and open their journal records or context. There is no vector database or automatic Telegram action.

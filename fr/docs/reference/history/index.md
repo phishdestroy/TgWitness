@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/histo
 
 Charger les messages antérieurs provenant des sources activées, mettre en pause et reprendre l'opération, puis vérifier un rapport d'avancement signé.
 
-**Version principale actuelle :** disponible à partir du code source ; non incluse dans la préversion portable 0.7.0.
-
 Dans **« Sources** », passez en revue les discussions activées, lancez l’observation, puis sélectionnez « **Charger l’historique complet**». L’exécution fixe cette liste de sources et importe leurs anciens messages disponibles dans « Discussions » et dans le journal d’observation signé. Les médias utilisent les paramètres de pièces jointes existants et la file d’attente de téléchargement permanente. Ceci est distinct de l’exportation JSON/HTML signée par discussion.
 
 Pour une collecte à l'échelle du compte, sélectionnez « **Compte entier** », lancez l'observation pour charger sa liste de sources, puis vérifiez cette liste avant de démarrer l'historique. La limite du nombre de listes de dialogues s'applique toujours (1 000 par défaut, ajustable dans les paramètres). Une exécution réussie ne prouve pas que toutes les conversations du compte ont été répertoriées. Les discussions découvertes ou activées ultérieurement nécessitent une nouvelle exécution.

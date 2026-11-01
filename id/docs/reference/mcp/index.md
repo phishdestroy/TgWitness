@@ -26,7 +26,7 @@ Gunakan lingkungan Python yang menjalankan panel. Dari checkout sumber:
 
 Mulai ulang panel dengan direktori data dan argumen peluncuran biasanya setelah instalasi. Pemeriksaan kesiapan harus menyertakan `[PASS] mcp: streamable-http available`. **Integrations → MCP** menampilkan status runtime dan perintah instalasi yang menggunakan eksekutabel Python aktual server tersebut. **Re-check** menyegarkan status ini tanpa memuat ulang halaman; tindakan ini tidak menginstal paket atau memulai ulang server.
 
-Ekstra MCP menggunakan [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk) resmi. `deploy/constraints-mcp.txt` mengunci versi SDK dan dependensi yang telah diuji. Fitur-fitur ini memerlukan kode sumber terbaru; pratinjau portabel 0.7.0 mendahului fitur-fitur tersebut.
+MCP extra menggunakan [SDK Python resmi MCP](https://github.com/modelcontextprotocol/python-sdk).`deploy/constraints-mcp.txt` mengunci versi SDK dan dependensi yang telah diuji.
 
 ## Terbitkan koneksi
 

@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/reference/analy
 
 Cari pesan yang disimpan, tinjau masukan AI, dan simpan laporan analitis beserta referensi sumbernya.
 
-**Versi utama saat ini:** gunakan checkout sumber; pratinjau portabel 0.7.0 dirilis sebelum fitur ini tersedia.
-
 [Panduan alur kerja](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Gunakan **Jurnal** untuk pencarian lokal tanpa AI. Untuk **Tanyakan ke arsip**, aktifkan dan konfigurasikan terlebih dahulu penyedia di **Integrasi**. Pemilih ruang kerja menentukan akun; formulir menentukan chat dan periode pengamatan. Pengambilan data dijalankan secara lokal. Frasa atau domain yang persis mempersempit pengambilan data; ID pesan meminta versi yang disimpan. Tinjau cuplikan dan buka catatan jurnal atau konteksnya. Tidak ada basis data vektor atau tindakan otomatis di Telegram.

@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/media
 
 로컬 워커를 통해 캡처된 이미지와 오디오를 인식하고, 추출된 텍스트를 원본 파일과 연결된 상태로 유지합니다.
 
-**현재 메인 버전:** 소스 체크아웃을 사용하십시오. 0.7.0 휴대용 미리보기 버전은 이 기능이 구현되기 전의 버전입니다.
-
 [워크플로우 가이드](https://phishdestroy.github.io/TgWitness/docs/archive/) · [위키](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 `media.saved` 저널 기록을 열고, **‘첨부 파일 인식’을** 선택한 다음, **‘아카이브에 문의’** 아래에서 OCR 또는 전사 기능을 선택하십시오. 처리는 수동으로 로컬에서 이루어집니다. 클라우드 미디어 모드나 자동 업로드 기능은 없습니다. 원본 첨부 파일의 바이트 데이터와 `media_sha256`는 변경되지 않으며, 인식된 텍스트는 명시적으로 ‘기계 인식’으로 표시되고 원본 해시, 엔진/모델 버전, 언어, 매개변수 및 완료 시간과 함께 별도로 저장됩니다. 전사본에는 반환된 타임스탬프가 유지됩니다.

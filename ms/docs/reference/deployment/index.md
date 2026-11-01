@@ -127,7 +127,7 @@ Ini akan tersedia selepas [aliran kerja pelepasan](https://phishdestroy.github.i
 Salin `deploy/env.example` ke `.env`. Tetapkan `TGWITNESS_IMAGE` ke versi terbitan, menggunakan laluan repositori **huruf kecil**, contohnya:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.1
 TGWITNESS_PORT=8787
 ```
 
@@ -206,10 +206,11 @@ Semak akses panel, identiti akaun, status pemerhatian, dan liputan selepas kemas
 
 [Aliran kerja pelepasan](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml) sedia untuk digunakan selepas projek ini dihantar ke repositori GitHub dengan Actions diaktifkan. Ia berjalan apabila GitHub Release **diterbitkan**, termasuk prapelepasan. Draf dan penghantaran tag sahaja tidak menerbitkan pakej.
 
-1. Aturkan versi pakej dan log perubahan, kemudian terbitkan rilisan yang ditandakan dengan `v` ditambah versi `pyproject.toml` yang tepat, seperti `v0.7.0`.
+1. Aturkan versi pakej dan log perubahan, kemudian terbitkan rilisan yang ditandakan dengan `v` ditambah versi `pyproject.toml` yang tepat, seperti `v0.7.1`.
 2. Aliran kerja mengesahkan tag dan menjalankan pemeriksaan Python yang dikongsi untuk Windows/Linux/macOS, pelayar umum/import akaun/QR, pakej sumber, dan Docker. Pemasangan asli baharu juga dijalankan pada ketiga-tiga sistem pengendalian menggunakan Python 3.12.
-3. Selepas pemeriksaan tersebut lulus, ia menjalankan ujian asap pada imej ARM64 di bawah QEMU, menerbitkan imej AMD64/ARM64 ke `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`, dan melampirkan fail ZIP sumber, checksum, dan roda Python pada keluaran. Satu tugas berasingan untuk Windows membina dan melampirkan ZIP mudah alih serta checksumnya.
-4. Selepas penerbitan pertama, buka tetapan pakej GHCR dan tetapkan keterlihatan kepada **Awam** jika muat turun imej tanpa nama dimaksudkan. Repositori sumber awam sahaja tidak menjamin pakej kontena awam. Dasar organisasi mesti membenarkan penerbitan pakej. Aliran kerja ini menggunakan `GITHUB_TOKEN`; tiada kata laluan pendaftaran atau kelayakan VPS yang perlu dimasukkan ke dalam repositori.
+3. Selepas pemeriksaan tersebut lulus, ia menjalankan ujian asap pada imej ARM64 di bawah QEMU, menerbitkan imej AMD64/ARM64 ke `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`, dan melampirkan fail ZIP sumber serta roda Python dengan fail sampingan SHA-256 mereka. ZIP mudah alih Windows adalah artifak tepat yang diuji oleh aliran kerja pemeriksaan; aliran kerja pelepasan memuat turun dan menerbitkan artifak tersebut serta jumlah semaknya.
+4. Satu tugas akhir memuat turun semula ketiga-tiga pakej yang diterbitkan dan mengesahkan checksum mereka. Ia kemudian menerbitkan `SHA256SUMS.txt` dan `RELEASE-MANIFEST.json`, merekodkan versi, revisi sumber dan saiz aset. Pemunggahan menolak untuk menimpa aset keluaran sedia ada.
+5. Selepas penerbitan pertama, buka tetapan pakej GHCR dan tetapkan keterlihatan kepada **Awam** jika muat turun imej tanpa nama dimaksudkan. Repositori sumber awam sahaja tidak menjamin pakej kontena awam. Dasar organisasi mesti membenarkan penerbitan pakej. Aliran kerja ini menggunakan `GITHUB_TOKEN`; tiada kata laluan pendaftaran atau kelayakan VPS yang perlu dimasukkan ke dalam repositori.
 
 Kejayaan aliran kerja jauh tidak dapat dipastikan melalui penyediaan tempatan ini. Emulasi ARM64 adalah pemeriksaan asap, bukan kelayakan perkakasan asli atau Telegram secara langsung. Ini mengautomasikan pembungkusan keluaran; memulakan pelayan masih memerlukan arahan Compose dan prasyarat domain/hosnya. Pelayan sedia ada tidak dinaik taraf atau dihidupkan semula secara senyap apabila keluaran diterbitkan.
 

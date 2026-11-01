@@ -22,7 +22,7 @@ MTProxy automatik mengekalkan laluan Telegram berfungsi daripada empat sumber aw
 
 ## Alat arkib
 
-`main` semasa menambah [pemerolehan sejarah](https://phishdestroy.github.io/TgWitness/ms/docs/reference/history/), [carian arkib dan analisis](https://phishdestroy.github.io/TgWitness/ms/docs/reference/analysis/), [MCP baca sahaja](https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/), [OCR/transkripsi tempatan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/media-analysis/) dan [webhook keluar](https://phishdestroy.github.io/TgWitness/ms/docs/reference/webhooks/). Ini adalah ciri-ciri yang diperoleh melalui pemeriksaan sumber, ditambah selepas pratonton mudah alih 0.7.0. Laporan analitik dan teks yang diiktiraf kekal berasingan daripada peristiwa yang dirakam.
+[Pendapatan sejarah](https://phishdestroy.github.io/TgWitness/ms/docs/reference/history/), [carian arkib dan analisis](https://phishdestroy.github.io/TgWitness/ms/docs/reference/analysis/), [MCP baca sahaja](https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/), [OCR/transkripsi tempatan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/media-analysis/) dan [webhook keluaran](https://phishdestroy.github.io/TgWitness/ms/docs/reference/webhooks/) disertakan dalam 0.7.1. Laporan analitik dan teks yang diiktiraf kekal berasingan daripada peristiwa yang dirakam.
 
 ## Tambahan pilihan
 

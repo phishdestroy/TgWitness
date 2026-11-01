@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/conne
 
 אימות, מאגרי פרוקסי אוטומטיים, מצבי IP, מדיניות גיבוי, בקשות חיצוניות ואחסון סודי.
 
-מסמך זה מתאר את התנהגות TgWitness 0.7.0 ואת מגבלותיו. אימות, גישה למקור, קישוריות רשת ושלמות הלכידה הם מצבים נפרדים. לפרטים על שלבי הכניסה, פורמטי קבצים וחשבונות מרובים, התחל בסעיף " [חשבונות ופורמטי הפעלה](https://phishdestroy.github.io/TgWitness/he/docs/reference/accounts/)". לגבי מדיניות אירועים והתנהגות לאחר הפעלה מחדש, ראה [כיצד פועל תהליך האיסוף](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/).
+מסמך זה מתאר את התנהגות TgWitness 0.7.1 ואת מגבלותיו. אימות, גישה למקור, קישוריות רשת ושלמות הלכידה הם מצבים נפרדים. לפרטים על שלבי הכניסה, פורמטי קבצים וחשבונות מרובים, התחל בסעיף " [חשבונות ופורמטי הפעלה](https://phishdestroy.github.io/TgWitness/he/docs/reference/accounts/)". לגבי מדיניות אירועים והתנהגות לאחר הפעלה מחדש, ראה [כיצד פועל תהליך האיסוף](https://phishdestroy.github.io/TgWitness/he/docs/reference/collection/).
 
 ## שיטות אימות
 

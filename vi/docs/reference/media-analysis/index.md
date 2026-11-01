@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/media
 
 Nhận diện hình ảnh và âm thanh đã thu thập bằng một worker cục bộ; duy trì liên kết giữa văn bản được trích xuất và tệp nguồn tương ứng.
 
-**Phiên bản chính hiện tại:** sử dụng bản checkout từ kho nguồn; phiên bản xem trước di động 0.7.0 ra mắt trước khi tính năng này được triển khai.
-
 [Hướng dẫn quy trình làm việc](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Mở bản ghi nhật ký `media.saved`, chọn **“Nhận diện tệp đính kèm**”, sau đó chọn “OCR” hoặc “chuyển đổi văn bản” trong mục **“Yêu cầu từ kho lưu trữ**”. Quá trình xử lý được thực hiện thủ công và tại địa phương. Không có chế độ phương tiện đám mây hay tải lên tự động. Dữ liệu gốc của tệp đính kèm và bản ghi `media_sha256` vẫn giữ nguyên; văn bản được nhận diện được đánh dấu rõ ràng là kết quả nhận diện bằng máy và được lưu trữ riêng biệt cùng với mã băm nguồn, phiên bản công cụ/mô hình, ngôn ngữ, các tham số và thời gian hoàn thành. Bản chép lại vẫn giữ nguyên dấu thời gian được trả về.

@@ -28,8 +28,6 @@ git clone https://github.com/phishdestroy/TgWitness.git
 cd TgWitness
 ```
 
-현재 소스에는 계정 일괄 가져오기, MTProxy 대시보드 및 이어받기 가능한 기록 불러오기가 포함되어 있습니다. 0.7.0 포터블 프리뷰 및 해당 릴리스 소스 아카이브는 이러한 기능이 추가되기 이전 버전입니다. 버전별 경계는 [변경 로그](https://phishdestroy.github.io/TgWitness/ko/docs/reference/changelog/)를 참조하세요.
-
 `Start.cmd`는 적합한 Python을 찾지 못한 경우 Windows 사용자를 위해 Python 3.12 설치를 제안합니다(winget 또는 서명된 python.org 설치 프로그램). `start.sh`는 Python이 없는 경우 사용 중인 Linux 배포판 또는 macOS에 맞는 정확한 설치 명령을 출력합니다. 소스를 처음 실행하면 자동으로 `.venv`를 생성하고 종속성을 설치합니다.
 
 Docker가 애플리케이션을 빌드하고 백그라운드에서 실행하므로, 호스트 측에서 Python을 설치할 필요가 없습니다. 컨테이너 상태가 정상일 때 `scripts\Docker.cmd`와 `scripts/docker-start.sh`가 패널 주소와 토큰을 출력합니다. 지원되는 모든 호스트에서 사용할 수 있는 해당 Docker 명령어는 다음과 같습니다:

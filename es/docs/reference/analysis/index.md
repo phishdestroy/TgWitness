@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reference/analy
 
 Busca mensajes guardados, revisa las aportaciones de la IA y conserva informes analíticos con sus referencias de origen.
 
-**Versión principal actual:** utiliza una copia del código fuente; la versión preliminar portátil 0.7.0 es anterior a esta función.
-
 [Guía de flujo de trabajo](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Use **Registro** para realizar búsquedas locales sin IA. Para usar **Consulte el archivo**, primero habilite y configure un proveedor en **Integraciones**. El selector de espacio de trabajo elige la cuenta; el formulario selecciona los chats y el periodo de observación. La recuperación se realiza localmente. Una frase exacta o un dominio restringe la recuperación; un ID de mensaje solicita las versiones guardadas. Revise los extractos y abra sus registros en el diario o su contexto. No hay ninguna base de datos vectorial ni acción automática en Telegram.

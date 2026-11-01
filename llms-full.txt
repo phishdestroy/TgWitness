@@ -6,7 +6,7 @@ TgWitness runs on your own computer or server. PhishDestroy maintains the projec
 
 The panel brings together isolated account workspaces, supported session imports, parallel chat export, cross-chat people profiles, observed name changes, bot-button interaction receipts, saved attachments and offline HTML/JSON evidence. Optional witnesses, timestamps and encrypted off-site copies add independent records to the local journal. Archive search, AI analysis, OCR, transcription, MCP and signed webhooks work with the records you have collected.
 
-These guides track the `main` source branch. The project version is `0.7.0`; check the changelog and release notes before assuming a source feature is included in a downloaded package. The 0.7.0 portable preview predates the archive analysis and MCP tools.
+These guides track the `main` source branch. The project version is `0.7.1`; check the changelog and release notes before assuming a source feature is included in a downloaded package.
 
 Choose an entry below for the exact workflow, commands and limits. Each guide has a Markdown edition; its canonical HTML page retains diagrams, animations and interactive examples. Translated pages also expose Markdown through `rel=alternate` links.
 
@@ -102,7 +102,7 @@ Choose an entry below for the exact workflow, commands and limits. Each guide ha
 
 Canonical page: https://phishdestroy.github.io/TgWitness/
 
-[Open source / v0.7.0](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/)
+[Open source / v0.7.1](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/)
 
 Keep what
 you saw.
@@ -334,7 +334,7 @@ Source launch needs Python 3.11+. The Windows launcher offers installation if Py
 
 [Browse releases](https://github.com/phishdestroy/TgWitness/releases)
 
-No Python on Windows? [Download the portable package](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.0/TgWitness-0.7.0-windows-amd64-portable.zip), extract it and double-click `TgWitness.cmd`.
+No Python on Windows? [Download the portable package](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip), extract it and double-click `TgWitness.cmd`.
 
 STEP 02
 
@@ -369,7 +369,7 @@ Open [127.0.0.1:8787](http://127.0.0.1:8787) after launch.
 
 For source installs, the token is in `data/live/panel-token.txt`. Telegram sign-in can use the built-in API settings or your own pair from [my.telegram.org](https://my.telegram.org). [Full setup guide ↗](https://phishdestroy.github.io/TgWitness/docs/reference/quickstart/)
 
-**TgWitness 0.7.0** [What’s new →](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/) · [Features and known limits →](https://phishdestroy.github.io/TgWitness/docs/reference/features/)
+**TgWitness 0.7.1** [What’s new →](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/) · [Features and known limits →](https://phishdestroy.github.io/TgWitness/docs/reference/features/)
 
 ## Clear instructions.
 A useful next step.
@@ -383,8 +383,6 @@ A useful next step.
 ## Work the archive.
 
 Load history, review AI sources, connect an MCP client, recognize saved media and send signed webhooks.
-
-Available from current source. The 0.7.0 portable preview predates these tools.
 
 [Explore the workflow](https://phishdestroy.github.io/TgWitness/docs/archive/)
 
@@ -476,8 +474,6 @@ Security & project
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/archive/
 
 Find the message. Check the source. Build the case.
-
-These tools are available from the current main branch. The 0.7.0 portable preview predates them; use a source checkout for this workflow.
 
 01**Bring in the history**
 
@@ -2103,8 +2099,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/history/
 
 Load past messages from enabled sources, pause and resume, and verify a signed progress report.
 
-**Current main:** available from source; not included in the 0.7.0 portable preview.
-
 In **Sources**, review the enabled chats, start observation, then choose **Load full history**. The run fixes that list of sources and reads their available past messages into Chats and the signed observation journal. Media uses the existing attachment settings and durable download queue. This is separate from the per-chat signed JSON/HTML export.
 
 For account-wide collection, select **Whole account**, start observation to load its source list, and review that list before starting history. The dialog-list limit still applies (1,000 by default, adjustable in Parameters). A successful run does not prove that every account dialog was listed. Chats discovered or enabled later need another run.
@@ -2142,8 +2136,6 @@ The acquisition cursor is local workspace state. Restoring an evidence ZIP alone
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/analysis/
 
 Search saved messages, review AI inputs and keep analytical reports with their source references.
-
-**Current main:** use a source checkout; the 0.7.0 portable preview predates this feature.
 
 [Workflow guide](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -2208,7 +2200,7 @@ Use the Python environment that runs the panel. From a source checkout:
 
 Restart the panel with its usual data directory and launch arguments after installation. Readiness should include `[PASS] mcp: streamable-http available`. **Integrations → MCP** shows the runtime status and an installation command using that server's actual Python executable. **Re-check** refreshes this status without reloading the page; it does not install packages or restart the server.
 
-The MCP extra uses the official [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk). `deploy/constraints-mcp.txt` pins the tested SDK and dependencies. These features require current source; the 0.7.0 portable preview predates them.
+The MCP extra uses the official [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk). `deploy/constraints-mcp.txt` pins the tested SDK and dependencies.
 
 ## Issue a connection
 
@@ -2279,8 +2271,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/media-an
 
 Recognize captured images and audio with a local worker; keep derived text linked to its source file.
 
-**Current main:** use a source checkout; the 0.7.0 portable preview predates this feature.
-
 [Workflow guide](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Open a `media.saved` journal record, choose **Recognize attachment**, then select OCR or transcription under **Ask the archive**. Processing is manual and local. There is no cloud media mode or automatic upload. Original attachment bytes and `media_sha256` remain unchanged; recognized text is explicitly marked as machine recognition and stored separately with the source hash, engine/model version, language, parameters and completion time. Transcripts retain returned timestamps.
@@ -2316,8 +2306,6 @@ Files are limited to 50 MiB, images to 20 million pixels, audio to 30 minutes wi
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/webhooks/
 
 Send scoped events to HTTPS receivers with HMAC signatures, retries and delivery status.
-
-**Current main:** use a source checkout; the 0.7.0 portable preview predates this feature.
 
 [Workflow guide](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
@@ -2450,8 +2438,6 @@ For the source methods, [download and extract current `main`](https://github.com
 git clone https://github.com/phishdestroy/TgWitness.git
 cd TgWitness
 ```
-
-The current source includes batch account import, the MTProxy dashboard and resumable history loading. The 0.7.0 portable preview and its release source archive predate these additions. See [the changelog](https://phishdestroy.github.io/TgWitness/docs/reference/changelog/) for the version boundary.
 
 `Start.cmd` offers to install Python 3.12 for your Windows user if no suitable Python is found (winget, or the signed python.org installer). `start.sh` prints the exact install command for your Linux distribution or macOS if Python is missing. The first source launch creates `.venv` and installs dependencies automatically.
 
@@ -2910,7 +2896,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/connecti
 
 Authentication, automatic proxy pools, IP modes, fallback policy, external requests and secret storage.
 
-This document describes TgWitness 0.7.0 behavior and its limits. Authentication, source access, network connectivity and capture completeness are separate states. For sign-in steps, file formats, and multiple accounts, start with [accounts and session formats](https://phishdestroy.github.io/TgWitness/docs/reference/accounts/). For event policies and restart behavior, see [how collection works](https://phishdestroy.github.io/TgWitness/docs/reference/collection/).
+This document describes TgWitness 0.7.1 behavior and its limits. Authentication, source access, network connectivity and capture completeness are separate states. For sign-in steps, file formats, and multiple accounts, start with [accounts and session formats](https://phishdestroy.github.io/TgWitness/docs/reference/accounts/). For event policies and restart behavior, see [how collection works](https://phishdestroy.github.io/TgWitness/docs/reference/collection/).
 
 ## Authentication methods
 
@@ -3224,7 +3210,7 @@ This becomes available after a successful [release workflow](https://phishdestro
 Copy `deploy/env.example` to `.env`. Set `TGWITNESS_IMAGE` to the published version, using the **lowercase** repository path, for example:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.1
 TGWITNESS_PORT=8787
 ```
 
@@ -3303,10 +3289,11 @@ Check panel access, account identity, observation state, and coverage after an u
 
 The [release workflow](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml) is ready to use after this project is pushed to a GitHub repository with Actions enabled. It runs when a GitHub Release is **published**, including a prerelease. Drafts and tag pushes alone do not publish packages.
 
-1. Set the package version and changelog, then publish a release tagged with `v` plus the exact `pyproject.toml` version, such as `v0.7.0`.
+1. Set the package version and changelog, then publish a release tagged with `v` plus the exact `pyproject.toml` version, such as `v0.7.1`.
 2. The workflow validates the tag and runs the shared Windows/Linux/macOS Python, general/account-import/QR browser, source-package, and Docker checks. Fresh native installation is also exercised on all three operating systems using Python 3.12.
-3. After those checks pass, it smoke-tests an ARM64 image under QEMU, publishes AMD64/ARM64 images to `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`, and attaches the source ZIP, checksum, and Python wheel to the release. A separate Windows job builds and attaches the portable ZIP and its checksum.
-4. After the first publication, open the GHCR package settings and set visibility to **Public** if anonymous image pulls are intended. A public source repository alone does not guarantee a public container package. Organization policies must permit package publication. The workflow uses `GITHUB_TOKEN`; no registry password or VPS credentials belong in the repository.
+3. After those checks pass, it smoke-tests an ARM64 image under QEMU, publishes AMD64/ARM64 images to `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`, and attaches the source ZIP and Python wheel with their SHA-256 sidecars. The Windows portable ZIP is the exact artifact tested by the checks workflow; the release workflow downloads and publishes that artifact and its checksum.
+4. A final job downloads all three published packages again and verifies their checksums. It then publishes `SHA256SUMS.txt` and `RELEASE-MANIFEST.json`, recording the version, source revision and asset sizes. Uploads refuse to overwrite existing release assets.
+5. After the first publication, open the GHCR package settings and set visibility to **Public** if anonymous image pulls are intended. A public source repository alone does not guarantee a public container package. Organization policies must permit package publication. The workflow uses `GITHUB_TOKEN`; no registry password or VPS credentials belong in the repository.
 
 Remote workflow success has not been established by this local preparation. ARM64 emulation is a smoke check, not native-hardware or live Telegram qualification. This automates release packaging; starting a server still requires the Compose command and its domain/host prerequisites. Existing servers are not silently upgraded or restarted when a release is published.
 
@@ -3870,7 +3857,7 @@ Automatic MTProxy maintains working Telegram routes from four public sources or 
 
 ## Archive tools
 
-Current `main` adds [history acquisition](https://phishdestroy.github.io/TgWitness/docs/reference/history/), [archive search and analysis](https://phishdestroy.github.io/TgWitness/docs/reference/analysis/), [read-only MCP](https://phishdestroy.github.io/TgWitness/docs/reference/mcp/), [local OCR/transcription](https://phishdestroy.github.io/TgWitness/docs/reference/media-analysis/) and [outgoing webhooks](https://phishdestroy.github.io/TgWitness/docs/reference/webhooks/). These are source-checkout features, added after the 0.7.0 portable preview. Analytical reports and recognized text stay separate from captured events.
+[History acquisition](https://phishdestroy.github.io/TgWitness/docs/reference/history/), [archive search and analysis](https://phishdestroy.github.io/TgWitness/docs/reference/analysis/), [read-only MCP](https://phishdestroy.github.io/TgWitness/docs/reference/mcp/), [local OCR/transcription](https://phishdestroy.github.io/TgWitness/docs/reference/media-analysis/) and [outgoing webhooks](https://phishdestroy.github.io/TgWitness/docs/reference/webhooks/) are included in 0.7.1. Analytical reports and recognized text stay separate from captured events.
 
 ## Optional extras
 
@@ -5041,8 +5028,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/changelo
 
 Every change by version, including the changes not yet released.
 
-## Unreleased
+## 0.7.1 preview · 1 November 2026
 
+- Fixed chat profiles getting stuck after navigating away while a request was loading. Reopening the view can retry, and an outdated request cannot overwrite the current chat's profile state.
 - Added a clear handoff after download: distinguish the original archive from sharing copies, review the report, and copy plain instructions for the recipient. Polling preserves the selected copy and focus; unavailable clipboard access leaves the instructions selectable.
 - Added recipient guidance and stable record references to readable account and sharing reports, including print layouts. References describe the archived document; they do not turn printouts or screenshots into signed evidence.
 - Added a browsable fictional report with the matching signed ZIP. Its preview is byte-identical to the archived HTML; previous signed demo samples are retained.
@@ -5093,7 +5081,7 @@ Every change by version, including the changes not yet released.
 - People and chats without a photo no longer fill the browser console with 404 errors, and the panel asks for the high-assurance statement only where it exists. Sign-in tabs wrap long labels instead of cutting them; the offline-gap note, size units and the reason of attachments dropped with a removed source are shown in the panel language.
 - Added scoped, read-only MCP connections and local archive search with optional AI source review and separate analytical reports.
 - Added local OCR/transcription for saved attachments and signed outgoing webhooks with delivery status, retries and an n8n example.
-- Connected the new workflows across README, Wiki and translated site reference. These additions require current source; the 0.7.0 portable preview predates them.
+- Connected the new workflows across README, Wiki and translated site reference.
 - Sealed, localized reports. `report.html` and `chat.html` are rebuilt as self-contained case documents in any of the 25 panel languages: case details, integrity and key fingerprint, timestamps with their check commands, coverage, chain of custody with a printable transfer table, verification steps, standards and limitations. Each ends with an Ed25519 seal over its own bytes, checked in the browser or by `verify.py report.html --fingerprint … --evidence …`. Reports carry Dublin Core and schema.org metadata and a Content-Security-Policy that blocks network loads; the chat report shows the history oldest first.
 - Signed archives add `custody.json` and `SHA256SUMS`; README.txt is written in the report language and in English. Case details from **Exports → Report settings** are signed into the manifest. `verify.py` checks the seal and the sums, prints a coloured summary at a terminal (`--lang en|ru|uk`) and offers `--json`.
 - Added a five-stage capture animation and examples of message/collector substitution to the helper and Exports.

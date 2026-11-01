@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/
 
-[Open Source / v0.7.0](https://phishdestroy.github.io/TgWitness/de/docs/reference/changelog/)
+[Open Source / v0.7.1](https://phishdestroy.github.io/TgWitness/de/docs/reference/changelog/)
 
 Telegram-Nachrichten erfassen, deren Änderungen dokumentieren und einen signierten Datensatz exportieren.
 
@@ -225,7 +225,7 @@ Für den Start des Programms ist Python 3.11+ erforderlich. Der Windows-Launcher
 
 [Veröffentlichungen durchsuchen](https://github.com/phishdestroy/TgWitness/releases)
 
-Kein Python unter Windows? [Laden Sie das portable Paket herunter](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.0/TgWitness-0.7.0-windows-amd64-portable.zip), entpacken Sie es und doppelklicken Sie auf „`TgWitness.cmd`“.
+Kein Python unter Windows? [Laden Sie das portable Paket herunter](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip), entpacken Sie es und doppelklicken Sie auf „`TgWitness.cmd`“.
 
 SCHRITT 02
 
@@ -260,7 +260,7 @@ Der zweite Befehl zeigt Ihr privates Panel-Token an. Bewahren Sie es auf Ihrem R
 
 Bei der Installation aus dem Quellcode lautet das Token „`data/live/panel-token.txt`“. Für die Telegram-Anmeldung können Sie die integrierten API-Einstellungen oder Ihr eigenes Schlüsselpaar von [my.telegram.org](https://my.telegram.org) verwenden. [Vollständige Einrichtungsanleitung ↗](https://phishdestroy.github.io/TgWitness/de/docs/reference/quickstart/)
 
-**TgWitness 0.7.0** [Was gibt’s Neues →](https://phishdestroy.github.io/TgWitness/de/docs/reference/changelog/) · [Funktionen und bekannte Einschränkungen →](https://phishdestroy.github.io/TgWitness/de/docs/reference/features/)
+**TgWitness 0.7.1** [Was gibt’s Neues →](https://phishdestroy.github.io/TgWitness/de/docs/reference/changelog/) · [Funktionen und bekannte Einschränkungen →](https://phishdestroy.github.io/TgWitness/de/docs/reference/features/)
 
 ## Klare Anweisungen. Ein nützlicher nächster Schritt.
 
@@ -273,8 +273,6 @@ Bei der Installation aus dem Quellcode lautet das Token „`data/live/panel-toke
 ## Das Archiv bearbeiten.
 
 Verlauf laden, KI-Quellen überprüfen, einen MCP-Client verbinden, gespeicherte Medien erkennen und signierte Webhooks senden.
-
-Verfügbar über die aktuelle Quelle. Die portable Vorschauversion 0.7.0 ist älter als diese Tools.
 
 [Entdecken Sie den Arbeitsablauf](https://phishdestroy.github.io/TgWitness/de/docs/archive/)
 

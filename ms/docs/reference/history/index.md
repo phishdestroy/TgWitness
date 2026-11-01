@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/histo
 
 Muat mesej lepas daripada sumber yang diaktifkan, berehat dan sambung semula, serta sahkan laporan kemajuan yang ditandatangani.
 
-**Utama semasa:** tersedia dari sumber; tidak disertakan dalam pratonton mudah alih 0.7.0.
-
 Dalam **Sumber**, semak sembang yang diaktifkan, mulakan pemerhatian, kemudian pilih **Muat Sejarah Penuh**. Proses ini menetapkan senarai sumber tersebut dan membaca mesej laluan mereka yang tersedia ke dalam Sembang dan jurnal pemerhatian yang ditandatangani. Media menggunakan tetapan lampiran sedia ada dan barisan muat turun tahan lama. Ini berasingan daripada eksport JSON/HTML yang ditandatangani bagi setiap sembang.
 
 Untuk pengumpulan seluruh akaun, pilih **Keseluruhan akaun**, mulakan pemerhatian untuk memuatkan senarai sumbernya, dan semak senarai tersebut sebelum memulakan sejarah. Had senarai dialog masih terpakai (1,000 secara lalai, boleh dilaras dalam Parameter). Jalankan yang berjaya tidak membuktikan bahawa setiap dialog akaun telah disenaraikan. Perbualan yang ditemui atau diaktifkan kemudian memerlukan pelaksanaan lain.

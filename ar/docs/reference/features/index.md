@@ -22,7 +22,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/featu
 
 ## أدوات الأرشفة
 
-تضيف النسخة الحالية `main` [إمكانية الحصول على السجل التاريخي](https://phishdestroy.github.io/TgWitness/ar/docs/reference/history/)، [والبحث والتحليل في الأرشيف](https://phishdestroy.github.io/TgWitness/ar/docs/reference/analysis/)، [وMCP للقراءة فقط](https://phishdestroy.github.io/TgWitness/ar/docs/reference/mcp/)، [وOCR/نسخ نصي محلي](https://phishdestroy.github.io/TgWitness/ar/docs/reference/media-analysis/)، و [webhooks الصادرة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/webhooks/). هذه ميزات تم التحقق من مصدرها، وأُضيفت بعد النسخة التجريبية المحمولة 0.7.0. تظل التقارير التحليلية والنصوص المعترف بها منفصلة عن الأحداث التي تم تسجيلها.
+يتم تضمين [الحصول على السجلات](https://phishdestroy.github.io/TgWitness/ar/docs/reference/history/)، [والبحث في الأرشيف وتحليله،](https://phishdestroy.github.io/TgWitness/ar/docs/reference/analysis/)[وMCP للقراءة فقط](https://phishdestroy.github.io/TgWitness/ar/docs/reference/mcp/)، [والتعرف الضوئي على الحروف (OCR) / النسخ المحلي،](https://phishdestroy.github.io/TgWitness/ar/docs/reference/media-analysis/)[وwebhooks الصادرة في](https://phishdestroy.github.io/TgWitness/ar/docs/reference/webhooks/) 0.7.1. تظل التقارير التحليلية والنصوص المعترف بها منفصلة عن الأحداث التي تم تسجيلها.
 
 ## إضافات اختيارية
 

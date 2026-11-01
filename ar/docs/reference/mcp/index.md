@@ -26,7 +26,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/mcp/
 
 أعد تشغيل لوحة التحكم مع مجلد بياناتها المعتاد ومعاملات التشغيل بعد التثبيت. يجب أن يتضمن فحص الجاهزية `[PASS] mcp: streamable-http available`. يعرض المسار **Integrations → MCP** حالة وقت التشغيل وأمر تثبيت يستخدم ملف Python التنفيذي الفعلي لذلك الخادم. يُحدِّث الزر **Re-check** هذه الحالة دون إعادة تحميل الصفحة؛ وهو لا يُثبِّت الحزم ولا يُعيد تشغيل الخادم.
 
-تستخدم الإضافة الخاصة بـ MCP حزمة [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk) الرسمية. يُثبِّت الملف `deploy/constraints-mcp.txt` إصدارات SDK والتبعيات التي تم اختبارها. تتطلب هذه الميزات الكود المصدري الحالي؛ إذ إن النسخة التجريبية المحمولة 0.7.0 قد صدرت قبلها.
+يستخدم المكون الإضافي MCP حزمة [SDK الرسمية لـ MCP بلغة Python](https://github.com/modelcontextprotocol/python-sdk). يحدد ملف`deploy/constraints-mcp.txt` إصدار SDK الذي تم اختباره والتبعيات.
 
 ## إصدار اتصال
 

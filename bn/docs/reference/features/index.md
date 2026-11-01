@@ -22,7 +22,7 @@ TgWitness-এর নিজস্ব ইনস্টলেশন, ডেটা �
 
 ## আর্কাইভ টুলস
 
-`main`-এ [ইতিহাস আহরণ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/history/), [আর্কাইভ অনুসন্ধান ও বিশ্লেষণ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/analysis/), [শুধুমাত্র-পঠন MCP](https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/), [স্থানীয় OCR/প্রতিলিপি](https://phishdestroy.github.io/TgWitness/bn/docs/reference/media-analysis/) এবং [আউটগোয়িং ওয়েবহুক](https://phishdestroy.github.io/TgWitness/bn/docs/reference/webhooks/) যুক্ত করা হয়েছে। এগুলো 0.7.0 পোর্টেবল প্রিভিউয়ের পর যোগ করা সোর্স-চেকআউট বৈশিষ্ট্য। বিশ্লেষণাত্মক প্রতিবেদন এবং স্বীকৃত পাঠ্য ধরা হওয়া ইভেন্ট থেকে পৃথক থাকে।
+0.7.1-এ [ইতিহাস আহরণ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/history/), [আর্কাইভ অনুসন্ধান ও বিশ্লেষণ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/analysis/),[শুধুমাত্র-পঠন MCP](https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/), [স্থানীয় OCR/ট্রান্সক্রিপশন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/media-analysis/) এবং[আউটগোয়িং ওয়েবহুক](https://phishdestroy.github.io/TgWitness/bn/docs/reference/webhooks/) অন্তর্ভুক্ত। বিশ্লেষণাত্মক প্রতিবেদন এবং স্বীকৃত পাঠ্য ধরা-পড়া ইভেন্ট থেকে পৃথক থাকে।
 
 ## ঐচ্ছিক অতিরিক্ত
 

@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/archive/
 
 Mesajı bulun. Kaynağını kontrol edin. Davayı oluşturun.
 
-Bu araçlar mevcut ana dalda mevcuttur. 0.7.0 taşınabilir önizleme sürümü bunlardan daha eskidir; bu iş akışı için kaynak kodunu indirip derleyin.
-
 01**Geçmişi ekleyin**
 
 Etkinleştirilmiş kaynaklarınızdaki geçmiş mesajları çalışma alanına yükleyin.

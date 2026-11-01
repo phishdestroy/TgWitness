@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/
 
-[Açık kaynak / v0.7.0](https://phishdestroy.github.io/TgWitness/tr/docs/reference/changelog/)
+[Açık kaynak / v0.7.1](https://phishdestroy.github.io/TgWitness/tr/docs/reference/changelog/)
 
 Telegram mesajlarını yakalayın, değişikliklerini koruyun ve imzalı bir kayıt olarak dışa aktarın.
 
@@ -225,7 +225,7 @@ Kaynak kodun çalıştırılması için Python 3.11+ gereklidir. Python yüklü 
 
 [Sürümleri inceleyin](https://github.com/phishdestroy/TgWitness/releases)
 
-Windows'ta Python yok mu? [Taşınabilir paketi indirin](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.0/TgWitness-0.7.0-windows-amd64-portable.zip), açın ve `TgWitness.cmd` dosyasına çift tıklayın.
+Windows'ta Python yok mu? [Taşınabilir paketi indirin](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip), açın ve `TgWitness.cmd` dosyasına çift tıklayın.
 
 ADIM 02
 
@@ -260,7 +260,7 @@ Başlatma işleminden sonra [127.0.0.1:8787 adresini](http://127.0.0.1:8787) aç
 
 Kaynak koddan kurulumlarda token `data/live/panel-token.txt`'dir. Telegram oturum açma işlemi için yerleşik API ayarları veya [my.telegram.org](https://my.telegram.org) adresinden aldığınız kendi anahtar çiftinizi kullanabilirsiniz. [Tam kurulum kılavuzu ↗](https://phishdestroy.github.io/TgWitness/tr/docs/reference/quickstart/)
 
-**TgWitness 0.7.0** [Yenilikler →](https://phishdestroy.github.io/TgWitness/tr/docs/reference/changelog/) · [Özellikler ve bilinen sınırlamalar →](https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/)
+**TgWitness 0.7.1** [Yenilikler →](https://phishdestroy.github.io/TgWitness/tr/docs/reference/changelog/) · [Özellikler ve bilinen sınırlamalar →](https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/)
 
 ## Anlaşılır talimatlar. Yararlı bir sonraki adım.
 
@@ -273,8 +273,6 @@ Kaynak koddan kurulumlarda token `data/live/panel-token.txt`'dir. Telegram oturu
 ## Arşivi inceleyin.
 
 Geçmişi yükleyin, AI kaynaklarını inceleyin, bir MCP istemcisini bağlayın, kaydedilmiş medya dosyalarını tanıyın ve imzalı webhook'lar gönderin.
-
-Mevcut kaynaktan edinilebilir. 0.7.0 taşınabilir önizleme sürümü, bu araçlardan daha eskidir.
 
 [İş akışını keşfedin](https://phishdestroy.github.io/TgWitness/tr/docs/archive/)
 

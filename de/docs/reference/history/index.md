@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/reference/histo
 
 Laden Sie vergangene Nachrichten aus aktivierten Quellen, halten Sie den Vorgang an und setzen Sie ihn fort, und überprüfen Sie einen signierten Fortschrittsbericht.
 
-**Aktuelle Hauptversion:** über den Quellcode verfügbar; nicht in der portablen Vorschauversion 0.7.0 enthalten.
-
 Überprüfen Sie unter **„Quellen**“ die aktivierten Chats, starten Sie die Beobachtung und wählen Sie anschließend **„Gesamten Verlauf laden**“. Der Durchlauf legt diese Liste von Quellen fest und liest deren verfügbare vergangene Nachrichten in „Chats“ und das signierte Beobachtungsprotokoll ein. Medien verwenden die bestehenden Einstellungen für Anhänge und die dauerhafte Download-Warteschlange. Dies ist unabhängig vom signierten JSON/HTML-Export pro Chat.
 
 Für die kontoweite Erfassung wählen Sie **„Gesamtes Konto“** aus, starten Sie die Beobachtung, um die Quellenliste zu laden, und überprüfen Sie diese Liste, bevor Sie den Verlauf starten. Die Begrenzung der Dialogliste gilt weiterhin (standardmäßig 1.000, einstellbar unter „Parameter“). Ein erfolgreicher Durchlauf beweist nicht, dass jeder Kontodialog aufgeführt wurde. Später entdeckte oder aktivierte Chats erfordern einen weiteren Durchlauf.

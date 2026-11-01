@@ -26,7 +26,7 @@ Panelni ishga tushiradigan Python muhitidan foydalaning. Manba kodlari yuklab ol
 
 O‘rnatishdan so‘ng panelni odatdagi ma’lumotlar katalogi va ishga tushirish argumentlari bilan qayta ishga tushiring. Tayyorlik holatida `[PASS] mcp: streamable-http available` bo‘lishi kerak. **Integrations → MCP** bo‘limida ish vaqti (runtime) holati va ushbu serverning haqiqiy Python bajariladigan faylidan foydalangan holda o‘rnatish buyrug‘i ko‘rsatiladi. **Re-check** tugmasi sahifani qayta yuklamasdan ushbu holatni yangilaydi; u paketlarni o‘rnatmaydi yoki serverni qayta ishga tushirmaydi.
 
-MCP qo‘shimcha paketi rasmiy [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk) dan foydalanadi. `deploy/constraints-mcp.txt` sinovdan o‘tgan SDK va bog‘liqliklarni qat’iy belgilaydi. Ushbu imkoniyatlar joriy manba kodini talab qiladi; 0.7.0 portativ dastlabki talqini ulardan oldin chiqqan.
+MCP extra rasmiy [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk)'dan foydalanadi.`deploy/constraints-mcp.txt` sinovdan o'tgan SDK va uning bog'liqliklarini belgilaydi.
 
 ## Ulanish yaratish
 

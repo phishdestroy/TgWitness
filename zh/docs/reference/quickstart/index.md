@@ -28,8 +28,6 @@ git clone https://github.com/phishdestroy/TgWitness.git
 cd TgWitness
 ```
 
-当前源码包含批量导入账户、MTProxy 仪表板以及可恢复的 历史记录加载功能。0.7.0 便携预览版及其发布源码压缩包早于 这些新增功能。有关版本界限，请参阅[更新日志](https://phishdestroy.github.io/TgWitness/zh/docs/reference/changelog/)。
-
 如果未找到合适的 Python，`Start.cmd` 会提议为您的 Windows 用户安装 Python 3.12（通过 winget 或带签名的 python.org 安装程序）。如果缺少 Python，`start.sh` 会打印 适用于您的 Linux 发行版或 macOS 的确切安装命令。 首次从源码启动会自动创建 `.venv` 并安装依赖项。
 
 Docker 负责构建应用程序并在后台启动它；无需在主机上安装 Python。当 容器运行正常时，`scripts\Docker.cmd` 和 `scripts/docker-start.sh` 会输出控制面板地址和令牌。在所有受支持的主机上，相应的 Docker 命令如下：

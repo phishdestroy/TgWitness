@@ -127,7 +127,7 @@ Fitur ini tersedia setelah [alur kerja rilis](https://phishdestroy.github.io/TgW
 Salin `deploy/env.example` ke `.env`. Atur `TGWITNESS_IMAGE` ke versi yang telah dipublikasikan, dengan menggunakan jalur repositori **huruf kecil**, misalnya:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.1
 TGWITNESS_PORT=8787
 ```
 
@@ -206,10 +206,11 @@ Periksa akses panel, identitas akun, status pemantauan, dan cakupan setelah pemb
 
 [Alur kerja rilis](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml) siap digunakan setelah proyek ini di-push ke repositori GitHub dengan Actions diaktifkan. Alur kerja ini berjalan saat Rilis GitHub **diterbitkan**, termasuk prarilis. Draf dan push tag saja tidak akan menerbitkan paket.
 
-1. Tentukan versi paket dan catatan perubahan, lalu terbitkan rilis yang diberi tag `v` ditambah versi `pyproject.toml` yang tepat, seperti `v0.7.0`.
+1. Tentukan versi paket dan catatan perubahan, lalu terbitkan rilis yang diberi tag `v` ditambah versi `pyproject.toml` yang tepat, seperti `v0.7.1`.
 2. Alur kerja ini memvalidasi tag dan menjalankan pemeriksaan Python yang dapat digunakan di Windows/Linux/macOS, general/account-import/QR browser, paket sumber, dan Docker. Instalasi asli yang baru juga dilakukan pada ketiga sistem operasi tersebut menggunakan Python 3.12.
-3. Setelah pemeriksaan tersebut lulus, sistem ini melakukan uji coba awal (smoke test) terhadap gambar ARM64 di bawah QEMU, mempublikasikan gambar AMD64/ARM64 ke `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`, serta melampirkan berkas ZIP sumber, checksum, dan Python wheel ke dalam rilis. Sebuah tugas terpisah di Windows membangun dan melampirkan berkas ZIP portabel beserta checksum-nya.
-4. Setelah publikasi pertama, buka pengaturan paket GHCR dan atur visibilitas menjadi **Publik** jika dimaksudkan untuk pengunduhan gambar secara anonim. Repositori sumber terbuka saja tidak menjamin paket kontainer yang terbuka. Kebijakan organisasi harus mengizinkan publikasi paket. Alur kerja ini menggunakan `GITHUB_TOKEN`; kata sandi registri atau kredensial VPS tidak boleh disimpan di repositori.
+3. Setelah pemeriksaan tersebut lulus, sistem akan melakukan pengujian awal (smoke test) terhadap gambar ARM64 di bawah QEMU, mempublikasikan gambar AMD64/ARM64 ke `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`, serta melampirkan berkas ZIP sumber dan roda Python beserta berkas SHA-256 pendampingnya. Berkas ZIP portabel Windows adalah artefak persis yang diuji oleh alur kerja pemeriksaan; alur kerja rilis mengunduh dan mempublikasikan artefak tersebut beserta checksum-nya.
+4. Tugas terakhir mengunduh kembali ketiga paket yang telah diterbitkan dan memverifikasi checksum-nya. Selanjutnya, tugas tersebut menerbitkan `SHA256SUMS.txt` dan `RELEASE-MANIFEST.json`, dengan mencatat versi, revisi sumber, dan ukuran aset. Proses unggahan menolak untuk menimpa aset rilis yang sudah ada.
+5. Setelah publikasi pertama, buka pengaturan paket GHCR dan atur visibilitas menjadi **Publik** jika dimaksudkan untuk pengunduhan gambar secara anonim. Repositori sumber terbuka saja tidak menjamin paket kontainer yang terbuka. Kebijakan organisasi harus mengizinkan publikasi paket. Alur kerja ini menggunakan `GITHUB_TOKEN`; kata sandi registri atau kredensial VPS tidak boleh disimpan di repositori.
 
 Keberhasilan alur kerja jarak jauh belum dapat dipastikan melalui persiapan lokal ini. Emulasi ARM64 hanyalah uji coba awal, bukan kualifikasi perangkat keras asli atau Telegram yang berjalan secara langsung. Ini mengotomatiskan pengemasan rilis; memulai server masih memerlukan perintah Compose serta prasyarat domain/host-nya. Server yang sudah ada tidak akan di-upgrade atau di-restart secara otomatis saat rilis diterbitkan.
 

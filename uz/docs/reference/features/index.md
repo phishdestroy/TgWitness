@@ -22,7 +22,7 @@ Avtomatik MTProxy to'rtta ommaviy manba yoki operator katalogidan Telegram ishch
 
 ## Arxiv vositalari
 
-`main`-ning joriy versiyasi [tarixni olish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/history/), [arxiv qidiruvi va tahlili](https://phishdestroy.github.io/TgWitness/uz/docs/reference/analysis/), [faqat o'qish uchun mo'ljallangan MCP](https://phishdestroy.github.io/TgWitness/uz/docs/reference/mcp/), [mahalliy OCR/transkripsiya](https://phishdestroy.github.io/TgWitness/uz/docs/reference/media-analysis/) va [chiquvchi webhooks funksiyalarini](https://phishdestroy.github.io/TgWitness/uz/docs/reference/webhooks/) qo'shadi. Bu manba-chiqarish xususiyatlari bo'lib, ular 0.7.0 portativ ko'rinishidan keyin qo'shilgan. Analitik hisobotlar va tan olingan matn yozib olingan voqealardan alohida saqlanadi.
+0.7.1-da [tarixni olish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/history/), [arxiv qidiruvi va tahlili](https://phishdestroy.github.io/TgWitness/uz/docs/reference/analysis/),[faqat o'qish uchun mo'ljallangan MCP](https://phishdestroy.github.io/TgWitness/uz/docs/reference/mcp/), [mahalliy OCR/transkripsiya](https://phishdestroy.github.io/TgWitness/uz/docs/reference/media-analysis/) va[chiquvchi webhooks funksiyalari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/webhooks/) mavjud. Analitik hisobotlar va tan olingan matn yozib olingan voqealardan alohida saqlanadi.
 
 ## Ixtiyoriy qo'shimchalar
 

@@ -28,8 +28,6 @@ git clone https://github.com/phishdestroy/TgWitness.git
 cd TgWitness
 ```
 
-Mã nguồn hiện tại bao gồm tính năng nhập tài khoản hàng loạt, bảng điều khiển MTProxy và tải lịch sử có thể tiếp tục. Bản xem trước di động (portable) 0.7.0 và gói mã nguồn phát hành của nó có trước các bổ sung này. Xem [nhật ký thay đổi](https://phishdestroy.github.io/TgWitness/vi/docs/reference/changelog/) để biết ranh giới phiên bản.
-
 `Start.cmd` đề xuất cài đặt Python 3.12 cho người dùng Windows của bạn nếu không tìm thấy Python phù hợp (qua winget, hoặc trình cài đặt có chữ ký số từ python.org). `start.sh` sẽ in ra lệnh cài đặt chính xác cho bản phân phối Linux hoặc macOS của bạn nếu thiếu Python. Lần khởi chạy từ mã nguồn đầu tiên sẽ tự động tạo `.venv` và cài đặt các gói phụ thuộc.
 
 Docker sẽ biên dịch ứng dụng và khởi chạy nó ở chế độ nền; không cần phải cài đặt Python trên máy chủ. `scripts\Docker.cmd` và `scripts/docker-start.sh` sẽ hiển thị địa chỉ bảng điều khiển và mã thông báo khi container hoạt động bình thường. Các lệnh Docker tương ứng trên mọi hệ điều hành được hỗ trợ là:

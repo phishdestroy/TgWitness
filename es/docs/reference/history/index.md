@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/reference/histo
 
 Carga mensajes anteriores de fuentes habilitadas, pausa y reanuda, y verifica un informe de progreso firmado.
 
-**Versión principal actual:** disponible desde el código fuente; no incluida en la versión preliminar portátil 0.7.0.
-
 En **«Fuentes**», revisa los chats habilitados, inicia la observación y, a continuación, selecciona **«Cargar historial completo**». La ejecución fija esa lista de fuentes e importa los mensajes anteriores disponibles a «Chats» y al registro de observación firmado. Los archivos multimedia utilizan la configuración de archivos adjuntos existente y la cola de descargas permanente. Esto es independiente de la exportación firmada en formato JSON/HTML por chat.
 
 Para la recopilación de toda la cuenta, selecciona **«Cuenta completa»**, inicia la observación para cargar su lista de fuentes y revisa dicha lista antes de iniciar el historial. El límite de la lista de diálogos sigue siendo aplicable (1.000 por defecto, ajustable en «Parámetros»). Una ejecución satisfactoria no garantiza que se hayan incluido todos los diálogos de la cuenta. Los chats descubiertos o habilitados posteriormente requieren otra ejecución.

@@ -127,7 +127,7 @@ This becomes available after a successful [release workflow](https://phishdestro
 Copy `deploy/env.example` to `.env`. Set `TGWITNESS_IMAGE` to the published version, using the **lowercase** repository path, for example:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.1
 TGWITNESS_PORT=8787
 ```
 
@@ -206,10 +206,11 @@ Check panel access, account identity, observation state, and coverage after an u
 
 The [release workflow](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml) is ready to use after this project is pushed to a GitHub repository with Actions enabled. It runs when a GitHub Release is **published**, including a prerelease. Drafts and tag pushes alone do not publish packages.
 
-1. Set the package version and changelog, then publish a release tagged with `v` plus the exact `pyproject.toml` version, such as `v0.7.0`.
+1. Set the package version and changelog, then publish a release tagged with `v` plus the exact `pyproject.toml` version, such as `v0.7.1`.
 2. The workflow validates the tag and runs the shared Windows/Linux/macOS Python, general/account-import/QR browser, source-package, and Docker checks. Fresh native installation is also exercised on all three operating systems using Python 3.12.
-3. After those checks pass, it smoke-tests an ARM64 image under QEMU, publishes AMD64/ARM64 images to `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`, and attaches the source ZIP, checksum, and Python wheel to the release. A separate Windows job builds and attaches the portable ZIP and its checksum.
-4. After the first publication, open the GHCR package settings and set visibility to **Public** if anonymous image pulls are intended. A public source repository alone does not guarantee a public container package. Organization policies must permit package publication. The workflow uses `GITHUB_TOKEN`; no registry password or VPS credentials belong in the repository.
+3. After those checks pass, it smoke-tests an ARM64 image under QEMU, publishes AMD64/ARM64 images to `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`, and attaches the source ZIP and Python wheel with their SHA-256 sidecars. The Windows portable ZIP is the exact artifact tested by the checks workflow; the release workflow downloads and publishes that artifact and its checksum.
+4. A final job downloads all three published packages again and verifies their checksums. It then publishes `SHA256SUMS.txt` and `RELEASE-MANIFEST.json`, recording the version, source revision and asset sizes. Uploads refuse to overwrite existing release assets.
+5. After the first publication, open the GHCR package settings and set visibility to **Public** if anonymous image pulls are intended. A public source repository alone does not guarantee a public container package. Organization policies must permit package publication. The workflow uses `GITHUB_TOKEN`; no registry password or VPS credentials belong in the repository.
 
 Remote workflow success has not been established by this local preparation. ARM64 emulation is a smoke check, not native-hardware or live Telegram qualification. This automates release packaging; starting a server still requires the Compose command and its domain/host prerequisites. Existing servers are not silently upgraded or restarted when a release is published.
 

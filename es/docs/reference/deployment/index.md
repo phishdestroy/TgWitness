@@ -127,7 +127,7 @@ Esto estará disponible tras completar con éxito el [flujo de trabajo de lanzam
 Copie `deploy/env.example` en `.env`. Establezca `TGWITNESS_IMAGE` en la versión publicada, utilizando la ruta del repositorio **en minúsculas**; por ejemplo:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.1
 TGWITNESS_PORT=8787
 ```
 
@@ -206,10 +206,11 @@ Compruebe el acceso al panel, la identidad de la cuenta, el estado de observaci�
 
 El [flujo de trabajo de lanzamiento](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml) estará listo para su uso una vez que este proyecto se haya subido a un repositorio de GitHub con Actions habilitado. Se ejecuta cuando se **publica** un lanzamiento en GitHub, incluida una versión preliminar. Los borradores y las subidas de etiquetas por sí solos no publican paquetes.
 
-1. Establezca la versión del paquete y el registro de cambios; a continuación, publique una versión etiquetada con «`v`» más la versión exacta de «`pyproject.toml`», como por ejemplo «`v0.7.0`».
+1. Establezca la versión del paquete y el registro de cambios; a continuación, publique una versión etiquetada con «`v`» más la versión exacta de «`pyproject.toml`», como por ejemplo «`v0.7.1`».
 2. El flujo de trabajo valida la etiqueta y ejecuta las comprobaciones compartidas de Python para Windows/Linux/macOS, del navegador «general/account-import/QR», del paquete fuente y de Docker. También se lleva a cabo una instalación nativa nueva en los tres sistemas operativos utilizando Python 3.12.
-3. Una vez superadas esas comprobaciones, realiza pruebas de funcionamiento de una imagen ARM64 en QEMU, publica imágenes AMD64/ARM64 en `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`, y adjunta el archivo ZIP con el código fuente, la suma de comprobación y el paquete Python «wheel» a la versión. Una tarea independiente en Windows compila y adjunta el archivo ZIP portátil y su suma de comprobación.
-4. Tras la primera publicación, abra la configuración del paquete GHCR y establezca la visibilidad en **«Pública»** si se pretende realizar descargas anónimas de imágenes. Un repositorio de código fuente público por sí solo no garantiza que el paquete del contenedor sea público. Las políticas de la organización deben permitir la publicación del paquete. El flujo de trabajo utiliza `GITHUB_TOKEN`; no deben incluirse en el repositorio contraseñas de registro ni credenciales de VPS.
+3. Una vez superadas esas comprobaciones, se realiza una prueba de funcionamiento de una imagen ARM64 en QEMU, se publican las imágenes AMD64/ARM64 en `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>`, y se adjuntan el archivo ZIP con el código fuente y el paquete Python wheel junto con sus archivos SHA-256 adjuntos. El archivo ZIP portátil para Windows es exactamente el mismo artefacto que se ha probado en el flujo de trabajo de comprobaciones; el flujo de trabajo de lanzamiento descarga y publica ese artefacto y su suma de comprobación.
+4. Una tarea final vuelve a descargar los tres paquetes publicados y verifica sus sumas de comprobación. A continuación, publica `SHA256SUMS.txt` y `RELEASE-MANIFEST.json`, registrando la versión, la revisión del código fuente y los tamaños de los recursos. Las subidas no sobrescriben los recursos de la versión existentes.
+5. Tras la primera publicación, abra la configuración del paquete GHCR y establezca la visibilidad en **«Pública»** si se pretende realizar descargas anónimas de imágenes. Un repositorio de código fuente público por sí solo no garantiza que el paquete del contenedor sea público. Las políticas de la organización deben permitir la publicación del paquete. El flujo de trabajo utiliza `GITHUB_TOKEN`; no deben incluirse en el repositorio contraseñas de registro ni credenciales de VPS.
 
 El éxito del flujo de trabajo remoto no se ha confirmado mediante esta preparación local. La emulación de ARM64 es una prueba preliminar, no una validación en hardware nativo ni en Telegram en entorno real. Esto automatiza la creación de paquetes de lanzamiento; para iniciar un servidor sigue siendo necesario el comando «Compose» y sus requisitos previos de dominio/host. Los servidores existentes no se actualizan ni se reinician de forma silenciosa cuando se publica una versión.
 

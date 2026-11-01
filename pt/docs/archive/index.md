@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/archive/
 
 Encontre a mensagem. Verifique a fonte. Monte o caso.
 
-Essas ferramentas estão disponíveis no ramo principal atual. A versão prévia portátil 0.7.0 é anterior a elas; use um checkout do código-fonte para esse fluxo de trabalho.
-
 01**Incluir o histórico**
 
 Carregue mensagens anteriores de suas fontes habilitadas na área de trabalho.

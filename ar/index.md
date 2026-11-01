@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/
 
-[مفتوح المصدر / v0.7.0](https://phishdestroy.github.io/TgWitness/ar/docs/reference/changelog/)
+[مفتوح المصدر / v0.7.1](https://phishdestroy.github.io/TgWitness/ar/docs/reference/changelog/)
 
 التقاط رسائل Telegram، والحفاظ على التغييرات التي تطرأ عليها، وتصدير سجل موقّع.
 
@@ -225,7 +225,7 @@ cd TgWitness
 
 [تصفح الإصدارات](https://github.com/phishdestroy/TgWitness/releases)
 
-لا يتوفر لغة Python على نظام Windows؟ [قم بتنزيل الحزمة المحمولة](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.0/TgWitness-0.7.0-windows-amd64-portable.zip)، وقم بفك ضغطها، ثم انقر نقرًا مزدوجًا على ملف `TgWitness.cmd`.
+لا يتوفر لغة Python على نظام Windows؟ [قم بتنزيل الحزمة المحمولة](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip)، وقم بفك ضغطها، ثم انقر نقرًا مزدوجًا على ملف `TgWitness.cmd`.
 
 الخطوة 02
 
@@ -260,7 +260,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 بالنسبة للتثبيت من المصدر، الرمز هو `data/live/panel-token.txt`. يمكن تسجيل الدخول إلى Telegram باستخدام إعدادات واجهة برمجة التطبيقات (API) المدمجة أو الزوج الخاص بك من [my.telegram.org](https://my.telegram.org). [دليل الإعداد الكامل ↗](https://phishdestroy.github.io/TgWitness/ar/docs/reference/quickstart/)
 
-**TgWitness 0.7.0** [ما الجديد →](https://phishdestroy.github.io/TgWitness/ar/docs/reference/changelog/) · [الميزات والقيود المعروفة →](https://phishdestroy.github.io/TgWitness/ar/docs/reference/features/)
+**TgWitness 0.7.1** [ما الجديد →](https://phishdestroy.github.io/TgWitness/ar/docs/reference/changelog/) · [الميزات والقيود المعروفة →](https://phishdestroy.github.io/TgWitness/ar/docs/reference/features/)
 
 ## تعليمات واضحة. خطوة تالية مفيدة.
 
@@ -273,8 +273,6 @@ docker compose exec tgwitness cat /data/panel-token.txt
 ## العمل على الأرشيف.
 
 تحميل السجل، ومراجعة مصادر الذكاء الاصطناعي، وتوصيل عميل MCP، والتعرف على الوسائط المحفوظة، وإرسال webhooks موقعة.
-
-متاح من المصدر الحالي. الإصدار التجريبي المحمول 0.7.0 أقدم من هذه الأدوات.
 
 [استكشف سير العمل](https://phishdestroy.github.io/TgWitness/ar/docs/archive/)
 

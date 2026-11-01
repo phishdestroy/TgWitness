@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/conne
 
 Avtorizatsiya, avtomatik proksi havzalari, IP rejimlari, zaxira siyosati, tashqi so'rovlar va maxfiy saqlash.
 
-Ushbu hujjat TgWitness 0.7.0 xatti-harakatlari va uning cheklovlarini tasvirlaydi. Avtorizatsiya, manbaga kirish, tarmoq ulanishi va yozib olish to'liqligi alohida holatlardir. Kirish bosqichlari, fayl formatlari va bir nechta hisoblar bo'yicha [hisoblar va sessiya formatlari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/accounts/) bo'limidan boshlang. Hodisalar siyosati va qayta ishga tushirish xatti-harakatlari uchun [to'plash qanday ishlashini](https://phishdestroy.github.io/TgWitness/uz/docs/reference/collection/) ko'ring.
+Ushbu hujjat TgWitness 0.7.1 xatti-harakatlari va uning cheklovlarini tasvirlaydi. Avtorizatsiya, manbaga kirish, tarmoq ulanishi va yozib olish to'liqligi alohida holatlardir. Kirish bosqichlari, fayl formatlari va bir nechta hisoblar bo'yicha [hisoblar va sessiya formatlari](https://phishdestroy.github.io/TgWitness/uz/docs/reference/accounts/) bo'limidan boshlang. Hodisalar siyosati va qayta ishga tushirish xatti-harakatlari uchun [to'plash qanday ishlashini](https://phishdestroy.github.io/TgWitness/uz/docs/reference/collection/) ko'ring.
 
 ## Avtorizatsiya usullari
 

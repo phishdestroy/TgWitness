@@ -26,7 +26,7 @@ Gunakan persekitaran Python yang menjalankan panel. Daripada semak keluar sumber
 
 Mulakan semula panel dengan direktori data dan argumen pelancaran yang biasa selepas pemasangan. Kesediaan harus menyertakan `[PASS] mcp: streamable-http available`. **Integrations → MCP** menunjukkan status masa jalan dan perintah pemasangan menggunakan boleh laku Python sebenar pelayan tersebut. **Re-check** memuat semula status ini tanpa memuat semula halaman; ia tidak memasang pakej atau memulakan semula pelayan.
 
-Tambahan MCP menggunakan [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk) yang rasmi. `deploy/constraints-mcp.txt` menetapkan SDK dan kebergantungan yang telah diuji. Ciri-ciri ini memerlukan sumber semasa; pratonton mudah alih 0.7.0 mendahului ciri-ciri tersebut.
+Tambahan MCP menggunakan [SDK Python MCP](https://github.com/modelcontextprotocol/python-sdk) rasmi.`deploy/constraints-mcp.txt` menetapkan pin untuk SDK yang diuji dan kebergantungannya.
 
 ## Keluarkan sambungan
 

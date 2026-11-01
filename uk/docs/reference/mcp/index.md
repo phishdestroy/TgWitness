@@ -26,7 +26,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/mcp/
 
 Після встановлення перезапустіть панель зі звичним каталогом даних та аргументами запуску. Перевірка готовності має містити `[PASS] mcp: streamable-http available`. Розділ **Integrations → MCP** показує стан середовища виконання та команду встановлення з використанням фактичного виконуваного файлу Python цього сервера. Кнопка **Re-check** оновлює цей статус без перезавантаження сторінки; вона не встановлює пакунки та не перезапускає сервер.
 
-Доповнення MCP використовує офіційний [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk). Файл `deploy/constraints-mcp.txt` фіксує протестовані версії SDK та залежностей. Ці функції потребують актуального вихідного коду; портативна попередня версія 0.7.0 вийшла раніше за них.
+Додаток MCP використовує офіційний [SDK MCP для Python](https://github.com/modelcontextprotocol/python-sdk). Файл`deploy/constraints-mcp.txt` фіксує версію тестованого SDK та його залежностей.
 
 ## Створення підключення
 

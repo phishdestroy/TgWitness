@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/analy
 
 Pesquise mensagens salvas, analise contribuições de IA e mantenha relatórios analíticos com suas referências de fonte.
 
-**Versão principal atual:** utilize uma cópia do código-fonte; a versão prévia portátil 0.7.0 é anterior a esse recurso.
-
 [Guia de fluxo de trabalho](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Use o **Diário** para pesquisa local sem IA. Para usar **Consulte o arquivo**, primeiro habilite e configure um provedor em **Integrações**. O seletor de área de trabalho escolhe a conta; o formulário seleciona os chats e o período de observação. A recuperação é executada localmente. Uma frase exata ou um domínio restringe a recuperação; um ID de mensagem solicita versões salvas. Analise os trechos e abra seus registros no diário ou o contexto. Não há banco de dados vetorial nem ação automática no Telegram.

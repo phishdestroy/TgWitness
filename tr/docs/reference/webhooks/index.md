@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/webho
 
 Kapsam dahilindeki olayları, HMAC imzaları, yeniden deneme ve teslim durumu bilgileriyle birlikte HTTPS alıcılarına gönderin.
 
-**Güncel ana sürüm:** kaynak kodunu kontrol edin; 0.7.0 taşınabilir önizleme sürümü bu özelliğin öncesine aittir.
-
 [İş akışı kılavuzu](https://phishdestroy.github.io/TgWitness/docs/archive/) · [Wiki](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Archive-and-Integrations.md)
 
 Seçilen çalışma alanında **Entegrasyonlar → Giden webhook'ları** açın. Bir HTTPS alıcısı ekleyin, toplayıcı/medya/dışa aktarma olaylarını seçin ve isteğe bağlı olarak yeni gözlemler ve değişiklikler için sohbetleri seçin. Mesaj metni varsayılan olarak kapalıdır. Alıntıları etkinleştirmek, mesaj değişikliği olaylarına en fazla 1.000 karakter ekler; ham Telegram alanları ve kimlik bilgileri asla gönderilmez.

@@ -26,7 +26,7 @@ Use el entorno de Python que ejecuta el panel. Desde una descarga del código fu
 
 Reinicie el panel con su directorio de datos habitual y sus argumentos de inicio después de la instalación. La comprobación de disponibilidad debe incluir `[PASS] mcp: streamable-http available`. **Integrations → MCP** muestra el estado del entorno de ejecución y un comando de instalación que utiliza el ejecutable real de Python de ese servidor. **Re-check** actualiza este estado sin recargar la página; no instala paquetes ni reinicia el servidor.
 
-El extra de MCP utiliza el [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk) oficial. `deploy/constraints-mcp.txt` fija las versiones probadas del SDK y sus dependencias. Estas funciones requieren el código fuente actual; la versión preliminar portátil 0.7.0 es anterior a ellas.
+El complemento MCP utiliza el [SDK oficial de Python de MCP](https://github.com/modelcontextprotocol/python-sdk).`deploy/constraints-mcp.txt` fija la versión del SDK y las dependencias probadas.
 
 ## Emitir una conexión
 

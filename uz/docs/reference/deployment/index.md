@@ -127,7 +127,7 @@ Bu muvaffaqiyatli [reliz jarayoni](https://phishdestroy.github.io/TgWitness/uz/d
 `deploy/env.example` nusxasini `.env` ga nusxalang. `TGWITNESS_IMAGE` ni e'lon qilingan versiyaga, **kichik harfli** ombor yo'lidan foydalangan holda o'rnating, masalan:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.7.1
 TGWITNESS_PORT=8787
 ```
 
@@ -206,10 +206,11 @@ Yangilanishdan so'ng panelga kirish, hisob identifikatori, kuzatuv holati va qam
 
 [Chiqarish ish](https://github.com/phishdestroy/TgWitness/blob/main/.github/workflows/release.yml) jarayoni ushbu loyiha GitHub omboriga Actions yoqilgan holda joylashtirilgach ishlashga tayyor bo'ladi. U GitHub Release **e'lon** qilinganda, jumladan prerelease ham, ishga tushadi. Faqat loyihalar (drafts) yoki tag push qilish paketlarni e'lon qilmaydi.
 
-1. Paket versiyasi va o'zgarishlar jurnalini sozlang, so'ngra `v` tegiga ega chiqarilishni nashr eting qo'shimcha ravishda aniq `pyproject.toml` versiyasini, masalan `v0.7.0`.
+1. Paket versiyasi va o'zgarishlar jurnalini sozlang, so'ngra `v` tegiga ega chiqarilishni nashr eting qo'shimcha ravishda aniq `pyproject.toml` versiyasini, masalan `v0.7.1`.
 2. Jarayon tegni tasdiqlaydi va Windows/Linux/macOS uchun umumiy Python, hisob-import/QR brauzer, manba paket va Docker tekshiruvlarini ishga tushiradi. Shuningdek, barcha uch operatsion tizimda Python 3.12 yordamida yangi mahalliy o'rnatish ham sinovdan o'tkaziladi.
-3. Ushbu tekshiruvlar muvaffaqiyatli o'tkazilgach, u QEMU ostida ARM64 imidjini smoke-test qiladi, AMD64/ARM64 imidjlarini `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>` ga joylaydi va manba ZIP-faylini, checksum hamda Python wheel-ni relizga ilova qiladi. Alohida Windows vazifasi esa portativ ZIP-faylni yaratib, uning checksumini ham ilova qiladi.
-4. Birinchi nashrdan so'ng, GHCR paket sozlamalarini oching va agar anonim rasm yuklab olish mo'ljallangan bo'lsa, ko'rinishni **Public** (Ommaviy) ga o'rnating. Faqat ommaviy manba ombori ommaviy konteyner paketini kafolatlamaydi. Tashkilot siyosati paket nashr etilishiga ruxsat berishi kerak. Ish jarayoni `GITHUB_TOKEN` ni ishlatadi; omborda hech qanday registr paroli yoki VPS ma'lumotlari bo'lmasligi kerak.
+3. Ushbu tekshiruvlar muvaffaqiyatli o'tkazilgach, u QEMU ostida ARM64 tasvirini smoke-test qiladi, AMD64/ARM64 tasvirlarini `ghcr.io/<lowercase-owner>/<lowercase-repository>:<version>` manziliga joylaydi, va manba ZIP hamda Python wheel fayllarini ularning SHA-256 sidecar fayllari bilan birga ilova qiladi. Windows uchun portativ ZIP — bu tekshiruvlar jarayoni tomonidan sinovdan o'tkazilgan aynan shu artefakt; chiqarish jarayoni ushbu artefakt va uning tekshiruv summasini yuklab oladi va e'lon qiladi.
+4. Oxirgi ish barcha uchta e'lon qilingan paketni yana yuklab oladi va ularning tekshirish yig'indilarini tekshiradi. Keyin u `SHA256SUMS.txt` va `RELEASE-MANIFEST.json` ni e'lon qiladi, versiyani, manbaa reviziyasini va aktivlar hajmlarini qayd etadi. Yuklashlar mavjud chiqarish aktivlarini ustidan yozishni rad etadi.
+5. Birinchi nashrdan so'ng, GHCR paket sozlamalarini oching va agar anonim rasm yuklab olish mo'ljallangan bo'lsa, ko'rinishni **Public** (Ommaviy) ga o'rnating. Faqat ommaviy manba ombori ommaviy konteyner paketini kafolatlamaydi. Tashkilot siyosati paket nashr etilishiga ruxsat berishi kerak. Ish jarayoni `GITHUB_TOKEN` ni ishlatadi; omborda hech qanday registr paroli yoki VPS ma'lumotlari bo'lmasligi kerak.
 
 Uzoqdan ish jarayonining muvaffaqiyati ushbu mahalliy tayyorgarlik bilan aniqlanmagan. ARM64 emulyatsiyasi — bu dastlabki tekshiruv bo'lib, u asl apparat yoki jonli Telegram uchun malaka emas. Bu chiqarilishni paketlashni avtomatlashtiradi; serverni ishga tushirish uchun hanuzgacha Compose buyrug'i va uning domen/mehmon oldindan shartlari talab etiladi. Mavjud serverlar chiqarilish e'lon qilinganda jimjit yangilanmaydi yoki qayta ishga tushirilmaydi.
 

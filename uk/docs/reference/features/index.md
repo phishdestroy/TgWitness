@@ -22,7 +22,7 @@ TgWitness має власну процедуру встановлення, ка�
 
 ## Інструменти архівування
 
-У поточній версії `main` додано функції [збору історії](https://phishdestroy.github.io/TgWitness/uk/docs/reference/history/), [пошуку та аналізу архіву](https://phishdestroy.github.io/TgWitness/uk/docs/reference/analysis/), [MCP у режимі «тільки для читання»](https://phishdestroy.github.io/TgWitness/uk/docs/reference/mcp/), [локального OCR/транскрипції](https://phishdestroy.github.io/TgWitness/uk/docs/reference/media-analysis/) та [вихідних вебхуків](https://phishdestroy.github.io/TgWitness/uk/docs/reference/webhooks/). Це функції, доступні у вихідному коді, додані після портативної попередньої версії 0.7.0. Аналітичні звіти та розпізнаний текст зберігаються окремо від зафіксованих подій.
+[Збір історії](https://phishdestroy.github.io/TgWitness/uk/docs/reference/history/), [пошук та аналіз архівів](https://phishdestroy.github.io/TgWitness/uk/docs/reference/analysis/),[MCP у режимі «тільки для читання»](https://phishdestroy.github.io/TgWitness/uk/docs/reference/mcp/), [локальне OCR/транскрипція](https://phishdestroy.github.io/TgWitness/uk/docs/reference/media-analysis/) та[вихідні вебхуки](https://phishdestroy.github.io/TgWitness/uk/docs/reference/webhooks/) включені в 0.7.1. Аналітичні звіти та розпізнаний текст зберігаються окремо від зафіксованих подій.
 
 ## Додаткові опції
 

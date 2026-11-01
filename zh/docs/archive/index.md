@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/archive/
 
 查找消息。核查来源。构建案情。
 
-这些工具可在当前主分支中获取。0.7.0 便携版预览版早于这些工具；若要使用该工作流，请检出源代码。
-
 01**引入历史记录**
 
 将已启用的消息源中的历史消息加载到工作区中。

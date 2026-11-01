@@ -26,7 +26,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 安裝完成後，請使用慣用的資料目錄與啟動引數重新啟動面板。就緒狀態應包含 `[PASS] mcp: streamable-http available`。 **Integrations → MCP** 會顯示執行階段狀態，以及使用該伺服器實際 Python 執行檔的安裝指令。**Re-check** 會在不重新載入頁面的情況下重新整理此狀態；它不會安裝套件或重新啟動伺服器。
 
-MCP 擴充套件使用官方的 [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk)。 `deploy/constraints-mcp.txt` 鎖定了經測試的 SDK 與相依套件版本。這些功能需要最新的原始碼；0.7.0 可攜式預覽版早於這些功能推出。
+此 MCP 擴充套件使用官方的[MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk)。`deploy/constraints-mcp.txt` 固定了經過測試的 SDK 及其依賴項。
 
 ## 核發連線
 

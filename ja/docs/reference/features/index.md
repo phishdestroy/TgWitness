@@ -22,7 +22,7 @@ TgWitnessには、独自のインストール手順、データディレクト�
 
 ## アーカイブツール
 
-最新の`main`では、[履歴の取得](https://phishdestroy.github.io/TgWitness/ja/docs/reference/history/)、[アーカイブの検索と分析](https://phishdestroy.github.io/TgWitness/ja/docs/reference/analysis/)、 [読み取り専用MCP](https://phishdestroy.github.io/TgWitness/ja/docs/reference/mcp/)、[ローカルでのOCR/文字起こし](https://phishdestroy.github.io/TgWitness/ja/docs/reference/media-analysis/)、および [送信用Webhookが](https://phishdestroy.github.io/TgWitness/ja/docs/reference/webhooks/)追加されました。これらはソースコードからチェックアウトして利用可能な機能であり、 0.7.0ポータブルプレビュー版以降に追加されたものです。分析レポートおよび認識されたテキストは、 キャプチャされたイベントとは別々に管理されます。
+[履歴の取得](https://phishdestroy.github.io/TgWitness/ja/docs/reference/history/)、[アーカイブの検索および分析](https://phishdestroy.github.io/TgWitness/ja/docs/reference/analysis/)、[読み取り専用MCP](https://phishdestroy.github.io/TgWitness/ja/docs/reference/mcp/)、[ローカルでのOCR/文字起こし](https://phishdestroy.github.io/TgWitness/ja/docs/reference/media-analysis/)、[および送信用Webhookが](https://phishdestroy.github.io/TgWitness/ja/docs/reference/webhooks/) 0.7.1 に含まれています。分析レポートおよび認識されたテキストは、 キャプチャされたイベントとは別々に保持されます。
 
 ## オプション機能
 

@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/reference/conne
 
 Pengesahan, kolam proksi automatik, mod IP, dasar sandaran, permintaan luaran dan penyimpanan rahsia.
 
-Dokumen ini menerangkan tingkah laku TgWitness 0.7.0 dan hadnya. Pengesahan, akses sumber, sambungan rangkaian dan kelengkapan tangkapan adalah keadaan yang berasingan. Untuk langkah log masuk, format fail, dan akaun berbilang, mulakan dengan [akaun dan format sesi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/accounts/). Untuk dasar peristiwa dan tingkah laku permulaan semula, lihat [bagaimana pengumpulan berfungsi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/collection/).
+Dokumen ini menerangkan tingkah laku TgWitness 0.7.1 dan hadnya. Pengesahan, akses sumber, sambungan rangkaian dan kelengkapan tangkapan adalah keadaan yang berasingan. Untuk langkah log masuk, format fail, dan akaun berbilang, mulakan dengan [akaun dan format sesi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/accounts/). Untuk dasar peristiwa dan tingkah laku permulaan semula, lihat [bagaimana pengumpulan berfungsi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/collection/).
 
 ## Kaedah pengesahan
 

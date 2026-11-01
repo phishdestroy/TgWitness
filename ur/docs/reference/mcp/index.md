@@ -26,7 +26,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/mcp/
 
 انسٹالیشن کے بعد پینل کو اس کی معمول کی ڈیٹا ڈائریکٹری اور لانچ آرگومنٹس کے ساتھ دوبارہ اسٹارٹ کریں۔ ریڈینیس چیک میں `[PASS] mcp: streamable-http available` شامل ہونا چاہیے۔ **Integrations → MCP** رن ٹائم اسٹیٹس اور اس سرور کے اصل Python ایگزیکیوٹیبل کا استعمال کرتے ہوئے ایک انسٹالیشن کمانڈ دکھاتا ہے۔ **Re-check** صفحہ کو دوبارہ لوڈ کیے بغیر اس اسٹیٹس کو ریفریش کرتا ہے؛ یہ پیکجز انسٹال نہیں کرتا اور نہ ہی سرور کو دوبارہ اسٹارٹ کرتا ہے۔
 
-MCP ایکسٹرا آفیشل [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk) استعمال کرتا ہے۔ `deploy/constraints-mcp.txt` ٹیسٹ شدہ SDK اور ڈیپینڈنسیز کو پن کرتا ہے۔ ان خصوصیات کے لیے موجودہ سورس درکار ہے؛ 0.7.0 پورٹیبل پریویو ان سے پرانا ہے۔
+MCP ایکسٹرا سرکاری [MCP پائتھن SDK](https://github.com/modelcontextprotocol/python-sdk) استعمال کرتا ہے۔`deploy/constraints-mcp.txt` ٹیسٹ شدہ SDK اور انحصار کو پن کرتا ہے۔
 
 ## کنکشن جاری کریں
 

@@ -26,7 +26,7 @@ MCPクライアントを、有効期限付きかつ取り消し可能なアク�
 
 インストール後、通常のデータディレクトリと起動引数を使用してパネルを再起動します。準備状態（Readiness）に `[PASS] mcp: streamable-http available` が含まれている必要があります。**Integrations → MCP** には、ランタイムステータスとそのサーバーの実際の Python 実行ファイルを使用したインストールコマンドが表示されます。**Re-check** はページを再読み込みせずにこのステータスを更新しますが、パッケージのインストールやサーバーの再起動は行いません。
 
-MCP extra は公式の [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk) を使用します。`deploy/constraints-mcp.txt` により、テスト済みの SDK と依存関係が固定されます。これらの機能には最新のソースが必要です（0.7.0 ポータブルプレビューはこれらより前のバージョンです）。
+この MCP エクストラは、公式の[MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk) を使用しています。`deploy/constraints-mcp.txt` には、テスト済みの SDK および依存関係が固定されています。
 
 ## 接続の発行
 

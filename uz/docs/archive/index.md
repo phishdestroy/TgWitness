@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/archive/
 
 Xabarni toping. Manbani tekshiring. Ishni tuzing.
 
-Ushbu vositalar hozirgi asosiy tarmoqdan mavjud. 0.7.0 portativ ko'rinishi ularning oldingi versiyasi bo'lib, ushbu ish jarayoni uchun manba kodini chiqarib olishni ishlating.
-
 01**Tarixni olib keling**
 
 Faollashtirilgan manbalaringizdan avvalgi xabarlarni ish maydoniga yuklang.

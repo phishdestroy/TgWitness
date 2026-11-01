@@ -26,7 +26,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/
 
 پس از نصب، پنل را با دایرکتوری داده و آرگومان‌های راه‌اندازی همیشگی آن مجدداً راه‌اندازی کنید. بررسی آمادگی باید شامل `[PASS] mcp: streamable-http available` باشد. مسیر **Integrations → MCP** وضعیت زمان اجرا و دستور نصب را با استفاده از فایل اجرایی واقعی پایتون آن سرور نشان می‌دهد. گزینه **Re-check** این وضعیت را بدون بارگذاری مجدد صفحه به‌روزرسانی می‌کند؛ این گزینه بسته‌ها را نصب نمی‌کند و سرور را مجدداً راه‌اندازی نمی‌کند.
 
-افزونه MCP از [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk) رسمی استفاده می‌کند. فایل `deploy/constraints-mcp.txt` نسخه تست‌شده SDK و وابستگی‌ها را ثابت نگه می‌دارد. این قابلیت‌ها نیازمند سورس فعلی هستند؛ پیش‌نمایش قابل حمل 0.7.0 پیش از آن‌ها منتشر شده است.
+MCP extra از [SDK رسمی MCP Python](https://github.com/modelcontextprotocol/python-sdk) استفاده می‌کند.`deploy/constraints-mcp.txt` SDK آزمایش‌شده و وابستگی‌ها را ثابت می‌کند.
 
 ## صدور یک اتصال
 

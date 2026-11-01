@@ -22,7 +22,7 @@ Otomatik MTProxy, dört kamuya açık kaynaktan veya bir operatör kataloğundan
 
 ## Arşivleme araçları
 
-Mevcut `main` sürümü, [geçmiş verilerinin alınması](https://phishdestroy.github.io/TgWitness/tr/docs/reference/history/), [arşiv arama ve analizi](https://phishdestroy.github.io/TgWitness/tr/docs/reference/analysis/), [salt okunur MCP](https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/), [yerel OCR/transkripsiyon](https://phishdestroy.github.io/TgWitness/tr/docs/reference/media-analysis/) ve [giden webhook'ları](https://phishdestroy.github.io/TgWitness/tr/docs/reference/webhooks/) ekler. Bunlar, 0.7.0 taşınabilir önizlemesinden sonra eklenen kaynak kodundan alınabilen özelliklerdir. Analitik raporlar ve tanınan metinler, yakalanan olaylardan ayrı tutulur.
+[Geçmiş verilerinin toplanması](https://phishdestroy.github.io/TgWitness/tr/docs/reference/history/), [arşiv arama ve analizi](https://phishdestroy.github.io/TgWitness/tr/docs/reference/analysis/),[salt okunur MCP](https://phishdestroy.github.io/TgWitness/tr/docs/reference/mcp/), [yerel OCR/transkripsiyon](https://phishdestroy.github.io/TgWitness/tr/docs/reference/media-analysis/) ve[giden webhook'lar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/webhooks/) 0.7.1 adresinde yer almaktadır. Analitik raporlar ve tanınan metinler, yakalanan olaylardan ayrı tutulur.
 
 ## İsteğe bağlı ek özellikler
 
