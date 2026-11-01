@@ -33,6 +33,12 @@
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">ডকুমেন্টেশন অনুসন্ধান করুন</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="প্রক্সি, হ্যাশ চেইন, টোকেন বা উইটনেস চেষ্টা করুন…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="স্পষ্ট অনুসন্ধান" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">গাইড এবং রেফারেন্স অনুসন্ধান করতে একটি শব্দ টাইপ করুন। অনুসন্ধান আপনার ব্রাউজারেই থাকবে।</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="language-notice">এই পৃষ্ঠা শুধুমাত্র ইংরেজিতে উপলব্ধ।</p><p class="eyebrow">তথ্যসূত্র / নিরাপত্তা ও প্রকল্প</p><h1>পরিবর্তনলগ</h1><p class="guide-outcome">প্রতি সংস্করণে প্রতিটি পরিবর্তন, এমনকি এখনও প্রকাশ না হওয়া পরিবর্তনগুলিও।</p><div class="wiki-body" lang=en dir=ltr><h2 id="unreleased">Unreleased<a class="anchor" href="#unreleased" aria-label="এই বিভাগের লিঙ্ক">#</a></h2>
 <ul>
+<li>Kept English as the canonical interface, documentation and demo language, with
+    explicit fallback and browser checks. Capture now falls back to its English
+    source when a translation is missing. Other languages remain translations.</li>
+<li>Hardened Capture language selection and encoded its HTML/URL output, pinned
+    release actions, and documented the dated security scan results, including
+    unresolved Debian package findings in the container images.</li>
 <li>Refreshed the Russian panel and Capture wizard through DeepL, with reviewed
     privacy and evidence terminology, preserved placeholders and command examples.</li>
 <li>Raised dependency security floors and regenerated the hash-locked build tools.

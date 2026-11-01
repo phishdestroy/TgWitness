@@ -33,6 +33,12 @@
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">חפש בתיעוד</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="נסו להשתמש במונחים כמו &quot;פרוקסי&quot;, &quot;שרשרת האש&quot;, &quot;אסימון&quot; או &quot;עד&quot;..." autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="חיפוש ברור" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">הקלידו מילה כדי לחפש במדריכים ובמאגר המידע. החיפוש נשאר בדפדפן שלכם.</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="language-notice">דף זה זמין באנגלית בלבד.</p><p class="eyebrow">הפניה / אבטחה ופרויקט</p><h1>יומן שינויים</h1><p class="guide-outcome">כל השינויים לפי גרסה, כולל השינויים שטרם שוחררו.</p><div class="wiki-body" lang=en dir=ltr><h2 id="unreleased">Unreleased<a class="anchor" href="#unreleased" aria-label="קישור לסעיף זה">#</a></h2>
 <ul>
+<li>Kept English as the canonical interface, documentation and demo language, with
+    explicit fallback and browser checks. Capture now falls back to its English
+    source when a translation is missing. Other languages remain translations.</li>
+<li>Hardened Capture language selection and encoded its HTML/URL output, pinned
+    release actions, and documented the dated security scan results, including
+    unresolved Debian package findings in the container images.</li>
 <li>Refreshed the Russian panel and Capture wizard through DeepL, with reviewed
     privacy and evidence terminology, preserved placeholders and command examples.</li>
 <li>Raised dependency security floors and regenerated the hash-locked build tools.

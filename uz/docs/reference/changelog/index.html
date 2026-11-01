@@ -33,6 +33,12 @@
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Dokumentatsiyani qidiring</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Proxy, hash zanjiri, token yoki guvohni sinab ko&#x27;ring…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Aniq qidiruv" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Qo&#x27;llanmalar va ma&#x27;lumotnoma bo&#x27;ylab qidirish uchun so&#x27;z yozing. Qidiruv brauzeringizda saqlanadi.</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="language-notice">Ushbu sahifa faqat ingliz tilida mavjud.</p><p class="eyebrow">Manba / Xavfsizlik va loyiha</p><h1>O&#x27;zgarishlar tarixi</h1><p class="guide-outcome">Har bir versiyadagi barcha o&#x27;zgarishlar, hali e&#x27;lon qilinmagan o&#x27;zgarishlar ham.</p><div class="wiki-body" lang=en dir=ltr><h2 id="unreleased">Unreleased<a class="anchor" href="#unreleased" aria-label="Ushbu bo&#x27;limga havola">#</a></h2>
 <ul>
+<li>Kept English as the canonical interface, documentation and demo language, with
+    explicit fallback and browser checks. Capture now falls back to its English
+    source when a translation is missing. Other languages remain translations.</li>
+<li>Hardened Capture language selection and encoded its HTML/URL output, pinned
+    release actions, and documented the dated security scan results, including
+    unresolved Debian package findings in the container images.</li>
 <li>Refreshed the Russian panel and Capture wizard through DeepL, with reviewed
     privacy and evidence terminology, preserved placeholders and command examples.</li>
 <li>Raised dependency security floors and regenerated the hash-locked build tools.

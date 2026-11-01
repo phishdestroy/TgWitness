@@ -33,6 +33,12 @@
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">문서 검색</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="프록시, 해시 체인, 토큰 또는 위트니스 등을 고려해 보십시오…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="명확한 검색" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">가이드와 참조 자료를 검색하려면 단어를 입력하세요. 검색 기록은 브라우저에 저장됩니다.</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="language-notice">이 페이지는 영어로만 제공됩니다.</p><p class="eyebrow">참고 문헌 / 보안 및 프로젝트</p><h1>변경 내역</h1><p class="guide-outcome">아직 공개되지 않은 변경 사항을 포함하여 버전별 모든 변경 내역.</p><div class="wiki-body" lang=en dir=ltr><h2 id="unreleased">Unreleased<a class="anchor" href="#unreleased" aria-label="이 섹션으로 이동">#</a></h2>
 <ul>
+<li>Kept English as the canonical interface, documentation and demo language, with
+    explicit fallback and browser checks. Capture now falls back to its English
+    source when a translation is missing. Other languages remain translations.</li>
+<li>Hardened Capture language selection and encoded its HTML/URL output, pinned
+    release actions, and documented the dated security scan results, including
+    unresolved Debian package findings in the container images.</li>
 <li>Refreshed the Russian panel and Capture wizard through DeepL, with reviewed
     privacy and evidence terminology, preserved placeholders and command examples.</li>
 <li>Raised dependency security floors and regenerated the hash-locked build tools.

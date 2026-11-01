@@ -5008,6 +5008,8 @@ Every change by version, including the changes not yet released.
 
 ## Unreleased
 
+- Kept English as the canonical interface, documentation and demo language, with explicit fallback and browser checks. Capture now falls back to its English source when a translation is missing. Other languages remain translations.
+- Hardened Capture language selection and encoded its HTML/URL output, pinned release actions, and documented the dated security scan results, including unresolved Debian package findings in the container images.
 - Refreshed the Russian panel and Capture wizard through DeepL, with reviewed privacy and evidence terminology, preserved placeholders and command examples.
 - Raised dependency security floors and regenerated the hash-locked build tools. Notification services now refuse HTTP redirects, including URL-level redirect overrides, so credentials cannot be forwarded to a different endpoint. Configure the final notification endpoint directly; HTTP 3xx responses fail delivery.
 - Added weekly Dependabot updates, checks for pull requests on hosted runners, and nightly dependency, CodeQL and container vulnerability scans. Custom dependency locks remain reviewed and regenerated together with version changes.

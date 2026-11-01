@@ -33,6 +33,12 @@
 <div class="search" data-index="../../search.json" hidden><label for="guide-search">Cari dalam dokumentasi</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Cuba proksi, rantaian hash, token atau saksi…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Carian jelas" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Taip satu perkataan untuk mencari panduan dan rujukan. Carian kekal di pelayar anda.</p><div id="search-results" hidden></div></div>
 <article class="guide-content"><p class="language-notice">Halaman ini hanya tersedia dalam bahasa Inggeris.</p><p class="eyebrow">Rujukan / Keselamatan &amp; projek</p><h1>Logs perubahan</h1><p class="guide-outcome">Setiap perubahan mengikut versi, termasuk perubahan yang belum dikeluarkan.</p><div class="wiki-body" lang=en dir=ltr><h2 id="unreleased">Unreleased<a class="anchor" href="#unreleased" aria-label="Pautan ke bahagian ini">#</a></h2>
 <ul>
+<li>Kept English as the canonical interface, documentation and demo language, with
+    explicit fallback and browser checks. Capture now falls back to its English
+    source when a translation is missing. Other languages remain translations.</li>
+<li>Hardened Capture language selection and encoded its HTML/URL output, pinned
+    release actions, and documented the dated security scan results, including
+    unresolved Debian package findings in the container images.</li>
 <li>Refreshed the Russian panel and Capture wizard through DeepL, with reviewed
     privacy and evidence terminology, preserved placeholders and command examples.</li>
 <li>Raised dependency security floors and regenerated the hash-locked build tools.
