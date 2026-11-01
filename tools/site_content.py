@@ -43,6 +43,7 @@ REFERENCE = {
     "features": ("Features and limits", "What TgWitness implements today, what the Telegram platform limits and what remains future work.", "features product status roadmap limits platform", "docs/PRODUCT.md"),
     "how-it-works": ("How the evidence works", "Hash chain, signatures, checkpoints and witnesses explained with the exact formulas the verifier uses.", "hash chain sha256 ed25519 canonical json checkpoint formula", "docs/HOW-IT-WORKS.md"),
     "evidence": ("Evidence format", "Contents of the signed ZIP, record kinds, process receipts, people profiles, off-site copies and offline verification.", "evidence zip manifest events jsonl verify dossier replica s3", "docs/EVIDENCE.md"),
+    "evidence-trust": ("Evidence and trust", "What exports, video, web archives and signed records can establish, and how the collecting device affects their reliability.", "evidence trust legal court authenticity integrity capture device Telegram Hunchly video archive", "docs/EVIDENCE-TRUST.md"),
     "witness": ("Independent witness", "Run a witness with its own key and bot, publish signed checkpoints to a channel and check exports against it.", "witness bot channel checkpoint tgw1 verify continuity", "docs/WITNESS.md"),
     "timestamp": ("Timestamps", "RFC 3161 timestamps for signed checkpoints: what is sent to the authority and how a response is verified.", "rfc 3161 tsa timestamp authority nonce checkpoint", "docs/TIMESTAMP.md"),
     "security": ("Security and data handling", "Threat model, access model, secrets at rest, network exposure, session imports and how to report a vulnerability.", "security threat model token vault fernet encryption report vulnerability", "docs/SECURITY-MODEL.md"),
@@ -55,7 +56,7 @@ REFERENCE_GROUPS = (
     ("Set up", ("quickstart", "accounts", "access", "connection", "deployment")),
     ("Collect", ("collection", "history", "operations", "investigation", "features")),
     ("Archive & integrations", ("analysis", "mcp", "media-analysis", "webhooks")),
-    ("Evidence", ("how-it-works", "evidence", "witness", "timestamp")),
+    ("Evidence", ("how-it-works", "evidence", "evidence-trust", "witness", "timestamp")),
     ("Security & project", ("security", "architecture", "verification", "license", "notice", "changelog")),
 )
 
