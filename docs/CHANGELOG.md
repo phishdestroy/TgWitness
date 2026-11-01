@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- Added configurable account export through Telegram Takeout or the explicitly
+  selected regular API. Jobs retain signed progress, support pause/resume and
+  produce a reusable ZIP with coverage and omission records.
+- Added separate signed disclosure copies with purpose, sender/date/text filters,
+  participant pseudonyms and optional text/file exclusions. Preview is bound to
+  the administrator session and source archive. Signatures establish integrity;
+  they do not establish Telegram authorship, completeness or legal admissibility.
+  See [account export](ACCOUNT-EXPORT.md) and the [Russian guide](ru/ACCOUNT-EXPORT.md).
+- Added fictional account-export and disclosure downloads to the online demo.
+
 - Added workspace-aware panel URLs, Back/Forward navigation and an active-view
   lifecycle. Background updates preserve form drafts and focus; settings can be
   saved with Ctrl/Cmd+S. Submitted secrets never become a Discard baseline.

@@ -1573,8 +1573,9 @@ function accountExportPhase(phase){return tr({preparing:"Discovering chats",runn
 function accountExportTime(value){
   if(!value)return "";
   const date=new Date(accountExportEpochMs(value));
-  return Number.isNaN(date.valueOf())?String(value):date.toLocaleString();
+  return Number.isNaN(date.valueOf())?String(value):fmtTime(date);
 }
+window.addEventListener("tgwitness:time-zone",()=>{if(state.view==="evidence")renderAccountExportJobs();});
 function accountExportEpochMs(value){return typeof value==="number"&&value<1e12?value*1000:value;}
 function accountExportIds(value,label){
   const values=String(value||"").trim().split(/[\s,;]+/).filter(Boolean);
@@ -1642,7 +1643,7 @@ function renderAccountExportJobs(){
     else if(job.delay_seconds)card.append(node("p","account-export-job-note warning",tr("Telegram delay: {n} seconds.",{n:job.delay_seconds})));
     if(coverage.inventory_complete===false)card.append(node("p","account-export-job-note warning",
       tr("Chat inventory is still being read or was interrupted; this is not a complete account inventory.")));
-    if(coverage.scope)card.append(node("p","account-export-job-note",tr("Coverage: {scope}",{scope:coverage.scope})));
+    if(coverage.scope)card.append(node("p","account-export-job-note",tr("Coverage: {scope}",{scope:tr(coverage.scope)})));
     if(coverage.failures)card.append(node("p","account-export-job-note warning",
       tr("Coverage issues: {n}.",{n:Array.isArray(coverage.failures)?coverage.failures.length:coverage.failures})));
     const omissions=Array.isArray(job.omissions)?job.omissions:[];

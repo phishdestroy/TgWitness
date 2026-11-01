@@ -142,6 +142,7 @@ jobs:
       - run: python tools/check_fleet_browser.py
       - run: python tools/check_proxy_async_browser.py
       - run: python tools/check_export_async_browser.py
+      - run: python tools/check_account_export_browser.py
       - run: python tools/check_refresh_browser.py
       - run: python tools/check_analyst_browser.py
       - run: python tools/check_history_browser.py
