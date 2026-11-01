@@ -3,7 +3,6 @@ import json
 import sqlite3
 import threading
 import time
-import unicodedata
 from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
@@ -11,16 +10,13 @@ from pathlib import Path
 from . import keyboard
 from . import message_content
 from . import continuity
+from .journal_index import CHAT_KINDS, MEDIA_KINDS, TEXT_KINDS, JournalIndex, migrate_media, nul_text, search_text
+from .journal_index import GONE_KINDS as GONE_KINDS
+from .journal_index import NUL_PAYLOAD
 
 ZERO = "0" * 64
 EVENT_FIELDS = ("seq", "observed_at", "source_at", "kind", "chat_id", "message_id",
                 "actor_id", "payload", "previous_hash")
-# Journal records that make up the readable chat view.
-TEXT_KINDS = ("message.new", "message.snapshot", "message.edited", "message.recovered")
-# A deletion notice from Telegram and "not returned at a later recheck" are different facts.
-GONE_KINDS = ("message.deleted", "message.missing_on_recheck")
-CHAT_KINDS = TEXT_KINDS + GONE_KINDS + ("media.saved",)
-
 
 def utcnow():
     return datetime.now(timezone.utc).isoformat(timespec="milliseconds")
@@ -35,16 +31,13 @@ def event_hash(event):
     return hashlib.sha256(canonical({k: event[k] for k in EVENT_FIELDS})).hexdigest()
 
 
-def search_text(value):
-    return unicodedata.normalize("NFC", value.casefold())
-
-
 class Store:
     def __init__(self, root: Path):
         self.root = root
         self.lock = threading.RLock()
         self.db = sqlite3.connect(root / "journal.sqlite3", check_same_thread=False)
         self.db.create_function("search_text", 1, search_text, deterministic=True)
+        self.db.create_function("nul_text", 1, nul_text, deterministic=True)
         self.db.row_factory = sqlite3.Row
         self.db.executescript("""
             PRAGMA journal_mode=WAL;
@@ -75,21 +68,23 @@ class Store:
             CREATE TRIGGER IF NOT EXISTS immutable_delete BEFORE DELETE ON events
               BEGIN SELECT RAISE(ABORT, 'Journal is append-only'); END;
         """)
-        # Sources added before 0.7 were all chosen by hand and rechecked at the priority interval.
+
         columns = {r[1] for r in self.db.execute("PRAGMA table_info(targets)")}
         if "origin" not in columns:
             self.db.execute("ALTER TABLE targets ADD COLUMN origin TEXT NOT NULL DEFAULT 'manual'")
         if "priority" not in columns:
             self.db.execute("ALTER TABLE targets ADD COLUMN priority INTEGER NOT NULL DEFAULT 1")
-        # Private chats and ordinary groups share one account-wide message ID sequence; deletion
-        # notices for them carry only IDs, so the chat is found by a saved message ID.
+
+
         self.db.execute("CREATE INDEX IF NOT EXISTS event_message_id ON events(message_id)")
         self.db.commit()
         self.signer = None
         self.targets_revision = 0
-        self.listeners = []  # called with each new record (the administrator's console)
+        self.listeners = []
         with self.transaction():
             continuity.initialize(self.db)
+            migrate_media(self.db)
+            self.read_index = JournalIndex(self.db)
 
     @contextmanager
     def transaction(self):
@@ -127,13 +122,14 @@ class Store:
                             tuple(canonical(event[k]).decode() if k == "payload" else event[k]
                                   for k in (*EVENT_FIELDS, "hash", "signature")))
             continuity.index_event(self.db, event["seq"], event["hash"])
+            self.read_index.append(event)
             if media_job:
                 self.db.execute(
                     "INSERT INTO media_jobs(message_event,account_id,chat_id,message_id,"
-                    "descriptor,descriptor_hash,max_bytes) VALUES (?,?,?,?,?,?,?)",
+                    "descriptor,descriptor_hash,max_bytes,priority,estimated_bytes) VALUES (?,?,?,?,?,?,?,?,?)",
                     (event["seq"], media_job["account_id"], chat_id, message_id,
                      media_job["descriptor"], hashlib.sha256(media_job["descriptor"]).hexdigest(),
-                     media_job["max_bytes"]))
+                     media_job["max_bytes"], media_job.get("priority", 10), media_job.get("estimated_bytes")))
             for listen in self.listeners:
                 try:
                     listen(event)
@@ -149,29 +145,19 @@ class Store:
 
     def chat_overview(self):
         """Per chat: saved messages, edited and deleted counts, and the newest saved text."""
-        marks = ",".join("?" * len(CHAT_KINDS))
-        text_marks = ",".join("?" * len(TEXT_KINDS))
         with self.lock:
             rows = self.db.execute(
-                "SELECT chat_id, count(DISTINCT CASE WHEN kind!='media.saved' THEN message_id END) AS messages,"
-                " count(DISTINCT CASE WHEN kind='message.edited' THEN message_id END) AS edited,"
-                " count(DISTINCT CASE WHEN kind='message.deleted' THEN message_id END) AS deleted,"
-                " count(DISTINCT CASE WHEN kind='message.missing_on_recheck' THEN message_id END) AS missing,"
-                " max(observed_at) AS last_observed_at"
-                " FROM events WHERE chat_id IS NOT NULL AND message_id IS NOT NULL AND kind IN (" + marks + ")"
-                " GROUP BY chat_id", CHAT_KINDS).fetchall()
+                "SELECT c.*,e.payload FROM chat_state_index c LEFT JOIN events e ON e.seq=c.text_seq "
+                "WHERE c.last_observed_at IS NOT NULL").fetchall()
             result = {}
             for row in rows:
-                newest = self.db.execute(
-                    "SELECT payload FROM events WHERE chat_id=? AND kind IN (" + text_marks + ")"
-                    " ORDER BY message_id DESC, seq DESC LIMIT 1", (row["chat_id"], *TEXT_KINDS)).fetchone()
-                payload = json.loads(newest["payload"]) if newest else {}
+                payload = json.loads(row["payload"]) if row["payload"] is not None else {}
                 sender = payload.get("sender_observation") or {}
                 result[row["chat_id"]] = {
                     "messages": row["messages"], "edited": row["edited"], "deleted": row["deleted"],
                     "missing": row["missing"],
                     "last_observed_at": row["last_observed_at"],
-                    "last_text": payload.get("text") if newest else None,
+                    "last_text": payload.get("text"),
                     "last_sender": sender.get("display_name"),
                 }
         return result
@@ -219,59 +205,64 @@ class Store:
 
     def last_message_id(self, chat_id):
         """Highest message ID with saved content in this chat, or None."""
-        marks = ",".join("?" * len(TEXT_KINDS))
         with self.lock:
-            row = self.db.execute("SELECT max(message_id) FROM events WHERE chat_id=? AND kind IN (" + marks + ")",
-                                  (chat_id, *TEXT_KINDS)).fetchone()
-        return row[0]
+            row = self.db.execute("SELECT message_id FROM message_state_index INDEXED BY message_text WHERE chat_id=? "
+                                  "AND text_seq IS NOT NULL ORDER BY message_id DESC LIMIT 1", (chat_id,)).fetchone()
+        return row[0] if row else None
 
     def message_state(self, chat_id, message_id):
         """Latest saved content of one message and whether it is already recorded as gone."""
-        marks = ",".join("?" * len(TEXT_KINDS))
         with self.lock:
             row = self.db.execute(
-                "SELECT seq, hash, json_extract(payload,'$.text') AS text,"
-                " json_extract(payload,'$.edited_at') AS edited_at,"
-                " json_extract(payload,'$.outgoing') AS outgoing,"
-                " payload FROM events"
-                " WHERE chat_id=? AND message_id=? AND kind IN (" + marks + ") ORDER BY seq DESC LIMIT 1",
-                (chat_id, message_id, *TEXT_KINDS)).fetchone()
-            gone = {r[0] for r in self.db.execute(
-                "SELECT DISTINCT kind FROM events WHERE chat_id=? AND message_id=? AND kind IN (?,?)",
-                (chat_id, message_id, *GONE_KINDS))}
-        content = dict(row) if row else None
+                "SELECT e.seq,e.hash,json_extract(e.payload,'$.text') AS text,"
+                "json_extract(e.payload,'$.edited_at') AS edited_at,"
+                "json_extract(e.payload,'$.outgoing') AS outgoing,e.payload,m.deleted,m.missing "
+                "FROM message_state_index m LEFT JOIN events e ON e.seq=m.text_seq "
+                "WHERE m.chat_id=? AND m.message_id=?", (chat_id, message_id)).fetchone()
+        content = {key: row[key] for key in ("seq", "hash", "text", "edited_at", "outgoing", "payload")} \
+            if row and row["seq"] is not None else None
         if content:
             content["observable"] = message_content.of_payload(json.loads(content.pop("payload")))
             content["buttons"] = content["observable"]["buttons"]
         return {"content": content,
-                "deleted": "message.deleted" in gone, "missing": "message.missing_on_recheck" in gone}
+                "deleted": bool(row and row["deleted"]), "missing": bool(row and row["missing"])}
 
     def alive_message_ids(self, chat_id, below=None, limit=200):
         """Saved message IDs not yet recorded as deleted or missing, newest first."""
-        marks = ",".join("?" * len(TEXT_KINDS))
-        where, params = "chat_id=? AND message_id IS NOT NULL AND kind IN (" + marks + ")", [chat_id, *TEXT_KINDS]
+        where, params = "chat_id=? AND text_seq IS NOT NULL AND deleted=0 AND missing=0", [chat_id]
         if below is not None:
             where += " AND message_id<?"
             params.append(below)
         with self.lock:
             return [r[0] for r in self.db.execute(
-                "SELECT DISTINCT message_id FROM events WHERE " + where +
-                " AND message_id NOT IN (SELECT message_id FROM events WHERE chat_id=? AND message_id IS NOT NULL"
-                " AND kind IN (?,?)) ORDER BY message_id DESC LIMIT ?", (*params, chat_id, *GONE_KINDS, limit))]
+                "SELECT message_id FROM message_state_index INDEXED BY message_alive WHERE " + where +
+                " ORDER BY message_id DESC LIMIT ?", (*params, limit))]
 
-    def chat_messages(self, chat_id, before_id=None, limit=60):
+    def chat_messages(self, chat_id, before_id=None, limit=60, *, after_id=None):
         """Readable view of one chat: every saved version, deletion and attachment per message."""
+        if before_id is not None and after_id is not None:
+            raise ValueError("Choose one message cursor.")
+        if not 1 <= limit <= 200:
+            raise ValueError("Limit must be 1–200.")
         marks = ",".join("?" * len(CHAT_KINDS))
-        where, params = "chat_id=? AND message_id IS NOT NULL AND kind IN (" + marks + ")", [chat_id, *CHAT_KINDS]
+        where, params = "chat_id=?", [chat_id]
         if before_id is not None:
             where += " AND message_id<?"
             params.append(before_id)
+        if after_id is not None:
+            where += " AND message_id>?"
+            params.append(after_id)
+        direction = "ASC" if after_id is not None else "DESC"
         with self.lock:
             ids = [r[0] for r in self.db.execute(
-                "SELECT DISTINCT message_id FROM events WHERE " + where + " ORDER BY message_id DESC LIMIT ?",
+                "SELECT message_id FROM message_state_index WHERE " + where + " ORDER BY message_id " + direction + " LIMIT ?",
                 (*params, limit))]
             if not ids:
-                return {"messages": [], "next_before": None}
+                return {"messages": [], "next_before": None, "next_after": None}
+            older = self.db.execute(
+                "SELECT 1 FROM message_state_index WHERE chat_id=? AND message_id<? LIMIT 1", (chat_id, min(ids))).fetchone()
+            newer = self.db.execute(
+                "SELECT 1 FROM message_state_index WHERE chat_id=? AND message_id>? LIMIT 1", (chat_id, max(ids))).fetchone()
             rows = self.db.execute(
                 "SELECT seq, observed_at, source_at, kind, message_id, payload FROM events"
                 " WHERE chat_id=? AND message_id IN (" + ",".join("?" * len(ids)) + ") AND kind IN (" + marks + ")"
@@ -302,9 +293,11 @@ class Store:
                 if origin not in item["origins"]:
                     item["origins"].append(origin)
                 text, buttons = payload.get("text") or "", keyboard.of_payload(payload)
-                content_hash = hashlib.sha256(canonical(message_content.of_payload(payload))).hexdigest()
+                observable = message_content.of_payload(payload)
+                content_hash = hashlib.sha256(canonical(observable)).hexdigest()
                 if not item["versions"] or item["versions"][-1]["content_hash"] != content_hash:
                     item["versions"].append({"text": text, "buttons": buttons, "observed_at": row["observed_at"],
+                                             "entities": observable["entities"],
                                              "content_hash": content_hash,
                                              "edited_at": payload.get("edited_at"), "kind": kind, "seq": row["seq"]})
             elif kind == "message.deleted":
@@ -323,7 +316,8 @@ class Store:
             item["buttons"] = item["versions"][-1]["buttons"] if item["versions"] else None
             item["edited"] = len(item["versions"]) > 1 or bool(item["telegram_edited_at"])
             result.append(item)
-        return {"messages": result, "next_before": min(ids) if len(ids) == limit else None}
+        return {"messages": result, "next_before": min(ids) if older else None,
+                "next_after": max(ids) if newer else None}
 
     def events_after(self, seq, limit):
         """Consecutive journal records after seq, as stored (for the off-site copy)."""
@@ -342,16 +336,17 @@ class Store:
         """(seq, SHA-256) of preserved files recorded after seq."""
         with self.lock:
             return [(r[0], r[1]) for r in self.db.execute(
-                "SELECT seq, json_extract(payload,'$.media_sha256') FROM events WHERE kind='media.saved' AND seq>?"
-                " ORDER BY seq", (seq,)) if r[1]]
+                "SELECT seq, json_extract(payload,'$.media_sha256') FROM events WHERE kind IN (?,?) AND seq>?"
+                " ORDER BY seq", (*MEDIA_KINDS, seq)) if r[1]]
 
     def media_in_chats(self, sha256, chat_ids):
         """Whether a preserved file was saved from one of these chats."""
         marks = ",".join("?" * len(chat_ids))
         with self.lock:
             return self.db.execute(
-                "SELECT 1 FROM events WHERE kind='media.saved' AND chat_id IN (" + marks + ")"
-                " AND json_extract(payload,'$.media_sha256')=? LIMIT 1", (*sorted(chat_ids), sha256)).fetchone() is not None
+                "SELECT 1 FROM events WHERE kind IN (?,?) AND chat_id IN (" + marks + ")"
+                " AND json_extract(payload,'$.media_sha256')=? LIMIT 1",
+                (*MEDIA_KINDS, *sorted(chat_ids), sha256)).fetchone() is not None
 
     def sender_in_chats(self, sender_id, chat_ids):
         """Whether someone wrote a saved message in one of these chats."""
@@ -361,37 +356,125 @@ class Store:
                 "SELECT 1 FROM events WHERE chat_id IN (" + marks + ") AND message_id IS NOT NULL"
                 " AND json_extract(payload,'$.sender_id')=? LIMIT 1", (*sorted(chat_ids), sender_id)).fetchone() is not None
 
-    def events(self, chat_id=None, message_id=None, kind=None, before=None, limit=100, search=None, chat_ids=None):
+    def events(self, chat_id=None, message_id=None, kind=None, before=None, limit=100, search=None, chat_ids=None,
+               *, since=None, until=None, message_min=None, message_max=None, timeout_s=None,
+               text_only=False, message_only=False, hide_system=False, after=None):
+        source, order, where, params = self._event_selection(
+            chat_id, message_id, kind, before, search, chat_ids, since=since, until=until,
+            message_min=message_min, message_max=message_max, text_only=text_only,
+            message_only=message_only, hide_system=hide_system, after=after)
+        sql = "SELECT events.* FROM " + source + where + " ORDER BY " + order
+        sql += " ASC LIMIT ?" if after is not None else " DESC LIMIT ?"
+        records = [self.decode(r) for r in self.bounded_read(sql, [*params, limit], timeout_s)]
+        return list(reversed(records)) if after is not None else records
+
+    def count_events(self, *, timeout_s=2, **filters):
+        source, _, where, params = self._event_selection(**filters)
+        return self.bounded_read("SELECT count(*) FROM " + source + where, params, timeout_s)[0][0]
+
+    def _event_selection(self, chat_id=None, message_id=None, kind=None, before=None, search=None, chat_ids=None,
+                         *, since=None, until=None, message_min=None, message_max=None,
+                         text_only=False, message_only=False, hide_system=False, after=None):
         filters, params = [], []
-        if chat_ids is not None:  # an access limited to chosen chats
+        source, order = "events", "seq"
+        if chat_ids is not None:
             filters.append("chat_id IN (" + ",".join("?" * len(chat_ids)) + ")")
             params.extend(sorted(chat_ids))
         for key, value in (("chat_id", chat_id), ("message_id", message_id)):
             if value is not None:
                 filters.append(key + "=?")
                 params.append(value)
-        if kind in ("membership", "coverage"):
-            prefixes = ("membership.",) if kind == "membership" else (
-                "coverage.", "connection.", "collector.", "process.", "observation.",
-                "snapshot.", "target.", "capture.", "monitoring.", "source.", "scope.", "telegram.", "clock.", "media.failed",
-                "media.retry", "media.recovered", "deletion.unscoped")
-            filters.append("(" + " OR ".join("kind LIKE ?" for _ in prefixes) + ")")
-            params.extend(p + "%" for p in prefixes)
-        elif kind:
-            filters.append("kind=?")
-            params.append(kind)
+        if kind:
+            groups = {"membership": ("membership.",), "media": ("media.",), "actions": ("interaction.",),
+                      "messages": ("message.new", "message.snapshot", "message.recovered"),
+                      "coverage": ("coverage.", "connection.", "collector.", "process.", "observation.",
+                                   "snapshot.", "target.", "capture.", "monitoring.", "source.", "scope.",
+                                   "telegram.", "clock.", "media.failed", "media.retry", "media.recovered",
+                                   "deletion.unscoped")}
+            kinds = list(dict.fromkeys(value.strip() for value in kind.split(",") if value.strip()))
+            choices = []
+            for value in kinds:
+                for match in groups.get(value, (value,)):
+                    choices.append("kind LIKE ?" if match.endswith(".") else "kind=?")
+                    params.append(match + "%" if match.endswith(".") else match)
+            if choices:
+                filters.append("(" + " OR ".join(choices) + ")")
+        if hide_system:
+            filters.append("kind NOT IN ('collector.heartbeat','host.state') AND NOT "
+                           "(kind='media.skipped' AND COALESCE(json_extract(payload,'$.reason'),'')='media download disabled')")
         if before is not None:
             filters.append("seq<?")
             params.append(before)
+        if after is not None:
+            filters.append("seq>?")
+            params.append(after)
         if search:
-            filters.append("instr(search_text(payload), ?)>0")
+            candidate = self.read_index.candidate(search, text_only=text_only)
+            if candidate is not None:
+                table = "event_text_search" if text_only else "event_payload_search"
+                if text_only:
+                    # Older trigram tokenizers also stop at NUL. Include the rare
+                    # NUL rows from a partial index, including existing journals
+                    # whose FTS rows were already truncated. Exact matching follows.
+                    source = ("(SELECT rowid FROM event_text_search WHERE event_text_search MATCH ? "
+                              "UNION SELECT seq AS rowid FROM events INDEXED BY event_text_nul WHERE "
+                              + NUL_PAYLOAD + ") AS candidates JOIN events ON events.seq=candidates.rowid")
+                    order = "candidates.rowid"
+                    params.insert(0, candidate)
+                else:
+                    source = table + " JOIN events ON events.seq=" + table + ".rowid"
+                    order = table + ".rowid"
+                    filters.append(table + " MATCH ?")
+                    params.append(candidate)
+            value = "COALESCE(json_extract(payload,'$.text'),'')" if text_only else "payload"
+            if text_only:
+                # Keep the fast path and scalar semantics. Only escaped-NUL text
+                # needs Python extraction on SQLite versions with JSON1 truncation.
+                value = ("CASE WHEN instr(payload,'\\u0000')>0 AND json_type(payload,'$.text')='text' "
+                         "THEN nul_text(payload) ELSE " + value + " END")
+            filters.append("instr(search_text(" + value + "), ?)>0")
             params.append(search_text(search))
-        sql = "SELECT * FROM events"
-        if filters:
-            sql += " WHERE " + " AND ".join(filters)
-        sql += " ORDER BY seq DESC LIMIT ?"
-        with self.lock:
-            return [self.decode(r) for r in self.db.execute(sql, [*params, limit])]
+        if message_only:
+            filters.append("kind IN (" + ",".join("?" * len(CHAT_KINDS)) + ")")
+            params.extend(CHAT_KINDS)
+        for comparison, value in (("observed_at>=?", since), ("observed_at<=?", until)):
+            if value is not None:
+                filters.append(comparison)
+                params.append(value.astimezone(timezone.utc).isoformat(timespec="milliseconds"))
+        for comparison, value in (("message_id>=?", message_min), ("message_id<=?", message_max)):
+            if value is not None:
+                filters.append(comparison)
+                params.append(value)
+        return source, order, " WHERE " + " AND ".join(filters) if filters else "", params
+
+    def archive_chats(self, offset, limit, chat_ids):
+        sql = ("WITH known AS (SELECT chat_id,title,kind,enabled FROM targets UNION ALL "
+               "SELECT chat_id,NULL,NULL,0 FROM known_chat_index "
+               "WHERE chat_id NOT IN (SELECT chat_id FROM targets)) SELECT * FROM known")
+        params = []
+        if chat_ids is not None:
+            sql += " WHERE chat_id IN (" + ",".join("?" * len(chat_ids)) + ")"
+            params.extend(sorted(chat_ids))
+        sql += " ORDER BY chat_id LIMIT ? OFFSET ?"
+        return [dict(r) for r in self.bounded_read(sql, [*params, limit, offset], 3)]
+
+    def bounded_read(self, sql, params, timeout_s):
+        if timeout_s is None:
+            with self.lock:
+                return self.db.execute(sql, params).fetchall()
+        deadline = time.monotonic() + timeout_s
+        if not self.lock.acquire(timeout=timeout_s):
+            raise TimeoutError("Archive is busy. Retry shortly.")
+        try:
+            self.db.set_progress_handler(lambda: int(time.monotonic() >= deadline), 1000)
+            return self.db.execute(sql, params).fetchall()
+        except sqlite3.OperationalError as exc:
+            if time.monotonic() >= deadline:
+                raise TimeoutError("Archive search timed out. Narrow the query.") from None
+            raise exc
+        finally:
+            self.db.set_progress_handler(None, 0)
+            self.lock.release()
 
     def all_events(self):
         with self.lock:
@@ -424,25 +507,32 @@ class Store:
         path = self.root / "checkpoints" / "latest.json"
         return json.loads(path.read_bytes()) if path.exists() else None
 
-    def media_stats(self):
+    def media_stats(self, chat_ids=None):
+        clause = " WHERE chat_id IN (" + ",".join("?" * len(chat_ids)) + ")" if chat_ids is not None else ""
         with self.lock:
             return {r[0]: r[1] for r in self.db.execute(
-                "SELECT state,count(*) FROM media_jobs GROUP BY state")}
+                "SELECT state,count(*) FROM media_jobs" + clause + " GROUP BY state", sorted(chat_ids or []))}
 
-    def media_oldest(self):
+    def media_oldest(self, chat_ids=None):
+        clause = " AND j.chat_id IN (" + ",".join("?" * len(chat_ids)) + ")" if chat_ids is not None else ""
         with self.lock:
             row = self.db.execute(
                 "SELECT min(e.observed_at) FROM media_jobs j JOIN events e ON e.seq=j.message_event "
-                "WHERE j.state IN ('queued','retry','running')").fetchone()
+                "WHERE j.state IN ('queued','retry','running')" + clause, sorted(chat_ids or [])).fetchone()
         return row[0]
 
-    def claim_media(self, account_id, now=None):
+    def claim_media(self, account_id, now=None, *, min_priority=None, max_priority=None):
+        filters, params = [], [account_id, time.time() if now is None else now]
+        for operator, value in ((">=", min_priority), ("<=", max_priority)):
+            if value is not None:
+                filters.append("j.priority" + operator + "?")
+                params.append(value)
         with self.transaction():
             row = self.db.execute(
                 "SELECT j.* FROM media_jobs j JOIN targets t USING(chat_id) "
                 "WHERE j.account_id=? AND t.enabled=1 AND j.state IN ('queued','retry') "
-                "AND j.next_attempt<=? ORDER BY j.message_event LIMIT 1",
-                (account_id, time.time() if now is None else now)).fetchone()
+                "AND j.next_attempt<=? " + ("AND " + " AND ".join(filters) if filters else "") +
+                " ORDER BY j.priority,j.message_event LIMIT 1", params).fetchone()
             if not row:
                 return None
             self.db.execute("UPDATE media_jobs SET state='running',attempts=attempts+1 WHERE message_event=?",
@@ -450,6 +540,23 @@ class Store:
             job = dict(row)
             job["attempts"] += 1
             return job
+
+    def clear_media_queue(self, through_seq):
+        """Cancel waiting jobs in the reviewed snapshot, retaining their signed receipts and files."""
+        if type(through_seq) is not int or not 0 <= through_seq < 2**53:
+            raise ValueError("Invalid queue cutoff")
+        with self.transaction():
+            rows = self.db.execute(
+                "SELECT message_event,chat_id,message_id FROM media_jobs "
+                "WHERE state IN ('queued','retry') AND message_event<=? ORDER BY message_event",
+                (through_seq,)).fetchall()
+            for row in rows:
+                self.append("media.skipped", {"message_event": row["message_event"],
+                                              "reason": "waiting download cancelled by operator"},
+                            row["chat_id"], row["message_id"])
+            self.db.execute("UPDATE media_jobs SET state='cancelled',next_attempt=0,last_error='operator_cancelled' "
+                            "WHERE state IN ('queued','retry') AND message_event<=?", (through_seq,))
+            return len(rows)
 
     def recover_media(self):
         with self.transaction():
@@ -462,20 +569,25 @@ class Store:
             return count
 
     def finish_media(self, job, state, payload, delay=0):
-        if state not in ("done", "retry", "failed"):
+        if state not in ("done", "retry", "failed", "skipped"):
             raise ValueError("Invalid media outcome")
         with self.transaction():
-            self.append({"done": "media.saved", "retry": "media.retry", "failed": "media.failed"}[state],
+            self.append({"done": "media.saved", "retry": "media.retry", "failed": "media.failed",
+                         "skipped": "media.skipped"}[state],
                         {"message_event": job["message_event"], "attempt": job["attempts"], **payload},
                         job["chat_id"], job["message_id"])
             self.db.execute("UPDATE media_jobs SET state=?,next_attempt=?,last_error=? WHERE message_event=?",
                             (state, time.time() + delay, payload.get("error_type"), job["message_event"]))
 
     def stats(self, chat_ids=None):
-        where = "" if chat_ids is None else " WHERE chat_id IN (" + ",".join("?" * len(chat_ids)) + ")"
         with self.lock:
-            counts = {r[0]: r[1] for r in self.db.execute(
-                "SELECT kind,count(*) FROM events" + where + " GROUP BY kind", sorted(chat_ids or ()))}
+            if chat_ids is None:
+                rows = self.db.execute("SELECT kind,total FROM event_kind_counts")
+            else:
+                rows = self.db.execute("SELECT kind,sum(total) FROM chat_event_kind_counts "
+                                       "WHERE chat_id IN (" + ",".join("?" * len(chat_ids)) + ") GROUP BY kind",
+                                       sorted(chat_ids))
+            counts = {r[0]: r[1] for r in rows}
             tail = self.db.execute("SELECT seq,hash,observed_at FROM events ORDER BY seq DESC LIMIT 1").fetchone()
         return {"counts": counts, "total": sum(counts.values()), "head": dict(tail) if tail else None}
 
@@ -492,6 +604,11 @@ class Store:
         with self.lock:
             return [dict(r) for r in self.db.execute(
                 "SELECT * FROM targets" + (" WHERE enabled=1" if enabled_only else "") + " ORDER BY title")]
+
+    def target_counts(self):
+        with self.lock:
+            row = self.db.execute("SELECT count(*),coalesce(sum(enabled=1),0) FROM targets").fetchone()
+        return {"total": row[0], "enabled": row[1]}
 
     def set_target(self, chat_id, title, kind, enabled, origin=None, priority=None):
         """Add or update a source. origin/priority keep their saved values unless given."""
@@ -523,11 +640,10 @@ class Store:
 
         Channels and supergroups (IDs below -10^12) number messages per chat and are never matched.
         """
-        marks = ",".join("?" * len(TEXT_KINDS))
         with self.lock:
             chats = [r[0] for r in self.db.execute(
-                "SELECT DISTINCT chat_id FROM events WHERE message_id=? AND chat_id IS NOT NULL"
-                " AND chat_id>-1000000000000 AND kind IN (" + marks + ")", (message_id, *TEXT_KINDS))]
+                "SELECT chat_id FROM message_state_index WHERE message_id=? AND text_seq IS NOT NULL"
+                " AND chat_id>-1000000000000 LIMIT 2", (message_id,))]
         return chats[0] if len(chats) == 1 else None
 
     def latest_reply_keyboard(self, chat_id, window=500, before_message_id=None):
@@ -546,9 +662,14 @@ class Store:
         labels = [b.get("text") for r in markup.get("rows", []) for b in r.get("buttons", []) if b.get("text")]
         return row[0], labels
 
-    def events_of(self, kinds, limit=50, after=None, before=None):
+    def events_of(self, kinds, limit=50, after=None, before=None, *, chat_ids=None):
         """Newest records of the given kinds (for the panel's notification list)."""
+        if not kinds or chat_ids is not None and not chat_ids:
+            return []
         where, params = "kind IN (" + ",".join("?" * len(kinds)) + ")", list(kinds)
+        if chat_ids is not None:
+            where += " AND chat_id IN (" + ",".join("?" * len(chat_ids)) + ")"
+            params.extend(sorted(chat_ids))
         if after is not None:
             where += " AND seq>?"
             params.append(after)
@@ -573,13 +694,17 @@ class Store:
             return {}
         marks = ",".join("?" * len(TEXT_KINDS))
         wanted = set(sender_ids)
+        sender_filter = "json_extract(payload,'$.sender_id') IN (" + ",".join("?" * len(wanted)) + ")"
+        if None in wanted:
+            sender_filter = "(" + sender_filter + " OR json_extract(payload,'$.sender_id') IS NULL)"
         result = {}
         with self.lock:
             for chat_id, sender, count in self.db.execute(
                     "SELECT chat_id, json_extract(payload,'$.sender_id') AS sender, count(DISTINCT message_id) FROM events"
-                    " WHERE kind IN (" + marks + ") AND chat_id IS NOT NULL GROUP BY chat_id, sender", TEXT_KINDS):
-                if sender in wanted:
-                    result.setdefault(sender, {})[chat_id] = count
+                    " WHERE kind IN (" + marks + ") AND chat_id IS NOT NULL"
+                    " AND " + sender_filter +
+                    " GROUP BY chat_id, sender", (*TEXT_KINDS, *wanted)):
+                result.setdefault(sender, {})[chat_id] = count
         return result
 
     def close(self):

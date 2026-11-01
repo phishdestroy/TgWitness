@@ -1,5 +1,230 @@
 # Changelog
 
+## 0.7.1 preview · 1 November 2026
+
+- Fixed chat profiles getting stuck after navigating away while a request was
+  loading. Reopening the view can retry, and an outdated request cannot overwrite
+  the current chat's profile state.
+
+- Added a clear handoff after download: distinguish the original archive from
+  sharing copies, review the report, and copy plain instructions for the recipient.
+  Polling preserves the selected copy and focus; unavailable clipboard access
+  leaves the instructions selectable.
+- Added recipient guidance and stable record references to readable account and
+  sharing reports, including print layouts. References describe the archived
+  document; they do not turn printouts or screenshots into signed evidence.
+- Added a browsable fictional report with the matching signed ZIP. Its preview
+  is byte-identical to the archived HTML; previous signed demo samples are retained.
+- Translated new export, sharing and recipient-report labels through DeepL into
+  the 24 supported non-English interface languages, including active labels that
+  had previously displayed English. Message text and operator-entered content
+  remain unchanged; English remains the canonical source.
+
+- Added **Start here** with separate personal-export and investigation journeys.
+  Account snapshots and saved observations now have distinct export controls;
+  secondary formats, account metadata and connection options are progressively
+  disclosed. Navigation preserves drafts and never starts collection implicitly.
+- Replaced disclosure JSON previews with readable transformed-message cards,
+  exact included-record counts and explicit sample limits. Original archives
+  remain separate from sharing copies, and privacy warnings remain visible.
+- Added printable offline reports for account exports and sharing copies, with
+  scope, coverage, readable messages and verification instructions. Choose the
+  report language separately from the panel; original message text stays intact.
+  New labels use explicit English fallbacks where translations are unavailable.
+  Existing signed jobs and already published archives retain their original bytes.
+- Distinguished rejected Telegram authorization from paused accounts and network
+  failures. Account counters filter the list; **Sign in again** returns to the
+  existing workspace without discarding its journal, sources or signing key.
+  This state follows actual authorization checks; simply opening the panel does
+  not probe every saved session.
+
+- Made large account-export progress and HTML preparation use linear task/page
+  scans. Interrupted ZIP writes leave no downloadable partial archive; regression
+  checks resume from byte-identical signed receipts and retain coverage gaps.
+- Strengthened disclosure masking for Unicode names, alternate usernames,
+  direct-chat names and whole-token sender IDs, including the public purpose.
+  Unknown senders no longer receive a shared identity alias. Exceeding the masking
+  limit now stops preparation rather than silently skipping identities.
+- Bound transcription by actual decoded audio samples, decode only once, and
+  reject playlist formats and secondary file/URL references inside the isolated
+  media worker. Native decoder checks cover generated common Telegram formats
+  and malformed input without downloading a transcription model.
+- Made source ZIP metadata repeatable and preserved the previous archive when
+  a new build fails before publication. Input bytes, including signed demo files,
+  remain unchanged; reproducibility requires matching inputs and compression tools.
+
+- Kept English as the canonical interface, documentation and demo language, with
+  explicit fallback and browser checks. Capture now falls back to its English
+  source when a translation is missing. Other languages remain translations.
+- Hardened Capture language selection and encoded its HTML/URL output, pinned
+  release actions, and documented the dated security scan results, including
+  unresolved Debian package findings in the container images.
+- Refreshed the Russian panel and Capture wizard through DeepL, with reviewed
+  privacy and evidence terminology, preserved placeholders and command examples.
+- Raised dependency security floors and regenerated the hash-locked build tools.
+  Notification services now refuse HTTP redirects, including URL-level redirect
+  overrides, so credentials cannot be forwarded to a different endpoint. Configure
+  the final notification endpoint directly; HTTP 3xx responses fail delivery.
+- Added weekly Dependabot updates, checks for pull requests on hosted runners,
+  and nightly dependency, CodeQL and container vulnerability scans. Custom
+  dependency locks remain reviewed and regenerated together with version changes.
+- Fixed quick search after rapid close/reopen and temporary parameter API errors.
+  Browser checks run two at a time with individual logs and a complete result
+  summary, including checks after a failure.
+- Corrected archive-search date defaults across daylight-saving transitions so
+  recently captured records remain inside the selected period.
+
+- Added configurable account export through Telegram Takeout or the explicitly
+  selected regular API. Jobs retain signed progress, support pause/resume and
+  produce a reusable ZIP with coverage and omission records.
+- Added separate signed disclosure copies with purpose, sender/date/text filters,
+  participant pseudonyms and optional text/file exclusions. Preview is bound to
+  the administrator session and source archive. Signatures establish integrity;
+  they do not establish Telegram authorship, completeness or legal admissibility.
+  See [account export](ACCOUNT-EXPORT.md) and the [Russian guide](ru/ACCOUNT-EXPORT.md).
+- Added fictional account-export and disclosure downloads to the online demo.
+
+- Added workspace-aware panel URLs, Back/Forward navigation and an active-view
+  lifecycle. Background updates preserve form drafts and focus; settings can be
+  saved with Ctrl/Cmd+S. Submitted secrets never become a Discard baseline.
+- Reorganized Sources into Scope, Chats and Recording with one recording save;
+  Parameters now have search, section links, inline validation and a reset preview.
+- Kept chat navigation and messages in separate scrolling columns, with compact
+  actions, source filters, priority and distinct conversation views/message filters.
+- Added combined journal filters, cursor windows and a desktop record inspector.
+  Routine system events are hidden by default and remain available with a toggle.
+- Added grouped notifications, focused health actions, workspace summaries and
+  access presets. Export preparation history records byte counts and hashes without
+  changing signed evidence. See [panel development](FRONTEND.md) for module ownership
+  and the remaining extraction plan.
+
+- Serve read-only MCP at the panel's `/mcp` endpoint. Connections select their
+  tools and scope, support token rotation and report recent use. Client setup
+  uses `tgwitness.mcp_server` and `TGWITNESS_MCP_TOKEN`; the runtime check provides
+  an installation command when the optional SDK is absent. Setup forms keep
+  their drafts, and protocol checks list tools without reading messages.
+- Keep report settings separate when switching workspaces. Cancelled exports
+  finish their file worker before releasing the lock and remove temporary data;
+  failed downloads clean up too. Scoped source actions return only allowed chats.
+- Refuse account/connection replacement during exports; roll back interrupted
+  collector startup and bound TLS shutdown. Local export write failures stop
+  immediately instead of skipping records. Verify signed attachment and avatar
+  references during export checks and backup restore, and reject invalid TSA
+  certificate constraints and broken storage pagination.
+
+- Kept disabled AI out of the sidebar and attachment actions. Provider setup lives
+  in Integrations; local recognition appears only when its worker is configured.
+  Connection settings now show the fields for the selected route, with the
+  automatic MTProxy catalog available on demand.
+- Added inline and side-by-side edit comparisons, separate changes to hidden links
+  and bot buttons, attachment previews and image zoom. The preserved original stays
+  downloadable. Preview reads stop at 32 MiB; the browser cache holds at most 40
+  previews and 64 MiB, with three concurrent reads, and is cleared on lock or workspace switch.
+- Added live journal/chat updates with a pause control for the view, batch source
+  selection and actions, and journal search from Ctrl/Cmd+K. Live updates recheck
+  access and chat scope; pausing the view does not pause collection.
+- Indexed saved message state and source summaries. Existing journals build these
+  derived indexes once during their first startup after the update; signed records
+  and their hashes stay unchanged. Small and expiring attachments have a separate
+  download lane so a large file does not hold them up.
+- Preserved observed avatar changes as signed records with content-addressed files,
+  including removal and reuse of an earlier photo. People profiles show scoped
+  history and similarity leads; saved photos travel in evidence ZIPs.
+- Added automatic upgrades for OpenTimestamps receipts older than one hour, with
+  bounded requests through the configured route and the original receipt retained.
+  A Bitcoin attestation remains explicitly unverified until checked independently.
+
+- Reworked the workspace navigation and chat layout, added chat search and kept
+  collection warnings visible. The desktop conversation fits the viewport.
+- Rebuilt the online demo around a fictional investigation with named participants,
+  edit comparisons and real signed sample downloads. Verification results now stay
+  visible; unavailable online-only actions no longer look usable.
+- Added batch session import and account groups with template settings. Failed
+  imports leave no empty workspace; locking or switching stops the remaining queue.
+- Added the MTProxy dashboard: ping, status, countries, filters, shared custom
+  lists and optional GitHub search. Routes remain separate for each account.
+- Added a country choice for the automatic MTProxy route (preferred, avoided, only
+  preferred) and the list download and check intervals to the dashboard. Panel strings of
+  groups, import and the dashboard are translated with their screen as context and with
+  plural forms; context-dependent report labels are corrected in 23 languages.
+- MTProxy traffic is deciphered through OpenSSL instead of Telethon's pure-Python AES
+  (about 0.3 MB/s on a small server): a busy MTProxy route no longer holds a whole CPU
+  core and delays every panel answer by seconds. The chats list shows that it is loading,
+  and journal rows explain skipped and failed attachments in the panel language.
+- The panel, proof, sealed and MCP servers keep idle connections for 150 seconds instead
+  of 5: Caddy and cloudflared reused connections the server had already closed, and the
+  browser received sporadic 502 answers.
+- GIFs and stickers are no longer downloaded unless turned on. Turning downloads off now
+  pauses the files already waiting, and turning a type off or lowering its limit skips the
+  waiting files it excludes; before, the queue kept downloading under the old settings.
+- Public proxy lists are parsed once, and again only after a list, a source setting or the
+  GitHub token changes. Every status read of every workspace parsed them on the event loop
+  that also carries Telegram traffic; with 10 workspaces the account list took 690 ms, now 7 ms.
+- Bulk import refuses a session another workspace already holds before it connects: the same
+  key from a second proxy address can make Telegram revoke it. An imported workspace
+  disconnects until its sources are chosen, imports no longer hold the other workspaces'
+  operations, an import can be stopped after the current account, files that are not
+  account files are shown as such, and import errors appear in the panel language.
+  Account groups can start or pause all their workspaces at once.
+- Unanswered servers in preferred countries no longer hide working servers in other
+  countries; servers identified as being in avoided countries are excluded, including from
+  checks. Servers with unknown country remain eligible unless only preferred countries are
+  allowed.
+  Country lookups move past hosts without an answer, the saved lists stay readable at
+  their size limits, the last list update shows when lists were actually downloaded, and
+  a blocked list download disables the update button and offers the proxy setting. Own
+  lists say how many links were left out and why. One server listed with several secrets
+  counts as one address, so two workspaces are no longer put on the same server.
+- People and chats without a photo no longer fill the browser console with 404 errors,
+  and the panel asks for the high-assurance statement only where it exists. Sign-in tabs
+  wrap long labels instead of cutting them; the offline-gap note, size units and the
+  reason of attachments dropped with a removed source are shown in the panel language.
+- Added scoped, read-only MCP connections and local archive search with optional
+  AI source review and separate analytical reports.
+- Added local OCR/transcription for saved attachments and signed outgoing webhooks
+  with delivery status, retries and an n8n example.
+- Connected the new workflows across README, Wiki and translated site reference.
+
+- Sealed, localized reports. `report.html` and `chat.html` are rebuilt as self-contained
+  case documents in any of the 25 panel languages: case details, integrity and key
+  fingerprint, timestamps with their check commands, coverage, chain of custody with a
+  printable transfer table, verification steps, standards and limitations. Each ends with
+  an Ed25519 seal over its own bytes, checked in the browser or by
+  `verify.py report.html --fingerprint … --evidence …`. Reports carry Dublin Core and
+  schema.org metadata and a Content-Security-Policy that blocks network loads; the chat
+  report shows the history oldest first.
+- Signed archives add `custody.json` and `SHA256SUMS`; README.txt is written in the report
+  language and in English. Case details from **Exports → Report settings** are signed into
+  the manifest. `verify.py` checks the seal and the sums, prints a coloured summary at a
+  terminal (`--lang en|ru|uk`) and offers `--json`.
+- Added a five-stage capture animation and examples of message/collector
+  substitution to the helper and Exports.
+
+- Replaced the separate capture form with a four-step wizard shared by Exports
+  and the standalone page. It uses workspace themes and controls, explains each
+  file handoff, confirms key saving and clears its key when the workspace locks.
+  The temporary Telegram panel also uses workspace styling and readable progress.
+
+- Added entry points for the GitHub Actions capture preview on the workspace
+  login screen, in Exports, on the project homepage and in the documentation.
+  Entry labels are translated; the English/Russian helper preserves the chosen
+  language. Expanded setup, privacy boundaries, mode selection and troubleshooting.
+
+- Added a fork-launched sealed capture preview: restricted fresh-session login,
+  one-chat history and media collection, encrypted connection/result artifacts,
+  pinned reusable-workflow provenance and a fail-closed verifier. English/Russian
+  browser helper keeps the private decryption key local. This uses ordinary GitHub
+  infrastructure, not confidential hardware or Telegram-signed evidence.
+  See [sealed capture](SEALED-ACTIONS.md) for setup, policy and deployment limits.
+- Sources can load the available history of every currently enabled source into
+  Chats and the signed journal. The persistent queue supports pause, resume and
+  explicit continuation after restart, with separate per-source failures and media
+  outcomes. It does not enumerate every account dialog or recover unseen deletions.
+- A signed history progress report can be checked with `verify.py --evidence`:
+  verify the journal prefix, source plan, account and message counters. Other report
+  fields remain signed collector statements; this does not authenticate Telegram origin.
+  See [history acquisition](HISTORY.md) for operation and limits.
+
 ## 0.7.0 preview · 31 October 2026
 
 - OpenTimestamps summaries now parse bounded operation trees and attestation

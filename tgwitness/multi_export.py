@@ -25,6 +25,7 @@ from contextlib import suppress
 
 from . import chat_export
 from . import replica
+from . import report
 from . import tuning
 from .store import canonical, utcnow
 from .verify import fingerprint
@@ -39,9 +40,10 @@ class MultiExport:
         self.state = None
         self.task = None
         self.path = None
+        self.preparing = set()
 
     def busy(self):
-        return bool(self.task and not self.task.done())
+        return bool(self.preparing or (self.task and not self.task.done()))
 
     def app_for(self, profile_id):
         entry = self.profiles.entries.get(profile_id)
@@ -52,17 +54,19 @@ class MultiExport:
     def public(self):
         return json.loads(json.dumps(self.state, default=str)) if self.state else {"phase": "none"}
 
-    async def start(self, chat_id, profile_ids, lead_id):
+    async def start(self, chat_id, profile_ids, lead_id, language="en"):
         if self.busy():
             raise ValueError("A multi-account export is already running. Wait for it or cancel it.")
         lead_app = self.app_for(lead_id)
         lead = lead_app.state.collector
         export_id = secrets.token_urlsafe(18)
-        # Every participating account is reserved with a check-and-take that has no await in
-        # between, so an individual export can never start on it at the same time.
+
+
         if not lead.reserve_export(export_id):
             raise ValueError("The starting account is already exporting. Wait for it or cancel it.")
         reserved = {lead_id: lead}
+        # Reserve the coordinator and selected workspaces before Telegram yields control.
+        self.preparing = {lead_id, *profile_ids}
         try:
             entity = await lead.resolve_for_export(chat_id)
             info = lead.dialog_cache.get(chat_id, {})
@@ -101,11 +105,14 @@ class MultiExport:
                 "eta_seconds": round(pages * (1 if total > 3000 else 0.3) / max(1, active)),
                 "workers": workers, "ready": False, "error": None, "started_at": utcnow()}
             self.path = None
-            self.task = asyncio.create_task(self.run(lead_app, entity, getattr(entity, "username", None), info))
+            self.task = asyncio.create_task(self.run(lead_app, entity, getattr(entity, "username", None), info,
+                                                     report.resolved(lead.store, language)))
         except BaseException:
             self.release(reserved, export_id)
             raise
-        # Released however the task ends, even if it is cancelled before its first step.
+        finally:
+            self.preparing.clear()
+
         self.task.add_done_callback(lambda _: self.release(reserved, export_id))
         await asyncio.sleep(0)
         return self.public()
@@ -117,21 +124,23 @@ class MultiExport:
 
     def uses(self, profile_id):
         """Whether a running export still depends on this workspace (its store, client or keys)."""
-        # A failed account's earlier ranges are still signed with its key when the export ends.
-        return self.busy() and any(w["profile_id"] == profile_id and w["state"] != "skipped"
-                                   and (w["state"] != "failed" or w["ranges"]) for w in self.state["workers"])
 
-    async def run(self, lead_app, lead_entity, username, info):
+        return profile_id in self.preparing or bool(self.task and not self.task.done() and (
+            profile_id == self.state["lead"] or any(
+                w["profile_id"] == profile_id and w["state"] != "skipped"
+                and (w["state"] != "failed" or w["ranges"]) for w in self.state["workers"])))
+
+    async def run(self, lead_app, lead_entity, username, info, report_options=None):
         state, lead = self.state, lead_app.state.collector
         directory = lead.store.root / "temporary-exports"
         stem = "tgwitness-export-multi-" + state["id"]
         newest = state["newest_message_id"]
         ranges = [(low, min(low + CHUNK - 1, newest)) for low in range(1, newest + 1, CHUNK)]
         queue = asyncio.Queue()
-        for item in reversed(ranges):  # newest messages first
+        for item in reversed(ranges):
             queue.put_nowait(item)
         results, started = {}, time.monotonic()
-        in_flight = {"ranges": 0}  # ranges being fetched; a failure can return one to the queue
+        in_flight = {"ranges": 0}
         out = directory / (stem + ".zip")
         scratch = directory / (stem + ".jsonl")
 
@@ -144,7 +153,7 @@ class MultiExport:
             except Exception as exc:
                 worker.update(state="skipped", error="This account cannot open the chat (" + type(exc).__name__ + ").")
                 if worker["profile_id"] != state["lead"]:
-                    collector.release_export(state["id"])  # free for its own exports again
+                    collector.release_export(state["id"])
                 return
             worker["state"] = "running"
             while True:
@@ -153,7 +162,7 @@ class MultiExport:
                 except asyncio.QueueEmpty:
                     if not in_flight["ranges"]:
                         break
-                    await asyncio.sleep(0.5)  # another account may still hand a range back
+                    await asyncio.sleep(0.5)
                     continue
                 path = directory / (stem + "-" + str(low) + ".jsonl")
                 got = 0
@@ -175,7 +184,7 @@ class MultiExport:
                 except asyncio.CancelledError:
                     raise
                 except Exception as exc:
-                    queue.put_nowait((low, high))  # another account picks it up
+                    queue.put_nowait((low, high))
                     worker["captured"] -= got
                     state["captured"] -= got
                     path.unlink(missing_ok=True)
@@ -194,7 +203,7 @@ class MultiExport:
             worker["state"] = "done"
 
         try:
-            # Setup is inside the lifecycle: a failure here still ends the export as failed.
+
             directory.mkdir(mode=0o700, exist_ok=True)
             lead.store.append("chat_export.started", {
                 "chat_id": state["chat_id"], "title": info.get("title"), "mode": "multi_account",
@@ -214,7 +223,7 @@ class MultiExport:
                                    "scope": "message numbers 1..newest_message_id at export start"},
                     "parts": signed}
             await complete_in_thread(chat_export.build_bundle, scratch, meta, lead.vault, out,
-                                    tuning.value(lead.store, "export_max_gib") * 1024**3)
+                                    tuning.value(lead.store, "export_max_gib") * 1024**3, report_options)
             replica.outbox(lead.store, out)
             self.path = out
             state.update(phase="done", ready=True, captured=message_count, eta_seconds=0)

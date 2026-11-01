@@ -12,8 +12,8 @@ _ACTIONS = (functions.messages.GetBotCallbackAnswerRequest,
 
 
 class WitnessClient(TelegramClient):
-    # Telethon reads this attribute when entering its RPC retry loop. Task-local
-    # state avoids changing the policy of concurrent observation/download tasks.
+
+
     @property
     def _request_retries(self):
         return 0 if _single_attempt.get() else self._read_retries
@@ -45,5 +45,9 @@ class WitnessClient(TelegramClient):
         token = _single_attempt.set(single)
         try:
             return await super()._call(sender, request, ordered, flood_sleep_threshold)
+        except Exception as exc:
+            if handler := getattr(self, "rpc_error_handler", None):
+                handler(exc)
+            raise
         finally:
             _single_attempt.reset(token)

@@ -17,15 +17,13 @@ from playwright.sync_api import sync_playwright, expect
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "tests"))
 from tgwitness import api_pool, i18n
 from tgwitness.app import create_app
 from tgwitness.proxy_catalog import ProxyPool
 from tgwitness.verify import verify_bundle
-from test_collector import FakeClient, saved_session
+from tools.browser_fixtures import FakeClient, saved_session
 
 
-# Automatic MTProxy, the default route, would resolve and check public proxies; this check stays offline.
 async def _listed(route, operator=False):
     return route
 
@@ -42,8 +40,8 @@ ProxyPool.pin, ProxyPool.probe, ProxyPool.run = staticmethod(_listed), staticmet
 
 
 def launch_browser(p):
-    # TGWITNESS_BROWSER_CHANNEL=msedge or chrome uses an installed browser instead of
-    # the Playwright download, e.g. on filesystems where its installer cannot lock.
+
+
     return p.chromium.launch(headless=True, channel=os.environ.get("TGWITNESS_BROWSER_CHANNEL") or None)
 
 
@@ -53,30 +51,40 @@ class RunningApp:
         self.sock = socket.socket()
         self.sock.bind(("127.0.0.1", 0))
         self.url = "http://127.0.0.1:" + str(self.sock.getsockname()[1])
-        self.server = uvicorn.Server(uvicorn.Config(self.app, log_level="error", access_log=False))
+        self.server = uvicorn.Server(uvicorn.Config(self.app, log_level="error", access_log=False,
+                                                   timeout_graceful_shutdown=5))
         self.thread = threading.Thread(target=self.server.run, kwargs={"sockets": [self.sock]}, daemon=True)
 
     def __enter__(self):
         self.thread.start()
-        deadline = time.monotonic() + 15
-        while not self.server.started:
-            if time.monotonic() > deadline:
-                raise RuntimeError("Local test server failed to start")
-            time.sleep(.05)
+        # A cold optional MCP SDK import is slower on Windows CI.
+        deadline = time.monotonic() + 45
+        try:
+            while not self.server.started:
+                if not self.thread.is_alive() or time.monotonic() > deadline:
+                    raise RuntimeError("Local test server failed to start")
+                time.sleep(.05)
+        except BaseException:
+            self.server.should_exit = True
+            self.thread.join(timeout=30)
+            self.sock.close()
+            raise
         return self
 
     def __exit__(self, *args):
         self.server.should_exit = True
-        self.thread.join(timeout=10)
+        self.thread.join(timeout=30)
+        if self.thread.is_alive():
+            raise RuntimeError("Local test server did not finish shutdown")
         self.sock.close()
 
 
-def unlock(page, server):
+def unlock(page, server, *, start=False):
     page.goto(server.url)
     if server.app.state.store.get_setting("demo",False):
         expect(page.locator("#workspace")).to_be_visible()
         expect(page.locator("#gate")).not_to_be_visible()
-        # The demo opens on the readable chat view: messages, deletions and edits are visible at once.
+
         expect(page.locator("#view-chats")).to_be_visible()
         expect(page.locator("#chats-list .chat-item")).to_have_count(3)
         expect(page.locator("#chat-feed .msg").first).to_be_visible()
@@ -85,7 +93,7 @@ def unlock(page, server):
         page.locator('#chat-status .filter', has_text="Deleted").click()
         expect(page.locator("#chat-feed .msg:not(.deleted)")).to_have_count(0)
         page.locator('#chat-status .filter', has_text="All").click()
-        # People: everyone with saved messages; a row narrows the feed to that person.
+
         page.locator('#chat-status .filter', has_text="People").click()
         expect(page.locator("#chat-feed .people-table tbody tr")).to_have_count(4)
         page.locator("#chat-feed .people-table tbody tr").first.click()
@@ -93,14 +101,59 @@ def unlock(page, server):
         expect(page.locator("#chat-feed .msg").first).to_be_visible()
         page.locator("#chat-status .chat-author-chip button").click()
         expect(page.locator("#chat-status .chat-author-chip")).to_have_count(0)
-        page.locator('[data-view="connection"]').click()
+        navigate_panel(page, 'connection')
         expect(page.locator("#demo-account-state")).to_be_visible()
         expect(page.locator("#credentials-form")).not_to_be_visible()
         expect(page.locator("#demo-account-state")).to_contain_text("python start.py")
         page.locator('#demo-account-state [data-open="observations"]').click()
         return
     page.locator("#panel-token").fill(server.app.state.vault.token)
-    page.get_by_role("button", name="Open workspace").click()
+    with page.expect_response(lambda response: response.request.method == "GET"
+            and urlsplit(response.url).path.endswith("/api/status"), timeout=20000) as authenticated:
+        page.get_by_role("button", name="Open workspace").click()
+    assert authenticated.value.ok, authenticated.value.status
+    authenticated.value.body()
+    expect(page.locator("#workspace")).to_be_visible()
+    # Legacy scenario helpers continue into setup through the new task choice.
+    # New landing acceptance keeps the chooser visible with start=True.
+    if not start and page.locator('#view-start').is_visible():
+        button = page.locator('[data-workflow="investigation"]')
+        if button.is_visible():
+            button.click()
+
+
+def navigate_panel(page, view):
+    """Use the same navigation on desktop and the mobile menu."""
+    button = page.locator(f'.sidebar [data-view="{view}"]')
+    toggle = page.locator("#navigation-toggle")
+    if page.viewport_size["width"] < 768 and toggle.get_attribute("aria-expanded") != "true":
+        toggle.click()
+    if button.evaluate("el=>!!el.closest('#nav-more')"):
+        if page.locator('#nav-more').get_attribute('open') is None:
+            page.locator('#nav-more > summary').click()
+    button.click()
+    expect(page.locator(f"#view-{view}")).to_be_visible()
+
+
+def lock_panel(page):
+    for selector in ("#top-lock", "#entry-lock"):
+        control = page.locator(selector)
+        if control.is_visible():
+            control.click()
+            return
+    if not page.locator("#lock-panel").is_visible():
+        page.locator("#navigation-toggle").click()
+    page.locator("#lock-panel").click()
+
+
+def reload_panel(page):
+    """Wait for authenticated bootstrap, separately from the render assertion."""
+    with page.expect_response(
+        lambda response: response.url.endswith("/api/status")
+        and response.request.method == "GET", timeout=20000,
+    ) as ready:
+        page.reload()
+    assert ready.value.ok, ready.value.status
     expect(page.locator("#workspace")).to_be_visible()
 
 
@@ -117,9 +170,8 @@ def check_layout(page, connection=False):
         row = page.locator("#events-body tr").first
         assert row.locator("td").nth(2).is_visible() or row.locator(".event-mobile-meta").is_visible(), \
             "Timeline timestamps disappeared at this width"
-    # Solid-background text contrast, including alpha-composited ancestor backgrounds.
-    # Faint decorative gradients count as the colour beneath them; image backgrounds are skipped.
-    # Not a replacement for a screen-reader/complete WCAG audit.
+
+
     failures = page.evaluate("""() => {
       const rgba=s=>(s.match(/[\\d.]+/g)||[]).map(Number);
       const blend=(fg,bg)=>fg.slice(0,3).map((v,i)=>v*(fg[3]??1)+bg[i]*(1-(fg[3]??1)));
@@ -163,16 +215,108 @@ def release_api_response(page):
     }""")
 
 
+def check_journal_messages(page, expected):
+    """Read the dashboard in its active view, then restore the user's screen."""
+    previous = page.evaluate("state.view")
+    page.evaluate("navigate('observations')")
+    expect(page.locator("#view-observations")).to_be_visible()
+    expect(page.locator("#stat-messages")).to_have_text(expected)
+    page.evaluate("view=>navigate(view)", previous)
+
+
+def check_reading_states(browser, server):
+    page = browser.new_page(viewport={"width": 1440, "height": 1000}, reduced_motion="reduce")
+    with page.expect_response(lambda response: response.request.method == "GET"
+            and "/api/chats/" in urlsplit(response.url).path
+            and urlsplit(response.url).path.endswith("/messages"), timeout=20000) as first_read:
+        page.goto(server.url)
+    assert first_read.value.ok, first_read.value.status
+    first_read.value.body()
+    expect(page.locator("#chat-feed .msg").first).to_be_visible()
+    expect(page.locator("#chat-compose")).to_be_hidden()
+    expect(page.locator(".health-details")).to_be_hidden()
+    assert page.evaluate("document.documentElement.scrollHeight <= innerHeight + 1"), "Chat workspace exceeds desktop viewport"
+    search = page.locator("#chat-search")
+    search.fill("northstar")
+    expect(page.locator("#chats-list .chat-item")).to_have_count(1)
+    search.fill("no matching chat")
+    expect(page.locator("#chats-list")).to_contain_text("No chats match your search.")
+    search.press("Escape")
+    expect(page.locator("#chats-list .chat-item")).to_have_count(3)
+    page.set_viewport_size({"width": 390, "height": 844})
+    expect(page.locator(".chats-sidebar")).to_be_hidden()
+    expect(page.locator(".chat-pane")).to_be_visible()
+    assert page.locator("#chat-feed").bounding_box()["y"] < 844, "Mobile first screen has no conversation"
+    page.locator("#chat-back").click()
+    expect(search).to_be_focused()
+    search.fill("northstar")
+    page.locator("#chats-list .chat-item").click()
+    expect(page.locator("#chat-name")).to_contain_text("Northstar")
+    expect(page.locator(".chats-sidebar")).to_be_hidden()
+    page.set_viewport_size({"width": 1440, "height": 1000})
+    search.fill("harbor")
+    page.locator("#chats-list .chat-item").click()
+    search.fill("")
+    page.locator('[data-demo-filter="edited"]').click()
+    expect(page.locator("#chat-feed .versions")).to_be_visible()
+    page.locator('[data-demo-filter="deleted"]').click()
+    expect(page.locator("#chat-feed .msg:not(.deleted)")).to_have_count(0)
+    page.locator('#chat-status .filter', has_text="All").click()
+    names = page.locator(".sender-details")
+    expect(names.first.locator(".sender-facts")).to_be_hidden()
+    names.first.locator("summary").click()
+    expect(names.first.locator(".sender-facts")).to_be_visible()
+    expect(page.locator("#chat-feed")).to_have_attribute("data-pattern", "plain")
+    page.locator("#chat-pattern").click()
+    reload_panel(page)
+    expect(page.locator("#chat-feed")).to_have_attribute("data-pattern", "dots")
+    page.locator("#chat-pattern").click()
+    page.route("**/messages?*", lambda route: route.fulfill(status=503, json={"detail": "Synthetic failure"}))
+    page.locator("#chats-list .chat-item").nth(1).click()
+    expect(page.locator('#chat-feed [data-state="error"]')).to_be_visible()
+    page.unroute("**/messages?*")
+    page.locator('#chat-feed .ui-state button').click()
+    expect(page.locator("#chat-feed .msg").first).to_be_visible()
+    original = page.locator("#chat-feed .bubble-text").all_text_contents()
+    page.route("**/messages?*", lambda route: route.fulfill(status=503, json={"detail": "Synthetic failure"}))
+    page.evaluate('loadChatMessages("refresh")')
+    assert page.locator("#chat-feed .bubble-text").all_text_contents() == original
+    expect(page.locator("#chat-feed .refresh-notice")).to_be_visible()
+    page.unroute("**/messages?*")
+    page.locator("#chat-feed .refresh-notice button").click()
+    expect(page.locator("#chat-feed .refresh-notice")).to_have_count(0)
+    page.evaluate('state.chatAuthor=999999;renderChatFeed()')
+    expect(page.locator('#chat-feed [data-state="filtered-empty"]')).to_be_visible()
+    page.locator('#chat-feed .ui-state button').click()
+    assert page.locator("#chat-feed .bubble-text").all_text_contents() == original
+    for theme in ("light", "dark"):
+        page.emulate_media(color_scheme=theme)
+        for view in ("chats", "sources", "parameters"):
+            navigate_panel(page, view)
+            if view == "sources":
+                page.locator("#sources-tab-recording").click()
+                page.locator(".media-rules-details").evaluate("n=>n.open=true")
+            check_layout(page)
+    page.close()
+
+
 def check_languages(browser, server):
     """Every shipped string has a translation or explicit English fallback; language choice works."""
-    context = browser.new_context(viewport={"width": 1440, "height": 1060}, reduced_motion="reduce")
+    assert i18n.pick(None, None) == i18n.pick(None, "zz-ZZ") == "en"
+    assert i18n.pick("en", "ru,en;q=0.5") == "en" and i18n.words("en") == {}
+    context = browser.new_context(viewport={"width": 1440, "height": 1060}, reduced_motion="reduce", locale="en-US")
     page, errors, keys = context.new_page(), [], []
     page.on("pageerror", lambda exc: errors.append(str(exc)))
-    page.route("**/app.js*", lambda route: route.abort())  # the static markup only, as shipped
+    panel_scripts = ("app.js", "integrations.js", "analysis.js", "media-analysis.js", "webhooks.js", "proxies.js",
+                     "fleet.js", "review.js", "live.js")
+    for script in panel_scripts:
+        page.route("**/" + script + "*", lambda route: route.abort())
     page.goto(server.url + "/")
+    expect(page.locator("html")).to_have_attribute("lang", "en")
+    expect(page.locator('[data-view="observations"]').first).to_contain_text("Journal")
     keys += page.evaluate("pageKeys()")
-    # The guides rewrite their links after translating: list their markup before that, as
-    # tools/check_guide_languages.py does.
+
+
     shipped = (ROOT / "tgwitness/static/i18n.js").read_text(encoding="utf-8").split("translatePage();\n")[0]
     page.route("**/i18n.js*", lambda route: route.fulfill(body=shipped, content_type="text/javascript"))
     for name in ("/guide.html", "/dedicated-account.html"):
@@ -181,9 +325,10 @@ def check_languages(browser, server):
     page.unroute("**/i18n.js*")
     journal = page.locator('[data-view="observations"]').first
     page.goto(server.url)
-    english = " ".join(journal.inner_text().split()[:-1])  # without the event counter
-    page.unroute("**/app.js*")
-    # A shared panel link must select its language, even with a different saved choice.
+    english = " ".join(journal.inner_text().split()[:-1])
+    for script in panel_scripts:
+        page.unroute("**/" + script + "*")
+
     context.add_cookies([{"name": i18n.COOKIE, "value": "ru", "url": server.url}])
     page.goto(server.url + "/?lang=de")
     expect(page.locator("html")).to_have_attribute("lang", "de")
@@ -219,7 +364,7 @@ def check_themes(browser, server):
     expect(html).to_have_attribute("data-theme", "dark")
     expect(sidebar.locator('[data-theme-choice="system"]')).to_have_attribute("aria-pressed", "true")
     for view in ("chats", "observations", "sources", "evidence", "witness", "parameters", "connection", "accounts"):
-        page.locator('[data-view="%s"]' % view).first.click()
+        navigate_panel(page, view)
         expect(page.locator("#view-" + view)).to_be_visible()
         check_layout(page)
     page.locator('[data-view="observations"]').first.click()
@@ -231,30 +376,30 @@ def check_themes(browser, server):
     sidebar.locator('[data-theme-choice="light"]').click()
     expect(html).to_have_attribute("data-theme", "light")
     expect(sidebar.locator('[data-theme-choice="light"]')).to_have_attribute("aria-pressed", "true")
-    page.reload()
-    expect(html).to_have_attribute("data-theme", "light")  # the saved choice wins over the dark system setting
+    reload_panel(page)
+    expect(html).to_have_attribute("data-theme", "light")
     sidebar.locator('[data-theme-choice="system"]').click()
     expect(html).to_have_attribute("data-theme", "dark")
     page.emulate_media(color_scheme="light")
-    expect(html).to_have_attribute("data-theme", "light")  # "system" follows a change of the system setting
+    expect(html).to_have_attribute("data-theme", "light")
     page.emulate_media(color_scheme="dark")
     expect(html).to_have_attribute("data-theme", "dark")
-    # With reduced motion requested, the panel stays still until "Animations always on" is chosen.
-    motion, view = page.locator(".sidebar [data-motion-toggle]"), page.locator("#view-chats")
+
+    motion, view = page.locator(".sidebar [data-motion-toggle]"), page.locator("#view-observations")
     expect(motion).to_have_attribute("aria-pressed", "false")
     assert view.evaluate("n => getComputedStyle(n).animationDuration") != "0.3s"
     motion.click()
     expect(html).to_have_attribute("data-motion", "always")
-    page.reload()
+    reload_panel(page)
     expect(motion).to_have_attribute("aria-pressed", "true")
     expect(view).to_be_visible()
     assert view.evaluate("n => getComputedStyle(n).animationDuration") == "0.3s"
     motion.click()
     expect(html).not_to_have_attribute("data-motion", "always")
     page.emulate_media(reduced_motion="no-preference")
-    expect(motion).to_be_hidden()  # offered only when the system asks for less motion
+    expect(motion).to_be_hidden()
     page.emulate_media(reduced_motion="reduce")
-    page.locator("#top-lock").click()
+    lock_panel(page)
     expect(page.locator("#gate")).to_be_visible()
     check_layout(page)
     page.locator('.login-card [data-theme-choice="dark"]').click()
@@ -295,28 +440,46 @@ def main():
             for width in (850, 768, 601, 600, 390, 320):
                 page.set_viewport_size({"width": width, "height": 1060})
                 check_layout(page)
-                expect(page.locator("#events-body tr").first.locator(".event-mobile-meta")).to_contain_text(
+                timestamp = page.locator("#events-body tr").first.locator(".event-mobile-meta time")
+                expect(timestamp).to_be_visible()
+                assert timestamp.get_attribute("datetime").startswith(
                     demo.app.state.store.stats()["head"]["observed_at"][:10])
+                assert "UTC" in timestamp.get_attribute("title")
                 if width == 768:
                     page.screenshot(path=str(output / "tablet.png"), full_page=True)
             page.set_viewport_size({"width": 1440, "height": 1060})
             page.get_by_role("button", name="Edits", exact=True).click()
             expect(page.locator("#events-body tr")).to_have_count(3)
             page.locator("#events-body tr").first.click()
-            expect(page.locator(".detail-block.before")).to_be_visible()
-            expect(page.locator(".detail-block.after")).to_be_visible()
+            comparison = page.locator("#detail-content .review-diff")
+            expect(comparison).to_be_visible()
+            comparison.get_by_role("button", name="Side by side", exact=True).click()
+            columns = comparison.locator(".review-split pre")
+            expect(columns).to_have_count(2)
+            edited = demo.app.state.store.events(kind="message.edited")[0]
+            original = next(e for e in demo.app.state.store.all_events()
+                            if e["kind"] == "message.new" and e["chat_id"] == edited["chat_id"]
+                            and e["message_id"] == edited["message_id"])
+            expect(columns.nth(0)).to_have_text(original["payload"]["text"])
+            expect(columns.nth(1)).to_have_text(edited["payload"]["text"])
             page.screenshot(path=str(output / "detail.png"), full_page=True)
             page.keyboard.press("Escape")
             expect(page.locator("#detail-drawer")).not_to_be_visible()
+            page.get_by_role("button", name="All events", exact=True).click()
             page.get_by_role("button", name="Deletions", exact=True).click()
-            page.locator("#events-body tr").first.click()
+            # The unfiltered table already contains three deletion icons.
+            # Wait until the filter has replaced all rows before selecting one.
+            expect(page.locator("#events-body tr")).to_have_count(3)
+            expect(page.locator("#events-body tr:has(.event-icon.delete)")).to_have_count(3)
+            page.locator("#events-body tr:has(.event-icon.delete)").first.click()
             expect(page.locator("#detail-content")).to_contain_text("Last captured content")
             expect(page.locator("#detail-content")).to_contain_text("Deleter not supplied")
             page.keyboard.press("Escape")
+            page.get_by_role("button", name="All events", exact=True).click()
             page.get_by_role("button", name="Membership", exact=True).click()
             expect(page.locator("#events-body tr")).to_have_count(1)
             page.get_by_role("button", name="All events", exact=True).click()
-            page.locator("#event-search").fill("Reference archive")
+            page.locator("#event-search").fill("recovery phrase")
             expect(page.locator("#events-body tr")).to_have_count(4)
             page.locator("#event-search").fill("")
             page.locator('[data-view="evidence"]').click()
@@ -329,13 +492,14 @@ def main():
             bundle = output / "browser-evidence.zip"
             pending.value.save_as(bundle)
             assert verify_bundle(bundle)["events"] > 25
-            # Native streaming branch: mock only the OS file chooser/writable, keep real API bytes.
+
             page.evaluate("""() => {window.savedChunks=[];window.writerClosed=false;window.writerAborted=false;
               window.showSaveFilePicker=async()=>({createWritable:async()=>({
                 write:async bytes=>window.savedChunks.push(Array.from(bytes)),
                 close:async()=>{window.writerClosed=true},abort:async()=>{window.writerAborted=true}
               })});}""")
             page.get_by_role("button", name="Download signed ZIP").click()
+            page.wait_for_function("()=>window.writerClosed===true")
             expect(page.locator("#toast")).to_have_text("Evidence export saved.")
             assert page.evaluate("window.writerClosed")
             streamed = output / "browser-streamed-evidence.zip"
@@ -360,6 +524,7 @@ def main():
             page.evaluate("window.showSaveFilePicker=undefined")
             page.route("**/api/export/jsonl", lambda route: route.fulfill(status=200,
                        headers={"Content-Length":str(128*1024**2+1), "Content-Type":"application/x-ndjson"}, body=b""))
+            page.locator('#export-more-formats > summary').click()
             page.locator('[data-export="jsonl"]').click()
             expect(page.locator("#toast")).to_contain_text("cannot stream this large export")
             page.unroute("**/api/export/jsonl")
@@ -380,6 +545,7 @@ def main():
                 verify_bundle(bundle, checkpoint["fingerprint"], json.loads(data))
             page.screenshot(path=str(output / "evidence.png"), full_page=True)
             page.locator('[data-view="sources"]').click()
+            page.locator("#sources-tab-chats").click()
             expect(page.locator("#target-list .target-row")).to_have_count(3)
             expect(page.locator("#load-dialogs")).to_be_disabled()
             page.locator('[data-view="observations"]').click()
@@ -388,20 +554,20 @@ def main():
             assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
             check_layout(page)
             page.screenshot(path=str(output / "mobile.png"), full_page=True)
-            # Saved content is text, including HTML-shaped hostile source strings.
+
             demo.app.state.store.append("message.new", {
                 "text": '<img src=x onerror="window.sourceExecuted=true"><script>window.sourceExecuted=true</script>',
                 "synthetic": True}, -100100001, 999)
             page.locator("#refresh").click()
             expect(page.locator("#events-body")).to_contain_text("<img src=x")
             assert not page.evaluate("Boolean(window.sourceExecuted)")
-            page.locator("#top-lock").click()
+            lock_panel(page)
             expect(page.locator("#gate")).to_be_visible()
             assert page.evaluate("sessionStorage.getItem('tgwitness-token')") is None
             page.set_viewport_size({"width": 1440, "height": 1060})
-            # Real panel onboarding with a fake transport. No Telegram network calls.
+
             unlock(page, live)
-            expect(page.locator("#empty-events")).not_to_be_visible()  # process.start is a real operational event
+            expect(page.locator("#empty-events")).not_to_be_visible()
             expect(page.locator("#view-connection")).to_be_visible()
             expect(page.locator("#protection-summary")).to_contain_text("Not encrypted by TgWitness")
             check_layout(page, connection=True)
@@ -427,7 +593,7 @@ def main():
             page.screenshot(path=str(output / "connection-mobile.png"), full_page=True)
             page.set_viewport_size({"width":1440,"height":1060})
             page.locator("#phone").fill("+15550001111")
-            # Empty API fields use the built-in pair; an incomplete own pair is stopped locally.
+
             expect(page.locator("#api-state")).to_have_text("Built-in")
             page.locator("#api-details > summary").click()
             page.locator("#api-id").fill("123")
@@ -449,17 +615,17 @@ def main():
             page.locator("#network-test").click()
             expect(page.locator("#network-result")).to_contain_text("Telegram transport connected")
             page.get_by_role("button", name="Choose sources").click()
-            # Without enabled sources the chat list loads on its own.
+
             expect(page.locator("#available-card")).to_be_visible()
-            expect(page.locator("#load-dialogs")).to_have_text("Reload chats")
-            page.get_by_role("button", name="Add source").first.click()  # the group; private chats are listed too
+            expect(page.locator("#load-dialogs")).to_have_text("Refresh chat list")
+            page.get_by_role("button", name="Add source").first.click()
             expect(page.locator("#target-list .target-row")).to_have_count(1)
             page.locator("#finish-source-selection").click()
             expect(page.locator("#available-card")).not_to_be_visible()
-            page.locator("#source-options > summary").click()
+            page.locator("#sources-tab-recording").click()
             page.locator('[data-monitor-preset="changes"]').click()
             expect(page.locator("#monitoring-unsaved")).to_contain_text("Unsaved changes")
-            page.locator('#monitoring-form button[type="submit"]').click()
+            page.locator("#recording-save").click()
             expect(page.locator("#monitoring-current")).to_have_text("Saved for this account: messages, edits, deletions.")
             expect(page.locator("#monitor-reactions")).not_to_be_checked()
             page.locator("#download-media").check()
@@ -469,22 +635,23 @@ def main():
             expect(page.locator("#download-media")).to_be_checked()
             expect(page.locator("#max-media")).to_have_value("50")
             expect(page.locator("#capture-unsaved")).to_contain_text("Unsaved changes")
-            hold_api_response(page, "/api/capture")
-            page.locator("#capture-form button").click()
+            hold_api_response(page, "/api/recording")
+            page.locator("#recording-save").click()
             expect(page.locator("html")).to_have_attribute("data-acceptance-held", "true")
             page.locator("#download-media").uncheck()
             page.locator("#max-media").fill("20")
             release_api_response(page)
-            expect(page.locator("#capture-form button")).to_be_enabled()
+            expect(page.locator("#recording-save")).to_be_enabled()
             expect(page.locator("#capture-unsaved")).to_contain_text("Unsaved changes")
             expect(page.locator("#download-media")).not_to_be_checked()
             expect(page.locator("#max-media")).to_have_value("20")
-            page.locator("#capture-form button").click()
+            page.locator("#recording-save").click()
             expect(page.locator("#capture-unsaved")).to_have_text("")
             saved = live.app.state.store.get_setting("capture")
             assert (saved["download_media"], saved["max_media_mb"]) == (False, 20)
-            # "Maximum file size" sets the limit of every attachment type.
-            assert len(saved["types"]) == 8 and all(r == {"enabled": True, "max_mb": 20} for r in saved["types"].values())
+
+            assert len(saved["types"]) == 8 and all(r == {"enabled": kind not in ("animation", "sticker"), "max_mb": 20}
+                                                    for kind, r in saved["types"].items())
             check_layout(page)
             expect(page.locator("#toast")).not_to_be_visible(timeout=10000)
             page.locator("#monitoring-form").screenshot(path=str(output / "monitoring.png"))
@@ -495,20 +662,24 @@ def main():
             page.set_viewport_size({"width":1440,"height":1060})
             page.locator("#collector-toggle").click()
             expect(page.locator("#collector-toggle")).to_have_text("Pause observation")
+            page.locator('[data-view="evidence"]').click()
+            page.locator('#export-task-journal').click()
+            page.locator("#export-chat-tools > summary").click()
             page.locator("#snapshot-form button").click()
             expect(page.locator("#toast")).to_contain_text("Saved 3 history observations", timeout=15000)
+            page.once("dialog", lambda dialog: dialog.accept())
             page.locator("#collector-toggle").click()
             expect(page.locator("#collector-toggle")).to_have_text("Start observation")
-            # Parameters: every limit is editable in the panel and each change is journaled.
-            page.locator('[data-view="parameters"]').click()
+
+            navigate_panel(page, "parameters")
             expect(page.locator("#parameters-groups .parameters-group")).to_have_count(8)
             page.locator("#parameter-recheck_max_chats").fill("0")
-            page.locator('#parameters-form button[type="submit"]').click()
-            expect(page.locator("#parameters-form .form-error")).to_contain_text("Chats per recheck pass")
+            expect(page.locator("#parameters-save")).to_be_disabled()
+            expect(page.locator("#parameter-recheck_max_chats-parameter-error")).to_contain_text("1 to 1,000")
             page.locator("#parameter-recheck_max_chats").fill("5")
             page.locator("#parameter-dossier_phones").uncheck()
             page.locator("#parameter-dossier_patterns").fill("Domain: [a-z0-9-]+\\.top\\b")
-            expect(page.locator("#parameters-unsaved")).to_contain_text("Unsaved changes")
+            expect(page.locator("#parameters-change-count")).to_contain_text("unsaved changes")
             page.locator('#parameters-form button[type="submit"]').click()
             expect(page.locator("#parameters-unsaved")).to_have_text("")
             expect(page.locator(".parameter-row.changed")).to_have_count(3)
@@ -519,13 +690,15 @@ def main():
                 page.set_viewport_size({"width": width, "height": 844})
                 check_layout(page)
             page.set_viewport_size({"width": 1440, "height": 1060})
-            page.once("dialog", lambda dialog: dialog.accept())
+            page.locator("#parameters-menu > summary").click()
             page.locator("#parameters-reset").click()
+            page.locator("#parameters-reset-apply").click()
+            page.locator("#parameters-save").click()
             expect(page.locator(".parameter-row.changed")).to_have_count(0)
             assert live.app.state.store.get_setting("parameters") == {}
-            page.reload()
+            reload_panel(page)
             expect(page.locator("#workspace")).to_be_visible()
-            page.locator('[data-view="connection"]').click()
+            navigate_panel(page, "connection")
             page.locator("#entry-settings").click()
             page.locator("#manage-profiles").click()
             page.locator("#profile-label").fill("Private groups · Account B")
@@ -536,33 +709,45 @@ def main():
             second_profile = page.locator("#profile-select").input_value()
             expect(page.locator("#credentials-form")).to_be_visible()
             expect(page.locator("#route-summary")).to_have_text("Automatic MTProxy")
+            page.locator('[data-view="sources"]').click()
+            page.locator("#sources-tab-recording").click()
             expect(page.locator("#monitor-reactions")).to_be_checked()
+            navigate_panel(page, "connection")
             page.locator('[data-auth-method="files"]').click()
             session_path = run / "synthetic.tgwitness-session"
-            session_path.write_text(saved_session(), encoding="ascii")
+            session_path.write_text(saved_session(b"y"), encoding="ascii")  # another account, another key
             page.locator("#session-file").set_input_files(session_path)
-            # No API fields: the converted session connects with a built-in pool pair.
-            page.locator("#auth-continue").click()
+
+            started = time.monotonic()
+            with page.expect_response(
+                lambda response: response.url.endswith("/api/auth/configure")
+                and response.request.method == "POST", timeout=20000,
+            ) as connected:
+                page.locator("#auth-continue").click()
+            assert connected.value.ok, connected.value.status
+            assert connected.value.json()["step"] == "authorized"
+            print(f"Synthetic session connected in {time.monotonic() - started:.2f}s", flush=True)
             expect(page.locator("#authorized-state")).to_be_visible()
             child_vault = live.app.state.profiles.entries[second_profile]["app"].state.vault
             assert child_vault.read("credentials")["api_id"] in api_pool.POOL_IDS, "Expected a built-in pool pair"
             page.get_by_role("button", name="Choose sources").click()
             expect(page.locator("#available-card")).to_be_visible()
-            page.get_by_role("button", name="Add source").first.click()  # the group; private chats are listed too
+            page.get_by_role("button", name="Add source").first.click()
             page.locator("#collector-toggle").click()
             expect(page.locator("#collector-toggle")).to_have_text("Pause observation")
             page.locator("#profile-select").select_option("default")
             expect(page.locator("#collector-toggle")).to_have_text("Start observation")
-            expect(page.locator("#stat-messages")).to_have_text("3")
-            # Accounts panel lists both workspaces with identity, status and per-account actions.
+            check_journal_messages(page, "3")
+
             page.locator('[data-view="accounts"]').click()
             expect(page.locator("#nav-accounts")).to_have_text("2")
             expect(page.locator("#accounts-list .account-card")).to_have_count(2)
             expect(page.locator("#accounts-list")).to_contain_text("@synthetic")
             expect(page.locator("#accounts-list")).to_contain_text("Collecting")
-            # Delete is offered only for non-default workspaces.
+
             expect(page.locator("#accounts-list .danger")).to_have_count(1)
             page.locator('[data-view="evidence"]').click()
+            page.locator('#export-task-journal').click()
             if not page.locator("#verification-details").get_attribute("open") == "":
                 page.locator("#verification-details > summary").click()
             page.locator("#verify-journal").click()
@@ -572,16 +757,16 @@ def main():
             expect(page.locator("#verification-result")).to_contain_text("journal has changed since this check")
             page.locator("#profile-select").select_option(second_profile)
             expect(page.locator("#collector-toggle")).to_have_text("Pause observation")
-            expect(page.locator("#stat-messages")).to_have_text("0")
+            check_journal_messages(page, "0")
             expect(page.locator("#verification-result")).to_have_text("")
-            # A late response must stay invalid even after switching away and back.
+
             hold_api_response(page, "/api/verify")
             page.locator("#verify-journal").click()
             expect(page.locator("html")).to_have_attribute("data-acceptance-held", "true")
             page.locator("#profile-select").select_option("default")
-            expect(page.locator("#stat-messages")).to_have_text("3")
+            check_journal_messages(page, "3")
             page.locator("#profile-select").select_option(second_profile)
-            expect(page.locator("#stat-messages")).to_have_text("0")
+            check_journal_messages(page, "0")
             release_api_response(page)
             expect(page.locator("#verify-journal")).to_be_enabled()
             expect(page.locator("#verification-result")).to_have_text("")
@@ -598,6 +783,7 @@ def main():
             from tgwitness.store import canonical
             Ed25519PublicKey.from_public_bytes(base64.b64decode(signed["public_key"])).verify(
                 base64.b64decode(signed["signature"]), canonical(signed["statement"]))
+            page.once("dialog", lambda dialog: dialog.accept())
             page.locator("#collector-toggle").click()
             expect(page.locator("#collector-toggle")).to_have_text("Start observation")
             page.goto(live.url + "/guide.html")
@@ -608,12 +794,13 @@ def main():
                 check_layout(page)
             page.screenshot(path=str(output / "guide-mobile.png"), full_page=True)
             page.goto(live.url + "/dedicated-account.html")
-            expect(page.get_by_role("heading", name="Why TgWitness works through public app hash/app ID pairs")).to_be_visible()
+            expect(page.locator("#api h2")).to_have_text("Why TgWitness works through public app hash/app ID pairs")
             for width in (1440,390,320):
                 page.set_viewport_size({"width":width,"height":844})
                 check_layout(page)
             check_languages(browser, demo)
             check_themes(browser, demo)
+            check_reading_states(browser, demo)
             assert not errors, errors
             receipt = {"passed": True, "page_errors": errors, "external_requests": outbound,
                        "scenarios": ["access gate", "filters", "edit comparison", "deleted content", "membership",

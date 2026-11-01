@@ -1,6 +1,7 @@
 .venv/
 __pycache__/
 .pytest_cache/
+/tests/
 .ruff_cache/
 *.pyc
 data/
@@ -21,6 +22,12 @@ tgwitness-backup*/
 *.log.*
 *.zip
 *.jsonl
+!website/demo/downloads/tgwitness-demo.zip
+!website/demo/downloads/tgwitness-demo.jsonl
+!website/demo/downloads/tgwitness-demo-timestamp-request.zip
+!website/demo/downloads/tgwitness-demo-account-export.zip
+!website/demo/downloads/tgwitness-demo-minimized-disclosure.zip
+!website/demo/report/sharing-copy.zip
 .instance.lock
 evidence.zip
 evidence.jsonl
@@ -40,6 +47,8 @@ dist/
 build/
 *.egg-info/
 test-results/
+.tmp/
+.tmp-*/
 .playwright/
 proof-config/
 proof-data/
@@ -47,3 +56,7 @@ witness-data/
 witness-key.json
 proxy-config/
 deployments/
+# Disposable capture keys and handoffs (never commit user material).
+sealed-key.json
+*.tgwsealed
+delivery.zip

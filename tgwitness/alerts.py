@@ -5,6 +5,7 @@ is added only when the operator turns on text excerpts. The panel's notification
 the same wording.
 """
 import asyncio
+import hashlib
 import re
 import socket
 import threading
@@ -18,10 +19,9 @@ from pydantic import BaseModel, Field
 from . import i18n
 from . import netclient
 from . import tuning
-from .store import utcnow
+from .store import canonical, utcnow
 
-# Pace, lines per notification and excerpt length are panel parameters (tuning.PARAMETERS);
-# these are their defaults.
+
 BATCH = 2000
 MAX_LINES = 25
 EXCERPT_CHARS = 120
@@ -29,14 +29,14 @@ CHANGES = {"message.deleted": "deleted", "message.edited": "edited", "message.mi
 PROBLEM_KINDS = ("storage.low", "storage.ok", "coverage.gap", "collector.error", "connection.retry_failed",
                  "source.access_unconfirmed", "export.failed", "chat_export.interrupted", "replica.completed",
                  "anchor.completed", "profile.unavailable", "host.state")
-# Panel list: newest change records grouped per chat and hour, and pages searched for problems.
+
 CHANGE_SCAN = 5000
 PROBLEM_PAGES = 20
 SUMMARY_KINDS = ("message.new", "message.recovered", "message.edited", "message.deleted", "message.missing_on_recheck")
-# These services open their own sockets (SMTP, IRC, MQTT, XMPP...), so they cannot use the workspace proxy.
+
 DIRECT_SOCKET = {"amqp", "amqps", "aprs", "deltachat", "deltachats", "growl", "irc", "ircs", "mailto", "mailtos",
                  "mqtt", "mqtts", "rsyslog", "smpp", "smpps", "xmpp", "xmpps"}
-# Of those, all but email bypass the destination check below (raw sockets, paho, UDP syslog).
+
 OWN_SOCKET = DIRECT_SOCKET - {"mailto", "mailtos"}
 
 
@@ -52,7 +52,7 @@ class AlertSettings(BaseModel):
     daily: bool = True
     daily_hour: int = Field(default=9, ge=0, le=23)
     language: Literal[i18n.LANGUAGES] = "en"
-    include_text: bool = False  # excerpts of deleted and edited messages in change notifications
+    include_text: bool = False
 
 
 def alert_settings(store):
@@ -67,13 +67,13 @@ def tr(words, text, **values):
 
 def describe(url):
     """Apprise's own masked form of a destination, or None when Apprise cannot use it."""
-    import apprise  # Apprise, requests and their native modules take seconds to load; only notifications need them
+    import apprise
     plugin = apprise.Apprise.instantiate(url)
     return plugin.url(privacy=True) if plugin else None
 
 
 def route_problem(urls, network):
-    if network.kind == "none":  # the workspace allows no requests outside Telegram (network.NoRoute)
+    if network.kind == "none":
         return str(network.error)
     if network.telegram_only:
         return "Notifications are not sent over MTProxy. Choose Direct, SOCKS5 or HTTP in Account → Connection settings."
@@ -90,13 +90,10 @@ def proxy_url(network, address=None):
     login = (quote(network.username, safe="") + ":" + quote(network.password, safe="") + "@") if network.username else ""
     host = address or network.host
     host = "[" + host + "]" if ":" in host else host
-    # socks5h: names are resolved by the proxy, so lookups do not leave through the local network.
+
     return ("socks5h" if network.kind == "socks5" else "http") + "://" + login + host + ":" + str(network.port)
 
 
-# While a notification is sent (under _send_lock), destinations inside this machine or its network
-# are refused, as in netclient. Apprise sends from its own threads, so the switch is not per thread;
-# only requests (urllib3) and smtplib connections are checked, which nothing else in the server uses.
 _guard = {"on": False, "allowed": set(), "refused": None}
 
 
@@ -140,7 +137,7 @@ def _install_guard():
 
     def smtp(original):
         def get_socket(self, host, port, timeout):
-            addresses = _checked(host, port)  # TLS keeps verifying self._host, the name
+            addresses = _checked(host, port)
             return original(self, addresses[0] if addresses else host, port, timeout)
         return get_socket
     smtplib.SMTP._get_socket = smtp(smtplib.SMTP._get_socket)
@@ -155,7 +152,7 @@ def _routed(proxy):
 
     def merge(self, url, proxies, stream, verify, cert):
         host = urlsplit(url).hostname or ""
-        if proxy and _guard["on"] and netclient.literal(host):  # through a proxy only an address can be checked
+        if proxy and _guard["on"] and netclient.literal(host):
             try:
                 netclient.refuse_internal(host, [netclient.literal(host)])
             except netclient.RouteError as error:
@@ -179,7 +176,7 @@ def deliver(urls, title, body, network):
         return {"sent": 0, "failed": len(urls), "error": problem}
     address = None
     if network.kind != "direct":
-        # The SOCKS library connects the proxy itself, past the guard: checked and pinned here.
+
         try:
             address = netclient.checked_proxy(network, list(dict.fromkeys(
                 info[4][0] for info in socket.getaddrinfo(network.host, network.port, type=socket.SOCK_STREAM))))
@@ -188,16 +185,21 @@ def deliver(urls, title, body, network):
     _install_guard()
     with _send_lock, _routed(proxy_url(network, address)):
         _guard.update(on=not netclient.private_allowed(), refused=None,
-                      allowed={address} if address else set())  # the proxy itself, already checked
+                      allowed={address} if address else set())
         try:
-            bundle = apprise.Apprise()
+            bundle = apprise.Apprise(asset=apprise.AppriseAsset(http_redirects=False))
             for url in urls:
                 bundle.add(url)
+            # URL redirect=yes overrides the asset default in Apprise. Enforce
+            # the application's policy after parsing, without rewriting service
+            # paths, query credentials or the workspace's transport settings.
+            for service in bundle:
+                service.redirects = False
             result = bundle.notify(body=body, title=title)
         finally:
             _guard["on"] = False
         refused = _guard["refused"]
-    if isinstance(result, bool):  # Apprise 1.x reports only whether every destination accepted it
+    if isinstance(result, bool):
         return {"sent": len(urls) if result else 0, "failed": 0 if result else len(urls),
                 "error": None if result else refused or "The service did not accept the notification."}
     errors = [entry.message for entry in result.logs() if str(entry.level).upper() in ("ERROR", "WARNING")]
@@ -241,7 +243,8 @@ def problem_line(event, titles, words):
         return tr(words, "Chat export stopped ({chat}): {error}", chat=where, error=p["error_type"])
     if kind == "replica.completed" and p.get("error"):
         return tr(words, "Off-site copy stopped: {error}", error=p["error"])
-    if kind == "anchor.completed" and not any(r.get("ok") for r in p.get("results", [])):
+    # A checkpoint another service stamped on an earlier pass is partly covered, as when some answer at once.
+    if kind == "anchor.completed" and not any(r.get("ok") for r in p.get("results", [])) and not p.get("covered"):
         return tr(words, "No timestamp service answered for the latest checkpoint.")
     if kind == "profile.unavailable":
         return tr(words, "Workspace {name} could not start: {error}", name=p.get("profile_id") or "?",
@@ -253,18 +256,23 @@ def problem_line(event, titles, words):
 
 def host_line(state, words):
     """A server deployed with python -m tgwitness.cloud measured SSH or a login; closing them is no problem."""
-    before, found = state.get("before") or {}, []
+    before, found, login = state.get("before") or {}, [], False
     if state.get("ssh_listening") and not before.get("ssh_listening"):
         found.append(tr(words, "port 22 accepts connections"))
     if (state.get("ssh_processes") or 0) > (before.get("ssh_processes") or 0):
         found.append(tr(words, "SSH server processes started"))
     if (state.get("sessions") or 0) > (before.get("sessions") or 0):
         found.append(tr(words, "logged-in sessions: {n}", n=state["sessions"]))
+        login = True
     if (state.get("logins") or 0) > (before.get("logins") or 0):
         found.append(tr(words, "new logins recorded: {n}", n=state["logins"] - (before.get("logins") or 0)))
+        login = True
     if not found:
         return None
-    return tr(words, "Server access detected: {details}", details="; ".join(found))
+    if login:
+        return tr(words, "Server access detected: {details}", details="; ".join(found))
+    # An open port or a started SSH process alone is not a recorded login.
+    return tr(words, "SSH change on the server, no new login recorded: {details}", details="; ".join(found))
 
 
 def change_line(title, counts, words):
@@ -302,49 +310,184 @@ def change_item(event, title, words):
     return tr(words, "Message #{id} not found at recheck in {chat}", **values)
 
 
-def panel_items(store, words, limit=60):
-    """Recent problems and chat changes for the panel's notification list, newest first.
+NOTICE_RECOVERIES = ("connection.restored", "replica.changed", "evidence.changed")
 
-    Problems keep their place however busy the chats are, and changes in one chat are grouped
-    per hour: a chat deleting a message every minute cannot push a sign-out or a full disk out.
+
+def notice_payload(event):
+    value = event.get("payload")
+    return value if isinstance(value, dict) else {}
+
+
+def notice_hour(event):
+    try:
+        at = datetime.fromisoformat(event["observed_at"].replace("Z", "+00:00"))
+        return at.replace(tzinfo=at.tzinfo or timezone.utc).astimezone(timezone.utc).isoformat(timespec="hours")
+    except (AttributeError, TypeError, ValueError, OverflowError):
+        return "event:" + str(event["seq"])
+
+
+def notice_key(*parts):
+    return "v1:" + hashlib.sha256(canonical(parts)).hexdigest()
+
+
+def timestamp_answered(payload):
+    results = payload.get("results")
+    return bool(payload.get("covered")) or isinstance(results, list) and any(
+        isinstance(result, dict) and result.get("ok") for result in results)
+
+
+def problem_group(event):
+    """Typed identity and recovery family. Distinct user operations remain individual records."""
+    p, kind, chat = notice_payload(event), event["kind"], event["chat_id"]
+    fields, family = None, kind
+    if kind == "collector.error":
+        fields = [p.get("operation"), p.get("error_type")]
+    elif kind == "connection.retry_failed":
+        fields, family = [p.get("error_type")], "connection"
+    elif kind == "coverage.gap":
+        fields = [p.get("reason"), p.get("error_type")]
+        if p.get("reason") in ("transport_disconnected", "authorization_required", "resume_failed"):
+            family = "connection"
+    elif kind == "replica.completed":
+        fields, family = [p.get("destination"), p.get("error")], "replica"
+    elif kind == "anchor.completed":
+        results = p.get("results")
+        outcomes = [{k: r.get(k) for k in ("kind", "url", "received", "error", "error_type")}
+                    for r in results if isinstance(r, dict)] if isinstance(results, list) else None
+        fields = [sorted(outcomes, key=canonical)] if outcomes is not None else [results]
+        family = "timestamps"
+    elif kind == "source.access_unconfirmed":
+        fields = [p.get("reason")]
+    elif kind == "storage.low":
+        fields, family = [], "storage"
+    identity = [kind, chat, *fields] if fields is not None else [kind, chat, event["seq"]]
+    return identity, (family, chat), fields is not None
+
+
+def recovered_family(event):
+    p, kind = notice_payload(event), event["kind"]
+    family = {"connection.restored": "connection", "storage.ok": "storage",
+              "replica.changed": "replica", "evidence.changed": "timestamps"}.get(kind)
+    if kind == "replica.completed" and not p.get("error"):
+        family = "replica"
+    if kind == "anchor.completed" and timestamp_answered(p):
+        family = "timestamps"
+    return (family, event["chat_id"]) if family else None
+
+
+def notice_destination(event, level):
+    kind, p = event["kind"], notice_payload(event)
+    if level == "change":
+        action = {"type": "chat", "chat_id": event["chat_id"]} if event["chat_id"] is not None else {"type": "record"}
+        return "changes", "info", action
+    category, part = {
+        "storage.low": ("media", "media"), "storage.ok": ("media", "media"),
+        "coverage.gap": ("collection", "intake"), "collector.error": ("collection", "intake"),
+        "connection.retry_failed": ("connection", "connection"),
+        "source.access_unconfirmed": ("sources", "sources"),
+        "export.failed": ("exports", "exports"), "chat_export.interrupted": ("exports", "exports"),
+        "replica.completed": ("replica", "replica"), "anchor.completed": ("timestamps", "timestamps"),
+        "profile.unavailable": ("accounts", "accounts"), "host.state": ("server", "server"),
+    }.get(kind, ("collection", None))
+    if kind == "coverage.gap" and p.get("reason") == "authorization_required":
+        category, part = "connection", "connection"
+    if kind == "collector.error" and p.get("operation") == "off-site copy":
+        category, part = "replica", "replica"
+    severity = "warning"
+    if level == "ok":
+        severity = "success"
+    elif kind in ("collector.error", "export.failed", "chat_export.interrupted", "profile.unavailable", "replica.completed") \
+            or category == "connection" and p.get("reason") == "authorization_required":
+        severity = "error"
+    action = {"type": "diagnostics", "part": part} if part else {"type": "record"}
+    return category, severity, action
+
+
+def notice_entry(event, level, text, read_key, *, group_id=None, count_exact=True):
+    category, severity, action = notice_destination(event, level)
+    return {"seq": event["seq"], "at": event["observed_at"], "kind": event["kind"], "level": level,
+            "text": text, "chat_id": event["chat_id"], "message_id": event["message_id"],
+            "group_id": group_id or read_key, "read_key": read_key, "count": 1, "occurrences": 1,
+            "count_exact": count_exact, "first_seq": event["seq"], "first_at": event["observed_at"],
+            "last_at": event["observed_at"], "category": category, "severity": severity, "action": action}
+
+
+def panel_items(store, words, limit=60, *, allowed_chats=None, workspace_id="default"):
+    """Bounded, scoped notification projection; the signed journal is never changed.
+
+    Recurring problems and chat changes are grouped per UTC hour. Known recovery events
+    separate problem episodes. A truncated scan reports lower-bound counts explicitly.
     """
-    titles = {t["chat_id"]: t["title"] for t in store.targets()}
+    if limit <= 0 or allowed_chats is not None and not allowed_chats:
+        return []
+    titles = {t["chat_id"]: t["title"] for t in store.targets()
+              if allowed_chats is None or t["chat_id"] in allowed_chats}
 
-    def entry(event, level, text, **extra):
-        return {"seq": event["seq"], "at": event["observed_at"], "kind": event["kind"], "level": level,
-                "text": text, "chat_id": event["chat_id"], "message_id": event["message_id"], **extra}
+    def scan(kinds, bound):
+        records = store.events_of(kinds, limit=bound + 1, chat_ids=allowed_chats)
+        return records[:bound], len(records) > bound
 
-    problems, before = [], None
-    for _ in range(PROBLEM_PAGES):  # completed copies and timestamps are not problems: look further back
-        batch = store.events_of(PROBLEM_KINDS, limit=limit * 5, before=before)
-        for event in batch:
-            text = problem_line(event, titles, words)
-            if text and len(problems) < limit:
-                problems.append(entry(event, "ok" if event["kind"] == "storage.ok" else "problem", text))
-        if len(problems) >= limit or len(batch) < limit * 5:
-            break
-        before = batch[-1]["seq"]
-    records, groups = store.events_of(tuple(CHANGES), limit=CHANGE_SCAN), {}
-    # The oldest hour of a full scan may be cut off; it is left out rather than shown with low counts.
-    partial = records[-1]["observed_at"][:13] if len(records) == CHANGE_SCAN else None
-    for event in records:
-        hour = event["observed_at"][:13]
-        if event["chat_id"] is None or hour == partial:
+    problem_bound = limit * 5 * PROBLEM_PAGES
+    records, truncated = scan((*PROBLEM_KINDS, *NOTICE_RECOVERIES), problem_bound)
+    ignored = set(store.get_setting("ignored_source_warnings", []))
+    resolved = store.get_setting("resolved_source_warnings", {})
+    groups, recovered = {}, {}
+    for event in reversed(records):
+        if event["kind"] == "source.access_unconfirmed" and (event["chat_id"] in ignored
+                or event["seq"] <= resolved.get(str(event["chat_id"]), 0)):
             continue
-        group = groups.setdefault((event["chat_id"], hour), {"event": event, "counts": {}, "records": 0})
-        group["counts"][CHANGES[event["kind"]]] = group["counts"].get(CHANGES[event["kind"]], 0) + 1
-        group["records"] += 1
+        family = recovered_family(event)
+        if family:
+            recovered[family] = event["seq"]
+        try:
+            text = problem_line({**event, "payload": notice_payload(event)}, titles, words)
+        except (AttributeError, TypeError, ValueError, OverflowError):
+            text = tr(words, "Problem recorded: {kind}", kind=event["kind"])
+        if not text:
+            continue
+        identity, family, grouped = problem_group(event)
+        read_key = notice_key(workspace_id, identity, notice_hour(event))
+        key = notice_key(read_key, recovered.get(family, 0))
+        item = notice_entry(event, "ok" if event["kind"] == "storage.ok" else "problem", text, read_key,
+                            group_id=key, count_exact=not (grouped and truncated))
+        if not item["count_exact"]:
+            item["scan_limit"] = problem_bound
+        previous = groups.get(key)
+        if previous:
+            item.update(count=previous["count"] + 1, occurrences=previous["count"] + 1,
+                        first_seq=previous["first_seq"], first_at=previous["first_at"])
+        groups[key] = item
+    problems = sorted(groups.values(), key=lambda item: item["seq"], reverse=True)[:limit]
+
+    records, truncated = scan(tuple(CHANGES), CHANGE_SCAN)
+    groups = {}
+    for event in records:
+        if event["chat_id"] is None:
+            continue
+        key = notice_key(workspace_id, "changes", event["chat_id"], notice_hour(event))
+        group = groups.setdefault(key, {"event": event, "first": event, "counts": {}, "count": 0})
+        change = CHANGES[event["kind"]]
+        group["counts"][change] = group["counts"].get(change, 0) + 1
+        group["count"] += 1
+        group["first"] = event
     changes = []
-    for (chat_id, _), group in groups.items():
-        title = titles.get(chat_id, str(chat_id))
-        if group["records"] == 1:
-            changes.append(entry(group["event"], "change", change_item(group["event"], title, words)))
-        else:
-            changes.append(entry(group["event"], "change", change_line(title, group["counts"], words),
-                                 records=group["records"]))
-    for event in store.events_of(("source.discovered",), limit=limit):
-        title = event["payload"].get("title") or titles.get(event["chat_id"], str(event["chat_id"]))
-        changes.append(entry(event, "change", discovered_line(title, words)))
+    for key, group in groups.items():
+        event, count = group["event"], group["count"]
+        title = titles.get(event["chat_id"], str(event["chat_id"]))
+        text = change_item(event, title, words) if count == 1 else change_line(title, group["counts"], words)
+        if truncated:
+            text = tr(words, "Recent changes in {chat}", chat=title)
+        item = notice_entry(event, "change", text, key, count_exact=not truncated)
+        if truncated:
+            item["scan_limit"] = CHANGE_SCAN
+        item.update(count=count, occurrences=count, first_seq=group["first"]["seq"], first_at=group["first"]["observed_at"])
+        if count > 1:
+            item["records"] = count
+        changes.append(item)
+    for event in store.events_of(("source.discovered",), limit=limit, chat_ids=allowed_chats):
+        title = notice_payload(event).get("title") or titles.get(event["chat_id"], str(event["chat_id"]))
+        key = notice_key(workspace_id, "source.discovered", event["seq"])
+        changes.append(notice_entry(event, "change", discovered_line(title, words), key))
     changes.sort(key=lambda item: item["seq"], reverse=True)
     return sorted(problems + changes[:max(0, limit - len(problems))], key=lambda item: item["seq"], reverse=True)
 
@@ -407,7 +550,7 @@ async def alert_pass(store, vault, network, now=None):
     settings, urls = alert_settings(store), vault.read("alerts").get("urls", [])
     head = (store.stats()["head"] or {}).get("seq", 0)
     if not settings["enabled"] or not urls:
-        store.set_setting("alerts_cursor", head)  # turning alerts on never replays old records
+        store.set_setting("alerts_cursor", head)
         return None
     words, name = i18n.words(settings["language"]), workspace_name(store)
     titles = {t["chat_id"]: t["title"] for t in store.targets()}
@@ -444,7 +587,7 @@ async def alert_pass(store, vault, network, now=None):
     return {"notifications": sent, "error": error}
 
 
-async def alert_loop(store, vault, network_config, wakeup):
+async def alert_loop(store, vault, network_config, wakeup, workspace_id="default"):
     while True:
         with suppress(TimeoutError):
             await asyncio.wait_for(wakeup.wait(), tuning.value(store, "alerts_check_seconds"))
@@ -453,3 +596,11 @@ async def alert_loop(store, vault, network_config, wakeup):
             await alert_pass(store, vault, network_config())
         except Exception as exc:
             store.set_setting("alerts_last", {"at": utcnow(), "notifications": 0, "error": type(exc).__name__})
+        from . import webhooks
+        try:
+            await webhooks.pump(store, vault, network_config(), workspace_id)
+        except Exception as exc:
+            async with webhooks.lock(store):
+                data = webhooks.state(store)
+                data["last_error"] = type(exc).__name__
+                store.set_setting("webhook_delivery", data)

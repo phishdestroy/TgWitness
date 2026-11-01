@@ -7,6 +7,7 @@ Run on 64-bit Windows with Python 3.12 (the embedded runtime's version):
 The user extracts the ZIP and double-clicks TgWitness.cmd; nothing is installed system-wide.
 """
 import argparse
+import csv
 import hashlib
 import json
 import os
@@ -24,7 +25,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))["project"]["version"]
 PYTHON = "3.12.10"
-# SHA-256 of the python.org embeddable archives, pinned so a changed download fails the build.
+
 EMBED_SHA256 = {
     "amd64": "4acbed6dd1c744b0376e3b1cf57ce906f9dc9e95e68824584c8099a63025a3c3",
     "arm64": "3065efc3d382d1cda66757ac71ade11904fa6e350f5a97eb74811acd71ba5532",
@@ -102,9 +103,8 @@ def sha256(path):
     return digest.hexdigest()
 
 
-# The only top-level entries a portable package may contain.
 TOP_LEVEL = {"python", "TgWitness.cmd", "TgWitness-Demo.cmd", "TgWitness-Check.cmd", "README.txt", "LICENSE", "NOTICE"}
-# Names that only a running instance creates: sessions, keys, tokens and account files.
+
 PRIVATE_NAMES = {"vault.key", "panel-token.txt", "credentials.json", "account.json", "vault.external.json",
                  ".instance.lock"}
 PRIVATE_SUFFIXES = (".session", ".session-journal", ".tgwitness-session", ".jsonl", ".sqlite", ".sqlite3",
@@ -168,6 +168,26 @@ def embedded_runtime(arch, cache, supplied=None):
     return archive
 
 
+def clean_app_install_metadata(site_packages):
+    """Drop local pip provenance and records for the app launchers replaced by CMD files."""
+    metadata = site_packages / ("tgwitness-" + VERSION + ".dist-info")
+    record = metadata / "RECORD"
+    with record.open(encoding="utf-8", newline="") as source:
+        rows = list(csv.reader(source))
+    if any(len(row) != 3 for row in rows):
+        raise SystemExit("Installed TgWitness RECORD is malformed")
+    origin = metadata / "direct_url.json"
+    origin_name = origin.relative_to(site_packages).as_posix()
+    launchers = {"../../bin/tgwitness.exe", "../../bin/tgwitness-mcp.exe"}
+    kept = [row for row in rows if row[0] != origin_name and not (
+        row[0] in launchers and not (site_packages / row[0]).exists()
+        and not (site_packages / "bin" / Path(row[0]).name).exists())]
+    origin.unlink(missing_ok=True)
+    if kept != rows:
+        with record.open("w", encoding="utf-8", newline="") as target:
+            csv.writer(target, lineterminator="\n").writerows(kept)
+
+
 def main():
     parser = argparse.ArgumentParser(description="Build the Windows portable package.")
     parser.add_argument("--python-zip", help="use a local python-" + PYTHON + "-embed-<arch>.zip")
@@ -180,8 +200,8 @@ def main():
     work = ROOT / "build/portable"
     name = "TgWitness-" + VERSION
     work.mkdir(parents=True, exist_ok=True)
-    # A new directory every time: files left by an earlier build or a portable instance
-    # started from it (data, sessions, locked files) can never reach this package.
+
+
     build = Path(tempfile.mkdtemp(prefix="stage-", dir=work))
     stage = build / name
     (stage / "python").mkdir(parents=True)
@@ -189,7 +209,7 @@ def main():
     with zipfile.ZipFile(embedded_runtime(arch, work / "cache", args.python_zip)) as runtime:
         runtime.extractall(stage / "python")
     tag = "python" + PYTHON.replace(".", "")[:3]
-    # Isolated module path: the standard library, the runtime folder and bundled packages only.
+
     (stage / "python" / (tag + "._pth")).write_text(tag + ".zip\n.\nLib\\site-packages\nimport site\n", encoding="ascii")
 
     print("Installing TgWitness and pinned dependencies", flush=True)
@@ -197,7 +217,8 @@ def main():
     subprocess.run([sys.executable, "-m", "pip", "install", "--disable-pip-version-check", "--no-warn-script-location",
                     "--no-compile", "--target", str(site_packages), "-c", str(ROOT / "deploy/constraints.txt"), str(ROOT)],
                    check=True, cwd=ROOT)
-    shutil.rmtree(site_packages / "bin", ignore_errors=True)  # Scripts would point at the build interpreter.
+    shutil.rmtree(site_packages / "bin", ignore_errors=True)
+    clean_app_install_metadata(site_packages)
 
     for filename, text in (("TgWitness.cmd", LAUNCHER), ("TgWitness-Demo.cmd", DEMO), ("TgWitness-Check.cmd", CHECK),
                            ("README.txt", README.format(version=VERSION, python=PYTHON))):
@@ -208,7 +229,7 @@ def main():
     print("Checking the embedded runtime", flush=True)
     probe = build / "readiness-probe"
     environment = {key: value for key, value in os.environ.items() if not key.startswith(("TGWITNESS_", "PYTHON"))}
-    # Building a package must also work while a live panel owns the default port.
+
     with socket.socket() as port_probe:
         port_probe.bind(("127.0.0.1", 0))
         probe_port = port_probe.getsockname()[1]
@@ -230,7 +251,7 @@ def main():
     out.mkdir(exist_ok=True)
     target = out / (name + "-windows-" + arch + "-portable.zip")
     write_release(stage, target)
-    shutil.rmtree(build, ignore_errors=True)  # Only this build's own directory; the ZIP is already checked.
+    shutil.rmtree(build, ignore_errors=True)
     digest = sha256(target)
     target.with_suffix(".zip.sha256").write_text(digest + "  " + target.name + "\n", encoding="ascii")
     print("Portable package:", target)

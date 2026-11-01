@@ -6,6 +6,7 @@ English lives at the site root and every other language under /<code>/ (tools/si
 translations come from website/i18n/<code>.json, made by test-results/site_translate.py.
 """
 import argparse
+import hashlib
 import html
 from html.parser import HTMLParser
 import json
@@ -14,17 +15,19 @@ from pathlib import Path
 import posixpath
 import re
 import tomllib
-from urllib.parse import urlsplit
+from urllib.parse import urljoin, urlsplit
 
 if __package__:
     from .site_content import GROUPS, GUIDES, LABELS, NEXT, REFERENCE, REFERENCE_GROUPS
-    from . import site_diagrams, site_i18n, site_wiki, site_modes
+    from . import site_diagrams, site_i18n, site_wiki, site_modes, site_account, site_llms
 else:
     from site_content import GROUPS, GUIDES, LABELS, NEXT, REFERENCE, REFERENCE_GROUPS
     import site_diagrams
     import site_i18n
     import site_wiki
     import site_modes
+    import site_account
+    import site_llms
 
 ROOT = Path(__file__).resolve().parents[1]
 LANGS = tuple(site_i18n.LANGUAGES)
@@ -39,7 +42,7 @@ ASSETS = {
     "assets/off-site-copy.png": "docs/assets/off-site-copy.png",
     "assets/tgwitness-social.png": "docs/assets/presentation/preview-social.png",
     "assets/public-proxies.png": "docs/assets/public-proxies.png",
-    # Home page films and their reduced-motion stills; the evidence explanations below.
+
     "assets/investigation.mp4": "docs/assets/presentation/investigation.mp4",
     "assets/investigation-static.png": "docs/assets/presentation/investigation-static.png",
     "assets/message-history.mp4": "docs/assets/presentation/message-history.mp4",
@@ -48,7 +51,7 @@ ASSETS = {
     "assets/evidence-tamper-static.svg": "docs/assets/presentation/evidence-tamper-static.svg",
     "assets/evidence-checkpoint-static.svg": "docs/assets/presentation/evidence-checkpoint-static.svg",
 }
-# Screenshots that reference pages show; a reference page using any other image fails the build.
+
 WIKI_ASSETS = {
     "assets/evidence-chain-animated.svg": "docs/assets/presentation/evidence-chain-animated.svg",
     "assets/evidence-tamper-animated.svg": "docs/assets/presentation/evidence-tamper-animated.svg",
@@ -57,25 +60,45 @@ WIKI_ASSETS = {
     "assets/connection.png": "docs/assets/connection.png",
 }
 STATIC = {"style.css": "website/style.css", "site.js": "website/site.js",
+          "sealed.html": "website/sealed.html", "sealed.js": "tgwitness/static/cloud-capture.js", "sealed.css": "tgwitness/static/cloud-capture.css",
+          "site-redirect.js": "website/site-redirect.js", "capture-site.css": "website/capture-site.css",
+          "capture-locales.js": "tgwitness/static/cloud-capture-locales.js",
+          "sealed-story.js": "tgwitness/static/cloud-capture-story.js", "sealed-story.css": "tgwitness/static/cloud-capture-story.css",
           "LICENSE": "LICENSE", "NOTICE": "NOTICE",
           "docs.css": "website/docs.css", "docs.js": "website/docs.js",
           "learn.css": "website/learn.css", "learn.js": "website/learn.js", **ASSETS, **WIKI_ASSETS}
 TRANSLATIONS = tuple(f"website/i18n/{lang}.json" for lang in site_modes.LANGUAGES)
 MODES_PAGES = site_modes.FILES
-# The read-only online demo: the panel's own files, answered from recorded demo records
-# (website/demo/mock.js, tools/capture_demo.py). Nothing on the website can change data.
+
+
 DEMO_STATIC = {"demo/" + name: "tgwitness/static/" + name
-               for name in ("style.css", "theme.js", "i18n.js", "app.js", "mark.svg", "guide.css", "guide.js")}
+               for name in ("style.css", "theme.js", "i18n.js", "app.js", "router.js", "integrations.js", "analysis.js", "media-analysis.js", "webhooks.js", "proxies.js", "fleet.js", "review.js", "live.js", "mark.svg", "guide.css", "guide.js",
+                            "cloud-capture-locales.js", "cloud-capture.js", "cloud-capture.css", "cloud-capture-story.js", "cloud-capture-story.css", "capture.html")}
+DEMO_STATIC.update({"demo/core/" + name: "tgwitness/static/core/" + name
+                    for name in ("time.js", "view-host.js")})
+DEMO_STATIC.update({"demo/components/" + name: "tgwitness/static/components/" + name
+                    for name in ("shell.js", "shell.css", "health.js", "health.css", "health-actions.js", "collection.js", "collection.css", "workspaces.js", "forms.js", "forms.css", "connection-notice.js", "feedback.css", "account-state.js")})
+DEMO_STATIC.update({"demo/views/" + name: "tgwitness/static/views/" + name
+                    for name in ("sources.js", "sources.css", "parameters.js", "parameters.css", "exports.js", "exports.css", "accounts.js", "accounts.css", "access.js", "access.css", "system-log.js", "chats.css", "chat-list.js", "chat-list.css", "workflows.css", "disclosure-preview.js", "disclosure-preview.css")})
 DEMO_STATIC.update({"demo/mock.js": "website/demo/mock.js", "demo/fixtures.json": "website/demo/fixtures.json"})
+DEMO_STATIC.update({"demo/report/" + name: "website/demo/report/" + name
+                    for name in ("index.html", "report.html", "sharing-copy.zip", "example.json")})
+DEMO_STATIC.update({"demo/components/" + name: "tgwitness/static/components/" + name
+                    for name in ("notifications.js", "notifications.css", "journal.js", "journal.css")})
+DEMO_STATIC.update({"demo/downloads/" + name: "website/demo/downloads/" + name for name in (
+    "tgwitness-demo.zip", "tgwitness-demo.jsonl", "tgwitness-demo.csv", "tgwitness-demo.html",
+    "tgwitness-demo-checkpoint.json", "tgwitness-demo-run-receipt.json", "tgwitness-demo-timestamp-request.zip",
+    "tgwitness-demo-account-export.zip", "tgwitness-demo-minimized-disclosure.zip")})
 DEMO_PAGES = {"demo/index.html": "tgwitness/static/index.html", "demo/guide.html": "tgwitness/static/guide.html",
               "demo/dedicated-account.html": "tgwitness/static/dedicated-account.html"}
 DEMO_LOCALES = {f"demo/locales/{lang}.js": lang for lang in LANGS}
 DEMO_GUIDE_LOCALES = {f"demo/guide-locales/{lang}.js": lang for lang in site_modes.LANGUAGES}
 DEMO_DICTIONARIES = ("tgwitness/english_fallbacks.json", *(f"tgwitness/locales/{lang}.json" for lang in LANGS if lang != "en"))
 GUIDE_DICTIONARIES = ("tgwitness/guide_locales/keys.json", *(f"tgwitness/guide_locales/{lang}.json" for lang in site_modes.EXTRA_LANGUAGES))
+CAPTURE_DOCS = {"en": "docs/SEALED-ACTIONS.md", "ru": "docs/ru/SEALED-ACTIONS.md"}
 INPUTS = ("website/index.html", "website/docs.html", "website/guide_intro.html", site_modes.SOURCE, *STATIC.values(),
-          *DEMO_STATIC.values(), *DEMO_PAGES.values(), *DEMO_DICTIONARIES, *GUIDE_DICTIONARIES,
-          *(f"website/guides/en/{slug}.html" for slug in GUIDES),
+          *DEMO_STATIC.values(), *DEMO_PAGES.values(), *DEMO_DICTIONARIES, *GUIDE_DICTIONARIES, *CAPTURE_DOCS.values(),
+          *(f"website/guides/en/{slug}.html" for slug in GUIDES if slug != "dedicated-account"),
           *dict.fromkeys(entry[3] for entry in REFERENCE.values()))
 WIKI_HUB = "docs/reference/"
 LOCAL_PAGES = ("", "docs/", *(f"docs/{slug}/" for slug in GUIDES), WIKI_HUB, *(f"{WIKI_HUB}{slug}/" for slug in REFERENCE))
@@ -84,7 +107,10 @@ PAGE_LOCALES = tuple((lang, local) for lang in NOTICE_LANGUAGES
                      for local in (LOCAL_PAGES if lang in LANGS else NOTICE_PAGES))
 PAGES = tuple(("" if lang == "en" else lang + "/") + local for lang, local in PAGE_LOCALES)
 SEARCH_FILES = tuple(("" if lang == "en" else lang + "/") + "docs/search.json" for lang in NOTICE_LANGUAGES)
-SEARCH_TEXT = 4000  # characters of each page in the search index
+MARKDOWN_PAGES = {path + "index.html": site_llms.markdown_path(path) for path in PAGES}
+MARKDOWN_PAGES.update({path: site_llms.markdown_path(path) for path in MODES_PAGES})
+LLM_FILES = ("llms.txt", "llms-full.txt", *MARKDOWN_PAGES.values())
+SEARCH_TEXT = 4000
 HOME_TITLE = "Telegram message history & signed exports | TgWitness"
 HOME_DESCRIPTION = ("A self-hosted Telegram observation journal. Preserve observed messages, compare edits, "
                     "track deletion notices, and export signed records you can verify.")
@@ -92,7 +118,7 @@ HOME_OG = "Your accounts. Your journal. A verifiable record. An open-source Tele
 HOME_IMAGE_ALT = "TgWitness — Follow the trail. Preserve the evidence. A Telegram investigation workspace."
 WIKI_DESCRIPTION = ("The complete TgWitness reference: installation, accounts, proxies, collection, evidence format, "
                     "witnesses, timestamps, security, architecture and test results.")
-# Words of the page frame that are not in LABELS.
+
 FRAME = ("Visual guide", "Security", "Language", "Switch between light and dark theme", "Link to this section",
          "Parts of this page are still in English: the English original changed after it was translated.",
          "This page is available in English only.")
@@ -110,6 +136,12 @@ def prefix(lang):
 def page_languages(local):
     """Full documentation languages, plus the existing Amharic notices."""
     return NOTICE_LANGUAGES if local in NOTICE_PAGES else site_i18n.LANGUAGES
+
+
+def canonical_path(path):
+    """Keep translated navigation, but consolidate untranslated reference copies."""
+    local = path.split("/", 1)[1] if path.split("/", 1)[0] in LANGS and "/" in path else path
+    return local if local in {WIKI_HUB + slug + "/" for slug in site_i18n.ENGLISH_ONLY} else path
 
 
 def render(template, values):
@@ -154,14 +186,26 @@ class PlainText(HTMLParser):
         return " ".join(" ".join(self.parts).split())
 
 
-def seo(base_url, path, title, description, lang, alternates, *, crumbs=(), extra_only=False, languages=site_i18n.LANGUAGES):
-    canonical = base_url + "/" + path
+def seo(base_url, path, title, description, lang, alternates, *, crumbs=(), extra_only=False, languages=site_i18n.LANGUAGES, software=None):
+    canonical = base_url + "/" + canonical_path(path)
+    if canonical_path(path) != path or path in {WIKI_HUB + slug + "/" for slug in site_i18n.ENGLISH_ONLY}:
+        lang = "en"
+        alternates = [("en", canonical_path(path))]
+        slug = canonical_path(path).split("/")[-2]
+        title, description = REFERENCE[slug][0] + " | TgWitness", REFERENCE[slug][1]
     code = languages[lang][1]
     graph = [{"@type": "WebPage", "@id": canonical, "url": canonical, "name": title,
               "description": description, "inLanguage": code, "isPartOf": {"@id": base_url + "/#website"}}]
     if not path:
         graph.append({"@type": "WebSite", "@id": base_url + "/#website", "url": base_url + "/",
                       "name": "TgWitness", "inLanguage": "en"})
+    if software:
+        graph[0]["mainEntity"] = {"@id": base_url + "/#software"}
+        graph.append({"@type": "SoftwareSourceCode", "@id": base_url + "/#software", "name": "TgWitness",
+                      "url": base_url + "/", "codeRepository": software, "description": HOME_DESCRIPTION,
+                      "programmingLanguage": ["Python", "JavaScript"], "runtimePlatform": "Python 3.11+",
+                      "license": "https://spdx.org/licenses/MIT.html", "isAccessibleForFree": True,
+                      "author": {"@type": "Organization", "name": "PhishDestroy", "url": "https://phishdestroy.io/"}})
     if crumbs:
         graph.append({"@type": "BreadcrumbList", "itemListElement": [
             {"@type": "ListItem", "position": i + 1, "name": name, "item": base_url + "/" + url}
@@ -170,6 +214,9 @@ def seo(base_url, path, title, description, lang, alternates, *, crumbs=(), extr
                     f'href="{html.escape(base_url + "/" + other_path, quote=True)}">'
                     for other, other_path in alternates)
     links += f'<link rel="alternate" hreflang="x-default" href="{html.escape(base_url + "/" + alternates[0][1], quote=True)}">'
+    links += (f'<link rel="alternate" type="text/markdown" href="{html.escape(base_url + "/" + site_llms.markdown_path(path), quote=True)}">'
+              f'<link rel="describedby" href="{html.escape(base_url, quote=True)}/llms.txt" type="text/plain">'
+              f'<link rel="sitemap" type="application/xml" href="{html.escape(base_url, quote=True)}/sitemap.xml">')
     extra = links + '<script type="application/ld+json">' + json_script({"@context": "https://schema.org", "@graph": graph}) + '</script>'
     if extra_only:
         return extra
@@ -214,6 +261,8 @@ def inventory(root=ROOT):
     fragments = {"home": home_body((root / "website/index.html").read_text(encoding="utf-8")),
                  "intro": (root / "website/guide_intro.html").read_text(encoding="utf-8")}
     for slug in GUIDES:
+        if slug == "dedicated-account":
+            continue
         fragments["guide:" + slug] = (root / f"website/guides/en/{slug}.html").read_text(encoding="utf-8")
     diagrams = list(site_diagrams.WORDS)
     for slug, entry in REFERENCE.items():
@@ -252,10 +301,10 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
         "BASE_URL": base_url, "VERSION": version, "BRANCH": branch,
     }.items()}
     output = root / "dist/site"
-    # Never clean/copy a directory recursively: an unexpected file must block the
-    # upload rather than be carried into the public Pages artifact.
+
+
     expected = {*(path + "index.html" for path in PAGES), *SEARCH_FILES, *STATIC, ".nojekyll", "robots.txt", "sitemap.xml",
-                *DEMO_STATIC, *DEMO_PAGES, *DEMO_LOCALES, *DEMO_GUIDE_LOCALES, *MODES_PAGES}
+                *DEMO_STATIC, *DEMO_PAGES, *DEMO_LOCALES, *DEMO_GUIDE_LOCALES, *MODES_PAGES, *LLM_FILES}
     if output.resolve() != output:
         raise ValueError("Site output must not be a linked directory")
     if output.exists():
@@ -273,10 +322,17 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
             raise ValueError("Site input must be an ordinary repository file: " + relative_path)
         return source.read_bytes()
 
+    markdown_documents = {}
+
     def write(path, content):
         target = output / path
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(content.replace("\r\n", "\n"), encoding="utf-8", newline="\n")
+        if path in MARKDOWN_PAGES:
+            url = base_url + "/" + (path.removesuffix("index.html") if path.endswith("index.html") else path)
+            plain = site_llms.markdown(content, url)
+            markdown_documents[path] = plain
+            (output / MARKDOWN_PAGES[path]).write_text(plain, encoding="utf-8", newline="\n")
 
     translations = {}
     for lang in NOTICE_LANGUAGES:
@@ -285,7 +341,7 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
             continue
         path = root / f"website/i18n/{lang}.json"
         if path.exists():
-            read_public(f"website/i18n/{lang}.json")  # an ordinary file, not a link
+            read_public(f"website/i18n/{lang}.json")
         translations[lang] = site_i18n.load(root, lang)
     sources = {slug: site_wiki.split_title(read_public(entry[3]).decode("utf-8"))[1] for slug, entry in REFERENCE.items()}
     home_template = read_public("website/index.html").decode("utf-8")
@@ -293,14 +349,23 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
     intro_template = read_public("website/guide_intro.html").decode("utf-8")
     modes_template = read_public(site_modes.SOURCE).decode("utf-8")
     modes_english = site_modes.catalogue(read_public, "en")
-    fragments = {slug: read_public(f"website/guides/en/{slug}.html").decode("utf-8") for slug in GUIDES}
+    fragments = {slug: read_public(f"website/guides/en/{slug}.html").decode("utf-8")
+                 for slug in GUIDES if slug != "dedicated-account"}
+    account_template = read_public(site_account.SOURCE).decode("utf-8")
+    capture_instructions = {}
+    for code, source in CAPTURE_DOCS.items():
+        body = site_wiki.to_html(site_wiki.split_title(read_public(source).decode("utf-8"))[1])[0]
+        source_url = repo_url + "/blob/" + branch + "/" + source
+        # Relative source links still resolve correctly outside GitHub's Markdown renderer.
+        body = re.sub(r'href="([^"#][^"]*)"', lambda m: 'href="' + html.escape(
+            urljoin(source_url, html.unescape(m[1])), quote=True) + '"', body)
+        capture_instructions[code] = body
     script_keys = []
     for script in ("website/learn.js", "website/docs.js", "website/site.js"):
         script_keys += site_i18n.script_strings(read_public(script).decode("utf-8"))
     images = {}
 
-    # A language in the main selector must have the complete current documentation.
-    # Changed English text must be translated before it can be published under that language.
+
     inventory_strings, inventory_fragments, inventory_diagrams = inventory(root)
     required_strings = set(inventory_strings + inventory_diagrams)
     for lang in LANGS:
@@ -312,7 +377,7 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
             raise ValueError(f"Incomplete site labels: {lang}: {missing[0]}")
         for name, fragment in inventory_fragments.items():
             if name in {"reference:license", "reference:notice"}:
-                continue  # The dedicated notice checks below retain their specific diagnostics.
+                continue
             missing = [text for text in site_i18n.unit_texts(fragment)
                        if not data["blocks"].get(site_i18n.digest(text), "").strip()]
             if missing:
@@ -346,7 +411,7 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
         def localize(fragment, data=data):
             return site_i18n.localize(fragment, data)
 
-        # Reference pages: render once to learn every heading, then fix the links between them.
+
         rendered, missing_by_page, diagrams = {}, {}, 0
         page_ids = {} if full_site else dict(english_page_ids)
         for slug in page_slugs:
@@ -418,25 +483,34 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
                            "THEME_SCRIPT": THEME_SCRIPT, "SITE_DICT": json_script(dictionary), "ARROW": arrow}
 
         if full_site:
-            # Home page.
+
             body, _ = localize(home_body(home_template))
             home = home_template[:home_template.index("<body>") + len("<body>")] + body + home_template[home_template.index("</body>"):]
             write(base + "index.html", links(render(home, {
                 **values, **language_values, "ROOT": "" if not base else relative(base, ""), "TITLE": html.escape(t(HOME_TITLE), quote=True),
+                "GUIDE_ARCHIVE": relative(base, hub + "archive/"),
                 "DESCRIPTION": html.escape(t(HOME_DESCRIPTION), quote=True), "CANONICAL": html.escape(base_url + "/" + base, quote=True),
                 "OG_LOCALE": site_i18n.LANGUAGES[lang][3], "OG_DESCRIPTION": html.escape(t(HOME_OG), quote=True),
                 "OG_IMAGE_ALT": html.escape(t(HOME_IMAGE_ALT), quote=True),
                 "LANGUAGE_MENU": language_menu(base, ""), "THEME_TOGGLE": theme_toggle(),
-                "EXTRA_HEAD": seo(base_url, base, t(HOME_TITLE), t(HOME_DESCRIPTION), lang, alternates(""), extra_only=True)}), base))
+                "EXTRA_HEAD": seo(base_url, base, t(HOME_TITLE), t(HOME_DESCRIPTION), lang, alternates(""), extra_only=True, software=repo_url)}), base))
 
         texts = {}
 
         def guide_values(path):
-            return {**values, "ROOT": relative(path, ""),
+            return {**values, **language_values, "ROOT": relative(path, ""),
+                    "REF_HISTORY": relative(path, wiki_hub + "history/"),
                     **{"GUIDE_" + key.upper(): relative(path, (hub if full_site else "docs/") + key + "/") for key in GUIDES}}
         guide_html, guide_missing = {}, {}
+        account_page = site_account.translate(account_template, site_account.catalogue(read_public, lang)) if full_site else ""
         for slug in (GUIDES if full_site else ()):
-            translated, missing = localize(fragments[slug])
+            translated, missing = ((site_account.main_content(account_page), 0) if slug == "dedicated-account"
+                                   else localize(fragments[slug]))
+            if slug == "capture":
+                source_lang = lang if lang in CAPTURE_DOCS else "en"
+                translated += (f'<details class="detail-block"><summary>{labels["reference"]}</summary>'
+                               f'<div class="wiki-body" lang="{source_lang}" dir="ltr">'
+                               + capture_instructions[source_lang] + '</div></details>')
             guide_html[slug], guide_missing[slug] = translated, missing
             texts[hub + slug + "/"] = PlainText(render(translated, guide_values(hub + slug + "/"))).text
         for slug in page_slugs:
@@ -448,7 +522,8 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
              "keywords": modes_words["modes.title"], "text": PlainText(modes_html).text[:SEARCH_TEXT],
              "url": "../" + site_modes.LOCAL},
             *({"title": labels["wiki"] + " · " + reference[key][0], "description": reference[key][1],
-               "keywords": reference[key][2], "text": texts[f"{wiki_hub}{key}/"][:SEARCH_TEXT],
+               "keywords": reference[key][2] + (" " + REFERENCE[key][2] if lang != "en" else ""),
+               "text": texts[f"{wiki_hub}{key}/"][:SEARCH_TEXT],
                "url": "reference/" + key + "/"} for key in page_slugs)]}
         write(hub + "search.json", json.dumps(search, ensure_ascii=False, separators=(",", ":")))
 
@@ -494,7 +569,13 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
                        "HEAD": seo(base_url, path, title + " | TgWitness", description, lang, alternates(local), crumbs=crumbs, languages=page_languages(local)),
                        "BREADCRUMBS": breadcrumb, "NOTICE": notice, "CONTENT": content, "CONTENTS": toc_html,
                        "GUIDE_FOOTER": footer}
-            write(path + "index.html", links(render(doc_template, context), path))
+            result = render(doc_template, context)
+            if local == "docs/capture/":
+                assets = relative(path, "")
+                extra = ''.join(f'<link rel="stylesheet" href="{assets}{name}">' for name in ("sealed.css", "sealed-story.css", "capture-site.css"))
+                extra += ''.join(f'<script defer src="{assets}{name}"></script>' for name in ("capture-locales.js", "sealed-story.js", "sealed.js"))
+                result = result.replace('</head>', extra + '</head>')
+            write(path + "index.html", links(result, path))
 
         def card(path, url, number, title, text):
             return (f'<a class="guide-card" href="{relative(path, url)}"><span class="card-number">{number} '
@@ -508,7 +589,7 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
             return ""
 
         if full_site:
-            # Documentation hub: guides, then the reference.
+
             intro, intro_missing = localize(intro_template)
             content = (f'<p class="eyebrow">TGWITNESS / {labels["docs"].upper()}</p><h1>{labels["title"]}</h1>'
                        f'<p class="guide-outcome">{labels["intro"]}</p>' + render(intro, guide_values(hub)))
@@ -531,6 +612,13 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
             for slug in GUIDES:
                 path = hub + slug + "/"
                 title, description = guides[slug][:2]
+                if slug == "dedicated-account":
+                    head = seo(base_url, path, title + " | TgWitness", description, lang,
+                               alternates("docs/dedicated-account/"))
+                    write(path + "index.html", site_account.render_page(
+                        account_page, lang=lang, path=path, relative=relative, relative_file=relative_file,
+                        head=head, docs_label=labels["docs"]))
+                    continue
                 guide = render(guide_html[slug], guide_values(path))
                 content = f'<p class="eyebrow">{labels["docs"]} / {list(GUIDES).index(slug) + 1:02d}</p><h1>{title}</h1>' + guide
                 next_slug = NEXT[slug]
@@ -541,7 +629,7 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
                 page(f"docs/{slug}/", title, description, [(labels["home"], base), (labels["docs"], hub), (title, path)],
                      content, headings(content), footer, notice(guide_missing[slug]))
 
-            # Reference hub and pages.
+
             content = (f'<p class="eyebrow">TGWITNESS / {labels["wiki"].upper()}</p><h1>{labels["wiki_title"]}</h1>'
                        f'<p class="guide-outcome">{labels["wiki_intro"]}</p>')
             number = 0
@@ -563,8 +651,8 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
                        f'<p class="guide-outcome">{html.escape(description)}</p>'
                        f'<div class="wiki-body"{" lang=en dir=ltr" if english and lang != "en" else ""}>{rendered[slug]}</div>')
             following = order[(index + 1) % len(order)]
-            # /edit/, not /blob/: the document-link rewriter keeps /blob/ links on the site,
-            # which would turn "Edit this page on GitHub" into a link to this same page.
+
+
             footer = (f'<a class="reference" href="{values["REPO_URL"]}/edit/{values["BRANCH"]}/{source}">{labels["source"]} ↗</a>'
                       f'<a class="next-guide" href="{relative(path, wiki_hub + following + "/")}"><span>{labels["next"]}</span>'
                       f'<strong>{reference[following][0]} {arrow}</strong></a>')
@@ -583,6 +671,10 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
         destination.parent.mkdir(parents=True, exist_ok=True)
         destination.write_bytes(read_public(source))
     build_demo(read_public, write)
+    llms_index = site_llms.index(base_url, repo_url, branch, version, GUIDES, REFERENCE)
+    write("llms.txt", llms_index)
+    write("llms-full.txt", site_llms.full(llms_index, [markdown_documents[path + "index.html"] for path in LOCAL_PAGES]
+                                        + [markdown_documents[site_modes.LOCAL]]))
     (output / ".nojekyll").write_text("", encoding="utf-8")
     (output / "robots.txt").write_text("User-agent: *\nAllow: /\nSitemap: " + base_url + "/sitemap.xml\n", encoding="utf-8")
     (output / "sitemap.xml").write_text(
@@ -590,8 +682,9 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
         + ''.join('<url><loc>' + html.escape(base_url + '/' + prefix(lang) + local) + '</loc>' + ''.join(
             f'<xhtml:link rel="alternate" hreflang="{page_languages(local)[other][1]}" '
-            f'href="{html.escape(base_url + "/" + prefix(other) + local)}"/>' for other in page_languages(local)) + '</url>\n'
-            for lang, local in PAGE_LOCALES)
+            f'href="{html.escape(base_url + "/" + prefix(other) + local)}"/>' for other in page_languages(local)
+            if canonical_path(prefix(other) + local) == prefix(other) + local) + '</url>\n'
+            for lang, local in PAGE_LOCALES if canonical_path(prefix(lang) + local) == prefix(lang) + local)
         + ''.join('<url><loc>' + html.escape(base_url + '/' + path) + '</loc>' + ''.join(
             f'<xhtml:link rel="alternate" hreflang="{site_modes.LANGUAGES[other][1]}" '
             f'href="{html.escape(base_url + "/" + ("" if other == "en" else other + "/") + site_modes.LOCAL)}"/>'
@@ -600,9 +693,7 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
     return output
 
 
-# An explicit ?lang= link takes precedence over the saved choice, then the browser's
-# languages. Written before the deferred scripts.
-def demo_language_script(languages, folder):
+def demo_language_script(languages, folder, revision=""):
     return ("<script>(function(){var known=" + json.dumps(list(languages)) + ","
             "saved=(document.cookie.match(/(?:^|; )tgwitness-lang=([^;]+)/)||[])[1];"
             "try{saved=saved&&decodeURIComponent(saved)}catch(e){saved=''}"
@@ -613,11 +704,19 @@ def demo_language_script(languages, folder):
             "var asked=new URLSearchParams(location.search).get('lang'),"
             "browser=navigator.languages||[navigator.language||'en'],"
             "pick=[asked,saved].concat(browser).map(match).find(Boolean)||'en';"
-            "document.write('<script src=\"" + folder + "/'+pick+'.js\"><\\/script>');})();</script>")
+            "document.write('<script src=\"" + folder + "/'+pick+'.js?v=" + revision + "\"><\\/script>');})();</script>")
+
+
+def redirect_page(target, root):
+    return (f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+            f'<title>TgWitness</title><script defer src="{root}site-redirect.js"></script></head>'
+            f'<body data-site-root="{root}" data-site-target="{target}"><a href="{root}{target}">TgWitness</a></body></html>')
 
 
 def build_demo(read_public, write):
     """Panel pages with relative paths, the request answering script and one dictionary per language."""
+    revision = hashlib.sha256(b"".join(read_public(path) for path in
+        (*DEMO_DICTIONARIES, *GUIDE_DICTIONARIES))).hexdigest()[:16]
     for target, source in DEMO_PAGES.items():
         page = read_public(source).decode("utf-8").replace('href="/"', 'href="../"')
         page = re.sub(r'\b(src|href)="/(?=[A-Za-z])', r'\1="', page)
@@ -626,8 +725,8 @@ def build_demo(read_public, write):
                            else '<script src="guide-locale.js" data-scope="panel"></script>')
         if original_loader not in page:
             raise ValueError("Demo page no longer loads locale.js where expected: " + source)
-        answering = '<script src="mock.js"></script>' if target == "demo/index.html" else ""
-        loader = demo_language_script(site_modes.LANGUAGES if guide else LANGS, "guide-locales" if guide else "locales")
+        answering = '<script src="mock.js?v=handoff1"></script>' if target == "demo/index.html" else ""
+        loader = demo_language_script(site_modes.LANGUAGES if guide else LANGS, "guide-locales" if guide else "locales", revision)
         page = page.replace(original_loader, answering + loader)
         page = page.replace("<head>", '<head>\n<meta name="robots" content="noindex">', 1)
         write(target, page)

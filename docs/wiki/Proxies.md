@@ -15,6 +15,7 @@
 - [Choose a route](#choose-a-route)
 - [Save and test](#save-and-test)
 - [Public lists](#public-lists)
+- [Pool dashboard and custom sources](#pool-dashboard-and-custom-sources)
 - [Other network traffic](#other-network-traffic)
 
 </details>
@@ -62,7 +63,7 @@ Direct fallback depends on the selected IP mode. A successful transport test is 
 
 ## Public lists
 
-A snapshot from four public sources is bundled. The active pool refreshes lists and
+A snapshot from six public sources is bundled. The active pool refreshes lists and
 checks transport in the background; failed downloads keep the last usable entries.
 **Update public lists** requests a refresh without rewriting a manual route.
 
@@ -74,6 +75,33 @@ different entries do not guarantee different exit addresses.
 Open **Where the list comes from** for providers, saved dates and download-route information. Public availability changes; an entry is not an endorsement or a promise that the server is reachable.
 
 An operator can provide a local catalog using `TGWITNESS_PROXY_CATALOG`. Feed downloads can use `TGWITNESS_PROXY_FEED_PROXY`. These are separate from the account's Telegram route.
+
+## Pool dashboard and custom sources
+
+**Account → Settings → Connection settings → Proxy servers** shows servers, measured ping, check status,
+country when available, source and workspace usage. Filter the table and press
+**Use** to save an entry for the selected workspace. Pause observation first.
+
+Under **Lists and sources**, the administrator can disable bundled lists, add HTTPS
+list URLs, upload files or paste proxy links. These sources belong to the whole
+installation, so a list added once is available in every workspace. Individual
+routes remain separate. Unsupported Fake TLS entries are skipped.
+
+An optional GitHub token enables authenticated downloads and code search for more
+lists during refresh. It is stored encrypted and sent only to HTTPS GitHub hosts.
+Country lookup is optional; it sends proxy server IPs to a geolocation service
+through the configured outside route. Ping and country are observations, not trust
+ratings. **Check all now** updates results without changing a saved manual route.
+
+**Countries** sets preferred and avoided countries for the automatic route. Servers in
+preferred countries are tried first. Servers identified as being in avoided countries are
+excluded; servers whose country is unknown remain eligible unless **Use only servers in
+preferred countries** is selected. With that option, a workspace waits rather than use
+another country or a server whose country is unknown. A workspace keeps a working server;
+the choice applies when it picks the next one, and each change is recorded in the journal.
+
+The dashboard shows how often lists are downloaded and servers checked; **Open Parameters**
+leads to these intervals under **Parameters → Automatic MTProxy** of the main workspace.
 
 ## Other network traffic
 

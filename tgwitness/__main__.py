@@ -11,7 +11,7 @@ def should_open_browser(host, no_browser, environ=os.environ, interactive=None):
     """Only a person starting the panel on this computer gets a browser tab: never in Docker,
     services, scheduled tasks or scripts, and never for an address reachable from elsewhere."""
     if interactive is None:
-        # Windowless starts (pythonw, scheduled tasks) have no console streams at all.
+
         interactive = all(stream is not None and getattr(stream, "isatty", lambda: False)()
                           for stream in (sys.stdin, sys.stdout))
     return interactive and host in LOOPBACK and not no_browser and not environ.get("TGWITNESS_NO_BROWSER")
@@ -36,6 +36,19 @@ def open_when_ready(url, host, port, token_file=None, timeout=60):
         print("Panel token:", token_file.read_text(encoding="utf-8").strip(), flush=True)
     webbrowser.open(url)
     return True
+
+
+def banner(demo, stream=None):
+    """A framed heading for a person starting the panel at a terminal; plain "TgWitness" otherwise."""
+    from . import __version__
+    stream = stream or sys.stdout
+    if not (stream and getattr(stream, "isatty", lambda: False)()):
+        print("TgWitness")
+        return
+    from .verify import Console
+    console = Console(stream, color=not os.environ.get("NO_COLOR"))
+    console.banner("TgWitness " + __version__ + ("  · demo" if demo else ""),
+                   "Telegram evidence workspace · signed · self-hosted")
 
 
 def main():
@@ -63,8 +76,9 @@ def main():
     import uvicorn
     from .app import create_app
     from .logging_config import server_logging
-    print("TgWitness")
-    host = "127.0.0.1" if args.host == "0.0.0.0" else "[" + args.host + "]" if ":" in args.host else args.host
+    from .middleware import KEEP_ALIVE_SECONDS
+    banner(args.demo)
+    host ="127.0.0.1" if args.host == "0.0.0.0" else "[" + args.host + "]" if ":" in args.host else args.host
     url = "http://" + host + ":" + str(args.port)
     print("Panel: " + url)
     print("Data directory:", root)
@@ -79,7 +93,8 @@ def main():
         threading.Thread(target=open_when_ready, daemon=True,
                          args=(url, args.host, args.port, None if args.demo else root / "panel-token.txt")).start()
     uvicorn.run(create_app(root, demo=args.demo), host=args.host, port=args.port, workers=1,
-                access_log=False, log_level="info", log_config=server_logging(root))
+                access_log=False, log_level="info", log_config=server_logging(root),
+                timeout_keep_alive=KEEP_ALIVE_SECONDS)
 
 
 if __name__ == "__main__":

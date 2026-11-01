@@ -1,6 +1,9 @@
 """Explicit public guide and reference inventory. No runtime application dependency."""
 
 GUIDES = {
+    "archive": ("Work the archive", "Load history, search saved records, review AI sources and connect your tools.", "archive history search AI MCP OCR transcription webhooks reports integrations", "docs/ANALYSIS.md"),
+    "capture": ("GitHub Actions capture", "Export one Telegram chat on a temporary GitHub runner.", "github actions capture encrypted archive", "docs/SEALED-ACTIONS.md"),
+    "dedicated-account": ("Dedicated account", "Prepare a separate Telegram account for collection.", "dedicated telegram account session api login", "docs/ACCOUNTS.md"),
     "start": ("Start in minutes", "Try TgWitness with sample data, then launch your own Telegram observation workspace on Windows, Linux or macOS.", "demo install setup windows linux macos python", "docs/QUICKSTART.md"),
     "accounts": ("Connect an account", "Connect Telegram by QR code, phone number or session import. Choose sources and check that new messages reach your journal.", "qr phone session tdata api id hash account sources", "docs/ACCOUNTS.md"),
     "proxies": ("Choose a proxy", "Maintain automatic MTProxy routes or use your own proxy. Choose IP modes, fallback rules and the route for external requests.", "mtproto mtproxy socks5 http automatic pool IP modes fallback network public lists", "docs/CONNECTION-SECURITY.md"),
@@ -15,13 +18,18 @@ GUIDES = {
 }
 
 GROUPS = (
-    ("First steps", "Your first captured message", ("start", "accounts", "proxies", "exports")),
+    ("First steps", "Your first captured message", ("start", "dedicated-account", "accounts", "proxies", "exports", "capture")),
     ("Understand the evidence", "Learn by trying it", ("concepts", "cases", "security")),
-    ("Go further", "Add only what you need", ("access", "witness", "server", "troubleshooting")),
+    ("Go further", "Add only what you need", ("archive", "access", "witness", "server", "troubleshooting")),
 )
 
-# The full reference, rendered from the repository's Markdown: slug -> (title, description, keywords, source).
+
 REFERENCE = {
+    "history": ("Load source history", "Load past messages from enabled sources, pause and resume, and verify a signed progress report.", "history acquisition sources pause resume progress report", "docs/HISTORY.md"),
+    "analysis": ("Archive analysis", "Search saved messages, review AI inputs and keep analytical reports with their source references.", "analysis AI Ollama sources citations reports review", "docs/ANALYSIS.md"),
+    "mcp": ("Read-only MCP", "Connect an MCP client to selected workspaces and chats with expiring, revocable access.", "MCP integrations stdio Streamable HTTP VS Code token scope", "docs/MCP.md"),
+    "media-analysis": ("Local OCR and transcription", "Recognize captured images and audio with a local worker; keep derived text linked to its source file.", "OCR transcription Tesseract Whisper Docker media attachment", "docs/MEDIA-ANALYSIS.md"),
+    "webhooks": ("Outgoing webhooks", "Send scoped events to HTTPS receivers with HMAC signatures, retries and delivery status.", "webhooks HMAC n8n SIEM integrations notifications retries", "docs/WEBHOOKS.md"),
     "notice": ("Operator incompatibility notice", "Our operator notice on Taylor Wessing and its source record.", "notice operator incompatibility Taylor Wessing statement licence", "docs/OPERATOR-INCOMPATIBILITY.md"),
     "license": ("Licence and architectural incompatibility notice", "TgWitness is MIT-licensed for everyone, and why it is architecturally incompatible with the Taylor Wessing workflow.", "license licence MIT Taylor Wessing position statement", "docs/TAYLOR-WESSING-EXCLUSION.md"),
     "quickstart": ("Quick start", "Every way to install and launch TgWitness: Windows package, Python, Docker and the synthetic demo, with first checks.", "install launch windows linux macos docker demo setup", "docs/QUICKSTART.md"),
@@ -45,7 +53,8 @@ REFERENCE = {
 
 REFERENCE_GROUPS = (
     ("Set up", ("quickstart", "accounts", "access", "connection", "deployment")),
-    ("Collect", ("collection", "operations", "investigation", "features")),
+    ("Collect", ("collection", "history", "operations", "investigation", "features")),
+    ("Archive & integrations", ("analysis", "mcp", "media-analysis", "webhooks")),
     ("Evidence", ("how-it-works", "evidence", "witness", "timestamp")),
     ("Security & project", ("security", "architecture", "verification", "license", "notice", "changelog")),
 )
@@ -67,6 +76,6 @@ LABELS = {
     "wiki_intro": "Every document of the project, rendered here with its diagrams. The guides are the short path; these pages hold every detail.",
 }
 
-NEXT = {"start": "accounts", "accounts": "exports", "access": "security", "proxies": "accounts", "exports": "concepts",
+NEXT = {"archive": "exports", "capture": "exports", "dedicated-account": "accounts", "start": "accounts", "accounts": "exports", "access": "security", "proxies": "accounts", "exports": "concepts",
         "concepts": "cases", "cases": "security", "security": "start", "witness": "server",
         "server": "troubleshooting", "troubleshooting": "start"}

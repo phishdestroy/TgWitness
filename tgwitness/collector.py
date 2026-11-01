@@ -13,6 +13,9 @@ from collections import deque
 
 from telethon import events, utils
 from telethon.errors import SessionPasswordNeededError, FloodWaitError, InvalidBufferError, RPCError
+from telethon.errors import FileReferenceExpiredError
+from telethon.errors import (AuthKeyDuplicatedError, AuthKeyInvalidError, AuthKeyUnregisteredError,
+                             SessionExpiredError, SessionRevokedError)
 from telethon.extensions import BinaryReader
 from telethon.sessions import StringSession
 from telethon.tl import functions, types
@@ -23,7 +26,9 @@ from . import keyboard
 from . import message_content
 from . import replica
 from . import tuning
-from .account_import import validate_string
+from .history import History
+from .account_import import session_key, validate_string
+from .avatar_history import AvatarHistory
 from .telegram_client import WitnessClient
 from .workers import complete_in_thread
 from .store import canonical, utcnow
@@ -35,12 +40,19 @@ from .monitoring import capture_settings, media_kind, monitoring_settings
 from .scope import allowed, folder_rule, in_folder, kind_of, recheck_settings, scope_settings
 from .verify import fingerprint
 
-# Recheck intervals (priority / other sources) are settings with defaults in scope.RECHECK_DEFAULTS;
-# limits and pace (dialogs, rechecks, downloads, heartbeats, client timeouts) are panel parameters
-# in tuning.PARAMETERS.
+
 STORAGE_RECHECK_SECONDS = 30
-# Automatic MTProxy routes: transport failures that move an account to another proxy
-# (thresholds are the "proxies" parameters).
+SMALL_MEDIA_BYTES = 2 * 1024**2
+
+
+class AuthorizationRequired(ValueError):
+    """The saved account session was rejected, not merely disconnected."""
+
+
+AUTHORIZATION_ERRORS = (AuthorizationRequired, AuthKeyDuplicatedError, AuthKeyInvalidError,
+                        AuthKeyUnregisteredError, SessionExpiredError, SessionRevokedError)
+
+
 ROUTE_ERRORS = (OSError, TimeoutError, asyncio.IncompleteReadError, InvalidBufferError)
 EXPOSURE_MEANING = {
     "hide": "Telegram is contacted only through a proxy; requests outside Telegram only through a proxy set for them.",
@@ -53,9 +65,52 @@ MEMBERSHIP_ACTIONS = (types.MessageActionChatAddUser, types.MessageActionChatDel
                       types.MessageActionChatJoinedByLink, types.MessageActionChatJoinedByRequest)
 
 
+def connection_change(call):
+    """An export and an account change must never own the same connection."""
+    @wraps(call)
+    async def guarded(self, *args, **kwargs):
+        if self.export_busy() or self.export_claim:
+            raise ValueError("An export is using this account. Wait for it or cancel it before changing its connection.")
+        previous, current = self.connection_change_task, asyncio.current_task()
+        if previous is not None and previous is not current:
+            raise ValueError("This account's connection is already being changed. Wait for it to finish.")
+        self.connection_change_task = current
+        try:
+            return await call(self, *args, **kwargs)
+        finally:
+            self.connection_change_task = previous
+    return guarded
+
+
 def recovered_source(update):
     """Telethon hands over messages fetched through getDifference (after a gap or restart) with pts=0."""
     return "update_recovery" if getattr(update, "pts", None) == 0 else None
+
+
+def media_priority(message, size):
+    ttl = (getattr(message, "ttl_period", None), getattr(message.media, "ttl_seconds", None))
+    if any(isinstance(value, int) and value > 0 for value in ttl):
+        return 0
+    return 1 if isinstance(size, int) and 0 <= size <= SMALL_MEDIA_BYTES else 10
+
+
+def attachment_identity(message):
+    attachment = getattr(message, "photo", None) or getattr(message, "document", None)
+    if isinstance(attachment, (types.Photo, types.Document)):
+        return type(attachment).__name__, attachment.id
+    return None
+
+
+def downloadable_media(message):
+    # A web preview may contain both a photo and a document. Use the file whose size was checked.
+    if isinstance(message.media, types.MessageMediaWebPage):
+        return message.photo or message.document
+    return message.media
+
+
+def file_digest(path):
+    with path.open("rb") as stream:
+        return hashlib.file_digest(stream, "sha256").hexdigest()
 
 
 def plain(value):
@@ -66,8 +121,8 @@ def plain(value):
     if hasattr(value, "to_dict"):
         return plain(value.to_dict())
     if isinstance(value, dict):
-        # Telegram access hashes/file references are preserved as source metadata,
-        # but authorization sessions and API credentials never enter this function.
+
+
         return {str(k): plain(v) for k, v in value.items()}
     if isinstance(value, (list, tuple)):
         return [plain(v) for v in value]
@@ -155,25 +210,31 @@ class Collector:
         self.pending_credentials = None
         self.pending_account_id = None
         self.pending_key_origin = None
-        self.pinned_proxy = None  # (name, checked address) of a listed proxy, see pin_proxy
+        self.pinned_proxy = None
         self.qr_task = None
         self.qr_state = None
         self.export_task = None
         self.export_state = None
         self.export_path = None
-        self.export_claim = None  # ID of a multi-account export using this account
+        self.export_claim = None
+        self.connection_change_task = None
         self.people = {}
         self.avatar_lock = asyncio.Lock()
         self.avatar_failures = {}
+        self.avatar_history = AvatarHistory(store, lambda: self.client)
         self.running = False
         self.phase = "offline"
         self.last_error = None
+        self.authorization_required = False
+        self.authorization_generation = 0
+        self.authorization_cleanup = None
         self.pending_phone = None
         self.phone_hash = None
         self.dialog_cache = {}
         self.watchdog = None
         self.media_wakeup = asyncio.Event()
         self.media_worker = None
+        self.urgent_media_worker = None
         self.last_heartbeat = None
         self.source_status = {}
         self.last_update_at = None
@@ -182,11 +243,11 @@ class Collector:
         self.account_guard = None
         self.reconnect_attempts = 0
         self.next_reconnect_at = 0
-        self.proxy_pool = None    # shared by the workspaces of one process; set by the app
-        self.auto_route = None    # (proxy id, pinned route) in automatic MTProxy mode
+        self.proxy_pool = None
+        self.auto_route = None
         self.route_drops = deque()
-        self.direct_fallback = False  # automatic mode connected directly (the IP mode allows it)
-        self.unavailable_since = None  # since when no listed proxy has answered
+        self.direct_fallback = False
+        self.unavailable_since = None
         self.pool_retry_at = 0
         self.target_ids = set()
         self.known_ids = set()
@@ -205,6 +266,7 @@ class Collector:
         self.buffer_overflow = False
         self.buffer_limit = tuning.BY_KEY["startup_buffer"].default
         self.storage_low = False
+        self.history = History(self)
 
     def status(self):
         credentials = self.vault.read("credentials")
@@ -213,6 +275,7 @@ class Collector:
             "phase": self.phase, "running": self.running,
             "connected": bool(self.client and self.client.is_connected()),
             "has_session": bool(credentials.get("session")),
+            "authorization_required": self.authorization_required,
             "has_api_credentials": bool(credentials.get("api_id") and credentials.get("api_hash")),
             "builtin_api": credentials.get("api_id") is None or credentials.get("api_id") in api_pool.POOL_IDS,
             "api_pool_size": len(api_pool.POOL) - len(api_pool.rejected),
@@ -222,7 +285,7 @@ class Collector:
                                  if s in ("queued", "running", "retry")),
             "media_jobs": self.store.media_stats(),
             "oldest_pending_media_at": self.store.media_oldest(),
-            "source_status": self.source_status,
+            "source_status": self.source_status_view(),
             "last_update_at": self.last_update_at,
             "max_handler_ms": round(self.max_handler_ms, 2),
             "rpc_backoff_until": self.store.get_setting("rpc_backoff_until", 0),
@@ -238,6 +301,44 @@ class Collector:
             "scope": scope_settings(self.store),
             "update_state_resumed_from": self.resumed_state_at,
         }
+
+    def handle_authorization_error(self, exc, operation, *, client=None):
+        """Invalidate only rejected saved authorization, before callers turn RPC errors into results.
+
+        Cleanup runs separately: an RPC can fail inside any observation worker, and two workers
+        must not cancel or await each other while reporting the same account-wide failure.
+        """
+        if not isinstance(exc, AUTHORIZATION_ERRORS):
+            return False
+        if client is not None and client is not self.client:
+            # A late result from an old connection must not invalidate a replacement session.
+            return True
+        self.authorization_generation += 1
+        first = not self.authorization_required
+        self.authorization_required, self.running, self.buffering = True, False, False
+        self.buffered = []
+        self.phase, self.last_error = "authorization_required", type(exc).__name__
+        if first:
+            self.note("coverage.gap", {"reason": "authorization_required", "operation": operation,
+                                      "error_type": type(exc).__name__, "saved_records_retained": True})
+        if self.authorization_cleanup is None or self.authorization_cleanup.done():
+            self.authorization_cleanup = asyncio.create_task(self.cleanup_rejected_authorization(self.client))
+        return True
+
+    async def wait_authorization_cleanup(self):
+        task = self.authorization_cleanup
+        if task is not None and task is not asyncio.current_task():
+            await asyncio.shield(task)
+
+    async def cleanup_rejected_authorization(self, client):
+        try:
+            await self.cancel_workers()
+            await self.history.pause("authorization_required")
+            await self.avatar_history.close()
+            if client is not None:
+                await client.disconnect()
+        except Exception as exc:
+            self.note("collector.error", {"operation": "authorization cleanup", "error_type": type(exc).__name__})
 
     def param(self, key):
         return tuning.value(self.store, key)
@@ -263,14 +364,14 @@ class Collector:
         if scope["mode"] == "selected" or chat_id in scope["exclude"]:
             return False
         if chat_id in self.known_ids or chat_id in self.scope_rejected:
-            return False  # a source the operator paused, or a chat these rules already declined
+            return False
         entry = self.dialog_cache.get(chat_id) or {}
         entity = entry.get("entity") or entity
         if entity is None:
             entity = await self.lookup_entity(chat_id)
         kind = entry.get("kind") or kind_of(entity)
         if kind is None:
-            return False  # not identified (lookup failed): a later update that carries the chat decides
+            return False
         rule = self.folder_for(scope)
         if not allowed(scope, kind) or (scope["mode"] == "folder" and (
                 rule is None or not in_folder(rule, chat_id, kind, entity, entry.get("archived", False)))):
@@ -280,12 +381,16 @@ class Collector:
         return True
 
     async def lookup_entity(self, chat_id):
-        get_entity = getattr(self.client, "get_entity", None)
+        client = self.client
+        get_entity = getattr(client, "get_entity", None)
         if not get_entity:
             return None
         try:
-            # Telethon answers from the entities that arrived with the update when it can.
+
             return await asyncio.wait_for(get_entity(chat_id), 10)
+        except AUTHORIZATION_ERRORS as exc:
+            self.handle_authorization_error(exc, "chat lookup", client=client)
+            raise
         except Exception:
             return None
 
@@ -306,12 +411,13 @@ class Collector:
                                             "meaning": "Added automatically by the observation scope.",
                                             "visibility": "unknown", "role": "unknown"}
         if scope["new_chats"]["profile"] or scope["new_chats"]["history"]:
-            self.intake.put_nowait((chat_id, entity))  # profile and earlier messages, outside the update handler
+            self.intake.put_nowait((chat_id, entity))
 
     async def intake_loop(self):
         """New chats and bots: save their profile and the messages visible when they appeared."""
         while self.running:
             chat_id, entity = await self.intake.get()
+            client = self.client
             options = scope_settings(self.store)["new_chats"]
             while self.running and time.time() < self.store.get_setting("rpc_backoff_until", 0):
                 await asyncio.sleep(1)
@@ -331,6 +437,9 @@ class Collector:
                 self.store.append("telegram.backoff", {"operation": "new chat intake", "retry_after_seconds": exc.seconds})
                 self.intake.put_nowait((chat_id, entity))
             except Exception as exc:
+                if self.handle_authorization_error(exc, "new chat intake", client=client):
+                    self.intake.put_nowait((chat_id, entity))
+                    return
                 self.store.append("collector.error", {
                     "operation": "new chat intake", "error_type": type(exc).__name__,
                     "coverage": "messages of this chat are still recorded live; its profile or earlier "
@@ -364,11 +473,13 @@ class Collector:
             info["invite_link"] = invite
         if getattr(full, "bot_info", None) and not isinstance(entity, types.User):
             info["bots"] = [getattr(b, "user_id", None) for b in full.bot_info]
-        return self.store.append("source.profile", {
+        event = self.store.append("source.profile", {
             "title": utils.get_display_name(entity), "kind": kind_of(entity), "username": getattr(entity, "username", None),
             **info, "raw": plain(full),
             "meaning": "what Telegram returned to this account about the chat at this time; descriptions are mutable"},
             chat_id)
+        self.remember(entity, chat_id=chat_id)
+        return event
 
     async def save_profile(self, chat_id):
         """Panel action: save the current profile of a source now."""
@@ -411,7 +522,7 @@ class Collector:
                     elif rule.get("all") or chat_id in rule["include"] or chat_id in rule["exclude"]:
                         wanted = in_folder(rule, chat_id, target["kind"])
                     else:
-                        # Outside the enumerated dialogs its folder membership is unknown: it keeps its state.
+
                         wanted = bool(target["enabled"])
                     if bool(target["enabled"]) != wanted:
                         self.store.set_target(chat_id, target["title"], target["kind"], wanted)
@@ -437,30 +548,34 @@ class Collector:
         return {"added": len(added), "paused": len(paused), "resumed": len(resumed)}
 
     def make_client(self, api_id, api_hash, session=""):
-        device = api_pool.DESKTOP_DEVICE if api_id == api_pool.DESKTOP_ID else {}
+        device = api_pool.device_for(api_id)
         string_session = StringSession(session)
         self.resumed_state_at = self.load_update_state(string_session)
-        # catch_up makes Telethon resume from the update state loaded into the session
-        # (if any) and request what happened while this account was not connected.
+
+
         client = self.client_factory(string_session, api_id, api_hash,
                                      sequential_updates=True, flood_sleep_threshold=0,
                                      request_retries=self.param("telegram_request_retries"),
                                      connection_retries=self.param("telegram_connection_retries"),
                                      timeout=self.param("telegram_timeout_seconds"), catch_up=True,
                                      **device, **self.route_options())
+        def rpc_error(exc):
+            # Candidate logins and independent network probes do not own the saved session.
+            self.handle_authorization_error(exc, "Telegram RPC", client=client)
+        client.rpc_error_handler = rpc_error
         for handler, builder in ((self.on_new, events.NewMessage()),
                                  (self.on_edit, events.MessageEdited()),
                                  (self.on_delete, events.MessageDeleted()),
                                  (self.on_raw, events.Raw())):
             @wraps(handler)
             async def active_client_only(update, handler=handler):
-                # Login, probe and superseded clients must never contribute observations.
+
                 if client is not self.client:
                     return
                 if self.running:
                     await handler(update)
                 elif self.buffering:
-                    # Observation is starting: keep what arrives (catch-up included) until it is on.
+
                     if len(self.buffered) < self.buffer_limit:
                         self.buffered.append((handler, update))
                     else:
@@ -536,6 +651,7 @@ class Collector:
         if candidate and candidate is not self.client:
             await candidate.disconnect()
 
+    @connection_change
     async def sign_out(self):
         """End this workspace's Telegram session and forget it here. The journal, sources, settings and
         signing key stay; the workspace still belongs to its account, so only that account can connect again."""
@@ -545,6 +661,7 @@ class Collector:
         credentials = self.vault.read("credentials")
         if not credentials.get("session"):
             raise ValueError("No Telegram account is connected.")
+        await self.avatar_history.close()
         client, self.client = self.client, None
         ended, error = False, None
         try:
@@ -553,7 +670,7 @@ class Collector:
                 client = self.make_client(credentials["api_id"], credentials["api_hash"], credentials["session"])
             if not client.is_connected():
                 await self.connect_client(client)
-            # auth.logOut: Telegram ends the session, so it also disappears from the account's devices.
+
             ended = bool(await asyncio.wait_for(client.log_out(), 25))
         except Exception as exc:
             error = type(exc).__name__
@@ -565,6 +682,7 @@ class Collector:
         self.vault.save("credentials", {k: v for k, v in credentials.items() if k != "session"})
         self.dialog_cache = {}
         self.phase, self.last_error = "offline", None
+        self.authorization_required = False
         account = self.store.get_setting("account", None) or {}
         self.store.append("account.signed_out", {
             "account_id": account.get("id"), "telegram_session_ended": ended,
@@ -587,7 +705,7 @@ class Collector:
     def route_owner(self):
         return str(self.store.root)
 
-    # ---- IP mode and requests outside Telegram ----
+
     def route_policy(self):
         """This workspace's IP mode; a workspace that chose a direct route before the modes existed keeps it."""
         saved = self.store.get_setting("route_policy", None)
@@ -640,13 +758,13 @@ class Collector:
                 **policy.model_dump(), "outside_proxy": proxy.receipt() if proxy else None,
                 "outside_route": self.outside_route().kind, "meaning": EXPOSURE_MEANING[policy.exposure]})
         if policy.exposure == "hide" and self.direct_fallback:
-            # Hide IP: leave the direct connection at once; reconnecting waits for a listed proxy.
+
             self.direct_fallback = False
             if self.client:
                 await self.client.disconnect()
         return self.policy_state()
 
-    # ---- automatic MTProxy ----
+
     def share(self):
         return self.param("proxy_max_accounts")
 
@@ -692,7 +810,7 @@ class Collector:
 
     def use_direct(self, reason):
         self.pool_retry_at = time.time() + 120
-        self.pool().waiting.add(self.route_owner)  # the pool keeps checking proxies for this workspace
+        self.pool().waiting.add(self.route_owner)
         if self.direct_fallback:
             return
         self.direct_fallback, self.auto_route = True, None
@@ -711,7 +829,7 @@ class Collector:
         if self.auto_route:
             return
         if self.direct_fallback and time.time() < self.pool_retry_at:
-            return  # stays direct until the next look at the pool
+            return
         try:
             alias, route = await self.pool().acquire(
                 self.route_owner, preferred=self.store.get_setting("auto_route", None), share=self.share())
@@ -772,7 +890,7 @@ class Collector:
         where the IP mode allows, connect directly when none answers."""
         old = getattr(client, "route_id", None)
         if old == "direct" or (self.auto_route and self.auto_route[0] != old):
-            return  # a direct fallback is not rotated / another connection already moved the workspace
+            return
         cooldown = self.pool().degrade(old, type(exc).__name__ if exc else reason,
                                        self.param("proxy_cooldown_minutes") * 60,
                                        self.param("proxy_cooldown_max_hours") * 3600) if old else 0
@@ -804,11 +922,11 @@ class Collector:
         try:
             alias, route = await self.pool().acquire(self.route_owner, avoid={old}, share=self.share())
         except NoProxyAvailable:
-            self.pool().keep(self.route_owner, old)  # no other proxy answers: stay, ask again after the interval
+            self.pool().keep(self.route_owner, old)
             self.store.set_setting("auto_route_since", time.time())
             return
         self.record_route(alias, route, old, "planned")
-        await self.client.disconnect()  # the monitor reconnects through the new proxy
+        await self.client.disconnect()
 
     async def review_route(self):
         """Automatic mode while connected: leave a direct fallback once a listed proxy answers again,
@@ -817,7 +935,7 @@ class Collector:
             if time.time() >= self.pool_retry_at and (self.route_policy()["exposure"] == "hide"
                                                       or self.pool().available(self.route_owner, self.share())):
                 self.pool_retry_at = 0
-                await self.client.disconnect()  # reconnecting goes through ensure_route, a proxy first
+                await self.client.disconnect()
             return
         await self.planned_rotation()
 
@@ -834,8 +952,8 @@ class Collector:
             except RPCError:
                 raise
             except Exception as exc:
-                # Something that is not a working proxy can answer with garbage (ValueError, parse
-                # errors); that is a failed route, never a lost authorization.
+
+
                 proxied = automatic and getattr(client, "route_id", None) not in (None, "direct")
                 if proxied:
                     await self.rotate_route(client, "connect_failed", exc)
@@ -848,13 +966,14 @@ class Collector:
                     self.pool().succeeded(client.route_id)
                 return
 
+    @connection_change
     async def set_network(self, config):
         if self.running:
             raise ValueError("Pause observation before changing the Telegram route.")
         if config.kind == "direct" and self.route_policy()["exposure"] != "tunnel":
             raise ValueError("A direct route is allowed only in the mode for a server behind a tunnel or VPN. "
                              "Change the IP mode first.")
-        # Cancel pending login and discard clients so no old route can be reused.
+
         await self.cancel_login()
         if self.client:
             await self.client.disconnect()
@@ -869,12 +988,13 @@ class Collector:
             self.store.set_setting("resume", False)
             self.store.set_setting("auto_route", None)
             self.store.append("network.changed", config.receipt())
-        self.phase = "offline"
-        self.last_error = None
+        self.phase = "authorization_required" if self.authorization_required else "offline"
+        if not self.authorization_required:
+            self.last_error = None
         return config.public()
 
     async def test_network(self):
-        # A Telegram connection probe, with no account login or public IP lookup.
+
         credentials = self.vault.read("credentials")
         api_id, api_hash = ((credentials["api_id"], credentials["api_hash"]) if credentials.get("api_id")
                             else api_pool.login_order()[0])
@@ -896,10 +1016,13 @@ class Collector:
 
     def login_pairs(self, api_id, api_hash):
         """An entered, imported or own saved pair is used as is; otherwise rotate through the built-in pool."""
-        if api_id is None and api_hash is None:
-            saved = self.vault.read("credentials")
-            api_id, api_hash = saved.get("api_id"), saved.get("api_hash")
-        if api_id and api_hash and api_id not in api_pool.POOL_IDS:
+        if api_id is not None or api_hash is not None:
+            if not api_id or not api_hash:
+                raise ValueError("Supply both API credentials or leave both empty")
+            return [(api_id, api_hash)]
+        saved = self.vault.read("credentials")
+        api_id, api_hash = saved.get("api_id"), saved.get("api_hash")
+        if api_id and api_hash and (api_id, api_hash) not in api_pool.POOL:
             return [(api_id, api_hash)]
         return api_pool.login_order((api_id, api_hash) if api_id and api_hash else None)
 
@@ -909,9 +1032,10 @@ class Collector:
             try:
                 return await attempt(pair_id, pair_hash)
             except api_pool.PAIR_ERRORS:
-                api_pool.reject(pair_id)
+                if (pair_id, pair_hash) in api_pool.POOL:
+                    api_pool.reject(pair_id)
                 await self.cancel_login()
-                self.phase = "ready" if self.vault.read("credentials").get("session") else "offline"
+                self.phase = self.resting_phase()
                 if number == len(pairs):
                     raise
 
@@ -919,33 +1043,40 @@ class Collector:
         return await self.with_api_pair(api_id, api_hash, lambda pair_id, pair_hash:
                                         self.connect_login(pair_id, pair_hash, session, expected_user_id))
 
+    @connection_change
     async def connect_login(self, api_id, api_hash, session="", expected_user_id=None):
+        await self.wait_authorization_cleanup()
         if self.running:
             raise ValueError("Pause observation before changing accounts.")
         await self.cancel_login()
-        # A session brought from elsewhere connects only to its DC's reference address.
+
         session = validate_string(session) if session else ""
-        await self.ensure_route()
-        candidate = self.make_client(api_id, api_hash, session)
-        self.login_client = candidate
-        self.pending_credentials = {"api_id": api_id, "api_hash": api_hash}
-        self.pending_account_id = expected_user_id
-        # An imported key is also known outside this server; a sign-in creates one here.
-        self.pending_key_origin = "imported" if session else "created"
+        release = self.account_guard(None, self, key=session_key(session)) if session and self.account_guard else None
         try:
-            await self.connect_client(candidate)
-            is_authorized = await candidate.is_user_authorized()
-            if session and not is_authorized:
-                raise ValueError("This session is not authorized.")
-            if is_authorized:
-                await self.authorized()
-                return {"step": "authorized"}
-        except BaseException:
-            await self.cancel_login()
-            self.phase = "ready" if self.vault.read("credentials").get("session") else "offline"
-            raise
-        self.phase = "login_required"
-        return {"step": "phone"}
+            await self.ensure_route()
+            candidate = self.make_client(api_id, api_hash, session)
+            self.login_client = candidate
+            self.pending_credentials = {"api_id": api_id, "api_hash": api_hash}
+            self.pending_account_id = expected_user_id
+
+            self.pending_key_origin = "imported" if session else "created"
+            try:
+                await self.connect_client(candidate)
+                is_authorized = await candidate.is_user_authorized()
+                if session and not is_authorized:
+                    raise ValueError("This session is not authorized.")
+                if is_authorized:
+                    await self.authorized()
+                    return {"step": "authorized"}
+            except BaseException:
+                await self.cancel_login()
+                self.phase = self.resting_phase()
+                raise
+            self.phase = "login_required"
+            return {"step": "phone"}
+        finally:
+            if release:
+                release()
 
     async def start_phone(self, phone, api_id=None, api_hash=None):
         async def attempt(pair_id, pair_hash):
@@ -982,7 +1113,7 @@ class Collector:
                 except asyncio.CancelledError:
                     raise
                 except Exception as exc:
-                    # authorized() may already have cleaned up a rejected identity.
+
                     if self.qr_state is record or self.qr_state is None:
                         record["step"] = "expired" if isinstance(exc, TimeoutError) else "failed"
                         record["error"] = "QR code expired. Generate a new code." if isinstance(exc, TimeoutError) else (
@@ -991,11 +1122,11 @@ class Collector:
                     if self.login_client is candidate:
                         self.login_client = None
                         self.pending_credentials = self.pending_account_id = None
-                        self.phase = "ready" if self.vault.read("credentials").get("session") else "offline"
+                        self.phase = self.resting_phase()
                         await candidate.disconnect()
 
             self.qr_task = asyncio.create_task(wait_for_scan())
-            # Install Telethon's UpdateLoginToken listener before returning the code.
+
             await asyncio.sleep(0)
             return {**record, "url": qr.url}
         except BaseException:
@@ -1012,7 +1143,7 @@ class Collector:
             was_pending = self.login_client is not None
             await self.cancel_login()
             if was_pending:
-                self.phase = "ready" if self.vault.read("credentials").get("session") else "offline"
+                self.phase = self.resting_phase()
         return {"step": "cancelled"}
 
     async def send_code(self, phone):
@@ -1040,12 +1171,15 @@ class Collector:
         await self.authorized()
         return {"step": "authorized"}
 
+    @connection_change
     async def authorized(self):
+        await self.wait_authorization_cleanup()
         if self.running:
             raise ValueError("Pause observation before completing an account change.")
         candidate = self.login_client
         if not candidate:
             raise ValueError("Configure API credentials first.")
+        release = None
         try:
             me = await candidate.get_me()
             self.remember(me)
@@ -1057,11 +1191,14 @@ class Collector:
             if existing.get("id") is not None and existing["id"] != me.id:
                 raise ValueError("This journal belongs to a different Telegram account. Create another account workspace.")
             if self.account_guard:
-                self.account_guard(me.id, self)
+                release = self.account_guard(me.id, self)
             credentials = dict(self.pending_credentials)
             credentials["session"] = candidate.session.save()
+            await self.avatar_history.close()
             if self.client:
                 await self.client.disconnect()
+            # An old RPC may have failed while the candidate was being validated.
+            await self.wait_authorization_cleanup()
             self.vault.save("credentials", credentials)
             with self.store.transaction():
                 self.store.set_setting("account", {"id": me.id, "username": me.username,
@@ -1069,8 +1206,11 @@ class Collector:
                 self.store.append("account.authorized", {"account_id": me.id, "key_origin": self.pending_key_origin})
         except BaseException:
             await self.cancel_login()
-            self.phase = "ready" if self.vault.read("credentials").get("session") else "offline"
+            self.phase = self.resting_phase()
             raise
+        finally:
+            if release:
+                release()
         self.client = candidate
         self.login_client = None
         self.pending_credentials = None
@@ -1079,33 +1219,93 @@ class Collector:
             self.qr_state["step"] = "authorized"
         self.dialog_cache = {}
         self.pending_phone = self.phone_hash = None
+        self.authorization_required = False
         self.phase, self.last_error = "ready", None
 
+    def resting_phase(self):
+        if self.authorization_required:
+            return "authorization_required"
+        return "ready" if self.vault.read("credentials").get("session") else "offline"
+
     async def restore(self):
+        await self.wait_authorization_cleanup()
         credentials = self.vault.read("credentials")
         if not credentials.get("session"):
             raise ValueError("Connect a Telegram account first.")
-        if not self.client:
-            await self.ensure_route()
-            self.client = self.make_client(credentials["api_id"], credentials["api_hash"], credentials["session"])
-        if not self.client.is_connected():
-            await self.connect_client(self.client)
-        if not await self.client.is_user_authorized():
-            self.phase = "login_required"
-            raise ValueError("Telegram authorization expired. Sign in again.")
+        client = self.client
+        authorization_generation = self.authorization_generation
+        try:
+            if not client:
+                await self.ensure_route()
+                client = self.client = self.make_client(credentials["api_id"], credentials["api_hash"], credentials["session"])
+            if not client.is_connected():
+                await self.connect_client(client)
+            if not await client.is_user_authorized():
+                raise AuthorizationRequired("Telegram authorization expired. Sign in again.")
+            if self.authorization_required:
+                # Telethon may cache a positive authorization check. A known rejection needs
+                # a fresh Telegram RPC before the panel can consider this session usable again.
+                me = await client.get_me()
+                if me is None:
+                    raise AuthorizationRequired("Telegram authorization expired. Sign in again.")
+                existing = self.store.get_setting("account", {}) or {}
+                if existing.get("id") is not None and existing["id"] != me.id:
+                    raise ValueError("This journal belongs to a different Telegram account. Create another account workspace.")
+        except AUTHORIZATION_ERRORS as exc:
+            self.handle_authorization_error(exc, "restore", client=client)
+            raise
+        if client is self.client and self.authorization_required:
+            if authorization_generation != self.authorization_generation:
+                # A successful earlier RPC cannot erase a newer rejection on this connection.
+                raise AuthorizationRequired("Telegram authorization expired. Sign in again.")
+            self.authorization_required = False
+            self.phase, self.last_error = "observing" if self.running else "ready", None
+
+    def source_status_view(self):
+        ignored = set(self.store.get_setting("ignored_source_warnings", []))
+        enabled = {str(t["chat_id"]) for t in self.store.targets(True)}
+        return {chat: {**status, **({"ignored": True} if int(chat) in ignored
+                                  and status.get("state") == "access_unconfirmed" else {})}
+                for chat, status in self.source_status.items() if chat in enabled}
+
+    def refresh_source_visibility(self):
+        """Refresh only after completed dialog enumeration; an ignored source resets on positive sighting."""
+        targets = self.store.targets(True)
+        statuses = {}
+        with self.store.transaction():
+            ignored = set(self.store.get_setting("ignored_source_warnings", []))
+            resolved = self.store.get_setting("resolved_source_warnings", {})
+            returned = ignored.intersection(self.dialog_cache, (t["chat_id"] for t in targets))
+            for target in targets:
+                chat_id = target["chat_id"]
+                visible = chat_id in self.dialog_cache
+                statuses[str(chat_id)] = {
+                    "state": "visible_in_dialogs" if visible else "access_unconfirmed",
+                    "checked_at": utcnow(), "meaning": "Dialog visibility is not a guarantee of every update.",
+                    "visibility": self.dialog_cache.get(chat_id, {}).get("visibility", "unknown"),
+                    "role": self.dialog_cache.get(chat_id, {}).get("role", "unknown")}
+                if chat_id in returned:
+                    receipt = self.store.append("target.changed", {"title": target["title"], "enabled": True,
+                                                                   "ignore_unconfirmed": False,
+                                                                   "reason": "source visible in account dialogs"}, chat_id)
+                    resolved[str(chat_id)] = receipt["seq"]
+            if returned:
+                self.store.set_setting("ignored_source_warnings", sorted(ignored - returned))
+                self.store.set_setting("resolved_source_warnings", resolved)
+        self.source_status = statuses
 
     async def dialogs(self):
         await self.restore()
-        self.dialog_cache = {}
+        dialogs = {}
         count, limit = 0, self.param("dialog_limit")
-        # Fetching a dialog is not joining it. No invite acceptance is performed.
+
         async for dialog in self.client.iter_dialogs(limit=limit):
             count += 1
             entity = getattr(dialog, "entity", None)
             kind = kind_of(entity) or (
                 "supergroup" if getattr(entity, "megagroup", False) else "channel" if dialog.is_channel
                 else "group" if dialog.is_group else "bot" if getattr(entity, "bot", False) else "private")
-            self.dialog_cache[dialog.id] = {
+            dialogs[dialog.id] = {
                 "chat_id": dialog.id, "title": dialog.name, "kind": kind, "entity": entity,
                 "archived": getattr(dialog, "folder_id", None) == 1,
                 "visibility": "public_username" if getattr(entity, "username", None) else "private_or_unlisted",
@@ -1113,6 +1313,8 @@ class Collector:
                         else "administrator" if getattr(entity, "admin_rights", None) else "member_or_unknown",
             }
         await self.load_folders()
+        self.dialog_cache = dialogs
+        self.refresh_source_visibility()
         return {"dialogs": [{k: v for k, v in d.items() if k != "entity"}
                             for d in self.dialog_cache.values()],
                 "folders": [{"id": f["id"], "title": f["title"],
@@ -1124,12 +1326,16 @@ class Collector:
     async def load_folders(self):
         """The account's Telegram folders (dialog filters); empty when Telegram does not answer."""
         own = (self.store.get_setting("account", {}) or {}).get("id")
+        client = self.client
         try:
-            result = await asyncio.wait_for(self.client(functions.messages.GetDialogFiltersRequest()), 15)
+            result = await asyncio.wait_for(client(functions.messages.GetDialogFiltersRequest()), 15)
         except FloodWaitError:
             raise
+        except AUTHORIZATION_ERRORS as exc:
+            self.handle_authorization_error(exc, "dialog folders", client=client)
+            raise
         except Exception:
-            if not self.folders:  # after a restart: the folders read last time, so folder mode can still start
+            if not self.folders:
                 self.folders = {f["id"]: f for f in self.store.get_setting("folders_seen", [])}
             return
         filters = getattr(result, "filters", result) or []
@@ -1148,7 +1354,28 @@ class Collector:
     async def start(self):
         if self.running:
             return
-        if self.watchdog or self.media_worker or self.reconciler or self.intake_worker:
+        client = self.client
+        try:
+            await self.start_observation()
+        except BaseException as exc:
+            self.buffered, self.buffering = [], False
+            if self.running:
+                # Buffered handlers and catch-up can yield after running was set.
+                # A timeout there must not leave a collector without workers.
+                with suppress(Exception):
+                    await self.stop()
+                self.running = False
+                await self.cancel_workers()
+                await self.avatar_history.close()
+                if self.client and not (self.export_busy() or self.export_claim):
+                    with suppress(Exception):
+                        await self.client.disconnect()
+            if isinstance(exc, AUTHORIZATION_ERRORS):
+                self.handle_authorization_error(exc, "start observation", client=client)
+            raise
+
+    async def start_observation(self):
+        if self.watchdog or self.media_worker or self.urgent_media_worker or self.reconciler or self.intake_worker:
             await self.stop()
         if scope_settings(self.store)["mode"] == "selected" and not self.store.targets(True):
             raise ValueError("Select at least one group or channel first.")
@@ -1185,7 +1412,9 @@ class Collector:
         for handler, update in pending:
             await handler(update)
         self.watchdog = asyncio.create_task(self.supervise(self.monitor, "connection monitor"))
-        self.media_worker = asyncio.create_task(self.supervise(self.download_worker, "media worker"))
+        self.media_worker = asyncio.create_task(self.supervise(lambda: self.download_worker("bulk"), "media worker"))
+        self.urgent_media_worker = asyncio.create_task(
+            self.supervise(lambda: self.download_worker("urgent"), "urgent media worker"))
         self.reconciler = asyncio.create_task(self.supervise(self.recheck_loop, "recheck"))
         self.intake_worker = asyncio.create_task(self.supervise(self.intake_loop, "new chat intake"))
         catch_up = getattr(self.client, "catch_up", None)
@@ -1194,7 +1423,7 @@ class Collector:
 
     async def prepare_start(self):
         await self.restore()
-        # StringSession does not retain the entity cache between process restarts.
+
         await self.dialogs()
         await self.apply_scope(refresh=False)
         self.source_status = {}
@@ -1214,17 +1443,33 @@ class Collector:
             raise ValueError("None of the selected sources was visible in the account dialogs. Check membership and refresh.")
 
     async def supervise(self, work, name):
+        client = self.client
         try:
             await work()
         except asyncio.CancelledError:
             raise
         except Exception as exc:
+            if self.handle_authorization_error(exc, name, client=client):
+                return
             await self.failure(exc, name)
-            self.running, self.phase = False, "collector_error"
-            if self.client:
-                asyncio.create_task(self.client.disconnect())
+            self.running = False
+            if self.phase not in ("storage_error", "authorization_required"):
+                self.phase = "collector_error"
+            await self.cancel_workers()
+            await self.avatar_history.close()
+            if self.client and not (self.export_busy() or self.export_claim):
+                await self.client.disconnect()
+
+    async def cancel_workers(self):
+        tasks = (self.watchdog, self.media_worker, self.urgent_media_worker, self.reconciler, self.intake_worker)
+        tasks = tuple(task for task in tasks if task and task is not asyncio.current_task())
+        for task in tasks:
+            task.cancel()
+        await asyncio.gather(*tasks, return_exceptions=True)
 
     async def stop(self, shutdown=False):
+        await self.wait_authorization_cleanup()
+        await self.history.pause("process_shutdown" if shutdown else "observation_stopped")
         if shutdown and self.export_task:
             self.export_task.cancel()
             await asyncio.gather(self.export_task, return_exceptions=True)
@@ -1233,22 +1478,19 @@ class Collector:
             self.persist_update_state()
         self.running = False
         self.buffered, self.buffering = [], False
-        tasks = (self.watchdog, self.media_worker, self.reconciler, self.intake_worker)
-        for task in tasks:
-            if task:
-                task.cancel()
-        await asyncio.gather(*(t for t in tasks if t), return_exceptions=True)
-        self.watchdog = self.media_worker = self.reconciler = self.intake_worker = None
+        await self.cancel_workers()
+        self.watchdog = self.media_worker = self.urgent_media_worker = self.reconciler = self.intake_worker = None
+        await self.avatar_history.close()
         if not shutdown:
             self.store.set_setting("resume", False)
         if active:
             self.store.append("observation.stopped", {"reason": "shutdown" if shutdown else "operator",
                                                     "media_jobs_preserved": self.store.media_stats()})
             retain_checkpoint(self.store, self.vault)
-        # A running export shares this client; pausing observation must not cut it off.
+
         if self.client and (shutdown or not (self.export_busy() or self.export_claim)):
             await self.client.disconnect()
-        if shutdown and self.proxy_pool:  # a closed or deleted workspace no longer holds or waits for a proxy
+        if shutdown and self.proxy_pool:
             self.proxy_pool.release(self.route_owner)
             self.proxy_pool.waiting.discard(self.route_owner)
         await self.cancel_login()
@@ -1306,7 +1548,7 @@ class Collector:
         while self.route_drops and now - self.route_drops[0] > self.param("proxy_drop_window_minutes") * 60:
             self.route_drops.popleft()
         if len(self.route_drops) >= self.param("proxy_drop_limit"):
-            with suppress(NoProxyAvailable):  # reconnect() then records the failure and retries later
+            with suppress(NoProxyAvailable):
                 await self.rotate_route(self.client, "repeated_disconnect")
 
     async def reconnect(self):
@@ -1315,12 +1557,11 @@ class Collector:
             return
         self.reconnect_attempts += 1
         self.store.append("connection.retry", {"attempt": self.reconnect_attempts})
+        client = self.client
         try:
             await self.restore()
-        except ValueError:
-            self.phase, self.running = "authorization_required", False
-            self.store.append("coverage.gap", {"reason": "authorization_required"})
-            asyncio.create_task(self.client.disconnect())
+        except AUTHORIZATION_ERRORS as exc:
+            self.handle_authorization_error(exc, "reconnect", client=client)
         except FloodWaitError as exc:
             self.next_reconnect_at = now + exc.seconds
             self.store.set_setting("rpc_backoff_until", self.next_reconnect_at)
@@ -1340,26 +1581,31 @@ class Collector:
                 await catch_up()
             self.recheck_wakeup.set()
 
-    async def failure(self, exc, context):
+    async def failure(self, exc, context, *, client=None):
+        if self.handle_authorization_error(exc, context, client=client):
+            return
         self.last_error = type(exc).__name__
         try:
             self.store.append("collector.error", {"operation": context, "error_type": type(exc).__name__,
                                                  "coverage": "this update may not have been recorded"})
         except Exception:
             self.running, self.phase = False, "storage_error"
-            if self.client:
-                asyncio.create_task(self.client.disconnect())
+            await self.cancel_workers()
+            await self.avatar_history.close()
+            if self.client and not (self.export_busy() or self.export_claim):
+                await self.client.disconnect()
 
-    async def capture_message(self, message, kind, chat_id, update=None, source=None):
+    async def capture_message(self, message, kind, chat_id, update=None, source=None, history_run_id=None):
         started = time.perf_counter()
-        self.remember(getattr(message, "sender", None))
         payload = describe_message(message)
         payload["source"] = source or ("history_snapshot" if kind == "message.snapshot" else "live_update")
         payload["collector_account_id"] = (self.store.get_setting("account", {}) or {}).get("id")
         payload["run_id"] = self.run_id
+        if history_run_id is not None:
+            payload["history_run_id"] = history_run_id
         if update is not None:
             payload["transport_update"] = plain(update)
-        # Sender is not necessarily the editor, including channel/admin edits.
+
         if kind == "message.edited":
             payload["editor_id"] = None
             payload["editor_visibility"] = "not supplied by this update"
@@ -1367,8 +1613,8 @@ class Collector:
                 payload["editor_visibility"] = ("outgoing message: in private chats and groups only its author, "
                                                 "this account, can edit it; in channels other admins may edit posts")
         if payload["outgoing"] and payload["text"] and kind == "message.new":
-            # Only a newly sent message, and only a keyboard shown before it; snapshots, recovered
-            # messages and edits are not button presses.
+
+
             keyboard = self.store.latest_reply_keyboard(chat_id, self.param("keyboard_window"), message.id)
             if keyboard and payload["text"] in keyboard[1]:
                 payload["button_press"] = {
@@ -1383,7 +1629,8 @@ class Collector:
             media_type = media_kind(message) if message.file else None
             rule = settings["types"].get(media_type) if media_type else None
             if not settings["download_media"]:
-                media_skip = "media download disabled"
+                if settings["record_disabled_media"]:
+                    media_skip = "media download disabled"
             elif not message.file:
                 media_skip = "metadata-only media type; no downloadable file"
             elif not rule["enabled"]:
@@ -1392,16 +1639,20 @@ class Collector:
                 media_skip = "authorized account identity unavailable"
             else:
                 descriptor = bytes(message)
+                size = getattr(message.file, "size", None)
                 job = {"account_id": account["id"], "descriptor": descriptor,
-                       "max_bytes": rule["max_mb"] * 1024**2}
+                       "max_bytes": rule["max_mb"] * 1024**2,
+                       "priority": media_priority(message, size), "estimated_bytes": size}
                 payload["media_capture"] = {
                     "descriptor_sha256": hashlib.sha256(descriptor).hexdigest(),
                     "account_id": account["id"], "max_bytes": job["max_bytes"], "media_type": media_type,
+                    "priority": job["priority"], "estimated_bytes": size,
                     "policy": "original observed descriptor; never substitute a newer message"}
         event = self.store.append(kind, payload, chat_id, message.id,
                                   message.sender_id if kind in ("message.new", "message.recovered") else None,
                                   date_string(getattr(message, "edit_date", None) or message.date),
                                   media_job=job)
+        self.remember(getattr(message, "sender", None), chat_id=chat_id)
         if getattr(message, "action", None):
             self.store.append("membership.service" if isinstance(message.action, (
                 types.MessageActionChatAddUser, types.MessageActionChatDeleteUser,
@@ -1424,6 +1675,7 @@ class Collector:
         return bool(getattr(message, "out", False)) and not scope_settings(self.store)["own_actions"]
 
     async def on_new(self, event):
+        client = self.client
         if not (self.running and monitoring_settings(self.store)["messages"]) or self.own_skipped(event.message):
             return
         try:
@@ -1432,12 +1684,13 @@ class Collector:
             update = getattr(event, "original_update", None)
             source = recovered_source(update)
             if source and self.store.message_state(event.chat_id, event.message.id)["content"]:
-                return  # saved before the restart or gap; Telegram resent it
+                return
             await self.capture_message(event.message, "message.new", event.chat_id, update, source)
         except Exception as exc:
-            await self.failure(exc, "message.new")
+            await self.failure(exc, "message.new", client=client)
 
     async def on_edit(self, event):
+        client = self.client
         if not (self.running and monitoring_settings(self.store)["edits"]) or self.own_skipped(event.message):
             return
         try:
@@ -1445,16 +1698,16 @@ class Collector:
                 return
             content = self.store.message_state(event.chat_id, event.message.id)["content"]
             if content and content["observable"] == message_content.of_payload(describe_message(event.message)):
-                return  # this exact version is already saved (resent after a restart or gap)
+                return
             await self.capture_message(event.message, "message.edited", event.chat_id,
                                        getattr(event, "original_update", None))
         except Exception as exc:
-            await self.failure(exc, "message.edited")
+            await self.failure(exc, "message.edited", client=client)
 
     def record_deletion(self, chat_id, message_id, raw, resolution=None):
         state = self.store.message_state(chat_id, message_id)
         if state["deleted"]:
-            return  # notice already recorded (resent after a restart or gap)
+            return
         payload = {"deleted_by": None, "deletion_time": None,
                    "meaning": "Telegram deletion notification; observation time is not deletion time", "raw": raw}
         if resolution:
@@ -1465,13 +1718,14 @@ class Collector:
         self.store.append("message.deleted", payload, chat_id, message_id)
 
     async def on_delete(self, event):
+        client = self.client
         if not self.running or not monitoring_settings(self.store)["deletions"]:
             return
         try:
             raw = plain(event.original_update)
             if event.chat_id is None:
-                # Private chats and ordinary groups number messages per account, so a saved message
-                # with the same ID identifies the chat. Unknown IDs stay unscoped; no deleter is inferred.
+
+
                 unresolved = []
                 for message_id in event.deleted_ids:
                     chat_id = self.store.account_message_chat(message_id)
@@ -1489,16 +1743,17 @@ class Collector:
                 for message_id in event.deleted_ids:
                     self.record_deletion(event.chat_id, message_id, raw)
         except Exception as exc:
-            await self.failure(exc, "message.deleted")
+            await self.failure(exc, "message.deleted", client=client)
 
     async def on_raw(self, update):
+        client = self.client
         if not self.running:
             return
         try:
             settings = monitoring_settings(self.store)
             if isinstance(update, (types.UpdateNewMessage, types.UpdateNewChannelMessage)) and isinstance(
                     update.message, types.MessageService):
-                # Telethon NewMessage deliberately excludes MessageService.
+
                 chat_id = utils.get_peer_id(update.message.peer_id)
                 membership = isinstance(update.message.action, (
                     types.MessageActionChatAddUser, types.MessageActionChatDeleteUser,
@@ -1536,7 +1791,7 @@ class Collector:
                         "visibility": "only participant updates delivered to this account",
                     }, chat_id, actor_id=update.actor_id, source_at=date_string(update.date))
         except Exception as exc:
-            await self.failure(exc, "raw.update")
+            await self.failure(exc, "raw.update", client=client)
 
     async def recheck_loop(self):
         """Periodically ask Telegram again: recover missed messages, missed edits and silent removals.
@@ -1544,7 +1799,7 @@ class Collector:
         Live updates and catch-up can still lose events (Telethon drops ChannelDifferenceTooLong and
         DifferenceTooLong; long outages; leaving or losing a chat). This is the second layer.
         """
-        # After a start or reconnect, priority sources go first.
+
         delay, forced = self.param("recheck_first_delay_seconds"), True
         while self.running:
             try:
@@ -1560,14 +1815,17 @@ class Collector:
                 continue
             if (scope_settings(self.store)["mode"] != "selected"
                     and time.time() - self.scope_refreshed_at > self.param("scope_refresh_minutes") * 60):
+                client = self.client
                 try:
-                    await self.apply_scope()  # folder changes and chats that appeared while offline
+                    await self.apply_scope()
                 except FloodWaitError as exc:
                     self.store.set_setting("rpc_backoff_until", time.time() + exc.seconds)
                     self.store.append("telegram.backoff", {"operation": "scope refresh",
                                                            "retry_after_seconds": exc.seconds})
                     continue
                 except Exception as exc:
+                    if self.handle_authorization_error(exc, "scope refresh", client=client):
+                        return
                     self.scope_refreshed_at = time.time()
                     self.store.append("collector.error", {"operation": "scope refresh", "error_type": type(exc).__name__,
                                                          "coverage": "new chats are still added when they become active"})
@@ -1605,11 +1863,12 @@ class Collector:
         for target in self.store.targets(True) if targets is None else targets:
             if not self.running:
                 break
+            client = self.client
             try:
                 result = await self.recheck_chat(target["chat_id"], settings)
                 results.append(result)
                 if "continues_after" not in result:
-                    # A chat still catching up keeps its old time, so the next tick continues it.
+
                     last = self.store.get_setting("recheck_last", {})
                     last[str(target["chat_id"])] = time.time()
                     self.store.set_setting("recheck_last", last)
@@ -1621,6 +1880,8 @@ class Collector:
                 break
             except Exception as exc:
                 results.append({"chat_id": target["chat_id"], "error": type(exc).__name__})
+                if self.handle_authorization_error(exc, "recheck", client=client):
+                    break
             await asyncio.sleep(pause / 2 if target.get("priority", 1) else pause)
         if not results:
             return self.recheck_state
@@ -1640,13 +1901,13 @@ class Collector:
             floors = self.store.get_setting("recheck_floor", {})
             last = self.store.last_message_id(chat_id)
             if last is None and str(chat_id) not in floors:
-                # Nothing saved yet: remember where observation began instead of fetching all history.
+
                 newest = await self.client.get_messages(entity, limit=1)
                 floors[str(chat_id)] = newest[0].id if newest else 0
                 self.store.set_setting("recheck_floor", floors)
-            elif limit := self.param("recheck_new_limit"):  # 0 turns recovery of missed messages off
-                # Walk up from where the previous pass stopped, not from the newest saved message:
-                # live messages saved after a long stop must not hide the part still missing below them.
+            elif limit := self.param("recheck_new_limit"):
+
+
                 walked = self.store.get_setting("recheck_walked", {})
                 floor = max(walked.get(str(chat_id), last) or 0, floors.get(str(chat_id), 0))
                 seen, reached, stopped = 0, floor, False
@@ -1669,7 +1930,7 @@ class Collector:
                     result["recovered"] += 1
                 walked = self.store.get_setting("recheck_walked", {})
                 if stopped or seen >= limit:
-                    # More may follow: the next pass continues after the last message checked here.
+
                     walked[str(chat_id)] = reached
                     result["continues_after"] = reached
                 else:
@@ -1677,7 +1938,7 @@ class Collector:
                 self.store.set_setting("recheck_walked", walked)
         if not (settings["edits"] or settings["deletions"]):
             return result
-        # The newest saved messages every pass, plus a rolling window that walks down through older ones.
+
         batch = self.param("recheck_batch")
         newest = self.store.alive_message_ids(chat_id, limit=batch)
         older = []
@@ -1696,7 +1957,7 @@ class Collector:
             if message is None:
                 missing.append(message_id)
             elif settings["edits"] and not self.own_skipped(message):
-                # Removed keyboards and replaced attachments need not have an edit date.
+
                 content = self.store.message_state(chat_id, message_id)["content"]
                 if content and content["observable"] != message_content.of_payload(describe_message(message)):
                     await self.capture_message(message, "message.edited", chat_id, source="recheck")
@@ -1704,7 +1965,7 @@ class Collector:
         result.update(checked=len(ids), checked_from=min(ids), checked_to=max(ids))
         if missing and settings["deletions"]:
             if len(missing) == len(ids) and len(ids) >= 10:
-                # Everything gone at once: make sure the chat is still readable (raises if access was lost).
+
                 await self.client.get_messages(entity, limit=1)
             for message_id in missing:
                 state = self.store.message_state(chat_id, message_id)
@@ -1753,7 +2014,7 @@ class Collector:
     def reserve_export(self, owner):
         """One export per account, individual or multi-account. Checked and taken with no await in
         between, before the owner's first await; only the owner releases it."""
-        if self.export_busy() or self.export_claim:
+        if self.export_busy() or self.export_claim or self.connection_change_task is not None:
             return False
         self.export_claim = owner
         return True
@@ -1778,10 +2039,10 @@ class Collector:
         request_seconds = time.monotonic() - started
         total = getattr(latest, "total", None) or 0
         last_id = latest[0].id if latest else None
-        # Channel/supergroup IDs are per chat; ordinary groups share an account-wide counter.
+
         per_chat_ids = self.dialog_cache.get(chat_id, {}).get("kind") in ("supergroup", "channel")
         pages = -(-total // 100)
-        # Telethon pages 100 messages and waits 1 s between pages for histories above 3,000.
+
         per_page = max(1.0 if total > 3000 else 0.0, request_seconds)
         return {"chat_id": chat_id, "total": total, "last_message_id": last_id,
                 "ids_are_per_chat": per_chat_ids,
@@ -1789,8 +2050,8 @@ class Collector:
                 "pages": pages, "estimate_seconds": round(pages * per_page),
                 "request_seconds": round(request_seconds, 3)}
 
-    async def start_export(self, chat_id):
-        # Observation keeps running: export and live updates share this account's single client.
+    async def start_export(self, chat_id, report_options=None):
+
         export_id = secrets.token_urlsafe(18)
         if not self.reserve_export(export_id):
             raise ValueError("A chat export is already running on this account. Wait for it or cancel it first.")
@@ -1801,14 +2062,14 @@ class Collector:
             try:
                 total = (await self.client.get_messages(entity, limit=0)).total
             except Exception:
-                total = None  # progress is still reported, just without a percentage
+                total = None
             record = {"id": export_id, "chat_id": chat_id, "title": info.get("title"),
                       "phase": "running", "captured": 0, "total": total, "eta_seconds": None,
                       "ready": False, "error": None, "started_at": utcnow()}
             self.export_state = record
             self.export_path = None
-            self.export_task = asyncio.create_task(self.run_export(entity, info, record))
-            # Released however the task ends, even if it is cancelled before its first step.
+            self.export_task = asyncio.create_task(self.run_export(entity, info, record, report_options))
+
             self.export_task.add_done_callback(lambda _: self.release_export(export_id))
         except BaseException:
             self.release_export(export_id)
@@ -1816,13 +2077,14 @@ class Collector:
         await asyncio.sleep(0)
         return dict(record)
 
-    async def run_export(self, entity, info, record):
+    async def run_export(self, entity, info, record, report_options=None):
+        client = self.client
         directory = self.store.root / "temporary-exports"
         scratch = directory / ("tgwitness-export-chat-" + record["id"] + ".jsonl")
         out_path = directory / ("tgwitness-export-chat-" + record["id"] + ".zip")
         chat_id = record["chat_id"]
         try:
-            # Setup is inside the lifecycle: a failure here still ends the export as failed.
+
             directory.mkdir(mode=0o700, exist_ok=True)
             self.store.append("chat_export.started", {"chat_id": chat_id, "title": info.get("title"),
                                                       "meaning": "full visible history snapshot"}, chat_id)
@@ -1831,7 +2093,7 @@ class Collector:
                              "visibility": info.get("visibility")},
                     "account": self.store.get_setting("account", None), "message_count": count}
             await complete_in_thread(chat_export.build_bundle, scratch, meta, self.vault, out_path,
-                                    self.param("export_max_gib") * 1024**3)
+                                    self.param("export_max_gib") * 1024**3, report_options)
             replica.outbox(self.store, out_path)
             self.export_path = out_path
             record.update(phase="done", captured=count, ready=True)
@@ -1847,6 +2109,7 @@ class Collector:
             raise
         except BaseException as exc:
             record.update(phase="failed", error=type(exc).__name__)
+            self.handle_authorization_error(exc, "chat export", client=client)
             self.note("chat_export.interrupted", {"chat_id": chat_id, "captured": record["captured"],
                                                   "error_type": type(exc).__name__}, chat_id)
             with suppress(OSError):
@@ -1859,18 +2122,27 @@ class Collector:
         """Newest to oldest; after FloodWait or a brief connection loss, resume below the last message seen."""
         failures = 0
         while True:
+            writing = False
             try:
                 async for message in self.client.iter_messages(entity, offset_id=offset_id, min_id=min_id):
-                    offset_id, failures = message.id, 0
+                    writing = True
                     await on_message(message)
+                    writing = False
+                    offset_id, failures = message.id, 0
                 return
             except FloodWaitError as exc:
+                if writing:
+                    raise
                 wait = min(exc.seconds + 1, 3600)
                 self.store.append("telegram.backoff", {"seconds": wait, "context": "chat_export"})
                 if on_wait:
                     on_wait(wait)
                 await asyncio.sleep(wait)
             except (OSError, ConnectionError, TimeoutError):
+                if writing:
+                    # A local write/flush failure is not a retryable Telegram
+                    # disconnect. Never skip that record and sign the remainder.
+                    raise
                 failures += 1
                 if failures > 8:
                     raise
@@ -1945,7 +2217,7 @@ class Collector:
             return self.export_path
         return None
 
-    def remember(self, entity):
+    def remember(self, entity, *, chat_id=None):
         """Keep full user/chat objects seen in updates; profile photos need the full object."""
         peer = getattr(entity, "id", None)
         if peer is None or not hasattr(entity, "photo"):
@@ -1953,6 +2225,8 @@ class Collector:
         if len(self.people) >= 5000:
             self.people.pop(next(iter(self.people)))
         self.people[utils.get_peer_id(entity)] = entity
+        if chat_id is not None:
+            self.avatar_history.observe(entity, chat_id=chat_id)
 
     async def avatar(self, peer_id):
         """Small profile photo from a local cache; downloaded once, never written to the journal."""
@@ -1968,7 +2242,7 @@ class Collector:
             return None
         account_id = (self.store.get_setting("account", {}) or {}).get("id")
         if not (self.client and self.client.is_connected()):
-            # Only the workspace's own account photo justifies opening a connection.
+
             if peer_id != account_id or not self.vault.read("credentials").get("session"):
                 return None
             try:
@@ -1976,12 +2250,14 @@ class Collector:
             except Exception:
                 self.avatar_failures[peer_id] = time.time()
                 return None
+        client = self.client
         entity = self.people.get(peer_id) or self.dialog_cache.get(peer_id, {}).get("entity")
         if entity is None and peer_id == account_id:
             try:
-                entity = await asyncio.wait_for(self.client.get_me(), 15)
+                entity = await asyncio.wait_for(client.get_me(), 15)
                 self.remember(entity)
-            except Exception:
+            except Exception as exc:
+                self.handle_authorization_error(exc, "account avatar", client=client)
                 entity = None
         if entity is None:
             return None
@@ -1990,12 +2266,13 @@ class Collector:
                 return path
             try:
                 data = await asyncio.wait_for(
-                    self.client.download_profile_photo(entity, file=bytes, download_big=False), 20)
+                    client.download_profile_photo(entity, file=bytes, download_big=False), 20)
             except FloodWaitError as exc:
                 until = max(time.time() + exc.seconds, self.store.get_setting("rpc_backoff_until", 0))
                 self.store.set_setting("rpc_backoff_until", until)
                 return None
-            except Exception:
+            except Exception as exc:
+                self.handle_authorization_error(exc, "account avatar", client=client)
                 self.avatar_failures[peer_id] = time.time()
                 return None
             directory.mkdir(mode=0o700, exist_ok=True)
@@ -2007,16 +2284,35 @@ class Collector:
             temporary.replace(path)
             return path
 
-    async def download_worker(self):
+    async def refresh_media_reference(self, message, job):
+        identity = attachment_identity(message)
+        if identity is None:
+            raise ValueError("original_attachment_has_no_stable_id")
+        fresh = await asyncio.wait_for(self.client.get_messages(job["chat_id"], ids=job["message_id"]), 30)
+        if fresh is None or not getattr(fresh, "media", None):
+            raise ValueError("original_attachment_no_longer_available")
+        if (attachment_identity(fresh) != identity or fresh.id != job["message_id"]
+                or fresh.chat_id != job["chat_id"]):
+            raise ValueError("refreshed_attachment_differs_from_signed_observation")
+        return downloadable_media(fresh)
+
+    async def download_worker(self, lane="all"):
         media_root = self.store.root / "media"
         media_root.mkdir(exist_ok=True)
         while self.running:
+            if not capture_settings(self.store)["download_media"]:
+                self.media_wakeup.clear()
+                try:
+                    await asyncio.wait_for(self.media_wakeup.wait(), 1)
+                except TimeoutError:
+                    pass
+                continue
             if time.time() < self.store.get_setting("rpc_backoff_until", 0):
                 await asyncio.sleep(1)
                 continue
             free, threshold = shutil.disk_usage(media_root).free, self.param("media_min_free_mb") * 1024**2
             if free < threshold:
-                # Pause instead of failing jobs: queued files stay queued and resume when space is freed.
+
                 if not self.storage_low:
                     self.storage_low = True
                     self.store.append("storage.low", {"free_bytes": free, "threshold_bytes": threshold,
@@ -2027,7 +2323,10 @@ class Collector:
                 self.storage_low = False
                 self.store.append("storage.ok", {"free_bytes": free, "media_jobs": self.store.media_stats()})
             account = self.store.get_setting("account", {}) or {}
-            job = self.store.claim_media(account.get("id", 0))
+            limits = {"max_priority": 1} if lane == "urgent" else {"min_priority": 2} if lane == "bulk" else {}
+            capture = capture_settings(self.store)
+            # Downloads turned off keep the waiting files queued until they are turned on again
+            job = self.store.claim_media(account.get("id", 0), **limits) if capture["download_media"] else None
             if not job:
                 self.media_wakeup.clear()
                 try:
@@ -2036,17 +2335,30 @@ class Collector:
                     pass
                 continue
             temp = media_root / ("pending-" + str(job["message_event"]))
+            client = self.client
             try:
                 original = self.store.events(before=job["message_event"] + 1, limit=1)[0]
                 policy = original["payload"].get("media_capture", {})
                 if (hashlib.sha256(job["descriptor"]).hexdigest() != policy.get("descriptor_sha256")
                         or job["max_bytes"] != policy.get("max_bytes")
                         or job["account_id"] != policy.get("account_id")
+                        or ("priority" in policy and job["priority"] != policy["priority"])
+                        or ("estimated_bytes" in policy and job["estimated_bytes"] != policy["estimated_bytes"])
                         or job["chat_id"] != original["chat_id"] or job["message_id"] != original["message_id"]):
                     raise ValueError("queue_descriptor_differs_from_signed_observation")
                 with BinaryReader(job["descriptor"]) as reader:
                     message = reader.tgread_object()
                 size = getattr(message.file, "size", None) if message.file else None
+                kind = policy.get("media_type") or media_kind(message)
+                rule, limit = capture["types"][kind], capture["types"][kind]["max_mb"] * 1024**2
+                if not rule["enabled"] or (size is not None and limit < size <= job["max_bytes"]):
+                    # The settings changed after the file was queued: a type turned off or a lower limit
+                    # also stops the files already waiting
+                    self.store.finish_media(job, "skipped", {
+                        "reason": "above the size limit of the attachment settings" if rule["enabled"]
+                        else "attachment type not collected by policy: " + kind,
+                        "meaning": "the attachment settings changed after this file was queued"})
+                    continue
                 if size is None or size > job["max_bytes"]:
                     raise ValueError("unknown_size_or_above_limit")
                 if shutil.disk_usage(media_root).free < size + 64 * 1024**2:
@@ -2056,35 +2368,33 @@ class Collector:
                     if max(current, total) > job["max_bytes"]:
                         raise ValueError("above_limit")
 
-                # A file object avoids Telethon adding a suffix outside our temporary path. Large videos
-                # and documents get extra time at the slowest expected speed.
+
                 timeout = self.param("media_timeout_seconds") + size // (self.param("media_min_speed_kbps") * 1024)
-                media = message.media
-                if isinstance(media, types.MessageMediaWebPage):
-                    # Telethon would fetch a preview's document before its photo; take the file whose
-                    # type and size were checked above (message.file describes the photo first).
-                    media = message.photo or message.document
-                with temp.open("wb") as stream:
-                    result = await asyncio.wait_for(
-                        self.client.download_media(media, file=stream, progress_callback=progress), timeout)
+                media = downloadable_media(message)
+                refreshed = False
+
+                async def download(media):
+                    with temp.open("wb") as stream:
+                        return await asyncio.wait_for(
+                            client.download_media(media, file=stream, progress_callback=progress), timeout)
+
+                try:
+                    result = await download(media)
+                except FileReferenceExpiredError:
+                    media = await self.refresh_media_reference(message, job)
+                    refreshed = True
+                    result = await download(media)
                 if result is None:
                     raise ValueError("download_unavailable")
-                h = hashlib.sha256()
-                with temp.open("rb") as stream:
-                    for chunk in iter(lambda: stream.read(1024 * 1024), b""):
-                        h.update(chunk)
-                digest, actual_size = h.hexdigest(), temp.stat().st_size
+                digest = await complete_in_thread(file_digest, temp)
+                actual_size = temp.stat().st_size
                 if actual_size > job["max_bytes"]:
                     raise ValueError("above_limit")
                 if actual_size != size:
                     raise ValueError("download_size_differs_from_observed_attachment")
                 destination = media_root / digest
                 if destination.exists():
-                    existing = hashlib.sha256()
-                    with destination.open("rb") as stream:
-                        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
-                            existing.update(chunk)
-                    if existing.hexdigest() != digest:
+                    if await complete_in_thread(file_digest, destination) != digest:
                         raise ValueError("existing_content_addressed_file_is_corrupt")
                     temp.unlink()
                 else:
@@ -2093,10 +2403,16 @@ class Collector:
                     "media_sha256": digest, "size": actual_size,
                     "original_name": getattr(message.file, "name", None),
                     "mime_type": getattr(message.file, "mime_type", None),
+                    "file_reference_refreshed": refreshed,
                 })
             except asyncio.CancelledError:
                 self.store.finish_media(job, "retry", {"reason": "collector stopped; durable job retained"})
                 raise
+            except AUTHORIZATION_ERRORS as exc:
+                self.handle_authorization_error(exc, "media download", client=client)
+                self.store.finish_media(job, "retry", {"error_type": type(exc).__name__,
+                    "reason": "Telegram authorization expired; durable job retained"})
+                return
             except FloodWaitError as exc:
                 until = max(time.time() + exc.seconds, self.store.get_setting("rpc_backoff_until", 0))
                 self.store.set_setting("rpc_backoff_until", until)

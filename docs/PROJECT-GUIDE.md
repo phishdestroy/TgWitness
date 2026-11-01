@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <a href="CHANGELOG.md">v0.7.0</a> &nbsp; · &nbsp;
+  <a href="CHANGELOG.md">v0.7.1</a> &nbsp; · &nbsp;
   <a href="QUICKSTART.md">Python 3.11+</a> &nbsp; · &nbsp;
   <a href="../LICENSE">MIT license</a>
 </p>
@@ -402,9 +402,14 @@ The panel listens on localhost by default. Sessions, credentials and signing key
 use an encrypted vault; local messages and attachments require disk encryption
 if you need protection at rest. [Security model](CONNECTION-SECURITY.md) · [Report a vulnerability](../.github/SECURITY.md)
 
-This is a pre-release project. Review the [verification record](VERIFICATION.md)
-and [open audit findings](internal/RECHECK-2026-10-29.md) before distributing a build.
+This is a pre-release project. Review the [verification record](VERIFICATION.md) before distributing a build.
 Executed checks and remaining qualification work are recorded explicitly.
+
+The [1 November live server inventory](VERIFICATION.md#live-server-journal-inventory--1-november-2026)
+counted 1,610,818 journal records across ten workspace databases, including 900,232
+`message.new` events. These are read-only, non-deduplicated event counts; the full
+aggregate hash chain was not newly verified. The table below describes the earlier
+single-account acceptance test.
 
 <details>
 <summary>What has actually been tested</summary>
@@ -415,7 +420,7 @@ TgWitness **0.6.1** runs on Windows 11 with Python 3.12. Status on 29 October 20
 
 | Area | How it was tested |
 | --- | --- |
-| Messages, edits, deletions, attachments, rechecks after restarts, FloodWait pauses | Done with **a real Telegram account**, 27–29 October 2026: 9,968 signed records, every signature and the hash chain verified ([live test](VERIFICATION.md#live-telegram-test-whole-account--29-october-2026)) |
+| Messages, edits, deletions, attachments, rechecks after restarts, FloodWait pauses | Historical **single-account test**, 27–29 October 2026: 9,968 signed records, every signature and the hash chain verified ([live test](VERIFICATION.md#live-telegram-test-whole-account--29-october-2026)) |
 | Observing the whole account, and history snapshots | Done with **a real account** on 29 October 2026: messages from 2 groups or channels and 3 private chats and bots |
 | Pressing a message button from **Chats** | Done once with **a real account** |
 | Sign-in with Telethon/Pyrogram session files and Telegram Desktop TData | Done with **one real account** |
@@ -500,7 +505,7 @@ Read the [contribution guide](../.github/CONTRIBUTING.md) and use fictional data
 ```sh
 python -m venv .venv && source .venv/bin/activate     # Windows: .venv\Scripts\Activate.ps1
 python -m pip install -c deploy/constraints.txt -e ".[dev]"
-python -m pytest -q                                    # unit and integration tests
+python -m ruff check .                                 # source checks
 python -m playwright install chromium
 python tools/check_browser.py                          # end-to-end UI acceptance
 python tools/check_account_browser.py                  # sign-in flows
@@ -511,12 +516,11 @@ python tools/build_site.py                             # static project site in 
 python tools/check_site.py                             # website browser acceptance
 ```
 
-The automated test suite uses synthetic Telegram objects and never connects real accounts;
-the live test is described above. CI is configured to run the test matrix on
-Windows, Linux and macOS with Python 3.11–3.13, the browser checks, source packaging, the Windows
-portable build and a Docker build. The release workflow is set up to attach the source ZIP, wheel,
-Windows portable ZIP and multi-architecture GHCR image to a published GitHub Release. Neither
-workflow has run yet. Read [CONTRIBUTING.md](../.github/CONTRIBUTING.md) before opening a pull request.
+Browser checks use synthetic Telegram data. CI checks package installation and readiness
+across the configured Python/platform matrix, browser flows, source packaging and Docker;
+full-platform runs also build the Windows portable package. The release workflow prepares
+the source ZIP, wheel, Windows portable ZIP and GHCR image.
+Read [CONTRIBUTING.md](../.github/CONTRIBUTING.md) before opening a pull request.
 
 </details>
 
@@ -553,8 +557,13 @@ workflow has run yet. Read [CONTRIBUTING.md](../.github/CONTRIBUTING.md) before 
 | --- | --- |
 | [Application](../tgwitness/README.md) | Collectors, journals, evidence exports and the panel |
 | [Documentation](README.md) · [Wiki](wiki/Home.md) | Setup, investigations, operations and verification |
-| [Tests](../tests/README.md) | Synthetic regression checks and qualification entry points |
 | [Tools](../tools/README.md) | Local builds, browser checks, screenshots and packaging |
 | [Deployment](../deploy/README.md) | Service templates and HTTPS configuration |
 | [Website](../website/README.md) | Public pages, practical guides and language catalogues |
 | [GitHub configuration](../.github/AUTOMATION.md) | Automation, issue forms and dependency updates |
+
+## Archive and integrations
+
+[Workflow guide](https://phishdestroy.github.io/TgWitness/docs/archive/) ·
+[History loading](HISTORY.md) · [Archive analysis](ANALYSIS.md) · [MCP](MCP.md) ·
+[OCR / transcription](MEDIA-ANALYSIS.md) · [Webhooks](WEBHOOKS.md)

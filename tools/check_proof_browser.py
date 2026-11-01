@@ -29,7 +29,7 @@ def monitor_server(app):
     thread = threading.Thread(target=server.run, kwargs={"sockets": [sock]}, daemon=True)
     thread.start()
     try:
-        deadline = time.monotonic() + 15
+        deadline = time.monotonic() + 60  # slow starts under load; ready returns at once
         while not server.started:
             if time.monotonic() > deadline:
                 raise RuntimeError("Proof monitor did not start")
@@ -61,7 +61,7 @@ def main():
                         store.append("message.new", {"text": "Synthetic private content"}, -100123, n + 1)
                     store.append("message.edited", {"text": "Synthetic edit"}, -100123, 1)
                     store.append("message.deleted", {}, -100123, 2)
-                    # Report synthetic collection health; no Telegram connection is opened.
+
                     original = app.state.collector.status
                     app.state.collector.status = lambda original=original: {**original(), "running": True, "connected": True}
                     prefix = "" if profile == "default" else "/profiles/" + profile

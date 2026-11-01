@@ -15,10 +15,10 @@ import requests
 from playwright.sync_api import expect, sync_playwright
 from telethon.helpers import TotalList
 
-from tools.check_browser import RunningApp, hold_api_response, launch_browser, release_api_response
-from tests.test_collector import CHAT, FakeClient, saved_session, telegram_message
-from tests.test_dossier import ALICE, say
-from tgwitness import dossier
+from tools.check_browser import RunningApp, hold_api_response, launch_browser, release_api_response, navigate_panel
+from tools.browser_fixtures import CHAT, FakeClient, saved_session, telegram_message
+from tools.browser_fixtures import ALICE, say
+from tgwitness import dossier, i18n
 
 
 class WorkspaceClient(FakeClient):
@@ -32,7 +32,7 @@ def main():
     output = ROOT / "test-results" / "workspace-browser"
     output.mkdir(parents=True, exist_ok=True)
     checks, errors = [], []
-    with tempfile.TemporaryDirectory(dir=output) as temporary, RunningApp(
+    with tempfile.TemporaryDirectory(prefix="workspace-browser-") as temporary, RunningApp(
             Path(temporary), client_factory=WorkspaceClient) as server:
         session = requests.Session()
         session.headers["Authorization"] = "Bearer " + server.app.state.vault.token
@@ -43,7 +43,7 @@ def main():
         post("/api/auth/configure", {"api_id": 123, "api_hash": "a" * 32, "session": saved_session()})
         child = post("/api/profiles", {"label": "Second workspace"})["id"]
         post("/profiles/" + child + "/api/auth/configure", {
-            "api_id": 124, "api_hash": "a" * 32, "session": saved_session()})
+            "api_id": 124, "api_hash": "a" * 32, "session": saved_session(b"y")})
         first_store = server.app.state.store
         second_store = server.app.state.profiles.entries[child]["app"].state.store
         for store, label in ((first_store, "First"), (second_store, "Second")):
@@ -100,7 +100,7 @@ def main():
 
             page = page_for_case()
             hold_api_response(page, "/api/witness/tokens")
-            page.locator('[data-view="witness"]').click()
+            navigate_panel(page, "witness")
             page.locator("#extras-open-bot").click()
             page.locator("#witness-label").fill("First workspace witness")
             page.locator("#witness-form button[type=submit]").click()
@@ -123,10 +123,9 @@ def main():
             checks.append("late export size response cannot open a dialog for another workspace")
             page.close()
 
-            # A locked data file must leave an actionable error, even when the
-            # account being deleted is the one currently selected in the panel.
+
             doomed = post("/api/profiles", {"label": "Incomplete deletion"})["id"]
-            directory = Path(temporary) / "profiles" / doomed
+            directory = (Path(temporary) / "profiles" / doomed).resolve()
             page = page_for_case()
             page.locator("#profile-select").select_option(doomed)
             page.locator('[data-view="accounts"]').click()
@@ -152,7 +151,11 @@ def main():
             page.reload()
             page.locator('[data-view="accounts"]').click()
             expect(card.locator(".account-badge")).to_have_text("Удаление не завершено")
-            expect(card).to_contain_text("Наблюдение остановлено.")
+            warning = ("Deletion is incomplete. Close programs using this workspace's files, "
+                       "then retry Delete. Observation remains stopped.")
+            translated = i18n.words("ru")[warning]
+            assert translated and translated != warning, "Incomplete-deletion warning must be translated"
+            expect(card).to_contain_text(translated)
             page.once("dialog", lambda dialog: dialog.accept())
             card.get_by_role("button", name="Удалить", exact=True).click()
             expect(card).to_have_count(0)

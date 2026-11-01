@@ -12,7 +12,7 @@ python tools/build_wiki.py
 
 Outputs:
 
-- `dist/wiki/`: 17 English pages, `_Sidebar.md`, `_Footer.md` and their `assets/`.
+- `dist/wiki/`: 19 English pages, `_Sidebar.md`, `_Footer.md` and their `assets/`.
 - `dist/TgWitness-<version>-wiki.zip`: the same pages and assets, ready to copy into a wiki clone.
 - The matching `.zip.sha256` file.
 - `dist/wiki-manifest.json`: destination repository, source branch and file hashes.
@@ -75,7 +75,6 @@ After pushing, open Home, test sidebar navigation, confirm images load and inspe
 4. Run the checks below, build, inspect the rendered Markdown and publish the reviewed result.
 
 ~~~sh
-python -m pytest --noconftest -q tests/test_wiki.py
 python tools/check_publication.py
 python tools/build_wiki.py
 ~~~

@@ -2,33 +2,36 @@
 import hashlib
 import zipfile
 import tomllib
+import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))["project"]["version"]
 FILES = [
+    "deploy/installer/install.sh.in", "deploy/installer/install.ps1.in", "deploy/installer/install.cmd.in",
+    "deploy/installer/index.html", "deploy/installer/style.css", "deploy/installer/site.js", "deploy/installer/wrangler.toml",
+    "deploy/media-worker/Dockerfile", "deploy/media-worker/worker.py",
+    "deploy/media-worker/requirements.in", "deploy/media-worker/requirements.lock",
+    "integrations/webhook.schema.json", "integrations/n8n-tgwitness.json", "tools/check_webhook_example.cjs",
+    "tools/check_writeonly_drafts.mjs", "deploy/constraints-mcp.txt",
+    "deploy/Dockerfile.sealed", "scripts/sealed_runner.py",
     "README.md", "docs/QUICKSTART.md", "LICENSE", "NOTICE", ".github/SECURITY.md", ".github/SUPPORT.md", ".github/CONTRIBUTING.md", "docs/CHANGELOG.md", "pyproject.toml",
     "start.py", "start.sh", "Start.cmd",
     "deploy/Dockerfile", "compose.yaml", "deploy/compose/compose.image.yaml", "deploy/compose/compose.https.yaml", "deploy/compose/compose.witness.yaml", "deploy/compose/compose.proof.yaml", "deploy/compose/compose.proxies.yaml",
     ".gitignore", ".gitattributes", ".dockerignore", "deploy/env.example", "deploy/constraints.txt", "deploy/requirements.lock", "deploy/build.lock",
+    "deploy/audit.lock", "deploy/browser.lock", "deploy/mcp.lock", "deploy/site.lock",
 ]
-# A bounded service manifest: never recurse through node_modules, .dev.vars,
-# controller state, browser profiles or locally exported receipts.
-FILES.extend("services/witness-controller/" + name for name in (
-    ".gitignore", "README.md", "package.json", "package-lock.json", "wrangler.jsonc",
-    "src/dashboard.mjs", "src/engine.mjs", "src/protocol.mjs", "src/worker.mjs",
-    "test/actions.test.mjs", "test/engine.test.mjs", "test/helpers.mjs", "test/worker.test.mjs",
-    "tools/demo.mjs", "tools/local-keys.mjs", "tools/synthetic.mjs", "tools/verify.mjs",
+FILES.extend("website/demo/downloads/" + name for name in (
+    "tgwitness-demo.zip", "tgwitness-demo.jsonl", "tgwitness-demo.csv", "tgwitness-demo.html",
+    "tgwitness-demo-checkpoint.json", "tgwitness-demo-run-receipt.json", "tgwitness-demo-timestamp-request.zip",
+    "tgwitness-demo-account-export.zip", "tgwitness-demo-minimized-disclosure.zip",
 ))
-# Public timestamp responses for the synthetic tests/tsa/data.bin digest. Keep
-# this exact allowlist: arbitrary binary fixtures and account data stay excluded.
-FILES.extend("tests/tsa/" + name for name in (
-    "data.bin", "dfn.tsq", "dfn.tsr", "digicert-http.tsq", "digicert-http.tsr",
-    "freetsa.tsq", "freetsa.tsr", "sectigo.tsq", "sectigo.tsr",
+FILES.extend("website/demo/report/" + name for name in (
+    "index.html", "report.html", "sharing-copy.zip", "example.json",
 ))
 DIRECTORIES = {
     "tgwitness": {".md", ".py", ".html", ".css", ".js", ".svg", ".json"},
-    "docs": {".md", ".png", ".webp", ".svg", ".txt", ".gif", ".mp4"}, "tests": {".py", ".md"}, "tools": {".py", ".md"},
+    "docs": {".md", ".png", ".webp", ".svg", ".txt", ".gif", ".mp4"}, "tools": {".py", ".md"},
     "deploy": {".md", ".ps1", ".service", ".example", ".docker"},
     "scripts": {".md", ".cmd", ".sh"},
     ".github": {".md", ".yml", ".yaml"},
@@ -37,25 +40,28 @@ DIRECTORIES = {
 LANGUAGES = ("ru", "uk", "es", "pt", "tr", "ar", "fa", "ur", "hi", "id", "vi", "zh",
              "fr", "de", "it", "uz", "ko", "zh-Hant", "ms", "pl", "ja", "th", "he", "bn")
 GUIDE_LANGUAGES = ("fr", "de", "it", "uz", "ko", "zh-Hant", "ms", "pl", "ja", "th", "he", "am", "bn")
-PACKAGE_JSON = {"english_fallbacks.json", "public_proxies.json", *("locales/" + language + ".json" for language in LANGUAGES),
+PACKAGE_JSON = {"english_fallbacks.json", "public_proxies.json", "sealed_policy.json", *("locales/" + language + ".json" for language in LANGUAGES),
                 "guide_locales/keys.json", *("guide_locales/" + language + ".json" for language in GUIDE_LANGUAGES)}
-# Site translations: without them every non-English page silently falls back to English.
+
 SITE_JSON = {"i18n/" + language + ".json" for language in
              ("en", *LANGUAGES, "fr", "de", "it", "uz", "ko", "zh-Hant", "ms", "pl", "ja", "th", "he", "am", "bn")}
-# Recorded answers of the fictional demo for the read-only online demo (tools/capture_demo.py).
+
 SITE_JSON.add("demo/fixtures.json")
 PRESENTATION_MEDIA = {
     "assets/presentation/investigation-overview.mp4",
     "assets/presentation/investigation.mp4", "assets/presentation/investigation.gif",
     "assets/presentation/message-history.mp4", "assets/presentation/message-history.gif",
 }
-PRIVATE_DIRECTORIES = {"data", "proof-data", "proof-config", "proxy-config", "witness-data", "__pycache__", ".venv", "venv", "test-results", ".pytest_cache", ".ruff_cache"}
+PRIVATE_DIRECTORIES = {"data", "proof-data", "proof-config", "proxy-config", "witness-data", "__pycache__", ".venv", "venv", "test-results", ".pytest_cache", ".ruff_cache", "build", "dist"}
 
 
 def is_public_file(path, directory):
     """JSON is an explicit resource allowlist, never a blanket source extension."""
     relative = path.relative_to(directory)
-    if any(part in PRIVATE_DIRECTORIES or part.startswith("tgwitness-backup") for part in relative.parts[:-1]):
+    parts = tuple(part.casefold() for part in relative.parts)
+    if any(part in PRIVATE_DIRECTORIES or part.startswith("tgwitness-backup") for part in parts[:-1]):
+        return False
+    if any(part == ".tmp" or part.startswith(".tmp-") for part in parts):
         return False
     if path.suffix in {".gif", ".mp4"}:
         return directory.name == "docs" and relative.as_posix() in PRESENTATION_MEDIA
@@ -76,7 +82,7 @@ def public_sources(root):
         sources.extend(p for p in (root / directory).rglob("*")
                        if p.is_file() and p.suffix in extensions and is_public_file(p, root / directory))
     for source in sources:
-        # An allowlisted filename must not point at a local secret through a link.
+
         if source.resolve() != source or not source.is_file():
             raise ValueError("Public source must be an ordinary repository file: " + str(source.relative_to(root)))
     return sorted(set(sources), key=lambda p: p.relative_to(root).as_posix())
@@ -88,17 +94,33 @@ def main():
     out.mkdir(exist_ok=True)
     target = out / ("TgWitness-" + VERSION + "-source.zip")
     manifest = []
-    with zipfile.ZipFile(target, "w", compression=zipfile.ZIP_DEFLATED) as archive:
-        for source in sources:
-            name = source.relative_to(ROOT).as_posix()
-            data = source.read_bytes()
-            archive.writestr("TgWitness/" + name, data)
-            manifest.append(hashlib.sha256(data).hexdigest() + "  " + name)
-        archive.writestr("TgWitness/SOURCE_SHA256SUMS", "\n".join(manifest) + "\n")
-    digest = hashlib.sha256(target.read_bytes()).hexdigest()
-    target.with_suffix(".zip.sha256").write_text(digest + "  " + target.name + "\n")
+    # Stage on the destination filesystem: a failed build leaves the previous ZIP intact.
+    with tempfile.TemporaryDirectory(prefix=".source-build-", dir=out) as temporary:
+        staged = Path(temporary) / target.name
+        with zipfile.ZipFile(staged, "w") as archive:
+            for source in sources:
+                name = source.relative_to(ROOT).as_posix()
+                data = source.read_bytes()
+                write_member(archive, "TgWitness/" + name, data)
+                manifest.append(hashlib.sha256(data).hexdigest() + "  " + name)
+            write_member(archive, "TgWitness/SOURCE_SHA256SUMS", ("\n".join(manifest) + "\n").encode("utf-8"))
+        with staged.open("rb") as stream:
+            digest = hashlib.file_digest(stream, "sha256").hexdigest()
+        checksum = staged.with_suffix(".zip.sha256")
+        checksum.write_bytes((digest + "  " + target.name + "\n").encode("utf-8"))
+        # Each rename is atomic; a failure between them leaves a detectable checksum mismatch.
+        staged.replace(target)
+        checksum.replace(target.with_suffix(".zip.sha256"))
     print("Public source archive:", target)
     print("Files:", len(sources), "| SHA-256:", digest)
+
+
+def write_member(archive, name, data):
+    # Archive timestamps are neutral metadata, never a claim about collection/build time.
+    member = zipfile.ZipInfo(name, date_time=(1980, 1, 1, 0, 0, 0))
+    member.create_system = 3
+    member.external_attr = 0o100644 << 16
+    archive.writestr(member, data, compress_type=zipfile.ZIP_DEFLATED, compresslevel=6)
 
 
 if __name__ == "__main__":

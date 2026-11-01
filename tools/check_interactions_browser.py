@@ -14,11 +14,11 @@ if (ROOT / ".playwright").is_dir():
 import requests
 from playwright.sync_api import expect, sync_playwright
 
-from tools.check_browser import RunningApp, launch_browser, hold_api_response, release_api_response
-from tests.test_interactions import InteractionClient
-from tests.test_collector import CHAT, saved_session
-from tests.test_investigation import offer
-from tests.test_scope import SHOP_BOT
+from tools.check_browser import RunningApp, launch_browser, hold_api_response, release_api_response, lock_panel, navigate_panel, unlock
+from tools.browser_fixtures import InteractionClient
+from tools.browser_fixtures import CHAT, saved_session
+from tools.browser_fixtures import offer
+from tools.browser_fixtures import SHOP_BOT
 from tgwitness.evidence import export_file
 from tgwitness.verify import verify_bundle
 
@@ -65,26 +65,39 @@ def main():
             expect(page.locator("#interaction-result")).to_contain_text("Recorded answer")
             expect(page.locator("#interaction-result")).to_contain_text("https://example.test/receipt")
             press = page.locator("#msg-10 .msg-button", has_text="I paid").get_by_role("button")
+            expect(page.locator("#chat-send")).to_be_enabled()
             expect(press).to_be_enabled()
             callbacks = len(server.app.state.collector.client.callbacks)
-            # A successful action followed by a failed GET still has a visible receipt.
+
             page.evaluate("""() => {
               const original=window.fetch;let arm=true,fail=false;
+              window.interactionRefreshFailure={hits:0,backgroundFailed:false,
+                restore(){window.fetch=original;delete window.interactionRefreshFailure;}};
               window.fetch=async(...args)=>{
                 if(fail&&String(args[0]).endsWith('/api/status')){
-                  fail=false;throw new TypeError('Synthetic status connection failure');
+                  window.interactionRefreshFailure.hits++;
+                  throw new TypeError('Synthetic status connection failure');
                 }
                 const result=await original(...args);
-                if(arm&&String(args[0]).endsWith('/api/interactions')){arm=false;fail=true;}
+                if(arm&&String(args[0]).endsWith('/api/interactions')){
+                  arm=false;fail=true;
+                  // A competing poll must not consume the post-action outage fixture.
+                  await refreshStatus().catch(()=>{window.interactionRefreshFailure.backgroundFailed=true;});
+                }
                 return result;
               };
             }""")
             press.click()
-            expect(page.locator("#interaction-result")).to_contain_text("Action completed and recorded.")
-            expect(page.locator("#interaction-result")).to_contain_text("Chat refresh failed")
-            expect(page.locator("#toast")).to_be_hidden()
-            assert len(server.app.state.collector.client.callbacks) == callbacks + 1
-            # Repeating the click after that refresh failure only retrieves the receipt.
+            try:
+                expect(page.locator("#interaction-result")).to_contain_text("Action completed and recorded.")
+                expect(page.locator("#interaction-result")).to_contain_text("Chat refresh failed")
+                expect(page.locator("#toast")).to_be_hidden()
+                assert page.evaluate("interactionRefreshFailure.backgroundFailed")
+                assert page.evaluate("interactionRefreshFailure.hits") >= 2
+                assert len(server.app.state.collector.client.callbacks) == callbacks + 1
+            finally:
+                page.evaluate("interactionRefreshFailure.restore()")
+
             expect(press).to_be_enabled()
             press.click()
             expect(page.locator("#interaction-result")).to_contain_text("Recorded answer")
@@ -101,10 +114,11 @@ def main():
             page.locator("#chat-preview-button").click()
             expect(page.locator("#chat-link-preview")).to_contain_text("Preview group")
             page.evaluate("""path=>{
-              const original=window.fetch;let fail=true;
+              const original=window.fetch;
+              window.interactionJoinFailure={restore(){window.fetch=original;delete window.interactionJoinFailure;}};
               window.fetch=async(...args)=>{
-                if(fail&&String(args[0]).endsWith(path)){
-                  fail=false;throw new TypeError('Synthetic new-chat connection failure');
+                if(String(args[0]).endsWith(path)){
+                  throw new TypeError('Synthetic new-chat connection failure');
                 }
                 return original(...args);
               };
@@ -116,10 +130,17 @@ def main():
             expect(page.locator("#chat-link-preview button")).to_have_count(0)
             expect(page.locator("#toast")).to_be_hidden()
             assert len(server.app.state.collector.client.joined) == 1
+            expect(page.locator("#chat-feed")).to_contain_text("Could not load data")
+            expect(page.locator("#chat-send")).to_be_disabled()
+            page.evaluate("interactionJoinFailure.restore()")
+            page.locator("#chat-feed").get_by_role("button", name="Retry", exact=True).click()
+            expect(page.locator("#chat-send")).to_be_enabled()
+            expect(page.locator("#interaction-result")).to_contain_text("Action completed and recorded.")
+            assert len(server.app.state.collector.client.joined) == 1
             page.locator(".chat-item", has_text="Synthetic shop bot").click()
             page.locator("#msg-10 .msg-button", has_text="I paid").get_by_role("button").click()
             expect(page.locator("#interaction-result")).to_contain_text("Recorded answer")
-            # The reply is evidence, shown as text; no remote link is automatically followed.
+
             assert page.locator('#interaction-result a[href^="https:"]').count() == 0
             expect(page.locator("#chat-message")).to_be_enabled()
             page.locator("#chat-message").fill("Draft intended for the bot")
@@ -131,7 +152,7 @@ def main():
             expect(page.locator("#chat-message")).to_have_value("")
             expect(page.locator("#chat-message")).to_be_disabled()
             expect(page.locator("#chat-send")).to_be_disabled()
-            # Even a programmatic submit cannot send an unbound draft.
+
             page.eval_on_selector("#chat-compose", "form=>form.dispatchEvent(new Event('submit',{cancelable:true}))")
             assert len(server.app.state.collector.client.sent) == sent
             release_api_response(page)
@@ -140,7 +161,7 @@ def main():
             page.locator("#chat-send").click()
             expect(page.locator("#chat-send")).to_be_enabled()
             assert server.app.state.collector.client.sent[-1][0] == 123
-            # A stale response must not overwrite a chat opened afterwards.
+
             page.locator(".chat-item", has_text="Synthetic shop bot").click()
             expect(page.locator("#chat-message")).to_be_enabled()
             hold_api_response(page, "/api/chats/" + str(CHAT) + "/messages?limit=60")
@@ -155,21 +176,24 @@ def main():
             for width, height in [(1440, 1000), (390, 844), (320, 800)]:
                 page.set_viewport_size({"width": width, "height": height})
                 for theme in ("light", "dark"):
+                    if width < 768:
+                        page.locator("#navigation-toggle").click()
                     page.locator(f'#workspace [data-theme-choice="{theme}"]').click()
                     expect(page.locator("html")).to_have_attribute("data-theme", theme)
+                    if width < 768:
+                        page.locator(".mobile-nav-close").click()
                     page.locator("#chat-compose").scroll_into_view_if_needed()
                     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1")
                     page.screenshot(path=str(output / f"chat-{width}-{theme}.png"), full_page=True)
-            # The operator's draft must not leak to another account or return after locking.
+
             page.locator("#chat-message").fill("private unfinished draft")
-            page.locator("#top-lock").click()
+            lock_panel(page)
             expect(page.locator("#gate")).to_be_visible()
-            assert page.locator("#chat-message").input_value() == ""
-            # New controls keep their English text after reloading.
-            page.reload()
-            page.locator("#panel-token").fill(server.app.state.vault.token)
-            page.locator("#unlock-form button").click()
-            page.locator('[data-view="chats"]').click()
+            assert page.evaluate("""()=>{const root=panelRoots.get('chats');
+              return !root.isConnected&&root.querySelector('#chat-message').value==='';}""")
+
+            unlock(page, server)
+            navigate_panel(page, "chats")
             expect(page.locator("#chat-send")).to_have_text("Send")
             expect(page.locator("#chat-message")).to_have_attribute("placeholder", "Write a message…")
             expect(page.locator("#chat-compose-account")).to_contain_text("Sending as")

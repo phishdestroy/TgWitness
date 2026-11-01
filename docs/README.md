@@ -25,11 +25,22 @@ The proxy and witness bot are separate options.
 
 ## Find your workflow
 
+History loading, archive analysis, MCP, local OCR/transcription and webhooks are
+included in 0.7.1. [Start with the workflow guide](https://phishdestroy.github.io/TgWitness/docs/archive/).
+
 | I want to… | Start here | What I should see |
 | --- | --- | --- |
 | Try the interface | [Quick start](QUICKSTART.md#explore-the-interface) | Fictional conversations; no Telegram login |
 | Connect my account | [Account setup](ACCOUNTS.md) | A new test message in the journal |
+| Capture one private chat from my fork | [GitHub Actions capture (preview)](SEALED-ACTIONS.md) | An encrypted archive and verification against the approved upstream workflow |
+| Load older messages into the workspace | [Source history](HISTORY.md) | Resumable capture and a signed progress report |
+| Export an account with a defined scope | [Account export](ACCOUNT-EXPORT.md) · [Русский](ru/ACCOUNT-EXPORT.md) | Selected messages and files, resumable jobs and a signed archive with coverage records |
+| Prepare a copy for a lawyer or another recipient | [Minimized disclosure](ACCOUNT-EXPORT.md#prepare-a-disclosure-for-a-lawyer-or-another-recipient) | A separate signed copy with participant pseudonyms and optional text/files; the source stays unchanged |
 | Give a reviewer or analyst access | [Access and permissions](ACCESS.md) | Only the chosen accounts, chats and permitted actions |
+| Connect an AI client | [Read-only MCP](MCP.md) | Expiring access to selected workspaces and chats |
+| Ask questions and write a report | [Archive analysis](ANALYSIS.md) | Reviewed sources, verified references and separate analyst revisions |
+| Read text in saved attachments | [Local OCR and transcription](MEDIA-ANALYSIS.md) | Hash-linked machine recognition, separate from original evidence |
+| Connect n8n or a SIEM | [Signed webhooks](WEBHOOKS.md) | Scoped notifications with delivery status |
 | Investigate across the whole account | [Complete investigation walkthrough](INVESTIGATION.md) | A source register, cited cross-chat timeline, people/file connections and verified evidence per workspace |
 | Choose a connection route | [Proxy settings](CONNECTION-SECURITY.md) | A successful Telegram connection check |
 | Share a verifiable record | [Export and verify](EVIDENCE.md#investigation-handoff) | Valid signatures and the expected key fingerprint |
@@ -38,10 +49,11 @@ The proxy and witness bot are separate options.
 | Let a third party check the server itself | [High-assurance deployment](HIGH-ASSURANCE.md) | A report from the provider, Cloudflare and the collector |
 | Diagnose a problem | [Operations](OPERATIONS.md) | A concrete cause and a way to check recovery |
 
-**What has actually been tested:** [verification record](VERIFICATION.md).
-Real Telegram observations, synthetic tests and remaining live qualification work
-are recorded separately. A signed journal establishes integrity relative to a
-trusted key; a controlled delivery test checks particular Telegram events.
+**What has actually been tested:** [verification record](VERIFICATION.md), including
+a dated live server inventory of journal and message-event counts. Real Telegram
+observations, synthetic tests and remaining live qualification work are recorded
+separately. A signed journal establishes integrity relative to a trusted key;
+a controlled delivery test checks particular Telegram events.
 
 For step-by-step instructions, use the [wiki](wiki/Home.md).
 For terminology, use the [glossary](wiki/Glossary.md).

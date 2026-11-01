@@ -4,12 +4,13 @@ import io
 import ipaddress
 import json
 import logging
+import re
 import secrets
 from secrets import token_bytes as secrets_token
 import time
 from datetime import datetime, timezone
 from collections import defaultdict, deque
-from contextlib import asynccontextmanager
+from contextlib import asynccontextmanager, suppress
 from pathlib import Path
 from typing import Literal
 
@@ -17,35 +18,42 @@ from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, Response
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel, Field, model_validator
-from starlette.background import BackgroundTask
+from pydantic import BaseModel, Field, StrictBool, StrictInt, model_validator
 from telethon.errors import FloodWaitError, RPCError
 
 from . import __version__
+from .workers import complete_in_thread
+from .account_export import AccountExport, AccountExportOptions
+from .disclosure import Disclosures, DisclosurePolicy
+from .downloads import TemporaryDownload, build_file
 from .access import POLICY, AccessControl, AdminSettings, Console, GrantSettings, Refused, check as access_check
-from .collector import Collector
+from .collector import AUTHORIZATION_ERRORS, Collector
 from .demo import seed_demo
 from .evidence import LIMITS, checkpoint, encrypt_export, export_file, producer, retain_checkpoint, cleanup_exports
 from . import i18n
 from .security import InstanceLock, Vault
-from .profiles import Profiles, ProfileDispatch
+from .profiles import GROUP_SECTIONS, Profiles, ProfileDispatch
 from .multi_export import MultiExport
 from .provenance import run_receipt
 from .middleware import RequestLimit, request_limit
-from .account_import import import_accounts, IMPORT_REQUEST_LIMIT
+from .account_import import import_accounts, IMPORT_REQUEST_LIMIT, session_key
 from .anchor import request_archive
 from .anchoring import EvidenceMode, anchor_loop, evidence_settings, request_anchor
 from . import replica
 from . import alerts
 from .network import NetworkConfig, RoutePolicy, parse_mtproxy_link
-from .proxy_catalog import ProxyPool, PublicCatalog, feed_network
+from . import proxy_catalog, proxy_sources
+from .proxy_catalog import NoProxyAvailable, ProxyPool, PublicCatalog, feed_network
 from .monitoring import Capture, Monitoring, capture_settings, monitoring_settings
 from .scope import (EXCLUDE_LIMIT, WIDE_WARNING, Recheck, ScopeUpdate, recheck_settings, scope_settings,
                     unexclude)
 from . import assurance
+from . import health
 from . import netclient
 from . import source_check
 from . import dossier
+from . import report
+from . import recording
 from . import tuning
 from . import witness_api
 from . import interactions
@@ -98,13 +106,13 @@ class SourceCheck(BaseModel):
 
 
 class AlertUpdate(alerts.AlertSettings):
-    # Write-only: None keeps the saved destinations; saved addresses are only shown masked.
+
     urls: list[str] | None = Field(default=None, max_length=20)
-    add_urls: list[str] = Field(default=[], max_length=20)  # appended to the saved (or given) destinations
+    add_urls: list[str] = Field(default=[], max_length=20)
 
 
 class ExportPassword(BaseModel):
-    # ZIP AES derives its key with 1,000 PBKDF2-SHA1 rounds, so length is what protects the file.
+
     password: str = Field(min_length=12, max_length=256)
 
 
@@ -119,6 +127,38 @@ class TargetPriority(BaseModel):
     priority: bool
 
 
+class TargetBatch(BaseModel):
+    chat_ids: list[int] = Field(min_length=1, max_length=500)
+    enabled: bool | None = None
+    priority: bool | None = None
+    remove: StrictBool = False
+
+    @model_validator(mode="after")
+    def action_required(self):
+        if self.remove:
+            if self.enabled is not None or self.priority is not None:
+                raise ValueError("Remove cannot be combined with enabled or priority.")
+            return self
+        if self.enabled is None and self.priority is None:
+            raise ValueError("Choose enabled, priority, or remove.")
+        return self
+
+
+class IgnoreSources(BaseModel):
+    chat_ids: list[StrictInt] = Field(min_length=1, max_length=500)
+    ignored: StrictBool
+
+    @model_validator(mode="after")
+    def valid_chat_ids(self):
+        if any(chat_id == 0 or not -(2**53) < chat_id < 2**53 for chat_id in self.chat_ids):
+            raise ValueError("Invalid chat ID.")
+        return self
+
+
+class ClearMediaQueue(BaseModel):
+    through_seq: StrictInt = Field(ge=0, lt=2**53)
+
+
 class DossierSwitch(BaseModel):
     enabled: bool
 
@@ -131,19 +171,28 @@ class ProxyLink(BaseModel):
     link: str = Field(min_length=1, max_length=2048)
 
 
+class ProxyListUpload(BaseModel):
+    label: str = Field(default="", max_length=120)
+    text: str = Field(min_length=1, max_length=1024 * 1024)
+
+
+class GitHubToken(BaseModel):
+    token: str = Field(default="", max_length=300)
+
+
 class ReplicaUpdate(replica.ReplicaSettings):
-    # Write-only: empty keeps the saved keys; saved keys are never sent back to the browser.
+
     access_key: str = Field(default="", max_length=256, pattern=r"^\S*$")
     secret_key: str = Field(default="", max_length=256, pattern=r"^\S*$")
 
 
 class Snapshot(BaseModel):
     chat_id: int
-    limit: int = Field(default=100, ge=1, le=10000)  # the workspace's own maximum is a panel parameter
+    limit: int = Field(default=100, ge=1, le=10000)
 
 
 class ParametersUpdate(BaseModel):
-    # Only the parameters to change; null restores a default.
+
     values: dict[str, bool | int | float | list[str] | None] = Field(max_length=200)
 
 
@@ -159,16 +208,39 @@ class MultiExportStart(BaseModel):
 
 class ProfileCreate(BaseModel):
     label: str = Field(min_length=1, max_length=80)
+    group: str | None = Field(default=None, max_length=40)
+
+
+class ProfileGroup(BaseModel):
+    label: str = Field(min_length=1, max_length=80)
+    template: str | None = Field(default=None, max_length=40)
+    sections: list[str] | None = Field(default=None, max_length=10)
+
+
+class ProfileGroupAssign(BaseModel):
+    group: str | None = Field(default=None, max_length=40)
+
+
+class ProfileImport(AccountImport):
+    label: str = Field(default="", max_length=80)
+    group: str | None = Field(default=None, max_length=40)
+    api_id: int | None = Field(default=None, gt=0)
+    api_hash: str | None = Field(default=None, pattern=r"^[0-9a-f]{32}$")
 
 
 class RoutePolicyUpdate(RoutePolicy):
-    # Write-only: null keeps the saved proxy for requests outside Telegram; its password is never sent back.
+
     outside_proxy: NetworkConfig | None = None
     remove_outside_proxy: bool = False
 
 
 class AccessLogin(BaseModel):
     token: str = Field(min_length=1, max_length=512)
+
+
+def panel_language(request):
+    """The language the panel is shown in; reports set to "Same as the panel" use it."""
+    return i18n.pick(request.cookies.get(i18n.COOKIE), request.headers.get("accept-language"))
 
 
 def create_app(data_dir=None, demo=False, client_factory=None, token_override=None, allow_profiles=True,
@@ -178,14 +250,18 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     bearer = HTTPBearer(auto_error=False)
     op_lock = asyncio.Lock()
     export_lock = asyncio.Lock()
+    from .live_stream import StreamSlots
+    stream_slots = StreamSlots()
     public_proxies = PublicCatalog(root)
-    # One automatic MTProxy pool per process: workspaces are spread over different proxies.
+
     shared_pool = proxy_pool or ProxyPool(public_proxies)
-    # The main panel keeps the installation's accesses and console; workspaces use the same.
+    public_proxies = shared_pool.catalog
+
     console = None if access else Console()
 
     @asynccontextmanager
     async def lifespan(app):
+        app.state.closing = False
         if console:
             console.attach()
         instance = InstanceLock(root)
@@ -204,17 +280,31 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             vault = Vault(root)
             if token_override:
                 vault.token = token_override
-            store = Store(root)
-            store.bind(vault)
-            await asyncio.to_thread(store.verify, vault.public_key)
+            def open_journal():
+                nonlocal store
+                store = Store(root)
+                store.bind(vault)
+
+            await complete_in_thread(open_journal)
+            await complete_in_thread(store.verify, vault.public_key)
             if demo:
                 if store.stats()["total"] and not store.get_setting("demo", False):
                     raise RuntimeError("Refusing to mix synthetic data into a real journal.")
                 seed_demo(store)
+            elif store.get_setting("capture", None) is None:
+                # Freeze defaults before the first startup record. An older journal without an
+                # explicit policy previously enabled every type; an upgrade must retain that choice.
+                policy = capture_settings(store)
+                if store.stats()["total"]:
+                    for rule in policy["types"].values():
+                        rule["enabled"] = True
+                store.set_setting("capture", policy)
             collector = Collector(store, vault, **({"client_factory": client_factory} if client_factory else {}))
             collector.account_guard = account_guard
             collector.proxy_pool = shared_pool
             app.state.store, app.state.vault, app.state.collector = store, vault, collector
+            app.state.account_export = AccountExport(collector, store, vault)
+            app.state.disclosures = Disclosures(app.state.account_export, vault)
             app.state.access = access or AccessControl(vault, store, console)
             if not access:
                 def workspace_label(pid):
@@ -228,11 +318,11 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                     return next((p["label"] for p in store.get_setting("profiles", []) if p["id"] == pid), pid)
                 app.state.access.labels = workspace_label
             store.listeners.append(app.state.access.journal_listener(profile_id))
-            # This capability never exposes the real panel token (including an env override).
-            # It is accepted only for a directly accessed, isolated synthetic demo.
+
+
             app.state.local_demo_token = secrets.token_urlsafe(32)
             app.state.run_receipt = run_receipt(store, vault)
-            # High-assurance deployments only: the host measured into the signed start record.
+
             selected = assurance.mode()
             app.state.assurance = None
             if selected and not demo:
@@ -250,22 +340,26 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             journal_ready = True
             app.state.anchor_wakeup, app.state.anchor_status = asyncio.Event(), {"busy": False}
             app.state.replica_wakeup, app.state.replica_status = asyncio.Event(), {"busy": False}
+            app.state.host_status = {}  # the assurance loop's latest host measurement
             app.state.alert_wakeup = asyncio.Event()
             if not store.get_setting("demo", False):
-                # Requests outside Telegram follow the workspace's IP mode (Collector.outside_route).
+
                 alert_task = asyncio.create_task(alerts.alert_loop(
-                    store, vault, collector.outside_route, app.state.alert_wakeup))
+                    store, vault, collector.outside_route, app.state.alert_wakeup, profile_id))
                 anchor_task = asyncio.create_task(anchor_loop(
                     store, collector.outside_route, app.state.anchor_wakeup, app.state.anchor_status))
                 replica_task = asyncio.create_task(replica.replica_loop(
                     store, vault, collector.outside_route, app.state.replica_wakeup, app.state.replica_status))
                 if app.state.assurance:
                     host_task = asyncio.create_task(assurance.assurance_loop(
-                        store, app.state.assurance["mode"], app.state.assurance["provider"]))
-                if proxy_pool is None:  # the process's main app keeps the shared pool up to date
+                        store, app.state.assurance["mode"], app.state.assurance["provider"],
+                        status=app.state.host_status))
+                if proxy_pool is None:
                     shared_pool.intervals = lambda: {"lists": tuning.value(store, "proxy_lists_minutes") * 60,
                                                      "probe": tuning.value(store, "proxy_probe_minutes") * 60}
                     shared_pool.outside = collector.outside_route
+                    shared_pool.catalog.vault = vault
+                    shared_pool.catalog.changed()
                     pool_task = asyncio.create_task(shared_pool.run())
 
             async def resume():
@@ -273,7 +367,8 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                     async with op_lock:
                         await collector.start()
                 except Exception as exc:
-                    collector.phase, collector.last_error = "resume_failed", type(exc).__name__
+                    collector.phase = "authorization_required" if collector.authorization_required else "resume_failed"
+                    collector.last_error = type(exc).__name__
                     store.append("coverage.gap", {"reason": "resume_failed", "error_type": type(exc).__name__})
 
             if store.get_setting("resume", False) and not store.get_setting("demo", False):
@@ -286,14 +381,27 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 app.state.profiles = profiles
                 await profiles.open()
                 app.state.multi_export = MultiExport(profiles)
+                from .archive_api import startup as start_mcp
+                await start_mcp(app)
             yield
         finally:
+            app.state.closing = True
             try:
+                if allow_profiles:
+                    from .archive_api import shutdown as stop_mcp
+                    await stop_mcp(app)
+                if getattr(app.state, "media_analysis", None):
+                    await app.state.media_analysis.close()
                 if getattr(app.state, "multi_export", None):
                     await app.state.multi_export.close()
                 if profiles:
                     await profiles.close()
-                for task in (resume_task, anchor_task, replica_task, alert_task, host_task, pool_task):
+                if getattr(app.state, "disclosures", None):
+                    await app.state.disclosures.close()
+                if getattr(app.state, "account_export", None):
+                    await app.state.account_export.close()
+                check_task = shared_pool.check_task if proxy_pool is None else None
+                for task in (resume_task, anchor_task, replica_task, alert_task, host_task, pool_task, check_task):
                     if task:
                         task.cancel()
                         await asyncio.gather(task, return_exceptions=True)
@@ -311,6 +419,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
 
     app = FastAPI(title="TgWitness", version=__version__, lifespan=lifespan,
                   docs_url=None, redoc_url=None, openapi_url=None)
+    app.state.operation_lock, app.state.closing = op_lock, False
     app.add_middleware(RequestLimit, max_body=16384)
 
     @app.middleware("http")
@@ -321,7 +430,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         response = await call_next(request)
         audit = getattr(request.state, "audit", None)
         if audit and audit[0] is app:
-            # Changes, downloads and refusals go to the administrator's console; routine reading does not.
+
             path = request.url.path
             if (request.method != "GET" or response.status_code == 403
                     or any(part in path for part in ("/export", "/download", "/media/", "/replica/key", "/anchor-request"))):
@@ -331,13 +440,13 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         response.headers["X-Content-Type-Options"] = "nosniff"
         response.headers["Referrer-Policy"] = "no-referrer"
         response.headers["X-Frame-Options"] = "DENY"
-        response.headers["Content-Security-Policy"] = (
+        response.headers.setdefault("Content-Security-Policy", (
             "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; "
-            "connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'; object-src 'none'")
+            "media-src 'self' blob:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'; object-src 'none'"))
         response.headers["Cache-Control"] = "no-store"
         return response
 
-    # FastAPI's default validation error echoes input, which can contain credentials.
+
     from fastapi.exceptions import RequestValidationError
     from fastapi.responses import JSONResponse
 
@@ -383,8 +492,8 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         return {"available": True, "token": app.state.local_demo_token}
 
     def reject_access(request, detail):
-        # A noisy client behind the same proxy must not lock out valid tokens.
-        # Both authentication paths share this bounded failure accounting.
+
+
         address = request.client.host if request.client else "unknown"
         now = time.monotonic()
         if address not in failures and len(failures) >= 4096:
@@ -432,10 +541,42 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         """None for every chat of this workspace, otherwise the chat IDs the access opens."""
         return request.state.principal.chats(profile_id)
 
+    def visible_targets(request):
+        allowed = visible_chats(request)
+        return [t for t in app.state.store.targets() if allowed is None or t["chat_id"] in allowed]
+
     def require_chat(request, chat_id):
         allowed = visible_chats(request)
         if allowed is not None and chat_id not in allowed:
             raise HTTPException(403, "This chat is not open to this access.")
+
+    def scoped_status(workspace, allowed, current=None):
+        current = dict(current or workspace.state.collector.status())
+        if allowed is not None:
+            store = workspace.state.store
+            current["source_status"] = {chat: status for chat, status in current.get("source_status", {}).items()
+                                        if int(chat) in allowed}
+            current["media_jobs"] = store.media_stats(allowed)
+            current["media_pending"] = sum(n for state, n in current["media_jobs"].items()
+                                           if state in ("queued", "running", "retry"))
+            current["oldest_pending_media_at"] = store.media_oldest(allowed)
+            recheck = current.get("recheck")
+            current["recheck"] = None
+            if recheck and (records := store.events(kind="recheck.completed", limit=1)):
+                results = [r for r in records[0]["payload"].get("chats", []) if r.get("chat_id") in allowed]
+                if results:
+                    current["recheck"] = {"at": recheck.get("at") or records[0]["observed_at"], "chats": len(results),
+                                          "errors": sum("error" in r for r in results),
+                                          **{key: sum(r.get(key, 0) for r in results)
+                                             for key in ("recovered", "edited", "missing", "checked")}}
+            if current.get("chat_export") and current["chat_export"].get("chat_id") not in allowed:
+                current["chat_export"] = None
+            if current.get("scope"):
+                current["scope"] = {**current["scope"],
+                                    "exclude": [chat for chat in current["scope"].get("exclude", []) if chat in allowed]}
+        targets = [t for t in workspace.state.store.targets() if allowed is None or t["chat_id"] in allowed]
+        parts = health.collector_of(workspace.state, current, enabled_sources=sum(bool(t["enabled"]) for t in targets))
+        return current, parts, targets
 
     async def authenticate_witness(request: Request, credential: HTTPAuthorizationCredentials = Depends(bearer)):
         """Witness tokens open only the signed journal head; the panel token is not accepted here."""
@@ -445,42 +586,69 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         return entry
 
     def require_live():
+        if app.state.closing:
+            raise HTTPException(503, "This workspace is closing. Wait for it to finish.")
         if app.state.store.get_setting("demo", False):
             raise HTTPException(409, "This is a synthetic demo. Start a separate data directory for real observation.")
+
+    async def perform_operation(call, *args):
+        collector = app.state.collector
+        client = collector.client
+        try:
+            return await asyncio.wait_for(call(*args), tuning.value(app.state.store, "operation_timeout_seconds"))
+        except FloodWaitError as exc:
+            app.state.store.set_setting("rpc_backoff_until", max(time.time() + exc.seconds,
+                app.state.store.get_setting("rpc_backoff_until", 0)))
+            raise HTTPException(429, {"message": "Telegram requested a pause.", "retry_after": exc.seconds},
+                                headers={"Retry-After": str(exc.seconds)}) from None
+        except AUTHORIZATION_ERRORS as exc:
+            owner, name = getattr(call, "__self__", None), getattr(call, "__name__", "operation")
+            candidate = name in {"configure", "start_phone", "start_qr", "send_code", "confirm_code",
+                                 "confirm_password", "cancel_qr", "sign_out", "test_network"}
+            if not candidate and (owner is collector or getattr(owner, "collector", None) is collector
+                                  or args and args[0] is collector):
+                collector.handle_authorization_error(exc, name, client=client)
+            raise HTTPException(400, "Telegram authorization expired. Sign in again.") from None
+        except RPCError as exc:
+            raise HTTPException(400, "Telegram rejected the request: " + type(exc).__name__) from None
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from None
+        except (TimeoutError, OSError, ConnectionError) as exc:
+            raise HTTPException(503, "Connection unavailable: " + type(exc).__name__) from None
 
     async def operation(call, *args):
         require_live()
         async with op_lock:
-            try:
-                return await asyncio.wait_for(call(*args), tuning.value(app.state.store, "operation_timeout_seconds"))
-            except FloodWaitError as exc:
-                app.state.store.set_setting("rpc_backoff_until", max(time.time() + exc.seconds,
-                    app.state.store.get_setting("rpc_backoff_until", 0)))
-                raise HTTPException(429, {"message": "Telegram requested a pause.", "retry_after": exc.seconds},
-                                    headers={"Retry-After": str(exc.seconds)}) from None
-            except RPCError as exc:
-                raise HTTPException(400, "Telegram rejected the request: " + type(exc).__name__) from None
-            except ValueError as exc:
-                raise HTTPException(400, str(exc)) from None
-            except (TimeoutError, OSError, ConnectionError) as exc:
-                raise HTTPException(503, "Connection unavailable: " + type(exc).__name__) from None
+            require_live()
+            if (app.state.collector.export_claim and getattr(call, "__name__", "") in {
+                    "configure", "start_phone", "start_qr", "send_code", "confirm_code", "confirm_password",
+                    "sign_out", "set_network", "set_route_policy", "apply"}):
+                raise HTTPException(409, "Pause the active export before changing its account or connection.")
+            return await perform_operation(call, *args)
 
     @app.get("/api/status", dependencies=[Depends(authenticate)])
     async def status(request: Request):
+        from . import ai, media_analysis
         store, vault = app.state.store, app.state.vault
         allowed = visible_chats(request)
+        collector_status, parts, targets = scoped_status(app, allowed)
         return {"version": __version__, "demo": store.get_setting("demo", False),
-                "collector": app.state.collector.status(), "stats": store.stats(allowed),
-                "targets": [t for t in store.targets() if allowed is None or t["chat_id"] in allowed],
+                "analysis": {"enabled": ai.enabled(app.state) and not store.get_setting("demo", False),
+                             "media_available": media_analysis.available() and not store.get_setting("demo", False)},
+                "collector": collector_status, "stats": store.stats(allowed),
+                "health": parts,
+                "history": app.state.collector.history.status() if allowed is None else None,
+                "targets": targets,
                 "capture": capture_settings(store),
-                "monitoring": monitoring_settings(store), "scope": scope_settings(store),
+                "monitoring": monitoring_settings(store), "scope": collector_status["scope"],
                 "recheck": recheck_settings(store),
                 "dossiers": [c for c in dossier.enabled_chats(store) if allowed is None or c in allowed],
                 "parameters": tuning.values(store),
                 "fingerprint": fingerprint(vault.public_key), "limitations": LIMITS,
                 "protection": {"vault_key_mode": vault.key_mode, "secrets_encrypted": True,
                                "journal_encrypted_by_app": False, "media_encrypted_by_app": False},
-                "run_id": app.state.run_receipt["run_id"], "chats_limited": allowed is not None}
+                "run_id": app.state.run_receipt["run_id"], "chats_limited": allowed is not None,
+                "assurance": bool(app.state.assurance)}
 
     if allow_profiles:
         @app.get("/api/profiles", dependencies=[Depends(authenticate)])
@@ -489,9 +657,13 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             for entry in app.state.profiles.summary():
                 if not principal.opens(entry["id"]):
                     continue
-                if principal.chats(entry["id"]) is not None:  # counts of the whole workspace stay closed
-                    entry = {**entry, "stats": None, "sources_enabled": None,
-                             "sources_total": len(principal.chats(entry["id"]))}
+                allowed = principal.chats(entry["id"])
+                if allowed is not None:
+                    workspace = app.state.profiles.entries[entry["id"]].get("app")
+                    current, parts, targets = (scoped_status(workspace, allowed, entry["collector"])
+                                                if workspace else (None, None, []))
+                    entry = {**entry, "stats": None, "sources_enabled": sum(bool(t["enabled"]) for t in targets),
+                             "collector": current, "health": parts, "sources_total": len(targets)}
                 listed.append(entry)
             return {"profiles": listed, "limit": Profiles.MAX_PROFILES,
                     "model": "independent account collectors and signing identities"}
@@ -502,9 +674,140 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             if not body.label.strip():
                 raise HTTPException(422, "Enter an account label.")
             try:
-                return await app.state.profiles.create(body.label.strip())
+                return await app.state.profiles.create(body.label.strip(), body.group)
             except ValueError as exc:
                 raise HTTPException(400, str(exc)) from None
+
+        def groups_view(principal=None):
+            registry = app.state.profiles
+            groups = []
+            for group in registry.groups():
+                members = registry.members(group["id"])
+                if principal and not principal.admin:
+                    members = [pid for pid in members if principal.opens(pid)]
+                    if not members:
+                        continue
+                    if not principal.opens(group.get("template") or ""):
+                        group = {**group, "template": None}
+                groups.append({**group, "members": members})
+            return {"groups": groups, "sections": list(GROUP_SECTIONS)}
+
+        @app.get("/api/profile-groups", dependencies=[Depends(authenticate)])
+        async def profile_groups(request: Request):
+            return groups_view(request.state.principal)
+
+        @app.post("/api/profile-groups", dependencies=[Depends(authenticate)])
+        async def profile_group_create(body: ProfileGroup):
+            require_live()
+            try:
+                await app.state.profiles.save_group(None, body.label.strip(), body.template, body.sections)
+            except ValueError as exc:
+                raise HTTPException(400, str(exc)) from None
+            return groups_view()
+
+        @app.patch("/api/profile-groups/{group_id}", dependencies=[Depends(authenticate)])
+        async def profile_group_update(group_id: str, body: ProfileGroup):
+            require_live()
+            try:
+                await app.state.profiles.save_group(group_id, body.label.strip(), body.template, body.sections)
+            except ValueError as exc:
+                raise HTTPException(400, str(exc)) from None
+            return groups_view()
+
+        @app.delete("/api/profile-groups/{group_id}", dependencies=[Depends(authenticate)])
+        async def profile_group_delete(group_id: str):
+            require_live()
+            try:
+                await app.state.profiles.delete_group(group_id)
+            except ValueError as exc:
+                raise HTTPException(400, str(exc)) from None
+            return groups_view()
+
+        @app.post("/api/profile-groups/{group_id}/apply", dependencies=[Depends(authenticate)])
+        async def profile_group_apply(group_id: str):
+            require_live()
+            try:
+                return {**await app.state.profiles.apply_group(group_id), **groups_view()}
+            except ValueError as exc:
+                raise HTTPException(400, str(exc)) from None
+
+        @app.put("/api/profiles/{profile_id}/group", dependencies=[Depends(authenticate)])
+        async def profile_group_assign(profile_id: str, body: ProfileGroupAssign):
+            require_live()
+            try:
+                await app.state.profiles.assign(profile_id, body.group)
+            except ValueError as exc:
+                raise HTTPException(400, str(exc)) from None
+            return groups_view()
+
+        @app.post("/api/profiles/import", dependencies=[Depends(authenticate)])
+        async def profiles_import(body: ProfileImport):
+            """One account per request: convert its files, give it a new workspace and connect the session.
+            A workspace whose session does not log in is removed again; the uploads are never stored."""
+            require_live()
+            if (body.api_id is None) != (body.api_hash is None):
+                raise HTTPException(422, "Provide both API ID and API hash, or leave both empty.")
+            try:
+                account = await asyncio.to_thread(import_accounts, [f.model_dump() for f in body.files], body.passcode)
+            except ValueError as exc:
+                raise HTTPException(400, str(exc)) from None
+            if not account.get("session"):
+                raise HTTPException(400, "These files hold no login session. Add the .session or TData of the account.")
+            registry = app.state.profiles
+            expected, key = account.get("expected_user_id"), session_key(account["session"])
+            # Before any connection: the same key from a second proxy address while its workspace is
+            # connected can make Telegram revoke it (AUTH_KEY_DUPLICATED)
+            holder = registry.holder(expected, key)
+            if holder:
+                raise HTTPException(409, "This Telegram account already has a workspace: " + holder["label"] + ".")
+            owner = object()
+            release = release_account = None
+            try:
+                release = registry.reserve_session(key, owner)
+                if expected is not None:
+                    release_account = registry.reserve_account(expected, owner)
+            except ValueError as exc:
+                if release:
+                    release()
+                raise HTTPException(409, str(exc)) from None
+            entry = None
+            label = body.label.strip() or (body.files[0].name.rsplit(".", 1)[0][:80] or "Imported account")
+            try:
+                entry = await registry.create(label, body.group)
+                # Only this new child's operation lock is held; the main workspace and registry stay usable.
+                child = registry.entries[entry["id"]]["app"]
+                if child is None:
+                    raise ValueError("The new workspace could not start.")
+                collector = child.state.collector
+                registry.transfer_session(key, owner, collector, expected)
+                async with child.state.operation_lock:
+                    if child.state.closing:
+                        raise ValueError("The new workspace could not start.")
+                    await asyncio.wait_for(collector.configure(
+                        body.api_id or account.get("api_id"), body.api_hash or account.get("api_hash"),
+                        account["session"], expected), tuning.value(app.state.store, "operation_timeout_seconds"))
+                    account_info = child.state.store.get_setting("account", {}) or {}
+                    # Keep the account photo, then disconnect until the operator chooses sources.
+                    with suppress(Exception):
+                        await asyncio.wait_for(collector.avatar(account_info.get("id")), 20)
+                    await collector.stop()
+            except (Exception, asyncio.CancelledError) as exc:
+                if entry is not None:
+                    with suppress(Exception):
+                        await registry.delete(entry["id"])
+                if isinstance(exc, asyncio.CancelledError):
+                    raise
+                reason = (str(exc) if isinstance(exc, (ValueError, NoProxyAvailable)) else
+                          "Telegram did not answer in time. Try again later." if isinstance(exc, TimeoutError)
+                          else type(exc).__name__)
+                raise HTTPException(400, "Not imported: " + reason) from None
+            finally:
+                if release_account:
+                    release_account()
+                release()
+            return {"profile": entry, "account": {"id": account_info.get("id"), "username": account_info.get("username"),
+                                                  "name": account_info.get("name")},
+                    "formats": account.get("formats", [])}
 
         def opens_chat_everywhere(principal, chat_id, profile_ids):
             return all(principal.opens(pid) and (principal.chats(pid) is None or chat_id in principal.chats(pid))
@@ -520,7 +823,8 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         async def multi_export_start(request: Request, body: MultiExportStart):
             if not opens_chat_everywhere(request.state.principal, body.chat_id, [body.lead, *body.profiles]):
                 raise HTTPException(403, "This access does not open this chat in every chosen account.")
-            return await operation(app.state.multi_export.start, body.chat_id, body.profiles, body.lead)
+            return await operation(app.state.multi_export.start, body.chat_id, body.profiles, body.lead,
+                                   panel_language(request))
 
         @app.get("/api/multi-export/current", dependencies=[Depends(authenticate)])
         async def multi_export_current(request: Request):
@@ -541,8 +845,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             path = app.state.multi_export.result_path(export_id) if multi_visible(request) else None
             if not path:
                 raise HTTPException(404, "No finished export is available to download.")
-            return FileResponse(path, filename="tgwitness-chat-export.zip", media_type="application/zip",
-                                background=BackgroundTask(path.unlink, missing_ok=True))
+            return TemporaryDownload(path, filename="tgwitness-chat-export.zip", media_type="application/zip")
 
         @app.patch("/api/profiles/{profile_id}", dependencies=[Depends(authenticate)])
         async def profiles_rename(profile_id: str, body: ProfileCreate):
@@ -565,14 +868,87 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     @app.get("/api/events", dependencies=[Depends(authenticate)])
     async def get_events(request: Request, chat_id: int | None = None, message_id: int | None = None,
                          kind: str | None = None, before: int | None = None,
-                         search: str | None = None, limit: int = 100):
+                         search: str | None = None, limit: int = 100,
+                         since: str | None = None, until: str | None = None, hide_system: bool = False,
+                         after: int | None = None, include_count: bool = False):
         if not 1 <= limit <= 500 or (search and len(search) > 200):
             raise HTTPException(422, "Limit must be 1–500; search must be at most 200 characters.")
+        if kind and (len(kind) > 300 or len(kind.split(",")) > 16):
+            raise HTTPException(422, "Choose at most 16 event types.")
+        if before is not None and after is not None or any(value is not None and not 0 <= value < 2**53 for value in (before, after)):
+            raise HTTPException(422, "Choose one valid journal cursor.")
         if chat_id is not None:
             require_chat(request, chat_id)
-        records = app.state.store.events(chat_id, message_id, kind, before, limit, search,
-                                         chat_ids=visible_chats(request))
-        return {"events": records, "next_before": records[-1]["seq"] if len(records) == limit else None}
+        dates = []
+        for value in (since, until):
+            try:
+                date = datetime.fromisoformat(value) if value is not None and len(value) <= 64 else None
+                if value is not None and (date is None or date.tzinfo is None):
+                    raise ValueError()
+                dates.append(date.astimezone(timezone.utc) if date else None)
+            except (ValueError, OverflowError):
+                raise HTTPException(422, "Dates must be ISO timestamps with a timezone.") from None
+        if dates[0] is not None and dates[1] is not None and dates[0] > dates[1]:
+            raise HTTPException(422, "The start must precede the end of the selected period.")
+        filters = dict(chat_id=chat_id, message_id=message_id, kind=kind, search=search,
+                       chat_ids=visible_chats(request), since=dates[0], until=dates[1], hide_system=hide_system)
+        store = app.state.store
+
+        def read_window():
+            records = store.events(**filters, before=before, after=after, limit=limit+1, timeout_s=2)
+            more = len(records) > limit
+            records = records[-limit:] if after is not None else records[:limit]
+            older = newer = None
+            if records:
+                if after is not None:
+                    newer = records[0]["seq"] if more else None
+                    older = records[-1]["seq"] if store.events(**filters, before=records[-1]["seq"], limit=1, timeout_s=1) else None
+                else:
+                    older = records[-1]["seq"] if more else None
+                    if before is not None and store.events(**filters, after=records[0]["seq"], limit=1, timeout_s=1):
+                        newer = records[0]["seq"]
+            matched = None
+            if include_count:
+                try:
+                    matched = store.count_events(**filters, timeout_s=2)
+                except TimeoutError:
+                    pass
+            return {"events": records, "next_before": older, "next_after": newer,
+                    "matched": matched, "count_exact": matched is not None}
+
+        try:
+            return await complete_in_thread(read_window)
+        except TimeoutError:
+            raise HTTPException(503, "The journal is busy. Narrow the filters and retry.") from None
+
+    @app.get("/api/stream", dependencies=[Depends(authenticate)])
+    async def journal_stream(request: Request, after: int = 0,
+                             credential: HTTPAuthorizationCredentials = Depends(bearer)):
+        from .live_stream import LimitedStreamingResponse, stream
+        if not 0 <= after <= 9223372036854775807:
+            raise HTTPException(422, "Invalid journal cursor.")
+        token = credential.credentials
+
+        def authorize():
+            if local_demo_access(request) and secrets.compare_digest(token, app.state.local_demo_token):
+                principal = request.state.principal
+            else:
+                principal = app.state.access.resolve(token, client_address(request))
+            if principal is None:
+                raise Refused("Access ended")
+            access_check(principal, profile_id, POLICY["GET /api/stream"], {})
+            return principal.chats(profile_id)
+
+        async def updates():
+            try:
+                yield ": connected\n\n"
+                async for item in stream(app.state.store, after, authorize, request.is_disconnected):
+                    yield item
+            except Refused:
+                yield "event: access-ended\ndata: {}\n\n"
+
+        return LimitedStreamingResponse(updates(), slots=stream_slots, media_type="text/event-stream",
+                                        headers={"X-Accel-Buffering": "no", "Cache-Control": "no-store"})
 
     @app.post("/api/auth/configure", dependencies=[Depends(authenticate)])
     async def configure(body: Credentials):
@@ -586,6 +962,9 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     async def import_account(body: AccountImport):
         require_live()
         async with op_lock:
+            require_live()
+            if app.state.collector.export_claim:
+                raise HTTPException(409, "Pause the active export before importing another account.")
             if app.state.collector.running:
                 raise HTTPException(400, "Pause observation before importing another account.")
             try:
@@ -619,7 +998,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         try:
             addresses = await netclient.resolve(config.host, config.port)
         except OSError:
-            addresses = []  # not resolvable now: every connection checks it again
+            addresses = []
         inside = any(netclient.internal(a) for a in addresses)
         if inside and not (request.state.principal.admin or netclient.private_allowed()):
             raise HTTPException(403, "This proxy is inside this machine or its network. Only the main administrator can set it.")
@@ -673,6 +1052,103 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             return await app.state.collector.set_network(route)
         return await operation(apply)
 
+    def lists_updated_at(sources):
+        """When the newest list in use was actually downloaded; a blocked or failed attempt changes nothing."""
+        stamps = []
+        for source in sources:
+            with suppress(TypeError, ValueError):
+                if source.get("enabled") and source.get("fetched_at"):
+                    stamps.append(datetime.fromisoformat(source["fetched_at"]).timestamp())
+        return max(stamps, default=None)
+
+    def proxy_view(principal=None):
+        """The shared automatic pool as the panel shows it: every server, its check and its users."""
+        catalog = shared_pool.catalog
+        labels = {str(app.state.store.root): app.state.store.get_setting("profile_label", "this workspace")}
+        profiles = getattr(app.state, "profiles", None)
+        for entry in (profiles.entries.values() if profiles else ()):
+            if entry.get("app") is not None and (principal is None or principal.opens(entry["id"])):
+                labels[str(entry["app"].state.store.root)] = entry["label"]
+        rows, settings, intervals = shared_pool.table(labels), catalog.settings(), shared_pool.intervals()
+        sources = catalog.public()["sources"]
+        latencies = sorted(r["latency_ms"] for r in rows if r["latency_ms"])
+        return {"rows": rows, "summary": {
+                    "listed": len(rows), "ok": sum(r["status"] == "ok" for r in rows),
+                    "resting": sum(r["status"] == "resting" for r in rows),
+                    "untested": sum(r["status"] == "untested" for r in rows),
+                    "excluded": sum(r["excluded"] for r in rows), "preferred": sum(r["preferred"] for r in rows),
+                    "median_ms": latencies[len(latencies) // 2] if latencies else None,
+                    "countries": len({r["country"] for r in rows if r["country"]}),
+                    "checked_at": shared_pool.probed_at or None, "checking": shared_pool.check_task is not None},
+                "schedule": {"lists_minutes": round(intervals["lists"] / 60), "probe_minutes": round(intervals["probe"] / 60),
+                             "lists_at": lists_updated_at(sources)},
+                "sources": sources,
+                "settings": {**settings.model_dump(), "github_token": bool(catalog.github_token()),
+                             "github_status": catalog.github_status},
+                **download_route()}
+
+    @app.get("/api/network/proxies", dependencies=[Depends(authenticate)])
+    async def network_proxies(request: Request):
+        try:
+            return proxy_view(request.state.principal)
+        except ValueError as exc:
+            raise HTTPException(503, str(exc)) from None
+
+    @app.post("/api/network/proxies/check", dependencies=[Depends(authenticate)])
+    async def network_proxies_check(request: Request):
+        require_live()
+        if shared_pool.check_task is None:
+            shared_pool.check_task = asyncio.create_task(shared_pool.check_all(app.state.collector.outside_route()))
+        return proxy_view(request.state.principal)
+
+    @app.post("/api/network/sources", dependencies=[Depends(authenticate)])
+    async def network_sources(body: proxy_sources.SourceSettings):
+        require_live()
+        catalog = shared_pool.catalog
+        async with catalog.lock:
+            before = {item.id for item in catalog.settings().custom}
+            known = {source["id"] for source in proxy_catalog.SOURCES}
+            if set(body.disabled) - known:
+                raise HTTPException(422, "Unknown bundled list.")
+            if any(item.id and item.id not in before for item in body.custom):
+                raise HTTPException(422, "Unknown own list. Reload the page.")
+            try:
+                proxy_sources.save(catalog.root, body)
+            except ValueError as exc:
+                raise HTTPException(422, str(exc)) from None
+            catalog.changed()
+            catalog.forget(before - {item.id for item in body.custom})
+        app.state.store.append("network.sources_changed", {
+            "bundled_off": body.disabled, "own_lists": len(body.custom), "github_search": body.github.enabled,
+            "prefer_countries": body.prefer, "avoid_countries": body.avoid, "only_preferred": body.only_preferred})
+        return proxy_view()
+
+    @app.post("/api/network/sources/list", dependencies=[Depends(authenticate)])
+    async def network_sources_list(body: ProxyListUpload):
+        require_live()
+        try:
+            async with shared_pool.catalog.lock:
+                item, compatible, skipped = await complete_in_thread(shared_pool.catalog.add_list, body.label, body.text)
+        except ValueError as exc:
+            raise HTTPException(422, str(exc)) from None
+        app.state.store.append("network.sources_changed", {"own_list_added": item.label, "compatible": compatible})
+        return {**proxy_view(), "added": {"id": item.id, "compatible": compatible, "skipped": skipped}}
+
+    @app.post("/api/network/github-token", dependencies=[Depends(authenticate)])
+    async def network_github_token(request: Request, body: GitHubToken):
+        require_live()
+        if not request.state.principal.admin:
+            raise HTTPException(403, "Only the main administrator can store a GitHub token.")
+        token = body.token.strip()
+        if token and proxy_sources.token_problem(token):
+            raise HTTPException(422, proxy_sources.token_problem(token))
+        try:
+            shared_pool.catalog.set_github_token(token)
+        except ValueError as exc:
+            raise HTTPException(409, str(exc)) from None
+        app.state.store.append("network.github_token", {"stored": bool(token)})
+        return proxy_view()
+
     @app.post("/api/network/parse-link", dependencies=[Depends(authenticate)])
     async def network_parse_link(body: ProxyLink):
         try:
@@ -715,7 +1191,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             if not entry:
                 raise HTTPException(400, "Refresh the group list and select an available target.")
             with store.transaction():
-                # An operator's choice is final: the observation scope never re-enables or pauses it.
+
                 store.set_target(body.chat_id, entry["title"], entry["kind"], body.enabled, origin="manual",
                                  priority=body.priority)
                 included = body.enabled and unexclude(store, body.chat_id)
@@ -723,7 +1199,33 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                                                **({"removed_from_scope_exclusions": True} if included else {}),
                                                "coverage": "No observations promised while target is disabled."},
                              body.chat_id)
-        return {"targets": store.targets()}
+        return {"targets": visible_targets(request)}
+
+    @app.post("/api/targets/batch", dependencies=[Depends(authenticate)])
+    async def targets_batch(request: Request, body: TargetBatch):
+        require_live()
+        collector, store = app.state.collector, app.state.store
+        ids = list(dict.fromkeys(body.chat_ids))
+        for chat_id in ids:
+            require_chat(request, chat_id)
+        async with op_lock:
+            if body.remove:
+                result = remove_targets(ids)
+                return {"targets": visible_targets(request), **result}
+            existing = {t["chat_id"]: t for t in store.targets()}
+            entries = {chat_id: existing.get(chat_id) or collector.dialog_cache.get(chat_id) for chat_id in ids}
+            if any(entry is None for entry in entries.values()):
+                raise HTTPException(400, "Refresh the group list and select an available target.")
+            with store.transaction():
+                for chat_id, entry in entries.items():
+                    enabled = body.enabled if body.enabled is not None else bool(entry.get("enabled", True))
+                    store.set_target(chat_id, entry["title"], entry["kind"], enabled,
+                                     origin=entry.get("origin", "manual"), priority=body.priority)
+                    included = enabled and unexclude(store, chat_id)
+                    store.append("target.changed", {"title": entry["title"], "enabled": enabled,
+                                                   "priority": body.priority, "batch": True,
+                                                   **({"removed_from_scope_exclusions": True} if included else {})}, chat_id)
+        return {"targets": visible_targets(request), "updated": len(ids)}
 
     @app.post("/api/targets/priority", dependencies=[Depends(authenticate)])
     async def target_priority(request: Request, body: TargetPriority):
@@ -738,40 +1240,126 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                              priority=body.priority)
             store.append("target.priority", {"title": existing["title"], "priority": body.priority,
                                             "recheck": recheck_settings(store)}, body.chat_id)
-        return {"targets": store.targets()}
+        return {"targets": visible_targets(request)}
 
-    @app.delete("/api/targets/{chat_id}", dependencies=[Depends(authenticate)])
-    async def target_remove(chat_id: int):
-        require_live()
+    def remove_targets(ids):
+        """Remove validated sources as one transaction, then clear rebuildable caches."""
         store = app.state.store
-        async with op_lock:
-            existing = next((t for t in store.targets() if t["chat_id"] == chat_id), None)
-            if not existing:
-                raise HTTPException(404, "This chat is not among the sources.")
-            scope = scope_settings(store)
-            exclude = scope["mode"] != "selected" and chat_id not in scope["exclude"]
-            if exclude and len(scope["exclude"]) >= EXCLUDE_LIMIT:
-                raise HTTPException(409, "The scope already excludes 5,000 chats, the most it keeps. Pause this "
-                                         "chat instead, or switch the scope to chosen chats to remove it.")
-            with store.transaction():
+        existing = {t["chat_id"]: t for t in store.targets()}
+        if any(chat_id not in existing for chat_id in ids):
+            raise HTTPException(404, "This chat is not among the sources.")
+        scope = scope_settings(store)
+        additions = set(ids) - set(scope["exclude"]) if scope["mode"] != "selected" else set()
+        if len(scope["exclude"]) + len(additions) > EXCLUDE_LIMIT:
+            raise HTTPException(409, "The scope already excludes 5,000 chats, the most it keeps. Pause these "
+                                     "chats instead, or switch the scope to chosen chats to remove them.")
+        with store.transaction():
+            if additions:
+                store.set_setting("scope", {**scope, "exclude": sorted(set(scope["exclude"]) | additions)})
+            for chat_id in ids:
                 store.remove_target(chat_id)
-                if exclude:
-                    # Otherwise folder or account mode would add it again with its next message.
-                    store.set_setting("scope", {**scope, "exclude": [*scope["exclude"], chat_id]})
-                removed_dossier = dossier.remove(store, chat_id)
+                removed_dossier = dossier.remove(store, chat_id, clear_cache=False)
                 store.append("target.removed", {
-                    "title": existing["title"], "dossier_removed": removed_dossier,
+                    "title": existing[chat_id]["title"], "dossier_removed": removed_dossier,
                     "excluded_from_scope": scope["mode"] != "selected",
                     "journal": "records already saved for this chat stay in the append-only journal"}, chat_id)
-        return {"targets": store.targets()}
+        pending = []
+        for chat_id in ids:
+            try:
+                dossier.cache_path(store, chat_id).unlink(missing_ok=True)
+            except OSError:
+                pending.append(chat_id)
+        return {"removed": len(ids), "excluded": len(additions), "cache_cleanup_pending": pending,
+                "media": {"pending": "cancelled", "running": "may_finish", "saved": "kept"}}
+
+    @app.post("/api/targets/ignore-unconfirmed", dependencies=[Depends(authenticate)])
+    async def ignore_sources(request: Request, body: IgnoreSources):
+        require_live()
+        collector, store = app.state.collector, app.state.store
+        ids = list(dict.fromkeys(body.chat_ids))
+        for chat_id in ids:
+            require_chat(request, chat_id)
+        async with op_lock:
+            targets = {t["chat_id"]: t for t in store.targets()}
+            if any(chat_id not in targets for chat_id in ids):
+                raise HTTPException(404, "A selected chat is no longer among the sources.")
+            if body.ignored and any(collector.source_status.get(str(chat_id), {}).get("state") != "access_unconfirmed"
+                                    for chat_id in ids):
+                raise HTTPException(409, "Only sources not found in the last dialog check can be ignored.")
+            with store.transaction():
+                ignored = set(store.get_setting("ignored_source_warnings", []))
+                for chat_id in ids:
+                    if (chat_id in ignored) == body.ignored:
+                        continue
+                    if body.ignored:
+                        ignored.add(chat_id)
+                    else:
+                        ignored.discard(chat_id)
+                    target = targets[chat_id]
+                    store.append("target.changed", {"title": target["title"], "enabled": bool(target["enabled"]),
+                                                    "ignore_unconfirmed": body.ignored,
+                                                    "reason": "source warning preference changed"}, chat_id)
+                store.set_setting("ignored_source_warnings", sorted(ignored))
+            current, parts, _ = scoped_status(app, visible_chats(request))
+        return {"source_status": current["source_status"], "health": parts["sources"]}
+
+    @app.delete("/api/targets/{chat_id}", dependencies=[Depends(authenticate)])
+    async def target_remove(request: Request, chat_id: int):
+        require_live()
+        require_chat(request, chat_id)
+        async with op_lock:
+            result = remove_targets([chat_id])
+        return {"targets": visible_targets(request), **result}
 
     @app.post("/api/capture", dependencies=[Depends(authenticate)])
     async def capture(body: Capture):
         require_live()
-        with app.state.store.transaction():
-            app.state.store.set_setting("capture", body.model_dump())
-            app.state.store.append("capture.changed", capture_settings(app.state.store))
+        async with op_lock:
+            with app.state.store.transaction():
+                saved = body.model_dump()
+                if "record_disabled_media" not in body.model_fields_set:
+                    saved["record_disabled_media"] = capture_settings(app.state.store)["record_disabled_media"]
+                app.state.store.set_setting("capture", saved)
+                app.state.store.append("capture.changed", capture_settings(app.state.store))
+            app.state.collector.media_wakeup.set()
         return capture_settings(app.state.store)
+
+    @app.post("/api/media/queue/clear", dependencies=[Depends(authenticate)])
+    async def clear_media_queue(body: ClearMediaQueue):
+        require_live()
+        store = app.state.store
+        async with op_lock:
+            head = store.stats()["head"]
+            if body.through_seq > (head["seq"] if head else 0):
+                raise HTTPException(409, "The queue snapshot is newer than this workspace. Refresh and try again.")
+            cancelled = await complete_in_thread(store.clear_media_queue, body.through_seq)
+            return {"cancelled": cancelled, "through_seq": body.through_seq, "media_jobs": store.media_stats()}
+
+    @app.post("/api/recording", dependencies=[Depends(authenticate)])
+    async def set_recording(request: Request, body: recording.RecordingUpdate):
+        require_live()
+        try:
+            for permission in body.permissions():
+                access_check(request.state.principal, profile_id, (permission, None), {})
+        except Refused as exc:
+            raise HTTPException(403, str(exc)) from None
+        async with op_lock:
+            try:
+                changed, saved = recording.save(app.state.store, body)
+            except recording.Invalid as exc:
+                raise HTTPException(exc.status, str(exc)) from None
+            collector = app.state.collector
+            application = {"state": "applied"}
+            if body.scope is not None:
+                if not collector.running:
+                    application = {"state": "pending", "reason": "next_start"}
+                else:
+                    try:
+                        application["scope"] = await perform_operation(collector.apply_scope)
+                    except HTTPException as exc:
+                        application = {"state": "failed", "status": exc.status_code, "detail": exc.detail}
+            return {"saved": True, **saved, "changed": changed, "application": application,
+                    "collector": {"running": collector.running, "phase": collector.phase}}
 
     def scope_state():
         collector = app.state.collector
@@ -787,35 +1375,25 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     async def set_scope(body: ScopeUpdate):
         require_live()
         store, collector = app.state.store, app.state.collector
-        previous, current = scope_settings(store), body.model_dump(exclude={"acknowledged"})
-        current["exclude"] = sorted(set(current["exclude"]))
-        widening = current["mode"] != "selected" and (previous["mode"] != current["mode"]
-                                                      or previous["folder_id"] != current["folder_id"])
-        if widening and not body.acknowledged:
-            raise HTTPException(409, WIDE_WARNING)
-        if current["mode"] == "folder" and current["folder_id"] is None:
-            raise HTTPException(422, "Choose a Telegram folder. Load chats first if the list is empty.")
-        if current != previous:
-            with store.transaction():
-                store.set_setting("scope", current)
-                store.append("scope.changed", {
-                    "before": previous, "after": current,
-                    "acknowledged": body.acknowledged if widening else None,
-                    "warning": WIDE_WARNING if current["mode"] != "selected" else None,
-                    "coverage": "applies to updates from now on; earlier history is not fetched"})
-            if collector.running:
-                await operation(collector.apply_scope)
+        async with op_lock:
+            try:
+                changed, _ = recording.save(store, recording.RecordingUpdate(scope=body))
+            except recording.Invalid as exc:
+                raise HTTPException(exc.status, str(exc)) from None
+            if "scope" in changed and collector.running:
+                await perform_operation(collector.apply_scope)
         return scope_state()
 
     @app.post("/api/recheck", dependencies=[Depends(authenticate)])
     async def set_recheck(body: Recheck):
         require_live()
         store = app.state.store
-        with store.transaction():
-            for key, value in body.model_dump().items():
-                store.set_setting(key, value)
-            store.append("recheck.changed", {**body.model_dump(), "meaning": "minutes between rechecks of "
-                                             "priority sources and of every other source; 0 turns a tier off"})
+        async with op_lock:
+            with store.transaction():
+                for key, value in body.model_dump().items():
+                    store.set_setting(key, value)
+                store.append("recheck.changed", {**body.model_dump(), "meaning": "minutes between rechecks of "
+                                                 "priority sources and of every other source; 0 turns a tier off"})
         return scope_state()
 
     def outside_state():
@@ -823,10 +1401,31 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         route = app.state.collector.outside_route()
         return {"route": route.kind, "route_problem": str(route.error) if route.kind == "none" else None}
 
-    def evidence_state():
+    def timestamps_health(outside):
         store = app.state.store
+        last, success = store.get_setting("evidence_last", None), store.get_setting("evidence_success", None)
+        if success is None and last and any(r.get("ok") for r in last.get("results", [])):  # saved before 0.7
+            success = {"at": last["at"], "verified_at": last["at"] if any(
+                r.get("ok") and r.get("kind") == "rfc3161" for r in last["results"]) else None}
+        return health.timestamps(evidence_settings(store), last, success, store.get_setting("evidence_failure", None),
+                                 app.state.anchor_status, outside["route_problem"], health.now_utc())
+
+    def replica_health(outside):
+        store = app.state.store
+        last, success = store.get_setting("replica_last", None), store.get_setting("replica_success", None)
+        if success is None and last and not last.get("error"):  # saved before 0.7
+            success = {"at": last["at"], "journal_seq": last.get("journal_seq")}
+        return health.replica(replica.replica_settings(store), last, success, app.state.replica_status,
+                              outside["route_problem"], (store.stats()["head"] or {}).get("seq", 0), health.now_utc())
+
+    def server_health():
+        return health.server(app.state.assurance, app.state.run_receipt.get("host"), app.state.host_status,
+                             health.now_utc())
+
+    def evidence_state():
+        store, outside = app.state.store, outside_state()
         return {"settings": evidence_settings(store), "last": store.get_setting("evidence_last", None),
-                "busy": app.state.anchor_status["busy"], **outside_state(),
+                "busy": app.state.anchor_status["busy"], **outside, "health": timestamps_health(outside),
                 "defaults": EvidenceMode().model_dump(exclude={"enabled"})}
 
     @app.get("/api/evidence", dependencies=[Depends(authenticate)])
@@ -842,7 +1441,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             store.set_setting("evidence", body.model_dump())
             store.append("evidence.changed", {**body.model_dump(), "fingerprint": fingerprint(vault.public_key)})
         if body.enabled and not was:
-            request_anchor(store, vault, app.state.anchor_wakeup)  # the key fingerprint is anchored first
+            request_anchor(store, vault, app.state.anchor_wakeup)
         return evidence_state()
 
     @app.post("/api/evidence/anchor", dependencies=[Depends(authenticate)])
@@ -857,7 +1456,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         last, receipt = app.state.store.get_setting("source_check", None), app.state.run_receipt
         return {"last": last, "version": __version__, "source_tree_sha256": receipt["source_tree_sha256"],
                 "files": len(receipt["source_files"]), **outside_state(),
-                # A check describes the code that ran then; a later start may run other code.
+
                 "current": bool(last) and last["source_tree_sha256"] == receipt["source_tree_sha256"]}
 
     @app.get("/api/source-check", dependencies=[Depends(authenticate)])
@@ -887,16 +1486,24 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         return source_state()
 
     def replica_state():
-        store, vault = app.state.store, app.state.vault
+        store, vault, outside = app.state.store, app.state.vault, outside_state()
         settings, secrets = replica.replica_settings(store), vault.read("replica")
         return {"settings": settings, "has_credentials": bool(secrets.get("access_key")),
                 "has_key": bool(secrets.get("key")), "last": store.get_setting("replica_last", None),
-                "busy": app.state.replica_status["busy"], **outside_state(),
+                "busy": app.state.replica_status["busy"], **outside, "health": replica_health(outside),
                 "location": replica.workspace_prefix(settings, vault.public_key)}
 
     @app.get("/api/replica", dependencies=[Depends(authenticate)])
     async def get_replica():
         return replica_state()
+
+    @app.get("/api/health", dependencies=[Depends(authenticate)])
+    async def get_health():
+        """What each part is doing now, apart from whether it is switched on (health.py)."""
+        outside = outside_state()
+        return {"checked_at": health.iso(health.now_utc()), "collector": health.collector_of(app.state),
+                "timestamps": timestamps_health(outside), "replica": replica_health(outside),
+                "server": server_health()}
 
     @app.post("/api/replica", dependencies=[Depends(authenticate)])
     async def set_replica(body: ReplicaUpdate):
@@ -939,7 +1546,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         for url in urls:
             if len(url) > 2048 or not alerts.describe(url):
                 raise HTTPException(422, "Apprise does not recognise one of the destination addresses. Check it against the Apprise wiki.")
-        # Their own sockets pass no destination check (alerts.OWN_SOCKET): only the main administrator adds them.
+
         if (any(alerts.own_socket(u) for u in urls if u not in saved)
                 and not (request.state.principal.admin or netclient.private_allowed())):
             raise HTTPException(403, "Only the main administrator can add destinations that connect without HTTP "
@@ -993,7 +1600,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         s3 = replica.client(settings, secrets, app.state.collector.outside_route())
         name = replica.workspace_prefix(settings, vault.public_key) + "/connection-test.tgwr"
         try:
-            # With retention set, the test object is locked for one day only, then read back.
+
             headers = replica.lock_headers(settings, 1 if settings["retention_days"] else 0)
             started_at = datetime.now(timezone.utc)
             await asyncio.wait_for(replica.upload(s3, base64.b64decode(secrets["key"]), name,
@@ -1045,6 +1652,25 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             raise HTTPException(422, "The snapshot is larger than this workspace allows. Raise the limit in Parameters.")
         return await operation(app.state.collector.snapshot, body.chat_id, body.limit)
 
+    @app.get("/api/history", dependencies=[Depends(authenticate)])
+    async def history_status():
+        return app.state.collector.history.status()
+
+    @app.post("/api/history/{action}", dependencies=[Depends(authenticate)])
+    async def history_action(action: str):
+        if action not in ("start", "pause", "resume", "cancel"):
+            raise HTTPException(404, "Unknown history action.")
+        return await operation(getattr(app.state.collector.history, action))
+
+    @app.get("/api/history/report", dependencies=[Depends(authenticate)])
+    async def history_report():
+        try:
+            report = app.state.collector.history.report()
+        except ValueError as exc:
+            raise HTTPException(404, str(exc)) from None
+        return Response(canonical(report), media_type="application/json",
+                        headers={"Content-Disposition": 'attachment; filename="tgwitness-history-report.json"'})
+
     @app.get("/api/parameters", dependencies=[Depends(authenticate)])
     async def get_parameters():
         return tuning.described(app.state.store)
@@ -1084,16 +1710,18 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     @app.post("/api/interactions", dependencies=[Depends(authenticate)])
     async def interaction_action(request: Request, body: interactions.Action):
         if visible_chats(request) is not None:
-            if body.action == "open":  # joins or opens a new chat: a change to the whole account
+            if body.action == "open":
                 raise HTTPException(403, "This access opens only chosen chats; this part of the workspace is closed to it.")
             require_chat(request, body.chat_id)
         return await operation(interactions.execute, app.state.collector, body)
 
     @app.get("/api/chats/{chat_id}/messages", dependencies=[Depends(authenticate)])
-    async def chat_messages(chat_id: int, before_id: int | None = None, limit: int = 60):
+    async def chat_messages(chat_id: int, before_id: int | None = None, limit: int = 60, after_id: int | None = None):
         if not 1 <= limit <= 200:
             raise HTTPException(422, "Limit must be 1–200.")
-        return app.state.store.chat_messages(chat_id, before_id, limit)
+        if before_id is not None and after_id is not None:
+            raise HTTPException(422, "Choose one message cursor.")
+        return app.state.store.chat_messages(chat_id, before_id, limit, after_id=after_id)
 
     @app.get("/api/chats/{chat_id}/authors", dependencies=[Depends(authenticate)])
     async def chat_authors(chat_id: int):
@@ -1120,10 +1748,12 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         return next((t["title"] for t in app.state.store.targets() if t["chat_id"] == chat_id), None)
 
     @app.post("/api/chats/{chat_id}/dossier", dependencies=[Depends(authenticate)])
-    async def dossier_switch(chat_id: int, body: DossierSwitch):
+    async def dossier_switch(request: Request, chat_id: int, body: DossierSwitch):
         require_live()
         dossier.set_enabled(app.state.store, chat_id, body.enabled)
-        return {"enabled": body.enabled, "dossiers": dossier.enabled_chats(app.state.store)}
+        allowed = visible_chats(request)
+        return {"enabled": body.enabled, "dossiers": [chat for chat in dossier.enabled_chats(app.state.store)
+                                                      if allowed is None or chat in allowed]}
 
     @app.get("/api/chats/{chat_id}/dossier", dependencies=[Depends(authenticate)])
     async def dossier_view(chat_id: int):
@@ -1132,27 +1762,37 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
 
     async def dossier_file(chat_id, password=None):
         title = dossier_title(chat_id)
-        value = await asyncio.to_thread(dossier.signed, app.state.store, app.state.vault, chat_id, title, producer())
-        directory = root / "temporary-exports"
-        directory.mkdir(mode=0o700, exist_ok=True)
-        path = directory / ("tgwitness-export-dossier-" + secrets.token_hex(8) + ".json")
-        path.write_bytes(json.dumps(value, ensure_ascii=False, indent=1).encode("utf-8"))
-        if password is not None:
-            path = await asyncio.to_thread(encrypt_export, path, "json", password,
-                                           "tgwitness-dossier-" + str(chat_id) + ".json")
-        return path
+
+        def build():
+            value = dossier.signed(app.state.store, app.state.vault, chat_id, title, producer())
+            directory = root / "temporary-exports"
+            directory.mkdir(mode=0o700, exist_ok=True)
+            if directory.resolve().parent != root:
+                raise ValueError("Temporary export directory must belong to this profile")
+            path = directory / ("tgwitness-export-dossier-" + secrets.token_hex(8) + ".json")
+            try:
+                with path.open("xb") as out:
+                    out.write(json.dumps(value, ensure_ascii=False, indent=1).encode("utf-8"))
+                if password is not None:
+                    path = encrypt_export(path, "json", password, "tgwitness-dossier-" + str(chat_id) + ".json")
+                return path
+            except BaseException:
+                path.unlink(missing_ok=True)
+                raise
+
+        async with export_lock:
+            return await build_file(build)
 
     @app.get("/api/chats/{chat_id}/dossier/export", dependencies=[Depends(authenticate)])
     async def dossier_export(chat_id: int):
         path = await dossier_file(chat_id)
-        return FileResponse(path, filename="tgwitness-dossier-" + str(chat_id) + ".json", media_type="application/json",
-                            background=BackgroundTask(path.unlink, missing_ok=True))
+        return TemporaryDownload(path, filename="tgwitness-dossier-" + str(chat_id) + ".json", media_type="application/json")
 
     @app.post("/api/chats/{chat_id}/dossier/export", dependencies=[Depends(authenticate)])
     async def dossier_export_encrypted(chat_id: int, body: ExportPassword):
         path = await dossier_file(chat_id, body.password)
-        return FileResponse(path, filename="tgwitness-dossier-" + str(chat_id) + "-encrypted.zip",
-                            media_type="application/zip", background=BackgroundTask(path.unlink, missing_ok=True))
+        return TemporaryDownload(path, filename="tgwitness-dossier-" + str(chat_id) + "-encrypted.zip",
+                                 media_type="application/zip")
 
     @app.get("/api/witness", dependencies=[Depends(authenticate)])
     async def witness_state():
@@ -1183,9 +1823,10 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     @app.get("/api/notifications", dependencies=[Depends(authenticate)])
     async def notifications(request: Request):
         lang = i18n.pick(request.cookies.get(i18n.COOKIE), request.headers.get("accept-language"))
-        items, allowed = alerts.panel_items(app.state.store, i18n.words(lang),
-                                            tuning.value(app.state.store, "panel_notifications")), visible_chats(request)
-        return {"items": [i for i in items if allowed is None or i.get("chat_id") in allowed]}
+        items = alerts.panel_items(app.state.store, i18n.words(lang),
+                                   tuning.value(app.state.store, "panel_notifications"),
+                                   allowed_chats=visible_chats(request), workspace_id=profile_id)
+        return {"items": items}
 
     @app.get("/api/chats/{chat_id}/scale", dependencies=[Depends(authenticate)])
     async def chat_scale(chat_id: int):
@@ -1200,13 +1841,116 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             raise HTTPException(404)
         path = await app.state.collector.avatar(peer_id)
         if not path:
-            raise HTTPException(404)
+            return Response(status_code=204)  # no photo (yet): not an error the browser should log
         return FileResponse(path, media_type="image/jpeg", headers={"Cache-Control": "private, max-age=3600"})
+
+    # Account-wide acquisition can reach data outside the observation scope and
+    # account contacts. These routes deliberately stay outside issued-access POLICY:
+    # only the installation administrator may acquire or prepare a disclosure.
+    @app.get("/api/account-export", dependencies=[Depends(authenticate)])
+    async def account_export_jobs():
+        jobs = app.state.account_export.list_jobs()
+        for job in jobs:
+            job["disclosures"] = app.state.disclosures.list(job["id"])
+        return {"jobs": jobs, "defaults": AccountExportOptions().model_dump(),
+                "capabilities": {"takeout": True, "regular": True, "resumable": True,
+                                 "signed_capture_pages": True, "minimized_disclosure": True}}
+
+    @app.post("/api/account-export/start", dependencies=[Depends(authenticate)])
+    async def account_export_start(body: AccountExportOptions):
+        return await operation(app.state.account_export.start, body.model_dump())
+
+    @app.get("/api/account-export/{export_id}", dependencies=[Depends(authenticate)])
+    async def account_export_status(export_id: str):
+        try:
+            state = app.state.account_export.public(export_id)
+            if state["phase"] == "unknown":
+                raise HTTPException(404, "Unknown account export.")
+            return {**state, "disclosures": app.state.disclosures.list(export_id)}
+        except ValueError as exc:
+            raise HTTPException(404, str(exc)) from None
+
+    @app.post("/api/account-export/{export_id}/pause", dependencies=[Depends(authenticate)])
+    async def account_export_pause(export_id: str):
+        return await operation(app.state.account_export.pause, export_id)
+
+    @app.post("/api/account-export/{export_id}/resume", dependencies=[Depends(authenticate)])
+    async def account_export_resume(export_id: str):
+        return await operation(app.state.account_export.resume, export_id)
+
+    @app.delete("/api/account-export/{export_id}", dependencies=[Depends(authenticate)])
+    async def account_export_remove(export_id: str):
+        if app.state.disclosures.busy(export_id):
+            raise HTTPException(409, "Wait for the disclosure package to finish before removing its source.")
+        return await operation(app.state.account_export.remove, export_id)
+
+    @app.get("/api/account-export/{export_id}/download", dependencies=[Depends(authenticate)])
+    async def account_export_download(export_id: str):
+        try:
+            path = app.state.account_export.result_path(export_id)
+        except ValueError:
+            path = None
+        if not path:
+            raise HTTPException(404, "No finished account export is available.")
+        state = app.state.account_export.public(export_id)
+        headers = {"Cache-Control": "private, no-store"}
+        if state.get("archive_sha256"):
+            headers["ETag"] = '"' + state["archive_sha256"] + '"'
+        return FileResponse(path, filename="tgwitness-account-export.zip", media_type="application/zip", headers=headers)
+
+    @app.post("/api/account-export/{export_id}/disclosure/preview", dependencies=[Depends(authenticate)])
+    async def disclosure_preview(request: Request, export_id: str, body: DisclosurePolicy):
+        require_live()
+        principal = request.state.principal
+        async with op_lock:
+            try:
+                require_live()
+                return await complete_in_thread(app.state.disclosures.preview, export_id, body.model_dump(),
+                                                principal.session_id or principal.owner)
+            except (ValueError, OSError, KeyError) as exc:
+                raise HTTPException(409, str(exc)) from None
+
+    class DisclosureConfirmation(BaseModel):
+        model_config = {"extra": "forbid"}
+        preview_id: str = Field(min_length=16, max_length=100)
+
+    @app.post("/api/account-export/{export_id}/disclosure", dependencies=[Depends(authenticate)])
+    async def disclosure_create(request: Request, export_id: str, body: DisclosureConfirmation):
+        require_live()
+        principal = request.state.principal
+        async with op_lock:
+            try:
+                require_live()
+                return await app.state.disclosures.create(export_id, body.preview_id,
+                                                         principal.session_id or principal.owner)
+            except (ValueError, OSError, KeyError) as exc:
+                raise HTTPException(409, str(exc)) from None
+
+    @app.get("/api/account-export/{export_id}/disclosures/{disclosure_id}/download", dependencies=[Depends(authenticate)])
+    async def disclosure_download(export_id: str, disclosure_id: str):
+        try:
+            path = app.state.disclosures.result_path(export_id, disclosure_id)
+        except ValueError:
+            path = None
+        if not path:
+            raise HTTPException(404, "No finished disclosure is available.")
+        return FileResponse(path, filename="tgwitness-minimized-disclosure.zip", media_type="application/zip",
+                            headers={"Cache-Control": "private, no-store"})
 
     @app.post("/api/chat-export/start", dependencies=[Depends(authenticate)])
     async def chat_export_start(request: Request, body: ChatExport):
         require_chat(request, body.chat_id)
-        return await operation(app.state.collector.start_export, body.chat_id)
+        return await operation(app.state.collector.start_export, body.chat_id,
+                               report.resolved(app.state.store, panel_language(request)))
+
+    @app.get("/api/report-options", dependencies=[Depends(authenticate)])
+    async def get_report_options():
+        return report.saved(app.state.store).model_dump()
+
+    @app.post("/api/report-options", dependencies=[Depends(authenticate)])
+    async def set_report_options(body: report.ReportOptions):
+        # Recorded, signed, in every export manifest and report seal; not a journal event of its own.
+        return report.save(app.state.store, body).model_dump()
 
     def export_visible(request):
         state, allowed = app.state.collector.export_state, visible_chats(request)
@@ -1227,8 +1971,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         path = app.state.collector.export_result_path(export_id) if export_visible(request) else None
         if not path:
             raise HTTPException(404, "No finished chat export is available to download.")
-        return FileResponse(path, filename="tgwitness-chat-export.zip", media_type="application/zip",
-                            background=BackgroundTask(path.unlink, missing_ok=True))
+        return TemporaryDownload(path, filename="tgwitness-chat-export.zip", media_type="application/zip")
 
     @app.get("/api/checkpoint", dependencies=[Depends(authenticate)])
     async def get_checkpoint():
@@ -1266,47 +2009,79 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         except Exception:
             raise HTTPException(409, "Journal integrity verification failed. Preserve the directory for inspection.") from None
 
-    async def build_export(fmt, password=None):
+    async def build_export(fmt, request, password=None):
+        from . import export_history
+        receipt = {}
+        options = report.resolved(app.state.store, panel_language(request))
+
+        def build():
+            path = export_file(app.state.store, app.state.vault, fmt, options)
+            try:
+                if password is not None:
+                    path = encrypt_export(path, fmt, password)
+                receipt.update(export_history.prepared(app.state.store, path, fmt, password is not None))
+                return path
+            except BaseException:
+                path.unlink(missing_ok=True)
+                raise
+
         async with export_lock:
             try:
-                path = await asyncio.to_thread(export_file, app.state.store, app.state.vault, fmt)
-                if password is not None:
-                    path = await asyncio.to_thread(encrypt_export, path, fmt, password)
+                path = await build_file(build)
             except Exception as exc:
                 app.state.store.append("export.failed", {"format": fmt, "error_type": type(exc).__name__})
                 raise HTTPException(409, "Export failed integrity, size, or file checks. Inspect local data and limits.") from None
-        return path
+        try:
+            from .webhooks import export_completed
+            await export_completed(app.state.store, app.state.vault, profile_id)
+            app.state.alert_wakeup.set()
+        except BaseException:
+            path.unlink(missing_ok=True)
+            raise
+        return path, export_history.headers(receipt)
 
     @app.get("/api/export/{fmt}", dependencies=[Depends(authenticate)])
-    async def export(fmt: Literal["zip", "jsonl", "csv", "html"]):
-        path = await build_export(fmt)
+    async def export(request: Request, fmt: Literal["zip", "jsonl", "csv", "html"]):
+        path, headers = await build_export(fmt, request)
         media_types = {"zip": "application/zip", "jsonl": "application/x-ndjson",
                        "csv": "text/csv", "html": "text/html"}
-        return FileResponse(path, filename="tgwitness-evidence." + fmt, media_type=media_types[fmt],
-                            background=BackgroundTask(path.unlink, missing_ok=True))
+        return TemporaryDownload(path, filename="tgwitness-evidence." + fmt, media_type=media_types[fmt], headers=headers)
 
     @app.post("/api/export/{fmt}", dependencies=[Depends(authenticate)])
-    async def export_encrypted(fmt: Literal["zip", "jsonl", "csv", "html"], body: ExportPassword):
-        # The password arrives in the request body and is never stored or written to the journal.
-        path = await build_export(fmt, body.password)
-        return FileResponse(path, filename="tgwitness-evidence-" + fmt + "-encrypted.zip", media_type="application/zip",
-                            background=BackgroundTask(path.unlink, missing_ok=True))
+    async def export_encrypted(request: Request, fmt: Literal["zip", "jsonl", "csv", "html"], body: ExportPassword):
+
+        path, headers = await build_export(fmt, request, body.password)
+        return TemporaryDownload(path, filename="tgwitness-evidence-" + fmt + "-encrypted.zip", media_type="application/zip", headers=headers)
+
+    @app.get("/api/exports/history", dependencies=[Depends(authenticate)])
+    async def prepared_exports():
+        from .export_history import listing
+        return listing(app.state.store)
 
     @app.get("/api/media/{digest}", dependencies=[Depends(authenticate)])
-    async def media(request: Request, digest: str):
-        if len(digest) != 64 or any(c not in "0123456789abcdef" for c in digest):
+    async def media(request: Request, digest: str, inline: bool = False):
+        if re.fullmatch(r"[0-9a-f]{64}", digest) is None:
             raise HTTPException(404)
         allowed = visible_chats(request)
         if allowed is not None and not app.state.store.media_in_chats(digest, allowed):
             raise HTTPException(404)
         path = root / "media" / digest
-        if not path.is_file():
+        if path.is_symlink() or not path.is_file():
             raise HTTPException(404)
-        # Send as an attachment, never execute active content inside the panel origin.
+        if inline:
+            from .media_preview import content_type
+            mime = await asyncio.to_thread(content_type, path)
+            return FileResponse(path, media_type=mime, filename=digest,
+                                content_disposition_type="inline" if mime != "application/octet-stream" else "attachment",
+                                headers={"Content-Security-Policy": "default-src 'none'; media-src 'self'; "
+                                         "img-src 'self'; style-src 'unsafe-inline'; sandbox"})
         return FileResponse(path, media_type="application/octet-stream", filename=digest)
 
+    from .webhook_api import register as register_webhooks
+    register_webhooks(app, authenticate, profile_id)
+
     if allow_profiles:
-        # ---- Access: sessions for every token, issued accesses and the administrator's console ----
+
         @app.post("/api/access/login")
         async def access_login(request: Request, body: AccessLogin):
             try:
@@ -1381,11 +2156,20 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         @app.get("/api/access/console", dependencies=[Depends(authenticate)])
         async def access_console(after: int = 0):
             console = app.state.access.console
-            if after > console.counter:  # the process restarted since the console last asked
+            if after > console.counter:
                 after = 0
             lines = console.after(after)
             return {"lines": lines, "last": lines[-1]["n"] if lines else after}
 
+        from .archive_api import register as register_archive
+        register_archive(app, authenticate)
+        from .analysis_api import register as register_analysis
+        register_analysis(app, authenticate)
+        from .media_analysis_api import register as register_media_analysis
+        register_media_analysis(app, authenticate)
         app.mount("/profiles", ProfileDispatch(app), name="profiles")
-    app.mount("/", StaticFiles(directory=Path(__file__).parent / "static", html=True), name="panel")
+    from .panel_routes import register as register_panel
+    static = StaticFiles(directory=Path(__file__).parent / "static", html=True)
+    register_panel(app, static)
+    app.mount("/", static, name="panel")
     return app

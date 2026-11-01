@@ -12,7 +12,7 @@
   <img alt="FastAPI + Telethon" src="https://img.shields.io/badge/FastAPI-Telethon-243a52?logo=fastapi&amp;logoColor=white">
   <img alt="Docker Compose" src="https://img.shields.io/badge/Docker-Compose-243a52?logo=docker&amp;logoColor=white">
   <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-243a52">
-  <img alt="Version: 0.7.0" src="https://img.shields.io/badge/version-0.7.0-243a52">
+  <img alt="Version: 0.7.1" src="https://img.shields.io/badge/version-0.7.1-243a52">
 </p>
 
 <p align="center">
@@ -344,7 +344,7 @@ TgWitness **0.6.1** работает в Windows 11 с Python 3.12. Состоя�
 ```sh
 python -m venv .venv && source .venv/bin/activate     # Windows: .venv\Scripts\Activate.ps1
 python -m pip install -c deploy/constraints.txt -e ".[dev]"
-python -m pytest -q                                    # unit and integration tests
+python -m ruff check .                                 # source checks
 python -m playwright install chromium
 python tools/check_browser.py                          # end-to-end UI acceptance
 python tools/check_account_browser.py                  # sign-in flows
@@ -355,13 +355,7 @@ python tools/build_site.py                             # static project site in 
 python tools/check_site.py                             # website browser acceptance
 ```
 
-Автоматические тесты используют синтетические объекты Telegram и не подключают реальные
-аккаунты; живой тест описан выше. CI настроен на проверки
-Windows, Linux и macOS с Python 3.11–3.13, браузерные сценарии, упаковку исходников,
-портативную сборку Windows и Docker. Release workflow настроен прикладывать к
-опубликованному релизу GitHub исходники, wheel, портативный ZIP для Windows и образ GHCR.
-Ни один из этих workflow ещё не запускался.
-Перед пул-реквестом прочитайте [CONTRIBUTING.md](../../.github/CONTRIBUTING.md).
+Браузерные проверки используют синтетические данные. Актуальные задания сборки и выпуска описаны в `.github/workflows/`. Перед пул-реквестом прочитайте [CONTRIBUTING.md](../../.github/CONTRIBUTING.md).
 
 ## Документация
 

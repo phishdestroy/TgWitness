@@ -44,11 +44,31 @@
 | Signed evidence ZIP | Captured journal, signatures, manifest, retained media and an offline report |
 | JSONL / CSV / HTML | Analysis or reading; retain the signed ZIP for verification |
 | Full chat export | The chat history visible at acquisition time |
+| [Account export](../ACCOUNT-EXPORT.md) | Resumable account acquisition with chat, sender, date, text and file controls; signed coverage records |
+| [Minimized disclosure](../ACCOUNT-EXPORT.md#prepare-a-disclosure-for-a-lawyer-or-another-recipient) | A separate signed copy for a defined recipient, with optional pseudonyms and text/file exclusions |
 | People profile export | Derived observations with record references |
 | Checkpoint | A signed journal boundary to retain separately |
 | Run receipt | The collector's program/version information for that run |
 
 A full chat export is a snapshot of current visible history. It cannot recreate every earlier edit or deletion. An evidence ZIP excludes login secrets and is not a full application backup.
+
+### What a signed archive carries
+
+| File | Purpose |
+| --- | --- |
+| `events.jsonl` / `chat.json` | Authoritative records |
+| `report.html` / `chat.html` | Readable report in the chosen language, sealed |
+| `custody.json` | Acquisition, export, case details and the standards followed |
+| `SHA256SUMS` | Every file's SHA-256 for `sha256sum -c`, without Python |
+| `manifest.json` + `manifest.sig` | Signed list of every file and its SHA-256 |
+| `README.txt` | Verification steps in the report language and in English |
+
+Set the report language, case title and ID, examiner, organization and notes under
+**Exports → Report settings**. They are signed into the manifest and the report seal.
+Every report ends with a seal: an Ed25519 signature over the SHA-256 of each byte before
+it. A recipient checks it in the browser by dropping the file onto the report, or with
+`python -m tgwitness.verify report.html --fingerprint TRUSTED_SHA256 --evidence evidence.zip`.
+The report also prints well to PDF, with a blank custody-transfer table.
 
 
 <picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>
@@ -78,6 +98,9 @@ python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --checkpoin
 ~~~
 
 Replace the placeholders with the actual files and trusted fingerprint. A successful check detects changes covered by the signatures, hash chain and manifest. Read the reported coverage and gaps too.
+
+At a terminal the verifier answers with a coloured summary (`--lang en|ru|uk`); piped output
+stays plain text. `--json` prints only a JSON answer for scripts.
 
 
 <picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>

@@ -28,6 +28,11 @@ def inspect_environment(root, host="127.0.0.1", port=8787):
             add(distribution, "pass", importlib.metadata.version(distribution))
         except Exception as exc:
             add(distribution, "fail", "Install/repair the project environment: " + type(exc).__name__)
+    from .mcp_server import runtime_status
+    mcp = runtime_status()
+    add("mcp", "pass" if mcp["available"] else "warning",
+        "streamable-http available" if mcp["available"] else
+        "Optional MCP support is unavailable. " + mcp["install_command"])
     try:
         from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
         key = Ed25519PrivateKey.generate()
@@ -61,7 +66,7 @@ def inspect_environment(root, host="127.0.0.1", port=8787):
     try:
         if not 1 <= port <= 65535:
             raise ValueError()
-        # Binding only; no connection or external address lookup is performed.
+
         import ipaddress
         if host == "localhost":
             host = "127.0.0.1"

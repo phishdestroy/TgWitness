@@ -9,12 +9,13 @@ from urllib.parse import urlsplit
 
 from playwright.sync_api import expect, sync_playwright
 
-from check_browser import ROOT, RunningApp, check_layout, hold_api_response, launch_browser, release_api_response, unlock
+from check_browser import (ROOT, RunningApp, check_layout, hold_api_response, launch_browser,
+                           navigate_panel, release_api_response, unlock)
 from tgwitness import i18n, proxy_catalog as catalogs
 
 
 def settings(page):
-    page.locator('[data-view="connection"]').click()
+    navigate_panel(page, "connection")
     if page.locator("#entry-settings").get_attribute("aria-expanded") != "true":
         page.locator("#entry-settings").click()
     if not page.locator("#network-details").get_attribute("open") == "":
@@ -38,8 +39,8 @@ def main():
         return "tg://proxy?server=" + host + "&port=443&secret=" + "a7" * 16
 
     env = {key: value for key, value in os.environ.items() if key not in ("TGWITNESS_PROXY_CATALOG", "TGWITNESS_PROXY_FEED_PROXY")}
-    # The default hide-address policy requires an explicit route outside Telegram.
-    # This proxy is never contacted: download() above is the synthetic transport.
+
+
     env["TGWITNESS_PROXY_FEED_PROXY"] = "socks5://proxy.example:1080"
     with patch.dict(os.environ, env, clear=True), patch.object(catalogs, "download", download), patch.object(catalogs, "REFRESH_SECONDS", 0):
         with tempfile.TemporaryDirectory(prefix="proxy-browser-") as scratch:
@@ -60,6 +61,9 @@ def main():
                 for lang in i18n.LANGUAGES[1:]:
                     assert not (set(keys) - set(i18n.words(lang))), (lang, sorted(set(keys) - set(i18n.words(lang))))
                 settings(page)
+                expect(page.locator("#network-kind")).to_have_value("mtproxy_auto")
+                expect(page.locator(".proxy-catalog")).to_be_hidden()
+                page.locator("#network-kind").select_option("mtproxy")
                 expect(page.locator("#proxy-catalog-status")).to_contain_text("compatible public proxies")
                 assert not calls, "Opening settings must not fetch external subscriptions"
                 assert page.locator("#proxy-catalog-select option").count() > 0
@@ -86,24 +90,30 @@ def main():
                 expect(page.locator("#proxy-catalog-status")).to_contain_text("previous list is still available")
                 expect(page.locator("#proxy-catalog-select option")).to_have_count(2)
                 assert server.app.state.collector.network_config() == route_before
-                # A late refresh belongs to the old workspace, including its saved cache.
+
                 child = page.evaluate("async()=>{const p=await json('profiles',{label:'Separate account'});await loadProfiles();return p.id;}")
                 hold_api_response(page, "/api/network/catalog/refresh")
                 page.locator("#proxy-catalog-refresh").click()
                 expect(page.locator("html")).to_have_attribute("data-acceptance-held", "true")
                 page.locator("#profile-select").select_option(child)
                 settings(page)
+                expect(page.locator("#network-kind")).to_have_value("mtproxy_auto")
+                expect(page.locator(".proxy-catalog")).to_be_hidden()
+                page.locator("#network-kind").select_option("mtproxy")
                 expect(page.locator("#proxy-catalog-status")).to_contain_text("compatible public proxies")
                 release_api_response(page)
                 expect(page.locator("#proxy-catalog-status")).to_contain_text("compatible public proxies")
-                expect(page.locator("#network-kind")).to_have_value("mtproxy_auto")
-                assert page.locator("#proxy-catalog-select option").count() == len(listing["proxies"])
+                expect(page.locator("#network-kind")).to_have_value("mtproxy")
+                assert server.app.state.profiles.entries[child]["app"].state.collector.network_config().kind == "mtproxy_auto"
+                assert page.locator("#proxy-catalog-select option").count() == 2
 
                 for lang in ("en", "ru"):
                     context.add_cookies([{"name": "tgwitness-lang", "value": lang, "url": server.url}])
                     page.reload()
                     expect(page.locator("#workspace")).to_be_visible()
                     settings(page)
+                    page.locator("#network-kind").select_option("mtproxy")
+                    expect(page.locator("#proxy-catalog-select option")).to_have_count(2)
                     for width in (390, 1440):
                         page.set_viewport_size({"width": width, "height": 1060})
                         for theme in ("light", "dark"):
