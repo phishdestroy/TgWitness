@@ -32,6 +32,7 @@ on:
       - tgwitness/guide_locales/**
       - tgwitness/english_fallbacks.json
       - pyproject.toml
+      - deploy/site.lock
       - .github/workflows/pages.yml
   workflow_dispatch:
 permissions:
