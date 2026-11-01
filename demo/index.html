@@ -24,7 +24,7 @@
 <script src="theme.js?v=0.7.0"></script>
 <script src="mock.js?v=handoff1"></script><script>(function(){var known=["en", "ru", "uk", "es", "pt", "tr", "ar", "fa", "ur", "hi", "id", "vi", "zh", "fr", "de", "it", "uz", "ko", "zh-Hant", "ms", "pl", "ja", "th", "he", "bn"],saved=(document.cookie.match(/(?:^|; )tgwitness-lang=([^;]+)/)||[])[1];try{saved=saved&&decodeURIComponent(saved)}catch(e){saved=''}function match(tag){tag=String(tag||'').toLowerCase().replace(/_/g,'-');var exact=known.find(function(x){return x.toLowerCase()===tag});if(exact)return exact;if(/^zh-/.test(tag)&&/(?:^|-)(?:hant|tw|hk|mo)(?:-|$)/.test(tag))return known.find(function(x){return x==='zh-Hant'});return known.find(function(x){return x===tag.split('-')[0]})}var asked=new URLSearchParams(location.search).get('lang'),browser=navigator.languages||[navigator.language||'en'],pick=[asked,saved].concat(browser).map(match).find(Boolean)||'en';document.write('<script src="locales/'+pick+'.js?v=4c61b58cae675aeb"><\/script>');})();</script>
 <script defer src="i18n.js?v=0.7.0"></script>
-<script defer src="app.js?v=0.7.0-handoff1"></script>
+<script defer src="app.js?v=0.7.0-handoff2"></script>
 <script defer src="integrations.js?v=2"></script>
 <script defer src="analysis.js?v=3"></script>
 <script defer src="media-analysis.js?v=2"></script>

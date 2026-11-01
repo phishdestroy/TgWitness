@@ -3530,6 +3530,7 @@ function renderChatFeed(){
     });return;
   }
   if(state.chatView==='profile'){
+    if(state.chatProfile?.chat!==state.chat)loadChatProfile().catch(()=>{});
     const key=JSON.stringify([state.chat,state.chatProfile,s.demo,s.collector.has_session,may('sources')]);
     if(feed.firstElementChild?.profileKey!==key){const profile=profileNode(true);profile.profileKey=key;feed.replaceChildren(profile);}return;
   }
@@ -3924,14 +3925,23 @@ $("chat-open-form").addEventListener("submit",e=>{e.preventDefault();busy($("cha
   }));
 });});
 
+let chatProfileRead=null;
 async function loadChatProfile(){
   const id=state.chat,revision=state.workspaceRevision,generation=chatGeneration;if(id===null||id===undefined)return;
-  let r;
-  try{r=await json("chats/"+encodeURIComponent(id)+"/profile",undefined,viewOptions('chats'));}
-  catch(error){if(id===state.chat&&revision===state.workspaceRevision&&generation===chatGeneration&&!(error instanceof StaleView)){
-    state.chatProfile={chat:id,error:true};if(state.chatView==='profile')renderChatFeed();}throw error;}
-  if(id!==state.chat||revision!==state.workspaceRevision||generation!==chatGeneration)return;
-  state.chatProfile={chat:id,...r};renderChatStatus();if(state.chatView==='profile')renderChatFeed();
+  const options=viewOptions('chats');
+  if(chatProfileRead?.id===id&&chatProfileRead.revision===revision&&chatProfileRead.generation===generation&&
+      chatProfileRead.signal===options.signal)return chatProfileRead.promise;
+  const read={id,revision,generation,signal:options.signal};
+  read.promise=(async()=>{
+    let r;
+    try{r=await json("chats/"+encodeURIComponent(id)+"/profile",undefined,options);}
+    catch(error){if(id===state.chat&&revision===state.workspaceRevision&&generation===chatGeneration&&!(error instanceof StaleView)){
+      state.chatProfile={chat:id,error:true};if(state.chatView==='profile')renderChatFeed();}throw error;}
+    if(id!==state.chat||revision!==state.workspaceRevision||generation!==chatGeneration)return;
+    state.chatProfile={chat:id,...r};renderChatStatus();if(state.chatView==='profile')renderChatFeed();
+  })();
+  chatProfileRead=read;
+  try{return await read.promise;}finally{if(chatProfileRead===read)chatProfileRead=null;}
 }
 function profileNode(standalone=false){
   const s=state.status,saved=state.chatProfile?.chat===state.chat?state.chatProfile:null,data=saved?.profile;
