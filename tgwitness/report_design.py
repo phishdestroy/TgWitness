@@ -2,8 +2,8 @@
 from pathlib import Path
 from typing import Literal
 
-Design = Literal["classic", "quire", "meridian", "atlas", "ledger", "horizon"]
-DESIGNS = ("classic", "quire", "meridian", "atlas", "ledger", "horizon")
+Design = Literal["classic", "quire", "meridian", "atlas", "ledger", "horizon", "reading_series", "ledger_margin"]
+DESIGNS = ("classic", "quire", "meridian", "atlas", "ledger", "horizon", "reading_series", "ledger_margin")
 LEGACY = {"dossier": "classic", "analytical": "atlas", "editorial": "quire"}
 
 

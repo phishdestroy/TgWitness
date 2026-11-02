@@ -10,26 +10,26 @@ html[data-report-design][data-theme=dark]{--design-accent:#98c3df;--design-secon
 @media(prefers-color-scheme:dark){html[data-report-design][data-theme=auto]{--design-accent:#98c3df;--design-secondary:#d9b38a}}
 
 /* Preserve state colours and legibility in light, dark, no-JavaScript and print views. */
-html[data-report-design]:not([data-report-design=classic]) .dossier .hero{background:var(--card);color:var(--ink);box-shadow:none;border:1px solid var(--line);border-radius:0}
-html[data-report-design]:not([data-report-design=classic]) .hero .eyebrow,
-html[data-report-design]:not([data-report-design=classic]) .hero .facts>div>span{color:var(--muted)}
-html[data-report-design]:not([data-report-design=classic]) .hero h1,
-html[data-report-design]:not([data-report-design=classic]) .hero .facts b,
-html[data-report-design]:not([data-report-design=classic]) .hero .facts time{color:var(--ink)}
-html[data-report-design]:not([data-report-design=classic]) .cover-register{color:var(--design-accent);border-color:var(--line)}
-html[data-report-design]:not([data-report-design=classic]) .hero .stamp{background:var(--bg2);color:var(--ink);box-shadow:none;border:1px solid var(--line);border-inline-start:3px solid var(--muted);min-width:0}
-html[data-report-design]:not([data-report-design=classic]) .stamp .stamp-label,
-html[data-report-design]:not([data-report-design=classic]) .stamp .stamp-key span{color:var(--muted)}
-html[data-report-design]:not([data-report-design=classic]) .stamp .stamp-key{background:var(--card);color:var(--ink)}
-html[data-report-design]:not([data-report-design=classic]) .stamp-hint{background:var(--card);color:var(--accent-text);border-color:var(--line)}
-html[data-report-design]:not([data-report-design=classic]) .stamp.partial .stamp-state{color:var(--warn)}
-html[data-report-design]:not([data-report-design=classic]) .stamp.ok .stamp-state{color:var(--ok)}
-html[data-report-design]:not([data-report-design=classic]) .stamp.bad .stamp-state{color:var(--bad)}
-html[data-report-design]:not([data-report-design=classic]) .dossier .tile b{font-variant-numeric:tabular-nums}
-html[data-report-design]:not([data-report-design=classic]) .version-compare>div:first-child{border-inline-start:3px solid var(--bad)}
-html[data-report-design]:not([data-report-design=classic]) .version-compare>div:last-child{border-inline-start:3px solid var(--ok)}
-html[data-report-design]:not([data-report-design=classic]) .retained-message{border-inline-start:3px solid var(--muted)}
-html[data-report-design]:not([data-report-design=classic]) .report-analytics{--chart-ink:var(--design-accent);--chart-accent:var(--design-accent)}
+html:where([data-report-design]:not([data-report-design=classic])) .dossier .hero{background:var(--card);color:var(--ink);box-shadow:none;border:1px solid var(--line);border-radius:0}
+html:where([data-report-design]:not([data-report-design=classic])) .dossier .hero .eyebrow,
+html:where([data-report-design]:not([data-report-design=classic])) .dossier .hero .facts>div>span{color:var(--muted)}
+html:where([data-report-design]:not([data-report-design=classic])) .dossier .hero h1,
+html:where([data-report-design]:not([data-report-design=classic])) .dossier .hero .facts b,
+html:where([data-report-design]:not([data-report-design=classic])) .dossier .hero .facts time{color:var(--ink)}
+html:where([data-report-design]:not([data-report-design=classic])) .dossier .cover-register{color:var(--design-accent);border-color:var(--line)}
+html:where([data-report-design]:not([data-report-design=classic])) .dossier .hero .stamp{background:var(--bg2);color:var(--ink);box-shadow:none;border:1px solid var(--line);border-inline-start:3px solid var(--muted);min-width:0}
+html:where([data-report-design]:not([data-report-design=classic])) .dossier .stamp .stamp-label,
+html:where([data-report-design]:not([data-report-design=classic])) .dossier .stamp .stamp-key span{color:var(--muted)}
+html:where([data-report-design]:not([data-report-design=classic])) .dossier .stamp .stamp-key{background:var(--card);color:var(--ink)}
+html:where([data-report-design]:not([data-report-design=classic])) .dossier .stamp-hint{background:var(--card);color:var(--accent-text);border-color:var(--line)}
+html:where([data-report-design]:not([data-report-design=classic])) .dossier .stamp.partial .stamp-state{color:var(--warn)}
+html:where([data-report-design]:not([data-report-design=classic])) .dossier .stamp.ok .stamp-state{color:var(--ok)}
+html:where([data-report-design]:not([data-report-design=classic])) .dossier .stamp.bad .stamp-state{color:var(--bad)}
+html:where([data-report-design]:not([data-report-design=classic])) .dossier .tile b{font-variant-numeric:tabular-nums}
+html:where([data-report-design]:not([data-report-design=classic])) .dossier .version-compare>div:first-child{border-inline-start:3px solid var(--bad)}
+html:where([data-report-design]:not([data-report-design=classic])) .dossier .version-compare>div:last-child{border-inline-start:3px solid var(--ok)}
+html:where([data-report-design]:not([data-report-design=classic])) .dossier .retained-message{border-inline-start:3px solid var(--muted)}
+html:where([data-report-design]:not([data-report-design=classic])) .dossier .report-analytics{--chart-ink:var(--design-accent);--chart-accent:var(--design-accent)}
 
 /* Quire / Claude: a framed title page, generous serif measure and a marginal rail. */
 html[data-report-design=quire][data-theme=light]{--bg:#ece7de;--card:#fbf8f1;--bg2:#f3eee4;--ink:#1f1b16;--soft:#423c35;--muted:#5e554b;--line:#d9d0c1;--th:#f3eee4}

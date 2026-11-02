@@ -38,7 +38,7 @@ def preview(store, options):
         + '" data-report-template="' + report.e(options.get("template", "dossier"))
         + '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
         '<link rel="stylesheet" href="/report-preview.css"><title>' + report.e(title) + '</title></head>'
-        '<body class="dossier studio-preview"><main><p class="preview-watermark">'
+        '<body class="dossier studio-preview"><main><p class="preview-watermark preview-cover">'
         + report.e(say("DRAFT PREVIEW · NOT SIGNED")) + '</p>'
         + report.hero(say, say("Report preview"), title,
                       [(say("Case ID"), report.e(options.get("case_id"))),
@@ -50,4 +50,7 @@ def preview(store, options):
         + (' ' + report.e(say("Preview limit reached; these charts cover only the first 50,000 records.")) if sampled else '') + '</p>'
         + report.case_section(say, 1, options, [])
         + ''.join(sections) + '</main></body></html>')
+    if options.get("design") in report.report_layouts.DESIGNS:
+        document = b''.join(report.report_layouts.compose(
+            [document.encode('utf-8')], options['design'], say, 'preview')).decode('utf-8')
     return {"html": document, "records": count, "sampled": sampled}

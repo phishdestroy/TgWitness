@@ -35,7 +35,7 @@ def main():
             page.locator('#exports-tab-settings').click()
             expect(page.locator('#report-design-classic')).to_be_checked()
             expect(page.locator('#report-design-classic')).to_be_enabled()
-            expect(page.locator('.report-design')).to_have_count(6)
+            expect(page.locator('.report-design')).to_have_count(8)
             expect(page.locator('.report-designs')).to_contain_text('HTML and PDF')
             page.locator('#report-case-title').fill('Fictional case design review')
             page.locator('#report-notes').fill('Keep the original questions and record references.')

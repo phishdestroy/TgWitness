@@ -1,4 +1,4 @@
-"""Build six complete, signed, fictional reports from the same journal, for visual review."""
+"""Build signed, fictional report layouts from the same journal for visual review."""
 import argparse
 import hashlib
 import html
@@ -24,6 +24,8 @@ LABELS = {
     'atlas': ('Analytics', 'A modular workspace for charts, activity patterns and comparisons.'),
     'ledger': ('Technical', 'A precise register with ruled tables and prominent record references.'),
     'horizon': ('Overview', 'A visual overview with an asymmetric cover and a clear reading path.'),
+    'reading_series': ('Reading series', 'A section rail, clear findings and a focused history of changes.'),
+    'ledger_margin': ('Ledger & margin', 'Numbered sections, a generous margin and figures with exact tables.'),
 }
 
 
@@ -87,8 +89,8 @@ main{max-width:1320px;margin:auto;padding:48px 28px}h1{font:500 clamp(32px,5vw,6
 h2{margin:18px 0 4px;font:600 23px/1.3 Georgia,serif}p{margin:8px 0 20px}article p{font-size:14px;min-height:4em;color:#53636b}nav{display:flex;flex-wrap:wrap;gap:14px}a{color:#175575;text-underline-offset:4px}
 .sample{display:block;height:280px;overflow:hidden;border:1px solid #d9deda;position:relative}iframe{width:1200px;height:1000px;border:0;transform:scale(.3);transform-origin:top left;pointer-events:none}
 @media(max-width:1000px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:640px){.grid{grid-template-columns:1fr}main{padding:28px 16px}}
-</style><main><div class="intro"><p class="eyebrow">TgWitness / Report collection</p><h1>One record. Six ways to read it.</h1>
-<p>Compare the same messages, saved edits, deletion observations and activity figures in six complete report layouts. Each includes HTML, a signed PDF and the original journal.</p>
+</style><main><div class="intro"><p class="eyebrow">TgWitness / Report collection</p><h1>One record. Different ways to read it.</h1>
+<p>Compare the same messages, saved edits, deletion observations and activity figures in complete report layouts. Each includes HTML, a signed PDF and the original journal.</p>
 <p class="notice">Fictional example. No Telegram account was connected. The signatures check these demonstration files; they do not make the invented messages real.</p></div>
 <div class="grid">'''+''.join(cards)+'</div></main></html>', encoding='utf-8')
     return receipts

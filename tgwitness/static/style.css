@@ -813,6 +813,10 @@ form > .health-detail { margin-top: 14px; }
 .report-design-preview .design-graticule { stroke-width:.6; }
 .report-design-preview .design-paper-line { fill:none;stroke:var(--design-paper,var(--surface));stroke-width:2;opacity:.9; }
 .report-design-preview .design-serif { fill:var(--design-ink,var(--text));font:400 30px Georgia,serif; }
+.report-design-preview .design-serif-line { fill:none;stroke:var(--design-ink,var(--text));stroke-width:4; }
+.report-design-preview .design-section-number { fill:var(--design-accent);font:600 12px Georgia,serif; }
+.report-design-preview .design-rail-fill { fill:var(--design-rail,var(--surface-3)); }
+.report-design-preview .design-note-fill { fill:var(--design-note,var(--surface-3)); }
 .report-design-preview .design-mono { fill:var(--design-ink,var(--text));font:bold 23px ui-monospace,Consolas,monospace; }
 .report-design[data-report-design=classic] { --design-accent:#142b3a;--design-paper:#faf9f5;--design-ink:#142b3a;--design-rule:#d9deda; }
 .report-design[data-report-design=quire] { --design-accent:#8c2f1c;--design-paper:#fbf8f1;--design-ink:#1f1b16;--design-rule:#d9d0c1; }
@@ -820,6 +824,8 @@ form > .health-detail { margin-top: 14px; }
 .report-design[data-report-design=atlas] { --design-accent:#0b5d6b;--design-paper:#f6f2e9;--design-ink:#16212e;--design-rule:#d6cfc1; }
 .report-design[data-report-design=ledger] { --design-accent:#174f69;--design-paper:#fff;--design-ink:#17252e;--design-rule:#8b9ba5; }
 .report-design[data-report-design=horizon] { --design-accent:#036b9c;--design-secondary:#0f172a;--design-highlight:#0ea5e9;--design-paper:#f4f6f9;--design-ink:#0f172a;--design-rule:#e2e8f0; }
+.report-design[data-report-design=reading_series] { --design-accent:#176461;--design-paper:#fffefa;--design-ink:#202d30;--design-rule:#c5ceca;--design-rail:#eaece8; }
+.report-design[data-report-design=ledger_margin] { --design-accent:#0d5c63;--design-paper:#fbfaf6;--design-ink:#1d1f22;--design-rule:#d6d2c6;--design-note:#fbf1df; }
 @media(max-width:1100px){.report-design-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }}
 @media(max-width:520px){
   .report-design-grid { grid-template-columns:1fr;gap:9px; }

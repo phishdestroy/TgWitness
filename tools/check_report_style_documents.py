@@ -88,6 +88,42 @@ def geometry(page):
     }""")
 
 
+def screen_identity(page, design):
+    """Design-specific details must survive the shared report reset rules."""
+    cover = page.locator('.hero').evaluate("""el=>{
+      const css=getComputedStyle(el);
+      return {leadingBorder:css.borderInlineStartWidth,topBorderStyle:css.borderTopStyle,
+        topBorderWidth:css.borderTopWidth,background:css.backgroundImage};
+    }""")
+    if design == 'meridian':
+        assert cover['leadingBorder'] == '14px', ('Meridian spine', cover)
+    elif design == 'atlas':
+        assert cover['background'] != 'none', ('Atlas grid', cover)
+        assert cover['background'].count('linear-gradient') == 2, ('Atlas grid axes', cover)
+    elif design == 'quire':
+        assert cover['topBorderStyle'] == 'double' and cover['topBorderWidth'] == '4px', ('Quire frame', cover)
+    # The base dossier has pale cover text; a shared reset must not leak it onto
+    # the other designs' light paper when selector specificity changes.
+    contrast = page.locator('.hero h1, .hero .facts b, .hero .facts time, .hero .facts>div>span').evaluate_all("""elements=>{
+      const rgba=value=>{const n=value.match(/[\\d.]+/g).map(Number);return [n[0],n[1],n[2],n[3]??1];};
+      const blend=(front,back)=>front.slice(0,3).map((v,i)=>v*front[3]+back[i]*(1-front[3]));
+      const background=el=>{
+        const layers=[];
+        for(let node=el;node;node=node.parentElement)layers.unshift(rgba(getComputedStyle(node).backgroundColor));
+        return layers.reduce((back,front)=>blend(front,back),[255,255,255]);
+      };
+      const luminance=rgb=>rgb.map(v=>v/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4)
+        .reduce((sum,v,i)=>sum+v*[.2126,.7152,.0722][i],0);
+      return elements.filter(el=>el.textContent.trim()).map(el=>{
+        const css=getComputedStyle(el),bg=background(el),ink=blend(rgba(css.color),bg);
+        const a=luminance(ink),b=luminance(bg),ratio=(Math.max(a,b)+.05)/(Math.min(a,b)+.05);
+        const size=parseFloat(css.fontSize),large=size>=24||(size>=18.66&&Number(css.fontWeight)>=700);
+        return {text:el.textContent.trim(),color:css.color,background:bg,ratio,minimum:large?3:4.5};
+      });
+    }""")
+    assert all(item['ratio'] >= item['minimum'] for item in contrast), (design + ' cover contrast', contrast)
+
+
 def overflow(page):
     return page.evaluate("""()=>({width:innerWidth,total:document.documentElement.scrollWidth,
       offenders:[...document.querySelectorAll('body *')].filter(el=>el.checkVisibility()&&el.getBoundingClientRect().right>innerWidth+2)
@@ -131,6 +167,8 @@ def check(examples, designs, output):
                     for direction in ('ltr', 'rtl'):
                         page.evaluate('({theme,direction})=>{document.documentElement.dataset.theme=theme;document.documentElement.dir=direction;}',
                                       {'theme': theme, 'direction': direction})
+                        if width == 1440:
+                            screen_identity(page, design)
                         measure = overflow(page)
                         key = [design, width, theme, scheme, direction]
                         layouts.append(key)

@@ -57,7 +57,7 @@ and unsuccessful rechecks remain separate event types.
 
 ### Choose a design
 
-Six page designs are available for journal and single-chat HTML and signed PDF
+Eight page designs are available for journal and single-chat HTML and signed PDF
 reports. They use the same records and calculations, with different covers,
 typography, chapter headings, tables and spacing.
 
@@ -69,12 +69,20 @@ typography, chapter headings, tables and spacing.
 | Analytics | A survey-style cover, modular chart plates and monospaced figures. |
 | Technical | A ruled register, numbered reference rail and precise comparison tables. |
 | Overview | A panoramic cover, generous spacing and prominent summary figures. |
+| Reading series | A section rail and grouped chapters for findings, scope, changes and the observation journal. |
+| Ledger & margin | Numbered chapters with a wide margin, exact chart tables and a separate message transcript. |
 
 The design is saved per workspace and recorded in the signed export manifest.
 HTML works offline, supports light and dark themes, and adapts to narrow screens
 and right-to-left languages. Native PDFs use bundled fonts; the Editorial design
-includes Noto Serif under its bundled SIL Open Font License. The account archive's
-overview page retains its existing design.
+includes Noto Serif under its bundled SIL Open Font License. Reading series and
+Ledger & margin also apply to account overviews, account chats and sharing copies.
+
+These two designs include a readable journal without JavaScript. For large
+exports this view contains up to 500 whole records within an 8 MiB input budget;
+the report labels the limit and links to the complete viewer and source records.
+The account directory and relationship index describe that same reading sample,
+not all participants. Full-journal charts keep their separately stated scope.
 
 ### Choose the contents
 
@@ -82,7 +90,7 @@ overview page retains its existing design.
 | --- | --- |
 | Case dossier | Activity, observation times, participants, chats and the record transcript. |
 | Briefing | An activity overview without participant rankings or the transcript. |
-| Activity review | All four charts, with source references and exact figures. |
+| Activity review | Activity, observation times, participants, chats and composition, with source references and exact figures. |
 | Custom report | Your own combination of charts, transcript and previews. |
 
 Changing a preset keeps your design, case details and written analysis. Integrity
@@ -107,8 +115,8 @@ chart components, limited to matches within the first 50,000 source records. The
 calculates the complete selection. It is explicitly
 unsigned and does not persist edits. Cover and Charts buttons switch its section.
 This is not a complete PDF preview. **Save report settings** applies the choices to
-future exports; existing signed files are immutable. PDF uses the chosen palette,
-its own A4 layout and the same selected aggregates as HTML and signed JSON.
+future exports; existing signed files are immutable. PDF uses the chosen cover,
+typography, chapter layout and the same selected aggregates as HTML and signed JSON.
 
 Trust assessment, coverage limitations and verification instructions stay present.
 Hiding charts or the readable transcript does not remove authoritative source rows

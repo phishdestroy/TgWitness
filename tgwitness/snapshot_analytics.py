@@ -274,7 +274,7 @@ def _pdf_section(lay, data, options):
         return
     say, pdf = lay.say, lay.pdf
     accent = lay.design.accent
-    if pdf.get_y() > 45:
+    if pdf.get_y() > 45 and not getattr(lay, "composition_chapter", False):
         pdf.add_page()
     lay.section(say("Activity & participants"), say(data["method"]))
     lay.figures([(say("Records analysed"), data["records"]), (say("Message observations" if data["basis"] == "journal" else "Message rows"), data["messages"]),

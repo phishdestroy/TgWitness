@@ -219,7 +219,8 @@ def pdf(lay, data):
     if not data:
         return
     say, pdf = lay.say, lay.pdf
-    pdf.add_page()
+    if not getattr(lay, "composition_chapter", False):
+        pdf.add_page()
     lay.section(say(TITLE), say(INTRO))
     lay.kv([(say("Source file"), data.get("source", {}).get("file", "events.jsonl")),
             ("SHA-256", data.get("source", {}).get("sha256"))])

@@ -48,6 +48,12 @@ STYLES = MappingProxyType({
     "horizon": Style("horizon", rgb("#0F172A"), rgb("#52657C"), rgb("#036B9C"),
                      rgb("#E2E8F0"), rgb("#F4F6F9"), margins=(12, 17, 12), table_padding=1.9,
                      highlight=rgb("#0EA5E9")),
+    "reading_series": Style("reading_series", rgb("#202D30"), rgb("#526266"), rgb("#176461"),
+                            rgb("#C5CECA"), rgb("#F0F3EF"), paper=rgb("#FFFEFA"),
+                            heading_family="Serif", margins=(20, 20, 20), table_padding=1.9),
+    "ledger_margin": Style("ledger_margin", rgb("#1D1F22"), rgb("#565B62"), rgb("#0D5C63"),
+                           rgb("#D6D2C6"), rgb("#F1EEE5"), paper=rgb("#FBFAF6"),
+                           heading_family="Serif", margins=(15, 20, 15), table_border="ALL", table_padding=1.4),
 })
 
 
@@ -126,6 +132,9 @@ def _facts(lay, facts, mode):
 
 def title_block(lay, eyebrow, title, facts, signed_note):
     pdf, style = lay.pdf, lay.pdf.report_style
+    if style.name in ("reading_series", "ledger_margin"):
+        from .report_composition_pdf import title_block as independent_title
+        return independent_title(lay, eyebrow, title, facts, signed_note)
     pdf.add_page()
     pdf.start_section(str(title), level=0)
     name = style.name
@@ -230,6 +239,9 @@ def _figure_row(lay, row, *, cards=False, compact=False, ruled=False, hairlines=
 
 def figures(lay, items):
     style = lay.pdf.report_style
+    if style.name in ("reading_series", "ledger_margin"):
+        from .report_composition_pdf import figures as independent_figures
+        return independent_figures(lay, items)
     items = [(str(label), str(value) if value is not None else "—") for label, value in items]
     if not items:
         return
@@ -249,6 +261,9 @@ def figures(lay, items):
 
 def section(lay, title, lead):
     pdf, style = lay.pdf, lay.pdf.report_style
+    if style.name in ("reading_series", "ledger_margin"):
+        from .report_composition_pdf import section as independent_section
+        return independent_section(lay, title, lead)
     lay.number += 1
     if pdf.get_y() > pdf.h - 65 or (style.name == "quire" and lay.number > 1 and pdf.get_y() > 35):
         pdf.add_page()
@@ -296,6 +311,9 @@ def section(lay, title, lead):
 
 def header(pdf, footer):
     style = pdf.report_style
+    if style.name in ("reading_series", "ledger_margin"):
+        from .report_composition_pdf import header as independent_header
+        return independent_header(pdf, footer)
     if style.name == "quire":
         _box(pdf, 0, 0, pdf.w, pdf.h, style.paper)
     if pdf.page_no() <= 1:
@@ -317,6 +335,9 @@ def header(pdf, footer):
 
 def footer(pdf, text):
     style = pdf.report_style
+    if style.name in ("reading_series", "ledger_margin"):
+        from .report_composition_pdf import footer as independent_footer
+        return independent_footer(pdf, text)
     _rule(pdf, pdf.h - 16, style.line, thickness=.55 if style.name == "ledger" else .25)
     pdf.set_y(-12)
     pdf.set_font("Mono" if style.name == "ledger" else "Sans", "", 7)
