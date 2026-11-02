@@ -55,7 +55,7 @@ async def boundary_checks():
     assert (await request('/api/bad'))['status'] == 401
     assert dict((await request())['headers'])[b'retry-after'] == b'2'
     clock[0] += 61
-    for _ in range(240):
+    for _ in range(600):
         assert (await request())['status'] == 200
     assert (await request())['status'] == 429
     assert (await request(peer='203.0.113.10'))['status'] == 200

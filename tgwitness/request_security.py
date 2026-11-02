@@ -74,7 +74,7 @@ class RequestSecurity:
             while row[name] and row[name][0] <= now - 60:
                 row[name].popleft()
         wait = max(0, row["until"] - now)
-        if len(row["requests"]) >= 240:
+        if len(row["requests"]) >= 600:
             wait = max(wait, row["requests"][0] + 60 - now)
         if wait:
             return await JSONResponse({"detail": "Too many requests. Wait before trying again."}, status_code=429,

@@ -63,7 +63,8 @@ def main():
                     route.fulfill(body='body{--tampered:yes}' if css else 'window.tampered=true;',
                                   content_type='text/css' if css else 'text/javascript')
                 broken.route('**/' + asset + '*', tamper)
-                broken.goto(server.url)
+                with broken.expect_console_message(predicate=lambda message: 'integrity' in message.text.lower() or 'digest' in message.text.lower()):
+                    broken.goto(server.url)
                 assert intercepted, asset
                 assert any('integrity' in message.lower() or 'digest' in message.lower() for message in messages), (asset, messages)
                 assert not broken.evaluate('!!window.tampered')

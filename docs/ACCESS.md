@@ -109,7 +109,7 @@ An installation using `TGWITNESS_TOKEN` must change that environment setting and
 
 ### Request and proxy boundaries
 
-The API admits up to 240 requests per minute per client IP. Ten rejected
+The API admits up to 600 requests per minute per client IP. Ten rejected
 authentications within a minute start an exponential cooldown, from one second
 up to five minutes. A failed attempt after the cooldown increases it; ten minutes
 without a failed attempt resets escalation. Rejections return HTTP 429 and
