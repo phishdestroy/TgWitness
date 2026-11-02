@@ -111,18 +111,34 @@ transcription, and send HMAC-signed webhooks.
 
 ## Your first capture
 
-**Guided installer · preview:** on Ubuntu, run this as root. On Linux desktops and
-macOS, run it as your normal user:
+**Guided installer · preview.** Python is included. These addresses always serve
+the latest published installer.
+
+**Linux / macOS** — on an Ubuntu server, run as root; on your desktop, use your normal user:
 
 ```sh
 curl -fsSL https://get.destroy.tools/install.sh | bash
+```
+
+**Windows** — paste into PowerShell or Command Prompt; no administrator needed:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "irm https://get.destroy.tools/install.ps1 | iex"
 ```
 
 On Ubuntu, choose **This computer**, **HTTPS link** or **My own domain**. The
 installer prepares the panel and prints its address and access key. Use
 `tgwitness open` to find it again. Your account data stays on your machine.
 
-[Windows installer, signatures and setup options](https://get.destroy.tools/).
+**Verified before installation:** the installer checks the application's SHA-256
+and RSA release signature. To check the installer itself before running it, use
+the [verification commands](docs/INSTALLATION.md#verify-before-running).
+[Checksums](https://get.destroy.tools/SHA256SUMS.txt) ·
+[Signatures and source revision](https://get.destroy.tools/#verification) ·
+[Update and manage your installation](docs/INSTALLATION.md#update-an-existing-installation).
+
+<details>
+<summary><strong>Prefer a ZIP or source checkout?</strong></summary>
 
 **Windows portable:** [download TgWitness 0.7.1](https://github.com/phishdestroy/TgWitness/releases/download/v0.7.1/TgWitness-0.7.1-windows-amd64-portable.zip),
 extract it and run **`TgWitness.cmd`**. Python is included.
@@ -139,6 +155,8 @@ with **Python 3.11+** installed. The launcher prepares the environment.
 
 Open **http://127.0.0.1:8787**. Use a separate Telegram account. Stop the demo before
 starting live mode; the live panel token is in `data/live/panel-token.txt`.
+
+</details>
 
 <p align="center">
   <a href="https://phishdestroy.github.io/TgWitness/docs/start/"><picture><source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-nav-setup-mobile.svg"><img src="docs/assets/presentation/readme-nav-setup.svg" width="32%" alt="Setup guide"></picture></a>
