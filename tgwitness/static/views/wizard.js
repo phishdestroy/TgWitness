@@ -10,10 +10,10 @@ const LIST_LIMIT=400;
 
 export function createWizard(context){
   const {root,tr,trn,json,node,toast,getState,refreshStatus,signedIn,authCard,setAuthStep,avatarNode,humanSize,
-    fmtFull,record,openAccountExport,openExtra,leaveTo,may,askConfirm,stateBadge,healthLines,healthNames}=context;
+    fmtFull,record,openAccountExport,openExtra,leaveTo,may,stateBadge,healthLines,healthNames,connectionGuide}=context;
   let data=null,answers={},step="goal",session=null;
   let dialogs=null,dialogsLoading=false,dialogsError="",search="",typeFilter="";
-  let preview=null,previewKey="",routeDraft=null,routeNote=null,outsideOpen=false,live=null,skipConnection=false;
+  let preview=null,previewKey="",live=null,skipConnection=false;
   let authHome=null,shownSignedIn=null,afterRender=null;
 
   const titles={goal:tr("What do you need?"),connection:tr("How will TgWitness reach Telegram?"),
@@ -60,7 +60,7 @@ export function createWizard(context){
   const steps=()=>answers.goal==="copy"?["goal","connection","account","summary"]:
     ["goal","connection","account","chats","saving","place","summary"];
   const kind=()=>answers.goal==="evidence"?"evidence":answers.goal==="watch"?(answers.purpose||"investigation"):null;
-  const connectionOk=()=>!!data?.checks?.connection?.ok&&data.checks.connection.kind===data.route?.kind;
+  const connectionOk=()=>!!data?.connection?.check?.telegram_connected;
 
   // ---------- what each step needs ----------
   function ready(name){
@@ -97,7 +97,7 @@ export function createWizard(context){
   // ---------- progress on the server ----------
   function cleanAnswers(){
     const a={goal:answers.goal||null,purpose:answers.goal==="watch"?answers.purpose||null:null,
-      connection:answers.connection||null,account_kind:answers.account_kind||null,chats:answers.chats||null,
+      account_kind:answers.account_kind||null,chats:answers.chats||null,
       saving:answers.saving||null,place:answers.place||null};
     if(a.chats)a.chats={mode:a.chats.mode,chat_ids:[...new Set(a.chats.chat_ids)],folder_id:a.chats.folder_id??null,
       types:{...a.chats.types},acknowledged:!!a.chats.acknowledged};
@@ -149,6 +149,7 @@ export function createWizard(context){
   function render(){
     if(!data)return;
     if(step!=="account")restoreAuth();
+    if(step!=="connection")restoreConnection();
     renderSteps();
     const h=node("h1","",titles[step]);h.tabIndex=-1;
     const body=node("div","wizard-body");
@@ -216,169 +217,70 @@ export function createWizard(context){
   }
 
   // ---------- 2. connection ----------
-  function routeName(route){
-    if(!route?.kind)return tr("Not chosen");
-    const where=route.host?" · "+route.host+":"+route.port:"";
-    return ({direct:tr("Direct connection"),socks5:tr("SOCKS5 proxy"),http:tr("HTTP proxy"),mtproxy:tr("Your MTProto proxy"),
-      mtproxy_auto:tr("Public proxies")}[route.kind]||route.kind)+where;
+  // The account page's checked connection (views/connection.js) is shown here while this step is open:
+  // a route is checked before it is applied, and one place keeps it.
+  const routeNames={direct:tr("Direct"),vpn:tr("VPN"),proxy:tr("My proxy"),socks5:tr("SOCKS5 proxy"),http:tr("HTTP proxy"),
+    mtproxy:tr("MTProxy"),mtproxy_auto:tr("Public MTProto"),warp:tr("WARP")};
+  const routeName=current=>current?.mode?routeNames[current.mode]||current.mode:tr("Not chosen");
+  let connectionHome=null,connectionTimer=null,autoCheck=null;
+  function restoreConnection(){
+    clearTimeout(connectionTimer);connectionTimer=null;
+    if(connectionHome&&connectionGuide.root.parentNode!==connectionHome.parentNode){connectionGuide.view()?.leave();connectionHome.after(connectionGuide.root);}
   }
-  function problemText(code){
-    return {direct_unreachable:tr("Telegram does not open directly from this computer. Use a proxy."),
-      proxy_unreachable:tr("The proxy does not answer or refused the connection. Check its address, port and password."),
-      bad_secret:tr("The MTProto secret is wrong. Copy the link again from the proxy's owner."),
-      no_public_proxy:tr("None of the public proxies answered. Try your own proxy."),
-      blocked_by_ip_mode:tr("The IP protection mode does not allow this route. Choose a proxy."),
-      rate_limited:tr("Telegram asked to wait. Try again in a few minutes.")}[code]||tr("The connection check failed.");
+  // Polls this account's route and the shared job while the step is open; the guide applies, the wizard follows.
+  async function watchConnection(){
+    clearTimeout(connectionTimer);
+    if(step!=="connection")return;
+    try{
+      const [current,root]=await Promise.all([json("connection"),getState().profile==="default"?null:json("connection",undefined,{root:true})]);
+      const job=(root||current).job,before=JSON.stringify([data.connection,autoCheck?.state]);
+      data.connection=current.current;
+      if(autoCheck&&autoCheck.state==="running"&&["ready","failed","expired","applied"].includes(job.state))
+        autoCheck={state:job.state==="ready"&&job.rows?.[0]?.check?.telegram_connected?"works":"failed",ms:job.rows?.[0]?.check?.latency_ms};
+      if(before!==JSON.stringify([data.connection,autoCheck?.state])){renderSteps();showConnection();}
+    }catch(error){if(error?.name==="StaleView")return;}
+    connectionTimer=setTimeout(watchConnection,2500);
   }
-  function parseProxy(text){
-    const value=text.trim();if(!value)return null;
-    if(/^(tg:\/\/proxy|https?:\/\/(t|telegram)\.me\/proxy)\?/i.test(value))return {kind:"mtproxy",link:value};
-    let url;try{url=new URL(/^[a-z0-9+.-]+:\/\//i.test(value)?value:"socks5://"+value);}catch{return {error:true};}
-    const scheme=url.protocol.replace(":","").toLowerCase();
-    const kindOf={socks5:"socks5",socks5h:"socks5",socks:"socks5",http:"http",https:"http"}[scheme];
-    const port=Number(url.port||(kindOf==="http"?8080:1080));
-    if(!kindOf||!url.hostname||!Number.isInteger(port)||port<1||port>65535)return {error:true};
-    return {kind:kindOf,host:url.hostname.replace(/^\[|\]$/g,""),port,
-      username:decodeURIComponent(url.username||""),password:decodeURIComponent(url.password||"")};
+  function showConnection(){
+    const line=page.querySelector(".wizard-connection-state");if(!line)return;
+    const check=data.connection?.check;
+    line.replaceChildren(connectionOk()?notice("success",tr("Connected to Telegram in {ms} ms · {route}",{ms:check.latency_ms??"?",route:routeName(data.connection)})):
+      notice("info",tr("Choose a route below, check it and apply it. Until then the saved connection stays as it is.")));
+    const auto=page.querySelector(".wizard-auto-result");if(!auto)return;
+    auto.replaceChildren(...(!autoCheck?[]:autoCheck.state==="running"?[node("p","wizard-progress",tr("Checking a direct connection to Telegram…"))]:
+      autoCheck.state==="works"?[notice("success",tr("Telegram opens directly from this computer ({ms} ms). Press Apply checked connection below to use it.",{ms:autoCheck.ms??"?"}))]:
+      [notice("warning",tr("Telegram does not open directly from this computer. Choose WARP or your own proxy below and check it."))]));
   }
-  async function routeConfig(){
-    const choice=answers.connection;
-    if(choice==="direct")return {kind:"direct"};
-    if(choice==="public")return {kind:"mtproxy_auto"};
-    if(choice!=="mtproxy"&&choice!=="socks5"&&choice!=="http")return null;
-    const draft=routeDraft||{};
-    if(draft.parsed?.kind==="mtproxy"){
-      const r=await json("network/parse-link",{link:draft.parsed.link});
-      return {kind:"mtproxy",host:r.host,port:r.port,secret:r.secret};
-    }
-    if(draft.parsed&&!draft.parsed.error)return {kind:draft.parsed.kind,host:draft.parsed.host,port:draft.parsed.port,
-      username:draft.parsed.username,password:draft.parsed.password};
-    throw new Error(tr("Paste a proxy link or address first."));
-  }
-  async function pauseIfRunning(){
-    if(!status().collector.running)return true;
-    if(!(await askConfirm(tr("Pause observation to change the route? New messages, edits and deletion notices are not collected while paused, and an unfinished sign-in is cancelled when the route is saved."),{confirmText:tr("Pause observation")})))return false;
-    await json("collector/stop",{});await refreshStatus();return true;
-  }
-  async function checkConnection(){
-    routeNote={state:"running",text:tr("Checking the connection to Telegram…")};render();
-    const r=await json("setup/wizard/check-connection",{});
-    data.checks={...data.checks,connection:r};data.route=r.route;data.policy=r.policy;
-    routeNote=null;skipConnection=false;
-    await refreshStatus();render();
-    return r;
-  }
-  async function saveAndCheck(control){
-    await work(control,async()=>{
-      if(answers.connection==="keep"){await checkConnection();return;}
-      if(answers.connection==="check"){
-        if(!(await pauseIfRunning()))return;
-        await json("setup/wizard/route",{kind:"direct"});
-        const r=await checkConnection();
-        if(!r.ok)routeNote={state:"failed",text:tr("Telegram does not open directly from this computer. A proxy is needed: enter your own, or use a public one as a fallback.")};
-        render();return;
-      }
-      const config=await routeConfig();if(!config)return;
-      if(!(await pauseIfRunning()))return;
-      const r=await json("setup/wizard/route",config);data.route=r.route;data.policy=r.policy;
-      await checkConnection();
-    });
+  async function checkDirect(){
+    autoCheck={state:"running"};showConnection();
+    const body={mode:"direct",scope:"account",account:getState().profile,group:null,keep_custom:true,outside_enabled:true,accept_setup:false};
+    await json("connection/preview",body,{root:true});
+    await json("connection/prepare",body,{root:true});
+    connectionGuide.view()?.enter();watchConnection();
   }
   function renderConnection(body){
-    const route=data.route||{},check=data.checks?.connection,known=signedIn()||!!check?.ok;
-    if(!answers.connection)answers.connection=known?"keep":null;
-    body.append(node("p","hint",tr("TgWitness connects to Telegram from this computer. If Telegram is blocked here, use a proxy.")));
-    const routes=group(titles.connection);
-    const pick=value=>{answers.connection=value;routeNote=null;persist();render();};
-    if(known)option(routes,"wizard-route","keep",{title:tr("Keep the current connection"),when:routeName(route),
-      checked:answers.connection==="keep",recommended:true,onPick:pick});
-    option(routes,"wizard-route","direct",{title:tr("Directly"),checked:answers.connection==="direct",recommended:!known,onPick:pick,
-      when:tr("If Telegram opens here without a VPN. Telegram sees this computer's address."),
-      help:tr("The simplest and fastest route. Choose a proxy instead if Telegram should not learn where TgWitness runs.")});
-    const own=["mtproxy","socks5","http"].includes(answers.connection);
-    option(routes,"wizard-route","mtproxy",{title:tr("Through my proxy"),checked:own,onPick:pick,
-      when:tr("An MTProto link (tg://proxy or t.me/proxy), SOCKS5 or HTTP. Telegram sees the proxy, not this computer."),
-      help:tr("Paste the link or address exactly as you received it, for example socks5://user:password@host:1080. We read the type, address, port and password from it.")});
-    option(routes,"wizard-route","check",{title:tr("I do not know: check for me"),checked:answers.connection==="check",onPick:pick,
-      when:tr("We try a direct connection first (Telegram sees this computer's address). If it fails, we suggest a proxy.")});
-    body.append(routes);
-    if(own){
-      const field=node("div","wizard-field"),label=node("label","",tr("Proxy link or address")),input=node("input");
-      input.id="wizard-proxy";label.htmlFor=input.id;input.type="password";input.autocomplete="off";input.spellcheck=false;
-      input.placeholder="tg://proxy?…  ·  socks5://user:password@host:1080";input.value=routeDraft?.text||"";
-      const parsed=node("p","hint wizard-parsed");parsed.setAttribute("role","status");
-      const show=()=>{
-        const p=routeDraft?.parsed;
-        parsed.textContent=!p?"":p.error?tr("This is not a proxy link or address."):p.kind==="mtproxy"?tr("MTProto proxy link"):
-          (p.kind==="http"?tr("HTTP proxy"):tr("SOCKS5 proxy"))+" · "+p.host+":"+p.port+(p.username?" · "+tr("with a login"):"");
-        parsed.classList.toggle("error",!!p?.error);
-      };
-      input.addEventListener("input",()=>{routeDraft={text:input.value,parsed:parseProxy(input.value)};
-        const usable=!!routeDraft.parsed&&!routeDraft.parsed.error;
-        if(usable)answers.connection=routeDraft.parsed.kind;
-        const run=page.querySelector(".wizard-run");if(run)run.disabled=!usable;
-        show();});
-      field.append(label,input,parsed);body.append(field);show();
-    }
-    const actions=node("div","wizard-actions");
-    const run=button("primary wizard-run",answers.connection==="keep"?tr("Check the connection"):tr("Save and check"));
-    run.disabled=!answers.connection||own&&!(routeDraft?.parsed&&!routeDraft.parsed.error);
-    run.addEventListener("click",()=>saveAndCheck(run));actions.append(run);
-    body.append(actions);
-    if(status().collector.running&&answers.connection!=="keep")
-      body.append(notice("warning",tr("Observation is running. Changing the route pauses it first; you will be asked.")));
-    const result=node("div","wizard-result");result.setAttribute("role","status");result.setAttribute("aria-live","polite");
-    if(routeNote?.state==="running")result.append(node("p","wizard-progress",routeNote.text));
-    else if(check&&check.kind===route.kind){
-      if(check.ok){
-        result.append(notice("success",tr("Connected to Telegram in {ms} ms · {route}",{ms:check.elapsed_ms??"?",route:routeName(route)})));
-        if(route.kind==="mtproxy_auto")result.append(notice("warning",tr("Public proxies are run by strangers. They see that this computer uses Telegram (not the content) and may stop at any time. Your own proxy is better; the protection scale counts this as a penalty.")));
-      }else{
-        const box=notice("error",problemText(check.code));
-        const more=node("details","wizard-detail");more.append(node("summary","",tr("Details")),node("code","",check.detail||""));box.append(more);
-        result.append(box);
-        if(routeNote?.state==="failed")result.append(node("p","",routeNote.text));
-        const ways=node("div","wizard-actions");
-        const mine=button("secondary",tr("Enter my proxy"));mine.addEventListener("click",()=>{answers.connection="mtproxy";routeNote=null;render();page.querySelector("#wizard-proxy")?.focus();});
-        const pub=button("secondary",tr("Use public proxies (fallback)"));
-        pub.addEventListener("click",()=>work(pub,async()=>{
-          answers.connection="public";
-          if(!(await pauseIfRunning()))return;
-          const r=await json("setup/wizard/route",{kind:"mtproxy_auto"});data.route=r.route;data.policy=r.policy;
-          await checkConnection();
-        }));
-        ways.append(mine,pub);result.append(ways);
-      }
-    }
-    body.append(result);
-    if(connectionOk()&&data.policy?.outside_route==="none"&&kind()!=="personal"&&answers.goal!=="copy")body.append(outsideBox());
+    body.append(node("p","hint",tr("TgWitness connects to Telegram from this computer. If Telegram is blocked here, use WARP, a VPN or a proxy.")));
+    const state=node("div","wizard-connection-state");state.setAttribute("role","status");state.setAttribute("aria-live","polite");
+    body.append(state);
+    const auto=node("div","wizard-auto"),run=button("secondary",tr("I do not know: check for me"));
+    auto.append(run,node("small","hint",tr("We check a direct connection first; nothing changes until you apply. Telegram sees this computer's address on a direct route.")));
+    run.addEventListener("click",()=>work(run,checkDirect));
+    const result=node("div","wizard-auto-result");result.setAttribute("aria-live","polite");
+    body.append(auto,result);
+    const slot=node("div","wizard-connect");body.append(slot);
+    if(!connectionHome){connectionHome=document.createComment("connect-guide");connectionGuide.root.before(connectionHome);}
+    const mounted=root.contains(connectionGuide.root);
+    slot.append(connectionGuide.root);
+    afterRender=()=>{
+      connectionGuide.root.querySelector("#connect-details").open=true;
+      if(!mounted)connectionGuide.view()?.enter();
+      showConnection();watchConnection();
+    };
     if(!connectionOk()&&!signedIn()){
       const skip=button("text-link",tr("Skip for now, I will set it up later"));
       skip.addEventListener("click",()=>{skipConnection=true;go("account");});
       body.append(node("p","hint",tr("Without a checked connection, sign-in may fail.")),skip);
     }
-  }
-  // Timestamps and notifications leave Telegram: a hidden address sends them only through a SOCKS5 or HTTP proxy.
-  function outsideBox(){
-    const box=notice("warning",tr("Timestamps, notifications and the off-site copy cannot be sent now: an MTProto proxy carries only Telegram traffic, and this computer's address stays hidden. Set a SOCKS5 or HTTP proxy for these requests, or leave them off."));
-    const open=button("secondary small",tr("Set a proxy for these requests"));
-    open.addEventListener("click",()=>{outsideOpen=!outsideOpen;render();});
-    box.append(open);
-    if(outsideOpen){
-      const form=node("form","wizard-outside");
-      const field=(id,label,attrs={})=>{const wrap=node("div","wizard-field"),l=node("label","",label),i=node("input");i.id=id;l.htmlFor=id;Object.assign(i,attrs);wrap.append(l,i);form.append(wrap);return i;};
-      const address=field("wizard-outside-proxy",tr("SOCKS5 or HTTP proxy address"),{placeholder:"socks5://user:password@host:1080",autocomplete:"off",spellcheck:false,type:"password",required:true});
-      const save=node("button","primary small",tr("Save"));save.type="submit";form.append(save);
-      form.addEventListener("submit",event=>{event.preventDefault();work(save,async()=>{
-        const p=parseProxy(address.value);
-        if(!p||p.error||p.kind==="mtproxy")throw new Error(tr("Enter a SOCKS5 or HTTP proxy, for example socks5://user:password@host:1080."));
-        data.policy=await json("network/policy",{exposure:data.policy.exposure,outside_enabled:true,
-          outside_proxy:{kind:p.kind,host:p.host,port:p.port,username:p.username,password:p.password},remove_outside_proxy:false});
-        outsideOpen=false;toast(tr("Saved. Requests outside Telegram go through this proxy."));render();
-      });});
-      box.append(form);
-    }
-    return box;
   }
 
   // ---------- 3. account ----------
@@ -566,7 +468,7 @@ export function createWizard(context){
     const text=node("span");text.append(node("strong","",tr("Independent timestamps")),
       node("small","",tr("Timestamp services confirm when each checkpoint existed. Only a hash leaves this computer.")));
     l.append(input,text);body.append(l);
-    if(a.timestamps&&data.policy?.outside_route==="none")body.append(notice("warning",tr("Timestamps cannot be sent with the current connection: requests outside Telegram are blocked. Set a proxy for them on the Connection step.")));
+    if(a.timestamps&&data.connection?.policy?.outside_route==="none")body.append(notice("warning",tr("Timestamps cannot be sent with the current connection: requests outside Telegram are blocked. Set a proxy for them on the Connection step.")));
   }
 
   // ---------- 6. place ----------
@@ -608,9 +510,8 @@ export function createWizard(context){
     const s=status(),account=s.collector.account,copy=answers.goal==="copy";
     const rows=node("div","wizard-summary");
     row(rows,"goal",shortNames.goal,goalNames[answers.goal]||"—",answers.goal==="watch"?purposeNames[kind()]:"");
-    const check=data.checks?.connection;
-    row(rows,"connection",shortNames.connection,routeName(data.route),
-      connectionOk()?tr("Checked: {ms} ms",{ms:check.elapsed_ms??"?"}):tr("Not checked"));
+    row(rows,"connection",shortNames.connection,routeName(data.connection),
+      connectionOk()?tr("Checked: {ms} ms",{ms:data.connection.check.latency_ms??"?"}):tr("Not checked"));
     row(rows,"account",shortNames.account,account?(account.username?"@"+account.username:"ID "+account.id):tr("Not signed in"),
       copy?"":answers.account_kind==="main"?tr("Main account"):tr("A separate account"));
     if(!copy){
@@ -760,7 +661,7 @@ export function createWizard(context){
   // ---------- view lifecycle ----------
   async function load(wanted=null,preset=null){
     const fresh=session!==getState().workspaceRevision+":"+getState().profile;
-    if(fresh){session=getState().workspaceRevision+":"+getState().profile;data=null;answers={};dialogs=null;preview=null;live=null;routeDraft=null;skipConnection=false;}
+    if(fresh){session=getState().workspaceRevision+":"+getState().profile;data=null;answers={};dialogs=null;preview=null;live=null;autoCheck=null;skipConnection=false;}
     let result;
     try{result=await json("setup/wizard");}
     catch(error){
@@ -792,7 +693,7 @@ export function createWizard(context){
       if(step==="account"&&signedIn()!==shownSignedIn)render();
       else renderSteps();
     },
-    leave(){restoreAuth();clearTimeout(watching);},
-    resetSession(){restoreAuth();clearTimeout(watching);session=null;data=null;answers={};dialogs=null;live=null;preview=null;},
+    leave(){restoreAuth();restoreConnection();clearTimeout(watching);},
+    resetSession(){restoreAuth();restoreConnection();clearTimeout(watching);autoCheck=null;session=null;data=null;answers={};dialogs=null;live=null;preview=null;},
   };
 }

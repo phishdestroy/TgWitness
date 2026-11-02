@@ -1293,15 +1293,14 @@ class Collector:
         credentials = self.vault.read("credentials")
         api_id, api_hash = ((credentials["api_id"], credentials["api_hash"]) if credentials.get("api_id")
                             else api_pool.login_order()[0])
-        client, started = None, time.monotonic()
+        client = None
         try:
             await self.ensure_route()
             client = self.make_client(api_id, api_hash)
             await self.connect_client(client)
-            elapsed = round((time.monotonic() - started) * 1000)
-            self.store.append("network.probe", {**self.route_receipt(), "connected": True, "elapsed_ms": elapsed,
+            self.store.append("network.probe", {**self.route_receipt(), "connected": True,
                               "meaning": "Telegram transport connected; capture completeness is not tested"})
-            return {"connected": True, "elapsed_ms": elapsed, "route": self.route_status()}
+            return {"connected": True, "route": self.route_status()}
         except Exception as exc:
             self.store.append("network.probe", {**self.route_receipt(), "connected": False,
                                                "error_type": type(exc).__name__})

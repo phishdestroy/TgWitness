@@ -18,7 +18,6 @@ STEPS = ("goal", "connection", "account", "chats", "saving", "place", "summary")
 COPY_STEPS = ("goal", "connection", "account", "summary")
 GOALS = ("copy", "watch", "evidence")
 PURPOSES = ("personal", "investigation")
-CONNECTIONS = ("keep", "direct", "mtproxy", "socks5", "http", "check", "public")
 MEDIA = ("none", "small", "standard", "all")
 HISTORY = ("none", "recent", "all")
 RECENT_MESSAGES = 100
@@ -53,7 +52,6 @@ class Answers(BaseModel):
     model_config = ConfigDict(extra="forbid")
     goal: Literal[GOALS] | None = None
     purpose: Literal[PURPOSES] | None = None
-    connection: Literal[CONNECTIONS] | None = None
     account_kind: Literal["dedicated", "main"] | None = None
     chats: Chats | None = None
     saving: Saving | None = None
@@ -100,11 +98,13 @@ def presets():
 def load(store):
     """The saved progress with its bookkeeping (when it finished or was skipped, what was applied)."""
     saved = store.get_setting("setup_wizard", None) or {}
+    # Answers a later version no longer asks are left out rather than discarding the rest.
+    answers = {key: value for key, value in (saved.get("answers") or {}).items() if key in Answers.model_fields}
     try:
-        progress = Progress(step=saved.get("step", "goal"), answers=saved.get("answers") or {})
+        progress = Progress(step=saved.get("step", "goal"), answers=answers)
     except ValueError:
         progress = Progress()
-    return {**progress.model_dump(), "checks": saved.get("checks") or {}, "updated_at": saved.get("updated_at"),
+    return {**progress.model_dump(), "updated_at": saved.get("updated_at"),
             "finished_at": saved.get("finished_at"), "skipped_at": saved.get("skipped_at"),
             "applied": saved.get("applied")}
 
@@ -213,19 +213,3 @@ def drift(applied, current):
         return []
     now = summary(current)
     return [key for key in ("scope", "monitoring", "media", "timestamps") if applied.get(key) != now[key]]
-
-
-def connection_problem(kind, status, detail):
-    """A short code for a failed connection check; the panel words it and offers the next step."""
-    text = str(detail or "")
-    if status == 429:
-        return "rate_limited"
-    if "secret" in text.lower():
-        return "bad_secret"
-    if "IP mode" in text or "tunnel" in text:
-        return "blocked_by_ip_mode"
-    if status == 503 or "Connection unavailable" in text or "transport failed" in text:
-        return {"direct": "direct_unreachable", "mtproxy_auto": "no_public_proxy"}.get(kind, "proxy_unreachable")
-    if "No working proxy" in text or "proxy" in text.lower():
-        return "proxy_unreachable"
-    return "failed"

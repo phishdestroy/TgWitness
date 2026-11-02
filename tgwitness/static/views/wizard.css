@@ -58,18 +58,16 @@
 .wizard-notice.error { border-color: var(--danger-border); background: var(--danger-soft); color: var(--danger); }
 .wizard-notice.info { border-color: var(--accent-border); background: var(--accent-soft); color: var(--accent-text); }
 .wizard-notice .check-label { color: var(--text); }
-.wizard-detail summary { font-size: 13px; cursor: pointer; }
-.wizard-detail code { display: block; margin-top: 6px; white-space: pre-wrap; overflow-wrap: anywhere; }
 
 .wizard-field { display: grid; gap: 6px; max-width: 560px; margin: 12px 0; }
 .wizard-field label { margin: 0; font-size: 14px; font-weight: 500; }
 .wizard-field input, .wizard-field select { width: 100%; min-width: 0; }
-.wizard-parsed { margin: 0; }
-.wizard-parsed.error { color: var(--danger); }
-.wizard-outside { display: grid; gap: 4px; }
-.wizard-outside .wizard-field { margin: 4px 0; }
-.wizard-outside button { justify-self: start; }
 .wizard-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0; }
+.wizard-auto { display: grid; justify-items: start; gap: 6px; margin: 12px 0; }
+.wizard-connect { margin: 14px 0; }
+.wizard-connect .connect-guide { margin: 0; }
+/* The wizard's own Next continues; the account page's Continue would leave the step. */
+.wizard-connect #connect-continue { display: none !important; }
 .wizard-progress { color: var(--text-2); }
 .wizard-progress:empty { display: none; }
 .wizard-expert { display: inline-block; margin-top: 10px; }

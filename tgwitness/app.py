@@ -1879,10 +1879,10 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 "parameters": tuning.values(store), "targets": store.targets()}
 
     def wizard_state():
-        progress, current, collector = wizard.load(app.state.store), wizard_current(), app.state.collector
+        progress, current = wizard.load(app.state.store), wizard_current()
         return {**progress, "steps": wizard.steps_for(progress["answers"]["goal"]), "presets": wizard.presets(),
                 "current": wizard.summary(current), "drift": wizard.drift(progress["applied"], current),
-                "route": collector.route_status(), "policy": collector.policy_state(),
+                "connection": app.state.connection.public()["current"],
                 "recent_messages": wizard.RECENT_MESSAGES, "setup": setup_state()}
 
     @app.get("/api/setup/wizard", dependencies=[Depends(authenticate)])
@@ -1905,55 +1905,6 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 store.set_setting("setup", {"skipped": True, "at": now})
             wizard.save(store, now, **({"finished_at": now} if body.reason == "copy" else {"skipped_at": now}))
         return wizard_state()
-
-    @app.post("/api/setup/wizard/route", dependencies=[Depends(authenticate)])
-    async def wizard_route(request: Request, body: NetworkConfig):
-        """The connection route with the IP mode it needs, in the order the two settings allow: a direct
-        route only in the mode for an address that may be seen; a proxy hides the address again."""
-        config, collector = await approved_route(request, body), app.state.collector
-
-        async def apply():
-            if collector.running:
-                raise ValueError("Pause observation before changing the Telegram route.")
-            policy, proxy = collector.route_policy(), collector.outside_proxy()
-            if config.kind == "direct":
-                if policy["exposure"] != "tunnel" or not policy["outside_enabled"]:
-                    await collector.set_route_policy(RoutePolicy(exposure="tunnel", outside_enabled=True))
-                return await collector.set_network(config)
-            # A proxy hides the address. Outside requests use a SOCKS5 or HTTP route, or the proxy set for them.
-            wanted = RoutePolicy(exposure="hide", outside_enabled=config.kind in ("socks5", "http") or proxy is not None)
-            changes = wanted.model_dump() != policy
-            if collector.network_config().kind == "direct" or config.kind in ("socks5", "http"):
-                result = await collector.set_network(config)
-                if changes:
-                    await collector.set_route_policy(wanted)
-                return result
-            if changes:
-                await collector.set_route_policy(wanted)
-            return await collector.set_network(config)
-
-        await operation(apply)
-        return {"route": collector.route_status(), "policy": collector.policy_state()}
-
-    @app.post("/api/setup/wizard/check-connection", dependencies=[Depends(authenticate)])
-    async def wizard_check_connection():
-        """Test the saved route and keep the result with the wizard's progress, worded by a short code."""
-        collector, store = app.state.collector, app.state.store
-        kind = collector.network_config().kind
-        try:
-            result = await operation(collector.test_network)
-            check = {"ok": True, "kind": kind, "elapsed_ms": result.get("elapsed_ms"), "at": utcnow()}
-        except HTTPException as exc:
-            if exc.status_code == 409 and "demo" in str(exc.detail):
-                raise
-            detail = exc.detail.get("message") if isinstance(exc.detail, dict) else exc.detail
-            check = {"ok": False, "kind": kind, "code": wizard.connection_problem(kind, exc.status_code, detail),
-                     "detail": str(detail), "at": utcnow()}
-        except (netclient.RouteError, OSError) as exc:
-            check = {"ok": False, "kind": kind, "code": wizard.connection_problem(kind, 503, str(exc)),
-                     "detail": str(exc) or type(exc).__name__, "at": utcnow()}
-        wizard.save(store, utcnow(), checks={**wizard.load(store)["checks"], "connection": check})
-        return {**check, "route": collector.route_status(), "policy": collector.policy_state()}
 
     def wizard_preview(answers):
         current = wizard_current()

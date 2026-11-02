@@ -2876,8 +2876,9 @@ $("setup-start-skip").addEventListener("click",ev=>busy(ev.currentTarget,async()
 // Step-by-step setup (views/wizard.js, wizard.py): what a new workspace opens with, and the one place to choose a goal.
 let wizardView=null;
 const wizardReady=import("./views/wizard.js?v=1").then(({createWizard})=>{
-  wizardView=createWizard({root:$("view-setup"),tr,trn,json,node,toast,may,fmtFull,humanSize,avatarNode,askConfirm,
+  wizardView=createWizard({root:$("view-setup"),tr,trn,json,node,toast,may,fmtFull,humanSize,avatarNode,
     getState:()=>state,refreshStatus,signedIn:accountSignedIn,authCard,setAuthStep,stateBadge,
+    connectionGuide:{root:$("connect-guide"),view:()=>connectionView},
     healthLines:collectorLines,healthNames:healthPartNames,
     record:options=>window.TgWitnessRouter?.record({},options||{}),
     openAccountExport:openAccountWorkflow,leaveTo:view=>navigate(view),

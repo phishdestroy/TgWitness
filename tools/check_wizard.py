@@ -10,6 +10,7 @@ import json
 import sys
 import tempfile
 from pathlib import Path
+from unittest.mock import AsyncMock, patch
 from urllib.parse import urlsplit
 
 import requests
@@ -75,9 +76,6 @@ def check_plan():
     assert wizard.media_choice(wizard.media_capture("small", CAPTURE)) == "small"
     assert wizard.media_choice(wizard.media_capture("all", CAPTURE)) == "all"
     assert wizard.media_choice({**CAPTURE, "download_media": False}) == "none"
-    assert wizard.connection_problem("direct", 503, "Connection unavailable: ConnectionError") == "direct_unreachable"
-    assert wizard.connection_problem("socks5", 503, "Connection unavailable: OSError") == "proxy_unreachable"
-    assert wizard.connection_problem("mtproxy_auto", 503, "Connection unavailable: NoProxyAvailable") == "no_public_proxy"
     named = levels.assess(EvidenceMode().model_dump(), {"enabled": False, "retention_days": 0},
                           {"enabled": False, "problems": True}, [], None, {}, [], "server")
     assert not named["reliability"]["items"][0]["on"], "a server named in an answer earns no points"
@@ -105,25 +103,10 @@ def check_api(directory):
         incomplete = post("/api/setup/wizard/preview", {"goal": "watch", "purpose": "investigation"}).json()
         assert incomplete == {"ready": False, "step": "chats", "message": "Choose the chats to record."}, incomplete
 
-        # The route with the IP mode it needs: direct only where the address may be seen; a proxy hides it again.
-        direct = post("/api/setup/wizard/route", {"kind": "direct"})
-        assert direct.ok, direct.text
-        assert direct.json()["policy"]["exposure"] == "tunnel" and collector.network_config().kind == "direct"
-        check = post("/api/setup/wizard/check-connection", {}).json()
-        assert check["ok"] and check["kind"] == "direct" and isinstance(check["elapsed_ms"], int), check
-        assert get("/api/setup/wizard")["checks"]["connection"]["ok"]
-        socks = post("/api/setup/wizard/route", {"kind": "socks5", "host": "proxy.example.org", "port": 1080})
-        assert socks.ok, socks.text
-        assert socks.json()["policy"]["exposure"] == "hide" and socks.json()["policy"]["outside_enabled"]
-        mtproxy = post("/api/setup/wizard/route", {"kind": "mtproxy", "host": "proxy.example.org", "port": 443,
-                                                    "secret": "a7" * 16})
-        assert mtproxy.ok, mtproxy.text
-        policy = mtproxy.json()["policy"]
-        assert policy["exposure"] == "hide" and not policy["outside_enabled"] and policy["outside_route"] == "none"
-        back = post("/api/setup/wizard/route", {"kind": "direct"})
-        assert back.ok and back.json()["policy"]["exposure"] == "tunnel", back.text
-        kinds = [row["kind"] for row in store.db.execute("SELECT kind FROM events ORDER BY seq")]
-        assert kinds.count("network.changed") == 4 and "network.policy_changed" in kinds
+        # The connection is the account page's checked route (guided_connection.py), read here, never set here.
+        assert state["connection"]["mode"] == "mtproxy_auto" and state["connection"]["check"] is None, state["connection"]
+        assert requests.post(server.url + "/api/setup/wizard/route", json={"kind": "direct"}, headers=headers,
+                             timeout=10).status_code in (404, 405)
 
         collector.dialog_cache = {chat_id: {"chat_id": chat_id, "title": title, "kind": kind, "entity": None,
                                             "archived": False} for chat_id, (title, kind) in CHATS.items()}
@@ -182,15 +165,17 @@ def check_api(directory):
         assert skipped["skipped_at"] and not skipped["finished_at"]
         store = server.app.state.store
         assert store.get_setting("setup")["skipped"] and store.get_setting("evidence", None) is None
-    return "ok  api: progress kept, route with its IP mode, connection check, preview, apply journals each part, drift, skip"
+    return "ok  api: progress kept, the shared connection state, preview, apply journals each part, drift, skip"
 
 
 def check_browser(directory, output):
-    from check_browser import RunningApp, launch_browser, unlock
+    from check_browser import RunningApp, answer_panel_dialog, launch_browser, unlock
+    from check_guided_connection import CHECK
     from playwright.sync_api import expect, sync_playwright
     from tgwitness import i18n
     errors, external = [], []
-    with RunningApp(directory / "panel", wizard=True) as server, sync_playwright() as p:
+    probe = patch("tgwitness.guided_connection.probe", AsyncMock(return_value=CHECK))
+    with probe, RunningApp(directory / "panel", wizard=True) as server, sync_playwright() as p:
         store = server.app.state.store
         browser = launch_browser(p)
         context = browser.new_context(viewport={"width": 1440, "height": 1000}, reduced_motion="reduce")
@@ -219,20 +204,20 @@ def check_browser(directory, output):
         page.go_forward()
         expect(page.locator(".wizard-count")).to_have_text("Step 2 of 7")
 
-        # A proxy is pasted as one line; the panel reads its kind, address and login before saving anything.
-        page.locator('input[name="wizard-route"][value="mtproxy"]').check()
-        expect(page.locator(".wizard-run")).to_be_disabled()
-        page.locator("#wizard-proxy").fill("socks5://user:secret@proxy.example.org:1081")
-        expect(page.locator(".wizard-parsed")).to_have_text("SOCKS5 proxy · proxy.example.org:1081 · with a login")
-        expect(page.locator(".wizard-run")).to_be_enabled()
-        page.locator("#wizard-proxy").fill("not a proxy at all")
-        expect(page.locator(".wizard-parsed")).to_have_text("This is not a proxy link or address.")
-        expect(page.locator(".wizard-run")).to_be_disabled()
-        assert server.app.state.collector.network_config().kind == "mtproxy_auto", "typing saves nothing"
-        page.locator('input[name="wizard-route"][value="direct"]').check()
-        page.locator(".wizard-run").click()
-        expect(page.locator(".wizard-notice.success")).to_contain_text("Connected to Telegram in")
+        # The account page's checked connection, inside the step: "check for me" tries a direct route without
+        # changing it; the route changes only when the checked result is applied.
+        expect(page.locator(".wizard-connect #connect-guide")).to_be_visible()
+        expect(page.locator("#connect-details")).to_have_attribute("open", "")
+        expect(next_button).to_be_disabled()
+        page.get_by_role("button", name="I do not know: check for me").click()
+        expect(page.locator(".wizard-auto-result")).to_contain_text("Telegram opens directly from this computer (25 ms)",
+                                                                   timeout=20000)
+        assert server.app.state.collector.network_config().kind == "mtproxy_auto", "checking changes nothing"
+        page.locator("#connect-apply").click()
+        answer_panel_dialog(page)
+        expect(page.locator(".wizard-connection-state")).to_contain_text("Connected to Telegram in 25 ms", timeout=20000)
         assert server.app.state.collector.network_config().kind == "direct"
+        expect(page.locator("#connect-continue")).to_be_hidden()
         page.screenshot(path=str(output / "connection-1440.png"), full_page=True)
         next_button.click()
 
@@ -301,8 +286,13 @@ def check_browser(directory, output):
                     expect(page.locator("#view-setup")).to_have_attribute("data-step", step)
                     page.wait_for_timeout(150)
                     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth"), (lang, width, step)
+                    # Content inside its own scrolling box (the connection review table) may extend past the screen.
                     clipped = page.evaluate("""() => [...document.querySelectorAll('#view-setup *')].filter(e => {
-                        const r = e.getBoundingClientRect(); return r.width && (r.right > innerWidth + 1 || r.left < -1);
+                        const r = e.getBoundingClientRect();
+                        if (!r.width || (r.right <= innerWidth + 1 && r.left >= -1)) return false;
+                        for (let p = e.parentElement; p && p.id !== 'view-setup'; p = p.parentElement)
+                          if (['auto', 'scroll'].includes(getComputedStyle(p).overflowX)) return false;
+                        return true;
                     }).map(e => e.className || e.tagName).slice(0, 5)""")
                     assert not clipped, (lang, width, step, clipped)
                     if width in (360, 1440) or step in ("goal", "summary"):
@@ -331,10 +321,9 @@ def check_copy(directory):
         expect(page.locator(".wizard-count")).to_have_text("Step 1 of 4")
         expect(page.locator(".wizard-steps .wizard-step")).to_have_count(4)
         page.locator(".wizard-nav .primary").click()
-        page.locator('input[name="wizard-route"][value="direct"]').check()
-        page.locator(".wizard-run").click()
-        expect(page.locator(".wizard-notice.success")).to_be_visible()
-        page.locator(".wizard-nav .primary").click()
+        expect(page.locator(".wizard-nav .primary")).to_be_disabled()
+        page.get_by_role("button", name="Skip for now, I will set it up later").click()
+        expect(page).to_have_url(server.url + "/setup/account?ws=default")
         page.locator("#phone").fill("+15550002222")
         page.locator("#auth-continue").click()
         page.locator("#code").fill("11111")
