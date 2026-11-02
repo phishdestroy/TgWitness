@@ -1,7 +1,7 @@
 """Administrator-only storage and operator bot controls."""
 import asyncio
 import json
-import re
+from string import ascii_letters, digits
 
 from fastapi import Depends, HTTPException, Request
 from fastapi.responses import Response
@@ -142,7 +142,10 @@ def register(app, authenticate, require_live):
         vault, store = app.state.vault, app.state.store
         secret = dict(vault.read("operator_bot"))
         if body.token:
-            if not re.fullmatch(r"\d+:[A-Za-z0-9_-]{20,200}", body.token):
+            bot_id, separator, key = body.token.partition(":")
+            if (not separator or not 1 <= len(bot_id) <= 20 or not 20 <= len(key) <= 200
+                    or any(char not in digits for char in bot_id)
+                    or any(char not in ascii_letters + digits + "_-" for char in key)):
                 raise HTTPException(422, "Paste the bot token from BotFather.")
             secret["token"] = body.token
         if body.enabled and (not secret.get("token") or not body.chat_id or not body.user_ids or any(n <= 0 for n in body.user_ids)):

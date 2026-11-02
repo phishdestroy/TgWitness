@@ -234,6 +234,13 @@ async def lifecycle_checks():
         for path in ("/api/storage", "/api/operator-bot", "/api/services/notifications"):
             response = await client.get(path)
             assert response.status_code == 200, (path, response.text)
+        # Bounded ASCII token validation must reject hostile input without losing a saved token.
+        bot_token = "123456789:" + "a" * 35
+        assert (await client.post("/api/operator-bot", json={"token": bot_token})).status_code == 200
+        for invalid in ("0" * 249, "0" * 100 + ":" + "a" * 35, "٠١٢:" + "a" * 35,
+                        "123:" + "a" * 19, bot_token + ":extra", bot_token + "\n", "0" * 10000):
+            assert (await client.post("/api/operator-bot", json={"token": invalid})).status_code == 422
+            assert app.state.vault.read("operator_bot")["token"] == bot_token
         response = await client.post("/api/storage", json={"rclone_config": "[remote]\ntype=local"})
         assert response.status_code == 422, response.text
         grant = await client.post("/api/access/grants", json={"label": "Synthetic reviewer", "workspaces": {"default": None}, "permissions": ["view"]})
