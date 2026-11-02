@@ -285,7 +285,10 @@ async def change(registry, group_id, body):
                 continue
             app = registry.entries[row["id"]]["app"]
             error = await apply_member(app, {k: result["after"][k] for k in keys}, group, "group value changed")
-            (failed.append({"id": row["id"], "label": row["label"], "error": error}) if error else applied.append(row["id"]))
+            if error:
+                failed.append({"id": row["id"], "label": row["label"], "error": error})
+            else:
+                applied.append(row["id"])
         registry.app.state.store.append("profile_group.settings_changed", {
             "group_id": group_id, "group": group["label"], "before": result["before"], "after": result["after"],
             "applied": applied, "kept_own": kept, "failed": failed, "unavailable": unavailable})
@@ -312,7 +315,10 @@ async def adopt(registry, group_id, body):
             current = read(entry["app"], keys)
             values = {k: shared[k] for k in keys if current[k] != shared[k]}
             error = await apply_member(entry["app"], values, group, "returned to the group value")
-            (failed.append({"id": profile_id, "label": entry["label"], "error": error}) if error else applied.append(profile_id))
+            if error:
+                failed.append({"id": profile_id, "label": entry["label"], "error": error})
+            else:
+                applied.append(profile_id)
         registry.app.state.store.append("profile_group.settings_adopted", {
             "group_id": group_id, "group": group["label"], "keys": keys, "applied": applied, "failed": failed})
         return {"applied": applied, "failed": failed, **group_view(registry, group_id)}

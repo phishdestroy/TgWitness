@@ -43,7 +43,6 @@ def test_overview(tmp_path):
         assert chat["recorded_by"] == [alpha]
         assert chat["coverage"]["observed"] and chat["coverage"]["interruptions"] == 0
         store[alpha].append("observation.stopped", {"reason": "operator"})
-        group_overview._periods.clear()
         [chat] = call("GET", "profile-groups/" + gid + "/overview")["chats"]
         assert chat["coverage"]["interruptions"] == 0
         call("GET", "profile-groups/" + "0" * 32 + "/overview", status=400)

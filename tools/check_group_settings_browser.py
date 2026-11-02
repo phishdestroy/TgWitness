@@ -50,7 +50,7 @@ def check_translations():
         words = json.loads((ROOT / "tgwitness/locales" / (lang + ".json")).read_text(encoding="utf-8"))
         missing = [key for key in keys if key not in words]
         assert not missing, (lang, missing[:8])
-    return f"ok  translations: {len(keys)} group-settings strings in {len(i18n.LANGUAGES) - 1} languages"
+    return f"ok  translations: {len(keys)} strings"
 
 
 def overflow(page):
@@ -195,8 +195,7 @@ def check_browser(directory, output):
                     i18n.words("ru")["Shared settings: {name}"].replace("{name}", "Harbor case"))
         browser.close()
     assert not errors, errors
-    return "ok  browser: group goal and values, 🔗/✏️ marks and return, own value kept, shared from an account, " \
-           "move into group, access by group, journal; en ru at 4 widths"
+    return "ok  browser"
 
 
 def main():

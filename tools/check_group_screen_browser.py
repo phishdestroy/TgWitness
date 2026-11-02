@@ -27,7 +27,7 @@ def check_translations():
         words = json.loads((ROOT / "tgwitness/locales" / (lang + ".json")).read_text(encoding="utf-8"))
         missing = [key for key in keys if key not in words]
         assert not missing, (lang, missing[:8])
-    return f"ok  translations: {len(keys)} group-screen strings in {len(i18n.LANGUAGES) - 1} languages"
+    return f"ok  translations: {len(keys)} strings"
 
 
 def overflow(page):
@@ -137,8 +137,7 @@ def check_browser(directory, output):
         browser.close()
     errors = [e for e in errors if not re.fullmatch(r"Failed to load resource: .* status of (400|404) .*", e)]
     assert not errors, errors
-    return "ok  browser: open from Accounts and by address, header, account cards, shared chat coverage, " \
-           "open in a member, export with both accounts, group export; en ru at 4 widths"
+    return "ok  browser"
 
 
 def main():

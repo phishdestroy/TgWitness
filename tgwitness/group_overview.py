@@ -1,5 +1,4 @@
 import json
-import time
 from datetime import datetime, timedelta, timezone
 
 from fastapi import Depends, HTTPException
@@ -13,7 +12,6 @@ CHATS_SHOWN = 200
 STATE_KINDS = ("observation.started", "observation.stopped", "process.started", "process.stopped",
                "coverage.gap", "connection.restored", "collector.heartbeat", "parameters.changed")
 OPENING = ("observation.started", "observation.stopped", "process.started", "process.stopped")
-_periods = {}
 
 
 def iso(moment):
@@ -25,9 +23,6 @@ def allowed_silence(store):
 
 
 def observed(store, since):
-    cached = _periods.get(id(store))
-    if cached and cached[0] == since[:15] and time.monotonic() - cached[1] < 60:
-        return cached[2]
     coverage = Coverage()
     coverage.allowed = allowed_silence(store)
     with store.lock:
@@ -42,9 +37,7 @@ def observed(store, since):
     for row in rows:
         coverage.add({"observed_at": row["observed_at"], "kind": row["kind"], "chat_id": row["chat_id"],
                       "message_id": row["message_id"], "payload": json.loads(row["payload"])})
-    periods = [(parse_time(p["from"]), parse_time(p["to"])) for p in coverage.result()["continuous"]]
-    _periods[id(store)] = (since[:15], time.monotonic(), periods)
-    return periods
+    return [(parse_time(p["from"]), parse_time(p["to"])) for p in coverage.result()["continuous"]]
 
 
 def interruptions(periods, start, end, allowed):

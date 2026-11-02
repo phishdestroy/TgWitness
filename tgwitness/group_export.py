@@ -35,14 +35,11 @@ def bundle(directory, group, parts, vault):
                 accounts.append({"workspace_id": workspace_id, "label": label, "file": inner, "sha256": digest(part),
                                  "bytes": part.stat().st_size, "signing_key_fingerprint": fingerprint(public_key)})
             statement = {"format": "tgwitness-group-export-v1", "group": {"id": group["id"], "label": group["label"]},
-                         "created_at": utcnow(), "accounts": accounts,
-                         "meaning": "Each account file is that workspace's own signed export, unchanged; verify each "
-                                    "with the verify.py inside it. This manifest lists their SHA-256 and is signed "
-                                    "by the main workspace."}
+                         "created_at": utcnow(), "accounts": accounts}
             archive.writestr("manifest.json", json.dumps(statement, ensure_ascii=False, indent=2))
             archive.writestr("manifest.signature.json", json.dumps(
                 {"signature": vault.sign(canonical(statement)), "public_key": vault.public_key,
-                 "signing_key_fingerprint": fingerprint(vault.public_key), "signed": "canonical JSON of manifest.json"}))
+                 "signing_key_fingerprint": fingerprint(vault.public_key)}))
         return path, accounts
     except BaseException:
         path.unlink(missing_ok=True)
