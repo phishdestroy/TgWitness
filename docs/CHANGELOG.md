@@ -1,7 +1,10 @@
 # Changelog
 
-## Unreleased
+## 0.8.0 preview · 2 November 2026
 
+- Fixed Windows portable packaging of fpdf2's public colour profile and licence;
+  private workspace files and generated caches remain excluded.
+- Translated the guided connection controls and documentation into 24 additional languages.
 - Added a guided Connection screen: choose accounts, prepare and check a route,
   then review and apply it. Direct, own proxies, the public MTProto pool, imported
   WireGuard profiles and portable WARP are available. Group changes preserve
