@@ -1,0 +1,6 @@
+python-3.12=3.12.16-r3
+build-base=1-r10
+cmake=4.4.5-r0
+leptonica-dev=1.87.0-r2
+nfpm=2.46.3-r7
+openssl=3.6.5-r6
