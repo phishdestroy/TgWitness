@@ -11,6 +11,8 @@ export function createSettingsHub(ctx) {
   let data=null, prefs=null, draft=null, section=null, generation=0, connectionBusy=false, checkTimer=null, statusTimer=null;
   let dialogs=null, moved=[], query='', reveal=new Set(), editing=false;
   let autoTried=false, routeDirty=false;
+  // After Start: the live check of the four collector parts. visited bounds browser Forward to steps already seen.
+  let live=null, liveTimer=null, visited=0, recordedStep=null, shownSession=null;
   let preferencesQueue=Promise.resolve(), draftQueue=Promise.resolve(), preferencesSequence=0, draftSequence=0, checkSequence=0;
   const owner=()=>({generation,profile:state.profile,token:state.token,revision:state.workspaceRevision});
   const current=who=>who.generation===generation&&who.profile===state.profile&&who.token===state.token&&who.revision===state.workspaceRevision;
@@ -96,12 +98,18 @@ export function createSettingsHub(ctx) {
     requireOwner(who);
     scheduleStatus();
   }
-  async function load(){
+  async function load(wanted=null){
     const who=owner();
     if(state.status?.demo){root.replaceChildren(message('Demo workspace. Connect accounts in your live installation.'));return;}
     if(!state.me?.admin){root.replaceChildren(message('Only the workspace administrator can change collection settings.'));return;}
     if(!prefs){const result=await request(who,'preferences');prefs=result.saved||{language:ctx.language,timezone:Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC',theme:'system',level:'simple'};applyPresentation();}
     data=await request(who,'settings');draft={...data.wizard};
+    visited=Math.max(visited,draft.step);
+    // A step address from Back or Forward opens that step when it was already reached; the server keeps it.
+    if(state.view==='first-run'&&wanted&&wanted!==draft.step&&wanted<=visited&&!live){
+      recordedStep=wanted;
+      try{await saveDraft({step:wanted},who);}catch(error){if(error.name==='StaleView')throw error;toast(error.message,true);recordedStep=null;}
+    }
     if(state.view==='first-run')await renderWizard(who);else render();
     requireOwner(who);
     updateIndicator(data.connection);
@@ -351,6 +359,9 @@ export function createSettingsHub(ctx) {
     restoreMoved();wizardRoot.replaceChildren();if(!draft||!prefs)return;
     const page=node('div','first-run-shell');wizardRoot.append(page);
     page.append(node('div','eyebrow',tr('First setup')));
+    if(live){renderLive(page);return;}
+    visited=Math.max(visited,draft.step);
+    if(recordedStep!==draft.step){ctx.record?.({replace:recordedStep===null});recordedStep=draft.step;}
     const step=Math.min(6,draft.step);page.append(message(draft.step===7?'Ready to start':tr('Step {n} of 6',{n:step}),'step-count'));
     const progress=node('progress');progress.max=6;progress.value=draft.step===7?6:step-1;progress.setAttribute('aria-label',tr('Setup progress'));page.append(progress);
     const names=['Language and time','How much would you like to see?','What do you want to do?','How should we connect?','Connect Telegram','Which chats?','Review your choices'];
@@ -363,11 +374,19 @@ export function createSettingsHub(ctx) {
     if(draft.step===5){
       if(state.status.collector.has_session)body.append(message('Telegram is connected.','notice success'));
       else{move(ctx.authCard(),body);ctx.authMethod('qr');}
+      if(draft.goal!=='copy')accountQuestion(body);
     }
     if(draft.step===6){
+      const main=draft.goal!=='copy'&&draft.account_kind==='main';
+      if(main&&draft.scope!=='selected')draft.scope='selected';
       cards(body,[['account','✦','All chats','Includes new chats in continuous collection.'],['selected','☑','Choose chats','Only the chats you select.'],['folder','▤','Telegram folder','Use a folder from Telegram.']],draft.scope,async scope=>{
         draft.scope=scope;await saveDraft();await renderWizard();});
-      if(!dialogs){body.append(message('Loading chats…'));try{dialogs=await request(who,'dialogs');}catch(e){if(e.name==='StaleView')throw e;body.append(message(e.message,'notice warning'));}}
+      // A main account records only chosen chats; the whole account and folders would bring in its owner's own chats.
+      if(main){
+        for(const key of ['account','folder']){const card=body.querySelector('[data-answer="'+key+'"]');card.disabled=true;card.title=tr('Only on a separate account.');}
+        body.append(message('Only chosen chats can be recorded on a main account.','notice warning'));
+      }
+      if(!dialogs){const loading=message('Loading chats…');body.append(loading);try{dialogs=await request(who,'dialogs');loading.remove();}catch(e){loading.remove();if(e.name==='StaleView')throw e;body.append(message(e.message,'notice warning'));}}
       requireOwner(who);
       if(dialogs){
         if(draft.scope==='folder')body.append(select('Telegram folder',[['','Choose a folder'],...dialogs.folders.map(f=>[String(f.id),f.title])],String(draft.folder_id??''),async id=>{draft.folder_id=id===''?null:Number(id);await saveDraft();updateNext();}));
@@ -399,7 +418,13 @@ export function createSettingsHub(ctx) {
     const back=button('Back',async()=>{draft.step--;await saveDraft();await renderWizard();});back.disabled=draft.step===1;footer.append(back);
     const next=button(draft.step===7?'Start':'Next',async()=>{
       const action=owner();
-      if(draft.step===7){const result=await request(action,'first-run/finish',draftBody());data=result;draft={...result.wizard};await refresh(action);await navigate(result.action==='export'?'evidence':'chats');return;}
+      if(draft.step===7){
+        const result=await request(action,'first-run/finish',draftBody());data=result;draft={...result.wizard};await refresh(action);
+        if(result.action==='export'){await navigate('evidence');return;}
+        // Recording started: stay here and show that it works before leaving the setup.
+        if(state.view!=='first-run')return;
+        live={started:Date.now(),done:false};await renderWizard(action);watchLive(action);return;
+      }
       if(draft.step===3){if(!await applyGoal(draft.goal,{first:!data.goal},action))return;}
       await saveDraft({step:draft.step+1},action);await renderWizard(action);
     },'primary');next.id='first-run-next';footer.append(next);
@@ -409,15 +434,71 @@ export function createSettingsHub(ctx) {
       autoTried=true;void checkConnection(false,who);
     }
   }
-  function draftBody(){const {step,goal,route,allow_direct,unchecked,scope,chat_ids,folder_id}=draft;return {step,goal,route,allow_direct,unchecked,scope,chat_ids,folder_id};}
+  // Recording sees everything the account sees; the answer limits what a main account may record.
+  function accountQuestion(box){
+    box.append(node('h2','',tr('Is this a separate account or your main one?')));
+    cards(box,[['dedicated','🧪','A separate account','Made for recording: it joins only the chats you want to keep.'],
+      ['main','👤','My main account','The account you use every day.']],draft.account_kind,async kind=>{
+      draft.account_kind=kind;if(kind==='main'&&draft.scope!=='selected')draft.scope='selected';
+      await saveDraft();await renderWizard();
+    });
+    const why=node('details','setting-help-block');why.append(node('summary','',tr('Why a separate account?')),
+      message('Recording sees everything the account sees, including private chats of other people. A separate account keeps your own chats out of the journal and does not risk your main account.'));
+    box.append(why);
+    if(draft.account_kind==='main')box.append(message('Your own private chats can end up in the journal and in exports. Only chosen chats can be recorded on a main account; the whole account and folders stay off. The protection scale counts a main account as a penalty.','notice warning'));
+  }
+  function liveParts(){const h=state.status?.health||{};return ['connection','intake','sources','media'].map(name=>({name,...(h[name]||{state:'unknown'})}));}
+  function renderLive(page){
+    const heading=node('h1','',tr(live.done?'Setup is applied.':'Checking that recording works…'));heading.tabIndex=-1;page.append(heading);
+    const list=node('div','first-run-live');list.setAttribute('aria-live','polite');
+    for(const part of liveParts()){
+      const row=node('div','first-run-check');
+      row.append(ctx.stateBadge(part.state),node('strong','',ctx.healthNames[part.name]),node('span','hint',ctx.healthLines(part.name,part)[0]||''));
+      list.append(row);
+    }
+    page.append(list);
+    if(live.done){
+      page.append(node('h2','',tr('Done! What next:')));
+      const actions=node('div','first-run-next-actions');
+      for(const [view,text,style] of [['chats','Open chats','primary'],['observations','Open the journal','secondary'],['evidence','How to export','secondary']])
+        actions.append(button(text,async()=>{live=null;clearTimeout(liveTimer);await navigate(view);},style));
+      page.append(actions);
+    }
+  }
+  // Until every part works (or is off), for at most two minutes; then the person moves on either way.
+  function watchLive(who=owner()){
+    clearTimeout(liveTimer);
+    const session=live;
+    const active=()=>current(who)&&session&&live===session&&state.view==='first-run';
+    const tick=async()=>{
+      if(!active())return;
+      try{await refresh(who);}catch{}
+      if(!active())return;
+      const ready=liveParts().every(part=>['working','off'].includes(part.state));
+      if(ready&&Date.now()-live.started>4000||Date.now()-live.started>120000)live.done=true;
+      await renderWizard(who);
+      if(active()&&!live.done)liveTimer=setTimeout(tick,2000);
+    };
+    liveTimer=setTimeout(tick,1500);
+  }
+  function draftBody(){const {step,goal,route,allow_direct,unchecked,scope,chat_ids,folder_id,account_kind}=draft;return {step,goal,route,allow_direct,unchecked,scope,chat_ids,folder_id,account_kind:account_kind||null};}
   function updateNext(){const next=$('first-run-next');if(!next||!draft)return;
-    next.disabled=connectionBusy||draft.step===4&&!draftChecked()&&!draft.unchecked||draft.step===5&&!state.status.collector.has_session||draft.step===6&&(draft.scope==='selected'&&!draft.chat_ids.length||draft.scope==='folder'&&draft.folder_id===null);
+    next.disabled=connectionBusy||draft.step===4&&!draftChecked()&&!draft.unchecked||
+      draft.step===5&&(!state.status.collector.has_session||draft.goal!=='copy'&&!draft.account_kind)||
+      draft.step===6&&(draft.scope==='selected'&&!draft.chat_ids.length||draft.scope==='folder'&&draft.folder_id===null);
   }
   for(const select of document.querySelectorAll('[data-ui-level]'))select.onchange=()=>run(async()=>{await savePreferences({level:select.value});if(state.view==='settings')render();});
   return {bootstrap,load,render,savePreferences,
-    leave(){restoreMoved();},
-    status(){updateNext();if(data)updateIndicator(data.connection);},
-    reset(){generation++;checkSequence++;clearTimeout(checkTimer);clearTimeout(statusTimer);restoreMoved();data=prefs=draft=dialogs=null;connectionBusy=false;editing=false;autoTried=routeDirty=false;preferencesQueue=draftQueue=Promise.resolve();},
+    get step(){return draft&&!live?draft.step:null;},
+    leave(){restoreMoved();clearTimeout(liveTimer);live=null;recordedStep=null;},
+    status(){
+      updateNext();if(data)updateIndicator(data.connection);
+      // Signing in on step 5 replaces the sign-in form with the result and the account question.
+      const session=!!state.status?.collector?.has_session;
+      if(state.view==='first-run'&&draft?.step===5&&!live&&shownSession!==null&&session!==shownSession)void renderWizard();
+      shownSession=session;
+    },
+    reset(){generation++;checkSequence++;clearTimeout(checkTimer);clearTimeout(statusTimer);clearTimeout(liveTimer);restoreMoved();data=prefs=draft=dialogs=null;live=null;visited=0;recordedStep=null;connectionBusy=false;editing=false;autoTried=routeDirty=false;preferencesQueue=draftQueue=Promise.resolve();},
     async refreshPreferences(patch){if(prefs)await savePreferences(patch);},
   };
 }

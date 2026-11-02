@@ -550,5 +550,64 @@ def test_settings_consent_belongs_to_its_workspace(tmp_path, change):
         browser.close()
 
 
+@pytest.mark.parametrize('destination', ['settings', 'workspace'])
+def test_live_setup_check_stops_after_navigation(tmp_path, destination):
+    """A delayed health response must not revive setup or touch the next workspace."""
+    from playwright.sync_api import sync_playwright, expect
+    from tools.browser_fixtures import ScopeClient, saved_session, CHAT
+
+    with RunningApp(tmp_path, client_factory=ScopeClient) as server, sync_playwright() as p:
+        store, vault = server.app.state.store, server.app.state.vault
+        vault.save('credentials', {'api_id': 123, 'api_hash': 'a' * 32, 'session': saved_session()})
+        vault.save('network', {'kind': 'direct'})
+        store.set_setting('route_policy', {'exposure': 'tunnel', 'outside_enabled': False})
+        store.set_setting('goal_preset', {'goal': 'watch'})
+        store.set_setting('first_run', {'step': 7, 'goal': 'watch', 'unchecked': True,
+            'scope': 'selected', 'chat_ids': [CHAT], 'account_kind': 'dedicated', 'route': 'direct'})
+        prefs = {'language': 'en', 'timezone': 'UTC', 'theme': 'system', 'level': 'expert'}
+        store.set_setting('ui_preferences:admin', prefs)
+        response = requests.post(server.url + '/api/profiles',
+            headers={'Authorization': 'Bearer ' + vault.token}, json={'label': 'Second'})
+        assert response.ok, response.text
+        child = response.json()['id']
+        child_store = server.app.state.profiles.entries[child]['app'].state.store
+        child_store.set_setting('first_run', {'skipped': True})
+        child_store.set_setting('ui_preferences:admin', prefs)
+        browser = launch_browser(p)
+        page = browser.new_page(locale='en-US', reduced_motion='reduce')
+        errors = []
+        page.on('pageerror', lambda error: errors.append(str(error)))
+        page.add_init_script("""(() => {
+          const original=window.fetch.bind(window); let held=false;
+          window.fetch=async(...args)=>{
+            const response=await original(...args);
+            if(!held&&String(args[0])==='/api/status'&&document.querySelector('.first-run-live')){
+              held=true; await new Promise(resolve=>{window.releaseLiveStatus=resolve;});
+              window.liveStatusReleased=true;
+            }
+            return response;
+          };
+        })();""")
+        page.goto(server.url + '/first-run/7?ws=default')
+        page.locator('#panel-token').fill(vault.token)
+        page.locator('#unlock-form button').click()
+        expect(page.locator('#first-run-next')).to_be_enabled()
+        page.locator('#first-run-next').click()
+        expect(page.locator('.first-run-live')).to_be_visible()
+        page.wait_for_function('()=>typeof window.releaseLiveStatus==="function"')
+        if destination == 'workspace':
+            page.evaluate('id=>switchProfile(id)', child)
+        page.evaluate('()=>navigate("settings")')
+        expect(page.locator('#view-settings')).to_be_visible()
+        page.evaluate('window.releaseLiveStatus()')
+        page.wait_for_function('()=>window.liveStatusReleased')
+        page.evaluate('()=>new Promise(requestAnimationFrame)')
+        expect(page.locator('#view-first-run')).to_be_hidden()
+        assert page.evaluate('state.profile') == (child if destination == 'workspace' else 'default')
+        assert child_store.get_setting('first_run') == {'skipped': True}
+        assert not errors, errors
+        browser.close()
+
+
 if __name__ == '__main__':
     raise SystemExit(pytest.main([__file__, '-q']))

@@ -36,7 +36,7 @@ const workspaceSafetyReady=import('./core/workspace-safety.js?v=1').then(({creat
 });
 let accountState;
 let settingsHub;
-const settingsHubReady=import('./views/settings-hub.js?v=1').then(({createSettingsHub})=>{
+const settingsHubReady=import('./views/settings-hub.js?v=2').then(({createSettingsHub})=>{
   const authCard=$('credentials-form').closest('.auth-card');
   // Metadata covers legacy fields as well as the compact settings. Search never drops expert fields.
   const catalog=()=>panelQueries('input[id],select[id],textarea[id]').filter(el=>!el.closest('#gate,#view-settings,#view-first-run')).map(el=>{
@@ -52,6 +52,7 @@ const settingsHubReady=import('./views/settings-hub.js?v=1').then(({createSettin
     language:LANG,languages:LANGUAGES,authCard:()=>authCard,authMethod:setAuthMethod,catalog,
     loadSettingsForm:id=>({'alerts-form':loadAlerts,'replica-form':loadReplica,'evidence-form':loadEvidence}[id])(),
     openExtra:async id=>{await loadExtras();selectExtra(id);},changeLanguage:setLanguage,
+    stateBadge,healthLines:collectorLines,healthNames:healthPartNames,record:options=>window.TgWitnessRouter?.record({},options||{}),
     applyPreferences:p=>{
       for(const el of panelQueries('[data-mode-locked]'))el.removeAttribute('data-mode-locked');
       for(const el of panelQueries('.mode-lock'))el.hidden=true;
@@ -149,9 +150,10 @@ async function loadPanelView(view){
 let routerTask=null;
 function routeSnapshot(){return {view:state.drawerSeq!==null?"observations":state.view,workspace:state.profile,
   chatId:state.view==="chats"?state.chat:null,seq:state.drawerSeq,kind:state.filter,source:state.source,q:state.search,
-  since:state.eventSince,until:state.eventUntil,system:state.eventSystem,before:state.eventBefore,extra:state.extra||null,section:state.parameterSection||null};}
+  since:state.eventSince,until:state.eventUntil,system:state.eventSystem,before:state.eventBefore,extra:state.extra||null,section:state.parameterSection||null,
+  step:state.view==="first-run"?settingsHub?.step||null:null};}
 function ensureRouter(){
-  if(!routerTask)routerTask=import("./router.js?v=4").then(({createRouter})=>{
+  if(!routerTask)routerTask=import("./router.js?v=5").then(({createRouter})=>{
     window.TgWitnessRouter=createRouter({snapshot:routeSnapshot,ready:()=>!!state.me&&!$("workspace").hidden,
       error:message=>toast(tr(message),true),apply:applyRouteToPanel});return window.TgWitnessRouter;
   });
@@ -174,7 +176,7 @@ async function applyRouteToPanel(route,current){
   if(route.view==="chats"&&route.chatId!==null&&route.chatId!==state.chat)beginChat(route.chatId);
   navigate(route.view,{history:false,load:false});
   const view=state.view;
-  if(view==='settings'||view==='first-run'){await settingsHubReady;await settingsHub.load();}
+  if(view==='settings'||view==='first-run'){await settingsHubReady;await settingsHub.load(route.step);}
   else if(view==="chats"){
     await refreshChats(false,route.chatId);
     if(current()&&route.chatId!==null){
@@ -247,6 +249,13 @@ const labels = {
   "network.route_unavailable": [tr("No working proxy"), "alert", "coverage"],
   "network.route_fallback": [tr("Connected directly without a proxy"), "alert", "coverage"],
   "network.policy_changed": [tr("IP protection changed"), "shield", "system"],
+  "network.connection_applied": [tr("Checked connection applied"), "link", "system"],
+  "network.connection_checked": [tr("Connection checked"), "link", "system"],
+  "network.connection_failed": [tr("Connection change not applied"), "alert", "coverage"],
+  "network.tunnel_control": [tr("Local tunnel started or stopped"), "link", "system"],
+  "settings.changed": [tr("Settings changed"), "settings", "system"],
+  "settings.collection_pending": [tr("Recording waits for a working connection"), "alert", "coverage"],
+  "sources.selected": [tr("Chats to record chosen"), "sources", "system"],
   "profile.created": [tr("Workspace created"), "plus", "system"], "profile.unavailable": [tr("Workspace unavailable"), "alert", "coverage"],
   "snapshot.started": [tr("History snapshot started"), "layers", "system"], "snapshot.completed": [tr("History snapshot completed"), "layers", "system"],
   "snapshot.interrupted": [tr("History snapshot interrupted"), "alert", "coverage"],

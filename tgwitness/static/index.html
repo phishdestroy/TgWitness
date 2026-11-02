@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="/views/parameters.css?v=21">
 <link rel="stylesheet" href="/views/accounts.css?v=30">
 <link rel="stylesheet" href="/views/setup.css?v=3">
-<link rel="stylesheet" href="/views/settings-hub.css?v=1">
+<link rel="stylesheet" href="/views/settings-hub.css?v=2">
 <link rel="stylesheet" href="/views/connection.css?v=1">
 <link rel="stylesheet" href="/services.css?v=1">
 <link rel="stylesheet" href="/workspace-safety.css?v=1">
@@ -1123,7 +1123,7 @@
         </dl>
     </form>
     <div hidden id="qr-state"><h2>Scan with Telegram</h2><p class="hint">Settings → Devices → Link Desktop Device</p><img alt="Telegram sign-in QR code" class="qr-image" height="256" id="qr-image" width="256"><p id="qr-status" role="status"></p><div class="auth-actions"><button class="primary" hidden id="qr-retry" type="button">Generate another QR code</button><button class="quiet" id="qr-cancel" type="button">Back</button></div></div>
-    <form hidden id="code-form"><h2>Enter your login code</h2><label for="code">Code from Telegram</label><input autocomplete="one-time-code" id="code" inputmode="numeric" pattern="[0-9 -]{3,12}" required><button class="primary" type="submit">Confirm code</button></form>
+    <form hidden id="code-form"><h2>Enter your login code</h2><label for="code">Code from Telegram</label><input autocomplete="one-time-code" id="code" inputmode="numeric" pattern="[0-9 \-]{3,12}" required><button class="primary" type="submit">Confirm code</button></form>
     <form hidden id="password-form"><h2>Two-step verification</h2><label for="password">Telegram password</label><input autocomplete="off" id="password" required type="password"><button class="primary" type="submit">Sign in</button></form>
     <button class="quiet auth-back" hidden id="auth-back" type="button">← Change sign-in method</button>
     <div hidden id="authorized-state"><span class="success-mark" id="authorized-mark"><svg aria-hidden="true" class="icon"><use href="#i-check"/></svg></span><span class="avatar xl" hidden id="authorized-avatar"></span><h2>Account connected</h2><p class="account-id" hidden id="authorized-account"></p><p class="muted">Choose the groups and channels to observe.</p><button class="primary" data-open="sources">Choose sources →</button><button class="quiet" id="change-account">Sign in again</button><button class="quiet sign-out" id="sign-out" type="button">Sign out of Telegram</button></div>

@@ -9,6 +9,7 @@ import re
 
 FORMAT = "tgwitness-case-assessment-v1"
 TITLE = "Basis of trust and limitations"
+OVERVIEW = "Evidence at a glance"
 INTRO = ("This assessment describes this copy. Checks performed by the exporter must be repeated independently. "
          "A valid signature does not establish the truth of a message or guarantee acceptance in court.")
 STANDALONE = "This is a standalone report. Obtain the signed ZIP to verify the authoritative records and supporting proofs."
@@ -188,14 +189,22 @@ def html(data, say):
     parts = ['<section class="card panel case-assessment" id="case-assessment"><h2>' + e(say(TITLE)) + '</h2><p>' + e(say(INTRO)) + '</p>']
     if not data.get("supporting_files_included"):
         parts.append('<p class="assessment-review">' + e(say(STANDALONE)) + '</p>')
+    parts.append('<ol class="assessment-overview" aria-label="' + e(say(OVERVIEW)) + '">')
+    for number, item in enumerate(data["checks"], 1):
+        parts.append('<li data-status="' + e(item["status"]) + '"><a href="#assessment-' + e(item["id"]) + '">'
+                     '<span class="assessment-index">' + f'{number:02d}' + '</span><strong>' + e(say(item["title"]))
+                     + '</strong><span class="assessment-state">' + e(say(STATUSES[item["status"]])) + '</span></a></li>')
+    parts.append('</ol>')
     parts.append('<div class="assessment-grid">')
-    for item in data["checks"]:
+    for number, item in enumerate(data["checks"], 1):
         conclusion = item["result"]
-        parts.append('<article class="assessment-item" data-assessment="' + e(item["id"]) + '"><h3>' + e(say(item["title"])) + '</h3><div class="assessment-state">' + e(say(STATUSES[item["status"]])) + '</div><p><strong>' + e(say(conclusion["text"], **conclusion["values"])) + '</strong></p><p>' + e(say(item["basis"])) + '</p><dl>')
+        parts.append('<article class="assessment-item" id="assessment-' + e(item["id"]) + '" data-status="' + e(item["status"]) + '" data-assessment="' + e(item["id"]) + '"><div class="assessment-heading"><span class="assessment-index">'
+                     + f'{number:02d}' + '</span><h3>' + e(say(item["title"])) + '</h3></div><div class="assessment-state">' + e(say(STATUSES[item["status"]]))
+                     + '</div><p class="assessment-result">' + e(say(conclusion["text"], **conclusion["values"])) + '</p><p class="assessment-basis">' + e(say(item["basis"])) + '</p><dl>')
         parts.extend('<dt>' + e(say(LABELS.get(k, k))) + '</dt><dd dir="auto">' + e(fact_text(v, say)) + '</dd>' for k, v in item["facts"].items())
-        parts.append('</dl><p><strong>' + e(say("Limits of this conclusion")) + '</strong><br>' + e(say(item["limitation"])) + '</p><p class="assessment-review"><strong>' + e(say("Independent review")) + '</strong><br>' + e(say(item["verification"])) + '</p>')
+        parts.append('</dl><p class="assessment-limit"><strong>' + e(say("Limits of this conclusion")) + '</strong>' + e(say(item["limitation"])) + '</p><p class="assessment-review"><strong>' + e(say("Independent review")) + '</strong>' + e(say(item["verification"])) + '</p>')
         if item["references"]:
-            parts.append('<p><small>' + e(say("Evidence references")) + ': ' + e(', '.join(item["references"])) + '</small></p>')
+            parts.append('<p class="assessment-references">' + e(say("Evidence references")) + ': ' + e(', '.join(item["references"])) + '</p>')
         parts.append('</article>')
     return ''.join(parts) + '</div></section>'
 
@@ -205,21 +214,15 @@ def pdf(lay, data):
     lay.section(say(TITLE), say(INTRO))
     if not data.get("supporting_files_included"):
         lay.callout(say(STANDALONE))
-    for item in data["checks"]:
-        lay.heading(say(item["title"]) + ' · ' + say(STATUSES[item["status"]]))
-        conclusion = item["result"]
-        lay.text(say(conclusion["text"], **conclusion["values"]), style="B")
-        lay.text(say(item["basis"]))
-        lay.kv([(say(LABELS.get(k, k)), fact_text(v, say)) for k, v in item["facts"].items()])
-        lay.callout(say(item["limitation"]))
-        lay.text(say("Independent review") + ': ' + say(item["verification"]))
-        if item["references"]:
-            lay.text(say("Evidence references") + ': ' + ', '.join(item["references"]), size=8)
+    lay.assessment_overview(data)
+    lay.pdf.add_page()
+    for number, item in enumerate(data["checks"], 1):
+        lay.assessment_card(number, item)
 
 
 def text_keys():
     """Explicit assessment language inventory without user-supplied facts."""
     examples = [journal({}, {}), snapshot({}), snapshot({}, "sharing"), snapshot({}, "chat"), journal({"journal_verified": True}, {})]
-    return list(dict.fromkeys([TITLE, INTRO, "Limits of this conclusion", "Independent review", "Evidence references", "Not recorded",
+    return list(dict.fromkeys([TITLE, INTRO, OVERVIEW, "Limits of this conclusion", "Independent review", "Evidence references", "Not recorded",
                               *STATUSES.values(), *LABELS.values(),
                               *(r[k] for data in examples for r in data["checks"] for k in ("title", "basis", "limitation", "verification")), *RESULTS.values(), STANDALONE]))

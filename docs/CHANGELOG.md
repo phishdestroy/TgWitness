@@ -35,6 +35,13 @@
   backups, verified attachment offloading and evidence retention. Recovery checks
   signatures and file hashes; exports require selected offloaded files to be
   restored. Investigation sources can be handed off as Markdown and JSONL.
+- Reports now use a coordinated dossier design: case cover, prominent figures,
+  linked evidence map, numbered findings and an observation/gap timeline. Signed
+  PDFs have an A4 cover with identifying QR, a summary, bookmarks and page references;
+  HTML remains offline, responsive and printable. Account and sharing copies use
+  the same visual design. A fresh signed fictional example can be built with
+  `tools/build_dossier_example.py`; see [case reports](CASE_REPORTS.md).
+
 - Signed reports now explain the trust basis for the specific archive, with separate
   export-time checks, recorded observations, missing material and independent review
   steps. HTML, PDF and signed JSON/manifest assessments share the same facts; English,
@@ -53,6 +60,13 @@
 - File policies can limit video duration; capture and account export enforce the
   configured size and duration. Existing journals and stored configurations stay
   intact. See [first setup and settings](ru/SETTINGS.md).
+- The first setup and Settings are translated into all 25 panel languages. Each step
+  has its own address and browser Back moves between steps. The Telegram step asks
+  whether the account is separate; a main account records only chosen chats, also
+  when Settings change the chats later. Start stays on the setup and shows that the
+  connection, event intake, sources and attachments work before offering what to do
+  next. A change of IP protection through Settings is a signed journal record, and the
+  journal names the new connection and settings records.
 
 ## 0.8.0 preview · 2 November 2026
 
