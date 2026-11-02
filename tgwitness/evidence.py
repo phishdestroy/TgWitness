@@ -252,6 +252,8 @@ def export_file(store, vault, fmt, options=None):
                 for format, name in (("jsonl", "events.jsonl"), ("csv", "events.csv")):
                     write_member(name, chunks(format))
                 write_member("coverage.json", [json.dumps(coverage, ensure_ascii=False, indent=1).encode("utf-8")])
+                if analytics := report.report_material(context).get("analytics"):
+                    write_member("analytics.json", [canonical(analytics)])
                 write_member("verify.py", [Path(__file__).with_name("verify.py").read_bytes()])
                 write_indicators(write_member, (context.get("report_digest") or summary).get("indicators"), context)
                 for event in snapshot.events():
@@ -351,7 +353,7 @@ def write_pdf(write_member, name, render):
 def report_entry(context, options, file="report.html"):
     """The manifest's account of the readable reports: the sealed page, its JSON and PDF twins and any parts."""
     entry = {"id": context["report_id"], "file": file, "language": options["language"], "sealed": True,
-             "custody": "custody.json"}
+             "custody": "custody.json", "presentation": {k: options.get(k, v) for k, v in report.report_analytics.Presentation().model_dump().items()}}
     if context.get("selection"):
         entry["selection"] = context["selection"]["selection"]
         entry["selected_records"] = context["selection"]["counts"]["selected_records"]

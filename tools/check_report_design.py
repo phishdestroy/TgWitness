@@ -38,7 +38,7 @@ def main():
             for lang in ('en','ru','de'):
                 page.goto((root/lang/'report.html').as_uri())
                 expect(page.locator('.assessment-overview li')).to_have_count(6)
-                expect(page.locator('.analytics-figure')).to_have_count(4)
+                expect(page.locator('.analytics-figure')).to_have_count(5)
                 expect(page.locator('.analytics-totals b')).to_have_count(6)
                 page.locator('.assessment-overview a[href="#assessment-coverage"]').click()
                 expect(page.locator('#assessment-coverage h3')).to_be_in_viewport()
@@ -51,7 +51,8 @@ def main():
                     page.set_viewport_size({'width':width,'height':1000})
                     for theme in ('light','dark'):
                         page.evaluate('(theme)=>document.documentElement.dataset.theme=theme', theme)
-                        assert page.evaluate('document.documentElement.scrollWidth <= innerWidth+1'), (lang,width,theme)
+                        assert page.evaluate('document.documentElement.scrollWidth <= innerWidth+1'), (lang,width,theme,
+                            page.evaluate("Array.from(document.querySelectorAll('body *')).filter(e=>e.checkVisibility() && e.getBoundingClientRect().right>innerWidth+1).slice(0,20).map(e=>[e.tagName,e.className,e.getBoundingClientRect().right])"))
                 page.set_viewport_size({'width':1440,'height':1000})
                 page.evaluate("document.documentElement.dataset.theme='light';scrollTo(0,0)")
                 page.screenshot(path=str(output/(lang+'-cover.png')))

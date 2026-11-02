@@ -16,6 +16,25 @@ hidden by the label setting never enter its result. Aliases are presentation
 labels, not anonymization of the source journal supplied with an export.
 """
 from datetime import datetime, timezone
+from typing import Literal
+
+from pydantic import BaseModel, ConfigDict, Field
+
+
+class Presentation(BaseModel):
+    """Shared visual choices; private case and examination text never enters this model."""
+    model_config = ConfigDict(extra="forbid")
+    design: Literal["dossier", "analytical", "editorial"] = "dossier"
+    activity_chart: bool = True
+    hourly_chart: bool = True
+    participant_chart: bool = True
+    chat_chart: bool = True
+    composition_chart: bool = True
+    participant_labels: Literal["aliases", "ids"] = "aliases"
+    chart_limit: int = Field(default=10, ge=5, le=30)
+
+
+DESIGN_COLORS = {"dossier": (29, 72, 91), "analytical": (45, 75, 196), "editorial": (146, 62, 42)}
 
 
 FORMAT = "tgwitness-observation-analytics-v1"
@@ -256,6 +275,8 @@ def selected(data, options):
         output["hourly"] = {**chart, "rows": [list(row) for row in chart["rows"]]}
     if options.get("participant_chart", True):
         output["participants"] = _ranking(data["participants"], limit, participants=True, labels=labels)
+    if options.get("composition_chart", True):
+        output["composition"] = dict(data["totals"])
     if options.get("chat_chart", True):
         output["chats"] = _ranking(data["chats"], limit)
     return output

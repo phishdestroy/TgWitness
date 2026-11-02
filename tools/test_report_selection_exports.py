@@ -116,6 +116,11 @@ def test_preview_is_scoped_read_only_and_requires_export_access():
             result = await client.post('/api/report-preview', json=choices())
             assert result.status_code == 200, result.text
             data = result.json()
+            design = await client.post('/api/report-design-preview', json=choices())
+            assert design.status_code == 200, design.text
+            assert design.json()['records'] == 3 and not design.json()['sampled']
+            assert 'NOT SIGNED' in design.json()['html']
+            assert 'Chat -1002' not in design.json()['html']
             assert data['unsigned'] and data['counts']['selected_records'] == 3
             assert data['id_gaps']['ids_total'] == 1
             assert app.state.store.get_setting('report_options', None) == previous
@@ -130,6 +135,8 @@ def test_preview_is_scoped_read_only_and_requires_export_access():
                                         chats=lambda _: [-1001])
             with pytest.raises(Refused):
                 check_access(principal, 'default', POLICY['POST /api/report-preview'], {})
+            with pytest.raises(Refused):
+                check_access(principal, 'default', POLICY['POST /api/report-design-preview'], {})
             principal.chats = lambda _: None
             principal.may = lambda permission: permission == 'view'
             with pytest.raises(Refused):

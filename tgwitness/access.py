@@ -91,6 +91,7 @@ POLICY = {
     "GET /api/report-options": ("view", None),
     "POST /api/report-options": ("export", None),
     "POST /api/report-preview": ("export", None),
+    "POST /api/report-design-preview": ("export", None),
     "GET /api/chats/{chat_id}/dossier/export": ("export", "path"),
     "POST /api/chats/{chat_id}/dossier/export": ("export", "path"),
     "POST /api/chat-export/start": ("export", "body"),
