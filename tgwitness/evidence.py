@@ -192,19 +192,41 @@ def export_file(store, vault, fmt, options=None):
                        "digest": summary, "anchors": [], "files": {},
                        "account": store.get_setting("account", None), "archive": fmt == "zip", "sign": vault.sign,
                        "events_again": snapshot.events, "journal_verified": True}
+            selection = report.report_selection.Selection.model_validate(options.get("selection") or {})
+            report_events = snapshot.events
+            if selection.enabled and fmt in ("html", "json", "pdf", "zip"):
+                selected_event = report.report_selection.compile_selection(selection)
+                def report_events():
+                    return (event for event in snapshot.events() if selected_event(event))
+
+                selected_digest = report.Digest()
+                for event in report_events():
+                    selected_digest.add(event)
+                selected_digest.hash_images(store.root / "media")
+                selected_summary = selected_digest.result()
+                selected_summary["titles"] = {chat: summary["titles"].get(chat, "")
+                                               for chat in selected_summary["chats"]}
+                context["report_digest"] = selected_summary
+                context["events_again"] = report_events
+                context["source_events"] = snapshot.events
+            if (selection.enabled or selection.id_gaps) and fmt in ("html", "json", "pdf", "zip"):
+                selected = report.report_selection.analyze(snapshot, selection, preview_limit=0, scratch_root=directory)
+                # The private catalog and preview samples are panel-only. The signed
+                # report records its scope, counts and bounded missing-ID context.
+                context["selection"] = {key: selected[key] for key in ("selection", "source", "counts", "id_gaps")}
 
             def chunks(format):
                 events = snapshot.events()
                 return {"jsonl": lambda: (canonical(e) + b"\n" for e in events),
                         "csv": lambda: csv_chunks(events),
-                        "html": lambda: html_chunks(events, coverage, context)}[format]()
+                        "html": lambda: html_chunks(report_events(), coverage, context)}[format]()
 
             if fmt == "json":
-                path.write_bytes(report.report_json(snapshot.events, coverage, context))
+                path.write_bytes(report.report_json(report_events, coverage, context))
                 return path
             if fmt == "pdf":
-                data = report.report_data(snapshot.events, coverage, context)
-                path.write_bytes(pdf_report.report_pdf(data, context, vault, snapshot.events()))
+                data = report.report_data(report_events, coverage, context)
+                path.write_bytes(pdf_report.report_pdf(data, context, vault, report_events()))
                 return path
             if fmt != "zip":
                 with path.open("wb") as out:
@@ -231,7 +253,7 @@ def export_file(store, vault, fmt, options=None):
                     write_member(name, chunks(format))
                 write_member("coverage.json", [json.dumps(coverage, ensure_ascii=False, indent=1).encode("utf-8")])
                 write_member("verify.py", [Path(__file__).with_name("verify.py").read_bytes()])
-                write_indicators(write_member, summary.get("indicators"), context)
+                write_indicators(write_member, (context.get("report_digest") or summary).get("indicators"), context)
                 for event in snapshot.events():
                     digest = event["payload"].get("media_sha256") if event["kind"] in ("media.saved", "actor.avatar_saved") else None
                     if not digest:
@@ -270,13 +292,13 @@ def export_file(store, vault, fmt, options=None):
                                                          indent=1).encode("utf-8")])
                 if options.get("timeline"):
                     context["viewer"] = write_viewer(write_member, "journal",
-                        (viewer.journal_item(event, options.get("raw_records", True)) for event in snapshot.events()),
-                        None, summary.get("indicators"), options)
+                        (viewer.journal_item(event, options.get("raw_records", True)) for event in report_events()),
+                        None, (context.get("report_digest") or summary).get("indicators"), options)
                 context["files"] = dict(hashes)
-                data = report.report_data(snapshot.events, coverage, context)
+                data = report.report_data(report_events, coverage, context)
                 write_member("report.json", [report.sealed_json(data, context)])
                 write_pdf(write_member, "report.pdf", lambda: pdf_report.report_pdf(
-                    data, context, vault, snapshot.events()))
+                    data, context, vault, report_events()))
                 context["files"] = dict(hashes)
                 write_member("report.html", chunks("html"))
                 listed = {**hashes, **dict.fromkeys(("README.txt", "SHA256SUMS", "manifest.json", "manifest.sig"), "")}
@@ -330,6 +352,9 @@ def report_entry(context, options, file="report.html"):
     """The manifest's account of the readable reports: the sealed page, its JSON and PDF twins and any parts."""
     entry = {"id": context["report_id"], "file": file, "language": options["language"], "sealed": True,
              "custody": "custody.json"}
+    if context.get("selection"):
+        entry["selection"] = context["selection"]["selection"]
+        entry["selected_records"] = context["selection"]["counts"]["selected_records"]
     if "report.json" in context.get("files", {}):
         entry["json"] = "report.json"
     for pdf in ("report.pdf", "chat.pdf"):

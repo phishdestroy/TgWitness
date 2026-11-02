@@ -15,9 +15,46 @@ manifest. Existing signatures and authoritative records are not rewritten.
 
 ### Choose the document you need
 
-Open **Exports → Report settings**. Choose a starting layout, select the material
-you want to show, then save. The next full journal export uses those choices in
-HTML, signed PDF and signed JSON.
+Open **Exports → Configure and preview**. Work through **Data → Contents → Preview**:
+
+1. Use the whole workspace or choose chats, authors, inclusive UTC observation
+   dates and event types. Load the catalog to search chats and authors, or enter
+   their Telegram IDs. Author filters match recorded sender IDs; a deletion
+   notice without a sender does not match an author filter.
+2. Choose charts, participant labels, the transcript and your written findings.
+3. Build the preview. It shows actual counts, activity, participants, sample
+   records, saved changes and missing message-number ranges. Changing a choice
+   marks the preview out of date. Save before downloading HTML, signed PDF,
+   signed JSON or the evidence ZIP.
+
+The preview counts the complete stable journal prefix, not an initial sample.
+Only displayed sample rows and long lists are bounded; their omitted counts are
+shown. A later export takes a fresh stable snapshot, so ongoing collection may
+increase the figures. Scope, counts and source identity are included in the
+signed report. Opening or previewing the form does not save it.
+
+**This is a report selection, not a minimized handover.** Charts and the transcript
+use the selected records. Integrity, custody and coverage describe the full source
+journal. The evidence ZIP still contains its original records and attachments.
+Use [a minimized handover](EVIDENCE.md) when a recipient must receive only
+the permitted data.
+
+### Read edits, deletions and missing IDs
+
+An edit shows the saved **Before** and **After** text and highlights the changed
+words. A deletion shows the last version saved before the notice. If no earlier
+content was captured, the report says so. When you select only edits or deletions,
+the preceding versions remain available as explicitly labelled context outside
+the filters. Unrelated messages are not added to these histories.
+
+**Unobserved message IDs** are gaps between known numbers in the chosen chats and
+date-derived ID span. Every known source record is checked before declaring a
+number unobserved: filtering out another author, an event type or a date cannot
+create a false gap. Neighboring saved messages are labelled as context. A missing
+number does not establish that a message existed or was deleted; deletion notices
+and unsuccessful rechecks remain separate event types.
+
+### Choose a layout
 
 | Starting layout | Included by default |
 | --- | --- |

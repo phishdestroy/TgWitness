@@ -25,6 +25,7 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from . import __version__, case_assessment, i18n, message_details, report_analytics, report_charts
+from . import report_history, report_selection, report_selection_view
 from . import indicators as ioc
 from . import viewer
 from .store import canonical, utcnow
@@ -69,6 +70,7 @@ class ReportOptions(BaseModel):
     review_method: str = Field(default="", max_length=4000)
     review_findings: str = Field(default="", max_length=8000)
     review_conclusion: str = Field(default="", max_length=4000)
+    selection: report_selection.Selection = Field(default_factory=report_selection.Selection)
 
     @field_validator("language")
     @classmethod
@@ -142,7 +144,7 @@ def text_keys():
     keys = [node.args[0].value for source in sources for node in ast.walk(ast.parse(source.read_text(encoding="utf-8")))
             if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id == "say"
             and node.args and isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str)]
-    return list(dict.fromkeys(keys + case_assessment.text_keys() + report_charts.text_keys() + list(SCRIPT_WORDS) + LIMITS + EXPORT_LIMITS + list(MEDIA_NAMES.values()) + ["Media"]
+    return list(dict.fromkeys(keys + case_assessment.text_keys() + report_charts.text_keys() + report_selection_view.text_keys() + list(SCRIPT_WORDS) + LIMITS + EXPORT_LIMITS + list(MEDIA_NAMES.values()) + ["Media"]
                               + list(ROUTE_KINDS.values()) + list(EXPOSURES.values()) + list(FILE_STATUS.values())
                               + list(ACTION_NAMES.values()) + [label for _, label in OUTCOMES.values()]
                               + ["Action", "no result recorded"] + list(OTHERS.values()) + list(TEXTS.values())
@@ -518,6 +520,8 @@ def custody(context):
             "purpose": handover["purpose"], "selection": handover["selection"], "counts": handover["counts"],
             "verification": "Records shown unchanged are verified in full; minimised records by the collector's "
                             "signature over the hash of the original record; records left out are only counted."}
+    if kind == "evidence" and context.get("selection"):
+        record["export"]["report_options"]["selection"] = context["selection"]["selection"]
     if kind in ("evidence", "handover"):
         digest = context["digest"]
         record["acquisition"].update(first_record_at=digest["first"], last_record_at=digest["last"],
@@ -1110,13 +1114,16 @@ def keycard(say, fp):
             + e(say("Visual fingerprint: copies signed by another key show other colours")) + '">' + swatch + "</div></div>")
 
 
-def evidence_brief(say, digest, count, anchors, coverage, account_text, handover=None):
+def evidence_brief(say, digest, count, anchors, coverage, account_text, handover=None, selected=False):
     """(summary, what it shows, what it does not show) for the top of an evidence report or extract."""
     cats, latest = digest["categories"], latest_stamp(anchors)
     summary = say("{account} observed {chats} chats from {first} to {last}. The journal holds {n} records: {m} messages, "
                   "{e} edits, {d} deletions and {f} saved files.", account=account_text or say("The observing account"),
                   chats=len(digest["chats"]), first=utc_text(digest["first"]), last=utc_text(digest["last"]),
                   n=count, m=cats["message"], e=cats["edited"], d=cats["deleted"], f=len(digest["media"]))
+    if selected:
+        summary = say("This report selects {n} records from {chats} chats: {m} message observations, {e} edits and {d} deletion observations.",
+                      n=count, chats=len(digest["chats"]), m=cats["message"], e=cats["edited"], d=cats["deleted"])
     if handover:
         summary = say("An extract for a stated purpose: {a} records shown unchanged and {b} minimised; {c} records of the "
                       "journal were left out.", a=handover["counts"]["unchanged"], b=handover["counts"]["minimised"],
@@ -1754,9 +1761,9 @@ def report_data(events_again, coverage, context):
     and what the PDF shows."""
     options = {**ReportOptions().model_dump(), "language": "en", **(context.get("options") or {})}
     say = Words(options["language"])
-    digest, handover = context.get("digest") or Digest().result(), context.get("handover")
+    digest, handover = context.get("report_digest") or context.get("digest") or Digest().result(), context.get("handover")
     anchors, changed = context.get("anchors", []), digest.get("changed") or set()
-    histories = message_histories(events_again(), changed, JSON_HISTORY_LIMIT) if changed and events_again else {}
+    histories = history_context(context, events_again, changed, JSON_HISTORY_LIMIT)
     subject = report_subject(context)
     data = {
         "kind": subject["kind"], "report_id": context.get("report_id"), "created_at": context.get("created_at"),
@@ -1793,14 +1800,15 @@ def report_material(context):
         return {}
     options = {**ReportOptions().model_dump(), **(context.get("options") or {})}
     examination = {key: options["review_"+key] for key in report_charts.REVIEW_FIELDS if options.get("review_"+key)}
-    raw = (context.get("digest") or {}).get("analytics")
+    raw = (context.get("report_digest") or context.get("digest") or {}).get("analytics")
     analytics = report_analytics.selected(raw, options) if raw and any(options[k] for k in
                  ("activity_chart", "hourly_chart", "participant_chart", "chat_chart")) else None
     if analytics:
         analytics["participant_labels"] = options["participant_labels"]
         analytics["source"] = {"file": "events.jsonl", "sha256": context.get("events_sha256"),
                                "journal_head": context.get("head_hash"), "records": context.get("event_count")}
-    return {"presentation": {k: options[k] for k in ("template", "activity_chart", "hourly_chart", "participant_chart",
+    return {**({"selection": context["selection"]} if context.get("selection") else {}),
+            "presentation": {k: options[k] for k in ("template", "activity_chart", "hourly_chart", "participant_chart",
                                                    "chat_chart", "participant_labels", "chart_limit")},
             **({"analytics": analytics} if analytics else {}),
             **({"examination": {"author": "operator", **examination}} if examination else {})}
@@ -1844,6 +1852,16 @@ def message_histories(events, changed, limit=HISTORY_LIMIT):
     return found
 
 
+def history_context(context, events_again, changed, limit=HISTORY_LIMIT):
+    """A selected deletion or edit retains its preceding saved content as labelled context."""
+    if not changed or not events_again:
+        return {}
+    if context.get("selection") and context.get("source_events"):
+        predicate = report_selection.compile_selection(context["selection"]["selection"])
+        return report_history.collect(context["source_events"](), changed, limit=limit, predicate=predicate)
+    return message_histories(events_again(), changed, limit)
+
+
 def diff_html(old, new):
     """Word-level comparison: removed words struck through, added words marked."""
     a, b = re.findall(r"\s+|\S+", old), re.findall(r"\s+|\S+", new)
@@ -1862,8 +1880,9 @@ def record_link(seq, linked):
     return ('<a href="#r' + str(seq) + '">#' + str(seq) + "</a>") if linked else "#" + str(seq)
 
 
-def changes_section(say, number, histories, total, titles, linked):
-    out = section(number, "changes", say("Changed and deleted messages"),
+def changes_section(say, number, histories, total, titles, linked, selected=False):
+    out = section(number, "changes", say("Selected message histories") if selected else say("Changed and deleted messages"),
+                  say("Selected changes with saved message history. Versions outside the filters are marked as context.") if selected else
                   say("Every saved version of each message that was edited, deleted or not found at a later check. "
                       "Removed words are struck through and added words are marked; each step names its signed record."))
     out += "".join(history_card(say, key, item, titles, linked) for key, item in histories.items())
@@ -1886,18 +1905,26 @@ def history_card(say, key, item, titles, linked=True):
             label = '<span class="pill">' + e(say("Original") if version["kind"] != "message.edited"
                                             else say("First saved version")) + "</span>"
         else:
-            label = '<span class="pill warn">' + e(say("Edit {n}", n=number)) + "</span>"
+            label = '<span class="pill warn">' + e(say("Edit {n}", n=number) if version["kind"] == "message.edited"
+                                                    else say("Saved version {n}", n=number + 1)) + "</span>"
         head = (label + " " + e(say("observed")) + " " + when(version["observed_at"])
                 + (" · " + e(say("Telegram time")) + " " + when(version["telegram_at"]) if version["telegram_at"] else "")
-                + " · " + record_link(version["seq"], linked))
+                + " · " + record_link(version["seq"], linked and not version.get("context_only")))
+        if version.get("context_only"):
+            head += ' · <span class="pill">' + e(say("Context outside the report filters")) + '</span>'
         if version.get("withheld"):
             text = "<i>" + e(say("Text withheld in this extract")) + "</i>"
         elif previous is None:
             text = e(version["text"]) if version["text"] else "<i>" + e(say("(no text)")) + "</i>"
+            if version["kind"] == "message.edited":
+                text = '<p class="lead">' + e(say("The earlier version was not captured.")) + '</p>' + text
         elif version["text"] == previous["text"]:
             text = "<i>" + e(say("Text unchanged")) + "</i>"
         else:
-            text = diff_html(previous["text"], version["text"])
+            text = ('<div class="version-compare"><div><b>' + e(say("Before")) + '</b><p>'
+                    + e(previous["text"] or say("(no text)")) + '</p></div><div><b>' + e(say("After"))
+                    + '</b><p>' + e(version["text"] or say("(no text)")) + '</p></div></div><b>'
+                    + e(say("Changes")) + '</b><div>' + diff_html(previous["text"], version["text"]) + '</div>')
         shown = details_html(say, version["details"]) if previous is None or pointing(previous) != pointing(version) else ""
         media = version["details"].get("media_info")
         if media and (previous is None or pointing(previous)[2] != pointing(version)[2]):
@@ -1907,16 +1934,29 @@ def history_card(say, key, item, titles, linked=True):
         previous = version
     for gone in item["gone"]:
         deleted = gone["kind"] == "message.deleted"
+        retained = last_saved_before(item["versions"], gone["seq"])
+        kept = ('<div class="retained-message"><b>' + e(say("Saved text before deletion") if deleted
+                 else say("Saved text before recheck")) + '</b><div class="text">'
+                + (e(retained["text"]) if retained and retained["text"] else
+                   e(say("(no text)")) if retained else e(say("No message content was saved before this observation.")))
+                + '</div></div>')
         steps.append('<li class="gone-step"><div class="vhead"><span class="pill bad">'
                      + e(kind_label(say, gone["kind"])) + "</span> " + e(say("observed")) + " " + when(gone["observed_at"])
-                     + " · " + record_link(gone["seq"], linked) + '</div><p class="gone">'
+                     + " · " + record_link(gone["seq"], linked and not gone.get("context_only"))
+                     + (' · <span class="pill">' + e(say("Context outside the report filters")) + '</span>'
+                        if gone.get("context_only") else '') + '</div><p class="gone">'
                      + e(say("Telegram does not say who deleted a message or exactly when; this is when the notice "
                              "was observed.") if deleted else say("Telegram no longer returned this message at a later check."))
-                     + "</p></li>")
+                     + "</p>" + kept + "</li>")
     return ('<article class="hist" id="m' + e(chat) + "-" + e(message_id) + '"><header><b>'
             + e(titles.get(chat) or say("Chat {id}", id=chat)) + " · " + e(say("message {id}", id=message_id)) + "</b>"
             + (" <span>" + who + "</span>" if who else "") + '</header><ol class="versions">' + "".join(steps)
             + "</ol></article>")
+
+
+def last_saved_before(versions, seq):
+    """Do not present content captured after a deletion as known beforehand."""
+    return next((version for version in reversed(versions) if version["seq"] < seq), None)
 
 
 # What a minimised record of a handover extract withholds (handover.Minimiser).
@@ -2174,7 +2214,8 @@ def evidence_chunks(events, coverage=None, context=None):
     producer = context.get("producer") or {"software": "TgWitness", "version": __version__, "project": "PhishDestroy",
                                            "homepage": "https://phishdestroy.io",
                                            "source": "https://github.com/phishdestroy/TgWitness"}
-    digest = context.get("digest") or Digest().result()
+    source_digest = context.get("digest") or Digest().result()
+    digest = context.get("report_digest") or source_digest
     anchors, files, archive = context.get("anchors", []), context.get("files", {}), context.get("archive", False)
     fp, report_id = context.get("fingerprint") or "", context.get("report_id") or "unsealed"
     created, count, head_hash = context.get("created_at") or utcnow(), context.get("event_count"), context.get("head_hash")
@@ -2184,7 +2225,10 @@ def evidence_chunks(events, coverage=None, context=None):
     sign = context.get("sign")
     handover = context.get("handover")
     material = report_material(context)
+    filtered = context.get("report_digest") is not None
     label, shown_count = say("Evidence report"), count
+    if context.get("selection"):
+        shown_count = context["selection"]["counts"]["selected_records"]
     if handover:
         archive_name, label = "tgwitness-handover.zip", say("Handover extract")
         title = options.get("case_title") or say("Handover extract")
@@ -2216,6 +2260,10 @@ def evidence_chunks(events, coverage=None, context=None):
             links.insert(1, ("report-analytics", say(report_charts.TITLE)))
         if material.get("examination"):
             links.insert(1, ("examination", say(report_charts.REVIEW_TITLE)))
+        if material.get("selection"):
+            links.insert(1, ("report-selection", say("Selected data")))
+        if filtered:
+            links = [link for link in links if link[0] != "actions"]
         if options.get("timeline"):
             links.append(("records", say("Records")))
         yield (head(say, title=title + " · TgWitness", description=description, meta=meta, linked=linked,
@@ -2239,8 +2287,9 @@ def evidence_chunks(events, coverage=None, context=None):
         account_text = " · ".join(x for x in (("@" + account["username"]) if account.get("username") else "",
                                               ("id " + str(account["id"])) if account.get("id") else "") if x)
         numbers = iter(range(1, 100))
-        yield brief_section(say, *evidence_brief(say, digest, count, anchors, coverage, account_text,
-                                                 handover)).encode("utf-8")
+        yield report_selection_view.html(material.get("selection"), say).encode("utf-8")
+        yield brief_section(say, *evidence_brief(say, digest, shown_count, anchors, coverage, account_text,
+                                                 handover, filtered)).encode("utf-8")
         analysis_sections = [report_charts.examination_html(material.get("examination"), say),
                              report_charts.html(material.get("analytics"), say)]
         if options.get("template") == "activity":
@@ -2256,16 +2305,17 @@ def evidence_chunks(events, coverage=None, context=None):
         if handover:
             yield minimisation_section(say, next(numbers), handover, count).encode("utf-8")
         if changed and events_again:
-            yield changes_section(say, next(numbers), message_histories(events_again(), changed), len(changed),
-                                  digest["titles"], bool(options.get("timeline"))).encode("utf-8")
+            yield changes_section(say, next(numbers), history_context(context, events_again, changed), len(changed),
+                                  digest["titles"], bool(options.get("timeline")), filtered).encode("utf-8")
         if (digest.get("indicators") or {}).get("items"):
             yield indicators_section(say, next(numbers), digest["indicators"],
                                      ref_link(context.get("parts"), "records", "seq", "r")).encode("utf-8")
-        yield actions_section(say, next(numbers), digest, digest["titles"], bool(options.get("timeline"))).encode("utf-8")
+        if not filtered:
+            yield actions_section(say, next(numbers), digest, digest["titles"], bool(options.get("timeline"))).encode("utf-8")
         chain = ('<div class="chain"><div class="link"><b>' + e(say("Chain start")) + "</b><code>0000…0000</code></div>"
                  '<span class="arrow"></span>')
         if count and count > 1:
-            chain += ('<div class="link"><b>#1</b><code>' + e(short(digest["first_hash"], 8, 4)) + "</code></div>"
+            chain += ('<div class="link"><b>#1</b><code>' + e(short(source_digest["first_hash"], 8, 4)) + "</code></div>"
                       '<span class="arrow"></span>')
         if count and count > 2:
             chain += ('<div class="link more"><b>' + e(say("Records in between: {n}", n=count - 2)) + "</b><code>SHA-256 · Ed25519"
@@ -2308,9 +2358,11 @@ def evidence_chunks(events, coverage=None, context=None):
         if not handover:
             yield timestamps_section(say, next(numbers), anchors, archive_name, fp).encode("utf-8")
         if coverage:
+            if material.get("selection"):
+                yield ('<h2>' + e(say("Source journal coverage")) + '</h2>').encode("utf-8")
             yield coverage_section(say, next(numbers), coverage).encode("utf-8")
         latest = latest_stamp(anchors)
-        steps = [(say("Observed and recorded"), when(digest["first"]) + " — " + when(digest["last"])),
+        steps = [(say("Observed and recorded"), when(source_digest["first"]) + " — " + when(source_digest["last"])),
                  (say("Each record hashed and signed at capture"), e(say("Records: {n}", n=count)))]
         if handover:
             steps.append((say("Extract prepared and minimised"), when(created) + " · " + e(say(
@@ -2327,10 +2379,10 @@ def evidence_chunks(events, coverage=None, context=None):
             (say("Acquisition method"), e(say("Telegram client observing the account; records chained by SHA-256 and "
                                               "signed with Ed25519 as they are written."))),
             (say("Observing account"), e(account_text)),
-            (say("Telegram client"), seen_list(say, digest.get("clients"), client_text)),
-            (say("Connection route"), seen_list(say, digest.get("routes"), route_text)
-             + direct_text(say, digest.get("direct_fallbacks"))),
-            (say("Collector clock against Telegram"), clocks_html(say, digest.get("clocks"))),
+            (say("Telegram client"), seen_list(say, source_digest.get("clients"), client_text)),
+            (say("Connection route"), seen_list(say, source_digest.get("routes"), route_text)
+             + direct_text(say, source_digest.get("direct_fallbacks"))),
+            (say("Collector clock against Telegram"), clocks_html(say, source_digest.get("clocks"))),
             (say("Export host"), e(platform.system() + " " + platform.release() + " · Python " + platform.python_version())),
             (say("Time standard"), "UTC · ISO 8601")]).encode("utf-8")
         yield verify_section(say, next(numbers), archive_name, fp, "report.html", archive,
@@ -2351,6 +2403,9 @@ def evidence_chunks(events, coverage=None, context=None):
             if statement["subject"]["viewer"].get("files"):
                 yield records_pointer(say, next(numbers), "records", say("Records"), shown_count, say(
                     "{n} records", n=shown_count)).encode("utf-8")
+            elif not shown_count:
+                yield (section(next(numbers), "records", say("Records")) + '<p>'
+                       + e(say("No records match this selection.")) + '</p></section>').encode("utf-8")
             else:
                 yield (section(next(numbers), "records", say("Records")) + '<div class="callout info">' + e(say(
                     "This journal has {n} records, more than a report saved on its own carries. Open report.html "

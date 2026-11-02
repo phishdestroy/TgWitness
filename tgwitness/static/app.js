@@ -99,7 +99,7 @@ const viewReady=Promise.all([
         if(name==='integrations'){window.TgWitnessIntegrations?.clear();window.TgWitnessWebhooks?.clear();}
         if(name==='sealed')window.TgWitnessCaptureStory?.pause?.();
         if(name==='parameters')parametersView?.leave();
-        if(name==='evidence')exportsView?.leave();
+        if(name==='evidence'){exportsView?.leave();reportSelection?.leave();}
         if(name==='system-log')systemLogView?.leave();
         if(name==='observations')window.TgWitnessJournal?.leave();
       },
@@ -408,6 +408,7 @@ const formsReady=import('./components/forms.js').then(({createFormControls})=>{
     forms:[['report-form',value=>reportDirty=value],['evidence-form',value=>state.evidenceDirty=value],
       ['replica-form',value=>state.replicaDirty=value],['alerts-form',value=>state.alertsDirty=value],
       ['github-form',value=>state.githubDirty=value]].map(([id,setDirty])=>({form:$(id),setDirty}))});
+  $("report-form").querySelector('.form-draft-bar').append($("report-open-downloads"));
 });
 function fmtTime(value,options){return panelTime?.fmtTime(value,options)??tr("No data");}
 function formatTime(value){return fmtTime(value);}
@@ -2419,6 +2420,14 @@ const REPORT_PRESETS={
   activity:{timeline:false,raw_records:false,media_previews:false,group_heartbeats:true,
     activity_chart:true,hourly_chart:true,participant_chart:true,chat_chart:true}
 };
+let reportSelection;
+const reportSelectionReady=import('./views/report-selection.js?v=1').then(({createReportSelection})=>{
+  reportSelection=createReportSelection({root:$("report-form"),tr,json,
+    getOwner:()=>state.workspaceRevision+":"+state.profile,
+    ready:()=>reportReady&&reportOwner===reportKey()&&!reportSaving&&state.view==='evidence',
+    options:reportDraft,active:()=>state.view==='evidence'});
+  return reportSelection;
+});
 const reportTemplate=()=>$("report-form").querySelector('[name="report-template"]:checked')?.value||"custom";
 function setReportTemplate(value){
   const known=Object.hasOwn(REPORT_PRESETS,value)||value==="custom"?value:"custom";
@@ -2430,6 +2439,7 @@ function resetReportSettings(){
   reportOwner=null;reportReady=false;reportDirty=false;reportRequest++;reportLoading=null;reportSaving=false;
   $("report-form").reset();$("report-fields").disabled=true;$("report-status").replaceChildren();
   $("report-outline").replaceChildren();$("report-form").querySelector('.report-examination').open=false;
+  reportSelection?.reset();
   $("report-form").querySelectorAll(".form-error").forEach(el=>el.remove());
 }
 function reportControls(){
@@ -2438,6 +2448,7 @@ function reportControls(){
 }
 async function loadReportSettings(){
   if(!state.status)return;
+  await reportSelectionReady;
   const owner=reportKey();
   if(reportOwner!==owner){resetReportSettings();reportOwner=owner;}
   if(reportSaving||reportReady&&reportDirty)return;
@@ -2460,6 +2471,7 @@ async function loadReportSettings(){
       const matches=preset&&Object.entries(REPORT_CHECKS).every(([id,key])=>$(id).checked===preset[key])
         &&$("report-participant-labels").value==="aliases"&&$("report-chart-limit").valueAsNumber===10;
       setReportTemplate(matches?template:"custom");
+      reportSelection.load(options.selection);
       reportReady=true;reportDirty=false;formControls?.loaded("report-form");$("report-status").textContent=window.TGW_ONLINE_DEMO?tr("Sample data"):"";
     }catch(error){
       if(!current()||error instanceof StaleView||error.name==='AbortError')return;
@@ -2495,33 +2507,43 @@ $("report-form").querySelectorAll('[name="report-template"]').forEach(input=>inp
   reportDirty=true;$("report-status").replaceChildren();syncReportParts();
 }));
 $("report-form").addEventListener("input",event=>{
-  if(!reportReady)return;
+  if(!reportReady||event.target.matches('[data-report-search]'))return;
   reportDirty=true;$("report-status").replaceChildren();
   if(Object.hasOwn(REPORT_CHECKS,event.target.id)||["report-participant-labels","report-chart-limit","report-part-size"].includes(event.target.id))setReportTemplate("custom");
   syncReportParts();
+  reportSelection?.changed(event);
 });
-$("report-form").addEventListener("change",syncReportParts);
-$("report-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
-  if(!reportReady||reportOwner!==reportKey()||reportSaving||window.TGW_ONLINE_DEMO)return;
-  const owner=reportOwner,draft=formControls?.capture("report-form");
-  if(!$("report-form").reportValidity())return;
+$("report-form").addEventListener("change",event=>{syncReportParts();reportSelection?.changed(event);});
+function reportDraft(){
   const body={template:reportTemplate()};
   for(const [id,key] of Object.entries(REPORT_FIELDS))body[key]=$(id).value;
   body.part_size=$("report-part-size").valueAsNumber;
   const limit=$("report-chart-limit").valueAsNumber;
   body.chart_limit=Number.isInteger(limit)&&limit>=5&&limit<=30?limit:10;
   for(const [id,key] of Object.entries(REPORT_CHECKS))body[key]=$(id).checked;
+  body.selection=reportSelection?.read();
+  return body;
+}
+$("report-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
+  if(!reportReady||reportOwner!==reportKey()||reportSaving||window.TGW_ONLINE_DEMO)return;
+  const owner=reportOwner,draft=formControls?.capture("report-form");
+  const body=reportDraft();
+  if(!$("report-form").reportValidity())return;
   reportSaving=true;reportControls();
   try{
     await json("report-options",body);if(reportOwner!==owner||reportKey()!==owner)return;
     reportDirty=formControls?.changed(draft)||false;formControls?.accepted(draft,reportDirty);$("report-status").textContent=tr(reportDirty?"Saved. New edits have not been saved.":"Saved. The next export uses these settings.");toast(tr("Report settings saved."));
   }finally{if(reportOwner===owner&&reportKey()===owner){reportSaving=false;reportControls();}}
 });});
+$("report-open-downloads").addEventListener("click",async()=>{
+  if(reportDirty){$("report-status").textContent=tr("Save your changes before downloading a report with these choices.");$("report-status").scrollIntoView({block:"center"});return;}
+  (await exportsReady).select('downloads');$("exports-downloads").scrollIntoView({block:"start"});
+});
 panelQueries("[data-go-reports]").forEach(link=>link.addEventListener("click",event=>{
   event.preventDefault();
-  // Open Exports → Report settings and bring the report language field into view with focus.
+  // Open the builder at the requested section; no draft is saved by navigation.
   Promise.resolve(navigate("evidence")).then(()=>exportsReady).then(view=>{view.select("settings");
-    const field=$("report-language");field.scrollIntoView({block:"center"});field.focus({preventScroll:true});});
+    const field=$(link.dataset.goReports==='data'?"report-data-title":"report-language");field.scrollIntoView({block:"center"});field.focus({preventScroll:true});});
 }));
 $("export-encrypt-on").addEventListener("change",()=>{
   const on=$("export-encrypt-on").checked;show("export-password-field",on);if(on)$("export-password").focus();else $("export-password").value="";
