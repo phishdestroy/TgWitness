@@ -72,8 +72,8 @@ class RunningApp:
             self.thread.join(timeout=30)
             self.sock.close()
             raise
-        store = self.app.state.store
-        if not self.wizard and not store.get_setting("demo", False) and store.get_setting("setup_wizard", None) is None:
+        store = getattr(self.app.state, "store", None)
+        if store and not self.wizard and not store.get_setting("demo", False) and store.get_setting("setup_wizard", None) is None:
             store.set_setting("setup_wizard", {"skipped_at": "2026-01-01T00:00:00+00:00"})
         return self
 

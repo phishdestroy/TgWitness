@@ -14,7 +14,7 @@
   signed journal records as their own forms; a later change by hand is shown with the
   way back. The goal is chosen only there: Start here, the Extras card and Sources →
   Investigation mode open it. A server named as the place no longer earns reliability
-  points before it is proven.
+  points before it is proven. The setup is translated into all 25 panel languages.
 
 ## 0.8.0 preview · 2 November 2026
 

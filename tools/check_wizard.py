@@ -3,10 +3,11 @@
 The plan from the answers, progress kept in the workspace, what applying changes and records in the signed
 journal, hand changes afterwards, the connection route with its IP mode. Then a new workspace in a browser:
 it opens with the wizard, every step has its own address, Back keeps the answers, sign-in, chats, applying
-and the live check, at 360, 600, 1024 and 1440 pixels, in English and Russian; and the short path that saves
-a copy of the account.
+and the live check, at 360 to 1440 pixels in English, Russian, German and Arabic; the wizard's strings in every
+panel language; and the short path that saves a copy of the account.
 """
 import json
+import re
 import sys
 import tempfile
 from pathlib import Path
@@ -274,11 +275,13 @@ def check_browser(directory, output):
 
         # Every page at the four widths, in English and Russian: no overflow, Back and Next in reach.
         words = i18n.words("ru")
-        for lang in ("en", "ru"):
+        # German for long words, Arabic for right-to-left.
+        for lang, widths in (("en", (360, 600, 1024, 1440)), ("ru", (360, 600, 1024, 1440)),
+                             ("de", (360, 1440)), ("ar", (360, 1440))):
             context.add_cookies([{"name": i18n.COOKIE, "value": lang, "url": server.url}])
             page.goto(server.url + "/setup/goal")
             expect(page.locator("#view-setup")).to_have_attribute("data-step", "goal")
-            for width in (360, 600, 1024, 1440):
+            for width in widths:
                 page.set_viewport_size({"width": width, "height": 900})
                 for index, step in enumerate(("goal", "connection", "account", "chats", "saving", "place", "summary")):
                     page.locator(".wizard-steps .wizard-step-link").nth(index).click()
@@ -304,7 +307,21 @@ def check_browser(directory, output):
         browser.close()
     assert not errors, errors
     assert not external, external
-    return "ok  browser: opens first, step addresses and Back, sign-in, chats, apply and live check; 4 widths, en and ru"
+    return "ok  browser: opens first, step addresses and Back, sign-in, chats, apply and live check; en, ru, de, ar"
+
+
+def check_translations():
+    """Every string of the wizard is translated in every panel language, plural forms included."""
+    from i18n_keys import script_keys
+    from tgwitness import i18n
+    source = (ROOT / "tgwitness/static/views/wizard.js").read_text(encoding="utf-8")
+    singular = set(re.findall(r'trn\("([^"]*)"', source))
+    keys = [key for key in script_keys(source) if key not in singular]
+    for lang in i18n.LANGUAGES[1:]:
+        words = i18n.words(lang)
+        missing = [key for key in keys if key not in words]
+        assert not missing, (lang, missing[:5])
+    return "ok  translations: " + str(len(keys)) + " wizard strings in " + str(len(i18n.LANGUAGES) - 1) + " languages"
 
 
 def check_copy(directory):
@@ -347,6 +364,7 @@ def main():
     output = ROOT / "test-results" / "wizard"
     output.mkdir(parents=True, exist_ok=True)
     print(check_plan())
+    print(check_translations())
     with tempfile.TemporaryDirectory() as tmp:
         print(check_api(Path(tmp)))
         print(check_browser(Path(tmp), output))
