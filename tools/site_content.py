@@ -1,5 +1,3 @@
-"""Explicit public guide and reference inventory. No runtime application dependency."""
-
 GUIDES = {
     "archive": ("Work the archive", "Load history, search saved records, review AI sources and connect your tools.", "archive history search AI MCP OCR transcription webhooks reports integrations", "docs/ANALYSIS.md"),
     "capture": ("GitHub Actions capture", "Export one Telegram chat on a temporary GitHub runner.", "github actions capture encrypted archive", "docs/SEALED-ACTIONS.md"),
