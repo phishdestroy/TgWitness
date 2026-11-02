@@ -23,11 +23,16 @@ def preview(store, options):
             count += 1
         sampled = next(rows, None) is not None
     material = report.report_material({"kind": "evidence", "options": options, "digest": {"analytics": analytics.result()}, "event_count": count})
+    sections = [report.report_charts.examination_html(material.get("examination"), say),
+                report.report_charts.html(material.get("analytics"), say)]
+    if options.get("template") == "activity":
+        sections.reverse()
     title = options.get("case_title") or say("Telegram observation journal")
     # An external stylesheet works under the panel's strict CSP. No scripts,
     # inline styles, external assets, signing operations or stored preview files.
     document = ('<!doctype html><html lang="' + report.e(say.language) + '" dir="' + say.direction
         + '" data-template="' + report.e(options["design"]) + '" data-theme="' + report.e(options["theme"])
+        + '" data-report-template="' + report.e(options.get("template", "dossier"))
         + '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
         '<link rel="stylesheet" href="/report-preview.css"><title>' + report.e(title) + '</title></head>'
         '<body class="dossier studio-preview"><main><p class="preview-watermark">'
@@ -41,6 +46,5 @@ def preview(store, options):
         + '</p><p>' + report.e(say("Preview analysed {n} records. The full export uses its complete selected scope.", n=count))
         + (' ' + report.e(say("Preview limit reached; these charts cover only the first 50,000 records.")) if sampled else '') + '</p>'
         + report.case_section(say, 1, options, [])
-        + report.report_charts.examination_html(material.get("examination"), say)
-        + report.report_charts.html(material.get("analytics"), say) + '</main></body></html>')
+        + ''.join(sections) + '</main></body></html>')
     return {"html": document, "records": count, "sampled": sampled}

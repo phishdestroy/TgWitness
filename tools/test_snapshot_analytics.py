@@ -85,6 +85,9 @@ class AnalyticsTests(TestCase):
                 self.assertEqual(rendered["records"], 2)
                 self.assertIn("NOT SIGNED", rendered["html"])
                 self.assertNotIn("<script", rendered["html"])
+                self.assertIn('data-report-template="dossier"', rendered["html"])
+                ordered = preview(store, {**options, "template": "activity", "review_findings": "Authored finding"})["html"]
+                self.assertLess(ordered.index('id="report-analytics"'), ordered.index('id="examination"'))
                 self.assertEqual(original, report.saved(store).model_dump())
                 bundle = evidence.export_file(store, vault, "zip", options)
                 self.assertTrue(verify_bundle(bundle, fingerprint(vault.public_key))["key_pinned"])
