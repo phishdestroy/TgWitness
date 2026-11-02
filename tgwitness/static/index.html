@@ -289,7 +289,7 @@
   </div>
   <div id="sources-panel-scope" role="tabpanel" aria-labelledby="sources-tab-scope">
   <form class="card padded scope-card" id="scope-form"><div class="eyebrow">Observation scope</div><h2>What this account records</h2>
-    <div class="investigation-preset"><button class="secondary" id="scope-investigation" type="button"><svg aria-hidden="true" class="icon"><use href="#i-eye"/></svg> Investigation mode</button><p class="hint">For a dedicated account that joins teams and talks to bots: records every chat, group, private chat and bot it sees, its own messages and button presses, and for each new chat or bot saves its profile and earlier visible messages at once. Review and press Save scope.</p><a class="format-help" href="/dedicated-account.html" rel="noopener" target="_blank">Why never your main account ↗</a></div>
+    <div class="investigation-preset"><button class="secondary" id="scope-investigation" type="button"><svg aria-hidden="true" class="icon"><use href="#i-eye"/></svg> Investigation mode</button><p class="hint">For a dedicated account that joins teams and talks to bots: records every chat, group, private chat and bot it sees, its own messages and button presses, and for each new chat or bot saves its profile and earlier visible messages at once. Applied as soon as you confirm the whole-account scope.</p><a class="format-help" href="/dedicated-account.html" rel="noopener" target="_blank">Why never your main account ↗</a></div>
     <div aria-label="Observation scope" class="scope-modes" role="radiogroup">
       <label><input name="scope-mode" type="radio" value="selected"><span><strong>Chosen chats</strong><small>Only the chats you add below.</small></span></label>
       <label><input name="scope-mode" type="radio" value="folder"><span><strong>Telegram folder</strong><small>Chats in one of the account's folders, including chats added to it later.</small></span></label>
@@ -1100,6 +1100,7 @@
         <div><label for="outside-username">Username · optional</label><input autocomplete="off" id="outside-username" maxlength="255"></div>
         <div><label for="outside-password">Password · optional</label><input autocomplete="new-password" id="outside-password" maxlength="255" type="password"></div>
       </div>
+      <div class="notice warning policy-warning" hidden id="policy-warning" role="alert"></div>
       <p class="hint" id="policy-status" role="status"></p>
       <div class="route-actions"><button class="secondary" type="submit">Save IP protection</button></div>
       <p class="hint">A saved proxy password is never shown again; re-enter it when you change the proxy. How often proxies are replaced, rested and checked is set in Parameters → Automatic MTProxy.</p>
