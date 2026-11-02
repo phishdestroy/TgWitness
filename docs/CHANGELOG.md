@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.8.0 preview · 2 November 2026
 
 - Long labels no longer spill on phones: the Sources tabs wrap their text, and the
   journal's period buttons wrap to a second row instead of five fixed columns. Russian
