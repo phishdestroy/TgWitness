@@ -50,6 +50,7 @@ support the provider and Cloudflare records rather than replace them.
 | `linode` | `LINODE_TOKEN` | `linodes`, `firewall`, `events` read-only scopes | Account events, firewall rule versions | 90 days |
 | `vultr` | `VULTR_API_KEY` | User with read access and the `activity_logs` permission | Account activity log (method, path, actor) | 30 days, longer with an audit-log subscription |
 | `aws` | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | `ec2:DescribeInstances`, `ec2:DescribeSecurityGroups`, `cloudtrail:LookupEvents` | CloudTrail event history | 90 days |
+| `phala` | `PHALA_CLOUD_API_KEY` | An API key of the same workspace | Application revisions: compose and environment changes, restarts, OS upgrades | While the application exists |
 | `generic` | none | none | none: **self-attested** | – |
 
 Use a dedicated project, team, account or sub-account for each case: the verifier's
@@ -62,6 +63,49 @@ logs console requests; DigitalOcean's Recovery Console, Linode's Lish/Glish and 
 console are not logged as such, so root is locked at the first boot and a console login
 would need a password reset or a boot change, which are logged. Vultr returns the console
 address to any key that can read the instance; neither the record nor the report stores it.
+
+## Confidential VM on Phala Cloud (Intel TDX)
+
+With `--provider phala` the collector runs in an Intel TDX confidential virtual machine on
+[Phala Cloud](https://phala.com/), managed by dstack. The host and Phala's staff cannot read its
+memory, and the processor signs an attestation of what the machine booted. The verifier does not
+take Phala's word for it: `tgwitness.tdx` checks every attestation itself, up to the pinned Intel
+SGX Root CA, against Intel's revocation lists and Intel's signed platform data, and refuses
+machines that can be debugged or migrated.
+
+| Report entry | What it shows |
+| --- | --- |
+| `tdx_binding` | The attestation covers the signed statement of the collector and the random value of this request |
+| `tdx_quote` | Intel vouches for the attestation; it passes only when Intel rates the platform as up to date |
+| `tdx_compose_hash` | RTMR3, replayed from the dstack event log, measures the app-compose the collector reports |
+| `tdx_compose` | That compose is byte for byte the one the code of the deployed commit builds: source files pinned by hash, both images by digest, no other code |
+| `tdx_identity` | The attestation comes from the deployed application and instance, with keys from Phala's KMS and an encrypted disk |
+| `tdx_os` | With `--tdx-measurements`, MRTD and RTMR0-2 equal the values computed from the dstack OS image (`dstack-mr measure --json`) |
+
+Every start of the collector recorded in the journal carries such an attestation, so
+`verify --evidence` checks each start. Phala's list of application revisions serves as the
+provider log: if the compose changed after the deployment, the report fails.
+
+In the panel choose **Confidential virtual machine · Phala Cloud** under **Extras** → **Server 24/7**
+and paste a Phala Cloud API key; the quick tunnel works as on Hetzner. From the command line:
+
+```sh
+python -m tgwitness.cloud deploy --provider phala --name case-1 --server-type tdx.small \
+    --ref v0.7.1 --repository https://github.com/phishdestroy/TgWitness --quick-tunnel \
+    --provider-token-file phala-key.txt
+python -m tgwitness.cloud verify --record deployments/case-1/deployment.json \
+    --provider-token-file phala-key.txt --cloud-init deployments/case-1/docker-compose.yaml \
+    --source CHECKOUT_OF_COMMIT --tdx-measurements dstack-mr.json
+```
+
+`--tdx-collateral` reads Intel's certificates and revocation lists from a file instead of
+downloading them from Intel. Gateway DNS is not available here: Phala has no provider firewall
+for outgoing traffic.
+
+An attestation cannot rule out a flaw in Intel's TDX module or microcode, or physical access to
+the memory bus. Whoever controls the application in Phala's account can deploy another compose;
+it appears as a new revision with a new compose hash. The host controls the machine's time
+source and network.
 
 ## Before you start
 
@@ -357,7 +401,11 @@ The deployment, lock and verification logic is covered by automated tests agains
 Hetzner, DigitalOcean, Linode, Vultr, EC2/CloudTrail and Cloudflare APIs built from their
 published API references, and the AWS request signing against AWS's published examples.
 `tools/check_cloud_wizard.py` runs the panel's server wizard the same way, with a domain and
-with a quick tunnel.
+with a quick tunnel. `tools/check_tdx.py` verifies real Intel TDX attestations from dcap-qvl and dstack
+up to Intel's root certificate (sources in [tools/tdx/README.md](../tools/tdx/README.md)); `tools/check_phala.py`
+runs deploy, verify, the journal, destroy and the panel wizard against a simulated Phala Cloud
+whose attestations come from a forged PKI shaped like Intel's. The Phala path has not yet been
+tried on Phala Cloud itself.
 
 On 1 November 2026 the quick tunnel path ran against real **Hetzner Cloud** (Nuremberg, `cpx22`,
 TgWitness v0.7.0), real ntfy.sh and GitHub, from the panel and from code:

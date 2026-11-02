@@ -356,6 +356,10 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 app.state.assurance = {"mode": selected, "provider": provider}
                 app.state.run_receipt["host"] = await asyncio.to_thread(
                     assurance.snapshot, selected, provider, detail=True)
+                # In a confidential VM the start record carries a quote over this run's key and host.
+                quote = await asyncio.to_thread(assurance.start_attestation, selected, app.state.run_receipt)
+                if quote is not None:
+                    app.state.run_receipt["tdx_start"] = quote
             collector.run_id = app.state.run_receipt["run_id"]
             previous = store.stats()["head"]
             process_event = store.append("process.started", {"version": __version__, "previous_observation": previous,
