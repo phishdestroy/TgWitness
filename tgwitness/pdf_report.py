@@ -105,12 +105,14 @@ def document(say, footer):
                 self.set_font("Sans", "B", size=7)
                 self.set_text_color(*MUTED)
                 self.set_y(6)
-                self.multi_cell(self.epw, 3.5, "TG / WITNESS    ·    " + footer, new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+                self.multi_cell(self.epw, 3.5, "TG / WITNESS    ·    " + footer, align="R" if self.rtl else "L",
+                                new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+                line_y = max(14, self.get_y() + 2)
                 self.set_draw_color(*LINE)
-                self.line(self.l_margin, 14, self.l_margin + self.epw, 14)
+                self.line(self.l_margin, line_y, self.l_margin + self.epw, line_y)
                 with self.local_context(draw_color=GOLD, line_width=0.7):
-                    self.line(self.l_margin, 14, self.l_margin + 16, 14)
-                self.set_xy(self.l_margin, 18)
+                    self.line(self.l_margin, line_y, self.l_margin + 16, line_y)
+                self.set_xy(self.l_margin, line_y + 4)
 
         def font_on_page(self):
             # fpdf2 sets the font of a line that starts in a fallback font (an emoji, say) inside that line's
@@ -372,7 +374,12 @@ class Layout:
     def brief(self, summary, shows, hidden):
         """Under the title: one paragraph, then what the material shows and what it does not."""
         say = self.say
-        self.pdf.add_page()
+        # A long case cover may already have flowed its QR onto the next page.
+        # Continue there instead of leaving a mostly empty reference-only page.
+        if self.pdf.page_no() == 1:
+            self.pdf.add_page()
+        else:
+            self.gap(4)
         self.section(say("In brief"))
         self.text(summary, size=11, height=5.8)
         self.gap(1.5)
