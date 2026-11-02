@@ -7,7 +7,7 @@ import sys
 import tempfile
 import threading
 import time
-from unittest.mock import patch
+from unittest.mock import AsyncMock, patch
 
 import httpx
 
@@ -22,6 +22,156 @@ from tools.check_session_reservations import workspace
 async def native(app, path, ticket, headers=None):
     async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url="http://127.0.0.1") as client:
         return await client.get(path, headers={"Cookie": "tgwitness-download=" + ticket, **(headers or {})})
+
+
+async def account_tickets():
+    """Account jobs keep their existing ACL and files; browser tickets add no authority."""
+    async with workspace() as (app, client):
+        job, disclosure = "a" * 32, "b" * 32
+        payload = b"Synthetic account export transport bytes" * 4096
+        archive = app.state.store.root / "synthetic-account.zip"
+        archive.write_bytes(payload)
+        prefix = "/api/account-export/" + job
+        session, _ = app.state.access.login(app.state.vault.token, "127.0.0.1", "Synthetic admin")
+        admin = {"Authorization": "Bearer " + session}
+        _, reviewer = grant_session(app)
+        with patch.object(app.state.account_export, "result_path", return_value=archive), \
+                patch.object(app.state.account_export, "public", return_value={"archive_sha256": hashlib.sha256(payload).hexdigest()}), \
+                patch.object(app.state.disclosures, "result_path", return_value=archive):
+            for endpoint in (prefix, prefix + "/disclosures/" + disclosure):
+                direct = await client.get(endpoint + "/download", headers=admin)
+                assert direct.content == payload
+                assert direct.headers["x-tgwitness-download-ticket"] == endpoint.removeprefix("/api/") + "/ticket"
+                assert (await client.get(endpoint + "/download", headers=reviewer)).status_code == 403
+                assert (await client.post(endpoint + "/ticket", headers=reviewer)).status_code == 403
+                result = await client.post(endpoint + "/ticket", headers=admin)
+                assert result.status_code == 200, result.text
+                cookie = result.cookies.get("tgwitness-download")
+                assert result.json()["url"] == endpoint + "/download"
+                assert "HttpOnly" in result.headers["set-cookie"] and "SameSite=strict" in result.headers["set-cookie"]
+                response = await native(app, result.json()["url"], cookie)
+                assert response.status_code == 200 and response.content == payload
+                assert "attachment" in response.headers["content-disposition"]
+                assert (await native(app, result.json()["url"], cookie)).status_code == 403
+
+            result = await client.post(prefix + "/ticket", headers=admin)
+            cookie = result.cookies.get("tgwitness-download")
+            assert (await native(app, prefix + "/disclosures/" + disclosure + "/download", cookie)).status_code == 403
+            child = await app.state.profiles.create("Synthetic account download boundary")
+            result = await client.post(prefix + "/ticket", headers=admin)
+            cookie = result.cookies.get("tgwitness-download")
+            assert (await native(app, "/profiles/" + child["id"] + prefix + "/download", cookie)).status_code == 403
+            assert (await native(app, prefix + "/download", cookie)).status_code == 200
+            await child_download_lifecycle(app, client, child, admin, payload)
+
+            # Authorization may be revoked while a request waits for a panel
+            # operation. Both ticket creation and lease acquisition recheck it.
+            for action, method in (("ticket", "POST"), ("download", "GET")):
+                temporary, _ = app.state.access.login(app.state.vault.token, "127.0.0.1", "Queued download")
+                waiting_at_lock = asyncio.Event()
+                acquire = app.state.operation_lock.acquire
+
+                async def tracked_acquire():
+                    waiting_at_lock.set()
+                    return await acquire()
+
+                async with app.state.operation_lock:
+                    with patch.object(app.state.operation_lock, "acquire", tracked_acquire):
+                        pending = asyncio.create_task(client.request(method, prefix + "/" + action,
+                            headers={"Authorization": "Bearer " + temporary}))
+                        await asyncio.wait_for(waiting_at_lock.wait(), 5)
+                    principal = app.state.access.resolve(temporary, "127.0.0.1")
+                    app.state.access.end(principal.session_id, "Revoked while waiting for operation")
+                response = await pending
+                assert response.status_code == 403, (action, response.text)
+                assert not app.state.account_downloads
+
+            # The download lease starts before response bytes. Neither the source
+            # nor its sharing copies can disappear while any such response is active.
+            started, release = asyncio.Event(), asyncio.Event()
+
+            async def slow(scope, receive, send):
+                async def held(message):
+                    if message["type"] == "http.response.start":
+                        started.set()
+                        await release.wait()
+                    await send(message)
+                await app(scope, receive, held)
+
+            removed = AsyncMock(return_value={"deleted": True})
+            with patch.object(app.state.account_export, "remove", removed):
+                async with httpx.AsyncClient(transport=httpx.ASGITransport(app=slow), base_url="http://127.0.0.1") as downloader:
+                    pending = asyncio.create_task(downloader.get(prefix + "/disclosures/" + disclosure + "/download", headers=admin))
+                    await asyncio.wait_for(started.wait(), 5)
+                    assert (await client.delete(prefix)).status_code == 409
+                    removed.assert_not_awaited()
+                    release.set()
+                    assert (await pending).content == payload
+                    assert (await client.delete(prefix)).status_code == 200
+                    removed.assert_awaited_once()
+
+                    # Aborting a response releases the lease without deleting the archive.
+                    started.clear()
+                    release.clear()
+                    pending = asyncio.create_task(downloader.get(prefix + "/download", headers=admin))
+                    await asyncio.wait_for(started.wait(), 5)
+                    pending.cancel()
+                    try:
+                        await pending
+                    except asyncio.CancelledError:
+                        pass
+                    assert archive.read_bytes() == payload
+                    assert (await client.delete(prefix)).status_code == 200
+
+            result = await client.post(prefix + "/ticket", headers=admin)
+            cookie = result.cookies.get("tgwitness-download")
+            principal = app.state.access.resolve(session, "127.0.0.1")
+            app.state.access.end(principal.session_id, "Synthetic revocation")
+            assert (await native(app, prefix + "/download", cookie)).status_code == 403
+            assert archive.read_bytes() == payload
+
+
+async def child_download_lifecycle(app, client, profile, admin, payload):
+    child = app.state.profiles.entries[profile["id"]]["app"]
+    archive = child.state.store.root / "synthetic-child-export.zip"
+    archive.write_bytes(payload)
+    prefix = "/profiles/" + profile["id"] + "/api/account-export/" + "c" * 32
+    disclosure = prefix + "/disclosures/" + "d" * 32
+    started, release = asyncio.Event(), asyncio.Event()
+    original = app_module.RetainedDownload.__call__
+
+    async def held(response, scope, receive, send):
+        # Hold after the route acquired its lease, before FileResponse opens the
+        # archive. Deleting the workspace here used to remove the download source.
+        started.set()
+        await release.wait()
+        return await original(response, scope, receive, send)
+
+    with patch.object(child.state.account_export, "result_path", return_value=archive), \
+            patch.object(child.state.account_export, "public", return_value={"archive_sha256": hashlib.sha256(payload).hexdigest()}), \
+            patch.object(child.state.disclosures, "result_path", return_value=archive):
+        child.state.closing = True
+        try:
+            for endpoint in (prefix, disclosure):
+                assert (await client.post(endpoint + "/ticket", headers=admin)).status_code == 503
+                assert (await client.get(endpoint + "/download", headers=admin)).status_code == 503
+            assert not child.state.account_downloads
+        finally:
+            child.state.closing = False
+        with patch.object(app_module.RetainedDownload, "__call__", held):
+            pending = asyncio.create_task(client.get(disclosure + "/download", headers=admin))
+            await asyncio.wait_for(started.wait(), 5)
+            try:
+                response = await client.delete("/api/profiles/" + profile["id"])
+                assert response.status_code == 400 and "active downloads" in response.text, response.text
+                assert archive.read_bytes() == payload and child.state.account_downloads
+                assert not child.state.closing
+            finally:
+                release.set()
+            assert (await pending).content == payload
+        assert not child.state.account_downloads
+        assert (await client.delete("/api/profiles/" + profile["id"])).status_code == 200
+        assert not archive.exists()
 
 
 def grant_session(app, workspaces=None, permissions=None):
@@ -287,6 +437,7 @@ async def download_lifetime():
 
 async def main():
     await tickets()
+    await account_tickets()
     await research_scope()
     await local_demo()
     await download_lifetime()

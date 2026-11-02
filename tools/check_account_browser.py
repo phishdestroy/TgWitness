@@ -346,7 +346,7 @@ def main():
         open_settings()
         page.locator("#profile-select").select_option("default")
         expect(page.locator("#authorized-state")).to_be_visible()
-        page.locator("#change-account").click()
+        page.locator("#account-add-another").click()
         choose_method("files")
         if page.locator("#entry-settings").get_attribute("aria-expanded") == "true": page.locator("#entry-settings").click()
         page.locator("#session-file").set_input_files([
@@ -465,6 +465,20 @@ def main():
             connect = page.locator("#auth-continue").bounding_box()
             assert connect["y"] >= 0 and connect["y"] + connect["height"] < 844, (width, connect)
         scenarios.append("file-import submit stays visible with fallback font metrics at 320/390px")
+        # Adding another account has the longest heading. Its title gets the
+        # whole mobile row rather than wrapping beside the three header actions.
+        page.evaluate("setAuthStep('authorized')")
+        page.locator('#account-add-another').click()
+        for width in (390, 320):
+            page.set_viewport_size({'width': width, 'height': 844})
+            check_layout(page)
+            heading = page.locator('.connection-simple > .page-heading').bounding_box()
+            title = page.locator('#account-heading').bounding_box()
+            connect = page.locator('#auth-continue').bounding_box()
+            assert title['width'] >= heading['width'] - 1, (width, heading, title)
+            assert 0 <= connect['y'] and connect['y'] + connect['height'] < 844, (width, connect)
+            page.screenshot(path=str(output / ('add-another-' + str(width) + '.png')))
+        scenarios.append('add-another mobile heading and connect action fit 320/390px with fallback fonts')
         assert not errors and not outbound, {"errors":errors,"outbound":outbound}
         receipt = {"passed":True,"scenarios":scenarios,"page_errors":errors,"external_requests":outbound}
         (output / "receipt.json").write_text(json.dumps(receipt,indent=2),encoding="utf-8")

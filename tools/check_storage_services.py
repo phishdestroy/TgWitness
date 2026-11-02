@@ -265,11 +265,98 @@ async def lifecycle_checks():
         assert not app.state.storage.lock.locked()
 
 
+async def storage_destination_checks(base):
+    ws = Workspace(base / "destination-change")
+    app = FastAPI()
+
+    async def authenticate():
+        return SimpleNamespace(admin=True)
+
+    app.state.storage, app.state.store, app.state.vault = ws.manager, ws.store, ws.vault
+    app.state.collector = SimpleNamespace(outside_route=lambda: NetworkConfig(kind="direct"))
+    storage_api.register(app, authenticate, lambda: None)
+    try:
+        old_recovery = ws.manager.recovery()
+        first, digest, original = ws.media(b"first attachment")
+        ws.media(b"second attachment")
+        ws.store.set_setting("storage", {**storage.settings(ws.store), "purpose": "copy"})
+        assert (await ws.manager.sync())["files"] == 2
+        old_settings = storage.settings(ws.store)
+        change = {**old_settings, "remote_path": "second-destination", "purpose": "offload",
+                  "batch_files": 1, "confirm_offload": True}
+        async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url="http://test") as client:
+            # An old receipt may be the only recovery path even when its evicted
+            # bit is false (external deletion, interrupted restore, corruption).
+            first.unlink()
+            response = await client.post("/api/storage", json=change)
+            assert response.status_code == 409 and "Restore" in response.text
+            first.write_bytes(b"corrupt original")
+            response = await client.post("/api/storage", json=change)
+            assert response.status_code == 409 and "recorded hash" in response.text
+            assert storage.settings(ws.store) == old_settings and ws.manager.public()["copied_files"] == 2
+            first.write_bytes(original)
+            response = await client.post("/api/storage", json=change)
+            assert response.status_code == 200, response.text
+            assert response.json()["copied_files"] == 0 and first.read_bytes() == original
+        # A partial first batch at the new destination must already have a usable
+        # recovery file, with no stale receipts from the previous destination.
+        assert (await ws.manager.sync())["files"] == 1
+        manifest = ws.manager.recovery()
+        assert len(manifest["objects"]) == 1
+        assert manifest["objects"][0]["destination"] == ws.manager.destination()
+        async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url="http://test") as client:
+            response = await client.post("/api/storage/recovery", json={"recovery": old_recovery})
+            assert response.status_code == 422 and "Restore" in response.text, response.text
+            assert storage.settings(ws.store)["remote_path"] == "second-destination"
+            assert ws.manager.public()["remote_files"] == 1
+            assert ws.manager.recovery()["objects"] == manifest["objects"]
+        with patch.object(storage.Storage, "backend", return_value=ws.remote):
+            restored = await storage.recover_directory(manifest, fingerprint(ws.vault.public_key),
+                ws.vault.read("storage")["config"], base / "new-destination-recovered", install_helper=False)
+        assert restored == {"restored": 1}
+    finally:
+        ws.close()
+
+    # Native S3 shares the replica settings endpoint, so the same guard is
+    # required there, not just in POST /api/storage.
+    from tools.check_session_reservations import workspace
+    async with workspace() as (app, client):
+        initial = {"endpoint": "https://old.example.invalid", "bucket": "old-bucket", "enabled": False,
+                   "access_key": "synthetic", "secret_key": "synthetic"}
+        assert (await client.post("/api/replica", json=initial)).status_code == 200
+        app.state.store.set_setting("storage", storage.Settings(backend="s3", purpose="offload", older_than_days=0).model_dump())
+        manager, remote = app.state.storage, Remote()
+        manager.backend = lambda config=None: remote
+        content = b"S3 attachment original"
+        digest = hashlib.sha256(content).hexdigest()
+        path = storage.safe_file(app.state.store.root, digest)
+        path.parent.mkdir(exist_ok=True)
+        path.write_bytes(content)
+        app.state.store.append("media.saved", {"media_sha256": digest}, chat_id=11, message_id=2)
+        assert (await manager.sync())["files"] == 1 and not path.exists()
+        changed = {**initial, "endpoint": "https://new.example.invalid", "bucket": "new-bucket"}
+        response = await client.post("/api/replica", json=changed)
+        assert response.status_code == 409 and "Restore" in response.text, response.text
+        assert app.state.store.get_setting("replica")["bucket"] == "old-bucket"
+        assert manager.public()["remote_files"] == 1
+        # Credential rotation at the same destination preserves its recovery path.
+        response = await client.post("/api/replica", json={**initial, "secret_key": "synthetic-rotated"})
+        assert response.status_code == 200 and manager.public()["remote_files"] == 1
+        await manager.restore(digest)
+        assert path.read_bytes() == content
+        async with manager.lock:
+            assert (await client.post("/api/replica", json=changed)).status_code == 409
+        response = await client.post("/api/replica", json=changed)
+        assert response.status_code == 200 and manager.public()["copied_files"] == 0
+        assert path.read_bytes() == content
+
+
 async def bot_and_alert_checks(base):
     ws = Workspace(base / "bot")
     try:
         collector = SimpleNamespace(status=lambda: {"running": True, "connected": True}, stop=AsyncMock(), start=AsyncMock())
-        state = SimpleNamespace(store=ws.store, vault=ws.vault, collector=collector, storage=ws.manager, replica_wakeup=asyncio.Event())
+        state = SimpleNamespace(store=ws.store, vault=ws.vault, collector=collector, storage=ws.manager,
+                                replica_wakeup=asyncio.Event(), operation_lock=asyncio.Lock())
         bot = operator_bot.OperatorBot(state)
         cfg = {"enabled": True, "chat_id": "-42", "user_ids": [7], "commands": "status"}
         ws.store.set_setting("operator_bot", cfg)
@@ -290,6 +377,26 @@ async def bot_and_alert_checks(base):
         ws.store.set_setting("operator_bot", {**cfg, "commands": "manage"})
         assert "Done" in await bot.handle(message()) and collector.stop.await_count == 1
         assert await bot.handle(message()) is None, "Control command cooldown bypassed"
+
+        bot.cooldown.clear()
+        async with state.operation_lock:
+            waiting = asyncio.create_task(bot.handle(message("/resume")))
+            await asyncio.sleep(0)
+            assert not collector.start.await_count, "Bot resumed while a panel operation held the connection"
+            assert not waiting.done()
+        assert "Done" in await waiting and collector.start.await_count == 1
+        for revoked in ("permissions", "token"):
+            bot.cooldown.clear()
+            ws.store.set_setting("operator_bot", {**cfg, "commands": "manage"})
+            async with state.operation_lock:
+                waiting = asyncio.create_task(bot.handle(message("/pause")))
+                await asyncio.sleep(0)
+                assert collector.stop.await_count == 1 and not waiting.done()
+                if revoked == "permissions":
+                    ws.store.set_setting("operator_bot", cfg)
+                else:
+                    ws.vault.save("operator_bot", {"token": "123:" + "r" * 30})
+            assert await waiting is None and collector.stop.await_count == 1, "Queued command survived access revocation"
 
         ws.store.set_setting("alerts", {"enabled": True, "daily": False, "problems": False, "completions": True})
         ws.vault.save("alerts", {"urls": ["jsons://synthetic.invalid/"]})
@@ -377,6 +484,54 @@ async def transport_checks(base):
         assert process.terminated and not Path(launched["args"][2]).exists()
     finally:
         ws.close()
+
+
+async def bot_reconfiguration_checks(base):
+    for change in ("token", "permissions"):
+        ws = Workspace(base / ("bot-change-" + change))
+        try:
+            cfg = {"enabled": True, "chat_id": "-42", "user_ids": [7, 8],
+                   "commands": "manage" if change == "token" else "status"}
+            ws.store.set_setting("operator_bot", cfg)
+            ws.vault.save("operator_bot", {"token": "123:" + "a" * 30})
+            collector = SimpleNamespace(status=lambda: {"running": True, "connected": True},
+                                        stop=AsyncMock(), start=AsyncMock())
+            bot = operator_bot.OperatorBot(SimpleNamespace(store=ws.store, vault=ws.vault,
+                                                           collector=collector, storage=ws.manager,
+                                                           operation_lock=asyncio.Lock()))
+            polls, next_offset = 0, None
+
+            def update(ident, text, user):
+                return {"update_id": ident, "message": {"text": text, "date": int(time.time()),
+                        "from": {"id": user}, "chat": {"id": -42}}}
+
+            async def call(method, payload, token=None):
+                nonlocal polls, next_offset
+                if method == "getUpdates":
+                    polls += 1
+                    if polls > 1:
+                        next_offset = payload["offset"]
+                        raise asyncio.CancelledError()
+                    return [update(10, "/status", 7), update(11, "/pause", 8)]
+                # Saving settings while the first reply awaits Telegram must
+                # invalidate the rest of the previously fetched update batch.
+                if change == "token":
+                    ws.vault.save("operator_bot", {"token": "456:" + "b" * 30})
+                    ws.store.set_setting("operator_bot_offset", 0)
+                else:
+                    ws.store.set_setting("operator_bot", {**cfg, "commands": "manage"})
+                await asyncio.sleep(0)
+                return {}
+
+            bot.call = call
+            try:
+                await bot.loop()
+            except asyncio.CancelledError:
+                pass
+            assert collector.stop.await_count == 0, "An old update acquired the replacement bot's policy"
+            assert next_offset == (0 if change == "token" else 11), "An old batch overwrote the replacement cursor"
+        finally:
+            ws.close()
 
 
 async def discord_and_handover_checks(base):
@@ -525,7 +680,9 @@ async def main():
         pure_checks(base)
         await offload_checks(base)
         await api_checks(base)
+        await storage_destination_checks(base)
         await bot_and_alert_checks(base)
+        await bot_reconfiguration_checks(base)
         await transport_checks(base)
         await discord_and_handover_checks(base)
         await lifecycle_checks()

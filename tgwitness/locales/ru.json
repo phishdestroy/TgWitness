@@ -5438,5 +5438,14 @@
 "Saved-copy cleanup is pending. Download this export now; prepare it again later to retry.": "Старые сохранённые копии пока заняты другой программой. Скачайте текущую выгрузку; позднее её можно подготовить заново.",
 "The prepared export could not be read. Prepare it again.": "Не удалось прочитать сохранённую выгрузку. Подготовьте её заново.",
 "Temporary export directory must belong to this workspace.": "Каталог временных выгрузок должен находиться в этом пространстве.",
-"This export was not retained for another download. Prepare it again.": "Эта выгрузка не сохранена для повторного скачивания. Подготовьте её заново."
+"This export was not retained for another download. Prepare it again.": "Эта выгрузка не сохранена для повторного скачивания. Подготовьте её заново.",
+"The selected sources changed. Review them again.": "Выбранные источники изменились. Просмотрите их ещё раз.",
+"Display masking does not change the original text sent to the model after approval.": "Маскирование в интерфейсе не меняет исходный текст, отправляемый модели после подтверждения.",
+"Restore all offloaded files before changing their storage destination.": "Перед сменой хранилища восстановите все выгруженные файлы.",
+"A local file differs from its recorded hash. Restore or repair it before changing the storage destination.": "Хеш локального файла не совпадает с сохранённым. Восстановите файл перед сменой хранилища.",
+"A local file could not be read. Keep its recovery receipt and retry before changing the storage destination.": "Не удалось прочитать локальный файл. Сохраните данные для его восстановления и повторите попытку перед сменой хранилища.",
+"This recovery file contains several storage destinations. Use the original recovery file for each destination.": "В этом файле восстановления указано несколько хранилищ. Используйте исходный файл восстановления для каждого хранилища.",
+"Wait for the active download to finish before removing this export.": "Прежде чем удалить выгрузку, дождитесь завершения её скачивания.",
+"Wait for the current storage operation to finish.": "Дождитесь завершения текущей операции с хранилищем.",
+"Finish active downloads before deleting this workspace.": "Дождитесь завершения скачиваний перед удалением этого пространства."
 }

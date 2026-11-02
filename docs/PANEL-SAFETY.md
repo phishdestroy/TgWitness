@@ -110,13 +110,29 @@ browser does not establish receipt. Check the browser's Downloads list.
 | `app.py`, `middleware.py`, `access.py` | Server validation, workspace identity, audited reveals and download authorization. |
 | `static/core/workspace-safety.js`, `static/workspace-safety.css`, `static/router.js` | Account header, URL ownership, mismatch blocking and cancelled navigation. |
 | `static/app.js`, `static/chat-safety.js`, `static/views/chats.css` | Read-only chat, named confirmations, history loading feedback and date layout. |
-| `static/privacy.js`, `static/views/chat-list.js` | Display masking and permanently masked list previews. |
-| `export_history.py`, `static/views/exports.js` | Retained exports, verified download copies, cache limits and retry feedback. |
+| `static/privacy.js`, `static/views/chat-list.js`, `static/analysis.js` | Display masking, permanently masked list previews and audited reveals in analysis previews. |
+| `export_history.py`, `downloads.py`, `static/views/exports.js` | Retained exports, verified download copies, active account-download leases, cache limits and retry feedback. |
 | `static/components/journal.js`, `static/core/time.js` | One event numbering scheme and plain missing-data labels. |
 | `locales/ru.json`, `english_fallbacks.json` | Russian copy and explicit English fallback for other languages. |
 
 Paths in this table are relative to `tgwitness/`. `tools/run_checks.py` includes
 the new regressions in the browser UX suite. The demo build includes the new assets.
+
+Repeat sign-in updates the existing account's session; **Add another account** creates
+a separate workspace. A history retry belongs to the chat where it failed and expires
+when that chat is left. Bot controls stay disabled until the previous action and its
+status refresh finish.
+
+Large account archives and sharing copies use a short-lived, one-use download cookie
+when the browser cannot stream to a chosen file. The server rechecks the original
+access session and account scope. The existing job archive is streamed directly;
+it is not duplicated into the prepared-export cache. Removing a job is blocked while
+its archive or sharing copy is actively downloading. Cancellation releases that block.
+
+Analysis sources, context, citations and the JSON transmission preview obey the same
+masking preference. The preview explicitly says that display masking does not redact
+the original text sent to a model after approval. Turning masking back on updates
+previously opened views too.
 
 ## Checks and visual artifacts
 

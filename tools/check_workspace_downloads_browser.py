@@ -4,6 +4,7 @@ import hashlib
 from pathlib import Path
 import sys
 import tempfile
+from unittest.mock import patch
 
 from playwright.sync_api import expect, sync_playwright
 
@@ -56,6 +57,30 @@ def main():
             page.locator('#workspace-context-alert button').click()
             expect(page.locator('#workspace-context-alert')).to_be_hidden()
             expect(page.locator('#profile-select')).to_have_value('default')
+
+            # A file-handle prompt can outlive the account where export was confirmed.
+            # Stop before making the old account's request, and close the stale writer.
+            page.evaluate("""()=>{window.reviewAbort=0;window.reviewResult=null;
+              window.showSaveFilePicker=async()=>({createWritable:()=>new Promise(resolve=>{
+                window.releaseReviewWriter=()=>resolve({write:async()=>{},close:async()=>{},
+                  abort:async()=>{window.reviewAbort++;}});})});
+              download('export/zip','stale.zip',true).then(ok=>window.reviewResult={ok},
+                error=>window.reviewResult={error:error.name});}""")
+            answer_panel_dialog(page)
+            page.wait_for_function('()=>typeof releaseReviewWriter===\'function\'')
+            page.evaluate('id=>switchProfile(id)',second)
+            stale_requests=[]
+            def track_stale(request):
+                if '/api/export/zip' in request.url:
+                    stale_requests.append(request.url)
+            page.on('request',track_stale)
+            page.evaluate('releaseReviewWriter()')
+            page.wait_for_function('()=>reviewResult!==null')
+            assert not stale_requests, stale_requests
+            assert page.evaluate('reviewAbort') == 1
+            assert page.evaluate('reviewResult.error') == 'StaleView'
+            page.remove_listener('request',track_stale)
+            page.evaluate("()=>switchProfile('default')")
 
             # A link change while the response is in flight must close an already-open file writer.
             original_url = page.url
@@ -110,6 +135,47 @@ def main():
             ticket = page.evaluate("id=>json('exports/'+id+'/ticket',{})", receipt['id'])
             assert page.request.get(server.url + ticket['url']).status == 200
             assert page.request.get(server.url + ticket['url']).status == 403
+
+            # Account archives and minimized disclosures can be larger than the
+            # browser's memory budget. Use their retained job files directly:
+            # cancel the fetch, request a scoped ticket and let the browser save.
+            job, disclosure = 'a' * 32, 'b' * 32
+            archive = Path(scratch) / 'synthetic-account.zip'
+            archive.write_bytes(b'Synthetic account export transport bytes\n' * (450 * 1024))
+            job_digest = hashlib.sha256(archive.read_bytes()).hexdigest()
+            store.set_setting('parameters', {'browser_buffer_mib': 16})
+            page.evaluate('refreshStatus()')
+            assert archive.stat().st_size > 16 * 1024**2
+            endpoints = ['account-export/' + job,
+                         'account-export/' + job + '/disclosures/' + disclosure]
+            with patch.object(server.app.state.account_export, 'result_path', return_value=archive), \
+                    patch.object(server.app.state.account_export, 'public', return_value={'archive_sha256': job_digest}), \
+                    patch.object(server.app.state.disclosures, 'result_path', return_value=archive):
+                for endpoint in endpoints:
+                    requested = []
+
+                    def track_ticket(request):
+                        if request.url.endswith('/' + endpoint + '/ticket'):
+                            requested.append(request)
+
+                    page.on('request', track_ticket)
+                    page.evaluate('window.showSaveFilePicker=undefined')
+                    with page.expect_download() as job_download:
+                        page.evaluate("""path=>{window.reviewResult=null;
+                          download(path+'/download','synthetic-account.zip',true).then(
+                            ok=>window.reviewResult={ok},error=>window.reviewResult={error:error.message});}""", endpoint)
+                        answer_panel_dialog(page)
+                    assert hashlib.sha256(Path(job_download.value.path()).read_bytes()).hexdigest() == job_digest
+                    page.wait_for_function('()=>reviewResult!==null')
+                    assert page.evaluate('reviewResult.ok'), page.evaluate('reviewResult')
+                    assert len(requested) == 1 and requested[0].method == 'POST'
+                    page.remove_listener('request', track_ticket)
+                    assert archive.is_file(), 'Native fallback must retain the finished job archive'
+                    assert page.request.get(server.url + '/api/' + endpoint + '/download').status == 403
+            # Native job downloads do not duplicate large files in prepared cache.
+            assert len(page.evaluate("async()=>(await json('exports/history')).exports")) == len(cases)
+            store.set_setting('parameters', {})
+            page.evaluate('refreshStatus()')
             for ws in ('../other', 'missing', second):
                 response = page.request.get(server.url + '/api/access?ws=' + ws,
                                             headers={'Authorization': 'Bearer ' + server.app.state.vault.token})
@@ -129,7 +195,7 @@ def main():
                 assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
             assert not errors, errors
             browser.close()
-    print(engine + ': workspace mismatch blocking, status ownership, file API fallbacks, retained hashes, repeat downloads and ticket isolation passed.')
+    print(engine + ': workspace mismatch blocking, status ownership, file API fallbacks, large account/disclosure downloads, retained hashes and ticket isolation passed.')
 
 
 if __name__ == '__main__':

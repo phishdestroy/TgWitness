@@ -1,10 +1,11 @@
 /* Local file inspection never starts a Telegram session. */
 (() => {
-  let inspection=null, pending=null, inspectionSerial=0, editing=false;
+  let inspection=null, pending=null, inspectionSerial=0, editing=false, intent='auto';
   const missing="No session — only application settings. Add a .session or TData file, or sign in by phone or QR.";
   const context=()=>({profile:state.profile,revision:state.workspaceRevision,selection:accountImportRevision});
   const current=c=>c.profile===state.profile&&c.revision===state.workspaceRevision&&c.selection===accountImportRevision&&!!state.token;
   const occupied=()=>!!state.status?.collector?.account;
+  const adding=()=>occupied()&&(intent==='add'||intent==='auto'&&accountSignedIn());
   function selected(){
     const files=[...$("session-file").files];
     return files.length?files:$("session-string").value.trim()?
@@ -14,7 +15,7 @@
     if(authMethod!=="files")return;
     const allowed=!!inspection?.result.can_connect&&current(inspection.owner);
     if(!$("auth-continue").hasAttribute("aria-busy"))$("auth-continue").disabled=!allowed;
-    $("auth-continue").textContent=tr(occupied()?"Create workspace and connect":"Connect account");
+    $("auth-continue").textContent=tr(adding()?"Create workspace and connect":"Connect account");
     if(!$("import-account").hasAttribute("aria-busy"))$("import-account").disabled=!!pending||!selected().length;
   }
   function render(result){
@@ -130,8 +131,8 @@
       toast(tr("Account connected in its new workspace."));
     }finally{authProgress("");}
   }
-  function clear(){inspectionSerial++;inspection=null;pending=null;editing=false;render({state:"empty",can_connect:false});}
-  function beginAdd(){editing=true;setAuthStep("credentials");setAuthMethod("files");renderAccount();$("session-file").focus();}
+  function clear(){inspectionSerial++;inspection=null;pending=null;editing=false;intent='auto';render({state:"empty",can_connect:false});}
+  function beginAdd(){editing=true;intent='add';setAuthStep("credentials");setAuthMethod("files");renderAccount();$("session-file").focus();}
   async function removeWorkspace(){
     const profile=state.profile,revision=state.workspaceRevision,p=state.profiles.find(entry=>entry.id===profile);
     if(!p||profile==="default")return;
@@ -155,21 +156,21 @@
     const heading=$("account-heading");
     if(account&&connected){
       const who=account.username?"@"+account.username:"ID "+account.id;
-      heading.textContent=tr(editing?(authMethod==="files"?"Add another account":"Sign in again"):"Connected: {who}",{who});
+      heading.textContent=tr(editing?(adding()&&authMethod==="files"?"Add another account":"Sign in again"):"Connected: {who}",{who});
       $("change-account").textContent=tr("Sign in again");
       $("sign-out").textContent=tr("Disconnect account");
       $("authorized-account").textContent=(account.username?"@"+account.username+" · ":"")+"ID "+account.id;
     }
     let note=$("import-new-workspace");
     if(!note){note=node("p","hint",tr("Another account gets a separate workspace."));note.id="import-new-workspace";$("import-details").prepend(note);}
-    note.hidden=!occupied();controls();
+    note.hidden=!adding();controls();
   }
   for(const id of ["tdata-passcode","session-string"]){
     $(id).addEventListener("input",()=>{if(authMethod==="files")inspect();});
   }
   for(const id of ["api-id","api-hash"])$(id).addEventListener("change",()=>{if(authMethod==="files"&&selected().length)inspect();});
-  window.TgWitnessAccountImport={inspect,read,connectNew,occupied,clear,renderAccount,beginAdd,
-    syncControls:controls,edit(){editing=true;},isEditing:()=>editing,methodChanged(){
+  window.TgWitnessAccountImport={inspect,read,connectNew,occupied,adding,clear,renderAccount,beginAdd,
+    syncControls:controls,edit(){editing=true;intent='renew';},isEditing:()=>editing,methodChanged(){
       if(authMethod==="files")inspect();
       else{inspectionSerial++;inspection=null;pending=null;render({state:"empty",can_connect:false});$("auth-continue").disabled=false;}
       renderAccount();

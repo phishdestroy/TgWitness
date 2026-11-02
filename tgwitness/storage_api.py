@@ -8,6 +8,7 @@ from fastapi.responses import Response
 from pydantic import BaseModel, Field
 
 from . import netclient, operator_bot, services, storage
+from .workers import complete_in_thread
 
 
 class Update(storage.Settings):
@@ -54,6 +55,10 @@ def register(app, authenticate, require_live):
     @app.post("/api/storage", dependencies=[Depends(admin)])
     async def set_storage(body: Update):
         idle()
+        async with app.state.storage.lock:
+            return await save_storage(body)
+
+    async def save_storage(body):
         manager, store, vault = app.state.storage, app.state.store, app.state.vault
         saved = body.model_dump(exclude={"rclone_config", "confirm_offload"})
         if saved["purpose"] == "offload" and not body.confirm_offload:
@@ -64,13 +69,7 @@ def register(app, authenticate, require_live):
                 storage.parse_config(body.rclone_config)
         except ValueError as exc:
             raise HTTPException(422, str(exc)) from None
-        if manager.public()["remote_files"] and (saved["backend"] != storage.settings(store)["backend"]
-                                                 or saved["remote_path"] != storage.settings(store)["remote_path"]):
-            raise HTTPException(409, "Restore offloaded files before changing their storage destination.")
         if body.rclone_config:
-            if (manager.public()["remote_files"] and secret.get("config")
-                    and manager.destination(saved, body.rclone_config) != manager.destination()):
-                raise HTTPException(409, "Restore offloaded files before changing their storage destination.")
             secret["config"] = body.rclone_config
         try:
             if saved["enabled"] and saved["backend"] == "rclone":
@@ -79,6 +78,14 @@ def register(app, authenticate, require_live):
                 storage.S3Backend(store, vault, app.state.collector.outside_route())
         except ValueError as exc:
             raise HTTPException(422, str(exc)) from None
+        try:
+            destination = manager.destination(saved, secret.get("config", ""))
+            obsolete = await complete_in_thread(manager.obsolete_copies, destination)
+        except ValueError as exc:
+            raise HTTPException(409, str(exc)) from None
+        # Retire only verified local copies before publishing new settings, so
+        # interruption cannot leave a mixed-destination recovery manifest.
+        manager.discard_copies(obsolete)
         vault.save("storage", secret)
         try:
             manager.key()
@@ -128,7 +135,8 @@ def register(app, authenticate, require_live):
     async def import_recovery(body: RecoveryImport):
         idle()
         try:
-            return app.state.storage.import_recovery(body.recovery)
+            async with app.state.storage.lock:
+                return await complete_in_thread(app.state.storage.import_recovery, body.recovery)
         except ValueError as exc:
             raise HTTPException(422, str(exc)) from None
 

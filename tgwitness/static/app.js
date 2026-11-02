@@ -2246,25 +2246,29 @@ async function download(path,filename,stream=false,root=false,body=undefined,pro
   current();
   if(handle){try{writer=await handle.createWritable();}catch{handle=null;}}
   let response;
-  try{response=await api(path,body,root?{root:true}:{profile});}
+  try{current();response=await api(path,body,root?{root:true}:{profile});}
   catch(error){await writer?.abort().catch(()=>{});throw error;}
   const expected=Number(response.headers.get("Content-Length")||0);
   const preparedId=response.headers.get('X-TgWitness-Export-ID');
+  const jobTicket=response.headers.get('X-TgWitness-Download-Ticket');
+  const ticketPath=preparedId?'exports/'+preparedId+'/ticket':jobTicket;
   const limit=(state.status?.parameters?.browser_buffer_mib||128)*1024*1024;
+  let nativeAttempted=false;
   async function nativeDownload(){
-    current();
-    const ticket=await json('exports/'+preparedId+'/ticket',{},root?{root:true}:{profile});current();
+    current();nativeAttempted=true;
+    const ticket=await json(ticketPath,{},root?{root:true}:{profile});current();
     const target=new URL(ticket.url,location.origin);
     if(target.origin!==location.origin)throw new Error(tr('The download address is invalid. Prepare the export again.'));
     const link=node('a');link.href=target.href;link.download=filename;document.body.append(link);link.click();link.remove();
     progress({phase:'browser',total:expected,expected});void exportsView?.load();
-    toast(tr('Download started. Check your browser’s downloads. The file is also in Prepared exports.'));return true;
+    toast(tr(preparedId?'Download started. Check your browser’s downloads. The file is also in Prepared exports.':
+      'Download started. Check your browser’s downloads.'));return true;
   }
   try{
     current();
     if(!writer&&expected>limit){
       await response.body?.cancel();
-      if(preparedId)return await nativeDownload();
+      if(ticketPath)return await nativeDownload();
       const error=new Error(tr('This file is too large for this browser. Use a browser with file streaming or download from the local command line.'));
       error.downloadHint=true;throw error;
     }
@@ -2288,8 +2292,9 @@ async function download(path,filename,stream=false,root=false,body=undefined,pro
   }catch(error){
     if(reader)await reader.cancel().catch(()=>{});else await response.body.cancel().catch(()=>{});
     if(writer)await writer.abort().catch(()=>{});
-    if(!(error instanceof StaleView)&&preparedId){current();return await nativeDownload();}
+    if(!(error instanceof StaleView)&&ticketPath&&!nativeAttempted){current();return await nativeDownload();}
     if(error instanceof StaleView)throw error;
+    if(nativeAttempted)throw error;
     if(error.downloadHint)throw error;
     throw new Error(tr('The browser could not save the file. Open Prepared exports and choose Download again.'));
   }
@@ -3790,7 +3795,7 @@ $("credentials-form").addEventListener("submit",e=>{e.preventDefault();busy(e.su
   }else if(method==="key"){
     if(!await loadAuthKey())return;
   }else{
-    if(window.TgWitnessAccountImport?.occupied()){await window.TgWitnessAccountImport.connectNew();return;}
+    if(window.TgWitnessAccountImport?.adding()){await window.TgWitnessAccountImport.connectNew();return;}
     if($("session-file").files.length){
       const imported=await loadAccountFiles();if(!imported)return;
     }
@@ -3982,6 +3987,7 @@ document.querySelectorAll("[data-demo-filter]").forEach(button=>button.addEventL
 })));
 function beginChat(id){
   $("export-dialog").close("cancel");
+  $("chat-history-feedback")?.remove();
   chatGeneration++;chatReady=false;state.chat=id;state.chatInfo=null;state.chatMessages=[];
   state.chatNextBefore=null;state.chatNextAfter=null;state.chatAuthor=null;state.chatProfile=null;
   state.chatView="messages";
@@ -4061,7 +4067,7 @@ function renderChat(){
   if(!info){renderChatEmpty();return;}
   show("chat-empty",false);show("chat-main",true);
   const title=info.title||tr("Chat {id}",{id:info.chat_id}),avatar=avatarNode(info.chat_id,title,"lg");avatar.id="chat-avatar";
-  $("chat-avatar").replaceWith(avatar);$("chat-name").textContent=title;
+  $("chat-avatar").replaceWith(avatar);$("chat-name").textContent=title;$("chat-name").title=title;
   const kind={supergroup:tr("Group"),megagroup:tr("Group"),group:tr("Group"),chat:tr("Group"),channel:tr("Channel"),broadcast:tr("Channel"),bot:tr("Bot"),user:tr("Private chat"),private:tr("Private chat")}[info.kind]||termText(info.kind);
   // The counters of /api/chats, with the definitions shared by the chat list and the notifications.
   const split=typeof info.deleted_saved==="number";
@@ -4436,7 +4442,7 @@ function buttonsNode(keyboard,message=null){
       if(target)item.append(node("code","target",window.TgWitnessPrivacy.preview(target)));
       if(chatSafety?.writable()&&may('interact')&&message&&!message.deleted&&!message.missing&&["callback","text"].includes(b.type)&&!state.status?.demo){
         const press=node("button","secondary small",tr("Press button"));press.type="button";
-        press.disabled=!state.status?.collector.has_session||!state.chatInfo?.enabled;
+        press.disabled=actionBusy||!chatReady||!state.status?.collector.has_session||!state.chatInfo?.enabled;
         press.addEventListener("click",()=>busy(press,async()=>{
           if(!chatReady||generation!==chatGeneration||revision!==state.workspaceRevision||chat!==state.chat)return;
           await panelAction({action:"press",chat_id:chat,message_id:message.message_id,
@@ -4463,6 +4469,7 @@ const chatSafety=window.TgWitnessChatSafety?.create({
 const pendingActions=new Map();
 function resetInteractions(){
   chatSafety?.reset();
+  $("chat-history-feedback")?.remove();
   composeContext=null;composeReply=null;composeOpen=false;linkPreview=null;
   chatGeneration++;chatReady=false;composeDestination=null;
   $("chat-message").value="";$("chat-link").value="";$("chat-link-preview").replaceChildren();
@@ -4486,6 +4493,7 @@ function renderComposer(){
   show("chat-compose",allowed&&composeOpen);
   composeDestination=enabled?{chat:state.chat,profile:state.profile,revision:state.workspaceRevision,generation:chatGeneration}:null;
   $("chat-send").disabled=!enabled||actionBusy;$("chat-message").disabled=!enabled||actionBusy;
+  for(const button of $("chat-feed").querySelectorAll(".msg-button button"))button.disabled=!enabled||actionBusy;
   $("chat-message").placeholder=tr("Write a message…");
   const account=s?.collector.account;
   const identity=account?(account.username?"@"+account.username:"ID "+account.id):tr("No account connected");
@@ -4624,18 +4632,19 @@ function mediaNode(media){
   return window.TgWitnessReview.attachment(media,{api,download,busy,tr});
 }
 async function loadHistory(button,limit){
-  const chat=state.chat,profile=state.profile,revision=state.workspaceRevision;
+  const chat=state.chat,profile=state.profile,revision=state.workspaceRevision,generation=chatGeneration;
+  const current=()=>profile===state.profile&&revision===state.workspaceRevision&&chat===state.chat&&generation===chatGeneration;
   const work=async()=>{
     toast(tr("Loading the last {n} messages from Telegram…",{n:limit}));
     try{
       const r=await json("snapshot",{chat_id:chat,limit},{profile});
-      if(profile!==state.profile||revision!==state.workspaceRevision||chat!==state.chat)return;
+      if(!current())return;
       $("chat-history-feedback")?.remove();
       toast(tr("Loaded {n} messages.",{n:r.captured}));await refreshStatus();await refreshChats();
     }catch(error){
-      if(profile!==state.profile||revision!==state.workspaceRevision||chat!==state.chat||error instanceof StaleView)return;
+      if(!current()||error instanceof StaleView)return;
       $("chat-history-feedback")?.remove();
-      const notice=viewState("error",tr("Could not load messages"),error.message,tr("Retry"),()=>loadHistory(null,limit));
+      const notice=viewState("error",tr("Could not load messages"),error.message,tr("Retry"),()=>current()?loadHistory(null,limit):undefined);
       notice.id="chat-history-feedback";$("chat-feed").before(notice);throw error;
     }
   };

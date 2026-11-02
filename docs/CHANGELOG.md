@@ -5,6 +5,14 @@
 - Run both panel regression suites on pull requests, including download checks in
   Firefox and WebKit. Release packages now wait for the exact revision's dependency,
   CodeQL and container audits; HIGH/CRITICAL container findings block publication.
+- Renew an imported session in its existing workspace, expire history retries when
+  leaving a chat, and keep bot controls disabled until the previous action finishes.
+  Analysis previews use audited secret masking without changing model input or exports.
+- Stream large account archives and sharing copies through one-use browser downloads;
+  block job deletion until active transfers finish. Reject stale commands after changing
+  the operator bot and serialize its start/stop commands with panel operations.
+- Validate local originals before changing storage destinations or importing older recovery
+  metadata, including native S3 settings. Recovery files cannot mix incompatible destinations.
 - Inspect account files before connecting: settings-only JSON cannot be imported as
   a session, paired files are checked together, and additional accounts get their
   own workspace. Connected accounts and typed-name deletion are visible on Account.

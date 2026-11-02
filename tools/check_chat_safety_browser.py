@@ -12,7 +12,7 @@ import requests
 from playwright.sync_api import expect, sync_playwright
 
 from tools.browser_fixtures import CHAT, SHOP_BOT, InteractionClient, message, offer, saved_session
-from tools.check_browser import RunningApp, launch_browser, unlock
+from tools.check_browser import RunningApp, hold_api_response, launch_browser, release_api_response, unlock
 
 
 class SafetyClient(InteractionClient):
@@ -114,13 +114,22 @@ def main():
             page.locator('[data-confirm-action="false"]').click()
             assert not actions
             page.locator('#chat-send').click()
+            # A receipt arrives before the subsequent chat refresh; block another write until both finish.
+            hold_api_response(page, '/api/chats')
             approve(page, remember=True)
             expect(page.locator('#interaction-result')).to_contain_text('Action completed')
             assert len(actions) == 1
-            page.locator('#msg-10 .msg-button', has_text='I paid').get_by_role('button').click()
+            expect(page.locator('html')).to_have_attribute('data-acceptance-held', 'true')
+            press = page.locator('#msg-10 .msg-button', has_text='I paid').get_by_role('button')
+            expect(press).to_be_disabled()
+            release_api_response(page)
+            expect(press).to_be_enabled()
+            press.click()
             expect(page.locator('#interaction-result')).to_contain_text('Recorded answer')
             assert len(actions) == 2
+            assert actions[-1]['action'] == 'press'
             expect(page.locator('dialog.chat-action-confirm')).to_have_count(0)
+            expect(press).to_be_enabled()
             page.evaluate('()=>{window.originalSafetyNow=Date.now;Date.now=()=>originalSafetyNow()+601000;}')
             page.locator('#msg-10 .msg-button', has_text='I paid').get_by_role('button').click()
             expect(page.locator('dialog.chat-action-confirm')).to_be_visible()
@@ -138,6 +147,16 @@ def main():
             page.locator('#chat-feed').get_by_role('button', name='Load last 100 messages').click()
             expect(page.locator('#chat-history-feedback')).to_contain_text('Could not load messages')
             assert snapshots[-1] == {'chat_id': CHAT, 'limit': 100}
+            # A retry belongs to the failed chat, including a queued click after removal.
+            stale_retry = page.locator('#chat-history-feedback').get_by_role('button', name='Retry').element_handle()
+            page.evaluate('(id)=>openChat(id)', SHOP_BOT)
+            expect(page.locator('#chat-history-feedback')).to_have_count(0)
+            stale_retry.evaluate('button=>button.click()')
+            page.evaluate('(id)=>openChat(id)', CHAT)
+            stale_retry.evaluate('button=>button.click()')
+            assert len(snapshots) == 1, 'A stale retry must not acquire history in another or reopened chat'
+            page.locator('#chat-feed').get_by_role('button', name='Load last 100 messages').click()
+            expect(page.locator('#chat-history-feedback')).to_contain_text('Could not load messages')
             page.unroute('**/api/snapshot')
             page.locator('#chat-history-feedback').get_by_role('button', name='Retry').click()
             expect(page.locator('#chat-feed .msg')).to_have_count(3)
@@ -146,7 +165,7 @@ def main():
             page.locator('#chat-load-history').click()
             expect(page.locator('#chat-load-history')).to_be_enabled()
             assert snapshots[-1] == {'chat_id': CHAT, 'limit': 100}
-            assert len(snapshots) == 3
+            assert len(snapshots) == 4
 
             # Fresh chat and reload return to read-only, regardless of remembered confirmation.
             page.evaluate('(id)=>openChat(id)', SHOP_BOT)

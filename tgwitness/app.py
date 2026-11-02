@@ -25,7 +25,7 @@ from . import __version__
 from .workers import complete_in_thread
 from .account_export import AccountExport, AccountExportOptions
 from .disclosure import Disclosures, DisclosurePolicy
-from .downloads import TemporaryDownload, build_file
+from .downloads import RetainedDownload, TemporaryDownload, build_file
 from .access import POLICY, AccessControl, AdminSettings, Console, GrantSettings, Refused, check as access_check
 from .collector import AUTHORIZATION_ERRORS, Collector
 from .demo import seed_demo
@@ -1881,6 +1881,13 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     @app.post("/api/replica", dependencies=[Depends(authenticate)])
     async def set_replica(body: ReplicaUpdate):
         require_live()
+        manager = app.state.storage
+        if manager.lock.locked() or (manager.task and not manager.task.done()):
+            raise HTTPException(409, "Wait for the current storage operation to finish.")
+        async with manager.lock:
+            return await save_replica(body)
+
+    async def save_replica(body):
         store, vault = app.state.store, app.state.vault
         secrets = dict(vault.read("replica"))
         if body.access_key or body.secret_key:
@@ -1890,7 +1897,15 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         settings = body.model_dump(exclude={"access_key", "secret_key"})
         if settings["enabled"] and not (settings["endpoint"] and settings["bucket"] and secrets.get("access_key")):
             raise HTTPException(422, "Enter the endpoint, bucket and access keys before turning the copy on.")
+        manager = app.state.storage
+        obsolete = []
+        if manager.public()["settings"]["backend"] == "s3":
+            try:
+                obsolete = await complete_in_thread(manager.obsolete_copies, manager.destination(replica_config=settings))
+            except ValueError as exc:
+                raise HTTPException(409, str(exc)) from None
         secrets.setdefault("key", base64.b64encode(secrets_token(32)).decode())
+        manager.discard_copies(obsolete)
         vault.save("replica", secrets)
         with store.transaction():
             store.set_setting("replica", settings)
@@ -2254,25 +2269,82 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     async def account_export_resume(export_id: str):
         return await operation(app.state.account_export.resume, export_id)
 
+    account_downloads = {}
+    app.state.account_downloads = account_downloads
+
     @app.delete("/api/account-export/{export_id}", dependencies=[Depends(authenticate)])
     async def account_export_remove(export_id: str):
-        if app.state.disclosures.busy(export_id):
-            raise HTTPException(409, "Wait for the disclosure package to finish before removing its source.")
-        return await operation(app.state.account_export.remove, export_id)
+        async def remove():
+            # operation holds op_lock; downloads acquire their lease under it too.
+            if account_downloads.get(export_id):
+                raise HTTPException(409, "Wait for the active download to finish before removing this export.")
+            if app.state.disclosures.busy(export_id):
+                raise HTTPException(409, "Wait for the disclosure package to finish before removing its source.")
+            return await app.state.account_export.remove(export_id)
+        return await operation(remove)
 
-    @app.get("/api/account-export/{export_id}/download", dependencies=[Depends(authenticate)])
-    async def account_export_download(export_id: str):
+    def account_download_path(export_id, disclosure_id=None):
         try:
-            path = app.state.account_export.result_path(export_id)
+            path = (app.state.disclosures.result_path(export_id, disclosure_id) if disclosure_id
+                    else app.state.account_export.result_path(export_id))
         except ValueError:
             path = None
         if not path:
-            raise HTTPException(404, "No finished account export is available.")
-        state = app.state.account_export.public(export_id)
-        headers = {"Cache-Control": "private, no-store"}
-        if state.get("archive_sha256"):
-            headers["ETag"] = '"' + state["archive_sha256"] + '"'
-        return FileResponse(path, filename="tgwitness-account-export.zip", media_type="application/zip", headers=headers)
+            raise HTTPException(404, "No finished disclosure is available." if disclosure_id else
+                                "No finished account export is available.")
+        return path
+
+    async def account_job_ticket(request, export_id, disclosure_id=None):
+        async with op_lock:
+            if app.state.closing:
+                raise HTTPException(503, "This workspace is closing. Wait for it to finish.")
+            await identify_download(request, request.headers.get("authorization", "").partition(" ")[2])
+            account_download_path(export_id, disclosure_id)
+            target = f"account-export/{export_id}" + (f"/disclosures/{disclosure_id}" if disclosure_id else "")
+            return issue_download_ticket(request, target, target + "/download")
+
+    async def account_job_download(request, export_id, disclosure_id=None):
+        target = f"account-export/{export_id}" + (f"/disclosures/{disclosure_id}" if disclosure_id else "")
+        credential = await authorize_download(request, target)
+        async with op_lock:
+            if app.state.closing:
+                raise HTTPException(503, "This workspace is closing. Wait for it to finish.")
+            # Waiting for a concurrent job operation must not outlive revocation.
+            await identify_download(request, credential)
+            path = account_download_path(export_id, disclosure_id)
+            headers = {"Cache-Control": "private, no-store", "X-TgWitness-Download-Ticket": target + "/ticket"}
+            if not disclosure_id:
+                state = app.state.account_export.public(export_id)
+                if state.get("archive_sha256"):
+                    headers["ETag"] = '"' + state["archive_sha256"] + '"'
+            account_downloads[export_id] = account_downloads.get(export_id, 0) + 1
+            released = False
+
+            def release():
+                nonlocal released
+                if not released:
+                    released = True
+                    remaining = account_downloads.get(export_id, 1) - 1
+                    if remaining:
+                        account_downloads[export_id] = remaining
+                    else:
+                        account_downloads.pop(export_id, None)
+
+            try:
+                return RetainedDownload(path, release=release,
+                    filename="tgwitness-minimized-disclosure.zip" if disclosure_id else "tgwitness-account-export.zip",
+                    media_type="application/zip", headers=headers)
+            except BaseException:
+                release()
+                raise
+
+    @app.post("/api/account-export/{export_id}/ticket", dependencies=[Depends(authenticate)])
+    async def account_export_ticket(export_id: str, request: Request):
+        return await account_job_ticket(request, export_id)
+
+    @app.get("/api/account-export/{export_id}/download")
+    async def account_export_download(export_id: str, request: Request):
+        return await account_job_download(request, export_id)
 
     @app.post("/api/account-export/{export_id}/disclosure/preview", dependencies=[Depends(authenticate)])
     async def disclosure_preview(request: Request, export_id: str, body: DisclosurePolicy):
@@ -2302,16 +2374,13 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             except (ValueError, OSError, KeyError) as exc:
                 raise HTTPException(409, str(exc)) from None
 
-    @app.get("/api/account-export/{export_id}/disclosures/{disclosure_id}/download", dependencies=[Depends(authenticate)])
-    async def disclosure_download(export_id: str, disclosure_id: str):
-        try:
-            path = app.state.disclosures.result_path(export_id, disclosure_id)
-        except ValueError:
-            path = None
-        if not path:
-            raise HTTPException(404, "No finished disclosure is available.")
-        return FileResponse(path, filename="tgwitness-minimized-disclosure.zip", media_type="application/zip",
-                            headers={"Cache-Control": "private, no-store"})
+    @app.post("/api/account-export/{export_id}/disclosures/{disclosure_id}/ticket", dependencies=[Depends(authenticate)])
+    async def disclosure_ticket(export_id: str, disclosure_id: str, request: Request):
+        return await account_job_ticket(request, export_id, disclosure_id)
+
+    @app.get("/api/account-export/{export_id}/disclosures/{disclosure_id}/download")
+    async def disclosure_download(export_id: str, disclosure_id: str, request: Request):
+        return await account_job_download(request, export_id, disclosure_id)
 
     @app.post("/api/chat-export/start", dependencies=[Depends(authenticate)])
     async def chat_export_start(request: Request, body: ChatExport):
@@ -2496,14 +2565,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 raise HTTPException(403, 'This access has expired.') from None
             raise
 
-    @app.post("/api/exports/{export_id}/ticket", dependencies=[Depends(authenticate)])
-    async def export_ticket(export_id: str, request: Request):
-        from .export_history import locate
-        try:
-            async with export_lock:
-                await complete_in_thread(locate, app.state.store, export_id)
-        except ValueError as exc:
-            raise HTTPException(404, str(exc)) from None
+    def issue_download_ticket(request, target, api_path):
         now = time.monotonic()
         for key, value in list(prepared_tickets.items()):
             if value[0] < now:
@@ -2511,16 +2573,14 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         if len(prepared_tickets) >= 100:
             raise HTTPException(429, "Too many pending downloads. Retry in a minute.")
         ticket = secrets.token_urlsafe(32)
-        prepared_tickets[ticket] = (now + 120, export_id, request.headers.get("authorization", "").partition(" ")[2])
-        path = ("" if profile_id == "default" else "/profiles/" + profile_id) + "/api/exports/" + export_id + "/download"
-        response = Response(json.dumps({"url": path}), media_type="application/json")
+        prepared_tickets[ticket] = (now + 120, target, request.headers.get("authorization", "").partition(" ")[2])
+        path = ("" if profile_id == "default" else "/profiles/" + profile_id) + "/api/" + api_path
+        response = Response(json.dumps({"url": path}), media_type="application/json", headers={"Cache-Control": "no-store"})
         response.set_cookie("tgwitness-download", ticket, max_age=120, path=path, httponly=True,
                             samesite="strict", secure=request.url.scheme == "https")
         return response
 
-    @app.get("/api/exports/{export_id}/download")
-    async def export_again(export_id: str, request: Request):
-        from .export_history import download_copy, headers
+    async def authorize_download(request, target):
         if request.headers.get("authorization"):
             scheme, _, credential = request.headers['authorization'].partition(' ')
             if scheme.lower() != 'bearer':
@@ -2529,16 +2589,26 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             await authenticate(request, who)
         else:
             entry = prepared_tickets.pop(request.cookies.get("tgwitness-download", ""), None)
-            if not entry or entry[0] < time.monotonic() or entry[1] != export_id:
+            if not entry or entry[0] < time.monotonic() or entry[1] != target:
                 raise HTTPException(403, "This download link expired. Choose Download again in the panel.")
-            try:
-                credential = entry[2]
-                who = await identify_download(request, credential)
-                if who is None:
-                    raise Refused("This access has expired.")
-                access_check(who, profile_id, POLICY["GET /api/exports/{export_id}/download"], {})
-            except Refused as exc:
-                raise HTTPException(403, str(exc)) from None
+            credential = entry[2]
+            await identify_download(request, credential)
+        return credential
+
+    @app.post("/api/exports/{export_id}/ticket", dependencies=[Depends(authenticate)])
+    async def export_ticket(export_id: str, request: Request):
+        from .export_history import locate
+        try:
+            async with export_lock:
+                await complete_in_thread(locate, app.state.store, export_id)
+        except ValueError as exc:
+            raise HTTPException(404, str(exc)) from None
+        return issue_download_ticket(request, export_id, "exports/" + export_id + "/download")
+
+    @app.get("/api/exports/{export_id}/download")
+    async def export_again(export_id: str, request: Request):
+        from .export_history import download_copy, headers
+        credential = await authorize_download(request, export_id)
         receipt = {}
 
         def prepare_download():

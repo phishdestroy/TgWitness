@@ -197,6 +197,10 @@ class Receipts:
                 self.db.execute("INSERT OR REPLACE INTO objects VALUES (?,?,?)",
                                 (value["sha256"], json.dumps(value), int(evicted)))
 
+    def discard(self, digests):
+        with self.db:
+            self.db.executemany("DELETE FROM objects WHERE digest=?", ((digest,) for digest in digests))
+
     def close(self):
         self.db.close()
 
@@ -372,10 +376,10 @@ class Storage:
             return S3Backend(self.store, self.vault, self.network())
         return Rclone(self.store.root, self.vault.read("storage").get("config", ""), saved["remote_path"], self.network())
 
-    def destination(self, saved=None, remote_config=None):
+    def destination(self, saved=None, remote_config=None, replica_config=None):
         saved = saved or settings(self.store)
         if saved["backend"] == "s3":
-            values = replica.replica_settings(self.store)
+            values = replica_config if replica_config is not None else replica.replica_settings(self.store)
             identity = {k: values[k] for k in ("endpoint", "region", "bucket", "prefix", "path_style")}
         else:
             config = configparser.ConfigParser(interpolation=None)
@@ -385,6 +389,36 @@ class Storage:
                         if k in ("type", "host", "url", "endpoint", "root_folder_id", "team_drive", "drive_id", "user", "account")}
                         for section in config.sections()}
         return hashlib.sha256(canonical({"backend": saved["backend"], "folder": saved["remote_path"], "identity": identity})).hexdigest()
+
+    def obsolete_copies(self, destination):
+        """Check a destination change while the caller holds the storage lock.
+
+        Receipts describe one configured destination. Only discard an old copy's
+        receipt when its original bytes are safely present here; otherwise it may
+        be the only recovery path. Keep this read-only check separate from commit.
+        """
+        receipts = Receipts(self.store.root)
+        try:
+            obsolete = [row for row in receipts.rows() if row["destination"] != destination]
+        finally:
+            receipts.close()
+        for row in obsolete:
+            path = safe_file(self.store.root, row["sha256"])
+            try:
+                if not path.is_file():
+                    raise ValueError("Restore all offloaded files before changing their storage destination.")
+                if file_hash(path) != row["sha256"]:
+                    raise ValueError("A local file differs from its recorded hash. Restore or repair it before changing the storage destination.")
+            except OSError:
+                raise ValueError("A local file could not be read. Keep its recovery receipt and retry before changing the storage destination.") from None
+        return [row["sha256"] for row in obsolete]
+
+    def discard_copies(self, digests):
+        receipts = Receipts(self.store.root)
+        try:
+            receipts.discard(digests)
+        finally:
+            receipts.close()
 
     def key(self):
         secret = dict(self.vault.read("storage"))
@@ -660,6 +694,14 @@ class Storage:
         secret = dict(self.vault.read("storage"))
         if secret.get("key") and secret["key"] != value["key"]:
             raise ValueError("This workspace already has a different storage key. Recover into a separate folder with the recovery command.")
+        destinations = {row["destination"] for row in value["objects"]}
+        if len(destinations) > 1:
+            raise ValueError("This recovery file contains several storage destinations. Use the original recovery file for each destination.")
+        destination = next(iter(destinations), None) or self.destination(value["settings"],
+            replica_config=replica.ReplicaSettings.model_validate(value.get("s3", {})).model_dump())
+        # Import also changes the configured destination. A valid older recovery
+        # file must not strand newer, remote-only files missing from that file.
+        obsolete = self.obsolete_copies(destination)
         current = Receipts(self.store.root)
         try:
             # A receipt for the same plaintext may reference another destination;
@@ -668,6 +710,7 @@ class Storage:
                 existing = current.get(row["sha256"])
                 if existing and existing["object"] != row["object"] and existing["evicted"]:
                     raise ValueError("Restore the workspace's existing offloaded files before importing different receipts.")
+            current.discard(obsolete)
             secret["key"] = value["key"]
             self.vault.save("storage", secret)
             self.store.set_setting("storage", {**value["settings"], "enabled": False})

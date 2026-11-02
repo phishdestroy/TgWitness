@@ -71,6 +71,14 @@ def main():
             response = api.post("/api/auth/configure", json={"api_id": 123, "api_hash": "b" * 32,
                                                             "session": saved_session(b"o")})
             assert response.status_code == 200, response.text
+            previous_credentials = server.app.state.vault.read("credentials")
+            previous_key = server.app.state.vault.public_key
+            response = api.post("/api/auth/configure", json={"api_id": 456, "api_hash": "b" * 32,
+                                                            "session": saved_session(b"f")})
+            assert response.status_code == 400 and "different Telegram account" in response.text, response.text
+            assert server.app.state.vault.read("credentials") == previous_credentials
+            assert server.app.state.store.get_setting("account")["id"] == 44
+            assert server.app.state.vault.public_key == previous_key
             assert api.post("/api/auth/import/preview", json={"files": [settings]}).json()["state"] == "missing_session"
             assert api.post("/api/auth/import", json={"files": [settings]}).status_code == 422
         with sync_playwright() as playwright:
@@ -84,6 +92,31 @@ def main():
             expect(page.locator("#authorized-account")).to_contain_text("ID 44")
             expect(page.locator("#credentials-form")).not_to_be_visible()
             page.locator("#authorized-state").screenshot(path=str(output / "connected-account-card.png"))
+            # Renewing this account must stay in its existing journal. It is a
+            # separate intent from the Add another account wizard.
+            renewal_metadata = json.dumps({"api_id": 123, "api_hash": "b" * 32}).encode()
+            for expired, seed in ((False, b"r"), (True, b"s")):
+                if expired:
+                    server.app.state.collector.authorization_required = True
+                    server.app.state.collector.phase = "authorization_required"
+                    page.evaluate("async()=>{await refreshStatus();setAuthStep('credentials');}")
+                else:
+                    page.locator("#change-account").click()
+                page.locator('[data-auth-method="files"]').click()
+                page.locator("#session-file").set_input_files([
+                    browser_file("replacement.txt", saved_session(seed).encode()),
+                    browser_file("replacement.json", renewal_metadata)])
+                expect(page.locator("#import-result")).to_have_attribute("data-state", "ready")
+                expect(page.locator("#auth-continue")).to_have_text("Connect account")
+                expect(page.locator("#import-new-workspace")).to_be_hidden()
+                with page.expect_response(lambda response: response.url.endswith('/api/auth/configure')) as renewed:
+                    page.locator("#auth-continue").click()
+                assert renewed.value.status == 200, renewed.value.text()
+                expect(page.locator("#authorized-state")).to_be_visible()
+                assert len(server.app.state.profiles.entries) == 1
+                assert server.app.state.store.get_setting("account")["id"] == 44
+                assert server.app.state.vault.public_key == previous_key
+                assert server.app.state.vault.read("credentials")["session"] == saved_session(seed)
             page.locator("#account-add-another").click()
             expect(page.locator("#import-new-workspace")).to_be_visible()
             page.locator("#session-file").set_input_files(browser_file("research.json", metadata))
@@ -140,7 +173,7 @@ def main():
             page.locator("#import-result").screenshot(path=str(output / "missing-session-card-ru.png"))
             assert not errors, errors
             browser.close()
-    print("Import preflight: metadata-only blocked; paired sessions, TData and StringSession accepted; conflicts and damaged ZIP explained; connected account uses separate workspace; typed deletion passed.")
+    print("Import preflight: metadata-only blocked; paired sessions, TData and StringSession accepted; conflicts and damaged ZIP explained; session renewal preserves workspace and identity; adding accounts uses separate workspaces; typed deletion passed.")
 
 
 if __name__ == "__main__":
