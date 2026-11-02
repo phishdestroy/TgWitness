@@ -79,6 +79,7 @@ def check_rotation_streams(browser, server):
                     'Authorization': 'Bearer ' + old_session}).status == 200
                 page.wait_for_function('()=>operatorStream.resumed')
                 page.unroute('**/api/access/token')
+                page.evaluate('operatorStream.resumed=false')
                 page.locator('#panel-key-rotate').click()
                 answer_panel_dialog(page)
             expect(page.locator('#panel-key-result')).to_be_visible()
