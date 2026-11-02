@@ -20,8 +20,8 @@ INK, GOLD, MUTED = "#edf5fc", "#dfbd86", "#b5c7d9"
 
 
 def render(fonts, mobile=False):
-    width, height = (640, 458) if mobile else (1200, 330)
-    x = 44 if mobile else 52
+    width, height = (600, 466) if mobile else (1200, 330)
+    x = 36 if mobile else 52
     d = Drawing(fonts, width, height, TITLE)
     d.add(f'''<defs>
 <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
@@ -47,7 +47,7 @@ def render(fonts, mobile=False):
             ("true", 250, INK),
         ):
             d.text(text, x, y, 49, color, 700, -1.2)
-        d.text("— ours included.", 156, 250, 49, GOLD, 700, -1.2)
+        d.text("— ours included.", 148, 250, 49, GOLD, 700, -1.2)
         rule_y = 288
         lines = (
             "We preserve what the account saw,",
@@ -55,7 +55,7 @@ def render(fonts, mobile=False):
             "and hand you the verifier.",
         )
         for i, text in enumerate(lines):
-            d.text(text, x, 335 + i * 39, 30, MUTED, 500, -.2)
+            d.text(text, x, 337 + i * 42, 32, MUTED, 500, -.2)
     else:
         d.text("No signature makes a Telegram", x, 116, 54, INK, 700, -1.3)
         d.text("message true", x, 181, 54, INK, 700, -1.3)
