@@ -3196,7 +3196,21 @@
 "95e1d0096213c7e0ebf10ad2aa9e3d4053124d7ac4d33b31315ee6d36298dd19": "Bewahren Sie die Arbeitsnotizen des Teams unter <a href=\"CASE-BOARD.md\">Case Board</a> auf: Setzen Sie Lesezeichen für die Datensätze,\nauf die Sie sich verlassen, wie z. B. #146, #188 und #205, markieren Sie die genaue Zielzeichenfolge und\nspeichern Sie einen Ausschnitt jeder aufgezeichneten Aktion zwischen zwei Datensätzen oder innerhalb eines Zeitraums. Notizen\nund Statusmeldungen sind Meinungen des Teams mit einem eigenen signierten Verlauf; sie werden niemals zu\nBeobachtungen.",
 "1d0c311a2d5909d5834c6364f925786baa5115911e40acab677a3ac68f2e7a19": "<strong>Chats mehrerer Konten zeigen:</strong>\n    gemeinsam genutzte Quellen, die Konten, die diese beobachten, sowie\n    Unterbrechungen im verfügbaren Beobachtungszeitraum des Arbeitsbereichs (bis zu sieben Tage). <strong>Der Export mit N Konten</strong>\n    teilt den Export eines Kanals oder einer Supergruppe auf diese Konten auf und signiert ein Archiv.",
 "2a23324f2dd287797da5dcf11a5b85aa360d54790975d37969d09e0010c00dde": "Bewahren Sie die Arbeitsnotizen des Teams auf <a href=\"CASE-BOARD.md\">dem</a> <a href=\"CASE-BOARD.md\">Case Board</a> auf: Setzen Sie Lesezeichen für die Datensätze,\nauf die Sie sich stützen, wie z. B. #146, #188 und #205, markieren Sie die genaue Zielzeichenfolge und\nspeichern Sie einen Ausschnitt jeder aufgezeichneten Aktion zwischen zwei Datensätzen oder in einem Zeitbereich. Notizen\nund Statusangaben bewahren die Überprüfung durch das Team in einem eigenen, signierten Verlauf auf, der\nvon den Beobachtungen der Quelle getrennt identifizierbar ist.",
-"f76dd0dd4c84d67ddf836309e64d140e473dabc295fb877f79a84311c7a54326": "Quellenverknüpfte Lesezeichen, Zitate, Teamnotizen, Sammlungen, Revisionsverlauf und ausgewählte Datensätze, die mit der ZIP-Datei der Beweismittel abgeglichen wurden"
+"f76dd0dd4c84d67ddf836309e64d140e473dabc295fb877f79a84311c7a54326": "Quellenverknüpfte Lesezeichen, Zitate, Teamnotizen, Sammlungen, Revisionsverlauf und ausgewählte Datensätze, die mit der ZIP-Datei der Beweismittel abgeglichen wurden",
+"c7f0a9ab8fff5e04d0410bdac5557b72903de383ff114cdb4872262f8330fba6": "Entdecken Sie die Arbeitsabläufe",
+"67743e4532df805fcf26fc1c9537abccc692d1dcbf5ff93583e19d7d1b7dcf98": "Illustrierte Anleitungen",
+"6ab01216cc75d0d9ac538a8e8737ac65ac0ca49032ede0b5ed90b81bbafad08f": "Halten Sie Beobachtungen, wörtliche Zitate und Teamnotizen miteinander verknüpft.",
+"6b8d60c42094043cf64baf2e3fce8217bc7a1cf6f57ab609bd25e2db695ced32": "Wählen Sie das Material und eines von acht Berichtsdesigns aus.",
+"50dcc3b5a3cfa136b46ae753f936a250a9d6f255cb72e588458e0d05f4149c41": "Freigabekopie",
+"82fd4760a05734950724dc871167af82f9b5717adbc4f36a2847675ef93ceb6b": "Erstellen Sie einen signierten Auszug mit den Feldern, die der Empfänger benötigt.",
+"a63b524553823dde04288947a8dcd814401f311203dfe705ccce55f3206f01db": "Kontogruppen",
+"df32772bb09931d98c1f2b1afd0fbd6c5abcbef70024e52909f976c159e350d3": "Überprüfen Sie Konten gemeinsam und halten Sie deren Arbeitsbereiche getrennt.",
+"f9d8f61b7be93b9062de999c1d58145f63d9ebb5bc8cafd94bd53a0cab57a089": "Übersicht abspielen",
+"a5fd1d6f61d6031985cbe2c59522add9e057bb496dfe06688b6eb6c0b41ec249": "Nächster Arbeitsablauf",
+"ac6adf2e18e7918f4b3a107e3912370c0ceec9b19e3cd5615b17cbd617675877": "Wählen Sie eine Anleitung aus oder spielen Sie die Workflow-Illustrationen ab.",
+"6470af9bfc77294b3b204cbde47c78315a1c764e344a3281d355c5d441b9e8b2": "Probieren Sie die Beweisbeispiele aus <span aria-hidden=\"true\">↗</span>",
+"1773a0a72cc85a1462c6a95312bdb8506d9f403b544bc2cb25a4ff76f4488d45": "Alle Anleitungen anzeigen <span aria-hidden=\"true\">↓</span>",
+"093afb332d6e9393bc68c896dc4f201f0199a49f5e714ddfac70699bb49fe883": "Installieren und verbinden <span aria-hidden=\"true\">↗</span>"
 },
 "modes": {
 "modes.actions.body": "Vorschau-, Anforderungs- und Ergebnisbestätigungen sind signiert. Vor dem Drücken einer Schaltfläche ruft der Server die Nachricht erneut ab und lehnt eine geänderte Eingabe ab. Zurückgesendete Callback-Texte und URLs bleiben als aufgezeichneter Kontext erhalten.",
@@ -3885,6 +3899,10 @@
 "report studio design contents preview PDF HTML charts transcript": "Berichtsstudio-Design, Inhaltsvorschau, PDF, HTML, Diagramme, Transkript",
 "sharing copy minimized handover disclosure redaction privacy recipient verification": "Weitergabe, Textminimierung, Übergabe, Offenlegung, Schwärzung, Datenschutz, Empfängerüberprüfung",
 "The current collection model, multi-account workflows, exports and operational boundaries of TgWitness.": "Das aktuelle Erfassungsmodell, Workflows für mehrere Konten, Exporte und operative Grenzen von TgWitness.",
-"features product status collection accounts exports limits platform": "Funktionen, Produktstatus, Erfassung, Konten, Exporte, Beschränkungen, Plattform"
+"features product status collection accounts exports limits platform": "Funktionen, Produktstatus, Erfassung, Konten, Exporte, Beschränkungen, Plattform",
+"From Telegram records to a clear case.": "Von Telegram-Datensätzen zu einem klaren Fall.",
+"Learn to preserve Telegram records, build a Case Board, design signed reports, prepare sharing copies and manage account groups.": "Lernen Sie, wie Sie Telegram-Datensätze sichern, ein Case Board erstellen, signierte Berichte gestalten, Kopien zur Weitergabe vorbereiten und Kontogruppen verwalten.",
+"More ways to start": "Weitere Möglichkeiten für den Einstieg",
+"Work with saved messages and changes, connect your findings to their sources, and prepare signed files for review.": "Arbeiten Sie mit gespeicherten Nachrichten und Änderungen, verknüpfen Sie Ihre Erkenntnisse mit den jeweiligen Quellen und bereiten Sie signierte Dateien für die Überprüfung vor."
 }
 }

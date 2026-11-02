@@ -67,9 +67,9 @@ REFERENCE_GROUPS = (
 LABELS = {
     "licence_link": "MIT license", "operator_link": "Operator notice",
     "docs": "Documentation", "home": "Home", "skip": "Skip to content", "nav": "Guides",
-    "title": "Follow the message. Understand the evidence.",
-    "intro": "Get your first capture, explore how the proof works, then build the setup you need.",
-    "description": "Get your first capture, explore how the proof works, then build the setup you need.",
+    "title": "From Telegram records to a clear case.",
+    "intro": "Work with saved messages and changes, connect your findings to their sources, and prepare signed files for review.",
+    "description": "Learn to preserve Telegram records, build a Case Board, design signed reports, prepare sharing copies and manage account groups.",
     "search": "Search the documentation", "placeholder": "Try proxy, hash chain, token or witness…",
     "empty": "No matches. Try a shorter term or choose a page below.",
     "results": "Pages found:", "prompt": "Type a word to search the guides and the reference. Search stays in your browser.",

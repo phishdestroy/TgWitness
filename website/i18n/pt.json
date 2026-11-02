@@ -3292,7 +3292,21 @@
 "95e1d0096213c7e0ebf10ad2aa9e3d4053124d7ac4d33b31315ee6d36298dd19": "Mantenha as anotações de trabalho da equipe em <a href=\"CASE-BOARD.md\">Case Board</a>: marque como favoritos os registros\nnos quais você confia, como #146, #188 e #205, destaque a sequência de caracteres exata de destino e\nsalve um trecho de cada ação registrada entre dois registros ou em um intervalo de tempo. Anotações\ne status são opiniões da equipe com seu próprio histórico assinado; elas nunca se tornam\nobservações.",
 "1d0c311a2d5909d5834c6364f925786baa5115911e40acab677a3ac68f2e7a19": "<strong>Nas conversas de várias contas, é possível ver:</strong>\n    fontes compartilhadas, as contas que as observam e\n    interrupções no período de observação do espaço de trabalho disponível (até sete dias). <strong>A exportação com N contas</strong>\n    divide a exportação de um canal ou supergrupo entre elas e assina um único arquivo.",
 "2a23324f2dd287797da5dcf11a5b85aa360d54790975d37969d09e0010c00dde": "Mantenha as anotações de trabalho da equipe no <a href=\"CASE-BOARD.md\">Case Board</a>: marque os registros\nnos quais você se baseia, como #146, #188 e #205, destaque a sequência de caracteres de destino exata e\nsalve um trecho de cada ação registrada entre dois registros ou em um intervalo de tempo. As notas\ne os status mantêm a revisão da equipe em seu próprio histórico assinado, separadamente\nidentificável das observações de origem.",
-"f76dd0dd4c84d67ddf836309e64d140e473dabc295fb877f79a84311c7a54326": "Marcadores vinculados à fonte, citações, notas da equipe, coleções, histórico de revisões e registros selecionados verificados em relação ao arquivo ZIP de provas"
+"f76dd0dd4c84d67ddf836309e64d140e473dabc295fb877f79a84311c7a54326": "Marcadores vinculados à fonte, citações, notas da equipe, coleções, histórico de revisões e registros selecionados verificados em relação ao arquivo ZIP de provas",
+"c7f0a9ab8fff5e04d0410bdac5557b72903de383ff114cdb4872262f8330fba6": "Explore os fluxos de trabalho",
+"67743e4532df805fcf26fc1c9537abccc692d1dcbf5ff93583e19d7d1b7dcf98": "Guias ilustrados",
+"6ab01216cc75d0d9ac538a8e8737ac65ac0ca49032ede0b5ed90b81bbafad08f": "Mantenha as observações, citações exatas e notas da equipe interligadas.",
+"6b8d60c42094043cf64baf2e3fce8217bc7a1cf6f57ab609bd25e2db695ced32": "Escolha o material e um dos oito modelos de relatório.",
+"50dcc3b5a3cfa136b46ae753f936a250a9d6f255cb72e588458e0d05f4149c41": "Texto para compartilhamento",
+"82fd4760a05734950724dc871167af82f9b5717adbc4f36a2847675ef93ceb6b": "Prepare um extrato assinado com os campos de que o destinatário precisa.",
+"a63b524553823dde04288947a8dcd814401f311203dfe705ccce55f3206f01db": "Grupos de contas",
+"df32772bb09931d98c1f2b1afd0fbd6c5abcbef70024e52909f976c159e350d3": "Analise as contas em conjunto e mantenha suas áreas de trabalho separadas.",
+"f9d8f61b7be93b9062de999c1d58145f63d9ebb5bc8cafd94bd53a0cab57a089": "Visão geral do Play",
+"a5fd1d6f61d6031985cbe2c59522add9e057bb496dfe06688b6eb6c0b41ec249": "Próximo fluxo de trabalho",
+"ac6adf2e18e7918f4b3a107e3912370c0ceec9b19e3cd5615b17cbd617675877": "Escolha um guia ou assista às ilustrações dos fluxos de trabalho.",
+"1773a0a72cc85a1462c6a95312bdb8506d9f403b544bc2cb25a4ff76f4488d45": "Veja todos os guias <span aria-hidden=\"true\">↓</span>",
+"093afb332d6e9393bc68c896dc4f201f0199a49f5e714ddfac70699bb49fe883": "Instalar e conectar <span aria-hidden=\"true\">↗</span>",
+"6470af9bfc77294b3b204cbde47c78315a1c764e344a3281d355c5d441b9e8b2": "Experimente os exemplos de evidências <span aria-hidden=\"true\">↗</span>"
 },
 "modes": {
 "modes.actions.body": "Os recibos de pré-visualização, solicitação e resultado são assinados. Antes de um botão ser pressionado, o servidor busca a mensagem novamente e rejeita um teclado alterado. O texto e as URLs de retorno de chamada permanecem como contexto registrado.",
@@ -4033,6 +4047,10 @@
 "report studio design contents preview PDF HTML charts transcript": "design do Studio de Relatórios, pré-visualização do conteúdo, PDF, HTML, gráficos, transcrição",
 "sharing copy minimized handover disclosure redaction privacy recipient verification": "compartilhamento, texto, minimização, transferência, divulgação, supressão, privacidade, verificação do destinatário",
 "The current collection model, multi-account workflows, exports and operational boundaries of TgWitness.": "O modelo atual de coleta, fluxos de trabalho com múltiplas contas, exportações e limites operacionais do TgWitness.",
-"features product status collection accounts exports limits platform": "recursos status do produto coleta contas exportações limites plataforma"
+"features product status collection accounts exports limits platform": "recursos status do produto coleta contas exportações limites plataforma",
+"From Telegram records to a clear case.": "Dos registros do Telegram a um caso bem definido.",
+"Learn to preserve Telegram records, build a Case Board, design signed reports, prepare sharing copies and manage account groups.": "Aprenda a preservar registros do Telegram, criar um Case Board, elaborar relatórios assinados, preparar cópias para compartilhamento e gerenciar grupos de contas.",
+"More ways to start": "Mais maneiras de começar",
+"Work with saved messages and changes, connect your findings to their sources, and prepare signed files for review.": "Trabalhe com mensagens e alterações salvas, vincule suas descobertas às respectivas fontes e prepare arquivos assinados para revisão."
 }
 }

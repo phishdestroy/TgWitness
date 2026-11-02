@@ -3197,7 +3197,21 @@
 "95e1d0096213c7e0ebf10ad2aa9e3d4053124d7ac4d33b31315ee6d36298dd19": "Simpan nota kerja pasukan di <a href=\"CASE-BOARD.md\">Case Board</a>: tandakan halaman untuk rekod yang anda bergantung padanya, seperti #146, #188 dan #205, sorot rentetan destinasi tepat, dan simpan potongan setiap tindakan yang direkodkan antara dua rekod atau dalam julat masa. Nota dan status adalah pendapat pasukan dengan sejarah tersendiri yang disahkan; ia tidak pernah menjadi pemerhatian.",
 "1d0c311a2d5909d5834c6364f925786baa5115911e40acab677a3ac68f2e7a19": "<strong>Perbualan beberapa akaun lihat:</strong>\n    sumber yang dikongsi, akaun yang memerhatikannya dan\n    gangguan dalam tempoh pemerhatian ruang kerja tersedia (sehingga tujuh hari). <strong>Eksport dengan N akaun</strong>\n    membahagikan eksport saluran atau superkumpulan di antara mereka dan menandatangani satu arkib.",
 "2a23324f2dd287797da5dcf11a5b85aa360d54790975d37969d09e0010c00dde": "Simpan nota kerja pasukan di <a href=\"CASE-BOARD.md\">Case Board</a>: tandakan rekod yang anda gunakan, seperti #146, #188 dan #205, sorot rentetan destinasi yang tepat, dan simpan potongan setiap tindakan yang direkodkan antara dua rekod atau dalam julat masa. Nota dan status mengekalkan semakan pasukan dalam sejarah berasingan yang disahkan, boleh dikenal pasti secara berasingan daripada pemerhatian sumber.",
-"f76dd0dd4c84d67ddf836309e64d140e473dabc295fb877f79a84311c7a54326": "Penanda buku yang dipautkan kepada sumber, petikan, nota pasukan, koleksi, sejarah semakan dan rekod terpilih disemak menentang ZIP bukti"
+"f76dd0dd4c84d67ddf836309e64d140e473dabc295fb877f79a84311c7a54326": "Penanda buku yang dipautkan kepada sumber, petikan, nota pasukan, koleksi, sejarah semakan dan rekod terpilih disemak menentang ZIP bukti",
+"c7f0a9ab8fff5e04d0410bdac5557b72903de383ff114cdb4872262f8330fba6": "Terokai aliran kerja",
+"67743e4532df805fcf26fc1c9537abccc692d1dcbf5ff93583e19d7d1b7dcf98": "Panduan berilustrasi",
+"6ab01216cc75d0d9ac538a8e8737ac65ac0ca49032ede0b5ed90b81bbafad08f": "Pastikan pemerhatian, petikan tepat dan nota pasukan saling berkait.",
+"6b8d60c42094043cf64baf2e3fce8217bc7a1cf6f57ab609bd25e2db695ced32": "Pilih bahan dan salah satu daripada lapan reka bentuk laporan.",
+"50dcc3b5a3cfa136b46ae753f936a250a9d6f255cb72e588458e0d05f4149c41": "Salinan perkongsian",
+"82fd4760a05734950724dc871167af82f9b5717adbc4f36a2847675ef93ceb6b": "Sediakan ekstrak bertandatangan dengan medan yang diperlukan oleh penerima.",
+"a63b524553823dde04288947a8dcd814401f311203dfe705ccce55f3206f01db": "Kumpulan akaun",
+"df32772bb09931d98c1f2b1afd0fbd6c5abcbef70024e52909f976c159e350d3": "Semak akaun bersama dan jaga ruang kerja mereka berasingan.",
+"f9d8f61b7be93b9062de999c1d58145f63d9ebb5bc8cafd94bd53a0cab57a089": "Mainkan gambaran keseluruhan",
+"a5fd1d6f61d6031985cbe2c59522add9e057bb496dfe06688b6eb6c0b41ec249": "Aliran kerja seterusnya",
+"ac6adf2e18e7918f4b3a107e3912370c0ceec9b19e3cd5615b17cbd617675877": "Pilih panduan, atau mainkan ilustrasi aliran kerja.",
+"1773a0a72cc85a1462c6a95312bdb8506d9f403b544bc2cb25a4ff76f4488d45": "Layari semua panduan <span aria-hidden=\"true\">↓</span>",
+"093afb332d6e9393bc68c896dc4f201f0199a49f5e714ddfac70699bb49fe883": "Pasang dan sambungkan <span aria-hidden=\"true\">↗</span>",
+"6470af9bfc77294b3b204cbde47c78315a1c764e344a3281d355c5d441b9e8b2": "Cuba contoh bukti <span aria-hidden=\"true\">↗</span>"
 },
 "modes": {
 "modes.actions.body": "Kuitans preview, permintaan dan hasil ditandatangani. Sebelum butang ditekan, pelayan memuat semula mesej dan menolak papan kekunci yang diubah. Teks dan URL callback yang dikembalikan kekal sebagai konteks yang direkodkan.",
@@ -3886,6 +3900,10 @@
 "report studio design contents preview PDF HTML charts transcript": "reka bentuk studio laporan pratonton kandungan PDF HTML carta transkrip",
 "sharing copy minimized handover disclosure redaction privacy recipient verification": "kongsi salinan meminimumkan pendedahan semasa penyerahan redaksi privasi pengesahan penerima",
 "The current collection model, multi-account workflows, exports and operational boundaries of TgWitness.": "Model pengumpulan semasa, aliran kerja berbilang akaun, eksport dan sempadan operasi TgWitness.",
-"features product status collection accounts exports limits platform": "ciri-ciri status produk pengumpulan akaun eksport had platform"
+"features product status collection accounts exports limits platform": "ciri-ciri status produk pengumpulan akaun eksport had platform",
+"From Telegram records to a clear case.": "Daripada rekod Telegram kepada kes yang jelas.",
+"Learn to preserve Telegram records, build a Case Board, design signed reports, prepare sharing copies and manage account groups.": "Belajar memelihara rekod Telegram, membina Papan Kes, mereka bentuk laporan bertandatangan, menyediakan salinan perkongsian dan mengurus kumpulan akaun.",
+"More ways to start": "Lebih banyak cara untuk memulakan",
+"Work with saved messages and changes, connect your findings to their sources, and prepare signed files for review.": "Bekerja dengan mesej yang disimpan dan perubahan, hubungkan penemuan anda kepada sumbernya, dan sediakan fail yang ditandatangani untuk semakan."
 }
 }

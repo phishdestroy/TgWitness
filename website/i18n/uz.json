@@ -3197,7 +3197,21 @@
 "95e1d0096213c7e0ebf10ad2aa9e3d4053124d7ac4d33b31315ee6d36298dd19": "<a href=\"CASE-BOARD.md\">Case Board</a>&#x27;da jamoaning ish yozuvlarini saqlang: ishonadigan yozuvlarni, masalan #146, #188 va #205 ni belgilab qo&#x27;ying, aniq manzil satrini ajratib ko&#x27;rsating va har bir qayd etilgan harakatdan ikki yozuv yoki vaqt oralig&#x27;i orasidagi bo&#x27;lakni saqlang. Eslatmalar va holatlar jamoa fikrlaridir va ularning o&#x27;z imzolangan tarixi bor; ular hech qachon kuzatuvlarga aylanmaydi.",
 "1d0c311a2d5909d5834c6364f925786baa5115911e40acab677a3ac68f2e7a19": "<strong>Suhbatlar bir nechta hisoblarni ko&#x27;rsatadi:</strong>\n    ulashilgan manbalar, ularni kuzatayotgan hisoblar va\n    mavjud ish maydoni-kuzatuv davrida (7 kungacha) uzilishlar. <strong>N ta hisob bilan eksport</strong>\n    kanal yoki superguruh eksportini ularga bo&#x27;lib beradi va bitta arxivni imzolaydi.",
 "2a23324f2dd287797da5dcf11a5b85aa360d54790975d37969d09e0010c00dde": "Jamoaning <a href=\"CASE-BOARD.md\">Case Board</a>&#x27;dagi ish yozuvlarini saqlang: #146, #188 va #205 kabi tayanadigan yozuvlarni belgilab qo&#x27;ying, aniq manzil satrini ajratib ko&#x27;rsating va har bir yozib olingan harakatning ikki yozuv orasidagi yoki vaqt oralig&#x27;idagi bo&#x27;lagini saqlang. Eslatmalar va holatlar jamoaning ko&#x27;rib chiqishini o&#x27;z imzolangan tarixida saqlaydi, ularni manba kuzatuvlaridan alohida aniqlash mumkin.",
-"f76dd0dd4c84d67ddf836309e64d140e473dabc295fb877f79a84311c7a54326": "Manbaga bog&#x27;langan belgilamalar, iqtiboslar, jamoa eslatmalari, to&#x27;plamlar, tahrir tarixi va tanlangan yozuvlar dalillar ZIP-fayliga solingan holda tekshiriladi"
+"f76dd0dd4c84d67ddf836309e64d140e473dabc295fb877f79a84311c7a54326": "Manbaga bog&#x27;langan belgilamalar, iqtiboslar, jamoa eslatmalari, to&#x27;plamlar, tahrir tarixi va tanlangan yozuvlar dalillar ZIP-fayliga solingan holda tekshiriladi",
+"c7f0a9ab8fff5e04d0410bdac5557b72903de383ff114cdb4872262f8330fba6": "Ish jarayonlarini o&#x27;rganing",
+"67743e4532df805fcf26fc1c9537abccc692d1dcbf5ff93583e19d7d1b7dcf98": "Illyustratsiyalangan qo&#x27;llanmalar",
+"6ab01216cc75d0d9ac538a8e8737ac65ac0ca49032ede0b5ed90b81bbafad08f": "Kuzatuvlar, aniq iqtiboslar va jamoa eslatmalarini bog&#x27;lab saqlang.",
+"6b8d60c42094043cf64baf2e3fce8217bc7a1cf6f57ab609bd25e2db695ced32": "Materialni va sakkizta hisobot dizaynidan birini tanlang.",
+"50dcc3b5a3cfa136b46ae753f936a250a9d6f255cb72e588458e0d05f4149c41": "Matnni ulashish",
+"82fd4760a05734950724dc871167af82f9b5717adbc4f36a2847675ef93ceb6b": "Qabul qiluvchiga kerak bo&#x27;lgan maydonlarni o&#x27;z ichiga olgan imzolangan qismini tayyorlang.",
+"a63b524553823dde04288947a8dcd814401f311203dfe705ccce55f3206f01db": "Hisob guruhlari",
+"df32772bb09931d98c1f2b1afd0fbd6c5abcbef70024e52909f976c159e350d3": "Hisoblarni birgalikda ko&#x27;rib chiqing va ularning ish maydonlarini alohida saqlang.",
+"f9d8f61b7be93b9062de999c1d58145f63d9ebb5bc8cafd94bd53a0cab57a089": "O&#x27;ynashni ko&#x27;rib chiqish",
+"a5fd1d6f61d6031985cbe2c59522add9e057bb496dfe06688b6eb6c0b41ec249": "Keyingi ish jarayoni",
+"ac6adf2e18e7918f4b3a107e3912370c0ceec9b19e3cd5615b17cbd617675877": "Qo&#x27;llanma tanlang yoki ish jarayoni illyustratsiyalarini ijro eting.",
+"1773a0a72cc85a1462c6a95312bdb8506d9f403b544bc2cb25a4ff76f4488d45": "Barcha qo&#x27;llanmalarni ko&#x27;rib chiqing <span aria-hidden=\"true\">↓</span>",
+"093afb332d6e9393bc68c896dc4f201f0199a49f5e714ddfac70699bb49fe883": "O&#x27;rnatish va ulanish <span aria-hidden=\"true\">↗</span>",
+"6470af9bfc77294b3b204cbde47c78315a1c764e344a3281d355c5d441b9e8b2": "Dalil misollarini sinab ko&#x27;ring <span aria-hidden=\"true\">↗</span>"
 },
 "modes": {
 "modes.actions.body": "Ko'rinish, so'rov va natija kvitansiyalari imzolanadi. Tugmani bosishdan oldin server xabarni qayta oladi va o'zgartirilgan klaviaturani rad etadi. Qaytarilgan callback matni va URL manzillari kontekstda qayd etilgan bo'lib qoladi.",
@@ -3886,6 +3900,10 @@
 "report studio design contents preview PDF HTML charts transcript": "hisobot studiyasi dizayni kontentini ko'rinish PDF HTML diagrammalar transkripti",
 "sharing copy minimized handover disclosure redaction privacy recipient verification": "nusxa ulashish topshirishni minimallashtirish oshkor etilishni kamaytirish qizil bilan o'chirish maxfiylik qabul qiluvchini tasdiqlash",
 "The current collection model, multi-account workflows, exports and operational boundaries of TgWitness.": "Joriy yig'ish modeli, ko'p hisobli ish jarayonlari, eksportlar va TgWitness'ning operatsion chegaralari.",
-"features product status collection accounts exports limits platform": "xususiyatlar mahsulot holati yig'ish hisoblari eksportlar cheklovlar platforma"
+"features product status collection accounts exports limits platform": "xususiyatlar mahsulot holati yig'ish hisoblari eksportlar cheklovlar platforma",
+"From Telegram records to a clear case.": "Telegram yozuvlaridan aniq ishga.",
+"Learn to preserve Telegram records, build a Case Board, design signed reports, prepare sharing copies and manage account groups.": "Telegram yozuvlarini saqlashni o'rganing, Case Board yarating, imzolangan hisobotlarni loyihalashni o'rganing, ulashish nusxalarini tayyorlang va hisob guruhlarini boshqaring.",
+"More ways to start": "Boshlashning ko'proq usullari",
+"Work with saved messages and changes, connect your findings to their sources, and prepare signed files for review.": "Saqlangan xabarlar va o'zgarishlar bilan ishlang, topilmalaringizni ularning manbalariga bog'lang va imzolangan fayllarni ko'rib chiqish uchun tayyorlang."
 }
 }

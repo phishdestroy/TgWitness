@@ -3197,7 +3197,21 @@
 "95e1d0096213c7e0ebf10ad2aa9e3d4053124d7ac4d33b31315ee6d36298dd19": "שמרו את הערות העבודה של הצוות ב-<a href=\"CASE-BOARD.md\">Case Board</a>: הוסיפו לסימניות את הרישומים\nעליהם אתם מסתמכים, כגון #146, #188 ו-#205, הדגישו את מחרוזת היעד המדויקת, ו\nשמרו קטע מכל פעולה שנרשמה בין שני רישומים או בטווח זמן מסוים. הערות\nוסטטוסים הם דעות של הצוות עם היסטוריה חתומה משלהם; הם לעולם לא הופכים\nלתצפיות.",
 "1d0c311a2d5909d5834c6364f925786baa5115911e40acab677a3ac68f2e7a19": "<strong>בצ&#x27;אטים של מספר חשבונות ניתן לראות:</strong>\n    מקורות משותפים, החשבונות העוקבים אחריהם ו\n    הפרעות בתקופת התצפית על סביבת העבודה הזמינה (עד שבעה ימים). <strong>ייצוא עם N חשבונות</strong>\n    מחלק את הייצוא של ערוץ או סופר-קבוצה ביניהם וחותם על ארכיון אחד.",
 "2a23324f2dd287797da5dcf11a5b85aa360d54790975d37969d09e0010c00dde": "שמרו את הערות העבודה של הצוות ב-<a href=\"CASE-BOARD.md\">Case Board</a>: הוסיפו סימניות לרשומות\nעליהן אתם מסתמכים, כגון #146, #188 ו-#205, הדגישו את מחרוזת היעד המדויקת, ו\nשמרו קטע מכל פעולה שנרשמה בין שתי רשומות או בטווח זמן מסוים. הערות\nומצבים שומרים את סקירת הצוות בהיסטוריה החתומה שלהם, הנפרדת\nוהניתנת לזיהוי מהתצפיות המקוריות.",
-"f76dd0dd4c84d67ddf836309e64d140e473dabc295fb877f79a84311c7a54326": "סימניות המקושרות למקור, ציטוטים, הערות צוות, אוספים, היסטוריית גרסאות ורשומות נבחרות נבדקות מול קובץ ה-ZIP של הראיות"
+"f76dd0dd4c84d67ddf836309e64d140e473dabc295fb877f79a84311c7a54326": "סימניות המקושרות למקור, ציטוטים, הערות צוות, אוספים, היסטוריית גרסאות ורשומות נבחרות נבדקות מול קובץ ה-ZIP של הראיות",
+"c7f0a9ab8fff5e04d0410bdac5557b72903de383ff114cdb4872262f8330fba6": "למדו על תהליכי העבודה",
+"67743e4532df805fcf26fc1c9537abccc692d1dcbf5ff93583e19d7d1b7dcf98": "מדריכים מאוירים",
+"6ab01216cc75d0d9ac538a8e8737ac65ac0ca49032ede0b5ed90b81bbafad08f": "יש לשמור על הקשר בין תצפיות, ציטוטים מדויקים והערות הצוות.",
+"6b8d60c42094043cf64baf2e3fce8217bc7a1cf6f57ab609bd25e2db695ced32": "בחרו את החומר ואת אחד משמונת עיצובי הדוחות.",
+"50dcc3b5a3cfa136b46ae753f936a250a9d6f255cb72e588458e0d05f4149c41": "שיתוף הטקסט",
+"82fd4760a05734950724dc871167af82f9b5717adbc4f36a2847675ef93ceb6b": "הכן תמצית חתומה הכוללת את השדות הדרושים למקבל.",
+"a63b524553823dde04288947a8dcd814401f311203dfe705ccce55f3206f01db": "קבוצות חשבונות",
+"df32772bb09931d98c1f2b1afd0fbd6c5abcbef70024e52909f976c159e350d3": "יש לעיין בחשבונות יחד ולשמור על הפרדה בין סביבות העבודה שלהם.",
+"f9d8f61b7be93b9062de999c1d58145f63d9ebb5bc8cafd94bd53a0cab57a089": "סקירת המשחק",
+"a5fd1d6f61d6031985cbe2c59522add9e057bb496dfe06688b6eb6c0b41ec249": "תהליך העבודה הבא",
+"ac6adf2e18e7918f4b3a107e3912370c0ceec9b19e3cd5615b17cbd617675877": "בחרו במדריך, או צפו באיורים הממחישים את תהליכי העבודה.",
+"1773a0a72cc85a1462c6a95312bdb8506d9f403b544bc2cb25a4ff76f4488d45": "עיין בכל המדריכים <span aria-hidden=\"true\">↓</span>",
+"093afb332d6e9393bc68c896dc4f201f0199a49f5e714ddfac70699bb49fe883": "התקנה וחיבור <span aria-hidden=\"true\">↗</span>",
+"6470af9bfc77294b3b204cbde47c78315a1c764e344a3281d355c5d441b9e8b2": "נסו את דוגמאות הראיות <span aria-hidden=\"true\">↗</span>"
 },
 "modes": {
 "modes.actions.body": "אישורי תצוגה מקדימה, בקשה ותוצאה חתומים. לפני לחיצה על כפתור, השרת משיג את ההודעה שוב ודוחה מקלדת ששונתה. טקסט ה-callback וה-URLs שהוחזרו נשארים בהקשר המוקלט.",
@@ -3886,6 +3900,10 @@
 "report studio design contents preview PDF HTML charts transcript": "תצוגה מקדימה של תוכן עיצוב הדוח ב-PDF, HTML, תרשימים ותמליל",
 "sharing copy minimized handover disclosure redaction privacy recipient verification": "שיתוף, עותק, צמצום, העברה, גילוי, עריכה, פרטיות, אימות נמען",
 "The current collection model, multi-account workflows, exports and operational boundaries of TgWitness.": "מודל האיסוף הנוכחי, תהליכי עבודה עם חשבונות מרובים, ייצוא ומגבלות תפעוליות של TgWitness.",
-"features product status collection accounts exports limits platform": "תכונות, מצב המוצר, איסוף, חשבונות, ייצוא, מגבלות, פלטפורמה"
+"features product status collection accounts exports limits platform": "תכונות, מצב המוצר, איסוף, חשבונות, ייצוא, מגבלות, פלטפורמה",
+"From Telegram records to a clear case.": "מרשומות Telegram לתיק ברור.",
+"Learn to preserve Telegram records, build a Case Board, design signed reports, prepare sharing copies and manage account groups.": "למדו כיצד לשמר רשומות Telegram, לבנות לוח תיקים (Case Board), לעצב דוחות חתומים, להכין עותקים לשיתוף ולנהל קבוצות חשבונות.",
+"More ways to start": "דרכים נוספות להתחיל",
+"Work with saved messages and changes, connect your findings to their sources, and prepare signed files for review.": "עבדו עם הודעות ושינויים שנשמרו, קישרו את הממצאים שלכם למקורותיהם, והכינו קבצים חתומים לבדיקה."
 }
 }

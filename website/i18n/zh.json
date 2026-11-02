@@ -3292,7 +3292,21 @@
 "95e1d0096213c7e0ebf10ad2aa9e3d4053124d7ac4d33b31315ee6d36298dd19": "在 <a href=\"CASE-BOARD.md\">Case Board</a> 上保存团队的工作笔记：将\n你依赖的记录（如 #146、#188 和 #205）添加到书签，突出显示确切的目标字符串，并\n保存两条记录之间或某个时间范围内每项记录操作的片段。笔记\n和状态是团队的观点，拥有各自经过签名的历史记录；它们绝不会成为\n观察结果。",
 "1d0c311a2d5909d5834c6364f925786baa5115911e40acab677a3ac68f2e7a19": "<strong>多个账户可见的聊天记录包括：</strong>\n    共享来源、正在查看这些记录的账户以及\n    可用工作区观察期间（最长七天）内的中断情况。<strong>使用 N 个账户进行导出时，</strong>\n    会将频道或超级群组的导出内容分配给这些账户，并为一个存档文件签名。",
 "2a23324f2dd287797da5dcf11a5b85aa360d54790975d37969d09e0010c00dde": "请将团队的工作笔记保存在<a href=\"CASE-BOARD.md\">“案件看板</a>”上：对您依赖的记录\n（如 #146、#188 和 #205）添加书签，突出显示确切的目标字符串，并\n保存两个记录之间或某个时间范围内所有记录操作的片段。 笔记\n和状态会将团队的审查记录保留在其各自的已签名历史记录中，可与\n源观察记录区分开来。",
-"f76dd0dd4c84d67ddf836309e64d140e473dabc295fb877f79a84311c7a54326": "与源文件关联的书签、引文、团队笔记、收藏集、修订历史以及选定记录均需与证据 ZIP 文件进行核对"
+"f76dd0dd4c84d67ddf836309e64d140e473dabc295fb877f79a84311c7a54326": "与源文件关联的书签、引文、团队笔记、收藏集、修订历史以及选定记录均需与证据 ZIP 文件进行核对",
+"c7f0a9ab8fff5e04d0410bdac5557b72903de383ff114cdb4872262f8330fba6": "探索工作流程",
+"67743e4532df805fcf26fc1c9537abccc692d1dcbf5ff93583e19d7d1b7dcf98": "图文指南",
+"6ab01216cc75d0d9ac538a8e8737ac65ac0ca49032ede0b5ed90b81bbafad08f": "请确保观察记录、原话引用和团队笔记保持关联。",
+"6b8d60c42094043cf64baf2e3fce8217bc7a1cf6f57ab609bd25e2db695ced32": "选择材料及八种报告设计之一。",
+"50dcc3b5a3cfa136b46ae753f936a250a9d6f255cb72e588458e0d05f4149c41": "共享文本",
+"82fd4760a05734950724dc871167af82f9b5717adbc4f36a2847675ef93ceb6b": "根据收件人的需求，准备一份包含所需字段的签名提取文件。",
+"a63b524553823dde04288947a8dcd814401f311203dfe705ccce55f3206f01db": "账户组",
+"df32772bb09931d98c1f2b1afd0fbd6c5abcbef70024e52909f976c159e350d3": "请共同审查账户，并保持其工作区相互独立。",
+"f9d8f61b7be93b9062de999c1d58145f63d9ebb5bc8cafd94bd53a0cab57a089": "播放概览",
+"a5fd1d6f61d6031985cbe2c59522add9e057bb496dfe06688b6eb6c0b41ec249": "下一个工作流程",
+"ac6adf2e18e7918f4b3a107e3912370c0ceec9b19e3cd5615b17cbd617675877": "选择一份指南，或观看工作流演示视频。",
+"1773a0a72cc85a1462c6a95312bdb8506d9f403b544bc2cb25a4ff76f4488d45": "浏览所有指南 <span aria-hidden=\"true\">↓</span>",
+"093afb332d6e9393bc68c896dc4f201f0199a49f5e714ddfac70699bb49fe883": "安装与连接 <span aria-hidden=\"true\">↗</span>",
+"6470af9bfc77294b3b204cbde47c78315a1c764e344a3281d355c5d441b9e8b2": "试用证据示例 <span aria-hidden=\"true\">↗</span>"
 },
 "modes": {
 "modes.actions.body": "预览、请求和结果回执均经过签名。在按下按钮之前，服务器会再次获取消息，并拒绝已更改的键盘输入。返回的回调文本和 URL 仍作为记录上下文保留。",
@@ -4033,6 +4047,10 @@
 "report studio design contents preview PDF HTML charts transcript": "报告工作室设计内容预览 PDF HTML 图表 文字记录",
 "sharing copy minimized handover disclosure redaction privacy recipient verification": "共享内容、最小化、移交、披露、删节、隐私、收件人验证",
 "The current collection model, multi-account workflows, exports and operational boundaries of TgWitness.": "TgWitness 的当前采集模型、多账户工作流、导出功能及操作边界。",
-"features product status collection accounts exports limits platform": "功能 产品状态 数据采集 账户 导出 限制 平台"
+"features product status collection accounts exports limits platform": "功能 产品状态 数据采集 账户 导出 限制 平台",
+"From Telegram records to a clear case.": "从 Telegram 记录到清晰的案件。",
+"Learn to preserve Telegram records, build a Case Board, design signed reports, prepare sharing copies and manage account groups.": "学习如何保存 Telegram 记录、构建“案件看板”、设计带签名的报告、准备共享副本以及管理账户组。",
+"More ways to start": "更多入门方式",
+"Work with saved messages and changes, connect your findings to their sources, and prepare signed files for review.": "处理已保存的消息及其变更，将调查结果与来源关联，并准备好已签名的文件以供审查。"
 }
 }
