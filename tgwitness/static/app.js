@@ -3461,6 +3461,13 @@ function renderConnection(){
   $("route-line-text").textContent=tr("Connection: {route}",{route:r.kind==="direct"||(auto&&!now)?route:route+" · "+(now||r).host+":"+(now||r).port});
   show("route-line",!state.status.demo);show("network-running",!state.status.demo&&c.running);
   renderSeenBy();
+  // Changing the route needs a pause: one button does both steps, after saying what pausing means.
+  if(!$("network-pause-change")){const b=node("button","secondary small",tr("Pause observation and change the route"));b.type="button";b.id="network-pause-change";
+    b.addEventListener("click",()=>busy(b,async()=>{
+      if(!(await askConfirm(tr("Pause observation to change the route? New messages, edits and deletion notices are not collected while paused, and an unfinished sign-in is cancelled when the route is saved."),{confirmText:tr("Pause observation")})))return;
+      await json("collector/stop",{});await refreshStatus();$("network-details").open=true;$("network-kind").focus();}));
+    $("network-running").append(b);}
+  $("network-pause-change").disabled=!may("collect");
   const fallback=r.fallback_to_direct?tr("Connected directly now: no listed proxy answers. A proxy is used again as soon as one does."):
     auto&&r.exposure==="fallback"?tr("Direct connection after {n} minutes without a working proxy.",{n:state.status.parameters?.proxy_fallback_minutes??10}):
     auto&&r.exposure==="tunnel"?tr("Direct connection while no proxy works."):tr("Direct fallback disabled.");
@@ -4184,7 +4191,7 @@ function messageRow(m,grouped,byId){
   if(!state.status?.demo&&state.status?.collector.has_session&&!m.deleted&&!m.missing&&may("interact")){const reply=node("button","text-link",tr("Reply"));reply.type="button";
     const generation=chatGeneration,revision=state.workspaceRevision;
     reply.addEventListener("click",()=>{if(!chatReady||generation!==chatGeneration||revision!==state.workspaceRevision)return;
-      composeReply=m.message_id;renderComposer();$("chat-message").focus();});meta.append(reply);}
+      composeReply=m.message_id;composeOpen=true;renderComposer();$("chat-message").focus();});meta.append(reply);}
   bubble.append(meta);row.append(bubble);return row;
 }
 let peopleRequest=0;
@@ -4390,11 +4397,11 @@ function buttonsNode(keyboard,message=null){
 }
 
 
-let composeContext=null,composeReply=null,linkPreview=null,actionBusy=false;
+let composeContext=null,composeReply=null,composeOpen=false,linkPreview=null,actionBusy=false;
 let chatGeneration=0,chatReady=false,composeDestination=null,chatPageRequest=0,chatPagePending=null;
 const pendingActions=new Map();
 function resetInteractions(){
-  composeContext=null;composeReply=null;linkPreview=null;
+  composeContext=null;composeReply=null;composeOpen=false;linkPreview=null;
   chatGeneration++;chatReady=false;composeDestination=null;
   $("chat-message").value="";$("chat-link").value="";$("chat-link-preview").replaceChildren();
   $("chat-search").value="";
@@ -4404,9 +4411,16 @@ function resetInteractions(){
 function renderComposer(){
   if(state.view!=='chats')return;
   const context=state.workspaceRevision+":"+chatGeneration+":"+state.profile+":"+state.chat;
-  if(composeContext!==context){$("chat-message").value="";composeReply=null;composeContext=context;show("interaction-result",false);}
+  if(composeContext!==context){$("chat-message").value="";composeReply=null;composeContext=context;composeOpen=false;show("interaction-result",false);}
   const s=state.status,enabled=!!(chatReady&&s&&!s.demo&&s.collector.has_session&&state.chatInfo?.enabled);
-  show("chat-compose",!!(state.chatView==='messages'&&s&&!s.demo&&s.collector.has_session&&may('interact')));
+  // Sending acts in the observed chat as this account: closed until asked for, with a warning, and off for Evidence.
+  const allowed=!!(state.chatView==='messages'&&s&&!s.demo&&s.collector.has_session&&may('interact')),evidence=s?.setup_goal==="evidence";
+  const account_=s?.collector.account,who=account_?(account_.username?"@"+account_.username:"ID "+account_.id):tr("this account");
+  show("chat-compose-toggle",allowed&&(!composeOpen||evidence));
+  $("chat-compose-open").textContent=evidence?tr("Sending is off for the Evidence for a case goal"):tr("Write as {account}",{account:who});
+  $("chat-compose-open").disabled=evidence;
+  $("chat-compose-warning").textContent=tr("Chat members will see this message, and the action is recorded in the signed journal.");
+  show("chat-compose",allowed&&composeOpen&&!evidence);
   composeDestination=enabled?{chat:state.chat,profile:state.profile,revision:state.workspaceRevision,generation:chatGeneration}:null;
   $("chat-send").disabled=!enabled||actionBusy;$("chat-message").disabled=!enabled||actionBusy;
   $("chat-message").placeholder=tr("Write a message…");
@@ -4459,6 +4473,8 @@ $("chat-compose").addEventListener("submit",e=>{e.preventDefault();const dest=co
   if(!dest||!chatReady||dest.generation!==chatGeneration||dest.chat!==state.chat||dest.revision!==state.workspaceRevision)return;
   busy($("chat-send"),()=>panelAction({action:"send",chat_id:dest.chat,text:$("chat-message").value,reply_to:composeReply},dest));});
 $("chat-reply-cancel").addEventListener("click",()=>{composeReply=null;renderComposer();});
+$("chat-compose-open").addEventListener("click",()=>{composeOpen=true;renderComposer();$("chat-message").focus();});
+$("chat-compose-close").addEventListener("click",()=>{composeOpen=false;composeReply=null;renderComposer();$("chat-compose-open").focus();});
 $("chat-link").addEventListener("input",()=>{linkPreview=null;$("chat-link-preview").replaceChildren();});
 $("chat-open-form").addEventListener("submit",e=>{e.preventDefault();busy($("chat-preview-button"),async()=>{
   const profile=state.profile,revision=state.workspaceRevision;linkPreview=null;$("chat-link-preview").replaceChildren();
