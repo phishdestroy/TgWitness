@@ -6,6 +6,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))["project"]["version"]
+CONTAINER_INPUTS = (
+    "deploy/containers/runtime.packages", "deploy/containers/media.packages", "deploy/containers/build.packages",
+    "deploy/containers/resolve-packages.sh", "deploy/containers/install-packages.sh",
+    *("deploy/containers/" + role + "-" + arch + ".lock"
+      for role in ("runtime", "media", "build") for arch in ("x86_64", "aarch64")),
+    "deploy/media-worker/build-tesseract.sh", "deploy/media-worker/tesseract.nfpm.yaml",
+    "deploy/media-worker/sources.lock.json",
+)
 FILES = [
     "tgwitness/client_profiles.LICENSE",
     "tgwitness/fonts/OFL.txt",
@@ -20,9 +28,10 @@ FILES = [
     "deploy/Dockerfile.sealed", "scripts/sealed_runner.py",
     "README.md", "docs/QUICKSTART.md", "LICENSE", "NOTICE", ".github/SECURITY.md", ".github/SUPPORT.md", ".github/CONTRIBUTING.md", "docs/CHANGELOG.md", "pyproject.toml",
     "start.py", "start.sh", "Start.cmd",
-    "deploy/Dockerfile", "compose.yaml", "deploy/compose/compose.image.yaml", "deploy/compose/compose.https.yaml", "deploy/compose/compose.witness.yaml", "deploy/compose/compose.proof.yaml", "deploy/compose/compose.proxies.yaml",
+    "deploy/Dockerfile", "compose.yaml", "deploy/compose/compose.image.yaml", "deploy/compose/compose.https.yaml", "deploy/compose/compose.witness.yaml", "deploy/compose/compose.proof.yaml", "deploy/compose/compose.proxies.yaml", "deploy/compose/compose.capture-panel.yaml",
     ".gitignore", ".gitattributes", ".dockerignore", "deploy/env.example", "deploy/constraints.txt", "deploy/requirements.lock", "deploy/build.lock",
     "deploy/audit.lock", "deploy/browser.lock", "deploy/mcp.lock", "deploy/site.lock",
+    *CONTAINER_INPUTS,
 ]
 FILES.extend("tgwitness/fonts/" + name for name in (
     "NotoSans-Regular.ttf", "NotoSans-Bold.ttf", "NotoSansMono-Regular.ttf",
@@ -43,7 +52,16 @@ FILES.extend("tools/tdx/" + name for name in (
     "intel-v4.quote.hex", "intel-v4.collateral.json", "intel-v5-td15ex.quote.hex", "intel-v5-td15ex.collateral.json",
     "intel-outdated.collateral.json", "dstack-v4.json", "dstack-v4.collateral.json",
 ))
+FILES.extend("addons/capture/" + name for name in (
+    "README.md", "pyproject.toml", "requirements.lock", "lock_from_project.py", "compose.yaml",
+    "config/browser.example.json", "config/ayugram.example.json",
+    "deploy/Dockerfile", "deploy/Dockerfile.neko", "deploy/Dockerfile.gateway",
+    "deploy/chromium.conf", "deploy/chromium-policy.json", "deploy/neko-start.sh", "deploy/upstream-proxy.example.conf",
+    "tests/conftest.py", "tests/test_capture.py", "tests/test_browser.py", "tests/test_video.py",
+    "tests/test_panel.py", "tests/test_witness.py", "tests/test_deployment.py", "tests/test_integration.py",
+))
 DIRECTORIES = {
+    "tgwitness_capture": {".py", ".html", ".css", ".js"},
     "tgwitness": {".md", ".py", ".html", ".css", ".js", ".svg", ".json"},
     "docs": {".md", ".png", ".webp", ".svg", ".txt", ".gif", ".mp4"}, "tools": {".py", ".md"},
     "deploy": {".md", ".ps1", ".service", ".example", ".docker"},
