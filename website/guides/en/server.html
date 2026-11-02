@@ -1,12 +1,4 @@
 <p class="guide-outcome">Keep the collector available and its data intact across restarts.</p>
-<h2 id="guided">Start on a clean Ubuntu server</h2>
-<p>Run the <a href="https://get.destroy.tools/">guided installer</a> as root:</p>
-<pre><code>curl -fsSL https://get.destroy.tools/install.sh | bash</code></pre>
-<p>Choose <strong>HTTPS link</strong> to get a trycloudflare.com address without a domain, <strong>My own domain</strong> for automatic HTTPS on your hostname, or <strong>This computer</strong> for loopback-only access. A domain needs DNS pointing at the server and open ports 80/443. The installer prints your address and access key after checking that the panel responds.</p>
-<pre><code>tgwitness open
-tgwitness status
-tgwitness logs</code></pre>
-<p>The system service runs after you close SSH and starts at boot. Use <code>tgwitness stop</code>, <code>start</code> or <code>restart</code> to control it. Data stays in the private directory printed at setup. Temporary tunnel addresses change after a tunnel restart; <code>tgwitness open</code> shows the current one.</p>
 <h2 id="launch">Choose a launch method</h2>
 <p>For a native installation, use the <a href="@@GUIDE_START@@">launcher</a> and the service examples in <a href="@@REPO_URL@@/blob/@@BRANCH@@/deploy/README.md">deploy/</a>. For Docker, install Docker with Compose and run from the project directory:</p>
 <pre><code>docker compose up -d --build --wait
