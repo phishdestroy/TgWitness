@@ -841,6 +841,9 @@ def evidence_pdf(data, context, events=None, certificate=None):
             if isinstance(selection, dict):
                 lay.kv([(str(k), ", ".join(map(str, v)) if isinstance(v, list) else str(v)) for k, v in selection.items()])
         titles = {str(c["chat_id"]): c["title"] for c in data["chats"] if c.get("title")}
+        if data.get("case_board"):
+            from . import board_report
+            board_report.pdf(lay, data["case_board"])
         if options.get("show_changes", True) and data["changes"]["messages"]:
             lay.section(say("Selected message histories") if filtered else say("Changed and deleted messages"),
                         say("Selected changes with saved message history. Versions outside the filters are marked as context.")
