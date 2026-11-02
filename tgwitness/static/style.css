@@ -470,6 +470,9 @@ footer a:hover { color: var(--text); text-decoration: underline; }
 .account-badge.sample { color: var(--accent-text); background: var(--accent-soft); }
 .notice.error { background: var(--danger-soft); border-color: var(--danger-border); color: var(--danger); }
 .notice.warning { background: var(--warning-soft); border-color: var(--warning-border); color: var(--warning); }
+.policy-warning { flex-wrap: wrap; align-items: center; }
+.policy-warning[hidden] { display: none; }
+.policy-warning p { flex: 1 1 100%; margin: 0; }
 .health-details { margin-left: auto; min-width: 0; max-width: 100%; }
 .health-details > summary {
   width: fit-content; max-width: 100%; margin-left: auto; min-height: 36px; padding: 7px 14px;
