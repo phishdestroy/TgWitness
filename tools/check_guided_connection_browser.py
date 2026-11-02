@@ -28,8 +28,17 @@ def main():
             page.locator('[data-connect-mode="direct"]').click()
             page.locator('#connect-preview').click()
             expect(page.locator('#connect-review')).to_contain_text('Direct')
+            failed_once=[]
+            def transient_failure(route):
+                if not failed_once:
+                    failed_once.append(True)
+                    route.fulfill(status=503, content_type='application/json', body='{"detail":"Temporary synthetic failure"}')
+                else:
+                    route.continue_()
+            page.route('**/api/connection', transient_failure)
             page.locator('#connect-prepare').click()
             expect(page.locator('#connect-apply')).to_be_visible(timeout=15000)
+            page.unroute('**/api/connection', transient_failure)
             expect(page.locator('#connect-review')).to_contain_text(CHECK['exit_ip'])
             assert server.app.state.collector.network_config().kind == 'mtproxy_auto'
             page.locator('#connect-apply').click()

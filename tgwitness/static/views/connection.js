@@ -13,7 +13,7 @@ export function createConnectionView({root, tr, json, state, refreshStatus, askC
     warp:tr('Run a local WARP tunnel for this account. TgWitness manages it inside its data folder using wgcf and wireproxy, an unofficial integration. No system VPN or driver is installed.'),
   };
   function status(text, error=false){get('connect-progress').textContent=text;get('connect-progress').classList.toggle('error',error);}
-  function invalidate(){draft=null;plan=null;get('connect-prepare').hidden=true;get('connect-apply').hidden=true;get('connect-review').replaceChildren();}
+  function invalidate(){draft=null;plan=null;status('');get('connect-prepare').hidden=true;get('connect-apply').hidden=true;get('connect-review').replaceChildren();}
   function choose(value){
     mode=value;invalidate();
     for(const button of root.querySelectorAll('[data-connect-mode]')){
@@ -93,7 +93,7 @@ export function createConnectionView({root, tr, json, state, refreshStatus, askC
       for(const button of root.querySelectorAll('[data-connect-mode="warp"],[data-connect-mode="vpn"]'))button.disabled=!result.supported;
       if(showJob(result.job))timer=setTimeout(load,1200);
       else if(result.job.state==='applied')await refreshStatus();
-    }catch(error){if(stamp===generation)status(error.message,true);}
+    }catch(error){if(stamp===generation&&visible){status(error.message,true);timer=setTimeout(load,5000);}}
   }
   async function action(button, fn){
     const stamp=generation;button.disabled=true;

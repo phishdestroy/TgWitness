@@ -43,6 +43,18 @@ async def main():
             assert process.returncode is None
             port = saved['network']['port']
             print('Authenticated loopback listener started; profile accepted by wireproxy', flush=True)
+            c.vault.save('portable_route', saved)
+            c.network_config = lambda: NetworkConfig.model_validate(saved['network'])
+            reused = await manager.prepare('vpn', text, False, lambda _: None)
+            assert reused == saved and len(manager.processes) == 1
+            try:
+                await manager.prepare('vpn', text.replace('10.0.0.2/32', '10.0.0.3/32'), False, lambda _: None)
+            except ValueError:
+                pass
+            else:
+                raise AssertionError('a second peer reused the active WireGuard key')
+            assert process.returncode is None
+            print('Rechecking reuses the selected tunnel; competing same-key profile refused', flush=True)
             # Simulate disappearance of the panel. The worker must reap wireproxy.
             process.stdin.close()
             await asyncio.wait_for(process.wait(), 10)

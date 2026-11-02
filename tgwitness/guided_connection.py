@@ -13,7 +13,7 @@ from telethon.sessions import StringSession
 
 from . import api_pool, netclient
 from .network import NetworkConfig, RoutePolicy
-from .portable_routes import PortableRoutes, target_platform, HASHES
+from .portable_routes import PortableRoutes, target_platform, HASHES, wireguard_profile
 
 
 class ConnectionDraft(BaseModel):
@@ -196,6 +196,14 @@ class GuidedConnection:
                     self.job.update(stage=stage, account=row["label"])
                 progress("Preparing connection")
                 if body.mode in ("warp", "vpn"):
+                    if body.mode == "vpn":
+                        key = wireguard_profile(body.wireguard)["interface"]["PrivateKey"]
+                        for other_id, entry in self.entries().items():
+                            other = entry.get("app")
+                            selected = other.state.connection.portable.selected() if other else None
+                            if (other_id != row["id"] and selected
+                                    and wireguard_profile(selected["profile"])["interface"]["PrivateKey"] == key):
+                                raise ValueError("Another account uses this WireGuard key. Give each account a separate VPN profile.")
                     item["managed"] = await portable.prepare(body.mode, body.wireguard, body.accept_setup, progress)
                     route = NetworkConfig.model_validate(item["managed"]["network"])
                 elif body.mode == "proxy":
@@ -214,8 +222,9 @@ class GuidedConnection:
             self.job.update(state="ready", stage="Review and apply", plan=self.plan["token"], expires_in=600)
         except BaseException as exc:
             for item in items:
-                if item.get("managed"):
-                    await item["app"].state.connection.portable.stop(item["managed"]["id"])
+                portable, managed = item["app"].state.connection.portable, item.get("managed")
+                if managed and portable.selected() != managed:
+                    await portable.stop(managed["id"])
             self.job = {"state": "failed", "stage": "Connection was not changed",
                         "error": str(exc) if isinstance(exc, ValueError) else "Connection check failed: " + type(exc).__name__}
             if isinstance(exc, asyncio.CancelledError):

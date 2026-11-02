@@ -18,10 +18,11 @@ import subprocess
 import sys
 import tarfile
 import tempfile
+import time
 from contextlib import suppress
 from pathlib import Path
-
-import httpx
+from urllib.parse import urlsplit
+from urllib.request import HTTPRedirectHandler, ProxyHandler, Request, build_opener
 
 from . import netclient
 from .network import NetworkConfig
@@ -48,6 +49,37 @@ HASHES = {
 }
 MAX_DOWNLOAD = 32 * 1024 * 1024
 CREATE_FLAGS = subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0
+
+
+def check_asset_url(url):
+    parts = urlsplit(url)
+    if (parts.scheme != "https" or parts.hostname not in {
+            "github.com", "release-assets.githubusercontent.com", "objects.githubusercontent.com"}
+            or parts.username or parts.password or parts.port not in (None, 443)):
+        raise ValueError("Tunnel helper download redirected outside the approved release hosts.")
+
+
+class ReleaseRedirect(HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        check_asset_url(newurl)
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+
+def fetch_asset(url):
+    """Bounded HTTPS download; setup explicitly opts into a direct connection."""
+    check_asset_url(url)
+    opener = build_opener(ProxyHandler({}), ReleaseRedirect())
+    content, started = bytearray(), time.monotonic()
+    with opener.open(Request(url, headers={"User-Agent": "TgWitness portable setup"}), timeout=20) as response:
+        while True:
+            if time.monotonic() - started > 120:
+                raise TimeoutError("Tunnel helper download timed out")
+            chunk = response.read(64 * 1024)
+            if not chunk:
+                return bytes(content)
+            content.extend(chunk)
+            if len(content) > MAX_DOWNLOAD:
+                raise ValueError("Tunnel helper download is too large.")
 
 
 def target_platform():
@@ -89,16 +121,9 @@ async def install_helper(root, tool, allow_download=False):
     if not cache.exists():
         if not allow_download:
             raise ValueError("Prepare the tunnel helpers in Connection before starting this route.")
-        content = bytearray()
-        async with httpx.AsyncClient(timeout=60, follow_redirects=True, trust_env=False) as client:
-            async with client.stream("GET", url) as response:
-                response.raise_for_status()
-                async for piece in response.aiter_bytes():
-                    content.extend(piece)
-                    if len(content) > MAX_DOWNLOAD:
-                        raise ValueError("Tunnel helper download is too large.")
-        binary_data(tool, bytes(content), expected, target.startswith("windows_"))
-        private_write(cache, bytes(content))
+        content = await asyncio.to_thread(fetch_asset, url)
+        binary_data(tool, content, expected, target.startswith("windows_"))
+        private_write(cache, content)
     if cache.stat().st_size > MAX_DOWNLOAD:
         raise ValueError("Tunnel helper download is too large.")
     executable = binary_data(tool, cache.read_bytes(), expected, target.startswith("windows_"))
@@ -184,6 +209,7 @@ class PortableRoutes:
         self.collector, self.vault = collector, collector.vault
         self.root = self.vault.root / "portable-routes"
         self.processes = {}
+        self.configs = {}
         self.lock = asyncio.Lock()
 
     def selected(self):
@@ -223,15 +249,29 @@ class PortableRoutes:
                     wireguard_profile(text)
                     self.vault.save("warp_profile", {"profile": text})
         profile = wireguard_profile(text)
-        with socket.socket() as sock:
-            sock.bind(("127.0.0.1", 0))
-            port = sock.getsockname()[1]
-        network = NetworkConfig(kind="socks5", host="127.0.0.1", port=port, local_proxy=True,
-                                username=secrets.token_hex(16), password=secrets.token_hex(24))
-        saved = {"id": secrets.token_hex(16), "mode": mode, "profile": text, "network": network.model_dump()}
-        progress("Starting the local tunnel")
-        await self.start(saved, executable=wireproxy, profile=profile)
-        return saved
+        async with self.lock:
+            # Two simultaneous WireGuard peers with one private key roam between
+            # endpoints and interrupt each other. Rechecking a selected route
+            # must reuse its listener, not silently start a competing peer.
+            selected = self.selected()
+            if selected and wireguard_profile(selected["profile"]) == profile and selected["mode"] == mode:
+                saved = {k: v for k, v in selected.items() if k != "paused"}
+                await self._start(saved, executable=wireproxy, profile=profile)
+                return saved
+            for identifier, known in self.configs.items():
+                process = self.processes.get(identifier)
+                previous = wireguard_profile(known["profile"])
+                if process and process.returncode is None and previous["interface"]["PrivateKey"] == profile["interface"]["PrivateKey"]:
+                    raise ValueError("A tunnel using this WireGuard key is already running. Stop it before changing its profile.")
+            with socket.socket() as sock:
+                sock.bind(("127.0.0.1", 0))
+                port = sock.getsockname()[1]
+            network = NetworkConfig(kind="socks5", host="127.0.0.1", port=port, local_proxy=True,
+                                    username=secrets.token_hex(16), password=secrets.token_hex(24))
+            saved = {"id": secrets.token_hex(16), "mode": mode, "profile": text, "network": network.model_dump()}
+            progress("Starting the local tunnel")
+            await self._start(saved, executable=wireproxy, profile=profile)
+            return saved
 
     async def start(self, saved, executable=None, profile=None):
         async with self.lock:
@@ -244,9 +284,15 @@ class PortableRoutes:
         current = self.processes.get(identifier)
         if current and current.returncode is None:
             return
+        profile = profile or wireguard_profile(saved["profile"])
+        for other, known in self.configs.items():
+            process = self.processes.get(other)
+            if (other != identifier and process and process.returncode is None
+                    and wireguard_profile(known["profile"])["interface"]["PrivateKey"] == profile["interface"]["PrivateKey"]):
+                raise ValueError("A tunnel using this WireGuard key is already running. Stop it before changing its profile.")
         executable = executable or await install_helper(self.root / "bin", "wireproxy")
         route = NetworkConfig.model_validate(saved["network"])
-        config = await runtime_config(profile or wireguard_profile(saved["profile"]), route)
+        config = await runtime_config(profile, route)
         path = self.root / (identifier + ".conf")
         private_write(path, config.encode())
         try:
@@ -256,6 +302,7 @@ class PortableRoutes:
                 "-s", "-c", str(path.resolve()), stdin=subprocess.PIPE, stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL, creationflags=CREATE_FLAGS)
             self.processes[identifier] = process
+            self.configs[identifier] = saved
             # Prove this is our authenticated listener, not just any process holding the port.
             for _ in range(50):
                 if process.returncode is not None:
@@ -300,6 +347,7 @@ class PortableRoutes:
             # The worker owns and terminates its child before exiting.
             await asyncio.wait_for(process.wait(), 10)
         self.processes.pop(identifier, None)
+        self.configs.pop(identifier, None)
         (self.root / (identifier + ".conf")).unlink(missing_ok=True)
 
     async def close(self):

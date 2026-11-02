@@ -232,6 +232,20 @@ class API(unittest.TestCase):
             vault=entry['app'].state.vault
             self.assertNotIn(KEY.encode(), (vault.root/'portable_route.enc').read_bytes())
 
+    def test_failed_check_does_not_stop_reused_selected_tunnel(self):
+        portable = self.app.state.connection.portable
+        route = NetworkConfig(kind='socks5',host='127.0.0.1',port=40001,local_proxy=True)
+        saved = {'id':'a'*32,'mode':'warp','profile':PROFILE,'network':route.model_dump()}
+        self.app.state.vault.save('network',route.model_dump())
+        self.app.state.vault.save('portable_route',saved)
+        self.probe.side_effect = ValueError('synthetic probe failure')
+        with patch.object(portable,'prepare',AsyncMock(return_value=saved)), \
+                patch.object(portable,'restore',AsyncMock()), patch.object(portable,'stop',AsyncMock()) as stop:
+            self.post('prepare', {'mode':'warp'})
+            self.assertEqual(self.wait_job()['state'],'failed')
+            stop.assert_not_awaited()
+        self.assertEqual(portable.selected(),saved)
+
 
 if __name__ == '__main__':
     unittest.main()
