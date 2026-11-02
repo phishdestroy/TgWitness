@@ -11,6 +11,11 @@ mkdir -p "$out"
 cache=$(mktemp -d)
 trap 'rm -rf "$cache"' EXIT HUP INT TERM
 
+# This digest-pinned Wolfi image ships the public Chainguard repository and keys.
+# Keep resolution and installation on that same authenticated package source.
+repository=https://apk.cgr.dev/chainguard
+test "$(awk 'NF && $1 !~ /^#/ {print $1}' /etc/apk/repositories)" = "$repository"
+cp /etc/apk/repositories "$out/$profile-$arch.repositories"
 # Repository signatures are checked by apk; no caller-supplied repository or key is used.
 apk update
 awk 'NF && $1 !~ /^#/ {print $1}' "$root/$profile.packages" > "$cache/roots"
@@ -20,8 +25,13 @@ cp "$root/$profile.packages" "$out/$profile-$arch.packages"
 awk '/^P:/ {name=substr($0,3)} /^V:/ {print name "=" substr($0,3)}' \
     /lib/apk/db/installed | sort > "$out/$profile-$arch.versions"
 mkdir "$cache/apks"
-apk fetch --recursive --output "$cache/apks" $(cat "$out/$profile-$arch.versions")
-for package in "$cache"/apks/*.apk; do apk verify "$package"; done
+# Download exactly the versions selected by the authenticated installation.
+# apk add --no-cache does not leave a repository index for a subsequent fetch.
+while IFS='=' read -r name version; do
+    package="$name-$version.apk"
+    wget -q -T 60 -O "$cache/apks/$package" "$repository/$arch/$package"
+    apk verify "$cache/apks/$package"
+done < "$out/$profile-$arch.versions"
 (
     cd "$cache/apks"
     sha256sum ./*.apk | sed 's|  ./|  |' | sort -k2
