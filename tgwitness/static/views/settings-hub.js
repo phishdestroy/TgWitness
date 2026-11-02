@@ -13,7 +13,7 @@ export function createSettingsHub(ctx) {
     parameters:'expert','system-log':'expert',integrations:'expert',sealed:'expert'};
   let data=null, prefs=null, draft=null, section=null, generation=0, connectionBusy=false, checkTimer=null, statusTimer=null;
   let dialogs=null, moved=[], query='', reveal=new Set(), editing=false;
-  let autoTried=false, routeDirty=false;
+  let autoTried=false, routeDirty=false, checkFailure=null;
   // After Start: the live check of the four collector parts. visited bounds browser Forward to steps already seen.
   let live=null, liveTimer=null, visited=0, recordedStep=null, shownSession=null;
   let groupScope=null;
@@ -325,7 +325,7 @@ export function createSettingsHub(ctx) {
     function updateRoutes(){routeBox.replaceChildren();cards(routeBox,routes,draft.route,async mode=>{
       const who=owner();
       if(connectionBusy)return;
-      draft.route=mode;draft.unchecked=false;routeDirty=true;
+      draft.route=mode;draft.unchecked=false;routeDirty=true;checkFailure=null;
       if(mode==='direct')draft.allow_direct=true;
       if(first)await saveDraft({step:4},who);requireOwner(who);updateRoutes();
       if(mode==='auto'||mode==='direct')await checkConnection(false,who);
@@ -348,7 +348,9 @@ export function createSettingsHub(ctx) {
     }
     updateRoutes();
     const status=node('div','connection-result');status.id='hub-connection-result';status.setAttribute('role','status');box.append(status);
-    paintConnection(data.connection);
+    if(connectionBusy){status.className='connection-result checking';status.textContent=tr('Checking connection…');}
+    else if(checkFailure&&!fresh(data.connection))connectionFailed(checkFailure);
+    else paintConnection(data.connection);
     if(first){const bypass=node('label','check-label');const check=node('input');check.type='checkbox';check.checked=!!draft.unchecked;
       check.onchange=()=>run(async()=>{const who=owner();draft.unchecked=check.checked;
         if(check.checked&&connectionBusy){checkSequence++;clearTimeout(checkTimer);await request(who,'connection/cancel',{});connectionBusy=false;}
@@ -357,7 +359,7 @@ export function createSettingsHub(ctx) {
   }
   async function checkConnection(acceptSetup=false,who=owner()){
     requireOwner(who);
-    if(connectionBusy)return;connectionBusy=true;updateNext();
+    if(connectionBusy)return;connectionBusy=true;checkFailure=null;updateNext();
     const profile=who.profile,attempt=++checkSequence;
     const currentAttempt=()=>current(who)&&checkSequence===attempt;
     const result=$('hub-connection-result');if(result){result.className='connection-result checking';result.textContent=tr('Checking connection…');}
@@ -384,7 +386,7 @@ export function createSettingsHub(ctx) {
       if(currentAttempt())checkTimer=setTimeout(safePoll,600);
     }catch(e){if(currentAttempt())connectionFailed(e);}
   }
-  function connectionFailed(error){connectionBusy=false;const box=$('hub-connection-result');if(box){box.className='connection-result failed';box.replaceChildren(message('Connection failed. Try WARP or your own proxy.'));
+  function connectionFailed(error){connectionBusy=false;checkFailure=error;const box=$('hub-connection-result');if(box){box.className='connection-result failed';box.replaceChildren(message('Connection failed. Try WARP or your own proxy.'));
     const details=node('details');details.append(node('summary','',tr('Technical details')),message(error.message));box.append(details);
     box.append(button('Try WARP',async()=>{draft.route='warp';if(state.view==='first-run')await renderWizard();else render();}),
       button('My proxy',async()=>{draft.route='proxy';if(state.view==='first-run')await renderWizard();else render();}),button('Check again',checkConnection));}updateNext();}
@@ -561,7 +563,7 @@ export function createSettingsHub(ctx) {
       if(state.view==='first-run'&&draft?.step===5&&!live&&shownSession!==null&&session!==shownSession)void renderWizard();
       shownSession=session;
     },
-    reset(){generation++;checkSequence++;clearTimeout(checkTimer);clearTimeout(statusTimer);clearTimeout(liveTimer);restoreMoved();data=prefs=draft=dialogs=null;live=null;groupScope=null;groupView.reset();visited=0;recordedStep=shownSession=null;connectionBusy=false;editing=false;autoTried=routeDirty=false;preferencesQueue=draftQueue=Promise.resolve();},
+    reset(){generation++;checkSequence++;clearTimeout(checkTimer);clearTimeout(statusTimer);clearTimeout(liveTimer);restoreMoved();data=prefs=draft=dialogs=null;live=null;groupScope=null;groupView.reset();visited=0;recordedStep=shownSession=null;connectionBusy=false;editing=false;autoTried=routeDirty=false;checkFailure=null;preferencesQueue=draftQueue=Promise.resolve();},
     async refreshPreferences(patch){if(prefs)await savePreferences(patch);},
   };
 }
