@@ -5675,5 +5675,22 @@
 "Validated time bound through record #{n}; {tail} later records are outside that bound.": "रिकॉर्ड #{n} के माध्यम से सत्यापित समय सीमा; {tail} बाद के रिकॉर्ड उस सीमा के बाहर हैं।",
 "Validated timestamp receipts": "प्रमाणित टाइमस्टैम्प रसीदें",
 "Verify the original ZIP with a trusted copy of verify.py and --fingerprint from a separate trusted channel. Keep the verification result with the unchanged ZIP.": "एक अलग विश्वसनीय चैनल से verify.py की विश्वसनीय प्रति और --fingerprint के साथ मूल ZIP सत्यापित करें। सत्यापन परिणाम को अपरिवर्तित ZIP के साथ रखें।",
-"Witnesses and collection environment": "गवाह और संग्रहण वातावरण"
+"Witnesses and collection environment": "गवाह और संग्रहण वातावरण",
+"<b>2</b> Design &amp; contents": "<b> 2</b> डिज़ाइन &amp; सामग्री",
+"A compact opening, key figures in one row and concise sections.": "एक संक्षिप्त आरंभ, प्रमुख आंकड़े एक ही पंक्ति में और संक्षिप्त अनुभाग।",
+"A familiar dossier with clear sections and a structured record.": "स्पष्ट अनुभागों और एक संरचित रिकॉर्ड वाला एक परिचित दस्तावेज़।",
+"A modular dashboard for comparing activity, people and sources.": "गतिविधि, लोगों और स्रोतों की तुलना के लिए एक मॉड्यूलर डैशबोर्ड।",
+"An open cover, prominent figures and a clear path through events.": "एक खुला आवरण, प्रमुख आकृतियाँ और घटनाओं के माध्यम से एक स्पष्ट मार्ग।",
+"Analytics": "एनालिटिक्स",
+"Choose how the report looks and what it includes.": "चुनें कि रिपोर्ट कैसी दिखेगी और इसमें क्या शामिल होगा।",
+"Classic": "क्लासिक",
+"Contents preset": "सामग्री प्रीसेट",
+"Design and contents": "डिज़ाइन और सामग्री",
+"Editorial": "संपादकीय",
+"Page layouts for HTML and PDF. Changing the design keeps your data, included sections and written notes.": "HTML और PDF के लिए पृष्ठ लेआउट। डिज़ाइन बदलने पर आपका डेटा, शामिल अनुभाग और लिखे हुए नोट्स बरकरार रहते हैं।",
+"Presets choose the sections below. They keep your design, data selection and written notes.": "प्रीसेट नीचे दिए गए अनुभागों को चुनते हैं। वे आपके डिज़ाइन, डेटा चयन और लिखे हुए नोट्स को बनाए रखते हैं।",
+"Report design": "रिपोर्ट डिज़ाइन",
+"Ruled tables, precise references and a compact register layout.": "रेखांकित तालिकाएँ, सटीक संदर्भ और एक संक्षिप्त रजिस्टर लेआउट।",
+"Serif headings, a quiet margin and space for longer explanations.": "सेरिफ़ शीर्षक, एक शांत मार्जिन और लंबी व्याख्याओं के लिए स्थान।",
+"Technical": "तकनीकी"
 }

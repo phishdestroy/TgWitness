@@ -5648,5 +5648,22 @@
 "Validated time bound through record #{n}; {tail} later records are outside that bound.": "Giới hạn thời gian đã được xác thực đến bản ghi số {n}; các bản ghi sau {tail} nằm ngoài giới hạn đó.",
 "Validated timestamp receipts": "Biên nhận dấu thời gian đã được xác thực",
 "Verify the original ZIP with a trusted copy of verify.py and --fingerprint from a separate trusted channel. Keep the verification result with the unchanged ZIP.": "Hãy xác minh tệp ZIP gốc bằng bản sao đáng tin cậy của tệp verify.py cùng tùy chọn --fingerprint từ một kênh đáng tin cậy riêng biệt. Lưu giữ kết quả xác minh cùng với tệp ZIP chưa bị thay đổi.",
-"Witnesses and collection environment": "Các nhân chứng và môi trường thu thập"
+"Witnesses and collection environment": "Các nhân chứng và môi trường thu thập",
+"<b>2</b> Design &amp; contents": "<b>2</b> Thiết kế &amp; nội dung",
+"A compact opening, key figures in one row and concise sections.": "Phần mở đầu gọn gàng, các số liệu chính được trình bày trên cùng một hàng và các phần nội dung súc tích.",
+"A familiar dossier with clear sections and a structured record.": "Một hồ sơ quen thuộc với các phần rõ ràng và cấu trúc tài liệu có tổ chức.",
+"A modular dashboard for comparing activity, people and sources.": "Một bảng điều khiển mô-đun để so sánh hoạt động, nhân sự và nguồn thông tin.",
+"An open cover, prominent figures and a clear path through events.": "Bìa mở, các số liệu nổi bật và lộ trình rõ ràng qua các sự kiện.",
+"Analytics": "Phân tích",
+"Choose how the report looks and what it includes.": "Hãy lựa chọn giao diện cũng như nội dung của báo cáo.",
+"Classic": "Classic",
+"Contents preset": "Cài đặt sẵn nội dung",
+"Design and contents": "Thiết kế và nội dung",
+"Editorial": "Biên tập",
+"Page layouts for HTML and PDF. Changing the design keeps your data, included sections and written notes.": "Bố cục trang cho HTML và PDF. Việc thay đổi thiết kế sẽ vẫn giữ nguyên dữ liệu, các phần được bao gồm và các ghi chú bằng văn bản của quý vị.",
+"Presets choose the sections below. They keep your design, data selection and written notes.": "Các cài đặt sẵn sẽ chọn các phần dưới đây. Chúng sẽ giữ nguyên thiết kế, lựa chọn dữ liệu và các ghi chú bằng văn bản của quý vị.",
+"Report design": "Thiết kế báo cáo",
+"Ruled tables, precise references and a compact register layout.": "Bảng có đường kẻ, các tham chiếu chính xác và bố cục danh mục gọn gàng.",
+"Serif headings, a quiet margin and space for longer explanations.": "Tiêu đề có phông chữ serif, lề trang thoáng đãng và không gian dành cho các phần giải thích dài hơn.",
+"Technical": "Kỹ thuật"
 }

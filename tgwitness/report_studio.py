@@ -34,7 +34,7 @@ def preview(store, options):
     # An external stylesheet works under the panel's strict CSP. No scripts,
     # inline styles, external assets, signing operations or stored preview files.
     document = ('<!doctype html><html lang="' + report.e(say.language) + '" dir="' + say.direction
-        + '" data-template="' + report.e(options["design"]) + '" data-theme="' + report.e(options["theme"])
+        + '" data-report-design="' + report.report_design.normalized(options.get("design")) + '" data-theme="' + report.e(options["theme"])
         + '" data-report-template="' + report.e(options.get("template", "dossier"))
         + '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
         '<link rel="stylesheet" href="/report-preview.css"><title>' + report.e(title) + '</title></head>'

@@ -25,7 +25,7 @@ from typing import Literal
 from pydantic import ConfigDict, Field, field_validator
 
 from . import __version__, case_assessment, i18n, message_details, report_analytics, report_charts, snapshot_analytics
-from . import report_history, report_selection, report_selection_view
+from . import report_design, report_history, report_selection, report_selection_view
 from . import indicators as ioc
 from . import viewer
 from .store import canonical, utcnow
@@ -974,6 +974,7 @@ CSS += case_assessment.CSS
 DOSSIER_CSS = Path(__file__).with_name("report_dossier.css").read_text(encoding="utf-8")
 CSS += DOSSIER_CSS
 CSS += report_charts.CSS
+CSS += report_design.CSS
 SCRIPT += "\n" + CONSOLE_JS
 SCRIPT_HASH = "'sha256-" + base64.b64encode(hashlib.sha256(SCRIPT.encode("utf-8")).digest()).decode() + "'"
 # Data documents run inside opaque-origin sandboxed frames, with their own CSP.
@@ -992,13 +993,14 @@ SCRIPT_WORDS = ("Copy", "Copied", "Signature valid · this file not yet checked"
     json.loads('"' + text + '"') for text in re.findall(r'\bsayf?\("((?:[^"\\]|\\.)*)"', CONSOLE_JS)))
 
 
-def head(say, *, title, description, meta, linked, theme, template="dossier", design="dossier"):
+def head(say, *, title, description, meta, linked, theme, template="dossier", design="classic"):
     """Document start: metadata for people, search tools and case-management systems."""
     tags = [("generator", "TgWitness " + __version__), ("description", description),
             ("robots", "noindex, nofollow, noarchive"), ("referrer", "no-referrer"), ("color-scheme", "light dark")]
-    tags += meta
-    return ('<!doctype html><html lang="' + e(say.language) + '" dir="' + say.direction + '" data-report-template="' + e(template) + '" data-theme="' + e(theme)
-            + '" data-template="' + e(design) + '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+    design = report_design.normalized(design)
+    tags += [*meta, ("tgwitness:report-design", design)]
+    return ('<!doctype html><html lang="' + e(say.language) + '" dir="' + say.direction + '" data-report-design="' + design + '" data-report-template="' + e(template) + '" data-theme="' + e(theme)
+            + '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
             '<meta http-equiv="Content-Security-Policy" content="' + e(CSP) + '"><title>' + e(title) + "</title>"
             '<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">'
             + "".join('<meta name="' + e(n) + '" content="' + e(v) + '">' for n, v in tags if v not in (None, ""))
@@ -1693,7 +1695,7 @@ def records_part_chunks(events, context, part):
         linked = {"@context": "https://schema.org", "@type": "Report", "name": title, "description": description,
                   "inLanguage": say.language, "isPartOf": {"@type": "Report", "identifier": "urn:uuid:" + report_id}}
         yield (head(say, title=title + " · TgWitness", description=description, meta=meta, linked=linked,
-                    theme=options.get("theme", "auto"), design=options.get("design", "dossier"))
+                    theme=options.get("theme", "auto"), design=options.get("design"))
                + bar(say, say("Records") + " · " + label, [("records", say("Records")), ("seal", say("Seal"))])
                ).encode("utf-8")
         facts = [(say("Part"), e(label)), (say("Records"), "#" + num(part["from"]) + " – #" + num(part["to"])),
@@ -2263,7 +2265,7 @@ def evidence_chunks(events, coverage=None, context=None):
         if options.get("timeline"):
             links.append(("records", say("Records")))
         yield (head(say, title=title + " · TgWitness", description=description, meta=meta, linked=linked,
-                    theme=options.get("theme", "auto"), template=options.get("template", "dossier"), design=options.get("design", "dossier"))
+                    theme=options.get("theme", "auto"), template=options.get("template", "dossier"), design=options.get("design"))
                + bar(say, label, links, "journal" if data_kind else None)).encode("utf-8")
         facts = [(say("Case ID"), e(options.get("case_id"))), (say("Examiner"), e(options.get("examiner"))),
                  (say("Organization"), e(options.get("organization"))), (say("Created"), when(created)),
@@ -2618,7 +2620,7 @@ def chat_chunks(meta, records, context):
                                        "identifier": {"@type": "PropertyValue", "propertyID": "sha256",
                                                       "value": context.get("chat_json_sha256")}})
         yield (head(say, title=title + " · TgWitness", description=description, meta=tags, linked=linked,
-                    theme=options.get("theme", "auto"), design=options.get("design", "dossier"))
+                    theme=options.get("theme", "auto"), design=options.get("design"))
                + bar(say, say("Chat export"), [("summary", say("Summary")), ("people", say("Participants")),
                                                ("messages", say("Messages")), ("integrity", say("Integrity")),
                                                ("verify", say("Verify"))], "chat")).encode("utf-8")
@@ -2943,7 +2945,7 @@ def chat_part_chunks(meta, records, context, part):
         linked = {"@context": "https://schema.org", "@type": "Report", "name": title, "description": description,
                   "inLanguage": say.language, "isPartOf": {"@type": "Report", "identifier": "urn:uuid:" + report_id}}
         yield (head(say, title=title + " · TgWitness", description=description, meta=tags, linked=linked,
-                    theme=options.get("theme", "auto"), design=options.get("design", "dossier"))
+                    theme=options.get("theme", "auto"), design=options.get("design"))
                + bar(say, say("Messages") + " · " + label, [("messages", say("Messages")), ("seal", say("Seal"))])
                ).encode("utf-8")
         facts = [(say("Chat"), e(chat_title)), (say("Part"), e(label)),

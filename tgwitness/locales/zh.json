@@ -5648,5 +5648,22 @@
 "Validated time bound through record #{n}; {tail} later records are outside that bound.": "通过记录 #{n} 验证的时间边界；{tail} 之后的记录超出该边界。",
 "Validated timestamp receipts": "经过验证的时间戳收据",
 "Verify the original ZIP with a trusted copy of verify.py and --fingerprint from a separate trusted channel. Keep the verification result with the unchanged ZIP.": "使用来自独立可信渠道的可信verify.py副本及--fingerprint参数，对原始ZIP文件进行验证。将验证结果与未修改的ZIP文件一同保存。",
-"Witnesses and collection environment": "见证人和采集环境"
+"Witnesses and collection environment": "见证人和采集环境",
+"<b>2</b> Design &amp; contents": "<b>2</b> 设计&amp;内容",
+"A compact opening, key figures in one row and concise sections.": "简洁的开篇、关键数据排成一行以及简明扼要的章节。",
+"A familiar dossier with clear sections and a structured record.": "一份结构清晰、章节分明且组织有序的文件。",
+"A modular dashboard for comparing activity, people and sources.": "一个用于比较活动、人员和来源的模块化仪表盘。",
+"An open cover, prominent figures and a clear path through events.": "开放式封面、醒目的图表以及清晰的事件脉络。",
+"Analytics": "Analytics",
+"Choose how the report looks and what it includes.": "选择报告的外观及包含内容。",
+"Classic": "经典",
+"Contents preset": "目录预设",
+"Design and contents": "设计与内容",
+"Editorial": "编辑风格",
+"Page layouts for HTML and PDF. Changing the design keeps your data, included sections and written notes.": "HTML和PDF的页面布局。更改设计不会影响您的数据、包含的章节和书面注释。",
+"Presets choose the sections below. They keep your design, data selection and written notes.": "预设会选择以下章节。它们将保留您的设计、数据选择和书面注释。",
+"Report design": "报告设计",
+"Ruled tables, precise references and a compact register layout.": "带格线的表格、精确的引用以及紧凑的索引布局。",
+"Serif headings, a quiet margin and space for longer explanations.": "衬线体标题、适度的边距以及用于较长说明的留白空间。",
+"Technical": "技术"
 }

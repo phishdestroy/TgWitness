@@ -5675,5 +5675,22 @@
 "Validated time bound through record #{n}; {tail} later records are outside that bound.": "محدوده زمانی معتبر تا رکورد شماره #{n}؛ رکوردهای بعدی {tail} خارج از آن محدوده هستند.",
 "Validated timestamp receipts": "رسیدهای مهر زمانی تأییدشده",
 "Verify the original ZIP with a trusted copy of verify.py and --fingerprint from a separate trusted channel. Keep the verification result with the unchanged ZIP.": "فایل ZIP اصلی را با یک نسخه قابل اعتماد از verify.py و گزینه --fingerprint از یک کانال قابل اعتماد جداگانه تأیید کنید. نتیجه تأیید را همراه با فایل ZIP بدون تغییر نگه دارید.",
-"Witnesses and collection environment": "شاهدین و محیط جمع‌آوری"
+"Witnesses and collection environment": "شاهدین و محیط جمع‌آوری",
+"<b>2</b> Design &amp; contents": "<b> 2</b> طراحی &amp; و محتوا",
+"A compact opening, key figures in one row and concise sections.": "شروع مختصر، اعداد کلیدی در یک ردیف و بخش‌های موجز.",
+"A familiar dossier with clear sections and a structured record.": "یک دایرهٔ آشنا با بخش‌های واضح و یک سند ساختاریافته.",
+"A modular dashboard for comparing activity, people and sources.": "یک داشبورد ماژولار برای مقایسه فعالیت‌ها، افراد و منابع.",
+"An open cover, prominent figures and a clear path through events.": "جلد باز، تصاویر برجسته و مسیری روشن از رویدادها.",
+"Analytics": "تحلیل‌گری",
+"Choose how the report looks and what it includes.": "انتخاب کنید گزارش چگونه به نظر می‌رسد و شامل چه مواردی است.",
+"Classic": "کلاسیک",
+"Contents preset": "پیش‌تنظیم مطالب",
+"Design and contents": "طراحی و محتوا",
+"Editorial": "ویرایشگاهی",
+"Page layouts for HTML and PDF. Changing the design keeps your data, included sections and written notes.": "قالب‌های صفحه برای HTML و PDF. تغییر طرح، داده‌ها، بخش‌های گنجانده‌شده و یادداشت‌های نوشتاری شما را حفظ می‌کند.",
+"Presets choose the sections below. They keep your design, data selection and written notes.": "پیش‌تنظیم‌ها بخش‌های زیر را انتخاب می‌کنند. آن‌ها طرح شما، انتخاب داده‌ها و یادداشت‌های نوشتاری را حفظ می‌کنند.",
+"Report design": "طراحی گزارش",
+"Ruled tables, precise references and a compact register layout.": "جدول‌های خط‌دار، ارجاعات دقیق و طرح‌بندی فشرده نمایه.",
+"Serif headings, a quiet margin and space for longer explanations.": "سرعنوان‌های سریف، حاشیهٔ ساده و فضایی برای توضیحات طولانی‌تر.",
+"Technical": "تکنیکی"
 }

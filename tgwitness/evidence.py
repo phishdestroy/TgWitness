@@ -353,6 +353,7 @@ def write_pdf(write_member, name, render):
 def report_entry(context, options, file="report.html"):
     """The manifest's account of the readable reports: the sealed page, its JSON and PDF twins and any parts."""
     entry = {"id": context["report_id"], "file": file, "language": options["language"], "sealed": True,
+             "design": report.report_design.normalized(options.get("design")),
              "custody": "custody.json", "presentation": {k: options.get(k, v) for k, v in report.report_analytics.Presentation().model_dump().items()}}
     if context.get("selection"):
         entry["selection"] = context["selection"]["selection"]

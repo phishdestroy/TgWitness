@@ -5648,5 +5648,22 @@
 "Validated time bound through record #{n}; {tail} later records are outside that bound.": "ขอบเขตเวลาที่ได้รับการตรวจสอบความถูกต้องจนถึงบันทึกหมายเลข {n}; บันทึกหมายเลข {tail} และบันทึกที่ตามมาอยู่นอกขอบเขตดังกล่าว",
 "Validated timestamp receipts": "ใบเสร็จรับเงินประทับเวลาที่ได้รับการตรวจสอบแล้ว",
 "Verify the original ZIP with a trusted copy of verify.py and --fingerprint from a separate trusted channel. Keep the verification result with the unchanged ZIP.": "ตรวจสอบไฟล์ZIPต้นฉบับด้วยสำเนาที่เชื่อถือได้ของverify.py และใช้ตัวเลือก --fingerprint จากช่องสื่อสารที่เชื่อถือได้แยกต่างหาก เก็บผลการตรวจสอบไว้พร้อมกับไฟล์ZIPที่ไม่มีการเปลี่ยนแปลง",
-"Witnesses and collection environment": "พยานและสภาพแวดล้อมการเก็บรวบรวม"
+"Witnesses and collection environment": "พยานและสภาพแวดล้อมการเก็บรวบรวม",
+"<b>2</b> Design &amp; contents": "<b>2</b> การออกแบบ &amp; เนื้อหา",
+"A compact opening, key figures in one row and concise sections.": "ส่วนเปิดที่กระชับ ตัวเลขสำคัญในแถวเดียว และส่วนเนื้อหาที่สรุปสั้นๆ",
+"A familiar dossier with clear sections and a structured record.": "แฟ้มเอกสารที่คุ้นเคย พร้อมส่วนต่าง ๆ ที่ชัดเจนและบันทึกที่มีโครงสร้าง",
+"A modular dashboard for comparing activity, people and sources.": "แดชบอร์ดแบบโมดูลาร์สำหรับการเปรียบเทียบกิจกรรม ผู้คน และแหล่งข้อมูล",
+"An open cover, prominent figures and a clear path through events.": "หน้าปกที่เปิดกว้าง รูปภาพที่โดดเด่น และเส้นทางการติดตามเหตุการณ์ที่ชัดเจน",
+"Analytics": "Analytics",
+"Choose how the report looks and what it includes.": "เลือกว่ารายงานจะมีลักษณะอย่างไรและจะรวมเนื้อหาอะไรไว้",
+"Classic": "Classic",
+"Contents preset": "การตั้งค่าเนื้อหา",
+"Design and contents": "การออกแบบและเนื้อหา",
+"Editorial": "Editorial",
+"Page layouts for HTML and PDF. Changing the design keeps your data, included sections and written notes.": "รูปแบบการจัดหน้าสำหรับ HTML และ PDF การเปลี่ยนการออกแบบจะรักษาข้อมูล ส่วนที่รวมอยู่ และหมายเหตุที่เขียนไว้",
+"Presets choose the sections below. They keep your design, data selection and written notes.": "การตั้งค่าล่วงหน้าจะเลือกส่วนต่าง ๆ ด้านล่าง โดยจะรักษาการออกแบบ การเลือกข้อมูล และบันทึกข้อความของคุณไว้",
+"Report design": "การออกแบบรายงาน",
+"Ruled tables, precise references and a compact register layout.": "ตารางที่มีเส้นแบ่ง, อ้างอิงที่แม่นยำ และรูปแบบทะเบียนที่กระชับ",
+"Serif headings, a quiet margin and space for longer explanations.": "หัวข้อแบบ serif, ขอบกระดาษที่เรียบง่าย และพื้นที่สำหรับคำอธิบายที่ยาวขึ้น",
+"Technical": "Technical"
 }

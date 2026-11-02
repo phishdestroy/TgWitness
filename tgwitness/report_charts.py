@@ -33,11 +33,11 @@ CSS = """
 .analytics-bar-label{overflow-wrap:anywhere}.analytics-bar-value{text-align:end;font-variant-numeric:tabular-nums}.analytics-bar-track{background:var(--line);height:12px}
 .analytics-bar-fill{background:var(--chart-ink);height:100%;min-width:1px}.analytics-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.analytics-pair>.analytics-figure{margin-top:0}
 .examination-text{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px;line-height:1.85;max-width:80ch}.examination-part{border-top:1px solid var(--line);padding-top:18px;margin-top:24px;break-inside:avoid}
-[data-report-template=dossier] .examination-part{display:grid;grid-template-columns:minmax(130px,1fr) minmax(0,3fr);gap:24px}
-[data-report-template=dossier] .examination-part h3{font:11px/1.8 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
-[data-report-template=dossier] .examination-text{font-family:Georgia,'Times New Roman',serif;font-size:16px}
+[data-report-design=classic] .examination-part{display:grid;grid-template-columns:minmax(130px,1fr) minmax(0,3fr);gap:24px}
+[data-report-design=classic] .examination-part h3{font:11px/1.8 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+[data-report-design=classic] .examination-text{font-family:Georgia,'Times New Roman',serif;font-size:16px}
 @media(max-width:800px){.analytics-pair{grid-template-columns:1fr}.analytics-totals{grid-template-columns:repeat(2,minmax(0,1fr))}.analytics-figure{padding:14px}.analytics-bar{grid-template-columns:minmax(70px,1fr) minmax(30px,1fr) 52px;gap:8px}}
-@media(max-width:600px){[data-report-template=dossier] .examination-part{display:block}}
+@media(max-width:600px){[data-report-design=classic] .examination-part{display:block}}
 @media print{.analytics-pair{display:block}.analytics-table{display:none}.analytics-print-data{display:block}.analytics-figure{break-inside:auto;padding:12px}.analytics-totals div{padding:10px}}
 """
 

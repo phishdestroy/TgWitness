@@ -5783,5 +5783,22 @@
 "Validated time bound through record #{n}; {tail} later records are outside that bound.": "الحد الزمني الذي تم التحقق من صحته من خلال السجل رقم {n}؛ السجلات اللاحقة {tail} تقع خارج هذا الحد.",
 "Validated timestamp receipts": "إيصالات الطوابع الزمنية التي تم التحقق من صحتها",
 "Verify the original ZIP with a trusted copy of verify.py and --fingerprint from a separate trusted channel. Keep the verification result with the unchanged ZIP.": "تحقق من ملف ZIP الأصلي باستخدام نسخة موثوقة من verify.py و--fingerprint من قناة موثوقة منفصلة. احتفظ بنتيجة التحقق مع ملف ZIP الذي لم يتغير.",
-"Witnesses and collection environment": "الشهود وبيئة التجميع"
+"Witnesses and collection environment": "الشهود وبيئة التجميع",
+"<b>2</b> Design &amp; contents": "<b>2</b> التصميم &amp; المحتوى",
+"A compact opening, key figures in one row and concise sections.": "افتتاحية موجزة، والأرقام الرئيسية في صف واحد، وأقسام موجزة.",
+"A familiar dossier with clear sections and a structured record.": "ملف مألوف بأقسام واضحة وسجل منظم.",
+"A modular dashboard for comparing activity, people and sources.": "لوحة معلومات معيارية لمقارنة الأنشطة والأشخاص والمصادر.",
+"An open cover, prominent figures and a clear path through events.": "غلاف مفتوح، وأرقام بارزة، ومسار واضح عبر الأحداث.",
+"Analytics": "التحليلات",
+"Choose how the report looks and what it includes.": "اختر شكل التقرير ومحتوياته.",
+"Classic": "كلاسيكي",
+"Contents preset": "الإعداد المسبق للمحتويات",
+"Design and contents": "التصميم والمحتوى",
+"Editorial": "تحريري",
+"Page layouts for HTML and PDF. Changing the design keeps your data, included sections and written notes.": "تخطيطات الصفحات لـ HTML وPDF. يؤدي تغيير التصميم إلى الحفاظ على بياناتك والأقسام المضمنة والملاحظات المكتوبة.",
+"Presets choose the sections below. They keep your design, data selection and written notes.": "تختار الإعدادات المسبقة الأقسام أدناه. وهي تحافظ على تصميمك واختيارك للبيانات وملاحظاتك المكتوبة.",
+"Report design": "تصميم التقرير",
+"Ruled tables, precise references and a compact register layout.": "جداول مسطرة، ومراجع دقيقة، وتصميم سجل موجز.",
+"Serif headings, a quiet margin and space for longer explanations.": "عناوين ذات حروف مزخرفة، وهامش هادئ، ومساحة لتفسيرات أطول.",
+"Technical": "تقني"
 }

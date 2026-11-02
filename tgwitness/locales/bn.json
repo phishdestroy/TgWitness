@@ -5675,5 +5675,22 @@
 "Validated time bound through record #{n}; {tail} later records are outside that bound.": "রেকর্ড #{n} দ্বারা যাচাইকৃত সময়সীমা; পরবর্তী {tail} রেকর্ডসমূহ সেই সীমার বাইরে।",
 "Validated timestamp receipts": "যাচাইকৃত টাইমস্ট্যাম্প রসিদ",
 "Verify the original ZIP with a trusted copy of verify.py and --fingerprint from a separate trusted channel. Keep the verification result with the unchanged ZIP.": "বিশ্বস্ত একটি verify.py কপি এবং একটি পৃথক বিশ্বস্ত চ্যানেল থেকে --fingerprint --fingerprint ব্যবহার করে মূল ZIP যাচাই করুন। যাচাইয়ের ফলাফল অপরিবর্তিত ZIP-এর সাথে সংরক্ষণ করুন।",
-"Witnesses and collection environment": "সাক্ষীরা এবং সংগ্রহ পরিবেশ"
+"Witnesses and collection environment": "সাক্ষীরা এবং সংগ্রহ পরিবেশ",
+"<b>2</b> Design &amp; contents": "<b> 2</b> ডিজাইন &amp; বিষয়বস্তু",
+"A compact opening, key figures in one row and concise sections.": "সংক্ষিপ্ত সূচনা, মূল পরিসংখ্যান এক সারিতে এবং সংক্ষিপ্ত বিভাগসমূহ।",
+"A familiar dossier with clear sections and a structured record.": "পরিচিত ডোজিয়ে, স্বচ্ছ বিভাগ এবং কাঠামোবদ্ধ রেকর্ডসহ।",
+"A modular dashboard for comparing activity, people and sources.": "কার্যকলাপ, মানুষ এবং উৎসসমূহ তুলনা করার জন্য একটি মডুলার ড্যাশবোর্ড।",
+"An open cover, prominent figures and a clear path through events.": "একটি খোলা কভার, বিশিষ্ট চিত্র এবং ঘটনাগুলির মধ্য দিয়ে একটি স্পষ্ট পথ।",
+"Analytics": "এ্যানালিটিক্স",
+"Choose how the report looks and what it includes.": "রিপোর্টটি দেখতে কেমন হবে এবং এতে কী কী থাকবে তা নির্বাচন করুন।",
+"Classic": "ক্লাসিক",
+"Contents preset": "বিষয়বস্তু প্রিসেট",
+"Design and contents": "ডিজাইন এবং বিষয়বস্তু",
+"Editorial": "সম্পাদনাগত",
+"Page layouts for HTML and PDF. Changing the design keeps your data, included sections and written notes.": "HTML এবং PDF-এর পৃষ্ঠা বিন্যাস। ডিজাইন পরিবর্তন করার সময় আপনার ডেটা, অন্তর্ভুক্ত বিভাগ এবং লিখিত নোটগুলো অক্ষুণ্ণ থাকে।",
+"Presets choose the sections below. They keep your design, data selection and written notes.": "প্রিসেটগুলো নীচের বিভাগগুলো নির্বাচন করে। এগুলো আপনার ডিজাইন, ডেটা নির্বাচন এবং লিখিত নোটগুলো সংরক্ষণ করে।",
+"Report design": "রিপোর্ট ডিজাইন",
+"Ruled tables, precise references and a compact register layout.": "রেখাঙ্কিত সারণি, সঠিক রেফারেন্স এবং একটি সংক্ষিপ্ত রেজিস্টার বিন্যাস।",
+"Serif headings, a quiet margin and space for longer explanations.": "সেরিফ শিরোনাম, শান্ত মার্জিন এবং দীর্ঘ ব্যাখ্যার জন্য স্থান।",
+"Technical": "প্রযুক্তিগত"
 }

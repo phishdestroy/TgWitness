@@ -5767,5 +5767,22 @@
 "Showing {shown} of {total} changed messages.": "Es werden {shown} von {total} geänderten Nachrichten angezeigt.",
 "Text shortened in this preview.": "Der Text wurde in dieser Vorschau gekürzt.",
 "The saved version is outside this preview. Open the report for the full context.": "Die gespeicherte Version ist in dieser Vorschau nicht enthalten. Öffnen Sie den Bericht, um den vollständigen Kontext anzuzeigen.",
-"All journal records": "Alle Protokollaufzeichnungen"
+"All journal records": "Alle Protokollaufzeichnungen",
+"<b>2</b> Design &amp; contents": "<b>2</b> Gestaltung &amp; Inhalt",
+"A compact opening, key figures in one row and concise sections.": "Eine kompakte Einleitung, Kennzahlen in einer Zeile und prägnante Abschnitte.",
+"A familiar dossier with clear sections and a structured record.": "Ein vertrautes Dossier mit klaren Abschnitten und einer strukturierten Darstellung.",
+"A modular dashboard for comparing activity, people and sources.": "Ein modulares Dashboard zum Vergleich von Aktivitäten, Personen und Quellen.",
+"An open cover, prominent figures and a clear path through events.": "Ein offenes Deckblatt, hervorstechende Zahlen und ein klarer Überblick über die Ereignisse.",
+"Analytics": "Analytics",
+"Choose how the report looks and what it includes.": "Wählen Sie aus, wie der Bericht aussehen soll und was er enthalten soll.",
+"Classic": "Classic",
+"Contents preset": "Inhaltsvorlage",
+"Design and contents": "Design und Inhalt",
+"Editorial": "Redaktionell",
+"Page layouts for HTML and PDF. Changing the design keeps your data, included sections and written notes.": "Seitenlayouts für HTML und PDF. Bei einer Änderung des Designs bleiben Ihre Daten, die enthaltenen Abschnitte und Ihre schriftlichen Notizen erhalten.",
+"Presets choose the sections below. They keep your design, data selection and written notes.": "Voreinstellungen wählen die unten aufgeführten Abschnitte aus. Sie behalten Ihr Design, Ihre Datenauswahl und Ihre schriftlichen Anmerkungen bei.",
+"Report design": "Berichtsgestaltung",
+"Ruled tables, precise references and a compact register layout.": "Linierte Tabellen, präzise Verweise und ein kompaktes Registerlayout.",
+"Serif headings, a quiet margin and space for longer explanations.": "Serifenüberschriften, ein dezenter Rand und Platz für ausführlichere Erläuterungen.",
+"Technical": "Technisch"
 }

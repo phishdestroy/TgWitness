@@ -5972,5 +5972,22 @@
 "Showing {shown} of {total} changed messages.": "Отображается {shown} из {total} измененных сообщений.",
 "Text shortened in this preview.": "Текст сокращён в данном предварительном просмотре.",
 "The saved version is outside this preview. Open the report for the full context.": "Сохраненная версия не входит в этот предварительный просмотр. Откройте отчёт, чтобы увидеть полный контекст.",
-"All journal records": "Все записи журнала"
+"All journal records": "Все записи журнала",
+"<b>2</b> Design &amp; contents": "<b>2</b> Дизайн &amp; содержание",
+"A compact opening, key figures in one row and concise sections.": "Краткое введение, ключевые показатели в одном ряду и лаконичные разделы.",
+"A familiar dossier with clear sections and a structured record.": "Знакомое досье с чётко выделенными разделами и структурированной записью.",
+"A modular dashboard for comparing activity, people and sources.": "Модульная панель инструментов для сравнения деятельности, людей и источников.",
+"An open cover, prominent figures and a clear path through events.": "Открытая обложка, заметные цифры и чёткий путь через события.",
+"Analytics": "Аналитика",
+"Choose how the report looks and what it includes.": "Выберите, как будет выглядеть отчёт и что он будет содержать.",
+"Classic": "Классический",
+"Contents preset": "Предустановка содержания",
+"Design and contents": "Дизайн и содержание",
+"Editorial": "Редакционный",
+"Page layouts for HTML and PDF. Changing the design keeps your data, included sections and written notes.": "Макеты страниц для форматов HTML и PDF. При смене дизайна ваши данные, включённые разделы и текстовые примечания сохраняются.",
+"Presets choose the sections below. They keep your design, data selection and written notes.": "Предустановки выбирают разделы, указанные ниже. Они сохраняют ваш дизайн, выбор данных и текстовые примечания.",
+"Report design": "Дизайн отчёта",
+"Ruled tables, precise references and a compact register layout.": "Таблицы с линовкой, точные ссылки и компактная структура указателя.",
+"Serif headings, a quiet margin and space for longer explanations.": "Заголовки с засечками, сдержанное поле и место для более подробных пояснений.",
+"Technical": "Технический"
 }

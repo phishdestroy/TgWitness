@@ -5729,5 +5729,22 @@
 "Validated time bound through record #{n}; {tail} later records are outside that bound.": "Перевірена часова межа охоплює запис № {n}; записи, що йдуть за {tail}, знаходяться поза цією межею.",
 "Validated timestamp receipts": "Перевірені квитанції з мітками часу",
 "Verify the original ZIP with a trusted copy of verify.py and --fingerprint from a separate trusted channel. Keep the verification result with the unchanged ZIP.": "Перевірте оригінальний ZIP-архів за допомогою надійної копії скрипту verify.py та параметра --fingerprint з окремого надійного каналу. Зберігайте результат перевірки разом із незміненим ZIP-архівом.",
-"Witnesses and collection environment": "Свідки та середовище збору даних"
+"Witnesses and collection environment": "Свідки та середовище збору даних",
+"<b>2</b> Design &amp; contents": "<b>2</b> Дизайн &amp; зміст",
+"A compact opening, key figures in one row and concise sections.": "Компактний вступ, ключові показники в одному рядку та лаконічні розділи.",
+"A familiar dossier with clear sections and a structured record.": "Звичне досьє з чіткими розділами та структурованим записом.",
+"A modular dashboard for comparing activity, people and sources.": "Модульна інформаційна панель для порівняння діяльності, осіб та джерел.",
+"An open cover, prominent figures and a clear path through events.": "Відкрита обкладинка, виразні цифри та чіткий шлях через події.",
+"Analytics": "Аналітика",
+"Choose how the report looks and what it includes.": "Виберіть, як виглядатиме звіт і що він міститиме.",
+"Classic": "Класичний",
+"Contents preset": "Шаблон змісту",
+"Design and contents": "Дизайн та зміст",
+"Editorial": "Редакційний",
+"Page layouts for HTML and PDF. Changing the design keeps your data, included sections and written notes.": "Макеты сторінок для форматів HTML та PDF. Зміна дизайну не впливає на ваші дані, включені розділи та текстові примітки.",
+"Presets choose the sections below. They keep your design, data selection and written notes.": "Пресети вибирають розділи, наведені нижче. Вони зберігають ваш дизайн, вибір даних та письмові примітки.",
+"Report design": "Дизайн звіту",
+"Ruled tables, precise references and a compact register layout.": "Таблиці з лініями, точні посилання та компактне оформлення реєстру.",
+"Serif headings, a quiet margin and space for longer explanations.": "Заголовки із зарубками, стримане поле та простір для докладніших пояснень.",
+"Technical": "Технічний"
 }

@@ -2429,6 +2429,13 @@ const reportSelectionReady=import('./views/report-selection.js?v=1').then(({crea
   return reportSelection;
 });
 const reportTemplate=()=>$("report-form").querySelector('[name="report-template"]:checked')?.value||"custom";
+const reportDesign=()=>$("report-form").querySelector('[name="report-design"]:checked')?.value||"classic";
+function setReportDesign(value){
+  const choices=[...$("report-form").querySelectorAll('[name="report-design"]')];
+  const canonical=({dossier:"classic",analytical:"atlas",editorial:"quire"})[value]||value;
+  const known=choices.some(input=>input.value===canonical)?canonical:"classic";
+  choices.forEach(input=>{input.checked=input.value===known;});
+}
 function setReportTemplate(value){
   const known=Object.hasOwn(REPORT_PRESETS,value)||value==="custom"?value:"custom";
   $("report-form").querySelectorAll('[name="report-template"]').forEach(input=>{input.checked=input.value===known;});
@@ -2441,6 +2448,7 @@ function resetReportSettings(){
   clearTimeout(reportPreviewTimer);reportPreviewRequest++;reportPreviewBusy=false;
   reportPreviewSection="cover";
   $("report-preview-frame").removeAttribute("srcdoc");show("report-preview-frame",false);show("report-preview-empty",true);
+  delete $("report-preview-frame").dataset.reportDesign;
   $("report-design-preview-status").textContent=tr("Preview uses your draft. Save settings before exporting.");
   reportOwner=null;reportReady=false;reportDirty=false;reportRequest++;reportLoading=null;reportSaving=false;
   $("report-form").reset();$("report-fields").disabled=true;$("report-status").replaceChildren();
@@ -2478,7 +2486,7 @@ async function loadReportSettings(){
       const matches=preset&&Object.entries(REPORT_CHECKS).every(([id,key])=>$(id).checked===preset[key])
         &&$("report-participant-labels").value==="aliases"&&$("report-chart-limit").valueAsNumber===10;
       setReportTemplate(matches?template:"custom");
-      $("report-form").querySelectorAll('[name="report-design"]').forEach(input=>input.checked=input.value===(options.design||"dossier"));
+      setReportDesign(options.design);
       reportSelection.load(options.selection);
       reportReady=true;reportDirty=false;formControls?.loaded("report-form");$("report-status").textContent=window.TGW_ONLINE_DEMO?tr("Sample data"):"";
       if(!$("report-form").hidden&&!$("report-preview-frame").hasAttribute("srcdoc"))scheduleReportPreview();
@@ -2502,6 +2510,8 @@ function syncReportParts(){
   if($("report-hourly-chart").checked)parts.push(tr("Activity by weekday and hour"));
   if($("report-participant-chart").checked)parts.push(tr("Participant activity"));
   if($("report-chat-chart").checked)parts.push(tr("Activity by chat"));
+  if($("report-changes").checked)parts.push(tr("Changed and deleted message histories"));
+  if($("report-indicators").checked)parts.push(tr("Links and technical indicators"));
   if($("report-timeline").checked)parts.push(tr("Record transcript"));
   if($("report-media").checked)parts.push(tr("Photo previews"));
   if($("report-composition-chart").checked)parts.push(tr("Record composition"));
@@ -2515,12 +2525,10 @@ function applyReportPreset(){
   }
 }
 function reportDraft(){
-  const body={};
+  const body={template:reportTemplate(),design:reportDesign()};
   for(const [id,key] of Object.entries(REPORT_FIELDS))body[key]=$(id).value;
   body.part_size=$("report-part-size").valueAsNumber;body.chart_limit=$("report-chart-limit").valueAsNumber;
-  body.template=reportTemplate();
   body.selection=reportSelection?.read();
-  body.design=$("report-form").querySelector('[name="report-design"]:checked')?.value||"dossier";
   for(const [id,key] of Object.entries(REPORT_CHECKS))body[key]=$(id).checked;
   return body;
 }
@@ -2554,6 +2562,7 @@ async function refreshReportPreview(){
   try{
     const result=await json("report-design-preview",body,viewOptions('evidence'));
     if(!current()||snapshot!==JSON.stringify(reportDraft())||state.view!=='evidence')return;
+    $("report-preview-frame").dataset.reportDesign=body.design;
     $("report-preview-frame").srcdoc=result.html;show("report-preview-frame",true);show("report-preview-empty",false);
     $("report-design-preview-status").textContent=tr(result.sampled?"Draft preview · first 50,000 records · not signed":"Draft preview · {n} records · not signed",{n:result.records.toLocaleString()});
   }catch(error){

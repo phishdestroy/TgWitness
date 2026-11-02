@@ -5675,5 +5675,22 @@
 "Validated time bound through record #{n}; {tail} later records are outside that bound.": "Límite temporal validado hasta el registro n.º {n}; los registros posteriores {tail} quedan fuera de dicho límite.",
 "Validated timestamp receipts": "Recibos de marca de tiempo validados",
 "Verify the original ZIP with a trusted copy of verify.py and --fingerprint from a separate trusted channel. Keep the verification result with the unchanged ZIP.": "Verifique el archivo ZIP original con una copia fiable de verify.py y la opción --fingerprint, procedente de un canal fiable independiente. Conserve el resultado de la verificación junto con el archivo ZIP sin modificar.",
-"Witnesses and collection environment": "Testigos y entorno de recopilación"
+"Witnesses and collection environment": "Testigos y entorno de recopilación",
+"<b>2</b> Design &amp; contents": "<b>2</b> Diseño &amp; contenido",
+"A compact opening, key figures in one row and concise sections.": "Una introducción compacta, cifras clave en una sola fila y secciones concisas.",
+"A familiar dossier with clear sections and a structured record.": "Un expediente familiar con secciones claras y un registro estructurado.",
+"A modular dashboard for comparing activity, people and sources.": "Un panel de control modular para comparar actividades, personas y fuentes.",
+"An open cover, prominent figures and a clear path through events.": "Una portada abierta, cifras destacadas y un recorrido claro por los acontecimientos.",
+"Analytics": "Analítica",
+"Choose how the report looks and what it includes.": "Elija el aspecto del informe y lo que incluye.",
+"Classic": "Clásico",
+"Contents preset": "Configuración predeterminada de contenidos",
+"Design and contents": "Diseño y contenido",
+"Editorial": "Editorial",
+"Page layouts for HTML and PDF. Changing the design keeps your data, included sections and written notes.": "Maquetaciones de página para HTML y PDF. Al cambiar el diseño, se conservan sus datos, las secciones incluidas y las notas escritas.",
+"Presets choose the sections below. They keep your design, data selection and written notes.": "Los preajustes seleccionan las secciones que se indican a continuación. Conservan su diseño, la selección de datos y las notas escritas.",
+"Report design": "Diseño del informe",
+"Ruled tables, precise references and a compact register layout.": "Tablas con líneas, referencias precisas y un diseño de índice compacto.",
+"Serif headings, a quiet margin and space for longer explanations.": "Encabezados con serifas, un margen discreto y espacio para explicaciones más extensas.",
+"Technical": "Técnico"
 }

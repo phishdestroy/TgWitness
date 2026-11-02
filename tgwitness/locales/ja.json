@@ -5648,5 +5648,22 @@
 "Validated time bound through record #{n}; {tail} later records are outside that bound.": "レコード #{n} までの検証済み時間範囲；{tail} 以降のレコードはその範囲外となります。",
 "Validated timestamp receipts": "検証済みのタイムスタンプ受領証",
 "Verify the original ZIP with a trusted copy of verify.py and --fingerprint from a separate trusted channel. Keep the verification result with the unchanged ZIP.": "別の信頼できるチャネルから入手した、verify.pyと--fingerprintオプション付きの信頼できるコピーを使用して、元のZIPを検証してください。検証結果は、変更されていないZIPと一緒に保管してください。",
-"Witnesses and collection environment": "証人および収集環境"
+"Witnesses and collection environment": "証人および収集環境",
+"<b>2</b> Design &amp; contents": "<b>2</b> デザイン &amp; コンテンツ",
+"A compact opening, key figures in one row and concise sections.": "簡潔な冒頭、主要な数値を1行にまとめ、各セクションも簡潔にまとめます。",
+"A familiar dossier with clear sections and a structured record.": "明確なセクションと構造化された記録を備えた、馴染みのある資料です。",
+"A modular dashboard for comparing activity, people and sources.": "活動、人物、情報源を比較するためのモジュール式ダッシュボードです。",
+"An open cover, prominent figures and a clear path through events.": "開かれた表紙、目立つ図表、そして出来事の経緯を明確に示す構成。",
+"Analytics": "Analytics",
+"Choose how the report looks and what it includes.": "レポートの外観や内容を選択してください。",
+"Classic": "Classic",
+"Contents preset": "コンテンツプリセット",
+"Design and contents": "デザインとコンテンツ",
+"Editorial": "Editorial",
+"Page layouts for HTML and PDF. Changing the design keeps your data, included sections and written notes.": "HTMLおよびPDF用のページレイアウトです。デザインを変更しても、データ、含まれるセクション、および記述されたメモは保持されます。",
+"Presets choose the sections below. They keep your design, data selection and written notes.": "プリセットでは、以下のセクションが選択されます。デザイン、データの選択、および記述されたメモは維持されます。",
+"Report design": "レポートのデザイン",
+"Ruled tables, precise references and a compact register layout.": "罫線入りの表、正確な参照情報、そしてコンパクトな目次レイアウト。",
+"Serif headings, a quiet margin and space for longer explanations.": "セリフ体の見出し、控えめな余白、そして詳細な説明のためのスペース。",
+"Technical": "Technical"
 }

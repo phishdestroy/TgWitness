@@ -142,7 +142,10 @@ def opening(context, title, sharing=False):
     kind = say('Sharing copy') if sharing else say('Account export')
     lead = (say('A minimized, signed copy for review and sharing. The original account export is unchanged.') if sharing else
             say('A snapshot of history visible to this Telegram account during acquisition.'))
-    template = Presentation.model_validate(context.get('presentation') or {}).design
+    design = Presentation.model_validate(context.get('presentation') or {}).design
+    # The account index retains its established three covers; journal/chat reports
+    # use the complete six-layout renderer. Keep older frozen jobs readable.
+    template = {'quire': 'editorial', 'atlas': 'analytical'}.get(design, 'dossier')
     yield encoded('<!doctype html><html data-template="' + template + '" lang="' + say.language + '" dir="' + say.direction + '"><head><meta charset="utf-8">'
                   '<meta name="viewport" content="width=device-width,initial-scale=1">'
                   '<meta http-equiv="Content-Security-Policy" content="default-src &#39;none&#39;; style-src &#39;unsafe-inline&#39;; base-uri &#39;none&#39;; form-action &#39;none&#39;">'

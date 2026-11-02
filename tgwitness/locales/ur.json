@@ -5675,5 +5675,22 @@
 "Validated time bound through record #{n}; {tail} later records are outside that bound.": "ریکارڈ #{n} کے ذریعے تصدیق شدہ وقت کی حد؛ بعد کے {tail} ریکارڈز اس حد سے باہر ہیں۔",
 "Validated timestamp receipts": "تصدیق شدہ ٹائم اسٹیمپ رسیدیں",
 "Verify the original ZIP with a trusted copy of verify.py and --fingerprint from a separate trusted channel. Keep the verification result with the unchanged ZIP.": "اصلی ZIP کو verify.py کی ایک قابلِ اعتماد کاپی اور ایک الگ قابلِ اعتماد چینل سے --fingerprint کے ساتھ تصدیق کریں۔ تصدیق کے نتیجے کو بغیر تبدیلی کے ZIP کے ساتھ محفوظ رکھیں۔",
-"Witnesses and collection environment": "گواہ اور جمع کرنے کا ماحول"
+"Witnesses and collection environment": "گواہ اور جمع کرنے کا ماحول",
+"<b>2</b> Design &amp; contents": "<b> 2</b> ڈیزائن &amp; اور مواد",
+"A compact opening, key figures in one row and concise sections.": "ایک مختصر آغاز، کلیدی اعداد و شمار ایک ہی قطار میں اور جامع سیکشنز۔",
+"A familiar dossier with clear sections and a structured record.": "ایک مانوس دستاویز جس میں واضح حصے اور منظم ریکارڈ ہوں۔",
+"A modular dashboard for comparing activity, people and sources.": "سرگرمیوں، افراد اور ذرائع کے موازنہ کے لیے ایک ماڈیولر ڈیش بورڈ۔",
+"An open cover, prominent figures and a clear path through events.": "ایک کھلا سرورق، نمایاں اعداد و شمار اور واقعات کے درمیان ایک واضح راستہ۔",
+"Analytics": "تجزیات",
+"Choose how the report looks and what it includes.": "رپورٹ کی شکل اور اس میں شامل مواد کا انتخاب کریں۔",
+"Classic": "کلاسیکی",
+"Contents preset": "مواد کا پری سیٹ",
+"Design and contents": "ڈیزائن اور مندرجات",
+"Editorial": "ادارتی",
+"Page layouts for HTML and PDF. Changing the design keeps your data, included sections and written notes.": "HTML اور PDF کے لیے صفحے کے لے آؤٹ۔ ڈیزائن تبدیل کرنے سے آپ کا ڈیٹا، شامل کردہ سیکشنز اور تحریری نوٹس برقرار رہتے ہیں۔",
+"Presets choose the sections below. They keep your design, data selection and written notes.": "پری سیٹس ذیل کے سیکشنز کا انتخاب کرتے ہیں۔ یہ آپ کے ڈیزائن، ڈیٹا کے انتخاب اور تحریری نوٹس کو برقرار رکھتے ہیں۔",
+"Report design": "رپورٹ کا ڈیزائن",
+"Ruled tables, precise references and a compact register layout.": "لکیری جدولیں، درست حوالہ جات اور ایک جامع رجسٹر لے آؤٹ۔",
+"Serif headings, a quiet margin and space for longer explanations.": "سیرف سرخیاں، پرسکون حاشیہ اور طویل وضاحتوں کے لیے جگہ۔",
+"Technical": "تکنیکی"
 }

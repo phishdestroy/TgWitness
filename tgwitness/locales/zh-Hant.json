@@ -5648,5 +5648,22 @@
 "Validated time bound through record #{n}; {tail} later records are outside that bound.": "經驗證的時間範圍以記錄 #{n} 為界；{tail} 之後的記錄均超出該範圍。",
 "Validated timestamp receipts": "經驗證的時間戳記收據",
 "Verify the original ZIP with a trusted copy of verify.py and --fingerprint from a separate trusted channel. Keep the verification result with the unchanged ZIP.": "請使用來自獨立可信管道的可信副本，透過 verify.py 及 --fingerprint 參數驗證原始 ZIP 檔案。請將驗證結果與未經修改的 ZIP 檔案一併保存。",
-"Witnesses and collection environment": "見證人與蒐集環境"
+"Witnesses and collection environment": "見證人與蒐集環境",
+"<b>2</b> Design &amp; contents": "<b>2</b> 設計 &amp; 內容",
+"A compact opening, key figures in one row and concise sections.": "簡潔的開頭、關鍵數據排列於同一行，以及簡明扼要的章節。",
+"A familiar dossier with clear sections and a structured record.": "一份結構清晰、分節明確且格式規範的熟悉文件。",
+"A modular dashboard for comparing activity, people and sources.": "一個用於比較活動、人員及來源的模組化儀表板。",
+"An open cover, prominent figures and a clear path through events.": "開放式封面、醒目的圖表，以及清晰的時間軸敘事。",
+"Analytics": "分析",
+"Choose how the report looks and what it includes.": "請選擇報告的外觀與內容。",
+"Classic": "經典",
+"Contents preset": "目錄預設",
+"Design and contents": "設計與內容",
+"Editorial": "編輯風格",
+"Page layouts for HTML and PDF. Changing the design keeps your data, included sections and written notes.": "HTML 與 PDF 的頁面版面配置。變更設計時，您的資料、包含的章節及書面註記均會保留。",
+"Presets choose the sections below. They keep your design, data selection and written notes.": "預設值會從以下章節中進行選擇。它們會保留您的設計、資料選取及書面註記。",
+"Report design": "報告設計",
+"Ruled tables, precise references and a compact register layout.": "帶格線的表格、精確的參考資料及簡潔的索引版面配置。",
+"Serif headings, a quiet margin and space for longer explanations.": "襯線標題、簡潔的邊距，以及留有空間供較長說明使用。",
+"Technical": "技術"
 }

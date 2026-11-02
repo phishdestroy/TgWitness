@@ -2,7 +2,11 @@
 
 ## Unreleased
 
-- Add Report studio with three document designs, live unsigned cover/chart preview,
+- Choose six report designs independently of the contents: Classic, Editorial,
+  Briefing, Analytics, Technical and Overview. Each has its own cover, typography,
+  tables and chapter layout in offline HTML and signed PDF. Designs stay with
+  their workspace; changing one preserves filters, charts and written notes.
+- Add Report studio with independent document designs, live unsigned cover/chart preview,
   selectable activity, weekday/hour, participant, chat and composition charts, and
   journal history/indicator controls. Saved choices reach HTML, signed PDF/JSON and
   new account/disclosure jobs. Analytics use only included/minimized records, retain

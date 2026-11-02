@@ -5675,5 +5675,22 @@
 "Validated time bound through record #{n}; {tail} later records are outside that bound.": "Kayıt #{n} aracılığıyla doğrulanmış zaman sınırı; {tail}'den sonraki kayıtlar bu sınırın dışındadır.",
 "Validated timestamp receipts": "Doğrulanmış zaman damgası makbuzları",
 "Verify the original ZIP with a trusted copy of verify.py and --fingerprint from a separate trusted channel. Keep the verification result with the unchanged ZIP.": "Orijinal ZIP dosyasını, ayrı bir güvenilir kanaldan alınan güvenilir bir verify.py kopyası ve --fingerprint komutuyla doğrulayın. Doğrulama sonucunu, değiştirilmemiş ZIP dosyasıyla birlikte saklayın.",
-"Witnesses and collection environment": "Tanıklar ve toplama ortamı"
+"Witnesses and collection environment": "Tanıklar ve toplama ortamı",
+"<b>2</b> Design &amp; contents": "<b>2</b> Tasarım &amp; içerik",
+"A compact opening, key figures in one row and concise sections.": "Kompakt bir giriş, tek satırda ana rakamlar ve özlü bölümler.",
+"A familiar dossier with clear sections and a structured record.": "Net bölümlere ve yapılandırılmış bir kayda sahip, tanıdık bir dosya.",
+"A modular dashboard for comparing activity, people and sources.": "Faaliyetleri, kişileri ve kaynakları karşılaştırmaya yarayan modüler bir gösterge paneli.",
+"An open cover, prominent figures and a clear path through events.": "Açık bir kapak, göze çarpan rakamlar ve olaylar arasında net bir yol.",
+"Analytics": "Analitik",
+"Choose how the report looks and what it includes.": "Raporun nasıl görüneceğini ve neleri içereceğini seçin.",
+"Classic": "Klasik",
+"Contents preset": "İçindekiler ön ayarı",
+"Design and contents": "Tasarım ve içerik",
+"Editorial": "Editör",
+"Page layouts for HTML and PDF. Changing the design keeps your data, included sections and written notes.": "HTML ve PDF için sayfa düzenleri. Tasarımı değiştirdiğinizde verileriniz, dahil edilen bölümler ve yazılı notlarınız korunur.",
+"Presets choose the sections below. They keep your design, data selection and written notes.": "Ön ayarlar, aşağıdaki bölümleri seçer. Tasarımınızı, veri seçiminizi ve yazılı notlarınızı korurlar.",
+"Report design": "Rapor tasarımı",
+"Ruled tables, precise references and a compact register layout.": "Çizgili tablolar, kesin referanslar ve kompakt bir dizin düzeni.",
+"Serif headings, a quiet margin and space for longer explanations.": "Serif başlıklar, sade bir kenar boşluğu ve daha uzun açıklamalar için yer.",
+"Technical": "Teknik"
 }

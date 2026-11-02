@@ -5675,5 +5675,22 @@
 "Validated time bound through record #{n}; {tail} later records are outside that bound.": "Yozuv #{n} orqali tasdiqlangan vaqt chegarasi; {tail} keyingi yozuvlar ushbu chegaradan tashqarida.",
 "Validated timestamp receipts": "Tasdiqlangan vaqt tamg'asi kvitansiyalari",
 "Verify the original ZIP with a trusted copy of verify.py and --fingerprint from a separate trusted channel. Keep the verification result with the unchanged ZIP.": "Asl ZIPni ishonchli verify.py nusxasi va alohida ishonchli kanaldan olingan --fingerprint --fingerprint bilan tekshiring. Tekshiruv natijasini o'zgarmagan ZIP bilan birga saqlang.",
-"Witnesses and collection environment": "Guvohlar va yig'ish muhiti"
+"Witnesses and collection environment": "Guvohlar va yig'ish muhiti",
+"<b>2</b> Design &amp; contents": "<b></b> Dizayn &amp; mazmuni",
+"A compact opening, key figures in one row and concise sections.": "Qisqa kirish, asosiy raqamlar bitta qatorda va lo'nda bo'limlar.",
+"A familiar dossier with clear sections and a structured record.": "Taniqli dosye aniq bo'limlar va tuzilmali yozuv bilan.",
+"A modular dashboard for comparing activity, people and sources.": "Faoliyat, odamlar va manbalarni solishtirish uchun modulli boshqaruv paneli.",
+"An open cover, prominent figures and a clear path through events.": "Ochiq muqova, ko'zga tashlanadigan rasmlar va voqealar bo'ylab aniq yo'l.",
+"Analytics": "Analitika",
+"Choose how the report looks and what it includes.": "Hisobot qanday ko'rinishga ega bo'lishini va unga nimalar kiritilishini tanlang.",
+"Classic": "Klassik",
+"Contents preset": "Mavzular bo'yicha oldindan sozlama",
+"Design and contents": "Dizayn va mazmun",
+"Editorial": "Tahririy",
+"Page layouts for HTML and PDF. Changing the design keeps your data, included sections and written notes.": "HTML va PDF uchun sahifa tartiblari. Dizaynni o'zgartirish ma'lumotlaringizni, kiritilgan bo'limlarni va yozma eslatmalaringizni saqlaydi.",
+"Presets choose the sections below. They keep your design, data selection and written notes.": "Oldindan sozlamalar quyidagi bo'limlarni tanlaydi. Ular dizayningizni, ma'lumot tanlovini va yozma eslatmalaringizni saqlaydi.",
+"Report design": "Hisobot dizayni",
+"Ruled tables, precise references and a compact register layout.": "Chiziqli jadvallar, aniq havolalar va ixcham indeks tuzilishi.",
+"Serif headings, a quiet margin and space for longer explanations.": "Serif sarlavhalar, sokin margina va uzunroq izohlar uchun bo'sh joy.",
+"Technical": "Texnik"
 }

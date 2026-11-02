@@ -5648,5 +5648,22 @@
 "Validated time bound through record #{n}; {tail} later records are outside that bound.": "기록 #{n}까지 검증된 시간 범위이며, {tail} 이후의 기록은 해당 범위를 벗어납니다.",
 "Validated timestamp receipts": "검증된 타임스탬프 영수증",
 "Verify the original ZIP with a trusted copy of verify.py and --fingerprint from a separate trusted channel. Keep the verification result with the unchanged ZIP.": "별도의 신뢰할 수 있는 채널에서 가져온 신뢰할 수 있는 verify.py 사본과 --fingerprint 옵션을 사용하여 원본 ZIP 파일을 검증하십시오. 검증 결과를 변경되지 않은 ZIP 파일과 함께 보관하십시오.",
-"Witnesses and collection environment": "증인 및 수집 환경"
+"Witnesses and collection environment": "증인 및 수집 환경",
+"<b>2</b> Design &amp; contents": "<b>2</b> 디자인 &amp; 내용",
+"A compact opening, key figures in one row and concise sections.": "간결한 서두, 한 줄에 정리된 주요 수치, 그리고 간결한 섹션 구성.",
+"A familiar dossier with clear sections and a structured record.": "명확한 섹션과 체계적인 기록을 갖춘 친숙한 문서입니다.",
+"A modular dashboard for comparing activity, people and sources.": "활동, 인력 및 출처를 비교하기 위한 모듈식 대시보드입니다.",
+"An open cover, prominent figures and a clear path through events.": "열린 표지, 눈에 띄는 그림, 그리고 사건의 흐름을 명확하게 보여주는 구성.",
+"Analytics": "Analytics",
+"Choose how the report looks and what it includes.": "보고서의 외관과 포함 내용을 선택하십시오.",
+"Classic": "Classic",
+"Contents preset": "목차 사전 설정",
+"Design and contents": "디자인 및 내용",
+"Editorial": "Editorial",
+"Page layouts for HTML and PDF. Changing the design keeps your data, included sections and written notes.": "HTML 및 PDF용 페이지 레이아웃. 디자인을 변경하더라도 데이터, 포함된 섹션 및 작성된 메모는 그대로 유지됩니다.",
+"Presets choose the sections below. They keep your design, data selection and written notes.": "사전 설정은 아래 섹션을 선택합니다. 이 설정은 사용자의 디자인, 데이터 선택 및 작성된 메모를 유지합니다.",
+"Report design": "보고서 디자인",
+"Ruled tables, precise references and a compact register layout.": "격자형 표, 정확한 참조 정보 및 간결한 색인 레이아웃.",
+"Serif headings, a quiet margin and space for longer explanations.": "세리프 서체의 제목, 여유 있는 여백, 그리고 자세한 설명을 위한 공간.",
+"Technical": "기술"
 }

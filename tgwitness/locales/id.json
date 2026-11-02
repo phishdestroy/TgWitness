@@ -5648,5 +5648,22 @@
 "Validated time bound through record #{n}; {tail} later records are outside that bound.": "Batas waktu yang telah divalidasi hingga catatan #{n}; {tail} catatan selanjutnya berada di luar batas tersebut.",
 "Validated timestamp receipts": "Tanda terima cap waktu yang telah divalidasi",
 "Verify the original ZIP with a trusted copy of verify.py and --fingerprint from a separate trusted channel. Keep the verification result with the unchanged ZIP.": "Verifikasi berkas ZIP asli menggunakan salinan tepercaya dari verify.py dan opsi --fingerprint dari saluran tepercaya yang terpisah. Simpan hasil verifikasi bersama berkas ZIP yang tidak diubah.",
-"Witnesses and collection environment": "Saksi dan lingkungan pengumpulan"
+"Witnesses and collection environment": "Saksi dan lingkungan pengumpulan",
+"<b>2</b> Design &amp; contents": "<b>2</b> Desain &amp; isi",
+"A compact opening, key figures in one row and concise sections.": "Pembukaan yang ringkas, angka-angka kunci dalam satu baris, dan bagian-bagian yang padat.",
+"A familiar dossier with clear sections and a structured record.": "Dokumen yang familiar dengan bagian-bagian yang jelas dan catatan yang terstruktur.",
+"A modular dashboard for comparing activity, people and sources.": "Dasbor modular untuk membandingkan aktivitas, orang, dan sumber.",
+"An open cover, prominent figures and a clear path through events.": "Sampul terbuka, angka-angka yang menonjol, dan alur peristiwa yang jelas.",
+"Analytics": "Analytics",
+"Choose how the report looks and what it includes.": "Pilih tampilan laporan dan isinya.",
+"Classic": "Classic",
+"Contents preset": "Preset isi",
+"Design and contents": "Desain dan isi",
+"Editorial": "Editorial",
+"Page layouts for HTML and PDF. Changing the design keeps your data, included sections and written notes.": "Tata letak halaman untuk HTML dan PDF. Mengubah desain tidak akan mengubah data, bagian yang disertakan, dan catatan tertulis Anda.",
+"Presets choose the sections below. They keep your design, data selection and written notes.": "Preset memilih bagian-bagian di bawah ini. Preset ini mempertahankan desain, pemilihan data, dan catatan tertulis Anda.",
+"Report design": "Desain laporan",
+"Ruled tables, precise references and a compact register layout.": "Tabel bergaris, referensi yang tepat, dan tata letak daftar isi yang ringkas.",
+"Serif headings, a quiet margin and space for longer explanations.": "Judul dengan huruf serif, margin yang tidak terlalu mencolok, dan ruang untuk penjelasan yang lebih panjang.",
+"Technical": "Teknis"
 }

@@ -22,6 +22,7 @@ import hashlib
 import logging
 import os
 import re
+import threading
 import uuid
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -31,7 +32,7 @@ from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.x509.oid import NameOID
 
-from . import report
+from . import report, report_design_pdf
 from .store import canonical
 from .verify import coverage_lines, fingerprint
 
@@ -94,13 +95,15 @@ def cjk_font():
     return next(cjk_candidates(), None)
 
 
-def document(say, footer):
+def document(say, footer, design="classic"):
     """An A4 page set-up with the bundled fonts, a footer naming the case and report, and page numbers."""
     from fpdf import FPDF
     from fpdf.enums import XPos, YPos
 
     class Document(FPDF):
         def header(self):
+            if self.report_style.name != "classic":
+                return report_design_pdf.header(self, footer)
             if self.page_no() > 1:
                 self.set_font("Sans", "B", size=7)
                 self.set_text_color(*MUTED)
@@ -145,6 +148,8 @@ def document(say, footer):
             return super().write(h, text, *args, **kwargs)
 
         def footer(self):
+            if self.report_style.name != "classic":
+                return report_design_pdf.footer(self, footer)
             self.set_draw_color(*LINE)
             self.line(self.l_margin, self.h - 16, self.l_margin + self.epw, self.h - 16)
             self.set_y(-12)
@@ -155,17 +160,21 @@ def document(say, footer):
 
         def line_text(self, text, size=9.5, style="", color=INK, height=None, align=None, family="Sans"):
             self.set_font(family, style, size)
-            self.set_text_color(*color)
+            self.set_text_color(*report_design_pdf.color(self.report_style, color))
             self.multi_cell(0, height or size * 0.47, str(text), new_x=XPos.LMARGIN, new_y=YPos.NEXT,
                             align=align or ("R" if self.rtl else "L"))
 
     pdf = Document(format="A4", unit="mm")
+    pdf.report_style = report_design_pdf.get_style(design)
     pdf.rtl, pdf.say, pdf.missing = say.direction == "rtl", say, set()
-    pdf.set_margins(18, 16, 18)
+    pdf.set_margins(*pdf.report_style.margins)
     pdf.set_auto_page_break(True, 20)
     pdf.add_font("Sans", "", str(FONT_DIR / "NotoSans-Regular.ttf"))
     pdf.add_font("Sans", "B", str(FONT_DIR / "NotoSans-Bold.ttf"))
     pdf.add_font("Mono", "", str(FONT_DIR / "NotoSansMono-Regular.ttf"))
+    if pdf.report_style.heading_family == "Serif":
+        pdf.add_font("Serif", "", str(FONT_DIR / "NotoSerif-Regular.ttf"))
+        pdf.add_font("Serif", "B", str(FONT_DIR / "NotoSerif-Bold.ttf"))
     fallbacks = []
     for name in FALLBACKS:
         pdf.add_font(name[:-4], "", str(FONT_DIR / name))
@@ -198,6 +207,7 @@ def document(say, footer):
         pdf.can_shape = False
     pdf.shaping = False
     pdf.set_creator("TgWitness")
+    pdf.set_keywords("TgWitness; report design: " + pdf.report_style.name)
     pdf.set_lang(say.language)
     pdf.alias_nb_pages()
     return pdf
@@ -208,8 +218,11 @@ class MissingGlyphs(logging.Handler):
     def __init__(self, found):
         super().__init__(logging.WARNING)
         self.found = found
+        self.thread = threading.get_ident()
 
     def emit(self, record):
+        if record.thread != self.thread:
+            return
         message = record.getMessage()
         if "missing the following glyphs" in message:
             self.found.add(message.split(":", 1)[-1].strip()[:200])
@@ -217,16 +230,18 @@ class MissingGlyphs(logging.Handler):
 
 class Layout:
     """The parts of a formal report, written onto a fpdf2 document."""
-    def __init__(self, pdf, say, template="dossier"):
+    def __init__(self, pdf, say, template=None):
         from fpdf.enums import TextEmphasis, XPos, YPos
         from fpdf.fonts import FontFace
         self.pdf, self.say, self.XPos, self.YPos, self.FontFace = pdf, say, XPos, YPos, FontFace
         self.plain = TextEmphasis.NONE
         self.number = 0
+        self.design = pdf.report_style
         self.rtl = pdf.rtl
         self.align = "RIGHT" if pdf.rtl else "LEFT"
-        self.accent = report.report_analytics.DESIGN_COLORS.get(template, INK)
-        self.template = template
+        # Older callers passed the presentation here; the document now owns
+        # the complete immutable style, shared by its cover, tables and footer.
+        self.accent = self.design.accent
 
     def need(self, height):
         if self.pdf.get_y() + height > self.pdf.h - self.pdf.b_margin:
@@ -239,7 +254,7 @@ class Layout:
 
     def face(self, mono=False, size=8.8, bold=False, color=INK):
         return self.FontFace(family="Mono" if mono else "Sans", emphasis="BOLD" if bold else self.plain,
-                             size_pt=size, color=color)
+                             size_pt=size, color=report_design_pdf.color(self.design, color))
 
     def text(self, value, **kwargs):
         self.pdf.line_text(value, **kwargs)
@@ -248,21 +263,23 @@ class Layout:
         self.pdf.ln(mm)
 
     def title_block(self, eyebrow, title, facts, signed_note):
+        if self.design.name != "classic":
+            return report_design_pdf.title_block(self, eyebrow, title, facts, signed_note)
         pdf = self.pdf
         pdf.add_page()
         pdf.start_section(str(title), level=0)
-        with pdf.local_context(fill_color=(248, 242, 233) if self.template == "editorial" else self.accent):
+        with pdf.local_context(fill_color=INK):
             pdf.rect(0, 0, pdf.w, 37, style="F")
-        with pdf.local_context(fill_color=self.accent if self.template == "editorial" else GOLD):
+        with pdf.local_context(fill_color=GOLD):
             pdf.rect(pdf.l_margin, 36, 28, 1, style="F")
         pdf.set_y(13)
-        self.text("TG / WITNESS", size=13, style="B", color=INK if self.template == "editorial" else WHITE)
-        self.text(self.say("Evidence dossier").upper(), size=7.5, color=MUTED if self.template == "editorial" else (214, 224, 228))
+        self.text("TG / WITNESS", size=13, style="B", color=WHITE)
+        self.text(self.say("Evidence dossier").upper(), size=7.5, color=(214, 224, 228))
         pdf.set_y(48)
         self.text(eyebrow.upper(), size=8, style="B", color=MUTED)
         self.gap(4)
         title_size = 29 if len(str(title)) < 90 else 23 if len(str(title)) < 160 else 19
-        self.text(title, size=title_size, style="" if self.template == "editorial" else "B", height=title_size * .42)
+        self.text(title, size=title_size, style="B", height=title_size * .42)
         self.gap(7)
         pdf.set_draw_color(*LINE)
         pdf.line(pdf.l_margin, pdf.get_y(), pdf.l_margin + pdf.epw, pdf.get_y())
@@ -289,6 +306,8 @@ class Layout:
 
     def figures(self, items):
         """A readable two-row index of figures on the cover, including long periods."""
+        if self.design.name != "classic":
+            return report_design_pdf.figures(self, items)
         pdf = self.pdf
         items = [(k, str(v) if v is not None else "—") for k, v in items]
         for start in range(0, len(items), 4):
@@ -304,6 +323,8 @@ class Layout:
         self.text(self.say("Read the summary. Review the evidence. Repeat the checks."), size=8, color=MUTED)
 
     def section(self, title, lead=""):
+        if self.design.name != "classic":
+            return report_design_pdf.section(self, title, lead)
         pdf = self.pdf
         self.number += 1
         if pdf.get_y() > pdf.h - 60:
@@ -311,7 +332,7 @@ class Layout:
         else:
             self.gap(3)
         y = pdf.get_y()
-        pdf.set_draw_color(*self.accent)
+        pdf.set_draw_color(*GOLD)
         pdf.line(pdf.l_margin, y, pdf.l_margin + pdf.epw, y)
         pdf.set_draw_color(*LINE)
         pdf.set_y(y + 3)
@@ -333,8 +354,11 @@ class Layout:
         rows = [(k, v) for k, v in rows if v not in (None, "")]
         if not rows:
             return
+        if self.design.name != "classic":
+            self.pdf.set_draw_color(*self.design.line)
         with self.pdf.table(col_widths=self.mirror((30, 70)), first_row_as_headings=False, line_height=4.6,
-                            borders_layout="ALL", cell_fill_color=FILL, text_align=self.align, padding=1.6,
+                            borders_layout=self.design.table_border, cell_fill_color=self.design.tint,
+                            text_align=self.align, padding=1.6 if self.design.name == "classic" else self.design.table_padding,
                             cell_fill_mode="COLUMNS" if self.rtl else "EVEN_COLUMNS") as table:
             for key, value in rows:
                 row = table.row()
@@ -347,9 +371,13 @@ class Layout:
     def grid(self, columns, rows, widths=None):
         if not rows:
             return
-        with self.pdf.table(col_widths=self.mirror(widths) if widths else None, line_height=4.4, borders_layout="ALL",
-                            text_align=self.align, padding=1.4,
-                            headings_style=self.FontFace(emphasis="BOLD", size_pt=8, fill_color=FILL)) as table:
+        if self.design.name != "classic":
+            self.pdf.set_draw_color(*self.design.line)
+        with self.pdf.table(col_widths=self.mirror(widths) if widths else None, line_height=4.4,
+                            borders_layout=self.design.table_border,
+                            text_align=self.align, padding=self.design.table_padding,
+                            headings_style=self.FontFace(emphasis="BOLD", size_pt=8, fill_color=self.design.tint,
+                                                         color=self.design.ink if self.design.name != "classic" else None)) as table:
             head = table.row()
             for column in self.mirror(columns):
                 head.cell(column)
@@ -367,10 +395,16 @@ class Layout:
 
     def callout(self, text, color=WARN):
         pdf = self.pdf
+        if self.design.name != "classic":
+            pdf.set_font("Sans", "", 8.8)
+            needed = pdf.multi_cell(pdf.epw - 3.5, 4.4, str(text), dry_run=True, output="HEIGHT")
+            if pdf.will_page_break(needed):
+                pdf.add_page()
+            color = report_design_pdf.color(self.design, color)
         y, x = pdf.get_y(), pdf.l_margin
         pdf.set_x(x if self.rtl else x + 3.5)
         pdf.set_font("Sans", "", 8.8)
-        pdf.set_text_color(*INK)
+        pdf.set_text_color(*self.design.ink)
         pdf.multi_cell(pdf.epw - 3.5, 4.4, str(text), new_x=self.XPos.LMARGIN, new_y=self.YPos.NEXT,
                        align=self.align[0])
         with pdf.local_context(fill_color=color):  # tables take the fill colour in force when they start
@@ -774,12 +808,12 @@ def evidence_pdf(data, context, events=None, certificate=None):
     report_id, fp = data["report_id"], data["subject"].get("fingerprint") or ""
     footer = " · ".join(x for x in ((say("Case ID") + " " + case["id"]) if case.get("id") else "",
                                     say("Report ID") + " " + report_id[:8]) if x)
-    pdf = document(say, footer)
+    pdf = document(say, footer, options.get("design", "classic"))
     found = MissingGlyphs(pdf.missing)
     logging.getLogger("fpdf").addHandler(found)
     logging.getLogger("fontTools.subset").setLevel(logging.ERROR)  # tables it cannot subset are left out, quietly
     try:
-        lay = Layout(pdf, say, options.get("design", "dossier"))
+        lay = Layout(pdf, say)
         label = say("Handover extract") if handover else say("Evidence report")
         title = case.get("title") or (say("Handover extract") if handover else say("Telegram observation journal"))
         pdf.set_title(title)
@@ -1035,12 +1069,12 @@ def chat_pdf(meta, context, messages=None, certificate=None):
     chat_title = chat.get("title") or say("Chat {id}", id=chat.get("id"))
     footer = " · ".join(x for x in ((say("Case ID") + " " + case["id"]) if case.get("id") else "",
                                     say("Report ID") + " " + report_id[:8]) if x)
-    pdf = document(say, footer)
+    pdf = document(say, footer, options.get("design", "classic"))
     found = MissingGlyphs(pdf.missing)
     logging.getLogger("fpdf").addHandler(found)
     logging.getLogger("fontTools.subset").setLevel(logging.ERROR)
     try:
-        lay = Layout(pdf, say, options.get("design", "dossier"))
+        lay = Layout(pdf, say)
         title = case.get("title") or chat_title
         pdf.set_title(title)
         pdf.set_author(case.get("examiner") or case.get("organization") or "TgWitness")

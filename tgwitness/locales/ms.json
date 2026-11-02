@@ -5648,5 +5648,22 @@
 "Validated time bound through record #{n}; {tail} later records are outside that bound.": "Batas masa yang disahkan sehingga rekod #{n}; rekod #{tail} yang kemudian berada di luar batas tersebut.",
 "Validated timestamp receipts": "Resit cap masa yang disahkan",
 "Verify the original ZIP with a trusted copy of verify.py and --fingerprint from a separate trusted channel. Keep the verification result with the unchanged ZIP.": "Sahkan ZIP asal dengan salinan verify.py yang dipercayai dan --fingerprint daripada saluran dipercayai yang berasingan. Simpan keputusan pengesahan bersama ZIP yang tidak berubah.",
-"Witnesses and collection environment": "Saksi dan persekitaran pengumpulan"
+"Witnesses and collection environment": "Saksi dan persekitaran pengumpulan",
+"<b>2</b> Design &amp; contents": "<b> 2</b> Reka bentuk &amp; & kandungan",
+"A compact opening, key figures in one row and concise sections.": "Pendahuluan ringkas, angka utama dalam satu baris dan seksyen padat.",
+"A familiar dossier with clear sections and a structured record.": "Dossier yang biasa dengan bahagian yang jelas dan rekod berstruktur.",
+"A modular dashboard for comparing activity, people and sources.": "Dashboard modular untuk membandingkan aktiviti, orang dan sumber.",
+"An open cover, prominent figures and a clear path through events.": "Sampul terbuka, figura menonjol dan laluan jelas melalui peristiwa.",
+"Analytics": "Analitik",
+"Choose how the report looks and what it includes.": "Pilih rupa laporan dan kandungannya.",
+"Classic": "Klasik",
+"Contents preset": "Pra-tetapan kandungan",
+"Design and contents": "Reka bentuk dan kandungan",
+"Editorial": "Editorial",
+"Page layouts for HTML and PDF. Changing the design keeps your data, included sections and written notes.": "Susun atur halaman untuk HTML dan PDF. Menukar reka bentuk mengekalkan data anda, bahagian yang disertakan dan nota bertulis.",
+"Presets choose the sections below. They keep your design, data selection and written notes.": "Preset memilih bahagian di bawah. Mereka mengekalkan reka bentuk anda, pemilihan data dan nota bertulis.",
+"Report design": "Reka bentuk laporan",
+"Ruled tables, precise references and a compact register layout.": "Jadual bergaris, rujukan tepat dan susun atur indeks padat.",
+"Serif headings, a quiet margin and space for longer explanations.": "Heading serif, margin yang tenang dan ruang untuk penjelasan yang lebih panjang.",
+"Technical": "Teknikal"
 }

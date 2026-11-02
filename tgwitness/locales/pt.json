@@ -5675,5 +5675,22 @@
 "Validated time bound through record #{n}; {tail} later records are outside that bound.": "Limite de tempo validado até o registro nº {n}; os registros posteriores {tail} estão fora desse limite.",
 "Validated timestamp receipts": "Recibos de carimbo de data/hora validados",
 "Verify the original ZIP with a trusted copy of verify.py and --fingerprint from a separate trusted channel. Keep the verification result with the unchanged ZIP.": "Verifique o arquivo ZIP original com uma cópia confiável do verify.py e a opção --fingerprint, proveniente de um canal confiável separado. Mantenha o resultado da verificação junto com o arquivo ZIP inalterado.",
-"Witnesses and collection environment": "Testemunhas e ambiente de coleta"
+"Witnesses and collection environment": "Testemunhas e ambiente de coleta",
+"<b>2</b> Design &amp; contents": "<b>2</b> Design &amp; conteúdo",
+"A compact opening, key figures in one row and concise sections.": "Uma abertura compacta, números-chave em uma única linha e seções concisas.",
+"A familiar dossier with clear sections and a structured record.": "Um dossiê familiar com seções claras e um registro estruturado.",
+"A modular dashboard for comparing activity, people and sources.": "Um painel modular para comparar atividades, pessoas e fontes.",
+"An open cover, prominent figures and a clear path through events.": "Uma capa aberta, números em destaque e um caminho claro pelos eventos.",
+"Analytics": "Analytics",
+"Choose how the report looks and what it includes.": "Escolha a aparência do relatório e o que ele inclui.",
+"Classic": "Clássico",
+"Contents preset": "Predefinição de conteúdo",
+"Design and contents": "Design e conteúdo",
+"Editorial": "Editorial",
+"Page layouts for HTML and PDF. Changing the design keeps your data, included sections and written notes.": "Layouts de página para HTML e PDF. A alteração do design mantém seus dados, seções incluídas e notas escritas.",
+"Presets choose the sections below. They keep your design, data selection and written notes.": "As predefinições selecionam as seções abaixo. Elas mantêm seu design, sua seleção de dados e suas anotações escritas.",
+"Report design": "Design do relatório",
+"Ruled tables, precise references and a compact register layout.": "Tabelas com linhas, referências precisas e um layout de registro compacto.",
+"Serif headings, a quiet margin and space for longer explanations.": "Títulos com serifa, uma margem discreta e espaço para explicações mais longas.",
+"Technical": "Técnico"
 }

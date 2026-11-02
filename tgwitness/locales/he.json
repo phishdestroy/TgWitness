@@ -5702,5 +5702,22 @@
 "Validated time bound through record #{n}; {tail} later records are outside that bound.": "גבול הזמן שאומת באמצעות הרשומה מס' {n}; הרשומות המאוחרות יותר {tail} נמצאות מחוץ לגבול זה.",
 "Validated timestamp receipts": "קבלות חותמות זמן מאומתות",
 "Verify the original ZIP with a trusted copy of verify.py and --fingerprint from a separate trusted channel. Keep the verification result with the unchanged ZIP.": "אמתו את קובץ ה-ZIP המקורי באמצעות עותק מהימן של verify.py ו---fingerprint מערוץ מהימן נפרד. שמרו את תוצאת האימות יחד עם קובץ ה-ZIP ללא שינויים.",
-"Witnesses and collection environment": "עדים וסביבת האיסוף"
+"Witnesses and collection environment": "עדים וסביבת האיסוף",
+"<b>2</b> Design &amp; contents": "<b>2</b> עיצוב &amp; תוכן",
+"A compact opening, key figures in one row and concise sections.": "פתיחה קומפקטית, נתונים מרכזיים בשורה אחת וסעיפים תמציתיים.",
+"A familiar dossier with clear sections and a structured record.": "תיק מוכר עם סעיפים ברורים ותיעוד מובנה.",
+"A modular dashboard for comparing activity, people and sources.": "לוח מחוונים מודולרי להשוואת פעילות, אנשים ומקורות.",
+"An open cover, prominent figures and a clear path through events.": "כריכה פתוחה, נתונים בולטים ומסלול ברור בין האירועים.",
+"Analytics": "Analytics",
+"Choose how the report looks and what it includes.": "בחרו כיצד ייראה הדוח ומה יכלול.",
+"Classic": "קלאסי",
+"Contents preset": "הגדרת תוכן קבועה מראש",
+"Design and contents": "עיצוב ותוכן",
+"Editorial": "עיתונאי",
+"Page layouts for HTML and PDF. Changing the design keeps your data, included sections and written notes.": "פריסות עמודים ב-HTML וב-PDF. שינוי העיצוב שומר על הנתונים, הסעיפים הכלולים וההערות הכתובות.",
+"Presets choose the sections below. They keep your design, data selection and written notes.": "ההגדרות הקבועות מראש בוחרות את הסעיפים המפורטים להלן. הן שומרות על העיצוב, בחירת הנתונים וההערות הכתובות שלכם.",
+"Report design": "עיצוב הדוח",
+"Ruled tables, precise references and a compact register layout.": "טבלאות מסודרות, הפניות מדויקות ועיצוב רישום קומפקטי.",
+"Serif headings, a quiet margin and space for longer explanations.": "כותרות עם סריפים, שוליים שקטים ומרחב להסברים ארוכים יותר.",
+"Technical": "טכני"
 }

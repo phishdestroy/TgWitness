@@ -5729,5 +5729,22 @@
 "Validated time bound through record #{n}; {tail} later records are outside that bound.": "Zweryfikowany przedział czasowy obejmuje rekord nr {n}; rekordy {tail} i późniejsze znajdują się poza tym przedziałem.",
 "Validated timestamp receipts": "Zweryfikowane potwierdzenia sygnatur czasowych",
 "Verify the original ZIP with a trusted copy of verify.py and --fingerprint from a separate trusted channel. Keep the verification result with the unchanged ZIP.": "Proszę zweryfikować oryginalny plik ZIP za pomocą zaufanej kopii skryptu verify.py oraz opcji --fingerprint, pobranych z oddzielnego, zaufanego kanału. Proszę zachować wynik weryfikacji wraz z niezmienionym plikiem ZIP.",
-"Witnesses and collection environment": "Świadkowie i środowisko gromadzenia danych"
+"Witnesses and collection environment": "Świadkowie i środowisko gromadzenia danych",
+"<b>2</b> Design &amp; contents": "<b>2</b> Projekt &amp; treść",
+"A compact opening, key figures in one row and concise sections.": "Zwięzły wstęp, kluczowe dane w jednym wierszu oraz zwięzłe sekcje.",
+"A familiar dossier with clear sections and a structured record.": "Znana dokumentacja z przejrzystymi sekcjami i uporządkowanym zapisem.",
+"A modular dashboard for comparing activity, people and sources.": "Modułowy pulpit nawigacyjny służący do porównywania działań, osób i źródeł.",
+"An open cover, prominent figures and a clear path through events.": "Otwarta okładka, wyraźne dane liczbowe oraz przejrzysta ścieżka wydarzeń.",
+"Analytics": "Analytics",
+"Choose how the report looks and what it includes.": "Proszę wybrać wygląd raportu oraz jego zawartość.",
+"Classic": "Classic",
+"Contents preset": "Ustawienie zawartości",
+"Design and contents": "Projekt i treść",
+"Editorial": "Redakcyjny",
+"Page layouts for HTML and PDF. Changing the design keeps your data, included sections and written notes.": "Układy stron dla formatów HTML i PDF. Zmiana projektu pozwala zachować Państwa dane, zawarte sekcje oraz zapisane uwagi.",
+"Presets choose the sections below. They keep your design, data selection and written notes.": "Ustawienia wstępne wybierają sekcje wymienione poniżej. Zachowują one Państwa projekt, wybór danych oraz zapisane notatki.",
+"Report design": "Projekt raportu",
+"Ruled tables, precise references and a compact register layout.": "Tabele z liniami, precyzyjne odniesienia oraz zwarty układ rejestru.",
+"Serif headings, a quiet margin and space for longer explanations.": "Nagłówki z czcionkami szeryfowymi, dyskretny margines oraz miejsce na dłuższe wyjaśnienia.",
+"Technical": "Technical"
 }
