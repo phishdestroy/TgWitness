@@ -1,10 +1,16 @@
-# 追蹤訊息。理解證據。
+# 從 Telegram 紀錄到清晰的案件。
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/
 
-先進行首次擷取，了解證據的運作原理，然後建立您所需的設定。
+處理已儲存的訊息及其變更紀錄，將您的調查結果與原始來源建立關聯，並準備經簽署的檔案以供審查。
 
-[互動式實地指南**帶來改變。看看證據能捕捉到什麼。** 播放訊息的歷史紀錄、修改記錄並追蹤其雜湊值。 探索視覺指南](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/concepts/) [## 模式、情境與證據等級 收集範圍、事件邊界、八種驗證機制以及六個虛構的調查情境。](https://phishdestroy.github.io/TgWitness/zh-Hant/guides/modes.html)
+## 探索工作流程
+
+圖文並茂的指南
+
+[### 案件看板 請確保觀察結果、精確引述及團隊筆記保持關聯性。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/case-board/) [### 報告工作室 請選擇素材及八種報告設計之一。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reports/) [### 分享副本 請根據收件者所需欄位，準備一份經簽署的摘錄文件。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/handover/) [### 帳戶群組 請共同審查帳戶，並將各帳戶的工作區分開。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/groups/)
+
+[## 模式、情境與證據等級 收集範圍、事件邊界、八種驗證機制以及六個虛構的調查情境。](https://phishdestroy.github.io/TgWitness/zh-Hant/guides/modes.html)
 
 ## 您捕獲的第一則訊息
 

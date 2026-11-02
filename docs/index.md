@@ -1,10 +1,16 @@
-# Follow the message. Understand the evidence.
+# From Telegram records to a clear case.
 
 Canonical page: https://phishdestroy.github.io/TgWitness/docs/
 
-Get your first capture, explore how the proof works, then build the setup you need.
+Work with saved messages and changes, connect your findings to their sources, and prepare signed files for review.
 
-[THE INTERACTIVE FIELD GUIDE**Make a change. See what the proof catches.** Play a message’s history, alter a record and follow its hash. Explore the visual guide](https://phishdestroy.github.io/TgWitness/docs/concepts/) [## Modes, scenarios and evidence levels Collection scopes, event boundaries, eight verification mechanisms and six fictional investigation scenarios.](https://phishdestroy.github.io/TgWitness/guides/modes.html)
+## Explore the workflows
+
+Illustrated guides
+
+[### Case Board Keep observations, exact quotes and team notes connected.](https://phishdestroy.github.io/TgWitness/docs/case-board/) [### Report studio Choose the material and one of eight report designs.](https://phishdestroy.github.io/TgWitness/docs/reports/) [### Sharing copy Prepare a signed extract with the fields a recipient needs.](https://phishdestroy.github.io/TgWitness/docs/handover/) [### Account groups Review accounts together and keep their workspaces separate.](https://phishdestroy.github.io/TgWitness/docs/groups/)
+
+[## Modes, scenarios and evidence levels Collection scopes, event boundaries, eight verification mechanisms and six fictional investigation scenarios.](https://phishdestroy.github.io/TgWitness/guides/modes.html)
 
 ## Your first captured message
 

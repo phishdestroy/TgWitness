@@ -1,10 +1,16 @@
-# Folgen Sie der Nachricht. Verstehen Sie die Beweise.
+# Von Telegram-Datensätzen zu einem klaren Fall.
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/docs/
 
-Erstellen Sie Ihre erste Aufzeichnung, erkunden Sie, wie die Nachweise funktionieren, und richten Sie anschließend die für Sie erforderliche Konfiguration ein.
+Arbeiten Sie mit gespeicherten Nachrichten und Änderungen, verknüpfen Sie Ihre Erkenntnisse mit den jeweiligen Quellen und bereiten Sie signierte Dateien für die Überprüfung vor.
 
-[DER INTERAKTIVE FELDLEITFADEN**Bewirken Sie etwas. Sehen Sie, was die Beweise offenbaren.** Rufen Sie den Verlauf einer Nachricht auf, ändern Sie einen Eintrag und verfolgen Sie dessen Hash-Wert. Entdecken Sie die visuelle Anleitung „“](https://phishdestroy.github.io/TgWitness/de/docs/concepts/) [## Modi, Szenarien und Evidenzstufen Erfassungsbereiche, Ereignisgrenzen, acht Verifizierungsmechanismen und sechs fiktive Untersuchungsszenarien.](https://phishdestroy.github.io/TgWitness/de/guides/modes.html)
+## Entdecken Sie die Arbeitsabläufe
+
+Illustrierte Anleitungen
+
+[### Case Board Halten Sie Beobachtungen, wörtliche Zitate und Teamnotizen miteinander verknüpft.](https://phishdestroy.github.io/TgWitness/de/docs/case-board/) [### Report Studio Wählen Sie das Material und eines von acht Berichtsdesigns aus.](https://phishdestroy.github.io/TgWitness/de/docs/reports/) [### Freigabekopie Erstellen Sie einen signierten Auszug mit den Feldern, die der Empfänger benötigt.](https://phishdestroy.github.io/TgWitness/de/docs/handover/) [### Kontogruppen Überprüfen Sie Konten gemeinsam und halten Sie deren Arbeitsbereiche getrennt.](https://phishdestroy.github.io/TgWitness/de/docs/groups/)
+
+[## Modi, Szenarien und Evidenzstufen Erfassungsbereiche, Ereignisgrenzen, acht Verifizierungsmechanismen und sechs fiktive Untersuchungsszenarien.](https://phishdestroy.github.io/TgWitness/de/guides/modes.html)
 
 ## Ihre erste erfasste Nachricht
 

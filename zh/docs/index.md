@@ -1,10 +1,16 @@
-# 追踪消息。理解证据。
+# 从 Telegram 记录到清晰的案件。
 
 Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/
 
-立即进行首次捕获，了解证据的运作原理，然后构建您所需的配置。
+处理已保存的消息及其变更，将调查结果与来源关联，并准备好已签名的文件以供审查。
 
-[交互式现场指南**带来改变。看看证据能捕捉到什么。** 回放消息历史记录、修改记录并追踪其哈希值。 浏览视觉指南](https://phishdestroy.github.io/TgWitness/zh/docs/concepts/) [## 模式、场景和证据级别 采集范围、事件边界、八种验证机制以及六个虚构的调查场景。](https://phishdestroy.github.io/TgWitness/zh/guides/modes.html)
+## 探索工作流程
+
+图文指南
+
+[### 案件看板 请确保观察记录、原话引用和团队笔记保持关联。](https://phishdestroy.github.io/TgWitness/zh/docs/case-board/) [### 报告工作室 选择材料及八种报告设计之一。](https://phishdestroy.github.io/TgWitness/zh/docs/reports/) [### 共享文本 根据收件人的需求，准备一份包含所需字段的签名提取文件。](https://phishdestroy.github.io/TgWitness/zh/docs/handover/) [### 账户组 请共同审查账户，并保持其工作区相互独立。](https://phishdestroy.github.io/TgWitness/zh/docs/groups/)
+
+[## 模式、场景和证据级别 采集范围、事件边界、八种验证机制以及六个虚构的调查场景。](https://phishdestroy.github.io/TgWitness/zh/guides/modes.html)
 
 ## 您捕获的第一条消息
 

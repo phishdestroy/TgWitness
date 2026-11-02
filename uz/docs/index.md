@@ -1,10 +1,16 @@
-# Xabarga rioya qiling. Dalillarni tushuning.
+# Telegram yozuvlaridan aniq ishga.
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/
 
-Birinchi ushlashni oling, dalil qanday ishlashini o'rganing, so'ng kerakli sozlamalarni yarating.
+Saqlangan xabarlar va o'zgarishlar bilan ishlang, topilmalaringizni ularning manbalariga bog'lang va imzolangan fayllarni ko'rib chiqish uchun tayyorlang.
 
-[Interaktiv maydon qo'llanmasi**O'zgartirish kirit. Dalil nima ushlashini ko'ring.** Xabar tarixini ijro eting, yozuvni o'zgartiring va uning xeshini kuzatib boring. vizual qo'llanmasini o'rganing](https://phishdestroy.github.io/TgWitness/uz/docs/concepts/) [## Rejimlar, ssenariylar va dalillar darajalari Yig'ish doiralari, voqea chegaralari, sakkizta tasdiqlash mexanizmi va oltita badiiy tergov ssenariysi.](https://phishdestroy.github.io/TgWitness/uz/guides/modes.html)
+## Ish jarayonlarini o'rganing
+
+Illyustratsiyalangan qo'llanmalar
+
+[### Case Board Kuzatuvlar, aniq iqtiboslar va jamoa eslatmalarini bog'lab saqlang.](https://phishdestroy.github.io/TgWitness/uz/docs/case-board/) [### Report studio Materialni va sakkizta hisobot dizaynidan birini tanlang.](https://phishdestroy.github.io/TgWitness/uz/docs/reports/) [### Matnni ulashish Qabul qiluvchiga kerak bo'lgan maydonlarni o'z ichiga olgan imzolangan qismini tayyorlang.](https://phishdestroy.github.io/TgWitness/uz/docs/handover/) [### Hisob guruhlari Hisoblarni birgalikda ko'rib chiqing va ularning ish maydonlarini alohida saqlang.](https://phishdestroy.github.io/TgWitness/uz/docs/groups/)
+
+[## Rejimlar, ssenariylar va dalillar darajalari Yig'ish doiralari, voqea chegaralari, sakkizta tasdiqlash mexanizmi va oltita badiiy tergov ssenariysi.](https://phishdestroy.github.io/TgWitness/uz/guides/modes.html)
 
 ## Sizning birinchi yozib olingan xabaringiz
 

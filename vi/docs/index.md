@@ -1,10 +1,16 @@
-# Theo dõi tin nhắn. Hiểu rõ bằng chứng.
+# Từ các bản ghi Telegram đến một vụ án rõ ràng.
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/
 
-Hãy thực hiện lần ghi lại đầu tiên, tìm hiểu cách thức hoạt động của bằng chứng, sau đó thiết lập cấu hình phù hợp với nhu cầu của quý vị.
+Làm việc với các tin nhắn đã lưu và các thay đổi, liên kết các phát hiện của bạn với nguồn gốc của chúng, và chuẩn bị các tệp đã ký để xem xét.
 
-[CỐ VẤN THỰC HÀNH TƯƠNG TÁC**Hãy thực hiện thay đổi. Hãy xem bằng chứng ghi lại được những gì.** Xem lại lịch sử của một tin nhắn, chỉnh sửa bản ghi và theo dõi mã băm của nó. Khám phá hướng dẫn trực quan](https://phishdestroy.github.io/TgWitness/vi/docs/concepts/) [## Các chế độ, kịch bản và mức độ bằng chứng Phạm vi thu thập, ranh giới sự kiện, tám cơ chế xác minh và sáu kịch bản điều tra giả định.](https://phishdestroy.github.io/TgWitness/vi/guides/modes.html)
+## Khám phá các quy trình làm việc
+
+Hướng dẫn có minh họa
+
+[### Case Board Giữ nguyên các quan sát, trích dẫn chính xác và ghi chú của nhóm.](https://phishdestroy.github.io/TgWitness/vi/docs/case-board/) [### Studio báo cáo Chọn tài liệu và một trong tám mẫu thiết kế báo cáo.](https://phishdestroy.github.io/TgWitness/vi/docs/reports/) [### Bản sao để chia sẻ Chuẩn bị một bản trích xuất đã ký với các trường thông tin mà người nhận cần.](https://phishdestroy.github.io/TgWitness/vi/docs/handover/) [### Nhóm tài khoản Cùng nhau xem xét các tài khoản và giữ không gian làm việc của từng tài khoản riêng biệt.](https://phishdestroy.github.io/TgWitness/vi/docs/groups/)
+
+[## Các chế độ, kịch bản và mức độ bằng chứng Phạm vi thu thập, ranh giới sự kiện, tám cơ chế xác minh và sáu kịch bản điều tra giả định.](https://phishdestroy.github.io/TgWitness/vi/guides/modes.html)
 
 ## Tin nhắn đầu tiên được ghi lại
 

@@ -1,10 +1,16 @@
-# Mesajı takip edin. Kanıtı anlayın.
+# Telegram kayıtlarından net bir davaya.
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/
 
-İlk yakalamanızı yapın, kanıtın nasıl işlediğini keşfedin, ardından ihtiyacınız olan kurulumu oluşturun.
+Kaydedilen mesajlar ve değişiklikler üzerinde çalışın, bulgularınızı kaynaklarıyla ilişkilendirin ve inceleme için imzalı dosyalar hazırlayın.
 
-[ETKİLEŞİMLİ SAHA KILAVUZU**Bir değişiklik yapın. Kanıtların neler ortaya çıkardığını görün.** Bir mesajın geçmişini görüntüleyin, bir kaydı değiştirin ve hash değerini takip edin. görsel kılavuzunu inceleyin](https://phishdestroy.github.io/TgWitness/tr/docs/concepts/) [## Modlar, senaryolar ve kanıt düzeyleri Toplama kapsamları, olay sınırları, sekiz doğrulama mekanizması ve altı kurgusal soruşturma senaryosu.](https://phishdestroy.github.io/TgWitness/tr/guides/modes.html)
+## İş akışlarını inceleyin
+
+Resimli kılavuzlar
+
+[### Case Board Gözlemler, tam alıntılar ve ekip notları arasındaki bağlantıları koruyun.](https://phishdestroy.github.io/TgWitness/tr/docs/case-board/) [### Rapor stüdyosu Malzemeyi ve sekiz rapor tasarımından birini seçin.](https://phishdestroy.github.io/TgWitness/tr/docs/reports/) [### Paylaşım metni Alıcının ihtiyaç duyduğu alanları içeren, imzalı bir özet hazırlayın.](https://phishdestroy.github.io/TgWitness/tr/docs/handover/) [### Hesap grupları Hesapları birlikte inceleyin ve çalışma alanlarını ayrı tutun.](https://phishdestroy.github.io/TgWitness/tr/docs/groups/)
+
+[## Modlar, senaryolar ve kanıt düzeyleri Toplama kapsamları, olay sınırları, sekiz doğrulama mekanizması ve altı kurgusal soruşturma senaryosu.](https://phishdestroy.github.io/TgWitness/tr/guides/modes.html)
 
 ## Yakalanan ilk mesajınız
 

@@ -1,10 +1,16 @@
-# Proszę kierować się treścią wiadomości. Proszę zrozumieć dowody.
+# Od zapisów z Telegrama do przejrzystej sprawy.
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pl/docs/
 
-Proszę wykonać pierwsze przechwycenie, zapoznać się z działaniem dowodu, a następnie skonfigurować niezbędne ustawienia.
+Pracuj z zapisanymi wiadomościami i zmianami, powiązaj swoje ustalenia z ich źródłami oraz przygotuj podpisane pliki do przeglądu.
 
-[INTERAKTYWNY PRZEWODNIK TERENOWY**Wprowadź zmianę. Zobacz, co uchwyci ten dowód.** Przeglądaj historię wiadomości, modyfikuj zapis i śledź jego skrót. Zapoznaj się z przewodnikiem wizualnym](https://phishdestroy.github.io/TgWitness/pl/docs/concepts/) [## Tryby, scenariusze i poziomy dowodów Zakresy gromadzenia danych, granice zdarzeń, osiem mechanizmów weryfikacji oraz sześć fikcyjnych scenariuszy dochodzeniowych.](https://phishdestroy.github.io/TgWitness/pl/guides/modes.html)
+## Zapoznaj się z procesami
+
+Ilustrowane przewodniki
+
+[### Case Board Należy zachować powiązania między spostrzeżeniami, dokładnymi cytatami i notatkami zespołu.](https://phishdestroy.github.io/TgWitness/pl/docs/case-board/) [### Studio raportów Należy wybrać materiał oraz jeden z ośmiu szablonów raportów.](https://phishdestroy.github.io/TgWitness/pl/docs/reports/) [### Udostępnianie tekstu Należy przygotować podpisany wyciąg zawierający pola potrzebne odbiorcy.](https://phishdestroy.github.io/TgWitness/pl/docs/handover/) [### Grupy kont Należy wspólnie przeglądać konta, zachowując oddzielne obszary robocze.](https://phishdestroy.github.io/TgWitness/pl/docs/groups/)
+
+[## Tryby, scenariusze i poziomy dowodów Zakresy gromadzenia danych, granice zdarzeń, osiem mechanizmów weryfikacji oraz sześć fikcyjnych scenariuszy dochodzeniowych.](https://phishdestroy.github.io/TgWitness/pl/guides/modes.html)
 
 ## Państwa pierwsza zarejestrowana wiadomość
 

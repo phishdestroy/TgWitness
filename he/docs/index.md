@@ -1,10 +1,16 @@
-# עקבו אחר המסר. הבינו את הראיות.
+# מרשומות Telegram לתיק ברור.
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/
 
-בצעו את התיעוד הראשון שלכם, בדקו כיצד הראיות פועלות, ואז בנו את התצורה הדרושה לכם.
+עבדו עם הודעות ושינויים שנשמרו, קישרו את הממצאים שלכם למקורותיהם, והכינו קבצים חתומים לבדיקה.
 
-[המדריך האינטראקטיבי לשטח**הביאו לשינוי. גלו מה מתועד בראיות.** הצג את היסטוריית ההודעה, שנה את הרישום ועקוב אחר ה-hash שלה. עיינו במדריך הוויזואלי](https://phishdestroy.github.io/TgWitness/he/docs/concepts/) [## מצבים, תרחישים ורמות ראיות היקפי איסוף, גבולות אירועים, שמונה מנגנוני אימות וששה תרחישי חקירה בדיוניים.](https://phishdestroy.github.io/TgWitness/he/guides/modes.html)
+## למדו על תהליכי העבודה
+
+מדריכים מאוירים
+
+[### Case Board יש לשמור על הקשר בין תצפיות, ציטוטים מדויקים והערות הצוות.](https://phishdestroy.github.io/TgWitness/he/docs/case-board/) [### סטודיו לדוחות בחרו את החומר ואת אחד משמונת עיצובי הדוחות.](https://phishdestroy.github.io/TgWitness/he/docs/reports/) [### שיתוף הטקסט הכן תמצית חתומה הכוללת את השדות הדרושים למקבל.](https://phishdestroy.github.io/TgWitness/he/docs/handover/) [### קבוצות חשבונות יש לעיין בחשבונות יחד ולשמור על הפרדה בין סביבות העבודה שלהם.](https://phishdestroy.github.io/TgWitness/he/docs/groups/)
+
+[## מצבים, תרחישים ורמות ראיות היקפי איסוף, גבולות אירועים, שמונה מנגנוני אימות וששה תרחישי חקירה בדיוניים.](https://phishdestroy.github.io/TgWitness/he/guides/modes.html)
 
 ## ההודעה הראשונה שנלכדה
 

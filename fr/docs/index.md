@@ -1,10 +1,16 @@
-# Suivez le fil du message. Comprenez les preuves.
+# Des messages Telegram à un dossier clair.
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/
 
-Effectuez votre première capture, découvrez le fonctionnement de la preuve, puis configurez l’installation dont vous avez besoin.
+Travaillez sur les messages enregistrés et les modifications, reliez vos conclusions à leurs sources et préparez des fichiers signés en vue de leur examen.
 
-[LE GUIDE PRATIQUE INTERACTIF**Faites la différence. Découvrez ce que les preuves révèlent.** Affichez l'historique d'un message, modifiez un enregistrement et suivez son hachage. Découvrez le guide visuel](https://phishdestroy.github.io/TgWitness/fr/docs/concepts/) [## Modes, scénarios et niveaux de preuve Portées de collecte, limites des événements, huit mécanismes de vérification et six scénarios d’enquête fictifs.](https://phishdestroy.github.io/TgWitness/fr/guides/modes.html)
+## Découvrez les workflows
+
+Guides illustrés
+
+[### Case Board Veillez à ce que les observations, les citations exactes et les notes de l'équipe restent liées entre elles.](https://phishdestroy.github.io/TgWitness/fr/docs/case-board/) [### Report Studio Choisissez le support et l’un des huit modèles de rapport.](https://phishdestroy.github.io/TgWitness/fr/docs/reports/) [### Partage du texte Préparez un extrait signé contenant les champs dont le destinataire a besoin.](https://phishdestroy.github.io/TgWitness/fr/docs/handover/) [### Groupes de comptes Examinez les comptes ensemble et conservez leurs espaces de travail séparés.](https://phishdestroy.github.io/TgWitness/fr/docs/groups/)
+
+[## Modes, scénarios et niveaux de preuve Portées de collecte, limites des événements, huit mécanismes de vérification et six scénarios d’enquête fictifs.](https://phishdestroy.github.io/TgWitness/fr/guides/modes.html)
 
 ## Votre premier message capturé
 

@@ -1,10 +1,16 @@
-# Ikuti pesan tersebut. Pahami buktinya.
+# Dari catatan Telegram menuju kasus yang jelas.
 
 Canonical page: https://phishdestroy.github.io/TgWitness/id/docs/
 
-Lakukan pencatatan pertama Anda, pelajari cara kerja bukti tersebut, lalu buat konfigurasi yang Anda butuhkan.
+Kerjakan pesan dan perubahan yang disimpan, hubungkan temuan Anda dengan sumbernya, dan siapkan berkas yang telah ditandatangani untuk ditinjau.
 
-[PANDUAN LAPANGAN INTERAKTIF**Lakukan perubahan. Lihat apa yang terekam dalam bukti tersebut.** Putar riwayat pesan, ubah catatan, dan lacak hash-nya. Jelajahi panduan visual](https://phishdestroy.github.io/TgWitness/id/docs/concepts/) [## Mode, skenario, dan tingkat bukti Ruang lingkup pengumpulan, batas peristiwa, delapan mekanisme verifikasi, dan enam skenario investigasi fiktif.](https://phishdestroy.github.io/TgWitness/id/guides/modes.html)
+## Jelajahi alur kerja
+
+Panduan bergambar
+
+[### Case Board Pastikan pengamatan, kutipan tepat, dan catatan tim tetap terhubung.](https://phishdestroy.github.io/TgWitness/id/docs/case-board/) [### Studio Laporan Pilih materi dan salah satu dari delapan desain laporan.](https://phishdestroy.github.io/TgWitness/id/docs/reports/) [### Teks untuk dibagikan Siapkan cuplikan yang telah ditandatangani dengan kolom-kolom yang dibutuhkan oleh penerima.](https://phishdestroy.github.io/TgWitness/id/docs/handover/) [### Grup akun Tinjau akun secara bersama-sama dan jaga agar ruang kerja masing-masing tetap terpisah.](https://phishdestroy.github.io/TgWitness/id/docs/groups/)
+
+[## Mode, skenario, dan tingkat bukti Ruang lingkup pengumpulan, batas peristiwa, delapan mekanisme verifikasi, dan enam skenario investigasi fiktif.](https://phishdestroy.github.io/TgWitness/id/guides/modes.html)
 
 ## Pesan pertama yang terekam
 

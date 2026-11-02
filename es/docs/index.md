@@ -1,10 +1,16 @@
-# Siga el hilo del mensaje. Comprenda las pruebas.
+# De los registros de Telegram a un caso claro.
 
 Canonical page: https://phishdestroy.github.io/TgWitness/es/docs/
 
-Realice su primera captura, explore cómo funciona la prueba y, a continuación, configure el sistema que necesite.
+Trabaja con los mensajes guardados y los cambios, vincula tus hallazgos a sus fuentes y prepara archivos firmados para su revisión.
 
-[LA GUÍA DE CAMPO INTERACTIVA**Marque la diferencia. Descubra lo que las pruebas revelan.** Reproduzca el historial de un mensaje, modifique un registro y siga su hash. Explore la guía visual](https://phishdestroy.github.io/TgWitness/es/docs/concepts/) [## Modos, escenarios y niveles de evidencia Ámbitos de recopilación, límites de eventos, ocho mecanismos de verificación y seis escenarios de investigación ficticios.](https://phishdestroy.github.io/TgWitness/es/guides/modes.html)
+## Explora los flujos de trabajo
+
+Guías ilustradas
+
+[### Case Board Mantén relacionadas las observaciones, las citas textuales y las notas del equipo.](https://phishdestroy.github.io/TgWitness/es/docs/case-board/) [### Estudio de informes Elige el material y uno de los ocho diseños de informe.](https://phishdestroy.github.io/TgWitness/es/docs/reports/) [### Texto para compartir Prepara un extracto firmado con los campos que necesite el destinatario.](https://phishdestroy.github.io/TgWitness/es/docs/handover/) [### Grupos de cuentas Revisa las cuentas conjuntamente y mantén sus espacios de trabajo separados.](https://phishdestroy.github.io/TgWitness/es/docs/groups/)
+
+[## Modos, escenarios y niveles de evidencia Ámbitos de recopilación, límites de eventos, ocho mecanismos de verificación y seis escenarios de investigación ficticios.](https://phishdestroy.github.io/TgWitness/es/guides/modes.html)
 
 ## Su primer mensaje capturado
 

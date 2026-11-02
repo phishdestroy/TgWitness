@@ -1,10 +1,16 @@
-# 메시지를 따르십시오. 증거를 이해하십시오.
+# 텔레그램 기록에서 명확한 사건으로.
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/
 
-첫 번째 캡처를 수행하고, 증거가 어떻게 작동하는지 살펴본 다음, 필요한 설정을 구축하십시오.
+저장된 메시지와 변경 사항을 처리하고, 조사 결과를 해당 출처와 연결하며, 검토를 위해 서명된 파일을 준비하십시오.
 
-[대화형 현장 가이드**변화를 만들어 보세요. 증거가 무엇을 포착하는지 확인해 보세요.** 메시지 이력을 확인하고, 기록을 수정하며, 해당 해시를 추적해 보세요. 시각적 가이드 살펴보기](https://phishdestroy.github.io/TgWitness/ko/docs/concepts/) [## 모드, 시나리오 및 증거 수준 수집 범위, 이벤트 경계, 8가지 검증 메커니즘 및 6가지 가상의 조사 시나리오.](https://phishdestroy.github.io/TgWitness/ko/guides/modes.html)
+## 워크플로우 살펴보기
+
+그림이 포함된 가이드
+
+[### 케이스 보드 관찰 내용, 정확한 인용문 및 팀 메모 간의 연관성을 유지해 주십시오.](https://phishdestroy.github.io/TgWitness/ko/docs/case-board/) [### 보고서 스튜디오 자료와 8가지 보고서 디자인 중 하나를 선택하십시오.](https://phishdestroy.github.io/TgWitness/ko/docs/reports/) [### 공유용 원문 수신자가 필요로 하는 필드를 포함하여 서명된 발췌본을 준비하십시오.](https://phishdestroy.github.io/TgWitness/ko/docs/handover/) [### 계정 그룹 계정을 함께 검토하되 작업 공간은 별도로 유지하십시오.](https://phishdestroy.github.io/TgWitness/ko/docs/groups/)
+
+[## 모드, 시나리오 및 증거 수준 수집 범위, 이벤트 경계, 8가지 검증 메커니즘 및 6가지 가상의 조사 시나리오.](https://phishdestroy.github.io/TgWitness/ko/guides/modes.html)
 
 ## 처음 캡처된 메시지
 

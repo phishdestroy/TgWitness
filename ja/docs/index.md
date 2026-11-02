@@ -1,10 +1,16 @@
-# メッセージに沿ってください。証拠を理解してください。
+# Telegramの記録から、明確な事件へ。
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/
 
-まずは最初のキャプチャを取得し、証拠の仕組みを確認してから、必要な設定を構築してください。
+保存されたメッセージや変更内容を処理し、調査結果をそのソースに関連付け、レビュー用の署名済みファイルを準備します。
 
-[インタラクティブ・フィールドガイド**変化を起こしましょう。証拠が何を捉えるか、ぜひご確認ください。** メッセージの履歴を再生し、記録を編集し、そのハッシュを追跡します。 ビジュアルガイド「」をご覧ください](https://phishdestroy.github.io/TgWitness/ja/docs/concepts/) [## モード、シナリオ、および証拠レベル 収集範囲、イベントの境界、8つの検証メカニズム、および6つの架空の調査シナリオ。](https://phishdestroy.github.io/TgWitness/ja/guides/modes.html)
+## ワークフローの詳細
+
+図解ガイド
+
+[### Case Board 観察事項、正確な引用、チームのメモは、それぞれ関連付けられた状態を維持してください。](https://phishdestroy.github.io/TgWitness/ja/docs/case-board/) [### レポートスタジオ 素材と、8種類のレポートデザインの中から1つを選択してください。](https://phishdestroy.github.io/TgWitness/ja/docs/reports/) [### 共有用テキスト 受取人が必要とするフィールドを含む、署名済みの抜粋を作成してください。](https://phishdestroy.github.io/TgWitness/ja/docs/handover/) [### アカウントグループ アカウントを共同でレビューしつつ、各ユーザーのワークスペースは分離してください。](https://phishdestroy.github.io/TgWitness/ja/docs/groups/)
+
+[## モード、シナリオ、および証拠レベル 収集範囲、イベントの境界、8つの検証メカニズム、および6つの架空の調査シナリオ。](https://phishdestroy.github.io/TgWitness/ja/guides/modes.html)
 
 ## 最初にキャプチャされたメッセージ
 

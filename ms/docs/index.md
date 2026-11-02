@@ -1,10 +1,16 @@
-# Ikuti mesej. Fahamilah bukti.
+# Daripada rekod Telegram kepada kes yang jelas.
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/docs/
 
-Dapatkan tangkapan pertama anda, terokai bagaimana bukti berfungsi, kemudian bina persediaan yang anda perlukan.
+Bekerja dengan mesej yang disimpan dan perubahan, hubungkan penemuan anda kepada sumbernya, dan sediakan fail yang ditandatangani untuk semakan.
 
-[PANDUAN LAPANGAN INTERAKTIF**Buat perubahan. Lihat apa yang ditangkap oleh bukti.** Mainkan sejarah mesej, ubah rekod dan ikuti hashnya. Terokai panduan visual](https://phishdestroy.github.io/TgWitness/ms/docs/concepts/) [## Mod, senario dan tahap bukti Skop pengumpulan, sempadan peristiwa, lapan mekanisme pengesahan dan enam senario penyiasatan rekaan.](https://phishdestroy.github.io/TgWitness/ms/guides/modes.html)
+## Terokai aliran kerja
+
+Panduan berilustrasi
+
+[### Papan Kes Pastikan pemerhatian, petikan tepat dan nota pasukan saling berkait.](https://phishdestroy.github.io/TgWitness/ms/docs/case-board/) [### Studio Laporan Pilih bahan dan salah satu daripada lapan reka bentuk laporan.](https://phishdestroy.github.io/TgWitness/ms/docs/reports/) [### Salinan perkongsian Sediakan ekstrak bertandatangan dengan medan yang diperlukan oleh penerima.](https://phishdestroy.github.io/TgWitness/ms/docs/handover/) [### Kumpulan akaun Semak akaun bersama dan jaga ruang kerja mereka berasingan.](https://phishdestroy.github.io/TgWitness/ms/docs/groups/)
+
+[## Mod, senario dan tahap bukti Skop pengumpulan, sempadan peristiwa, lapan mekanisme pengesahan dan enam senario penyiasatan rekaan.](https://phishdestroy.github.io/TgWitness/ms/guides/modes.html)
 
 ## Mesej pertama yang dirakam
 
