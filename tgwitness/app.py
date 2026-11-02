@@ -2342,6 +2342,8 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             unknown = set(settings.workspaces) - set(app.state.profiles.entries)
             if unknown:
                 raise HTTPException(422, "Unknown workspace.")
+            from .showcase import validate_scope
+            validate_scope(app.state.profiles, settings)
             return settings
 
         def access_state(request):
@@ -2405,6 +2407,8 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             return {"lines": lines, "last": lines[-1]["n"] if lines else after}
 
         from .archive_api import register as register_archive
+        from .showcase import register as register_showcase
+        register_showcase(app, authenticate)
         register_archive(app, authenticate)
         from .analysis_api import register as register_analysis
         register_analysis(app, authenticate)
