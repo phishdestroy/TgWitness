@@ -54,6 +54,7 @@ def markdown(source, url):
         if (tag in {"script", "style", "nav", "footer", "button", "input", "select", "textarea"}
                 or attrs.get("aria-hidden") == "true"
                 or "data-workflow-controls" in attrs or "data-workflow-choices" in attrs
+                or "data-hub-controls" in attrs or "data-hub-status" in attrs
                 or classes & {"eyebrow", "card-number", "search", "lab-controls", "copy-button", "language-notice", "anchor"}):
             return ""
         if tag == "svg":
