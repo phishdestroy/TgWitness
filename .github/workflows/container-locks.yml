@@ -29,7 +29,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - name: Resolve signed packages and record candidate hashes
+      - name: Resolve packages against the signed index and record candidate hashes
         env:
           PROFILE: ${{ matrix.profile }}
           WOLFI_BASE: cgr.dev/chainguard/wolfi-base:latest@sha256:fd50bd0cdeb808cf4f45c9c9189e0cc7f7fcc27195d69abd6622c80527e7e021

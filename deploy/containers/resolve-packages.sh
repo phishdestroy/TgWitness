@@ -24,16 +24,27 @@ cp /lib/apk/db/installed "$out/$profile-$arch.installed"
 cp "$root/$profile.packages" "$out/$profile-$arch.packages"
 awk '/^P:/ {name=substr($0,3)} /^V:/ {print name "=" substr($0,3)}' \
     /lib/apk/db/installed | sort > "$out/$profile-$arch.versions"
-mkdir -p "$cache/apks" "$cache/root/etc/apk/keys"
-cp -L /etc/apk/keys/* "$cache/root/etc/apk/keys/"
-cp /etc/apk/repositories "$cache/root/etc/apk/repositories"
-cp "$out/$profile-$arch.versions" "$cache/root/etc/apk/world"
-# apk 2.x fetch arguments are package names, not version constraints. Its
-# --world mode reads exact constraints from this isolated package database.
-apk fetch --root "$cache/root" --arch "$arch" --no-cache --world --output "$cache/apks"
-for package in "$cache"/apks/*.apk; do apk verify "$package"; done
+mkdir "$cache/apks"
+# These repository packages are authenticated by the signed index, which binds
+# their control checksum and data hash; they do not carry individual signatures.
+# Unlike apk fetch arguments, apk cache download accepts version constraints.
+apk cache --cache-dir "$cache/apks" --update-cache download $(cat "$out/$profile-$arch.versions")
+for index in "$cache"/apks/APKINDEX.*.tar.gz; do
+    apk verify "$index"
+    cp "$index" "$out/$profile-$arch.${index##*/}"
+done
 (
-    cd "$cache/apks"
-    sha256sum ./*.apk | sed 's|  ./|  |' | sort -k2
+    for package in "$cache"/apks/*.apk; do
+        name=${package##*/}
+        stem=${name%.apk}
+        suffix=${stem##*.}
+        test "${#suffix}" -eq 8
+        case "$suffix" in *[!0-9a-f]*) exit 2 ;; esac
+        canonical=${stem%.*}.apk
+        digest=$(sha256sum "$package")
+        printf '%s  %s\n' "${digest%% *}" "$canonical"
+    done
 ) > "$out/$profile-$arch.lock"
-printf 'Resolved %s/%s: %s signed APKs\n' "$profile" "$arch" "$(wc -l < "$out/$profile-$arch.lock")"
+sort -k2 "$out/$profile-$arch.lock" > "$cache/sorted.lock"
+cp "$cache/sorted.lock" "$out/$profile-$arch.lock"
+printf 'Resolved %s/%s: %s authenticated repository packages\n' "$profile" "$arch" "$(wc -l < "$out/$profile-$arch.lock")"
