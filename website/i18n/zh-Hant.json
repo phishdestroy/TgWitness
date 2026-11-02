@@ -3211,7 +3211,8 @@
 "ac6adf2e18e7918f4b3a107e3912370c0ceec9b19e3cd5615b17cbd617675877": "請選擇指南，或播放工作流程示意影片。",
 "1773a0a72cc85a1462c6a95312bdb8506d9f403b544bc2cb25a4ff76f4488d45": "瀏覽所有指南 <span aria-hidden=\"true\">↓</span>",
 "093afb332d6e9393bc68c896dc4f201f0199a49f5e714ddfac70699bb49fe883": "安裝與連線 <span aria-hidden=\"true\">↗</span>",
-"6470af9bfc77294b3b204cbde47c78315a1c764e344a3281d355c5d441b9e8b2": "試用證據範例 <span aria-hidden=\"true\">↗</span>"
+"6470af9bfc77294b3b204cbde47c78315a1c764e344a3281d355c5d441b9e8b2": "試用證據範例 <span aria-hidden=\"true\">↗</span>",
+"a1d99ea4a6bbcb32db4ec79bab5b1029b365f1103d0b3fe59c2888a023e9e9de": "每個請求均使用工作區所設定的外部路由。若遇封鎖的路由或\n僅限 Telegram 的 MTProxy，則會產生錯誤；此情況不會直接重試。若刻意\n設定本地 Ollama 位址，則允許使用私有目的地。 迴路 AI\n終端點需要工作區的「Direct」外部路由；代理路由會在\n傳輸前被拒絕。對於其他私有服務，則適用現有的伺服器層級私有\n目的地選擇加入機制。預覽畫面會顯示終端點和外部路由，\n包括適用的代理主機。若要變更該路由，則需建立新的預覽。"
 },
 "modes": {
 "modes.actions.body": "預覽、請求及結果回執均經簽署。按下按鈕前，伺服器會再次擷取訊息，並拒絕已變更的鍵盤輸入。回傳的回呼文字與網址仍屬已記錄的上下文。",

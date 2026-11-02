@@ -3211,7 +3211,8 @@
 "ac6adf2e18e7918f4b3a107e3912370c0ceec9b19e3cd5615b17cbd617675877": "Choisissez un guide ou visionnez les illustrations des flux de travail.",
 "1773a0a72cc85a1462c6a95312bdb8506d9f403b544bc2cb25a4ff76f4488d45": "Parcourir tous les guides <span aria-hidden=\"true\">↓</span>",
 "093afb332d6e9393bc68c896dc4f201f0199a49f5e714ddfac70699bb49fe883": "Installation et connexion <span aria-hidden=\"true\">↗</span>",
-"6470af9bfc77294b3b204cbde47c78315a1c764e344a3281d355c5d441b9e8b2": "Découvrez les exemples de preuves <span aria-hidden=\"true\">↗</span>"
+"6470af9bfc77294b3b204cbde47c78315a1c764e344a3281d355c5d441b9e8b2": "Découvrez les exemples de preuves <span aria-hidden=\"true\">↗</span>",
+"a1d99ea4a6bbcb32db4ec79bab5b1029b365f1103d0b3fe59c2888a023e9e9de": "Chaque requête utilise l’itinéraire externe configuré de l’espace de travail. Un itinéraire bloqué ou\nun MTProxy réservé à Telegram constitue une erreur ; il n’y a pas de nouvelle tentative directe. Une adresse Ollama locale\nconfigurée délibérément permet une destination privée. Un point de terminaison IA\nen boucle fermée nécessite la route externe « Direct » de l’espace de travail ; les routes par proxy sont rejetées\navant la transmission. Pour les autres services privés, l’option d’activation de la destination privée\nau niveau du serveur s’applique. L’aperçu affiche le point de terminaison et la route externe,\ny compris l’hôte proxy le cas échéant. La modification de cette route nécessite un nouvel aperçu."
 },
 "modes": {
 "modes.actions.body": "Les accusés de réception d’aperçu, de requête et de résultat sont signés. Avant qu’un bouton ne soit enfoncé, le serveur récupère à nouveau le message et rejette toute modification apportée au clavier. Le texte et les URL des rappels renvoyés restent enregistrés dans le contexte.",

@@ -3210,7 +3210,8 @@
 "ac6adf2e18e7918f4b3a107e3912370c0ceec9b19e3cd5615b17cbd617675877": "Wählen Sie eine Anleitung aus oder spielen Sie die Workflow-Illustrationen ab.",
 "6470af9bfc77294b3b204cbde47c78315a1c764e344a3281d355c5d441b9e8b2": "Probieren Sie die Beweisbeispiele aus <span aria-hidden=\"true\">↗</span>",
 "1773a0a72cc85a1462c6a95312bdb8506d9f403b544bc2cb25a4ff76f4488d45": "Alle Anleitungen anzeigen <span aria-hidden=\"true\">↓</span>",
-"093afb332d6e9393bc68c896dc4f201f0199a49f5e714ddfac70699bb49fe883": "Installieren und verbinden <span aria-hidden=\"true\">↗</span>"
+"093afb332d6e9393bc68c896dc4f201f0199a49f5e714ddfac70699bb49fe883": "Installieren und verbinden <span aria-hidden=\"true\">↗</span>",
+"a1d99ea4a6bbcb32db4ec79bab5b1029b365f1103d0b3fe59c2888a023e9e9de": "Jede Anfrage nutzt die im Arbeitsbereich konfigurierte externe Route. Eine blockierte Route oder\nein ausschließlich für Telegram bestimmter MTProxy führt zu einem Fehler; es erfolgt kein direkter Wiederholungsversuch. Eine bewusst\nkonfigurierte lokale Ollama-Adresse ermöglicht ein privates Ziel. Ein Loopback-AI-\nEndpunkt erfordert die externe „Direct“-Route des Arbeitsbereichs; Proxy-Routen werden\nvor der Übertragung abgelehnt. Für andere private Dienste gilt die bestehende\nOpt-in-Möglichkeit für private Ziele auf Serverebene. Die Vorschau zeigt den Endpunkt und die externe Route,\neinschließlich des Proxy-Hosts, sofern zutreffend. Eine Änderung dieser Route erfordert eine neue Vorschau."
 },
 "modes": {
 "modes.actions.body": "Vorschau-, Anforderungs- und Ergebnisbestätigungen sind signiert. Vor dem Drücken einer Schaltfläche ruft der Server die Nachricht erneut ab und lehnt eine geänderte Eingabe ab. Zurückgesendete Callback-Texte und URLs bleiben als aufgezeichneter Kontext erhalten.",

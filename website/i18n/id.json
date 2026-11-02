@@ -3306,7 +3306,8 @@
 "ac6adf2e18e7918f4b3a107e3912370c0ceec9b19e3cd5615b17cbd617675877": "Pilih panduan, atau putar ilustrasi alur kerja.",
 "1773a0a72cc85a1462c6a95312bdb8506d9f403b544bc2cb25a4ff76f4488d45": "Lihat semua panduan <span aria-hidden=\"true\">↓</span>",
 "093afb332d6e9393bc68c896dc4f201f0199a49f5e714ddfac70699bb49fe883": "Instal dan sambungkan <span aria-hidden=\"true\">↗</span>",
-"6470af9bfc77294b3b204cbde47c78315a1c764e344a3281d355c5d441b9e8b2": "Coba contoh bukti <span aria-hidden=\"true\">↗</span>"
+"6470af9bfc77294b3b204cbde47c78315a1c764e344a3281d355c5d441b9e8b2": "Coba contoh bukti <span aria-hidden=\"true\">↗</span>",
+"a1d99ea4a6bbcb32db4ec79bab5b1029b365f1103d0b3fe59c2888a023e9e9de": "Setiap permintaan menggunakan rute luar yang dikonfigurasi di ruang kerja. Rute yang diblokir atau\nMTProxy khusus Telegram merupakan kesalahan; tidak ada upaya ulang langsung. Alamat Ollama lokal yang\ndikonfigurasi secara sengaja memungkinkan tujuan pribadi. Titik akhir AI loopback\nmemerlukan rute luar “Direct” dari ruang kerja; rute proxy akan ditolak\nsebelum transmisi. Untuk layanan pribadi lainnya, opsi\ntujuan pribadi tingkat server yang sudah ada berlaku. Pratinjau menampilkan titik akhir dan rute luar,\ntermasuk host proxy jika berlaku. Mengubah rute tersebut memerlukan pratinjau baru."
 },
 "modes": {
 "modes.actions.body": "Tanda terima pratinjau, permintaan, dan hasil ditandatangani. Sebelum tombol ditekan, server mengambil pesan tersebut kembali dan menolak perubahan yang dilakukan melalui keyboard. Teks dan URL callback yang dikembalikan tetap menjadi konteks yang tercatat.",

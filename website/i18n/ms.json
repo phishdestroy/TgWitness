@@ -3211,7 +3211,8 @@
 "ac6adf2e18e7918f4b3a107e3912370c0ceec9b19e3cd5615b17cbd617675877": "Pilih panduan, atau mainkan ilustrasi aliran kerja.",
 "1773a0a72cc85a1462c6a95312bdb8506d9f403b544bc2cb25a4ff76f4488d45": "Layari semua panduan <span aria-hidden=\"true\">↓</span>",
 "093afb332d6e9393bc68c896dc4f201f0199a49f5e714ddfac70699bb49fe883": "Pasang dan sambungkan <span aria-hidden=\"true\">↗</span>",
-"6470af9bfc77294b3b204cbde47c78315a1c764e344a3281d355c5d441b9e8b2": "Cuba contoh bukti <span aria-hidden=\"true\">↗</span>"
+"6470af9bfc77294b3b204cbde47c78315a1c764e344a3281d355c5d441b9e8b2": "Cuba contoh bukti <span aria-hidden=\"true\">↗</span>",
+"a1d99ea4a6bbcb32db4ec79bab5b1029b365f1103d0b3fe59c2888a023e9e9de": "Setiap permintaan menggunakan laluan luar ruang kerja yang dikonfigurasikan. Laluan yang dihalang atau MTProxy hanya untuk Telegram adalah ralat; tiada percubaan semula secara langsung. Alamat Ollama tempatan yang dikonfigurasikan dengan sengaja membenarkan destinasi peribadi. Titik akhir AI loopback memerlukan laluan luar Langsung ruang kerja; laluan proksi ditolak sebelum penghantaran. Untuk perkhidmatan peribadi lain, pilihan destinasi peribadi peringkat pelayan sedia ada terpakai. Pratonton menunjukkan titik akhir dan laluan luar, termasuk hos proksi apabila berkenaan. Menukar laluan tersebut memerlukan pratonton baru."
 },
 "modes": {
 "modes.actions.body": "Kuitans preview, permintaan dan hasil ditandatangani. Sebelum butang ditekan, pelayan memuat semula mesej dan menolak papan kekunci yang diubah. Teks dan URL callback yang dikembalikan kekal sebagai konteks yang direkodkan.",

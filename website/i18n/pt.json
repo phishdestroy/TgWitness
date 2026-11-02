@@ -3306,7 +3306,8 @@
 "ac6adf2e18e7918f4b3a107e3912370c0ceec9b19e3cd5615b17cbd617675877": "Escolha um guia ou assista às ilustrações dos fluxos de trabalho.",
 "1773a0a72cc85a1462c6a95312bdb8506d9f403b544bc2cb25a4ff76f4488d45": "Veja todos os guias <span aria-hidden=\"true\">↓</span>",
 "093afb332d6e9393bc68c896dc4f201f0199a49f5e714ddfac70699bb49fe883": "Instalar e conectar <span aria-hidden=\"true\">↗</span>",
-"6470af9bfc77294b3b204cbde47c78315a1c764e344a3281d355c5d441b9e8b2": "Experimente os exemplos de evidências <span aria-hidden=\"true\">↗</span>"
+"6470af9bfc77294b3b204cbde47c78315a1c764e344a3281d355c5d441b9e8b2": "Experimente os exemplos de evidências <span aria-hidden=\"true\">↗</span>",
+"a1d99ea4a6bbcb32db4ec79bab5b1029b365f1103d0b3fe59c2888a023e9e9de": "Cada solicitação utiliza a rota externa configurada do espaço de trabalho. Uma rota bloqueada ou\num MTProxy exclusivo para o Telegram constitui um erro; não há repetição direta. Um endereço Ollama local\ndeliberadamente configurado permite um destino privado. Um endpoint de IA\nde loopback requer a rota externa “Direct” do espaço de trabalho; rotas de proxy são rejeitadas\nantes da transmissão. Para outros serviços privados, aplica-se a opção de adesão ao destino privado\nno nível do servidor já existente. A pré-visualização mostra o endpoint e a rota externa,\nincluindo o host do proxy, quando aplicável. Alterar essa rota requer uma nova pré-visualização."
 },
 "modes": {
 "modes.actions.body": "Os recibos de pré-visualização, solicitação e resultado são assinados. Antes de um botão ser pressionado, o servidor busca a mensagem novamente e rejeita um teclado alterado. O texto e as URLs de retorno de chamada permanecem como contexto registrado.",

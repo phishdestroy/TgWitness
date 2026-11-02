@@ -3307,7 +3307,8 @@
 "ac6adf2e18e7918f4b3a107e3912370c0ceec9b19e3cd5615b17cbd617675877": "Elige una guía o reproduce las ilustraciones de los flujos de trabajo.",
 "1773a0a72cc85a1462c6a95312bdb8506d9f403b544bc2cb25a4ff76f4488d45": "Ver todas las guías <span aria-hidden=\"true\">↓</span>",
 "093afb332d6e9393bc68c896dc4f201f0199a49f5e714ddfac70699bb49fe883": "Instalar y conectar <span aria-hidden=\"true\">↗</span>",
-"6470af9bfc77294b3b204cbde47c78315a1c764e344a3281d355c5d441b9e8b2": "Prueba los ejemplos de pruebas <span aria-hidden=\"true\">↗</span>"
+"6470af9bfc77294b3b204cbde47c78315a1c764e344a3281d355c5d441b9e8b2": "Prueba los ejemplos de pruebas <span aria-hidden=\"true\">↗</span>",
+"a1d99ea4a6bbcb32db4ec79bab5b1029b365f1103d0b3fe59c2888a023e9e9de": "Cada solicitud utiliza la ruta externa configurada del espacio de trabajo. Una ruta bloqueada o\nun MTProxy exclusivo para Telegram constituye un error; no hay reintento directo. Una dirección Ollama local\nconfigurada deliberadamente permite un destino privado. Un punto final de IA de bucle cerrado\nrequiere la ruta externa «Direct» del espacio de trabajo; las rutas de proxy se rechazan\nantes de la transmisión. Para otros servicios privados se aplica la opción de activación de destino privado\na nivel de servidor ya existente. La vista previa muestra el punto final y la ruta externa,\nincluido el host del proxy cuando corresponda. Cambiar esa ruta requiere una nueva vista previa."
 },
 "modes": {
 "modes.actions.body": "Los acuses de recibo de vista previa, solicitud y resultado están firmados. Antes de pulsar un botón, el servidor vuelve a recuperar el mensaje y rechaza cualquier modificación introducida mediante el teclado. El texto y las URL de la llamada de retorno siguen formando parte del contexto registrado.",

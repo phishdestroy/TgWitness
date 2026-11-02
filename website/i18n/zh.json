@@ -3306,7 +3306,8 @@
 "ac6adf2e18e7918f4b3a107e3912370c0ceec9b19e3cd5615b17cbd617675877": "选择一份指南，或观看工作流演示视频。",
 "1773a0a72cc85a1462c6a95312bdb8506d9f403b544bc2cb25a4ff76f4488d45": "浏览所有指南 <span aria-hidden=\"true\">↓</span>",
 "093afb332d6e9393bc68c896dc4f201f0199a49f5e714ddfac70699bb49fe883": "安装与连接 <span aria-hidden=\"true\">↗</span>",
-"6470af9bfc77294b3b204cbde47c78315a1c764e344a3281d355c5d441b9e8b2": "试用证据示例 <span aria-hidden=\"true\">↗</span>"
+"6470af9bfc77294b3b204cbde47c78315a1c764e344a3281d355c5d441b9e8b2": "试用证据示例 <span aria-hidden=\"true\">↗</span>",
+"a1d99ea4a6bbcb32db4ec79bab5b1029b365f1103d0b3fe59c2888a023e9e9de": "每次请求均使用工作区配置的外部路由。被封锁的路由或\n仅限Telegram的MTProxy将导致错误；系统不会直接重试。若刻意\n配置了本地Ollama地址，则允许访问私有目的地。 环回 AI\n端点需要工作区配置的“Direct”外部路由；代理路由将在\n传输前被拒绝。对于其他私有服务，适用现有的服务器级私有\n目标选择加入机制。预览中会显示端点和外部路由，\n包括适用的代理主机。更改该路由需要生成新的预览。"
 },
 "modes": {
 "modes.actions.body": "预览、请求和结果回执均经过签名。在按下按钮之前，服务器会再次获取消息，并拒绝已更改的键盘输入。返回的回调文本和 URL 仍作为记录上下文保留。",

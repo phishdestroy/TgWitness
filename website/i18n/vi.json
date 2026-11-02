@@ -3306,7 +3306,8 @@
 "ac6adf2e18e7918f4b3a107e3912370c0ceec9b19e3cd5615b17cbd617675877": "Chọn một hướng dẫn hoặc xem các minh họa quy trình làm việc.",
 "1773a0a72cc85a1462c6a95312bdb8506d9f403b544bc2cb25a4ff76f4488d45": "Xem tất cả hướng dẫn <span aria-hidden=\"true\">↓</span>",
 "093afb332d6e9393bc68c896dc4f201f0199a49f5e714ddfac70699bb49fe883": "Cài đặt và kết nối <span aria-hidden=\"true\">↗</span>",
-"6470af9bfc77294b3b204cbde47c78315a1c764e344a3281d355c5d441b9e8b2": "Thử các ví dụ về bằng chứng <span aria-hidden=\"true\">↗</span>"
+"6470af9bfc77294b3b204cbde47c78315a1c764e344a3281d355c5d441b9e8b2": "Thử các ví dụ về bằng chứng <span aria-hidden=\"true\">↗</span>",
+"a1d99ea4a6bbcb32db4ec79bab5b1029b365f1103d0b3fe59c2888a023e9e9de": "Mỗi yêu cầu đều sử dụng đường dẫn bên ngoài đã được cấu hình của không gian làm việc. Đường dẫn bị chặn hoặc\nMTProxy chỉ dành cho Telegram là lỗi; không có lần thử lại trực tiếp. Một địa chỉ Ollama cục bộ được\ncấu hình có chủ đích cho phép đích đến riêng tư. Một điểm cuối AI\nloopback yêu cầu tuyến đường bên ngoài Direct của không gian làm việc; các tuyến đường proxy sẽ bị từ chối\ntrước khi truyền tải. Đối với các dịch vụ riêng tư khác, tùy chọn tham gia điểm đến riêng tư\nở cấp máy chủ hiện có sẽ được áp dụng. Bản xem trước hiển thị điểm cuối và tuyến đường bên ngoài,\nbao gồm máy chủ proxy nếu có. Việc thay đổi tuyến đường đó yêu cầu một bản xem trước mới."
 },
 "modes": {
 "modes.actions.body": "Các biên nhận xem trước, yêu cầu và kết quả đều được ký điện tử. Trước khi nhấn nút, máy chủ sẽ truy xuất lại tin nhắn và từ chối bất kỳ thay đổi nào từ bàn phím. Văn bản và các URL được trả về qua hàm callback vẫn được ghi lại trong bối cảnh.",
