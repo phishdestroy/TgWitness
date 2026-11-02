@@ -5792,5 +5792,12 @@
 "one": "{n} ta akkaunt bilan eksport",
 "other": "{n} ta akkaunt bilan eksport"
 },
-"Export with {n} account": "{n} ta akkaunt bilan eksport"
+"Export with {n} account": "{n} ta akkaunt bilan eksport",
+"Export the records of every account in the group {name}?": "{name} guruhidagi har bir akkaunt yozuvlarini eksport qiling?",
+"Group export saved: each account’s signed export and a signed list of them.": "Guruh eksporti saqlandi: har bir hisobning imzolangan eksporti va ularning imzolangan ro'yxati.",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "Har bir akkauntning imzolangan eksporti bitta ZIP-faylda, asosiy ish maydoni tomonidan imzolangan manifest bilan.",
+"Group exported": "Guruh eksport qilindi",
+"This group has no accounts to export.": "Ushbu guruhda eksport qilish uchun hech qanday hisob yo'q.",
+"Every account of the group must be available to export it.": "Guruhdagi har bir akkauntni eksport qilish mumkin bo'lishi kerak.",
+"Prepare export": "Eksportni tayyorlang"
 }

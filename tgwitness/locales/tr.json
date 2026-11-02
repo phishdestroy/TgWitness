@@ -5792,5 +5792,12 @@
 "one": "{n} hesapla dışa aktar",
 "other": "{n} hesapla dışa aktar"
 },
-"Export with {n} account": "{n} hesapla dışa aktar"
+"Export with {n} account": "{n} hesapla dışa aktar",
+"Export the records of every account in the group {name}?": "{name} grubundaki tüm hesapların kayıtlarını dışa aktarmak istiyor musunuz?",
+"Group export saved: each account’s signed export and a signed list of them.": "Grup dışa aktarımı kaydedildi: her hesabın imzalı dışa aktarımı ve bunların imzalı listesi.",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "Her hesabın imzalı dışa aktarım dosyası tek bir ZIP dosyasında bulunur ve ana çalışma alanı tarafından imzalanmış bir manifest içerir.",
+"Group exported": "Grup dışa aktarıldı",
+"This group has no accounts to export.": "Bu grupta dışa aktarılacak hesap bulunmamaktadır.",
+"Every account of the group must be available to export it.": "Grubu dışa aktarabilmek için grubun tüm hesaplarının erişilebilir olması gerekir.",
+"Prepare export": "Dışa aktarmayı hazırla"
 }

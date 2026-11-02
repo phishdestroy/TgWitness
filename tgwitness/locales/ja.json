@@ -5756,5 +5756,12 @@
 "Export with {n} accounts": {
 "other": "{n}つのアカウントでエクスポート"
 },
-"Export with {n} account": "{n}つのアカウントでエクスポート"
+"Export with {n} account": "{n}つのアカウントでエクスポート",
+"Export the records of every account in the group {name}?": "グループ{name}内のすべてのアカウントの記録をエクスポートしますか？",
+"Group export saved: each account’s signed export and a signed list of them.": "グループのエクスポートが保存されました：各アカウントの署名付きエクスポートデータと、それらの署名付きリストです。",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "各アカウントの署名付きエクスポートデータを1つのZIPファイルにまとめ、メインワークスペースによって署名されたマニフェストを同梱しています。",
+"Group exported": "グループのエクスポート",
+"This group has no accounts to export.": "このグループには、エクスポートするアカウントがありません。",
+"Every account of the group must be available to export it.": "グループをエクスポートするには、そのグループ内のすべてのアカウントが利用可能である必要があります。",
+"Prepare export": "エクスポートの準備"
 }

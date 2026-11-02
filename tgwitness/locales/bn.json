@@ -5792,5 +5792,12 @@
 "one": "{n}টি অ্যাকাউন্টের সাথে রপ্তানি করুন",
 "other": "{n}টি অ্যাকাউন্টের সাথে রপ্তানি করুন"
 },
-"Export with {n} account": "{n}টি অ্যাকাউন্টের সাথে রপ্তানি করুন"
+"Export with {n} account": "{n}টি অ্যাকাউন্টের সাথে রপ্তানি করুন",
+"Export the records of every account in the group {name}?": "{name} গ্রুপের প্রতিটি অ্যাকাউন্টের রেকর্ড রপ্তানি করুন?",
+"Group export saved: each account’s signed export and a signed list of them.": "গ্রুপ এক্সপোর্ট সংরক্ষিত: প্রতিটি অ্যাকাউন্টের স্বাক্ষরিত এক্সপোর্ট এবং তাদের স্বাক্ষরিত তালিকা।",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "প্রতিটি অ্যাকাউন্টের স্বাক্ষরিত এক্সপোর্ট একটি ZIP ফাইলে, যার ম্যানিফেস্টটি প্রধান ওয়ার্কস্পেস দ্বারা স্বাক্ষরিত।",
+"Group exported": "গ্রুপ রপ্তানি করা হয়েছে",
+"This group has no accounts to export.": "এই গ্রুপে রপ্তানি করার জন্য কোনো অ্যাকাউন্ট নেই।",
+"Every account of the group must be available to export it.": "গ্রুপের প্রতিটি অ্যাকাউন্টই রপ্তানি করার জন্য উপলব্ধ থাকতে হবে।",
+"Prepare export": "রপ্তানি প্রস্তুত করুন"
 }

@@ -5756,5 +5756,12 @@
 "Export with {n} accounts": {
 "other": "ส่งออกข้อมูลพร้อมบัญชี {n} บัญชี"
 },
-"Export with {n} account": "ส่งออกข้อมูลพร้อมบัญชี {n} บัญชี"
+"Export with {n} account": "ส่งออกข้อมูลพร้อมบัญชี {n} บัญชี",
+"Export the records of every account in the group {name}?": "ส่งออกข้อมูลบันทึกของทุกบัญชีในกลุ่ม{name}?",
+"Group export saved: each account’s signed export and a signed list of them.": "การส่งออกกลุ่มได้บันทึกแล้ว: ไฟล์ส่งออกที่ลงนามของแต่ละบัญชี และรายชื่อบัญชีเหล่านั้นที่ลงนามแล้ว",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "ไฟล์ส่งออกที่ลงนามของแต่ละบัญชีในไฟล์ ZIP เดียว พร้อมด้วยไฟล์ manifest ที่ลงนามโดยพื้นที่ทำงานหลัก",
+"Group exported": "กลุ่มที่ส่งออก",
+"This group has no accounts to export.": "กลุ่มนี้ไม่มีบัญชีใดที่จะส่งออก",
+"Every account of the group must be available to export it.": "ต้องสามารถเข้าถึงบัญชีทุกบัญชีในกลุ่มได้ เพื่อส่งออกข้อมูลกลุ่มนั้น",
+"Prepare export": "เตรียมการส่งออก"
 }

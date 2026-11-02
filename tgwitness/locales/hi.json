@@ -5792,5 +5792,12 @@
 "one": "{n} खाते के साथ निर्यात करें",
 "other": "{n} खातों के साथ निर्यात करें"
 },
-"Export with {n} account": "{n} खाते के साथ निर्यात करें"
+"Export with {n} account": "{n} खाते के साथ निर्यात करें",
+"Export the records of every account in the group {name}?": "{name} समूह में प्रत्येक खाते के रिकॉर्ड निर्यात करें?",
+"Group export saved: each account’s signed export and a signed list of them.": "समूह निर्यात सहेजा गया: प्रत्येक खाते का हस्ताक्षरित निर्यात और उनकी एक हस्ताक्षरित सूची।",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "प्रत्येक खाते का एक ही ZIP फ़ाइल में हस्ताक्षरित निर्यात, मुख्य वर्कस्पेस द्वारा हस्ताक्षरित एक मैनिफ़ेस्ट के साथ।",
+"Group exported": "समूह निर्यातित",
+"This group has no accounts to export.": "इस समूह में निर्यात करने के लिए कोई खाते नहीं हैं।",
+"Every account of the group must be available to export it.": "समूह के प्रत्येक खाते को निर्यात करने के लिए उपलब्ध होना चाहिए।",
+"Prepare export": "निर्यात तैयार करें"
 }

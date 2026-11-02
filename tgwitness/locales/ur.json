@@ -5792,5 +5792,12 @@
 "one": "{n} اکاؤنٹ کے ساتھ برآمد کریں",
 "other": "{n} اکاؤنٹس کے ساتھ برآمد کریں"
 },
-"Export with {n} account": "{n} اکاؤنٹ کے ساتھ برآمد کریں"
+"Export with {n} account": "{n} اکاؤنٹ کے ساتھ برآمد کریں",
+"Export the records of every account in the group {name}?": "کیا گروپ {name} کے ہر اکاؤنٹ کے ریکارڈز برآمد کریں؟",
+"Group export saved: each account’s signed export and a signed list of them.": "گروپ ایکسپورٹ محفوظ: ہر اکاؤنٹ کا دستخط شدہ ایکسپورٹ اور ان کی دستخط شدہ فہرست۔",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "ہر اکاؤنٹ کا ایک ہی ZIP فائل میں دستخط شدہ ایکسپورٹ، جس کے ساتھ مرکزی ورک اسپیس نے دستخط شدہ مینفیسٹ بھی شامل کیا ہے۔",
+"Group exported": "گروپ برآمد شد",
+"This group has no accounts to export.": "اس گروپ کے پاس برآمد کرنے کے لیے کوئی اکاؤنٹس نہیں ہیں۔",
+"Every account of the group must be available to export it.": "گروپ کے ہر اکاؤنٹ کو برآمد کرنے کے لیے دستیاب ہونا چاہیے۔",
+"Prepare export": "ایکسپورٹ تیار کریں"
 }

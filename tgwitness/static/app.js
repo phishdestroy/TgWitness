@@ -266,6 +266,7 @@ const labels = {
   "profile_group.settings_adopted": [tr("Accounts returned to the group settings"), "settings", "system"],
   "profile_group.settings_failed": [tr("Group settings not applied"), "alert", "coverage"],
   "profile_group.migrated": [tr("Group shares its copied settings"), "settings", "system"],
+  "profile_group.exported": [tr("Group exported"), "export", "system"],
   "profile.created": [tr("Workspace created"), "plus", "system"], "profile.unavailable": [tr("Workspace unavailable"), "alert", "coverage"],
   "snapshot.started": [tr("History snapshot started"), "layers", "system"], "snapshot.completed": [tr("History snapshot completed"), "layers", "system"],
   "snapshot.interrupted": [tr("History snapshot interrupted"), "alert", "coverage"],
@@ -1238,6 +1239,7 @@ const groupViewReady=import("./views/group.js?v=1").then(({createGroupView})=>{
   groupView=createGroupView({root:$("view-group"),json,tr,trn,node,toast,getState:()=>state,avatarNode,stateBadge,
     accountState:p=>accountState(p),accountPhaseLabel,healthPartNames,collectorLines,needsLook,fmtTime,fmtDuration,may,
     switchProfile,navigate,loadProfiles,diagnose:openDiagnostics,openChat:openChatIn,exportTogether,
+    exportGroup:(id,label)=>download('profile-groups/'+encodeURIComponent(id)+'/export','tgwitness-group-'+label.replace(/[^A-Za-z0-9._-]+/g,'-')+'.zip',true,true),
     openConnection:async preset=>{await navigate('connection');await connectionViewReady;connectionView.preset(preset);},
     openGroupSettings:async id=>{await navigate('settings');if(state.view==='settings'){await settingsHubReady;await settingsHub.openGroup(id);}}});
   return groupView;
@@ -2362,7 +2364,8 @@ const exportLanguage=()=>$("export-language").value;
 async function download(path,filename,stream=false,root=false,body=undefined,progress=()=>{}){
   workspaceSafety?.assert();
   const profile=state.profile,revision=state.workspaceRevision;
-  if((/export|handover|history\/report/.test(path))&&!(await workspaceSafety.confirmExport())){progress({phase:'cancelled'});return false;}
+  // A group export names its group in its own confirmation (views/group.js), not the open workspace.
+  if((/export|handover|history\/report/.test(path))&&!path.startsWith('profile-groups/')&&!(await workspaceSafety.confirmExport())){progress({phase:'cancelled'});return false;}
   const current=()=>{workspaceSafety?.assert();if(profile!==state.profile||revision!==state.workspaceRevision)throw new StaleView();};
   let handle=null,writer=null,reader=null;
   if(stream&&typeof window.showSaveFilePicker==="function"){

@@ -4,8 +4,9 @@ the server.
 Every new string is translated in each panel language. Accounts opens the group at /groups/<id>, which also
 opens directly. The header names the goal and what needs attention; each account shows its kind, route,
 latest message and problems with Fix; a chat two accounts see shows its coverage, opens in a member's
-workspace and starts an export with both accounts chosen. Bulk Start and Pause ask first. At 360, 600, 1024
-and 1440 pixels in English and Russian, without horizontal overflow or console errors.
+workspace and starts an export with both accounts chosen. Exporting the group asks naming it and saves one
+ZIP. Bulk Start and Pause ask first. At 360, 600, 1024 and 1440 pixels in English and Russian, without
+horizontal overflow or console errors.
 """
 import json
 import re
@@ -17,8 +18,9 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "tools"))
 
-# Strings of the group screen outside views/group.js.
-EXTRA = ("Open group", "Group")
+# Strings of the group screen outside views/group.js: Accounts, the journal and the server.
+EXTRA = ("Open group", "Group", "Group exported", "This group has no accounts to export.",
+         "Every account of the group must be available to export it.")
 WIDTHS = (360, 600, 1024, 1440)
 CHANNEL = -1001234567890
 
@@ -108,6 +110,19 @@ def check_browser(directory, output):
         expect(dialog.locator("#export-dialog-accounts input:checked")).to_have_count(2)
         page.locator("#export-dialog-cancel").click()
 
+        # The group export asks naming the group, then saves one ZIP and records it.
+        page.evaluate("g=>window.TgWitnessOpenGroup(g)", group)
+        expect(page.locator("#view-group h1")).to_have_text("Harbor case")
+        page.evaluate("window.showSaveFilePicker=undefined")
+        page.locator("#view-group .group-actions").get_by_role("button", name="Export group").click()
+        confirm = page.locator("dialog.panel-dialog[open]")
+        expect(confirm).to_contain_text("Export the records of every account in the group Harbor case?")
+        with page.expect_download() as download:
+            confirm.locator("button[type=submit]").click()
+        assert download.value.suggested_filename == "tgwitness-group-Harbor-case.zip"
+        expect(page.locator("#toast")).to_contain_text("Group export saved")
+        assert "profile_group.exported" in {r[0] for r in server.app.state.store.db.execute("SELECT kind FROM events")}
+
         # A direct link opens the screen; bulk Pause asks first.
         page.goto(server.url + "/groups/" + group + "?ws=default")
         expect(page.locator("#view-group h1")).to_have_text("Harbor case", timeout=20000)
@@ -140,7 +155,7 @@ def check_browser(directory, output):
     errors = [e for e in errors if not re.fullmatch(r"Failed to load resource: .* status of (400|404) .*", e)]
     assert not errors, errors
     return "ok  browser: open from Accounts and by address, header, account cards, shared chat coverage, " \
-           "open in a member, export with both accounts; en ru at 4 widths"
+           "open in a member, export with both accounts, group export; en ru at 4 widths"
 
 
 def main():

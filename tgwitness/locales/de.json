@@ -5884,5 +5884,12 @@
 "one": "Exportieren mit {n} Konto",
 "other": "Export mit {n} Konten"
 },
-"Export with {n} account": "Exportieren mit {n} Konto"
+"Export with {n} account": "Exportieren mit {n} Konto",
+"Export the records of every account in the group {name}?": "Die Datensätze aller Konten in der Gruppe {name} exportieren?",
+"Group export saved: each account’s signed export and a signed list of them.": "Gruppenexport gespeichert: der signierte Export jedes Kontos und eine signierte Liste dieser Exporte.",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "Der signierte Export jedes Kontos in einer ZIP-Datei, mit einem vom Haupt-Workspace signierten Manifest.",
+"Group exported": "Gruppe exportiert",
+"This group has no accounts to export.": "Diese Gruppe enthält keine Konten, die exportiert werden können.",
+"Every account of the group must be available to export it.": "Jedes Konto der Gruppe muss verfügbar sein, damit die Gruppe exportiert werden kann.",
+"Prepare export": "Export vorbereiten"
 }

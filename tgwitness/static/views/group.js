@@ -82,8 +82,15 @@ export function createGroupView(ctx){
     pause.disabled=working||!collect||!members.some(p=>p.collector?.running);
     const route=button('Change the group route',()=>ctx.openConnection({scope:'group',group:groupId})),goal=button('Apply a goal',()=>ctx.openGroupSettings(groupId));
     const settings=button('Group settings',()=>ctx.openGroupSettings(groupId),'quiet small');
+    // One ZIP: each account's own signed export, unchanged, and a manifest signed by the main workspace.
+    const save=button('Export group',async()=>{
+      if(!(await window.TgWitnessDialogs.confirm(tr('Export the records of every account in the group {name}?',{name:data.group.label}),{confirmText:tr('Prepare export')})))return;
+      if(await ctx.exportGroup(groupId,data.group.label)!==false)toast(tr('Group export saved: each account’s signed export and a signed list of them.'));
+    });
+    save.title=tr('Each account’s signed export in one ZIP, with a manifest signed by the main workspace.');
     for(const b of [route,goal,settings])b.disabled=working||!data.members.length;
-    box.append(start,pause,route,goal,settings);return box;
+    save.disabled=working||!data.members.length||!ctx.may('export')||data.members.some(m=>!m.available);
+    box.append(start,pause,route,goal,save,settings);return box;
   }
   function card(m){
     const p=profile(m.id),box=node('article','card padded group-account');box.id='group-account-'+m.id;box.tabIndex=-1;box.dataset.profile=m.id;

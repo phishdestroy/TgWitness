@@ -5828,5 +5828,12 @@
 "two": "ייצוא עם {n} חשבונות",
 "other": "ייצוא עם {n} חשבונות"
 },
-"Export with {n} account": "ייצוא עם חשבון {n}"
+"Export with {n} account": "ייצוא עם חשבון {n}",
+"Export the records of every account in the group {name}?": "לייצא את הרשומות של כל חשבון בקבוצה {name}?",
+"Group export saved: each account’s signed export and a signed list of them.": "ייצוא הקבוצה נשמר: הייצוא החתום של כל חשבון ורשימה חתומה של החשבונות.",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "היצוא החתום של כל חשבון בקובץ ZIP אחד, עם מניפסט חתום על ידי סביבת העבודה הראשית.",
+"Group exported": "קבוצה שיוצאה",
+"This group has no accounts to export.": "לקבוצה זו אין חשבונות לייצוא.",
+"Every account of the group must be available to export it.": "כל החשבונות בקבוצה חייבים להיות זמינים כדי שניתן יהיה לייצא אותה.",
+"Prepare export": "הכן לייצוא"
 }

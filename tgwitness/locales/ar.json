@@ -5936,5 +5936,12 @@
 "many": "التصدير مع {n} حسابًا",
 "other": "التصدير مع {n} حساب"
 },
-"Export with {n} account": "التصدير باستخدام حساب{n}"
+"Export with {n} account": "التصدير باستخدام حساب{n}",
+"Export the records of every account in the group {name}?": "هل تريد تصدير سجلات كل حساب في المجموعة {name}؟",
+"Group export saved: each account’s signed export and a signed list of them.": "تم حفظ تصدير المجموعة: التصدير الموقّع لكل حساب وقائمة موقّعة بها.",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "يتم تضمين التصدير الموقّع لكل حساب في ملف ZIP واحد، مع ملف بيان موقّع من قبل مساحة العمل الرئيسية.",
+"Group exported": "مجموعة تم تصديرها",
+"This group has no accounts to export.": "لا توجد حسابات في هذه المجموعة لتصديرها.",
+"Every account of the group must be available to export it.": "يجب أن يكون كل حساب في المجموعة متاحًا حتى يمكن تصديرها.",
+"Prepare export": "تحضير التصدير"
 }

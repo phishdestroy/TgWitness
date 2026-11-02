@@ -52,6 +52,45 @@ def test_overview(tmp_path):
         call("GET", "profile-groups/" + "0" * 32 + "/overview", status=400)
 
 
+def test_group_export(tmp_path):
+    import base64
+    import hashlib
+    import io
+    import json
+    import zipfile
+    import requests
+    from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
+    from tgwitness.store import canonical
+    with RunningApp(tmp_path) as server:
+        call = session(server)
+        registry = server.app.state.profiles
+        gid = call("POST", "profile-groups", {"label": "Harbor case"})["groups"][0]["id"]
+        call("GET", "profile-groups/" + gid + "/export", status=409)
+        alpha = call("POST", "profiles", {"label": "Alpha", "group": gid})["id"]
+        beta = call("POST", "profiles", {"label": "Beta", "group": gid})["id"]
+        registry.entries[alpha]["app"].state.store.append("message.new", {"text": "hi"}, chat_id=CHANNEL, message_id=1)
+        token = requests.post(server.url + "/api/access/login", json={"token": server.app.state.vault.token}).json()["session"]
+        response = requests.get(server.url + "/api/profile-groups/" + gid + "/export", headers={"Authorization": "Bearer " + token})
+        assert response.status_code == 200, response.text
+        assert response.headers["X-TgWitness-Export-ID"]
+        archive = zipfile.ZipFile(io.BytesIO(response.content))
+        manifest = json.loads(archive.read("manifest.json"))
+        signed = json.loads(archive.read("manifest.signature.json"))
+        assert signed["public_key"] == server.app.state.vault.public_key
+        Ed25519PublicKey.from_public_bytes(base64.b64decode(signed["public_key"])).verify(
+            base64.b64decode(signed["signature"]), canonical(manifest))
+        assert manifest["format"] == "tgwitness-group-export-v1" and manifest["group"]["id"] == gid
+        assert {a["workspace_id"] for a in manifest["accounts"]} == {alpha, beta}
+        for account in manifest["accounts"]:
+            inner = archive.read(account["file"])
+            assert hashlib.sha256(inner).hexdigest() == account["sha256"]
+            # Each account file is that workspace's own evidence export, with its journal inside.
+            assert any(name.endswith(".jsonl") for name in zipfile.ZipFile(io.BytesIO(inner)).namelist())
+        kinds = [r[0] for r in server.app.state.store.db.execute("SELECT kind FROM events")]
+        assert "profile_group.exported" in kinds
+        call("GET", "profile-groups/" + "0" * 32 + "/export", status=400)
+
+
 def test_interruptions():
     t = datetime(2026, 11, 1, tzinfo=timezone.utc)
     hour, allowed = timedelta(hours=1), timedelta(minutes=3)

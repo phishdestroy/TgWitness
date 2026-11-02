@@ -5756,5 +5756,12 @@
 "Export with {n} accounts": {
 "other": "Xuất với {n} tài khoản"
 },
-"Export with {n} account": "Xuất với {n} tài khoản"
+"Export with {n} account": "Xuất với {n} tài khoản",
+"Export the records of every account in the group {name}?": "Xuất các bản ghi của mọi tài khoản trong nhóm {name}?",
+"Group export saved: each account’s signed export and a signed list of them.": "Đã lưu bản xuất nhóm: bản xuất đã ký của từng tài khoản và danh sách đã ký của các tài khoản đó.",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "Tệp xuất đã ký của từng tài khoản được gói trong một tệp ZIP, kèm theo tệp manifest được ký bởi không gian làm việc chính.",
+"Group exported": "Nhóm đã xuất",
+"This group has no accounts to export.": "Nhóm này không có tài khoản nào để xuất.",
+"Every account of the group must be available to export it.": "Tất cả các tài khoản trong nhóm phải có sẵn thì mới có thể xuất nhóm đó.",
+"Prepare export": "Chuẩn bị xuất"
 }

@@ -5756,5 +5756,12 @@
 "Export with {n} accounts": {
 "other": "{n}개 계정으로 내보내기"
 },
-"Export with {n} account": "{n}개 계정으로 내보내기"
+"Export with {n} account": "{n}개 계정으로 내보내기",
+"Export the records of every account in the group {name}?": "그룹 {name}에 속한 모든 계정의 기록을 내보내시겠습니까?",
+"Group export saved: each account’s signed export and a signed list of them.": "그룹 내보내기 저장: 각 계정의 서명된 내보내기 파일과 해당 계정 목록의 서명된 파일.",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "각 계정의 서명된 내보내기 파일을 하나의 ZIP 파일로 묶은 것으로, 메인 워크스페이스에서 서명한 매니페스트가 포함되어 있습니다.",
+"Group exported": "그룹 내보내기",
+"This group has no accounts to export.": "이 그룹에는 내보낼 계정이 없습니다.",
+"Every account of the group must be available to export it.": "그룹을 내보내려면 그룹에 속한 모든 계정이 사용 가능해야 합니다.",
+"Prepare export": "내보내기 준비"
 }

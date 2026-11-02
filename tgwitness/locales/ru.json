@@ -6104,5 +6104,11 @@
 "many": "Экспорт с {n} аккаунтами",
 "other": "Экспорт с {n} аккаунтами"
 },
-"Export with {n} account": "Экспорт с {n} аккаунтом"
+"Export with {n} account": "Экспорт с {n} аккаунтом",
+"Export the records of every account in the group {name}?": "Экспортировать записи всех аккаунтов в группе {name}?",
+"Group export saved: each account’s signed export and a signed list of them.": "Сохраненный экспорт группы: подписанный экспорт каждого аккаунта и подписанный список этих аккаунтов.",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "Подписанный экспорт каждого аккаунта в одном ZIP-файле с манифестом, подписанным главным рабочим пространством.",
+"Group exported": "Экспортированная группа",
+"This group has no accounts to export.": "В этой группе нет аккаунтов для экспорта.",
+"Every account of the group must be available to export it.": "Для экспорта группы необходимо, чтобы все аккаунты, входящие в неё, были доступны."
 }

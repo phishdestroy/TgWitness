@@ -5756,5 +5756,12 @@
 "Export with {n} accounts": {
 "other": "导出 {n} 个账户"
 },
-"Export with {n} account": "导出 {n} 个账户"
+"Export with {n} account": "导出 {n} 个账户",
+"Export the records of every account in the group {name}?": "导出组{name}中所有账户的记录？",
+"Group export saved: each account’s signed export and a signed list of them.": "已保存的组导出：每个账户的签名导出文件及其签名列表。",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "每个账户的签名导出文件打包在一个 ZIP 文件中，其中包含由主工作区签名的清单文件。",
+"Group exported": "导出组",
+"This group has no accounts to export.": "该组中没有可导出的账户。",
+"Every account of the group must be available to export it.": "必须所有组中的账户均可用，才能导出该组。",
+"Prepare export": "准备导出"
 }

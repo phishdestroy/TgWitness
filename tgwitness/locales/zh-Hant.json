@@ -5756,5 +5756,12 @@
 "Export with {n} accounts": {
 "other": "以 {n} 個帳戶匯出"
 },
-"Export with {n} account": "以 {n} 個帳戶匯出"
+"Export with {n} account": "以 {n} 個帳戶匯出",
+"Export the records of every account in the group {name}?": "是否要匯出群組 {name} 中所有帳戶的記錄？",
+"Group export saved: each account’s signed export and a signed list of them.": "已儲存的群組匯出檔：每個帳戶的簽名匯出檔，以及這些帳戶的簽名清單。",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "每個帳戶的簽名輸出皆封裝於一個 ZIP 檔案中，並附有由主工作區簽名的清單檔案。",
+"Group exported": "已匯出的群組",
+"This group has no accounts to export.": "此群組中沒有可匯出的帳戶。",
+"Every account of the group must be available to export it.": "必須能存取該群組中的每個帳戶，才能將其匯出。",
+"Prepare export": "準備匯出"
 }

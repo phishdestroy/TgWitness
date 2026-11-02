@@ -5864,5 +5864,12 @@
 "many": "Експорт із {n} обліковими записами",
 "other": "Експорт із {n} обліковими записами"
 },
-"Export with {n} account": "Експорт з {n} обліковим записом"
+"Export with {n} account": "Експорт з {n} обліковим записом",
+"Export the records of every account in the group {name}?": "Експортувати записи всіх облікових записів у групі {name}?",
+"Group export saved: each account’s signed export and a signed list of them.": "Збережено експорт групи: підписаний експорт кожного облікового запису та підписаний список цих облікових записів.",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "Підписаний експорт кожного облікового запису в одному ZIP-файлі з маніфестом, підписаним головним робочим простором.",
+"Group exported": "Експортована група",
+"This group has no accounts to export.": "У цій групі немає облікових записів для експорту.",
+"Every account of the group must be available to export it.": "Щоб експортувати групу, усі облікові записи в ній мають бути доступними.",
+"Prepare export": "Підготувати експорт"
 }

@@ -5756,5 +5756,12 @@
 "Export with {n} accounts": {
 "other": "Eksport dengan {n} akaun"
 },
-"Export with {n} account": "Eksport dengan {n} akaun"
+"Export with {n} account": "Eksport dengan {n} akaun",
+"Export the records of every account in the group {name}?": "Eksport rekod setiap akaun dalam kumpulan {name}?",
+"Group export saved: each account’s signed export and a signed list of them.": "Eksport kumpulan disimpan: eksport berterasai setiap akaun dan senarai berterasai mereka.",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "Eksport berterasai setiap akaun dalam satu fail ZIP, dengan manifest yang ditandatangani oleh ruang kerja utama.",
+"Group exported": "Kumpulan dieksport",
+"This group has no accounts to export.": "Kumpulan ini tiada akaun untuk dieksport.",
+"Every account of the group must be available to export it.": "Setiap akaun dalam kumpulan mesti tersedia untuk dieksport.",
+"Prepare export": "Sediakan eksport"
 }

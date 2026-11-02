@@ -5792,5 +5792,12 @@
 "one": "صادرات با {n} حساب",
 "other": "صادرات با {n} حساب"
 },
-"Export with {n} account": "صادرات با {n} حساب"
+"Export with {n} account": "صادرات با {n} حساب",
+"Export the records of every account in the group {name}?": "آیا رکوردهای هر حساب در گروه {name} را صادر می‌کنید؟",
+"Group export saved: each account’s signed export and a signed list of them.": "خروجی گروه ذخیره شد: خروجی امضا شده هر حساب و فهرستی امضا شده از آن‌ها.",
+"Each account’s signed export in one ZIP, with a manifest signed by the main workspace.": "خروجی امضا‌شدهٔ هر حساب در یک فایل ZIP، همراه با یک مانیفست امضا‌شده توسط فضای کاری اصلی.",
+"Group exported": "گروه صادرشده",
+"This group has no accounts to export.": "این گروه هیچ حسابی برای خروجی‌گیری ندارد.",
+"Every account of the group must be available to export it.": "هر حساب از گروه باید برای صدور آن در دسترس باشد.",
+"Prepare export": "آماده‌سازی خروجی"
 }

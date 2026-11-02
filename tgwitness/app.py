@@ -915,6 +915,8 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         register_group_settings(app, authenticate, require_live)
         from .group_overview import register as register_group_overview
         register_group_overview(app, authenticate)
+        from .group_export import register as register_group_export
+        register_group_export(app, authenticate)
 
         @app.post("/api/profiles/import", dependencies=[Depends(authenticate)])
         async def profiles_import(body: ProfileImport, request: Request):
@@ -2543,6 +2545,9 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             path.unlink(missing_ok=True)
             raise
         return path, export_history.headers(receipt)
+
+    # A group export (group_export.py) asks each member workspace for its own signed export.
+    app.state.build_export = build_export
 
     @app.get("/api/export/{fmt}", dependencies=[Depends(authenticate)])
     async def export(request: Request, fmt: Literal["zip", "jsonl", "csv", "html", "json", "pdf"],

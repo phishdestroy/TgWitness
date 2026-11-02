@@ -9,7 +9,9 @@
   each and any interruptions in the last 7 days when none of the accounts recording
   it observed. A chat opens in a member's workspace or is exported with all of them
   at once. Start, pause, the group route, a goal and the group settings are one
-  click away.
+  click away. Export group saves one ZIP with each account's own signed export,
+  unchanged, and a manifest of their SHA-256 signed by the main workspace; it is
+  kept under Prepared exports and recorded in the journal.
 - Account groups now share settings. The group page sets the goal, collection,
   protection and notification rules, recording, recheck schedule, report settings,
   parameters and connection route; members follow it, and an account with its own
