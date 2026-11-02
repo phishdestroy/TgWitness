@@ -87,12 +87,12 @@ export function createSettingsHub(ctx) {
     });return preferencesQueue;
   }
   async function bootstrap({openFirstRun=true}={}) {
-    const who=owner(), initialRoute=location.href;
+    const who=owner(), initialRoute=location.href, draftVersion=draftSequence, preferenceVersion=preferencesSequence;
     const demo=state.status?.demo||window.TGW_ONLINE_DEMO;
     for(const control of document.querySelectorAll('[data-ui-level]'))control.hidden=!!demo;
     if(demo){$('hub-route-status').hidden=true;return;}
     const loaded=await request(who,'preferences');
-    prefs=loaded.saved||{language:ctx.language,timezone:Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC',theme:'system',level:'simple'};
+    if(preferenceVersion===preferencesSequence)prefs=loaded.saved||{language:ctx.language,timezone:Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC',theme:'system',level:'simple'};
     const requestedLanguage=new URL(location.href).searchParams.get('lang');
     if(requestedLanguage===ctx.language&&prefs.language!==requestedLanguage)await savePreferences({language:requestedLanguage},who);
     else if(!loaded.saved)await savePreferences({},who);else applyPresentation();
@@ -100,6 +100,9 @@ export function createSettingsHub(ctx) {
     if(prefs.language!==ctx.language){await ctx.changeLanguage(prefs.language);return;}
     if(!state.me?.admin||state.status?.demo)return;
     const loadedSettings=await request(who,'settings');
+    // The route can already be interactive while bootstrap is reading. Its old
+    // snapshot must not replace a step or answer the investigator has just saved.
+    if(draftVersion!==draftSequence){scheduleStatus();return;}
     data=loadedSettings;draft={...data.wizard};
     // A direct link or a newer navigation takes precedence over automatic setup.
     if(openFirstRun&&location.href===initialRoute&&!draft.completed&&!draft.skipped)await navigate('first-run');

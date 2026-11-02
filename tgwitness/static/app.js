@@ -707,6 +707,7 @@ function syncLive(){
   window.TgWitnessLive?.start({key:state.workspaceRevision+":"+state.profile,head:state.status.stats.head?.seq,api,tr,accessEnded:lock,
     hosts:[viewQuery(state.view,state.view==='chats'?'.chat-toolbar':'.journal .card-heading')].filter(Boolean),
     canRefresh:()=>{
+      if(!['observations','chats'].includes(state.view))return false;
       if(state.drawerSeq!==null||window.getSelection()?.toString()||document.hidden)return false;
       if(state.view==="chats"){const feed=$("chat-feed");return state.chatNextAfter===null&&feed.scrollHeight-feed.scrollTop-feed.clientHeight<80;}
       return state.eventBefore===null&&state.events.length<=200&&window.scrollY<120&&window.TgWitnessJournal?.canRefresh()!==false;
