@@ -3308,6 +3308,7 @@ $("api-id").addEventListener("paste",event=>{
 });
 for(const id of ["api-id","api-hash"])$(id).addEventListener("input",()=>{accountImportRevision++;importClientProfile=null;$("api-pair-result").textContent="";authProgress("");renderApiState();});
 function clearSecrets(){
+  $("panel-key-new").value="";show("panel-key-result",false);
   clearTimeout(toastTimer);show("toast",false);
   cancelQR();importExpectedId=null;importClientProfile=null;accountImportRevision++;$("import-result").textContent="";
   for(const name of ["api-id","api-hash","session-string","session-file","phone","code","password",
@@ -3411,6 +3412,7 @@ async function routeSaved(){
 }
 $("proxy-catalog-apply").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   const id=$("proxy-catalog-select").value;if(!id)return;
+  if(!confirmRouteChange())return;
   await json("network/catalog/"+encodeURIComponent(id),{});await routeSaved();
 }));
 $("network-import").addEventListener("click",e=>busy(e.currentTarget,async()=>{
@@ -3463,10 +3465,12 @@ $("policy-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitt
   if(policyOutsideDirty&&kind)body.outside_proxy={kind,host:$("outside-host").value.trim(),port:Number($("outside-port").value),
     username:$("outside-username").value,password:$("outside-password").value};
   else if(!kind&&state.policy?.outside_proxy)body.remove_outside_proxy=true;
+  if(!window.confirm(tr("Change this workspace's IP protection and outside-request policy?")))return;
   renderPolicy(await json("network/policy",body));await refreshStatus();
   toast(tr("IP protection saved."));
 });});
 $("network-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
+  if(!confirmRouteChange())return;
   const kind=$("network-kind").value,body={kind};
   if(kind!=="direct"&&kind!=="mtproxy_auto")Object.assign(body,{host:$("network-host").value.trim(),port:Number($("network-port").value)});
   if(kind==="socks5"||kind==="http")Object.assign(body,{username:$("network-username").value,password:$("network-password").value});
@@ -3479,6 +3483,7 @@ $("network-test").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   try{await json("network/test",{});$("network-result").textContent=tr("Telegram transport connected. This does not test capture completeness.");}
   catch(error){if(error instanceof StaleView)throw error;$("network-result").textContent=tr("Connection test failed. No direct fallback was attempted.");throw error;}
 }));
+function confirmRouteChange(){return window.confirm(tr("Change this account's connection route? Any pending sign-in will be cancelled. Saved evidence stays."));}
 function renderSelectedFiles(){
   const files=[...$("session-file").files];
   $("file-picker-title").textContent=tr(files.length?"Change selected files":"Choose account files");
@@ -4618,8 +4623,7 @@ function renderAccess(){
     row.dataset.id=s.id;row.record=s;
     info.append(node("h3","",sessionOwner(s)+(s.current?" · "+tr("this browser"):"")),
       node("p","",[s.address,tr("since {time}",{time:formatTime(s.started_at)}),
-        tr("last activity {time}",{time:formatTime(s.last_seen_at)}),trn("{n} request","{n} requests",s.requests)].join(" · ")),
-      node("p","hint",s.agent.slice(0,120)));
+        tr("last activity {time}",{time:formatTime(s.last_seen_at)}),trn("{n} request","{n} requests",s.requests)].join(" · ")));
     end.addEventListener("click",()=>busy(end,async()=>{
       if(!(await askConfirm(tr("End this session? Its open panel will be locked."),{danger:true})))return;
       accessLoadSerial++;
@@ -4687,6 +4691,18 @@ $("access-admin-form").addEventListener("submit",event=>{event.preventDefault();
     session_minutes:Number($("admin-idle").value)},{root:true});
   if(version===adminLimitsVersion)adminLimitsDirty=false;renderAccess();toast(tr("Limits saved."));
 });});
+$("panel-key-rotate").addEventListener("click",event=>busy(event.currentTarget,async()=>{
+  if(!window.confirm(tr("Replace the administrator key and end all current browser sessions? Save the new key after this step.")))return;
+  const result=await json("access/token",{},{root:true});
+  state.token=result.session;state.me=result.me;state.workspaceRevision++;
+  sessionStorage.setItem("tgwitness-token",state.token);
+  $("panel-key-new").value=result.token;show("panel-key-result",true);
+  await loadAccess();
+}));
+$("panel-key-copy").addEventListener("click",event=>busy(event.currentTarget,async()=>{
+  await navigator.clipboard.writeText($("panel-key-new").value);toast(tr("Token copied."));
+}));
+$("panel-key-hide").addEventListener("click",()=>{$("panel-key-new").value="";show("panel-key-result",false);});
 let notifyTick=0,pollRevision=null;
 async function pollWorkspace(){
   if(!state.token||document.hidden||$("workspace").hidden||$("workspace").inert||pollRevision===state.workspaceRevision)return;
