@@ -72,7 +72,7 @@ const boardReady=import('./views/board.js?v=1').then(({createCaseBoard})=>{
   const slice=node('button','quiet small',tr('Slice by time'));slice.type='button';slice.id='chat-to-slice';slice.addEventListener('click',()=>boardView.sliceDialog({chat_id:state.chat}));viewQuery('chats','.chat-toolbar').append(slice);
 });
 let settingsHub;
-const settingsHubReady=import('./views/settings-hub.js?v=3').then(({createSettingsHub})=>{
+const settingsHubReady=import('./views/settings-hub.js?v=4').then(({createSettingsHub})=>{
   const authCard=$('credentials-form').closest('.auth-card');
   // Metadata covers legacy fields as well as the compact settings. Search never drops expert fields.
   const catalog=()=>panelQueries('input[id],select[id],textarea[id]').filter(el=>!el.closest('#gate,#view-settings,#view-first-run')).map(el=>{
