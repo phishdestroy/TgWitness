@@ -2,6 +2,8 @@
 
 ## 0.8.0 preview · 2 November 2026
 
+- Fixed Windows portable packaging of fpdf2's public colour profile and licence;
+  private workspace files and generated caches remain excluded.
 - Long labels no longer spill on phones: the Sources tabs wrap their text, and the
   journal's period buttons wrap to a second row instead of five fixed columns. Russian
   gains the missing route, IP protection and administrator key confirmations; a working

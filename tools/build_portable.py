@@ -110,6 +110,13 @@ PRIVATE_NAMES = {"vault.key", "panel-token.txt", "credentials.json", "account.js
 PRIVATE_SUFFIXES = (".session", ".session-journal", ".tgwitness-session", ".jsonl", ".sqlite", ".sqlite3",
                     ".db", ".db-wal", ".db-shm")
 
+# fpdf2 ships its public ICC profile and licence under a directory named data.
+# Allow these exact dependency resources without admitting workspace data folders.
+PUBLIC_DATA_FILES = {"python/Lib/site-packages/fpdf/data/" + name for name in (
+    "__init__.py", "color_profiles/__init__.py", "color_profiles/sRGB2014.icc",
+    "color_profiles/sRGB2014.icc.LICENSE",
+)}
+
 
 def release_problem(relative):
     """Why a package-relative path must not be shipped, or None. Shared by the folder and ZIP checks."""
@@ -117,7 +124,9 @@ def release_problem(relative):
     if parts[0] not in TOP_LEVEL or (parts[0] != "python" and len(parts) > 1):
         return "unexpected entry outside the package layout"
     name = parts[-1].lower()
-    if any(part in ("data", "__pycache__") for part in parts[:-1]) or name in PRIVATE_NAMES or name.endswith(PRIVATE_SUFFIXES):
+    directories = {part.lower() for part in parts[:-1]}
+    private_data = "data" in directories and relative not in PUBLIC_DATA_FILES
+    if private_data or "__pycache__" in directories or name in PRIVATE_NAMES or name.endswith(PRIVATE_SUFFIXES):
         return "private or generated file"
     return None
 
