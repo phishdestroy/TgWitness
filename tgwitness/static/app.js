@@ -446,7 +446,7 @@ async function busy(button, work) {
   }
   finally { if (button) {button.disabled=false;button.removeAttribute("aria-busy");
     if(['auth-continue','import-account'].includes(button.id))window.TgWitnessAccountImport?.syncControls();
-    if(button.id==="chat-send"||button.id==="chat-preview-button")renderComposer();} }
+    if(button.id==="chat-send"||button.id==="chat-preview-button"||button.matches(".msg-button button"))renderComposer();} }
 }
 function lock() {
   state.workflow=null;state.exportTask='journal';
@@ -4492,14 +4492,16 @@ function renderComposer(){
   $("chat-compose-warning").textContent=tr("Chat members will see this message, and the action is recorded in the signed journal.");
   show("chat-compose",allowed&&composeOpen);
   composeDestination=enabled?{chat:state.chat,profile:state.profile,revision:state.workspaceRevision,generation:chatGeneration}:null;
-  $("chat-send").disabled=!enabled||actionBusy;$("chat-message").disabled=!enabled||actionBusy;
-  for(const button of $("chat-feed").querySelectorAll(".msg-button button"))button.disabled=!enabled||actionBusy;
+  // The control is busy while consent is pending, before panelAction sets actionBusy.
+  const writing=actionBusy||$("chat-send").hasAttribute("aria-busy")||!!$("chat-feed").querySelector(".msg-button button[aria-busy]");
+  $("chat-send").disabled=!enabled||writing;$("chat-message").disabled=!enabled||writing;
+  for(const button of $("chat-feed").querySelectorAll(".msg-button button"))button.disabled=!enabled||writing;
   $("chat-message").placeholder=tr("Write a message…");
   const account=s?.collector.account;
   const identity=account?(account.username?"@"+account.username:"ID "+account.id):tr("No account connected");
   $("chat-compose-account").textContent=tr("Sending as {account}",{account:identity});
   show("chat-reply",composeReply!==null);$("chat-reply-label").textContent=tr("Reply to message #{id}",{id:composeReply});
-  $("chat-preview-button").disabled=!s||s.demo||!s.collector.has_session||actionBusy;
+  $("chat-preview-button").disabled=!s||s.demo||!s.collector.has_session||writing;
 }
 function actionResult(result){
   const box=$("interaction-result");box.replaceChildren();show("interaction-result",true);

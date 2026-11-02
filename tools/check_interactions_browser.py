@@ -199,10 +199,24 @@ def main():
             expect(page.locator("#chat-message")).to_be_enabled()
             open_composer(page)
             page.locator("#chat-message").fill("Message intended for the group")
-            page.locator("#chat-send").click()
-            confirm_action(page)
+            with page.expect_response(lambda response: response.request.method == "POST"
+                    and response.url.endswith("/api/interactions")
+                    and response.request.post_data_json.get("action") == "send"
+                    and response.request.post_data_json.get("chat_id") == CHAT
+                    and response.request.post_data_json.get("text") == "Message intended for the group") as group_send:
+                page.locator("#chat-send").click()
+                expect(page.locator('dialog.chat-action-confirm[open]')).to_be_visible()
+                # Polling during consent must not make a pending send look completed.
+                page.evaluate("refreshStatus()")
+                expect(page.locator("#chat-send")).to_have_attribute("aria-busy", "true")
+                expect(page.locator("#chat-send")).to_be_disabled()
+                assert len(server.app.state.collector.client.sent) == sent
+                confirm_action(page)
+            assert group_send.value.ok and group_send.value.json()["status"] == "succeeded"
             expect(page.locator("#chat-send")).to_be_enabled()
+            assert len(server.app.state.collector.client.sent) == sent + 1
             assert server.app.state.collector.client.sent[-1][0] == 123
+            assert server.app.state.collector.client.sent[-1][1] == "Message intended for the group"
 
             page.locator(".chat-item", has_text="Synthetic shop bot").click()
             expect(page.locator("#chat-message")).to_be_enabled()
@@ -260,7 +274,8 @@ def main():
                               "join and observe", "light/dark at 1440/390/320", "lock clears draft",
                               "English controls", "signed evidence verifies", "no browser errors",
                               "refresh failure preserves receipt and request ID", "chat switch blocks sending",
-                              "stale chat response ignored", "join receipt survives destination load failure"],
+                              "stale chat response ignored", "join receipt survives destination load failure",
+                              "status poll preserves pending consent", "group send confirms exact recipient and text"],
                    "events_verified": verified["events"]}
         (output / "receipt.json").write_text(json.dumps(receipt, indent=2), encoding="utf-8")
         print(json.dumps(receipt, indent=2))
