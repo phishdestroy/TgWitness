@@ -75,7 +75,7 @@ with the group's values. Sessions, signing keys, evidence, notification destinat
 and proxy credentials stay separate. Deleting a group keeps its accounts.
 
 **Open group** shows the group page: members with **Start all** and **Pause all**,
-what needs attention, the chats several accounts see with their coverage over 7 days,
+what needs attention, shared chats and the available workspace-observation intervals,
 and **Export group**. See [shared settings](../SETTINGS.md#account-groups) and
 [account groups](../ACCOUNTS.md#bulk-import-and-account-groups).
 

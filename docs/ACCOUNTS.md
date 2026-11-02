@@ -300,8 +300,8 @@ evidence. **Open group** on **Accounts** leads to its page at `/groups/<id>`:
   **Start all** and **Pause all**.
 - **Needs attention:** accounts that were signed out, are unavailable or have a
   connection, intake, source or media problem; each name leads to its card.
-- **Chats several accounts see:** which members record each shared chat and how many
-  interruptions their observation had in the last 7 days. **Export with N accounts**
+- **Chats several accounts see:** shared sources, the accounts observing them and
+  interruptions in the available workspace-observation period (up to seven days). **Export with N accounts**
   splits a channel or supergroup export between them and signs one archive.
 - **Export group:** one ZIP with each account's signed export under `accounts/` and
   `manifest.json` listing their SHA-256 and key fingerprints, signed by the main
