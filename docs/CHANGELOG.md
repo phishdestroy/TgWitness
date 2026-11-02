@@ -5,8 +5,6 @@
 - Preserve an active Telegram sign-in when workflow navigation finishes late.
   Returning through account export or investigation keeps the pending code,
   password or QR step instead of resetting the form.
-- Added [Evidence and trust](EVIDENCE-TRUST.md), explaining capture-device trust,
-  independent verification and legal limits with sources and 24 DeepL translations.
 - Added a guided 24/7 server in Extras → Server 24/7: on the local panel, a region
   and a Hetzner token are enough to review the type, monthly price and version from
   Hetzner's API, then run `deploy` with live progress. Without a domain the server
