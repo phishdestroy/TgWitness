@@ -24,6 +24,8 @@
   Each recorder starts disabled and keeps its own key and storage. Optional Compose
   profiles are separate from ordinary startup. A read-only, separately operated
   witness can retain challenge-bound checkpoints and sign receipts.
+- Include the independent capture package in Phala source bundles and their
+  manifests, so the panel can import the capture integration after installation.
 
 ## 0.8.0 preview · 2 November 2026
 
