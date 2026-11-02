@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- Account groups now share settings. The group page sets the goal, collection,
+  protection and notification rules, recording, recheck schedule, report settings,
+  parameters and connection route; members follow it, and an account with its own
+  value keeps it until it is returned to the group's. Settings marks each value 🔗
+  (from the group) or ✏️ (own). A change previews which accounts it reaches and asks
+  per account before overwriting an own value; accounts added later start with the
+  group's values. Notification destinations, proxies and sign-in stay per account,
+  as does starting and pausing collection. Access can be granted to a whole group,
+  including accounts added to it later; showcase links still list their channels.
+  Every change is recorded in the signed journal of the main workspace and of each
+  member it reaches; existing template groups are migrated.
 - Build full-journal reports from dossier, briefing, activity or custom presets.
   Select time, weekday/hour, participant and chat charts; add signed examination
   notes. HTML, PDF and JSON share exact observation counts and source hashes.
