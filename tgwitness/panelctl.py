@@ -12,6 +12,7 @@ import os
 from pathlib import Path
 import platform
 import re
+import secrets
 import shutil
 import signal
 import socket
@@ -263,8 +264,8 @@ def setup(root, mode=None, domain=None, port=8787):
         main()
         return
     is_system = os.geteuid() == 0
-    if is_system and (root.is_relative_to(Path("/root")) or root.is_relative_to(Path("/home"))):
-        raise ValueError("A system service needs an installation outside home directories. Install under /opt/tgwitness.")
+    if is_system and any(root.is_relative_to(Path(p)) for p in ("/root", "/home", "/tmp", "/var/tmp")):
+        raise ValueError("A system service needs an installation outside home and temporary directories. Install under /opt/tgwitness.")
     if mode == "domain" and not is_system:
         raise ValueError("Automatic HTTPS on ports 80/443 needs a system installation. Run the installer as root, or choose the HTTPS link.")
     if not 1024 <= port <= 65535:
@@ -274,8 +275,10 @@ def setup(root, mode=None, domain=None, port=8787):
         domain = hostname(domain or "")
         check_port(80, "0.0.0.0")
         check_port(443, "0.0.0.0")
-        if not socket.getaddrinfo(domain, 443):
-            raise ValueError("The domain does not resolve. Set its DNS first or choose the temporary HTTPS link.")
+        try:
+            socket.getaddrinfo(domain, 443)
+        except OSError as exc:
+            raise ValueError("The domain does not resolve. Set its DNS first or choose the temporary HTTPS link.") from exc
     service = service_name(root)
     config = {"schema": "tgwitness-panel-v1", "mode": mode, "domain": domain, "port": port,
               "system": is_system, "service": service,
@@ -292,11 +295,10 @@ def setup(root, mode=None, domain=None, port=8787):
         print("Starts at login. To keep it running after sign-out and start at boot, an administrator can enable user lingering.")
 
 
-def reachable(url, token=None):
-    headers = {"Authorization": "Bearer " + token} if token else {}
+def reachable(url, expected=None):
     try:
-        with urlopen(Request(url, headers=headers), timeout=4) as response:
-            return response.status == 200
+        with urlopen(Request(url, headers={"User-Agent": "TgWitness-Setup/1"}), timeout=4) as response:
+            return response.status == 200 and (expected is None or response.read(128) == expected.encode())
     except (OSError, ValueError):
         return False
 
@@ -313,14 +315,16 @@ def show(root, credentials=False, wait=0):
         except (FileNotFoundError, json.JSONDecodeError):
             state = {}
         url = state.get("url")
-        ready = active and url and reachable(url)
+        identity = state.get("id", "")
+        ready = (active and url and re.fullmatch(r"[0-9a-f]{64}", identity)
+                 and reachable(url.rstrip("/") + "/_tgwitness/ready", identity))
         if ready or time.monotonic() >= deadline:
             break
         time.sleep(1)
     if not ready:
         print("Panel is starting or needs attention. Run: tgwitness logs\nThen: tgwitness open")
         if url:
-            print("Configured address (not yet reachable): " + url)
+            print("Configured address (this panel is not yet confirmed there): " + url)
         if config["mode"] == "domain":
             print("Check that DNS points to this server and ports 80/443 are reachable for HTTPS.")
         if wait:
@@ -357,10 +361,12 @@ def serve(root):
     data.mkdir(mode=0o700, parents=True, exist_ok=True)
     address = data / "panel-address.json"
     atomic(address, "{}\n")
+    installation_id = secrets.token_hex(32)
     stopping = threading.Event()
     signal.signal(signal.SIGTERM, lambda *_: stopping.set())
     signal.signal(signal.SIGINT, lambda *_: stopping.set())
-    env = dict(os.environ, TGWITNESS_NO_BROWSER="1", XDG_DATA_HOME=str(data / "service-data"),
+    env = dict(os.environ, TGWITNESS_NO_BROWSER="1", TGWITNESS_INSTALLATION_ID=installation_id,
+               XDG_DATA_HOME=str(data / "service-data"),
                XDG_CONFIG_HOME=str(data / "service-config"))
     app = subprocess.Popen([sys.executable, "-I", "-m", "tgwitness", "--host", "127.0.0.1", "--port",
                             str(config["port"]), "--data-dir", str(data), "--no-browser"], env=env)
@@ -368,18 +374,18 @@ def serve(root):
     try:
         origin = "http://127.0.0.1:" + str(config["port"])
         deadline = time.monotonic() + 90
-        while not reachable(origin):
+        while not reachable(origin + "/_tgwitness/ready", installation_id):
             if app.poll() is not None or stopping.wait(0.5) or time.monotonic() > deadline:
                 raise RuntimeError("The local panel did not start. See tgwitness logs.")
         if config["mode"] != "quick":
-            atomic(address, json.dumps({"url": origin if config["mode"] == "local" else "https://" + config["domain"]}))
+            atomic(address, json.dumps({"url": origin if config["mode"] == "local" else "https://" + config["domain"], "id": installation_id}))
 
         def read_bridge_output(process):
             for line in process.stdout:
                 print(line.rstrip(), flush=True)
                 match = QUICK_URL.search(line)
                 if match and bridge is process and not stopping.is_set():
-                    atomic(address, json.dumps({"url": match.group(0)}))
+                    atomic(address, json.dumps({"url": match.group(0), "id": installation_id}))
 
         while not stopping.wait(0.5):
             if app.poll() is not None:
@@ -392,7 +398,7 @@ def serve(root):
                 bridge = subprocess.Popen(bridge_command(config, data), env=env, stdout=subprocess.PIPE,
                                           stderr=subprocess.STDOUT, text=True, errors="replace")
                 if config["mode"] == "domain":
-                    atomic(address, json.dumps({"url": "https://" + config["domain"]}))
+                    atomic(address, json.dumps({"url": "https://" + config["domain"], "id": installation_id}))
                 threading.Thread(target=read_bridge_output, args=(bridge,), daemon=True).start()
     finally:
         stopping.set()

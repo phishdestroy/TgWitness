@@ -1,5 +1,6 @@
 """Exercise first-run choices and failure boundaries without changing host services."""
 import contextlib
+import http.server
 import io
 import json
 import os
@@ -7,6 +8,7 @@ from pathlib import Path
 import socket
 import sys
 import tempfile
+import threading
 import unittest
 from unittest.mock import patch
 
@@ -90,13 +92,31 @@ class SetupChecks(unittest.TestCase):
             config = {"schema": "tgwitness-panel-v1", "mode": "quick", "system": False,
                       "service": panel.service_name(root), "data": str(root / "data"), "port": 8787}
             panel.atomic(root / "panel.json", json.dumps(config))
-            panel.atomic(root / "data" / "panel-address.json", json.dumps({"url": "https://not-ready.trycloudflare.com"}))
+            panel.atomic(root / "data" / "panel-address.json", json.dumps({"url": "https://not-ready.trycloudflare.com", "id": "a" * 64}))
             with patch.object(panel.subprocess, "run") as run, patch.object(panel, "reachable", return_value=False), \
                     contextlib.redirect_stdout(io.StringIO()) as output:
                 run.return_value.returncode = 0
                 panel.show(root)
             self.assertNotIn("Your panel is ready", output.getvalue())
-            self.assertIn("not yet reachable", output.getvalue())
+            self.assertIn("not yet confirmed", output.getvalue())
+
+    def test_wrong_site_with_http_200_is_not_the_installed_panel(self):
+        class WrongSite(http.server.BaseHTTPRequestHandler):
+            def log_message(self, *_):
+                pass
+
+            def do_GET(self):
+                self.send_response(200)
+                self.end_headers()
+                self.wfile.write(b"An unrelated website")
+
+        server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), WrongSite)
+        threading.Thread(target=server.serve_forever, daemon=True).start()
+        try:
+            self.assertFalse(panel.reachable(f"http://127.0.0.1:{server.server_port}/_tgwitness/ready", "b" * 64))
+        finally:
+            server.shutdown()
+            server.server_close()
 
     def test_tunnel_uses_only_loopback_and_ignores_ambient_config(self):
         with tempfile.TemporaryDirectory() as tmp:
