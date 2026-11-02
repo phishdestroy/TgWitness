@@ -8,8 +8,8 @@ COPY deploy/build.lock /tmp/build.lock
 COPY addons/capture/requirements.lock /tmp/requirements.lock
 RUN pip install --no-cache-dir --require-hashes -r /tmp/build.lock \
     && pip install --no-cache-dir --require-hashes -r /tmp/requirements.lock
-COPY addons/capture/pyproject.toml ./
-COPY addons/capture/tgwitness_capture ./tgwitness_capture
-RUN pip install --no-cache-dir --no-deps --no-build-isolation .
+COPY addons/capture/pyproject.toml ./addons/capture/pyproject.toml
+COPY tgwitness_capture ./tgwitness_capture
+RUN pip install --no-cache-dir --no-deps --no-build-isolation ./addons/capture
 USER recorder
 CMD ["python", "-m", "tgwitness_capture", "serve", "--data", "/data", "--config", "/config.json", "--host", "0.0.0.0"]

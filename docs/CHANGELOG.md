@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Integrate **Extras → Independent capture** into the English main panel: separate
+  browser/AyuGram connections, encrypted control tokens, pinned identity checks,
+  tab selection, start/pause, capture options, snapshots, checkpoints and verified
+  original ZIP downloads. Add optional Docker control-network wiring; keep recorders
+  independently runnable and all connections disabled by default.
+
 - Add the optional, independent `tgwitness-capture` preview: selected-tab Chromium
   PNG/MHTML, consistent AyuGram SQLite snapshots, separately enabled silent video,
   Ed25519 event chains, signed ZIP/HTML reports and standalone verification.

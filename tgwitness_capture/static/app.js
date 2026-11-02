@@ -3,40 +3,40 @@
   const $ = id => document.getElementById(id);
   let token = '', status = null, dirty = false, busy = false, revision = 0;
   const flags = ['screenshots', 'pages', 'database', 'video'];
-  const labels={'service.started':'Регистратор запущен','service.stopped':'Регистратор остановлен',
-    'capture.saved':'Материал сохранён','capture.partial':'Материал сохранён частично',
-    'capture.failed':'Ошибка сохранения','capture.requested':'Запрошен снимок',
-    'capture.settings_changed':'Настройки фиксации изменены','capture.target_selected':'Выбрана вкладка',
-    'capture.heartbeat':'Проверка состояния регистратора','export.created':'Экспорт подготовлен',
-    'video.started':'Видеозапись начата','video.segment':'Фрагмент видео сохранён',
-    'video.stopped':'Видеозапись завершена','video.interrupted':'Видеозапись прервана'};
-  function date(value) {return value ? new Intl.DateTimeFormat('ru-RU',{dateStyle:'medium',timeStyle:'medium',timeZone:'UTC'}).format(new Date(value)) + ' UTC' : 'ещё нет';}
+  const labels={'service.started':'Recorder started','service.stopped':'Recorder stopped',
+    'capture.saved':'Artifact saved','capture.partial':'Artifact partially saved',
+    'capture.failed':'Capture failed','capture.requested':'Snapshot requested',
+    'capture.settings_changed':'Capture settings changed','capture.target_selected':'Browser tab selected',
+    'capture.heartbeat':'Recorder heartbeat','export.created':'Export prepared',
+    'video.started':'Video started','video.segment':'Video segment saved',
+    'video.stopped':'Video stopped','video.interrupted':'Video interrupted'};
+  function date(value) {return value ? new Intl.DateTimeFormat('en-GB',{dateStyle:'medium',timeStyle:'medium',timeZone:'UTC'}).format(new Date(value)) + ' UTC' : 'none yet';}
   async function api(path, body) {
     const expected=revision;
     const response = await fetch('/api/' + path, {method:body === undefined ? 'GET' : 'POST',
       headers:{Authorization:'Bearer ' + token, ...(body === undefined ? {} : {'Content-Type':'application/json'})},
       body:body === undefined ? undefined : JSON.stringify(body), cache:'no-store'});
-    if(expected !== revision) throw new Error('Панель отключена; результат запроса не показан.');
-    if (!response.ok) { let detail='Ошибка запроса'; try {detail=(await response.json()).detail || detail;} catch {} throw new Error(typeof detail === 'string' ? detail : 'Проверьте параметры запроса'); }
+    if(expected !== revision) throw new Error('Panel disconnected; request result hidden.');
+    if (!response.ok) { let detail='Request failed'; try {detail=(await response.json()).detail || detail;} catch {} throw new Error(typeof detail === 'string' ? detail : 'Check request parameters'); }
     return response;
   }
   function render(data) {
     status=data;
     $('login').hidden=true; $('workspace').hidden=false;
-    $('kind').textContent=data.kind === 'browser' ? 'Браузерный регистратор' : 'Регистратор AyuGram';
-    $('badge').textContent=!data.settings.enabled ? 'Фиксация выключена' : data.last_error ? 'Ошибка захвата' : 'Фиксация включена';
+    $('kind').textContent=data.kind === 'browser' ? 'Browser recorder' : 'AyuGram recorder';
+    $('badge').textContent=!data.settings.enabled ? 'Capture paused' : data.last_error ? 'Capture error' : 'Capture running';
     $('badge').className='badge' + (!data.settings.enabled ? '' : data.last_error ? ' error' : ' active');
     $('browser-options').hidden=data.kind !== 'browser'; $('database-options').hidden=data.kind !== 'ayugram';
-    $('coverage').textContent=data.kind === 'browser' ? 'Фоновая фиксация проверяет текст и адрес выбранной вкладки, дополняя их периодическими снимками. Состояния между проверками могут быть пропущены.' : 'База копируется по расписанию. Изменения, не сохранившиеся в базе между снимками, могут остаться незамеченными.';
+    $('coverage').textContent=data.kind === 'browser' ? 'Background capture checks the selected tab’s text and URL and saves periodic snapshots. Changes between observations may be missed.' : 'The database is copied at intervals. Changes that do not persist between snapshots may be missed.';
     if (!dirty) for (const key of flags) $(key).checked=data.settings[key];
     $('video').disabled=!data.video_available;
-    $('video-help').textContent=data.video_available ? 'Видео сохраняется только при включённой фиксации. Последний сегмент: ' + (data.last_video_segment || 'ещё нет') : 'Видео недоступно: настройте источник экрана и FFmpeg на сервере.';
-    $('toggle').textContent=data.settings.enabled ? 'Пауза перед входом / завершение' : 'Начать фиксацию';
+    $('video-help').textContent=data.video_available ? 'Video is recorded only while capture is running. Last segment: ' + (data.last_video_segment || 'none yet') : 'Video unavailable: configure a screen source and FFmpeg on the server.';
+    $('toggle').textContent=data.settings.enabled ? 'Pause capture' : 'Start capture';
     $('snapshot').disabled=!data.settings.enabled; $('export').disabled=data.settings.enabled;
     $('select-target').disabled=data.settings.enabled; $('refresh-targets').disabled=data.settings.enabled;
     $('observer').textContent=data.observer_id; $('fingerprint').textContent=data.fingerprint;
     $('boundary').textContent='#' + data.seq + ' · ' + data.head_hash; $('route').textContent=data.route_label;
-    $('last-success').textContent='Последний сохранённый снимок: ' + date(data.last_success) + (data.last_error ? ' · ' + data.last_error : '');
+    $('last-success').textContent='Last saved snapshot: ' + date(data.last_success) + (data.last_error ? ' · ' + data.last_error : '');
   }
   async function refresh() {
     if (!token || busy) return;
@@ -61,7 +61,7 @@
     a.href=url; a.download=name; document.body.append(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),30000);
   }
   $('login-form').addEventListener('submit',event=>{event.preventDefault(); action(async()=>{token=$('token').value.trim(); $('token').value=''; revision++; render(await (await api('status')).json());});});
-  $('logout').addEventListener('click',()=>{token=''; revision++; status=null; dirty=false; $('workspace').hidden=true; $('login').hidden=false; $('events').replaceChildren(); $('notice').textContent='Панель отключена. Состояние регистратора не изменилось.';});
+  $('logout').addEventListener('click',()=>{token=''; revision++; status=null; dirty=false; $('workspace').hidden=true; $('login').hidden=false; $('events').replaceChildren(); $('notice').textContent='Panel disconnected. Recorder capture state has not changed.';});
   for (const key of flags) $(key).addEventListener('change',()=>{dirty=true;});
   $('save').addEventListener('click',()=>action(async()=>{render(await (await api('settings',selection())).json()); dirty=false;}));
   $('toggle').addEventListener('click',()=>action(async()=>{

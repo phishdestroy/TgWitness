@@ -1,10 +1,11 @@
 # Optional independent capture
 
 This preview adds two independently operated recorders. It is a separate Python
-package and optional Compose deployment; the ordinary TgWitness application neither
-starts it nor receives its keys, sessions or database. Both recorders start with
+package and optional Compose deployment, controlled from **Extras → Independent capture**
+or each recorder's standalone English panel. The ordinary application does not start
+recorders or receive their signing keys or client sessions. Both recorders start with
 capture **disabled**, including after a restart. Video is separately selectable and
-off by default. The control panel currently uses Russian labels.
+off by default. See the [main-panel connection guide](../../docs/OPTIONAL-CAPTURE.md).
 
 [Desktop panel](../../docs/assets/optional-capture.png) · [Mobile panel](../../docs/assets/optional-capture-mobile.png)
 (synthetic SQLite fixture, no real account).

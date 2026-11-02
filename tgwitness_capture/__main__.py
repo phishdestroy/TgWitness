@@ -4,7 +4,7 @@ import sys
 import time
 from pathlib import Path
 
-from .format import decode
+from .format import decode, fingerprint
 
 
 def main():
@@ -15,6 +15,8 @@ def main():
     serve.add_argument("--config", type=Path)
     serve.add_argument("--host", default="127.0.0.1")
     serve.add_argument("--port", type=int, default=8791)
+    identity = commands.add_parser("identity", help="Read the public recorder identity without opening its journal")
+    identity.add_argument("--data", type=Path, required=True)
     verify = commands.add_parser("verify", help="Verify an export without any running recorder or TgWitness")
     verify.add_argument("archive", type=Path)
     verify.add_argument("--fingerprint")
@@ -41,6 +43,10 @@ def main():
         print("Read-only witness token:", args.data.resolve() / "witness-token.txt")
         uvicorn.run(create_app(args.data, config), host=args.host, port=args.port,
                     access_log=False, workers=1, proxy_headers=False)
+    elif args.command == "identity":
+        saved = decode((args.data / "identity.json").read_bytes())
+        print(json.dumps({"observer_id": saved["observer_id"], "public_key": saved["public_key"],
+                          "fingerprint": fingerprint(saved["public_key"])}, indent=2))
     elif args.command == "verify":
         from .verify import verify_zip
         try:

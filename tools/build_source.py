@@ -20,7 +20,7 @@ FILES = [
     "deploy/Dockerfile.sealed", "scripts/sealed_runner.py",
     "README.md", "docs/QUICKSTART.md", "LICENSE", "NOTICE", ".github/SECURITY.md", ".github/SUPPORT.md", ".github/CONTRIBUTING.md", "docs/CHANGELOG.md", "pyproject.toml",
     "start.py", "start.sh", "Start.cmd",
-    "deploy/Dockerfile", "compose.yaml", "deploy/compose/compose.image.yaml", "deploy/compose/compose.https.yaml", "deploy/compose/compose.witness.yaml", "deploy/compose/compose.proof.yaml", "deploy/compose/compose.proxies.yaml",
+    "deploy/Dockerfile", "compose.yaml", "deploy/compose/compose.image.yaml", "deploy/compose/compose.https.yaml", "deploy/compose/compose.witness.yaml", "deploy/compose/compose.proof.yaml", "deploy/compose/compose.proxies.yaml", "deploy/compose/compose.capture-panel.yaml",
     ".gitignore", ".gitattributes", ".dockerignore", "deploy/env.example", "deploy/constraints.txt", "deploy/requirements.lock", "deploy/build.lock",
     "deploy/audit.lock", "deploy/browser.lock", "deploy/mcp.lock", "deploy/site.lock",
 ]
@@ -48,15 +48,11 @@ FILES.extend("addons/capture/" + name for name in (
     "config/browser.example.json", "config/ayugram.example.json",
     "deploy/Dockerfile", "deploy/Dockerfile.neko", "deploy/Dockerfile.gateway",
     "deploy/chromium.conf", "deploy/chromium-policy.json", "deploy/neko-start.sh", "deploy/upstream-proxy.example.conf",
-    "tgwitness_capture/__init__.py", "tgwitness_capture/__main__.py", "tgwitness_capture/format.py",
-    "tgwitness_capture/journal.py", "tgwitness_capture/adapters.py", "tgwitness_capture/video.py",
-    "tgwitness_capture/service.py", "tgwitness_capture/export.py", "tgwitness_capture/verify.py",
-    "tgwitness_capture/witness.py", "tgwitness_capture/static/index.html",
-    "tgwitness_capture/static/app.js", "tgwitness_capture/static/style.css",
     "tests/conftest.py", "tests/test_capture.py", "tests/test_browser.py", "tests/test_video.py",
-    "tests/test_panel.py", "tests/test_witness.py", "tests/test_deployment.py",
+    "tests/test_panel.py", "tests/test_witness.py", "tests/test_deployment.py", "tests/test_integration.py",
 ))
 DIRECTORIES = {
+    "tgwitness_capture": {".py", ".html", ".css", ".js"},
     "tgwitness": {".md", ".py", ".html", ".css", ".js", ".svg", ".json"},
     "docs": {".md", ".png", ".webp", ".svg", ".txt", ".gif", ".mp4"}, "tools": {".py", ".md"},
     "deploy": {".md", ".ps1", ".service", ".example", ".docker"},
