@@ -228,8 +228,6 @@ cd TgWitness
 
 [瀏覽版本](https://github.com/phishdestroy/TgWitness/releases)
 
-Windows 上沒有 Python？[請下載可攜式套件](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip)，解壓縮後雙擊 `TgWitness.cmd`。
-
 步驟 02
 
 ### 選擇運行方式。

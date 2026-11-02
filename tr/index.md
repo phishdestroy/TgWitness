@@ -228,8 +228,6 @@ Kaynak kodun çalıştırılması için Python 3.11+ gereklidir. Python yüklü 
 
 [Sürümleri inceleyin](https://github.com/phishdestroy/TgWitness/releases)
 
-Windows'ta Python yok mu? [Taşınabilir paketi indirin](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip), açın ve `TgWitness.cmd` dosyasına çift tıklayın.
-
 ADIM 02
 
 ### Çalıştırma şeklini seçin.

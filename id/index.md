@@ -228,8 +228,6 @@ Peluncuran sumber memerlukan Python 3.11+. Peluncur Windows menawarkan instalasi
 
 [Telusuri rilis](https://github.com/phishdestroy/TgWitness/releases)
 
-Tidak ada Python di Windows? [Unduh paket portabel](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip), ekstrak, lalu klik dua kali berkas `TgWitness.cmd`.
-
 LANGKAH 02
 
 ### Pilih cara menjalankannya.

@@ -228,8 +228,6 @@ cd TgWitness
 
 [مرور نسخه‌های منتشرشده](https://github.com/phishdestroy/TgWitness/releases)
 
-پایتون روی ویندوز ندارید؟ [بستهٔ قابل حمل را دانلود کنید](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip)، آن را استخراج کرده و روی `TgWitness.cmd` دوبار کلیک کنید.
-
 مرحلهٔ ۰۲
 
 ### انتخاب کنید چگونه اجرا شود.

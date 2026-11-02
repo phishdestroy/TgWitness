@@ -228,8 +228,6 @@ cd TgWitness
 
 [रिलीज़ ब्राउज़ करें](https://github.com/phishdestroy/TgWitness/releases)
 
-Windows पर Python नहीं है? [पोर्टेबल पैकेज डाउनलोड करें](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip), इसे एक्सट्रेक्ट करें और `TgWitness.cmd` पर डबल-क्लिक करें।
-
 चरण 02
 
 ### चलाने का तरीका चुनें।

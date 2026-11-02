@@ -228,8 +228,6 @@ cd TgWitness
 
 [تصفح الإصدارات](https://github.com/phishdestroy/TgWitness/releases)
 
-لا يتوفر لغة Python على نظام Windows؟ [قم بتنزيل الحزمة المحمولة](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip)، وقم بفك ضغطها، ثم انقر نقرًا مزدوجًا على ملف `TgWitness.cmd`.
-
 الخطوة 02
 
 ### اختر طريقة التشغيل.

@@ -228,8 +228,6 @@ Việc khởi chạy ứng dụng yêu cầu Python 3.11 trở lên. Trình kh�
 
 [Xem các bản phát hành](https://github.com/phishdestroy/TgWitness/releases)
 
-Không có Python trên Windows? Vui lòng [tải xuống gói phần mềm di động](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip), giải nén và nhấp đúp vào tệp `TgWitness.cmd`.
-
 BƯỚC 02
 
 ### Chọn cách thức vận hành.

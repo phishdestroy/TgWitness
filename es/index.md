@@ -228,8 +228,6 @@ Para ejecutar el programa se requiere Python 3.11 o superior. El ejecutable de W
 
 [Consulte las versiones](https://github.com/phishdestroy/TgWitness/releases)
 
-¿No dispone de Python en Windows? [Descargue el paquete portátil](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip), extráigalo y haga doble clic en «`TgWitness.cmd`».
-
 PASO 02
 
 ### Elija cómo ejecutarla.

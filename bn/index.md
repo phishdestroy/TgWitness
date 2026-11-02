@@ -228,8 +228,6 @@ cd TgWitness
 
 [রিলিজগুলো ব্রাউজ করুন](https://github.com/phishdestroy/TgWitness/releases)
 
-উইন্ডোজে পাইথন নেই? [পোর্টেবল প্যাকেজটি ডাউনলোড করুন](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip), এটি এক্সট্র্যাক্ট করুন এবং `TgWitness.cmd`-এ ডাবল-ক্লিক করুন।
-
 ধাপ ০২
 
 ### কীভাবে চালাতে হবে তা নির্বাচন করুন।

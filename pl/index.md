@@ -228,8 +228,6 @@ Uruchomienie aplikacji wymaga środowiska Python 3.11 lub nowszego. Program uruc
 
 [Przeglądaj wersje](https://github.com/phishdestroy/TgWitness/releases)
 
-Nie ma Pythona w systemie Windows? [Proszę pobrać pakiet przenośny](https://github.com/phishdestroy/TgWitness/releases/download/v0.8.0/TgWitness-0.8.0-windows-amd64-portable.zip), rozpakować go i kliknąć dwukrotnie plik „`TgWitness.cmd`”.
-
 KROK 02
 
 ### Wybierz sposób uruchomienia.
