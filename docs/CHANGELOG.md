@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+## 0.8.1 preview · 2 November 2026
+
+- Build the runtime, sealed and media containers on a pinned Wolfi/glibc base
+  with Python 3.12 and hash-locked system packages for AMD64 and ARM64,
+  authenticated through signed repository indexes.
+- Build Tesseract 5.5.4 from verified source and pin its English and Russian
+  recognition data. Preserve the existing Python dependency locks.
+- Check real OCR and offline transcription, signed multilingual PDFs, installed
+  source measurements and container restrictions. Include all container build
+  inputs in the source archive and scan the ARM64 runtime before publication.
+
 ## 0.8.0 preview · 2 November 2026
 
 - Apply sharing-copy text and contact controls to interaction records, and include
