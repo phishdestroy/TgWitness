@@ -60,13 +60,20 @@ People profiles are opt-in per chat. They can show observed names, reply relatio
 
 ## Organize and review on Case Board
 
-Open **Investigation → Case Board** and create a collection for the case. Use **To board**
-beside a journal record or saved chat message to keep its source reference on a card. Highlight
-an exact passage, save a slice of records, and add questions or discussion beside the material.
+Open **Investigation → Case Board** in Standard or Expert mode and create a collection for
+the case. Use **To board** (or **B**) beside a journal record or saved chat message to keep its
+source reference on a card. Select an exact passage for **Highlight → board**, Shift-click two
+records in one chat for **Slice between**, or save Journal's current filters as a slice.
 
-Signed revisions retain the team's changes. **Presentation** walks through the collection's
-cards, source context and comments. Workspace and chat permissions also apply to the board.
-See [Case Board](../CASE-BOARD.md) for roles, slice exports and verification.
+Sort cards into collections, discuss them in threads and set a team status. Signed revisions
+retain the team's changes. **Presentation** walks through cards, source context and comments
+without editing controls. Workspace and chat permissions also apply; configure board rights
+in [Access](Access.md).
+
+Team annotations stay in the workspace with their own signed history, separately identifiable
+from Telegram observations. Reports label them as team notes; minimized handovers include them
+when selected. Evidence ZIPs carry the board, and slices export as signed JSON. See
+[Case Board](../CASE-BOARD.md) for roles, exports and verification.
 
 ## Record deliberate actions
 

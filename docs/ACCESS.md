@@ -13,9 +13,12 @@ folder or the whole account. **Access scope** decides which of those recorded
 accounts and chats another person can see and use. Giving access does not join a
 Telegram chat, start collection or grant Telegram account permissions.
 
-An access can open selected workspaces, selected chats within them, or all
-workspaces. **All workspaces, including ones added later** also covers future
-accounts. Select workspaces explicitly when a case should stay limited to them.
+An access can open selected workspaces, selected chats within them, all
+workspaces, or every account of an
+[account group](ACCOUNTS.md#bulk-import-and-account-groups). **All workspaces,
+including ones added later** also covers future accounts. A group access also
+covers accounts added to that group later. Select workspaces explicitly when a
+case should stay limited to them.
 
 ## Give someone access
 

@@ -3183,7 +3183,21 @@
 "29a5d51ce7734fa1bd5ca445125e443e3948d3623df4776518b814e7501b2898": "「<a href=\"ACCESS.md\">存取與權限</a>」章節中說明了分域式面板存取權限。0.6 版支援\n<a href=\"ACCOUNTS.md\">《ACCOUNTS.md</a>》中所述的「有限單一帳戶 TData」及「帳戶檔案匯入」功能。\n發佈前請詳閱 Telegram API 條款。相關研究參考資料及平台\n調查結果請參閱<a href=\"internal/RESEARCH.md\">《RESEARCH.md</a>》。",
 "6ee3917266db005fc176b5e4d698ab541be8963421d9924313051703f7655b88": "已簽署的證據、移交檔案及聊天 ZIP 檔均包含可讀取的 HTML 和 JSON 報告，此外\n若所需字型可用，還會提供以選定報告語言產生的 PDF 檔案。每份\n報告均以工作區的 Ed25519 金鑰加密封存，並可單獨驗證：\n<code>python -m tgwitness.verify FILE --fingerprint KEY [--evidence ZIP]</code>。",
 "703fcd3caad83aa5db652276574ab23cfdaba162bb1662cc6c7df97c1ce84854": "<strong>drand</strong>\n（<code>beacon.drand</code>\n）。每次處理都會將最新一輪的 drand quicknet（即「熵聯盟」的公開\n隨機數，每 3 秒一輪）寫入日誌：<code>chain</code>\n、\n<code>round</code>\n、<code>randomness</code>\n、<code>signature</code>\n、<code>round_time</code>\n以及回應的 <code>relay</code>\n。一個經過驗證的\n不可預測的輪次，為後續透過雜湊連結的材料提供較早的時間參考點。\n後續檢查點上的經驗證時間戳記則提供時間上限參考。這些檢查\n界定了鏈結資料的範圍；資料收集的覆蓋範圍則另行評估。收集器會先查詢 <code>drand.cloudflare.com</code>\n，接著透過工作區路徑查詢 Protocol Labs 的中繼站，每輪執行一次請求。",
-"3d51eccc4d18ce376ebb74298ad9fe9a7d38b59fa03f0794bbd2595ff9fd22ce": "若需進行全帳號範圍的資料蒐集，請使用專用的蒐集帳號。主要帳號可蒐集選定的聊天室或 Telegram 資料夾。"
+"3d51eccc4d18ce376ebb74298ad9fe9a7d38b59fa03f0794bbd2595ff9fd22ce": "若需進行全帳號範圍的資料蒐集，請使用專用的蒐集帳號。主要帳號可蒐集選定的聊天室或 Telegram 資料夾。",
+"705206ec3f65fdd74e7fc2166f4aa809ed9b0a69e052a85f43ec4c58c3dcd7fb": "請使用「<strong>帳戶」→「匯入帳戶」</strong>來新增多個帳戶，根據檔案基名配對檔案\n並查看每個登入結果。每個帳戶都會擁有專屬的工作區。",
+"dbf4806778cfd687ed507274f9951a8881f0bcc79d3a053f960cf85624b3826d": "群組可將相關帳戶彙整在一起，同時不會合併其會話、金鑰或\n證據。在「<strong>帳戶」</strong>中<strong>開啟「群組」</strong>將導向其頁面： <code>/groups/&lt;id&gt;</code>:",
+"850b18165a53cd2ff133150504a79abbc5d2972506f12f1e6fa3ab7cd740d8b5": "<strong>帳戶:</strong>每位成員的連線路徑、觀察記錄及最後一則訊息，並附有\n    「<strong>全部</strong>啟動」與「<strong>全部暫停」功能</strong>。",
+"3d12c6392992a4f115261e65f9b927ddaac11677458c1d65096d3902df43fe08": "<strong>需要注意:</strong>已登出、無法使用，或存在\n    連線、匯入、來源或媒體問題的帳戶；每個名稱皆可導向其對應的卡片。",
+"bc5b1a23ff1d2f525c3265f9e9f4f5ab5a8a9dae32774db63564979020837985": "<strong>多個帳戶可見的聊天室:</strong>\n    哪些成員記錄了每個共享的聊天室，以及\n    過去 7 天內他們的觀察過程遭遇了多少次中斷。<strong>使用 N 個帳戶進行匯出時，</strong>\n    會將頻道或超級群組的匯出內容分配給這些帳戶，並對單一存檔進行簽名。",
+"7b75e6de4775f13419252def99ca68da29a03bf0c96cd057fcd41fa40f4c795a": "<strong>匯出群組:</strong>包含一個 ZIP，其中每個帳戶的簽名匯出檔位於 <code>accounts/</code> ，並\n    <code>manifest.json</code> 列出其SHA-256與金鑰指紋，並由主\n    工作區在 <code>manifest.signature.json</code>。請使用\n    <code>python -m tgwitness.verify</code> 並使用該帳戶的可信指紋，分別驗證每個帳戶的存檔。",
+"7d155548776f338717dcd9baea758fb1a0ed7695bcf3a70ac0e0d1e0ff4d6fa5": "成員共享群組的設定；每個帳號可保留其自身的設定值。\n請參閱「<a href=\"SETTINGS.md#account-groups\">共享設定</a>」、\n<a href=\"wiki/Accounts.md#import-accounts-and-share-settings\">「匯入與群組指南」</a>\n以及 <a href=\"wiki/Proxies.md#pool-dashboard-and-custom-sources\">MTProxy 資料池儀表板</a>。",
+"16e07e1dcbeba6fe961b4f60d57efa458b31c11111997038dada4d7e30f0bd1d": "某項存取權限可開啟選定的工作區、其中選定的聊天室、所有\n工作區，或某個\n<a href=\"ACCOUNTS.md#bulk-import-and-account-groups\">帳戶群組</a>中的每個帳戶。<strong>所有工作區，\n包括日後新增的工作區</strong>，亦涵蓋未來的帳戶。群組存取權限同樣\n涵蓋日後新增至該群組的帳戶。若需將案件範圍\n限定於特定工作區內，請明確選取該等工作區。",
+"38ecfc1c49923aa3742016c675bd96dcf7199d2d8f20824b4d8ef497e6351fcd": "Case Board 若已使用，則包含匯出與片段",
+"3c4d77071a6648ec8af03b76133d528bb1dd3bf97ab915e5a7d0f80f4e6561c6": "團隊筆記與精選紀錄，標記為「意見」並經證據核對ZIP",
+"95e1d0096213c7e0ebf10ad2aa9e3d4053124d7ac4d33b31315ee6d36298dd19": "請將團隊的工作筆記存於 <a href=\"CASE-BOARD.md\">Case Board</a>：將您\n倚重的記錄（例如 #146、#188 和 #205）加入書籤，標示出確切的目標字串，並\n儲存兩則記錄之間或特定時間範圍內每項已記錄動作的片段。筆記\n與狀態是團隊的意見，並擁有各自經過簽名的歷史紀錄；它們絕不會成為\n觀察結果。",
+"1d0c311a2d5909d5834c6364f925786baa5115911e40acab677a3ac68f2e7a19": "<strong>多個帳戶可查看的聊天內容包含：</strong>\n    共享來源、正在監看這些來源的帳戶，以及\n    可用工作區監看期間（最長七天）內的中斷情況。<strong>使用 N 個帳戶進行匯出時，</strong>\n    系統會將頻道或超級群組的匯出內容分配至各帳戶，並對單一存檔進行簽署。",
+"2a23324f2dd287797da5dcf11a5b85aa360d54790975d37969d09e0010c00dde": "請將團隊的工作筆記保留在<a href=\"CASE-BOARD.md\">「案件看板」</a>上：將您依賴的紀錄\n（例如 #146、#188 和 #205）加入書籤，標示出確切的目標字串，並\n儲存兩個紀錄之間或特定時間範圍內每項記錄動作的片段。 筆記\n與狀態會將團隊的審閱內容保留在其各自的簽名歷史紀錄中，可與\n原始觀察結果分開識別。",
+"f76dd0dd4c84d67ddf836309e64d140e473dabc295fb877f79a84311c7a54326": "與來源連結的書籤、引文、團隊筆記、彙整集、修訂歷史紀錄，以及經與證據 ZIP 檔案比對後選定的紀錄"
 },
 "modes": {
 "modes.actions.body": "預覽、請求及結果回執均經簽署。按下按鈕前，伺服器會再次擷取訊息，並拒絕已變更的鍵盤輸入。回傳的回呼文字與網址仍屬已記錄的上下文。",

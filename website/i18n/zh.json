@@ -3278,7 +3278,21 @@
 "29a5d51ce7734fa1bd5ca445125e443e3948d3623df4776518b814e7501b2898": "<a href=\"ACCESS.md\">“访问与权限</a>”部分描述了范围限定面板的访问权限。0.6 版本支持\n<a href=\"ACCOUNTS.md\">“ACCOUNTS.md</a>”中所述的受限单账户 TData 以及账户文件导入功能。\n发布前请审阅 Telegram API 条款。相关研究参考文献和平台\n调查结果详见<a href=\"internal/RESEARCH.md\">“RESEARCH.md</a>”。",
 "6ee3917266db005fc176b5e4d698ab541be8963421d9924313051703f7655b88": "已签名的证据、移交文件和聊天记录 ZIP 包包含可读的 HTML 和 JSON 报告，此外，\n当所需字体可用时，还会包含所选报告语言的 PDF 文件。每份\n报告均使用工作区的 Ed25519 密钥进行封装，并可单独验证：\n<code>python -m tgwitness.verify FILE --fingerprint KEY [--evidence ZIP]</code>。",
 "703fcd3caad83aa5db652276574ab23cfdaba162bb1662cc6c7df97c1ce84854": "<strong>drand</strong>\n（<code>beacon.drand</code>\n）。每次处理都会将最新一轮的 drand quicknet（即熵联盟的公共\n随机数，每 3 秒一轮）写入日志：<code>chain</code>\n、\n<code>round</code>\n、<code>randomness</code>\n、<code>signature</code>\n、<code>round_time</code>\n以及响应的 <code>relay</code>\n。一个经过验证的\n不可预测的轮次为后续哈希链接的材料提供了较低的时间参考。\n后续检查点上的经过验证的时间戳则提供时间上限。这些检查\n界定了关联的数据范围；数据收集的覆盖范围则单独评估。收集器首先向 <code>drand.cloudflare.com</code>\n发起请求，然后通过工作区路径向 Protocol Labs 的中继节点发起请求，每轮一次请求。",
-"3d51eccc4d18ce376ebb74298ad9fe9a7d38b59fa03f0794bbd2595ff9fd22ce": "若需采集整个账户范围的数据，请使用专用的采集账户。主账户可采集选定的聊天记录或 Telegram 文件夹。"
+"3d51eccc4d18ce376ebb74298ad9fe9a7d38b59fa03f0794bbd2595ff9fd22ce": "若需采集整个账户范围的数据，请使用专用的采集账户。主账户可采集选定的聊天记录或 Telegram 文件夹。",
+"705206ec3f65fdd74e7fc2166f4aa809ed9b0a69e052a85f43ec4c58c3dcd7fb": "使用<strong>“账户”→“导入账户</strong>”可添加多个账户，按文件基名配对文件\n并查看每个登录结果。每个账户都有独立的工作区。",
+"dbf4806778cfd687ed507274f9951a8881f0bcc79d3a053f960cf85624b3826d": "“组”可将相关账户集中管理，同时不会合并其会话、密钥或\n证据。在<strong>“账户</strong>”页面中<strong>点击“开放组</strong>”可跳转至其页面： <code>/groups/&lt;id&gt;</code>:",
+"850b18165a53cd2ff133150504a79abbc5d2972506f12f1e6fa3ab7cd740d8b5": "<strong>账户:</strong>每位成员的连接路径、观察记录和最后一条消息，并提供\n    <strong>“全部</strong>启动”和<strong>“全部暂停”功能</strong>。",
+"3d12c6392992a4f115261e65f9b927ddaac11677458c1d65096d3902df43fe08": "<strong>需要关注:</strong>已注销、不可用或存在\n    连接、接收、来源或媒体问题的账户；每个名称均链接至其卡片。",
+"bc5b1a23ff1d2f525c3265f9e9f4f5ab5a8a9dae32774db63564979020837985": "<strong>多个账户可见的聊天:</strong>\n    哪些成员记录了每个共享的聊天，以及\n    过去 7 天内他们的观察记录遭遇了多少次中断。<strong>使用 N 个账户导出时，</strong>\n    会将频道或超级群组的导出内容在这些账户之间进行拆分，并为一个存档文件签名。",
+"7b75e6de4775f13419252def99ca68da29a03bf0c96cd057fcd41fa40f4c795a": "<strong>导出组:</strong>包含一个 ZIP，其中包含每个账户的已签名导出文件，位于 <code>accounts/</code> ，并\n    <code>manifest.json</code> 列出其SHA-256和密钥指纹，由主\n    工作区在 <code>manifest.signature.json</code>。请使用\n    <code>python -m tgwitness.verify</code> 并使用该账户的可信指纹进行验证。",
+"7d155548776f338717dcd9baea758fb1a0ed7695bcf3a70ac0e0d1e0ff4d6fa5": "成员共享群组的设置；单个账户可保留其自身的设置值。\n请参阅<a href=\"SETTINGS.md#account-groups\">共享设置</a>、\n<a href=\"wiki/Accounts.md#import-accounts-and-share-settings\">导入与群组指南</a>\n以及 <a href=\"wiki/Proxies.md#pool-dashboard-and-custom-sources\">MTProxy 数据池仪表盘</a>。",
+"16e07e1dcbeba6fe961b4f60d57efa458b31c11111997038dada4d7e30f0bd1d": "访问权限可打开选定的工作区、其中选定的聊天、所有\n工作区，或某个\n<a href=\"ACCOUNTS.md#bulk-import-and-account-groups\">账户组</a>中的所有账户。<strong>所有工作区，\n包括后续添加的工作区</strong>，也涵盖未来的账户。组访问权限同样\n涵盖后续添加到该组的账户。若需将某个\n案例的访问范围限定在特定工作区内，请明确选择相应的工作区。",
+"38ecfc1c49923aa3742016c675bd96dcf7199d2d8f20824b4d8ef497e6351fcd": "Case Board（若使用）导出和片段",
+"3c4d77071a6648ec8af03b76133d528bb1dd3bf97ab915e5a7d0f80f4e6561c6": "团队笔记和精选记录，标注为“观点”并经证据核对 ZIP",
+"95e1d0096213c7e0ebf10ad2aa9e3d4053124d7ac4d33b31315ee6d36298dd19": "在 <a href=\"CASE-BOARD.md\">Case Board</a> 上保存团队的工作笔记：将\n你依赖的记录（如 #146、#188 和 #205）添加到书签，突出显示确切的目标字符串，并\n保存两条记录之间或某个时间范围内每项记录操作的片段。笔记\n和状态是团队的观点，拥有各自经过签名的历史记录；它们绝不会成为\n观察结果。",
+"1d0c311a2d5909d5834c6364f925786baa5115911e40acab677a3ac68f2e7a19": "<strong>多个账户可见的聊天记录包括：</strong>\n    共享来源、正在查看这些记录的账户以及\n    可用工作区观察期间（最长七天）内的中断情况。<strong>使用 N 个账户进行导出时，</strong>\n    会将频道或超级群组的导出内容分配给这些账户，并为一个存档文件签名。",
+"2a23324f2dd287797da5dcf11a5b85aa360d54790975d37969d09e0010c00dde": "请将团队的工作笔记保存在<a href=\"CASE-BOARD.md\">“案件看板</a>”上：对您依赖的记录\n（如 #146、#188 和 #205）添加书签，突出显示确切的目标字符串，并\n保存两个记录之间或某个时间范围内所有记录操作的片段。 笔记\n和状态会将团队的审查记录保留在其各自的已签名历史记录中，可与\n源观察记录区分开来。",
+"f76dd0dd4c84d67ddf836309e64d140e473dabc295fb877f79a84311c7a54326": "与源文件关联的书签、引文、团队笔记、收藏集、修订历史以及选定记录均需与证据 ZIP 文件进行核对"
 },
 "modes": {
 "modes.actions.body": "预览、请求和结果回执均经过签名。在按下按钮之前，服务器会再次获取消息，并拒绝已更改的键盘输入。返回的回调文本和 URL 仍作为记录上下文保留。",
