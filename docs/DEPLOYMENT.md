@@ -4,6 +4,24 @@
 
 ## Choose an installation
 
+The [guided installer](https://get.destroy.tools/) brings Python, verifies the
+package signature and asks how to open the panel. On a clean Ubuntu server, run
+as root:
+
+```sh
+curl -fsSL https://get.destroy.tools/install.sh | bash
+```
+
+Choose a local panel, a temporary trycloudflare.com HTTPS link, or your own domain.
+The installer starts a sandboxed systemd service and prints the address and access
+key. `tgwitness open` shows them again; `tgwitness status`, `stop`, `start`, `restart`
+and `logs` manage this installation. For a domain, configure DNS and allow ports
+80/443 first. The temporary link changes when the tunnel restarts.
+
+This installation keeps program files in `/opt/tgwitness` and private state under
+the `/var/lib/tgwitness-...` path shown at setup. The methods below use their own
+data locations. [Installer details and verification](../deploy/installer/README.md).
+
 For the portable package, extract `TgWitness-<version>-windows-amd64-portable.zip` from
 GitHub Releases. For the other methods, download and extract the source ZIP or clone the
 repository, then run the following from the project directory:

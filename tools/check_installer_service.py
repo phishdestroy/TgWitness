@@ -1,12 +1,54 @@
 """Acceptance helper: an empty, isolated installation on a disposable systemd host."""
 import hashlib
 import json
+import os
 from pathlib import Path
+import pty
+import select
+import shlex
+import signal
 import socket
 import subprocess
 import time
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
+
+
+def interactive_setup(launcher, mode, port):
+    """A real controlling terminal with piped stdin, as in curl ... | bash."""
+    child, terminal = pty.fork()
+    if child == 0:
+        args = [launcher, "setup", "--port", str(port)]
+        os.execv("/bin/bash", ["bash", "-c", "printf '' | " + shlex.join(args)])
+    output = bytearray()
+    selected = False
+    finished = False
+    deadline = time.monotonic() + 240
+    try:
+        while time.monotonic() < deadline:
+            if select.select([terminal], [], [], 0.2)[0]:
+                try:
+                    chunk = os.read(terminal, 65536)
+                except OSError:
+                    chunk = b""
+                if chunk:
+                    output.extend(chunk)
+                if not selected and b"Choose [1-4]:" in output:
+                    os.write(terminal, b"1\n" if mode == "local" else b"2\n")
+                    selected = True
+            exited, status = os.waitpid(child, os.WNOHANG)
+            if exited:
+                finished = True
+                safe = "\n".join(line for line in output.decode(errors="replace").splitlines() if "Access key:" not in line)
+                assert os.waitstatus_to_exitcode(status) == 0, safe
+                assert selected and "Your panel is ready" in safe, safe
+                return safe
+        raise AssertionError("Interactive setup did not finish within four minutes")
+    finally:
+        os.close(terminal)
+        if not finished:
+            os.killpg(child, signal.SIGTERM)
+            os.waitpid(child, 0)
 
 
 def check_service(app, mode):
@@ -37,7 +79,7 @@ def check_service(app, mode):
             return exc.code, b""
 
     try:
-        output = run("setup", "--mode", mode, "--port", str(port))
+        output = interactive_setup(launcher, mode, port)
         assert "Your panel is ready" in output
         config = json.loads((app / "panel.json").read_text())
         data = Path(config["data"])
@@ -72,6 +114,18 @@ def check_service(app, mode):
         run("start")
         assert request(origin + "/api/status", token)[0] == 200
         assert (data / "acceptance-record").read_text() == "keep this record\n"
+        if mode == "local":
+            # Run the actual pinned Caddy binary against the generated own-domain
+            # configuration. Certificate issuance needs the operator's DNS/ports.
+            python = next((app / "versions").glob("*/venv/bin/python"))
+            snippet = ("import json; from pathlib import Path; from tgwitness.panelctl import fetch_tool, bridge_command; "
+                       "root=Path(" + repr(str(app)) + "); "
+                       "tool=fetch_tool(root,'caddy'); "
+                       "config={'mode':'domain','domain':'panel.example.org','port':" + str(port) + ",'bridge':str(tool)}; "
+                       "args=bridge_command(config,root/'domain-check'); "
+                       "import subprocess; result=subprocess.check_output([str(tool),'adapt','--config',args[3],'--adapter','caddyfile']); "
+                       "assert json.loads(result)['apps']['http']['servers']; print('Caddy configuration: passed')")
+            subprocess.run([str(python), "-I", "-c", snippet], check=True, timeout=120)
         print(f"{mode}: installed panel, authentication, boot enablement, restart, retained data, stop/start: passed")
     finally:
         if unit.exists():
