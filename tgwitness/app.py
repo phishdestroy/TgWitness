@@ -913,6 +913,8 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
 
         from .group_settings import register as register_group_settings
         register_group_settings(app, authenticate, require_live)
+        from .group_overview import register as register_group_overview
+        register_group_overview(app, authenticate)
 
         @app.post("/api/profiles/import", dependencies=[Depends(authenticate)])
         async def profiles_import(body: ProfileImport, request: Request):
