@@ -6,6 +6,13 @@
   journal's period buttons wrap to a second row instead of five fixed columns. Russian
   gains the missing route, IP protection and administrator key confirmations; a working
   part of the status strip reads "Работает" and the custom period "Другое".
+- Added signed HTML, JSON and PDF reports with an offline viewer, verified selections,
+  archive sidecars and configurable report contents in all 25 panel languages.
+- Added minimised journal handovers, message details, indicators, collection clock/profile
+  receipts, absent-ID rechecks and admin-log context. Existing signed records remain verifiable.
+- Added workspace protection modes and clearer account-loss reasons; packaged report fonts
+  and assets for wheel and source installations.
+
 - No consequential action on a single stray click. In Sources the status badge only
   shows the state; pausing, resuming, excluding and removing are in the row menu, each
   with what it does, pausing and excluding are confirmed (also in bulk), and removing a
