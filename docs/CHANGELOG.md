@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Signed reports now explain the trust basis for the specific archive, with separate
+  export-time checks, recorded observations, missing material and independent review
+  steps. HTML, PDF and signed JSON/manifest assessments share the same facts; English,
+  Russian and German wording is available. Timestamp conclusions require a trusted
+  certificate signature and a checkpoint bound to the exact journal prefix.
+  See [case reports](CASE_REPORTS.md).
 - Added six-step first setup and a unified Settings page with simple, standard and
   expert presentation levels. Language, device time zone, theme and progress are
   saved per operator and workspace; language changes preserve the panel session.
