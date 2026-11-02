@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.8.0 preview · 2 November 2026
 
 - Documentation: a [panel guide](PANEL.md) for every screen, protection modes and the
   code check; Discord publication and the public proof page in [witness](WITNESS.md);
@@ -111,9 +111,6 @@
   connection, event intake, sources and attachments work before offering what to do
   next. A change of IP protection through Settings is a signed journal record, and the
   journal names the new connection and settings records.
-
-## 0.8.0 preview · 2 November 2026
-
 - Fixed Windows portable packaging of fpdf2's public colour profile and licence;
   private workspace files and generated caches remain excluded.
 - Translated the guided connection controls and documentation into 24 additional languages.
