@@ -4,6 +4,14 @@
 
 - Fixed Windows portable packaging of fpdf2's public colour profile and licence;
   private workspace files and generated caches remain excluded.
+- Translated the guided connection controls and documentation into 24 additional languages.
+- Added a guided Connection screen: choose accounts, prepare and check a route,
+  then review and apply it. Direct, own proxies, the public MTProto pool, imported
+  WireGuard profiles and portable WARP are available. Group changes preserve
+  custom routes by default, check again before switching, pause active observation
+  and report failures per account. WARP/WireGuard helpers stay in the data folder,
+  use pinned SHA-256 downloads and stop when the owning panel exits.
+
 - Long labels no longer spill on phones: the Sources tabs wrap their text, and the
   journal's period buttons wrap to a second row instead of five fixed columns. Russian
   gains the missing route, IP protection and administrator key confirmations; a working

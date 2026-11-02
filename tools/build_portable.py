@@ -109,13 +109,12 @@ PRIVATE_NAMES = {"vault.key", "panel-token.txt", "credentials.json", "account.js
                  ".instance.lock"}
 PRIVATE_SUFFIXES = (".session", ".session-journal", ".tgwitness-session", ".jsonl", ".sqlite", ".sqlite3",
                     ".db", ".db-wal", ".db-shm")
-
-# fpdf2 ships its public ICC profile and licence under a directory named data.
-# Allow these exact dependency resources without admitting workspace data folders.
-PUBLIC_DATA_FILES = {"python/Lib/site-packages/fpdf/data/" + name for name in (
-    "__init__.py", "color_profiles/__init__.py", "color_profiles/sRGB2014.icc",
-    "color_profiles/sRGB2014.icc.LICENSE",
-)}
+FPDF_RESOURCES = {
+    "python/Lib/site-packages/fpdf/data/__init__.py",
+    "python/Lib/site-packages/fpdf/data/color_profiles/__init__.py",
+    "python/Lib/site-packages/fpdf/data/color_profiles/sRGB2014.icc",
+    "python/Lib/site-packages/fpdf/data/color_profiles/sRGB2014.icc.LICENSE",
+}
 
 
 def release_problem(relative):
@@ -124,9 +123,11 @@ def release_problem(relative):
     if parts[0] not in TOP_LEVEL or (parts[0] != "python" and len(parts) > 1):
         return "unexpected entry outside the package layout"
     name = parts[-1].lower()
-    directories = {part.lower() for part in parts[:-1]}
-    private_data = "data" in directories and relative not in PUBLIC_DATA_FILES
-    if private_data or "__pycache__" in directories or name in PRIVATE_NAMES or name.endswith(PRIVATE_SUFFIXES):
+    folders = {part.lower() for part in parts[:-1]}
+    # fpdf2's pinned distribution includes its public ICC profile in a directory
+    # named data. Keep the exact package resources, not arbitrary data folders.
+    if ("__pycache__" in folders or "data" in folders and relative not in FPDF_RESOURCES
+            or name in PRIVATE_NAMES or name.endswith(PRIVATE_SUFFIXES)):
         return "private or generated file"
     return None
 

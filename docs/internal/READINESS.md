@@ -30,8 +30,9 @@ Passing functional tests does not override a failed security check.
   Preserve failed or skipped results in the acceptance record.
 - Keep the existing 0.7.1 tag, assets and container image unchanged. Do not publish
   this candidate as security-cleared or replace an existing release download.
-- Keep the draft public showcase and guided WARP changes outside this candidate;
-  their separate live acceptance and translation work are not established here.
+- Keep the draft public showcase (#57) outside this candidate. Guided connection
+  setup and portable WARP (#58) are included from main; their helper lifecycle passed
+  the [full platform run](https://github.com/phishdestroy/TgWitness/actions/runs/41397629374).
 
 Admin-log context, scoped panel permissions, supported TData import, QR sign-in
 and isolated media processing are implemented. Their presence does not establish
