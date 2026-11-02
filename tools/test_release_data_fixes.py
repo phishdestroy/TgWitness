@@ -158,13 +158,14 @@ def test_interaction_content_follows_author_policy(action_workspace, text, subje
     options = handover.Options(purpose="Synthetic author policy", chats=[CHAT], text=text,
                                subjects=subjects, others=others, mask_contacts=True)
     rows = projected(store, options)
-    payloads = [row["payload"] for row in rows if row["kind"].startswith("interaction.")]
+    action_rows = [row for row in rows if row["kind"].startswith("interaction.")]
+    payloads = [row["payload"] for row in action_rows]
     actions = canonical(payloads).decode()
     assert ("PRIVATE_SEND_473" in actions) is send
     assert ("PRIVATE_BUTTON_473" in actions) is callback
     assert ("PRIVATE_CALLBACK_473" in actions) is callback
     assert "@example.invalid" not in actions and UNUSED not in actions
-    assert {"raw", "data_base64"}.isdisjoint(field_keys(payloads))
+    assert {"raw", "data_base64"}.isdisjoint(field_keys(action_rows))
     assert str(OBSERVER) in actions and str(CHAT) in actions
 
 
