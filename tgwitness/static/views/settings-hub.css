@@ -102,6 +102,9 @@ html[data-ui-level=simple] #mode-switch,html[data-ui-level=standard] #mode-switc
 .hub-detail > form { margin-top:24px; }
 @media(max-width:1200px) { .workspace .topbar { flex-wrap:wrap; } .topbar .top-actions { max-width:100%; flex-wrap:wrap; } }
 @media(max-width:767px) {
+  .workspace[data-current-view=chats] .health-toolbar { display:none; }
+  .media-duration { gap:6px; margin-block:6px; }
+  #view-sources .recording-sections .padded { padding-block:14px; }
   .workspace .topbar { flex-wrap:wrap; }
   .topbar .profile-switch { flex-basis:calc(100% - 52px); }
   .topbar .top-actions { flex:1 1 100%; max-width:100%; }

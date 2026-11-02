@@ -501,6 +501,11 @@ function lock() {
   clearSecrets();resetWitnessSetup();selectExtra(null);
   $("panel-token").value=""; show("workspace",false); show("gate",true);
 }
+async function bootstrapSettings() {
+  await settingsHubReady;
+  try { await settingsHub.bootstrap(); }
+  catch(error) { if(!(error instanceof StaleView))toast(error.message,true); }
+}
 async function unlock() {
   accessStarted=true;
   await Promise.all([timeReady,shellReady,viewReady,formsReady,connectionReady,chatListReady,accountStateReady,disclosurePreviewReady]);
@@ -524,7 +529,7 @@ async function unlock() {
   renderStatus(); setAuthStep(accountSignedIn() ? "authorized" : "credentials");
   loadNotifications().catch(()=>{});
   await router.start();
-  await settingsHubReady;await settingsHub.bootstrap();
+  await bootstrapSettings();
 }
 $("unlock-form").addEventListener("submit", async event => {
   event.preventDefault(); $("login-error").textContent="";
@@ -534,7 +539,7 @@ $("unlock-form").addEventListener("submit", async event => {
     const entered=$("panel-token").value.trim();
     state.token=(await json("access/login",{token:entered},{root:true,token:""})).session;
     await unlock();
-  } catch (e) { state.token="";$("login-error").textContent=e.message; } finally { button.disabled=false; }
+  } catch (e) { if(!(e instanceof StaleView)){state.token="";$("login-error").textContent=e.message;} } finally { button.disabled=false; }
 });
 function may(permission){return !!state.me&&(state.me.admin||state.me.permissions.includes(permission));}
 
@@ -1304,7 +1309,8 @@ async function switchProfile(id,options={}){
   $("network-result").textContent="";
   await refreshStatus();await loadProfiles();
   if(revision!==state.workspaceRevision)return;
-  await settingsHubReady;await settingsHub.bootstrap();
+  await bootstrapSettings();
+  if(revision!==state.workspaceRevision)return;
   await navigate(state.view,{history:false});
   await loadNotifications().catch(()=>{});
   if(revision!==state.workspaceRevision)return;

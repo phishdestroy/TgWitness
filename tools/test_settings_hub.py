@@ -303,5 +303,45 @@ def test_browser(tmp_path, monkeypatch):
     assert not errors,errors
 
 
+@pytest.mark.parametrize('outcome', ['late', 'network'])
+def test_settings_bootstrap_failure_preserves_session(tmp_path, outcome):
+    from playwright.sync_api import sync_playwright, expect
+    with RunningApp(tmp_path) as server, sync_playwright() as p:
+        headers={'Authorization':'Bearer '+server.app.state.vault.token}
+        response=requests.post(server.url+'/api/profiles',headers=headers,json={'label':'Second'})
+        assert response.ok,response.text
+        child=response.json()['id']
+        for app in (server.app, server.app.state.profiles.entries[child]['app']):
+            app.state.store.set_setting('first_run',{'skipped':True})
+            app.state.store.set_setting('ui_preferences:admin',{'language':'en','timezone':'UTC','theme':'system','level':'expert'})
+        browser=launch_browser(p)
+        page=browser.new_page(locale='en-US')
+        page.add_init_script("""(()=>{
+          const original=window.fetch.bind(window);let held=false;
+          window.fetch=async(...args)=>{const response=await original(...args);
+            if(!held&&String(args[0])==='/api/settings'){held=true;await new Promise((resolve,reject)=>{window.releaseOldSettings=resolve;window.failOldSettings=()=>reject(new TypeError('Synthetic interrupted settings fetch'));});}
+            return response;
+          };
+        })();""")
+        page.goto(server.url)
+        page.locator('#panel-token').fill(server.app.state.vault.token)
+        page.locator('#unlock-form button').click()
+        page.wait_for_function('()=>typeof window.releaseOldSettings==="function"')
+        token=page.evaluate('state.token')
+        if outcome == 'late':
+            page.locator('#profile-select').select_option(child)
+            page.wait_for_function('id=>state.profile===id&&!document.querySelector("#workspace").inert',arg=child)
+            page.evaluate('window.releaseOldSettings()')
+        else:
+            page.evaluate('window.failOldSettings()')
+            expect(page.locator('#toast')).to_contain_text('Synthetic interrupted settings fetch')
+        expect(page.locator('#unlock-form button')).to_be_enabled()
+        assert page.evaluate('state.token')==token
+        assert page.evaluate('sessionStorage.getItem("tgwitness-token")')==token
+        expect(page.locator('#workspace')).to_be_visible()
+        assert page.evaluate('async()=>{await json("status");return true;}')
+        browser.close()
+
+
 if __name__ == '__main__':
     raise SystemExit(pytest.main([__file__, '-q']))
