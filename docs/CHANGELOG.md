@@ -2,6 +2,95 @@
 
 ## Unreleased
 
+- Preserve workspace-specific deep links through first setup, keep the shared
+  account form current in Settings, and expose file import when adding an account.
+  Compact mobile connection controls keep the account identity visible.
+- Cancel pending Settings confirmations and setup continuations when their
+  workspace changes, including accounts with identical configuration revisions.
+- Keep a valid panel session through temporary startup/network failures and offer
+  Retry. Expired or revoked access still returns the browser to sign-in.
+- Run both panel regression suites on pull requests, including download checks in
+  Firefox and WebKit. Release packages now wait for the exact revision's dependency,
+  CodeQL and container audits; HIGH/CRITICAL container findings block publication.
+- Renew an imported session in its existing workspace, expire history retries when
+  leaving a chat, and keep bot controls disabled until the previous action finishes.
+  Analysis previews use audited secret masking without changing model input or exports.
+- Stream large account archives and sharing copies through one-use browser downloads;
+  block job deletion until active transfers finish. Reject stale commands after changing
+  the operator bot and serialize its start/stop commands with panel operations.
+- Validate local originals before changing storage destinations or importing older recovery
+  metadata, including native S3 settings. Recovery files cannot mix incompatible destinations.
+- Inspect account files before connecting: settings-only JSON cannot be imported as
+  a session, paired files are checked together, and additional accounts get their
+  own workspace. Connected accounts and typed-name deletion are visible on Account.
+- Keep URL, workspace selector and loaded account in agreement. A mismatch blocks
+  actions. Exports and Telegram actions name the account in their confirmation.
+  Chats open read-only, mask detected secrets without rewriting originals, and
+  journal reveals. Empty chats can load history with a result or a retry.
+- Fall back to ordinary downloads when the browser refuses its file picker or
+  writer. Prepared journal exports retain their size, SHA-256 and a download-again
+  action. Journal numbering, missing-time text and chat date spacing are clearer.
+- Add a searchable notification-service catalog, service icons, an optional
+  operator-owned control bot and Discord witness publication. Storage separates
+  backups, verified attachment offloading and evidence retention. Recovery checks
+  signatures and file hashes; exports require selected offloaded files to be
+  restored. Investigation sources can be handed off as Markdown and JSONL.
+- Reports now use a coordinated dossier design: case cover, prominent figures,
+  linked evidence map, numbered findings and an observation/gap timeline. Signed
+  PDFs have an A4 cover with identifying QR, a summary, bookmarks and page references;
+  HTML remains offline, responsive and printable. Account and sharing copies use
+  the same visual design. A fresh signed fictional example can be built with
+  `tools/build_dossier_example.py`; see [case reports](CASE_REPORTS.md).
+
+- Signed reports now explain the trust basis for the specific archive, with separate
+  export-time checks, recorded observations, missing material and independent review
+  steps. HTML, PDF and signed JSON/manifest assessments share the same facts; English,
+  Russian and German wording is available. Timestamp conclusions require a trusted
+  certificate signature and a checkpoint bound to the exact journal prefix.
+  See [case reports](CASE_REPORTS.md).
+- Added six-step first setup and a unified Settings page with simple, standard and
+  expert presentation levels. Language, device time zone, theme and progress are
+  saved per operator and workspace; language changes preserve the panel session.
+- Copy, monitoring and evidence presets show a diff before changes, preserve optional
+  manual overrides and expose hidden settings through search. External-service
+  permissions are checked when enabling timestamps, notifications and off-site copies.
+- Automatic connection tries public MTProxy, portable WARP, then an explicitly
+  allowed direct route. Checks, a persistent status indicator and recovery actions
+  replace silent proxy failures. HTTPS CONNECT verifies the proxy certificate.
+- File policies can limit video duration; capture and account export enforce the
+  configured size and duration. Existing journals and stored configurations stay
+  intact. See [first setup and settings](ru/SETTINGS.md).
+- The first setup and Settings are translated into all 25 panel languages. Each step
+  has its own address and browser Back moves between steps. The Telegram step asks
+  whether the account is separate; a main account records only chosen chats, also
+  when Settings change the chats later. Start stays on the setup and shows that the
+  connection, event intake, sources and attachments work before offering what to do
+  next. A change of IP protection through Settings is a signed journal record, and the
+  journal names the new connection and settings records.
+
+## 0.8.0 preview · 2 November 2026
+
+- Fixed Windows portable packaging of fpdf2's public colour profile and licence;
+  private workspace files and generated caches remain excluded.
+- Translated the guided connection controls and documentation into 24 additional languages.
+- Added a guided Connection screen: choose accounts, prepare and check a route,
+  then review and apply it. Direct, own proxies, the public MTProto pool, imported
+  WireGuard profiles and portable WARP are available. Group changes preserve
+  custom routes by default, check again before switching, pause active observation
+  and report failures per account. WARP/WireGuard helpers stay in the data folder,
+  use pinned SHA-256 downloads and stop when the owning panel exits.
+
+- Long labels no longer spill on phones: the Sources tabs wrap their text, and the
+  journal's period buttons wrap to a second row instead of five fixed columns. Russian
+  gains the missing route, IP protection and administrator key confirmations; a working
+  part of the status strip reads "Работает" and the custom period "Другое".
+- Added signed HTML, JSON and PDF reports with an offline viewer, verified selections,
+  archive sidecars and configurable report contents in all 25 panel languages.
+- Added minimised journal handovers, message details, indicators, collection clock/profile
+  receipts, absent-ID rechecks and admin-log context. Existing signed records remain verifiable.
+- Added workspace protection modes and clearer account-loss reasons; packaged report fonts
+  and assets for wheel and source installations.
+
 - No consequential action on a single stray click. In Sources the status badge only
   shows the state; pausing, resuming, excluding and removing are in the row menu, each
   with what it does, pausing and excluding are confirmed (also in bulk), and removing a
@@ -99,10 +188,9 @@
   document; they do not turn printouts or screenshots into signed evidence.
 - Added a browsable fictional report with the matching signed ZIP. Its preview
   is byte-identical to the archived HTML; previous signed demo samples are retained.
-- Translated new export, sharing and recipient-report labels through DeepL into
-  the 24 supported non-English interface languages, including active labels that
-  had previously displayed English. Message text and operator-entered content
-  remain unchanged; English remains the canonical source.
+- Added missing translations for export controls, sharing copies and recipient
+  reports in all 25 interface languages. Message text and content entered by the
+  operator keep their original wording.
 
 - Added **Start here** with separate personal-export and investigation journeys.
   Account snapshots and saved observations now have distinct export controls;
@@ -137,14 +225,13 @@
   a new build fails before publication. Input bytes, including signed demo files,
   remain unchanged; reproducibility requires matching inputs and compression tools.
 
-- Kept English as the canonical interface, documentation and demo language, with
-  explicit fallback and browser checks. Capture now falls back to its English
-  source when a translation is missing. Other languages remain translations.
+- Capture now displays English text when a translation is missing and respects
+  the user's language choice.
 - Hardened Capture language selection and encoded its HTML/URL output, pinned
   release actions, and documented the dated security scan results, including
   unresolved Debian package findings in the container images.
-- Refreshed the Russian panel and Capture wizard through DeepL, with reviewed
-  privacy and evidence terminology, preserved placeholders and command examples.
+- Updated Russian wording in the panel and Capture wizard, including privacy and
+  evidence terms. Placeholders and command examples are preserved.
 - Raised dependency security floors and regenerated the hash-locked build tools.
   Notification services now refuse HTTP redirects, including URL-level redirect
   overrides, so credentials cannot be forwarded to a different endpoint. Configure
@@ -566,7 +653,7 @@
 - The UI and docs say "workspace" throughout.
 - Exports can be saved as a password-protected AES-256 ZIP that 7-Zip and WinRAR open.
 - Notifications through Apprise: problems, changes in observed chats and a daily summary.
-- Interface in 13 languages and README, Quick start and Deployment guide in 12 translations, made with DeepL.
+- Added 13 interface languages and translated the README, Quick start and Deployment guide into 12 languages.
 - Off-site copy: everything goes encrypted to any S3-compatible storage, with Object Lock where available and a verified restore command.
 - After a restart, observation catches up on Telegram updates missed while it was off.
 - Observed chats are rechecked every 15 minutes for missed messages, edits and messages Telegram no longer returns.

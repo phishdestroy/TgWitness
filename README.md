@@ -14,7 +14,7 @@
 <p align="center"><strong>Your Telegram investigation workspace.</strong><br>Export chats, preserve observed changes and trace connections back to the source.<br>Self-hosted. Separate accounts. Signed handoffs.</p>
 
 <p align="center">
-  <a href="docs/CHANGELOG.md"><img src="docs/assets/presentation/identity-meta-version.svg" width="144" height="30" alt="v0.7.1 · pre-release"></a>
+  <a href="docs/CHANGELOG.md"><img src="docs/assets/presentation/identity-meta-version.svg" width="144" height="30" alt="v0.8.0 · pre-release"></a>
   <a href="docs/VERIFICATION.md"><img src="docs/assets/presentation/identity-meta-verification.svg" width="158" height="30" alt="Tested environments"></a>
   <img src="docs/assets/presentation/identity-meta-languages.svg" width="279" height="30" alt="25 interface languages · 26 guide languages">
   <a href="LICENSE"><img src="docs/assets/presentation/identity-meta-license.svg" width="60" height="30" alt="MIT"></a>
@@ -80,11 +80,9 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "irm https://get.dest
   <a href="docs/COLLECTION.md"><picture><source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-nav-history-mobile.svg"><img src="docs/assets/presentation/readme-nav-history.svg" width="32%" alt="Collection and saved versions"></picture></a>
 </p>
 
-In the panel, **Start here** offers **Export my account** for a
-one-off [signed account snapshot](docs/ACCOUNT-EXPORT.md), or **Follow an investigation**
-for ongoing observation. Choose a task, connect an account and review its scope;
-collection only starts when you explicitly start it. Less common controls live
-under **More tools & settings**.
+Choose what you want to do: [export your account](docs/ACCOUNT-EXPORT.md) or
+[follow an investigation](docs/INVESTIGATION.md). Connect an account, choose the
+chats and files to save, then start when you are ready.
 
 **Choose your scope:** selected chats, a Telegram folder or the whole account.
 Keep each account in its own workspace, with separate sources, session and signing key.
@@ -116,8 +114,8 @@ transcription, and send HMAC-signed webhooks.
 
 | Task | What you get |
 | --- | --- |
-| [Load older messages](docs/HISTORY.md) | Enabled sources → workspace history, with pause/resume and a signed progress report. |
-| [Export with several accounts](docs/ACCOUNTS.md#multiple-accounts) | Split one chat's acquisition across eligible accounts; each keeps its own session and signing key. |
+| [Load older messages](docs/HISTORY.md) | Save older messages from your selected chats. Pause and resume without starting over. |
+| [Export with several accounts](docs/ACCOUNTS.md#multiple-accounts) | Use several connected accounts to export one chat. Each account keeps its own session and signing key. |
 | [Import a batch of accounts](docs/ACCOUNTS.md#bulk-import-and-account-groups) | Pair session files automatically, see each login result and organize workspaces into groups with shared settings. |
 | [Manage the MTProxy pool](docs/wiki/Proxies.md#pool-dashboard-and-custom-sources) | Ping, countries, filters and your own lists; one shared catalog with separate account routes. |
 | [Bring an existing session](docs/ACCOUNTS.md) | Telegram Desktop TData, Telethon, Pyrogram, StringSession or an auth key. |
@@ -166,6 +164,17 @@ Verification checks integrity against those trusted inputs. A local signing key
 alone does not prove Telegram origin or complete history.
 
 [Verification guide](docs/TRUST.md) · [Checks and tested scale](docs/VERIFICATION.md)
+
+### A dossier built for its reader
+
+[![Fictional evidence dossier with a case cover, record counts and a signed-file check](docs/assets/reports/dossier-en.png)](docs/CASE_REPORTS.md)
+
+An offline HTML report for exploring records; a signed PDF with a cover, summary,
+evidence map and observation timeline; a ZIP with authoritative data and verification
+instructions. Every conclusion has its basis, limits and independent review step.
+The preview uses fictional messages and a disposable demonstration key.
+
+[Report design and sample generation](docs/CASE_REPORTS.md) · [Русский](docs/ru/CASE_REPORTS.md)
 
 <details>
 <summary><strong>Inside the signed record</strong> · hashes, signatures and independent checkpoints</summary>

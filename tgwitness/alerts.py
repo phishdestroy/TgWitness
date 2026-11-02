@@ -28,7 +28,8 @@ EXCERPT_CHARS = 120
 CHANGES = {"message.deleted": "deleted", "message.edited": "edited", "message.missing_on_recheck": "missing"}
 PROBLEM_KINDS = ("storage.low", "storage.ok", "coverage.gap", "collector.error", "connection.retry_failed",
                  "source.access_unconfirmed", "export.failed", "chat_export.interrupted", "replica.completed",
-                 "anchor.completed", "profile.unavailable", "host.state")
+                 "anchor.completed", "profile.unavailable", "host.state", "storage.completed")
+COMPLETION_KINDS = ("account_export.completed", "chat_export.completed", "snapshot.completed", "storage.completed")
 
 CHANGE_SCAN = 5000
 PROBLEM_PAGES = 20
@@ -49,6 +50,7 @@ class AlertSettings(BaseModel):
     enabled: bool = False
     problems: bool = True
     changes: bool = False
+    completions: bool = False
     daily: bool = True
     daily_hour: int = Field(default=9, ge=0, le=23)
     language: Literal[i18n.LANGUAGES] = "en"
@@ -88,13 +90,16 @@ def proxy_url(network, address=None):
     if network.kind == "direct":
         return None
     login = (quote(network.username, safe="") + ":" + quote(network.password, safe="") + "@") if network.username else ""
-    host = address or network.host
+    # HTTPS uses the original hostname for certificate verification. The socket
+    # guard still connects only to the address checked before the send.
+    host = network.host if network.kind == "http" and network.tls else address or network.host
     host = "[" + host + "]" if ":" in host else host
 
-    return ("socks5h" if network.kind == "socks5" else "http") + "://" + login + host + ":" + str(network.port)
+    scheme = "socks5h" if network.kind == "socks5" else "https" if network.tls else "http"
+    return scheme + "://" + login + host + ":" + str(network.port)
 
 
-_guard = {"on": False, "allowed": set(), "refused": None}
+_guard = {"on": False, "allowed": set(), "refused": None, "pinned": {}}
 
 
 class Refused(OSError):
@@ -103,6 +108,8 @@ class Refused(OSError):
 
 def _checked(host, port):
     """The addresses to connect to, checked once and then used (no second lookup); None: unchecked."""
+    if host in _guard["pinned"]:
+        return _guard["pinned"][host]
     if not _guard["on"] or host in _guard["allowed"]:
         return None
     addresses = list(dict.fromkeys(info[4][0] for info in socket.getaddrinfo(host, port, type=socket.SOCK_STREAM)))
@@ -185,7 +192,8 @@ def deliver(urls, title, body, network):
     _install_guard()
     with _send_lock, _routed(proxy_url(network, address)):
         _guard.update(on=not netclient.private_allowed(), refused=None,
-                      allowed={address} if address else set())
+                      allowed={address} if address else set(),
+                      pinned={network.host: [address]} if address else {})
         try:
             bundle = apprise.Apprise(asset=apprise.AppriseAsset(http_redirects=False))
             for url in urls:
@@ -198,6 +206,7 @@ def deliver(urls, title, body, network):
             result = bundle.notify(body=body, title=title)
         finally:
             _guard["on"] = False
+            _guard["pinned"] = {}
         refused = _guard["refused"]
     if isinstance(result, bool):
         return {"sent": len(urls) if result else 0, "failed": 0 if result else len(urls),
@@ -216,6 +225,21 @@ def human_size(n):
         n /= 1024
 
 
+def account_loss_line(cause, words):
+    """Why observation stopped when Telegram no longer accepts the account's session."""
+    if cause == "account_banned":
+        return tr(words, "Telegram banned this account. Observation stopped; the journal is kept.")
+    if cause == "account_frozen":
+        return tr(words, "Telegram froze this account and refuses most requests. Observation stopped; "
+                         "the account can appeal through @SpamBot.")
+    if cause == "account_deleted":
+        return tr(words, "The Telegram account was deleted. Observation stopped; the journal is kept.")
+    if cause == "session_duplicated":
+        return tr(words, "Telegram ended this session because it was used in two places at once. "
+                         "Sign in again with a new session.")
+    return tr(words, "Telegram signed this account out. Sign in again to resume observation.")
+
+
 def problem_line(event, titles, words):
     p, kind = event["payload"], event["kind"]
     where = titles.get(event["chat_id"], str(event["chat_id"])) if event["chat_id"] is not None else ""
@@ -225,7 +249,7 @@ def problem_line(event, titles, words):
     if kind == "storage.ok":
         return tr(words, "Disk space available again; photo and file downloads resumed.")
     if kind == "coverage.gap" and p.get("reason") == "authorization_required":
-        return tr(words, "Telegram signed this account out. Sign in again to resume observation.")
+        return account_loss_line(p.get("cause"), words)
     if kind == "coverage.gap":
         return tr(words, "Coverage gap{where}: {reason}", where=" (" + where + ")" if where else "",
                   reason=p.get("reason") or "")
@@ -243,6 +267,8 @@ def problem_line(event, titles, words):
         return tr(words, "Chat export stopped ({chat}): {error}", chat=where, error=p["error_type"])
     if kind == "replica.completed" and p.get("error"):
         return tr(words, "Off-site copy stopped: {error}", error=p["error"])
+    if kind == "storage.completed" and p.get("error"):
+        return tr(words, "Storage task stopped: {error}", error=p["error"])
     # A checkpoint another service stamped on an earlier pass is partly covered, as when some answer at once.
     if kind == "anchor.completed" and not any(r.get("ok") for r in p.get("results", [])) and not p.get("covered"):
         return tr(words, "No timestamp service answered for the latest checkpoint.")
@@ -544,6 +570,22 @@ def workspace_name(store):
     return "ID " + str(account["id"]) if account.get("id") else "TgWitness"
 
 
+def completion_line(event, titles, words):
+    payload, kind = event["payload"], event["kind"]
+    if kind == "account_export.completed":
+        return tr(words, "Account export finished. Review its coverage and download it in the panel.") if payload.get("complete_within_scope") else tr(
+            words, "Account export finished with gaps. Review incomplete sources in the panel.")
+    if kind == "chat_export.completed":
+        return tr(words, "Chat export finished: {chat}, {n} messages.", chat=titles.get(event["chat_id"], str(event["chat_id"])),
+                  n=payload.get("message_count", 0))
+    if kind == "snapshot.completed":
+        return tr(words, "History loading finished: {n} messages saved.", n=payload.get("captured", 0))
+    if kind == "storage.completed" and not payload.get("error"):
+        return tr(words, "Storage task finished: {n} files verified, {size} freed locally.",
+                  n=payload.get("files", 0), size=human_size(payload.get("freed_bytes", 0)))
+    return None
+
+
 def collect(store, cursor, titles, words, include_text=False, max_lines=MAX_LINES, chars=EXCERPT_CHARS):
     """Problem lines, per-chat change counts, newly added chats and (optionally) excerpts after cursor."""
     problems, changes, discovered, excerpts = [], {}, [], []
@@ -590,6 +632,11 @@ async def alert_pass(store, vault, network, now=None):
                  for chat, counts in changes.items()]
         messages.append((tr(words, "TgWitness · {name}: changes in observed chats", name=name),
                          capped(discovered + lines + excerpts, words, limit)))
+    if settings["completions"]:
+        completed = [line for event in reversed(store.events_of(COMPLETION_KINDS, limit=limit + 1, after=start, before=cursor + 1))
+                     if (line := completion_line(event, titles, words))]
+        if completed:
+            messages.append((tr(words, "TgWitness · {name}: completed tasks", name=name), capped(completed, words, limit)))
     local = (now or datetime.now(timezone.utc)).astimezone()
     daily_due = settings["daily"] and local.hour >= settings["daily_hour"] \
         and store.get_setting("alerts_daily", None) != local.date().isoformat()

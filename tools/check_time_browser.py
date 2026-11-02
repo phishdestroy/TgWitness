@@ -34,7 +34,7 @@ def main():
                   return {value,roundTrip:new Date(value).toISOString()};}""", instant)
                 assert expiry == {"value": expected, "roundTrip": instant.replace("Z", ".000Z")}, (instant, expiry)
             head = store.stats()["head"]
-            expect(page.locator("#time-zone")).to_have_value("UTC")
+            expect(page.locator("#time-zone")).to_have_value("America/Los_Angeles")
             result = page.evaluate("""async () => {
                 const {createTimeFormatter} = await import('/core/time.js');
                 const t = createTimeFormatter({now: () => Date.parse('2026-10-31T15:19:22Z')});
@@ -54,8 +54,8 @@ def main():
             assert result["utcDay"] == "2026-10-31" and result["localDay"] == "2026-10-30"
             assert "08:19:22" in result["local"]
             assert result["dst"][0] != result["dst"][1] and all("01:30:00" in item for item in result["dst"])
-            assert result["invalid"] == result["empty"] == "Not supplied"
-            assert result["zero"] != "Not supplied"
+            assert result["invalid"] == result["empty"] == "No data"
+            assert result["zero"] != "No data"
             page.locator('.sidebar [data-view="observations"]').click()
             page.evaluate("async()=>{state.filter='message.new';await refreshEvents();}")
             expect(page.locator('#events-body .event-time').first).to_be_visible()
@@ -65,8 +65,8 @@ def main():
             expect(timestamp).not_to_have_attribute("title", re.compile(r"UTC$"))
             assert store.stats()["head"] == head, "Display settings must not append journal events"
             page.reload()
-            expect(page.locator("#time-zone")).to_have_value("local")
-            assert page.evaluate("localStorage.getItem('tgwitness-time-zone')") == "local"
+            expect(page.locator("#time-zone")).to_have_value("America/Los_Angeles")
+            assert store.get_setting('ui_preferences:admin')['timezone'] == 'America/Los_Angeles'
             output = Path("build/ux-review/after/04-time")
             output.mkdir(parents=True, exist_ok=True)
             for width in (1440, 390):

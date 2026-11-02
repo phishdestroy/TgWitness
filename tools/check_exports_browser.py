@@ -1,11 +1,14 @@
 """Synthetic downloads: progress, exact receipt, report drafts and compact layouts."""
 import hashlib
+import json
 from pathlib import Path
+import re
 import tempfile
+import zipfile
 
 from playwright.sync_api import expect, sync_playwright
 
-from check_browser import RunningApp, hold_api_response, launch_browser, release_api_response, unlock
+from check_browser import RunningApp, answer_panel_dialog, hold_api_response, launch_browser, release_api_response, unlock
 
 
 def main():
@@ -36,6 +39,7 @@ def main():
             page.evaluate("""()=>{window.showSaveFilePicker=async()=>{
               throw new DOMException('Synthetic picker cancellation','AbortError');};}""")
             page.locator('[data-export=jsonl]').click()
+            answer_panel_dialog(page)
             expect(page.locator('#exports-progress-label')).to_have_text('Download cancelled.')
             expect(page.locator('#exports-progress-bar')).to_be_hidden()
             expect(page.locator('#exports-next')).to_be_hidden()
@@ -43,6 +47,7 @@ def main():
             hold_api_response(page, '/api/export/jsonl')
             with page.expect_download() as transfer:
                 page.locator('[data-export=jsonl]').click()
+                answer_panel_dialog(page)
                 page.wait_for_function("()=>typeof releaseAcceptanceResponse==='function'")
                 expect(page.locator('#exports-progress-bar')).to_be_visible()
                 assert page.locator('#exports-progress-bar').evaluate('bar=>!bar.hasAttribute("value")')
@@ -62,6 +67,7 @@ def main():
             page.locator('#exports-tab-downloads').click()
             with page.expect_download():
                 page.locator('#export-journal-panel [data-export=zip]').click()
+                answer_panel_dialog(page)
             expect(page.locator('#exports-next-copy')).to_contain_text('report.html')
             expect(page.locator('#exports-next-copy')).to_contain_text('independently obtained')
             page.locator('#export-task-account').click()
@@ -72,6 +78,7 @@ def main():
             page.locator('#export-password').fill('Synthetic test password only')
             with page.expect_download():
                 page.locator('[data-export=html]').click()
+                answer_panel_dialog(page)
             expect(page.locator('#exports-next-copy')).to_contain_text('HTML report')
             expect(page.locator('#exports-next-encrypted')).to_be_visible()
             page.locator('#exports-tab-downloads').focus()
@@ -80,6 +87,29 @@ def main():
             expect(page.locator('#report-case-title')).to_have_value('Unsaved investigation')
             page.keyboard.press('Home')
             expect(page.locator('#exports-tab-downloads')).to_be_focused()
+            page.locator('#export-encrypt-on').uncheck()
+            page.locator('#exports-tab-settings').click()
+            page.locator('#report-timeline').uncheck()
+            expect(page.locator('#report-raw')).to_be_disabled()
+            expect(page.locator('#report-heartbeats')).to_be_disabled()
+            expect(page.locator('#report-media')).to_be_enabled()
+            page.locator('#report-timeline').check()
+            for control in ('raw', 'media', 'heartbeats'):
+                page.locator('#report-' + control).uncheck()
+            page.locator('#report-part-size').fill('601')
+            with page.expect_response(lambda response: response.request.method == 'POST'
+                                      and response.url.endswith('/api/report-options')) as saved:
+                page.locator('#report-form button[type=submit]').click()
+            assert saved.value.status == 200 and saved.value.json()['part_size'] == 601
+            page.locator('#exports-tab-downloads').click()
+            with page.expect_download() as configured:
+                page.locator('#export-journal-panel [data-export=zip]').click()
+                answer_panel_dialog(page)
+            with zipfile.ZipFile(configured.value.path()) as archive:
+                document = archive.read('report.html').decode('utf-8')
+                options = json.loads(re.search(r'id="viewer-meta">(.*?)</script>', document)[1])
+                assert not any(options[name] for name in ('raw_records', 'media_previews', 'group_heartbeats'))
+                assert 'report.pdf' in archive.namelist()
             for width in (1440, 390):
                 page.set_viewport_size({'width': width, 'height': 1000 if width == 1440 else 844})
                 for theme in ('light', 'dark'):
@@ -88,6 +118,7 @@ def main():
                     assert page.evaluate('()=>document.documentElement.scrollWidth<=innerWidth+1')
             page.route('**/api/export/csv', lambda route: route.fulfill(status=503, json={'detail': 'Synthetic export outage'}))
             page.locator('[data-export=csv]').click()
+            answer_panel_dialog(page)
             expect(page.locator('#exports-progress-label')).to_have_text('Download failed. Retry the export.')
             expect(page.locator('#exports-next')).to_be_hidden()
             page.evaluate('()=>lock()')

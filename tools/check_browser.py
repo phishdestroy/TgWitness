@@ -80,6 +80,26 @@ class RunningApp:
 
 
 def unlock(page, server, *, start=False):
+    if not server.app.state.store.get_setting("demo", False):
+        # Legacy feature checks explicitly skip onboarding and use all controls.
+        # test_settings_hub.py exercises the untouched first-run defaults separately.
+        store = server.app.state.store
+        if not store.get_setting('first_run', None):
+            store.set_setting('first_run', {'skipped': True})
+        if not store.get_setting('ui_preferences:admin', None):
+            store.set_setting('ui_preferences:admin', {'language':'en', 'theme':'system', 'level':'expert',
+                'timezone':page.evaluate("Intl.DateTimeFormat().resolvedOptions().timeZone")})
+        registry=server.app.state.profiles
+        if not getattr(registry,'legacy_setup_fixture',False):
+            original_open=registry.open_entry
+            async def open_legacy_workspace(entry):
+                await original_open(entry)
+                child=registry.entries[entry['id']].get('app')
+                if child:
+                    child.state.store.set_setting('first_run',{'skipped':True})
+                    child.state.store.set_setting('ui_preferences:admin',store.get_setting('ui_preferences:admin'))
+            registry.open_entry=open_legacy_workspace
+            registry.legacy_setup_fixture=True
     page.goto(server.url)
     if server.app.state.store.get_setting("demo",False):
         expect(page.locator("#workspace")).to_be_visible()
@@ -114,12 +134,15 @@ def unlock(page, server, *, start=False):
     assert authenticated.value.ok, authenticated.value.status
     authenticated.value.body()
     expect(page.locator("#workspace")).to_be_visible()
+    page.wait_for_function('()=>window.TGW_ONLINE_DEMO||!!document.documentElement.dataset.uiLevel')
     # Legacy scenario helpers continue into setup through the new task choice.
     # New landing acceptance keeps the chooser visible with start=True.
     if not start and page.locator('#view-start').is_visible():
         button = page.locator('[data-workflow="investigation"]')
         if button.is_visible():
             button.click()
+    if not start:
+        page.evaluate("document.querySelectorAll('.other-sign-in').forEach(el=>el.open=true)")
 
 
 def answer_panel_dialog(page, accept=True, text=None):
@@ -141,6 +164,14 @@ def answer_panel_dialog(page, accept=True, text=None):
 def navigate_panel(page, view):
     """Use the same navigation on desktop and the mobile menu."""
     button = page.locator(f'.sidebar [data-view="{view}"]')
+    if not page.evaluate('!!state.status?.demo'):
+        page.wait_for_function('()=>window.TGW_ONLINE_DEMO||!!document.documentElement.dataset.uiLevel')
+    level=button.get_attribute('data-level')
+    current=page.locator('html').get_attribute('data-ui-level')
+    rank={'simple':0,'standard':1,'expert':2}
+    if level in rank and current in rank and rank[level]>rank[current]:
+        page.locator('select.level-pick').select_option(level)
+        expect(page.locator('html')).to_have_attribute('data-ui-level',level)
     toggle = page.locator("#navigation-toggle")
     if page.viewport_size["width"] < 768 and toggle.get_attribute("aria-expanded") != "true":
         toggle.click()
@@ -149,6 +180,8 @@ def navigate_panel(page, view):
             page.locator('#nav-more > summary').click()
     button.click()
     expect(page.locator(f"#view-{view}")).to_be_visible()
+    if view == 'connection':
+        page.locator('.other-sign-in').evaluate('el=>el.open=true')
 
 
 def lock_panel(page):
@@ -164,17 +197,33 @@ def lock_panel(page):
 
 def reload_panel(page):
     """Wait for authenticated bootstrap, separately from the render assertion."""
-    with page.expect_response(
-        lambda response: response.url.endswith("/api/status")
-        and response.request.method == "GET", timeout=20000,
-    ) as ready:
-        page.reload()
+    requests, errors = [], []
+    def response_seen(response):
+        if '/api/' in response.url:
+            requests.append((urlsplit(response.url).path, response.status))
+    def error_seen(error):
+        errors.append(str(error))
+    page.on('response', response_seen)
+    page.on('pageerror', error_seen)
+    try:
+        with page.expect_response(
+            lambda response: response.url.endswith("/api/status")
+            and response.request.method == "GET", timeout=20000,
+        ) as ready:
+            page.reload()
+    except Exception:
+        print('Reload bootstrap failed:', {'url': page.url, 'requests': requests, 'errors': errors,
+              'login_error': page.locator('#login-error').text_content()}, flush=True)
+        raise
+    finally:
+        page.remove_listener('response', response_seen)
+        page.remove_listener('pageerror', error_seen)
     assert ready.value.ok, ready.value.status
     expect(page.locator("#workspace")).to_be_visible()
 
 
 def check_layout(page, connection=False):
-    assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), "Horizontal overflow"
+    assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), page.evaluate("""()=>({width:innerWidth,overflow:[...document.querySelectorAll('body *')].filter(e=>e.checkVisibility()&&e.getBoundingClientRect().right>innerWidth+1).map(e=>[e.tagName,e.id,e.className,e.getBoundingClientRect().right]).slice(0,20)})""")
     for button in page.locator(".sidebar .nav:visible").all():
         bounds = button.bounding_box()
         assert bounds and bounds["x"] >= 0 and bounds["x"] + bounds["width"] <= page.viewport_size["width"] + 1
@@ -324,7 +373,7 @@ def check_languages(browser, server):
     page, errors, keys = context.new_page(), [], []
     page.on("pageerror", lambda exc: errors.append(str(exc)))
     panel_scripts = ("app.js", "integrations.js", "analysis.js", "media-analysis.js", "webhooks.js", "proxies.js",
-                     "fleet.js", "review.js", "live.js")
+                     "fleet.js", "review.js", "live.js", "services.js", "account-import.js")
     for script in panel_scripts:
         page.route("**/" + script + "*", lambda route: route.abort())
     page.goto(server.url + "/")
@@ -489,7 +538,7 @@ def main():
             expect(page.locator("#events-body tr:has(.event-icon.delete)")).to_have_count(3)
             page.locator("#events-body tr:has(.event-icon.delete)").first.click()
             expect(page.locator("#detail-content")).to_contain_text("Last captured content")
-            expect(page.locator("#detail-content")).to_contain_text("Deleter not supplied")
+            expect(page.locator("#detail-content")).to_contain_text("Telegram does not report who deleted the message")
             page.keyboard.press("Escape")
             page.get_by_role("button", name="All events", exact=True).click()
             page.get_by_role("button", name="Membership", exact=True).click()
@@ -505,6 +554,7 @@ def main():
             expect(page.locator("#verification-result")).to_contain_text("event signatures")
             with page.expect_download() as pending:
                 page.get_by_role("button", name="Download signed ZIP").click()
+                answer_panel_dialog(page)
             bundle = output / "browser-evidence.zip"
             pending.value.save_as(bundle)
             assert verify_bundle(bundle)["events"] > 25
@@ -515,8 +565,9 @@ def main():
                 close:async()=>{window.writerClosed=true},abort:async()=>{window.writerAborted=true}
               })});}""")
             page.get_by_role("button", name="Download signed ZIP").click()
+            answer_panel_dialog(page)
             page.wait_for_function("()=>window.writerClosed===true")
-            expect(page.locator("#toast")).to_have_text("Evidence export saved.")
+            expect(page.locator("#toast")).to_have_text("Export sent to your browser. Check Downloads for the saved file.")
             assert page.evaluate("window.writerClosed")
             streamed = output / "browser-streamed-evidence.zip"
             streamed.write_bytes(bytes(page.evaluate("window.savedChunks.flat()")))
@@ -526,6 +577,7 @@ def main():
             page.on("request", lambda req: requests_before.append(req.url) if "/api/export/" in req.url else None)
             page.evaluate("() => {window.showSaveFilePicker=async()=>{throw new DOMException('Cancelled','AbortError')};}")
             page.get_by_role("button", name="Download signed ZIP").click()
+            answer_panel_dialog(page)
             expect(page.get_by_role("button", name="Download signed ZIP")).to_be_enabled()
             assert not requests_before, "Cancelled file chooser must not start an export"
             page.evaluate("""() => {window.writerAborted=false;
@@ -534,15 +586,17 @@ def main():
                 close:async()=>{throw new Error('Failed stream must not be closed')},
                 abort:async()=>{window.writerAborted=true}
               })});}""")
-            page.get_by_role("button", name="Download signed ZIP").click()
-            expect(page.locator("#toast")).to_have_text("Synthetic disk full")
+            with page.expect_download():
+                page.get_by_role("button", name="Download signed ZIP").click()
+                answer_panel_dialog(page)
             assert page.evaluate("window.writerAborted")
             page.evaluate("window.showSaveFilePicker=undefined")
             page.route("**/api/export/jsonl", lambda route: route.fulfill(status=200,
                        headers={"Content-Length":str(128*1024**2+1), "Content-Type":"application/x-ndjson"}, body=b""))
             page.locator('#export-more-formats > summary').click()
             page.locator('[data-export="jsonl"]').click()
-            expect(page.locator("#toast")).to_contain_text("cannot stream this large export")
+            answer_panel_dialog(page)
+            expect(page.locator("#toast")).to_contain_text("too large for this browser")
             page.unroute("**/api/export/jsonl")
             check_layout(page)
             with page.expect_download() as pending:
