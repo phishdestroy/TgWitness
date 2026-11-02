@@ -81,9 +81,9 @@ button.chat-setting-chip:hover { border-color: var(--accent); color: var(--accen
   .chat-safety { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px 12px; padding:6px 12px; }
   .chat-safety label { min-height:28px; }
   .chat-safety-hint { display:none; }
-  .workspace[data-current-view="chats"] .health-toolbar { display:flex; flex-wrap:nowrap; justify-content:flex-start; overflow-x:auto; scrollbar-width:thin; }
-  .workspace[data-current-view="chats"] .health-chip { flex:0 0 auto; }
-  .workspace[data-current-view="chats"] .health-chip-label { white-space:nowrap; }
+  /* The route stays in the topbar and collection state in the conversation.
+     Do not restore the duplicate health strip when this view loads after Settings. */
+  .workspace[data-current-view="chats"] .health-toolbar { display:none; }
   .workspace[data-current-view="chats"] .content { padding: 10px 8px; }
   .workspace[data-current-view="chats"] .chats-shell { grid-template-columns: minmax(0, 1fr); }
   .chats-shell[data-panel="chat"] .chats-sidebar, .chats-shell[data-panel="list"] .chat-pane { display: none; }
