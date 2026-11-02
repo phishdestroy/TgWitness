@@ -570,9 +570,35 @@
   </div>
   </div>
   <form class="card padded report-settings" id="report-form" role="tabpanel" aria-labelledby="exports-tab-settings" hidden>
-    <div class="eyebrow">Readable reports</div><h2>Report settings</h2>
-    <p class="muted">Language, case details and contents of journal and single-chat reports. Case details are signed into the export; leave a field empty to omit it. Account snapshots and sharing copies choose their report language in their own export settings.</p>
+    <div class="eyebrow">Readable reports</div><h2>Build your report</h2>
+    <p class="muted">Choose a starting layout, then make it fit your case. Your next export includes the saved choices.</p>
     <fieldset class="report-fields" id="report-fields" disabled>
+    <fieldset class="report-templates"><legend>Start with a template</legend>
+      <div class="report-template-grid">
+        <label class="report-template"><input type="radio" name="report-template" value="dossier" id="report-template-dossier" checked>
+          <div class="report-template-heading"><svg aria-hidden="true" class="icon"><use href="#i-journal"/></svg><strong>Case dossier</strong></div>
+          <div class="report-template-sketch" data-no-translate aria-hidden="true"><span class="sketch-cover"></span><span class="sketch-lines"></span><span class="sketch-chart"></span></div>
+          <small>Detailed findings, charts and the record transcript.</small>
+        </label>
+        <label class="report-template"><input type="radio" name="report-template" value="brief" id="report-template-brief">
+          <div class="report-template-heading"><svg aria-hidden="true" class="icon"><use href="#i-report"/></svg><strong>Briefing</strong></div>
+          <div class="report-template-sketch sketch-brief" data-no-translate aria-hidden="true"><span class="sketch-cover"></span><span class="sketch-lines"></span></div>
+          <small>An overview with activity over time, without the transcript.</small>
+        </label>
+        <label class="report-template"><input type="radio" name="report-template" value="activity" id="report-template-activity">
+          <div class="report-template-heading"><svg aria-hidden="true" class="icon"><use href="#i-activity"/></svg><strong>Activity review</strong></div>
+          <div class="report-template-sketch sketch-activity" data-no-translate aria-hidden="true"><span class="sketch-chart"></span><span class="sketch-chart"></span><span class="sketch-lines"></span></div>
+          <small>Patterns over time, across chats and among participants.</small>
+        </label>
+        <label class="report-template"><input type="radio" name="report-template" value="custom" id="report-template-custom">
+          <div class="report-template-heading"><svg aria-hidden="true" class="icon"><use href="#i-settings"/></svg><strong>Custom report</strong></div>
+          <div class="report-template-sketch sketch-custom" data-no-translate aria-hidden="true"><span class="sketch-lines"></span><span class="sketch-chart"></span></div>
+          <small>Choose each chart and decide how much detail to include.</small>
+        </label>
+      </div>
+    </fieldset>
+    <div class="report-outline"><div class="report-outline-heading"><svg aria-hidden="true" class="icon"><use href="#i-check"/></svg><strong>Included in your report</strong></div><ul id="report-outline" aria-live="polite" aria-atomic="true" data-no-translate></ul><p class="hint">Integrity checks, observation gaps and verification instructions stay in every report. The original records stay in the signed ZIP.</p></div>
+    <h3 class="report-subheading">Case details</h3>
     <div class="report-grid">
       <div><label for="report-language">Report language</label><select data-no-translate id="report-language"></select></div>
       <div><label for="report-theme">Report colours</label><select id="report-theme"><option value="auto">Follow the reader's system</option><option value="light">Light</option><option value="dark">Dark</option></select></div>
@@ -582,6 +608,27 @@
       <div><label for="report-organization">Organization</label><input autocomplete="off" id="report-organization" maxlength="160"></div>
     </div>
     <label for="report-notes">Notes for the report</label><textarea id="report-notes" maxlength="4000" rows="3"></textarea>
+    <details class="report-examination"><summary>Examination notes</summary>
+      <p class="hint">Write the questions, method and findings in your own words. These signed notes are attributed to the report author.</p>
+      <label for="report-review-question">Questions to examine</label><textarea id="report-review-question" maxlength="2000" rows="2" placeholder="What does this material need to establish?"></textarea>
+      <label for="report-review-method">Method and sources</label><textarea id="report-review-method" maxlength="4000" rows="3" placeholder="Describe the steps taken and the material reviewed."></textarea>
+      <label for="report-review-findings">Findings and record references</label><textarea id="report-review-findings" maxlength="8000" rows="4" placeholder="Explain each finding and cite the supporting record numbers."></textarea>
+      <label for="report-review-conclusion">Conclusion and open questions</label><textarea id="report-review-conclusion" maxlength="4000" rows="3" placeholder="What follows from the records? What still needs to be checked?"></textarea>
+    </details>
+    <fieldset class="report-parts report-charts"><legend>Charts and statistics</legend>
+      <p class="hint">Charts and examination notes appear in full journal reports. Counts describe recorded observations, not everything that happened on Telegram.</p>
+      <div class="report-chart-choices">
+        <label class="check-label"><input id="report-activity-chart" type="checkbox" checked> Activity over time</label>
+        <label class="check-label"><input id="report-hourly-chart" type="checkbox" checked> Activity by weekday and hour</label>
+        <label class="check-label"><input id="report-participant-chart" type="checkbox" checked> Participant activity</label>
+        <label class="check-label"><input id="report-chat-chart" type="checkbox" checked> Activity by chat</label>
+      </div>
+      <div class="report-grid">
+        <div><label for="report-participant-labels">Participant labels in charts</label><select id="report-participant-labels"><option value="aliases">Neutral labels (Participant 01, 02…)</option><option value="ids">Telegram account IDs</option></select></div>
+        <div><label for="report-chart-limit">Participants and chats to show</label><input id="report-chart-limit" type="number" required min="5" max="30" step="1" value="10"></div>
+      </div>
+      <p class="hint">Aliases apply to charts only. Source records remain unchanged.</p>
+    </fieldset>
     <fieldset class="report-parts"><legend>Report contents</legend>
       <label class="check-label"><input id="report-timeline" type="checkbox"> Journal records in HTML and PDF</label>
       <label class="check-label"><input id="report-raw" type="checkbox"> Full JSON record in the HTML viewer</label>

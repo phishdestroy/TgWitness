@@ -13,6 +13,57 @@ manifest. Existing signatures and authoritative records are not rewritten.
 
 ## Document formats and reading order
 
+### Choose the document you need
+
+Open **Exports → Report settings**. Choose a starting layout, select the material
+you want to show, then save. The next full journal export uses those choices in
+HTML, signed PDF and signed JSON.
+
+| Starting layout | Included by default |
+| --- | --- |
+| Case dossier | Activity, observation times, participants, chats and the record transcript. |
+| Briefing | An activity overview without participant rankings or the transcript. |
+| Activity review | All four charts, with source references and exact figures. |
+| Custom report | Your own combination of charts, transcript and previews. |
+
+Changing a layout keeps your case details and written analysis. Integrity checks,
+coverage, limitations and verification instructions remain in every layout.
+Source records in the ZIP stay unchanged when a chart or transcript is hidden.
+
+The optional **Examination notes** contain the question, method, findings and
+conclusion written by the report's author. Cite the source file and record numbers
+in the findings. The signature preserves these statements alongside the report;
+it does not mean an independent expert has reviewed them. These private notes and
+full-journal charts are omitted from minimized handovers. Single-chat and account
+reports retain their existing layouts.
+
+### Read the charts correctly
+
+- Activity separates new-message observations, history reads, recovered messages,
+  edits, deletion notices and messages missing on recheck. Collector heartbeats
+  are excluded. Repeated history reads can count the same message again.
+- The time axis and weekday/hour heatmap use **observation time in UTC**. These
+  are not sending times. Empty intervals do not establish inactivity or complete
+  collection; compare the coverage section.
+- Participant rankings count message observations, including history and
+  recovery. They do not identify who edited or deleted a message. Unknown senders
+  and the remaining participants are separate rows.
+- Charts use aliases by default. Showing account IDs is an explicit choice.
+  Aliases affect the charts only; the source journal still contains its identities.
+- Every figure has exact numbers. HTML offers expandable tables and a print
+  version; the signed PDF includes tables. JSON preserves selected aggregates,
+  the source journal's SHA-256 and the report choices. A chart that exceeds its
+  grouping limit is marked unavailable rather than presenting an approximate ranking.
+
+Build all four layouts with fictional activity:
+
+```sh
+python tools/build_dossier_example.py --templates --language en --output test-results/report-templates
+```
+
+Each layout gets its own HTML, signed PDF, signed JSON and original ZIP. Use a new
+output directory for each run so previously signed examples are preserved.
+
 ![Fictional HTML dossier](assets/reports/dossier-en.png)
 
 The HTML opens with a case cover and key figures. The numbered evidence map links
