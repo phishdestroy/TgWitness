@@ -5904,5 +5904,9 @@
 "This workspace is not in the group.": "مساحة العمل هذه ليست ضمن المجموعة.",
 "Continuous collection": "الجمع المستمر",
 "Saved files": "الملفات المحفوظة",
-"Can Telegram see this server's address?": "هل يمكن لـ Telegram رؤية عنوان هذا الخادم؟"
+"Can Telegram see this server's address?": "هل يمكن لـ Telegram رؤية عنوان هذا الخادم؟",
+"Case Board card soft limit": "حد التنبيه لعدد بطاقات Case Board",
+"Case Board comment soft limit": "حد التنبيه لعدد تعليقات Case Board",
+"Case Board slice page size": "عدد السجلات في صفحة مقتطف Case Board",
+"Show Case Board media previews": "عرض معاينات الوسائط في Case Board"
 }

@@ -5734,5 +5734,9 @@
 "This workspace is not in the group.": "이 작업 공간은 그룹에 속해 있지 않습니다.",
 "Continuous collection": "지속적인 수집",
 "Saved files": "저장된 파일",
-"Can Telegram see this server's address?": "텔레그램에서 이 서버의 주소를 확인할 수 있나요?"
+"Can Telegram see this server's address?": "텔레그램에서 이 서버의 주소를 확인할 수 있나요?",
+"Case Board card soft limit": "Case Board 카드 수 경고 기준",
+"Case Board comment soft limit": "Case Board 댓글 수 경고 기준",
+"Case Board slice page size": "Case Board 추출 결과의 페이지당 기록 수",
+"Show Case Board media previews": "Case Board 미디어 미리보기 표시"
 }

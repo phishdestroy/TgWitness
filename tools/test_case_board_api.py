@@ -5,6 +5,7 @@ from pathlib import Path
 import sys
 import zipfile
 import pytest
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from tools.check_prepared_export_access import grant_session
@@ -72,6 +73,20 @@ def test_http_permissions_and_export_isolation(tmp_path):
             who = app.state.access.resolve(scoped['Authorization'].split()[1], '127.0.0.1')
             live, _ = notifications(store, 0, who, 'default')
             assert hidden['payload']['id'] not in str(live)
+            # Group membership can widen/narrow scope without changing the grant itself.
+            group = {'current':'team'}
+            app.state.access.group_of = lambda workspace: group['current']
+            app.state.access.grant(saved.json()['access_id'])['groups'] = ['team']
+            assert (await client.get('/api/board/card/'+hidden['payload']['id'], headers=scoped)).status_code == 200
+            original_read = Board.read
+            def changing_read(service, db, principal):
+                result = original_read(service, db, principal)
+                group['current'] = 'another-team'
+                return result
+            with patch.object(Board, 'read', changing_read):
+                raced = await client.get('/api/board', headers=scoped)
+                assert raced.status_code == 403 and 'PRIVATE TEAM NOTE' not in raced.text
+            assert (await client.get('/api/board/card/'+hidden['payload']['id'], headers=scoped)).status_code == 404
     asyncio.run(run())
 
 

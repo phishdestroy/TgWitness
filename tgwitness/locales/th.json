@@ -5734,5 +5734,9 @@
 "This workspace is not in the group.": "พื้นที่ทำงานนี้ไม่อยู่ในกลุ่ม",
 "Continuous collection": "การเก็บรวบรวมข้อมูลอย่างต่อเนื่อง",
 "Saved files": "ไฟล์ที่บันทึกไว้",
-"Can Telegram see this server's address?": "Telegram สามารถเห็นที่อยู่ของเซิร์ฟเวอร์นี้ได้หรือไม่?"
+"Can Telegram see this server's address?": "Telegram สามารถเห็นที่อยู่ของเซิร์ฟเวอร์นี้ได้หรือไม่?",
+"Case Board card soft limit": "เกณฑ์เตือนจำนวนการ์ดใน Case Board",
+"Case Board comment soft limit": "เกณฑ์เตือนจำนวนความคิดเห็นใน Case Board",
+"Case Board slice page size": "จำนวนระเบียนต่อหน้าของชุดข้อมูล Case Board",
+"Show Case Board media previews": "แสดงตัวอย่างสื่อใน Case Board"
 }

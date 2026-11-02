@@ -5734,5 +5734,9 @@
 "This workspace is not in the group.": "Không gian làm việc này không thuộc nhóm.",
 "Continuous collection": "Thu thập liên tục",
 "Saved files": "Các tệp đã lưu",
-"Can Telegram see this server's address?": "Telegram có thể thấy địa chỉ của máy chủ này không?"
+"Can Telegram see this server's address?": "Telegram có thể thấy địa chỉ của máy chủ này không?",
+"Case Board card soft limit": "Ngưỡng cảnh báo số thẻ Case Board",
+"Case Board comment soft limit": "Ngưỡng cảnh báo số bình luận Case Board",
+"Case Board slice page size": "Số bản ghi mỗi trang trích đoạn Case Board",
+"Show Case Board media previews": "Hiển thị bản xem trước phương tiện Case Board"
 }

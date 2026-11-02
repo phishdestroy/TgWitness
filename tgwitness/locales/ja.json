@@ -5734,5 +5734,9 @@
 "This workspace is not in the group.": "このワークスペースはグループに含まれていません。",
 "Continuous collection": "継続的な収集",
 "Saved files": "保存されたファイル",
-"Can Telegram see this server's address?": "Telegramはこのサーバーのアドレスを確認できますか？"
+"Can Telegram see this server's address?": "Telegramはこのサーバーのアドレスを確認できますか？",
+"Case Board card soft limit": "Case Board のカード数の警告しきい値",
+"Case Board comment soft limit": "Case Board のコメント数の警告しきい値",
+"Case Board slice page size": "Case Board の抽出結果の1ページあたりの記録数",
+"Show Case Board media previews": "Case Board でメディアのプレビューを表示"
 }
