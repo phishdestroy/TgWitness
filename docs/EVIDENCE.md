@@ -85,7 +85,7 @@ proxy, notifications use the same route; services that cannot use it, and MTProx
 
 A signed ZIP carries the whole workspace journal. When a court, a lawyer or an abuse desk needs
 only some chats, a period or certain people, **Exports → Handover extract** prepares a minimised
-copy (`tgwitness-handover-v1`) and does not disclose third parties the recipient does not need.
+copy (`tgwitness-handover-v1`) according to the selected disclosure rules.
 The operator states the purpose and chooses the chats, an optional period (UTC), the people the
 extract is about, what happens to everyone else (shown, replaced by pseudonyms P01, P02… or left
 out), which message texts stay, which attachments and profile photos are included, and whether
@@ -99,7 +99,8 @@ minimised record keeps the original hash and signature, so the signature still v
 withheld fields cannot be recomputed from it; the record names what was withheld and the report
 marks it. The manifest names the journal length and head with the collector's signature over that
 head, and counts the records left out; `coverage.json` describes the chosen chats. Names inside file
-names are not detected. Keep the full signed ZIP: the extract is a disclosure, not a replacement.
+names are not detected. Review the final files before sharing: free text, file names and selected
+attachments can still identify people. Keep the full signed ZIP: the extract is a disclosure, not a replacement.
 
 ## Readable reports
 
