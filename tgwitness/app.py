@@ -276,7 +276,8 @@ def panel_language(request):
 
 def client_languages(request):
     from .client_identity import language_defaults
-    return language_defaults(panel_language(request), request.headers.get("accept-language"))
+    return language_defaults(panel_language(request), request.headers.get("x-tgwitness-system-language")
+                             or request.headers.get("accept-language"))
 
 
 def create_app(data_dir=None, demo=False, client_factory=None, token_override=None, allow_profiles=True,

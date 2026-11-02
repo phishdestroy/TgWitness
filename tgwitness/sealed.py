@@ -292,7 +292,8 @@ def create_app(root, output, config, client_factory=WitnessClient):
     @app.post("/api/phone")
     async def phone(body: Phone, request: Request):
         from .client_identity import language_defaults
-        languages = language_defaults(request.headers.get("x-tgwitness-language"), request.headers.get("accept-language"))
+        languages = language_defaults(request.headers.get("x-tgwitness-language"),
+                                      request.headers.get("x-tgwitness-system-language") or request.headers.get("accept-language"))
         return await operation(app.state.session.collector.start_phone, body.phone,
                                body.api_id, body.api_hash, None, languages, login=True, fresh=True)
 
@@ -309,7 +310,8 @@ def create_app(root, output, config, client_factory=WitnessClient):
         import qrcode
         from qrcode.image.svg import SvgPathImage
         from .client_identity import language_defaults
-        languages = language_defaults(request.headers.get("x-tgwitness-language"), request.headers.get("accept-language"))
+        languages = language_defaults(request.headers.get("x-tgwitness-language"),
+                                      request.headers.get("x-tgwitness-system-language") or request.headers.get("accept-language"))
         result = await operation(app.state.session.collector.start_qr, body.api_id, body.api_hash,
                                  None, languages, login=True, fresh=True)
         output = io.BytesIO()

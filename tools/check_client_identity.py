@@ -47,6 +47,8 @@ def check_imports():
         assert StringSession(result["session"]).auth_key.key == b"x" * 256
         assert "unused-synthetic" not in json.dumps(result)
     assert json_account(json.dumps(PROFILE).encode())["client_profile"] == PROFILE
+    android = json_account(json.dumps({"device": "Synthetic Android", "sdk": "SDK 33", "app_version": "11.7.4 (56982)"}).encode())
+    assert android["client_profile"] == {"device_model": "Synthetic Android", "system_version": "SDK 33", "app_version": "11.7.4 (56982)"}
     for bad in ({"device": "x\nsecret"}, {"sdk": 11}, {"device": "a", "device_model": "b"},
                 {"app_version": "x" * 129}, {"lang_code": "en/invalid"}, {"lang_pack": []}):
         try:
@@ -122,12 +124,12 @@ async def check_retention(root):
 async def check_routes():
     from tools.check_session_reservations import workspace, import_body, RecordingClient
     async with workspace() as (app, http):
-        headers = {"Accept-Language": "de-DE,de;q=0.9", "Cookie": i18n.COOKIE + "=es"}
+        headers = {"Accept-Language": "de-DE,de;q=0.9", "X-TgWitness-System-Language": "fr-CA", "Cookie": i18n.COOKIE + "=es"}
         response = await http.post("/api/auth/phone/start", json={"api_id": 321, "api_hash": "a" * 32,
                                                                 "phone": "+15550001111"}, headers=headers)
         assert response.status_code == 200, response.text
         assert app.state.collector.login_client.options["lang_code"] == "es"
-        assert app.state.collector.login_client.options["system_lang_code"] == "de-DE"
+        assert app.state.collector.login_client.options["system_lang_code"] == "fr-CA"
         await app.state.collector.cancel_login()
         body = import_body()
         body["files"].append(uploaded("synthetic.json", json.dumps(METADATA).encode()))

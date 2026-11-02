@@ -367,7 +367,8 @@ async function api(path, body, options={}) {
   const deadline=path==='status'?AbortSignal.timeout(15000):null;
   const requestSignal=deadline?(fetchOptions.signal?AbortSignal.any([deadline,fetchOptions.signal]):deadline):fetchOptions.signal;
   let response;try{response = await fetch(prefix + path, {method: body === undefined ? "GET" : "POST",
-    headers: {Authorization: "Bearer " + token, ...(body !== undefined ? {"Content-Type":"application/json"} : {})},
+    headers: {Authorization: "Bearer " + token, ...(body !== undefined ? {"Content-Type":"application/json"} : {}),
+      ...(path.startsWith("auth/")||path==="profiles/import"?{"X-TgWitness-System-Language":navigator.language}:{})},
     ...(body !== undefined ? {body: JSON.stringify(body)} : {}), ...fetchOptions,...(requestSignal?{signal:requestSignal}:{})});
   }catch(error){if(fetchOptions.signal?.aborted)throw new StaleView();
     if(revision===state.workspaceRevision&&token===state.token)connectionNotice?.fail();
