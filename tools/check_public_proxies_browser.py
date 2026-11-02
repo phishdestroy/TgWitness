@@ -73,6 +73,7 @@ def main():
                 listing = page.evaluate("json('network/catalog')")
                 row = next(row for row in listing["proxies"] if is_ip(row["host"]))
                 page.locator("#proxy-catalog-select").select_option(row["id"])
+                page.once("dialog", lambda dialog: dialog.accept())
                 page.locator("#proxy-catalog-apply").click()
                 expect(page.locator("#route-detail")).to_contain_text(row["host"])
                 settings(page)

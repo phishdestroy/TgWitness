@@ -118,6 +118,7 @@ def main():
         expect(page.locator("#pool-own .pool-source-item")).to_have_count(1)
         page.locator("#pool-search").fill("7.7.7.7")
         expect(page.locator("#pool-rows .pool-row")).to_have_count(1)
+        page.once("dialog", lambda dialog: dialog.accept())
         page.locator("#pool-rows button").click()
         expect(page.locator("#route-detail")).to_contain_text("7.7.7.7")
         assert server.app.state.profiles.entries[alpha]["app"].state.collector.network_config().host == "7.7.7.7"
