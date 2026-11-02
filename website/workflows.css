@@ -45,6 +45,11 @@
 @media(max-width:600px) {
   .workflow-lab { padding:17px; }
   .workflow-lab .workflow-scene,.workflow-lab [data-workflow-scene] { grid-template-columns:1fr; }
+  .workflow-lab.is-enhanced [data-workflow-scene] > .workflow-node { grid-area:1 / 1; visibility:hidden; }
+  .workflow-lab.is-enhanced [data-workflow-scene] > .workflow-node.is-current { visibility:visible; }
+  .workflow-lab.is-enhanced[data-workflow=handover] [data-workflow-scene] > .workflow-node { grid-area:2 / 1; }
+  .workflow-lab.is-enhanced[data-workflow=handover] [data-workflow-scene] > [data-workflow-node="0"] { grid-area:1 / 1; visibility:visible; }
+  .workflow-lab.is-enhanced[data-workflow=handover][data-step="0"] [data-workflow-node="1"] { visibility:visible; }
   .workflow-steps { grid-template-columns:repeat(2,minmax(0,1fr)); }
   .workflow-node { padding:15px; }
   .workflow-lab [data-workflow-progress] { flex-basis:100%; margin-inline-start:0; }

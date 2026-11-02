@@ -92,7 +92,10 @@
       if (!choices.length) continue;
       choices.forEach(button => button.addEventListener('click', () => {
         stop();
+        step = 1;
+        lab.dataset.workflowInteracted = 'true';
         select(group, button.dataset.workflowChoice);
+        render();
       }));
       select(group, choices[0].dataset.workflowChoice);
       group.hidden = false;

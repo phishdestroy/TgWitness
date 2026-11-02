@@ -141,12 +141,16 @@ def check_choices(lab, kind):
         preview = lab.locator("[data-workflow-design]")
         choices = lab.locator('[data-workflow-choices="design"]')
         choices.locator('[data-workflow-choice="reading_series"]').press("Enter")
+        expect(lab).to_have_attribute("data-step", "1")
+        expect(lab).to_have_attribute("data-playing", "false")
+        expect(preview).to_be_visible()
         expect(preview).to_have_attribute("data-workflow-design", "reading_series")
         expect(choices.locator('[aria-pressed="true"]')).to_have_count(1)
         content = lab.locator('[data-workflow-choices="contents"]')
         for button in content.locator("button").all():
             value = button.get_attribute("data-workflow-choice")
             button.press("Space")
+            expect(lab).to_have_attribute("data-step", "1")
             expect(lab.locator("[data-workflow-content]:visible")).to_have_count(1)
             expect(lab.locator(f'[data-workflow-content="{value}"]')).to_be_visible()
         lab.locator("[data-workflow-reset]").click()
@@ -156,6 +160,8 @@ def check_choices(lab, kind):
         choices = lab.locator('[data-workflow-choices="identity"]')
         for value in ("pseudonymize", "omit", "keep"):
             choices.locator(f'[data-workflow-choice="{value}"]').press("Enter")
+            expect(lab).to_have_attribute("data-step", "1")
+            expect(lab).to_have_attribute("data-playing", "false")
             expect(lab.locator("[data-workflow-identity-value]:visible")).to_have_count(1)
             expect(lab.locator(f'[data-workflow-identity-value="{value}"]')).to_be_visible()
             assert lab.locator('[data-workflow-node="0"]').inner_text() == original
@@ -164,13 +170,62 @@ def check_choices(lab, kind):
         expect(lab.locator('[data-workflow-identity-value="keep"]')).to_be_visible()
 
 
-def run(browser, base, output, fixture):
+def mobile_step_measurements(page, lab, kind):
+    """The active sample must remain beside its controls during real playback."""
+    page.clock.install()
+    measurements = []
+
+    def measure():
+        value = lab.evaluate("""root => {
+            const box = node => {
+                const r = node.getBoundingClientRect();
+                return {top:r.top,bottom:r.bottom,height:r.height};
+            };
+            return {step:Number(root.dataset.step),height:innerHeight,
+                current:box(root.querySelector('.workflow-node.is-current')),
+                controls:box(root.querySelector('[data-workflow-controls]')),
+                scene:box(root.querySelector('[data-workflow-scene]'))};
+        }""")
+        current = value["current"]
+        # The persistent original can start above the viewport when the browser
+        # centres controls under a long translated original/copy pair. It remains
+        # readable by scrolling; every subsequent active copy/stage is in view.
+        if kind == "handover" and value["step"] == 0:
+            assert current["bottom"] > 0, value
+        else:
+            assert current["top"] >= -1 and current["bottom"] <= value["height"] + 1, value
+        if measurements:
+            assert abs(value["controls"]["top"] - measurements[0]["controls"]["top"]) < 1, value
+            assert abs(value["scene"]["height"] - measurements[0]["scene"]["height"]) < 1, value
+        expect(lab.locator("[data-workflow-node]:visible")).to_have_count(2 if kind == "handover" else 1)
+        if kind == "handover":
+            expect(lab.locator('[data-workflow-node="0"]')).to_be_visible()
+        measurements.append(value)
+
+    lab.locator("[data-workflow-play]").click()
+    for step in range(4):
+        if step:
+            page.clock.fast_forward(2401)
+        expect(lab).to_have_attribute("data-step", str(step))
+        measure()
+    expect(lab).to_have_attribute("data-playing", "false")
+    lab.locator("[data-workflow-reset]").click()
+    lab.locator("[data-workflow-next]").click()
+    expect(lab).to_have_attribute("data-step", "1")
+    measure()
+    check_choices(lab, kind)
+    return measurements
+
+
+def run(browser, base, output, fixture, source_assets=False):
     errors, external, failed, writes = [], [], [], []
 
     def route_request(route):
         if not route.request.url.startswith(base):
             external.append(route.request.url)
             route.abort()
+        elif source_assets and route.request.url.rsplit("/", 1)[-1] in {"workflows.js", "workflows.css"}:
+            route.fulfill(path=ROOT / "website" / route.request.url.rsplit("/", 1)[-1])
         else:
             if route.request.method not in {"GET", "HEAD"}:
                 writes.append(route.request.url)
@@ -189,6 +244,7 @@ def run(browser, base, output, fixture):
         page = ctx.new_page()
         page.goto(base + f"docs/{slug}/", wait_until="networkidle")
         lab = page.locator(f'[data-workflow="{kind}"]')
+        expect(lab.locator("[data-workflow-node]:visible")).to_have_count(4)
         check_sequence(page, lab)
         check_choices(lab, kind)
         for direction in ("ltr", "rtl"):
@@ -201,6 +257,17 @@ def run(browser, base, output, fixture):
                 if width == 320:
                     lab.screenshot(path=str(output / f"{slug}-{direction}-320.png"))
         ctx.close()
+
+    step_measurements = []
+    for lang in (("en",) if fixture else ("en", "de", "ar")):
+        for slug, kind in PAGES.items():
+            ctx = context(viewport={"width": 320, "height": 844}, reduced_motion="reduce")
+            page = ctx.new_page()
+            page.goto(base + ("" if lang == "en" else lang + "/") + f"docs/{slug}/", wait_until="networkidle")
+            values = mobile_step_measurements(page, page.locator(f'[data-workflow="{kind}"]'), kind)
+            step_measurements.append({"language": lang, "page": slug, "states": values})
+            ctx.close()
+    (output / "mobile-step-measurements.json").write_text(json.dumps(step_measurements, indent=2) + "\n", encoding="utf-8")
 
     languages = ("en",) if fixture else tuple(LANGUAGES)
     for lang in languages:
@@ -240,15 +307,17 @@ def run(browser, base, output, fixture):
             check_layout(page, lab, (slug, lang, "no JavaScript"))
         ctx.close()
     assert not errors and not external and not failed and not writes, (errors, external, failed, writes)
-    return {"passed": True, "english_fixture": fixture, "pages": list(PAGES), "languages": list(languages),
+    return {"passed": True, "english_fixture": fixture, "source_assets": source_assets, "pages": list(PAGES), "languages": list(languages),
             "keyboard": True, "play_pause_reset": True, "no_autoplay": True, "reduced_motion": True,
             "static_fallback": True, "mobile_rtl_dark": True, "text_contrast": True, "original_unchanged": True,
+            "mobile_current_step": True, "mobile_controls_stable": True,
             "javascript_errors": errors, "external_requests": external, "failed_requests": failed, "writes": writes}
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--english-fixture", action="store_true")
+    parser.add_argument("--source-assets", action="store_true", help="Check source workflow JS/CSS over the existing translated site before rebuilding.")
     parser.add_argument("--site-root", type=Path, default=ROOT / "dist/site")
     parser.add_argument("--output", type=Path, default=ROOT / "test-results/docs-workflows")
     args = parser.parse_args()
@@ -256,7 +325,7 @@ def main():
     site = english_fixture(args.output / "english-site") if args.english_fixture else args.site_root
     with site_server(site) as base, sync_playwright() as playwright:
         browser = playwright.chromium.launch(headless=True, channel=os.environ.get("TGWITNESS_BROWSER_CHANNEL") or None)
-        receipt = run(browser, base, args.output, args.english_fixture)
+        receipt = run(browser, base, args.output, args.english_fixture, args.source_assets)
         browser.close()
     name = "english-receipt.json" if args.english_fixture else "receipt.json"
     (args.output / name).write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
