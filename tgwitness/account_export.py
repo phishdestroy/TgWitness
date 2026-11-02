@@ -793,7 +793,7 @@ class AccountExport:
                     "complete_within_scope": not self.current["coverage"]["failures"],
                     "omissions": [*self.inventory.get("gaps", []), *self.current.get("omissions", [])],
                     "fingerprint": fingerprint(self.vault.public_key), "limitations": LIMITATIONS}
-                analytics = account_report.report_analytics.Analytics("snapshot")
+                analytics = account_report.snapshot_analytics.Analytics("snapshot")
                 for chat in selected:
                     name = "chats/" + str(chat["id"]) + ".html"
                     def message_rows(chat=chat):
@@ -801,12 +801,12 @@ class AccountExport:
                             with (directory / data_file).open("rb") as stream:
                                 for raw in stream:
                                     yield json.loads(raw)
-                    chat_analytics = account_report.report_analytics.Analytics("snapshot")
+                    chat_analytics = account_report.snapshot_analytics.Analytics("snapshot")
                     for row in message_rows():
                         analytics.snapshot(row, chat)
                         chat_analytics.snapshot(row, chat)
-                    write(name, account_report.account_chat({**report_context, "analytics": chat_analytics.result()}, chat, message_rows()))
-                report_context["analytics"] = analytics.result()
+                    write(name, account_report.account_chat({**report_context, "analytics": account_report.snapshot_analytics.project(chat_analytics.result(), report_context["presentation"])}, chat, message_rows()))
+                report_context["analytics"] = account_report.snapshot_analytics.project(analytics.result(), report_context["presentation"])
                 write("analytics.json", [canonical(report_context["analytics"])])
                 write("index.html", account_report.account_index(report_context,
                     ({**chat, "message_count": chat_counts.get(chat["id"], 0)} for chat in selected)))

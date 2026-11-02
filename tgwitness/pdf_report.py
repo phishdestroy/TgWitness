@@ -225,7 +225,7 @@ class Layout:
         self.number = 0
         self.rtl = pdf.rtl
         self.align = "RIGHT" if pdf.rtl else "LEFT"
-        self.accent = report.report_analytics.COLORS.get(template, INK)
+        self.accent = report.report_analytics.DESIGN_COLORS.get(template, INK)
         self.template = template
 
     def need(self, height):
@@ -763,7 +763,7 @@ def evidence_pdf(data, context, events=None, certificate=None):
     logging.getLogger("fpdf").addHandler(found)
     logging.getLogger("fontTools.subset").setLevel(logging.ERROR)  # tables it cannot subset are left out, quietly
     try:
-        lay = Layout(pdf, say, options.get("template", "dossier"))
+        lay = Layout(pdf, say, options.get("design", "dossier"))
         label = say("Handover extract") if handover else say("Evidence report")
         title = case.get("title") or (say("Handover extract") if handover else say("Telegram observation journal"))
         pdf.set_title(title)
@@ -793,7 +793,12 @@ def evidence_pdf(data, context, events=None, certificate=None):
                   "first": summary["first_record_at"], "last": summary["last_record_at"]}
         lay.brief(*report.evidence_brief(say, digest, records_total, data["timestamps"], coverage, account_text,
                                          handover))
-        report.report_analytics.pdf_section(lay, data.get("analytics"), options)
+        sections = [(report.report_charts.examination_pdf, data.get("examination")),
+                    (report.report_charts.pdf, data.get("analytics"))]
+        if options.get("template") == "activity":
+            sections.reverse()
+        for render, material in sections:
+            render(lay, material)
         report.case_assessment.pdf(lay, data.get("case_assessment") or report.case_assessment.journal(context, coverage))
         lay.section(say("Case"))
         lay.kv([(say("Case title"), case.get("title")), (say("Case ID"), case.get("id")),
@@ -1012,7 +1017,7 @@ def chat_pdf(meta, context, messages=None, certificate=None):
     logging.getLogger("fpdf").addHandler(found)
     logging.getLogger("fontTools.subset").setLevel(logging.ERROR)
     try:
-        lay = Layout(pdf, say, options.get("template", "dossier"))
+        lay = Layout(pdf, say, options.get("design", "dossier"))
         title = case.get("title") or chat_title
         pdf.set_title(title)
         pdf.set_author(case.get("examiner") or case.get("organization") or "TgWitness")
@@ -1033,7 +1038,7 @@ def chat_pdf(meta, context, messages=None, certificate=None):
         account_text = " · ".join(x for x in (("@" + account["username"]) if account.get("username") else "",
                                               ("id " + str(account["id"])) if account.get("id") else "") if x)
         lay.brief(*report.chat_brief(say, meta, stats, ids, account_text))
-        report.report_analytics.pdf_section(lay, context.get("analytics"), options)
+        report.snapshot_analytics.pdf_section(lay, context.get("analytics"), options)
         report.case_assessment.pdf(lay, report.case_assessment.snapshot(context, "chat", meta))
         lay.section(say("Case"))
         lay.kv([(say("Case title"), case.get("title")), (say("Case ID"), case.get("id")),

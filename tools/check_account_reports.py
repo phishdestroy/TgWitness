@@ -161,7 +161,7 @@ async def manager_checks(directory, output):
     try:
         for language in ('en', 'ru', 'ar', 'zh'):
             job = await exports.start({'transport': 'regular', 'report_language': language,
-                                       'report_presentation': {'template': 'analytical', 'chart_top_n': 5},
+                                       'report_presentation': {'design': 'analytical', 'chart_limit': 5},
                                        'purpose': 'Synthetic report <svg onload=window.reportXSS=2>',
                                        'include_profile': False, 'include_contacts': False, 'media_types': []})
             await asyncio.wait_for(asyncio.shield(exports.task), 30)
@@ -190,7 +190,7 @@ async def manager_checks(directory, output):
                         for line in archive.read(name).splitlines()]
                 assert all(row['text'] == MESSAGE for row in rows)
             policy = {'purpose': 'Public review SECRET_FILTER', 'report_language': language,
-                      'report_presentation': {'template': 'editorial', 'chart_participants': False},
+                      'report_presentation': {'design': 'editorial', 'participant_chart': False},
                       'text_contains': ['SECRET_FILTER', 'UNCHANGED'], 'identity_mode': 'pseudonymize_all'}
             preview = disclosures.preview(job['id'], policy, 'synthetic-reviewer')
             result = await disclosures.create(job['id'], preview['preview_id'], 'synthetic-reviewer')
@@ -208,7 +208,7 @@ async def manager_checks(directory, output):
                 assert 'chart-participants"' not in body
                 analytics = json.loads(archive.read('analytics.json'))
                 assert analytics['basis'] == 'sharing' and analytics['messages'] == 4
-                assert all(str(person['id']).startswith('participant-') for person in analytics['participants'])
+                assert 'participants' not in analytics, 'Disabled participant chart leaked its series'
                 assert 'SECRET' not in json.dumps(analytics)
                 assert 'SECRET_FILTER' not in body and SECRET_METADATA not in body
                 assert result['id'] in body and manifest['created_at'] in body

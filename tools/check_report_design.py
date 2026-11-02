@@ -38,6 +38,8 @@ def main():
             for lang in ('en','ru','de'):
                 page.goto((root/lang/'report.html').as_uri())
                 expect(page.locator('.assessment-overview li')).to_have_count(6)
+                expect(page.locator('.analytics-figure')).to_have_count(5)
+                expect(page.locator('.analytics-totals b')).to_have_count(6)
                 page.locator('.assessment-overview a[href="#assessment-coverage"]').click()
                 expect(page.locator('#assessment-coverage h3')).to_be_in_viewport()
                 assert page.locator('#assessment-coverage .assessment-state').inner_text() == report.Words(lang)(report.case_assessment.STATUSES['recorded'])
@@ -70,6 +72,8 @@ def main():
             nojs.emulate_media(media='print')
             expect(nojs.locator('.assessment-overview')).to_be_visible()
             expect(nojs.locator('.coverage-figure')).to_be_visible()
+            expect(nojs.locator('.analytics-print-data table').first).to_be_visible()
+            expect(nojs.locator('.analytics-table').first).to_be_hidden()
             nojs.pdf(path=str(output/'browser-print.pdf'), format='A4')
             browser.close()
     assert not errors and not outbound, (errors, outbound)

@@ -168,11 +168,13 @@ def export_file(store, vault, fmt, options=None):
         retained = store.retained_checkpoint()
         with store.snapshot() as snapshot:
             observed, digest = Coverage(), report.Digest()
+            journal_bytes = hashlib.sha256()
 
             def measured(events):
                 for event in events:
                     observed.add(event)
                     digest.add(event)
+                    journal_bytes.update(canonical(event) + b"\n")
                     yield event
             result = verify_events(measured(snapshot.events()), vault.public_key)
             if retained:
@@ -183,11 +185,11 @@ def export_file(store, vault, fmt, options=None):
             # Titles recorded in the journal win; current source titles fill the rest.
             summary["titles"] = {**{t["chat_id"]: t["title"] for t in store.targets() if t.get("title")},
                                  **summary["titles"]}
-            report.report_analytics.chat_labels(summary["analytics"], summary["titles"])
             context = {"kind": "evidence", "options": options, "report_id": str(uuid.uuid4()), "created_at": utcnow(),
                        "producer": producer(), "limits": LIMITS, "public_key": vault.public_key,
                        "fingerprint": result["fingerprint"], "event_count": result["events"],
-                       "head_hash": result["head_hash"], "digest": summary, "anchors": [], "files": {},
+                       "head_hash": result["head_hash"], "events_sha256": journal_bytes.hexdigest(),
+                       "digest": summary, "anchors": [], "files": {},
                        "account": store.get_setting("account", None), "archive": fmt == "zip", "sign": vault.sign,
                        "events_again": snapshot.events, "journal_verified": True}
 
@@ -228,7 +230,8 @@ def export_file(store, vault, fmt, options=None):
                 for format, name in (("jsonl", "events.jsonl"), ("csv", "events.csv")):
                     write_member(name, chunks(format))
                 write_member("coverage.json", [json.dumps(coverage, ensure_ascii=False, indent=1).encode("utf-8")])
-                write_member("analytics.json", [canonical(summary["analytics"])])
+                if analytics := report.report_material(context).get("analytics"):
+                    write_member("analytics.json", [canonical(analytics)])
                 write_member("verify.py", [Path(__file__).with_name("verify.py").read_bytes()])
                 write_indicators(write_member, summary.get("indicators"), context)
                 for event in snapshot.events():

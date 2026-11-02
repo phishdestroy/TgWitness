@@ -2405,11 +2405,25 @@ panelQueries("[data-export]").forEach(b=>b.addEventListener("click",()=>busy(b,a
 // Report settings: language, case details and contents of the sealed report in every export.
 const REPORT_FIELDS={"report-language":"language","report-theme":"theme","report-case-title":"case_title",
   "report-case-id":"case_id","report-examiner":"examiner","report-organization":"organization","report-notes":"notes",
-  "report-part-size":"part_size","report-chart-top-n":"chart_top_n"};
+  "report-part-size":"part_size","report-participant-labels":"participant_labels","report-chart-limit":"chart_limit",
+  "report-review-question":"review_question","report-review-method":"review_method",
+  "report-review-findings":"review_findings","report-review-conclusion":"review_conclusion"};
 const REPORT_CHECKS={"report-timeline":"timeline","report-raw":"raw_records","report-media":"media_previews",
-  "report-heartbeats":"group_heartbeats","report-changes":"show_changes","report-indicators":"show_indicators",
-  "report-chart-activity":"chart_activity","report-chart-heatmap":"chart_heatmap","report-chart-participants":"chart_participants",
-  "report-chart-chats":"chart_chats","report-chart-composition":"chart_composition"};
+  "report-heartbeats":"group_heartbeats","report-changes":"show_changes","report-indicators":"show_indicators","report-composition-chart":"composition_chart","report-activity-chart":"activity_chart","report-hourly-chart":"hourly_chart",
+  "report-participant-chart":"participant_chart","report-chat-chart":"chat_chart"};
+const REPORT_PRESETS={
+  dossier:{timeline:true,raw_records:true,media_previews:true,group_heartbeats:true,
+    activity_chart:true,hourly_chart:true,participant_chart:true,chat_chart:true,composition_chart:true,show_changes:true,show_indicators:true},
+  brief:{timeline:false,raw_records:false,media_previews:false,group_heartbeats:true,
+    activity_chart:true,hourly_chart:false,participant_chart:false,chat_chart:false,composition_chart:false,show_changes:false,show_indicators:false},
+  activity:{timeline:false,raw_records:false,media_previews:false,group_heartbeats:true,
+    activity_chart:true,hourly_chart:true,participant_chart:true,chat_chart:true,composition_chart:true,show_changes:true,show_indicators:true}
+};
+const reportTemplate=()=>$("report-form").querySelector('[name="report-template"]:checked')?.value||"custom";
+function setReportTemplate(value){
+  const known=Object.hasOwn(REPORT_PRESETS,value)||value==="custom"?value:"custom";
+  $("report-form").querySelectorAll('[name="report-template"]').forEach(input=>{input.checked=input.value===known;});
+}
 let reportOwner=null,reportReady=false,reportDirty=false,reportRequest=0,reportLoading=null,reportSaving=false;
 let reportPreviewRequest=0,reportPreviewTimer=null,reportPreviewBusy=false;
 let reportPreviewSection="cover";
@@ -2421,6 +2435,7 @@ function resetReportSettings(){
   $("report-preview-status").textContent=tr("Preview uses your draft. Save settings before exporting.");
   reportOwner=null;reportReady=false;reportDirty=false;reportRequest++;reportLoading=null;reportSaving=false;
   $("report-form").reset();$("report-fields").disabled=true;$("report-status").replaceChildren();
+  $("report-outline").replaceChildren();$("report-form").querySelector(".report-examination").open=false;
   $("report-form").querySelectorAll(".form-error").forEach(el=>el.remove());
 }
 function reportControls(){
@@ -2444,11 +2459,15 @@ async function loadReportSettings(){
         select.append(new Option(tr("Same as the panel"),"auto"));
         for(const [code,name] of Object.entries(PANEL_LANGUAGES)){const o=new Option(name,code);o.lang=code;select.append(o);}
       }
-      const top=$("report-chart-top-n");
-      if(options.chart_top_n&&!Array.from(top.options).some(option=>option.value===String(options.chart_top_n)))top.append(new Option(String(options.chart_top_n),String(options.chart_top_n)));
-      for(const [id,key] of Object.entries(REPORT_FIELDS))$(id).value=options[key]??"";
-      for(const [id,key] of Object.entries(REPORT_CHECKS))$(id).checked=!!options[key];
-      $("report-form").querySelectorAll('[name="report-template"]').forEach(input=>input.checked=input.value===(options.template||"dossier"));
+      for(const [id,key] of Object.entries(REPORT_FIELDS))$(id).value=options[key]??({participant_labels:"aliases",chart_limit:10}[key]??"");
+      for(const [id,key] of Object.entries(REPORT_CHECKS))$(id).checked=options[key]??REPORT_PRESETS.dossier[key];
+      const template=options.template||"dossier",preset=REPORT_PRESETS[template];
+      // Older settings and API callers may supply a template label with different
+      // controls. Keep their choices and describe the resulting layout as custom.
+      const matches=preset&&Object.entries(REPORT_CHECKS).every(([id,key])=>$(id).checked===preset[key])
+        &&$("report-participant-labels").value==="aliases"&&$("report-chart-limit").valueAsNumber===10;
+      setReportTemplate(matches?template:"custom");
+      $("report-form").querySelectorAll('[name="report-design"]').forEach(input=>input.checked=input.value===(options.design||"dossier"));
       reportReady=true;reportDirty=false;formControls?.loaded("report-form");$("report-status").textContent=window.TGW_ONLINE_DEMO?tr("Sample data"):"";
       if(!$("report-form").hidden&&!$("report-preview-frame").hasAttribute("srcdoc"))scheduleReportPreview();
     }catch(error){
@@ -2463,13 +2482,32 @@ async function loadReportSettings(){
 }
 function syncReportParts(){
   $("report-raw").disabled=$("report-heartbeats").disabled=!$("report-timeline").checked;
+  $("report-participant-labels").disabled=!$("report-participant-chart").checked;
+  $("report-chart-limit").disabled=!$("report-participant-chart").checked&&!$("report-chat-chart").checked;
+  const parts=[tr("Case details")];
+  if(["question","method","findings","conclusion"].some(key=>$("report-review-"+key).value.trim()))parts.push(tr("Examination notes"));
+  if($("report-activity-chart").checked)parts.push(tr("Activity over time"));
+  if($("report-hourly-chart").checked)parts.push(tr("Activity by weekday and hour"));
+  if($("report-participant-chart").checked)parts.push(tr("Participant activity"));
+  if($("report-chat-chart").checked)parts.push(tr("Activity by chat"));
+  if($("report-timeline").checked)parts.push(tr("Record transcript"));
+  if($("report-media").checked)parts.push(tr("Photo previews"));
+  if($("report-composition-chart").checked)parts.push(tr("Record composition"));
+  $("report-outline").replaceChildren(...parts.map(text=>node("li","",text)));
 }
-$("report-timeline").addEventListener("change",syncReportParts);
+function applyReportPreset(){
+  const preset=REPORT_PRESETS[reportTemplate()];
+  if(preset){
+    for(const [id,key] of Object.entries(REPORT_CHECKS))$(id).checked=preset[key];
+    $("report-participant-labels").value="aliases";$("report-chart-limit").value="10";
+  }
+}
 function reportDraft(){
   const body={};
   for(const [id,key] of Object.entries(REPORT_FIELDS))body[key]=$(id).value;
-  body.part_size=$("report-part-size").valueAsNumber;body.chart_top_n=Number($("report-chart-top-n").value);
-  body.template=$("report-form").querySelector('[name="report-template"]:checked')?.value||"dossier";
+  body.part_size=$("report-part-size").valueAsNumber;body.chart_limit=$("report-chart-limit").valueAsNumber;
+  body.template=reportTemplate();
+  body.design=$("report-form").querySelector('[name="report-design"]:checked')?.value||"dossier";
   for(const [id,key] of Object.entries(REPORT_CHECKS))body[key]=$(id).checked;
   return body;
 }
@@ -2482,7 +2520,7 @@ function showReportPreviewSection(section){
   $("report-form").querySelectorAll('[data-preview-section]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.previewSection===section)));
   const frame=$("report-preview-frame");
   if(frame.hidden)return;
-  if(section==='analytics')frame.contentDocument?.getElementById('analytics')?.scrollIntoView({block:'start'});
+  if(section==='analytics')frame.contentDocument?.getElementById('report-analytics')?.scrollIntoView({block:'start'});
   else frame.contentWindow?.scrollTo(0,0);
 }
 $("report-preview-frame").addEventListener('load',()=>showReportPreviewSection(reportPreviewSection));
@@ -2508,12 +2546,17 @@ async function refreshReportPreview(){
 }
 $("report-preview-refresh").addEventListener("click",refreshReportPreview);
 $("exports-tab-settings").addEventListener("click",()=>{if(reportReady&&!$("report-preview-frame").hasAttribute("srcdoc"))scheduleReportPreview();});
-$("report-form").addEventListener("input",event=>{if(reportReady){reportDirty=true;$("report-status").textContent=tr("Draft changed. Save before exporting.");
-  if(event.target.id.startsWith('report-chart-'))reportPreviewSection='analytics';
-  if(event.target.name==='report-template')reportPreviewSection='cover';
-  $("report-preview-status").textContent=tr("Preview is updating to your draft…");scheduleReportPreview();}});
+$("report-form").addEventListener("input",event=>{if(reportReady){
+  if(event.target.name==="report-template")applyReportPreset();
+  else if(Object.hasOwn(REPORT_CHECKS,event.target.id)||["report-participant-labels","report-chart-limit"].includes(event.target.id))setReportTemplate("custom");
+  syncReportParts();reportDirty=true;$("report-status").textContent=tr("Draft changed. Save before exporting.");
+  if(event.target.id.endsWith('-chart')||event.target.id==='report-chart-limit')reportPreviewSection='analytics';
+  if(event.target.name==='report-design')reportPreviewSection='cover';
+  $("report-preview-status").textContent=tr("Preview is updating to your draft…");scheduleReportPreview();
+}});
 $("report-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
   if(!reportReady||reportOwner!==reportKey()||reportSaving||window.TGW_ONLINE_DEMO)return;
+  if(!$("report-form").reportValidity())return;
   const owner=reportOwner,draft=formControls?.capture("report-form");
   const body=reportDraft();
   reportSaving=true;reportControls();

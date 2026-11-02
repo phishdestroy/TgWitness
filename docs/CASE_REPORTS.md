@@ -15,64 +15,80 @@ manifest. Existing signatures and authoritative records are not rewritten.
 
 ### Report studio
 
-Open **Exports → Report settings**. Choose **Case dossier**, **Intelligence brief**
-or **Editorial review**, then select activity over time, the UTC weekday/hour heatmap,
-participant rankings, chat rankings and record composition. Rankings show the chosen
-top count, unknown senders separately, and a reconciled Other / unlisted row.
-Change a chart to jump to its preview; Cover and Charts buttons switch preview sections.
-The preview updates from the unsaved draft. **Save report settings** applies it to
-future exports; existing signed files are immutable.
+Open **Exports → Report settings**. Choose one of three independent visual designs:
+**Case dossier**, **Intelligence brief** or **Editorial review**. Then choose the
+contents: **Case dossier** (detailed), **Briefing** (an overview), **Activity review**
+(charts without the transcript), or **Custom report**. A content preset keeps your
+chosen design, case details and written analysis. Individual changes select Custom.
 
-The preview uses the production cover and chart components with up to the first
-50,000 journal records in this workspace. It is unsigned, explicitly labelled,
-does not persist edits and is not a full PDF preview. It adds no independent
-verification claim. PDF uses the chosen palette, its own A4 layout and the same
-aggregate data. Trust assessment, coverage limitations and verification instructions
-remain present when readable histories or indicators are turned off. These display
-choices do not remove data from signed source files or `analytics.json`; use a
-minimized export to restrict disclosure.
+Select activity over time, the UTC weekday/hour heatmap, participant rankings, chat
+rankings and record composition. Choose 5–30 ranked groups and neutral participant
+aliases or account IDs. Unknown senders and the remaining participants are separate
+rows. Aliases affect charts only; source records still contain their identities.
 
-Design/chart preferences are frozen into new account jobs and disclosure previews.
-Their language and privacy settings remain independent. Case notes, examiner names
-and private journal metadata are never copied into a sharing export by this feature.
-Account/sharing reports remain HTML protected by their signed archive manifest;
-journal, handover and single-chat kits also provide signed PDFs.
+The optional **Examination notes** contain the question, method, findings and
+conclusion written by the report's author. Cite source files and record numbers.
+The signature preserves these statements; it does not mean an independent expert
+has reviewed them. Private examination notes and full-journal charts are excluded
+from minimized journal handovers.
+
+The preview updates from the unsaved draft using production cover, examination and
+chart components, limited to the first 50,000 journal records. It is explicitly
+unsigned and does not persist edits. Cover and Charts buttons switch its section.
+This is not a complete PDF preview. **Save report settings** applies the choices to
+future exports; existing signed files are immutable. PDF uses the chosen palette,
+its own A4 layout and the same selected aggregates as HTML and signed JSON.
+
+Trust assessment, coverage limitations and verification instructions stay present.
+Hiding charts or the readable transcript does not remove authoritative source rows
+from the ZIP. Disabled chart series are omitted from the analytical JSON; use a
+minimized export to restrict disclosure of source records.
+
+Shared design/chart preferences are frozen into new chat/account exports and account
+sharing previews. Account/sharing language and privacy settings remain independent;
+private case and examination notes are not copied into these exports. Account and
+sharing reports remain HTML protected by their signed archive manifest. Journal,
+minimized journal handover and single-chat kits also provide signed PDFs.
 
 ### What the charts count
 
-Journal charts count new, snapshot and recovered **message observations** by UTC
-capture time. Repeated observations can refer to the same Telegram message.
-Edits and deletion notices are separate record categories, never attributed to an
-editor/deleter merely because the message has a sender. Service and operational
-records do not inflate participant activity. Snapshots count included non-service
-message rows by their recorded message time. Missing/naive dates are reported and
-excluded from time charts. These are descriptive statistics, not online presence,
-person identification, completeness or credibility scores.
+Journal activity and heatmaps count new, historical, recovered, edited, deleted and
+missing-on-recheck **observations**, by collector observation time in UTC. Heartbeats
+and attachment receipts are excluded. Participant rankings count only new, historical
+and recovered message observations: a sender is not declared to be the editor or
+deleter. Repeated observations can describe the same Telegram message.
 
-Activity is binned into at most 90 equal-width UTC date intervals. Exact values
-are available in HTML and `analytics.json`; the last interval may be shorter.
-Empty intervals mean no included observations, not verified inactivity. The heatmap
-aggregates weekday × hour in UTC and retains exact cell values. Participant labels
-come from included records; chat labels can use recorded or current export-time
-titles. IDs distinguish equal names. To bound memory, each grouping retains up to
-10,000 distinct values. Excess counts are explicitly declared and reconciled;
-rankings must not be treated as exhaustive after that limit.
+Journal analytics retain counts by kind, first/last record references and the source
+`events.jsonl` SHA-256. Figures include exact values in HTML and PDF. Daily buckets
+switch to months beyond 366 recorded days; graphs combine these into at most 36
+equal-width intervals. More than 100,000 distinct identifiers or 1,200 months marks
+the affected chart unavailable, while exact overall counts remain available.
 
-`analytics.json` is protected by the archive's signed file hashes; journal and
-handover `report.json` also embed the same aggregate. Verification detects changed
-bytes. It does not independently certify the statistical method: a reviewer can
-recompute aggregates from the authoritative rows using `report_analytics.collect`.
-Sharing and handover analytics consume only the already minimized rows, including
-their pseudonyms. Unknown senders are not treated as a verified common identity.
+Snapshot and account-sharing charts count only included non-service message rows,
+using their recorded message time. Sharing aggregates are calculated after redaction
+and filtering. These charts use at most 90 equal-width UTC date intervals and retain
+up to 10,000 grouping values; excess counts are explicitly declared and reconciled.
+The last interval may be shorter. Unknown or naive dates do not enter time charts.
 
-Build three fictional designs without Telegram or an external service:
+An empty interval means no included observations, not verified inactivity. Activity
+is not online presence or identification of a real person. Consult coverage for gaps.
+Unknown senders are not treated as a verified common identity. There is no trust score.
+
+When included, `analytics.json` is protected by the archive's signed file hashes.
+Journal `report.json` embeds the same selected aggregate. Signature verification
+detects changed bytes; it does not independently certify the calculation method.
+Recompute journal aggregates with `report_analytics.Analytics` and `selected`, or
+snapshot aggregates with `snapshot_analytics.collect` and `project`.
+
+Build the three designs from fictional activity, without Telegram or external services:
 
 ```sh
 python tools/build_report_studio_example.py --output test-results/new-studio-example
 ```
 
-Use a new directory for each run. The default sample language is English; `--language`
-also accepts `ru` and `de`.
+Use a new directory for each run. English is the default; `--language` also accepts
+`ru` and `de`. To exercise all four content presets, use
+`python tools/build_dossier_example.py --templates --language en --output test-results/new-presets`.
 
 ![Fictional HTML dossier](assets/reports/dossier-en.png)
 

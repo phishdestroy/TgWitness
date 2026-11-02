@@ -435,7 +435,7 @@ class Disclosures:
                         if matches(row, policy):
                             yield projection.apply(chat, row)
 
-                analytics = account_report.report_analytics.Analytics("sharing")
+                analytics = account_report.snapshot_analytics.Analytics("sharing")
 
                 def message_bytes():
                     for row in rows():
@@ -447,7 +447,7 @@ class Disclosures:
                 write('messages.jsonl', message_bytes())
                 counts.update(chats=len(chats), media=len(media))
                 report_context = {'report_language': policy.report_language, 'policy': shared_policy, 'archive': True,
-                    'presentation': policy.report_presentation.model_dump(), 'analytics': analytics.result(),
+                    'presentation': policy.report_presentation.model_dump(), 'analytics': account_report.snapshot_analytics.project(analytics.result(), policy.report_presentation.model_dump()),
                     'archive_reference': identity, 'created_at': created,
                     'counts': counts, 'fingerprint': fingerprint(self.vault.public_key),
                     'source_archive_sha256': digest, 'limitations': WARNINGS}

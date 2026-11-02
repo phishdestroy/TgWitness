@@ -7,7 +7,9 @@
   journal history/indicator controls. Saved choices reach HTML, signed PDF/JSON and
   new account/disclosure jobs. Analytics use only included/minimized records, retain
   unknowns and bounded-grouping counts, and ship as manifest-protected `analytics.json`.
-  Existing signed exports and private disclosure boundaries remain unchanged.
+  Designs are independent of content presets. Author-written examination notes and
+  source-linked journal statistics retain the published privacy defaults; minimized
+  journal handovers exclude that private analysis. Existing signed exports remain unchanged.
 - Preserve workspace-specific deep links through first setup, keep the shared
   account form current in Settings, and expose file import when adding an account.
   Compact mobile connection controls keep the account identity visible.

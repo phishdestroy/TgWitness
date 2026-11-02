@@ -31,17 +31,17 @@ def main():
             page.locator("#report-case-id").fill("SYNTHETIC / MRD-2026")
             page.locator("#report-language").select_option("en")
             page.locator("#report-timeline").uncheck()
-            page.locator("#report-chart-top-n").select_option("5")
+            page.locator("#report-chart-limit").fill("5")
             page.locator("#report-notes").fill("SYNTHETIC EXAMPLE · Fictional records, no Telegram connection.")
             for template in ("analytical", "editorial", "dossier"):
-                page.locator(f'[name="report-template"][value="{template}"]').check()
+                page.locator(f'[name="report-design"][value="{template}"]').check()
                 expect(page.locator("#report-preview-status")).to_contain_text("not signed", timeout=20000)
                 frame = page.frame_locator("#report-preview-frame")
                 expect(frame.locator("html")).to_have_attribute("data-template", template)
                 expect(frame.locator(".chart-card")).to_have_count(5)
-                expect(frame.locator(".rank-row").first).to_contain_text("DEMO")
+                expect(frame.locator(".rank-row").first).to_contain_text("Participant")
                 # External stylesheet is actually applied under the panel CSP.
-                assert frame.locator(".analytics-grid").evaluate("el=>getComputedStyle(el).display") == "grid"
+                assert frame.locator(".analytics-pair").evaluate("el=>getComputedStyle(el).display") == "grid"
                 if template == 'editorial':
                     assert frame.locator('.facts b').first.evaluate('el=>getComputedStyle(el).color') == frame.locator('h1').evaluate('el=>getComputedStyle(el).color')
                 assert frame.locator(".preview-watermark").inner_text() == "DRAFT PREVIEW · NOT SIGNED"
@@ -60,12 +60,12 @@ def main():
                     data = json.loads(archive.read("report.json"))["report"]
                     analytic = json.loads(archive.read("analytics.json"))
                     assert data["analytics"] == analytic
-                    assert data["presentation"]["template"] == template
+                    assert data["presentation"]["design"] == template
                     assert f'data-template="{template}"' in html
-                    assert sum(row["count"] for row in analytic["activity"]) == analytic["messages"]
+                    assert sum(row["total"] for row in analytic["activity"]["rows"]) == analytic["activity_events"]
                     (output / f"{template}.html").write_text(html, encoding="utf-8")
                 page.locator("#exports-tab-settings").click()
-            page.locator('[name="report-template"][value="analytical"]').check()
+            page.locator('[name="report-design"][value="analytical"]').check()
             expect(page.locator("#report-preview-status")).to_contain_text("not signed", timeout=20000)
             for width in (1440, 390):
                 page.set_viewport_size({"width": width, "height": 1100 if width == 1440 else 844})
@@ -73,12 +73,12 @@ def main():
                     page.evaluate("theme=>document.documentElement.dataset.theme=theme", theme)
                     page.locator("#report-form").screenshot(path=str(output / f"studio-{width}-{theme}.png"))
                     assert page.evaluate("document.documentElement.scrollWidth<=innerWidth+1")
-            page.locator("#report-chart-participants").uncheck()
+            page.locator("#report-participant-chart").uncheck()
             expect(page.locator("#report-preview-status")).to_contain_text("not signed", timeout=20000)
             expect(page.frame_locator("#report-preview-frame").locator(".chart-participants")).to_have_count(0)
             # Preview never persists the draft or produces a signature.
             options = page.evaluate("json('report-options')")
-            assert options["chart_participants"] and options["template"] == "dossier"
+            assert options["participant_chart"] and options["design"] == "dossier"
             hold_api_response(page, '/api/report-preview')
             page.locator('#report-case-title').fill('PRIVATE STALE DRAFT')
             page.wait_for_function("()=>typeof releaseAcceptanceResponse==='function'")
