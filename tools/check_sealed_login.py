@@ -23,6 +23,9 @@ class RecordingClient(CapsuleClient, QRClient):
     fail_ids = set()
 
     def __init__(self, session, api_id, api_hash, **kwargs):
+        labels = (kwargs.get("device_model", ""), kwargs.get("system_version", ""), kwargs.get("app_version", ""))
+        assert not any("tgwitness" in str(value).lower() for value in labels)
+        assert kwargs.get("system_version") != "Python"
         self.pair = (api_id, api_hash)
         self.attempts.append(self.pair)
         super().__init__(session, api_id, api_hash, **kwargs)
