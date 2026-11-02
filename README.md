@@ -11,7 +11,7 @@
   <a href="https://github.com/phishdestroy/TgWitness/wiki"><picture><source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-nav-handbook-mobile.svg"><img src="docs/assets/presentation/readme-nav-handbook.svg" width="32%" alt="Read the investigation handbook"></picture></a>
 </p>
 
-<p align="center"><strong>Your Telegram investigation workspace.</strong><br>Export chats, preserve observed changes and trace connections back to the source.<br>Self-hosted. Separate accounts. Signed handoffs.</p>
+<p align="center"><strong>Save Telegram chats, edits and deletion notices.</strong><br>Search them, compare versions and export a signed archive.<br>Runs on your computer or server.</p>
 
 <p align="center">
   <a href="docs/CHANGELOG.md"><img src="docs/assets/presentation/identity-meta-version.svg" width="144" height="30" alt="v0.8.0 · pre-release"></a>
@@ -61,11 +61,13 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "irm https://get.dest
 </picture>
 </a>
 
-<p align="center"><sub>Explore the actual interface with fictional records. Click the workspace to try it.</sub></p>
+<p align="center"><sub>Click to try the demo. It uses fictional chats; no Telegram login needed.</sub></p>
 
 <p align="center"><picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-divider-static.svg"><img src="docs/assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture></p>
 
-## From a conversation to a case
+<a name="from-a-conversation-to-a-case"></a>
+
+## Save chats and changes
 
 <picture>
   <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-features-mobile-static.svg">
@@ -80,14 +82,15 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "irm https://get.dest
   <a href="docs/COLLECTION.md"><picture><source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-nav-history-mobile.svg"><img src="docs/assets/presentation/readme-nav-history.svg" width="32%" alt="Collection and saved versions"></picture></a>
 </p>
 
-Choose what you want to do: [export your account](docs/ACCOUNT-EXPORT.md) or
-[follow an investigation](docs/INVESTIGATION.md). Connect an account, choose the
-chats and files to save, then start when you are ready.
+Connect an account, choose chats, a Telegram folder or the whole account, then
+start collecting. Each account has its own workspace, session and signing key.
 
-**Choose your scope:** selected chats, a Telegram folder or the whole account.
-Keep each account in its own workspace, with separate sources, session and signing key.
+[Export once](docs/ACCOUNT-EXPORT.md) or [keep collecting](docs/INVESTIGATION.md).
+Saved versions remain available after a message is edited or deleted.
 
-## Built for the rest of the investigation
+<a name="built-for-the-rest-of-the-investigation"></a>
+
+## More tools
 
 <picture>
   <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-capabilities-mobile-static.svg">
@@ -105,26 +108,22 @@ Keep each account in its own workspace, with separate sources, session and signi
   <a href="docs/HIGH-ASSURANCE.md"><picture><source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-nav-cloud-mobile.svg"><img src="docs/assets/presentation/readme-nav-cloud.svg" width="48%" alt="Sealed cloud deployment"></picture></a>
 </p>
 
-**Available in 0.7.1:** load the history of enabled chats with pause/resume,
-review sources before asking AI, connect read-only MCP clients, run local OCR or
-transcription, and send HMAC-signed webhooks.
-
 <details>
-<summary><strong>Pick the tools for your case</strong> · history, accounts, media and integrations</summary>
+<summary><strong>History, accounts and integrations</strong></summary>
 
 | Task | What you get |
 | --- | --- |
-| [Load older messages](docs/HISTORY.md) | Save older messages from your selected chats. Pause and resume without starting over. |
-| [Export with several accounts](docs/ACCOUNTS.md#multiple-accounts) | Use several connected accounts to export one chat. Each account keeps its own session and signing key. |
-| [Import a batch of accounts](docs/ACCOUNTS.md#bulk-import-and-account-groups) | Pair session files automatically, see each login result and organize workspaces into groups with shared settings. |
-| [Manage the MTProxy pool](docs/wiki/Proxies.md#pool-dashboard-and-custom-sources) | Ping, countries, filters and your own lists; one shared catalog with separate account routes. |
+| [Load older messages](docs/HISTORY.md) | Load chat history, pause and resume. |
+| [Export with several accounts](docs/ACCOUNTS.md#multiple-accounts) | Share one export job across accounts. |
+| [Import a batch of accounts](docs/ACCOUNTS.md#bulk-import-and-account-groups) | Import sessions in bulk and group accounts. |
+| [Manage the MTProxy pool](docs/wiki/Proxies.md#pool-dashboard-and-custom-sources) | Check proxies, filter by country or add your own lists. |
 | [Bring an existing session](docs/ACCOUNTS.md) | Telegram Desktop TData, Telethon, Pyrogram, StringSession or an auth key. |
 | [Route through a proxy](docs/CONNECTION-SECURITY.md#ip-modes) | Per-workspace SOCKS5, HTTP CONNECT or MTProxy. **Hide IP** mode refuses direct fallback. |
-| [Search and review](docs/ANALYSIS.md) | Local search, optional AI, cited observations and separate analytical reports. |
-| [Connect via MCP](docs/MCP.md) | Seven read-only tools, selected workspaces/chats, expiry and revocation. |
-| [Read images and audio](docs/MEDIA-ANALYSIS.md) | Optional local OCR and transcription; original files stay unchanged. |
-| [Send webhooks](docs/WEBHOOKS.md) | Scoped outgoing events, HMAC signatures, retries and an n8n example. |
-| [Share a focused view](docs/ACCESS.md) | Selected accounts/chats, permissions, expiry and IP restrictions. |
+| [Search and review](docs/ANALYSIS.md) | Search saved messages and check sources before asking AI. |
+| [Connect via MCP](docs/MCP.md) | Give an AI client read-only access to selected chats. |
+| [Read images and audio](docs/MEDIA-ANALYSIS.md) | Local OCR and transcription. |
+| [Send webhooks](docs/WEBHOOKS.md) | Signed events for n8n and other tools. |
+| [Share a focused view](docs/ACCESS.md) | Choose accounts, chats, permissions and an expiry date. |
 
 </details>
 
@@ -139,9 +138,8 @@ transcription, and send HMAC-signed webhooks.
 <details>
 <summary><strong>Export through GitHub Actions</strong> · preview</summary>
 
-Run the pinned collector from your fork, select one chat and download an encrypted
-archive with GitHub provenance. The capture helper is also available under
-**Exports** in the panel.
+Export one chat from your fork using the pinned collector. Download an encrypted
+archive and a GitHub attestation. Also available under **Exports** in the panel.
 
 [Open the capture page](https://phishdestroy.github.io/TgWitness/docs/capture/) · [Instructions](docs/SEALED-ACTIONS.md)
 
@@ -151,22 +149,24 @@ archive with GitHub provenance. The capture helper is also available under
 
 <a name="how-it-works"></a>
 
-## A record someone else can check
+<a name="a-record-someone-else-can-check"></a>
 
-Export the observations and preserved files together. Give the recipient an
-independently trusted key fingerprint and checkpoint to verify the handoff.
+## Verify an export
+
+Share the signed archive. Give the recipient the key fingerprint and a previously
+saved checkpoint through a separate, trusted channel.
 
 ```sh
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_SHA256 --checkpoint checkpoint.json
 ```
 
-Verification checks integrity against those trusted inputs. A local signing key
-alone does not prove Telegram origin or complete history.
+The verifier checks the archive against that key and checkpoint. It cannot prove
+that Telegram created the messages or that no messages were missed.
 
 [Verification guide](docs/TRUST.md) · [Checks and tested scale](docs/VERIFICATION.md)
 
 <details>
-<summary><strong>Inside the signed record</strong> · hashes, signatures and independent checkpoints</summary>
+<summary><strong>Hashes, signatures and checkpoints</strong></summary>
 
 <picture>
   <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/casework-chain-mobile-static.svg">
@@ -185,85 +185,19 @@ alone does not prove Telegram origin or complete history.
 
 <a name="manifesto"></a>
 
-## What nobody can prove, including us
+<a name="what-nobody-can-prove-including-us"></a>
 
-<picture>
-  <source media="(max-width: 640px)" srcset="docs/assets/presentation/readme-manifesto-mobile.svg">
-  <img src="docs/assets/presentation/readme-manifesto.svg" width="1200" alt="No signature makes a Telegram message true — ours included. We preserve what the account saw, link it so that a change shows, and hand you the verifier.">
-</picture>
+## Limits
 
-**We publish this under a project name, not a person's.** No title, degree or prefix
-belongs in front of it: a credential describes who is speaking, not what
-happened. The same bytes that would be doubted in one pair of hands do not become
-true in another. Whoever brings evidence is an interested party — we are no
-exception — so we would rather you checked the file than believed the author.
+TgWitness records what the connected account sees. It cannot recover messages
+deleted before capture, read Secret Chats or collect while it is offline.
 
-We do not think a method exists that makes Telegram content certain. The one
-thing that would settle it is a signature from Telegram, over the message, that
-a third party can check. Telegram does not do that — not in an export, not
-anywhere else. Everything after that, ours included, is a record of what somebody
-saw.
+Our signature is not Telegram's signature. An operator who controls the signing
+key can fabricate a journal. Independent checkpoints and timestamps add checks,
+but neither a signature nor a video of an export makes its contents true.
 
-<details>
-<summary><strong>What we found looking into this</strong><br><sub>unequal standards, borrowed reputation, and why an export settles nothing</sub></summary>
-
-We read through cases where chat material decided the outcome, and we collected
-such material ourselves, recently, the same way everyone does. Two things became
-clear.
-
-**The standard moves with the accusation.** Where one side is already assumed to be
-right, a screenshot settles the matter. Where the other side has to clear its
-name, a full export filmed from beginning to end is waved away. The same
-artifact, opposite weight.
-
-**Filming does not fix it.** An export recorded on video, with the archive signed on
-camera, shows that a file existed and was signed. It says nothing about where the
-content came from.
-
-We name no tools, because the problem is not in any of them. Capture software,
-page archiving and device extraction all preserve faithfully what they were
-given. The question none of them answers is who gave it to them. Ask that
-instead: who is telling you this, who signed the file, who answers for the data.
-Telegram did not sign it, and Telegram is not on anyone's side here. What is left
-is the motive of whoever collected it, and the ways in are many.
-
-A vendor's standing says nothing about the person holding the tool. Neither does
-its price, its customer list, nor how much it would lose by being wrong. Those
-are facts about a company, and the question in front of you is the motive of
-whoever ran it that day. A trusted signature over a false record is worse than no
-signature at all: it does not fail quietly, it lends the falsehood someone else's
-reputation.
-
-Where such material is accepted today, it is usually accepted on the examiner's
-oath, their licence, and the fact that forging every background request and
-cached fragment of a page by hand is tedious. Those are procedural guarantees,
-not mathematical ones. Tedious is not impossible, an oath is worth whatever the
-person swearing it is worth, and both weigh unevenly — they help most whoever
-already has standing to lose.
-
-**This is why an export should not be the thing that decides.** Open one in a text
-editor, change a 1 to a 2, save. Nothing complains, and there is nothing to
-compare it against. No cache tricks, no DNS, no interception — a text editor.
-
-We are not saying Telegram's export is insecure. Registration, payments and
-account protection are defended deliberately and well. Export is simply not that
-kind of feature: forks export too, the format carries no integrity of any kind,
-and it was never meant to vouch for its own contents.
-
-</details>
-
-> **We take no side in what is recorded.** Who runs the tool is not the tool's
-> business, and its purpose is plain: preserve what was there, as completely and as
-> checkably as it can be preserved. This software is not on its operator's side. It
-> is on the side of the record staying what it was — about everyone in it,
-> including whoever collected it.
-
-So we claim no proof. TgWitness signs what the connected account saw, links every
-record to the one before it, and ships the verifier inside the archive, so the
-outcome is not ours to assert. Where a record can be anchored outside this
-machine — an independent witness, an external timestamp — we do that and show it.
-What stays unproven is written down, in the verifier's own output and in the
-[trust model](docs/SECURITY-MODEL.md).
+Check the files and their sources, whoever supplies them, including us.
+[Trust model](docs/SECURITY-MODEL.md) · [Known limits and tests](docs/VERIFICATION.md)
 
 <!-- authors-manifesto:end -->
 
@@ -273,7 +207,7 @@ What stays unproven is written down, in the verifier's own output and in the
 <a name="layout-review"></a>
 
 <details>
-<summary><strong>Keep the investigation running</strong> · notifications, storage and recovery</summary>
+<summary><strong>Alerts, storage and recovery</strong></summary>
 
 <picture>
   <source media="(max-width: 640px) and (prefers-reduced-motion: reduce)" srcset="docs/assets/presentation/readme-services-mobile-static.svg">
@@ -285,9 +219,6 @@ What stays unproven is written down, in the verifier's own output and in the
 [Notifications](docs/OPERATIONS.md#notifications) · [Encrypted off-site copy](docs/wiki/Off-site-Copy.md) · [Backup and recovery](docs/wiki/Backup-and-Recovery.md) · [Troubleshooting](docs/OPERATIONS.md)
 
 </details>
-
-TgWitness can only collect what the connected account can access. It cannot recover
-unseen deleted messages or Secret Chats; downtime may leave gaps.
 
 <p align="center">
   <a href="docs/README.md"><img src="docs/assets/presentation/readme-button-docs.svg" height="34" alt="Technical documentation"></a>
@@ -347,6 +278,8 @@ To strictly comply with the MIT License, we do not restrict the use of this soft
 [Complete project guide](docs/PROJECT-GUIDE.md) · [Technical documentation](docs/README.md)
 
 </details>
+
+<a name="read-the-project-overview-in-your-language"></a>
 
 <details>
 <summary><strong>Read the project overview in your language</strong></summary>

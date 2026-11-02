@@ -76,6 +76,15 @@ must not rewrite signed payloads. New collection settings must record their effe
 on coverage. Changes to defaults, dependencies, user workflows or limits need matching
 documentation and a changelog entry.
 
+## Writing
+
+Keep public text short. Say what the tool does and what the user needs to do next.
+Use familiar terms and abbreviations such as API, CLI and JSON. Keep button names,
+commands and technical limits exact. Link to detailed instructions instead of
+repeating them in the README. Comments should explain a reason or a constraint;
+skip narration of obvious code. Describe checks with their results, without a
+long report or claims that were not tested.
+
 ## Preparing a public source archive
 
 ```sh
