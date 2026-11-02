@@ -52,6 +52,7 @@ class Draft(BaseModel):
     scope: Literal["account", "selected", "folder"] = "account"
     chat_ids: list[int] = Field(default_factory=list, max_length=10000)
     folder_id: int | None = Field(default=None, ge=0, le=4096)
+    account_kind: Literal["dedicated", "main"] | None = None
 
 
 class GoalChange(BaseModel):
@@ -141,6 +142,16 @@ def preview(app, body):
             "diff": [{"key": k, "before": current[k], "after": v} for k, v in desired.items() if current[k] != v]}
 
 
+def main_account_scope(app, body):
+    """A main account records only chosen chats: the whole account or a folder would bring in its owner's
+    private conversations. The answer comes from the first setup; a copy of one's own account is exempt."""
+    saved = wizard_state(app)
+    kind = body.account_kind or saved.get("account_kind")
+    goal = body.goal if "goal" in body.model_fields_set else saved.get("goal", body.goal)
+    if kind == "main" and goal != "copy" and body.scope != "selected":
+        raise HTTPException(409, "On your main account only chosen chats can be recorded. Choose chats, or use a separate account.")
+
+
 def checked(app, draft=None):
     result = app.state.store.get_setting("connection_check", {}) or {}
     from .guided_connection import revision as connection_revision
@@ -197,9 +208,15 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
             await c.stop()
         policy = c.route_policy()
         exposure = "hide" if desired["ip"] == "hide" else policy["exposure"]
+        wanted = {"exposure": exposure, "outside_enabled": desired["outside"]}
         # "Auto" preserves the user's answer about direct fallback.
         with s.transaction():
-            s.set_setting("route_policy", {"exposure": exposure, "outside_enabled": desired["outside"]})
+            s.set_setting("route_policy", wanted)
+            if wanted != policy:
+                # The same record the IP protection form writes: who may see this server's address is evidence.
+                from .collector import EXPOSURE_MEANING
+                s.append("network.policy_changed", {**wanted, "before": policy, "source": "settings",
+                                                    "meaning": EXPOSURE_MEANING[exposure]})
             s.set_setting("ip_choice", desired["ip"])
             strategy = s.get_setting("connection_strategy", {})
             if strategy and desired["ip"] == "hide":
@@ -320,6 +337,7 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
     @app.post("/api/settings/scope", dependencies=deps)
     async def edit_scope(body: Draft):
         require_live()
+        main_account_scope(app, body)
         async def apply():
             await save_scope(body)
             if app.state.collector.running:
@@ -381,6 +399,7 @@ def register(app, authenticate, require_live, operation, save_evidence, save_cap
             raise HTTPException(409, "Connect Telegram first.")
         if wizard_state(app).get("completed"):
             return {"action": "existing", **state(app)}
+        main_account_scope(app, body)
         from .account_export import AccountExportOptions
         async def start():
             if wizard_state(app).get("completed"):

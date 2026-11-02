@@ -109,3 +109,15 @@ html[data-ui-level=simple] #mode-switch,html[data-ui-level=standard] #mode-switc
   .topbar .profile-switch { flex-basis:calc(100% - 52px); }
   .topbar .top-actions { flex:1 1 100%; max-width:100%; }
 }
+
+/* After Start in the first setup: the four collector parts, then what to do next. */
+.first-run-live{display:grid;gap:8px;margin:20px 0}
+.first-run-check{display:grid;grid-template-columns:auto minmax(0,190px) minmax(0,1fr);align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--border);border-radius:12px}
+.first-run-check .hint{margin:0}
+.first-run-next-actions{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 4px}
+.setting-help-block{margin:4px 0 12px}
+.setting-help-block summary{cursor:pointer;color:var(--muted);font-size:13px}
+.answer-card:disabled{opacity:.55;cursor:not-allowed}
+@media(max-width:600px){.first-run-check{grid-template-columns:auto minmax(0,1fr)}.first-run-check .hint{grid-column:1/-1}.first-run-next-actions button{flex:1 1 100%}}
+/* The step heading takes focus for screen readers; it needs no visible ring. */
+.first-run-shell h1[tabindex="-1"]:focus{outline:none}
