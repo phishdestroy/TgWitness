@@ -784,7 +784,7 @@ class AccountExport:
                     if hashes[name] != name.removeprefix("media/"):
                         raise ValueError("An attachment changed while packaging.")
                 selected = [c for c in self.inventory["chats"] if c["selected"]]
-                report_context = {"report_language": job["options"].get("report_language", "en"),
+                report_context = {"report_language": job["options"].get("report_language", "en"), "archive": True,
                     "archive_reference": job["job_id"], "requested_at": job["created_at"],
                     "captured_from": captured_from, "captured_until": captured_until,
                     "options": job["options"], "counts": self.current["counts"], "coverage": self.current["coverage"],
@@ -814,7 +814,8 @@ class AccountExport:
                     "created_at": job["created_at"], "completed_at": utcnow(), "status": "partial" if self.current["coverage"]["failures"] else "done",
                     "complete_within_scope": not self.current["coverage"]["failures"], "coverage": self.current["coverage"],
                     "counts": self.current["counts"], "receipt_count": len(self.receipts), "receipt_head_sha256": self.head,
-                    "files": hashes, "limitations": LIMITATIONS, "producer": producer()}
+                    "files": hashes, "limitations": LIMITATIONS, "producer": producer(),
+                    "case_assessment": account_report.case_assessment.snapshot(report_context)}
                 archive.writestr(zipfile.ZipInfo("manifest.json"), canonical(manifest))
                 archive.writestr(zipfile.ZipInfo("manifest.sig"), self.vault.sign(canonical(manifest)))
             with out.open("r+b") as stream:
