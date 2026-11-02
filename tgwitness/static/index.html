@@ -24,6 +24,7 @@
 <script src="/theme.js?v=0.7.0"></script>
 <script src="/guide-locale.js" data-scope="panel"></script>
 <script defer src="/i18n.js?v=0.7.0"></script>
+<script defer src="/dialogs.js?v=1"></script>
 <script defer src="/app.js?v=0.7.0-handoff2-setup2-phala2"></script>
 <script defer src="/integrations.js?v=2"></script>
 <script defer src="/analysis.js?v=3"></script>
@@ -243,7 +244,7 @@
     <div class="stat"><span>Edits recorded</span><strong id="stat-edits">0</strong><small>Observed versions, preserved</small></div>
     <div class="stat"><span>Deletion notices</span><strong id="stat-deletes">0</strong><small>Scoped Telegram notifications</small></div>
     <div class="stat"><span>Selected sources</span><strong id="stat-sources">0</strong><small id="sources-footnote">Ready for observation</small></div>
-  </div></details>
+  </div><div class="overview-empty" hidden id="overview-empty"></div></details>
   <div class="journal card">
     <div class="card-heading">
       <h2>Event timeline <span class="subtle" id="event-total"></span></h2>

@@ -8,7 +8,7 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
-from check_browser import RunningApp, unlock, check_layout, launch_browser, navigate_panel
+from check_browser import RunningApp, answer_panel_dialog, unlock, check_layout, launch_browser, navigate_panel
 from playwright.sync_api import expect, sync_playwright
 from tgwitness import i18n
 
@@ -105,8 +105,8 @@ def main():
             expect(page.locator("#proxy-catalog-select")).to_have_value("project-a")
             assert catalog_reads, "Selecting MTProxy must load its catalog"
             assert page.locator("#network-secret").input_value() == ""
-            page.once("dialog", lambda dialog: dialog.accept())
             page.locator("#proxy-catalog-apply").click()
+            answer_panel_dialog(page)
             expect(page.locator("#route-detail")).to_contain_text("proxy.example.org:443")
             assert server.app.state.collector.network_config().secret == secret
             if page.locator("#entry-settings").get_attribute("aria-expanded") != "true":
@@ -118,8 +118,8 @@ def main():
             expect(page.locator("#network-host")).to_have_value("own.example.org")
             expect(page.locator("#network-secret")).to_have_value(secret)
             assert server.app.state.collector.network_config().host == "proxy.example.org"
-            page.once("dialog", lambda dialog: dialog.accept())
             page.locator('#network-form [type="submit"]').click()
+            answer_panel_dialog(page)
             expect(page.locator("#route-detail")).to_contain_text("own.example.org:8443")
             expect(page.locator("#network-secret")).to_have_value("")
             for lang in ("en", "ru"):
