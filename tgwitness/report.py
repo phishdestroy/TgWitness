@@ -954,6 +954,8 @@ CONSOLE_JS = Path(__file__).with_name("report_console.js").read_text(encoding="u
 CSS += Path(__file__).with_name("report_console.css").read_text(encoding="utf-8")
 CSS += Path(__file__).with_name("report_skin.css").read_text(encoding="utf-8")
 CSS += case_assessment.CSS
+DOSSIER_CSS = Path(__file__).with_name("report_dossier.css").read_text(encoding="utf-8")
+CSS += DOSSIER_CSS
 SCRIPT += "\n" + CONSOLE_JS
 SCRIPT_HASH = "'sha256-" + base64.b64encode(hashlib.sha256(SCRIPT.encode("utf-8")).digest()).decode() + "'"
 # Data documents run inside opaque-origin sandboxed frames, with their own CSP.
@@ -983,7 +985,7 @@ def head(say, *, title, description, meta, linked, theme):
             '<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">'
             + "".join('<meta name="' + e(n) + '" content="' + e(v) + '">' for n, v in tags if v not in (None, ""))
             + '<script type="application/ld+json">' + script_json(linked) + "</script>"
-            "<style>" + CSS + page_footer(say, meta) + "</style></head><body>" + ICONS)
+            "<style>" + CSS + page_footer(say, meta) + '</style></head><body class="dossier">' + ICONS)
 
 
 def css_text(value):
@@ -1036,7 +1038,8 @@ def hero(say, eyebrow, title, facts, fp, sealed):
              + e(" ".join(grouped(fp).split()[:4])) + " …</div>"
              '<a class="stamp-hint no-print" id="seal-hint" href="#seal" hidden>'
              + e(say("Check the file itself")) + " →</a></aside>") if sealed else ""
-    return ('<section class="hero" id="summary"><div class="hero-main"><div class="eyebrow">' + e(eyebrow) + "</div><h1>"
+    return ('<section class="hero" id="summary"><div class="cover-register"><span>TG / WITNESS</span><span>'
+            + e(say("Evidence dossier")) + '</span></div><div class="hero-main"><div class="eyebrow">' + e(eyebrow) + "</div><h1>"
             + e(title) + "</h1>"
             '<div class="facts">' + "".join("<div><span>" + e(k) + "</span><b>" + v + "</b></div>" for k, v in facts if v)
             + "</div></div>" + stamp + "</section>")
@@ -1065,7 +1068,7 @@ def toc(links):
 def section(number, anchor, title, lead="", long=False):
     glyph, tone = SECTION_ICONS.get(anchor, ("info", "slate"))
     return ('<section class="card' + (" long" if long else "") + '" id="' + anchor + '"><h2><span class="sec-icon tone-'
-            + tone + '">' + icon(glyph) + '</span><span class="num">' + str(number) + "</span>" + e(title) + "</h2>"
+            + tone + '">' + icon(glyph) + '</span><span class="num">' + str(number) + '</span><span class="section-title">' + e(title) + '</span></h2>'
             + ('<p class="lead">' + e(lead) + "</p>" if lead else ""))
 
 
@@ -1991,6 +1994,46 @@ def ranges_text(ranges, total, limit=8):
             if shown else "—")
 
 
+def coverage_plot(coverage):
+    """Position recorded intervals on one UTC axis; never fill unobserved time."""
+    rows = []
+    for key in ("continuous", "gaps"):
+        spans = []
+        for item in coverage.get(key) or []:
+            try:
+                start, end = (datetime.fromisoformat(item[k].replace("Z", "+00:00")) for k in ("from", "to"))
+                if start.tzinfo is None or end.tzinfo is None or end < start:
+                    return None
+                spans.append((start.timestamp(), end.timestamp()))
+            except (KeyError, AttributeError, TypeError, ValueError, OverflowError):
+                return None
+        rows.append(spans)
+    all_spans = rows[0] + rows[1]
+    if not all_spans or len(all_spans) > 2000:
+        return None
+    first, last = min(a for a, _ in all_spans), max(b for _, b in all_spans)
+    if last <= first:
+        return None
+    return {"from": datetime.fromtimestamp(first, timezone.utc).isoformat(),
+            "to": datetime.fromtimestamp(last, timezone.utc).isoformat(),
+            "rows": [[((a-first)/(last-first), (b-a)/(last-first)) for a, b in spans] for spans in rows]}
+
+
+def coverage_figure(say, coverage):
+    plot = coverage_plot(coverage)
+    if not plot:
+        return ""
+    out = '<figure class="coverage-figure"><figcaption>' + e(say("Observation timeline")) + '</figcaption>'
+    for index, label in enumerate(("Continuous observation", "Gaps")):
+        out += '<div class="coverage-track"><span>' + e(say(label)) + '</span><svg viewBox="0 0 1000 24" preserveAspectRatio="none" aria-hidden="true">'
+        out += '<rect width="1000" height="24" class="coverage-track-bg"/>'
+        for x, width in plot["rows"][index]:
+            out += f'<rect x="{x*1000:.3f}" y="3" width="{width*1000:.3f}" height="18" class="coverage-span coverage-span-{index}"/>'
+        out += '</svg></div>'
+    return (out + '<div class="coverage-axis"><span>' + when(plot["from"]) + '</span><span>' + when(plot["to"])
+            + '</span></div><p>' + e(say("Recorded intervals only. Blank space is not proof of uninterrupted collection.")) + '</p></figure>')
+
+
 def coverage_section(say, number, coverage):
     if not coverage:
         return ""
@@ -2004,10 +2047,11 @@ def coverage_section(say, number, coverage):
     out = section(number, "coverage", say("Coverage"),
                   say("Continuous means observation was on, connected and writing records at least every three minutes. "
                       "IDs not observed were never seen by this collector; that is not evidence that they were deleted."))
-    out += "<h3>" + e(say("Continuous observation")) + "</h3>" + (table([say("From"), say("To"), say("Duration")], periods)
+    out += coverage_figure(say, coverage)
+    out += "<h3>" + e(say("Continuous observation")) + "</h3>" + (table([say("Interval start"), say("Interval end"), say("Duration")], periods)
                                                                     if periods else "<p>—</p>")
     if gaps:
-        out += "<h3>" + e(say("Gaps")) + "</h3>" + table([say("From"), say("To"), say("Reason")], gaps)
+        out += "<h3>" + e(say("Gaps")) + "</h3>" + table([say("Interval start"), say("Interval end"), say("Reason")], gaps)
     if ids:
         out += ("<h3>" + e(say("Message IDs per chat")) + '</h3><p class="lead">' + e(say(
             "Channels and supergroups number their messages 1, 2, 3… A number between the first and the last "
@@ -2147,7 +2191,7 @@ def evidence_chunks(events, coverage=None, context=None):
                         (say("Deletions"), num(categories["deleted"]), "bad", "trash"),
                         (say("Files"), num(len(digest["media"])), "violet", "file"),
                         (say("Timestamps"), num(len([a for a in anchors if a.get("kind") != "unreadable"])), "ok", "seal"),
-                        (say("Observed"), e(span_text(say, digest["first"], digest["last"])), "pink", "eye")])
+                        (say("Observation period"), e(span_text(say, digest["first"], digest["last"])), "pink", "eye")])
                + (toc(links) if data_kind else "")).encode("utf-8")
         account = context.get("account") or {}
         account_text = " · ".join(x for x in (("@" + account["username"]) if account.get("username") else "",

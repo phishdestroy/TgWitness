@@ -11,6 +11,39 @@ account and sharing reports. Journal and handover PDFs use the same assessment a
 their signed `report.json`. ZIP manifests carry `case_assessment` in the signed
 manifest. Existing signatures and authoritative records are not rewritten.
 
+## Document formats and reading order
+
+![Fictional HTML dossier](assets/reports/dossier-en.png)
+
+The HTML opens with a case cover and key figures. The numbered evidence map links
+to each finding, its supporting facts, limits and independent review. Searchable
+records and stable record references remain available in the offline viewer.
+The design adapts to narrow screens, both themes and browsers without JavaScript.
+
+The signed PDF has a dedicated A4 cover, report reference and QR, an executive
+summary, an evidence map, numbered findings and document bookmarks. Its page
+headers and footers identify the report. A QR identifies the material; it is not
+an independent verification result. Browser printouts are separate from this
+cryptographically signed PDF.
+
+The observation timeline places recorded observation periods and interruptions
+on the same UTC axis. Empty space is not inferred coverage; the detailed tables
+retain the exact intervals. The ZIP contains the readable reports, signed JSON,
+source records and verification instructions.
+
+Generate a fresh, fictional English/Russian/German dossier with the development
+environment installed:
+
+```sh
+python tools/build_dossier_example.py --output test-results/my-new-dossier
+```
+
+Each language directory contains `report.html`, `report.pdf`, `report.json` and
+`dossier.zip`. Existing sample directories are never overwritten. No Telegram
+account, external timestamp service or network connection is used to create it.
+
+![First three pages of the fictional signed PDF](assets/reports/dossier-pdf.png)
+
 ## Reading a concrete case
 
 For a journal of 1,200 entries with a validated timestamp at entry 1,000, the

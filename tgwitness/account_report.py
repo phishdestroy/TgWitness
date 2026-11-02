@@ -10,7 +10,7 @@ import re
 from datetime import datetime
 
 from . import case_assessment, i18n
-from .report import Words
+from .report import DOSSIER_CSS, Words
 
 MEDIA_PATH = re.compile(r'media/[0-9a-f]{64}\Z')
 COUNT_LABELS = {'messages': 'Messages', 'chats': 'Chats', 'media': 'Media files included',
@@ -144,8 +144,9 @@ def opening(context, title, sharing=False):
     yield encoded('<!doctype html><html lang="' + say.language + '" dir="' + say.direction + '"><head><meta charset="utf-8">'
                   '<meta name="viewport" content="width=device-width,initial-scale=1">'
                   '<meta http-equiv="Content-Security-Policy" content="default-src &#39;none&#39;; style-src &#39;unsafe-inline&#39;; base-uri &#39;none&#39;; form-action &#39;none&#39;">'
-                  '<title>' + e(title) + ' · TgWitness</title><style>' + CSS + case_assessment.CSS + '</style></head><body><main>'
-                  '<header><div class="brand" dir="ltr">TGWITNESS</div><p class="badge">' + e(kind) + '</p>'
+                  '<title>' + e(title) + ' · TgWitness</title><style>' + CSS + case_assessment.CSS + DOSSIER_CSS + '</style></head><body class="dossier account-dossier"><main>'
+                  '<header class="account-cover"><div class="cover-register"><span dir="ltr">TG / WITNESS</span><span>'
+                  + e(say('Evidence dossier')) + '</span></div><p class="badge">' + e(kind) + '</p>'
                   '<h1 class="user" dir="auto">' + e(title) + '</h1><p class="lead">' + e(lead) + '</p></header>')
 
 

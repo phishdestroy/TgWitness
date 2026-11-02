@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Reports now use a coordinated dossier design: case cover, prominent figures,
+  linked evidence map, numbered findings and an observation/gap timeline. Signed
+  PDFs have an A4 cover with identifying QR, a summary, bookmarks and page references;
+  HTML remains offline, responsive and printable. Account and sharing copies use
+  the same visual design. A fresh signed fictional example can be built with
+  `tools/build_dossier_example.py`; see [case reports](CASE_REPORTS.md).
+
 - Signed reports now explain the trust basis for the specific archive, with separate
   export-time checks, recorded observations, missing material and independent review
   steps. HTML, PDF and signed JSON/manifest assessments share the same facts; English,
