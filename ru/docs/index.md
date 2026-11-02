@@ -36,7 +36,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ru/docs/
 
 Доказательства
 
-[Как устроены доказательства](https://phishdestroy.github.io/TgWitness/ru/docs/reference/how-it-works/)[Формат доказательств](https://phishdestroy.github.io/TgWitness/ru/docs/reference/evidence/)[Доказательства и доверие](https://phishdestroy.github.io/TgWitness/ru/docs/reference/evidence-trust/)[Независимый свидетель](https://phishdestroy.github.io/TgWitness/ru/docs/reference/witness/)[Метки времени](https://phishdestroy.github.io/TgWitness/ru/docs/reference/timestamp/)
+[Как устроены доказательства](https://phishdestroy.github.io/TgWitness/ru/docs/reference/how-it-works/)[Формат доказательств](https://phishdestroy.github.io/TgWitness/ru/docs/reference/evidence/)[Независимый свидетель](https://phishdestroy.github.io/TgWitness/ru/docs/reference/witness/)[Метки времени](https://phishdestroy.github.io/TgWitness/ru/docs/reference/timestamp/)
 
 Безопасность и проект
 

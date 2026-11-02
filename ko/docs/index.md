@@ -36,7 +36,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/
 
 증거
 
-[증거 기록의 작동 방식](https://phishdestroy.github.io/TgWitness/ko/docs/reference/how-it-works/)[증거 형식](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/)[증거 및 신뢰](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence-trust/)[독립적인 증인](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/)[타임스탬프](https://phishdestroy.github.io/TgWitness/ko/docs/reference/timestamp/)
+[증거 기록의 작동 방식](https://phishdestroy.github.io/TgWitness/ko/docs/reference/how-it-works/)[증거 형식](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/)[독립적인 증인](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/)[타임스탬프](https://phishdestroy.github.io/TgWitness/ko/docs/reference/timestamp/)
 
 보안 및 프로젝트
 

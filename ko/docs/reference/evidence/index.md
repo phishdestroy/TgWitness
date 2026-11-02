@@ -6,8 +6,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/evide
 
 관찰 결과는 결론이 아닙니다. 발신자 ID는 실제 신원을 의미하지 않습니다. 계정에서 확인할 수 있는 서비스 업데이트가 정보의 출처이며, 텔레그램은 제3자 조사관을 위해 이러한 저장된 기록에 암호화 서명을 하지 않습니다.
 
-수집 장치의 역할, 내보낸 자료와의 비교, 동영상 및 웹 아카이브, 그리고 법적 평가에서 검증으로 입증할 수 있는 사항에 대해서는 『[증거, 캡처 장치 및 법적 효력](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence-trust/)』을 참조하십시오.
-
 ## 서명된 증거란 무엇인가
 
 | 자료 | 보호 | 보존 대상 |

@@ -36,7 +36,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/
 
 証拠
 
-[証拠の仕組み](https://phishdestroy.github.io/TgWitness/ja/docs/reference/how-it-works/)[証拠の形式](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/)[証拠と信頼](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence-trust/)[独立した証人](https://phishdestroy.github.io/TgWitness/ja/docs/reference/witness/)[タイムスタンプ](https://phishdestroy.github.io/TgWitness/ja/docs/reference/timestamp/)
+[証拠の仕組み](https://phishdestroy.github.io/TgWitness/ja/docs/reference/how-it-works/)[証拠の形式](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/)[独立した証人](https://phishdestroy.github.io/TgWitness/ja/docs/reference/witness/)[タイムスタンプ](https://phishdestroy.github.io/TgWitness/ja/docs/reference/timestamp/)
 
 セキュリティとプロジェクト
 

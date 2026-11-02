@@ -36,7 +36,7 @@ Archiwum i integracje
 
 Dowody
 
-[Jak działa ten rejestr dowodów](https://phishdestroy.github.io/TgWitness/pl/docs/reference/how-it-works/)[Format dowodów](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/)[Dowody i zaufanie](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence-trust/)[Niezależny świadek](https://phishdestroy.github.io/TgWitness/pl/docs/reference/witness/)[Sygnatury czasowe](https://phishdestroy.github.io/TgWitness/pl/docs/reference/timestamp/)
+[Jak działa ten rejestr dowodów](https://phishdestroy.github.io/TgWitness/pl/docs/reference/how-it-works/)[Format dowodów](https://phishdestroy.github.io/TgWitness/pl/docs/reference/evidence/)[Niezależny świadek](https://phishdestroy.github.io/TgWitness/pl/docs/reference/witness/)[Sygnatury czasowe](https://phishdestroy.github.io/TgWitness/pl/docs/reference/timestamp/)
 
 Bezpieczeństwo i projekt
 

@@ -6,8 +6,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 觀察結果不等同於結論。發送者 ID 並非現實世界的身分。 帳戶可見的服務更新是資料來源；Telegram 並未為第三方調查人員 對這些儲存的記錄進行加密簽名。
 
-關於蒐集裝置的角色、與匯出資料、影片及網路 檔案庫的比較，以及驗證結果在法律評估中能確立的效力，請參閱 《[證據、擷取裝置與法律效力](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence-trust/)》。
-
 ## 何謂「簽名」
 
 | 資料 | 保護 | 應保留的內容 |

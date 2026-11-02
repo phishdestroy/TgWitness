@@ -18,7 +18,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/
 
 ## 証拠
 
-[### 証拠の仕組み ハッシュチェーン、署名、チェックポイント、およびウィットネスについて、検証者が使用する正確な数式を用いて解説しています。](https://phishdestroy.github.io/TgWitness/ja/docs/reference/how-it-works/)[### 証拠の形式 署名付きZIPファイルの内容、記録の種類、処理の受領確認、ユーザープロフィール、オフサイトコピー、およびオフライン検証について。](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/)[### 証拠と信頼 エクスポートデータ、動画、ウェブアーカイブ、および署名付き記録が何を立証し得るか、また収集デバイスがそれらの信頼性にどのような影響を与えるか。](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence-trust/)[### 独立した証人 独自の鍵とボットを使用してWitnessを実行し、署名済みのチェックポイントをチャンネルに公開し、エクスポートしたデータと照合してください。](https://phishdestroy.github.io/TgWitness/ja/docs/reference/witness/)[### タイムスタンプ 署名付きチェックポイントにおけるRFC 3161タイムスタンプ：認証機関に送信される内容と、応答の検証方法について。](https://phishdestroy.github.io/TgWitness/ja/docs/reference/timestamp/)
+[### 証拠の仕組み ハッシュチェーン、署名、チェックポイント、およびウィットネスについて、検証者が使用する正確な数式を用いて解説しています。](https://phishdestroy.github.io/TgWitness/ja/docs/reference/how-it-works/)[### 証拠の形式 署名付きZIPファイルの内容、記録の種類、処理の受領確認、ユーザープロフィール、オフサイトコピー、およびオフライン検証について。](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/)[### 独立した証人 独自の鍵とボットを使用してWitnessを実行し、署名済みのチェックポイントをチャンネルに公開し、エクスポートしたデータと照合してください。](https://phishdestroy.github.io/TgWitness/ja/docs/reference/witness/)[### タイムスタンプ 署名付きチェックポイントにおけるRFC 3161タイムスタンプ：認証機関に送信される内容と、応答の検証方法について。](https://phishdestroy.github.io/TgWitness/ja/docs/reference/timestamp/)
 
 ## セキュリティとプロジェクト
 

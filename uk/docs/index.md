@@ -36,7 +36,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/
 
 Докази
 
-[Як працює система збереження доказів](https://phishdestroy.github.io/TgWitness/uk/docs/reference/how-it-works/)[Формат доказів](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/)[Докази та довіра](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence-trust/)[Незалежний свідок](https://phishdestroy.github.io/TgWitness/uk/docs/reference/witness/)[Часові мітки](https://phishdestroy.github.io/TgWitness/uk/docs/reference/timestamp/)
+[Як працює система збереження доказів](https://phishdestroy.github.io/TgWitness/uk/docs/reference/how-it-works/)[Формат доказів](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/)[Незалежний свідок](https://phishdestroy.github.io/TgWitness/uk/docs/reference/witness/)[Часові мітки](https://phishdestroy.github.io/TgWitness/uk/docs/reference/timestamp/)
 
 Безпека та проект
 

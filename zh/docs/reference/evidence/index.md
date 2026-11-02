@@ -6,8 +6,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/reference/evide
 
 观察结果不等于结论。发件人 ID 不等同于现实世界中的身份。 账户可见的服务更新是数据来源；Telegram 不会为第三方调查人员对这些保存的记录进行加密 签名。
 
-关于采集设备的作用、与导出数据的对比、视频和网络 存档，以及在法律评估中验证能确立什么，请参阅 《[证据、采集设备与法律效力](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence-trust/)》。
-
 ## 什么是签名
 
 | 资料 | 保护 | 应保留的内容 |

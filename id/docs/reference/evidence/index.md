@@ -6,8 +6,6 @@ Isi berkas ZIP yang telah ditandatangani, jenis catatan, tanda terima proses, pr
 
 Sebuah pengamatan bukanlah kesimpulan. ID pengirim bukanlah identitas di dunia nyata. Pembaruan layanan yang terlihat di akun adalah sumbernya; Telegram tidak menandatangani secara kriptografis catatan yang disimpan ini untuk penyelidik pihak ketiga.
 
-Untuk peran perangkat pengumpul, perbandingan dengan ekspor, arsip video dan web, serta apa yang dapat dibuktikan melalui verifikasi dalam penilaian hukum, baca[Bukti, perangkat penangkapan, dan bobot hukum](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence-trust/).
-
 ## Apa itu "ditandatangani"?
 
 | Materi | Perlindungan | Apa yang perlu disimpan |

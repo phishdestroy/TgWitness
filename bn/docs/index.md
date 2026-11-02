@@ -36,7 +36,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/
 
 প্রমাণ
 
-[প্রমাণ কীভাবে কাজ করে](https://phishdestroy.github.io/TgWitness/bn/docs/reference/how-it-works/)[প্রমাণের ফর্ম্যাট](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/)[প্রমাণ এবং বিশ্বাস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence-trust/)[স্বতন্ত্র সাক্ষী](https://phishdestroy.github.io/TgWitness/bn/docs/reference/witness/)[টাইমস্ট্যাম্পস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/timestamp/)
+[প্রমাণ কীভাবে কাজ করে](https://phishdestroy.github.io/TgWitness/bn/docs/reference/how-it-works/)[প্রমাণের ফর্ম্যাট](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/)[স্বতন্ত্র সাক্ষী](https://phishdestroy.github.io/TgWitness/bn/docs/reference/witness/)[টাইমস্ট্যাম্পস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/timestamp/)
 
 নিরাপত্তা ও প্রকল্প
 

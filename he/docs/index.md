@@ -36,7 +36,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/
 
 ראיות
 
-[כיצד פועלת הראיה](https://phishdestroy.github.io/TgWitness/he/docs/reference/how-it-works/)[פורמט הראיות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/)[ראיות ואמון](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence-trust/)[עד עצמאי](https://phishdestroy.github.io/TgWitness/he/docs/reference/witness/)[חותמות זמן](https://phishdestroy.github.io/TgWitness/he/docs/reference/timestamp/)
+[כיצד פועלת הראיה](https://phishdestroy.github.io/TgWitness/he/docs/reference/how-it-works/)[פורמט הראיות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/)[עד עצמאי](https://phishdestroy.github.io/TgWitness/he/docs/reference/witness/)[חותמות זמן](https://phishdestroy.github.io/TgWitness/he/docs/reference/timestamp/)
 
 אבטחה ופרויקט
 

@@ -18,7 +18,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 ## 證據
 
-[### 證據的運作方式 文中以驗證者實際使用的精確公式，詳盡闡述了雜湊鏈、簽名、檢查點及見證者的運作原理。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/how-it-works/)[### 證據格式 簽名 ZIP 檔案的內容、記錄類型、處理回執、使用者檔案、異地備份及離線驗證。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/)[### 證據與信任 匯出資料、影片、網頁存檔及簽署紀錄能證明什麼，以及收集裝置如何影響其可靠性。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence-trust/)[### 獨立見證人 請使用具備專屬金鑰與機器人的「Witness」執行程序，將簽署過的檢查點發佈至頻道，並據此核對匯出資料。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/witness/)[### 時間戳記 簽名檢查點的 RFC 3161 時間戳記：傳送至授權機構的內容，以及如何驗證回應。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/timestamp/)
+[### 證據的運作方式 文中以驗證者實際使用的精確公式，詳盡闡述了雜湊鏈、簽名、檢查點及見證者的運作原理。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/how-it-works/)[### 證據格式 簽名 ZIP 檔案的內容、記錄類型、處理回執、使用者檔案、異地備份及離線驗證。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/)[### 獨立見證人 請使用具備專屬金鑰與機器人的「Witness」執行程序，將簽署過的檢查點發佈至頻道，並據此核對匯出資料。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/witness/)[### 時間戳記 簽名檢查點的 RFC 3161 時間戳記：傳送至授權機構的內容，以及如何驗證回應。](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/timestamp/)
 
 ## 安全性與專案
 

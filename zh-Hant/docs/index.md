@@ -36,7 +36,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/
 
 證據
 
-[證據的運作方式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/how-it-works/)[證據格式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/)[證據與信任](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence-trust/)[獨立見證人](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/witness/)[時間戳記](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/timestamp/)
+[證據的運作方式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/how-it-works/)[證據格式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/)[獨立見證人](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/witness/)[時間戳記](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/timestamp/)
 
 安全性與專案
 

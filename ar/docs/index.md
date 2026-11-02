@@ -36,7 +36,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/
 
 الأدلة
 
-[كيف تعمل الأدلة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/how-it-works/)[تنسيق الأدلة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/)[الأدلة والثقة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence-trust/)[شاهد مستقل](https://phishdestroy.github.io/TgWitness/ar/docs/reference/witness/)[الطوابع الزمنية](https://phishdestroy.github.io/TgWitness/ar/docs/reference/timestamp/)
+[كيف تعمل الأدلة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/how-it-works/)[تنسيق الأدلة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/)[شاهد مستقل](https://phishdestroy.github.io/TgWitness/ar/docs/reference/witness/)[الطوابع الزمنية](https://phishdestroy.github.io/TgWitness/ar/docs/reference/timestamp/)
 
 الأمن والمشروع
 

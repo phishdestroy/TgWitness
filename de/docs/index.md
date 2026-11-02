@@ -36,7 +36,7 @@ Archiv & Integrationen
 
 Beweismaterial
 
-[So funktioniert das Beweismaterial](https://phishdestroy.github.io/TgWitness/de/docs/reference/how-it-works/)[Format der Beweismittel](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/)[Beweise und Vertrauen](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence-trust/)[Unabhängiger Zeuge](https://phishdestroy.github.io/TgWitness/de/docs/reference/witness/)[Zeitstempel](https://phishdestroy.github.io/TgWitness/de/docs/reference/timestamp/)
+[So funktioniert das Beweismaterial](https://phishdestroy.github.io/TgWitness/de/docs/reference/how-it-works/)[Format der Beweismittel](https://phishdestroy.github.io/TgWitness/de/docs/reference/evidence/)[Unabhängiger Zeuge](https://phishdestroy.github.io/TgWitness/de/docs/reference/witness/)[Zeitstempel](https://phishdestroy.github.io/TgWitness/de/docs/reference/timestamp/)
 
 Sicherheit & Projekt
 

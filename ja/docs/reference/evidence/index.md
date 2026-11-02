@@ -6,8 +6,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/evide
 
 観察結果は結論ではありません。送信者IDは実世界の身元ではありません。 アカウント上で確認できるサービス更新情報が情報源であり、Telegramは第三者の調査員のために、 これらの保存記録に暗号学的署名を行っていません。
 
-収集デバイスの役割、エクスポートデータとの比較、動画およびウェブアーカイブ、ならびに法的評価において検証によって何が立証できるかについては、「[証拠、キャプチャデバイス、および法的証拠価値](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence-trust/)」を参照してください。
-
 ## 署名とは
 
 | 資料 | 保護 | 保存すべき内容 |

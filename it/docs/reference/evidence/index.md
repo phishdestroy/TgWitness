@@ -6,8 +6,6 @@ Contenuto del file ZIP firmato, tipi di registrazioni, ricevute di elaborazione,
 
 Un’osservazione non è una conclusione. L’ID del mittente non corrisponde a un’identità nel mondo reale. La fonte è l’aggiornamento del servizio visibile sull’account; Telegram non firma crittograficamente questi record salvati per conto di un investigatore di terze parti.
 
-Per quanto riguarda il ruolo del dispositivo di raccolta, i confronti con le esportazioni, gli archivi video e web e ciò che la verifica può stabilire in una valutazione giuridica, si legga[Prove, dispositivi di acquisizione e valore giuridico](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence-trust/).
-
 ## Che cosa viene firmato
 
 | Materiale | Protezione | Cosa conservare |

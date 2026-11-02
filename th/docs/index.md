@@ -36,7 +36,7 @@ Collect
 
 หลักฐาน
 
-[วิธีการทำงานของหลักฐาน](https://phishdestroy.github.io/TgWitness/th/docs/reference/how-it-works/)[รูปแบบหลักฐาน](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/)[หลักฐานและความเชื่อถือ](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence-trust/)[พยานอิสระ](https://phishdestroy.github.io/TgWitness/th/docs/reference/witness/)[ข้อมูลเวลา](https://phishdestroy.github.io/TgWitness/th/docs/reference/timestamp/)
+[วิธีการทำงานของหลักฐาน](https://phishdestroy.github.io/TgWitness/th/docs/reference/how-it-works/)[รูปแบบหลักฐาน](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/)[พยานอิสระ](https://phishdestroy.github.io/TgWitness/th/docs/reference/witness/)[ข้อมูลเวลา](https://phishdestroy.github.io/TgWitness/th/docs/reference/timestamp/)
 
 ความปลอดภัยและโครงการ
 

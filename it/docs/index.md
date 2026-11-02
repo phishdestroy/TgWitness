@@ -36,7 +36,7 @@ Archivio e integrazioni
 
 Prove
 
-[Come funziona la raccolta delle prove](https://phishdestroy.github.io/TgWitness/it/docs/reference/how-it-works/)[Formato delle prove](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/)[Prove e affidabilità](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence-trust/)[Testimone indipendente](https://phishdestroy.github.io/TgWitness/it/docs/reference/witness/)[Marcatori temporali](https://phishdestroy.github.io/TgWitness/it/docs/reference/timestamp/)
+[Come funziona la raccolta delle prove](https://phishdestroy.github.io/TgWitness/it/docs/reference/how-it-works/)[Formato delle prove](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/)[Testimone indipendente](https://phishdestroy.github.io/TgWitness/it/docs/reference/witness/)[Marcatori temporali](https://phishdestroy.github.io/TgWitness/it/docs/reference/timestamp/)
 
 Sicurezza e progetto
 

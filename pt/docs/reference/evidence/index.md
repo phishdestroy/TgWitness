@@ -6,8 +6,6 @@ Conteúdo do arquivo ZIP assinado, tipos de registros, recibos de processamento,
 
 Uma observação não é uma conclusão. Um ID de remetente não é uma identidade no mundo real. A atualização do serviço visível na conta é a fonte; o Telegram não assina criptograficamente esses registros salvos para um investigador terceirizado.
 
-Para conhecer o papel do dispositivo de coleta, comparações com exportações, arquivos de vídeo e da web e o que a verificação pode estabelecer em uma avaliação jurídica, leia[“Provas, dispositivos de captura e peso jurídico](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence-trust/)”.
-
 ## O que é assinado
 
 | Material | Proteção | O que deve ser mantido |

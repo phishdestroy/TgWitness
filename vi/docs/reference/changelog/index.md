@@ -7,7 +7,6 @@ Mọi thay đổi theo từng phiên bản, bao gồm cả những thay đổi c
 ## Unreleased
 
 - Preserve an active Telegram sign-in when workflow navigation finishes late. Returning through account export or investigation keeps the pending code, password or QR step instead of resetting the form.
-- Added [Evidence and trust](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence-trust/), explaining capture-device trust, independent verification and legal limits with sources and 24 DeepL translations.
 
 ## 0.7.1 preview · 1 November 2026
 

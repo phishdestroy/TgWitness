@@ -36,7 +36,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh/docs/
 
 证据
 
-[证据的运作原理](https://phishdestroy.github.io/TgWitness/zh/docs/reference/how-it-works/)[证据格式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/)[证据与信任](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence-trust/)[独立见证者](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/)[时间戳](https://phishdestroy.github.io/TgWitness/zh/docs/reference/timestamp/)
+[证据的运作原理](https://phishdestroy.github.io/TgWitness/zh/docs/reference/how-it-works/)[证据格式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/evidence/)[独立见证者](https://phishdestroy.github.io/TgWitness/zh/docs/reference/witness/)[时间戳](https://phishdestroy.github.io/TgWitness/zh/docs/reference/timestamp/)
 
 安全与项目
 

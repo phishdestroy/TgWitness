@@ -36,7 +36,7 @@ Archives et intégrations
 
 Preuves
 
-[Fonctionnement des preuves](https://phishdestroy.github.io/TgWitness/fr/docs/reference/how-it-works/)[Format des preuves](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/)[Preuves et confiance](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence-trust/)[Témoin indépendant](https://phishdestroy.github.io/TgWitness/fr/docs/reference/witness/)[Horodatages](https://phishdestroy.github.io/TgWitness/fr/docs/reference/timestamp/)
+[Fonctionnement des preuves](https://phishdestroy.github.io/TgWitness/fr/docs/reference/how-it-works/)[Format des preuves](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/)[Témoin indépendant](https://phishdestroy.github.io/TgWitness/fr/docs/reference/witness/)[Horodatages](https://phishdestroy.github.io/TgWitness/fr/docs/reference/timestamp/)
 
 Sécurité et projet
 
