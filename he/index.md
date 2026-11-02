@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/he/
 
-[קוד פתוח / v0.8.0](https://phishdestroy.github.io/TgWitness/he/docs/reference/changelog/)
+[קוד פתוח / v0.8.1](https://phishdestroy.github.io/TgWitness/he/docs/reference/changelog/)
 
 תיעוד הודעות טלגרם, שימור השינויים בהן וייצוא תיעוד חתום.
 
@@ -261,7 +261,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 להתקנות מהמקור, האסימון הוא `data/live/panel-token.txt`. ניתן להשתמש בהגדרות ה-API המובנות לצורך כניסה ל-Telegram, או בזוג המפתחות האישי שלכם מ[-my.telegram.org](https://my.telegram.org). [מדריך התקנה מלא ↗](https://phishdestroy.github.io/TgWitness/he/docs/reference/quickstart/)
 
-**TgWitness 0.8.0** [מה חדש →](https://phishdestroy.github.io/TgWitness/he/docs/reference/changelog/) · [תכונות ומגבלות ידועות →](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/)
+**TgWitness 0.8.1** [מה חדש →](https://phishdestroy.github.io/TgWitness/he/docs/reference/changelog/) · [תכונות ומגבלות ידועות →](https://phishdestroy.github.io/TgWitness/he/docs/reference/features/)
 
 ## הוראות ברורות. צעד מועיל להמשך.
 

@@ -127,7 +127,7 @@ Tale contenuto diventa disponibile al termine di un [flusso di lavoro di rilasci
 Copi `deploy/env.example` in `.env`. Imposti `TGWITNESS_IMAGE` sulla versione pubblicata, utilizzando il percorso del repository **in minuscolo**, ad esempio:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
 TGWITNESS_PORT=8787
 ```
 

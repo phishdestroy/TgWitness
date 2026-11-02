@@ -127,7 +127,7 @@ docker compose logs witness                     # witness key fingerprint
 คัดลอก `deploy/env.example` ไปยัง `.env` ตั้งค่า `TGWITNESS_IMAGE` เป็นเวอร์ชันที่เผยแพร่ โดยใช้ เส้นทางรีโพสิตอรี**แบบตัวพิมพ์เล็ก** เช่น:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
 TGWITNESS_PORT=8787
 ```
 

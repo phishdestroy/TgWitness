@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ur/
 
-[اوپن سورس / v0.8.0](https://phishdestroy.github.io/TgWitness/ur/docs/reference/changelog/)
+[اوپن سورس / v0.8.1](https://phishdestroy.github.io/TgWitness/ur/docs/reference/changelog/)
 
 ٹیلیگرام پیغامات کو محفوظ کریں، ان میں تبدیلیاں برقرار رکھیں، اور ایک دستخط شدہ ریکارڈ برآمد کریں۔
 
@@ -261,7 +261,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 ماخذ انسٹالیشن کے لیے ٹوکن `data/live/panel-token.txt` میں موجود ہے۔ ٹیلیگرام سائن ان بلٹ ان API سیٹنگز یا [my.telegram.org](https://my.telegram.org) سے آپ کے اپنے جوڑے کا استعمال کر سکتا ہے۔ [مکمل سیٹ اپ گائیڈ ↗](https://phishdestroy.github.io/TgWitness/ur/docs/reference/quickstart/)
 
-**TgWitness 0.8.0** [کیا نیا ہے →](https://phishdestroy.github.io/TgWitness/ur/docs/reference/changelog/) · [خصوصیات اور معلوم حدود →](https://phishdestroy.github.io/TgWitness/ur/docs/reference/features/)
+**TgWitness 0.8.1** [کیا نیا ہے →](https://phishdestroy.github.io/TgWitness/ur/docs/reference/changelog/) · [خصوصیات اور معلوم حدود →](https://phishdestroy.github.io/TgWitness/ur/docs/reference/features/)
 
 ## واضح ہدایات۔ ایک مفید اگلا قدم۔
 

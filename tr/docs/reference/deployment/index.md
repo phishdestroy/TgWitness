@@ -127,7 +127,7 @@ Bu, başarılı bir [sürüm yayın iş akışı](https://phishdestroy.github.io
 `deploy/env.example`'yi `.env`'ye kopyalayın. `TGWITNESS_IMAGE`'yi, **küçük harfli** depo yolunu kullanarak yayınlanan sürüme ayarlayın, örneğin:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
 TGWITNESS_PORT=8787
 ```
 

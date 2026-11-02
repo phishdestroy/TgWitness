@@ -127,7 +127,7 @@ docker compose logs witness                     # witness key fingerprint
 `deploy/env.example`를 `.env`로 복사하십시오. `TGWITNESS_IMAGE`를 공개된 버전으로 설정할 때는 **소문자** 리포지토리 경로를 사용하십시오. 예:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
 TGWITNESS_PORT=8787
 ```
 

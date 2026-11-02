@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/tr/
 
-[Açık kaynak / v0.8.0](https://phishdestroy.github.io/TgWitness/tr/docs/reference/changelog/)
+[Açık kaynak / v0.8.1](https://phishdestroy.github.io/TgWitness/tr/docs/reference/changelog/)
 
 Telegram mesajlarını yakalayın, değişikliklerini koruyun ve imzalı bir kayıt olarak dışa aktarın.
 
@@ -261,7 +261,7 @@ Başlatma işleminden sonra [127.0.0.1:8787 adresini](http://127.0.0.1:8787) aç
 
 Kaynak koddan kurulumlarda token `data/live/panel-token.txt`'dir. Telegram oturum açma işlemi için yerleşik API ayarları veya [my.telegram.org](https://my.telegram.org) adresinden aldığınız kendi anahtar çiftinizi kullanabilirsiniz. [Tam kurulum kılavuzu ↗](https://phishdestroy.github.io/TgWitness/tr/docs/reference/quickstart/)
 
-**TgWitness 0.8.0** [Yenilikler →](https://phishdestroy.github.io/TgWitness/tr/docs/reference/changelog/) · [Özellikler ve bilinen sınırlamalar →](https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/)
+**TgWitness 0.8.1** [Yenilikler →](https://phishdestroy.github.io/TgWitness/tr/docs/reference/changelog/) · [Özellikler ve bilinen sınırlamalar →](https://phishdestroy.github.io/TgWitness/tr/docs/reference/features/)
 
 ## Anlaşılır talimatlar. Yararlı bir sonraki adım.
 

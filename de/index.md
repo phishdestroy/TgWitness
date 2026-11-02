@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/de/
 
-[Open Source / v0.8.0](https://phishdestroy.github.io/TgWitness/de/docs/reference/changelog/)
+[Open Source / v0.8.1](https://phishdestroy.github.io/TgWitness/de/docs/reference/changelog/)
 
 Telegram-Nachrichten erfassen, deren Änderungen dokumentieren und einen signierten Datensatz exportieren.
 
@@ -261,7 +261,7 @@ Der zweite Befehl zeigt Ihr privates Panel-Token an. Bewahren Sie es auf Ihrem R
 
 Bei der Installation aus dem Quellcode lautet das Token „`data/live/panel-token.txt`“. Für die Telegram-Anmeldung können Sie die integrierten API-Einstellungen oder Ihr eigenes Schlüsselpaar von [my.telegram.org](https://my.telegram.org) verwenden. [Vollständige Einrichtungsanleitung ↗](https://phishdestroy.github.io/TgWitness/de/docs/reference/quickstart/)
 
-**TgWitness 0.8.0** [Was gibt’s Neues →](https://phishdestroy.github.io/TgWitness/de/docs/reference/changelog/) · [Funktionen und bekannte Einschränkungen →](https://phishdestroy.github.io/TgWitness/de/docs/reference/features/)
+**TgWitness 0.8.1** [Was gibt’s Neues →](https://phishdestroy.github.io/TgWitness/de/docs/reference/changelog/) · [Funktionen und bekannte Einschränkungen →](https://phishdestroy.github.io/TgWitness/de/docs/reference/features/)
 
 ## Klare Anweisungen. Ein nützlicher nächster Schritt.
 

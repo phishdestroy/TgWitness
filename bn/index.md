@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/bn/
 
-[মুক্ত উৎস / v0.8.0](https://phishdestroy.github.io/TgWitness/bn/docs/reference/changelog/)
+[মুক্ত উৎস / v0.8.1](https://phishdestroy.github.io/TgWitness/bn/docs/reference/changelog/)
 
 টেলিগ্রাম বার্তাগুলো ক্যাপচার করুন, তাদের পরিবর্তন সংরক্ষণ করুন, এবং স্বাক্ষরিত রেকর্ড রপ্তানি করুন।
 
@@ -261,7 +261,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 সোর্স ইনস্টলের জন্য টোকেনটি `data/live/panel-token.txt`-এ রয়েছে। টেলিগ্রাম সাইন-ইন বিল্ট-ইন API সেটিংস ব্যবহার করতে পারে অথবা [my.telegram.org](https://my.telegram.org) থেকে আপনার নিজস্ব জোড়া ব্যবহার করতে পারে। [সম্পূর্ণ সেটআপ গাইড ↗](https://phishdestroy.github.io/TgWitness/bn/docs/reference/quickstart/)
 
-**টিজিউইটনেস 0.8.0** [নতুন কী →](https://phishdestroy.github.io/TgWitness/bn/docs/reference/changelog/) · [বৈশিষ্ট্যসমূহ এবং পরিচিত সীমাবদ্ধতা →](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/)
+**টিজিউইটনেস 0.8.1** [নতুন কী →](https://phishdestroy.github.io/TgWitness/bn/docs/reference/changelog/) · [বৈশিষ্ট্যসমূহ এবং পরিচিত সীমাবদ্ধতা →](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/)
 
 ## স্পষ্ট নির্দেশনা। একটি উপকারী পরবর্তী পদক্ষেপ।
 

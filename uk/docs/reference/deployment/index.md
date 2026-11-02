@@ -127,7 +127,7 @@ docker compose logs witness                     # witness key fingerprint
 Скопіюйте `deploy/env.example` у `.env`. Встановіть `TGWITNESS_IMAGE` на опубліковану версію, використовуючи шлях до репозиторію **з малими літерами**, наприклад:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
 TGWITNESS_PORT=8787
 ```
 

@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ko/
 
-[오픈 소스 / v0.8.0](https://phishdestroy.github.io/TgWitness/ko/docs/reference/changelog/)
+[오픈 소스 / v0.8.1](https://phishdestroy.github.io/TgWitness/ko/docs/reference/changelog/)
 
 텔레그램 메시지를 캡처하고, 변경 내역을 보존하며, 서명된 기록을 내보냅니다.
 
@@ -260,7 +260,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 소스 코드 설치 시 토큰은 `data/live/panel-token.txt`입니다. 텔레그램 로그인은 내장된 API 설정을 사용하거나 [my.telegram.](https://my.telegram.org)org에서 생성한 본인만의 키 쌍을 사용할 수 있습니다. [전체 설정 가이드 ↗](https://phishdestroy.github.io/TgWitness/ko/docs/reference/quickstart/)
 
-**TgWitness 0.8.0** [새로운 소식 →](https://phishdestroy.github.io/TgWitness/ko/docs/reference/changelog/) · [기능 및 알려진 제한 사항 →](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/)
+**TgWitness 0.8.1** [새로운 소식 →](https://phishdestroy.github.io/TgWitness/ko/docs/reference/changelog/) · [기능 및 알려진 제한 사항 →](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/)
 
 ## 명확한 지침. 유용한 다음 단계.
 

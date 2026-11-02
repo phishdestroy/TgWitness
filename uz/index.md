@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uz/
 
-[Ochiq manba / v0.8.0](https://phishdestroy.github.io/TgWitness/uz/docs/reference/changelog/)
+[Ochiq manba / v0.8.1](https://phishdestroy.github.io/TgWitness/uz/docs/reference/changelog/)
 
 Telegram xabarlarini yozib oling, ularning o'zgartirishlarini saqlang va imzolangan yozuvni eksport qiling.
 
@@ -261,7 +261,7 @@ Ishga tushirgandan so‘ng [127.0.0.1:8787](http://127.0.0.1:8787) manzilini och
 
 Manba kodidan o'rnatishda token `data/live/panel-token.txt` da joylashgan. Telegramga kirish uchun o'rnatilgan API sozlamalaridan yoki [my.telegram.org](https://my.telegram.org) saytidan olingan o'zingizning juft kalitingizdan foydalanishingiz mumkin. [To'liq sozlash bo'yicha qo'llanma ↗](https://phishdestroy.github.io/TgWitness/uz/docs/reference/quickstart/)
 
-**TgWitness 0.8.0** [Nima yangilik →](https://phishdestroy.github.io/TgWitness/uz/docs/reference/changelog/) · [Xususiyatlar va ma'lum cheklovlar →](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/)
+**TgWitness 0.8.1** [Nima yangilik →](https://phishdestroy.github.io/TgWitness/uz/docs/reference/changelog/) · [Xususiyatlar va ma'lum cheklovlar →](https://phishdestroy.github.io/TgWitness/uz/docs/reference/features/)
 
 ## Aniq ko'rsatmalar. Foydali keyingi qadam.
 

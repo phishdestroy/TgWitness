@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/th/
 
-[โอเพนซอร์ส / v0.8.0](https://phishdestroy.github.io/TgWitness/th/docs/reference/changelog/)
+[โอเพนซอร์ส / v0.8.1](https://phishdestroy.github.io/TgWitness/th/docs/reference/changelog/)
 
 บันทึกข้อความ Telegram, รักษาการเปลี่ยนแปลงของข้อความ และส่งออกบันทึกที่มีลายเซ็น
 
@@ -261,7 +261,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 สำหรับการติดตั้งจากแหล่งต้นแบบ โทเค็นอยู่ที่ `data/live/panel-token.txt` การลงชื่อเข้าใช้ Telegram สามารถใช้การตั้งค่า API ที่มาพร้อมระบบ หรือคู่กุญแจของคุณเองจาก [my.telegram.org](https://my.telegram.org) [คู่มือการตั้งค่าครบถ้วน ↗](https://phishdestroy.github.io/TgWitness/th/docs/reference/quickstart/)
 
-**TgWitness 0.8.0** [มีอะไรใหม่ →](https://phishdestroy.github.io/TgWitness/th/docs/reference/changelog/) · [คุณสมบัติและข้อจำกัดที่ทราบ →](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/)
+**TgWitness 0.8.1** [มีอะไรใหม่ →](https://phishdestroy.github.io/TgWitness/th/docs/reference/changelog/) · [คุณสมบัติและข้อจำกัดที่ทราบ →](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/)
 
 ## คำแนะนำที่ชัดเจน ขั้นตอนต่อไปที่มีประโยชน์
 

@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ar/
 
-[مفتوح المصدر / v0.8.0](https://phishdestroy.github.io/TgWitness/ar/docs/reference/changelog/)
+[مفتوح المصدر / v0.8.1](https://phishdestroy.github.io/TgWitness/ar/docs/reference/changelog/)
 
 التقاط رسائل Telegram، والحفاظ على التغييرات التي تطرأ عليها، وتصدير سجل موقّع.
 
@@ -261,7 +261,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 بالنسبة للتثبيت من المصدر، الرمز هو `data/live/panel-token.txt`. يمكن تسجيل الدخول إلى Telegram باستخدام إعدادات واجهة برمجة التطبيقات (API) المدمجة أو الزوج الخاص بك من [my.telegram.org](https://my.telegram.org). [دليل الإعداد الكامل ↗](https://phishdestroy.github.io/TgWitness/ar/docs/reference/quickstart/)
 
-**TgWitness 0.8.0** [ما الجديد →](https://phishdestroy.github.io/TgWitness/ar/docs/reference/changelog/) · [الميزات والقيود المعروفة →](https://phishdestroy.github.io/TgWitness/ar/docs/reference/features/)
+**TgWitness 0.8.1** [ما الجديد →](https://phishdestroy.github.io/TgWitness/ar/docs/reference/changelog/) · [الميزات والقيود المعروفة →](https://phishdestroy.github.io/TgWitness/ar/docs/reference/features/)
 
 ## تعليمات واضحة. خطوة تالية مفيدة.
 

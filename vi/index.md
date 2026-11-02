@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/vi/
 
-[Nguồn mở / v0.8.0](https://phishdestroy.github.io/TgWitness/vi/docs/reference/changelog/)
+[Nguồn mở / v0.8.1](https://phishdestroy.github.io/TgWitness/vi/docs/reference/changelog/)
 
 Ghi lại các tin nhắn Telegram, bảo toàn các thay đổi của chúng và xuất bản ghi có chữ ký.
 
@@ -261,7 +261,7 @@ Vui lòng truy cập [127.0.0.1:8787](http://127.0.0.1:8787) sau khi khởi ch�
 
 Đối với cài đặt từ nguồn, mã thông báo nằm trong `data/live/panel-token.txt`. Việc đăng nhập Telegram có thể sử dụng cài đặt API tích hợp sẵn hoặc cặp khóa riêng của bạn từ [my.telegram.org](https://my.telegram.org). [Hướng dẫn cài đặt đầy đủ ↗](https://phishdestroy.github.io/TgWitness/vi/docs/reference/quickstart/)
 
-**TgWitness 0.8.0** [Có gì mới →](https://phishdestroy.github.io/TgWitness/vi/docs/reference/changelog/) · [Các tính năng và giới hạn đã biết →](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/)
+**TgWitness 0.8.1** [Có gì mới →](https://phishdestroy.github.io/TgWitness/vi/docs/reference/changelog/) · [Các tính năng và giới hạn đã biết →](https://phishdestroy.github.io/TgWitness/vi/docs/reference/features/)
 
 ## Hướng dẫn rõ ràng. Bước tiếp theo hữu ích.
 

@@ -127,7 +127,7 @@ docker compose logs witness                     # witness key fingerprint
 `deploy/env.example`-কে `.env`-এ কপি করুন। `TGWITNESS_IMAGE`-কে প্রকাশিত সংস্করণে সেট করুন, ছোট হাতের রেপোজিটরি পথ ব্যবহার করে, উদাহরণস্বরূপ:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
 TGWITNESS_PORT=8787
 ```
 
