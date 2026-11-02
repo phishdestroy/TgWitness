@@ -22,6 +22,21 @@ def main():
             RunningApp(Path(scratch), demo=True) as server, sync_playwright() as p:
         seed(server.app.state.store)
         browser = launch_browser(p)
+        # Neither a made-up fragment nor a stored credential can select permissions.
+        for stored, fragment in ((None, "#access=tgwa_invalid"), ("tgws_invalid", ""),
+                                 (server.app.state.vault.token, "")):
+            denied = browser.new_context()
+            if stored:
+                denied.add_init_script("sessionStorage.setItem('tgwitness-showcase-session'," + json.dumps(stored) + ");")
+            blocked = denied.new_page()
+            reads = []
+            blocked.on("request", lambda r: reads.append(r.url) if "/api/showcase" in r.url else None)
+            blocked.goto(server.url + "/showcase.html" + fragment)
+            expect(blocked.locator("#notice")).not_to_be_empty()
+            expect(blocked.locator("#content")).to_be_hidden()
+            expect(blocked.locator("#login")).to_be_visible()
+            assert not reads, reads
+            denied.close()
         admin = browser.new_context(viewport={"width": 1440, "height": 1000})
         admin.add_init_script("sessionStorage.setItem('tgwitness-token'," + json.dumps(server.app.state.vault.token) + ");")
         page = admin.new_page()

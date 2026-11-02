@@ -8,8 +8,19 @@ function notice(text,error=false){$('notice').textContent=text;$('notice').class
 function clear(){revision++;ticket++;session='';sessionStorage.removeItem('tgwitness-showcase-session');snapshots.clear();selection='';cursor=null;messageId=null;$('login').hidden=false;$('content').hidden=true;$('sign-out').hidden=true;$('feed').replaceChildren();$('collectors').replaceChildren();$('channel').replaceChildren();$('totals').replaceChildren();$('title').textContent='Real records. Visible changes.';}
 async function api(path,body){const response=await fetch('/api/'+path,{method:body?'POST':'GET',headers:{'Content-Type':'application/json',...(session?{Authorization:'Bearer '+session}:{})},body:body?JSON.stringify(body):undefined,cache:'no-store',referrerPolicy:'no-referrer'});if(!response.ok){if([401,403].includes(response.status))clear();const error=await response.json().catch(()=>({}));throw Error(typeof error.detail==='string'?error.detail:'The request could not be completed.');}return response.json();}
 function download(value,name){const url=URL.createObjectURL(new Blob([JSON.stringify(value,null,2)],{type:'application/json'})),link=node('a');link.href=url;link.download=name;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
-async function login(token){const result=await api('access/login',{token});if(!result.me.showcase){await fetch('/api/access/logout',{method:'POST',headers:{Authorization:'Bearer '+result.session}});throw Error('Use a showcase access link. This page does not open administrator or reviewer access.');}session=result.session;sessionStorage.setItem('tgwitness-showcase-session',session);$('token').value='';await refresh();}
-$('login').addEventListener('submit',async e=>{e.preventDefault();e.submitter.disabled=true;try{await login($('token').value.trim());}catch(error){notice(error.message,true);}finally{e.submitter.disabled=false;}});
+async function restoreSession(){
+  // Stored strings and URL fragments select credentials, never permissions.
+  // Resolve the session and its access type on the server before rendering data.
+  const me=await api('access/me');
+  if(!me.showcase){clear();throw Error('Use a showcase access link. This page does not open administrator or reviewer access.');}
+  await refresh();
+}
+async function exchangeAccessToken(token){
+  const result=await api('access/login',{token});
+  if(!result.me.showcase){await fetch('/api/access/logout',{method:'POST',headers:{Authorization:'Bearer '+result.session}});throw Error('Use a showcase access link. This page does not open administrator or reviewer access.');}
+  session=result.session;sessionStorage.setItem('tgwitness-showcase-session',session);$('token').value='';await restoreSession();
+}
+$('login').addEventListener('submit',async e=>{e.preventDefault();e.submitter.disabled=true;try{await exchangeAccessToken($('token').value.trim());}catch(error){notice(error.message,true);}finally{e.submitter.disabled=false;}});
 $('sign-out').addEventListener('click',async()=>{try{await api('access/logout',{});}catch{}clear();notice('Showcase access closed.');});
 function collectorCard(value,index,previous){const s=value.statement,card=node('article','card collector'),head=node('header'),status=node('span','pill',s.health.running?(s.health.connected?'Collecting':'Waiting for connection'):'Paused');if(s.health.running&&s.health.connected)status.classList.add('live');head.append(node('h3','','Collector '+(index+1)),status);card.append(head,node('p','muted','Last heartbeat · '+date(s.health.last_heartbeat)));
   const settings=s.settings_now;card.append(node('p','',Object.entries(settings.monitoring).filter(([,v])=>v).map(([k])=>k).join(' · ')),node('p','muted','Heartbeat: '+settings.heartbeat_seconds+'s · checkpoints: '+settings.checkpoint_minutes+' min'));
@@ -52,5 +63,5 @@ $('older').addEventListener('click',()=>feed(true).catch(e=>notice(e.message,tru
 $('latest').addEventListener('click',()=>{messageId=null;cursor=null;feed(false).catch(e=>notice(e.message,true));});
 $('refresh').addEventListener('click',()=>refresh().catch(e=>notice(e.message,true)));
 const fragment=new URLSearchParams(location.hash.slice(1)),token=fragment.get('access');if(location.hash)history.replaceState(null,'',location.pathname);
-if(token)login(token).catch(e=>notice(e.message,true));else if(session)refresh().catch(e=>notice(e.message,true));
+if(token)exchangeAccessToken(token).catch(e=>notice(e.message,true));else if(session)restoreSession().catch(e=>notice(e.message,true));
 setInterval(()=>{if(session&&!document.hidden&&!messageId&&!paged)refresh().catch(e=>notice(e.message,true));},60000);
