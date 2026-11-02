@@ -10,7 +10,7 @@ from tools.check_browser import RunningApp, check_layout, launch_browser, unlock
 
 
 def lifecycle_checks(browser, app, output):
-    context = browser.new_context(viewport={"width": 1440, "height": 1000}, reduced_motion="reduce")
+    context = browser.new_context(viewport={"width": 1440, "height": 1000}, reduced_motion="reduce", locale="en-US")
     context.add_init_script(r"""(() => {
       const probe=window.shellAcceptance={events:[],resizeQueue:[],policyQueue:[],holdResize:false};
       const match=window.matchMedia.bind(window);
@@ -87,7 +87,7 @@ def lifecycle_checks(browser, app, output):
 
 
 def main():
-    with tempfile.TemporaryDirectory(prefix="panel-shell-") as scratch, RunningApp(Path(scratch)) as app:
+    with tempfile.TemporaryDirectory(prefix="panel-shell-") as scratch, RunningApp(Path(scratch) / "layout") as app:
         store = app.app.state.store
         store.set_target(-1001, "Synthetic source", "supergroup", True)
         store.append("message.new", {"text": "The conversation gets the space.", "sender_id": 42}, -1001, 1)
@@ -163,7 +163,9 @@ def main():
                 if width < 768:
                     page.keyboard.press("Escape")
             assert not errors, errors
-            lifecycle_checks(browser, app, output)
+            page.close()
+            with RunningApp(Path(scratch) / "lifecycle") as lifecycle_app:
+                lifecycle_checks(browser, lifecycle_app, output)
             browser.close()
     print("Panel shell passed: five widths, mobile focus/navigation, unclipped Russian labels and delayed startup/resize.")
 

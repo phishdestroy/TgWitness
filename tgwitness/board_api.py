@@ -230,11 +230,12 @@ def register(app, authenticate, workspace):
             raise HTTPException(404, "Board action not found.")
         def append(db, who):
             validated = MODELS[action].model_validate(body).model_dump(by_alias=True, exclude_none=True)
-            with app.state.store.transaction():
-                who = current(request)
-                if action == "comment" and validated.get("mentions"):
-                    allowed = {item["id"] for item in participants(db, who, validated["parent_id"])}
-                    if not set(validated["mentions"]) <= allowed:
-                        raise ValueError("A mentioned participant does not have access to this card.")
-                return service().append(action, validated, who, authorize=lambda: current(request))
+            with app.state.access.lock:
+                with app.state.store.transaction():
+                    who = current(request)
+                    if action == "comment" and validated.get("mentions"):
+                        allowed = {item["id"] for item in participants(db, who, validated["parent_id"])}
+                        if not set(validated["mentions"]) <= allowed:
+                            raise ValueError("A mentioned participant does not have access to this card.")
+                    return service().append(action, validated, who, authorize=lambda: current(request))
         return await run(request, append, write=True)

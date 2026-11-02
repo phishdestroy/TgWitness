@@ -6,7 +6,11 @@ from pathlib import Path
 import zipfile
 
 from playwright.sync_api import expect, sync_playwright
-from check_browser import answer_panel_dialog
+
+if __package__:
+    from .browser_helpers import answer_panel_dialog
+else:
+    from browser_helpers import answer_panel_dialog
 
 
 def check_demo_downloads(browser, url, output, route_request, errors, failed):
