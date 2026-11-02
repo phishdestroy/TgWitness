@@ -122,8 +122,8 @@ signatures (`manifest.json.sig` and `SHA256SUMS.txt.sig`).
 
 ## Update an existing installation
 
-**The download site updates automatically; installed programs update when you run
-the installer again.** There is no unattended updater or automatic restart of a
+**A new publication updates the download site; installed programs update when you
+run the installer again.** There is no unattended updater or automatic restart of a
 running collection. The current installer channel is **preview**; it follows
 published, checked builds from `main`, whose commit can be newer than the last
 numbered GitHub release. The page's version comes from `pyproject.toml`; its commit
