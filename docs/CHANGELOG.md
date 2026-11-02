@@ -27,6 +27,13 @@
 - File policies can limit video duration; capture and account export enforce the
   configured size and duration. Existing journals and stored configurations stay
   intact. See [first setup and settings](ru/SETTINGS.md).
+- The first setup and Settings are translated into all 25 panel languages. Each step
+  has its own address and browser Back moves between steps. The Telegram step asks
+  whether the account is separate; a main account records only chosen chats, also
+  when Settings change the chats later. Start stays on the setup and shows that the
+  connection, event intake, sources and attachments work before offering what to do
+  next. A change of IP protection through Settings is a signed journal record, and the
+  journal names the new connection and settings records.
 
 ## 0.8.0 preview · 2 November 2026
 
