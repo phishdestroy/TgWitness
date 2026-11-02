@@ -86,6 +86,10 @@ if not source.is_relative_to(root) or not source.is_file():
 flag = '--output' if '--output' in args else '-o'
 destination = pathlib.Path(args[args.index(flag) + 1])
 shutil.copyfile(source, destination)
+if os.environ.get('TGW_CHECK_TAMPER_SIGNATURE') == '1' and relative.endswith('.whl.sig'):
+    raw = bytearray(destination.read_bytes())
+    raw[0] ^= 1
+    destination.write_bytes(raw)
 with open(os.environ['TGW_CHECK_DOWNLOADS'], 'a') as stream:
     stream.write(relative + '\n')
 ''', encoding="utf-8")
@@ -98,6 +102,13 @@ with open(os.environ['TGW_CHECK_DOWNLOADS'], 'a') as stream:
         subprocess.run([bash, "-n", script], check=True)
         subprocess.run([bash, script, "--plan"], env=env, check=True)
         assert not app.exists(), "Planning changed the filesystem"
+        rejected_app = scratch / "rejected signature"
+        rejected = subprocess.run([bash, script, "--no-start"],
+                                  env=dict(env, TGWITNESS_INSTALL_DIR=str(rejected_app), TGW_CHECK_TAMPER_SIGNATURE="1"),
+                                  capture_output=True, text=True, timeout=300)
+        assert rejected.returncode != 0 and "Release signature rejected" in rejected.stderr, "A corrupt signature was not rejected"
+        assert not list((rejected_app / "versions").glob("*/.ready")), "A rejected package was activated"
+        print("Altered release signature: refused before package installation", flush=True)
         subprocess.run([bash, script, "--no-start"], env=env, check=True, timeout=900)
         launcher = app / "bin" / "tgwitness"
         original = launcher.read_bytes()
