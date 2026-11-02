@@ -165,24 +165,6 @@ alone does not prove Telegram origin or complete history.
 
 [Verification guide](docs/TRUST.md) · [Checks and tested scale](docs/VERIFICATION.md)
 
-### A dossier built for its reader
-
-[![Fictional evidence dossier with a case cover, record counts and a signed-file check](docs/assets/reports/dossier-en.png)](docs/CASE_REPORTS.md)
-
-An offline HTML report for exploring records; a signed PDF with a cover, summary,
-evidence map and observation timeline; a ZIP with authoritative data and verification
-instructions. Every conclusion has its basis, limits and independent review step.
-The preview uses fictional messages and a disposable demonstration key.
-
-**Report studio** adds three designs and a live draft preview. Choose daily activity,
-weekday/hour heatmaps, participant and chat rankings, and record composition.
-Charts use included records, preserve unknowns and carry their exact aggregates in
-the signed archive. Sharing copies calculate their statistics after minimization.
-
-[![Fictional report analytics: activity timeline, heatmap, participants and chats](docs/assets/reports/studio-analytics.png)](docs/CASE_REPORTS.md#report-studio)
-
-[Report design and sample generation](docs/CASE_REPORTS.md)
-
 **Case Board** keeps a private investigation feed alongside the evidence: bookmarks, exact-version
 highlights, slices of every recorded action, collections and team discussions. Notes have their own
 signed history and access rights. Reports label them as team opinions; minimized handovers include

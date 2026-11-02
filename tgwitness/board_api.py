@@ -42,9 +42,10 @@ def register(app, authenticate, workspace):
                     return function(app.state.store.db, current(request))
                 with app.state.store.snapshot() as snapshot:
                     who = current(request)
-                    authorization = copy.deepcopy(who.public())
+                    authorization = copy.deepcopy((who.public(), who.chats(workspace)))
                     result = function(snapshot.connection, who)
-                    if authorization != current(request).public():
+                    latest = current(request)
+                    if authorization != (latest.public(), latest.chats(workspace)):
                         raise Refused("Access changed during this read. Reload the board.")
                     return result
             except Refused as exc:
@@ -149,7 +150,7 @@ def register(app, authenticate, workspace):
             if grant.get("revoked_at") or grant.get("expires_at") and grant["expires_at"] <= time.time():
                 continue
             try:
-                board.require_scope(Principal(False, grant["label"], grant), workspace, scope)
+                board.require_scope(Principal(False, grant["label"], grant, group_of=app.state.access.group_of), workspace, scope)
             except Refused:
                 continue
             result.append({"id": grant["id"], "label": grant["label"]})

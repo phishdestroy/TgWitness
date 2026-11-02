@@ -85,10 +85,10 @@ async def stream(store, after, authorize, disconnected, *, interval=1, lifetime=
         if board_authorize:
             from .board import notifications as board_notifications
             principal = board_authorize()
-            authorization = copy.deepcopy(principal.public()) if principal else None
+            authorization = copy.deepcopy((principal.public(), principal.chats(workspace))) if principal else None
             notes, next_board = await asyncio.to_thread(board_notifications, store, board_after, principal, workspace)
             current = board_authorize()
-            if principal and current and authorization == current.public():
+            if principal and current and authorization == (current.public(), current.chats(workspace)):
                 board_after = next_board
                 if notes:
                     yield "event: board\ndata: " + json.dumps(notes, separators=(",", ":")) + "\n\n"
