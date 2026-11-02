@@ -18,6 +18,22 @@ from tgwitness import panelctl as panel  # noqa: E402
 
 
 class SetupChecks(unittest.TestCase):
+    def test_printed_guide_supports_legacy_windows_output(self):
+        from tgwitness.operator_guide import write
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write(root, windows=True)
+            saved = (root / "START-HERE.txt").read_bytes()
+            with io.BytesIO() as raw, io.TextIOWrapper(raw, encoding="cp1252") as output:
+                with contextlib.redirect_stdout(output):
+                    panel.guide(root, print_text=True)
+                output.flush()
+                printed = raw.getvalue().decode("cp1252")
+            self.assertIn("Access > My limits", printed)
+            self.assertIn("tgwitness.cmd' token rotate", printed)
+            self.assertIn("https://github.com/phishdestroy/TgWitness", printed)
+            self.assertEqual((root / "START-HERE.txt").read_bytes(), saved)
+
     def test_offline_guide_is_safe_repeatable_and_preserves_unrelated_files(self):
         from tgwitness.operator_guide import write
         with tempfile.TemporaryDirectory() as tmp:
