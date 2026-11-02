@@ -1,13 +1,3 @@
-"""Check group settings (group_settings.py, views/group-settings.js) in a browser; tools/test_group_settings.py
-covers the server rules.
-
-Every new string is translated in each panel language. A group shares a goal: the preview lists the accounts
-with a different value; Settings of an account then marks each value 🔗 from the group or ✏️ its own and
-returns it to the group's; an account's own value is kept when the group changes; a value one account has
-becomes the group's; moving an account into the group offers the group's values; an access can open a group;
-the journal names the new records. The group page and the marked Settings at 360, 600, 1024 and 1440 pixels
-in English and Russian, without horizontal overflow or console errors.
-"""
 import json
 import re
 import sys
@@ -18,7 +8,6 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "tools"))
 
-# Strings of group settings outside views/group-settings.js: Settings, Accounts, Access, the journal and the server.
 EXTRA = (
     "From the group", "Own value", "Return to the group value", "This account is in the group {name}.",
     "🔗 marks a value from the group; ✏️ marks this account’s own value.", "Group settings", "Shared with the group",
@@ -50,7 +39,6 @@ def group_keys():
     keys = script_keys(source)
     keys += re.findall(r"\['[a-z_]+','([^']+)'\]", re.search(r"const OTHER=\[(.*?)\];", source, re.S).group(1))
     keys += re.findall(r"(?:button|message)\('([^']+)'", source)
-    # The names of the shared settings come from the server, Parameters included.
     keys += list(group_settings.LABELS.values())
     return list(dict.fromkeys([*keys, *EXTRA]))
 
@@ -66,7 +54,6 @@ def check_translations():
 
 
 def overflow(page):
-    """Elements past the screen edge, except inside their own scrolling box."""
     return page.evaluate("""() => [...document.querySelectorAll('#view-settings *')].filter(e => {
         const r = e.getBoundingClientRect();
         if (!r.width || (r.right <= innerWidth + 1 && r.left >= -1)) return false;
@@ -77,7 +64,6 @@ def overflow(page):
 
 
 def answer(page, ticks=None):
-    """Confirm the group change preview; ticks maps an account label to its wanted checkbox state."""
     from playwright.sync_api import expect
     dialog = page.locator("dialog.panel-dialog[open]")
     expect(dialog).to_have_count(1)
@@ -107,7 +93,6 @@ def check_browser(directory, output):
         page.evaluate("async g=>{await json('profiles/default/group',{group:g},{root:true,method:'PUT'});await loadProfiles();}", group)
         store = lambda pid: registry.entries[pid]["app"].state.store
 
-        # The group's page opens from Accounts; the group starts sharing a goal, by default for every account.
         navigate_panel(page, "accounts")
         page.locator("#accounts-groups").evaluate("element=>element.open=true")
         page.locator('[data-action="shared-settings"]').click()
@@ -128,7 +113,6 @@ def check_browser(directory, output):
         answer(page)
         expect(page.locator('#view-settings [data-setting="files"] select')).to_have_value("all")
 
-        # The account's Settings: 🔗 from the group, ✏️ its own value, and back.
         page.get_by_role("button", name="Back to account settings").click()
         expect(page.locator("#view-settings .hub-group-note")).to_contain_text("This account is in the group Harbor case.")
         page.locator('#view-settings .hub-summary[data-section="collection"]').click()
@@ -141,7 +125,6 @@ def check_browser(directory, output):
         expect(mark).to_have_attribute("data-inherit", "group")
         assert store("default").get_setting("capture")["max_media_mb"] == 1000
 
-        # Alpha keeps its own value when the group changes, unless ticked.
         result = page.evaluate("""async id=>{const s=await json('settings',undefined,{profile:id});
             return json('settings/edit',{key:'files',value:'photos',revision:s.revision},{profile:id});}""", alpha)
         assert result["inheritance"]["keys"]["files"]["source"] == "own"
@@ -156,7 +139,6 @@ def check_browser(directory, output):
         assert store(alpha).get_setting("capture")["max_media_mb"] == 20
         assert store(alpha).get_setting("capture")["types"]["video"]["enabled"] is False
 
-        # A value one account has becomes the group's.
         page.evaluate("json('parameters',{values:{snapshot_max:777}})")
         page.get_by_role("button", name="Back to account settings").click()
         page.locator('#view-settings .hub-group-note').get_by_role("button", name="Group settings").click()
@@ -169,7 +151,6 @@ def check_browser(directory, output):
         expect(row).to_contain_text("2 of 2 accounts follow the group")
         assert store(alpha).get_setting("parameters")["snapshot_max"] == 777
 
-        # Moving an account into the group offers the group's values.
         navigate_panel(page, "accounts")
         page.locator(f'.account-card[data-profile="{beta}"] .fleet-card-group').select_option(group)
         expect(dialog).to_contain_text("Take the group's values?")
@@ -178,7 +159,6 @@ def check_browser(directory, output):
         assert store(beta).get_setting("goal_preset")["goal"] == "watch"
         assert store(beta).get_setting("parameters")["snapshot_max"] == 777
 
-        # An access can open the whole group, including accounts added to it later.
         navigate_panel(page, "access")
         expect(page.locator("#access-groups")).to_be_visible()
         expect(page.locator("#access-group-list")).to_contain_text("Group Harbor case · 3 accounts")
@@ -190,7 +170,6 @@ def check_browser(directory, output):
         assert {"group.settings_inherited", "profile_group.settings_changed", "profile_group.settings_adopted",
                 "profile_group.settings_failed", "profile_group.migrated"} <= labels
 
-        # The group page and the marked Settings at four widths, in English and Russian.
         for lang in ("en", "ru"):
             context.add_cookies([{"name": i18n.COOKIE, "value": lang, "url": server.url}])
             page.goto(server.url + "/settings?ws=default&lang=" + lang)

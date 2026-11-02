@@ -1,9 +1,3 @@
-"""The group screen: each member's account and route, its latest message, and the chats several members see.
-
-A chat several accounts see is covered while at least one of the accounts recording it observes; an
-interruption is a stretch of the last WINDOW_DAYS when none of them did (verify.Coverage decides what
-counts as observing). Collection state and problems come from /api/profiles, as on Accounts.
-"""
 import json
 import time
 from datetime import datetime, timedelta, timezone
@@ -16,7 +10,6 @@ from .verify import LIVENESS_GAP_SECONDS, MESSAGE_KINDS, Coverage, parse_time
 
 WINDOW_DAYS = 7
 CHATS_SHOWN = 200
-# The records verify.Coverage reads to tell continuous observation from interruptions.
 STATE_KINDS = ("observation.started", "observation.stopped", "process.started", "process.stopped",
                "coverage.gap", "connection.restored", "collector.heartbeat", "parameters.changed")
 OPENING = ("observation.started", "observation.stopped", "process.started", "process.stopped")
@@ -32,7 +25,6 @@ def allowed_silence(store):
 
 
 def observed(store, since):
-    """Continuous observation periods of one workspace from `since`; reused for a minute."""
     cached = _periods.get(id(store))
     if cached and cached[0] == since[:15] and time.monotonic() - cached[1] < 60:
         return cached[2]
@@ -45,7 +37,6 @@ def observed(store, since):
         rows = store.db.execute(
             "SELECT observed_at,kind,chat_id,message_id,payload FROM events WHERE observed_at>=? AND kind IN ("
             + ",".join("?" * len(STATE_KINDS)) + ") ORDER BY seq", (since, *STATE_KINDS)).fetchall()
-    # Observation that began before the window is open at its start.
     if before and before["kind"] == "observation.started":
         coverage.open(since)
     for row in rows:
@@ -57,7 +48,6 @@ def observed(store, since):
 
 
 def interruptions(periods, start, end, allowed):
-    """Stretches between start and end that no period covers, ignoring silences up to `allowed`."""
     holes, cursor = [], start
     for low, high in sorted(p for p in periods if p[1] > start):
         if low - cursor > allowed:
@@ -87,8 +77,7 @@ def member(entry, app):
     return {"id": entry["id"], "label": entry["label"], "available": True,
             "username": account.get("username"), "account_id": account.get("id"),
             "account_kind": wizard_state(app).get("account_kind"),
-            "route": {"mode": current["mode"], "latency_ms": check.get("latency_ms") if measured else None,
-                      "checked_at": check.get("checked_at") if measured else None},
+            "route": {"mode": current["mode"], "latency_ms": check.get("latency_ms") if measured else None},
             "last_message": latest(store, MESSAGE_KINDS)}
 
 
@@ -122,12 +111,11 @@ def overview(registry, group_id):
         start = max(parse_time(since), min(starts))
         allowed = timedelta(seconds=max(allowed_silence(stores[p]) for p in chat["recorded_by"]))
         holes = interruptions([p for period in recording for p in period], start, now, allowed)
-        chat["coverage"] = {"observed": True, "from": iso(start), "interruptions": len(holes),
+        chat["coverage"] = {"observed": True, "interruptions": len(holes),
                             "seconds_unobserved": round(sum((b - a).total_seconds() for a, b in holes))}
-    return {"group": {"id": group["id"], "label": group["label"], "goal": (group.get("values") or {}).get("goal"),
-                      "members": len(members)},
+    return {"group": {"id": group["id"], "label": group["label"], "goal": (group.get("values") or {}).get("goal")},
             "members": members, "chats": shared, "chats_total": sum(len(c["seen_by"]) > 1 for c in seen.values()),
-            "window_days": WINDOW_DAYS, "computed_at": iso(now)}
+            "window_days": WINDOW_DAYS}
 
 
 def register(app, authenticate):

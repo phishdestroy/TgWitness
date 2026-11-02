@@ -1,5 +1,3 @@
-// The group screen (/groups/<id>): its goal, what needs attention, each account, and chats several accounts see.
-// Collection state and problems come from the panel's profile list, as on Accounts; the rest from /overview.
 export function createGroupView(ctx){
   const {root,json,tr,trn,node,toast}=ctx;
   let groupId=null,data=null,serial=0,working=false;
@@ -20,7 +18,6 @@ export function createGroupView(ctx){
     if(request!==serial||groupId!==id)return;
     data=result;render();
   }
-  // Like Accounts: failed, degraded or unknown parts, each with its reason; a signed-out account first.
   function problems(id){
     const p=profile(id);if(!p)return [];
     if(p.error_type)return [{part:null,text:tr('Unavailable: {error}',{error:p.error_type})}];
@@ -62,8 +59,6 @@ export function createGroupView(ctx){
     title.append(node('div','eyebrow',tr('Group')),node('h1','',g.label));
     const goal=goals[g.goal];
     title.append(node('p','group-goal',goal?goal[0]+' '+tr('Goal')+': '+tr(goal[1]):tr('No goal yet: choose one in the group settings.')));
-    // Trust level of the group: filled in by the trust scale (stage 5).
-    const trust=node('div','group-trust');trust.dataset.slot='trust';trust.hidden=true;
     const attention=node('div','group-attention'),troubled=data.members.filter(m=>problems(m.id).length);
     attention.dataset.count=String(troubled.length);
     if(!troubled.length)attention.append(node('span','group-ok','✓ '+tr('Nothing needs attention.')));
@@ -73,7 +68,7 @@ export function createGroupView(ctx){
         link.addEventListener('click',()=>{const card=root.querySelector('#group-account-'+CSS.escape(m.id));card?.scrollIntoView({block:'center'});card?.focus({preventScroll:true});});
         attention.append(link);}
     }
-    box.append(title,trust,attention);return box;
+    box.append(title,attention);return box;
   }
   function actions(){
     const box=node('div','group-actions'),members=data.members.map(m=>profile(m.id)).filter(Boolean),collect=ctx.may('collect');
@@ -82,7 +77,6 @@ export function createGroupView(ctx){
     pause.disabled=working||!collect||!members.some(p=>p.collector?.running);
     const route=button('Change the group route',()=>ctx.openConnection({scope:'group',group:groupId})),goal=button('Apply a goal',()=>ctx.openGroupSettings(groupId));
     const settings=button('Group settings',()=>ctx.openGroupSettings(groupId),'quiet small');
-    // One ZIP: each account's own signed export, unchanged, and a manifest signed by the main workspace.
     const save=button('Export group',async()=>{
       if(!(await window.TgWitnessDialogs.confirm(tr('Export the records of every account in the group {name}?',{name:data.group.label}),{confirmText:tr('Prepare export')})))return;
       if(await ctx.exportGroup(groupId,data.group.label)!==false)toast(tr('Group export saved: each account’s signed export and a signed list of them.'));
@@ -99,7 +93,7 @@ export function createGroupView(ctx){
     who.append(ctx.avatarNode(m.account_id??null,m.username||m.label,'',m.id),name);head.append(who);
     if(p?.health&&!p.error_type)head.append(ctx.stateBadge(p.health.state,'account-badge'));
     box.append(head);
-    if(m.account_kind){const kind=node('span','group-kind '+m.account_kind,tr(m.account_kind==='main'?'Main account':'Dedicated account'));box.append(kind);}
+    if(m.account_kind)box.append(node('span','group-kind '+m.account_kind,tr(m.account_kind==='main'?'Main account':'Dedicated account')));
     if(m.available&&p){
       const facts=node('dl','account-meta');
       const pair=(k,v,field)=>{const item=node('div','account-value');item.dataset.field=field;item.append(node('dt','',tr(k)),node('dd','',v));facts.append(item);};
@@ -143,7 +137,6 @@ export function createGroupView(ctx){
     if(data.chats_total>data.chats.length)box.append(node('p','hint',tr('Showing {n} of {total}.',{n:data.chats.length,total:data.chats_total})));
     return box;
   }
-  // Status polls redraw only when a member's collection state changed, so controls keep focus and hover.
   const stamp=()=>JSON.stringify((data?.members||[]).map(m=>{const p=profile(m.id);
     return p&&[p.error_type,p.health?.state,p.collector?.running,p.collector?.phase,p.collector?.has_session,
       ...['connection','intake','sources','media'].map(part=>p.health?.[part]?.state+':'+p.health?.[part]?.reason)];}));
@@ -159,8 +152,7 @@ export function createGroupView(ctx){
     root.replaceChildren(back,header(),actions(),node('h2','group-section',tr('Accounts')),grid,chats());
     if(focus)root.querySelector('#'+CSS.escape(focus))?.focus({preventScroll:true});
   }
-  return {load,render,
+  return {load,
     status(){if(data&&!working&&stamp()!==shown)render();},
-    get id(){return groupId;},
     reset(){serial++;groupId=null;data=null;working=false;root.replaceChildren();}};
 }

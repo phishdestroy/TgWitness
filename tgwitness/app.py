@@ -2546,7 +2546,6 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             raise
         return path, export_history.headers(receipt)
 
-    # A group export (group_export.py) asks each member workspace for its own signed export.
     app.state.build_export = build_export
 
     @app.get("/api/export/{fmt}", dependencies=[Depends(authenticate)])

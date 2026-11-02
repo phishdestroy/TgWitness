@@ -1,9 +1,3 @@
-"""Export a group: each member's own signed evidence ZIP, unchanged, in one ZIP with a signed manifest.
-
-Each account file is exactly what that workspace's Exports would give and verifies on its own. The manifest
-lists their SHA-256 and signing-key fingerprints and is signed by the main workspace, which also keeps the
-bundle under Prepared exports and records the export in its journal.
-"""
 import asyncio
 import hashlib
 import json
@@ -30,7 +24,6 @@ def digest(path):
 
 
 def bundle(directory, group, parts, vault):
-    """parts: (workspace id, label, export path, signing public key) per member."""
     handle, name = tempfile.mkstemp(prefix="tgwitness-group-", suffix=".zip", dir=directory)
     path = Path(name)
     try:

@@ -1233,7 +1233,6 @@ const accountsReady=import("./views/accounts.js?v=30").then(({createAccounts})=>
   if(state.view==='accounts')renderAccounts();
   return accountsView;
 }).catch(error=>toast(error.message,true));
-// The group screen (views/group.js): actions on a member open that member's workspace first.
 let groupView=null;
 const groupViewReady=import("./views/group.js?v=1").then(({createGroupView})=>{
   groupView=createGroupView({root:$("view-group"),json,tr,trn,node,toast,getState:()=>state,avatarNode,stateBadge,
@@ -1249,7 +1248,6 @@ window.TgWitnessOpenGroup=openGroup;
 async function openChatIn(profileId,chatId){
   if(state.profile!==profileId&&await switchProfile(profileId)===false)return false;
   if(state.profile!==profileId||!state.token)return false;
-  // One history step: Back returns to the group screen.
   await navigate('chats',{load:false,history:false});await refreshChats(false,chatId);
   return await openChat(chatId)!==false;
 }
@@ -2364,7 +2362,6 @@ const exportLanguage=()=>$("export-language").value;
 async function download(path,filename,stream=false,root=false,body=undefined,progress=()=>{}){
   workspaceSafety?.assert();
   const profile=state.profile,revision=state.workspaceRevision;
-  // A group export names its group in its own confirmation (views/group.js), not the open workspace.
   if((/export|handover|history\/report/.test(path))&&!path.startsWith('profile-groups/')&&!(await workspaceSafety.confirmExport())){progress({phase:'cancelled'});return false;}
   const current=()=>{workspaceSafety?.assert();if(profile!==state.profile||revision!==state.workspaceRevision)throw new StaleView();};
   let handle=null,writer=null,reader=null;
@@ -5047,7 +5044,6 @@ function accessScope(g){
   return [...groups,...Object.entries(g.workspaces).map(([id,chats])=>chats===null?tr("{workspace}: every chat",{workspace:workspaceName(id)}):
     trn("{workspace}: {n} chat","{workspace}: {n} chats",chats.length,{workspace:workspaceName(id)}))].join("; ");
 }
-// Groups open every account in them, including ones added later; the list arrives with the access overview.
 let accessGroupChoice=[];
 function renderAccessGroups(selected){
   const box=$("access-group-list"),groups=state.access?.groups||[];

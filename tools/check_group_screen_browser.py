@@ -1,13 +1,3 @@
-"""Check the group screen (group_overview.py, views/group.js) in a browser; tools/test_group_overview.py covers
-the server.
-
-Every new string is translated in each panel language. Accounts opens the group at /groups/<id>, which also
-opens directly. The header names the goal and what needs attention; each account shows its kind, route,
-latest message and problems with Fix; a chat two accounts see shows its coverage, opens in a member's
-workspace and starts an export with both accounts chosen. Exporting the group asks naming it and saves one
-ZIP. Bulk Start and Pause ask first. At 360, 600, 1024 and 1440 pixels in English and Russian, without
-horizontal overflow or console errors.
-"""
 import json
 import re
 import sys
@@ -18,7 +8,6 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "tools"))
 
-# Strings of the group screen outside views/group.js: Accounts, the journal and the server.
 EXTRA = ("Open group", "Group", "Group exported", "This group has no accounts to export.",
          "Every account of the group must be available to export it.")
 WIDTHS = (360, 600, 1024, 1440)
@@ -79,7 +68,6 @@ def check_browser(directory, output):
         store(alpha).append("message.new", {"text": "hello", "sender": {"id": 5}}, chat_id=CHANNEL, message_id=7)
         page.evaluate("loadProfiles()")
 
-        # Accounts opens the group screen at its own address.
         navigate_panel(page, "accounts")
         page.locator("#accounts-groups").evaluate("element=>element.open=true")
         page.locator('[data-action="open-group"]').click()
@@ -93,7 +81,6 @@ def check_browser(directory, output):
         expect(card.locator('[data-field="last"]')).not_to_contain_text("none yet")
         expect(page.locator(f'#view-group .group-account[data-profile="{beta}"] [data-field="last"]')).to_contain_text("none yet")
 
-        # The chat both accounts see: coverage, open in a member's workspace, export with both accounts.
         chat = page.locator("#view-group .group-chat")
         expect(chat).to_have_count(1)
         expect(chat).to_contain_text("2 of 2 accounts see it")
@@ -110,7 +97,6 @@ def check_browser(directory, output):
         expect(dialog.locator("#export-dialog-accounts input:checked")).to_have_count(2)
         page.locator("#export-dialog-cancel").click()
 
-        # The group export asks naming the group, then saves one ZIP and records it.
         page.evaluate("g=>window.TgWitnessOpenGroup(g)", group)
         expect(page.locator("#view-group h1")).to_have_text("Harbor case")
         page.evaluate("window.showSaveFilePicker=undefined")
@@ -123,7 +109,6 @@ def check_browser(directory, output):
         expect(page.locator("#toast")).to_contain_text("Group export saved")
         assert "profile_group.exported" in {r[0] for r in server.app.state.store.db.execute("SELECT kind FROM events")}
 
-        # A direct link opens the screen; bulk Pause asks first.
         page.goto(server.url + "/groups/" + group + "?ws=default")
         expect(page.locator("#view-group h1")).to_have_text("Harbor case", timeout=20000)
         pause = page.locator("#view-group .group-actions").get_by_role("button", name="Pause all")
@@ -132,7 +117,6 @@ def check_browser(directory, output):
             confirm = page.locator("dialog.panel-dialog[open]")
             expect(confirm).to_contain_text("Pause")
             confirm.locator("button[value=cancel], button:not([type=submit])").first.click()
-        # A malformed address is not a panel page; an unknown group says so.
         assert page.goto(server.url + "/groups/" + "0" * 31 + "x?ws=default").status == 404
         page.goto(server.url + "/groups/" + "0" * 32 + "?ws=default")
         expect(page.locator("#toast")).to_contain_text("Unknown account group.", timeout=20000)
@@ -151,7 +135,6 @@ def check_browser(directory, output):
             if lang == "ru":
                 expect(page.locator("#view-group .group-section")).to_have_text(i18n.words("ru")["Accounts"])
         browser.close()
-    # The malformed and unknown group addresses above answer 404 and 400 on purpose.
     errors = [e for e in errors if not re.fullmatch(r"Failed to load resource: .* status of (400|404) .*", e)]
     assert not errors, errors
     return "ok  browser: open from Accounts and by address, header, account cards, shared chat coverage, " \

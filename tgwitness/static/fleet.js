@@ -103,7 +103,6 @@
     return select;
   }
 
-  // A moved account keeps its settings; where they differ from what the group shares, offer the group's.
   async function offerShared(groupId, profileId) {
     const shared = await json("profile-groups/" + encodeURIComponent(groupId) + "/settings", undefined, {root: true});
     const member = shared.members.find(m => m.id === profileId);

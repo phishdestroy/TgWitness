@@ -8,7 +8,6 @@ const cards=new Set(["setup","alerts","evidence","cloud","bot","github","storage
 // The first setup (views/settings-hub.js): one address per step, /first-run/1 to /first-run/7.
 const firstRunStep=value=>/^[1-7]$/.test(value||"")?Number(value):null;
 const workspacePattern=/^(?:default|[a-f0-9]{32})$/;
-// An account group screen (views/group.js): /groups/<group id>.
 const groupPattern=/^[a-f0-9]{32}$/;
 const integer=value=>/^-?\d+$/.test(value||"")&&Number.isSafeInteger(Number(value))&&Number(value)!==0?Number(value):null;
 

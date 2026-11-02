@@ -15,7 +15,6 @@ export function createSettingsHub(ctx) {
   let autoTried=false, routeDirty=false;
   // After Start: the live check of the four collector parts. visited bounds browser Forward to steps already seen.
   let live=null, liveTimer=null, visited=0, recordedStep=null, shownSession=null;
-  // Settings shows one account, or the shared settings of a group when groupScope names it.
   let groupScope=null;
   let preferencesQueue=Promise.resolve(), draftQueue=Promise.resolve(), preferencesSequence=0, draftSequence=0, checkSequence=0;
   const owner=()=>({generation,profile:state.profile,token:state.token,revision:state.workspaceRevision});
@@ -182,7 +181,6 @@ export function createSettingsHub(ctx) {
     },'text-link'));
     return row;
   }
-  // In a group: 🔗 the value comes from the group, ✏️ this account keeps its own until returned to the group's.
   const inherited=key=>data?.inheritance?.keys?.[key];
   async function adoptGroup(keys,who=owner()){
     requireOwner(who);
@@ -191,7 +189,6 @@ export function createSettingsHub(ctx) {
   }
   function revertKey(key){
     const item=inherited(key);
-    // A route changes only after its connection check.
     if(key==='route')return ctx.openConnection({scope:'account',mode:item.group_value.mode});
     if(data.fields.some(f=>f.key===key))return edit(key,item.group_value);
     return adoptGroup([key]);
