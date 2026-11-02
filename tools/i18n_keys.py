@@ -49,6 +49,9 @@ DYNAMIC_SCRIPT_KEYS = (
     "Starting",
     "Open the panel address and sign in with the panel token.", "Connect a Telegram account in the server's panel.",
     "Choose the chats to observe.", "Save the deployment record",
+    "Phala Cloud confidential virtual machine", "Usually a few minutes", "TgWitness installs itself in the confidential virtual machine",
+    "Usually several minutes; the panel waits up to 40", "The server answers with its signing key and Intel's attestation",
+    "Save the measured docker-compose file",
 )
 
 

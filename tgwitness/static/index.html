@@ -24,7 +24,7 @@
 <script src="/theme.js?v=0.7.0"></script>
 <script src="/guide-locale.js" data-scope="panel"></script>
 <script defer src="/i18n.js?v=0.7.0"></script>
-<script defer src="/app.js?v=0.7.0-handoff2-setup2"></script>
+<script defer src="/app.js?v=0.7.0-handoff2-setup2-phala2"></script>
 <script defer src="/integrations.js?v=2"></script>
 <script defer src="/analysis.js?v=3"></script>
 <script defer src="/media-analysis.js?v=2"></script>
@@ -656,20 +656,39 @@
     <p class="notice warning" hidden id="cloud-remote">This panel is reached over a network, so it does not take cloud tokens. Create servers from TgWitness on your own computer, or run the commands below.</p>
     <div hidden id="cloud-wizard">
       <form id="cloud-setup">
-        <div class="card padded extra-step"><div class="extra-step-heading"><span class="step-number" aria-hidden="true">1</span><div><h3>Where should the server be?</h3><p>Data protection law follows the country: for EU cases choose Europe. Hetzner rents out the server and bills you directly, not TgWitness.</p></div></div>
-          <div aria-label="Server region" class="scope-modes cloud-regions" role="radiogroup">
-            <label><input checked name="cloud-region" type="radio" value="eu"><span><strong>Europe</strong><small>Germany · usually the lowest price</small></span></label>
-            <label><input name="cloud-region" type="radio" value="us"><span><strong>United States</strong><small>Virginia or Oregon</small></span></label>
+        <div class="card padded extra-step"><div class="extra-step-heading"><span class="step-number" aria-hidden="true">1</span><div><h3>Which server, and where?</h3><p>The provider rents out the server and bills you directly, not TgWitness.</p></div></div>
+          <div aria-label="Server kind" class="scope-modes cloud-hosts" role="radiogroup">
+            <label><input checked name="cloud-host" type="radio" value="hetzner"><span><strong>Ordinary server · Hetzner</strong><small>Lowest price. Hetzner's and Cloudflare's records can be checked, but Hetzner could read the server's memory.</small></span></label>
+            <label><input name="cloud-host" type="radio" value="phala"><span><strong>Confidential virtual machine · Phala Cloud</strong><small>Intel TDX: the processor attests which code runs, and the host cannot read its memory. Costs more.</small></span></label>
           </div>
+          <div data-cloud-host="hetzner">
+            <p class="hint">Data protection law follows the country: for EU cases choose Europe.</p>
+            <div aria-label="Server region" class="scope-modes cloud-regions" role="radiogroup">
+              <label><input checked name="cloud-region" type="radio" value="eu"><span><strong>Europe</strong><small>Germany · usually the lowest price</small></span></label>
+              <label><input name="cloud-region" type="radio" value="us"><span><strong>United States</strong><small>Virginia or Oregon</small></span></label>
+            </div>
+          </div>
+          <p class="hint" data-cloud-host="phala" hidden>Phala Cloud chooses the data centre; the deployment record names it. Every answer of the server carries Intel's attestation, which TgWitness checks against Intel's own certificates.</p>
         </div>
-        <div class="card padded extra-step"><div class="extra-step-heading"><span class="step-number" aria-hidden="true">2</span><div><h3>Connect Hetzner</h3><p>One access token. It stays in this tab and reaches TgWitness on this computer only while a task runs; nothing stores it.</p></div></div>
-          <div class="witness-fields">
-            <label for="cloud-hetzner-token">Hetzner API token<input autocomplete="off" id="cloud-hetzner-token" required spellcheck="false" type="password"></label>
+        <div class="card padded extra-step"><div class="extra-step-heading"><span class="step-number" aria-hidden="true">2</span><div><h3 data-cloud-host="hetzner">Connect Hetzner</h3><h3 data-cloud-host="phala" hidden>Connect Phala Cloud</h3><p>One access token. It stays in this tab and reaches TgWitness on this computer only while a task runs; nothing stores it.</p></div></div>
+          <div data-cloud-host="hetzner">
+            <div class="witness-fields">
+              <label for="cloud-hetzner-token">Hetzner API token<input autocomplete="off" id="cloud-hetzner-token" spellcheck="false" type="password"></label>
+            </div>
+            <details class="extra-detail"><summary>How to get the Hetzner token</summary>
+              <ol class="cloud-howto"><li>Open the Hetzner console and create a project, for example TgWitness. A new account asks for a payment method first.</li><li>In the project, open Security → API tokens → Generate API token.</li><li>Choose Read &amp; Write, create the token and copy it: Hetzner shows it only once.</li></ol>
+              <a class="text-link cloud-link" href="https://console.hetzner.com/projects" rel="noopener noreferrer" target="_blank">Open the Hetzner console ↗</a><a class="text-link cloud-link" href="https://docs.hetzner.com/cloud/api/getting-started/generating-api-token/" rel="noopener noreferrer" target="_blank">Hetzner's guide ↗</a>
+            </details>
           </div>
-          <details class="extra-detail"><summary>How to get the Hetzner token</summary>
-            <ol class="cloud-howto"><li>Open the Hetzner console and create a project, for example TgWitness. A new account asks for a payment method first.</li><li>In the project, open Security → API tokens → Generate API token.</li><li>Choose Read &amp; Write, create the token and copy it: Hetzner shows it only once.</li></ol>
-            <a class="text-link cloud-link" href="https://console.hetzner.com/projects" rel="noopener noreferrer" target="_blank">Open the Hetzner console ↗</a><a class="text-link cloud-link" href="https://docs.hetzner.com/cloud/api/getting-started/generating-api-token/" rel="noopener noreferrer" target="_blank">Hetzner's guide ↗</a>
-          </details>
+          <div data-cloud-host="phala" hidden>
+            <div class="witness-fields">
+              <label for="cloud-phala-token">Phala Cloud API key<input autocomplete="off" id="cloud-phala-token" spellcheck="false" type="password"></label>
+            </div>
+            <details class="extra-detail"><summary>How to get the Phala Cloud API key</summary>
+              <ol class="cloud-howto"><li>Sign up at Phala Cloud and add credit: it bills the confidential virtual machine by the hour.</li><li>In the dashboard, open your account settings → API Keys and create a key.</li><li>Copy the key: it starts with phak_.</li></ol>
+              <a class="text-link cloud-link" href="https://cloud.phala.com/" rel="noopener noreferrer" target="_blank">Open Phala Cloud ↗</a><a class="text-link cloud-link" href="https://docs.phala.com/phala-cloud/what-is/what-is-phala-cloud" rel="noopener noreferrer" target="_blank">Phala Cloud documentation ↗</a>
+            </details>
+          </div>
           <details class="extra-detail" id="cloud-own-domain"><summary>Optional · your own domain instead of a trycloudflare.com address</summary>
             <p class="hint">Without a domain the panel gets a free random address on trycloudflare.com. It changes whenever the server restarts; Your servers below finds the current one. Cloudflare keeps no record of such an address, so a verifier cannot check which machine serves it. Under your own domain the address stays the same and Cloudflare's records can be checked.</p>
             <div class="witness-fields">
@@ -678,7 +697,7 @@
             <ol class="cloud-howto"><li>Your domain must be in your Cloudflare account; the free plan is enough. The panel gets an address in it, such as tgw-1a2b3c.your-domain.org.</li><li>Open the prepared token page: Zone Read, DNS Edit and Cloudflare Tunnel Edit are already selected.</li><li>Choose Continue to summary, then Create token, and copy it: Cloudflare shows it only once.</li></ol>
             <a class="text-link cloud-link" href="https://dash.cloudflare.com/profile/api-tokens?permissionGroupKeys=%5B%7B%22key%22%3A%22zone%22%2C%22type%22%3A%22read%22%7D%2C%7B%22key%22%3A%22dns%22%2C%22type%22%3A%22edit%22%7D%2C%7B%22key%22%3A%22argotunnel%22%2C%22type%22%3A%22edit%22%7D%5D&amp;accountId=%2A&amp;zoneId=all&amp;name=TgWitness%20server" rel="noopener noreferrer" target="_blank">Create the Cloudflare token ↗</a><a class="text-link cloud-link" href="https://developers.cloudflare.com/registrar/get-started/register-domain/" rel="noopener noreferrer" target="_blank">Buy a domain at Cloudflare ↗</a><a class="text-link cloud-link" href="https://developers.cloudflare.com/fundamentals/manage-domains/add-site/" rel="noopener noreferrer" target="_blank">Add a domain you have ↗</a>
           </details>
-          <details class="extra-detail" id="cloud-gateway"><summary>Optional · Cloudflare Gateway DNS: a record of every name the server looks up</summary>
+          <details class="extra-detail" data-cloud-host="hetzner" id="cloud-gateway"><summary>Optional · Cloudflare Gateway DNS: a record of every name the server looks up</summary>
             <p class="hint">The server resolves names only through a DNS location in your Cloudflare account, over TLS, and the Hetzner firewall blocks DNS to anyone else. Cloudflare logs each lookup, such as github.com, pypi.org or ntfy.sh, so a verifier sees by name where the server connected. No domain is needed and the free Zero Trust plan is enough. Cloudflare keeps the log 24 hours; evidence mode on the server can copy it into the journal.</p>
             <label class="check-label"><input id="cloud-gateway-on" type="checkbox"> Resolve the server's DNS only through Cloudflare Gateway</label>
             <div class="witness-fields">
@@ -702,7 +721,7 @@
           </div>
           <p class="hint">The name is also the first part of the address. Leave both empty for a random name and the version this panel runs.</p>
         </details>
-        <label class="cloud-consent"><input id="cloud-consent" required type="checkbox"><span>I understand that Hetzner bills this server from now on, until I delete it.</span></label>
+        <label class="cloud-consent"><input id="cloud-consent" required type="checkbox"><span data-cloud-host="hetzner">I understand that Hetzner bills this server from now on, until I delete it.</span><span data-cloud-host="phala" hidden>I agree that Phala Cloud bills this confidential virtual machine by the hour from now on, until I delete it.</span></label>
         <button class="primary" id="cloud-create" type="submit">Create the server</button>
       </form>
       <div class="card padded extra-step" hidden id="cloud-job">

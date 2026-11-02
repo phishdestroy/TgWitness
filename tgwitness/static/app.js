@@ -2733,7 +2733,8 @@ $("github-form").addEventListener("submit",event=>{event.preventDefault();busy(e
 
 const CLOUD={hetzner:["Hetzner Cloud","cpx22","nbg1"],digitalocean:["DigitalOcean","s-1vcpu-2gb","fra1"],
   linode:["Akamai Cloud (Linode)","g6-standard-1","eu-central"],vultr:["Vultr","vc2-1c-2gb","fra"],
-  aws:["Amazon EC2","t3.small","eu-central-1"],generic:["Any server (self-attested)","",""]};
+  aws:["Amazon EC2","t3.small","eu-central-1"],phala:["Phala Cloud (Intel TDX)","tdx.small","any"],
+  generic:["Any server (self-attested)","",""]};
 for(const [key,[title]] of Object.entries(CLOUD))$("cloud-provider").append(new Option(key==="generic"?tr("Any server (self-attested)"):title,key));
 const shellWord=v=>/^[\w@%+=:,./-]+$/.test(v)?v:"'"+v.replaceAll("'","'\\''")+"'";
 function renderCloud(){
@@ -2753,7 +2754,8 @@ function renderCloud(){
     run("deploy",[...target,...(generic?[]:["--provider-token-file",provider+"-token.txt"]),"--cloudflare-token-file","cloudflare-token.txt"]),"",
     "# "+tr("3. Check at any time, also by someone else with read-only tokens"),
     run("verify",["--record","deployments/"+name+"/deployment.json",...(generic?[]:["--provider-token-file",provider+"-readonly.txt"]),
-      "--fingerprint","COLLECTOR_FINGERPRINT"])].join("\n");
+      "--fingerprint","COLLECTOR_FINGERPRINT",
+      ...(provider==="phala"?["--cloud-init","deployments/"+name+"/docker-compose.yaml"]:[])])].join("\n");
 }
 $("cloud-form").addEventListener("input",renderCloud);
 $("cloud-form").addEventListener("submit",e=>e.preventDefault());
@@ -2765,20 +2767,34 @@ $("cloud-copy").addEventListener("click",e=>busy(e.currentTarget,async()=>{
 // Guided server (cloud_wizard.py): the main administrator, in the panel on this computer only. Tokens stay in
 // the inputs and travel with each request; they are cleared when the panel locks. Without a Cloudflare token
 // the server gets a quick tunnel: a random trycloudflare.com address it posts, signed, for this panel to find.
+// Hetzner rents an ordinary server; Phala Cloud an Intel TDX confidential virtual machine whose attestation verify checks.
 const cloudWizard={status:null,offer:null,name:"",timer:null};
 const CLOUD_STAGES={
-  deploy:{rank:{start:0,version:1,tunnel:2,gateway:2,server:3,running:4,waiting:4,done:5},rows:[
-    [1,"Version on GitHub","A few seconds"],[2,"Cloudflare tunnel and address","A few seconds"],
-    [3,"Hetzner firewall and server","Usually under a minute"],
-    [4,"TgWitness installs itself on the server","Usually several minutes; the panel waits up to 30"],
-    [5,"The server answers with its signing key",""]]},
-  destroy:{rank:{start:0,server:1,tunnel:2,note:2,done:3},rows:[
-    [1,"Hetzner server and firewall",""],[2,"Cloudflare address and tunnel",""],[3,"Done",""]]}};
+  deploy:{rank:{start:0,version:1,tunnel:2,gateway:2,server:3,running:4,waiting:4,attestation:5,done:5},rows:{
+    hetzner:[[1,"Version on GitHub","A few seconds"],[2,"Cloudflare tunnel and address","A few seconds"],
+      [3,"Hetzner firewall and server","Usually under a minute"],
+      [4,"TgWitness installs itself on the server","Usually several minutes; the panel waits up to 30"],
+      [5,"The server answers with its signing key",""]],
+    phala:[[1,"Version on GitHub","A few seconds"],[2,"Cloudflare tunnel and address","A few seconds"],
+      [3,"Phala Cloud confidential virtual machine","Usually a few minutes"],
+      [4,"TgWitness installs itself in the confidential virtual machine","Usually several minutes; the panel waits up to 40"],
+      [5,"The server answers with its signing key and Intel's attestation",""]]}},
+  destroy:{rank:{start:0,server:1,tunnel:2,note:2,done:3},rows:{
+    hetzner:[[1,"Hetzner server and firewall",""],[2,"Cloudflare address and tunnel",""],[3,"Done",""]],
+    phala:[[1,"Phala Cloud confidential virtual machine",""],[2,"Cloudflare address and tunnel",""],[3,"Done",""]]}}};
+// Extras may be detached from the page (view lifecycle): its controls are looked up in the view's own root.
+const cloudHost=()=>viewQuery("witness",'input[name="cloud-host"]:checked')?.value||"hetzner";
+function showCloudHost(host){
+  const choice=viewQuery("witness",'input[name="cloud-host"][value="'+host+'"]');if(choice)choice.checked=true;
+  viewQueries("witness","#cloud-wizard [data-cloud-host]").forEach(el=>{el.hidden=el.dataset.cloudHost!==host;});
+}
 // One Cloudflare token serves both the domain and Gateway DNS; it may be pasted in either field.
 function cloudTokens(){
-  const domain=$("cloud-cloudflare-token").value.trim(),gateway=$("cloud-gateway-token").value.trim();
+  const host=cloudHost(),domain=$("cloud-cloudflare-token").value.trim();
+  const gateway=host==="hetzner"?$("cloud-gateway-token").value.trim():"";
   if(domain&&gateway&&domain!==gateway)throw new Error(tr("Paste the same Cloudflare token in both fields."));
-  return {hetzner_token:$("cloud-hetzner-token").value.trim(),cloudflare_token:domain||gateway};
+  return {provider:host,hetzner_token:host==="hetzner"?$("cloud-hetzner-token").value.trim():"",
+    phala_token:host==="phala"?$("cloud-phala-token").value.trim():"",cloudflare_token:domain||gateway};
 }
 const cloudFailure=error=>new Error(tr(error.message)+(error.technical?" "+tr("Details: {text}",{text:error.technical}):""));
 function cloudRandomName(){
@@ -2808,8 +2824,12 @@ function renderCloudOffer(){
   const domains=[new Option(tr("Random address on trycloudflare.com"),"quick"),...o.domains.map((d,i)=>new Option(d.name,String(i)))];
   cloudRow(list,tr("Server"),tr("{type} · {cores} vCPU · {memory} GB memory · {disk} GB disk",
     {type:s.name,cores:s.cores,memory:s.memory,disk:s.disk}));
-  cloudRow(list,tr("Location"),[o.location.city,o.location.country].filter(Boolean).join(", ")+" ("+o.location.name+")");
-  cloudRow(list,tr("Price"),tr("{price} {currency} a month including VAT, billed by Hetzner",{price:s.monthly,currency:o.currency}));
+  const phala=o.provider==="phala";
+  cloudRow(list,tr("Location"),phala?tr("Phala Cloud chooses the data centre; the deployment record names it")
+    :[o.location.city,o.location.country].filter(Boolean).join(", ")+" ("+o.location.name+")");
+  cloudRow(list,tr("Price"),phala?tr("Approximately {price} {currency} a month ({hourly} {currency} an hour), billed by Phala Cloud",
+    {price:s.monthly,hourly:s.hourly,currency:o.currency})
+    :tr("{price} {currency} a month including VAT, billed by Hetzner",{price:s.monthly,currency:o.currency}));
   cloudRow(list,tr("Panel address"),"").id="cloud-address";
   cloudRow(list,tr("Version"),"").id="cloud-version";
   cloudRow(list,tr("Access"),"").id="cloud-access";
@@ -2824,11 +2844,14 @@ function updateCloudOffer(){
   const domain=cloudDomain(),ref=$("cloud-wizard-ref").value.trim();
   $("cloud-address").textContent=domain?"https://"+($("cloud-wizard-name").value.trim()||cloudWizard.name)+"."+domain.name
     :tr("https://….trycloudflare.com · random; known once the server answers");
-  $("cloud-access").textContent=tr(domain?"No SSH and no open ports; the panel is reached only through your Cloudflare Tunnel."
+  $("cloud-access").textContent=o.provider==="phala"?tr(domain?"Intel TDX confidential virtual machine without SSH or open ports; the panel is reached only through your Cloudflare Tunnel."
+    :"Intel TDX confidential virtual machine without SSH or open ports; the panel is reached only through a Cloudflare quick tunnel.")
+    :tr(domain?"No SSH and no open ports; the panel is reached only through your Cloudflare Tunnel."
     :"No SSH and no open ports; the panel is reached only through a Cloudflare quick tunnel.");
   const accounts=o.gateway_accounts||[],chosen=accounts.find(a=>a.id===(domain?.account||$("cloud-gateway-account").value));
   show("cloud-gateway-field",o.gateway&&!domain&&accounts.length>1);
-  $("cloud-dns").textContent=!o.gateway?tr("Hetzner's resolvers; nobody you can ask keeps a log"):
+  $("cloud-dns").textContent=o.provider==="phala"?tr("Phala Cloud's resolvers; nobody you can ask keeps a log"):
+    !o.gateway?tr("Hetzner's resolvers; nobody you can ask keeps a log"):
     chosen?.locations?tr("Only through Cloudflare Gateway, account {account}: its DNS location, shared, holds this server's lookups apart by its address. The Hetzner firewall blocks any other DNS.",{account:chosen.name||chosen.id}):
     tr("Only through Cloudflare Gateway, account {account}: a DNS location of its own. The Hetzner firewall blocks any other DNS.",{account:chosen?.name||chosen?.id||""});
   $("cloud-version").textContent=ref?tr("{ref} · looked up when the task starts",{ref})
@@ -2836,10 +2859,13 @@ function updateCloudOffer(){
 }
 ["cloud-domain","cloud-wizard-name","cloud-wizard-ref","cloud-gateway-account"].forEach(id=>$(id).addEventListener("input",updateCloudOffer));
 $("cloud-gateway-on").addEventListener("change",()=>show("cloud-offer",false));
+viewQueries("witness",'input[name="cloud-host"]').forEach(input=>input.addEventListener("change",()=>{
+  showCloudHost(cloudHost());show("cloud-offer",false);
+}));
 $("cloud-setup").addEventListener("input",event=>{if(event.target.type!=="checkbox")show("cloud-offer",false);});
 $("cloud-setup").addEventListener("submit",event=>{event.preventDefault();busy($("cloud-check"),async()=>{
   const region=document.querySelector('input[name="cloud-region"]:checked').value;
-  const gateway=$("cloud-gateway-on").checked;
+  const gateway=cloudHost()==="hetzner"&&$("cloud-gateway-on").checked;
   const r=await json("cloud/check",{...cloudTokens(),region,gateway},{root:true});
   if(r.error)throw cloudFailure(r.error);
   cloudWizard.offer={...r,region,gateway};cloudWizard.name=cloudRandomName();
@@ -2862,13 +2888,14 @@ function cloudElapsed(job){
 function renderCloudJob(job){
   show("cloud-job",!!job);if(!job)return;
   const deploy=job.kind==="deploy",running=job.state==="running",plan=CLOUD_STAGES[job.kind];
+  const phala=job.provider==="phala",rows=plan.rows[phala?"phala":"hetzner"];
   $("cloud-job-title").textContent=tr(deploy?{running:"Creating the server",done:"The server is ready",failed:"The server was not created"}[job.state]
     :{running:"Deleting the server",done:"The server is deleted",failed:"The server was not fully deleted"}[job.state]);
   $("cloud-job-lead").textContent=running?tr("Keep TgWitness running on this computer until the end. Closing this tab does not stop the task."):
     tr("Server {name}",{name:job.name});
   const reached=job.state==="done"?Infinity:plan.rank[job.stage]??0,list=$("cloud-stages");list.replaceChildren();
   let marked=false;
-  for(const [rank,title,timing] of plan.rows){
+  for(const [rank,title,timing] of rows){
     const done=reached>rank,current=!done&&!marked;if(current)marked=true;
     const item=node("li",done?"done":current?(job.state==="failed"?"failed":"current"):""),mark=node("span");
     if(done)mark.append(icon("check"));else if(current&&job.state==="failed")mark.append(icon("x"));
@@ -2883,10 +2910,12 @@ function renderCloudJob(job){
     problem.append(node("span","",tr(job.error.message)));box.append(problem);
     if(job.error.technical)box.append(node("p","hint",tr("Details: {text}",{text:job.error.technical})));
     if(deploy){
-      box.append(node("p","hint",tr("Anything created before the failure is listed under Your servers. Delete it there so Hetzner stops billing it.")));
+      box.append(node("p","hint",tr(phala?"Anything created before the failure is listed under Your servers. Delete it there so Phala Cloud stops billing it."
+        :"Anything created before the failure is listed under Your servers. Delete it there so Hetzner stops billing it.")));
     }
   }else if(job.state==="done"&&deploy)renderCloudResult(box,job.result);
-  else if(job.state==="done")box.append(node("p","notice",tr("Hetzner stops billing the deleted server. Its record stays under Your servers.")));
+  else if(job.state==="done")box.append(node("p","notice",tr(phala?"Phala Cloud stops billing the deleted confidential virtual machine. Its record stays under Your servers."
+    :"Hetzner stops billing the deleted server. Its record stays under Your servers.")));
 }
 function cloudFileButton(name,file,label){
   const button=node("button","quiet",tr(label));button.type="button";
@@ -2914,6 +2943,11 @@ function renderCloudResult(box,result){
   for(const text of ["Open the panel address and sign in with the panel token.","Connect a Telegram account in the server's panel.","Choose the chats to observe."])
     steps.append(node("li","",tr(text)));
   const actions=node("div","cloud-actions");actions.append(cloudFileButton(result.name,"deployment.json","Save the deployment record"));
+  if(result.provider==="phala"){
+    actions.append(cloudFileButton(result.name,"docker-compose.yaml","Save the measured docker-compose file"));
+    box.append(key,node("p","hint",tr("Intel's attestation matched this deployment. Give a verifier the deployment record and the measured docker-compose file: python -m tgwitness.cloud verify checks the attestation against Intel's own certificates.")),steps,actions);
+    return;
+  }
   box.append(key,steps,actions);
 }
 const CLOUD_STATES={running:"Up and running",removed:"Server deleted",starting:"Starting"};
@@ -2928,6 +2962,7 @@ function renderCloudServers(list,local){
       node("p","",[d.panel_host?"https://"+d.panel_host:"",[d.server_type,d.location].filter(Boolean).join(" · "),d.ipv4||"",
         d.created_at?fmtFull(d.created_at):""].filter(Boolean).join(" · ")));
     if(d.quick&&d.address&&phase!=="removed")row.append(cloudAddressLink(d.address));
+    if(d.attested)row.append(node("p","",tr("Intel TDX confidential virtual machine at Phala Cloud: Intel's attestation shows which code runs")));
     if(d.gateway)row.append(node("p","",tr("DNS only through Cloudflare Gateway")));
     if(d.fingerprint)row.append(node("p","",tr("Signing key fingerprint: {fingerprint}",{fingerprint:d.fingerprint})));
     const actions=node("div","cloud-actions");
@@ -2935,9 +2970,9 @@ function renderCloudServers(list,local){
       if(d.quick&&phase!=="removed")actions.append(cloudFindButton(d.name,row));
       if(phase!=="removed")cloudTokenButton(d.name,actions);
       actions.append(cloudFileButton(d.name,"deployment.json","Save the deployment record"));
-      if(phase!=="removed"&&["hetzner","generic"].includes(d.provider)){
+      if(phase!=="removed"&&["hetzner","phala","generic"].includes(d.provider)){
         const remove=node("button","danger",tr("Delete the server"));remove.type="button";remove.disabled=busyJob;
-        remove.addEventListener("click",()=>busy(remove,()=>cloudDestroy(d.name,d.quick)));actions.append(remove);
+        remove.addEventListener("click",()=>busy(remove,()=>cloudDestroy(d.name,d.quick,d.provider)));actions.append(remove);
       }
     }
     row.append(actions);box.append(row);
@@ -2957,11 +2992,14 @@ function cloudFindButton(name,row){
   }));
   return button;
 }
-async function cloudDestroy(name,quick){
-  const tokens=cloudTokens();
-  if(!tokens.hetzner_token||(!quick&&!tokens.cloudflare_token)){
-    if(!quick)$("cloud-own-domain").open=true;$("cloud-hetzner-token").focus();
-    throw new Error(tr(quick?"Enter the Hetzner token in step 2 first.":"Enter the Hetzner and Cloudflare tokens in step 2 first."));
+async function cloudDestroy(name,quick,provider){
+  if(provider==="phala"&&cloudHost()!=="phala")showCloudHost("phala");
+  if(provider==="hetzner"&&cloudHost()!=="hetzner")showCloudHost("hetzner");
+  const tokens=cloudTokens(),phala=provider==="phala",key=phala?tokens.phala_token:tokens.hetzner_token;
+  if(!key||(!quick&&!tokens.cloudflare_token)){
+    if(!quick)$("cloud-own-domain").open=true;$(phala?"cloud-phala-token":"cloud-hetzner-token").focus();
+    throw new Error(tr(phala?(quick?"Enter the Phala Cloud API key in step 2 first.":"Enter the Phala Cloud API key and the Cloudflare token in step 2 first.")
+      :quick?"Enter the Hetzner token in step 2 first.":"Enter the Hetzner and Cloudflare tokens in step 2 first."));
   }
   const typed=window.prompt(tr("Deleting {name} removes the server with its journal and signing key for good. Export the evidence from its panel first. Type the server name to delete it:",{name}));
   if(typed===null)return;
@@ -2971,7 +3009,7 @@ async function cloudDestroy(name,quick){
 }
 window.addEventListener("tgwitness:lock",()=>{
   clearTimeout(cloudWizard.timer);Object.assign(cloudWizard,{status:null,offer:null,name:""});
-  $("cloud-setup").reset();$("cloud-offer").reset();show("cloud-offer",false);show("cloud-job",false);
+  $("cloud-setup").reset();$("cloud-offer").reset();showCloudHost("hetzner");show("cloud-offer",false);show("cloud-job",false);
 });
 async function loadWitness(){
   if(!state.status)return;

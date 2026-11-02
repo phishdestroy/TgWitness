@@ -39,6 +39,14 @@
   and two parameters, each recorded in the journal as usual plus `setup.applied`;
   notifications, an off-site copy, a server, the code check and a witness bot are
   offered as next steps with their own forms.
+- Added Phala Cloud for a 24/7 server (`--provider phala`, **Confidential virtual machine ·
+  Phala Cloud** in the wizard): the collector runs in an Intel TDX confidential virtual
+  machine whose compose pins the commit's source files and both images by hash. `verify`
+  checks each Intel attestation up to Intel's root itself (`tgwitness.tdx`), the measured
+  compose, the instance and, with `--tdx-measurements`, the OS image; every start in the
+  journal carries an attestation too. Works with the quick tunnel; `destroy` removes the
+  machine. `tools/check_tdx.py` and `tools/check_phala.py` cover it offline; not yet tried
+  on Phala Cloud itself. See [high assurance](HIGH-ASSURANCE.md#confidential-vm-on-phala-cloud-intel-tdx).
 
 ## 0.7.1 preview · 1 November 2026
 
