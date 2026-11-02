@@ -228,13 +228,17 @@ def pdf(lay, data):
         if chart.get("status") != "available":
             lay.text(say("This chart exceeds the grouping limit. Exact overall counts remain available."), size=9)
         elif rows := activity_bins(chart["rows"]):
-            if pdf.get_y()+65 > pdf.page_break_trigger:
+            if pdf.get_y()+85 > pdf.page_break_trigger:
                 pdf.add_page()
             left, top, width, height = pdf.l_margin+10, pdf.get_y()+5, pdf.epw-12, 43
             maximum = max(r["total"] for r in rows) or 1
             with pdf.local_context(draw_color=(190,197,200)):
                 for frac in (0,.5,1):
                     pdf.line(left, top+height*frac, left+width, top+height*frac)
+            for fraction in (0,.5,1):
+                pdf.set_xy(pdf.l_margin,top+height*(1-fraction)-1.5)
+                pdf.set_font("Sans",size=6)
+                pdf.cell(8,3,f'{maximum*fraction:g}',align="R")
             step = width/len(rows)
             for index, row in enumerate(rows):
                 y = top+height
@@ -246,6 +250,19 @@ def pdf(lay, data):
                             pdf.rect(left+index*step, y, max(.2,step-.8), bar, style="F")
             pdf.set_y(top+height+3)
             lay.text(rows[0]["period"]+'  →  '+rows[-1]["period"]+' · UTC', size=8)
+            kinds=list(KINDS)
+            for start in (0,3):
+                y=pdf.get_y()+1
+                ends=[]
+                for column, kind in enumerate(kinds[start:start+3]):
+                    x=pdf.l_margin+column*pdf.epw/3
+                    with pdf.local_context(fill_color=_rgb(COLORS[kind])):
+                        pdf.rect(x,y+1,2.5,2.5,style="F")
+                    pdf.set_xy(x+4,y)
+                    pdf.set_font("Sans",size=7)
+                    pdf.multi_cell(pdf.epw/3-6,3.5,say(KINDS[kind]),align=lay.align[0])
+                    ends.append(pdf.get_y())
+                pdf.set_y(max(ends)+1)
             lay.gap(3)
             lay.heading(say("Exact figures"))
             lay.grid([say("Period (UTC)"), say("New message"), say("History snapshot"), say("Recovered message"),
