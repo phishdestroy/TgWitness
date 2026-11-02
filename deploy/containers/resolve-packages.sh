@@ -28,11 +28,12 @@ mkdir "$cache/apks"
 # These repository packages are authenticated by the signed index, which binds
 # their control checksum and data hash; they do not carry individual signatures.
 # Unlike apk fetch arguments, apk cache download accepts version constraints.
-apk cache --cache-dir "$cache/apks" --update-cache download $(cat "$out/$profile-$arch.versions")
+apk update --cache-dir "$cache/apks"
 for index in "$cache"/apks/APKINDEX.*.tar.gz; do
     apk verify "$index"
     cp "$index" "$out/$profile-$arch.${index##*/}"
 done
+apk cache --cache-dir "$cache/apks" download $(cat "$out/$profile-$arch.versions")
 (
     for package in "$cache"/apks/*.apk; do
         name=${package##*/}
