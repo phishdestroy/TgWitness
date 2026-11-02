@@ -34,6 +34,12 @@ WORKSPACE_ID = re.compile(r"default|[a-f0-9]{32}")
 
 
 POLICY = {
+    "POST /api/auth/import/preview": ("account", None),
+    "GET /api/exports/{export_id}/download": ("export", None),
+    "POST /api/exports/{export_id}/ticket": ("export", None),
+    "POST /api/privacy/reveal": ("view", "body"),
+    "GET /api/services/notifications": ("settings", None),
+    "POST /api/analysis/context-export": ("export", "root"),
     "GET /api/preferences": ("view", "root"),
     "POST /api/preferences": ("view", "root"),
     "GET /api/analysis/provider": ("view", "root"),
