@@ -323,6 +323,21 @@ def main():
                     page.screenshot(path=str(output / f"{tab}-{width}-{theme}.png"), full_page=True)
                     checks.append({"theme": theme, "width": width, "tab": tab, "height": height})
 
+        # Investigation mode saves what it describes, once the whole-account scope is confirmed.
+        page.locator("#sources-tab-scope").click()
+        page.locator("#scope-investigation").click()
+        answer_panel_dialog(page, accept=False)
+        assert server.app.state.store.get_setting("scope", {}).get("mode", "selected") == "selected"
+        page.locator("#scope-investigation").click()
+        answer_panel_dialog(page)
+        for _ in range(100):
+            saved = server.app.state.store.get_setting("scope", {})
+            if saved.get("mode") == "account":
+                break
+            page.wait_for_timeout(50)
+        assert saved["mode"] == "account" and saved["new_chats"] == {"profile": True, "history": 200}, saved
+        page.evaluate("""json('scope',{mode:'selected',folder_id:null,types:{channels:true,groups:true,private:true,bots:true},
+            exclude:[],own_actions:true,new_chats:{profile:false,history:0}}).then(()=>{state.scopeDirty=false;return loadScope();})""")
         check_targets(page, server)
         check_export_location(page)
         check_dialog_refresh(page, server)

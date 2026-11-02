@@ -315,7 +315,8 @@ const termLabels={offline:tr("offline"),ready:tr("ready"),credentials:tr("creden
   observing:tr("observing"),paused:tr("paused"),reconnecting:tr("reconnecting"),collector_error:tr("collector error"),
   storage_error:tr("storage error"),supergroup:tr("supergroup"),channel:tr("channel"),group:tr("group"),
   private:tr("private chat"),bot:tr("bot"),discovered:tr("added automatically"),
-  visible_in_dialogs:tr("visible in dialogs"),access_unconfirmed:tr("access unconfirmed"),public_username:tr("public username"),
+  visible_in_dialogs:tr("visible in dialogs"),receiving_updates:tr("receiving updates, not in the chat list"),access_unconfirmed:tr("access unconfirmed"),
+  not_in_dialogs:tr("not found among the account's chats"),beyond_dialog_limit:tr("beyond the chats listed for this account"),public_username:tr("public username"),
   private_or_unlisted:tr("private or unlisted"),creator:tr("creator"),administrator:tr("administrator"),
   member_or_unknown:tr("member or unknown"),unknown:tr("unknown"),messages:tr("messages"),edits:tr("edits"),
   deletions:tr("deletions"),reactions:tr("reactions"),membership:tr("membership")};
@@ -1318,7 +1319,7 @@ function excerpt(e) {
       queue_descriptor_differs_from_signed_observation:"The queued file differs from the signed observation",
       existing_content_addressed_file_is_corrupt:"The saved copy of this file is damaged"}[p.reason]||p.reason||p.meaning||"");
     case "target.changed": return (p.title||tr("Source"))+" · "+tr(p.enabled?"observed":"paused");
-    case "capture.changed": return p.download_media ? tr("Attachments on · up to {n} MiB per file",{n:mediaLimit(p)}) : tr("Attachment downloads off");
+    case "capture.changed": return p.download_media ? tr("Attachments on · {list}",{list:mediaLimitText(p)}) : tr("Attachment downloads off");
     case "connection.retry": return tr("Attempt {n}",{n:p.attempt});
     case "connection.retry_failed": return tr("Attempt {n}",{n:p.attempt})+failure;
     case "telegram.backoff": return tr("Telegram asked to wait {n} s",{n:p.retry_after_seconds});
@@ -1529,7 +1530,7 @@ document.addEventListener("keydown",e=>{
 });
 // Sources view boundary: the host supplies session, data and actions explicitly.
 let sourcesView=null;
-const sourcesReady=import("./views/sources.js").then(({createSources})=>{
+const sourcesReady=import("./views/sources.js?v=2").then(({createSources})=>{
   sourcesView=createSources({root:$("view-sources"),tr,getState:()=>state,
     getSession:()=>state.workspaceRevision+":"+state.profile,may,json,refreshStatus,toast,termText,scopeName,icon,loadScope,formatTime,
     setDialogs:result=>{state.dialogs=result.dialogs;if(state.scope)state.scope.folders=result.folders||[];},
@@ -1544,6 +1545,17 @@ const sourcesReady=import("./views/sources.js").then(({createSources})=>{
 }).catch(error=>{toast(error.message,true);throw error;});
 function renderTargets() { sourcesView?.renderTargets(); }
 const mediaLimit=c=>Math.max(0,...Object.values(c?.types||{}).filter(r=>r.enabled).map(r=>r.max_mb))||c?.max_media_mb;
+// The limits as the policy states them per type. The largest one alone misled: "Files ≤ 100 MB" while photos stop at 20 MB.
+const MEDIA_ORDER=["photo","video","document","voice","audio","video_note","animation","sticker"];
+function mediaLimitText(c,short=false){
+  const types=c?.types||{};
+  if(!Object.keys(types).length)return tr("up to {n} MB per file",{n:c?.max_media_mb});
+  const on=MEDIA_ORDER.filter(t=>types[t]?.enabled);
+  if(!on.length)return tr("no attachment types");
+  const part=t=>tr("{type} {n} MB",{type:tr(MEDIA_TYPE_LABELS[t]),n:types[t].max_mb});
+  if(!short)return on.map(part).join(", ");
+  return part(on[0])+(on.length>1?" · "+tr("+{n} more",{n:on.length-1}):"");
+}
 function renderHistory(){
   const s=state.status,h=s?.history||{phase:"none"},phase=h.phase;
   const active=phase==="running",paused=phase==="paused",exists=phase!=="none";
@@ -2633,7 +2645,8 @@ $("scope-investigation").addEventListener("click",()=>{
   for(const k of scopeTypes)$("scope-"+k).checked=true;
   $("scope-own").checked=true;$("scope-new-profile").checked=true;
   if(Number($("scope-new-history").value)<200)$("scope-new-history").value="200";
-  state.scopeDirty=true;renderScope();$("scope-form").querySelector("button[type=submit]").focus();
+  // The preset does what it describes: it is saved at once, after the whole-account confirmation.
+  state.scopeDirty=true;renderScope();$("scope-form").requestSubmit($("scope-form").querySelector("button[type=submit]"));
 });
 function chatTitle(id){
   return state.status?.targets.find(t=>t.chat_id===id)?.title||state.dialogs.find(d=>d.chat_id===id)?.title||tr("Chat {id}",{id});
@@ -2823,7 +2836,10 @@ async function loadSetup(){
 function renderSetupCard(){
   const data=setupView?.data;if(!data||state.view!=="witness")return;
   const goal=data.saved&&!data.saved.skipped?data.saved.goal:null,badge=$("extra-setup-badge");
-  badge.textContent=goal?setupView.goalName(goal):tr("No goal chosen");badge.classList.toggle("on",!!goal);
+  // Without a chosen goal, say what the configuration already amounts to instead of a bare "No goal chosen".
+  const wide=["folder","account"].includes(state.status?.scope?.mode);
+  badge.textContent=goal?setupView.goalName(goal):wide?tr("No goal chosen · set up like {goal}",{goal:setupView.goalName("investigation")}):tr("No goal chosen");
+  badge.classList.toggle("on",!!goal);
   setupView.renderScales($("setup-overview-scales"),data,{tr,node,compact:true});
 }
 function renderSetupStart(){
@@ -3575,11 +3591,28 @@ function renderPolicy(p){
   $("outside-port").value=String(proxy?.port||1080);$("outside-username").value="";$("outside-password").value="";
   outsideFields();
   $("policy-status").textContent=(p.direct_fallback?tr("Connected to Telegram directly now: no listed proxy answers.")+" ":"")+
-    (p.outside_route==="none"?tr(p.outside_problem):p.outside_route==="direct"?
+    (p.outside_route==="none"?"":p.outside_route==="direct"?
       tr("Requests outside Telegram go directly from this server."):
       tr("Requests outside Telegram go through {proxy}.",{proxy:(proxy?proxy.host+":"+proxy.port:tr("this workspace's proxy"))}));
-
+  policyWarning();
   $("network-kind").querySelector('[value="direct"]').disabled=p.exposure!=="tunnel"&&$("network-kind").value!=="direct";
+}
+// A setting that silently blocks something is stated with its consequence and the two ways out, right here.
+function policyWarning(){
+  const box=$("policy-warning"),p=state.policy;if(!p)return;
+  const exposure=viewQuery("connection",'input[name="exposure"]:checked')?.value||p.exposure;
+  const enabled=$("outside-enabled").checked,proxy=$("outside-kind").value,route=state.status?.collector?.network?.kind;
+  const blocked=enabled&&exposure==="hide"&&!proxy&&!["socks5","http"].includes(route);
+  box.replaceChildren();box.hidden=!(blocked||!enabled);
+  const add=(label,work)=>{const b=node("button","secondary small",label);b.type="button";b.addEventListener("click",work);box.append(b);};
+  if(blocked){
+    box.append(node("p","",tr("Requests outside Telegram are blocked now: timestamps, notifications, off-site copies and proxy-list updates are not sent. Hide-address mode sends them only through a SOCKS5 or HTTP proxy, and none is set.")));
+    add(tr("Set a proxy for these requests"),()=>{$("outside-kind").value="socks5";policyOutsideDirty=policyFormDirty=true;outsideFields();policyWarning();$("outside-host").focus();});
+    add(tr("Turn these requests off"),()=>{$("outside-enabled").checked=false;policyFormDirty=true;outsideFields();policyWarning();});
+  }else if(!enabled){
+    box.append(node("p","",tr("Requests outside Telegram are off: timestamps, notifications, off-site copies and proxy-list updates are not sent.")));
+    add(tr("Allow requests outside Telegram"),()=>{$("outside-enabled").checked=true;policyFormDirty=true;outsideFields();policyWarning();$("outside-kind").focus();});
+  }
 }
 function outsideFields(){
   const none=!$("outside-kind").value;
@@ -3593,7 +3626,7 @@ async function loadPolicy(){
   const profile=state.profile,p=await json("network/policy",undefined,viewOptions('connection'));
   if(profile===state.profile){if(policyFormDirty)state.policy=p;else renderPolicy(p);}
 }
-for(const event of ['input','change'])$("policy-form").addEventListener(event,()=>{policyFormDirty=true;});
+for(const event of ['input','change'])$("policy-form").addEventListener(event,()=>{policyFormDirty=true;policyWarning();});
 for(const id of ["outside-kind","outside-host","outside-port","outside-username","outside-password"])
   $(id).addEventListener("input",()=>{policyOutsideDirty=true;outsideFields();});
 $("outside-enabled").addEventListener("change",outsideFields);
@@ -3838,7 +3871,7 @@ function recordingMode(s){
     on.length?tr("Custom: {list}",{list:on.map(termText).join(", ")}):tr("Nothing selected");
 }
 function modeSummary(s){
-  const free=s.collector?.disk_free_bytes,files=s.capture?.download_media?tr("photos & files up to {n} MB each",{n:mediaLimit(s.capture)})
+  const free=s.collector?.disk_free_bytes,files=s.capture?.download_media?tr("attachments: {list}",{list:mediaLimitText(s.capture)})
     +(free?" · "+tr("{size} free on disk",{size:humanSize(free)}):""):tr("photos & files not saved");
   return tr("Mode: {mode}",{mode:recordingMode(s)})+" · "+files;
 }
@@ -3872,7 +3905,7 @@ async function refreshChats(refresh=false,wanted=null){
   return await loadChatMessages(refresh?"refresh":"open");
 }
 let chatListView=null;
-const chatListReady=import('./views/chat-list.js?v=13').then(({createChatList})=>{
+const chatListReady=import('./views/chat-list.js?v=14').then(({createChatList})=>{
   chatListView=createChatList({root:panelRoots.get('chats'),tr,node,icon,avatarNode,timeNode,getState:()=>state,
     getSession:()=>state.workspaceRevision+':'+state.profile,may,json,refreshStatus,openChat,toast,viewState,reload:()=>refreshChats()});
   return chatListView;
@@ -3977,8 +4010,12 @@ function renderChat(){
   const title=info.title||tr("Chat {id}",{id:info.chat_id}),avatar=avatarNode(info.chat_id,title,"lg");avatar.id="chat-avatar";
   $("chat-avatar").replaceWith(avatar);$("chat-name").textContent=title;
   const kind={supergroup:tr("Group"),megagroup:tr("Group"),group:tr("Group"),chat:tr("Group"),channel:tr("Channel"),broadcast:tr("Channel"),bot:tr("Bot"),user:tr("Private chat"),private:tr("Private chat")}[info.kind]||termText(info.kind);
-  $("chat-sub").textContent=[kind,tr("{n} saved",{n:(info.messages||0).toLocaleString()}),info.deleted?tr("{n} deleted",{n:info.deleted}):"",
-    info.missing?tr("{n} not found",{n:info.missing}):"",info.edited?tr("{n} edited",{n:info.edited}):""].filter(Boolean).join(" · ");
+  // The counters of /api/chats, with the definitions shared by the chat list and the notifications.
+  const split=typeof info.deleted_saved==="number";
+  $("chat-sub").textContent=$("chat-sub").title=[kind,tr("{n} saved",{n:(split?info.saved:info.messages||0).toLocaleString()}),
+    split?(info.deleted_saved?tr("{n} deleted, text kept",{n:info.deleted_saved}):""):(info.deleted?tr("{n} deleted",{n:info.deleted}):""),
+    split&&info.deleted_unsaved?tr("{n} deleted before saving",{n:info.deleted_unsaved}):"",
+    info.missing?tr("{n} not found on recheck",{n:info.missing}):"",info.edited?tr("{n} edited",{n:info.edited}):""].filter(Boolean).join(" · ");
   renderChatStatus();renderMulti();renderChatFeed();renderComposer();
 }
 function renderChatStatus(){
@@ -4002,8 +4039,8 @@ function renderChatStatus(){
   else if(c.storage_low)say("warn",tr("Files paused: low disk space"),tr("Observing, but the disk is almost full ({size} free): photos & files are paused until space is freed. Messages are still saved.",{size:humanSize(c.disk_free_bytes)}));
   else say(c.connected?"ok":"warn",c.connected?tr("Observing"):tr("Reconnecting to Telegram"),c.connected?tr("Observing — new messages, edits and deletions are saved as they happen.")+recheckText(c):tr("Reconnecting to Telegram — missed changes are requested again once connected."));
   const mode=node("div","chat-mode-chips");
-  for(const [name,label] of [['mode',tr("Mode: {mode}",{mode:recordingMode(s)})],['files',s.capture?.download_media?tr("Files ≤ {n} MB",{n:mediaLimit(s.capture)}):tr("Files off")]]){
-    const allowed=!s.demo&&viewAllowed('sources'),chip=node(allowed?'button':'span','chat-setting-chip',label);chip.dataset.recording=name;chip.title=modeSummary(s);
+  for(const [name,label] of [['mode',tr("Mode: {mode}",{mode:recordingMode(s)})],['files',s.capture?.download_media?mediaLimitText(s.capture,true):tr("Files off")]]){
+    const allowed=!s.demo&&viewAllowed('sources'),chip=node(allowed?'button':'span','chat-setting-chip',label);chip.dataset.recording=name;chip.title=label+' · '+modeSummary(s);
     if(allowed){chip.type='button';chip.setAttribute('aria-label',label+' · '+tr('Recording settings'));chip.addEventListener('click',()=>busy(chip,openRecordingSettings));}mode.append(chip);
   }
   const filters=node("div","chat-filters");filters.setAttribute("role","group");filters.setAttribute("aria-label",tr("Show messages"));

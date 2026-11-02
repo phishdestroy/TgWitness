@@ -1,3 +1,5 @@
+import {priorityHint} from "../components/priority.js?v=1";
+
 const monitoring = ["messages", "edits", "deletions", "reactions", "membership"];
 const media = [
   ["photo", "Photos"], ["video", "Videos"], ["animation", "GIFs & animations"],
@@ -223,11 +225,16 @@ export function createSources(context) {
         toggle.setAttribute("aria-label", tr(target.enabled && state !== "excluded"
           ? "Pause recording for {name}" : "Enable recording for {name}", {name: target.title}));
         stateCell.append(toggle);
+        // The reason is written out, so the same status reads the same here, in health and in notifications.
+        const seen = status.collector.source_status?.[String(target.chat_id)];
+        if (seen?.state === "receiving_updates" || state === "unconfirmed")
+          stateCell.append(element("span", "source-reason", context.termText(
+            seen.state === "receiving_updates" ? "receiving_updates" : seen.reason || "not_in_dialogs")));
         const starCell = element("td", "source-star-cell");
         const star = sourceButton("star", target, "", "icon-button star" + (target.priority ? " on" : ""));
         star.append(context.icon("star")); star.setAttribute("aria-pressed", String(!!target.priority));
-        star.setAttribute("aria-label", tr("Priority recheck for {name}", {name: target.title}));
-        star.title = tr(target.priority ? "Priority" : "Regular");
+        const hint = priorityHint(tr, !!target.priority, getState().status?.collector);
+        star.setAttribute("aria-label", hint + " — " + target.title); star.title = hint;
         starCell.append(star);
         const menuCell = element("td", "source-menu-cell"), menu = element("details", "source-row-menu");
         const summary = element("summary", "", "⋯");
