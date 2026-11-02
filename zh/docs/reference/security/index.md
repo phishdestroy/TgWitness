@@ -48,7 +48,7 @@ Telegram API 凭据、StringSession 以及 Ed25519 私钥均使用 Fernet 进行
 
 代理配置在保险库中经过加密存储。密码和 MTProxy 密钥 不会通过 API 返回，也不会写入证据记录。每个工作区可自行选择 Telegram 路由和 [IP 模式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/#ip-modes)。
 
-“隐藏 IP”模式会拒绝 Telegram 的直接备用连接，并要求通过代理处理外部 HTTP 请求。明确选择的“备用”模式允许在延迟后直接访问 Telegram； “隧道/VPN”模式则允许直接连接。 选择隧道 模式不会安装或验证 VPN。这些设置不会控制设备的全部 流量、浏览器、软件包管理器或本地代理主机的 DNS 解析。
+**“隐藏地址”模式会**拒绝直接使用 Telegram 备用连接，并要求通过代理处理外部 HTTP 请求。“显式选择的备用模式”允许在延迟后直接访问 Telegram； “隧道/VPN 模式”则允许直接连接。选择“隧道” 模式不会安装或验证 VPN。这些设置不会控制所有设备 流量、浏览器、软件包管理器或本地代理主机的 DNS 解析。
 
 MTProxy 仅传输 Telegram 流量。外部请求可使用独立的 SOCKS5/HTTP 代理、工作区的 SOCKS5/HTTP 路由，或允许的直连路由； 也可将其禁用。独立见证器拥有自己的传输设置。 普通 SOCKS5/HTTP CONNECT 身份验证不会由这些代理 协议本身进行加密。伪 TLS MTProxy 密钥目前仍不支持。
 

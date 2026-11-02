@@ -28,7 +28,7 @@ Abra o painel com o token emitido em uma sessão separada do navegador e verifiq
 
 ## Selecione as permissões
 
-Para uma demonstração pública apenas em texto, use **a “Vitrine pública”** em vez do acesso comum de revisor. Ela mostra canais públicos explicitamente selecionados, edições e exclusões retidas e estatísticas assinadas, com os campos de autor ocultados e os arquivos fechados no limite da API. [Crie e verifique uma vitrine](https://github.com/phishdestroy/TgWitness/blob/main/docs/LIVE-SHOWCASE.md).
+Para uma demonstração pública apenas em texto, use **a “Vitrine pública”** em vez do acesso comum de revisor. Ela mostra canais públicos explicitamente selecionados, edições e exclusões retidas e estatísticas assinadas, com os campos de autor ocultados e os arquivos fechados no limite da API. [Crie e verifique uma vitrine](https://phishdestroy.github.io/TgWitness/pt/docs/reference/showcase/).
 
 | Permissão | O que ela permite |
 | --- | --- |
@@ -70,7 +70,7 @@ O IP é o endereço do cliente visualizado pelo aplicativo. Caso esteja atrás d
 
 ## Alterar ou revogar o acesso
 
-Edite uma entrada na **seção “Acessos”** para alterar seu escopo, permissões ou limites. As alterações de escopo e permissão são verificadas em solicitações subsequentes, incluindo solicitações de sessões que já estejam abertas. A revogação de um acesso encerra suas sessões e torna o token emitido inutilizável. **As sessões abertas** também permitem que o administrador encerre uma sessão individual sem revogar todo o acesso.
+Edite uma entrada em **“Acesso concedido”** para alterar seu escopo, permissões ou limites. Alterações no escopo e nas permissões são verificadas em solicitações subsequentes, incluindo solicitações de sessões que já estejam abertas. A revogação de um acesso encerra suas sessões e torna o token emitido inutilizável. **A opção “Sessões abertas”** também permite que o administrador encerre uma sessão individual sem revogar todo o acesso.
 
 As cópias de exportação salvas mantêm seu criador, espaço de trabalho, escopo do chat e as permissões necessárias. Um usuário com acesso concedido pode listar ou baixar suas próprias cópias apenas enquanto essas permissões ainda estiverem válidas; cópias contendo o Case Board também exigem a permissão ``board.read``. O administrador pode recuperar todas as cópias. Cópias mais antigas sem esses metadados e pacotes de grupo são exclusivas do administrador. Os tickets de download e as respostas de arquivos preparadas verificam novamente o acesso após a preparação do arquivo, antes do envio de seus bytes.
 

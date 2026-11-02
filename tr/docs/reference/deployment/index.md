@@ -19,7 +19,7 @@ Taşınabilir paket için, GitHub Releases'tan `TgWitness-<version>-windows-amd6
 | Windows'ta Docker yardımcısı | `scripts\Docker.cmd` | Evet; yardımcı program, web sunucusunun durumunu bekler. |
 | Linux/macOS üzerinde Docker yardımcısı | `sh scripts/docker-start.sh` | Evet; yardımcı program, web sunucusunun durumunu bekler. |
 
-Üçüncü tarafların kontrol edebilmesi gereken bir bulut sunucusu için — sağlayıcının API'si aracılığıyla, SSH olmadan oluşturulmuş, yalnızca Cloudflare Tüneli üzerinden erişilebilen — [yüksek güvenilirlikli dağıtım bölümüne](https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md) bakınız.
+Üçüncü tarafların kontrol edebilmesi gereken bir bulut sunucusu için — sağlayıcının API'si aracılığıyla, SSH olmadan oluşturulmuş, yalnızca Cloudflare Tüneli üzerinden erişilebilen — [yüksek güvenilirlikli dağıtım bölümüne](https://phishdestroy.github.io/TgWitness/tr/docs/reference/high-assurance/) bakınız.
 
 Yerel başlatma işlemi, özel bir `.venv` oluşturur ve sabitlenmiş bağımlılıkları yükler. Docker, ana bilgisayar Python'una ihtiyaç duymadan bunları görüntü içinde derler. İlk kez kurulum için İnternet erişimi gerekir. Python 3.11+ bulunmadığında, `Start.cmd`, mevcut Windows kullanıcısı için Python 3.12'yi yüklemeden önce izin ister (winget; aksi takdirde, Python Software Foundation imzasını kontrol ettikten sonra python.org yükleyicisi kullanılır); hiçbir zaman yönetici ayrıcalıkları talep etmez. Docker ve işletim sistemi hizmetleri ön koşul olarak kalır.
 
@@ -250,7 +250,7 @@ Panel, kuyrukta bekleyen/başarısız medya öğelerini, en eski bekleyen medya 
 
 ## Bağlantı ve koruma seçenekleri
 
-Bağlantı yolları çalışma alanı bazındadır ve yetkilendirme öncesinde yapılandırılmalıdır. SOCKS5/HTTP CONNECT, sabitlenmiş python-socks bağımlılığını kullanır. MTProxy, Telethon'un deneysel rastgele ara aktarımını kullanır; Sahte TLS ee gizli anahtarları desteklenmez. Doğrudan yedekleme, seçilen [IP](https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/#ip-modes)moduna bağlıdır: Hide IP bunu reddeder; açık yedekleme modu ise bir gecikmeden sonra buna izin verir. Tünel/VPN modu doğrudan yollara izin verir ancak bir VPN oluşturmaz. Bu, sistem genelinde geçerli bir ağ politikası değildir.
+Bağlantı yolları çalışma alanı bazındadır ve yetkilendirme öncesinde yapılandırılmalıdır. SOCKS5/HTTP CONNECT, sabitlenmiş python-socks bağımlılığını kullanır. MTProxy, Telethon'un deneysel rastgele ara aktarımını kullanır; Sahte TLS ee gizli anahtarları desteklenmez. Doğrudan yedekleme, seçilen [IP](https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/#ip-modes)moduna bağlıdır: **Adresi Gizle seçeneği** bunu reddeder; **Son Çare Olarak Doğrudan seçeneği ise** bir gecikmeden sonra buna izin verir. **Tünel veya VPN arkasında bulunan sunucu,** doğrudan rotalara izin verir ancak bir VPN oluşturmaz. Bu, sistem genelinde geçerli bir ağ politikası değildir.
 
 Yeni kurulumlarda, TGWITNESS_VAULT_KEY_FILE değişkeni, ayrı olarak korunan rastgele bir ana anahtar dosyasına işaret eder. Bu dosyayı bir konteyner içinde /data dizininin dışında salt okunur olarak bağlayın. Her çalışma alanı ve ana anahtar için vault.external.json salt meta verilerini ayrı ayrı saklayın. Mevcut yerel kasalar için planlı bir geçiş gereklidir; bu değişkenin ayarlanması, kasaları otomatik olarak dönüştürmez. Mesaj/medya depolama ve dışa aktarımlar uygulama tarafından şifrelenmez. Gerektiğinde şifreli birimler ve yeterli miktarda özel geçici depolama alanı kullanın.
 

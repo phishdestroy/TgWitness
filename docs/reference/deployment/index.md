@@ -19,7 +19,7 @@ For the portable package, extract `TgWitness-<version>-windows-amd64-portable.zi
 | Docker helper on Windows | `scripts\Docker.cmd` | Yes; the helper waits for web-server health. |
 | Docker helper on Linux/macOS | `sh scripts/docker-start.sh` | Yes; the helper waits for web-server health. |
 
-For a cloud server that a third party should be able to check — created through the provider's API, without SSH, reached only through a Cloudflare Tunnel — see [high-assurance deployment](https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md).
+For a cloud server that a third party should be able to check — created through the provider's API, without SSH, reached only through a Cloudflare Tunnel — see [high-assurance deployment](https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/).
 
 Native startup creates a private `.venv` and installs the pinned dependencies. Docker builds them inside the image, without requiring host Python. First-time setup needs Internet access. When no Python 3.11+ is found, `Start.cmd` asks before installing Python 3.12 for the current Windows user (winget, otherwise the python.org installer after checking its Python Software Foundation signature); it never requests administrator privileges. Docker and OS services remain prerequisites.
 
@@ -250,7 +250,7 @@ The panel displays queued/failed media, oldest pending media, free disk, Telegra
 
 ## Connection and protection options
 
-Connection routes are per workspace and should be configured before authorization. SOCKS5/HTTP CONNECT use the pinned python-socks dependency. MTProxy uses Telethon's experimental randomized intermediate transport; Fake TLS ee secrets are unsupported. Direct fallback depends on the selected [IP mode](https://phishdestroy.github.io/TgWitness/docs/reference/connection/#ip-modes): Hide IP refuses it; the explicit fallback mode permits it after a delay. Tunnel/VPN mode permits direct routes but does not create a VPN. This is not a system-wide network policy.
+Connection routes are per workspace and should be configured before authorization. SOCKS5/HTTP CONNECT use the pinned python-socks dependency. MTProxy uses Telethon's experimental randomized intermediate transport; Fake TLS ee secrets are unsupported. Direct fallback depends on the selected [IP mode](https://phishdestroy.github.io/TgWitness/docs/reference/connection/#ip-modes): **Hide the address** refuses it; **Direct as a last resort** permits it after a delay. **Server behind a tunnel or VPN** permits direct routes but does not create a VPN. This is not a system-wide network policy.
 
 For new installations, TGWITNESS_VAULT_KEY_FILE points to a separately protected random master-key file. Mount it read-only outside /data in a container. Preserve the public vault.external.json salt metadata with each workspace and the master key separately. Existing local vaults require a planned migration; setting this variable does not silently convert them. Message/media storage and exports are not application-encrypted. Use encrypted volumes and sufficient private temporary storage where needed.
 

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="zh-Hans" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>存储与恢复 · 参考 | TgWitness</title>
+<meta name="description" content="备份、将旧文件移至云端、Object Lock 下的副本以及在新设备上的恢复。"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/storage/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="存储与恢复 · 参考 | TgWitness"><meta property="og:description" content="备份、将旧文件移至云端、Object Lock 下的副本以及在新设备上的恢复。">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/zh/docs/reference/storage/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/storage/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/storage/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/storage/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/storage/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/storage/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/storage/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/storage/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/storage/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/storage/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/storage/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/storage/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/storage/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/storage/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/storage/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/storage/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/storage/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/storage/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/storage/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/storage/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/storage/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/storage/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/storage/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/storage/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/storage/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/storage/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/storage/"><link rel="alternate" type="text/markdown" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/storage/index.md"><link rel="describedby" href="https://phishdestroy.github.io/TgWitness/llms.txt" type="text/plain"><link rel="sitemap" type="application/xml" href="https://phishdestroy.github.io/TgWitness/sitemap.xml"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/storage/", "url": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/storage/", "name": "存储与恢复 · 参考 | TgWitness", "description": "备份、将旧文件移至云端、Object Lock 下的副本以及在新设备上的恢复。", "inLanguage": "zh-Hans", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}, "breadcrumb": {"@id": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/storage/#breadcrumb"}}, {"@type": "BreadcrumbList", "@id": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/storage/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://phishdestroy.github.io/TgWitness/zh/"}, {"@type": "ListItem", "position": 2, "name": "文档", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/"}, {"@type": "ListItem", "position": 3, "name": "参考", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "存储与恢复", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/storage/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">跳转至内容</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / 文档</span></a>
+<nav aria-label="指南"><a href="../../concepts/">图文指南</a><a href="../../">所有指南</a><a href="../">参考</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="语言"><span aria-hidden="true">◍</span> 简体中文</summary><div class="lang-list"><a href="../../../../docs/reference/storage/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/storage/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/storage/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/storage/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/storage/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/storage/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/storage/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/storage/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/storage/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/storage/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/storage/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/storage/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="./" hreflang="zh-Hans" lang="zh-Hans" aria-current="true">简体中文</a><a href="../../../../fr/docs/reference/storage/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/storage/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/storage/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/storage/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/storage/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/storage/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/storage/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/storage/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/storage/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/storage/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/storage/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/storage/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="在浅色和深色主题之间切换"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="指南"><a href="../../../guides/modes.html">模式、场景和证据级别</a><p class="nav-label">入门指南</p><a href="../../start/">几分钟内即可开始使用</a><a href="../../dedicated-account/">专用账号</a><a href="../../accounts/">连接账户</a><a href="../../proxies/">选择代理</a><a href="../../exports/">导出与验证</a><a href="../../capture/">GitHub Actions 捕获</a><p class="nav-label">调查与报告</p><a href="../../cases/">跨所有聊天记录进行调查</a><a href="../../case-board/">创建案件看板</a><a href="../../reports/">设计报告</a><a href="../../handover/">准备一份共享副本</a><a href="../../groups/">管理一组账户</a><p class="nav-label">了解证据</p><a href="../../concepts/">了解证据如何运作</a><a href="../../security/">确保安全</a><a href="../../witness/">设置 Witness 机器人</a><p class="nav-label">了解更多</p><a href="../../archive/">浏览存档</a><a href="../../access/">分享案例</a><a href="../../server/">保持其运行</a><a href="../../troubleshooting/">查找问题所在</a></nav><nav class="wiki-nav" aria-label="参考"><p class="nav-label"><a class="nav-label-link" href="../">参考</a></p><details class="wiki-group"><summary>设置</summary><a href="../quickstart/">快速入门</a><a href="../installation/">安装、验证和更新</a><a href="../settings/">初始设置与配置</a><a href="../accounts/">账户与会话格式</a><a href="../access/">访问与权限</a><a href="../connection/">连接、代理和数据保护</a><a href="../deployment/">部署</a><a href="../high-assurance/">高可信度部署</a></details><details class="wiki-group"><summary>收集</summary><a href="../panel/">面板指南</a><a href="../collection/">数据采集原理</a><a href="../history/">加载源代码历史记录</a><a href="../operations/">工作流程与操作</a><a href="../investigation/">调查模式</a><a href="../features/">功能与限制</a></details><details class="wiki-group"><summary>存档与集成</summary><a href="../case-board/">“案件看板”参考</a><a href="../analysis/">存档分析</a><a href="../mcp/">只读 MCP</a><a href="../media-analysis/">本地 OCR 和转录</a><a href="../webhooks/">外发 webhook</a><a href="../showcase/">公开展示</a></details><details class="wiki-group" open><summary>证据</summary><a href="../how-it-works/">证据的运作原理</a><a href="../case-reports/">报告配置与验证</a><a href="../account-export/">账户导出</a><a href="../evidence/">证据格式</a><a href="../witness/">独立见证者</a><a href="../timestamp/">时间戳</a><a href="./" aria-current="page">存储与恢复</a></details><details class="wiki-group"><summary>安全与项目</summary><a href="../security/">安全与数据处理</a><a href="../architecture/">架构</a><a href="../verification/">已测试的内容</a><a href="../license/">许可协议与架构不兼容声明</a><a href="../notice/">运营商兼容性通知</a><a href="../changelog/">更新日志</a></details></nav><p class="sidebar-note">v0.8.0<br>开源 · 可在您的设备上运行</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="指南"><a href="../../../">首页</a> <span aria-hidden="true">/</span> <a href="../../">文档</a> <span aria-hidden="true">/</span> <a href="../">参考</a> <span aria-hidden="true">/</span> <span aria-current="page">存储与恢复</span></nav>
+<p class="verification-shortcut"><a href="../verification/">已测试的内容 →</a></p>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">参考 / 证据</p><h1>存储与恢复</h1><p class="guide-outcome">备份、将旧文件移至云端、Object Lock 下的副本以及在新设备上的恢复。</p><div class="wiki-body"><p>该面板将任务分为三类：</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>任务</th>
+<th>功能介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>保留备份</td>
+<td>将已签名的日志、检查点、已保存的文件和队列中的导出内容复制到配置好的 S3 目标位置。</td>
+</tr>
+<tr>
+<td>免费本地存储空间</td>
+<td>将选定的旧附件复制到 S3 或 rclone 云远程存储中，完整读取这些附件，验证加密字节，然后删除已验证的本地副本。</td>
+</tr>
+<tr>
+<td>保留一份证据副本</td>
+<td>配置 S3 Object Lock 并检查返回的保留状态。该服务必须确认请求的模式和日期。</td>
+</tr>
+</tbody>
+</table></div>
+<p>释放空间时绝不会删除或覆盖已签名的日志。每个附件都会保留
+其原始SHA-256以及一份恢复凭证。可选的 gzip 压缩会在
+经过身份验证的加密之前进行。云端文件名不包含 Telegram 用户名、
+聊天 ID 或原始附件名称。单个附件最大可达 32 GiB。</p>
+<p>仅凭上传响应本身并不意味着可以删除文件。TgWitness会下载
+完整的加密对象并验证其大小，SHA-256保存收据，
+然后在删除前立即再次检查本地字节。如果上传失败、
+回读结果不同或传输被取消，本地文件将保留原位。如果
+已启用的证据备份尚未复制该文件，删除操作也会等待备份完成。</p>
+<h2 id="connect-a-destination">连接目标<a class="anchor" href="#connect-a-destination" aria-label="本节链接">#</a></h2>
+<p><strong>在“附加功能”→“存储与磁盘空间”→“管理存储”中</strong>，选择任务和目标位置，
+保存后，选择<strong>“测试上传与下载</strong>”。该测试会上传一个随机的微小探测数据并将其
+读回。此过程不会使用 Telegram 内容。</p>
+<p>对于 S3，请使用服务提供商的实际端点、区域和存储桶。Wasabi、Backblaze、
+Cloudflare R2 及其他兼容服务均使用相同的 S3 设置。仅具备兼容
+API 并不意味着支持 Object Lock。治理模式可能允许
+授权管理员绕过保留策略；合规模式则有不同的
+限制。在依赖保留策略之前，请先阅读返回的 Object Lock 状态。</p>
+<p>对于 rclone 目标，请使用 rclone 的提供商设置创建一个远程，并将
+该远程的 <code>[name]</code> 部分粘贴到面板中。已安装的辅助程序支持
+MEGA、Google Drive、OneDrive、Dropbox、Box、pCloud 以及
+选择器中显示的其他提供商。凭据保存在该工作区的加密保险库中。OAuth
+刷新信息也会保存回保险库。凭据不会添加到日志
+事件中，也不会包含在恢复下载中。</p>
+<p>该辅助工具安装在工作区内部，包含一个固定版本和 SHA-256。
+它不会被添加到系统 PATH 中。配置文件和工作文件是
+该工作区内的临时文件。基于命令行和本地文件的远程连接将被
+拒绝。rclone 目前要求为
+外部请求显式选择 <strong>直接</strong> 路由。请使用原生 S3 存储作为工作区的 SOCKS5 或 HTTP 路由；
+rclone 不会在路由不可用时静默绕过。</p>
+<h2 id="keep-the-recovery-file">请妥善保存恢复文件<a class="anchor" href="#keep-the-recovery-file" aria-label="本节链接">#</a></h2>
+<p>请选择“复制文件后<strong>保存恢复文件</strong>”，并将该文件保存在
+与安装目录分开的位置。该文件包含解密密钥和已签名的对象
+收据，因此请将其视为私钥备份。请将原始远程配置
+和目标凭据也分别单独保存。在后续复制操作之前
+生成的恢复文件不包含该后续文件的收据。</p>
+<p>签名密钥的指纹应已独立记录。仅通过
+与同一文件内提供的密钥进行比对的签名，无法确定该
+恢复文件属于谁。</p>
+<p>若要修复现有工作区中缺失的存储收据，请打开<strong>“从已保存的恢复文件中恢复文件</strong>”，
+并选择该文件。该面板会验证签名，并要求使用相同的工作区
+签名密钥。若存储密钥不同，系统将拒绝替换。随后选择<strong>“恢复
+所有文件</strong>”。恢复过程会暂停自动存储规则，以确保下一次计划的
+处理不会立即再次删除已恢复的文件。当
+本地副本处理完毕后，请重新启用该规则。</p>
+<p>恢复操作会验证密文、认证解密过程、在
+必要时进行解压，并检查原始明文SHA-256，然后将文件放入 <code>media/</code>。
+损坏的远程对象绝不会替换本地文件。若现有本地文件的
+字节内容不同，则会保留该文件以供审查，而非被覆盖。</p>
+<h2 id="recover-after-losing-the-installation">安装丢失后的恢复方法<a class="anchor" href="#recover-after-losing-the-installation" aria-label="本节链接">#</a></h2>
+<p>在另一台机器上安装 TgWitness。使用私有恢复文件、单独
+记录的指纹以及原始目标凭据：</p>
+<pre><code class="language-sh">python -m tgwitness.storage recover \
+  --recovery storage-recovery.json \
+  --fingerprint TRUSTED_WORKSPACE_SHA256 \
+  --credentials original-rclone.conf \
+  --output recovered-attachments</code></pre>
+<p>对于 S3， <code>--credentials</code> 指向一个包含 <code>access_key</code> 和
+<code>secret_key</code>；已签名的恢复文件提供目标设置。
+该命令使用直接外部连接，并在 rclone 远程需要时下载固定的辅助程序
+。它拒绝使用现有的输出目录。</p>
+<p>恢复的原始字节将写入 <code>recovered-attachments/media/</code>，文件名由
+其SHA-256决定。 <code>recovery-log.jsonl</code> 是一个关于恢复操作的未签名记录。
+该命令不会重建丢失的已签名日志或其签名密钥。请保留
+完整的工作区备份以备不时之需。存储恢复文件并非完整的工作区
+备份。</p>
+<h2 id="operator-bot-and-completion-notices">操作员机器人和完成通知<a class="anchor" href="#operator-bot-and-completion-notices" aria-label="本节链接">#</a></h2>
+<p>该 Telegram 机器人归操作员所有。请通过 BotFather 创建该机器人，并在控制面板中设置其
+令牌、目标聊天室以及明确允许的 Telegram 用户 ID。
+发件人和聊天室必须一致。转发消息以及来自其他
+机器人的命令将被忽略。</p>
+<p><code>/status</code> 并且 <code>/stats</code> 可在默认的“仅状态”模式下使用。可选的
+控制模式还增加了 <code>/pause</code>, <code>/resume</code> 和 <code>/copy</code>. <code>/copy</code> 并请求已配置的
+存储任务；这并不意味着远程上传已经完成。命令
+不能提供任意的 URL、文件或 shell 程序。</p>
+<p>请分别设置提醒和任务完成的通知。完成
+通知会区分存在缺失的账户导出与完整的导出，并显示
+历史记录和存储数量。除非在通知设置中单独
+启用，否则不会包含消息摘录。服务选择器是根据实际
+安装的 Apprise 目录生成的，而非一组固定的提供商示例。</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/STORAGE.md">在 GitHub 上编辑此页面 ↗</a><a class="next-guide" href="../security/"><span>下一步</span><strong>安全与数据处理 →</strong></a><p>这些指南描述了当前的实现方案。验证结果和剩余缺陷在其他文档中单独记录。 <a href="../verification/">已测试的内容 →</a></p></footer>
+</main>
+<aside class="toc" aria-label="本页面内容"><p class="nav-label">本页面内容</p><a href="#connect-a-destination">连接目标</a><a href="#keep-the-recovery-file">请妥善保存恢复文件</a><a href="#recover-after-losing-the-installation">安装丢失后的恢复方法</a><a href="#operator-bot-and-completion-notices">操作员机器人和完成通知</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>开源 · 可在您的设备上运行</span><a href="../../../../LICENSE">MIT 许可协议</a><a href="../notice/">操作员通知</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">安全</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "等待消息", "Step through a fictional send, edit and delete.": "通过一个虚构的发送、编辑和删除过程进行演示。", "No observations yet. Start the sequence or advance one event.": "尚无观察记录。开始序列或跳转至下一事件。", "Meet at 10:00": "10:00 见面", "A new message is visible in the chat.": "聊天中显示了一条新消息。", "Record 1 appended: the collector observed the original message.": "已附录记录 1 条：采集器已捕获原始消息。", "Meet at 11:00": "11:00 见面", "The current text changes. The earlier observation stays.": "当前文本内容有所变更。先前的观察结果仍然有效。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "记录 2 已追加：该编辑内容为新观察结果。记录 1 仍保留原始文本。", "Message deleted": "消息已删除", "The message has disappeared from the chat view.": "该消息已从聊天界面中消失。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "已添加记录 3：删除通知与两个被观察到的版本一同保留。", "0 records": "0 条记录", "1 record": "1 条记录", "2 records": "2 条记录", "3 records": "3 条记录", "Complete / {n} of 3": "已完成 / {n}/3", "Step / {n} of 3": "第 {n} 步（共 3 步）", "Pause": "暂停", "Replay sequence": "回放序列", "Play sequence": "播放序列", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "静态示例已上线。如需交互式计算哈希值，请通过 HTTPS 访问此页面，或在支持 Web Crypto 的本地预览环境中打开。", "No record supplied": "未提供记录", "Tail removed": "尾部内容已删除", "≠ saved hash": "≠ 已保存的哈希值", "Rebuilt · different hash": "重建 · 哈希值不同", "= saved hash": "= 已保存的哈希值", "Same length and matching head.": "篇幅相同且标题一致。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "这三个计算出的哈希值均与保存的哈希值一致。该样本符合保留的三个记录边界。", "Same saved head; the journal prefix fails verification.": "保存的头部信息相同；日志前缀验证失败。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "记录 2 与其保存的哈希值不再匹配。若仅检查最终存储的头部，则会遗漏此问题；验证器会检查每一条记录。", "Head differs from the retained checkpoint.": "标题与保留的检查点不同。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "重建的哈希值相互关联，但最终的头部已发生变化。保留的检查点拒绝接受这一历史记录。对于已更改的记录，原始签名也会验证失败。", "Too short: 2 supplied records \u003c 3 retained records.": "内容过短：提供的记录有 2 条，而保留的记录少于 3 条。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "剩下的两个哈希值仍然匹配。保留的检查点揭示了缺失的部分。如果没有那个早先的边界，仅凭这个较短的前缀是无法揭示这一遗漏的。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "此浏览器不支持哈希计算。下方的公式和静态说明仍可查看。", "{n} records": "{n}条记录", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "已接受：计数持续增加，签名已验证，密钥匹配。该见证者保留了这一新边界。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "回滚：签名后的结果报告的记录数量少于上次被接受的检查点。Witness 会记录该问题，并保留较早被接受的边界。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "分叉：计数保持不变，但分支头不同。见证者会记录该分歧，并保留先前被接受的分界点。", "No answer": "无回答", "boundary unknown": "边界未知", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "无响应：该工具会记录验证失败的情况。它无法确定收集器的当前状态。如果该工具仍能访问 Bot API 且其发布政策允许，则会发布该失败信息。", "Send {n}": "发送 {n}", "Edit {n}": "编辑 {n}", "Delete {n}": "删除 {n}", "Both accounts captured all six expected observations in this example.": "在这项示例中，这两个账户均捕获了预期的全部六项观察结果。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "账户 B 依然成功捕获了 6 条中的 6 条。其中两条收据的捕获耗时较长。捕获率和收据延迟反映的是不同的问题。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "账户 B 在截止时间前捕获了 6 条中的 5 条（83.3%）。缺失的编辑操作未测得延迟。此结果仅描述了这六项受控操作。", "not observed by cutoff": "未在截止时间前观察到", "{s} seconds": "{s}秒", "Exact values follow in the table.": "具体数值见下表。", "{s} s": "{s} s", "Not observed": "未发现", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "四个聊天群组提供了不同的观察结果。请追溯每条连接的源记录；在未确认发件人身份的情况下，请勿将该频道帖子归因于用户 71001。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "记录 #146 和 #205 显示相同的发件人 ID：71001。这将同一 Telegram 账号在两个聊天群组中发布的帖子关联起来。但这并不能识别现实世界中的具体个人，也无法确定该频道帖子的发布者。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "目标地址 pay.example.invalid/new 出现在群组记录 #146、机器人键盘 #173、频道编辑 #188 以及私信 #205 中。目标地址的重复出现表明这些内容之间存在关联；但这并不能证明这些账户受共同控制。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "在此虚构案例中，已完成的媒体收据 #151 和 #209 具有完全相同的 SHA-256 值。请对比实际字节内容及其关联的消息记录。该匹配文件既未标识其创建者，也无法证明是谁转发了该文件。", "the encrypted off-site copy": "加密的异地副本", "notifications": "通知", "checkpoint hashes for timestamps": "时间戳的检查点哈希值", "signed checkpoints for the witness": "TgWitness 的签名检查点", "Switched on in this example": "在此示例中已启用", "Optional · off by default": "可选 · 默认关闭", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "离开这台机器时：Telegram 连接和 {list}。除此之外别无他物。", "Default: only the Telegram connection leaves this machine.": "默认设置：仅 Telegram 连接会离开这台机器。", "{done} of {total} done": "已完成 {done}/{total}", "Mark step {n} as done": "将步骤 {n} 标记为已完成", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "文案", "Copied": "已复制", "Command copied.": "已复制该指令。", "Selected — Ctrl/Cmd+C": "选中 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "已选中命令。请手动复制。", "Command copied to clipboard.": "命令已复制到剪贴板。", "Select text": "选择文本", "Clipboard unavailable. Command selected; copy it manually.": "剪贴板不可用。已选中命令；请手动复制。", "A message arrives. The first observation is saved.": "一条消息送达。首次记录被保存。", "The time changes. Both captured versions stay.": "时间会改变，但两个记录版本都会保留下来。", "The message disappears. The captured history remains.": "消息虽已消失，但记录的历史依然存在。", "Pause example animation": "暂停示例动画", "Play example animation": "播放示例动画", "Play": "播放", "Full-size workspace screenshot": "全屏工作区截图", "Workspace screenshot · fictional data": "工作区截图 · 虚构数据", "Close": "关闭", "Close screenshot": "关闭截图", "Scrollable full-size screenshot": "可滚动全屏截图", "Enlarge: {name}": "放大：{name}", "View full size": "查看大图", "Step {n} of {total}": "第 {n} 步，共 {total} 步"}</script>
+</body></html>

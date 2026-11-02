@@ -235,7 +235,7 @@ TData는 텔레그램 데스크톱 애플리케이션(desktop.telegram.org에서
 - **여러 계정이 볼 수 있는 채팅:** 공유된 출처, 이를 관찰하는 계정 및 사용 가능한 작업 공간 관찰 기간(최대 7일) 내의 중단 사항. **N개 계정으로 내보내기 시** , 채널 또는 슈퍼그룹 내보내기 파일을 해당 계정들 간에 분할하고 하나의 아카이브에 서명합니다.
 - **그룹 내보내기:** 각 계정의 서명된 내보내기 파일이 포함된 ZIP 하나씩 `accounts/` 아래에 `manifest.json` 각 계정의 SHA-256 및 키 지문 목록을 포함하며, 이는 메인 워크스페이스에서 `manifest.signature.json`. 각 계정 아카이브는 `python -m tgwitness.verify` 해당 계정의 신뢰할 수 있는 지문으로 개별적으로 검증하십시오.
 
-멤버들은 그룹 설정을 공유하며, 각 계정은 자체 설정을 유지할 수 있습니다. [공유 설정](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups), [가져오기 및 그룹 가이드](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) 그리고 [MTProxy 풀 대시보드를](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources) 참조하세요.
+멤버들은 그룹 설정을 공유하며, 각 계정은 자체 설정을 유지할 수 있습니다. [공유 설정](https://phishdestroy.github.io/TgWitness/ko/docs/reference/settings/#account-groups), [가져오기 및 그룹 가이드](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) 그리고 [MTProxy 풀 대시보드를](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources) 참조하세요.
 
 ## 로그아웃
 
@@ -278,6 +278,6 @@ TData는 텔레그램 데스크톱 애플리케이션(desktop.telegram.org에서
 | 계정 ID가 가져온 계정과 일치하지 않습니다. | 이 파일의 사용자 ID는 텔레그램이 보고한 내용과 다릅니다. 이 파일은 다른 계정의 것입니다. |
 | 이 계정은 이미 다른 워크스페이스에 속해 있습니다. | 계정을 두 번 추가하는 대신 해당 작업 공간을 열어주세요. |
 | 연결되어 있지만, **‘Sources**’의 채팅 목록에서 비공개 그룹이 누락되어 있습니다. | 멤버십 확인. 피커는 처음 1,000개의 대화를 검사합니다. **‘Parameters’에서** 한도를 늘리십시오. |
-| 프록시 연결 실패 | 경로 및 IP 모드를 확인하십시오. 자동 MTProxy는 작동하는 다른 항목을 시도합니다. IP 숨기기 모드는 대기하며, 명시적으로 선택된 대체 모드는 구성된 지연 시간이 지난 후 직접 연결할 수 있습니다. [라우팅 모드를](https://phishdestroy.github.io/TgWitness/ko/docs/reference/connection/#ip-modes) 참조하십시오. |
+| 프록시 연결 실패 | 경로 및 IP 모드를 확인하세요. 자동 MTProxy은 작동하는 다른 항목을 시도합니다. ‘주소 숨기기’는 대기하며, 최후의 수단인 ‘직접 연결’은 설정된 지연 시간이 지난 후 직접 연결할 수 있습니다. [라우팅 모드를](https://phishdestroy.github.io/TgWitness/ko/docs/reference/connection/#ip-modes) 참조하세요. |
 
 참조: 프록시 및 암호화와 관련된 [연결 및 보안](https://phishdestroy.github.io/TgWitness/ko/docs/reference/connection/), 그리고 로그인 후 수집되는 데이터의 [수집 방식](https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/).

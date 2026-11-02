@@ -8,7 +8,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/
 
 그림이 포함된 가이드
 
-[### 케이스 보드 관찰 내용, 정확한 인용문 및 팀 메모 간의 연관성을 유지해 주십시오.](https://phishdestroy.github.io/TgWitness/ko/docs/case-board/) [### 보고서 스튜디오 자료와 8가지 보고서 디자인 중 하나를 선택하십시오.](https://phishdestroy.github.io/TgWitness/ko/docs/reports/) [### 공유용 원문 수신자가 필요로 하는 필드를 포함하여 서명된 발췌본을 준비하십시오.](https://phishdestroy.github.io/TgWitness/ko/docs/handover/) [### 계정 그룹 계정을 함께 검토하되 작업 공간은 별도로 유지하십시오.](https://phishdestroy.github.io/TgWitness/ko/docs/groups/)
+[### 케이스 보드 관찰 내용, 정확한 인용문 및 팀 메모 간의 연관성을 유지해 주십시오.](https://phishdestroy.github.io/TgWitness/ko/docs/case-board/) [### 보고서 스튜디오 자료와 8가지 보고서 디자인 중 하나를 선택하십시오.](https://phishdestroy.github.io/TgWitness/ko/docs/reports/) [### 공유하기 수신자가 필요로 하는 필드를 포함하여 서명된 발췌본을 준비하십시오.](https://phishdestroy.github.io/TgWitness/ko/docs/handover/) [### 계정 그룹 계정을 함께 검토하되 작업 공간은 별도로 유지하십시오.](https://phishdestroy.github.io/TgWitness/ko/docs/groups/)
 
 [## 모드, 시나리오 및 증거 수준 수집 범위, 이벤트 경계, 8가지 검증 메커니즘 및 6가지 가상의 조사 시나리오.](https://phishdestroy.github.io/TgWitness/ko/guides/modes.html)
 
@@ -34,19 +34,19 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/
 
 설정
 
-[빠른 시작](https://phishdestroy.github.io/TgWitness/ko/docs/reference/quickstart/)[계정 및 세션 형식](https://phishdestroy.github.io/TgWitness/ko/docs/reference/accounts/)[접근 및 권한](https://phishdestroy.github.io/TgWitness/ko/docs/reference/access/)[연결, 프록시 및 데이터 보호](https://phishdestroy.github.io/TgWitness/ko/docs/reference/connection/)[배포](https://phishdestroy.github.io/TgWitness/ko/docs/reference/deployment/)
+[빠른 시작](https://phishdestroy.github.io/TgWitness/ko/docs/reference/quickstart/)[설치, 확인 및 업데이트](https://phishdestroy.github.io/TgWitness/ko/docs/reference/installation/)[초기 설정 및 구성](https://phishdestroy.github.io/TgWitness/ko/docs/reference/settings/)[계정 및 세션 형식](https://phishdestroy.github.io/TgWitness/ko/docs/reference/accounts/)[접근 및 권한](https://phishdestroy.github.io/TgWitness/ko/docs/reference/access/)[연결, 프록시 및 데이터 보호](https://phishdestroy.github.io/TgWitness/ko/docs/reference/connection/)[배포](https://phishdestroy.github.io/TgWitness/ko/docs/reference/deployment/)[고신뢰도 배포](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/)
 
 수집
 
-[데이터 수집 방식](https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/)[소스 기록 불러오기](https://phishdestroy.github.io/TgWitness/ko/docs/reference/history/)[워크플로우 및 운영](https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/)[조사 모드](https://phishdestroy.github.io/TgWitness/ko/docs/reference/investigation/)[기능 및 제한 사항](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/)
+[패널 가이드](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/)[데이터 수집 방식](https://phishdestroy.github.io/TgWitness/ko/docs/reference/collection/)[소스 기록 불러오기](https://phishdestroy.github.io/TgWitness/ko/docs/reference/history/)[워크플로우 및 운영](https://phishdestroy.github.io/TgWitness/ko/docs/reference/operations/)[조사 모드](https://phishdestroy.github.io/TgWitness/ko/docs/reference/investigation/)[기능 및 제한 사항](https://phishdestroy.github.io/TgWitness/ko/docs/reference/features/)
 
 아카이브 및 연동 기능
 
-[Case Board 참조](https://phishdestroy.github.io/TgWitness/ko/docs/reference/case-board/)[아카이브 분석](https://phishdestroy.github.io/TgWitness/ko/docs/reference/analysis/)[읽기 전용 MCP](https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/)[로컬 OCR 및 텍스트 변환](https://phishdestroy.github.io/TgWitness/ko/docs/reference/media-analysis/)[발신 웹훅](https://phishdestroy.github.io/TgWitness/ko/docs/reference/webhooks/)
+[Case Board 참조](https://phishdestroy.github.io/TgWitness/ko/docs/reference/case-board/)[아카이브 분석](https://phishdestroy.github.io/TgWitness/ko/docs/reference/analysis/)[읽기 전용 MCP](https://phishdestroy.github.io/TgWitness/ko/docs/reference/mcp/)[로컬 OCR 및 텍스트 변환](https://phishdestroy.github.io/TgWitness/ko/docs/reference/media-analysis/)[발신 웹훅](https://phishdestroy.github.io/TgWitness/ko/docs/reference/webhooks/)[공개 쇼케이스](https://phishdestroy.github.io/TgWitness/ko/docs/reference/showcase/)
 
 증거
 
-[증거 기록의 작동 방식](https://phishdestroy.github.io/TgWitness/ko/docs/reference/how-it-works/)[보고서 구성 및 검증](https://phishdestroy.github.io/TgWitness/ko/docs/reference/case-reports/)[증거 형식](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/)[독립적인 증인](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/)[타임스탬프](https://phishdestroy.github.io/TgWitness/ko/docs/reference/timestamp/)
+[증거 기록의 작동 방식](https://phishdestroy.github.io/TgWitness/ko/docs/reference/how-it-works/)[보고서 구성 및 검증](https://phishdestroy.github.io/TgWitness/ko/docs/reference/case-reports/)[계정 내보내기](https://phishdestroy.github.io/TgWitness/ko/docs/reference/account-export/)[증거 형식](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/)[독립적인 증인](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/)[타임스탬프](https://phishdestroy.github.io/TgWitness/ko/docs/reference/timestamp/)[저장 및 복구](https://phishdestroy.github.io/TgWitness/ko/docs/reference/storage/)
 
 보안 및 프로젝트
 

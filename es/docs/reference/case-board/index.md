@@ -6,7 +6,7 @@ Marcadores, resaltados exactos, fragmentos de acción, debates, acceso restringi
 
 Case Board ofrece al equipo de investigación una vista de trabajo compartida del material guardado. Se puede marcar una observación, resaltar un pasaje concreto, guardar una serie de acciones y comentarlas con los compañeros. Las fichas conservan sus referencias de origen y el historial de revisiones firmado. Las anotaciones del equipo permanecen en el espacio de trabajo, identificables por separado de las observaciones originales de Telegram.
 
-[Modelo de pruebas](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/) · [Acceso](https://phishdestroy.github.io/TgWitness/es/docs/reference/access/) · [Informes](https://phishdestroy.github.io/TgWitness/es/docs/reference/case-reports/) · [Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE-BOARD.md)
+[Modelo de pruebas](https://phishdestroy.github.io/TgWitness/es/docs/reference/evidence/) · [Acceso](https://phishdestroy.github.io/TgWitness/es/docs/reference/access/) · [Informes](https://phishdestroy.github.io/TgWitness/es/docs/reference/case-reports/)
 
 ![Feed de investigación sintético](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
 

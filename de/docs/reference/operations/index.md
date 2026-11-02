@@ -51,7 +51,7 @@ Der lokale Demo-Zugriff wird automatisch ohne manuelle Token-Eingabe freigeschal
 
 ![Überwachungseinstellungen pro Konto mit synthetischen Quelldaten](https://phishdestroy.github.io/TgWitness/assets/sources.png)
 
-**Wählen Sie** unter **„Quellen“ → „Erfassungseinstellungen“ → „Zu speichernde Änderungen auswählen“ die Optionen** „Neue Nachrichten“, „Bearbeitungen“, „Löschmeldungen“, „Reaktionsaktualisierungen“ und „Mitgliedschaftsereignisse“ einzeln aus. In der Standardeinstellung werden alle Kategorien beibehalten. Die Option **„Nachrichten, Bearbeitungen und Löschungen“** bewahrt den ursprünglichen Kontext bei, während separate Reaktions- und Mitgliederaktualisierungen deaktiviert werden. **„Alle sichtbaren Aktivitäten“** stellt alle fünf Kategorien wieder her. Voreinstellungen ändern die Darstellung; klicken Sie auf **„Überwachungseinstellungen speichern“,** um die Änderungen zu übernehmen.
+Wählen Sie in **Quellen → Aufzeichnung → Wählen Sie aus, welche Änderungen beibehalten werden sollen** neue Nachrichten, Bearbeitungen, Löschbenachrichtigungen, Reaktions-Updates und Mitgliederereignisse unabhängig voneinander aus. Die Standardeinstellung behält alle Kategorien bei. **Nachrichten, Bearbeitungen und Löschungen** behält den ursprünglichen Kontext bei, deaktiviert jedoch separate Reaktions- und Mitglieder-Updates. **Alle sichtbaren Aktivitäten** stellt alle fünf wieder her. Voreinstellungen ändern das Formular; drücken Sie **Aufzeichnungseinstellungen speichern**, um sie anzuwenden.
 
 Die gespeicherte Richtlinie gilt für alle ausgewählten Quellen in diesem Arbeitsbereich. Andere Arbeitsbereiche behalten ihre eigenen Einstellungen bei. Bei jeder tatsächlichen Änderung werden signierte Vorher-Nachher-Werte aufgezeichnet; die aktuelle Richtlinie wird zudem in Prozessbelegen und Beobachtungsstartprotokollen erfasst. Das Deaktivieren einer Kategorie löscht frühere Beobachtungen nicht. Durch erneutes Aktivieren werden versäumte Änderungen nicht nachträglich erfasst. In dieser Version gibt es keine gruppenspezifische Übersteuerung von Kategorien.
 
@@ -65,7 +65,7 @@ Das Löschen eines zusätzlichen Arbeitsbereichs stoppt dessen Datenerfassung un
 
 ## Benachrichtigungen
 
-Open **Sources → Benachrichtigungen → Warnmeldungen und eine tägliche Zusammenfassung**. TgWitness nutzt Apprise, um Warnmeldungen an Matrix, Telegram, Discord, Slack, ntfy, E-Mail und andere unterstützte Dienste zu senden. Sie können einem Arbeitsbereich mehrere Ziele hinzufügen.
+Öffnen Sie **„Extras“ → „Benachrichtigungen“ → „Konfigurieren**“. TgWitness verwendet Apprise, um Benachrichtigungen an Matrix, Telegram, Discord, Slack, ntfy, E-Mail und andere unterstützte Dienste zu senden. Sie können einem Arbeitsbereich mehrere Ziele hinzufügen.
 
 1. Geben Sie pro Zeile eine Apprise-Ziel-URL ein. Verwenden Sie den [Servicekatalog und die URL-Formate](https://appriseit.com/services/) für Ihren Dienst.
 2. Aktivieren Sie die Option **„Benachrichtigungen senden**“ und wählen Sie anschließend Problemwarnungen, Änderungen in beobachteten Chats sowie eine tägliche Zusammenfassung aus. Die Uhrzeit in der Zusammenfassung richtet sich nach der Serverzeit.

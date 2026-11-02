@@ -28,7 +28,7 @@ Vui lòng mở bảng điều khiển có chứa mã thông báo đã được c
 
 ## Chọn các quyền truy cập
 
-Để thực hiện trình diễn công khai chỉ chứa văn bản, hãy sử dụng **“Trình diễn công khai”** thay vì quyền truy cập người đánh giá thông thường. Tính năng này hiển thị các kênh công khai được chọn rõ ràng, các thao tác chỉnh sửa và xóa đã được lưu giữ, cùng với số liệu thống kê đã được ký xác nhận, trong đó các trường tác giả được che đi và các tệp được đóng lại tại ranh giới API. [Tạo và xác minh một trình diễn](https://github.com/phishdestroy/TgWitness/blob/main/docs/LIVE-SHOWCASE.md).
+Để thực hiện trình diễn công khai chỉ chứa văn bản, hãy sử dụng **“Trình diễn công khai”** thay vì quyền truy cập người đánh giá thông thường. Tính năng này hiển thị các kênh công khai được chọn rõ ràng, các thao tác chỉnh sửa và xóa đã được lưu giữ, cùng với số liệu thống kê đã được ký xác nhận, trong đó các trường tác giả được che đi và các tệp được đóng lại tại ranh giới API. [Tạo và xác minh một trình diễn](https://phishdestroy.github.io/TgWitness/vi/docs/reference/showcase/).
 
 | Quyền sử dụng | Các tính năng mà công cụ này cung cấp |
 | --- | --- |
@@ -70,7 +70,7 @@ Các cài đặt mặc định ban đầu của biểu mẫu Access cũng bao g�
 
 ## Thay đổi hoặc thu hồi quyền truy cập
 
-Chỉnh sửa một mục trong **phần Quyền truy cập** để thay đổi phạm vi, quyền hạn hoặc giới hạn của mục đó. Các thay đổi về phạm vi và quyền hạn sẽ được kiểm tra trên các yêu cầu tiếp theo, bao gồm cả các yêu cầu từ các phiên đang mở. Việc thu hồi quyền truy cập sẽ kết thúc các phiên hiện có và khiến mã thông báo đã cấp không còn hiệu lực. **Tính năng phiên đang mở** cũng cho phép quản trị viên kết thúc một phiên cụ thể mà không cần thu hồi toàn bộ quyền truy cập.
+Chỉnh sửa một mục trong **phần “Granted access” (Quyền truy cập đã cấp)** để thay đổi phạm vi, quyền hoặc giới hạn của nó. Các thay đổi về phạm vi và quyền sẽ được kiểm tra trên các yêu cầu tiếp theo, bao gồm các yêu cầu từ các phiên đang mở. Việc thu hồi quyền truy cập sẽ kết thúc các phiên đó và khiến mã thông báo đã cấp không còn sử dụng được. **Tính năng “Open sessions” (Phiên đang mở)** cũng cho phép quản trị viên kết thúc một phiên riêng lẻ mà không cần thu hồi toàn bộ quyền truy cập.
 
 Các bản sao xuất đã lưu giữ nguyên thông tin về người tạo, không gian làm việc, phạm vi cuộc trò chuyện và các quyền truy cập cần thiết. Quyền truy cập được cấp chỉ cho phép liệt kê hoặc tải xuống các bản sao của chính nó trong thời gian các quyền đó còn hiệu lực; các bản sao chứa Case Board cũng yêu cầu quyền ``board.read``. Quản trị viên có thể truy xuất tất cả các bản sao. Các bản sao cũ hơn không có siêu dữ liệu này và các gói nhóm chỉ dành riêng cho quản trị viên. Tải xuống phiếu yêu cầu và các tệp phản hồi đã chuẩn bị sẽ kiểm tra lại quyền truy cập sau khi chuẩn bị tệp, trước khi gửi các byte của tệp đó.
 

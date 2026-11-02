@@ -51,7 +51,7 @@ El acceso a la demostración local se abre automáticamente sin necesidad de int
 
 ![Configuración de supervisión por cuenta con datos de origen sintéticos](https://phishdestroy.github.io/TgWitness/assets/sources.png)
 
-En **Fuentes → Configuración de captura → Elegir qué cambios conservar**, seleccione de forma independiente los mensajes nuevos, las modificaciones, los avisos de eliminación, las actualizaciones de reacciones y los eventos de pertenencia a grupos. La configuración predeterminada conserva todas las categorías. La opción **«Mensajes, modificaciones y eliminaciones»** mantiene el contexto original mientras desactiva las actualizaciones independientes de reacciones y miembros. **«Toda la actividad visible**» restaura las cinco opciones. Los ajustes preestablecidos modifican el formato; pulse **«Guardar configuración de supervisión»** para aplicarlos.
+En **Fuentes → Grabación → Elegir qué cambios conservar**, selecciona de forma independiente los mensajes nuevos, las ediciones, los avisos de eliminación, las actualizaciones de reacciones y los eventos de pertenencia. La opción predeterminada conserva todas las categorías. La opción **«Mensajes, ediciones y eliminaciones»** mantiene el contexto original mientras desactiva las actualizaciones separadas de reacciones y miembros. **La opción «Toda la actividad visible»** restaura las cinco categorías. Los ajustes preestablecidos modifican el formulario; pulsa **«Guardar configuración de grabación**» para aplicarlos.
 
 La política guardada se aplica a todas las fuentes seleccionadas en ese espacio de trabajo. Los demás espacios de trabajo conservan su propia configuración. Cada cambio real registra los valores firmados «antes» y «después» ; la política actual también se incluye en los recibos de proceso y en los registros de inicio de observación . Desactivar una categoría no elimina las observaciones anteriores. Volver a activarla no recupera los cambios que se hayan perdido. En esta versión no existe la posibilidad de anular las categorías por grupo.
 
@@ -65,7 +65,7 @@ Al eliminar un espacio de trabajo adicional, se detiene su recopilador y se elim
 
 ## Notificaciones
 
-Abra **«Fuentes» → «Notificaciones» → «Alertas» y un resumen diario**. TgWitness utiliza Apprise para enviar alertas a Matrix, Telegram, Discord, Slack, ntfy, correo electrónico y otros servicios compatibles. Puede añadir varios destinos a un mismo espacio de trabajo.
+Abre **Extras → Notificaciones → Configurar**. TgWitness utiliza Apprise para enviar alertas a Matrix, Telegram, Discord, Slack, ntfy, correo electrónico y otros servicios compatibles. Puedes añadir varios destinos a un mismo espacio de trabajo.
 
 1. Introduzca una URL de destino de Apprise por línea. Utilice el [catálogo de servicios y los formatos de URL](https://appriseit.com/services/) correspondientes a su servicio.
 2. Active la opción **«Enviar notificaciones**» y, a continuación, seleccione las alertas de problemas, los cambios en los chats supervisados y un resumen diario. La hora del resumen se basa en la hora del servidor.

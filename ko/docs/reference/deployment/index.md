@@ -19,7 +19,7 @@ TgWitness를 Windows, Linux, macOS 또는 Docker 환경에서 HTTPS를 통해 �
 | Windows용 Docker 보조 도구 | `scripts\Docker.cmd` | 네, 헬퍼는 웹 서버의 정상 작동 상태를 확인합니다. |
 | Linux/macOS용 Docker 보조 도구 | `sh scripts/docker-start.sh` | 네, 헬퍼는 웹 서버의 정상 작동 상태를 확인합니다. |
 
-제3자가 확인할 수 있어야 하는 클라우드 서버( SSH 없이 제공업체의 API를 통해 생성되며, Cloudflare Tunnel을 통해서만 접속 가능)에 대해서는 [‘고신뢰도 배포’를](https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md) 참조하십시오.
+제3자가 확인할 수 있어야 하는 클라우드 서버( SSH 없이 제공업체의 API를 통해 생성되며, Cloudflare Tunnel을 통해서만 접속 가능)에 대해서는 [‘고신뢰도 배포’를](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/) 참조하십시오.
 
 네이티브 시작 시 비공개 `.venv`를 생성하고 고정된 종속성을 설치합니다. Docker는 호스트 Python 없이 이미지 내에서 이를 빌드합니다. 최초 설정 시 인터넷 접속이 필요합니다. Python 3.11 이상이 발견되지 않으면, `Start.cmd`는 현재 Windows 사용자를 위해 Python 3.12를 설치하기 전에 확인을 요청합니다(winget을 사용하거나, 그렇지 않은 경우 Python Software Foundation의 서명을 확인한 후 python.org 설치 프로그램을 사용함). 이 과정에서 관리자 권한을 요청하지 않습니다. Docker 및 OS 서비스는 여전히 필수 전제 조건으로 유지됩니다.
 
@@ -250,7 +250,7 @@ python -m tgwitness.download --token-file data/live/panel-token.txt --out eviden
 
 ## 연결 및 보안 옵션
 
-연결 경로는 워크스페이스별로 다르며, 인증 전에 구성해야 합니다. SOCKS5/HTTP CONNECT는 고정된 python-socks 종속성을 사용합니다. MTProxy는 Telethon의 실험적인 무작위 중간 전송 방식을 사용하며, 가짜 TLS ee 비밀키는 지원되지 않습니다. 직접 폴백은 선택한 [IP 모드에](https://phishdestroy.github.io/TgWitness/ko/docs/reference/connection/#ip-modes) 따라 달라집니다. 'IP 숨기기' 모드는 이를 허용하지 않으며, '명시적 폴백' 모드는 지연 시간 후 이를 허용합니다. '터널/VPN' 모드는 직접 경로를 허용하지만 VPN을 생성하지는 않습니다. 이는 시스템 전체에 적용되는 네트워크 정책이 아닙니다.
+연결 경로는 워크스페이스별로 설정되며, 인증 전에 구성해야 합니다. SOCKS5/HTTP CONNECT는 고정된 python-socks 종속성을 사용합니다. MTProxy는 Telethon의 실험적인 무작위 중간 전송 방식을 사용하며, 가짜 TLS ee 비밀키는 지원되지 않습니다. 직접 연결 폴백은 선택한 [IP](https://phishdestroy.github.io/TgWitness/ko/docs/reference/connection/#ip-modes)모드에 따라 달라집니다. **‘주소 숨기기’**모드는 이를 거부하며, **‘최후의 수단으로서의 직접 연결’ 모드는** 지연 시간 후 이를 허용합니다. **터널이나 VPN 뒤의 서버는** 직접 경로를 허용하지만 VPN을 생성하지는 않습니다. 이는 시스템 전체에 적용되는 네트워크 정책이 아닙니다.
 
 새로 설치할 경우, TGWITNESS_VAULT_KEY_FILE은 별도로 보호된 무작위 마스터 키 파일을 가리키도록 설정합니다. 컨테이너 내 /data 외부에 읽기 전용으로 마운트하십시오. 각 작업 공간과 마스터 키에 대한 vault.external.json 솔트 메타데이터를 별도로 보관하십시오. 기존의 로컬 볼트는 계획적인 마이그레이션이 필요하며, 이 변수를 설정한다고 해서 자동으로 변환되지는 않습니다. 메시지/미디어 저장 및 내보내기 기능은 애플리케이션 수준에서 암호화되지 않습니다. 필요한 경우 암호화된 볼륨과 충분한 용량의 비공개 임시 저장 공간을 사용하십시오.
 

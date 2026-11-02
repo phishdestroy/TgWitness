@@ -51,7 +51,7 @@ Mahalliy demo kirish qo'lda token kiritmasdan avtomatik ochiladi. U izolyatsiyal
 
 ![Har bir hisob uchun monitoring sozlamalari sun'iy manba ma'lumotlari bilan](https://phishdestroy.github.io/TgWitness/assets/sources.png)
 
-**Manbalar → Yozib olish sozlamalari → Qaysi o'zgarishlarni saqlashni tanlash** bo'limida yangi xabarlar, tahrirlar, o'chirish bildirishnomalari, reaktsiya yangilanishlari va a'zolik voqealarini alohida tanlang. Standart sozlama barcha toifalarni saqlaydi. "**Xabarlar, tahrirlar va o'chirishlar**" esa alohida reaktsiya/a'zo yangilanishlarini o'chirib, asl kontekstni saqlaydi. **Ko'rinadigan barcha faoliyat** beshtasini ham tiklaydi. Oldindan sozlamalar shaklni o'zgartiradi; qo'llash uchun **Monitoring sozlamalarini saqlash tugmasini** bosing.
+**Manbalar → Yozib olish → Qaysi o'zgarishlarni saqlashni tanlash** bo'limida yangi xabarlar, tahrirlar, o'chirish bildirishnomalari, reaktsiya yangilanishlari va a'zolik voqealarini alohida tanlang. Standart sozlama barcha toifalarni saqlaydi. **Xabarlar, tahrirlar va o'chirishlar** asl kontekstni saqlaydi, ammo alohida reaktsiya/a'zo yangilanishlarini o'chiradi. **Barcha ko'rinadigan faoliyat** beshala toifani tiklaydi. Oldindan o'rnatmalar shaklni o'zgartiradi; qo'llash uchun **Yozib olish sozlamalarini saqlash tugmasini** bosing.
 
 Saqlangan siyosat shu ish maydonidagi barcha tanlangan manbalarga tatbiq etiladi. Boshqa ish maydonchalari o'z sozlamalarini saqlab qoladi. Har bir haqiqiy o'zgarish imzolangan oldingi/keyingi qiymatlarni qayd etadi; joriy siyosat jarayon kvitansiyalari va kuzatuv boshlanishi yozuvlariga ham kiritilgan. Toifani o'chirish oldingi kuzatuvlarni o'chirib tashlamaydi. Uni qayta yoqish o'tkazib yuborilgan o'zgarishlarni qaytarib bermaydi. Ushbu versiyada guruh bo'yicha kategoriyani ustuvor qilish imkoniyati mavjud emas.
 
@@ -65,7 +65,7 @@ Qo'shimcha ish maydonini o'chirish uning yig'uvchisini to'xtatadi va mahalliy ma
 
 ## Bildirishnomalar
 
-Ochiq **manbalar → Bildirishnomalar → Ogohlantirishlar va kunlik xulosa**. TgWitness ogohlantirishlarni Matrix, Telegram, Discord, Slack, ntfy, elektron pochta va boshqa qo'llab-quvvatlanadigan xizmatlarga yuborish uchun Apprise-dan foydalanadi. Bir ish maydoniga bir nechta manzillarni qo'shishingiz mumkin.
+**Qo'shimchalar → Bildirishnomalar → Sozlashni** oching. TgWitness Matrix, Telegram, Discord, Slack, ntfy, elektron pochta va boshqa qo'llab-quvvatlanadigan xizmatlarga ogohlantirishlar yuborish uchun Apprise-dan foydalanadi. Bir ish maydoniga bir nechta manzilni qo'shishingiz mumkin.
 
 1. Har bir satrga bitta Apprise manzil URL-ni kiriting. Xizmatingiz uchun [xizmat katalogi va URL formatlaridan](https://appriseit.com/services/) foydalaning.
 2. **Xabar yuborishni** yoqing, so'ng muammo bildirishnomalarini, kuzatilayotgan suhbatlardagi o'zgarishlarni va kunlik xulosani tanlang. Xulosa soati server vaqtiga asoslanadi.

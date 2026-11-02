@@ -51,7 +51,7 @@ L'accès à la démo locale s'ouvre automatiquement sans saisie manuelle de jeto
 
 ![Paramètres de surveillance par compte avec des données sources synthétiques](https://phishdestroy.github.io/TgWitness/assets/sources.png)
 
-Dans **Sources → Paramètres de capture → Choisir les modifications à conserver**, sélectionnez indépendamment les nouveaux messages, les modifications, les notifications de suppression, les mises à jour des réactions et les événements liés à l’adhésion. Le réglage par défaut conserve toutes les catégories. L’option « **Messages, modifications et suppressions »** conserve le contexte d’origine tout en désactivant les mises à jour distinctes concernant les réactions et les membres. L’option « **Toutes les activités visibles »** restaure les cinq catégories. Les préréglages modifient le format ; cliquez sur « **Enregistrer les paramètres de surveillance »** pour les appliquer.
+Dans **Sources → Enregistrement → Choisir les modifications à conserver**, sélectionnez indépendamment les nouveaux messages, les modifications, les notifications de suppression, les mises à jour des réactions et les événements liés à l’adhésion. Le réglage par défaut conserve toutes les catégories. L’option « **Messages, modifications et suppressions »** conserve le contexte d’origine tout en désactivant les mises à jour séparées concernant les réactions et les membres. L’option « **Toute l’activité visible »** restaure les cinq catégories. Les préréglages modifient le formulaire ; cliquez sur **« Enregistrer les paramètres d’enregistrement »** pour les appliquer.
 
 La politique enregistrée s’applique à toutes les sources sélectionnées dans cet espace de travail. Les autres espaces de travail conservent leurs propres paramètres. Chaque modification effective enregistre les valeurs « avant » et « après » signées ; la politique en vigueur est également incluse dans les accusés de réception de processus et les enregistrements de début d’observation. La désactivation d’une catégorie ne supprime pas les observations antérieures. La réactivation ne permet pas de récupérer les modifications manquées. Il n’existe pas de dérogation par groupe de catégories dans cette version.
 
@@ -65,7 +65,7 @@ La suppression d’un espace de travail supplémentaire arrête son collecteur e
 
 ## Notifications
 
-**Sources** ouvertes **→ Notifications → Alertes et résumé quotidien**. TgWitness utilise Apprise pour envoyer des alertes vers Matrix, Telegram, Discord, Slack, ntfy, par e-mail et vers d’autres services pris en charge. Vous pouvez ajouter plusieurs destinations à un même espace de travail.
+Ouvrez **Extras → Notifications → Configurer**. TgWitness utilise Apprise pour envoyer des alertes vers Matrix, Telegram, Discord, Slack, ntfy, par e-mail et vers d’autres services pris en charge. Vous pouvez ajouter plusieurs destinations à un même espace de travail.
 
 1. Saisissez une URL de destination Apprise par ligne. Utilisez le [catalogue de services et les formats d'URL](https://appriseit.com/services/) adaptés à votre service.
 2. Activez l’option « **Envoyer des notifications** », puis sélectionnez les alertes de problèmes, les modifications dans les discussions surveillées et un résumé quotidien. L’heure indiquée dans le résumé correspond à l’heure du serveur.

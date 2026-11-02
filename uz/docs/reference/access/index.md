@@ -28,7 +28,7 @@ Ajratilgan token bilan panelni alohida brauzer sessiyasida oching va uni topshir
 
 ## Ruxsatlarni tanlang
 
-Matnli ommaviy namoyish uchun oddiy ko'rib chiquvchi kirish o'rniga **Public showcase**-dan foydalaning. U aniq tanlangan ommaviy kanallar, saqlangan tahrirlar va o'chirishlar hamda imzolangan statistikani ko'rsatadi, muallif maydonchalari o'chirib tashlangan va fayllar API chegarasida yopiq bo'ladi. [Showcase yarating va tekshiring](https://github.com/phishdestroy/TgWitness/blob/main/docs/LIVE-SHOWCASE.md).
+Matnli ommaviy namoyish uchun oddiy ko'rib chiquvchi kirish o'rniga **Public showcase**-dan foydalaning. U aniq tanlangan ommaviy kanallar, saqlangan tahrirlar va o'chirishlar hamda imzolangan statistikani ko'rsatadi, muallif maydonchalari o'chirib tashlangan va fayllar API chegarasida yopiq bo'ladi. [Showcase yarating va tekshiring](https://phishdestroy.github.io/TgWitness/uz/docs/reference/showcase/).
 
 | Ruxsat | U nimaga imkon beradi |
 | --- | --- |
@@ -70,7 +70,7 @@ IP — bu ilova ko'radigan mijoz manzili. Teskari proxy yoki tunnel ortida bo'ls
 
 ## Kirishni o'zgartirish yoki bekor qilish
 
-**Kirishlar** bo'limida yozuvni tahrirlab uning doirasi, ruxsatlari yoki cheklovlarini o'zgartiring. Doirasi va ruxsatlardagi o'zgarishlar keyingi so'rovlarda, jumladan allaqachon ochilgan sessiyalardan keladigan so'rovlarda ham tekshiriladi. Kirishni bekor qilish uning sessiyalarini tugatadi va berilgan tokenni ishlatilmaydigan holga keltiradi. **Ochilgan sessiyalar** administratorga butun kirishni bekor qilmasdan alohida sessiyani yakunlash imkonini ham beradi.
+**Granted access** bo'limidagi yozuvni tahrirlab, uning doirasi, ruxsatlari yoki cheklovlarini o'zgartiring. Doirasi va ruxsatlardagi o'zgarishlar keyingi so'rovlarda, jumladan allaqachon ochilgan sessiyalardan keladigan so'rovlarda ham tekshiriladi. Kirishni bekor qilish uning sessiyalarini tugatadi va berilgan tokenni ishlatilmaydigan holga keltiradi. **Ochilgan sessiyalar** administratorga butun kirishni bekor qilmasdan alohida sessiyani yakunlash imkonini ham beradi.
 
 Saqlangan eksport nusxalari ularning yaratuvchisi, ish maydoni, suhbat doirasi va zarur ruxsatlarini saqlab qoladi. Berilgan ruxsat faqat o'sha ruxsatlar amal qilayotgan paytda o'z nusxalarini ro'yxatga olish yoki yuklab olish imkonini beradi; Case Board nusxalari ham `board.read` huquqini talab qiladi. Administrator barcha nusxalarni qaytarib olishi mumkin. Ushbu metadata va guruh paketlarisiz eski nusxalar faqat administrator uchun mo'ljallangan. Yuklab olish chiptalari va tayyorlangan fayl javoblari faylni tayyorlagandan so'ng, uning baytlarini yuborishdan oldin ruxsatni qayta tekshiradi.
 

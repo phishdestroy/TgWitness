@@ -40,8 +40,8 @@ Proszę utworzyć bota za pomocą BotFather i zezwolić mu na publikowanie post�
 
 ## Trzy kroki w sekcji „Dodatki”
 
-1. **Dostęp tylko do odczytu.** Otwórz **sekcję „Dodatki” → Bot na Państwa kanale**, utwórz token świadka i zapisz plik dostępu. Umożliwia to odczytanie punktów kontrolnych i stanu systemu, ale nie pozwala na przeglądanie rozmów ani sterowanie kolektorem.
-2. **Kanał i interwał.** Proszę wprowadzić nazwę kanału oraz adres kolektora dostępny dla świadka. Proszę zapisać plik ustawień.
+1. **Dostęp tylko do odczytu.** Otwórz **menu „Extras” → „Independent witness”**, utwórz token świadka i zapisz plik dostępu. Umożliwia to odczyt punktów kontrolnych i stanu systemu, ale nie rozmów ani elementów sterujących kolektora.
+2. **Kanał i interwał.** Wybierz kanał w Telegramie lub webhook Discorda i wprowadź adres kolektora dostępny z poziomu świadka. Zapisz plik ustawień.
 3. **Uruchomienie.** Umieść razem pliki `witness.json`, `witness-token.txt` oraz `bot-token.txt` utworzone na serwerze Witness. Proszę uruchomić poniższe polecenia w zainstalowanym środowisku projektowym.
 
 ```
@@ -50,6 +50,8 @@ python -m tgwitness.witness run --config witness.json
 ```
 
 Pobranie plików nie uruchamia narzędzia TgWitness. Proszę sprawdzić, czy w kanale pojawił się pierwszy podpisany wpis, a następnie oddzielnie zachować odcisk klucza publicznego narzędzia TgWitness.
+
+W przypadku Discorda należy zapisać adres URL webhooka kanału jako `discord-webhook.txt` zamiast tokenu bota. Świadek publikuje w jednym miejscu – na kanale Telegramu lub Discordzie; pliki większe niż wiadomość na Discordzie są przesyłane jako załączniki.
 
 ## Proszę wybrać częstotliwość publikacji
 

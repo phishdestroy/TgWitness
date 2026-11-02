@@ -97,7 +97,7 @@ Older entries below describe their own runs; most of them used synthetic test cl
 
 This is the historical test record of the original manual-selection build. For the current automatic pool and IP modes, see [connection settings](https://phishdestroy.github.io/TgWitness/docs/reference/connection/#ip-modes). Counts and unsupported features below belong to that tested revision.
 
-Added a bundled public snapshot and explicit HTTPS refresh from SoliSpirit/mtproto and zakky8/mtproto-proxy-pro. On this host, the application downloader fetched both feeds successfully on 29 October 2026 at 12:58 UTC: **118 unique compatible endpoints** after filtering, deduplication and the 64-entry limit per source. This verifies list retrieval, not connectivity or message delivery through those endpoints. No real account was connected to a listed proxy during this work. [Operator and user guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/PROXIES.md).
+Added a bundled public snapshot and explicit HTTPS refresh from SoliSpirit/mtproto and zakky8/mtproto-proxy-pro. On this host, the application downloader fetched both feeds successfully on 29 October 2026 at 12:58 UTC: **118 unique compatible endpoints** after filtering, deduplication and the 64-entry limit per source. This verifies list retrieval, not connectivity or message delivery through those endpoints. No real account was connected to a listed proxy during this work. [Operator and user guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md).
 
 Failed/empty/incompatible source responses retain previous entries and dates. Updates do not alter the selected route. Public addresses are validated and resolved IPs pinned on selection; operator/manual routes remain separate. The connection probe is now available in the panel before account login. Fake TLS ee and automatic proxy selection remain unsupported. The operator's catalog overrides subscriptions completely.
 
@@ -111,7 +111,7 @@ Receipts: `test-results/public-proxy-research/download-receipt.json`, `test-resu
 
 ## Optional extras presentation · 29 October 2026
 
-The former Proof bot destination is now **Extras**: a short overview followed by a separate setup page for the selected option. The witness form has three steps, with connection management, network options and deployment details folded away. GitHub is explicitly planned and has no credential form. [Russian overview](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/EXTRAS.md).
+The former Proof bot destination is now **Extras**: a short overview followed by a separate setup page for the selected option. The witness form has three steps, with connection management, network options and deployment details folded away. GitHub is explicitly planned and has no credential form. [Overview of Extras](https://phishdestroy.github.io/TgWitness/docs/reference/panel/#extras).
 
 - 30 focused tests passed for localization, witness setup and publication checks.
 - Chromium setup acceptance passed in English/Russian, light/dark, at 390/1440 pixels: keyboard focus and return, no implicit connections when selecting extras, draft retention, pinned configuration/token downloads, token clearing on lock, and working local guide anchors. Layout and solid-background text contrast checks passed.
@@ -124,7 +124,7 @@ Receipts: `test-results/setup-browser/receipt.json`, `test-results/quick-navigat
 
 ## Witness bot and proxy setup audit · 29 October 2026
 
-The witness setup (now **Extras → A bot in your channel**) prepares an independently deployed witness: pinned collector key, scoped token download, own channel, publication policy, HTTP/SOCKS5 route and custom Bot API. The bot token remains on the witness host. Its new `--check-config` validates configuration and files without opening a network connection or creating a key. JSON file paths resolve beside the configuration. All Compose witness variants now forward the HTTP proxy and Bot API settings.
+The witness setup (now **Extras → Independent witness**) prepares an independently deployed witness: pinned collector key, scoped token download, own channel, publication policy, HTTP/SOCKS5 route and custom Bot API. The bot token remains on the witness host. Its new `--check-config` validates configuration and files without opening a network connection or creating a key. JSON file paths resolve beside the configuration. All Compose witness variants now forward the HTTP proxy and Bot API settings.
 
 Account settings support an operator-managed public MTProxy catalog, custom Telegram proxy-link preview and the existing manual fields. Catalog responses omit secrets; selection stores the route in the workspace vault. Missing/malformed catalogs leave manual routes available. No project proxy addresses or hosted witness service are invented or enabled by default. A Caddy example exposes only the scoped head endpoint when an external witness must reach a collector whose panel stays private.
 
@@ -136,7 +136,7 @@ Validation:
 - Ruff, source/link checks and Compose/workflow YAML parsing passed.
 - The rebuilt wheel passed isolated installation, panel/static resource and API-auth checks, plus independent verification of direct and streamed 32-event synthetic exports.
 
-Receipts: `test-results/setup-full-suite.log`, `setup-final-focused.log`, `setup-browser/receipt.json`, `setup-browser-final.log` and `setup-package.log`. These checks use synthetic accounts/proxies and a local Bot API fixture. They do not claim a real bot publication, working public MTProxy server, remote CI run or Docker deployment. The retained real Telegram observation history above remains a separate piece of evidence. [Setup instructions](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/WITNESS.md).
+Receipts: `test-results/setup-full-suite.log`, `setup-final-focused.log`, `setup-browser/receipt.json`, `setup-browser-final.log` and `setup-package.log`. These checks use synthetic accounts/proxies and a local Bot API fixture. They do not claim a real bot publication, working public MTProxy server, remote CI run or Docker deployment. The retained real Telegram observation history above remains a separate piece of evidence. [Setup instructions](https://phishdestroy.github.io/TgWitness/docs/reference/witness/#run-a-witness).
 
 ## Presentation and documentation review · 29 October 2026
 

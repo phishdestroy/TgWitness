@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/witne
 
 הפעל את Witness עם מפתח ובוט משלו, פרסם נקודות ביקורת חתומות בערוץ ובדוק את הייצוא מולן.
 
-[הגדרת הבוט והפרוקסי ברוסית](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/WITNESS.md).
+[ייצוא ואימות](https://phishdestroy.github.io/TgWitness/he/docs/reference/evidence/) · [אמינות גבוהה](https://phishdestroy.github.io/TgWitness/he/docs/reference/high-assurance/) · [מדריך לפאנלים](https://phishdestroy.github.io/TgWitness/he/docs/reference/panel/#extras)
 
 אוסף הנתונים חותם על היומן שלו עצמו, ולכן מי ששולט באוסף הנתונים ובמפתח שלו יכול, בעיקרון, לשכתב או לקצר את היומן ולחתום עליו שוב. "Witness" מאפשר לזהות זאת. זהו תהליך נפרד — מיכל נוסף, או ליתר דיוק שרת שמישהו אחר מפעיל — אשר כל כמה דקות משיג את ראש היומן החתום של האספן, חותם על מה ש ראה באמצעות המפתח שלו, שומר זאת ביומן משלו ומפרסם זאת בערוץ טלגרם.
 
@@ -27,7 +27,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/he/docs/reference/witne
 | מפתח Ed25519 ויומן משלו | כספת האספן, מפתח החתימה או אסימון הפאנל |
 | אסימון בוט טלגרם משלו | תוכן ההודעה: בראש ההודעה מופיע מספר הרשומות ו-hash |
 
-האסימון נוצר בדף **ה-Witness** של הפאנל, מוצג פעם אחת ונשמר רק כ- SHA-256. הוא פותח נקודת קצה אחת בדיוק, `GET /api/witness/head`, המחזירה נקודת ביקורת חתומה טרייה, בנוסף למונים חתומים של איסוף ללא תוכן ולמצב תפעולי. הוא אינו יכול לפתוח את הפאנל, לקרוא תוכן הודעות או לשנות הגדרות, ו אסימון הפאנל אינו מתקבל שם. ניתן לבטל אסימון באותו דף. האספן מתעד מתי מפתח עד חדש מתחיל לבדוק (`witness.seen`) ומציג את הבדיקה האחרונה לכל אסימון; עד שלא נבדק תוך 2.5 מרווחי זמן מסומן כאיחור.
+האסימון נוצר **ב-Extras → Independent witness**, מוצג פעם אחת ונשמר רק כ- SHA-256. הוא פותח נקודת קצה אחת בלבד, `GET /api/witness/head`, המחזירה נקודת ביקורת חתומה טרייה, בנוסף למונים חתומים של אוספים נטולי תוכן ולמצב תפעולי. היא אינה יכולה לפתוח את הלוח, לקרוא תוכן הודעות או לשנות הגדרות, ו אסימון הלוח אינו מתקבל שם. ניתן לבטל אסימון באותו דף. האספן מתעד מתי מפתח עד חדש מתחיל לבדוק (`witness.seen`) ומציג את הבדיקה האחרונה לכל אסימון; עד שלא ביצע בדיקה תוך 2.5 מרווחים מסומן כאיחור.
 
 עדים חדשים שולחים אתגר אקראי בכל סקר; הצהרת הלכידה חוזרת עליו תחת חתימת האספן. מונים קשורים לנקודת הבדיקה המדויקת ונכללים בפוסטים חתומים של העדים. כותרות ישנות ממשיכות להתקבל על ידי העד העצמאי. צמיחת היומן כשלעצמה לעולם אינה נספרת כהודעה חדשה.
 
@@ -54,7 +54,7 @@ TGW1.eyJhdCI6…<statement>.<signature>
 
 נדרש בוט של טלגרם (ניתן ליצור אחד באמצעות @BotFather), ערוץ שבו הבוט משמש כמנהל, וכתובת האספן הנגישה לעד — באמצעות HTTPS מחוץ לרשת פרטית (ראו את פרופיל ה-HTTPS בפרק [הפריסה](https://phishdestroy.github.io/TgWitness/he/docs/reference/deployment/)).
 
-פתח **תוספות → בוט בערוץ שלך → הגדר בוט** בלוח הבקרה. שלושה שלבים מכסים גישה לקריאה בלבד, הערוץ שלך והמרווח, ולאחר מכן הפעלת ה-Witness. מדיניות פרסום, פרוקסי HTTP/SOCKS5 אופציונלי וכתובת API מותאמת אישית לבוט נמצאים תחת **הגדרות מתקדמות** . הטופס מוריד את `witness.json` עם מפתח האספן של סביבת העבודה הזו מוצמד. הורידו את האסימון לקריאה בלבד שנוצר זה עתה באמצעות **'שמור קובץ גישה** כ-`witness-token.txt` '; שימו אותו ואת `bot-token.txt` שנוצר במארח ה-Witness לצד קובץ ה-JSON הזה. האספן לעולם אינו מקבל את אסימון הבוט. ההורדה אינה מפעילה שירות ואינה מפרסמת הודעה. אף עד לפרויקט מאוחסן אינו נרשם באופן מרומז.
+פתחו **את 'תוספות' → 'עד עצמאי' → 'הגדר'** בלוח הבקרה. שלושת השלבים כוללים גישה לקריאה בלבד, הערוץ והמרווח שלכם, ולאחר מכן הפעלת העד. מדיניות הפרסום, פרוקסי HTTP/SOCKS5 אופציונלי וכתובת API מותאמת אישית לבוט נמצאים תחת **'הגדרות מתקדמות**'. הטופס מוריד `witness.json` עם מפתח האספן של סביבת העבודה הזו מוצמד אליו. הורידו את האסימון לקריאה בלבד שנוצר זה עתה באמצעות **'שמור קובץ גישה** כ-' `witness-token.txt`; שמור אותו ואת `bot-token.txt`נוצר במארח העד לצד קובץ ה-JSON הזה. האספן לעולם אינו מקבל את אסימון הבוט. ההורדה אינה מפעילה שירות ואינה מפרסמת הודעה. אף עד של פרויקט מאוחסן אינו נרשם באופן מרומז.
 
 ```
 python -m tgwitness.witness run --config witness.json --check-config
@@ -95,6 +95,17 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
     --token-file witness-token.txt --bot-token-file bot-token.txt --channel @your_witness_channel
 ```
 
+### פרסם ב-Discord
+
+עד יכול לפרסם בערוץ Discord במקום ב-Telegram. ב-Discord, פתחו **"ערוך ערוץ" → "אינטגרציות" → "Webhooks**", צרו Webhook והעתיקו את כתובת ה-URL שלו. בלוח הבקרה, בחרו **"Webhook של Discord · הערוץ שלכם**" בשלב 2. במארח העד, שמרו את כתובת ה-URL כ `discord-webhook.txt` ליד `witness.json`; הוא לעולם לא מגיע אל האספן.
+
+```
+python -m tgwitness.witness run --collector https://your-collector.example.org \
+    --token-file witness-token.txt --discord-webhook-file discord-webhook.txt
+```
+
+ל-Witness יש מפרסם אחד: ערוץ Telegram או Webhook של Discord, אך לא שניהם. פוסטים נושאים את אותה הצהרה חתומה ואינם יכולים לשלוח התראות לאף אחד. פוסט שאורכו עולה על המגבלה של Discord (2,000 תווים) מוחלף בשורה קצרה עם הצ'ק המלא המצורף כקובץ `witness-check.txt`. כל מזהה פוסט נרשם כ `witness.posted`. `verify.py --channel`קורא רק ייצוא של ערוצי טלגרם, ולכן עבור Discord יש לשמור את יומן העד: הוא מכיל כל בדיקה.
+
 ### אפשרויות
 
 | אפשרות | סביבה | ברירת מחדל | משמעות |
@@ -109,7 +120,7 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
 | `--data-dir` | `_DATA` | `witness-data` | מפתח Witness ויומן |
 | `--config` | `_CONFIG` | – | קובץ JSON עם אחת מהאפשרויות שלעיל |
 
-כתובת האספן, האסימונים והערוץ מקורם ב-`--collector`, `--token` או `--token-file`, `--bot-token` או `--bot-token-file` ו-`--channel`, או `_COLLECTOR`, `_TOKEN`, `_TOKEN_FILE`, `_BOT_TOKEN`, `_BOT_TOKEN_FILE` ו-`_CHANNEL`, מה שמאפשר לשמור על סודיות מחוץ לרשימת התהליכים.
+כתובת האספן, האסימונים והערוץ מגיעים מ `--collector`, `--token` או `--token-file`, `--bot-token` או `--bot-token-file`, `--discord-webhook-file` ו `--channel`, או `_COLLECTOR`, `_TOKEN`, `_TOKEN_FILE`, `_BOT_TOKEN`, `_BOT_TOKEN_FILE`, `_DISCORD_WEBHOOK_FILE` ו `_CHANNEL`, מה שמונע מסודות להופיע ברשימת התהליכים.
 
 קובץ התצורה משתמש בשמות האפשרויות עם קווים תחתונים, בתוספת `texts`, המחליף את המילים בהודעות הערוץ:
 
@@ -123,6 +134,36 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
 מפתחות `texts`: `ok`, `key_changed`, `rollback`, `fork`, `invalid`, `no_response`, `collector`, `records`, `head`. שורת הפקודה גוברת על הסביבה, והסביבה גוברת על הקובץ. אפשרויות או מפתחות טקסט לא מוכרים עוצרים את התוכנה עם הודעה במקום להתעלם מהם. הניסוח לעולם אינו משפיע על האימות: verify.py בודק את האסימון החתום בסוף כל פרסום. ב-`--post changes` או ב-`problems`, בדיקות שלא פורסמו עדיין נמצאות ב יומן העדים, ו-`verify.py` מפרט אותן כלא פורסמו מעולם; רשומת הפתיחה מציינת את המדיניות. כל בדיקה עדיין מופיעה ביומן, ולכן פחות פרסומים משמעותם פחות פעמים עצמאיות ב-Telegram, ולא פחות בדיקות.
 
 גם ללא ערוץ, ה-Witness ממשיך לנהל את היומן שלו. שמרו את טביעת האצבע של מפתח ה-Witness (`python -m tgwitness.witness fingerprint`) במקום אחר.
+
+## דף הוכחה ציבורי למספר סביבות עבודה
+
+`python -m tgwitness.proof` TgWitness תומך בעד 32 סביבות עבודה בו-זמנית ומציג דף לקריאה בלבד המכיל את הבדיקה החתומה האחרונה של כל אחת מהן. כל סביבת עבודה מקבלת מפתח Witness משלה ו יומן בתיקיית הנתונים, וכן מפתח אספן מוצמד; פרסום בערוץ Telegram הוא אופציונלי עבור כל סביבת עבודה. התחל מ- [proof.config.example](https://github.com/phishdestroy/TgWitness/blob/main/deploy/proof.config.example):
+
+| תחום | משמעות |
+| --- | --- |
+| `title` | כותרת הדף, 1–100 תווים |
+| `data_dir` | מפתחות ויומנים של Witness, ביחס לקובץ; ברירת מחדל `proof-data` |
+| `interval`, `timeout` | דקות בין בדיקות (1–1440, ברירת מחדל 5); שניות להמתנה (5–600, ברירת מחדל 20) |
+| `workspaces[].id`, `label` | כינוי קצר באותיות קטנות והשם המוצג |
+| `workspaces[].collector` | כתובת ה-Collector; סביבות עבודה אחרות מסתיימות ב- `/profiles/<workspace ID>` |
+| `workspaces[].collector_fingerprint` | נדרש, שונה עבור כל סביבת עבודה |
+| `workspaces[].token_file` | קובץ עם אסימון העד לקריאה בלבד של סביבת העבודה הזו |
+| `workspaces[].channel`, `bot_token_file` | אופציונלי, בשילוב: פרסום כל בדיקה בערוץ |
+| `workspaces[].proxy`, `bot_api` | מסלול אופציונלי וכתובת ה-API של הבוט |
+
+```
+python -m tgwitness.proof --config proof.json --check-config
+python -m tgwitness.proof --config proof.json --host 127.0.0.1 --port 8790
+```
+
+הפקודה הראשונה מאמתת את הקובץ ואת קבצי האסימונים מבלי לפתוח חיבור. הדף מגיב רק לפקודות GET ו-HEAD:
+
+- `/` מציג את כל סביבות העבודה; סביבת עבודה שלא נבדקה במשך 2.5 מחזורים מסומנת כ"מיושנת".
+- `/api/proof` מחזיר את אותו התוכן כמו JSON.
+- `/api/proof/<id>` מוריד את ההצהרה החתומה העדכנית ביותר (`tgwitness-public-proof-v1`): מספר התיעוד של העד וה-hash, סטטוס, מפתח האספן המוצמד, נקודת ביקורת, מונה האיסוף והאם פרסום הערוץ הצליח, חתום על ידי מפתח העד של סביבת העבודה הזו.
+- `/healthz` מציג שגיאה 503 כאשר הצג של סביבת העבודה הפסיק לפעול.
+
+הקצו לדף שם מארח משלו, כמו [ב-Caddyfile.proof.example](https://github.com/phishdestroy/TgWitness/blob/main/deploy/Caddyfile.proof.example). לצורך אימות, ייצאו את יומן העדים של סביבת העבודה `python -m tgwitness.witness export --data-dir proof-data/<id> --out witness.zip` והשתמש בו כמתואר להלן.
 
 ## אמת
 

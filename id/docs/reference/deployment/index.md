@@ -19,7 +19,7 @@ Untuk paket portabel, ekstrak `TgWitness-<version>-windows-amd64-portable.zip` d
 | Pembantu Docker di Windows | `scripts\Docker.cmd` | Ya; program bantu tersebut menunggu status kesehatan server web. |
 | Pembantu Docker di Linux/macOS | `sh scripts/docker-start.sh` | Ya; program bantu tersebut menunggu status kesehatan server web. |
 
-Untuk server cloud yang dapat diperiksa oleh pihak ketiga — dibuat melalui API penyedia layanan, tanpa SSH, dan hanya dapat diakses melalui Cloudflare Tunnel — lihat [penerapan dengan jaminan tinggi](https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md).
+Untuk server cloud yang dapat diperiksa oleh pihak ketiga — dibuat melalui API penyedia layanan, tanpa SSH, dan hanya dapat diakses melalui Cloudflare Tunnel — lihat [penerapan dengan jaminan tinggi](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/).
 
 Proses startup asli membuat `.venv` pribadi dan menginstal dependensi yang disematkan. Docker membangunnya di dalam gambar, tanpa memerlukan Python host. Pengaturan pertama kali memerlukan akses internet. Jika Python 3.11+ tidak ditemukan, `Start.cmd` akan meminta izin sebelum menginstal Python 3.12 untuk pengguna Windows saat ini (menggunakan winget, atau jika tidak, penginstal python.org setelah memeriksa tanda tangan Python Software Foundation-nya); alat ini tidak pernah meminta hak akses administrator. Docker dan layanan sistem operasi tetap menjadi prasyarat.
 
@@ -250,7 +250,7 @@ Panel menampilkan media yang sedang dalam antrian/gagal, media tertunda tertua, 
 
 ## Opsi koneksi dan perlindungan
 
-Rute koneksi ditentukan per ruang kerja dan harus dikonfigurasi sebelum otorisasi. SOCKS5/HTTP CONNECT menggunakan dependensi python-socks yang disematkan. MTProxy menggunakan transportasi perantara acak eksperimental dari Telethon; rahasia TLS palsu tidak didukung. Pengalihan langsung bergantung pada [mode IP](https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/#ip-modes) yang dipilih: Mode "Hide IP" menolaknya; mode pengalihan eksplisit mengizinkannya setelah penundaan. Mode "Tunnel/VPN" mengizinkan rute langsung tetapi tidak membuat VPN. Ini bukanlah kebijakan jaringan yang berlaku secara sistem.
+Rute koneksi ditentukan per ruang kerja dan harus dikonfigurasi sebelum otorisasi. SOCKS5/HTTP CONNECT menggunakan dependensi python-socks yang disematkan. MTProxy menggunakan transportasi perantara acak eksperimental dari Telethon; rahasia TLS palsu tidak didukung. Fallback langsung bergantung pada [mode IP](https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/#ip-modes) yang dipilih: **“Sembunyikan alamat”** menolaknya; **“Langsung sebagai pilihan terakhir**” mengizinkannya setelah penundaan. **“Server di balik terowongan atau VPN”** mengizinkan rute langsung tetapi tidak membuat VPN. Ini bukan kebijakan jaringan sistem secara keseluruhan.
 
 Untuk instalasi baru, TGWITNESS_VAULT_KEY_FILE mengarah ke berkas kunci utama acak yang dilindungi secara terpisah. Pasang berkas tersebut dalam mode baca-saja di luar direktori /data dalam sebuah kontainer. Simpan metadata salt publik vault.external.json secara terpisah untuk setiap ruang kerja dan kunci utama. Brankas lokal yang sudah ada memerlukan migrasi terencana; pengaturan variabel ini tidak akan mengonversinya secara otomatis. Penyimpanan pesan/media serta ekspornya tidak dienkripsi oleh aplikasi. Gunakan volume terenkripsi dan penyimpanan sementara pribadi yang memadai jika diperlukan.
 

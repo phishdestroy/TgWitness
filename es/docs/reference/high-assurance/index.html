@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="es" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Implementación de alta seguridad · Referencia | TgWitness</title>
+<meta name="description" content="Un servidor sellado disponible las 24 horas del día, los 7 días de la semana, en Hetzner o Phala Cloud, un DNS de puerta de enlace y comprobaciones que un tercero puede repetir."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/high-assurance/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="Implementación de alta seguridad · Referencia | TgWitness"><meta property="og:description" content="Un servidor sellado disponible las 24 horas del día, los 7 días de la semana, en Hetzner o Phala Cloud, un DNS de puerta de enlace y comprobaciones que un tercero puede repetir.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/es/docs/reference/high-assurance/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/high-assurance/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-assurance/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/high-assurance/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/high-assurance/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/high-assurance/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/high-assurance/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/high-assurance/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/high-assurance/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/high-assurance/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/high-assurance/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/high-assurance/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/high-assurance/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/high-assurance/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/"><link rel="alternate" type="text/markdown" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/high-assurance/index.md"><link rel="describedby" href="https://phishdestroy.github.io/TgWitness/llms.txt" type="text/plain"><link rel="sitemap" type="application/xml" href="https://phishdestroy.github.io/TgWitness/sitemap.xml"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/es/docs/reference/high-assurance/", "url": "https://phishdestroy.github.io/TgWitness/es/docs/reference/high-assurance/", "name": "Implementación de alta seguridad · Referencia | TgWitness", "description": "Un servidor sellado disponible las 24 horas del día, los 7 días de la semana, en Hetzner o Phala Cloud, un DNS de puerta de enlace y comprobaciones que un tercero puede repetir.", "inLanguage": "es", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}, "breadcrumb": {"@id": "https://phishdestroy.github.io/TgWitness/es/docs/reference/high-assurance/#breadcrumb"}}, {"@type": "BreadcrumbList", "@id": "https://phishdestroy.github.io/TgWitness/es/docs/reference/high-assurance/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://phishdestroy.github.io/TgWitness/es/"}, {"@type": "ListItem", "position": 2, "name": "Documentación", "item": "https://phishdestroy.github.io/TgWitness/es/docs/"}, {"@type": "ListItem", "position": 3, "name": "Referencia", "item": "https://phishdestroy.github.io/TgWitness/es/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Implementación de alta seguridad", "item": "https://phishdestroy.github.io/TgWitness/es/docs/reference/high-assurance/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Ir al contenido</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Documentación</span></a>
+<nav aria-label="Guías"><a href="../../concepts/">Guía visual</a><a href="../../">Todas las guías</a><a href="../">Referencia</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Idioma"><span aria-hidden="true">◍</span> Español</summary><div class="lang-list"><a href="../../../../docs/reference/high-assurance/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/high-assurance/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/high-assurance/" hreflang="uk" lang="uk">Українська</a><a href="./" hreflang="es" lang="es" aria-current="true">Español</a><a href="../../../../pt/docs/reference/high-assurance/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/high-assurance/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/high-assurance/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/high-assurance/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/high-assurance/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/high-assurance/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/high-assurance/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/high-assurance/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/high-assurance/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/high-assurance/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/high-assurance/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/high-assurance/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/high-assurance/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/high-assurance/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/high-assurance/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/high-assurance/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/high-assurance/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/high-assurance/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/high-assurance/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/high-assurance/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/high-assurance/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Cambiar entre el tema claro y el oscuro"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Guías"><a href="../../../guides/modes.html">Modos, escenarios y niveles de evidencia</a><p class="nav-label">Primeros pasos</p><a href="../../start/">Empiece en cuestión de minutos</a><a href="../../dedicated-account/">Cuenta dedicada</a><a href="../../accounts/">Conecte una cuenta</a><a href="../../proxies/">Elija un proxy</a><a href="../../exports/">Exportar y verificar</a><a href="../../capture/">Captura de GitHub Actions</a><p class="nav-label">Investigación y elaboración de informes</p><a href="../../cases/">Investigue en todos los chats</a><a href="../../case-board/">Crear un «Case Board»</a><a href="../../reports/">Diseñar un informe</a><a href="../../handover/">Prepara una copia para compartir</a><a href="../../groups/">Gestionar un grupo de cuentas</a><p class="nav-label">Comprender las pruebas</p><a href="../../concepts/">Vea cómo funciona el registro de pruebas</a><a href="../../security/">Mantenga la seguridad</a><a href="../../witness/">Configurar un bot de TgWitness</a><p class="nav-label">Más información</p><a href="../../archive/">Explorar el archivo</a><a href="../../access/">Compartir un caso</a><a href="../../server/">Manténgala en funcionamiento</a><a href="../../troubleshooting/">Averigüe qué ha fallado</a></nav><nav class="wiki-nav" aria-label="Referencia"><p class="nav-label"><a class="nav-label-link" href="../">Referencia</a></p><details class="wiki-group" open><summary>Configuración</summary><a href="../quickstart/">Inicio rápido</a><a href="../installation/">Instalación, verificación y actualización</a><a href="../settings/">Primera configuración y ajustes</a><a href="../accounts/">Formatos de cuentas y sesiones</a><a href="../access/">Acceso y permisos</a><a href="../connection/">Conexión, servidores proxy y protección de datos</a><a href="../deployment/">Implementación</a><a href="./" aria-current="page">Implementación de alta seguridad</a></details><details class="wiki-group"><summary>Recopilar</summary><a href="../panel/">Guía de paneles</a><a href="../collection/">Cómo funciona la recopilación</a><a href="../history/">Cargar historial de fuentes</a><a href="../operations/">Flujos de trabajo y operaciones</a><a href="../investigation/">Modo de investigación</a><a href="../features/">Características y limitaciones</a></details><details class="wiki-group"><summary>Archivo e integraciones</summary><a href="../case-board/">Referencia de Case Board</a><a href="../analysis/">Análisis de archivos</a><a href="../mcp/">MCP de solo lectura</a><a href="../media-analysis/">OCR y transcripción locales</a><a href="../webhooks/">Webhooks salientes</a><a href="../showcase/">Mostrador público</a></details><details class="wiki-group"><summary>Pruebas</summary><a href="../how-it-works/">Cómo funciona el registro de pruebas</a><a href="../case-reports/">Configuración y verificación de informes</a><a href="../account-export/">Exportación de cuentas</a><a href="../evidence/">Formato de las pruebas</a><a href="../witness/">Testigo independiente</a><a href="../timestamp/">Marcas de tiempo</a><a href="../storage/">Almacenamiento y recuperación</a></details><details class="wiki-group"><summary>Seguridad y proyecto</summary><a href="../security/">Seguridad y tratamiento de datos</a><a href="../architecture/">Arquitectura</a><a href="../verification/">Lo que se ha probado</a><a href="../license/">Aviso sobre incompatibilidades de licencia y arquitectura</a><a href="../notice/">Aviso de incompatibilidad con algunos operadores</a><a href="../changelog/">Registro de cambios</a></details></nav><p class="sidebar-note">v0.8.0<br>Código abierto · Se ejecuta en su equipo</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Guías"><a href="../../../">Inicio</a> <span aria-hidden="true">/</span> <a href="../../">Documentación</a> <span aria-hidden="true">/</span> <a href="../">Referencia</a> <span aria-hidden="true">/</span> <span aria-current="page">Implementación de alta seguridad</span></nav>
+<p class="verification-shortcut"><a href="../verification/">Lo que se ha probado →</a></p>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Buscar en la documentación</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Pruebe con «proxy», «cadena de hash», «token» o «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Búsqueda clara" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Escriba una palabra para buscar en las guías y en la documentación de referencia. La búsqueda se realiza en su navegador.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Referencia / Configuración</p><h1>Implementación de alta seguridad</h1><p class="guide-outcome">Un servidor sellado disponible las 24 horas del día, los 7 días de la semana, en Hetzner o Phala Cloud, un DNS de puerta de enlace y comprobaciones que un tercero puede repetir.</p><div class="wiki-body"><p>Un diario firmado demuestra que los registros no se modificaron <strong>tras</strong> la firma. En casos graves,
+la siguiente pregunta es si alguien podría haber manipulado los datos <strong>antes de</strong> que se firmaran:
+quién ejecutó el colector, en qué máquina y si alguien inició sesión en él. Este modo opcional
+implementa el colector de tal forma que un tercero pueda comprobarlo, utilizando los registros conservados por el
+proveedor de la nube y Cloudflare, en lugar de basarse en la palabra del operador.</p>
+<p>El uso habitual de Docker y en el entorno local no sufre cambios. Nada de lo que hay aquí se ejecuta a menos que se implemente con
+<code>python -m tgwitness.cloud</code>, y el recopilador lee su host únicamente cuando la implementación establece
+<code>TGWITNESS_ASSURANCE</code>.</p>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 1046 280" width="1046" height="280" role="img" aria-labelledby="flow-9-title flow-9-desc"><title id="flow-9-title">Diagrama de flujo</title><desc id="flow-9-desc">Operador → Servidor, cortafuegos sin reglas de entrada (API del proveedor); Operador → Túnel y DNS (API de Cloudflare); Servidor, cortafuegos sin reglas de entrada → Túnel y DNS (solo salida); Servidor, cortafuegos sin reglas de entrada → Clave de firma creada en el servidor; Verifier, tokens de solo lectura → Registro del proveedor y cortafuegos; Verifier, tokens de solo lectura → Dirección del conector de túnel e ingreso; Verifier, tokens de solo lectura → Declaración firmada de /api/assurance; Verifier, tokens de solo lectura → Archivo ZIP de pruebas</desc><defs><marker id="flow-9-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M404.0 55.0C404.0 83.0 113.6 83.0 113.6 111.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:301" pathLength="301"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="3.3s" repeatCount="indefinite" path="M404.0 55.0C404.0 83.0 113.6 83.0 113.6 111.0"/></circle><path class="flow-edge" d="M404.0 55.0C404.0 140.0 269.6 140.0 269.6 225.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:228" pathLength="228"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.5s" repeatCount="indefinite" path="M404.0 55.0C404.0 140.0 269.6 140.0 269.6 225.0"/></circle><path class="flow-edge" d="M113.6 169.0C113.6 197.0 269.6 197.0 269.6 225.0" marker-end="url(#flow-9-arrow)" style="--i:1;--len:172" pathLength="172"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.9s" repeatCount="indefinite" path="M113.6 169.0C113.6 197.0 269.6 197.0 269.6 225.0"/></circle><path class="flow-edge" d="M113.6 169.0C113.6 192.5 102.8 192.5 102.8 216.0" marker-end="url(#flow-9-arrow)" style="--i:1;--len:49" pathLength="49"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M113.6 169.0C113.6 192.5 102.8 192.5 102.8 216.0"/></circle><path class="flow-edge" d="M570.8 64.0C570.8 87.5 328.6 87.5 328.6 111.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:251" pathLength="251"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.8s" repeatCount="indefinite" path="M570.8 64.0C570.8 87.5 328.6 87.5 328.6 111.0"/></circle><path class="flow-edge" d="M570.8 64.0C570.8 87.5 543.7 87.5 543.7 111.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:56" pathLength="56"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M570.8 64.0C570.8 87.5 543.7 87.5 543.7 111.0"/></circle><path class="flow-edge" d="M570.8 64.0C570.8 87.5 751.8 87.5 751.8 111.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:192" pathLength="192"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.1s" repeatCount="indefinite" path="M570.8 64.0C570.8 87.5 751.8 87.5 751.8 111.0"/></circle><path class="flow-edge" d="M570.8 64.0C570.8 92.0 949.6 92.0 949.6 120.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:388" pathLength="388"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="4.3s" repeatCount="indefinite" path="M570.8 64.0C570.8 92.0 949.6 92.0 949.6 120.0"/></circle><g class="flow-node" style="--i:0"><rect x="352.0" y="15.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="404.0" y="35.0">Operador</tspan></text></g><g class="flow-node" style="--i:0"><rect x="474.0" y="6.0" width="193.6" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="570.8" y="26.0">Verifier, tokens de solo</tspan><tspan x="570.8" y="44.0">lectura</tspan></text></g><g class="flow-node" style="--i:1"><rect x="13.3" y="111.0" width="200.5" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="113.6" y="131.0">Servidor, cortafuegos sin</tspan><tspan x="113.6" y="149.0">reglas de entrada</tspan></text></g><g class="flow-node" style="--i:1"><rect x="231.8" y="111.0" width="193.6" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="328.6" y="131.0">Registro del proveedor y</tspan><tspan x="328.6" y="149.0">cortafuegos</tspan></text></g><g class="flow-node" style="--i:1"><rect x="443.4" y="111.0" width="200.5" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="543.7" y="131.0">Dirección del conector de</tspan><tspan x="543.7" y="149.0">túnel e ingreso</tspan></text></g><g class="flow-node" style="--i:1"><rect x="661.9" y="111.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="751.8" y="131.0">Declaración firmada de</tspan><tspan x="751.8" y="149.0">/api/assurance</tspan></text></g><g class="flow-node" style="--i:1"><rect x="859.7" y="120.0" width="179.8" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="949.6" y="140.0">Archivo ZIP de pruebas</tspan></text></g><g class="flow-node" style="--i:2"><rect x="217.6" y="225.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="269.6" y="245.0">Túnel y DNS</tspan></text></g><g class="flow-node" style="--i:2"><rect x="6.0" y="216.0" width="193.6" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="102.8" y="236.0">Clave de firma creada en</tspan><tspan x="102.8" y="254.0">el servidor</tspan></text></g><g class="flow-label" style="--i:0"><rect x="122.2" y="79.4" width="123.1" height="23.0" rx="6"/><text x="183.8" y="90.9" text-anchor="middle" dominant-baseline="central">API del proveedor</text></g><g class="flow-label" style="--i:0"><rect x="240.5" y="152.4" width="123.1" height="23.0" rx="6"/><text x="302.1" y="163.9" text-anchor="middle" dominant-baseline="central">API de Cloudflare</text></g><g class="flow-label" style="--i:1"><rect x="189.2" y="193.4" width="85.3" height="23.0" rx="6"/><text x="231.9" y="204.9" text-anchor="middle" dominant-baseline="central">solo salida</text></g></svg></div><details class="flow-steps"><summary>Diagrama en formato de texto</summary><ol><li>Operador → Servidor, cortafuegos sin reglas de entrada (API del proveedor)</li><li>Operador → Túnel y DNS (API de Cloudflare)</li><li>Servidor, cortafuegos sin reglas de entrada → Túnel y DNS (solo salida)</li><li>Servidor, cortafuegos sin reglas de entrada → Clave de firma creada en el servidor</li><li>Verifier, tokens de solo lectura → Registro del proveedor y cortafuegos</li><li>Verifier, tokens de solo lectura → Dirección del conector de túnel e ingreso</li><li>Verifier, tokens de solo lectura → Declaración firmada de /api/assurance</li><li>Verifier, tokens de solo lectura → Archivo ZIP de pruebas</li></ol></details></figure>
+<h2 id="what-a-verifier-can-check">Lo que puede comprobar un verificador<a class="anchor" href="#what-a-verifier-can-check" aria-label="Enlace a esta sección">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Afirmación</th>
+<th>Cómo se comprueba</th>
+<th>Mantenido por</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>El servidor se creó a través de la API del proveedor en un momento determinado.</td>
+<td>El objeto «servidor» y su creación en el propio registro del proveedor</td>
+<td>Proveedor</td>
+</tr>
+<tr>
+<td>Nadie utilizó las rutas de acceso del proveedor</td>
+<td>Registro de solicitudes de consola, recuperación, restablecimiento de contraseña, reconstrucción, ISO, imágenes y copias de seguridad</td>
+<td>Proveedor</td>
+</tr>
+<tr>
+<td>No se pudo establecer conexión con él</td>
+<td>El cortafuegos del proveedor no tiene reglas de entrada; el SSH queda oculto desde el primer arranque.</td>
+<td>Proveedor (cortafuegos), servidor (SSH)</td>
+</tr>
+<tr>
+<td>Solo se puede acceder al panel a través del túnel</td>
+<td>El ingreso al túnel se reenvía únicamente al panel; el conector se ejecuta desde la dirección del servidor</td>
+<td>Cloudflare</td>
+</tr>
+<tr>
+<td>Este mismo software se ejecuta</td>
+<td>El hash firmado del árbol de código fuente del recopilador coincide con una copia del commit implementado.</td>
+<td>Collector, sincronizado con Git</td>
+</tr>
+<tr>
+<td>La clave de firma se creó en ese servidor.</td>
+<td>La clave firma una declaración en la que se indica el ID del servidor del proveedor y el hash del archivo «cloud-init» que ha recibido.</td>
+<td>Collector, verificado con el proveedor</td>
+</tr>
+<tr>
+<td>El diario pertenece a esa clave y a ese servidor</td>
+<td>Cada inicio de proceso en la prueba ZIP incluye la medición del host correspondiente a ese servidor</td>
+<td>Pruebas ZIP</td>
+</tr>
+</tbody>
+</table></div>
+<p>Las mediciones del servidor (escuchas y procesos SSH, sesiones actuales, inicios de sesión en <code>wtmp</code>, el arranque)
+son comunicadas por el propio recopilador y se firman al inicio de cada proceso y en
+<code>host.state</code> registros cada vez que cambian. Un usuario con privilegios de root en el servidor podría falsificarlas; estas
+complementan los registros del proveedor y de Cloudflare, en lugar de sustituirlos.</p>
+<h2 id="providers">Proveedores<a class="anchor" href="#providers" aria-label="Enlace a esta sección">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th><code>--provider</code></th>
+<th>Credenciales</th>
+<th>Acceso de solo lectura de Verifier</th>
+<th>Registro del proveedor para el verificador</th>
+<th>Se conserva para</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hetzner</code></td>
+<td><code>HCLOUD_TOKEN</code></td>
+<td>Token de lectura del mismo proyecto</td>
+<td>Acciones del servidor y del cortafuegos</td>
+<td>Mientras existan los recursos</td>
+</tr>
+<tr>
+<td><code>digitalocean</code></td>
+<td><code>DIGITALOCEAN_TOKEN</code></td>
+<td>Token de acceso personal de solo lectura</td>
+<td>Acciones de Droplet</td>
+<td>Mientras el Droplet exista</td>
+</tr>
+<tr>
+<td><code>linode</code></td>
+<td><code>LINODE_TOKEN</code></td>
+<td><code>linodes</code>, <code>firewall</code>, <code>events</code> ámbitos de solo lectura</td>
+<td>Eventos de la cuenta, versiones de las reglas del cortafuegos</td>
+<td>90 días</td>
+</tr>
+<tr>
+<td><code>vultr</code></td>
+<td><code>VULTR_API_KEY</code></td>
+<td>Usuario con acceso de lectura y el <code>activity_logs</code> permiso</td>
+<td>Registro de actividad de la cuenta (método, ruta, actor)</td>
+<td>30 días, o más con una suscripción al registro de auditoría</td>
+</tr>
+<tr>
+<td><code>aws</code></td>
+<td><code>AWS_ACCESS_KEY_ID</code>, <code>AWS_SECRET_ACCESS_KEY</code></td>
+<td><code>ec2:DescribeInstances</code>, <code>ec2:DescribeSecurityGroups</code>, <code>cloudtrail:LookupEvents</code></td>
+<td>Historial de eventos de CloudTrail</td>
+<td>90 días</td>
+</tr>
+<tr>
+<td><code>phala</code></td>
+<td><code>PHALA_CLOUD_API_KEY</code></td>
+<td>Una clave API del mismo espacio de trabajo</td>
+<td>Revisiones de la aplicación: cambios en el código y el entorno, reinicios y actualizaciones del sistema operativo</td>
+<td>Aunque la aplicación existe</td>
+</tr>
+<tr>
+<td><code>generic</code></td>
+<td>ninguno</td>
+<td>ninguno</td>
+<td>ninguno: <strong>autocertificado</strong></td>
+<td>–</td>
+</tr>
+</tbody>
+</table></div>
+<p>Utiliza un proyecto, equipo, cuenta o subcuenta específicos para cada caso: el acceso de solo lectura del verificador
+mostrará entonces únicamente esta implementación. Las credenciales se leen desde
+<code>--provider-token-file</code> de la variable anterior, nunca desde la línea de comandos. Para AWS, el archivo
+contiene <code>ACCESS_KEY_ID SECRET_ACCESS_KEY [SESSION_TOKEN]</code>; la región es <code>--location</code>.</p>
+<p>En cada informe se indica lo que los registros de cada proveedor no pueden mostrar. En resumen: Hetzner
+registra las solicitudes de la consola; la consola de recuperación de DigitalOcean, Lish/Glish de Linode y la consola web
+de Vultr no se registran como tales, por lo que el acceso de root queda bloqueado en el primer arranque y para iniciar sesión en la consola
+sería necesario restablecer la contraseña o cambiar la configuración de arranque, acciones que sí se registran. Vultr devuelve la dirección de la consola
+a cualquier clave que pueda leer la instancia; ni el registro ni el informe la almacenan.</p>
+<h2 id="confidential-vm-on-phala-cloud-intel-tdx">Máquina virtual confidencial en Phala Cloud (Intel TDX)<a class="anchor" href="#confidential-vm-on-phala-cloud-intel-tdx" aria-label="Enlace a esta sección">#</a></h2>
+<p>Con <code>--provider phala</code> el colector se ejecuta en una máquina virtual confidencial Intel TDX en
+<a href="https://phala.com/">Phala Cloud</a>, gestionada por dstack. Ni el anfitrión ni el personal de Phala pueden leer su
+memoria, y el procesador firma un certificado que acredita lo que ha arrancado la máquina. El verificador no
+se fía de la palabra de Phala: <code>tgwitness.tdx</code> comprueba él mismo cada certificación, hasta la CA raíz de Intel
+SGX fijada, cotejándola con las listas de revocación de Intel y los datos de plataforma firmados por Intel, y rechaza
+las máquinas que puedan ser depuradas o migradas.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Entrada de informe</th>
+<th>Qué muestra</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tdx_binding</code></td>
+<td>La certificación abarca la declaración firmada del recopilador y el valor aleatorio de esta solicitud.</td>
+</tr>
+<tr>
+<td><code>tdx_quote</code></td>
+<td>Intel avala la certificación; solo se aprueba cuando Intel considera que la plataforma está actualizada.</td>
+</tr>
+<tr>
+<td><code>tdx_compose_hash</code></td>
+<td>RTMR3, reproducido a partir del registro de eventos de dstack, mide la composición de la aplicación que informa el recopilador.</td>
+</tr>
+<tr>
+<td><code>tdx_compose</code></td>
+<td>Ese código es, byte a byte, el mismo que genera el código de la confirmación desplegada: archivos fuente fijados por hash, ambas imágenes por resumen, sin ningún otro código.</td>
+</tr>
+<tr>
+<td><code>tdx_identity</code></td>
+<td>La certificación procede de la aplicación y la instancia desplegadas, con claves del KMS de Phala y un disco cifrado.</td>
+</tr>
+<tr>
+<td><code>tdx_os</code></td>
+<td>Con <code>--tdx-measurements</code>, MRTD y RTMR0-2 equivalen a los valores calculados a partir de la imagen del sistema operativo dstack (<code>dstack-mr measure --json</code>)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Cada inicio del recopilador registrado en el diario lleva consigo dicha certificación, por lo que
+<code>verify --evidence</code> se comprueba cada inicio. La lista de revisiones de la aplicación de Phala sirve como
+registro del proveedor: si el código de redacción ha cambiado tras la implementación, el informe falla.</p>
+<p>En el panel, selecciona <strong>«Máquina virtual confidencial · Phala Cloud»</strong>
+en <strong>«Extras»</strong>
+→ <strong>«Servidor 24/7»</strong>
+y pega una clave API de Phala Cloud; el túnel rápido funciona igual que en Hetzner. Desde la línea de comandos:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud deploy --provider phala --name case-1 --server-type tdx.small \
+    --ref v0.8.0 --repository https://github.com/phishdestroy/TgWitness --quick-tunnel \
+    --provider-token-file phala-key.txt
+python -m tgwitness.cloud verify --record deployments/case-1/deployment.json \
+    --provider-token-file phala-key.txt --cloud-init deployments/case-1/docker-compose.yaml \
+    --source CHECKOUT_OF_COMMIT --tdx-measurements dstack-mr.json</code></pre>
+<p><code>--tdx-collateral</code> Lee los certificados y las listas de revocación de Intel desde un archivo en lugar de
+descargarlos de Intel. El DNS de puerta de enlace no está disponible aquí: Phala no tiene un cortafuegos del proveedor
+para el tráfico saliente.</p>
+<p>Una certificación no puede descartar un fallo en el módulo TDX o en el microcódigo de Intel, ni el acceso físico al
+bus de memoria. Quien controle la aplicación en la cuenta de Phala puede implementar otro «compose»;
+aparecerá como una nueva revisión con un nuevo hash de «compose». El anfitrión controla la fuente de tiempo
+de la máquina y la red.</p>
+<h2 id="before-you-start">Antes de empezar<a class="anchor" href="#before-you-start" aria-label="Enlace a esta sección">#</a></h2>
+<ol>
+<li>Una zona de Cloudflare, su ID de cuenta y un token de API con permisos para <strong>«Cloudflare Tunnel Edit</strong>»,
+    <strong>«Zone Read»</strong> y <strong>«DNS Edit</strong>», proporcionado con <code>--cloudflare-token-file</code> o
+    <code>CLOUDFLARE_API_TOKEN</code>. Para el verificador: <strong>lectura de Cloudflare Tunnel</strong>, <strong>lectura de DNS</strong> y, para
+    el registro de auditoría, <strong>lectura de la configuración de la cuenta</strong>. Sin un dominio, un
+    <a href="#quick-tunnel-without-a-domain">túnel rápido</a> no necesita nada de esto.</li>
+<li>Credenciales de proveedor con acceso de escritura a un proyecto específico; <code>lock</code> utiliza lo mismo:<ul>
+<li>Hetzner: token de API con permisos de lectura y escritura;</li>
+<li>DigitalOcean: token de acceso personal con permiso de escritura;</li>
+<li>Linode: token de acceso personal con <code>linodes</code>, <code>firewall</code> y <code>events</code> ámbitos de lectura/escritura;</li>
+<li>Vultr: clave API de una cuenta dedicada o una subcuenta;</li>
+<li>AWS: se permiten credenciales de IAM <code>ec2:DescribeVpcs</code>, <code>ec2:DescribeImages</code>,
+    <code>ec2:CreateSecurityGroup</code>, <code>ec2:AuthorizeSecurityGroupIngress</code>, <code>ec2:RunInstances</code>,
+    <code>ec2:CreateTags</code>, <code>ec2:DescribeInstances</code>, <code>ec2:DescribeSecurityGroupRules</code> y
+    <code>ec2:RevokeSecurityGroupIngress</code>.</li>
+</ul>
+</li>
+<li>La confirmación que se va a ejecutar. Una etiqueta de lanzamiento se resuelve una sola vez a su confirmación con <code>git ls-remote</code>;
+    el servidor solo recibe siempre el commit de 40 caracteres.</li>
+</ol>
+<h2 id="from-the-panel">Desde el panel<a class="anchor" href="#from-the-panel" aria-label="Enlace a esta sección">#</a></h2>
+<p>En tu propio ordenador, en <strong>Extras → Servidor 24/7</strong> se ejecuta lo mismo <code>deploy</code> para Hetzner en tres
+pasos: elige Europa o Estados Unidos, pega un token de Hetzner (lectura y escritura) y, a continuación, revisa
+el tipo de servidor, el precio mensual, la dirección y la versión que el panel ha encontrado con ese token. No
+se crea nada hasta que lo confirmes. El panel muestra cada paso tal y como <code>deploy</code> se va indicando, y a continuación la
+dirección, el token del panel y la huella digital de la clave de firma. Sin un dominio, el servidor obtiene un
+<a href="#quick-tunnel-without-a-domain">túnel rápido</a>
+; <strong>en «Tus servidores» → «Buscar la dirección actual»</strong>
+se vuelve a consultar tras un reinicio. Para obtener una dirección fija bajo tu propio dominio, abre
+<strong>«Opcional · tu propio dominio»</strong>
+y añade un token de Cloudflare (el enlace preparado selecciona «Lectura de zona»,
+«Edición de DNS» y «Edición del túnel de Cloudflare»).</p>
+<p>Los tokens se transmiten con cada solicitud desde la pestaña del navegador hasta TgWitness en el mismo ordenador
+y no se guardan en ningún sitio; el registro de implementación, el cloud-init censurado, el token del panel y,
+en el caso de un túnel rápido, la clave de dirección se guardan en <code>deployments/NAME</code> dentro del directorio de datos.
+El panel ofrece esto únicamente al administrador principal a través de una conexión directa de bucle invertido
+(<code>127.0.0.1</code>, sin encabezados de proxy ni de túnel); un panel al que se accede a través de una red muestra los comandos
+en su lugar. La versión por defecto es la etiqueta de lanzamiento del panel en ejecución, resuelta a través de la
+API de GitHub. La ubicación, el tipo de servidor y el precio proceden de la API de Hetzner: <code>cpx22</code> si está
+disponible; de lo contrario, el tipo x86 más barato con al menos 2 GB de memoria.</p>
+<h2 id="quick-tunnel-without-a-domain">Túnel rápido sin dominio<a class="anchor" href="#quick-tunnel-without-a-domain" aria-label="Enlace a esta sección">#</a></h2>
+<p><code>--quick-tunnel</code> sustituye a <code>--zone</code>, <code>--cloudflare-account</code> y <code>--panel-host</code>; no interviene ninguna
+cuenta ni token de Cloudflare:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server-type cpx22 \
+    --ref 0123456789abcdef0123456789abcdef01234567 --quick-tunnel --provider-token-file hetzner.token</code></pre>
+<p>En el servidor, Cloudflared abre un
+<a href="https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/">túnel rápido</a>
+hacia el panel: una dirección aleatoria <code>https://….trycloudflare.com</code> que cambia cada vez que se reinicia cloudflared
+o el servidor. Un pequeño servicio en el servidor publica cada dirección en un tema aleatorio de ntfy.sh
+, firmada (HMAC-SHA256) con una clave que solo contiene el directorio de implementación
+(<code>address-key.txt</code>), y la repite cada tres horas porque ntfy.sh conserva las publicaciones durante 12.
+<code>deploy</code> y <strong>«Find the current address»</strong> solo aceptan publicaciones firmadas, por lo que una publicación falsificada no puede
+enviarte a ti, ni a tu token del panel, a la dirección de otra persona. El tema figura en el registro y en el
+cloud-init publicado: quienquiera que los tenga puede leer la dirección actual, que sigue solicitando el
+token del panel. El servidor no mantiene ningún puerto de entrada en ningún caso.</p>
+<p>Cuánto cuesta: ninguna cuenta de Cloudflare guarda registros de un túnel rápido, por lo que <code>verify</code> se indica que el
+túnel, el conector y la comprobación de DNS no están disponibles y el resultado es, en el mejor de los casos, <code>incomplete</code>; los
+registros del proveedor, el cortafuegos, la declaración firmada, las mediciones del host y la comparación del instalador se
+comprueban como de costumbre. La comparación de bytes con el instalador de referencia requiere una confirmación desplegada
+que ya conozca <code>--quick-tunnel</code>; una versión 0.7.0 compila el instalador del dominio e informa de
+la diferencia. Cloudflare no ofrece garantía de disponibilidad para los túneles rápidos, permite 200 solicitudes en
+trámite y no admite eventos enviados por el servidor (Server-Sent Events), por lo que es posible que las actualizaciones en tiempo real del panel (versiones posteriores a la 0.7.0)
+no lleguen a través de uno de ellos y sea necesario recargar la vista; esa parte no se ha probado. Para un caso
+que deba ser permanente, utiliza tu propio dominio.</p>
+<h2 id="deploy">Implementar<a class="anchor" href="#deploy" aria-label="Enlace a esta sección">#</a></h2>
+<p>Echa un vistazo primero a todo lo que se va a enviar. <code>plan</code> No realiza ninguna solicitud al proveedor ni a Cloudflare:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud plan --provider hetzner --name case-2026-11 --server-type cpx22 \
+    --ref 0123456789abcdef0123456789abcdef01234567 --zone example.org \
+    --cloudflare-account CLOUDFLARE_ACCOUNT_ID --panel-host case.example.org</code></pre>
+<p>A continuación, realice la implementación con las mismas opciones y las credenciales:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server-type cpx22 \
+    --ref 0123456789abcdef0123456789abcdef01234567 --zone example.org \
+    --cloudflare-account CLOUDFLARE_ACCOUNT_ID --panel-host case.example.org \
+    --witness-host case-witness.example.org \
+    --provider-token-file hetzner.token --cloudflare-token-file cloudflare.token</code></pre>
+<p>Tipos de servidor para empezar: <code>cpx22</code> (Hetzner), <code>s-1vcpu-2gb</code> (DigitalOcean), <code>g6-standard-1</code>
+(Linode), <code>vc2-1c-2gb</code> (Vultr), <code>t3.small</code> (AWS). <code>--location</code> y <code>--image</code> por defecto, Ubuntu 24.04 de cada
+proveedor en una región europea.</p>
+<p><code>--repository</code> Toma la confirmación de otro repositorio Git https, sin credenciales en la
+URL (por defecto <code>https://github.com/phishdestroy/TgWitness.git</code>). <code>deploy</code> también acepta <code>--out</code>
+para otro directorio de implementación (por defecto <code>deployments/NAME</code>; se rechaza un directorio que ya contenga una
+implementación) y <code>--wait</code>, los minutos que hay que esperar a la declaración firmada del recopilador:
+de 1 a 240, por defecto 20, o 60 para <code>generic</code>.</p>
+<p>El comando:</p>
+<ol>
+<li>crea un túnel de Cloudflare cuyo ingreso reenvía el nombre de host del panel al propio panel y,
+    si se ha especificado, el nombre de host de Witness a <code>/api/witness/head</code> y <code>/api/assurance</code> solo;</li>
+<li>crea registros CNAME proxy para esos nombres de host, rechazando los nombres que ya existen;</li>
+<li>crea un cortafuegos de proveedor sin reglas de entrada y un servidor detrás de él sin clave SSH,
+    sin copias de seguridad, sin agente de consola y con cloud-init que enmascara el SSH, bloquea el acceso de root, instala
+    <code>cloudflared</code>, recupera exactamente el commit, lo comprueba e inicia TgWitness como un
+    servicio de systemd reforzado;</li>
+<li>espera la declaración firmada del recopilador y comprueba que en ella se mencione este servidor y el
+    hash de este cloud-init.</li>
+</ol>
+<p><code>deployments/case-2026-11/</code> A continuación, contiene:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Archivo</th>
+<th>Índice</th>
+<th>¿Compartir?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>deployment.json</code></td>
+<td>ID, hash, las llamadas a la API realizadas (método, ruta, estado) y la primera declaración firmada</td>
+<td>Sí, con el verificador</td>
+</tr>
+<tr>
+<td><code>cloud-init.redacted.yaml</code></td>
+<td>El comando exact cloud-init con sus dos claves secretas sustituidas por <code>REDACTED</code></td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><code>panel-token.txt</code></td>
+<td>El token del panel</td>
+<td>No</td>
+</tr>
+</tbody>
+</table></div>
+<p>La contraseña de root del proveedor, el token del túnel y el token del panel nunca se escriben en
+<code>deployment.json</code>. Publica la huella digital del recopilador que aparece al final a través de un canal
+que no controles tú solo, por ejemplo, un canal de testigos o un mensaje al destinatario.</p>
+<p>Inicia sesión en Telegram en <code>https://case.example.org</code> con el token del panel, tal y como se indica en la
+<a href="../accounts/">guía de la cuenta</a>. Las acciones del panel se registran en el diario firmado; no se trata de
+sesiones SSH. Un <a href="../witness/">testigo</a> puede consultar <code>https://case-witness.example.org</code>.</p>
+<p>No hay SSH: si falla la inicialización, el recopilador nunca responde. Elimina el servidor y
+vuelve a implementarlo, o utiliza una implementación de depuración para encontrar la causa.</p>
+<h3 id="secrets-in-the-user-data">Secretos en los datos de usuario<a class="anchor" href="#secrets-in-the-user-data" aria-label="Enlace a esta sección">#</a></h3>
+<p>El cloud-init contiene dos claves secretas: el token del panel y el token del túnel de Cloudflare. La
+clave de firma no se encuentra entre ellas; se crea en el servidor. Hetzner, DigitalOcean y Linode
+no devuelven datos de usuario a través de su API. Vultr los devuelve a cualquier clave que pueda leer la
+instancia, y EC2 a través de <code>DescribeInstanceAttribute</code>. Para AWS, proporciona al verificador únicamente las tres
+acciones de la tabla, nunca <code>ec2:Describe*</code>. En el caso de Vultr, supongamos que la clave del verificador puede leer ambos
+tokens. Un token de túnel permite a alguien ejecutar un segundo conector: <code>verify</code> informa de cualquier conector
+que no esté en el servidor, y las declaraciones del recopilador no pueden falsificarse de esa manera porque cada una
+firma un desafío nuevo. Con <code>--quick-tunnel</code> el segundo secreto es, en cambio, la clave de dirección:
+quienquiera que la lea puede publicar una dirección falsa que el panel aceptaría.</p>
+<p>La declaración pública del recopilador omite la dirección del servidor y las fuentes de los inicios de sesión;
+ambas permanecen en el registro firmado.</p>
+<h2 id="debug-deployment-and-lock">Depuración de la implementación y bloqueo<a class="anchor" href="#debug-deployment-and-lock" aria-label="Enlace a esta sección">#</a></h2>
+<p><code>--debug-ssh-key KEY --debug-ssh-from 198.51.100.4</code> mantiene SSH para una clave procedente de una dirección
+o una red pequeña, como máximo un /24 para IPv4 o un /48 para IPv6. <code>KEY</code> Ya está registrado con
+el proveedor: el nombre o el ID de una clave SSH en el proyecto Hetzner, el ID o la huella digital de una
+clave SSH en el equipo de DigitalOcean, un nombre de usuario de Linode cuyas claves SSH de perfil se añaden a root,
+el ID de una clave SSH en la cuenta de Vultr o el nombre de un par de claves de EC2 en la región. Estas
+opciones no se aplican a <code>generic</code>. Dicha implementación se registra como <code>debug</code> y <strong>nunca</strong> se clasifica como
+de alta seguridad. Cuando hayas terminado, ejecuta <code>sudo tgwitness-lock</code> como último comando de la última
+sesión SSH y, a continuación:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud lock --record deployments/case-2026-11/deployment.json --provider-token-file hetzner.token</code></pre>
+<p>El cortafuegos pierde todas las reglas de entrada. A continuación, los informes muestran cuándo se permitió el SSH y cuándo
+se cerró; esa ventana permanece visible.</p>
+<h2 id="remove-a-deployment">Eliminar una implementación<a class="anchor" href="#remove-a-deployment" aria-label="Enlace a esta sección">#</a></h2>
+<p><code>destroy</code> Elimina el servidor y su cortafuegos, identificados mediante la etiqueta de la implementación, de modo que una
+implementación que haya fallado a mitad de camino también se elimine; a continuación, se eliminan los registros DNS que apuntan a su
+túnel, así como el propio túnel. El registro del servidor y la clave de firma se eliminan junto con él: exporta primero las
+pruebas. El registro permanece, marcado <code>removed</code>, con las llamadas a la API de la eliminación.</p>
+<pre><code class="language-sh">python -m tgwitness.cloud destroy --record deployments/case-2026-11/deployment.json --confirm case-2026-11 \
+    --provider-token-file hetzner.token --cloudflare-token-file cloudflare.token</code></pre>
+<p>La eliminación a través de la API está implementada para Hetzner. En el caso de otros proveedores <code>destroy</code> se detiene antes de
+eliminar nada y especifica la etiqueta que se va a eliminar en la consola del proveedor. Un servidor instalado manualmente
+(<code>generic</code>) solo pierde su túnel y sus registros DNS. Una implementación rápida del túnel no necesita
+token de Cloudflare: su túnel termina en el servidor, y sus publicaciones caducan en ntfy.sh en un plazo de
+12 horas.</p>
+<h2 id="any-server-self-attested">Cualquier servidor (autocertificado)<a class="anchor" href="#any-server-self-attested" aria-label="Enlace a esta sección">#</a></h2>
+<p><code>--provider generic</code> Es para un servidor comprado o instalado manualmente. <code>deploy</code> crea el túnel
+y el DNS, escribe <code>install.sh</code> (privado) y <code>install.redacted.sh</code> (para publicar), y espera.
+Copia <code>install.sh</code> en un servidor Ubuntu 24.04 recién instalado y ejecútalo allí:</p>
+<pre><code class="language-sh">sudo bash install.sh</code></pre>
+<p>Registra el servidor tal y como estaba (inicios de sesión, cuentas, <code>authorized_keys</code>, sockets de escucha,
+servicios, tareas programadas, paquetes), instala la confirmación, activa el cortafuegos del host, se elimina
+a sí mismo, enmascara el SSH y finaliza la sesión. El informe de un servidor de este tipo es, en el mejor de los casos,
+<strong>AUTOATESTADO</strong>: quienquiera que ejecutara el instalador ya tenía privilegios de root antes de hacerlo, y no hay ningún registro del proveedor
+disponible para el verificador. Aun así, es mejor que un servidor sin explicación: el inventario,
+el hash del instalador y todos los inicios de sesión posteriores están firmados.</p>
+<h2 id="verify">Verificar<a class="anchor" href="#verify" aria-label="Enlace a esta sección">#</a></h2>
+<p>El verificador necesita <code>deployment.json</code>el instalador publicado, credenciales de solo lectura y,
+a ser posible, una copia del commit y una prueba ZIP:</p>
+<pre><code class="language-sh">git clone -c core.autocrlf=false https://github.com/phishdestroy/TgWitness.git checkout
+git -C checkout checkout 0123456789abcdef0123456789abcdef01234567
+python -m tgwitness.cloud verify --record deployment.json \
+    --provider-token-file read-only.token --cloudflare-token-file cloudflare-read.token \
+    --fingerprint COLLECTOR_FINGERPRINT --cloud-init cloud-init.redacted.yaml \
+    --source checkout --evidence tgwitness-evidence.zip --report report.md</code></pre>
+<p>El verificador solicita en ese momento todos los datos de los proveedores y de Cloudflare; el registro
+solo proporciona los ID sobre los que se debe preguntar. El código de salida es 0 para <strong>APROBADO</strong>, 1 para <strong>FALLO</strong> y 2 para
+<strong>REVISIÓN</strong>, <strong>INCOMPLETO</strong> o <strong>AUTOCERTIFICADO</strong>. <code>--fingerprint</code> debería proceder de un canal independiente;
+sin él, la clave se compara únicamente con el registro del operador. <code>python verify.py</code>
+Sigue verificando las pruebas ZIP por sí mismo, tal y como se describe en <a href="../evidence/">«Pruebas</a>».</p>
+<p>Las acciones del proveedor se clasifican: la creación y el inicio en los 30 minutos siguientes a la creación se aprueban;
+la consola, el rescate, el restablecimiento de contraseña, la reconstrucción, la ISO, las imágenes, las instantáneas, las copias de seguridad, Systems Manager,
+EC2 Instance Connect y las aperturas del cortafuegos se rechazan; las acciones relacionadas con la alimentación y cualquier otra acción no prevista
+se marcan para su revisión. Una acción desconocida nunca pasa desapercibida.</p>
+<h2 id="report-for-evidence-handover">Informe para la entrega de pruebas<a class="anchor" href="#report-for-evidence-handover" aria-label="Enlace a esta sección">#</a></h2>
+<p><code>--report report.md</code> redacta el informe en Markdown y <code>report.json</code> junto a él:</p>
+<ol>
+<li>resultado, huella digital de la clave del recopilador, implementación, proveedor, confirmación, servidor, cortafuegos, túnel;</li>
+<li>cada comprobación con su estado y su origen (API del proveedor, API de Cloudflare, extracto del recopilador,
+    registro de pruebas);</li>
+<li>el registro del proveedor con la evaluación de cada acción y, cuando el proveedor lo registra, el autor;</li>
+<li>los puntos finales de Cloudflare que contienen las conexiones del túnel, la configuración y el registro de auditoría;</li>
+<li>la declaración firmada del recopilador;</li>
+<li>lo que el informe establece y lo que no;</li>
+<li>los comandos para reproducirlo y el SHA-256 de cada archivo que se le proporcionó.</li>
+</ol>
+<p>Entrega el informe, <code>report.json</code>, <code>deployment.json</code>el instalador publicado y las
+pruebas ZIP. Elabora el informe con antelación: los registros de los proveedores se conservan durante un tiempo limitado.</p>
+<h2 id="cloudflare-as-an-outside-witness">Cloudflare como testigo externo<a class="anchor" href="#cloudflare-as-an-outside-witness" aria-label="Enlace a esta sección">#</a></h2>
+<p>Todo lo que aparece aquí es opcional. El servidor sigue funcionando aunque no se disponga de una cuenta de Cloudflare, y dos de
+estas opciones funcionan actualmente:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>¿Qué?</th>
+<th>Qué muestra</th>
+<th>En TgWitness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Túnel rápido o el túnel de tu dominio</td>
+<td>Solo se puede acceder al panel a través del túnel</td>
+<td>El asistente del servidor; véase más arriba.</td>
+</tr>
+<tr>
+<td>drand relay <code>drand.cloudflare.com</code></td>
+<td>Los registros posteriores a una ronda de drand son más recientes que este: el diario se fue escribiendo sobre la marcha.</td>
+<td>modo de pruebas, <strong>Más testigos</strong>, sin cuenta (<a href="../evidence/#optional-records-in-evidence-mode-drand-and-telegram-devices">formato</a>)</td>
+</tr>
+<tr>
+<td>Notificaciones sobre el estado del túnel</td>
+<td>cuando el túnel estaba inactivo, por correo electrónico o mediante un webhook de Cloudflare</td>
+<td>Configúralos en el panel de control de Cloudflare</td>
+</tr>
+<tr>
+<td>DNS de Gateway (<code>--gateway-dns</code>, o <strong>Cloudflare Gateway DNS</strong> en el asistente)</td>
+<td>cada nombre que el servidor consultó, respondido por Cloudflare a través de TLS; el cortafuegos de Hetzner impide que el DNS acceda a cualquier otra cosa; si una política de Gateway podría reescribir las respuestas</td>
+<td>Hetzner, plan Zero Trust gratuito, sin dominio; <code>verify</code> comprueba el cortafuegos, la ubicación, el registro de actividades, las políticas, las consultas del servidor y el registro de auditoría; el modo de evidencia copia el registro en el diario</td>
+</tr>
+<tr>
+<td>Puerta de enlace con Cloudflare: un cliente One en el servidor, un cortafuegos de salida que solo permite el acceso a Cloudflare</td>
+<td>cada conexión que ha establecido el servidor, no solo las de DNS</td>
+<td>Aún no está desarrollado</td>
+</tr>
+<tr>
+<td>Acceso frente al panel</td>
+<td>quién se ha conectado al panel y cuándo</td>
+<td>No está implementado: requiere un dominio propio</td>
+</tr>
+<tr>
+<td>Registro de comandos SSH</td>
+<td>cada comando en una sesión de depuración</td>
+<td>Aún no está desarrollado</td>
+</tr>
+</tbody>
+</table></div>
+<p>Logpush, que mantendría la copia propia de Cloudflare en R2, es una función de Enterprise: en el plan gratuito
+, Cloudflare responde <code>logpush is not enabled for this account</code>. Su registro de Gateway se conserva allí durante 24
+horas, por lo que el «modo de evidencia» lo copia en el diario firmado (<strong>el registro de Cloudflare Gateway de
+las consultas DNS de este servidor</strong>, un token de solo lectura con «Account Analytics Read»).</p>
+<p>Sin un plan Zero Trust, una cuenta tiene una única ubicación DNS. Cuando Cloudflare rechaza otra,
+el servidor comparte la existente y sus consultas se distinguen por su dirección; ese filtro
+también necesita Zero Trust PII Read, y <code>destroy</code> deja una ubicación compartida. Una consulta de registro abarca
+como máximo tres horas, por lo que la copia y la <code>verify</code> lectura del día en intervalos de tres horas.</p>
+<p>El DNS de la puerta de enlace se encarga del resolutor del sistema. El DNS sobre HTTPS en el puerto 443 hacia otro resolutor, así como
+las conexiones a direcciones que no aparecen en ningún registro (como los centros de datos de Telegram, por ejemplo), no figuran en
+su registro.</p>
+<p>Cloudflare no puede ver el interior del cifrado de Telegram, otros dispositivos de la cuenta de Telegram
+(la lista de dispositivos del modo «evidence» los registra desde el lado de Telegram) ni el hipervisor del proveedor.</p>
+<p>El 1 de noviembre de 2026, el DNS de Gateway se ejecutó contra la nube real de Hetzner y una cuenta gratuita de Cloudflare:
+Hetzner aceptó las reglas de salida, el servidor instaló la versión v0.7.0 y todas las consultas pasaron
+por Gateway a través de TLS, el túnel rápido funcionó a través de ese cortafuegos y <code>verify</code> leyó
+los 19 nombres del servidor desde Cloudflare (espejos de Ubuntu y Hetzner, GitHub, PyPI, NTP,
+el túnel, ntfy.sh). El panel copió 36 consultas en ocho ventanas a un diario y
+<code>verify.py</code> las resumió sin omisiones; <code>destroy</code> retiró el servidor y el cortafuegos y abandonó
+la ubicación compartida.</p>
+<h2 id="what-this-does-not-establish">Lo que esto no establece<a class="anchor" href="#what-this-does-not-establish" aria-label="Enlace a esta sección">#</a></h2>
+<ul>
+<li>El proveedor y su personal controlan el hipervisor, los discos y la red.</li>
+<li>Las mediciones del servidor son facilitadas por el propio recopilador.</li>
+<li>El contenido de las reglas de cortafuegos anteriores no figura en todos los registros de los proveedores; solo Linode conserva las versiones de las reglas.</li>
+<li>No aporta nada nuevo sobre la autenticidad de los mensajes; véase <a href="../evidence/">«Evidencia</a>».</li>
+</ul>
+<h2 id="tested-here">Probado aquí<a class="anchor" href="#tested-here" aria-label="Enlace a esta sección">#</a></h2>
+<p>La lógica de implementación, bloqueo y verificación se comprueba mediante pruebas automatizadas con simulaciones de las
+API de Hetzner, DigitalOcean, Linode, Vultr, EC2/CloudTrail y Cloudflare, creadas a partir de sus
+referencias de API publicadas, y la firma de solicitudes de AWS según los ejemplos publicados por AWS.
+<code>tools/check_cloud_wizard.py</code> Ejecuta el asistente de servidor del panel de la misma manera, con un dominio y
+con un túnel rápido. <code>tools/check_tdx.py</code> verifica las certificaciones TDX reales de Intel procedentes de dcap-qvl y dstack
+hasta el certificado raíz de Intel (códigos fuente en <a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/tdx/README.md">tools/tdx/README.md</a>); <code>tools/check_phala.py</code>ejecuta las operaciones de despliegue, verificación, registro, destrucción y el asistente del panel en una Phala Cloud simulada
+cuyas certificaciones proceden de una PKI falsificada con la estructura de la de Intel. La ruta de Phala aún no se ha
+probado en la propia Phala Cloud.</p>
+<p>El 1 de noviembre de 2026, la ruta del túnel rápido se ejecutó contra el <strong>Hetzner Cloud</strong> real (Núremberg, <code>cpx22</code>,
+TgWitness v0.7.0), ntfy.sh real y GitHub, tanto desde el panel como desde el código:</p>
+<ul>
+<li>Comprobación del precio y, a continuación, creación mediante los botones del panel: el servidor se pone en marcha tras 13 segundos,
+    declaración firmada con los hash de la instancia y del instalador coincidentes tras unos dos minutos;</li>
+<li>el propio panel del servidor se abrió a través de su dirección trycloudflare.com y aceptó el
+    token del panel; sin el token, devuelve un código de error 401;</li>
+<li>Tras un reinicio a través de la API de Hetzner, el servidor publicó una nueva dirección firmada; <strong>«Find the
+    current address»</strong> la encontró, la dirección antigua dejó de responder y la clave de firma se mantuvo
+    igual; se ignoró una publicación sin firmar en un tema de ntfy.sh;</li>
+<li><code>verify</code> respecto a la API de Hetzner: servidor, cortafuegos sin reglas de entrada, declaración, enlace,
+    mediciones del host, arranque y el hash de origen de una copia de la versión v0.7.0 superaron las pruebas; las comprobaciones de Cloudflare
+    no estaban disponibles, tal y como se ha descrito anteriormente; el instalador difería del que utiliza la versión v0.7.0
+    y coincidía byte a byte con el que compila el código de esta versión;</li>
+<li>Al eliminarla del panel, se eliminaron exactamente el servidor y el cortafuegos etiquetados en la implementación;
+    los demás servidores y cortafuegos del mismo proyecto no se vieron afectados.</li>
+</ul>
+<p>Aún no se ha probado con cuentas reales: una implementación bajo tu propio dominio (túnel de Cloudflare y
+DNS), los demás proveedores, una implementación de depuración y <code>lock</code>, una cuenta de Telegram en dicho servidor,
+y las actualizaciones en tiempo real de versiones posteriores a través de un túnel rápido. Comprueba la primera implementación en
+cada proveedor con <code>plan</code>, una implementación de depuración y <code>verify</code> antes de utilizarlo en un caso.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/HIGH-ASSURANCE.md">Edite esta página en GitHub ↗</a><a class="next-guide" href="../panel/"><span>Siguiente paso</span><strong>Guía de paneles →</strong></a><p>Estas guías describen la implementación actual. Los resultados de la validación y las deficiencias pendientes se documentan por separado. <a href="../verification/">Lo que se ha probado →</a></p></footer>
+</main>
+<aside class="toc" aria-label="En esta página"><p class="nav-label">En esta página</p><a href="#what-a-verifier-can-check">Lo que puede comprobar un verificador</a><a href="#providers">Proveedores</a><a href="#confidential-vm-on-phala-cloud-intel-tdx">Máquina virtual confidencial en Phala Cloud (Intel TDX)</a><a href="#before-you-start">Antes de empezar</a><a href="#from-the-panel">Desde el panel</a><a href="#quick-tunnel-without-a-domain">Túnel rápido sin dominio</a><a href="#deploy">Implementar</a><a href="#debug-deployment-and-lock">Depuración de la implementación y bloqueo</a><a href="#remove-a-deployment">Eliminar una implementación</a><a href="#any-server-self-attested">Cualquier servidor (autocertificado)</a><a href="#verify">Verificar</a><a href="#report-for-evidence-handover">Informe para la entrega de pruebas</a><a href="#cloudflare-as-an-outside-witness">Cloudflare como testigo externo</a><a href="#what-this-does-not-establish">Lo que esto no establece</a><a href="#tested-here">Probado aquí</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Código abierto · Se ejecuta en su equipo</span><a href="../../../../LICENSE">Licencia MIT</a><a href="../notice/">Aviso del operador</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">Seguridad</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "A la espera de un mensaje", "Step through a fictional send, edit and delete.": "Siga paso a paso un proceso ficticio de envío, edición y eliminación.", "No observations yet. Start the sequence or advance one event.": "Aún no hay observaciones. Inicie la secuencia o avance un evento.", "Meet at 10:00": "Nos vemos a las 10:00", "A new message is visible in the chat.": "Aparece un nuevo mensaje en el chat.", "Record 1 appended: the collector observed the original message.": "Se adjunta el registro n.º 1: el recopilador ha observado el mensaje original.", "Meet at 11:00": "Nos vemos a las 11:00", "The current text changes. The earlier observation stays.": "El texto actual cambia. La observación anterior se mantiene.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Se ha añadido el registro 2: la modificación constituye una nueva observación. El registro 1 sigue conteniendo el texto original.", "Message deleted": "Mensaje eliminado", "The message has disappeared from the chat view.": "El mensaje ha desaparecido de la vista del chat.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Se adjunta el registro n.º 3: el aviso de eliminación se conserva junto con ambas versiones observadas.", "0 records": "0 registros", "1 record": "1 registro", "2 records": "2 registros", "3 records": "3 registros", "Complete / {n} of 3": "Completo / {n} de 3", "Step / {n} of 3": "Paso / {n} de 3", "Pause": "Pausa", "Replay sequence": "Secuencia de reproducción", "Play sequence": "Secuencia de reproducción", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "El ejemplo estático está disponible. Para calcular los hash de forma interactiva, abra esta página a través de HTTPS o en una vista previa en localhost con soporte para Web Crypto.", "No record supplied": "No se ha facilitado ningún registro", "Tail removed": "Se ha eliminado la cola", "≠ saved hash": "≠ hash guardado", "Rebuilt · different hash": "Reconstruido · hash diferente", "= saved hash": "= hash guardado", "Same length and matching head.": "Misma extensión y encabezado a juego.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Los tres hash calculados coinciden con los hash guardados. Esta muestra se ajusta al límite de tres registros conservados.", "Same saved head; the journal prefix fails verification.": "Se ha guardado el mismo encabezado; el prefijo del registro no supera la verificación.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "El registro n.º 2 ya no coincide con su hash guardado. Si solo se comprobara el último registro almacenado, esto pasaría desapercibido; el verificador comprueba todos los registros.", "Head differs from the retained checkpoint.": "El encabezado difiere del punto de control conservado.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Los hash reconstruidos se enlazan entre sí, pero el encabezado final ha cambiado. El punto de control conservado rechaza este historial. Las firmas originales también fallarían en los registros modificados.", "Too short: 2 supplied records \u003c 3 retained records.": "Demasiado breve: 2 registros facilitados \u003c 3 registros conservados.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Los dos hash restantes siguen coincidiendo. El punto de control conservado revela la parte final que falta. Sin ese límite anterior, este prefijo más corto por sí solo no revelaría la omisión.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "El cálculo de hash no está disponible en este navegador. Las fórmulas y la explicación estática que figuran a continuación siguen estando disponibles.", "{n} records": "{n} registros", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Aceptado: el recuento aumenta, la firma se verifica y la clave coincide. El testigo conserva este nuevo límite.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Reversión: la respuesta firmada indica un número de registros inferior al del último punto de control aceptado. El sistema registra el problema y mantiene el límite aceptado anteriormente.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Bifurcación: el recuento no ha variado, pero la punta difiere. El testigo registra el desacuerdo y mantiene el límite aceptado anteriormente.", "No answer": "Sin respuesta", "boundary unknown": "límite desconocido", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Sin respuesta: el «witness» registra el fallo en la comprobación. No puede determinar el estado actual del recopilador. Si el «witness» sigue pudiendo acceder a la API del bot y su política de publicación lo permite, puede publicar dicho fallo.", "Send {n}": "Enviar {n}", "Edit {n}": "Editar {n}", "Delete {n}": "Eliminar {n}", "Both accounts captured all six expected observations in this example.": "Ambas cuentas han recogido las seis observaciones previstas en este ejemplo.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "La cuenta B volvió a capturar 6 de 6. Dos recibos tardaron más en aparecer. La tasa de captura y el retraso en la recepción de los recibos responden a cuestiones diferentes.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "La cuenta B capturó 5 de 6 antes del plazo límite (83,3 %). La edición que falta no presenta ningún retraso medido. Este resultado solo describe las seis acciones controladas.", "not observed by cutoff": "No se ha respetado el límite de caracteres.", "{s} seconds": "{s} segundos", "Exact values follow in the table.": "Los valores exactos figuran en la tabla.", "{s} s": "{s} s", "Not observed": "No se ha observado", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Cuatro chats aportan observaciones diferentes. Siga los registros originales de cada conexión; no asigne la publicación del canal al usuario 71001 sin un remitente identificado.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Los registros n.º 146 y n.º 205 presentan el mismo identificador de remitente, 71001. Esto permite relacionar las publicaciones observadas de una cuenta de Telegram en dos chats diferentes. No identifica a ninguna persona del mundo real ni atribuye la publicación al canal.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "La dirección de destino pay.example.invalid/new aparece en el registro del grupo n.º 146, en el teclado del bot n.º 173, en la edición del canal n.º 188 y en el mensaje privado n.º 205. Una dirección de destino repetida vincula el material; ello no demuestra que exista un control común de dichas cuentas.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Los recibos multimedia completados n.º 151 y n.º 209 presentan valores SHA-256 completos idénticos en este caso ficticio. Compare los bytes reales y sus registros de mensajes asociados. El archivo coincidente no identifica a su creador ni demuestra quién lo reenvió.", "the encrypted off-site copy": "la copia cifrada almacenada externamente", "notifications": "notificaciones", "checkpoint hashes for timestamps": "Hashes de puntos de control para marcas de tiempo", "signed checkpoints for the witness": "puntos de control firmados para TgWitness", "Switched on in this example": "Activado en este ejemplo", "Optional · off by default": "Opcional · desactivado por defecto", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Al salir de este equipo: la conexión a Telegram y {list}. Nada más.", "Default: only the Telegram connection leaves this machine.": "Por defecto: solo la conexión a Telegram sale de este equipo.", "{done} of {total} done": "{done} de {total} completado", "Mark step {n} as done": "Marcar el paso {n} como completado", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Texto", "Copied": "Copiado", "Command copied.": "Comando copiado.", "Selected — Ctrl/Cmd+C": "Seleccionado — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Comando seleccionado. Cópielo manualmente.", "Command copied to clipboard.": "Comando copiado en el portapapeles.", "Select text": "Seleccionar texto", "Clipboard unavailable. Command selected; copy it manually.": "El portapapeles no está disponible. Se ha seleccionado el comando; cópielo manualmente.", "A message arrives. The first observation is saved.": "Llega un mensaje. Se guarda la primera observación.", "The time changes. Both captured versions stay.": "La hora cambia. Ambas versiones capturadas se conservan.", "The message disappears. The captured history remains.": "El mensaje desaparece. El historial capturado permanece.", "Pause example animation": "Pausar la animación de ejemplo", "Play example animation": "Reproduzca la animación de ejemplo", "Play": "Reproducir", "Full-size workspace screenshot": "Captura de pantalla a pantalla completa del espacio de trabajo", "Workspace screenshot · fictional data": "Captura de pantalla del espacio de trabajo · datos ficticios", "Close": "Cerrar", "Close screenshot": "Cerrar captura de pantalla", "Scrollable full-size screenshot": "Captura de pantalla a tamaño completo con desplazamiento", "Enlarge: {name}": "Ampliar: {name}", "View full size": "Ver a tamaño completo", "Step {n} of {total}": "Paso {n} de {total}"}</script>
+</body></html>

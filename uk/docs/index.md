@@ -8,7 +8,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/
 
 Ілюстровані посібники
 
-[### Case Board Зберігайте зв’язок між спостереженнями, точними цитатами та нотатками команди.](https://phishdestroy.github.io/TgWitness/uk/docs/case-board/) [### Студія звітів Оберіть матеріал та один із восьми макетів звітів.](https://phishdestroy.github.io/TgWitness/uk/docs/reports/) [### Копія для поширення Підготуйте підписаний витяг із полями, необхідними для одержувача.](https://phishdestroy.github.io/TgWitness/uk/docs/handover/) [### Групи облікових записів Переглядайте облікові записи разом, але зберігайте їхні робочі простори окремо.](https://phishdestroy.github.io/TgWitness/uk/docs/groups/)
+[### Case Board Зберігайте зв’язок між спостереженнями, точними цитатами та нотатками команди.](https://phishdestroy.github.io/TgWitness/uk/docs/case-board/) [### Студія звітів Оберіть матеріал та один із восьми макетів звітів.](https://phishdestroy.github.io/TgWitness/uk/docs/reports/) [### Поділитися копією Підготуйте підписаний витяг із полями, необхідними для одержувача.](https://phishdestroy.github.io/TgWitness/uk/docs/handover/) [### Групи облікових записів Переглядайте облікові записи разом, але зберігайте їхні робочі простори окремо.](https://phishdestroy.github.io/TgWitness/uk/docs/groups/)
 
 [## Режими, сценарії та рівні доказовості Області збору даних, межі подій, вісім механізмів верифікації та шість вигаданих сценаріїв розслідування.](https://phishdestroy.github.io/TgWitness/uk/guides/modes.html)
 
@@ -34,19 +34,19 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/
 
 Налаштування
 
-[Швидкий старт](https://phishdestroy.github.io/TgWitness/uk/docs/reference/quickstart/)[Формати облікових записів та сеансів](https://phishdestroy.github.io/TgWitness/uk/docs/reference/accounts/)[Доступ та дозволи](https://phishdestroy.github.io/TgWitness/uk/docs/reference/access/)[Підключення, проксі-сервери та захист даних](https://phishdestroy.github.io/TgWitness/uk/docs/reference/connection/)[Впровадження](https://phishdestroy.github.io/TgWitness/uk/docs/reference/deployment/)
+[Швидкий старт](https://phishdestroy.github.io/TgWitness/uk/docs/reference/quickstart/)[Встановлення, перевірка та оновлення](https://phishdestroy.github.io/TgWitness/uk/docs/reference/installation/)[Перше налаштування та параметри](https://phishdestroy.github.io/TgWitness/uk/docs/reference/settings/)[Формати облікових записів та сеансів](https://phishdestroy.github.io/TgWitness/uk/docs/reference/accounts/)[Доступ та дозволи](https://phishdestroy.github.io/TgWitness/uk/docs/reference/access/)[Підключення, проксі-сервери та захист даних](https://phishdestroy.github.io/TgWitness/uk/docs/reference/connection/)[Впровадження](https://phishdestroy.github.io/TgWitness/uk/docs/reference/deployment/)[Розгортання з високим рівнем безпеки](https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-assurance/)
 
 Зібрати
 
-[Як відбувається збір даних](https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/)[Завантажити історію джерел](https://phishdestroy.github.io/TgWitness/uk/docs/reference/history/)[Робочі процеси та операції](https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/)[Режим розслідування](https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/)[Можливості та обмеження](https://phishdestroy.github.io/TgWitness/uk/docs/reference/features/)
+[Посібник з панелей](https://phishdestroy.github.io/TgWitness/uk/docs/reference/panel/)[Як відбувається збір даних](https://phishdestroy.github.io/TgWitness/uk/docs/reference/collection/)[Завантажити історію джерел](https://phishdestroy.github.io/TgWitness/uk/docs/reference/history/)[Робочі процеси та операції](https://phishdestroy.github.io/TgWitness/uk/docs/reference/operations/)[Режим розслідування](https://phishdestroy.github.io/TgWitness/uk/docs/reference/investigation/)[Можливості та обмеження](https://phishdestroy.github.io/TgWitness/uk/docs/reference/features/)
 
 Архів та інтеграції
 
-[Довідка щодо Case Board](https://phishdestroy.github.io/TgWitness/uk/docs/reference/case-board/)[Аналіз архіву](https://phishdestroy.github.io/TgWitness/uk/docs/reference/analysis/)[MCP тільки для читання](https://phishdestroy.github.io/TgWitness/uk/docs/reference/mcp/)[Локальне розпізнавання тексту (OCR) та транскрипція](https://phishdestroy.github.io/TgWitness/uk/docs/reference/media-analysis/)[Вихідні веб-хуки](https://phishdestroy.github.io/TgWitness/uk/docs/reference/webhooks/)
+[Довідка щодо Case Board](https://phishdestroy.github.io/TgWitness/uk/docs/reference/case-board/)[Аналіз архіву](https://phishdestroy.github.io/TgWitness/uk/docs/reference/analysis/)[MCP тільки для читання](https://phishdestroy.github.io/TgWitness/uk/docs/reference/mcp/)[Локальне розпізнавання тексту (OCR) та транскрипція](https://phishdestroy.github.io/TgWitness/uk/docs/reference/media-analysis/)[Вихідні веб-хуки](https://phishdestroy.github.io/TgWitness/uk/docs/reference/webhooks/)[Публічна вітрина](https://phishdestroy.github.io/TgWitness/uk/docs/reference/showcase/)
 
 Докази
 
-[Як працює система збереження доказів](https://phishdestroy.github.io/TgWitness/uk/docs/reference/how-it-works/)[Налаштування та перевірка звітів](https://phishdestroy.github.io/TgWitness/uk/docs/reference/case-reports/)[Формат доказів](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/)[Незалежний свідок](https://phishdestroy.github.io/TgWitness/uk/docs/reference/witness/)[Часові мітки](https://phishdestroy.github.io/TgWitness/uk/docs/reference/timestamp/)
+[Як працює система збереження доказів](https://phishdestroy.github.io/TgWitness/uk/docs/reference/how-it-works/)[Налаштування та перевірка звітів](https://phishdestroy.github.io/TgWitness/uk/docs/reference/case-reports/)[Експорт облікового запису](https://phishdestroy.github.io/TgWitness/uk/docs/reference/account-export/)[Формат доказів](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/)[Незалежний свідок](https://phishdestroy.github.io/TgWitness/uk/docs/reference/witness/)[Часові мітки](https://phishdestroy.github.io/TgWitness/uk/docs/reference/timestamp/)[Зберігання та відновлення](https://phishdestroy.github.io/TgWitness/uk/docs/reference/storage/)
 
 Безпека та проект
 

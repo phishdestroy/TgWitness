@@ -235,7 +235,7 @@ Sebuah grup menyatukan akun-akun yang terkait tanpa menggabungkan sesi, kunci, a
 - **Obrolan di beberapa akun menampilkan:** sumber yang dibagikan, akun-akun yang mengamati obrolan tersebut, dan gangguan dalam periode pengamatan ruang kerja yang tersedia (hingga tujuh hari). **Ekspor dengan N akun** membagi ekspor saluran atau supergrup di antara akun-akun tersebut dan menandatangani satu arsip.
 - **Ekspor grup:** satu ZIP dengan ekspor yang telah ditandatangani dari setiap akun di bawah `accounts/` dan `manifest.json` mencantumkan SHA-256 dan sidik jari kunci masing-masing, yang ditandatangani oleh ruang kerja utama di `manifest.signature.json`. Verifikasi setiap arsip akun secara terpisah dengan `python -m tgwitness.verify` dan sidik jari tepercaya akun tersebut.
 
-Anggota berbagi pengaturan grup; sebuah akun dapat mempertahankan nilai-nilainya sendiri. Lihat [pengaturan bersama](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups), [panduan impor dan grup](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) dan [dasbor kolam MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
+Anggota berbagi pengaturan grup; sebuah akun dapat mempertahankan nilai-nilainya sendiri. Lihat [pengaturan bersama](https://phishdestroy.github.io/TgWitness/id/docs/reference/settings/#account-groups), [panduan impor dan grup](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) dan [dasbor kolam MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
 
 ## Keluar
 
@@ -278,6 +278,6 @@ Konverter ini hanya membaca file Telethon SQLite (hingga 64 MiB), tidak pernah m
 | ID akun tidak sesuai dengan akun yang diimpor | ID pengguna pada berkas tersebut berbeda dengan yang dilaporkan oleh Telegram; berkas tersebut diperuntukkan bagi akun lain. |
 | Akun ini sudah terdaftar di ruang kerja lain | Buka ruang kerja tersebut daripada menambahkan akun dua kali. |
 | Tersambung, tetapi ada grup pribadi yang hilang dari daftar obrolan di **Sumber** | Periksa keanggotaan. Alat pemilih memeriksa 1.000 percakapan pertama; tingkatkan batasnya di bagian **Parameter**. |
-| Koneksi proxy gagal | Periksa mode rute dan IP. MTProxy otomatis akan mencoba entri lain yang berfungsi. Mode Sembunyikan IP akan menunggu; mode cadangan yang dipilih secara eksplisit dapat terhubung langsung setelah penundaan yang dikonfigurasi. Lihat [mode perutean](https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/#ip-modes). |
+| Koneksi proxy gagal | Periksa rute dan mode IP. Secara otomatis, MTProxy akan mencoba entri lain yang berfungsi. Sembunyikan penundaan alamat; Direct sebagai pilihan terakhir dapat terhubung langsung setelah penundaan yang telah dikonfigurasi. Lihat [mode perutean](https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/#ip-modes). |
 
 Lihat juga: [koneksi dan keamanan](https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/) untuk proxy dan enkripsi, serta [cara kerja pengumpulan](https://phishdestroy.github.io/TgWitness/id/docs/reference/collection/) data yang direkam setelah masuk.

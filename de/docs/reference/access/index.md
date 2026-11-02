@@ -28,7 +28,7 @@ Ein Zugriff kann ausgewählte Arbeitsbereiche, ausgewählte Chats innerhalb dies
 
 ## Wählen Sie die Berechtigungen aus
 
-Verwenden Sie für eine rein textbasierte öffentliche Demonstration **die Option „Public Showcase“** anstelle des normalen Reviewer-Zugriffs. Dabei werden explizit ausgewählte öffentliche Kanäle, gespeicherte Bearbeitungen und Löschungen sowie signierte Statistiken angezeigt, wobei Autorenfelder unkenntlich gemacht und Dateien an der API-Grenze geschlossen werden. [Erstellen und überprüfen Sie ein Showcase](https://github.com/phishdestroy/TgWitness/blob/main/docs/LIVE-SHOWCASE.md).
+Verwenden Sie für eine rein textbasierte öffentliche Demonstration **die Option „Public Showcase“** anstelle des normalen Reviewer-Zugriffs. Dabei werden explizit ausgewählte öffentliche Kanäle, gespeicherte Bearbeitungen und Löschungen sowie signierte Statistiken angezeigt, wobei Autorenfelder unkenntlich gemacht und Dateien an der API-Grenze geschlossen werden. [Erstellen und überprüfen Sie ein Showcase](https://phishdestroy.github.io/TgWitness/de/docs/reference/showcase/).
 
 | Genehmigung | Was es ermöglicht |
 | --- | --- |
@@ -70,7 +70,7 @@ Die IP-Adresse ist die vom Programm erkannte Client-Adresse. Wenn Sie sich hinte
 
 ## Zugriff ändern oder widerrufen
 
-Bearbeiten Sie einen Eintrag unter **„Zugriffe“**, um dessen Geltungsbereich, Berechtigungen oder Einschränkungen zu ändern. Änderungen am Geltungsbereich und an den Berechtigungen werden bei nachfolgenden Anfragen überprüft, einschließlich Anfragen aus bereits geöffneten Sitzungen. Der Widerruf eines Zugriffs beendet dessen Sitzungen und macht das ausgestellte Token unbrauchbar. **Bei geöffneten Sitzungen** kann der Administrator auch eine einzelne Sitzung beenden, ohne den gesamten Zugriff zu widerrufen.
+Bearbeiten Sie einen Eintrag unter **„Gewährter Zugriff“**, um dessen Geltungsbereich, Berechtigungen oder Einschränkungen zu ändern. Änderungen am Geltungsbereich und an den Berechtigungen werden bei nachfolgenden Anfragen überprüft, einschließlich Anfragen aus bereits geöffneten Sitzungen. Das Widerrufen eines Zugriffs beendet dessen Sitzungen und macht das ausgestellte Token unbrauchbar. Über **„Offene Sitzungen“** kann der Administrator auch eine einzelne Sitzung beenden, ohne den gesamten Zugriff zu widerrufen.
 
 Gespeicherte Exportkopien behalten ihren Ersteller, den Arbeitsbereich, den Chat-Umfang und die erforderlichen Berechtigungen bei. Ein berechtigter Nutzer kann seine eigenen Kopien nur so lange auflisten oder herunterladen, wie diese Berechtigungen noch gelten; Kopien, die das Case Board enthalten, erfordern zusätzlich die Berechtigung „`board.read`“. Der Administrator kann alle Kopien abrufen. Ältere Kopien ohne diese Metadaten sowie Gruppenbündel sind nur für den Administrator zugänglich. Download-Tickets und vorbereitete Dateiantworten überprüfen den Zugriff erneut nach der Vorbereitung der Datei, bevor deren Daten gesendet werden.
 

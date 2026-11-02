@@ -235,7 +235,7 @@ TData هو المجلد `tdata` الخاص بتطبيق Telegram Desktop (الت
 - **ترى المحادثات عبر عدة حسابات:** المصادر المشتركة، والحسابات التي تراقبها، و الانقطاعات في فترة المراقبة المتاحة لمساحة العمل (حتى سبعة أيام). يؤدي **التصدير باستخدام N حسابات** إلى تقسيم تصدير القناة أو المجموعة الفائقة بينها وتوقيع أرشيف واحد.
 - **تصدير المجموعة:** صورة واحدة ZIP مع التصدير الموقّع لكل حساب تحت `accounts/` و `manifest.json` مع إدراج بصمات SHA-256 وبصمات المفاتيح الخاصة بها، موقعة من قبل مساحة العمل الرئيسية في `manifest.signature.json`. تحقق من أرشيف كل حساب على حدة باستخدام `python -m tgwitness.verify` وبصمة الإصبع الموثوقة لذلك الحساب.
 
-يتشارك الأعضاء إعدادات المجموعة؛ ويمكن للحساب الاحتفاظ بقيمه الخاصة. انظر [الإعدادات المشتركة](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups)، [ودليل الاستيراد والمجموعات](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) [ولوحة معلومات المجمع MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
+يتشارك الأعضاء إعدادات المجموعة؛ ويمكن للحساب الاحتفاظ بقيمه الخاصة. انظر [الإعدادات المشتركة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/settings/#account-groups)، [ودليل الاستيراد والمجموعات](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) [ولوحة معلومات المجمع MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
 
 ## تسجيل الخروج
 
@@ -278,6 +278,6 @@ TData هو المجلد `tdata` الخاص بتطبيق Telegram Desktop (الت
 | معرف الحساب لا يتطابق مع الحساب المستورد | يختلف معرّف المستخدم الخاص بالملف عما أوردته Telegram؛ فالملف يخص حسابًا آخر. |
 | الحساب مملوك بالفعل لمساحة عمل أخرى | افتح مساحة العمل تلك بدلاً من إضافة الحساب مرتين. |
 | متصل، لكن هناك مجموعة خاصة مفقودة من قائمة الدردشات في **«المصادر»** | تحقق من العضوية. يقوم أداة الاختيار بفحص أول 1,000 محادثة؛ قم برفع الحد الأقصى ضمن **«المعلمات**». |
-| فشل الاتصال عبر الوكيل | تحقق من مسار التوجيه ووضع IP. يحاول MTProxy التلقائي استخدام مدخل آخر فعال. أما وضع إخفاء عنوان IP فينتظر؛ ويمكن لوضع الاحتياطي المحدد صراحةً الاتصال مباشرةً بعد انقضاء فترة التأخير المحددة له. انظر [أوضاع التوجيه](https://phishdestroy.github.io/TgWitness/ar/docs/reference/connection/#ip-modes). |
+| فشل الاتصال عبر الوكيل | تحقق من المسار ووضع IP. يحاول الوضع التلقائي MTProxy إدخالًا آخر فعالًا. يظل وضع «إخفاء العنوان» في حالة انتظار؛ أما الوضع «مباشر» (كملاذ أخير) فيمكنه الاتصال مباشرةً بعد انقضاء فترة التأخير المحددة. انظر [أوضاع التوجيه](https://phishdestroy.github.io/TgWitness/ar/docs/reference/connection/#ip-modes). |
 
 انظر أيضًا: [الاتصال والأمان](https://phishdestroy.github.io/TgWitness/ar/docs/reference/connection/) للوكلاء والتشفير، [وكيفية عمل عملية التجميع](https://phishdestroy.github.io/TgWitness/ar/docs/reference/collection/) لما يتم التقاطه بعد تسجيل الدخول.

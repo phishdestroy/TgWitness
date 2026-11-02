@@ -6,15 +6,15 @@ Veillez à ce que le compte reste connecté. Déterminez explicitement à quel m
 
 ## Choisissez d'abord le mode IP
 
-01**Masquer l'adresse IP**
+01**Masquer l'adresse**
 
 Utilisez un proxy. Si aucun ne fonctionne, patientez sans connexion directe à Telegram.
 
-02**Autoriser une solution de secours**
+02**Recourir à Direct en dernier recours**
 
 Autoriser l'accès direct une fois le délai configuré écoulé ; revenir à un proxy opérationnel dès qu'un proxy répond.
 
-03**Tunnel / VPN**
+03**Serveur derrière un tunnel ou un VPN**
 
 Autorisez les connexions directes via le réseau de l’hébergeur. Cette option n’installe ni ne vérifie aucun VPN.
 
@@ -27,7 +27,7 @@ L'itinéraire détermine la connexion. Le mode IP détermine si une connexion di
 3. Enregistrez et lancez **le test de connexion à Telegram**. Cela fonctionne également avant la connexion.
 4. Une fois la collecte lancée, vérifiez qu’un message de contrôle parvient bien au journal.
 
-Les nouveaux espaces de travail utilisent automatiquement MTProxy avec la fonctionnalité « Hide IP ». Le pool combine quatre sources publiques, teste les entrées, conserve les routes opérationnelles et remplace les proxys défaillants. Les téléchargements ayant échoué conservent les instantanés précédents.
+Les nouveaux espaces de travail utilisent automatiquement la balise MTProxy avec l'option « **Masquer l'adresse** ». Le pool combine quatre sources publiques, vérifie les entrées, conserve les routes opérationnelles et remplace les proxys défaillants. Les téléchargements ayant échoué conservent les instantanés précédents.
 
 ## Utilisez votre propre proxy
 

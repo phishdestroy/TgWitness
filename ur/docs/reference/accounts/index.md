@@ -235,7 +235,7 @@ TData ٹیلیگرام ڈیسک ٹاپ ایپلیکیشن کا`tdata` فولڈر
 - **کئی اکاؤنٹس کی چیٹس دیکھیں:** مشترکہ ذرائع، انہیں دیکھنے والے اکاؤنٹس اور دستیاب ورک اسپیس-مشاہداتی مدت (سات دن تک) میں خلل۔ **N اکاؤنٹس کے ساتھ ایکسپورٹ** ایک چینل یا سپر گروپ کے ایکسپورٹ کو ان کے درمیان تقسیم کرتا ہے اور ایک آرکائیو پر دستخط کرتا ہے۔
 - **گروپ کی برآمد:** ایک ZIP، جس کے تحت ہر اکاؤنٹ کا دستخط شدہ ایکسپورٹ موجود ہے۔ `accounts/` اور `manifest.json` ان کے SHA-256 اور کلید کے فنگر پرنٹس کی فہرست، جو مرکزی ورک اسپیس میں دستخط شدہ ہیں `manifest.signature.json`۔ ہر اکاؤنٹ آرکائیو کو اس کے اپنے ساتھ تصدیق کریں `python -m tgwitness.verify` اور اس اکاؤنٹ کے معتبر فنگر پرنٹ کے ساتھ۔
 
-ارکان گروپ کی ترتیبات شیئر کرتے ہیں؛ ایک اکاؤنٹ اپنی مخصوص قدریں برقرار رکھ سکتا ہے۔ [مشترکہ ترتیبات](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups)، [امپورٹ اور گروپس گائیڈ](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) دیکھیں اور [MTProxy پول ڈیش بورڈ](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)۔
+ارکان گروپ کی ترتیبات شیئر کرتے ہیں؛ ایک اکاؤنٹ اپنی مخصوص قدریں برقرار رکھ سکتا ہے۔ [مشترکہ ترتیبات](https://phishdestroy.github.io/TgWitness/ur/docs/reference/settings/#account-groups)، [امپورٹ اور گروپس گائیڈ](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) دیکھیں اور [MTProxy پول ڈیش بورڈ](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)۔
 
 ## سائن آؤٹ
 
@@ -278,6 +278,6 @@ TData ٹیلیگرام ڈیسک ٹاپ ایپلیکیشن کا`tdata` فولڈر
 | اکاؤنٹ آئی ڈی درآمد شدہ اکاؤنٹ سے مطابقت نہیں رکھتی | فائل کا صارف آئی ڈی ٹیلیگرام کی رپورٹ کردہ معلومات سے مختلف ہے؛ یہ فائل کسی دوسرے اکاؤنٹ کے لیے ہے۔ |
 | اکاؤنٹ پہلے ہی کسی دوسرے ورک اسپیس کا حصہ ہے۔ | اکاؤنٹ کو دو بار شامل کرنے کے بجائے اس ورک اسپیس کو کھولیں۔ |
 | منسلک ہے، لیکن **Sources** میں چیٹ لسٹ سے ایک نجی گروپ غائب ہے۔ | رکنیت چیک کریں۔ پِکر پہلے 1,000 ڈائیلاگز کا معائنہ کرتا ہے؛ **پیرامیٹرز** میں حد بڑھائیں۔ |
-| پراکسی کنکشن ناکام | روٹ اور آئی پی موڈ چیک کریں۔ خودکار MTProxy ایک اور قابلِ عمل انٹری آزماتی ہے۔ Hide IP موڈ انتظار کرتا ہے؛ واضح طور پر منتخب کردہ فال بیک موڈ اپنی متعین کردہ تاخیر کے بعد براہِ راست کنیکٹ ہو سکتا ہے۔ [روٹنگ موڈز](https://phishdestroy.github.io/TgWitness/ur/docs/reference/connection/#ip-modes) دیکھیں۔ |
+| پراکسی کنکشن ناکام | روٹ اور آئی پی موڈ چیک کریں۔ خودکار MTProxy ایک اور قابلِ عمل اندراج آزمائیں۔ 'ایڈریس چھپائیں' انتظار کرتا ہے؛ 'براہِ راست' آخری چارہ کے طور پر متعین کردہ تاخیر کے بعد براہِ راست کنکٹ کر سکتا ہے۔ [روٹنگ موڈز](https://phishdestroy.github.io/TgWitness/ur/docs/reference/connection/#ip-modes) دیکھیں۔ |
 
 مزید دیکھیں: پروکسیز اور انکرپشن کے لیے [کنکشن اور سیکیورٹی](https://phishdestroy.github.io/TgWitness/ur/docs/reference/connection/)، اور سائن ان کے بعد کیا جمع کیا جاتا ہے اس کے لیے [کلیکشن کیسے کام کرتی](https://phishdestroy.github.io/TgWitness/ur/docs/reference/collection/) ہے۔

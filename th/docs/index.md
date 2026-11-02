@@ -8,7 +8,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/
 
 คู่มือที่มีภาพประกอบ
 
-[### Case Board รักษาความเชื่อมโยงระหว่างข้อสังเกต คำพูดต้นฉบับ และบันทึกของทีม](https://phishdestroy.github.io/TgWitness/th/docs/case-board/) [### Report Studio เลือกเนื้อหาและหนึ่งในแปดแบบรายงาน](https://phishdestroy.github.io/TgWitness/th/docs/reports/) [### ข้อความสำหรับแบ่งปัน เตรียมส่วนคัดลอกที่ลงนามแล้ว พร้อมด้วยข้อมูลที่ผู้รับต้องการ](https://phishdestroy.github.io/TgWitness/th/docs/handover/) [### กลุ่มบัญชี ตรวจสอบบัญชีร่วมกันและรักษาพื้นที่ทำงานให้แยกกัน](https://phishdestroy.github.io/TgWitness/th/docs/groups/)
+[### Case Board รักษาความเชื่อมโยงระหว่างข้อสังเกต คำพูดต้นฉบับ และบันทึกของทีม](https://phishdestroy.github.io/TgWitness/th/docs/case-board/) [### Report Studio เลือกเนื้อหาและหนึ่งในแปดแบบรายงาน](https://phishdestroy.github.io/TgWitness/th/docs/reports/) [### แชร์ข้อความ เตรียมส่วนคัดลอกที่ลงนามแล้ว พร้อมด้วยข้อมูลที่ผู้รับต้องการ](https://phishdestroy.github.io/TgWitness/th/docs/handover/) [### กลุ่มบัญชี ตรวจสอบบัญชีร่วมกันและรักษาพื้นที่ทำงานให้แยกกัน](https://phishdestroy.github.io/TgWitness/th/docs/groups/)
 
 [## โหมด, สถานการณ์ และระดับหลักฐาน ขอบเขตการเก็บรวบรวมข้อมูล, ขอบเขตเหตุการณ์, แปดกลไกการตรวจสอบ และหกสถานการณ์การสอบสวนสมมติ](https://phishdestroy.github.io/TgWitness/th/guides/modes.html)
 
@@ -34,19 +34,19 @@ Canonical page: https://phishdestroy.github.io/TgWitness/th/docs/
 
 การตั้งค่า
 
-[เริ่มต้นอย่างรวดเร็ว](https://phishdestroy.github.io/TgWitness/th/docs/reference/quickstart/)[รูปแบบบัญชีและเซสชัน](https://phishdestroy.github.io/TgWitness/th/docs/reference/accounts/)[การเข้าถึงและสิทธิ์](https://phishdestroy.github.io/TgWitness/th/docs/reference/access/)[การเชื่อมต่อ, พร็อกซี และการคุ้มครองข้อมูล](https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/)[การติดตั้ง](https://phishdestroy.github.io/TgWitness/th/docs/reference/deployment/)
+[เริ่มต้นอย่างรวดเร็ว](https://phishdestroy.github.io/TgWitness/th/docs/reference/quickstart/)[ติดตั้ง ตรวจสอบ และอัปเดต](https://phishdestroy.github.io/TgWitness/th/docs/reference/installation/)[การตั้งค่าและกำหนดค่าครั้งแรก](https://phishdestroy.github.io/TgWitness/th/docs/reference/settings/)[รูปแบบบัญชีและเซสชัน](https://phishdestroy.github.io/TgWitness/th/docs/reference/accounts/)[การเข้าถึงและสิทธิ์](https://phishdestroy.github.io/TgWitness/th/docs/reference/access/)[การเชื่อมต่อ, พร็อกซี และการคุ้มครองข้อมูล](https://phishdestroy.github.io/TgWitness/th/docs/reference/connection/)[การติดตั้ง](https://phishdestroy.github.io/TgWitness/th/docs/reference/deployment/)[การปรับใช้ที่มีความมั่นใจสูง](https://phishdestroy.github.io/TgWitness/th/docs/reference/high-assurance/)
 
 Collect
 
-[วิธีการเก็บรวบรวมข้อมูล](https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/)[โหลดประวัติแหล่งที่มา](https://phishdestroy.github.io/TgWitness/th/docs/reference/history/)[ขั้นตอนการทำงานและการดำเนินการ](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/)[โหมดการสืบสวน](https://phishdestroy.github.io/TgWitness/th/docs/reference/investigation/)[คุณสมบัติและข้อจำกัด](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/)
+[คู่มือแผงควบคุม](https://phishdestroy.github.io/TgWitness/th/docs/reference/panel/)[วิธีการเก็บรวบรวมข้อมูล](https://phishdestroy.github.io/TgWitness/th/docs/reference/collection/)[โหลดประวัติแหล่งที่มา](https://phishdestroy.github.io/TgWitness/th/docs/reference/history/)[ขั้นตอนการทำงานและการดำเนินการ](https://phishdestroy.github.io/TgWitness/th/docs/reference/operations/)[โหมดการสืบสวน](https://phishdestroy.github.io/TgWitness/th/docs/reference/investigation/)[คุณสมบัติและข้อจำกัด](https://phishdestroy.github.io/TgWitness/th/docs/reference/features/)
 
 การเก็บรักษาข้อมูลและการบูรณาการ
 
-[อ้างอิง Case Board](https://phishdestroy.github.io/TgWitness/th/docs/reference/case-board/)[การวิเคราะห์ข้อมูลในคลัง](https://phishdestroy.github.io/TgWitness/th/docs/reference/analysis/)[MCP แบบอ่านเท่านั้น](https://phishdestroy.github.io/TgWitness/th/docs/reference/mcp/)[OCR และแปลงข้อความเป็นข้อความแบบท้องถิ่น](https://phishdestroy.github.io/TgWitness/th/docs/reference/media-analysis/)[webhooks ส่งออก](https://phishdestroy.github.io/TgWitness/th/docs/reference/webhooks/)
+[อ้างอิง Case Board](https://phishdestroy.github.io/TgWitness/th/docs/reference/case-board/)[การวิเคราะห์ข้อมูลในคลัง](https://phishdestroy.github.io/TgWitness/th/docs/reference/analysis/)[MCP แบบอ่านเท่านั้น](https://phishdestroy.github.io/TgWitness/th/docs/reference/mcp/)[OCR และแปลงข้อความเป็นข้อความแบบท้องถิ่น](https://phishdestroy.github.io/TgWitness/th/docs/reference/media-analysis/)[webhooks ส่งออก](https://phishdestroy.github.io/TgWitness/th/docs/reference/webhooks/)[แสดงผลงานสาธารณะ](https://phishdestroy.github.io/TgWitness/th/docs/reference/showcase/)
 
 หลักฐาน
 
-[วิธีการทำงานของหลักฐาน](https://phishdestroy.github.io/TgWitness/th/docs/reference/how-it-works/)[การตั้งค่าและตรวจสอบรายงาน](https://phishdestroy.github.io/TgWitness/th/docs/reference/case-reports/)[รูปแบบหลักฐาน](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/)[พยานอิสระ](https://phishdestroy.github.io/TgWitness/th/docs/reference/witness/)[ข้อมูลเวลา](https://phishdestroy.github.io/TgWitness/th/docs/reference/timestamp/)
+[วิธีการทำงานของหลักฐาน](https://phishdestroy.github.io/TgWitness/th/docs/reference/how-it-works/)[การตั้งค่าและตรวจสอบรายงาน](https://phishdestroy.github.io/TgWitness/th/docs/reference/case-reports/)[การส่งออกบัญชี](https://phishdestroy.github.io/TgWitness/th/docs/reference/account-export/)[รูปแบบหลักฐาน](https://phishdestroy.github.io/TgWitness/th/docs/reference/evidence/)[พยานอิสระ](https://phishdestroy.github.io/TgWitness/th/docs/reference/witness/)[ข้อมูลเวลา](https://phishdestroy.github.io/TgWitness/th/docs/reference/timestamp/)[การเก็บรักษาและกู้คืนข้อมูล](https://phishdestroy.github.io/TgWitness/th/docs/reference/storage/)
 
 ความปลอดภัยและโครงการ
 

@@ -235,7 +235,7 @@ TData پوشهٔ `tdata` در اپلیکیشن Telegram Desktop (اپلیکیش�
 - **چت‌ها در چندین حساب قابل مشاهده‌اند:** منابع مشترک، حساب‌هایی که آن‌ها را مشاهده می‌کنند و وقفه‌ها در دورهٔ مشاهدهٔ فضای کاری موجود (تا هفت روز). **خروجی‌گیری با N حساب،** خروجی یک کانال یا ابرگروه را بین آن‌ها تقسیم می‌کند و یک آرشیو را امضا می‌کند.
 - **صادرات گروه:** یک ZIP با خروجی امضا‌شده هر حساب زیر `accounts/` و `manifest.json` که شامل امضاهای SHA-256 و اثرانگشت کلیدهای هر حساب است، امضا شده توسط فضای کاری اصلی در `manifest.signature.json`. هر آرشیو حساب را به طور جداگانه با `python -m tgwitness.verify` و اثر انگشت معتبر آن حساب.
 
-اعضا تنظیمات گروه را به اشتراک می‌گذارند؛ یک حساب می‌تواند مقادیر خود را حفظ کند. به [تنظیمات مشترک](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups)، [راهنمای وارد کردن و گروه‌ها](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) و [داشبورد استخر MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources) مراجعه کنید.
+اعضا تنظیمات گروه را به اشتراک می‌گذارند؛ یک حساب می‌تواند مقادیر خود را حفظ کند. به [تنظیمات مشترک](https://phishdestroy.github.io/TgWitness/fa/docs/reference/settings/#account-groups)، [راهنمای وارد کردن و گروه‌ها](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) و [داشبورد استخر MTProxy](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources) مراجعه کنید.
 
 ## خروج
 
@@ -278,6 +278,6 @@ TData پوشهٔ `tdata` در اپلیکیشن Telegram Desktop (اپلیکیش�
 | شناسه حساب با حساب واردشده مطابقت ندارد | شناسه کاربری فایل با آنچه تلگرام گزارش می‌کند متفاوت است؛ این فایل مربوط به حساب کاربری دیگری است. |
 | حساب کاربری از قبل به فضای کاری دیگری تعلق دارد | به جای افزودن دوباره‌ی حساب، آن فضای کاری را باز کنید. |
 | متصل است، اما یک گروه خصوصی در فهرست چت‌های **«منابع**» وجود ندارد. | عضویت را بررسی کنید. انتخابگر اولین ۱۰۰۰ دیالوگ را بازرسی می‌کند؛ محدودیت را در بخش **پارامترها** افزایش دهید. |
-| اتصال پروکسی ناموفق است | مسیر و حالت آی‌پی را بررسی کنید. MTProxy خودکار ورودی دیگری را که کار می‌کند امتحان می‌کند. حالت مخفی‌سازی آی‌پی منتظر می‌ماند؛ حالت پشتیبان انتخاب‌شده به‌طور صریح می‌تواند پس از تأخیر تنظیم‌شده مستقیماً متصل شود. [حالت‌های مسیریابی را](https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/#ip-modes) ببینید. |
+| اتصال پروکسی ناموفق است | مسیر و حالت آی‌پی را بررسی کنید. MTProxy خودکار ورودی دیگرِ کارا را امتحان می‌کند. «پنهان کردن آدرس در انتظار»؛ «راست‌زمانی» به‌عنوان آخرین راه‌حل می‌تواند پس از تأخیر تنظیم‌شده مستقیماً متصل شود. [حالت‌های مسیریابی را](https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/#ip-modes) ببینید. |
 
 همچنین ببینید: [اتصال و امنیت](https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/) برای پروکسی‌ها و رمزگذاری، و [نحوه کارکرد جمع‌آوری](https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/) برای آنچه پس از ورود ثبت می‌شود.

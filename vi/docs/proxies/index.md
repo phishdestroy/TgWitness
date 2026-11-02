@@ -6,15 +6,15 @@ Vui lòng duy trì kết nối tài khoản. Hãy quyết định rõ ràng khi 
 
 ## Vui lòng chọn chế độ IP trước tiên
 
-01**Ẩn địa chỉ IP**
+01**Ẩn địa chỉ**
 
 Vui lòng sử dụng máy chủ trung gian (proxy). Trong trường hợp không có máy chủ trung gian nào hoạt động, xin vui lòng chờ đợi mà không cần kết nối trực tiếp với Telegram.
 
-02**Cho phép sử dụng phương án dự phòng**
+02**Chỉ sử dụng phương án này khi không còn lựa chọn nào khác**
 
 Cho phép kết nối trực tiếp sau khoảng thời gian trễ đã được cấu hình; quay trở lại sử dụng máy chủ proxy đang hoạt động khi có máy chủ nào đó phản hồi.
 
-03**Tunnel / VPN**
+03**Máy chủ nằm sau một đường hầm hoặc VPN**
 
 Cho phép các kết nối trực tiếp qua mạng của nhà cung cấp dịch vụ. Tùy chọn này không cài đặt hoặc xác minh VPN.
 
@@ -27,7 +27,7 @@ Tuyến đường sẽ quyết định loại kết nối. Chế độ IP sẽ x
 3. Lưu lại và thực hiện **kiểm tra kết nối Telegram**. Tính năng này cũng hoạt động ngay cả trước khi đăng nhập.
 4. Sau khi bắt đầu quá trình thu thập, vui lòng kiểm tra xem tin nhắn đã được kiểm soát có được ghi vào sổ chứng cứ hay không.
 
-Các không gian làm việc mới sử dụng tính năng MTProxy tự động với chế độ Ẩn địa chỉ IP. Hệ thống này kết hợp bốn nguồn công khai, kiểm tra các mục, duy trì các tuyến đường hoạt động và thay thế các proxy không hoạt động. Các lần tải xuống không thành công sẽ giữ lại các bản chụp nhanh trước đó.
+Các không gian làm việc mới sử dụng tính năng tự động MTProxy với tùy chọn **“Ẩn địa chỉ**”. Hệ thống kết hợp bốn nguồn công khai, kiểm tra các mục, duy trì các đường dẫn hoạt động và thay thế các proxy không hoạt động. Các lần tải xuống không thành công sẽ giữ lại các bản chụp nhanh trước đó.
 
 ## Vui lòng sử dụng máy chủ proxy của riêng quý vị
 

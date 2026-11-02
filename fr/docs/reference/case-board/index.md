@@ -6,7 +6,7 @@ Signets, surlignages précis, extraits d’actions, discussions, accès restrein
 
 Case Board offre à l’équipe d’enquête une vue de travail partagée sur les éléments enregistrés. Ajoutez une observation à vos favoris, surlignez un passage précis, enregistrez une série d’actions et discutez-en avec vos collègues. Les fiches conservent leurs références sources et l’historique des révisions signé. Les annotations de l’équipe restent dans l’ espace de travail, et peuvent être identifiées séparément des observations Telegram d’origine.
 
-[Modèle de preuve](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/) · [Accès](https://phishdestroy.github.io/TgWitness/fr/docs/reference/access/) · [Rapports](https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-reports/) · [Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE-BOARD.md)
+[Modèle de preuve](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/) · [Accès](https://phishdestroy.github.io/TgWitness/fr/docs/reference/access/) · [Rapports](https://phishdestroy.github.io/TgWitness/fr/docs/reference/case-reports/)
 
 ![Flux d'enquête synthétique](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
 

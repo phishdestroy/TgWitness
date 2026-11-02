@@ -235,7 +235,7 @@ Bir grup, oturumlarını, anahtarlarını veya kanıtlarını birleştirmeden il
 - **Birden fazla hesabın görüldüğü sohbetler:** paylaşılan kaynaklar, bunları gözlemleyen hesaplar ve kullanılabilir çalışma alanı gözlem süresindeki kesintiler (en fazla yedi gün). **N hesapla dışa aktarma,** bir kanal veya süper grubun dışa aktarımını bu hesaplar arasında böler ve tek bir arşivi imzalar.
 - **Grubu dışa aktar:** her hesabın imzalanmış dışa aktarımının bulunduğu bir ZIP `accounts/` ve `manifest.json` SHA-256 ve anahtar parmak izlerini listeleyen, ana çalışma alanı tarafından `manifest.signature.json`. Her hesap arşivini, `python -m tgwitness.verify` ve o hesabın güvenilir parmak izi ile ayrı ayrı doğrulayın.
 
-Üyeler grubun ayarlarını paylaşır; bir hesap kendi değerlerini koruyabilir. [Paylaşılan ayarlar](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups), [içe aktarma ve gruplar kılavuzuna](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) ve [MTProxy havuz panosuna](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources) bakın.
+Üyeler grubun ayarlarını paylaşır; bir hesap kendi değerlerini koruyabilir. [Paylaşılan ayarlar](https://phishdestroy.github.io/TgWitness/tr/docs/reference/settings/#account-groups), [içe aktarma ve gruplar kılavuzuna](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) ve [MTProxy havuz panosuna](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources) bakın.
 
 ## Çıkış
 
@@ -278,6 +278,6 @@ Dönüştürücü yalnızca Telethon SQLite dosyalarını okur (en fazla 64 MiB)
 | Hesap kimliği, içe aktarılan hesapla eşleşmiyor | Dosyanın kullanıcı kimliği, Telegram'ın bildirdiğinden farklıdır; dosya başka bir hesaba aittir. |
 | Hesap zaten başka bir çalışma alanına ait | Hesabı iki kez eklemek yerine o çalışma alanını açın. |
 | Bağlantı kurulmuş, ancak "**Kaynaklar"** bölümündeki sohbet listesinde bir özel grup eksik. | Üyeliği kontrol edin. Seçici, ilk 1.000 diyaloğu inceler; **Parametreler** altından sınırı artırın. |
-| Proxy bağlantısı başarısız | Yol ve IP modunu kontrol edin. Otomatik MTProxy, çalışan başka bir girişi dener. IP gizleme modu bekler; açıkça seçilen yedek mod, yapılandırılan gecikme süresinden sonra doğrudan bağlanabilir. [Yönlendirme modlarına](https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/#ip-modes) bakın. |
+| Proxy bağlantısı başarısız | Yol ve IP modunu kontrol edin. Otomatik MTProxy, çalışan başka bir girişi dener. Adres gizleme bekler; son çare olarak Direct, yapılandırılan gecikmeden sonra doğrudan bağlanabilir. [Yönlendirme modlarına](https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/#ip-modes) bakın. |
 
 Ayrıca bakınız: proxy'ler ve şifreleme için [bağlantı ve güvenlik](https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/), ve oturum açıldıktan sonra yakalanan verilerin [nasıl toplandığı](https://phishdestroy.github.io/TgWitness/tr/docs/reference/collection/).

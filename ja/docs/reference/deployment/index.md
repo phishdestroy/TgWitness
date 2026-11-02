@@ -19,7 +19,7 @@ TgWitnessは、Windows、Linux、macOS、またはDocker上で、HTTPS経由で�
 | Windows 版 Docker ヘルパー | `scripts\Docker.cmd` | はい。このヘルパーは、Webサーバーの稼働状態を確認します。 |
 | Linux/macOS 用の Docker ヘルパー | `sh scripts/docker-start.sh` | はい。このヘルパーは、Webサーバーの稼働状態を確認します。 |
 
-第三者が確認可能なクラウドサーバーについては（ プロバイダーのAPIを通じて作成され、SSHを使用せず、Cloudflare Tunnel経由でのみアクセス可能なもの）、 [高保証デプロイメント](https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md)をご覧ください。
+第三者が確認可能なクラウドサーバーについては（ プロバイダーのAPIを通じて作成され、SSHを使用せず、Cloudflare Tunnel経由でのみアクセス可能なもの）、 [高保証デプロイメント](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/)をご覧ください。
 
 ネイティブ起動時には、プライベートな`.venv`が生成され、ピン留めされた依存関係がインストールされます。 Dockerは、ホスト側のPythonを必要とせずに、イメージ内でこれらをビルドします。初回 セットアップにはインターネット接続が必要です。 Python 3.11 以降が見つからない場合、`Start.cmd` は、 現在の Windows ユーザー向けに Python 3.12 をインストールする前に確認を行います（winget を使用、それ以外の場合は Python Software Foundation の署名を確認した上で python.org の インストーラーを使用）。管理者権限を要求することは 一切ありません。Docker および OS サービスは引き続き前提条件となります。
 
@@ -250,7 +250,7 @@ python -m tgwitness.download --token-file data/live/panel-token.txt --out eviden
 
 ## 接続および保護オプション
 
-接続経路はワークスペースごとに設定され、認証の前に構成する必要があります。 SOCKS5/HTTP CONNECT では、固定された python-socks 依存関係を使用します。MTProxy では、Telethon の 実験的なランダム化中間トランスポートを使用します。Fake TLS ee シークレットはサポートされていません。 ダイレクト・フォールバックは、選択された[IP](https://phishdestroy.github.io/TgWitness/ja/docs/reference/connection/#ip-modes)モードによって異なります。「Hide IP」モードではこれを拒否しますが、「explicit fallback」モードでは、遅延の後で許可されます。「Tunnel/VPN」モードではダイレクト・ルートが許可されますが、VPNは構築されません。これはシステム全体のネットワークポリシーではありません。
+接続ルートはワークスペースごとに設定され、認証の前に構成する必要があります。 SOCKS5/HTTP CONNECTでは、ピン留めされたpython-socks依存関係を使用します。MTProxyでは、Telethonの 実験的なランダム化中間トランスポートを使用します。Fake TLSのeeシークレットはサポートされていません。 ダイレクト・フォールバックは、選択された[IP](https://phishdestroy.github.io/TgWitness/ja/docs/reference/connection/#ip-modes)モードによって異なります。「**アドレスを非表示**」モードではこれを拒否し、**「最後の手段としてのダイレクト」モードでは、**遅延後にこれを許可します。**トンネルまたはVPNの背後にあるサーバーでは、**ダイレクト・ルートが許可されますが、VPNは作成されません。これはシステム全体のネットワークポリシーではありません。
 
 新規インストールの場合、TGWITNESS_VAULT_KEY_FILE は、別途保護されたランダムな マスターキーファイルを指すように設定してください。コンテナ内の /data ディレクトリ外に、読み取り専用でマウントしてください。各ワークスペースの vault.external.json にある公開ソルトメタデータと、マスターキーは別々に保管してください。 既存のローカル・ヴォルトについては、計画的な移行が必要です。この変数を設定しても、 それらを自動的に変換することはありません。メッセージやメディアの保存およびエクスポートは、アプリケーション側で暗号化されていません。 必要に応じて、暗号化されたボリュームや十分な容量のプライベートな一時ストレージをご利用ください。
 

@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/witne
 
 자체 키와 봇을 사용하여 위트니스를 실행하고, 서명된 체크포인트를 채널에 게시한 후, 내보낸 데이터를 이를 기준으로 대조하여 확인하십시오.
 
-[러시아어로 된 봇 및 프록시 설정 안내](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/WITNESS.md).
+[내보내기 및 검증](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/) · [높은 신뢰도](https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/) · [패널 가이드](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#extras)
 
 수집기는 자체 저널에 서명하므로, 수집기와 그 키를 제어하는 사람은 원칙적으로 저널을 재작성하거나 일부를 삭제한 후 다시 서명할 수 있습니다. ‘위트니스(Witness)’는 이러한 변조를 감지 가능하게 만듭니다. 이는 별도의 프로세스—다른 컨테이너, 또는 더 정확히 말해 다른 사람이 운영하는 서버—로, 몇 분마다 수집기의 서명된 저널 헤드를 가져와, 확인한 내용을 자신의 키로 서명하고, 이를 자체 저널에 보관한 뒤 텔레그램 채널에 게시합니다.
 
@@ -27,7 +27,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/witne
 | 자체 Ed25519 키 및 저널 | 수집기의 보관소, 서명 키 또는 패널 토큰 |
 | 자체 텔레그램 봇 토큰 | 메시지 내용: 헤더에는 기록 수와 해시가 포함됩니다. |
 
-토큰은 패널의 ‘Witness’ 페이지에서 생성되며, 한 번만 표시되고 SHA-256 형태로만 저장됩니다. 이 토큰은 정확히 하나의 엔드포인트(`GET /api/witness/head`)를 열며, 해당 엔드포인트는 갓 서명된 체크포인트와 서명된 콘텐츠가 포함되지 않은 수집 카운터, 운영 상태 정보를 반환합니다. 이 토큰으로는 패널을 열거나, 메시지 내용을 읽거나, 설정을 변경할 수 없으며, 해당 패널에서는 이 토큰이 허용되지 않습니다. 토큰은 동일한 페이지에서 취소할 수 있습니다. 수집기는 새로운 위트니스 키(`witness.seen`)가 확인을 시작하는 시점을 기록하고 토큰별 마지막 확인 내역을 표시하며, 2.5 간격 내에 확인되지 않은 위트니스는 기한 초과로 표시됩니다.
+토큰은 **[추가 기능] → [독립 위트니스**]에서 생성되며, 한 번만 표시되고 SHA-256 형태로만 저장됩니다. 이 토큰은 정확히 하나의 엔드포인트만 열며, `GET /api/witness/head`이 엔드포인트는 갓 서명된 체크포인트와 서명된 콘텐츠가 없는 컬렉션 카운터, 운영 상태 정보를 반환합니다. 이 토큰으로는 패널을 열거나, 메시지 내용을 읽거나, 설정을 변경할 수 없으며, 해당 곳에서는 패널 토큰이 허용되지 않습니다. 같은 페이지에서 토큰을 취소할 수 있습니다. 수집기는 새로운 위트니스 키가 확인을 시작할 때(`witness.seen`) 시점을 기록하고 토큰별 마지막 확인 시점을 표시하며, 2.5 간격 내에 확인하지 않은 위트니스는 기한이 지난 것으로 표시됩니다.
 
 새로운 증인은 각 폴링마다 무작위 챌린지를 전송하며, 캡처 문장은 수집자 서명 아래에서 이를 반영합니다. 카운터는 정확한 체크포인트에 바인딩되며 서명된 증인 게시물에 포함됩니다. 기존 헤더는 독립형 증인에 의해 계속 허용됩니다. 저널의 증가량만으로는 새로운 메시지로 간주되지 않습니다.
 
@@ -54,7 +54,7 @@ TGW1.eyJhdCI6…<statement>.<signature>
 
 텔레그램 봇(@BotFather를 통해 생성)과, 해당 봇이 관리자로 등록된 채널, 그리고 증인이 접근할 수 있는 수집기 주소가 필요합니다. 이 주소는 사설 네트워크 외부에서 HTTPS를 통해 접속 가능해야 합니다([배포](https://phishdestroy.github.io/TgWitness/ko/docs/reference/deployment/) 안내서의 HTTPS 프로필 참조).
 
-**'추가 기능' → '채널 내 봇' →** 패널에서 **봇 설정을 선택합니다** . 세 단계로 읽기 전용 액세스, 채널 및 간격 설정을 완료한 후 위트니스를 실행합니다. 게시 정책, 선택적 HTTP/SOCKS5 프록시 및 사용자 지정 봇 API 주소는 **'고급** 설정'에서 확인할 수 있습니다. 이 양식을 통해 이 작업 공간의 수집기 키가 고정된 `witness.json` 를 다운로드합니다. 새로 생성된 읽기 전용 토큰을 ‘`witness-token.txt` ’로 **저장하여** 다운로드하고, 이를 위트니스 호스트에서 생성된 `bot-token.txt` 와 함께 해당 JSON **파일** 옆에 배치하십시오. 수집기는 봇 토큰을 절대 수신하지 않습니다. 다운로드한다고 해서 서비스가 시작되거나 메시지가 게시되지는 않습니다. 호스팅된 프로젝트 위트니스는 암묵적으로 등록되지 않습니다.
+패널에서 **[추가 기능] → [독립 위트니스] → [구성]**을 엽니다. 다음 세 단계로 읽기 전용 액세스, 채널 및 간격 설정을 마친 후 위트니스를 실행합니다. 게시 정책, 선택 사항인 HTTP/SOCKS5 프록시 및 사용자 지정 봇 API 주소는 [**고급 설정**]에서 확인할 수 있습니다. 이 양식을 다운로드하면 `witness.json` 이 작업 공간의 수집기 키가 고정된 상태로 제공됩니다. **‘액세스 파일 저장**’을 통해 새로 생성된 읽기 전용 토큰을 다운로드한 후 `witness-token.txt`를 선택하여 새로 생성된 읽기 전용 토큰을 다운로드하세요. 이 토큰과 `bot-token.txt`위트니스 호스트에서 생성된 파일을 해당 JSON 파일 옆에 배치하십시오. 수집기는 봇 토큰을 절대 수신하지 않습니다. 다운로드를 해도 서비스가 시작되거나 메시지가 게시되지 않습니다. 호스팅된 프로젝트 위트니스는 암묵적으로 등록되지 않습니다.
 
 ```
 python -m tgwitness.witness run --config witness.json --check-config
@@ -95,6 +95,17 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
     --token-file witness-token.txt --bot-token-file bot-token.txt --channel @your_witness_channel
 ```
 
+### Discord에 게시하기
+
+위트니스는 텔레그램 대신 디스코드 채널에 게시할 수 있습니다. 디스코드에서 **‘채널 편집’ → ‘통합’ → ‘웹훅’을** 열고, 웹훅을 생성한 후 URL을 복사하세요. 패널에서 2단계에서 **‘디스코드 웹훅 · 귀하의 채널’을** 선택하세요. 위트니스 호스트에서 해당 URL을 `discord-webhook.txt` 옆에 `witness.json`옆에 저장하십시오; 이 URL은 수집기로 절대 전송되지 않습니다.
+
+```
+python -m tgwitness.witness run --collector https://your-collector.example.org \
+    --token-file witness-token.txt --discord-webhook-file discord-webhook.txt
+```
+
+위트니스는 텔레그램 채널 또는 디스코드 웹훅 중 하나의 게시자만 가질 수 있으며, 둘 다 가질 수는 없습니다. 게시물에는 동일한 서명된 진술이 포함되며, 누구에게도 알림을 보낼 수 없습니다. 디스코드의 2,000자 제한을 초과하는 게시물은 짧은 한 줄로 대체되며, 전체 체크가 `witness-check.txt`. 각 게시물 ID는 `witness.posted`. `verify.py --channel`텔레그램 채널 내보내기만 읽을 수 있으므로, 디스코드의 경우 위트니스 저널을 보관하십시오. 여기에는 모든 체크가 포함되어 있습니다.
+
 ### 옵션
 
 | 옵션 | 환경 | 기본값 | 의미 |
@@ -109,7 +120,7 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
 | `--data-dir` | `_DATA` | `witness-data` | Witness 키 및 저널 |
 | `--config` | `_CONFIG` | – | 위의 옵션 중 하나를 포함한 JSON 파일 |
 
-수집기 주소, 토큰 및 채널은 `--collector`, `--token` 또는 `--token-file`, `--bot-token`, `--bot-token-file`, `--channel`, `_COLLECTOR`, `_TOKEN`, `_TOKEN_FILE`, `_BOT_TOKEN`, `_BOT_TOKEN_FILE`, `_CHANNEL` 중에서 제공되며, 이를 통해 비밀 정보가 처리 목록에 노출되지 않도록 합니다.
+수집기 주소, 토큰 및 채널은 다음에서 가져옵니다. `--collector`, `--token` 또는 `--token-file`, `--bot-token` 또는 `--bot-token-file`, `--discord-webhook-file` 그리고 `--channel`, 또는 `_COLLECTOR`, `_TOKEN`, `_TOKEN_FILE`, `_BOT_TOKEN`, `_BOT_TOKEN_FILE`, `_DISCORD_WEBHOOK_FILE` 그리고 `_CHANNEL`, 이를 통해 프로세스 목록에서 비밀 정보가 제외됩니다.
 
 구성 파일은 밑줄(_)이 포함된 옵션 이름과, 채널 게시물의 단어를 대체하는 `texts`를 사용합니다:
 
@@ -123,6 +134,36 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
 `texts` 키: `ok`, `key_changed`, `rollback`, `fork`, `invalid`, `no_response`, `collector`, `records`, `head`. 명령줄이 환경 변수보다 우선하며, 환경 변수가 파일보다 우선합니다. 알 수 없는 옵션이나 텍스트 키는 무시되지 않고 메시지와 함께 위트니스를 중지시킵니다. 표현 방식은 검증에 절대 영향을 미치지 않습니다: verify.py는 모든 게시물 끝에 있는 서명된 토큰을 확인합니다. `--post changes`나 `problems`의 경우, 게시되지 않은 검사는 여전히 위트니스 저널에 남아 있으며, `verify.py`는 이를 ‘게시되지 않음’으로 나열합니다. 시작 레코드에는 정책이 명시됩니다. 모든 검사는 여전히 저널에 표시되므로, 게시 횟수가 적다는 것은 독립적인 텔레그램 전송 횟수가 적다는 것을 의미할 뿐, 검사 횟수가 적다는 것을 의미하지는 않습니다.
 
 채널이 없어도 Witness는 여전히 로그를 보관합니다. Witness 키 지문 (`python -m tgwitness.witness fingerprint`)은 다른 곳에 보관하십시오.
+
+## 여러 워크스페이스를 위한 공개 증명 페이지
+
+`python -m tgwitness.proof` 한 번에 최대 32개의 워크스페이스를 처리하며, 각 워크스페이스의 최신 서명된 확인 내역을 담은 읽기 전용 페이지를 제공합니다. 모든 워크스페이스는 데이터 폴더 내에 고유한 위트니스 키와 저널, 그리고 고정된 컬렉터 키를 갖습니다. 텔레그램 채널에 게시하는 기능은 워크스페이스별로 선택 사항입니다. 다음 파일을 기준으로 시작하세요: [proof.config.example](https://github.com/phishdestroy/TgWitness/blob/main/deploy/proof.config.example):
+
+| 분야 | 의미 |
+| --- | --- |
+| `title` | 페이지 제목, 1–100자 |
+| `data_dir` | 파일과 관련된 Witness 키 및 저널; 기본값 `proof-data` |
+| `interval`, `timeout` | 점검 간격(분, 1–1440, 기본값 5); 대기 시간(초, 5–600, 기본값 20) |
+| `workspaces[].id`, `label` | 짧은 소문자 별명과 표시되는 이름 |
+| `workspaces[].collector` | 컬렉터 주소; 다른 워크스페이스는 `/profiles/<workspace ID>` |
+| `workspaces[].collector_fingerprint` | 필수 항목이며, 워크스페이스마다 다릅니다. |
+| `workspaces[].token_file` | 해당 워크스페이스의 읽기 전용 위트니스 토큰이 포함된 파일 |
+| `workspaces[].channel`, `bot_token_file` | 선택 사항: 각 확인 결과를 채널에 게시하기 |
+| `workspaces[].proxy`, `bot_api` | 선택적 경로 및 봇 API 주소 |
+
+```
+python -m tgwitness.proof --config proof.json --check-config
+python -m tgwitness.proof --config proof.json --host 127.0.0.1 --port 8790
+```
+
+첫 번째 명령어는 연결을 열지 않고 파일과 토큰 파일을 검증합니다. 이 페이지는 GET 및 HEAD 요청에만 응답합니다:
+
+- `/` 모든 워크스페이스를 표시하며, 2.5 간격 동안 확인 표시가 없는 워크스페이스는 ‘유효하지 않음’으로 표시됩니다.
+- `/api/proof` JSON과 동일한 결과를 반환합니다.
+- `/api/proof/<id>` 최신 서명된 명세서를 다운로드합니다 (`tgwitness-public-proof-v1`): 증인 기록 번호 및 해시, 상태, 고정된 수집기 키, 체크포인트, 수집 카운터 및 채널 게시 성공 여부, 해당 워크스페이스의 증인 키로 서명됨.
+- `/healthz` 워크스페이스의 모니터가 중지되면 503 오류를 반환합니다.
+
+[Caddyfile.proof.](https://github.com/phishdestroy/TgWitness/blob/main/deploy/Caddyfile.proof.example)example과 같이 이 페이지에 고유한 호스트 이름을 지정하십시오. 검증을 위해 아래 설명된 대로 `python -m tgwitness.witness export --data-dir proof-data/<id> --out witness.zip` 내보낸 후 아래 설명대로 사용하십시오.
 
 ## 확인
 

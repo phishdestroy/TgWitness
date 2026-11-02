@@ -19,7 +19,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 | Windows 版 Docker 輔助工具 | `scripts\Docker.cmd` | 是的；該輔助程式會監控網頁伺服器的運作狀態。 |
 | 適用於 Linux/macOS 的 Docker 輔助工具 | `sh scripts/docker-start.sh` | 是的；該輔助程式會監控網頁伺服器的運作狀態。 |
 
-若需部署可由第三方驗證的雲端伺服器——該伺服器透過 服務供應商的 API 建立，不使用 SSH，且僅能透過 Cloudflare Tunnel 存取——請參閱 [「高保障部署](https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md)」說明。
+若需部署可由第三方驗證的雲端伺服器——該伺服器透過 服務供應商的 API 建立，不使用 SSH，且僅能透過 Cloudflare Tunnel 存取——請參閱 [「高保障部署](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/)」說明。
 
 原生啟動程序會建立一個私有 `.venv`，並安裝已固定（pinned）的依賴項。 Docker 會在映像檔內建置這些組件，無需主機端的 Python。首次 設定需要網路連線。 若未偵測到 Python 3.11 以上版本，`Start.cmd` 會先徵求確認， 再為當前 Windows 使用者安裝 Python 3.12（若使用 winget，否則在驗證 Python 軟體基金會簽章後， 將使用 python.org 安裝程式）；此過程絕不會要求 管理員權限。Docker 及作業系統服務仍為先決條件。
 
@@ -250,7 +250,7 @@ python -m tgwitness.download --token-file data/live/panel-token.txt --out eviden
 
 ## 連線與保護選項
 
-連線路徑依工作區而定，應在授權前完成設定。 SOCKS5/HTTP CONNECT 採用固定依賴項 python-socks。MTProxy 則使用 Telethon 的 實驗性隨機化中間傳輸協議；不支援偽 TLS ee 機密金鑰。 直接備用連線取決於所選的 [IP 模式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/#ip-modes)：「隱藏 IP」模式會拒絕此功能；「顯式備用」模式則會在延遲後允許此功能。「隧道/VPN」模式允許直接連線，但不會建立 VPN。此非系統層級的網路政策。
+連線路徑依工作區而定，應在授權前完成設定。 SOCKS5/HTTP CONNECT 會使用已固定（pinned）的 python-socks 依賴項。MTProxy 採用 Telethon 的 實驗性隨機化中間傳輸；不支援偽 TLS ee 密鑰。 直接備用模式取決於所選的 [IP 模式](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/connection/#ip-modes)：「**隱藏位址」**會拒絕此模式；**「直接作為最後手段」**則會在延遲後允許此模式。**位於隧道或 VPN 後方的伺服器允許**直接路由，但不會建立 VPN。這並非系統層級的網路政策。
 
 對於新安裝，TGWITNESS_VAULT_KEY_FILE 應指向一個獨立受保護的隨機 主金鑰檔案。請在容器中將其以唯讀方式掛載至 /data 目錄之外。請分別將每個工作區的公開 vault.external.json 鹽值元資料與主金鑰妥善保存。 現有的本地金庫需要進行有計畫的遷移；設定此變數並不會 自動將其轉換。訊息／媒體儲存及匯出內容均未經應用程式加密。 請視需要使用加密卷宗及足夠的私人臨時儲存空間。
 

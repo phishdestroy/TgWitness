@@ -48,7 +48,7 @@ Untuk direktori data baru, TGWITNESS_VAULT_KEY_FILE dapat menyediakan kunci utam
 
 Konfigurasi proxy dienkripsi di dalam vault. Kata sandi dan rahasia MTProxy tidak dikembalikan oleh API atau ditulis ke dalam catatan bukti. Setiap ruang kerja memilih rute Telegram dan [mode IP](https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/#ip-modes)-nya sendiri.
 
-Mode "Hide IP" menolak fallback Telegram langsung dan memerlukan proxy untuk permintaan HTTP eksternal. Mode fallback yang dipilih secara eksplisit mengizinkan akses langsung ke Telegram setelah penundaan; mode terowongan/VPN mengizinkan rute langsung. Memilih mode terowongan tidak akan menginstal atau memverifikasi VPN. Pengaturan ini tidak mengontrol seluruh lalu lintas mesin, peramban, pengelola paket, atau resolusi DNS host proxy lokal.
+**Menyembunyikan alamat** akan menonaktifkan fallback Telegram langsung dan memerlukan proxy untuk permintaan HTTP eksternal. Mode fallback yang dipilih secara eksplisit memungkinkan akses langsung ke Telegram setelah penundaan; mode terowongan/VPN memungkinkan rute langsung. Memilih mode terowongan tidak menginstal atau memverifikasi VPN. Pengaturan ini tidak mengontrol seluruh lalu lintas mesin, peramban, pengelola paket, atau resolusi DNS host proxy lokal.
 
 MTProxy hanya mengangkut lalu lintas Telegram. Permintaan eksternal dapat menggunakan proksi SOCKS5/HTTP terpisah, rute SOCKS5/HTTP ruang kerja, atau rute langsung yang diizinkan; permintaan tersebut juga dapat dinonaktifkan. Saksi independen memiliki pengaturan transportasi tersendiri. Otentikasi SOCKS5/HTTP CONNECT biasa tidak dienkripsi oleh protokol proxy tersebut sendiri. Rahasia TLS MTProxy palsu tetap tidak didukung.
 

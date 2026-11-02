@@ -8,7 +8,7 @@ Kerjakan pesan dan perubahan yang disimpan, hubungkan temuan Anda dengan sumbern
 
 Panduan bergambar
 
-[### Case Board Pastikan pengamatan, kutipan tepat, dan catatan tim tetap terhubung.](https://phishdestroy.github.io/TgWitness/id/docs/case-board/) [### Studio Laporan Pilih materi dan salah satu dari delapan desain laporan.](https://phishdestroy.github.io/TgWitness/id/docs/reports/) [### Teks untuk dibagikan Siapkan cuplikan yang telah ditandatangani dengan kolom-kolom yang dibutuhkan oleh penerima.](https://phishdestroy.github.io/TgWitness/id/docs/handover/) [### Grup akun Tinjau akun secara bersama-sama dan jaga agar ruang kerja masing-masing tetap terpisah.](https://phishdestroy.github.io/TgWitness/id/docs/groups/)
+[### Case Board Pastikan pengamatan, kutipan tepat, dan catatan tim tetap terhubung.](https://phishdestroy.github.io/TgWitness/id/docs/case-board/) [### Studio Laporan Pilih materi dan salah satu dari delapan desain laporan.](https://phishdestroy.github.io/TgWitness/id/docs/reports/) [### Berbagi salinan Siapkan cuplikan yang telah ditandatangani dengan kolom-kolom yang dibutuhkan oleh penerima.](https://phishdestroy.github.io/TgWitness/id/docs/handover/) [### Grup akun Tinjau akun secara bersama-sama dan jaga agar ruang kerja masing-masing tetap terpisah.](https://phishdestroy.github.io/TgWitness/id/docs/groups/)
 
 [## Mode, skenario, dan tingkat bukti Ruang lingkup pengumpulan, batas peristiwa, delapan mekanisme verifikasi, dan enam skenario investigasi fiktif.](https://phishdestroy.github.io/TgWitness/id/guides/modes.html)
 
@@ -34,19 +34,19 @@ Setiap dokumen proyek, disajikan di sini beserta diagramnya. Panduan-panduan ter
 
 Pengaturan
 
-[Panduan cepat](https://phishdestroy.github.io/TgWitness/id/docs/reference/quickstart/)[Format akun dan sesi](https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/)[Akses dan izin](https://phishdestroy.github.io/TgWitness/id/docs/reference/access/)[Koneksi, proxy, dan perlindungan data](https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/)[Penerapan](https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/)
+[Panduan cepat](https://phishdestroy.github.io/TgWitness/id/docs/reference/quickstart/)[Instal, verifikasi, dan perbarui](https://phishdestroy.github.io/TgWitness/id/docs/reference/installation/)[Pengaturan awal dan konfigurasi](https://phishdestroy.github.io/TgWitness/id/docs/reference/settings/)[Format akun dan sesi](https://phishdestroy.github.io/TgWitness/id/docs/reference/accounts/)[Akses dan izin](https://phishdestroy.github.io/TgWitness/id/docs/reference/access/)[Koneksi, proxy, dan perlindungan data](https://phishdestroy.github.io/TgWitness/id/docs/reference/connection/)[Penerapan](https://phishdestroy.github.io/TgWitness/id/docs/reference/deployment/)[Penerapan dengan jaminan keamanan tinggi](https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/)
 
 Kumpulkan
 
-[Cara kerja pengumpulan data](https://phishdestroy.github.io/TgWitness/id/docs/reference/collection/)[Muat riwayat sumber](https://phishdestroy.github.io/TgWitness/id/docs/reference/history/)[Alur kerja dan operasi](https://phishdestroy.github.io/TgWitness/id/docs/reference/operations/)[Mode penyelidikan](https://phishdestroy.github.io/TgWitness/id/docs/reference/investigation/)[Fitur dan batasan](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/)
+[Panduan panel](https://phishdestroy.github.io/TgWitness/id/docs/reference/panel/)[Cara kerja pengumpulan data](https://phishdestroy.github.io/TgWitness/id/docs/reference/collection/)[Muat riwayat sumber](https://phishdestroy.github.io/TgWitness/id/docs/reference/history/)[Alur kerja dan operasi](https://phishdestroy.github.io/TgWitness/id/docs/reference/operations/)[Mode penyelidikan](https://phishdestroy.github.io/TgWitness/id/docs/reference/investigation/)[Fitur dan batasan](https://phishdestroy.github.io/TgWitness/id/docs/reference/features/)
 
 Arsip & integrasi
 
-[Referensi Case Board](https://phishdestroy.github.io/TgWitness/id/docs/reference/case-board/)[Analisis arsip](https://phishdestroy.github.io/TgWitness/id/docs/reference/analysis/)[MCP hanya baca](https://phishdestroy.github.io/TgWitness/id/docs/reference/mcp/)[OCR dan transkripsi lokal](https://phishdestroy.github.io/TgWitness/id/docs/reference/media-analysis/)[Webhook keluar](https://phishdestroy.github.io/TgWitness/id/docs/reference/webhooks/)
+[Referensi Case Board](https://phishdestroy.github.io/TgWitness/id/docs/reference/case-board/)[Analisis arsip](https://phishdestroy.github.io/TgWitness/id/docs/reference/analysis/)[MCP hanya baca](https://phishdestroy.github.io/TgWitness/id/docs/reference/mcp/)[OCR dan transkripsi lokal](https://phishdestroy.github.io/TgWitness/id/docs/reference/media-analysis/)[Webhook keluar](https://phishdestroy.github.io/TgWitness/id/docs/reference/webhooks/)[Galeri publik](https://phishdestroy.github.io/TgWitness/id/docs/reference/showcase/)
 
 Bukti
 
-[Cara kerja bukti tersebut](https://phishdestroy.github.io/TgWitness/id/docs/reference/how-it-works/)[Konfigurasi dan verifikasi laporan](https://phishdestroy.github.io/TgWitness/id/docs/reference/case-reports/)[Format bukti](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/)[Saksi independen](https://phishdestroy.github.io/TgWitness/id/docs/reference/witness/)[Cap waktu](https://phishdestroy.github.io/TgWitness/id/docs/reference/timestamp/)
+[Cara kerja bukti tersebut](https://phishdestroy.github.io/TgWitness/id/docs/reference/how-it-works/)[Konfigurasi dan verifikasi laporan](https://phishdestroy.github.io/TgWitness/id/docs/reference/case-reports/)[Ekspor akun](https://phishdestroy.github.io/TgWitness/id/docs/reference/account-export/)[Format bukti](https://phishdestroy.github.io/TgWitness/id/docs/reference/evidence/)[Saksi independen](https://phishdestroy.github.io/TgWitness/id/docs/reference/witness/)[Cap waktu](https://phishdestroy.github.io/TgWitness/id/docs/reference/timestamp/)[Penyimpanan dan pemulihan](https://phishdestroy.github.io/TgWitness/id/docs/reference/storage/)
 
 Keamanan & proyek
 

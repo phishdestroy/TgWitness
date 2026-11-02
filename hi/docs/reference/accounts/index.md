@@ -235,7 +235,7 @@ TData टेलीग्राम डेस्कटॉप एप्लिके
 - **चैट्स कई खाते देख सकते हैं:** साझा स्रोत, उन्हें देखने वाले खाते और उपलब्ध कार्यक्षेत्र-निरीक्षण अवधि (सात दिनों तक) में रुकावटें। **N खातों के साथ एक्सपोर्ट** एक चैनल या सुपरग्रुप एक्सपोर्ट को उनके बीच विभाजित करता है और एक आर्काइव पर हस्ताक्षर करता है।
 - **समूह निर्यात:** प्रत्येक खाते के हस्ताक्षरित एक्सपोर्ट के साथ एक ZIP `accounts/` और `manifest.json` उनके SHA-256 और कुंजी फिंगरप्रिंट्स की सूची, मुख्य द्वारा हस्ताक्षरित कार्यक्षेत्र में `manifest.signature.json`प्रत्येक खाते के आर्काइव को उसके स्वयं के साथ सत्यापित करें `python -m tgwitness.verify` और उस खाते के विश्वसनीय फिंगरप्रिंट के साथ।
 
-सदस्य समूह की सेटिंग्स साझा करते हैं; एक खाता अपने स्वयं के मान रख सकता है। [साझा सेटिंग्स](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups), [आयात और समूह गाइड](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) और [MTProxy पूल डैशबोर्ड](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources) देखें।
+सदस्य समूह की सेटिंग्स साझा करते हैं; एक खाता अपने स्वयं के मान रख सकता है। [साझा सेटिंग्स](https://phishdestroy.github.io/TgWitness/hi/docs/reference/settings/#account-groups), [आयात और समूह गाइड](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) और [MTProxy पूल डैशबोर्ड](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources) देखें।
 
 ## साइन आउट
 
@@ -278,6 +278,6 @@ TData टेलीग्राम डेस्कटॉप एप्लिके
 | खाता आईडी आयात किए गए खाते से मेल नहीं खाता | फ़ाइल का उपयोगकर्ता आईडी टेलीग्राम द्वारा रिपोर्ट किए गए आईडी से भिन्न है; यह फ़ाइल किसी अन्य खाते के लिए है। |
 | खाता पहले से ही किसी अन्य कार्यक्षेत्र का है | खाते को दो बार जोड़ने के बजाय उस वर्कस्पेस को खोलें। |
 | कनेक्टेड, लेकिन स्रोतों में चैट सूची से एक निजी समूह गायब है | सदस्यता की जाँच करें। पिकर पहले 1,000 डायलॉग्स का निरीक्षण करता है; **पैरामीटर के** अंतर्गत सीमा बढ़ाएँ। |
-| प्रॉक्सी कनेक्शन विफल | मार्ग और IP मोड की जाँच करें। स्वचालित MTProxy एक अन्य कार्यशील प्रवेश का प्रयास करता है। Hide IP मोड प्रतीक्षा करता है; स्पष्ट रूप से चयनित फॉलबैक मोड अपनी विन्यस्त देरी के बाद सीधे कनेक्ट हो सकता है। [राउटिंग मोड](https://phishdestroy.github.io/TgWitness/hi/docs/reference/connection/#ip-modes) देखें। |
+| प्रॉक्सी कनेक्शन विफल | रूट और आईपी मोड की जाँच करें। स्वचालित MTProxy दूसरी कार्यशील प्रविष्टि आज़माता है। Hide the address waits; Direct as a last resort कॉन्फ़िगर की गई देरी के बाद सीधे कनेक्ट कर सकता है। [राउटिंग मोड](https://phishdestroy.github.io/TgWitness/hi/docs/reference/connection/#ip-modes) देखें। |
 
 यह भी देखें: प्रॉक्सी और एन्क्रिप्शन के लिए [कनेक्शन और सुरक्षा](https://phishdestroy.github.io/TgWitness/hi/docs/reference/connection/), और साइन-इन के बाद क्या कैप्चर किया जाता है, इसके लिए [संग्रह कैसे काम करता है](https://phishdestroy.github.io/TgWitness/hi/docs/reference/collection/)।

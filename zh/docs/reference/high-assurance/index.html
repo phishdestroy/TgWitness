@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="zh-Hans" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>高可信度部署 · 参考 | TgWitness</title>
+<meta name="description" content="部署在 Hetzner 或 Phala Cloud 上的全天候密封服务器、网关 DNS 以及第三方可复现的验证机制。"><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="高可信度部署 · 参考 | TgWitness"><meta property="og:description" content="部署在 Hetzner 或 Phala Cloud 上的全天候密封服务器、网关 DNS 以及第三方可复现的验证机制。">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/high-assurance/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-assurance/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/high-assurance/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/high-assurance/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/high-assurance/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/high-assurance/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/high-assurance/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/high-assurance/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/high-assurance/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/high-assurance/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/high-assurance/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/high-assurance/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/high-assurance/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/"><link rel="alternate" type="text/markdown" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/index.md"><link rel="describedby" href="https://phishdestroy.github.io/TgWitness/llms.txt" type="text/plain"><link rel="sitemap" type="application/xml" href="https://phishdestroy.github.io/TgWitness/sitemap.xml"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/", "url": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/", "name": "高可信度部署 · 参考 | TgWitness", "description": "部署在 Hetzner 或 Phala Cloud 上的全天候密封服务器、网关 DNS 以及第三方可复现的验证机制。", "inLanguage": "zh-Hans", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}, "breadcrumb": {"@id": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/#breadcrumb"}}, {"@type": "BreadcrumbList", "@id": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://phishdestroy.github.io/TgWitness/zh/"}, {"@type": "ListItem", "position": 2, "name": "文档", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/"}, {"@type": "ListItem", "position": 3, "name": "参考", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "高可信度部署", "item": "https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">跳转至内容</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / 文档</span></a>
+<nav aria-label="指南"><a href="../../concepts/">图文指南</a><a href="../../">所有指南</a><a href="../">参考</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="语言"><span aria-hidden="true">◍</span> 简体中文</summary><div class="lang-list"><a href="../../../../docs/reference/high-assurance/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/high-assurance/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/high-assurance/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/high-assurance/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/high-assurance/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/high-assurance/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/high-assurance/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/high-assurance/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/high-assurance/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/high-assurance/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/high-assurance/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/high-assurance/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="./" hreflang="zh-Hans" lang="zh-Hans" aria-current="true">简体中文</a><a href="../../../../fr/docs/reference/high-assurance/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/high-assurance/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/high-assurance/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/high-assurance/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/high-assurance/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/high-assurance/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/high-assurance/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/high-assurance/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/high-assurance/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/high-assurance/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/high-assurance/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/high-assurance/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="在浅色和深色主题之间切换"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="指南"><a href="../../../guides/modes.html">模式、场景和证据级别</a><p class="nav-label">入门指南</p><a href="../../start/">几分钟内即可开始使用</a><a href="../../dedicated-account/">专用账号</a><a href="../../accounts/">连接账户</a><a href="../../proxies/">选择代理</a><a href="../../exports/">导出与验证</a><a href="../../capture/">GitHub Actions 捕获</a><p class="nav-label">调查与报告</p><a href="../../cases/">跨所有聊天记录进行调查</a><a href="../../case-board/">创建案件看板</a><a href="../../reports/">设计报告</a><a href="../../handover/">准备一份共享副本</a><a href="../../groups/">管理一组账户</a><p class="nav-label">了解证据</p><a href="../../concepts/">了解证据如何运作</a><a href="../../security/">确保安全</a><a href="../../witness/">设置 Witness 机器人</a><p class="nav-label">了解更多</p><a href="../../archive/">浏览存档</a><a href="../../access/">分享案例</a><a href="../../server/">保持其运行</a><a href="../../troubleshooting/">查找问题所在</a></nav><nav class="wiki-nav" aria-label="参考"><p class="nav-label"><a class="nav-label-link" href="../">参考</a></p><details class="wiki-group" open><summary>设置</summary><a href="../quickstart/">快速入门</a><a href="../installation/">安装、验证和更新</a><a href="../settings/">初始设置与配置</a><a href="../accounts/">账户与会话格式</a><a href="../access/">访问与权限</a><a href="../connection/">连接、代理和数据保护</a><a href="../deployment/">部署</a><a href="./" aria-current="page">高可信度部署</a></details><details class="wiki-group"><summary>收集</summary><a href="../panel/">面板指南</a><a href="../collection/">数据采集原理</a><a href="../history/">加载源代码历史记录</a><a href="../operations/">工作流程与操作</a><a href="../investigation/">调查模式</a><a href="../features/">功能与限制</a></details><details class="wiki-group"><summary>存档与集成</summary><a href="../case-board/">“案件看板”参考</a><a href="../analysis/">存档分析</a><a href="../mcp/">只读 MCP</a><a href="../media-analysis/">本地 OCR 和转录</a><a href="../webhooks/">外发 webhook</a><a href="../showcase/">公开展示</a></details><details class="wiki-group"><summary>证据</summary><a href="../how-it-works/">证据的运作原理</a><a href="../case-reports/">报告配置与验证</a><a href="../account-export/">账户导出</a><a href="../evidence/">证据格式</a><a href="../witness/">独立见证者</a><a href="../timestamp/">时间戳</a><a href="../storage/">存储与恢复</a></details><details class="wiki-group"><summary>安全与项目</summary><a href="../security/">安全与数据处理</a><a href="../architecture/">架构</a><a href="../verification/">已测试的内容</a><a href="../license/">许可协议与架构不兼容声明</a><a href="../notice/">运营商兼容性通知</a><a href="../changelog/">更新日志</a></details></nav><p class="sidebar-note">v0.8.0<br>开源 · 可在您的设备上运行</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="指南"><a href="../../../">首页</a> <span aria-hidden="true">/</span> <a href="../../">文档</a> <span aria-hidden="true">/</span> <a href="../">参考</a> <span aria-hidden="true">/</span> <span aria-current="page">高可信度部署</span></nav>
+<p class="verification-shortcut"><a href="../verification/">已测试的内容 →</a></p>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">搜索文档</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="尝试使用代理、哈希链、令牌或见证……" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="清晰搜索" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">输入关键词以搜索指南和参考资料。搜索结果仅保存在您的浏览器中。</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">参考 / 设置</p><h1>高可信度部署</h1><p class="guide-outcome">部署在 Hetzner 或 Phala Cloud 上的全天候密封服务器、网关 DNS 以及第三方可复现的验证机制。</p><div class="wiki-body"><p>经过签名的日志可证明记录未被篡改 <strong>after</strong> 签名。对于严重案件，
+接下来的问题是：在签名之前 <strong>之前</strong> 是否有人可能篡改了数据：
+谁运行了数据收集器、在哪个机器上运行，以及是否有人登录过该设备。此可选
+模式会部署数据收集器，以便第三方能够通过云服务提供商和 Cloudflare 保存的记录
+（而非运营商的口头声明）来核查上述情况。</p>
+<p>常规的本地和 Docker 使用方式保持不变。除非您使用
+<code>python -m tgwitness.cloud</code>进行部署，且收集器仅在部署设置为
+<code>TGWITNESS_ASSURANCE</code>.</p>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 912 244" width="912" height="244" role="img" aria-labelledby="flow-9-title flow-9-desc"><title id="flow-9-title">流程图</title><desc id="flow-9-desc">操作员 → 服务器，防火墙未配置入站规则 (提供商 API); 操作员 → 隧道与 DNS (Cloudflare API); 服务器，防火墙未配置入站规则 → 隧道与 DNS (仅限外发); 服务器，防火墙未配置入站规则 → 在服务器上生成的签名密钥; Verifier，只读令牌 → 提供商日志和防火墙; Verifier，只读令牌 → 隧道连接器地址和入口; Verifier，只读令牌 → 已签名的 /api/assurance 声明; Verifier，只读令牌 → 证据 ZIP</desc><defs><marker id="flow-9-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M379.7 46.0C379.7 69.5 121.7 69.5 121.7 93.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:267" pathLength="267"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="3.0s" repeatCount="indefinite" path="M379.7 46.0C379.7 69.5 121.7 69.5 121.7 93.0"/></circle><path class="flow-edge" d="M379.7 46.0C379.7 122.0 269.6 122.0 269.6 198.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:197" pathLength="197"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.2s" repeatCount="indefinite" path="M379.7 46.0C379.7 122.0 269.6 122.0 269.6 198.0"/></circle><path class="flow-edge" d="M121.7 151.0C121.7 174.5 269.6 174.5 269.6 198.0" marker-end="url(#flow-9-arrow)" style="--i:1;--len:160" pathLength="160"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.8s" repeatCount="indefinite" path="M121.7 151.0C121.7 174.5 269.6 174.5 269.6 198.0"/></circle><path class="flow-edge" d="M121.7 151.0C121.7 174.5 102.8 174.5 102.8 198.0" marker-end="url(#flow-9-arrow)" style="--i:1;--len:52" pathLength="52"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M121.7 151.0C121.7 174.5 102.8 174.5 102.8 198.0"/></circle><path class="flow-edge" d="M525.8 46.0C525.8 74.0 319.5 74.0 319.5 102.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:220" pathLength="220"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.4s" repeatCount="indefinite" path="M525.8 46.0C525.8 74.0 319.5 74.0 319.5 102.0"/></circle><path class="flow-edge" d="M525.8 46.0C525.8 74.0 496.6 74.0 496.6 102.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:65" pathLength="65"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M525.8 46.0C525.8 74.0 496.6 74.0 496.6 102.0"/></circle><path class="flow-edge" d="M525.8 46.0C525.8 69.5 690.9 69.5 690.9 93.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:177" pathLength="177"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.0s" repeatCount="indefinite" path="M525.8 46.0C525.8 69.5 690.9 69.5 690.9 93.0"/></circle><path class="flow-edge" d="M525.8 46.0C525.8 74.0 854.3 74.0 854.3 102.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:338" pathLength="338"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="3.8s" repeatCount="indefinite" path="M525.8 46.0C525.8 74.0 854.3 74.0 854.3 102.0"/></circle><g class="flow-node" style="--i:0"><rect x="327.7" y="6.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="379.7" y="26.0">操作员</tspan></text></g><g class="flow-node" style="--i:0"><rect x="449.7" y="6.0" width="152.2" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="525.8" y="26.0">Verifier，只读令牌</tspan></text></g><g class="flow-node" style="--i:1"><rect x="18.0" y="93.0" width="207.4" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="121.7" y="113.0">服务器，防火墙未配置入站规</tspan><tspan x="121.7" y="131.0">则</tspan></text></g><g class="flow-node" style="--i:1"><rect x="243.4" y="102.0" width="152.2" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="319.5" y="122.0">提供商日志和防火墙</tspan></text></g><g class="flow-node" style="--i:1"><rect x="413.6" y="102.0" width="166.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="496.6" y="122.0">隧道连接器地址和入口</tspan></text></g><g class="flow-node" style="--i:1"><rect x="597.6" y="93.0" width="186.7" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="690.9" y="113.0">已签名的 /api/assurance</tspan><tspan x="690.9" y="131.0">声明</tspan></text></g><g class="flow-node" style="--i:1"><rect x="802.3" y="102.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="854.3" y="122.0">证据 ZIP</tspan></text></g><g class="flow-node" style="--i:2"><rect x="217.6" y="198.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="269.6" y="218.0">隧道与 DNS</tspan></text></g><g class="flow-node" style="--i:2"><rect x="6.0" y="198.0" width="193.6" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="102.8" y="218.0">在服务器上生成的签名密钥</tspan></text></g><g class="flow-label" style="--i:0"><rect x="144.5" y="64.6" width="79.0" height="23.0" rx="6"/><text x="184.0" y="76.1" text-anchor="middle" dominant-baseline="central">提供商 API</text></g><g class="flow-label" style="--i:0"><rect x="244.1" y="131.9" width="104.2" height="23.0" rx="6"/><text x="296.2" y="143.4" text-anchor="middle" dominant-baseline="central">Cloudflare API</text></g><g class="flow-label" style="--i:1"><rect x="200.7" y="169.6" width="66.4" height="23.0" rx="6"/><text x="233.9" y="181.1" text-anchor="middle" dominant-baseline="central">仅限外发</text></g></svg></div><details class="flow-steps"><summary>图表转为文本</summary><ol><li>操作员 → 服务器，防火墙未配置入站规则 (提供商 API)</li><li>操作员 → 隧道与 DNS (Cloudflare API)</li><li>服务器，防火墙未配置入站规则 → 隧道与 DNS (仅限外发)</li><li>服务器，防火墙未配置入站规则 → 在服务器上生成的签名密钥</li><li>Verifier，只读令牌 → 提供商日志和防火墙</li><li>Verifier，只读令牌 → 隧道连接器地址和入口</li><li>Verifier，只读令牌 → 已签名的 /api/assurance 声明</li><li>Verifier，只读令牌 → 证据 ZIP</li></ol></details></figure>
+<h2 id="what-a-verifier-can-check">验证者可以检查的内容<a class="anchor" href="#what-a-verifier-can-check" aria-label="本节链接">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>声明</th>
+<th>如何进行验证</th>
+<th>维护者：</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>该服务器是在已知时间点通过服务商 API 创建的</td>
+<td>服务器对象及其在提供商自有日志中的创建过程</td>
+<td>提供商</td>
+</tr>
+<tr>
+<td>没有人使用该提供商的访问路径</td>
+<td>控制台请求、救援、密码重置、重建、ISO、镜像和备份的日志</td>
+<td>提供商</td>
+</tr>
+<tr>
+<td>无法连接到它</td>
+<td>提供商防火墙没有入站规则；SSH 服务在首次启动时即被屏蔽</td>
+<td>提供商（防火墙）、主机（SSH）</td>
+</tr>
+<tr>
+<td>该面板仅可通过隧道访问</td>
+<td>隧道入口仅将流量转发至控制面板；连接器从服务器地址运行</td>
+<td>Cloudflare</td>
+</tr>
+<tr>
+<td>该软件的运行情况如下：</td>
+<td>收集器的签名源代码树哈希值与已部署提交的检出结果相等</td>
+<td>Collector，已与 Git 进行过校验</td>
+</tr>
+<tr>
+<td>该签名密钥是在该服务器上生成的</td>
+<td>该密钥会签署一份声明，其中包含服务提供商的服务器 ID 以及收到的 cloud-init 的哈希值</td>
+<td>Collector，已与提供商进行过核对</td>
+</tr>
+<tr>
+<td>该日志属于该密钥和服务器</td>
+<td>证据ZIP中的每个进程启动时，都会携带该服务器的宿主测量数据</td>
+<td>证据 ZIP</td>
+</tr>
+</tbody>
+</table></div>
+<p>主机指标（SSH 监听器和进程、当前会话、 <code>wtmp</code>、系统启动）
+由收集器自身报告，并在每次进程启动时以及
+<code>host.state</code> 记录中。服务器上的 root 用户可能篡改这些数据；这些数据
+旨在支持提供商和 Cloudflare 的记录，而非取代它们。</p>
+<h2 id="providers">提供商<a class="anchor" href="#providers" aria-label="本节链接">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th><code>--provider</code></th>
+<th>凭据</th>
+<th>验证员的只读访问权限</th>
+<th>验证器的提供者日志</th>
+<th>保留用于</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hetzner</code></td>
+<td><code>HCLOUD_TOKEN</code></td>
+<td>同一项目的读取令牌</td>
+<td>服务器和防火墙操作</td>
+<td>只要这些资源存在</td>
+</tr>
+<tr>
+<td><code>digitalocean</code></td>
+<td><code>DIGITALOCEAN_TOKEN</code></td>
+<td>只读个人访问令牌</td>
+<td>Droplet 操作</td>
+<td>只要 Droplet 存在</td>
+</tr>
+<tr>
+<td><code>linode</code></td>
+<td><code>LINODE_TOKEN</code></td>
+<td><code>linodes</code>, <code>firewall</code>, <code>events</code> 只读范围</td>
+<td>账户事件、防火墙规则版本</td>
+<td>90 天</td>
+</tr>
+<tr>
+<td><code>vultr</code></td>
+<td><code>VULTR_API_KEY</code></td>
+<td>具有读取权限且拥有 <code>activity_logs</code> 权限</td>
+<td>账户活动日志（方法、路径、操作者）</td>
+<td>30 天，订阅审计日志可延长保存期限</td>
+</tr>
+<tr>
+<td><code>aws</code></td>
+<td><code>AWS_ACCESS_KEY_ID</code>, <code>AWS_SECRET_ACCESS_KEY</code></td>
+<td><code>ec2:DescribeInstances</code>, <code>ec2:DescribeSecurityGroups</code>, <code>cloudtrail:LookupEvents</code></td>
+<td>CloudTrail 事件历史记录</td>
+<td>90 天</td>
+</tr>
+<tr>
+<td><code>phala</code></td>
+<td><code>PHALA_CLOUD_API_KEY</code></td>
+<td>同一工作区的 API 密钥</td>
+<td>应用程序更新：代码和环境变更、重启、操作系统升级</td>
+<td>虽然该应用程序已存在</td>
+</tr>
+<tr>
+<td><code>generic</code></td>
+<td>无</td>
+<td>无</td>
+<td>无：<strong>自我认证</strong></td>
+<td>–</td>
+</tr>
+</tbody>
+</table></div>
+<p>请为每个案例使用专用的项目、团队、账户或子账户：这样，验证者的
+只读访问权限将仅显示此部署。凭据从
+<code>--provider-token-file</code> 或上述变量中读取，绝不从命令行获取。对于 AWS，该文件
+包含 <code>ACCESS_KEY_ID SECRET_ACCESS_KEY [SESSION_TOKEN]</code>；区域为 <code>--location</code>.</p>
+<p>每份报告中都会注明各服务商记录中无法显示的内容。 简而言之：Hetzner
+会记录控制台请求；而 DigitalOcean 的恢复控制台、Linode 的 Lish/Glish 以及 Vultr 的 Web
+控制台则不会被直接记录，因此 root 账户在首次启动时会被锁定，若要登录控制台
+则需要重置密码或更改启动方式，而这些操作会被记录下来。Vultr 会向任何能够读取该实例的密钥返回控制台
+地址；但记录和报告中均不会存储该地址。</p>
+<h2 id="confidential-vm-on-phala-cloud-intel-tdx">Phala Cloud 上的机密虚拟机（Intel TDX）<a class="anchor" href="#confidential-vm-on-phala-cloud-intel-tdx" aria-label="本节链接">#</a></h2>
+<p>该 <code>--provider phala</code> 收集器运行在 <a href="https://phala.com/">Phala Cloud</a> 上的英特尔 TDX 机密虚拟机中，
+由 dstack 管理。主机和 Phala 工作人员无法读取其
+内存，且处理器会对机器的启动过程生成一份认证声明并进行签名。验证器不会
+仅凭 Phala 的声明就予以采信： <code>tgwitness.tdx</code> 会自行核查每份证明——直至固定的英特尔
+SGX 根证书颁发机构（Root CA）——并将其与英特尔的撤销列表及英特尔签名的平台数据进行比对，同时拒绝
+任何可被调试或迁移的机器。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>报告条目</th>
+<th>功能展示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tdx_binding</code></td>
+<td>该证明涵盖了收集者的签名声明以及本次请求的随机值。</td>
+</tr>
+<tr>
+<td><code>tdx_quote</code></td>
+<td>英特尔对该认证负责；只有当英特尔将该平台评定为“最新”时，该认证才算通过。</td>
+</tr>
+<tr>
+<td><code>tdx_compose_hash</code></td>
+<td>RTMR3 通过重放 dstack 事件日志，对收集器报告的 app-compose 进行测量</td>
+</tr>
+<tr>
+<td><code>tdx_compose</code></td>
+<td>该代码与已部署提交生成的代码字节对字节完全一致：源文件通过哈希值固定，两张图片均通过摘要固定，不存在其他代码</td>
+</tr>
+<tr>
+<td><code>tdx_identity</code></td>
+<td>该证明来自已部署的应用程序和实例，使用 Phala 的 KMS 提供的密钥以及加密磁盘。</td>
+</tr>
+<tr>
+<td><code>tdx_os</code></td>
+<td>其中 <code>--tdx-measurements</code>，MRTD 和 RTMR0-2 的值等于根据 dstack 操作系统镜像计算出的值（<code>dstack-mr measure --json</code>)</td>
+</tr>
+</tbody>
+</table></div>
+<p>日志中记录的每个收集器启动都附有此类证明，因此
+<code>verify --evidence</code> 会检查每次启动。Phala 的应用程序修订列表充当
+提供者日志：如果部署后“compose”发生了变化，报告将失败。</p>
+<p>在面板中，选择<strong>“附加功能</strong>
+→ <strong>7×24小时服务器</strong>
+”下的<strong>“机密虚拟机 · Phala Cloud</strong>
+”，并粘贴 Phala Cloud API 密钥；快速隧道的工作原理与 Hetzner 上相同。在命令行中：</p>
+<pre><code class="language-sh">python -m tgwitness.cloud deploy --provider phala --name case-1 --server-type tdx.small \
+    --ref v0.8.0 --repository https://github.com/phishdestroy/TgWitness --quick-tunnel \
+    --provider-token-file phala-key.txt
+python -m tgwitness.cloud verify --record deployments/case-1/deployment.json \
+    --provider-token-file phala-key.txt --cloud-init deployments/case-1/docker-compose.yaml \
+    --source CHECKOUT_OF_COMMIT --tdx-measurements dstack-mr.json</code></pre>
+<p><code>--tdx-collateral</code> 从文件中读取英特尔的证书和撤销列表，而不是
+从英特尔下载。此处无法使用网关 DNS：Phala 没有用于
+出站流量的提供商防火墙。</p>
+<p>一份认证报告无法排除英特尔 TDX 模块或微代码中存在漏洞，也无法排除对
+内存总线的物理访问。无论谁控制了 Phala 账户中的应用程序，都可以部署另一个“compose”；
+它将显示为一个带有新“compose”哈希值的新版本。主机控制着机器的
+时间源和网络。</p>
+<h2 id="before-you-start">开始之前<a class="anchor" href="#before-you-start" aria-label="本节链接">#</a></h2>
+<ol>
+<li>一个 Cloudflare 区域、其账户 ID 以及一个具有 <strong>Cloudflare Tunnel 编辑</strong>、
+    <strong>区域读取</strong>和 <strong>DNS 编辑权限的</strong> API 令牌，由 <code>--cloudflare-token-file</code> 或
+    <code>CLOUDFLARE_API_TOKEN</code>。对于验证者：<strong>Cloudflare Tunnel 读取</strong>、<strong>DNS 读取</strong>，以及针对
+    审计日志的<strong>账户设置读取</strong>。若无域名，
+    <a href="#quick-tunnel-without-a-domain">快速隧道</a>则无需上述任何信息。</li>
+<li>具有专用项目写入权限的提供商凭据； <code>lock</code> 同样使用：<ul>
+<li>Hetzner：具有读写权限的 API 令牌；</li>
+<li>DigitalOcean：具有写入权限的个人访问令牌；</li>
+<li>Linode：个人访问令牌，包含 <code>linodes</code>, <code>firewall</code> 和 <code>events</code> 读写权限；</li>
+<li>Vultr：专用账户或子账户的 API 密钥；</li>
+<li>AWS：允许使用 IAM 凭据 <code>ec2:DescribeVpcs</code>, <code>ec2:DescribeImages</code>,
+    <code>ec2:CreateSecurityGroup</code>, <code>ec2:AuthorizeSecurityGroupIngress</code>, <code>ec2:RunInstances</code>,
+    <code>ec2:CreateTags</code>, <code>ec2:DescribeInstances</code>, <code>ec2:DescribeSecurityGroupRules</code> 且
+    <code>ec2:RevokeSecurityGroupIngress</code>.</li>
+</ul>
+</li>
+<li>待执行的提交。发布标签会通过以下方式解析为对应的提交： <code>git ls-remote</code>；
+    服务器仅接收该 40 个字符的提交信息。</li>
+</ol>
+<h2 id="from-the-panel">来自面板<a class="anchor" href="#from-the-panel" aria-label="本节链接">#</a></h2>
+<p>在您的电脑上，<strong>通过“扩展功能”→“24/7 服务器”</strong>即可为 Hetzner 运行相同的 <code>deploy</code> Hetzner服务，仅需三个
+步骤：选择欧洲或美国，粘贴Hetzner令牌（读写权限），然后核对
+控制面板根据该令牌检索到的服务器类型、月费、地址及版本。在您确认之前，
+不会创建任何内容。控制面板会将每个步骤显示为 <code>deploy</code> 报告显示，随后显示
+地址、面板令牌和签名密钥指纹。若未绑定域名，服务器将获得
+<a href="#quick-tunnel-without-a-domain">快速隧道</a>
+；重启后，<strong>通过“您的服务器”→“查找当前地址</strong>
+”可再次查询。若要在自有域名下设置固定地址，请打开
+<strong>“可选”→“自有域名</strong>
+”，并添加 Cloudflare 令牌（预设链接会自动选择“区域
+读取”、“DNS 编辑”和“Cloudflare 隧道编辑”）。</p>
+<p>这些令牌随每次请求从浏览器标签页传输至同一台计算机上的 TgWitness，
+且不会被写入任何位置；部署记录、经过处理的 cloud-init、面板令牌以及
+用于快速隧道的地址密钥均保存在 <code>deployments/NAME</code> 数据目录内。
+面板仅通过直接回环连接向主管理员提供此功能
+（<code>127.0.0.1</code>，不允许代理或隧道头部）；通过网络访问的面板则会显示相关命令
+。版本默认采用运行中面板的发布标签，该标签通过
+GitHub API解析获得。位置、服务器类型和价格来自Hetzner的API： <code>cpx22</code> 在提供该服务的地方
+使用该服务，否则使用内存至少为 2 GB 的最便宜 x86 类型。</p>
+<h2 id="quick-tunnel-without-a-domain">无需域名的快速隧道<a class="anchor" href="#quick-tunnel-without-a-domain" aria-label="本节链接">#</a></h2>
+<p><code>--quick-tunnel</code> 替换 <code>--zone</code>, <code>--cloudflare-account</code> 并 <code>--panel-host</code>；无需使用 Cloudflare
+账户或令牌：</p>
+<pre><code class="language-sh">python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server-type cpx22 \
+    --ref 0123456789abcdef0123456789abcdef01234567 --quick-tunnel --provider-token-file hetzner.token</code></pre>
+<p>在服务器端，cloudflared 会打开一条
+<a href="https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/">快速隧道</a>
+连接到控制面板：一个随机的 <code>https://….trycloudflare.com</code> 地址，该地址会在 cloudflared
+或服务器重启时发生变化。服务器上一个小型服务会将每个地址发布到一个随机的 ntfy.sh
+主题中，并使用仅部署目录中保存的密钥进行签名（HMAC-SHA256）
+（<code>address-key.txt</code>），并每三小时重复一次，因为 ntfy.sh 会保留帖子 12.
+<code>deploy</code> 和<strong>“查找当前地址”</strong>功能仅接受签名帖子，因此伪造的帖子无法
+将您和您的面板令牌重定向到他人的地址。该主题记录在
+已发布的 cloud-init 中：任何拥有这些信息的人都能读取当前地址，而该地址仍会要求提供
+面板令牌。无论哪种方式，服务器均不保留任何入站端口。</p>
+<p>相关成本：由于没有 Cloudflare 账户记录快速隧道的状态，因此 <code>verify</code> 报告称
+隧道、连接器和 DNS 检查不可用，因此结果充其量 <code>incomplete</code>；
+提供商记录、防火墙、签名声明、主机测量和安装程序比较则
+照常进行检查。与参考安装程序的字节比较需要一个已部署的提交
+，该提交已知 <code>--quick-tunnel</code>；从 0.7.0 版本检出后构建域名安装程序，并报告
+差异。 Cloudflare 不对快速隧道提供正常运行时间保证，允许 200 个请求
+在传输中，且不支持 Server-Sent Events，因此控制面板的实时更新（0.7.0 之后的版本）
+可能无法通过快速隧道传送，需要重新加载页面；该部分尚未经过测试。对于
+必须保持稳定的场景，请使用您自己的域名。</p>
+<h2 id="deploy">部署<a class="anchor" href="#deploy" aria-label="本节链接">#</a></h2>
+<p>请先查看所有即将发送的内容。 <code>plan</code> 不会向任何服务提供商或 Cloudflare 发起请求：</p>
+<pre><code class="language-sh">python -m tgwitness.cloud plan --provider hetzner --name case-2026-11 --server-type cpx22 \
+    --ref 0123456789abcdef0123456789abcdef01234567 --zone example.org \
+    --cloudflare-account CLOUDFLARE_ACCOUNT_ID --panel-host case.example.org</code></pre>
+<p>然后使用相同的选项和凭据进行部署：</p>
+<pre><code class="language-sh">python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server-type cpx22 \
+    --ref 0123456789abcdef0123456789abcdef01234567 --zone example.org \
+    --cloudflare-account CLOUDFLARE_ACCOUNT_ID --panel-host case.example.org \
+    --witness-host case-witness.example.org \
+    --provider-token-file hetzner.token --cloudflare-token-file cloudflare.token</code></pre>
+<p>初始服务器类型： <code>cpx22</code> (Hetzner)， <code>s-1vcpu-2gb</code> (DigitalOcean)， <code>g6-standard-1</code>
+(Linode)， <code>vc2-1c-2gb</code> (Vultr)， <code>t3.small</code> (AWS)。 <code>--location</code> 以及 <code>--image</code> 默认使用各
+服务商位于欧洲区域的 Ubuntu 24.04 系统。</p>
+<p><code>--repository</code> 从另一个 https Git 仓库获取提交，且 URL 中不包含凭据
+（默认 <code>https://github.com/phishdestroy/TgWitness.git</code>). <code>deploy</code> 也接受 <code>--out</code>
+指定其他部署目录（默认 <code>deployments/NAME</code>；若目录中已存在
+部署则会被拒绝）以及 <code>--wait</code>，即等待收集器签署声明所需的分钟数：
+1 到 240，默认值为 20，或 60 用于 <code>generic</code>.</p>
+<p>命令：</p>
+<ol>
+<li>创建一个 Cloudflare 隧道，其入站流量将面板主机名转发至面板，
+    若已指定，则将见证主机名转发至 <code>/api/witness/head</code> 并 <code>/api/assurance</code> 且仅限该主机名；</li>
+<li>为这些主机名创建代理 CNAME 记录，并拒绝已存在的名称；</li>
+<li>创建一个不包含入站规则的提供商防火墙，并在其后部署一台服务器，该服务器不使用 SSH 密钥、
+    不进行备份、不使用控制台代理，且 cloud-init 会屏蔽 SSH、锁定 root 权限，并安装
+    <code>cloudflared</code>、精确获取该提交、验证并以
+    强化版 systemd 服务的形式启动 TgWitness；</li>
+<li>等待收集器发送的签名声明，并验证该声明是否指明了此服务器以及
+    此 cloud-init 的哈希值。</li>
+</ol>
+<p><code>deployments/case-2026-11/</code> 其中包含：</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>文件</th>
+<th>目录</th>
+<th>分享？</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>deployment.json</code></td>
+<td>ID、哈希值、发出的 API 调用（方法、路径、状态）以及第一条已签名的声明</td>
+<td>是的，通过验证器</td>
+</tr>
+<tr>
+<td><code>cloud-init.redacted.yaml</code></td>
+<td>将云初始化脚本（cloud-init）中的两个密钥替换为 <code>REDACTED</code></td>
+<td>是</td>
+</tr>
+<tr>
+<td><code>panel-token.txt</code></td>
+<td>面板令牌</td>
+<td>无</td>
+</tr>
+</tbody>
+</table></div>
+<p>提供商的根密码、隧道令牌和面板令牌绝不会写入
+<code>deployment.json</code>。请通过您无法单独控制的频道（例如见证频道或发送给收件人的消息）发布文末显示的收集器指纹。</p>
+<p>请使用面板令牌登录 Telegram， <code>https://case.example.org</code> 使用面板令牌登录 Telegram，具体操作参见
+<a href="../accounts/">账户指南</a>。面板操作会被记录在已签名的日志中；这些操作并非
+SSH 会话。<a href="../witness/">见证人</a>可以轮询 <code>https://case-witness.example.org</code>.</p>
+<p>不支持 SSH：如果初始化失败，收集器将永远不会响应。请删除服务器并
+重新部署，或使用调试部署来查找原因。</p>
+<h3 id="secrets-in-the-user-data">用户数据中的秘密<a class="anchor" href="#secrets-in-the-user-data" aria-label="本节链接">#</a></h3>
+<p>cloud-init 包含两个密钥：控制面板令牌和 Cloudflare 隧道令牌。
+签名密钥不在此列；它是在服务器上生成的。Hetzner、DigitalOcean 和 Linode
+不会通过其 API 返回用户数据。Vultr 会将其返回给任何能够读取
+实例的密钥，而 EC2 则通过 <code>DescribeInstanceAttribute</code>。对于 AWS，仅向验证者提供表格中的三项
+操作，切勿 <code>ec2:Describe*</code>。对于 Vultr，假设验证者的密钥可以读取这两个
+令牌。隧道令牌允许某人运行第二个连接器： <code>verify</code> 这会报告任何
+不在服务器上的连接器，且收集器的声明无法通过这种方式伪造，因为每一条
+都会对新的挑战进行签名。使用 <code>--quick-tunnel</code> 第二个密钥则是地址密钥：
+任何读取它的人都可以发布一个虚假地址，而控制面板会接受该地址。</p>
+<p>该收集器的公开声明中未提及服务器地址和登录来源；
+这两项信息均保存在已签名的日志中。</p>
+<h2 id="debug-deployment-and-lock">调试部署与锁定<a class="anchor" href="#debug-deployment-and-lock" aria-label="本节链接">#</a></h2>
+<p><code>--debug-ssh-key KEY --debug-ssh-from 198.51.100.4</code> 仅支持来自单一地址
+或小型网络（IPv4 最多 /24，IPv6 最多 /48）的单个密钥的 SSH 连接。 <code>KEY</code> 已向
+服务商注册：Hetzner 项目中 SSH 密钥的名称或 ID、DigitalOcean 团队中
+SSH 密钥的 ID 或指纹、其个人资料中的 SSH 密钥已添加到 root 用户的 Linode 用户名、
+Vultr 账户中 SSH 密钥的 ID，或该区域内 EC2 密钥对的名称。这些
+选项不适用于 <code>generic</code>。此类部署将被记录为 <code>debug</code> ，且<strong>绝不会</strong>被报告为
+高可信度。操作完成后，请运行 <code>sudo tgwitness-lock</code> 作为最后一次
+SSH 会话的最后一条命令，然后：</p>
+<pre><code class="language-sh">python -m tgwitness.cloud lock --record deployments/case-2026-11/deployment.json --provider-token-file hetzner.token</code></pre>
+<p>防火墙会丢失所有入站规则。随后生成的报告会显示何时允许了 SSH 连接以及何时
+将其关闭；该窗口将保持可见状态。</p>
+<h2 id="remove-a-deployment">删除部署<a class="anchor" href="#remove-a-deployment" aria-label="本节链接">#</a></h2>
+<p><code>destroy</code> 删除服务器及其防火墙（通过部署标签定位），以便
+中途失败的部署也会被移除，随后删除指向其
+隧道的 DNS 记录以及隧道本身。服务器的日志和签名密钥将一并删除：请先导出
+证据。记录将保留，并标记为 <code>removed</code>，并附有删除操作的API调用记录。</p>
+<pre><code class="language-sh">python -m tgwitness.cloud destroy --record deployments/case-2026-11/deployment.json --confirm case-2026-11 \
+    --provider-token-file hetzner.token --cloudflare-token-file cloudflare.token</code></pre>
+<p>针对 Hetzner，已通过 API 实现了内容删除功能。对于其他服务商 <code>destroy</code> 在删除任何内容之前
+需先停止服务，并在服务商控制台中指定要删除的标签。手动安装的
+服务器（<code>generic</code>）仅会丢失其隧道和 DNS 记录。快速隧道部署无需
+Cloudflare 令牌：其隧道仅连接至服务器，且相关帖子将在 ntfy.sh 上于
+12 小时内过期。</p>
+<h2 id="any-server-self-attested">任意服务器（自我认证）<a class="anchor" href="#any-server-self-attested" aria-label="本节链接">#</a></h2>
+<p><code>--provider generic</code> 适用于购买或手动安装的服务器。 <code>deploy</code> 用于创建隧道
+和 DNS，并写入 <code>install.sh</code> （私有）和 <code>install.redacted.sh</code> （用于发布），然后进入等待状态。
+将 <code>install.sh</code> 到新安装的 Ubuntu 24.04 服务器上，并在该服务器上运行：</p>
+<pre><code class="language-sh">sudo bash install.sh</code></pre>
+<p>它会记录主机当时的原始状态（登录信息、账户、 <code>authorized_keys</code>、监听套接字、
+服务、定时任务、软件包）的原始状态，安装该提交，启用主机防火墙，删除
+自身，屏蔽 SSH 并结束会话。此类服务器的报告充其量只能
+<strong>算是“自我证明”</strong>：无论谁运行了安装程序，在运行之前都已拥有 root 权限，且验证者无法获取
+任何提供商记录。但这仍优于来源不明的服务器：资产清单、
+安装程序哈希值以及此后每次登录都经过了签名。</p>
+<h2 id="verify">验证<a class="anchor" href="#verify" aria-label="本节链接">#</a></h2>
+<p>验证者需要 <code>deployment.json</code>已发布的安装程序、只读凭据，以及
+最好是该提交的代码检出和证据 ZIP：</p>
+<pre><code class="language-sh">git clone -c core.autocrlf=false https://github.com/phishdestroy/TgWitness.git checkout
+git -C checkout checkout 0123456789abcdef0123456789abcdef01234567
+python -m tgwitness.cloud verify --record deployment.json \
+    --provider-token-file read-only.token --cloudflare-token-file cloudflare-read.token \
+    --fingerprint COLLECTOR_FINGERPRINT --cloud-init cloud-init.redacted.yaml \
+    --source checkout --evidence tgwitness-evidence.zip --report report.md</code></pre>
+<p>验证器会在该时刻请求每个提供商和 Cloudflare 的值；记录
+仅提供需要查询的 ID。退出代码 0 表示通过<strong>（PASS）</strong>，1 表示<strong>失败（FAIL）</strong>，2 表示
+<strong>待审核（REVIEW）</strong>、<strong>不完整（INCOMPLETE）</strong>或<strong>自我认证（SELF-ATTESTED）</strong>。 <code>--fingerprint</code> 应来自一个独立的
+频道；若无此信息，则仅将密钥与运营商的记录进行比对。 <code>python verify.py</code>
+仍会像“<a href="../evidence/">证据</a>”部分所述那样，自行验证证据ZIP。</p>
+<p>提供商操作分为以下几类：创建操作以及在创建后 30 分钟内启动的操作均通过审核；
+控制台、救援、密码重置、重建、ISO、镜像、快照、备份、系统管理器、
+EC2 实例连接和防火墙开放操作若失败；电源操作以及任何意外操作
+均会被标记为待审查。未知操作绝不会悄无声息地通过审核。</p>
+<h2 id="report-for-evidence-handover">证据移交报告<a class="anchor" href="#report-for-evidence-handover" aria-label="本节链接">#</a></h2>
+<p><code>--report report.md</code> 生成 Markdown 报告，并 <code>report.json</code> 其旁边：</p>
+<ol>
+<li>结果、收集器密钥指纹、部署、提供商、提交、服务器、防火墙、隧道；</li>
+<li>每次检查及其状态和来源（提供商 API、Cloudflare API、收集器声明、
+    证据日志）；</li>
+<li>提供者日志，其中包含每项操作的评估结果，以及（若提供者进行了记录）操作执行者；</li>
+<li>Cloudflare 端点，用于存储隧道的连接信息、配置和审计日志；</li>
+<li>经签名的收集者声明；</li>
+<li>该报告阐明了哪些内容，又未阐明哪些内容；</li>
+<li>用于重现该功能的命令，以及每个输入文件的SHA-256。</li>
+</ol>
+<p>提交报告、 <code>report.json</code>, <code>deployment.json</code>、已发布的安装程序以及
+证据 ZIP。请尽早生成报告：服务商的日志保存期限有限。</p>
+<h2 id="cloudflare-as-an-outside-witness">Cloudflare 作为外部见证方<a class="anchor" href="#cloudflare-as-an-outside-witness" aria-label="本节链接">#</a></h2>
+<p>此处所有内容均为可选。即使没有 Cloudflare 账户，服务器仍可运行，且其中两项
+功能目前已可正常使用：</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>功能展示</th>
+<th>在 TgWitness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>快速隧道或您域名的隧道</td>
+<td>该面板仅可通过隧道访问</td>
+<td>服务器向导，参见上文</td>
+</tr>
+<tr>
+<td>drand 中继 <code>drand.cloudflare.com</code></td>
+<td>drand 轮之后生成的记录比它更新：日志是边进行边撰写的</td>
+<td>证据模式、<strong>更多见证者</strong>、无账户（<a href="../evidence/#optional-records-in-evidence-mode-drand-and-telegram-devices">格式</a>）</td>
+</tr>
+<tr>
+<td>隧道状态通知</td>
+<td>当隧道中断时，通过电子邮件或来自 Cloudflare 的 Webhook 通知</td>
+<td>在 Cloudflare 控制台中进行设置</td>
+</tr>
+<tr>
+<td>网关 DNS（<code>--gateway-dns</code>，或在向导中称为 <strong>Cloudflare Gateway DNS</strong>）</td>
+<td>服务器查询的每个名称，均由 Cloudflare 通过 TLS 响应；Hetzner 防火墙不允许 DNS 访问其他任何内容；网关策略是否可以重写响应</td>
+<td>Hetzner，免费“零信任”套餐，不提供域名； <code>verify</code> 检查防火墙、位置、日志记录、策略、服务器查询及审计日志；证据模式会将日志复制到日志簿中</td>
+</tr>
+<tr>
+<td>与 Cloudflare 的网关：服务器上运行一个客户端，并配置出站防火墙，仅允许连接 Cloudflare</td>
+<td>服务器建立的每次连接，而不仅仅是 DNS 连接</td>
+<td>尚未开发</td>
+</tr>
+<tr>
+<td>面板前方的访问入口</td>
+<td>谁在何时登录了该面板</td>
+<td>尚未实现：需要您自己的域名</td>
+</tr>
+<tr>
+<td>SSH 命令日志记录</td>
+<td>调试会话中的每个命令</td>
+<td>尚未开发</td>
+</tr>
+</tbody>
+</table></div>
+<p>Logpush（该功能会将 Cloudflare 的副本保存在 R2 中）是一项企业级功能：在免费
+套餐中，Cloudflare 会 <code>logpush is not enabled for this account</code>。其网关日志在该处保留 24
+小时，因此“证据模式”会将其复制到已签名的日志中（即 <strong>Cloudflare Gateway 记录的
+该服务器的 DNS 查询日志</strong>，这是一个具有“账户分析读取”权限的只读令牌）。</p>
+<p>如果没有“零信任”方案，一个账户只有一个 DNS 位置。当 Cloudflare 拒绝另一个位置时，
+服务器会共享现有的位置，并通过其地址来区分查询；该过滤器
+也需要“零信任”PII 读取权限，并且 <code>destroy</code> 这会留下一个共享位置。一次日志查询的跨度
+最多为三小时，因此复制和 <code>verify</code> 读取操作需在三小时的时段内完成。</p>
+<p>Gateway DNS 负责系统解析器。通过 443 端口以 DNS over HTTPS 方式连接至其他解析器，以及
+连接至未被任何地方查询的地址（例如 Telegram 的数据中心）的连接，均不会
+记录在日志中。</p>
+<p>Cloudflare 无法查看 Telegram 的加密内容、该 Telegram 账户下的其他设备
+（“证据模式”的设备列表是从 Telegram 端记录的）或服务提供商的虚拟机管理程序。</p>
+<p>2026年11月1日，Gateway DNS 针对真实的 Hetzner Cloud 及一个免费的 Cloudflare 账户进行了测试：
+Hetzner 接受了出站规则，服务器安装了 v0.7.0 版本，所有查询均
+通过 TLS 经由 Gateway 进行，快速隧道能够穿透该防火墙，并且 <code>verify</code> 从Cloudflare读取
+到了该服务器的19个域名（Ubuntu和Hetzner镜像、GitHub、PyPI、NTP、
+隧道、ntfy.sh）。测试小组将八个窗口中的36条查询复制到日志中，并
+<code>verify.py</code> 并完整地汇总了这些查询； <code>destroy</code> 移除了服务器和防火墙，并离开了
+该共享位置。</p>
+<h2 id="what-this-does-not-establish">这并未说明以下内容<a class="anchor" href="#what-this-does-not-establish" aria-label="本节链接">#</a></h2>
+<ul>
+<li>服务提供商及其员工负责管理虚拟机管理程序、磁盘和网络。</li>
+<li>主机指标由收集器自行报告。</li>
+<li>早期防火墙规则的内容并非在每个服务商的日志中都有记录；只有 Linode 会保留规则版本信息。</li>
+<li>该工具并未提供有关消息真实性的新信息；请参阅<a href="../evidence/">“证据”部分</a>。</li>
+</ul>
+<h2 id="tested-here">在此处进行了测试<a class="anchor" href="#tested-here" aria-label="本节链接">#</a></h2>
+<p>部署、锁定和验证逻辑通过针对模拟的
+Hetzner、DigitalOcean、Linode、Vultr、EC2/CloudTrail 和 Cloudflare API 的自动化测试进行验证，这些模拟 API 是根据其
+已发布的 API 参考文档构建的；此外，AWS 请求签名也依据 AWS 发布的示例进行验证。
+<code>tools/check_cloud_wizard.py</code> 以相同方式运行面板的服务器向导，支持域名配置和
+快速隧道功能。 <code>tools/check_tdx.py</code> 验证来自 dcap-qvl 和 dstack 的真实英特尔 TDX 证明，
+直至英特尔的根证书（源代码位于 <a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/tdx/README.md">tools/tdx/README.md</a>）； <code>tools/check_phala.py</code>针对一个模拟的 Phala Cloud 运行部署、验证、日志记录、销毁以及面板向导，
+该 Phala Cloud 的认证信息来自一个模仿英特尔 PKI 结构的伪造 PKI。Phala 路径尚未
+在 Phala Cloud 本身上进行过测试。</p>
+<p>2026年11月1日，快速隧道路径在真实的 <strong>Hetzner Cloud</strong>（纽伦堡， <code>cpx22</code>，
+TgWitness v0.7.0）、真实的 ntfy.sh 以及 GitHub 进行了测试，测试方式包括通过控制面板和代码执行：</p>
+<ul>
+<li>价格核对后，通过面板上的按钮进行创建：服务器在 13 秒后开始运行，
+    大约两分钟后，生成包含与实例和安装程序哈希值匹配的签名声明；</li>
+<li>通过其 trycloudflare.com 地址打开的服务器自有控制面板，并接受了
+    控制面板令牌；若无该令牌，则返回 401 状态码；</li>
+<li>通过 Hetzner API 重启后，服务器发布了一个新的签名地址，<strong>查找
+    当前地址</strong>后已找到，旧地址不再响应，签名密钥保持
+    不变；发送到 ntfy.sh 主题的一条未签名帖子被忽略；</li>
+<li><code>verify</code> 针对 Hetzner 的 API：服务器、无入站规则的防火墙、声明、绑定、
+    主机测量、启动以及 v0.7.0 检出版本的源代码哈希均通过测试；如上所述，Cloudflare
+    的检测不可用；安装程序与 v0.7.0 构建的版本不同，
+    但与本版本代码构建的安装程序字节对字节完全一致；</li>
+<li>从面板中删除操作会精确移除该部署所标记的特定服务器和防火墙；
+    同一项目中的其他服务器和防火墙则不受影响。</li>
+</ul>
+<p>尚未在真实账户上运行：包括在您自己的域名下部署（Cloudflare 隧道和
+DNS）、其他服务商、调试部署以及 <code>lock</code>，该服务器上的 Telegram 账户，
+以及通过快速隧道获取后续版本的实时更新。请通过
+以下链接查看各服务商的首个部署： <code>plan</code>，以及调试部署， <code>verify</code> ，以及，再将其应用于具体案例。</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/HIGH-ASSURANCE.md">在 GitHub 上编辑此页面 ↗</a><a class="next-guide" href="../panel/"><span>下一步</span><strong>面板指南 →</strong></a><p>这些指南描述了当前的实现方案。验证结果和剩余缺陷在其他文档中单独记录。 <a href="../verification/">已测试的内容 →</a></p></footer>
+</main>
+<aside class="toc" aria-label="本页面内容"><p class="nav-label">本页面内容</p><a href="#what-a-verifier-can-check">验证者可以检查的内容</a><a href="#providers">提供商</a><a href="#confidential-vm-on-phala-cloud-intel-tdx">Phala Cloud 上的机密虚拟机（Intel TDX）</a><a href="#before-you-start">开始之前</a><a href="#from-the-panel">来自面板</a><a href="#quick-tunnel-without-a-domain">无需域名的快速隧道</a><a href="#deploy">部署</a><a href="#debug-deployment-and-lock">调试部署与锁定</a><a href="#remove-a-deployment">删除部署</a><a href="#any-server-self-attested">任意服务器（自我认证）</a><a href="#verify">验证</a><a href="#report-for-evidence-handover">证据移交报告</a><a href="#cloudflare-as-an-outside-witness">Cloudflare 作为外部见证方</a><a href="#what-this-does-not-establish">这并未说明以下内容</a><a href="#tested-here">在此处进行了测试</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>开源 · 可在您的设备上运行</span><a href="../../../../LICENSE">MIT 许可协议</a><a href="../notice/">操作员通知</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">安全</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "等待消息", "Step through a fictional send, edit and delete.": "通过一个虚构的发送、编辑和删除过程进行演示。", "No observations yet. Start the sequence or advance one event.": "尚无观察记录。开始序列或跳转至下一事件。", "Meet at 10:00": "10:00 见面", "A new message is visible in the chat.": "聊天中显示了一条新消息。", "Record 1 appended: the collector observed the original message.": "已附录记录 1 条：采集器已捕获原始消息。", "Meet at 11:00": "11:00 见面", "The current text changes. The earlier observation stays.": "当前文本内容有所变更。先前的观察结果仍然有效。", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "记录 2 已追加：该编辑内容为新观察结果。记录 1 仍保留原始文本。", "Message deleted": "消息已删除", "The message has disappeared from the chat view.": "该消息已从聊天界面中消失。", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "已添加记录 3：删除通知与两个被观察到的版本一同保留。", "0 records": "0 条记录", "1 record": "1 条记录", "2 records": "2 条记录", "3 records": "3 条记录", "Complete / {n} of 3": "已完成 / {n}/3", "Step / {n} of 3": "第 {n} 步（共 3 步）", "Pause": "暂停", "Replay sequence": "回放序列", "Play sequence": "播放序列", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "静态示例已上线。如需交互式计算哈希值，请通过 HTTPS 访问此页面，或在支持 Web Crypto 的本地预览环境中打开。", "No record supplied": "未提供记录", "Tail removed": "尾部内容已删除", "≠ saved hash": "≠ 已保存的哈希值", "Rebuilt · different hash": "重建 · 哈希值不同", "= saved hash": "= 已保存的哈希值", "Same length and matching head.": "篇幅相同且标题一致。", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "这三个计算出的哈希值均与保存的哈希值一致。该样本符合保留的三个记录边界。", "Same saved head; the journal prefix fails verification.": "保存的头部信息相同；日志前缀验证失败。", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "记录 2 与其保存的哈希值不再匹配。若仅检查最终存储的头部，则会遗漏此问题；验证器会检查每一条记录。", "Head differs from the retained checkpoint.": "标题与保留的检查点不同。", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "重建的哈希值相互关联，但最终的头部已发生变化。保留的检查点拒绝接受这一历史记录。对于已更改的记录，原始签名也会验证失败。", "Too short: 2 supplied records \u003c 3 retained records.": "内容过短：提供的记录有 2 条，而保留的记录少于 3 条。", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "剩下的两个哈希值仍然匹配。保留的检查点揭示了缺失的部分。如果没有那个早先的边界，仅凭这个较短的前缀是无法揭示这一遗漏的。", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "此浏览器不支持哈希计算。下方的公式和静态说明仍可查看。", "{n} records": "{n}条记录", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "已接受：计数持续增加，签名已验证，密钥匹配。该见证者保留了这一新边界。", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "回滚：签名后的结果报告的记录数量少于上次被接受的检查点。Witness 会记录该问题，并保留较早被接受的边界。", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "分叉：计数保持不变，但分支头不同。见证者会记录该分歧，并保留先前被接受的分界点。", "No answer": "无回答", "boundary unknown": "边界未知", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "无响应：该工具会记录验证失败的情况。它无法确定收集器的当前状态。如果该工具仍能访问 Bot API 且其发布政策允许，则会发布该失败信息。", "Send {n}": "发送 {n}", "Edit {n}": "编辑 {n}", "Delete {n}": "删除 {n}", "Both accounts captured all six expected observations in this example.": "在这项示例中，这两个账户均捕获了预期的全部六项观察结果。", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "账户 B 依然成功捕获了 6 条中的 6 条。其中两条收据的捕获耗时较长。捕获率和收据延迟反映的是不同的问题。", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "账户 B 在截止时间前捕获了 6 条中的 5 条（83.3%）。缺失的编辑操作未测得延迟。此结果仅描述了这六项受控操作。", "not observed by cutoff": "未在截止时间前观察到", "{s} seconds": "{s}秒", "Exact values follow in the table.": "具体数值见下表。", "{s} s": "{s} s", "Not observed": "未发现", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "四个聊天群组提供了不同的观察结果。请追溯每条连接的源记录；在未确认发件人身份的情况下，请勿将该频道帖子归因于用户 71001。", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "记录 #146 和 #205 显示相同的发件人 ID：71001。这将同一 Telegram 账号在两个聊天群组中发布的帖子关联起来。但这并不能识别现实世界中的具体个人，也无法确定该频道帖子的发布者。", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "目标地址 pay.example.invalid/new 出现在群组记录 #146、机器人键盘 #173、频道编辑 #188 以及私信 #205 中。目标地址的重复出现表明这些内容之间存在关联；但这并不能证明这些账户受共同控制。", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "在此虚构案例中，已完成的媒体收据 #151 和 #209 具有完全相同的 SHA-256 值。请对比实际字节内容及其关联的消息记录。该匹配文件既未标识其创建者，也无法证明是谁转发了该文件。", "the encrypted off-site copy": "加密的异地副本", "notifications": "通知", "checkpoint hashes for timestamps": "时间戳的检查点哈希值", "signed checkpoints for the witness": "TgWitness 的签名检查点", "Switched on in this example": "在此示例中已启用", "Optional · off by default": "可选 · 默认关闭", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "离开这台机器时：Telegram 连接和 {list}。除此之外别无他物。", "Default: only the Telegram connection leaves this machine.": "默认设置：仅 Telegram 连接会离开这台机器。", "{done} of {total} done": "已完成 {done}/{total}", "Mark step {n} as done": "将步骤 {n} 标记为已完成", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "文案", "Copied": "已复制", "Command copied.": "已复制该指令。", "Selected — Ctrl/Cmd+C": "选中 — Ctrl/Cmd+C", "Command selected. Copy it manually.": "已选中命令。请手动复制。", "Command copied to clipboard.": "命令已复制到剪贴板。", "Select text": "选择文本", "Clipboard unavailable. Command selected; copy it manually.": "剪贴板不可用。已选中命令；请手动复制。", "A message arrives. The first observation is saved.": "一条消息送达。首次记录被保存。", "The time changes. Both captured versions stay.": "时间会改变，但两个记录版本都会保留下来。", "The message disappears. The captured history remains.": "消息虽已消失，但记录的历史依然存在。", "Pause example animation": "暂停示例动画", "Play example animation": "播放示例动画", "Play": "播放", "Full-size workspace screenshot": "全屏工作区截图", "Workspace screenshot · fictional data": "工作区截图 · 虚构数据", "Close": "关闭", "Close screenshot": "关闭截图", "Scrollable full-size screenshot": "可滚动全屏截图", "Enlarge: {name}": "放大：{name}", "View full size": "查看大图", "Step {n} of {total}": "第 {n} 步，共 {total} 步"}</script>
+</body></html>

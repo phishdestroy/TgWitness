@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>نشر عالي الأمان · مرجع | TgWitness</title>
+<meta name="description" content="خادم مغلق يعمل على مدار الساعة طوال أيام الأسبوع على Hetzner أو Phala Cloud، وبوابة DNS، وعمليات التحقق التي يمكن لطرف ثالث تكرارها."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/high-assurance/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="ar_AR">
+<meta property="og:title" content="نشر عالي الأمان · مرجع | TgWitness"><meta property="og:description" content="خادم مغلق يعمل على مدار الساعة طوال أيام الأسبوع على Hetzner أو Phala Cloud، وبوابة DNS، وعمليات التحقق التي يمكن لطرف ثالث تكرارها.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/ar/docs/reference/high-assurance/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/high-assurance/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-assurance/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/high-assurance/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/high-assurance/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/high-assurance/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/high-assurance/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/high-assurance/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/high-assurance/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/high-assurance/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/high-assurance/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/high-assurance/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/high-assurance/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/high-assurance/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/"><link rel="alternate" type="text/markdown" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/high-assurance/index.md"><link rel="describedby" href="https://phishdestroy.github.io/TgWitness/llms.txt" type="text/plain"><link rel="sitemap" type="application/xml" href="https://phishdestroy.github.io/TgWitness/sitemap.xml"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/ar/docs/reference/high-assurance/", "url": "https://phishdestroy.github.io/TgWitness/ar/docs/reference/high-assurance/", "name": "نشر عالي الأمان · مرجع | TgWitness", "description": "خادم مغلق يعمل على مدار الساعة طوال أيام الأسبوع على Hetzner أو Phala Cloud، وبوابة DNS، وعمليات التحقق التي يمكن لطرف ثالث تكرارها.", "inLanguage": "ar", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}, "breadcrumb": {"@id": "https://phishdestroy.github.io/TgWitness/ar/docs/reference/high-assurance/#breadcrumb"}}, {"@type": "BreadcrumbList", "@id": "https://phishdestroy.github.io/TgWitness/ar/docs/reference/high-assurance/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "الصفحة الرئيسية", "item": "https://phishdestroy.github.io/TgWitness/ar/"}, {"@type": "ListItem", "position": 2, "name": "التوثيق", "item": "https://phishdestroy.github.io/TgWitness/ar/docs/"}, {"@type": "ListItem", "position": 3, "name": "مرجع", "item": "https://phishdestroy.github.io/TgWitness/ar/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "نشر عالي الأمان", "item": "https://phishdestroy.github.io/TgWitness/ar/docs/reference/high-assurance/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">الانتقال إلى المحتوى</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / التوثيق</span></a>
+<nav aria-label="الأدلة الإرشادية"><a href="../../concepts/">دليل مرئي</a><a href="../../">جميع الأدلة الإرشادية</a><a href="../">مرجع</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="اللغة"><span aria-hidden="true">◍</span> العربية</summary><div class="lang-list"><a href="../../../../docs/reference/high-assurance/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/high-assurance/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/high-assurance/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/high-assurance/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/high-assurance/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/high-assurance/" hreflang="tr" lang="tr">Türkçe</a><a href="./" hreflang="ar" lang="ar" aria-current="true">العربية</a><a href="../../../../fa/docs/reference/high-assurance/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/high-assurance/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/high-assurance/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/high-assurance/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="../../../../vi/docs/reference/high-assurance/" hreflang="vi" lang="vi">Tiếng Việt</a><a href="../../../../zh/docs/reference/high-assurance/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/high-assurance/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/high-assurance/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/high-assurance/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/high-assurance/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/high-assurance/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/high-assurance/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/high-assurance/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/high-assurance/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/high-assurance/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/high-assurance/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/high-assurance/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/high-assurance/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="التبديل بين السمة الفاتحة والداكنة"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="الأدلة الإرشادية"><a href="../../../guides/modes.html">الأوضاع، والسيناريوهات، ومستويات الأدلة</a><p class="nav-label">الخطوات الأولى</p><a href="../../start/">ابدأ في غضون دقائق</a><a href="../../dedicated-account/">حساب مخصص</a><a href="../../accounts/">ربط حساب</a><a href="../../proxies/">اختر وكيلًا</a><a href="../../exports/">التصدير والتحقق</a><a href="../../capture/">التقاط GitHub Actions</a><p class="nav-label">التحقيق وإعداد التقارير</p><a href="../../cases/">التحقيق في جميع الدردشات</a><a href="../../case-board/">إنشاء لوحة القضية (Case Board)</a><a href="../../reports/">تصميم تقرير</a><a href="../../handover/">قم بإعداد نسخة للمشاركة</a><a href="../../groups/">إدارة مجموعة من الحسابات</a><p class="nav-label">فهم الأدلة</p><a href="../../concepts/">تعرف على كيفية عمل الأدلة</a><a href="../../security/">حافظ على أمانها</a><a href="../../witness/">إعداد روبوت «Witness»</a><p class="nav-label">اكتشف المزيد</p><a href="../../archive/">العمل على الأرشيف</a><a href="../../access/">شارك حالة</a><a href="../../server/">حافظ على استمرار عملها</a><a href="../../troubleshooting/">اكتشف ما الذي حدث</a></nav><nav class="wiki-nav" aria-label="مرجع"><p class="nav-label"><a class="nav-label-link" href="../">مرجع</a></p><details class="wiki-group" open><summary>الإعداد</summary><a href="../quickstart/">البداية السريعة</a><a href="../installation/">التثبيت والتحقق والتحديث</a><a href="../settings/">الإعداد الأولي والإعدادات</a><a href="../accounts/">الحسابات وتنسيقات الجلسات</a><a href="../access/">الوصول والأذونات</a><a href="../connection/">الاتصال، والوكلاء، وحماية البيانات</a><a href="../deployment/">النشر</a><a href="./" aria-current="page">نشر عالي الأمان</a></details><details class="wiki-group"><summary>جمع</summary><a href="../panel/">دليل اللوحة</a><a href="../collection/">كيفية عمل عملية الجمع</a><a href="../history/">تحميل سجل المصدر</a><a href="../operations/">سير العمل والعمليات</a><a href="../investigation/">وضع التحقيق</a><a href="../features/">الميزات والقيود</a></details><details class="wiki-group"><summary>الأرشيف والتكاملات</summary><a href="../case-board/">مرجع «لوحة القضية»</a><a href="../analysis/">تحليل الأرشيف</a><a href="../mcp/">MCP للقراءة فقط</a><a href="../media-analysis/">التعرف الضوئي على الحروف (OCR) المحلي والنسخ الصوتي</a><a href="../webhooks/">الويب هوكس الصادرة</a><a href="../showcase/">عرض عام</a></details><details class="wiki-group"><summary>الأدلة</summary><a href="../how-it-works/">كيف تعمل الأدلة</a><a href="../case-reports/">تكوين التقارير والتحقق منها</a><a href="../account-export/">تصدير الحساب</a><a href="../evidence/">تنسيق الأدلة</a><a href="../witness/">شاهد مستقل</a><a href="../timestamp/">الطوابع الزمنية</a><a href="../storage/">التخزين والاستعادة</a></details><details class="wiki-group"><summary>الأمن والمشروع</summary><a href="../security/">الأمن ومعالجة البيانات</a><a href="../architecture/">الهندسة</a><a href="../verification/">ما تم اختباره</a><a href="../license/">إشعار بشأن الترخيص وعدم التوافق المعماري</a><a href="../notice/">إشعار بعدم التوافق مع المشغل</a><a href="../changelog/">سجل التغييرات</a></details></nav><p class="sidebar-note">v0.8.0<br>مفتوحة المصدر · تعمل على جهازك</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="الأدلة الإرشادية"><a href="../../../">الصفحة الرئيسية</a> <span aria-hidden="true">/</span> <a href="../../">التوثيق</a> <span aria-hidden="true">/</span> <a href="../">مرجع</a> <span aria-hidden="true">/</span> <span aria-current="page">نشر عالي الأمان</span></nav>
+<p class="verification-shortcut"><a href="../verification/">ما تم اختباره ←</a></p>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">البحث في الوثائق</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="جرب «proxy» أو «hash chain» أو «token» أو «witness»…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="بحث واضح" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">اكتب كلمة للبحث في الأدلة والمراجع. يبقى البحث في متصفحك.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">مرجع / الإعداد</p><h1>نشر عالي الأمان</h1><p class="guide-outcome">خادم مغلق يعمل على مدار الساعة طوال أيام الأسبوع على Hetzner أو Phala Cloud، وبوابة DNS، وعمليات التحقق التي يمكن لطرف ثالث تكرارها.</p><div class="wiki-body"><p>تثبت السجلات الموقعة أن البيانات لم تتغير <strong>بعد</strong> التوقيع. بالنسبة للحالات الخطيرة،
+يكون السؤال التالي هو ما إذا كان بإمكان أي شخص التلاعب بالبيانات <strong>قبل</strong> التوقيع عليها:
+من قام بتشغيل أداة التجميع، وعلى أي جهاز، وما إذا كان أي شخص قد سجل الدخول إليها. يعمل هذا الوضع الاختياري
+على نشر أداة التجميع بحيث يمكن لطرف ثالث التحقق من ذلك، باستخدام السجلات التي يحتفظ بها
+مزود الخدمة السحابية وCloudflare بدلاً من الاعتماد على أقوال المشغل.</p>
+<p>لا يتغير الاستخدام العادي المحلي واستخدام Docker. لا يعمل أي شيء هنا ما لم تقم بالنشر باستخدام
+<code>python -m tgwitness.cloud</code>، ولا يقرأ المجمع مضيفه إلا عندما يحدد النشر
+<code>TGWITNESS_ASSURANCE</code>.</p>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 931 295" width="931" height="295" role="img" aria-labelledby="flow-9-title flow-9-desc"><title id="flow-9-title">مخطط تدفق</title><desc id="flow-9-desc">المشغل → خادم، وجدار حماية بدون قواعد دخول (واجهة برمجة تطبيقات المزود); المشغل → النفق وDNS (واجهة برمجة تطبيقات Cloudflare); خادم، وجدار حماية بدون قواعد دخول → النفق وDNS (للإرسال فقط); خادم، وجدار حماية بدون قواعد دخول → مفتاح التوقيع الذي تم إنشاؤه على الخادم; Verifier، الرموز المميزة للقراءة فقط → سجل المزود وجدار الحماية; Verifier، الرموز المميزة للقراءة فقط → عنوان موصل النفق ومدخل البيانات; Verifier، الرموز المميزة للقراءة فقط → بيان /api/assurance الموقّع; Verifier، الرموز المميزة للقراءة فقط → ملف ZIP للأدلة</desc><defs><marker id="flow-9-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M365.7 55.0C365.7 90.5 105.7 90.5 105.7 126.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:277" pathLength="277"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="3.1s" repeatCount="indefinite" path="M365.7 55.0C365.7 90.5 105.7 90.5 105.7 126.0"/></circle><path class="flow-edge" d="M365.7 55.0C365.7 147.5 248.9 147.5 248.9 240.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:228" pathLength="228"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.5s" repeatCount="indefinite" path="M365.7 55.0C365.7 147.5 248.9 147.5 248.9 240.0"/></circle><path class="flow-edge" d="M105.7 184.0C105.7 212.0 248.9 212.0 248.9 240.0" marker-end="url(#flow-9-arrow)" style="--i:1;--len:160" pathLength="160"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.8s" repeatCount="indefinite" path="M105.7 184.0C105.7 212.0 248.9 212.0 248.9 240.0"/></circle><path class="flow-edge" d="M105.7 184.0C105.7 207.5 92.4 207.5 92.4 231.0" marker-end="url(#flow-9-arrow)" style="--i:1;--len:50" pathLength="50"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M105.7 184.0C105.7 207.5 92.4 207.5 92.4 231.0"/></circle><path class="flow-edge" d="M532.5 64.0C532.5 99.5 310.4 99.5 310.4 135.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:241" pathLength="241"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.7s" repeatCount="indefinite" path="M532.5 64.0C532.5 99.5 310.4 99.5 310.4 135.0"/></circle><path class="flow-edge" d="M532.5 64.0C532.5 95.0 515.1 95.0 515.1 126.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:65" pathLength="65"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M532.5 64.0C532.5 95.0 515.1 95.0 515.1 126.0"/></circle><path class="flow-edge" d="M532.5 64.0C532.5 95.0 702.5 95.0 702.5 126.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:188" pathLength="188"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.1s" repeatCount="indefinite" path="M532.5 64.0C532.5 95.0 702.5 95.0 702.5 126.0"/></circle><path class="flow-edge" d="M532.5 64.0C532.5 99.5 862.4 99.5 862.4 135.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:344" pathLength="344"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="3.8s" repeatCount="indefinite" path="M532.5 64.0C532.5 99.5 862.4 99.5 862.4 135.0"/></circle><g class="flow-node" style="--i:0"><rect x="313.7" y="15.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="365.7" y="35.0">المشغل</tspan></text></g><g class="flow-node" style="--i:0"><rect x="435.7" y="6.0" width="193.6" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="532.5" y="26.0">Verifier، الرموز المميزة</tspan><tspan x="532.5" y="44.0">للقراءة فقط</tspan></text></g><g class="flow-node" style="--i:1"><rect x="15.8" y="126.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="105.7" y="146.0">خادم، وجدار حماية بدون</tspan><tspan x="105.7" y="164.0">قواعد دخول</tspan></text></g><g class="flow-node" style="--i:1"><rect x="213.6" y="135.0" width="193.6" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="310.4" y="155.0">سجل المزود وجدار الحماية</tspan></text></g><g class="flow-node" style="--i:1"><rect x="425.2" y="126.0" width="179.8" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="515.1" y="146.0">عنوان موصل النفق ومدخل</tspan><tspan x="515.1" y="164.0">البيانات</tspan></text></g><g class="flow-node" style="--i:1"><rect x="623.0" y="126.0" width="159.1" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="702.5" y="146.0">بيان /api/assurance</tspan><tspan x="702.5" y="164.0">الموقّع</tspan></text></g><g class="flow-node" style="--i:1"><rect x="800.1" y="135.0" width="124.6" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="862.4" y="155.0">ملف ZIP للأدلة</tspan></text></g><g class="flow-node" style="--i:2"><rect x="196.9" y="240.0" width="104.0" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="248.9" y="260.0">النفق وDNS</tspan></text></g><g class="flow-node" style="--i:2"><rect x="6.0" y="231.0" width="172.9" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="92.4" y="251.0">مفتاح التوقيع الذي تم</tspan><tspan x="92.4" y="269.0">إنشاؤه على الخادم</tspan></text></g><g class="flow-label" style="--i:0"><rect x="78.6" y="89.0" width="179.8" height="23.0" rx="6"/><text x="168.5" y="100.5" text-anchor="middle" dominant-baseline="central">واجهة برمجة تطبيقات المزود</text></g><g class="flow-label" style="--i:0"><rect x="209.3" y="154.6" width="135.7" height="38.0" rx="6"/><text x="277.1" y="166.1" text-anchor="middle" dominant-baseline="central">واجهة برمجة تطبيقات</text><text x="277.1" y="181.1" text-anchor="middle" dominant-baseline="central">Cloudflare</text></g><g class="flow-label" style="--i:1"><rect x="171.6" y="208.4" width="85.3" height="23.0" rx="6"/><text x="214.3" y="219.9" text-anchor="middle" dominant-baseline="central">للإرسال فقط</text></g></svg></div><details class="flow-steps"><summary>الرسم التخطيطي كنص</summary><ol><li>المشغل → خادم، وجدار حماية بدون قواعد دخول (واجهة برمجة تطبيقات المزود)</li><li>المشغل → النفق وDNS (واجهة برمجة تطبيقات Cloudflare)</li><li>خادم، وجدار حماية بدون قواعد دخول → النفق وDNS (للإرسال فقط)</li><li>خادم، وجدار حماية بدون قواعد دخول → مفتاح التوقيع الذي تم إنشاؤه على الخادم</li><li>Verifier، الرموز المميزة للقراءة فقط → سجل المزود وجدار الحماية</li><li>Verifier، الرموز المميزة للقراءة فقط → عنوان موصل النفق ومدخل البيانات</li><li>Verifier، الرموز المميزة للقراءة فقط → بيان /api/assurance الموقّع</li><li>Verifier، الرموز المميزة للقراءة فقط → ملف ZIP للأدلة</li></ol></details></figure>
+<h2 id="what-a-verifier-can-check">ما يمكن للمحقق التحقق منه<a class="anchor" href="#what-a-verifier-can-check" aria-label="رابط لهذا القسم">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>الادعاء</th>
+<th>كيف يتم التحقق من ذلك</th>
+<th>يتم الاحتفاظ بها بواسطة</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>تم إنشاء الخادم عبر واجهة برمجة تطبيقات (API) المزود في وقت معروف</td>
+<td>كائن الخادم وإنشاؤه في سجل المزود الخاص</td>
+<td>المزود</td>
+</tr>
+<tr>
+<td>لم يستخدم أحد مسارات الوصول الخاصة بالمزود</td>
+<td>سجل طلبات وحدة التحكم، والإنقاذ، وإعادة تعيين كلمة المرور، وإعادة البناء، وملفات ISO، والصور، والنسخ الاحتياطية</td>
+<td>المزود</td>
+</tr>
+<tr>
+<td>لا يمكن لأي شيء الاتصال بها</td>
+<td>لا يحتوي جدار الحماية الخاص بالمزود على أي قواعد للاتصالات الواردة؛ ويتم إخفاء SSH منذ التشغيل الأول</td>
+<td>المزود (جدار الحماية)، المضيف (SSH)</td>
+</tr>
+<tr>
+<td>لا يمكن الوصول إلى اللوحة إلا عبر النفق</td>
+<td>يتم توجيه مدخل النفق إلى اللوحة وحدها؛ ويعمل الموصل من عنوان الخادم</td>
+<td>Cloudflare</td>
+</tr>
+<tr>
+<td>هذا البرنامج بالذات يعمل</td>
+<td>تتطابق قيمة التجزئة الموقعة لشجرة المصدر الخاصة بـ«الجامع» مع نسخة من الالتزام الذي تم نشره</td>
+<td>Collector، تمت مقارنته مع Git</td>
+</tr>
+<tr>
+<td>تم إنشاء مفتاح التوقيع على ذلك الخادم</td>
+<td>يقوم المفتاح بتوقيع بيان يحدد معرّف خادم المزود وهاش ملف cloud-init الذي تلقّاه</td>
+<td>Collector، تمت مقارنته مع المزود</td>
+</tr>
+<tr>
+<td>تنتمي اليومية إلى ذلك المفتاح والخادم</td>
+<td>كل عملية تبدأ في الدليل ZIP تحمل قياس المضيف لذلك الخادم</td>
+<td>الأدلة ZIP</td>
+</tr>
+</tbody>
+</table></div>
+<p>يتم الإبلاغ عن قياسات المضيف (مستمعات وعمليات SSH، والجلسات الحالية، وعمليات تسجيل الدخول في <code>wtmp</code>، وعملية التشغيل)
+يتم الإبلاغ عنها من قِبل المجمع نفسه ويتم توقيعها عند بدء كل عملية وفي
+<code>host.state</code> السجلات كلما تغيرت. يمكن لـ «root» على الخادم تزويرها؛ وهي
+تدعم سجلات المزود وCloudflare بدلاً من استبدالها.</p>
+<h2 id="providers">المزودون<a class="anchor" href="#providers" aria-label="رابط لهذا القسم">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th><code>--provider</code></th>
+<th>بيانات الاعتماد</th>
+<th>وصول «Verifier» للقراءة فقط</th>
+<th>سجل المزود الخاص بالمدقق</th>
+<th>يُحتفظ بها من أجل</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hetzner</code></td>
+<td><code>HCLOUD_TOKEN</code></td>
+<td>قراءة الرمز المميز لنفس المشروع</td>
+<td>إجراءات الخادم وجدار الحماية</td>
+<td>طالما أن الموارد متوفرة</td>
+</tr>
+<tr>
+<td><code>digitalocean</code></td>
+<td><code>DIGITALOCEAN_TOKEN</code></td>
+<td>رمز وصول شخصي للقراءة فقط</td>
+<td>إجراءات Droplet</td>
+<td>طالما أن Droplet موجود</td>
+</tr>
+<tr>
+<td><code>linode</code></td>
+<td><code>LINODE_TOKEN</code></td>
+<td><code>linodes</code>, <code>firewall</code>, <code>events</code> نطاقات للقراءة فقط</td>
+<td>أحداث الحساب، وإصدارات قواعد جدار الحماية</td>
+<td>90 يومًا</td>
+</tr>
+<tr>
+<td><code>vultr</code></td>
+<td><code>VULTR_API_KEY</code></td>
+<td>المستخدم الذي يتمتع بحق الوصول للقراءة و <code>activity_logs</code> الإذن</td>
+<td>سجل نشاط الحساب (الطريقة، المسار، الفاعل)</td>
+<td>30 يومًا، ويمكن تمديد المدة مع الاشتراك في سجل التدقيق</td>
+</tr>
+<tr>
+<td><code>aws</code></td>
+<td><code>AWS_ACCESS_KEY_ID</code>, <code>AWS_SECRET_ACCESS_KEY</code></td>
+<td><code>ec2:DescribeInstances</code>, <code>ec2:DescribeSecurityGroups</code>, <code>cloudtrail:LookupEvents</code></td>
+<td>سجل أحداث CloudTrail</td>
+<td>90 يومًا</td>
+</tr>
+<tr>
+<td><code>phala</code></td>
+<td><code>PHALA_CLOUD_API_KEY</code></td>
+<td>مفتاح API لنفس مساحة العمل</td>
+<td>تحديثات التطبيق: تغييرات في البنية والبيئة، وإعادة التشغيل، وترقيات نظام التشغيل</td>
+<td>طالما أن التطبيق موجود</td>
+</tr>
+<tr>
+<td><code>generic</code></td>
+<td>لا شيء</td>
+<td>لا شيء</td>
+<td>لا شيء: <strong>مصدق ذاتيًا</strong></td>
+<td>–</td>
+</tr>
+</tbody>
+</table></div>
+<p>استخدم مشروعًا أو فريقًا أو حسابًا أو حسابًا فرعيًا مخصصًا لكل حالة: عندئذٍ لن يُظهر حق الوصول
+للمحقق (للقراءة فقط) سوى هذا النشر. تُقرأ بيانات الاعتماد من
+<code>--provider-token-file</code> أو من المتغير أعلاه، وليس أبدًا من سطر الأوامر. بالنسبة لـ AWS، يحتوي الملف
+على <code>ACCESS_KEY_ID SECRET_ACCESS_KEY [SESSION_TOKEN]</code>؛ المنطقة هي <code>--location</code>.</p>
+<p>يتم طباعة ما لا يمكن أن تظهره سجلات كل مزود في كل تقرير. باختصار: تقوم Hetzner
+بتسجيل طلبات وحدة التحكم؛ أما وحدة التحكم في الاستعادة (Recovery Console) الخاصة بـ DigitalOcean، و Lish/Glish الخاصة بـ Linode، ووحدة التحكم على الويب الخاصة بـ Vultr
+فلا يتم تسجيلها على هذا النحو، لذا يتم قفل حساب الجذر (root) عند أول عملية تشغيل، ويحتاج تسجيل الدخول إلى وحدة التحكم
+إلى إعادة تعيين كلمة المرور أو تغيير طريقة التشغيل، وهما أمران يتم تسجيلهما. تقوم Vultr بإرجاع عنوان وحدة التحكم
+إلى أي مفتاح يمكنه قراءة المثيل؛ ولا يتم تخزينه لا في السجل ولا في التقرير.</p>
+<h2 id="confidential-vm-on-phala-cloud-intel-tdx">آلة افتراضية سرية على Phala Cloud (Intel TDX)<a class="anchor" href="#confidential-vm-on-phala-cloud-intel-tdx" aria-label="رابط لهذا القسم">#</a></h2>
+<p>مع <code>--provider phala</code> يعمل المجمع في آلة افتراضية سرية من نوع Intel TDX على
+<a href="https://phala.com/">Phala Cloud</a>، التي تديرها dstack. لا يمكن للمضيف وموظفي Phala قراءة
+ذاكرتها، ويوقع المعالج على شهادة تثبت ما تم تشغيله على الآلة. ولا يكتفي المُحقق
+بكلمة Phala في هذا الشأن: <code>tgwitness.tdx</code> فإنه يتحقق بنفسه من كل شهادة، وصولًا إلى شهادة Intel
+SGX Root CA المثبتة، بمقارنتها بقوائم الإلغاء الخاصة بـ Intel وبيانات المنصة الموقعة من Intel، ويرفض
+الآلات التي يمكن تصحيح أخطائها أو ترحيلها.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>إدخال تقرير</th>
+<th>ما يعرضه</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tdx_binding</code></td>
+<td>يشمل التصديق البيان الموقّع من قِبل المُجمِّع والقيمة العشوائية لهذا الطلب</td>
+</tr>
+<tr>
+<td><code>tdx_quote</code></td>
+<td>تضمن شركة Intel صحة هذا التصديق؛ ولا يتم اعتماده إلا عندما تصنف Intel المنصة على أنها محدثة</td>
+</tr>
+<tr>
+<td><code>tdx_compose_hash</code></td>
+<td>يقيس RTMR3، الذي يتم إعادة تشغيله من سجل أحداث dstack، عملية إنشاء التطبيق التي يبلغ عنها المجمع</td>
+</tr>
+<tr>
+<td><code>tdx_compose</code></td>
+<td>هذا النص هو، بايتًا بايتًا، نفس النص الذي يبنيه كود الالتزام الذي تم نشره: ملفات المصدر مثبتة بواسطة التجزئة، والصورتان بواسطة الملخص، ولا يوجد أي كود آخر</td>
+</tr>
+<tr>
+<td><code>tdx_identity</code></td>
+<td>يأتي التوثيق من التطبيق والمثيل الذي تم نشره، باستخدام مفاتيح من نظام إدارة المفاتيح (KMS) الخاص بـ Phala وقرص مشفر</td>
+</tr>
+<tr>
+<td><code>tdx_os</code></td>
+<td>مع <code>--tdx-measurements</code>، فإن MRTD و RTMR0-2 يساويان القيم المحسوبة من صورة نظام التشغيل dstack (<code>dstack-mr measure --json</code>)</td>
+</tr>
+</tbody>
+</table></div>
+<p>كل بدء تشغيل للمجمع يتم تسجيله في السجل يحمل مثل هذا التصديق، لذا
+<code>verify --evidence</code> يتم فحص كل عملية بدء. تعمل قائمة Phala لمراجعات التطبيق كـ
+سجل المزود: إذا تغيرت عملية الإنشاء بعد النشر، يفشل التقرير.</p>
+<p>في اللوحة، اختر <strong>«آلة افتراضية سرية · Phala Cloud»</strong>
+ضمن <strong>«إضافات»</strong>
+→ <strong>«خادم 24/7»</strong>
+والصق مفتاح واجهة برمجة تطبيقات Phala Cloud؛ يعمل النفق السريع كما هو الحال على Hetzner. من سطر الأوامر:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud deploy --provider phala --name case-1 --server-type tdx.small \
+    --ref v0.8.0 --repository https://github.com/phishdestroy/TgWitness --quick-tunnel \
+    --provider-token-file phala-key.txt
+python -m tgwitness.cloud verify --record deployments/case-1/deployment.json \
+    --provider-token-file phala-key.txt --cloud-init deployments/case-1/docker-compose.yaml \
+    --source CHECKOUT_OF_COMMIT --tdx-measurements dstack-mr.json</code></pre>
+<p><code>--tdx-collateral</code> يقرأ شهادات Intel وقوائم الإلغاء من ملف بدلاً من
+تنزيلها من Intel. خدمة Gateway DNS غير متوفرة هنا: لا يمتلك Phala جدار حماية من مزود الخدمة
+للحركة الصادرة.</p>
+<p>لا يمكن للتصديق أن يستبعد وجود عيب في وحدة TDX أو الميكروكود الخاص بشركة Intel، أو الوصول المادي إلى
+ناقل الذاكرة. يمكن لأي شخص يتحكم في التطبيق في حساب Phala نشر تكوين آخر؛
+ويظهر هذا التكوين كنسخة معدلة جديدة مع هاش تكوين جديد. يتحكم المضيف في مصدر الوقت
+للجهاز والشبكة.</p>
+<h2 id="before-you-start">قبل أن تبدأ<a class="anchor" href="#before-you-start" aria-label="رابط لهذا القسم">#</a></h2>
+<ol>
+<li>منطقة Cloudflare، ومعرف حسابها، ورمز API مع <strong>تحرير Cloudflare Tunnel</strong> و
+    <strong>قراءة المنطقة</strong> و<strong>تحرير DNS</strong>، مع إرفاقها بـ <code>--cloudflare-token-file</code> أو
+    <code>CLOUDFLARE_API_TOKEN</code>. بالنسبة للمُحقق: <strong>قراءة Cloudflare Tunnel</strong> و<strong>قراءة DNS</strong>، وبالنسبة
+    لسجل التدقيق، <strong>إعدادات الحساب - قراءة</strong>. بدون نطاق، لا يحتاج
+    <a href="#quick-tunnel-without-a-domain">نفق سريع</a> إلى أي من هذا.</li>
+<li>بيانات اعتماد المزود مع حق الوصول للكتابة إلى مشروع مخصص؛ <code>lock</code> يستخدم نفس الشيء:<ul>
+<li>Hetzner: رمز API مع أذونات القراءة والكتابة؛</li>
+<li>DigitalOcean: رمز وصول شخصي مع حق الكتابة؛</li>
+<li>Linode: رمز وصول شخصي مع <code>linodes</code>, <code>firewall</code> و <code>events</code> نطاقات القراءة/الكتابة؛</li>
+<li>Vultr: مفتاح واجهة برمجة التطبيقات (API) لحساب مخصص أو حساب فرعي؛</li>
+<li>AWS: يُسمح باستخدام بيانات اعتماد IAM <code>ec2:DescribeVpcs</code>, <code>ec2:DescribeImages</code>,
+    <code>ec2:CreateSecurityGroup</code>, <code>ec2:AuthorizeSecurityGroupIngress</code>, <code>ec2:RunInstances</code>,
+    <code>ec2:CreateTags</code>, <code>ec2:DescribeInstances</code>, <code>ec2:DescribeSecurityGroupRules</code> و
+    <code>ec2:RevokeSecurityGroupIngress</code>.</li>
+</ul>
+</li>
+<li>التزام التشغيل. يتم تحويل علامة الإصدار مرة واحدة إلى التزامها باستخدام <code>git ls-remote</code>؛
+    ولا يتلقى الخادم سوى الالتزام المكون من 40 حرفًا.</li>
+</ol>
+<h2 id="from-the-panel">من اللوحة<a class="anchor" href="#from-the-panel" aria-label="رابط لهذا القسم">#</a></h2>
+<p>على جهاز الكمبيوتر الخاص بك، تعمل <strong>«Extras → Server 24/7»</strong> بنفس الطريقة <code>deploy</code> بالنسبة لـ Hetzner في ثلاث
+خطوات: اختر أوروبا أو الولايات المتحدة، والصق رمز Hetzner (قراءة وكتابة)، ثم راجع
+نوع الخادم، والسعر الشهري، والعنوان، والإصدار الذي عثرت عليه اللوحة باستخدام هذا الرمز. لا
+يتم إنشاء أي شيء قبل تأكيدك. تعرض اللوحة كل خطوة كما <code>deploy</code> يتم الإبلاغ عنها، ثم
+العنوان، ورمز لوحة التحكم وبصمة مفتاح التوقيع. بدون نطاق، يحصل الخادم على
+<a href="#quick-tunnel-without-a-domain">نفق سريع</a>
+؛ <strong>خوادمك → «البحث عن العنوان الحالي</strong>
+» يبحث عنه مرة أخرى بعد إعادة التشغيل. للحصول على عنوان ثابت تحت نطاقك الخاص، افتح
+<strong>«اختياري · نطاقك الخاص</strong>
+» وأضف رمز Cloudflare (الرابط المُعد مسبقًا يحدد «قراءة المنطقة»
+و«تحرير DNS» و«تحرير نفق Cloudflare»).</p>
+<p>تنتقل الرموز مع كل طلب من علامة تبويب المتصفح إلى TgWitness على نفس الكمبيوتر
+ولا يتم تسجيلها في أي مكان؛ حيث يتم الاحتفاظ بسجل النشر، وملف cloud-init المحجوب، ورمز اللوحة، و
+مفتاح العنوان (لإنشاء نفق سريع) داخل <code>deployments/NAME</code> داخل دليل البيانات.
+لا توفر اللوحة هذه الميزة إلا للمسؤول الرئيسي عبر اتصال لوبباك مباشر
+(<code>127.0.0.1</code>، بدون رؤوس بروكسي أو نفق)؛ أما اللوحة التي يتم الوصول إليها عبر الشبكة فتعرض الأوامر
+بدلاً من ذلك. يكون الإصدار افتراضيًا هو علامة الإصدار الخاصة باللوحة قيد التشغيل، والتي يتم تحديدها من خلال
+واجهة برمجة تطبيقات GitHub. أما الموقع ونوع الخادم والسعر فتأتي من واجهة برمجة تطبيقات Hetzner: <code>cpx22</code> حيثما كان
+متاحًا، وإلا يتم استخدام أرخص نوع x86 بذاكرة لا تقل عن 2 جيجابايت.</p>
+<h2 id="quick-tunnel-without-a-domain">نفق سريع بدون نطاق<a class="anchor" href="#quick-tunnel-without-a-domain" aria-label="رابط لهذا القسم">#</a></h2>
+<p><code>--quick-tunnel</code> يحل محل <code>--zone</code>, <code>--cloudflare-account</code> و <code>--panel-host</code>؛ ولا يتم استخدام أي حساب أو رمز Cloudflare
+في هذه العملية:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server-type cpx22 \
+    --ref 0123456789abcdef0123456789abcdef01234567 --quick-tunnel --provider-token-file hetzner.token</code></pre>
+<p>على الخادم، تفتح خدمة Cloudflare
+<a href="https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/">نفقًا سريعًا</a>
+إلى اللوحة: عنوان عشوائي <code>https://….trycloudflare.com</code> يتغير كلما أُعيد تشغيل cloudflared
+أو الخادم. تقوم خدمة صغيرة على الخادم بنشر كل عنوان في موضوع عشوائي على ntfy.sh
+، موقّعًا (HMAC-SHA256) بمفتاح لا يحتفظ به سوى دليل النشر
+(<code>address-key.txt</code>)، وتكرره كل ثلاث ساعات لأن ntfy.sh يحتفظ بالمنشورات لمدة 12.
+<code>deploy</code> و«<strong>Find the current address</strong>» لا تقبلان سوى المنشورات الموقعة، لذا لا يمكن لمنشور مزور
+إرسالك أنت ورمز لوحة التحكم الخاص بك إلى عنوان شخص آخر. الموضوع موجود في السجل و
+في cloud-init المنشور: يمكن لأي شخص يمتلكهما قراءة العنوان الحالي، الذي لا يزال يطلب
+رمز لوحة التحكم. لا يحتفظ الخادم بأي منفذ وارد في كلتا الحالتين.</p>
+<p>التكلفة: لا يحتفظ أي حساب Cloudflare بسجلات «النفق السريع»، لذا <code>verify</code> تُبلغ
+أن النفق والموصل وفحص DNS غير متاحين، والنتيجة في أحسن الأحوال <code>incomplete</code>؛ أما
+سجلات المزود، وجدار الحماية، والبيان الموقّع، وقياسات المضيف، ومقارنة المثبت، فيتم
+فحصها كالمعتاد. تتطلب مقارنة البايتات مع المثبت المرجعي التزامًا تم نشره
+يعرف بالفعل <code>--quick-tunnel</code>؛ حيث يقوم سحب الإصدار 0.7.0 بإنشاء مُثبِّت النطاق والإبلاغ
+عن الفرق. لا تقدم Cloudflare ضمانًا لوقت التشغيل للأنفاق السريعة، وتسمح بـ 200 طلب
+قيد التنفيذ ولا تنقل أحداث Server-Sent Events، لذا فإن التحديثات المباشرة للوحة التحكم (الإصدارات بعد 0.7.0)
+قد لا تصل عبرها وقد يتطلب العرض إعادة التحميل؛ لم يتم تجربة هذا الجزء. في حالة
+تتطلب الاستمرارية، استخدم نطاقك الخاص.</p>
+<h2 id="deploy">النشر<a class="anchor" href="#deploy" aria-label="رابط لهذا القسم">#</a></h2>
+<p>اطلع أولاً على كل ما سيتم إرساله. <code>plan</code> لا يُرسل أي طلب إلى مزود الخدمة أو إلى Cloudflare:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud plan --provider hetzner --name case-2026-11 --server-type cpx22 \
+    --ref 0123456789abcdef0123456789abcdef01234567 --zone example.org \
+    --cloudflare-account CLOUDFLARE_ACCOUNT_ID --panel-host case.example.org</code></pre>
+<p>ثم قم بالنشر باستخدام نفس الخيارات وبيانات الاعتماد:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server-type cpx22 \
+    --ref 0123456789abcdef0123456789abcdef01234567 --zone example.org \
+    --cloudflare-account CLOUDFLARE_ACCOUNT_ID --panel-host case.example.org \
+    --witness-host case-witness.example.org \
+    --provider-token-file hetzner.token --cloudflare-token-file cloudflare.token</code></pre>
+<p>أنواع الخوادم التي يمكن البدء بها: <code>cpx22</code> (Hetzner)، <code>s-1vcpu-2gb</code> (DigitalOcean)، <code>g6-standard-1</code>
+(Linode)، <code>vc2-1c-2gb</code> (Vultr)، <code>t3.small</code> (AWS). <code>--location</code> و <code>--image</code> يتم تعيين الإعداد الافتراضي لكل
+مزود على Ubuntu 24.04 في منطقة أوروبية.</p>
+<p><code>--repository</code> يأخذ الالتزام من مستودع Git آخر عبر https، دون بيانات اعتماد في
+عنوان URL (يقبل الإعداد الافتراضي <code>https://github.com/phishdestroy/TgWitness.git</code>). <code>deploy</code> يقبل أيضًا <code>--out</code>
+لدليل نشر آخر (الافتراضي <code>deployments/NAME</code>؛ ويتم رفض الدليل الذي يحتوي بالفعل على
+نشر) و <code>--wait</code>، عدد الدقائق التي يجب انتظارها للحصول على البيان الموقّع من المجمع:
+من 1 إلى 240، الافتراضي 20، أو 60 لـ <code>generic</code>.</p>
+<p>الأمر:</p>
+<ol>
+<li>تنشئ نفق Cloudflare يقوم مدخله بإعادة توجيه اسم مضيف اللوحة إلى اللوحة،
+    وإذا تم تحديده، اسم مضيف الشاهد إلى <code>/api/witness/head</code> و <code>/api/assurance</code> فقط؛</li>
+<li>تقوم بإنشاء سجلات CNAME عبر الوكيل لتلك أسماء المضيفين، مع رفض الأسماء الموجودة بالفعل؛</li>
+<li>ينشئ جدار حماية للمزود بدون قواعد دخول وخادمًا خلفه بدون مفتاح SSH،
+    وبدون نسخ احتياطية، وبدون وكيل وحدة التحكم، و`cloud-init` الذي يخفي SSH، ويقفل حساب الجذر، ويقوم بتثبيت
+    <code>cloudflared</code>، ويجلب الالتزام بالضبط، ويتحقق منه، ويبدأ تشغيل TgWitness كخدمة
+    systemd معززة؛</li>
+<li>ينتظر البيان الموقّع من المجمع ويتحقق من أنه يذكر اسم هذا الخادم و
+    التجزئة الخاصة بـ cloud-init هذا.</li>
+</ol>
+<p><code>deployments/case-2026-11/</code> ثم تحتوي على:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>ملف</th>
+<th>المحتويات</th>
+<th>مشاركة؟</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>deployment.json</code></td>
+<td>المعرفات، والتجزئات، وطلبات واجهة برمجة التطبيقات (الطريقة، المسار، الحالة)، والبيان الأول الموقّع</td>
+<td>نعم، باستخدام أداة التحقق</td>
+</tr>
+<tr>
+<td><code>cloud-init.redacted.yaml</code></td>
+<td>تم استبدال الأمر الدقيق لـ cloud-init مع سرّيه بـ <code>REDACTED</code></td>
+<td>نعم</td>
+</tr>
+<tr>
+<td><code>panel-token.txt</code></td>
+<td>رمز اللوحة</td>
+<td>لا</td>
+</tr>
+</tbody>
+</table></div>
+<p>لا يتم أبدًا كتابة كلمة مرور الجذر الخاصة بالمزود، ورمز النفق، ورمز اللوحة
+<code>deployment.json</code>. انشر بصمة المجمع المطبوعة في النهاية عبر قناة
+لا تتحكم فيها بمفردك، على سبيل المثال قناة الشهود أو رسالة إلى المستلم.</p>
+<p>قم بتسجيل الدخول إلى Telegram على <code>https://case.example.org</code> باستخدام رمز اللوحة، كما هو موضح في
+<a href="../accounts/">دليل الحساب</a>. يتم تسجيل إجراءات اللوحة في السجل الموقّع؛ وهي ليست
+جلسات SSH. يمكن <a href="../witness/">للشاهد</a> إجراء استطلاع <code>https://case-witness.example.org</code>.</p>
+<p>لا يوجد SSH: إذا فشل التمهيد، فلن يستجيب المجمع أبدًا. احذف الخادم و
+قم بالنشر مرة أخرى، أو استخدم نشرًا للتصحيح لتحديد السبب.</p>
+<h3 id="secrets-in-the-user-data">الأسرار في بيانات المستخدم<a class="anchor" href="#secrets-in-the-user-data" aria-label="رابط لهذا القسم">#</a></h3>
+<p>يحمل cloud-init سرين: رمز اللوحة ورمز نفق Cloudflare.
+مفتاح التوقيع ليس من بينهما؛ فهو يُنشأ على الخادم. لا تقوم Hetzner وDigitalOcean وLinode
+بإرجاع بيانات المستخدم عبر واجهة برمجة التطبيقات (API) الخاصة بها. أما Vultr فتقوم بإرجاعها إلى أي مفتاح يمكنه قراءة
+المثيل، وEC2 من خلال <code>DescribeInstanceAttribute</code>. بالنسبة لـ AWS، لا تُعطى الجهة المُثبتة سوى الإجراءات الثلاثة
+المذكورة في الجدول، أبدًا <code>ec2:Describe*</code>. بالنسبة لـ Vultr، افترض أن مفتاح المُحقق يمكنه قراءة كلا
+الرمزين. يسمح رمز النفق لشخص ما بتشغيل موصل ثانٍ: <code>verify</code> يبلغ عن أي موصل
+غير موجود على الخادم، ولا يمكن تزوير بيانات المجمع بهذه الطريقة لأن كل واحد
+يوقع على تحدٍ جديد. أما <code>--quick-tunnel</code> السر الثاني هو مفتاح العنوان بدلاً من ذلك:
+يمكن لمن يقرأه نشر عنوان مزيف تقبله اللوحة.</p>
+<p>يغفل البيان العام للمجمع ذكر عنوان الخادم ومصادر عمليات تسجيل الدخول؛
+وكلاهما يظلان في السجل الموقّع.</p>
+<h2 id="debug-deployment-and-lock">تصحيح أخطاء النشر والقفل<a class="anchor" href="#debug-deployment-and-lock" aria-label="رابط لهذا القسم">#</a></h2>
+<p><code>--debug-ssh-key KEY --debug-ssh-from 198.51.100.4</code> يحتفظ بـ SSH لمفتاح واحد من عنوان واحد
+أو شبكة صغيرة، بحد أقصى /24 لـ IPv4 أو /48 لـ IPv6. <code>KEY</code> مسجلة بالفعل لدى
+المزود: اسم أو معرّف مفتاح SSH في مشروع Hetzner، أو معرّف أو بصمة
+مفتاح SSH في فريق DigitalOcean، أو اسم مستخدم Linode تمت إضافة مفاتيح SSH الخاصة بملفه الشخصي إلى الجذر،
+أو معرّف مفتاح SSH في حساب Vultr، أو اسم زوج مفاتيح EC2 في المنطقة. هذه
+الخيارات لا تنطبق على <code>generic</code>. يتم تسجيل هذا النشر على أنه <code>debug</code> ولا يُبلغ عنه <strong>أبدًا</strong> على أنه
+ذو ضمان عالٍ. عند الانتهاء، قم بتشغيل <code>sudo tgwitness-lock</code> كأخير أمر في آخر
+جلسة SSH، ثم:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud lock --record deployments/case-2026-11/deployment.json --provider-token-file hetzner.token</code></pre>
+<p>يفقد جدار الحماية كل قاعدة دخول. ثم تُظهر التقارير متى تم السماح بـ SSH ومتى
+تم إغلاقه؛ وتظل تلك النافذة مرئية.</p>
+<h2 id="remove-a-deployment">إزالة عملية نشر<a class="anchor" href="#remove-a-deployment" aria-label="رابط لهذا القسم">#</a></h2>
+<p><code>destroy</code> يحذف الخادم وجدار الحماية الخاص به، اللذين يتم العثور عليهما من خلال تسمية النشر، بحيث يتم
+إزالة النشر الذي فشل في منتصف الطريق أيضًا، ثم سجلات DNS التي تشير إلى
+نفقه، والنفق نفسه. يتم حذف سجل الخادم ومفتاح التوقيع معه: قم بتصدير
+الأدلة أولاً. يبقى السجل، مع وضع علامة <code>removed</code>، مع استدعاءات واجهة برمجة التطبيقات (API) الخاصة بعملية الإزالة.</p>
+<pre><code class="language-sh">python -m tgwitness.cloud destroy --record deployments/case-2026-11/deployment.json --confirm case-2026-11 \
+    --provider-token-file hetzner.token --cloudflare-token-file cloudflare.token</code></pre>
+<p>يتم تنفيذ عملية الحذف عبر واجهة برمجة التطبيقات (API) بالنسبة لـ Hetzner. أما بالنسبة لمزودي الخدمة الآخرين <code>destroy</code> تتوقف العملية قبل
+حذف أي شيء وتحدد التسمية المراد حذفها في وحدة التحكم الخاصة بمزود الخدمة. أما الخادم المُثبَّت يدويًّا
+(<code>generic</code>) يفقد فقط نفقه وسجلات DNS الخاصة به. لا يحتاج النشر السريع للنفق إلى
+رمز Cloudflare: حيث ينتهي نفقه عند الخادم، وتنتهي صلاحية منشوراته من ntfy.sh في غضون
+12 ساعة.</p>
+<h2 id="any-server-self-attested">أي خادم (مُصدق ذاتيًا)<a class="anchor" href="#any-server-self-attested" aria-label="رابط لهذا القسم">#</a></h2>
+<p><code>--provider generic</code> هذا مخصص لخادم تم شراؤه أو تثبيته يدويًّا. <code>deploy</code> يُنشئ النفق
+وDNS، ويكتب <code>install.sh</code> (خاص) و <code>install.redacted.sh</code> (للنشر)، وينتظر.
+انسخ <code>install.sh</code> إلى خادم Ubuntu 24.04 تم تثبيته حديثًا وقم بتشغيله هناك:</p>
+<pre><code class="language-sh">sudo bash install.sh</code></pre>
+<p>وهي تسجل المضيف كما كان (عمليات تسجيل الدخول، والحسابات، <code>authorized_keys</code>، ومنافذ الاستماع،
+والخدمات، والمهام المجدولة، والحزم)، ويقوم بتثبيت الالتزام، وتفعيل جدار الحماية الخاص بالمضيف، وحذف
+نفسه، وإخفاء SSH، وإنهاء الجلسة. ويكون التقرير الخاص بمثل هذا الخادم في أحسن الأحوال
+<strong>«مُثبت ذاتيًا</strong>»: أي أن من قام بتشغيل المثبت كان يمتلك صلاحيات الجذر قبله، ولا يتوفر أي سجل من المزود
+للمحقق. ومع ذلك، فهو أفضل من خادم غير موثق: حيث يتم توقيع قائمة الجرد،
+وتجزئة المثبت، وكل عملية تسجيل دخول لاحقة.</p>
+<h2 id="verify">التحقق<a class="anchor" href="#verify" aria-label="رابط لهذا القسم">#</a></h2>
+<p>يحتاج المُحقق إلى <code>deployment.json</code>إلى المثبت المنشور، وبيانات اعتماد للقراءة فقط، و
+في الحالة المثالية، نسخة من الالتزام (commit) ودليل ZIP:</p>
+<pre><code class="language-sh">git clone -c core.autocrlf=false https://github.com/phishdestroy/TgWitness.git checkout
+git -C checkout checkout 0123456789abcdef0123456789abcdef01234567
+python -m tgwitness.cloud verify --record deployment.json \
+    --provider-token-file read-only.token --cloudflare-token-file cloudflare-read.token \
+    --fingerprint COLLECTOR_FINGERPRINT --cloud-init cloud-init.redacted.yaml \
+    --source checkout --evidence tgwitness-evidence.zip --report report.md</code></pre>
+<p>يُطلب كل مزود وقيمة Cloudflare من قبل المُحقق في تلك اللحظة؛ ولا يوفر السجل
+سوى المعرّفات المطلوب الاستفسار عنها. رمز الخروج هو 0 لـ <strong>«PASS</strong>»، و1 لـ <strong>«FAIL</strong>»، و2 لـ
+<strong>«REVIEW</strong>» أو <strong>«INCOMPLETE</strong>» أو <strong>«SELF-ATTESTED</strong>». <code>--fingerprint</code> يجب أن يأتي من قناة مستقلة؛
+وبدونها تتم مقارنة المفتاح بسجل المشغل فقط. <code>python verify.py</code>
+لا يزال يتحقق من الدليل ZIP، كما هو موضح في <a href="../evidence/">قسم «الدليل</a>».</p>
+<p>يتم تصنيف إجراءات المزود على النحو التالي: يتم قبول إجراءات الإنشاء والتشغيل في غضون 30 دقيقة من الإنشاء؛
+أما إجراءات وحدة التحكم، والإنقاذ، وإعادة تعيين كلمة المرور، وإعادة البناء، وملفات ISO، والصور، واللقطات، والنسخ الاحتياطية، و«مدير الأنظمة»،
+و«EC2 Instance Connect»، وفتح ثغرات في جدار الحماية، فتُرفض؛ أما إجراءات الطاقة وأي إجراءات غير متوقعة
+فيتم وضع علامة عليها للمراجعة. ولا تمر أي إجراء غير معروف مرور الكرام أبدًا.</p>
+<h2 id="report-for-evidence-handover">تقرير لتسليم الأدلة<a class="anchor" href="#report-for-evidence-handover" aria-label="رابط لهذا القسم">#</a></h2>
+<p><code>--report report.md</code> يكتب تقرير Markdown و <code>report.json</code> بجانبه:</p>
+<ol>
+<li>النتيجة، بصمة مفتاح المجمع، النشر، المزود، الالتزام، الخادم، جدار الحماية، النفق؛</li>
+<li>كل فحص مع حالته ومصدره (واجهة برمجة تطبيقات المزود، واجهة برمجة تطبيقات Cloudflare، بيان المجمع،
+    سجل الأدلة)؛</li>
+<li>سجل المزود الذي يتضمن تقييم كل إجراء، وكذلك الفاعل، في الحالات التي يسجله فيها المزود؛</li>
+<li>نقاط نهاية Cloudflare التي تحتفظ باتصالات النفق وتكوينه وسجل التدقيق؛</li>
+<li>بيان المجمع الموقّع؛</li>
+<li>ما يثبته التقرير وما لا يثبته؛</li>
+<li>الأوامر اللازمة لتكرار العملية، وSHA-256 لكل ملف تم تزويدها به.</li>
+</ol>
+<p>قم بتسليم التقرير، <code>report.json</code>, <code>deployment.json</code>والمثبت المنشور و
+الأدلة ZIP. قم بإعداد التقرير في وقت مبكر: حيث يتم الاحتفاظ بسجلات مزود الخدمة لفترات محدودة.</p>
+<h2 id="cloudflare-as-an-outside-witness">Cloudflare كشاهد خارجي<a class="anchor" href="#cloudflare-as-an-outside-witness" aria-label="رابط لهذا القسم">#</a></h2>
+<p>كل شيء هنا اختياري. حتى بدون حساب Cloudflare، يظل الخادم يعمل، وهناك اثنان من
+هذه الخوادم يعملان اليوم:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>ماذا</th>
+<th>ما يعرضه</th>
+<th>في TgWitness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>نفق سريع أو نفق خاص بنطاقك</td>
+<td>لا يمكن الوصول إلى اللوحة إلا عبر النفق</td>
+<td>معالج الخادم، انظر أعلاه</td>
+</tr>
+<tr>
+<td>ترحيل drand <code>drand.cloudflare.com</code></td>
+<td>السجلات التي تلي جولة drand أحدث منها: فقد كُتبت اليومية بشكل متتابع</td>
+<td>وضع الأدلة، <strong>المزيد من الشهود</strong>، بدون حساب (<a href="../evidence/#optional-records-in-evidence-mode-drand-and-telegram-devices">تنسيق</a>)</td>
+</tr>
+<tr>
+<td>إشعارات حالة النفق</td>
+<td>عند تعطل النفق، عبر البريد الإلكتروني أو webhook من Cloudflare</td>
+<td>قم بتعيينها في لوحة تحكم Cloudflare</td>
+</tr>
+<tr>
+<td>Gateway DNS (<code>--gateway-dns</code>، أو <strong>Cloudflare Gateway DNS</strong> في المعالج)</td>
+<td>كل اسم بحث عنه الخادم، تم الرد عليه بواسطة Cloudflare عبر بروتوكول TLS؛ ولا يسمح جدار الحماية من Hetzner لنظام DNS بالوصول إلى أي شيء آخر؛ وما إذا كان بإمكان سياسة البوابة إعادة كتابة الإجابات</td>
+<td>Hetzner، خطة Zero Trust مجانية، بدون نطاق؛ <code>verify</code> يتحقق من جدار الحماية والموقع والتسجيل والسياسات واستعلامات الخادم وسجل التدقيق؛ ويقوم «وضع الأدلة» بنسخ السجل إلى «اليومية»</td>
+</tr>
+<tr>
+<td>بوابة مع عميل Cloudflare One على الخادم، وهو جدار حماية للاتصالات الصادرة لا يسمح إلا بـ Cloudflare</td>
+<td>كل اتصال أجراه الخادم، وليس فقط DNS</td>
+<td>لم يتم إنشاؤها بعد</td>
+</tr>
+<tr>
+<td>الوصول أمام اللوحة</td>
+<td>من قام بتسجيل الدخول إلى اللوحة ومتى</td>
+<td>لم يتم إنشاؤها بعد: تحتاج إلى نطاق خاص بك</td>
+</tr>
+<tr>
+<td>تسجيل أوامر SSH</td>
+<td>كل أمر في جلسة تصحيح الأخطاء</td>
+<td>لم يتم إنشاؤها بعد</td>
+</tr>
+</tbody>
+</table></div>
+<p>تعد Logpush، التي تحتفظ بنسخة Cloudflare الخاصة في R2، ميزة مخصصة للمؤسسات: في الخطة المجانية
+، تستجيب Cloudflare <code>logpush is not enabled for this account</code>. يستمر سجل بوابة Cloudflare لمدة 24
+ساعة هناك، لذا يقوم «وضع الأدلة» بنسخه إلى السجل الموقّع (<strong>سجل بوابة Cloudflare لـ
+استعلامات DNS لهذا الخادم،</strong> وهو رمز للقراءة فقط مع «قراءة تحليلات الحساب»).</p>
+<p>بدون خطة «Zero Trust»، يكون للحساب موقع DNS واحد. وعندما ترفض Cloudflare موقعًا آخر،
+يشارك الخادم الموقع الحالي ويتم تمييز استفساراته عن طريق عنوانه؛ ويحتاج هذا المرشح
+إلى «Zero Trust PII Read» أيضًا، و <code>destroy</code> يترك موقعًا مشتركًا. يمتد استعلام السجل الواحد
+لمدة ثلاث ساعات كحد أقصى، لذا تتم قراءة النسخة و <code>verify</code> قراءة اليوم في نوافذ مدتها ثلاث ساعات.</p>
+<p>يغطي بوابة DNS محلل النظام. ولا يظهر في
+سجلها بروتوكول DNS عبر HTTPS على المنفذ 443 المتجه إلى محلل آخر، ولا
+الاتصالات الموجهة إلى عناوين لم يتم البحث عنها في أي مكان (مثل مراكز بيانات Telegram، على سبيل المثال).</p>
+<p>لا يمكن لـ Cloudflare الاطلاع على محتوى تشفير Telegram، أو الأجهزة الأخرى المرتبطة بحساب Telegram
+(قائمة الأجهزة في «وضع الأدلة» تسجلها من جانب Telegram) أو برنامج Hypervisor الخاص بالمزود.</p>
+<p>في 1 نوفمبر 2026، تم تشغيل Gateway DNS على سحابة Hetzner الحقيقية وحساب Cloudflare مجاني:
+قبلت Hetzner القواعد الصادرة، وقام الخادم بتثبيت الإصدار v0.7.0 بحيث تمر كل عملية بحث
+عبر Gateway عبر بروتوكول TLS، وعمل النفق السريع عبر جدار الحماية هذا، و <code>verify</code> وقام بقراءة
+الأسماء الـ19 الخاصة بالخادم من Cloudflare (مرايا Ubuntu وHetzner، GitHub، PyPI، NTP،
+النفق، ntfy.sh). قامت اللوحة بنسخ 36 استعلامًا في ثماني نوافذ إلى دفتر يوميات و
+<code>verify.py</code> ولخصتها دون أي ثغرات؛ <code>destroy</code> وأزال الخادم وجدار الحماية وغادر
+الموقع المشترك.</p>
+<h2 id="what-this-does-not-establish">ما لا يثبته هذا<a class="anchor" href="#what-this-does-not-establish" aria-label="رابط لهذا القسم">#</a></h2>
+<ul>
+<li>يتحكم المزود وموظفوه في برنامج Hypervisor والأقراص والشبكة.</li>
+<li>يتم الإبلاغ عن قياسات المضيف ذاتيًا بواسطة أداة التجميع.</li>
+<li>لا توجد محتويات قواعد جدار الحماية السابقة في سجلات جميع مزودي الخدمة؛ حيث يحتفظ Linode فقط بإصدارات القواعد.</li>
+<li>ولا يضيف هذا أي شيء جديد بشأن أصالة الرسائل؛ انظر قسم <a href="../evidence/">«الأدلة</a>».</li>
+</ul>
+<h2 id="tested-here">تم اختبارها هنا<a class="anchor" href="#tested-here" aria-label="رابط لهذا القسم">#</a></h2>
+<p>يتم تغطية منطق النشر والقفل والتحقق من خلال اختبارات آلية تُجرى على واجهات برمجة تطبيقات (API) محاكاة لـ
+Hetzner وDigitalOcean وLinode وVultr وEC2/CloudTrail وCloudflare، والتي تم إنشاؤها استنادًا إلى
+مراجع واجهات برمجة التطبيقات (API) المنشورة الخاصة بها، بالإضافة إلى توقيع طلبات AWS وفقًا للأمثلة المنشورة من قبل AWS.
+<code>tools/check_cloud_wizard.py</code> يُشغّل معالج خادم اللوحة بنفس الطريقة، باستخدام نطاق و
+نفق سريع. <code>tools/check_tdx.py</code> يتحقق من شهادات Intel TDX الحقيقية من dcap-qvl و dstack
+حتى شهادة الجذر الخاصة بـ Intel (المصادر في <a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/tdx/README.md">tools/tdx/README.md</a>)؛ <code>tools/check_phala.py</code>يقوم بتشغيل عمليات النشر والتحقق والسجل والتدمير ومعالج اللوحة على سحابة Phala محاكاة
+تأتي شهاداتها من بنية PKI مزورة تشبه بنية Intel. لم يتم بعد
+تجربة مسار Phala على سحابة Phala نفسها.</p>
+<p>في 1 نوفمبر 2026، تم تشغيل مسار النفق السريع على خدمة <strong>Hetzner Cloud</strong> الحقيقية (نورمبرغ، <code>cpx22</code>،
+TgWitness الإصدار 0.7.0)، وخدمة ntfy.sh الحقيقية، وGitHub، من لوحة التحكم ومن الكود:</p>
+<ul>
+<li>التحقق من السعر، ثم الإنشاء باستخدام أزرار اللوحة: يبدأ الخادم في العمل بعد 13 ثانية،
+    بيان موقّع مع تجزئات متطابقة للمثيل والمثبت بعد حوالي دقيقتين؛</li>
+<li>تم فتح لوحة التحكم الخاصة بالخادم عبر عنوان trycloudflare.com الخاص به وقبلت
+    رمز لوحة التحكم؛ وبدون الرمز، ترسل الخادم ردًا برمز الخطأ 401؛</li>
+<li>بعد إعادة التشغيل عبر واجهة برمجة تطبيقات Hetzner، نشر الخادم عنوانًا جديدًا موقّعًا، وعثرت <strong>«Find the
+    current address</strong>» عليه، وتوقف العنوان القديم عن الاستجابة، وظل مفتاح التوقيع
+    كما هو؛ وتم تجاهل منشور غير موقّع على موضوع ntfy.sh؛</li>
+<li><code>verify</code> بالنسبة لواجهة برمجة تطبيقات Hetzner: اجتاز كل من الخادم، وجدار الحماية بدون قواعد دخول، والبيان، والربط،
+    وقياسات المضيف، وعملية التمهيد، وتجزئة المصدر لنسخة v0.7.0؛ أما اختبارات Cloudflare
+    فلم تكن متاحة، كما هو موضح أعلاه؛ واختلف المثبت عن ذلك المستخدم في إصدار v0.7.0
+    وكان مطابقًا بايتًا بايتًا للمثبت الذي يبنيه كود هذا الإصدار؛</li>
+<li>أدى الحذف من اللوحة إلى إزالة الخادم وجدار الحماية المحددين في عملية النشر بالضبط؛
+    بينما بقيت الخوادم وجدران الحماية الأخرى في نفس المشروع دون تغيير.</li>
+</ul>
+<p>لم يتم تشغيلها بعد على حسابات حقيقية: نشر تحت نطاقك الخاص (نفق Cloudflare و
+DNS)، ومزودي الخدمة الآخرين، ونشر للتصحيح، و <code>lock</code>، وحساب Telegram على مثل هذا الخادم،
+والتحديثات المباشرة للإصدارات اللاحقة عبر نفق سريع. تحقق من النشر الأول على
+كل مزود باستخدام <code>plan</code>، ونشر تصحيح الأخطاء و <code>verify</code> قبل الاعتماد عليه في حالة ما.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/HIGH-ASSURANCE.md">تحرير هذه الصفحة على GitHub ↗</a><a class="next-guide" href="../panel/"><span>الخطوة التالية</span><strong>دليل اللوحة ←</strong></a><p>تصف هذه الأدلة طريقة التنفيذ الحالية. ويتم توثيق نتائج التحقق والثغرات المتبقية بشكل منفصل. <a href="../verification/">ما تم اختباره ←</a></p></footer>
+</main>
+<aside class="toc" aria-label="في هذه الصفحة"><p class="nav-label">في هذه الصفحة</p><a href="#what-a-verifier-can-check">ما يمكن للمحقق التحقق منه</a><a href="#providers">المزودون</a><a href="#confidential-vm-on-phala-cloud-intel-tdx">آلة افتراضية سرية على Phala Cloud (Intel TDX)</a><a href="#before-you-start">قبل أن تبدأ</a><a href="#from-the-panel">من اللوحة</a><a href="#quick-tunnel-without-a-domain">نفق سريع بدون نطاق</a><a href="#deploy">النشر</a><a href="#debug-deployment-and-lock">تصحيح أخطاء النشر والقفل</a><a href="#remove-a-deployment">إزالة عملية نشر</a><a href="#any-server-self-attested">أي خادم (مُصدق ذاتيًا)</a><a href="#verify">التحقق</a><a href="#report-for-evidence-handover">تقرير لتسليم الأدلة</a><a href="#cloudflare-as-an-outside-witness">Cloudflare كشاهد خارجي</a><a href="#what-this-does-not-establish">ما لا يثبته هذا</a><a href="#tested-here">تم اختبارها هنا</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>مفتوحة المصدر · تعمل على جهازك</span><a href="../../../../LICENSE">رخصة MIT</a><a href="../notice/">إشعار المشغل</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">الأمن</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "في انتظار رسالة", "Step through a fictional send, edit and delete.": "تتبع خطوات عملية إرسال وتعديل وحذف افتراضية.", "No observations yet. Start the sequence or advance one event.": "لا توجد ملاحظات حتى الآن. ابدأ التسلسل أو انتقل إلى الحدث التالي.", "Meet at 10:00": "نلتقي الساعة 10:00", "A new message is visible in the chat.": "تظهر رسالة جديدة في الدردشة.", "Record 1 appended: the collector observed the original message.": "تم إرفاق السجل رقم 1: لاحظ المجمع الرسالة الأصلية.", "Meet at 11:00": "نلتقي الساعة 11:00", "The current text changes. The earlier observation stays.": "النص الحالي قد يتغير. أما الملاحظة السابقة فتبقى كما هي.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "تم إرفاق السجل 2: التعديل يمثل ملاحظة جديدة. ولا يزال السجل 1 يحتوي على النص الأصلي.", "Message deleted": "تم حذف الرسالة", "The message has disappeared from the chat view.": "لقد اختفت الرسالة من شاشة الدردشة.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "تم إرفاق السجل رقم 3: يتم الاحتفاظ بإشعار الحذف جنبًا إلى جنب مع كلا النسختين اللتين تمت ملاحظتهما.", "0 records": "0 سجل", "1 record": "سجل واحد", "2 records": "سجلان", "3 records": "3 سجلات", "Complete / {n} of 3": "كامل / {n} من 3", "Step / {n} of 3": "الخطوة / {n} من 3", "Pause": "توقف مؤقت", "Replay sequence": "تسلسل إعادة التشغيل", "Play sequence": "تشغيل التسلسل", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "يتوفر نموذج ثابت. لحساب التجزئات (هاش) تفاعليًّا، افتح هذه الصفحة عبر HTTPS أو معاينة localhost مع دعم Web Crypto.", "No record supplied": "لم يتم تقديم أي سجل", "Tail removed": "تم حذف الجزء الأخير", "≠ saved hash": "≠ التجزئة المحفوظة", "Rebuilt · different hash": "أعيد بناؤه · هاش مختلف", "= saved hash": "= التجزئة المحفوظة", "Same length and matching head.": "نفس الطول وعنوان مطابق.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "تتطابق جميع التجزئات الحسابية الثلاثة مع التجزئات المحفوظة. تتوافق هذه العينة مع الحد المحدد المتمثل في الاحتفاظ بثلاثة سجلات.", "Same saved head; the journal prefix fails verification.": "نفس العنوان المحفوظ؛ لم تجتز بادئة السجل عملية التحقق.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "لم يعد السجل رقم 2 مطابقًا لـ«هاش»ه المحفوظ. قد يفوت هذا الأمر عند التحقق من الرأس الأخير المخزن فقط؛ لذا يقوم المُحقق بفحص كل سجل.", "Head differs from the retained checkpoint.": "يختلف العنوان عن نقطة التحقق التي تم الاحتفاظ بها.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "ترتبط التجزئات المعاد بناؤها ببعضها البعض، لكن الرأس النهائي قد تغير. نقطة التحقق المحتفظ بها ترفض هذا السجل. كما أن التوقيعات الأصلية ستفشل أيضًا في السجلات التي تم تغييرها.", "Too short: 2 supplied records \u003c 3 retained records.": "قصير جدًا: 2 سجلات مقدمة \u003c 3 سجلات محفوظة.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "لا يزال التوافقيان المتبقيان متطابقين. ويكشف نقطة التحقق المحتفظ بها عن الجزء المفقود في نهاية السلسلة. وبدون ذلك الحد السابق، لما كشفت هذه البادئة الأقصر وحدها عن هذا الحذف.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "حساب التجزئة غير متاح في هذا المتصفح. تظل الصيغ والتفسيرات الثابتة أدناه متاحة.", "{n} records": "{n} سجل", "head {hash}": "head {hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "تم القبول: يزداد العدد، ويتم التحقق من التوقيع، ويتطابق المفتاح. ويحتفظ الشاهد بهذا الحد الجديد.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "التراجع: يُظهر الرد الموقّع عددًا أقل من السجلات مقارنةً بنقطة التحقق الأخيرة المقبولة. تقوم الأداة بتسجيل المشكلة والاحتفاظ بحدود النسخة السابقة المقبولة.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "التفرع (Fork): العدد لم يتغير لكن الرأس يختلف. يقوم الشاهد بتسجيل الخلاف ويحتفظ بالحدود التي تم قبولها سابقًا.", "No answer": "لا توجد إجابة", "boundary unknown": "الحدود غير معروفة", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "عدم الاستجابة: يسجل «الشهود» فشل عملية التحقق. ولا يمكنه تأكيد الحالة الحالية لـ«المجمع». إذا كان «الشهود» لا يزال قادرًا على الوصول إلى واجهة برمجة تطبيقات الروبوت (Bot API) وكانت سياسة النشر الخاصة به تسمح بذلك، فيمكنه نشر هذا الفشل.", "Send {n}": "أرسل {n}", "Edit {n}": "تحرير {n}", "Delete {n}": "حذف {n}", "Both accounts captured all six expected observations in this example.": "وقد استوفى كلا الحسابين جميع الملاحظات الست المتوقعة في هذا المثال.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "لا يزال الحساب «ب» قد سجل 6 من أصل 6. استغرق تسجيل إيصالين وقتًا أطول. تعكس نسبة التسجيل وتأخير استلام الإيصالات إجابات مختلفة.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "سجل الحساب «ب» 5 من أصل 6 قبل الموعد النهائي (83.3٪). لا يوجد تأخير مقاس للتعديل المفقود. تصف هذه النتيجة فقط الإجراءات الستة الخاضعة للرقابة.", "not observed by cutoff": "لم يُلاحظ ذلك بحلول الموعد النهائي", "{s} seconds": "{s} ثانية", "Exact values follow in the table.": "ترد القيم الدقيقة في الجدول التالي.", "{s} s": "{s} s", "Not observed": "لم يُلاحظ", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "تقدم أربع محادثات ملاحظات مختلفة. اتبع السجلات المصدرية لكل اتصال؛ ولا تنسب منشور القناة إلى المستخدم 71001 دون وجود مرسل محدد.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "يقدم السجلان رقم 146 ورقم 205 نفس معرّف المرسل، 71001. وهذا يربط بين المنشورات الملحوظة لحساب Telegram عبر محادثتين. ولا يحدد هوية شخص حقيقي ولا ينسب المنشور إلى القناة.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "يظهر العنوان pay.example.invalid/new في سجل المجموعة رقم 146، ولوحة مفاتيح الروبوت رقم 173، وتعديل القناة رقم 188، والرسالة الخاصة رقم 205. وجود عنوان متكرر يربط بين المواد؛ لكنه لا يثبت وجود سيطرة مشتركة على تلك الحسابات.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "تحتوي إيصالات الوسائط المكتملة رقم #151 ورقم #209 على قيم SHA-256 كاملة متطابقة في هذه الحالة الافتراضية. قارن بين البايتات الفعلية وسجلات الرسائل المرتبطة بها. لا يحدد الملف المطابق هوية منشئه ولا يثبت هوية من قام بإعادة توجيهه.", "the encrypted off-site copy": "النسخة المشفرة خارج الموقع", "notifications": "الإشعارات", "checkpoint hashes for timestamps": "تجزئات نقاط التحقق (checkpoint hashes) للطوابع الزمنية", "signed checkpoints for the witness": "نقاط تحقق موقعة لـ «TgWitness»", "Switched on in this example": "تم تفعيلها في هذا المثال", "Optional · off by default": "اختياري · معطّل افتراضيًا", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "ما يُترك في هذا الجهاز: اتصال Telegram و{list}. لا شيء آخر.", "Default: only the Telegram connection leaves this machine.": "الإعداد الافتراضي: لا يغادر هذا الجهاز سوى اتصال Telegram.", "{done} of {total} done": "{done} من {total} تم إنجازها", "Mark step {n} as done": "وضع علامة «تم» على الخطوة {n}", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "نص", "Copied": "نسخ", "Command copied.": "تم نسخ الأمر.", "Selected — Ctrl/Cmd+C": "تم التحديد — Ctrl/Cmd+C", "Command selected. Copy it manually.": "تم تحديد الأمر. انسخه يدويًّا.", "Command copied to clipboard.": "تم نسخ الأمر إلى الحافظة.", "Select text": "حدد النص", "Clipboard unavailable. Command selected; copy it manually.": "الحافظة غير متاحة. تم تحديد الأمر؛ انسخه يدويًّا.", "A message arrives. The first observation is saved.": "تصل رسالة. يتم حفظ الملاحظة الأولى.", "The time changes. Both captured versions stay.": "يتغير الوقت. وتبقى النسختان المسجلتان كما هما.", "The message disappears. The captured history remains.": "تختفي الرسالة. لكن السجل المسجل يبقى.", "Pause example animation": "إيقاف الرسوم المتحركة التوضيحية مؤقتًا", "Play example animation": "تشغيل مثال للرسوم المتحركة", "Play": "تشغيل", "Full-size workspace screenshot": "لقطة شاشة لمساحة العمل بالحجم الكامل", "Workspace screenshot · fictional data": "لقطة شاشة لمساحة العمل · بيانات خيالية", "Close": "إغلاق", "Close screenshot": "إغلاق لقطة الشاشة", "Scrollable full-size screenshot": "لقطة شاشة كاملة الحجم قابلة للتمرير", "Enlarge: {name}": "تكبير: {name}", "View full size": "عرض بالحجم الكامل", "Step {n} of {total}": "الخطوة {n} من {total}"}</script>
+</body></html>

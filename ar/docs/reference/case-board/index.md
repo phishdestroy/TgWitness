@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-
 
 يوفر «Case Board» لفريق التحقيق رؤية عمل مشتركة للمواد المحفوظة. يمكنك وضع إشارة مرجعية على ملاحظة ما، وتمييز مقطع محدد، وحفظ مجموعة من الإجراءات، ومناقشتها مع الزملاء. تحتفظ البطاقات بمراجع مصادرها وسجل المراجعات الموقّع. وتبقى تعليقات الفريق في مساحة العمل، ويمكن تمييزها بشكل منفصل عن الملاحظات الأصلية في Telegram.
 
-[نموذج الأدلة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/) · [الوصول](https://phishdestroy.github.io/TgWitness/ar/docs/reference/access/) · [التقارير](https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-reports/) · [Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE-BOARD.md)
+[نموذج الأدلة](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence/) · [الوصول](https://phishdestroy.github.io/TgWitness/ar/docs/reference/access/) · [التقارير](https://phishdestroy.github.io/TgWitness/ar/docs/reference/case-reports/)
 
 ![موجز التحقيقات المركب](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
 

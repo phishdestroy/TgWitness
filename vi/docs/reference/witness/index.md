@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/vi/docs/reference/witne
 
 Vui lòng chạy một bản sao TgWitness với khóa và bot riêng, đăng các điểm kiểm tra đã được ký lên một kênh và đối chiếu các tệp xuất với các điểm kiểm tra đó.
 
-[Hướng dẫn thiết lập bot và proxy bằng tiếng Nga](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/WITNESS.md).
+[Xuất và xác minh](https://phishdestroy.github.io/TgWitness/vi/docs/reference/evidence/) · [Độ tin cậy cao](https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/) · [Hướng dẫn sử dụng bảng điều khiển](https://phishdestroy.github.io/TgWitness/vi/docs/reference/panel/#extras)
 
 Một bộ thu thập sẽ tự ký vào nhật ký của chính mình, do đó, bất kỳ ai kiểm soát bộ thu thập và khóa của nó về nguyên tắc đều có thể viết lại hoặc cắt bớt nội dung nhật ký rồi ký lại. Witness giúp việc này trở nên có thể phát hiện được. Đây là một quy trình riêng biệt — một container khác, hay chính xác hơn là một máy chủ do người khác vận hành — cứ sau vài phút sẽ truy xuất phần đầu của nhật ký đã được ký bởi bộ thu thập, ký xác nhận những gì nó đã ghi nhận bằng khóa riêng của mình, lưu trữ trong nhật ký của chính nó và đăng lên một kênh Telegram.
 
@@ -27,7 +27,7 @@ Sơ đồ quy trình · Trình thu thập → Witness (điểm kiểm tra có ch
 | Sử dụng khóa Ed25519 và sổ nhật ký riêng | Kho lưu trữ của bộ thu thập, khóa ký hoặc mã thông báo bảng điều khiển |
 | Mã thông báo bot Telegram riêng của nền tảng này | Nội dung tin nhắn: phần đầu bao gồm số lượng bản ghi và mã băm |
 
-Mã thông báo được tạo trên trang **Witness** của bảng điều khiển, chỉ hiển thị một lần và được lưu trữ dưới dạng SHA-256. Mã này mở chính xác một điểm cuối, `GET /api/witness/head`, điểm cuối này sẽ trả về một điểm kiểm tra mới được ký cùng với các bộ đếm thu thập không chứa nội dung đã được ký và tình trạng hoạt động. Token này không thể mở bảng điều khiển, đọc nội dung tin nhắn hoặc thay đổi cài đặt, và token bảng điều khiển không được chấp nhận tại đó. Quý vị có thể thu hồi token trên cùng trang này. Bộ thu thập ghi lại thời điểm một khóa chứng nhân mới bắt đầu kiểm tra (`witness.seen`) và hiển thị lần kiểm tra gần nhất cho từng token; một chứng nhân chưa thực hiện kiểm tra trong vòng 2,5 khoảng thời gian sẽ được đánh dấu là quá hạn.
+Token được tạo trong **Extras → Independent witness**, chỉ hiển thị một lần và chỉ được lưu trữ dưới dạng SHA-256. Nó mở chính xác một điểm cuối, `GET /api/witness/head`, trả về một điểm kiểm tra vừa được ký cùng với các bộ đếm bộ sưu tập không chứa nội dung đã được ký và tình trạng hoạt động. Nó không thể mở bảng điều khiển, đọc nội dung tin nhắn hoặc thay đổi cài đặt, và token bảng điều khiển không được chấp nhận tại đó. Hủy token trên cùng trang. Trình thu thập ghi lại thời điểm một khóa chứng nhân mới bắt đầu kiểm tra (`witness.seen`) và hiển thị lần kiểm tra gần nhất cho mỗi mã thông báo; một nhân chứng chưa kiểm tra trong vòng 2,5 khoảng thời gian sẽ được đánh dấu là quá hạn.
 
 Các nhân chứng mới sẽ gửi một thách thức ngẫu nhiên trong mỗi cuộc thăm dò; tuyên bố ghi lại sẽ lặp lại thách thức đó dưới chữ ký của bộ thu thập. Các bộ đếm được gắn với điểm kiểm tra chính xác và được bao gồm trong các bài đăng có chữ ký của nhân chứng. Các tiêu đề cũ vẫn được nhân chứng độc lập chấp nhận. Việc tăng dung lượng nhật ký đơn thuần không bao giờ được tính là một tin nhắn mới.
 
@@ -54,7 +54,7 @@ TGW1.eyJhdCI6…<statement>.<signature>
 
 Quý vị cần một bot Telegram (tạo bot bằng @BotFather), một kênh mà bot đó là quản trị viên, và địa chỉ của bộ thu thập phải có thể truy cập được từ phía người làm chứng — qua HTTPS bên ngoài mạng riêng (xem cấu hình HTTPS trong [phần triển khai](https://phishdestroy.github.io/TgWitness/vi/docs/reference/deployment/)).
 
-Mở **phần Tiện ích bổ sung → Một bot trong kênh của quý vị → Thiết lập bot** trong bảng điều khiển. Ba bước bao gồm quyền truy cập chỉ đọc, kênh của quý vị và khoảng thời gian, sau đó khởi chạy công cụ chứng thực. Chính sách công bố, proxy HTTP/SOCKS5 tùy chọn và địa chỉ API Bot tùy chỉnh nằm trong **phần Cài đặt nâng cao** . Biểu mẫu sẽ tải xuống tệp `witness.json` với khóa thu thập dữ liệu của không gian làm việc này được ghim sẵn. Vui lòng tải xuống mã thông báo chỉ đọc vừa được tạo với tùy chọn **“Lưu tệp truy cập** dưới dạng `witness-token.txt` ”; đặt tệp này cùng với tệp `bot-token.txt` được tạo trên máy chủ chứng thực bên cạnh tệp JSON đó. Bộ thu thập dữ liệu sẽ không bao giờ nhận được mã thông báo của bot. Việc tải xuống sẽ không khởi động dịch vụ hay xuất bản bất kỳ thông điệp nào. Không có chứng nhân dự án được lưu trữ nào được đăng ký một cách ngầm định.
+Mở **Extras → Independent witness → Configure** trong bảng điều khiển. Ba bước bao gồm quyền truy cập chỉ đọc, kênh của bạn và khoảng thời gian, sau đó khởi chạy công cụ chứng thực. Chính sách xuất bản, proxy HTTP/SOCKS5 tùy chọn và địa chỉ API Bot tùy chỉnh nằm trong **phần Cài đặt nâng cao**. Biểu mẫu sẽ tải xuống `witness.json` với khóa thu thập dữ liệu của không gian làm việc này được gắn sẵn. Tải xuống mã thông báo chỉ đọc vừa tạo bằng cách chọn **“Lưu tệp truy cập** dưới dạng” `witness-token.txt`; đặt nó cùng với một `bot-token.txt`được tạo trên máy chủ chứng nhân bên cạnh tệp JSON đó. Bộ thu thập không bao giờ nhận được mã thông báo bot. Việc tải xuống không khởi động dịch vụ hoặc xuất bản tin nhắn. Không có chứng nhân dự án được lưu trữ nào được đăng ký ngầm.
 
 ```
 python -m tgwitness.witness run --config witness.json --check-config
@@ -95,6 +95,17 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
     --token-file witness-token.txt --bot-token-file bot-token.txt --channel @your_witness_channel
 ```
 
+### Đăng lên Discord
+
+Một nhân chứng có thể đăng lên kênh Discord thay vì Telegram. Trong Discord, mở **Chỉnh sửa kênh → Tích hợp → Webhooks**, tạo một webhook và sao chép URL của nó. Trong bảng điều khiển, chọn **webhook Discord · kênh của bạn** ở bước 2. Trên máy chủ của nhân chứng, lưu URL này dưới tên `discord-webhook.txt` bên cạnh `witness.json`; nó sẽ không bao giờ đến được bộ thu thập.
+
+```
+python -m tgwitness.witness run --collector https://your-collector.example.org \
+    --token-file witness-token.txt --discord-webhook-file discord-webhook.txt
+```
+
+Một nhân chứng có một nhà xuất bản: một kênh Telegram hoặc một webhook Discord, không phải cả hai. Các bài đăng đều chứa cùng một tuyên bố đã được ký và không thể gửi thông báo đến bất kỳ ai. Một bài đăng dài hơn giới hạn 2.000 ký tự của Discord sẽ được thay thế bằng một dòng ngắn kèm theo bản kiểm tra đầy đủ dưới dạng `witness-check.txt`. Mỗi ID bài đăng được ghi lại dưới dạng `witness.posted`. `verify.py --channel`chỉ đọc các tệp xuất từ kênh Telegram, vì vậy đối với Discord, hãy giữ nhật ký chứng nhân: nó chứa mọi bản kiểm tra.
+
 ### Các tùy chọn
 
 | Tùy chọn | Môi trường | Mặc định | Ý nghĩa |
@@ -109,7 +120,7 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
 | `--data-dir` | `_DATA` | `witness-data` | Khóa chứng thực và nhật ký |
 | `--config` | `_CONFIG` | – | Tệp JSON với bất kỳ tùy chọn nào nêu trên |
 
-Địa chỉ thu thập, mã thông báo và kênh đến từ `--collector`, `--token` hoặc `--token-file`, `--bot-token` hoặc `--bot-token-file` và `--channel`, hoặc `_COLLECTOR`, `_TOKEN`, `_TOKEN_FILE`, `_BOT_TOKEN`, `_BOT_TOKEN_FILE` và `_CHANNEL`, giúp giữ bí mật khỏi danh sách quy trình.
+Địa chỉ bộ thu thập, mã thông báo và kênh đến từ `--collector`, `--token` hoặc `--token-file`, `--bot-token` hoặc `--bot-token-file`, `--discord-webhook-file` và `--channel`, hoặc `_COLLECTOR`, `_TOKEN`, `_TOKEN_FILE`, `_BOT_TOKEN`, `_BOT_TOKEN_FILE`, `_DISCORD_WEBHOOK_FILE` và `_CHANNEL`, giúp giữ các bí mật khỏi danh sách quy trình.
 
 Một tệp cấu hình sử dụng các tên tùy chọn có dấu gạch dưới, kèm theo chuỗi ký tự `texts` để thay thế các từ trong các bài đăng trên kênh:
 
@@ -123,6 +134,36 @@ Một tệp cấu hình sử dụng các tên tùy chọn có dấu gạch dư�
 Các khóa `texts`: `ok`, `key_changed`, `rollback`, `fork`, `invalid`, `no_response`, `collector`, `records`, `head`. Dòng lệnh có ưu tiên cao hơn môi trường, còn môi trường lại có ưu tiên cao hơn tệp tin. Các tùy chọn hoặc khóa văn bản không xác định sẽ khiến công cụ ngừng hoạt động kèm theo thông báo thay vì bị bỏ qua. Cách diễn đạt không bao giờ ảnh hưởng đến quá trình xác minh: tệp verify.py sẽ kiểm tra mã thông báo đã được ký số ở cuối mỗi bài đăng. Với `--post changes` hoặc `problems`, các kiểm tra chưa được đăng vẫn nằm trong sổ nhật ký chứng nhân và `verify.py` liệt kê chúng là chưa từng được đăng; bản ghi đầu tiên nêu rõ chính sách. Mọi kiểm tra vẫn xuất hiện trong sổ nhật ký, do đó số lần đăng ít hơn đồng nghĩa với việc có ít thời điểm Telegram độc lập hơn, chứ không phải số lượng kiểm tra ít hơn.
 
 Ngay cả khi không có kênh, TgWitness vẫn duy trì nhật ký của mình. Vui lòng lưu giữ dấu vân tay khóa của TgWitness (`python -m tgwitness.witness fingerprint`) ở một nơi khác.
+
+## Trang chứng minh công khai cho một số không gian làm việc
+
+`python -m tgwitness.proof` TgWitness hỗ trợ tối đa 32 không gian làm việc cùng lúc và cung cấp một trang chỉ đọc với bản kiểm tra đã ký mới nhất của từng không gian. Mỗi không gian làm việc có khóa chứng thực riêng và sổ nhật ký trong thư mục dữ liệu, cùng với một khóa thu thập được ghim; việc đăng lên kênh Telegram là tùy chọn cho từng không gian làm việc. Bắt đầu từ [proof.config.example](https://github.com/phishdestroy/TgWitness/blob/main/deploy/proof.config.example):
+
+| Lĩnh vực | Ý nghĩa |
+| --- | --- |
+| `title` | Tiêu đề trang, 1–100 ký tự |
+| `data_dir` | Khóa và nhật ký Witness, liên quan đến tệp; mặc định `proof-data` |
+| `interval`, `timeout` | Số phút giữa các lần kiểm tra (1–1440, mặc định là 5); số giây chờ (5–600, mặc định là 20) |
+| `workspaces[].id`, `label` | Biệt danh viết thường ngắn và tên hiển thị |
+| `workspaces[].collector` | Địa chỉ Collector; các không gian làm việc khác kết thúc bằng `/profiles/<workspace ID>` |
+| `workspaces[].collector_fingerprint` | Bắt buộc, khác nhau tùy theo từng không gian làm việc |
+| `workspaces[].token_file` | Tệp chứa mã chứng thực chỉ đọc của không gian làm việc đó |
+| `workspaces[].channel`, `bot_token_file` | Tùy chọn, kết hợp: đăng mỗi lần kiểm tra lên một kênh |
+| `workspaces[].proxy`, `bot_api` | Đường dẫn tùy chọn và địa chỉ API Bot |
+
+```
+python -m tgwitness.proof --config proof.json --check-config
+python -m tgwitness.proof --config proof.json --host 127.0.0.1 --port 8790
+```
+
+Lệnh đầu tiên xác thực tệp và các tệp token mà không cần thiết lập kết nối. Trang này chỉ phản hồi các yêu cầu GET và HEAD:
+
+- `/` hiển thị tất cả các không gian làm việc; một không gian làm việc không được kiểm tra trong 2,5 khoảng thời gian sẽ được đánh dấu là đã hết hạn.
+- `/api/proof` trả về kết quả giống như JSON.
+- `/api/proof/<id>` tải xuống bản tuyên bố đã ký mới nhất (`tgwitness-public-proof-v1`): số bản ghi chứng thực và mã băm, trạng thái, khóa thu thập được ghim, điểm kiểm tra, số lần thu thập và liệu bài đăng trên kênh có thành công hay không, được ký bằng khóa chứng thực của không gian làm việc đó.
+- `/healthz` Trả về mã lỗi 503 khi trình giám sát của không gian làm việc đã ngừng hoạt động.
+
+Đặt tên máy chủ riêng cho trang, ví dụ như [Caddyfile.proof.example](https://github.com/phishdestroy/TgWitness/blob/main/deploy/Caddyfile.proof.example). Để xác minh, hãy xuất sổ nhật ký chứng thực của không gian làm việc bằng `python -m tgwitness.witness export --data-dir proof-data/<id> --out witness.zip` và sử dụng nó theo hướng dẫn dưới đây.
 
 ## Xác minh
 

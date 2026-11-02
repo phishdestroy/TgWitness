@@ -81,26 +81,26 @@ Pemindahan penukaran memindahkan kebenaran, bukan mesej asal, cache entiti atau 
 
 MTProto ialah protokol Telegram. Telethon ialah pustaka klien Python yang digunakan oleh TgWitness. MTProxy ialah proksi pengangkutan Telegram; SOCKS5 dan HTTP CONNECT menyediakan terowong umum. Tiada satu pun menggantikan pengesahan akaun.
 
-Simpan laluan untuk setiap ruang kerja di **Akaun → Tetapan → Tetapan sambungan → Ubah laluan sambungan** sebelum log masuk. Ruang kerja baru secara lalai menggunakan **Automatic MTProxy · senarai awam** dengan kelakuan Sembunyikan IP. Ruang kerja sedia ada yang secara eksplisit menggunakan Direct mengekalkan mod yang membenarkannya.
+Simpan laluan untuk setiap ruang kerja dalam **Akaun → Tetapan → Tetapan sambungan → Ubah laluan sambungan** sebelum log masuk. Ruang kerja baru secara lalai menggunakan **Automatik MTProxy · senarai awam** dengan **Sembunyikan alamat**. Ruang kerja sedia ada yang secara eksplisit menggunakan Direct mengekalkan mod yang membenarkannya.
 
 ## Mod IP
 
-Rute memilih sambungan. Mod IP menentukan bila alamat pelayan mungkin terdedah. Kawalan ini tidak memasang VPN atau mengalihkan semua trafik mesin.
+Rute memilih sambungan. Mod IP, **perlindungan IP** dalam bahagian Akaun panel, menentukan bila alamat pelayan mungkin terdedah. Kawalan ini tidak memasang VPN atau merute semua trafik mesin.
 
 | Mod | Telegram | Permintaan luaran |
 | --- | --- | --- |
-| Sembunyikan IP (`hide`) | Gunakan proksi; tunggu jika tiada yang berfungsi. Tiada pelan sandaran langsung. | Perlukan SOCKS5/HTTP; menolak permintaan tanpa proksi yang sesuai. |
-| Benarkan sandaran (`fallback`) | MTProxy automatik mungkin menggunakan Direct selepas kelewatan yang ditetapkan, kemudian kembali ke proksi yang berfungsi. | Utamakan proksi luaran yang dikonfigurasikan atau laluan SOCKS5/HTTP akaun; jika tidak, Direct dibenarkan. |
-| Terowong / VPN (`tunnel`) | Laluan terus dan pelan B imbangan automatik segera dibenarkan. | Direct dibenarkan apabila tiada proksi yang sesuai dikonfigurasikan. |
+| Sembunyikan alamat (`hide`) | Gunakan proksi; tunggu jika tiada yang berfungsi. Tiada pelan sandaran langsung. | Perlukan SOCKS5/HTTP; menolak permintaan tanpa proksi yang sesuai. |
+| Langsung sebagai pilihan terakhir (`fallback`) | MTProxy automatik mungkin menggunakan Direct selepas kelewatan yang ditetapkan, kemudian kembali ke proksi yang berfungsi. | Utamakan proksi luaran yang dikonfigurasikan atau laluan SOCKS5/HTTP akaun; jika tidak, Direct dibenarkan. |
+| Pelayan di sebalik terowong atau VPN (`tunnel`) | Laluan terus dan pelan B imbangan automatik segera dibenarkan. | Direct dibenarkan apabila tiada proksi yang sesuai dikonfigurasikan. |
 
-Mod terowong/VPN menganggap anda mengurus rangkaian tersebut secara berasingan. Tanpa terowong yang berfungsi, destinasi boleh melihat alamat pelayan itu sendiri. Pilih mod mengikut rangkaian sebenar anda, bukan nama pilihan.
+Mod terowong atau VPN menganggap anda mengurus rangkaian tersebut secara berasingan. Tanpa terowong yang berfungsi, destinasi boleh melihat alamat pelayan itu sendiri. Pilih mod mengikut rangkaian sebenar anda, bukan nama pilihan.
 
 ### Pilih laluan
 
 | Rute | Tetapan | Batas |
 | --- | --- | --- |
 | MTProxy automatik | Senarai terbina dalam atau katalog pengendali | Menjaga laluan Telegram yang berfungsi; sandaran langsung bergantung pada mod IP |
-| Langsung | Mod Terowong/VPN | Telethon menggunakan laluan rangkaian hos |
+| Langsung | Mod terowong atau VPN | Telethon menggunakan laluan rangkaian hos |
 | SOCKS5 | Host, port, nama pengguna/kata laluan pilihan | python-socks, DNS destinasi jauh diaktifkan |
 | HTTP CONNECT | Host, port, nama pengguna/kata laluan pilihan | HTTP CONNECT biasa; TLS ke proksi itu sendiri tidak dilaksanakan |
 | MTProxy | Host, port, rahsia | Pengangkutan Telethon Eksperimental; 32 digit heksadesimal atau `dd` + 32 digit heksadesimal |
@@ -121,13 +121,13 @@ Tindak balas suapan yang gagal, kosong atau tidak serasi mengekalkan tangkapan s
 
 **Lalu lintas Telegram dan permintaan HTTPS menggunakan laluan yang berbeza.** Muat turun senarai menggunakan sambungan HTTPS berasingan dan laluan permintaan luaran yang disediakan. `TGWITNESS_PROXY_FEED_PROXY` secara eksplisit menimpa laluan itu dengan proksi HTTP/SOCKS5; kedua-dua varian Compose pengumpul meneruskannya. Kolam latar belakang mengikuti ruang kerja utama. Tiada sesi Telegram, kelayakan API, token panel atau token bot dihantar kepada penyedia feed. Nama penyedia, tarikh snapshot dan laluan muat turun muncul di bawah Bahagian **'Where the list comes from**'.
 
-MTProxy hanya membawa trafik Telegram. Operasi Workspace HTTP seperti cap masa, pemberitahuan, salinan luar tapak dan semakan sumber menggunakan proksi SOCKS5/HTTP berasingan apabila dikonfigurasikan, kemudian laluan SOCKS5/HTTP akaun. Tanpa salah satu daripadanya, Hide IP menolak permintaan; mod lain membenarkan Direct. Permintaan luaran boleh dilumpuhkan. Proksi muat turun suapan yang dikonfigurasikan secara eksplisit kekal sebagai keutamaan pengendali berasingan. Perkhidmatan saksi bebas mengekalkan laluan tersendiri.
+MTProxy hanya membawa trafik Telegram. Operasi HTTP ruang kerja seperti cap masa, pemberitahuan, salinan luar tapak dan semakan sumber menggunakan proksi SOCKS5/HTTP berasingan apabila dikonfigurasikan, kemudian laluan SOCKS5/HTTP akaun. Tanpa kedua-duanya, Hide the address menolak permintaan; mod lain membenarkan Direct. Permintaan luaran boleh dilumpuhkan. Proksi muat turun suapan yang dikonfigurasikan secara eksplisit kekal sebagai override pengendali berasingan. Perkhidmatan saksi bebas mengekalkan laluan tersendiri.
 
 Permintaan HTTP luaran yang hanya untuk awam melalui SOCKS5 atau proksi HTTP menyelesaikan destinasi dengan Cloudflare DNS melalui HTTPS di `https://1.1.1.1/dns-query`, melalui proksi yang sama. Hanya nama hos dan jenis pertanyaan A/AAAA dihantar ke penyelesai; URL perkhidmatan, kelayakan dan kandungan pemberitahuan tidak disertakan. TLS mengesahkan sijil penyelesai untuk alamat IPnya. Kedua-dua keluarga alamat diperiksa, dan sebarang jawapan peribadi, gelung balik, tempatan-pautan atau yang diperuntukkan akan menolak permintaan tersebut. Sambungan menggunakan alamat numerik yang diperiksa sambil mengekalkan Host HTTP dan nama sijil TLS asal perkhidmatan. Penghantaran semula HTTP pemberitahuan dan permintaan CONNECT menggunakan pemeriksaan destinasi yang sama. Kegagalan DNS menghentikan permintaan tanpa DNS destinasi tempatan atau pelarian langsung. Jawapan yang berjaya disimpan dalam cache memori bagi setiap laluan proksi selama maksimum 30 saat dan tidak lebih lama daripada TTL DNS mereka; cache ini terhad kepada 128 entri. Nama hos proksi itu sendiri boleh menggunakan DNS tempatan. Kegagalan SOCKS dan CONNECT boleh mencuba alamat semak lain sebelum menghantar badan permintaan perkhidmatan. Pengalihan HTTP biasa melaporkan permintaan yang gagal tanpa secara automatik menghantar semula badannya melalui alamat lain.
 
 Untuk perkhidmatan peribadi yang diuruskan oleh pengendali, tetapan persekitaran pelayan sedia ada `TGWITNESS_ALLOW_PRIVATE_DESTINATIONS=1` membenarkan destinasi peribadi dan mengekalkan penyelesaian nama hos di pihak proksi. Ia tidak boleh diaktifkan dari panel. Mod hanya awam menolak destinasi `.onion` sebelum membuat pertanyaan kepada penyelesai awam; perkhidmatan bawang Tor memerlukan tetapan destinasi peribadi yang jelas tersebut dan proksi yang sesuai. Tingkah laku DNS ini terpakai kepada operasi HTTP luaran, bukan pengangkutan Telegram. Cloudflare mendokumenkan [hujung titik akhir DNS JSON](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/).
 
-****Parameter kolam automatik**** Di bawah **Parameter → MTProxy Automatik**, konfigurasi ambang kegagalan, masa rehat, putaran yang dirancang, perkongsian proksi dan kelewatan fallback yang dibenarkan. | Kawalan | Lalai | | --- | --- | | Putus sambungan sebelum penggantian | 3 dalam 10 minit | | Proksi yang dicuba bagi setiap percubaan sambungan | 3 | | Rehat pertama / maksimum selepas kegagalan | 10 minit / 6 jam | | Putaran yang dirancang | Dilumpuhkan; aktifkan semasa kegagalan | | Akaun setiap proksi | 0: utamakan kemasukan berasingan, kongsi apabila perlu. Tetapkan 1 untuk menunggu kemasukan eksklusif. | | Kelewatan sebelum fallback Langsung yang dibenarkan | 10 minit; Sembunyikan IP masih menolak Langsung | | Semakan semula suapan / pengesahan penghantaran | 60 / 10 minit; nilai ruang kerja utama terpakai pada kolam kongsi | Proksi yang berbeza tidak menjamin alamat keluar yang berbeza. Tetapan ini tidak membatalkan had Telegram atau membuktikan kerahsiaan.
+****Parameter kolam automatik**** Di bawah **Parameter → MTProxy Automatik**, konfigurasi ambang kegagalan, masa rehat, putaran yang dirancang, perkongsian proksi dan kelewatan fallback yang dibenarkan. | Kawalan | Lalai | | --- | --- | | Pemutusan sambungan sebelum penggantian | 3 dalam 10 minit | | Proksi dicuba bagi setiap percubaan sambungan | 3 | | Rehat pertama / maksimum selepas kegagalan | 10 minit / 6 jam | | Putaran yang dirancang | Dilumpuhkan; aktifkan semasa kegagalan | | Akaun setiap proksi | 0: utamakan entri berasingan, kongsi apabila perlu. Tetapkan 1 untuk menunggu entri eksklusif. | | Jeda sebelum pelepasan langsung yang dibenarkan | 10 minit; Sembunyikan alamat masih menolak Direct | | Semakan penyegaran suapan / pengangkutan | 60 / 10 minit; nilai ruang kerja utama terpakai pada kolam kongsi | Proksi yang berbeza tidak menjamin alamat keluar yang berbeza. Tetapan ini tidak membatalkan had Telegram atau membuktikan kebolehsembunyian.
 
 Untuk menggantikan senarai awam dengan katalog pengendali anda sendiri, konfigurasi penggantian di bawah. Ia menyahaktifkan langganan luaran sepenuhnya, termasuk apabila tatasusunan `proxies`-nya kosong.
 

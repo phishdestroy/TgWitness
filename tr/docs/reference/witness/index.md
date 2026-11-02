@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/tr/docs/reference/witne
 
 Kendi anahtarı ve botu olan bir tanık çalıştırın, imzalı kontrol noktalarını bir kanala yayınlayın ve dışa aktarımları bu kontrol noktalarıyla karşılaştırarak doğrulayın.
 
-[Rusça bot ve proxy ayarları](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/WITNESS.md).
+[Dışa aktarma ve doğrulama](https://phishdestroy.github.io/TgWitness/tr/docs/reference/evidence/) · [Yüksek güvenilirlik](https://phishdestroy.github.io/TgWitness/tr/docs/reference/high-assurance/) · [Panel kılavuzu](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#extras)
 
 Bir toplayıcı kendi günlüğünü imzalar; bu nedenle, toplayıcıyı ve anahtarını kontrol eden kişi, prensip olarak günlüğü yeniden yazabilir veya kısaltabilir ve tekrar imzalayabilir. Bir tanık, bunu tespit edilebilir hale getirir. Bu, ayrı bir işlemdir — başka bir konteyner ya da daha doğrusu başka birinin işlettiği bir sunucu — ve birkaç dakikada bir toplayıcının imzalı günlük başlığını alır, gördüklerini kendi anahtarıyla imzalar, kendi günlüğünde saklar ve bir Telegram kanalına gönderir.
 
@@ -27,7 +27,7 @@ Akış şeması · Toplayıcı → Witness (imzalı kontrol noktası: kayıt say
 | Kendi Ed25519 anahtarı ve günlüğü | Toplayıcının kasası, imzalama anahtarı veya panel jetonu |
 | Kendi Telegram bot jetonu | Mesaj içeriği: başlıkta kayıt sayısı ve bir hash yer alır |
 
-Token, panelin **Witness** sayfasında oluşturulur, bir kez gösterilir ve yalnızca SHA-256 olarak saklanır. Tam olarak bir uç nokta açar: `GET /api/witness/head`; bu uç nokta, yeni imzalanmış bir kontrol noktası ile imzalanmış, içerik içermeyen toplama sayaçları ve operasyonel durum bilgisini döndürür. Panel açamaz, mesaj içeriğini okuyamaz veya ayarları değiştiremez ve panel jetonu burada kabul edilmez. Aynı sayfadan bir jetonu iptal edebilirsiniz. Toplayıcı, yeni bir tanık anahtarının (`witness.seen`) ne zaman kontrol etmeye başladığını kaydeder ve jeton başına son kontrolü gösterir; 2,5 aralık içinde kontrol yapılmayan bir tanık, gecikmiş olarak işaretlenir.
+Token, **Extras → Independent witness** bölümünde oluşturulur, bir kez gösterilir ve yalnızca SHA-256 olarak saklanır. Tam olarak tek bir uç noktayı açar; `GET /api/witness/head`; bu uç nokta, yeni imzalanmış bir kontrol noktası ile imzalanmış, içerik içermeyen toplama sayaçları ve operasyonel durum bilgisini döndürür. Paneli açamaz, mesaj içeriğini okuyamaz veya ayarları değiştiremez; ayrıca panel jetonu burada kabul edilmez. Aynı sayfadan bir jetonu iptal edebilirsiniz. Toplayıcı, yeni bir tanık anahtarının ne zaman kontrol etmeye başladığını kaydeder (`witness.seen`) ve jeton başına son kontrolü gösterir; 2,5 aralık içinde kontrol yapmamış bir tanık, gecikmiş olarak işaretlenir.
 
 Yeni tanıklar her oylamada rastgele bir doğrulama mesajı gönderir; yakalama ifadesi bunu toplayıcı imzası altında yineler. Sayaçlar tam kontrol noktasına bağlıdır ve imzalı tanık gönderilerine dahil edilir. Eski başlıklar bağımsız tanık tarafından kabul edilmeye devam eder. Günlüğün büyümesi tek başına asla yeni bir mesaj olarak sayılmaz.
 
@@ -54,7 +54,7 @@ TGW1.eyJhdCI6…<statement>.<signature>
 
 Bir Telegram botuna (@BotFather ile oluşturabilirsiniz), bu botun yönetici olduğu bir kanala ve tanık tarafından erişilebilir bir toplayıcı adresine ihtiyacınız vardır — özel ağın dışında HTTPS üzerinden ([kurulum](https://phishdestroy.github.io/TgWitness/tr/docs/reference/deployment/) bölümündeki HTTPS profiline bakın).
 
-**Ekstra'ları** açın **→ Kanalınızdaki bir bot →** Panelde **bir bot kurun** . Üç adımda salt okunur erişim, kanalınız ve aralık ayarlarını yapın, ardından tanık botunu başlatın. Yayın politikası, isteğe bağlı HTTP/SOCKS5 proxy ve özel Bot API adresi **Gelişmiş ayarlar** altında bulunur. Form, bu çalışma alanının sabitlenmiş toplayıcı anahtarıyla birlikte `witness.json` dosyasını indirir. Yeni oluşturulan salt okunur jetonu "**Erişim dosyasını**`witness-token.txt` olarak **kaydet** " seçeneğiyle indirin; bunu ve tanık sunucusunda oluşturulan `bot-token.txt` dosyasını o JSON dosyasının yanına yerleştirin. Toplayıcı, bot jetonunu asla almaz. İndirme işlemi bir hizmeti başlatmaz veya mesaj yayınlamaz. Barındırılan proje tanığı örtük olarak kaydedilmez.
+Panelde **Ekstralar → Bağımsız tanık → Yapılandır** öğesini açın. Üç adımda salt okunur erişim, kanalınız ve aralık ayarlarını yapıp tanığı başlatabilirsiniz. Yayın politikası, isteğe bağlı HTTP/SOCKS5 proxy ve özel Bot API adresi **Gelişmiş ayarlar** öğesinin altındadır. Form, bu çalışma alanının toplayıcı anahtarı sabitlenmiş olarak `witness.json` bu çalışma alanının toplayıcı anahtarı sabitlenmiş olarak indirilir. Yeni oluşturulan salt okunur jetonu **Erişim dosyasını kaydet** ile `witness-token.txt`; bunu ve `bot-token.txt`tanık sunucusunda oluşturulan bu JSON'un yanına yerleştirin. Toplayıcı, bot jetonunu asla almaz. İndirme işlemi bir hizmeti başlatmaz veya bir mesaj yayınlamaz. Barındırılan hiçbir proje tanığı zımnen kaydedilmez.
 
 ```
 python -m tgwitness.witness run --config witness.json --check-config
@@ -95,6 +95,17 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
     --token-file witness-token.txt --bot-token-file bot-token.txt --channel @your_witness_channel
 ```
 
+### Discord'da yayınla
+
+Bir tanık, Telegram yerine bir Discord kanalına gönderi paylaşabilir. Discord’da **Kanal Düzenle → Entegrasyonlar → Webhook’lar’ı** açın, bir webhook oluşturun ve URL’sini kopyalayın. Panelde, 2. adımda **Discord webhook · kanalınız’ı** seçin. Tanık sunucusunda, URL’yi `discord-webhook.txt` yanına `witness.json`; bu URL asla toplayıcıya ulaşmaz.
+
+```
+python -m tgwitness.witness run --collector https://your-collector.example.org \
+    --token-file witness-token.txt --discord-webhook-file discord-webhook.txt
+```
+
+Bir tanığın tek bir yayıncısı vardır: ya bir Telegram kanalı ya da bir Discord webhook'u; ikisi birden olamaz. Gönderiler aynı imzalı beyanı içerir ve kimseye ping atamaz. Discord'un 2.000 karakter sınırını aşan bir gönderi, tam kontrolün `witness-check.txt`. Her gönderi kimliği, `witness.posted`. `verify.py --channel`sadece Telegram kanalının dışa aktarımlarını okur; bu nedenle Discord için tanık günlüğünü saklayın: bu günlük her kontrolü içerir.
+
 ### Seçenekler
 
 | Seçenek | Ortam | Varsayılan | Anlam |
@@ -109,7 +120,7 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
 | `--data-dir` | `_DATA` | `witness-data` | Tanık anahtarı ve günlüğü |
 | `--config` | `_CONFIG` | – | Yukarıdaki seçeneklerden herhangi birini içeren JSON dosyası |
 
-Toplayıcı adresi, tokenlar ve kanal, `--collector`, `--token` veya `--token-file`, `--bot-token` veya `--bot-token-file` ve `--channel`, ya da `_COLLECTOR`, `_TOKEN`, `_TOKEN_FILE`, `_BOT_TOKEN`, `_BOT_TOKEN_FILE` ve `_CHANNEL`'den gelir; bu sayede gizli bilgiler işlem listesinin dışında tutulur.
+Toplayıcı adresi, jetonlar ve kanal `--collector`, `--token` veya `--token-file`, `--bot-token` veya `--bot-token-file`, `--discord-webhook-file` ve `--channel`, veya `_COLLECTOR`, `_TOKEN`, `_TOKEN_FILE`, `_BOT_TOKEN`, `_BOT_TOKEN_FILE`, `_DISCORD_WEBHOOK_FILE` ve `_CHANNEL`, bu da gizli öğeleri işlem listesinden uzak tutar.
 
 Bir yapılandırma dosyası, alt çizgi içeren seçenek adlarının yanı sıra, kanal gönderilerindeki kelimelerin yerine geçen `texts`'yi kullanır:
 
@@ -123,6 +134,36 @@ Bir yapılandırma dosyası, alt çizgi içeren seçenek adlarının yanı sıra
 `texts` anahtarları: `ok`, `key_changed`, `rollback`, `fork`, `invalid`, `no_response`, `collector`, `records`, `head`. Komut satırı ortamdan, ortam ise dosyadan önceliklidir. Bilinmeyen seçenekler veya metin anahtarları, göz ardı edilmeyip bir mesajla tanık işlemini durdurur. İfade biçimi doğrulamayı asla etkilemez: verify.py, her gönderimin sonunda imzalı belirteci kontrol eder. `--post changes` veya `problems` ile, gönderilmemiş kontroller yine de tanık günlüğünde yer alır ve `verify.py` bunları hiç gönderilmemiş olarak listeler; başlangıç kaydı politikayı belirtir. Her kontrol yine de günlüğünde görünür, bu nedenle daha az gönderi, daha az bağımsız Telegram zamanı anlamına gelir, daha az kontrol anlamına gelmez.
 
 Kanal olmasa bile tanık, günlüğünü tutmaya devam eder. Tanık anahtarının parmak izini (`python -m tgwitness.witness fingerprint`) başka bir yerde saklayın.
+
+## Çeşitli çalışma alanları için herkese açık kanıt sayfası
+
+`python -m tgwitness.proof` Aynı anda en fazla 32 çalışma alanını izler ve her birinin en son imzalanmış kontrolünü içeren, salt okunur bir sayfa sunar. Her çalışma alanı, veri klasörü altında kendine ait bir tanık anahtarı ve günlüğü ile sabitlenmiş bir toplayıcı anahtarı alır; bir Telegram kanalına gönderim, çalışma alanı başına isteğe bağlıdır. Şu dosyadan başlayın: [proof.config.example](https://github.com/phishdestroy/TgWitness/blob/main/deploy/proof.config.example):
+
+| Alan | Anlam |
+| --- | --- |
+| `title` | Sayfa başlığı, 1–100 karakter |
+| `data_dir` | Dosyaya ilişkin Witness anahtarları ve günlükleri; varsayılan `proof-data` |
+| `interval`, `timeout` | Kontroller arasındaki süre (1–1440 dakika, varsayılan 5); bekleme süresi (5–600 saniye, varsayılan 20) |
+| `workspaces[].id`, `label` | Kısa küçük harfli takma ad ve gösterilen ad |
+| `workspaces[].collector` | Toplayıcı adresi; diğer çalışma alanlarının sonu `/profiles/<workspace ID>` |
+| `workspaces[].collector_fingerprint` | Zorunlu, her çalışma alanı için farklıdır |
+| `workspaces[].token_file` | Bu çalışma alanının salt okunur tanık jetonunu içeren dosya |
+| `workspaces[].channel`, `bot_token_file` | İsteğe bağlı, birlikte: her kontrolü bir kanala gönderin |
+| `workspaces[].proxy`, `bot_api` | İsteğe bağlı rota ve Bot API adresi |
+
+```
+python -m tgwitness.proof --config proof.json --check-config
+python -m tgwitness.proof --config proof.json --host 127.0.0.1 --port 8790
+```
+
+İlk komut, bağlantı kurmadan dosyayı ve token dosyalarını doğrular. Sayfa yalnızca GET ve HEAD isteklerine yanıt verir:
+
+- `/` Tüm çalışma alanlarını gösterir; 2,5 aralık boyunca kontrol edilmeyen bir çalışma alanı, güncel olmayan olarak işaretlenir.
+- `/api/proof` JSON ile aynı sonucu döndürür.
+- `/api/proof/<id>` en son imzalanmış beyanı indirir (`tgwitness-public-proof-v1`): tanık kayıt numarası ve hash değeri, durum, sabitlenmiş toplayıcı anahtarı, kontrol noktası, toplama sayıcıları ve kanal gönderisinin başarılı olup olmadığı; söz konusu çalışma alanının tanık anahtarıyla imzalanmış.
+- `/healthz` Bir çalışma alanının monitörü durduğunda 503 hatası verir.
+
+Sayfaya, [Caddyfile.proof.example](https://github.com/phishdestroy/TgWitness/blob/main/deploy/Caddyfile.proof.example) örneğindeki gibi kendine ait bir ana bilgisayar adı verin. Doğrulama için, bir çalışma alanının tanık günlüğünü `python -m tgwitness.witness export --data-dir proof-data/<id> --out witness.zip` dışa aktarın ve aşağıda açıklandığı gibi kullanın.
 
 ## Doğrula
 

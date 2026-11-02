@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ko/docs/reference/case-
 
 Case Board는 수사팀에게 저장된 자료에 대한 공유 작업 화면을 제공합니다. 관찰 내용을 북마크하고, 정확한 구절을 강조 표시하며, 일련의 조치를 저장하고, 동료들과 논의할 수 있습니다. 카드에는 원본 참조 정보와 서명된 수정 내역이 유지됩니다. 팀의 주석은 작업 공간에 남아 있으며, 원본 텔레그램 관찰 내용과 별도로 식별할 수 있습니다.
 
-[증거 모델](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/) · [접근](https://phishdestroy.github.io/TgWitness/ko/docs/reference/access/) · [보고서](https://phishdestroy.github.io/TgWitness/ko/docs/reference/case-reports/) · [Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE-BOARD.md)
+[증거 모델](https://phishdestroy.github.io/TgWitness/ko/docs/reference/evidence/) · [접근](https://phishdestroy.github.io/TgWitness/ko/docs/reference/access/) · [보고서](https://phishdestroy.github.io/TgWitness/ko/docs/reference/case-reports/)
 
 ![합성 수사 피드](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
 

@@ -235,7 +235,7 @@ Guruh tegishli hisoblarni ularning sessiyalari, kalitlari yoki dalillarini birla
 - **Suhbatlar bir nechta hisoblarni ko'rsatadi:** ulashilgan manbalar, ularni kuzatayotgan hisoblar va mavjud ish maydoni-kuzatuv davrida (7 kungacha) uzilishlar. **N ta hisob bilan eksport** kanal yoki superguruh eksportini ularga bo'lib beradi va bitta arxivni imzolaydi.
 - **Guruhni eksport qilish:** har bir hisobning imzolangan eksporti bilan bitta ZIP `accounts/` va `manifest.json` SHA-256 va kalit barmoq izlarini ro'yxatlab, asosiy ish maydoni tomonidan imzolangan `manifest.signature.json`. Har bir akkaunt arxivini alohida tarzda bilan tasdiqlang. `python -m tgwitness.verify` va o'sha hisobning ishonchli barmoq izi yordamida.
 
-A'zolar guruh sozlamalarini baham ko'radi; hisob o'z qiymatlarini saqlab qolishi mumkin. Qarang [ulashilgan sozlamalar](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups), [import va guruhlar bo'yicha qo'llanma](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) va [MTProxy pool boshqaruv paneli](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
+A'zolar guruh sozlamalarini baham ko'radi; hisob o'z qiymatlarini saqlab qolishi mumkin. Qarang [ulashilgan sozlamalar](https://phishdestroy.github.io/TgWitness/uz/docs/reference/settings/#account-groups), [import va guruhlar bo'yicha qo'llanma](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) va [MTProxy pool boshqaruv paneli](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources).
 
 ## Chiqish
 
@@ -278,6 +278,6 @@ Konverter faqat Telethon SQLite (64 MiB gacha) faylini o'qiydi, kirishni hech qa
 | Hisob IDi import qilingan hisob bilan mos kelmaydi | Faylning foydalanuvchi IDi Telegram xabar qilganidan farq qiladi; fayl boshqa hisob uchun mo'ljallangan. |
 | Hisob allaqachon boshqa ish maydoniga tegishli | Hisobni ikki marta qo'shish o'rniga o'sha ish maydonini oching. |
 | Ulanish mavjud, ammo **Manbalar** chat ro'yxatida shaxsiy guruh yo'q. | A'zolikni tekshiring. Tanlovchi birinchi 1 000 ta dialogni tekshiradi; **parametrlar** bo'limida limitni oshiring. |
-| Proxy ulanishi muvaffaqiyatsiz bo'ldi | Yo'nalish va IP rejimini tekshiring. Avtomatik MTProxy boshqa ishlaydigan kirishni sinab ko'radi. IP yashirish rejimi kutadi; aniq tanlangan zaxira rejimi sozlangan kechikishdan so'ng to'g'ridan-to'g'ri ulanishi mumkin. [Yo'naltirish rejimlarini](https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/#ip-modes) ko'ring. |
+| Proxy ulanishi muvaffaqiyatsiz bo'ldi | Yo'nalish va IP rejimini tekshiring. Avtomatik MTProxy boshqa ishlaydigan kirishni sinab ko'radi. "Adressni yashirish" kutadi; "To'g'ridan-to'g'ri" esa oxirgi chora sifatida sozlangan kechikishdan so'ng to'g'ridan-to'g'ri ulanishi mumkin. [Yo'naltirish rejimlarini](https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/#ip-modes) ko'ring. |
 
 Shuningdek qarang: proksi va shifrlash uchun [ulanish va xavfsizlik](https://phishdestroy.github.io/TgWitness/uz/docs/reference/connection/), hamda tizimga kirgandan keyin [qanday ma'lumotlar yig'ilishi](https://phishdestroy.github.io/TgWitness/uz/docs/reference/collection/).

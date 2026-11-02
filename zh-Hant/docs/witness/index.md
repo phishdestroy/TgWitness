@@ -40,8 +40,8 @@ Witness 會自行執行驗證。收集器的存取權限為唯讀。機器人發
 
 ## 「進階功能」中的三個步驟
 
-1. **唯讀存取權限。**開啟「**Extras」→ 在您的頻道中加入一個機器人**，建立一個見證代幣並儲存存取檔案。此權限僅允許讀取檢查點和系統狀態，無法存取對話內容或收集器控制功能。
-2. **頻道與間隔。**請輸入頻道名稱，以及可從該頻道存取的收集器位址。儲存設定檔。
+1. **唯讀存取權限。**開啟「**Extras」→「Independent witness」**，建立見證者代幣並儲存存取檔案。此權限僅允許讀取檢查點與系統狀態，無法存取對話內容或收集器控制項。
+2. **頻道與間隔。**選擇一個 Telegram 頻道或 Discord Webhook，並輸入可從見證節點存取的收集器地址。儲存設定檔。
 3. **啟動。**將 `witness.json`、`witness-token.txt` 以及在 Witness 主機上建立的 `bot-token.txt` 置於同一位置。在已安裝的專案環境中執行以下指令。
 
 ```
@@ -50,6 +50,8 @@ python -m tgwitness.witness run --config witness.json
 ```
 
 下載檔案並不會啟動「witness」。請確認首則簽名貼文已出現在頻道中，然後將「witness」的公鑰指紋另行保存。
+
+針對 Discord，請將頻道的 webhook URL 儲存為 `discord-webhook.txt` ，而非機器人代幣。見證人會將內容發佈至單一位置（Telegram 頻道或 Discord 頻道）；長於 Discord 訊息長度的驗證結果將以附件形式傳送。
 
 ## 選擇發布頻率
 

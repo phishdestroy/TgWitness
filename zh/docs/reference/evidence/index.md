@@ -223,7 +223,7 @@ ZIP 导出工具会根据文件名对存储的媒体文件进行验证。JSONL�
 
 ## 证据模式下的可选记录：drand 和 Telegram 设备
 
-还有两项记录可与时间戳在同一轮处理中运行。这两项默认均处于关闭状态， 且仅在证据模式开启时生效：扩展功能 → 证据 → **更多见证人 · 可选**， 或 `"drand": true` 以及 `"devices": true`（位于 `POST /api/evidence` 中）。其中一项出现故障不会阻止 另一项或时间戳的运行；面板会在表单下方显示每项的最新结果。
+还有两项记录功能可与时间戳在同一轮处理中运行。这两项功能默认均处于关闭状态， 且仅在证据模式开启时生效：[扩展] → [证据与备份] → [**更多见证人] · 可选**， 或 `"drand": true` 以及 `"devices": true` 在 `POST /api/evidence`中。其中一项失败不会阻止 另一项或时间戳的运行；面板会在表单下方显示每项的最新结果。
 
 **drand** （`beacon.drand` ）。每次处理都会将最新一轮的 drand quicknet（即熵联盟的公共 随机数，每 3 秒一轮）写入日志：`chain` 、 `round` 、`randomness` 、`signature` 、`round_time` 以及响应的 `relay` 。一个经过验证的 不可预测的轮次为后续哈希链接的材料提供了较低的时间参考。 后续检查点上的经过验证的时间戳则提供时间上限。这些检查 界定了关联的数据范围；数据收集的覆盖范围则单独评估。收集器首先向 `drand.cloudflare.com` 发起请求，然后通过工作区路径向 Protocol Labs 的中继节点发起请求，每轮一次请求。
 
@@ -235,4 +235,4 @@ ZIP 导出工具会根据文件名对存储的媒体文件进行验证。JSONL�
 
 2026年11月1日测试结果：`tools/check_evidence_witnesses.py --live` 向 `drand.cloudflare.com` 发起了一轮真实交互，导出了日志，并由 `drand.cloudflare.com` 和 `api.drand.sh` 确认了该交互；设备列表是针对模拟的 Telegram 响应运行的，而非真实账户。
 
-**Cloudflare Gateway 日志**（`cloudflare.gateway_dns`）。 对于通过 Cloudflare Gateway（[Gateway DNS](https://github.com/phishdestroy/TgWitness/blob/main/docs/HIGH-ASSURANCE.md#cloudflare-as-an-outside-witness)）进行解析的服务器，每次 复制都会包含自上次复制以来 Gateway 记录的内容：每个时间窗口（最长三 小时）对应一条记录，包含 `from`、`until`、`location_id`、服务器的 `address`（若已设置），以及 `queries`（作为 `[at, name, type, rcode, decision, colo]`，即使没有记录时也包含）。 请在 **下进行设置。Cloudflare Gateway日志**：账户、位置、可选地址以及一个只读令牌（账户 Analytics 读取；零信任 PII 读取，用于保留共享位置的一个地址）。控制面板会在保存前通过 一次请求验证这些信息；令牌始终保持加密状态，且绝不会进入日志。 `verify.py` 列出了时间窗口、被查询次数最多的名称以及任何未被副本覆盖的时间段；如果某条记录 的计数与其查询不匹配，则该记录将失败。 若某个时间窗口在单秒内包含超过一页的 查询，则保留该页内容，并标注其余部分缺失。该副本是 Cloudflare 通过收集器返回的响应，并由收集器签名；在 24 小时内，任何持有 只读令牌的用户均可将其与 Cloudflare 进行比对。
+**Cloudflare Gateway 日志**（`cloudflare.gateway_dns`）。 对于通过 Cloudflare Gateway（[Gateway DNS](https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/#cloudflare-as-an-outside-witness)）进行解析的服务器，每次 复制都会包含自上次复制以来 Gateway 记录的内容：每个时间窗口（最长三 小时）对应一条记录，包含 `from`、`until`、`location_id`、服务器的 `address`（若已设置），以及 `queries`（作为 `[at, name, type, rcode, decision, colo]`，即使没有记录时也包含）。 请在 **下进行设置。Cloudflare Gateway日志**：账户、位置、可选地址以及一个只读令牌（账户 Analytics 读取；零信任 PII 读取，用于保留共享位置的一个地址）。控制面板会在保存前通过 一次请求验证这些信息；令牌始终保持加密状态，且绝不会进入日志。 `verify.py` 列出了时间窗口、被查询次数最多的名称以及任何未被副本覆盖的时间段；如果某条记录 的计数与其查询不匹配，则该记录将失败。 若某个时间窗口在单秒内包含超过一页的 查询，则保留该页内容，并标注其余部分缺失。该副本是 Cloudflare 通过收集器返回的响应，并由收集器签名；在 24 小时内，任何持有 只读令牌的用户均可将其与 Cloudflare 进行比对。

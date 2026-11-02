@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/witne
 
 O'z kaliti va botiga ega Witnessni ishga tushiring, imzolangan tekshiruv nuqtalarini kanalga joylashtiring va eksportlarni ularga solishtiring.
 
-[Bot va proxy sozlamalari rus tilida](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/WITNESS.md).
+[Eksport va tekshirish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/evidence/) · [Yuqori ishonchlilik](https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/) · [Panel bo'yicha qo'llanma](https://phishdestroy.github.io/TgWitness/uz/docs/reference/panel/#extras)
 
 Yig'uvchi o'z jurnalini imzolaydi, shuning uchun yig'uvchi va uning kalitini nazorat qiluvchi har kim nazariy jihatdan jurnalni qayta yozishi yoki qisqartirishi va uni yana imzolashi mumkin. Guvox buni aniqlashga imkon beradi. Bu alohida jarayon — yana bir konteyner yoki, yaxshisi, kimdir boshqarayotgan server — bo'lib, u har bir necha daqiqada kollektorning imzolangan jurnal boshini oladi, ko'rganlarini o'z kaliti bilan imzolaydi, uni o'z jurnalida saqlaydi va Telegram kanaliga joylaydi.
 
@@ -27,7 +27,7 @@ Oqim sxemasi · Yig'uvchi → Guvoh (imzolangan tekshiruv nuqtasi: yozuvlar soni
 | O'zining Ed25519 kaliti va jurnali | Yig'uvchining ombori, imzolash kaliti yoki panel tokeni |
 | O'z Telegram bot tokeni | Xabar mazmuni: sarlavha yozuvlar soni va xesh |
 
-Token panelning **Witness** sahifasida yaratiladi, bir marta ko'rsatiladi va faqat SHA-256 ko'rinishida saqlanadi. U aynan bitta endpointni, `GET /api/witness/head` ni ochadi, u yangi imzolangan tekshiruv nuqtasini hamda mazmunsiz to'plam hisoblagichlari va operatsion holatini imzolab qaytaradi. U panelni ocholmaydi, xabar mazmunini o'qiy olmaydi yoki sozlamalarni o'zgartira olmaydi, va panel tokeni u yerda qabul qilinmaydi. Tokenni shu sahifada bekor qiling. Yig'uvchi yangi guvoh kaliti tekshirishni boshlagan vaqtni (`witness.seen`) qayd etadi va har bir token bo'yicha oxirgi tekshiruvni ko'rsatadi; 2,5 intervallarda tekshirilmagan guvoh muddati o'tgan deb belgilangan.
+Token **Extras → Mustaqil guvoh** bo'limida yaratiladi, bir marta ko'rsatiladi va faqat SHA-256 sifatida saqlanadi. U aniq bir endpointni ochadi, `GET /api/witness/head`, u yangi imzolangan tekshiruv nuqtasini, shuningdek imzolangan, kontentsiz to'plam hisoblagichlari va operatsion holatini qaytaradi. U panelni ocholmaydi, xabar kontentini o'qiy olmaydi yoki sozlamalarni o'zgartira olmaydi va panel tokeni u yerda qabul qilinmaydi. Tokenni shu sahifada bekor qiling. Yig'uvchi qayd etadi yangi guvoh kaliti tekshirishni qachon boshlaganini (`witness.seen`) va har bir token bo'yicha oxirgi tekshiruvni ko'rsatadi; 2,5 intervaldan ortiq tekshirilmagan guvoh kechikkan deb belgilangan.
 
 Yangi guvohlar har bir so'rov bo'yicha tasodifiy chaqiriq yuboradilar; capture bayonoti uni kollektor imzosining ostida aks ettiradi. Hisoblagichlar aniq nazorat nuqtasiga bog'langan va imzolangan guvoh postlariga kiritilgan. Meros boshliqlar mustaqil guvoh tomonidan qabul qilinishda davom etadi. Jurnal hajmining o'sishi alohida yangi xabar sifatida hisobga olinmaydi.
 
@@ -54,7 +54,7 @@ TGW1.eyJhdCI6…<statement>.<signature>
 
 Sizga Telegram boti (uni @BotFather yordamida yarating), o'sha bot ma'mur bo'lgan kanal va guvohdan erishiladigan kollektor manzili kerak — xususiy tarmoqdan tashqarida HTTPS orqali (joylashtir[ish](https://phishdestroy.github.io/TgWitness/uz/docs/reference/deployment/)dagi HTTPS profiliga qarang).
 
-**Qo'shimchalarni** oching **→ Kanalingizdagi bot →** Paneldagi **botni sozlang** . Uch bosqichda faqat o'qish huquqi, kanalingiz va intervallar sozlanadi, so'ngra guvoh ishga tushiriladi. Nashr siyosati, ixtiyoriy HTTP/SOCKS5 proksi va maxsus Bot API manzili **Kengaytirilgan sozlam** alarda joylashgan. Forma ushbu ish maydonining yig'uvchi kaliti (collector key) biriktirilgan holda `witness.json` ni yuklab oladi. Yangi yaratilgan faqat o'qish uchun mo'ljallangan tokenni "**Save access file** as" `witness-token.txt` orqali yuklab oling; uni va guvoh mezbonida yaratilgan `bot-token.txt` ni shu JSON yoniga joylashtiring. Yig'uvchi bot tokenini hech qachon olmaydi. Yuklab olish xizmatni ishga tushirmaydi yoki xabarni e'lon qilmaydi. Hech qanday joylashtirilgan loyiha guvohi avtomatik ravishda ro'yxatdan o'tkazilmaydi.
+Paneldagi **Extras → Mustaqil guvoh → Sozlashni** oching. Uch bosqichda faqat o'qish huquqi, kanal va interval sozlanadi, so'ngra guvoh ishga tushiriladi. Nashr siyosati, ixtiyoriy HTTP/SOCKS5 proksi va maxsus Bot API manzili **Kengaytirilgan sozlamalarda** joylashgan. Forma yuklab olinadi `witness.json` ushbu ish maydonining yig'uvchi kaliti (collector key) belgilangan holda. Yangi yaratilgan faqat o'qish uchun mo'ljallangan tokenni "**Save access file** as" orqali yuklab oling. `witness-token.txt`; uni va bir `bot-token.txt`host'da yaratilgan JSON yoniga joylang. Collector bot tokenini hech qachon olmaydi. Yuklab olish xizmatni ishga tushirmaydi yoki xabar e'lon qilmaydi. Hech qanday joylashtirilgan loyiha guvohi avtomatik ravishda ro'yxatdan o'tkazilmaydi.
 
 ```
 python -m tgwitness.witness run --config witness.json --check-config
@@ -95,6 +95,17 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
     --token-file witness-token.txt --bot-token-file bot-token.txt --channel @your_witness_channel
 ```
 
+### Discordga e'lon qiling
+
+Guvoh Telegram o'rniga Discord kanaliga post qilishi mumkin. Discord'da **Kanalni tahrirlash → Integratsiyalar → Webhooks bo'limini** oching, webhook yarating va uning URL manzilini nusxalang. Panelda 2-qadamda **Discord webhook · o'zingizning kanalni** tanlang. Guvoh mezbonida URL manzilini sifatida saqlang `discord-webhook.txt` yonida `witness.json`; u hech qachon yig'uvchiga yetib bormaydi.
+
+```
+python -m tgwitness.witness run --collector https://your-collector.example.org \
+    --token-file witness-token.txt --discord-webhook-file discord-webhook.txt
+```
+
+Guvohda faqat bitta nashriyotchi bo'ladi: Telegram kanali yoki Discord webhook, ikkalasi ham emas. Postlar bir xil imzolangan bayonotni o'z ichiga oladi va hech kimga ping yubora olmaydi. Discord'ning 2 000 belgidan uzun post qisqa satr bilan almashtiriladi, to'liq tekshiruv esa ilova qilingan holda `witness-check.txt`. Har bir post ID quyidagicha qayd etiladi `witness.posted`. `verify.py --channel`Telegram kanal eksportlarini o'qiydi, shuning uchun Discord uchun guvoh jurnalini saqlang: u har bir tekshiruvni o'z ichiga oladi.
+
 ### Imkoniyatlar
 
 | Variant | Muhit | O'rnatilgan | Ma'no |
@@ -109,7 +120,7 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
 | `--data-dir` | `_DATA` | `witness-data` | Witness kaliti va jurnali |
 | `--config` | `_CONFIG` | – | Yuqoridagi istalgan variantlardan birini o'z ichiga olgan JSON fayl |
 
-Yig'uvchi manzili, tokenlar va kanal `--collector`, `--token` yoki `--token-file`, `--bot-token` yoki `--bot-token-file` va `--channel`, yoki `_COLLECTOR`, `_TOKEN`, `_TOKEN_FILE`, `_BOT_TOKEN`, `_BOT_TOKEN_FILE` va `_CHANNEL` manzillaridan keladi, ular jarayonlar ro'yxatidan sirlarni yashiradi.
+Yig'uvchi manzili, tokenlar va kanal keladi `--collector`, `--token` yoki `--token-file`, `--bot-token` yoki `--bot-token-file`, `--discord-webhook-file` va `--channel`, yoki `_COLLECTOR`, `_TOKEN`, `_TOKEN_FILE`, `_BOT_TOKEN`, `_BOT_TOKEN_FILE`, `_DISCORD_WEBHOOK_FILE` va `_CHANNEL`, bu jarayonlar ro'yxatidan sirlarni yashiradi.
 
 Konfiguratsiya fayli opsion nomlarini tirelar bilan, shuningdek `texts` ni ishlatadi, u kanal postlaridagi so'zlarni almashtiradi:
 
@@ -123,6 +134,36 @@ Konfiguratsiya fayli opsion nomlarini tirelar bilan, shuningdek `texts` ni ishla
 `texts` kalitlari: `ok`, `key_changed`, `rollback`, `fork`, `invalid`, `no_response`, `collector`, `records`, `head`. Kommanda qatori muhitdan ustun, muhit esa fayldan ustun. Noma'lum parametrlar yoki matnli kalitlar e'tiborsiz qoldirilish o'rniga xabar bilan guvohni to'xtatadi. Matn hech qachon tasdiqlashga ta'sir qilmaydi: verify.py har bir post oxirida imzolangan tokenni tekshiradi. `--post changes` yoki `problems` bilan joylanmagan tekshiruvlar ham guvoh jurnalida qoladi va `verify.py` ularni hech qachon joylanmagan deb ro'yxatlaydi; boshlang'ich yozuv siyosatni nomlaydi. Har bir tekshiruv jurnalda paydo bo'ladi, shuning uchun kamroq postlar kamroq mustaqil Telegram vaqtlarini anglatadi, tekshiruvlar soni esa kamaymaydi.
 
 Kanal bo'lmasa ham guvoh o'z jurnalini saqlab qoladi. Guvoh kalit barmoq izini (`python -m tgwitness.witness fingerprint`) boshqa joyda saqlang.
+
+## Bir nechta ish maydonchalari uchun ommaviy tasdiqlash sahifasi
+
+`python -m tgwitness.proof` bir vaqtning o'zida 32 tagacha ish maydonini kuzatadi va har birining so'nggi imzolangan tekshiruvini o'z ichiga olgan faqat o'qish uchun mo'ljallangan sahifani taqdim etadi. Har bir ish maydoni ma'lumotlar papkasi ostida o'z guvoh kaliti va jurnalini hamda biriktirilgan to'plovchi kalitni oladi; Telegram kanaliga post qilish har bir ish maydoni uchun ixtiyoriy hisoblanadi. [proof.config.](https://github.com/phishdestroy/TgWitness/blob/main/deploy/proof.config.example)example-dan boshlang:
+
+| Maydon | Ma'no |
+| --- | --- |
+| `title` | Sahifa sarlavhasi, 1–100 belgilar |
+| `data_dir` | Guvoh kalitlari va jurnallari, faylga nisbatan; standart `proof-data` |
+| `interval`, `timeout` | Tekshiruvlar orasidagi daqiqalar (1–1440, standart 5); kutish soniyalari (5–600, standart 20) |
+| `workspaces[].id`, `label` | Qisqa kichik harfli taxallus va ko'rsatilgan nom |
+| `workspaces[].collector` | Yig'uvchi manzili; boshqa ish maydonchalari bilan tugaydi `/profiles/<workspace ID>` |
+| `workspaces[].collector_fingerprint` | Talab qilinadi, har bir ish maydoni uchun turlicha |
+| `workspaces[].token_file` | Ushbu ish maydonining faqat o'qish uchun mo'ljallangan guvoh tokeni bilan fayl |
+| `workspaces[].channel`, `bot_token_file` | Ixtiyoriy, birgalikda: har bir tekshiruvni kanalga joylashtirish |
+| `workspaces[].proxy`, `bot_api` | Ixtiyoriy yo'nalish va Bot API manzili |
+
+```
+python -m tgwitness.proof --config proof.json --check-config
+python -m tgwitness.proof --config proof.json --host 127.0.0.1 --port 8790
+```
+
+Birinchi buyruq fayl va token fayllarini ulanishni ochmasdan tekshiradi. Sahifa faqat GET va HEAD so'rovlariga javob beradi:
+
+- `/` har bir ish maydonini ko'rsatadi; 2.5 intervallarni tekshirmasdan qoldirilgan ish maydoni eskirgan deb belgilangan.
+- `/api/proof` JSON kabi bir xil natijani qaytaradi.
+- `/api/proof/<id>` so'nggi imzolangan bayonotni yuklab oladi (`tgwitness-public-proof-v1`): guvoh yozuvi raqami va xesh, holat, biriktirilgan yig'uvchi kaliti, tekshiruv nuqtasi, yig'ma hisoblagichlar va kanal postining muvaffaqiyatli ekanligi, ushbu ish maydonining guvoh kaliti bilan imzolangan.
+- `/healthz` ish maydonining monitori to'xtaganida 503-javobni qaytaradi.
+
+Sahifaga [Caddyfile.proof.example](https://github.com/phishdestroy/TgWitness/blob/main/deploy/Caddyfile.proof.example) kabi o'z host nomini bering. Tekshirish uchun ish maydonining guvoh jurnalini eksport qiling `python -m tgwitness.witness export --data-dir proof-data/<id> --out witness.zip` va uni quyida tavsiflangandek ishlating.
 
 ## Tasdiqlang
 

@@ -235,7 +235,7 @@ TData 是 Telegram Desktop 应用程序（来自 desktop.telegram.org 的跨平�
 - **多个账户可见的聊天记录包括：** 共享来源、正在查看这些记录的账户以及 可用工作区观察期间（最长七天）内的中断情况。**使用 N 个账户进行导出时，** 会将频道或超级群组的导出内容分配给这些账户，并为一个存档文件签名。
 - **导出组:**包含一个 ZIP，其中包含每个账户的已签名导出文件，位于 `accounts/` ，并 `manifest.json` 列出其SHA-256和密钥指纹，由主 工作区在 `manifest.signature.json`。请使用 `python -m tgwitness.verify` 并使用该账户的可信指纹进行验证。
 
-成员共享群组的设置；单个账户可保留其自身的设置值。 请参阅[共享设置](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups)、 [导入与群组指南](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) 以及 [MTProxy 数据池仪表盘](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)。
+成员共享群组的设置；单个账户可保留其自身的设置值。 请参阅[共享设置](https://phishdestroy.github.io/TgWitness/zh/docs/reference/settings/#account-groups)、 [导入与群组指南](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings) 以及 [MTProxy 数据池仪表盘](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)。
 
 ## 退出登录
 
@@ -278,6 +278,6 @@ TData 是 Telegram Desktop 应用程序（来自 desktop.telegram.org 的跨平�
 | 账户 ID 与导入的账户不匹配 | 该文件的用户 ID 与 Telegram 报告的不一致；该文件属于另一个账户。 |
 | 该账户已属于另一个工作区 | 请打开该工作区，而非重复添加该账户。 |
 | 已连接，但**“来源**”中的聊天列表中缺少一个私人群组 | 检查成员资格。筛选器会检查前 1,000 个对话；请在**“参数**”下提高该限制。 |
-| 代理连接失败 | 检查路由和 IP 模式。自动 MTProxy 会尝试另一个可用的条目。隐藏 IP 模式将进入等待状态；明确选定的备用模式将在配置的延迟时间过后直接建立连接。参见[路由模式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/#ip-modes)。 |
+| 代理连接失败 | 检查路由和 IP 模式。自动模式MTProxy会尝试其他可用的入口。隐藏地址模式会等待；直接模式作为最后手段，可在配置的延迟后直接连接。参见[路由模式](https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/#ip-modes)。 |
 
 另请参阅：代理和加密的[连接与安全](https://phishdestroy.github.io/TgWitness/zh/docs/reference/connection/)设置， 以及登录后数据采集的具体[工作原理](https://phishdestroy.github.io/TgWitness/zh/docs/reference/collection/)。

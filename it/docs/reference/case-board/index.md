@@ -6,7 +6,7 @@ Segnalibri, evidenziazioni precise, sezioni di azione, discussioni, accesso limi
 
 Case Board offre al team investigativo una visione condivisa del materiale salvato. È possibile aggiungere un segnalibro a un’ osservazione, evidenziare un passaggio preciso, salvare una serie di azioni e discuterne con i colleghi. Le schede conservano i riferimenti alle fonti e la cronologia delle revisioni firmata. Le annotazioni del team rimangono nell’ area di lavoro, distinguibili dalle osservazioni originali di Telegram.
 
-[Modello probatorio](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/) · [Accesso](https://phishdestroy.github.io/TgWitness/it/docs/reference/access/) · [Rapporti](https://phishdestroy.github.io/TgWitness/it/docs/reference/case-reports/) · [Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE-BOARD.md)
+[Modello probatorio](https://phishdestroy.github.io/TgWitness/it/docs/reference/evidence/) · [Accesso](https://phishdestroy.github.io/TgWitness/it/docs/reference/access/) · [Rapporti](https://phishdestroy.github.io/TgWitness/it/docs/reference/case-reports/)
 
 ![Feed sintetico delle indagini](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
 

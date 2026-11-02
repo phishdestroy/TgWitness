@@ -6,15 +6,15 @@ Halten Sie die Verbindung zum Konto aufrecht. Legen Sie ausdrücklich fest, wann
 
 ## Wählen Sie zunächst den IP-Modus aus
 
-01**IP verbergen**
+01**Adresse ausblenden**
 
 Verwenden Sie einen Proxy. Sollte keiner funktionieren, warten Sie, ohne eine direkte Verbindung zu Telegram herzustellen.
 
-02**Fallback zulassen**
+02**Direkt als letztes Mittel**
 
 Nach Ablauf der konfigurierten Verzögerung den direkten Zugriff zulassen; zu einem funktionierenden Proxy zurückkehren, sobald einer antwortet.
 
-03**Tunnel / VPN**
+03**Server hinter einem Tunnel oder VPN**
 
 Erlauben Sie direkte Verbindungen durch das Netzwerk des Hosts. Bei dieser Option wird kein VPN installiert oder überprüft.
 
@@ -27,7 +27,7 @@ Die Route bestimmt die Verbindung. Der IP-Modus legt fest, ob eine direkte Verbi
 3. Speichern Sie **die Telegram-Verbindung** und führen Sie **den Test** durch. Dies funktioniert auch vor der Anmeldung.
 4. Überprüfen Sie nach dem Start der Erfassung, ob eine Testnachricht im Protokoll eingeht.
 
-Neue Arbeitsbereiche nutzen automatisch MTProxy mit „Hide IP“-Funktion. Der Pool kombiniert vier öffentliche Quellen, prüft Einträge, behält funktionierende Routen bei und ersetzt ausgefallene Proxys. Bei fehlgeschlagenen Downloads bleiben die vorherigen Snapshots erhalten.
+Neue Arbeitsbereiche verwenden automatisch MTProxy mit **Adresse ausblenden**. Der Pool kombiniert vier öffentliche Quellen, überprüft Einträge, behält funktionierende Routen bei und ersetzt ausgefallene Proxys. Bei fehlgeschlagenen Downloads bleiben die vorherigen Snapshots erhalten.
 
 ## Verwenden Sie Ihren eigenen Proxy
 

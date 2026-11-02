@@ -6,15 +6,15 @@ Należy utrzymać połączenie z kontem. Należy wyraźnie określić, w jakich 
 
 ## Proszę najpierw wybrać tryb IP
 
-01**Ukryj adres IP**
+01**Ukryj adres**
 
 Proszę skorzystać z serwera proxy. Jeśli żaden z nich nie działa, proszę poczekać bez bezpośredniego połączenia z Telegramem.
 
-02**Zezwól na rozwiązanie awaryjne**
+02**Direct jako ostateczność**
 
 Po upływie skonfigurowanego opóźnienia zezwól na bezpośrednie połączenie; w przypadku uzyskania odpowiedzi należy powrócić do działającego serwera proxy.
 
-03**Tunel / VPN**
+03**Serwer za tunelem lub VPN**
 
 Zezwól na bezpośrednie połączenia przez sieć dostawcy usług. Ta opcja nie powoduje instalacji ani weryfikacji sieci VPN.
 
@@ -27,7 +27,7 @@ Trasa wybiera połączenie. Tryb IP określa, czy dozwolone jest połączenie be
 3. Zapisz i uruchom **test połączenia z Telegramem**. Działa to również przed zalogowaniem się.
 4. Po rozpoczęciu gromadzenia danych proszę sprawdzić, czy kontrolowana wiadomość trafiła do dziennika.
 
-Nowe środowiska robocze wykorzystują automatyczny serwer MTProxy z funkcją ukrywania adresu IP. Pula łączy cztery publiczne źródła, sprawdza połączenia, zachowuje działające trasy i zastępuje serwery proxy, które przestały działać. W przypadku nieudanych pobrań zachowywane są poprzednie migawki.
+Nowe obszary robocze korzystają z automatycznego tagu MTProxy z opcją **„Ukryj adres**”. Pula łączy cztery publiczne źródła, sprawdza wpisy, zachowuje działające trasy i zastępuje nieprawidłowo działające serwery proxy. W przypadku nieudanych pobrań zachowywane są poprzednie migawki.
 
 ## Proszę skorzystać z własnego serwera proxy
 

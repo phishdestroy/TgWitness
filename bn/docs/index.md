@@ -8,7 +8,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/
 
 চিত্রসহ গাইড
 
-[### কেস বোর্ড পর্যবেক্ষণ, সঠিক উদ্ধৃতি এবং দলের নোটগুলো সংযুক্ত রাখুন।](https://phishdestroy.github.io/TgWitness/bn/docs/case-board/) [### রিপোর্ট স্টুডিও উপকরণ নির্বাচন করুন এবং আটটি রিপোর্ট ডিজাইনের মধ্যে একটি বেছে নিন।](https://phishdestroy.github.io/TgWitness/bn/docs/reports/) [### শেয়ার করার জন্য অনুলিপি প্রাপ্তকারীর প্রয়োজনীয় ক্ষেত্রসমূহ সহ স্বাক্ষরিত একটি সারসংক্ষেপ প্রস্তুত করুন।](https://phishdestroy.github.io/TgWitness/bn/docs/handover/) [### অ্যাকাউন্ট গ্রুপসমূহ একসঙ্গে অ্যাকাউন্ট পর্যালোচনা করুন এবং তাদের ওয়ার্কস্পেস আলাদা রাখুন।](https://phishdestroy.github.io/TgWitness/bn/docs/groups/)
+[### কেস বোর্ড পর্যবেক্ষণ, সঠিক উদ্ধৃতি এবং দলের নোটগুলো সংযুক্ত রাখুন।](https://phishdestroy.github.io/TgWitness/bn/docs/case-board/) [### রিপোর্ট স্টুডিও উপকরণ নির্বাচন করুন এবং আটটি রিপোর্ট ডিজাইনের মধ্যে একটি বেছে নিন।](https://phishdestroy.github.io/TgWitness/bn/docs/reports/) [### শেয়ার করার কপি প্রাপ্তকারীর প্রয়োজনীয় ক্ষেত্রসমূহ সহ স্বাক্ষরিত একটি সারসংক্ষেপ প্রস্তুত করুন।](https://phishdestroy.github.io/TgWitness/bn/docs/handover/) [### অ্যাকাউন্ট গ্রুপসমূহ একসঙ্গে অ্যাকাউন্ট পর্যালোচনা করুন এবং তাদের ওয়ার্কস্পেস আলাদা রাখুন।](https://phishdestroy.github.io/TgWitness/bn/docs/groups/)
 
 [## মোড, পরিস্থিতি এবং প্রমাণ স্তর সংগ্রহের পরিধি, ঘটনার সীমা, আটটি যাচাইকরণ প্রক্রিয়া এবং ছয়টি কাল্পনিক তদন্ত পরিস্থিতি।](https://phishdestroy.github.io/TgWitness/bn/guides/modes.html)
 
@@ -34,19 +34,19 @@ Canonical page: https://phishdestroy.github.io/TgWitness/bn/docs/
 
 সেটআপ
 
-[দ্রুত শুরু](https://phishdestroy.github.io/TgWitness/bn/docs/reference/quickstart/)[অ্যাকাউন্ট এবং সেশন ফরম্যাটসমূহ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/accounts/)[অ্যাক্সেস এবং অনুমতিসমূহ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/access/)[সংযোগ, প্রক্সি এবং ডেটা সুরক্ষা](https://phishdestroy.github.io/TgWitness/bn/docs/reference/connection/)[নিয়োগ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/deployment/)
+[দ্রুত শুরু](https://phishdestroy.github.io/TgWitness/bn/docs/reference/quickstart/)[ইনস্টল, যাচাই এবং আপডেট](https://phishdestroy.github.io/TgWitness/bn/docs/reference/installation/)[প্রাথমিক সেটআপ এবং সেটিংস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/settings/)[অ্যাকাউন্ট এবং সেশন ফরম্যাটসমূহ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/accounts/)[অ্যাক্সেস এবং অনুমতিসমূহ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/access/)[সংযোগ, প্রক্সি এবং ডেটা সুরক্ষা](https://phishdestroy.github.io/TgWitness/bn/docs/reference/connection/)[নিয়োগ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/deployment/)[উচ্চ-আশ্বাসজনক মোতায়েন](https://phishdestroy.github.io/TgWitness/bn/docs/reference/high-assurance/)
 
 সংগ্রহ করুন
 
-[সংগ্রহ কীভাবে কাজ করে](https://phishdestroy.github.io/TgWitness/bn/docs/reference/collection/)[লোড সোর্সের ইতিহাস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/history/)[ওয়ার্কফ্লো এবং অপারেশনসমূহ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/)[তদন্ত মোড](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/)[বৈশিষ্ট্য এবং সীমাবদ্ধতা](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/)
+[প্যানেল গাইড](https://phishdestroy.github.io/TgWitness/bn/docs/reference/panel/)[সংগ্রহ কীভাবে কাজ করে](https://phishdestroy.github.io/TgWitness/bn/docs/reference/collection/)[লোড সোর্সের ইতিহাস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/history/)[ওয়ার্কফ্লো এবং অপারেশনসমূহ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/operations/)[তদন্ত মোড](https://phishdestroy.github.io/TgWitness/bn/docs/reference/investigation/)[বৈশিষ্ট্য এবং সীমাবদ্ধতা](https://phishdestroy.github.io/TgWitness/bn/docs/reference/features/)
 
 আর্কাইভ ও ইন্টিগ্রেশনসমূহ
 
-[কেস বোর্ড রেফারেন্স](https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-board/)[আর্কাইভ বিশ্লেষণ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/analysis/)[শুধুমাত্র-পঠন MCP](https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/)[স্থানীয় OCR এবং প্রতিলিপি](https://phishdestroy.github.io/TgWitness/bn/docs/reference/media-analysis/)[প্রস্থানকারী ওয়েবহুকস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/webhooks/)
+[কেস বোর্ড রেফারেন্স](https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-board/)[আর্কাইভ বিশ্লেষণ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/analysis/)[শুধুমাত্র-পঠন MCP](https://phishdestroy.github.io/TgWitness/bn/docs/reference/mcp/)[স্থানীয় OCR এবং প্রতিলিপি](https://phishdestroy.github.io/TgWitness/bn/docs/reference/media-analysis/)[প্রস্থানকারী ওয়েবহুকস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/webhooks/)[জনসাধারণের প্রদর্শনী](https://phishdestroy.github.io/TgWitness/bn/docs/reference/showcase/)
 
 প্রমাণ
 
-[প্রমাণ কীভাবে কাজ করে](https://phishdestroy.github.io/TgWitness/bn/docs/reference/how-it-works/)[রিপোর্ট কনফিগারেশন এবং যাচাইকরণ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-reports/)[প্রমাণের ফর্ম্যাট](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/)[স্বতন্ত্র সাক্ষী](https://phishdestroy.github.io/TgWitness/bn/docs/reference/witness/)[টাইমস্ট্যাম্পস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/timestamp/)
+[প্রমাণ কীভাবে কাজ করে](https://phishdestroy.github.io/TgWitness/bn/docs/reference/how-it-works/)[রিপোর্ট কনফিগারেশন এবং যাচাইকরণ](https://phishdestroy.github.io/TgWitness/bn/docs/reference/case-reports/)[অ্যাকাউন্ট রপ্তানি](https://phishdestroy.github.io/TgWitness/bn/docs/reference/account-export/)[প্রমাণের ফর্ম্যাট](https://phishdestroy.github.io/TgWitness/bn/docs/reference/evidence/)[স্বতন্ত্র সাক্ষী](https://phishdestroy.github.io/TgWitness/bn/docs/reference/witness/)[টাইমস্ট্যাম্পস](https://phishdestroy.github.io/TgWitness/bn/docs/reference/timestamp/)[সংরক্ষণ এবং পুনরুদ্ধার](https://phishdestroy.github.io/TgWitness/bn/docs/reference/storage/)
 
 নিরাপত্তা ও প্রকল্প
 

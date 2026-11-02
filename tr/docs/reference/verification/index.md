@@ -97,7 +97,7 @@ Aşağıdaki eski kayıtlar kendi çalıştırma sonuçlarını açıklamaktadı
 
 Bu, orijinal manuel seçim sürümünün geçmiş test kaydıdır. Güncel otomatik havuz ve IP modları için [bağlantı ayarlarına](https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/#ip-modes) bakınız. Aşağıdaki sayılar ve desteklenmeyen özellikler, test edilen o sürüme aittir.
 
-SoliSpirit/mtproto ve zakky8/mtproto-proxy-pro kaynaklarından bir paketlenmiş genel anlık görüntü ve açık HTTPS yenileme eklenmiştir. Bu sunucuda, uygulama indiricisi her iki beslemeyi de 29 Ekim 2026 tarihinde saat 12:58 UTC'de başarıyla aldı: filtreleme, tekilleştirme ve kaynak başına 64 giriş sınırlamasından sonra **118 benzersiz uyumlu uç nokta**. Bu, liste alımını doğrular; bağlantı durumunu veya bu uç noktalar üzerinden mesaj iletimini doğrulamaz. Bu çalışma sırasında listelenen bir proxy’ye gerçek bir hesap bağlanmamıştır. [Operatör ve kullanıcı kılavuzu](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/PROXIES.md).
+SoliSpirit/mtproto ve zakky8/mtproto-proxy-pro'dan paketlenmiş bir genel anlık görüntü ve açık HTTPS yenileme eklenmiştir. Bu sunucuda, uygulama indiricisi her iki akışı da 29 Ekim 2026 tarihinde saat 12:58 UTC'de başarıyla aldı: filtreleme, tekilleştirme ve kaynak başına 64 giriş sınırı uygulandıktan sonra **118 benzersiz uyumlu uç nokta**. Bu, liste alımını doğrular; bu uç noktalar üzerinden bağlantı veya mesaj iletimini doğrulamaz. Bu çalışma sırasında listelenen bir proxy'ye gerçek bir hesap bağlanmamıştır. [Operatör ve kullanıcı kılavuzu](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md).
 
 Başarısız/boş/uyumsuz kaynak yanıtları, önceki girişleri ve tarihleri korur. Güncellemeler seçilen rotayı değiştirmez. Genel adresler doğrulanır ve seçildiğinde IP'ler sabitlenir; operatör/manuel rotalar ayrı kalır. Bağlantı testi artık hesap girişinden önce panelde kullanılabilir. Sahte TLS ee ve otomatik proxy seçimi hala desteklenmemektedir. Operatör kataloğu, abonelikleri tamamen geçersiz kılar.
 
@@ -111,7 +111,7 @@ Makbuzlar: `test-results/public-proxy-research/download-receipt.json`, `test-res
 
 ## İsteğe bağlı ek özelliklerin sunumu · 29 Ekim 2026
 
-Eski Proof botu sayfası artık **"Extras"** olarak adlandırılıyor: kısa bir genel bakışın ardından seçilen seçenek için ayrı bir kurulum sayfası geliyor. Witness formu üç adımdan oluşuyor; bağlantı yönetimi, ağ seçenekleri ve dağıtım ayrıntıları ise katlanmış durumda. GitHub açıkça planlanmış ve kimlik bilgisi formu bulunmuyor. [Rusça genel bakış](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/EXTRAS.md).
+Eski Proof botu sayfası artık **Extras** olarak adlandırılıyor: kısa bir genel bakışın ardından seçilen seçenek için ayrı bir kurulum sayfası geliyor. Tanık formu üç adımdan oluşuyor; bağlantı yönetimi, ağ seçenekleri ve dağıtım ayrıntıları ise katlanmış durumda. GitHub açıkça planlanmış ve kimlik bilgisi formu bulunmuyor. [Extras'a genel bakış](https://phishdestroy.github.io/TgWitness/tr/docs/reference/panel/#extras).
 
 - Yerelleştirme, tanık kurulumu ve yayın denetimleri için 30 odaklanmış testten başarıyla geçilmiştir.
 - Chromium kurulum kabul testi, İngilizce/Rusça, açık/koyu modda, 390/1440 piksel çözünürlükte başarıyla geçildi: klavye odağı ve Enter tuşu, ek özellikler seçildiğinde örtük bağlantılar oluşmaması, taslak saklama, sabitlenmiş yapılandırma/token indirmeleri, kilitlendiğinde token silme ve çalışan yerel kılavuz bağlantıları. Mizanpaj ve düz arka plan metin kontrast kontrolleri başarıyla tamamlandı.
@@ -124,7 +124,7 @@ Makbuzlar: `test-results/setup-browser/receipt.json`, `test-results/quick-naviga
 
 ## Witness botu ve proxy kurulum denetimi · 29 Ekim 2026
 
-Witness kurulumu (artık **Ekstralar → Kanalınızda bir bot**), bağımsız olarak dağıtılmış bir witness hazırlar: sabitlenmiş toplayıcı anahtarı, kapsamlı token indirme, kendi kanalı, yayın politikası, HTTP/SOCKS5 rotası ve özel Bot API. Bot belirteci tanık sunucusunda kalır. Yeni `--check-config`, bir ağ bağlantısı açmadan veya anahtar oluşturmadan yapılandırmayı ve dosyaları doğrular. JSON dosya yolları, yapılandırmanın yanında çözümlenir. Tüm Compose tanık varyantları artık HTTP proxy ve Bot API ayarlarını iletir.
+Witness kurulumu (artık **Ekstralar → Bağımsız witness**), bağımsız olarak dağıtılan bir witness hazırlar: sabitlenmiş toplayıcı anahtarı, kapsamlı token indirme, kendi kanalı, yayın politikası, HTTP/SOCKS5 rotası ve özel Bot API. Bot tokeni, witness sunucusunda kalır. Yeni `--check-config` , ağ bağlantısı açmadan veya anahtar oluşturmadan yapılandırmayı ve dosyaları doğrular. JSON dosya yolları, yapılandırmanın yanında çözümlenir. Tüm Compose tanık varyantları artık HTTP proxy ve Bot API ayarlarını iletir.
 
 Hesap ayarları, operatör tarafından yönetilen genel bir MTProxy kataloğunu, özel Telegram proxy bağlantısı önizlemesini ve mevcut manuel alanları destekler. Katalog yanıtlarında gizli bilgiler yer almaz; seçim yapıldığında rota, çalışma alanı kasasına kaydedilir. Eksik veya hatalı biçimlendirilmiş kataloglar durumunda manuel rotalar kullanılabilir kalır. Varsayılan olarak hiçbir proje proxy adresi veya barındırılan tanık hizmeti oluşturulmaz veya etkinleştirilmez. Bir Caddy örneği, paneli gizli kalan bir toplayıcıya harici bir tanığın ulaşması gerektiğinde yalnızca kapsamlı baş uç noktasını gösterir.
 
@@ -136,7 +136,7 @@ Doğrulama:
 - Ruff, kaynak/bağlantı kontrolleri ve Compose/iş akışı YAML ayrıştırması başarıyla geçildi.
 - Yeniden geliştirilen araç, izole kurulum, panel/statik kaynak ve API kimlik doğrulama kontrollerinin yanı sıra, doğrudan ve akış yoluyla gerçekleştirilen 32 olaylık sentetik dışa aktarımların bağımsız doğrulamasını da başarıyla geçti.
 
-Makbuzlar: `test-results/setup-full-suite.log`, `setup-final-focused.log`, `setup-browser/receipt.json`, `setup-browser-final.log` ve `setup-package.log`. Bu kontroller, sentetik hesaplar/proxy'ler ve yerel bir Bot API fikstürü kullanır. Bunlar, gerçek bir bot yayını, çalışan halka açık MTProxy sunucusu, uzaktan CI çalıştırması veya Docker dağıtımı olduğunu iddia etmez. Yukarıda tutulan gerçek Telegram gözlem geçmişi, ayrı bir delil parçası olarak kalır. [Kurulum talimatları](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/WITNESS.md).
+Makbuzlar: `test-results/setup-full-suite.log`, `setup-final-focused.log`, `setup-browser/receipt.json`, `setup-browser-final.log` ve `setup-package.log`. Bu kontroller, sentetik hesaplar/proxy'ler ve yerel bir Bot API fikstürü kullanır. Bunlar, gerçek bir bot yayını, çalışan halka açık MTProxy sunucusu, uzaktan CI çalıştırması veya Docker dağıtımı olduğunu iddia etmez. Yukarıda tutulan gerçek Telegram gözlem geçmişi, ayrı bir kanıt parçası olarak kalır. [Kurulum talimatları](https://phishdestroy.github.io/TgWitness/tr/docs/reference/witness/#run-a-witness).
 
 ## Sunum ve dokümantasyon incelemesi · 29 Ekim 2026
 

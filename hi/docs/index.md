@@ -8,7 +8,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/
 
 चित्रित मार्गदर्शिकाएँ
 
-[### केस बोर्ड अवलोकन, सटीक उद्धरण और टीम नोट्स को आपस में जुड़ा रखें।](https://phishdestroy.github.io/TgWitness/hi/docs/case-board/) [### रिपोर्ट स्टूडियो सामग्री चुनें और आठ रिपोर्ट डिज़ाइनों में से एक चुनें।](https://phishdestroy.github.io/TgWitness/hi/docs/reports/) [### साझा करने के लिए प्रतिलिपि प्राप्तकर्ता को आवश्यक फ़ील्ड्स के साथ एक हस्ताक्षरित अंश तैयार करें।](https://phishdestroy.github.io/TgWitness/hi/docs/handover/) [### खाता समूह खातों की समीक्षा एक साथ करें और उनके कार्यक्षेत्रों को अलग रखें।](https://phishdestroy.github.io/TgWitness/hi/docs/groups/)
+[### केस बोर्ड अवलोकन, सटीक उद्धरण और टीम नोट्स को आपस में जुड़ा रखें।](https://phishdestroy.github.io/TgWitness/hi/docs/case-board/) [### रिपोर्ट स्टूडियो सामग्री चुनें और आठ रिपोर्ट डिज़ाइनों में से एक चुनें।](https://phishdestroy.github.io/TgWitness/hi/docs/reports/) [### शेयरिंग कॉपी प्राप्तकर्ता को आवश्यक फ़ील्ड्स के साथ एक हस्ताक्षरित अंश तैयार करें।](https://phishdestroy.github.io/TgWitness/hi/docs/handover/) [### खाता समूह खातों की समीक्षा एक साथ करें और उनके कार्यक्षेत्रों को अलग रखें।](https://phishdestroy.github.io/TgWitness/hi/docs/groups/)
 
 [## मोड, परिदृश्य और साक्ष्य स्तर संग्रह दायरे, घटना सीमाएँ, आठ सत्यापन तंत्र और छह काल्पनिक जांच परिदृश्य।](https://phishdestroy.github.io/TgWitness/hi/guides/modes.html)
 
@@ -34,19 +34,19 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/
 
 सेटअप
 
-[त्वरित आरंभ](https://phishdestroy.github.io/TgWitness/hi/docs/reference/quickstart/)[खाते और सत्र प्रारूप](https://phishdestroy.github.io/TgWitness/hi/docs/reference/accounts/)[पहुँच और अनुमतियाँ](https://phishdestroy.github.io/TgWitness/hi/docs/reference/access/)[कनेक्शन, प्रॉक्सी और डेटा सुरक्षा](https://phishdestroy.github.io/TgWitness/hi/docs/reference/connection/)[तैनाती](https://phishdestroy.github.io/TgWitness/hi/docs/reference/deployment/)
+[त्वरित आरंभ](https://phishdestroy.github.io/TgWitness/hi/docs/reference/quickstart/)[इंस्टॉल करें, सत्यापित करें और अपडेट करें](https://phishdestroy.github.io/TgWitness/hi/docs/reference/installation/)[पहला सेटअप और सेटिंग्स](https://phishdestroy.github.io/TgWitness/hi/docs/reference/settings/)[खाते और सत्र प्रारूप](https://phishdestroy.github.io/TgWitness/hi/docs/reference/accounts/)[पहुँच और अनुमतियाँ](https://phishdestroy.github.io/TgWitness/hi/docs/reference/access/)[कनेक्शन, प्रॉक्सी और डेटा सुरक्षा](https://phishdestroy.github.io/TgWitness/hi/docs/reference/connection/)[तैनाती](https://phishdestroy.github.io/TgWitness/hi/docs/reference/deployment/)[उच्च-आश्वासन परिनियोजन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/high-assurance/)
 
 एकत्र करें
 
-[संग्रह कैसे काम करता है](https://phishdestroy.github.io/TgWitness/hi/docs/reference/collection/)[स्रोत इतिहास लोड करें](https://phishdestroy.github.io/TgWitness/hi/docs/reference/history/)[कार्यप्रवाह और संचालन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/)[जांच मोड](https://phishdestroy.github.io/TgWitness/hi/docs/reference/investigation/)[विशेषताएँ और सीमाएँ](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/)
+[पैनल मार्गदर्शिका](https://phishdestroy.github.io/TgWitness/hi/docs/reference/panel/)[संग्रह कैसे काम करता है](https://phishdestroy.github.io/TgWitness/hi/docs/reference/collection/)[स्रोत इतिहास लोड करें](https://phishdestroy.github.io/TgWitness/hi/docs/reference/history/)[कार्यप्रवाह और संचालन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/operations/)[जांच मोड](https://phishdestroy.github.io/TgWitness/hi/docs/reference/investigation/)[विशेषताएँ और सीमाएँ](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/)
 
 संग्रह और एकीकरण
 
-[केस बोर्ड संदर्भ](https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-board/)[संग्रह विश्लेषण](https://phishdestroy.github.io/TgWitness/hi/docs/reference/analysis/)[केवल-पठनीय MCP](https://phishdestroy.github.io/TgWitness/hi/docs/reference/mcp/)[स्थानीय OCR और प्रतिलेखन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/media-analysis/)[आउटगोइंग वेबहुक्स](https://phishdestroy.github.io/TgWitness/hi/docs/reference/webhooks/)
+[केस बोर्ड संदर्भ](https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-board/)[संग्रह विश्लेषण](https://phishdestroy.github.io/TgWitness/hi/docs/reference/analysis/)[केवल-पठनीय MCP](https://phishdestroy.github.io/TgWitness/hi/docs/reference/mcp/)[स्थानीय OCR और प्रतिलेखन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/media-analysis/)[आउटगोइंग वेबहुक्स](https://phishdestroy.github.io/TgWitness/hi/docs/reference/webhooks/)[सार्वजनिक प्रदर्शन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/showcase/)
 
 साक्ष्य
 
-[साक्ष्य कैसे काम करता है](https://phishdestroy.github.io/TgWitness/hi/docs/reference/how-it-works/)[रिपोर्ट कॉन्फ़िगरेशन और सत्यापन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-reports/)[साक्ष्य प्रारूप](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/)[स्वतंत्र गवाह](https://phishdestroy.github.io/TgWitness/hi/docs/reference/witness/)[टाइमस्टैम्प](https://phishdestroy.github.io/TgWitness/hi/docs/reference/timestamp/)
+[साक्ष्य कैसे काम करता है](https://phishdestroy.github.io/TgWitness/hi/docs/reference/how-it-works/)[रिपोर्ट कॉन्फ़िगरेशन और सत्यापन](https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-reports/)[खाता निर्यात](https://phishdestroy.github.io/TgWitness/hi/docs/reference/account-export/)[साक्ष्य प्रारूप](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/)[स्वतंत्र गवाह](https://phishdestroy.github.io/TgWitness/hi/docs/reference/witness/)[टाइमस्टैम्प](https://phishdestroy.github.io/TgWitness/hi/docs/reference/timestamp/)[भंडारण और पुनर्प्राप्ति](https://phishdestroy.github.io/TgWitness/hi/docs/reference/storage/)
 
 सुरक्षा और परियोजना
 

@@ -28,7 +28,7 @@ Buka panel dengan token yang dikeluarkan dalam sesi pelayar berasingan dan perik
 
 ## Pilih kebenaran
 
-Untuk demonstrasi awam hanya teks, gunakan **Paparan Awam** sebaliknya akses penilai biasa. Ia memaparkan saluran awam yang dipilih secara eksplisit, suntingan dan pemadaman yang disimpan, serta statistik yang disahkan, dengan medan pengarang disembunyikan dan fail ditutup pada sempadan API. [Buat dan sahkan paparan](https://github.com/phishdestroy/TgWitness/blob/main/docs/LIVE-SHOWCASE.md).
+Untuk demonstrasi awam hanya teks, gunakan **Paparan Awam** sebaliknya akses penilai biasa. Ia memaparkan saluran awam yang dipilih secara eksplisit, suntingan dan pemadaman yang disimpan, serta statistik yang disahkan, dengan medan pengarang disembunyikan dan fail ditutup pada sempadan API. [Buat dan sahkan paparan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/showcase/).
 
 | Kebenaran | Apa yang dibenarkan |
 | --- | --- |
@@ -70,7 +70,7 @@ IP ialah alamat klien yang dilihat oleh aplikasi. Di sebalik proksi songsang ata
 
 ## Ubah atau tarik balik akses
 
-Sunting entri di bawah **Akses** untuk mengubah skop, kebenaran atau hadnya. Perubahan skop dan kebenaran disemak pada permintaan seterusnya, termasuk permintaan daripada sesi yang sudah terbuka. Membatalkan akses akan menamatkan sesinya dan menjadikan token yang dikeluarkan tidak boleh digunakan. **Sesi terbuka** juga membolehkan pentadbir menamatkan sesi individu tanpa membatalkan keseluruhan akses.
+Sunting entri di bawah **Akses yang diberikan** untuk mengubah skop, kebenaran atau hadnya. Perubahan skop dan kebenaran disemak pada permintaan seterusnya, termasuk permintaan daripada sesi yang sudah dibuka. Membatalkan akses akan menamatkan sesi-sesi dan menjadikan token yang dikeluarkan tidak boleh digunakan. **Sesi terbuka** juga membolehkan pentadbir menamatkan sesi individu tanpa membatalkan keseluruhan akses.
 
 Salinan eksport yang disimpan mengekalkan penciptanya, ruang kerja, skop sembang dan kebenaran yang diperlukan. Akses yang dikeluarkan hanya boleh menyenaraikan atau memuat turun salinan sendiri selagi kebenaran tersebut masih terpakai; salinan yang mengandungi Papan Kes juga memerlukan kebenaran b`board.read`. Pentadbir boleh mendapatkan semua salinan. Salinan lama tanpa metadata ini dan bundel kumpulan adalah untuk pentadbir sahaja. Tiket muat turun dan respons fail yang disediakan menyemak semula akses selepas menyediakan fail, sebelum menghantar baitnya.
 

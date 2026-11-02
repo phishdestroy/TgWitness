@@ -51,7 +51,7 @@ Yerel demo erişimi, manuel jeton girişi yapılmasına gerek kalmadan otomatik 
 
 ![Sentetik kaynak verileriyle hesap başına izleme ayarları](https://phishdestroy.github.io/TgWitness/assets/sources.png)
 
-**Kaynaklar → Yakalama ayarları → Hangi değişikliklerin saklanacağını seçin** bölümünden yeni mesajları, düzenlemeleri, silme bildirimlerini, tepki güncellemelerini ve üyelik olaylarını ayrı ayrı seçin. Varsayılan ayar tüm kategorileri saklar. **Mesajlar, düzenlemeler ve silmeler** seçeneği, orijinal bağlamı korurken ayrı tepki/üye güncellemelerini devre dışı bırakır. "**Tüm görünür etkinlikler" seçeneği ise** beşini de geri yükler. Ön ayarlar formu değiştirir; uygulamak için "**İzleme ayarlarını kaydet"**e basın.
+**Kaynaklar → Kayıt → Hangi değişikliklerin saklanacağını seç** bölümünde, yeni mesajlar, düzenlemeler, silme bildirimleri, tepki güncellemeleri ve üyelik olaylarını ayrı ayrı seçin. Varsayılan ayar tüm kategorileri saklar. **Mesajlar, düzenlemeler ve silmeler** seçeneği, orijinal bağlamı korurken ayrı tepki/üye güncellemelerini devre dışı bırakır. **Tüm görünür etkinlik seçeneği ise** beşini de geri yükler. Ön ayarlar formu değiştirir; uygulamak için **Kayıt ayarlarını kaydet düğmesine** basın.
 
 Kaydedilen politika, o çalışma alanındaki tüm seçili kaynaklar için geçerlidir. Diğer çalışma alanları kendi ayarlarını korur. Her bir gerçek değişiklik, imzalanmış "önce/sonra" değerlerini kaydeder; mevcut politika ayrıca işlem makbuzlarına ve gözlem başlangıç kayıtlarına da dahil edilir. Bir kategorinin devre dışı bırakılması, önceki gözlemleri silmez. Yeniden etkinleştirme işlemi, kaçırılan değişiklikleri geri getirmez. Bu sürümde grup bazında kategori geçersiz kılma özelliği bulunmamaktadır.
 
@@ -65,7 +65,7 @@ Ek bir çalışma alanının silinmesi, toplayıcısını durdurur ve yerel veri
 
 ## Bildirimler
 
-**Kaynaklar → Bildirimler → Uyarılar'ı ve günlük özeti** açın. TgWitness, Apprise'ı kullanarak Matrix, Telegram, Discord, Slack, ntfy, e-posta ve diğer desteklenen hizmetlere uyarılar gönderir. Bir çalışma alanına birden fazla hedef ekleyebilirsiniz.
+**Ekstralar → Bildirimler → Yapılandır'ı** açın. TgWitness, Apprise'ı kullanarak Matrix, Telegram, Discord, Slack, ntfy, e-posta ve diğer desteklenen hizmetlere uyarılar gönderir. Bir çalışma alanına birden fazla hedef ekleyebilirsiniz.
 
 1. Her satıra bir Apprise hedef URL'si girin. Kullandığınız hizmet için [hizmet kataloğuna ve URL biçimlerine](https://appriseit.com/services/) bakın.
 2. **"Bildirimleri gönder**" seçeneğini etkinleştirin, ardından sorun uyarılarını, izlenen sohbetlerdeki değişiklikleri ve günlük özeti seçin. Özet saati, sunucunun saatini kullanır.

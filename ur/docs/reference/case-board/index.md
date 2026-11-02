@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-
 
 کیس بورڈ تفتیشی ٹیم کو محفوظ شدہ مواد کا ایک مشترکہ ورکنگ ویو فراہم کرتا ہے۔ کسی مشاہدے کو بک مارک کریں، کسی مخصوص عبارت کو نمایاں کریں، متعدد کارروائیوں کو محفوظ کریں، اور اسے ساتھیوں کے ساتھ زیرِ بحث لائیں۔ کارڈز اپنے ماخذ کے حوالہ جات اور دستخط شدہ نظر ثانی کی تاریخ کو برقرار رکھتے ہیں۔ ٹیم کی تشریحات ورک اسپیس میں رہتی ہیں، اور اصل ٹیلیگرام مشاہدات سے علیحدہ طور پر قابلِ شناخت ہوتی ہیں۔
 
-[شواہد کا ماڈل](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/) · [رسائی](https://phishdestroy.github.io/TgWitness/ur/docs/reference/access/) · [رپورٹس](https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-reports/) · [روسی](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE-BOARD.md)
+[شواہد کا ماڈل](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/) · [رسائی](https://phishdestroy.github.io/TgWitness/ur/docs/reference/access/) · [رپورٹس](https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-reports/)
 
 ![مصنوعی تفتیش فیڈ](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
 

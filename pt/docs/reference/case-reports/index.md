@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/case-
 
 Filtros de relatório, oito modelos, predefinições de conteúdo, históricos de alterações salvos e a avaliação incluída nas exportações assinadas.
 
-[Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE_REPORTS.md)
-
 Transforme as observações selecionadas em um relato legível do caso: sua questão, escopo, alterações salvas, gráficos, conclusões e referências de fontes. Cada relatório oferece ao destinatário uma maneira de verificar o material entregue e inspecionar a cobertura da coleta.
 
 A seção **“Base de confiança e limitações”** aparece nos relatórios de diário, transferência, bate-papo, conta e compartilhamento. Os PDFs do diário e da transferência utilizam a mesma avaliação que seu arquivo “`report.json`” assinado. Os manifestos ZIP contêm o “`case_assessment`” no manifesto assinado. Essa avaliação acompanha o material exportado. As observações originais mantêm suas assinaturas existentes.

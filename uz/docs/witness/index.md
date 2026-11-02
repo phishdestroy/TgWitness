@@ -40,8 +40,8 @@ BotFather yordamida bot yarating va uni o'zingiz nazorat qiladigan kanalga post 
 
 ## Extras bo'limida uchta qadam
 
-1. **Faqat o'qish huquqi bilan.** Open **Extras → Kanalga bot qo'shib**, guvoh tokenini yarating va kirish faylini saqlang. Bu tekshiruv nuqtalari va holatni o'qishga imkon beradi, suhbatlar yoki yig'uvchi boshqaruvlarini emas.
-2. **Kanal va intervallar.** Kanalni va guvohdan erishiladigan kollektor manzilini kiriting. Sozlamalar faylini saqlang.
+1. **Faqat o'qish huquqi.**ni oching, **Qo'shimchalar → Mustaqil guvoh** yarating va kirish faylini saqlang. Bu tekshiruv nuqtalarini va holatni o'qishga imkon beradi, suhbatlarni yoki kollektor boshqaruvlarini emas.
+2. **Kanal va intervallar.** Telegram kanalini yoki Discord webhook-ni tanlang va guvohdan erishiladigan kollektor manzilini kiriting. Sozlamalar faylini saqlang.
 3. **Boshlash.** Witness hostida yaratilgan `witness.json`, `witness-token.txt` va `bot-token.txt` ni birga joylashtiring. O'rnatilgan loyiha muhitida quyidagi buyruqlarni ijro eting.
 
 ```
@@ -50,6 +50,8 @@ python -m tgwitness.witness run --config witness.json
 ```
 
 Fayllarni yuklab olish witness dasturini ishga tushirmaydi. Kanalda birinchi imzolangan post paydo bo'lishini tekshiring, so'ngra guvohning jamoat kaliti barmoq izini alohida saqlang.
+
+Discord uchun kanalning webhook URL manzilini `discord-webhook.txt` bot tokeni o'rniga. Witness yozuvni faqat bitta joyga – Telegram kanali yoki Discord kanali – joylaydi; Discord xabaridan uzunroq tekshiruvlar esa ilova qilingan fayl sifatida keladi.
 
 ## Nashr etish chastotasini tanlang
 

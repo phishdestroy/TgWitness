@@ -28,7 +28,7 @@ Open the panel with the issued token in a separate browser session and check the
 
 ## Choose the permissions
 
-For a text-only public demonstration, use **Public showcase** instead of ordinary reviewer access. It shows explicitly selected public channels, retained edits and deletions, and signed statistics, with author fields redacted and files closed at the API boundary. [Create and verify a showcase](https://github.com/phishdestroy/TgWitness/blob/main/docs/LIVE-SHOWCASE.md).
+For a text-only public demonstration, use **Public showcase** instead of ordinary reviewer access. It shows explicitly selected public channels, retained edits and deletions, and signed statistics, with author fields redacted and files closed at the API boundary. [Create and verify a showcase](https://phishdestroy.github.io/TgWitness/docs/reference/showcase/).
 
 | Permission | What it allows |
 | --- | --- |
@@ -70,7 +70,7 @@ The IP is the client address seen by the application. Behind a reverse proxy or 
 
 ## Change or withdraw access
 
-Edit an entry under **Accesses** to change its scope, permissions or limits. Scope and permission changes are checked on subsequent requests, including requests from sessions that are already open. Revoking an access ends its sessions and makes the issued token unusable. **Open sessions** also lets the administrator end an individual session without revoking the whole access.
+Edit an entry under **Granted access** to change its scope, permissions or limits. Scope and permission changes are checked on subsequent requests, including requests from sessions that are already open. Revoking an access ends its sessions and makes the issued token unusable. **Open sessions** also lets the administrator end an individual session without revoking the whole access.
 
 Saved export copies retain their creator, workspace, chat scope and required permissions. An issued access can list or download its own copies only while those permissions still apply; copies containing Case Board also require `board.read`. The administrator can retrieve all copies. Older copies without this metadata and group bundles are administrator-only. Download tickets and prepared file responses recheck access after preparing the file, before sending its bytes.
 

@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/witne
 
 独自の鍵とボットを使用してWitnessを実行し、署名済みのチェックポイントをチャンネルに公開し、エクスポートしたデータと照合してください。
 
-[ロシア語によるボットとプロキシの設定方法](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/WITNESS.md)。
+[エクスポートと検証](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/) · [高信頼性](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/) · [パネルガイド](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/#extras)
 
 コレクターは自身のジャーナルに署名するため、コレクターとその鍵を管理する者がいれば、 原則としてジャーナルを書き換えたり切り詰めたりして、再度署名することが可能です。 Witnessは、 その行為を検知可能にします。これは独立したプロセスであり、別のコンテナ、あるいはより正確には第三者が 運用するサーバーが、数分おきにコレクターの署名済みジャーナルの先頭部分を取得し、 確認した内容を自身の鍵で署名し、自身のジャーナルに保存した上で、Telegramチャンネルに投稿します。
 
@@ -27,7 +27,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/witne
 | 独自のEd25519鍵とジャーナル | コレクターの保管庫、署名鍵、またはパネルトークン |
 | 独自のTelegramボットトークン | メッセージの内容：ヘッダーには記録件数とハッシュ値が含まれます |
 
-トークンは、パネルの「**Witness**」ページで生成され、一度だけ表示され、 SHA-256としてのみ保存されます。これにより、`GET /api/witness/head`というエンドポイントが正確に1つ開かれ、そこから 新たに署名されたチェックポイントに加え、署名済みのコンテンツを含まない収集カウンターおよび稼働状況が返されます。 このトークンでは、パネルを開いたり、メッセージの内容を読み取ったり、設定を変更したりすることはできず、 パネル側ではこのトークンは受け入れられません。トークンの無効化は同じページで行えます。コレクターは、 新しいウィットネスキーがチェックを開始した時刻（`witness.seen`）を記録し、トークンごとの最終チェック日時を表示します。 2.5インターバル以内にチェックが行われていないウィットネスは、期限切れとしてマークされます。
+トークンは**追加情報 → 独立した証人**で生成され、一度だけ表示された後、 SHA-256としてのみ保存されます。これは正確に1つのエンドポイントを開き、 `GET /api/witness/head`、そこからは新たに 署名されたチェックポイントに加え、署名済みのコンテンツを含まないコレクションカウンターおよび運用状態が返されます。 このトークンではパネルを開いたり、メッセージの内容を読み取ったり、設定を変更したりすることはできず、 パネルトークンもここでは受け入れられません。トークンの無効化は同じページで行えます。コレクターは 新しいウィットネスキーがチェックを開始した時刻を記録し（`witness.seen`) を記録し、トークンごとの最後のチェックを表示します。 2.5 インターバル以内にチェックを行っていないウィットネスは、期限切れとしてマークされます。
 
 新しいウィットネスは、 各ポーリングごとにランダムなチャレンジを送信します。キャプチャステートメントは、コレクターの署名の下でそれを反映します。カウンターは 正確なチェックポイントに紐付けられており、署名付きウィットネス投稿に含まれます。レガシーヘッドは スタンドアロンのウィットネスによって引き続き受け入れられます。ジャーナルの増分のみは、決して新しいメッセージとしてカウントされることはありません。
 
@@ -54,7 +54,7 @@ TGW1.eyJhdCI6…<statement>.<signature>
 
 Telegramボット（@BotFatherで作成してください）、そのボットが 管理者となっているチャンネル、および証人からアクセス可能なコレクターのアドレス（プライベートネットワーク外で HTTPS経由）が必要となります（[導入手順の](https://phishdestroy.github.io/TgWitness/ja/docs/reference/deployment/)「HTTPSプロファイル」を参照してください）。
 
-**[Extras] → [チャンネル内のボット] → [** パネルで**ボットを設定]** を選択してください。3つのステップで、 読み取り専用アクセス権、チャンネル、間隔の設定を行い、その後ウィットネスを起動します。公開 ポリシー、オプションのHTTP/SOCKS5プロキシ、およびカスタムBot APIアドレスは、**[詳細設定]** にあります。 このフォームから、 このワークスペースのコレクターキーが固定された`witness.json` をダウンロードします。「**アクセスファイルを**`witness-token.txt` として**保存** 」を選択して、新しく 作成された読み取り専用トークンをダウンロードし、そのJSONファイルの横に、ウィットネスホスト上で作成された`bot-token.txt` を配置してください。コレクターはボットトークンを受け取ることはありません。 ダウンロードを行っても、サービスの起動やメッセージの公開は行われません。ホスト型プロジェクトのウィットネスは、 暗黙的に登録されることはありません。
+パネルで **[Extras] → [Independent witness] → [Configure]** を開きます。3つのステップで、 読み取り専用アクセス、チャンネルと間隔の設定、そしてウィットネスの起動を行います。公開 ポリシー、オプションのHTTP/SOCKS5プロキシ、およびカスタムBot APIアドレスは、[**Advanced settings**] にあります。このフォームを ダウンロードすると `witness.json` 。新しく 作成された読み取り専用トークンを「**アクセスファイルを次のように保存**」でダウンロードし `witness-token.txt`」を選択して、新しく作成された読み取り専用トークンをダウンロードし、そのJSONの横に `bot-token.txt`ウィットネスホスト上で生成されたものを、そのJSONファイルの隣に配置してください。コレクターはボットトークンを受け取ることはありません。 ダウンロードを行っても、サービスの起動やメッセージの公開は行われません。ホストされたプロジェクトのウィットネスは 暗黙的に登録されることはありません。
 
 ```
 python -m tgwitness.witness run --config witness.json --check-config
@@ -95,6 +95,17 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
     --token-file witness-token.txt --bot-token-file bot-token.txt --channel @your_witness_channel
 ```
 
+### Discordに公開する
+
+ウィットネスは、Telegramの代わりにDiscordチャンネルに投稿することもできます。Discordで、 **「チャンネルの編集」→「統合」→「Webhook**」を開き、Webhookを作成してそのURLをコピーします。 パネル内のステップ2で、**「Discord Webhook・あなたのチャンネル」**を選択します。ウィットネスホスト上で、 そのURLを `discord-webhook.txt` の横に `witness.json`の横に保存してください。このURLは コレクターには決して送信されません。
+
+```
+python -m tgwitness.witness run --collector https://your-collector.example.org \
+    --token-file witness-token.txt --discord-webhook-file discord-webhook.txt
+```
+
+「ウィットネス」には、TelegramチャンネルまたはDiscordウェブフックのいずれか1つを「パブリッシャー」として設定します（両方を設定することはできません）。投稿には 同じ署名付きステートメントが含まれ、誰にも「ping」を送ることはできません。Discordの 2,000文字を超える投稿は、短い一行のテキストに置き換えられ、完全なチェックが `witness-check.txt`。各投稿IDは `witness.posted`. `verify.py --channel`Telegramチャンネルのエクスポートデータのみを読み取るため、Discordの場合はウィットネス・ジャーナルを保管してください。そこには すべてのチェックが記録されています。
+
 ### オプション
 
 | オプション | 環境 | デフォルト | 意味 |
@@ -109,7 +120,7 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
 | `--data-dir` | `_DATA` | `witness-data` | Witnessキーとジャーナル |
 | `--config` | `_CONFIG` | – | 上記のいずれかのオプションを含むJSONファイル |
 
-コレクターアドレス、トークン、およびチャンネルは、`--collector`、`--token`、または `--token-file`、`--bot-token`、`--bot-token-file`、`--channel`、あるいは`_COLLECTOR`、`_TOKEN`、 `_TOKEN_FILE`、`_BOT_TOKEN`、`_BOT_TOKEN_FILE`、`_CHANNEL`から取得されます。これにより、機密情報が 処理リストに漏れるのを防ぎます。
+コレクターアドレス、トークン、チャンネルは以下から取得されます `--collector`, `--token` または `--token-file`, `--bot-token` または `--bot-token-file`, `--discord-webhook-file` および `--channel`、 または `_COLLECTOR`, `_TOKEN`, `_TOKEN_FILE`, `_BOT_TOKEN`, `_BOT_TOKEN_FILE`, `_DISCORD_WEBHOOK_FILE` および `_CHANNEL`、これにより、プロセス一覧から秘密情報が除外されます。
 
 設定ファイルでは、アンダースコア付きのオプション名に加え、`texts` を使用します。これは、 チャンネルの投稿文を置き換えるものです：
 
@@ -123,6 +134,36 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
 `texts`キー：`ok`、`key_changed`、`rollback`、`fork`、`invalid`、`no_response`、`collector`、 `records`、`head`。コマンドラインは環境変数に優先し、環境変数はファイルに優先します。 未知のオプションやテキストキーは、無視されるのではなく、メッセージを表示してwitnessを停止させます。 記述内容は検証結果に影響を与えません。verify.pyは、各投稿の最後に署名付きトークンを チェックします。 `--post changes`または`problems`では、投稿されなかったチェックも引き続き ウィットネス・ジャーナルに残っており、`verify.py`ではそれらが「未投稿」として一覧表示されます。開始レコードには ポリシー名が記載されています。すべてのチェックは依然としてジャーナルに表示されるため、投稿回数が減っても、独立した Telegramの送信回数が減るだけで、チェックの数が減るわけではありません。
 
 チャンネルがなくても、Witnessは引き続きジャーナルを保持します。Witnessのキーフィンガープリント （`python -m tgwitness.witness fingerprint`）は別の場所に保管してください。
+
+## 複数のワークスペースの公開証明ページ
+
+`python -m tgwitness.proof` witnessesは一度に最大32のワークスペースを管理し、各ワークスペースの最新の署名済みチェック結果を 読み取り専用ページとして提供します。各ワークスペースには、dataフォルダ内に独自のwitnessキーと ジャーナル、および固定されたコレクターキーが割り当てられます。Telegramチャンネルへの投稿は、 ワークスペースごとに任意です。まずは [proof.config.example](https://github.com/phishdestroy/TgWitness/blob/main/deploy/proof.config.example)から始めてください：
+
+| 分野 | 意味 |
+| --- | --- |
+| `title` | ページタイトル（1～100文字） |
+| `data_dir` | ファイルに関連付けられたWitnessの鍵とジャーナル。デフォルト `proof-data` |
+| `interval`, `timeout` | チェック間隔（分単位：1～1440、デフォルトは5）；待機時間（秒単位：5～600、デフォルトは20） |
+| `workspaces[].id`, `label` | 短い小文字のエイリアスと表示名 |
+| `workspaces[].collector` | コレクターのアドレス。その他のワークスペースは「」で終わります。 `/profiles/<workspace ID>` |
+| `workspaces[].collector_fingerprint` | 必須。ワークスペースごとに異なります。 |
+| `workspaces[].token_file` | そのワークスペースの読み取り専用ウィットネストークンを含むファイル |
+| `workspaces[].channel`, `bot_token_file` | オプション：各チェック結果をチャンネルに投稿する |
+| `workspaces[].proxy`, `bot_api` | オプションのルートおよびBot APIアドレス |
+
+```
+python -m tgwitness.proof --config proof.json --check-config
+python -m tgwitness.proof --config proof.json --host 127.0.0.1 --port 8790
+```
+
+最初のコマンドは、接続を開くことなくファイルとトークンファイルの有効性を検証します。 このページは GET および HEAD メソッドのみに応答します：
+
+- `/` すべてのワークスペースが表示されます。2.5 インターバルの間、チェックが入っていないワークスペースは「stale（古くなった）」とマークされます。
+- `/api/proof` JSONと同じ内容を返します。
+- `/api/proof/<id>` 最新の署名付きステートメントをダウンロードします（`tgwitness-public-proof-v1`）： ウィットネス記録番号とハッシュ、ステータス、固定されたコレクターキー、チェックポイント、収集 カウンター、およびチャンネルへの投稿が成功したかどうか。これらは、そのワークスペースのウィットネスキーによって署名されています。
+- `/healthz` ワークスペースのモニターが停止すると、503エラーが返されます。
+
+[Caddyfile.proof.example](https://github.com/phishdestroy/TgWitness/blob/main/deploy/Caddyfile.proof.example) のように、ページに独自のホスト名を割り当ててください。検証のために、 ワークスペースのウィットネス・ジャーナルを `python -m tgwitness.witness export --data-dir proof-data/<id> --out witness.zip` でエクスポートし、 以下に説明する通りに使用してください。
 
 ## 検証
 

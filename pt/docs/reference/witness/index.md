@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/pt/docs/reference/witne
 
 Execute uma instância do TgWitness com sua própria chave e bot, publique pontos de verificação assinados em um canal e compare as exportações com esses pontos.
 
-[Configuração do bot e do proxy em russo](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/WITNESS.md).
+[Exportar e verificar](https://phishdestroy.github.io/TgWitness/pt/docs/reference/evidence/) · [Alta segurança](https://phishdestroy.github.io/TgWitness/pt/docs/reference/high-assurance/) · [Guia do painel](https://phishdestroy.github.io/TgWitness/pt/docs/reference/panel/#extras)
 
 Um coletor assina seu próprio diário; portanto, quem quer que controle o coletor e sua chave poderia, em princípio, reescrever ou truncar o diário e assiná-lo novamente. Uma testemunha torna isso detectável. Trata-se de um processo separado — outro contêiner, ou melhor, um servidor operado por outra pessoa — que, a cada poucos minutos, busca o cabeçalho do diário assinado do coletor, assina o que observou com sua própria chave, mantém isso em seu próprio diário e o publica em um canal do Telegram.
 
@@ -27,7 +27,7 @@ Diagrama de fluxo · Coletor → Witness (ponto de verificação assinado: conta
 | Sua própria chave Ed25519 e seu próprio registro | O cofre do coletor, a chave de assinatura ou o token do painel |
 | Seu próprio token de bot do Telegram | Conteúdo da mensagem: o cabeçalho contém a contagem de registros e um hash |
 
-O token é criado na página **“Witness”** do painel, exibido uma única vez e armazenado apenas como um SHA-256. Ele abre exatamente um endpoint, `GET /api/witness/head`, que retorna um ponto de verificação recém-assinado, além de contadores de coleta sem conteúdo assinados e informações sobre a integridade operacional. Ele não pode abrir o painel, ler o conteúdo das mensagens ou alterar configurações, e o token do painel não é aceito nesse local. Revogue um token na mesma página. O coletor registra quando uma nova chave de testemunha começa a verificar (`witness.seen`) e mostra a última verificação por token; uma testemunha que não tenha sido verificada em 2,5 intervalos é marcada como vencida.
+O token é criado em **Extras → Testemunha independente**, exibido uma única vez e armazenado apenas como um SHA-256. Ele abre exatamente um endpoint, `GET /api/witness/head`, que retorna um ponto de verificação recém-assinado, além de contadores de coleções sem conteúdo assinados e o estado operacional. Ele não pode abrir o painel, ler o conteúdo das mensagens ou alterar configurações, e o token do painel não é aceito nesse local. Revogue um token na mesma página. O coletor registra quando uma nova chave de testemunha começa a verificar (`witness.seen`) e exibe a última verificação por token; uma testemunha que não tenha verificado em 2,5 intervalos é marcada como atrasada.
 
 Novas testemunhas enviam um desafio aleatório em cada enquete; a declaração de captura o repete sob a assinatura do coletor. Os contadores estão vinculados ao ponto de verificação exato e são incluídos nas postagens assinadas das testemunhas. Cabeçalhos legados continuam sendo aceitos pela testemunha autônoma. O aumento do diário, por si só, nunca é contabilizado como uma nova mensagem.
 
@@ -54,7 +54,7 @@ TGW1.eyJhdCI6…<statement>.<signature>
 
 É necessário um bot do Telegram (crie um com @BotFather), um canal no qual esse bot seja administrador e o endereço do coletor acessível a partir do testemunho — via HTTPS fora de uma rede privada (consulte o perfil HTTPS na seção de [implantação](https://phishdestroy.github.io/TgWitness/pt/docs/reference/deployment/)).
 
-Abra **Extras → Um bot no seu canal → Configure um bot** no painel. Três etapas abrangem o acesso somente leitura, o seu canal e o intervalo, seguidas do lançamento do witness. A política de publicação, o proxy HTTP/SOCKS5 opcional e o endereço personalizado da API do bot encontram-se nas **configurações avançadas** . O formulário baixa o `witness.json` com a chave do coletor deste espaço de trabalho fixada. Baixe o token de somente leitura recém-criado com **“Salvar arquivo de acesso** como `witness-token.txt` ”; coloque-o e um `bot-token.txt` criado no host da testemunha ao lado desse JSON. O coletor nunca recebe o token do bot. O download não inicia um serviço nem publica uma mensagem. Nenhuma testemunha de projeto hospedado é implicitamente cadastrada.
+Abra **Extras → Testemunha independente → Configurar** no painel. Três etapas abrangem o acesso somente leitura, seu canal e intervalo, e, por fim, a ativação da testemunha. A política de publicação, o proxy HTTP/SOCKS5 opcional e o endereço personalizado da API do bot estão nas **configurações avançadas**. O formulário baixa `witness.json` com a chave do coletor deste espaço de trabalho fixada. Baixe o token de somente leitura recém-criado com **“Salvar arquivo de acesso** como” `witness-token.txt`; coloque-o e um `bot-token.txt`arquivo criado no host da testemunha ao lado desse JSON. O coletor nunca recebe o token do bot. O download não inicia um serviço nem publica uma mensagem. Nenhuma testemunha de projeto hospedado é implicitamente cadastrada.
 
 ```
 python -m tgwitness.witness run --config witness.json --check-config
@@ -95,6 +95,17 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
     --token-file witness-token.txt --bot-token-file bot-token.txt --channel @your_witness_channel
 ```
 
+### Publicar no Discord
+
+Uma testemunha pode postar em um canal do Discord em vez de no Telegram. No Discord, abra **Editar Canal → Integrações → Webhooks**, crie um webhook e copie sua URL. No painel, escolha **Webhook do Discord · seu canal** na etapa 2. No servidor da testemunha, salve a URL como `discord-webhook.txt` ao lado de `witness.json`; ela nunca chega ao coletor.
+
+```
+python -m tgwitness.witness run --collector https://your-collector.example.org \
+    --token-file witness-token.txt --discord-webhook-file discord-webhook.txt
+```
+
+Uma testemunha tem um único editor: um canal do Telegram ou um webhook do Discord, mas não ambos. As postagens contêm a mesma declaração assinada e não podem enviar notificações a ninguém. Uma postagem com mais de 2.000 caracteres, conforme o limite do Discord, é substituída por uma linha curta com a verificação completa anexada como `witness-check.txt`. Cada ID de postagem é registrado como `witness.posted`. `verify.py --channel`lê apenas exportações de canais do Telegram; portanto, para o Discord, mantenha o diário de testemunhas: ele contém todas as verificações.
+
 ### Opções
 
 | Opção | Ambiente | Padrão | Significado |
@@ -109,7 +120,7 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
 | `--data-dir` | `_DATA` | `witness-data` | Chave de testemunho e registro |
 | `--config` | `_CONFIG` | – | Arquivo JSON com qualquer uma das opções acima |
 
-O endereço do coletor, os tokens e o canal provêm de `--collector`, `--token` ou `--token-file`, `--bot-token` ou `--bot-token-file` e `--channel`, ou `_COLLECTOR`, `_TOKEN`, `_TOKEN_FILE`, `_BOT_TOKEN`, `_BOT_TOKEN_FILE` e `_CHANNEL`, o que mantém os segredos fora da lista de processos.
+O endereço do coletor, os tokens e o canal provêm de `--collector`, `--token` ou `--token-file`, `--bot-token` ou `--bot-token-file`, `--discord-webhook-file` e `--channel`, ou `_COLLECTOR`, `_TOKEN`, `_TOKEN_FILE`, `_BOT_TOKEN`, `_BOT_TOKEN_FILE`, `_DISCORD_WEBHOOK_FILE` e `_CHANNEL`, o que mantém os segredos fora da lista de processos.
 
 Um arquivo de configuração utiliza nomes de opções com sublinhados, além de “`texts`”, que substitui as palavras das publicações do canal:
 
@@ -123,6 +134,36 @@ Um arquivo de configuração utiliza nomes de opções com sublinhados, além de
 Chaves `texts`: `ok`, `key_changed`, `rollback`, `fork`, `invalid`, `no_response`, `collector`, `records`, `head`. A linha de comando tem prioridade sobre o ambiente, e o ambiente sobre o arquivo. Opções desconhecidas ou chaves de texto interrompem o TgWitness com uma mensagem, em vez de serem ignoradas. A redação nunca afeta a verificação: o verify.py verifica o token assinado ao final de cada publicação. Com `--post changes` ou `problems`, as verificações que não foram publicadas ainda constam no diário de testemunhas e `verify.py` as lista como nunca publicadas; o registro inicial indica a política. Todas as verificações ainda aparecem no diário, portanto, menos publicações significam menos momentos independentes no Telegram, e não menos verificações.
 
 Mesmo sem um canal, o TgWitness continua mantendo seu diário. Guarde a impressão digital da chave do TgWitness (`python -m tgwitness.witness fingerprint`) em outro local.
+
+## Página pública de comprovação para vários espaços de trabalho
+
+`python -m tgwitness.proof` O TgWitness monitora até 32 espaços de trabalho ao mesmo tempo e exibe uma página somente leitura com a verificação assinada mais recente de cada um. Cada espaço de trabalho recebe sua própria chave de testemunha e diário na pasta de dados, além de uma chave de coletor fixada; a publicação em um canal do Telegram é opcional para cada espaço de trabalho. Comece com o arquivo [proof.config.example](https://github.com/phishdestroy/TgWitness/blob/main/deploy/proof.config.example):
+
+| Campo | Significado |
+| --- | --- |
+| `title` | Título da página, 1–100 caracteres |
+| `data_dir` | Chaves e diários do Witness, relativos ao arquivo; padrão `proof-data` |
+| `interval`, `timeout` | Minutos entre verificações (1–1.440, padrão 5); segundos de espera (5–600, padrão 20) |
+| `workspaces[].id`, `label` | Alias curto em letras minúsculas e o nome exibido |
+| `workspaces[].collector` | Endereço do coletor; outros espaços de trabalho terminam em `/profiles/<workspace ID>` |
+| `workspaces[].collector_fingerprint` | Obrigatório, varia de acordo com cada espaço de trabalho |
+| `workspaces[].token_file` | Arquivo com o token de testemunha somente leitura desse espaço de trabalho |
+| `workspaces[].channel`, `bot_token_file` | Opcional, em conjunto: publique cada verificação em um canal |
+| `workspaces[].proxy`, `bot_api` | Rota opcional e endereço da API do bot |
+
+```
+python -m tgwitness.proof --config proof.json --check-config
+python -m tgwitness.proof --config proof.json --host 127.0.0.1 --port 8790
+```
+
+O primeiro comando valida o arquivo e os arquivos de token sem estabelecer uma conexão. A página responde apenas aos métodos GET e HEAD:
+
+- `/` Mostra todos os espaços de trabalho; um espaço de trabalho sem verificação por 2,5 intervalos é marcado como obsoleto.
+- `/api/proof` retorna o mesmo que JSON.
+- `/api/proof/<id>` baixa a declaração assinada mais recente (`tgwitness-public-proof-v1`): número e hash do registro de testemunha, status, chave do coletor fixada, ponto de verificação, contadores de coleta e se a publicação no canal foi bem-sucedida, assinada pela chave de testemunha daquele espaço de trabalho.
+- `/healthz` Retorna o código de erro 503 quando o monitor de um espaço de trabalho é desativado.
+
+Atribua à página seu próprio nome de host, como em [Caddyfile.proof.example](https://github.com/phishdestroy/TgWitness/blob/main/deploy/Caddyfile.proof.example). Para verificação, exporte o diário de testemunho de um espaço de trabalho com `python -m tgwitness.witness export --data-dir proof-data/<id> --out witness.zip` e use-o conforme descrito abaixo.
 
 ## Verificar
 

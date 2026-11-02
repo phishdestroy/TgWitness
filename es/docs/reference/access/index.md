@@ -28,7 +28,7 @@ Abra el panel con el token generado en una sesión de navegador independiente y 
 
 ## Seleccione los permisos
 
-Para una demostración pública solo de texto, utilice **la «Galería pública»** en lugar del acceso habitual para revisores. Muestra canales públicos seleccionados explícitamente, ediciones y eliminaciones conservadas, y estadísticas firmadas, con los campos de autor ocultos y los archivos cerrados en el límite de la API. [Cree y verifique una galería](https://github.com/phishdestroy/TgWitness/blob/main/docs/LIVE-SHOWCASE.md).
+Para una demostración pública solo de texto, utilice **la «Galería pública»** en lugar del acceso habitual para revisores. Muestra canales públicos seleccionados explícitamente, ediciones y eliminaciones conservadas, y estadísticas firmadas, con los campos de autor ocultos y los archivos cerrados en el límite de la API. [Cree y verifique una galería](https://phishdestroy.github.io/TgWitness/es/docs/reference/showcase/).
 
 | Autorización | Qué permite |
 | --- | --- |
@@ -70,7 +70,7 @@ La IP es la dirección del cliente que ve la aplicación. Si se encuentra detrá
 
 ## Modificar o retirar el acceso
 
-Modifique una entrada en **«Accesos»** para cambiar su ámbito de aplicación, permisos o límites. Los cambios en el ámbito de aplicación y los permisos se comprueban en las solicitudes posteriores, incluidas las solicitudes de sesiones que ya estén abiertas. La revocación de un acceso pone fin a sus sesiones y hace que el token emitido quede inutilizable. **Las sesiones abiertas** también permiten al administrador finalizar una sesión concreta sin revocar todo el acceso.
+Edita una entrada en **«Acceso concedido»** para cambiar su ámbito, permisos o límites. Los cambios en el ámbito y los permisos se comprueban en las solicitudes posteriores, incluidas las solicitudes de sesiones que ya estén abiertas. La revocación de un acceso pone fin a sus sesiones y hace que el token emitido quede inutilizable. La opción **«Sesiones abiertas»** también permite al administrador cerrar una sesión individual sin revocar todo el acceso.
 
 Las copias de exportación guardadas conservan su creador, el espacio de trabajo, el alcance del chat y los permisos necesarios. Un usuario con acceso concedido solo puede ver o descargar sus propias copias mientras dichos permisos sigan vigentes; las copias que contengan el «Case Board» también requieren el permiso «`board.read`». El administrador puede recuperar todas las copias. Las copias más antiguas que carezcan de estos metadatos y los paquetes de grupo son de acceso exclusivo para el administrador. Las solicitudes de descarga y las respuestas de archivos preparadas vuelven a comprobar el acceso tras preparar el archivo, antes de enviar sus bytes.
 

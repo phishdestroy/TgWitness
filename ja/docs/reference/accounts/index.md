@@ -235,7 +235,7 @@ TDataとは、Telegram Desktopアプリケーション（desktop.telegram.orgか
 - **複数のアカウントが閲覧できるチャットには、** 共有ソース、それらを閲覧しているアカウント、および 利用可能なワークスペースの閲覧期間（最大7日間）における中断が表示されます。**N個のアカウントでのエクスポートでは** 、チャンネルまたはスーパーグループのエクスポートが各アカウントに分割され、1つのアーカイブに署名されます。
 - **グループのエクスポート:**各アカウントの署名付きエクスポートが以下に格納された1つのZIP `accounts/` 、 `manifest.json` 各アカウントのSHA-256およびキーのフィンガープリントを列挙し、メイン ワークスペースによって `manifest.signature.json`。各アカウントのアーカイブは、 `python -m tgwitness.verify` およびそのアカウントの信頼済みフィンガープリントを使用して、各アカウントのアーカイブを個別に検証してください。
 
-メンバーはグループの設定を共有しますが、各アカウントは独自の設定値を保持することもできます。 [共有設定](https://github.com/phishdestroy/TgWitness/blob/main/docs/SETTINGS.md#account-groups)、 [インポートおよびグループのガイド](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings)、 ならびに[MTProxyプールダッシュボード](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)をご覧ください。
+メンバーはグループの設定を共有しますが、各アカウントは独自の設定値を保持することもできます。 [共有設定](https://phishdestroy.github.io/TgWitness/ja/docs/reference/settings/#account-groups)、 [インポートおよびグループのガイド](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Accounts.md#import-accounts-and-share-settings)、 ならびに[MTProxyプールダッシュボード](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md#pool-dashboard-and-custom-sources)をご覧ください。
 
 ## ログアウト
 
@@ -278,6 +278,6 @@ TDataとは、Telegram Desktopアプリケーション（desktop.telegram.orgか
 | アカウントIDがインポートされたアカウントと一致しません | このファイルのユーザーIDは、Telegramが報告しているものとは異なります。このファイルは別のアカウントのものです。 |
 | このアカウントはすでに別のワークスペースに属しています | アカウントを2回追加するのではなく、そのワークスペースを開いてください。 |
 | 接続されていますが、「**ソース**」のチャットリストに非公開グループが欠落しています。 | メンバーシップをご確認ください。ピッカーは最初の1,000件のダイアログを検査します。制限数は「**パラメータ**」で変更できます。 |
-| プロキシ接続に失敗しました | ルーティングモードとIPモードをご確認ください。自動MTProxyは、別の有効なエントリを試行します。IP非表示モードは待機し、明示的に選択されたフォールバックモードは、設定された遅延時間が経過した後、直接接続できます。[ルーティングモードについては](https://phishdestroy.github.io/TgWitness/ja/docs/reference/connection/#ip-modes)こちらをご覧ください。 |
+| プロキシ接続に失敗しました | ルートとIPモードを確認してください。自動MTProxyは、動作する別のエントリを試行します。「アドレスを非表示」は待機状態となり、「Direct」は最後の手段として、設定された遅延時間の後に直接接続を試みます。[ルーティングモード](https://phishdestroy.github.io/TgWitness/ja/docs/reference/connection/#ip-modes)を参照してください。 |
 
 関連項目：プロキシおよび暗号化に関する[接続とセキュリティ](https://phishdestroy.github.io/TgWitness/ja/docs/reference/connection/)、 およびログイン後に収集されるデータの[収集方法について](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/)。

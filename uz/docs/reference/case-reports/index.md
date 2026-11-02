@@ -4,8 +4,6 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uz/docs/reference/case-
 
 Hisobot filtrlari, sakkizta dizayn, kontent uchun oldindan belgilangan sozlamalar, saqlangan o'zgarish tarixlari va imzolangan eksportlarga kiritilgan baholash.
 
-[Rus tili](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE_REPORTS.md)
-
 Tanlangan kuzatuvlarni ishning o'qiladigan hisobotiga aylantiring: uning savoli, doirasi, saqlangan o'zgarishlari, diagrammalari, topilmalari va manba havolalari. Har bir hisobot qabul qiluvchiga yetkazilgan materialni tekshirish va uning to'plam qamrovini ko'zdan kechirish imkonini beradi.
 
 **Ishonch va cheklovlar** bo'limi jurnal, topshirish, suhbat, hisob va ulashish hisobotlarida paydo bo'ladi. Jurnal va topshirish bo'yicha PDF-fayllar imzolangan `report.json`-fayl bilan bir xil baholashdan foydalanadi. ZIP manifestlari imzolangan manifestda `case_assessment` ni o'z ichiga oladi. Ushbu baholash eksport qilingan material bilan birga yuboriladi. Asl kuzatuvlar o'z mavjud imzolarini saqlab qoladi.

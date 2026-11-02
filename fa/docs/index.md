@@ -8,7 +8,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/
 
 راهنماهای مصور
 
-[### تخته پرونده مشاهدات، نقل‌قول‌های دقیق و یادداشت‌های تیم را مرتبط نگه دارید.](https://phishdestroy.github.io/TgWitness/fa/docs/case-board/) [### استودیوی گزارش ماده و یکی از هشت طرح گزارش را انتخاب کنید.](https://phishdestroy.github.io/TgWitness/fa/docs/reports/) [### نسخهٔ قابل اشتراک‌گذاری یک خروجی امضا شده را با فیلدهای مورد نیاز دریافت‌کننده آماده کنید.](https://phishdestroy.github.io/TgWitness/fa/docs/handover/) [### گروه‌های حساب حساب‌ها را به‌صورت مشترک مرور کنید و فضای کاری آن‌ها را جدا نگه دارید.](https://phishdestroy.github.io/TgWitness/fa/docs/groups/)
+[### تخته پرونده مشاهدات، نقل‌قول‌های دقیق و یادداشت‌های تیم را مرتبط نگه دارید.](https://phishdestroy.github.io/TgWitness/fa/docs/case-board/) [### استودیوی گزارش ماده و یکی از هشت طرح گزارش را انتخاب کنید.](https://phishdestroy.github.io/TgWitness/fa/docs/reports/) [### اشتراک‌گذاری کپی یک خروجی امضا شده را با فیلدهای مورد نیاز دریافت‌کننده آماده کنید.](https://phishdestroy.github.io/TgWitness/fa/docs/handover/) [### گروه‌های حساب حساب‌ها را به‌صورت مشترک مرور کنید و فضای کاری آن‌ها را جدا نگه دارید.](https://phishdestroy.github.io/TgWitness/fa/docs/groups/)
 
 [## حالت‌ها، سناریوها و سطوح شواهد دامنه‌های جمع‌آوری، مرزهای رویداد، هشت مکانیزم تأیید و شش سناریوی تحقیقاتی خیالی.](https://phishdestroy.github.io/TgWitness/fa/guides/modes.html)
 
@@ -34,19 +34,19 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/
 
 راه‌اندازی
 
-[راه‌اندازی سریع](https://phishdestroy.github.io/TgWitness/fa/docs/reference/quickstart/)[فرمت‌های حساب کاربری و جلسه](https://phishdestroy.github.io/TgWitness/fa/docs/reference/accounts/)[دسترسی و مجوزها](https://phishdestroy.github.io/TgWitness/fa/docs/reference/access/)[اتصال، پروکسی‌ها و حفاظت از داده‌ها](https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/)[راه‌اندازی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/)
+[راه‌اندازی سریع](https://phishdestroy.github.io/TgWitness/fa/docs/reference/quickstart/)[نصب، تأیید و به‌روزرسانی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/installation/)[راه‌اندازی اولیه و تنظیمات](https://phishdestroy.github.io/TgWitness/fa/docs/reference/settings/)[فرمت‌های حساب کاربری و جلسه](https://phishdestroy.github.io/TgWitness/fa/docs/reference/accounts/)[دسترسی و مجوزها](https://phishdestroy.github.io/TgWitness/fa/docs/reference/access/)[اتصال، پروکسی‌ها و حفاظت از داده‌ها](https://phishdestroy.github.io/TgWitness/fa/docs/reference/connection/)[راه‌اندازی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/deployment/)[استقرار با تضمین بالا](https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/)
 
 جمع‌آوری
 
-[نحوهٔ کارکرد جمع‌آوری](https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/)[بارگذاری تاریخچه منبع](https://phishdestroy.github.io/TgWitness/fa/docs/reference/history/)[روندها و عملیات‌ها](https://phishdestroy.github.io/TgWitness/fa/docs/reference/operations/)[حالت تحقیق](https://phishdestroy.github.io/TgWitness/fa/docs/reference/investigation/)[ویژگی‌ها و محدودیت‌ها](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/)
+[راهنمای پنل](https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel/)[نحوهٔ کارکرد جمع‌آوری](https://phishdestroy.github.io/TgWitness/fa/docs/reference/collection/)[بارگذاری تاریخچه منبع](https://phishdestroy.github.io/TgWitness/fa/docs/reference/history/)[روندها و عملیات‌ها](https://phishdestroy.github.io/TgWitness/fa/docs/reference/operations/)[حالت تحقیق](https://phishdestroy.github.io/TgWitness/fa/docs/reference/investigation/)[ویژگی‌ها و محدودیت‌ها](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/)
 
 آرشیو و یکپارچه‌سازی‌ها
 
-[مرجع Case Board](https://phishdestroy.github.io/TgWitness/fa/docs/reference/case-board/)[تحلیل بایگانی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/analysis/)[MCP فقط-خواندنی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/)[شناسایی نوری حروف (OCR) و رونویسی محلی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/media-analysis/)[وب‌هوک‌های خروجی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/webhooks/)
+[مرجع Case Board](https://phishdestroy.github.io/TgWitness/fa/docs/reference/case-board/)[تحلیل بایگانی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/analysis/)[MCP فقط-خواندنی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/mcp/)[شناسایی نوری حروف (OCR) و رونویسی محلی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/media-analysis/)[وب‌هوک‌های خروجی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/webhooks/)[نمایشگاه عمومی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/showcase/)
 
 شواهد
 
-[چگونگی کارکرد شواهد](https://phishdestroy.github.io/TgWitness/fa/docs/reference/how-it-works/)[پیکربندی و اعتبارسنجی گزارش](https://phishdestroy.github.io/TgWitness/fa/docs/reference/case-reports/)[فرمت مدرک](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/)[شاهد مستقل](https://phishdestroy.github.io/TgWitness/fa/docs/reference/witness/)[برچسب‌های زمانی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/timestamp/)
+[چگونگی کارکرد شواهد](https://phishdestroy.github.io/TgWitness/fa/docs/reference/how-it-works/)[پیکربندی و اعتبارسنجی گزارش](https://phishdestroy.github.io/TgWitness/fa/docs/reference/case-reports/)[صادرات حساب](https://phishdestroy.github.io/TgWitness/fa/docs/reference/account-export/)[فرمت مدرک](https://phishdestroy.github.io/TgWitness/fa/docs/reference/evidence/)[شاهد مستقل](https://phishdestroy.github.io/TgWitness/fa/docs/reference/witness/)[برچسب‌های زمانی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/timestamp/)[ذخیره‌سازی و بازیابی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/storage/)
 
 امنیت و پروژه
 

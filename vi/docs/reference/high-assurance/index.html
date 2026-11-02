@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="vi" dir="ltr" class="docs-root">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1120"><title>Triển khai có độ tin cậy cao · Tham khảo | TgWitness</title>
+<meta name="description" content="Một máy chủ được bảo mật 24/7 trên Hetzner hoặc Phala Cloud, Gateway DNS và các kiểm tra mà bên thứ ba có thể lặp lại."><link rel="canonical" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TgWitness">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:title" content="Triển khai có độ tin cậy cao · Tham khảo | TgWitness"><meta property="og:description" content="Một máy chủ được bảo mật 24/7 trên Hetzner hoặc Phala Cloud, Gateway DNS và các kiểm tra mà bên thứ ba có thể lặp lại.">
+<meta property="og:url" content="https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/"><meta property="og:image" content="https://phishdestroy.github.io/TgWitness/assets/tgwitness-social.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TgWitness — Telegram observation journal">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/"><link rel="alternate" hreflang="ru" href="https://phishdestroy.github.io/TgWitness/ru/docs/reference/high-assurance/"><link rel="alternate" hreflang="uk" href="https://phishdestroy.github.io/TgWitness/uk/docs/reference/high-assurance/"><link rel="alternate" hreflang="es" href="https://phishdestroy.github.io/TgWitness/es/docs/reference/high-assurance/"><link rel="alternate" hreflang="pt-BR" href="https://phishdestroy.github.io/TgWitness/pt/docs/reference/high-assurance/"><link rel="alternate" hreflang="tr" href="https://phishdestroy.github.io/TgWitness/tr/docs/reference/high-assurance/"><link rel="alternate" hreflang="ar" href="https://phishdestroy.github.io/TgWitness/ar/docs/reference/high-assurance/"><link rel="alternate" hreflang="fa" href="https://phishdestroy.github.io/TgWitness/fa/docs/reference/high-assurance/"><link rel="alternate" hreflang="ur" href="https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/"><link rel="alternate" hreflang="hi" href="https://phishdestroy.github.io/TgWitness/hi/docs/reference/high-assurance/"><link rel="alternate" hreflang="id" href="https://phishdestroy.github.io/TgWitness/id/docs/reference/high-assurance/"><link rel="alternate" hreflang="vi" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/"><link rel="alternate" hreflang="zh-Hans" href="https://phishdestroy.github.io/TgWitness/zh/docs/reference/high-assurance/"><link rel="alternate" hreflang="fr" href="https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/"><link rel="alternate" hreflang="de" href="https://phishdestroy.github.io/TgWitness/de/docs/reference/high-assurance/"><link rel="alternate" hreflang="it" href="https://phishdestroy.github.io/TgWitness/it/docs/reference/high-assurance/"><link rel="alternate" hreflang="uz" href="https://phishdestroy.github.io/TgWitness/uz/docs/reference/high-assurance/"><link rel="alternate" hreflang="ko" href="https://phishdestroy.github.io/TgWitness/ko/docs/reference/high-assurance/"><link rel="alternate" hreflang="zh-Hant" href="https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/"><link rel="alternate" hreflang="ms" href="https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/"><link rel="alternate" hreflang="pl" href="https://phishdestroy.github.io/TgWitness/pl/docs/reference/high-assurance/"><link rel="alternate" hreflang="ja" href="https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/"><link rel="alternate" hreflang="th" href="https://phishdestroy.github.io/TgWitness/th/docs/reference/high-assurance/"><link rel="alternate" hreflang="he" href="https://phishdestroy.github.io/TgWitness/he/docs/reference/high-assurance/"><link rel="alternate" hreflang="bn" href="https://phishdestroy.github.io/TgWitness/bn/docs/reference/high-assurance/"><link rel="alternate" hreflang="x-default" href="https://phishdestroy.github.io/TgWitness/docs/reference/high-assurance/"><link rel="alternate" type="text/markdown" href="https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/index.md"><link rel="describedby" href="https://phishdestroy.github.io/TgWitness/llms.txt" type="text/plain"><link rel="sitemap" type="application/xml" href="https://phishdestroy.github.io/TgWitness/sitemap.xml"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/", "url": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/", "name": "Triển khai có độ tin cậy cao · Tham khảo | TgWitness", "description": "Một máy chủ được bảo mật 24/7 trên Hetzner hoặc Phala Cloud, Gateway DNS và các kiểm tra mà bên thứ ba có thể lặp lại.", "inLanguage": "vi", "isPartOf": {"@id": "https://phishdestroy.github.io/TgWitness/#website"}, "breadcrumb": {"@id": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#breadcrumb"}}, {"@type": "BreadcrumbList", "@id": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "https://phishdestroy.github.io/TgWitness/vi/"}, {"@type": "ListItem", "position": 2, "name": "Tài liệu hướng dẫn", "item": "https://phishdestroy.github.io/TgWitness/vi/docs/"}, {"@type": "ListItem", "position": 3, "name": "Tham khảo", "item": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/"}, {"@type": "ListItem", "position": 4, "name": "Triển khai có độ tin cậy cao", "item": "https://phishdestroy.github.io/TgWitness/vi/docs/reference/high-assurance/"}]}]}</script>
+<script>(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()</script>
+<link rel="icon" href="../../../../assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../../../docs.css">
+<link rel="stylesheet" href="../../../../learn.css">
+<script src="../../../../docs.js" defer></script>
+<script src="../../../../learn.js" defer></script>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main">Chuyển thẳng đến nội dung</a>
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<header class="docs-header"><div class="header-inner">
+<a class="brand" href="../../../"><img src="../../../../assets/mark.svg" width="30" height="30" alt="">TgWitness<span> / Tài liệu hướng dẫn</span></a>
+<nav aria-label="Hướng dẫn"><a href="../../concepts/">Hướng dẫn trực quan</a><a href="../../">Tất cả các hướng dẫn</a><a href="../">Tham khảo</a><a href="https://github.com/phishdestroy/TgWitness">GitHub <span aria-hidden="true">↗</span></a></nav>
+<div class="header-tools"><details class="lang-menu"><summary aria-label="Ngôn ngữ"><span aria-hidden="true">◍</span> Tiếng Việt</summary><div class="lang-list"><a href="../../../../docs/reference/high-assurance/" hreflang="en" lang="en">English</a><a href="../../../../ru/docs/reference/high-assurance/" hreflang="ru" lang="ru">Русский</a><a href="../../../../uk/docs/reference/high-assurance/" hreflang="uk" lang="uk">Українська</a><a href="../../../../es/docs/reference/high-assurance/" hreflang="es" lang="es">Español</a><a href="../../../../pt/docs/reference/high-assurance/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="../../../../tr/docs/reference/high-assurance/" hreflang="tr" lang="tr">Türkçe</a><a href="../../../../ar/docs/reference/high-assurance/" hreflang="ar" lang="ar">العربية</a><a href="../../../../fa/docs/reference/high-assurance/" hreflang="fa" lang="fa">فارسی</a><a href="../../../../ur/docs/reference/high-assurance/" hreflang="ur" lang="ur">اردو</a><a href="../../../../hi/docs/reference/high-assurance/" hreflang="hi" lang="hi">हिन्दी</a><a href="../../../../id/docs/reference/high-assurance/" hreflang="id" lang="id">Bahasa Indonesia</a><a href="./" hreflang="vi" lang="vi" aria-current="true">Tiếng Việt</a><a href="../../../../zh/docs/reference/high-assurance/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="../../../../fr/docs/reference/high-assurance/" hreflang="fr" lang="fr">Français</a><a href="../../../../de/docs/reference/high-assurance/" hreflang="de" lang="de">Deutsch</a><a href="../../../../it/docs/reference/high-assurance/" hreflang="it" lang="it">Italiano</a><a href="../../../../uz/docs/reference/high-assurance/" hreflang="uz" lang="uz">O‘zbekcha</a><a href="../../../../ko/docs/reference/high-assurance/" hreflang="ko" lang="ko">한국어</a><a href="../../../../zh-Hant/docs/reference/high-assurance/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a><a href="../../../../ms/docs/reference/high-assurance/" hreflang="ms" lang="ms">Bahasa Melayu</a><a href="../../../../pl/docs/reference/high-assurance/" hreflang="pl" lang="pl">Polski</a><a href="../../../../ja/docs/reference/high-assurance/" hreflang="ja" lang="ja">日本語</a><a href="../../../../th/docs/reference/high-assurance/" hreflang="th" lang="th">ไทย</a><a href="../../../../he/docs/reference/high-assurance/" hreflang="he" lang="he">עברית</a><a href="../../../../bn/docs/reference/high-assurance/" hreflang="bn" lang="bn">বাংলা</a></div></details><button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Chuyển đổi giữa chế độ giao diện sáng và tối"><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+</div></header>
+<div class="docs-layout">
+<aside class="sidebar"><nav aria-label="Hướng dẫn"><a href="../../../guides/modes.html">Các chế độ, kịch bản và mức độ bằng chứng</a><p class="nav-label">Các bước đầu tiên</p><a href="../../start/">Bắt đầu chỉ trong vài phút</a><a href="../../dedicated-account/">Tài khoản chuyên dụng</a><a href="../../accounts/">Kết nối tài khoản</a><a href="../../proxies/">Chọn một máy chủ proxy</a><a href="../../exports/">Xuất và xác minh</a><a href="../../capture/">Ghi lại các hành động trên GitHub Actions</a><p class="nav-label">Điều tra & báo cáo</p><a href="../../cases/">Điều tra trên tất cả các cuộc trò chuyện</a><a href="../../case-board/">Tạo Case Board</a><a href="../../reports/">Thiết kế báo cáo</a><a href="../../handover/">Chuẩn bị bản sao để chia sẻ</a><a href="../../groups/">Quản lý một nhóm tài khoản</a><p class="nav-label">Hiểu rõ về bằng chứng</p><a href="../../concepts/">Tìm hiểu cách thức hoạt động của bằng chứng</a><a href="../../security/">Hãy đảm bảo tính bảo mật</a><a href="../../witness/">Thiết lập bot chứng cứ</a><p class="nav-label">Tìm hiểu thêm</p><a href="../../archive/">Quản lý kho lưu trữ</a><a href="../../access/">Chia sẻ một trường hợp</a><a href="../../server/">Hãy duy trì hoạt động của nó</a><a href="../../troubleshooting/">Tìm hiểu nguyên nhân sự cố</a></nav><nav class="wiki-nav" aria-label="Tham khảo"><p class="nav-label"><a class="nav-label-link" href="../">Tham khảo</a></p><details class="wiki-group" open><summary>Thiết lập</summary><a href="../quickstart/">Hướng dẫn bắt đầu nhanh</a><a href="../installation/">Cài đặt, xác minh và cập nhật</a><a href="../settings/">Cài đặt ban đầu và cấu hình</a><a href="../accounts/">Các định dạng tài khoản và phiên làm việc</a><a href="../access/">Quyền truy cập và quyền hạn</a><a href="../connection/">Kết nối, máy chủ trung gian và bảo vệ dữ liệu</a><a href="../deployment/">Triển khai</a><a href="./" aria-current="page">Triển khai có độ tin cậy cao</a></details><details class="wiki-group"><summary>Thu thập</summary><a href="../panel/">Hướng dẫn sử dụng bảng điều khiển</a><a href="../collection/">Cách thức thu thập dữ liệu</a><a href="../history/">Tải lịch sử nguồn</a><a href="../operations/">Quy trình làm việc và hoạt động</a><a href="../investigation/">Chế độ điều tra</a><a href="../features/">Các tính năng và giới hạn</a></details><details class="wiki-group"><summary>Lưu trữ & tích hợp</summary><a href="../case-board/">Tham chiếu Case Board</a><a href="../analysis/">Phân tích kho lưu trữ</a><a href="../mcp/">MCP chỉ đọc</a><a href="../media-analysis/">Nhận dạng ký tự quang học (OCR) và chuyển đổi văn bản tại địa phương</a><a href="../webhooks/">Webhook đi</a><a href="../showcase/">Trưng bày công khai</a></details><details class="wiki-group"><summary>Bằng chứng</summary><a href="../how-it-works/">Cách thức hoạt động của bằng chứng</a><a href="../case-reports/">Cấu hình và xác minh báo cáo</a><a href="../account-export/">Xuất tài khoản</a><a href="../evidence/">Định dạng bằng chứng</a><a href="../witness/">Nhân chứng độc lập</a><a href="../timestamp/">Dấu thời gian</a><a href="../storage/">Lưu trữ và khôi phục</a></details><details class="wiki-group"><summary>An ninh & dự án</summary><a href="../security/">An ninh và xử lý dữ liệu</a><a href="../architecture/">Kiến trúc</a><a href="../verification/">Những nội dung đã được kiểm thử</a><a href="../license/">Thông báo về sự không tương thích giữa giấy phép và kiến trúc</a><a href="../notice/">Thông báo về sự không tương thích giữa các nhà cung cấp dịch vụ</a><a href="../changelog/">Bản ghi thay đổi</a></details></nav><p class="sidebar-note">v0.8.0<br>Mã nguồn mở · Chạy trên máy tính của quý vị</p></aside>
+<main id="main" class="docs-main">
+<nav class="breadcrumbs" aria-label="Hướng dẫn"><a href="../../../">Trang chủ</a> <span aria-hidden="true">/</span> <a href="../../">Tài liệu hướng dẫn</a> <span aria-hidden="true">/</span> <a href="../">Tham khảo</a> <span aria-hidden="true">/</span> <span aria-current="page">Triển khai có độ tin cậy cao</span></nav>
+<p class="verification-shortcut"><a href="../verification/">Những nội dung đã được kiểm thử →</a></p>
+<div class="search" data-index="../../search.json" hidden><label for="guide-search">Tìm kiếm trong tài liệu</label><div class="search-field"><span aria-hidden="true">⌕</span><input id="guide-search" type="search" placeholder="Hãy thử các thuật ngữ như proxy, chuỗi băm, token hoặc witness…" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" aria-label="Tìm kiếm rõ ràng" hidden>×</button></div><p class="search-status" role="status" aria-live="polite">Hãy nhập một từ khóa để tìm kiếm trong các hướng dẫn và tài liệu tham khảo. Kết quả tìm kiếm sẽ được lưu lại trong trình duyệt của quý vị.</p><div id="search-results" hidden></div></div>
+<article class="guide-content"><p class="eyebrow">Tham khảo / Thiết lập</p><h1>Triển khai có độ tin cậy cao</h1><p class="guide-outcome">Một máy chủ được bảo mật 24/7 trên Hetzner hoặc Phala Cloud, Gateway DNS và các kiểm tra mà bên thứ ba có thể lặp lại.</p><div class="wiki-body"><p>Một nhật ký đã được ký xác nhận chứng minh rằng các bản ghi không bị thay đổi <strong>sau khi</strong> ký. Đối với các trường hợp nghiêm trọng,
+câu hỏi tiếp theo là liệu có ai đó có thể đã can thiệp vào dữ liệu <strong>trước</strong> khi nó được ký hay không:
+ai đã chạy trình thu thập dữ liệu, trên máy nào, và liệu có ai đã đăng nhập vào nó hay không. Chế độ tùy chọn
+này triển khai trình thu thập dữ liệu sao cho một bên thứ ba có thể kiểm tra điều đó, bằng cách sử dụng các bản ghi được lưu trữ bởi
+nhà cung cấp dịch vụ đám mây và Cloudflare thay vì chỉ dựa vào lời khẳng định của nhà điều hành.</p>
+<p>Việc sử dụng thông thường trên máy cục bộ và Docker vẫn không thay đổi. Không có gì ở đây hoạt động trừ khi bạn triển khai bằng
+<code>python -m tgwitness.cloud</code>, và trình thu thập dữ liệu chỉ đọc máy chủ của nó khi quá trình triển khai được thiết lập
+<code>TGWITNESS_ASSURANCE</code>.</p>
+<figure class="flow-figure flow-flow" data-diagram><div class="flow-canvas"><svg viewBox="0 0 1079 298" width="1079" height="298" role="img" aria-labelledby="flow-9-title flow-9-desc"><title id="flow-9-title">Sơ đồ quy trình</title><desc id="flow-9-desc">Người vận hành → Máy chủ, tường lửa không có quy tắc cho lưu lượng vào (API nhà cung cấp); Người vận hành → Tunnel và DNS (API Cloudflare); Máy chủ, tường lửa không có quy tắc cho lưu lượng vào → Tunnel và DNS (chỉ gửi đi); Máy chủ, tường lửa không có quy tắc cho lưu lượng vào → Khóa ký được tạo trên máy chủ; Verifier, các token chỉ đọc → Nhật ký nhà cung cấp và tường lửa; Verifier, các token chỉ đọc → Địa chỉ kết nối đường hầm và cổng vào; Verifier, các token chỉ đọc → Tuyên bố /api/assurance đã được ký; Verifier, các token chỉ đọc → Tệp ZIP chứa bằng chứng</desc><defs><marker id="flow-9-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="flow-arrowhead"/></marker></defs><path class="flow-edge" d="M409.6 55.0C409.6 83.0 123.2 83.0 123.2 111.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:297" pathLength="297"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="3.3s" repeatCount="indefinite" path="M409.6 55.0C409.6 83.0 123.2 83.0 123.2 111.0"/></circle><path class="flow-edge" d="M409.6 55.0C409.6 149.0 283.4 149.0 283.4 243.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:237" pathLength="237"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.6s" repeatCount="indefinite" path="M409.6 55.0C409.6 149.0 283.4 149.0 283.4 243.0"/></circle><path class="flow-edge" d="M123.2 187.0C123.2 215.0 283.4 215.0 283.4 243.0" marker-end="url(#flow-9-arrow)" style="--i:1;--len:176" pathLength="176"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="2.0s" repeatCount="indefinite" path="M123.2 187.0C123.2 215.0 283.4 215.0 283.4 243.0"/></circle><path class="flow-edge" d="M123.2 187.0C123.2 210.5 106.2 210.5 106.2 234.0" marker-end="url(#flow-9-arrow)" style="--i:1;--len:51" pathLength="51"/><circle class="flow-pulse" r="3.2" style="--i:1"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M123.2 187.0C123.2 210.5 106.2 210.5 106.2 234.0"/></circle><path class="flow-edge" d="M583.2 64.0C583.2 92.0 331.4 92.0 331.4 120.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:263" pathLength="263"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.9s" repeatCount="indefinite" path="M583.2 64.0C583.2 92.0 331.4 92.0 331.4 120.0"/></circle><path class="flow-edge" d="M583.2 64.0C583.2 92.0 543.0 92.0 543.0 120.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:72" pathLength="72"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="1.4s" repeatCount="indefinite" path="M583.2 64.0C583.2 92.0 543.0 92.0 543.0 120.0"/></circle><path class="flow-edge" d="M583.2 64.0C583.2 92.0 764.9 92.0 764.9 120.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:196" pathLength="196"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="2.2s" repeatCount="indefinite" path="M583.2 64.0C583.2 92.0 764.9 92.0 764.9 120.0"/></circle><path class="flow-edge" d="M583.2 64.0C583.2 96.5 980.0 96.5 980.0 129.0" marker-end="url(#flow-9-arrow)" style="--i:0;--len:408" pathLength="408"/><circle class="flow-pulse" r="3.2" style="--i:0"><animateMotion begin="indefinite" dur="4.5s" repeatCount="indefinite" path="M583.2 64.0C583.2 96.5 980.0 96.5 980.0 129.0"/></circle><g class="flow-node" style="--i:0"><rect x="347.3" y="15.0" width="124.6" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="409.6" y="35.0">Người vận hành</tspan></text></g><g class="flow-node" style="--i:0"><rect x="489.9" y="6.0" width="186.7" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="583.2" y="26.0">Verifier, các token chỉ</tspan><tspan x="583.2" y="44.0">đọc</tspan></text></g><g class="flow-node" style="--i:1"><rect x="26.4" y="111.0" width="193.6" height="76.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="123.2" y="131.0">Máy chủ, tường lửa không</tspan><tspan x="123.2" y="149.0">có quy tắc cho lưu lượng</tspan><tspan x="123.2" y="167.0">vào</tspan></text></g><g class="flow-node" style="--i:1"><rect x="238.0" y="120.0" width="186.7" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="331.4" y="140.0">Nhật ký nhà cung cấp và</tspan><tspan x="331.4" y="158.0">tường lửa</tspan></text></g><g class="flow-node" style="--i:1"><rect x="442.7" y="120.0" width="200.5" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="543.0" y="140.0">Địa chỉ kết nối đường hầm</tspan><tspan x="543.0" y="158.0">và cổng vào</tspan></text></g><g class="flow-node" style="--i:1"><rect x="661.2" y="120.0" width="207.4" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="764.9" y="140.0">Tuyên bố /api/assurance đã</tspan><tspan x="764.9" y="158.0">được ký</tspan></text></g><g class="flow-node" style="--i:1"><rect x="886.6" y="129.0" width="186.7" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="980.0" y="149.0">Tệp ZIP chứa bằng chứng</tspan></text></g><g class="flow-node" style="--i:2"><rect x="224.5" y="243.0" width="117.7" height="40.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="283.4" y="263.0">Tunnel và DNS</tspan></text></g><g class="flow-node" style="--i:2"><rect x="6.0" y="234.0" width="200.5" height="58.0" rx="10"/><text class="flow-text" text-anchor="middle" dominant-baseline="central"><tspan x="106.2" y="254.0">Khóa ký được tạo trên máy</tspan><tspan x="106.2" y="272.0">chủ</tspan></text></g><g class="flow-label" style="--i:0"><rect x="134.0" y="79.4" width="116.8" height="23.0" rx="6"/><text x="192.4" y="90.9" text-anchor="middle" dominant-baseline="central">API nhà cung cấp</text></g><g class="flow-label" style="--i:0"><rect x="261.8" y="164.0" width="104.2" height="23.0" rx="6"/><text x="313.9" y="175.5" text-anchor="middle" dominant-baseline="central">API Cloudflare</text></g><g class="flow-label" style="--i:1"><rect x="205.2" y="211.4" width="79.0" height="23.0" rx="6"/><text x="244.7" y="222.9" text-anchor="middle" dominant-baseline="central">chỉ gửi đi</text></g></svg></div><details class="flow-steps"><summary>Sơ đồ dưới dạng văn bản</summary><ol><li>Người vận hành → Máy chủ, tường lửa không có quy tắc cho lưu lượng vào (API nhà cung cấp)</li><li>Người vận hành → Tunnel và DNS (API Cloudflare)</li><li>Máy chủ, tường lửa không có quy tắc cho lưu lượng vào → Tunnel và DNS (chỉ gửi đi)</li><li>Máy chủ, tường lửa không có quy tắc cho lưu lượng vào → Khóa ký được tạo trên máy chủ</li><li>Verifier, các token chỉ đọc → Nhật ký nhà cung cấp và tường lửa</li><li>Verifier, các token chỉ đọc → Địa chỉ kết nối đường hầm và cổng vào</li><li>Verifier, các token chỉ đọc → Tuyên bố /api/assurance đã được ký</li><li>Verifier, các token chỉ đọc → Tệp ZIP chứa bằng chứng</li></ol></details></figure>
+<h2 id="what-a-verifier-can-check">Những gì người xác minh có thể kiểm tra<a class="anchor" href="#what-a-verifier-can-check" aria-label="Liên kết đến phần này">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Tuyên bố</th>
+<th>Cách kiểm tra</th>
+<th>Quản lý bởi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Máy chủ đã được tạo thông qua API của nhà cung cấp vào một thời điểm cụ thể</td>
+<td>Đối tượng máy chủ và quá trình tạo ra nó trong nhật ký riêng của nhà cung cấp</td>
+<td>Nhà cung cấp</td>
+</tr>
+<tr>
+<td>Không ai sử dụng các đường dẫn truy cập của nhà cung cấp</td>
+<td>Nhật ký các yêu cầu trên bảng điều khiển, khôi phục, đặt lại mật khẩu, xây dựng lại, ISO, hình ảnh, bản sao lưu</td>
+<td>Nhà cung cấp</td>
+</tr>
+<tr>
+<td>Không có gì có thể kết nối với nó</td>
+<td>Tường lửa của nhà cung cấp không có quy tắc cho phép kết nối vào; SSH bị ẩn ngay từ lần khởi động đầu tiên</td>
+<td>Nhà cung cấp (tường lửa), máy chủ (SSH)</td>
+</tr>
+<tr>
+<td>Bảng điều khiển chỉ có thể truy cập thông qua đường hầm</td>
+<td>Lưu lượng vào đường hầm chỉ được chuyển tiếp đến bảng điều khiển; trình kết nối chạy từ địa chỉ máy chủ</td>
+<td>Cloudflare</td>
+</tr>
+<tr>
+<td>Chính phần mềm này đang chạy</td>
+<td>Hash cây nguồn đã ký của trình thu thập tương đương với bản checkout của commit đã được triển khai</td>
+<td>Collector, được kiểm tra dựa trên Git</td>
+</tr>
+<tr>
+<td>Khóa ký đã được tạo trên máy chủ đó</td>
+<td>Khóa này ký một tuyên bố nêu rõ ID máy chủ của nhà cung cấp và giá trị băm của tệp cloud-init mà nó đã nhận được</td>
+<td>Collector, đã được kiểm tra với nhà cung cấp</td>
+</tr>
+<tr>
+<td>Nhật ký này thuộc về khóa và máy chủ đó</td>
+<td>Mỗi quá trình bắt đầu trong bằng chứng ZIP đều chứa thông số đo lường máy chủ cho máy chủ đó</td>
+<td>Bằng chứng ZIP</td>
+</tr>
+</tbody>
+</table></div>
+<p>Các số liệu máy chủ (trình nghe SSH và các tiến trình, phiên hiện tại, các lần đăng nhập <code>wtmp</code>, quá trình khởi động)
+được chính bộ thu thập báo cáo và được ký vào mỗi lần khởi động tiến trình cũng như vào
+<code>host.state</code> bản ghi mỗi khi chúng thay đổi. Người dùng root trên máy chủ có thể làm sai lệch các số liệu này; chúng
+hỗ trợ các bản ghi của nhà cung cấp và Cloudflare thay vì thay thế chúng.</p>
+<h2 id="providers">Nhà cung cấp<a class="anchor" href="#providers" aria-label="Liên kết đến phần này">#</a></h2>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th><code>--provider</code></th>
+<th>Thông tin đăng nhập</th>
+<th>Quyền truy cập chỉ đọc của Verifier</th>
+<th>Nhật ký nhà cung cấp dành cho người xác minh</th>
+<th>Dành cho</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hetzner</code></td>
+<td><code>HCLOUD_TOKEN</code></td>
+<td>Token đọc của cùng dự án</td>
+<td>Các hành động liên quan đến máy chủ và tường lửa</td>
+<td>Trong khi các tài nguyên vẫn còn tồn tại</td>
+</tr>
+<tr>
+<td><code>digitalocean</code></td>
+<td><code>DIGITALOCEAN_TOKEN</code></td>
+<td>Mã truy cập cá nhân chỉ đọc</td>
+<td>Các hành động của Droplet</td>
+<td>Trong khi Droplet vẫn tồn tại</td>
+</tr>
+<tr>
+<td><code>linode</code></td>
+<td><code>LINODE_TOKEN</code></td>
+<td><code>linodes</code>, <code>firewall</code>, <code>events</code> phạm vi chỉ đọc</td>
+<td>Sự kiện tài khoản, phiên bản quy tắc tường lửa</td>
+<td>90 ngày</td>
+</tr>
+<tr>
+<td><code>vultr</code></td>
+<td><code>VULTR_API_KEY</code></td>
+<td>Người dùng có quyền truy cập đọc và <code>activity_logs</code> quyền</td>
+<td>Nhật ký hoạt động tài khoản (phương thức, đường dẫn, tác nhân)</td>
+<td>30 ngày, thời gian lưu trữ có thể kéo dài hơn nếu đăng ký dịch vụ nhật ký kiểm toán</td>
+</tr>
+<tr>
+<td><code>aws</code></td>
+<td><code>AWS_ACCESS_KEY_ID</code>, <code>AWS_SECRET_ACCESS_KEY</code></td>
+<td><code>ec2:DescribeInstances</code>, <code>ec2:DescribeSecurityGroups</code>, <code>cloudtrail:LookupEvents</code></td>
+<td>Lịch sử sự kiện CloudTrail</td>
+<td>90 ngày</td>
+</tr>
+<tr>
+<td><code>phala</code></td>
+<td><code>PHALA_CLOUD_API_KEY</code></td>
+<td>Một khóa API của cùng một không gian làm việc</td>
+<td>Các bản cập nhật ứng dụng: thay đổi cấu hình và môi trường, khởi động lại, nâng cấp hệ điều hành</td>
+<td>Mặc dù ứng dụng này hiện đã tồn tại</td>
+</tr>
+<tr>
+<td><code>generic</code></td>
+<td>không có</td>
+<td>không có</td>
+<td>none: <strong>tự chứng thực</strong></td>
+<td>–</td>
+</tr>
+</tbody>
+</table></div>
+<p>Sử dụng một dự án, nhóm, tài khoản hoặc tài khoản con dành riêng cho từng vụ việc: quyền truy cập
+chỉ đọc của người xác minh sau đó sẽ chỉ hiển thị triển khai này. Thông tin đăng nhập được đọc từ
+<code>--provider-token-file</code> hoặc biến ở trên, không bao giờ từ dòng lệnh. Đối với AWS, tệp
+chứa <code>ACCESS_KEY_ID SECRET_ACCESS_KEY [SESSION_TOKEN]</code>; khu vực là <code>--location</code>.</p>
+<p>Những thông tin mà bản ghi của từng nhà cung cấp không thể hiển thị sẽ được in trong mỗi báo cáo. Tóm lại: Hetzner
+ghi lại các yêu cầu trên bảng điều khiển; Bảng điều khiển Khôi phục của DigitalOcean, Lish/Glish của Linode và bảng điều khiển web
+của Vultr không được ghi lại theo cách này, do đó quyền root bị khóa ngay từ lần khởi động đầu tiên và việc đăng nhập vào bảng điều khiển
+sẽ yêu cầu đặt lại mật khẩu hoặc thay đổi chế độ khởi động, những thao tác này đều được ghi lại. Vultr trả về địa chỉ bảng điều khiển
+cho bất kỳ khóa nào có thể truy cập vào instance; cả bản ghi lẫn báo cáo đều không lưu trữ thông tin này.</p>
+<h2 id="confidential-vm-on-phala-cloud-intel-tdx">Máy ảo bảo mật trên Phala Cloud (Intel TDX)<a class="anchor" href="#confidential-vm-on-phala-cloud-intel-tdx" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Với <code>--provider phala</code> trình thu thập chạy trong một máy ảo bảo mật Intel TDX trên
+<a href="https://phala.com/">Phala Cloud</a>, được quản lý bởi dstack. Máy chủ và nhân viên của Phala không thể đọc
+bộ nhớ của nó, và bộ xử lý ký xác nhận về những gì máy đã khởi động. Trình xác minh không
+chỉ tin vào lời của Phala: <code>tgwitness.tdx</code> mà tự kiểm tra từng bản xác nhận, lên đến Intel
+SGX Root CA được ghim, so sánh với danh sách thu hồi của Intel và dữ liệu nền tảng được ký bởi Intel, đồng thời từ chối
+các máy có thể bị gỡ lỗi hoặc di chuyển.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Nhập báo cáo</th>
+<th>Nội dung hiển thị</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tdx_binding</code></td>
+<td>Giấy chứng nhận bao gồm tuyên bố đã được ký của người thu thập và giá trị ngẫu nhiên của yêu cầu này</td>
+</tr>
+<tr>
+<td><code>tdx_quote</code></td>
+<td>Intel xác nhận tính hợp lệ của chứng nhận; chứng nhận chỉ được cấp khi Intel đánh giá nền tảng đó là cập nhật nhất</td>
+</tr>
+<tr>
+<td><code>tdx_compose_hash</code></td>
+<td>RTMR3, được tái tạo từ nhật ký sự kiện dstack, đo lường quá trình soạn thảo trong ứng dụng mà trình thu thập dữ liệu báo cáo</td>
+</tr>
+<tr>
+<td><code>tdx_compose</code></td>
+<td>Mã nguồn đó, từng byte một, chính là mã nguồn được xây dựng từ commit đã triển khai: các tệp nguồn được cố định bằng băm, cả hai hình ảnh đều được cố định bằng bản tóm tắt, không có mã nguồn nào khác</td>
+</tr>
+<tr>
+<td><code>tdx_identity</code></td>
+<td>Chứng nhận này được tạo ra từ ứng dụng và phiên bản đã triển khai, sử dụng các khóa từ hệ thống quản lý khóa (KMS) của Phala và một đĩa được mã hóa</td>
+</tr>
+<tr>
+<td><code>tdx_os</code></td>
+<td>Với <code>--tdx-measurements</code>, MRTD và RTMR0-2 bằng các giá trị được tính toán từ hình ảnh hệ điều hành dstack (<code>dstack-mr measure --json</code>)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Mỗi lần khởi động trình thu thập được ghi lại trong nhật ký đều kèm theo chứng nhận như vậy, do đó
+<code>verify --evidence</code> kiểm tra mỗi lần khởi động. Danh sách các bản sửa đổi ứng dụng của Phala đóng vai trò là
+nhật ký nhà cung cấp: nếu nội dung soạn thảo thay đổi sau khi triển khai, báo cáo sẽ không thành công.</p>
+<p>Trong bảng điều khiển, chọn <strong>Máy ảo bảo mật · Phala Cloud</strong>
+trong <strong>mục
+Extras</strong>
+→ <strong>Server 24/7</strong>
+và dán khóa API Phala Cloud; đường hầm nhanh hoạt động tương tự như trên Hetzner. Từ dòng lệnh:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud deploy --provider phala --name case-1 --server-type tdx.small \
+    --ref v0.8.0 --repository https://github.com/phishdestroy/TgWitness --quick-tunnel \
+    --provider-token-file phala-key.txt
+python -m tgwitness.cloud verify --record deployments/case-1/deployment.json \
+    --provider-token-file phala-key.txt --cloud-init deployments/case-1/docker-compose.yaml \
+    --source CHECKOUT_OF_COMMIT --tdx-measurements dstack-mr.json</code></pre>
+<p><code>--tdx-collateral</code> đọc các chứng chỉ và danh sách thu hồi của Intel từ một tệp thay vì
+tải chúng xuống từ Intel. Dịch vụ Gateway DNS không khả dụng tại đây: Phala không có tường lửa của nhà cung cấp
+cho lưu lượng truy cập đi.</p>
+<p>Một chứng nhận không thể loại trừ lỗ hổng trong mô-đun TDX hoặc vi mã của Intel, hoặc quyền truy cập vật lý vào
+bus bộ nhớ. Bất kỳ ai kiểm soát ứng dụng trong tài khoản của Phala đều có thể triển khai một bản soạn thảo khác;
+nó sẽ xuất hiện dưới dạng một bản sửa đổi mới với mã băm soạn thảo mới. Máy chủ kiểm soát nguồn thời gian
+và mạng của máy.</p>
+<h2 id="before-you-start">Trước khi bắt đầu<a class="anchor" href="#before-you-start" aria-label="Liên kết đến phần này">#</a></h2>
+<ol>
+<li>Một vùng Cloudflare, ID tài khoản của vùng đó và một mã thông báo API có quyền <strong>Cloudflare Tunnel Edit</strong>,
+    <strong>Zone Read</strong> và <strong>DNS Edit</strong>, được cung cấp cùng với <code>--cloudflare-token-file</code> hoặc
+    <code>CLOUDFLARE_API_TOKEN</code>. Đối với người xác minh: <strong>Cloudflare Tunnel Read</strong>, <strong>DNS Read</strong> và, đối với
+    nhật ký kiểm toán, <strong>Account Settings Read</strong>. Nếu không có tên miền, một
+    <a href="#quick-tunnel-without-a-domain">đường hầm nhanh</a> không cần bất kỳ thông tin nào trong số này.</li>
+<li>Thông tin đăng nhập của nhà cung cấp có quyền ghi vào một dự án chuyên dụng; <code>lock</code> cũng sử dụng cùng một:<ul>
+<li>Hetzner: Mã thông báo API có quyền Đọc &amp; Ghi;</li>
+<li>DigitalOcean: mã thông báo truy cập cá nhân có quyền ghi;</li>
+<li>Linode: mã thông báo truy cập cá nhân với <code>linodes</code>, <code>firewall</code> và <code>events</code> phạm vi đọc/ghi;</li>
+<li>Vultr: Khóa API của một tài khoản chuyên dụng hoặc tài khoản phụ;</li>
+<li>AWS: Cho phép thông tin đăng nhập IAM <code>ec2:DescribeVpcs</code>, <code>ec2:DescribeImages</code>,
+    <code>ec2:CreateSecurityGroup</code>, <code>ec2:AuthorizeSecurityGroupIngress</code>, <code>ec2:RunInstances</code>,
+    <code>ec2:CreateTags</code>, <code>ec2:DescribeInstances</code>, <code>ec2:DescribeSecurityGroupRules</code> và
+    <code>ec2:RevokeSecurityGroupIngress</code>.</li>
+</ul>
+</li>
+<li>Commit cần chạy. Một thẻ phát hành sẽ được giải quyết một lần duy nhất thành commit tương ứng với <code>git ls-remote</code>;
+    máy chủ chỉ nhận được commit dài 40 ký tự.</li>
+</ol>
+<h2 id="from-the-panel">Từ bảng điều khiển<a class="anchor" href="#from-the-panel" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Trên máy tính của bạn, <strong>Extras → Server 24/7</strong> sẽ chạy dịch vụ tương tự <code>deploy</code> cho Hetzner chỉ trong ba
+bước: chọn Châu Âu hoặc Hoa Kỳ, dán mã thông báo Hetzner (Đọc &amp; Ghi), sau đó xem lại
+loại máy chủ, giá hàng tháng, địa chỉ và phiên bản mà bảng điều khiển tìm thấy với mã thông báo đó. Không có gì
+được tạo ra trước khi bạn xác nhận. Bảng điều khiển hiển thị từng bước dưới dạng <code>deploy</code> báo cáo, sau đó là
+địa chỉ, mã thông báo của bảng điều khiển và dấu vân tay khóa ký. Nếu không có tên miền, máy chủ sẽ được cấp một
+<a href="#quick-tunnel-without-a-domain">đường hầm nhanh</a>
+; <strong>mục Máy chủ của bạn → Tìm địa chỉ hiện tại</strong>
+sẽ tra cứu lại sau khi khởi động lại. Để có địa chỉ cố định dưới tên miền của riêng bạn, hãy mở
+<strong>Tùy chọn · tên miền của riêng bạn</strong>
+và thêm mã thông báo Cloudflare (liên kết đã chuẩn bị sẽ chọn Zone
+Read, DNS Edit và Cloudflare Tunnel Edit).</p>
+<p>Các mã thông báo được truyền cùng với mỗi yêu cầu từ tab trình duyệt đến TgWitness trên cùng một máy tính
+và không được lưu ở bất kỳ đâu; bản ghi triển khai, cloud-init đã được che giấu, mã thông báo bảng điều khiển và,
+đối với đường hầm nhanh, khóa địa chỉ được lưu trữ trong <code>deployments/NAME</code> bên trong thư mục dữ liệu.
+Bảng điều khiển chỉ cung cấp tính năng này cho quản trị viên chính qua kết nối loopback trực tiếp
+(<code>127.0.0.1</code>, không có tiêu đề proxy hoặc đường hầm); một bảng điều khiển được truy cập qua mạng sẽ hiển thị các lệnh
+thay vào đó. Phiên bản mặc định là thẻ phát hành của bảng điều khiển đang chạy, được xác định thông qua
+API GitHub. Vị trí, loại máy chủ và giá cả lấy từ API của Hetzner: <code>cpx22</code> nếu dịch vụ này được
+cung cấp tại đó, nếu không thì sẽ là loại x86 rẻ nhất với ít nhất 2 GB bộ nhớ.</p>
+<h2 id="quick-tunnel-without-a-domain">Tunnel nhanh mà không cần tên miền<a class="anchor" href="#quick-tunnel-without-a-domain" aria-label="Liên kết đến phần này">#</a></h2>
+<p><code>--quick-tunnel</code> thay thế <code>--zone</code>, <code>--cloudflare-account</code> và <code>--panel-host</code>; không liên quan đến tài khoản
+hoặc mã thông báo Cloudflare:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server-type cpx22 \
+    --ref 0123456789abcdef0123456789abcdef01234567 --quick-tunnel --provider-token-file hetzner.token</code></pre>
+<p>Trên máy chủ, cloudflared mở một
+<a href="https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/">đường hầm nhanh</a>
+đến bảng điều khiển: một địa chỉ ngẫu nhiên <code>https://….trycloudflare.com</code> thay đổi mỗi khi cloudflared
+hoặc máy chủ khởi động lại. Một dịch vụ nhỏ trên máy chủ đăng mỗi địa chỉ lên một chủ đề ngẫu nhiên trên ntfy.sh
+, được ký (HMAC-SHA256) bằng một khóa chỉ có trong thư mục triển khai
+(<code>address-key.txt</code>), và lặp lại việc này cứ sau ba giờ vì ntfy.sh lưu giữ các bài đăng trong 12.
+<code>deploy</code> và <strong>Tìm địa chỉ hiện tại</strong> chỉ chấp nhận các bài đăng được ký, do đó một bài đăng giả mạo không thể
+chuyển bạn và mã thông báo bảng điều khiển của bạn đến địa chỉ của người khác. Chủ đề này được lưu trong bản ghi và
+cloud-init đã được công bố: bất kỳ ai có chúng đều có thể đọc địa chỉ hiện tại, địa chỉ này vẫn yêu cầu
+mã thông báo bảng điều khiển. Máy chủ không giữ bất kỳ cổng vào nào trong cả hai trường hợp.</p>
+<p>Chi phí: không có tài khoản Cloudflare nào lưu trữ bản ghi về đường hầm tạm thời, do đó <code>verify</code> báo cáo rằng
+kênh, bộ kết nối và kiểm tra DNS không khả dụng và kết quả tốt nhất là <code>incomplete</code>; các
+bản ghi của nhà cung cấp, tường lửa, tuyên bố đã ký, đo lường máy chủ và so sánh trình cài đặt được
+kiểm tra như bình thường. Việc so sánh byte với trình cài đặt tham chiếu cần một bản commit đã triển khai
+đã biết trước <code>--quick-tunnel</code>; một bản checkout 0.7.0 sẽ xây dựng trình cài đặt miền và báo cáo
+sự khác biệt. Cloudflare không đảm bảo thời gian hoạt động cho các đường hầm nhanh, cho phép 200 yêu cầu đang
+được xử lý và không hỗ trợ Server-Sent Events, do đó các cập nhật trực tiếp trên bảng điều khiển (các phiên bản sau 0.7.0)
+có thể không được truyền qua đường hầm này và cần tải lại trang; phần này chưa được thử nghiệm. Đối với trường hợp
+cần đảm bảo tính ổn định, hãy sử dụng tên miền của riêng bạn.</p>
+<h2 id="deploy">Triển khai<a class="anchor" href="#deploy" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Hãy xem trước tất cả những gì sẽ được gửi đi. <code>plan</code> không thực hiện bất kỳ yêu cầu nào đến nhà cung cấp hoặc Cloudflare:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud plan --provider hetzner --name case-2026-11 --server-type cpx22 \
+    --ref 0123456789abcdef0123456789abcdef01234567 --zone example.org \
+    --cloudflare-account CLOUDFLARE_ACCOUNT_ID --panel-host case.example.org</code></pre>
+<p>Sau đó, triển khai với các tùy chọn và thông tin đăng nhập tương tự:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud deploy --provider hetzner --name case-2026-11 --server-type cpx22 \
+    --ref 0123456789abcdef0123456789abcdef01234567 --zone example.org \
+    --cloudflare-account CLOUDFLARE_ACCOUNT_ID --panel-host case.example.org \
+    --witness-host case-witness.example.org \
+    --provider-token-file hetzner.token --cloudflare-token-file cloudflare.token</code></pre>
+<p>Các loại máy chủ để bắt đầu: <code>cpx22</code> (Hetzner), <code>s-1vcpu-2gb</code> (DigitalOcean), <code>g6-standard-1</code>
+(Linode), <code>vc2-1c-2gb</code> (Vultr), <code>t3.small</code> (AWS). <code>--location</code> và <code>--image</code> mặc định là Ubuntu 24.04 của từng
+nhà cung cấp tại khu vực châu Âu.</p>
+<p><code>--repository</code> lấy bản cam kết từ một kho lưu trữ Git https khác, mà không cần thông tin đăng nhập trong
+URL (mặc định <code>https://github.com/phishdestroy/TgWitness.git</code>). <code>deploy</code> cũng chấp nhận <code>--out</code>
+cho một thư mục triển khai khác (mặc định <code>deployments/NAME</code>; một thư mục đã chứa sẵn một
+triển khai sẽ bị từ chối) và <code>--wait</code>, số phút chờ bản tuyên bố đã ký của trình thu thập:
+từ 1 đến 240, mặc định là 20, hoặc 60 cho <code>generic</code>.</p>
+<p>Lệnh:</p>
+<ol>
+<li>tạo một đường hầm Cloudflare, trong đó lưu lượng truy cập vào (ingress) chuyển tiếp tên miền máy chủ của bảng điều khiển đến bảng điều khiển và,
+    nếu có, tên miền máy chủ của witness đến <code>/api/witness/head</code> và <code>/api/assurance</code> chỉ;</li>
+<li>tạo các bản ghi CNAME được chuyển tiếp cho các tên máy chủ đó, từ chối các tên đã tồn tại;</li>
+<li>tạo một tường lửa nhà cung cấp không có quy tắc vào và một máy chủ phía sau nó không có khóa SSH,
+    không có bản sao lưu, không có tác nhân console, và cloud-init che giấu SSH, khóa quyền root, cài đặt
+    <code>cloudflared</code>, tải chính xác bản cam kết, kiểm tra nó và khởi động TgWitness dưới dạng
+    dịch vụ systemd được tăng cường bảo mật;</li>
+<li>chờ nhận bản tuyên bố đã được ký bởi trình thu thập và kiểm tra xem bản tuyên bố đó có đề cập đến máy chủ này và
+    băm của tệp cloud-init này hay không.</li>
+</ol>
+<p><code>deployments/case-2026-11/</code> sau đó chứa:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Tệp</th>
+<th>Nội dung</th>
+<th>Chia sẻ?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>deployment.json</code></td>
+<td>ID, băm, các lệnh gọi API đã thực hiện (phương thức, đường dẫn, trạng thái) và tuyên bố được ký đầu tiên</td>
+<td>Có, với trình xác minh</td>
+</tr>
+<tr>
+<td><code>cloud-init.redacted.yaml</code></td>
+<td>Câu lệnh cloud-init chính xác với hai khóa bí mật được thay thế bằng <code>REDACTED</code></td>
+<td>Có</td>
+</tr>
+<tr>
+<td><code>panel-token.txt</code></td>
+<td>Mã thông báo bảng điều khiển</td>
+<td>Không</td>
+</tr>
+</tbody>
+</table></div>
+<p>Mật khẩu root của nhà cung cấp, mã thông báo đường hầm và mã thông báo bảng điều khiển không bao giờ được ghi vào
+<code>deployment.json</code>. Hãy công bố dấu vân tay của bộ thu thập được hiển thị ở phần cuối thông qua một kênh
+mà bạn không kiểm soát một mình, ví dụ như một kênh chứng kiến hoặc một tin nhắn gửi đến người nhận.</p>
+<p>Đăng nhập vào Telegram tại <code>https://case.example.org</code> với mã thông báo bảng điều khiển, như được hướng dẫn trong
+<a href="../accounts/">hướng dẫn tài khoản</a>. Các hành động trên bảng điều khiển được ghi lại trong nhật ký đã được ký; chúng không phải là
+các phiên SSH. Một <a href="../witness/">nhân chứng</a> có thể kiểm tra <code>https://case-witness.example.org</code>.</p>
+<p>Không có SSH: nếu quá trình khởi động thất bại, trình thu thập dữ liệu sẽ không bao giờ phản hồi. Hãy xóa máy chủ và
+triển khai lại, hoặc sử dụng triển khai gỡ lỗi để tìm nguyên nhân.</p>
+<h3 id="secrets-in-the-user-data">Thông tin bí mật trong dữ liệu người dùng<a class="anchor" href="#secrets-in-the-user-data" aria-label="Liên kết đến phần này">#</a></h3>
+<p>Cloud-init chứa hai thông tin bí mật: mã thông báo bảng điều khiển và mã thông báo đường hầm Cloudflare.
+Khóa ký không nằm trong số đó; nó được tạo trên máy chủ. Hetzner, DigitalOcean và Linode
+không trả về dữ liệu người dùng qua API của họ. Vultr trả về dữ liệu cho bất kỳ khóa nào có thể đọc
+phân vùng, và EC2 thông qua <code>DescribeInstanceAttribute</code>. Đối với AWS, chỉ cung cấp cho người xác minh ba
+hành động trong bảng, tuyệt đối không <code>ec2:Describe*</code>. Đối với Vultr, giả định rằng khóa của người xác minh có thể đọc cả hai
+mã thông báo. Mã thông báo đường hầm cho phép ai đó chạy một trình kết nối thứ hai: <code>verify</code> báo cáo bất kỳ trình kết nối nào
+không có trên máy chủ, và các tuyên bố của bộ thu thập không thể bị làm giả theo cách đó vì mỗi tuyên bố
+đều ký một thách thức mới. Với <code>--quick-tunnel</code> mật khẩu thứ hai là khóa địa chỉ thay vào đó:
+bất kỳ ai đọc được nó đều có thể đăng một địa chỉ giả mà bảng điều khiển sẽ chấp nhận.</p>
+<p>Tuyên bố công khai của người thu thập dữ liệu không đề cập đến địa chỉ máy chủ và nguồn đăng nhập;
+cả hai thông tin này đều được lưu giữ trong nhật ký đã được ký xác thực.</p>
+<h2 id="debug-deployment-and-lock">Gỡ lỗi triển khai và khóa<a class="anchor" href="#debug-deployment-and-lock" aria-label="Liên kết đến phần này">#</a></h2>
+<p><code>--debug-ssh-key KEY --debug-ssh-from 198.51.100.4</code> giữ SSH cho một khóa từ một địa chỉ
+hoặc mạng nhỏ, tối đa là /24 đối với IPv4 hoặc /48 đối với IPv6. <code>KEY</code> đã được đăng ký với
+nhà cung cấp: tên hoặc ID của một khóa SSH trong dự án Hetzner, ID hoặc dấu vân tay của một
+khóa SSH trong nhóm DigitalOcean, tên người dùng Linode có các khóa SSH trong hồ sơ được thêm vào tài khoản root,
+ID của một khóa SSH trong tài khoản Vultr, hoặc tên của cặp khóa EC2 trong khu vực. Các
+tùy chọn này không áp dụng cho <code>generic</code>. Việc triển khai như vậy được ghi nhận là <code>debug</code> và <strong>không bao giờ</strong> được báo cáo là
+có độ bảo mật cao. Khi hoàn tất, hãy chạy <code>sudo tgwitness-lock</code> làm lệnh cuối cùng của phiên
+SSH cuối cùng, sau đó:</p>
+<pre><code class="language-sh">python -m tgwitness.cloud lock --record deployments/case-2026-11/deployment.json --provider-token-file hetzner.token</code></pre>
+<p>Tường lửa mất tất cả các quy tắc kết nối vào. Các báo cáo sau đó hiển thị thời điểm SSH được phép và thời điểm nó
+bị đóng; cửa sổ đó vẫn hiển thị.</p>
+<h2 id="remove-a-deployment">Xóa một bản triển khai<a class="anchor" href="#remove-a-deployment" aria-label="Liên kết đến phần này">#</a></h2>
+<p><code>destroy</code> xóa máy chủ và tường lửa của nó, được xác định bằng nhãn của bản triển khai để đảm bảo rằng một
+bản triển khai bị lỗi giữa chừng cũng sẽ bị xóa, sau đó là các bản ghi DNS trỏ đến
+đường hầm của nó, và chính đường hầm đó. Nhật ký máy chủ và khóa ký cũng bị xóa cùng lúc: hãy xuất
+bằng chứng trước. Bản ghi vẫn được lưu lại, được đánh dấu <code>removed</code>, cùng với các lệnh gọi API của quá trình xóa.</p>
+<pre><code class="language-sh">python -m tgwitness.cloud destroy --record deployments/case-2026-11/deployment.json --confirm case-2026-11 \
+    --provider-token-file hetzner.token --cloudflare-token-file cloudflare.token</code></pre>
+<p>Việc xóa qua API đã được triển khai cho Hetzner. Đối với các nhà cung cấp khác <code>destroy</code> phải dừng lại trước khi
+xóa bất kỳ thứ gì và chỉ định nhãn cần xóa trong bảng điều khiển của nhà cung cấp. Một máy chủ được cài đặt thủ công
+(<code>generic</code>) chỉ mất đường hầm và bản ghi DNS của nó. Việc triển khai đường hầm nhanh không cần
+mã thông báo Cloudflare: đường hầm của nó kết thúc tại máy chủ, và các bài đăng của nó sẽ hết hạn trên ntfy.sh trong vòng
+12 giờ.</p>
+<h2 id="any-server-self-attested">Bất kỳ máy chủ nào (được tự chứng thực)<a class="anchor" href="#any-server-self-attested" aria-label="Liên kết đến phần này">#</a></h2>
+<p><code>--provider generic</code> dành cho máy chủ được mua hoặc cài đặt thủ công. <code>deploy</code> tạo đường hầm
+và DNS, ghi <code>install.sh</code> (riêng tư) và <code>install.redacted.sh</code> (để công khai), và chờ đợi.
+Sao chép <code>install.sh</code> vào một máy chủ Ubuntu 24.04 vừa cài đặt xong và chạy nó tại đó:</p>
+<pre><code class="language-sh">sudo bash install.sh</code></pre>
+<p>Nó ghi lại máy chủ ở trạng thái ban đầu (thông tin đăng nhập, tài khoản, <code>authorized_keys</code>, các socket lắng nghe,
+dịch vụ, tác vụ được lên lịch, gói phần mềm), cài đặt bản cam kết, kích hoạt tường lửa máy chủ, tự xóa
+bản thân, ẩn địa chỉ SSH và kết thúc phiên làm việc. Báo cáo cho một máy chủ như vậy tốt nhất chỉ là
+<strong>TỰ CHỨNG NHẬN</strong>: bất kỳ ai chạy trình cài đặt đều đã có quyền root trước đó, và không có bản ghi nào từ nhà cung cấp
+có sẵn cho người xác minh. Tuy nhiên, điều này vẫn tốt hơn so với một máy chủ không rõ nguồn gốc: danh sách tài sản,
+băm của trình cài đặt và mọi lần đăng nhập sau đó đều được ký điện tử.</p>
+<h2 id="verify">Xác minh<a class="anchor" href="#verify" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Người xác minh cần <code>deployment.json</code>, trình cài đặt đã được công bố, thông tin đăng nhập chỉ đọc và,
+tốt nhất là bản checkout của commit và bằng chứng ZIP:</p>
+<pre><code class="language-sh">git clone -c core.autocrlf=false https://github.com/phishdestroy/TgWitness.git checkout
+git -C checkout checkout 0123456789abcdef0123456789abcdef01234567
+python -m tgwitness.cloud verify --record deployment.json \
+    --provider-token-file read-only.token --cloudflare-token-file cloudflare-read.token \
+    --fingerprint COLLECTOR_FINGERPRINT --cloud-init cloud-init.redacted.yaml \
+    --source checkout --evidence tgwitness-evidence.zip --report report.md</code></pre>
+<p>Mọi giá trị từ nhà cung cấp và Cloudflare đều được trình xác minh yêu cầu tại thời điểm đó; bản ghi
+chỉ cung cấp các ID cần tra cứu. Mã thoát là 0 cho <strong>PASS</strong>, 1 cho <strong>FAIL</strong> và 2 cho
+<strong>REVIEW</strong>, <strong>INCOMPLETE</strong> hoặc <strong>SELF-ATTESTED</strong>. <code>--fingerprint</code> phải đến từ một kênh độc lập
+; nếu không có nó, khóa sẽ chỉ được so sánh với bản ghi của nhà điều hành. <code>python verify.py</code>
+vẫn tự xác minh bằng chứng ZIP, như trong <a href="../evidence/">phần Bằng chứng</a>.</p>
+<p>Các hành động của nhà cung cấp được phân loại: tạo mới và khởi động trong vòng 30 phút kể từ khi tạo sẽ được chấp nhận;
+các hành động liên quan đến console, cứu hộ, đặt lại mật khẩu, xây dựng lại, ISO, hình ảnh, ảnh chụp nhanh, sao lưu, Systems Manager,
+kết nối EC2 Instance và mở cổng tường lửa sẽ bị từ chối; các hành động liên quan đến nguồn điện và bất kỳ hành động nào không mong đợi
+sẽ được đánh dấu để xem xét. Một hành động không xác định sẽ không bao giờ được chấp nhận mà không có cảnh báo.</p>
+<h2 id="report-for-evidence-handover">Báo cáo về việc bàn giao bằng chứng<a class="anchor" href="#report-for-evidence-handover" aria-label="Liên kết đến phần này">#</a></h2>
+<p><code>--report report.md</code> viết báo cáo Markdown và <code>report.json</code> bên cạnh đó:</p>
+<ol>
+<li>kết quả, dấu vân tay khóa thu thập, triển khai, nhà cung cấp, cam kết, máy chủ, tường lửa, đường hầm;</li>
+<li>mỗi lần kiểm tra kèm theo trạng thái và nguồn (API của nhà cung cấp, API Cloudflare, báo cáo của bộ thu thập,
+    sổ ghi chép bằng chứng);</li>
+<li>nhật ký của nhà cung cấp với đánh giá về mỗi hành động và, nếu nhà cung cấp ghi lại, thì cả thông tin về chủ thể thực hiện hành động đó;</li>
+<li>các điểm cuối Cloudflare lưu trữ các kết nối, cấu hình và nhật ký kiểm toán của đường hầm;</li>
+<li>bản tuyên bố đã được ký của người thu thập;</li>
+<li>những gì báo cáo xác định và những gì báo cáo không xác định;</li>
+<li>các lệnh để tái tạo nó, và thẻ SHA-256 của mọi tệp được cung cấp.</li>
+</ol>
+<p>Giao nộp báo cáo, <code>report.json</code>, <code>deployment.json</code>, trình cài đặt đã được phát hành và
+bằng chứng ZIP. Hãy lập báo cáo sớm: nhật ký của nhà cung cấp chỉ được lưu giữ trong một khoảng thời gian giới hạn.</p>
+<h2 id="cloudflare-as-an-outside-witness">Cloudflare với vai trò là bên chứng kiến bên ngoài<a class="anchor" href="#cloudflare-as-an-outside-witness" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Mọi thứ ở đây đều là tùy chọn. Ngay cả khi không có tài khoản Cloudflare, máy chủ vẫn hoạt động, và hai trong số
+các tùy chọn này hiện đang hoạt động:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Nội dung</th>
+<th>Nội dung hiển thị</th>
+<th>Trong TgWitness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tunnel nhanh hoặc tunnel của tên miền của bạn</td>
+<td>Bảng điều khiển chỉ có thể truy cập thông qua đường hầm</td>
+<td>trình hướng dẫn cài đặt máy chủ, xem ở trên</td>
+</tr>
+<tr>
+<td>drand relay <code>drand.cloudflare.com</code></td>
+<td>các bản ghi sau vòng drand mới hơn bản ghi này: nhật ký được viết theo tiến trình thực hiện</td>
+<td>chế độ bằng chứng, <strong>Thêm nhân chứng</strong>, không có tài khoản (<a href="../evidence/#optional-records-in-evidence-mode-drand-and-telegram-devices">định dạng</a>)</td>
+</tr>
+<tr>
+<td>Thông báo về tình trạng đường hầm</td>
+<td>khi đường hầm bị ngắt kết nối, qua email hoặc webhook từ Cloudflare</td>
+<td>thiết lập chúng trong bảng điều khiển Cloudflare</td>
+</tr>
+<tr>
+<td>Gateway DNS (<code>--gateway-dns</code>, hoặc <strong>Cloudflare Gateway DNS</strong> trong trình hướng dẫn)</td>
+<td>mọi tên miền mà máy chủ đã tra cứu, được Cloudflare trả lời qua TLS; tường lửa Hetzner không cho phép DNS truy cập bất kỳ dịch vụ nào khác; liệu chính sách Gateway có thể sửa đổi các phản hồi hay không</td>
+<td>Hetzner, gói Zero Trust miễn phí, không cần tên miền; <code>verify</code> kiểm tra tường lửa, vị trí, ghi nhật ký, chính sách, các truy vấn của máy chủ và nhật ký kiểm toán; chế độ bằng chứng sao chép nhật ký vào sổ nhật ký</td>
+</tr>
+<tr>
+<td>Cổng kết nối với Cloudflare: Một client trên máy chủ, một tường lửa ra ngoài chỉ cho phép kết nối qua Cloudflare</td>
+<td>mọi kết nối mà máy chủ thực hiện, không chỉ giới hạn ở DNS</td>
+<td>chưa được xây dựng</td>
+</tr>
+<tr>
+<td>Truy cập ở phía trước bảng điều khiển</td>
+<td>Ai đã đăng nhập vào bảng điều khiển và vào thời điểm nào</td>
+<td>chưa được triển khai: cần có tên miền riêng của bạn</td>
+</tr>
+<tr>
+<td>Ghi nhật ký lệnh SSH</td>
+<td>mỗi lệnh trong một phiên gỡ lỗi</td>
+<td>chưa được xây dựng</td>
+</tr>
+</tbody>
+</table></div>
+<p>Logpush, tính năng giúp lưu giữ bản sao riêng của Cloudflare trong R2, là một tính năng dành cho doanh nghiệp: trên gói miễn phí
+, Cloudflare trả lời <code>logpush is not enabled for this account</code>. Nhật ký Gateway của nó tồn tại trong 24
+giờ tại đó, do đó chế độ bằng chứng sẽ sao chép nó vào nhật ký đã ký (<strong>nhật ký của Cloudflare Gateway về
+các truy vấn DNS của máy chủ này</strong>, một token chỉ đọc với quyền Account Analytics Read).</p>
+<p>Nếu không có kế hoạch Zero Trust, một tài khoản sẽ có một vị trí DNS. Khi Cloudflare từ chối một vị trí khác,
+máy chủ sẽ chia sẻ vị trí hiện có và các truy vấn của nó được phân biệt thông qua địa chỉ; bộ lọc đó
+cũng cần quyền truy cập Zero Trust PII Read, và <code>destroy</code> để lại một vị trí được chia sẻ. Một truy vấn nhật ký kéo dài
+tối đa ba giờ, do đó việc sao chép và <code>verify</code> đọc dữ liệu theo các khung thời gian ba giờ trong ngày.</p>
+<p>Gateway DNS bao gồm bộ giải quyết tên miền của hệ thống. DNS qua HTTPS trên cổng 443 đến một bộ giải quyết tên miền khác, và
+các kết nối đến một địa chỉ không được tra cứu ở bất kỳ đâu (ví dụ như các trung tâm dữ liệu của Telegram) sẽ không được ghi lại
+trong nhật ký của nó.</p>
+<p>Cloudflare không thể xem nội dung bên trong lớp mã hóa của Telegram, các thiết bị khác trên tài khoản Telegram
+(danh sách thiết bị trong chế độ bằng chứng ghi lại chúng từ phía Telegram) hoặc hypervisor của nhà cung cấp.</p>
+<p>Vào ngày 1 tháng 11 năm 2026, Gateway DNS đã chạy trên Hetzner Cloud thực tế và một tài khoản Cloudflare miễn phí:
+Hetzner đã chấp nhận các quy tắc đi ra ngoài, máy chủ đã cài đặt phiên bản v0.7.0 với mọi lần tra cứu đều
+đi qua Gateway qua TLS, đường hầm nhanh đã hoạt động qua tường lửa đó, và <code>verify</code> đọc
+lại 19 tên miền của máy chủ từ Cloudflare (các máy chủ gương Ubuntu và Hetzner, GitHub, PyPI, NTP,
+đường hầm, ntfy.sh). Bảng điều khiển đã sao chép 36 truy vấn trong tám cửa sổ vào nhật ký và
+<code>verify.py</code> tổng hợp chúng mà không bỏ sót; <code>destroy</code> gỡ bỏ máy chủ và tường lửa, rồi rời khỏi
+vị trí dùng chung.</p>
+<h2 id="what-this-does-not-establish">Điều này không xác định được<a class="anchor" href="#what-this-does-not-establish" aria-label="Liên kết đến phần này">#</a></h2>
+<ul>
+<li>Nhà cung cấp và nhân viên của họ quản lý hypervisor, đĩa cứng và mạng.</li>
+<li>Các chỉ số máy chủ được báo cáo tự động bởi trình thu thập dữ liệu.</li>
+<li>Nội dung các quy tắc tường lửa trước đây không có trong nhật ký của mọi nhà cung cấp; chỉ có Linode lưu giữ các phiên bản quy tắc.</li>
+<li>Nó không đề cập đến bất kỳ thông tin mới nào về tính xác thực của tin nhắn; xem phần <a href="../evidence/">Bằng chứng</a>.</li>
+</ul>
+<h2 id="tested-here">Đã được thử nghiệm tại đây<a class="anchor" href="#tested-here" aria-label="Liên kết đến phần này">#</a></h2>
+<p>Các logic triển khai, khóa và xác minh được kiểm tra bằng các bài kiểm tra tự động dựa trên các API mô phỏng
+của Hetzner, DigitalOcean, Linode, Vultr, EC2/CloudTrail và Cloudflare, được xây dựng từ
+các tài liệu tham khảo API đã công bố của họ, cùng với việc ký yêu cầu AWS dựa trên các ví dụ đã công bố của AWS.
+<code>tools/check_cloud_wizard.py</code> chạy trình hướng dẫn máy chủ của bảng điều khiển theo cách tương tự, với một tên miền và
+với một đường hầm nhanh. <code>tools/check_tdx.py</code> xác minh các chứng nhận Intel TDX thực từ dcap-qvl và dstack
+lên đến chứng chỉ gốc của Intel (nguồn trong <a href="https://github.com/phishdestroy/TgWitness/blob/main/tools/tdx/README.md">tools/tdx/README.md</a>); <code>tools/check_phala.py</code>chạy các lệnh deploy, verify, journal, destroy và trình hướng dẫn trên bảng điều khiển đối với một môi trường Phala Cloud mô phỏng
+có các chứng nhận xuất phát từ một hệ thống PKI giả mạo được thiết kế giống hệ thống của Intel. Quy trình Phala này chưa được
+thử nghiệm trực tiếp trên chính nền tảng Phala Cloud.</p>
+<p>Vào ngày 1 tháng 11 năm 2026, đường dẫn đường hầm nhanh đã chạy trên nền tảng <strong>Hetzner Cloud</strong> thực tế (Nuremberg, <code>cpx22</code>,
+TgWitness v0.7.0), ntfy.sh thực tế và GitHub, từ bảng điều khiển và từ mã nguồn:</p>
+<ul>
+<li>kiểm tra giá, sau đó tạo từ các nút trên bảng điều khiển: máy chủ hoạt động sau 13 giây,
+    bản ghi có chữ ký với các giá trị băm của phiên bản và trình cài đặt khớp nhau sau khoảng hai phút;</li>
+<li>bảng điều khiển riêng của máy chủ được mở qua địa chỉ trycloudflare.com và chấp nhận
+    mã thông báo bảng điều khiển; nếu không có mã thông báo, nó sẽ trả về mã trạng thái 401;</li>
+<li>sau khi khởi động lại thông qua API Hetzner, máy chủ đã đăng một địa chỉ mới đã được ký; <strong>Tìm
+    địa chỉ hiện tại</strong> đã tìm thấy nó, địa chỉ cũ ngừng phản hồi, khóa ký vẫn
+    giữ nguyên; một bài đăng chưa được ký lên chủ đề ntfy.sh đã bị bỏ qua;</li>
+<li><code>verify</code> so với API của Hetzner: máy chủ, tường lửa không có quy tắc vào, tuyên bố, ràng buộc,
+    đo lường máy chủ, quá trình khởi động và băm nguồn của bản checkout v0.7.0 đã vượt qua; các kiểm tra của Cloudflare
+    không khả dụng, như đã mô tả ở trên; trình cài đặt khác với trình cài đặt mà phiên bản v0.7.0
+    tạo ra và trùng khớp từng byte với trình cài đặt mà mã của phiên bản này tạo ra;</li>
+<li>Việc xóa khỏi bảng điều khiển đã loại bỏ chính xác máy chủ và tường lửa được gắn nhãn trong quá trình triển khai;
+    các máy chủ và tường lửa khác trong cùng dự án vẫn được giữ nguyên.</li>
+</ul>
+<p>Chưa được chạy trên các tài khoản thực: một bản triển khai dưới tên miền riêng của bạn (đường hầm Cloudflare và
+DNS), các nhà cung cấp khác, một bản triển khai gỡ lỗi và <code>lock</code>, một tài khoản Telegram trên máy chủ đó,
+và các bản cập nhật trực tiếp của các phiên bản sau thông qua đường hầm nhanh. Kiểm tra lần triển khai đầu tiên trên
+mỗi nhà cung cấp với <code>plan</code>, một triển khai gỡ lỗi và <code>verify</code> trước khi sử dụng nó trong một vụ việc.</p></div></article>
+<footer class="guide-footer"><a class="reference" href="https://github.com/phishdestroy/TgWitness/edit/main/docs/HIGH-ASSURANCE.md">Chỉnh sửa trang này trên GitHub ↗</a><a class="next-guide" href="../panel/"><span>Bước tiếp theo</span><strong>Hướng dẫn sử dụng bảng điều khiển →</strong></a><p>Các hướng dẫn này mô tả cách triển khai hiện tại. Kết quả xác thực và những hạn chế còn tồn tại được ghi chép riêng biệt. <a href="../verification/">Những nội dung đã được kiểm thử →</a></p></footer>
+</main>
+<aside class="toc" aria-label="Trên trang này"><p class="nav-label">Trên trang này</p><a href="#what-a-verifier-can-check">Những gì người xác minh có thể kiểm tra</a><a href="#providers">Nhà cung cấp</a><a href="#confidential-vm-on-phala-cloud-intel-tdx">Máy ảo bảo mật trên Phala Cloud (Intel TDX)</a><a href="#before-you-start">Trước khi bắt đầu</a><a href="#from-the-panel">Từ bảng điều khiển</a><a href="#quick-tunnel-without-a-domain">Tunnel nhanh mà không cần tên miền</a><a href="#deploy">Triển khai</a><a href="#debug-deployment-and-lock">Gỡ lỗi triển khai và khóa</a><a href="#remove-a-deployment">Xóa một bản triển khai</a><a href="#any-server-self-attested">Bất kỳ máy chủ nào (được tự chứng thực)</a><a href="#verify">Xác minh</a><a href="#report-for-evidence-handover">Báo cáo về việc bàn giao bằng chứng</a><a href="#cloudflare-as-an-outside-witness">Cloudflare với vai trò là bên chứng kiến bên ngoài</a><a href="#what-this-does-not-establish">Điều này không xác định được</a><a href="#tested-here">Đã được thử nghiệm tại đây</a></aside>
+</div>
+<footer class="docs-bottom"><a class="brand" href="../../../">TgWitness</a><span>Mã nguồn mở · Chạy trên máy tính của quý vị</span><a href="../../../../LICENSE">Giấy phép MIT</a><a href="../notice/">Thông báo dành cho người vận hành</a><a href="https://github.com/phishdestroy/TgWitness/blob/main/.github/SECURITY.md">An ninh</a></footer>
+<script id="site-dict" type="application/json">{"Waiting for a message": "Đang chờ tin nhắn", "Step through a fictional send, edit and delete.": "Hãy cùng tìm hiểu từng bước về một quy trình giả định bao gồm việc gửi, chỉnh sửa và xóa tin nhắn.", "No observations yet. Start the sequence or advance one event.": "Chưa có ghi chú nào. Bắt đầu chuỗi sự kiện hoặc chuyển sang sự kiện tiếp theo.", "Meet at 10:00": "Hẹn gặp lúc 10:00", "A new message is visible in the chat.": "Một tin nhắn mới đã xuất hiện trong cuộc trò chuyện.", "Record 1 appended: the collector observed the original message.": "Ghi chú 1 được đính kèm: bộ thu thập đã ghi nhận tin nhắn gốc.", "Meet at 11:00": "Hẹn gặp lúc 11:00", "The current text changes. The earlier observation stays.": "Nội dung văn bản hiện tại đã được điều chỉnh. Quan sát trước đó vẫn được giữ nguyên.", "Record 2 appended: the edit is a new observation. Record 1 still holds the original text.": "Bản ghi số 2 đã được bổ sung: nội dung chỉnh sửa là một quan sát mới. Bản ghi số 1 vẫn giữ nguyên văn bản gốc.", "Message deleted": "Tin nhắn đã bị xóa", "The message has disappeared from the chat view.": "Tin nhắn đã biến mất khỏi giao diện trò chuyện.", "Record 3 appended: the deletion notice is retained alongside both observed versions.": "Ghi chú 3 được đính kèm: thông báo xóa được lưu giữ cùng với cả hai phiên bản đã quan sát được.", "0 records": "0 bản ghi", "1 record": "1 bản ghi", "2 records": "2 bản ghi", "3 records": "3 bản ghi", "Complete / {n} of 3": "Hoàn tất / {n}/3", "Step / {n} of 3": "Bước / {n}/3", "Pause": "Tạm dừng", "Replay sequence": "Trình tự phát lại", "Play sequence": "Trình tự phát lại", "The static example is available. To calculate hashes interactively, open this page over HTTPS or a localhost preview with Web Crypto support.": "Ví dụ tĩnh hiện đã có sẵn. Để tính toán các giá trị băm một cách tương tác, vui lòng truy cập trang này qua HTTPS hoặc xem bản xem trước trên localhost với sự hỗ trợ của Web Crypto.", "No record supplied": "Không có bản ghi nào được cung cấp", "Tail removed": "Phần cuối đã được loại bỏ", "≠ saved hash": "≠ băm đã lưu", "Rebuilt · different hash": "Đã được xây dựng lại · mã băm khác", "= saved hash": "= mã băm đã lưu", "Same length and matching head.": "Độ dài tương đương và tiêu đề phù hợp.", "All three computed hashes match the saved hashes. This sample agrees with the retained three-record boundary.": "Cả ba giá trị băm được tính toán đều khớp với các giá trị băm đã lưu. Mẫu này phù hợp với giới hạn ba bản ghi được lưu giữ.", "Same saved head; the journal prefix fails verification.": "Cùng một tiêu đề đã lưu; tiền tố của sổ ghi chép không qua được quá trình xác minh.", "Record 2 no longer matches its saved hash. Checking only the final stored head would miss this; the verifier checks every record.": "Bản ghi số 2 hiện không còn khớp với giá trị băm đã lưu trữ của nó. Việc chỉ kiểm tra giá trị băm cuối cùng đã lưu trữ sẽ bỏ sót lỗi này; trình xác minh sẽ kiểm tra từng bản ghi một.", "Head differs from the retained checkpoint.": "Đầu trang khác với điểm kiểm tra được lưu giữ.", "The rebuilt hashes link together, but the final head has changed. The retained checkpoint rejects this history. Original signatures would also fail on changed records.": "Các giá trị băm được tái tạo liên kết với nhau, nhưng phần đầu cuối cùng đã thay đổi. Điểm kiểm tra được lưu giữ từ chối lịch sử này. Các chữ ký gốc cũng sẽ không hợp lệ đối với các bản ghi đã bị thay đổi.", "Too short: 2 supplied records \u003c 3 retained records.": "Quá ngắn: 2 bản ghi được cung cấp \u003c 3 bản ghi được lưu giữ.", "The two remaining hashes still match. The retained checkpoint reveals the missing tail. Without that earlier boundary, this shorter prefix alone would not reveal the omission.": "Hai giá trị băm còn lại vẫn khớp nhau. Điểm kiểm tra được lưu giữ đã tiết lộ phần cuối bị thiếu. Nếu không có ranh giới trước đó, chỉ riêng tiền tố ngắn hơn này sẽ không thể phát hiện ra sự thiếu sót.", "Hash calculation is unavailable in this browser. The formulas and static explanation below remain available.": "Trình duyệt này không hỗ trợ tính toán hàm băm. Các công thức và phần giải thích tĩnh dưới đây vẫn có sẵn.", "{n} records": "{n} bản ghi", "head {hash}": "head{hash}", "Accepted: the count grows, the signature verifies and the key matches. The witness retains this new boundary.": "Đã được chấp nhận: số lượng tăng lên, chữ ký đã được xác minh và khóa khớp. TgWitness duy trì ranh giới mới này.", "Rollback: the signed answer reports fewer records than the last accepted checkpoint. The witness records the problem and keeps the earlier accepted boundary.": "Rollback: bản trả lời có chữ ký báo cáo số lượng bản ghi ít hơn so với điểm kiểm tra được chấp nhận gần nhất. Hệ thống TgWitness ghi nhận sự cố và giữ nguyên ranh giới đã được chấp nhận trước đó.", "Fork: the count is unchanged but the head differs. The witness records the disagreement and keeps the earlier accepted boundary.": "Fork: số lượng không thay đổi nhưng nhánh chính khác biệt. TgWitness ghi lại sự bất đồng này và duy trì ranh giới đã được chấp nhận trước đó.", "No answer": "Không có câu trả lời", "boundary unknown": "giới hạn chưa xác định", "No response: the witness records the failed check. It cannot assert the collector’s current state. If the witness can still reach the Bot API and its publication policy permits, it can publish that failure.": "Không có phản hồi: TgWitness ghi lại kết quả kiểm tra không thành công. Công cụ này không thể xác định trạng thái hiện tại của bộ thu thập dữ liệu. Nếu TgWitness vẫn có thể kết nối với Bot API và chính sách xuất bản cho phép, công cụ này có thể công bố thông tin về sự cố đó.", "Send {n}": "Gửi {n}", "Edit {n}": "Chỉnh sửa {n}", "Delete {n}": "Xóa {n}", "Both accounts captured all six expected observations in this example.": "Cả hai tài khoản đều ghi lại đầy đủ cả sáu quan sát dự kiến trong ví dụ này.", "Account B still captured 6 of 6. Two receipts took longer. Capture ratio and receipt delay answer different questions.": "Tài khoản B vẫn ghi lại được 6/6 tin nhắn. Hai biên nhận mất nhiều thời gian hơn. Tỷ lệ ghi lại và độ trễ của biên nhận trả lời cho những câu hỏi khác nhau.", "Account B captured 5 of 6 by the cutoff (83.3%). The missing edit has no measured delay. This result only describes the six controlled actions.": "Tài khoản B đã ghi lại được 5 trong số 6 hành động trước thời hạn (83,3%). Hành động chỉnh sửa còn thiếu không có độ trễ được đo lường. Kết quả này chỉ mô tả sáu hành động được kiểm soát.", "not observed by cutoff": "không được ghi nhận trước thời hạn", "{s} seconds": "{s} giây", "Exact values follow in the table.": "Các giá trị chính xác được trình bày trong bảng dưới đây.", "{s} s": "{s} s", "Not observed": "Chưa được quan sát thấy", "Four chats contribute different observations. Follow the source records for every connection; do not assign the channel post to user 71001 without an attributed sender.": "Bốn cuộc trò chuyện cung cấp các quan sát khác nhau. Vui lòng theo dõi các bản ghi nguồn cho từng kết nối; không gán bài đăng trên kênh cho người dùng 71001 nếu không có thông tin người gửi được xác định rõ.", "Records #146 and #205 supply the same sender ID, 71001. That connects a Telegram account’s observed posts across two chats. It does not identify a real-world person or attribute the channel post.": "Các bản ghi số 146 và 205 cung cấp cùng một ID người gửi, đó là 71001. Điều này giúp liên kết các bài đăng được quan sát thấy từ một tài khoản Telegram trên hai cuộc trò chuyện. Tuy nhiên, thông tin này không xác định danh tính của một cá nhân trong thế giới thực cũng như không quy thuộc bài đăng trên kênh đó cho bất kỳ ai.", "The destination pay.example.invalid/new appears in group record #146, bot keyboard #173, channel edit #188 and private message #205. A repeated destination connects the material; it does not prove common control of those accounts.": "Địa chỉ đích pay.example.invalid/new xuất hiện trong bản ghi nhóm số 146, bản ghi bàn phím bot số 173, bản ghi chỉnh sửa kênh số 188 và tin nhắn riêng tư số 205. Việc địa chỉ đích này xuất hiện lặp lại giúp liên kết các tài liệu với nhau; điều này không chứng minh rằng các tài khoản đó nằm dưới sự kiểm soát chung.", "Completed media receipts #151 and #209 have equal full SHA-256 values in this fictional case. Compare the actual bytes and their associated message records. The matching file does not identify its creator or prove who forwarded it.": "Trong trường hợp giả định này, các biên nhận phương tiện đã hoàn tất số #151 và #209 có các giá trị SHA-256 đầy đủ trùng khớp. Hãy so sánh các byte thực tế và các bản ghi tin nhắn liên quan. Tệp trùng khớp này không xác định được người tạo ra nó cũng như không chứng minh được ai là người đã chuyển tiếp nó.", "the encrypted off-site copy": "bản sao được mã hóa lưu trữ ngoài trang web", "notifications": "thông báo", "checkpoint hashes for timestamps": "Các giá trị băm điểm kiểm tra (checkpoint hashes) để xác định dấu thời gian", "signed checkpoints for the witness": "các mốc kiểm tra có chữ ký dành cho TgWitness", "Switched on in this example": "Đã kích hoạt trong ví dụ này", "Optional · off by default": "Tùy chọn · tắt theo mặc định", "Leaving this machine: the Telegram connection and {list}. Nothing else.": "Khi rời khỏi thiết bị này: kết nối Telegram và {list}. Không có gì khác.", "Default: only the Telegram connection leaves this machine.": "Mặc định: chỉ kết nối Telegram mới được truyền ra khỏi máy này.", "{done} of {total} done": "{done}/{total} đã hoàn thành", "Mark step {n} as done": "Đánh dấu bước {n} là đã hoàn thành", "modes.hash.unavailable": "modes.hash.unavailable", "Copy": "Nội dung", "Copied": "Đã sao chép", "Command copied.": "Lệnh đã được sao chép.", "Selected — Ctrl/Cmd+C": "Đã chọn — Ctrl/Cmd+C", "Command selected. Copy it manually.": "Lệnh đã được chọn. Vui lòng sao chép thủ công.", "Command copied to clipboard.": "Lệnh đã được sao chép vào khay nhớ tạm.", "Select text": "Chọn văn bản", "Clipboard unavailable. Command selected; copy it manually.": "Không thể truy cập khay nhớ tạm. Lệnh đã được chọn; vui lòng sao chép thủ công.", "A message arrives. The first observation is saved.": "Một tin nhắn được gửi đến. Quan sát đầu tiên được lưu lại.", "The time changes. Both captured versions stay.": "Thời gian có thể thay đổi. Cả hai phiên bản được lưu giữ đều được giữ nguyên.", "The message disappears. The captured history remains.": "Tin nhắn có thể biến mất. Nhưng lịch sử đã được ghi lại vẫn còn đó.", "Pause example animation": "Tạm dừng hình ảnh minh họa", "Play example animation": "Xem ví dụ về hình ảnh động", "Play": "Phát", "Full-size workspace screenshot": "Ảnh chụp màn hình toàn màn hình không gian làm việc", "Workspace screenshot · fictional data": "Ảnh chụp màn hình giao diện làm việc · dữ liệu giả định", "Close": "Đóng", "Close screenshot": "Đóng ảnh chụp màn hình", "Scrollable full-size screenshot": "Ảnh chụp màn hình toàn màn hình có thể cuộn", "Enlarge: {name}": "Phóng to: {name}", "View full size": "Xem kích thước đầy đủ", "Step {n} of {total}": "Bước {n} trong số {total}"}</script>
+</body></html>

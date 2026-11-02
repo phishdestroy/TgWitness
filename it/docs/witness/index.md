@@ -40,8 +40,8 @@ Creare un bot con BotFather e autorizzarlo a pubblicare in un canale da Lei cont
 
 ## Tre passaggi nella sezione «Extras»
 
-1. **Accesso in sola lettura.** Aprire **«Extras» → Un bot nel Suo canale**, creare un token di autenticazione e salvare il file di accesso. Consente di leggere i checkpoint e lo stato di integrità, ma non le conversazioni né i controlli del collettore.
-2. **Canale e intervallo.** Inserisca il canale e un indirizzo di raccolta raggiungibile dal testimone. Salvi il file delle impostazioni.
+1. **Accesso in sola lettura.** Apri **«Extras» → «Independent witness»**, crea un token di testimone e salva il file di accesso. Consente di leggere i checkpoint e lo stato di integrità, ma non le conversazioni né i controlli del collector.
+2. **Canale e intervallo.** Scegli un canale Telegram o un webhook Discord e inserisci un indirizzo di raccolta raggiungibile dal witness. Salva il file delle impostazioni.
 3. **Avvio.** Inserisca insieme `witness.json`, `witness-token.txt` e un `bot-token.txt` creati sull’host di Witness. Esegua i comandi riportati di seguito nell’ambiente di progetto installato.
 
 ```
@@ -50,6 +50,8 @@ python -m tgwitness.witness run --config witness.json
 ```
 
 Il download dei file non avvia il processo di creazione del registro. Verifichi che il primo post firmato compaia nel canale, quindi conservi separatamente l’impronta digitale della chiave pubblica del registro.
+
+Per Discord, salvare l’URL del webhook del canale come `discord-webhook.txt` anziché il token del bot. Un testimone pubblica in un unico posto, un canale Telegram o un canale Discord; i controlli più lunghi di un messaggio Discord arrivano come file allegato.
 
 ## Scegliete la frequenza di pubblicazione
 

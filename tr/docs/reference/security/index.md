@@ -48,7 +48,7 @@ Yeni bir veri dizini için, TGWITNESS_VAULT_KEY_FILE harici bir rastgele ana ana
 
 Proxy yapılandırması kasada şifrelenir. Şifreler ve MTProxy gizli bilgileri API tarafından döndürülmez veya kanıt kayıtlarına yazılmaz. Her çalışma alanı kendi Telegram rotasını ve bir [IP modunu](https://phishdestroy.github.io/TgWitness/tr/docs/reference/connection/#ip-modes) seçer.
 
-IP Gizleme modu, Telegram'ın doğrudan yedekleme modunu reddeder ve harici HTTP istekleri için bir proxy gerektirir. Açıkça seçilen yedekleme modu, gecikmeden sonra Telegram'a doğrudan erişime izin verir; tünel/VPN modu ise doğrudan yollara izin verir. Tünel modunun seçilmesi, bir VPN kurmaz veya doğrulamaz. Bu ayarlar, tüm sistem trafiğini, tarayıcıları, paket yöneticilerini veya yerel proxy sunucusunun DNS çözümlemesini kontrol etmez.
+**Adresi gizle seçeneği,** doğrudan Telegram yedeklemeyi engeller ve harici HTTP istekleri için bir proxy gerektirir. Açıkça seçilen yedekleme modu, gecikmeden sonra doğrudan Telegram erişimine izin verir; tünel/VPN modu ise doğrudan yollara izin verir. Tünel modunun seçilmesi, bir VPN'in kurulmasını veya doğrulanmasını gerektirmez. Bu ayarlar, tüm makine trafiğini, tarayıcıları, paket yöneticilerini veya yerel proxy sunucusunun DNS çözümlemesini kontrol etmez.
 
 MTProxy yalnızca Telegram trafiğini taşır. Harici istekler için ayrı bir SOCKS5/HTTP proxy'si, çalışma alanının SOCKS5/HTTP rotası veya izin verilen bir doğrudan rota kullanılabilir; ayrıca devre dışı bırakılabilirler. Bağımsız tanık, kendi aktarım ayarlarına sahiptir. Sıradan SOCKS5/HTTP CONNECT kimlik doğrulaması, bu proxy protokollerinin kendisi tarafından şifrelenmez. Sahte TLS MTProxy gizli anahtarları hâlâ desteklenmemektedir.
 

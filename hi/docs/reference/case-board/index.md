@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-
 
 केस बोर्ड एक जांच टीम को सहेजी गई सामग्री का एक साझा कार्यशील दृश्य प्रदान करता है। किसी अवलोकन को बुकमार्क करें, एक सटीक अंश को हाइलाइट करें, क्रियाओं की एक श्रृंखला सहेजें, और अपने सहकर्मियों के साथ चर्चा करें। कार्ड अपने स्रोत संदर्भों और हस्ताक्षरित संशोधन इतिहास को बनाए रखते हैं। टीम की टिप्पणियाँ कार्यक्षेत्र में रहती हैं, जो मूल टेलीग्राम अवलोकनों से अलग पहचान योग्य होती हैं।
 
-[साक्ष्य मॉडल](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/) · [पहुँच](https://phishdestroy.github.io/TgWitness/hi/docs/reference/access/) · [रिपोर्टें](https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-reports/) · [रूसी](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE-BOARD.md)
+[साक्ष्य मॉडल](https://phishdestroy.github.io/TgWitness/hi/docs/reference/evidence/) · [पहुँच](https://phishdestroy.github.io/TgWitness/hi/docs/reference/access/) · [रिपोर्टें](https://phishdestroy.github.io/TgWitness/hi/docs/reference/case-reports/)
 
 ![कृत्रिम जांच फ़ीड](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
 

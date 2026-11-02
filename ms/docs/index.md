@@ -8,7 +8,7 @@ Bekerja dengan mesej yang disimpan dan perubahan, hubungkan penemuan anda kepada
 
 Panduan berilustrasi
 
-[### Papan Kes Pastikan pemerhatian, petikan tepat dan nota pasukan saling berkait.](https://phishdestroy.github.io/TgWitness/ms/docs/case-board/) [### Studio Laporan Pilih bahan dan salah satu daripada lapan reka bentuk laporan.](https://phishdestroy.github.io/TgWitness/ms/docs/reports/) [### Salinan perkongsian Sediakan ekstrak bertandatangan dengan medan yang diperlukan oleh penerima.](https://phishdestroy.github.io/TgWitness/ms/docs/handover/) [### Kumpulan akaun Semak akaun bersama dan jaga ruang kerja mereka berasingan.](https://phishdestroy.github.io/TgWitness/ms/docs/groups/)
+[### Papan Kes Pastikan pemerhatian, petikan tepat dan nota pasukan saling berkait.](https://phishdestroy.github.io/TgWitness/ms/docs/case-board/) [### Studio Laporan Pilih bahan dan salah satu daripada lapan reka bentuk laporan.](https://phishdestroy.github.io/TgWitness/ms/docs/reports/) [### Salinan untuk dikongsi Sediakan ekstrak bertandatangan dengan medan yang diperlukan oleh penerima.](https://phishdestroy.github.io/TgWitness/ms/docs/handover/) [### Kumpulan akaun Semak akaun bersama dan jaga ruang kerja mereka berasingan.](https://phishdestroy.github.io/TgWitness/ms/docs/groups/)
 
 [## Mod, senario dan tahap bukti Skop pengumpulan, sempadan peristiwa, lapan mekanisme pengesahan dan enam senario penyiasatan rekaan.](https://phishdestroy.github.io/TgWitness/ms/guides/modes.html)
 
@@ -34,19 +34,19 @@ Setiap dokumen projek, dipaparkan di sini beserta diagramnya. Panduan adalah lal
 
 Pemasangan
 
-[Permulaan pantas](https://phishdestroy.github.io/TgWitness/ms/docs/reference/quickstart/)[Akaun dan format sesi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/accounts/)[Akses dan kebenaran](https://phishdestroy.github.io/TgWitness/ms/docs/reference/access/)[Sambungan, proksi dan perlindungan data](https://phishdestroy.github.io/TgWitness/ms/docs/reference/connection/)[Penyebaran](https://phishdestroy.github.io/TgWitness/ms/docs/reference/deployment/)
+[Permulaan pantas](https://phishdestroy.github.io/TgWitness/ms/docs/reference/quickstart/)[Pasang, sahkan dan kemas kini](https://phishdestroy.github.io/TgWitness/ms/docs/reference/installation/)[Pendaftaran awal dan tetapan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/settings/)[Akaun dan format sesi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/accounts/)[Akses dan kebenaran](https://phishdestroy.github.io/TgWitness/ms/docs/reference/access/)[Sambungan, proksi dan perlindungan data](https://phishdestroy.github.io/TgWitness/ms/docs/reference/connection/)[Penyebaran](https://phishdestroy.github.io/TgWitness/ms/docs/reference/deployment/)[Penyebaran berjaminan tinggi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/high-assurance/)
 
 Kumpulkan
 
-[Bagaimana pengumpulan berfungsi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/collection/)[Muat sejarah sumber](https://phishdestroy.github.io/TgWitness/ms/docs/reference/history/)[Aliran kerja dan operasi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/)[Mod siasatan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/)[Ciri dan had](https://phishdestroy.github.io/TgWitness/ms/docs/reference/features/)
+[Panduan panel](https://phishdestroy.github.io/TgWitness/ms/docs/reference/panel/)[Bagaimana pengumpulan berfungsi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/collection/)[Muat sejarah sumber](https://phishdestroy.github.io/TgWitness/ms/docs/reference/history/)[Aliran kerja dan operasi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/operations/)[Mod siasatan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/investigation/)[Ciri dan had](https://phishdestroy.github.io/TgWitness/ms/docs/reference/features/)
 
 Arkib & integrasi
 
-[Rujukan Case Board](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-board/)[Analisis arkib](https://phishdestroy.github.io/TgWitness/ms/docs/reference/analysis/)[MCP hanya-baca](https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/)[OCR tempatan dan transkripsi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/media-analysis/)[Webhook keluaran](https://phishdestroy.github.io/TgWitness/ms/docs/reference/webhooks/)
+[Rujukan Case Board](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-board/)[Analisis arkib](https://phishdestroy.github.io/TgWitness/ms/docs/reference/analysis/)[MCP hanya-baca](https://phishdestroy.github.io/TgWitness/ms/docs/reference/mcp/)[OCR tempatan dan transkripsi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/media-analysis/)[Webhook keluaran](https://phishdestroy.github.io/TgWitness/ms/docs/reference/webhooks/)[Paparan awam](https://phishdestroy.github.io/TgWitness/ms/docs/reference/showcase/)
 
 Bukti
 
-[Bagaimana bukti berfungsi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/how-it-works/)[Konfigurasi dan pengesahan laporan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-reports/)[Format bukti](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/)[Saksi bebas](https://phishdestroy.github.io/TgWitness/ms/docs/reference/witness/)[Cap masa](https://phishdestroy.github.io/TgWitness/ms/docs/reference/timestamp/)
+[Bagaimana bukti berfungsi](https://phishdestroy.github.io/TgWitness/ms/docs/reference/how-it-works/)[Konfigurasi dan pengesahan laporan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/case-reports/)[Eksport akaun](https://phishdestroy.github.io/TgWitness/ms/docs/reference/account-export/)[Format bukti](https://phishdestroy.github.io/TgWitness/ms/docs/reference/evidence/)[Saksi bebas](https://phishdestroy.github.io/TgWitness/ms/docs/reference/witness/)[Cap masa](https://phishdestroy.github.io/TgWitness/ms/docs/reference/timestamp/)[Penyimpanan dan pemulihan](https://phishdestroy.github.io/TgWitness/ms/docs/reference/storage/)
 
 Keselamatan & projek
 

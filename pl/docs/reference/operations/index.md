@@ -51,7 +51,7 @@ Dostęp do lokalnej wersji demonstracyjnej otwiera się automatycznie bez koniec
 
 ![Ustawienia monitorowania dla poszczególnych kont z wykorzystaniem syntetycznych danych źródłowych](https://phishdestroy.github.io/TgWitness/assets/sources.png)
 
-W sekcji **Źródła → Ustawienia przechwytywania → Wybierz zmiany do zachowania** należy niezależnie zaznaczyć nowe wiadomości, edycje, powiadomienia o usunięciu, aktualizacje reakcji oraz zdarzenia związane z członkostwem. Ustawienie domyślne zachowuje wszystkie kategorie. Opcja **„Wiadomości, edycje i usunięcia”** zachowuje oryginalny kontekst, wyłączając jednocześnie oddzielne aktualizacje dotyczące reakcji i członków. Opcja **„Wszystkie widoczne działania”** przywraca wszystkie pięć kategorii. Ustawienia wstępne zmieniają formę; naciśnij **„Zapisz ustawienia monitorowania”,** aby zastosować zmiany.
+W **sekcji Źródła → Rejestrowanie → Wybierz zmiany do zachowania** wybierz osobno nowe wiadomości, edycje, powiadomienia o usunięciu, aktualizacje reakcji oraz zdarzenia związane z członkostwem. Ustawienie domyślne zachowuje wszystkie kategorie. Opcja **Wiadomości, edycje i usunięcia** zachowuje oryginalny kontekst, wyłączając jednocześnie osobne aktualizacje reakcji i członkostwa. **Opcja Wszystkie widoczne działania** przywraca wszystkie pięć kategorii. Ustawienia wstępne zmieniają formę; naciśnij **Zapisz ustawienia rejestrowania**, aby je zastosować.
 
 Zapisana polityka ma zastosowanie do wszystkich wybranych źródeł w danym obszarze roboczym. Pozostałe obszary robocze zachowują własne ustawienia. Każda faktyczna zmiana jest rejestrowana wraz z podpisanymi wartościami „przed” i „po” ; aktualna polityka jest również uwzględniana w potwierdzeniach procesów oraz rekordach rozpoczęcia obserwacji. Wyłączenie kategorii nie powoduje usunięcia wcześniejszych obserwacji. Ponowne włączenie nie pozwala na odzyskanie pominiętych zmian. W tej wersji nie ma możliwości nadpisania kategorii na poziomie poszczególnych grup.
 
@@ -65,7 +65,7 @@ Usunięcie dodatkowego obszaru roboczego zatrzymuje działanie jego modułu zbie
 
 ## Powiadomienia
 
-**Źródła** otwarte **→ Powiadomienia → Alerty i codzienne podsumowanie**. TgWitness wykorzystuje aplikację Apprise do wysyłania alertów do serwisów Matrix, Telegram, Discord, Slack, ntfy, poczty elektronicznej oraz innych obsługiwanych usług. Do jednego obszaru roboczego można dodać kilka miejsc docelowych.
+Otwórz **„Dodatki” → „Powiadomienia” → „Konfiguruj**”. TgWitness wykorzystuje Apprise do wysyłania powiadomień do Matrixa, Telegrama, Discorda, Slacka, ntfy, poczty e-mail i innych obsługiwanych usług. Do jednego obszaru roboczego można dodać kilka miejsc docelowych.
 
 1. W każdym wierszu proszę podać jeden adres docelowy Apprise. Proszę skorzystać z [katalogu usług i formatów adresów URL](https://appriseit.com/services/) odpowiednich dla Państwa usługi.
 2. Proszę włączyć opcję **„Wysyłaj powiadomienia”**, a następnie wybrać alerty o problemach, zmiany w obserwowanych czatach oraz codzienne podsumowanie. Godzina podsumowania jest podawana według czasu serwera.

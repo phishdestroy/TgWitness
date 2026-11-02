@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fr/docs/reference/witne
 
 Exécutez un instance de TgWitness avec sa propre clé et son propre bot, publiez des points de contrôle signés sur un canal et vérifiez les exportations par rapport à ceux-ci.
 
-[Configuration du bot et du proxy en russe](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/WITNESS.md).
+[Exporter et vérifier](https://phishdestroy.github.io/TgWitness/fr/docs/reference/evidence/) · [Haute fiabilité](https://phishdestroy.github.io/TgWitness/fr/docs/reference/high-assurance/) · [Guide des panneaux](https://phishdestroy.github.io/TgWitness/fr/docs/reference/panel/#extras)
 
 Un collecteur signe son propre journal ; ainsi, toute personne contrôlant le collecteur et sa clé pourrait, en principe, réécrire ou tronquer le journal, puis le signer à nouveau. Un « témoin » rend ce manipulateur détectable. Il s’agit d’un processus distinct — un autre conteneur, ou mieux encore, un serveur géré par une autre personne — qui, toutes les quelques minutes, récupère l’en-tête du journal signé du collecteur, signe ce qu’il a observé avec sa propre clé, le conserve dans son propre journal et le publie sur une chaîne Telegram.
 
@@ -27,7 +27,7 @@ Organigramme · Collector → Witness (point de contrôle signé : nombre d'enre
 | Sa propre clé Ed25519 et son propre journal | Le coffre-fort du collecteur, la clé de signature ou le jeton du panneau |
 | Son propre jeton de bot Telegram | Contenu du message : l'en-tête comprend le nombre d'enregistrements et un hachage |
 
-Le jeton est créé sur la page **« Witness »** du panneau, affiché une seule fois et stocké uniquement sous forme de SHA-256. Il ouvre exactement un point de terminaison, `GET /api/witness/head`, qui renvoie un point de contrôle fraîchement signé, ainsi que des compteurs de collecte sans contenu signés et des informations sur l’état de fonctionnement. Il ne peut pas ouvrir le panneau, lire le contenu des messages ni modifier les paramètres, et le jeton du panneau n’y est pas accepté. Vous pouvez révoquer un jeton sur cette même page. Le collecteur enregistre le moment où une nouvelle clé de témoin commence à effectuer une vérification (`witness.seen`) et affiche la dernière vérification par jeton ; un témoin qui n’a pas effectué de vérification depuis 2,5 intervalles est marqué comme en retard.
+Le jeton est créé dans **Extras → Témoin indépendant** ; il s’affiche une seule fois et n’est stocké que sous la forme d’une balise SHA-256. Il ouvre exactement un point de terminaison, `GET /api/witness/head`qui renvoie un point de contrôle fraîchement signé, ainsi que des compteurs de collection sans contenu signés et l’état de santé opérationnel. Il ne peut pas ouvrir le panneau, lire le contenu des messages ni modifier les paramètres, et le jeton du panneau n’y est pas accepté. Révocer un jeton sur la même page. Le collecteur enregistre le moment où une nouvelle clé de témoin commence à effectuer des vérifications (`witness.seen`) et affiche la dernière vérification par jeton ; un témoin qui ne s’est pas manifesté au cours des 2,5 intervalles est marqué comme en retard.
 
 Les nouveaux témoins envoient un défi aléatoire à chaque sondage ; l’instruction de capture le reprend sous la signature du collecteur. Les compteurs sont liés au point de contrôle exact et sont inclus dans les messages signés des témoins. Les en-têtes hérités restent acceptés par le témoin autonome. La croissance du journal à elle seule n’est jamais comptabilisée comme un nouveau message.
 
@@ -54,7 +54,7 @@ TGW1.eyJhdCI6…<statement>.<signature>
 
 Vous avez besoin d’un bot Telegram (créez-en un avec @BotFather), d’une chaîne dont ce bot est administrateur, ainsi que de l’adresse du collecteur accessible depuis le témoin — via HTTPS en dehors d’un réseau privé (voir le profil HTTPS dans la section « [Déploiement](https://phishdestroy.github.io/TgWitness/fr/docs/reference/deployment/) »).
 
-Ouvrez **« Extras » → « Un bot dans votre chaîne » → « Configurer un bot »** dans le panneau. Trois étapes permettent de définir l’accès en lecture seule, votre chaîne et l’intervalle, puis de lancer le witness. La politique de publication, le proxy HTTP/SOCKS5 facultatif et l’adresse API personnalisée du bot se trouvent dans **les paramètres avancés** . Le formulaire télécharge le fichier `witness.json` avec la clé de collecte de cet espace de travail épinglée. Téléchargez le jeton en lecture seule nouvellement créé en **enregistrant le fichier d’accès** sous le nom `witness-token.txt` ; placez-le ainsi qu’un fichier `bot-token.txt` créé sur l’hôte du témoin à côté de ce fichier JSON. Le collecteur ne reçoit jamais le jeton du bot. Le téléchargement ne lance pas de service et ne publie pas de message. Aucun témoin de projet hébergé n’est implicitement enregistré.
+Ouvrez **Extras → Témoin indépendant → Configurer** dans le panneau. Trois étapes couvrent l'accès en lecture seule, votre canal et l'intervalle, puis le lancement du témoin. La politique de publication, le proxy HTTP/SOCKS5 facultatif et l'adresse API du bot personnalisée se trouvent dans **les paramètres avancés**. Le formulaire télécharge `witness.json` avec la clé de collecteur de cet espace de travail épinglée. Téléchargez le jeton en lecture seule nouvellement créé à l’aide de « **Enregistrer le fichier d’accès** sous » `witness-token.txt` ; placez-le ainsi qu’un `bot-token.txt`fichier créé sur l’hôte du témoin à côté de ce fichier JSON. Le collecteur ne reçoit jamais le jeton du bot. Le téléchargement ne lance pas de service et ne publie pas de message. Aucun témoin de projet hébergé n’est implicitement enregistré.
 
 ```
 python -m tgwitness.witness run --config witness.json --check-config
@@ -95,6 +95,17 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
     --token-file witness-token.txt --bot-token-file bot-token.txt --channel @your_witness_channel
 ```
 
+### Publier sur Discord
+
+Un témoin peut publier sur un canal Discord plutôt que sur Telegram. Dans Discord, ouvrez **« Modifier le canal » → « Intégrations » → « Webhooks »**, créez un webhook et copiez son URL. Dans le panneau, choisissez **« Webhook Discord · votre canal »** à l’étape 2. Sur l’hôte du témoin, enregistrez l’URL comme `discord-webhook.txt` à côté de `witness.json`; elle n’atteint jamais le collecteur.
+
+```
+python -m tgwitness.witness run --collector https://your-collector.example.org \
+    --token-file witness-token.txt --discord-webhook-file discord-webhook.txt
+```
+
+Un « witness » dispose d’un seul éditeur : soit une chaîne Telegram, soit un webhook Discord, mais pas les deux. Les publications contiennent toutes la même déclaration signée et ne peuvent mentionner personne. Une publication dépassant la limite de 2 000 caractères imposée par Discord est remplacée par une courte ligne accompagnée du check complet sous la forme `witness-check.txt`. Chaque identifiant de publication est enregistré sous la forme `witness.posted`. `verify.py --channel`ne lit que les exportations des chaînes Telegram ; pour Discord, conservez donc le journal du témoin : il contient chaque vérification.
+
 ### Options
 
 | Option | Environnement | Par défaut | Signification |
@@ -109,7 +120,7 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
 | `--data-dir` | `_DATA` | `witness-data` | Clé de témoin et journal |
 | `--config` | `_CONFIG` | – | Fichier JSON contenant l’une des options ci-dessus |
 
-L’adresse du collecteur, les jetons et le canal proviennent de `--collector`, `--token` ou `--token-file`, `--bot-token` ou `--bot-token-file` et `--channel`, ou encore de `_COLLECTOR`, `_TOKEN`, `_TOKEN_FILE`, `_BOT_TOKEN`, `_BOT_TOKEN_FILE` et `_CHANNEL`, ce qui permet de préserver la confidentialité des informations hors de la liste des processus.
+L'adresse du collecteur, les jetons et le canal proviennent de `--collector`, `--token` ou `--token-file`, `--bot-token` ou `--bot-token-file`, `--discord-webhook-file` et `--channel`, ou `_COLLECTOR`, `_TOKEN`, `_TOKEN_FILE`, `_BOT_TOKEN`, `_BOT_TOKEN_FILE`, `_DISCORD_WEBHOOK_FILE` et `_CHANNEL`, ce qui empêche les secrets d'apparaître dans la liste des processus.
 
 Un fichier de configuration utilise les noms d’options avec des traits de soulignement, ainsi que « `texts` », qui remplace les mots des publications de la chaîne :
 
@@ -123,6 +134,36 @@ Un fichier de configuration utilise les noms d’options avec des traits de soul
 Clés `texts` : `ok`, `key_changed`, `rollback`, `fork`, `invalid`, `no_response`, `collector`, `records`, `head`. La ligne de commande prime sur l’environnement, et l’environnement sur le fichier. Les options ou clés de texte inconnues interrompent le journal de preuve par un message au lieu d’être ignorées. La formulation n’affecte jamais la vérification : verify.py vérifie le jeton signé à la fin de chaque publication. Avec `--post changes` ou `problems`, les vérifications qui n’ont pas été publiées figurent toujours dans le journal des témoins et `verify.py` les répertorie comme n’ayant jamais été publiées ; l’enregistrement de début désigne la politique. Chaque vérification apparaît toujours dans le journal ; ainsi, moins de publications signifient moins de transmissions Telegram indépendantes, et non moins de vérifications.
 
 Même en l'absence de chaîne, TgWitness conserve son journal. Conservez l'empreinte de la clé de TgWitness (`python -m tgwitness.witness fingerprint`) dans un autre emplacement.
+
+## Page de vérification publique pour plusieurs espaces de travail
+
+`python -m tgwitness.proof` TgWitness prend en charge jusqu’à 32 espaces de travail à la fois et fournit une page en lecture seule affichant la dernière vérification signée de chacun d’entre eux. Chaque espace de travail dispose de sa propre clé de témoin et de son propre journal dans le dossier « data », ainsi que d’une clé de collecteur épinglée ; la publication sur un canal Telegram est facultative pour chaque espace de travail. Commencez par [proof.config.example](https://github.com/phishdestroy/TgWitness/blob/main/deploy/proof.config.example) :
+
+| Domaine | Signification |
+| --- | --- |
+| `title` | Titre de la page, 1 à 100 caractères |
+| `data_dir` | Clés et journaux de Witness, relatifs au fichier ; par défaut `proof-data` |
+| `interval`, `timeout` | Intervalle entre les vérifications (1 à 1 440, valeur par défaut : 5) ; délai d'attente en secondes (5 à 600, valeur par défaut : 20) |
+| `workspaces[].id`, `label` | Alias court en minuscules et nom affiché |
+| `workspaces[].collector` | Adresse du collecteur ; les autres espaces de travail se terminent par `/profiles/<workspace ID>` |
+| `workspaces[].collector_fingerprint` | Obligatoire, différent pour chaque espace de travail |
+| `workspaces[].token_file` | Fichier contenant le jeton de témoin en lecture seule de cet espace de travail |
+| `workspaces[].channel`, `bot_token_file` | En option, les deux actions peuvent être combinées : publier chaque vérification sur un canal |
+| `workspaces[].proxy`, `bot_api` | Itinéraire facultatif et adresse de l’API du bot |
+
+```
+python -m tgwitness.proof --config proof.json --check-config
+python -m tgwitness.proof --config proof.json --host 127.0.0.1 --port 8790
+```
+
+La première commande valide le fichier et les fichiers de jetons sans établir de connexion. La page ne répond qu'aux requêtes GET et HEAD :
+
+- `/` affiche tous les espaces de travail ; un espace de travail n'ayant pas fait l'objet d'une vérification depuis 2,5 intervalles est marqué comme obsolète.
+- `/api/proof` Renvoie la même chose que JSON.
+- `/api/proof/<id>` télécharge la dernière déclaration signée (`tgwitness-public-proof-v1`) : numéro et hachage de l'enregistrement du témoin, statut, clé de collecte épinglée, point de contrôle, compteurs de collecte et indication de la réussite ou non de la publication sur la chaîne, signée par la clé de témoin de cet espace de travail.
+- `/healthz` Renvoie le code d'erreur 503 lorsque le moniteur d'un espace de travail s'est arrêté.
+
+Attribuez à la page son propre nom d’hôte, comme dans [Caddyfile.proof.example](https://github.com/phishdestroy/TgWitness/blob/main/deploy/Caddyfile.proof.example). À des fins de vérification, exportez le journal de témoin d’un espace de travail avec `python -m tgwitness.witness export --data-dir proof-data/<id> --out witness.zip` et utilisez-le comme décrit ci-dessous.
 
 ## Vérifier
 

@@ -6,15 +6,15 @@ Mantenha a conta conectada. Defina explicitamente quando sua rota poderá utiliz
 
 ## Escolha primeiro o modo IP
 
-01**Ocultar IP**
+01**Ocultar o endereço**
 
 Utilize um proxy. Caso nenhum funcione, aguarde sem conexão direta com o Telegram.
 
-02**Permitir alternativa**
+02**Recurso direto como último recurso**
 
 Permitir conexão direta após o atraso configurado; retornar a um proxy funcional quando houver resposta.
 
-03**Túnel / VPN**
+03**Servidor atrás de um túnel ou VPN**
 
 Permita rotas diretas pela rede do provedor. Esta opção não instala nem verifica uma VPN.
 
@@ -27,7 +27,7 @@ A rota determina a conexão. O modo IP determina se uma conexão direta é permi
 3. Salve e execute **o teste de conexão com o Telegram**. Isso também funciona antes do login.
 4. Após iniciar a coleta, verifique se uma mensagem de teste chega ao registro.
 
-Os novos espaços de trabalho utilizam o MTProxy automático com a funcionalidade “Hide IP”. O conjunto combina quatro fontes públicas, verifica as entradas, mantém as rotas ativas e substitui os proxies com falha. Os downloads com falha mantêm os instantâneos anteriores.
+Novos espaços de trabalho utilizam o recurso automático MTProxy com a opção **“Ocultar o endereço**”. O pool combina quatro fontes públicas, verifica as entradas, mantém as rotas ativas e substitui os proxies com falha. Os downloads com falha mantêm os instantâneos anteriores.
 
 ## Utilize seu próprio proxy
 

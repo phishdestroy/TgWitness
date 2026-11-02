@@ -40,8 +40,8 @@ Créez un bot à l’aide de BotFather et autorisez-le à publier dans un canal 
 
 ## Trois étapes dans la rubrique « Extras »
 
-1. **Accès en lecture seule.** Ouvrez « **Extras » → Un bot dans votre chaîne**, créez un jeton de témoin et enregistrez le fichier d’accès. Cela permet de consulter les points de contrôle et l’état de santé du système, mais pas les conversations ni les commandes du collecteur.
-2. **Canal et intervalle.** Saisissez le canal et une adresse de collecteur accessible depuis le témoin. Enregistrez le fichier de paramètres.
+1. **Accès en lecture seule.** Ouvrez « **Extras » → « Témoin indépendant** », créez un jeton de témoin et enregistrez le fichier d'accès. Cela permet de consulter les points de contrôle et l'état de santé, mais pas les conversations ni les commandes du collecteur.
+2. **Canal et intervalle.** Choisissez un canal Telegram ou un webhook Discord, puis saisissez une adresse de collecteur accessible depuis le témoin. Enregistrez le fichier de paramètres.
 3. **Lancement.** Placez ensemble les fichiers `witness.json`, `witness-token.txt` et `bot-token.txt` créés sur l’hôte « witness ». Exécutez les commandes ci-dessous dans l’environnement du projet installé.
 
 ```
@@ -50,6 +50,8 @@ python -m tgwitness.witness run --config witness.json
 ```
 
 Le téléchargement des fichiers ne lance pas le « witness ». Vérifiez que le premier message signé apparaît bien dans la chaîne, puis conservez séparément l’empreinte de la clé publique du « witness ».
+
+Pour Discord, enregistrez l’URL du webhook du canal comme `discord-webhook.txt` au lieu du jeton du bot. Un témoin publie à un seul endroit, soit un canal Telegram, soit un canal Discord ; les vérifications plus longues qu’un message Discord arrivent sous forme de fichier joint.
 
 ## Choisissez la fréquence de publication
 

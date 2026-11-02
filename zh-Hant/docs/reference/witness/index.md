@@ -4,7 +4,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 
 請使用具備專屬金鑰與機器人的「Witness」執行程序，將簽署過的檢查點發佈至頻道，並據此核對匯出資料。
 
-[俄語版的機器人與代理伺服器設定指南](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/WITNESS.md)。
+[匯出與驗證](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/evidence/) · [高可信度](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/high-assurance/) · [面板指南](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/panel/#extras)
 
 收集器會對其日誌進行簽名，因此無論誰控制該收集器及其金鑰，原則上都可能 重寫或截斷日誌內容，並再次簽名。 Witness 則能讓此類行為 被偵測到。這是一個獨立的流程——另一個容器，或者更理想地說是由他人 運作的伺服器——每隔幾分鐘便會擷取收集器的簽名日誌開頭，使用其 自身的金鑰對所見內容進行簽名，將其保存於自身的日誌中，並發佈至 Telegram 頻道。
 
@@ -27,7 +27,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/
 | 其專屬的 Ed25519 金鑰與日誌 | 收集器的儲存庫、簽名金鑰或面板憑證 |
 | 專屬的 Telegram 機器人代幣 | 訊息內容：開頭為記錄數量及雜湊值 |
 
-該憑證是在控制面板的**「Witness」**頁面上建立的，僅顯示一次，且僅以 SHA-256 格式儲存。它會開啟一個且僅一個端點 `GET /api/witness/head`，該端點會返回一個剛 簽署的檢查點，以及經簽署的、不含內容的收集計數器和運作狀態。 該令牌無法開啟控制面板、讀取訊息內容或變更設定，且 控制面板的令牌在此處不被接受。可在同一頁面撤銷令牌。收集器會記錄 新見證金鑰開始檢查的時間（`witness.seen`），並顯示每個令牌的最後一次檢查時間； 若見證金鑰在 2.5 個間隔內未進行檢查，則會被標記為逾期。
+該憑證是在**「Extras」→「Independent witness」**中建立的，僅顯示一次，且僅以 SHA-256 的形式儲存。它會開啟一個且僅一個端點， `GET /api/witness/head`，該端點會回傳一個剛 簽署的檢查點，以及經簽署的無內容集合計數器和運作狀態。 它無法開啟面板、讀取訊息內容或變更設定，且 該處不接受面板代幣。請在同一頁面撤銷代幣。收集器會記錄 新見證金鑰開始檢查的時間（`witness.seen`) 並顯示每個令牌的最後一次檢查時間； 若見證者在 2.5 個間隔內未進行檢查，則會被標記為逾期。
 
 新見證者會在 每次投票時發送一個隨機挑戰；擷取陳述會於收集器簽名下方重複該挑戰。計數器 與確切的檢查點綁定，並包含在簽名的見證貼文中。舊版見證者 仍可被獨立見證者接受。僅日誌的增長絕不會被計為新訊息。
 
@@ -54,7 +54,7 @@ TGW1.eyJhdCI6…<statement>.<signature>
 
 您需要一個 Telegram 機器人（可透過 @BotFather 建立），一個由該機器人擔任 管理員的頻道，以及一個可從證人端存取的收集器位址——需透過 HTTPS 連線，且位於 私有網路之外（請參閱[部署](https://phishdestroy.github.io/TgWitness/zh-Hant/docs/reference/deployment/)章節中的 HTTPS 設定檔）。
 
-開啟**「額外功能」→「頻道中的機器人」→** 在控制面板中**設定機器人** 。三個步驟涵蓋 唯讀存取權限、您的頻道及間隔時間，接著啟動 Witness。發佈 政策、可選用的 HTTP/SOCKS5 代理伺服器以及自訂機器人 API 位址均位於**「進階設定」** 中。 此表單 會下載附有此工作區固定收集器金鑰的 `witness.json` 。請將新 建立的唯讀憑證以「`witness-token.txt` 」**為檔名儲存** ；將該檔案與在見證主機上建立的 `bot-token.txt` 放置於該 JSON 檔案旁。收集器絕不會接收機器人憑證。 下載過程不會啟動任何服務，也不會發佈任何訊息。任何託管專案的見證者均不會 被隱式註冊。
+在面板中開啟**「附加功能」→「獨立見證人」→「設定」**。三個步驟涵蓋 唯讀存取權限、您的頻道與間隔時間，接著啟動見證人。發佈 政策、可選用的 HTTP/SOCKS5 代理伺服器以及自訂 Bot API 位址皆位於**「進階設定」**中。此表單 會下載 `witness.json` 時，會預先填入此工作區的收集器金鑰。請透過「**將存取檔案儲存**為」功能下載新 建立的唯讀憑證 `witness-token.txt`」下載新建立的唯讀憑證；將其與 `bot-token.txt`在見證主機上建立的檔案，一併放置於該 JSON 檔案旁。收集器絕不會接收機器人憑證。 下載過程不會啟動任何服務，也不會發佈任何訊息。任何託管專案的見證者均不會 被隱含地註冊。
 
 ```
 python -m tgwitness.witness run --config witness.json --check-config
@@ -95,6 +95,17 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
     --token-file witness-token.txt --bot-token-file bot-token.txt --channel @your_witness_channel
 ```
 
+### 發佈至 Discord
+
+見證者可選擇在 Discord 頻道而非 Telegram 上發文。在 Discord 中，開啟 **「編輯頻道」→「整合」→「Webhook」**，建立一個 Webhook 並複製其網址。在 設定面板中，於步驟 2 選擇**「Discord Webhook · 您的頻道」**。在見證者主機上， 將該網址儲存為 `discord-webhook.txt` 旁 `witness.json`；該連結絕不會傳送至 收集器。
+
+```
+python -m tgwitness.witness run --collector https://your-collector.example.org \
+    --token-file witness-token.txt --discord-webhook-file discord-webhook.txt
+```
+
+每位見證者僅有一位發布者：Telegram 頻道或 Discord Webhook，不可同時具備兩者。貼文 均包含相同的簽名聲明，且無法標記任何人。若貼文長度超過 Discord 的 2,000 個字元，則會被一行簡短文字取代，並附上完整的檢查碼作為 `witness-check.txt`。每則貼文的 ID 會以 `witness.posted`. `verify.py --channel`僅讀取 Telegram 頻道的匯出資料，因此針對 Discord 請保留見證日誌：其中包含 每筆檢查紀錄。
+
 ### 選項
 
 | 選項 | 環境 | 預設 | 含義 |
@@ -109,7 +120,7 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
 | `--data-dir` | `_DATA` | `witness-data` | Witness 金鑰與日誌 |
 | `--config` | `_CONFIG` | – | 包含上述任一選項的 JSON 檔案 |
 
-收集器地址、代幣及頻道來自 `--collector`、`--token` 或 `--token-file`、`--bot-token` 或 `--bot-token-file` 及 `--channel`，或 `_COLLECTOR`、`_TOKEN`、 `_TOKEN_FILE`、`_BOT_TOKEN`、`_BOT_TOKEN_FILE` 及 `_CHANNEL`，此設計可將機密資訊排除於 處理清單之外。
+收集器的地址、代幣及頻道來自 `--collector`, `--token` 或 `--token-file`, `--bot-token` 或 `--bot-token-file`, `--discord-webhook-file` 以及 `--channel`， 或 `_COLLECTOR`, `_TOKEN`, `_TOKEN_FILE`, `_BOT_TOKEN`, `_BOT_TOKEN_FILE`, `_DISCORD_WEBHOOK_FILE` 以及 `_CHANNEL`，這能防止機密項目出現在程序清單中。
 
 配置檔採用帶有底線的選項名稱，並加上`texts`，該代碼會替換頻道貼文中的 文字：
 
@@ -123,6 +134,36 @@ python -m tgwitness.witness run --collector https://your-collector.example.org \
 `texts` 金鑰：`ok`、`key_changed`、`rollback`、`fork`、`invalid`、`no_response`、`collector`、 `records`、`head`。命令列優先於環境變數，環境變數優先於檔案。 未知選項或文字金鑰會觸發警告訊息並中止記錄，而非被忽略。 文字表述絕不影響驗證：verify.py 會在每次 發文結束時檢查簽名代幣。 在 `--post changes` 或 `problems` 中，未發布的檢查仍會保留在 見證日誌中，而 `verify.py` 會將其標示為「從未發布」；起始記錄會標明 相關政策。每項檢查仍會出現在日誌中，因此發布次數減少僅意味著獨立的 Telegram 傳送次數減少，而非檢查數量減少。
 
 即使沒有頻道，Witness 仍會持續維護其日誌。請將 Witness 金鑰指紋 (`python -m tgwitness.witness fingerprint`) 存放在其他地方。
+
+## 多個工作區的公開驗證頁面
+
+`python -m tgwitness.proof` TgWitness 最多可同時監控 32 個工作區，並提供一個唯讀 頁面，顯示每個工作區最新的簽名檢查結果。每個工作區在 data 資料夾下都有專屬的見證金鑰和 日誌，以及一個固定收藏金鑰；是否發佈至 Telegram 頻道 則可針對每個工作區自行選擇。請從 [proof.config.example](https://github.com/phishdestroy/TgWitness/blob/main/deploy/proof.config.example) 開始：
+
+| 領域 | 含義 |
+| --- | --- |
+| `title` | 頁面標題，1–100 個字元 |
+| `data_dir` | 與檔案相關的 Witness 金鑰和日誌；預設值 `proof-data` |
+| `interval`, `timeout` | 檢查間隔（分鐘，範圍 1–1440，預設值 5）；等待時間（秒，範圍 5–600，預設值 20） |
+| `workspaces[].id`, `label` | 簡短的小寫別名與顯示名稱 |
+| `workspaces[].collector` | 收集器地址；其他工作區的結尾為 `/profiles/<workspace ID>` |
+| `workspaces[].collector_fingerprint` | 必備項目，每個工作區各不相同 |
+| `workspaces[].token_file` | 包含該工作區唯讀見證代幣的檔案 |
+| `workspaces[].channel`, `bot_token_file` | 可選功能：將每次檢查結果發佈至頻道 |
+| `workspaces[].proxy`, `bot_api` | 可選的路徑與 Bot API 位址 |
+
+```
+python -m tgwitness.proof --config proof.json --check-config
+python -m tgwitness.proof --config proof.json --host 127.0.0.1 --port 8790
+```
+
+第一個指令會在不建立連線的情況下，驗證檔案及代幣檔案。 該頁面僅回應 GET 和 HEAD 請求：
+
+- `/` 顯示所有工作區；若某個工作區在 2.5 個間隔內未被檢查，則會被標記為過期。
+- `/api/proof` 回傳的結果與 JSON 相同。
+- `/api/proof/<id>` 下載最新的簽署聲明（`tgwitness-public-proof-v1`)： 見證記錄編號與雜湊值、狀態、固定收藏器金鑰、檢查點、收集 計數器，以及頻道發文是否成功，並由該工作區的見證金鑰簽署。
+- `/healthz` 當工作區的監控程式停止運作時，會回傳 503 錯誤。
+
+請為該頁面設定專屬的主機名稱，例如 [Caddyfile.proof.example](https://github.com/phishdestroy/TgWitness/blob/main/deploy/Caddyfile.proof.example)。為進行驗證，請使用 以下說明中的方法匯出 工作區的見證日誌， `python -m tgwitness.witness export --data-dir proof-data/<id> --out witness.zip` ，並依照 以下說明使用該日誌。
 
 ## 驗證
 

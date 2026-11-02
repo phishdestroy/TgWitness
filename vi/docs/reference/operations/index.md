@@ -51,7 +51,7 @@ Quyền truy cập bản demo tại địa phương sẽ tự động mở mà k
 
 ![Cài đặt giám sát theo từng tài khoản với dữ liệu nguồn tổng hợp](https://phishdestroy.github.io/TgWitness/assets/sources.png)
 
-Trong **phần Nguồn → Cài đặt ghi lại → Chọn các thay đổi cần lưu giữ**, quý vị có thể chọn riêng biệt các tin nhắn mới, nội dung chỉnh sửa, thông báo xóa, cập nhật phản ứng và các sự kiện liên quan đến thành viên. Cài đặt mặc định sẽ lưu giữ tất cả các danh mục. Tùy chọn **“Tin nhắn, chỉnh sửa & xóa”** sẽ giữ nguyên bối cảnh ban đầu đồng thời vô hiệu hóa các cập nhật riêng biệt về phản ứng và thành viên. Tùy chọn **“Tất cả hoạt động hiển thị”** sẽ khôi phục cả năm loại. Các cài đặt sẵn sẽ thay đổi định dạng; nhấn **“Lưu cài đặt giám sát”** để áp dụng.
+Trong **Sources → Recording → Chọn những thay đổi cần lưu giữ**, hãy chọn riêng biệt các tin nhắn mới, chỉnh sửa, thông báo xóa, cập nhật phản ứng và sự kiện thành viên. Mặc định sẽ lưu giữ tất cả các danh mục. Tùy chọn "**Tin nhắn, chỉnh sửa & xóa"** giữ nguyên bối cảnh ban đầu trong khi vô hiệu hóa các cập nhật riêng biệt về phản ứng và thành viên. Tùy chọn **"Tất cả hoạt động hiển thị"** khôi phục cả năm danh mục. Các cài đặt sẵn thay đổi hình thức; nhấn **"Lưu cài đặt ghi lại"** để áp dụng.
 
 Chính sách đã lưu sẽ áp dụng cho tất cả các nguồn được chọn trong không gian làm việc đó. Các không gian làm việc khác vẫn giữ nguyên cài đặt riêng của mình. Mỗi thay đổi thực tế đều được ghi lại kèm theo các giá trị trước và sau đã được ký xác thực; chính sách hiện tại cũng được bao gồm trong biên nhận quá trình và bản ghi bắt đầu quan sát. Việc vô hiệu hóa một danh mục sẽ không xóa các quan sát trước đó. Việc kích hoạt lại sẽ không khôi phục các thay đổi đã bỏ lỡ. Trong phiên bản này, không có tính năng ghi đè danh mục theo từng nhóm.
 
@@ -65,7 +65,7 @@ Việc xóa một không gian làm việc bổ sung sẽ dừng trình thu thậ
 
 ## Thông báo
 
-Mở **Nguồn → Thông báo → Cảnh báo và bản tóm tắt hàng ngày**. TgWitness sử dụng Apprise để gửi cảnh báo đến Matrix, Telegram, Discord, Slack, ntfy, email và các dịch vụ được hỗ trợ khác. Quý vị có thể thêm nhiều điểm đến vào một không gian làm việc.
+Mở **Extras → Notifications → Configure**. TgWitness sử dụng Apprise để gửi thông báo đến Matrix, Telegram, Discord, Slack, ntfy, email và các dịch vụ được hỗ trợ khác. Bạn có thể thêm nhiều điểm đến vào một không gian làm việc.
 
 1. Vui lòng nhập một URL đích Apprise trên mỗi dòng. Hãy sử dụng danh mục dịch vụ ( [danh mục dịch vụ và các định dạng URL](https://appriseit.com/services/)) phù hợp với dịch vụ của quý vị.
 2. Vui lòng bật tùy chọn **“Gửi thông báo”**, sau đó chọn các cảnh báo sự cố, thay đổi trong các cuộc trò chuyện được theo dõi và bản tóm tắt hàng ngày. Giờ trong bản tóm tắt sử dụng múi giờ của máy chủ.

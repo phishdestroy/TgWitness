@@ -8,7 +8,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/
 
 تصویری رہنما
 
-[### کیس بورڈ مشاہدات، بالکل درست اقتباسات اور ٹیم کے نوٹس کو مربوط رکھیں۔](https://phishdestroy.github.io/TgWitness/ur/docs/case-board/) [### رپورٹ اسٹوڈیو مواد منتخب کریں اور آٹھ رپورٹ ڈیزائنز میں سے ایک منتخب کریں۔](https://phishdestroy.github.io/TgWitness/ur/docs/reports/) [### شیئر کرنے کے لیے متن ایک دستخط شدہ خلاصہ تیار کریں جس میں وصول کنندہ کے لیے درکار فیلڈز شامل ہوں۔](https://phishdestroy.github.io/TgWitness/ur/docs/handover/) [### اکاؤنٹ گروپس اکاؤنٹس کا مشترکہ جائزہ لیں اور ان کے ورک اسپیسز کو الگ رکھیں۔](https://phishdestroy.github.io/TgWitness/ur/docs/groups/)
+[### کیس بورڈ مشاہدات، بالکل درست اقتباسات اور ٹیم کے نوٹس کو مربوط رکھیں۔](https://phishdestroy.github.io/TgWitness/ur/docs/case-board/) [### رپورٹ اسٹوڈیو مواد منتخب کریں اور آٹھ رپورٹ ڈیزائنز میں سے ایک منتخب کریں۔](https://phishdestroy.github.io/TgWitness/ur/docs/reports/) [### شیئر کرنے کے لیے نقل ایک دستخط شدہ خلاصہ تیار کریں جس میں وصول کنندہ کے لیے درکار فیلڈز شامل ہوں۔](https://phishdestroy.github.io/TgWitness/ur/docs/handover/) [### اکاؤنٹ گروپس اکاؤنٹس کا مشترکہ جائزہ لیں اور ان کے ورک اسپیسز کو الگ رکھیں۔](https://phishdestroy.github.io/TgWitness/ur/docs/groups/)
 
 [## مodes، منظرنامے اور شواہد کی سطحیں مجموعے کے دائرہ کار، واقعات کی حدیں، آٹھ تصدیقی میکانزم اور چھ فرضی تفتیشی منظرنامے۔](https://phishdestroy.github.io/TgWitness/ur/guides/modes.html)
 
@@ -34,19 +34,19 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/
 
 سیٹ اپ
 
-[تیزی سے آغاز](https://phishdestroy.github.io/TgWitness/ur/docs/reference/quickstart/)[اکاؤنٹس اور سیشن فارمیٹس](https://phishdestroy.github.io/TgWitness/ur/docs/reference/accounts/)[رسائی اور اجازت نامے](https://phishdestroy.github.io/TgWitness/ur/docs/reference/access/)[کنیکشن، پراکسیز اور ڈیٹا کی حفاظت](https://phishdestroy.github.io/TgWitness/ur/docs/reference/connection/)[نفاذ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/)
+[تیزی سے آغاز](https://phishdestroy.github.io/TgWitness/ur/docs/reference/quickstart/)[انسٹال کریں، تصدیق کریں اور اپ ڈیٹ کریں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/installation/)[ابتدائی سیٹ اپ اور ترتیبات](https://phishdestroy.github.io/TgWitness/ur/docs/reference/settings/)[اکاؤنٹس اور سیشن فارمیٹس](https://phishdestroy.github.io/TgWitness/ur/docs/reference/accounts/)[رسائی اور اجازت نامے](https://phishdestroy.github.io/TgWitness/ur/docs/reference/access/)[کنیکشن، پراکسیز اور ڈیٹا کی حفاظت](https://phishdestroy.github.io/TgWitness/ur/docs/reference/connection/)[نفاذ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/deployment/)[اعلیٰ یقین دہانی کے ساتھ تعیناتی](https://phishdestroy.github.io/TgWitness/ur/docs/reference/high-assurance/)
 
 جمع کریں
 
-[جمع کرنے کا طریقہ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/collection/)[ماخذ کی تاریخ لوڈ کریں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/history/)[ورک فلو اور آپریشنز](https://phishdestroy.github.io/TgWitness/ur/docs/reference/operations/)[تحقیقاتی موڈ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/)[خصوصیات اور حدود](https://phishdestroy.github.io/TgWitness/ur/docs/reference/features/)
+[پینل گائیڈ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/panel/)[جمع کرنے کا طریقہ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/collection/)[ماخذ کی تاریخ لوڈ کریں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/history/)[ورک فلو اور آپریشنز](https://phishdestroy.github.io/TgWitness/ur/docs/reference/operations/)[تحقیقاتی موڈ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/investigation/)[خصوصیات اور حدود](https://phishdestroy.github.io/TgWitness/ur/docs/reference/features/)
 
 آرکائیو اور انضمامات
 
-[کیس بورڈ حوالہ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-board/)[آرکائیو کا تجزیہ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/analysis/)[صرف پڑھنے کے لیے MCP](https://phishdestroy.github.io/TgWitness/ur/docs/reference/mcp/)[مقامی OCR اور ٹرانسکرپشن](https://phishdestroy.github.io/TgWitness/ur/docs/reference/media-analysis/)[جاں نکلنے والے ویب ہُکس](https://phishdestroy.github.io/TgWitness/ur/docs/reference/webhooks/)
+[کیس بورڈ حوالہ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-board/)[آرکائیو کا تجزیہ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/analysis/)[صرف پڑھنے کے لیے MCP](https://phishdestroy.github.io/TgWitness/ur/docs/reference/mcp/)[مقامی OCR اور ٹرانسکرپشن](https://phishdestroy.github.io/TgWitness/ur/docs/reference/media-analysis/)[جاں نکلنے والے ویب ہُکس](https://phishdestroy.github.io/TgWitness/ur/docs/reference/webhooks/)[عوامی نمائش](https://phishdestroy.github.io/TgWitness/ur/docs/reference/showcase/)
 
 شواہد
 
-[شواہد کیسے کام کرتے ہیں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/how-it-works/)[رپورٹ کی تشکیلات اور تصدیق](https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-reports/)[شواہد کا فارمیٹ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/)[آزاد شاہد](https://phishdestroy.github.io/TgWitness/ur/docs/reference/witness/)[ٹائم اسٹیمپس](https://phishdestroy.github.io/TgWitness/ur/docs/reference/timestamp/)
+[شواہد کیسے کام کرتے ہیں](https://phishdestroy.github.io/TgWitness/ur/docs/reference/how-it-works/)[رپورٹ کی تشکیلات اور تصدیق](https://phishdestroy.github.io/TgWitness/ur/docs/reference/case-reports/)[اکاؤنٹ کی برآمد](https://phishdestroy.github.io/TgWitness/ur/docs/reference/account-export/)[شواہد کا فارمیٹ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/evidence/)[آزاد شاہد](https://phishdestroy.github.io/TgWitness/ur/docs/reference/witness/)[ٹائم اسٹیمپس](https://phishdestroy.github.io/TgWitness/ur/docs/reference/timestamp/)[ذخیرہ اور بازیابی](https://phishdestroy.github.io/TgWitness/ur/docs/reference/storage/)
 
 سیکیورٹی اور پروجیکٹ
 

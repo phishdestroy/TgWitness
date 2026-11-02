@@ -97,7 +97,7 @@ The checks run in the [pull-request](https://github.com/phishdestroy/TgWitness/b
 
 이 문서는 초기 수동 선택 빌드의 테스트 기록입니다. 현재의 자동 풀 및 IP 모드에 대해서는 [연결 설정을](https://phishdestroy.github.io/TgWitness/ko/docs/reference/connection/#ip-modes) 참조하십시오. 아래의 카운트 및 지원되지 않는 기능은 테스트된 해당 버전에 해당합니다.
 
-SoliSpirit/mtproto 및 zakky8/mtproto-proxy-pro에서 번들된 공개 스냅샷과 명시적인 HTTPS 새로고침 기능을 추가했습니다. 이 호스트에서 애플리케이션 다운로더는 2026년 10월 29일 12:58 UTC에 두 피드를 성공적으로 가져왔습니다: 필터링, 중복 제거 및 소스당 64개 항목 제한을 적용한 후 **118개의 고유한 호환 엔드포인트가** 확인되었습니다. 이는 목록 검색 기능만 검증한 것이며, 해당 엔드포인트를 통한 연결성이나 메시지 전달을 검증한 것은 아닙니다. 이 작업 동안 목록에 포함된 프록시에 실제 계정이 연결된 적은 없습니다. [운영자 및 사용자 가이드](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/PROXIES.md).
+SoliSpirit/mtproto 및 zakky8/mtproto-proxy-pro에서 번들된 공개 스냅샷과 명시적 HTTPS 새로고침 기능을 추가했습니다. 이 호스트에서 애플리케이션 다운로더는 2026년 10월 29일 12:58 UTC에 두 피드를 모두 성공적으로 가져왔습니다: 필터링, 중복 제거 및 소스당 64개 항목 제한을 적용한 후 **118개의 고유한 호환 엔드포인트가** 확인되었습니다. 이는 목록 검색을 검증하는 것이며, 해당 엔드포인트를 통한 연결성이나 메시지 전달을 검증하는 것은 아닙니다. 이 작업 동안 목록에 포함된 프록시에 실제 계정이 연결된 적은 없습니다. [운영자 및 사용자 가이드](https://github.com/phishdestroy/TgWitness/blob/main/docs/wiki/Proxies.md).
 
 오류가 발생했거나, 내용이 비어 있거나, 호환되지 않는 소스 응답의 경우 이전 항목과 날짜가 유지됩니다. 업데이트 선택된 경로는 변경되지 않습니다. 공개 주소는 유효성 검증을 거치며, 선택 시 IP 주소가 고정됩니다. 운영자/수동 경로는 별도로 유지됩니다. 이제 계정 로그인 전 패널에서 연결 테스트를 사용할 수 있습니다. 가짜 TLS ee 및 자동 프록시 선택은 여전히 지원되지 않습니다. 운영자 카탈로그는 구독 설정을 완전히 재정의합니다.
 
@@ -111,7 +111,7 @@ SoliSpirit/mtproto 및 zakky8/mtproto-proxy-pro에서 번들된 공개 스냅샷
 
 ## 선택적 추가 기능 소개 · 2026년 10월 29일
 
-이전의 Proof 봇 접속처는 이제 **‘Extras’로** 변경되었습니다: 간략한 개요에 이어 선택한 옵션에 대한 별도의 설정 페이지가 제공됩니다. 위트니스 양식은 세 단계로 구성되어 있으며, 연결 관리, 네트워크 옵션 및 배포 세부 정보는 접혀져 있습니다. GitHub는 명시적으로 계획되어 있으며, 인증 정보 입력 양식이 없습니다. [러시아어 개요](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/EXTRAS.md).
+이전의 Proof 봇 목적지는 이제 **‘Extras’로** 변경되었습니다. 간략한 개요에 이어 선택한 옵션에 대한 별도의 설정 페이지가 제공됩니다. 위트니스 양식은 세 단계로 구성되어 있으며, 연결 관리, 네트워크 옵션 및 배포 세부 정보는 접혀 있습니다. GitHub는 명시적으로 계획되어 있으며, 인증 정보 입력 양식이 없습니다. [Extras 개요](https://phishdestroy.github.io/TgWitness/ko/docs/reference/panel/#extras).
 
 - 현지화, Witness 설정 및 게시 검증을 위한 30가지 집중 테스트를 통과했습니다.
 - 영어/러시아어, 라이트/다크 모드, 390/1440 픽셀 해상도에서 크로미움 설정 승인 테스트 통과: 키보드 포커스 및 리턴 키 작동, 추가 기능 선택 시 암시적 연결 없음, 초안 보존, 고정된 구성/토큰 다운로드, 잠금 시 토큰 삭제, 그리고 정상 작동하는 로컬 가이드 앵커. 레이아웃 및 단색 배경 텍스트 대비 검사 통과.
@@ -124,7 +124,7 @@ SoliSpirit/mtproto 및 zakky8/mtproto-proxy-pro에서 번들된 공개 스냅샷
 
 ## Witness 봇 및 프록시 설정 감사 · 2026년 10월 29일
 
-위트니스 설정(현재 **‘추가 기능(Extras)’ → ‘채널 내 봇’**)은 독립적으로 배포된 위트니스를 준비합니다: 고정된 수집기 키, 범위 지정된 토큰 다운로드, 전용 채널, 게시 정책, HTTP/SOCKS5 경로 및 사용자 지정 봇 API. 봇 토큰은 위트니스 호스트에 남아 있습니다. 새로운 `--check-config`는 네트워크 연결을 열거나 키를 생성하지 않고도 구성 및 파일을 검증합니다. JSON 파일 경로는 구성 파일과 동일한 위치에서 해결됩니다. 모든 Compose 위트니스 변형은 이제 HTTP 프록시 및 봇 API 설정을 전달합니다.
+위트니스 설정(현재 **‘Extras → Independent witness**’)은 독립적으로 배포되는 위트니스를 준비합니다: 고정된 수집기 키, 범위 지정된 토큰 다운로드, 전용 채널, 게시 정책, HTTP/SOCKS5 경로 및 사용자 지정 봇 API. 봇 토큰은 위트니스 호스트에 남아 있습니다. 새로운 `--check-config` 는 네트워크 연결을 열거나 키를 생성하지 않고도 구성 및 파일을 검증합니다. JSON 파일 경로는 구성 파일과 동일한 위치에서 해결됩니다. 모든 Compose 위트니스 변형은 이제 HTTP 프록시 및 봇 API 설정을 전달합니다.
 
 계정 설정에서는 운영자가 관리하는 공개 MTProxy 카탈로그, 사용자 지정 텔레그램 프록시 링크 미리보기 및 기존 수동 입력 필드를 지원합니다. 카탈로그 응답에서는 비밀 정보가 생략되며, 선택 시 경로는 워크스페이스 볼트에 저장됩니다. 카탈로그가 없거나 형식이 잘못된 경우 수동 경로를 사용할 수 있습니다. 프로젝트 프록시 주소나 호스팅된 위트니스 서비스는 기본적으로 생성되거나 활성화되지 않습니다. Caddy 예제에서는 패널이 비공개로 유지되는 수집기에 외부 위트니스가 접근해야 할 때, 범위가 지정된 헤드 엔드포인트만 노출합니다.
 
@@ -136,7 +136,7 @@ SoliSpirit/mtproto 및 zakky8/mtproto-proxy-pro에서 번들된 공개 스냅샷
 - Ruff, 출처/링크 검증 및 Compose/워크플로우 YAML 구문 분석 테스트를 통과했습니다.
 - 재구축된 휠은 독립 설치, 패널/정적 리소스 및 API 인증 검사를 통과했을 뿐만 아니라, 직접 및 스트리밍 방식의 32개 이벤트 합성 내보내기 데이터에 대한 독립적인 검증도 통과했습니다.
 
-수신 내역: `test-results/setup-full-suite.log`, `setup-final-focused.log`, `setup-browser/receipt.json`, `setup-browser-final.log` 및 `setup-package.log`. 이 검증 과정에서는 합성 계정/프록시 및 로컬 봇 API 고정 장치를 사용합니다. 이는 실제 봇 게시물, 작동 중인 공개 MTProxy 서버, 원격 CI 실행 또는 Docker 배포를 주장하는 것이 아닙니다. 위에 보관된 실제 텔레그램 관찰 기록은 별도의 증거 자료로 남아 있습니다. [설정 안내](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/WITNESS.md).
+수신 내역: `test-results/setup-full-suite.log`, `setup-final-focused.log`, `setup-browser/receipt.json`, `setup-browser-final.log` 그리고 `setup-package.log`. 이 검증은 합성 계정/프록시 및 로컬 봇 API 피처(fixture)를 사용합니다. 이는 실제 봇 게시물, 작동 중인 공개 MTProxy 서버, 원격 CI 실행 또는 Docker 배포를 주장하지 않습니다. 위에 보관된 실제 텔레그램 관찰 기록은 별도의 증거 자료로 남아 있습니다. [설정 안내](https://phishdestroy.github.io/TgWitness/ko/docs/reference/witness/#run-a-witness).
 
 ## 프레젠테이션 및 문서 검토 · 2026년 10월 29일
 

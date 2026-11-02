@@ -28,7 +28,7 @@ Buka panel yang berisi token yang diterbitkan dalam sesi browser terpisah dan pe
 
 ## Pilih izin
 
-Untuk demonstrasi publik berbasis teks saja, gunakan **"Public showcase"** alih-alih akses peninjau biasa. Fitur ini menampilkan saluran publik yang dipilih secara eksplisit, riwayat suntingan dan penghapusan yang disimpan, serta statistik yang ditandatangani, dengan kolom penulis disamarkan dan berkas ditutup pada batas API. [Buat dan verifikasi showcase](https://github.com/phishdestroy/TgWitness/blob/main/docs/LIVE-SHOWCASE.md).
+Untuk demonstrasi publik berbasis teks saja, gunakan **"Public showcase"** alih-alih akses peninjau biasa. Fitur ini menampilkan saluran publik yang dipilih secara eksplisit, riwayat suntingan dan penghapusan yang disimpan, serta statistik yang ditandatangani, dengan kolom penulis disamarkan dan berkas ditutup pada batas API. [Buat dan verifikasi showcase](https://phishdestroy.github.io/TgWitness/id/docs/reference/showcase/).
 
 | Izin | Fitur yang ditawarkan |
 | --- | --- |
@@ -70,7 +70,7 @@ IP adalah alamat klien yang terlihat oleh aplikasi. Jika berada di balik proxy t
 
 ## Mengubah atau mencabut akses
 
-Edit entri di bawah **Akses** untuk mengubah cakupan, izin, atau batasannya. Perubahan cakupan dan izin akan diperiksa pada permintaan berikutnya, termasuk permintaan dari sesi yang sudah terbuka. Mencabut akses akan mengakhiri sesi tersebut dan membuat token yang diterbitkan tidak dapat digunakan lagi. **Sesi terbuka** juga memungkinkan administrator mengakhiri sesi individu tanpa mencabut seluruh akses.
+Edit entri di bawah "**Akses yang Diberikan"** untuk mengubah cakupan, izin, atau batasannya. Perubahan cakupan dan izin akan diperiksa pada permintaan berikutnya, termasuk permintaan dari sesi yang sudah terbuka. Mencabut akses akan mengakhiri sesi-sesi tersebut dan membuat token yang diterbitkan tidak dapat digunakan lagi. **Sesi yang terbuka** juga memungkinkan administrator mengakhiri sesi individu tanpa mencabut seluruh akses.
 
 Salinan ekspor yang disimpan tetap mempertahankan informasi pembuat, ruang kerja, cakupan obrolan, dan izin yang diperlukan. Akses yang diberikan hanya dapat menampilkan daftar atau mengunduh salinannya sendiri selama izin tersebut masih berlaku; salinan yang berisi Case Board juga memerlukan izin ``board.read``. Administrator dapat mengambil semua salinan. Salinan lama tanpa metadata ini dan bundel grup hanya dapat diakses oleh administrator. Unduh tiket dan respons berkas yang telah disiapkan akan memeriksa ulang akses setelah berkas disiapkan, sebelum mengirimkan byte-bytenya.
 

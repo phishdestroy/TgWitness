@@ -6,7 +6,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/uk/docs/reference/case-
 
 Case Board надає слідчій групі спільний робочий огляд збережених матеріалів. Додавайте спостереження до закладок, виділяйте конкретні фрагменти, зберігайте послідовність дій та обговорюйте їх із колегами. Картки зберігають посилання на джерела та підписану історію редагувань. Коментарі команди залишаються в робочому просторі, де їх можна легко відрізнити від оригінальних спостережень у Telegram.
 
-[Модель доказів](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/) · [Доступ](https://phishdestroy.github.io/TgWitness/uk/docs/reference/access/) · [Звіти](https://phishdestroy.github.io/TgWitness/uk/docs/reference/case-reports/) · [Русский](https://github.com/phishdestroy/TgWitness/blob/main/docs/ru/CASE-BOARD.md)
+[Модель доказів](https://phishdestroy.github.io/TgWitness/uk/docs/reference/evidence/) · [Доступ](https://phishdestroy.github.io/TgWitness/uk/docs/reference/access/) · [Звіти](https://phishdestroy.github.io/TgWitness/uk/docs/reference/case-reports/)
 
 ![Синтетичний канал розслідування](https://phishdestroy.github.io/TgWitness/assets/case-board.png)
 

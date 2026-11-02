@@ -8,7 +8,7 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/
 
 図解ガイド
 
-[### Case Board 観察事項、正確な引用、チームのメモは、それぞれ関連付けられた状態を維持してください。](https://phishdestroy.github.io/TgWitness/ja/docs/case-board/) [### レポートスタジオ 素材と、8種類のレポートデザインの中から1つを選択してください。](https://phishdestroy.github.io/TgWitness/ja/docs/reports/) [### 共有用テキスト 受取人が必要とするフィールドを含む、署名済みの抜粋を作成してください。](https://phishdestroy.github.io/TgWitness/ja/docs/handover/) [### アカウントグループ アカウントを共同でレビューしつつ、各ユーザーのワークスペースは分離してください。](https://phishdestroy.github.io/TgWitness/ja/docs/groups/)
+[### Case Board 観察事項、正確な引用、チームのメモは、それぞれ関連付けられた状態を維持してください。](https://phishdestroy.github.io/TgWitness/ja/docs/case-board/) [### レポートスタジオ 素材と、8種類のレポートデザインの中から1つを選択してください。](https://phishdestroy.github.io/TgWitness/ja/docs/reports/) [### コピーの共有 受取人が必要とするフィールドを含む、署名済みの抜粋を作成してください。](https://phishdestroy.github.io/TgWitness/ja/docs/handover/) [### アカウントグループ アカウントを共同でレビューしつつ、各ユーザーのワークスペースは分離してください。](https://phishdestroy.github.io/TgWitness/ja/docs/groups/)
 
 [## モード、シナリオ、および証拠レベル 収集範囲、イベントの境界、8つの検証メカニズム、および6つの架空の調査シナリオ。](https://phishdestroy.github.io/TgWitness/ja/guides/modes.html)
 
@@ -34,19 +34,19 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/
 
 セットアップ
 
-[クイックスタート](https://phishdestroy.github.io/TgWitness/ja/docs/reference/quickstart/)[アカウントとセッション形式](https://phishdestroy.github.io/TgWitness/ja/docs/reference/accounts/)[アクセスと権限](https://phishdestroy.github.io/TgWitness/ja/docs/reference/access/)[接続、プロキシ、およびデータ保護](https://phishdestroy.github.io/TgWitness/ja/docs/reference/connection/)[導入](https://phishdestroy.github.io/TgWitness/ja/docs/reference/deployment/)
+[クイックスタート](https://phishdestroy.github.io/TgWitness/ja/docs/reference/quickstart/)[インストール、検証、および更新](https://phishdestroy.github.io/TgWitness/ja/docs/reference/installation/)[初期設定と設定](https://phishdestroy.github.io/TgWitness/ja/docs/reference/settings/)[アカウントとセッション形式](https://phishdestroy.github.io/TgWitness/ja/docs/reference/accounts/)[アクセスと権限](https://phishdestroy.github.io/TgWitness/ja/docs/reference/access/)[接続、プロキシ、およびデータ保護](https://phishdestroy.github.io/TgWitness/ja/docs/reference/connection/)[導入](https://phishdestroy.github.io/TgWitness/ja/docs/reference/deployment/)[高信頼性の導入](https://phishdestroy.github.io/TgWitness/ja/docs/reference/high-assurance/)
 
 収集
 
-[収集の仕組み](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/)[ソース履歴を読み込む](https://phishdestroy.github.io/TgWitness/ja/docs/reference/history/)[ワークフローと操作方法](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/)[調査モード](https://phishdestroy.github.io/TgWitness/ja/docs/reference/investigation/)[機能と制限事項](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/)
+[パネルガイド](https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel/)[収集の仕組み](https://phishdestroy.github.io/TgWitness/ja/docs/reference/collection/)[ソース履歴を読み込む](https://phishdestroy.github.io/TgWitness/ja/docs/reference/history/)[ワークフローと操作方法](https://phishdestroy.github.io/TgWitness/ja/docs/reference/operations/)[調査モード](https://phishdestroy.github.io/TgWitness/ja/docs/reference/investigation/)[機能と制限事項](https://phishdestroy.github.io/TgWitness/ja/docs/reference/features/)
 
 アーカイブと連携機能
 
-[Case Board の参照](https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-board/)[アーカイブ分析](https://phishdestroy.github.io/TgWitness/ja/docs/reference/analysis/)[読み取り専用 MCP](https://phishdestroy.github.io/TgWitness/ja/docs/reference/mcp/)[ローカルでのOCRおよび文字起こし](https://phishdestroy.github.io/TgWitness/ja/docs/reference/media-analysis/)[送信されるWebhook](https://phishdestroy.github.io/TgWitness/ja/docs/reference/webhooks/)
+[Case Board の参照](https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-board/)[アーカイブ分析](https://phishdestroy.github.io/TgWitness/ja/docs/reference/analysis/)[読み取り専用 MCP](https://phishdestroy.github.io/TgWitness/ja/docs/reference/mcp/)[ローカルでのOCRおよび文字起こし](https://phishdestroy.github.io/TgWitness/ja/docs/reference/media-analysis/)[送信されるWebhook](https://phishdestroy.github.io/TgWitness/ja/docs/reference/webhooks/)[公開ショーケース](https://phishdestroy.github.io/TgWitness/ja/docs/reference/showcase/)
 
 証拠
 
-[証拠の仕組み](https://phishdestroy.github.io/TgWitness/ja/docs/reference/how-it-works/)[レポートの設定と検証](https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-reports/)[証拠の形式](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/)[独立した証人](https://phishdestroy.github.io/TgWitness/ja/docs/reference/witness/)[タイムスタンプ](https://phishdestroy.github.io/TgWitness/ja/docs/reference/timestamp/)
+[証拠の仕組み](https://phishdestroy.github.io/TgWitness/ja/docs/reference/how-it-works/)[レポートの設定と検証](https://phishdestroy.github.io/TgWitness/ja/docs/reference/case-reports/)[アカウントのエクスポート](https://phishdestroy.github.io/TgWitness/ja/docs/reference/account-export/)[証拠の形式](https://phishdestroy.github.io/TgWitness/ja/docs/reference/evidence/)[独立した証人](https://phishdestroy.github.io/TgWitness/ja/docs/reference/witness/)[タイムスタンプ](https://phishdestroy.github.io/TgWitness/ja/docs/reference/timestamp/)[保存と復元](https://phishdestroy.github.io/TgWitness/ja/docs/reference/storage/)
 
 セキュリティとプロジェクト
 

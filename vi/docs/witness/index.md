@@ -40,8 +40,8 @@ Hãy tạo một bot bằng BotFather và cho phép bot này đăng bài trong m
 
 ## Ba bước trong phần Tiện ích bổ sung
 
-1. **Quyền truy cập chỉ đọc.** Mở **phần “Extras” →**Tạo**một bot trong kênh của quý vị**, tạo mã thông báo chứng thực (witness token) và lưu tệp truy cập. Tính năng này cho phép đọc các điểm kiểm tra (checkpoints) và trạng thái hoạt động (health), chứ không bao gồm các cuộc trò chuyện hay các thiết lập điều khiển của trình thu thập dữ liệu.
-2. **Kênh và khoảng thời gian.** Vui lòng nhập tên kênh và địa chỉ máy thu dữ liệu mà TgWitness có thể truy cập được. Lưu tệp cài đặt.
+1. **Quyền truy cập chỉ đọc.** Mở **Extras → Independent witness**, tạo mã chứng thực (witness token) và lưu tệp truy cập. Tính năng này cho phép đọc các điểm kiểm tra (checkpoints) và trạng thái hoạt động (health), không bao gồm các cuộc trò chuyện hay các điều khiển của trình thu thập dữ liệu.
+2. **Kênh và khoảng thời gian.** Chọn một kênh Telegram hoặc webhook Discord và nhập địa chỉ bộ thu có thể truy cập được từ witness. Lưu tệp cài đặt.
 3. **Khởi chạy.** Đặt các tệp `witness.json`, `witness-token.txt` và `bot-token.txt` đã được tạo trên máy chủ chứng thực vào cùng một thư mục. Vui lòng thực thi các lệnh dưới đây trong môi trường dự án đã cài đặt.
 
 ```
@@ -50,6 +50,8 @@ python -m tgwitness.witness run --config witness.json
 ```
 
 Việc tải xuống các tệp tin sẽ không khởi động công cụ TgWitness. Vui lòng kiểm tra xem bài đăng có chữ ký đầu tiên đã xuất hiện trong kênh hay chưa, sau đó lưu lại dấu vân tay khóa công khai của công cụ TgWitness một cách riêng biệt.
+
+Đối với Discord, hãy lưu URL webhook của kênh dưới dạng `discord-webhook.txt` thay vì mã thông báo bot. Một nhân chứng đăng bài lên một nơi, một kênh Telegram hoặc một kênh Discord; các bản kiểm tra dài hơn một tin nhắn Discord sẽ được gửi dưới dạng tệp đính kèm.
 
 ## Chọn tần suất đăng tải
 
