@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/uk/
 
-[Відкрите програмне забезпечення / v0.8.0](https://phishdestroy.github.io/TgWitness/uk/docs/reference/changelog/)
+[Відкрите програмне забезпечення / v0.8.1](https://phishdestroy.github.io/TgWitness/uk/docs/reference/changelog/)
 
 Збирайте повідомлення Telegram, зберігайте їхні зміни та експортуйте підписаний запис.
 
@@ -261,7 +261,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 Для встановлення з вихідного коду токен знаходиться в `data/live/panel-token.txt`. Для входу в Telegram можна використовувати вбудовані налаштування API або власну пару з [my.telegram.org](https://my.telegram.org). [Повна інструкція з налаштування ↗](https://phishdestroy.github.io/TgWitness/uk/docs/reference/quickstart/)
 
-**TgWitness 0.8.0** [Що нового →](https://phishdestroy.github.io/TgWitness/uk/docs/reference/changelog/) · [Функції та відомі обмеження →](https://phishdestroy.github.io/TgWitness/uk/docs/reference/features/)
+**TgWitness 0.8.1** [Що нового →](https://phishdestroy.github.io/TgWitness/uk/docs/reference/changelog/) · [Функції та відомі обмеження →](https://phishdestroy.github.io/TgWitness/uk/docs/reference/features/)
 
 ## Чіткі інструкції. Корисний наступний крок.
 

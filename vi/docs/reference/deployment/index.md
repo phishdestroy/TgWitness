@@ -127,7 +127,7 @@ Tính năng này sẽ khả dụng sau khi [quy trình phát hành](https://phis
 Sao chép `deploy/env.example` vào `.env`. Đặt `TGWITNESS_IMAGE` thành phiên bản đã được phát hành, bằng cách sử dụng đường dẫn kho lưu trữ **viết thường**, ví dụ:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
 TGWITNESS_PORT=8787
 ```
 

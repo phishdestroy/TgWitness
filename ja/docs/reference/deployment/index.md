@@ -127,7 +127,7 @@ docker compose logs witness                     # witness key fingerprint
 `deploy/env.example`を`.env`にコピーしてください。`TGWITNESS_IMAGE`には、公開版を指定してください。その際、 リポジトリパスは**小文字で**指定してください。例：
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
 TGWITNESS_PORT=8787
 ```
 

@@ -127,7 +127,7 @@ Zostanie to udostępnione po pomyślnym zakończeniu [procesu wydania](https://p
 Skopiuj `deploy/env.example` do `.env`. Ustaw `TGWITNESS_IMAGE` na opublikowaną wersję, używając ścieżki do repozytorium **zapisanej małymi literami**, na przykład:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
 TGWITNESS_PORT=8787
 ```
 

@@ -127,7 +127,7 @@ docker compose logs witness                     # witness key fingerprint
 محتویات `deploy/env.example` را به `.env` کپی کنید. `TGWITNESS_IMAGE` را با استفاده از نسخه منتشرشده و مسیر مخزن **با حروف کوچک** تنظیم کنید، برای مثال:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
 TGWITNESS_PORT=8787
 ```
 

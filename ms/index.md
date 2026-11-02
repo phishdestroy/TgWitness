@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/ms/
 
-[Sumber terbuka / v0.8.0](https://phishdestroy.github.io/TgWitness/ms/docs/reference/changelog/)
+[Sumber terbuka / v0.8.1](https://phishdestroy.github.io/TgWitness/ms/docs/reference/changelog/)
 
 Rekod mesej Telegram, pelihara perubahan mereka, dan eksport rekod yang disahkan.
 
@@ -261,7 +261,7 @@ Buka [127.0.0.1:8787](http://127.0.0.1:8787) selepas pelancaran.
 
 Untuk pemasangan sumber, token berada di `data/live/panel-token.txt`. Log masuk Telegram boleh menggunakan tetapan API terbina dalam atau pasangan anda sendiri dari [my.telegram.org](https://my.telegram.org). [Panduan penyediaan penuh ↗](https://phishdestroy.github.io/TgWitness/ms/docs/reference/quickstart/)
 
-**TgWitness 0.8.0** [Apa yang baru →](https://phishdestroy.github.io/TgWitness/ms/docs/reference/changelog/) · [Ciri-ciri dan had yang diketahui →](https://phishdestroy.github.io/TgWitness/ms/docs/reference/features/)
+**TgWitness 0.8.1** [Apa yang baru →](https://phishdestroy.github.io/TgWitness/ms/docs/reference/changelog/) · [Ciri-ciri dan had yang diketahui →](https://phishdestroy.github.io/TgWitness/ms/docs/reference/features/)
 
 ## Arahan yang jelas. Langkah seterusnya yang berguna.
 

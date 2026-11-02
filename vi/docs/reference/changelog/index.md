@@ -6,8 +6,14 @@ Mọi thay đổi theo từng phiên bản, bao gồm cả những thay đổi c
 
 ## Unreleased
 
+## 0.8.1 preview · 2 November 2026
+
+- Build the runtime, sealed and media containers on a pinned Wolfi/glibc base with Python 3.12 and hash-locked system packages for AMD64 and ARM64, authenticated through signed repository indexes.
+- Build Tesseract 5.5.4 from verified source and pin its English and Russian recognition data. Preserve the existing Python dependency locks.
+- Check real OCR and offline transcription, signed multilingual PDFs, installed source measurements and container restrictions. Include all container build inputs in the source archive and scan the ARM64 runtime before publication.
 - Integrate **Extras → Independent capture** into the English main panel: separate browser/AyuGram connections, encrypted control tokens, pinned identity checks, tab selection, start/pause, capture options, snapshots, checkpoints and verified original ZIP downloads. Add optional Docker control-network wiring; keep recorders independently runnable and all connections disabled by default.
 - Add the optional, independent `tgwitness-capture` preview: selected-tab Chromium PNG/MHTML, consistent AyuGram SQLite snapshots, separately enabled silent video, Ed25519 event chains, signed ZIP/HTML reports and standalone verification. Each recorder starts disabled and keeps its own key and storage. Optional Compose profiles are separate from ordinary startup. A read-only, separately operated witness can retain challenge-bound checkpoints and sign receipts.
+- Include the independent capture package in Phala source bundles and their manifests, so the panel can import the capture integration after installation.
 
 ## 0.8.0 preview · 2 November 2026
 

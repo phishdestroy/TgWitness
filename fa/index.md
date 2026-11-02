@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/fa/
 
-[متن‌باز / v0.8.0](https://phishdestroy.github.io/TgWitness/fa/docs/reference/changelog/)
+[متن‌باز / v0.8.1](https://phishdestroy.github.io/TgWitness/fa/docs/reference/changelog/)
 
 پیام‌های تلگرام را ضبط کنید، تغییرات آن‌ها را حفظ کنید و یک رکورد امضا شده صادر کنید.
 
@@ -261,7 +261,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 برای نصب از سورس، توکن در `data/live/panel-token.txt` قرار دارد. ورود به تلگرام می‌تواند از تنظیمات API داخلی استفاده کند یا از جفت توکن خودتان از [my.telegram.org](https://my.telegram.org). [راهنمای کامل راه‌اندازی ↗](https://phishdestroy.github.io/TgWitness/fa/docs/reference/quickstart/)
 
-**TgWitness 0.8.0** [آخرین تغییرات →](https://phishdestroy.github.io/TgWitness/fa/docs/reference/changelog/) · [ویژگی‌ها و محدودیت‌های شناخته‌شده →](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/)
+**TgWitness 0.8.1** [آخرین تغییرات →](https://phishdestroy.github.io/TgWitness/fa/docs/reference/changelog/) · [ویژگی‌ها و محدودیت‌های شناخته‌شده →](https://phishdestroy.github.io/TgWitness/fa/docs/reference/features/)
 
 ## دستورالعمل‌های واضح. یک گام بعدی مفید.
 

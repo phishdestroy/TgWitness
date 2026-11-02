@@ -127,7 +127,7 @@ Diese wird nach einem erfolgreichen [Release-Workflow](https://phishdestroy.gith
 Kopieren Sie `deploy/env.example` nach `.env`. Setzen Sie `TGWITNESS_IMAGE` auf die veröffentlichte Version, wobei Sie den Repository-Pfad **in Kleinbuchstaben** verwenden, zum Beispiel:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
 TGWITNESS_PORT=8787
 ```
 

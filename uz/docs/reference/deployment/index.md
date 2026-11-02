@@ -127,7 +127,7 @@ Bu muvaffaqiyatli [reliz jarayoni](https://phishdestroy.github.io/TgWitness/uz/d
 `deploy/env.example` nusxasini `.env` ga nusxalang. `TGWITNESS_IMAGE` ni e'lon qilingan versiyaga, **kichik harfli** ombor yo'lidan foydalangan holda o'rnating, masalan:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
 TGWITNESS_PORT=8787
 ```
 

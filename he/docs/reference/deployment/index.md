@@ -127,7 +127,7 @@ docker compose logs witness                     # witness key fingerprint
 העתיקו את `deploy/env.example` ל-`.env`. הגדירו את `TGWITNESS_IMAGE` לגרסה שפורסמה, תוך שימוש בנתיב המאגר **באותיות קטנות**, לדוגמה:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
 TGWITNESS_PORT=8787
 ```
 

@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/hi/
 
-[ओपन सोर्स / v0.8.0](https://phishdestroy.github.io/TgWitness/hi/docs/reference/changelog/)
+[ओपन सोर्स / v0.8.1](https://phishdestroy.github.io/TgWitness/hi/docs/reference/changelog/)
 
 टेलीग्राम संदेशों को कैप्चर करें, उनके परिवर्तनों को संरक्षित करें, और एक हस्ताक्षरित रिकॉर्ड निर्यात करें।
 
@@ -261,7 +261,7 @@ docker compose exec tgwitness cat /data/panel-token.txt
 
 सोर्स इंस्टॉल्स के लिए, टोकन `data/live/panel-token.txt` में है। टेलीग्राम साइन-इन अंतर्निहित API सेटिंग्स या [my.telegram.org](https://my.telegram.org) से आपके अपने जोड़े का उपयोग कर सकता है। [पूर्ण सेटअप गाइड ↗](https://phishdestroy.github.io/TgWitness/hi/docs/reference/quickstart/)
 
-**TgWitness 0.8.0** [क्या नया है →](https://phishdestroy.github.io/TgWitness/hi/docs/reference/changelog/) · [विशेषताएँ और ज्ञात सीमाएँ →](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/)
+**TgWitness 0.8.1** [क्या नया है →](https://phishdestroy.github.io/TgWitness/hi/docs/reference/changelog/) · [विशेषताएँ और ज्ञात सीमाएँ →](https://phishdestroy.github.io/TgWitness/hi/docs/reference/features/)
 
 ## स्पष्ट निर्देश। एक उपयोगी अगला कदम।
 

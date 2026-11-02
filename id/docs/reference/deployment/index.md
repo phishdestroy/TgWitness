@@ -127,7 +127,7 @@ Fitur ini tersedia setelah [alur kerja rilis](https://phishdestroy.github.io/TgW
 Salin `deploy/env.example` ke `.env`. Atur `TGWITNESS_IMAGE` ke versi yang telah dipublikasikan, dengan menggunakan jalur repositori **huruf kecil**, misalnya:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
 TGWITNESS_PORT=8787
 ```
 

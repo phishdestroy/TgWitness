@@ -8,7 +8,7 @@ Signed exports let recipients verify file integrity and the signing key offline.
 
 The panel brings together isolated account workspaces, supported session imports, parallel chat export, cross-chat people profiles, observed name changes, bot-button interaction receipts, saved attachments and offline HTML/JSON evidence. Case Board keeps team annotations linked to saved records. The report studio offers eight designs, content choices and a data preview; minimized sharing copies control what recipients receive. Optional witnesses, timestamps and encrypted off-site copies add records outside the local journal. Archive search, AI analysis, OCR, transcription, MCP and signed webhooks work with the records you have collected.
 
-These guides track the `main` source branch. The project version is `0.8.0`; check the changelog and release notes before assuming a source feature is included in a downloaded package.
+These guides track the `main` source branch. The project version is `0.8.1`; check the changelog and release notes before assuming a source feature is included in a downloaded package.
 
 Choose an entry below for the exact workflow, commands and limits. Each guide has a Markdown edition; its canonical HTML page retains diagrams, animations and interactive examples. Translated pages also expose Markdown through `rel=alternate` links.
 
@@ -3109,7 +3109,7 @@ This becomes available after a successful [release workflow](https://phishdestro
 Copy `deploy/env.example` to `.env`. Set `TGWITNESS_IMAGE` to the published version, using the **lowercase** repository path, for example:
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
 TGWITNESS_PORT=8787
 ```
 
@@ -6347,8 +6347,14 @@ Every change by version, including the changes not yet released.
 
 ## Unreleased
 
+## 0.8.1 preview · 2 November 2026
+
+- Build the runtime, sealed and media containers on a pinned Wolfi/glibc base with Python 3.12 and hash-locked system packages for AMD64 and ARM64, authenticated through signed repository indexes.
+- Build Tesseract 5.5.4 from verified source and pin its English and Russian recognition data. Preserve the existing Python dependency locks.
+- Check real OCR and offline transcription, signed multilingual PDFs, installed source measurements and container restrictions. Include all container build inputs in the source archive and scan the ARM64 runtime before publication.
 - Integrate **Extras → Independent capture** into the English main panel: separate browser/AyuGram connections, encrypted control tokens, pinned identity checks, tab selection, start/pause, capture options, snapshots, checkpoints and verified original ZIP downloads. Add optional Docker control-network wiring; keep recorders independently runnable and all connections disabled by default.
 - Add the optional, independent `tgwitness-capture` preview: selected-tab Chromium PNG/MHTML, consistent AyuGram SQLite snapshots, separately enabled silent video, Ed25519 event chains, signed ZIP/HTML reports and standalone verification. Each recorder starts disabled and keeps its own key and storage. Optional Compose profiles are separate from ordinary startup. A read-only, separately operated witness can retain challenge-bound checkpoints and sign receipts.
+- Include the independent capture package in Phala source bundles and their manifests, so the panel can import the capture integration after installation.
 
 ## 0.8.0 preview · 2 November 2026
 

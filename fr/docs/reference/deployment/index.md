@@ -127,7 +127,7 @@ Ce site devient accessible une fois le [workflow de publication](https://phishde
 Copiez `deploy/env.example` vers `.env`. Définissez `TGWITNESS_IMAGE` sur la version publiée, en utilisant le chemin d'accès au dépôt **en minuscules**, par exemple :
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
 TGWITNESS_PORT=8787
 ```
 

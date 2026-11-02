@@ -127,7 +127,7 @@ docker compose logs witness                     # witness key fingerprint
 將 `deploy/env.example` 複製到 `.env`。將 `TGWITNESS_IMAGE` 設定為已發布的版本，並使用 **小寫的**儲存庫路徑，例如：
 
 ```
-TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.0
+TGWITNESS_IMAGE=ghcr.io/your-owner/your-repository:0.8.1
 TGWITNESS_PORT=8787
 ```
 

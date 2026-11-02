@@ -2,7 +2,7 @@
 
 Canonical page: https://phishdestroy.github.io/TgWitness/pt/
 
-[Código aberto / v0.8.0](https://phishdestroy.github.io/TgWitness/pt/docs/reference/changelog/)
+[Código aberto / v0.8.1](https://phishdestroy.github.io/TgWitness/pt/docs/reference/changelog/)
 
 Capture mensagens do Telegram, preserve suas alterações e exporte um registro assinado.
 
@@ -261,7 +261,7 @@ Acesse [127.0.0.1:8787](http://127.0.0.1:8787) após a inicialização.
 
 Para instalações a partir do código-fonte, o token é `data/live/panel-token.txt`. O login no Telegram pode ser feito usando as configurações da API integrada ou seu próprio par de chaves obtido em [my.telegram.org](https://my.telegram.org). [Guia completo de configuração ↗](https://phishdestroy.github.io/TgWitness/pt/docs/reference/quickstart/)
 
-**TgWitness 0.8.0** [Novidades →](https://phishdestroy.github.io/TgWitness/pt/docs/reference/changelog/) · [Recursos e limitações conhecidas →](https://phishdestroy.github.io/TgWitness/pt/docs/reference/features/)
+**TgWitness 0.8.1** [Novidades →](https://phishdestroy.github.io/TgWitness/pt/docs/reference/changelog/) · [Recursos e limitações conhecidas →](https://phishdestroy.github.io/TgWitness/pt/docs/reference/features/)
 
 ## Instruções claras. Um próximo passo útil.
 
