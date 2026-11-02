@@ -16,6 +16,8 @@
 - [Keep a source register](#keep-a-source-register)
 - [Follow changes and connections](#follow-changes-and-connections)
 - [Record deliberate actions](#record-deliberate-actions)
+- [Keep team notes on Case Board](#keep-team-notes-on-case-board)
+- [Work with the saved archive](#work-with-the-saved-archive)
 - [Hand over the case](#hand-over-the-case)
 
 </details>
@@ -64,6 +66,21 @@ An unknown action outcome should be checked before retrying. Callback presses in
 
 
 <picture><source media="(prefers-reduced-motion: reduce)" srcset="../assets/presentation/readme-divider-static.svg"><img src="../assets/presentation/readme-divider.svg" width="1200" height="28" alt=""></picture>
+
+## Keep team notes on Case Board
+
+Open **Investigation → Case Board** in Standard or Expert mode. **To board** (or **B**)
+bookmarks a journal record or a saved message. Select text in a saved message for
+**Highlight → board**, Shift-click two records in one chat for **Slice between**, or
+save Journal's current filters as a slice. Sort cards into collections, discuss them
+in threads and set a team status. **Presentation** walks through a collection without
+editing controls.
+
+Notes are the team's opinion, not observations. They have their own signed history,
+are never sent to Telegram, webhooks, Apprise or AI, and need board rights in
+[Access](Access.md). Reports label them as team notes; minimized handovers include
+them only when selected. Evidence ZIPs carry the board, and slices export as signed
+JSON. See [Case Board](../CASE-BOARD.md).
 
 ## Work with the saved archive
 

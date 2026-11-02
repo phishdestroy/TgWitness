@@ -148,6 +148,12 @@ Compare attachment hashes and their associated message references. Identical
 files do not establish a creator, forwarder or common operator. Equal names and
 similar avatars alone do not join two Telegram IDs into one person.
 
+Keep the team's working notes on [Case Board](CASE-BOARD.md): bookmark the records
+you rely on, such as #146, #188 and #205, highlight the exact destination string, and
+save a slice of every recorded action between two records or in a time range. Notes
+and statuses are team opinions with their own signed history; they never become
+observations.
+
 ## 5. Build the cross-chat timeline
 
 Use saved versions in **Chats** and their **Journal record #…** links. In
@@ -197,6 +203,7 @@ Keep these together in an analyst-assembled case directory:
 | Signed full chat exports | Current visible-history acquisition, separate from the observation journal |
 | Trusted fingerprints and earlier checkpoints | Key identity and retained journal boundaries |
 | Witness artifacts, if configured | Separate journal, signed posts and witness fingerprint |
+| Case Board export and slices, if used | Team notes and selected records, labelled as opinions and checked against the evidence ZIP |
 | Verification results and delivered-file hashes | What was checked, which bytes were transferred and to whom |
 
 From a trusted installation, with filenames and each workspace's actual fingerprint:
@@ -205,6 +212,7 @@ From a trusted installation, with filenames and each workspace's actual fingerpr
 python -m tgwitness.verify evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --checkpoint retained-checkpoint.json
 python -m tgwitness.verify profiles-operations.json --fingerprint TRUSTED_PUBLIC_KEY_SHA256 --evidence evidence.zip
 python -m tgwitness.verify history-channel.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
+python -m tgwitness.verify board-slice.json --evidence evidence.zip --fingerprint TRUSTED_PUBLIC_KEY_SHA256
 ```
 
 Retain the actual verification results and original artifacts. The top-level case
