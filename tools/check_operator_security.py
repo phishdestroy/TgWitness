@@ -111,6 +111,12 @@ def disclosure_checks():
             assert app.state.collector.policy_state() == before
             accepted = http.post('/api/network/policy', headers=root_headers, json={'exposure': 'hide', 'outside_enabled': False})
             assert accepted.status_code == 200, accepted.content
+            # A later Telegram-route change cannot remove the only outside route.
+            proxy = {'kind': 'socks5', 'host': '127.0.0.1', 'port': 1080}
+            assert http.post('/api/network', headers=root_headers, json=proxy).status_code == 200
+            assert http.post('/api/network/policy', headers=root_headers, json={'exposure': 'hide', 'outside_enabled': True}).status_code == 200
+            assert http.post('/api/network', headers=root_headers, json={'kind': 'mtproxy_auto'}).status_code == 400
+            assert app.state.collector.network_config().kind == 'socks5'
             assert 'PrivateBrowser' not in json.dumps(vault.read('access'))
             assert 'PrivateBrowser' not in json.dumps(access.state())
             archive = export_file(store, vault, 'zip')

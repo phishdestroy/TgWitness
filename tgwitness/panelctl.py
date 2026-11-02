@@ -427,7 +427,7 @@ def guide(root, print_text=False, write_only=False):
     if write_only:
         return
     if print_text or os.environ.get("SSH_CONNECTION"):
-        print((root / "START-HERE.txt").read_text())
+        print((root / "START-HERE.txt").read_text(encoding="utf-8"))
     else:
         print("Operator guide: " + str(path))
         if sys.stdout.isatty():

@@ -987,6 +987,10 @@ class Collector:
     async def set_network(self, config):
         if self.running:
             raise ValueError("Pause observation before changing the Telegram route.")
+        policy = self.route_policy()
+        if (policy['exposure'] == 'hide' and policy['outside_enabled']
+                and config.kind not in ('socks5', 'http') and self.outside_proxy() is None):
+            raise ValueError("Set a SOCKS5 or HTTP proxy for requests outside Telegram, or turn those requests off.")
         if config.kind == "direct" and self.route_policy()["exposure"] != "tunnel":
             raise ValueError("A direct route is allowed only in the mode for a server behind a tunnel or VPN. "
                              "Change the IP mode first.")
