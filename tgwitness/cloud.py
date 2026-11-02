@@ -13,7 +13,9 @@ signing key on that server; the panel is reached only through the tunnel. A veri
 read-only credentials compares the provider's own log and firewall, the tunnel connector's
 address and the collector's signed statement. "generic" installs on any server by hand with
 install.sh and is never more than self-attested. Nothing here shows what a provider can do on
-its own hypervisor.
+its own hypervisor, except on "phala": there the collector runs in an Intel TDX confidential VM,
+its compose pins the commit's source files and both images by hash, and the verifier checks the
+processor's quote over the collector's statement to Intel's root itself (tgwitness.tdx).
 
 --quick-tunnel needs no domain and no Cloudflare account: cloudflared opens a random
 https://*.trycloudflare.com address that changes whenever it restarts. The server posts each
@@ -25,6 +27,7 @@ import argparse
 import base64
 import hashlib
 import hmac
+import io
 import ipaddress
 import json
 import os
@@ -33,6 +36,7 @@ import secrets
 import shutil
 import subprocess
 import sys
+import tarfile
 import time
 import uuid
 from pathlib import Path
@@ -41,8 +45,8 @@ import requests
 from cryptography.exceptions import InvalidSignature
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 
-from . import __version__
-from .assurance import redact_user_data, user_data_hashes
+from . import __version__, tdx
+from .assurance import redact_user_data, start_binding, user_data_hashes
 from .provenance import source_files, source_tree_sha256
 from .providers import NAMES, get
 from .providers import base
@@ -57,6 +61,7 @@ PANEL_SERVICE = "http://127.0.0.1:8787"
 WITNESS_PATHS = r"^/(profiles/[^/]+/)?api/(witness/head|assurance)$"
 CF, COLLECTOR, JOURNAL, RECORD = ("Cloudflare API", "collector statement (self-reported)", "evidence journal",
                                   "deployment record")
+TDX_SOURCE = "Intel TDX quote (checked to Intel's root)"
 NAME = re.compile(r"[a-z0-9]([a-z0-9-]{0,48}[a-z0-9])?")
 SLUG = re.compile(r"[A-Za-z0-9][A-Za-z0-9._/-]{0,99}")
 HOST = re.compile(r"(?=.{4,253}$)([a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}")
@@ -94,8 +99,12 @@ from tgwitness.assurance import redact_user_data
 if Path(cloud.__file__).resolve().parent != source / "tgwitness":
     sys.exit("the checkout's own tgwitness package was not the one imported")
 spec, tunnel = json.load(sys.stdin)
-build = cloud.install_script if spec["provider"] == "generic" else cloud.cloud_init
-sys.stdout.buffer.write(redact_user_data(build(spec, tunnel, "x" * 43, "x" * 32)).encode())
+if spec["provider"] == "phala":
+    text = cloud.phala_compose(spec, tunnel, cloud.source_manifest(cloud.tree_files(source)))
+else:
+    build = cloud.install_script if spec["provider"] == "generic" else cloud.cloud_init
+    text = redact_user_data(build(spec, tunnel, "x" * 43, "x" * 32))
+sys.stdout.buffer.write(text.encode())
 """
 REFERENCES = {}
 ESTABLISHES = (
@@ -124,6 +133,31 @@ GATEWAY_LIMITS = (
     "not in the Gateway log. Cloudflare keeps that log 24 hours on the free plan; the collector's journal "
     "keeps a copy only when evidence mode copies it.",
 )
+PHALA_ESTABLISHES = (
+    "Intel signs, through a chain to its SGX Root CA that this verifier checks itself against Intel's revocation "
+    "lists and TCB Info, that the collector's signed statement (its key, this request's challenge, the commit and "
+    "its source tree) was produced inside an Intel TDX confidential VM that does not run in debug mode and cannot "
+    "be migrated, on a platform at the TCB level shown.",
+    "That VM's RTMR3, replayed from dstack's event log, measures the compose the collector reports. The compose "
+    "pins the deployed commit's source files by hash and both container images by digest, and installs nothing "
+    "else; its bytes equal the compose the commit's own code builds.",
+    "With --tdx-measurements, MRTD and RTMR0-2 equal the values computed from the dstack OS image: the firmware, "
+    "kernel and command line are that image's, which has no SSH.",
+    "Every collector start in the journal carries such a quote over its run, its key and its host measurement.",
+    "Cloudflare reports the tunnel and its ingress; the panel is reachable only through it.",
+)
+PHALA_QUICK = ("With a quick tunnel no Cloudflare account keeps records of the tunnel; the panel's address is "
+               "whatever the CVM last posted, and the quote, not the address, identifies the collector.")
+
+
+def phala_establishes(record):
+    return PHALA_ESTABLISHES[:-1] if record.get("beacon") else PHALA_ESTABLISHES
+COMMON_LIMITS = (
+    "Provider and Cloudflare logs are kept for limited periods; produce this report early and keep it "
+    "with the evidence.",
+    "Panel actions through the tunnel are not SSH sessions; they are recorded in the signed journal.",
+    "Message authenticity still rests on Telegram and on what the account could see; see EVIDENCE.md.",
+)
 LIMITS = (
     "The initial installer is a trust boundary. A malicious bootstrap could copy the signing key and falsify "
     "the collector's measurements without a later SSH login. Matching installer/source hashes reported by "
@@ -131,15 +165,24 @@ LIMITS = (
     "The collector's host measurements (SSH listeners, logins, boot) are self-reported: root on the server "
     "could falsify them. They support, not replace, the provider and Cloudflare records.",
     "The provider and its staff control the hypervisor, disks and network; nothing here excludes them.",
-    "Provider and Cloudflare logs are kept for limited periods; produce this report early and keep it "
-    "with the evidence.",
-    "Panel actions through the tunnel are not SSH sessions; they are recorded in the signed journal.",
-    "Message authenticity still rests on Telegram and on what the account could see; see EVIDENCE.md.",
+    *COMMON_LIMITS,
     "Without hardware attestation (AMD SEV-SNP or Intel TDX) a substitution during the first boot is not "
     "detected: root on the server, or whoever controls its image or hypervisor, could hand the collector forged "
     "metadata answers, user data and hashes before it signs them. The byte comparison with the reference "
     "installer shows what the collector was given, not what the provider delivered.",
 )
+# Phala: the images the compose pins, by digest, and what of the commit's tree it installs.
+PHALA_IMAGES = {"python": "python:3.12-slim@sha256:aa943ce411423c7582288f18707ff66eddcbaeb510502d747a72aeb34f30d159",
+                "cloudflared": "cloudflare/cloudflared:2026.10.7"
+                               "@sha256:4955524aeaa379e154023d5a027c250f7b35041a2e7e950cf13f144bc9b9c5ba"}
+SOURCE_NEEDED = ("pyproject.toml", "README.md", "LICENSE", "NOTICE", "deploy/build.lock", "deploy/requirements.lock")
+GITHUB = re.compile(r"https://github\.com/([A-Za-z0-9-]{1,39})/([A-Za-z0-9._-]{1,100}?)(\.git)?")
+PHALA_ENV = ("TGWITNESS_TOKEN", "TGWITNESS_TUNNEL_TOKEN")
+# The app-compose settings deploy sends; anything else the measured compose holds is reported.
+PHALA_SETTINGS = {"kms_enabled": True, "gateway_enabled": False, "public_logs": False, "public_sysinfo": False,
+                  "public_tcbinfo": True, "no_instance_id": False, "secure_time": True}
+EXECUTABLE_SETTINGS = ("pre_launch_script", "bash_script", "init_script", "init_scripts")
+TDX_OK = ("UpToDate",)
 
 
 class Cloudflare(Api):
@@ -214,6 +257,11 @@ def specification(args, resolve=resolve_commit):
                 raise DeployError("--" + option.replace("_", "-") + " has an unexpected value")
     if not REPOSITORY.fullmatch(args.repository):
         raise DeployError("--repository must be an https:// Git URL without credentials")
+    if args.provider == "phala" and not GITHUB.fullmatch(args.repository):
+        raise DeployError("--repository must be a GitHub repository for phala: the CVM downloads the commit's "
+                          "archive from GitHub and checks every file against the hashes in its measured compose")
+    if args.provider == "phala" and (args.debug_ssh_key or args.debug_ssh_from):
+        raise DeployError("--debug-ssh-* do not apply to phala: a production dstack image has no SSH")
     quick = bool(getattr(args, "quick_tunnel", False))
     gateway = bool(getattr(args, "gateway_dns", False))
     if gateway:
@@ -553,9 +601,7 @@ def files(spec, tunnel_id, panel_token, tunnel_token):
     for a quick tunnel or Gateway DNS, their own files."""
     if not TUNNEL_TOKEN.fullmatch(tunnel_token) or not re.fullmatch(r"[A-Za-z0-9_-]{24,256}", panel_token):
         raise DeployError("Unexpected token format; refusing to write it into the installer")
-    description = {"format": "tgwitness-deployment-v1", "tunnel_id": tunnel_id,
-                   **{k: spec[k] for k in ("deployment_id", "name", "mode", "provider", "repository", "commit",
-                                           "panel_host", "witness_host", "ssh")}}
+    description = deployment_description(spec, tunnel_id)
     extra = []
     if spec.get("beacon"):
         if not BEACON.fullmatch(spec["beacon"]):
@@ -633,6 +679,246 @@ def install_script(spec, tunnel_id, panel_token, tunnel_token):
     return "\n".join(lines) + "\n"
 
 
+PHALA_INSTALLER = """\
+import hashlib, io, json, os, subprocess, sys, tarfile, urllib.request
+from pathlib import Path
+ARCHIVE = "@ARCHIVE@"
+MANIFEST = "@MANIFEST@"
+NEEDED = @NEEDED@
+DESCRIPTION = json.loads(@DESCRIPTION@)
+SOURCE, VENV = Path("/opt/tgwitness/source"), Path("/opt/tgwitness/.venv")
+
+
+def wanted(path):
+    return path in NEEDED or (path.startswith("tgwitness/") and "__pycache__" not in path.split("/")
+                              and not path.endswith(".pyc"))
+
+
+def install():
+    # Only files whose hashes give MANIFEST are installed; anything else in the archive is ignored.
+    with urllib.request.urlopen(ARCHIVE, timeout=300) as response:
+        data = response.read(128 * 1024 * 1024)
+    files = {}
+    with tarfile.open(fileobj=io.BytesIO(data), mode="r:gz") as archive:
+        for member in archive.getmembers():
+            path = member.name.partition("/")[2]
+            if member.isfile() and wanted(path):
+                files[path] = archive.extractfile(member).read()
+    digests = {path: hashlib.sha256(body).hexdigest() for path, body in files.items()}
+    found = hashlib.sha256(json.dumps(digests, ensure_ascii=False, sort_keys=True,
+                                      separators=(",", ":")).encode()).hexdigest()
+    if found != MANIFEST:
+        sys.exit("TgWitness: the downloaded source is not the deployed commit's (" + found + ")")
+    for path, body in files.items():
+        (SOURCE / path).parent.mkdir(parents=True, exist_ok=True)
+        (SOURCE / path).write_bytes(body)
+    pip = [str(VENV / "bin" / "pip"), "install", "--no-cache-dir"]
+    subprocess.run([sys.executable, "-m", "venv", str(VENV)], check=True)
+    subprocess.run(pip + ["--require-hashes", "-r", str(SOURCE / "deploy/build.lock")], check=True)
+    subprocess.run(pip + ["--require-hashes", "--no-build-isolation", "-r",
+                          str(SOURCE / "deploy/requirements.lock")], check=True)
+    subprocess.run(pip + ["--no-deps", "--no-build-isolation", str(SOURCE)], check=True)
+    (VENV / "tgwitness-source").write_text(MANIFEST)
+
+
+marker = VENV / "tgwitness-source"
+if not marker.exists() or marker.read_text() != MANIFEST:
+    install()
+Path("/etc/tgwitness").mkdir(parents=True, exist_ok=True)
+Path("/etc/tgwitness/assurance.json").write_text(json.dumps(DESCRIPTION, sort_keys=True) + "\\n")
+python = str(VENV / "bin" / "python")
+os.execv(python, [python, "-m", "tgwitness", "--host", "127.0.0.1", "--port", "8787"])
+"""
+
+PHALA_COMPOSE = """\
+# TgWitness high-assurance deployment @DEPLOYMENT@ on Phala Cloud (Intel TDX), commit @COMMIT@.
+# The collector installs only the commit's files whose hashes give source manifest @MANIFEST@;
+# both images are pinned by digest. Secrets arrive encrypted to this application and are not measured.
+services:
+  collector:
+    image: @PYTHON@
+    restart: unless-stopped
+    environment:
+      TGWITNESS_TOKEN: ${TGWITNESS_TOKEN}
+      TGWITNESS_DATA: /data
+      TGWITNESS_ASSURANCE: phala
+      TGWITNESS_NO_BROWSER: "1"
+      PYTHONDONTWRITEBYTECODE: "1"
+      PIP_DISABLE_PIP_VERSION_CHECK: "1"
+    volumes:
+      - tgwitness-data:/data
+      - /var/run/dstack.sock:/var/run/dstack.sock
+    command:
+      - python
+      - -c
+      - |
+@INSTALLER@
+@TUNNEL@
+volumes:
+  tgwitness-data:
+"""
+
+PHALA_TUNNEL = """\
+  tunnel:
+    image: @CLOUDFLARED@
+    restart: unless-stopped
+    network_mode: service:collector
+    environment:
+      TUNNEL_TOKEN: ${TGWITNESS_TUNNEL_TOKEN}
+    command: [tunnel, --no-autoupdate, run]
+"""
+
+# --quick-tunnel: a trycloudflare.com address, posted signed to the deployment's topic as on other providers.
+PHALA_QUICK_TUNNEL = """\
+  tunnel:
+    image: @CLOUDFLARED@
+    restart: unless-stopped
+    network_mode: service:collector
+    command: [tunnel, --no-autoupdate, --metrics, 127.0.0.1:20241, --url, http://127.0.0.1:8787]
+  address:
+    image: @PYTHON@
+    restart: unless-stopped
+    network_mode: service:collector
+    environment:
+      TGWITNESS_TUNNEL_TOKEN: ${TGWITNESS_TUNNEL_TOKEN}
+      TGWITNESS_BEACON: "@BEACON@"
+    command:
+      - python
+      - -c
+      - |
+@ADDRESS@
+"""
+
+
+def wanted_source(path):
+    return path in SOURCE_NEEDED or (path.startswith("tgwitness/") and "__pycache__" not in path.split("/")
+                                     and not path.endswith(".pyc"))
+
+
+def source_manifest(files):
+    """SHA-256 over the hashes of the files the CVM installs; the installer computes the same."""
+    digests = {path: hashlib.sha256(body).hexdigest() for path, body in files.items() if wanted_source(path)}
+    missing = [path for path in SOURCE_NEEDED if path not in digests]
+    if missing or not any(path.startswith("tgwitness/") for path in digests):
+        raise DeployError("the source is missing " + (", ".join(missing) or "the tgwitness package"))
+    return hashlib.sha256(canonical(digests)).hexdigest()
+
+
+def tarball_files(data):
+    """The regular files of a GitHub commit archive, without its top directory."""
+    files = {}
+    with tarfile.open(fileobj=io.BytesIO(data), mode="r:gz") as archive:
+        for member in archive.getmembers():
+            path = member.name.partition("/")[2]
+            if member.isfile() and wanted_source(path):
+                files[path] = archive.extractfile(member).read()
+    return files
+
+
+def tree_files(folder):
+    """The same files from a checkout of the commit (clone with core.autocrlf=false on Windows)."""
+    folder = Path(folder)
+    found = {path: (folder / path).read_bytes() for path in SOURCE_NEEDED if (folder / path).is_file()}
+    for item in sorted((folder / "tgwitness").rglob("*")):
+        path = item.relative_to(folder).as_posix()
+        if item.is_file() and wanted_source(path):
+            found[path] = item.read_bytes()
+    return found
+
+
+def archive_url(spec):
+    owner, name = GITHUB.fullmatch(spec["repository"]).group(1, 2)
+    return "https://codeload.github.com/" + owner + "/" + name + "/tar.gz/" + spec["commit"]
+
+
+def fetch_archive(spec, session=None):
+    response = (session or requests).get(archive_url(spec), timeout=300)
+    if response.status_code != 200:
+        raise DeployError(archive_url(spec) + " answered HTTP " + str(response.status_code))
+    return response.content
+
+
+def deployment_description(spec, tunnel_id):
+    description = {"format": "tgwitness-deployment-v1", "tunnel_id": tunnel_id,
+                   **{k: spec[k] for k in ("deployment_id", "name", "mode", "provider", "repository", "commit",
+                                           "panel_host", "witness_host", "ssh")}}
+    if spec.get("beacon"):
+        if not BEACON.fullmatch(spec["beacon"]):
+            raise DeployError("Unexpected address topic; refusing to write it into the installer")
+        description["beacon"] = spec["beacon"]
+    return description
+
+
+def phala_compose(spec, tunnel_id, manifest):
+    """The docker-compose file of a Phala deployment. dstack measures it (as part of app-compose) into
+    RTMR3 before anything runs; it holds no secret, so it is published as it is."""
+    if not re.fullmatch(r"[0-9a-f]{64}", manifest):
+        raise DeployError("Unexpected source manifest")
+    installer = PHALA_INSTALLER.replace("@ARCHIVE@", archive_url(spec)).replace("@MANIFEST@", manifest) \
+        .replace("@NEEDED@", repr(SOURCE_NEEDED)) \
+        .replace("@DESCRIPTION@", json.dumps(json.dumps(deployment_description(spec, tunnel_id), sort_keys=True)))
+    address = ADDRESS_SCRIPT.replace("@FORMAT@", ADDRESS_FORMAT)
+    if "$" in installer or "$" in address:
+        raise DeployError("The installer may not contain '$': docker compose would substitute it")
+    tunnel = PHALA_QUICK_TUNNEL.replace("@BEACON@", spec["beacon"]) if spec.get("beacon") else PHALA_TUNNEL
+    return PHALA_COMPOSE.replace("@TUNNEL@", tunnel.rstrip("\n")).replace("@ADDRESS@", block(address, 8).rstrip("\n")) \
+        .replace("@DEPLOYMENT@", spec["deployment_id"]).replace("@COMMIT@", spec["commit"]) \
+        .replace("@MANIFEST@", manifest).replace("@PYTHON@", PHALA_IMAGES["python"]) \
+        .replace("@CLOUDFLARED@", PHALA_IMAGES["cloudflared"]).replace("@INSTALLER@", block(installer, 8).rstrip("\n"))
+
+
+def app_compose(compose):
+    """What deploy asks Phala to measure: this compose, the names of the two secrets and the settings."""
+    return {"docker_compose_file": compose, "allowed_envs": list(PHALA_ENV), **PHALA_SETTINGS}
+
+
+def compose_check(text, reference=None, published=None):
+    """Status and detail of the app-compose the CVM measured against what deploy asked for: its compose
+    byte for byte equal to the one the commit's code builds, no other executable setting, the settings
+    deploy sent. Without a reference only the published copy can be compared."""
+    try:
+        found = json.loads(text)
+    except (TypeError, ValueError):
+        return "fail", "the measured app-compose is not JSON"
+    if not isinstance(found, dict):
+        return "fail", "the measured app-compose is not an object"
+    problems, notes = [], []
+    compose = found.get("docker_compose_file")
+    expected = reference if reference is not None else published
+    if not isinstance(compose, str):
+        problems.append("it holds no docker-compose file")
+    elif expected is not None and compose != expected:
+        problems.append("its compose differs from " + ("the one the commit builds" if reference is not None
+                        else "the published compose") + ", " + first_difference(expected, compose))
+    if found.get("runner", "docker-compose") != "docker-compose":
+        problems.append("runner " + str(found.get("runner")))
+    for name in EXECUTABLE_SETTINGS:
+        if found.get(name):
+            problems.append(name + " runs code the compose does not show")
+    if sorted(found.get("allowed_envs") or []) != sorted(PHALA_ENV):
+        problems.append("environment variables allowed: " + json.dumps(found.get("allowed_envs")))
+    for name, value in PHALA_SETTINGS.items():
+        if name in found and found[name] != value:
+            (problems if name in ("kms_enabled", "gateway_enabled", "no_instance_id") else notes).append(
+                name + " is " + json.dumps(found[name]))
+    if found.get("key_provider") not in (None, "kms") or found.get("local_key_provider_enabled"):
+        problems.append("its keys do not come from the KMS")
+    known = {"docker_compose_file", "allowed_envs", "runner", "manifest_version", "name", "features",
+             "tproxy_enabled", "key_provider", "key_provider_id", "local_key_provider_enabled", "docker_config",
+             "storage_fs", "swap_size", *PHALA_SETTINGS, *EXECUTABLE_SETTINGS}
+    if found.get("tproxy_enabled"):
+        problems.append("the gateway proxy is enabled")
+    notes += ["setting " + name + " = " + json.dumps(found[name])[:80] for name in sorted(set(found) - known)]
+    if problems:
+        return "fail", "; ".join(problems)
+    if expected is None:
+        return "unavailable", "pass --source with a checkout of the commit: its code builds the reference compose"
+    if notes:
+        return "review", "the compose is the reference; " + "; ".join(notes)
+    return "pass", "byte for byte the compose the " + ("commit's code builds" if reference is not None
+                                                     else "deployment published") + "; no other code, KMS keys, no gateway"
+
+
 def collector_statement(host, challenge=None, session=None):
     """The collector's signed /api/assurance answer, checked: format, signature, fingerprint, challenge."""
     url = "https://" + host + "/api/assurance" + ("?challenge=" + challenge if challenge else "")
@@ -696,6 +982,8 @@ def installer_spec(record):
                  and bool(DOH_SUBDOMAIN.fullmatch(gateway["doh_subdomain"])))
     if spec["beacon"] is not None:
         valid = valid and spec["panel_host"] is None and spec["witness_host"] is None and tunnel is None
+    if spec["provider"] == "phala":
+        valid = valid and bool(GITHUB.fullmatch(spec["repository"])) and spec["ssh"] == "disabled"
     generic, ssh = spec["provider"] == "generic", spec["ssh"]
     if ssh == "disabled":
         valid = valid and spec["mode"] == ("self-attested" if generic else "high-assurance")
@@ -782,6 +1070,108 @@ def installer_check(seen, commit, reference=None, published=None):
     return "pass", "byte for byte equal: " + ", ".join(compared)
 
 
+def hex_id(value):
+    return str(value or "").lower().removeprefix("0x")
+
+
+def intel_collateral(path=None, session=None):
+    """Intel's collateral per platform: from a file (dcap-qvl's JSON layout) or from Intel's PCS, once each."""
+    if path:
+        fixed = json.loads(Path(path).read_text(encoding="utf-8"))
+        return lambda raw: fixed
+    memo = {}
+
+    def collateral(raw):
+        fmspc = tdx.pck_extension(tdx.pem_chain(tdx.parse_quote(raw)["pck_chain"])[0])["fmspc"]
+        if fmspc not in memo:
+            memo[fmspc] = tdx.fetch_collateral(raw, session or requests.Session())
+        return memo[fmspc]
+    return collateral
+
+
+def intel_check(raw, collateral, now=None):
+    """(status, detail) of Intel's chain over a quote: pass only at TCB level UpToDate."""
+    try:
+        found = tdx.verify_quote(raw, collateral(raw), now)
+    except tdx.QuoteError as exc:
+        return "fail", str(exc), None
+    except (requests.RequestException, OSError, ValueError, KeyError) as exc:
+        return "unavailable", "Intel's collateral could not be read (" + type(exc).__name__ + "); pass " \
+               "--tdx-collateral with collateral fetched from Intel's PCS", None
+    advisories = (" with " + ", ".join(found["advisory_ids"][:12])) if found["advisory_ids"] else ""
+    return ("pass" if found["status"] in TDX_OK else "review"), (
+        "Intel TCB status " + found["status"] + advisories + "; quote v" + str(found["quote_version"]) + ", FMSPC "
+        + found["fmspc"] + ", TCB level of " + found["tcb_date"] + ", Intel collateral issued "
+        + found["collateral_issued"] + "; not in debug mode, not migratable"), found
+
+
+def attestation_checks(answer, record, reference=None, published=None, collateral=None, expected=None, now=None):
+    """The Intel TDX evidence beside a collector statement, check by check, as (check, status, title, detail):
+    the quote covers the statement, Intel vouches for the quote, RTMR3 measures the app-compose the collector
+    reports, that compose is the commit's, the CVM is the deployed one, its image is the expected one."""
+    statement = answer["statement"]
+    seen = (statement.get("host") or {}).get("provider") or {}
+    evidence = answer.get("tdx") or {}
+    title = "The collector answers with an Intel TDX quote whose RTMR3 replays from its event log"
+    if evidence.get("error") or not evidence.get("quote"):
+        return [("tdx_quote", "fail", title, evidence.get("error") or "the answer carries no quote")]
+    try:
+        raw, log = tdx.evidence(evidence)
+        quote, identity = tdx.measured(raw, log)
+    except (tdx.QuoteError, ValueError, KeyError, TypeError) as exc:
+        return [("tdx_quote", "fail", title, type(exc).__name__ + ": " + str(exc))]
+    checks = []
+    bound = quote["report"]["report_data"] == tdx.report_data(statement)
+    checks.append(("tdx_binding", "pass" if bound else "fail", "The quote covers this signed statement and its challenge",
+                   "report data is SHA-512 of the statement" if bound else
+                   "the quote's report data is not SHA-512 of this statement: it vouches for something else"))
+    status, detail, _ = intel_check(raw, collateral or intel_collateral(), now)
+    checks.append(("tdx_quote", status, "Intel vouches for the quote: a genuine TDX platform at a current TCB level",
+                   detail))
+    text = seen.get("app_compose")
+    same = isinstance(text, str) and hashlib.sha256(text.encode()).hexdigest() == identity["compose_hash"]
+    after = identity["after_ready"]
+    checks.append(("tdx_compose_hash", "fail" if not same else "review" if after else "pass",
+                   "RTMR3 measures the app-compose the collector reports",
+                   ("compose hash " + identity["compose_hash"] if same else "the reported app-compose is not the one "
+                    "RTMR3 measured (" + identity["compose_hash"] + ")")
+                   + ("; extended after boot: " + ", ".join(after[:10]) if after else "")))
+    status, detail = compose_check(text, reference, published) if same else \
+        ("fail", "not compared: the reported app-compose is not the measured one")
+    checks.append(("tdx_compose", status, "The measured compose is the deployed commit's and runs nothing else", detail))
+    server, problems, notes = record.get("server") or {}, [], []
+    if hex_id(identity["app_id"]) != hex_id(server.get("app_id")):
+        problems.append("app ID " + identity["app_id"] + " is not the deployed " + str(server.get("app_id")))
+    if identity["instance_id"] is None:
+        problems.append("no instance-id event")
+    elif hex_id(identity["instance_id"]) != hex_id(seen.get("instance_id")) or (
+            server.get("instance_id") and hex_id(identity["instance_id"]) != hex_id(server["instance_id"])):
+        problems.append("instance " + identity["instance_id"] + " is not the deployed or reported instance")
+    provider = identity["key_provider"]
+    name = provider.get("name") if isinstance(provider, dict) else provider
+    if name != "kms":
+        (notes if str(name).startswith("local") else problems).append("key provider " + json.dumps(provider)[:120])
+    if identity["storage_encrypted"] == "0":
+        problems.append("the data disk is not encrypted")
+    checks.append(("tdx_identity", "fail" if problems else "review" if notes else "pass",
+                   "The quote comes from the deployed CVM, with KMS keys and an encrypted disk",
+                   "; ".join(problems + notes) or "app " + identity["app_id"] + ", instance " + identity["instance_id"]
+                   + ", key provider kms" + (", disk encrypted" if identity["storage_encrypted"] == "1" else "")))
+    report = {k: v.hex() for k, v in quote["report"].items()}
+    status, detail = tdx.compare_measurements(report, expected)
+    try:
+        vm = json.loads(evidence.get("vm_config") or "{}")
+    except ValueError:
+        vm = {}
+    images = {hex_id(h) for h in (vm.get("os_image_hash"), identity["os_image_hash"], server.get("os_image_hash")) if h}
+    if len(images) > 1:
+        status, detail = "fail", "the OS image hashes disagree: " + ", ".join(sorted(images)) + "; " + detail
+    checks.append(("tdx_os", status, "Firmware, kernel and command line are the dstack OS image's",
+                   detail + ("; OS image " + images.pop() if len(images) == 1 else "")
+                   + (", " + str(vm.get("cpu_count")) + " vCPU, " + str(vm.get("memory_size")) + " bytes" if vm else "")))
+    return checks
+
+
 def write_record(path, record):
     path.write_bytes(json.dumps(record, indent=2, ensure_ascii=False).encode() + b"\n")
 
@@ -840,10 +1230,11 @@ def printed(stage, text):
 
 
 def deploy(args, provider=None, cloudflare=None, fetch=collector_statement, resolve=resolve_commit, progress=printed,
-           beacon=read_beacon):
-    """progress(stage, text) reports each step: tunnel, install, server, running, waiting."""
+           beacon=read_beacon, archive=None, collateral=None):
+    """progress(stage, text) reports each step: tunnel, gateway, install, server, running, waiting, attestation."""
     spec = specification(args, resolve)
     kind, generic, quick = get(spec["provider"]), spec["provider"] == "generic", bool(spec["beacon"])
+    phala = spec["provider"] == "phala"
     out = Path(args.out or Path("deployments") / spec["name"])
     if (out / "deployment.json").exists():
         raise DeployError(str(out) + " already holds a deployment; choose another --out or --name")
@@ -903,7 +1294,24 @@ def deploy(args, provider=None, cloudflare=None, fetch=collector_statement, reso
                         else "") + ": the server resolves only through " + gateway_host(spec) + ", over TLS")
         panel_token = secrets.token_urlsafe(32)
         private_write(out / "panel-token.txt", panel_token.encode())
-        if generic:
+        if phala:
+            compose = phala_compose(spec, tunnel_id, source_manifest(tarball_files((archive or fetch_archive)(spec))))
+            fields = app_compose(compose)
+            if len(compose.encode()) > kind.user_data_limit:
+                raise DeployError("the compose exceeds " + kind.title + "'s limit")
+            (out / "docker-compose.yaml").write_bytes(compose.encode())
+            record["compose"] = {"sha256": hashlib.sha256(compose.encode()).hexdigest(), "settings": PHALA_SETTINGS,
+                                 "published": "docker-compose.yaml"}
+            write_record(path, record)
+            progress("server", kind.title + ": creating the confidential VM")
+            firewall, server = provider.create(spec, fields, {"TGWITNESS_TOKEN": panel_token,
+                                                              "TGWITNESS_TUNNEL_TOKEN": tunnel_token})
+            record["firewall"], record["server"] = firewall, server
+            record["state"] = "CVM running; waiting for the collector"
+            write_record(path, record)
+            progress("running", kind.title + " CVM " + str(server["id"]) + " (app "
+                     + str(server["app_id"]) + ") is running")
+        elif generic:
             script = install_script(spec, tunnel_id, panel_token, tunnel_token)
             private_write(out / "install.sh", script.encode())
             (out / "install.redacted.sh").write_bytes(redact_user_data(script).encode())
@@ -946,7 +1354,14 @@ def deploy(args, provider=None, cloudflare=None, fetch=collector_statement, reso
             seen = host.get("provider") or {}
             record["server"] = {"id": seen.get("instance_id"), "name": spec["name"], "hostname": seen.get("hostname"),
                                 "created": None, "ipv4": None, "ipv6": None, "machine_id": seen.get("instance_id")}
-        problems = binding(statement, record["server"]["id"], record["server"].get("ipv4"), record["cloud_init"])
+        if phala:
+            checks = attestation_checks(answer, record, compose, None, collateral)
+            for check, status, title, detail in checks:
+                progress("attestation", "[" + status.upper() + "] " + title + ": " + detail)
+            problems = [title + ": " + detail for check, status, title, detail in checks if status == "fail"]
+            record["collector"]["attestation"] = [{"check": c, "status": st} for c, st, _, _ in checks]
+        else:
+            problems = binding(statement, record["server"]["id"], record["server"].get("ipv4"), record["cloud_init"])
         if problems:
             raise DeployError("The collector answered but does not match this deployment: " + "; ".join(problems))
         record["state"] = "running"
@@ -1082,7 +1497,8 @@ def destroy(args, provider=None, cloudflare=None, progress=printed):
         cf.log = log
     try:
         if not generic:
-            progress("server", kind.title + ": deleting the server and its firewall")
+            progress("server", kind.title + (": deleting the confidential VM" if record["provider"] == "phala"
+                                             else ": deleting the server and its firewall"))
             removed += provider.destroy(record)
         if not quick:  # a quick tunnel ends with its server; its posts expire from ntfy.sh within 12 hours
             progress("tunnel", "Cloudflare: deleting the DNS records and the tunnel")
@@ -1151,7 +1567,7 @@ def verify_provider(report, record, provider):
     report.add("firewall", "fail" if problems else "review" if found.get("changed") else "pass",
                "The provider firewall admits no inbound connections",
                "; ".join(problems + ([found["changed"]] if found.get("changed") else []))
-               or "firewall " + str(record["firewall"]["id"]) + " applied with no inbound rules", source)
+               or found.get("detail") or "firewall " + str(record["firewall"]["id"]) + " applied with no inbound rules", source)
     if record.get("gateway"):
         leaks = dns_leaks(found.get("outbound"))
         report.add("dns_firewall", "fail" if leaks else "pass", "DNS leaves the server only to Cloudflare Gateway",
@@ -1210,7 +1626,11 @@ def verify_tunnel(report, record, cf, server):
                 (server or {}).get("ipv6") and ip in ipaddress.ip_network(server["ipv6"], strict=False))
         except ValueError:
             return False
-    if record["provider"] == "generic":
+    if record["provider"] == "phala":
+        report.add("connector", "pass" if addresses else "review", "The tunnel connector is online",
+                   "connections from " + (", ".join(addresses) or "nowhere now") + "; a Phala CVM has no address of "
+                   "its own to compare: its quote, not its address, identifies it", CF)
+    elif record["provider"] == "generic":
         report.add("connector", "review", "The tunnel connector runs on this server",
                    "connections from " + (", ".join(addresses) or "nowhere now")
                    + "; no provider record to compare the address with", CF)
@@ -1367,8 +1787,9 @@ def verify_collector(report, record, server, args, fetch, reference=None, refere
         status, detail = "review", "no expected fingerprint"
     report.add("fingerprint", status, "The collector key matches the expected fingerprint",
                statement["fingerprint"] + "; " + detail, COLLECTOR)
+    phala = record["provider"] == "phala"
     target = record["server"] if record["provider"] == "generic" else server
-    if target:
+    if target and not phala:
         ipv4 = target.get("ipv4")
         problems = binding(statement, target["id"], ipv4, record.get("cloud_init") or {})
         report.add("binding", "fail" if problems else "pass",
@@ -1377,7 +1798,9 @@ def verify_collector(report, record, server, args, fetch, reference=None, refere
                    + ", installer hashes match", COLLECTOR)
 
     title = "The collector-reported user data equals the installer the deployed commit builds"
-    if reference_error:
+    if phala:
+        pass  # the measured compose is checked with the quote (attestation_checks)
+    elif reference_error:
         report.add("cloud_init", "fail", title, reference_error, COLLECTOR)
     else:
         published = Path(args.cloud_init).read_bytes() if args.cloud_init else None
@@ -1403,8 +1826,10 @@ def verify_collector(report, record, server, args, fetch, reference=None, refere
     problems = [text for flag, text in flags if flag]
     unknown = [k for k in ("sessions", "logins") if host.get(k) is None]
     notes = problems + (["unreadable: " + ", ".join(unknown)] if unknown else [])
-    report.add("host_access", "fail" if problems else "review" if unknown else "pass", "No SSH and no logins on the host",
-               "; ".join(notes) or "nothing on port 22, no SSH processes, no sessions, no logins recorded", COLLECTOR)
+    if not phala:  # inside the collector's container these say nothing; the measured image does (tdx_os)
+        report.add("host_access", "fail" if problems else "review" if unknown else "pass",
+                   "No SSH and no logins on the host",
+                   "; ".join(notes) or "nothing on port 22, no SSH processes, no sessions, no logins recorded", COLLECTOR)
     first = (record.get("collector") or {}).get("first_boot_id")
     report.add("boot", "pass" if first and host.get("boot_id") == first else "review", "Running since the first boot",
                "boot " + str(host.get("boot_id")) + (" (same as at deployment)" if host.get("boot_id") == first
@@ -1461,8 +1886,18 @@ def verify_journal(report, path, key, server_id, generic=False, reference=None):
                 problems.append("record " + str(event["seq"]) + ": login(s) recorded")
             if host.get("boot_id") and host["boot_id"] not in boots:
                 boots.append(host["boot_id"])
+    account_key_check(report, keys)
+    if not starts:
+        problems.append("no process.started record binds this journal to the reported server")
+    report.add("journal", "fail" if problems else "unavailable" if unknown else "pass",
+               "The journal signatures and recorded host measurements match",
+               "; ".join((problems + unknown)[:20]) or str(result["events"]) + " records verified; " + str(starts)
+               + " process start(s) on server " + str(server_id) + "; " + str(len(boots)) + " boot(s)", JOURNAL)
 
 
+def account_key_check(report, keys):
+    """A key imported from a session file also exists outside this server: whoever holds it can answer for
+    Telegram on the network path. Marked for review, not refused: seized accounts stay usable."""
     notes = ["record " + str(seq) + ": " + (
         "authorized with an imported session; its key also exists outside this server, and whoever holds it "
         "could stand in for Telegram on the network path, so observations also rest on the key's holders"
@@ -1473,12 +1908,78 @@ def verify_journal(report, path, key, server_id, generic=False, reference=None):
                "The Telegram authorization key was created on this server",
                "; ".join(notes[:20]) or ("created by signing in on this server (record " + ", ".join(
                    str(seq) for seq, _ in keys) + ")" if keys else "no account authorization in this journal"), JOURNAL)
+
+
+def verify_tdx_journal(report, path, key, record, reference=None, collateral=None, now=None):
+    """Every start in the journal carries an Intel TDX quote over its run, key and host; each must replay to
+    the deployed app-compose of the deployed CVM, and Intel must vouch for each quote."""
+    if not key:
+        report.add("journal", "fail", "The evidence journal matches the expected collector key",
+                   "no expected collector key is available for this deployment", JOURNAL)
+        return
+    try:
+        result = verify_bundle(path, expected_fingerprint=key)
+    except Exception as exc:
+        report.add("journal", "fail", "The evidence journal is signed by this key", type(exc).__name__ + ": " + str(exc), JOURNAL)
+        return
+    server, collateral = record["server"], collateral or intel_collateral()
+    starts, problems, reviews, keys, composes, statuses = 0, [], [], [], set(), set()
+    with open_archive(path) as archive, archive.open("events.jsonl") as stream:
+        for line in bounded_lines(stream):
+            event = json.loads(line)
+            where = "record " + str(event["seq"]) + ": "
+            if event["kind"] == "account.authorized":
+                keys.append((event["seq"], event["payload"].get("key_origin")))
+            elif event["kind"] == "host.state":
+                if hex_id(event["payload"].get("instance_id")) != hex_id(server.get("instance_id")):
+                    problems.append(where + "instance " + str(event["payload"].get("instance_id")))
+            elif event["kind"] == "process.started":
+                starts += 1
+                run = event["payload"].get("run") or {}
+                quote = run.get("tdx_start") or {}
+                if quote.get("error") or not quote.get("quote"):
+                    problems.append(where + "a start without an Intel TDX quote (" + str(quote.get("error")) + ")")
+                    continue
+                try:
+                    raw, log = tdx.evidence(quote)
+                    measured, identity = tdx.measured(raw, log)
+                except (tdx.QuoteError, ValueError, KeyError, TypeError) as exc:
+                    problems.append(where + str(exc))
+                    continue
+                if run.get("public_key") and fingerprint(run["public_key"]) != key.lower():
+                    problems.append(where + "started with another key")
+                if measured["report"]["report_data"] != tdx.report_data(start_binding(run)):
+                    problems.append(where + "the quote does not cover this start")
+                seen = (run.get("host") or {}).get("provider") or {}
+                text = seen.get("app_compose")
+                if not isinstance(text, str) or hashlib.sha256(text.encode()).hexdigest() != identity["compose_hash"]:
+                    problems.append(where + "the recorded app-compose is not the measured one")
+                else:
+                    status, detail = compose_check(text, reference)
+                    if status == "fail":
+                        problems.append(where + "started from another compose: " + detail)
+                composes.add(identity["compose_hash"])
+                if hex_id(identity["app_id"]) != hex_id(server.get("app_id")):
+                    problems.append(where + "app " + identity["app_id"])
+                if hex_id(identity["instance_id"]) != hex_id(server.get("instance_id")):
+                    problems.append(where + "instance " + str(identity["instance_id"]))
+                status, detail, found = intel_check(raw, collateral, now)
+                if status == "fail":
+                    problems.append(where + detail)
+                elif status != "pass":
+                    reviews.append(where + detail)
+                if found:
+                    statuses.add(found["status"])
+    account_key_check(report, keys)
     if not starts:
-        problems.append("no process.started record binds this journal to the reported server")
-    report.add("journal", "fail" if problems else "unavailable" if unknown else "pass",
-               "The journal signatures and recorded host measurements match",
-               "; ".join((problems + unknown)[:20]) or str(result["events"]) + " records verified; " + str(starts)
-               + " process start(s) on server " + str(server_id) + "; " + str(len(boots)) + " boot(s)", JOURNAL)
+        problems.append("no process.started record binds this journal to the deployed CVM")
+    if len(composes) > 1:
+        reviews.append("the collector started from " + str(len(composes)) + " different composes")
+    report.add("journal", "fail" if problems else "review" if reviews else "pass",
+               "The journal signatures and every start's Intel TDX quote match the deployed CVM",
+               "; ".join((problems + reviews)[:20]) or str(result["events"]) + " records verified; " + str(starts)
+               + " start(s), each quoted inside CVM " + str(server.get("instance_id")) + " (Intel TCB "
+               + ", ".join(sorted(statuses)) + ")", JOURNAL)
 
 
 def verify(args, provider=None, cloudflare=None, fetch=collector_statement, beacon=read_beacon):
@@ -1518,9 +2019,23 @@ def verify(args, provider=None, cloudflare=None, fetch=collector_statement, beac
         except DeployError as exc:
             reference_error = str(exc)
     statement = verify_collector(report, record, server, args, fetch, reference, reference_error, beacon)
+    phala = record["provider"] == "phala"
+    collateral = intel_collateral(getattr(args, "tdx_collateral", None)) if phala else None
+    expected = json.loads(Path(args.tdx_measurements).read_text(encoding="utf-8")) \
+        if phala and getattr(args, "tdx_measurements", None) else None
+    if phala and report.collector:
+        published = Path(args.cloud_init).read_text(encoding="utf-8") if args.cloud_init else None
+        for check, status, title, detail in attestation_checks(report.collector, record, reference, published,
+                                                               collateral, expected):
+            if reference_error and check == "tdx_compose":
+                status, detail = "fail", reference_error
+            report.add(check, status, title, detail, TDX_SOURCE)
     if args.evidence:
         key = args.fingerprint or (statement or {}).get("fingerprint") or (record.get("collector") or {}).get("fingerprint")
-        verify_journal(report, args.evidence, key, record["server"]["id"], record["provider"] == "generic", reference)
+        if phala:
+            verify_tdx_journal(report, args.evidence, key, record, reference, collateral)
+        else:
+            verify_journal(report, args.evidence, key, record["server"]["id"], record["provider"] == "generic", reference)
     files_seen = {}
     for path in (args.record, args.cloud_init, args.evidence):
         if path:
@@ -1530,12 +2045,21 @@ def verify(args, provider=None, cloudflare=None, fetch=collector_statement, beac
                     digest.update(chunk)
             files_seen[Path(path).name] = digest.hexdigest()
     generic = record["provider"] == "generic"
+    assurance = {"runtime_measurements": "collector-self-report", "independent_runtime_attestation": "not-performed",
+                 "key_nonexportability": "not-established", "source_authenticity": "not-established"}
+    if phala:
+        found = {c["check"]: c["status"] for c in report.checks if c["source"] == TDX_SOURCE}
+        attested = all(found.get(c) in ("pass", "review")
+                       for c in ("tdx_binding", "tdx_quote", "tdx_compose_hash", "tdx_compose", "tdx_identity"))
+        assurance = {"runtime_measurements": "intel-tdx-quote",
+                     "independent_runtime_attestation": "intel-tdx" if attested else "failed",
+                     "key_nonexportability": ("established-by-measured-code" if found.get("tdx_os") == "pass"
+                                              else "conditional-on-os-image") if attested else "not-established",
+                     "source_authenticity": "commit-pinned-in-measured-compose" if attested else "not-established"}
     return {"format": "tgwitness-assurance-report-v1", "generated_at": utcnow(),
             "verifier": {"software": "TgWitness", "version": __version__}, "result": report.result(),
-            "verification_scope": "deployment-consistency",
-            "assurance": {"runtime_measurements": "collector-self-report",
-                          "independent_runtime_attestation": "not-performed",
-                          "key_nonexportability": "not-established", "source_authenticity": "not-established"},
+            "verification_scope": "hardware-attestation" if phala else "deployment-consistency",
+            "assurance": assurance,
             "deployment": {k: record.get(k) for k in ("deployment_id", "name", "mode", "provider", "location",
                                                       "repository", "commit", "panel_host", "witness_host", "beacon",
                                                       "gateway", "created_at")},
@@ -1544,9 +2068,21 @@ def verify(args, provider=None, cloudflare=None, fetch=collector_statement, beac
             "fingerprint": (statement or {}).get("fingerprint"), "checks": report.checks,
             "provider_actions": report.actions, "cloudflare": report.cloudflare,
             "collector_statement": report.collector, "files": files_seen,
-            "establishes": (SELF_ESTABLISHES if generic else ESTABLISHES)
+            "establishes": (SELF_ESTABLISHES if generic else phala_establishes(record) if phala else ESTABLISHES)
             + (GATEWAY_ESTABLISHES if record.get("gateway") else ()),
-            "does_not_establish": tuple(kind.limits) + LIMITS + (GATEWAY_LIMITS if record.get("gateway") else ())}
+            "does_not_establish": tuple(kind.limits) + (COMMON_LIMITS if phala else LIMITS)
+            + ((PHALA_QUICK,) if phala and record.get("beacon") else ())
+            + (GATEWAY_LIMITS if record.get("gateway") else ())}
+
+
+RUNTIME = {"not-performed": "Self-reported by the collector; no independent runtime attestation",
+           "intel-tdx": "Intel TDX quote over the collector's statement, checked by this verifier to Intel's root",
+           "failed": "**An Intel TDX quote was expected and did not verify**"}
+CUSTODY = {"not-established": "This report does not establish that the key was never copied",
+           "established-by-measured-code": "Created and kept inside the attested CVM by the measured commit; "
+                                           "the OS image measurements match",
+           "conditional-on-os-image": "Created inside the attested CVM by the measured commit; the OS image "
+                                      "measurements were not compared (--tdx-measurements)"}
 
 
 def cell(value):
@@ -1564,8 +2100,10 @@ def render(report):
              "requested by the verifier at that time; the deployment record supplied only the IDs to ask about.", "",
              "| | |", "| --- | --- |",
              "| **Deployment checks** | **" + report["result"].upper() + "** |",
-             "| Runtime measurements | Self-reported by the collector; no independent runtime attestation |",
-             "| Private-key custody | This report does not establish that the key was never copied |",
+             "| Runtime measurements | " + RUNTIME.get(report["assurance"]["independent_runtime_attestation"],
+                                                   RUNTIME["not-performed"]) + " |",
+             "| Private-key custody | " + CUSTODY.get(report["assurance"]["key_nonexportability"],
+                                                  CUSTODY["not-established"]) + " |",
              "| Collector key fingerprint | `" + str(report["fingerprint"]) + "` |",
              "| Deployment | " + cell(deployment["deployment_id"]) + " (" + cell(deployment["mode"]) + "), "
              + cell(deployment["created_at"]) + " |",
@@ -1611,10 +2149,14 @@ def render(report):
                   json.dumps(report["collector_statement"], indent=2, ensure_ascii=False), "```"]
     lines += ["", "## What this report establishes", ""] + ["- " + t for t in report["establishes"]]
     lines += ["", "## What it does not establish", ""] + ["- " + t for t in report["does_not_establish"]]
+    phala = deployment["provider"] == "phala"
     lines += ["", "## Reproduce", "", "```sh",
               "python -m tgwitness.cloud verify --record deployment.json --provider-token-file READ_ONLY_CREDENTIALS \\",
               "    --cloudflare-token-file READ_ONLY_TOKEN --fingerprint " + str(report["fingerprint"]) + " \\",
-              "    --cloud-init PUBLISHED_INSTALLER --source CHECKOUT_OF_COMMIT --evidence tgwitness-evidence.zip",
+              "    --cloud-init " + ("docker-compose.yaml" if phala else "PUBLISHED_INSTALLER")
+              + " --source CHECKOUT_OF_COMMIT --evidence tgwitness-evidence.zip"
+              + (" \\" if phala else ""),
+              *(["    --tdx-measurements MRTD_RTMR0-2_FROM_DSTACK_MR.json"] if phala else []),
               "python verify.py tgwitness-evidence.zip --fingerprint " + str(report["fingerprint"]), "```", "",
               "## Handover", "", "| File | SHA-256 |", "| --- | --- |"]
     lines += ["| " + cell(name) + " | `" + digest + "` |" for name, digest in report["files"].items()]
@@ -1625,7 +2167,7 @@ def add_target(parser):
     parser.add_argument("--provider", required=True, choices=NAMES, help="Where the server runs")
     parser.add_argument("--name", required=True, help="Server name; also the deployment directory name")
     parser.add_argument("--server-type", help="Provider server type, e.g. cpx22, s-1vcpu-2gb, g6-standard-1, "
-                        "vc2-1c-2gb, t3.small")
+                        "vc2-1c-2gb, t3.small, tdx.small (phala)")
     parser.add_argument("--location", help="Provider location or region (default per provider)")
     parser.add_argument("--image", help="Image (default Ubuntu 24.04 of the provider)")
     parser.add_argument("--ref", required=True, help="40-character commit, or a release tag resolved once with git")
@@ -1646,9 +2188,24 @@ def add_target(parser):
     parser.add_argument("--debug-ssh-from", help="NOT high-assurance: the only address or network allowed to SSH")
 
 
-def plan(spec):
+def plan(spec, archive=None):
     kind = get(spec["provider"])
     placeholder = (None, "x" * 43, "x" * 43) if spec["beacon"] else ("TUNNEL-ID-AFTER-CREATION", "x" * 43, "x" * 32)
+    if spec["provider"] == "phala":
+        compose = phala_compose(spec, placeholder[0], source_manifest(tarball_files((archive or fetch_archive)(spec))))
+        settings = {k: v for k, v in app_compose(compose).items() if k != "docker_compose_file"}
+        lines = ["# Provider: " + kind.title + "; mode " + spec["mode"] + "; commit " + spec["commit"],
+                 *(["# Quick tunnel without a Cloudflare account; the address is posted, signed, to "
+                    + spec["beacon"]] if spec["beacon"] else
+                   ["# Cloudflare: tunnel ingress " + json.dumps(ingress(spec)),
+                    *("# Cloudflare: CNAME " + h + " -> TUNNEL.cfargotunnel.com"
+                      for h in (spec["panel_host"], spec["witness_host"]) if h)]),
+                 "# " + kind.title + ": CVM " + spec["server_type"] + " in " + spec["location"] + ", OS image "
+                 + spec["image"] + ", app-compose settings " + json.dumps(settings),
+                 "# " + kind.title + ": " + ", ".join(PHALA_ENV) + " encrypted to the application's KMS key",
+                 "# compose " + str(len(compose.encode())) + " of " + str(kind.user_data_limit) + " bytes",
+                 "# Published compose (measured into RTMR3; no secrets):"]
+        return "\n".join(lines) + "\n" + compose
     if spec["provider"] == "generic":
         text = install_script(spec, *placeholder)
         calls = ["Cloudflare: tunnel, its ingress and DNS records as below" if not spec["beacon"] else
@@ -1688,7 +2245,8 @@ def main(argv=None):
                      help="Token with Cloudflare Tunnel Edit, Zone Read and DNS Edit, and Zero Trust Edit for "
                      "--gateway-dns (or CLOUDFLARE_API_TOKEN)")
     run.add_argument("--out", type=Path, help="Deployment directory (default deployments/NAME)")
-    run.add_argument("--wait", type=int, help="Minutes to wait for the collector (default 20; 60 for generic)")
+    run.add_argument("--wait", type=int, help="Minutes to wait for the collector (default 20; 40 for phala; "
+                     "60 for generic)")
     close = commands.add_parser("lock", help="Remove every inbound rule from the deployment firewall")
     close.add_argument("--record", type=Path, required=True, help="deployment.json")
     close.add_argument("--provider-token-file", help="Provider credentials with write access")
@@ -1699,10 +2257,15 @@ def main(argv=None):
                        "Settings Read; with Gateway DNS also Zero Trust Read, Account Analytics Read, Audit Logs "
                        "Read and, for a shared location, Zero Trust PII Read (or CLOUDFLARE_API_TOKEN)")
     check.add_argument("--fingerprint", help="Collector key fingerprint received through an independent channel")
-    check.add_argument("--cloud-init", type=Path, help="The published installer: cloud-init.redacted.yaml or install.redacted.sh")
+    check.add_argument("--cloud-init", type=Path, help="The published installer: cloud-init.redacted.yaml, "
+                       "install.redacted.sh or, for phala, docker-compose.yaml")
     check.add_argument("--source", type=Path, help="A checkout of the deployed commit; its own code builds the reference "
                        "installer the server's user data must equal byte for byte")
     check.add_argument("--evidence", type=Path, help="An evidence ZIP exported from this collector")
+    check.add_argument("--tdx-measurements", type=Path, help="phala: JSON with mrtd, rtmr0, rtmr1 and rtmr2 computed "
+                       "from the dstack OS image (dstack-mr measure --json)")
+    check.add_argument("--tdx-collateral", type=Path, help="phala: Intel collateral in dcap-qvl's JSON layout, "
+                       "instead of fetching it from Intel's PCS")
     check.add_argument("--report", type=Path, help="Write the Markdown report here and its JSON beside it")
     remove = commands.add_parser("destroy", help="Delete the server, its firewall, DNS records and tunnel; "
                                  "the record stays")
@@ -1718,7 +2281,7 @@ def main(argv=None):
         if args.command == "plan":
             sys.stdout.write(plan(specification(args)))
         elif args.command == "deploy":
-            args.wait = args.wait or (60 if args.provider == "generic" else 20)
+            args.wait = args.wait or {"generic": 60, "phala": 40}.get(args.provider, 20)
             if not 1 <= args.wait <= 240:
                 parser.error("--wait must be 1-240 minutes")
             record, out = deploy(args)
@@ -1735,8 +2298,9 @@ def main(argv=None):
                 print("Server", server["id"], server.get("ipv4") or "", "- tunnel", record["tunnel"]["id"])
                 print("Cloudflare records:", CLOUDFLARE_API + "/accounts/" + account + "/cfd_tunnel/"
                       + record["tunnel"]["id"] + "/connections")
+            published = (record.get("cloud_init") or record.get("compose"))["published"]
             print("Publish the fingerprint through a separate channel. Give a verifier", out / "deployment.json",
-                  "and", out / record["cloud_init"]["published"], "with read-only credentials.")
+                  "and", out / published, "with read-only credentials.")
         elif args.command == "lock":
             record = lock(args)
             print("Firewall", record["firewall"]["id"], "now admits no inbound connections.")

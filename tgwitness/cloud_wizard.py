@@ -1,7 +1,8 @@
 """The panel's guided 24/7 server: python -m tgwitness.cloud deploy and destroy, started from the local panel.
 
-Hetzner hosts the server. Its address is a quick tunnel on trycloudflare.com, or a name under the user's own
-domain when a Cloudflare token comes along. The tokens come with each request
+Hetzner hosts an ordinary server; Phala Cloud runs the collector in an Intel TDX confidential VM whose quote
+the verifier checks to Intel's root. The address is a quick tunnel on trycloudflare.com, or a name under the
+user's own domain when a Cloudflare token comes along. The tokens come with each request
 from the browser on this computer and live only for that request or task: nothing writes them down. The
 deployment record, the redacted installer and the panel token are kept under the data directory, as the
 command line keeps them under deployments/.
@@ -17,7 +18,7 @@ from types import SimpleNamespace
 from typing import Literal
 
 import requests
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel, field_validator, model_validator
 
 from . import __version__, cloud
 from .providers import get
@@ -28,10 +29,13 @@ from .store import utcnow
 REGIONS = {"eu": ("nbg1", ("eu-central",)), "us": ("ash", ("us-east", "us-west"))}
 PREFERRED_TYPE = "cpx22"  # the type the deployment guide starts with; otherwise the cheapest that fits
 MIN_MEMORY = 2
+PHALA_TYPE = "tdx.small"  # otherwise the cheapest CPU type with enough memory
+HOURS_PER_MONTH = 730
 GITHUB = "https://api.github.com/repos/phishdestroy/TgWitness/commits/"
 FILES = {"deployment.json": "application/json", "panel-token.txt": "text/plain; charset=utf-8",
-         "cloud-init.redacted.yaml": "text/plain; charset=utf-8"}
+         "cloud-init.redacted.yaml": "text/plain; charset=utf-8", "docker-compose.yaml": "text/plain; charset=utf-8"}
 HETZNER_TOKEN = re.compile(r"[A-Za-z0-9]{32,128}")
+PHALA_TOKEN = re.compile(r"phak_[A-Za-z0-9_-]{16,200}")
 CLOUDFLARE_TOKEN = re.compile(r"[A-Za-z0-9_-]{20,400}")
 DOMAIN_CHARACTERS = frozenset(string.ascii_lowercase + string.digits + "-")
 
@@ -57,15 +61,32 @@ def domain(value):
 
 
 class Tokens(BaseModel):
-    hetzner_token: str
+    provider: Literal["hetzner", "phala"] = "hetzner"
+    hetzner_token: str = ""
+    phala_token: str = ""
     cloudflare_token: str = ""
 
     @field_validator("hetzner_token")
     @classmethod
     def hetzner(cls, value):
-        if not HETZNER_TOKEN.fullmatch(plain(value)):
+        if plain(value) and not HETZNER_TOKEN.fullmatch(plain(value)):
             raise ValueError("Paste the Hetzner API token: letters and digits, shown once when it is created.")
         return plain(value)
+
+    @field_validator("phala_token")
+    @classmethod
+    def phala(cls, value):
+        if plain(value) and not PHALA_TOKEN.fullmatch(plain(value)):
+            raise ValueError("Paste the Phala Cloud API key: it starts with phak_.")
+        return plain(value)
+
+    @model_validator(mode="after")
+    def provider_token(self):
+        if self.provider == "hetzner" and not self.hetzner_token:
+            raise ValueError("Paste the Hetzner API token: letters and digits, shown once when it is created.")
+        if self.provider == "phala" and not self.phala_token:
+            raise ValueError("Paste the Phala Cloud API key: it starts with phak_.")
+        return self
 
     @field_validator("cloudflare_token")
     @classmethod
@@ -142,6 +163,17 @@ def explain(exc):
             return WizardError("A server with this name already exists in the Hetzner project. Choose another "
                                "name under Advanced.", text)
         return WizardError("Hetzner refused the request.", text)
+    if head.startswith("Phala Cloud"):
+        if "HTTP 401" in text or "HTTP 403" in text:
+            return WizardError("Phala Cloud did not accept the API key. Create a new one under Settings → API Keys "
+                               "in the Phala Cloud dashboard.", text)
+        if "ERR-1002" in text or "No available resources" in text:
+            return WizardError("Phala Cloud has no free confidential virtual machine of this type right now. Try again later.",
+                               text)
+        if "balance" in text.lower() or "credit" in text.lower() or "HTTP 402" in text:
+            return WizardError("Phala Cloud refused: the account has no credit left. Top it up in the Phala Cloud "
+                               "dashboard.", text)
+        return WizardError("Phala Cloud refused the request.", text)
     if head.startswith("Cloudflare"):
         if "HTTP 401" in text or "HTTP 403" in text or "10000" in text or "9109" in text:
             return WizardError("Cloudflare did not accept the token or it lacks a permission. Create the token "
@@ -207,22 +239,55 @@ def version(ref=None, session=None):
     return {"ref": ref, "commit": commit}
 
 
+def phala_type(families):
+    """tdx.small where Phala offers it, else the cheapest CPU type with enough memory; the price per month
+    is Phala's hourly rate times 730 hours."""
+    offers = []
+    for family in families:
+        for kind in family.get("items") or []:
+            if kind.get("requires_gpu") or float(kind.get("memory_mb") or 0) < MIN_MEMORY * 1024:
+                continue
+            try:
+                offers.append((float(kind["hourly_rate"]), kind))
+            except (KeyError, TypeError, ValueError):
+                continue
+    if not offers:
+        raise WizardError("Phala Cloud offers no suitable confidential virtual machine right now. Try again later.")
+    hourly, kind = next((o for o in offers if PHALA_TYPE in (o[1].get("id"), o[1].get("name"))), None) \
+        or min(offers, key=lambda o: o[0])
+    return {"name": kind.get("id") or kind["name"], "cores": kind.get("vcpu"),
+            "memory": round(float(kind["memory_mb"]) / 1024, 1), "disk": kind.get("default_disk_size_gb"),
+            "monthly": "%.2f" % (hourly * HOURS_PER_MONTH),
+            "hourly": ("%.3f" % hourly).rstrip("0").rstrip(".")}
+
+
 def services(tokens, session=None):
     cf = cloud.Cloudflare(tokens.cloudflare_token, session) if tokens.cloudflare_token else None
+    if tokens.provider == "phala":
+        return get("phala")(tokens.phala_token, session=session), cf
     return get("hetzner")(tokens.hetzner_token, session=session), cf
 
 
 def check(request, session=None):
     """What would be created, at what monthly price, and under which of the user's domains when a Cloudflare
     token is given; creates nothing."""
-    hetzner, cf = services(request, session)
+    host, cf = services(request, session)
+    phala = request.provider == "phala"
+    if phala and request.gateway:
+        raise WizardError("Gateway DNS needs a provider firewall for outgoing traffic; Phala Cloud has none. Turn "
+                          "Gateway DNS off or choose Hetzner.")
     try:
-        place = location(request.region, hetzner.call("GET", "/locations")["locations"])
-        offer = server_type(hetzner.pages("/server_types", "server_types"), place["name"])
-        currency = hetzner.call("GET", "/pricing")["pricing"]["currency"]
+        if phala:
+            place = {"name": "any", "city": None, "country": None}
+            offer, currency = phala_type(host.call("GET", "/instance-types").get("result") or []), "USD"
+        else:
+            place = location(request.region, host.call("GET", "/locations")["locations"])
+            offer = server_type(host.pages("/server_types", "server_types"), place["name"])
+            currency = host.call("GET", "/pricing")["pricing"]["currency"]
     except DeployError as exc:
         raise explain(exc) from None
-    found = {"location": {"name": place["name"], "city": place.get("city"), "country": place.get("country")},
+    found = {"provider": request.provider,
+             "location": {"name": place["name"], "city": place.get("city"), "country": place.get("country")},
              "server": offer, "currency": currency, "domains": [], "gateway_accounts": [],
              "version": version(session=session)}
     if cf is None:
@@ -279,9 +344,9 @@ def gateway_accounts(cf, accounts):
 class Jobs:
     """One server task at a time, in a thread: deploying waits up to half an hour for the new server."""
 
-    def __init__(self, root, session=None, fetch=None, beacon=None):
+    def __init__(self, root, session=None, fetch=None, beacon=None, collateral=None):
         self.directory = Path(root) / "deployments"
-        self.session, self.fetch = session, fetch or cloud.collector_statement
+        self.session, self.fetch, self.collateral = session, fetch or cloud.collector_statement, collateral
         self.beacon = beacon or (lambda topic, key=None: cloud.read_beacon(topic, key, self.session))
         self.guard, self.job = threading.Lock(), None
 
@@ -315,7 +380,7 @@ class Jobs:
                           "ipv4": server.get("ipv4"), "commit": record.get("commit"),
                           "fingerprint": (record.get("collector") or {}).get("fingerprint"),
                           "quick": bool(record.get("beacon")), "address": (record.get("address") or {}).get("host"),
-                          "gateway": bool(record.get("gateway"))})
+                          "gateway": bool(record.get("gateway")), "attested": record.get("provider") == "phala"})
         return found
 
     def address(self, name):
@@ -329,6 +394,9 @@ class Jobs:
         try:
             found = self.beacon(record["beacon"], (folder / "address-key.txt").read_text(encoding="utf-8").strip())
         except DeployError as exc:
+            if record.get("provider") == "phala":
+                raise WizardError("The server has not posted an address in the last 12 hours. It may be stopped: "
+                                  "check it in the Phala Cloud dashboard.", str(exc)) from None
             raise WizardError("The server has not posted an address in the last 12 hours. It may be stopped: check "
                               "it in the Hetzner console.", str(exc)) from None
         except requests.RequestException as exc:
@@ -345,11 +413,12 @@ class Jobs:
             raise WizardError("This deployment file does not exist.")
         return path, FILES[filename]
 
-    def start(self, kind, name, work):
+    def start(self, kind, name, work, provider="hetzner"):
         with self.guard:
             if self.job and self.job["state"] == "running":
                 raise WizardError("Another server task is still running. Wait until it ends.")
-            job = self.job = {"id": secrets.token_hex(8), "kind": kind, "name": name, "state": "running",
+            job = self.job = {"id": secrets.token_hex(8), "kind": kind, "name": name, "provider": provider,
+                              "state": "running",
                               "stage": "start", "started_at": utcnow(), "finished_at": None, "lines": [],
                               "error": None, "result": None}
 
@@ -389,31 +458,38 @@ class Jobs:
         if request.gateway and not (request.cloudflare_token and cloud.ACCOUNT.fullmatch(gateway_account)):
             raise WizardError("Check the Cloudflare token again and choose the account for Gateway DNS.")
 
+        phala = request.provider == "phala"
+        if phala and request.gateway:
+            raise WizardError("Gateway DNS needs a provider firewall for outgoing traffic; Phala Cloud has none.")
+
         def work(progress):
             progress("version", "Looking up the TgWitness version on GitHub")
             chosen = version(request.ref, self.session)
-            hetzner, cf = services(request, self.session)
-            args = SimpleNamespace(provider="hetzner", name=name, server_type=request.server_type,
-                                   location=request.location, image=None, ref=chosen["ref"],
+            host, cf = services(request, self.session)
+            args = SimpleNamespace(provider=request.provider, name=name, server_type=request.server_type,
+                                   location="any" if phala else request.location, image=None, ref=chosen["ref"],
                                    repository=cloud.DEFAULT_REPOSITORY, zone=request.zone or None,
                                    cloudflare_account=(gateway_account if request.gateway else request.account) or None,
                                    gateway_dns=request.gateway, gateway_location=None,
                                    panel_host=None if quick else name + "." + request.zone, quick_tunnel=quick,
                                    witness_host=None, debug_ssh_key=None, debug_ssh_from=None,
-                                   out=folder, wait=30)
+                                   out=folder, wait=40 if phala else 30)
             if not quick:
                 progress("tunnel", "Cloudflare: creating the tunnel and the address " + args.panel_host)
-            record, out = cloud.deploy(args, hetzner, cf, self.fetch, resolve=lambda repository, ref: chosen["commit"],
-                                       progress=progress, beacon=self.beacon)
+            record, out = cloud.deploy(args, host, cf, self.fetch, resolve=lambda repository, ref: chosen["commit"],
+                                       progress=progress, beacon=self.beacon,
+                                       archive=lambda spec: cloud.fetch_archive(spec, self.session),
+                                       collateral=self.collateral)
             progress("done", "TgWitness answered with its signing key " + record["collector"]["fingerprint"])
-            host = record["address"]["host"] if quick else record["panel_host"]
-            return {"name": name, "panel": "https://" + host, "quick": quick, "fingerprint":
+            address = record["address"]["host"] if quick else record["panel_host"]
+            return {"name": name, "provider": request.provider, "panel": "https://" + address, "quick": quick,
+                    "fingerprint":
                     record["collector"]["fingerprint"], "server": record["server"].get("ipv4"),
                     "commit": record["commit"], "ref": record.get("requested_ref"),
                     "gateway": record.get("gateway"), "gateway_shared": record.get("gateway_shared")}
 
         self.directory.mkdir(parents=True, exist_ok=True)
-        return self.start("deploy", name, work)
+        return self.start("deploy", name, work, request.provider)
 
     def destroy(self, request):
         path = self.folder(request.name, "deployment.json") if cloud.NAME.fullmatch(request.name) else None
@@ -422,8 +498,13 @@ class Jobs:
         if request.confirm.strip() != request.name:
             raise WizardError("Type the server name to confirm the deletion.")
         record = json.loads(path.read_text(encoding="utf-8"))
-        if record.get("provider") not in ("hetzner", "generic"):
-            raise WizardError("Only Hetzner servers can be deleted here. Use python -m tgwitness.cloud destroy.")
+        if record.get("provider") not in ("hetzner", "phala", "generic"):
+            raise WizardError("Only Hetzner and Phala Cloud servers can be deleted here. Use python -m "
+                              "tgwitness.cloud destroy.")
+        if record.get("provider") == "phala" and request.provider != "phala":
+            raise WizardError("This server runs at Phala Cloud: paste the Phala Cloud API key.")
+        if record.get("provider") == "hetzner" and request.provider != "hetzner":
+            raise WizardError("This server runs at Hetzner: paste the Hetzner token.")
         if not record.get("beacon") and not request.cloudflare_token:
             raise WizardError("This server's address is under your domain: paste the Cloudflare token as well, so "
                               "its tunnel and DNS record are deleted too.")
@@ -432,11 +513,11 @@ class Jobs:
                               "so its DNS location is removed too.")
 
         def work(progress):
-            hetzner, cf = services(request, self.session)
+            host, cf = services(request, self.session)
             args = SimpleNamespace(record=path, confirm=request.name, provider_token_file=None,
                                    cloudflare_token_file=None)
-            record, removed = cloud.destroy(args, hetzner, cf, progress)
+            record, removed = cloud.destroy(args, host, cf, progress)
             progress("done", "Deleted: " + ", ".join(item["resource"] + " " + str(item["id"]) for item in removed))
             return {"name": request.name, "removed": removed}
 
-        return self.start("destroy", request.name, work)
+        return self.start("destroy", request.name, work, record.get("provider") or "hetzner")
