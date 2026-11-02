@@ -168,10 +168,9 @@
   document; they do not turn printouts or screenshots into signed evidence.
 - Added a browsable fictional report with the matching signed ZIP. Its preview
   is byte-identical to the archived HTML; previous signed demo samples are retained.
-- Translated new export, sharing and recipient-report labels through DeepL into
-  the 24 supported non-English interface languages, including active labels that
-  had previously displayed English. Message text and operator-entered content
-  remain unchanged; English remains the canonical source.
+- Added missing translations for export controls, sharing copies and recipient
+  reports in all 25 interface languages. Message text and content entered by the
+  operator keep their original wording.
 
 - Added **Start here** with separate personal-export and investigation journeys.
   Account snapshots and saved observations now have distinct export controls;
@@ -206,14 +205,13 @@
   a new build fails before publication. Input bytes, including signed demo files,
   remain unchanged; reproducibility requires matching inputs and compression tools.
 
-- Kept English as the canonical interface, documentation and demo language, with
-  explicit fallback and browser checks. Capture now falls back to its English
-  source when a translation is missing. Other languages remain translations.
+- Capture now displays English text when a translation is missing and respects
+  the user's language choice.
 - Hardened Capture language selection and encoded its HTML/URL output, pinned
   release actions, and documented the dated security scan results, including
   unresolved Debian package findings in the container images.
-- Refreshed the Russian panel and Capture wizard through DeepL, with reviewed
-  privacy and evidence terminology, preserved placeholders and command examples.
+- Updated Russian wording in the panel and Capture wizard, including privacy and
+  evidence terms. Placeholders and command examples are preserved.
 - Raised dependency security floors and regenerated the hash-locked build tools.
   Notification services now refuse HTTP redirects, including URL-level redirect
   overrides, so credentials cannot be forwarded to a different endpoint. Configure
@@ -635,7 +633,7 @@
 - The UI and docs say "workspace" throughout.
 - Exports can be saved as a password-protected AES-256 ZIP that 7-Zip and WinRAR open.
 - Notifications through Apprise: problems, changes in observed chats and a daily summary.
-- Interface in 13 languages and README, Quick start and Deployment guide in 12 translations, made with DeepL.
+- Added 13 interface languages and translated the README, Quick start and Deployment guide into 12 languages.
 - Off-site copy: everything goes encrypted to any S3-compatible storage, with Object Lock where available and a verified restore command.
 - After a restart, observation catches up on Telegram updates missed while it was off.
 - Observed chats are rechecked every 15 minutes for missed messages, edits and messages Telegram no longer returns.

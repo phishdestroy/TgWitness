@@ -2,7 +2,7 @@
 
 # TgWitness documentation
 
-**Choose a workflow. Find the details. Keep a record you can explain.**
+Install TgWitness, connect your account and choose what to save.
 
 [Project overview](../README.md) · [GitHub Wiki](https://github.com/phishdestroy/TgWitness/wiki) · [Offline handbook](wiki/Home.md) · [FAQ](wiki/FAQ.md)
 
@@ -95,13 +95,9 @@ For terminology, use the [glossary](wiki/Glossary.md).
 
 </details>
 
-The project also includes a documentation website in 25 languages, with light and dark
-themes and local search,
-animated message history, an interactive hash-chain sandbox, witness scenarios,
-a delivery chart, a complete investigation across channels, groups, private
-chats and bots, and a security guide that shows what leaves your machine. Its
-reference section renders every document listed here, with animated diagrams.
-The examples run in your browser with fictional data; they do not contact Telegram.
+The online guides include examples you can try in your browser: follow a message
+through its edits, check a signature or explore a sample investigation. These
+examples use fictional data and do not contact Telegram.
 [Preview it locally or publish it to GitHub Pages](internal/PUBLISHING.md#preview-the-website-locally).
 [Website structure and SEO](internal/SEO.md) describes the metadata and post-deployment checks.
 
