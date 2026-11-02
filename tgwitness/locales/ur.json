@@ -5768,5 +5768,29 @@
 "This workspace is not in the group.": "یہ ورک اسپیس گروپ میں شامل نہیں ہے۔",
 "Continuous collection": "مسلسل جمع",
 "Saved files": "محفوظ شدہ فائلیں",
-"Can Telegram see this server's address?": "کیا ٹیلیگرام اس سرور کا پتہ دیکھ سکتا ہے؟"
+"Can Telegram see this server's address?": "کیا ٹیلیگرام اس سرور کا پتہ دیکھ سکتا ہے؟",
+"No goal yet: choose one in the group settings.": "ابھی کوئی ہدف نہیں: گروپ کی ترتیبات میں سے ایک منتخب کریں۔",
+"Nothing needs attention.": "کسی چیز پر توجہ دینے کی ضرورت نہیں۔",
+"{n} ms": "{n} ms",
+"not checked": "چیک نہیں کیا گیا",
+"Chats several accounts see": "وہ چیٹس جو متعدد اکاؤنٹس دیکھ سکتے ہیں",
+"Several accounts can export one chat together: each fetches part of it and the archive is signed once. Channels and supergroups only.": "کئی اکاؤنٹس ایک ہی چیٹ کو ایک ساتھ ایکسپورٹ کر سکتے ہیں: ہر ایک اس کا ایک حصہ حاصل کرتا ہے اور آرکائیو ایک بار دستخط کیا جاتا ہے۔ صرف چینلز اور سپر گروپس۔",
+"No chat is seen by more than one account of this group yet.": "اس گروپ کے کسی بھی اکاؤنٹ نے ابھی تک اس چیٹ کو نہیں دیکھا۔",
+"none of them records it": "ان میں سے کوئی بھی اسے ریکارڈ نہیں کرتا",
+"not observed in the last {days} days": "گزشتہ {days} دنوں میں مشاہدہ نہیں ہوا",
+"no interruptions in {days} days": "{days} دن میں کوئی خلل نہیں",
+"{n} of {total} accounts see it": "{n} میں سے {total} اکاؤنٹس اسے دیکھتے ہیں",
+"recording paused": "ریکارڈنگ معطل",
+"Showing {n} of {total}.": "{n} میں سے {total} دکھا رہا ہے۔",
+"Open group": "گروپ کھولیں",
+"{n} interruptions in {days} days": {
+"one": "{n} وقفہ {days} دنوں میں",
+"other": "{days} دنوں میں {n} خلل"
+},
+"{n} interruption in {days} days": "{n} وقفہ {days} دنوں میں",
+"Export with {n} accounts": {
+"one": "{n} اکاؤنٹ کے ساتھ برآمد کریں",
+"other": "{n} اکاؤنٹس کے ساتھ برآمد کریں"
+},
+"Export with {n} account": "{n} اکاؤنٹ کے ساتھ برآمد کریں"
 }

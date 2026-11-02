@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- Each account group has its own screen at `/groups/<id>`, opened from Accounts: the
+  group's goal, which accounts need attention and why, with Fix; each account's kind
+  (dedicated or main), connection route and measured latency, latest message and
+  collection state; and the chats several of its accounts see, with how many see
+  each and any interruptions in the last 7 days when none of the accounts recording
+  it observed. A chat opens in a member's workspace or is exported with all of them
+  at once. Start, pause, the group route, a goal and the group settings are one
+  click away.
 - Account groups now share settings. The group page sets the goal, collection,
   protection and notification rules, recording, recheck schedule, report settings,
   parameters and connection route; members follow it, and an account with its own

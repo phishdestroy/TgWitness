@@ -116,6 +116,7 @@ function resetViewContent(view){
   if(view==='parameters')parametersView?.resetSession();
   if(view==='evidence'){exportsView?.resetSession();resetAccountExport();}
   if(view==='accounts')accountsView?.resetSession();
+  if(view==='group')groupView?.reset();
   if(view==='witness'){state.evidenceDirty=false;state.replicaDirty=false;state.alertsDirty=false;state.githubDirty=false;}
   if(view==='chats')chatListView?.resetSession();
   if(view==='sealed')window.TgWitnessCapture?.reset();
@@ -136,6 +137,7 @@ async function loadPanelView(view){
   else if(view==='witness')await loadExtras();
   else if(view==='parameters')await loadParameters();
   else if(view==='accounts'){renderAccounts();await loadProfiles();}
+  else if(view==='group'){await groupViewReady;await loadProfiles();await groupView.load(state.groupId);}
   else if(view==='chats')await refreshChats(true);
   else if(view==='observations')await refreshEvents();
   else if(view==='access')await loadAccess();
@@ -152,9 +154,9 @@ let routerTask=null;
 function routeSnapshot(){return {view:state.drawerSeq!==null?"observations":state.view,workspace:state.profile,
   chatId:state.view==="chats"?state.chat:null,seq:state.drawerSeq,kind:state.filter,source:state.source,q:state.search,
   since:state.eventSince,until:state.eventUntil,system:state.eventSystem,before:state.eventBefore,extra:state.extra||null,section:state.parameterSection||null,
-  step:state.view==="first-run"?settingsHub?.step||null:null};}
+  step:state.view==="first-run"?settingsHub?.step||null:null,group:state.view==="group"?state.groupId:null};}
 function ensureRouter(){
-  if(!routerTask)routerTask=import("./router.js?v=5").then(({createRouter})=>{
+  if(!routerTask)routerTask=import("./router.js?v=6").then(({createRouter})=>{
     window.TgWitnessRouter=createRouter({snapshot:routeSnapshot,ready:()=>!!state.me&&!$("workspace").hidden,
       error:message=>toast(tr(message),true),apply:applyRouteToPanel});return window.TgWitnessRouter;
   });
@@ -175,6 +177,7 @@ async function applyRouteToPanel(route,current){
   viewQueries("observations","[data-filter]").forEach(button=>button.classList.toggle("active",button.dataset.filter===state.filter));
   // A direct link to a chat must never show the previously open chat while the list loads.
   if(route.view==="chats"&&route.chatId!==null&&route.chatId!==state.chat)beginChat(route.chatId);
+  if(route.view==="group")state.groupId=route.group;
   navigate(route.view,{history:false,load:false});
   const view=state.view;
   if(view==='settings'||view==='first-run'){await settingsHubReady;await settingsHub.load(route.step);}
@@ -190,6 +193,7 @@ async function applyRouteToPanel(route,current){
   else if(view==="parameters"){
     await loadParameters();if(current()){state.parameterSection=route.section;if(route.section)parametersView?.selectSection(route.section,{record:false});}
   }else if(view==="accounts")await loadProfiles();
+  else if(view==="group"){await groupViewReady;await loadProfiles();if(current())await groupView.load(route.group);}
   else if(view==="connection"){await loadProfiles();if(current()&&!state.status.demo)await loadPolicy();await connectionViewReady;if(current())await connectionView.enter();}
   else if(view==="access")await loadAccess();
   else if(view==="system-log")await loadConsole();
@@ -598,7 +602,7 @@ function may(permission){return !!state.me&&(state.me.admin||state.me.permission
 function viewAllowed(view){
   const limited=!!state.status?.chats_limited;
   return {settings:!!state.me?.admin,'first-run':!!state.me?.admin,start:!!state.me&&!limited,sources:may("sources")&&!limited,evidence:may("export")&&!limited,sealed:may("export")&&!limited,witness:may("settings")&&!limited,
-    parameters:may("settings")&&!limited,connection:may("account")&&!limited,accounts:!!state.me?.admin,
+    parameters:may("settings")&&!limited,connection:may("account")&&!limited,accounts:!!state.me?.admin,group:!!state.me?.admin,
     access:!!state.me?.admin,"system-log":!!state.me?.admin,integrations:!!state.me?.admin,
     analysis:!!(state.status?.analysis?.enabled||state.status?.analysis?.media_available)}[view]??true;
 }
@@ -685,11 +689,11 @@ function navigate(view,options={}) {
   });
   syncLive();
   document.querySelectorAll("[data-view]").forEach(n=>{
-    const selected=n.dataset.view===(view==="sealed"?"evidence":view);
+    const selected=n.dataset.view===(view==="sealed"?"evidence":view==="group"?"accounts":view);
     n.classList.toggle("active",selected);
     if(selected)n.setAttribute("aria-current","page");else n.removeAttribute("aria-current");
   });
-  $("view-label").textContent=tr({settings:'Settings','first-run':'First setup',start:"Start here",chats:"Chats",observations:"Journal",sources:"Sources",evidence:"Exports",sealed:"Exports",witness:"Extras",parameters:"Parameters",connection:"Account",accounts:"Accounts",access:"Access","system-log":"System log",integrations:"Integrations",analysis:state.status?.analysis?.enabled?"Ask the archive":"Machine recognition"}[view]);
+  $("view-label").textContent=tr({settings:'Settings','first-run':'First setup',start:"Start here",chats:"Chats",observations:"Journal",sources:"Sources",evidence:"Exports",sealed:"Exports",witness:"Extras",parameters:"Parameters",connection:"Account",accounts:"Accounts",group:"Group",access:"Access","system-log":"System log",integrations:"Integrations",analysis:state.status?.analysis?.enabled?"Ask the archive":"Machine recognition"}[view]);
   show("entry-header",view==="connection");
   if(view==="connection")connectionSettings(false);
   if(state.status){renderSetup();renderWorkflowControls();}
@@ -1208,6 +1212,7 @@ async function loadProfiles(){
   if(state.view==='accounts')await window.TgWitnessFleet?.load();
   if(request!==profilesRequest)return;
   renderAccounts();
+  if(state.view==='group')groupView?.status();
 }
 function accountPhaseLabel(p){
   if(p.error_type==="DeletionPending")return tr("Deletion incomplete");
@@ -1227,6 +1232,31 @@ const accountsReady=import("./views/accounts.js?v=30").then(({createAccounts})=>
   if(state.view==='accounts')renderAccounts();
   return accountsView;
 }).catch(error=>toast(error.message,true));
+// The group screen (views/group.js): actions on a member open that member's workspace first.
+let groupView=null;
+const groupViewReady=import("./views/group.js?v=1").then(({createGroupView})=>{
+  groupView=createGroupView({root:$("view-group"),json,tr,trn,node,toast,getState:()=>state,avatarNode,stateBadge,
+    accountState:p=>accountState(p),accountPhaseLabel,healthPartNames,collectorLines,needsLook,fmtTime,fmtDuration,may,
+    switchProfile,navigate,loadProfiles,diagnose:openDiagnostics,openChat:openChatIn,exportTogether,
+    openConnection:async preset=>{await navigate('connection');await connectionViewReady;connectionView.preset(preset);},
+    openGroupSettings:async id=>{await navigate('settings');if(state.view==='settings'){await settingsHubReady;await settingsHub.openGroup(id);}}});
+  return groupView;
+}).catch(error=>toast(error.message,true));
+function openGroup(id){state.groupId=id;return navigate('group');}
+window.TgWitnessOpenGroup=openGroup;
+async function openChatIn(profileId,chatId){
+  if(state.profile!==profileId&&await switchProfile(profileId)===false)return false;
+  if(state.profile!==profileId||!state.token)return false;
+  // One history step: Back returns to the group screen.
+  await navigate('chats',{load:false,history:false});await refreshChats(false,chatId);
+  return await openChat(chatId)!==false;
+}
+let exportPreselect=null;
+async function exportTogether(profileId,chatId,members){
+  if(!await openChatIn(profileId,chatId))return;
+  exportPreselect=new Set(members);
+  try{await openExportDialog();}finally{exportPreselect=null;}
+}
 function renderAccounts(){
   if(state.view!=='accounts')return;
   const grid=$("accounts-list"),s=state.status;if(!grid||!s)return;
@@ -4902,7 +4932,8 @@ async function openExportDialog(){
   for(const p of state.profiles){
     const c=p.collector,lead=p.id===state.profile,connected=!!c?.has_session&&!p.error_type,account=c?.account;
     const row=node("label","export-account"),box=node("input"),who=node("span","export-account-who"),text=node("span");
-    box.type="checkbox";box.value=p.id;box.checked=lead;box.disabled=lead||!connected||basic;box.addEventListener("change",estimate);
+    box.type="checkbox";box.value=p.id;box.disabled=lead||!connected||basic;box.addEventListener("change",estimate);
+    box.checked=lead||!box.disabled&&!!exportPreselect?.has(p.id);
     text.append(node("b","",p.label),node("small","",lead?tr("starts the export and signs the archive"):!connected?tr("no Telegram account connected"):
       basic?tr("not possible for ordinary groups"):account?(account.username?"@"+account.username+" · ":"")+"ID "+account.id:""));
     who.append(avatarNode(account?account.id:null,account&&account.username?account.username:p.label,"",p.id),text);
@@ -5228,7 +5259,7 @@ async function pollWorkspace(){
     if(!window.TgWitnessLive?.active()&&state.view==="observations" && state.drawerSeq===null && state.eventBefore===null && state.events.length<=200&&window.TgWitnessJournal?.canRefresh()!==false
         && state.status.stats.head?.seq!==head) await refreshEvents();
     if(!window.TgWitnessLive?.active()&&state.view==="chats" && state.status.stats.head?.seq!==head) await refreshChats(true);
-    if(state.view==="accounts") await loadProfiles();
+    if(state.view==="accounts"||state.view==="group") await loadProfiles();
     if(state.view==="witness") await loadExtras();
     if(state.view==="access") await loadAccess(true);
     if(state.view==="system-log") await loadConsole();

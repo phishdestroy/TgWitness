@@ -5768,5 +5768,29 @@
 "This workspace is not in the group.": "Ushbu ish maydoni guruhda emas.",
 "Continuous collection": "Uzluksiz yig'ish",
 "Saved files": "Saqlangan fayllar",
-"Can Telegram see this server's address?": "Telegram bu server manzilini ko'rishi mumkinmi?"
+"Can Telegram see this server's address?": "Telegram bu server manzilini ko'rishi mumkinmi?",
+"No goal yet: choose one in the group settings.": "Hali maqsad yo'q: guruh sozlamalaridan birini tanlang.",
+"Nothing needs attention.": "E'tibor berish talab etilmaydi.",
+"{n} ms": "{n} ms",
+"not checked": "belgilanmagan",
+"Chats several accounts see": "Bir nechta akkauntlar ko'radigan suhbatlar",
+"Several accounts can export one chat together: each fetches part of it and the archive is signed once. Channels and supergroups only.": "Bir nechta akkaunt bir chatni birgalikda eksport qilishi mumkin: har biri uning bir qismini oladi va arxiv faqat bir marta imzolanadi. Faqat kanallar va superguruhlar.",
+"No chat is seen by more than one account of this group yet.": "Hozirgacha bu guruhning hech bir hisobida chat ko'rilmagan.",
+"none of them records it": "ularning hech biri uni yozib qoldirmaydi",
+"not observed in the last {days} days": "so'nggi {days} kun ichida kuzatilmagan",
+"no interruptions in {days} days": "{days} kun mobaynida hech qanday uzilishlarsiz",
+"{n} of {total} accounts see it": "{n} ta akkauntdan {total} tasi buni ko'radi",
+"recording paused": "yozib olish to'xtatildi",
+"Showing {n} of {total}.": "{n} ta {total} dan ko'rsatilmoqda.",
+"Open group": "Guruhni ochish",
+"{n} interruptions in {days} days": {
+"one": "{days} kun ichida {n} ta uzilish",
+"other": "{days} kun ichida {n} ta uzilish"
+},
+"{n} interruption in {days} days": "{days} kun ichida {n} ta uzilish",
+"Export with {n} accounts": {
+"one": "{n} ta akkaunt bilan eksport",
+"other": "{n} ta akkaunt bilan eksport"
+},
+"Export with {n} account": "{n} ta akkaunt bilan eksport"
 }

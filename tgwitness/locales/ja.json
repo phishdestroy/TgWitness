@@ -5734,5 +5734,27 @@
 "This workspace is not in the group.": "このワークスペースはグループに含まれていません。",
 "Continuous collection": "継続的な収集",
 "Saved files": "保存されたファイル",
-"Can Telegram see this server's address?": "Telegramはこのサーバーのアドレスを確認できますか？"
+"Can Telegram see this server's address?": "Telegramはこのサーバーのアドレスを確認できますか？",
+"No goal yet: choose one in the group settings.": "まだ目標は設定されていません：グループ設定で1つ選択してください。",
+"Nothing needs attention.": "特に注意すべき点はありません。",
+"{n} ms": "{n}ミリ秒",
+"not checked": "未確認",
+"Chats several accounts see": "複数のアカウントが閲覧できるチャット",
+"Several accounts can export one chat together: each fetches part of it and the archive is signed once. Channels and supergroups only.": "複数のアカウントで1つのチャットをまとめてエクスポートすることができます。各アカウントがその一部を取得し、アーカイブには1回だけ署名が行われます。チャンネルおよびスーパーグループのみ対象です。",
+"No chat is seen by more than one account of this group yet.": "現時点では、このグループの複数のアカウントで同じチャットが表示されているものはありません。",
+"none of them records it": "いずれも記録されません",
+"not observed in the last {days} days": "過去{days}日間、確認されませんでした",
+"no interruptions in {days} days": "{days}日間、中断なし",
+"{n} of {total} accounts see it": "{total}アカウントのうち{n}がこれを閲覧しています",
+"recording paused": "記録を一時停止しました",
+"Showing {n} of {total}.": "{total}件のうち{n}件を表示しています。",
+"Open group": "グループを開く",
+"{n} interruptions in {days} days": {
+"other": "{days}日間で{n}回の中断"
+},
+"{n} interruption in {days} days": "{days}日間で{n}回の中断",
+"Export with {n} accounts": {
+"other": "{n}つのアカウントでエクスポート"
+},
+"Export with {n} account": "{n}つのアカウントでエクスポート"
 }

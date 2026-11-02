@@ -5768,5 +5768,29 @@
 "This workspace is not in the group.": "این فضای کاری در گروه نیست.",
 "Continuous collection": "جمع‌آوری مداوم",
 "Saved files": "فایل‌های ذخیره شده",
-"Can Telegram see this server's address?": "آیا تلگرام می‌تواند آدرس این سرور را ببیند؟"
+"Can Telegram see this server's address?": "آیا تلگرام می‌تواند آدرس این سرور را ببیند؟",
+"No goal yet: choose one in the group settings.": "هنوز هیچ هدفی وجود ندارد: یکی را در تنظیمات گروه انتخاب کنید.",
+"Nothing needs attention.": "نیازی به توجه نیست.",
+"{n} ms": "{n} میلی‌ثانیه",
+"not checked": "انتخاب نشده",
+"Chats several accounts see": "گفتگوهایی که چندین حساب می‌بینند",
+"Several accounts can export one chat together: each fetches part of it and the archive is signed once. Channels and supergroups only.": "چند حساب می‌توانند یک گفتگوی مشترک را به‌صورت یکجا صادر کنند: هر حساب بخشی از آن را دریافت می‌کند و آرشیو تنها یک‌بار امضا می‌شود. فقط برای کانال‌ها و ابرگروه‌ها.",
+"No chat is seen by more than one account of this group yet.": "هنوز هیچ چتی توسط بیش از یک حساب از این گروه مشاهده نشده است.",
+"none of them records it": "هیچ‌کدام از آن‌ها آن را ضبط نمی‌کنند",
+"not observed in the last {days} days": "در {days} روز گذشته مشاهده نشده است",
+"no interruptions in {days} days": "بدون وقفه در {days} روز",
+"{n} of {total} accounts see it": " {n} از {total} حساب آن را می‌بینند",
+"recording paused": "ثبت متوقف شد",
+"Showing {n} of {total}.": "نمایش {n} از {total}.",
+"Open group": "گروه باز",
+"{n} interruptions in {days} days": {
+"one": "{n} وقفه در {days} روز",
+"other": "{n} وقفه در {days} روز"
+},
+"{n} interruption in {days} days": "{n} وقفه در {days} روز",
+"Export with {n} accounts": {
+"one": "صادرات با {n} حساب",
+"other": "صادرات با {n} حساب"
+},
+"Export with {n} account": "صادرات با {n} حساب"
 }

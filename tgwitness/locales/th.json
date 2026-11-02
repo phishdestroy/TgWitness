@@ -5734,5 +5734,27 @@
 "This workspace is not in the group.": "พื้นที่ทำงานนี้ไม่อยู่ในกลุ่ม",
 "Continuous collection": "การเก็บรวบรวมข้อมูลอย่างต่อเนื่อง",
 "Saved files": "ไฟล์ที่บันทึกไว้",
-"Can Telegram see this server's address?": "Telegram สามารถเห็นที่อยู่ของเซิร์ฟเวอร์นี้ได้หรือไม่?"
+"Can Telegram see this server's address?": "Telegram สามารถเห็นที่อยู่ของเซิร์ฟเวอร์นี้ได้หรือไม่?",
+"No goal yet: choose one in the group settings.": "ยังไม่มีเป้าหมาย: เลือกหนึ่งข้อในตั้งค่ากลุ่ม",
+"Nothing needs attention.": "ไม่มีส่วนใดที่ต้องแก้ไข",
+"{n} ms": "{n} ms",
+"not checked": "ยังไม่ได้รับการตรวจสอบ",
+"Chats several accounts see": "การสนทนาที่บัญชีหลายบัญชีสามารถเห็นได้",
+"Several accounts can export one chat together: each fetches part of it and the archive is signed once. Channels and supergroups only.": "หลายบัญชีสามารถส่งออกการสนทนาหนึ่งครั้งร่วมกันได้: แต่ละบัญชีจะดึงข้อมูลส่วนหนึ่งมา และไฟล์เก็บถาวรจะถูกลงนามเพียงครั้งเดียว ใช้ได้เฉพาะกับช่อง (Channels) และกลุ่มใหญ่ (Supergroups) เท่านั้น",
+"No chat is seen by more than one account of this group yet.": "ยังไม่มีบัญชีใดในกลุ่มนี้ที่เห็นการสนทนานี้มากกว่าหนึ่งบัญชี",
+"none of them records it": "ไม่มีเครื่องมือใดที่บันทึกข้อมูลนี้",
+"not observed in the last {days} days": "ไม่พบใน{days}{days} วันที่ผ่านมา",
+"no interruptions in {days} days": "ไม่มีการขัดจังหวะใน{days} วัน",
+"{n} of {total} accounts see it": "{n} ในจำนวน {total} บัญชีเห็นข้อความนี้",
+"recording paused": "การบันทึกถูกหยุดชั่วคราว",
+"Showing {n} of {total}.": "แสดง {n} จาก {total}.",
+"Open group": "เปิดกลุ่ม",
+"{n} interruptions in {days} days": {
+"other": "{n} ครั้งใน{days} วัน"
+},
+"{n} interruption in {days} days": "{n} ครั้งใน{days} วัน",
+"Export with {n} accounts": {
+"other": "ส่งออกข้อมูลพร้อมบัญชี {n} บัญชี"
+},
+"Export with {n} account": "ส่งออกข้อมูลพร้อมบัญชี {n} บัญชี"
 }

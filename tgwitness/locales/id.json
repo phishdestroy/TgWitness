@@ -5734,5 +5734,27 @@
 "This workspace is not in the group.": "Ruang kerja ini tidak termasuk dalam grup.",
 "Continuous collection": "Pengumpulan berkelanjutan",
 "Saved files": "Berkas yang disimpan",
-"Can Telegram see this server's address?": "Apakah Telegram dapat melihat alamat server ini?"
+"Can Telegram see this server's address?": "Apakah Telegram dapat melihat alamat server ini?",
+"No goal yet: choose one in the group settings.": "Belum ada tujuan: pilih salah satu di pengaturan grup.",
+"Nothing needs attention.": "Tidak ada yang perlu diperhatikan.",
+"{n} ms": "{n} ms",
+"not checked": "belum dicentang",
+"Chats several accounts see": "Obrolan yang dapat dilihat oleh beberapa akun",
+"Several accounts can export one chat together: each fetches part of it and the archive is signed once. Channels and supergroups only.": "Beberapa akun dapat mengekspor satu obrolan secara bersamaan: masing-masing mengambil bagian darinya dan arsip tersebut ditandatangani satu kali. Hanya berlaku untuk saluran dan supergrup.",
+"No chat is seen by more than one account of this group yet.": "Belum ada obrolan yang terlihat oleh lebih dari satu akun dalam grup ini.",
+"none of them records it": "tidak ada satupun yang merekamnya",
+"not observed in the last {days} days": "tidak terdeteksi dalam {days} hari terakhir",
+"no interruptions in {days} days": "tidak ada gangguan selama {days} hari",
+"{n} of {total} accounts see it": "{n} dari {total} akun melihatnya",
+"recording paused": "perekaman dijeda",
+"Showing {n} of {total}.": "Menampilkan {n} dari {total}.",
+"Open group": "Buka grup",
+"{n} interruptions in {days} days": {
+"other": "{n} gangguan dalam {days} hari"
+},
+"{n} interruption in {days} days": "{n} gangguan dalam {days} hari",
+"Export with {n} accounts": {
+"other": "Ekspor dengan {n} akun"
+},
+"Export with {n} account": "Ekspor dengan {n} akun"
 }

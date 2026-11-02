@@ -5734,5 +5734,27 @@
 "This workspace is not in the group.": "이 작업 공간은 그룹에 속해 있지 않습니다.",
 "Continuous collection": "지속적인 수집",
 "Saved files": "저장된 파일",
-"Can Telegram see this server's address?": "텔레그램에서 이 서버의 주소를 확인할 수 있나요?"
+"Can Telegram see this server's address?": "텔레그램에서 이 서버의 주소를 확인할 수 있나요?",
+"No goal yet: choose one in the group settings.": "아직 목표가 없습니다: 그룹 설정에서 하나를 선택하세요.",
+"Nothing needs attention.": "특별히 주의할 사항은 없습니다.",
+"{n} ms": "{n}ms",
+"not checked": "확인되지 않음",
+"Chats several accounts see": "여러 계정이 볼 수 있는 채팅",
+"Several accounts can export one chat together: each fetches part of it and the archive is signed once. Channels and supergroups only.": "여러 계정이 하나의 채팅을 함께 내보낼 수 있습니다. 각 계정이 채팅의 일부를 가져오고, 아카이브는 한 번만 서명됩니다. 채널과 슈퍼그룹에만 해당됩니다.",
+"No chat is seen by more than one account of this group yet.": "아직 이 그룹에 속한 두 개 이상의 계정이 동일한 채팅을 보고 있는 경우는 없습니다.",
+"none of them records it": "이 중 어느 것도 이를 기록하지 않습니다",
+"not observed in the last {days} days": "지난 {days}일 동안 관찰되지 않음",
+"no interruptions in {days} days": "{days}일 동안 중단 없음",
+"{n} of {total} accounts see it": "{total}개 계정 중 {n}개가 이를 확인합니다",
+"recording paused": "기록 일시 중지됨",
+"Showing {n} of {total}.": "{total}개 중 {n}개를 표시 중입니다.",
+"Open group": "그룹 열기",
+"{n} interruptions in {days} days": {
+"other": "{days}일 동안 {n}회의 중단"
+},
+"{n} interruption in {days} days": "{days}일 동안 {n}회의 중단",
+"Export with {n} accounts": {
+"other": "{n}개 계정으로 내보내기"
+},
+"Export with {n} account": "{n}개 계정으로 내보내기"
 }

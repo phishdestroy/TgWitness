@@ -6076,5 +6076,33 @@
 "Group shares its copied settings": "Теперь группа использует настройки, скопированные из аккаунта",
 "These group settings conflict. Review external requests and timestamps.": "Эти настройки группы противоречат друг другу. Проверьте внешние запросы и временные метки.",
 "The group does not share this setting.": "Эта настройка не является общей для группы.",
-"This workspace is not in the group.": "Эта рабочая область не входит в группу."
+"This workspace is not in the group.": "Эта рабочая область не входит в группу.",
+"No goal yet: choose one in the group settings.": "Цель пока не выбрана: выберите одну в настройках группы.",
+"Nothing needs attention.": "Ничего не требует внимания.",
+"{n} ms": "{n} мс",
+"not checked": "не проверено",
+"Chats several accounts see": "Чаты, доступные нескольким аккаунтам",
+"Several accounts can export one chat together: each fetches part of it and the archive is signed once. Channels and supergroups only.": "Несколько аккаунтов могут экспортировать один чат совместно: каждый из них извлекает свою часть, а архив подписывается один раз. Только каналы и супергруппы.",
+"No chat is seen by more than one account of this group yet.": "Пока ни один чат не просматривается более чем одним аккаунтом из этой группы.",
+"none of them records it": "ни один из них это не фиксирует",
+"not observed in the last {days} days": "не наблюдалось в течение последних {days} дней",
+"no interruptions in {days} days": "без перерывов в течение {days} дней",
+"{n} of {total} accounts see it": "{n} из {total} аккаунтов видят это",
+"recording paused": "запись приостановлена",
+"Showing {n} of {total}.": "Отображается {n} из {total}.",
+"Open group": "Открыть группу",
+"{n} interruptions in {days} days": {
+"one": "{n} прерывание за {days} дней",
+"few": "{n} прерывания за {days} дней",
+"many": "{n} прерываний за {days} дней",
+"other": "{n} перерыва за {days} дней"
+},
+"{n} interruption in {days} days": "{n} прерывание за {days} дней",
+"Export with {n} accounts": {
+"one": "Экспорт с {n} аккаунтом",
+"few": "Экспорт с {n} аккаунтами",
+"many": "Экспорт с {n} аккаунтами",
+"other": "Экспорт с {n} аккаунтами"
+},
+"Export with {n} account": "Экспорт с {n} аккаунтом"
 }

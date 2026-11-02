@@ -5836,5 +5836,33 @@
 "This workspace is not in the group.": "Ten obszar roboczy nie należy do grupy.",
 "Continuous collection": "Ciągłe gromadzenie danych",
 "Saved files": "Zapisane pliki",
-"Can Telegram see this server's address?": "Czy Telegram widzi adres tego serwera?"
+"Can Telegram see this server's address?": "Czy Telegram widzi adres tego serwera?",
+"No goal yet: choose one in the group settings.": "Brak celu: wybierz jeden w ustawieniach grupy.",
+"Nothing needs attention.": "Nie ma żadnych kwestii wymagających uwagi.",
+"{n} ms": "{n} ms",
+"not checked": "niezaznaczone",
+"Chats several accounts see": "Czat widoczny dla kilku kont",
+"Several accounts can export one chat together: each fetches part of it and the archive is signed once. Channels and supergroups only.": "Kilka kont może wspólnie eksportować jedną rozmowę: każde z nich pobiera jej część, a archiwum jest podpisywane tylko raz. Dotyczy wyłącznie kanałów i supergrup.",
+"No chat is seen by more than one account of this group yet.": "Żadna rozmowa nie jest jeszcze widoczna dla więcej niż jednego konta z tej grupy.",
+"none of them records it": "żadne z nich tego nie rejestruje",
+"not observed in the last {days} days": "nie zaobserwowano w ciągu ostatnich {days} dni",
+"no interruptions in {days} days": "brak przerw od {days} dni",
+"{n} of {total} accounts see it": "Widzi zu {n} und zu {total} Konten",
+"recording paused": "nagrywanie wstrzymane",
+"Showing {n} of {total}.": "Wyświetlono {n} z {total}.",
+"Open group": "Otwórz grupę",
+"{n} interruptions in {days} days": {
+"one": "{n} przerw{days} dni",
+"few": "{n} przerwy w ciągu {days} dni",
+"many": "{n} przerw w ciągu {days} dni",
+"other": "{n} przerwy w ciągu {days} dni"
+},
+"{n} interruption in {days} days": "{n} przerw{days} dni",
+"Export with {n} accounts": {
+"one": "Eksport z {n} kontem",
+"few": "Eksport z {n} kontami",
+"many": "Eksport z {n} kontami",
+"other": "Eksport z {n} kontami"
+},
+"Export with {n} account": "Eksport z {n} kontem"
 }

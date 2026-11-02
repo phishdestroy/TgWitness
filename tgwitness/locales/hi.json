@@ -5768,5 +5768,29 @@
 "This workspace is not in the group.": "यह कार्यक्षेत्र समूह में नहीं है।",
 "Continuous collection": "निरंतर संग्रह",
 "Saved files": "सहेजी गई फ़ाइलें",
-"Can Telegram see this server's address?": "क्या टेलीग्राम इस सर्वर का पता देख सकता है?"
+"Can Telegram see this server's address?": "क्या टेलीग्राम इस सर्वर का पता देख सकता है?",
+"No goal yet: choose one in the group settings.": "अभी कोई लक्ष्य नहीं: समूह सेटिंग्स में से एक चुनें।",
+"Nothing needs attention.": "किसी भी चीज़ पर ध्यान देने की आवश्यकता नहीं है।",
+"{n} ms": "{n} मिलीसेकंड",
+"not checked": "चेक नहीं किया गया",
+"Chats several accounts see": "चैट्स जो कई खाते देखते हैं",
+"Several accounts can export one chat together: each fetches part of it and the archive is signed once. Channels and supergroups only.": "कई खाते एक साथ एक चैट एक्सपोर्ट कर सकते हैं: प्रत्येक उसका एक हिस्सा प्राप्त करता है और आर्काइव एक बार साइन किया जाता है। केवल चैनल और सुपरग्रुप।",
+"No chat is seen by more than one account of this group yet.": "इस समूह के किसी भी खाते द्वारा अभी तक कोई चैट नहीं देखी गई है।",
+"none of them records it": "इनमें से कोई भी इसे रिकॉर्ड नहीं करता",
+"not observed in the last {days} days": "पिछले {days} दिनों में नहीं देखा गया",
+"no interruptions in {days} days": "{days} दिनों में कोई रुकावट नहीं",
+"{n} of {total} accounts see it": "{n} में से {total} खाते इसे देखते हैं",
+"recording paused": "रिकॉर्डिंग रुकी हुई",
+"Showing {n} of {total}.": "{total} में से {n} दिखा रहा है।",
+"Open group": "समूह खोलें",
+"{n} interruptions in {days} days": {
+"one": "{days} दिनों में {n} रुकावट",
+"other": "{days} दिनों में {n} रुकावटें"
+},
+"{n} interruption in {days} days": "{days} दिनों में {n} रुकावट",
+"Export with {n} accounts": {
+"one": "{n} खाते के साथ निर्यात करें",
+"other": "{n} खातों के साथ निर्यात करें"
+},
+"Export with {n} account": "{n} खाते के साथ निर्यात करें"
 }

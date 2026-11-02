@@ -5734,5 +5734,27 @@
 "This workspace is not in the group.": "此工作区不属于该组。",
 "Continuous collection": "持续收集",
 "Saved files": "已保存的文件",
-"Can Telegram see this server's address?": "Telegram 能看到该服务器的地址吗？"
+"Can Telegram see this server's address?": "Telegram 能看到该服务器的地址吗？",
+"No goal yet: choose one in the group settings.": "尚未设定目标：请在组设置中选择一个。",
+"Nothing needs attention.": "无需特别注意。",
+"{n} ms": "{n}毫秒",
+"not checked": "未核对",
+"Chats several accounts see": "多个账户可见的聊天",
+"Several accounts can export one chat together: each fetches part of it and the archive is signed once. Channels and supergroups only.": "多个账户可以共同导出一个聊天记录：每个账户分别获取其中的一部分，然后对整个存档进行一次签名。仅限频道和超级群组。",
+"No chat is seen by more than one account of this group yet.": "目前尚无该组中超过一个账户能看到该聊天记录。",
+"none of them records it": "它们都没有记录该内容",
+"not observed in the last {days} days": "在过去 {days} 天内未观察到",
+"no interruptions in {days} days": "{days}天内未中断",
+"{n} of {total} accounts see it": "{n}个账户（总计{total}个）看到了该内容",
+"recording paused": "录制已暂停",
+"Showing {n} of {total}.": "显示 {n} 个，共 {total} 个。",
+"Open group": "打开组",
+"{n} interruptions in {days} days": {
+"other": "{days}天内发生{n}次中断"
+},
+"{n} interruption in {days} days": "{days}天内发生{n}次中断",
+"Export with {n} accounts": {
+"other": "导出 {n} 个账户"
+},
+"Export with {n} account": "导出 {n} 个账户"
 }

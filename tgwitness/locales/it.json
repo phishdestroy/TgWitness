@@ -5768,5 +5768,29 @@
 "This workspace is not in the group.": "Questo spazio di lavoro non fa parte del gruppo.",
 "Continuous collection": "Raccolta continua",
 "Saved files": "File salvati",
-"Can Telegram see this server's address?": "Telegram può vedere l'indirizzo di questo server?"
+"Can Telegram see this server's address?": "Telegram può vedere l'indirizzo di questo server?",
+"No goal yet: choose one in the group settings.": "Nessun obiettivo ancora: sceglierne uno nelle impostazioni del gruppo.",
+"Nothing needs attention.": "Non è necessario intervenire.",
+"{n} ms": "{n} ms",
+"not checked": "non verificato",
+"Chats several accounts see": "Chat visibili da più account",
+"Several accounts can export one chat together: each fetches part of it and the archive is signed once. Channels and supergroups only.": "È possibile esportare una chat in modo congiunto da più account: ciascuno ne recupera una parte e l’archivio viene firmato una sola volta. Solo canali e supergruppi.",
+"No chat is seen by more than one account of this group yet.": "Nessuna chat è ancora visibile da più di un account di questo gruppo.",
+"none of them records it": "nessuno di essi lo registra",
+"not observed in the last {days} days": "non osservato negli ultimi {days} giorni",
+"no interruptions in {days} days": "nessuna interruzione da {days} giorni",
+"{n} of {total} accounts see it": "{n} degli {total} account lo vedono",
+"recording paused": "registrazione in pausa",
+"Showing {n} of {total}.": "Vengono visualizzati {n} su {total}.",
+"Open group": "Apri gruppo",
+"{n} interruptions in {days} days": {
+"one": "{n} interruzione tra {days} giorni",
+"other": "{n} interruzioni in {days} giorni"
+},
+"{n} interruption in {days} days": "{n} interruzione tra {days} giorni",
+"Export with {n} accounts": {
+"one": "Esporta con {n} account",
+"other": "Esportazione con {n} account"
+},
+"Export with {n} account": "Esporta con {n} account"
 }

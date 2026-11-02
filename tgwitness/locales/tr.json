@@ -5768,5 +5768,29 @@
 "This workspace is not in the group.": "Bu çalışma alanı gruba dahil değildir.",
 "Continuous collection": "Sürekli toplama",
 "Saved files": "Kaydedilen dosyalar",
-"Can Telegram see this server's address?": "Telegram bu sunucunun adresini görebilir mi?"
+"Can Telegram see this server's address?": "Telegram bu sunucunun adresini görebilir mi?",
+"No goal yet: choose one in the group settings.": "Henüz bir hedef yok: grup ayarlarından birini seçin.",
+"Nothing needs attention.": "Dikkat edilmesi gereken bir husus yoktur.",
+"{n} ms": "{n} ms",
+"not checked": "kontrol edilmedi",
+"Chats several accounts see": "Birden fazla hesabın görebildiği sohbetler",
+"Several accounts can export one chat together: each fetches part of it and the archive is signed once. Channels and supergroups only.": "Birden fazla hesap, bir sohbeti birlikte dışa aktarabilir: her hesap sohbetin bir kısmını alır ve arşiv tek seferde imzalanır. Yalnızca kanallar ve süper gruplar için geçerlidir.",
+"No chat is seen by more than one account of this group yet.": "Bu gruptaki hiçbir sohbet henüz birden fazla hesap tarafından görülmemiştir.",
+"none of them records it": "hiçbiri bunu kaydetmez",
+"not observed in the last {days} days": "son {days} gün içinde gözlemlenmedi",
+"no interruptions in {days} days": "{days} gündür kesinti yok",
+"{n} of {total} accounts see it": "{total} hesaptan {n}'i görüyor",
+"recording paused": "kayıt duraklatıldı",
+"Showing {n} of {total}.": "{total}'in {n}'i gösteriliyor.",
+"Open group": "Grubu aç",
+"{n} interruptions in {days} days": {
+"one": "{days} gün içinde {n} kesinti",
+"other": "{days} gün içinde {n} kesinti"
+},
+"{n} interruption in {days} days": "{days} gün içinde {n} kesinti",
+"Export with {n} accounts": {
+"one": "{n} hesapla dışa aktar",
+"other": "{n} hesapla dışa aktar"
+},
+"Export with {n} account": "{n} hesapla dışa aktar"
 }
