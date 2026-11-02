@@ -553,7 +553,7 @@ class Collector:
         if client_profile is None and (saved.get("api_id"), saved.get("api_hash")) == (api_id, api_hash):
             if not session or session_key(session) == session_key(saved.get("session")):
                 client_profile = saved.get("client_profile")
-        device = client_identity.resolve(api_id, client_profile)
+        device = client_identity.resolve(api_id, client_profile, self.vault.public_key)
         options = {key: value for key, value in device.items() if key != "lang_pack"}
         string_session = StringSession(session)
         self.resumed_state_at = self.load_update_state(string_session)

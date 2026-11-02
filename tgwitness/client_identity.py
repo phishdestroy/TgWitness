@@ -48,11 +48,11 @@ def from_account(raw):
     return validate(profile)
 
 
-def resolve(api_id, supplied=None):
+def resolve(api_id, supplied=None, seed=""):
     machine = platform.machine()
     model = "PC 64bit" if machine in ("x86_64", "AMD64") else "PC 32bit" if machine in ("i386", "i686", "x86") else machine
     profile = {"device_model": model or "Desktop", "system_version": re.sub(r"-.+", "", platform.release()) or "1.0",
                "app_version": TelegramClient.__version__, "lang_code": "en", "system_lang_code": "en", "lang_pack": ""}
-    profile.update(api_pool.device_for(api_id))
+    profile.update(api_pool.device_for(api_id, seed))
     profile.update(validate(supplied))
     return validate(profile)

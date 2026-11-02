@@ -1,5 +1,6 @@
 """Inspect real MTProto initialization metadata without connecting to Telegram."""
 import asyncio
+import argparse
 import base64
 import json
 from pathlib import Path
@@ -14,13 +15,12 @@ from telethon.sessions import StringSession
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from tgwitness import api_pool, client_identity  # noqa: E402
+from tgwitness import api_pool, client_identity, client_profiles  # noqa: E402
 from tgwitness.account_import import import_accounts, json_account  # noqa: E402
 from tgwitness.collector import Collector  # noqa: E402
 from tgwitness.security import Vault  # noqa: E402
 from tgwitness.store import Store  # noqa: E402
 from tools.browser_fixtures import FakeClient, saved_session, sqlite_fixture  # noqa: E402
-from tools.check_session_reservations import workspace, import_body, RecordingClient  # noqa: E402
 
 PROFILE = {"device_model": "Synthetic laptop", "system_version": "Windows 11", "app_version": "6.0.0 x64",
            "lang_code": "en", "system_lang_code": "en-US", "lang_pack": "tdesktop"}
@@ -116,6 +116,7 @@ async def check_retention(root):
 
 
 async def check_routes():
+    from tools.check_session_reservations import workspace, import_body, RecordingClient
     async with workspace() as (app, http):
         body = import_body()
         body["files"].append(uploaded("synthetic.json", json.dumps(METADATA).encode()))
@@ -139,7 +140,54 @@ async def check_routes():
         assert response.status_code == 422 and RecordingClient.connections == connections
 
 
-async def main():
+def check_catalog():
+    data = client_profiles.catalog()
+    models = {item["model"] for item in data["models"]}
+    systems = {item["version"] for item in data["systems"]}
+    assert len(models) == len(data["models"]) == 116
+    assert systems == {"Windows 10 x64", "Windows 11 x64"}
+    assert data["app_version"] == "7.3.3 x64" and data["api_id"] == api_pool.DESKTOP_ID
+    assert all(isinstance(item["weight"], int) and item["weight"] > 0 for item in [*data["models"], *data["systems"]])
+    assert Path(client_profiles.__file__).with_suffix(".LICENSE").is_file()
+    found = set()
+    for index in range(500):
+        seed = "synthetic-workspace-" + str(index)
+        profile = client_identity.resolve(api_pool.DESKTOP_ID, seed=seed)
+        assert profile == client_identity.resolve(api_pool.DESKTOP_ID, seed=seed)
+        assert profile["device_model"] in models and profile["system_version"] in systems
+        assert profile["app_version"] == data["app_version"] and profile["lang_pack"] == "tdesktop"
+        found.add(profile["device_model"])
+    assert len(found) > 80
+    with patch.object(api_pool, "rejected", set()):
+        assert api_pool.login_order()[0][0] == api_pool.DESKTOP_ID
+        saved_pair = next(pair for pair in api_pool.POOL if pair[0] != api_pool.DESKTOP_ID)
+        assert api_pool.login_order(saved_pair)[0] == saved_pair
+        api_pool.reject(api_pool.DESKTOP_ID)
+        assert all(pair[0] != api_pool.DESKTOP_ID for pair in api_pool.login_order())
+
+
+async def check_catalog_retention(root):
+    vault, store = Vault(root), Store(root)
+    store.bind(vault)
+    vault.save("network", {"kind": "direct"})
+    collector = Collector(store, vault, FakeClient)
+    try:
+        pair = next(pair for pair in api_pool.POOL if pair[0] == api_pool.DESKTOP_ID)
+        await collector.configure(*pair, saved_session())
+        saved = vault.read("credentials")["client_profile"]
+        await collector.stop(shutdown=True)
+        collector = Collector(store, vault, FakeClient)
+        # Updating bundled defaults must leave an existing account's complete profile intact.
+        with patch.object(client_profiles, "desktop", return_value={**saved, "app_version": "99.0.0 x64"}):
+            await collector.restore()
+        assert collector.client.tgwitness_client_profile == saved
+        assert vault.read("credentials")["client_profile"] == saved
+    finally:
+        await collector.stop(shutdown=True)
+        store.close()
+
+
+async def main(http=False):
     imported = StringSession()
     imported.set_dc(2, "149.154.167.51", 443)
     imported.auth_key = AuthKey(b"x" * 256)
@@ -182,11 +230,18 @@ async def main():
         finally:
             store.close()
         check_imports()
+        check_catalog()
         await check_retention(root / "retention")
-        await check_routes()
+        await check_catalog_retention(root / "catalog-retention")
+        if http:
+            await check_routes()
     print(f"Client identity passed: {checks} real initialization requests; imported profiles, encrypted retention, "
-          "legacy migration, stale-restore protection, single/bulk HTTP import; no Telegram connections.")
+          "legacy migration, stale-restore protection, 116-model Desktop catalog; no Telegram connections.")
+    if http:
+        print("Single and bulk HTTP import also passed.")
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--http", action="store_true", help="Also exercise HTTP import routes; requires dev dependencies.")
+    asyncio.run(main(parser.parse_args().http))

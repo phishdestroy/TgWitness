@@ -33,28 +33,31 @@ POOL = (
 POOL_IDS = frozenset(api_id for api_id, _ in POOL)
 DESKTOP_ID = 2040
 
-DESKTOP_DEVICE = {"device_model": "Desktop", "system_version": "Windows 10", "app_version": "5.6.3 x64",
-                  "lang_code": "en", "system_lang_code": "en-US"}
-
 PAIR_ERRORS = (ApiIdInvalidError, ApiIdPublishedFloodError, UpdateAppToLoginError)
 
 ATTEMPTS = 8
 rejected = set()
 
 
-def device_for(api_id):
-    """Keep the Desktop API profile; other pairs use the client's platform defaults."""
+def device_for(api_id, seed=""):
+    """Use the Desktop catalog only with its API; other pairs keep platform defaults."""
     if api_id == DESKTOP_ID:
-        return dict(DESKTOP_DEVICE)
+        from .client_profiles import desktop
+        return desktop(seed)
     return {}
 
 
 def login_order(first=None):
-    """Pairs for one login: a previously used pool pair first, then the rest in random order."""
+    """Retain a saved pair; prefer the known Desktop profile for a fresh login."""
     pairs = [pair for pair in POOL if pair[0] not in rejected and pair != first]
     random.shuffle(pairs)
     if first in POOL and first[0] not in rejected:
         pairs.insert(0, first)
+    elif first is None:
+        desktop = next((pair for pair in pairs if pair[0] == DESKTOP_ID), None)
+        if desktop:
+            pairs.remove(desktop)
+            pairs.insert(0, desktop)
     return (pairs or list(POOL))[:ATTEMPTS]
 
 
