@@ -189,6 +189,7 @@ def main():
                   "SIGNING_EXPONENT": public_exponent, "SIGNING_KEY_SHA256": digest(public_key),
                   "WHEEL_SIGNATURE_SHA256": digest(signing_key.sign(wheel_bytes, padding.PKCS1v15(), hashes.SHA256())),
                   "CONSTRAINTS_SIGNATURE_SHA256": digest(signing_key.sign(locked, padding.PKCS1v15(), hashes.SHA256()))}
+        values["SITE_SCRIPT_SRI"] = "sha256-" + base64.b64encode(hashlib.sha256((TEMPLATES / "site.js").read_bytes()).digest()).decode()
         scripts = {}
         for name in ("install.sh", "install.ps1"):
             content = render(name + ".in", values)
@@ -227,12 +228,12 @@ def main():
         put(output / "mark.svg", (ROOT / "tgwitness" / "static" / "mark.svg").read_bytes())
         put(output / "_headers", (
             "/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: no-referrer\n"
-            "  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'\n"
-            "  Cache-Control: public, max-age=300\n"
+            "  Content-Security-Policy: default-src 'none'; script-src '" + values["SITE_SCRIPT_SRI"] + "'; style-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'\n"
+            "  Cache-Control: public, max-age=300, no-transform\n"
             "/install.sh\n  Content-Type: text/plain; charset=utf-8\n"
             "/install.ps1\n  Content-Type: text/plain; charset=utf-8\n"
             "/install.cmd\n  Content-Type: text/plain; charset=utf-8\n"
-            "/releases/*\n  Cache-Control: public, max-age=31536000, immutable\n"
+            "/releases/*\n  Cache-Control: public, max-age=31536000, immutable, no-transform\n"
         ).encode())
     print(json.dumps({"output": str(output), "source_revision": revision, "release_id": release_id,
                       "wheel_sha256": wheel_hash, "base_url": base}, indent=2))

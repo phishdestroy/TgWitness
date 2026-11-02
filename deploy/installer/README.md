@@ -5,10 +5,11 @@ The builder packages the checked application, embeds SHA-256 hashes in the
 installers and creates an immutable release directory. Hosting needs only static
 HTTPS: a separate virtual host on the API server or Cloudflare Workers assets.
 
-The intended public address is `https://get.destroy.tools`. Connect and verify
-that hostname before putting the commands in the main installation instructions.
+The public download address is [get.destroy.tools](https://get.destroy.tools/),
+served as static Cloudflare Workers assets. It hosts program files and release
+signatures, not users' panels or account data.
 
-| System | Command after the host is live |
+| System | Installation command |
 | --- | --- |
 | Linux / macOS | `curl -fsSL https://get.destroy.tools/install.sh \| bash` |
 | Windows Command Prompt or PowerShell | `powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "irm https://get.destroy.tools/install.ps1 \| iex"` |
