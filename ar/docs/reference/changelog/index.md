@@ -4,6 +4,11 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/changelo
 
 كل التغييرات حسب الإصدار، بما في ذلك التغييرات التي لم يتم إصدارها بعد.
 
+## Unreleased
+
+- Preserve an active Telegram sign-in when workflow navigation finishes late. Returning through account export or investigation keeps the pending code, password or QR step instead of resetting the form.
+- Added [Evidence and trust](https://phishdestroy.github.io/TgWitness/ar/docs/reference/evidence-trust/), explaining capture-device trust, independent verification and legal limits with sources and 24 DeepL translations.
+
 ## 0.7.1 preview · 1 November 2026
 
 - Fixed chat profiles getting stuck after navigating away while a request was loading. Reopening the view can retry, and an outdated request cannot overwrite the current chat's profile state.
