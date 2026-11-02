@@ -143,7 +143,7 @@ Run the pinned collector from your fork, select one chat and download an encrypt
 archive with GitHub provenance. The capture helper is also available under
 **Exports** in the panel.
 
-[Open the capture page](https://phishdestroy.github.io/TgWitness/docs/capture/) · [Instructions](docs/SEALED-ACTIONS.md) · [Русский](docs/ru/SEALED-ACTIONS.md)
+[Open the capture page](https://phishdestroy.github.io/TgWitness/docs/capture/) · [Instructions](docs/SEALED-ACTIONS.md)
 
 </details>
 
@@ -174,7 +174,7 @@ evidence map and observation timeline; a ZIP with authoritative data and verific
 instructions. Every conclusion has its basis, limits and independent review step.
 The preview uses fictional messages and a disposable demonstration key.
 
-[Report design and sample generation](docs/CASE_REPORTS.md) · [Русский](docs/ru/CASE_REPORTS.md)
+[Report design and sample generation](docs/CASE_REPORTS.md)
 
 <details>
 <summary><strong>Inside the signed record</strong> · hashes, signatures and independent checkpoints</summary>
