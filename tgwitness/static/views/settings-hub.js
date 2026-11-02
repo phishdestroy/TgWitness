@@ -6,7 +6,7 @@ export function createSettingsHub(ctx) {
   const routes = [['auto','✨','Automatic','Try public proxies, then WARP.'],['warp','🛡','Cloudflare WARP','Connect through a local tunnel.'],['proxy','🔌','My proxy','Paste one proxy address.'],['direct','🌐','Direct','Telegram will see this server’s address.']];
   const levels = [['simple','🙂','Simple','Only the essentials.'],['standard','⚙','Standard','Common settings and explanations.'],['expert','🛠','Expert','All fields, limits and technical details.']];
   const navLevels = {start:'simple',chats:'simple',observations:'simple',evidence:'simple',settings:'simple',
-    accounts:'standard',access:'standard',sources:'expert',connection:'expert',witness:'expert',analysis:'expert',
+    board:'standard',accounts:'standard',access:'standard',sources:'expert',connection:'expert',witness:'expert',analysis:'expert',
     parameters:'expert','system-log':'expert',integrations:'expert',sealed:'expert'};
   let data=null, prefs=null, draft=null, section=null, generation=0, connectionBusy=false, checkTimer=null, statusTimer=null;
   let dialogs=null, moved=[], query='', reveal=new Set(), editing=false;

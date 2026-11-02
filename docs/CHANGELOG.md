@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- Add a private Case Board with signed, append-only bookmarks, exact-version Unicode
+  highlights, complete action slices, scoped collections, threaded comments and team statuses.
+  Chats/Journal shortcuts, live updates, source navigation, presentation and English/Russian UI
+  keep team interpretation separate from observed evidence. Signed ZIPs bind the annotations
+  head and recomputed slices; the standalone verifier checks replay, references, query excerpts
+  and retained checkpoints. Reports have independent board/comment controls; minimized handovers
+  require explicit inclusion and support investigator aliases. New board rights do not expand
+  existing grants, and export permission alone does not disclose team notes.
 - Add Report studio with three document designs, live unsigned cover/chart preview,
   selectable activity, weekday/hour, participant, chat and composition charts, and
   journal history/indicator controls. Saved choices reach HTML, signed PDF/JSON and

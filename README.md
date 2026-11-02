@@ -183,6 +183,13 @@ the signed archive. Sharing copies calculate their statistics after minimization
 
 [Report design and sample generation](docs/CASE_REPORTS.md)
 
+**Case Board** keeps a private investigation feed alongside the evidence: bookmarks, exact-version
+highlights, slices of every recorded action, collections and team discussions. Notes have their own
+signed history and access rights. Reports label them as team opinions; minimized handovers include
+them only when selected. [Use Case Board and verify its exports](docs/CASE-BOARD.md).
+
+![Case Board with fictional observations and separately attributed team notes](docs/assets/case-board.png)
+
 <details>
 <summary><strong>Inside the signed record</strong> · hashes, signatures and independent checkpoints</summary>
 
