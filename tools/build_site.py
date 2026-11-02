@@ -120,7 +120,8 @@ FRAME = ("Visual guide", "Security", "Language", "Switch between light and dark 
          "This page is available in English only.")
 NOTICE_LINK_NOTE = ("The two project notices and the capability guide are translated into this language. "
                     "Other linked guides and reference pages are in English.")
-NOTICE_FRAME = (*LABELS.values(), *FRAME[:5], "Security & project", NOTICE_LINK_NOTE)
+NOTICE_FRAME = (*(value for key, value in LABELS.items() if key not in {"title", "intro", "description"}),
+                *FRAME[:5], "Security & project", NOTICE_LINK_NOTE)
 THEME_SCRIPT = ("(()=>{try{const s=localStorage.getItem('tgw-theme');document.documentElement.dataset.theme="
                 "s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})()")
 
@@ -572,7 +573,7 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
             toc_html = (f'<p class="nav-label">{labels["toc"]}</p>' + ''.join(f'<a href="#{id_}">{text}</a>' for id_, text in toc)
                         if toc else "")
             context = {**guide_values(path), **language_values,
-                       "PAGE_CLASS": "notice-page" if local in NOTICE_PAGES else "docs-root",
+                       "PAGE_CLASS": "notice-page" if local in NOTICE_PAGES else "docs-root docs-hub" if local == "docs/" else "docs-root",
                        **{key.upper(): html.escape(value, quote=True) for key, value in labels.items()},
                        "HOME": relative(path, base if full_site else ""), "HUB": relative(path, hub if full_site else "docs/"),
                        "WIKI_HUB": relative(path, wiki_hub if full_site else WIKI_HUB),
@@ -584,6 +585,13 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
                        "BREADCRUMBS": breadcrumb, "NOTICE": notice, "CONTENT": content, "CONTENTS": toc_html,
                        "GUIDE_FOOTER": footer}
             result = render(doc_template, context)
+            if local == "docs/":
+                search_start = result.index('<div class="search"')
+                search_end = result.index('<article class="guide-content">', search_start)
+                search = result[search_start:search_end]
+                result = result[:search_start] + result[search_end:]
+                result = result.replace('<div data-hub-search></div>', search, 1)
+                result = re.sub(r'<p class="verification-shortcut">.*?</p>', '', result, count=1)
             if "data-workflow=" in content:
                 assets = relative(path, "")
                 result = result.replace('</head>', f'<link rel="stylesheet" href="{assets}workflows.css">'
@@ -611,6 +619,7 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
             intro, intro_missing = localize(intro_template)
             content = (f'<p class="eyebrow">TGWITNESS / {labels["docs"].upper()}</p><h1>{labels["title"]}</h1>'
                        f'<p class="guide-outcome">{labels["intro"]}</p>' + render(intro, guide_values(hub)))
+            content += '<section class="hub-catalog" id="guide-catalog">'
             content += (f'<a class="guide-card" href="{relative_file(hub, base + site_modes.LOCAL)}">'
                         f'<span class="card-number" aria-hidden="true">04 / 08 ↗</span>'
                         f'<h2>{html.escape(modes_words["modes.eyebrow"])}</h2>'
@@ -623,7 +632,7 @@ def build_site(root=ROOT, *, repository="phishdestroy/TgWitness", base_url=None,
                         f'<div class="wiki-index">' + "".join(
                             f'<div class="wiki-column"><p class="nav-label">{t(label)}</p>' + "".join(
                                 f'<a href="{relative(hub, wiki_hub + key + "/")}">{reference[key][0]}</a>' for key in keys)
-                            + '</div>' for label, keys in REFERENCE_GROUPS) + '</div>')
+                            + '</div>' for label, keys in REFERENCE_GROUPS) + '</div></section>')
             page("docs/", labels["docs"], labels["description"], [(labels["home"], base), (labels["docs"], hub)], content, [], "",
                  notice(intro_missing))
 

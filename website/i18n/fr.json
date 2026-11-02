@@ -3197,7 +3197,21 @@
 "95e1d0096213c7e0ebf10ad2aa9e3d4053124d7ac4d33b31315ee6d36298dd19": "Conservez les notes de travail de l&#x27;équipe sur <a href=\"CASE-BOARD.md\">Case Board</a> : ajoutez aux favoris les enregistrements\nsur lesquels vous vous appuyez, tels que #146, #188 et #205, surlignez la chaîne de destination exacte, et\nenregistrez un extrait de chaque action enregistrée entre deux enregistrements ou sur une plage horaire. Les notes\net les statuts sont des avis de l&#x27;équipe dotés de leur propre historique signé ; ils ne deviennent jamais\ndes observations.",
 "1d0c311a2d5909d5834c6364f925786baa5115911e40acab677a3ac68f2e7a19": "<strong>Les discussions impliquant plusieurs comptes permettent de visualiser :</strong>\n    les sources partagées, les comptes qui les surveillent et\n    les interruptions dans la période d’observation de l’espace de travail disponible (jusqu’à sept jours). <strong>L’exportation avec N comptes</strong>\n    répartit l’exportation d’un canal ou d’un supergroupe entre eux et signe une seule archive.",
 "2a23324f2dd287797da5dcf11a5b85aa360d54790975d37969d09e0010c00dde": "Conservez les notes de travail de l’équipe sur <a href=\"CASE-BOARD.md\">Case Board</a> : ajoutez aux favoris les enregistrements\nsur lesquels vous vous appuyez, tels que #146, #188 et #205, mettez en surbrillance la chaîne de destination exacte, et\nenregistrez un extrait de chaque action enregistrée entre deux enregistrements ou sur une plage horaire. Les notes\net les statuts conservent l’examen effectué par l’équipe dans leur propre historique signé, distinct\ndes observations sources.",
-"f76dd0dd4c84d67ddf836309e64d140e473dabc295fb877f79a84311c7a54326": "Signets liés aux sources, citations, notes d’équipe, collections, historique des révisions et enregistrements sélectionnés vérifiés par rapport au fichier ZIP contenant les preuves"
+"f76dd0dd4c84d67ddf836309e64d140e473dabc295fb877f79a84311c7a54326": "Signets liés aux sources, citations, notes d’équipe, collections, historique des révisions et enregistrements sélectionnés vérifiés par rapport au fichier ZIP contenant les preuves",
+"c7f0a9ab8fff5e04d0410bdac5557b72903de383ff114cdb4872262f8330fba6": "Découvrez les workflows",
+"67743e4532df805fcf26fc1c9537abccc692d1dcbf5ff93583e19d7d1b7dcf98": "Guides illustrés",
+"6ab01216cc75d0d9ac538a8e8737ac65ac0ca49032ede0b5ed90b81bbafad08f": "Veillez à ce que les observations, les citations exactes et les notes de l&#x27;équipe restent liées entre elles.",
+"6b8d60c42094043cf64baf2e3fce8217bc7a1cf6f57ab609bd25e2db695ced32": "Choisissez le support et l’un des huit modèles de rapport.",
+"50dcc3b5a3cfa136b46ae753f936a250a9d6f255cb72e588458e0d05f4149c41": "Partage du texte",
+"82fd4760a05734950724dc871167af82f9b5717adbc4f36a2847675ef93ceb6b": "Préparez un extrait signé contenant les champs dont le destinataire a besoin.",
+"a63b524553823dde04288947a8dcd814401f311203dfe705ccce55f3206f01db": "Groupes de comptes",
+"df32772bb09931d98c1f2b1afd0fbd6c5abcbef70024e52909f976c159e350d3": "Examinez les comptes ensemble et conservez leurs espaces de travail séparés.",
+"f9d8f61b7be93b9062de999c1d58145f63d9ebb5bc8cafd94bd53a0cab57a089": "Présentation générale",
+"a5fd1d6f61d6031985cbe2c59522add9e057bb496dfe06688b6eb6c0b41ec249": "Workflow suivant",
+"ac6adf2e18e7918f4b3a107e3912370c0ceec9b19e3cd5615b17cbd617675877": "Choisissez un guide ou visionnez les illustrations des flux de travail.",
+"1773a0a72cc85a1462c6a95312bdb8506d9f403b544bc2cb25a4ff76f4488d45": "Parcourir tous les guides <span aria-hidden=\"true\">↓</span>",
+"093afb332d6e9393bc68c896dc4f201f0199a49f5e714ddfac70699bb49fe883": "Installation et connexion <span aria-hidden=\"true\">↗</span>",
+"6470af9bfc77294b3b204cbde47c78315a1c764e344a3281d355c5d441b9e8b2": "Découvrez les exemples de preuves <span aria-hidden=\"true\">↗</span>"
 },
 "modes": {
 "modes.actions.body": "Les accusés de réception d’aperçu, de requête et de résultat sont signés. Avant qu’un bouton ne soit enfoncé, le serveur récupère à nouveau le message et rejette toute modification apportée au clavier. Le texte et les URL des rappels renvoyés restent enregistrés dans le contexte.",
@@ -3886,6 +3900,10 @@
 "report studio design contents preview PDF HTML charts transcript": "conception du rapport studio aperçu du contenu PDF HTML graphiques transcription",
 "sharing copy minimized handover disclosure redaction privacy recipient verification": "partage, copie, minimisation, transfert, divulgation, expurgation, confidentialité, vérification du destinataire",
 "The current collection model, multi-account workflows, exports and operational boundaries of TgWitness.": "Le modèle de collecte actuel, les workflows multi-comptes, les exportations et les limites opérationnelles de TgWitness.",
-"features product status collection accounts exports limits platform": "fonctionnalités statut du produit collecte comptes exportations limites plateforme"
+"features product status collection accounts exports limits platform": "fonctionnalités statut du produit collecte comptes exportations limites plateforme",
+"From Telegram records to a clear case.": "Des messages Telegram à un dossier clair.",
+"Learn to preserve Telegram records, build a Case Board, design signed reports, prepare sharing copies and manage account groups.": "Apprenez à préserver les enregistrements Telegram, à créer un « Case Board », à concevoir des rapports signés, à préparer des copies à partager et à gérer des groupes de comptes.",
+"More ways to start": "Autres façons de commencer",
+"Work with saved messages and changes, connect your findings to their sources, and prepare signed files for review.": "Travaillez sur les messages enregistrés et les modifications, reliez vos conclusions à leurs sources et préparez des fichiers signés en vue de leur examen."
 }
 }

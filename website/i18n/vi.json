@@ -3292,7 +3292,21 @@
 "95e1d0096213c7e0ebf10ad2aa9e3d4053124d7ac4d33b31315ee6d36298dd19": "Lưu giữ các ghi chú làm việc của nhóm trên <a href=\"CASE-BOARD.md\">Case Board</a>: đánh dấu các bản ghi\nmà bạn tin cậy, chẳng hạn như #146, #188 và #205, đánh dấu chuỗi đích chính xác, và\nlưu một đoạn trích của mọi hành động được ghi lại giữa hai bản ghi hoặc trong một khoảng thời gian. Ghi chú\nvà trạng thái là ý kiến của nhóm với lịch sử đã được ký xác thực riêng; chúng không bao giờ trở thành\nnhững quan sát.",
 "1d0c311a2d5909d5834c6364f925786baa5115911e40acab677a3ac68f2e7a19": "<strong>Các cuộc trò chuyện trên nhiều tài khoản hiển thị:</strong>\n    các nguồn được chia sẻ, các tài khoản đang theo dõi chúng và\n    các gián đoạn trong khoảng thời gian quan sát không gian làm việc có sẵn (tối đa bảy ngày). <strong>Khi xuất với N tài khoản,</strong>\n    quá trình xuất kênh hoặc siêu nhóm sẽ được chia đều giữa các tài khoản này và tạo ra một tệp lưu trữ duy nhất.",
 "2a23324f2dd287797da5dcf11a5b85aa360d54790975d37969d09e0010c00dde": "Lưu giữ các ghi chú làm việc của nhóm trên <a href=\"CASE-BOARD.md\">Case Board</a>: đánh dấu các bản ghi\nmà bạn dựa vào, chẳng hạn như #146, #188 và #205, đánh dấu chuỗi đích chính xác, và\nlưu một đoạn của mọi hành động được ghi lại giữa hai bản ghi hoặc trong một khoảng thời gian. Các ghi chú\nvà trạng thái lưu giữ quá trình rà soát của nhóm trong lịch sử đã ký riêng biệt, có thể\nnhận diện độc lập với các quan sát từ nguồn.",
-"f76dd0dd4c84d67ddf836309e64d140e473dabc295fb877f79a84311c7a54326": "Dấu trang liên kết với nguồn, trích dẫn, ghi chú nhóm, bộ sưu tập, lịch sử sửa đổi và các bản ghi được chọn đã được đối chiếu với tệp ZIP chứa bằng chứng"
+"f76dd0dd4c84d67ddf836309e64d140e473dabc295fb877f79a84311c7a54326": "Dấu trang liên kết với nguồn, trích dẫn, ghi chú nhóm, bộ sưu tập, lịch sử sửa đổi và các bản ghi được chọn đã được đối chiếu với tệp ZIP chứa bằng chứng",
+"c7f0a9ab8fff5e04d0410bdac5557b72903de383ff114cdb4872262f8330fba6": "Khám phá các quy trình làm việc",
+"67743e4532df805fcf26fc1c9537abccc692d1dcbf5ff93583e19d7d1b7dcf98": "Hướng dẫn có minh họa",
+"6ab01216cc75d0d9ac538a8e8737ac65ac0ca49032ede0b5ed90b81bbafad08f": "Giữ nguyên các quan sát, trích dẫn chính xác và ghi chú của nhóm.",
+"6b8d60c42094043cf64baf2e3fce8217bc7a1cf6f57ab609bd25e2db695ced32": "Chọn tài liệu và một trong tám mẫu thiết kế báo cáo.",
+"50dcc3b5a3cfa136b46ae753f936a250a9d6f255cb72e588458e0d05f4149c41": "Bản sao để chia sẻ",
+"82fd4760a05734950724dc871167af82f9b5717adbc4f36a2847675ef93ceb6b": "Chuẩn bị một bản trích xuất đã ký với các trường thông tin mà người nhận cần.",
+"a63b524553823dde04288947a8dcd814401f311203dfe705ccce55f3206f01db": "Nhóm tài khoản",
+"df32772bb09931d98c1f2b1afd0fbd6c5abcbef70024e52909f976c159e350d3": "Cùng nhau xem xét các tài khoản và giữ không gian làm việc của từng tài khoản riêng biệt.",
+"f9d8f61b7be93b9062de999c1d58145f63d9ebb5bc8cafd94bd53a0cab57a089": "Xem tổng quan",
+"a5fd1d6f61d6031985cbe2c59522add9e057bb496dfe06688b6eb6c0b41ec249": "Quy trình làm việc tiếp theo",
+"ac6adf2e18e7918f4b3a107e3912370c0ceec9b19e3cd5615b17cbd617675877": "Chọn một hướng dẫn hoặc xem các minh họa quy trình làm việc.",
+"1773a0a72cc85a1462c6a95312bdb8506d9f403b544bc2cb25a4ff76f4488d45": "Xem tất cả hướng dẫn <span aria-hidden=\"true\">↓</span>",
+"093afb332d6e9393bc68c896dc4f201f0199a49f5e714ddfac70699bb49fe883": "Cài đặt và kết nối <span aria-hidden=\"true\">↗</span>",
+"6470af9bfc77294b3b204cbde47c78315a1c764e344a3281d355c5d441b9e8b2": "Thử các ví dụ về bằng chứng <span aria-hidden=\"true\">↗</span>"
 },
 "modes": {
 "modes.actions.body": "Các biên nhận xem trước, yêu cầu và kết quả đều được ký điện tử. Trước khi nhấn nút, máy chủ sẽ truy xuất lại tin nhắn và từ chối bất kỳ thay đổi nào từ bàn phím. Văn bản và các URL được trả về qua hàm callback vẫn được ghi lại trong bối cảnh.",
@@ -4033,6 +4047,10 @@
 "report studio design contents preview PDF HTML charts transcript": "thiết kế báo cáo, nội dung, bản xem trước, PDF, HTML, biểu đồ, bản ghi chép",
 "sharing copy minimized handover disclosure redaction privacy recipient verification": "chia sẻ bản sao, giảm thiểu việc tiết lộ thông tin khi bàn giao, che giấu thông tin, bảo mật, xác minh người nhận",
 "The current collection model, multi-account workflows, exports and operational boundaries of TgWitness.": "Mô hình thu thập hiện tại, quy trình làm việc với nhiều tài khoản, tính năng xuất dữ liệu và các giới hạn vận hành của TgWitness.",
-"features product status collection accounts exports limits platform": "tính năng trạng thái sản phẩm thu thập tài khoản xuất dữ liệu giới hạn nền tảng"
+"features product status collection accounts exports limits platform": "tính năng trạng thái sản phẩm thu thập tài khoản xuất dữ liệu giới hạn nền tảng",
+"From Telegram records to a clear case.": "Từ các bản ghi Telegram đến một vụ án rõ ràng.",
+"Learn to preserve Telegram records, build a Case Board, design signed reports, prepare sharing copies and manage account groups.": "Học cách bảo quản hồ sơ Telegram, tạo Case Board, thiết kế báo cáo có chữ ký, chuẩn bị bản sao để chia sẻ và quản lý nhóm tài khoản.",
+"More ways to start": "Các cách khác để bắt đầu",
+"Work with saved messages and changes, connect your findings to their sources, and prepare signed files for review.": "Làm việc với các tin nhắn đã lưu và các thay đổi, liên kết các phát hiện của bạn với nguồn gốc của chúng, và chuẩn bị các tệp đã ký để xem xét."
 }
 }
