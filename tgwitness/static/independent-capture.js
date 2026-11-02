@@ -132,13 +132,16 @@
     if (bound !== owner()) clear();
     if (state.extra !== 'capture' || loading || bound === owner()) return;
     loading = true; const who = owner(), epoch = generation;
+    bound = who;
     try {
       const result = await json('capture');
       if (epoch !== generation || who !== owner()) return;
       $('capture-connections').replaceChildren(...kinds.map(kind => make(kind, result.connections[kind])));
       bound = who; $('capture-load-message').textContent = '';
     } catch (error) {
-      if (epoch === generation && who === owner() && !(error instanceof StaleView)) $('capture-load-message').textContent = error.message;
+      if (epoch === generation && who === owner() && !(error instanceof StaleView)) {
+        bound = null; $('capture-load-message').textContent = error.message;
+      }
     } finally {if (epoch === generation) loading = false;}
   }
   window.TgWitnessIndependentCapture = {select, clear};
