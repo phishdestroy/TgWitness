@@ -8,6 +8,8 @@
   chat metadata only for the selected chats.
 - Keep pending confirmations bound to their original workspace, group and session.
   Mask detected secrets in Case Board source context until an explicit reveal.
+- Keep the new panel session active after rotating its access token. Events from
+  the old connection cannot sign out the replacement session.
 - Preserve the collecting account's attribution when recovering missing messages
   in multi-account exports, and verify the completed archive before marking it ready.
 - Show the AI endpoint and outside route in the data preview. Server-local AI

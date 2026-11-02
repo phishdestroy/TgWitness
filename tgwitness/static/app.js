@@ -709,15 +709,18 @@ function syncLive(){
   if(!state.token||!state.status||state.status.demo||window.TGW_ONLINE_DEMO||(!["observations","chats"].includes(state.view)&&!may('board.read'))){
     window.TgWitnessLive?.stop();return;
   }
-  window.TgWitnessLive?.start({key:state.workspaceRevision+":"+state.profile,head:state.status.stats.head?.seq,api,tr,accessEnded:lock,
+  const owner=actionOwner();
+  window.TgWitnessLive?.start({key:owner.revision+":"+owner.profile+":"+owner.token,head:state.status.stats.head?.seq,tr,
+    api:(path,body,options={})=>{if(!owner.current())throw new StaleView();return api(path,body,{...options,profile:owner.profile,token:owner.token});},
+    accessEnded:()=>{if(owner.current())lock();},
     hosts:[viewQuery(state.view,state.view==='chats'?'.chat-toolbar':'.journal .card-heading')].filter(Boolean),
     canRefresh:()=>{
-      if(!['observations','chats'].includes(state.view))return false;
+      if(!owner.current()||!['observations','chats'].includes(state.view))return false;
       if(state.drawerSeq!==null||window.getSelection()?.toString()||document.hidden)return false;
       if(state.view==="chats"){const feed=$("chat-feed");return state.chatNextAfter===null&&feed.scrollHeight-feed.scrollTop-feed.clientHeight<80;}
       return state.eventBefore===null&&state.events.length<=200&&window.scrollY<120&&window.TgWitnessJournal?.canRefresh()!==false;
     },
-    refresh:async({force=false}={})=>{await refreshStatus();if(state.view==="chats"){
+    refresh:async({force=false}={})=>{if(!owner.current())throw new StaleView();await refreshStatus();if(!owner.current())throw new StaleView();if(state.view==="chats"){
       const result=force&&state.chatView==='messages'?await loadChatMessages('latest'):await refreshChats(true);
       if(result===false)throw new Error('Chat refresh failed');
     }else if(state.view==="observations")await refreshEvents();}
@@ -5276,12 +5279,19 @@ $("access-admin-form").addEventListener("submit",event=>{event.preventDefault();
   if(version===adminLimitsVersion)adminLimitsDirty=false;renderAccess();toast(tr("Limits saved."));
 });});
 $("panel-key-rotate").addEventListener("click",event=>busy(event.currentTarget,async()=>{
+  let owner=actionOwner();
   if(!(await askConfirm(tr("Replace the administrator key and end all current browser sessions? Save the new key after this step."),{danger:true})))return;
-  const result=await json("access/token",{},{root:true});
-  state.token=result.session;state.me=result.me;state.workspaceRevision++;
-  sessionStorage.setItem("tgwitness-token",state.token);
-  $("panel-key-new").value=result.token;show("panel-key-result",true);
-  await loadAccess();
+  if(!owner.current())return;
+  const inert=$("workspace").inert;
+  window.TgWitnessLive?.stop();state.workspaceRevision++;owner=actionOwner();$("workspace").inert=true;
+  try{
+    const result=await json("access/token",{},{root:true,token:owner.token});
+    if(!owner.current())throw new StaleView();
+    state.token=result.session;state.me=result.me;state.workspaceRevision++;owner=actionOwner();
+    sessionStorage.setItem("tgwitness-token",state.token);
+    $("panel-key-new").value=result.token;show("panel-key-result",true);
+    await loadAccess();
+  }finally{if(owner.current()){$("workspace").inert=inert;syncLive();}}
 }));
 $("panel-key-copy").addEventListener("click",event=>busy(event.currentTarget,async()=>{
   await navigator.clipboard.writeText($("panel-key-new").value);toast(tr("Token copied."));
