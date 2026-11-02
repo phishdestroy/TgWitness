@@ -1,4 +1,5 @@
 """Real local exports: workspace confusion, denied file APIs, receipts and repeat downloads."""
+import argparse
 import hashlib
 from pathlib import Path
 import sys
@@ -11,13 +12,16 @@ from tools.check_browser import RunningApp, answer_panel_dialog, launch_browser,
 
 
 def main():
-    output = Path('build/ux-review/account-safety')
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--browser', choices=('chromium', 'firefox', 'webkit'), default='chromium')
+    engine = parser.parse_args().browser
+    output = Path('build/ux-review/account-safety') / engine
     output.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='safe-exports-') as scratch, RunningApp(Path(scratch)) as server:
         store = server.app.state.store
         store.append('message.new', {'text': 'Synthetic export receipt'}, -1001, 1)
         with sync_playwright() as playwright:
-            browser = launch_browser(playwright)
+            browser = launch_browser(playwright) if engine == 'chromium' else getattr(playwright, engine).launch(headless=True)
             page = browser.new_page(viewport={'width': 1440, 'height': 1000}, reduced_motion='reduce')
             errors = []
             page.on('pageerror', lambda error: errors.append(str(error)))
@@ -125,7 +129,7 @@ def main():
                 assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
             assert not errors, errors
             browser.close()
-    print('Workspace mismatch blocking, status ownership, file API fallbacks, retained hashes, repeat downloads and ticket isolation passed.')
+    print(engine + ': workspace mismatch blocking, status ownership, file API fallbacks, retained hashes, repeat downloads and ticket isolation passed.')
 
 
 if __name__ == '__main__':

@@ -93,9 +93,30 @@ browser does not establish receipt. Check the browser's Downloads list.
 | Export records from {account}? | Выгрузить записи аккаунта {account}? |
 | Confirm the workspace above before continuing. | Сначала подтвердите пространство в плашке выше. |
 | Download again | Скачать снова |
+| Read-only | Только чтение |
+| Mask secrets | Маскировать секреты |
+| Send as {account}? | Отправить от {account}? |
+| Do not ask again for 10 minutes in this chat | Не спрашивать 10 минут в этом чате |
+| Retry export | Повторить экспорт |
 | No data | Нет данных |
 | Telegram does not report who deleted the message | Кто удалил — Telegram не сообщает |
 | Technical sequence (seq) | Технический номер (seq) |
+
+## Implementation map
+
+| Files | Change |
+| --- | --- |
+| `account_import.py`, `static/account-import.js`, `static/account-import.css` | Import preflight, connected account card, additional workspace flow and deletion control. |
+| `app.py`, `middleware.py`, `access.py` | Server validation, workspace identity, audited reveals and download authorization. |
+| `static/core/workspace-safety.js`, `static/workspace-safety.css`, `static/router.js` | Account header, URL ownership, mismatch blocking and cancelled navigation. |
+| `static/app.js`, `static/chat-safety.js`, `static/views/chats.css` | Read-only chat, named confirmations, history loading feedback and date layout. |
+| `static/privacy.js`, `static/views/chat-list.js` | Display masking and permanently masked list previews. |
+| `export_history.py`, `static/views/exports.js` | Retained exports, verified download copies, cache limits and retry feedback. |
+| `static/components/journal.js`, `static/core/time.js` | One event numbering scheme and plain missing-data labels. |
+| `locales/ru.json`, `english_fallbacks.json` | Russian copy and explicit English fallback for other languages. |
+
+Paths in this table are relative to `tgwitness/`. `tools/run_checks.py` includes
+the new regressions in the browser UX suite. The demo build includes the new assets.
 
 ## Checks and visual artifacts
 
@@ -110,6 +131,17 @@ python tools/check_services_browser.py
 python tools/check_storage_services.py
 node tools/check_privacy_js.cjs
 ```
+
+To check ordinary downloads with other browser engines, install the corresponding
+Playwright browsers and run:
+
+```sh
+python tools/check_workspace_downloads_browser.py --browser firefox
+python tools/check_workspace_downloads_browser.py --browser webkit
+```
+
+WebKit is tested through Playwright; this is not a test on a physical iPhone or
+of every Safari and embedded-browser release.
 
 The browser checks generate real desktop/mobile screenshots under
 `test-results/import-preflight/`, `test-results/chat-safety/`,
