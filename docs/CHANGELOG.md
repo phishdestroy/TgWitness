@@ -12,6 +12,9 @@
   in multi-account exports, and verify the completed archive before marking it ready.
 - Show the AI endpoint and outside route in the data preview. Server-local AI
   requires an explicitly selected Direct outside route; a route change requires a new preview.
+- Documentation: a [panel guide](PANEL.md) for every screen, protection modes and the
+  code check; Discord publication and the public proof page in [witness](WITNESS.md);
+  removing an installation; current panel labels throughout.
 - Group screen at `/groups/<id>`: accounts, problems, shared chats with coverage, group export.
 - Add Reading series and Ledger & margin to the report builder, with distinct
   HTML and native signed PDF chapters, live preview, account and sharing layouts,
@@ -110,7 +113,7 @@
   replace silent proxy failures. HTTPS CONNECT verifies the proxy certificate.
 - File policies can limit video duration; capture and account export enforce the
   configured size and duration. Existing journals and stored configurations stay
-  intact. See [first setup and settings](ru/SETTINGS.md).
+  intact. See [first setup and settings](SETTINGS.md).
 - The first setup and Settings are translated into all 25 panel languages. Each step
   has its own address and browser Back moves between steps. The Telegram step asks
   whether the account is separate; a main account records only chosen chats, also
