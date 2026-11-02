@@ -88,7 +88,7 @@ def check_browser(directory, output):
         expect(chat.get_by_role("button", name="Export with 2 accounts")).to_be_visible()
         chat.get_by_role("button", name="Open chat").click()
         expect(page.locator("#view-chats")).to_be_visible()
-        page.wait_for_function("id=>state.profile===id&&state.chat===%d" % CHANNEL, arg=alpha)
+        page.wait_for_url(re.compile(r"/chats/%d\?ws=%s" % (CHANNEL, alpha)))
         page.go_back()
         expect(page.locator("#view-group h1")).to_have_text("Harbor case", timeout=20000)
         page.locator("#view-group .group-chat").get_by_role("button", name="Export with 2 accounts").click()
