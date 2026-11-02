@@ -15,7 +15,7 @@ from telethon.sessions import StringSession
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from tgwitness import api_pool, client_identity, client_profiles  # noqa: E402
+from tgwitness import api_pool, client_identity, client_profiles, i18n  # noqa: E402
 from tgwitness.account_import import import_accounts, json_account  # noqa: E402
 from tgwitness.collector import Collector  # noqa: E402
 from tgwitness.security import Vault  # noqa: E402
@@ -36,6 +36,9 @@ def uploaded(name, content):
 
 
 def check_imports():
+    assert client_identity.language_defaults("ru", "de-DE,de;q=0.9") == {"lang_code": "ru", "system_lang_code": "de-DE"}
+    assert client_identity.language_defaults("es", "en-US;q=0.1,fr-CA;q=0.9") == {"lang_code": "es", "system_lang_code": "fr-CA"}
+    assert client_identity.language_defaults("en", "*;q=1,de-DE;q=0,ru;q=nan") == {"lang_code": "en", "system_lang_code": "en"}
     for kind in ("telethon", "pyrogram"):
         result = import_accounts([uploaded("account.session", sqlite_fixture(kind)),
                                   uploaded("account.json", json.dumps(METADATA).encode())])
@@ -60,7 +63,8 @@ async def check_retention(root):
     vault.save("network", {"kind": "direct"})
     collector = Collector(store, vault, FakeClient)
     try:
-        await collector.configure(123, "a" * 32, saved_session(), 44, PROFILE)
+        await collector.configure(123, "a" * 32, saved_session(), 44, PROFILE,
+                                  {"lang_code": "fr", "system_lang_code": "fr-FR"})
         assert vault.read("credentials")["client_profile"] == PROFILE
         assert PROFILE["device_model"].encode() not in (root / "credentials.enc").read_bytes()
         await collector.stop(shutdown=True)
@@ -118,9 +122,16 @@ async def check_retention(root):
 async def check_routes():
     from tools.check_session_reservations import workspace, import_body, RecordingClient
     async with workspace() as (app, http):
+        headers = {"Accept-Language": "de-DE,de;q=0.9", "Cookie": i18n.COOKIE + "=es"}
+        response = await http.post("/api/auth/phone/start", json={"api_id": 321, "api_hash": "a" * 32,
+                                                                "phone": "+15550001111"}, headers=headers)
+        assert response.status_code == 200, response.text
+        assert app.state.collector.login_client.options["lang_code"] == "es"
+        assert app.state.collector.login_client.options["system_lang_code"] == "de-DE"
+        await app.state.collector.cancel_login()
         body = import_body()
         body["files"].append(uploaded("synthetic.json", json.dumps(METADATA).encode()))
-        response = await http.post("/api/profiles/import", json=body)
+        response = await http.post("/api/profiles/import", json=body, headers=headers)
         assert response.status_code == 200, response.text
         child = app.state.profiles.entries[response.json()["profile"]["id"]]["app"]
         assert child.state.vault.read("credentials")["client_profile"] == PROFILE
@@ -132,12 +143,15 @@ async def check_routes():
         assert response.status_code == 200, response.text
         imported = response.json()
         credentials = {k: imported[k] for k in ("api_id", "api_hash", "session", "client_profile")}
-        response = await http.post("/api/auth/configure", json=credentials)
+        response = await http.post("/api/auth/configure", json=credentials, headers=headers)
         assert response.status_code == 200, response.text
         assert app.state.vault.read("credentials")["client_profile"] == PROFILE
         connections = RecordingClient.connections
         response = await http.post("/api/auth/configure", json={**credentials, "client_profile": {"proxy": "unused.invalid"}})
         assert response.status_code == 422 and RecordingClient.connections == connections
+        response = await http.post("/api/auth/phone/start", json={"phone": "+15550001111"}, headers=headers)
+        assert response.status_code == 200, response.text
+        assert app.state.collector.login_client.tgwitness_client_profile == PROFILE
 
 
 def check_catalog():
@@ -173,8 +187,9 @@ async def check_catalog_retention(root):
     collector = Collector(store, vault, FakeClient)
     try:
         pair = next(pair for pair in api_pool.POOL if pair[0] == api_pool.DESKTOP_ID)
-        await collector.configure(*pair, saved_session())
+        await collector.configure(*pair, saved_session(), languages={"lang_code": "es", "system_lang_code": "fr-CA"})
         saved = vault.read("credentials")["client_profile"]
+        assert saved["lang_code"] == "es" and saved["system_lang_code"] == "fr-CA"
         await collector.stop(shutdown=True)
         collector = Collector(store, vault, FakeClient)
         # Updating bundled defaults must leave an existing account's complete profile intact.

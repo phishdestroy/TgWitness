@@ -17,6 +17,29 @@ FIELDS = {
 }
 
 
+def language_defaults(language, accept_language=None):
+    """Use the panel choice and browser locale only where no account value exists."""
+    valid = lambda value: len(value) <= 32 and re.fullmatch(r"[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*", value)
+    language = language if isinstance(language, str) and valid(language) else "en"
+    choices = []
+    for order, part in enumerate((accept_language or "").split(",")[:20]):
+        tag, *params = part.strip().split(";")
+        if not valid(tag):
+            continue
+        weight = 1.0
+        for param in params:
+            name, _, value = param.strip().partition("=")
+            if name == "q":
+                try:
+                    weight = float(value)
+                except ValueError:
+                    weight = 0.0
+        if 0 < weight <= 1:
+            choices.append((-weight, order, tag))
+    system = min(choices)[2] if choices else language
+    return {"lang_code": language, "system_lang_code": system}
+
+
 def validate(profile):
     if profile is None:
         return {}

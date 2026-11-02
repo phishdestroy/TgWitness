@@ -274,6 +274,11 @@ def panel_language(request):
     return i18n.pick(request.cookies.get(i18n.COOKIE), request.headers.get("accept-language"))
 
 
+def client_languages(request):
+    from .client_identity import language_defaults
+    return language_defaults(panel_language(request), request.headers.get("accept-language"))
+
+
 def create_app(data_dir=None, demo=False, client_factory=None, token_override=None, allow_profiles=True,
                account_guard=None, proxy_pool=None, access=None, profile_id="default"):
     root = Path(data_dir or "data").resolve()
@@ -852,7 +857,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             return groups_view()
 
         @app.post("/api/profiles/import", dependencies=[Depends(authenticate)])
-        async def profiles_import(body: ProfileImport):
+        async def profiles_import(body: ProfileImport, request: Request):
             """One account per request: convert its files, give it a new workspace and connect the session.
             A workspace whose session does not log in is removed again; the uploads are never stored."""
             require_live()
@@ -896,7 +901,8 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                         raise ValueError("The new workspace could not start.")
                     await asyncio.wait_for(collector.configure(
                         body.api_id or account.get("api_id"), body.api_hash or account.get("api_hash"),
-                        account["session"], expected, account.get("client_profile")), tuning.value(app.state.store, "operation_timeout_seconds"))
+                        account["session"], expected, account.get("client_profile"), client_languages(request)),
+                        tuning.value(app.state.store, "operation_timeout_seconds"))
                     account_info = child.state.store.get_setting("account", {}) or {}
                     # Keep the account photo, then disconnect until the operator chooses sources.
                     with suppress(Exception):
@@ -1062,13 +1068,14 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                                         headers={"X-Accel-Buffering": "no", "Cache-Control": "no-store"})
 
     @app.post("/api/auth/configure", dependencies=[Depends(authenticate)])
-    async def configure(body: Credentials):
+    async def configure(body: Credentials, request: Request):
         return await operation(app.state.collector.configure, body.api_id, body.api_hash, body.session,
-                               body.expected_user_id, body.client_profile)
+                               body.expected_user_id, body.client_profile, client_languages(request))
 
     @app.post("/api/auth/phone/start", dependencies=[Depends(authenticate)])
-    async def start_phone(body: PhoneLogin):
-        return await operation(app.state.collector.start_phone, body.phone, body.api_id, body.api_hash, body.client_profile)
+    async def start_phone(body: PhoneLogin, request: Request):
+        return await operation(app.state.collector.start_phone, body.phone, body.api_id, body.api_hash,
+                               body.client_profile, client_languages(request))
 
     @app.post("/api/auth/import", dependencies=[Depends(authenticate)])
     async def import_account(body: AccountImport):
@@ -1085,10 +1092,11 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 raise HTTPException(400, str(exc)) from None
 
     @app.post("/api/auth/qr/start", dependencies=[Depends(authenticate)])
-    async def start_qr(body: Credentials):
+    async def start_qr(body: Credentials, request: Request):
         import qrcode
         from qrcode.image.svg import SvgPathImage
-        result = await operation(app.state.collector.start_qr, body.api_id, body.api_hash, body.client_profile)
+        result = await operation(app.state.collector.start_qr, body.api_id, body.api_hash,
+                                 body.client_profile, client_languages(request))
         url = result.pop("url")
         output = io.BytesIO()
         qrcode.make(url, image_factory=SvgPathImage, border=4).save(output)

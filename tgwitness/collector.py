@@ -547,13 +547,14 @@ class Collector:
                                 "become active; earlier history of added chats is not fetched"})
         return {"added": len(added), "paused": len(paused), "resumed": len(resumed)}
 
-    def make_client(self, api_id, api_hash, session="", client_profile=None):
+    def make_client(self, api_id, api_hash, session="", client_profile=None, languages=None):
         from . import client_identity
         saved = self.vault.read("credentials")
         if client_profile is None and (saved.get("api_id"), saved.get("api_hash")) == (api_id, api_hash):
             if not session or session_key(session) == session_key(saved.get("session")):
                 client_profile = saved.get("client_profile")
-        device = client_identity.resolve(api_id, client_profile, self.vault.public_key)
+        supplied = {**client_identity.validate(languages), **client_identity.validate(client_profile)}
+        device = client_identity.resolve(api_id, supplied, self.vault.public_key)
         options = {key: value for key, value in device.items() if key != "lang_pack"}
         string_session = StringSession(session)
         self.resumed_state_at = self.load_update_state(string_session)
@@ -1051,12 +1052,12 @@ class Collector:
                 if number == len(pairs):
                     raise
 
-    async def configure(self, api_id=None, api_hash=None, session="", expected_user_id=None, client_profile=None):
+    async def configure(self, api_id=None, api_hash=None, session="", expected_user_id=None, client_profile=None, languages=None):
         return await self.with_api_pair(api_id, api_hash, lambda pair_id, pair_hash:
-                                        self.connect_login(pair_id, pair_hash, session, expected_user_id, client_profile))
+                                        self.connect_login(pair_id, pair_hash, session, expected_user_id, client_profile, languages))
 
     @connection_change
-    async def connect_login(self, api_id, api_hash, session="", expected_user_id=None, client_profile=None):
+    async def connect_login(self, api_id, api_hash, session="", expected_user_id=None, client_profile=None, languages=None):
         from .client_identity import validate
         if client_profile is not None:
             client_profile = validate(client_profile)
@@ -1069,7 +1070,7 @@ class Collector:
         release = self.account_guard(None, self, key=session_key(session)) if session and self.account_guard else None
         try:
             await self.ensure_route()
-            candidate = self.make_client(api_id, api_hash, session, client_profile)
+            candidate = self.make_client(api_id, api_hash, session, client_profile, languages)
             self.login_client = candidate
             self.pending_credentials = {"api_id": api_id, "api_hash": api_hash,
                                         "client_profile": candidate.tgwitness_client_profile}
@@ -1094,15 +1095,15 @@ class Collector:
             if release:
                 release()
 
-    async def start_phone(self, phone, api_id=None, api_hash=None, client_profile=None):
+    async def start_phone(self, phone, api_id=None, api_hash=None, client_profile=None, languages=None):
         async def attempt(pair_id, pair_hash):
-            await self.connect_login(pair_id, pair_hash, client_profile=client_profile)
+            await self.connect_login(pair_id, pair_hash, client_profile=client_profile, languages=languages)
             return await self.send_code(phone)
         return await self.with_api_pair(api_id, api_hash, attempt)
 
-    async def start_qr(self, api_id=None, api_hash=None, client_profile=None):
+    async def start_qr(self, api_id=None, api_hash=None, client_profile=None, languages=None):
         async def attempt(pair_id, pair_hash):
-            await self.connect_login(pair_id, pair_hash, client_profile=client_profile)
+            await self.connect_login(pair_id, pair_hash, client_profile=client_profile, languages=languages)
             return await self.login_client.qr_login()
         try:
             qr = await self.with_api_pair(api_id, api_hash, attempt)
