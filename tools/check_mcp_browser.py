@@ -1,5 +1,6 @@
 """Synthetic MCP setup, drafts, credentials and client configurations. No AI calls."""
 import json
+import re
 from pathlib import Path
 import sys
 import tempfile
@@ -169,7 +170,8 @@ def main():
             page.locator("#mcp-url").fill("http://remote.invalid/mcp")
             expect(page.locator("#mcp-check")).to_be_disabled()
             release_api_response(page)
-            page.wait_for_function("!document.getElementById('mcp-check').hasAttribute('aria-busy')")
+            # The page's CSP refuses string evaluation, so wait on the attribute instead of wait_for_function.
+            expect(page.locator("#mcp-check")).not_to_have_attribute("aria-busy", re.compile(".*"))
             expect(page.locator("#mcp-check")).to_be_disabled()
             expect(page.locator("#mcp-check-result")).to_have_text("")
             page.locator("#mcp-url").fill(app.url + "/mcp")

@@ -1,5 +1,6 @@
-/* Reserve the scrollbar track so the layout does not shift or clip when a page starts to scroll. */
-html { scrollbar-gutter: stable; }
+/* On desktop, reserve the scrollbar track so the layout does not shift or clip when a page starts to scroll.
+   Phones use overlay scrollbars, where a reserved track would only narrow the content. */
+@media (min-width: 768px) { html { scrollbar-gutter: stable; } }
 :root {
   --radius-small: 6px; --radius-control: 8px; --radius-panel: 12px; --radius-large: 16px;
   --status-ok: var(--success); --status-warn: var(--warning); --status-error: var(--danger);
