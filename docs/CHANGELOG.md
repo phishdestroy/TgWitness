@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Run both panel regression suites on pull requests, including download checks in
+  Firefox and WebKit. Release packages now wait for the exact revision's dependency,
+  CodeQL and container audits; HIGH/CRITICAL container findings block publication.
 - Inspect account files before connecting: settings-only JSON cannot be imported as
   a session, paired files are checked together, and additional accounts get their
   own workspace. Connected accounts and typed-name deletion are visible on Account.
