@@ -1,5 +1,7 @@
 """Inspect real MTProto initialization metadata without connecting to Telegram."""
 import asyncio
+import base64
+import json
 from pathlib import Path
 import socket
 import sys
@@ -12,10 +14,129 @@ from telethon.sessions import StringSession
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from tgwitness import api_pool  # noqa: E402
+from tgwitness import api_pool, client_identity  # noqa: E402
+from tgwitness.account_import import import_accounts, json_account  # noqa: E402
 from tgwitness.collector import Collector  # noqa: E402
 from tgwitness.security import Vault  # noqa: E402
 from tgwitness.store import Store  # noqa: E402
+from tools.browser_fixtures import FakeClient, saved_session, sqlite_fixture  # noqa: E402
+from tools.check_session_reservations import workspace, import_body, RecordingClient  # noqa: E402
+
+PROFILE = {"device_model": "Synthetic laptop", "system_version": "Windows 11", "app_version": "6.0.0 x64",
+           "lang_code": "en", "system_lang_code": "en-US", "lang_pack": "tdesktop"}
+METADATA = {"app_id": 123, "app_hash": "a" * 32, "device": PROFILE["device_model"],
+            "sdk": PROFILE["system_version"], **{k: v for k, v in PROFILE.items()
+                                                if k not in ("device_model", "system_version")},
+            "twoFA": "unused-synthetic-password", "proxy": ["unused.invalid", "unused-synthetic-password"],
+            "device_token": "unused-synthetic-token", "program": "Synthetic importer"}
+
+
+def uploaded(name, content):
+    return {"name": name, "content": base64.b64encode(content).decode()}
+
+
+def check_imports():
+    for kind in ("telethon", "pyrogram"):
+        result = import_accounts([uploaded("account.session", sqlite_fixture(kind)),
+                                  uploaded("account.json", json.dumps(METADATA).encode())])
+        assert result["client_profile"] == PROFILE
+        assert result["api_id"] == 123 and result["has_authorization"]
+        assert StringSession(result["session"]).auth_key.key == b"x" * 256
+        assert "unused-synthetic" not in json.dumps(result)
+    assert json_account(json.dumps(PROFILE).encode())["client_profile"] == PROFILE
+    for bad in ({"device": "x\nsecret"}, {"sdk": 11}, {"device": "a", "device_model": "b"},
+                {"app_version": "x" * 129}, {"lang_code": "en/invalid"}, {"lang_pack": []}):
+        try:
+            json_account(json.dumps(bad).encode())
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("Invalid imported profile accepted")
+
+
+async def check_retention(root):
+    vault, store = Vault(root), Store(root)
+    store.bind(vault)
+    vault.save("network", {"kind": "direct"})
+    collector = Collector(store, vault, FakeClient)
+    try:
+        await collector.configure(123, "a" * 32, saved_session(), 44, PROFILE)
+        assert vault.read("credentials")["client_profile"] == PROFILE
+        assert PROFILE["device_model"].encode() not in (root / "credentials.enc").read_bytes()
+        await collector.stop(shutdown=True)
+        collector = Collector(store, vault, FakeClient)
+        with patch.object(client_identity.platform, "release", return_value="Changed OS"):
+            await collector.restore()
+        assert collector.client.options["system_version"] == PROFILE["system_version"]
+        assert collector.client.tgwitness_client_profile == PROFILE
+        assert collector.client.session.save() == saved_session()
+        previous = vault.read("credentials")
+        for bad in ({"proxy": "unused.invalid"}, {"system_version": ""}, {"device_model": 123}):
+            try:
+                await collector.configure(123, "a" * 32, saved_session(), 44, bad)
+            except ValueError:
+                pass
+            else:
+                raise AssertionError("Invalid profile accepted before authorization")
+            assert vault.read("credentials") == previous
+        try:
+            await collector.configure(123, "a" * 32, saved_session(), 99, {**PROFILE, "device_model": "Wrong account"})
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("Wrong account accepted")
+        assert vault.read("credentials") == previous
+
+        # Old vaults gain a fixed profile on their first successful restore.
+        await collector.stop(shutdown=True)
+        legacy = {k: v for k, v in previous.items() if k != "client_profile"}
+        vault.save("credentials", legacy)
+        collector = Collector(store, vault, FakeClient)
+        with patch.object(client_identity.platform, "release", return_value="First OS"):
+            await collector.restore()
+        assert vault.read("credentials")["client_profile"]["system_version"] == "First OS"
+        await collector.stop(shutdown=True)
+        collector = Collector(store, vault, FakeClient)
+        with patch.object(client_identity.platform, "release", return_value="Second OS"):
+            await collector.restore()
+        assert collector.client.options["system_version"] == "First OS"
+
+        # A restore in flight cannot write obsolete credentials over a newer session.
+        vault.save("credentials", legacy)
+        replacement = {**previous, "session": saved_session(b"z")}
+        async def changed_during_rpc():
+            vault.save("credentials", replacement)
+            return True
+        with patch.object(collector.client, "is_user_authorized", changed_during_rpc):
+            await collector.restore()
+        assert vault.read("credentials") == replacement
+    finally:
+        await collector.stop(shutdown=True)
+        store.close()
+
+
+async def check_routes():
+    async with workspace() as (app, http):
+        body = import_body()
+        body["files"].append(uploaded("synthetic.json", json.dumps(METADATA).encode()))
+        response = await http.post("/api/profiles/import", json=body)
+        assert response.status_code == 200, response.text
+        child = app.state.profiles.entries[response.json()["profile"]["id"]]["app"]
+        assert child.state.vault.read("credentials")["client_profile"] == PROFILE
+        assert child.state.collector.client.options["device_model"] == PROFILE["device_model"]
+        assert not app.state.vault.read("credentials")
+
+        response = await http.post("/api/auth/import", json={"files": [
+            uploaded("other.json", json.dumps({**METADATA, "app_id": 321, "session": saved_session(b"q")}).encode())]})
+        assert response.status_code == 200, response.text
+        imported = response.json()
+        credentials = {k: imported[k] for k in ("api_id", "api_hash", "session", "client_profile")}
+        response = await http.post("/api/auth/configure", json=credentials)
+        assert response.status_code == 200, response.text
+        assert app.state.vault.read("credentials")["client_profile"] == PROFILE
+        connections = RecordingClient.connections
+        response = await http.post("/api/auth/configure", json={**credentials, "client_profile": {"proxy": "unused.invalid"}})
+        assert response.status_code == 422 and RecordingClient.connections == connections
 
 
 async def main():
@@ -49,9 +170,22 @@ async def main():
                         checks += 1
                     finally:
                         await client.disconnect()
+            client = collector.make_client(123, "a" * 32, imported.save(), PROFILE)
+            try:
+                assert {field: getattr(client._init_request, field) for field in PROFILE} == PROFILE
+                assert client._init_request.api_id == 123
+                assert client.session.auth_key.key == imported.auth_key.key
+                assert client.session.dc_id == imported.dc_id
+                checks += 1
+            finally:
+                await client.disconnect()
         finally:
             store.close()
-    print(f"Client identity passed: {checks} real initialization requests; new/imported authorization, no project branding, no network.")
+        check_imports()
+        await check_retention(root / "retention")
+        await check_routes()
+    print(f"Client identity passed: {checks} real initialization requests; imported profiles, encrypted retention, "
+          "legacy migration, stale-restore protection, single/bulk HTTP import; no Telegram connections.")
 
 
 if __name__ == "__main__":

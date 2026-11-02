@@ -69,9 +69,13 @@ class Credentials(BaseModel):
     api_hash: str | None = Field(default=None, pattern=r"^[a-fA-F0-9]{32}$")
     session: str = Field(default="", max_length=4096)
     expected_user_id: int | None = Field(default=None, gt=0)
+    client_profile: dict[str, str] | None = None
 
     @model_validator(mode="after")
     def complete_api_pair(self):
+        from .client_identity import validate
+        if self.client_profile is not None:
+            self.client_profile = validate(self.client_profile)
         if (self.api_id is None) != (self.api_hash is None):
             raise ValueError("Provide both API ID and API hash, or use this workspace's saved credentials.")
         return self
@@ -892,7 +896,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                         raise ValueError("The new workspace could not start.")
                     await asyncio.wait_for(collector.configure(
                         body.api_id or account.get("api_id"), body.api_hash or account.get("api_hash"),
-                        account["session"], expected), tuning.value(app.state.store, "operation_timeout_seconds"))
+                        account["session"], expected, account.get("client_profile")), tuning.value(app.state.store, "operation_timeout_seconds"))
                     account_info = child.state.store.get_setting("account", {}) or {}
                     # Keep the account photo, then disconnect until the operator chooses sources.
                     with suppress(Exception):
@@ -1059,11 +1063,12 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
 
     @app.post("/api/auth/configure", dependencies=[Depends(authenticate)])
     async def configure(body: Credentials):
-        return await operation(app.state.collector.configure, body.api_id, body.api_hash, body.session, body.expected_user_id)
+        return await operation(app.state.collector.configure, body.api_id, body.api_hash, body.session,
+                               body.expected_user_id, body.client_profile)
 
     @app.post("/api/auth/phone/start", dependencies=[Depends(authenticate)])
     async def start_phone(body: PhoneLogin):
-        return await operation(app.state.collector.start_phone, body.phone, body.api_id, body.api_hash)
+        return await operation(app.state.collector.start_phone, body.phone, body.api_id, body.api_hash, body.client_profile)
 
     @app.post("/api/auth/import", dependencies=[Depends(authenticate)])
     async def import_account(body: AccountImport):
@@ -1083,7 +1088,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
     async def start_qr(body: Credentials):
         import qrcode
         from qrcode.image.svg import SvgPathImage
-        result = await operation(app.state.collector.start_qr, body.api_id, body.api_hash)
+        result = await operation(app.state.collector.start_qr, body.api_id, body.api_hash, body.client_profile)
         url = result.pop("url")
         output = io.BytesIO()
         qrcode.make(url, image_factory=SvgPathImage, border=4).save(output)
