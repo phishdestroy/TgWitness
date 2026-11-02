@@ -19,7 +19,7 @@ PANEL_MODULES = ("app.py", "collector.py", "account_import.py", "tdata.py", "ses
                  "access.py", "history.py", "archive.py", "archive_api.py", "ai.py", "analysis.py", "analysis_api.py",
                  "media_analysis.py", "media_analysis_api.py", "webhooks.py", "webhook_api.py", "proxy_catalog.py",
                  "proxy_sources.py", "account_export.py", "account_export_transport.py", "account_report.py", "disclosure.py",
-                 "cloud_wizard.py", "levels.py")
+                 "cloud_wizard.py", "levels.py", "wizard.py")
 
 # Labels passed through small renderer tables (tr(label)), rather than literal tr() calls.
 DYNAMIC_SCRIPT_KEYS = (
@@ -129,7 +129,7 @@ def server_keys():
                 elif name == "disclosure.py" and func == "append" and isinstance(node.func.value, ast.Name) \
                         and node.func.value.id == "warnings":
                     texts = node.args[:1]
-                elif func in ("tr", "Invalid") and len(node.args) > 1:
+                elif func in ("tr", "Invalid", "Incomplete") and len(node.args) > 1:
                     texts = node.args[1:2]
             elif isinstance(node, ast.Return) and name == "alerts.py":
                 texts = [node.value]

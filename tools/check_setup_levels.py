@@ -1,14 +1,13 @@
 """Check setup by goal and the credibility and reliability scales (levels.py, views/setup.js).
 
 The proposal for each goal, what Apply changes and records in the signed journal, and the scales
-from the actual settings. Then the panel in a browser: the goal card on Start here, the
-proposal with its predicted scales, Apply, the Extras card, both widths and Russian.
+from the actual settings. Then the panel in a browser: Start here and the Extras card open the
+step-by-step setup (tools/check_wizard.py checks it), the card's goal and scales, Russian.
 """
 import argparse
 import json
 import sys
 import tempfile
-import time
 from pathlib import Path
 
 import requests
@@ -81,8 +80,8 @@ def check_levels():
     mid = levels.assess({**evidence, "enabled": True}, NO_REPLICA, {"enabled": True, "problems": True}, [],
                         None, {"current": False, "last": {"matches": True}}, [{"last_poll": None}], "server")
     assert [i["id"] for i in mid["credibility"]["items"] if i["on"]] == ["journal", "timestamps"]
-    assert [i["id"] for i in mid["reliability"]["items"] if i["on"]] == ["always_on"], \
-        "notifications without a destination and an outdated code check do not count"
+    assert [i["id"] for i in mid["reliability"]["items"] if i["on"]] == [], \
+        "notifications without a destination, an outdated code check and a server named but not proven do not count"
     return "ok  levels: proposals per goal, what Apply changes, settings kept, both scales"
 
 
@@ -120,8 +119,8 @@ def check_api(directory):
         assert applied["goal"] == "evidence" and applied["changed"] == result["changed"]
         credibility = result["assessment"]["credibility"]
         assert [i["id"] for i in credibility["items"] if i["on"]] == ["journal", "timestamps", "drand", "devices"]
-        assert result["assessment"]["reliability"]["items"][0] == {"id": "always_on", "weight": 3, "on": True,
-                                                                   "extra": "cloud"}
+        assert result["assessment"]["reliability"]["items"][0] == {"id": "always_on", "weight": 3, "on": False,
+                                                                   "extra": "cloud"}, "a server named is not a server proven"
         again = post("/api/setup", {"goal": "evidence", "size": "large", "files": "all", "place": "server",
                                     "timestamps": True, "drand": True, "devices": True}).json()
         assert again["changed"] == [], "applying the same answers changes nothing"
@@ -156,45 +155,27 @@ def check_browser(directory, output):
         check_layout(page)
         page.set_viewport_size({"width": 1280, "height": 900})
 
-        page.locator('[data-setup-goal="evidence"]').click()
-        expect(page.locator("#extras-setup")).to_be_visible()
-        expect(page.locator('input[name="setup-goal"][value="evidence"]')).to_be_checked()
-        expect(page.locator('input[name="setup-size"][value="small"]')).to_be_checked()
-        expect(page.locator('input[name="setup-files"][value="media"]')).to_be_checked()
-        expect(page.locator("#setup-proposal")).to_be_visible()
-        for name in ("timestamps", "drand", "devices"):
-            expect(page.locator("#setup-" + name)).to_be_checked()
-        expect(page.locator('#setup-steps li[data-step="server"] .setup-tag')).to_have_text("Recommended")
-        scale = page.locator('#setup-scales .level-scale').first
-        expect(scale.locator(".level-name")).to_have_text("High")
-        expect(scale.locator(".level-was")).to_have_text("now: Basic")
-        page.locator("#setup-timestamps").uncheck()
-        expect(page.locator("#setup-drand")).to_be_disabled()
-        expect(page.locator("#setup-drand")).not_to_be_checked()
-        expect(scale.locator(".level-was")).to_have_count(0)
-        page.locator("#setup-timestamps").check()
-        page.locator("#setup-drand").check()
-        page.locator("#setup-devices").check()
-        page.locator('input[name="setup-place"][value="server"]').check()
-        page.locator('input[name="setup-files"][value="all"]').check()
-        expect(page.locator("#setup-facts")).to_contain_text("everything up to 1 GB each")
-        page.screenshot(path=str(output / "setup-proposal-en.png"), full_page=True)
-        for width in (390, 1440):
-            page.set_viewport_size({"width": width, "height": 1000})
-            check_layout(page)
-        page.set_viewport_size({"width": 1280, "height": 900})
-        page.locator("#setup-form button[type=submit]").click()
-        deadline = time.monotonic() + 15
-        while store.get_setting("setup", None) is None and time.monotonic() < deadline:
-            time.sleep(.1)
+        # The goal has one place: Start here and the Extras card open the step-by-step setup.
+        page.locator("#setup-start-open").click()
+        expect(page.locator("#view-setup")).to_be_visible()
+        expect(page.locator(".wizard-page h1")).to_have_text("What do you need?")
+        navigate_panel(page, "witness")
+        expect(page.locator("#extra-setup-badge")).to_have_text("No goal chosen")
+        expect(page.locator("#setup-overview-scales .level-scale")).to_have_count(2)
+        page.locator("#extras-open-setup").click()
+        expect(page).to_have_url(server.url + "/setup/goal?ws=default")
+
+        # A goal applied elsewhere shows on the card, with the scales from what is set.
+        session = page.evaluate("state.token")
+        answer = requests.post(server.url + "/api/setup", json={"goal": "evidence", "size": "small", "files": "all",
+                                                                "place": "server", "timestamps": True, "drand": True,
+                                                                "devices": True},
+                               headers={"Authorization": "Bearer " + session}, timeout=10)
+        assert answer.ok, answer.text
         saved = store.get_setting("setup")
         assert saved["goal"] == "evidence" and saved["place"] == "server" and saved["files"] == "all", saved
-        expect(page.locator("#setup-status")).to_contain_text("Evidence for a case")
-        expect(page.locator("#setup-skip")).to_be_hidden()
-
-        page.locator('[data-extra-close="setup"]').click()
+        navigate_panel(page, "witness")
         expect(page.locator("#extra-setup-badge")).to_have_text("Evidence for a case")
-        expect(page.locator("#setup-overview-scales .level-scale")).to_have_count(2)
         expect(page.locator("#setup-overview-scales .level-scale").first.locator(".level-name")).to_have_text("High")
         page.locator(".extra-card.extra-setup").screenshot(path=str(output / "setup-card-en.png"))
         navigate_panel(page, "start")
@@ -206,12 +187,11 @@ def check_browser(directory, output):
         navigate_panel(page, "witness")
         words = i18n.words("ru")
         expect(page.locator("#extra-setup-badge")).to_have_text(words["Evidence for a case"])
-        page.locator("#extras-open-setup").click()
-        expect(page.locator("#setup-scales .level-scale").first.locator("strong")).to_have_text(words["Credibility"])
-        page.screenshot(path=str(output / "setup-proposal-ru.png"), full_page=True)
+        expect(page.locator("#setup-overview-scales .level-scale").first.locator("strong")).to_have_text(words["Credibility"])
+        page.screenshot(path=str(output / "setup-card-ru.png"), full_page=True)
         browser.close()
     assert not errors, errors
-    return "ok  browser: goal card on Start here, proposal with predicted scales, Apply, Extras card; English and Russian"
+    return "ok  browser: Start here and the Extras card open the step-by-step setup; the card's goal and scales; en and ru"
 
 
 def main():

@@ -46,7 +46,10 @@ def launch_browser(p):
 
 
 class RunningApp:
-    def __init__(self, path, demo=False, client_factory=FakeClient):
+    """A local panel. A new workspace opens with the step-by-step setup; scenarios about other parts start
+    as someone who chose to set up by hand, unless wizard=True keeps the setup for them."""
+    def __init__(self, path, demo=False, client_factory=FakeClient, wizard=False):
+        self.wizard = wizard
         self.app = create_app(path, demo=demo, client_factory=client_factory)
         self.sock = socket.socket()
         self.sock.bind(("127.0.0.1", 0))
@@ -69,6 +72,9 @@ class RunningApp:
             self.thread.join(timeout=30)
             self.sock.close()
             raise
+        store = self.app.state.store
+        if not self.wizard and not store.get_setting("demo", False) and store.get_setting("setup_wizard", None) is None:
+            store.set_setting("setup_wizard", {"skipped_at": "2026-01-01T00:00:00+00:00"})
         return self
 
     def __exit__(self, *args):

@@ -1,10 +1,14 @@
 const paths={start:"start",chats:"chats",observations:"journal",sources:"sources",parameters:"parameters",accounts:"accounts",
-  access:"access","system-log":"system-log",integrations:"integrations",evidence:"exports",witness:"extras",connection:"account",analysis:"analysis",sealed:"sealed"};
+  access:"access","system-log":"system-log",integrations:"integrations",evidence:"exports",witness:"extras",connection:"account",analysis:"analysis",sealed:"sealed",
+  setup:"setup"};
 const views=Object.fromEntries(Object.entries(paths).map(([view,path])=>[path,view]));
 const legacy={start:"start",account:"connection",connection:"connection",journal:"observations",observations:"observations",
   exports:"evidence",evidence:"evidence",extras:"witness",witness:"witness",sealed:"sealed",chats:"chats",
-  sources:"sources",parameters:"parameters",accounts:"accounts",access:"access","system-log":"system-log",integrations:"integrations",analysis:"analysis"};
-const cards=new Set(["setup","alerts","evidence","cloud","bot","github"]);
+  sources:"sources",parameters:"parameters",accounts:"accounts",access:"access","system-log":"system-log",integrations:"integrations",analysis:"analysis",
+  setup:"setup"};
+const cards=new Set(["alerts","evidence","cloud","bot","github"]);
+// The step-by-step setup (views/wizard.js): one address per step.
+const setupSteps=new Set(["goal","connection","account","chats","saving","place","summary"]);
 const workspacePattern=/^(?:default|[a-f0-9]{32})$/;
 const integer=value=>/^-?\d+$/.test(value||"")&&Number.isSafeInteger(Number(value))&&Number(value)!==0?Number(value):null;
 
@@ -20,7 +24,7 @@ export function parseRoute(value,{workspace="default",staticDemo=false}={}){
   const route={view:views[parts[0]]||null,workspace:query.get("ws")||query.get("workspace")||workspace,
     chatId:null,seq:null,kind:query.get("kind")||"",source:query.get("source")||"",q:query.get("q")||"",
     since:query.get("since")||"",until:query.get("until")||"",system:query.get("system")==="1",
-    before:query.has("before")?integer(query.get("before")):null,extra:null,section:null,explicit};
+    before:query.has("before")?integer(query.get("before")):null,extra:null,section:null,step:null,explicit};
   if(!workspacePattern.test(route.workspace))route.error="Unknown workspace.";
   if(parts[0]==="chats"&&parts.length>1){route.chatId=integer(parts[1]);if(route.chatId===null||parts.length>2)route.error="Record is unavailable to this access.";}
   if(parts[0]==="journal"&&parts.length>1){
@@ -28,7 +32,8 @@ export function parseRoute(value,{workspace="default",staticDemo=false}={}){
     if(route.seq===null||route.seq<=0)route.error="Record is unavailable to this access.";
   }
   if(parts[0]==="extras"&&parts.length>1){route.extra=parts[1];if(!cards.has(route.extra)||parts.length>2)route.error="Record is unavailable to this access.";}
-  if(parts.length>1&&!["chats","journal","extras"].includes(parts[0]))route.error="Record is unavailable to this access.";
+  if(parts[0]==="setup"&&parts.length>1){route.step=parts[1];if(!setupSteps.has(route.step)||parts.length>2)route.error="Record is unavailable to this access.";}
+  if(parts.length>1&&!["chats","journal","extras","setup"].includes(parts[0]))route.error="Record is unavailable to this access.";
   if(query.has("event")){
     route.seq=integer(query.get("event"));route.view="observations";
     if(route.seq===null||route.seq<=0)route.error="Record is unavailable to this access.";
@@ -46,6 +51,7 @@ export function routeURL(route,{base=location.href,staticDemo=false}={}){
   if(route.view==="chats"&&route.chatId!==null&&route.chatId!==undefined)path+="/"+route.chatId;
   if(route.view==="observations"&&route.seq)path+="/event/"+route.seq;
   if(route.view==="witness"&&route.extra)path+="/"+encodeURIComponent(route.extra);
+  if(route.view==="setup"&&route.step)path+="/"+encodeURIComponent(route.step);
   if(staticDemo)query.set("route",path);else url.pathname=path;
   query.set("ws",route.workspace||"default");
   if(current.searchParams.has("lang"))query.set("lang",current.searchParams.get("lang"));

@@ -4,11 +4,14 @@ import re
 
 from starlette.exceptions import HTTPException
 
+from .wizard import STEPS
+
 
 DOCUMENTS = (
     "/start", "/chats", "/journal", "/sources", "/parameters", "/account", "/accounts",
-    "/access", "/system-log", "/integrations", "/exports", "/extras", "/analysis", "/sealed",
+    "/access", "/system-log", "/integrations", "/exports", "/extras", "/analysis", "/sealed", "/setup",
     *("/extras/" + card for card in ("alerts", "evidence", "cloud", "bot", "github")),
+    *("/setup/" + step for step in STEPS),
 )
 
 

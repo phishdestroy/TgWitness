@@ -111,7 +111,8 @@ def scale(weights, on):
 
 def assess(evidence, replica, alerts, destinations, assurance, source, witnesses, place, gateway_log=False):
     """Both scales from the current settings. A part counts when it is switched on and set up; whether
-    it is working right now is shown next to it from health.py."""
+    it is working right now is shown next to it from health.py. An answer alone earns nothing: "runs on a
+    server" counts only for a sealed server that proves it (assurance), not for the place the person named."""
     timestamps = bool(evidence["enabled"])
     polled = [w for w in witnesses if w.get("last_poll") and not w.get("overdue")]
     credibility = {"journal": True, "timestamps": timestamps, "drand": timestamps and evidence.get("drand"),
@@ -120,7 +121,7 @@ def assess(evidence, replica, alerts, destinations, assurance, source, witnesses
                    "witness": bool(polled), "server": bool(assurance),
                    "gateway_log": timestamps and bool(evidence.get("gateway")) and bool(gateway_log)}
     copy = bool(replica["enabled"])
-    reliability = {"always_on": bool(assurance) or place == "server", "replica": copy,
+    reliability = {"always_on": bool(assurance), "replica": copy,
                    "replica_lock": copy and replica["retention_days"] > 0,
                    "alerts": bool(alerts["enabled"] and alerts["problems"] and destinations)}
     return {"credibility": scale(CREDIBILITY, credibility), "reliability": scale(RELIABILITY, reliability)}

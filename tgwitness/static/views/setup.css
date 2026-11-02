@@ -1,4 +1,4 @@
-/* Setup by goal and the two scales (views/setup.js). */
+/* The goal card on Extras and the two scales (views/setup.js); the goal itself is chosen in views/wizard.js. */
 .extra-card.extra-setup { grid-column: 1 / -1; }
 .extra-setup .level-scales { width: 100%; margin: 4px 0 18px; }
 
@@ -21,36 +21,11 @@
 .level-items li.on .level-mark { color: var(--success); }
 .level-weight { color: var(--muted); font-variant-numeric: tabular-nums; }
 
-.setup-form fieldset { min-width: 0; margin: 0 0 18px; padding: 0; border: 0; }
-.setup-form legend { margin-bottom: 2px; padding: 0; font-size: 15px; font-weight: 600; }
-.setup-choices { margin: 8px 0 0; }
-.setup-choices.setup-two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-#setup-proposal { margin-top: 4px; padding-top: 18px; border-top: 1px solid var(--border-soft); }
-#setup-proposal h3 { margin: 0 0 6px; font-size: 15px; }
-.setup-items { display: grid; gap: 10px; margin: 12px 0; }
-.setup-items .setup-item { align-items: flex-start; margin-top: 0; }
-.setup-item strong { display: block; }
-.setup-item small { display: block; color: var(--muted); font-size: 13px; line-height: 1.5; }
-.setup-facts { margin: 0 0 18px; padding-inline-start: 18px; color: var(--text-2); font-size: 13.5px; }
-.setup-steps { display: grid; gap: 8px; margin: 10px 0 22px; padding: 0; list-style: none; }
-.setup-steps li { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius); }
-.setup-steps li.setup-step-done { background: var(--surface-2); }
-.setup-steps strong { display: block; font-size: 14px; }
-.setup-steps small { display: block; color: var(--muted); font-size: 13px; line-height: 1.5; }
-.setup-tag { padding: 3px 8px; border-radius: var(--radius-small); color: var(--text-2); background: var(--surface-2); font-size: 12.5px; font-weight: 600; white-space: nowrap; }
-.setup-tag:empty { display: none; }
-.setup-tag.recommended { color: var(--accent-text); background: var(--accent-soft); }
-.setup-tag.done { color: var(--success); background: var(--success-soft); }
-#setup-scales { padding: 16px; border-radius: var(--radius-lg); background: var(--surface-2); }
-.setup-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
-
 /* On Start here, below the two journeys: how much the record has to prove. */
 .setup-start { margin: 0 0 16px; padding: 18px 20px; border: 1px solid var(--accent-border); border-radius: var(--radius-lg); background: var(--accent-soft); }
 .setup-start h2 { margin: 6px 0 4px; font-size: 18px; }
 .setup-start-goals { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 8px; }
 
 @media (max-width: 760px) {
-  .level-scales, .setup-choices.setup-two { grid-template-columns: 1fr; }
-  .setup-steps li { grid-template-columns: minmax(0, 1fr) auto; }
-  .setup-steps li > button { grid-column: 1 / -1; justify-self: start; }
+  .level-scales { grid-template-columns: 1fr; }
 }

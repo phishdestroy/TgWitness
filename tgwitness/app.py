@@ -62,6 +62,7 @@ from . import tuning
 from . import witness_api
 from . import interactions
 from . import levels
+from . import wizard
 from .store import Store, canonical, utcnow
 from .verify import fingerprint
 
@@ -234,6 +235,11 @@ class ReplicaUpdate(replica.ReplicaSettings):
 class Snapshot(BaseModel):
     chat_id: int
     limit: int = Field(default=100, ge=1, le=10000)
+
+
+class WizardSkip(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    reason: Literal["expert", "copy"] = "expert"
 
 
 class ParametersUpdate(BaseModel):
@@ -733,6 +739,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 "recheck": recheck_settings(store),
                 "dossiers": [c for c in dossier.enabled_chats(store) if allowed is None or c in allowed],
                 "setup_answered": store.get_setting("setup", None) is not None,
+                "setup_wizard": wizard.flags(store),
                 "setup_goal": (store.get_setting("setup", None) or {}).get("goal"),
                 "fingerprint": fingerprint(vault.public_key), "limitations": LIMITS,
                 "chats_limited": allowed is not None,
@@ -1804,16 +1811,19 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         _, parts = status_parts(request.state.principal, {}, parts, visible_chats(request))
         return {"checked_at": health.iso(health.now_utc()), **parts}
 
+    def assessment_for(evidence, place):
+        store = app.state.store
+        return levels.assess(evidence, replica.replica_settings(store), alerts.alert_settings(store),
+                             app.state.vault.read("alerts").get("urls", []), app.state.assurance, source_state(),
+                             witness_api.state(app.state.vault, store)["tokens"], place,
+                             bool(app.state.vault.read("gateway").get("token")))
+
     def setup_state():
         """Setup by goal (levels.py): the saved answers, the current state as answers, and both scales."""
         store, outside = app.state.store, outside_state()
         saved = store.get_setting("setup", None)
         place = (saved or {}).get("place") or ("server" if app.state.assurance else "computer")
-        assessment = levels.assess(evidence_settings(store), replica.replica_settings(store),
-                                   alerts.alert_settings(store), app.state.vault.read("alerts").get("urls", []),
-                                   app.state.assurance, source_state(),
-                                   witness_api.state(app.state.vault, store)["tokens"], place,
-                                   bool(app.state.vault.read("gateway").get("token")))
+        assessment = assessment_for(evidence_settings(store), place)
         return {"saved": saved, "recommended": levels.RECOMMENDED, "assessment": assessment,
                 "levels": levels.LEVELS, "sealed": bool(app.state.assurance),
                 "limits": {"dialog_limit": levels.DIALOG_LIMIT, "reserve_mb": levels.LARGE_MEDIA_RESERVE_MB},
@@ -1860,6 +1870,182 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         require_live()
         app.state.store.set_setting("setup", {"skipped": True, "at": utcnow()})
         return setup_state()
+
+    # Step-by-step setup (wizard.py): progress kept here, applied through the same settings and journal records.
+    def wizard_current():
+        store = app.state.store
+        return {"scope": scope_settings(store), "monitoring": monitoring_settings(store),
+                "capture": capture_settings(store), "evidence": evidence_settings(store),
+                "parameters": tuning.values(store), "targets": store.targets()}
+
+    def wizard_state():
+        progress, current, collector = wizard.load(app.state.store), wizard_current(), app.state.collector
+        return {**progress, "steps": wizard.steps_for(progress["answers"]["goal"]), "presets": wizard.presets(),
+                "current": wizard.summary(current), "drift": wizard.drift(progress["applied"], current),
+                "route": collector.route_status(), "policy": collector.policy_state(),
+                "recent_messages": wizard.RECENT_MESSAGES, "setup": setup_state()}
+
+    @app.get("/api/setup/wizard", dependencies=[Depends(authenticate)])
+    async def get_wizard():
+        return wizard_state()
+
+    @app.post("/api/setup/wizard", dependencies=[Depends(authenticate)])
+    async def save_wizard(body: wizard.Progress):
+        require_live()
+        wizard.save(app.state.store, utcnow(), step=body.step, answers=body.answers.model_dump())
+        return wizard_state()
+
+    @app.post("/api/setup/wizard/skip", dependencies=[Depends(authenticate)])
+    async def skip_wizard(body: WizardSkip):
+        """"I will set it up myself", or a copy of the account, which needs no observation settings."""
+        require_live()
+        store, now = app.state.store, utcnow()
+        with store.transaction():
+            if store.get_setting("setup", None) is None:
+                store.set_setting("setup", {"skipped": True, "at": now})
+            wizard.save(store, now, **({"finished_at": now} if body.reason == "copy" else {"skipped_at": now}))
+        return wizard_state()
+
+    @app.post("/api/setup/wizard/route", dependencies=[Depends(authenticate)])
+    async def wizard_route(request: Request, body: NetworkConfig):
+        """The connection route with the IP mode it needs, in the order the two settings allow: a direct
+        route only in the mode for an address that may be seen; a proxy hides the address again."""
+        config, collector = await approved_route(request, body), app.state.collector
+
+        async def apply():
+            if collector.running:
+                raise ValueError("Pause observation before changing the Telegram route.")
+            policy, proxy = collector.route_policy(), collector.outside_proxy()
+            if config.kind == "direct":
+                if policy["exposure"] != "tunnel" or not policy["outside_enabled"]:
+                    await collector.set_route_policy(RoutePolicy(exposure="tunnel", outside_enabled=True))
+                return await collector.set_network(config)
+            # A proxy hides the address. Outside requests use a SOCKS5 or HTTP route, or the proxy set for them.
+            wanted = RoutePolicy(exposure="hide", outside_enabled=config.kind in ("socks5", "http") or proxy is not None)
+            changes = wanted.model_dump() != policy
+            if collector.network_config().kind == "direct" or config.kind in ("socks5", "http"):
+                result = await collector.set_network(config)
+                if changes:
+                    await collector.set_route_policy(wanted)
+                return result
+            if changes:
+                await collector.set_route_policy(wanted)
+            return await collector.set_network(config)
+
+        await operation(apply)
+        return {"route": collector.route_status(), "policy": collector.policy_state()}
+
+    @app.post("/api/setup/wizard/check-connection", dependencies=[Depends(authenticate)])
+    async def wizard_check_connection():
+        """Test the saved route and keep the result with the wizard's progress, worded by a short code."""
+        collector, store = app.state.collector, app.state.store
+        kind = collector.network_config().kind
+        try:
+            result = await operation(collector.test_network)
+            check = {"ok": True, "kind": kind, "elapsed_ms": result.get("elapsed_ms"), "at": utcnow()}
+        except HTTPException as exc:
+            if exc.status_code == 409 and "demo" in str(exc.detail):
+                raise
+            detail = exc.detail.get("message") if isinstance(exc.detail, dict) else exc.detail
+            check = {"ok": False, "kind": kind, "code": wizard.connection_problem(kind, exc.status_code, detail),
+                     "detail": str(detail), "at": utcnow()}
+        except (netclient.RouteError, OSError) as exc:
+            check = {"ok": False, "kind": kind, "code": wizard.connection_problem(kind, 503, str(exc)),
+                     "detail": str(exc) or type(exc).__name__, "at": utcnow()}
+        wizard.save(store, utcnow(), checks={**wizard.load(store)["checks"], "connection": check})
+        return {**check, "route": collector.route_status(), "policy": collector.policy_state()}
+
+    def wizard_preview(answers):
+        current = wizard_current()
+        try:
+            planned = wizard.plan(answers, current)
+        except wizard.Incomplete as exc:
+            return {"ready": False, "step": exc.step, "message": str(exc)}
+        except ValueError as exc:
+            return {"ready": False, "step": "saving", "message": str(exc)}
+        evidence = planned["evidence"] or current["evidence"]
+        saved = app.state.store.get_setting("setup", None) or {}
+        place = saved.get("place") or ("server" if app.state.assurance else "computer")
+        return {"ready": True, "goal": planned["goal"], "now": wizard.summary(current),
+                "after": wizard.summary({**current, "scope": planned["scope"], "monitoring": planned["monitoring"],
+                                         "capture": planned["capture"], "evidence": evidence}),
+                "enable": len(planned["enable"]), "pause": len(planned["pause"]),
+                "parameters": {key: {"now": current["parameters"][key], "after": value}
+                               for key, value in planned["parameters"].items()},
+                "scales": {"now": assessment_for(current["evidence"], place),
+                           "after": assessment_for(evidence, answers.place)},
+                "outside_route": app.state.collector.outside_route().kind}
+
+    @app.post("/api/setup/wizard/preview", dependencies=[Depends(authenticate)])
+    async def preview_wizard(body: wizard.Answers):
+        return wizard_preview(body)
+
+    @app.post("/api/setup/wizard/apply", dependencies=[Depends(authenticate)])
+    async def apply_wizard(body: wizard.Answers):
+        """Apply the answers: scope, chosen chats, live events, attachments, evidence and the goal, each with
+        its own signed journal record, in one transaction."""
+        require_live()
+        store, collector, vault = app.state.store, app.state.collector, app.state.vault
+        async with op_lock:
+            require_live()
+            current = wizard_current()
+            try:
+                planned = wizard.plan(body, current)
+                saved, before, after = tuning.changes(store, planned["parameters"])
+            except wizard.Incomplete as exc:
+                raise HTTPException(422, {"message": str(exc), "step": exc.step}) from None
+            except (ValueError, tuning.Invalid) as exc:
+                raise HTTPException(422, str(exc)) from None
+            known = {t["chat_id"]: t for t in current["targets"]}
+            if any(chat_id not in known and chat_id not in collector.dialog_cache for chat_id in planned["enable"]):
+                await perform_operation(collector.dialogs)
+            entries = {chat_id: known.get(chat_id) or collector.dialog_cache.get(chat_id) for chat_id in planned["enable"]}
+            if any(entry is None for entry in entries.values()):
+                raise HTTPException(400, {"message": "Some chosen chats are no longer in the account's list. Refresh "
+                                                     "the chat list and choose them again.", "step": "chats"})
+            update = recording.RecordingUpdate(monitoring=Monitoring(**planned["monitoring"]),
+                                               capture=Capture(**planned["capture"]),
+                                               scope=ScopeUpdate(**planned["scope"], acknowledged=planned["acknowledged"]))
+            answers = body.model_dump()
+            answers["chats"] = {**answers["chats"], "chat_ids": len(answers["chats"]["chat_ids"])}
+            try:
+                with store.transaction():
+                    changed, _ = recording.save(store, update)
+                    for chat_id, entry in entries.items():
+                        store.set_target(chat_id, entry["title"], entry["kind"], True, origin="manual")
+                        included = unexclude(store, chat_id)
+                        store.append("target.changed", {"title": entry["title"], "enabled": True, "wizard": True,
+                                                       **({"removed_from_scope_exclusions": True} if included else {})},
+                                     chat_id)
+                    for chat_id in planned["pause"]:
+                        target = known[chat_id]
+                        store.set_target(chat_id, target["title"], target["kind"], False)
+                        store.append("target.changed", {"title": target["title"], "enabled": False, "wizard": True,
+                                                       "coverage": "No observations promised while target is disabled."},
+                                     chat_id)
+                    if planned["enable"] or planned["pause"]:
+                        changed.append("chats")
+                    if planned["evidence"]:
+                        save_evidence(store, EvidenceMode(**planned["evidence"]))
+                        changed.append("evidence")
+                    if after:
+                        save_parameters(store, saved, before, after)
+                        changed.append("parameters")
+                    setup, now = planned["setup"].model_dump(), utcnow()
+                    store.set_setting("setup", {**setup, "at": now, "wizard": True})
+                    store.append("setup.applied", {**setup, "changed": changed, "wizard": answers})
+                    wizard.save(store, now, step="summary", answers=body.model_dump(), finished_at=now,
+                                applied=wizard.summary(wizard_current()))
+            except recording.Invalid as exc:
+                raise HTTPException(exc.status, {"message": str(exc), "step": "chats"}) from None
+            if planned["evidence"] and planned["evidence"]["enabled"] and not current["evidence"]["enabled"]:
+                request_anchor(store, vault, app.state.anchor_wakeup)
+            collector.media_wakeup.set()
+            if after:
+                app.state.alert_wakeup.set()
+            if "scope" in changed and collector.running:
+                await perform_operation(collector.apply_scope)
+        return {**wizard_state(), "changed": changed}
 
     @app.post("/api/replica", dependencies=[Depends(authenticate)])
     async def set_replica(body: ReplicaUpdate):

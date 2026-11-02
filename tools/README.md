@@ -32,6 +32,7 @@ Builds stay local. See [publishing](../docs/internal/PUBLISHING.md) and
 | `python tools/check_evidence_witnesses.py` | Evidence mode's drand and device-list records, through export and `verify.py`; `--live` asks the real drand relays |
 | `python tools/check_gateway_dns.py` | Gateway DNS for a 24/7 server: firewall rules, installer, verify, shared location, the journal copy and the panel; `--no-browser` skips the panel |
 | `python tools/check_setup_levels.py` | Setup by goal: the proposal per goal, what Apply changes and records, the credibility and reliability scales, in the browser |
+| `python tools/check_wizard.py` | Step-by-step setup: the plan from the answers, progress, route and IP mode, apply and its journal records, hand changes; the whole path in a browser at four widths, English and Russian |
 | `python tools/check_tdx.py` | Intel TDX attestations: real quotes from dcap-qvl and dstack to Intel's root, and every refusal with a forged PKI |
 | `python tools/check_phala.py` | Phala Cloud deployments against a simulated Phala Cloud: deploy, verify, the journal, quick tunnel, destroy and the panel wizard |
 | `python tools/capture_screenshots.py` | Screenshots in `test-results/`; `--docs` updates docs assets |

@@ -28,7 +28,7 @@ const state = {token: sessionStorage.getItem("tgwitness-token") || "",
   accountExportJobs: [], accountExportDefaults: null, accountExportCapabilities: null,
   accountExportDraftProfile: null, accountExportDirty: false,
   accountDisclosureJob: null, accountDisclosurePreview: null, accountDisclosureDirty: false,
-  accountDisclosures: {}, exportTask: 'journal', workflow: null};
+  accountDisclosures: {}, exportTask: 'journal', workflow: null, wizardStep: null, wizardPreset: null, setupData: null};
 let accountState;
 let connectionView;
 const connectionViewReady=import('./views/connection.js?v=1').then(({createConnectionView})=>{
@@ -67,6 +67,7 @@ const viewReady=Promise.all([
         if(name==='evidence')exportsView?.leave();
         if(name==='system-log')systemLogView?.leave();
         if(name==='observations')window.TgWitnessJournal?.leave();
+        if(name==='setup')wizardView?.leave();
       },
       resetSession(){top=0;scrolls=[];viewContexts.delete(name);resetViewContent(name);},
     });
@@ -87,6 +88,7 @@ function resetViewContent(view){
   if(view==='access'){accessView?.resetSession();accessFormVersion++;adminLimitsVersion++;accessFormReady=false;adminLimitsReady=false;adminLimitsDirty=false;accessLoadSerial++;
     state.access=null;state.accessEdit=null;state.accessChats={};state.consoleAfter=0;show('access-new',false);}
   if(view==='observations')window.TgWitnessJournal?.reset();
+  if(view==='setup')wizardView?.resetSession();
   const clear={observations:['events-body'],chats:['chats-list','chat-feed','chat-people','chat-about'],accounts:['accounts-list','fleet-groups'],
     access:['access-list','access-sessions-list','access-token'],'system-log':['access-console'],
     connection:['profiles-list'],witness:['witness-list','github-result','cloud-health','alerts-saved','evidence-status','replica-status'],
@@ -110,13 +112,15 @@ async function loadPanelView(view){
   else if(view==='integrations')await window.TgWitnessIntegrations?.load();
   else if(view==='analysis')await window.TgWitnessAnalysis?.load();
   else if(view==='connection'){await loadProfiles();if(!state.status.demo)await loadPolicy();await connectionViewReady;await connectionView.enter();}
+  else if(view==='setup')await loadWizard();
 }
 let routerTask=null;
 function routeSnapshot(){return {view:state.drawerSeq!==null?"observations":state.view,workspace:state.profile,
   chatId:state.view==="chats"?state.chat:null,seq:state.drawerSeq,kind:state.filter,source:state.source,q:state.search,
-  since:state.eventSince,until:state.eventUntil,system:state.eventSystem,before:state.eventBefore,extra:state.extra||null,section:state.parameterSection||null};}
+  since:state.eventSince,until:state.eventUntil,system:state.eventSystem,before:state.eventBefore,extra:state.extra||null,section:state.parameterSection||null,
+  step:state.view==="setup"?wizardView?.step||null:null};}
 function ensureRouter(){
-  if(!routerTask)routerTask=import("./router.js?v=4").then(({createRouter})=>{
+  if(!routerTask)routerTask=import("./router.js?v=5").then(({createRouter})=>{
     window.TgWitnessRouter=createRouter({snapshot:routeSnapshot,ready:()=>!!state.me&&!$("workspace").hidden,
       error:message=>toast(tr(message),true),apply:applyRouteToPanel});return window.TgWitnessRouter;
   });
@@ -158,6 +162,7 @@ async function applyRouteToPanel(route,current){
     await Promise.all([loadReportSettings(),loadExports(),loadAccountExport().catch(accountExportError)]);
   }
   else if(view==="witness"){await loadExtras();if(current())selectExtra(route.extra,{history:false});}
+  else if(view==="setup")await loadWizard(route.step);
 }
 
 const permissionLabels={
@@ -472,7 +477,7 @@ async function unlock() {
   state.status = await json("status");
   applyAccess();
   if(!state.opened&&!requested.explicit){
-    state.view=state.status.demo?"chats":viewAllowed('start')?'start':'chats';
+    state.view=state.status.demo?"chats":wizardPending()?"setup":viewAllowed('start')?'start':'chats';
   }
   if(!viewAllowed(state.view))state.view="chats";
   state.opened=true;
@@ -501,6 +506,7 @@ function viewAllowed(view){
   return {start:!!state.me&&!limited,sources:may("sources")&&!limited,evidence:may("export")&&!limited,sealed:may("export")&&!limited,witness:may("settings")&&!limited,
     parameters:may("settings")&&!limited,connection:may("account")&&!limited,accounts:!!state.me?.admin,
     access:!!state.me?.admin,"system-log":!!state.me?.admin,integrations:!!state.me?.admin,
+    setup:!!state.me?.admin&&!limited&&!state.status?.demo,
     analysis:!!(state.status?.analysis?.enabled||state.status?.analysis?.media_available)}[view]??true;
 }
 function applyAccess(){
@@ -590,7 +596,7 @@ function navigate(view,options={}) {
     n.classList.toggle("active",selected);
     if(selected)n.setAttribute("aria-current","page");else n.removeAttribute("aria-current");
   });
-  $("view-label").textContent=tr({start:"Start here",chats:"Chats",observations:"Journal",sources:"Sources",evidence:"Exports",sealed:"Exports",witness:"Extras",parameters:"Parameters",connection:"Account",accounts:"Accounts",access:"Access","system-log":"System log",integrations:"Integrations",analysis:state.status?.analysis?.enabled?"Ask the archive":"Machine recognition"}[view]);
+  $("view-label").textContent=tr({start:"Start here",chats:"Chats",observations:"Journal",sources:"Sources",evidence:"Exports",sealed:"Exports",witness:"Extras",parameters:"Parameters",connection:"Account",accounts:"Accounts",access:"Access","system-log":"System log",integrations:"Integrations",setup:"Step-by-step setup",analysis:state.status?.analysis?.enabled?"Ask the archive":"Machine recognition"}[view]);
   show("entry-header",view==="connection");
   if(view==="connection")connectionSettings(false);
   if(state.status){renderSetup();renderWorkflowControls();}
@@ -684,6 +690,7 @@ panelQueries('[data-workflow]').forEach(button=>button.addEventListener('click',
   if(button.dataset.workflow==='account'){await openAccountWorkflow();return;}
   state.workflow=null;
   if(!viewAllowed('sources')||!viewAllowed('connection')||!may('collect'))return;
+  if(wizardPending()){await openWizard();return;}
   if(!accountSignedIn()&&!state.status.demo){await openWorkflowSignIn();return;}
   await navigate(hasSources(state.status)?'chats':'sources');
 })));
@@ -1017,12 +1024,26 @@ function renderViewStatus(view){
   }
   renderConnection();
   }else if(view==='analysis'||view==='integrations')window.TgWitnessAnalysis?.syncStatus?.(s);
+  else if(view==='setup')wizardView?.updateStatus(s);
 }
 
 function hasSources(s){return s.targets.some(t=>t.enabled)||(s.scope?.mode||"selected")!=="selected";}
+// The step-by-step setup is unfinished: neither completed nor skipped, and nothing set up by hand either.
+function wizardPending(s=state.status){
+  const w=s?.setup_wizard;
+  return viewAllowed("setup")&&!!w&&!w.finished&&!w.skipped&&!s.setup_answered&&!hasSources(s);
+}
 function renderSetup(){
   const s=state.status,c=s.collector;
   show("setup-card",['chats','observations','sources'].includes(state.view)&&!s.demo&&!c.running&&viewAllowed("connection")&&viewAllowed("sources")&&may("collect"));
+  const wizard=wizardPending(s);
+  $("setup-card").querySelector(".setup-progress").hidden=wizard;
+  if(wizard){
+    $("setup-stage").textContent=tr("SETUP NOT FINISHED");$("setup-title").textContent=tr("Continue the step-by-step setup");
+    $("setup-description").textContent=tr("Everything you chose so far is kept. It takes a few minutes.");
+    $("setup-action").textContent=tr("Continue setup →");
+    return;
+  }
   const stage=!accountSignedIn()?0:!hasSources(s)?1:2;
   const steps=[
     [tr("GET STARTED · STEP 1 OF 3"),tr("Connect your Telegram account"),tr("Use your phone number, scan a QR code, or import account files."),tr("Connect account →")],
@@ -1038,6 +1059,7 @@ function renderSetup(){
   });
 }
 function nextSetupStep(){
+  if(wizardPending()){openWizard();return;}
   if(!accountSignedIn()){navigate("connection");setAuthStep('credentials');}
   else if(!hasSources(state.status))navigate("sources");
   else{$("collector-toggle").click();if(modesUI?.mode()==="easy")navigate("chats");}
@@ -2644,20 +2666,16 @@ function scopeDraft(){
     new_chats:{profile:$("scope-new-profile").checked,history:Math.max(0,Math.min(1000,Math.floor(Number($("scope-new-history").value)||0)))}};
 }
 
-$("scope-investigation").addEventListener("click",()=>{
-  viewQueries("sources","[name=scope-mode]").forEach(r=>{r.checked=r.value==="account";});
-  for(const k of scopeTypes)$("scope-"+k).checked=true;
-  $("scope-own").checked=true;$("scope-new-profile").checked=true;
-  if(Number($("scope-new-history").value)<200)$("scope-new-history").value="200";
-  // The preset does what it describes: it is saved at once, after the whole-account confirmation.
-  state.scopeDirty=true;renderScope();$("scope-form").requestSubmit($("scope-form").querySelector("button[type=submit]"));
-});
+// Investigation mode is the step-by-step setup with the investigation goal chosen: one place applies a goal.
+$("scope-investigation").addEventListener("click",()=>openWizard("goal",{goal:"watch",purpose:"investigation"}));
+$("scope-investigation-copy").textContent=tr("For a separate account that joins groups and talks to bots. Opens the step-by-step setup for an investigation: the whole account, and each new chat with its profile and earlier messages.");
 function chatTitle(id){
   return state.status?.targets.find(t=>t.chat_id===id)?.title||state.dialogs.find(d=>d.chat_id===id)?.title||tr("Chat {id}",{id});
 }
 function renderScope(){
   const form=$("scope-form"),sc=state.scope,demo=!!state.status?.demo;
   form.querySelectorAll("input,select,button").forEach(n=>n.disabled=demo||!sc);
+  $("scope-investigation").closest(".investigation-preset").hidden=!viewAllowed("setup");
   if(!sc){$("scope-unsaved").textContent=demo?tr("The scope can be changed in a real workspace, not in the demo."):"";return;}
   const saved=sc.settings,select=$("scope-folder");
   if(!state.scopeDirty){
@@ -2730,12 +2748,11 @@ function selectExtra(name,options={}){
   if(modesUI?.lockedExtra(name))name=null;
   state.extra=name;
   show("extras-overview",!name);
-  for(const key of ["setup","alerts","evidence","cloud","bot","github"]){
+  for(const key of ["alerts","evidence","cloud","bot","github"]){
     show("extras-"+key,key===name);
     $("extras-open-"+key).setAttribute("aria-expanded",String(key===name));
   }
   if(name==="cloud")loadCloud().catch(error=>{if(!(error instanceof StaleView))toast(error.message,true);});
-  if(name==="setup")loadSetup().catch(error=>{if(!(error instanceof StaleView))toast(error.message,true);});
   if(state.view==="witness"&&options.history!==false)window.TgWitnessRouter?.record();
 }
 document.querySelectorAll("[data-extra]").forEach(button=>button.addEventListener("click",()=>{
@@ -2822,42 +2839,61 @@ async function loadExtras(){
   await Promise.all([loadWitness(),loadAlerts(),loadEvidence(),loadReplica(),loadAssurance(),loadSourceCheck(),loadSetup(),modesUI?.refresh()]);
 }
 
-// Setup by goal (views/setup.js, levels.py): the goal card on Start here, the Extras card and its panel.
-let setupView=null;
-const setupReady=import("./views/setup.js?v=3").then(({createSetup,renderScales})=>{
-  setupView=createSetup({root:$("extras-setup"),tr,json,node,toast,may,fmtFull,getState:()=>state,
-    answered:()=>{if(state.status)state.status.setup_answered=true;renderSetupStart();renderSetupCard();},
-    openExtra:name=>selectExtra(name)});
-  setupView.renderScales=renderScales;
-  return setupView;
-}).catch(error=>{toast(error.message,true);throw error;});
+// The goal is chosen in one place, the step-by-step setup (views/wizard.js, wizard.py). Start here offers it
+// until the first setup; the Extras card shows the goal and both scales (views/setup.js, levels.py) and opens it.
+let setupScales=null;
+const setupReady=import("./views/setup.js?v=4").then(module=>{setupScales=module;renderSetupCard();return module;})
+  .catch(error=>{toast(error.message,true);throw error;});
 async function loadSetup(){
   if(!state.status||state.status.demo||!may("settings"))return;
-  const view=await setupReady,profile=state.profile;
-  await view.load();
-  if(profile===state.profile)renderSetupCard();
+  const profile=state.profile,data=await json("setup");
+  if(profile!==state.profile)return;
+  state.setupData=data;renderSetupCard();
 }
 function renderSetupCard(){
-  const data=setupView?.data;if(!data||state.view!=="witness")return;
+  const data=state.setupData;if(!data||!setupScales||state.view!=="witness")return;
   const goal=data.saved&&!data.saved.skipped?data.saved.goal:null,badge=$("extra-setup-badge");
   // Without a chosen goal, say what the configuration already amounts to instead of a bare "No goal chosen".
-  const wide=["folder","account"].includes(state.status?.scope?.mode);
-  badge.textContent=goal?setupView.goalName(goal):wide?tr("No goal chosen · set up like {goal}",{goal:setupView.goalName("investigation")}):tr("No goal chosen");
+  const wide=["folder","account"].includes(state.status?.scope?.mode),like=setupScales.goalName(tr,"investigation");
+  badge.textContent=goal?setupScales.goalName(tr,goal):wide?tr("No goal chosen · set up like {goal}",{goal:like}):tr("No goal chosen");
   badge.classList.toggle("on",!!goal);
-  setupView.renderScales($("setup-overview-scales"),data,{tr,node,compact:true});
+  $("extra-setup-copy").textContent=tr("Set up by steps: the goal, the chats, what to save. Here, how far the record can be trusted.");
+  setupScales.renderScales($("setup-overview-scales"),data,{tr,node,compact:true});
+  $("extras-open-setup").hidden=!viewAllowed("setup");
 }
 function renderSetupStart(){
   const s=state.status;if(viewHost?.active!=='start')return;
-  show("setup-start",!!s&&!s.demo&&!s.chats_limited&&!s.setup_answered&&may("settings"));
+  show("setup-start",!!s&&!s.demo&&!s.chats_limited&&!s.setup_answered&&viewAllowed("setup"));
+  $("setup-start-copy").textContent=tr("Answer a few questions, one per page: what you need, how to connect, which chats. We set everything up and check that recording works.");
+  $("setup-start-open").textContent=tr("Set up step by step →");
 }
-document.querySelectorAll("[data-setup-goal]").forEach(button=>button.addEventListener("click",async()=>{
-  const view=await setupReady;view.start(button.dataset.setupGoal);
-  navigate("witness");selectExtra("setup");
-  const heading=$("extras-setup-title");heading.focus({preventScroll:true});heading.scrollIntoView({block:"start"});
-}));
+$("setup-start-open").addEventListener("click",()=>openWizard());
+$("extras-open-setup").addEventListener("click",()=>openWizard("goal"));
 $("setup-start-skip").addEventListener("click",ev=>busy(ev.currentTarget,async()=>{
-  await json("setup/skip",{});state.status.setup_answered=true;renderSetupStart();
+  await json("setup/wizard/skip",{reason:"expert"});await refreshStatus();renderSetupStart();
 }));
+
+// Step-by-step setup (views/wizard.js, wizard.py): what a new workspace opens with, and the one place to choose a goal.
+let wizardView=null;
+const wizardReady=import("./views/wizard.js?v=1").then(({createWizard})=>{
+  wizardView=createWizard({root:$("view-setup"),tr,trn,json,node,toast,may,fmtFull,humanSize,avatarNode,askConfirm,
+    getState:()=>state,refreshStatus,signedIn:accountSignedIn,authCard,setAuthStep,stateBadge,
+    healthLines:collectorLines,healthNames:healthPartNames,
+    record:options=>window.TgWitnessRouter?.record({},options||{}),
+    openAccountExport:openAccountWorkflow,leaveTo:view=>navigate(view),
+    openExtra:name=>{
+      navigate("witness");selectExtra(name);
+      const heading=$("extras-"+name+"-title");heading?.focus({preventScroll:true});heading?.scrollIntoView({block:"start"});
+    }});
+  return wizardView;
+}).catch(error=>{toast(error.message,true);throw error;});
+async function loadWizard(step=null){
+  if(!viewAllowed("setup"))return;
+  const view=await wizardReady,wanted=step||state.wizardStep,preset=state.wizardPreset;
+  state.wizardStep=null;state.wizardPreset=null;
+  await view.load(wanted,preset);
+}
+function openWizard(step=null,preset=null){state.wizardStep=step;state.wizardPreset=preset;return navigate("setup");}
 
 async function loadSourceCheck(){
   if(!state.status)return;
@@ -3347,6 +3383,8 @@ $("verify-journal").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   state.verification={...r,profile};renderVerification();
   toast(tr("Journal integrity check passed."));
 }));
+// The sign-in form lives on the account page; the step-by-step setup shows the same form while its account step is open.
+const authCard=viewQuery("connection",".auth-card");
 function setAuthStep(step){
   const demo=!!state.status?.demo;
   show("demo-account-state",demo);
@@ -3366,7 +3404,7 @@ function setAuthMethod(method){
     $("import-result").textContent="";
   }
   authMethod=method;
-  viewQueries("connection","[data-auth-method]").forEach(button=>{
+  authCard.querySelectorAll("[data-auth-method]").forEach(button=>{
     const selected=button.dataset.authMethod===method;
     button.classList.toggle("active",selected);button.setAttribute("aria-pressed",String(selected));
   });
@@ -3418,7 +3456,7 @@ async function loginRequest(path,body,options){
 function authProgress(message){
   $("auth-progress").textContent=message;show("auth-progress",!!message);
 }
-viewQueries("connection","[data-auth-method]").forEach(button=>button.addEventListener("click",()=>setAuthMethod(button.dataset.authMethod)));
+authCard.querySelectorAll("[data-auth-method]").forEach(button=>button.addEventListener("click",()=>setAuthMethod(button.dataset.authMethod)));
 $("api-id").addEventListener("paste",event=>{
   const text=event.clipboardData?.getData("text")||"";
   if(!text.includes(":"))return;
@@ -3706,7 +3744,7 @@ async function loadAccountFiles(){
     converted=true;renderApiState();return result;
   }catch(error){
     if(revision===state.workspaceRevision&&selection===accountImportRevision&&/passcode/i.test(error.message)){
-      viewQuery("connection",".import-advanced").open=true;$("tdata-passcode").focus();
+      authCard.querySelector(".import-advanced").open=true;$("tdata-passcode").focus();
     }
     throw error;
   }finally{if(revision===state.workspaceRevision&&selection===accountImportRevision){if(converted)input.value="";renderSelectedFiles();$("tdata-passcode").value="";authProgress("");}}

@@ -12,6 +12,19 @@
   and report failures per account. WARP/WireGuard helpers stay in the data folder,
   use pinned SHA-256 downloads and stop when the owning panel exits.
 
+- A new workspace opens with a step-by-step setup: what you need, how to reach
+  Telegram, the account, which chats, what to save and where it runs, then a summary
+  and Start recording with a live check of the connection, events, sources and
+  attachments. Each step has its own address, Back keeps the answers and the progress
+  is kept in the workspace. The connection step reads a pasted MTProto, SOCKS5 or HTTP
+  proxy, sets the IP protection mode the route needs and checks it, with the time it
+  took and a plain reason when it fails. The account step uses the account page's
+  sign-in and asks whether the account is separate; a main account records only chosen
+  chats. Applying sets the scope, chosen chats, events, attachments, timestamps and the
+  goal through the same settings and signed journal records as their own forms; a
+  later change by hand is shown with the way back. The goal is chosen only there:
+  Start here, the Extras card and Sources → Investigation mode open it. A server named
+  as the place no longer earns reliability points before it is proven.
 - Long labels no longer spill on phones: the Sources tabs wrap their text, and the
   journal's period buttons wrap to a second row instead of five fixed columns. Russian
   gains the missing route, IP protection and administrator key confirmations; a working

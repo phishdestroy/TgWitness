@@ -51,7 +51,7 @@ def main():
             expect(page.locator("#witness-form")).to_be_hidden()
             expect(page.locator(".extra-card")).to_have_count(6)
             before = len(writes)
-            for name in ("setup", "alerts", "evidence", "cloud", "github"):
+            for name in ("alerts", "evidence", "cloud", "github"):
                 opener = page.locator("#extras-open-" + name)
                 opener.focus()
                 page.keyboard.press("Enter")
