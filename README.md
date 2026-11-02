@@ -123,6 +123,7 @@ transcription, and send HMAC-signed webhooks.
 | [Search and review](docs/ANALYSIS.md) | Local search, optional AI, cited observations and separate analytical reports. |
 | [Connect via MCP](docs/MCP.md) | Seven read-only tools, selected workspaces/chats, expiry and revocation. |
 | [Read images and audio](docs/MEDIA-ANALYSIS.md) | Optional local OCR and transcription; original files stay unchanged. |
+| [Add independent capture](docs/OPTIONAL-CAPTURE.md) | Optional browser and AyuGram recorders with their own controls, keys and signed exports; capture and video start off. Preview. |
 | [Send webhooks](docs/WEBHOOKS.md) | Scoped outgoing events, HMAC signatures, retries and an n8n example. |
 | [Share a focused view](docs/ACCESS.md) | Selected accounts/chats, permissions, expiry and IP restrictions. |
 

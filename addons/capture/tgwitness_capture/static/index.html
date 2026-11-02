@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ru">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Независимая фиксация · TgWitness Capture</title><link rel="stylesheet" href="/static/style.css"><script src="/static/app.js" defer></script></head>
+<body><main>
+<header><p class="eyebrow">TGWITNESS CAPTURE · ДОПОЛНИТЕЛЬНЫЙ МОДУЛЬ</p><h1>Независимая фиксация</h1><p>Собственная сессия, журнал и ключ. Основной сборщик для работы не нужен.</p></header>
+<section id="login"><h2>Подключение к регистратору</h2><form id="login-form"><label>Токен управления<input id="token" type="password" autocomplete="off" required></label><button>Подключиться</button></form><p>Токен находится в файле control-token.txt регистратора. Он хранится только в памяти этой вкладки.</p></section>
+<p id="notice" role="status" aria-live="polite"></p>
+<div id="workspace" hidden>
+<section class="summary"><div><span id="badge" class="badge">Выключено</span><h2 id="kind">Регистратор</h2><p id="last-success"></p></div><button id="logout" class="secondary">Отключить панель</button></section>
+<section><h2>Что сохранять</h2><p>Сначала войдите в отдельный браузер или AyuGram. При каждом запуске регистратора захват выключен. Перед повторной авторизацией поставьте его на паузу.</p>
+<div id="browser-options"><label class="switch"><input id="screenshots" type="checkbox"> Скриншоты видимой области</label><label class="switch"><input id="pages" type="checkbox"> Страница MHTML и извлечённый текст</label><div class="target"><button id="refresh-targets" class="secondary">Найти вкладки браузера</button><label>Вкладка для фиксации<select id="targets"><option value="">Выберите вкладку после входа</option></select></label><button id="select-target" class="secondary">Выбрать</button></div></div>
+<div id="database-options" hidden><label class="switch"><input id="database" type="checkbox"> Согласованные снимки БД AyuGram</label><p>Сохраняется указанная локальная SQLite-база. Сообщения пока не интерпретируются; полнота истории и вложений не предполагается.</p></div>
+<label class="switch"><input id="video" type="checkbox"> Видео выбранной процедуры · без звука</label><p id="video-help">Для видео нужен настроенный источник экрана и FFmpeg.</p>
+<div class="actions"><button id="save" class="secondary">Сохранить выбор</button><button id="toggle">Начать фиксацию</button><button id="snapshot" class="secondary">Снимок сейчас</button></div>
+<p id="coverage"></p></section>
+<section><h2>Проверка и передача</h2><dl><dt>Наблюдатель</dt><dd id="observer"></dd><dt>Отпечаток ключа SHA-256</dt><dd id="fingerprint"></dd><dt>Граница журнала</dt><dd id="boundary"></dd><dt>Маршрут, заданный оператором</dt><dd id="route"></dd></dl>
+<p>Сохраните отпечаток ключа отдельно. Контрольная точка помогает заметить обрезку журнала, если сохранена независимо. Она не является внешней меткой времени.</p>
+<div class="actions"><button id="checkpoint" class="secondary">Скачать контрольную точку</button><button id="export">Скачать подписанный ZIP</button></div><p>Перед экспортом поставьте фиксацию на паузу. В ZIP входят оригиналы, подписанный журнал и HTML-отчёт. Проверяющий инструмент запускается отдельно.</p></section>
+<section><h2>Последние события</h2><ol id="events"></ol></section>
+</div></main></body></html>

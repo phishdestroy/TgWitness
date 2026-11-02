@@ -43,6 +43,19 @@ FILES.extend("tools/tdx/" + name for name in (
     "intel-v4.quote.hex", "intel-v4.collateral.json", "intel-v5-td15ex.quote.hex", "intel-v5-td15ex.collateral.json",
     "intel-outdated.collateral.json", "dstack-v4.json", "dstack-v4.collateral.json",
 ))
+FILES.extend("addons/capture/" + name for name in (
+    "README.md", "pyproject.toml", "requirements.lock", "lock_from_project.py", "compose.yaml",
+    "config/browser.example.json", "config/ayugram.example.json",
+    "deploy/Dockerfile", "deploy/Dockerfile.neko", "deploy/Dockerfile.gateway",
+    "deploy/chromium.conf", "deploy/chromium-policy.json", "deploy/neko-start.sh", "deploy/upstream-proxy.example.conf",
+    "tgwitness_capture/__init__.py", "tgwitness_capture/__main__.py", "tgwitness_capture/format.py",
+    "tgwitness_capture/journal.py", "tgwitness_capture/adapters.py", "tgwitness_capture/video.py",
+    "tgwitness_capture/service.py", "tgwitness_capture/export.py", "tgwitness_capture/verify.py",
+    "tgwitness_capture/witness.py", "tgwitness_capture/static/index.html",
+    "tgwitness_capture/static/app.js", "tgwitness_capture/static/style.css",
+    "tests/conftest.py", "tests/test_capture.py", "tests/test_browser.py", "tests/test_video.py",
+    "tests/test_panel.py", "tests/test_witness.py", "tests/test_deployment.py",
+))
 DIRECTORIES = {
     "tgwitness": {".md", ".py", ".html", ".css", ".js", ".svg", ".json"},
     "docs": {".md", ".png", ".webp", ".svg", ".txt", ".gif", ".mp4"}, "tools": {".py", ".md"},

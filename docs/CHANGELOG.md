@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Add the optional, independent `tgwitness-capture` preview: selected-tab Chromium
+  PNG/MHTML, consistent AyuGram SQLite snapshots, separately enabled silent video,
+  Ed25519 event chains, signed ZIP/HTML reports and standalone verification.
+  Each recorder starts disabled and keeps its own key and storage. Optional Compose
+  profiles are separate from ordinary startup. A read-only, separately operated
+  witness can retain challenge-bound checkpoints and sign receipts.
+
 ## 0.8.0 preview · 2 November 2026
 
 - Apply sharing-copy text and contact controls to interaction records, and include
