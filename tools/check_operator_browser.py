@@ -5,7 +5,7 @@ import tempfile
 
 from playwright.sync_api import expect, sync_playwright
 
-from check_browser import RunningApp, launch_browser, unlock
+from check_browser import RunningApp, answer_panel_dialog, launch_browser, unlock
 from tgwitness.operator_guide import write
 
 
@@ -23,11 +23,11 @@ def main():
             old_session = page.evaluate('state.token')
             page.evaluate("navigate('access')")
             page.locator('#access-tab-limits').click()
-            page.once('dialog', lambda dialog: dialog.dismiss())
             page.locator('#panel-key-rotate').click()
+            answer_panel_dialog(page, accept=False)
             assert server.app.state.vault.token == old_key
-            page.once('dialog', lambda dialog: dialog.accept())
             page.locator('#panel-key-rotate').click()
+            answer_panel_dialog(page)
             expect(page.locator('#panel-key-result')).to_be_visible()
             key = page.locator('#panel-key-new').input_value()
             assert key != old_key and key == server.app.state.vault.token

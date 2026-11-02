@@ -271,8 +271,15 @@ class Console(logging.Handler):
     def __init__(self, size=5000):
         super().__init__(logging.INFO)
         self.lines, self.counter, self.guard = deque(maxlen=size), 0, threading.Lock()
+        self.last = None
 
     def emit(self, record):
+        # Attached to the root and to uvicorn's loggers: a record that propagates through
+        # both reaches this handler twice. Keep it once.
+        with self.guard:
+            if record is self.last:
+                return
+            self.last = record
         try:
             text = record.getMessage()
             if record.exc_info and record.exc_info[1] is not None:
