@@ -1025,7 +1025,7 @@
 
     <div class="card padded route-card"><div class="eyebrow">Connection route</div><h2 id="route-summary">Direct connection</h2><p class="muted" id="route-detail">Choose a route before signing in.</p>
       <details id="network-details"><summary>Change connection route</summary>
-        <p class="notice route-running" hidden id="network-running">Pause observation to change the route. Until then, observation keeps using the current one.</p>
+        <div class="notice warning route-running" hidden id="network-running"><p>Pause observation to change the route. Until then, observation keeps using the current one.</p></div>
         <div class="proxy-catalog"><h3>Public MTProxy lists</h3>
           <p class="hint" id="proxy-catalog-status" role="status"></p>
           <label for="proxy-catalog-select">Available public servers</label><select id="proxy-catalog-select" disabled></select>
@@ -1141,8 +1141,10 @@
         <div class="chat-status" id="chat-status"></div>
         <div class="export-box" hidden id="export-box" role="status"></div>
         <div class="chat-feed" id="chat-feed"></div>
+        <div class="chat-compose-toggle" hidden id="chat-compose-toggle"><button class="secondary small" id="chat-compose-open" type="button"></button></div>
         <form class="chat-compose" id="chat-compose">
-          <p class="hint" id="chat-compose-account"></p>
+          <p class="notice warning chat-compose-warning" id="chat-compose-warning"></p>
+          <div class="chat-compose-head"><p class="hint" id="chat-compose-account"></p><button class="text-link" id="chat-compose-close" type="button">Close</button></div>
           <div hidden id="chat-reply"><span id="chat-reply-label"></span> <button class="text-link" id="chat-reply-cancel" type="button">Cancel</button></div>
           <label class="visually-hidden" for="chat-message">Message</label>
           <div class="chat-compose-row"><textarea id="chat-message" rows="1" maxlength="4096" placeholder="Write a message…" required></textarea><button class="primary" id="chat-send" type="submit">Send</button></div>

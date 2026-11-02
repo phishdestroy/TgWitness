@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- No consequential action on a single stray click. In Sources the status badge only
+  shows the state; pausing, resuming, excluding and removing are in the row menu, each
+  with what it does, pausing and excluding are confirmed (also in bulk), and removing a
+  source asks for its name. Sending from a chat is closed until "Write as @account" is
+  chosen, warns that chat members see the message and that the action is journaled,
+  and is refused by the panel and the API for the Evidence for a case goal. Changing
+  the connection route while observing shows a warning with one button that pauses
+  and opens the route settings. The sticky chat date now sits on a full-width band.
 - One set of numbers and statuses across the panel. Chat counters separate messages
   deleted with their text kept, deleted before any text was saved, and not found on
   recheck; the chat list, chat header and notifications use the same definitions (the
