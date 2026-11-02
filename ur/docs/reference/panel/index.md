@@ -196,6 +196,8 @@ Apprise کے ذریعے Telegram، Discord، Slack، ntfy، ای میل، Matrix
 
 ## مزید اوزار
 
+**Extras → Independent capture**: connect a separate browser or AyuGram recorder, pin its signing key, select capture options, start/pause, take snapshots and download verified signed archives. Each recorder has its own manual login, route, journal and key. Both connections start disabled. See the English [Independent capture guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md).
+
 - **آرکائیو سے پوچھیں**: محفوظ شدہ مشاہدات تلاش کریں، ذرائع کا جائزہ لیں، پھر فیصلہ کریں کہ آیا انہیں AI ماڈل کو بھیجا جائے۔ [آرکائیو تجزیہ](https://phishdestroy.github.io/TgWitness/ur/docs/reference/analysis/) اور مقامی[OCR اور ٹرانسکرپشن](https://phishdestroy.github.io/TgWitness/ur/docs/reference/media-analysis/) دیکھیں۔
 - **پیرامیٹرز**: جمع کرنے کی حدیں اور رفتار، دوبارہ چیک، ڈاؤن لوڈز، پروفائلز، اطلاعات اور برآمدات۔ نام کے ذریعے تلاش کریں، **صرف تبدیل شدہ** اقدار دکھائیں اور ڈیفالٹس کو مسودے کے طور پر تیار کریں **'ڈیفالٹس بحال کریں'** کے ساتھ۔ **پیرامیٹرز محفوظ کریں** اقدار کو ان کے اگلے استعمال سے لاگو کرتا ہے، اور ہر تبدیلی جرنل ریکارڈ ہوتی ہے۔
 - **رسائی**: جائزہ کاروں، تجزیہ کاروں اور آپریٹرز کے لیے الگ الگ ٹوکنز، منتخب کردہ ورک اسپیسز، چیٹس اور اختیارات تک محدود۔ دیکھیں [رسائی](https://phishdestroy.github.io/TgWitness/ur/docs/reference/access/)۔

@@ -196,6 +196,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/panel
 
 ## ابزارهای بیشتر
 
+**Extras → Independent capture**: connect a separate browser or AyuGram recorder, pin its signing key, select capture options, start/pause, take snapshots and download verified signed archives. Each recorder has its own manual login, route, journal and key. Both connections start disabled. See the English [Independent capture guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md).
+
 - **از آرشیو بپرسید**: مشاهدات ذخیره‌شده را جستجو کنید، منابع را بررسی کنید، سپس تصمیم بگیرید که آیا آن‌ها را به یک مدل هوش مصنوعی ارسال کنید. به [تحلیل آرشیو](https://phishdestroy.github.io/TgWitness/fa/docs/reference/analysis/) و [OCR و رونویسی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/media-analysis/) محلی مراجعه کنید.
 - **پارامترها**: محدودیت‌ها و سرعت جمع‌آوری، بازبینی‌ها، دانلودها، پروفایل‌ها، اعلان‌ها و خروجی‌ها. جستجو بر اساس نام، نمایش **فقط** مقادیر **تغییر یافته** و آماده کردن مقادیر پیش‌فرض به عنوان پیش‌نویس با **«بازیابی پیش‌فرض‌ها…». ذخیره پارامترها** مقادیر را از اولین استفاده بعدی اعمال می‌کند، و هر تغییر یک رکورد در ژورنال است.
 - **دسترسی**: توکن‌های جداگانه برای بازبینان، تحلیلگران و اپراتورها، محدود به فضاهای کاری، چت‌ها و حقوق انتخاب‌شده. به [بخش دسترسی](https://phishdestroy.github.io/TgWitness/fa/docs/reference/access/) مراجعه کنید.

@@ -196,6 +196,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ar/docs/reference/panel
 
 ## المزيد من الأدوات
 
+**Extras → Independent capture**: connect a separate browser or AyuGram recorder, pin its signing key, select capture options, start/pause, take snapshots and download verified signed archives. Each recorder has its own manual login, route, journal and key. Both connections start disabled. See the English [Independent capture guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md).
+
 - **استفسر من الأرشيف**: ابحث في الملاحظات المحفوظة، وراجع المصادر، ثم قرر ما إذا كنت سترسلها إلى نموذج الذكاء الاصطناعي. انظر [تحليل الأرشيف](https://phishdestroy.github.io/TgWitness/ar/docs/reference/analysis/) و [التعرف الضوئي على الحروف (OCR) المحلي والنسخ الصوتي](https://phishdestroy.github.io/TgWitness/ar/docs/reference/media-analysis/).
 - **المعلمات**: حدود وتيرة التجميع، وإعادة التحقق، والتنزيلات، والملفات الشخصية، والإشعارات، وعمليات التصدير. البحث حسب الاسم، وعرض «القيم **التي تم تغييرها فقط**»، وإعداد الإعدادات الافتراضية كمسودة باستخدام **«استعادة الإعدادات الافتراضية...».** يؤدي **«حفظ المعلمات»** إلى تطبيق القيم اعتبارًا من الاستخدام التالي، ويُسجل كل تغيير في سجل الأحداث.
 - **الوصول**: رموز وصول منفصلة للمراجعين والمحللين والمشغلين، تقتصر على مساحات العمل والدردشات والصلاحيات المحددة. انظر [«الوصول](https://phishdestroy.github.io/TgWitness/ar/docs/reference/access/)».

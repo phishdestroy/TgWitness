@@ -196,6 +196,8 @@ Katmanlar: imzalanmış ve zincirlenmiş her kayıt; imzalanmış çalıştırma
 
 ## Diğer araçlar
 
+**Extras → Independent capture**: connect a separate browser or AyuGram recorder, pin its signing key, select capture options, start/pause, take snapshots and download verified signed archives. Each recorder has its own manual login, route, journal and key. Both connections start disabled. See the English [Independent capture guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md).
+
 - **Arşive danışın**: kaydedilmiş gözlemleri arayın, kaynakları inceleyin, ardından bunları bir AI modeline gönderip göndermemeye karar verin. [Arşiv analizi](https://phishdestroy.github.io/TgWitness/tr/docs/reference/analysis/) ile [yerel OCR ve transkripsiyona](https://phishdestroy.github.io/TgWitness/tr/docs/reference/media-analysis/) bakın.
 - **Parametreler**: toplama sınırları ve hızı, yeniden kontroller, indirmeler, profiller, bildirimler ve dışa aktarmalar. Adına göre arama yapın, **“Yalnızca değişen** değerleri göster” seçeneğini kullanın ve “Varsayılanları **geri yükle…”** seçeneğiyle varsayılan ayarları taslak olarak hazırlayın. **“Parametreleri kaydet” seçeneği**, değerleri bir sonraki kullanımdan itibaren uygular ve her değişiklik bir günlük kaydı olarak kaydedilir.
 - **Erişim**: gözden geçirenler, analistler ve operatörler için ayrı erişim belirteçleri; seçilen çalışma alanları, sohbetler ve haklarla sınırlıdır. [Erişim bölümüne](https://phishdestroy.github.io/TgWitness/tr/docs/reference/access/) bakınız.

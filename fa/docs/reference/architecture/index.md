@@ -6,6 +6,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/fa/docs/reference/archi
 
 یک فرآیند پایتون میزبان پنل FastAPI و هر تعداد فضای کاری ایزوله است، که هر کدام دارای یک کلاینت حساب کاربری تل‌هان (Telethon) هستند. SQLite یک دفترچه وقایع امضا شده با قابلیت الحاق تنها و تنظیمات عملیاتی قابل تغییر را در خود جای می‌دهد. یک گاوصندوق رمزگذاری‌شده حاوی اعتبارنامه‌های API، StringSession و کلید امضا است. فرانت‌اند، HTML/CSS/JavaScript بسته‌بندی‌شده و ساده‌ای است: نیازی به ساخت با Node، CDNها یا دانلودهای فرانت‌اند در زمان اجرا نیست.
 
+Optional browser and AyuGram recorders run in **separate processes or containers**. The `tgwitness_capture` package owns their event format, keys, artifacts, checkpoint API, independent witness and standalone verifier. It is bundled in the main wheel and can also be installed alone from `addons/capture`, without importing the collector. The main panel's `capture_api.py` and `capture_connections.py` provide administrator-only, workspace-scoped controls under `/api/capture`; connection tokens live in the encrypted vault. No recorder or outbound request starts with the main process. Each explicit command verifies a fresh challenge against the pinned recorder key. Exports are verified before download and keep their original signature; they do not become Telegram message events. Collection sessions and proxy routes stay with each client. See the English [Independent capture guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md) for deployment and trust boundaries.
+
 | ماژول | مسئولیت |
 | --- | --- |
 | collector.py | مجوز، انتخاب دیالوگ، به‌روزرسانی‌ها، اسنپ‌شات‌ها، صف رسانه‌ای، نظارت بر اتصال |

@@ -196,6 +196,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ja/docs/reference/panel
 
 ## その他のツール
 
+**Extras → Independent capture**: connect a separate browser or AyuGram recorder, pin its signing key, select capture options, start/pause, take snapshots and download verified signed archives. Each recorder has its own manual login, route, journal and key. Both connections start disabled. See the English [Independent capture guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md).
+
 - **アーカイブに問い合わせてみましょう**：保存された観察結果を検索し、出典を確認した上で、 それらをAIモデルに送信するかどうかを決定します。[アーカイブ分析](https://phishdestroy.github.io/TgWitness/ja/docs/reference/analysis/)および ロー[カルでのOCRと文字起こしを](https://phishdestroy.github.io/TgWitness/ja/docs/reference/media-analysis/)参照してください。
 - **パラメータ**：収集の制限とペース、再確認、ダウンロード、プロファイル、 通知、エクスポート。「名前で検索」、「**変更された値のみ**を表示」機能、および 「デフォルトを**復元…**」によるデフォルト設定の下書き作成。**パラメータの保存**を行うと、 次回使用時からその値が適用され、変更のたびにログ記録が残ります。
 - **アクセス権限**：レビュー担当者、アナリスト、オペレーターごとに個別のトークンが発行され、選択された ワークスペース、チャット、権限に限定されます。[アクセス権限については](https://phishdestroy.github.io/TgWitness/ja/docs/reference/access/)こちらをご覧ください。

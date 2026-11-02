@@ -6,6 +6,8 @@ Canonical page: https://phishdestroy.github.io/TgWitness/ur/docs/reference/archi
 
 ایک پائتھن پراسیس FastAPI پینل اور کسی بھی تعداد میں الگ تھلگ ورک اسپیسز کو ہوسٹ کرتا ہے، جن میں سے ہر ایک میں Telethon یوزر اکاؤنٹ کلائنٹ ہوتا ہے۔ SQLite ایک صرف-ضم (append-only) شدہ دستخط شدہ ایونٹ جرنل اور قابلِ تبدیلی آپریشنل ترتیبات کو محفوظ رکھتا ہے۔ ایک انکرپٹڈ والٹ میں API کی تفصیلات، StringSession، اور دستخطی کلید محفوظ ہوتی ہے۔ فرنٹ اینڈ محض بنڈل شدہ HTML/CSS/JavaScript پر مشتمل ہے: Node بلڈ، CDNs، یا فرنٹ اینڈ ڈاؤن لوڈز کی ضرورت نہیں ہے۔
 
+Optional browser and AyuGram recorders run in **separate processes or containers**. The `tgwitness_capture` package owns their event format, keys, artifacts, checkpoint API, independent witness and standalone verifier. It is bundled in the main wheel and can also be installed alone from `addons/capture`, without importing the collector. The main panel's `capture_api.py` and `capture_connections.py` provide administrator-only, workspace-scoped controls under `/api/capture`; connection tokens live in the encrypted vault. No recorder or outbound request starts with the main process. Each explicit command verifies a fresh challenge against the pinned recorder key. Exports are verified before download and keep their original signature; they do not become Telegram message events. Collection sessions and proxy routes stay with each client. See the English [Independent capture guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md) for deployment and trust boundaries.
+
 | ماڈیول | ذمہ داری |
 | --- | --- |
 | collector.py | تصدیق، ڈائیلاگ کے انتخاب، اپ ڈیٹس، اسنیپ شاٹس، میڈیا قطار، کنکشن کی نگرانی |

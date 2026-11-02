@@ -196,6 +196,8 @@ Qatlamlar: har bir yozuv imzolangan va zanjirlangan; imzolangan ijro kvitasi; il
 
 ## Boshqa vositalar
 
+**Extras → Independent capture**: connect a separate browser or AyuGram recorder, pin its signing key, select capture options, start/pause, take snapshots and download verified signed archives. Each recorder has its own manual login, route, journal and key. Both connections start disabled. See the English [Independent capture guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md).
+
 - **Arxivdan so'rang**: saqlangan kuzatuvlarni qidiring, manbalarni ko'rib chiqing, so'ng ularni sun'iy intellekt modeliga yuborishga qaror qiling. [Arxiv tahlili](https://phishdestroy.github.io/TgWitness/uz/docs/reference/analysis/) va mahalliy[OCR hamda transkripsiyani](https://phishdestroy.github.io/TgWitness/uz/docs/reference/media-analysis/) ko'ring.
 - **Parametrlar**: yig'ish limitlari va tezligi, qayta tekshirishlar, yuklab olishlar, profillar, bildirishnomalar va eksportlar. Nom bo'yicha qidirish, **faqat o'zgargan** qiymatlarni ko'rsatish va tayyor qiymatlarni loyiha sifatida tayyorlash **"Tayyor qiymatlarni tiklash…"** yordamida. **Parametrlarni saqlash** qiymatlarni keyingi foydalanishdan boshlab qo'llaydi, va har bir o'zgartirish jurnal yozuvidir.
 - **Kirish**: ko'rib chiquvchilar, tahlilchilar va operatorlar uchun alohida tokenlar, tanlangan ish maydonchalari, suhbatlar va huquqlar bilan cheklangan. [Kirishni](https://phishdestroy.github.io/TgWitness/uz/docs/reference/access/) ko'ring.

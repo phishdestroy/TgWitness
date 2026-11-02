@@ -3714,6 +3714,8 @@ The layers: every record signed and chained; a signed run receipt; attachments s
 
 ## More tools
 
+**Extras → Independent capture**: connect a separate browser or AyuGram recorder, pin its signing key, select capture options, start/pause, take snapshots and download verified signed archives. Each recorder has its own manual login, route, journal and key. Both connections start disabled. See the English [Independent capture guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md).
+
 - **Ask the archive**: search saved observations, review the sources, then decide whether to send them to an AI model. See [archive analysis](https://phishdestroy.github.io/TgWitness/docs/reference/analysis/) and [local OCR and transcription](https://phishdestroy.github.io/TgWitness/docs/reference/media-analysis/).
 - **Parameters**: limits and pace of collection, rechecks, downloads, profiles, notifications and exports. Search by name, show **Only changed** values and prepare defaults as a draft with **Restore defaults…**. **Save parameters** applies the values from their next use, and each change is a journal record.
 - **Access**: separate tokens for reviewers, analysts and operators, limited to chosen workspaces, chats and rights. See [access](https://phishdestroy.github.io/TgWitness/docs/reference/access/).
@@ -5838,6 +5840,8 @@ Components of the collector, panel, journal, workers and witness, and how data m
 
 One Python process hosts the FastAPI panel and any number of isolated workspaces, each with a Telethon user-account client. SQLite holds an append-only signed event journal and mutable operational settings. An encrypted vault holds API credentials, the StringSession, and signing key. The frontend is plain bundled HTML/CSS/JavaScript: no Node build, CDNs, or runtime frontend downloads are needed.
 
+Optional browser and AyuGram recorders run in **separate processes or containers**. The `tgwitness_capture` package owns their event format, keys, artifacts, checkpoint API, independent witness and standalone verifier. It is bundled in the main wheel and can also be installed alone from `addons/capture`, without importing the collector. The main panel's `capture_api.py` and `capture_connections.py` provide administrator-only, workspace-scoped controls under `/api/capture`; connection tokens live in the encrypted vault. No recorder or outbound request starts with the main process. Each explicit command verifies a fresh challenge against the pinned recorder key. Exports are verified before download and keep their original signature; they do not become Telegram message events. Collection sessions and proxy routes stay with each client. See the English [Independent capture guide](https://github.com/phishdestroy/TgWitness/blob/main/docs/OPTIONAL-CAPTURE.md) for deployment and trust boundaries.
+
 | Module | Responsibility |
 | --- | --- |
 | collector.py | Authorization, dialog selection, updates, snapshots, media queue, connection monitoring |
@@ -6342,6 +6346,9 @@ Canonical page: https://phishdestroy.github.io/TgWitness/docs/reference/changelo
 Every change by version, including the changes not yet released.
 
 ## Unreleased
+
+- Integrate **Extras → Independent capture** into the English main panel: separate browser/AyuGram connections, encrypted control tokens, pinned identity checks, tab selection, start/pause, capture options, snapshots, checkpoints and verified original ZIP downloads. Add optional Docker control-network wiring; keep recorders independently runnable and all connections disabled by default.
+- Add the optional, independent `tgwitness-capture` preview: selected-tab Chromium PNG/MHTML, consistent AyuGram SQLite snapshots, separately enabled silent video, Ed25519 event chains, signed ZIP/HTML reports and standalone verification. Each recorder starts disabled and keeps its own key and storage. Optional Compose profiles are separate from ordinary startup. A read-only, separately operated witness can retain challenge-bound checkpoints and sign receipts.
 
 ## 0.8.0 preview · 2 November 2026
 
