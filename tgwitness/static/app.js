@@ -3412,7 +3412,7 @@ async function routeSaved(){
 }
 $("proxy-catalog-apply").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   const id=$("proxy-catalog-select").value;if(!id)return;
-  if(!confirmRouteChange())return;
+  if(!(await confirmRouteChange()))return;
   await json("network/catalog/"+encodeURIComponent(id),{});await routeSaved();
 }));
 $("network-import").addEventListener("click",e=>busy(e.currentTarget,async()=>{
@@ -3465,12 +3465,12 @@ $("policy-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitt
   if(policyOutsideDirty&&kind)body.outside_proxy={kind,host:$("outside-host").value.trim(),port:Number($("outside-port").value),
     username:$("outside-username").value,password:$("outside-password").value};
   else if(!kind&&state.policy?.outside_proxy)body.remove_outside_proxy=true;
-  if(!window.confirm(tr("Change this workspace's IP protection and outside-request policy?")))return;
+  if(!(await askConfirm(tr("Change this workspace's IP protection and outside-request policy?"))))return;
   renderPolicy(await json("network/policy",body));await refreshStatus();
   toast(tr("IP protection saved."));
 });});
 $("network-form").addEventListener("submit",e=>{e.preventDefault();busy(e.submitter,async()=>{
-  if(!confirmRouteChange())return;
+  if(!(await confirmRouteChange()))return;
   const kind=$("network-kind").value,body={kind};
   if(kind!=="direct"&&kind!=="mtproxy_auto")Object.assign(body,{host:$("network-host").value.trim(),port:Number($("network-port").value)});
   if(kind==="socks5"||kind==="http")Object.assign(body,{username:$("network-username").value,password:$("network-password").value});
@@ -3483,7 +3483,7 @@ $("network-test").addEventListener("click",e=>busy(e.currentTarget,async()=>{
   try{await json("network/test",{});$("network-result").textContent=tr("Telegram transport connected. This does not test capture completeness.");}
   catch(error){if(error instanceof StaleView)throw error;$("network-result").textContent=tr("Connection test failed. No direct fallback was attempted.");throw error;}
 }));
-function confirmRouteChange(){return window.confirm(tr("Change this account's connection route? Any pending sign-in will be cancelled. Saved evidence stays."));}
+function confirmRouteChange(){return askConfirm(tr("Change this account's connection route? Any pending sign-in will be cancelled. Saved evidence stays."));}
 function renderSelectedFiles(){
   const files=[...$("session-file").files];
   $("file-picker-title").textContent=tr(files.length?"Change selected files":"Choose account files");
@@ -4692,7 +4692,7 @@ $("access-admin-form").addEventListener("submit",event=>{event.preventDefault();
   if(version===adminLimitsVersion)adminLimitsDirty=false;renderAccess();toast(tr("Limits saved."));
 });});
 $("panel-key-rotate").addEventListener("click",event=>busy(event.currentTarget,async()=>{
-  if(!window.confirm(tr("Replace the administrator key and end all current browser sessions? Save the new key after this step.")))return;
+  if(!(await askConfirm(tr("Replace the administrator key and end all current browser sessions? Save the new key after this step."),{danger:true})))return;
   const result=await json("access/token",{},{root:true});
   state.token=result.session;state.me=result.me;state.workspaceRevision++;
   sessionStorage.setItem("tgwitness-token",state.token);
