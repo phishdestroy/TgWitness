@@ -51,12 +51,12 @@ gh attestation verify "TgWitness-${VERSION}.zip" \
 gh attestation verify evidence.zip --bundle attestation.jsonl \
   --repo OWNER/TgWitness \
   --signer-workflow phishdestroy/TgWitness/.github/workflows/sealed-collector.yml \
-  --signer-digest fc67d167b06f368db947b406001db3aee02642f9 \
+  --signer-digest 4d0cee7799ea583acb06c2688e17c1f02e25b7d8 \
   --deny-self-hosted-runners
 ```
 
-Просмотрите [закреплённый workflow коллектора](https://github.com/phishdestroy/TgWitness/blob/fc67d167b06f368db947b406001db3aee02642f9/.github/workflows/sealed-collector.yml):
-он загружает коммит коллектора `3d8325905f9248e878ea61bc602a757692177340`.
+Просмотрите [закреплённый workflow коллектора](https://github.com/phishdestroy/TgWitness/blob/4d0cee7799ea583acb06c2688e17c1f02e25b7d8/.github/workflows/sealed-collector.yml):
+он загружает коммит коллектора `f9a70d6a98744267dcdec65404190a49e0c0bab2`.
 Для проверки журнала, вложений, политики коллектора и полноты захвата также
 запустите верификатор из независимо доверенной установки:
 
