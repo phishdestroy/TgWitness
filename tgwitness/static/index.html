@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="/views/parameters.css?v=21">
 <link rel="stylesheet" href="/views/accounts.css?v=30">
 <link rel="stylesheet" href="/views/setup.css?v=3">
-<link rel="stylesheet" href="/views/settings-hub.css?v=2">
+<link rel="stylesheet" href="/views/settings-hub.css?v=3">
 <link rel="stylesheet" href="/views/connection.css?v=1">
 <link rel="stylesheet" href="/services.css?v=1">
 <link rel="stylesheet" href="/workspace-safety.css?v=1">
@@ -26,14 +26,15 @@
 <link rel="stylesheet" href="/components/journal.css?v=5">
 <link rel="stylesheet" href="/views/chats.css?v=11">
 <link rel="stylesheet" href="/views/chat-list.css?v=12">
+<link rel="stylesheet" href="/views/board.css?v=1">
 <link rel="stylesheet" href="/cloud-capture.css?v=5"><link rel="stylesheet" href="/cloud-capture-story.css?v=3">
 <script src="/theme.js?v=0.7.0"></script>
 <script src="/guide-locale.js" data-scope="panel"></script>
 <script defer src="/i18n.js?v=0.7.0"></script>
-<script defer src="/dialogs.js?v=1"></script>
+<script defer src="/dialogs.js?v=2"></script>
 <script defer src="/privacy.js?v=1"></script>
 <script defer src="/chat-safety.js?v=1"></script>
-<script defer src="/app.js?v=0.8.0-report-studio3"></script>
+<script defer src="/app.js?v=0.8.0-case-board1"></script>
 <script defer src="/services.js?v=1"></script>
 <script defer src="/account-import.js?v=1"></script>
 <script defer src="/integrations.js?v=2"></script>
@@ -41,7 +42,7 @@
 <script defer src="/media-analysis.js?v=2"></script>
 <script defer src="/webhooks.js?v=2"></script>
 <script defer src="/proxies.js?v=3"></script>
-<script defer src="/fleet.js?v=4"></script>
+<script defer src="/fleet.js?v=5"></script>
 <script defer src="/review.js?v=1"></script>
 <script defer src="/live.js?v=2"></script>
 <script defer src="/cloud-capture-locales.js?v=1"></script><script defer src="/cloud-capture-story.js?v=4"></script><script defer src="/cloud-capture.js?v=6"></script>
@@ -144,6 +145,7 @@
   <nav aria-label="Main navigation">
     <button class="nav" data-view="start"><svg aria-hidden="true" class="nav-icon"><use href="#i-home"/></svg> Start here</button>
     <div class="nav-section">Investigation</div>
+    <button class="nav" data-view="board"><svg aria-hidden="true" class="nav-icon"><use href="#i-layers"/></svg> Case Board <b id="board-unread" hidden>0</b></button>
     <button class="nav" data-view="chats"><svg aria-hidden="true" class="nav-icon"><use href="#i-message"/></svg> Chats</button>
     <button class="nav active" data-view="observations"><svg aria-hidden="true" class="nav-icon"><use href="#i-journal"/></svg> Journal <b id="nav-count">0</b></button>
     <button class="nav" data-view="sources"><svg aria-hidden="true" class="nav-icon"><use href="#i-sources"/></svg> Sources</button>
@@ -555,6 +557,8 @@
       </fieldset>
       <label class="check-label"><input id="handover-avatars" type="checkbox"> Include profile photos of the chosen people</label>
       <label class="check-label"><input id="handover-contacts" type="checkbox"> Mask phone numbers and e-mail addresses in texts</label>
+      <label for="handover-board">Case Board in this handover<select id="handover-board"><option value="off">Do not include</option><option value="bookmarks">Bookmarks and slices, without comments</option><option value="comments">Cards and team comments</option></select></label>
+      <label class="check-label"><input id="handover-board-aliases" type="checkbox" checked> Replace investigator names with R01, R02…</label>
       <div class="chat-export-actions"><button class="primary" type="submit"><svg aria-hidden="true" class="icon"><use href="#i-download"/></svg> Download handover extract</button></div>
       <p class="hint">Records shown unchanged are verified in full by verify.py; minimised records by the signature over the original record. The password option below applies to this download too.</p>
     </form>
@@ -776,6 +780,7 @@
     <fieldset class="report-parts"><legend>Report contents</legend>
       <label class="check-label"><input id="report-changes" type="checkbox"> Changed and deleted message histories</label>
       <label class="check-label"><input id="report-indicators" type="checkbox"> Links and technical indicators</label>
+      <label for="report-case-board">Case Board in the report<select id="report-case-board"><option value="off">Do not include</option><option value="bookmarks">Bookmarks and slices, without comments</option><option value="comments">Cards and team comments</option></select></label>
       <label class="check-label"><input id="report-timeline" type="checkbox"> Journal records in HTML and PDF</label>
       <label class="check-label"><input id="report-raw" type="checkbox"> Full JSON record in the HTML viewer</label>
       <label class="check-label"><input id="report-media" type="checkbox"> Photo previews in HTML reports</label>
@@ -1438,6 +1443,7 @@
 </section>
 
 <section class="view" hidden id="view-settings"></section>
+<section class="view" hidden id="view-board"></section>
 <section class="view" hidden id="view-first-run"></section>
 <section class="view" hidden id="view-chats">
   <div class="chats-shell" data-panel="chat">
@@ -1638,6 +1644,7 @@
     <label for="access-label">Name</label><input id="access-label" maxlength="80" placeholder="e.g. Lawyer, analyst on the Harbor case" required>
     <fieldset class="access-group"><legend>Workspaces and chats</legend>
       <label class="check-label"><input id="access-all" type="checkbox"> All workspaces, including ones added later</label>
+      <div class="access-groups" id="access-groups" hidden><p class="hint">Account groups: every account of the group, including ones added to it later.</p><div id="access-group-list"></div></div>
       <div class="access-workspace-tools"><label for="access-workspace-search">Find workspace<input id="access-workspace-search" type="search" placeholder="Workspace name or ID"></label><label class="check-label"><input id="access-workspace-picked" type="checkbox"> Selected only</label></div>
       <div class="access-workspaces" id="access-workspaces"></div><p id="access-workspace-empty" class="hint" hidden>No matching workspaces.</p><p id="access-workspace-count" role="status"></p>
     </fieldset>

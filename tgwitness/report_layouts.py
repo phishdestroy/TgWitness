@@ -30,7 +30,7 @@ def chapter_plan(design, kind="journal"):
     if design == "reading_series":
         return (
             Chapter("case", "Case & examination question", ("case", "brief")),
-            Chapter("assessment", "Findings & assessment", ("examination", "assessment")),
+            Chapter("assessment", "Findings & assessment", ("examination", "assessment", "case_board")),
             Chapter("scope", "Scope & coverage", ("selection", "minimisation", "source", "coverage", "message_numbers")),
             Chapter("histories", "Change dossiers", ("histories",)),
             Chapter("activity", "Activity & observed accounts", ("analytics", "directory", "participants")),
@@ -41,7 +41,7 @@ def chapter_plan(design, kind="journal"):
         )
     if design == "ledger_margin":
         return (
-            Chapter("case", "Case, question & findings", ("case", "examination", "brief", "assessment")),
+            Chapter("case", "Case, question & findings", ("case", "examination", "brief", "assessment", "case_board")),
             Chapter("scope", "Scope & acquisition conditions", ("selection", "minimisation", "source")),
             Chapter("activity", "Counts, activity & basis", ("analytics",)),
             Chapter("directory", "Chats & observed accounts", ("directory", "participants")),
@@ -257,6 +257,7 @@ def chat_replacements(record_factory, context, meta, say, options):
 
 
 SECTION_KEYS = {
+    "case-board": "case_board",
     "brief": "brief", "case": "case", "case-assessment": "assessment", "examination": "examination",
     "report-selection": "selection", "minimisation": "minimisation", "report-analytics": "analytics",
     "observed-directory": "directory", "changes": "histories", "record-relations": "relations",

@@ -463,6 +463,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                                       access=app.state.access, profile_id=Path(path).name, **options)
                 profiles = Profiles(app, root, child_factory)
                 app.state.profiles = profiles
+                app.state.access.group_of = profiles.group_of
                 await profiles.open()
                 app.state.multi_export = MultiExport(profiles)
                 from .archive_api import startup as start_mcp
@@ -910,6 +911,9 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                 raise HTTPException(400, str(exc)) from None
             return groups_view()
 
+        from .group_settings import register as register_group_settings
+        register_group_settings(app, authenticate, require_live)
+
         @app.post("/api/profiles/import", dependencies=[Depends(authenticate)])
         async def profiles_import(body: ProfileImport, request: Request):
             """One account per request: convert its files, give it a new workspace and connect the session.
@@ -1043,13 +1047,26 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
                          kind: str | None = None, before: int | None = None,
                          search: str | None = None, limit: int = 100,
                          since: str | None = None, until: str | None = None, hide_system: bool = False,
-                         after: int | None = None, include_count: bool = False):
+                         after: int | None = None, include_count: bool = False,
+                         slice_id: str | None = None, added_since: bool = False):
         if not 1 <= limit <= 500 or (search and len(search) > 200):
             raise HTTPException(422, "Limit must be 1–500; search must be at most 200 characters.")
         if kind and (len(kind) > 300 or len(kind.split(",")) > 16):
             raise HTTPException(422, "Choose at most 16 event types.")
         if before is not None and after is not None or any(value is not None and not 0 <= value < 2**53 for value in (before, after)):
             raise HTTPException(422, "Choose one valid journal cursor.")
+        if slice_id:
+            from .board import Board
+            def slice_window():
+                try:
+                    with app.state.store.snapshot() as snapshot:
+                        return Board(app.state.store, profile_id).journal_window(snapshot.connection,
+                            request.state.principal, slice_id, before, after, limit, added_since)
+                except Refused as exc:
+                    raise HTTPException(403, str(exc)) from None
+                except KeyError:
+                    raise HTTPException(404, "Slice not found.") from None
+            return await complete_in_thread(slice_window)
         if chat_id is not None:
             require_chat(request, chat_id)
         dates = []
@@ -1095,10 +1112,10 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             raise HTTPException(503, "The journal is busy. Narrow the filters and retry.") from None
 
     @app.get("/api/stream", dependencies=[Depends(authenticate)])
-    async def journal_stream(request: Request, after: int = 0,
+    async def journal_stream(request: Request, after: int = 0, board_after: int = 0,
                              credential: HTTPAuthorizationCredentials = Depends(bearer)):
         from .live_stream import LimitedStreamingResponse, stream
-        if not 0 <= after <= 9223372036854775807:
+        if not 0 <= after <= 9223372036854775807 or not 0 <= board_after <= 9223372036854775807:
             raise HTTPException(422, "Invalid journal cursor.")
         token = credential.credentials
 
@@ -1110,12 +1127,19 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             if principal is None:
                 raise Refused("Access ended")
             access_check(principal, profile_id, POLICY["GET /api/stream"], {})
+            request.state.stream_principal = principal
             return principal.chats(profile_id)
+
+        def board_authorize():
+            authorize()
+            principal = request.state.stream_principal
+            return principal if principal.may("board.read") else None
 
         async def updates():
             try:
                 yield ": connected\n\n"
-                async for item in stream(app.state.store, after, authorize, request.is_disconnected):
+                async for item in stream(app.state.store, after, authorize, request.is_disconnected,
+                                         board_after=board_after, board_authorize=board_authorize, workspace=profile_id):
                     yield item
             except Refused:
                 yield "event: access-ended\ndata: {}\n\n"
@@ -1955,11 +1979,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         vault.save("alerts", {"urls": urls})
         with store.transaction():
             store.set_setting("alerts", settings)
-            store.append("alerts.changed", {**settings, "destinations": len(urls),
-                                            "services": sorted({u.split("://", 1)[0].lower() for u in urls}),
-                                            "content": "chat names, counts and excerpts of changed messages"
-                                                       if settings["include_text"] else
-                                                       "chat names and counts only, never message text"})
+            store.append("alerts.changed", alerts.change_record(settings, urls))
         app.state.alert_wakeup.set()
         return alert_state()
 
@@ -2090,6 +2110,8 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             "before": before, "after": after,
             "applies": "from the next use of each value; Telegram client timeouts and retries from "
                        "the next connection"})
+
+    app.state.save_parameters = save_parameters
 
     @app.get("/api/chats", dependencies=[Depends(authenticate)])
     async def chats(request: Request):
@@ -2508,7 +2530,7 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         options = report_options(app.state.store, request, language)
 
         def build():
-            path = export_file(app.state.store, app.state.vault, fmt, options)
+            path = export_file(app.state.store, app.state.vault, fmt, options, include_board=request.state.principal.may("board.read"))
             try:
                 if password is not None:
                     path = encrypt_export(path, fmt, password)
@@ -2561,6 +2583,8 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         """A minimised extract for a court, lawyer or abuse desk; who made it, why and how is journaled."""
         for chat in body.chats:
             require_chat(request, chat)
+        if body.case_board != "off" and not request.state.principal.may("board.read"):
+            raise HTTPException(403, "Reading Case Board requires board.read.")
         from . import export_history
         options = report_options(app.state.store, request, body.language)
         selection = handover.Options.model_validate(body.model_dump(exclude={"password", "language"}))
@@ -2720,6 +2744,8 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
         return FileResponse(path, media_type="application/octet-stream", filename=digest)
 
     from .webhook_api import register as register_webhooks
+    from .board_api import register as register_board
+    register_board(app, authenticate, profile_id)
     register_webhooks(app, authenticate, profile_id)
     from .storage_api import register as register_storage
     register_storage(app, authenticate, require_live)
@@ -2753,12 +2779,16 @@ def create_app(data_dir=None, demo=False, client_factory=None, token_override=No
             unknown = set(settings.workspaces) - set(app.state.profiles.entries)
             if unknown:
                 raise HTTPException(422, "Unknown workspace.")
+            if set(settings.groups) - {g["id"] for g in app.state.profiles.groups()}:
+                raise HTTPException(422, "Unknown account group.")
             from .showcase import validate_scope
             validate_scope(app.state.profiles, settings)
             return settings
 
         def access_state(request):
-            return app.state.access.state(request.state.principal.session_id)
+            return {**app.state.access.state(request.state.principal.session_id),
+                    "groups": [{"id": g["id"], "label": g["label"], "members": app.state.profiles.members(g["id"])}
+                               for g in app.state.profiles.groups()]}
 
         @app.get("/api/access", dependencies=[Depends(authenticate)])
         async def access_overview(request: Request):

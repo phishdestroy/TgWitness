@@ -927,6 +927,7 @@ def evidence_pdf(data, context, events=None, certificate=None):
         digest = {"categories": cats, "chats": [None] * summary["chats"], "media": [None] * summary["files"],
                   "first": summary["first_record_at"], "last": summary["last_record_at"]}
         titles = {str(c["chat_id"]): c["title"] for c in data["chats"] if c.get("title")}
+
         actions = data["actions"]
 
         def render_brief():
@@ -1142,6 +1143,11 @@ def evidence_pdf(data, context, events=None, certificate=None):
         def render_examination():
             report.report_charts.examination_pdf(lay, data.get("examination"))
 
+        def render_case_board():
+            if data.get("case_board"):
+                from . import board_report
+                board_report.pdf(lay, data["case_board"])
+
         def render_analytics():
             report.report_charts.pdf(lay, data.get("analytics"))
 
@@ -1170,15 +1176,17 @@ def evidence_pdf(data, context, events=None, certificate=None):
             "limitations": render_limitations,
             "journal": render_journal,
             "examination": render_examination,
+            "case_board": render_case_board,
             "analytics": render_analytics,
             "directory": render_directory,
             "relations": render_relations,
         }
-        default_order = ['brief', 'selection', 'examination', 'analytics', 'assessment', 'case', 'minimisation', 'histories', 'indicators', 'actions', 'integrity', 'timestamps', 'coverage', 'custody', 'verify', 'files', 'standards', 'limitations', 'journal']
+        default_order = ['brief', 'selection', 'examination', 'analytics', 'assessment', 'case', 'minimisation', 'case_board', 'histories', 'indicators', 'actions', 'integrity', 'timestamps', 'coverage', 'custody', 'verify', 'files', 'standards', 'limitations', 'journal']
         if options.get("template") == "activity":
             default_order[2:4] = ["analytics", "examination"]
         visible = {
             "selection": bool(data.get("selection")), "minimisation": bool(handover),
+            "case_board": bool((data.get("case_board") or {}).get("cards")),
             "examination": bool(data.get("examination")), "analytics": bool(data.get("analytics")),
             "histories": bool(options.get("show_changes", True) and data["changes"]["messages"]),
             "indicators": bool(options.get("show_indicators", True) and (data.get("indicators") or {}).get("items")),

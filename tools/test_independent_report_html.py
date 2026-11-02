@@ -122,6 +122,33 @@ def test_preview_preserves_analytics_anchor_without_scripts_or_styles():
 
 
 @pytest.mark.parametrize('design', sorted(report_layouts.DESIGNS))
+def test_case_board_survives_composition_in_signed_html_and_pdf(tmp_path, design):
+    from tgwitness import board
+    from tools.test_case_board import ADMIN, bookmark
+    from tgwitness.verify import verify_bundle
+    import fitz
+
+    vault, store = Vault(tmp_path), Store(tmp_path)
+    store.bind(vault)
+    try:
+        source = store.append('message.new', {'text': 'Source observation for review'}, -1001, 1)
+        bookmark(board.Board(store), source, ADMIN, title='Saved observation', note='Investigator interpretation')
+        options = report.resolved() | {'language': 'en', 'design': design, 'case_board': 'bookmarks'}
+        archive = evidence.export_file(store, vault, 'zip', options)
+        assert verify_bundle(archive, fingerprint(vault.public_key))['report_pdf']
+        with zipfile.ZipFile(archive) as bundle:
+            html = bundle.read('report.html').decode('utf-8')
+            assert html.count('id="case-board"') == 1
+            assert 'Investigator interpretation' in html
+            assert 'Team notes and bookmarks' in html
+            with fitz.open(stream=bundle.read('report.pdf'), filetype='pdf') as document:
+                text = ''.join(page.get_text() for page in document)
+            assert 'Investigator interpretation' in text and 'Team notes and bookmarks' in text
+    finally:
+        store.close()
+
+
+@pytest.mark.parametrize('design', sorted(report_layouts.DESIGNS))
 def test_question_precedes_disclosed_case_notes_without_duplicate_heading(design):
     say = report.Words('en')
     options = {'case_title': 'Actual title', 'case_id': 'CASE-42', 'notes': 'All notes preserved'}

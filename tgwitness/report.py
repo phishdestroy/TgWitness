@@ -57,6 +57,7 @@ class ReportOptions(report_analytics.Presentation):
     media_previews: bool = True
     show_changes: bool = True
     show_indicators: bool = True
+    case_board: Literal["off", "bookmarks", "comments"] = "bookmarks"
     # Maximum items per signed viewer data file and maximum transcript size included in a PDF.
     part_size: int = Field(default=5000, ge=500, le=100000)
     # Runs of collector heartbeats are listed as one line; each one stays in the journal file.
@@ -1853,6 +1854,7 @@ def report_data(events_again, coverage, context):
                     "messages_sent": digest.get("own_total", 0), "sent_listed": digest.get("own_messages") or []},
         "timestamps": anchors, "coverage": coverage, "custody": custody(context),
         "case_assessment": case_assessment.journal(context, coverage),
+        "case_board": context.get("case_board"),
         "indicators": digest.get("indicators") or {"items": [], "total": 0, "not_listed": 0},
         "files": context.get("files") or {},
         "parts": [{k: p[k] for k in ("index", "file", "from", "to", "count", "first_at", "last_at", "sha256") if k in p}
@@ -2338,6 +2340,8 @@ def evidence_chunks(events, coverage=None, context=None):
                                                                          ("verify", say("Verify"))]
         if material.get("analytics"):
             links.insert(1, ("report-analytics", say(report_charts.TITLE)))
+        if (context.get("case_board") or {}).get("cards"):
+            links.insert(2, ("case-board", say("Case Board")))
         if material.get("examination"):
             links.insert(1, ("examination", say(report_charts.REVIEW_TITLE)))
         if material.get("selection"):
@@ -2384,6 +2388,9 @@ def evidence_chunks(events, coverage=None, context=None):
              + e(producer.get("project")))]).encode("utf-8")
         if handover:
             yield minimisation_section(say, next(numbers), handover, count).encode("utf-8")
+        if context.get("case_board"):
+            from . import board_report
+            yield board_report.html(context["case_board"], say).encode("utf-8")
         if changed and events_again and options.get("show_changes", True):
             yield changes_section(say, next(numbers), history_context(context, events_again, changed), len(changed),
                                   digest["titles"], bool(options.get("timeline")), filtered).encode("utf-8")
