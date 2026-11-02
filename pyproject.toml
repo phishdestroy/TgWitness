@@ -65,7 +65,7 @@ include-package-data = false
 
 [tool.setuptools.package-data]
 tgwitness = [
-  "report_console.js", "report_console.css", "report_skin.css", "report_icons.svg",
+  "report_console.js", "report_console.css", "report_skin.css", "report_dossier.css", "report_icons.svg",
   "static/*.html", "static/*.css", "static/*.js", "static/*.svg",
   "static/core/*.js",
   "static/components/*.js", "static/components/*.css",

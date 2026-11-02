@@ -5346,5 +5346,14 @@
 "Not assessed by this report: a valid RFC 3161 token alone does not establish qualified status or legal effect.": "Dieser Bericht bewertet dies nicht: Ein gültiges RFC-3161-Token allein begründet weder einen qualifizierten Status noch eine rechtliche Wirkung.",
 "No independently validated checkpoint timestamp in this copy.": "Diese Kopie enthält keinen unabhängig validierten Zeitstempel eines Prüfpunkts.",
 "Checkpoint or timestamp trust not established": "Vertrauen in Prüfpunkt oder Zeitstempel nicht festgestellt",
-"This is a standalone report. Obtain the signed ZIP to verify the authoritative records and supporting proofs.": "Dies ist ein eigenständiger Bericht. Fordern Sie das signierte ZIP an, um die maßgeblichen Aufzeichnungen und Belege zu prüfen."
+"This is a standalone report. Obtain the signed ZIP to verify the authoritative records and supporting proofs.": "Dies ist ein eigenständiger Bericht. Fordern Sie das signierte ZIP an, um die maßgeblichen Aufzeichnungen und Belege zu prüfen.",
+"Evidence dossier": "Beweisdossier",
+"Evidence at a glance": "Beweise auf einen Blick",
+"Read the summary. Review the evidence. Repeat the checks.": "Zusammenfassung lesen. Beweise prüfen. Prüfungen wiederholen.",
+"Evidence": "Beweise",
+"Observation timeline": "Beobachtungsverlauf",
+"Recorded intervals only. Blank space is not proof of uninterrupted collection.": "Nur aufgezeichnete Intervalle. Leere Bereiche belegen keine lückenlose Erfassung.",
+"Interval start": "Beginn des Intervalls",
+"Interval end": "Ende des Intervalls",
+"Observation period": "Beobachtungszeitraum"
 }
