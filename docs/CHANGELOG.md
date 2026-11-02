@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Build full-journal reports from dossier, briefing, activity or custom presets.
+  Select time, weekday/hour, participant and chat charts; add signed examination
+  notes. HTML, PDF and JSON share exact observation counts and source hashes.
+  Participant charts use aliases by default; minimized handovers omit private
+  analysis. Report choices and new labels are available in every panel language.
 - Preserve workspace-specific deep links through first setup, keep the shared
   account form current in Settings, and expose file import when adding an account.
   Compact mobile connection controls keep the account identity visible.

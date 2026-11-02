@@ -726,6 +726,51 @@ form > .health-detail { margin-top: 14px; }
 .report-parts .check-label { margin-top: 10px; }
 .report-parts .check-label:has(input:disabled) { opacity: .55; cursor: default; }
 .report-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 18px; }
+.report-templates { min-width: 0; margin: 22px 0 18px; padding: 0; border: 0; }
+.report-templates legend { margin-bottom: 12px; padding: 0; font-weight: 600; }
+.report-template-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.report-template { position: relative; display: flex; flex-direction: column; gap: 12px; min-width: 0;
+  margin: 0; padding: 16px; border: 1px solid var(--border-strong); border-radius: var(--radius-panel);
+  background: var(--surface-2); cursor: pointer; color: var(--text); }
+.report-template:hover { border-color: var(--accent); }
+.report-template:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+.report-template:has(input:focus-visible) { outline: 2px solid var(--focus); outline-offset: 3px; }
+.report-template input[type=radio] { position: absolute; top: 16px; inset-inline-end: 14px; width: 16px; height: 16px; margin: 0; }
+.report-template-heading { display: flex; gap: 8px; align-items: flex-start; padding-inline-end: 16px; }
+.report-template-heading .icon { flex: 0 0 18px; color: var(--accent-text); }
+.report-template-heading strong { font-size: 14px; line-height: 20px; overflow-wrap: anywhere; }
+.report-template small { display: block; color: var(--muted); font-size: 12px; line-height: 18px; }
+.report-template-sketch { display: flex; gap: 8px; height: 48px; margin-top: auto; padding: 8px;
+  border: 1px solid var(--border); border-radius: 6px; background: var(--surface); color: var(--accent-text); }
+.report-template-sketch span { display: block; flex: 1 1 0; min-width: 0; }
+.report-template-sketch .sketch-cover { flex: 0 0 24%; border-inline-start: 3px solid currentColor; background: var(--accent-soft); }
+.report-template-sketch .sketch-lines { background: repeating-linear-gradient(to bottom, var(--border-strong) 0 2px, transparent 2px 7px); }
+.report-template-sketch .sketch-chart { background: linear-gradient(to top,currentColor 0 30%,transparent 30%) 0 0/20% 100%,
+  linear-gradient(to top,currentColor 0 60%,transparent 60%) 27% 0/20% 100%,
+  linear-gradient(to top,currentColor 0 90%,transparent 90%) 54% 0/20% 100%,
+  linear-gradient(to top,currentColor 0 48%,transparent 48%) 81% 0/20% 100%; background-repeat: no-repeat; opacity: .65; }
+.sketch-brief .sketch-lines { flex: 2; }.sketch-custom { border-style: dashed; }
+.report-outline { margin: 18px 0 22px; padding: 16px; border: 1px solid var(--border); border-radius: var(--radius-control); }
+.report-outline-heading { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.report-outline-heading .icon { color: var(--success); }
+.report-outline ul { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; padding: 0; list-style: none; }
+.report-outline li { background: var(--surface-3); color: var(--text-2); padding: 4px 9px; border-radius: 4px; font-size: 12px; }
+.report-outline .hint { margin: 10px 0 0; }
+.report-subheading { margin: 22px 0 0; font-size: 15px; }
+.report-examination { margin-top: 18px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-control); }
+.report-examination summary { cursor: pointer; font-weight: 600; }
+.report-examination textarea { resize: vertical; }
+.report-charts { border-top: 1px solid var(--border); padding-top: 16px; margin-top: 24px; }
+.report-charts legend { padding-inline-end: 10px; }
+.report-chart-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; margin-bottom: 8px; }
+@media (max-width: 1150px) { .report-template-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 700px) { .report-chart-choices { grid-template-columns: 1fr; } }
+@media (max-width: 440px) {
+  .report-template-grid { grid-template-columns: 1fr; gap: 8px; }
+  .report-template { padding: 12px 14px; gap: 6px; }
+  .report-template input[type=radio] { top: 14px; }
+  .report-template-sketch { display: none; }
+}
 @media (max-width: 700px) { .report-grid { grid-template-columns: 1fr; } }
 #replica-form > .secondary { margin-top: 14px; }
 .replica-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; }

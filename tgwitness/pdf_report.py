@@ -787,6 +787,12 @@ def evidence_pdf(data, context, events=None, certificate=None):
                   "first": summary["first_record_at"], "last": summary["last_record_at"]}
         lay.brief(*report.evidence_brief(say, digest, records_total, data["timestamps"], coverage, account_text,
                                          handover))
+        sections = [(report.report_charts.examination_pdf, data.get("examination")),
+                    (report.report_charts.pdf, data.get("analytics"))]
+        if options.get("template") == "activity":
+            sections.reverse()
+        for render, material in sections:
+            render(lay, material)
         report.case_assessment.pdf(lay, data.get("case_assessment") or report.case_assessment.journal(context, coverage))
         lay.section(say("Case"))
         lay.kv([(say("Case title"), case.get("title")), (say("Case ID"), case.get("id")),

@@ -168,11 +168,13 @@ def export_file(store, vault, fmt, options=None):
         retained = store.retained_checkpoint()
         with store.snapshot() as snapshot:
             observed, digest = Coverage(), report.Digest()
+            journal_bytes = hashlib.sha256()
 
             def measured(events):
                 for event in events:
                     observed.add(event)
                     digest.add(event)
+                    journal_bytes.update(canonical(event) + b"\n")
                     yield event
             result = verify_events(measured(snapshot.events()), vault.public_key)
             if retained:
@@ -186,7 +188,8 @@ def export_file(store, vault, fmt, options=None):
             context = {"kind": "evidence", "options": options, "report_id": str(uuid.uuid4()), "created_at": utcnow(),
                        "producer": producer(), "limits": LIMITS, "public_key": vault.public_key,
                        "fingerprint": result["fingerprint"], "event_count": result["events"],
-                       "head_hash": result["head_hash"], "digest": summary, "anchors": [], "files": {},
+                       "head_hash": result["head_hash"], "events_sha256": journal_bytes.hexdigest(),
+                       "digest": summary, "anchors": [], "files": {},
                        "account": store.get_setting("account", None), "archive": fmt == "zip", "sign": vault.sign,
                        "events_again": snapshot.events, "journal_verified": True}
 
