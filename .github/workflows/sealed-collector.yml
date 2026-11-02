@@ -30,7 +30,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           repository: phishdestroy/TgWitness
-          ref: f9a70d6a98744267dcdec65404190a49e0c0bab2
+          ref: f27e5ca315b1fa756173c21d501a2765f99276b3
           path: trusted-source
           persist-credentials: false
           submodules: false
