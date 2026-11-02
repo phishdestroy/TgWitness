@@ -760,6 +760,10 @@ class Collector:
                              "then change the IP mode.")
         if outside is not None and outside.kind not in ("socks5", "http"):
             raise ValueError("Requests outside Telegram use a SOCKS5 or HTTP proxy.")
+        proposed = outside if outside is not None else None if remove_outside else self.outside_proxy()
+        if (policy.exposure == "hide" and policy.outside_enabled and proposed is None
+                and self.network_config().kind not in ("socks5", "http")):
+            raise ValueError("Set a SOCKS5 or HTTP proxy for requests outside Telegram, or turn those requests off.")
         if outside is not None:
             self.vault.save("outside_proxy", outside.model_dump())
         elif remove_outside:

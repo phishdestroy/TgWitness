@@ -584,6 +584,7 @@ def main():
             page.locator("#network-port").fill("1080")
             page.locator("#network-username").fill("synthetic-user")
             page.locator("#network-password").fill("synthetic-proxy-secret")
+            page.once("dialog", lambda dialog: dialog.accept())
             page.locator('#network-form button[type="submit"]').click()
             expect(page.locator("#route-summary")).to_have_text("SOCKS5 proxy")
             expect(page.locator("#network-password")).to_have_value("")
